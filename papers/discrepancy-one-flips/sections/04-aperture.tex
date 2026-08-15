@@ -18,9 +18,9 @@ The asymptotic analysis of \cite[Section~7]{SS} rests on
   \qquad
   t_{m}:=e^{-\pi\sqrt{-1}(2m+s)}\Bigl(\frac{q}{z}\Bigr)^{r-s}.
 \end{equation}
-In the notation of \cite[Appendix~A]{SS} the lower and upper index counts of
-this \(G\)-function are \(s\) and \(r\), so the parameter governing the
-asymptotic expansion is
+In the notation of \cite[Appendix~A]{SS} the upper and lower parameter rows of
+this \(G\)-function have \(s\) and \(r\) entries, so the parameter governing
+the asymptotic expansion is
 \begin{equation}
   \label{eq:nu}
   \nu=r-s,
@@ -42,7 +42,7 @@ stated there as
 \end{equation}
 The \(\epsilon\) of \eqref{eq:A1} is the whole issue.  The expansion printed
 in \cite[Section~7]{SS} after \cite[Lemma~7.4]{SS} is introduced by the
-sentence ``For \(r-s>1\)'', and the sector recorded with it,
+clause ``For \(r-s>1\)'', and the sector recorded with it,
 \begin{equation}
   \label{eq:ss64}
   \left|\arg\Bigl(\frac zq\Bigr)+\frac{(2m+s)\pi}{r-s}\right|
@@ -90,11 +90,12 @@ remains is still enough.  The other sector in play is unaffected.
 
 \begin{proof}
   \cite[Proposition~8.2]{SS} is deduced from \cite[(76)]{SS}, which applies
-  \cite[Theorem~A.2]{SS} to a \(G^{r,1}_{s,r}\) function of the same
-  argument.  The hypothesis of \cite[Theorem~A.2]{SS} is
+  \cite[Theorem~A.2]{SS} to a \(G^{r,1}_{s,r}\) function of the argument
+  \(t=e^{\pi\sqrt{-1}(1-s)}(q/z)^{r-s}\) of \cite[(75)]{SS}.  The hypothesis
+  of \cite[Theorem~A.2]{SS} is
   \(|\arg t|<(\tfrac\nu2+1)\pi\); it involves no \(\epsilon\) and no
-  restriction on \(\nu\).  Transporting it through the same substitution as
-  above gives \eqref{eq:ss78} for every \(\nu\ge1\), and the displayed form
+  restriction on \(\nu\).  Transporting it through that substitution gives
+  \eqref{eq:ss78} for every \(\nu\ge1\), and the displayed form
   at \(\nu=1\).
 \end{proof}
 

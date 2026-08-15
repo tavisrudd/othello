@@ -22,7 +22,6 @@
 \newcommand{\one}{\mathbf 1}
 \newcommand{\rk}{\operatorname{rank}}
 \newcommand{\Db}{D^{b}}
-\newcommand{\Ghat}{\widehat{\Gamma}}
 
 \title{Standard Flips of Discrepancy One: Extremal \(J\)-Normalization
   and the Meijer Aperture at \(\nu=1\)}
@@ -51,18 +50,22 @@ codimension-two blow-up.
 We supply the two missing steps.  First, the degree-\(d\) summand of their
 formula~(35) has \(z\)-order at most \(1-s-(r-s)d\); for \(r=s+1\) and
 \(s\ge1\) this is at most \(-1\) for every \(d\ge1\), so the series is
-\(z\one+\bar{\mathbf t}+O(z^{-1})\), no mirror-map correction arises, and
+\(z\one+\bar{\mathbf t}+O(z^{-1})\), with \(\one\) the unit class and
+\(\bar{\mathbf t}=t+\ln(q)c_{1}(T)\) the extremal parameter; no mirror-map
+correction arises, and
 uniqueness of the \(J\)-slice of Givental's cone identifies the series with
 the extremal \(J\)-function.  We prove the cone membership that this uses
 instead of quoting Remark~4.5(3) for it: for split bundles it follows from
 Brown's toric-fibration theorem together with the twisted theory of
 Coates and Givental, and the general case follows by a flag-bundle pullback
-and a deformation to the associated graded.  Neither input restricts
+and a deformation to the associated graded.  None of these inputs restricts
 \(r-s\).  The only remaining formal failure of the normalization is the
 degenerate endpoint \(s=0\), whose point fibres contain
 no extremal line.  Second, at \(\nu:=r-s=1\) the
-sector printed after their Lemma~7.4 is unavailable, being the
-\(\epsilon=1\) case of their own Theorem~A.1; the correct \(\epsilon=1/2\)
+sector printed after their Lemma~7.4 is unavailable: their own Theorem~A.1
+is valid on \(|\arg t|<(\nu+\epsilon)\pi\) with \(\epsilon=1\) only for
+\(\nu>1\) and \(\epsilon=\tfrac12\) at \(\nu=1\), and the correct
+\(\epsilon=\tfrac12\)
 sector still meets the sector of their Proposition~8.2 in an open sector of
 opening \(2\pi\) that contains both the nonzero-eigenvalue ray and the tame
 ray.  With the reductions of their Sections~9.1--9.4 unchanged, this extends

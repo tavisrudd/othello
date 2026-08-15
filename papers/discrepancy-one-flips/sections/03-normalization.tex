@@ -21,7 +21,9 @@ form \(mz+a\) with \(m\ge1\) and \(a=\rho_{i}+H\in A\), so
   \frac1{mz+a}
   =\frac1{mz}\sum_{l\ge0}\Bigl(\frac{-a}{mz}\Bigr)^{l}\in z^{-1}A[z^{-1}]
 \]
-is a finite sum, and \eqref{eq:ss35} is an element of \(zA[z^{-1}][[q]]\).
+is a finite sum, so each summand of \eqref{eq:ss35} lies in
+\(zA[z^{-1}][[q]]\) once the \(\ln q\) carried by the prefactor is handled as
+described before Lemma~\ref{lem:jslice}.
 By the \emph{\(z\)-order} of such an element we mean the largest \(n\) with a
 nonzero \(z^{n}\) coefficient.  A \(z\)-order bound proved after the pullback
 is a coefficientwise statement about classes in the image of an injective
@@ -86,7 +88,7 @@ else.
   class \([L]\), so \((1,0)\) is a degenerate endpoint of the extremal-line
   setup, not a further standard-flip case repaired here.  For \(\nu=0\) the bound is the
   \(d\)-independent value \(1-s\) and the sum is not \(q\)-adically
-  convergent, which is why \(r>s\) is assumed throughout \cite{SS}.
+  convergent, consistently with the standing assumption \(r>s\) in \cite{SS}.
 \end{remark}
 
 To convert the normalization into an identification we use the standard
@@ -102,7 +104,7 @@ the divisor equation, over which both the extremal cone and \eqref{eq:ss35}
 are defined; or one may factor off the prefactor \(q^{c_{1}(T)/z}\) and work
 with the remaining series, in which \(q\) appears only in integral powers.
 In either reading the degree-\(d\) summand carries \(q^{(r-s)d}\) by
-\cite[(33)]{SS}.  That weight is positive because \(r>s\), so the series
+\eqref{eq:ss35}.  That weight is positive because \(r>s\), so the series
 converges \(q\)-adically and \eqref{eq:ss35} is a point of the ambient
 symplectic space.
 
@@ -114,13 +116,13 @@ symplectic space.
 
 This is the mechanism behind every mirror theorem of Givental type: a point
 of the cone with a prescribed \(z^{0}\) coefficient is the \(J\)-function at
-that coefficient, and the mirror map is precisely the discrepancy between
+that coefficient, and the mirror map is precisely the difference between
 the prescribed \(z^{0}\) coefficient and the parameter one started with.
 
 The second ingredient is that \eqref{eq:ss35} lies on \(\mathcal L_{T}\) at
-all.  This is asserted in \cite[Remark~4.5(3)]{SS}, in the same sentence
-whose first half Corollary~\ref{cor:normalized} contradicts, so we prove it
-instead of quoting it.  We begin with split bundles, where the two sources
+all.  This is asserted in \cite[Remark~4.5(3)]{SS}, the same remark
+whose other assertion Corollary~\ref{cor:normalized} contradicts, so we prove
+it instead of quoting it.  We begin with split bundles, where the two sources
 the authors name do the work.
 
 \begin{lemma}
@@ -157,9 +159,9 @@ the authors name do the work.
   the theory twisted by the inverse \(\C^{\times}\)-equivariant Euler class
   is the Gromov--Witten theory of the total space, which is
   \cite[Corollary~2]{CoatesGivental}; and quantum Riemann--Roch
-  \cite[Theorem~1]{CoatesGivental} presents the twisted cone as the image of
-  \(\mathcal L_{\PP(V)}\) under an explicit quantized symplectic
-  transformation.  It multiplies the degree-\(d\) summand of
+  \cite[Theorem~1]{CoatesGivental}, in its genus-zero cone form
+  \cite[Corollary~4]{CoatesGivental}, presents the twisted cone as the image
+  of \(\mathcal L_{\PP(V)}\) under an explicit symplectic transformation.  It multiplies the degree-\(d\) summand of
   \cite[(34)]{SS} by \(\prod_{j=1}^{s}\prod_{m=0}^{d-1}(\sigma_{j}-H-mz)\);
   after the extremal specialization appropriate to \(T\), which replaces
   \(q^{rd}\) by \(q^{(r-s)d}\) and \(c_{1}(\PP(V))\) by \(c_{1}(T)\), the
