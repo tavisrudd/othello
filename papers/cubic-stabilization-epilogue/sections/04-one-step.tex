@@ -215,34 +215,6 @@ ring.  Finally, the deck action fixes every integral power of \(z\) at each
 finite level, so the compatible gauge is single-valued for the framed turn.
 \end{proof}
 
-\noindent\textbf{Faithful graded Laurent receiver.}
-Let \(k\) be a field and let \(\Gamma\) be a lattice with a
-translation-invariant total order.  Write \(k((\Gamma))\) for the Hahn field
-of formal sums
-\[
- \sum_{\gamma\in\Gamma}a_\gamma X^\gamma,
- \qquad a_\gamma\in k,
-\]
-whose support is well ordered.  Suppose a graded monomial completion has the
-finite-below property: below every value of its positive multidegree there
-are only finitely many supported monomials.  After refining that multidegree
-lexicographically to an order on its exponent lattice, coefficientwise
-inclusion is an injective ring map from the completion, and from every
-graded monomial Laurent localization of it, to \(k((\Gamma))\).
-
-The same remains true after adjoining the exponent of \(z\), ordered only
-after the positive completion degree.  In particular, a compatible gauge
-whose filtration-degree-\(m\) terms have \(z\)-order at least \(-m\) maps
-injectively to this enlarged Hahn field.
-The finite-below property makes every allowed support well ordered for the
-refined order.  Sums preserve this property, and the coefficient of a fixed
-monomial in a product is a finite sum.  Thus coefficientwise inclusion is a
-ring homomorphism; it is injective because a nonzero series retains its
-least supported monomial.  Laurent localization translates supports and
-therefore preserves well-ordering.  With the completion degree ordered
-before the \(z\)-exponent, a sequence of terms of increasing filtration
-degree remains increasing even when its \(z\)-orders decrease linearly.
-
 \begin{lemma}[Formal base shift]
 \label{lem:formal-base-shift}
 Let \(A\) be a \(\C\)-domain and let \(B\) be a complete separated
@@ -398,8 +370,8 @@ invariants; the center terms are computed after the displayed specializations.
 
 \begin{proof}
 For each of the finitely many endpoint and summand comparisons, use the
-faithful graded Laurent receiver described above.  Their coefficient exponent
-lattices embed in one ordered direct-sum lattice.  Take an algebraic closure
+faithful graded Laurent receiver constructed below.  Their coefficient
+exponent lattices embed in one ordered direct-sum lattice.  Take an algebraic closure
 of that coefficient Hahn field, choose one complement to \(\C\), and form its
 universal exponential field.  Only afterward adjoin the distinguished
 integral exponent of the independent loop coordinate \(z\).  Choice
@@ -523,10 +495,13 @@ inverse because the displayed coordinate map has invertible linear term.
 Let \(\Gamma_j^{\rm coeff}\) be the coefficient exponent lattice of these
 source homogeneous variables, including \(v\), the source Novikov monomials,
 and the scaled source bulk variables.  The pulled-back monomials of \(R_j\)
-are elements of its graded completion.  Order the lattice by the preceding positive
-multidegree, then by any lexicographic refinement.  The faithful graded
-Laurent receiver above embeds both the pulled-back \(J_j\)-complete gauge
-coefficient ring and Iritani's graded Laurent comparison coefficient ring faithfully into
+are elements of its graded completion.  Order this lattice by the preceding
+positive multidegree, then by any lexicographic refinement.  The finite-below
+property makes every permitted support well ordered.  The coefficient of a
+fixed monomial in a product is a finite sum, and a nonzero series retains its
+least supported monomial; Laurent localization only translates supports.
+Coefficientwise inclusion therefore embeds faithfully both the pulled-back
+\(J_j\)-complete gauge ring and Iritani's graded Laurent comparison ring into
 \(H_{0,j}=\C((\Gamma_j^{\rm coeff}))\).  Take an algebraic closure of
 \(H_{0,j}\) and its universal exponential field \(\Omega_{V,j}\) as in
 Definition~\ref{def:framed-sixth-multiplicity}, using a new independent loop
@@ -558,8 +533,9 @@ inversion.  Theorem~5.18 supplies both maps with only integral powers of
 disc.  The fixed-divisor
 substitution is a \(z\)-constant
 coefficient automorphism, so it does not change \(\nu_6\); it is well defined
-on the image because \(h_{C,j}\) is a scalar multiple of \(\rho_C\).  Thus each center target summand has the
-framed monodromy of its specialized small connection.  The ambient target
+on the image because \(h_{C,j}\) is a scalar multiple of \(\rho_C\).  Thus
+each center target summand has the framed monodromy of its specialized small
+connection.  The ambient target
 uses \(\tau=\tau^\circ+t\), with \(\tau^\circ=O(q^{-1})\), and the same
 finite-quotient argument.  Direct-sum additivity gives
 \eqref{eq:blowup-nu}.
@@ -628,7 +604,7 @@ homogeneous generators
 \[
  v,\qquad q^{-c_1(V)\cdot d/r}Q^d,\qquad
  q^{k/r}\widehat\tau_{i,k}=u^{-k}\widehat\tau_{i,k}.
- \tag{4.5a}
+ \tag{4.4d}
  \label{eq:projective-scaled-completion-variables}
 \]
 The graded-completion convention of
@@ -640,7 +616,7 @@ by ample Novikov degree and bulk weight; the grading controls the negative
  \widehat\tau\longmapsto
  \bigl(\varsigma_0(\widehat\tau),\ldots,
        \varsigma_{r-1}(\widehat\tau)\bigr)
- \tag{4.5b}
+ \tag{4.4e}
  \label{eq:projective-full-coordinate-map}
 \]
 has invertible Jacobian by Theorem~5.1(5), and hence is a graded formal
@@ -654,9 +630,10 @@ linear term.
 Form the coefficient exponent lattice \(\Gamma_j^{\rm coeff}\) from the
 source homogeneous generators in
 \eqref{eq:projective-scaled-completion-variables}, and refine this
-multidegree to a total order.  Its Hahn field
-\(H_{0,j}=\C((\Gamma_j^{\rm coeff}))\) receives the gauge and comparison
-coefficient rings.  Take its algebraic closure and universal exponential
+multidegree to a total order.  The same finite-below support argument embeds
+the gauge and comparison coefficient rings in its Hahn field
+\(H_{0,j}=\C((\Gamma_j^{\rm coeff}))\).  Take its algebraic closure and
+universal exponential
 field \(\Omega_{V,j}\) before adjoining \(e_z\), and use the nonzero receiver
 \[
  \Omega_{V,j}\otimes_{H_{0,j}}
