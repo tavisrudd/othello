@@ -622,12 +622,40 @@ verdict text lives only in `claim-proof-novelty-ledger.md`.
   framing-compatibility checks the memo proposed have been run against the
   pinned sources; verdicts, locators, and hashes are in
   `../2026-08-15-c912-framing-compatibility-checks.md`.  The memo is now at its
-  fourth version, carries those verdicts in its Section 6, and adds Section 7,
-  which attacks the residual gap through the flatness identities: 20 pages, PDF
-  SHA-256
-  `4dccbe6d9ecfcbda59f9d0f4243d8d8e3f35bc9798743a12b5e0d8c5ae4c2402`.  Either
+  fifth version, carries those verdicts in its Section 6, attacks the residual
+  gap through the flatness identities in Section 7, and closes it for the cubic
+  block in Section 8: 25 pages, PDF SHA-256
+  `6c5b06a02b35b0685db820702464e8ade9f91de86e8c3471a77520d7261248e8`.  Either
   document can be read first; the report is the shorter route in, the memo's
-  Section 7 is where the mathematics now is.
+  Section 8 is where the mathematics now is.  A source-verified assessment of
+  the proposed Hodge-atom spine, which is the alternative presentation, is
+  `../2026-08-15-c912-atom-spine-source-assessment.md`.
+
+  *The coalesced case is closed for the cubic (Section 8).*  Over the formal
+  even bulk germ, with the block decoupled and its exponential factor twisted
+  away, three statements follow from the flatness identities alone.  The
+  commutant of the regular block operator forces `C_{a,0} = p I + q N`, so the
+  bulk connection has no `(2,1)` entry.  The double eigenvalue never splits:
+  `d = det N` satisfies `d_a d = 2 q_a d` with `d(0) = 0`, hence `d = 0`.  After
+  the shearing `diag(1,z)` no irregularity appears and the bulk connection loses
+  its pole: the `z^-1` flatness equation gives `k_a = f h_a` and
+  `d_a f = f w_a` with `f(0) = 0`, hence `f = 0`.  The `z^0` equation then reads
+  `d_a R = [R, G_a]`, so the residue's characteristic polynomial is constant.
+  For the cubic it is `rho^2 + rho + 5/36` with roots `-1/6, -5/6`, reproducing
+  the draft's own `J_0 = [[0,2],[0,0]]`, `D_0 = diag(-19/18, 19/18)` and
+  `(E_0)_21 = -8/81` exactly, so `nu_6 = 2` at every bulk parameter including a
+  specialized one.  Specialization is substitution into constants, so no
+  receiver, bulk gauge, or convergence question survives.  The regression test
+  is met by construction: the residue contains the `z^2` coefficient through the
+  shearing.  Not covered: derogatory blocks, semisimple blocks with a
+  `rho_i - rho_j = -1` resonance, and Jordan blocks of size above two, which is
+  what an arbitrary-center statement would need.
+
+  *Correction carried by Section 8.*  Cai's Proposition 6 already states the
+  `+/-1/6` exponents for the big quantum connection, proved by a bulk gauge
+  `M = I + sum M_n t^n` with `d_{t_i} M = -z^-1 P_i M` -- the same pro-Laurent
+  object the memo scrutinized.  That argument is sound with the bulk kept
+  formal; the receiver problem was always about specialization.
 
   *State after the checks.*  Check 1 fails: Hinault--Yu--Zhang--Zhang's
   Theorem 4.34 governs F-bundles over the large-radius limit point `q=t=0`,
