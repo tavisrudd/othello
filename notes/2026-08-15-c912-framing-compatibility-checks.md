@@ -9,6 +9,10 @@ pro-Laurent bulk gauge of `lem:formal-base-shift` in the proof of
 `prop:framed-operations`.  The proposal and its motivation are in
 `2026-08-15-c912-frame-transport-memo.tex`, Section 6 (`sec:hyzz`); the adversarial
 check that corrected the memo is `2026-08-15-c912-frame-transport-memo-red-team.md`.
+The memo has since been revised to its third version, which carries the verdicts below
+in its Section 6, replaces its route list and questions accordingly, and records the two
+corrections in `sec:corrections`; that version is 15 pages with PDF SHA-256
+`1e1a2393762ba9c2b64b29fc9e8164ee4dfe799a02e20bc4b71422e8442d7156`.
 No manuscript, Lean, or export change is made by this pass.
 
 **Headline.**  Check 1 fails as posed, for three independent reasons; check 2 passes and

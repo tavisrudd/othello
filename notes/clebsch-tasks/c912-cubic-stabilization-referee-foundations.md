@@ -599,8 +599,11 @@ verdict text lives only in `claim-proof-novelty-ledger.md`.
   `../2026-08-15-c912-frame-transport-memo-red-team.md`.  The three
   framing-compatibility checks the memo proposed have been run against the
   pinned sources; verdicts, locators, and hashes are in
-  `../2026-08-15-c912-framing-compatibility-checks.md`, which supersedes the
-  memo's Section 6 and its Section 5 diagnosis.  Read that report first.
+  `../2026-08-15-c912-framing-compatibility-checks.md`.  The memo is now at its
+  third version and carries those verdicts in its Section 6, its corrected
+  route list, and its corrections section: 15 pages, PDF SHA-256
+  `1e1a2393762ba9c2b64b29fc9e8164ee4dfe799a02e20bc4b71422e8442d7156`.  Either
+  document can be read first; the report is the shorter route in.
 
   *State after the checks.*  Check 1 fails: Hinault--Yu--Zhang--Zhang's
   Theorem 4.34 governs F-bundles over the large-radius limit point `q=t=0`,

@@ -20,7 +20,7 @@
 
 \title{Frame transport for framed formal monodromy:\\
   the lemma, its hypotheses, and the receiver problem\\
-  \large Second version, correcting the first}
+  \large Third version, reporting the source checks and correcting the second}
 \author{Memo for a reader of \emph{Irrationality of Cubic Threefolds after One
     Stabilization}}
 \date{15 August 2026}
@@ -42,12 +42,23 @@ weight parameter large, and holds at the cubic endpoint under the smallest
 admissible choice. Section~\ref{sec:iterated} examines an iterated receiver that
 would satisfy the inequality trivially, checks it against the sources, and finds
 that it needs a semipositivity hypothesis on the ambient variety which weak
-factorization does not supply. Section~\ref{sec:hyzz} then identifies what is
-probably the actual repair, in the framing theory of Hinault, Yu, Zhang and
-Zhang, whose decomposition gauge is regular in the loop coordinate and so
-satisfies the transport lemma's hypothesis outright.
-Section~\ref{sec:corrections} lists what the first version
-of this memo got wrong; readers of that version should start there.
+factorization does not supply.
+
+The second version of this memo proposed the framing theory of Hinault, Yu,
+Zhang and Zhang as the probable repair, on the ground that its decomposition
+gauge is regular in the loop coordinate. Three compatibility checks against the
+pinned sources have since been run, and the route does not survive them;
+Section~\ref{sec:hyzz} now reports what those checks found. Two consequences are
+worth more than the route was. First, no receiver is needed for the comparison
+isomorphisms at all: Iritani's $\Psi$ and Iritani--Koto's $\Phi$ are polynomial
+in the loop coordinate with inverses in the same ring, so the transport theorem
+below applies to them with $\Gamma=0$. Second, the diagnosis of the second
+version was wrong --- the pro-Laurent bulk gauge is not the draft's own choice
+but Iritani--Koto's own fundamental solution, which the sources meet and handle
+by Birkhoff factorization. What is left is a single statement about one bulk
+displacement, recorded in Section~\ref{sec:hyzz}.
+Section~\ref{sec:corrections} lists what the earlier versions
+got wrong; readers of those versions should start there.
 \end{abstract}
 
 \section{The assertion at issue}
@@ -592,8 +603,18 @@ ruled surfaces, and point blowups. Proving primitive-sixth vanishing directly
 for those, in the coordinates Iritani's specialization actually produces, is a
 smaller problem than a general transport theorem.
 
-\section{The framing route, which is probably the repair}
+\section{The framing route, checked against the sources and closed}
 \label{sec:hyzz}
+
+The second version of this memo proposed the following route and called it the
+probable repair. I state it as it was proposed, then report the three checks,
+then state what survives. The checks were run against
+arXiv:2411.02266 as cached, arXiv:2307.03696v4, and arXiv:2307.13555v3; the
+full verdicts, locators and file hashes are in the companion report
+\emph{The three framing-compatibility checks, run against Iritani's
+decomposition}.
+
+\subsection*{The route as proposed}
 
 Everything above treats the pro-Laurent bulk gauge of Lemma~4.5 as unavoidable.
 It may not be. Hinault, Yu, Zhang and Zhang work with $F$-bundles on the formal
@@ -628,80 +649,241 @@ further work:
   M_{\mathrm f,V}(\nabla')\ \text{and}\ M_{\mathrm f,V}(\nabla)\ \text{conjugate}.
 \]
 No Hahn receiver, no product $GP$, and no inequality
-$e\,w(\Delta\lambda)<\varepsilon$. The scissors of Section~\ref{sec:lemma}
-close because the gauge is regular rather than pro-Laurent: the entire
-obstruction analysed in Section~\ref{sec:receiver} is a consequence of the
-draft's own choice to realize the bulk transport by a normalized gauge with
-unbounded negative loop order, not of anything in the comparison theorems.
+$e\,w(\Delta\lambda)<\varepsilon$, provided the decomposition of
+Proposition~4.7 can be identified with an $F$-bundle isomorphism of the class
+Theorem~4.34 governs. That identification, the matching of the $u=0$ datum, and
+the separation of the center specialization were the three checks.
 
-What has to be checked is therefore a compatibility question, and it is much
-smaller than a transport theorem:
+\subsection*{Check one: the identification does not exist as posed}
+
+It fails three times over, and the first two are independent of the draft.
+
+\emph{Domain.} Section~4.4 of Hinault--Yu--Zhang--Zhang is titled
+\emph{Equivalence of $F$-bundles over a point}, and both of its applications
+evaluate at the closed point $q=t=0$ of the base, the large-radius limit; the
+proof of their Theorem~5.16 opens by observing that there the quantum product
+reduces to the classical cup product, so that the leading operator $K_{\rm
+split}$ of their (5.18) is a cup-product operator and hence nilpotent. The
+draft's $\nu_6$ is not evaluated there. It is read where the eigenvalues of
+$c_1\star$ separate --- at the cubic, where the block carries $r=(3q)^{1/2}$ and
+the indicial roots $\pm1/6$, $\pm5/6$. At $q=0$ that separation collapses and
+the exponential blocks the framed operator is built from do not exist. Their
+Theorems~5.20 and 5.24 do reconstruct the isomorphism over the whole base from
+its restriction at the limit point, but that is uniqueness of a map whose
+existence is Iritani's and Iritani--Koto's theorem; it is not a transport of
+framed monodromy between base points.
+
+\emph{Hypotheses, for the blowup.} Section~4.4 assumes the generalized
+eigenspaces of $K$ all have the same dimension, and the matrix calculus of
+Definition~4.33 and Theorem~4.34 rests on the resulting splitting
+$H_0^{\oplus m}\cong H$. The blowup decomposition is
+$H^*(X)\oplus\bigoplus_{i=1}^{m-1}H^*(Z)[-2i]$, whose summands differ in
+dimension whenever $\dim H^*(Z)\ne\dim H^*(X)$; the authors write a general
+endomorphism there as a matrix with $\Phi_{1,1}\in\operatorname{End}(H^*(X))$
+and $\Phi_{i,i}\in\operatorname{End}(H^*(Z))$, so the mismatch is explicit in
+their own notation. Their blowup statement, Theorem~5.22, is accordingly called
+analogous and carries \emph{no proof}; its uniqueness clause is conditional on
+restricting the coefficients of $\Phi$ to a universal algebra, and for existence
+they refer to Iritani--Koto. So the blowup half of Proposition~4.7 --- equation
+(4.3), the half the headline theorem cannot do without --- has no proved
+statement of theirs behind it. The projective-bundle half is genuinely covered:
+there the eigenspaces are $m$ copies of $H^*(X)$ by their Lemma~5.8, matching
+Section~4.4, and Theorem~5.16 is proved.
+
+\emph{Purpose.} Even where Theorem~4.34 applies, its conclusion compares the
+source at its base point with the target based at a shifted class $\Delta(a)$,
+pinned by their (5.17) for projective bundles and (5.23) for blowups. That
+shift is exactly what the pro-Laurent gauge of Lemma~4.5 exists to undo. The
+route relocates the bulk displacement rather than removing it.
+
+The two normalizations do agree on where the displacement sits, which is a
+useful check on the draft's reading of the sources. In their limit-point
+coordinates the eigenvalue $\lambda_i\in\C[c_1,\dots,c_m]$ is cohomology-valued,
+so $\Delta(a)$ acquires components in $H^{\ge4}$ from the higher Chern classes,
+while the $H^2$ components cancel identically --- their Lemma~5.8(2) gives
+$m\lambda_i\equiv m\xi^{i-1}-c_1V$, cancelling the $c_1V$ on the right of
+(5.17) --- and the $H^2$ part of $\Delta(a)$ is left free. In Iritani's
+coordinates the same data reads
+$\varsigma_j^\circ=-(c-1)\lambda_j+h_{Z,j}+O(q^{-1/(c-1)})$ with $\lambda_j$ a
+\emph{scalar} multiple of $q^{1/(c-1)}$, so the $H^0$ part is that scalar, the
+$H^2$ part is $h_{Z,j}$, and everything of degree at least four has moved into
+the tail. Same content, different bookkeeping; the draft's split of
+$\varsigma_j^\circ$ into unit twist, fixed divisor, and positive-filtration tail
+is right. The tail is irreducible: for a trivial rank-two bundle all $c_i(V)$
+vanish and their $\Delta(a)$ is purely $H^0\oplus H^2$, yet Iritani--Koto's
+$\varsigma_j^\circ$ still carries its $O(q^{-1/r})$ tail, so even
+$X\times\PP^1$ does not escape the bulk gauge.
+
+\subsection*{Check two: the $u=0$ datum, which passes}
+
+Their Theorems~5.20(2) and 5.24(2) determine the base map from its restriction
+to the base point up to a multiplicative constant in each logarithmic direction;
+the proof of their Proposition~4.31 shows why, since $df$ is recovered through
+$\Psi(d\log p_i)=d\log f_i$ and integrating a logarithmic form leaves one
+constant. That ambiguity is a character of the Novikov lattice: $q\mapsto cq$ is
+$Q^d\mapsto c^{E\cdot d}Q^d$, which is the divisor substitution (4.1) of the
+draft with $a_2^\circ$ a logarithmic multiple of the dual class. The draft
+already proves such a substitution is a $z$-constant coefficient automorphism
+and leaves $\nu_6$ unchanged, and already checks it is well defined on the image
+monoid. The bundle map carries no ambiguity at all once its restriction is
+fixed.
+
+The ambiguity also never has to be tolerated, because the sources pin it.
+Iritani--Koto's (5.11) gives
+$\varsigma_j^\circ=r\lambda_j+[z^{-1}]\log\bigl(q^{c_1(V)/(rz)}F_j(1)\bigr)$ in
+closed form and their (5.12) gives $\Phi_j^\circ$; Iritani's Section~5.8.1 fixes
+$\Psi|_{Q=\widetilde\tau=0}$ from his Lemma~5.13 and the explicit $\lambda_j$.
+One manuscript sentence citing those, and noting that any residual constant is a
+divisor substitution already covered by (4.1), settles this point for good,
+whichever repair eventually lands.
+
+\subsection*{Check three: the center specialization, which stays separate}
+
+It stays separate more firmly than the check anticipated. Their $A$-model
+$F$-bundle is built throughout on the one-variable Novikov projection
+$q^\beta\mapsto q^{\beta\cdot\omega}$ of their (2.21), and in the blowup
+application the center copies are the maximal $F$-bundles of $Z$ associated to
+$\sigma^*\omega_X$ --- the Novikov direction pulled back from the ambient
+variety, which is the draft's specialization in a coarser form. No statement of
+theirs can therefore certify that a specialized center module carries an
+intrinsic framed monodromy. Divisor tagging remains the only route to intrinsic
+center invariants.
+
+One genuine gain came out of it. Their Lemma~2.24 proves that the collapsed
+potential determines the full genus-zero potential, by expanding in the $H^2$
+bulk directions and separating curve classes by their intersection numbers with
+an $H^2$ basis, under the finiteness of their Assumption~2.22. That is the
+mechanism of \texttt{lem:divisor-tagging}, in print, in a closely related
+setting. It does not close that lemma --- it works at the level of the potential
+over a base retaining all $H^2$ directions, whereas the draft needs the
+separation at the level of a framed operator at a fixed bulk point, and the
+draft's collapse is by the pair $(i_*,\rho_C\cdot)$ rather than by a single nef
+class --- but it makes the shape of the argument a cited one.
+
+\subsection*{What survives, and the corrected diagnosis}
+
+Two things survive, and both are worth more than the route was.
+
+\emph{The comparison isomorphisms need no receiver.} Iritani's $\Psi$ is an
+isomorphism of $\C[z](\!(q^{-1/s})\!)[[Q,\widetilde\tau]]$-modules
+(Theorem~5.18), and Iritani--Koto's $\Phi$ is induced by a
+$\C[z,q][[Q,\widehat\tau]]$-module map and is an isomorphism over
+$\C[z](\!(q^{-1/r})\!)[[Q,\widehat\tau]]$ (proof of their Theorem~5.1(6)). Both
+are polynomial in $z$ with inverses in the same ring, hence lie in
+$\mathrm{GL}_n(F(\!(z)\!))$ for $F$ the Laurent coefficient field, hence are
+fixed by the turn. Theorem~\ref{thm:transport} applies to them with $\Gamma=0$,
+where Levelt--Turrittin is available: no Hahn field, no product $GP$, no
+inequality. The receiver problem was never a property of the comparison.
+
+\emph{The pro-Laurent gauge is not the draft's choice.} This corrects the
+sentence the second version of this memo built its recommendation on.
+Iritani--Koto transport along the same object: their reconstruction in
+Section~5.8 uses
+$M=\bigoplus_je^{-\varsigma_j^\circ/z}M_B(\varsigma_j^\circ+s_j;Qq^{-c_1(V)/r})$,
+described in their footnote as a fundamental solution for the summands with
+respect to $(Q,s_0,\dots,s_{r-1})$ but not for $q$ and $z$, satisfying
+$M=\mathrm{id}+O(z^{-1})$ and lying in
+$\operatorname{End}[z^{-1}](\!(q^{-1/r})\!)[[Q,s]]$. Per bulk degree it is a
+\emph{polynomial} in $z^{-1}$ --- which is the draft's own bound (4.1a), that
+$G_\alpha$ has no power of $z$ below $-|\alpha|$ --- and it is unbounded only
+after summing over bulk degrees. The sources meet this object and handle it not
+by an ordered receiver but by Birkhoff factorization, splitting the $z$-regular
+factor $\Phi$ from the $\mathrm{id}+O(z^{-1})$ factor $M'$ in
+$(\Phi^\circ)^{-1}\circ M=M'\circ\Phi^{-1}$. Any repair should be measured
+against that, not against a receiver.
+
+\subsection*{The residual gap}
+
+After the two survivals, the blocker is no longer transport across the
+comparison. It is one statement:
 
 \begin{quote}
-  Does the decomposition used in Proposition~4.7, after the coefficient base
-  changes and with $u=z$, coincide with an $F$-bundle isomorphism of the class
-  Theorem~4.34 governs --- that is, do the two connections being compared lie in
-  $\mathcal F(H,\mathrm{iso},d,(c_i))$, and are its three conditions met?
+  Let $T$ be smooth projective with quantum connection $\nabla$, and let
+  $\tau^\bullet$ be a bulk parameter in the positive filtration --- Iritani's
+  $\tau^\circ=q^{-1}[Z]+O(q^{-2})$ on the ambient summand, the
+  $O(q^{-1/(c-1)})$ tail of $\varsigma_j^\circ$ together with $s_j$ on a center
+  summand. Show that the framed formal monodromy of $\nabla|_{\tau=\tau^\bullet}$
+  has the same primitive-sixth multiplicity as $\nabla|_{\tau=0}$.
 \end{quote}
 
-Two remarks on scope. First, the identification is plausible on the authors'
-own terms, since their stated application is uniqueness of exactly the
-decompositions Proposition~4.7 imports for existence. Second, this does not
-touch the center specialization: their statement is about the decomposition as
-an $F$-bundle, upstream of the numerical center map, whose noninjectivity is
-what divisor tagging exists to repair. So the low-dimensional center problem
-survives intact, while the frightening half --- transporting framed monodromy
-across arbitrary intermediate fourfolds --- would be removed.
+Everything else in Proposition~4.7 is proved or reduced to a regular gauge, and
+\texttt{lem:divisor-tagging} inherits this gap and nothing else.
 
-If that bridge checks, Sections~\ref{sec:lemma} to \ref{sec:receiver} remain
-accurate as an account of why the proof currently in the manuscript does not
-work, but they stop being the repair, and the manuscript should adopt the
-regular gauge instead of the pro-Laurent one wherever it can.
+\section{Routes, in the order I would now try them}
 
-\section{Four routes, in the order I would try them}
+The framing route has been removed from this list by the checks of
+Section~\ref{sec:hyzz}. All five below attack the residual gap stated at the end
+of that section.
 
 \begin{enumerate}
-\item \textbf{The framing theory of Hinault, Yu, Zhang and Zhang}
-  (arXiv:2411.02266), whose reconstruction algorithm is the one Iritani--Koto
-  added as their Section~5.8, and which is very likely the actual repair. See
-  Section~\ref{sec:hyzz}.
-\item \textbf{The iterated receiver of Section~\ref{sec:iterated}}, now known to
-  need a semipositivity hypothesis on the ambient variety that weak
-  factorization does not supply. Still worth having where it applies, but it
-  does not remove the arbitrary intermediate fourfolds.
+\item \textbf{Birkhoff.} The identity $(\Phi^\circ)^{-1}\circ M=M'\circ\Phi^{-1}$
+  of Iritani--Koto's Section~5.8, and its counterpart in Iritani's
+  Section~5.8.2, already factors the bulk transport into a $z$-regular factor,
+  which Theorem~\ref{thm:transport} handles, and a factor
+  $M'=\mathrm{id}+O(z^{-1})$. What must be shown is that the second factor does
+  not change the primitive-sixth multiplicity. This is a statement about a
+  $z=\infty$-side gauge acting on a $z=0$ invariant, so it is not automatic; it
+  is, however, sharply posed and of a standard shape, unlike the receiver
+  inequality.
+\item \textbf{Pointwise residues, avoiding transport altogether.} In
+  Iritani--Koto's displayed conventions, $\nabla_a=\partial_a+z^{-1}(\phi_a\star)$
+  and $\nabla_{z\partial_z}=z\partial_z-z^{-1}(E\star)+\mu$, two exact relations
+  hold: commutativity and associativity of the quantum product give
+  $[E\star,\phi_a\star]=0$, and flatness gives
+  $\partial_a(E\star)=\phi_a\star+[\phi_a\star,\mu]$. The first says every bulk
+  direction preserves the spectral decomposition of $E\star$, so a bulk
+  displacement never mixes exponential blocks; the second identifies
+  $\partial_a\lambda_i$ with the $i$-th eigenvalue of $\phi_a\star$, the
+  canonical-coordinate relation. Together they invite comparing block residues
+  at the two parameters instead of transporting between them --- the ``argue
+  graded piece by graded piece'' possibility the earlier versions left open,
+  now with the relations that make it concrete. The signs above follow the
+  displayed connection of Iritani--Koto's Theorem~5.1 and should be rechecked
+  against the draft's normalization before use.
 \item \textbf{The low-dimensional centers directly}: primitive-sixth vanishing
   after Iritani's specialization, using the classification the draft already
   proves, rather than through a general transport statement.
 \item \textbf{Divisor tagging on its own terms}: whether the divisor equation
   gives a more explicit transport than the general positive-bulk gauge of
-  Lemma~4.5. This lemma carries the same receiver problem and needs its own
-  treatment either way.
+  Lemma~4.5. Their Lemma~2.24 is the same mechanism in print and is worth
+  citing; it does not close the lemma, for the reasons under check three.
 \item \textbf{Normalize, then verify.} Replace ``choose $L$ so large'' by the
   smallest weight satisfying separation, adopt the single-copy receiver of
   Section~\ref{sec:receiver}, and verify $e\,w(\Delta\lambda)<\varepsilon$ case
-  by case.
+  by case. This is fallback machinery now.
 \end{enumerate}
 
-Two further possibilities remain open rather than ordered. A transport theorem
-that never forms $GP$ --- arguing graded piece by graded piece, as the rank-one
-case does --- escapes the criterion entirely, but by the scissors it must supply
-a canonical normal form over the receiver singling out the turn, and cannot be a
-pure valuation argument. And restricting Proposition~4.7 to centers satisfying
-the criterion is available, at a cost in generality that is the author's call.
+The iterated receiver of Section~\ref{sec:iterated} is not on the list: it needs
+a semipositivity hypothesis on the ambient variety that weak factorization does
+not supply. It remains worth having where it applies. Restricting
+Proposition~4.7 to centers satisfying the criterion is likewise available, at a
+cost in generality that is the author's call.
 
-A separate scope reduction, also due to the same reader, would shrink what needs
-repairing: for the headline theorem the projective-bundle identity
-$\nu_6(X\times\PP^1)=2\nu_6(X)$ might be replaced by a direct quantum
-K\"unneth calculation, with $\nu_6(\PP^4)=0$ computed directly, leaving the
-blowup step for four-dimensional birational invariance as the only indispensable
-operation formula. The genus-eight corollary would then wait for the
-projective-bundle machinery.
+One observation bears on how much any of these has to prove. In Dubrovin's
+semisimple normalization the operator $\mu$, conjugated to canonical
+coordinates, has zero diagonal, so a multiplicity-one block of $E\star$
+contributes residue zero and no root of unity. If that carries over to this
+normalization --- I flag it rather than assert it --- then $\nu_6$ is supported
+entirely on blocks with repeated $E\star$-eigenvalue, and the routes above need
+only control those. It is consistent with the draft's own cubic block, where
+$K_0$ has eigenvalues $\pm6r,0,0$ and the primitive-sixth roots come from the
+rank-two $\lambda=0$ block through $\det L_s=(s+1/6)(s+5/6)$.
+
+A separate scope reduction stands on its own, unchanged: a direct quantum
+K\"unneth computation for $X\times\PP^1$ together with a direct computation for
+$\PP^4$ would leave the blowup step as the only operation formula the headline
+theorem needs, with the genus-eight corollary waiting. Note that this cannot be
+had by triviality of the bundle alone --- see the end of check one.
 
 \section{Placement in the manuscript}
 \label{sec:placement}
 
-Conditional on a receiver repair, and stated by label because these insertions
-renumber Section~4.
+Stated by label because these insertions renumber Section~4. Items 1 to 3 and
+item 5 are unconditional and can be written now; the checks of
+Section~\ref{sec:hyzz} also make item 6 partly unconditional, since the
+comparison isomorphisms themselves are $z$-polynomial and the transport lemma
+applies to them with no receiver. Only the steps that pass through the
+pro-Laurent bulk gauge remain conditional on closing the residual gap.
 
 \begin{enumerate}
 \item The ground field and solution algebra go immediately before ``Apply
@@ -722,8 +904,18 @@ renumber Section~4.
   $M^{\mathrm{bulk}}$ as the transported framed automorphism, in the module
   frame, with the solution-frame statement cited.
 \item \texttt{prop:framed-operations} cites the lemma at its three load-bearing
-  steps and says which field plays the role of $\mathcal H$ at each, with the
-  criterion verified there.
+  steps and says which field plays the role of $\mathcal H$ at each. Two of
+  those steps are now unconditional: the transport across $\Psi$ and across
+  $\Phi$ needs only that both are $z$-polynomial with inverses in the same ring,
+  which their statements give, so the field there is $F(\!(z)\!)$ over the
+  Laurent coefficient field and no criterion is verified. The step that removes
+  the positive-filtration bulk parameter is the one that waits.
+\item A sentence in \texttt{prop:framed-operations} fixing the normalization of
+  the coordinate change, citing Iritani--Koto (5.11)--(5.12) and Iritani's
+  Section~5.8.1, and noting that any residual constant in a logarithmic Novikov
+  direction is a divisor substitution already covered by (4.1). This is owed
+  regardless of which repair lands, and is check two of
+  Section~\ref{sec:hyzz}.
 \item \texttt{lem:divisor-tagging} carries the same obstruction --- it embeds
   the gauge of \texttt{lem:formal-base-shift}, whose negative $z$-order is
   unbounded, together with every transported operator, into one ordered Hahn
@@ -736,8 +928,32 @@ source-only gate, with an empty declaration list exactly when its coverage is
 recorded as absent, and the coverage snapshot string in both verification
 READMEs must be regenerated.
 
-\section{Corrections to the first version of this memo}
+\section{Corrections to the earlier versions of this memo}
 \label{sec:corrections}
+
+\subsection*{From the second version to this one}
+
+Both changes come from running the three checks against the sources.
+
+\begin{enumerate}
+\item The framing route of Section~\ref{sec:hyzz} was called the probable
+  repair. It is not a repair at all: its governing theorem lives at the
+  large-radius limit point, its blowup case is unproved and outside that
+  theorem's hypotheses, and the gauge it supplies lands at the shifted base
+  point the bulk gauge exists to undo.
+\item The second version wrote that the unbounded negative loop order is the
+  draft's own choice rather than something the comparison theorems impose. That
+  is wrong, and it was the ground for the recommendation. Iritani--Koto
+  transport along the same object, their fundamental solution $M$ of
+  Section~5.8, with the same per-bulk-degree $z^{-1}$-polynomiality the draft
+  derives in (4.1a).
+\end{enumerate}
+
+Two findings were gained in exchange, and they narrow the problem rather than
+restate it: the comparison isomorphisms need no receiver, and the residual gap
+is one displacement statement. Both are in Section~\ref{sec:hyzz}.
+
+\subsection*{From the first version to the second}
 
 For readers of the first version, these are the substantive changes.
 
@@ -770,17 +986,25 @@ For readers of the first version, these are the substantive changes.
 
 \section{Questions}
 
+The first question of the second version --- whether the two connections
+compared in Proposition~4.7 lie in the class Theorem~4.34 governs --- has been
+answered no, three times over, in Section~\ref{sec:hyzz}. These replace it.
+
 \begin{enumerate}
-\item Do the two connections compared in Proposition~4.7 lie in the class
-  Theorem~4.34 of Hinault--Yu--Zhang--Zhang governs, and are its three
-  conditions met? This is the question that decides the repair.
+\item Does the factor $M'=\mathrm{id}+O(z^{-1})$ of the sources' Birkhoff
+  factorization preserve the primitive-sixth multiplicity? This is now the
+  question that decides the repair.
+\item Can the framed spectrum at a positive-filtration bulk parameter be
+  compared with the one at the origin blockwise, using
+  $[E\star,\phi_a\star]=0$ and
+  $\partial_a(E\star)=\phi_a\star+[\phi_a\star,\mu]$, without transporting?
+\item Does the vanishing of the diagonal of $\mu$ in canonical coordinates carry
+  over to this normalization, so that only repeated-eigenvalue blocks can carry
+  $\nu_6$?
 \item For the low-dimensional centers, can primitive-sixth vanishing be proved
   directly in the coordinates Iritani's specialization produces, given that the
   nef-canonical case already yields an integral-$z$ gauge to a regular-singular
   connection?
-\item Is there a canonical normal form over the receiver singling out the turn,
-  which is what a transport argument avoiding $GP$ needs and what the existence
-  of a Picard--Vessiot ring does not give?
 \item Failing all of these, what is the right restriction on centers, and does
   weak factorization stay inside it?
 \end{enumerate}
