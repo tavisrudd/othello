@@ -222,6 +222,15 @@ estimate written out.  The false chart-independence argument in
 counterexample to the old one, plus the family form.  `make check` passes at
 44 pages.
 
+## Export state
+
+Exported at authority commit `75bfa9271`. The standalone repository
+`~/src/math-papers/cubic-stabilization-irrationality` carries it as forward commit `2d01c00` on top
+of the pushed `d8d2937`; its release gate replays green at 48 pages, warning-free, and its PDF is
+byte-identical to the authority copy. The portfolio summary is synchronized at `734f11c` from
+authority `a9b5b9c9a`. Nothing is pushed; publication remains a separate decision, and the export is
+a checkpoint for cross-checking rather than a release.
+
 ## Follow-up to discuss before the next revision pass
 
 Six independent referee cold reads ran on 2026-08-15 (reports
