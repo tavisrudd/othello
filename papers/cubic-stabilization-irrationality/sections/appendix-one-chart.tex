@@ -3,7 +3,7 @@
 
 This appendix expands the proof of Theorem~\ref{thm:tailwise-derived} at the
 three places where it is compressed: the affine verification of the derived
-equivalence, the two-commutative obstruction-theory square, and the
+equivalence, the \(2\)-commutative obstruction-theory square, and the
 \(\mu_k\)-equivariance and rigidification step.  The hypotheses, the statement,
 and the conclusions of that theorem are unchanged; what follows adds no new
 assumption and asserts nothing stronger.
@@ -267,7 +267,8 @@ extensions, the inverse construction reads off \(x\) and reconstructs the two
 sections by \eqref{eq:app-graded-map}, which is where the exponents reappear.
 \end{proof}
 
-\subsection{Tangent complexes and the two-commutative square}
+\subsection{Tangent complexes and the
+\texorpdfstring{\(2\)-commutative}{2-commutative} square}
 \label{app:square}
 
 All complexes in this subsection are relative to the fixed moduli \(\mathfrak
@@ -392,7 +393,7 @@ universal object and the truncation of the derived cotangent complex; that
 comparison is imported from \cite{SchurgToenVezzosi}, not reproved.
 \end{proof}
 
-\begin{proposition}[The two-commutative square]
+\begin{proposition}[The \(2\)-commutative square]
 \label{prop:app-square}
 Under the equivalence
 \(\operatorname{ev}_1\colon\mathfrak S_{a_-,a_+}\simeq\mathfrak Z\) of
@@ -405,7 +406,7 @@ Proposition~\ref{prop:app-descent}, the square
    & \longrightarrow & L_{t_0\mathfrak Z/\mathfrak M}
 \end{array}
 \]
-is two-commutative, its left vertical arrow is a quasi-isomorphism, and the two
+is \(2\)-commutative, its left vertical arrow is a quasi-isomorphism, and the two
 perfect obstruction theories are isomorphic as morphisms to the cotangent
 complex.  Passing to classical truncations, the derived data recover Woodward's
 relative perfect obstruction theory, hence his relative virtual class.
@@ -600,7 +601,14 @@ maps, or the truncation map of a cotangent complex.  All are morphisms of
 stacks and of complexes over \(\C\), independent of the Novikov and bulk
 coefficients; a finite Artin quotient enters only when the resulting virtual
 classes are paired with localization coefficients.  The identifications are
-therefore compatible with every reduction \(R_{N+1}\to R_N\).
+therefore compatible with every reduction \(R_{N+1}\to R_N\).  Compatibility
+here is a statement about the identifications, not about the numbers they
+produce: the identified stacks, obstruction theories, and virtual classes carry
+no \(N\), so there is nothing for a reduction to act on, and the assertion is
+automatic rather than a level-by-level verification.  The paired
+localization coefficients do depend on \(N\), and for them compatibility means
+the usual thing, that reduction sends the level-\(N+1\) pairing to the
+level-\(N\) one.
 \end{proof}
 
 \begin{remark}[Imported statements]
