@@ -622,7 +622,7 @@ verdict text lives only in `claim-proof-novelty-ledger.md`.
   framing-compatibility checks the memo proposed have been run against the
   pinned sources; verdicts, locators, and hashes are in
   `../2026-08-15-c912-framing-compatibility-checks.md`.  The memo is now at its
-  third version, carries those verdicts in its Section 6, and adds Section 7,
+  fourth version, carries those verdicts in its Section 6, and adds Section 7,
   which attacks the residual gap through the flatness identities: 20 pages, PDF
   SHA-256
   `4dccbe6d9ecfcbda59f9d0f4243d8d8e3f35bc9798743a12b5e0d8c5ae4c2402`.  Either
