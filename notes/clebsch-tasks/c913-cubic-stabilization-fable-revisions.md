@@ -5,7 +5,20 @@
 **Status:** active.  Milestone 1 (Packages A/B) is complete at authority
 commit `28a4457aa`: the 29-page PDF is warning-free and byte-current, the GYY
 input proposition has passed a primary-source reread, and the paper and
-portfolio mirrors have been exported and rechecked.  A fresh Fable referee report finds no endpoint
+portfolio mirrors have been exported and rechecked.  Package C is complete in
+the authority tree (review: `notes/2026-08-14-c913-package-c-review.md`):
+the threshold hypothesis is split into wall and zero-mode halves
+(`hyp:marked-threshold-wall`/`hyp:marked-threshold-zero`, referee Major 1
+minimal fix), the implying Gamma/window statement is displayed as
+`conj:gamma-window` and labeled a new manuscript conjecture, the
+endpoint-only weakening is `rem:endpoint-only` plus abstract and intro
+sentences (referee Major 2(i)), the expected-versus-open clause account
+follows Definition `def:gauged-admissible` and is summarized in the intro
+(Major 2(ii)), and the calibration paragraphs are consolidated under
+`rem:verification-status` (Major 1(c)).  The ledger and release-surface
+checker track the new identifiers; `make check` passes at 30 pages.  The
+expected-versus-open labels for clauses (i)--(iii) await Tavis's sign-off.
+Mirror export waits for the Package D milestone.  A fresh Fable referee report finds no endpoint
 calculation error or hidden discharge of the global hypotheses.  It requests
 a major presentation and proof expansion before broad circulation.  The first
 pass is deliberately local: repair endpoint/frame exposition, source
@@ -119,6 +132,8 @@ master inverse-system comparison or the zero-mode nearby-cycle clause.
 
 ## Immediate next step
 
-Begin Package C without changing the theorem: separate the two open inputs at
-first read, state the endpoint-only application form, and formulate the
-manuscript-local marked Gamma/window implication target.
+Begin Package D: expand the orbit-cylinder marking into a proved
+disjointness lemma (referee Major 3) and expand the rank-one derived
+clutching theorem, with the one-chart calculation in an appendix (referee
+Major 4).  Confirm the expected-versus-open clause labels with Tavis before
+the next export.

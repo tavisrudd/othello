@@ -55,7 +55,12 @@ required_labels = {
     "prop:gamma-ratio-reduction",
     "thm:tailwise-derived",
     "prop:clutching-tail-holonomicity",
-    "hyp:marked-threshold",
+    "hyp:marked-threshold-wall",
+    "hyp:marked-threshold-zero",
+    "def:reduced-nearby",
+    "conj:gamma-window",
+    "rem:endpoint-only",
+    "rem:verification-status",
     "lem:finite-threshold-gluing",
     "lem:cyclic-row-support",
     "rem:neutral-boundary",
@@ -78,7 +83,7 @@ if "They are not asserted to arise from smooth projective quantum connections" n
 if "Cai enters only Proposition" not in scope_text:
     errors.append("Cai endpoint dependency is not visibly isolated")
 if (
-    "Hypothesis~\\ref{hyp:marked-threshold} is an inverse-system family" not in scope_text
+    "and~\\ref{hyp:marked-threshold-zero} form an inverse-system family" not in scope_text
     or "separate holonomicity does not determine the threshold maps" not in scope_text
     or "gauged-admissibility conditions" not in scope_text
 ):
@@ -87,8 +92,13 @@ if (
 global_text = (ROOT / "sections/08-global-transport.tex").read_text(encoding="utf-8")
 if "\\begin{theorem}[Rank-one tailwise derived identification]" not in global_text:
     errors.append("rank-one tailwise derived identification is not a theorem")
-if "\\begin{hypothesis}[Marked threshold compatibility]" not in global_text:
-    errors.append("marked threshold compatibility is not an explicit hypothesis")
+if (
+    "\\begin{hypothesis}[Marked threshold compatibility: sign and stability" not in global_text
+    or "\\begin{hypothesis}[Marked threshold compatibility: zero modes]" not in global_text
+):
+    errors.append("marked threshold compatibility is not an explicit hypothesis pair")
+if "\\begin{conjecture}[Marked Gamma/window continuation]" not in global_text:
+    errors.append("implying Gamma/window conjecture is not displayed")
 if "\\label{def:finite-dual-cyclic-rees}" not in global_text:
     errors.append("finite cyclic Rees definition lacks a stable label")
 if (
@@ -118,8 +128,11 @@ if "\\begin{theorem}[Conditional cubic stabilization criterion]" not in intro_te
     errors.append("headline cubic theorem is not visibly conditional")
 if "Theorem~\\ref{thm:tailwise-derived}" not in intro_text:
     errors.append("introduction does not name the derived-tail theorem")
-if "\\ref{hyp:marked-threshold}" not in intro_text:
-    errors.append("headline theorem does not name the marked-threshold hypothesis")
+if (
+    "\\ref{hyp:marked-threshold-wall}" not in intro_text
+    or "\\ref{hyp:marked-threshold-zero}" not in intro_text
+):
+    errors.append("headline theorem does not name the marked-threshold hypotheses")
 if (
     "strict isomorphisms" not in global_text
     or "eq:zero-mode-specialization" not in global_text
