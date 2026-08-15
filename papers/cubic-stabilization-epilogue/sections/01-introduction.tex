@@ -7,21 +7,26 @@ A smooth projective variety is universally \(CH_0\)-trivial if the degree map
 is an isomorphism for every field extension \(L/\C\).  This condition is a
 central consequence of stable rationality, and its failure is a standard
 stable-rationality obstruction.  Its validity, however, need not provide a
-rational parametrization.  We exhibit smooth fourfolds \(X\times\PP^1\) that
-are universally \(CH_0\)-trivial and irrational.
+rational parametrization.  Conditional on Hypothesis~4.7H, we exhibit smooth
+fourfolds \(X\times\PP^1\) that are universally \(CH_0\)-trivial and
+irrational.
 
-Irrationality holds uniformly.  The small even
-quantum connection of every smooth cubic threefold has primitive-sixth framed
-formal monodromy, and Iritani's quantum blowup formula shows that its
-multiplicity survives one stabilization.
+The small even quantum connection of every smooth cubic threefold has
+primitive-sixth framed formal monodromy, and
+Proposition~\ref{prop:cubic-packet} computes its multiplicity
+unconditionally.  Hypothesis~4.7H isolates the only unresolved transport step:
+invariance of that cyclotomic multiplicity under the positive-filtration bulk
+displacements produced by the reconstruction formulas.  Conditional on that
+hypothesis, the operation formulas and weak factorization give irrationality
+after one stabilization uniformly.
 
-\begin{theorem}[One-step irrationality]
+\begin{theorem}[Conditional one-step irrationality]
 \label{thm:every-cubic}
-For every smooth complex cubic threefold \(X\), the fourfold
-\(X\times\PP^1\) is irrational.
+Assume Hypothesis~4.7H.  For every smooth complex cubic threefold \(X\), the
+fourfold \(X\times\PP^1\) is irrational.
 \end{theorem}
 
-The conclusion depends only on the birational class: if \(Y\) is birational to
+Under Hypothesis~4.7H, the conclusion depends only on the birational class: if \(Y\) is birational to
 a smooth cubic threefold then \(Y\times\PP^1\) is birational to
 \(X\times\PP^1\), so Theorem~\ref{thm:every-cubic} applies to \(Y\) as well.
 This covers the Fano threefolds of degree fourteen and Picard number one, and
@@ -38,12 +43,16 @@ projective bundle formula for Chow groups, and with it the usual
 decomposition-of-the-diagonal obstructions.  Universal \(CH_0\)-triviality must
 then be proved for those same \(X\), integrally rather than up to a multiple,
 since the criterion used along the \(A_5\)-pencil below is algebraicity of an
-integral class.  Theorem~\ref{thm:every-cubic} counts eigenvalues of a formal
-monodromy operator attached to the quantum connection;
+integral class.  Conditional Theorem~\ref{thm:every-cubic} counts eigenvalues
+of a formal monodromy operator attached to the quantum connection;
 Theorem~\ref{thm:six-axis-divided-powers} proves that divided powers of an
 integral lattice of divisor classes on the intermediate Jacobian are ordinary
 divisor products.  Each reads a different structure on the same \(X\), so the
 two inputs are logically independent.
+
+The universal \(CH_0\)-triviality assertions in the next statements are
+unconditional; their irrationality assertions are conditional on
+Hypothesis~4.7H.
 
 Universally \(CH_0\)-trivial cubic threefolds are known in abundance, and
 Theorem~\ref{thm:every-cubic} turns every such locus into a locus where the
@@ -52,12 +61,12 @@ threefolds, which has dimension ten, contains a nonempty countable union of
 subvarieties of codimension at most three parametrizing threefolds with
 universally trivial \(CH_0\) \cite[Theorem~4.5]{Voisin}.
 
-\begin{corollary}[Separation in codimension three]
+\begin{corollary}[Conditional separation in codimension three]
 \label{cor:voisin-separation}
 There is a nonempty countable union of subvarieties of codimension at most
 three in the moduli space of smooth cubic threefolds such that, for every
 member \(X\), both \(X\) and \(X\times\PP^1\) are universally
-\(CH_0\)-trivial while \(X\times\PP^1\) is irrational.
+\(CH_0\)-trivial.  Assuming Hypothesis~4.7H, \(X\times\PP^1\) is irrational.
 \end{corollary}
 
 Independently of that construction, one cubic gives the same separation
@@ -69,7 +78,7 @@ the Fermat equation directly.
 \begin{corollary}[Fermat]
 \label{cor:fermat-separation}
 The fourfold \(\{x_1^3+x_2^3+x_3^3+x_4^3+x_5^3=0\}\times\PP^1\) is
-universally \(CH_0\)-trivial and irrational.
+universally \(CH_0\)-trivial.  Assuming Hypothesis~4.7H, it is irrational.
 \end{corollary}
 
 Yang--Yu--Zhu construct a two-dimensional family of smooth cubic threefolds
@@ -83,7 +92,7 @@ is universally \(CH_0\)-trivial, and the same parametrizations persist on
 \label{cor:coprime-separation}
 Let \(X\) be one of the cubic threefolds of \cite[Theorem~3.3]{YYZ}.  Then
 \(X\times\PP^1\) admits unirational parametrizations of coprime degrees and is
-universally \(CH_0\)-trivial, and it is irrational.
+universally \(CH_0\)-trivial.  Assuming Hypothesis~4.7H, it is irrational.
 \end{corollary}
 
 Yang--Yu--Zhu ask whether a variety with unirational parametrizations of
@@ -109,11 +118,11 @@ Let \(W_5\) be the five-dimensional irreducible \(A_5\)-module, and let
 For the resulting family \(\mathcal X\to B^\circ\) and every
  \(b\in B^\circ(\C)\),
 \[
- \mathcal X_b\text{ is universally }CH_0\text{-trivial},
- \qquad
- \mathcal X_b\times\PP^1\text{ is universally }CH_0\text{-trivial and irrational}.
+ \mathcal X_b\text{ and }\mathcal X_b\times\PP^1
+ \text{ are universally }CH_0\text{-trivial}.
 \]
-The family is non-isotrivial in coarse moduli.
+Assuming Hypothesis~4.7H, \(\mathcal X_b\times\PP^1\) is irrational.  The
+family is non-isotrivial in coarse moduli.
 \end{theorem}
 
 The invariant cubic space in Theorem~\ref{thm:separation-family} is
@@ -167,17 +176,21 @@ coefficient divisors have square zero, \(\Theta^4/4!\) is an ordinary
 integral divisor product.
 
 The quantum argument counts primitive sixth-root eigenvalues of framed formal
-monodromy on the numerical small even quantum connection.  Iritani's
-operation formulas make this count additive through weak factorization;
-divisor tags repair a potentially noninjective center specialization.
-Starting from Cai's displayed small-even matrix, the internal calculation gives
-the nonzero count, while every center of dimension at most
-two contributes zero.  The special \(A_5\)-geometry enters only in the cycle
-argument; the quantum theorem applies to every smooth cubic threefold.
+monodromy on the numerical small even quantum connection.  The actual Iritani
+and Iritani--Koto comparison isomorphisms use only integral powers of the
+original loop coordinate and preserve the framed operator after
+coefficient-field extension.  Hypothesis~4.7H supplies the remaining
+invariance under the positive-filtration reconstruction bulk displacements and
+the divisor-tagging step.  Under that hypothesis the count is additive through
+weak factorization.  Starting from Cai's displayed small-even matrix, the
+internal calculation gives the nonzero cubic count.  The special
+\(A_5\)-geometry enters only in the cycle argument; the quantum theorem
+applies to every smooth cubic threefold.
 
-On the pencil of Theorem~\ref{thm:separation-family} both conclusions hold at
-every member: \(\mathcal X_b\) is universally \(CH_0\)-trivial and
-\(\mathcal X_b\times\PP^1\) is irrational.
+On the pencil of Theorem~\ref{thm:separation-family} the universal
+\(CH_0\)-triviality conclusion holds unconditionally at every member; under
+Hypothesis~4.7H the one-stabilization irrationality conclusion holds there as
+well.
 
 \subsection*{Relation with earlier rationality results}
 
@@ -192,8 +205,9 @@ quantum connection \cite{Cai}.  Iritani and Iritani--Koto prove the quantum
 \(D\)-module decompositions for blowups and projective bundles
 \cite{IritaniBlowup,IritaniKoto}; Katzarkov--Kontsevich--Pantev--Yu identify
 the nef-canonical normal form used for low-dimensional centers
-\cite{KKPYY}.  Theorem~\ref{thm:every-cubic} combines these inputs at the next
-dimension.
+\cite{KKPYY}.  Conditional Theorem~\ref{thm:every-cubic} combines these inputs
+at the next dimension; Hypothesis~4.7H isolates the remaining
+positive-filtration bulk-displacement step.
 
 On the cycle side, Voisin reduces universal \(CH_0\)-triviality of a cubic
 threefold to algebraicity of the primitive minimal class of its intermediate
@@ -229,6 +243,9 @@ nonstandard \(A_5\)-pencil.
 Section~\ref{sec:envelope} computes the six-axis polarization and identifies
 the exotic cubic gluing.  Section~\ref{sec:minimal-class} proves
 the local divisor-product theorem and applies it to the primitive minimal
-class.  Section~\ref{sec:one-step} proves Theorem~\ref{thm:every-cubic} from
-formal monodromy and weak factorization.  The final section combines the two
+class.  Section~\ref{sec:one-step} defines the framed multiplicity, proves its
+invariance under the regular comparison isomorphisms, computes \(\nu_6=2\) for
+every smooth cubic threefold, and reduces the one-stabilization irrationality
+statement to Hypothesis~4.7H on the positive-filtration reconstruction
+displacement.  The final section combines the two
 detectors and records the exact scope boundary.

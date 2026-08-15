@@ -7,11 +7,16 @@ equivalence classes of quantum atoms.  This avoids a subtlety: a formal bulk
 gauge is coefficientwise Laurent in the loop coordinate, but need not
 specialize to a meromorphic gauge at a nearby analytic point.
 
-The proof has three stages.  We first define the framed multiplicity
-\(\nu_6\).  We then prove its projective-bundle and blowup formulas, using
-divisor tags when the center Novikov map is not injective.  Finally we show
-that centers of dimension at most two have \(\nu_6=0\), so weak factorization
-makes \(\nu_6\) birationally invariant through dimension four.
+The argument has four parts.  We first define the framed multiplicity
+\(\nu_6\) and record its invariance under ordinary coefficient-field gauges
+that use only integral powers of the original loop coordinate.  We then apply
+the blowup and projective-bundle comparison isomorphisms.  Those comparison
+maps themselves preserve framed formal monodromy; the only unresolved step is
+invariance under the positive-filtration bulk displacements produced by
+reconstruction, isolated as Hypothesis~4.7H below.  We next record the
+divisor-tagging argument under the same hypothesis.  Finally we compute the
+cubic packet explicitly and, conditional on Hypothesis~4.7H, deduce the
+four-dimensional birational statements.
 
 Let \(T\) be a smooth projective variety.  Write
 \[
@@ -159,6 +164,32 @@ coefficient extension and is harmless by choice independence.  Adjoining a root 
 \(z\), by contrast, would replace the original loop and could erase the deck
 part of the operator.
 
+\begin{lemmaOneA}[Frame transport over a coefficient field]
+Let \(K\supset\C\) be an algebraically closed field of characteristic zero,
+and let \(D,D'\) be differential modules over \(K(\!(z)\!)\).  Suppose
+\(G\in\operatorname{GL}_n(K(\!(z)\!))\) is a gauge isomorphism from \(D\) to
+\(D'\).  Then the framed operators \(M_{\mathrm f,V}(D)\) and
+\(M_{\mathrm f,V}(D')\), defined using the original \(z\)-disc turn, are
+conjugate after passage to a common coefficient extension.  In particular the
+algebraic multiplicity of every root of unity is the same for \(D\) and
+\(D'\).
+\end{lemmaOneA}
+
+\begin{proof}
+After a common Levelt--Turrittin ramification, choose a formal solution matrix
+\(Y\) for \(D\) in the formal solution algebra used in
+Definition~\ref{def:framed-sixth-multiplicity}, and let \(\sigma\) denote one
+turn of the original \(z\)-disc.  Since \(G\) has entries in
+\(K(\!(z)\!)\), \(\sigma(G)=G\).  Hence
+\[
+ \sigma(GY)=G\sigma(Y).
+\]
+Thus \(GY\) is a solution frame for \(D'\) in which the original-disc turn has
+the same matrix as in the frame \(Y\).  Comparing with any other solution frame
+for \(D'\) conjugates that matrix by a constant matrix.  Therefore the framed
+operators are conjugate and have the same characteristic polynomial.
+\end{proof}
+
 \begin{definition}[Pro-Laurent gauge group]
 \label{def:pro-laurent-gauge-group}
 Let \(B\) be a complete separated multiplicatively filtered \(k\)-algebra,
@@ -200,9 +231,9 @@ Assume that the canonical map \(A\to\mathscr L_{B,F}\) is injective.  Then
 is a nonzero coefficient algebra containing the framed operator
 \(M_{\mathrm f,V}(D)\) and receiving the image of every pro-Laurent gauge
 over \(B\).  Conjugation by the image of such a gauge preserves its
-characteristic polynomial.  If the gauge uses
-only integral powers of \(z\) at every finite level, this conjugacy preserves
-the original-\(z\)-disc frame.
+characteristic polynomial.  This lemma is an algebraic conjugacy statement in
+the inverse-limit coefficient algebra; it does not identify the conjugated
+matrix with the intrinsic framed operator of another differential module.
 \end{lemma}
 
 \begin{proof}
@@ -215,8 +246,8 @@ family and its inverse to an invertible pair over
 \(M_{\mathrm f,V}(D)\) to the same matrix algebra and conjugate there.
 The determinant identity
 \(\det(X-GMG^{-1})=\det(X-M)\) holds over every commutative coefficient
-ring.  Finally, the deck action fixes every integral power of \(z\) at each
-finite level, so the compatible gauge is single-valued for the framed turn.
+ring.  No assertion about intrinsic framed monodromy over the nonfield
+inverse-limit algebra is made here.
 \end{proof}
 
 \begin{remark}[What the inverse limit requires]
@@ -257,16 +288,17 @@ displayed coefficient automorphism of \(A\), extending continuously to
 Then the positive-filtration bulk equations have unique normalized gauges
 \(G_N\) over every \(B/F^NB\), compatible under reduction.  Their inverse
 limit \(G\) belongs to
-\(\mathcal G^{\rm pro}_{B,F}(H^{\rm ev}(T))\).  After extending
-coefficients as in \eqref{eq:scalar-extended-pro-laurent-ring}, transporting
-the small framed operator through \(G\), after the
-divisor substitution
+\(\mathcal G^{\rm pro}_{B,F}(H^{\rm ev}(T))\).  Apply first the divisor
+substitution
 \[
  Q^d\longmapsto e^{\langle a_2^\circ,d\rangle}Q^d
  \tag{4.1}
  \label{eq:formal-base-shift-divisor}
 \]
-defines a comparison-transported framed operator.  Its characteristic
+to the small framed matrix.  After extending coefficients as in
+\eqref{eq:scalar-extended-pro-laurent-ring}, conjugating the
+divisor-substituted small framed matrix through \(G\) defines a
+comparison-transported matrix.  Its characteristic
 polynomial is equal to the divisor-substituted small framed characteristic
 polynomial in \(\widetilde{\mathscr L}_{B,F}[X]\).
 \end{lemma}
@@ -327,11 +359,13 @@ single coefficient algebra define
  \tag{4.1c}
  \label{eq:pro-laurent-transported-operator}
 \]
-Every \(G_N\) uses only integral powers of \(z\), so the compatible gauge is
-single-valued on the original disc.  Lemma~\ref{lem:pv-base-change} gives
-the asserted characteristic-polynomial equality.  No Levelt--Turrittin
-decomposition or framed operator over a nonfield quotient, and no evaluation
-at a nonnilpotent analytic bulk point, is used.
+Every \(G_N\) uses only integral powers of \(z\), but the inverse-limit gauge
+need not lie in a Laurent-series field over which Levelt--Turrittin theory is
+available.  Lemma~\ref{lem:pv-base-change} therefore gives the asserted
+algebraic characteristic-polynomial identity and no more.  In the applications
+below, identifying the comparison-transported matrix with the intrinsic framed
+operator at the positive-filtration bulk point is exactly the content of
+Hypothesis~4.7H.
 \end{proof}
 
 We now apply Iritani's quantum blowup theorem and the Iritani--Koto
@@ -370,8 +404,27 @@ substitutions.  Passing through the compatible cutoffs proves the asserted
 completed base change.
 \end{proof}
 
-\begin{proposition}[Framed operation formulas]
+\begin{hypothesisH}[Reconstruction-displacement invariance]
+Consider only the positive-filtration bulk displacements that occur in the
+arguments below:
+\begin{enumerate}[label=(\arabic*)]
+\item after the unit term and the fixed divisor term are separated from the
+  reconstruction coordinates in the blowup and projective-bundle
+  decompositions used in Proposition~\ref{prop:framed-operations}; and
+\item in the divisor-tagging family used in
+  Lemma~\ref{lem:divisor-tagging}.
+\end{enumerate}
+After the coefficient specialization displayed in the relevant construction,
+replacing zero bulk by any one of these positive-filtration bulk displacements
+does not change the algebraic multiplicities of \(e^{\pi i/3}\) and
+\(e^{-\pi i/3}\) in framed formal monodromy on the original \(z\)-disc.
+
+No invariance under an arbitrary bulk displacement is asserted.
+\end{hypothesisH}
+
+\begin{proposition}[Framed operation formulas, conditional]
 \label{prop:framed-operations}
+Assume Hypothesis~4.7H.
 Let \(V\to T\) be a vector bundle of rank \(r\ge2\).  Then
 \[
  \nu_6(\PP_T(V))=r\nu_6(T).
@@ -392,14 +445,14 @@ invariants; the center terms are computed after the displayed specializations.
 \end{proposition}
 
 \begin{proof}
-For each of the finitely many endpoint and summand comparisons, use the
-faithful graded Laurent receiver constructed below.  Their coefficient
-exponent lattices embed in one ordered direct-sum lattice.  Take an algebraic closure
-of that coefficient Hahn field, choose one complement to \(\C\), and form its
-universal exponential field.  Only afterward adjoin the distinguished
-integral exponent of the independent loop coordinate \(z\).  Choice
-independence shows that this common choice does not alter any cyclotomic
-multiplicity.
+For the actual comparison isomorphisms, first pass the relevant coefficient
+ring to a Laurent coefficient field.  Iritani's \(\Psi\) and Iritani--Koto's
+\(\Phi\), together with their inverses, use only integral powers of the
+original loop coordinate \(z\).  Lemma~4.1A therefore transports framed formal
+monodromy across those comparison isomorphisms without changing the
+original-\(z\)-disc frame.  The remaining issue is the positive-filtration
+bulk displacement in the reconstruction coordinates; Hypothesis~4.7H is
+invoked precisely at that step.
 
 Iritani's Theorem~5.18 gives a formal coordinate isomorphism and a
 quantum-\(D\)-module isomorphism
@@ -568,16 +621,18 @@ nonzero receiver \(\mathscr R_j\), with the source
 and target monomials identified by the displayed coordinate map.  No uniform
 \(u\)-denominator is asserted, and no adic ideal is extended across Laurent
 inversion.  Theorem~5.18 supplies both maps with only integral powers of
-\(z\), so they preserve the framed characteristic polynomial on the original
-disc.  The fixed-divisor
+\(z\), so Lemma~4.1A transports framed formal monodromy across the comparison
+isomorphism after coefficient-field extension.  The fixed-divisor
 substitution is a \(z\)-constant
 coefficient automorphism, so it does not change \(\nu_6\); it is well defined
-on the image because \(h_{C,j}\) is a scalar multiple of \(\rho_C\).  Thus
-each center target summand has the framed monodromy of its specialized small
-connection.  The ambient target
-uses \(\tau=\tau^\circ+t\), with \(\tau^\circ=O(q^{-1})\), and the same
-finite-quotient argument.  Direct-sum additivity gives
-\eqref{eq:blowup-nu}.
+on the image because \(h_{C,j}\) is a scalar multiple of \(\rho_C\).
+After the unit and fixed-divisor terms are separated, the remaining
+reconstruction coordinate lies in the positive filtration.  Hypothesis~4.7H
+identifies the primitive-sixth multiplicities at the resulting
+positive-filtration bulk point with those at zero bulk, after the displayed
+center specialization.  The same applies to the ambient summand, which uses
+\(\tau=\tau^\circ+t\) with \(\tau^\circ=O(q^{-1})\).  Direct-sum additivity
+then gives \eqref{eq:blowup-nu}.
 
 The endpoint map is faithful: on numerical curve lattices
 \[
@@ -705,13 +760,16 @@ field \(\Omega_{V,j}\) before adjoining \(e_z\), and use the nonzero receiver
 Theorem~5.1 and Proposition~5.6 put the comparison maps, their inverses, and
 the connection identities in that same receiver.
 Thus growing negative \(u\)-order coupled to positive bulk degree is
-retained rather than replaced by a fictitious uniform denominator.  Since
-the comparison maps use integral powers of \(z\), the framed characteristic
-polynomial is preserved.
+retained rather than replaced by a fictitious uniform denominator.
 Again the divisor substitution is a \(z\)-constant coefficient automorphism;
 it factors through the displayed \(u\)-exponent.
-This gives \(r\)
-copies of the intrinsic base module and proves
+The comparison isomorphism and its inverse use only integral powers of the
+original loop coordinate, so Lemma~4.1A preserves the framed operator across
+that comparison after coefficient-field extension.  After separating the unit
+and fixed-divisor terms, Hypothesis~4.7H identifies the primitive-sixth
+multiplicity at the remaining positive-filtration reconstruction bulk point
+with the multiplicity at zero bulk.  This gives \(r\)
+copies of the intrinsic base contribution and proves
 \eqref{eq:projective-bundle-nu}.  The base Novikov map is the
 embedding in \cite[(1.1) and Remark~5.2]{IritaniKoto}.  The theorem assumes
 \(V^\vee\) globally generated.  Tensoring \(V\) by a sufficiently negative
@@ -763,8 +821,9 @@ Laurent variable valuation zero and use an ample divisor \(H\) on \(T\).  Then
 The restriction \(H|_C\) is ample, which gives positivity and properness; the
 associated graded Laurent monoid ring is a domain.
 
-\begin{lemma}[Divisor tagging]
+\begin{lemma}[Divisor tagging, conditional]
 \label{lem:divisor-tagging}
+Assume Hypothesis~4.7H.
 Let \(\chi:\Lambda_T\to A\) be strictly Novikov-admissible.  If the intrinsic
 small even quantum connection of \(T\) has no primitive-sixth framed
 monodromy, neither does its specialization along \(\chi\).
@@ -854,33 +913,24 @@ intrinsic module, so
  \label{eq:tagged-equals-intrinsic}
 \]
 over that closure.  The divisor equation identifies
-\eqref{eq:divisor-tagging-map} with the degree-two formal bulk pullback of the
-\(\chi\)-module over \(B=k_\chi[[\boldsymbol t]]\).  Apply
+\eqref{eq:divisor-tagging-map} with the degree-two positive-filtration bulk
+pullback of the \(\chi\)-specialized module over
+\(B=k_\chi[[\boldsymbol t]]\).  Apply
 Lemma~\ref{lem:formal-base-shift} with \(\eta=\sum_i t_iD_i\).  The whole
 tagging direction sits in the positive filtration, so the lemma is applied
-with \(a_0=0\) and \(a_2^\circ=0\); its substitution
-\eqref{eq:formal-base-shift-divisor} is the identity here, and its
-integral-\(z\) bulk gauge removes the tagging direction and transports the
-framed operator.  Hence
-\[
- p^{\rm tag}=p^{\rm spec}.
- \tag{4.6b}
- \label{eq:tagged-equals-specialized}
-\]
+with \(a_0=0\) and \(a_2^\circ=0\), and its substitution
+\eqref{eq:formal-base-shift-divisor} is the identity here.  It constructs the
+corresponding comparison-transported matrix and proves the algebraic
+conjugacy statement in the pro-Laurent coefficient algebra.  Hypothesis~4.7H,
+applied to this tagging displacement, identifies the algebraic multiplicities
+of \(e^{\pi i/3}\) and \(e^{-\pi i/3}\) in \(p^{\rm tag}\) with those of the
+intrinsic specialized framed operator \(p^{\rm spec}\).
 
-Every primitive sixth root of unity \(\zeta\) lies in \(\C\), and the
-embedding behind \eqref{eq:tagged-equals-intrinsic} fixes \(\C\).  Evaluating
-\eqref{eq:tagged-equals-intrinsic} and
-\eqref{eq:tagged-equals-specialized} at such a \(\zeta\) gives
-\[
- p^{\rm int}(\zeta)=0
- \iff
- p^{\rm tag}(\zeta)=0
- \iff
- p^{\rm spec}(\zeta)=0
-\]
-with equal multiplicities.  The stated implication follows; the equality of
-multiplicities is not needed here.
+Every primitive sixth root of unity lies in \(\C\), and the embedding behind
+\eqref{eq:tagged-equals-intrinsic} fixes \(\C\).  Since the tagged module is
+also the scalar extension of the intrinsic module under the injective map
+\eqref{eq:divisor-tagging-map}, the primitive-sixth multiplicities of
+\(p^{\rm tag}\) and \(p^{\rm int}\) agree.  The stated implication follows.
 
 Substituting on divisors and gauging away a bulk direction are not in
 competition, because the divisor equation sends a bulk divisor direction to
@@ -891,14 +941,15 @@ see because it is an automorphism fixing \(\C\).  A component in positive
 filtration is instead removed by the normalized gauge of
 Lemma~\ref{lem:formal-base-shift}.  Divisor tagging uses only the second
 mechanism: the tags \(\boldsymbol t\) are positive-filtration variables, so
-the first component is zero and \eqref{eq:tagged-equals-specialized} carries
+the first component is zero and the base shift used above carries
 no substitution.  The first mechanism is what the blowup and
 projective-bundle comparisons use, where the shift is a fixed divisor class
 rather than a deformation parameter.
 \end{proof}
 
-\begin{proposition}[Low-dimensional vanishing]
+\begin{proposition}[Low-dimensional vanishing, conditional]
 \label{prop:low-dimensional-vanishing}
+Assume Hypothesis~4.7H.
 Let \(T\) be a point, a smooth projective curve, or a smooth projective
 surface.  For every strictly Novikov-admissible specialization \(\chi\),
 \[
@@ -909,7 +960,8 @@ surface.  For every strictly Novikov-admissible specialization \(\chi\),
 \end{proposition}
 
 \begin{proof}
-We first prove the intrinsic generic statement.  If \(K_T\) is nef, the proof
+We first prove the intrinsic generic statement.  If the canonical bundle of
+\(T\) is nef, the proof
 of \cite[Claim~6.15]{KKPYY} applies coefficient by coefficient over the small
 numerical Novikov ring.  Set
 \[
@@ -923,7 +975,7 @@ sends
 \[
  H^i(T)\longrightarrow H^{i+2-2c_1(T)\cdot\beta}(T).
 \]
-If \(K_T\) is nef, then \(c_1(T)\cdot\beta\le0\), so the
+If the canonical bundle of \(T\) is nef, then \(c_1(T)\cdot\beta\le0\), so the
 \(\operatorname{Gr}\)-weight rises by
 \(1-c_1(T)\cdot\beta\ge1\).
 Conjugation by \(z^g\) therefore turns
@@ -950,8 +1002,9 @@ Lemma~\ref{lem:divisor-tagging} gives
 \eqref{eq:low-dimensional-vanishing}.
 \end{proof}
 
-\begin{theorem}[Birational invariance through dimension four]
+\begin{theorem}[Conditional birational invariance through dimension four]
 \label{thm:nu6-birational-invariance}
+Assume Hypothesis~4.7H.
 If \(Y\) and \(Y'\) are birational smooth projective complex varieties of
 the same dimension at most four, then
 \[
@@ -995,6 +1048,8 @@ For every smooth cubic threefold \(X\),
  \label{eq:cubic-packet-value}
 \]
 \end{proposition}
+
+This proposition is unconditional and does not use Hypothesis~4.7H.
 
 \begin{proof}
 Fix the positive generator \(\ell\) of the numerical curve lattice of \(X\),
@@ -1232,6 +1287,7 @@ as an input.
 \end{proof}
 
 \begin{proof}[Proof of Theorem~\ref{thm:every-cubic}]
+Assume Hypothesis~4.7H.
 The projective-bundle formula and Proposition~\ref{prop:cubic-packet} give
 \[
  \nu_6(X\times\PP^1)=2\nu_6(X)>0.
@@ -1254,8 +1310,9 @@ eight a smooth Pfaffian cubic threefold \(X\), together with rank-two vector
 bundles \(U\) on \(V\) and \(E^*\) on \(X\), whose projectivizations are
 related by a flop \cite[Theorems~2.17--2.18]{KuznetsovV14}.
 
-\begin{corollary}[One stabilization of \(V_{14}\)]
+\begin{corollary}[Conditional one stabilization of \(V_{14}\)]
 \label{cor:v14-one-step}
+Assume Hypothesis~4.7H.
 For every smooth prime Fano threefold \(V\) of genus eight,
 \[
  \nu_6(V)=2,
