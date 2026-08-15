@@ -19,8 +19,10 @@ its stable Section~4 numbering; commits `f8f9f0bda` and `ae0cad04f` derive
 the rank-two indicial equation coefficient by coefficient.  The roots and
 framed eigenvalues are derived in commits `af1cc0c9e` and
 `18fd50077`; commits `62c9b068e` and `44ddeb801` derive the two unramified
-rank-one factors and their trivial regular monodromy.  The remaining WP4
-steps, then WP5--WP6, remain prioritized work.
+rank-one factors and their trivial regular monodromy; commits `23ddd1c6f`
+and `e99e503b1` close the nonresonant Frobenius recursion and exact framed
+count while preserving Cai's starting-matrix role.  WP4 is complete pending
+its coherent-tranche cold review; WP5--WP6 remain prioritized work.
 
 **Lifecycle rule:** keep this card open until the author explicitly closes it.
 Passing implementation, review, export, and release gates does **not** authorize
@@ -253,8 +255,8 @@ exact bridge is formalized.
   `exp(+/- pi i/3)` with the repaired framed convention.
 - [x] Show the two rank-one exponential blocks are unramified and contribute
   no primitive-sixth eigenvalues.
-- [ ] Conclude `nu_6(X)=2` without using Cai's gauge assertions as a black box.
-- [ ] Retain Cai as attribution and compare calculations line by line.
+- [x] Conclude `nu_6(X)=2` without using Cai's gauge assertions as a black box.
+- [x] Retain Cai as attribution and compare calculations line by line.
 
 ### WP5 — divisor tagging
 
