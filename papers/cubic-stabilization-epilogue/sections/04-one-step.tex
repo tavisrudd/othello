@@ -961,9 +961,33 @@ Eliminating \(c\) gives
 This is the coefficient comparison in Cai's displayed rank-two
 ansatz~\cite[p.~6]{Cai}.
 
-Its roots are \(-1/6\) and \(-5/6\) \cite[Section~3, pp.~5--6]{Cai}.  His gauge uses only
-integral powers of \(z\).  The two corresponding framed-monodromy eigenvalues
-are \(e^{-\pi i/3}\) and \(e^{\pi i/3}\).  The two remaining rank-one even
+The quadratic formula applied to \eqref{eq:cubic-indicial-polynomial} gives
+\[
+ \rho=-\frac16,\ -\frac56.
+ \tag{4.9i}
+ \label{eq:cubic-indicial-roots}
+\]
+The constant matrix \(C\) adjoins only the algebraic Novikov coefficient
+\(r\), and \eqref{eq:cubic-integral-block-gauge} and its inverse use only
+integral powers of \(z\).  Hence they preserve each exponent class in
+\(\Q/\Z\): multiplication sends \(z^\rho\C[[z]]\) to itself, and the same
+holds for the inverse.  Thus the two classes in
+\eqref{eq:cubic-indicial-roots} remain the classes in the original-\(z\)-disc
+frame.  By \eqref{eq:universal-exponential}, the repaired framed convention
+assigns to a rational exponent \(\rho\) the eigenvalue
+\(\operatorname{Exp}_V(\rho)=e^{2\pi i\rho}\).  Therefore these two classes
+give
+\[
+ \operatorname{Exp}_V\left(-\frac16\right)=e^{-\pi i/3},
+ \qquad
+ \operatorname{Exp}_V\left(-\frac56\right)
+ =e^{-5\pi i/3}=e^{\pi i/3}.
+ \tag{4.9j}
+ \label{eq:cubic-framed-eigenvalues}
+\]
+This agrees with Cai's rank-two calculation on p.~6\cite[p.~6]{Cai}.
+
+The two remaining rank-one even
 blocks are displayed as exponentials in \(z^{-1}\) times series in nonnegative
 integral powers of \(z\) \cite[pp.~5--7]{Cai}; their framed-monodromy factor is
 therefore \(1\), so they contribute no primitive sixth root.
