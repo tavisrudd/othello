@@ -503,17 +503,59 @@ lie in it. With the Novikov directions as coefficients, $\exp(-a_0/z)$ is an
 honest exponential symbol rather than the object the draft must argue about
 separately.
 
-What has to be checked is a source question, and it is the only thing standing
-between this proposal and a repair: the comparison theorems are stated over
-rings that are formal in the Novikov variables as well as the bulk. One must
-show that the comparison map, its inverse, and the coordinate change survive
-over a receiver that completes only in the bulk and, for the center, in the
-reconstruction coordinate, with the Novikov directions inverted into a
-coefficient field. For the ambient endpoint, where the Novikov map is injective
-and the draft now proves the endpoint injection on both sides, this looks
-plausible. For the center it does not: that map is the noninjective one whose
-reconstruction coordinate is expanded in $u$, which is why divisor tagging
-exists.
+\subsection*{What the sources actually permit}
+
+I have checked this against the pinned sources rather than left it as a
+question, and the answer is positive for the comparison and negative for the
+gauge.
+
+Iritani's Theorem~5.18 states $\Psi$ as an isomorphism of
+$\C[z](\!(q^{-1/s})\!)[[Q,\widetilde\tau]]$-modules, with the change of
+variables defined over $\C(\!(q^{-1/(r-1)})\!)[[Q]]$. So the ring is
+\emph{Laurent} in the exceptional root and \emph{formal} in the ambient Novikov
+variables and the bulk. Two consequences.
+
+\emph{The comparison survives.} Inverting the Novikov monomials and completing
+in the exceptional and bulk directions is a ring homomorphism out of that ring.
+$\Psi$, its inverse, and the two inverse identities are module maps over it, so
+they base-change along it unchanged, and the framed operators' entries lie in
+the coefficient field, which injects. Nothing in the transport step needs
+Iritani's proof, only his statement, so the formality of his ring in $Q$ is not
+by itself an obstacle.
+
+\emph{The gauge does not.} The source's own reconstruction writes
+$\tau(\widetilde\tau)=\tau^\circ+t(\widetilde\tau)$ and
+$\varsigma_j(\widetilde\tau)=\varsigma_j^\circ+s_j(\widetilde\tau)$, with
+$t(\widetilde\tau)\in H^*(X)(\!(q^{-1})\!)[[Q,\widetilde\tau]]$ and $s_j$ of the
+same shape over $H^*(Z)$. The initial terms are harmless: $\tau^\circ$ and
+$\varsigma_j^\circ$ are by definition the values at $Q=\widetilde\tau=0$, hence
+carry no Novikov dependence at all, and the exceptional direction remains a
+completion direction as the draft already has it. But $t$ and $s_j$ vanish only
+at $Q=\widetilde\tau=0$, so at $\widetilde\tau=0$ they retain pure-Novikov
+terms. Those have to be removed by the normalized gauge of Lemma~4.5, and that
+construction converges by topological nilpotence of the bulk shift. Inverting
+the Novikov directions destroys exactly that.
+
+So the iterated receiver is not free, and the decisive question is now small and
+graded rather than general:
+
+\begin{quote}
+  Is the pure-Novikov part of the coordinate shift --- $t$ and $s_j$ restricted
+  to $\widetilde\tau=0$ --- confined to $H^0\oplus H^2$?
+\end{quote}
+
+If it is, the string and divisor equations absorb it into the $a_0$ and
+$a_2^\circ$ terms of Lemma~4.5, which are required only to be constant in the
+positive filtration, and the iterated receiver goes through for the ambient
+summand with $w(\Delta\lambda)=0$. If it is not, the Novikov directions must
+stay inside the filtration, eigenvalue differences reacquire positive weight,
+and the criterion of Section~\ref{sec:receiver} returns. Since Iritani's change
+of variables is graded, this is a question about degrees of one coordinate, and
+should be settleable directly.
+
+For the center the same analysis applies, with the additional and unchanged
+difficulty that its Novikov map is the noninjective one, which is why divisor
+tagging exists.
 
 The scope consequence is the reason to try this first. If the ambient endpoint
 is handled this way, no inequality is needed for arbitrary intermediate
@@ -530,8 +572,9 @@ smaller problem than a general transport theorem.
 
 \begin{enumerate}
 \item \textbf{The iterated receiver of Section~\ref{sec:iterated}}, for the
-  ambient summand. Highest leverage, because it removes the arbitrary
-  intermediate fourfolds from the problem.
+  ambient summand, conditional on the graded question isolated there. Highest
+  leverage, because it removes the arbitrary intermediate fourfolds from the
+  problem.
 \item \textbf{The low-dimensional centers directly}: primitive-sixth vanishing
   after Iritani's specialization, using the classification the draft already
   proves, rather than through a general transport statement.
@@ -634,11 +677,11 @@ For readers of the first version, these are the substantive changes.
 \section{Questions}
 
 \begin{enumerate}
-\item Do the comparison map, its inverse, and the coordinate change survive over
-  an iterated receiver that completes only in the bulk and the reconstruction
-  coordinate, with the Novikov directions inverted into a coefficient field?
-  This decides route~1, and it is a question about the sources rather than about
-  the draft.
+\item Is the pure-Novikov part of Iritani's coordinate shift confined to
+  $H^0\oplus H^2$? This is what decides route~1, by
+  Section~\ref{sec:iterated}: in that case the string and divisor equations
+  absorb it and the iterated receiver needs no inequality, and otherwise the
+  Novikov directions stay in the filtration and the criterion returns.
 \item For the low-dimensional centers, can primitive-sixth vanishing be proved
   directly in the coordinates Iritani's specialization produces, given that the
   nef-canonical case already yields an integral-$z$ gauge to a regular-singular
