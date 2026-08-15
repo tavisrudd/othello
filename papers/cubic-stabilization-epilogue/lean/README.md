@@ -1,4 +1,4 @@
-# Lean companion to *Irrationality after One Stabilization of Universally (CH_0)-Trivial Cubic Threefolds*
+# Lean companion to *Irrationality of Cubic Threefolds after One Stabilization*
 
 This Mathlib-only package is the formal companion to the manuscript.  Its
 reviewer-facing entry point is

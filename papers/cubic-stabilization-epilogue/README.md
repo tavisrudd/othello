@@ -6,8 +6,7 @@
 
 [**Open the paper (PDF) →**](irrationality_after_one_stabilization.pdf)
 
-**Title:** *Irrationality after one stabilization of universally
-CH₀-trivial cubic threefolds.*
+**Title:** *Irrationality of cubic threefolds after one stabilization.*
 
 The paper proves that `X x P^1` is irrational for every smooth cubic threefold
 `X`, that the quantum obstruction behind that theorem is birationally
