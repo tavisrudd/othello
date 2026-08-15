@@ -630,7 +630,32 @@ verdict text lives only in `claim-proof-novelty-ledger.md`.
   document can be read first; the report is the shorter route in, the memo's
   Sections 8 and 9 are where the mathematics now is.
 
-  *The endpoint is unconditional (Section 10).*  Iritani's Theorem 1.1/5.18
+  *Section 10 is refuted; the endpoint is NOT proved.*  Hostile-referee report
+  `../2026-08-15-c912-section10-hostile-referee.md` (verdict FATAL, with source
+  locators).  The parameter at which both summand parameters vanish does not
+  exist.  Iritani--Koto's (5.13) states invertibility for the **displaced**
+  coordinates `s_j = varsigma_j - varsigma_j^0` treated as independent formal
+  variables, so demanding `s_j = -varsigma_j^0` sets a formal variable of a
+  completed ring equal to a unit-order element `-+2q^{1/2} + O(q^{-1/2})`; that
+  is not a point of the germ.  Iritani's Lemma 5.15 is the formal inverse
+  function theorem at `Q = theta = 0`, an isomorphism of the germ at the origin
+  onto the germ at the image, licensing nothing at a non-nilpotent displacement;
+  and Iritani states the pullback of functions along the change of variables is
+  ill-defined.  Every version of the decomposition identity in the sources is
+  over a formal germ, not a family of pointwise statements, so "at any
+  parameter" is also unsupported.  Reading the identity in either direction was
+  the false step.  Section 8's algebra was recomputed independently and is
+  correct in every step, but its domain is the formal even bulk germ, the same as
+  Cai's gauge, so it does not extend validity to the displaced parameter either;
+  its gain is avoiding the pro-Laurent gauge.  Net: the endpoint holds if
+  `nu_6 = 2` at the displaced parameter, which is Hypothesis 4.7H.  A repair must
+  supply: which elements may be substituted into the change of variables, proved
+  from the graded completion rather than from the word invertible; invariance of
+  `nu_6` under degree-zero and degree-two shifts as a theorem about framed
+  monodromy rather than a normalization; and solvability in the negative-degree
+  coordinates with convergence proved degree by degree.
+
+  *Superseded claim, kept for the trail.*  Iritani's Theorem 1.1/5.18
   states a formal **invertible** change of variables
   `H*(Bl_Z X) -> H*(X) + H*(Z)^(r-1)` over `C((q^{-1/(r-1)}))[[Q]]`, invertible
   because its Jacobian at `Q = theta = 0` is (his Lemma 5.15).  The draft reads
