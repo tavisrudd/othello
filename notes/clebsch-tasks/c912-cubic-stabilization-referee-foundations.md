@@ -546,7 +546,11 @@ verdict text lives only in `claim-proof-novelty-ledger.md`.
   floats, references, and final-page balance.
 - [x] Check logs for undefined references/citations and layout warnings.
 - [x] Confirm deterministic rebuild and record page count and checksum:
-  23 pages, SHA-256 `cd57a43e08019efd5f9ae7ff79ebb3ff09d71b34abd9eded62349937e8d708bb`.
+  23 pages, SHA-256 `cd57a43e08019efd5f9ae7ff79ebb3ff09d71b34abd9eded62349937e8d708bb`
+  at the WP1--WP3 authority; after WP5 through WP11 the tracked PDF is
+  29 pages, SHA-256
+  `2804d9254525fd86f629b2c407bb8c2d2dbbc3a2a8e9c1ee1725ba5f24b1b30c`
+  at authority commit `673f51da1`.
 - [x] Red-team the complete diff against the pre-C912 authority commit.
 
 ### Commit and export gates
@@ -556,12 +560,16 @@ verdict text lives only in `claim-proof-novelty-ledger.md`.
 - [x] Finish every started edit; leave no dangling manuscript tranche.
 - [x] Commit the final reviewed manuscript and generated PDF together where the
   repository convention requires it.
-- [x] Run export plan/audit/sync from immutable source commit `2405ca85a`;
+- [x] Run export plan/audit/sync from immutable source commit `2405ca85a`,
+  and again from `673f51da1` after WP5 through WP11; both runs report
+  zero audit findings, and `verify` accepts the refreshed tree at 120
+  tracked files;
   audit and post-sync verification both report zero findings.
 - [x] Update all standalone links and metadata if filenames or commit targets
   change.
 - [x] Do not push unless the author separately requests it; standalone commit
-  `f336131` remains local and unpushed.
+  `f336131`, and now `e51a9c0`, remain local and unpushed. The mirror's own
+  `make check` passes and its PDF matches the authority byte for byte.
 - [ ] Report the final authority commits, page count, checksum, review verdicts,
   and any remaining explicit assumptions.
 - [x] Leave C912 **open** after all green gates; await explicit author closure.
