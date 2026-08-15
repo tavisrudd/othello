@@ -867,8 +867,67 @@ algebraic Novikov-coefficient extension inside \(\mathcal K_X\), not a
 ramification of \(z\).  Equation~\eqref{eq:cubic-small-even-connection} is
 the displayed system in Cai, Section~3, p.~4\cite{Cai}.
 
-In the basis \(1,P,P^2,P^3\), Cai explicitly block-diagonalizes the small even
-quantum connection.  The rank-two zero-exponential block has indicial
+Put \(r=(3q)^{1/2}\in\mathcal K_X\).  The constant change of basis
+\begin{equation}
+ C=\begin{pmatrix}
+ 6r^3&-6r^3&0&-7r^2\\
+ 7r^2&7r^2&-2r^2&0\\
+ 3r&-3r&0&1\\
+ 1&1&1&0
+ \end{pmatrix},
+ \qquad \det C=-486r^5,
+ \qquad S=C\widehat S
+ \label{eq:cubic-constant-block-basis}
+\end{equation}
+puts the constant term into the form
+\begin{equation}
+ K_0=C^{-1}K_XC=
+ \begin{pmatrix}
+ 6r&0&0&0\\
+ 0&-6r&0&0\\
+ 0&0&0&2\\
+ 0&0&0&0
+ \end{pmatrix},
+ \qquad G_0=C^{-1}G_XC.
+ \label{eq:cubic-constant-block-form}
+\end{equation}
+Partition the coordinates as \(1\mathbin{|}1\mathbin{|}2\).  There is a
+unique formal gauge
+\begin{equation}
+ A(z)=I+\sum_{n\ge1}A_nz^n,
+ \qquad A_n\in\operatorname{Mat}_4\bigl(\C[r,r^{-1}]\bigr),
+ \label{eq:cubic-integral-block-gauge}
+\end{equation}
+with zero block-diagonal part for every \(A_n\), such that
+\(\widehat S=A(z)\widetilde S\) makes every coefficient block diagonal.
+Indeed, at order \(n\), the block-off-diagonal coefficient is removed by a
+Sylvester equation \([K_0,A_n]=B_n\) determined by the preceding orders.
+The three diagonal blocks of \(K_0\) have distinct eigenvalues, so this
+equation has a unique solution on the block-off-diagonal matrices.  In
+particular, the gauge uses only integral powers of the original loop variable
+\(z\).
+
+Direct multiplication gives the first reduced coefficients:
+\begin{equation}
+ \begin{aligned}
+ J_0&=\begin{pmatrix}0&2\\0&0\end{pmatrix},\\
+ D_0&=\begin{pmatrix}-19/18&0\\0&19/18\end{pmatrix},\\
+ E_0&=\begin{pmatrix}0&-14/(81r^2)\\-8/81&0\end{pmatrix},\\
+ z^2\partial_z\widetilde S_+&=(6r+O(z^2))\widetilde S_+,\\
+ z^2\partial_z\widetilde S_-&=(-6r+O(z^2))\widetilde S_-,\\
+ z^2\partial_z
+ \begin{pmatrix}\widetilde S_3\\\widetilde S_4\end{pmatrix}
+ &=\bigl[J_0+zD_0+z^2E_0+O(z^3)\bigr]
+ \begin{pmatrix}\widetilde S_3\\\widetilde S_4\end{pmatrix}.
+ \end{aligned}
+ \label{eq:cubic-integral-block-reduction}
+\end{equation}
+This is the integral-\(z\) block reduction used by Cai in Section~3,
+pp.~4--5\cite{Cai}; the displayed change of basis and recurrence make the
+reduction \eqref{eq:cubic-integral-block-reduction} internal to the present
+calculation.
+
+The rank-two zero-exponential block has indicial
 polynomial
 \[
  \rho^2+\rho+\frac5{36},
