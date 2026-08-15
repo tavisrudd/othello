@@ -206,19 +206,16 @@
       "cautions": "The type records the framed operator only after construction; it neither permits nor models adjoining roots of z, and it does not prove independence of the algebraic closure."
     },
     {
-      "manuscript_label": "def:pro-laurent-monodromy",
+      "manuscript_label": "def:pro-laurent-gauge-group",
       "coverage": "fragment",
       "declarations": [
         "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.proLaurentGaugeSystem",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.proLaurentGaugeGroup",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.proLaurentCharacteristicPolynomialSystem",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.proLaurent_characteristicPolynomial_of_compatibleMonodromy",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.proLaurent_conjugatedMonodromy_compatible_and_charpoly"
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.proLaurentGaugeGroup"
       ],
-      "objects": "Lean represents coefficient rings at every natural-number level, invertible matrices over ordinary integer-exponent Laurent series, entrywise reduction homomorphisms, compatible finite-level square matrices, and characteristic polynomials over the level coefficient rings.",
-      "hypotheses": "Both displayed Laurent-matrix inverses hold at every level, gauges and inverses agree entrywise under reduction, and the supplied finite-level monodromy matrices agree entrywise under coefficient reduction. For the actual gauge-group object, one fixed Laurent coefficient tower and its adjacent reductions are supplied. For the conjugacy terminal the matrix and gauge systems share the same Laurent-series coefficient rings and reductions. A separately supplied characteristic-polynomial system may also state compatibility directly.",
-      "conclusion": "Typed pro-Laurent gauge and compatible characteristic-polynomial inverse systems; each finite level uses only integral powers of z and no uniform Laurent lower bound is assumed across levels. For a fixed tower, compatible levelwise general-linear matrices form an actual subgroup, hence are closed under identity, pointwise multiplication, and inversion. For entrywise compatible monodromy matrices, Lean derives the compatible characteristic-polynomial system and proves every level is the literal matrix characteristic polynomial. Levelwise conjugation by the supplied compatible gauges remains compatible under reduction and preserves every characteristic polynomial.",
-      "cautions": "The filtered algebra quotients, compatible differential modules, horizontal solutions, analytic monodromy construction, and proof that a bulk differential equation produces the supplied matrix/gauge system are not represented. The matrices are named monodromy data but supplied abstractly."
+      "objects": "Lean represents coefficient rings at every natural-number level, invertible matrices over ordinary integer-exponent Laurent series, and entrywise reduction homomorphisms.",
+      "hypotheses": "Both displayed Laurent-matrix inverse identities hold at every level, and gauges and inverses agree entrywise under reduction. For the actual gauge-group object, one fixed Laurent coefficient tower and its adjacent reductions are supplied.",
+      "conclusion": "A typed pro-Laurent gauge inverse system in which every finite level uses only integral powers of z and no uniform Laurent lower bound is assumed across levels. For a fixed tower, compatible levelwise general-linear matrices form an actual subgroup, hence are closed under identity, pointwise multiplication, and inversion.",
+      "cautions": "The filtered algebra quotients, compatible differential modules, horizontal solutions, analytic monodromy construction, characteristic-polynomial system, and proof that a bulk differential equation produces the supplied gauge system are not represented by this definition."
     },
     {
       "manuscript_label": "lem:pv-base-change",
@@ -244,6 +241,9 @@
       "manuscript_label": "lem:formal-base-shift",
       "coverage": "fragment",
       "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.proLaurentCharacteristicPolynomialSystem",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.proLaurent_characteristicPolynomial_of_compatibleMonodromy",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.proLaurent_conjugatedMonodromy_compatible_and_charpoly",
         "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.formalBaseShift_completedDivisorSubstitution",
         "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.formalBaseShift_formalStringGauge_trivial",
         "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.formalBaseShift_characteristicPolynomial_of_matrixInput",

@@ -4,6 +4,14 @@
 
 **Status:** active; author-close only
 
+**Current release gate:** GO for the repaired WP1--WP3 foundation tranche;
+full-paper copy, detritus, visual, commit, and export gates remain open.  The
+universal framed operator, normalized gauges, and Iritani comparison maps now
+meet only in a faithful graded Hahn receiver after the positive completion,
+with the coefficient field algebraically closed before the independent
+integral loop coordinate is adjoined.  C912 remains active and author-close
+only; WP4--WP6 remain prioritized work.
+
 **Lifecycle rule:** keep this card open until the author explicitly closes it.
 Passing implementation, review, export, and release gates does **not** authorize
 automatic closure.
@@ -103,12 +111,12 @@ exact bridge is formalized.
 - [x] Inspect the current recursion, uniqueness, and reduction statements.
 - [x] Verdict: **the recursion is present; the definition/proof order and the
   divisor-substitution reconciliation need repair**.
-- [x] Define the finite-level characteristic polynomial by transporting the
+- [ ] Define the finite-level characteristic polynomial by transporting the
   base-changed small framed polynomial through the unique normalized gauge.
-- [x] State explicitly that no separate Levelt--Turrittin theory over the
+- [ ] State explicitly that no separate Levelt--Turrittin theory over the
   Artinian quotients is being invoked.
 - [x] Prove uniqueness of the normalized gauge before defining the invariant.
-- [x] Prove adjacent reduction compatibility of the gauge and polynomial.
+- [ ] Prove adjacent reduction compatibility of the gauge and polynomial.
 - [ ] Add the paragraph reconciling divisor substitution with positive-bulk
   gauge invariance: the former is a filtered coefficient automorphism and the
   latter supplies the normalized identification.
@@ -195,7 +203,7 @@ exact bridge is formalized.
   extension.
 - [x] Treat ramified blocks and deck permutations explicitly.
 - [x] Prove agreement with analytic monodromy over `C`.
-- [ ] Replace the old Definition 4.1 and update Definition 4.2 and all uses.
+- [x] Replace the old Definition 4.1 and update Definition 4.2 and all uses.
 - [ ] Add a short reader-facing example, including the nonconstant rank-one
   exponent that invalidates the old wording.
 - [x] Run a dedicated adversarial mathematical review before moving to WP2.
@@ -204,18 +212,23 @@ exact bridge is formalized.
 
 - [x] Reorder the section so existence/uniqueness precedes finite-level
   invariant construction.
-- [x] Define each finite-level polynomial by the normalized gauge comparison.
-- [x] Prove representative/action and adjacent-reduction identities.
+- [x] Construct normalized gauges at each finite positive cutoff, assemble
+  them by uniqueness, and compare framed operators only in an explicitly
+  typed faithful graded receiver.
+- [x] Prove the cutoff compatibility and inverse identities before passing to
+  the receiver; no monodromy operator is placed over a nonfield quotient.
 - [x] Ensure the pro-system is assembled from those proved identities.
 - [x] Remove every sentence suggesting independent Artinian formal monodromy.
-- [ ] Check the Lean companion prose remains honest about its formal boundary.
+- [x] Check the Lean companion prose remains honest about its formal boundary.
 
 ### WP3 — adic continuity and frozen sources
 
-- [ ] Prove the completed-ring extension lemma.
-- [ ] Prove finite-stage descent of comparison maps, inverses, and identities.
-- [ ] Record exact source versions, theorem/remark names, and equation locators.
-- [ ] Quote only the minimum source statements actually consumed.
+- [x] Prove the faithful completed/graded-Laurent Hahn receiver construction.
+- [x] Prove degreewise continuity of the full nonlinear coordinate maps and
+  their inverse identities before faithful embedding.
+- [x] Record exact source versions, theorem/remark names, and equation locators
+  for the repaired completion bridge.
+- [x] Quote only the minimum source statements consumed by that bridge.
 - [ ] Audit parity preservation and even-connection restriction.
 - [ ] Re-run the literature evidence log and store immutable source identities.
 
@@ -330,7 +343,9 @@ become manuscript edits.
 | C912-M06 | resolved | The choice-independent formulation uses `K[V]`, the universal exponential with torsion preimage `Q`, and the intrinsic orbit relation `U^(e/d) = M_RS`; a focused adversarial review rejected three weaker drafts before accepting this form. | WP1; `C912-QF-001` and `C912-QF-002` closed |
 | C912-M07 | resolved | A universal exponential field built from `C[V]` does not contain the original coefficient field and cannot carry its LT matrices. | Replaced by `K[V]`; `C912-QF-001` |
 | C912-M08 | resolved | Factoring a ramified return as a scalar finite descent character times a fractional residue exponential fails in resonant multiplicity spaces. | Replaced by the intrinsic return-power argument; `C912-QF-002` |
-| C912-M09 | resolved | The formal-base-shift statement still named a pre-existing bulk monodromy polynomial after the proof had switched to a transported definition. | The theorem now constructs `G_N`, then `M_N^bulk`, `chi_N`, and `chi_B` in that order; `C912-WP2-001` closed |
+| C912-M09 | resolved | The source operator over `Omega_V` cannot be base-changed directly to `B/F^N`; ordering the finite gauges first does not by itself type the comparison. | Framed operators are now compared only after faithful graded embedding; `C912-GEN-001` / `C912-GEO-001` closed |
+| C912-M10 | resolved | No coefficient map from the universal LT constants field `Omega_V` to the nilpotent quotient rings `B/F^N` is supplied or generally available. | The repair uses no such map: it completes positive/scaled variables first and embeds gauges and comparison maps into a common Hahn receiver |
+| C912-M11 | resolved | Extending the positive ideal across Iritani's Laurent coordinate makes it the unit ideal, while ordinary localization misses series whose Laurent pole order grows with bulk degree. | Use the sources' homogeneous scaled variables and finite-below grading; pull through the full nonlinear coordinate isomorphism, embed in a coefficient Hahn field, construct `Omega_V`, then adjoin only integral powers of the independent loop coordinate |
 
 ## Close condition
 
