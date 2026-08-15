@@ -603,7 +603,7 @@ verdict text lives only in `claim-proof-novelty-ledger.md`.
   third version, carries those verdicts in its Section 6, and adds Section 7,
   which attacks the residual gap through the flatness identities: 20 pages, PDF
   SHA-256
-  `814c1a0c0816bcd1aa4b25483847893f796ae7aba2dbaaf7fe4de86bd1814694`.  Either
+  `4dccbe6d9ecfcbda59f9d0f4243d8d8e3f35bc9798743a12b5e0d8c5ae4c2402`.  Either
   document can be read first; the report is the shorter route in, the memo's
   Section 7 is where the mathematics now is.
 

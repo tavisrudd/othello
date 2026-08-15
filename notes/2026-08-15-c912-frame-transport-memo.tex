@@ -758,8 +758,10 @@ application the center copies are the maximal $F$-bundles of $Z$ associated to
 $\sigma^*\omega_X$ --- the Novikov direction pulled back from the ambient
 variety, which is the draft's specialization in a coarser form. No statement of
 theirs can therefore certify that a specialized center module carries an
-intrinsic framed monodromy. Divisor tagging remains the only route to intrinsic
-center invariants.
+intrinsic framed monodromy. Divisor tagging remains the route, in the current
+manuscript, for identifying the specialized center contribution with the
+intrinsic invariant; route~3 of the list below bypasses that identification
+instead, by proving specialized vanishing directly in low dimension.
 
 One genuine gain came out of it. Their Lemma~2.24 proves that the collapsed
 potential determines the full genus-zero potential, by expanding in the $H^2$
@@ -825,10 +827,11 @@ Everything else in Proposition~4.7 is proved or reduced to a regular gauge, and
 \label{sec:blockwise}
 
 This section carries out the second route far enough to see what it costs. It
-produces three things: an exact evolution equation for the block residue under
-bulk motion, a proof that multiplicity-one blocks carry no framed monodromy at
-all, and a reduction of the residual statement to one Sylvester solvability
-condition per coalesced block. Conventions are Iritani--Koto's, from their
+produces the exact evolution of the leading block operator under bulk motion and
+proves that multiplicity-one blocks carry no framed monodromy at all; for
+coalesced blocks it does not reduce the problem, but identifies why the full
+formal normal form, rather than the compressed pair $(U_i,\mu_i)$, is what has to
+be controlled. Conventions are Iritani--Koto's, from their
 Theorem~5.1: write $U=E\star_\tau$, $C_a=\phi_a\star_\tau$, and
 \[
   \nabla_a=\partial_a+z^{-1}C_a,\qquad
@@ -1230,9 +1233,11 @@ Both changes come from running the three checks against the sources.
 \begin{enumerate}
 \item The framing route of Section~\ref{sec:hyzz} was called the probable
   repair. It is not a repair at all: its governing theorem lives at the
-  large-radius limit point, its blowup case is unproved and outside that
-  theorem's hypotheses, and the gauge it supplies lands at the shifted base
-  point the bulk gauge exists to undo.
+  large-radius limit point; its blowup case, though stated with existence in
+  Theorem~5.22 and uniqueness in Theorem~5.24, is not derived from
+  Theorem~4.34, whose hypotheses do not cover the unequal block sizes, and its
+  existence is referred to the earlier decomposition work; and the gauge it
+  supplies lands at the shifted base point the bulk gauge exists to undo.
 \item The second version wrote that the unbounded negative loop order is the
   draft's own choice rather than something the comparison theorems impose. That
   is wrong, and it was the ground for the recommendation. Iritani--Koto

@@ -14,7 +14,7 @@ in its Section 6, replaces its route list and questions accordingly, and adds Se
 carrying out the blockwise attack on the residual gap.  A fourth version then corrects
 two errors in that attack, both at the coalesced blocks; the current file is 20 pages
 with PDF SHA-256
-`814c1a0c0816bcd1aa4b25483847893f796ae7aba2dbaaf7fe4de86bd1814694`.
+`4dccbe6d9ecfcbda59f9d0f4243d8d8e3f35bc9798743a12b5e0d8c5ae4c2402`.
 No manuscript, Lean, or export change is made by this pass.
 
 **Headline.**  Check 1 fails as posed, for three independent reasons; check 2 passes and
@@ -176,7 +176,10 @@ ambient variety, which is precisely the manuscript's specialization
 `Q_C^d ↦ Q^{i_*d}u^{ρ_C·d}` in a coarser form.  So no HYZZ statement can certify that a
 specialized center module carries an intrinsic framed monodromy; `ν_6(C;χ_j)` must stay
 defined after the specialization, as `prop:framed-operations` already states, and
-`lem:divisor-tagging` remains the only route to an intrinsic center invariant.
+`lem:divisor-tagging` remains the route, in the current manuscript, for identifying the
+specialized center contribution with the intrinsic invariant.  Proving specialized
+vanishing directly in low dimension bypasses that identification instead of supplying
+it.
 
 One genuine gain.  HYZZ Lemma 2.24 proves that the collapsed potential `Φ_ω` determines
 the full Gromov–Witten potential `Φ`, by using the divisor axiom to expand in the `H^2`
@@ -261,10 +264,11 @@ Recorded as leads, with their status marked; none is a claim.
    control those.  This matches the manuscript's cubic computation, where `K_0` has
    eigenvalues `±6r, 0, 0`: the simple `±6r` blocks contribute the identity, and the
    indicial roots `1/6` and `5/6` are `±1/6` mod `Z`, the symmetry the argument forces.
-4. **Blowup uniqueness is not available from HYZZ.**  Anyone later tempted to cite
-   Theorem 5.22 for the blowup half should know it is unproved there and outside
-   Theorem 4.34's stated hypotheses (finding 1b).  The manuscript must not cite it as
-   support for (4.3).
+4. **Theorem 5.22 gives the blowup half no independent support.**  Anyone later tempted
+   to cite it should know that it states existence, with uniqueness in Theorem 5.24, but
+   is not derived from Theorem 4.34 — whose hypotheses do not cover the unequal block
+   sizes — and that its existence is referred to the earlier decomposition work
+   (finding 1b).  Citing it in support of (4.3) would add nothing beyond Iritani.
 
 ## 7. Mystery ledger rows for the card
 
