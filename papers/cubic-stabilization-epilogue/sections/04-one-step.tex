@@ -987,10 +987,35 @@ give
 \]
 This agrees with Cai's rank-two calculation~\cite[p.~6]{Cai}.
 
-The two remaining rank-one even
-blocks are displayed as exponentials in \(z^{-1}\) times series in nonnegative
-integral powers of \(z\) \cite[pp.~5--7]{Cai}; their framed-monodromy factor is
-therefore \(1\), so they contribute no primitive sixth root.
+Put \(R=\C[r,r^{-1}]\).  The two scalar equations in
+\eqref{eq:cubic-integral-block-reduction} have the form
+\[
+ z^2\partial_z\widetilde S_\pm
+ =\bigl(\pm6r+h_\pm(z)\bigr)\widetilde S_\pm,
+ \qquad h_\pm(z)\in z^2R[[z]].
+ \tag{4.9k}
+ \label{eq:cubic-rank-one-scalar-equations}
+\]
+Their normalized formal solutions are
+\[
+ \begin{aligned}
+ \widetilde S_+&=e^{-6r/z}u_+(z),
+ &u_+(z)&\in1+zR[[z]],\\
+ \widetilde S_-&=e^{6r/z}u_-(z),
+ &u_-(z)&\in1+zR[[z]].
+ \end{aligned}
+ \tag{4.9l}
+ \label{eq:cubic-rank-one-solutions}
+\]
+Indeed, after the displayed exponential is removed,
+\(\partial_zu_\pm=z^{-2}h_\pm(z)u_\pm\).  The coefficient
+\(z^{-2}h_\pm(z)\) lies in \(R[[z]]\), so integration with initial value
+one gives the asserted units.  The exponentials and these units use only
+integral powers of the original \(z\); neither adjoins a root of \(z\) nor
+produces a deck factor.  Thus each block is unramified and has framed regular
+factor \(1\), so neither contributes a primitive sixth root.  This agrees
+with Cai's scalar solutions~\cite[pp.~5--6]{Cai}.
+
 Thus the multiplicity is exactly two.  By definition, \(\nu_6\) uses the small
 even connection, so no odd-cohomology block enters this count.  The numerical
 curve lattice of a cubic
