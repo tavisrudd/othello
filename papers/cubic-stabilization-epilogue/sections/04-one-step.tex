@@ -129,7 +129,7 @@ unity.  This criterion does not depend on \(V\) and does not require a
 fractional residue factor to commute with the descent action.
 
 For completeness, compare two Levelt--Turrittin choices after pulling both to
-a common ramification \(z=u^E\).  Equivariant uniqueness of the formal
+a common ramification \(z=\widetilde w^{\,E}\).  Equivariant uniqueness of the formal
 decomposition identifies their total horizontal solution spaces and carries
 the original-\(z\)-turn deck/descent operator for one choice to the scalar
 extension of the other.  Thus the product of all orbit polynomials
@@ -340,8 +340,10 @@ term of total bulk degree \(m\) lies in \(F^mB\); modulo \(F^NB\), only the
 finitely many degrees \(m<N\) survive.  The resulting finite sum is congruent
 to the identity modulo \(F^1B\), hence is invertible, and has a Laurent lower
 bound at least \(-(N-1)\).  That bound decreases with \(N\), which costs
-nothing by Remark~\ref{rem:pro-laurent-concrete}: the transported operator is
-formed over \(\mathscr L_{B,F}\) and never over \(B((z))\).  Uniqueness makes
+nothing by Remark~\ref{rem:pro-laurent-concrete}: the compatible gauge is
+formed over \(\mathscr L_{B,F}\) and never over \(B((z))\), and the
+comparison-transported matrix only after coefficient extension as in
+\eqref{eq:scalar-extended-pro-laurent-ring}.  Uniqueness makes
 these solutions compatible in \(N\).  Their inverse limit belongs to
 \[
  \mathcal G^{\rm pro}_{B,F}(H^{\rm ev}(T)).
@@ -529,10 +531,11 @@ First separate the single-valued rank-one exponential twist associated with
 \(-(c-1)\lambda_j\), and apply the fixed divisor shift.  The normalized
 connection descends to \(B_j\).  Apply
 Lemma~\ref{lem:formal-base-shift} with \(A=R_j\).  It constructs the
-compatible gauges first and compares the framed operators only after forming
-\(\mathscr L_{B_j,F}\), localizing its \(R_j\)-coefficients, and extending to
-a universal exponential field.  No framed operator is placed over an
-individual quotient.
+compatible gauges first.  The comparison-transported matrix is formed only
+after \(\mathscr L_{B_j,F}\), the localization of its \(R_j\)-coefficients,
+and the coefficient extension
+\eqref{eq:scalar-extended-pro-laurent-ring}.  No framed operator is placed
+over an individual quotient.
 
 Here is the required continuity check without extending \(J_j\) to a ring in
 which \(u\) is a unit.  Put \(v=q^{-1/s_c}\), so \(v^e=u\) for
@@ -616,9 +619,10 @@ and no root of \(z\) is adjoined.  The recurrence bound
 \eqref{eq:formal-base-shift-recursion} puts the compatible gauge and its
 inverse in \(\mathscr R_j\).  Theorem~5.18 places \(\Psi\),
 \(\Psi^{-1}\), and their two inverse identities in the same graded Laurent
-ring.  Hence all comparison maps, gauges, and framed operators coexist in one
-nonzero receiver \(\mathscr R_j\), with the source
-and target monomials identified by the displayed coordinate map.  No uniform
+ring.  Hence the comparison maps and gauges used in the algebraic conjugacy
+calculation coexist in one nonzero receiver \(\mathscr R_j\), with the source
+and target monomials identified by the displayed coordinate map.  No intrinsic
+framed operator at the shifted bulk point is defined there.  No uniform
 \(u\)-denominator is asserted, and no adic ideal is extended across Laurent
 inversion.  Theorem~5.18 supplies both maps with only integral powers of
 \(z\), so Lemma~4.1A transports framed formal monodromy across the comparison
@@ -694,8 +698,9 @@ value at the origin.
 Separate the Laurent unit as a single-valued rank-one exponential twist and
 apply the fixed divisor shift first.  The normalized connection descends to
 \(B_j\); apply Lemma~\ref{lem:formal-base-shift} with \(A=R_j\).  It produces
-the compatible pro-Laurent gauge and compares framed operators only after the
-inverse limit, coefficient localization, and universal-exponential extension.
+the compatible pro-Laurent gauge and forms the comparison-transported matrix
+only after the inverse limit, coefficient localization, and coefficient
+extension as in \eqref{eq:scalar-extended-pro-laurent-ring}.
 For completeness, put \(v=q^{-1/r'}\), so \(v^e=u\) for
 \(e=r'/r\in\{1,2\}\).  The nonlocalized coefficient ring displayed in
 \cite[Section~5.5]{IritaniKoto} is a power series ring in the homogeneous
@@ -898,7 +903,7 @@ graded Hahn field \(k_\chi((\Z^\rho\oplus\Z e_z))\), ordered by
 by \(z\)-degree, exactly as in the receiver built for
 Proposition~\ref{prop:framed-operations}.  The pro-Laurent support condition
 of Remark~\ref{rem:pro-laurent-concrete} gives every gauge and every
-transported operator well-ordered support in that order, so the gauge of
+comparison-transported matrix well-ordered support in that order, so the gauge of
 Lemma~\ref{lem:formal-base-shift}, whose negative \(z\)-order is unbounded,
 and the \(\chi_{\boldsymbol t}\)-module both embed there.
 
@@ -923,8 +928,9 @@ with \(a_0=0\) and \(a_2^\circ=0\), and its substitution
 corresponding comparison-transported matrix and proves the algebraic
 conjugacy statement in the pro-Laurent coefficient algebra.  Hypothesis~4.7H,
 applied to this tagging displacement, identifies the algebraic multiplicities
-of \(e^{\pi i/3}\) and \(e^{-\pi i/3}\) in \(p^{\rm tag}\) with those of the
-intrinsic specialized framed operator \(p^{\rm spec}\).
+of \(e^{\pi i/3}\) and \(e^{-\pi i/3}\) in \(p^{\rm tag}\) with those encoded
+by \(p^{\rm spec}\), the characteristic polynomial of the intrinsic
+specialized framed operator.
 
 Every primitive sixth root of unity lies in \(\C\), and the embedding behind
 \eqref{eq:tagged-equals-intrinsic} fixes \(\C\).  Since the tagged module is
