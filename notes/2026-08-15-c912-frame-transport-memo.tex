@@ -42,7 +42,11 @@ weight parameter large, and holds at the cubic endpoint under the smallest
 admissible choice. Section~\ref{sec:iterated} examines an iterated receiver that
 would satisfy the inequality trivially, checks it against the sources, and finds
 that it needs a semipositivity hypothesis on the ambient variety which weak
-factorization does not supply. Section~\ref{sec:corrections} lists what the first version
+factorization does not supply. Section~\ref{sec:hyzz} then identifies what is
+probably the actual repair, in the framing theory of Hinault, Yu, Zhang and
+Zhang, whose decomposition gauge is regular in the loop coordinate and so
+satisfies the transport lemma's hypothesis outright.
+Section~\ref{sec:corrections} lists what the first version
 of this memo got wrong; readers of that version should start there.
 \end{abstract}
 
@@ -588,19 +592,79 @@ ruled surfaces, and point blowups. Proving primitive-sixth vanishing directly
 for those, in the coordinates Iritani's specialization actually produces, is a
 smaller problem than a general transport theorem.
 
+\section{The framing route, which is probably the repair}
+\label{sec:hyzz}
+
+Everything above treats the pro-Laurent bulk gauge of Lemma~4.5 as unavoidable.
+It may not be. Hinault, Yu, Zhang and Zhang work with $F$-bundles on the formal
+$u$-disc, where a framing is a regular flat connection and, in a framing-flat
+trivialization, the meromorphic connection takes the normal form
+\[
+  \nabla_{u\partial_u}=u\partial_u+u^{-1}K+(\mu D+H).
+\]
+Their Theorem~4.34 characterizes when two connections of that shape are
+gauge-equivalent under
+\[
+  \Phi(u)\in\mathrm{GL}(H[[u]]),
+  \qquad \Phi_{ij}(u)\in k[c_1,\dots,c_r][[u]],
+\]
+with $\Phi$ then unique given its value at $u=0$; the conditions are that the
+leading operators $K$ be conjugate by a parameter-polynomial $\phi$, that the
+two $\mu$ agree, and that the diagonal entries of $H$ agree after conjugation
+modulo the parameter ideal. Their applications are uniqueness of the
+decomposition for projective bundles and for blowups, complementing the
+existence theorems of Iritani--Koto and Iritani.
+
+The shape of that gauge is exactly what this memo has been missing. A gauge in
+$\mathrm{GL}_n(K[[u]])$ has only nonnegative integral powers of the loop
+coordinate, adjoins no root of $u$, and is therefore fixed by the turn
+$u\mapsto e^{2\pi i}u$. Taking $\Gamma=0$, so that $\mathcal H=\Omega_V(\!(u)\!)$
+and Levelt--Turrittin is available, Theorem~\ref{thm:transport} applies with no
+further work:
+\[
+  \Phi\in\mathrm{GL}_n(K[[u]]),\quad
+  \nabla'=\Phi\nabla\Phi^{-1}-\theta(\Phi)\Phi^{-1}
+  \ \Longrightarrow\
+  M_{\mathrm f,V}(\nabla')\ \text{and}\ M_{\mathrm f,V}(\nabla)\ \text{conjugate}.
+\]
+No Hahn receiver, no product $GP$, and no inequality
+$e\,w(\Delta\lambda)<\varepsilon$. The scissors of Section~\ref{sec:lemma}
+close because the gauge is regular rather than pro-Laurent: the entire
+obstruction analysed in Section~\ref{sec:receiver} is a consequence of the
+draft's own choice to realize the bulk transport by a normalized gauge with
+unbounded negative loop order, not of anything in the comparison theorems.
+
+What has to be checked is therefore a compatibility question, and it is much
+smaller than a transport theorem:
+
+\begin{quote}
+  Does the decomposition used in Proposition~4.7, after the coefficient base
+  changes and with $u=z$, coincide with an $F$-bundle isomorphism of the class
+  Theorem~4.34 governs --- that is, do the two connections being compared lie in
+  $\mathcal F(H,\mathrm{iso},d,(c_i))$, and are its three conditions met?
+\end{quote}
+
+Two remarks on scope. First, the identification is plausible on the authors'
+own terms, since their stated application is uniqueness of exactly the
+decompositions Proposition~4.7 imports for existence. Second, this does not
+touch the center specialization: their statement is about the decomposition as
+an $F$-bundle, upstream of the numerical center map, whose noninjectivity is
+what divisor tagging exists to repair. So the low-dimensional center problem
+survives intact, while the frightening half --- transporting framed monodromy
+across arbitrary intermediate fourfolds --- would be removed.
+
+If that bridge checks, Sections~\ref{sec:lemma} to \ref{sec:receiver} remain
+accurate as an account of why the proof currently in the manuscript does not
+work, but they stop being the repair, and the manuscript should adopt the
+regular gauge instead of the pro-Laurent one wherever it can.
+
 \section{Four routes, in the order I would try them}
 
 \begin{enumerate}
 \item \textbf{The framing theory of Hinault, Yu, Zhang and Zhang}
   (arXiv:2411.02266), whose reconstruction algorithm is the one Iritani--Koto
-  added as their Section~5.8. They develop formal and non-Archimedean spectral
-  decomposition together with existence and uniqueness of an extension of
-  framing, and apply it to uniqueness of the blowup and projective-bundle
-  decompositions. That is aimed at what the scissors identify as missing: a
-  canonical structure over a non-Archimedean base that survives the completion
-  and distinguishes a normal form. What needs proof is that their framing, which
-  is an $F$-bundle framing, recovers the original-disc cyclotomic turn used
-  here; the implication is not automatic.
+  added as their Section~5.8, and which is very likely the actual repair. See
+  Section~\ref{sec:hyzz}.
 \item \textbf{The iterated receiver of Section~\ref{sec:iterated}}, now known to
   need a semipositivity hypothesis on the ambient variety that weak
   factorization does not supply. Still worth having where it applies, but it
@@ -707,9 +771,9 @@ For readers of the first version, these are the substantive changes.
 \section{Questions}
 
 \begin{enumerate}
-\item Does the framing of Hinault, Yu, Zhang and Zhang recover the
-  original-disc cyclotomic turn, so that their canonical extension of framing
-  transports $M_{\mathrm f,V}$?
+\item Do the two connections compared in Proposition~4.7 lie in the class
+  Theorem~4.34 of Hinault--Yu--Zhang--Zhang governs, and are its three
+  conditions met? This is the question that decides the repair.
 \item For the low-dimensional centers, can primitive-sixth vanishing be proved
   directly in the coordinates Iritani's specialization produces, given that the
   nef-canonical case already yields an integral-$z$ gauge to a regular-singular
