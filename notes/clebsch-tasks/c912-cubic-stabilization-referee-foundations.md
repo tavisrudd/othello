@@ -626,11 +626,17 @@ verdict text lives only in `claim-proof-novelty-ledger.md`.
   reconstruction has `t` and `s_j` in `H^*((q^-1))[[Q,tau]]` vanishing only at
   `Q=tau=0`, so the coordinate shift retains pure-Novikov terms whose removal by
   the normalized gauge needs Novikov-adic convergence.  The initial terms are
-  harmless, being restrictions to `Q=0`.  The decisive question is now graded
-  and small: is the pure-Novikov part of that shift confined to `H^0 + H^2`?  If
-  yes the string and divisor equations absorb it and the ambient summand needs
-  no inequality; if no, the Novikov directions stay in the filtration and the
-  criterion returns.  Independently,
+  harmless, being restrictions to `Q=0`.  The graded question this left is now settled
+  negatively.  Theorem 5.18(5) makes the coordinate maps homogeneous of degree
+  two, and with `deg Q^d = 2c_1·d` and `deg tau_i = 2 - deg phi_i` a pure-Novikov
+  term `Q^d phi` has `deg phi = 2 - 2c_1·d`.  So confinement to `H^0 + H^2` holds
+  exactly when every contributing effective class has `c_1·d >= 0`, which weak
+  factorization does not supply for an intermediate ambient variety.  The
+  iterated receiver therefore needs a semipositivity hypothesis and does not
+  remove the arbitrary fourfolds.  Next in line is the Hinault--Yu--Zhang--Zhang
+  framing theory (arXiv:2411.02266, cached), whose reconstruction algorithm is
+  Iritani--Koto's Section 5.8: the open question is whether their `F`-bundle
+  framing recovers the original-disc cyclotomic turn.  Independently,
   the obstruction is order-free: for the critical ratio the loop coefficient of
   the gauge product is an infinite sum of bounded weight, hence undefined in any
   completion.  `lem:divisor-tagging` carries the same obstruction and needs the

@@ -785,10 +785,9 @@ standalone forward commit is `b0b3861` and the summary mirror is `11b6e63`.
 Nothing was pushed.  The next step is the frame-transport lemma owed to
 referee A.  Its reviewer-facing memo and the red team that corrected it are
 `../2026-08-15-c912-frame-transport-memo.tex` and
-`../2026-08-15-c912-frame-transport-memo-red-team.md`; the source check is done and the
-open question is now whether the pure-Novikov part of Iritani's coordinate shift
-lies in `H^0 + H^2`, which decides the iterated receiver for the ambient
-summand.  Current
+`../2026-08-15-c912-frame-transport-memo-red-team.md`; the iterated receiver is ruled out
+for general ambients by a grading argument, and the next route is whether the
+Hinault--Yu--Zhang--Zhang framing recovers the original-disc turn.  Current
 card: `../clebsch-tasks/c912-cubic-stabilization-referee-foundations.md`.
 
 C914 places the `A_5`-pencil against the known universally `CH_0`-trivial
