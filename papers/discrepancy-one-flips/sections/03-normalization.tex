@@ -110,8 +110,9 @@ symplectic space.
 
 \begin{lemma}[\(J\)-slice uniqueness; {\cite{Givental}}, {\cite{CoatesGivental}}]
   \label{lem:jslice}
-  Let \(f\in\mathcal L_{T}\) be of the form \(f=z\one+\tau+O(z^{-1})\) for
-  some \(\tau\) in the parameter space.  Then \(f=J^{T}(\tau,z)\).
+  Let \(Y\) be \(T\) or \(\PP(V)\) in the extremal specialization, and let
+  \(f\in\mathcal L_{Y}\) be of the form \(f=z\one+\tau+O(z^{-1})\) for
+  some \(\tau\) in the parameter space.  Then \(f=J^{Y}(\tau,z)\).
 \end{lemma}
 
 This is the mechanism behind every mirror theorem of Givental type: a point
@@ -127,8 +128,8 @@ the authors name do the work.
 
 \begin{lemma}
   \label{lem:cone}
-  Let \(r>s\ge0\) and suppose \(V=\bigoplus_{i=1}^{r}L_{i}\) and
-  \(V'=\bigoplus_{j=1}^{s}M_{j}\).  Then the right-hand side of
+  Let \(r>s\ge0\) with \(r\ge2\), and suppose \(V=\bigoplus_{i=1}^{r}L_{i}\)
+  and \(V'=\bigoplus_{j=1}^{s}M_{j}\).  Then the right-hand side of
   \eqref{eq:ss35} lies on \(\mathcal L_{T}\).
 \end{lemma}
 
@@ -156,28 +157,38 @@ the authors name do the work.
   such component, on the contracted components as well; so
   \(H^{0}(C,f^{*}V'(-1))=0\) and
   \(V'(-1)\) is concave along every extremal class, while its dual
-  \(E:=(V'(-1))^{\vee}=\pi^{*}(V')^{\vee}\otimes\mathcal O_{\PP(V)}(1)\) is
-  convex there.  Twisting by the inverse equivariant Euler class of a concave
-  bundle gives the Gromov--Witten theory of its total space, and the
-  hypergeometric modification \cite[Theorem~2]{CoatesGivental} of the
-  \(J\)-function has a Serre-dual partner obtained by replacing \(e,E\) with
-  \(e^{-1},E^{\vee}\); both are the discussion ``On Serre duality'' of
+  \(W:=(V'(-1))^{\vee}=\pi^{*}(V')^{\vee}\otimes\mathcal O_{\PP(V)}(1)\) is
+  convex there.  Twisting by the inverse Euler class equivariant for the
+  fibrewise \(\C^{\times}\)-action, whose parameter we write \(\lambda\),
+  gives the Gromov--Witten theory of the total space of a concave bundle, and
+  the hypergeometric modification \cite[Theorem~2]{CoatesGivental} of the
+  \(J\)-function has a Serre-dual partner obtained by replacing the Euler
+  class of \(W\) with the inverse equivariant Euler class of \(W^{\vee}\);
+  that partner is stated in the discussion ``On Serre duality'' of
   \cite{CoatesGivental}.
 
   The dual modification is termwise, so its degree-\(d\) factor can be read
-  off.  The Chern roots of \(E\) are \(H-\sigma_{j}\), and each pairs to
+  off.  The Chern roots of \(W\) are \(H-\sigma_{j}\), and each pairs to
   \(d\) on \(d[L]\), so the factor contributed by the \(j\)-th root is
-  \(\prod_{k=-d+1}^{0}\bigl(-\lambda-(H-\sigma_{j})+kz\bigr)\), which is
+  \(\prod_{l=-d+1}^{0}\bigl(-\lambda-(H-\sigma_{j})+lz\bigr)\), which is
   empty for \(d=0\).  In positive degree the concave local theory admits the
   non-equivariant specialization, and letting \(\lambda\to0\) and writing
-  \(m=-k\) turns this into
-  \(\prod_{m=0}^{d-1}(\sigma_{j}-H-mz)\).  Applying the modification to
-  Brown's projective-bundle \(I\)-function \cite[(34)]{SS}, and reparametrizing
+  \(m=-l\) turns this into
+  \(\prod_{m=0}^{d-1}(\sigma_{j}-H-mz)\).
+
+  The modification applies to a \(J\)-function, so we record that
+  \cite[(34)]{SS} is one.  For \(r\ge2\) the count of Lemma~\ref{lem:order},
+  applied with \(s=0\), gives its degree-\(d\) summand \(z\)-order at most
+  \(1-rd\le-1\) for every \(d\ge1\); so \cite[(34)]{SS} is \(J\)-normalized
+  and, lying on \(\mathcal L_{\PP(V)}\), equals \(J^{\PP(V)}\) by
+  Lemma~\ref{lem:jslice}.  Applying the modification to it, and reparametrizing
   the extremal variable as in \cite[(33)]{SS}, so that the class \(d[L]\)
   carries the weight
   \(q^{\langle c_{1}(T),\,d[L]\rangle}=q^{(r-s)d}\) and the prefactor becomes
-  \(q^{c_{1}(T)/z}\), gives \eqref{eq:ss35}.  The Novikov exponent is fixed by
-  that reparametrization, not by the twist.  The \(d=0\) summand is untouched by the modification and
+  \(q^{c_{1}(T)/z}\), gives \eqref{eq:ss35}.  The modification factor carries
+  no \(q\); the exponent changes only because the reparametrization is by
+  \(c_{1}(T)=c_{1}(\PP(V))+c_{1}(V'(-1))\).  The \(d=0\) summand is untouched
+  by the modification and
   remains the classical term \(z\,e^{\bar{\mathbf t}/z}\).  The modification
   involves the Chern roots of \(V'(-1)\) and nothing else; here too \(r\) and
   \(s\) enter only as numbers of factors.
@@ -214,17 +225,26 @@ cone.
   quotients.
 
   It remains to replace a filtered bundle by its associated graded.  Take one
-  step \(0\to A\to V\to Q\to0\) of the filtration.  The construction of
+  step \(0\to A\to V\to Q\to0\) of the filtration; in this paragraph \(A\),
+  \(Q\) and \(t\) are the sub- and quotient bundles and the coordinate on
+  \(\mathbf A^{1}\), not the coefficient ring above, the Novikov variable of
+  \eqref{eq:jnorm} or the parameter of \eqref{eq:barparam}.  The construction of
   \cite[Lemma~9.4]{SS} produces a bundle \(\ker(g)\) on \(Z\times\mathbf
   A^{1}\) with \(\ker(g)_{1}=V\) and \(\ker(g)_{0}=A\oplus Q\), hence a
   smooth projective family \(\PP(\ker g)\to Z\times\mathbf A^{1}\) carrying
-  the bundle \(V'(-1)\).  By \cite[Proposition~3.1]{SS} the moduli spaces
-  \(\overline M_{0,n}(\PP(\ker g)_{t},k[L])\) form a smooth proper family
+  the bundle \(V'(-1)\).  For \(k\ge1\), the argument of
+  \cite[Proposition~3.1]{SS}, applied to the projective bundle
+  \(\PP(\ker g)\to Z\times\mathbf A^{1}\), makes the moduli spaces
+  \(\overline M_{0,n}(\PP(\ker g)_{t},k[L])\) a smooth proper family
   over \(\mathbf A^{1}\), and concavity makes
-  \(R^{1}\pi_{\mathcal C*}f^{*}V'(-1)\) a relative locally free obstruction
+  \(R^{1}\pi_{\mathcal C*}f^{*}V'(-1)\), for \(\pi_{\mathcal C}\) and \(f\)
+  the universal curve and universal map, a relative locally free obstruction
   bundle of rank \(s(k-1)\).  Its Euler class, capped with the relative
   fundamental class, defines a relative class whose fibrewise restrictions
-  are the extremal virtual classes of \cite[Corollary~3.2]{SS}.  Deformation invariance therefore identifies all
+  are the extremal virtual classes of \cite[Corollary~3.2]{SS}.  Since
+  \(\mathbf A^{1}\) is connected and the class is defined relatively, the
+  descendant integrals against it do not depend on the fibre, and this
+  identifies all
   extremal genus-zero descendant invariants, and with them the extremal
   \(J\)-functions, under the isomorphism of cohomology rings of
   \cite[Lemma~9.4]{SS}.  The right-hand side of \eqref{eq:ss35} is likewise

@@ -587,3 +587,404 @@ type and number:
   of toric fibrations*). The paper is not in the local literature cache. The Corollary 1
   attribution is consistent with Shen–Shoemaker, who cite "[11, Corollary 1]" for exactly this
   step (extraction line 1267); the Theorem 1 attribution I could not check.
+
+---
+
+# Second pass (2026-08-14)
+
+Re-read after the reviewer-prompted revision. Scope as instructed: the rewritten
+`lem:cone` proof and second half of `lem:split-reduction` in
+`sections/03-normalization.tex`, the changed citation list in
+`sections/01-introduction.tex`, the changed abstract closing sentence in
+`discrepancy_one_flips.tex`, plus a whole-note consistency re-check. First-pass
+findings are not restated.
+
+Upstream cross-check for this pass: `/tmp/persistent/tavis/lit-search/text/arXiv_math_0110142.txt`
+(Coates–Givental), formula (12) at extraction lines 714–730, Theorem 2 at lines 731–739,
+and the unnumbered discussion "On Serre duality" at lines 1259–1346.
+
+Caveat on line numbers: the files were being edited while I read them. Every quotation below
+was re-verified against the file immediately before writing this section, but if further edits
+have landed since, match on the quoted string rather than the line number.
+
+## Verdict on the Coates–Givental chain
+
+The mathematics of the new `lem:cone` derivation is correct, and every arithmetic link checks
+out against Coates–Givental's own formulas. One structural step is not covered by the statement
+cited for it (B1), and one version question I cannot settle locally (B4). Details of what
+checked out are in "Second-pass CHECKED AND CORRECT" below.
+
+## MATH-AFFECTING
+
+### B1. Coates–Givental Theorem 2 modifies the `J`-function; the proof applies it to a cone point
+
+- **File:** `sections/03-normalization.tex`, lines 174–175 (with a consequential change at line 130)
+- **Current text (lines 174–175):**
+  ```
+    \(\prod_{m=0}^{d-1}(\sigma_{j}-H-mz)\).  Applying the modification to
+    Brown's projective-bundle \(I\)-function \cite[(34)]{SS}, and reparametrizing
+  ```
+- **Proposed replacement:**
+  ```
+    \(\prod_{m=0}^{d-1}(\sigma_{j}-H-mz)\).  For \(r\ge2\), Lemma~\ref{lem:order}
+    applied to \cite[(34)]{SS} gives \(z\)-order at most \(1-rd\le-1\) for every
+    \(d\ge1\), so \cite[(34)]{SS} is \(J\)-normalized and, being a point of
+    \(\mathcal L_{\PP(V)}\), equals \(J^{\PP(V)}\) by Lemma~\ref{lem:jslice}.
+    Applying the modification to it, and reparametrizing
+  ```
+  and at line 130:
+  ```
+    Let \(r>s\ge0\) and suppose \(V=\bigoplus_{i=1}^{r}L_{i}\) and
+  ```
+  becomes
+  ```
+    Let \(r>s\ge0\) with \(r\ge2\), and suppose \(V=\bigoplus_{i=1}^{r}L_{i}\) and
+  ```
+- **Reason:** Coates–Givental introduce the hypergeometric modification (12) explicitly as a
+  modification of the `J`-function — "consider the J-function `J_X(t,z) = Σ_d J_d(t,z)Q^d` …
+  introduce the following hypergeometric modification of `J_X`" (extraction lines 717–718) —
+  and Theorem 2 asserts that `I_E`, built from those `J_d`, lies on the twisted Lagrangian
+  section. Their Serre-duality passage transports Theorem 2 in that same form. The proof as
+  printed applies the modification to `\cite[(34)]{SS}`, which it deliberately calls "Brown's
+  projective-bundle `I`-function" and has only shown to be a point of `\mathcal L_{\PP(V)}`, so
+  the cited statement does not reach it. The gap closes with no new input for every case
+  `prop:IJ` actually uses (`r=s+1`, `s\ge1`, hence `r\ge2`), since `lem:order` and `lem:jslice`
+  both precede `lem:cone` and together identify `(34)` with `J^{\PP(V)}`. Note that the
+  cone-level form `\cite[Corollary~4]{CoatesGivental}` (`L_s = exp{…}L_0`, extraction lines
+  667–680) would cover an arbitrary point of the cone, but it is not the termwise
+  hypergeometric modification and the Serre-dual partner is attached to Theorem 2, so
+  substituting it is not a fix.
+
+### B2. Proposition 3.1 of Shen–Shoemaker is an absolute statement with a `k>0` hypothesis; a relative form over `\mathbf A^{1}` is used
+
+- **File:** `sections/03-normalization.tex`, lines 221–223
+- **Current text:**
+  ```
+    the bundle \(V'(-1)\).  By \cite[Proposition~3.1]{SS} the moduli spaces
+    \(\overline M_{0,n}(\PP(\ker g)_{t},k[L])\) form a smooth proper family
+    over \(\mathbf A^{1}\), and concavity makes
+  ```
+- **Proposed replacement:**
+  ```
+    the bundle \(V'(-1)\).  For \(k\ge1\), the argument of
+    \cite[Proposition~3.1]{SS}, applied to the projective bundle
+    \(\PP(\ker g)\to Z\times\mathbf A^{1}\), makes the moduli spaces
+    \(\overline M_{0,n}(\PP(\ker g)_{t},k[L])\) a smooth proper family
+    over \(\mathbf A^{1}\), and concavity makes
+  ```
+- **Reason:** Upstream Proposition 3.1 is stated "For `d = k[L]` with `L` a line contracted by
+  `p` and `k > 0`" and concludes that `M_{g,n}(X,d) ≅ M_{g,n}(F,d)`, a fibre bundle over the
+  projective base `Z` with fibre `M_{g,n}(P^{r-1},k)` (extraction lines 925–932); smoothness is
+  drawn in the proof of Corollary 3.2, not in Proposition 3.1. The note needs the relative
+  statement over `Z\times\mathbf A^{1}` and needs `k\ge1` both for that proposition and for the
+  rank `s(k-1)`, and `k` is otherwise undeclared in this paragraph. The extension is routine —
+  the same Kleiman-criterion argument contracts class-`k[L]` curves in any projective bundle
+  over a quasi-projective base — but as printed it is cited as the published statement.
+
+### B3. The abstract is now the only place whose "stated without a `\nu` restriction" list omits Theorem 9.9
+
+- **File:** `discrepancy_one_flips.tex`, lines 44–45
+- **Current text:**
+  ```
+  inequality.  Their Theorem~1.2 is printed only for \(r-s>1\), while their
+  Theorems~1.4 and~9.14 and their Corollary~1.5 are stated in a range that
+  ```
+- **Proposed replacement:**
+  ```
+  inequality.  Their Theorem~1.2 is printed only for \(r-s>1\), while their
+  Theorems~1.4, 9.9 and~9.14 and their Corollary~1.5 are stated in a range that
+  ```
+- **Reason:** `sections/01-introduction.tex` line 33 and line 72, the abstract's own closing
+  list at line 74, `cor:repaired` and `thm:assembled` now all name Theorems 1.2, 1.4, 9.9 and
+  9.14 and Corollary 1.5; this one list still omits 9.9. Upstream Theorem 9.9 (extraction line
+  3977) carries no inequality in its statement, so it belongs in the list.
+
+### B4. Cannot verify that "Theorem 2" and "On Serre duality" carry over to the Annals version the bibliography cites
+
+- **File:** `discrepancy_one_flips.tex`, bibliography entry `CoatesGivental` (currently
+  "Ann. of Math. (2) 165 (2007), 15--53")
+- **Current text:**
+  ```
+  \emph{Quantum Riemann--Roch, Lefschetz and Serre},
+  Ann. of Math. (2) 165 (2007), 15--53.
+  ```
+- **Proposed replacement:**
+  ```
+  \emph{Quantum Riemann--Roch, Lefschetz and Serre},
+  Ann. of Math. (2) 165 (2007), 15--53; arXiv:math/0110142.
+  ```
+  together with extending the convention paragraph at `sections/01-introduction.tex` lines
+  177–180 to pin the version of `\cite{CoatesGivental}` in the same way it pins `\cite{SS}`.
+- **Reason:** Say plainly: I checked "Theorem 2" and the unnumbered discussion headed "On
+  Serre duality" only against `arXiv:math/0110142v2 [math.AG] 19 Oct 2001`, which is the only
+  copy available locally. In that version the numbering is Theorem 1, Theorem 2,
+  Corollaries 1–5, with "On Serre duality" as an unnumbered heading in the concluding
+  discussion. I have no local copy of the 2007 Annals version and cannot tell whether it keeps
+  that numbering or that heading. Since the whole of `lem:cone`'s twist step now rests on those
+  two pointers, the version must be pinned or the pointers re-verified against the published
+  paper. This is the one item in this pass I could not resolve.
+
+## MATH-SAFE
+
+### B5. Sentence does not parse
+
+- **File:** `sections/03-normalization.tex`, lines 163–165
+- **Current text:**
+  ```
+    \(J\)-function has a Serre-dual partner obtained by replacing \(e,E\) with
+    \(e^{-1},E^{\vee}\); both are the discussion ``On Serre duality'' of
+    \cite{CoatesGivental}.
+  ```
+- **Proposed replacement:**
+  ```
+    \(J\)-function has a Serre-dual partner obtained by replacing the Euler
+    class of \(E\) with the inverse equivariant Euler class of \(E^{\vee}\);
+    that partner is stated in the discussion ``On Serre duality'' of
+    \cite{CoatesGivental}.
+  ```
+- **Reason:** "both are the discussion" has no reading — the antecedent of "both" is missing
+  and a modification cannot *be* a discussion. The replacement also removes the bare `e`
+  (see B7).
+
+### B6. Product index `k` collides with the extremal degree `k` earlier in the same proof
+
+- **File:** `sections/03-normalization.tex`, lines 170–173
+- **Current text:**
+  ```
+    \(\prod_{k=-d+1}^{0}\bigl(-\lambda-(H-\sigma_{j})+kz\bigr)\), which is
+    empty for \(d=0\).  In positive degree the concave local theory admits the
+    non-equivariant specialization, and letting \(\lambda\to0\) and writing
+    \(m=-k\) turns this into
+  ```
+- **Proposed replacement:**
+  ```
+    \(\prod_{l=-d+1}^{0}\bigl(-\lambda-(H-\sigma_{j})+lz\bigr)\), which is
+    empty for \(d=0\).  In positive degree the concave local theory admits the
+    non-equivariant specialization, and letting \(\lambda\to0\) and writing
+    \(m=-l\) turns this into
+  ```
+- **Reason:** `k` is the extremal curve degree twenty lines earlier in the same proof ("of class
+  `k[L]` with `k\ge1`", and `k_i` for component degrees, lines 149–154), and is the
+  semiorthogonal index in Section 4. `l` is free.
+
+### B7. `E` collides with the exceptional divisor, and `e` with the exponential
+
+- **File:** `sections/03-normalization.tex`, line 159 (and the four later uses of `E` in the
+  same proof, at lines 163, 164 and 168)
+- **Current text (line 159):**
+  ```
+    \(E:=(V'(-1))^{\vee}=\pi^{*}(V')^{\vee}\otimes\mathcal O_{\PP(V)}(1)\) is
+  ```
+- **Proposed replacement:**
+  ```
+    \(W:=(V'(-1))^{\vee}=\pi^{*}(V')^{\vee}\otimes\mathcal O_{\PP(V)}(1)\) is
+  ```
+  with `E` replaced by `W` at lines 163, 164 and 168 as well.
+- **Reason:** `E` already denotes the exceptional divisor `E\cong\PP(V)\times_{Z}\PP(V')` of the
+  common blow-up in `sections/01-introduction.tex` lines 14 and 19, where it also appears in
+  `\tau^{*}K_{X}-\tau'^{*}K_{X'}=(r-s)E`. `W` is unused anywhere in the note. The bare `e` for
+  the Euler class in the same sentence collides with the exponential used throughout
+  (`e^{t/z}`, `e^{\bar{\mathbf t}/z}`, `e^{-\pi\sqrt{-1}(2m+s)}`), so that `e^{-1}` reads as a
+  reciprocal exponential; B5's replacement removes it.
+
+### B8. `\lambda` used undefined, and it collides with the eigenvalues `\lambda_{k}(q)`
+
+- **File:** `sections/03-normalization.tex`, lines 160–161
+- **Current text:**
+  ```
+    convex there.  Twisting by the inverse equivariant Euler class of a concave
+    bundle gives the Gromov--Witten theory of its total space, and the
+  ```
+- **Proposed replacement:**
+  ```
+    convex there.  Twisting by the inverse Euler class equivariant for the
+    fibrewise \(\C^{\times}\)-action, whose parameter we write \(\lambda\),
+    gives the Gromov--Witten theory of the total space of a concave bundle, and the
+  ```
+- **Reason:** `\lambda` first appears unannounced at line 170 and is then sent to `0` at line
+  172; it is the equivariant parameter of the scaling action, and the note never says so. It
+  also collides with `\lambda_{0}(q)` and `\lambda_{k}(q)`, the extremal eigenvalues, used in
+  `thm:normalization`, `cor:presentation` and `rem:blowup`. The subscript and the argument `q`
+  keep the two apart on the page, but the bare symbol should be introduced.
+
+### B9. Universal curve and universal map are not introduced
+
+- **File:** `sections/03-normalization.tex`, line 224
+- **Current text:**
+  ```
+    \(R^{1}\pi_{\mathcal C*}f^{*}V'(-1)\) a relative locally free obstruction
+  ```
+- **Proposed replacement:**
+  ```
+    \(R^{1}\pi_{\mathcal C*}f^{*}V'(-1)\), for \(\pi_{\mathcal C}\) and \(f\)
+    the universal curve and universal map, a relative locally free obstruction
+  ```
+- **Reason:** `\mathcal C` appears only here, and `f` was used at line 149 for a stable map to
+  `\PP(V)`, a different object. Upstream introduces the universal map explicitly in the proof
+  of Corollary 3.2 (extraction lines 940–951); the note should do the same at the point of use.
+
+### B10. "Deformation invariance" is the one step in the proof invoked without support
+
+- **File:** `sections/03-normalization.tex`, line 227
+- **Current text:**
+  ```
+    are the extremal virtual classes of \cite[Corollary~3.2]{SS}.  Deformation invariance therefore identifies all
+  ```
+- **Proposed replacement:**
+  ```
+    are the extremal virtual classes of \cite[Corollary~3.2]{SS}.  Since \(\mathbf A^{1}\) is
+    connected and the class is defined relatively, the descendant integrals against it do not
+    depend on the fibre, and this identifies all
+  ```
+- **Reason:** Every other step in this proof carries a citation; "deformation invariance" is
+  named as a principle without one. The mechanism the note has just built — a locally free
+  relative obstruction bundle on a smooth proper family over a connected base — gives the
+  conclusion directly, so stating it costs nothing and removes an unsupported appeal.
+
+### B11. "Not by the twist" overstates the separation
+
+- **File:** `sections/03-normalization.tex`, lines 179–180
+- **Current text:**
+  ```
+    \(q^{c_{1}(T)/z}\), gives \eqref{eq:ss35}.  The Novikov exponent is fixed by
+    that reparametrization, not by the twist.
+  ```
+- **Proposed replacement:**
+  ```
+    \(q^{c_{1}(T)/z}\), gives \eqref{eq:ss35}.  The modification factor carries no
+    \(q\); the exponent changes only because the reparametrization is by
+    \(c_{1}(T)=c_{1}(\PP(V))+c_{1}(V'(-1))\).
+  ```
+- **Reason:** The intended point — that the modification factor contributes no power of `q` —
+  is right, but "not by the twist" is not: `\langle c_{1}(T),d[L]\rangle=(r-s)d` differs from
+  `\langle c_{1}(\PP(V)),d[L]\rangle=rd` by exactly `\langle c_{1}(V'(-1)),d[L]\rangle=-sd`,
+  i.e. the drop from `r` to `r-s` is caused by the twisting bundle, reaching the exponent
+  through `c_{1}(T)`.
+
+### B12. `A`, `Q` and `t` each carry a second meaning in the deformation paragraph
+
+- **File:** `sections/03-normalization.tex`, lines 216–217
+- **Current text:**
+  ```
+    It remains to replace a filtered bundle by its associated graded.  Take one
+    step \(0\to A\to V\to Q\to0\) of the filtration.
+  ```
+- **Proposed replacement:**
+  ```
+    It remains to replace a filtered bundle by its associated graded.  Take one
+    step \(0\to A\to V\to Q\to0\) of the filtration; in this paragraph \(A\),
+    \(Q\) and \(t\) are the sub- and quotient bundles and the coordinate on
+    \(\mathbf A^{1}\), not the coefficient ring above, the Novikov variable of
+    \eqref{eq:jnorm} or the parameter of \eqref{eq:barparam}.
+  ```
+- **Reason:** In this one paragraph `A` is a subbundle while `A` is the coefficient ring
+  `H^{*}(\PP_{Y}(V))` at lines 12–49 of the same section; `Q` is a quotient bundle while `Q` is
+  the Novikov variable in `eq:jnorm` and in `sections/02-hypotheses.tex` line 18; and `t` is the
+  coordinate on `\mathbf A^{1}` in `\PP(\ker g)_{t}` while `t` is the parameter pulled back from
+  `H^{*}(Z)` everywhere else. All three collisions are inherited from Shen–Shoemaker's own
+  notation, so renaming would cost the reader more than it saves; one disambiguating clause is
+  the minimal fix.
+
+---
+
+## Second-pass CHECKED AND CORRECT
+
+### The Coates–Givental chain, link by link
+
+Every link the coordinator named was checked against the extraction and holds.
+
+- **Formula (12) and its Serre-dual form.** Coates–Givental's modification is
+  `I_E(t,z) = Σ_d J_d(t,z) Q^d ∏_i [∏_{k=-∞}^{ρ_i(d)}(λ+ρ_i+kz) / ∏_{k=-∞}^{0}(λ+ρ_i+kz)]`
+  with `ρ_i(d)=∫_d ρ_i` (extraction lines 714–730). The "On Serre duality" passage replaces
+  `e,E` by `e^{-1},E^*` and `I_E` by
+  `I_{E*} = Σ_d Q^d J_d ∏_i [∏_{k=-∞}^{0}(-λ-ρ_i+kz) / ∏_{k=-∞}^{-ρ_i(d)}(-λ-ρ_i+kz)]`
+  (extraction lines 1283–1337).
+- **Is the dual modification termwise in the form used?** Yes. Both `I_E` and `I_{E*}` are
+  written as a sum over Novikov degree `d` of `J_d` times a factor depending only on `d`, so
+  the degree-`d` factor is exactly what the note reads off.
+- **Is the pairing of `H-\sigma_j` with `d[L]` really `d`?** Yes. `[L]` is a line in a fibre of
+  `\PP(V)`, so `H\cdot[L]=1`, and `\sigma_j` is pulled back from `Z` and pairs to `0`.
+- **Are the index limits right?** Yes. With `ρ_i(d)=d`, the Serre-dual factor collapses to
+  `∏_{k=-d+1}^{0}(-λ-ρ_i+kz)`, which is exactly what the note displays with `ρ_i = H-σ_j`. It
+  is an empty product at `d=0`, as the note says.
+- **Does `λ→0` give the numerator of (35)?** Yes. At `λ=0` the factor is
+  `∏_{k=-d+1}^{0}(σ_j-H+kz)`, and `m=-k` runs over `0,…,d-1`, giving
+  `∏_{m=0}^{d-1}(σ_j-H-mz)` — the numerator of (35) exactly, with no residual sign. This also
+  confirms the note took the first (unsigned `Q^d`) of Coates–Givental's two displayed forms;
+  the second carries `(±Q)^d` and would have introduced a sign.
+- **Is the `λ→0` specialization legitimate as invoked?** Yes, and the note restricts it
+  correctly. Coates–Givental state "The GW-invariants twisted by `(e^{-1},E*)` admit the
+  non-equivariant specialization `λ = 0` (in moduli spaces `X_{g,m,d}` of positive degrees
+  `d ≠ 0`)" under the hypothesis that the classes `ρ_i` are positive (extraction lines
+  1339–1342). Here `ρ_i = H-σ_j` pairs to `d>0` on `d[L]`, and the note takes the limit only
+  "in positive degree", having disposed of `d=0` by emptiness of the product.
+- **Convexity/concavity roles.** The note's `E:=(V'(-1))^{\vee}` matches Coates–Givental's
+  convex `E`, and `V'(-1)` matches their concave `E^*`; the modification is written in the
+  Chern roots of the convex bundle, as theirs is. The claim that the inverse-equivariant-Euler
+  twist of a concave bundle is the Gromov–Witten theory of its total space is upstream verbatim
+  ("Using the Euler class of `E*_{g,n,d}` one obtains Gromov–Witten invariants of the
+  non-compact total space `E*X`", extraction lines 1266–1269) — a strict improvement on the
+  Corollary 2 pointer flagged in the first pass, which was wrong.
+- **Splitting hypothesis.** Coates–Givental's Theorem 2 assumes `E` is a direct sum of line
+  bundles with integral Chern roots (extraction lines 714–717); `lem:cone` assumes `V'` splits,
+  so `V'(-1)` and its dual split, and `H-\sigma_j` are first Chern classes of line bundles.
+- **`\langle c_{1}(T),d[L]\rangle=(r-s)d`.** Correct: `c_1(T)=(r-s)H+c_1(Z)+c_1(V)+c_1(V')` by
+  upstream (32), and only the `H` term pairs nontrivially with `[L]`.
+- **Line 182, "the Chern roots of `V'(-1)` and nothing else".** Correct in substance — the roots
+  used, `H-\sigma_j`, are the negatives of the roots `\sigma_j-H` of `V'(-1)`.
+- One honest caveat, already conveyed by the note's own wording: in Coates–Givental the
+  Serre-dual partner of Theorem 2 is asserted in an unnumbered discussion ("Theorem 2,
+  Corollary 5 and the mirror formulas of Section 9 have Serre-dual partners") rather than
+  proved as a separate numbered statement. The note says "that partner is … the discussion
+  ``On Serre duality''", which is the right level of claim.
+
+### The rewritten deformation argument
+
+- **Rank `s(k-1)`.** Correct for `k\ge1`. On a genus-zero stable map of degree `k` into a
+  fibre, `f^*V'(-1)` is a sum of `s` line bundles of total degree `-sk`, so
+  `\chi = -sk + s = -s(k-1)`; `H^0=0` by the concavity established earlier in `lem:cone`, so
+  `R^1` has rank `s(k-1)`. It vanishes at `k=1`, as it should.
+- **Fibrewise identification with Corollary 3.2.** Correct. Upstream Corollary 3.2 states
+  `[M_{0,n}(X,d)]^{vir} = e(R^1π_{C*}f^*N_{F|X}) = e(R^1π_{C*}f^*V'(-1))` (extraction lines
+  934–936), which is exactly what the note's relative class restricts to. The revised phrasing
+  ("Its Euler class, capped with the relative fundamental class, defines a relative class whose
+  fibrewise restrictions are the extremal virtual classes") is accurate.
+- **`\ker(g)_{1}=V`, `\ker(g)_{0}=A\oplus Q`.** Correct: upstream defines `g: A⊕Q→Q`,
+  `(a,q) ↦ d(a) − t·q` over `Z×A^1`, with `ker(g)_1 = V` and `ker(g)_0 = A⊕Q` (extraction lines
+  3737–3747).
+- **Only the non-circular half of Lemma 9.4 is used.** The note draws the cohomology-ring
+  isomorphism from `\cite[Lemma~9.4]{SS}`, whose proof says that part "is immediate from the
+  S-equivariant generalization of (31)"; the circular part is the subsequent
+  `\Phi^T_S = \Phi^{T_{sp}}_S` deduced "By (35)". `rem:circularity` describes this correctly and
+  the proof stays on the right side of it.
+- **"Repeating the construction for the filtration of `V'`".** Matches upstream, which says "By
+  applying Lemma 9.4 and its analogue for `V'` repeatedly" (extraction line 3918).
+- Beyond what Proposition 3.1 and Corollary 3.2 give: the relative form over `\mathbf A^{1}`
+  and the `k>0` hypothesis (issue B2), and the unattributed deformation-invariance step
+  (issue B10). Nothing else in the chain is asserted beyond the cited results.
+
+### Whole-note consistency after the edits
+
+- All `\ref`/`\eqref` still resolve; no dangling references, and no reference now points at a
+  renumbered statement. `lem:order` and `lem:jslice` both still precede `lem:cone`, so the B1
+  fix introduces no forward reference.
+- The abstract's new closing sentence ("Once these repaired inputs are supplied, their
+  Sections~9.1--9.4 impose no further restriction on the discrepancy") now matches
+  `sections/05-scope.tex` lines 23–25 and `sections/02-hypotheses.tex` lines 91–93. The
+  first-pass mismatch on this point is fully resolved at all three sites.
+- The abstract's new clause "whose printed attribution passes through a lemma of their
+  Section~9 that presupposes Theorem~4.4" agrees with `rem:circularity` and with
+  `sections/02-hypotheses.tex` lines 78–81.
+- "None of these inputs restricts `r-s`" (abstract line 63) remains accurate, including under
+  the B1 fix, since `r\ge2` is a condition on `r`, not on `r-s`.
+- Citation lists: `sections/01-introduction.tex` lines 33 and 72, the abstract's closing list,
+  `cor:repaired` and `thm:assembled` all now name the same five upstream results. The abstract
+  at lines 44–45 is the only remaining omission (issue B3).
+- Symbols used before definition, after the rewrite: `\lambda` (B8), `\mathcal C` and the
+  universal `f` (B9), and the Euler class `e` (B7/B5). No others. `\mathcal L_{\PP(V)}` is
+  introduced inline where first used, which is adequate.
+- Symbols now carrying two meanings: `E` (B7), and `A`, `Q`, `t` (B12). The `k`/`m` pair is a
+  third case, confined to one proof (B6).
+- Everything verified in the first pass that these edits did not touch — the `z`-order counts,
+  the sector endpoints and half-widths, the eigenvalue formulas, the `(r,s)=(2,1)` numbers, and
+  all Shen–Shoemaker item labels — was re-checked for drift and is unchanged and still correct.
