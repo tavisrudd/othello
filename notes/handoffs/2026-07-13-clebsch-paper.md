@@ -783,8 +783,10 @@ six-axis theorems as the two halves one fourfold requires.  The warning-free
 `b10f0a1d351ea292bd5d17382e40a19cd6701b2b9ac28b828f55c96c22c392da`; the
 standalone forward commit is `b0b3861` and the summary mirror is `11b6e63`.
 Nothing was pushed.  The next step is the frame-transport lemma owed to
-referee A, which is blocked on an architecture decision and awaiting a second
-opinion: `../2026-08-15-c912-frame-transport-receiver-obstruction.md`.  Current
+referee A.  Its reviewer-facing memo and the red team that corrected it are
+`../2026-08-15-c912-frame-transport-memo.tex` and
+`../2026-08-15-c912-frame-transport-memo-red-team.md`; the first repair to try
+is normalizing the separating weight minimally rather than large.  Current
 card: `../clebsch-tasks/c912-cubic-stabilization-referee-foundations.md`.
 
 C914 places the `A_5`-pencil against the known universally `CH_0`-trivial

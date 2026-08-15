@@ -596,8 +596,23 @@ verdict text lives only in `claim-proof-novelty-ledger.md`.
   `z`-power — so a common order exists exactly when
   `w(Delta lambda)` is below the minimal generator weight.  That holds at the
   cubic endpoint and is not supplied for arbitrary weak-factorization centers.
-  A second opinion on the architecture is the next step; `prop:framed-operations`
-  stays unproved as written until it lands.  The reviewer-facing memo carrying
+  A red team of the memo (`../2026-08-15-c912-frame-transport-memo-red-team.md`)
+  changed this picture and the memo was rebuilt on it.  Three corrections
+  matter.  The constants computation is false unless the exponential factors
+  carry constant coefficients, because in the draft's coefficient-dominant order
+  `exp(-lambda/z)` is already a unit of the coefficient field; the transport
+  theorem's two hypotheses have no common instance over the present receiver,
+  since a trivial value group loses the gauge and a nontrivial one loses
+  Levelt--Turrittin; and the criterion is **not** scale-invariant.  The draft
+  pins `w(u)=w(s)=1` regardless of `L`, so the minimal generator weight is
+  always one while Novikov generator weights grow linearly in `L`.  Choosing `L`
+  minimally rather than large is therefore the cheapest repair, and it is now
+  route 1.  Index one still fails under any admissible weight.  Independently,
+  the obstruction is order-free: for the critical ratio the loop coefficient of
+  the gauge product is an infinite sum of bounded weight, hence undefined in any
+  completion.  `lem:divisor-tagging` carries the same obstruction and needs the
+  same repair.  `prop:framed-operations` stays unproved as written until this
+  lands.  The reviewer-facing memo carrying
   the lemma, its proofs, the obstruction, the criterion, the three candidate
   routes, and the exact manuscript placement is
   `../2026-08-15-c912-frame-transport-memo.tex`, built to
