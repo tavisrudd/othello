@@ -4,8 +4,9 @@
 
 **Status:** active; author-close only
 
-**Current release gate:** GO for the repaired WP1--WP3 foundation tranche;
-full-paper copy, detritus, visual, commit, and export gates remain open.  The
+**Current release gate:** GO for the repaired WP1--WP3 foundation tranche at
+authority commit `9ee4987c7`; full-paper copy, detritus, visual, build, and
+commit gates are green, while standalone export remains open.  The
 universal framed operator, normalized gauges, and Iritani comparison maps now
 meet only in a faithful graded Hahn receiver after the positive completion,
 with the coefficient field algebraically closed before the independent
@@ -80,8 +81,8 @@ exact bridge is formalized.
   numerical Novikov roots inside the fixed algebraic closure.
 - [x] State separately how ramified `z`-extensions contribute deck factors.
 - [x] Rewrite `nu_6` using the repaired definition.
-- [ ] Audit every theorem and proof using `nu_6` for unchanged meaning.
-- [ ] Ask a differential-equations referee to cold-check the construction,
+- [x] Audit every theorem and proof using `nu_6` for unchanged meaning.
+- [x] Ask a differential-equations referee to cold-check the construction,
   choice independence, ramification convention, and primitive-root count.
 
 ### Major comment 2 — comparison theorems and source interfaces
@@ -229,7 +230,7 @@ exact bridge is formalized.
 - [x] Record exact source versions, theorem/remark names, and equation locators
   for the repaired completion bridge.
 - [x] Quote only the minimum source statements consumed by that bridge.
-- [ ] Audit parity preservation and even-connection restriction.
+- [x] Audit parity preservation and even-connection restriction.
 - [ ] Re-run the literature evidence log and store immutable source identities.
 
 ### WP4 — internal cubic endpoint
@@ -280,45 +281,46 @@ exact bridge is formalized.
   frozen versions of every cited preprint.
 - [ ] Quantum referee C: recompute the cubic block and divisor-tagging endpoint
   without using the manuscript's intermediate assertions.
-- [ ] Geometry referee: recheck the complete cycle spine and every new
+- [x] Geometry referee: recheck the complete cycle spine and every new
   Roulleau/Hartlieb/polarization clarification for regressions.
-- [ ] General referee: cold-read the entire paper at the stated landmark-result
+- [x] General referee: cold-read the entire paper at the stated landmark-result
   standard and issue stable finding IDs with exact severity.
-- [ ] Every NO-GO finding receives an exact repair and a fresh repeat review.
-- [ ] No self-review substitutes for the independent cold reads.
+- [x] Every NO-GO finding receives an exact repair and a fresh repeat review.
+- [x] No self-review substitutes for the independent cold reads.
 
 ### Copy edit and detritus reviews
 
-- [ ] Run a context-free copy edit for grammar, punctuation, displayed-math
+- [x] Run a context-free copy edit for grammar, punctuation, displayed-math
   introductions, antecedents, theorem-strength words, and sentence length.
-- [ ] Run a separate detritus audit for stale review prose, workflow language,
+- [x] Run a separate detritus audit for stale review prose, workflow language,
   mutable internal IDs, hard-coded internal reference numbers, duplicate
   caveats, dead TODOs, obsolete version claims, and old PDF filenames.
-- [ ] Check all cross-references, bibliography keys, URLs, arXiv versions, and
+- [x] Check all cross-references, bibliography keys, URLs, arXiv versions, and
   quoted equation locators.
-- [ ] Check theorem names, abstract, introduction, conclusion, summary README,
+- [x] Check theorem names, abstract, introduction, conclusion, summary README,
   verification README, C910 card, and standalone metadata for exact agreement.
-- [ ] Confirm no unrelated paper/table claims changed.
+- [x] Confirm no unrelated paper/table claims changed.
 
 ### Build, trust, and visual gates
 
-- [ ] Run the paper's supported `make check` gate.
+- [x] Run the paper's supported `make check` gate.
 - [ ] If Lean changes, run only the guarded Lean build and axiom-audit route.
-- [ ] Confirm the rejecting theorem inventory and coverage partition remain
+- [x] Confirm the rejecting theorem inventory and coverage partition remain
   exact; record and justify any intentional change.
-- [ ] Build the PDF through the supported deterministic route.
-- [ ] Inspect every page visually, including formulas, superscripts, tables,
+- [x] Build the PDF through the supported deterministic route.
+- [x] Inspect every page visually, including formulas, superscripts, tables,
   floats, references, and final-page balance.
-- [ ] Check logs for undefined references/citations and layout warnings.
-- [ ] Confirm deterministic rebuild and record page count and checksum.
-- [ ] Red-team the complete diff against the pre-C912 authority commit.
+- [x] Check logs for undefined references/citations and layout warnings.
+- [x] Confirm deterministic rebuild and record page count and checksum:
+  23 pages, SHA-256 `cd57a43e08019efd5f9ae7ff79ebb3ff09d71b34abd9eded62349937e8d708bb`.
+- [x] Red-team the complete diff against the pre-C912 authority commit.
 
 ### Commit and export gates
 
-- [ ] Commit each coherent repair tranche with exact-path staging.
-- [ ] Never mix foreign worktree changes into a C912 commit.
-- [ ] Finish every started edit; leave no dangling manuscript tranche.
-- [ ] Commit the final reviewed manuscript and generated PDF together where the
+- [x] Commit each coherent repair tranche with exact-path staging.
+- [x] Never mix foreign worktree changes into a C912 commit.
+- [x] Finish every started edit; leave no dangling manuscript tranche.
+- [x] Commit the final reviewed manuscript and generated PDF together where the
   repository convention requires it.
 - [ ] Run export plan/audit/sync from an immutable source commit.
 - [ ] Update all standalone links and metadata if filenames or commit targets
@@ -346,6 +348,14 @@ become manuscript edits.
 | C912-M09 | resolved | The source operator over `Omega_V` cannot be base-changed directly to `B/F^N`; ordering the finite gauges first does not by itself type the comparison. | Framed operators are now compared only after faithful graded embedding; `C912-GEN-001` / `C912-GEO-001` closed |
 | C912-M10 | resolved | No coefficient map from the universal LT constants field `Omega_V` to the nilpotent quotient rings `B/F^N` is supplied or generally available. | The repair uses no such map: it completes positive/scaled variables first and embeds gauges and comparison maps into a common Hahn receiver |
 | C912-M11 | resolved | Extending the positive ideal across Iritani's Laurent coordinate makes it the unit ideal, while ordinary localization misses series whose Laurent pole order grows with bulk degree. | Use the sources' homogeneous scaled variables and finite-below grading; pull through the full nonlinear coordinate isomorphism, embed in a coefficient Hahn field, construct `Omega_V`, then adjoin only integral powers of the independent loop coordinate |
+| C912-M12 | resolved | Presenting the elementary Hahn embedding as a standalone unlabelled result escaped the rejecting theorem inventory even though the proof used it twice. | Fold its full well-ordering, multiplication, injectivity, and localization argument into the mapped operation-formula proof; three cold rereads found no lost premise |
+| C912-M13 | resolved | The public literature ledger retained internal commit, cache, and task-routing residue, while the Lean claim caution described an obsolete inverse-limit architecture. | Rewrite the public ledger as a stable literature-scope note and name the manuscript-only Hahn/nonlinear-coordinate bridge explicitly in the formal claim boundary |
+
+The final `ej`+`tt` closeout found no unresolved mystery in the completed
+WP1--WP3 tranche.  Removing the freestanding Hahn paragraph both repaired the
+claim inventory and shortened the warning-free PDF from 24 to 23 pages without
+compressing a proof step.  WP4--WP6 are explicit planned work, not unexplained
+features of this tranche.
 
 ## Close condition
 
