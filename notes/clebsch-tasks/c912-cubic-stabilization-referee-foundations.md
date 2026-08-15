@@ -6,7 +6,7 @@
 
 **Current release gate:** GO for the repaired WP1--WP3 foundation tranche at
 authority commit `9ee4987c7`; full-paper copy, detritus, visual, build, and
-commit gates are green, while standalone export remains open.  The
+commit and standalone-export gates are green.  The
 universal framed operator, normalized gauges, and Iritani comparison maps now
 meet only in a faithful graded Hahn receiver after the positive completion,
 with the coefficient field algebraically closed before the independent
@@ -322,13 +322,15 @@ exact bridge is formalized.
 - [x] Finish every started edit; leave no dangling manuscript tranche.
 - [x] Commit the final reviewed manuscript and generated PDF together where the
   repository convention requires it.
-- [ ] Run export plan/audit/sync from an immutable source commit.
-- [ ] Update all standalone links and metadata if filenames or commit targets
+- [x] Run export plan/audit/sync from immutable source commit `2405ca85a`;
+  audit and post-sync verification both report zero findings.
+- [x] Update all standalone links and metadata if filenames or commit targets
   change.
-- [ ] Do not push unless the author separately requests it.
+- [x] Do not push unless the author separately requests it; standalone commit
+  `f336131` remains local and unpushed.
 - [ ] Report the final authority commits, page count, checksum, review verdicts,
   and any remaining explicit assumptions.
-- [ ] Leave C912 **open** after all green gates; await explicit author closure.
+- [x] Leave C912 **open** after all green gates; await explicit author closure.
 
 ## Mystery ledger
 
