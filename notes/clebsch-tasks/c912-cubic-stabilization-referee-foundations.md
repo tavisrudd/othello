@@ -600,19 +600,22 @@ verdict text lives only in `claim-proof-novelty-ledger.md`.
   framing-compatibility checks the memo proposed have been run against the
   pinned sources; verdicts, locators, and hashes are in
   `../2026-08-15-c912-framing-compatibility-checks.md`.  The memo is now at its
-  third version and carries those verdicts in its Section 6, its corrected
-  route list, and its corrections section: 15 pages, PDF SHA-256
-  `1e1a2393762ba9c2b64b29fc9e8164ee4dfe799a02e20bc4b71422e8442d7156`.  Either
-  document can be read first; the report is the shorter route in.
+  third version, carries those verdicts in its Section 6, and adds Section 7,
+  which attacks the residual gap through the flatness identities: 18 pages, PDF
+  SHA-256
+  `20b348901afba5fd8234fd46bceb4da62389a892a6c1bb8565866aee25dd18fa`.  Either
+  document can be read first; the report is the shorter route in, the memo's
+  Section 7 is where the mathematics now is.
 
   *State after the checks.*  Check 1 fails: Hinault--Yu--Zhang--Zhang's
   Theorem 4.34 governs F-bundles over the large-radius limit point `q=t=0`,
   where the K-operator is a nilpotent cup product, while `nu_6` is evaluated
-  where the eigenvalues separate; their blowup analogue Theorem 5.22 is stated
-  without proof and outside Theorem 4.34's equal-dimension hypothesis, since
-  the blowup summands `H^*(X)` and `H^*(Z)` differ in dimension; and the gauge
-  it would supply lands at the shifted base point that the pro-Laurent gauge
-  exists to undo.  Do not cite Theorem 5.22 for the blowup formula.  Check 2
+  where the eigenvalues separate; their blowup statement Theorem 5.22 is
+  asserted but not derived from Theorem 4.34, whose equal-dimension hypothesis
+  misses the unequal summands `H^*(X)` and `H^*(Z)`, with existence referred to
+  the earlier decomposition work; and the gauge it would supply lands at the
+  shifted base point that the pro-Laurent gauge exists to undo.  Theorem 5.22
+  therefore adds nothing to the blowup formula beyond Iritani.  Check 2
   passes: the base-map ambiguity of their Theorems 5.20/5.24 is a Novikov
   character, hence the divisor substitution (4.1), hence `nu_6`-invariant, and
   Iritani--Koto (5.11)--(5.12) and Iritani Section 5.8.1 pin it anyway; one
@@ -637,11 +640,25 @@ verdict text lives only in `claim-proof-novelty-ledger.md`.
   monodromy at that parameter has the same primitive-sixth multiplicity as at
   the origin.
 
-  *Next routes, in order.*  (i) Birkhoff: show the `id + O(z^-1)` factor of
-  `(Phi^0)^-1 M = M' Phi^-1` preserves the multiplicity.  (ii) Pointwise
-  residues instead of transport, using `[E*, phi_a*] = 0` and
-  `d_a(E*) = phi_a* + [phi_a*, mu]`, so that bulk displacement never mixes
-  exponential blocks.  (iii) Direct specialized vanishing for centers of
+  *Blockwise progress, memo Section 7.*  The flatness identities
+  `[E*, phi_a*] = 0` and `d_a(E*) = phi_a* + [phi_a*, mu]` are exact.  In the
+  Kato block frame the block data evolves by
+  `D_a U_i = C_{a,i} + [C_{a,i}, mu_i]` and `D_a mu_i = [C_{a,i}, S_i]` with
+  `S_i = sum_{j!=i} mu_{ij} mu_{ji}/(u_i - u_j)`.  Self-adjointness of `E*` and
+  anti-self-adjointness of `mu` for the Poincare pairing make every block
+  residue traceless with spectrum symmetric about zero, and force it to vanish
+  on every multiplicity-one block; so `nu_6` is carried entirely by coalesced
+  blocks, and the draft's cubic roots `1/6` and `5/6` are the forced `+/-1/6`.
+  Deformation by an infinitesimal gauge then reduces to one Sylvester condition
+  per coalesced block: a `beta` commuting with `U_i` with
+  `[beta, mu_i] = [C_{a,i}, S_i]`.  The live danger is block splitting, which
+  would drop `nu_6` by two; that is a coalescence question.
+
+  *Next routes, in order.*  (i) The Sylvester condition and the splitting
+  question above, with the isomonodromy-at-coalescence literature still to be
+  read.  (ii) Birkhoff: show the `id + O(z^-1)` factor of
+  `(Phi^0)^-1 M = M' Phi^-1` preserves the multiplicity; same question in other
+  coordinates, useful as a cross-check.  (iii) Direct specialized vanishing for centers of
   dimension at most two, using the classification already in the draft, which
   for nef canonical class gives an integral-loop gauge to a regular-singular
   connection.  Divisor tagging only if those fail; the mixed-receiver
@@ -744,7 +761,7 @@ become manuscript edits.
 | C912-M13 | resolved | The public literature ledger retained internal commit, cache, and task-routing residue, while the Lean claim caution described an obsolete inverse-limit architecture. | Rewrite the public ledger as a stable literature-scope note and name the manuscript-only Hahn/nonlinear-coordinate bridge explicitly in the formal claim boundary |
 | C912-M14 | resolved | The receiver problem was attributed to the comparison isomorphism; both `Psi` and `Phi` are `z`-polynomial module maps, so the transport lemma applies to them unconditionally. | `../2026-08-15-c912-framing-compatibility-checks.md`, check 1d; the gap is the residual bulk gauge alone |
 | C912-M15 | confirmed | The pro-Laurent bulk gauge is Iritani--Koto's own fundamental solution `M`; per bulk degree it is polynomial in `z^-1`, unbounded only in the limit. | Same report, Section 5; corrects the memo's Section 6 |
-| C912-M16 | confirmed | Hinault--Yu--Zhang--Zhang Theorem 5.22 (blowup) has no proof in the paper and falls outside Theorem 4.34's equal-dimension hypothesis. | Same report, finding 1b; do not cite for (4.3) |
+| C912-M16 | confirmed | Hinault--Yu--Zhang--Zhang Theorem 5.22 (blowup) is asserted, with uniqueness in Theorem 5.24, but is not derived from Theorem 4.34, whose hypotheses miss the unequal block sizes; existence is referred to the earlier decomposition work. | Same report, finding 1b; it adds nothing to (4.3) beyond Iritani |
 | C912-M17 | resolved | The base-map ambiguity of their Theorems 5.20/5.24 is a Novikov character, hence the divisor substitution (4.1), hence `nu_6`-invariant; the sources' initial conditions pin it anyway. | Same report, check 2; one manuscript sentence owed |
 | C912-M18 | confirmed | Their center F-bundle is itself built on a collapsed Novikov variable, so the framing theory cannot certify intrinsic center invariants; their Lemma 2.24 is nonetheless the divisor-tagging mechanism in print. | Same report, check 3; `lem:divisor-tagging` stays owner |
 

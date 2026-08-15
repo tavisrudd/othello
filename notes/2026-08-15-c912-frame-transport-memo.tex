@@ -57,12 +57,18 @@ version was wrong --- the pro-Laurent bulk gauge is not the draft's own choice
 but Iritani--Koto's own fundamental solution, which the sources meet and handle
 by Birkhoff factorization. What is left is a single statement about one bulk
 displacement, recorded in Section~\ref{sec:hyzz}.
+Section~\ref{sec:blockwise} then attacks that statement directly through the
+flatness identities, and gets far enough to prove that multiplicity-one blocks
+carry no framed monodromy, to write down how a block residue evolves under bulk
+motion, and to reduce what remains to one solvability condition on the coalesced
+blocks.
 Section~\ref{sec:corrections} lists what the earlier versions
 got wrong; readers of those versions should start there.
 \end{abstract}
 
 \section{The assertion at issue}
 
+\sloppypar
 References are to Section~4 of the draft, \emph{Framed formal monodromy}. I name
 statements by their semantic labels as well as by number, because the edits
 proposed in Section~\ref{sec:placement} renumber the section: Definition~4.1
@@ -681,12 +687,14 @@ $H^*(X)\oplus\bigoplus_{i=1}^{m-1}H^*(Z)[-2i]$, whose summands differ in
 dimension whenever $\dim H^*(Z)\ne\dim H^*(X)$; the authors write a general
 endomorphism there as a matrix with $\Phi_{1,1}\in\operatorname{End}(H^*(X))$
 and $\Phi_{i,i}\in\operatorname{End}(H^*(Z))$, so the mismatch is explicit in
-their own notation. Their blowup statement, Theorem~5.22, is accordingly called
-analogous and carries \emph{no proof}; its uniqueness clause is conditional on
-restricting the coefficients of $\Phi$ to a universal algebra, and for existence
-they refer to Iritani--Koto. So the blowup half of Proposition~4.7 --- equation
-(4.3), the half the headline theorem cannot do without --- has no proved
-statement of theirs behind it. The projective-bundle half is genuinely covered:
+their own notation. Their blowup statement, Theorem~5.22, does assert existence
+of the isomorphism, and Theorem~5.24 gives the corresponding uniqueness; the
+point is not that it is unproved but that it is not \emph{derived from}
+Theorem~4.34, whose hypotheses do not cover the unequal block sizes, and that
+its existence is referred to the earlier decomposition work. So Theorem~5.22
+supplies no leverage of its own on the blowup half of Proposition~4.7 ---
+equation (4.3), the half the headline theorem cannot do without --- beyond what
+Iritani's theorem already gives. The projective-bundle half is genuinely covered:
 there the eigenspaces are $m$ copies of $H^*(X)$ by their Lemma~5.8, matching
 Section~4.4, and Theorem~5.16 is proved.
 
@@ -809,37 +817,220 @@ comparison. It is one statement:
 Everything else in Proposition~4.7 is proved or reduced to a regular gauge, and
 \texttt{lem:divisor-tagging} inherits this gap and nothing else.
 
+\section{The blockwise route, and what the flatness identities already give}
+\label{sec:blockwise}
+
+This section carries out the second route far enough to see what it costs. It
+produces three things: an exact evolution equation for the block residue under
+bulk motion, a proof that multiplicity-one blocks carry no framed monodromy at
+all, and a reduction of the residual statement to one Sylvester solvability
+condition per coalesced block. Conventions are Iritani--Koto's, from their
+Theorem~5.1: write $U=E\star_\tau$, $C_a=\phi_a\star_\tau$, and
+\[
+  \nabla_a=\partial_a+z^{-1}C_a,\qquad
+  \nabla_{z\partial_z}=z\partial_z-z^{-1}U+\mu ,
+\]
+with $\mu$ the constant grading operator. Horizontal sections satisfy
+$z^2\partial_zY=(U-z\mu)Y$.
+
+\subsection*{The two identities}
+
+\begin{lemma}[Flatness]
+\label{lem:flatness-ids}
+$[U,C_a]=0$ and $\partial_aU=C_a+[C_a,\mu]$.
+\end{lemma}
+
+\begin{proof}
+The first is commutativity and associativity of the quantum product. For the
+second, expand $[\nabla_a,\nabla_{z\partial_z}]=0$. The $z^{-2}$ term is
+$z^{-2}[U,C_a]$ and vanishes by the first identity; the $z^{-1}$ term is
+$z^{-1}\bigl(-\partial_aU+C_a+[C_a,\mu]\bigr)$, using
+$z\partial_z(z^{-1}C_as)=-z^{-1}C_as+z^{-1}C_az\partial_zs$ and
+$\partial_a\mu=0$. There is no $z^0$ term.
+\end{proof}
+
+So bulk motion is not an arbitrary negative-loop gauge. The first identity says
+$C_a$ commutes with every spectral projector $P_i$ of $U$, hence preserves each
+generalized eigenspace $H_i$ with $U|_{H_i}=u_i+N_i$; the second says the motion
+of $U$ itself is expressed through $C_a$ and $\mu$ alone.
+
+\subsection*{The block frame}
+
+Let $T_a=\sum_j(\partial_aP_j)P_j$ be Kato's transport operator, so that
+$\partial_aP_i=[T_a,P_i]$ and $P_iT_aP_i=0$. It is independent of $z$ and has no
+pole, so it moves the blocks without touching the loop coordinate. For an
+operator $A$ write $A_i=P_iAP_i$ and $A_{ij}=P_iAP_j$, and let
+$D_aA_i=\partial_aA_i-[T_a,A_i]$ be the covariant derivative in this frame. A
+short computation using $\partial_aP_i=[T_a,P_i]$ gives the general rule
+\[
+  D_aA_i=P_i(\partial_aA)P_i+P_i[A,T_a]P_i .
+  \tag{6.1}
+  \label{eq:block-covariant-rule}
+\]
+
+\begin{theorem}[Block evolution]
+\label{thm:block-evolution}
+Assume the eigenvalues $u_j$ of $U$ are pairwise distinct as scalars, so that
+each difference $u_i-u_j$ is invertible, and assume for the residue formula that
+the neighbouring blocks are semisimple, $N_j=0$ for $j\ne i$. Then
+\[
+  D_aU_i=C_{a,i}+[C_{a,i},\mu_i],
+  \qquad
+  D_a\mu_i=[\,C_{a,i},S_i\,],
+  \qquad
+  S_i:=\sum_{j\ne i}\frac{\mu_{ij}\mu_{ji}}{u_i-u_j} .
+\]
+\end{theorem}
+
+\begin{proof}
+For $U$: by \eqref{eq:block-covariant-rule} and
+Lemma~\ref{lem:flatness-ids}, $D_aU_i=P_i(C_a+[C_a,\mu])P_i+P_i[U,T_a]P_i$. Since
+$C_a$ commutes with $P_i$, the first term is $C_{a,i}+[C_{a,i},\mu_i]$; since $U$
+commutes with $P_i$, the second is $[U_i,P_iT_aP_i]=0$.
+
+For $\mu$: $\partial_a\mu=0$, so \eqref{eq:block-covariant-rule} gives
+$D_a\mu_i=P_i[\mu,T_a]P_i=\sum_{j\ne i}\bigl(\mu_{ij}X_{ji}-Y_{ij}\mu_{ji}\bigr)$
+with $X_{ji}=P_j(\partial_aP_i)P_i$ and $Y_{ij}=P_i(\partial_aP_j)P_j$.
+Differentiating $UP_i=(u_i+N_i)P_i$ and compressing by $P_j(\cdot)P_i$ gives
+$(\partial_aU)_{ji}+(u_j-u_i+N_j)X_{ji}=0$, so under the semisimplicity
+assumption $X_{ji}=(\partial_aU)_{ji}/(u_i-u_j)$ and likewise
+$Y_{ij}=-(\partial_aU)_{ij}/(u_i-u_j)$. Substituting
+$(\partial_aU)_{ji}=C_{a,j}\mu_{ji}-\mu_{ji}C_{a,i}$ and
+$(\partial_aU)_{ij}=C_{a,i}\mu_{ij}-\mu_{ij}C_{a,j}$, the two terms containing
+$C_{a,j}$ cancel and what remains is
+$\sum_{j\ne i}[C_{a,i},\mu_{ij}\mu_{ji}]/(u_i-u_j)$.
+\end{proof}
+
+The cancellation is the point. The neighbouring blocks enter $D_a\mu_i$ only
+through the symmetric combination $S_i$, and the motion of the block residue is
+a commutator with the block's own quantum multiplication operator. Without the
+semisimplicity of the neighbours the same computation leaves the residual term
+$-\mu_{ij}(\Delta_{ji}+\Delta_{ij})C_{a,j}\mu_{ji}$ with
+$\Delta_{ji}=(u_j-u_i+N_j)^{-1}$, which vanishes exactly when the nilpotent parts
+do; that correction is where a general statement would have to work harder.
+
+\subsection*{Multiplicity-one blocks carry nothing}
+
+This is independent of the deformation and settles, in this normalization, the
+observation the earlier version of this memo only flagged.
+
+\begin{theorem}[Simple blocks are invisible]
+\label{thm:simple-blocks}
+Let $(\cdot,\cdot)$ be the Poincar\'e pairing. Then each $\mu_i$ is
+anti-self-adjoint for the restriction of the pairing to $H_i$, which is
+nondegenerate; consequently $\operatorname{tr}\mu_i=0$ and the spectrum of
+$\mu_i$ is symmetric about $0$. If $u_i$ has multiplicity one, then $\mu_i=0$,
+the block's formal solution is $e^{-u_i/z}$ times a constant, its framed
+monodromy is the identity, and it contributes no root of unity to $\nu_6$.
+\end{theorem}
+
+\begin{proof}
+Quantum multiplication is Frobenius, $(a\star b,c)=(a,b\star c)$, so $U$ is
+self-adjoint; distinct generalized eigenspaces of a self-adjoint operator are
+orthogonal, so each $P_i$ is self-adjoint and the pairing restricts
+nondegenerately to $H_i$. The pairing vanishes unless the degrees are
+complementary, so $\mu$ is anti-self-adjoint; hence so is
+$\mu_i=P_i\mu P_i$ on $H_i$. An anti-self-adjoint operator has
+$\operatorname{tr}\mu_i=\operatorname{tr}\mu_i^{\dagger}=-\operatorname{tr}\mu_i$
+and characteristic polynomial even up to sign, giving the trace and symmetry
+statements. On a one-dimensional space anti-self-adjointness forces $\mu_i=0$,
+and then $z^2\partial_zY=u_iY$ integrates to $e^{-u_i/z}$, single-valued under
+the turn.
+\end{proof}
+
+\begin{corollary}
+\label{cor:coalesced-only}
+$\nu_6$ is carried entirely by the blocks of $E\star$ whose eigenvalue has
+multiplicity greater than one.
+\end{corollary}
+
+This matches the draft's own cubic computation, where $K_0$ has eigenvalues
+$\pm6r,0,0$ and the primitive-sixth exponents come from the repeated $0$: the
+$\pm6r$ blocks are simple, so by Theorem~\ref{thm:simple-blocks} they contribute
+the identity, and the draft's indicial roots $1/6$ and $5/6$ are $\pm1/6$ modulo
+$\Z$, exactly the symmetry about $0$ that the theorem forces on a block residue.
+
+\subsection*{What is left, exactly}
+
+\begin{proposition}[Isomonodromy criterion for a block]
+\label{prop:block-isomonodromy}
+Write the block connection as
+$\nabla_i=z\partial_z+A_i(z)$ with $A_i(z)=-z^{-1}U_i+\mu_i$. Under the
+hypotheses of Theorem~\ref{thm:block-evolution}, the deformation $D_a\nabla_i$ is
+an infinitesimal gauge transformation by
+$\Theta_a(z)=-z^{-1}C_{a,i}+\beta$ if and only if
+\[
+  [\beta,U_i]=0
+  \qquad\text{and}\qquad
+  [\beta,\mu_i]=[\,C_{a,i},S_i\,].
+\]
+The $z^{-2}$ and $z^{-1}$ obstructions vanish identically for that choice of
+leading term; only the $z^0$ equation remains.
+\end{proposition}
+
+\begin{proof}
+Infinitesimally, $\delta A_i=[\Theta_a,A_i]-z\partial_z\Theta_a$. With
+$\Theta_a=z^{-1}\alpha+\beta$ this is
+$-z^{-2}[\alpha,U_i]+z^{-1}\bigl([\alpha,\mu_i]-[\beta,U_i]+\alpha\bigr)+[\beta,\mu_i]$.
+Theorem~\ref{thm:block-evolution} gives
+$D_a\nabla_i=-z^{-1}\bigl(C_{a,i}+[C_{a,i},\mu_i]\bigr)+[C_{a,i},S_i]$. Taking
+$\alpha=-C_{a,i}$ kills the $z^{-2}$ term because $C_{a,i}$ commutes with $U_i$,
+and reduces the $z^{-1}$ equation to $[\beta,U_i]=0$; the $z^0$ equation is the
+second displayed condition.
+\end{proof}
+
+So the residual statement of Section~\ref{sec:hyzz} is now one solvability
+question, asked only of the coalesced blocks that
+Corollary~\ref{cor:coalesced-only} leaves in play: is there, in the commutant of
+$U_i$, a $\beta$ with $[\beta,\mu_i]=[C_{a,i},S_i]$? If yes in every bulk
+direction, the block connection is isomonodromic along the displacement, its
+formal invariants are constant, and Proposition~4.7 closes without any receiver.
+
+Two remarks on the shape of the risk, so that the next attempt does not start
+optimistic. First, $[C_{a,i},S_i]$ is a commutator of two self-adjoint operators
+--- $C_{a,i}$ by the Frobenius property, $S_i$ because
+$\mu_{ij}^\dagger=-\mu_{ji}$ makes each $\mu_{ij}\mu_{ji}$ self-adjoint --- hence
+anti-self-adjoint, which is consistent with $\mu_i$ remaining anti-self-adjoint
+but is not by itself the solvability. Second, and this is the real danger, a
+coalesced block can \emph{split} under the displacement: the splitting is
+governed by $D_aU_i=C_{a,i}+[C_{a,i},\mu_i]$, and if a rank-two block carrying
+the exponents $\pm1/6$ split into two simple blocks, those would carry residue
+$0$ by Theorem~\ref{thm:simple-blocks} and $\nu_6$ would drop by two. So the
+theorem that has to be proved is not general isomonodromy but exactly this: the
+reconstruction displacement does not split the blocks that carry $\nu_6$, or
+splits them in a way that preserves the count. That is a coalescence question in
+the sense of the isomonodromy-at-coalescing-eigenvalues literature, which is the
+next thing to read.
+
 \section{Routes, in the order I would now try them}
 
 The framing route has been removed from this list by the checks of
-Section~\ref{sec:hyzz}. All five below attack the residual gap stated at the end
-of that section.
+Section~\ref{sec:hyzz}. All below attack the residual gap stated at the end of
+that section, and the order has changed: the blockwise route is now first,
+because Section~\ref{sec:blockwise} has already carried it past the point where
+the Birkhoff route still stands.
 
 \begin{enumerate}
+\item \textbf{Blockwise, avoiding transport altogether.} Developed in
+  Section~\ref{sec:blockwise}. It has already produced the two evolution
+  equations $D_aU_i=C_{a,i}+[C_{a,i},\mu_i]$ and $D_a\mu_i=[C_{a,i},S_i]$, the
+  vanishing of every multiplicity-one block residue, and a reduction of the
+  residual statement to one Sylvester condition per coalesced block. What
+  remains is that condition and the coalescence question stated at the end of
+  that section. Signs follow the displayed connection of Iritani--Koto's
+  Theorem~5.1 and should be rechecked against the draft's normalization before
+  anything is written into the manuscript.
 \item \textbf{Birkhoff.} The identity $(\Phi^\circ)^{-1}\circ M=M'\circ\Phi^{-1}$
   of Iritani--Koto's Section~5.8, and its counterpart in Iritani's
   Section~5.8.2, already factors the bulk transport into a $z$-regular factor,
   which Theorem~\ref{thm:transport} handles, and a factor
   $M'=\mathrm{id}+O(z^{-1})$. What must be shown is that the second factor does
   not change the primitive-sixth multiplicity. This is a statement about a
-  $z=\infty$-side gauge acting on a $z=0$ invariant, so it is not automatic; it
-  is, however, sharply posed and of a standard shape, unlike the receiver
-  inequality.
-\item \textbf{Pointwise residues, avoiding transport altogether.} In
-  Iritani--Koto's displayed conventions, $\nabla_a=\partial_a+z^{-1}(\phi_a\star)$
-  and $\nabla_{z\partial_z}=z\partial_z-z^{-1}(E\star)+\mu$, two exact relations
-  hold: commutativity and associativity of the quantum product give
-  $[E\star,\phi_a\star]=0$, and flatness gives
-  $\partial_a(E\star)=\phi_a\star+[\phi_a\star,\mu]$. The first says every bulk
-  direction preserves the spectral decomposition of $E\star$, so a bulk
-  displacement never mixes exponential blocks; the second identifies
-  $\partial_a\lambda_i$ with the $i$-th eigenvalue of $\phi_a\star$, the
-  canonical-coordinate relation. Together they invite comparing block residues
-  at the two parameters instead of transporting between them --- the ``argue
-  graded piece by graded piece'' possibility the earlier versions left open,
-  now with the relations that make it concrete. The signs above follow the
-  displayed connection of Iritani--Koto's Theorem~5.1 and should be rechecked
-  against the draft's normalization before use.
+  $z=\infty$-side gauge acting on a $z=0$ invariant, so it is not automatic, and
+  it is close to the original difficulty in another form: any proof will have to
+  use where $M'$ comes from, which is the flat quantum connection --- that is,
+  the identities route~1 already exploits directly. Worth keeping as a
+  cross-check rather than as the primary attack.
 \item \textbf{The low-dimensional centers directly}: primitive-sixth vanishing
   after Iritani's specialization, using the classification the draft already
   proves, rather than through a general transport statement.
@@ -859,15 +1050,12 @@ not supply. It remains worth having where it applies. Restricting
 Proposition~4.7 to centers satisfying the criterion is likewise available, at a
 cost in generality that is the author's call.
 
-One observation bears on how much any of these has to prove. In Dubrovin's
-semisimple normalization the operator $\mu$, conjugated to canonical
-coordinates, has zero diagonal, so a multiplicity-one block of $E\star$
-contributes residue zero and no root of unity. If that carries over to this
-normalization --- I flag it rather than assert it --- then $\nu_6$ is supported
-entirely on blocks with repeated $E\star$-eigenvalue, and the routes above need
-only control those. It is consistent with the draft's own cubic block, where
-$K_0$ has eigenvalues $\pm6r,0,0$ and the primitive-sixth roots come from the
-rank-two $\lambda=0$ block through $\det L_s=(s+1/6)(s+5/6)$.
+The observation that multiplicity-one blocks contribute nothing, flagged in the
+second version of this memo on the strength of Dubrovin's zero-diagonal fact in
+canonical coordinates, is no longer a flag: Theorem~\ref{thm:simple-blocks}
+proves it in this normalization, from self-adjointness of $E\star$ and
+anti-self-adjointness of $\mu$ for the Poincar\'e pairing. So every route above
+needs to control only the coalesced blocks.
 
 A separate scope reduction stands on its own, unchanged: a direct quantum
 K\"unneth computation for $X\times\PP^1$ together with a direct computation for
@@ -916,10 +1104,10 @@ pro-Laurent bulk gauge remain conditional on closing the residual gap.
   direction is a divisor substitution already covered by (4.1). This is owed
   regardless of which repair lands, and is check two of
   Section~\ref{sec:hyzz}.
-\item \texttt{lem:divisor-tagging} carries the same obstruction --- it embeds
-  the gauge of \texttt{lem:formal-base-shift}, whose negative $z$-order is
-  unbounded, together with every transported operator, into one ordered Hahn
-  field --- and needs whatever repair the receiver gets.
+\item {\sloppy \texttt{lem:divisor-tagging} carries the same obstruction --- it
+  embeds the gauge of \texttt{lem:formal-base-shift}, whose negative $z$-order
+  is unbounded, together with every transported operator, into one ordered Hahn
+  field --- and needs whatever repair the receiver gets.\par}
 \end{enumerate}
 
 Mechanically, a new theorem-like environment must carry exactly one semantic
@@ -991,16 +1179,20 @@ compared in Proposition~4.7 lie in the class Theorem~4.34 governs --- has been
 answered no, three times over, in Section~\ref{sec:hyzz}. These replace it.
 
 \begin{enumerate}
+\item In the commutant of $U_i$, is there a $\beta$ with
+  $[\beta,\mu_i]=[C_{a,i},S_i]$, in every bulk direction and for every coalesced
+  block? By Proposition~\ref{prop:block-isomonodromy} this is now the question
+  that decides the repair.
+\item Can the reconstruction displacement split a coalesced block that carries
+  $\nu_6$? The splitting is governed by $D_aU_i=C_{a,i}+[C_{a,i},\mu_i]$, and by
+  Theorem~\ref{thm:simple-blocks} a split into simple blocks would destroy the
+  primitive-sixth exponents outright.
+\item Failing a general answer, does the coalescence literature on isomonodromic
+  deformations with coalescing eigenvalues cover the formal exponents, rather
+  than only the Stokes matrices?
 \item Does the factor $M'=\mathrm{id}+O(z^{-1})$ of the sources' Birkhoff
-  factorization preserve the primitive-sixth multiplicity? This is now the
-  question that decides the repair.
-\item Can the framed spectrum at a positive-filtration bulk parameter be
-  compared with the one at the origin blockwise, using
-  $[E\star,\phi_a\star]=0$ and
-  $\partial_a(E\star)=\phi_a\star+[\phi_a\star,\mu]$, without transporting?
-\item Does the vanishing of the diagonal of $\mu$ in canonical coordinates carry
-  over to this normalization, so that only repeated-eigenvalue blocks can carry
-  $\nu_6$?
+  factorization preserve the primitive-sixth multiplicity? This is the same
+  question in the other coordinates, and is worth keeping as a cross-check.
 \item For the low-dimensional centers, can primitive-sixth vanishing be proved
   directly in the coordinates Iritani's specialization produces, given that the
   nef-canonical case already yields an integral-$z$ gauge to a regular-singular

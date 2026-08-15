@@ -10,9 +10,10 @@ pro-Laurent bulk gauge of `lem:formal-base-shift` in the proof of
 `2026-08-15-c912-frame-transport-memo.tex`, Section 6 (`sec:hyzz`); the adversarial
 check that corrected the memo is `2026-08-15-c912-frame-transport-memo-red-team.md`.
 The memo has since been revised to its third version, which carries the verdicts below
-in its Section 6, replaces its route list and questions accordingly, and records the two
-corrections in `sec:corrections`; that version is 15 pages with PDF SHA-256
-`1e1a2393762ba9c2b64b29fc9e8164ee4dfe799a02e20bc4b71422e8442d7156`.
+in its Section 6, replaces its route list and questions accordingly, records the two
+corrections in `sec:corrections`, and adds Section 7 carrying out the blockwise attack
+on the residual gap; that version is 18 pages with PDF SHA-256
+`20b348901afba5fd8234fd46bceb4da62389a892a6c1bb8565866aee25dd18fa`.
 No manuscript, Lean, or export change is made by this pass.
 
 **Headline.**  Check 1 fails as posed, for three independent reasons; check 2 passes and
@@ -80,12 +81,13 @@ resulting splitting `iso : H_0^{⊕m} ≅ H`.  The blowup decomposition (5.21) i
 `H^*(X) ⊕ ⊕_{i=1}^{m-1} H^*(Z)[-2i]`, whose summands have different dimensions whenever
 `dim H^*(Z) ≠ dim H^*(X)`; HYZZ themselves write a general endomorphism there as a
 matrix with `Φ_{1,1} ∈ End(H^*(X))` and `Φ_{i,i} ∈ End(H^*(Z))`, so the mismatch is
-explicit in their own notation.  Theorem 5.22 is accordingly stated as "analogous" and
-carries **no proof** in the paper; its uniqueness clause is conditional ("if we restrict
-the coefficients of `Φ` to lie in a universal algebra as in the projective bundle
-case"), and for existence they refer to Iritani–Koto.  The blowup half of
-`prop:framed-operations` — equation (4.3), which is the half the headline theorem
-cannot do without — therefore has no proved HYZZ statement behind it at all.
+explicit in their own notation.  Theorem 5.22 does assert existence of the isomorphism,
+and Theorem 5.24 gives the corresponding uniqueness; the accurate criticism is not that
+it is unproved but that it is not *derived from* Theorem 4.34 — whose hypotheses do not
+cover the unequal block sizes — and that its existence is referred to the earlier
+decomposition work.  So the blowup half of `prop:framed-operations` — equation (4.3),
+the half the headline theorem cannot do without — gains nothing from Theorem 5.22 beyond
+what Iritani's own theorem already supplies.
 
 The projective-bundle half is genuinely covered: there the eigenspaces are `m` copies of
 `H^*(X)` (Lemma 5.8), matching Section 4.4, and Theorem 5.16 is proved.
@@ -228,26 +230,29 @@ Recorded as leads, with their status marked; none is a claim.
    `id + O(z^{-1})` factor does not change the primitive-sixth multiplicity — a
    `z = ∞`-side statement about a `z = 0` invariant, so it is not automatic, but it is a
    sharply posed and standard-shaped question, unlike the receiver inequality.
-2. **Pointwise residue route, avoiding transport entirely.**  With Iritani–Koto's
-   displayed conventions, `∇_a = ∂_a + z^{-1}(φ_a⋆)` and
-   `∇_{z∂z} = z∂z - z^{-1}(E⋆) + μ`, two exact relations hold: commutativity and
-   associativity of the quantum product give `[E⋆, φ_a⋆] = 0`, and flatness gives
-   `∂_a(E⋆) = φ_a⋆ + [φ_a⋆, μ]` (derived here from the displayed connection; signs
-   should be rechecked against the manuscript's normalization before use).  The first
-   says every bulk direction preserves the spectral decomposition of `E⋆`, so bulk
+2. **Blockwise route, avoiding transport entirely — now the primary attack, carried out
+   in the memo's Section 7.**  With Iritani–Koto's displayed conventions,
+   `∇_a = ∂_a + z^{-1}(φ_a⋆)` and `∇_{z∂z} = z∂z - z^{-1}(E⋆) + μ`, two exact relations
+   hold: commutativity and associativity give `[E⋆, φ_a⋆] = 0`, and flatness gives
+   `∂_a(E⋆) = φ_a⋆ + [φ_a⋆, μ]` (signs follow the displayed connection and should be
+   rechecked against the manuscript's normalization before use).  The first says bulk
    displacement never mixes exponential blocks; the second identifies `∂_aλ_i` with the
-   `i`-th eigenvalue of `φ_a⋆`, the canonical-coordinate relation.  This suggests
-   proving invariance of the framed spectrum by comparing block residues at the two
-   points rather than transporting between them, which is the "argue graded piece by
-   graded piece" route the memo left open.
-3. **Where `ν_6` can live at all.**  In Dubrovin's semisimple normalization the operator
-   `μ` conjugated to canonical coordinates has zero diagonal, so a multiplicity-one
-   block of `E⋆` contributes residue zero and no root of unity.  If that carries over to
-   this normalization — flagged, not verified — then `ν_6` is supported entirely on
-   blocks with repeated `E⋆`-eigenvalue.  That is consistent with the manuscript's own
-   cubic computation, where `K_0` has eigenvalues `±6r, 0, 0` and the primitive-sixth
-   roots come from the rank-two `λ = 0` block via `det L_s = (s+1/6)(s+5/6)`.  If it
-   holds, routes 1 and 2 only ever have to control degenerate blocks.
+   `i`-th eigenvalue of `φ_a⋆`.  In the Kato block frame these give
+   `D_aU_i = C_{a,i} + [C_{a,i}, μ_i]` and `D_aμ_i = [C_{a,i}, S_i]` with
+   `S_i = Σ_{j≠i} μ_{ij}μ_{ji}/(u_i-u_j)`, and the whole isomonodromy question collapses
+   to one Sylvester condition per coalesced block: a `β` commuting with `U_i` with
+   `[β, μ_i] = [C_{a,i}, S_i]`.  The live danger is that the displacement *splits* a
+   coalesced block, which by item 3 below would drop `ν_6` by two.
+3. **Where `ν_6` can live at all — now proved, see the memo's Section 7.**  Quantum
+   multiplication is Frobenius, so `E⋆` is self-adjoint for the Poincaré pairing and its
+   distinct generalized eigenspaces are orthogonal; `μ` is anti-self-adjoint because the
+   pairing is nonzero only in complementary degrees.  Hence every block residue
+   `μ_i = P_i μ P_i` is anti-self-adjoint on its block: traceless, spectrum symmetric
+   about zero, and identically zero on a multiplicity-one block.  So `ν_6` is carried
+   entirely by blocks with repeated `E⋆`-eigenvalue, and every route only ever has to
+   control those.  This matches the manuscript's cubic computation, where `K_0` has
+   eigenvalues `±6r, 0, 0`: the simple `±6r` blocks contribute the identity, and the
+   indicial roots `1/6` and `5/6` are `±1/6` mod `Z`, the symmetry the argument forces.
 4. **Blowup uniqueness is not available from HYZZ.**  Anyone later tempted to cite
    Theorem 5.22 for the blowup half should know it is unproved there and outside
    Theorem 4.34's stated hypotheses (finding 1b).  The manuscript must not cite it as
@@ -259,7 +264,7 @@ Recorded as leads, with their status marked; none is a claim.
 |---|---|---|---|
 | C912-M14 | resolved | The frame-transport receiver problem was attributed to the comparison isomorphism; in fact both `Ψ` and `Φ` are `z`-polynomial module maps, so the transport lemma applies to them unconditionally. | Check 1d; the gap is the residual bulk gauge alone |
 | C912-M15 | confirmed | The pro-Laurent bulk gauge is Iritani–Koto's own fundamental solution `M`, not a draft-specific choice; per bulk degree it is polynomial in `z^{-1}`, unbounded only in the limit. | Section 5; corrects the memo's Section 6 |
-| C912-M16 | confirmed | HYZZ Theorem 5.22 (blowup) has no proof in the paper and falls outside Theorem 4.34's equal-dimension hypothesis. | Finding 1b; do not cite for (4.3) |
+| C912-M16 | confirmed | HYZZ Theorem 5.22 (blowup) is asserted, with uniqueness in Theorem 5.24, but is not derived from Theorem 4.34, whose hypotheses miss the unequal block sizes; existence is referred to the earlier decomposition work. | Finding 1b; it adds nothing to (4.3) beyond Iritani |
 | C912-M17 | resolved | The base-map ambiguity of Theorems 5.20/5.24 is a Novikov character, hence the divisor substitution (4.1), hence `ν_6`-invariant; the sources' explicit initial conditions pin it anyway. | Check 2; one manuscript sentence owed |
 | C912-M18 | confirmed | HYZZ's center F-bundle is itself built on a collapsed Novikov variable, so the framing theory can never certify intrinsic center invariants; their Lemma 2.24 is nonetheless the divisor-tagging mechanism in print. | Check 3; `lem:divisor-tagging` stays owner |
 
