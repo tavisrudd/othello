@@ -539,6 +539,20 @@ verdict text lives only in `claim-proof-novelty-ledger.md`.
   replayed with a byte-identical PDF, `verify` accepts 120 tracked files.
   Standalone commit `8678447`; summary mirror commit `11b6e63`.  Neither is
   pushed.
+- [x] Second external read of the retitled draft, scored 95.5 with the
+  Levelt--Turrittin citation supplied.  Its three items are taken: the
+  two-theorems paragraph moved to after Theorem~1.1 and its birational-class
+  paragraph, which puts the headline theorem back on page one; "their
+  conclusions are independent" softened to "the two inputs are logically
+  independent" and "every obstruction that a decomposition of the diagonal
+  kills" to "the usual decomposition-of-the-diagonal obstructions"; and the
+  algebraic formal classification now cites van der Put--Singer Chapter~3,
+  with Sabbah kept for the complex-analytic account only.  That closes referee
+  A's severity-2 item as well.
+- [x] Rebuilt deterministically at 30 pages, PDF SHA-256
+  `b10f0a1d351ea292bd5d17382e40a19cd6701b2b9ac28b828f55c96c22c392da`,
+  authority `f8183bf97`; re-exported with zero audit findings, standalone
+  commit `b0b3861`, `verify` accepts 120 tracked files.
 - [ ] The next Zenodo release deposits the new title as a new version; the
   existing deposit keeps the old one.
 
@@ -583,7 +597,12 @@ verdict text lives only in `claim-proof-novelty-ledger.md`.
   `w(Delta lambda)` is below the minimal generator weight.  That holds at the
   cubic endpoint and is not supplied for arbitrary weak-factorization centers.
   A second opinion on the architecture is the next step; `prop:framed-operations`
-  stays unproved as written until it lands.
+  stays unproved as written until it lands.  The reviewer-facing memo carrying
+  the lemma, its proofs, the obstruction, the criterion, the three candidate
+  routes, and the exact manuscript placement is
+  `../2026-08-15-c912-frame-transport-memo.tex`, built to
+  `../2026-08-15-c912-frame-transport-memo.pdf` with
+  `nix develop papers#manuscript --command latexmk -xelatex`.
 - [ ] **Owed to referee A, the one item left open.** The frame-transport step
   in `prop:framed-operations` — that a turn-invariant gauge conjugates framed
   operators — is asserted in one sentence, and no solution algebra carrying

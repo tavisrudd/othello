@@ -779,9 +779,9 @@ coefficient/loop Hahn receiver have passed quantum, geometry, and general cold
 reads.  The paper is now titled *Irrationality of Cubic Threefolds after One
 Stabilization*, and its introduction presents the framed-multiplicity and
 six-axis theorems as the two halves one fourfold requires.  The warning-free
-30-page authority is committed at `a85ddbb32` with PDF SHA-256
-`a06cc45ce5b9adac5c1795320d0c4162166ae47d70de4eee922caec3512d2f33`; the
-standalone forward commit is `8678447` and the summary mirror is `11b6e63`.
+30-page authority is committed at `f8183bf97` with PDF SHA-256
+`b10f0a1d351ea292bd5d17382e40a19cd6701b2b9ac28b828f55c96c22c392da`; the
+standalone forward commit is `b0b3861` and the summary mirror is `11b6e63`.
 Nothing was pushed.  The next step is the frame-transport lemma owed to
 referee A, which is blocked on an architecture decision and awaiting a second
 opinion: `../2026-08-15-c912-frame-transport-receiver-obstruction.md`.  Current
