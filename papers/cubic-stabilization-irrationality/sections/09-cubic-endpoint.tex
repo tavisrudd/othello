@@ -98,9 +98,14 @@ degree-three hypersurface in \(\mathbf P^4\),
  \frac{\prod_{m=1}^{3d}(3P+mz)}{\prod_{m=1}^{d}(P+mz)^5},
 \end{equation}
 and identifies it with the small \(J\)-function up to a mirror map
-\cite{GiventalToricCI,CoatesGivental}.  The degree-\(d\) term here carries
-\(z^{3d-5d}=z^{-2d}\), so \(I=z\mathbf 1+O(z^{-1})\) and the mirror map is
-trivial.  Setting \(P=0\) in \eqref{eq:cubic-i-function} leaves
+\cite{GiventalToricCI,CoatesGivental}; the exponential prefactor
+\(e^{(P\log q)/z}\) of the usual display is absorbed into the Novikov
+convention here, and is killed by the specialization \(P=0\) below in any
+case.  The degree-\(d\) term carries \(z^{3d-5d}=z^{-2d}\), so
+\(I=z\mathbf 1+O(z^{-1})\) and the mirror map is trivial.  This count uses
+the Fano index: index one would leave a \(z^0\) term and a nontrivial mirror
+map, and a cubic threefold has index \(5-3=2\), the smallest value for which
+the count closes.  Setting \(P=0\) in \eqref{eq:cubic-i-function} leaves
 \[
  z\sum_{d\geq0}q^d\frac{(3d)!\,z^{3d}}{(d!)^5z^{5d}}
  =z\,F(q/z^2),
@@ -109,7 +114,11 @@ which is that coefficient up to the power of \(z\) carried by the chosen
 normalization.  The accumulated factors---\((2\pi)^{-3/2}(2\pi i)^3\), the
 sign convention relating \(L_X(0,z)\) to \(J\), and the overall power of
 \(z\) in the \(I\)- and \(J\)-function conventions---are a nonzero constant
-times an integral power of \(z\).
+times an integral power of \(z\).  The one factor which could have contributed
+a further half-integral power does not: the normalization in
+\eqref{eq:gamma-framed-section} is \((2\pi)^{-\dim X/2}\), not
+\((2\pi z)^{-\dim X/2}\), so \(z^{-\mu}\) is the only source of a fractional
+exponent.
 \end{proof}
 
 Only the fractional part of the exponent of \(z\) is used below, so the
@@ -125,7 +134,7 @@ primitive-sixth formal monodromy---is regular singular and produces the
 algebraic terms.  The packet in question is therefore read from the algebraic
 part alone.
 
-That part is a Barnes expansion.  For \({}_pF_q\) with \(p\leq q\) and
+That part is a Barnes expansion.  For \({}_pF_q\) with \(p=q-1\) and
 \(a_k\) distinct modulo the integers, its algebraic terms are
 \begin{equation}\label{eq:barnes-algebraic-part}
  \frac{\prod_{j}\Gamma(b_j)}{\prod_{j}\Gamma(a_j)}
@@ -167,7 +176,9 @@ It remains to pass from the section to the row.  The row is
 \(v\mapsto[v,s_X(\OO_p))\), and \eqref{eq:flat-euler-pairing} is
 nondegenerate; because of the half-turn \(z\mapsto e^{-\pi i}z\) in its first
 slot, it pairs a formal line of monodromy \(\lambda\) with the line of
-monodromy \(\lambda^{-1}\).  A nonzero coefficient of \(s_X(\OO_p)\) along
+monodromy \(\lambda^{-1}\).  The two lines of the block are inverse to each
+other, so the restriction of the pairing to that block is again
+nondegenerate.  A nonzero coefficient of \(s_X(\OO_p)\) along
 one of the two lines therefore makes the row nonzero on the other.  Both
 coefficients are nonzero here, so the conclusion is the same for both packets
 and does not depend on resolving which line is paired with which.
