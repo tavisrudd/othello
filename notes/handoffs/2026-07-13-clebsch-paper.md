@@ -786,8 +786,9 @@ Nothing was pushed.  The next step is the frame-transport lemma owed to
 referee A.  Its reviewer-facing memo and the red team that corrected it are
 `../2026-08-15-c912-frame-transport-memo.tex` and
 `../2026-08-15-c912-frame-transport-memo-red-team.md`; the iterated receiver is ruled out
-for general ambients by a grading argument, and the next route is whether the
-Hinault--Yu--Zhang--Zhang framing recovers the original-disc turn.  Current
+for general ambients by a grading argument, and the likely repair is the
+Hinault--Yu--Zhang--Zhang regular decomposition gauge, whose compatibility with
+the comparison used in `prop:framed-operations` is the open item.  Current
 card: `../clebsch-tasks/c912-cubic-stabilization-referee-foundations.md`.
 
 C914 places the `A_5`-pencil against the known universally `CH_0`-trivial

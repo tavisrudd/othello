@@ -633,10 +633,20 @@ verdict text lives only in `claim-proof-novelty-ledger.md`.
   exactly when every contributing effective class has `c_1·d >= 0`, which weak
   factorization does not supply for an intermediate ambient variety.  The
   iterated receiver therefore needs a semipositivity hypothesis and does not
-  remove the arbitrary fourfolds.  Next in line is the Hinault--Yu--Zhang--Zhang
-  framing theory (arXiv:2411.02266, cached), whose reconstruction algorithm is
-  Iritani--Koto's Section 5.8: the open question is whether their `F`-bundle
-  framing recovers the original-disc cyclotomic turn.  Independently,
+  remove the arbitrary fourfolds.  The likely repair is the
+  Hinault--Yu--Zhang--Zhang framing theory (arXiv:2411.02266, cached), whose
+  reconstruction algorithm is Iritani--Koto's Section 5.8.  Their Theorem 4.34
+  makes the decomposition gauge `Phi(u)` an element of `GL(H[[u]])` with entries
+  polynomial in the parameters, unique given its value at `u=0`.  Such a gauge
+  is regular in the loop coordinate, adjoins no root of it, and is therefore
+  fixed by the turn, so the transport lemma applies over the ordinary Laurent
+  field with no Hahn receiver, no gauge product, and no inequality.  The whole
+  obstruction traced above is a consequence of realizing the bulk transport by a
+  pro-Laurent gauge, which is the draft's choice rather than the sources'.  The
+  open item is compatibility: do the two connections compared in
+  `prop:framed-operations` lie in their class `F(H, iso, d, (c_i))`, and are its
+  three conditions met?  The center specialization is upstream of this and
+  survives unchanged.  Independently,
   the obstruction is order-free: for the critical ratio the loop coefficient of
   the gauge product is an infinite sum of bounded weight, hence undefined in any
   completion.  `lem:divisor-tagging` carries the same obstruction and needs the
