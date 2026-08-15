@@ -13,8 +13,10 @@ with the coefficient field algebraically closed before the independent
 integral loop coordinate is adjoined.  C912 remains active and author-close
 only.  WP4 has begun in reviewed microincrements: commit `7f5d1439b`
 displays Cai's exact small-even cubic connection matrix with its coefficient
-and original-loop-coordinate conventions.  The remaining WP4 steps, then
-WP5--WP6, remain prioritized work.
+and original-loop-coordinate conventions; commits `4a8d4d638` and
+`09c571ec2` give the independently checked integral-(z) block reduction and
+its stable Section~4 numbering.  The remaining WP4 steps, then WP5--WP6,
+remain prioritized work.
 
 **Lifecycle rule:** keep this card open until the author explicitly closes it.
 Passing implementation, review, export, and release gates does **not** authorize
@@ -240,7 +242,7 @@ exact bridge is formalized.
 
 - [x] Display the small even quantum connection matrix in the basis
   `1,P,P^2,P^3`.
-- [ ] Perform the formal integral-`z` block reduction in the paper.
+- [x] Perform the formal integral-`z` block reduction in the paper.
 - [ ] Derive the rank-two indicial polynomial
   `rho^2 + rho + 5/36`.
 - [ ] Derive roots `-1/6,-5/6` and eigenvalues
