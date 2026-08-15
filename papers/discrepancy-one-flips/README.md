@@ -18,15 +18,21 @@ semiorthogonal decomposition is a decomposition into asymptotic classes.
 Their explicit formula for the extremal `J`-function of the local model is
 stated under `r - s > 1`, a remark asserts that the same series is not
 `J`-normalized when `r - s <= 1`, and the Barnes asymptotic expansion is
-applied under the same inequality.  The printed dependency chain therefore
-does not reach the discrepancy-one range `r = s + 1`, `s >= 1`, which
-contains every codimension-two blow-up.
+applied under the same inequality.  Their Theorem 1.2 is printed only for
+`r - s > 1`, while the later results are stated in a range that includes
+blow-ups; the printed proof chain for those later results does not reach the
+discrepancy-one range `r = s + 1`, `s >= 1`, which contains every
+codimension-two blow-up.
 
 This note supplies the two missing steps.  An exact `z`-order count shows
 that the degree-`d` summand of the series has `z`-order at most
 `1 - s - (r - s) d`, hence at most `-1` for every `d >= 1` when `r = s + 1`
-and `s >= 1`; with the cone membership already recorded in the source, this
-identifies the series with the extremal `J`-function.  At `nu = r - s = 1`
+and `s >= 1`, so uniqueness of the `J`-slice of Givental's cone identifies
+the series with the extremal `J`-function.  The cone membership this uses is
+proved rather than quoted: for split bundles from Brown's toric-fibration
+theorem and the twisted theory of Coates and Givental, and in general by a
+flag-bundle pullback and a deformation to the associated graded.  At
+`nu = r - s = 1`
 the correct Meijer sector comes from Barnes' expansion with `epsilon = 1/2`
 rather than from specializing the printed sector, and the corrected sector
 still meets the ambient one in an open sector of opening `2 pi` containing

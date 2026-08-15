@@ -20,17 +20,24 @@
   \cite[Propositions~8.2 and~8.3]{SS} and \cite[Corollary~8.4]{SS} hold as
   printed, by Lemma~\ref{lem:ambient}.
 
-  The reductions of \cite[Sections~9.1--9.4]{SS} are then unchanged.
+  Once the repaired \(J\)-function formula and the corrected common sector
+  are supplied, \cite[Sections~9.1--9.4]{SS} impose no further restriction on
+  \(r-s\), and their internal arguments apply without modification.
   \cite[Proposition~9.1]{SS} uses the presentation \eqref{eq:ss37} and the
   extremal Dubrovin connection; \cite[Proposition~9.2]{SS} combines it with
-  \cite[Propositions~7.8 and~8.4]{SS}; \cite[Corollary~9.3]{SS} takes a
+  \cite[Proposition~7.8]{SS} and \cite[Corollary~8.4]{SS};
+  \cite[Corollary~9.3]{SS} takes a
   partial nonequivariant limit; \cite[Section~9.2]{SS} removes the splitting
   assumption on \(V,V'\), giving \cite[Corollary~9.7]{SS};
   \cite[Section~9.3]{SS} passes from the local model to \(X\), giving
   \cite[Theorem~9.9]{SS}; and \cite[Section~9.4]{SS} compares the
   Fourier--Mukai transform with the local model, giving
   \cite[Theorem~9.14]{SS}.  None of these steps constrains \(\nu\) beyond
-  \(r>s\).  The two halves of \cite[Theorem~1.4]{SS} are
+  \(r>s\), but they are not independent of the repair: the deformation
+  argument of \cite[Section~9.2]{SS} runs through \cite[Lemmas~9.4--9.6]{SS},
+  whose proofs read \eqref{eq:ss35} as the extremal \(J\)-function.
+  Proposition~\ref{prop:IJ} supplies exactly that at \(r-s=1\).
+  The two halves of \cite[Theorem~1.4]{SS} are
   \cite[Theorems~9.9 and~9.14]{SS}, and \cite[Corollary~1.5]{SS} is the
   translation of \cite[Theorem~1.4]{SS} through the functors
   \cite[(3)]{SS}.  Proposition~\ref{prop:common} supplies the sector on
@@ -39,14 +46,15 @@
 
 Three boundaries should be stated explicitly.
 
-First, \((r,s)=(1,0)\) is not covered.  By
+First, \((r,s)=(1,0)\) is not covered, and it is not another
+discrepancy-one standard flip in the extremal-line setup.  There
+\(\PP(V)=Z\), \(X'=\varnothing\), the fibre is a point, and there is no line
+class \([L]\) to restrict the Novikov parameter to.  By
 Remark~\ref{rem:boundary} the formal expression \eqref{eq:ss35} has a
-\(z\)-order-zero term there and is not \(J\)-normalized.  This is the
-rank-one projective-bundle endpoint, where \(\PP(V)=Z\), \(X'=\varnothing\),
-and the point fibres contain no line class \([L]\).  It therefore lies
-outside both the normalization argument and the geometric extremal-line
-setup.  All genuine discrepancy-one standard flips have \(s\ge1\) and are
-covered by Theorem~\ref{thm:assembled}.
+\(z\)-order-zero term there and is not \(J\)-normalized; that failure marks
+the boundary of the formula rather than an omitted geometric case.  All
+genuine discrepancy-one standard flips have \(s\ge1\) and are covered by
+Theorem~\ref{thm:assembled}.
 
 Second, everything above lives on the extremal slice.  The Novikov
 parameter is restricted to multiples of the class \([L]\) of a line in a
@@ -63,6 +71,10 @@ of \cite{SS} applies as printed, with \eqref{eq:ss64} supplied by the
 ingredient of \cite{SS} --- the ring homomorphism to the local model, the
 spectral computation in the abstract presentation, the deformation to the
 normal cone, the Fourier--Mukai comparison --- is used exactly as it stands.
+No other part of the standard-flip argument is altered: the correction is
+confined to the \(J\)-normalization of \eqref{eq:ss35} and to the Barnes
+aperture at \(\nu=1\), with the cone membership of
+Section~\ref{sec:normalization} supplied rather than corrected.
 
 The count in Lemma~\ref{lem:order} is what makes the discrepancy-one range
 behave like the higher-discrepancy one.  The \(s\) numerator factors
