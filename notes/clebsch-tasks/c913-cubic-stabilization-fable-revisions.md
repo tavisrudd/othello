@@ -18,7 +18,10 @@ follows Definition `def:gauged-admissible` and is summarized in the intro
 `rem:verification-status` (Major 1(c)).  The ledger and release-surface
 checker track the new identifiers; `make check` passes at 30 pages.  The
 expected-versus-open labels for clauses (i)--(iii) await Tavis's sign-off.
-Mirror export waits for the Package D milestone.  A fresh Fable referee report finds no endpoint
+The standalone mirror has adopted both packages as forward commits
+(`2e49e2c` Package C, `b43ad7a` Package D) with its gate green and PDF
+hashes byte-identical to the authority; the epilogue mirror was refreshed
+the same day (`2877536`).  A fresh Fable referee report finds no endpoint
 calculation error or hidden discharge of the global hypotheses.  It requests
 a major presentation and proof expansion before broad circulation.  The first
 pass is deliberately local: repair endpoint/frame exposition, source
