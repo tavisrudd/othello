@@ -1,0 +1,303 @@
+<title>Stabilization Debt Ledger</title>
+<style>
+  :root {
+    --paper: #eef1f3;
+    --surface: #ffffff;
+    --ink: #111820;
+    --ink-soft: #4a555f;
+    --rule: #ccd4d9;
+    --accent: #0f5a6b;
+    --ok: #186a3f;
+    --bad: #9b2226;
+    --owed: #8a5a00;
+    --idle: #55606b;
+    --void: #6b4a86;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #0d1418;
+      --surface: #141d23;
+      --ink: #e4ebee;
+      --ink-soft: #9aa8b1;
+      --rule: #2a373f;
+      --accent: #57b5c8;
+      --ok: #56b980;
+      --bad: #e2757a;
+      --owed: #d3a13f;
+      --idle: #8a97a1;
+      --void: #b394d4;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #0d1418;
+    --surface: #141d23;
+    --ink: #e4ebee;
+    --ink-soft: #9aa8b1;
+    --rule: #2a373f;
+    --accent: #57b5c8;
+    --ok: #56b980;
+    --bad: #e2757a;
+    --owed: #d3a13f;
+    --idle: #8a97a1;
+    --void: #b394d4;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: Georgia, "Iowan Old Style", "Times New Roman", serif;
+    font-size: 17px;
+    line-height: 1.6;
+    margin: 0;
+    padding: 3rem 1.25rem 5rem;
+  }
+  main { max-width: 60rem; margin: 0 auto; display: flex; flex-direction: column; gap: 2.5rem; }
+  h1 { font-size: 2.1rem; line-height: 1.15; margin: 0; text-wrap: balance; letter-spacing: -0.01em; }
+  h2 {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.13em;
+    color: var(--accent); margin: 0 0 0.75rem; font-weight: 600;
+  }
+  p { margin: 0 0 0.9rem; max-width: 68ch; }
+  section > p:last-child { margin-bottom: 0; }
+  .lede { font-size: 1.12rem; color: var(--ink-soft); max-width: 62ch; margin-top: 0.9rem; }
+  header { border-bottom: 2px solid var(--rule); padding-bottom: 1.5rem; }
+  .stamp {
+    font-family: ui-monospace, monospace; font-size: 0.72rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--ink-soft);
+  }
+  .card { background: var(--surface); border: 1px solid var(--rule); padding: 1.5rem 1.6rem; }
+  figure { margin: 0; }
+  figcaption { font-size: 0.92rem; color: var(--ink-soft); margin-top: 0.9rem; max-width: 68ch; }
+  svg { max-width: 100%; height: auto; display: block; }
+  .scroll { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; font-size: 0.94rem; min-width: 40rem; }
+  th, td { text-align: left; padding: 0.6rem 0.7rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  th {
+    font-family: ui-monospace, monospace; font-size: 0.68rem; text-transform: uppercase;
+    letter-spacing: 0.1em; color: var(--ink-soft); font-weight: 600;
+  }
+  td.claim { max-width: 30rem; }
+  .chip {
+    font-family: ui-monospace, monospace; font-size: 0.66rem; letter-spacing: 0.07em;
+    text-transform: uppercase; padding: 0.15rem 0.45rem; border: 1px solid currentColor;
+    white-space: nowrap; display: inline-block;
+  }
+  .s-ok { color: var(--ok); } .s-bad { color: var(--bad); } .s-owed { color: var(--owed); }
+  .s-idle { color: var(--idle); } .s-void { color: var(--void); }
+  .balance { display: flex; flex-wrap: wrap; gap: 1.5rem; }
+  .balance div { flex: 1 1 9rem; border-left: 3px solid var(--accent); padding-left: 0.9rem; }
+  .num { font-size: 2rem; font-family: ui-monospace, monospace; font-variant-numeric: tabular-nums; display: block; }
+  .lbl { font-size: 0.85rem; color: var(--ink-soft); }
+  ol, ul { max-width: 68ch; padding-left: 1.3rem; }
+  li { margin-bottom: 0.5rem; }
+  code { font-family: ui-monospace, monospace; font-size: 0.88em; }
+</style>
+
+<main>
+  <header>
+    <div class="stamp">C912 &middot; clebsch &middot; 15 August 2026</div>
+    <h1>Stabilization Debt Ledger</h1>
+    <p class="lede">Tracking one obligation across the attempts to prove that <code>X&nbsp;&times;&nbsp;P¹</code>
+    is irrational for every smooth cubic threefold. The obligation keeps changing location; this page records
+    where it currently sits, what has been paid outright, and what has been refuted.</p>
+  </header>
+
+  <section>
+    <h2>The mechanism</h2>
+    <figure>
+      <svg viewBox="0 0 780 330" role="img" aria-label="A zigzag factorization between X times P1 and P4, with exact value transfer down each blowdown arrow and an unpaid comparison inside each valley.">
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/>
+          </marker>
+          <marker id="arb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#9b2226"/>
+          </marker>
+        </defs>
+
+        <g stroke="currentColor" fill="none" stroke-width="1.5">
+          <line x1="205" y1="118" x2="105" y2="222" marker-end="url(#ar)"/>
+          <line x1="245" y1="118" x2="348" y2="222" marker-end="url(#ar)"/>
+          <line x1="530" y1="118" x2="430" y2="222" marker-end="url(#ar)"/>
+          <line x1="570" y1="118" x2="672" y2="222" marker-end="url(#ar)"/>
+        </g>
+
+        <g font-family="ui-monospace, monospace" font-size="11" fill="currentColor" opacity="0.75">
+          <text x="120" y="165" text-anchor="end">blowdown</text>
+          <text x="330" y="165">blowdown</text>
+          <text x="445" y="165" text-anchor="end">blowdown</text>
+          <text x="655" y="165">blowdown</text>
+          <text x="390" y="88" text-anchor="middle">value transfers exactly &mdash; centres of dimension &le; 2 contribute nothing</text>
+        </g>
+
+        <g stroke="currentColor" fill="none" stroke-width="1" opacity="0.35">
+          <line x1="120" y1="72" x2="660" y2="72" stroke-dasharray="3 4"/>
+        </g>
+
+        <g fill="var(--surface)" stroke="currentColor" stroke-width="1.5">
+          <rect x="30" y="222" width="150" height="52"/>
+          <rect x="180" y="92" width="90" height="30"/>
+          <rect x="348" y="222" width="120" height="52"/>
+          <rect x="505" y="92" width="90" height="30"/>
+          <rect x="600" y="222" width="150" height="52"/>
+        </g>
+
+        <g font-family="ui-monospace, monospace" font-size="12" fill="currentColor" text-anchor="middle">
+          <text x="105" y="242">X &times; P¹</text>
+          <text x="225" y="112">peak</text>
+          <text x="408" y="242">valley</text>
+          <text x="550" y="112">peak</text>
+          <text x="675" y="242">P⁴</text>
+        </g>
+        <g font-family="ui-monospace, monospace" font-size="12" text-anchor="middle">
+          <text x="105" y="262" fill="#186a3f">&nu;₆ = 4 &nbsp;proven</text>
+          <text x="675" y="262" fill="#186a3f">&nu;₆ = 0 &nbsp;everywhere</text>
+        </g>
+
+        <g stroke="#9b2226" fill="none" stroke-width="1.6">
+          <line x1="378" y1="296" x2="438" y2="296" marker-start="url(#arb)" marker-end="url(#arb)"/>
+          <line x1="378" y1="274" x2="378" y2="292"/>
+          <line x1="438" y1="274" x2="438" y2="292"/>
+        </g>
+        <text x="408" y="320" text-anchor="middle" font-family="ui-monospace, monospace" font-size="11" fill="#9b2226">two parameters arrive &mdash; unpaid</text>
+      </svg>
+      <figcaption>Every descent carries the count exactly, because the centres of a fourfold factorization have
+      dimension at most two and contribute nothing. So the count can only change inside a valley, where two
+      separate descents deliver two different bulk parameters on the same variety. With a single peak there is no
+      valley and no debt; a general zigzag has one valley per interior variety.</figcaption>
+    </figure>
+  </section>
+
+  <section class="card">
+    <h2>Balance</h2>
+    <div class="balance">
+      <div><span class="num">4</span><span class="lbl">supplied at the left end, two copies of the cubic's rank-two block</span></div>
+      <div><span class="num">1</span><span class="lbl">needed for the contradiction &mdash; only a lower bound</span></div>
+      <div><span class="num">3</span><span class="lbl">slack: eigenvalues that may be lost anywhere without harm</span></div>
+    </div>
+    <p style="margin-top:1.3rem">The count is carried by a rank-two Jordan block whose sheared residue has trace
+    <code>&minus;1</code>. With that trace fixed, the count is nonzero exactly when the residue's determinant is
+    <code>5/36</code> &mdash; the exponents are then <code>&minus;1/6</code> and <code>&minus;5/6</code>. So the
+    property is a codimension-one coincidence, which is why constancy along a displacement is the whole question.</p>
+  </section>
+
+  <section>
+    <h2>Ledger</h2>
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr><th>Node</th><th>Claim</th><th>Status</th><th>Evidence</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Endpoint displacement</td>
+            <td class="claim">For a trivial rank-two bundle the displacement is <code>&varsigma;° = 2&lambda;</code> exactly, a pure degree-zero shift with no tail.</td>
+            <td><span class="chip s-ok">paid</span></td>
+            <td>Two independent proofs; source formula read directly.</td>
+          </tr>
+          <tr>
+            <td>Left end value</td>
+            <td class="claim">The count on <code>X &times; P¹</code> at the canonical parameter is 4.</td>
+            <td><span class="chip s-ok">paid</span></td>
+            <td>String equation is exact at unit-order shifts; cubic block computed.</td>
+          </tr>
+          <tr>
+            <td>Vertical exactness</td>
+            <td class="claim">Each blowup relation splits the count as base plus centres.</td>
+            <td><span class="chip s-idle">imported</span></td>
+            <td>Iritani; Iritani&ndash;Koto. Deep input, not reproved.</td>
+          </tr>
+          <tr>
+            <td>Centres vanish</td>
+            <td class="claim">Every variety of dimension at most two contributes nothing, at the parameters that arise.</td>
+            <td><span class="chip s-owed">partial</span></td>
+            <td>Nef-canonical case verified pointwise in source; remainder needs the identity at arising parameters.</td>
+          </tr>
+          <tr>
+            <td>Right end value</td>
+            <td class="claim"><code>P⁴</code> contributes nothing at every parameter.</td>
+            <td><span class="chip s-owed">partial</span></td>
+            <td>Projective bundle over a point; same caveat as centres.</td>
+          </tr>
+          <tr>
+            <td>Block rigidity</td>
+            <td class="claim">A rank-two Jordan block cannot split, cannot become irregular, and keeps its residue's characteristic polynomial.</td>
+            <td><span class="chip s-ok">proven</span></td>
+            <td>Algebra independently recomputed line by line. Domain is the formal germ.</td>
+          </tr>
+          <tr>
+            <td>Gauge constancy</td>
+            <td class="claim">The formal type is constant along the formal bulk germ.</td>
+            <td><span class="chip s-ok">proven</span></td>
+            <td>Cai's argument, stated generally. Same domain limit; not usable at unit-order displacement.</td>
+          </tr>
+          <tr>
+            <td>Substitution</td>
+            <td class="claim">A displaced parameter may be substituted into the change of variables.</td>
+            <td><span class="chip s-bad">refuted</span></td>
+            <td>Invertibility is in displaced coordinates treated as formal variables; pullback of functions is ill-defined.</td>
+          </tr>
+          <tr>
+            <td>Either direction</td>
+            <td class="claim">The comparison identity may be read backwards to solve for a parameter.</td>
+            <td><span class="chip s-bad">refuted</span></td>
+            <td>Formal inverse function theorem only gives the germ at the image.</td>
+          </tr>
+          <tr>
+            <td>Roof</td>
+            <td class="claim">The factorization can be arranged with a single peak, so no inverse is needed.</td>
+            <td><span class="chip s-bad">unsupported</span></td>
+            <td>That is strong factorization, open in general. Sources give a zigzag only.</td>
+          </tr>
+          <tr>
+            <td>Atom equivalence</td>
+            <td class="claim">The count is well defined across identification of base points in one spectral component.</td>
+            <td><span class="chip s-owed">open</span></td>
+            <td>Needed by the atom formulation, which otherwise makes intermediates cancel.</td>
+          </tr>
+          <tr>
+            <td>Serre decoration</td>
+            <td class="claim">A decoration whose well-definedness is representation-theoretic rather than analytic.</td>
+            <td><span class="chip s-idle">deferred</span></td>
+            <td>Sources defer the non-archimedean definition to forthcoming work.</td>
+          </tr>
+          <tr>
+            <td>Surface falsifier</td>
+            <td class="claim">A surface acquires the count at some bulk parameter, killing the approach.</td>
+            <td><span class="chip s-void">inconclusive</span></td>
+            <td>The caustic found lies outside the series' radius; no coalescence occurs where the expansion is valid.</td>
+          </tr>
+          <tr>
+            <td>Residual debt</td>
+            <td class="claim">The count on <code>X &times; P¹</code> stays nonzero along the accumulated displacement.</td>
+            <td><span class="chip s-owed">open</span></td>
+            <td>One variety, lower bound only, blocks are of the type the rigidity theorem covers.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Where the debt cancels</h2>
+    <ol>
+      <li>Any step whose accumulated displacement lies in degrees zero and two &mdash; the string and divisor equations are exact there. This is what makes the left end free.</li>
+      <li>An adjacent blowup and blowdown of the same centre, where the composite parameter map is the identity and no two parameters are ever compared.</li>
+      <li>Any valley whose Euler operator has only multiplicity-one eigenvalues: the count is zero at every parameter unconditionally, so both arrivals agree trivially.</li>
+      <li>Every centre. A leak would have to land in one, and they cannot receive it.</li>
+    </ol>
+    <p>What survives all four: valleys that simultaneously carry a nonzero count and receive a displacement with a
+    nonzero part in degree four or above.</p>
+  </section>
+
+  <section>
+    <h2>What would end it</h2>
+    <p><strong>In our favour.</strong> Proving the residual debt for one variety, using the rigidity theorem along
+    a pencil whose matrices are polynomial per slot, needs only that the four eigenvalues not vanish together.</p>
+    <p><strong>Against us.</strong> A surface, or <code>P⁴</code> itself, acquiring the count at a reachable bulk
+    parameter would show the invariant is not zero below dimension three at all parameters, and the approach would
+    have to be abandoned rather than repaired. The experiment that would decide this needs a model whose quantum
+    product converges where its eigenvalues collide; the naive expansion does not reach that far.</p>
+  </section>
+</main>
