@@ -9,9 +9,46 @@ to `papers/cubic-stabilization-epilogue/`.  The unresolved positive-filtration
 bulk-displacement step is now a manually named hypothesis rather than an
 asserted proof step, and every statement that depends on it says so.
 
-Authority commit `76b016341`.  Warning-free deterministic build at **32 pages**,
-PDF SHA-256 `eb5983e46d1de135c9bab92cb5f0a052e851cadf9163ae4a9516c8979a2ecc95`;
+Authority commit `76b016341`, with the author's review fixes at `bca9aec73`.
+Warning-free deterministic build at **32 pages**, PDF SHA-256
+`446242498cbb0a5e48c74e9aad31450984feec575b5876fae86206bf7abbcbb0`;
 `make check` (lint, formal-static, manuscript, warnings) exits zero.
+
+## Author review pass, same day
+
+The author reviewed the first build and found no new mathematical damage, but
+seven localized remnants.  All are repaired in `bca9aec73`.
+
+- The common Levelt--Turrittin ramification in the choice-independence
+  paragraph was written `z=u^E`, colliding with the reconstruction coordinate
+  of Proposition 4.7.  It is now `z=\widetilde w^{\,E}`.  The author narrowed
+  the original blanket rule accordingly: the prohibition is on bare `u` as a
+  loop or ramified loop coordinate, not on `u` generally, so the cubic
+  calculation's scalar units `u_\pm(z)` correctly stayed.
+- The abstract's separation sentence and its Yang--Yu--Zhu stabilization
+  clause, and the matching introduction sentence for Corollary 1.4, stated
+  conditional consequences without the hypothesis.  All three now carry it;
+  these are the sentences most likely to be quoted outside the paper.
+- Lemma 4.5's proof, both halves of Proposition 4.7's proof, and Lemma 4.9's
+  receiver paragraph still said the construction "compares the framed
+  operators" or formed a "transported operator".  Each now says
+  comparison-transported matrix and names the coefficient extension (4.0d).
+- The Hahn receiver paragraph claimed that comparison maps, gauges, and framed
+  operators all coexist in one receiver, which would have undercut the reason
+  for the hypothesis.  It now says the comparison maps and gauges used in the
+  algebraic conjugacy calculation coexist there, and that no intrinsic framed
+  operator at the shifted bulk point is defined in it.
+- The introduction's "the quantum theorem applies to every smooth cubic
+  threefold" now distinguishes the unconditional cubic packet computation from
+  the conditional one-stabilization conclusion, and the Section 5 "both
+  conclusions hold" passage makes the same split for the `A_5`-family and the
+  coprime-degree family.
+- Lemma 4.9 called `p^spec` a framed operator; it now names it as the
+  characteristic polynomial of the intrinsic specialized framed operator.
+
+Not a defect: the author read Lemma 4.1A's `D'` as `D^0` in the PDF.  The
+source is `\(D,D'\)`, the same prime convention the manuscript already uses
+for `Y'` and `r'`; this is a glyph-extraction artifact in the reader.
 
 ## The hypothesis
 
