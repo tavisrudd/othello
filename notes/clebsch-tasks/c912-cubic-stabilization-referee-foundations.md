@@ -289,6 +289,8 @@ exact bridge is formalized.
 - [ ] Evaluate at the primitive sixth root explicitly.
 - [ ] Explain why divisor substitution and positive-filtration gauge invariance
   are compatible, not contradictory.
+- [x] Say where the domain hypothesis on the associated graded enters; done in
+  WP9.
 
 ### WP6 — cycle and exposition seams
 
@@ -366,15 +368,46 @@ exact bridge is formalized.
 The external reader named four load-bearing points inside the accepted
 WP1--WP3 tranche. Each needs an independent recheck, not a re-reading.
 
-- [ ] Lemma 4.4: whether an inverse-limit gauge whose Laurent lower bound
-  tends to `-infinity` really conjugates framed formal monodromy after passage
-  to the receiver.
-- [ ] Proposition 4.6: compatibility of the full nonlinear mirror-coordinate
-  map with the particular completions and embeddings used.
-- [ ] The center specialization: that the fixed divisor shift descends through
-  a noninjective center monomial map and cannot alter `nu_6`.
-- [ ] Lemma 4.8: a self-contained statement of divisor tagging saying exactly
-  where the domain hypothesis on `gr A` enters. This is WP5's remaining work.
+Rendered numbers moved when the clarifying remark was added, so the items are
+keyed to the semantic labels.
+
+- [x] `lem:formal-base-shift`, the reader's Lemma 4.4: no defect. The Laurent
+  lower bound at level `N` does decrease without limit, and that is harmless
+  because `def:pro-laurent-gauge-group` is the inverse limit of the finite
+  levels, which for finite-dimensional `V` is `GL(V (x) L_{B,F})` itself; a
+  compatible family therefore has an inverse in one ring, conjugation
+  preserves the characteristic polynomial over any commutative ring, and
+  integral `z`-powers at every level keep the original-disc frame. Added
+  `rem:pro-laurent-concrete`, which describes `L_{B,F}` element by element as
+  a series whose coefficients enter arbitrarily deep filtration as the
+  exponent decreases, states the identification of the gauge group, and is
+  pointed at from the step where the bound appears.
+- [x] `prop:framed-operations`, the reader's Proposition 4.6: the
+  source-facing claims hold against the pinned versions. Iritani's Theorem
+  5.18 gives the decomposition over `C[z]((q^{-1/s}))[[Q, tau]]`, so the
+  isomorphism and its inverse carry only integral powers of `z` and the mirror
+  coordinates are `z`-free, as the manuscript asserts. The manuscript's
+  convention `s_c = c-1` for even `c` and `2(c-1)` for odd `c` matches
+  Iritani's own sentence that `s` equals `r-1` or `2(r-1)` according to the
+  parity of `r`. Strengthened the completion step: the coefficient ring of
+  Iritani--Koto (5.3) is now named as a power series ring, its exponent monoid
+  is noted to be finitely generated because `0 <= k <= r-1`, and the order is
+  stated to be positive on those generators, so supports are well-ordered.
+- [x] The center specialization: the manuscript's map
+  `Q^{i_* d} q^{-rho_C . d/(c-1)}` is exactly Iritani (5.15), the
+  noninjectivity is real because `i_*` can have a kernel, and the valuation
+  identity `v_H = (H|_C) . d` follows from the projection formula with
+  ampleness of `H|_C` supplying positivity and properness. No defect.
+- [x] `lem:divisor-tagging`, the reader's Lemma 4.8: the domain hypothesis on
+  the associated graded is now located precisely in the proof. It makes the
+  valuation multiplicative, so each monomial image has valuation exactly
+  `l(d)`, the exponential tag is a unit of valuation zero, no product jumps,
+  and the degree-`mu` identity holds with the coefficients intact. This closes
+  the referee item that WP5 was carrying.
+- [ ] Residual: re-derive the continuity claim for the inverse of the full
+  coordinate map, which is asserted from the invertible linear term and the
+  degreewise finiteness of substitution. The structure supports it; the
+  recursion was not written out.
 
 ### WP10 — deep literature sweep closing the pre-emption risk
 
