@@ -585,78 +585,64 @@ verdict text lives only in `claim-proof-novelty-ledger.md`.
   exactly.  Its moderate gap, that the tagged polynomial was never placed in
   the same coefficient ring as the transported operator, is repaired by
   reading all three polynomials in the graded Hahn receiver.
-- [ ] **Blocked, not merely unwritten.** The lemma statement and proof are
-  worked out in
-  `../2026-08-15-c912-frame-transport-receiver-obstruction.md`, and they are
-  short over a differential field.  The receiver cannot host them: its elements
-  are finite tensors, so it does not contain a Levelt--Turrittin gauge, and no
-  single Hahn field holds both a pro-Laurent gauge and a formal solution.  The
-  two rates are exact — the pro-Laurent gauge gains one filtration unit per
-  unit of `z`-pole, the splitting gauge loses `w(Delta lambda)` per unit of
-  `z`-power — so a common order exists exactly when
-  `w(Delta lambda)` is below the minimal generator weight.  That holds at the
-  cubic endpoint and is not supplied for arbitrary weak-factorization centers.
-  A red team of the memo (`../2026-08-15-c912-frame-transport-memo-red-team.md`)
-  changed this picture and the memo was rebuilt on it.  Three corrections
-  matter.  The constants computation is false unless the exponential factors
-  carry constant coefficients, because in the draft's coefficient-dominant order
-  `exp(-lambda/z)` is already a unit of the coefficient field; the transport
-  theorem's two hypotheses have no common instance over the present receiver,
-  since a trivial value group loses the gauge and a nontrivial one loses
-  Levelt--Turrittin; and the criterion is **not** scale-invariant.  The draft
-  pins `w(u)=w(s)=1` regardless of `L`, so the minimal generator weight is
-  always one while Novikov generator weights grow linearly in `L`.  Choosing `L`
-  minimally rather than large is therefore a cheap repair.  Index one still
-  fails under any admissible weight.  The external reader then supplied a better
-  route, now first in the memo: treat the intrinsic Novikov fraction field as
-  coefficients and complete only in the exceptional and bulk directions.  The
-  draft's own recursion shows the unbounded `z`-order is bulk-driven, so
-  bulk-adic completion already hosts the pro-Laurent gauge, and with Novikov
-  directions as coefficients the eigenvalue differences have weight zero, the
-  constants hypothesis holds, and the inequality is satisfied rather than
-  evaded.  The check that decides it is whether the source comparison maps
-  survive over such a receiver; plausible for the injective ambient endpoint,
-  not for the noninjective center.  Attack order: ambient iterated receiver,
-  then low-dimensional centers directly, then divisor tagging, then the
-  inequality case by case.  The source check is done against the pinned
-  versions and split: Iritani's Theorem 5.18 is an isomorphism of
-  `C[z]((q^-1/s))[[Q,tau]]`-modules, so inverting the Novikov monomials and
-  completing in the exceptional and bulk directions is a ring map and the
-  comparison, its inverse, and their identities base-change unchanged; but his
-  reconstruction has `t` and `s_j` in `H^*((q^-1))[[Q,tau]]` vanishing only at
-  `Q=tau=0`, so the coordinate shift retains pure-Novikov terms whose removal by
-  the normalized gauge needs Novikov-adic convergence.  The initial terms are
-  harmless, being restrictions to `Q=0`.  The graded question this left is now settled
-  negatively.  Theorem 5.18(5) makes the coordinate maps homogeneous of degree
-  two, and with `deg Q^d = 2c_1·d` and `deg tau_i = 2 - deg phi_i` a pure-Novikov
-  term `Q^d phi` has `deg phi = 2 - 2c_1·d`.  So confinement to `H^0 + H^2` holds
-  exactly when every contributing effective class has `c_1·d >= 0`, which weak
-  factorization does not supply for an intermediate ambient variety.  The
-  iterated receiver therefore needs a semipositivity hypothesis and does not
-  remove the arbitrary fourfolds.  The likely repair is the
-  Hinault--Yu--Zhang--Zhang framing theory (arXiv:2411.02266, cached), whose
+- [ ] **Frame transport: blocked, with a likely repair identified.**
+  `prop:framed-operations` is unproved as written, and `lem:divisor-tagging`
+  carries the same problem.  Full analysis, proofs, and manuscript placement:
+  `../2026-08-15-c912-frame-transport-memo.tex` and its built PDF, rebuilt with
+  `nix develop papers#manuscript --command latexmk -xelatex`; the adversarial
+  check that corrected two earlier versions is
+  `../2026-08-15-c912-frame-transport-memo-red-team.md`.  Read the memo before
+  resuming; the summary below is a map, not a substitute.
+
+  *State.* The transport lemma is true and short over a differential field, but
+  its hypotheses have no common instance over the receiver the draft builds.
+  Two proposed repairs failed on inspection: a mixed-order Hahn receiver needs
+  an inequality that the draft's own weight normalization violates, and an
+  iterated receiver needs a semipositivity hypothesis on the ambient variety
+  that weak factorization does not supply.  The root cause is that the draft
+  realizes the bulk transport by a pro-Laurent gauge with unbounded negative
+  loop order.  That is the manuscript's choice, not something the comparison
+  theorems impose.
+
+  *Likely repair.*  Hinault--Yu--Zhang--Zhang, arXiv:2411.02266, cached; their
   reconstruction algorithm is Iritani--Koto's Section 5.8.  Their Theorem 4.34
-  makes the decomposition gauge `Phi(u)` an element of `GL(H[[u]])` with entries
-  polynomial in the parameters, unique given its value at `u=0`.  Such a gauge
-  is regular in the loop coordinate, adjoins no root of it, and is therefore
-  fixed by the turn, so the transport lemma applies over the ordinary Laurent
-  field with no Hahn receiver, no gauge product, and no inequality.  The whole
-  obstruction traced above is a consequence of realizing the bulk transport by a
-  pro-Laurent gauge, which is the draft's choice rather than the sources'.  The
-  open item is compatibility: do the two connections compared in
-  `prop:framed-operations` lie in their class `F(H, iso, d, (c_i))`, and are its
-  three conditions met?  The center specialization is upstream of this and
-  survives unchanged.  Independently,
-  the obstruction is order-free: for the critical ratio the loop coefficient of
-  the gauge product is an infinite sum of bounded weight, hence undefined in any
-  completion.  `lem:divisor-tagging` carries the same obstruction and needs the
-  same repair.  `prop:framed-operations` stays unproved as written until this
-  lands.  The reviewer-facing memo carrying
-  the lemma, its proofs, the obstruction, the criterion, the three candidate
-  routes, and the exact manuscript placement is
-  `../2026-08-15-c912-frame-transport-memo.tex`, built to
-  `../2026-08-15-c912-frame-transport-memo.pdf` with
-  `nix develop papers#manuscript --command latexmk -xelatex`.
+  gives a decomposition gauge in `GL(H[[u]])`, regular in the loop coordinate
+  and unique given its value at `u=0`; they verify its hypotheses in the
+  projective-bundle application and give the analogous blowup isomorphism in
+  Theorem 5.22, referring to Iritani for existence.  A regular gauge adjoins no
+  root of the loop coordinate and is fixed by the turn, so the memo's
+  field-level lemma applies directly: no Hahn receiver, no gauge product, no
+  inequality.
+
+  *Three checks that close it.*
+  1. Identify the decomposition used in `prop:framed-operations`, after the
+     coefficient extensions, with an isomorphism of exactly the A-model
+     `F`-bundles their uniqueness governs, and write that identification down.
+  2. Match the `u=0` map and the reconstruction coordinate.  Their bundle map is
+     determined by its limiting restriction, but the base map is unique only up
+     to a multiplicative constant in a logarithmic Novikov direction; show that
+     ambiguity harmless or match it to Iritani's normalization.
+  3. Keep the center specialization separate.  Their result is upstream of the
+     noninjective numerical center map, so it does not show that the specialized
+     center module carries the intrinsic framed monodromy used in `nu_6(C;chi)`.
+
+  *Caveat.*  Theorem 4.34 is not general: it assumes equal-dimensional
+  generalized eigenspaces and the universal-algebra form of their Definition
+  4.33.  That is not a weakness here, since they check the setup for projective
+  bundles and supply the blowup construction.
+
+  *Then.*  Direct specialized vanishing for centers of dimension at most two,
+  using the classification already in the draft, which for nef canonical class
+  gives an integral-loop gauge to a regular-singular connection.  Divisor
+  tagging only if that fails.  The mixed-receiver inequality is fallback
+  machinery.  A separate scope reduction stands on its own: a direct
+  quantum-Kuenneth computation for `X x P^1` plus a direct computation for
+  `P^4` would leave the blowup step as the only operation formula the headline
+  theorem needs, with the genus-eight corollary waiting.
+
+  *If the repair lands*, the final proof should use the regular `F`-bundle gauge
+  directly; the receiver analysis stays out of the manuscript as forensic work.
+
 - [ ] **Owed to referee A, the one item left open.** The frame-transport step
   in `prop:framed-operations` — that a turn-invariant gauge conjugates framed
   operators — is asserted in one sentence, and no solution algebra carrying
