@@ -838,17 +838,38 @@ slope \eqref{eq:total-moving-slope}.
 Only finitely many parameter derivatives are therefore needed.  Gamma
 arguments do not cross a pole inside a tail, since every zero-mode crossing
 was removed as a threshold.  Clearing recurrence denominators is therefore
-legitimate there.  If \(c_k\in R_N^r\) is the resulting virtual pushforward,
-Gamma recurrence gives a rational finite-state recurrence in \(k\).  Clearing
+legitimate there.  Let \(c_k\in R_N^r\) be the resulting virtual pushforward,
+where \(r\) is the rank of its target.  The
+Gamma recurrence expresses \(c_{k+1}\) in terms of \(c_k\) through a matrix
+whose entries are rational in \(k\); clearing
 its denominators yields
 \[
  \sum_{i=0}^d p_i(k)c_{k+i}=0,
  \qquad p_i(k)\in R_N[k],
 \]
-on the tail, with scalar \(p_i\): fix a \(\C\)-basis of \(R_N\), view the
-Gamma recurrence as a first-order system of size \(r\dim_{\C}R_N\) over
-\(\C(k)\), and take a linear relation among the first \(r\dim_{\C}R_N+1\)
-shifts.  Hence \(F(x)=\sum_{k\geq k_0}c_kx^k\) is \((D)\)-finite over
+on the tail.  The coefficients may be taken scalar, that is in \(\C[k]\).  To
+see this, work in the \(\C(k)\)-vector space of \(\C\)-valued sequences
+defined for large \(k\), two sequences being identified when they agree
+eventually, so that a rational function acts by its values.  Fix a
+\(\C\)-basis of \(R_N\), put \(\ell=r\dim_{\C}R_N\), and view the
+recurrence as a first-order system \(c_{k+1}=\mathsf A(k)c_k\) of size
+\(\ell\) over \(\C(k)\); write \(E\) for the displacement operator,
+\((Ec)_k=c_{k+1}\).  Let
+\(\mathcal V\) be the \(\C(k)\)-span of the \(\ell\) coordinate sequences of
+\(c\), so that \(\dim_{\C(k)}\mathcal V\leq\ell\).  Each shift \(E^ic\)
+equals \(\mathsf A_i(k)c\) for a matrix \(\mathsf A_i\) over \(\C(k)\), so its
+coordinates again
+lie in \(\mathcal V\), and every shift therefore lies in
+\(\mathcal V^{\oplus\ell}\), the space of length-\(\ell\) vectors with
+coordinates in \(\mathcal V\), of
+dimension at most \(\ell^2\).  Hence \(\ell^2+1\) shifts are
+\(\C(k)\)-linearly dependent, and
+the displayed recurrence exists with \(d\leq\ell^2\).  The count
+\(\ell+1\) would not suffice: for the companion system of
+\(E^2-kE-1\), where \(\ell=2\), the shifts \(c,Ec,E^2c\)
+are independent over \(\C(k)\) as soon as the two coordinates of \(c\) are
+themselves independent over \(\C(k)\).
+Nothing below uses the value of \(d\).  Hence \(F(x)=\sum_{k\geq k_0}c_kx^k\) is \((D)\)-finite over
 \(R_N\).  Finite Chern-root, input, and bulk derivatives commute with this
 identity and preserve \((D)\)-finiteness.  Under
 \eqref{eq:neutral-direction}, Stirling's

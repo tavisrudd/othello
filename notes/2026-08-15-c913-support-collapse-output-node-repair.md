@@ -453,6 +453,34 @@ repair.
 
 `make check` passes at 48 pages, warning-free, tracked PDF current.
 
+## 10. Eighth batch: round six, and the last required repair
+
+Round six (report `2026-08-15-c913-cold-read-round6.md`, weighted toward the periphery) returned one
+required repair and eight optional. The required one was in a clause added in the fourth batch: the
+justification that the recurrence coefficients may be taken scalar claimed a linear relation among
+the first `r·dim_C R_N + 1` shifts. That count is false. I verified the referee's counterexample
+symbolically before editing: for the companion system of `E² − kE − 1`, the three shifts `c, Ec, E²c`
+have rank three over `Q(k)` and admit no scalar relation.
+
+The corrected argument is the one that was always available: the shifts lie in `V^⊕ℓ` where `V` is
+the span of the coordinate sequences, so `ℓ²+1` of them are dependent and the recurrence exists with
+order at most `ℓ²`. Nothing downstream uses the order.
+
+Proofreading that block turned up four further problems in my own new text, all now fixed: the
+displacement operator was written `σ`, which is already the residue variable in this section's
+Gamma-residue equation; the system matrix was written `Λ`, which is the Novikov ring throughout this
+literature and in the paper's own Section 4; the size was written `M`, which is the ample
+linearization in the orbit-cylinder lemma; and the rank `r` of the pushforward target was used
+undefined. The block now uses `E` for the displacement operator with `(Ec)_k = c_{k+1}`, sans-serif
+`A` for the system matrix in the paper's existing sans-serif convention, `ℓ` for the size, and
+defines `r` where it first appears. It also states the germ convention that lets rational functions
+act on sequences, and gives the counterexample its hypothesis.
+
+Remaining findings are recorded as a follow-up list on the C913 card for deliberate decision rather
+than another edit round.
+
+`make check` passes at 48 pages, warning-free, tracked PDF current.
+
 ## Still open from the same cold read
 
 - Optional items not taken: the reason (rather than the conclusion) for constancy of graph

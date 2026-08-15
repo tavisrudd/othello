@@ -222,6 +222,45 @@ estimate written out.  The false chart-independence argument in
 counterexample to the old one, plus the family form.  `make check` passes at
 44 pages.
 
+## Follow-up to discuss before the next revision pass
+
+Six independent referee cold reads ran on 2026-08-15 (reports
+`notes/2026-08-15-c913-cold-read-post-repair.md`, `-round2`, `-round3`, `-round4`, `-round5`,
+`-round6`). Required-repair counts fell ten, two, two, one, one, and the last was in a clause an
+earlier round had itself introduced. Everything required is closed. The following were judged
+optional by the referees who raised them, or lie outside what a repair round should decide, and are
+held for a deliberate decision rather than another edit cycle.
+
+1. **Notation pass across Section 8 and its appendix.** `k` is both the affine-degree index and the
+   orbifold cover order, so "consecutive degrees inside a tail differ by the stabilizer order" reads
+   as saying consecutive `k` differ by `k`; `a` is the clutching exponent, the virtual-line index,
+   and the Poincaré dual of the orbit closure; `x` is a point of `W`, a test-scheme point, and the
+   generating-series variable. Raised in four consecutive rounds and declined each time because
+   renaming across a section and its appendix is exactly the sweeping edit that introduced six new
+   defects in one round. Worth doing once, deliberately, with a build check per rename.
+2. **Five citations never verified at source, across every round.** Behrend–Fantechi,
+   Graber–Pandharipande, Toën–Vezzosi, Schürg–Toën–Vezzosi, and Mumford's GIT are not in the
+   literature cache. These carry the virtual-class bridge in `prop:app-square`, the fixed-part
+   principle, the mapping-stack cotangent formula, and the numerical criterion. The manuscript
+   derives the numerical criterion itself, so GIT is mitigated; the others are not. Natural first
+   task for a cross-check with fetch access.
+3. **Tangent versus cotangent in `lem:app-truncation`'s proof.** The sentence "the pushforward along
+   `π` of the pullback of the cotangent complex of the target, dualized" inverts the operations; the
+   object used, and the one `E_a` is defined from, is the dual of the pushforward of the pulled-back
+   tangent complex. Round six judged this optional because `E_a` is defined correctly where it is
+   introduced.
+4. **The main text still reads as citing Definition 7.13 for a morphism**, which
+   `conv:app-obstruction-morphism` explicitly says that definition does not supply. Half a clause
+   pointing at the convention would settle it.
+5. **`prop:app-descent` does not state `a_± ≠ 0`**, which its proof needs through
+   `prop:app-one-chart` and which its right-hand side presupposes.
+6. **Two locator additions in `rem:verification-status`**: Iritani's global Landau–Ginzburg
+   construction for the Brieskorn-module clause, and the kernel description behind the graph
+   Fourier–Mukai transform's action on skyscrapers of the common open.
+7. **The joint rotation-plus-polarization fixed-point analysis** is registered as an assumption
+   rather than proved. Correctly registered, but it is the largest single thing the conditional
+   theorem rests on inside this section, and a cross-check should look at it directly.
+
 ## Immediate next step
 
 Land the remaining cold-read items: the Schürg--Toën--Vezzosi import replaced
