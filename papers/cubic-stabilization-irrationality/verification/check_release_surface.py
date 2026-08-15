@@ -127,12 +127,17 @@ if abstract_match is None:
     errors.append("manuscript has no abstract")
 else:
     # The abstract may lead with the mechanism, but the irrationality
-    # conclusion must never appear before both standing assumptions.
-    abstract_text = abstract_match.group(1)
-    conclusion = abstract_text.find("is irrational")
-    if conclusion < 0:
+    # conclusion must be governed by both standing assumptions.  This is a
+    # tripwire against drift, not a proof: it checks that both assumptions
+    # precede the earliest conclusion, that the sentence stating the
+    # conclusion is conditional, and that it does not disclaim them.
+    # Collapse whitespace first: the phrases below wrap across source lines.
+    abstract_text = re.sub(r"\s+", " ", abstract_match.group(1))
+    conclusions = [m.start() for m in re.finditer("is irrational", abstract_text)]
+    if not conclusions:
         errors.append("abstract does not state the cubic conclusion")
     else:
+        conclusion = min(conclusions)
         for phrase in ("gauged-admissible", "marked threshold compatibility"):
             position = abstract_text.find(phrase)
             if position < 0 or position > conclusion:
@@ -140,6 +145,21 @@ else:
                     "abstract states the cubic conclusion before its standing "
                     f"assumption: {phrase}"
                 )
+        stop = abstract_text.find(".", conclusion)
+        sentence = abstract_text[
+            abstract_text.rfind(".", 0, conclusion) + 1 :
+            stop + 1 if stop >= 0 else len(abstract_text)
+        ]
+        if not re.search(r"Granting|Assum|Under|Suppose|conditional", sentence):
+            errors.append(
+                "the abstract's irrationality sentence states no condition"
+            )
+        if re.search(
+            r"without|neither|\bnor\b|unconditional|no need", sentence, flags=re.I
+        ):
+            errors.append(
+                "the abstract's irrationality sentence disclaims its assumptions"
+            )
 if "\\begin{theorem}[Conditional cubic stabilization criterion]" not in intro_text:
     errors.append("headline cubic theorem is not visibly conditional")
 if "Theorem~\\ref{thm:tailwise-derived}" not in intro_text:
@@ -178,10 +198,18 @@ if metadata.get("title") != (
     errors.append("Zenodo title does not match the manuscript")
 if metadata.get("license") != "cc-by-4.0":
     errors.append("Zenodo license must be cc-by-4.0")
-if "Assuming a gauged-admissible marked Wlodarczyk completion" not in metadata.get(
-    "description", ""
-):
-    errors.append("Zenodo description does not lead with the conditional hypothesis")
+description = re.sub(r"\s+", " ", metadata.get("description", ""))
+description_conclusion = description.find("is irrational")
+if description_conclusion < 0:
+    errors.append("Zenodo description does not state the cubic conclusion")
+else:
+    for phrase in ("gauged-admissible", "marked threshold compatibility"):
+        position = description.find(phrase)
+        if position < 0 or position > description_conclusion:
+            errors.append(
+                "Zenodo description states the cubic conclusion before its "
+                f"standing assumption: {phrase}"
+            )
 
 for boundary_path in [
     ROOT / "literature-audit.md",
