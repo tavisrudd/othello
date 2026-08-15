@@ -432,22 +432,23 @@ public mirror.
 Gamma-class argument extends through the omitted discrepancy-one range
 `r = s + 1`, `s ≥ 1`, including every codimension-two blow-up.
 
-> *Abstract* Shen and Shoemaker compute the extremal quantum spectrum of a standard flip `X ⇢ X'` with exceptional locus `P(V) ⊂ X`, `rank V = r`, `rank V' = s`, and show that the Gamma-class decomposition of `H*(X)` attached to the Belmans--Fu--Raedschelders semiorthogonal decomposition is a decomposition into asymptotic classes. Their Theorem 4.4, which identifies an explicit hypergeometric series with the extremal `J`-function of the local model, assumes `r-s>1`; their Remark 4.5(3) asserts that for `r-s≤1` the series is not `J`-normalized; and the Barnes asymptotic expansion of their Section 7 is applied under the same inequality. The printed dependency chain of their Theorems 1.2, 1.4 and 9.14 therefore does not reach the discrepancy-one range `r=s+1`, `s≥1`, which contains every codimension-two blow-up.
+> *Abstract* Shen and Shoemaker compute the extremal quantum spectrum of a standard flip `X ⇢ X'` with exceptional locus `P(V) ⊂ X`, `rank V = r`, `rank V' = s`, and show that the Gamma-class decomposition of `H*(X)` attached to the Belmans--Fu--Raedschelders semiorthogonal decomposition is a decomposition into asymptotic classes. Their Theorem 4.4, which identifies an explicit hypergeometric series with the extremal `J`-function of the local model, assumes `r-s>1`; their Remark 4.5(3) asserts that for `r-s≤1` the series is not `J`-normalized; and the Barnes asymptotic expansion of their Section 7 is applied under the same inequality. Their Theorem 1.2 is printed only for `r-s>1`, while their Theorems 1.4 and 9.14 and their Corollary 1.5 are stated in a range that includes blow-ups. The printed proof chain for these later statements does not reach the discrepancy-one case `r=s+1`, `s≥1`, which contains every codimension-two blow-up.
 >
-> We supply the two missing steps. First, the degree-`d` summand of their formula (35) has `z`-order at most `1-s-(r-s)d`; for `r=s+1` and `s≥1` this is at most `-1` for every `d≥1`, so the series is `z1+t̄+O(z⁻¹)`, no mirror-map correction arises, and the cone membership recorded in Remark 4.5(3) identifies the series with the extremal `J`-function. The only remaining formal failure of that normalization is the degenerate endpoint `s=0`, whose point fibres contain no extremal line. Second, at `ν:=r-s=1` the sector printed after their Lemma 7.4 is unavailable, being the `ε=1` case of their own Theorem A.1; the correct `ε=1/2` sector still meets the sector of their Proposition 8.2 in an open sector of opening `2π` that contains both the nonzero-eigenvalue ray and the tame ray. With the reductions of their Sections 9.1--9.4 unchanged, this extends Theorems 1.2, 1.4, 9.14 and Corollary 1.5 to every standard flip with `r=s+1` and `s≥1`.
+> We supply the two missing steps. First, the degree-`d` summand of their formula (35) has `z`-order at most `1-s-(r-s)d`; for `r=s+1` and `s≥1` this is at most `-1` for every `d≥1`, so the series is `z1+t̄+O(z⁻¹)`, with `1` the unit class and `t̄ = t + ln(q)c₁(T)` the extremal parameter; no mirror-map correction arises, and uniqueness of the `J`-slice of Givental's cone identifies the series with the extremal `J`-function. We prove the cone membership that this uses instead of quoting Remark 4.5(3) for it, whose printed attribution passes through a lemma of their Section 9 that presupposes Theorem 4.4: for split bundles it follows from Brown's toric-fibration theorem together with the twisted theory of Coates and Givental, and the general case follows by a flag-bundle pullback and a deformation to the associated graded. None of these inputs restricts `r-s`. The only remaining formal failure of the normalization is the degenerate endpoint `(r,s)=(1,0)`, whose point fibres contain no extremal line. Second, at `ν:=r-s=1` the sector printed after their Lemma 7.4 is unavailable: their own Theorem A.1 is valid on `|arg t|<(ν+ε)π` with `ε=1` only for `ν>1` and `ε=1/2` at `ν=1`, and the correct `ε=1/2` sector still meets the sector of their Proposition 8.2 in an open sector of opening `2π` that contains both the nonzero-eigenvalue ray and the tame ray. With the reductions of their Sections 9.1--9.4 unchanged, this extends Theorems 1.2, 1.4, 9.9 and 9.14 and Corollary 1.5 to every standard flip with `r=s+1` and `s≥1`. No other part of the standard-flip argument is altered: the correction is confined to the `J`-normalization of the extremal hypergeometric series and to the Barnes aperture at `ν=1`.
 
 **Delivers.** A source-local correction: the missing `I`-to-`J`
-normalization, the correct Meijer aperture at `ν=1`, and a precise account of
-the formal rank-one projective-bundle endpoint, whose fibres contain no
-extremal line.
+normalization, a proof of the cone membership the source only asserts, the
+correct Meijer aperture at `ν=1`, and a precise account of the formal
+rank-one projective-bundle endpoint, whose fibres contain no extremal line.
 
 **Who cares.** Algebraic geometers working on quantum cohomology, standard
 flips and blow-ups, Gamma classes, semiorthogonal decompositions, or Meijer
 asymptotics.
 
 **Why it matters.** The omitted range is geometrically basic: it includes
-every codimension-two blow-up. The repair uses the source's own cone
-membership and Appendix A, and changes no higher-discrepancy statement.
+every codimension-two blow-up. The repair proves the cone membership that
+the source only asserts, uses the source's own Appendix A for the sector, and
+changes no higher-discrepancy statement.
 
 ---
 
