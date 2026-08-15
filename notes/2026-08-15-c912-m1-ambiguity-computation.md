@@ -248,6 +248,80 @@ two.
    away by rigidity of representations of a proreductive group but imports the
    integral-structure definition the sources defer.
 
+## Addendum: what the series' own toolkit suggests for the blocker
+
+Read against `papers/summary/README.md`, the collection uses a small number of
+mechanisms repeatedly, and four of them transfer directly to what is blocking
+this task. They are listed in the order I would spend effort on them.
+
+**1. Replace the equality by an exact identity with a pointwise nonnegative
+remainder.** This is the collection's most reusable tool: the secant-defect
+identity of *Arcs Complete Outside a Conic*, and the chord-defect identity of
+Clebsch I, combine low moments into an identity whose remainder is pointwise
+nonnegative, so that vanishing gives rigidity and the remainder itself gives
+stability. Hypothesis 4.7H is stated as an equality, but the one-stabilization
+theorem consumes only a lower bound, and the conservation accounting of the
+framing memo already reads like a defect ledger with slack three. Making that
+accounting an exact identity with a nonnegative defect term would change what
+has to be proved from invariance to one-sidedness, and would deliver a
+stability statement as a by-product. This is the highest-value reframing
+available, because it attacks the hypothesis rather than the route to it.
+
+**2. Find the low-order statistic that is the whole invariant.** Paper IV's
+weighted pair concurrences and Paper III's aligned four-sets both replace a
+complicated object by a low-order statistic that is nevertheless a complete
+invariant. The same compression is already available here and has not been
+exploited: self-adjointness of the Euler operator and anti-self-adjointness of
+the grading operator force the block residue's trace to `-1` unconditionally,
+so the entire obstruction is the single scalar `det R`, and the count is
+nonzero exactly when `det R = 5/36`. The target is therefore a
+pairing-theoretic formula for `det R` in Frobenius and Poincaré data, which are
+parameter-independent structures. If such a formula exists, invariance is
+automatic and no transport statement is needed at all.
+
+**3. State the theorem relative to a marked datum and publish the ambiguity
+ledger.** Papers I, III and V all reach their strongest form this way: Paper III
+is explicitly relative to a marked bridge datum, Paper I recovers an unordered
+orientation torsor, and Paper V computes the residual `C_2`-torsor between the
+two cubics rather than making the passage canonical. The analogue here is to
+state transport relative to a marked datum — a chosen sheet of the spectral
+cover, equivalently a chosen square root of the Novikov variable — and to record
+the residual ambiguity explicitly. Section 2 above supplies the first entry of
+that ledger, and it is trivial. This is the fallback that would make the
+one-stabilization statement unconditional at a marked level if the rest stalls.
+
+**4. Compute the sharpness boundary, do not only prove the positive statement.**
+Paper II pairs its classification with the `q - 2` nonmatching orbits that share
+the same trade, and Clebsch I's companion pairs recognition with the proof that
+`q = 11` is the only field order. The analogue is the caustic `4 q_2 = 27 q_1`
+of Section 4: compute what happens there rather than only proving invariance
+away from it. Either outcome is a result in the series' idiom — a sharpness
+statement if the count moves, and the removal of the last crossing worry if it
+does not.
+
+**A recorded negative, so it is not re-entered.** The obvious way to get
+discreteness of the exponent, and hence local constancy for free, is to argue
+that the monodromy preserves an integral lattice, so its eigenvalues are
+algebraic integers and, with a polarization, roots of unity. The naive form of
+this fails: the eigenvalues of the topological monodromy are not those of the
+formal monodromy once the Stokes matrices are nontrivial. In rank two with
+exponential factors `e^{+-1/z}` and trivial formal monodromy, the Stokes
+matrices `[[1,a],[0,1]]` and `[[1,0],[b,1]]` give topological monodromy of trace
+`2 + ab`, not `2`. Discreteness therefore needs an integral structure on the
+Stokes-graded block itself, which is exactly what the sources defer to
+forthcoming work. That outcome is evidence *for* the framing memo's three-axis
+trade at the level of decorations, even though Section 5 above refutes its
+identification of this route's hole with the Stokes torsor.
+
+**One lesson about the framing rather than the mathematics.** Paper V's
+contribution was to retract a tempting literal identification of two cubics and
+replace it with the exact relation between them. The framing memo's "the holes
+are one hole" is the same kind of tempting identification, and Section 5 shows
+it is false for this route. The Paper V template says what to do instead: state
+the precise relation between the two holes — one is a discriminant-crossing
+problem for a formal invariant, the other a section problem for an integral
+one — and keep them separate in the ledger.
+
 ## Mystery ledger additions
 
 | ID | Status | Discovery | Owner |
