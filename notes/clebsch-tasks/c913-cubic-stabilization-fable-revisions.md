@@ -189,10 +189,21 @@ the bracketed matrix has characteristic polynomial `l^4 - 27q l^2`, so the
 displayed `K = 2(...)` has `+-6 sqrt3 q^{1/2}`, as our Section~9.1 states.
 Nothing downstream moves; raised with the author by email.
 
+Both author sign-offs are closed (2026-08-14, with third-party review).  The
+`F^0_{≤0}` subscript is correct: tangent weights are opposite to
+coordinate-function weights, so the invariant sections over a chart retain
+`aw <= 0`, and it was the module identity in the Čech lemma that carried the
+wrong inequality.  That is fixed, the subscript now states which weights it
+means, and an `A^1` check is included.  Definition 8.1(i) is split: freeness of
+the extreme quotients is close to what Włodarczyk's construction supplies,
+while stable equals semistable is a separate chamber-position assumption which
+does not subsume it, since GIT stability gives only finite stabilizers.  Clause
+(iii) no longer claims to be "closest to automatic"; the separation must reach
+the affine cocharacter degree and pointedness is a positivity hypothesis.
+Clause (ii) stands as written.
+
 ## Immediate next step
 
-Author sign-offs: the expected-versus-open labels for Definition
-8.1(i)--(iii) (Package C) and the `F^0_{≤0}` subscript convention check
-(Package D report, open point 1).  Then the acceptance-gate closeout:
+The acceptance-gate closeout:
 ej+tt pass with Mystery ledger, fresh frozen PDF, and the two independent
 cold reads (derived/gauged-GW and birational/quantum) before re-export.
