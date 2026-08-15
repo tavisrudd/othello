@@ -279,18 +279,27 @@ exact bridge is formalized.
 
 ### WP5 — divisor tagging
 
-- [ ] State the finite support and associated-graded initial-form setup.
-- [ ] Write the integral-direction selection argument.
-- [ ] Write the Vandermonde determinant and nonvanishing conclusion over
-  `Frac(gr A)`.
-- [ ] Name the intrinsic polynomial, tagged polynomial, and specialized
-  polynomial separately.
-- [ ] Display both polynomial equalities and the field embeddings fixing `C`.
-- [ ] Evaluate at the primitive sixth root explicitly.
-- [ ] Explain why divisor substitution and positive-filtration gauge invariance
-  are compatible, not contradictory.
+- [x] State the finite support and associated-graded initial-form setup.
+- [x] Write the integral-direction selection argument.
+- [x] Write the Vandermonde determinant and nonvanishing conclusion, now named
+  over `Frac(gr_v A)` and tied to characteristic zero.
+- [x] Name the intrinsic polynomial, tagged polynomial, and specialized
+  polynomial separately, as `p^int`, `p^tag`, and `p^spec`.
+- [x] Display both polynomial equalities, `p^tag = p^int` from injectivity of
+  the tagging map and `p^tag = sigma(p^spec)` from the base-shift gauge, with
+  the embeddings and the coefficient automorphism stated to fix `C`.
+- [x] Evaluate at the primitive sixth root explicitly: since the root lies in
+  `C` and both comparisons fix `C`, the three vanishing conditions agree, with
+  equal multiplicities. Only the stated implication is used.
+- [x] Explain why divisor substitution and positive-filtration gauge
+  invariance are compatible: the divisor equation splits the bulk divisor
+  direction into a coefficient automorphism, invisible to characteristic
+  polynomials, and a positive-filtration deformation, which is what the
+  normalized gauge removes. They act on different factors.
 - [x] Say where the domain hypothesis on the associated graded enters; done in
   WP9.
+
+WP5 is complete. The paper now runs 29 pages and builds warning-free.
 
 ### WP6 — cycle and exposition seams
 

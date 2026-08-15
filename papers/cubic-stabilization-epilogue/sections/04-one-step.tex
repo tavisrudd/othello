@@ -763,8 +763,10 @@ integral vectors.  Choose \(a=(a_i)\in\Z^\rho\) outside the finitely many
 integral hyperplanes on which two dot products agree, and substitute
 \(t_i=a_i s\).  The resulting exponents are distinct integers.  Their
 derivatives at \(s=0\) form a Vandermonde matrix with nonzero integer
-determinant, which remains invertible in the characteristic-zero fraction
-field.  The characters are therefore linearly independent.
+determinant, which stays invertible over
+\(\operatorname{Frac}(\operatorname{gr}_v A)\) because that field has
+characteristic zero.  The characters are therefore linearly independent, and
+the initial form displayed above is nonzero.
 
 The domain hypothesis on \(\operatorname{gr}_v(A)\) enters exactly here.  It
 makes \(v\) multiplicative on \(A\), so each monomial image has valuation
@@ -775,17 +777,59 @@ no product of monomial images jumps in valuation.  Terms with
 associated graded to have zero divisors, \(v\) would be a filtration rather
 than a valuation, and the displayed degree-\(\mu\) identity could fail.
 
-Let \(k_\chi=\overline{\operatorname{Frac}A}\).  After embedding the two
-fraction fields in a common algebraic closure, injectivity makes the
-\(\chi_{\boldsymbol t}\)-module a scalar extension of the intrinsic module.
-On the other hand, the divisor equation
-identifies \eqref{eq:divisor-tagging-map} with the degree-two formal bulk
-pullback of the \(\chi\)-module
-over \(B=k_\chi[[\boldsymbol t]]\).  Apply the finite-quotient argument in
-Lemma~\ref{lem:formal-base-shift} with
-\(\eta=\sum_i t_iD_i\): its integral-\(z\) bulk gauge removes the positive
-divisor component.  Hence vanishing over the intrinsic field implies
-vanishing after \(\chi\).
+Put \(k_\chi=\overline{\operatorname{Frac}A}\) and name the three framed
+characteristic polynomials in play: \(p^{\rm int}\) for the intrinsic small
+even connection of \(T\), \(p^{\rm tag}\) for the
+\(\chi_{\boldsymbol t}\)-module, and \(p^{\rm spec}\) for the module
+specialized along \(\chi\).
+
+Injectivity of \eqref{eq:divisor-tagging-map} embeds the intrinsic Novikov
+fraction field in \(\operatorname{Frac}(A[[\boldsymbol t]])\), and that
+embedding fixes \(\C\).  Embedding both fraction fields in one algebraic
+closure makes the \(\chi_{\boldsymbol t}\)-module the scalar extension of the
+intrinsic module, so
+\[
+ p^{\rm tag}=p^{\rm int}
+ \tag{4.6a}
+ \label{eq:tagged-equals-intrinsic}
+\]
+over that closure.  The divisor equation identifies
+\eqref{eq:divisor-tagging-map} with the degree-two formal bulk pullback of the
+\(\chi\)-module over \(B=k_\chi[[\boldsymbol t]]\).  Apply
+Lemma~\ref{lem:formal-base-shift} with \(\eta=\sum_i t_iD_i\): its
+integral-\(z\) bulk gauge removes the positive divisor component and
+transports the framed operator, so
+\[
+ p^{\rm tag}=\sigma\bigl(p^{\rm spec}\bigr),
+ \tag{4.6b}
+ \label{eq:tagged-equals-specialized}
+\]
+where \(\sigma\) is the divisor substitution
+\eqref{eq:formal-base-shift-divisor}, a coefficient automorphism fixing
+\(\C\).
+
+Every primitive sixth root of unity \(\zeta\) lies in \(\C\), and both
+comparisons fix \(\C\).  Evaluating \eqref{eq:tagged-equals-intrinsic} and
+\eqref{eq:tagged-equals-specialized} at such a \(\zeta\) gives
+\[
+ p^{\rm int}(\zeta)=0
+ \iff
+ p^{\rm tag}(\zeta)=0
+ \iff
+ p^{\rm spec}(\zeta)=0
+\]
+with equal multiplicities.  The stated implication follows; the equality of
+multiplicities is not needed here.
+
+The substitution and the gauge do not compete.  The divisor equation splits
+the bulk divisor direction into a coefficient automorphism of the Novikov
+ring and a deformation in positive filtration.  The first is \(\sigma\), which
+no characteristic polynomial can see because it is an automorphism fixing
+\(\C\); the second is what the normalized gauge of
+Lemma~\ref{lem:formal-base-shift} removes.  The two act on different factors,
+so invariance under the positive-filtration gauge and a nontrivial
+substitution on Novikov coefficients are compatible rather than
+contradictory.
 \end{proof}
 
 \begin{proposition}[Low-dimensional vanishing]
