@@ -358,13 +358,24 @@ isotropic.  The natural \(S_6\)-action is the same on both multiplicity
 copies, so it fixes every one of these four lines.  The dependency is thus:
 a rational two-primary half is \(S_6\)-fixed, every three-primary half is
 \(S_6\)-fixed, and \(|\ker f|=6^4\) makes the two primary parts exhaust
-\(\ker f\).  The full kernel would therefore be \(S_6\)-stable.  Since this
-action preserves \(6I_6-J_6\), it would descend through the principally
-polarized quotient.  That descent is a statement about polarization classes:
-a polarization is a class in \(\NS\), and the translation and
-Appell--Humbert semicharacter choices that realize it by an actual line bundle
-change neither its first Chern class nor the Neron--Severi coefficient
-lattice.  It would act faithfully: if a
+\(\ker f\).  The full kernel would therefore be \(S_6\)-stable, so each
+\(s\in S_6\) would descend to \(\bar s:J\to J\).  The descended map preserves
+the principal polarization.  Indeed \(s\) preserves \(6I_6-J_6\), hence
+\(s^*\lambda_{\mathcal A}=\lambda_{\mathcal A}\), and
+\[
+ f^*\bigl(\bar s^*\lambda_\Theta\bigr)
+ =s^*f^*\lambda_\Theta
+ =s^*\lambda_{\mathcal A}
+ =\lambda_{\mathcal A}
+ =f^*\lambda_\Theta ,
+\]
+while \(\varphi\mapsto f^\vee\varphi f\) is injective on
+\(\Hom(J,J^\vee)\) because \(f\) is an isogeny; so
+\(\bar s^*\lambda_\Theta=\lambda_\Theta\) and
+\(\bar s\in\operatorname{Aut}(J,\Theta)\).  Everything here is a statement
+about polarization classes, so the translation and Appell--Humbert
+semicharacter choices that realize a class by an actual line bundle do not
+enter.  The action would be faithful: if a
 source automorphism acts
 trivially on the quotient, the image of its difference from the identity is
 both connected and contained in the finite isogeny kernel, hence zero.
