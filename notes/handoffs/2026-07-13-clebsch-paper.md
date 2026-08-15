@@ -780,10 +780,36 @@ reads.  The warning-free 23-page paper authority is committed at `9ee4987c7`,
 the immutable exported source is `2405ca85a`, and the clean local standalone
 forward commit is `f336131`; PDF SHA-256 is
 `cd57a43e08019efd5f9ae7ff79ebb3ff09d71b34abd9eded62349937e8d708bb`.
-Nothing was pushed.  The next prioritized work remains WP4--WP6: internalize
-the cubic endpoint, make divisor tagging fully explicit, and close the verified
+Nothing was pushed.  WP4 is accepted and WP5 has begun.  The next prioritized
+work is WP5--WP6: make divisor tagging fully explicit and close the verified
 cycle/exposition seams.  Current card:
 `../clebsch-tasks/c912-cubic-stabilization-referee-foundations.md`.
+
+An external reader supplied three further defects on 2026-08-14, all verified
+against sources and partly repaired at `0db2a97fc` and `131e926d6`.  First,
+Yang--Yu--Zhu (arXiv:2508.03623, August 2025) give a two-dimensional family of
+smooth cubic threefolds with unirational parametrizations of coprime degrees,
+hence universally `CH_0`-trivial; the epilogue introduction, abstract, README,
+and novelty ledger now lead with the uniform one-step irrationality theorem and
+present the `A_5`-pencil as a separate mechanism rather than a first example.
+Second, Voisin's own Theorem 4.5 with Lemma 4.6 already gives components of
+codimension at most three carrying an algebraic minimal class, which is now
+cited in the same place.  Third, the manuscript still carries at least one
+Iritani--Koto locator from version three: `sections/04-one-step.tex` cites
+"Section 5.8, especially (5.11)" for the coordinate asymptotics, and in the
+pinned version four that section is the added Hinault--Yu--Zhang--Zhang
+reconstruction algorithm while the content used is Theorem 5.1(4).  Repairing
+that locator, auditing every Iritani, Iritani--Koto, and Cai locator against
+its pinned version, and rechecking Lemma 4.4, Proposition 4.6, the noninjective
+center specialization, and the divisor-tagging domain hypothesis on `gr A` are
+open and unallocated.
+
+C914 is active and answers the first question it was allocated for: the
+`A_5`-pencil contains the Fermat cubic threefold, because `W_5` is the
+induced representation of a nontrivial cubic character of a point stabilizer
+and is therefore monomial with cube-root entries.  Report:
+`../2026-08-14-c914-a5-pencil-vs-known-loci.md`.  Open there: whether the
+generic member lies in the Yang--Yu--Zhu locus or in a Voisin component.
 
 The 2026-08-12 crown-compression pass adds two exact structural conclusions.
 First, in dimension five the full one-depth finite-etale ambient
