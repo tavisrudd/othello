@@ -786,7 +786,9 @@ Nothing was pushed.  The next step is the frame-transport lemma owed to
 referee A.  Its reviewer-facing memo and the red team that corrected it are
 `../2026-08-15-c912-frame-transport-memo.tex` and
 `../2026-08-15-c912-frame-transport-memo-red-team.md`; the first repair to try
-is normalizing the separating weight minimally rather than large.  Current
+is the iterated receiver for the ambient summand, treating the intrinsic Novikov
+field as coefficients and completing only in the exceptional and bulk
+directions.  Current
 card: `../clebsch-tasks/c912-cubic-stabilization-referee-foundations.md`.
 
 C914 places the `A_5`-pencil against the known universally `CH_0`-trivial

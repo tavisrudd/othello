@@ -606,8 +606,19 @@ verdict text lives only in `claim-proof-novelty-ledger.md`.
   Levelt--Turrittin; and the criterion is **not** scale-invariant.  The draft
   pins `w(u)=w(s)=1` regardless of `L`, so the minimal generator weight is
   always one while Novikov generator weights grow linearly in `L`.  Choosing `L`
-  minimally rather than large is therefore the cheapest repair, and it is now
-  route 1.  Index one still fails under any admissible weight.  Independently,
+  minimally rather than large is therefore a cheap repair.  Index one still
+  fails under any admissible weight.  The external reader then supplied a better
+  route, now first in the memo: treat the intrinsic Novikov fraction field as
+  coefficients and complete only in the exceptional and bulk directions.  The
+  draft's own recursion shows the unbounded `z`-order is bulk-driven, so
+  bulk-adic completion already hosts the pro-Laurent gauge, and with Novikov
+  directions as coefficients the eigenvalue differences have weight zero, the
+  constants hypothesis holds, and the inequality is satisfied rather than
+  evaded.  The check that decides it is whether the source comparison maps
+  survive over such a receiver; plausible for the injective ambient endpoint,
+  not for the noninjective center.  Attack order: ambient iterated receiver,
+  then low-dimensional centers directly, then divisor tagging, then the
+  inequality case by case.  Independently,
   the obstruction is order-free: for the critical ratio the loop coefficient of
   the gauge product is an infinite sum of bounded weight, hence undefined in any
   completion.  `lem:divisor-tagging` carries the same obstruction and needs the
