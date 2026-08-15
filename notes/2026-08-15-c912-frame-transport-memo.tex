@@ -39,7 +39,11 @@ application; corrects the receiver; and reduces the remaining question to one
 inequality that depends on a normalization the draft is free to choose. The
 inequality fails under the draft's current instruction to take the separating
 weight parameter large, and holds at the cubic endpoint under the smallest
-admissible choice. Section~\ref{sec:corrections} lists what the first version
+admissible choice. Section~\ref{sec:iterated} then argues that the inequality is
+itself an artifact of putting the intrinsic Novikov variables and the new
+completion variables into one ordered group: an iterated receiver satisfies it
+trivially for the ambient summand, which leaves the center summands as the real
+problem. Section~\ref{sec:corrections} lists what the first version
 of this memo got wrong; readers of that version should start there.
 \end{abstract}
 
@@ -460,24 +464,101 @@ version of this memo asserted the opposite, on the false ground that the ratio
 was scale-invariant; rescaling $w$ does move both rates equally, but $L$ is not
 a rescaling, because the bulk generators' weights are pinned at one.
 
-\section{Three routes}
+\section{The iterated receiver}
+\label{sec:iterated}
+
+The criterion above is a consequence of one architectural choice, and a reader
+of the second version of this memo proposed the alternative: the draft puts the
+intrinsic Novikov variables of the endpoint and the new completion variables
+into a single ordered group, which is what gives an eigenvalue difference
+positive weight. Nothing forces that. Treat the intrinsic Novikov fraction field
+as \emph{coefficients}, and complete only in the new exceptional and bulk
+directions afterwards.
+
+Two facts make the proposal concrete, and both are visible in the draft.
+
+\begin{itemize}
+\item \emph{The unbounded negative $z$-order is bulk-driven, not
+  Novikov-driven.} In the recursion (4.1a) the coefficient $G_\alpha$ has no
+  power of $z$ below $-|\alpha|$, where $\alpha$ indexes the \emph{bulk}
+  parameter $\eta$, and the filtration depth is acquired by substituting
+  $\eta\in F^1B$. A completion in the bulk directions alone therefore already
+  hosts the pro-Laurent gauge; the Novikov directions are not needed for it.
+\item \emph{With the Novikov directions as coefficients, the pathology
+  disappears and the criterion is satisfied rather than evaded.} Eigenvalues of
+  $c_1\star$ become constants of weight zero, so $\exp(-\lambda/z)$ is not a
+  unit of the receiver but a genuine exponential symbol, the constant-coefficient
+  hypothesis of Definition~\ref{def:solution-algebra} holds, and
+  Remark~\ref{rem:constants-fails} evaporates. Since $w(\Delta\lambda)=0$, the
+  inequality $e\,w(\Delta\lambda)<\varepsilon$ holds trivially, and the product
+  $GP$ of Section~\ref{sec:receiver} converges coefficientwise.
+\end{itemize}
+
+The shifts that do involve the exceptional Novikov root do not force those
+directions back into the filtration. The rank-one unit twist attached to
+$-(c-1)\lambda_j$, the fixed divisor shift, and the ambient target's
+$\tau^\circ=O(q^{-1})$ all enter Lemma~4.5 as its $a_0$ and $a_2^\circ$ terms,
+which are required only to be \emph{constant in} the positive filtration, not to
+lie in it. With the Novikov directions as coefficients, $\exp(-a_0/z)$ is an
+honest exponential symbol rather than the object the draft must argue about
+separately.
+
+What has to be checked is a source question, and it is the only thing standing
+between this proposal and a repair: the comparison theorems are stated over
+rings that are formal in the Novikov variables as well as the bulk. One must
+show that the comparison map, its inverse, and the coordinate change survive
+over a receiver that completes only in the bulk and, for the center, in the
+reconstruction coordinate, with the Novikov directions inverted into a
+coefficient field. For the ambient endpoint, where the Novikov map is injective
+and the draft now proves the endpoint injection on both sides, this looks
+plausible. For the center it does not: that map is the noninjective one whose
+reconstruction coordinate is expanded in $u$, which is why divisor tagging
+exists.
+
+The scope consequence is the reason to try this first. If the ambient endpoint
+is handled this way, no inequality is needed for arbitrary intermediate
+fourfolds --- the case that looked least tractable. What remains is the center
+summands, and there the draft's own low-dimensional classification is
+restrictive: for nef canonical class it produces an integral-$z$ gauge to a
+regular-singular connection, so there is no exponential separation at all and
+$w(\Delta\lambda)=0$ again; the remaining minimal cases are $\PP^1$, $\PP^2$,
+ruled surfaces, and point blowups. Proving primitive-sixth vanishing directly
+for those, in the coordinates Iritani's specialization actually produces, is a
+smaller problem than a general transport theorem.
+
+\section{Four routes, in the order I would try them}
 
 \begin{enumerate}
+\item \textbf{The iterated receiver of Section~\ref{sec:iterated}}, for the
+  ambient summand. Highest leverage, because it removes the arbitrary
+  intermediate fourfolds from the problem.
+\item \textbf{The low-dimensional centers directly}: primitive-sixth vanishing
+  after Iritani's specialization, using the classification the draft already
+  proves, rather than through a general transport statement.
+\item \textbf{Divisor tagging on its own terms}: whether the divisor equation
+  gives a more explicit transport than the general positive-bulk gauge of
+  Lemma~4.5. This lemma carries the same receiver problem and needs its own
+  treatment either way.
 \item \textbf{Normalize, then verify.} Replace ``choose $L$ so large'' by the
-  smallest weight satisfying separation, adopt the single-copy receiver above,
-  and verify $e\,w(\Delta\lambda)<\varepsilon$ for the comparisons the theorem
-  uses. This keeps the architecture and is the first thing to try.
-\item \textbf{A transport theorem that never forms $GP$.} Prove that the
-  cyclotomic framed monodromy is functorial under a connection isomorphism whose
-  gauge lies in the pro-Laurent completion with integral $z$-powers, arguing
-  graded piece by graded piece rather than by comparing complete solutions. The
-  rank-one case is exactly this argument. What such a route must supply, by the
-  scissors above, is a canonical normal form over the receiver singling out the
-  turn; it cannot be a pure valuation argument.
-\item \textbf{Restrict the proposition} to centers satisfying the criterion, and
-  check that weak factorization stays inside that class. This changes the shape
-  of the result and is the author's decision.
+  smallest weight satisfying separation, adopt the single-copy receiver of
+  Section~\ref{sec:receiver}, and verify $e\,w(\Delta\lambda)<\varepsilon$ case
+  by case.
 \end{enumerate}
+
+Two further possibilities remain open rather than ordered. A transport theorem
+that never forms $GP$ --- arguing graded piece by graded piece, as the rank-one
+case does --- escapes the criterion entirely, but by the scissors it must supply
+a canonical normal form over the receiver singling out the turn, and cannot be a
+pure valuation argument. And restricting Proposition~4.7 to centers satisfying
+the criterion is available, at a cost in generality that is the author's call.
+
+A separate scope reduction, also due to the same reader, would shrink what needs
+repairing: for the headline theorem the projective-bundle identity
+$\nu_6(X\times\PP^1)=2\nu_6(X)$ might be replaced by a direct quantum
+K\"unneth calculation, with $\nu_6(\PP^4)=0$ computed directly, leaving the
+blowup step for four-dimensional birational invariance as the only indispensable
+operation formula. The genus-eight corollary would then wait for the
+projective-bundle machinery.
 
 \section{Placement in the manuscript}
 \label{sec:placement}
@@ -553,14 +634,20 @@ For readers of the first version, these are the substantive changes.
 \section{Questions}
 
 \begin{enumerate}
-\item Is route~1 enough --- does the smallest admissible weight satisfy the
-  criterion at every comparison the main theorem uses, once the Picard rank
-  caveat is taken into account?
+\item Do the comparison map, its inverse, and the coordinate change survive over
+  an iterated receiver that completes only in the bulk and the reconstruction
+  coordinate, with the Novikov directions inverted into a coefficient field?
+  This decides route~1, and it is a question about the sources rather than about
+  the draft.
+\item For the low-dimensional centers, can primitive-sixth vanishing be proved
+  directly in the coordinates Iritani's specialization produces, given that the
+  nef-canonical case already yields an integral-$z$ gauge to a regular-singular
+  connection?
 \item Is there a canonical normal form over the receiver singling out the turn,
-  which is what route~2 needs and what the existence of a Picard--Vessiot ring
-  does not give?
-\item Failing both, what is the right restriction on centers, and does weak
-  factorization stay inside it?
+  which is what a transport argument avoiding $GP$ needs and what the existence
+  of a Picard--Vessiot ring does not give?
+\item Failing all of these, what is the right restriction on centers, and does
+  weak factorization stay inside it?
 \end{enumerate}
 
 \end{document}
