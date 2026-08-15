@@ -161,7 +161,7 @@ complex as separate victories.
   framed-monodromy multiplicity used in the proof is birationally invariant
   through dimension four; it also proves one-step irrationality for every
   smooth prime Fano threefold of genus eight.
-  [Irrationality after One Stabilization of Universally CH₀-Trivial Cubic Threefolds](https://github.com/tavisrudd/cubic-stabilization-epilogue/blob/main/irrationality_after_one_stabilization.pdf).
+  [Irrationality of Cubic Threefolds after One Stabilization](https://github.com/tavisrudd/cubic-stabilization-epilogue/blob/main/irrationality_after_one_stabilization.pdf).
 
 ### Coding theory and quantum information
 
@@ -234,7 +234,7 @@ boundary, and reproducible entry points.
 | *Reconstructing PG(2,13), Its Conic, and Polarity from the Minimum Words of a Binary Conic Code* | Coding / finite geometry | Weighted pair data on minimum words recover a marked projective plane, conic, and polarity. | [PDF](https://github.com/tavisrudd/q13-passant-code/blob/main/passant_code_q13.pdf) · [repo](https://github.com/tavisrudd/q13-passant-code) |
 | *Chordal and Conference Cubics: Reconstruction and a Residual C2-Torsor* | Invariant theory / algebraic combinatorics | Distinct chordal and conference cubics recover one marked six-axis carrier and admit an exact oriented marked return. | [PDF](../chordal-conference-reconstruction/chordal_conference_reconstruction.pdf) |
 | *Gamma Point Rows under Quantum Wall Crossing and a Criterion for Stable Irrationality* | Algebraic geometry / quantum cohomology | A rank-one derived-clutching theorem, an exact simple-wall ambient point coordinate, ordinary-flop point-row transport, global support collapse, and Gamma reduction give an all-stabilizations criterion under explicit gauged-admissibility and marked threshold assumptions. | [PDF](https://github.com/tavisrudd/cubic-stabilization-irrationality/blob/main/cubic_stabilization_irrationality.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-irrationality) |
-| *Irrationality after One Stabilization of Universally CH₀-Trivial Cubic Threefolds* | Algebraic geometry / birational geometry | Every smooth cubic threefold remains irrational after multiplication by `P¹`; an explicit family is nevertheless universally `CH₀`-trivial. | [PDF](https://github.com/tavisrudd/cubic-stabilization-epilogue/blob/main/irrationality_after_one_stabilization.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-epilogue) |
+| *Irrationality of Cubic Threefolds after One Stabilization* | Algebraic geometry / birational geometry | Every smooth cubic threefold remains irrational after multiplication by `P¹`; an explicit family is nevertheless universally `CH₀`-trivial. | [PDF](https://github.com/tavisrudd/cubic-stabilization-epilogue/blob/main/irrationality_after_one_stabilization.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-epilogue) |
 | *Standard Flips of Discrepancy One: Extremal J-Normalization and the Meijer Aperture at ν=1* | Algebraic geometry / quantum cohomology | An exact `z`-order count and the `ν=1` Barnes sector complete the discrepancy-one range in Shen--Shoemaker's extremal flip theorem. | [PDF](https://github.com/tavisrudd/discrepancy-one-flips/blob/main/discrepancy_one_flips.pdf) · [repo](https://github.com/tavisrudd/discrepancy-one-flips) |
 | *Arcs Complete Outside a Conic: A Prescribed-Hole Defect Identity and Matching-Design Rigidity* | Finite geometry / designs | A universal pointwise defect identity gives matching-design rigidity, stability, and conic-relative bounds. | [PDF](https://github.com/tavisrudd/arcs-complete-outside-conic/blob/main/arcs_complete_outside_conic.pdf) · [repo](https://github.com/tavisrudd/arcs-complete-outside-conic) |
 | *Deep Holes of Projective Reed–Solomon Codes Beyond Redundancy Four: Recursive Carriers and Exact Classifications Through Redundancy Ten* | Coding theory | Deep-hole classifications extend through redundancy ten in stated ranges. | [PDF](https://github.com/tavisrudd/beyond4-prs/blob/main/prs-beyond-redundancy-four.pdf) · [repo](https://github.com/tavisrudd/beyond4-prs) |
@@ -523,7 +523,7 @@ into a global birational obstruction.
 
 ---
 
-#### Irrationality after One Stabilization of Universally CH₀-Trivial Cubic Threefolds
+#### Irrationality of Cubic Threefolds after One Stabilization
 
 [PDF](https://github.com/tavisrudd/cubic-stabilization-epilogue/blob/main/irrationality_after_one_stabilization.pdf) · [Repository](https://github.com/tavisrudd/cubic-stabilization-epilogue)
 
@@ -534,11 +534,11 @@ detect the irrationality.  The same quantum invariant is birationally
 invariant through dimension four and gives one-step irrationality for every
 smooth prime Fano threefold of genus eight.
 
-> *Abstract* Does universal CH₀-triviality force rationality after stabilization? We construct a non-isotrivial one-parameter family of smooth cubic threefolds X_b for which X_b is universally CH₀-trivial but X_b × P¹ is irrational. More generally, we prove that X × P¹ is irrational for every smooth cubic threefold X.
+> *Abstract* We prove that X × P¹ is irrational for every smooth cubic threefold X, and likewise for every smooth prime Fano threefold of genus eight. The proof counts primitive-sixth eigenvalues of framed formal monodromy on the numerical small even quantum connection. That count is a birational invariant through dimension four and equals two for a cubic threefold, and divisor tags make Iritani's blowup formula compatible with a possibly noninjective center specialization.
 >
-> The cycle argument proves an all-degree integral saturation theorem for marked finite-etale graph quotients of elliptic powers: divided powers of the marked divisor lattice are ordinary divisor products. The six-axis intermediate Jacobians in the nonstandard A₅-invariant cubic pencil satisfy its hypotheses. Voisin's theorem gives universal CH₀-triviality on every smooth fibre.
+> Combined with any family of universally CH₀-trivial cubic threefolds, the theorem separates universal CH₀-triviality from rationality after one stabilization. Voisin's loci of codimension at most three give that separation on subvarieties of dimension at least seven; Colliot-Thélène's almost-diagonal theorem gives the explicit example {x₁³ + ⋯ + x₅³ = 0} × P¹; and for the coprime-degree cubics of Yang–Yu–Zhu it verifies the first nontrivial stabilization of their stable-rationality question.
 >
-> For irrationality, we count primitive-sixth eigenvalues of framed formal monodromy on the numerical small even quantum connection. Divisor tags make Iritani's blowup formula compatible with a possibly noninjective center specialization. The count is a birational invariant through dimension four and equals two for a cubic. Thus the cycle-theoretic and quantum detectors diverge on the same smooth fourfolds.
+> We also prove an all-degree integral saturation theorem for marked finite-etale graph quotients of elliptic powers: divided powers of the marked divisor lattice are ordinary divisor products. The six-axis intermediate Jacobians of the nonstandard A₅-invariant cubic pencil satisfy its hypotheses, so every smooth member of that pencil is universally CH₀-trivial by an integral lattice saturation rather than by a unirational parametrization or an odd-degree isogeny to a curve Jacobian. The two detectors therefore diverge on the same smooth fourfolds. Stable irrationality stays out of reach: from the second stabilization onward the low-dimensional exclusion used here no longer applies.
 
 **Delivers.** A birational obstruction after one projective-line stabilization
 for every smooth cubic threefold, together with an explicit family showing that universal
