@@ -713,9 +713,27 @@ Choose integral divisors \(D_1,\ldots,D_\rho\) whose pairings separate
  \label{eq:divisor-tagging-map}
 \]
 This map from \(\Lambda_T\) to \(A[[\boldsymbol t]]\) is injective.  To prove
-this, take a nonzero series.  Properness in
-\eqref{eq:strict-novikov-valuation} makes its lowest-valuation
-support finite.  Its initial image is a finite combination of distinct
+this, take \(f=\sum_d c_dQ^d\ne0\) and put
+\[
+ \mu=\min\{v(\chi(Q^d)):c_d\ne0\}
+     =\min\{\ell(d):c_d\ne0\},
+ \qquad
+ S_\mu=\{d:c_d\ne0,\ \ell(d)=\mu\}.
+ \label{eq:divisor-tagging-initial-support}
+\]
+Properness in \eqref{eq:strict-novikov-valuation} makes \(S_\mu\) finite
+and nonempty.  Write \(\operatorname{in}_v\) for the initial class in the
+associated graded.  The degree-\(\mu\) initial form is
+\[
+ \operatorname{in}_\mu\!\left(\chi_{\boldsymbol t}(f)\right)
+ =\sum_{d\in S_\mu}c_d\operatorname{in}_v\!\left(\chi(Q^d)\right)
+ \exp\!\left(\sum_i t_i(D_i\cdot d)\right)
+ \ \in\ \operatorname{gr}_v(A)[[\boldsymbol t]],
+ \label{eq:divisor-tagging-initial-form}
+\]
+and every displayed summand coefficient is nonzero.  Every term outside \(S_\mu\) has valuation
+strictly greater than \(\mu\), so a nonzero initial form proves
+\(\chi_{\boldsymbol t}(f)\ne0\).  This is a finite combination of distinct
 exponential characters.  The finitely many exponent vectors are distinct
 integral vectors.  Choose \(a=(a_i)\in\Z^\rho\) outside the finitely many
 integral hyperplanes on which two dot products agree, and substitute
