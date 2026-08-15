@@ -260,7 +260,7 @@ structure.
 **Who cares.** Coding theorists, finite geometers, and researchers interested
 in inverse problems or in what can be learned from failures.
 
-**Why it matters.** Error-pattern data can expose a code’s underlying geometry
+**Why it matters.** Error-pattern data can expose a code's underlying geometry
 even when the code is not given directly.  The result turns indirect evidence
 into a complete reconstruction theorem, and it is not confined to one field:
 the same chord-defect argument gives a field window for every k-arc, and the
@@ -344,7 +344,7 @@ and polarity.
 **Delivers.** The minimum-weight codewords of a binary code built from the
 passant lines of a conic over the field with thirteen elements reconstruct the
 code and the marked projective plane that produced it.  The paper also
-determines the code’s minimum distance and coordinate symmetries.
+determines the code's minimum distance and coordinate symmetries.
 
 **Who cares.** Coding theorists and finite geometers interested in inverse
 problems, minimum-weight structure, and the information retained by a code.
@@ -623,7 +623,7 @@ sufficiently approximate symmetries near exact Clifford symmetries.
 > We prove a quantitative counterpart without reading the exponentially small Weyl signal of one marginal. Viewing each party as the logical leg of the associated code, a leakage-aware three-region cleaning argument and Weyl–Fourier concentration round every local factor within 8ε of a Clifford. The uniform stabilizer overlap gap then selects an exact symmetry and gives a defect-only decomposition radius Θ(min{p⁻¹, q⁻¹ᐟ², n⁻¹ᐟ²}), n = 2m, with residual generator norm at most π√q ε. At a dimension-only radius the rounded symplectic maps already satisfy the exact minimum-support atlas. The remaining obstruction is affine: localized commutators cancel the stabilizer-character phases and therefore cannot control the product-Pauli correction. On generalized and extended Reed–Solomon AME families the certified scale is Θ(q⁻¹) over prime fields and Θ(q⁻¹ᐟ²) at extension degree at least two.
 >
 **Delivers.** Exact product-unitary changes between a broad class of highly
-entangled quantum states must come from the code’s discrete symmetry group;
+entangled quantum states must come from the code's discrete symmetry group;
 approximate changes are quantitatively close to that group.
 
 **Who cares.** Quantum-information theorists, stabilizer-code researchers, and
