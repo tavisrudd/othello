@@ -484,6 +484,23 @@ verdict text lives only in `claim-proof-novelty-ledger.md`.
   literature before any claim that its universal `CH_0`-triviality has no
   earlier proof; see `../2026-08-14-c914-a5-pencil-vs-known-loci.md`.
 
+### WP11 — cold read of the session changes
+
+- [x] Independent cold read of WP5 through WP9 and the repositioning, run
+  read-only against the pinned sources. Verdict GO on all eight items, with
+  nine locator and exposition defects and none invalidating a statement.
+  Report: `../2026-08-14-c912-cold-read-session-changes.md`.
+- [x] Repair all nine. The substantive one: divisor tagging applies the base
+  shift with the whole tagging direction in the positive filtration, so the
+  lemma's coefficient substitution is the identity there; the tagged and
+  specialized polynomials are equal outright, and the closing paragraph now
+  assigns the substitution to the blowup and projective-bundle comparisons
+  where it is actually used.
+- [ ] The reader left five items unverified, all outside the session's diff:
+  the Grieve trace-formula polarization step, Roulleau's intersection data,
+  the Brauer-atlas endomorphism rings, `prop:cubic-packet` with its Cai input,
+  and the priority question itself, which WP10 owns.
+
 ## Review protocol
 
 ### Mathematical cold reads
