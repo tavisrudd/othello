@@ -104,6 +104,133 @@
   </header>
 
   <section>
+    <h2>Route map</h2>
+    <figure>
+      <svg viewBox="0 0 1120 700" role="img" aria-label="Dependency map: the goal depends on a left end that is paid, a right end that is partial, and a connector between them; four routes lead from the connector, three blocked and one current; a band of closed routes sits at the bottom.">
+        <defs>
+          <marker id="m-up" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/>
+          </marker>
+        </defs>
+
+        <g stroke="currentColor" fill="none" stroke-width="1.3" opacity="0.55" marker-end="url(#m-up)">
+          <path d="M 160 120 L 160 100 L 500 100 L 500 76"/>
+          <path d="M 560 120 L 560 76"/>
+          <path d="M 960 120 L 960 100 L 620 100 L 620 76"/>
+          <path d="M 110 230 L 110 210 L 160 210 L 160 178"/>
+          <path d="M 305 230 L 305 210 L 200 210 L 200 178"/>
+          <path d="M 815 230 L 815 210 L 930 210 L 930 178"/>
+          <path d="M 1010 230 L 1010 210 L 990 210 L 990 178"/>
+          <path d="M 540 178 L 540 330 L 125 330 L 125 358"/>
+          <path d="M 550 178 L 550 330 L 375 330 L 375 358"/>
+          <path d="M 570 178 L 570 330 L 625 330 L 625 358"/>
+          <path d="M 580 178 L 580 330 L 875 330 L 875 358"/>
+          <path d="M 125 416 L 125 466"/>
+          <path d="M 375 416 L 375 466"/>
+          <path d="M 625 416 L 625 466"/>
+          <path d="M 875 416 L 875 466"/>
+          <path d="M 875 578 L 875 526"/>
+        </g>
+
+        <g stroke="currentColor" fill="none" stroke-width="1.1" opacity="0.3" stroke-dasharray="4 4">
+          <path d="M 125 578 L 125 526"/>
+          <path d="M 375 578 L 375 526"/>
+          <path d="M 625 578 L 625 526"/>
+        </g>
+
+        <g fill="var(--surface)" stroke="currentColor" stroke-width="1.5">
+          <rect x="460" y="24" width="200" height="52"/>
+          <rect x="60" y="120" width="200" height="58"/>
+          <rect x="460" y="120" width="200" height="58"/>
+          <rect x="860" y="120" width="200" height="58"/>
+          <rect x="20" y="230" width="180" height="50"/>
+          <rect x="215" y="230" width="180" height="50"/>
+          <rect x="725" y="230" width="180" height="50"/>
+          <rect x="920" y="230" width="180" height="50"/>
+          <rect x="20" y="358" width="210" height="58"/>
+          <rect x="270" y="358" width="210" height="58"/>
+          <rect x="520" y="358" width="210" height="58"/>
+          <rect x="770" y="358" width="210" height="58"/>
+          <rect x="20" y="466" width="210" height="60"/>
+          <rect x="270" y="466" width="210" height="60"/>
+          <rect x="520" y="466" width="210" height="60"/>
+          <rect x="770" y="466" width="210" height="60"/>
+          <rect x="770" y="578" width="210" height="52"/>
+        </g>
+        <g fill="var(--surface)" stroke="currentColor" stroke-width="1.2" stroke-dasharray="5 4" opacity="0.85">
+          <rect x="20" y="578" width="210" height="52"/>
+          <rect x="270" y="578" width="210" height="52"/>
+          <rect x="520" y="578" width="210" height="52"/>
+        </g>
+
+        <g font-family="ui-monospace, monospace" font-size="12.5" fill="currentColor" text-anchor="middle">
+          <text x="560" y="47">X &times; P¹ irrational</text>
+          <text x="160" y="143">left end &nbsp;&nu;₆ = 4</text>
+          <text x="560" y="143">chain the two ends</text>
+          <text x="960" y="143">right end &nbsp;&nu;₆ = 0</text>
+          <text x="110" y="252">displacement = 2&lambda;</text>
+          <text x="305" y="252">string equation</text>
+          <text x="815" y="252">centres, dim &le; 2</text>
+          <text x="1010" y="252">P⁴ over a point</text>
+          <text x="125" y="381">transport, summand</text>
+          <text x="125" y="396">by summand</text>
+          <text x="375" y="381">atom ledger,</text>
+          <text x="375" y="396">intermediates cancel</text>
+          <text x="625" y="381">roof: descend</text>
+          <text x="625" y="396">in one direction</text>
+          <text x="875" y="381">residual debt on</text>
+          <text x="875" y="396">X &times; P¹ alone</text>
+          <text x="125" y="492">rigidity for</text>
+          <text x="125" y="507">arbitrary blocks</text>
+          <text x="375" y="492">base-point</text>
+          <text x="375" y="507">globalization</text>
+          <text x="625" y="492">strong</text>
+          <text x="625" y="507">factorization</text>
+          <text x="875" y="492">four owed</text>
+          <text x="875" y="507">lemmas</text>
+          <text x="875" y="601">block rigidity theorem</text>
+          <text x="125" y="601">substitution legality</text>
+          <text x="375" y="601">read either direction</text>
+          <text x="625" y="601">quantum K&uuml;nneth</text>
+        </g>
+
+        <g font-family="ui-monospace, monospace" font-size="10" text-anchor="middle">
+          <text x="560" y="64" fill="var(--owed)">OPEN</text>
+          <text x="160" y="163" fill="var(--ok)">PAID</text>
+          <text x="560" y="163" fill="var(--bad)">THE DIFFICULTY</text>
+          <text x="960" y="163" fill="var(--owed)">PARTIAL</text>
+          <text x="110" y="269" fill="var(--ok)">PAID, TWO PROOFS</text>
+          <text x="305" y="269" fill="var(--ok)">EXACT</text>
+          <text x="815" y="269" fill="var(--owed)">PARTIAL</text>
+          <text x="1010" y="269" fill="var(--owed)">PARTIAL</text>
+          <text x="125" y="411" fill="var(--bad)">BLOCKED</text>
+          <text x="375" y="411" fill="var(--bad)">BLOCKED</text>
+          <text x="625" y="411" fill="var(--bad)">UNSUPPORTED</text>
+          <text x="875" y="411" fill="var(--ok)">CURRENT ROUTE</text>
+          <text x="125" y="521" fill="var(--owed)">OPEN</text>
+          <text x="375" y="521" fill="var(--owed)">OPEN</text>
+          <text x="625" y="521" fill="var(--bad)">OPEN CONJECTURE</text>
+          <text x="875" y="521" fill="var(--owed)">OWED</text>
+          <text x="875" y="618" fill="var(--ok)">PROVEN &middot; GERM DOMAIN</text>
+          <text x="125" y="618" fill="var(--bad)">REFUTED</text>
+          <text x="375" y="618" fill="var(--bad)">REFUTED</text>
+          <text x="625" y="618" fill="var(--idle)">NEEDS NEW THEORY</text>
+        </g>
+
+        <g font-family="ui-monospace, monospace" font-size="10.5" fill="currentColor" opacity="0.6">
+          <text x="20" y="662">closed &mdash; recorded so the same move is not made a fourth time</text>
+          <text x="770" y="662" fill="var(--ok)">the one tool that discharges rather than relocates</text>
+        </g>
+      </svg>
+      <figcaption>Four routes lead from the same difficulty. Three are blocked, each by a different open
+      statement, and the one that looked cheapest turned out to rest on strong factorization. The fourth is
+      current because its obligation concerns a single variety, needs only a lower bound, and is aimed at the one
+      block type the rigidity theorem already covers. The dashed band records closed moves with the reason, so
+      they are not re-entered.</figcaption>
+    </figure>
+  </section>
+
+  <section>
     <h2>The mechanism</h2>
     <figure>
       <svg viewBox="0 0 780 330" role="img" aria-label="A zigzag factorization between X times P1 and P4, with exact value transfer down each blowdown arrow and an unpaid comparison inside each valley.">
