@@ -27,11 +27,31 @@ allowed total equivariant degree, and the effective infinity-side degree
 semigroup is pointed.
 \item There is a class \(a_p\in H^*_{\Gm}(W)\) whose ordinary Kirwan
 restrictions are the two endpoint point classes and whose restriction to
-every intermediate fixed component is zero.
+every fixed component that is semistable for some polarization interpolating
+the two chamber linearizations is zero.
 \end{enumerate}
 These are assumptions on the gauged completion, not consequences of smooth
 projectivity alone.
 \end{definition}
+
+\begin{remark}[Why \textup{(iv)} is restricted to semistable fixed
+components]
+\label{rem:iv-semistable-restriction}
+Condition \textup{(iv)} cannot be strengthened to vanishing on every
+component of \(W^{\Gm}\).  For a smooth projective \(W\) with \(\Gm\)-action
+the Bia{\l}ynicki--Birula decomposition makes \(H^*_{\Gm}(W;\Q)\) a free
+module over \(H^*(B\Gm;\Q)\), so the restriction
+\(H^*_{\Gm}(W)\to H^*_{\Gm}(W^{\Gm})\) is injective.  A class vanishing on
+every fixed component is therefore zero, and cannot have the two endpoint
+point classes as its Kirwan restrictions.  The vanishing needed in the
+polarization sweep is only on the fixed components that the distinguished
+output evaluation can reach at an intermediate polarization, and those are
+semistable for the corresponding interpolated linearization; that is what
+Lemma~\ref{lem:orbit-cylinder-disjoint}\textup{(b)} supplies.  In particular
+the two limits of the cylinder orbit, whose weights stay strictly nonzero
+along the whole interpolation, are outside the scope of \textup{(iv)} by
+design.
+\end{remark}
 
 The four conditions have different standing.  Condition \textup{(iii)} is the
 one most plausibly checkable from the geometry of a given completion, though
@@ -96,7 +116,8 @@ The marked class has the restrictions
  \operatorname{Kir}_\pm(a_p)=[p_\pm],\qquad
  a_p|_F=0.
 \end{equation}
-for every fixed component \(F\) occurring at an intermediate polarization.
+for every fixed component \(F\) that is semistable for some polarization
+interpolating the two chamber linearizations.
 Here \(p_-\) and \(p_+\) lie in the common birational open set.
 
 \begin{lemma}[Point insertion and the Gamma row]
@@ -115,7 +136,10 @@ such that
 \begin{equation}\label{eq:point-insertion-row}
  \rrow_{Y,p}\,D\tau_{Y,-}=c_n(z)\epsilon_{Y,p}.
 \end{equation}
-Consequently the endpoint functional with distinguished insertion
+The insertion is at the output of \(D\tau_{Y,-}\): the point class is paired
+against the flat section, which is the slot in which
+\eqref{eq:endpoint-gauged-maps} is evaluated.
+Consequently the endpoint functional with distinguished output insertion
 \(\operatorname{Kir}(a_p)=[p]\) is
 \[
  c_n(z)^{-1}\rrow_{Y,p}D\tau_{Y,-}D\kappa.
@@ -174,20 +198,54 @@ zero factor is exactly the localized graph potential in
 full equivariant divisor lattice is important: endpoint divisor spaces alone
 need not separate an affine cocharacter degree.
 
-For each fixed degree and sufficiently large area, every nonendpoint
-polarization-fixed graph has its principal component in a fixed quotient.
-Moreover every marking and node lands in the corresponding fixed locus
-\cite[Proposition~3.15(c), Lemma~3.17 and
-Proposition~3.18]{GonzalezWoodward}.  Its insertion therefore factors through
-one of the restrictions in \eqref{eq:marked-class-restrictions} and vanishes
-before division by the virtual
-normal Euler class.  Only the two endpoints survive the virtual Kalkman
+The distinguished class \(a_p\) is inserted at the distinguished output
+evaluation of the graph factor, not at an ordinary input marking.  This is
+the evaluation through which Woodward's localized graph potential is defined
+by pushforward: it is the evaluation of the principal component at a fixed
+parametrized point of the domain, so when a bubble tree sits over that point
+it is the evaluation at the attaching node, computed from the principal side.
+The ordinary inputs remain at their own markings.
+
+For each fixed degree and sufficiently large area, a nonendpoint
+polarization-fixed graph is a Mundet-semistable \(\C^\times_\zeta\)-fixed
+object for a wall cocharacter \(\zeta\), and its principal component maps to
+\(W^{\zeta,t}/G_\zeta\), where \(W^{\zeta,t}\) is the locus of
+\(L_t\)-semistable points of the \(\zeta\)-fixed locus and \(t\) runs over the
+interpolation between the two chamber linearizations
+\cite[Lemma~3.17 and Proposition~3.18]{GonzalezWoodward}.  In the bubble-tree
+description of that fixed locus, the principal factor is a gauged-map stack
+over \(W^{\zeta,t}\) framed at its attaching points, and the bubble factors are
+glued to it along those framings
+\cite[Remark~3.19]{GonzalezWoodward}; so an attaching node, evaluated from the
+principal side, again lies in \(W^{\zeta,t}\).  The distinguished output
+evaluation therefore lands in a fixed component which is \(L_t\)-semistable,
+so \(a_p\) restricts to zero on it by
+\eqref{eq:marked-class-restrictions} and the wall term vanishes
+before division by the virtual normal Euler class.
+
+The placement is what makes this work, and the weaker statement for an
+arbitrary marking would not.  Proposition~3.15(c) of the same source places an
+arbitrary node or marking only in the full fixed locus \(W^\zeta\), with no
+semistability, so a marking carried off on a bubble tree may land on a fixed
+component that is unstable for every interpolated polarization --- for
+instance on a component containing one of the two limits of the cylinder
+orbit below, where the class of
+Lemma~\ref{lem:orbit-cylinder-disjoint} has no reason to restrict to zero.
+Remark~\ref{rem:iv-semistable-restriction} shows that no class with the
+required Kirwan restrictions vanishes on every fixed component, so the
+vanishing must come from the placement of the distinguished insertion rather
+than from a stronger property of the class.
+
+Only the two endpoints survive the virtual Kalkman
 identity.  Their signs and node factors agree with Woodward's localized
-adiabatic identity.  At either endpoint the distinguished equivariant
+adiabatic identity.  At either endpoint there is no wall, and the
+distinguished output evaluation is exactly the slot through which
+\(\tau_{Y_\pm,-}\) is defined, so the distinguished equivariant
 insertion restricts through \(\operatorname{Kir}_\pm\), hence becomes
 \([p_\pm]\) by \eqref{eq:marked-class-restrictions}; the quantum Kirwan
 derivatives remain inside
-\(A_\pm\).  Lemma~\ref{lem:point-insertion-row} identifies the resulting
+\(A_\pm\).  Lemma~\ref{lem:point-insertion-row} is stated for that slot, so it
+applies verbatim and identifies the resulting
 endpoint covector with
 \(c_{\dim Y_\pm}(z)^{-1}\rrow_{Y_\pm,p_\pm}D\tau_{Y_\pm,-}\);
 differentiating the affine-gauged input gives the remaining factor
@@ -198,7 +256,11 @@ coefficientwise Kalkman identity is \eqref{eq:support-collapse-row} as an
 equality of functionals on
 the common equivariant input module.  Applying arbitrary further input and
 bulk derivatives before coefficient extraction gives the polarized row
-identity, not only its value on the unit.
+identity, not only its value on the unit.  Those derivatives add and
+differentiate ordinary input markings; they leave the distinguished output
+evaluation untouched, so they commute with the insertion of \(a_p\) and both
+the wall vanishing and the endpoint identification above hold unchanged under
+them.
 \end{proof}
 
 For a birational map between smooth projective varieties, the required class
@@ -292,9 +354,15 @@ extreme quotients with the two endpoints in
 Definition~\ref{def:gauged-admissible}\textup{(i)} is an identification of
 birational varieties: it restricts over the common open to the cobordism
 quotients, which are defined at \(p\), and the free semistable fibre over
-\(p_\pm\) is then the cylinder orbit itself.  A fixed component occurring at an intermediate polarization in
-the wall-crossing sense is semistable for some interpolated \(L_u\), so
-clause \textup{(b)} covers every wall term in the polarization sweep.  The
+\(p_\pm\) is then the cylinder orbit itself.  Every fixed component reached by
+the distinguished output evaluation at an intermediate polarization is
+semistable for the corresponding interpolated \(L_u\), so
+clause \textup{(b)} covers every wall term in the polarization sweep.  It does
+not cover the two limits \(w_0,w_\infty\), whose weights stay strictly nonzero
+along the whole interpolation by clause \textup{(c)}, and by
+Remark~\ref{rem:iv-semistable-restriction} no admissible class could make them
+vanish; this is why the distinguished insertion sits at the output evaluation.
+The
 lemma answers the completion question intrinsically: its hypotheses are
 conditions on the resolved completion itself, namely
 Definition~\ref{def:gauged-admissible}\textup{(i)} and bistability of the
@@ -352,7 +420,7 @@ We compare formal monodromy after the Rees substitution
 \label{prop:gamma-ratio-reduction}
 At any finite Artin level, every individual rotation-fixed graph coefficient
 in a neutral direction is a finite nilpotent derivative of a vector-valued
-balanced Gamma-ratio kernel.  Its signed slope is
+balanced Gamma-ratio kernel.  Its total affine slope is
 \(c_1^{\Gm}(TW)\cdot\delta\).  In a nonneutral direction, every homogeneous
 coefficient is Laurent-finite.
 \end{proposition}
@@ -393,19 +461,30 @@ For \(n<0\), the left side denotes the Euler class of \(H^1\); for
 \(n\geq0\), it denotes the inverse Euler class of \(H^0\).  Thus the two
 degree rays are not assigned unrelated Gamma products.
 
-The signed sum of the moving slopes is
-\begin{equation}\label{eq:signed-moving-slope}
- \sum_a\epsilon_a h_a=c_1^{\Gm}(TW)\cdot\delta.
+The total affine slope of the moving index carries no ray sign:
+\begin{equation}\label{eq:total-moving-slope}
+ \sum_a h_a=c_1^{\Gm}(TW)\cdot\delta,
 \end{equation}
-The gauge Lie algebra has slope zero.  Moving modes on attached fixed bubbles
-have fixed rank at the chosen ordinary degree.  Their Euler factors are
+where the integers \(h_a\) themselves may have either sign.  Indeed the
+virtual line with degree \eqref{eq:affine-moving-degree} contributes
+\(\chi(\OO(n_a))=n_a+1\) to the virtual rank on both degree rays: for
+\(n_a<0\) the group \(H^1\) replaces \(H^0\), and its negative contribution to
+the index is already what makes \(\chi=n_a+1\).  Summing the slopes of these
+ranks is the equivariant Riemann--Roch statement
+\eqref{eq:total-moving-slope}, with no further factor of
+\(\operatorname{sign}(n_a)\) inserted.
+The gauge Lie algebra has affine slope zero, and so does the fixed part of the
+index, which Theorem~\ref{thm:tailwise-derived} identifies from degree to
+degree along the tail; the whole affine slope therefore sits in the moving
+index.  Moving modes on attached fixed
+bubbles have fixed rank at the chosen ordinary degree.  Their Euler factors are
 finite products of linear functions of \(k\), possibly inverted.  Each
 inverse factor is an adjacent Gamma ratio
 \begin{equation}\label{eq:adjacent-gamma-ratio}
  (hk+a)^{-1}=\frac{\Gamma(hk+a)}{\Gamma(hk+a+1)},
 \end{equation}
-so it has zero signed slope and does not alter
-\eqref{eq:signed-moving-slope}.  Equivariant inputs
+so it has zero affine slope and does not alter
+\eqref{eq:total-moving-slope}.  Equivariant inputs
 are polynomial in \(k\); Chern roots and psi classes are nilpotent at Artin
 level; Liouville classes supply the Fourier exponential.
 
@@ -654,7 +733,8 @@ the fixed coefficient stack.  Stable attached components, including
 degree-zero bubbles stabilized by markings and nodes, retain the node and
 attaching factors in \eqref{eq:virtual-normal-euler}.  Only the irreducible
 unstable type has no such
-factors.  They are adjacent Gamma ratios and do not change the signed slope.
+factors.  They are adjacent Gamma ratios and do not change the total affine
+slope \eqref{eq:total-moving-slope}.
 
 Only finitely many parameter derivatives are therefore needed.  Gamma
 arguments do not cross a pole inside a tail, since every zero-mode crossing
@@ -671,8 +751,29 @@ on the tail.  Hence \(F(x)=\sum_{k\geq k_0}c_kx^k\) is (D)-finite over
 identity and preserve (D)-finiteness.  Under
 \eqref{eq:neutral-direction}, Stirling's
 formula cancels the
-\(k\log k\) terms in the signed product; the remaining exponential is removed
-by one rescaling and the coefficients grow by a power of \(k\) and
+\(k\log k\) terms.  Sizes here are those of the coefficients in a fixed
+\(\C\)-basis of \(R_N\), so the estimate is componentwise and the nilpotent
+Chern roots contribute only bounded factors.  The cancellation is uniform in
+the two degree rays
+because each virtual line contributes the same expression to \(\log|c_k|\) on
+both of them: for \(n_a\geq0\) the factor \eqref{eq:gamma-index-factor} has
+log-magnitude \(-n_a\log n_a+n_a+O(\log n_a)\), and for \(n_a<0\) the
+\(H^1\) Euler class \(\prod_{m=n_a+1}^{-1}(\alpha_a+m\zeta)\) has
+log-magnitude \(|n_a|\log|n_a|-|n_a|+O(\log|n_a|)
+=-n_a\log|n_a|+n_a+O(\log|n_a|)\).  With
+\eqref{eq:affine-moving-degree} this gives
+\[
+ \log|c_k|=
+ -\Bigl(\sum_ah_a\Bigr)k\log k
+ -k\sum_ah_a\log|h_a|
+ +\Bigl(\sum_ah_a\Bigr)k+O(\log k),
+\]
+where the sums run over the roots with \(h_a\neq0\); a root with \(h_a=0\) has
+constant degree along the tail and contributes a bounded factor.  Thus
+\eqref{eq:total-moving-slope} together with \eqref{eq:neutral-direction}
+kills both the \(k\log k\) term and the linear term.  The remaining
+exponential rate \(-\sum_ah_a\log|h_a|\) is removed by one rescaling, after
+which the coefficients grow by a power of \(k\) and
 \(\log k\).  After that rescaling, radial limits of \(F\) therefore define
 finite-order distributions, with polynomial-logarithmic bounds in the radial
 parameter.  This is the meaning of tempered radial boundary values here.

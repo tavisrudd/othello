@@ -142,9 +142,11 @@ generate \(I_a\), and a ring map killing a generating set of an ideal kills the
 ideal.
 \end{proof}
 
-Nothing in Lemma~\ref{lem:app-graded-extension} required \(A\) to be resolved:
-the target \(R[z]\) is a polynomial extension of \(R\), and the graded pieces
-were used only to split a map of sets.  The next two statements record the
+Nothing in Lemma~\ref{lem:app-graded-extension} required \(A\) to be resolved,
+and the graded pieces were used only to split a map of sets.  What makes the
+levelwise functor \(R\mapsto\operatorname{Hom}(A,R)\) the derived mapping
+space is smoothness of the \emph{source} algebra \(A\), which holds because
+\(W\) is smooth; the target \(R[z]\) plays no role in that point.  The next two statements record the
 consequences that the proof of Theorem~\ref{thm:tailwise-derived} uses.
 
 \begin{lemma}[Sign dependence]
@@ -207,17 +209,46 @@ and closed in \(\operatorname{Spec}A^a\); intersecting with the open
 \(W^{\mathrm{gen}}\) imposes generic semistability.  This is the chartwise
 description of \(W_F^a\).
 
-Chart independence.  Because \(W\) is projective, the limit
-\(\lim_{t\to0}t^ax\) exists in \(W\) for every \(x\), and because \(W\) is
-separated an extension of a section across the origin is unique when it
-exists.  Two invariant affine charts therefore impose the same condition on
-their overlap, and the chartwise closed subschemes glue to the locally closed
-subscheme \(W_F^a\subset W\).  Uniqueness also makes the identification
-\(\operatorname{ev}_1\) compatible on overlaps, so it globalizes.
+Chart independence.  The chartwise condition of
+Lemma~\ref{lem:app-graded-extension}\textup{(b)} is that the limit exists
+\emph{inside the given chart}, and that condition is genuinely chart
+dependent.  Take \(W=\mathbf P^1\) with \(t\cdot y=ty\) in the target
+coordinate \(y\), and \(a=+1\).  On \(V_0=\operatorname{Spec}\C[y]\) the
+coordinate has weight \(+1\), no weight space is killed, and the chart imposes
+no condition at all; on \(V_\infty=\operatorname{Spec}\C[y^{-1}]\) the
+coordinate \(y^{-1}\) has weight \(-1\), so \(I_a=(y^{-1})\) and the chart
+imposes \(y^{-1}=0\).  On the overlap the two conditions disagree at every
+point.  Separatedness makes an
+extension unique once it exists in a given chart; it does not make it exist.
+The gluing instead follows from invariance of the charts.  Let
+\(x\in W_F^a\) and let \(y=\lim_{t\to0}t^ax\in F\).  By Sumihiro's theorem
+choose a \(\Gm\)-invariant affine open \(U\ni y\).  Since \(U\) is open and
+the completed orbit map \(\mathbf A^1\to W\), \(t\mapsto t^ax\), is
+continuous, \(t^ax\in U\) for all small \(t\neq0\); since \(U\) is invariant,
+\(x\in U\), and then the whole completed orbit lies in \(U\).  Hence
+\(W_F^a\) is covered by the invariant affine charts \emph{meeting \(F\)}, and
+on each of those the previous paragraph is the correct chartwise description;
+charts disjoint from \(F\) compute a different stratum and are excluded.
+Uniqueness of the extension then makes the identification
+\(\operatorname{ev}_1\) compatible on overlaps, so it globalizes.  The family
+form needs one more word, since a section over \(P^0_R\) must factor through a
+single chart.  It does: the invariant affine charts meeting \(F\) are opens of
+\(W\) covering \(W_F^a\) by the previous paragraph, so for an \(R\)-point
+\(x\) of \(W_F^a\) their preimages \(x^{-1}(U)\) are an open cover of
+\(\operatorname{Spec}R\); Zariski-locally on \(\operatorname{Spec}R\) the point
+\(x\) factors through one such \(U\), and then so does the whole section
+\(z\mapsto z^ax\), by invariance of \(U\) again.
 
 Descent to the quotient stack.  A rotation-fixed section over \(P^0_R\) with
 values in \([W/\Gm]\) is, locally on \(\operatorname{Spec}R\), a trivialization
-of the \(\Gm\)-bundle together with a section as above; two trivializations
+of the \(\Gm\)-bundle together with a section as above.  Here we use that a
+rotation-equivariant \(\Gm\)-bundle on \(P^0_R\) is locally trivial on
+\(\operatorname{Spec}R\): equivariantly, such a bundle is a graded invertible
+\(R[z]\)-module, and the graded Picard group of \(R[z]\) is
+\(\operatorname{Pic}(R)\times\mathbf Z\), the second factor recording the
+clutching exponent.  The nonequivariant analogue is false for nonreduced
+\(R\), which is why the equivariant statement is the one used.  Two
+trivializations
 differ by a rotation-invariant gauge transformation, and the rotation-invariant
 gauge transformations over \(P^0\) are the constants \(\Gm(R)\).  Quotienting
 by this action turns the previous paragraph into the asserted equivalence with

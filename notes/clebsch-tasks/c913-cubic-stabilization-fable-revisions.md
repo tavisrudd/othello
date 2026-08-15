@@ -202,8 +202,32 @@ does not subsume it, since GIT stability gives only finite stabilizers.  Clause
 the affine cocharacter degree and pointedness is a positivity hypothesis.
 Clause (ii) stands as written.
 
+The derived/gauged-GW cold read
+(`notes/2026-08-14-c913-cold-read-derived-gauged.md`) found one architecture-level
+defect and two local ones; all three are repaired in the authority tree
+(report: `notes/2026-08-15-c913-support-collapse-output-node-repair.md`).
+`prop:support-collapse` conflated two González--Woodward statements: the
+principal component lands in the semistable fixed locus, but an arbitrary
+marking only in the full fixed locus.  Remark 3.19, now read in full from the
+cached source, sharpens the distinction rather than closing it.  The repair
+narrows `def:gauged-admissible`(iv) to fixed components semistable for an
+interpolated polarization and inserts the distinguished class at the output
+evaluation of the graph factor, which is computed from the principal
+component; `rem:iv-semistable-restriction` proves by equivariant formality
+that no choice of class could repair it instead.  The endpoint functional is
+unchanged.  `eq:signed-moving-slope` carried an undefined symbol and is
+replaced by the unsigned `eq:total-moving-slope`, with the two-ray Stirling
+estimate written out.  The false chart-independence argument in
+`prop:app-one-chart` is replaced by the invariance argument with a
+counterexample to the old one, plus the family form.  `make check` passes at
+44 pages.
+
 ## Immediate next step
 
-The acceptance-gate closeout:
-ej+tt pass with Mystery ledger, fresh frozen PDF, and the two independent
-cold reads (derived/gauged-GW and birational/quantum) before re-export.
+Land the remaining cold-read items: the Schürg--Toën--Vezzosi import replaced
+by an internal comparison, the QK III/Graber--Pandharipande/Toën--Vezzosi
+locators, and D-finite wording plus the boundary-value paragraph in
+`prop:clutching-tail-holonomicity`.  Then the acceptance-gate closeout:
+ej+tt pass with Mystery ledger, fresh frozen PDF, mirror and portfolio sync in
+one forward commit, and the second independent cold read
+(birational/quantum) on the revised text.
