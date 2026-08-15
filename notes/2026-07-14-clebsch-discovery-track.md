@@ -1697,3 +1697,38 @@ map is not yet written down.
 
 **Status:** open, unpromoted. Incidental find of the pass-7 literature
 extraction; not needed by the pass-7 no-go.
+
+## 2026-08-14 (C913): additivity cannot rescue the eigenvalue count at m >= 2
+
+**Observation.** The m=1 lane proposes that if blowup-centre contributions to
+the framed multiplicity `nu_6` add rather than cancel, then stable
+irrationality follows for m >= 2 and Yang--Yu--Zhu Question 1.4 is answered.
+Additivity gives the opposite conclusion. Take a common resolution
+`X x P^m <- W -> P^{m+3}`. With every centre contribution nonnegative,
+`nu_6(W) = nu_6(X x P^m) + sum(up-centres)` and
+`nu_6(W) = 0 + sum(down-centres)`, so the down-centres must carry at least
+`2(m+1)` primitive-sixth eigenvalues. That is satisfiable, not contradictory.
+
+**Why it matters.** For m >= 1 one has `P^4 subset P^{m+3}`, so a cubic
+threefold `X` is itself an admissible three-dimensional centre inside
+projective space. On the epilogue's own blowup formula a centre with
+`nu_6 != 0` contributes, so `nu_6(Bl_X P^5) != nu_6(P^5) = 0` with both
+varieties rational: the count is demonstrably not a birational invariant in
+dimension >= 5. Nonnegative additivity makes this worse rather than better,
+because it removes the only way the centre terms could have cancelled.
+
+**Consequence.** The missing ingredient at m >= 2 is not additivity but a
+marking that annihilates centre-carried packets while keeping the packet
+carried by a point of the common open. That is exactly the Gamma point row of
+the C913 manuscript: classes supported on an exceptional locus are
+Euler-orthogonal to the skyscraper of a common-open point, which is why
+detection replaced counting.
+
+**Evidence:** REASONED from the epilogue's own centre-vanishing statement
+(`papers/cubic-stabilization-epilogue/sections/04-one-step.tex`, centres of
+dimension at most two have `nu_6 = 0`) plus the codimension bound; the exact
+multiplicity contributed by a cubic-threefold centre is not computed here.
+
+**Status:** open, unpromoted. Incidental; raised by the m=1 lane, corrected
+here. No new identifier: any successor work belongs to the existing
+higher-stabilization quantum task.
