@@ -6,8 +6,8 @@ and does not make an uncaveated “first” claim.
 
 | Claim family | Proof status | Literature posture | Manuscript action |
 |---|---|---|---|
-| Irrationality of `X x P^1` for every smooth complex cubic threefold | complete manuscript proof from the primitive-sixth-root multiplicity, projective-bundle formula, low-dimensional atom exclusion, and weak factorization | Cai proves symplectic irrationality of `X`; KKPYY prove the atom formalism and already recover irrationality of `X`, but no inspected source states the one-stabilization theorem. A 2020 MathOverflow question records the problem as then open. Current absence claim remains “no predecessor located” pending the audit breadth recorded below | headline Theorem 1.2; state as a consequence of Cai plus KKPYY with the paper-local atomicity lemma, not as a freestanding invention of the underlying quantum framework |
-| Non-isotrivial family with `X` universally `CH_0`-trivial while `X x P^1` is irrational | complete manuscript proof conditional only on the printed six-axis geometric realization and the cited Voisin criterion | Voisin gives the exact minimal-class criterion; Hartlieb identifies the one-dimensional special period locus; Roulleau supplies the Fano-surface configuration. No inspected source states the conjunction. Current absence claim remains “no predecessor located” | headline Theorem 1.1; emphasize the separation of two detectors, not priority language |
+| Irrationality of `X x P^1` for every smooth complex cubic threefold | complete manuscript proof from the primitive-sixth-root multiplicity, projective-bundle formula, low-dimensional atom exclusion, and weak factorization | Cai proves symplectic irrationality of `X`; KKPYY prove the atom formalism and already recover irrationality of `X`, but no inspected source states the one-stabilization theorem. A 2020 MathOverflow question records the problem as then open. Current absence claim remains “no predecessor located” pending the audit breadth recorded below | lead theorem `thm:every-cubic`; state as a consequence of Cai plus KKPYY with the paper-local atomicity lemma, not as a freestanding invention of the underlying quantum framework |
+| Non-isotrivial family with `X` universally `CH_0`-trivial while `X x P^1` is irrational | complete manuscript proof conditional only on the printed six-axis geometric realization and the cited Voisin criterion | Voisin gives the exact minimal-class criterion; Hartlieb identifies the one-dimensional special period locus; Roulleau supplies the Fano-surface configuration. **Pre-empted as an existence statement:** Yang--Yu--Zhu (arXiv:2508.03623, August 2025) give a two-dimensional family of smooth cubic threefolds with unirational parametrizations of degrees two and three, state that such parametrizations force universal `CH_0`-triviality, and extend the parametrizations to `X x P^m`. With `thm:every-cubic` their family separates the two properties on a larger locus than the `A_5`-pencil, which is one-dimensional in coarse moduli. What is not pre-empted is the mechanism: algebraicity of the primitive minimal class, proved from the six-axis lattice rather than from a decomposition of the diagonal | second theorem `thm:separation-family`; cite Yang--Yu--Zhu in the introduction, present the family as a separate mechanism, and make no existence-priority claim |
 | All-degree marked finite-etale graph saturation | complete human proof, now Theorem `thm:all-degree-graph-saturation`. The theorem retains the marked elliptic ruling, orthogonal depth blocks, `B^{-1}`-self-adjoint graph slopes, exact cross ideals, signed rank-one straightening, square-zero realization, and faithful-flat descent | no exact predecessor was located in the bounded literature search. Classical tropical midpoint inequalities, unweighted integral Pluecker straightening, rational divisor generation, and divided-power/Fourier technology are credited only at their actual ranges. MathSciNet and a full citation-graph closure remain uncovered | printed without “first” or unqualified “to our knowledge” language |
 | Full integral Hodge/product saturation for the non-CM six-axis packet | not a claim of this paper | prior six-axis and period-locus sources supply the geometry, not the repeated-root weighted Pluecker calculation or `Hdg^{2k}=P^k` in all degrees | omitted from the manuscript and its theorem inventory |
 | Exact distinct-root rank-five middle defect | not a claim of this paper | the neighboring calculation is a weighted graph-lattice statement, not a novelty claim for unweighted Pluecker theory | omitted from the manuscript and its theorem inventory |
@@ -24,6 +24,17 @@ minimal classes. It recovered Cai, KKPYY, Voisin, the classical
 Clemens--Griffiths line, nearby intermediate-Jacobian and automorphism work,
 and the 2020 MathOverflow question. It located no exact predecessor for either
 headline conjunction.
+
+A follow-up search on 2026-08-14, prompted by an external reader, queried
+"cubic threefolds unirational parametrizations coprime degrees" and
+"nonrational varieties unirational parametrizations coprime degrees" on the
+open web and recovered Yang--Yu--Zhu, arXiv:2508.03623 (v1 5 August 2025,
+v2 7 August 2025). The full text was fetched into the shared literature cache
+and read at Theorems 1.1, 1.2, 3.1, 3.3, Corollary 3.5, Remarks 3.4--3.8, and
+the closing paragraph of the introduction. The 2026-08-11 search missed it
+because every query on that date was phrased in `CH_0` or stable-rationality
+vocabulary, and the Yang--Yu--Zhu title and abstract use neither. This is a
+recorded gap in the earlier search, not a metadata failure of the source.
 
 The cycle and quantum literature searches were bounded to the exact queries,
 screened sets, and source depths used for the statements above.  A separate
@@ -57,6 +68,12 @@ say only what is proved and should avoid “first,” “new,” or “to our kn
   projective line irrational?” **Read depth: full page.** Accessed on
   2026-08-11; it records only the state of knowledge asserted in December
   2020 and is not a primary theorem source.
+- Song Yang, Xun Yu, and Zigang Zhu, *Nonrational varieties with unirational
+  parametrizations of coprime degrees*, arXiv:2508.03623v2. **Read depth:
+  partial.** Read Theorems 1.1, 1.2, 3.1, 3.3; Corollary 3.5; Remarks
+  3.4--3.8; and the universal `CH_0`-triviality paragraph preceding
+  Question 1.3. The Noether--Cremona quotient computations in Sections 2 and
+  3 were not verified line by line.
 - Alexander Kuznetsov, *Derived categories of cubic and `V_14`
   threefolds*, arXiv:math/0303037v1. **Read depth: full text.** Section 2,
   especially Theorems 2.2 and 2.17--2.18 and Remark 2.19, is load-bearing.

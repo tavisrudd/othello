@@ -9,11 +9,17 @@
 **Title:** *Irrationality after one stabilization of universally
 CH₀-trivial cubic threefolds.*
 
-The paper studies a non-isotrivial family of smooth cubic threefolds whose
-members are universally `CH_0`-trivial, while their products with
-`P^1` are irrational.  It also proves that `X x P^1` is irrational for every
-smooth cubic threefold, that the quantum obstruction is birationally invariant
-through dimension four, and that every smooth `V_14 x P^1` is irrational.
+The paper proves that `X x P^1` is irrational for every smooth cubic threefold
+`X`, that the quantum obstruction behind that theorem is birationally
+invariant through dimension four, and that every smooth `V_14 x P^1` is
+irrational.  It then gives a non-isotrivial pencil of smooth cubic threefolds
+that are universally `CH_0`-trivial, with irrational products with `P^1`,
+where universal `CH_0`-triviality comes from an algebraic primitive minimal
+class on the intermediate Jacobian.  Yang--Yu--Zhu (arXiv:2508.03623) already
+supply a two-dimensional family of universally `CH_0`-trivial cubic
+threefolds, by way of unirational parametrizations of coprime degrees; the
+pencil here is distinguished by its mechanism, not by being the first such
+family.
 
 This is an unnumbered geometric epilogue to *Clebsch: Rigidity from Sparse
 Shadows*.  It is a logically independent entry point: reading the numbered

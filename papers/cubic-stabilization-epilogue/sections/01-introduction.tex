@@ -10,15 +10,36 @@ stable-rationality obstruction.  Its validity, however, need not provide a
 rational parametrization.  We ask how far that gap can persist after one
 explicit stabilization.
 
-Our examples are fourfolds of the form \(Y=X\times\PP^1\), where \(X\) is a
-smooth cubic threefold in the nonstandard \(A_5\)-invariant pencil.  Two
-independent mechanisms act on the same \(Y\).  The intermediate Jacobian of
-\(X\) has an algebraic primitive minimal class; this gives universal
-\(CH_0\)-triviality.  The small even quantum connection of every smooth cubic
-has primitive-sixth framed formal monodromy; Iritani's quantum blowup formula
-shows that its multiplicity survives one stabilization.
+The irrationality half of that question has a uniform answer.  The small even
+quantum connection of every smooth cubic threefold has primitive-sixth framed
+formal monodromy, and Iritani's quantum blowup formula shows that its
+multiplicity survives one stabilization.
 
-\begin{theorem}[Separation after one stabilization]
+\begin{theorem}[One-step irrationality]
+\label{thm:every-cubic}
+For every smooth complex cubic threefold \(X\), the fourfold
+\(X\times\PP^1\) is irrational.
+\end{theorem}
+
+The same invariant also gives one-step irrationality for every smooth prime
+Fano threefold of genus eight; see Corollary~\ref{cor:v14-one-step}.
+
+Yang--Yu--Zhu construct a two-dimensional family of smooth cubic threefolds
+admitting unirational parametrizations of degrees two and three
+\cite[Theorems 1.1 and 3.3]{YYZ}.  Unirational parametrizations of coprime
+degrees give a decomposition of the diagonal, so every member of that family
+is universally \(CH_0\)-trivial, and the same parametrizations persist on
+\(X\times\PP^m\) \cite[Corollary~3.5]{YYZ}.  Together with
+Theorem~\ref{thm:every-cubic}, their family already answers the question
+above on a two-dimensional locus in moduli.
+
+Our second result exhibits the separation on a family whose universal
+\(CH_0\)-triviality is proved from the intermediate Jacobian instead.  Here
+\(X\) is a smooth cubic threefold in the nonstandard \(A_5\)-invariant
+pencil, and the primitive minimal class of its intermediate Jacobian is
+algebraic.
+
+\begin{theorem}[Separation on the \(A_5\)-pencil]
 \label{thm:separation-family}
 Let \(W_5\) be the five-dimensional irreducible \(A_5\)-module, and let
 \(B^\circ\) be the smooth locus inside
@@ -35,17 +56,6 @@ For the resulting family \(\mathcal X\to B^\circ\) and every
 The family is non-isotrivial in coarse moduli.
 \end{theorem}
 
-The irrationality statement does not depend on the symmetry of the pencil.
-
-\begin{theorem}[One-step irrationality]
-\label{thm:every-cubic}
-For every smooth complex cubic threefold \(X\), the fourfold
-\(X\times\PP^1\) is irrational.
-\end{theorem}
-
-The same invariant also gives one-step irrationality for every smooth prime
-Fano threefold of genus eight; see Corollary~\ref{cor:v14-one-step}.
-
 The invariant cubic space in Theorem~\ref{thm:separation-family} is
 two-dimensional.  Indeed, the character of \(W_5\) is
 \((5,1,-1,0,0)\) on the classes \(1,2A,3A,5A,5B\).  The symmetric-cube
@@ -55,7 +65,9 @@ character formula gives
 \]
 Thus its projectivization is a pencil with connected smooth locus
 \(B^\circ\).  Hartlieb denotes it by \(M_{H_1}\); it is not the component
-associated with \(\mathbf1\oplus W_4\) \cite[Lemma~5.5]{Hartlieb}.
+associated with \(\mathbf1\oplus W_4\) \cite[Lemma~5.5]{Hartlieb}.  Since the
+family is non-isotrivial, its image in coarse moduli is a curve, one
+dimension below the locus of \cite{YYZ}.
 
 We do not claim that \(X\) is stably irrational.  From the second
 stabilization onward, weak-factorization centers can themselves have cubic
@@ -104,7 +116,9 @@ threefold admits no decomposition of the diagonal
 \cite[Theorem~1.3 and Corollary~1.4]{EdGFS}.  What Voisin's criterion leaves is
 the countable union of moduli subvarieties on which the class is algebraic;
 Theorem~\ref{thm:six-axis-divided-powers} places an explicit exceptional family
-inside that union.  The six elliptic
+inside that union.  The coprime-degree family of \cite{YYZ} lies in the same
+union, by a decomposition of the diagonal rather than by a period
+computation.  The six elliptic
 quotients supplied by Roulleau and the special period locus isolated by
 Hartlieb make the class explicit: it belongs to the
 ordinary integral divisor-product lattice for every smooth member of the
