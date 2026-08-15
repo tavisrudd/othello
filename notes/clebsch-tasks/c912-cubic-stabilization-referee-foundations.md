@@ -42,6 +42,23 @@ review protocol below.  Start a fresh session with
 `../2026-08-15-c912-framing-compatibility-checks.md`, then the memo
 `../2026-08-15-c912-frame-transport-memo.pdf` for the underlying analysis.
 
+**Manuscript status change, 2026-08-15.**  On author instruction the paper no
+longer asserts the bulk-displacement step.  It is now the manually named
+Hypothesis 4.7H, inserted before `prop:framed-operations` without renumbering
+anything, and the new unnumbered Lemma 4.1A proves frame transport across a
+coefficient-field gauge, which covers Iritani's `Psi` and Iritani--Koto's
+`Phi`.  Conditional: `prop:framed-operations`, `lem:divisor-tagging`,
+`prop:low-dimensional-vanishing`, `thm:nu6-birational-invariance`,
+`thm:every-cubic`, the irrationality clauses of Corollaries 1.2--1.4 and
+Theorem 1.5, and `cor:v14-one-step`.  Unconditional: Sections 2--3,
+`prop:cubic-packet`, and every universal `CH_0`-triviality assertion.
+Lemma 4.3 and Lemma 4.5 no longer claim intrinsic frame transport, and
+equation (4.6b) is deleted.  Authority commit `76b016341`, warning-free at
+32 pages, PDF SHA-256
+`eb5983e46d1de135c9bab92cb5f0a052e851cadf9163ae4a9516c8979a2ecc95`.  Exact
+partition, downgrades, and the README/ledger/summary residuals:
+`../2026-08-15-c912-hypothesis-4-7h-conditionalization.md`.
+
 **Lifecycle rule:** keep this card open until the author explicitly closes it.
 Passing implementation, review, export, and release gates does **not** authorize
 automatic closure.
