@@ -39,11 +39,10 @@ application; corrects the receiver; and reduces the remaining question to one
 inequality that depends on a normalization the draft is free to choose. The
 inequality fails under the draft's current instruction to take the separating
 weight parameter large, and holds at the cubic endpoint under the smallest
-admissible choice. Section~\ref{sec:iterated} then argues that the inequality is
-itself an artifact of putting the intrinsic Novikov variables and the new
-completion variables into one ordered group: an iterated receiver satisfies it
-trivially for the ambient summand, which leaves the center summands as the real
-problem. Section~\ref{sec:corrections} lists what the first version
+admissible choice. Section~\ref{sec:iterated} examines an iterated receiver that
+would satisfy the inequality trivially, checks it against the sources, and finds
+that it needs a semipositivity hypothesis on the ambient variety which weak
+factorization does not supply. Section~\ref{sec:corrections} lists what the first version
 of this memo got wrong; readers of that version should start there.
 \end{abstract}
 
@@ -549,9 +548,30 @@ $a_2^\circ$ terms of Lemma~4.5, which are required only to be constant in the
 positive filtration, and the iterated receiver goes through for the ambient
 summand with $w(\Delta\lambda)=0$. If it is not, the Novikov directions must
 stay inside the filtration, eigenvalue differences reacquire positive weight,
-and the criterion of Section~\ref{sec:receiver} returns. Since Iritani's change
-of variables is graded, this is a question about degrees of one coordinate, and
-should be settleable directly.
+and the criterion of Section~\ref{sec:receiver} returns.
+
+The grading answers this, and the answer is negative in general. Iritani's
+Theorem~5.18(5) states that $\tau(\widetilde\tau)$ and
+$\varsigma_j(\widetilde\tau)$ are homogeneous of degree $2$, and his conventions
+are $\deg Q^d=2c_1(X)\cdot d$ and $\deg\tau_i=2-\deg\phi_i$. A pure-Novikov term
+$Q^d\phi$ therefore satisfies
+\[
+  \deg\phi=2-2\,c_1(X)\cdot d,
+\]
+so $c_1\cdot d=1$ contributes in $H^0$, $c_1\cdot d=0$ in $H^2$, and
+$c_1\cdot d=-1,-2,\dots$ in $H^4,H^6,\dots$; classes with $c_1\cdot d\ge2$
+cannot contribute at all. Hence the required confinement to $H^0\oplus H^2$
+follows exactly when every contributing effective class satisfies
+$c_1\cdot d\ge0$, and it is not automatic: Iritani's theorem is stated for an
+arbitrary smooth projective $X$, and after several blowups in a weak
+factorization there is no reason for the intermediate ambient variety to have
+nef anticanonical class.
+
+So the iterated receiver does not by itself remove arbitrary intermediate
+fourfolds from the problem. It removes them under a semipositivity hypothesis on
+the ambient, which the weak factorization does not supply. This is worth stating
+plainly, because it is the second proposed repair that fails on inspection, and
+it fails for a reason the draft would have inherited silently.
 
 For the center the same analysis applies, with the additional and unchanged
 difficulty that its Novikov map is the noninjective one, which is why divisor
@@ -571,10 +591,20 @@ smaller problem than a general transport theorem.
 \section{Four routes, in the order I would try them}
 
 \begin{enumerate}
-\item \textbf{The iterated receiver of Section~\ref{sec:iterated}}, for the
-  ambient summand, conditional on the graded question isolated there. Highest
-  leverage, because it removes the arbitrary intermediate fourfolds from the
-  problem.
+\item \textbf{The framing theory of Hinault, Yu, Zhang and Zhang}
+  (arXiv:2411.02266), whose reconstruction algorithm is the one Iritani--Koto
+  added as their Section~5.8. They develop formal and non-Archimedean spectral
+  decomposition together with existence and uniqueness of an extension of
+  framing, and apply it to uniqueness of the blowup and projective-bundle
+  decompositions. That is aimed at what the scissors identify as missing: a
+  canonical structure over a non-Archimedean base that survives the completion
+  and distinguishes a normal form. What needs proof is that their framing, which
+  is an $F$-bundle framing, recovers the original-disc cyclotomic turn used
+  here; the implication is not automatic.
+\item \textbf{The iterated receiver of Section~\ref{sec:iterated}}, now known to
+  need a semipositivity hypothesis on the ambient variety that weak
+  factorization does not supply. Still worth having where it applies, but it
+  does not remove the arbitrary intermediate fourfolds.
 \item \textbf{The low-dimensional centers directly}: primitive-sixth vanishing
   after Iritani's specialization, using the classification the draft already
   proves, rather than through a general transport statement.
@@ -677,11 +707,9 @@ For readers of the first version, these are the substantive changes.
 \section{Questions}
 
 \begin{enumerate}
-\item Is the pure-Novikov part of Iritani's coordinate shift confined to
-  $H^0\oplus H^2$? This is what decides route~1, by
-  Section~\ref{sec:iterated}: in that case the string and divisor equations
-  absorb it and the iterated receiver needs no inequality, and otherwise the
-  Novikov directions stay in the filtration and the criterion returns.
+\item Does the framing of Hinault, Yu, Zhang and Zhang recover the
+  original-disc cyclotomic turn, so that their canonical extension of framing
+  transports $M_{\mathrm f,V}$?
 \item For the low-dimensional centers, can primitive-sixth vanishing be proved
   directly in the coordinates Iritani's specialization produces, given that the
   nef-canonical case already yields an integral-$z$ gauge to a regular-singular
