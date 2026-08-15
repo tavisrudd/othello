@@ -24,7 +24,11 @@ and `e99e503b1` close the nonresonant Frobenius recursion and exact framed
 count while preserving Cai's starting-matrix role.  The independent
 coherent-tranche reviews are GO (`C912-WP4-CR-GO-001` and the closed
 `R-WP4-*` findings), with source/scope repairs at `f4a959bf8`.  WP4 is
-accepted; WP5--WP6 remain prioritized work.
+accepted.  WP5 has begun at `5a6362680`, which exposes the divisor-tag initial
+form.  WP7 is landed at `0db2a97fc` and `131e926d6`, which reposition the paper
+against Yang--Yu--Zhu and Voisin's Theorem 4.5 and print the Fermat membership
+of the pencil proved in C914.  WP5, WP6, WP8, and WP9 remain prioritized work;
+the paper now builds warning-free at 27 pages.
 
 **Lifecycle rule:** keep this card open until the author explicitly closes it.
 Passing implementation, review, export, and release gates does **not** authorize
@@ -50,6 +54,13 @@ revision of the paper. The six prioritized work packages are:
    explicit;
 6. close the verified cycle-side and statement-hygiene seams without changing
    theorem strength.
+
+An external reader added two more on 2026-08-14, both verified against sources
+before acting:
+
+7. reposition the paper against the pre-emptions of the separation family;
+8. repair the source-version locators, which are not all at the pinned
+   version.
 
 The task is manuscript-facing. C910 retains ownership of the standalone Lean
 companion and its formal coverage classification. Any Lean strengthening
@@ -283,6 +294,54 @@ exact bridge is formalized.
 - [ ] Add the finite-generation clarification only if useful.
 - [ ] Resolve all verified minor comments.
 - [ ] Keep prose changes surgical; do not add a new page without need.
+
+### WP7 — positioning against the pre-emptions
+
+- [x] Verify Yang--Yu--Zhu, arXiv:2508.03623: a two-dimensional family of
+  smooth cubic threefolds with unirational parametrizations of degrees two and
+  three, universally `CH_0`-trivial by their own introduction, with
+  Corollary 3.5 extending the parametrizations to `X x P^m`.
+- [x] Verify that Voisin's Theorem 4.5 with Lemma 4.6 already gives components
+  of codimension at most three carrying an algebraic minimal class, and that
+  Colliot-Thélène's almost-diagonal theorem covers the Fermat cubic threefold.
+- [x] Lead the abstract, introduction, and README with the uniform one-step
+  irrationality theorem; present the `A_5`-pencil as a separate mechanism.
+- [x] Record both pre-emptions and the read depths in the novelty ledger.
+- [x] State the pencil's moduli dimension against the Yang--Yu--Zhu locus, and
+  print the Fermat membership proved in C914.
+- [ ] Recheck the synthesis section and the scope paragraph for any remaining
+  first-example rhetoric.
+
+### WP8 — source-version locator repair
+
+- [ ] Repair `sections/04-one-step.tex` line 594: it cites "Section 5.8,
+  especially (5.11)" of Iritani--Koto for the coordinate asymptotics, but in
+  the pinned arXiv:2307.03696v4 that section is the added
+  Hinault--Yu--Zhang--Zhang reconstruction algorithm and the content used is
+  Theorem 5.1(4).
+- [ ] Recheck the use of Theorem 5.1(5), the item v4 corrected, against its v4
+  statement `(d_{tau i,k} sigma_j)|_{Q=tau=0} = lambda_j^k (phi_i + O(q^{-1/r}))`,
+  invertible over `C((q^{-1/r}))`.
+- [ ] Check whether anything in the paper depends on the `log q` term that v4
+  removed from the change of coordinates for Theorem 1.7.
+- [ ] Audit every Iritani, Iritani--Koto, and Cai locator against its pinned
+  version, and put version numbers and dates in prose wherever a corrected
+  formula is invoked.
+
+### WP9 — reopened foundation rechecks
+
+The external reader named four load-bearing points inside the accepted
+WP1--WP3 tranche. Each needs an independent recheck, not a re-reading.
+
+- [ ] Lemma 4.4: whether an inverse-limit gauge whose Laurent lower bound
+  tends to `-infinity` really conjugates framed formal monodromy after passage
+  to the receiver.
+- [ ] Proposition 4.6: compatibility of the full nonlinear mirror-coordinate
+  map with the particular completions and embeddings used.
+- [ ] The center specialization: that the fixed divisor shift descends through
+  a noninjective center monomial map and cannot alter `nu_6`.
+- [ ] Lemma 4.8: a self-contained statement of divisor tagging saying exactly
+  where the domain hypothesis on `gr A` enters. This is WP5's remaining work.
 
 ## Review protocol
 
