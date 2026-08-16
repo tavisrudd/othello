@@ -649,11 +649,17 @@ verdict text lives only in `claim-proof-novelty-ledger.md`.
   framing-compatibility checks the memo proposed have been run against the
   pinned sources; verdicts, locators, and hashes are in
   `../2026-08-15-c912-framing-compatibility-checks.md`.  The memo is now at its
-  fifth version, carries those verdicts in its Section 6, attacks the residual
+  sixth version, carries those verdicts in its Section 6, attacks the residual
   gap through the flatness identities in Section 7, and closes it for the cubic
   block in Section 8, assembles the one-stabilization statement in Section 9,
-  and proves it unconditionally in Section 10: 33 pages, PDF SHA-256
-  `d8bdef7720fdaedd9893015e00502a065a4bcece7cd79ec15cda0682130bf130`.  Either
+  and proves it unconditionally in Section 10.  PDF SHA-256
+  `a8e8772cb8b221f99311956b5216917c23ffee38b0eb2f94ad7cc69b5aa7a21d`.  The sixth
+  version deletes standing hypothesis (H2) of Section 8, which is now a theorem
+  proved from the Frobenius property via an isometry lemma for the decoupling
+  gauge, and adds the arbitrary-Jordan-size analysis: the commutant and
+  no-splitting steps extend to any size, but duality removes only the deepest
+  pole coefficient, so rank two is special and the base point for larger blocks
+  must be settled by the grading.  Either
   document can be read first; the report is the shorter route in, the memo's
   Sections 8 and 9 are where the mathematics now is.
 
@@ -969,13 +975,14 @@ become manuscript edits.
 | C912-M20 | confirmed | The carrier block meets another sheet only at `4q_2 = 27q_1`, which equates two distinct Novikov monomials, so the formal germ is caustic-free by filtration rather than by genericity and the rigidity theorem applies at every point of it. | Same report, Proposition 4 and Section 4 |
 | C912-M21 | open | At `q_2 = 27q_1` two simple sheets coalesce at value zero, so the count can rise there. Harmless for the lower bound the one-stabilization theorem needs; a real gap in any equality form of birational invariance of the count. | Same report, Section 4; owner is whichever successor states the invariance as an equality |
 | C912-M22 | confirmed | The Stokes torsor of the `X x P^1` small even connection is 52-dimensional and acts trivially on the count, since the count is a formal invariant; the one-stabilization hole is a discriminant-crossing problem, not a Stokes-section problem. | Same report, Section 5 |
-| C912-M23 | resolved | Standing hypothesis (H2) of the rigidity theorem is forced by the Frobenius structure: the image of the nilpotent part is isotropic and the `z^0` coefficient is anti-self-adjoint, so the assumed entry vanishes pointwise rather than on a germ. | `../2026-08-15-c912-det-r-pairing-and-serre-lattice.md`, Theorem 2; the memo's Section 8 should be updated |
+| C912-M23 | resolved | Standing hypothesis (H2) of the rigidity theorem is forced by the Frobenius structure: the image of the nilpotent part is isotropic and the `z^0` coefficient is anti-self-adjoint, so the assumed entry vanishes pointwise rather than on a germ. | `../2026-08-15-c912-det-r-pairing-and-serre-lattice.md`, Theorem 2; recorded in the memo's Section 8 and (H2) deleted there |
 | C912-M24 | confirmed | After the shearing the Poincare pairing is `z` times a symplectic form, and `sp(2) = sl(2)`, so in rank two the pairing gives exactly `tr R = -1` and can never determine `det R`. | Same report, Proposition 3 |
 | C912-M25 | confirmed | The count equals the number of primitive-sixth eigenvalues of the Serre operator on the numerical K-group of the Kuznetsov component. The genus-six Gushel--Mukai test passes -- `N(Ku) = <-1> + <-1>`, symmetric Euler form, `S = I`, count zero -- and the identification reproduces the whole prime-Fano census. Still an expected correspondence rather than a proved one. | `../2026-08-15-c912-gm-genus-six-serre-test.md`, Sections 3--4 |
 | C912-M26 | open | The frame-transport memo records `S^5 = [3]` where Kuznetsov's relation for the same category is `S^3 = [5]`; only the latter yields primitive sixth roots, and the memo's shorter endpoint route leans on that sentence. | `../2026-08-15-c912-det-r-pairing-and-serre-lattice.md`, Section 5 |
 | C912-M27 | resolved | The sign convention between the classification's reduced factorial cyclotomic polynomial `R` and the Serre side is `lam -> -lam`, the shift `[1]`: in all four genera where `R` is recorded the Serre characteristic polynomial is `R(-lam)` up to sign. | `../2026-08-15-c912-gm-genus-six-serre-test.md`, Section 4 |
 | C912-M28 | open | `N(Ku)` of the sextic double solid has the cubic threefold's Gram matrix and an order-six Serre operator, so the identification predicts count two there; the lane has not computed that quantum-side value. Independently, no Kuznetsov component equivalent to a curve category can have nonzero count, so the degree-one case of Kuznetsov's Fano threefold conjecture cannot hold. | Same report, Section 5; owner is the sextic-double-solid quantum computation |
 | C912-M29 | open | The Euler form on the residual component is symmetric for the Gushel--Mukai threefold and asymmetric for the cubic, and that symmetry alone controls the count. No structural reason for the difference was identified. | Same report, Section 3 |
+| C912-M30 | open | Rank two is special in the rigidity section, not typical: for a Jordan block of size `m` the shear produces a nested family of pole coefficients, and duality removes only the deepest one, which in rank two happens to be the whole pole. The base-point input for `m >= 3` should instead be the grading, since an operator of `mu`-weight `p` sits exactly on the `p`-th sub-diagonal; the missing step is `mu`-equivariance of the decoupling gauge on the zero block. | Memo Section 8, "Arbitrary Jordan size"; owner is whichever successor needs the general center statement |
 
 The final `ej`+`tt` closeout found no unresolved mystery in the completed
 WP1--WP3 tranche.  Removing the freestanding Hahn paragraph both repaired the

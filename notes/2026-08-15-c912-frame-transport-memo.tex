@@ -1169,18 +1169,24 @@ Lemma~\ref{lem:flatness-ids} holds: $[U,C_a]=0$ and
 $\partial_aU=C_a+[C_a,\mu]$. Everything below is formal in $\tau$ and needs no
 completion of the loop coordinate, no ordered receiver, and no bulk gauge.
 
-Standing hypotheses, all verified for the cubic at $\tau=0$:
+There is one standing hypothesis, verified for the cubic at $\tau=0$:
 
 \begin{itemize}
 \item[(H1)] $U(0)$ has an eigenvalue $u_0$ whose generalized eigenspace $H_0$
   has rank two and on which the nilpotent part is nonzero; every other
   eigenvalue differs from $u_0$ by a unit of $\Lambda$.
-\item[(H2)] After the shearing of Step~4 the block is regular singular at
-  $\tau=0$, that is $f(0)=0$ in the notation there.
 \end{itemize}
 
-For the cubic, (H1) holds with $u_0=0$ and the other eigenvalues $\pm6r$, and
-(H2) holds because the draft's $D_0$ is diagonal.
+For the cubic, (H1) holds with $u_0=0$ and the other eigenvalues $\pm6r$.
+
+Earlier versions of this memo carried a second standing hypothesis (H2): that
+after the shearing of Step~4 the block is regular singular at $\tau=0$, that is
+$f(0)=0$ in the notation there. It was verified for the cubic by inspection,
+because the draft's $D_0$ is diagonal. It is now a theorem for every rank-two
+coalesced block of every smooth projective target
+(Theorem~\ref{thm:h2-automatic}), proved from the Frobenius property of quantum
+multiplication, and it holds pointwise on the germ rather than only at the base
+point. Nothing below assumes it.
 
 \subsection*{Step 1: decoupling, and the bulk connection stays block diagonal}
 
@@ -1327,13 +1333,102 @@ $(A_1')_{21}$, so the regression test of Section~\ref{sec:not-yet} is met by
 construction rather than by accident: the object being deformed below is $R$,
 which sees it.
 
-\subsection*{Step 5: no irregularity appears, and the bulk connection is regular}
+\subsection*{Step 5: the Poincar\'e pairing survives the decoupling, and kills
+$f$}
+
+The shearing of Step~4 produces a pole exactly when $f=(A_0')_{21}\ne0$.
+Earlier versions assumed $f(0)=0$ as a standing hypothesis, verified for the
+cubic by inspecting the draft's diagonal $D_0$. It is not a hypothesis: it is
+forced by the Frobenius property of quantum multiplication, at every point of
+the germ and for every smooth projective target. The only thing needed is that
+the decoupling gauge of Step~1 preserves the pairing, which is what the
+following lemma supplies --- the step the earlier list of open questions
+identified as missing.
+
+Let $G$ be the Poincar\'e pairing on the even part, symmetric and
+nondegenerate. Quantum multiplication is Frobenius, so $U=E\star$ is
+$G$-self-adjoint, and $\mu$ is $G$-anti-self-adjoint. Writing
+$\mathcal A(z)=z^{-1}U-\mu$, those two facts are exactly
+\[
+  \mathcal A(-z)^TG+G\,\mathcal A(z)=0.
+  \tag{8.4}
+  \label{eq:duality}
+\]
+
+\begin{lemma}[The decoupling gauge is an isometry]
+\label{lem:duality-gauge}
+The unique gauge $g=I+O(z)$ of Lemma~\ref{lem:decouple} satisfies
+$g(-z)^TG\,g(z)=G$. Hence the decoupled connection satisfies
+\eqref{eq:duality} with the same constant pairing, and so does each block with
+the restriction of $G$ to it, before and after the twist by $\exp(u_0/z)$.
+\end{lemma}
+
+\begin{proof}
+Let $\sigma$ be the involution $\mathcal A\mapsto-G^{-1}\mathcal A(-z)^TG$ on
+connection matrices, so that \eqref{eq:duality} reads
+$\mathcal A^\sigma=\mathcal A$. A direct computation with the gauge action
+$g\cdot\mathcal A=g^{-1}\mathcal Ag-g^{-1}z\partial_zg$ gives
+\[
+  (g\cdot\mathcal A)^\sigma=h\cdot(\mathcal A^\sigma),
+  \qquad h:=G^{-1}g(-z)^{-T}G,
+\]
+the two terms matching separately: the conjugation term because
+$h^{-1}=G^{-1}g(-z)^TG$, and the logarithmic-derivative term because
+$h^{-1}z\partial_zh=-G^{-1}\bigl(z\partial_zg(-z)\bigr)^Tg(-z)^{-T}G$. Take
+$g$ to be the decoupling gauge and put $\widetilde{\mathcal A}=g\cdot\mathcal A$.
+The generalized eigenspaces of a $G$-self-adjoint operator are $G$-orthogonal,
+so $G$ is block diagonal and $\widetilde{\mathcal A}^\sigma$ is block diagonal
+whenever $\widetilde{\mathcal A}$ is; and $h=I+O(z)$ because $g=I+O(z)$. So $h$
+is a second gauge of the normalized form carrying $\mathcal A$ to block-diagonal
+form, and the uniqueness in Lemma~\ref{lem:decouple} gives $h=g$, which is the
+claim. Restriction to a block is legitimate because $G$ restricts
+nondegenerately to each block. The twist by $\exp(u_0/z)$ subtracts the scalar
+$z^{-1}u_0I$ from the block connection, and \eqref{eq:duality} is insensitive to
+that because the subtracted term is odd in $z$ and self-adjoint.
+\end{proof}
+
+Expanding \eqref{eq:duality} for the twisted decoupled block connection
+$z^{-1}N+A_0'+zA_1'+\cdots$ coefficient by coefficient gives the parity rule
+\[
+  N^TG_0=G_0N,
+  \qquad
+  (A_p')^TG_0=(-1)^{p+1}G_0A_p',
+  \tag{8.5}
+  \label{eq:parity}
+\]
+that is, $N$ and the odd coefficients are $G_0$-self-adjoint and the even
+coefficients are $G_0$-anti-self-adjoint. The $p=0$ case is the tracelessness
+statement of Section~\ref{sec:blockwise}, now with the decoupling correction
+included rather than only for $P_i\mu P_i$.
+
+\begin{theorem}[The sheared block is regular singular at every point]
+\label{thm:h2-automatic}
+Under (H1), $f=(A_0')_{21}=0$ identically on $B$.
+\end{theorem}
+
+\begin{proof}
+By \eqref{eq:parity}, $N$ is $G_0$-self-adjoint, and $N^2=0$ by
+Theorem~\ref{thm:no-splitting}, so for all $x,y$ one has
+$(Nx,Ny)=(x,N^2y)=0$: the image of $N$ is isotropic. In particular
+$(e_1,e_1)=0$, and nondegeneracy of $G_0$ then forces $(e_1,e_2)\ne0$. Again by
+\eqref{eq:parity}, $A_0'$ is $G_0$-anti-self-adjoint, and for a symmetric form
+that gives $(A_0'x,x)=0$ for every $x$. Taking $x=e_1$ and expanding
+$A_0'e_1=\alpha e_1+fe_2$ gives $f\,(e_2,e_1)=0$, hence $f=0$.
+\end{proof}
+
+This is stronger than the deleted hypothesis in two ways. It holds pointwise on
+the germ, with no differential equation and no lowest-order argument, which is
+what a statement outside the germ needs; and it holds for every rank-two
+coalesced block of every smooth projective target, so the cubic's diagonal
+$D_0$ was not an accident of that example.
+
+\subsection*{Step 6: no irregularity appears, and the bulk connection is regular}
 
 \begin{theorem}[The sheared block stays regular singular]
 \label{thm:no-irregularity}
-$f\equiv0$ and $k_a\equiv0$ on $B$. Hence at every point of the formal germ the
-block is regular singular with residue $R$, and in the sheared frame the bulk
-connection has no pole in $z$.
+$k_a\equiv0$ on $B$. Hence at every point of the formal germ the block is
+regular singular with residue $R$, and in the sheared frame the bulk connection
+has no pole in $z$.
 \end{theorem}
 
 \begin{proof}
@@ -1355,12 +1450,22 @@ $k_a=f\,h_a$ for some $h_a\in B$. Comparing $(2,1)$ entries then gives
   \partial_af=f\Bigl(h_a\bigl(1+\delta-\alpha\bigr)
   +\bigl([E_{21},G_a]\bigr)_{21}\Bigr),
 \]
-a linear equation $\partial_af=f\,w_a$. By (H2), $f(0)=0$, and the
-lowest-order argument of Theorem~\ref{thm:no-splitting} applies verbatim, so
-$f\equiv0$ and therefore $k_a\equiv0$.
+a linear equation $\partial_af=f\,w_a$, which is now redundant:
+Theorem~\ref{thm:h2-automatic} already gives $f\equiv0$ outright, and
+$k_a=f\,h_a$ then gives $k_a\equiv0$.
 \end{proof}
 
-\subsection*{Step 6: the exponents are constant}
+\begin{remark}[What the flatness route still buys]
+The displayed equation $\partial_af=f\,w_a$ is kept because it is the only
+place where the argument would survive the loss of the Frobenius property: with
+$f(0)=0$ assumed rather than proved, the lowest-order argument of
+Theorem~\ref{thm:no-splitting} applies verbatim and yields the same conclusion.
+In any setting where the Frobenius input is unavailable, or for a block of a
+connection that is not the quantum connection of a smooth projective target,
+that is the route to use, at the cost of carrying the hypothesis.
+\end{remark}
+
+\subsection*{Step 7: the exponents are constant}
 
 \begin{theorem}[Rigidity of the formal type]
 \label{thm:rigidity}
@@ -1478,19 +1583,155 @@ not a theorem with hypotheses; before anything rests on it, the graded minimal
 polynomial and the surface exclusion both need to be checked at the level of
 detail this memo has applied to everything else.
 
-\begin{remark}[Scope]
-Steps 2 to 5 used rank two only through the identities
-$\operatorname{adj}(N)=-N$ and $N^2=-\det(N)I$ and through the single shearing.
-The mechanism --- commutant of a regular block kills the would-be $z^{-2}$ bulk
-term, one shearing makes the block regular singular, flatness then forces the
-bulk pole to vanish --- should extend to a single Jordan block of any size with
-the shearing $\operatorname{diag}(1,z,\dots,z^{m-1})$, and this is worth doing
-because it is what a general center statement would need. It does not cover a
-derogatory block, where the commutant is larger, nor a semisimple block, where
-the $z^{-1}$ equation instead reads $(I+\operatorname{ad}_R)(C_{a,0}-p_aI)=0$
-and a resonance $\rho_i-\rho_j=-1$ must be excluded before the same conclusion
-follows.
-\end{remark}
+\subsection*{Arbitrary Jordan size: what extends, and the one thing that does
+not}
+\label{sec:jordan-size}
+
+Earlier versions of this section closed with the expectation that the mechanism
+--- commutant of a regular block kills the would-be $z^{-2}$ bulk term, one
+shearing makes the block regular singular, flatness then forces the bulk pole to
+vanish --- should extend to a single Jordan block of any size with the shearing
+$\operatorname{diag}(1,z,\dots,z^{m-1})$, since that is what a general center
+statement needs. Carrying it out separates cleanly into a part that does extend,
+a bookkeeping statement, and one step where rank two turns out to be genuinely
+special.
+
+\begin{proposition}[Steps 1 to 3 in size $m$]
+\label{prop:size-m-steps}
+Let $H_0$ be a generalized eigenspace of $U(0)$ of rank $m$ on which the
+nilpotent part is regular, the other eigenvalues differing from $u_0$ by units.
+Put $u_0=\tfrac1m\operatorname{tr}(U|_{H_0})$ and $N:=U|_{H_0}-u_0I$. Then
+\begin{enumerate}
+\item $C_{a,0}\in B[N]=B\cdot I\oplus B\cdot N\oplus\cdots\oplus B\cdot N^{m-1}$,
+  and the coefficient of $I$ is $\partial_au_0$; after the twist by
+  $\exp(u_0/z)$ the leading bulk coefficient lies in $N\cdot B[N]$, hence is
+  strictly upper triangular in a cyclic frame, so no entry of it shears down to
+  a pole of the bulk connection;
+\item $\operatorname{tr}(N^k)\equiv0$ on $B$ for every $k\ge1$. Hence $N$ is
+  nilpotent at every point of the formal germ, and regular there because
+  $N^{m-1}$ has a unit entry, so the block keeps one eigenvalue of multiplicity
+  $m$ and a single Jordan block.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+$[U,C_a]=0$ gives $[U|_{H_0},C_{a,0}]=0$, and the commutant of a regular matrix
+over a local ring is the free module it generates, which is $B[N]$. Write
+$C_{a,0}=p_aI+Q_a$ with $Q_a:=\sum_{j\ge1}q_a^{(j)}N^j\in N\cdot B[N]$; this much
+is the commutant statement alone, and the identification of $p_a$ is deferred to
+the end.
+
+(2) By Theorem~\ref{thm:block-evolution},
+$D_aN=Q_a+[Q_a,\mu_0]$. Put $t_k:=\operatorname{tr}(N^k)$, so $t_1\equiv0$ by
+construction. Then
+\[
+  \partial_at_k=k\operatorname{tr}\bigl(N^{k-1}D_aN\bigr)
+  =k\operatorname{tr}\bigl(N^{k-1}Q_a\bigr)
+  =k\sum_{j\ge1}q_a^{(j)}t_{k+j-1},
+\]
+the commutator term dropping because $N^{k-1}$ and $Q_a$ commute and the trace
+is cyclic:
+$\operatorname{tr}(N^{k-1}Q_a\mu_0)=\operatorname{tr}(N^{k-1}\mu_0Q_a)$. By
+Newton's identities the coefficients of the characteristic polynomial of $N$ are
+polynomials without constant term in $t_1,\dots,t_m$, so Cayley--Hamilton puts
+every $t_l$ with $l>m$ in the ideal generated by $t_2,\dots,t_m$. The vector
+$t=(t_2,\dots,t_m)$ therefore satisfies a linear system $\partial_at=M_at$ with
+$M_a$ over $B$, and $t(0)=0$ because $N(0)$ is nilpotent. The lowest-order
+argument of Theorem~\ref{thm:no-splitting} applies to the vector unchanged, so
+$t\equiv0$, and in characteristic zero the vanishing of all power traces forces
+the characteristic polynomial of $N$ to be $\lambda^m$.
+
+(1) With $\operatorname{tr}N^j\equiv0$ for every $j\ge1$ now available,
+$\operatorname{tr}C_{a,0}=m\,p_a$, and taking traces in
+$\partial_aU=C_a+[C_a,\mu]$ on the block gives $m\,\partial_au_0=m\,p_a$. The
+twist by $\exp(u_0/z)$ replaces $C_{a,0}$ by $C_{a,0}-(\partial_au_0)I=Q_a$,
+which lies in $N\cdot B[N]$ and so has no entry on or below the diagonal.
+\end{proof}
+
+The shearing bookkeeping is the next thing to fix, because it decides what has
+to be proved. Conjugation by $S=\operatorname{diag}(1,z,\dots,z^{m-1})$
+multiplies the $(i,j)$ entry by $z^{j-i}$, so writing the twisted decoupled
+block connection as $z^{-1}N+A_0'+zA_1'+\cdots$, the coefficient of $z^{-k}$ in
+the sheared connection collects the entries of $A_p'$ at sub-diagonal distance
+$i-j=p+k$, and $z^{-1}N$ shears up to the residue. Hence:
+
+\begin{quote}
+the sheared block is regular singular exactly when $A_p'$ vanishes strictly
+below its $p$-th sub-diagonal, for every $p\ge0$.
+\end{quote}
+
+For $m=2$ this is the single condition $f=(A_0')_{21}=0$. For $m\ge3$ it is a
+nested family, deepest first: $(A_0')_{m1}$, then $(A_0')_{m-1,1}$,
+$(A_0')_{m,2}$ and $(A_1')_{m,1}$, and so on.
+
+\begin{proposition}[Duality in size $m$, and its limit]
+\label{prop:size-m-duality}
+In the cyclic frame $e_i=N^{m-i}e_m$ the Gram matrix of $G_0$ is anti-triangular
+Hankel: $(e_i,e_j)$ depends only on $i+j$ and vanishes for $i+j\le m$, so
+$G_0=J\,P(N)$ with $J$ the reversal matrix and $P(N)\in B[N]$ invertible.
+Writing $X^{\mathrm{at}}:=JX^TJ$ for the reflection in the anti-diagonal, the
+parity rule \eqref{eq:parity} becomes
+\[
+  (A_p')^{\mathrm{at}}=(-1)^{p+1}\,P\,A_p'\,P^{-1}.
+\]
+The reflection preserves each sub-diagonal, and conjugation by $P$ acts trivially
+on the deepest one, so $(A_p')_{m1}=0$ for $p$ even and is unconstrained for $p$
+odd; on the next sub-diagonal the rule only exchanges the two entries with each
+other.
+\end{proposition}
+
+\begin{proof}
+Self-adjointness of $N$ gives
+$(e_i,e_j)=(N^{m-i}e_m,N^{m-j}e_m)=(e_m,N^{2m-i-j}e_m)$, which depends only on
+$i+j$ and vanishes when $2m-i-j\ge m$; the anti-diagonal value
+$(e_m,N^{m-1}e_m)$ is a unit by nondegeneracy. Collecting anti-diagonals gives
+$G_0=\sum_{t\ge0}g_{m+1+t}JN^t=J\,P(N)$. Substituting into
+$(A_p')^TG_0=(-1)^{p+1}G_0A_p'$ and multiplying by $J$ on the left gives the
+displayed rule, using $J^2=I$. The reflection sends $(i,j)$ to $(m+1-j,m+1-i)$
+and so preserves $i-j$; and in $PA_p'P^{-1}$ every correction term is of the
+form $N^aA_p'N^b$ with $a+b\ge1$, whose $(m,1)$ entry is $(A_p')_{m+a,1-b}$ and
+therefore out of range. At distance $m-1$ the rule thus reads
+$(A_p')_{m1}=(-1)^{p+1}(A_p')_{m1}$.
+\end{proof}
+
+So duality removes exactly one pole coefficient, the deepest, $z^{-(m-1)}$. In
+rank two that coefficient is the entire pole, which is why
+Theorem~\ref{thm:h2-automatic} closes the case; for $m\ge3$ it is one condition
+out of a growing family. The expectation that the rank-two mechanism extends as
+it stands was therefore too optimistic at exactly this step, and the extension
+needs a different input at the base point.
+
+The natural input is the grading rather than the pairing, and it is available
+precisely for the blocks a center statement cares about, those at $u_0=0$. Since
+$\mu$ is the grading operator and $E\star$ raises degree by two, $[\mu,U]=U$;
+this makes $H_0$ for the eigenvalue zero $\mu$-invariant, and on it $[\mu,N]=N$,
+so $N$ raises the $\mu$-weight by one. In a $\mu$-homogeneous cyclic frame an
+operator of $\mu$-weight $p$ is supported exactly on the $p$-th sub-diagonal, so
+the statement ``$A_p'$ has $\mu$-weight $p$'' \emph{is} the regular-singularity
+condition displayed above, with nothing left to check entry by entry. The cubic
+is the rank-two instance of it: $A_0'=D_0$ is diagonal, of weight zero, and
+$A_1'$ contributes only its $(2,1)$ entry, of weight one --- which is why the
+deleted hypothesis (H2) looked like an accident of that example and was not one.
+
+What must be supplied to turn this into a proof is that the decoupling gauge of
+Step~1 respects the grading on the zero block: the analogue of
+Lemma~\ref{lem:duality-gauge} with $\mu$ in place of $G$. Uniqueness is again
+the device, but the argument is not verbatim, because the $\mathbf C^\times$
+action generated by $\mu$ scales the nonzero eigenvalues of $U$ rather than
+fixing them, so it moves the other blocks and the equivariance has to be stated
+for the whole decoupling problem before restricting to $H_0$. With the base
+point settled that way, propagation over the germ should be
+Theorem~\ref{thm:no-irregularity}'s flatness argument applied to the pole
+coefficients in order of depth; the shape to expect is that each satisfies a
+linear equation whose remaining terms involve only deeper coefficients, already
+known to vanish, but that triangular structure is a computation this memo has
+not done.
+
+None of this covers a derogatory block, where the commutant is larger than
+$B[N]$ and Proposition~\ref{prop:size-m-steps} fails at its first step, nor a
+semisimple block, where the $z^{-1}$ equation instead reads
+$(I+\operatorname{ad}_R)(C_{a,0}-p_aI)=0$ and a resonance $\rho_i-\rho_j=-1$
+must be excluded before the same conclusion follows.
 
 \section{The one-stabilization theorem, and the one step it still needs}
 \label{sec:endpoint}
@@ -2119,7 +2360,30 @@ READMEs must be regenerated.
 \section{Corrections to the earlier versions of this memo}
 \label{sec:corrections}
 
-\subsection*{From the fourth version to this one}
+\subsection*{From the fifth version to this one}
+
+Nothing in the fifth version is retracted; one of its hypotheses is discharged
+and one of its expectations is corrected.
+
+\begin{enumerate}
+\item Standing hypothesis (H2) of Section~\ref{sec:rigid} is deleted. It is a
+  theorem: Lemma~\ref{lem:duality-gauge} shows the decoupling gauge is an
+  isometry of the Poincar\'e pairing, and Theorem~\ref{thm:h2-automatic} then
+  forces $f\equiv0$ pointwise on the germ, for every rank-two coalesced block of
+  every smooth projective target. Theorem~\ref{thm:no-irregularity} and
+  Corollary~\ref{cor:cubic-closed} now hold under (H1) alone. The flatness route
+  to $f\equiv0$ is kept as a remark, since it is what survives without the
+  Frobenius property.
+\item The scope remark expected the rank-two mechanism to extend to a Jordan
+  block of any size. It half does. Proposition~\ref{prop:size-m-steps} carries
+  the commutant and no-splitting steps to size $m$, but
+  Proposition~\ref{prop:size-m-duality} shows duality removes only the deepest
+  of the pole coefficients the general shearing produces, so rank two is special
+  rather than typical, and for $m\ge3$ the base point must be settled by the
+  grading, whose missing step is named there.
+\end{enumerate}
+
+\subsection*{From the fourth version to the fifth}
 
 Nothing in the fourth version is retracted. Section~\ref{sec:rigid} is added,
 and three of its consequences change earlier readings.
@@ -2243,12 +2507,19 @@ since the coalescence literature is not used. These remain.
   needs at every intermediate fourfold. The endpoint no longer waits on it, by
   Section~\ref{sec:endpoint}, so this is now a question about how the result is
   presented and about the general stabilization statement, not about whether the
-  endpoint holds.
-\item Is hypothesis (H2) --- that the sheared block is regular singular at the
-  base point --- structural rather than computed? Self-adjointness of $E\star$
-  and anti-self-adjointness of $\mu$ force the $(2,1)$ entry of $\mu_0$ to
-  vanish in the shearing frame, which is suggestive; what is missing is the
-  same statement for the decoupling correction.
+  endpoint holds. Partially answered: the commutant and no-splitting steps
+  extend to any Jordan size (Proposition~\ref{prop:size-m-steps}), but duality
+  kills only the deepest pole coefficient
+  (Proposition~\ref{prop:size-m-duality}), so for $m\ge3$ the base-point input
+  must come from the grading instead. The precise remaining step is
+  $\mu$-equivariance of the decoupling gauge on the zero block.
+\item \emph{Answered, and the hypothesis is gone.} Hypothesis (H2) --- that the
+  sheared block is regular singular at the base point --- was structural, not
+  computed. What was missing, the same statement for the decoupling correction,
+  is Lemma~\ref{lem:duality-gauge}: the decoupling gauge is an isometry of the
+  Poincar\'e pairing, so the parity rule \eqref{eq:parity} applies to the
+  corrected coefficients, and Theorem~\ref{thm:h2-automatic} then gives the
+  vanishing pointwise on the germ for every smooth projective target.
 \item Does the factor $M'=\mathrm{id}+O(z^{-1})$ of the sources' Birkhoff
   factorization preserve the primitive-sixth multiplicity? Now a cross-check
   rather than a route.
