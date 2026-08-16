@@ -655,7 +655,7 @@ verdict text lives only in `claim-proof-novelty-ledger.md`.
   gap through the flatness identities in Section 7, and closes it for the cubic
   block in Section 8, assembles the one-stabilization statement in Section 9,
   and proves it unconditionally in Section 10.  PDF SHA-256
-  `2d279ae244255fe28e5f366e648367794df1b9de2678620d6b6c3f350a6690ad`.  The sixth
+  `2f5505c7b0b7df5266d9a4638f164f2c0733d6b6dfc08ac61f9a08be934e5a93`.  The sixth
   version deletes standing hypothesis (H2) of Section 8, which is now a theorem
   proved from the Frobenius property via an isometry lemma for the decoupling
   gauge; adds the arbitrary-Jordan-size analysis, where the commutant and
@@ -663,10 +663,9 @@ verdict text lives only in `claim-proof-novelty-ledger.md`.
   pole coefficient, so rank two is special and the base point for larger blocks
   must be settled by the grading; corrects the graded minimal polynomial to
   Kuznetsov's `S^3 = [5]`; states the surface obligation as (iii) with its two
-  reductions and a counterexample to the weakened form; and proves (iii) by a
-  minimal-model induction on Iritani's blowup decomposition read at the source
-  plus two statements the route already uses, so the endpoint route's surface
-  exclusion is no longer an open problem of its own.  Either
+  reductions and a counterexample to the weakened form; and records that the shorter route's step (iii) is discharged by the
+  existing low-dimensional vanishing theorem, the Serre automorphism being
+  defined as the monodromy.  Either
   document can be read first; the report is the shorter route in, the memo's
   Sections 8 and 9 are where the mathematics now is.
 
@@ -988,7 +987,7 @@ become manuscript edits.
 | C912-M26 | resolved, verdict corrected | Katzarkov--Kontsevich--Pantev--Yu's Example 6.21 does state `S^5 = [3]`, so the memo transcribed faithfully and the earlier transcription-slip verdict was wrong. The incompatibility with the lattice is a convention difference between their Hodge-atom Serre automorphism in the cohomological grading and the categorical Serre functor on a K-group; their Example 6.20 shows the same offset in dimension four. | `../2026-08-15-c912-kkpy-imports-source-check.md`, Section 3 |
 | C912-M31 | confirmed | Every non-minimal smooth projective surface has an admissible subcategory of numerical Serre order six, from the exceptional pair `<O_E(-1), O_X>` on a `(-1)`-curve. Step (iii) is false for admissible subcategories, so the eigenvalue criterion is an invariant of the atomic decomposition rather than of the surface, and the blowup step of any proof is where the care is needed. | Same report, Section 3 |
 | C912-M32 | resolved | Step (iii) is automatic wherever the small quantum cohomology is semisimple, since every atom is then rank one and a rank-one numerical Serre operator is the identity. The obligation lives entirely in the non-semisimple cases outside the nef-canonical class. | Same report, Section 2 |
-| C912-M33 | confirmed | Step (iii) holds for every smooth projective surface by minimal-model induction. Its blowup input is Iritani's decomposition, read at the source; the two remaining imports, the projective-bundle formula and the nef-canonical atom description, are ones the endpoint route already uses. Blowing up only ever adds rank-one atoms, so the blow-down step is free; the minimal cases reduce to a curve or to a semisimple spectrum. | `../2026-08-15-c912-step-iii-surface-induction.md`, Section 1; memo Proposition in Section 8 |
+| C912-M33 | corrected | The surface exclusion was never open: it is the memo's existing Theorem `thm:low-dim` (atoms of varieties of dimension at most two have `nu_6 = 0`), proved by the same minimal-model induction. The separately written proposition duplicating it has been removed. What survives is that the Serre-decorated reading needs nothing further, since their Serre automorphism is defined as the monodromy, and that the blowup input can now be taken from Iritani's Theorem 5.18 directly. | `../2026-08-15-c912-kkpy-imports-source-check.md`; memo Remark `rem:step-iii-is-low-dim` |
 | C912-M34 | resolved | Iritani's blowup formula (arXiv:2307.13555, Theorem 5.18, Corollary 1.2) is an isomorphism of quantum D-modules commuting with the quantum connection, intertwining the pairings and preserving the Euler vector fields, so formal monodromy transports summand by summand. Read at the source; the surface induction rests on two imports rather than three. | `../2026-08-15-c912-blowup-formula-source-check.md`, Sections 1--2 |
 | C912-M35 | confirmed | Step (iii) upgrades to (iii'): every atom of a smooth projective surface has monodromy of order at most two. This is the discriminator Katzarkov--Kontsevich--Pantev--Yu use for the cubic fourfold, where they need only surfaces of general type; the endpoint needs all surfaces because the cubic threefold's atom is shaped like a curve atom. | `../2026-08-15-c912-kkpy-imports-source-check.md`, Section 4 |
 | C912-M36 | open | The endpoint follows from their Theorem 4.11, the *enhanced* non-rationality criterion and (iii'), with no transport lemma and no integral structures. The enhanced criterion is load-bearing, since the argument separates atoms by monodromy, a decoration; it is asserted in unnumbered prose, unlike the numbered Proposition 5.30 which is proved. A manuscript using this route must prove it in the generality needed or quote it as an assertion. | Same report, Section 5 |

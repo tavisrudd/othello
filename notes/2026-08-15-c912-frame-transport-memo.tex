@@ -1622,52 +1622,26 @@ putting every eigenvalue at a root of unity of order at most two.
 reductions leave a short induction, which closes (iii) modulo three imported
 statements.
 
-\begin{proposition}[Step (iii) for surfaces]
-\label{prop:step-iii}
-Assume Katzarkov--Kontsevich--Pantev--Yu's Lemma~5.24 and Claim~6.15. Then every
-atom of a smooth projective surface has formal monodromy of order at most two;
-in particular none has a primitive sixth root of unity as an eigenvalue. The
-same holds for Serre eigenvalues, either because their Serre automorphism is
-defined as the monodromy in the $u$-direction, or case by case from the Serre
-computations recorded alongside each step of the proof.
-\end{proposition}
+\begin{remark}[This is Theorem~\ref{thm:low-dim}, and the two readings coincide]
+\label{rem:step-iii-is-low-dim}
+Statement (iii) is not new work: it is Theorem~\ref{thm:low-dim}, proved in
+Section~\ref{sec:endpoint} by exactly this induction --- blow down to a minimal
+model, use their Lemma~5.24 and Claim~6.15 for nef canonical class, and reduce
+$\PP^2$ and the geometrically ruled surfaces to point and curve atoms through the
+projective-bundle identity. What the present section adds is only that the
+Serre-decorated reading of (iii) is the same statement rather than a companion to
+it: Katzarkov--Kontsevich--Pantev--Yu \emph{define} the Serre automorphism as the
+monodromy in the $u$-direction, with $\chi(a,b)=\chi(b,S(a))$, so an atom's Serre
+eigenvalues are its formal monodromy eigenvalues and the shorter route's step
+(iii) is discharged by Theorem~\ref{thm:low-dim} as it stands.
 
-\begin{proof}
-Induct on the number of blow-downs to a minimal model, finite by Castelnuovo,
-with the statement quantified over all parameters of the formal base. If $S$ is
-not minimal, write $S=\mathrm{Bl}_pS'$. Iritani's decomposition theorem
-(arXiv:2307.13555, Theorem 5.18) gives an isomorphism of quantum $D$-modules
-$\mathrm{QDM}(S)\to\tau^*\mathrm{QDM}(S')\oplus\varsigma^*\mathrm{QDM}(\mathrm{pt})$
-commuting with the quantum connection and intertwining the pairings, and by his
-Corollary 1.2 the underlying change of variables preserves the Euler vector
-fields. So the formal type of $S$ at a parameter is that of $S'$ at the
-corresponding parameter plus that of a point, which is rank one with trivial
-connection; the added atom contributes the eigenvalue $1$ and $S$ inherits the
-conclusion from $S'$. A minimal surface has nef canonical class, or is $\PP^2$,
-or is a projective bundle over a smooth curve. The nef case is the reduction
-above. For $\PP^2$ the characteristic polynomial of $c_1\star$ is
-$\lambda^3-27q$, of nonzero discriminant, so the small quantum cohomology is
-semisimple and every atom is rank one, so Theorem~\ref{thm:simple-blocks}
-applies to each. For a projective bundle the atoms are copies of the base
-curve's, and the curve is settled on the monodromy side directly, with no appeal
-to the identification. Let $C$ have genus $g$. The even part of $H^*(C)$ is
-spanned by $1$ and the point class, and the grading operator has eigenvalues
-$\mp\tfrac12$ on them. If $g\ge1$ there are no rational curves and
-$\deg(-K_C)\le0$, so the quantum product is the cup product and $E\star$ is
-nilpotent: the even part is a single block at the eigenvalue $0$, its connection
-is exactly $z^{-1}E\star-\mu$ with no higher $z$ coefficients, and the shearing
-moves the exponents $\pm\tfrac12$ by integers only, which $\nu_6$ does not see.
-The formal monodromy eigenvalues are therefore $e^{\mp\pi i}=-1$, twice. If
-$g=0$ then $E\star=2H\star$ has the distinct eigenvalues $\pm2\sqrt q$, so both
-blocks are multiplicity one and Theorem~\ref{thm:simple-blocks} applies again.
-Either way no primitive sixth root. The Serre side agrees, as it must if the
-identification holds: the Euler form
-$\left(\begin{smallmatrix}1-g&1\\-1&0\end{smallmatrix}\right)$ on
-$([\mathcal O_C],[\mathcal O_{pt}])$ gives the Serre operator
-$\left(\begin{smallmatrix}-1&0\\2-2g&-1\end{smallmatrix}\right)$, of
-characteristic polynomial $(\lambda+1)^2$ for every $g$. This exhausts the
-classification.
-\end{proof}
+Two refinements are worth recording. First, the conclusion is sharper than
+$\nu_6=0$: in every case the proof produces monodromy of order at most two, which
+is the discriminator their own dimension-four example uses. Second, the blowup
+input can now be taken from Iritani's Theorem 5.18 directly, an isomorphism of
+quantum $D$-modules commuting with the connection and preserving the Euler
+vector fields, rather than only through the chemical-formula identity.
+\end{remark}
 
 The fake of the previous paragraph does not disturb the blow-down step: it mixes
 the new exceptional object with the ambient structure sheaf, which lie in
@@ -1712,7 +1686,7 @@ $r=2$, applied to $X\times\PP^1=\PP(\mathcal O\oplus\mathcal O)$, puts two copie
 of $\alpha(X)$ in the atomic decomposition of $X\times\PP^1$. And no atom of a
 smooth projective variety of dimension at most two has monodromy of order six:
 points give the identity, curves give $-1$ twice, and surfaces have order at most
-two by Proposition~\ref{prop:step-iii}.
+two by Theorem~\ref{thm:low-dim}.
 
 The criterion applied at the end is \emph{not} their numbered Proposition~5.30,
 which excludes membership in $\mathrm{HAtoms}$ of low dimension for undecorated
@@ -1743,7 +1717,8 @@ Lemma~5.24, Claim~6.15, Proposition~5.30 and Theorem~4.11 --- have now been read
 at the source and say what is claimed of them here. The graded minimal
 polynomial has been checked on the lattice as well, and the two conventions
 differ as described above; the surface exclusion is
-Proposition~\ref{prop:step-iii}.
+Theorem~\ref{thm:low-dim}, with Remark~\ref{rem:step-iii-is-low-dim} for why the
+decorated reading needs nothing further.
 Backing computations, and the exact record of what was and was not read at the
 source, are in `2026-08-15-c912-step-iii-serre-restatement.md' and
 `2026-08-15-c912-step-iii-surface-induction.md', with the scripts
@@ -2548,10 +2523,11 @@ and one of its expectations is corrected.
   six, matching Kuznetsov's $S^3=[5]$. The subsection now uses the verified
   relation, and states the surface obligation as (iii) with its two reductions
   and the non-minimal-surface counterexample to the weakened form. It also now
-  proves (iii) outright by a minimal-model induction
-  (Proposition~\ref{prop:step-iii}), on Iritani's blowup decomposition read at
-  the source plus two statements this route already uses; the endpoint route's
-  surface exclusion is therefore no longer an open problem of its own.
+  records that the shorter route's step (iii) is discharged by the existing
+  Theorem~\ref{thm:low-dim}, since their Serre automorphism is defined as the
+  monodromy and the two readings therefore coincide
+  (Remark~\ref{rem:step-iii-is-low-dim}); an intermediate version of this memo
+  carried a separate proposition duplicating that theorem, now removed.
 \item The scope remark expected the rank-two mechanism to extend to a Jordan
   block of any size. It half does. Proposition~\ref{prop:size-m-steps} carries
   the commutant and no-splitting steps to size $m$, but
