@@ -1087,32 +1087,28 @@ point. Nothing below assumes it.
 
 \begin{lemma}
 \label{lem:decouple}
-Write $P_i$ for the projectors onto the generalized eigenspaces of $U$, and call
-$X\in\operatorname{End}(V)\otimes B$ \emph{purely off-block} if $P_iXP_i=0$ for
-every $i$. There is a unique gauge of the form
-\[
-  g=\exp(X),\qquad X\ \text{purely off-block},\ X=O(z),
-  \tag{8.0}
-  \label{eq:decouple-normalization}
-\]
-block-diagonalizing the $z$-connection with respect to those eigenspaces. In the
-gauged frame the bulk connection is block diagonal as well, and its leading
-coefficient on $H_0$ is $C_{a,0}=P_0C_aP_0$.
+There exists a gauge $g=I+O(z)$ over $B$ block-diagonalizing the $z$-connection
+with respect to the generalized eigenspaces of $U$. It is \emph{not} unique: two
+such gauges differ exactly by a block-diagonal gauge $k=I+O(z)$, and that is the
+whole freedom. In the gauged frame the bulk connection is block diagonal as well,
+and its leading coefficient on $H_0$ is $C_{a,0}=P_0C_aP_0$.
 \end{lemma}
 
 \begin{proof}
 Existence is the splitting lemma at Poincar\'e rank one, solved order by order by
 Sylvester equations whose operators are invertible because the eigenvalue
-differences are units. Uniqueness requires the normalization
-\eqref{eq:decouple-normalization} and fails without it: if $g$
-block-diagonalizes and $k=I+O(z)$ is any block-diagonal gauge, then $gk$
-block-diagonalizes as well and is again $I+O(z)$, so the condition $g=I+O(z)$
-alone determines $g$ only up to that block-diagonal freedom. Prescribing the
-purely off-block exponential removes exactly that freedom, and the order-by-order
-solution then has a unique purely off-block $X$ at each order. An earlier version
-of this memo asserted uniqueness for $g=I+O(z)$; that was wrong, and the
-correction matters because Lemma~\ref{lem:duality-gauge} argues by uniqueness.
-For the second statement write
+differences are units. For the freedom: if $g$ block-diagonalizes and $k=I+O(z)$
+is block diagonal then $gk$ block-diagonalizes and is again $I+O(z)$; conversely
+if $g$ and $g'$ both block-diagonalize then $g^{-1}g'$ preserves the block
+decomposition of the gauged connection and is therefore block diagonal.
+
+An earlier version of this memo asserted that $g=I+O(z)$ is \emph{unique}. That is
+false --- the block-diagonal freedom just described is exactly the
+counterexample --- and the error mattered, because
+Lemma~\ref{lem:duality-gauge} argued by uniqueness. A second attempt normalized
+$g$ as the exponential of a purely off-block generator; that does cut down the
+freedom, but it is not needed, and the argument below is both shorter and
+independent of any choice of slice. For the second statement write
 the gauged pair as $\widetilde{\mathcal A}=z^{-1}U+O(1)$, block diagonal, and
 $\widetilde{\mathcal C}_a=z^{-1}\check C_a(z)$ with
 $\check C_a=\check C^{(0)}+z\check C^{(1)}+\cdots$, and expand the flatness
@@ -1266,52 +1262,66 @@ $\mathcal A(z)=z^{-1}U-\mu$, those two facts are exactly
   \label{eq:duality}
 \]
 
-\begin{lemma}[The decoupling gauge is an isometry]
+\begin{lemma}[The splitting gauge can be chosen to be an isometry]
 \label{lem:duality-gauge}
-The unique normalized gauge $g=\exp(X)$ of Lemma~\ref{lem:decouple} satisfies
-$g(-z)^TG\,g(z)=G$. Hence the decoupled connection satisfies
-\eqref{eq:duality} with the same constant pairing, and so does each block with
-the restriction of $G$ to it, before and after the twist by $\exp(u_0/z)$.
+The block-splitting gauge of Lemma~\ref{lem:decouple} may be corrected by a
+block-diagonal gauge so that $g(-z)^TG\,g(z)=G$. It then still block-diagonalizes,
+so the decoupled connection satisfies \eqref{eq:duality} with the same constant
+pairing, and so does each block with the restriction of $G$ to it, before and
+after the twist by $\exp(u_0/z)$.
 \end{lemma}
 
 \begin{proof}
-Let $\sigma$ be the involution $\mathcal A\mapsto-G^{-1}\mathcal A(-z)^TG$ on
-connection matrices, so that \eqref{eq:duality} reads
-$\mathcal A^\sigma=\mathcal A$. A direct computation with the gauge action
-$g\cdot\mathcal A=g^{-1}\mathcal Ag-g^{-1}z\partial_zg$ gives
-\[
-  (g\cdot\mathcal A)^\sigma=h\cdot(\mathcal A^\sigma),
-  \qquad h:=G^{-1}g(-z)^{-T}G,
-\]
-the two terms matching separately: the conjugation term because
-$h^{-1}=G^{-1}g(-z)^TG$, and the logarithmic-derivative term because
-$h^{-1}z\partial_zh=-G^{-1}\bigl(z\partial_zg(-z)\bigr)^Tg(-z)^{-T}G$. Take
-$g=\exp(X)$ to be the normalized decoupling gauge and put
-$\widetilde{\mathcal A}=g\cdot\mathcal A$.
-The generalized eigenspaces of a $G$-self-adjoint operator are $G$-orthogonal,
-so $G$ is block diagonal, and therefore $\widetilde{\mathcal A}^\sigma$ is block
-diagonal whenever $\widetilde{\mathcal A}$ is.
+Let $g=I+O(z)$ be any block-splitting gauge and set
+$\widetilde G(z):=g(-z)^TG\,g(z)$, so that $\widetilde G(0)=G$. Three facts.
 
-The point of the normalization is that $h$ lies in the same normalized class.
-Indeed $h=G^{-1}\exp\bigl(-X(-z)^T\bigr)G=\exp\bigl(\sigma'(X)\bigr)$ with
-$\sigma'(X):=-G^{-1}X(-z)^TG$. Transposition carries the $(i,j)$ block to the
-$(j,i)$ block and so preserves ``purely off-block'', and conjugation by the
-block-diagonal $G$ preserves it too; and $\sigma'(X)=O(z)$ since $X=O(z)$. So
-$h=\exp(\sigma'(X))$ satisfies \eqref{eq:decouple-normalization}, and it carries
-$\mathcal A^\sigma=\mathcal A$ to the block-diagonal
-$\widetilde{\mathcal A}^\sigma$. Uniqueness in Lemma~\ref{lem:decouple} now gives
-$h=g$, and since $X=O(z)$ makes the exponential injective here, $\sigma'(X)=X$,
-that is $X(-z)^TG=-G\,X(z)$. Hence
+\emph{(i) $\widetilde G$ obeys the transported duality.} Writing
+$\widetilde{\mathcal A}=g\cdot\mathcal A$ and using
+$\mathcal A(-z)^TG+G\mathcal A(z)=0$ together with the invariance of $z\partial_z$
+under $z\mapsto-z$, a direct computation gives
 \[
-  g(-z)^TG\,g(z)=\exp\bigl(X(-z)^T\bigr)G\exp\bigl(X(z)\bigr)
-   =G\exp\bigl(-X(z)\bigr)\exp\bigl(X(z)\bigr)=G,
+  \widetilde{\mathcal A}(-z)^T\widetilde G+\widetilde G\,\widetilde{\mathcal A}(z)
+  +z\partial_z\widetilde G=0,
+  \tag{8.4a}
+  \label{eq:duality-transported}
 \]
-which is the claim. Note that $\sigma'$ is an involution, using that $G$ is
-symmetric, so no orientation has been chosen. Restriction to a block is
-legitimate because $G$ restricts
-nondegenerately to each block. The twist by $\exp(u_0/z)$ subtracts the scalar
-$z^{-1}u_0I$ from the block connection, and \eqref{eq:duality} is insensitive to
-that because the subtracted term is odd in $z$ and self-adjoint.
+the two gauge terms combining into $z\partial_z\widetilde G$ exactly.
+
+\emph{(ii) $\widetilde G$ is block diagonal.} Take the $(i,j)$ off-block component
+of \eqref{eq:duality-transported} with $i\ne j$. Since
+$\widetilde{\mathcal A}$ is block diagonal with
+$\widetilde{\mathcal A}_i=z^{-1}U_i+O(1)$, the coefficient of $z^{-1}$ reads
+$(u_j-u_i)\widetilde G_{ij}=0$ modulo terms involving the nilpotent parts and
+lower order, and $u_i-u_j$ is a unit; the same invertible factor multiplies each
+successive coefficient, so $\widetilde G_{ij}=0$ order by order. This is the
+Sylvester argument already used in Lemma~\ref{lem:decouple}.
+
+\emph{(iii) A block-diagonal correction makes it constant.} From the definition,
+$\widetilde G(z)^T=g(z)^TG\,g(-z)=\widetilde G(-z)$, so writing
+$\widetilde G=\sum_n\widetilde G_nz^n$ we get $\widetilde G_n^T=(-1)^n\widetilde
+G_n$: even coefficients symmetric, odd ones antisymmetric, with
+$\widetilde G_0=G$. Seek a block-diagonal $k=I+O(z)$ with
+$k(-z)^T\widetilde G(z)k(z)=G$. At order $z$ the equation is
+$M-M^T=-\widetilde G_1$ with $M=Gk_1$, solvable by $M=-\tfrac12\widetilde G_1$
+precisely because $\widetilde G_1$ is antisymmetric, and $k_1=G^{-1}M$ is block
+diagonal because $\widetilde G_1$ and $G$ are. The same alternation makes each
+higher order solvable, the obstruction at order $n$ being symmetric or
+antisymmetric exactly as required. Replacing $g$ by $gk$ leaves it
+block-splitting, by Lemma~\ref{lem:decouple}, and makes it an isometry.
+
+Restriction to a block is legitimate because $G$ restricts nondegenerately to
+each block, the generalized eigenspaces of a $G$-self-adjoint operator being
+$G$-orthogonal. The twist by $\exp(u_0/z)$ subtracts the scalar $z^{-1}u_0I$ from
+the block connection, and \eqref{eq:duality} is insensitive to that because the
+subtracted term is odd in $z$ and self-adjoint.
+
+\emph{Remark on the earlier argument.} Two previous versions tried to prove that
+the splitting gauge \emph{is} an isometry, by showing that its adjoint partner
+$h=G^{-1}g(-z)^{-T}G$ coincides with it. That cannot be had from uniqueness: $h$
+need only differ from $g$ by a block-diagonal gauge. The correct statement is the
+one above --- the transported pairing is block diagonal, and a block-diagonal
+correction, formally a square root, restores it --- and it needs no normalization
+of $g$ at all.
 \end{proof}
 
 Expanding \eqref{eq:duality} for the twisted decoupled block connection
