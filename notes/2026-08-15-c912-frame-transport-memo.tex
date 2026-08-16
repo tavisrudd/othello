@@ -1125,19 +1125,38 @@ identity
   \tag{8.1}
   \label{eq:flat-pair}
 \]
-Its off-block part in bidegree $(i,j)$, $i\ne j$, has zero left side because
-$\widetilde{\mathcal A}$ is block diagonal. At order $z^{-2}$ this reads
-$U_i\check C^{(0)}_{ij}-\check C^{(0)}_{ij}U_j=0$. The operator here is
+Its off-block part in bidegree $(i,j)$, $i\ne j$, at order $z^{-2}$ involves the
+Sylvester operator
 \[
   X\longmapsto U_iX-XU_j=(u_i-u_j)X+N_iX-XN_j,
 \]
-not multiplication by $u_i-u_j$: the nilpotent parts must be carried, and an
-earlier version of this proof dropped them. The conclusion is unchanged, because
+\emph{not} multiplication by $u_i-u_j$: the nilpotent parts must be carried, and
+an earlier version of this proof dropped them. Nothing is lost, because
 $u_i-u_j$ is a unit and $X\mapsto N_iX-XN_j$ is nilpotent, so the sum is
-invertible and $\check C^{(0)}_{ij}=0$. The same invertible Sylvester operator
-multiplies the next off-block coefficient at each successive order, so every
-off-block coefficient vanishes. Since $g=I+O(z)$, the leading term is unchanged.
+invertible; the same operator governs each successive order.
+
+What this yields, however, is \emph{not} that the bulk connection is block
+diagonal, and an earlier version claimed that on the ground that the left side of
+the off-block equation vanishes. It does not vanish: the projectors move with the
+bulk parameter, $\partial_aP_i\ne0$. The correct statement is that the off-block
+part of the gauged bulk connection in bidegree $(i,j)$ is exactly
+$-P_i(\partial_aP_j)P_j$, so the bulk connection \emph{preserves each $H_i$ as a
+subbundle} rather than being block diagonal on the nose. That is what the later
+steps use --- the connection form $\Gamma_a$ of Step~4 is written in the true
+version --- and the leading coefficient on $H_0$ is $C_{a,0}=P_0C_aP_0$ as
+stated, since $g=I+O(z)$ leaves the leading term unchanged.
 \end{proof}
+
+\begin{remark}[The invariant does not depend on the choices just made]
+\label{rem:gauge-independence}
+Because the splitting gauge is explicitly non-canonical, and is corrected further
+in Lemma~\ref{lem:duality-gauge}, it is worth recording that the object
+Theorem~\ref{thm:rigidity} freezes is insensitive to both choices. Changing the
+splitting gauge by a block-diagonal $k=I+O(z)$ and changing the frame within a
+block replace the sheared residue $R$ by $S^{-1}RS$ with $S$ regular and
+invertible at $z=0$, so $R$ moves by conjugation alone and $\det(XI-R)$ is
+unchanged.
+\end{remark}
 
 \subsection*{Step 2: the exponential factor, and the commutant}
 
@@ -1303,10 +1322,16 @@ the two gauge terms combining into $z\partial_z\widetilde G$ exactly.
 of \eqref{eq:duality-transported} with $i\ne j$. Since
 $\widetilde{\mathcal A}$ is block diagonal with
 $\widetilde{\mathcal A}_i=z^{-1}U_i+O(1)$, the coefficient of $z^{-1}$ reads
-$(u_j-u_i)\widetilde G_{ij}=0$ modulo terms involving the nilpotent parts and
-lower order, and $u_i-u_j$ is a unit; the same invertible factor multiplies each
-successive coefficient, so $\widetilde G_{ij}=0$ order by order. This is the
-Sylvester argument already used in Lemma~\ref{lem:decouple}.
+the Sylvester operator
+$Z\mapsto(u_j-u_i)Z+ZN_j-\widehat N_iZ$, a unit plus a nilpotent and therefore
+invertible with the nilpotent parts carried inside it rather than discarded. The
+term $z\partial_z\widetilde G$ does not interfere and in particular creates no
+resonance: at order $z^{n-1}$ it contributes $(n-1)\widetilde G_{n-1}$, which
+sits on the right-hand side and involves only a lower coefficient, so the operator
+acting on $\widetilde G_n$ is the one just displayed, with no integer added to the
+eigenvalue difference. Hence $\widetilde G_{ij}=0$ order by order. The case $n=0$
+of the same recursion gives, for free, that the constant pairing $G$ is itself
+block diagonal.
 
 \emph{(iii) A block-diagonal correction makes it constant.} From the definition,
 $\widetilde G(z)^T=g(z)^TG\,g(-z)=\widetilde G(-z)$, so writing
@@ -1316,9 +1341,13 @@ $\widetilde G_0=G$. Seek a block-diagonal $k=I+O(z)$ with
 $k(-z)^T\widetilde G(z)k(z)=G$. At order $z$ the equation is
 $M-M^T=-\widetilde G_1$ with $M=Gk_1$, solvable by $M=-\tfrac12\widetilde G_1$
 precisely because $\widetilde G_1$ is antisymmetric, and $k_1=G^{-1}M$ is block
-diagonal because $\widetilde G_1$ and $G$ are. The same alternation makes each
-higher order solvable, the obstruction at order $n$ being symmetric or
-antisymmetric exactly as required. Replacing $g$ by $gk$ leaves it
+diagonal because $\widetilde G_1$ and $G$ are. The induction closes at every
+order for a uniform reason: setting $H(z):=k(-z)^T\widetilde G(z)k(z)$ for any
+$k$, the same computation that gave $\widetilde G(z)^T=\widetilde G(-z)$ gives
+$H(z)^T=H(-z)$, so the order-$n$ obstruction $\Omega_n$ carries parity $(-1)^n$
+automatically and $M_n=-\tfrac12\Omega_n$ solves it. The factor of two is the
+only arithmetic used, so characteristic zero --- or merely
+$\operatorname{char}\ne2$ --- is required, which holds here. Replacing $g$ by $gk$ leaves it
 block-splitting, by Lemma~\ref{lem:decouple}, and makes it an isometry.
 
 Restriction to a block is legitimate because $G$ restricts nondegenerately to
