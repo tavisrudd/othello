@@ -10,14 +10,15 @@ Discovery companion:
 
 ## Current status
 
-**Referee edit packet applied (2026-08-16, unallocated user request).**  Twelve
+**Referee edits applied (2026-08-16, unallocated user request).**  Fourteen
 edits to Paper I: the Corollary B.19 phase sign and empty-complement corner, the
 Lemma 5.1 `c=0` branch, explicitly constructed traceless local logarithms in the
-Theorem 5.3 proof, a direct binary-MDS argument, and five attribution or
-bibliography corrections.  Warning-free 37-page build and release gate pass at
-`e5d77ed0e`.  The standalone repository is synchronized at `c9af535` from
-authority `86b887162`, with a byte-identical PDF and a matching public tree
-hash, and is unpushed.  Report:
+Theorem 5.3 proof, a direct binary-MDS argument, a variable spread bound
+`s<=pi` in Theorem B.18, and six attribution or bibliography corrections.
+Warning-free 37-page build and release gate pass at `53b2024ed`.  The standalone
+repository is synchronized at `fc8f8aa` from authority `09ed89265`, with a
+byte-identical PDF and a matching public tree hash, and is two commits ahead of
+its remote and unpushed.  Report:
 `2026-08-16-ame-lu-referee-edit-packet.md`.
 
 **C890 closed (2026-08-08): C787's exact-base reduction is kernel checked.**

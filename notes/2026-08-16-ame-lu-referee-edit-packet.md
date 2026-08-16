@@ -174,8 +174,13 @@ commits:
 - `export-paper-repos.py verify --root ~/src/math-papers/ame-lu` confirms 28
   tracked files against source commit `86b887162`.
 
-Forward commit `c9af535` in `~/src/math-papers/ame-lu`, one ahead of its
-`origin/main` at `67602af`.  **Nothing was pushed**; publishing stays an author
+The second round was exported the same way from authority `09ed89265`:
+`audit` findings zero, five changed paths, a rebuilt repository PDF
+byte-identical to the authority's at `d7654488...`, matching public tree
+`93898066...`, and `verify` clean at 28 tracked files.
+
+Forward commits `c9af535` and `fc8f8aa` in `~/src/math-papers/ame-lu`, two ahead
+of its `origin/main` at `67602af`.  **Nothing was pushed**; publishing stays an author
 decision.  No Lean, certificate-package, finitegeom, or portfolio-summary tree
 was touched, and none needed to be: this batch changed manuscript prose and
 bibliography only.
