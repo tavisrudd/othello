@@ -307,8 +307,13 @@ have positive Novikov weight. Then $v(\theta_w\varphi)>0$ in the
 coefficient-dominant order and the domination argument reverses. Worse, the
 equation $\theta_w(c)=\theta_w(\varphi)c$ is solved by
 \[
-  c=\sum_{n\ge0}\frac{(-1)^n}{n!}\,x^{n\gamma}w^{-n},
+  c=\sum_{n\ge0}\frac{1}{n!}\,x^{n\gamma}w^{-n}=\exp(x^\gamma w^{-1}),
 \]
+--- note the sign: $\theta_w\varphi=-\varphi$ here, so matching the coefficient of
+$x^{m\gamma}w^{-m}$ gives $-ma_m=-a_{m-1}$, hence $a_m=a_{m-1}/m$ and
+$a_m=1/m!$ with no alternation. An earlier version displayed the alternating
+series, which solves $\theta_w(c)=+\varphi c$ instead; the support, and with it
+the conclusion, is unaffected ---
 whose support $\{(n\gamma,-n/e)\}_{n\ge0}$ is increasing, hence well ordered, so
 $c\in\mathcal H_e$ and $cE(\varphi)$ is a $\theta_w$-constant outside
 $\mathcal C$. Lemma~\ref{lem:constants} is therefore false in that regime, and
@@ -1122,9 +1127,16 @@ identity
 \]
 Its off-block part in bidegree $(i,j)$, $i\ne j$, has zero left side because
 $\widetilde{\mathcal A}$ is block diagonal. At order $z^{-2}$ this reads
-$(u_i-u_j)(\check C^{(0)})_{ij}=0$, and at each successive order the same
-invertible factor multiplies the next off-block coefficient. So every off-block
-coefficient vanishes. Since $g=I+O(z)$, the leading term is unchanged.
+$U_i\check C^{(0)}_{ij}-\check C^{(0)}_{ij}U_j=0$. The operator here is
+\[
+  X\longmapsto U_iX-XU_j=(u_i-u_j)X+N_iX-XN_j,
+\]
+not multiplication by $u_i-u_j$: the nilpotent parts must be carried, and an
+earlier version of this proof dropped them. The conclusion is unchanged, because
+$u_i-u_j$ is a unit and $X\mapsto N_iX-XN_j$ is nilpotent, so the sum is
+invertible and $\check C^{(0)}_{ij}=0$. The same invertible Sylvester operator
+multiplies the next off-block coefficient at each successive order, so every
+off-block coefficient vanishes. Since $g=I+O(z)$, the leading term is unchanged.
 \end{proof}
 
 \subsection*{Step 2: the exponential factor, and the commutant}
@@ -1407,10 +1419,24 @@ that is the route to use, at the cost of carrying the hypothesis.
 \begin{theorem}[Rigidity of the formal type]
 \label{thm:rigidity}
 $\partial_aR=[R,G_a]$ for every bulk direction $a$. Hence the characteristic
-polynomial of $R$ has coefficients in $\Lambda$, constant in $\tau$; the
-formal monodromy of the block is conjugate to $\exp(2\pi iR)$ at every point of
-the formal germ; and the primitive-sixth multiplicity of the block is constant.
+polynomial of $R$ has coefficients in $\Lambda$, constant in $\tau$, and the
+primitive-sixth multiplicity of the block is constant.
 \end{theorem}
+
+\begin{remark}[Claiming only what the count needs]
+\label{rem:no-levelt}
+An earlier version added that the formal monodromy of the block is conjugate to
+$\exp(2\pi iR)$ at every point of the formal germ. That is more than is needed and
+more than is proved: in a \emph{resonant} regular-singular system the passage from
+the residue to the full formal monodromy requires a Levelt normal form, and higher
+resonant terms can affect the unipotent part. What $\nu_6$ counts is the
+multiplicity of the primitive sixth roots of unity among the eigenvalues, and
+that is read off the characteristic polynomial of $R$ alone, which
+Theorem~\ref{thm:rigidity} freezes. For the cubic block there is in any case no
+resonance --- the exponents $-1/6$ and $-5/6$ differ by $2/3$, not by an integer
+--- so the stronger statement happens to hold there; but the argument does not
+need it and should not assert it in general.
+\end{remark}
 
 \begin{proof}
 By Theorem~\ref{thm:no-irregularity} the sheared pair has $A_{-1}=0$ and
@@ -1680,10 +1706,24 @@ $\Gamma=0$: no receiver enters anywhere in this section.
 \label{thm:bulk-constancy}
 Let $(H,\nabla)$ be the A-model $F$-bundle of a smooth projective $T$ over its
 base $B$, and let $b\in B$. Then the framed monodromy at every point of the
-formal germ of $B$ at $b$ is conjugate to that at $b$. Consequently $\nu_6$ is
-locally constant on $B$, hence constant on each connected component, and
-likewise on each summand of the spectral decomposition.
+formal germ of $B$ at $b$ is conjugate to that at $b$, and likewise on each
+summand of the spectral decomposition.
 \end{theorem}
+
+\begin{remark}[What this does \emph{not} give]
+\label{rem:no-local-constancy}
+An earlier version of this theorem continued: ``Consequently $\nu_6$ is locally
+constant on $B$, hence constant on each connected component.'' That inference is
+unavailable, and the paragraphs after \S\ref{sec:endpoint-gap} explain why: the
+gauge realizing the conjugacy is the pro-Laurent object, whose $z$-order is
+unbounded below across bulk degrees, so it need not sum at an ordinary nearby
+analytic point of $B$. Constancy on a formal germ is not analytic local
+constancy, and ``locally constant on $B$, hence constant on each connected
+component'' silently upgrades the first to the second. The distinction is exactly
+the one that matters downstream, because Katzarkov--Kontsevich--Pantev--Yu
+identify geometric atoms whose spectral lifts lie in a common \emph{connected
+component}, not merely in a common formal germ. The sentence is deleted.
+\end{remark}
 
 \begin{proof}
 This is Cai's argument in the proof of his Proposition 6, which deserves to be
