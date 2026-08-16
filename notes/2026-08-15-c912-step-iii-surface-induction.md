@@ -94,6 +94,12 @@ That exhausts the classification, so the theorem follows. ∎
 3. **The nef-canonical description**: Katzarkov–Kontsevich–Pantev–Yu's Lemma 5.24
    and Claim 6.15, as recorded in the memo.
 
+**Settled after this report was written:** input 1 has since been read at the
+source and holds in the decorated form — see
+`2026-08-15-c912-blowup-formula-source-check.md`. The discussion below of what
+the decorated form means, and of the gap between it and the multiplicity
+reading, stands as written; only its status changed.
+
 The induction needs the *decorated* form of inputs 1 and 2 — that the atoms
 carry over with their Serre automorphisms, not merely that the multiplicities
 match. That is how Katzarkov–Kontsevich–Pantev–Yu use the projective-bundle

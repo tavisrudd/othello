@@ -1601,20 +1601,26 @@ putting every eigenvalue at a root of unity of order at most two.
 reductions leave a short induction, which closes (iii) modulo three imported
 statements.
 
-\begin{proposition}[Step (iii) for surfaces, conditional]
+\begin{proposition}[Step (iii) for surfaces]
 \label{prop:step-iii}
-Assume Iritani's blowup formula for atoms, the projective-bundle formula for
-atoms, and Katzarkov--Kontsevich--Pantev--Yu's nef-canonical description, each in
-the decorated form that carries atoms with their Serre automorphisms. Then no
-atom of a smooth projective surface has a primitive sixth root of unity as a
-Serre eigenvalue.
+Assume the projective-bundle formula for atoms and
+Katzarkov--Kontsevich--Pantev--Yu's nef-canonical description. Then no atom of a
+smooth projective surface has a primitive sixth root of unity as an eigenvalue
+of its formal monodromy, equivalently --- under the identification of
+Section~\ref{sec:kkpy-serre} --- as a Serre eigenvalue.
 \end{proposition}
 
 \begin{proof}
-Induct on the number of blow-downs to a minimal model, finite by Castelnuovo. If
-$S$ is not minimal, write $S=\mathrm{Bl}_pS'$; the blowup formula in codimension
-two with a point as centre gives the atoms of $S$ as those of $S'$ together with
-one rank-one atom, whose Serre operator is the identity, so $S$ inherits the
+Induct on the number of blow-downs to a minimal model, finite by Castelnuovo,
+with the statement quantified over all parameters of the formal base. If $S$ is
+not minimal, write $S=\mathrm{Bl}_pS'$. Iritani's decomposition theorem
+(arXiv:2307.13555, Theorem 5.18) gives an isomorphism of quantum $D$-modules
+$\mathrm{QDM}(S)\to\tau^*\mathrm{QDM}(S')\oplus\varsigma^*\mathrm{QDM}(\mathrm{pt})$
+commuting with the quantum connection and intertwining the pairings, and by his
+Corollary 1.2 the underlying change of variables preserves the Euler vector
+fields. So the formal type of $S$ at a parameter is that of $S'$ at the
+corresponding parameter plus that of a point, which is rank one with trivial
+connection; the added atom contributes the eigenvalue $1$ and $S$ inherits the
 conclusion from $S'$. A minimal surface has nef canonical class, or is $\PP^2$,
 or is a projective bundle over a smooth curve. The nef case is the reduction
 above. For $\PP^2$ the characteristic polynomial of $c_1\star$ is
@@ -1631,13 +1637,16 @@ classification.
 
 The fake of the previous paragraph does not disturb the blow-down step: it mixes
 the new exceptional object with the ambient structure sheaf, which lie in
-different atoms, so the pair it generates is not an atom. What the step does
-need, and what the computational literature does not supply, is the decorated
-reading --- Böhning, von Bothmer and Su'a verify the blowup statement for
-multiplicity sequences and record that naive and small atomic decompositions can
-differ. That is the one point to check at the source; Iritani's formula is
-arXiv:2307.13555, verified in the surface case by Gyenge and Szab\'o, Advances
-in Mathematics 479 (2025).
+different atoms, so the pair it generates is not an atom. Nor is the blow-down
+step resting on a multiplicity count: the computational literature --- Böhning,
+von Bothmer and Su'a --- verifies the blowup statement for multiplicity
+sequences and records that naive and small atomic decompositions can differ, but
+Iritani's theorem is at the level of the connection itself, which is the reading
+used above. The reading list, cache locators and hashes are in
+`2026-08-15-c912-blowup-formula-source-check.md'. Iritani also records that
+Gyenge and Szab\'o studied the asymptotics of the Euler eigenvalues under
+blowdowns to minimal models of surfaces, which is the configuration this
+induction runs through.
 
 \emph{The ambient category never sees it.} The Serre functor of a surface is
 tensor by $\omega$ followed by $[2]$, and $[2]$ acts by $+1$ on K-groups, so the
@@ -1668,7 +1677,7 @@ than the two decomposition theorems. And their sentence is a worked example,
 not a theorem with hypotheses. The graded minimal polynomial has now been
 checked, on the lattice rather than at the source, and came out as Kuznetsov's
 $S^3=[5]$; the surface exclusion is Proposition~\ref{prop:step-iii}, which holds
-modulo three imported statements, one of which needs its decorated form checked.
+modulo two imported statements, both of which this route already uses elsewhere.
 Backing computations, and the exact record of what was and was not read at the
 source, are in `2026-08-15-c912-step-iii-serre-restatement.md' and
 `2026-08-15-c912-step-iii-surface-induction.md', with the scripts
@@ -2473,10 +2482,10 @@ and one of its expectations is corrected.
   six, matching Kuznetsov's $S^3=[5]$. The subsection now uses the verified
   relation, and states the surface obligation as (iii) with its two reductions
   and the non-minimal-surface counterexample to the weakened form. It also now
-  proves (iii) outright, modulo three imported statements, by a minimal-model
-  induction (Proposition~\ref{prop:step-iii}); the endpoint route's
-  surface exclusion is therefore no longer an open problem of its own but a
-  literature obligation.
+  proves (iii) outright by a minimal-model induction
+  (Proposition~\ref{prop:step-iii}), on Iritani's blowup decomposition read at
+  the source plus two statements this route already uses; the endpoint route's
+  surface exclusion is therefore no longer an open problem of its own.
 \item The scope remark expected the rank-two mechanism to extend to a Jordan
   block of any size. It half does. Proposition~\ref{prop:size-m-steps} carries
   the commutant and no-splitting steps to size $m$, but
