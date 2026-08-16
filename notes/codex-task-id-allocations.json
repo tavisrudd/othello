@@ -3122,8 +3122,17 @@
       "last": 914,
       "purpose": "Decide whether the A5-invariant cubic pencil meets the Yang-Yu-Zhu coprime-degree locus in cubic-threefold moduli",
       "sequence": 347
+    },
+    {
+      "count": 1,
+      "first": 915,
+      "kind": "reservation",
+      "lane": "reed-solomon",
+      "last": 915,
+      "purpose": "Apply the external referee correction package (E1-E6 + checklists) to the beyond-redundancy-four PRS Version 2 draft",
+      "sequence": 348
     }
   ],
-  "next_id": 915,
+  "next_id": 916,
   "schema": "codex-task-id-allocations-v1"
 }
