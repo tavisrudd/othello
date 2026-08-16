@@ -111,6 +111,22 @@ F1. Related open residual, WP9: "re-derive the continuity claim for the inverse
 of the full coordinate map… The structure supports it; the recursion was not
 written out."
 
+**STATUS, 2026-08-15, after a hostile referee pass: NOT DISCHARGED.** An attempt
+to prove Obligation A was written into the memo as `sec:base-change` and then
+refuted. The argument claimed that no continuity is needed because Iritani's
+elements are finite sums of homogeneous pieces, so membership in `R_j` would be
+decidable monomial by monomial and the identities would transport along
+`R_j ↪ B_j`. That is false, and the source says so directly: Iritani §2.2 states
+that a homogeneous element of `K((x))` is of the form `Σ_{n=m}^∞ a_n x^n`, so a
+single homogeneous component is *itself an infinite series*. Graded finiteness is
+finiteness in the grading only. Verified against arXiv:2307.13555v3 in this pass;
+the source-exactness audit's §11.5 verdict of "no obstruction" is withdrawn.
+Two further gaps: the argument never covered the entries of the comparison map
+itself, whose entries involve variables that are not `R_j` generators, and the
+power series directions are not finite in any sense. The memo section now states
+what survives — the removal of the `u^{-1}` obstruction by one explicit rank-one
+twist, and the separation of `R_j` — and records the rest as owed.
+
 **Why this is the whole ball game.** With Obligation A proved, `B_j` is a
 legitimate receiver, the tail is topologically nilpotent in it, and the
 displacement is a genuine point of a formal germ over `B_j` — which is the
@@ -186,8 +202,22 @@ transcription in the hostile-referee report, not the membership conclusion.
   shared subring rather than a contradictory one.
 - **Resolved.** Obligation B is discharged at the source, with the source
   statement stronger than the manuscript's. See above.
-- **Still open.** Obligation A, the base-change lemma, is untouched by the audit
-  and remains the one thing between the reconciliation and a closed argument.
+- **Still open, and an attempt on it has been refuted.** Obligation A remains the
+  one thing between the reconciliation and a closed argument. See the status note
+  above. The reconciliation of §2 is therefore weaker than first written: the two
+  rings are still plausibly two completions of one shared subring, but the
+  comparison data has not been shown to cross between them.
+- **Two defects found downstream on 2026-08-15, both in the memo rather than
+  here.** Its endpoint section asserted that weak factorization can be arranged
+  as a roof with every arrow a blowdown; that is strong factorization, which is
+  not available in the dimension at issue, and the reduction built on it is
+  conditional rather than unconditional. And the rank-two rigidity chain used
+  uniqueness of a block-diagonalizing gauge `g = I + O(z)` without the
+  normalization that makes such a gauge unique — composing with any
+  block-diagonal gauge preserves both stated properties. The repair normalizes
+  the gauge as the exponential of a purely off-block generator, which also makes
+  the pairing-isometry argument go through, since the relevant involution
+  preserves that class. Under independent verification.
 - Nothing here touches the divisor-tagging clause, which deforms over a formal
   power series ring on an algebraically closed field and is a separate and easier
   problem.
