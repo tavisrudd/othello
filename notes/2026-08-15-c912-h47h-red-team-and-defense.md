@@ -186,6 +186,79 @@ substitution. That is a genuinely narrow residue, and it is fair to say so.
   on a K-group (C912-M26, C912-M27). Support of this kind is only as good as
   the convention bookkeeping; see the source-exactness audit.
 
+### E7 — Any `H⁰` component of a displacement is exactly invariant
+
+- **Provenance.** `2026-08-15-c912-section10-hostile-referee.md`, second pass,
+  "The string equation is exact here, and needs no smallness"; used by the
+  manuscript for the unit term at `sections/04-one-step.tex`, lines 307–311.
+- **Mechanism.** The string equation kills all but the exceptional term, so
+  `⋆_{τ+c1} = ⋆_τ` identically for any `c` in the coefficient ring. The Euler
+  field gains exactly `c·1`, so `E⋆` gains the scalar `c·id`; adding a scalar to
+  `U` translates every exponential factor by the same `c/z` and leaves every
+  spectral projector, block and residue untouched.
+- **Validity class.** PROVED-UNCONDITIONAL. `c` may be a **unit** of the
+  Novikov ring — no nilpotence is required. This is the one place where "exact,
+  no smallness" is literally true.
+- **Scope delta.** Disposes of the `H⁰` component in all three reconstruction
+  use sites. Leaves the `H²` component (E8's companion, the divisor
+  substitution) and the `H^{≥4}` tail plus `s_j`, which is the live obligation.
+
+### E8 — For `X × P¹` the entire reconstruction displacement is an `H⁰` shift
+
+- **Provenance.** Same report, "CLAIM A: SURVIVES", with Iritani–Koto
+  arXiv:2307.03696 §5.3 stationary phase, the quantum Riemann–Roch asymptotic,
+  and (5.11) as locators.
+- **Mechanism, two independent routes.** (i) For a trivial bundle every Chern
+  root vanishes, so the modified quantum Riemann–Roch operator is a scalar in
+  `(λ, z)` with strictly non-negative `z`-powers; the stationary-phase
+  `z`-count then forces `[z^{-1}]log(...) = 0`, and Iritani–Koto (5.11) gives
+  `ς_j° = rλ_j` exactly — no `H²` term, no `H^{≥4}` tail. (ii) Independently,
+  `P(O_X^{⊕2}) = X × P¹` and small quantum cohomology of a product is the
+  tensor product, so the generalized eigenspace at `rλ_j` is `H^*(X) ⊗ v_j`;
+  the compressed grading numbers `tr(P_jμ)` are degree zero, permuted by the
+  deck action, hence all equal, and sum to `tr μ = 0`, hence each is zero. The
+  `j`-th summand is therefore the quantum D-module of `X` at a bulk parameter
+  lying in `H⁰`.
+- **Validity class.** PROVED-UNCONDITIONAL for the trivial rank-two bundle, by
+  two independent routes, at the canonical base point inside the germ where
+  Iritani–Koto Theorem 5.1 lives. Combined with E7 this gives
+  `ν_6(X × P¹) = 4` **with no use of Hypothesis 4.7H**.
+- **Scope delta.** Covers the projective-bundle site only for `c_1(V) = 0` and
+  `V` trivial. For `c_1(V) ≠ 0` the exponential factor is present and the
+  quantum Riemann–Roch operator is cohomology-valued, so neither route runs.
+  Covers nothing of the blowup centre or ambient sites.
+- **It also strikes an earlier pessimistic claim** in the memo (lines 771–774)
+  that even `X × P¹` carries an `O(q^{-1/r})` tail. That was an inference from
+  the `O(·)` symbol, which carries no information about `[z^{-1}]log`, and
+  should be struck from the memo.
+
+### E9 — The divisor-tagging clause sits in the ring where E1 already applies
+
+- **Provenance.** Evidence ledger `2026-08-15-c912-h47h-evidence-ledger.md`,
+  sections A.5 and A.6, against `sections/04-one-step.tex`.
+- **Content.** The divisor-tagging family deforms over `k_χ[[t]]` — formal
+  parameters over an algebraically closed field — which is exactly the setting
+  of `thm:bulk-constancy` (E1). The three reconstruction sites instead deform
+  over a non-field Novikov monoid completion with an `O(q^{-1/(c-1)})` tail.
+  Nothing transfers between the two classes.
+- **Why this matters.** Clause (2) of the hypothesis is not in the same
+  difficulty class as clause (1). It looks close to provable with the argument
+  the lane already has, unimported. That is the cheapest available reduction of
+  the hypothesis's surface area.
+
+### E10 — The `H²` component is disposed of by a coefficient automorphism
+
+- **Provenance.** `sections/04-one-step.tex`, lines 629–632 and 769–770, with
+  (4.1) at 293–297; confirmed at source level in
+  `2026-08-15-c912-framing-compatibility-checks.md` §3, ledger row C912-M17.
+- **Mechanism.** `Q^d ↦ e^{⟨a_2°,d⟩}Q^d` is a `z`-constant coefficient
+  automorphism fixing `ℂ`, so it cannot move the roots-of-unity multiplicities
+  of a characteristic polynomial.
+- **Validity class.** PROVED-UNCONDITIONAL.
+- **Owed.** One manuscript sentence citing Iritani–Koto (5.11)–(5.12),
+  respectively Iritani §5.8.1, as the normalization fixing the logarithmic
+  constant. Cheap, and unwritten.
+
 ---
 
 ## 3. Red team
@@ -296,6 +369,69 @@ answer — that the formal germ is caustic-free by a filtration argument, meetin
 another sheet only at `4q_2 = 27q_1` (C912-M20) — is what verifies (H1), so the
 two questions are the same question. It should be stated that way in the paper.
 
+### R8 — Two different topologies on overlapping objects, reconciled nowhere
+
+**This is the highest-value open item in the file, and it may mean the
+hypothesis is not yet well-posed rather than merely unproved.**
+
+- **Provenance.** Evidence ledger, junction C-J1, combining
+  `2026-08-15-c912-section10-hostile-referee.md` finding R4 and finding F1 with
+  the manuscript's own weight definition at `sections/04-one-step.tex`, lines
+  499–514.
+- **The break.** `cor:cubic-closed` extends Section 8's germ statement to "any
+  bulk parameter in the positive filtration" on the ground that evaluation at a
+  topologically nilpotent parameter is legitimate. The hostile referee's R4
+  answers that `τ`-constancy removes the need to *transport* the polynomial but
+  does not put the displacement point *inside the germ*, so Section 8 gains a
+  gauge-free proof and no enlargement of the domain of validity. F1 then
+  supplies the reason: under Iritani's graded completion and Iritani–Koto
+  Remark 5.3, `q^{±1/s}` is a **unit**, so the `H⁰` part, the `H²` constant and
+  the `H^{≥4}` tail all fail topological nilpotence in the sources' topology.
+- **And the counter-observation, which is what makes this decisive rather than
+  simply fatal.** The manuscript does not use Iritani's graded completion for
+  its filtration. It defines its own additive weight with `w(u) = 1`,
+  `w(s_{j,ℓ}) = 1`, under which `u = q^{-1/(c-1)}` **is** topologically
+  nilpotent by construction. So the manuscript and the refutation are working
+  in two different topologies on overlapping objects, and the sources'
+  invertibility and pullback statements are proved in the topology where the
+  roots of `q` are units. Nothing in the audited set reconciles them.
+- **What it kills, and what it does not.** It kills the claim that Section 8
+  discharges the reconstruction use sites. It does not establish that the
+  hypothesis is false. Until the manuscript's weight topology is shown
+  compatible with the sources' graded completion, the hypothesis's own phrase
+  "positive-filtration bulk displacement" does not have a single agreed meaning
+  across the paper and its imports — which is a well-posedness defect, not a
+  gap in a proof. **This is the one statement the paper most owes a referee.**
+
+### R9 — Even the cubic's own carrier stops being rank two on a nearby locus
+
+- **Provenance.** Evidence ledger section D, from
+  `2026-08-15-c912-m1-ambiguity-computation.md`.
+- **Content.** At `q_2 = 27q_1` two simple sheets coalesce at value zero,
+  creating a coalesced block out of blocks that carried nothing — so the count
+  can *rise* (ledger row C912-M21, open). At `4q_2 = 27q_1` the carrier becomes
+  **rank three**, and the hypotheses of the rigidity theorem lapse entirely;
+  settling that needs exactly the size-`≥ 3` machinery the memo says does not
+  exist. Both loci are argued absent from the Novikov germ by a filtration
+  argument — which means they matter precisely insofar as R8 does. The same
+  filtration claim is doing double duty, and it is the claim under dispute.
+- **Also unexcluded anywhere:** the resonance `ρ_i - ρ_j = -1` for semisimple
+  coalesced blocks.
+
+### R10 — A supporting lemma of the memo's own transport framework is false in range
+
+- **Provenance.** Evidence ledger findings D2 and D3.
+- **Content.** The transport theorem of the memo's Section 2 has **no verified
+  instances in the application**, and the Constants Lemma it rests on is false
+  once Novikov-coefficient exponentials are admitted, with an explicit
+  counterexample on record. Separately, the earlier claim that the convergence
+  criterion of R2 is scale invariant is refuted, and the criterion is
+  `L`-dependent in the direction that hurts the manuscript's own instruction to
+  choose `L` large.
+- **What it kills.** Any residual hope of defending the hypothesis through the
+  memo's general transport machinery. Only E1 (formal direction), E7/E8/E10
+  (exact, componentwise) and E5 (gauge-free, rank two) survive as load-bearing.
+
 ---
 
 ## 4. The defense, as a referee should hear it
@@ -307,11 +443,21 @@ Stated at the strength the evidence supports, and no higher.
    constant on the formal germ of the bulk base (E1). Nothing about the
    hypothesis is in doubt as a statement about formal deformation.
 
-2. **The entire residue is the legitimacy of one substitution**, of a
-   topologically nilpotent, positive-filtration element into a formal identity.
-   The hypothesis is not a leap about quantum connections; it is a claim that a
-   universally valid formal identity survives the mildest kind of
-   specialization.
+2. **The entire residue is the legitimacy of one substitution** of a specific
+   positive-filtration element into a formal identity. *This point must be made
+   carefully, and the first version of this report overstated it.* It is
+   tempting to say the substituted element is topologically nilpotent and so the
+   substitution is the mildest possible. That is true in the manuscript's own
+   weight `w`, and false in the sources' topology — see R8, which is now the
+   highest-value open item in the whole file.
+
+2b. **Two of the three use sites are already discharged, or nearly so.** The
+   projective-bundle displacement for `X × P¹` itself is an `H⁰` shift and is
+   exactly invariant by the string equation, with no smallness hypothesis and no
+   use of 4.7H at all (E7, E8). The divisor-tagging clause deforms over a formal
+   power series ring on an algebraically closed field, which is precisely the
+   hypothesis of the general formal-constancy theorem E1 — so it is close to
+   provable today, and the manuscript simply never imports the argument (E9).
 
 3. **The one mechanism that could falsify it is identified and excluded in the
    proved case.** Only coalesced blocks can carry the count (E2), and within a
@@ -349,6 +495,19 @@ of a growing family).
 
 In priority order, with the memo's own program (lines 1846–1876, and Section 6's
 repair) as the base.
+
+0. **The normalization statement of R8, before any of the rest.** Show that the
+   manuscript's additive weight `w` (with `w(u) = 1`, under which `u` is
+   topologically nilpotent by construction) is compatible with the graded
+   completion in which Iritani's and Iritani–Koto's invertibility and pullback
+   statements are proved, and in which `q^{±1/s}` is a unit. Every other item
+   below is conditional on this one having an answer, and the answer determines
+   whether the residual obligation is true, false, or ill-posed. Cheap items
+   that should ship regardless: import the formal-constancy argument to
+   discharge the divisor-tagging clause (E9); write the owed sentence fixing the
+   logarithmic constant (E10); strike the memo's unsupported `O(q^{-1/r})`-tail
+   claim at lines 771–774 (E8); state `ν_6(X × P¹) = 4` as unconditional (E7 +
+   E8).
 
 1. **The `μ`-grading route for arbitrary Jordan size at `u_0 = 0`.** Since `μ`
    is the grading operator and `E⋆` raises degree by two, `[μ, U] = U`, so `H_0`
@@ -392,14 +551,35 @@ repair) as the base.
 
 ## 6. Verdict
 
-Hypothesis 4.7H is a well-posed, falsifiable statement with a proved general
-formal core, a proved unconditional special case at the one target the paper most
-cares about, and an identified — not hypothetical — failure mechanism that is
-excluded exactly where the proof reaches and unexamined elsewhere. It is
-substantially better supported than "we found a hole of this shape."
+Hypothesis 4.7H is substantially better supported than "we found a hole of this
+shape". It has a proved general formal core valid for every smooth projective
+target and every block type (E1); two of its three instances are already
+discharged or nearly so, one of them unconditionally and by two independent
+routes (E7, E8, E9); the `H⁰` and `H²` components of every displacement are
+exactly invariant by identities rather than estimates (E7, E10); and the one
+mechanism that could falsify it — block splitting — is provably excluded
+wherever the argument reaches (E3), by steps that were re-derived independently
+in this pass rather than taken on the memo's word (E3, E4, E5).
 
-It is also weaker than the manuscript's presentation suggests, in one specific
-way that a referee will find: it is quantified over arbitrary smooth fourfolds,
-in a regime where the obvious transport argument provably does not converge under
-the paper's own normalization. Calling it a conjecture with strong structural
-evidence is accurate. Calling it a routine technical assumption is not.
+Three things a referee will nevertheless find, and the paper should say them
+first rather than be caught with them.
+
+1. **The scope is larger than the statement implies.** Clause (1) is quantified
+   over every intermediate smooth fourfold of a weak factorization, hence over
+   arbitrary block structure; and by E2 every one of those fourfolds must carry
+   a coalesced block, so the easy case is exactly the case the application never
+   meets.
+2. **The obvious proof route provably does not converge under the paper's own
+   normalization** (R2), with the loss of control landing precisely at Picard
+   rank above one, which every relevant ambient has (R3).
+3. **"Positive-filtration bulk displacement" does not currently have one agreed
+   meaning** across the manuscript and its imports (R8). Until that is settled,
+   part of the hypothesis is not merely unproved but not yet well-posed.
+
+Net: a conjecture with real structural evidence and two independently proved
+instances — not a routine technical assumption, and not an artifact of a
+failed proof. The single most valuable next action is not more mathematics on
+the coalesced case; it is writing the normalization statement that reconciles
+the manuscript's weight topology with the sources' graded completion, because
+that one statement decides whether the remaining obligation is true, false, or
+ill-posed.
