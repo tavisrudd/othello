@@ -119,6 +119,66 @@ existence of a horizontal section into a statement about the codimension of a
 degeneracy locus, which is the kind of thing that can be settled by a dimension
 count.
 
+## 3b. Outcome of repair B, after attack
+
+Worked in `2026-08-15-c912-degeneration-locus.md` (verdict PROVED) and attacked in
+`2026-08-15-c912-degeneration-locus-hostile-referee.md` (verdict MAJOR REVISION,
+**no false step found**). Net: the mechanism is correct and cheaper than first
+written; the unconditional verdict is not supported. Repair A is dead.
+
+**What survives, and may be cited.**
+
+- The central lemma. Quantum cohomology is a commutative algebra with a cyclic
+  vector, so its commutant gives the ideal property for free — no atom formalism
+  needed. A rank-two summand is a rank-two unital commutative algebra, which
+  cannot act on itself by scalars, whether it is local (`k[ε]/ε²`, with `ε`
+  non-scalar) or split (`k × k`, with an idempotent non-scalar). Hence the
+  traceless part `C'_a` is nonzero at every point, including on `Z`. Spanning by
+  even classes holds.
+- `D_a N ≠ 0` really does give `Z` no interior: at a zero of a section the
+  covariant and ordinary derivatives coincide, so the step is clean. This was the
+  place I expected trouble, by analogy with the circular argument of §3, and there
+  is none.
+- Riemann extension applies, with boundedness genuinely proved rather than
+  assumed.
+- **Repair A is refuted, not merely unproved.** Since `C'_a` never vanishes, the
+  coefficient `q_a` genuinely blows up at `Z` and `N` is not a horizontal section
+  of anything. The horizontal-section narrative should be deleted from the
+  program, not repaired.
+- Independent recomputation from the cubic's small quantum cohomology confirms
+  `det μ_0 = -361/324`, and finds `ν_6 = 2` on **both** isotropic branches at `Z`
+  — stronger than the one-branch check the original report ran.
+
+**What does not survive, and blocks an unconditional claim.**
+
+- **(A1), an analyticity hypothesis, load-bearing.** The argument needs the base
+  to be a connected analytic space with analytic structure operators, which means
+  non-archimedean convergence of the big quantum product. This is a genuine
+  mathematical input, not bookkeeping. Without it the conclusion degrades to the
+  containment `int(Z) ⊆ {det μ_0 = -1/4}` and nothing more.
+- **Rank-two-ness of the component is unsupported, and the report is internally
+  inconsistent about it**: one section derives the rank-two hypothesis for free
+  from disjointness of cover components, while another imports it from the
+  literature. It cannot have both, and which one is intended changes what must be
+  cited.
+- **Small versus big.** The central lemma as used needs the **big** even bulk.
+  The manuscript and the memo's rigidity section work with the **small** even
+  quantum connection. That mismatch has to be resolved before anything is
+  transplanted; it is the first thing to check, not the last.
+- **The decoration is choice-dependent on `Z` itself** — `ρ² + ρ + 5/36` against
+  `ρ² + ρ − 7/36` — so the constancy statement must be restated as constancy on
+  the complement plus continuation across `Z`, rather than as a value assigned at
+  every point.
+- The two arguments offered for nowhere-density are not independent: both route
+  through the identity principle, and given it the conclusion is a two-line
+  triviality that needs neither of the report's headline results.
+
+**Status.** Repair B is *conditionally* established: granted (A1) and rank-two-ness,
+the degeneration locus is nowhere dense and the decoration continues across it.
+Nothing is folded into the memo yet. Next obligations, in order: resolve
+small-versus-big; settle (A1), which is the real mathematical content; and fix the
+rank-two provenance.
+
 ## 4. Route 2, and why it is worth keeping second
 
 The philosophical statement Hypothesis 4.7H wants is in the literature: for a
