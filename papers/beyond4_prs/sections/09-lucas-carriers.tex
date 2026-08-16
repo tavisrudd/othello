@@ -1099,7 +1099,9 @@ determinant \eqref{eq:hessian-terminal-determinant} gives
 with $e_1,e_2,e_3$ the coefficients of $P_1$ named in (ii), so $P_1\equiv0$
 implies $\mathcal D=0$ and both Fano rulings lie in $\mathcal D=0$.  The
 degeneracy locus of (ii) is therefore contained in the union of
-$\mathcal D=0$ and $\Sigma$.
+$\mathcal D=0$ and $\Sigma$.  Containment in that union is all the selector
+argument uses; no equality is claimed, and indeed $\mathcal D=0$ also meets
+lines that are not degenerate.
 
 Finally, dividing out the common factor of $P_0,P_1,P_2$ in $(u,v)$ removes
 exactly the vertical components, so $\cC^{\mathrm{nv}}_{f,R}$ is what the
@@ -1134,11 +1136,15 @@ while $\mathcal A$ has degree at most four; by the containment established in
 most seven in each root.
 
 Write $R=\prod_{i=1}^5(t+r_i)$, so each coefficient of $R$ is at most linear in
-each $r_i$ and $\mathcal{AD}$ has degree at most seven in each $r_i$.  The
+each $r_i$ and $\mathcal{AD}$ has degree at most seven in each $r_i$
+separately, hence total degree at most $7\cdot5=35$ in the five roots
+together.  The
 Vandermonde $\prod_{i<j}(r_i+r_j)$ has total degree $\binom52=10$, so
-Schwartz--Zippel gives a squarefree base once $q>7\cdot5+10=45$.  Alternatively
+Schwartz--Zippel, which reads the total degree, gives a squarefree base once
+$q>35+10=45$.  Alternatively
 partition $8\cdot5=40$ field elements into five pairwise disjoint
-eight-element blocks $S_1,\ldots,S_5$: a nonzero polynomial of degree at most
+eight-element blocks $S_1,\ldots,S_5$, which reads the individual degrees
+instead: a nonzero polynomial of degree at most
 seven in each
 variable cannot vanish on $S_1\times\cdots\times S_5$, since successive
 univariate interpolation would make it zero, and disjointness makes every tuple

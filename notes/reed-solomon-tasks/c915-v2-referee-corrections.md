@@ -392,6 +392,18 @@ elements, and the deletion count and point count are untouched.  Dropping the
 factor also removed the complementary-ruling nonvanishing argument from the
 proof, which is where the page budget came back.
 
+**Wording follow-ups accepted after the simplification.**  Seven is the degree
+in each individual root, not a total degree: the total root degree of the
+two-factor selector is `7*5 = 35`, which is why the Schwartz--Zippel estimate is
+`35 + 10 = 45` rather than `7 + 10`.  The proof now says this explicitly and
+names which estimate reads which degree, since the block argument reads the
+individual degrees and Schwartz--Zippel reads the total.  The proof also states
+that the degeneracy locus is only *contained* in the union of the determinant
+locus and the common-factor Veronese, which is all the selector needs, and notes
+that the determinant locus meets nondegenerate lines too.  A sweep of every
+summary occurrence of a selector bound found only the roadmap table, now 40; the
+binary field threshold reads 64 everywhere.
+
 **Malformed quantifiers.**  The lemma opened over an algebraically closed field
 and then concluded existence over `F_q`.  It now fixes `q` a power of two, takes
 `f` rational over `F_q`, sets `k` to the algebraic closure for the geometric
