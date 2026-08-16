@@ -37,11 +37,16 @@ overturns a verdict I gave two reports ago.
    eigenvalues in `{+1, -1}` — not merely "no primitive sixth root". That is the
    same discriminator they use for the cubic fourfold, where the exclusion is
    unipotency versus non-unipotency.
-5. **The hard part of their machinery is not needed.** They flag the enhancement
-   by *integral structures* as difficult and defer it to forthcoming work, but
-   say the enhancement by Euler pairings and Serre automorphisms "is completely
-   straightforward and is just a repeat of the theory of undecorated Hodge
-   atoms". The route this lane needs uses only the second.
+5. **But the decoration is undefined in the category our atoms live in, and the
+   route is therefore not taken.** They sort the two enhancements into easy and
+   hard — integral structures difficult and deferred, Euler pairings and Serre
+   automorphisms "completely straightforward" — yet `S` itself is defined only
+   for *complex analytic* F-bundles, with the non-archimedean analytic case
+   deferred to the same forthcoming work. The A-model F-bundle of a projective
+   variety is non-archimedean analytic in their own words, so for the atoms we
+   care about the decoration is not merely unproved but undefined as the paper
+   stands. Section 6 records the route as restricted, referee-risky and costly,
+   and not the plan.
 
 ## 1. Source and reading list
 
@@ -201,6 +206,40 @@ route without the memo's Section 10, which remains refuted, and without the
 rigidity theorem. Whether to take that route is an editorial decision about
 importing the atom framework, not a mathematical gap.
 
+## 6. Why this route is not being taken
+
+Recorded as a restricted, referee-risky alternative with heavy import costs. Not
+the plan, as of 2026-08-15.
+
+1. **The decoration is undefined in the category our atoms live in.** They define
+   the duality automorphism `S` for a *complex analytic* F-bundle of exponential
+   type, as the monodromy in the `u`-direction, and then state that "the
+   definition in the case of non-archimedean analytic F-bundle requires extra
+   work, and will be discussed in [49]". The A-model F-bundle of a projective
+   variety is built over `k((y))`, base changed to its algebraic closure, and is
+   in their own words a non-archimedean analytic F-bundle. So for Hodge atoms of
+   a projective variety the decoration this route turns on is not merely
+   unproved, it is undefined as the paper stands. No lemma of ours closes that;
+   supplying the definition is the content of their deferred work.
+2. **The criterion we would use is unnumbered prose.** The numbered and proved
+   Proposition 5.30 is the undecorated version and does not separate atoms by a
+   decoration. The enhanced version, and the sentence that the enhanced theory is
+   "completely straightforward and is just a repeat of the theory of undecorated
+   Hodge atoms", are running text.
+3. **Three categories in one argument.** Theorem 4.11 is analytic over domains,
+   the atomic statements are local near a base point, and Iritani's decomposition
+   is formal over an extended Novikov ring. Every stitch between them is a
+   referee question.
+4. **Their examples are examples.** Examples 6.17 to 6.21 are worked cases, not
+   theorems with hypotheses, so the surface exclusion would have to be done
+   rather than cited regardless.
+
+The one visible dodge for item 1 is to work complex analytically, where `S` is
+defined, at the price of a convergence hypothesis on the relevant quantum
+cohomology — trading Hypothesis 4.7H for a hypothesis of a more familiar kind,
+but a hypothesis all the same, and the formal treatment was chosen to avoid one.
+Whether convergence is known in the cases needed has not been checked.
+
 ## Mystery ledger updates
 
 | ID | Status | Discovery | Owner |
@@ -209,7 +248,7 @@ importing the atom framework, not a mathematical gap.
 | C912-M25 | refined | Their Serre automorphism is *defined* as the monodromy in the `u`-direction, with `chi(a,b) = chi(b,S(a))` — the relation this lane's scripts already use. The identification of the count with Serre eigenvalues is therefore definitional on the F-bundle side; only the comparison with the categorical Serre functor of a Kuznetsov component remains expected rather than proved. | Section 1 passage on the duality automorphism |
 | C912-M27 | explained | The `lam -> -lam` substitution between the classification's `R` and the Serre side is the half-parity gauge `u^g`, which shifts exponents by half the cohomological degree and so multiplies monodromy eigenvalues by a parity-dependent sign. All separations used here are invariant under it. | Section 3 here |
 | C912-M35 | confirmed | Step (iii) upgrades to (iii'): every atom of a smooth projective surface has monodromy of order at most two. This is the same discriminator Katzarkov–Kontsevich–Pantev–Yu use for the cubic fourfold, where they need only surfaces of general type; the endpoint needs all surfaces because the cubic threefold's atom is shaped like a curve atom. | Section 4 here |
-| C912-M36 | open | The endpoint follows from Theorem 4.11, the *enhanced* non-rationality criterion and (iii'), with no transport lemma and no integral structures. The enhanced criterion is the load-bearing one, since the argument separates atoms by monodromy, which is a decoration; it is asserted in unnumbered prose rather than proved, unlike the numbered Proposition 5.30. Any manuscript using this route must either prove it in the generality needed or quote it as an assertion. | Section 5 here |
+| C912-M36 | closed as not-taken | The atom route would reach the `m = 1` statement without a transport lemma, but it turns on a decoration that is undefined for non-archimedean analytic F-bundles, which is the category the atoms of a projective variety live in; its criterion is unnumbered prose; and it mixes formal, non-archimedean analytic and complex analytic statements. Recorded as a restricted, referee-risky alternative with heavy import costs. Not taken as of 2026-08-15. | Section 6 here |
 
 ## Replay
 
