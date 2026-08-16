@@ -493,6 +493,31 @@ paid for the material that round added.  Any further printed mathematics in this
 appendix forces a decision: a compression pass, moving material out of the
 submission build, or changing the gate.  Flagging rather than acting.
 
+## Standalone export
+
+Exported to `~/src/math-papers/beyond4-prs` on 2026-08-16, after the full replay
+gate passed on the final tree.  Nothing was pushed; publication remains a
+separate decision.
+
+- Authority commit exported: `ea720f7af90cfa9e456ee7b3bb6acf46e3d37b03`.
+- `audit` and `plan` both clean: no private-repository coupling, no excluded
+  symlinks, 111 carried files.
+- The mirror took two forward commits.  The first, `bcbf8e7`, is the refresh
+  itself.  The second, `8cd570b`, corrects the submission README, which still
+  claimed 45 single-column pages against a tracked build of 50.  The sync
+  surfaced that staleness, the authority was fixed first, and the exporter
+  refuses a dirty mirror, so the correction arrived as its own commit rather
+  than by discarding the first refresh.  That is the same defect the mirror's
+  previous commit had already corrected once, so the page-count line deserves a
+  check on every future export.
+- `verify --root` passes against the export manifest with 114 tracked files, and
+  the paper's own gate passes inside the mirror.
+- Release identity agrees: the canonical and single-column PDFs have the same
+  SHA-256 in the mirror as in the authority, `fae8e8ae26a2...` and
+  `634c5220986b...`, and the local built-PDF row of the mirror's release
+  manifest carries the canonical hash.  The published Version 1 rows, its source
+  archive and released PDF hashes, are untouched.
+
 ## Closing audits
 
 Two of the specification's five audits were run here in full.
