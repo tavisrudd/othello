@@ -145,21 +145,56 @@ be proved rather than cited.
 
 ## 5. What now follows for the endpoint
 
-Chain, with sources: the product of a smooth cubic threefold with the projective
-line has an atomic decomposition containing two copies of the threefold's atom
-(Theorem 4.11 with `r = 2`); that atom has monodromy eigenvalues the primitive
-sixth roots of unity, from this lane's own computation of the exponents `-1/6`
-and `-5/6`; no atom of a smooth projective variety of dimension at most two has
-such an eigenvalue, by (iii') for surfaces together with the curve and point
-cases; therefore by Proposition 5.30 in dimension four the product is not
-rational.
+The target statement is: for `X` a smooth complex cubic threefold, `X x P^1` is
+not rational. The argument has four steps.
 
-Every link is now either verified at the source or proved in this lane. What the
-chain still rests on is the framework itself — that enhanced atoms with Serre
-automorphisms behave as the undecorated theory does, which the authors assert as
-straightforward but do not spell out, and the analytic-domain technicalities that
-Theorem 4.11 carries. It does *not* rest on the integral-structure enhancement
-they defer to forthcoming work, and it does not rest on any transport lemma.
+1. **The atom exists in `X`.** The atomic decomposition of `X` at the hyperplane
+   point consists of two one-dimensional atoms at the nonzero eigenvalues of
+   Euler multiplication and one atom `alpha(X)` at the eigenvalue zero
+   (Example 6.21), with no further splitting nearby by their Remark 3.14 Witt
+   algebra argument.
+2. **The atom's monodromy.** In this memo's normalization the zero block has
+   exponents `-1/6` and `-5/6`, so the formal monodromy eigenvalues of
+   `alpha(X)` are the two primitive sixth roots of unity — order six. This is
+   the lane's own computation, not an import.
+3. **The atom appears in `X x P^1`.** Writing `X x P^1 = P(O + O)`, Theorem 4.11
+   with `r = 2` gives a canonical isomorphism of maximal F-bundles between
+   `X x P^1` and the disjoint union of two copies of `X`, over analytic domains
+   whose unions are connected and nonempty. So the atomic decomposition of
+   `X x P^1` contains two copies of `alpha(X)`.
+4. **The atom comes from no variety of dimension at most two.** Points give
+   trivial monodromy; a curve has even-part exponents `+-1/2`, hence monodromy
+   `-1` twice; a surface has monodromy of order at most two by (iii'). Order six
+   is none of these.
+
+The criterion that then applies is **not** the numbered Proposition 5.30**.**
+That one excludes membership in `HAtoms` of dimension at most `d-2` for
+*undecorated* Hodge atoms, whereas steps 2 and 4 distinguish atoms by their
+monodromy, which is a decoration. The applicable statement is the enhanced form,
+which the authors give as unnumbered prose in the same section: "with the
+enhancements in place, we get a stronger version of the nonrationality criterion
+Proposition 5.30. In this version we conclude that if a smooth projective variety
+`X` has an enhanced atomic composition containing an enhanced atom that does not
+come from a smooth projective variety of dimension `<= dim X - 2`, then `X` can
+not be rational." With `dim(X x P^1) = 4` the excluded dimensions are at most
+two, which is what steps 1 to 4 supply.
+
+That distinction matters for how much this route imports. The numbered
+proposition is proved in their paper as a special case of Proposition 5.17. The
+enhanced version, which is the one needed here, is asserted in prose, on the
+grounds that the theory of Hodge atoms enhanced with Euler pairings and Serre
+automorphisms "is completely straightforward and is just a repeat of the theory
+of undecorated Hodge atoms". So the load-bearing citation for this route is an
+assertion rather than a numbered theorem, and any manuscript using it either
+proves the enhanced criterion in the generality it needs or states plainly that
+it is quoting an assertion.
+
+Two further dependencies, both stated: Theorem 4.11 holds over analytic domains
+and its proof reduces to Iritani–Koto's Theorem 5.1, which has not been read
+here; and the monodromy has to be an invariant of the enhanced atom, which is
+the same assertion again. The route does *not* depend on the integral-structure
+enhancement they defer to forthcoming work, and does not depend on any transport
+lemma or on the memo's refuted Section 10.
 
 The practical consequence: the one-stabilization statement is available by this
 route without the memo's Section 10, which remains refuted, and without the
@@ -174,7 +209,7 @@ importing the atom framework, not a mathematical gap.
 | C912-M25 | refined | Their Serre automorphism is *defined* as the monodromy in the `u`-direction, with `chi(a,b) = chi(b,S(a))` — the relation this lane's scripts already use. The identification of the count with Serre eigenvalues is therefore definitional on the F-bundle side; only the comparison with the categorical Serre functor of a Kuznetsov component remains expected rather than proved. | Section 1 passage on the duality automorphism |
 | C912-M27 | explained | The `lam -> -lam` substitution between the classification's `R` and the Serre side is the half-parity gauge `u^g`, which shifts exponents by half the cohomological degree and so multiplies monodromy eigenvalues by a parity-dependent sign. All separations used here are invariant under it. | Section 3 here |
 | C912-M35 | confirmed | Step (iii) upgrades to (iii'): every atom of a smooth projective surface has monodromy of order at most two. This is the same discriminator Katzarkov–Kontsevich–Pantev–Yu use for the cubic fourfold, where they need only surfaces of general type; the endpoint needs all surfaces because the cubic threefold's atom is shaped like a curve atom. | Section 4 here |
-| C912-M36 | open | The endpoint follows from Theorem 4.11, Proposition 5.30 and (iii') with no transport lemma and no integral structures, but rests on the enhanced-atom framework being as straightforward as its authors assert, and on the analytic-domain technicalities of Theorem 4.11. Deciding whether to import that framework is an editorial call. | Section 5 here |
+| C912-M36 | open | The endpoint follows from Theorem 4.11, the *enhanced* non-rationality criterion and (iii'), with no transport lemma and no integral structures. The enhanced criterion is the load-bearing one, since the argument separates atoms by monodromy, which is a decoration; it is asserted in unnumbered prose rather than proved, unlike the numbered Proposition 5.30. Any manuscript using this route must either prove it in the generality needed or quote it as an assertion. | Section 5 here |
 
 ## Replay
 
