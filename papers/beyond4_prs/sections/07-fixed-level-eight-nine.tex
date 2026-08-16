@@ -159,7 +159,9 @@ $x,r,s$ costs at most six.  Thus
 \begin{equation}\label{eq:r8-deletion}
  \delta\leq4+8+3\cdot6=30.
 \end{equation}
-Hasse--Weil supplies a surviving rational point for every $q\geq43$.
+The Aubry--Perret bound for a reduced geometrically integral projective
+curve of arithmetic genus one supplies a surviving rational point for
+every $q\geq43$ \cite[p.~468]{AubryPerret1995}.
 
 It remains to show that the strata removed above do not hide another
 component.  On an exact-gcd-one bottom stratum write the cubic pencil
@@ -826,14 +828,18 @@ $z\mapsto z+8u$, which vanishes exactly in characteristic two.
 \end{proof}
 
 \begin{proposition}[Other modular lifts]\label{prop:r9-other-modular}
-The consecutive Lucas supports leave a line in characteristic five and
-the quartic carrier above in characteristic seven; no other
-characteristic has a nonzero coherent lift.  The former line is shallow
-for every $q>5$.
+The consecutive Lucas supports leave the point $\PP\langle e_4\rangle$ in
+characteristic five and the quartic carrier above in characteristic
+seven; no other characteristic has a nonzero coherent lift.  The
+characteristic-five point is shallow for every $q>5$.
 \end{proposition}
 
 \begin{proof}
 Lucas' theorem and the consecutive-row overlap give the two supports.
+Here $r=9$, so \eqref{eq:maximal-lucas-carrier} reads off Pascal row
+$r-2=7$: modulo five that row is $(1,2,1,0,0,1,2,1)$, and
+$\binom7j\equiv\binom7{j-1}\equiv0$ holds only at $j=4$, leaving the
+single point $\PP\langle e_4\rangle$.
 In characteristic five, homogenize $t^5-t$ to include its simple root
 at infinity and multiply by a linear factor $t-a$ with
 $a\notin\F_5$.  The seven roots are distinct and the two required
