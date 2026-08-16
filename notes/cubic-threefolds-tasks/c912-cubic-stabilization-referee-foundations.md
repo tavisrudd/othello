@@ -1,6 +1,8 @@
 # C912 — Cubic stabilization referee-foundations revision
 
-**Lane:** `clebsch`
+**Lane:** `cubic-threefolds` (re-pegged from `clebsch` on 2026-08-15 by author
+instruction; dated reports written before that date carry the old lane in their
+headers, which records where the work was done and is not a routing error)
 
 **Status:** active; author-close only
 

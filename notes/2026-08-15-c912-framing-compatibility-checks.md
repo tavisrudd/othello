@@ -3,7 +3,7 @@
 **Lane:** `clebsch` · **Task:** C912 · **Date:** 2026-08-15
 
 Scope: run the three checks listed under the frame-transport item of
-`clebsch-tasks/c912-cubic-stabilization-referee-foundations.md`, which ask whether the
+`cubic-threefolds-tasks/c912-cubic-stabilization-referee-foundations.md`, which ask whether the
 regular decomposition gauge of Hinault–Yu–Zhang–Zhang (HYZZ) can replace the
 pro-Laurent bulk gauge of `lem:formal-base-shift` in the proof of
 `prop:framed-operations`.  The proposal and its motivation are in

@@ -214,7 +214,7 @@ with their reasons.
 - Source assessment of the atom spine: `2026-08-15-c912-atom-spine-source-assessment.md`.
 - Route map and status ledger, published page: `2026-08-15-c912-debt-ledger.html`.
 - Caustic experiment and its validity check: `p2_caustic.py`, `p2_exponents.py`, `p2_assoc.py`.
-- Live task card: `clebsch-tasks/c912-cubic-stabilization-referee-foundations.md`.
+- Live task card: `cubic-threefolds-tasks/c912-cubic-stabilization-referee-foundations.md`.
 
 A task ID must be reserved through `notes/scripts/allocate_codex_task_ids.py reserve` when
 this is picked up; none is allocated here.
