@@ -179,6 +179,59 @@ Nothing is folded into the memo yet. Next obligations, in order: resolve
 small-versus-big; settle (A1), which is the real mathematical content; and fix the
 rank-two provenance.
 
+## 3c. Route 1 executed: the rank-two atomic residue proof
+
+Transcribed verbatim in `2026-08-15-c912-atom-residue-proof.tex` and verified
+independently in `2026-08-15-c912-atom-residue-proof-verification.md`
+(**MAJOR REVISION; no fatal flaw**). This supersedes repair B: the argument
+never needs the degeneration locus to be thin.
+
+**The mechanism.** The Poincaré pairing forces the connection's constant term to
+preserve the canonical line `L = im N = ker N`. That single fact makes the
+elementary modification of the lattice along `L` produce a *regular* connection
+rather than a polar one, and it is obtained without any pairing-preserving
+splitting gauge — so the lemma that consumed most of this lane's effort is
+bypassed rather than repaired. Flatness then kills the base-direction pole and
+gives `δR = [G_δ, R]`, freezing the residue's characteristic polynomial. Finite
+dimensional isomonodromy, no bulk gauge anywhere. The crossing points where `N`
+degenerates are handled by meromorphic continuation on an integral component
+rather than by proving they do not occur.
+
+**Verified.** The convention check passes cleanly: both the cubic and the curve
+reduce to the same normal form with the same grading operator, both taken from
+Cai in one convention. The verifier supplies an independent witness worth
+recording — `tr R_X = tr R_C = -1`, so only the *determinant* discriminates the
+two atoms, and mismatched conventions would not have matched in trace. The cubic
+block reduction was recomputed from scratch with exact agreement, and its
+eigenvalues independently reproduce the manuscript's indicial exponents. Steps
+(7)–(11), (18)–(28), the crossing-point argument, the Chern and Betti count, the
+curve residue, the surface exclusion, and the `d = 4` application of the numbered
+non-rationality criterion all survive.
+
+**The Poincaré pairing is not the deferred object** — what
+Katzarkov–Kontsevich–Pantev–Yu defer is the Euler-pairing comparison and the
+Serre automorphism, while their non-archimedean `F`-bundle already carries the
+Poincaré Gram matrix as a constant analytic section. But they state horizontality
+only after assuming convergence and passing to the complex-analytic bundle, so
+step 1 is **our own lemma to prove**, not an import. It is routine over the
+Novikov ring; it must be written.
+
+**Where "unconditional" overstates it.** The parity ranks `(2, 10)`, which drive
+the genus-five forcing and the surface exclusion, rest on the assertion in the
+source's Example 6.21 that the zero-eigenvalue packet does not split further at
+the relevant point. Its cited support has no proof and covers only a restricted
+case. So the theorem does not become unconditional; it trades **our** Hypothesis
+4.7H for an **unproved assertion in someone else's preprint**. That is a real
+improvement in kind — the remaining gap is a finite, checkable splitting
+statement about one packet rather than an invariance statement about arbitrary
+centres — but it should not be described as an unconditional proof.
+
+**Owed before it could be used.** The horizontality lemma above; that the even
+part is a sub-`F`-bundle; uniqueness and gluing of the spectral splitting; the
+identity principle on irreducible `k`-analytic spaces; and descent through the
+blowup, projective-bundle and disjoint-union equivalences, not only the two in
+the source's definition.
+
 ## 4. Route 2, and why it is worth keeping second
 
 The philosophical statement Hypothesis 4.7H wants is in the literature: for a
