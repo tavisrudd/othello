@@ -60,6 +60,32 @@ Authoritative commit: `e5d77ed0e`.
     programme" replaced by "local-unitary equivalence is a central part of the
     classification problem".
 
+## Second round: two further user-reported defects (commit `53b2024ed`)
+
+13. **Tan theorem number, page 21** (`sections/B-secondary-quantitative.tex`).
+    The four-qutrit order-5832 local symmetry group was cited as
+    `[Tan26b, Theorem~B.3]`; the published theorem is 5.3, which is what the
+    introduction already cites at `01-introduction.tex:178`.  The error is
+    explained by the sentence immediately after it, which refers to the
+    manuscript's *own* Theorem~B.3 (`thm:two-uniform-discrete`) — an internal
+    label captured by an external citation.
+14. **Theorem B.18 spread parameter.**  The statement assumed spectral spread
+    at most `\pi` but concluded with `c=c(s)`, leaving `s` undefined.  The
+    hypothesis is now spread at most `s\leq\pi`, matching Lemma~B.11's
+    `c(s)=\max\{1-s^2/12,\ (4/\pi^2)[s\leq\pi]\}` and matching Theorem~B.14,
+    which already quantifies over a common spread `s`.  This is the formulation
+    the surrounding text requires: the comparison paragraph uses the theorem at
+    both spreads, quoting `\pi\sqrt q` at spread `\pi` and `2.02\sqrt q` at
+    spread `1/2`.  Both numbers check out — `c(\pi)=4/\pi^2` gives
+    `2\sqrt{q/c}=\pi\sqrt q` exactly, and `c(1/2)=1-1/48=0.97917` gives
+    `2/\sqrt{0.97917}=2.0212`.  Section 5's use of the theorem is the `s=\pi`
+    case, consistent with (5.4)'s `\pi\sqrt q\,\varepsilon(U)`.
+
+    The proof reused `s` as a local abbreviation for
+    `\eta_{a_1}+\eta_{a_2}` in the `m=2` case.  That collision is resolved by
+    renaming the local variable to `\sigma`; it lives on two lines and nothing
+    else refers to it.
+
 ## Deliberate no-ops
 
 - **`[CP24]`** (Claudet--Perdrix) keeps its key and its 2024 date.  The 2025
@@ -102,14 +128,18 @@ Authoritative commit: `e5d77ed0e`.
 
 ## Build and gates
 
-- `make check` succeeds from the tracked state: warning-free, still 37 pages,
-  314,312 bytes.  The log has no `Overfull`, `Underfull`, `LaTeX Warning`,
+- `make check` succeeds from the tracked state after each round: warning-free
+  and still 37 pages.  The log has no `Overfull`, `Underfull`, `LaTeX Warning`,
   undefined-reference, or undefined-citation line.
 - `make release-check` initially failed on a stale manifest and passes after
-  `release/verify_release.py --write --require-formal`: 18 public artifacts,
-  public tree `01d3e7d0...`, 83 formal companion artifacts, formal tree
-  `7e771df1...`.
-- `git diff --check` is clean and the commit touches only `papers/ame_lu`.
+  `release/verify_release.py --write --require-formal`.  The first round gave 18
+  public artifacts with public tree `01d3e7d0...` and 83 formal companion
+  artifacts with formal tree `7e771df1...`; the second round moved the public
+  tree to `93898066f25e6af38fcc5e231cd6f9353be63364e9a355db7dec330b978a0d83`
+  and left the formal tree unchanged, as expected for a manuscript-only edit.
+- The second round's manifest diff touches exactly two paths, the rebuilt PDF
+  and `sections/B-secondary-quantitative.tex`, with no foreign drift.
+- `git diff --check` is clean and both commits touch only `papers/ame_lu`.
 
 ## Foreign-lane note for the user
 
