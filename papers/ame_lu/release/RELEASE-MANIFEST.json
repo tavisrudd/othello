@@ -11,9 +11,9 @@
         "sha256": "2b6a65af3d935ac153c41d6cd00975f6165869b573bd65ba9ea6c418f36cd15d"
       },
       {
-        "bytes": 314312,
+        "bytes": 314323,
         "path": "ame-lu.pdf",
-        "sha256": "c40296d1be341a3c460eabb078526b97b86162aa1dcba2acfc3928d020713f19"
+        "sha256": "d7654488e065014be4e76eb97db8b3ae35d09805f4123ef92097f8d6ad305b8a"
       },
       {
         "bytes": 2646,
@@ -91,12 +91,12 @@
         "sha256": "ff0f54553472e5b1f62e00c32238ecaa60735e8dbdbc5e29d6c4dd00746e8d44"
       },
       {
-        "bytes": 63429,
+        "bytes": 63449,
         "path": "sections/B-secondary-quantitative.tex",
-        "sha256": "6075f340c12acb72e3ffd7e88a343b57eb298b98fa3f095795448e014c992b41"
+        "sha256": "70562a1d85a0c4164149b74f8d4152cc311e9cf41c14b188696503c2324ee2e9"
       }
     ],
-    "tree_sha256": "01d3e7d0cc66c6a6513991e487f9c715e1bb821c2fadbbd4bc445203d5f8d7f5"
+    "tree_sha256": "93898066f25e6af38fcc5e231cd6f9353be63364e9a355db7dec330b978a0d83"
   },
   "formal_companion": {
     "artifacts": [
