@@ -468,6 +468,339 @@ Thus the criterion loses neither infinity nor the degenerate linear-system
 cases.
 \end{proof}
 
+The next three lemmas carry the all-field part of the theorem below: the
+first fixes the rank of the coefficient map off the invariant block, the
+second makes the final-pair cover geometrically integral, and the third
+selects a rational base of five roots with an effective degree bound.
+
+\begin{lemma}[Rank of the coefficient map off the invariant block]
+\label{lem:m9-rank}
+Let $z=(z_2,\ldots,z_7)$ and let $h=(h_0,\ldots,h_5)^{\mathsf T}$ collect the
+free coefficients of the monic sextic of Proposition~\ref{prop:final-pair}.
+Then
+\[
+ (A_0,A_1,A_2,A_3)^{\mathsf T}=M_zh+(0,0,z_7,z_6)^{\mathsf T},
+\quad
+M_z=\begin{pmatrix}
+ z_3&z_4&z_5&z_6&z_7&0\\
+ z_2&z_3&z_4&z_5&z_6&z_7\\
+ 0&z_2&z_3&z_4&z_5&z_6\\
+ 0&0&z_2&z_3&z_4&z_5
+\end{pmatrix},
+\autoeqtag{eq:binary-hankel-rank}
+\]
+and $\operatorname{rank}M_z\geq3$ whenever $z_4\neq0$ or $z_5\neq0$.  In that
+case exactly one of the following holds.
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item $\operatorname{rank}M_z=4$, and $h\mapsto(A_0,A_1,A_2,A_3)$ is onto
+      $\mathbb A^4$.
+\item $\operatorname{rank}M_z=3$, the left kernel of $M_z$ is a line
+      $\langle\ell\rangle$, and the image of $h\mapsto(A_0,A_1,A_2,A_3)$ is
+      the affine hyperplane
+      \[
+       \ell_0A_0+\ell_1A_1+\ell_2A_2+\ell_3A_3=\kappa,
+       \qquad\kappa=\ell_2z_7+\ell_3z_6 .
+       \autoeqtag{eq:m9-affine-relation}
+      \]
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Reading $A_j=\sum_{i=2}^7z_ih_{i+j-3}$ row by row, with $h_6=1$ and $h_k=0$
+for $k\notin\{0,\ldots,6\}$, gives the displayed affine form; the constant
+vector collects the two $h_6$ terms, which occur in $A_2$ and $A_3$ only.
+A row vector $\ell$ satisfies $\ell M_z=0$ exactly when
+\[
+\begin{aligned}
+ \ell_0z_3+\ell_1z_2&=0,&
+ \ell_0z_4+\ell_1z_3+\ell_2z_2&=0,\\
+ \ell_0z_5+\ell_1z_4+\ell_2z_3+\ell_3z_2&=0,&
+ \ell_0z_6+\ell_1z_5+\ell_2z_4+\ell_3z_3&=0,\\
+ \ell_0z_7+\ell_1z_6+\ell_2z_5+\ell_3z_4&=0,&
+ \ell_1z_7+\ell_2z_6+\ell_3z_5&=0,
+\end{aligned}
+\autoeqtag{eq:m9-column-relations}
+\]
+one equation per column, read left to right.
+
+Suppose $\operatorname{rank}M_z\leq2$, so the left kernel $K$ has dimension at
+least two.  Either $K$ contains a nonzero vector with $\ell_0=\ell_1=0$, or
+$\ell\mapsto(\ell_0,\ell_1)$ is injective on $K$ and hence, $\dim K\geq2$,
+also onto.
+
+In the first case take $\ell=(0,0,\ell_2,\ell_3)\neq0$.  If $\ell_2\neq0$,
+normalize $\ell_2=1$: the second, third, fourth and fifth equations of
+\eqref{eq:m9-column-relations} read $z_2=0$, $z_3=\ell_3z_2$,
+$z_4=\ell_3z_3$ and $z_5=\ell_3z_4$, so $z_2=z_3=z_4=z_5=0$ in turn.  If
+$\ell_2=0$ then $\ell_3\neq0$, and the third through sixth equations read
+$\ell_3z_2=\ell_3z_3=\ell_3z_4=\ell_3z_5=0$, with the same conclusion.
+
+In the second case $K$ contains $(1,0,\ell_2,\ell_3)$ and
+$(0,1,\ell_2',\ell_3')$.  The first equation applied to the second vector
+gives $z_2=0$, and applied to the first gives $z_3=0$; the second and third
+equations applied to the first vector then give $z_4=\ell_2z_2=0$ and
+$z_5=\ell_2z_3+\ell_3z_2=0$.
+
+Either case contradicts $z_4\neq0$ or $z_5\neq0$, so
+$\operatorname{rank}M_z\in\{3,4\}$.  At rank four the linear map $h\mapsto
+M_zh$ is onto, hence so is its translate.  At rank three the left kernel is a
+line $\langle\ell\rangle$, the image of $h\mapsto M_zh$ is the linear
+hyperplane $\sum_i\ell_iA_i=0$, and translating by $(0,0,z_7,z_6)$ moves the
+right-hand side to $\kappa=\ell_2z_7+\ell_3z_6$.
+\end{proof}
+
+\begin{lemma}[Geometric nontriviality of the final-pair Artin--Schreier
+cover]\label{lem:m9-nonsquare}
+Let $k$ be algebraically closed of characteristic two, let $z\in\cM_9(k)$
+satisfy $z_4\neq0$ or $z_5\neq0$, and let $L\subseteq\mathbb A^4$ be the
+image of the coefficient map of Lemma~\ref{lem:m9-rank}.  Then the reduced
+divisor $Q=0$ in $L$ has an irreducible component $\mathfrak q$ on which
+$A_3$ and $\Delta$ do not vanish identically and on whose function field
+$A_1/A_3$ is not a square.  Ordering the six roots leaves that conclusion
+intact, so the double pole of $N\Delta/Q^2$ along $\mathfrak q$ does not
+reduce and \eqref{eq:artin-schreier-cover} is geometrically integral.
+\end{lemma}
+
+\begin{proof}
+On $Q=0$ with $A_3\neq0$ one has $A_0=A_1A_2/A_3$, hence
+\[
+ N=A_1^2+\frac{A_1A_2^2}{A_3}=\frac{A_1(A_1A_3+A_2^2)}{A_3}
+  =\frac{A_1\Delta}{A_3},
+ \qquad
+ N\Delta=\frac{A_1}{A_3}\,\Delta^2 .
+ \autoeqtag{eq:m9-double-pole}
+\]
+Since $u^2\equiv u$ modulo $\wp(u)=u^2+u$, the double pole of $N\Delta/Q^2$
+along a component of $Q=0$ reduces to a simple pole exactly when $A_1/A_3$ is
+a square in the function field of that component.  That square class is what
+the two rank cases test.
+
+\emph{Rank four.}  Here $L=\mathbb A^4$ and the coordinates $A_i$ are
+independent.  The partial derivatives of $Q=A_0A_3+A_1A_2$ are
+$A_3,A_2,A_1,A_0$, whose only common zero is the origin, so the projective
+quadric is smooth and $X=V(Q)$ is irreducible; in particular $A_3$ and
+$\Delta$ do not vanish on it identically.  Inside $X$ lie the planes
+$\Pi_1=V(A_0,A_1)$, $\Pi_{13}=V(A_1,A_3)$ and $\Pi_2=V(A_2,A_3)$, and
+$V(A_1)\cap X=\Pi_1\cup\Pi_{13}$, $V(A_3)\cap X=\Pi_{13}\cup\Pi_2$.  At the
+generic point of $\Pi_1$ the functions $A_2,A_3$ are units and
+$A_0=A_1A_2/A_3$, so the local ring of $X$ there is a discrete valuation ring
+with uniformizer $A_1$; symmetrically $A_3$ is a uniformizer at $\Pi_2$,
+where $A_0,A_1$ are units and $A_2=A_0A_3/A_1$; and at $\Pi_{13}$ the two
+relations $A_3=A_1A_2/A_0$ and $A_1=A_0A_3/A_2$ show that $A_1$ and $A_3$
+generate the same maximal ideal.  Hence
+\[
+ \operatorname{div}\left(\frac{A_1}{A_3}\right)=[\Pi_1]-[\Pi_2],
+\]
+with both multiplicities equal to one.  A square has even multiplicity along
+every prime divisor, so $A_1/A_3$ is not a square in $k(X)$, and
+$\mathfrak q=X$ serves.
+
+\emph{Rank three, principal case.}  Let \eqref{eq:m9-affine-relation} be the
+relation and assume first $(\ell_0,\ell_1)\neq(0,0)$.  We claim some
+component $\mathfrak q$ of $Q=0$ in $L$ carries $A_2$ and $A_3$ as
+algebraically independent functions.  Otherwise every component lies in an
+affine plane $\alpha A_2+\beta A_3=\gamma$ with $(\alpha,\beta)\neq(0,0)$.
+Such a plane is not all of $L$, because $(0,0,\alpha,\beta)$ is not
+proportional to $\ell$; and a component of the quadric surface $Q|_L$ is
+either that whole surface, which has degree two and so lies in no plane, or a
+plane.  Hence every component is one of the planes
+$\alpha A_2+\beta A_3=\gamma$, and $Q|_L$, being of degree two, is a scalar
+multiple of a product of two of those linear forms, hence a polynomial in
+$A_2,A_3$ alone.  That is impossible: if $\ell_0\neq0$,
+eliminating $A_0$ leaves
+$Q|_L=A_3(\kappa+\ell_1A_1+\ell_2A_2+\ell_3A_3)/\ell_0+A_1A_2$, whose
+coefficient of $A_1$ is $\ell_1A_3/\ell_0+A_2\neq0$; and if $\ell_0=0$,
+$\ell_1\neq0$, eliminating $A_1$ leaves
+$Q|_L=A_0A_3+A_2(\kappa+\ell_2A_2+\ell_3A_3)/\ell_1$, which contains
+$A_0A_3$.  Fix such a component $\mathfrak q$.  On it $A_3\not\equiv0$ and
+$\ell_0A_2+\ell_1A_3\not\equiv0$, since either vanishing is a linear
+dependence between $A_2$ and $A_3$.
+
+Substituting $A_0=A_1A_2/A_3$ into \eqref{eq:m9-affine-relation} and clearing
+$A_3$ gives $A_1(\ell_0A_2+\ell_1A_3)=A_3(\kappa+\ell_2A_2+\ell_3A_3)$, that
+is
+\[
+ \frac{A_1}{A_3}=\frac{\kappa+\ell_2A_2+\ell_3A_3}
+                      {\ell_0A_2+\ell_1A_3}
+ \autoeqtag{eq:m9-rank-three-slice}
+\]
+on $\mathfrak q$.  Together with $A_0=A_1A_2/A_3$ and
+\eqref{eq:m9-affine-relation} this writes every coordinate as a rational
+function of $A_2,A_3$, so $k(\mathfrak q)=k(A_2,A_3)$.  In characteristic two
+a rational function of
+two independent variables is a square exactly when both of its partial
+derivatives vanish.  Writing $P$ and $D$ for the numerator and denominator of
+\eqref{eq:m9-rank-three-slice},
+\[
+ \frac{\partial}{\partial A_2}\frac PD=\frac{\ell_2D+\ell_0P}{D^2}
+ =\frac{(\ell_1\ell_2+\ell_0\ell_3)A_3+\ell_0\kappa}{D^2},
+ \qquad
+ \frac{\partial}{\partial A_3}\frac PD
+ =\frac{(\ell_1\ell_2+\ell_0\ell_3)A_2+\ell_1\kappa}{D^2},
+\]
+so $A_1/A_3$ is a square on $\mathfrak q$ only if
+\[
+ \ell_0\kappa=\ell_1\kappa=0,\qquad \ell_1\ell_2=\ell_0\ell_3 .
+ \autoeqtag{eq:m9-square-obstruction}
+\]
+
+Those equalities force $z_4=z_5=0$.  If $\kappa\neq0$ then
+$\ell_0=\ell_1=0$, and the first case of the proof of
+Lemma~\ref{lem:m9-rank} applies verbatim to $\ell$.  If $\kappa=0$ and
+$\ell_0=0$ then $\ell_1\ell_2=0$; for $\ell_1=0$ the same first case applies,
+while for $\ell_2=0$ and $\ell_1\neq0$ the first four equations of
+\eqref{eq:m9-column-relations} read $\ell_1z_2=0$, $\ell_1z_3=0$,
+$\ell_1z_4+\ell_3z_2=0$ and $\ell_1z_5+\ell_3z_3=0$, giving
+$z_2=z_3=z_4=z_5=0$.  Finally let $\ell_0\neq0$; then $\kappa=0$, and scaling
+$\ell_0=1$ and writing $\lambda=\ell_1$, $\mu=\ell_2$, $\ell_3=\lambda\mu$,
+the first three equations of \eqref{eq:m9-column-relations} give
+\[
+ z_3=\lambda z_2,\qquad z_4=(\lambda^2+\mu)z_2,\qquad
+ z_5=\lambda(\lambda^2+\mu)z_2,
+ \autoeqtag{eq:m9-borel-elimination}
+\]
+the fourth gives $z_6=(\lambda^4+\lambda^2\mu+\mu^2)z_2$, and the fifth
+substituted into the sixth gives
+$(\lambda^2+\mu)z_6+\lambda^2\mu z_4=(\lambda^2+\mu)^3z_2=0$.  If $z_2=0$
+then \eqref{eq:m9-borel-elimination} and the remaining equations force $z=0$;
+otherwise $\lambda^2+\mu=0$ and \eqref{eq:m9-borel-elimination} gives
+$z_4=z_5=0$.
+Both outcomes are excluded, so $A_1/A_3$ is not a square on $\mathfrak q$.
+
+\emph{Rank three, relation in $A_2,A_3$ only.}  Suppose $\ell_0=\ell_1=0$, so
+the relation is $\ell_2A_2+\ell_3A_3=\kappa$ and $A_0,A_1$ are unconstrained
+on $L$.  If $\ell_2\neq0$, use $(A_0,A_1,A_3)$ as coordinates on $L$ and
+substitute $A_2=(\kappa+\ell_3A_3)/\ell_2$:
+\[
+ Q|_L=A_3A_0+A_1(\kappa+\ell_3A_3)/\ell_2 .
+\]
+This is of degree one in $A_0$, so it is irreducible unless $A_3$ divides its
+constant term, which happens only for $\kappa=0$, where
+$Q|_L=A_3(A_0+\ell_3A_1/\ell_2)$.  In the irreducible case the unique
+component carries $A_1$ and $A_3$ as independent coordinates; in the split
+case the component $A_0=\ell_3A_1/\ell_2$ does.  On such a component
+$\partial(A_1/A_3)/\partial A_1=1/A_3\neq0$, so $A_1/A_3$ is not a square.
+If instead $\ell_2=0$, then $\ell_3\neq0$ and $A_3=\kappa/\ell_3$ is constant
+on $L$.  For $\kappa=0$ the function $A_3$ vanishes identically, so the last
+row of $M_z$ vanishes and $z_2=z_3=z_4=z_5=0$, which is excluded; for
+$\kappa\neq0$ the surface $Q|_L=\kappa A_0/\ell_3+A_1A_2$ is irreducible with
+$A_1,A_2$ independent on it, and $A_1/A_3$ is a nonzero constant multiple of
+$A_1$, again not a square.
+
+\emph{The component avoids $\Delta=0$.}  On $A_3\neq0$ the locus $Q=\Delta=0$
+is $\{(u^3c,u^2c,uc,c)\}$, the two-dimensional irreducible cone over the
+twisted cubic, and on $A_3=0$ it is the plane $A_2=A_3=0$.  The chosen
+$\mathfrak q$ has $A_3\not\equiv0$, so if $\mathfrak q$ were contained in
+$\Delta=0$ it would equal that cone, forcing
+$\ell_0u^3c+\ell_1u^2c+\ell_2uc+\ell_3c=\kappa$ for all $u$ and $c$, hence
+$\ell=0$ and $\kappa=0$.  In the rank-four case $\mathfrak q$ has dimension
+three and the cone has dimension two.  Either way
+$\Delta\not\equiv0$ on $\mathfrak q$, so \eqref{eq:m9-double-pole} really
+computes the double-pole coefficient there.
+
+\emph{Passage to ordered roots.}  The coefficient map $h\mapsto A$ is onto
+$L$ with linear fibers, so the preimage of $\mathfrak q$ is irreducible and
+its function field is a purely transcendental extension of
+$k(\mathfrak q)$, which acquires no new square roots of elements of
+$k(\mathfrak q)$.  Ordering the six roots is a finite separable base change,
+and adjoining a square root in characteristic two is purely inseparable, so
+it cannot make $A_1/A_3$ a square either.  Hence the double pole survives and
+\eqref{eq:artin-schreier-cover} is geometrically integral.
+\end{proof}
+
+\begin{lemma}[Good-base selector and degree bound]\label{lem:m9-selector}
+Let $z$ satisfy $z_4\neq0$ or $z_5\neq0$.  Fix five roots $r_1,\ldots,r_5$
+with $g(t)=\prod_{i=1}^5(t+r_i)=\sum_{i=0}^5g_it^i$, let $x$ be the sixth
+root, and put
+\[
+ B_j=\sum_{i=2}^7z_ig_{i+j-4}\quad(0\leq j\leq4),
+ \qquad\text{so that}\qquad A_j=B_j+xB_{j+1}.
+ \autoeqtag{eq:m9-five-root-split}
+\]
+Then $Q=q_2x^2+q_1x+q_0$ with
+\[
+ q_2=[x^2]Q=B_1B_4+B_2B_3,\qquad
+ q_1=Q'=B_0B_4+B_2^2,\qquad
+ q_0=B_0B_3+B_1B_2,
+ \autoeqtag{eq:m9-Q-coefficients}
+\]
+neither $q_2$ nor $q_1$ vanishes identically in $g_0,\ldots,g_4$, and
+$N\Delta$ and $R=((N\Delta)')^2+(Q')^2N\Delta$ have degree at most four in
+$x$.  Write $R=\sum_{i=0}^4R_ix^i$ and let $\rho=\rho_1x+\rho_0$ be the
+pseudo-remainder of $R$ by $Q$, defined by $q_2^3R=SQ+\rho$; explicitly
+\[
+\begin{aligned}
+ \rho_1&=q_2^3R_1+q_2^2q_1R_2+(q_2^2q_0+q_2q_1^2)R_3+q_1^3R_4,\\
+ \rho_0&=q_2^3R_0+q_2^2q_0R_2+q_2q_1q_0R_3+(q_2q_0^2+q_1^2q_0)R_4 .
+\end{aligned}
+ \autoeqtag{eq:m9-pseudo-remainder}
+\]
+Some $\rho_i$ is a nonzero polynomial, and the product of that $\rho_i$ with
+$q_2$, $q_1$ and the Vandermonde $\prod_{i<j}(r_i+r_j)$ is a nonzero
+polynomial of degree at most
+\[
+ 14+2+2+4=22
+ \autoeqtag{eq:m9-selector-degree}
+\]
+in each root coordinate.  Consequently every binary $q\geq32$ admits five
+distinct rational roots for which $Q$ is a genuine quadratic in $x$ with
+$Q'\neq0$ and $Q\nmid R$.
+\end{lemma}
+
+\begin{proof}
+Expanding $A_0A_3+A_1A_2$ with $A_j=B_j+xB_{j+1}$ gives
+\eqref{eq:m9-Q-coefficients}; the two middle terms $B_1B_3$ cancel, and in
+characteristic two $Q'=\mathrm dQ/\mathrm dx$ is the coefficient $q_1$.  Each
+$A_j$ is linear in $x$, so $\Delta$, $N$ and $Q$ have degree at most two,
+$N\Delta$ degree at most four, $(N\Delta)'$ degree at most two, and $R$
+degree at most four.
+
+Neither $q_2$ nor $q_1$ is the zero polynomial.  Written out,
+\[
+\begin{aligned}
+ B_0&=z_4g_0+z_5g_1+z_6g_2+z_7g_3,&
+ B_1&=z_3g_0+z_4g_1+z_5g_2+z_6g_3+z_7g_4,\\
+ B_2&=z_2g_0+z_3g_1+z_4g_2+z_5g_3+z_6g_4+z_7,&
+ B_3&=z_2g_1+z_3g_2+z_4g_3+z_5g_4+z_6,\\
+ B_4&=z_2g_2+z_3g_3+z_4g_4+z_5 .
+\end{aligned}
+\]
+In $q_1=B_0B_4+B_2^2$ the square $B_2^2$ contributes only square monomials.
+The coefficients of $g_0^2$, $g_4^2$, $g_2^2$, $g_1^2$, $g_3^2$ and $1$ are
+$z_2^2$, $z_6^2$, $z_4^2+z_2z_6$, $z_3^2$, $z_5^2+z_3z_7$ and $z_7^2$; read
+in that order they force $z_2=z_6=z_4=z_3=z_5=z_7=0$.  In
+$q_2=B_1B_4+B_2B_3$ the coefficients of $g_0g_1$, $g_1g_2$, $g_1g_4$ and
+$g_3g_4$ are $z_2^2$, $z_3^2$, $z_4^2+z_3z_5+z_2z_6$ and $z_5^2+z_3z_7$; read
+in that order they force $z_2=z_3=z_4=z_5=0$.  Both conclusions contradict
+the hypothesis.
+
+Pseudo-division by the degree-two polynomial $Q$ with leading coefficient
+$q_2$ takes three steps, each replacing $R$ by $q_2R$ plus a multiple of $Q$;
+carrying them out gives \eqref{eq:m9-pseudo-remainder}.  Over the fraction
+field of $k[g_0,\ldots,g_4]$ the element $q_2$ is invertible, so $\rho=0$ would
+say $Q\mid R$.  Lemma~\ref{lem:m9-nonsquare} rules that out: the double pole
+along the component $\mathfrak q$ does not reduce, which is exactly the
+nonvanishing of $R$ modulo $Q$.  Hence some $\rho_i\neq0$.
+
+For the degrees, each $g_j$ is elementary symmetric in $r_1,\ldots,r_5$ and
+therefore multi-affine, so each $B_j$ is multi-affine, each of
+$q_2,q_1,q_0$ has
+degree at most two in every root coordinate, each coefficient of $N\Delta$ at
+most four, and each $R_i$ at most eight.  By
+\eqref{eq:m9-pseudo-remainder} each $\rho_i$ has degree at most
+$6+8=14$.  The Vandermonde $\prod_{i<j}(r_i+r_j)$ has degree four in each
+root, which gives \eqref{eq:m9-selector-degree}.
+
+Finally, a nonzero polynomial of degree at most $d$ in each of $n$ variables
+separately does not vanish identically on $S^n$ for any set $S$ with
+$|S|>d$: fix all but one variable at values where the polynomial is nonzero,
+and use that a nonzero univariate polynomial of degree at most $d$ has at
+most $d$ roots.  With $d=22$ and $S=\F_q$, every $q>22$, hence every binary
+$q\geq32$, carries a point where the product above is nonzero.  There the
+Vandermonde factor makes the five roots distinct, $q_2\neq0$ makes $Q$
+quadratic in $x$, $q_1=Q'\neq0$, and $\rho\neq0$ gives $Q\nmid R$.
+\end{proof}
+
 \begin{theorem}[Empty first higher Lucas carrier]\label{thm:m9-shallow}
 For every $m\geq4$,
 \[
@@ -492,54 +825,22 @@ the affine slice
 \]
 modulo its upper-Borel stabilizer.
 
-For the all-field argument, the coefficient map
-\[
- (A_0,A_1,A_2,A_3)^{\mathsf T}=M_zh+(0,0,z_7,z_6)^{\mathsf T},
-\quad
-M_z=\begin{pmatrix}
- z_3&z_4&z_5&z_6&z_7&0\\
- z_2&z_3&z_4&z_5&z_6&z_7\\
- 0&z_2&z_3&z_4&z_5&z_6\\
- 0&0&z_2&z_3&z_4&z_5
-\end{pmatrix}
-\autoeqtag{eq:binary-hankel-rank}
-\]
-has rank at least three whenever $z_4\ne0$ or $z_5\ne0$.
-Indeed, a two-dimensional left kernel either contains a vector supported
-in its last two coordinates or projects isomorphically to the first two;
-the boundary columns then successively force
-$z_2=z_3=z_4=z_5=0$, a contradiction.  At rank four, $Q$ is an
-irreducible quadric and the double-pole coefficient of
-\eqref{eq:final-pair-trace} along $Q=0$
-is nonsquare.  At rank three, write the unique affine relation as
-$\sum\ell_iA_i=\kappa$.  If that coefficient were square on every
-component of $Q=0$, differentiation gives
-\[
- \ell_0\kappa=\ell_1\kappa=0,\qquad
- \ell_1\ell_2=\ell_0\ell_3.
-\]
-The six column relations in \eqref{eq:binary-hankel-rank} again force
-$z_4=z_5=0$.  Hence the
-Artin--Schreier cover is geometrically integral throughout the complement.
-The displayed rank split and derivative identities are manuscript
-calculations.  The public rank-two replay reconstructs the complete
-\(q=64\) rational-twist mass and its five witnesses; it is not a symbolic
-all-field proof.
+In particular $z_4\neq0$, so Lemma~\ref{lem:m9-rank} applies:
+\eqref{eq:binary-hankel-rank} has rank three or four, and in either case
+Lemma~\ref{lem:m9-nonsquare} makes the final-pair cover
+\eqref{eq:artin-schreier-cover} geometrically integral, with a component of
+$Q=0$ along which the double pole does not reduce.  The rank split, the
+derivative identity \eqref{eq:m9-square-obstruction} and its elimination are
+manuscript calculations.  The public rank-two replay reconstructs the
+complete \(q=64\) rational-twist mass and its five witnesses; it is not a
+symbolic all-field proof.
 
-Fix five roots and let $x$ be the sixth.  Write
-$A_j=B_j+xB_{j+1}$.  Then
-
-\[
- Q'=B_0B_4+B_2^2,
- \qquad [x^2]Q=B_1B_4+B_2B_3,
-\]
-
-and coefficient comparison shows that both are nonzero polynomials on the
-complement.  Geometric integrality makes at least one coefficient of the
-quadratic pseudo-remainder nonzero.  Its product with $Q'$, $[x^2]Q$, and
-the five-root Vandermonde is therefore nonzero and has degree at most
-$14+2+2+4=22$ in each root coordinate.  The finite-field grid bound supplies
-a rational good base for every binary $q\geq32$.  The reduced cover has at
+Fix five roots and let $x$ be the sixth, as in
+\eqref{eq:m9-five-root-split}.  Lemma~\ref{lem:m9-selector} then supplies,
+for every binary $q\geq32$, five distinct rational roots at which $Q$ is
+quadratic in $x$ with $Q'\neq0$ and $Q\nmid R$; its selector product has
+individual root degree at most $22$, which is what the grid bound needs.
+The reduced cover has at
 most two simple poles, hence genus at most one.  The exact deletion table on the
 normalized cover is
 \[
