@@ -313,4 +313,4 @@ SHA-256 `2c5c9f0a2f9eaf230605eaf844c3b7d08e0181e6dbc921153156a071d616ff64`:
 
 For the endpoint length and the exact C907 analytic boundary, see
 `notes/2026-08-10-c907-quantum-monodromy-stabilization.md` and
-`notes/clebsch-tasks/c907-solver-dossier.md`.
+`notes/cubic-threefolds-tasks/c907-solver-dossier.md`.

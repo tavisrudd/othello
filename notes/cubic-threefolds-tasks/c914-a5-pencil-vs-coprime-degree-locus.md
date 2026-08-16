@@ -1,6 +1,6 @@
 # C914 — The `A_5`-pencil against the known universally `CH_0`-trivial loci
 
-**Lane:** `clebsch`
+**Lane:** `cubic-threefolds`
 
 **Status:** active; first question answered, successor question open
 

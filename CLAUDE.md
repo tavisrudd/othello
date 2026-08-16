@@ -67,6 +67,7 @@ with no lane selected — ask which lane. An explicit alias switches lanes.
 | `continuation` | `notes/handoffs/2026-07-17-continuation-paper.md` |
 | `crowns` | `notes/handoffs/2026-07-17-crowns.md` |
 | `cubic` | `notes/handoffs/2026-07-13-twisted-cubic-transversal-spectrum.md` |
+| `cubic-threefolds` | `notes/handoffs/2026-08-15-cubic-threefolds.md` |
 | `dihedral` | `notes/handoffs/2026-07-17-dihedral-paper.md` |
 | `gem-mining` | `notes/handoffs/2026-07-14-gem-mining.md` |
 | `golden` | `notes/handoffs/2026-07-31-golden-operator-paper.md` |

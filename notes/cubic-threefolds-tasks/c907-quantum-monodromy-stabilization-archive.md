@@ -1,6 +1,6 @@
 # C907 — Quantum-monodromy stabilization archive
 
-**Lane:** `clebsch`
+**Lane:** `cubic-threefolds`
 
 Append-only history removed from the live task card.  Full proofs,
 certificates, source loci, replay commands, and the Mystery ledger are in

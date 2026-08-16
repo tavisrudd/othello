@@ -71,7 +71,7 @@ preload one for another paper, even when subjects or named experts overlap.
 10. C907 quantum-monodromy stabilization beyond `X x P^1`, including the
     codimension-two Stokes/Gamma blow-up gate or arbitrary-threefold carrier
     bounds: load
-    `clebsch-tasks/c907-solver-dossier.md`.
+    `cubic-threefolds-tasks/c907-solver-dossier.md`.
 
 ## Current project cautions
 

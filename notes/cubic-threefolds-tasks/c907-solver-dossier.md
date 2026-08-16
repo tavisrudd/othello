@@ -1,6 +1,6 @@
 # C907 solver dossier
 
-**Lane:** `clebsch`
+**Lane:** `cubic-threefolds`
 
 Load with `c907-quantum-monodromy-stabilization.md`.  Proof-design context,
 not attribution or outreach.

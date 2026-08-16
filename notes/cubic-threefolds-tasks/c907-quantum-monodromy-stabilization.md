@@ -1,6 +1,6 @@
 # C907 — Quantum-monodromy stabilization
 
-**Lane:** `clebsch`
+**Lane:** `cubic-threefolds`
 
 **Status:** the all-stabilization theorem is conditional on gauged-admissible
 smooth projective completions and one locally finite marked-threshold

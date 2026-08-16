@@ -216,7 +216,7 @@ Surfaces checked but not edited:
   this report.
 * notes/2026-07-31-results-summary-snapshot.md records exact small-point
   \(\nu _6=2\) but still says global atom transport is conditional. The
-  notes/clebsch-tasks/c907-quantum-monodromy-stabilization.md summary mentions
+  notes/cubic-threefolds-tasks/c907-quantum-monodromy-stabilization.md summary mentions
   \(V_{14}\) and should be synchronized with the eventual ledger row.
 
 Closing status: A and B are ready as conditional formal corollaries; C is

@@ -180,6 +180,6 @@ unedited surfaces checked:
 * notes/2026-08-12-c909-epilogue-integration-blueprint.md
 * notes/2026-08-12-c909-epilogue-integration-blueprint-quantum-audit.md
 * notes/2026-07-31-results-summary-snapshot.md
-* notes/clebsch-tasks/c907-quantum-monodromy-stabilization.md
+* notes/cubic-threefolds-tasks/c907-quantum-monodromy-stabilization.md
 
 No repeated surface was edited.

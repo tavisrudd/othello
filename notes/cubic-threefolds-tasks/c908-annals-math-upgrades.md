@@ -1,6 +1,6 @@
 # C908 — Annals-upgrade mathematics after the cubic epilogue
 
-**Lane:** `clebsch`
+**Lane:** `cubic-threefolds`
 
 **Status:** queued for Fable.  This task is mathematics only.  It does not
 edit Papers I--V, the computational companion, the cubic-stabilization

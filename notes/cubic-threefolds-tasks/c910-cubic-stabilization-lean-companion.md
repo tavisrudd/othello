@@ -1,6 +1,6 @@
 # C910 — Lean companion for cubic stabilization
 
-**Lane:** `clebsch`
+**Lane:** `cubic-threefolds`
 
 **Status:** active
 

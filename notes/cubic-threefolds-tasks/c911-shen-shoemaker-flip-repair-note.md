@@ -1,6 +1,6 @@
 # C911 — standalone discrepancy-one flip repair note
 
-**Lane:** `clebsch`
+**Lane:** `cubic-threefolds`
 
 **Status:** COMPLETE — reviewed manuscript, DOI metadata, AI disclosure,
 standalone export, and portfolio entry are green (2026-08-13).

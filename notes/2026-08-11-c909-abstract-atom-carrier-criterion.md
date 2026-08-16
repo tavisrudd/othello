@@ -367,5 +367,5 @@ SHA-256 `2c5c9f0a2f9eaf230605eaf844c3b7d08e0181e6dbc921153156a071d616ff64`:
 
 Related local statements and the \(\mathbf P^2\) analytic gates are in
 `notes/2026-08-10-c907-quantum-monodromy-stabilization.md` and
-`notes/clebsch-tasks/c907-solver-dossier.md`; this note does not repeat C907's
+`notes/cubic-threefolds-tasks/c907-solver-dossier.md`; this note does not repeat C907's
 proof search.

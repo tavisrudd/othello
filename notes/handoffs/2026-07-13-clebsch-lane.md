@@ -95,21 +95,20 @@ continue concurrently under their own explicit selectors.
 
 ## Research-only successor tracks
 
-- **C907 — quantum monodromy stabilization, active.** v1 is unconditional:
-  framed formal monodromy of the numerical small quantum connection, followed
-  through Iritani's blow-up comparison, proves `X x P^1` irrational for every
-  smooth cubic threefold (`papers/cubic-stabilization-epilogue/`). The
-  wall-local Gamma-rank generalization (arbitrary one-step blow-up) is now a
-  reviewed 27-page manuscript, `papers/cubic-stabilization-irrationality/`,
-  authority `9acab5fdc`, standalone mirror `db8e059`, unpushed; its
-  discrepancy-one flip correction is a separate published standalone note
-  (`papers/discrepancy-one-flips/`, DOI `10.5281/zenodo.21924799`), closed as
-  C911. Full stability of the epilogue's cofactor lemma is open from `m=2`;
-  live exits and closed routes are tracked on the card. Current card:
-  [`c907-quantum-monodromy-stabilization.md`](../clebsch-tasks/c907-quantum-monodromy-stabilization.md).
+**C907, C908, C909, C910, C911, and C914 moved to the new `cubic-threefolds`
+lane on 2026-08-15** (entry handoff `notes/handoffs/2026-08-15-cubic-threefolds.md`,
+task cards under `notes/cubic-threefolds-tasks/`). C908 is a direct successor
+of C904's Annals-upgrade frontier (below) — expect the two lanes' research to
+stay in close contact even though they route separately.
+
+**C912 and C913 stay here for now**, since they are active, author-close work
+and moving mid-task would disrupt it; migrate them once the current
+referee-revision round closes.
+
 - **C912 — referee-facing follow-on paper, active, author-close only.**
-  *Irrationality of Cubic Threefolds after One Stabilization*, warning-free
-  30-page authority `f8183bf97`, standalone `b0b3861`, unpushed. WP1–WP3
+  *Irrationality of Cubic Threefolds after One Stabilization*
+  (`papers/cubic-stabilization-irrationality/`), warning-free 30-page
+  authority `f8183bf97`, standalone `b0b3861`, unpushed. WP1–WP3
   referee-foundation tranche is green; the owed frame-transport lemma for
   referee A is narrowed to invariance of the framed spectrum under one
   positive-filtration bulk displacement. Current card:
@@ -118,26 +117,6 @@ continue concurrently under their own explicit selectors.
   hypothesis presentation, expanded proofs) before the next frozen cold-read
   cycle; card:
   [`c913-cubic-stabilization-fable-revisions.md`](../clebsch-tasks/c913-cubic-stabilization-fable-revisions.md).
-- **C908 — Annals-upgrade mathematics, active.** Proved an integral lattice
-  theorem for `H^3(Bl_0Θ,Z)` (torsion-free rank 130, escape group free of rank
-  ten, correcting a prior `(Z/2)^10` misidentification) — a candidate for its
-  own paper, scoping pending the user. The priority-A `(1,5)` Chow-index
-  channel is closed negative for every named source; priority A itself (the
-  relative Chow index `ind(Y)=1` vs `2`) remains undecided. Card:
-  [`c908-annals-math-upgrades.md`](../clebsch-tasks/c908-annals-math-upgrades.md).
-- **C909 — cycle-side crown, active.** Full ordinary cohomological saturation
-  of the prescribed graph divisor lattice is proved intrinsically; the actual
-  six-axis four-slot quotient audit is now positive (unit line plus
-  depth-one rank-four block, Pluecker defect vanishes), passing two
-  independent hostile/priority audits. The higher-rank Dyck-height Smith
-  formula is a successor crown, not a gate on this one. Card:
-  [`c909-epilogue-math-level-ups.md`](../clebsch-tasks/c909-epilogue-math-level-ups.md).
-- **C910 — Lean companion for the epilogue, active.** 93 sources build
-  through the guarded queue; exact bijection among 23 manuscript claims, 168
-  reviewer terminals, and expected axiom rows; coverage 0 absent / 13
-  fragmentary / 9 conditional / 1 complete. Card:
-  [`c910-cubic-stabilization-lean-companion.md`](../clebsch-tasks/c910-cubic-stabilization-lean-companion.md);
-  interim release report `../2026-08-12-c910-partial-lean-release.md`.
 - **C904 — Paper V Annals-upgrade frontier, active.** The relative Shen-cycle
   descent gate (fixed-fibre lifting is closed; Shen's cycle is existential
   rather than horizontal) is the exact obstruction. Many routes are now
@@ -154,13 +133,10 @@ continue concurrently under their own explicit selectors.
   classical, the surviving theorem is an exact sparse marked entry through
   the `E_6` carrier; its arithmetic-lift frontier is literature-gated and not
   promoted to any manuscript or Lean source.
-- **C914 — active.** Places the `A_5`-pencil against the known universally
-  `CH_0`-trivial loci. Card:
-  [`c914-a5-pencil-vs-coprime-degree-locus.md`](../clebsch-tasks/c914-a5-pencil-vs-coprime-degree-locus.md).
 
-No C907, C908, C909, C912, C913, C914, Chow, manuscript, PDF, mirror, or Lean
-promotion between these tracks or into the numbered series follows
-automatically from any of the above.
+No C904, C912, C913, Chow, manuscript, PDF, mirror, or Lean promotion
+between these tracks or into the numbered series follows automatically from
+any of the above.
 
 ## Active and queued task cards
 
@@ -243,8 +219,10 @@ the next export of any area.
 
 This lane owns the five Clebsch paper roots, the preserved mega-paper
 fallback, Clebsch checkers/reports, and exact Clebsch queue rows. It does not
-own Baer, alternate-orbit, gem-mining, golden, or crowns work. Cross-lane
-results are read-only until an owning split-paper task explicitly admits them.
+own Baer, alternate-orbit, gem-mining, golden, crowns, or (as of 2026-08-15)
+`cubic-threefolds` work — the latter retains only C912/C913 here until their
+active referee-revision round closes and they migrate. Cross-lane results are
+read-only until an owning split-paper task explicitly admits them.
 
 The companion discovery log is `notes/2026-07-14-clebsch-discovery-track.md`.
 Logging an observation neither allocates work nor adds it to a paper.

@@ -256,4 +256,4 @@ The KKPYY source boundary is recorded in
 `notes/2026-08-11-c909-enriched-carrier-no-go.md`.  The C907 analytic target
 and its exclusions are in
 `notes/2026-08-10-c907-quantum-monodromy-stabilization.md` and
-`notes/clebsch-tasks/c907-solver-dossier.md`.
+`notes/cubic-threefolds-tasks/c907-solver-dossier.md`.
