@@ -726,7 +726,8 @@ It fails three times over, and the first two are independent of the draft.
 evaluate at the closed point $q=t=0$ of the base, the large-radius limit; the
 proof of their Theorem~5.16 opens by observing that there the quantum product
 reduces to the classical cup product, so that the leading operator $K_{\rm
-split}$ of their (5.18) is a cup-product operator and hence nilpotent. The
+split}$ of their (5.18) is a cup-product operator, hence scalar-plus-nilpotent
+on each block rather than nilpotent outright. The
 draft's $\nu_6$ is not evaluated there. It is read where the eigenvalues of
 $c_1\star$ separate --- at the cubic, where the block carries $r=(3q)^{1/2}$ and
 the indicial roots $\pm1/6$, $\pm5/6$. At $q=0$ that separation collapses and
@@ -774,15 +775,20 @@ $\varsigma_j^\circ=-(c-1)\lambda_j+h_{Z,j}+O(q^{-1/(c-1)})$ with $\lambda_j$ a
 $H^2$ part is $h_{Z,j}$, and everything of degree at least four has moved into
 the tail. Same content, different bookkeeping; the draft's split of
 $\varsigma_j^\circ$ into unit twist, fixed divisor, and positive-filtration tail
-is right. The tail is irreducible: for a trivial rank-two bundle all $c_i(V)$
-vanish and their $\Delta(a)$ is purely $H^0\oplus H^2$, yet Iritani--Koto's
-$\varsigma_j^\circ$ still carries its $O(q^{-1/r})$ tail, so even
-$X\times\PP^1$ does not escape the bulk gauge.
+is right. The tail is present in general, but \emph{not} always: an earlier
+version of this passage inferred from the $O(q^{-1/r})$ symbol that even
+$X\times\PP^1$ carries a tail and so does not escape the bulk gauge. That
+inference was unsupported --- the $O(\cdot)$ symbol carries no information about
+$[z^{-1}]\log$ either way --- and it is contradicted by
+Theorem~\ref{thm:trivial-displacement} below, which shows that for a trivial
+bundle $\varsigma_j^\circ=r\lambda_j$ \emph{exactly}, with no $H^2$ term and no
+$H^{\ge4}$ tail. The claim is struck.
 
 \subsection*{Check two: the $u=0$ datum, which passes}
 
 Their Theorems~5.20(2) and 5.24(2) determine the base map from its restriction
-to the base point up to a multiplicative constant in each logarithmic direction;
+to the base point up to a multiplicative constant in the $q$ direction (the
+statement for all logarithmic directions is their Proposition~4.31(2));
 the proof of their Proposition~4.31 shows why, since $df$ is recovered through
 $\Psi(d\log p_i)=d\log f_i$ and integrating a logarithmic form leaves one
 constant. That ambiguity is a character of the Novikov lattice: $q\mapsto cq$ is
@@ -835,7 +841,8 @@ Two things survive, and both are worth more than the route was.
 isomorphism of $\C[z](\!(q^{-1/s})\!)[[Q,\widetilde\tau]]$-modules
 (Theorem~5.18), and Iritani--Koto's $\Phi$ is induced by a
 $\C[z,q][[Q,\widehat\tau]]$-module map and is an isomorphism over
-$\C[z](\!(q^{-1/r})\!)[[Q,\widehat\tau]]$ (proof of their Theorem~5.1(6)). Both
+$\C[z](\!(q^{-1/r'})\!)[[Q,\widehat\tau]]$, with $r'\in\{r,2r\}$ according to
+the parity convention of their statement (proof of their Theorem~5.1(6)). Both
 are polynomial in $z$ with inverses in the same ring, hence lie in
 $\mathrm{GL}_n(F(\!(z)\!))$ for $F$ the Laurent coefficient field, hence are
 fixed by the turn. Theorem~\ref{thm:transport} applies to them with $\Gamma=0$,
@@ -1568,8 +1575,11 @@ $S^3=-I$ and $S^5=-I$ respectively; the Serre operator computed from
 Riemann--Roch satisfies the first exactly and fails the second, its
 characteristic polynomial being $\Phi_6$ and its order six, in agreement with the
 exponents $-1/6,-5/6$ recorded after \eqref{eq:sheared-data}. The offset is
-systematic rather than a slip: their Example~6.20 gives $S^3=[4]$ for the cubic
-fourfold, whose Kuznetsov component is a K3 category with $S=[2]$ categorically.
+systematic rather than a slip: their Example~6.19 gives $S^3=[4]$ for a very
+general quartic in $\PP^5$, whose Kuznetsov component is a K3 category with
+$S=[2]$ categorically. (An earlier version of this passage cited an
+``Example~6.20'' about a cubic fourfold; no such example exists, and the
+statement belongs to Example~6.19 and to the quartic.)
 The two are different objects --- the Serre automorphism of a Hodge atom in the
 cohomological $\mathbf Z$-grading, and the categorical Serre functor on a K-group
 --- so a citation should follow the object it is about. Locators and the full
@@ -1603,7 +1613,7 @@ on such an atom's numerical Grothendieck group has $\Phi_6$ as a factor.
 
 The stronger form is the one Katzarkov--Kontsevich--Pantev--Yu's own dimension-four
 example uses, where the exclusion is unipotency against non-unipotency. Their
-Example~6.20 needs it only for surfaces of general type, the atom there being
+Example~6.19 needs it only for surfaces of general type, the atom there being
 shaped like one; the endpoint needs every surface, because the cubic threefold's
 atom is shaped like a genus-five curve atom and nothing narrows the search in
 advance.
@@ -1708,10 +1718,13 @@ This is not the same invariant as $\nu_6$, and it is not obviously weaker or
 stronger; it is the sources' own, which is an argument for using it. Two
 cautions. It buys the Hodge-atom, motive and Serre-enhancement machinery that
 the earlier blueprint deliberately avoided, so the manuscript would import more
-than the two decomposition theorems --- though not the integral-structure
-enhancement, which its authors call difficult and defer to forthcoming work,
-while calling the Euler-pairing and Serre-automorphism enhancement a
-straightforward repeat of the undecorated theory. And their sentence is a worked example,
+than the two decomposition theorems. The deferral is wider than an earlier
+version of this passage recorded: in the non-archimedean analytic setting, which
+is the one an $A$-model $F$-bundle of a projective variety actually lives in, the
+authors defer the Euler pairing and the Serre automorphism themselves to
+forthcoming work, not merely the integral-structure enhancement. So the
+decoration the route turns on is not available off the shelf in the setting
+required. And their sentence is a worked example,
 not a theorem with hypotheses, although the statements it invokes ---
 Lemma~5.24, Claim~6.15, Proposition~5.30 and Theorem~4.11 --- have now been read
 at the source and say what is claimed of them here. The graded minimal
@@ -1843,31 +1856,42 @@ out of a growing family. The expectation that the rank-two mechanism extends as
 it stands was therefore too optimistic at exactly this step, and the extension
 needs a different input at the base point.
 
-The natural input is the grading rather than the pairing, and it is available
-precisely for the blocks a center statement cares about, those at $u_0=0$. Since
-$\mu$ is the grading operator and $E\star$ raises degree by two, $[\mu,U]=U$;
-this makes $H_0$ for the eigenvalue zero $\mu$-invariant, and on it $[\mu,N]=N$,
-so $N$ raises the $\mu$-weight by one. In a $\mu$-homogeneous cyclic frame an
-operator of $\mu$-weight $p$ is supported exactly on the $p$-th sub-diagonal, so
-the statement ``$A_p'$ has $\mu$-weight $p$'' \emph{is} the regular-singularity
-condition displayed above, with nothing left to check entry by entry. The cubic
-is the rank-two instance of it: $A_0'=D_0$ is diagonal, of weight zero, and
-$A_1'$ contributes only its $(2,1)$ entry, of weight one --- which is why the
-deleted hypothesis (H2) looked like an accident of that example and was not one.
+An earlier version of this memo proposed the grading as that input, on the
+ground that since $\mu$ is the grading operator and $E\star$ raises degree by
+two, $[\mu,U]=U$, making $H_0$ for the eigenvalue zero $\mu$-invariant with
+$[\mu,N]=N$; in a $\mu$-homogeneous cyclic frame an operator of $\mu$-weight $p$
+is supported exactly on the $p$-th sub-diagonal, so ``$A_p'$ has $\mu$-weight
+$p$'' would \emph{be} the regular-singularity condition, with nothing left to
+check entry by entry.
 
-What must be supplied to turn this into a proof is that the decoupling gauge of
-Step~1 respects the grading on the zero block: the analogue of
-Lemma~\ref{lem:duality-gauge} with $\mu$ in place of $G$. Uniqueness is again
-the device, but the argument is not verbatim, because the $\mathbf C^\times$
-action generated by $\mu$ scales the nonzero eigenvalues of $U$ rather than
-fixing them, so it moves the other blocks and the equivariance has to be stated
-for the whole decoupling problem before restricting to $H_0$. With the base
-point settled that way, propagation over the germ should be
-Theorem~\ref{thm:no-irregularity}'s flatness argument applied to the pole
-coefficients in order of depth; the shape to expect is that each satisfies a
-linear equation whose remaining terms involve only deeper coefficients, already
-known to vanish, but that triangular structure is a computation this memo has
-not done.
+\emph{That route is withdrawn: the identity is false over a Novikov ring.} The
+operator $\mu$ implements only the cohomological half of the grading, whereas
+the homogeneity that makes $E\star$ raise degree by two is with respect to the
+total grading, which includes $\deg Q^d=2c_1(X)\cdot d$. On the $Q^d$-part the
+correct rule is
+\[
+  [\mu,U]_{ij}=(1-c_1\cdot d)\,U_{ij},
+\]
+so $[\mu,U]=U$ holds only in Novikov degree zero. The cubic refutes it on its own
+matrices: with $\mu=-G_X=\operatorname{diag}(-3/2,-1/2,1/2,3/2)$ and $U=K_X$ the
+small even connection matrix of the draft's (4.9a), the entry $(2,1)$ gives
+$[\mu,U]_{21}=2=U_{21}$, but the entry $(1,2)$ gives
+$[\mu,U]_{12}=-12q\ne U_{12}=12q$. The drawn consequence fails there too: the
+zero generalized eigenspace is
+$H_0=\operatorname{span}_\Lambda\{P^3-6qP,\;P^2-21q\cdot1\}$, and applying $\mu$
+to the first generator gives $3qP+\tfrac32P^3$, which is not in $H_0$. So the
+cubic is not the rank-two instance of a $\mu$-grading mechanism, and the
+appearance that the deleted hypothesis (H2) was explained by one was an
+artifact of the false identity --- (H2) is explained instead, and correctly, by
+Theorem~\ref{thm:h2-automatic}, from the Frobenius property.
+
+Nothing proved in this memo used the identity: Section~\ref{sec:rigid},
+Steps~1--7, uses only $[U,C_a]=0$, $\partial_aU=C_a+[C_a,\mu]$, the commutant of
+a regular $2\times2$ matrix, and the Frobenius input, so
+Theorem~\ref{thm:rigidity} and Corollary~\ref{cor:cubic-closed} are untouched.
+What is lost is the proposed route for $m\ge3$. No replacement input at the base
+point is currently identified; a correct version would have to work with the
+total grading, in which $Q$ carries degree, rather than with $\mu$ alone.
 
 None of this covers a derogatory block, where the commutant is larger than
 $B[N]$ and Proposition~\ref{prop:size-m-steps} fails at its first step, nor a
@@ -2241,10 +2265,18 @@ inverting Iritani's change of variables. That was refuted, and the refutation is
 recorded here because the move is tempting and should not be made again.
 Iritani--Koto's (5.13) sets $s_j=\varsigma_j-\varsigma_j^\circ$ and states that
 the invertible change of variables is the one in those \emph{displaced}
-coordinates, treated as independent formal variables; Iritani's Lemma 5.15 is the
-formal inverse function theorem at $Q=\vartheta=0$, an isomorphism of the germ at
-the origin onto the germ at its image; and Iritani states that the pullback of
-functions along the change of variables is ill-defined. Every version of the
+coordinates, treated as independent formal variables; Iritani's Lemma 5.15 is a
+normalization lemma about initial terms, and it is the unnumbered discussion
+following it that draws the inverse-function conclusion, in the form that
+$\vartheta\mapsto(\tau(\vartheta),\{\varsigma_j(\vartheta)\})$ is
+\emph{formally} invertible over $\C(\!(q^{-1/(r-1)})\!)[[Q]]$ --- invertibility
+of a formal power series map over a specified coefficient ring, with no germ in
+sight, and Iritani's Remark 1.5 says explicitly that $\Psi$ is not expected to be
+analytic in all the variables; and the well-definedness of the pullbacks along
+the change of variables is argued by Iritani from the String and Divisor
+equations together with the reduction of $QDM(X)^{\rm La}$ and $QDM(Z)^{\rm La}$
+to the smaller rings of his Remark 5.6, not from any general substitution
+principle. Every version of the
 decomposition identity in the sources is an isomorphism of modules over a formal
 germ, not a family of pointwise statements. So a parameter at which a prescribed
 displaced coordinate vanishes need not exist, and "read the identity in either

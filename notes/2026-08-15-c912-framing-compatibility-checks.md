@@ -263,7 +263,7 @@ Recorded as leads, with their status marked; none is a claim.
    entirely by blocks with repeated `E⋆`-eigenvalue, and every route only ever has to
    control those.  This matches the manuscript's cubic computation, where `K_0` has
    eigenvalues `±6r, 0, 0`: the simple `±6r` blocks contribute the identity, and the
-   indicial roots `1/6` and `5/6` are `±1/6` mod `Z`, the symmetry the argument forces.
+   indicial roots `-1/6` and `-5/6` are `±1/6` mod `Z`, the symmetry the argument forces.
 4. **Theorem 5.22 gives the blowup half no independent support.**  Anyone later tempted
    to cite it should know that it states existence, with uniqueness in Theorem 5.24, but
    is not derived from Theorem 4.34 — whose hypotheses do not cover the unequal block

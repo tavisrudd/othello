@@ -57,7 +57,7 @@ Theorem 5.18(6) (I-Bl line 5661):
 > $\varsigma_j(\tilde\tau)|_{Q=\tilde\tau=0} = -(r-1)\lambda_j+h_{Z,j}+O(q^{-1/(r-1)})$
 
 with $\lambda_j=e^{-2\pi i(j+r/2)/(r-1)}q^{1/(r-1)}$ (I-Bl line 5688) and
-$h_{Z,j}=\frac{2\pi i}{r-1}(j+\frac r2)\rho_Z$ (I-Bl (5.19), line 4300). Every
+$h_{Z,j}=\frac{2\pi i}{r-1}(j+\tfrac12)\rho_Z$ (I-Bl (5.19), line 4300). Every
 term here is $Q$-free. The projective-bundle case, which is the one the memo's
 final step actually uses, is Iritani-Koto Theorem 5.1(4) (IK line 2382):
 
@@ -681,7 +681,7 @@ Two of the three ingredients are real.
   no $H^2$ part at all in the ambient displacement, and every term is a negative
   power of $q$. The first two shapes occur only in the centre displacement
   $\varsigma_j^\circ=-(r-1)\lambda_j+h_{Z,j}+O(q^{-1/(r-1)})$, with
-  $h_{Z,j}=\frac{2\pi i}{r-1}(j+\frac r2)\rho_Z$ a $q$-free divisor class (I-Bl
+  $h_{Z,j}=\frac{2\pi i}{r-1}(j+\tfrac12)\rho_Z$ a $q$-free divisor class (I-Bl
   (5.19), line 4300) --- and the centre terms are the ones the ledger discards
   anyway. So for the chain the claim is not merely supported, it is stronger than
   stated. Whether the *accumulated* displacement keeps the three shapes is not in
