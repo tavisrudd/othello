@@ -10,9 +10,10 @@ make tit-check
 ```
 
 The output is `prs-beyond-redundancy-four-tit-submission.pdf`.  The tracked
-build has 45 single-column pages, under the 50-page submission limit effective
-since 2025-05-01, but the margin is small: recheck the page count after any
-manuscript change and before submitting.  The canonical preprint PDF remains a
+build has 50 single-column pages, exactly the submission limit effective
+since 2025-05-01, so there is no margin left: recheck the page count after any
+manuscript change and before submitting, and expect any further addition to
+require compensating compression.  The canonical preprint PDF remains a
 separate build from `main.tex`.
 
 Before submission:
