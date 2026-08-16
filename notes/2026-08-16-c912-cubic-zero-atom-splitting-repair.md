@@ -287,3 +287,180 @@ disjoint-union equivalences (`notes/2026-08-15-c912-owed-lemmas.tex`, "still owe
    obstruction is that WDVV applied to even insertions sums over the full basis, including
    `H^3`, so the even sector may not close on itself. Worth a bounded attempt as an
    independent check on the whole proposition, not as a replacement for it.
+
+---
+
+# Part II — the second round: a full proof, and one further simplification
+
+Written the same day, after a second red-team pass produced a complete proof in which the
+David–Hertling citation is replaced by a self-contained two-dimensional lemma derived from
+the Witt identities. Items are numbered as in that pass.
+
+## 9. The two-dimensional non-splitting lemma: verified, with one missing sentence
+
+The lemma proposed is: on a two-dimensional F-manifold over a field of characteristic zero,
+if `C_E` at `p` is a non-scalar single Jordan block then `C_E` has one eigenvalue on a whole
+neighbourhood. Re-derived here independently, and it is correct.
+
+`e` and `E` are independent at `p` (otherwise `C_E` is scalar), so they frame the germ; write
+`E ∘ E = aE + be`. In that frame `C_E = [[0, b], [1, a]]`, with characteristic polynomial
+`T² − aT − b` and discriminant `D = a² + 4b`. The Witt identities `[e, E] = e`,
+`[e, E∘E] = 2E`, `[E, E∘E] = E∘E` give
+
+    [e, aE + be] = e(a)E + (a + e(b))e = 2E   ⟹   e(a) = 2 ,  e(b) = −a ,
+    [E, aE + be] = E(a)E + (E(b) − b)e = aE + be   ⟹   E(a) = a ,  E(b) = 2b ,
+
+whence `e(D) = 2a·2 + 4(−a) = 0` and `E(D) = 2a·a + 4·2b = 2D`. Since `e, E` frame the germ,
+`dD = D·ω` for the analytic one-form dual to `(0, 2)` in that frame. If `D ≠ 0` in the
+completed local ring, its lowest nonzero homogeneous part `D_m` has `m ≥ 1` because
+`D(p) = 0`, and comparing lowest degrees in `dD = Dω` gives `dD_m = 0`, hence `m·D_m = 0` by
+Euler's relation, hence `D_m = 0` in characteristic zero. Contradiction.
+
+**The missing sentence.** That argument gives `D = 0` in the *completed* local ring. The
+step to `D = 0` as a germ is Krull's intersection theorem in the Noetherian local ring
+`O_{B,b}`, as in §3 above. The proposed write-up says "hence `D ≡ 0` in the germ" without it.
+One sentence, but it is the sentence that makes the formal argument bite on the analytic
+object.
+
+## 10. The lemma holds in every dimension, which removes the decomposition step
+
+The proposed proof reaches the two-dimensional situation by decomposing the germ of the
+rank-four Hodge sector into factors of dimensions `1`, `1`, `2` and applying the lemma to the
+last one. That decomposition is the weakest remaining link: the source's spectral theorem
+decomposes the *F-bundle* according to separated eigenvalues, whereas what is needed is a
+decomposition of the *base germ* into a product of F-manifolds, each with its own unit and
+Euler field. That is Hertling's decomposition theorem, proved complex-analytically — so the
+route reintroduces, one level down, exactly the category mismatch it was written to avoid.
+
+It is not needed. The discriminant identity holds in every dimension:
+
+> **Lemma.** Let `(M, ∘, e, E)` be an F-manifold with Euler field, regular at `p`, let
+> `U = C_E` with characteristic polynomial `P(z) = z^n + Σ λ_k z^k`, and let `Δ` be the
+> discriminant of `P`. Then `X_s(Δ) = c_s Δ` for every `s < n`, where `X_s = E^{∘s}` is the
+> canonical frame and
+>
+>     c_0 = 0 ,   c_1 = n(n−1) ,   c_2 = −2(n−1) λ_{n−1} ,
+>     c_3 = 2(n−1) λ_{n−1}² − (4n−6) λ_{n−2} .
+>
+> Consequently `dΔ = Δ·ω` with `ω` analytic, and if `U_p` has a repeated eigenvalue then
+> `Δ = 0` on the germ at `p`.
+
+The reason is transparent: David–Hertling's coefficient formulas (their (19), (20), (24),
+(25)) say exactly that `X_s` acts on the eigenvalues by `μ_i ↦ μ_i^s`. Since
+`Δ = Π_{i<j}(μ_i − μ_j)²`, one gets
+`X_s(Δ)/Δ = 2 Σ_{i<j} (μ_i^s − μ_j^s)/(μ_i − μ_j) = 2 Σ_{i<j} h_{s−1}(μ_i, μ_j)`, a symmetric
+polynomial, hence a polynomial in the `λ_k`. At `s = 0` it is `0` and at `s = 1` it is
+`n(n−1)` by Euler's relation, recovering the two-dimensional case `e(D) = 0`, `E(D) = 2D`.
+The endgame is then the same lowest-degree argument, applied to `Δ` rather than to `D`.
+
+**Verified symbolically** for `n = 2, 3, 4`: both that the four published coefficient formulas
+coincide with the derivation `μ_i ↦ μ_i^s` (which also confirms the transcription and their
+algebra), and that `X_s(Δ) − c_s Δ = 0` identically for every `s < n`.
+Replay: `uv run --with sympy python3 notes/scripts/c912_fmanifold_discriminant_identity.py`.
+
+**Why this matters for the cubic.** `n = 4` is the Hodge-invariant sector
+`H^0 ⊕ H^2 ⊕ H^4 ⊕ H^6`, and `s ≤ 3` is exactly the range David–Hertling publish, so no
+unpublished extension of their computation is needed. The lemma applies directly at `b`,
+where `U` is regular because the zero block is a single Jordan block (`ν = 2 ≠ 0`) and the
+two nonzero eigenvalues are simple. Nothing is restricted, nothing is decomposed, and the
+only hypothesis used is regularity at the single point `b`.
+
+This closes the second of the two items ranked red in the red-team pass — the worry that the
+restricted rank-four object might not satisfy the hypotheses a regular-F-manifold theorem
+needs. There is no restriction and no imported theorem: the Witt identities, Cayley–Hamilton
+and Euler's relation are the whole input.
+
+## 11. Integrality of the base is a citation, not an open problem
+
+The first red item — that the discriminant continuation needs the base to be integral, and
+that connectedness alone does not give it — is answered without any explicit description of
+the Hodge base:
+
+> **Conrad, *Irreducible components of rigid spaces*, Annales de l'Institut Fourier 49 (1999)
+> 473–541, Lemma 2.1.4:** let `X` be a connected normal rigid space and `U` a non-empty
+> admissible open. The only analytic subset of `X` containing `U` is `X` itself.
+
+Applied to the zero locus of the discriminant, which is an analytic subset containing a
+neighbourhood of `b`, this gives `Δ ≡ 0` on the whole base. The source already states that
+the fixed locus is connected and smooth, and smooth implies normal, so both hypotheses are in
+hand. The proposed alternative — displaying the Hodge base explicitly as a product of an
+annulus, an affine line and two discs — would additionally have to be checked against the
+source's actual construction, and buys nothing.
+
+The same lemma settles the third red item, constancy of the residue invariant across a locus
+where the nilpotent part vanishes: the reduced spectral cover is unramified over a smooth
+base, hence smooth, hence normal, so each connected component is irreducible and the
+meromorphic-continuation step is legitimate.
+
+**One choice for the write-up.** Conrad's statement is for rigid spaces. If the source's
+spaces are Berkovich `k`-analytic spaces rather than rigid spaces, cite the corresponding
+Berkovich result (Ducros) instead; the two theories agree on the good, quasi-separated spaces
+in play, but the manuscript should not mix the categories silently.
+
+## 12. Items already discharged on this side
+
+Two of the red-team items are already closed here and need no further work:
+
+- **The pairing in the non-archimedean setting.** Horizontality of the Poincaré pairing over
+  the Novikov ring was proved on 2026-08-15 and committed
+  (`notes/2026-08-15-c912-owed-lemmas.tex`, §Horizontality, with the Frobenius and
+  anti-self-adjointness lemmas; independently checked in
+  `notes/2026-08-15-c912-horizontality-check.md`). What remains is not the pairing itself but
+  its restriction to a single even spectral factor carrying a `u`-dependent `P(u)`, together
+  with spectral orthogonality and non-degeneracy there — item (i′) of that note's "still
+  owed" list. The proposed proof by Sylvester invertibility at distinct leading eigenvalues
+  is the right argument for exactly that item.
+- **The elementary-modification algebra.** It has already had the independent from-scratch
+  audit that was asked for: `notes/2026-08-15-c912-atom-residue-proof-verification.md`, §§1–2,
+  which re-derived `N^T P_0 = P_0 N`, the isotropy of `im N`, the constant-order identity and
+  `A_0 ker N ⊆ ker N`, and §7, which recomputed the block reduction and the residue
+  `R_X = [[−19/18, 2], [−8/81, 1/18]]` from Cai's matrix without using the target's
+  intermediate numbers, then cross-checked its eigenvalues against the manuscript's indicial
+  exponents derived by an unrelated route. No effort should go there.
+
+## 13. The residue discriminant is the right normalization
+
+Replacing the characteristic polynomial of the residue by `δ = (ρ_1 − ρ_2)² = (tr R)² − 4 det R`
+is a good trade and costs nothing. The earlier verification found that
+`tr R_X = tr R_C = −1` on both sides for structural reasons, so the trace never discriminated
+anything; the entire separation was always carried by the determinant. Passing to `δ` discards
+exactly the coordinate that was never doing work, and buys invariance under scalar and power
+shifts. The values are `δ(α_X) = 1 − 20/36 = 4/9` for the cubic and `δ = 0` for the
+genus-five curve, matching `(T + 1/6)(T + 5/6)` against `(T + 1/2)²`.
+
+## 14. One item is greener in the write-up than the evidence supports
+
+The proof's §VI establishes that the invariant descends through the source's Definition 5.21,
+both clauses. But Hodge atoms are not the quotient by those two relations: the source's §5.4
+defines `HAtoms` as a quotient by the equivalence generated by **disjoint unions, blowups with
+smooth centres, and projective bundles**. The comparison the theorem makes — "`α_X` is not an
+atom of any curve or surface" — is an identification across two different varieties, so it
+lives in that larger quotient, and the invariant must be shown constant on its classes. This
+was flagged on 2026-08-15 (`...-atom-residue-proof-verification.md`, §5, "GAP") and is
+unaddressed in the new write-up, where it does not appear in the risk ranking at all.
+
+It is fillable and probably short: the source's Proposition 5.22 realizes each elementary
+equivalence by an isomorphism of the geometric atomic F-bundles, and isomorphism-invariance is
+already proved. But it has to be written, and until it is, the descent claim is about a
+different object from the one the theorem quantifies over.
+
+## 15. Status after round two
+
+The two items ranked red both close: local non-splitting by §10, and the global maximality of
+the spectrum by §11. Both close using less machinery than proposed, not more. What remains,
+in order:
+
+1. **Amber.** Restriction of the horizontal pairing to a single even spectral factor, with
+   orthogonality and non-degeneracy there — the standing item (i′).
+2. **Amber.** Descent of the invariant through the blowup, projective-bundle and
+   disjoint-union equivalences, per §14.
+3. **Yellow.** Two source-facing checks not yet done here: that the source's Lemma 5.19 really
+   states that the reduced spectrum may be read on the Hodge-invariant sector (if it does not,
+   the two-line module argument of §5 above proves it), and that the even part is a
+   sub-F-bundle.
+4. **Structural, and not removable.** The whole route rests on an unrefereed preprint whose
+   projective-bundle theorem itself reduces to Iritani–Koto. "Unconditional" here means
+   unconditional relative to that package, and the manuscript must say so in those words.
+
+None of these is a mechanism question. All four are statements to write, cite, or check at
+the source.
