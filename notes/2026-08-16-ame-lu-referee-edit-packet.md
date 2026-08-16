@@ -122,8 +122,30 @@ a clean tree.  Absorbing that hash is unavoidable if the gate is to pass, but it
 is not an `ame-lu` change and the Q13 owner should know the AME--LU release
 manifest now pins their current lakefile.
 
-## Not done
+## Standalone repository synchronized
 
-The standalone paper repository `~/src/math-papers/ame-lu` was not
-synchronized.  These edits are manuscript-authoritative here; forward-committing
-them there is a separate step and was not requested.
+Exported per `notes/export-and-mirror-conventions.md` from the committed
+authority `86b887162`, after the manuscript commit and the two documentation
+commits:
+
+- `export-paper-repos.py plan --source-ref HEAD` reports `ame-lu` with zero
+  reference findings, and `audit --repository ame-lu` reports `findings=0`.
+- `sync --repository ame-lu --root ~/src/math-papers/ame-lu` changed nine
+  tracked files: the four edited sections, `refs.bib`, the rebuilt PDF, the
+  release manifest, `PROVENANCE.md`, and `export-manifest.json`.  No path was
+  deleted and no README or Zenodo metadata was touched, so neither of the two
+  hard refusals arose.
+- `make check` inside the repository rebuilds a warning-free 37-page PDF that is
+  byte-identical to the authority's, SHA-256 `c40296d1...20713f19`.
+- `release/verify_release.py` there verifies 18 public artifacts with public
+  tree `01d3e7d0cc66c6a6513991e487f9c715e1bb821c2fadbbd4bc445203d5f8d7f5`,
+  equal to the authority's, and correctly reports the formal companion as absent
+  from that checkout.
+- `export-paper-repos.py verify --root ~/src/math-papers/ame-lu` confirms 28
+  tracked files against source commit `86b887162`.
+
+Forward commit `c9af535` in `~/src/math-papers/ame-lu`, one ahead of its
+`origin/main` at `67602af`.  **Nothing was pushed**; publishing stays an author
+decision.  No Lean, certificate-package, finitegeom, or portfolio-summary tree
+was touched, and none needed to be: this batch changed manuscript prose and
+bibliography only.
