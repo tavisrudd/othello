@@ -6,9 +6,12 @@ all.  Choose one AME party as a logical input.  The other \(2m-1\) parties
 form an \([[2m-1,1,m]]_q\) stabilizer code, and the product of their local
 factors approximately implements the transpose-inverse of the factor on the
 chosen party.  Three correctable regions then test that logical action by a
-nested commutator.  The exact mechanism is standard: the stabilizer cleaning
-lemma is due to Bravyi and Terhal
-\cite[Lemma~1]{BravyiTerhal2009}, nested-commutator localization underlies the
+nested commutator.  The exact mechanism is standard: the qubit stabilizer
+cleaning lemma is due to Bravyi and Terhal
+\cite[Lemma~1]{BravyiTerhal2009}; in the additive prime-power setting used
+here, the same cleaning step is the elementary symplectic statement recorded
+in the proof of Lemma~\ref{lem:quantitative-cleaning-commutator}.
+Nested-commutator localization underlies the
 Bravyi--K\"onig hierarchy theorem \cite{BravyiKonig2013}, and
 Pastawski--Yoshida prove directly that a transversal logical unitary on three
 cleanable regions is Clifford \cite[Lemma~5]{PastawskiYoshida2015}.
@@ -59,7 +62,9 @@ Transversality makes \([T,\widetilde P]\) supported outside \(R_1\), so
 Knill--Laflamme correction on \(R_3\) gives
 \(V^\dagger C V=cI\).  Hence the logical nested commutator lies within
 \(4\varepsilon\) of \(cI\).  Its normalized Hilbert--Schmidt norm is one,
-so \(|c|\geq1-4\varepsilon\); replacing \(c\) by its phase proves (5.1).
+so \(|c|\geq1-4\varepsilon\).  If \(c=0\), then \(\varepsilon\geq1/4\), and
+(5.1) is immediate because its left-hand side is at most
+\(2\leq8\varepsilon\).  Otherwise, replacing \(c\) by \(c/|c|\) proves (5.1).
 Notice that \(C\) need not preserve the code.  Only its scalar compression
 is used, while (5.2) controls leakage.
 \end{proof}
@@ -168,12 +173,23 @@ inverse, with \(E(T_i,L_i)=\varepsilon(U)\).  Lemmas
 \ref{lem:nested-weyl-rounding}, with \(\eta=8\varepsilon(U)\), give
 (5.5); transpose and inverse preserve the additive Clifford group.
 
-Put \(K=\bigotimes_iK_i\), choose principal logarithms of
-\(K_i^\dagger U_i\) after optimizing the local phases, and let
+Put \(K=\bigotimes_iK_i\).  For each \(i\), choose a phase \(z_i\)
+attaining the minimum in (5.5), and let \(a_i\) be the principal Hermitian
+logarithm defined by
+\[
+ z_i^{-1}K_i^\dagger U_i=e^{ia_i}.
+\]
+Set \(\bar a_i=q^{-1}\operatorname{Tr}(a_i)\) and \(h_i=a_i-\bar a_iI\).
+Rephase \(K_i\) by \(z_ie^{i\bar a_i}\); this changes
+\(K=\bigotimes_iK_i\) only by a global phase and does not change its
+projective Clifford action.  After this rephasing,
+\(K_i^\dagger U_i=e^{ih_i}\), each \(h_i\) is traceless, centering does not
+increase its Frobenius norm, and its spectral spread is unchanged.  Let
 \(D^2=\sum_i\lVert h_i\rVert_F^2\).  The chord--angle bound gives
 \[
  D^2\leq\frac{\pi^2q}{4}\sum_i
-  \left(q^{-1/2}\lVert U_i-K_i\rVert_{\mathrm{HS}}\right)^2
+  \left(q^{-1/2}\min_{|z|=1}
+   \lVert U_i-zK_i\rVert_{\mathrm{HS}}\right)^2
  \leq16\pi^2qn\varepsilon(U)^2.                      \tag{5.6}
 \]
 The second clause of (5.3) puts every spectrum in an arc of length
@@ -394,7 +410,9 @@ by positive absolute constants.  An asymptotic use of (5.10) must specify
 an existing family.
 
 For the explicit generalized and extended generalized Reed--Solomon
-construction, \(n=2m\leq q+1\), so the party-count term cannot be smaller
+construction \cite{SeroussiRoth1986}, together with the standard
+MDS-to-AME construction \cite{RaissiGogolinRieraAcin2018},
+\(n=2m\leq q+1\), so the party-count term cannot be smaller
 than the local-dimension term.  Hence
 \[
  R^{\mathrm{clean}}_{n,q}

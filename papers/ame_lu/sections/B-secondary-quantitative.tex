@@ -732,9 +732,12 @@ uniform on \(\{X,Z\}\); then \(u(\ell)v(\ell)=2^{-m}\) when every
 \(\{X,Z\}=X+\{0,Y\}\), the set \(L\cap\{X,Z\}^{2m}\) is empty or a coset of
 \(L\cap\{0,Y\}^{2m}\), and the latter is a binary linear code of length
 \(2m\) whose nonzero words have weight at least \(m+1\).  Singleton bounds
-its dimension by \(m\), with equality only for a binary
-\([2m,m,m+1]\) MDS code; the binary MDS codes are the trivial ones, which
-forces \(m\leq1\).  Hence \(\langle u,v\rangle\leq\frac12\) and
+its dimension by \(m\).  Equality would give a binary
+\([2m,m,m+1]\) MDS code.  In systematic form \(G=[I_m\mid A]\), the MDS
+property forces every square minor of \(A\) to be nonsingular.  The
+\(1\times1\) minors therefore force every entry of \(A\) to be \(1\),
+whereas for \(m\geq2\) any \(2\times2\) minor is singular.  Equality
+therefore forces \(m\leq1\).  Hence \(\langle u,v\rangle\leq\frac12\) and
 \(\varepsilon(H^{\otimes2m})^2\geq1\) for every stabilizer
 \(\AME(2m,2)\) state with \(m\geq2\).  The bound is not merely nonvacuous
 there; it is within \(\sqrt2\) of the largest possible defect.  What the
@@ -779,8 +782,8 @@ Theorem~\ref{thm:two-uniform-stability} gives
 \(f\geq\frac5{6q}\sum_j\lVert h_j\rVert_F^2\) on it.  For \(g\in G(\psi)\)
 one has \(f(gV)=f(V)\): if \(g\lvert\psi\rangle=e^{i\theta}\lvert\psi\rangle\)
 then \(\langle\psi\rvert g V\lvert\psi\rangle
-=e^{-i\theta}\langle\psi\rvert V\lvert\psi\rangle\) after conjugating the
-left factor, and \(f\) depends only on the modulus.  Hence the same estimate
+=e^{i\theta}\langle\psi\rvert V\lvert\psi\rangle\), so the modulus is
+unchanged.  Hence the same estimate
 holds on the left translate \(gB\), with the generators measured from \(g\),
 which is the form the factorization \(U=g\cdot\bigotimes_je^{ih_j}\) requires.
 
@@ -788,7 +791,10 @@ which is the form the factorization \(U=g\cdot\bigotimes_je^{ih_j}\) requires.
 image \(Z\) of \(G(\psi)\), finite by
 Theorem~\ref{thm:two-uniform-discrete} and
 Remark~\ref{rem:local-phase-torus}.  So \(\bigcup_{g\in Z}gB\) is a
-neighbourhood of \(Z\), its complement \(K\) is compact, and \(f>0\) on
+neighbourhood of \(Z\), and its complement \(K\) is compact.  If
+\(K=\varnothing\), then every point of \(X\) already lies in some \(gB\),
+so the desired factorization holds globally and one may choose any
+\(\varepsilon_0>0\).  Otherwise \(f>0\) on
 \(K\); put \(\varepsilon_0=(\min_Kf)^{1/2}>0\).  If
 \(\varepsilon(U)<\varepsilon_0\) then \(U\notin K\), so \(U\in gB\) for
 some \(g\in Z\), and the first step applies at that \(g\).
@@ -1320,8 +1326,8 @@ Theorem~\ref{thm:lu-lc-rigidity}.
 \end{proof}
 
 The statement is vacuous at \(q=2\), where no \(\AME(4,2)\) state exists.
-In the dual-unitary circuit literature the local gauge freedom is the
-standing nuisance parameter of the classification programme
+In the dual-unitary circuit literature, local-unitary equivalence is a
+central part of the classification problem
 \cite{RatherAravindaLakshminarayan2022}, and the finite-field Clifford
 subfamily has been classified, with perfect-tensor cores appearing among
 its equivalence classes \cite{Pahari2026}; the corollary says that for
