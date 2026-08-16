@@ -92,6 +92,16 @@ In particular every quantum multiplication operator, including $U=\Eu\star_\tau$
 and each $C_\xi=\xi\star_\tau$, is self-adjoint for the Poincar\'e pairing.
 \end{lemma}
 
+\begin{remark}[The convention this depends on]
+That $U$ is a quantum multiplication operator is a convention-sensitive point and
+should be cited rather than assumed: in several presentations the Euler operator
+on a quantum connection carries an additional derivation term, and if it did
+here the lemma would not apply to it. It does not. In
+Katzarkov--Kontsevich--Pantev--Yu, (3.31) makes $\Eu_\gamma$ a cohomology class
+and (3.30) makes the operator $\mathcal O$-linear multiplication by it, with no
+derivation term.
+\end{remark}
+
 \begin{proof}
 By definition the structure constants of $\star_\tau$ are
 \[
@@ -185,23 +195,47 @@ by Lemma~\ref{lem:frobenius} again, applied to $C_\xi=\xi\star_\tau$. So $f$ is
 constant in every base direction as well.
 \end{proof}
 
-\begin{corollary}[What the atomic residue proof needs]
+\begin{corollary}[What transfers to the atomic residue proof]
 \label{cor:for-atom}
-In the notation of \texttt{2026-08-15-c912-atom-residue-proof.tex}, equation
-\textup{(7)} holds with the constant Gram matrix $P_0$, and hence so do its
-consequences \textup{(8)}, \textup{(10)} and \textup{(11)}.
+Equation \textup{(7)} of \texttt{2026-08-15-c912-atom-residue-proof.tex} holds on
+the even bundle in the global cohomology frame, with the constant Gram matrix
+$P_0$. Its consequences \textup{(8)}, \textup{(10)} and \textup{(11)} follow in
+that frame.
 \end{corollary}
 
 \begin{proof}
-Equation (7) there is $u\partial_uP(u)+A(u)^TP(u)+P(u)A(-u)=0$ for a possibly
-$u$-dependent pairing $P(u)$. Theorem~\ref{thm:horizontal} gives it with
-$P(u)=P_0$ constant, so the $u\partial_uP$ term drops and the remaining identity
-is \eqref{eq:horizontality}. The $u^{-1}$ coefficient is $N^TP_0=P_0N$, which is
-(8); the $u^0$ coefficient with a constant pairing is
-$A_0^TP_0+P_0A_0=0$, which is (10) with $P_1=0$, and the sandwich argument
-producing $A_0L\subset L$ goes through unchanged --- indeed more simply, since
-the terms of (10) involving $N$ and $P_1$ are absent.
+Immediate from Theorem~\ref{thm:horizontal}: with $P(u)=P_0$ constant the
+$u\partial_uP$ term of (7) drops and the remainder is
+\eqref{eq:horizontality}. The $u^{-1}$ coefficient is $N^TP_0=P_0N$, which is
+(8), and the sandwich argument of the target then gives $A_0L\subset L$.
 \end{proof}
+
+\begin{remark}[A correction: the pairing is \emph{not} constant on a spectral
+factor, and the corollary must not claim it is]
+\label{rem:p1-correction}
+An earlier version of this corollary asserted additionally that (10) holds
+``with $P_1=0$'', on the ground that the pairing is constant. That is
+\textbf{false as a general statement} and the error is worth recording, since it
+is the kind that hides in bookkeeping.
+
+Theorem~\ref{thm:horizontal} is proved in the global cohomology frame, where the
+Gram matrix is the constant $P_0$. The target's equation (7) is applied in the
+even \emph{spectral-factor} frame of a single atom, which is reached from the
+global frame by a $u$-dependent gauge $F$. In that frame the pairing is
+\[
+  P(u)=F(u)^TP_0F(-u)
+  =P_0|_{\mathrm{block}}-u^2\,\textstyle\sum F_1^TP_0F_1+O(u^3),
+\]
+which is not constant; $P_1$ vanishes only in a particular
+block-off-diagonal Sylvester gauge, so ``$P_1=0$'' is gauge-dependent
+bookkeeping and not a fact about the pairing.
+
+Nothing downstream is affected. The target's own sandwich argument derives (8)
+and $A_0L\subset L$ with $P_1$ left arbitrary, which is exactly why it was
+written that way; the simplification claimed here was never needed. What the
+corollary may be cited for is the statement above, in the global frame, and no
+more.
+\end{remark}
 
 \begin{remark}[What was actually at issue]
 The verification's concern was not that horizontality is false but that the
@@ -222,7 +256,14 @@ bookkeeping rather than substance, but none is written:
 
 \begin{enumerate}[label=(\roman*)]
 \item that the even part is a sub-$F$-bundle, so that restricting the whole
-  construction to it is legitimate;
+  construction to it is legitimate --- note that
+  Corollary~\ref{cor:for-atom} does \emph{not} discharge this, and an earlier
+  version of that corollary silently consumed it, which was circular;
+\item[(i$'$)] the transfer of Theorem~\ref{thm:horizontal} from the global frame
+  to a single even spectral factor, carrying a $u$-dependent $P(u)$ as in
+  Remark~\ref{rem:p1-correction}, together with spectral orthogonality and
+  non-degeneracy of the restricted pairing on that factor. This is the genuine
+  residue of the present note and is what the target's (7) actually assumes;
 \item uniqueness and gluing of the spectral splitting;
 \item the identity principle on irreducible $k$-analytic spaces, which is what
   the crossing-point argument uses when it propagates constancy from a nonempty
