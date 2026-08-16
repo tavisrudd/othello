@@ -655,13 +655,15 @@ verdict text lives only in `claim-proof-novelty-ledger.md`.
   gap through the flatness identities in Section 7, and closes it for the cubic
   block in Section 8, assembles the one-stabilization statement in Section 9,
   and proves it unconditionally in Section 10.  PDF SHA-256
-  `a8e8772cb8b221f99311956b5216917c23ffee38b0eb2f94ad7cc69b5aa7a21d`.  The sixth
+  `3602cef2e045c25144b4c0cab6b722ad86c2223c5f12f0d74159908526caed12`.  The sixth
   version deletes standing hypothesis (H2) of Section 8, which is now a theorem
   proved from the Frobenius property via an isometry lemma for the decoupling
-  gauge, and adds the arbitrary-Jordan-size analysis: the commutant and
-  no-splitting steps extend to any size, but duality removes only the deepest
+  gauge; adds the arbitrary-Jordan-size analysis, where the commutant and
+  no-splitting steps extend to any size but duality removes only the deepest
   pole coefficient, so rank two is special and the base point for larger blocks
-  must be settled by the grading.  Either
+  must be settled by the grading; corrects the graded minimal polynomial to
+  Kuznetsov's `S^3 = [5]`; and states the surface obligation as (iii) with its
+  two reductions and a counterexample to the weakened form.  Either
   document can be read first; the report is the shorter route in, the memo's
   Sections 8 and 9 are where the mathematics now is.
 
@@ -980,7 +982,9 @@ become manuscript edits.
 | C912-M23 | resolved | Standing hypothesis (H2) of the rigidity theorem is forced by the Frobenius structure: the image of the nilpotent part is isotropic and the `z^0` coefficient is anti-self-adjoint, so the assumed entry vanishes pointwise rather than on a germ. | `../2026-08-15-c912-det-r-pairing-and-serre-lattice.md`, Theorem 2; recorded in the memo's Section 8 and (H2) deleted there |
 | C912-M24 | confirmed | After the shearing the Poincare pairing is `z` times a symplectic form, and `sp(2) = sl(2)`, so in rank two the pairing gives exactly `tr R = -1` and can never determine `det R`. | Same report, Proposition 3 |
 | C912-M25 | confirmed | The count equals the number of primitive-sixth eigenvalues of the Serre operator on the numerical K-group of the Kuznetsov component. The genus-six Gushel--Mukai test passes -- `N(Ku) = <-1> + <-1>`, symmetric Euler form, `S = I`, count zero -- and the identification reproduces the whole prime-Fano census. Still an expected correspondence rather than a proved one. | `../2026-08-15-c912-gm-genus-six-serre-test.md`, Sections 3--4 |
-| C912-M26 | open | The frame-transport memo records `S^5 = [3]` where Kuznetsov's relation for the same category is `S^3 = [5]`; only the latter yields primitive sixth roots, and the memo's shorter endpoint route leans on that sentence. | `../2026-08-15-c912-det-r-pairing-and-serre-lattice.md`, Section 5 |
+| C912-M26 | resolved | The relation is Kuznetsov's `S^3 = [5]`: on the numerical K-group it predicts `S^3 = -I`, which the Riemann--Roch Serre operator satisfies, while `S^5 = [3]` predicts `S^5 = -I`, which it fails and which would force primitive tenth roots. The memo now records the verified relation; the source sentence is still unread, so the citation goes to Kuznetsov. | `../2026-08-15-c912-step-iii-serre-restatement.md`, Section 1 |
+| C912-M31 | confirmed | Every non-minimal smooth projective surface has an admissible subcategory of numerical Serre order six, from the exceptional pair `<O_E(-1), O_X>` on a `(-1)`-curve. Step (iii) is false for admissible subcategories, so the eigenvalue criterion is an invariant of the atomic decomposition rather than of the surface, and the blowup step of any proof is where the care is needed. | Same report, Section 3 |
+| C912-M32 | resolved | Step (iii) is automatic wherever the small quantum cohomology is semisimple, since every atom is then rank one and a rank-one numerical Serre operator is the identity. The obligation lives entirely in the non-semisimple cases outside the nef-canonical class. | Same report, Section 2 |
 | C912-M27 | resolved | The sign convention between the classification's reduced factorial cyclotomic polynomial `R` and the Serre side is `lam -> -lam`, the shift `[1]`: in all four genera where `R` is recorded the Serre characteristic polynomial is `R(-lam)` up to sign. | `../2026-08-15-c912-gm-genus-six-serre-test.md`, Section 4 |
 | C912-M28 | open | `N(Ku)` of the sextic double solid has the cubic threefold's Gram matrix and an order-six Serre operator, so the identification predicts count two there; the lane has not computed that quantum-side value. Independently, no Kuznetsov component equivalent to a curve category can have nonzero count, so the degree-one case of Kuznetsov's Fano threefold conjecture cannot hold. | Same report, Section 5; owner is the sextic-double-solid quantum computation |
 | C912-M29 | open | The Euler form on the residual component is symmetric for the Gushel--Mukai threefold and asymmetric for the cubic, and that symmetry alone controls the count. No structural reason for the difference was identified. | Same report, Section 3 |
