@@ -68,7 +68,14 @@ proves and what the hypothesis needs.
   monodromy is therefore literally the same matrix in the deformed solution
   frame.
 - **Validity class.** PROVED — for every smooth projective target, every block
-  type, no (H1), no rank restriction.
+  type, no (H1), no rank restriction — **but only on the formal germ.** The memo
+  originally continued "consequently `ν_6` is locally constant on `B`, hence
+  constant on each connected component". That sentence is deleted: the gauge
+  realizing the conjugacy is the pro-Laurent object, which need not sum at an
+  ordinary nearby analytic point, so formal-germ constancy is not analytic local
+  constancy. This matters beyond bookkeeping, because the atom route needs
+  constancy on a connected *component* of the spectral cover, which is exactly
+  what the deleted sentence would have supplied and does not.
 - **Scope delta — and this is the whole point.** It is a statement over
   `Λ[z,z^{-1}][[t]]` with `t` a **formal variable**. The hypothesis needs the
   conclusion after `t` is **specialized** to a specific element of the
@@ -219,10 +226,20 @@ substitution. That is a genuinely narrow residue, and it is fair to say so.
   deck action, hence all equal, and sum to `tr μ = 0`, hence each is zero. The
   `j`-th summand is therefore the quantum D-module of `X` at a bulk parameter
   lying in `H⁰`.
-- **Validity class.** PROVED-UNCONDITIONAL for the trivial rank-two bundle, by
-  two independent routes, at the canonical base point inside the germ where
-  Iritani–Koto Theorem 5.1 lives. Combined with E7 this gives
-  `ν_6(X × P¹) = 4` **with no use of Hypothesis 4.7H**.
+- **Validity class — downgraded after external review.** Originally recorded as
+  proved unconditionally by two independent routes. That is too strong for the
+  *exact-coordinate* claim `ς_j° = rλ_j`. Iritani–Koto's initial-condition
+  formula carries a correction term `[z^{-1}]log(…)`, and the source does not
+  state that it vanishes for a trivial bundle; the stationary-phase argument for
+  its vanishing may well be right but needs a standalone detailed proof, and the
+  second route's eigenspace computation suppresses the formal decoupling
+  corrections coming from the grading operator. Treat the exact-coordinate claim
+  as PLAUSIBLE-BUT-UNPROVED.
+- **The endpoint count itself is not at risk, and should be obtained a safer
+  way.** `ν_6(X × P¹) = 4` is still expected to be unconditional, but the clean
+  route is a direct quantum-Künneth computation on the product, which needs
+  neither the exact-coordinate claim nor the reconstruction formula. That
+  separation is the recommended repair: prove the number, drop the coordinate.
 - **Scope delta.** Covers the projective-bundle site only for `c_1(V) = 0` and
   `V` trivial. For `c_1(V) ≠ 0` the exponential factor is present and the
   quantum Riemann–Roch operator is cohomology-valued, so neither route runs.
@@ -551,6 +568,36 @@ repair) as the base.
    boundary at each use site.
 
 ---
+
+## 5b. Three distinct missing bridges, and the narrow line that is left
+
+External review (Sol, 2026-08-15) settles the shape of what remains. There is no
+complete chain to the headline theorem, and the three candidate presentations
+fail in three *different* places, so none of them is close to the others:
+
+1. **The operation-formula presentation** — the manuscript's own — needs
+   positive-bulk invariance for arbitrary centre blocks, not merely the cubic's
+   rank-two block.
+2. **The atom presentation** needs invariance on a connected component of the
+   spectral cover, which formal-germ constancy does not supply.
+3. **The roof presentation** needs strong factorization, which weak
+   factorization does not give.
+
+The recommended near-term line is therefore narrower than the memo advertised:
+repair the isometry lemma (**done**, and independently verified); prove the cubic
+rank-two rigidity cleanly (**done**, verified, `cor:cubic-closed` stands); prove
+`ν_6(X × P¹) = 4` directly by Künneth rather than through the exact-coordinate
+claim (**open**); and then look for a birational bookkeeping argument requiring
+neither arbitrary-centre bulk transport nor strong factorization (**open, and
+the real prize**). Until such an argument exists, the headline theorem stays
+explicitly conditional.
+
+Also flagged, manuscript-side and outside this file's scope: the ATLAS
+matrix-table citation supporting the two endomorphism-ring claims is thinner
+than the prose implies. The representation fields and dimensions support the
+assertions, but the commutants should either be derived in a sentence from the
+irreducibility and field-of-definition data or given a source that states them.
+That is a citation repair, not a mathematical one.
 
 ## 6. Verdict
 
