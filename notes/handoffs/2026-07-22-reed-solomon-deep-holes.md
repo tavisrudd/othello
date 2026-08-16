@@ -1151,8 +1151,9 @@ gates remain binding.
 
 | EV rank | Task | Current gate | Why this position |
 |---:|---|---|---|
-| 1 | C608 | publication and Version 2 gates cleared | extract the immediate decoding consequence of the R5--R7 Hankel criterion |
-| 2 | C607 | active, broader algorithmic scope | settle the FPT/XP decoding boundary after the absolute \(q\)-exponent and prior-decoding audit are rigorous |
+| 1 | C915 | edits E1--E6 applied and checklist green; three independent audits open | the external referee package blocks the Version 2 release |
+| 2 | C608 | publication and Version 2 gates cleared | extract the immediate decoding consequence of the R5--R7 Hankel criterion |
+| 3 | C607 | active, broader algorithmic scope | settle the FPT/XP decoding boundary after the absolute \(q\)-exponent and prior-decoding audit are rigorous |
 
 ## Unallocated level-ups
 
@@ -1212,8 +1213,9 @@ history.
 
 ## Next command
 
-`go C608`
+`go C915`
 
-(C886 and the Version 2 exposition/release gates are complete; C608 is the
-immediate decoder consequence, and C607 remains the broader parallel decoding
-task.)
+(The external referee correction package is applied and its checklist is green;
+the independent dependency, hostile redundancy-ten, and primary-source audits
+remain.  C608 is the immediate decoder consequence after that, and C607 remains
+the broader parallel decoding task.)
