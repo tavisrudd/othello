@@ -1,6 +1,9 @@
 # C913 — Cubic-stabilization referee revisions
 
-**Lane:** `clebsch`
+**Lane:** `cubic-threefolds` (re-pegged from `clebsch` on 2026-08-15 by author
+instruction, together with C912; dated reports written before that date carry
+the old lane in their headers, which records where the work was done and is not
+a routing error)
 
 **Status:** active.  Milestone 1 (Packages A/B) is complete at authority
 commit `28a4457aa`: the 29-page PDF is warning-free and byte-current, the GYY

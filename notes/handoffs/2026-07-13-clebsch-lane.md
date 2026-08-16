@@ -101,23 +101,6 @@ task cards under `notes/cubic-threefolds-tasks/`). C908 is a direct successor
 of C904's Annals-upgrade frontier (below) — expect the two lanes' research to
 stay in close contact even though they route separately.
 
-**C912 moved to `cubic-threefolds` on 2026-08-15 by author instruction; C913
-stays here**, since it is active, author-close work. C913's referee revision
-pass edits a paper root that C912 now owns from the other lane, so coordinate
-before touching `papers/cubic-stabilization-irrationality/`.
-
-- **C912 — re-pegged to the `cubic-threefolds` lane on 2026-08-15 by author
-  instruction.** The referee-facing follow-on paper *Irrationality of Cubic
-  Threefolds after One Stabilization* (`papers/cubic-stabilization-irrationality/`)
-  and the C912 card now route through
-  [`2026-08-15-cubic-threefolds.md`](2026-08-15-cubic-threefolds.md); treat both
-  as foreign to this lane.
-- **C913 — referee revision pass, active, author-close only.**
-  C913 owns the referee revision pass (local frame/source repairs, modular
-  hypothesis presentation, expanded proofs) before the next frozen cold-read
-  cycle, and still sits in this lane although the paper root it edits is now
-  `cubic-threefolds`-owned; card:
-  [`c913-cubic-stabilization-fable-revisions.md`](../clebsch-tasks/c913-cubic-stabilization-fable-revisions.md).
 - **C904 — Paper V Annals-upgrade frontier, active.** The relative Shen-cycle
   descent gate (fixed-fibre lifting is closed; Shen's cycle is existential
   rather than horizontal) is the exact obstruction. Many routes are now
@@ -135,7 +118,7 @@ before touching `papers/cubic-stabilization-irrationality/`.
   the `E_6` carrier; its arithmetic-lift frontier is literature-gated and not
   promoted to any manuscript or Lean source.
 
-No C904, C912, C913, Chow, manuscript, PDF, mirror, or Lean promotion
+No C904, Chow, manuscript, PDF, mirror, or Lean promotion
 between these tracks or into the numbered series follows automatically from
 any of the above.
 
@@ -221,8 +204,7 @@ the next export of any area.
 This lane owns the five Clebsch paper roots, the preserved mega-paper
 fallback, Clebsch checkers/reports, and exact Clebsch queue rows. It does not
 own Baer, alternate-orbit, gem-mining, golden, crowns, or (as of 2026-08-15)
-`cubic-threefolds` work — the latter retains only C913 here, C912 having been
-re-pegged to `cubic-threefolds` on 2026-08-15. Cross-lane results are
+`cubic-threefolds` work. Cross-lane results are
 read-only until an owning split-paper task explicitly admits them.
 
 The companion discovery log is `notes/2026-07-14-clebsch-discovery-track.md`.

@@ -17,13 +17,12 @@ quantum-monodromy stabilization, the relative Chow/cycle-theory frontier,
 and adjacent structural research on cubic threefolds. It does **not** own
 Paper V itself or the numbered Clebsch series — those stay in `clebsch`.
 
-**C912 was re-pegged to this lane on 2026-08-15 by author instruction**, with
-*Irrationality of Cubic Threefolds after One Stabilization*
-(`papers/cubic-stabilization-irrationality/`) as the paper root it owns. It is
-active and author-close only. **C913 is still `clebsch`-pegged** and owns the
-referee revision pass on that same paper root, so the two lanes now share a
-manuscript: coordinate before editing it, and treat C913's own card and edits as
-foreign here.
+**C912 and C913 were re-pegged to this lane on 2026-08-15 by author
+instruction**, and with them the paper root *Irrationality of Cubic Threefolds
+after One Stabilization* (`papers/cubic-stabilization-irrationality/`). Both are
+active and author-close only: C912 owns the referee-foundation repairs, C913 the
+referee revision pass on the same manuscript, so the two must stay sequenced
+against each other rather than editing it concurrently.
 
 ## Formal standard (when Lean-facing)
 
@@ -42,6 +41,10 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   positive-filtration bulk displacement; card:
   [`c912-cubic-stabilization-referee-foundations.md`](../cubic-threefolds-tasks/c912-cubic-stabilization-referee-foundations.md),
   analysis in `notes/2026-08-15-c912-frame-transport-memo.tex` and its PDF.
+- **C913 — referee revision pass, active, author-close only.** Local
+  frame/source repairs, modular hypothesis presentation and expanded proofs on
+  the same manuscript, before the next frozen cold-read cycle; card:
+  [`c913-cubic-stabilization-fable-revisions.md`](../cubic-threefolds-tasks/c913-cubic-stabilization-fable-revisions.md).
 - **C907 — quantum monodromy stabilization, active.** v1 is unconditional:
   framed formal monodromy of the numerical small quantum connection, followed
   through Iritani's blow-up comparison, proves `X x P^1` irrational for every
@@ -117,15 +120,16 @@ Lean source follows automatically from any of the above.
 |---|---|---|---|
 | Cubic-stabilization epilogue (Silver: `X x P^1` irrational unconditionally) | `papers/cubic-stabilization-epilogue/` | warning-free; Lean companion in progress under C910 | C907, C909, C910 |
 | Discrepancy-one flip correction | `papers/discrepancy-one-flips/` | published standalone note, DOI `10.5281/zenodo.21924799` | C911 (closed) |
-| *Irrationality of Cubic Threefolds after One Stabilization* | `papers/cubic-stabilization-irrationality/` | owned by this lane's C912 since 2026-08-15; `clebsch`'s C913 still edits it for the referee revision pass, so coordinate before touching it | C912 (this lane), C913 (`clebsch`) |
+| *Irrationality of Cubic Threefolds after One Stabilization* | `papers/cubic-stabilization-irrationality/` | owned by this lane since 2026-08-15; two active tasks edit it, so sequence them rather than editing concurrently | C912, C913 |
 
 ## Lane boundaries
 
-This lane owns the cubic-threefold research program above and its task
-cards under `notes/cubic-threefolds-tasks/`. It does not own the numbered
-Clebsch series (Papers I–V), `papers/cubic-stabilization-irrationality/`, or
-any other `clebsch`-lane surface — those remain foreign until an owning task
-here explicitly admits them, per the usual cross-lane hygiene rule.
+This lane owns the cubic-threefold research program above, its task cards
+under `notes/cubic-threefolds-tasks/`, and — since 2026-08-15 —
+`papers/cubic-stabilization-irrationality/` under C912 and C913. It does not
+own the numbered Clebsch series (Papers I–V) or any other `clebsch`-lane
+surface — those remain foreign until an owning task here explicitly admits
+them, per the usual cross-lane hygiene rule.
 
 The companion discovery log is
 `notes/2026-08-15-cubic-threefolds-discovery-track.md`. Logging an
