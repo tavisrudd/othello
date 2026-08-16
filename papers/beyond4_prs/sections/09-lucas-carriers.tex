@@ -922,9 +922,22 @@ $R\in\Sym^5E^\vee$ squarefree let
 \]
 be the pencil obtained by iterating the contraction of \eqref{eq:lift} along
 the six linear factors of $R\lambda$, spanned by the divided cubics
-$U=(A,B,C,D_3)$ and $V=(a,b,c,d)$, and write $c_{u,v}=uU+vV$.  Write $C_3$ for
-the twisted cubic of divided cubes in $\PP(\Gamma^3E)$, which is the base
-locus of the divided Hessian.  Then the following hold.
+$U=(A,B,C,D_3)$ and $V=(a,b,c,d)$, and write $c_{u,v}=uU+vV$.  Put
+$h_R=\iota_Rf\in\Gamma^4E$, so that $U$ and $V$ are its two coordinate shifts,
+\[
+ U=(h_0,h_1,h_2,h_3),\qquad V=(h_1,h_2,h_3,h_4),
+ \autoeqtag{eq:hessian-shift-pencil}
+\]
+and let
+\[
+ \mathcal D(R)=\det\begin{pmatrix}
+ h_0&h_1&h_2\\ h_1&h_2&h_3\\ h_2&h_3&h_4\end{pmatrix}
+ \autoeqtag{eq:hessian-terminal-determinant}
+\]
+be the terminal persistent determinant of \(h_R\), that is the cubic $D$ of
+Proposition~\ref{prop:reduced-terminal-carrier} evaluated at $h_R$.  Write
+$C_3$ for the twisted cubic of divided cubes in $\PP(\Gamma^3E)$, which is the
+base locus of the divided Hessian.  Then the following hold.
 \begin{enumerate}[label=\textup{(\roman*)}]
 \item The Hankel kernel of $c_{u,v}$ is spanned by the divided Hessian
       $P_0X^2+P_1XY+P_2Y^2$, where
@@ -945,13 +958,19 @@ locus of the divided Hessian.  Then the following hold.
       has bidegree $(2,2)$ and arithmetic genus one, and off $P_1=0$ it is
       the Artin--Schreier cover of class $P_0P_2/P_1^2$.
 \item After the vertical factors $\ell_{f,R}\cap C_3$ are removed,
-      \eqref{eq:hessian-incidence} is geometrically integral unless
-      $\ell_{f,R}$ lies in the Veronese surface $\Sigma$ of common-quadratic
-      lines, whose member attached to $[Q]\in\PP(\Sym^2E^\vee)$ is the line
-      $\{[c]:H_cQ=0\}$, or in one of the two Fano rulings of the quadric
-      $\mathcal Q_0=\{AD_3+BC=0\}$.  In Pl\"ucker coordinates
-      $(z_0,\ldots,z_5)=(p_{01},p_{02},p_{03},p_{12},p_{13},p_{23})$ these
-      are cut out by the $2\times2$ minors of
+      \eqref{eq:hessian-incidence} is geometrically integral unless one of
+      three things happens: the pencil has a common kernel quadratic, which for
+      the shift pencil \eqref{eq:hessian-shift-pencil} is exactly
+      $\mathcal D(R)=0$; or $\ell_{f,R}$ lies in the Veronese surface $\Sigma$
+      of lines with a common quadratic factor, whose member attached to
+      $[Q]=[a:b:c]\in\PP(\Sym^2E^\vee)$ is the line spanned by the two shifts
+      $(a,b,c,0)$ and $(0,a,b,c)$ of $Q$; or $\ell_{f,R}$ lies in one of the two
+      Fano rulings of the quadric $\mathcal Q_0=\{AD_3+BC=0\}$.  The first case
+      is the horizontal-factor degeneracy and the last is the inseparable one.
+      In Pl\"ucker coordinates
+      $(z_0,\ldots,z_5)=(p_{01},p_{02},p_{03},p_{12},p_{13},p_{23})$ the
+      surface $\Sigma$ has the parametrization
+      $[a^2:ab:ac:b^2+ac:bc:c^2]$ and is cut out by the $2\times2$ minors of
       \[
        \begin{pmatrix}z_0&z_1&z_2\\ z_1&z_3+z_2&z_4\\ z_2&z_4&z_5\end{pmatrix},
        \autoeqtag{eq:hessian-veronese-ideal}
@@ -962,19 +981,20 @@ locus of the divided Hessian.  Then the following hold.
        \autoeqtag{eq:hessian-complementary-ruling}
       \]
       for the complementary ruling.
-\item There are a nonzero pullback $\mathcal A$ of a minor of
-      \eqref{eq:hessian-veronese-ideal} and a nonzero pullback $\mathcal B$ of
-      an equation of \eqref{eq:hessian-complementary-ruling}, each of degree at
-      most four in every root of $R$, whose product vanishes on the whole
-      reduced degeneracy locus and has degree at most eight in every root.
-      Consequently a squarefree $R$ with $\ell_{f,R}$ outside that locus exists
-      over $\F_q$ as soon as
+\item None of $\mathcal D$, a suitable pullback $\mathcal A$ of a minor of
+      \eqref{eq:hessian-veronese-ideal}, and a suitable pullback $\mathcal B$
+      of an equation of \eqref{eq:hessian-complementary-ruling} vanishes
+      identically in $R$.  Their degrees in every individual root of $R$ are at
+      most $3$, $4$ and $4$, so the product $\mathcal{ABD}$ vanishes on the
+      whole reduced degeneracy locus of (ii) and has degree at most $11$ in
+      every root.  Consequently a squarefree $R$ with $\ell_{f,R}$ outside that
+      locus exists over $\F_q$ as soon as
       \[
-       q\geq\min\{(9-4)(9+11)/2+1,\ 9(9-4)\}=\min\{51,45\}=45,
+       q\geq\min\{11\cdot5+\tbinom52+1,\ 12\cdot5\}=\min\{66,60\}=60,
        \autoeqtag{eq:hessian-selector-bound}
       \]
-      where $45=9\cdot5$ counts field elements used as candidate root values,
-      split into five pairwise disjoint nine-element blocks.
+      where $60=12\cdot5$ counts field elements used as candidate root values,
+      split into five pairwise disjoint twelve-element blocks.
 \item For such an $R$ the normalization of \eqref{eq:hessian-incidence} is
       geometrically integral of genus at most one, and the parameters that fail
       to produce a squarefree witness form a divisor of degree
@@ -1003,28 +1023,53 @@ turns it into $y^2+y=P_0P_2/P_1^2$.
 (ii)  A vertical factor divides $P_0,P_1,P_2$ simultaneously, that is, the
 divided Hessian vanishes at the corresponding member of the pencil; its base
 locus is the twisted cubic $C_3$, so the vertical factors are exactly
-$\ell_{f,R}\cap C_3$.  A horizontal factor fixes one Hessian root along the
-whole pencil; the cubics with a given Hessian root form the rank-three quadric
-cone swept by the secants through the corresponding point of $C_3$, and every
-line on that cone passes through its vertex, so a horizontal factor forces a
-chord or tangent line, already in $\Sigma$ or on its collision boundary.
+$\ell_{f,R}\cap C_3$.  A horizontal factor $m(X,Y)$ says that $m$ lies in the
+Hankel kernel of every member of the pencil, so it is a common kernel
+quadratic.  For the shift pencil \eqref{eq:hessian-shift-pencil} the two
+members $U$ and $V$ contribute the rows $(h_0,h_1,h_2)$, $(h_1,h_2,h_3)$ and
+$(h_1,h_2,h_3)$, $(h_2,h_3,h_4)$, so a common kernel quadratic is exactly a
+kernel vector of the matrix in \eqref{eq:hessian-terminal-determinant}: the
+horizontal-factor locus is $\mathcal D(R)=0$.  This family is a genuine third
+case, not part of $\Sigma$.  For instance $h_R=(1,0,0,0,1)$ gives the chord
+$\ell_{f,R}=\PP\langle e_0,e_3\rangle$, whose incidence is $uv\,XY=0$ and stays
+reducible after its two vertical factors are removed, while its Pl\"ucker
+vector $(0,0,1,0,0,0)$ satisfies neither
+\eqref{eq:hessian-veronese-ideal} nor \eqref{eq:hessian-complementary-ruling}.
 
-After those factors are removed, bidegree additivity makes any separable
+Away from that locus no horizontal factor occurs, and after the vertical
+factors are removed bidegree additivity makes any separable
 factorization $(1,1)+(1,1)$, so both factors are graphs of projectivities.
 Normalize the first to the identity by independent coordinate changes on the
 parameter and root lines.  Over an algebraically closed field of characteristic
 two the second projectivity is the identity, semisimple with two fixed points
 and conjugate to $g(t)=ct$ with $c\neq1$, or unipotent and conjugate to
 $g(t)=t+1$.  In the semisimple case normalize the two cubics at the fixed
-parameters to $U=(a,1,0,0)$ and $V=(0,0,\gamma,d)$; comparison with
+parameters to $U=(a,1,0,0)$ and $V=(0,0,\gamma,d)$, for which
+\eqref{eq:hessian-coefficients} gives
 \[
- (uX+vY)(uX+cvY)=u^2X^2+(1+c)uvXY+cv^2Y^2
+ P_0=d\,uv+\gamma^2v^2,\qquad
+ P_1=(ad+\gamma)uv,\qquad
+ P_2=u^2+a\gamma\,uv .
 \]
-forces $d=a=0$, $\gamma=1+c$ and $\gamma^2=c$, hence $c^2+c+1=0$ and the
-normalized line is $XY\cdot\PP(E^\vee)$, which is a member of $\Sigma$; the
-identity is the case $c=1$ of the same comparison and fails it.  In the
-unipotent case comparison with $(uX+vY)((u+v)X+vY)$ forces
-$d=\gamma=0$ together with $a\gamma=1$, which is impossible.  Since the
+The graph of the identity is $uY+vX$ and the graph of the second projectivity
+is $uY+cvX$, so the comparison to make is with
+\[
+ (uY+vX)(uY+cvX)=cv^2X^2+(1+c)uvXY+u^2Y^2 ,
+\]
+the roles of $X$ and $Y$ being fixed by the convention of (i), in which
+$P_0$ is the coefficient of $X^2$.  Its $Y^2$ coefficient leaves no scalar
+freedom, and matching the three coefficients forces $d=0$, $\gamma^2=c$,
+$\gamma=1+c$ and $a\gamma=0$; since $c\neq0$ also $\gamma\neq0$, so $a=0$ and
+$c^2+c+1=0$.  The normalized line
+is spanned by $e_1$ and $e_2$, which is the member of $\Sigma$ attached to
+$Q=XY$.  The identity is the case $c=1$ of the same comparison and fails it.
+In the unipotent case the second graph is $(u+v)Y+vX$ and
+\[
+ (uY+vX)\bigl((u+v)Y+vX\bigr)=v^2X^2+v^2XY+(u^2+uv)Y^2 ,
+\]
+whose $XY$ coefficient is a multiple of $v^2$ while $P_1$ is a multiple of
+$uv$; matching them forces $P_1=0$, which is the inseparable case treated
+below rather than a separable factorization.  Since the
 coordinate changes used are basis changes on $\ell_{f,R}$ and on $E$, and both
 \eqref{eq:hessian-incidence} and $\Sigma$ are equivariant for them, undoing the
 normalization introduces no further component.  Finally $P_1$ vanishes
@@ -1062,17 +1107,29 @@ ring, which is a unique factorization domain, $L_1^2=L_0L_2$ with linear $L_i$
 forces a vanishing form or proportionality of the three, and the two
 overlapping triples propagate proportionality across $h_{-2},\ldots,h_2$.
 Proportional contraction forms are proportional rows of the consecutive
-catalecticant of $f$, so its rank is at most one and $f\in\cP_{10}$.  Both
-alternatives are excluded, so nonzero $\mathcal A$ and $\mathcal B$ exist; their
-product vanishes on the reduced degeneracy locus of (ii) and has degree at most
-eight in each root.
+catalecticant of $f$, so its rank is at most one and $f\in\cP_{10}$.  Suppose
+finally that $\mathcal D$ vanished identically on squarefree $R$.  Split forms
+are dense, so $\mathcal D$ vanishes for every $R$, that is every bottom
+syndrome $\iota_Rf$ lies in the prime cubic $V(D)$ of
+Proposition~\ref{prop:reduced-terminal-carrier}.  The attainable bottom
+syndromes close to the projectivized row space of the marker catalecticant
+\eqref{eq:marker-catalecticant}, so that row space lies in the reduced terminal
+carrier, and Proposition~\ref{prop:recursive-component-selection} puts $f$ in
+$\cP_{10}\cup\cM^{\max}_{10,2}$.  All three alternatives are excluded, so
+nonzero $\mathcal A$, $\mathcal B$ and $\mathcal D$ exist.  Each coefficient of
+$h_R$ is linear in the coefficients of $R$, so $\mathcal D$, a $3\times3$
+determinant in those coefficients, has degree at most three in every root,
+while $\mathcal A$ and $\mathcal B$ have degree at most four; the product
+vanishes on the whole reduced degeneracy locus of (ii) and has degree at most
+eleven in each root.
 
 Write $R=\prod_{i=1}^5(t+r_i)$, so each coefficient of $R$ is at most linear in
-each $r_i$ and $\mathcal{AB}$ has degree at most eight in each $r_i$.  The
+each $r_i$ and $\mathcal{ABD}$ has degree at most eleven in each $r_i$.  The
 Vandermonde $\prod_{i<j}(r_i+r_j)$ has total degree $\binom52=10$, so
-Schwartz--Zippel gives a squarefree base once $q>8\cdot5+10=50$.  Alternatively
-partition $9\cdot5=45$ field elements into five pairwise disjoint nine-element
-blocks $S_1,\ldots,S_5$: a nonzero polynomial of degree at most eight in each
+Schwartz--Zippel gives a squarefree base once $q>11\cdot5+10=65$.  Alternatively
+partition $12\cdot5=60$ field elements into five pairwise disjoint
+twelve-element blocks $S_1,\ldots,S_5$: a nonzero polynomial of degree at most
+eleven in each
 variable cannot vanish on $S_1\times\cdots\times S_5$, since successive
 univariate interpolation would make it zero, and disjointness makes every tuple
 have distinct coordinates.  This gives
@@ -1106,7 +1163,7 @@ five vanishes identically, and integrality is what rules each out: $R$ is
 squarefree of degree five and nonzero; $P_0\equiv0$ would leave
 $Y(P_1X+P_2Y)=0$, so $\cC_{f,R}$ would contain the horizontal line $Y=0$;
 $P_1\equiv0$ is the inseparable degeneracy already excluded by
-$\mathcal{AB}\neq0$; $\Res_X(h_\lambda,R)\equiv0$ would put one of the five
+$\mathcal{ABD}\neq0$; $\Res_X(h_\lambda,R)\equiv0$ would put one of the five
 horizontal lines $X=r_iY$ inside $\cC_{f,R}$; and $h_\lambda(\lambda)\equiv0$
 would put the diagonal inside it.  An integral curve of bidegree $(2,2)$
 contains no such component.  Each deleted base parameter
@@ -1152,19 +1209,21 @@ Since
                               q+1-2\sqrt q>42
 \]
 first holds at a prime power \(q=59\), the odd assertion follows.
-In characteristic two, Lemma~\ref{lem:r10-hessian} replaces that top step.  It
-supplies a nonzero base selector as soon as
-$q\geq\min\{51,45\}=45$ field elements are available as candidate roots, and
-for such a base a geometrically integral ordered-Hessian slice whose
+In characteristic two the argument above is not used.  Lemma~\ref{lem:r10-hessian}
+applies directly to $f$: it chooses all five roots of its base at once, and its
+witness lies in $W_f$ by repeated application of \eqref{eq:lift}, so it needs
+neither the stagewise marker selection nor the intermediate lower packages.
+Its selector is nonzero as soon as
+$q\geq\min\{66,60\}=60$ field elements are available as candidate roots, and
+for such a base it gives a geometrically integral ordered-Hessian slice whose
 normalization has genus at most one and whose deletion divisor has degree
 $5+2+2+10+4=23$ on the base line, hence at most $2\cdot23+2=48$ deleted
 rational points.  Since $64+1-2\sqrt{64}=49>48$, and since $64$ is the first
-binary field with at least $45$ elements, both conditions first hold at
+binary field with at least $60$ elements, both conditions first hold at
 $q=64$; part (v) of the lemma turns a surviving point into a split squarefree
-octic in $W_f$ avoiding all five markers.
+octic in $W_f$ avoiding all five markers.  In both characteristics
 Proposition~\ref{prop:recursive-component-selection}
-then identifies the sole contained locus in either case as the displayed
-carrier union.
+identifies the sole contained locus as the displayed carrier union.
 \end{proof}
 
 \begin{proposition}[Characteristic-seven coherent lift at R10]

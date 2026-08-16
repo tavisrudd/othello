@@ -4,8 +4,9 @@
 
 **Date:** 2026-08-16
 
-**Status:** all six edits E1--E6 are applied, verified, and committed, and the
-specification's post-edit checklist has been run.  Of its five closing audits,
+**Status:** all six edits E1--E6 are applied, verified, and committed; a second
+referee round on the inserted material found four defects in the E1 lemma, all
+confirmed and repaired; the specification's post-edit checklist has been run.  Of its five closing audits,
 the characteristic audit and the regression/diff audit were run in full here;
 the theorem-dependency, hostile-R10, and primary-source audits are the ones a
 second reader should still run, since running them on my own edits is not an
@@ -279,6 +280,80 @@ selector needs 45 field elements, the slice deletes at most 48 rational points,
 45 elements, so `q = 64` is the first admissible binary field for both
 conditions at once.  PASS on every item.
 
+## Second referee round on the new material
+
+A second reader audited the inserted lemmas algebraically and cleared everything
+in E2 and in the four small edits.  They found four defects in the E1 lemma, all
+confirmed here before being repaired, and all four repairs are in.
+
+**The missing degeneracy family (their S1, real).**  The classification in the
+lemma listed only the common-quadratic Veronese surface and the two Fano
+rulings.  It missed the horizontal-factor family, which their chord
+`P<e_0,e_3>` exhibits: with `c = (u,0,0,v)` the coefficients are `P_0 = P_2 = 0`
+and `P_1 = uv`, so the incidence is `uv XY = 0` and stays reducible after its
+two vertical factors are removed, while its Plucker vector `(0,0,1,0,0,0)`
+satisfies neither the Veronese minors nor either ruling, both of which force
+`z_2 = z_3`.  Verified by direct computation.
+
+The repair is theirs and it is clean, because the missing family is already a
+named object in this paper.  Contraction is transitive, so the pencil is the
+shift pencil of `h_R = iota_R f`, spanned by `(h_0,h_1,h_2,h_3)` and
+`(h_1,h_2,h_3,h_4)`.  A common kernel quadratic for both members is exactly a
+kernel vector of the `3x3` catalecticant of `h_R`, so the horizontal-factor
+locus is the vanishing of the terminal persistent determinant, which is the
+cubic `D` of the reduced-terminal-carrier proposition evaluated at `h_R`.  The
+chord above comes from `h_R = (1,0,0,0,1)`, whose determinant does vanish.  That
+determinant joins the selector as a third factor, and its identical vanishing
+routes `f` into the excluded union by citation rather than by new mathematics:
+every bottom syndrome would then lie in the component `V(D)` of the reduced
+terminal carrier, so the marker-catalecticant row space lies in that carrier and
+the recursive-component-selection proposition puts `f` in
+`P_10 ∪ M^max_{10,2}`.
+
+**The threshold moves, the theorem does not.**  Each coefficient of `h_R` is
+linear in the coefficients of `R`, so the determinant has degree at most three
+per root and the three-factor selector at most `4 + 4 + 3 = 11`.  Block
+interpolation now needs five disjoint twelve-element blocks, that is 60 field
+elements, against `11*5 + 10 + 1 = 66` for the Schwartz--Zippel alternative, so
+the printed selector bound goes from 45 to `min{66, 60} = 60`.  The first binary
+field with at least 60 elements is still 64, the deletion count is untouched at
+23 with `49 > 48`, so redundancy ten still closes at `q = 64` and the headline
+theorem is unchanged.
+
+**The Veronese surface was misdefined (their S2, real).**  The lemma described
+the member attached to `Q` as the line `{c : H_c Q = 0}`, but the printed
+Plucker parametrization `[a^2 : ab : ac : b^2+ac : bc : c^2]` is the span of the
+two shifts `(a,b,c,0)` and `(0,a,b,c)` of `Q`, that is the pencil of cubics with
+`Q` as a common factor.  For `Q = XY` the two disagree: the parametrization
+gives the line spanned by `e_1, e_2`, while the kernel condition gives the chord
+spanned by `e_0, e_3`.  I checked both by computing the Plucker vectors.  The
+error was mine in transcription and also latent in the C525 source note, which
+calls the same surface persistent and then routes horizontal factors into it;
+that conflation is exactly what hid the missing family.  The definition now
+matches the equations, and the normal-form proof lands in the member attached to
+`Q = XY`, as it should.
+
+**The normal-form comparison needed the coordinate swap (their S2, real).**  I
+had written the incidence as the Hankel kernel quadratic rather than its
+coordinate reversal, for consistency with the paper's own convention, and did
+not carry that swap into the projectivity comparison.  With `U = (a,1,0,0)` and
+`V = (0,0,gamma,d)` the coefficients are `P_0 = d uv + gamma^2 v^2`,
+`P_1 = (ad + gamma) uv`, `P_2 = u^2 + a gamma uv`, so the comparison is with
+`(uY + vX)(uY + c vX)`, whose `Y^2` coefficient also removes any scalar freedom.
+It gives `d = 0`, `gamma^2 = c`, `gamma = 1 + c`, and `a = 0` because
+`gamma^2 = c` is nonzero, hence `c^2 + c + 1 = 0` as before.  The unipotent case
+is now stated correctly too: matching forces `P_1 = 0`, which is the inseparable
+case rather than a separable factorization.
+
+**Stagewise versus simultaneous selection (their S2, real).**  The escape
+proposition opened with the five-stage argument and then invoked a lemma that
+chooses all five roots at once, with nothing reconciling the two marker tuples.
+Their recommendation is what the lemma already supports, so the proposition now
+says it plainly: in characteristic two the stagewise argument is not used, the
+lemma applies directly to `f`, and its witness lands in `W_f` by repeated
+application of the lift identity, needing neither stagewise selection nor the
+intermediate lower packages.
+
 ## Post-edit checklist
 
 Section A (build and reference integrity): both builds compile warning-free with
@@ -342,9 +417,10 @@ loosening of any gate:
 
 ## Page budget
 
-The TIT submission build now stands at 49 of its 50-page gate, one page of
-headroom.  Any further printed mathematics in this appendix needs either a
-compression pass or a decision about the gate.  Flagging rather than acting.
+The TIT submission build now stands at exactly 50 of its 50-page gate.  It
+passes, with no headroom at all.  Any further printed mathematics in this
+appendix forces a decision: a compression pass, moving material out of the
+submission build, or changing the gate.  Flagging rather than acting.
 
 ## Closing audits
 
