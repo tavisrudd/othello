@@ -5,7 +5,7 @@
 **Status**: maintained companion archive for the active C682 exploration.
 The active work package is
 `notes/clebsch-tasks/c682-hitchin-structural-exploration.md`, and the live
-program routing authority is `notes/handoffs/2026-07-13-clebsch-paper.md`.
+program routing authority is `notes/handoffs/2026-07-13-clebsch-lane.md`.
 This file owns detailed lookup, chronology, negative gates, and parked
 branches. It is intentionally more detailed than the shared Clebsch archive
 and may be reorganized as C682 evolves.

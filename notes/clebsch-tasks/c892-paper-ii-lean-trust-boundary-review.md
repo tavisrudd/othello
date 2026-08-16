@@ -86,7 +86,7 @@ artifact at the referee standard in `lean/AGENTS.md` and
 - this task card;
 - the C892 row in `notes/2026-07-07-codex-task-queue.md` and its lifecycle
   archive row;
-- `notes/handoffs/2026-07-13-clebsch-paper.md` and its archive if lifecycle
+- `notes/handoffs/2026-07-13-clebsch-lane.md` and its archive if lifecycle
   cleanup needs history moved out of the live map;
 - `notes/2026-08-08-c892-paper-ii-lean-trust-boundary-review.md`; and
 - the Clebsch discovery track only if the discriminator admits a genuinely

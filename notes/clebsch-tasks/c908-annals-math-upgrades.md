@@ -103,6 +103,60 @@ Pursue only if A and B are genuinely blocked:
   ordinary divisor-product minimal classes, with the exotic `F_4` cubic
   gluing as a positive exceptional example and explicit negative boundaries.
 
+## Current status (2026-08-15)
+
+**Positive result, independent of A/B/C.** The blown-up theta divisor
+`M = Bl_0 Theta` has an integral lattice theorem: `H^3(M,Z)` is torsion-free of
+rank 130, a nonsplit extension of `H^3(X,Z)` by `∧³Λ` glued by an explicit
+isomorphism `ρ: H^3(X,Z)⊗F_2 → Sat/L_3∧³Λ`; `b_*H^3(M,Z)` is exactly the
+saturation `Sat` of `Θ∧∧³Λ` in `∧⁵Λ`, of index `2^10`; the transfer `q_*μ*`
+from `H^3(F×F,Z)` is integrally surjective, so the whole lattice comes from
+the Fano surface through the degree-six model; and the escape group
+`E = H^5(M,Z)/(b^*H^5(J,Z)+tors)` is **free** of rank ten — correcting pass-2's
+`(Z/2)^10` misidentification — with `E/2E ≅ (Z/2)^10` explaining all four prior
+`(Z/2)^10` coincidences as shadows of `H^3(X,Z)⊗F_2`. A hostile proof audit and
+a bounded priority audit (no prior source computes the cohomology of `Θ` or
+`Bl_0Θ` for a cubic threefold) both passed. **This theorem is a candidate for
+its own paper; that scoping decision is pending with the user.**
+
+**Priority-A `(1,5)` channel-population question is closed negative.** Every
+named source — pullbacks from `J×J`, exceptional-divisor cycles, the
+span/incidence dictionary, `c_4` of either the span model or the `ℰ`-model —
+is excluded: `λ_𝒢 = λ_ℰ = 0`. Byproduct: codimension-four sheaf defects can
+never affect a mod-two `c_4` readout. The `(2,4)` channel is untouched.
+
+**Two live debts on prior C908 work.** (1) The pass-5 twist lemma's rank-three
+branch is false on the corrected lattice (an explicit witness refutes it); the
+item-F argument doesn't need that branch, but the lemma's other use — the
+relative Ext object `E` on `M×M`, at ranks other than three — is not repaired
+and still rests on the refuted step, weakening (not voiding — Theorem C covers
+pencil-defined classes) the `{0,I}` pinning there. (2) The λ-reduction note's
+claim that the span-model sheaf doesn't descend along the degree-six map `q`
+is false; correcting it strengthens the verdict chain, but the wrong statement
+still stands in the report text.
+
+**Against this card's acceptance criteria:** priority A remains undecided (no
+odd horizontal multisection constructed; the accumulated negatives exclude
+named sources without yet defining and computing a canonical two-primary
+obstruction class on the exotic marked base). Priority B is untouched. The
+lattice theorem is the strongest result in hand but lands in the non-diluting
+band C, not A or B — the genuine-block clause has not triggered.
+
+Reports: `notes/2026-08-12-c908-h3-lattice-adjudication.md`,
+`notes/2026-08-12-c908-h3-compression.md`,
+`notes/2026-08-12-c908-z2-naturality-checks.md`,
+`notes/2026-08-12-c908-lambda-reduction-and-verdict.md`,
+`notes/2026-08-12-c908-e-model-mutation-comparison.md`; audits
+`notes/2026-08-12-c908-h3-lattice-proof-audit.md` and
+`notes/2026-08-12-c908-h3-lattice-priority-audit.md`; the pass-8 correction of
+record is `notes/2026-08-11-c908-h3-resolution-lattice-correction.md`; earlier
+passes `notes/2026-08-11-c908-universal-family-even-rigidity.md`,
+`notes/2026-08-11-c908-transfer-liveness-and-span-incidence.md`,
+`notes/2026-08-11-c908-span-incidence-parity-no-go.md`,
+`notes/2026-08-11-c908-fano-schubert-restriction-extraction.md`,
+`notes/2026-08-11-c908-unordered-degree-normalization.md`, and
+`notes/2026-08-11-c908-unmarked-closure-and-w-twist.md`.
+
 ## Closed or quarantined routes
 
 Do not spend a pass rediscovering any of the following.

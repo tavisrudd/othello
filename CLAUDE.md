@@ -62,7 +62,7 @@ with no lane selected — ask which lane. An explicit alias switches lanes.
 | `ame-lu` | `notes/handoffs/2026-07-24-ame-lu-paper.md` |
 | `build-sys` | `notes/handoffs/2026-07-14-lean-build-system.md` |
 | `cap` | `notes/handoffs/2026-07-06-projective-cap-game-handoff.md` |
-| `clebsch` | `notes/handoffs/2026-07-13-clebsch-paper.md` |
+| `clebsch` | `notes/handoffs/2026-07-13-clebsch-lane.md` |
 | `complete-ports` | `notes/handoffs/2026-07-17-complete-ports-paper.md` |
 | `continuation` | `notes/handoffs/2026-07-17-continuation-paper.md` |
 | `crowns` | `notes/handoffs/2026-07-17-crowns.md` |
@@ -282,19 +282,8 @@ rg -n 'C210|210' ..
 - Never use broad `ps -eo`, repeated `ps`/`free`/`df`, `list_agents`, `wait`, or `write_stdin` as a
   progress dashboard. Use an unattended runner with disk-backed status and inspect one bounded
   milestone only after genuine uncertainty or a user request.
-- **Codex only; Claude must ignore this item:** Enforce a hard polling budget for running tool
-  cells. Call `functions.wait` only after the cell
-  has explicitly yielded a running ID, set `yield_time_ms` to 60000, and call it at most twice for
-  that cell. If two waits do not complete it, do not poll it again: continue independent work or
-  leave the job with a durable unattended status path. Start work expected to exceed that budget
-  through an unattended runner in the first place; never shorten the timeout to manufacture updates.
 - **Codex only; Claude must ignore this item:** Enforce a hard delegation-wait budget. Spawn agents
-  only when useful independent local work can
-  run concurrently, exhaust that work before waiting, then call `wait_agent` at most once per
-  delegation batch with `timeout_ms: 60000`. If agents remain active, rely on their completion
-  notifications or continue other work; do not call `wait_agent` again and do not use `list_agents`
-  to poll them. A targeted `list_agents` call is allowed only to diagnose genuinely inconsistent
-  orchestration state, not to check progress.
+  only when useful independent local work can run concurrently, exhaust that work before waiting.
 - Do not rerun an unchanged build/elaboration after the same failure. First reduce the saved log to
   the first error, change the source or invocation, and only then retry.
 - Never render a full ASG session into context. Analyze `asg +show --expand-tool-calls` through a
@@ -320,7 +309,9 @@ rg -n 'C210|210' ..
   `git add -p` or `git add -A`.
 
 ## Build, test, and dependencies
-- we are on nixos. use it
+- We are on NixOS. Use `nix shell`/`nix develop` or `uv` for Python dependencies
+  such as SymPy, and use the Nix-provided Sage environment. Never assume that
+  `python3`, `sympy`, or `sage` is available directly on `PATH`.
 - Makefiles good
 - Use libs properly (`clap`, `rayon`, `libc`, etc.); do not invent a no-dependency rule.
 
