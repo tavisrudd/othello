@@ -464,3 +464,113 @@ in order:
 
 None of these is a mechanism question. All four are statements to write, cite, or check at
 the source.
+
+---
+
+# Part III — the source re-read, and a withdrawal
+
+All three points intended for an erratum were re-checked directly against the cached
+arXiv:2508.05105v2 text (sha256 `2c5c9f0a2f9eaf230605eaf844c3b7d08e0181e6dbc921153156a071d616ff64`).
+
+## 16. Equation numbering: both numberings are correct
+
+The paper displays the quantum connection and the Euler vector field **twice**: (3.19) and
+(3.20) for the formal logarithmic A-model F-bundle, and (3.30) and (3.31) for the
+non-archimedean analytic one, with identical formulas
+
+    nabla_{d_u} = d_u − u^{-2}(Eu * (−)) + u^{-1}(Deg − dim X · id)/2 ,
+    Eu_gamma = c_1(TX) + ((Deg − 2·id)/2)(gamma) .
+
+So the earlier note's (3.30)/(3.31) and the second reader's (3.19)/(3.20) are both right and
+refer to different displays of the same content. An erratum should cite both pairs; citing
+only one invites the reply that the other display is the intended one.
+
+## 17. The cubic matrix: now certain, and provable purely internally
+
+Confirmed at the source that the displayed matrix in Example 6.6(ii) has a zero in the corner
+slot `(1,4)`, with `K = 2A`. The correction is forced by the paper's own machinery, and the
+argument can be given entirely in their terms:
+
+- Their **Example 6.6(i)** works the quadric threefold by exactly this method: put unknowns in
+  the slots the index allows, eliminate to a fourth-order ODE, and compare with Givental's
+  quantum differential equation. That example is internally consistent — it yields
+  `a_1 + a_2 = 4`, `a_2 = 2`, matching its displayed matrix.
+- Their **(6.4)**, specialized to the cubic (`N = 5`, `k = 1`, `d = 3`, `d_tot = 3`), gives
+  `delta^4 phi = 3q(3delta + u)(3delta + 2u) phi = q(27 delta^2 + 27 u delta + 6 u^2) phi`,
+  with `delta = u q d_q` and **no `q^2` term**.
+- Eliminating from their displayed matrix with an unknown corner entry `b q^2` gives
+  `delta^4 phi = q(27 delta^2 + 27 u delta + 6 u^2) phi − (36 − b) q^2 phi`.
+  Derived here by hand from the entries `6q`, `15q`, `6q` alone, and independently by the
+  second reader; the two agree.
+
+The three coefficients `27`, `27`, `6` match between the two computations, which confirms both
+the rest of their matrix and the elimination, and isolates the corner as the sole discrepancy.
+Hence `b = 36`, their Example 6.21's spectrum `{lambda_+, lambda_-, 0, 0}` is the correct one,
+and the display in 6.6(ii) has lost the only entry of Novikov degree two. Cai is not needed to
+say any of this, and neither is our block reduction.
+
+## 18. Remark 3.14: the scope objection is withdrawn
+
+The verification note of 2026-08-15 raised two objections to Example 6.21's appeal to
+Remark 3.14. The second one — that Remark 3.14 asserts constancy only along the Witt-orbit
+germ `W`, whereas `U_X` is a locus in `B_X^G` — **is withdrawn**, for a reason that is correct
+and that the earlier pass missed.
+
+Remark 3.14 defines `W` by `span_k{Eu^k_w}_{k>=0} = T_{W,w}`. For the cubic, once the matrix is
+corrected, the minimal polynomial of `Eu ⋆ (−)` on the even part has degree four, so the Witt
+powers `1, Eu, Eu^{◦2}, Eu^{◦3}` already span the whole four-dimensional even tangent space at
+`b`. Any integral germ of that distribution is therefore open in `B^{ev}`, so `W` **is** the
+full even germ. For a cubic threefold `B^{ev} = B^{Hod}`, since every even cohomology class is
+a Hodge class. The promotion from `W` to the even base is thus not a gap; the remark is
+compressed, not wrong.
+
+**What still stands, and how to say it.** Remark 3.14 carries no proof and cites no source for
+its constancy statement; the string "Witt algebra", for which Examples 6.19 and 6.21 cite it,
+does not occur in it. The right form of this observation is not an error report but a
+reference: on `W` the operator `κ|_W` is cyclic by construction, so `W` is a *regular*
+F-manifold, and the constancy assertion is exactly David–Hertling's theorem for regular
+F-manifolds (arXiv:1411.4553, Proposition 14 with their germ decomposition). Telling them that
+is useful and costs nothing; telling them the remark fails to support Example 6.21 would be
+wrong.
+
+## 19. Why this does not touch our own proof
+
+The withdrawal changes the framing of our lemma and not its necessity, for a reason that is
+easy to lose: **Remark 3.14 is a local statement, and `U_X` is defined by a global maximum.**
+Even granting the remark in full, and granting `W = B^{Hod}` for the cubic, what follows is
+that the eigenvalue count is constant near `b` — not that three is the maximum attained
+anywhere on `B_X^{Hod}`. Atoms are connected components of the reduced cover over the locus
+where the count is globally maximal, so `b ∈ U_X` still needs the step that neither the remark
+nor Example 6.21 supplies: the discriminant vanishing identically on the whole base, which is
+what §10 and §11 above prove.
+
+So the position after the re-read is: their Example 6.21 asserts a conclusion that is true, by
+an argument that is unproved in their text but correct and attributable, and whose local form
+is in any case insufficient for the conclusion drawn. Our contribution is the global step, and
+it is unaffected.
+
+## 20. The sign inconsistency: verified, and it is visible in two independent places
+
+Both confirmed at the source, and they are independent of each other:
+
+1. `κ` is defined twice. In the F-bundle definitions it is
+   `κ = nabla_{u^2 d_u}|_{H_{u=0}}`, the residual endomorphism; in the Frobenius-manifold
+   discussion it is `κ := Eu ◦ (−)`. With their own connection (3.19)/(3.30), the first gives
+   `κ = −(Eu ⋆ (−))`, so the two definitions differ by a sign. The same collision recurs in
+   §6.1, where the connection is written with `−u^{-2}K` and `K` is then said to be the action
+   of `κ`.
+2. Their Witt relation (2.5), `[Eu^k, Eu^l] = (l − k) Eu^{k+l−1}`, gives `[e, Eu] = e` at
+   `k = 0`, `l = 1`. But (3.20)/(3.31) contribute `−t_0 d_{t_0}` in the unit coordinate, since
+   `deg(1) = 0` makes the coefficient `(0 − 2)/2 = −1`, giving `[d_{t_0}, Eu] = −d_{t_0}`. The
+   standard Frobenius coefficient `(2 − Deg)/2` gives the sign their own (2.5) requires. This
+   argument involves neither `u` nor `q`, so their Remark 3.21 change of convention `u ↦ −u`
+   cannot account for it.
+
+Report it as an inconsistency among the definitions rather than prescribing which sign to
+change, since more than one repair is available and the choice interacts with Remark 3.21.
+
+## 21. Consequence for our own record
+
+The 2026-08-15 verification note's Check C should be read with §18 above: its first prong (no
+proof, wrong attribution) stands, its second prong (constancy along `W` is weaker than local
+constancy on the base) is withdrawn for the cubic. Nothing downstream changes, because §19.
