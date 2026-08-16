@@ -1592,13 +1592,52 @@ Two reductions come with the statement, and one warning.
 \emph{Rank-one atoms are automatic.} For a rank-one lattice the Euler form is a
 $1\times1$ matrix, hence symmetric, so $S=E^{-1}E^T=1$. A semisimple small
 quantum cohomology has every block of rank one, so (iii) holds for every surface
-with semisimple small quantum cohomology with nothing to prove --- which covers
-$\PP^2$, ruled surfaces and point blowups more cheaply than the
-projective-bundle and blowup formulas do. For a surface with nef canonical class
-their Lemma~5.24 gives a single atom and Claim~6.15 gives a regular singularity
-with nilpotent residue after the half-parity gauge, putting every eigenvalue at
-a root of unity of order at most two. What is left is the non-semisimple cases
-outside that class.
+with semisimple small quantum cohomology with nothing to prove. For a surface
+with nef canonical class their Lemma~5.24 gives a single atom and Claim~6.15
+gives a regular singularity with nilpotent residue after the half-parity gauge,
+putting every eigenvalue at a root of unity of order at most two.
+
+\emph{The remaining surfaces, by the minimal model program.} These two
+reductions leave a short induction, which closes (iii) modulo three imported
+statements.
+
+\begin{proposition}[Step (iii) for surfaces, conditional]
+\label{prop:step-iii}
+Assume Iritani's blowup formula for atoms, the projective-bundle formula for
+atoms, and Katzarkov--Kontsevich--Pantev--Yu's nef-canonical description, each in
+the decorated form that carries atoms with their Serre automorphisms. Then no
+atom of a smooth projective surface has a primitive sixth root of unity as a
+Serre eigenvalue.
+\end{proposition}
+
+\begin{proof}
+Induct on the number of blow-downs to a minimal model, finite by Castelnuovo. If
+$S$ is not minimal, write $S=\mathrm{Bl}_pS'$; the blowup formula in codimension
+two with a point as centre gives the atoms of $S$ as those of $S'$ together with
+one rank-one atom, whose Serre operator is the identity, so $S$ inherits the
+conclusion from $S'$. A minimal surface has nef canonical class, or is $\PP^2$,
+or is a projective bundle over a smooth curve. The nef case is the reduction
+above. For $\PP^2$ the characteristic polynomial of $c_1\star$ is
+$\lambda^3-27q$, of nonzero discriminant, so the small quantum cohomology is
+semisimple and every atom is rank one. For a projective bundle the atoms are
+copies of the base curve's; a curve of genus $g$ has Euler form
+$\left(\begin{smallmatrix}1-g&1\\-1&0\end{smallmatrix}\right)$ on
+$([\mathcal O_C],[\mathcal O_{pt}])$, Serre operator
+$\left(\begin{smallmatrix}-1&0\\2-2g&-1\end{smallmatrix}\right)$ and characteristic
+polynomial $(\lambda+1)^2$ for every $g$, so its only eigenvalue is $-1$; for a
+rational base the category splits further into rank-one atoms. This exhausts the
+classification.
+\end{proof}
+
+The fake of the previous paragraph does not disturb the blow-down step: it mixes
+the new exceptional object with the ambient structure sheaf, which lie in
+different atoms, so the pair it generates is not an atom. What the step does
+need, and what the computational literature does not supply, is the decorated
+reading --- Böhning, von Bothmer and Su'a verify the blowup statement for
+multiplicity sequences and record that naive and small atomic decompositions can
+differ. That is the one point to check at the source; Iritani's formula is
+arXiv:2307.13555, verified in the surface case by Gyenge and Szab\'o, Advances
+in Mathematics 479 (2025).
 
 \emph{The ambient category never sees it.} The Serre functor of a surface is
 tensor by $\omega$ followed by $[2]$, and $[2]$ acts by $+1$ on K-groups, so the
@@ -1628,10 +1667,13 @@ the earlier blueprint deliberately avoided, so the manuscript would import more
 than the two decomposition theorems. And their sentence is a worked example,
 not a theorem with hypotheses. The graded minimal polynomial has now been
 checked, on the lattice rather than at the source, and came out as Kuznetsov's
-$S^3=[5]$; the surface exclusion is stated as (iii) above and is still owed.
+$S^3=[5]$; the surface exclusion is Proposition~\ref{prop:step-iii}, which holds
+modulo three imported statements, one of which needs its decorated form checked.
 Backing computations, and the exact record of what was and was not read at the
-source, are in `2026-08-15-c912-step-iii-serre-restatement.md' with the script
-`2026-08-15-c912-surface-atom-serre-check.py'.
+source, are in `2026-08-15-c912-step-iii-serre-restatement.md' and
+`2026-08-15-c912-step-iii-surface-induction.md', with the scripts
+`2026-08-15-c912-surface-atom-serre-check.py' and
+`2026-08-15-c912-step-iii-surface-induction-check.py'.
 
 \subsection*{Arbitrary Jordan size: what extends, and the one thing that does
 not}
@@ -2430,7 +2472,11 @@ and one of its expectations is corrected.
   computed from Riemann--Roch has characteristic polynomial $\Phi_6$ and order
   six, matching Kuznetsov's $S^3=[5]$. The subsection now uses the verified
   relation, and states the surface obligation as (iii) with its two reductions
-  and the non-minimal-surface counterexample to the weakened form.
+  and the non-minimal-surface counterexample to the weakened form. It also now
+  proves (iii) outright, modulo three imported statements, by a minimal-model
+  induction (Proposition~\ref{prop:step-iii}); the endpoint route's
+  surface exclusion is therefore no longer an open problem of its own but a
+  literature obligation.
 \item The scope remark expected the rank-two mechanism to extend to a Jordan
   block of any size. It half does. Proposition~\ref{prop:size-m-steps} carries
   the commutant and no-splitting steps to size $m$, but

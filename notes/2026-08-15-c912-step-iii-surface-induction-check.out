@@ -1,0 +1,21 @@
+Small quantum spectra of the minimal rational surfaces that are not
+projective bundles over a curve of positive genus:
+  projective plane: char poly of c_1 * = lam**3 - 27*q
+    discriminant in q = -19683*q**2  -> distinct roots for generic Novikov parameters: True
+  quadric surface: char poly of c_1 * = lam**4 + lam**2*(-8*q1 - 8*q2) + 16*q1**2 - 32*q1*q2 + 16*q2**2
+    discriminant in q1, q2 = 16777216*q1**4*q2**2 - 33554432*q1**3*q2**3 + 16777216*q1**2*q2**4  -> distinct roots for generic Novikov parameters: True
+  Semisimple small quantum cohomology means every block of the quantum
+  connection is rank one, hence every atom is rank one, hence every atom's
+  Serre operator is the identity: no primitive sixth eigenvalue.
+
+Curves, the base case of the projective-bundle reduction:
+  genus g: Euler form [[1 - g, 1], [-1, 0]], Serre [[-1, 0], [2 - 2*g, -1]]
+  char poly = lam**2 + 2*lam + 1 = (lam+1)^2 for every g, factored [(lam + 1, 2)]
+  Eigenvalue -1 with multiplicity two: never a primitive sixth root.
+  For the rational curve the category splits further, into the two rank-one
+  atoms of its exceptional collection, whose Serre operators are the
+  identity -- the ambient (lam+1)^2 is not the atomic answer, which is the
+  same decomposition-dependence recorded in the step-(iii) restatement.
+
+Rank-one atoms: E = [[n]] is symmetric, so S = E^-1 E^T = 1 for every n.
+  check n = 1, 2, 5: [1, 1, 1]
