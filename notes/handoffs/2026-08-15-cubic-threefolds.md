@@ -18,13 +18,14 @@ and adjacent structural research on cubic threefolds. It does **not** own
 Paper V itself or the numbered Clebsch series — those stay in `clebsch`.
 
 **C912 and C913 were re-pegged to this lane on 2026-08-15 by author
-instruction.** Both work on the cubic-stabilization epilogue
-(`papers/cubic-stabilization-epilogue/`), the `m = 1` statement: C912 owns the
-referee-foundation repairs, C913 the referee revision pass, so the two must stay
-sequenced against each other rather than editing it concurrently. An earlier
-version of this paragraph named `papers/cubic-stabilization-irrationality/` as
-their root, carried over from a stale description in the `clebsch` handoff; that
-manuscript is the all-`m` paper and is not theirs.
+instruction**, and with them both stabilization manuscripts. C912 owns the
+referee-foundation repairs to the cubic-stabilization epilogue
+(`papers/cubic-stabilization-epilogue/`), the `m = 1` statement, whose headline
+is conditional on Hypothesis 4.7H. C913 owns the referee revision pass on
+*Irrationality of Cubic Threefolds after One Stabilization*
+(`papers/cubic-stabilization-irrationality/`), the all-`m` statement, conditional
+on the marked-threshold wall and zero-mode hypotheses. They are separate
+manuscripts with separate hypotheses; this lane now covers both.
 
 ## Formal standard (when Lean-facing)
 
@@ -43,9 +44,11 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   positive-filtration bulk displacement; card:
   [`c912-cubic-stabilization-referee-foundations.md`](../cubic-threefolds-tasks/c912-cubic-stabilization-referee-foundations.md),
   analysis in `notes/2026-08-15-c912-frame-transport-memo.tex` and its PDF.
-- **C913 — referee revision pass, active, author-close only.** Local
-  frame/source repairs, modular hypothesis presentation and expanded proofs on
-  the same manuscript, before the next frozen cold-read cycle; card:
+- **C913 — referee revision pass on the all-`m` paper, active, author-close
+  only.** Manuscript `papers/cubic-stabilization-irrationality/`, conditional on
+  the marked-threshold wall and zero-mode hypotheses. Local frame/source repairs,
+  modular hypothesis presentation and expanded proofs before the next frozen
+  cold-read cycle; card:
   [`c913-cubic-stabilization-fable-revisions.md`](../cubic-threefolds-tasks/c913-cubic-stabilization-fable-revisions.md).
 - **C907 — quantum monodromy stabilization, active.** v1 is unconditional:
   framed formal monodromy of the numerical small quantum connection, followed
@@ -122,13 +125,15 @@ Lean source follows automatically from any of the above.
 |---|---|---|---|
 | Cubic-stabilization epilogue: `X x P^1` irrational, the `m = 1` statement | `papers/cubic-stabilization-epilogue/` | headline conditional on Hypothesis 4.7H since the author instruction of 2026-08-15; the cubic count itself unconditional; warning-free; Lean companion in progress under C910 | C907, C909, C910, C912, C913 |
 | Discrepancy-one flip correction | `papers/discrepancy-one-flips/` | published standalone note, DOI `10.5281/zenodo.21924799` | C911 (closed) |
-| *Irrationality of Cubic Threefolds after One Stabilization* (all `m`) | `papers/cubic-stabilization-irrationality/` | conditional on the marked-threshold hypotheses; not owned by C912/C913 | unassigned here |
+| *Irrationality of Cubic Threefolds after One Stabilization*: `X x P^m` for all `m`, the all-`m` statement | `papers/cubic-stabilization-irrationality/` | headline conditional on the marked-threshold wall and zero-mode hypotheses | C913 |
 
 ## Lane boundaries
 
 This lane owns the cubic-threefold research program above, its task cards
 under `notes/cubic-threefolds-tasks/`, and — since 2026-08-15 —
-`papers/cubic-stabilization-epilogue/` under C907, C909, C910, C912 and C913. It does not
+both stabilization manuscripts: `papers/cubic-stabilization-epilogue/` under
+C907, C909, C910 and C912, and `papers/cubic-stabilization-irrationality/`
+under C913. It does not
 own the numbered Clebsch series (Papers I–V) or any other `clebsch`-lane
 surface — those remain foreign until an owning task here explicitly admits
 them, per the usual cross-lane hygiene rule.
