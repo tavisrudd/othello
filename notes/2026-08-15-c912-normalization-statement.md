@@ -120,17 +120,39 @@ applies unconditionally, for every smooth projective target and every block
 type. Without it, the phrase "positive-filtration bulk displacement" has two
 meanings and the hypothesis is not well-posed.
 
-### Obligation B — the membership claim
+### Obligation B — the membership claim — **DISCHARGED at the source**
 
 `04-one-step.tex:523-527` asserts that after the unit term `-(c-1)λ_j` and the
 fixed divisor `h_{C,j}` are removed, the target bulk coordinate lies in
 `J_j H^*(C)`, citing Iritani (5.45), (5.47) and the initial asymptotics
-(5.27)–(5.30). This is the statement that puts the residual displacement inside
-the nilpotent ideal, so Obligation A is useless without it.
+(5.27)–(5.30).
 
-The evidence ledger marks it **UNRECONSTRUCTED** — unverified anywhere in the
-audited set, and the most load-bearing of the four items so marked. It should be
-checked at the source before anything else in this note is relied on.
+**Verified against arXiv:2307.13555v3** in
+`2026-08-15-c912-h47h-source-exactness-audit.md`. All six cited items exist, and
+Iritani (5.30) reads verbatim
+
+> `ς_j(0)|_{Q=0} ∈ -(r-1)λ_j + h_{Z,j} + q^{-1/(r-1)}H*(Z)[q^{-1/(r-1)}]`
+
+The source is **stronger than the manuscript's claim**: the residual is a
+*polynomial* in `q^{-1/(r-1)}` with a forced factor of `q^{-1/(r-1)}`, so it
+consists of negative powers only, with no degree-zero and no positive-power
+remainder. The `s_j` components enter via (5.47) and are themselves generators of
+`J_j`. No term is unaccounted for.
+
+Two consequences worth stating explicitly.
+
+1. The membership holds, so the reconciliation of §2 stands.
+2. Because the residual is a **polynomial** rather than a series, it is a finite
+   sum of homogeneous elements and is therefore a legitimate element of Iritani's
+   graded ring as well. The direct-sum obstruction of §1 never applied to the
+   displacement itself; it applies only to *powers* of it accumulating in
+   infinitely many degrees, which is what topological nilpotence would require
+   and which is supplied by `B_j` and not by `Ĥ`. That narrows the gap between
+   the two rings further than §2 claimed.
+
+**One MISMATCH, harmless here.** The audit records `h_{Z,j} = (2πi/(r-1))(j + 1/2)ρ_Z`,
+not `(j + r/2)`; the `r/2` belongs to the exponent of `λ_j`. This affects the
+transcription in the hostile-referee report, not the membership conclusion.
 
 ---
 
@@ -153,16 +175,45 @@ checked at the source before anything else in this note is relied on.
    Obligations A and B are, and both are bounded, named, and previously
    identified.
 
-## 5. Caveats on this note
+## 5. Caveats — both of the original two are now resolved
 
-- The reading of Iritani's category is taken from F1's quotations of Remark 1.3,
-  §2.2 and Iritani–Koto Remark 5.3, not from a fresh read of the sources. The
-  companion source-exactness audit
-  (`2026-08-15-c912-h47h-source-exactness-audit.md`) should confirm them before
-  this note is cited in the manuscript.
-- Obligation B is unverified and could fail. If the residual coordinate does not
-  lie in `J_j H^*(C)`, this note's reconciliation collapses and F1 stands against
-  the manuscript's construction as well as against Iritani's category.
+- **Resolved.** The reading of Iritani's category was originally taken from the
+  hostile-referee report rather than the sources. The source-exactness audit
+  confirms it verbatim: Iritani §2.2 defines the graded completion as the direct
+  sum `M̂ = ⊕_{n∈ℤ} M̂_n` with `M̂_n = lim_k M_n/N_{k,n}`, corroborated by
+  Remark 1.3 and Iritani–Koto Remark 5.3. An infinite series in `q^{-1/s}` is
+  genuinely not an element of his ring, and `B_j` is a different completion of a
+  shared subring rather than a contradictory one.
+- **Resolved.** Obligation B is discharged at the source, with the source
+  statement stronger than the manuscript's. See above.
+- **Still open.** Obligation A, the base-change lemma, is untouched by the audit
+  and remains the one thing between the reconciliation and a closed argument.
 - Nothing here touches the divisor-tagging clause, which deforms over a formal
   power series ring on an algebraically closed field and is a separate and easier
   problem.
+
+## 6. Collateral finding: the memo's proposed successor route is refuted
+
+Outside this note's scope but decided by the same audit, and it changes what to
+do next. The memo's route for extending the rank-two mechanism to arbitrary
+Jordan size (lines 1846–1850) rests on `[μ, U] = U`, "which makes `H_0` for the
+eigenvalue zero `μ`-invariant".
+
+**That identity is false over a Novikov ring.** `μ` implements only the
+cohomological half of the grading, while the homogeneity making `E⋆` raise degree
+by two is with respect to the total grading including `deg Q^d = 2c_1(X)·d`. The
+general rule is `[μ,U]_{ij} = (1 - c_1·d)U_{ij}` on the `Q^d`-part, so the
+identity holds only on the Novikov-degree-zero part. The audit refutes it on the
+cubic's own matrices: with `μ = diag(-3/2,-1/2,1/2,3/2)` and the manuscript's
+`K_X`, entry `(2,1)` gives `[μ,U]_{21} = 2 = U_{21}` but entry `(1,2)` gives
+`[μ,U]_{12} = -12q ≠ U_{12} = 12q`. And the drawn consequence fails on the same
+example: `H_0 = span_Λ{P³ - 6qP, P² - 21q·1}` is **not** `μ`-invariant.
+
+**Damage assessment (from the audit).** Section 8 Steps 1–7 do not use the
+identity anywhere — they use only `[U,C_a] = 0`, `∂_aU = C_a + [C_a,μ]`, the
+commutant of a regular `2×2` matrix, and the Frobenius input — so
+`cor:cubic-closed` is untouched. The identity appears only in the
+arbitrary-Jordan-size passage that the memo itself labels incomplete, so no
+proved statement depends on it. But the passage must be corrected, and the
+`μ`-grading route should be struck from the successor list rather than ranked
+first.
