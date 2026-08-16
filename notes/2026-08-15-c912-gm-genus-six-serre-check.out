@@ -1,0 +1,176 @@
+Calibration of ch(U^dual) on the Gushel--Mukai threefold, k = H.c_2(U^dual):
+  chi(U^dual)      = 9 - k   (= 5 since h^0(U^dual) = dim V_5 = 5)
+  chi(U^dual, O_X) = 0   (= 0 by semiorthogonality of <Ku, O_X, U^dual>)
+  chi(U^dual, U^dual) = 9 - 2*k   (= 1, exceptional)
+  all three force k = 4, matching the Schubert computation.
+
+==========================================================================
+CALIBRATION -- cubic threefold Y_3, D^b = <Ku, O, O(1)>
+  index 2, degree H^3 = 3, H.c_2(X) = 12
+  exceptional object 0: ch = (1, 0, 0, 0), chi = 1, chi(e,e) = 1
+  exceptional object 1: ch = (1, 1, 3/2, 1/2), chi = 5, chi(e,e) = 1
+    semiorthogonality chi(obj1, obj0) = 0 (must be 0)
+  rank N(Ku) = 2
+    basis class: lattice coords [-1, 0, 1, 0], ch = (-1, 0, 1, 0)
+    basis class: lattice coords [0, -1, 0, 1], ch = (0, -1, 3/2, 1/2)
+  Euler Gram matrix E = [[-1, -1], [-2, -3]]   det = 1   symmetric = False
+  Serre operator S = E^-1 E^T = [[2, 3], [-1, -1]]
+  char poly = lam**2 - lam + 1   factored = [(lam**2 - lam + 1, 1)]
+  basis-independence check (det P = -1): same char poly = True
+  order of S = 6
+  primitive-sixth eigenvalue count from Serre = 2
+  lane's quantum-side nu_6 = 2  ->  AGREES
+  note: reproduces Phi_6 and S^3 = -I from Riemann--Roch alone
+==========================================================================
+TEST -- Gushel--Mukai threefold V_10 (genus 6), D^b = <Ku, O_X, U^dual>
+  index 1, degree H^3 = 10, H.c_2(X) = 24
+  exceptional object 0: ch = (1, 0, 0, 0), chi = 1, chi(e,e) = 1
+  exceptional object 1: ch = (2, 1, 1, -1/3), chi = 5, chi(e,e) = 1
+    semiorthogonality chi(obj1, obj0) = 0 (must be 0)
+  rank N(Ku) = 2
+    basis class: lattice coords [-1, -1, 1, 2], ch = (-1, -1, 6, 5/6)
+    basis class: lattice coords [-1, -2, 0, 5], ch = (-1, -2, 10, 5/3)
+  Euler Gram matrix E = [[-10, -17], [-17, -29]]   det = 1   symmetric = True
+  Serre operator S = E^-1 E^T = [[1, 0], [0, 1]]
+  char poly = lam**2 - 2*lam + 1   factored = [(lam - 1, 2)]
+  basis-independence check (det P = -1): same char poly = True
+  order of S = 1
+  primitive-sixth eigenvalue count from Serre = 0
+  lane's quantum-side nu_6 = 0  ->  AGREES
+  note: lane's provisional zero from the quantum operator L_10
+Explicit basis of N(Ku(V_10)) from geometric classes:
+  w1 = [O_X] - 2[O_l] + [O_p], w2 = [O_S] + [O_l] - 3[O_p]: Gram = [[-1, -2], [-2, -5]]
+  after w2 -> w2 - 2 w1: Gram = [[-1, 0], [0, -1]], i.e. N(Ku(V_10)) = <-1> + <-1>
+  Serre operator in this basis = [[1, 0], [0, 1]]
+
+==========================================================================
+index-two threefold Y_1, D^b = <Ku, O, O(1)>  [Kuznetsov partner: genus 7 X_12]
+  index 2, degree H^3 = 1, H.c_2(X) = 12
+  exceptional object 0: ch = (1, 0, 0, 0), chi = 1, chi(e,e) = 1
+  exceptional object 1: ch = (1, 1, 1/2, 1/6), chi = 3, chi(e,e) = 1
+    semiorthogonality chi(obj1, obj0) = 0 (must be 0)
+  rank N(Ku) = 2
+    basis class: lattice coords [-1, 0, 1, 0], ch = (-1, 0, 1, 0)
+    basis class: lattice coords [0, -1, 0, 1], ch = (0, -1, 1/2, 5/6)
+  Euler Gram matrix E = [[-1, -1], [0, -1]]   det = 1   symmetric = False
+  Serre operator S = E^-1 E^T = [[0, -1], [1, 1]]
+  char poly = lam**2 - lam + 1   factored = [(lam**2 - lam + 1, 1)]
+  basis-independence check (det P = -1): same char poly = True
+  order of S = 6
+  primitive-sixth eigenvalue count from Serre = 2
+  lane's quantum-side nu_6 = 0  ->  CONFLICTS
+==========================================================================
+index-two threefold Y_2, D^b = <Ku, O, O(1)>  [Kuznetsov partner: genus 9 X_16]
+  index 2, degree H^3 = 2, H.c_2(X) = 12
+  exceptional object 0: ch = (1, 0, 0, 0), chi = 1, chi(e,e) = 1
+  exceptional object 1: ch = (1, 1, 1, 1/3), chi = 4, chi(e,e) = 1
+    semiorthogonality chi(obj1, obj0) = 0 (must be 0)
+  rank N(Ku) = 2
+    basis class: lattice coords [-1, 0, 1, 0], ch = (-1, 0, 1, 0)
+    basis class: lattice coords [0, -1, 0, 1], ch = (0, -1, 1, 2/3)
+  Euler Gram matrix E = [[-1, -1], [-1, -2]]   det = 1   symmetric = True
+  Serre operator S = E^-1 E^T = [[1, 0], [0, 1]]
+  char poly = lam**2 - 2*lam + 1   factored = [(lam - 1, 2)]
+  basis-independence check (det P = -1): same char poly = True
+  order of S = 1
+  primitive-sixth eigenvalue count from Serre = 0
+  lane's quantum-side nu_6 = 0  ->  AGREES
+==========================================================================
+index-two threefold Y_4, D^b = <Ku, O, O(1)>  [Kuznetsov partner: genus 10 X_18]
+  index 2, degree H^3 = 4, H.c_2(X) = 12
+  exceptional object 0: ch = (1, 0, 0, 0), chi = 1, chi(e,e) = 1
+  exceptional object 1: ch = (1, 1, 2, 2/3), chi = 6, chi(e,e) = 1
+    semiorthogonality chi(obj1, obj0) = 0 (must be 0)
+  rank N(Ku) = 2
+    basis class: lattice coords [-1, 0, 1, 0], ch = (-1, 0, 1, 0)
+    basis class: lattice coords [0, -1, 0, 1], ch = (0, -1, 2, 1/3)
+  Euler Gram matrix E = [[-1, -1], [-3, -4]]   det = 1   symmetric = False
+  Serre operator S = E^-1 E^T = [[3, 8], [-2, -5]]
+  char poly = lam**2 + 2*lam + 1   factored = [(lam + 1, 2)]
+  basis-independence check (det P = -1): same char poly = True
+  order of S = None
+  primitive-sixth eigenvalue count from Serre = 0
+  lane's quantum-side nu_6 = 0  ->  AGREES
+==========================================================================
+index-two threefold Y_5, D^b = <Ku, O, O(1)>  [Kuznetsov partner: genus 12 X_22]
+  index 2, degree H^3 = 5, H.c_2(X) = 12
+  exceptional object 0: ch = (1, 0, 0, 0), chi = 1, chi(e,e) = 1
+  exceptional object 1: ch = (1, 1, 5/2, 5/6), chi = 7, chi(e,e) = 1
+    semiorthogonality chi(obj1, obj0) = 0 (must be 0)
+  rank N(Ku) = 2
+    basis class: lattice coords [-1, 0, 1, 0], ch = (-1, 0, 1, 0)
+    basis class: lattice coords [0, -1, 0, 1], ch = (0, -1, 5/2, 1/6)
+  Euler Gram matrix E = [[-1, -1], [-4, -5]]   det = 1   symmetric = False
+  Serre operator S = E^-1 E^T = [[4, 15], [-3, -11]]
+  char poly = lam**2 + 7*lam + 1   factored = [(lam**2 + 7*lam + 1, 1)]
+  basis-independence check (det P = -1): same char poly = True
+  order of S = None
+  primitive-sixth eigenvalue count from Serre = 0
+  lane's quantum-side nu_6 = 0  ->  AGREES
+Cross-check, smooth curve of any genus g (Kuznetsov partner of Y_4 is g = 2):
+  E = [[1 - g, 1], [-1, 0]], S = [[-1, 0], [2 - 2*g, -1]], char poly = lam**2 + 2*lam + 1
+  = (lam + 1)^2 for every g: a Kuznetsov component equivalent to D^b of a curve
+  always has primitive-sixth count zero.  This matches the Y_4 row above, and it
+  gives count zero for the genus-seven and genus-nine prime Fano threefolds,
+  whose Kuznetsov components are Mukai's curves of genus seven and three.
+
+==========================================================================
+index-one genus 2 threefold X_2, D^b = <Ku, O_X>
+  index 1, degree H^3 = 2, H.c_2(X) = 24
+  exceptional object 0: ch = (1, 0, 0, 0), chi = 1, chi(e,e) = 1
+  rank N(Ku) = 3
+    basis class: lattice coords [-2, 1, 0, 0], ch = (-2, 1, -1, 1/3)
+    basis class: lattice coords [-1, 0, 1, 0], ch = (-1, 0, 1, 1/2)
+    basis class: lattice coords [-1, 0, 0, 1], ch = (-1, 0, 0, 1)
+  Euler Gram matrix E = [[5, 2, 3], [1, 0, 0], [2, 1, 1]]   det = 1   symmetric = False
+  Serre operator S = E^-1 E^T = [[2, 0, 1], [2, -1, 0], [-3, 1, -1]]
+  char poly = lam**3 - 1   factored = [(lam - 1, 1), (lam**2 + lam + 1, 1)]
+  basis-independence check (det P = 3): same char poly = True
+  order of S = 3
+  primitive-sixth eigenvalue count from Serre = 0
+  lane's quantum-side nu_6 = 0  ->  AGREES
+==========================================================================
+index-one genus 3 threefold X_4, D^b = <Ku, O_X>
+  index 1, degree H^3 = 4, H.c_2(X) = 24
+  exceptional object 0: ch = (1, 0, 0, 0), chi = 1, chi(e,e) = 1
+  rank N(Ku) = 3
+    basis class: lattice coords [-2, 1, 0, 0], ch = (-2, 1, -2, 2/3)
+    basis class: lattice coords [-1, 0, 1, 0], ch = (-1, 0, 1, 1/2)
+    basis class: lattice coords [-1, 0, 0, 1], ch = (-1, 0, 0, 1)
+  Euler Gram matrix E = [[6, 3, 4], [1, 0, 0], [2, 1, 1]]   det = 1   symmetric = False
+  Serre operator S = E^-1 E^T = [[3, 0, 1], [4, -1, 0], [-6, 1, -1]]
+  char poly = lam**3 - lam**2 + lam - 1   factored = [(lam - 1, 1), (lam**2 + 1, 1)]
+  basis-independence check (det P = 3): same char poly = True
+  order of S = 4
+  primitive-sixth eigenvalue count from Serre = 0
+  lane's quantum-side nu_6 = 0  ->  AGREES
+==========================================================================
+index-one genus 4 threefold X_6, D^b = <Ku, O_X>
+  index 1, degree H^3 = 6, H.c_2(X) = 24
+  exceptional object 0: ch = (1, 0, 0, 0), chi = 1, chi(e,e) = 1
+  rank N(Ku) = 3
+    basis class: lattice coords [-2, 1, 0, 0], ch = (-2, 1, -3, 1)
+    basis class: lattice coords [-1, 0, 1, 0], ch = (-1, 0, 1, 1/2)
+    basis class: lattice coords [-1, 0, 0, 1], ch = (-1, 0, 0, 1)
+  Euler Gram matrix E = [[7, 4, 5], [1, 0, 0], [2, 1, 1]]   det = 1   symmetric = False
+  Serre operator S = E^-1 E^T = [[4, 0, 1], [6, -1, 0], [-9, 1, -1]]
+  char poly = lam**3 - 2*lam**2 + 2*lam - 1   factored = [(lam - 1, 1), (lam**2 - lam + 1, 1)]
+  basis-independence check (det P = 3): same char poly = True
+  order of S = 6
+  primitive-sixth eigenvalue count from Serre = 2
+  lane's quantum-side nu_6 = 2  ->  AGREES
+==========================================================================
+index-one genus 5 threefold X_8, D^b = <Ku, O_X>
+  index 1, degree H^3 = 8, H.c_2(X) = 24
+  exceptional object 0: ch = (1, 0, 0, 0), chi = 1, chi(e,e) = 1
+  rank N(Ku) = 3
+    basis class: lattice coords [-2, 1, 0, 0], ch = (-2, 1, -4, 4/3)
+    basis class: lattice coords [-1, 0, 1, 0], ch = (-1, 0, 1, 1/2)
+    basis class: lattice coords [-1, 0, 0, 1], ch = (-1, 0, 0, 1)
+  Euler Gram matrix E = [[8, 5, 6], [1, 0, 0], [2, 1, 1]]   det = 1   symmetric = False
+  Serre operator S = E^-1 E^T = [[5, 0, 1], [8, -1, 0], [-12, 1, -1]]
+  char poly = lam**3 - 3*lam**2 + 3*lam - 1   factored = [(lam - 1, 3)]
+  basis-independence check (det P = 3): same char poly = True
+  order of S = None
+  primitive-sixth eigenvalue count from Serre = 0
+  lane's quantum-side nu_6 = 0  ->  AGREES

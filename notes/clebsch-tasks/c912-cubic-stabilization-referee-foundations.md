@@ -58,6 +58,16 @@ identification is expected rather than proved, and the genus-six Gushel--Mukai
 threefold is the test that may refute it or the lane's provisional zero.
 Report: `../2026-08-15-c912-det-r-pairing-and-serre-lattice.md`, with
 `../2026-08-15-c912-serre-lattice-check.py` and `.out`.
+That test has now been run and passes: the numerical K-group of the Kuznetsov
+component of a Gushel--Mukai threefold is `<-1> + <-1>` with symmetric Euler
+form, so its Serre operator is the identity and the count is zero, matching the
+lane's provisional zero.  The same computation, run from Riemann--Roch with no
+external Euler matrix, reproduces the whole prime-Fano census, and fixes the
+sign convention between the census's polynomial `R` and the Serre side as
+`lam -> -lam`.  It also predicts count two for the sextic double solid, which is
+outside the census and is the sharpest remaining falsification test.
+Report: `../2026-08-15-c912-gm-genus-six-serre-test.md`, with
+`../2026-08-15-c912-gm-genus-six-serre-check.py` and `.out`.
 
 **Manuscript status change, 2026-08-15.**  On author instruction the paper no
 longer asserts the bulk-displacement step.  It is now the manually named
@@ -961,8 +971,11 @@ become manuscript edits.
 | C912-M22 | confirmed | The Stokes torsor of the `X x P^1` small even connection is 52-dimensional and acts trivially on the count, since the count is a formal invariant; the one-stabilization hole is a discriminant-crossing problem, not a Stokes-section problem. | Same report, Section 5 |
 | C912-M23 | resolved | Standing hypothesis (H2) of the rigidity theorem is forced by the Frobenius structure: the image of the nilpotent part is isotropic and the `z^0` coefficient is anti-self-adjoint, so the assumed entry vanishes pointwise rather than on a germ. | `../2026-08-15-c912-det-r-pairing-and-serre-lattice.md`, Theorem 2; the memo's Section 8 should be updated |
 | C912-M24 | confirmed | After the shearing the Poincare pairing is `z` times a symplectic form, and `sp(2) = sl(2)`, so in rank two the pairing gives exactly `tr R = -1` and can never determine `det R`. | Same report, Proposition 3 |
-| C912-M25 | open | The count equals the number of primitive-sixth eigenvalues of the Serre operator on the numerical K-group of the Kuznetsov component; for the cubic threefold that operator has characteristic polynomial `Phi_6` and cube `-I`, giving two. Expected correspondence, not proved; the genus-six Gushel--Mukai threefold is the refuting test. | Same report, Section 4 |
-| C912-M26 | open | The frame-transport memo records `S^5 = [3]` where Kuznetsov's relation for the same category is `S^3 = [5]`; only the latter yields primitive sixth roots, and the memo's shorter endpoint route leans on that sentence. | Same report, Section 5 |
+| C912-M25 | confirmed | The count equals the number of primitive-sixth eigenvalues of the Serre operator on the numerical K-group of the Kuznetsov component. The genus-six Gushel--Mukai test passes -- `N(Ku) = <-1> + <-1>`, symmetric Euler form, `S = I`, count zero -- and the identification reproduces the whole prime-Fano census. Still an expected correspondence rather than a proved one. | `../2026-08-15-c912-gm-genus-six-serre-test.md`, Sections 3--4 |
+| C912-M26 | open | The frame-transport memo records `S^5 = [3]` where Kuznetsov's relation for the same category is `S^3 = [5]`; only the latter yields primitive sixth roots, and the memo's shorter endpoint route leans on that sentence. | `../2026-08-15-c912-det-r-pairing-and-serre-lattice.md`, Section 5 |
+| C912-M27 | resolved | The sign convention between the classification's reduced factorial cyclotomic polynomial `R` and the Serre side is `lam -> -lam`, the shift `[1]`: in all four genera where `R` is recorded the Serre characteristic polynomial is `R(-lam)` up to sign. | `../2026-08-15-c912-gm-genus-six-serre-test.md`, Section 4 |
+| C912-M28 | open | `N(Ku)` of the sextic double solid has the cubic threefold's Gram matrix and an order-six Serre operator, so the identification predicts count two there; the lane has not computed that quantum-side value. Independently, no Kuznetsov component equivalent to a curve category can have nonzero count, so the degree-one case of Kuznetsov's Fano threefold conjecture cannot hold. | Same report, Section 5; owner is the sextic-double-solid quantum computation |
+| C912-M29 | open | The Euler form on the residual component is symmetric for the Gushel--Mukai threefold and asymmetric for the cubic, and that symmetry alone controls the count. No structural reason for the difference was identified. | Same report, Section 3 |
 
 The final `ej`+`tt` closeout found no unresolved mystery in the completed
 WP1--WP3 tranche.  Removing the freestanding Hahn paragraph both repaired the
