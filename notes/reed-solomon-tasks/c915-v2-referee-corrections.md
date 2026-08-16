@@ -374,12 +374,56 @@ level.  This task verified the Blokhuis--Pellikaan--Szonyi locators against the
 published article directly and the Aubry--Perret usage against its stated
 hypotheses; the rest were last checked in the C885 full review.
 
-## Adjacent observation, not part of the package
+## Closeout pass beyond the package
 
-`sections/09-lucas-carriers.tex` invokes Hasse--Weil in the rank-two
-Artin--Schreier descent after calling the cover "the smooth double cover", while
-the sentence two lines earlier concludes only that the cover is geometrically
-integral with at most two reduced simple poles, hence of genus at most one.  The
-smoothness needed for Hasse--Weil there is asserted, not proved.  The referee did
-not flag it; the same Aubry--Perret substitution used for E6 would remove the
-dependence at no numerical cost.  Raised for a decision rather than edited.
+**One more instance of the E6 defect, fixed.**  The invariant-block proposition
+in `sections/09-lucas-carriers.tex` invoked Hasse--Weil after calling the cover
+"the smooth double cover", while the sentence two lines earlier concludes only
+that the cover is geometrically integral with at most two reduced simple poles,
+hence of arithmetic genus at most one.  The smoothness was asserted, not proved.
+Since Aubry--Perret gives the identical inequality under exactly the hypotheses
+that are proved, the sentence now cites it and speaks of the normalized double
+cover.  No threshold moves: the binary uniform range there starts at `q = 128`,
+where `q + 1 - 2 sqrt q` is about 106 against a deletion of 48.
+
+**The available sharpening does not move the redundancy-ten binary threshold.**
+C533 sharpens the characteristic-two ordered-Hessian bounds from selector
+`9(n-4)` and deletion `3n-4` to `7(n-4)` and `3n-6`, that is from 45 and 23 to
+35 and 21 at `n = 9`.  The manuscript keeps the C525 form, and nothing is lost:
+the first binary field with at least 35 elements is still 64, since 32 is too
+small, and the point count is already satisfied at 64 either way.  Only a
+selector needing at most 32 field elements would pull the binary range down to
+`q = 32`, and no such selector is in hand.
+
+**The E4 defect class may recur elsewhere, unverified.**  Three citations carry
+statement-level locators into sources whose bibliography entry is a published
+version: `[Thm. 3.3]` into Davydov--Marcugini--Pambianco 2022, `[\S2]` and
+`[Lem. 2]` into Gunay--Lavrauw 2022, and `[Lem. 1 and Thm. 1]` into
+Gmainer--Havlicek.  Blokhuis--Pellikaan--Szonyi shifted every section number by
+one between preprint and publication, so the same mismatch is possible here and
+was not checked: the Gunay--Lavrauw published version is closed access, and the
+other two were not opened in this task.  The Gmainer--Havlicek row of the
+literature audit also records only "abstract/Theorem 1" as read, while the
+manuscript cites its Lemma 1.  These belong to the primary-source audit.
+
+## Mystery ledger
+
+- **Why the redundancy-ten binary threshold sits exactly at 64.**  Settled by the
+  closeout: it is the selector, not the point count.  The point count is
+  satisfied at 64 with one point of slack (`49 > 48`), and even the sharpened
+  selector needs 35 field elements, which 32 cannot supply.  The slack of one is
+  a coincidence of the two independent bounds, not a designed fit.
+- **Why the deletion budget and the selector degree are both so loose.**  Open,
+  and owned by any successor that wants a smaller binary range.  The selector
+  bound comes from a product of one equation per ruling with no attempt at a
+  common factor, and the deletion table charges each failure separately;
+  C533 already showed that exact divisor overlap removes two from the deletion
+  budget.  There is no evidence either bound is tight.
+- **Whether the ordered-Hessian slice is ever singular on the selected open set.**
+  Open but harmless: the proof needs only arithmetic genus at most one, which
+  holds for every reduced `(2,2)` curve, and Aubry--Perret is stated for exactly
+  that class.  Nothing downstream would change if the slice were always smooth.
+- **Whether the terminal-carrier sign slip propagated.**  Settled: it did not.
+  The parametrization itself was correct, only the prose square was written with
+  the wrong middle sign, and no other passage reuses that formula.
+- No other genuine mystery surfaced in this pass.
