@@ -1560,16 +1560,30 @@ Serre automorphism of a genus-five curve. They conclude that every smooth cubic
 threefold is irrational, and remark that the same approach applies to other Fano
 threefolds.
 
-The relation to use here is Kuznetsov's fractional Calabi--Yau relation
-$S^3=[5]$. An earlier version of this memo recorded the minimal polynomial as
-$S^5=[3]$; on the numerical Grothendieck group a shift $[k]$ acts by $(-1)^k$, so
-the two readings predict $S^3=-I$ and $S^5=-I$ respectively, and the Serre
-operator computed from Riemann--Roch satisfies the first exactly and fails the
-second. Its characteristic polynomial is $\Phi_6$ and its order is six, whereas
-$S^5=[3]$ would force order ten and primitive tenth roots, contradicting the
-exponents $-1/6,-5/6$ recorded after \eqref{eq:sheared-data}. Either relation
-supports their exclusion of a curve atom, since both keep $-1$ out of the
-spectrum; only $S^3=[5]$ is compatible with the count this memo is about.
+Their $S^5=[3]$ is quoted correctly above --- it is what Example 6.21 says --- but
+it is not the relation to use when computing on a K-group. Kuznetsov's fractional
+Calabi--Yau relation for the same category is $S^3=[5]$, and on the numerical
+Grothendieck group, where a shift $[k]$ acts by $(-1)^k$, the two predict
+$S^3=-I$ and $S^5=-I$ respectively; the Serre operator computed from
+Riemann--Roch satisfies the first exactly and fails the second, its
+characteristic polynomial being $\Phi_6$ and its order six, in agreement with the
+exponents $-1/6,-5/6$ recorded after \eqref{eq:sheared-data}. The offset is
+systematic rather than a slip: their Example~6.20 gives $S^3=[4]$ for the cubic
+fourfold, whose Kuznetsov component is a K3 category with $S=[2]$ categorically.
+The two are different objects --- the Serre automorphism of a Hodge atom in the
+cohomological $\mathbf Z$-grading, and the categorical Serre functor on a K-group
+--- so a citation should follow the object it is about. Locators and the full
+comparison are in `2026-08-15-c912-kkpy-imports-source-check.md'.
+
+A second normalization difference runs alongside it and explains a substitution
+this lane had observed but not accounted for. Their statements are made after the
+half-parity gauge $u^g$ of Claim~6.15, this memo's count before it. That gauge
+shifts exponents by half the cohomological degree, multiplying monodromy
+eigenvalues by a parity-dependent sign: primitive sixth roots become primitive
+cube roots and $\pm1$ swap. It is the $\lambda\mapsto-\lambda$ substitution
+between the prime-Fano classification's polynomial $R$ and the Serre side. Every
+separation used below distinguishes roots of unity of order at most two from
+roots of order three or six, which the gauge preserves.
 
 The consequence for the endpoint is worth stating plainly. Their argument is
 dimension three, where Proposition~5.30 requires excluding only points and
@@ -1581,11 +1595,18 @@ is already theirs. So the endpoint theorem may reduce to one classification
 question, which in the terms of this memo reads:
 
 \begin{quote}
-\textbf{(iii)} No atom of a smooth projective surface has formal monodromy with
-a primitive sixth root of unity as an eigenvalue; equivalently, for no such atom
-does the characteristic polynomial of the Serre operator on its numerical
-Grothendieck group have $\Phi_6$ as a factor.
+\textbf{(iii)} Every atom of a smooth projective surface has formal monodromy of
+order at most two, its eigenvalues lying in $\{+1,-1\}$. In particular no such
+atom has a primitive sixth root of unity as an eigenvalue, and no Serre operator
+on such an atom's numerical Grothendieck group has $\Phi_6$ as a factor.
 \end{quote}
+
+The stronger form is the one Katzarkov--Kontsevich--Pantev--Yu's own dimension-four
+example uses, where the exclusion is unipotency against non-unipotency. Their
+Example~6.20 needs it only for surfaces of general type, the atom there being
+shaped like one; the endpoint needs every surface, because the cubic threefold's
+atom is shaped like a genus-five curve atom and nothing narrows the search in
+advance.
 
 Two reductions come with the statement, and one warning.
 
@@ -1603,11 +1624,12 @@ statements.
 
 \begin{proposition}[Step (iii) for surfaces]
 \label{prop:step-iii}
-Assume the projective-bundle formula for atoms and
-Katzarkov--Kontsevich--Pantev--Yu's nef-canonical description. Then no atom of a
-smooth projective surface has a primitive sixth root of unity as an eigenvalue
-of its formal monodromy, equivalently --- under the identification of
-Section~\ref{sec:kkpy-serre} --- as a Serre eigenvalue.
+Assume Katzarkov--Kontsevich--Pantev--Yu's Lemma~5.24 and Claim~6.15. Then every
+atom of a smooth projective surface has formal monodromy of order at most two;
+in particular none has a primitive sixth root of unity as an eigenvalue. The
+same holds for Serre eigenvalues, either because their Serre automorphism is
+defined as the monodromy in the $u$-direction, or case by case from the Serre
+computations recorded alongside each step of the proof.
 \end{proposition}
 
 \begin{proof}
@@ -1625,13 +1647,25 @@ conclusion from $S'$. A minimal surface has nef canonical class, or is $\PP^2$,
 or is a projective bundle over a smooth curve. The nef case is the reduction
 above. For $\PP^2$ the characteristic polynomial of $c_1\star$ is
 $\lambda^3-27q$, of nonzero discriminant, so the small quantum cohomology is
-semisimple and every atom is rank one. For a projective bundle the atoms are
-copies of the base curve's; a curve of genus $g$ has Euler form
+semisimple and every atom is rank one, so Theorem~\ref{thm:simple-blocks}
+applies to each. For a projective bundle the atoms are copies of the base
+curve's, and the curve is settled on the monodromy side directly, with no appeal
+to the identification. Let $C$ have genus $g$. The even part of $H^*(C)$ is
+spanned by $1$ and the point class, and the grading operator has eigenvalues
+$\mp\tfrac12$ on them. If $g\ge1$ there are no rational curves and
+$\deg(-K_C)\le0$, so the quantum product is the cup product and $E\star$ is
+nilpotent: the even part is a single block at the eigenvalue $0$, its connection
+is exactly $z^{-1}E\star-\mu$ with no higher $z$ coefficients, and the shearing
+moves the exponents $\pm\tfrac12$ by integers only, which $\nu_6$ does not see.
+The formal monodromy eigenvalues are therefore $e^{\mp\pi i}=-1$, twice. If
+$g=0$ then $E\star=2H\star$ has the distinct eigenvalues $\pm2\sqrt q$, so both
+blocks are multiplicity one and Theorem~\ref{thm:simple-blocks} applies again.
+Either way no primitive sixth root. The Serre side agrees, as it must if the
+identification holds: the Euler form
 $\left(\begin{smallmatrix}1-g&1\\-1&0\end{smallmatrix}\right)$ on
-$([\mathcal O_C],[\mathcal O_{pt}])$, Serre operator
-$\left(\begin{smallmatrix}-1&0\\2-2g&-1\end{smallmatrix}\right)$ and characteristic
-polynomial $(\lambda+1)^2$ for every $g$, so its only eigenvalue is $-1$; for a
-rational base the category splits further into rank-one atoms. This exhausts the
+$([\mathcal O_C],[\mathcal O_{pt}])$ gives the Serre operator
+$\left(\begin{smallmatrix}-1&0\\2-2g&-1\end{smallmatrix}\right)$, of
+characteristic polynomial $(\lambda+1)^2$ for every $g$. This exhausts the
 classification.
 \end{proof}
 
@@ -1669,15 +1703,29 @@ generated by an exceptional pair and splits into two rank-one pieces whose Serre
 operators are both the identity. Since the blowup is exactly what supplies this
 fake, the blowup step of any proof of (iii) is where the care is needed.
 
+With all four imports now read at the source, the route assembles: Theorem~4.11
+with $r=2$ puts two copies of the cubic's atom in $X\times\PP^1$; that atom has
+primitive-sixth monodromy by the exponents $-1/6,-5/6$ above; no atom of a
+variety of dimension at most two has such an eigenvalue, by
+Proposition~\ref{prop:step-iii} for surfaces together with the point and curve
+cases; so Proposition~5.30 in dimension four gives that $X\times\PP^1$ is not
+rational. This uses no transport lemma and none of
+Section~\ref{sec:unconditional}.
+
 This is not the same invariant as $\nu_6$, and it is not obviously weaker or
 stronger; it is the sources' own, which is an argument for using it. Two
 cautions. It buys the Hodge-atom, motive and Serre-enhancement machinery that
 the earlier blueprint deliberately avoided, so the manuscript would import more
-than the two decomposition theorems. And their sentence is a worked example,
-not a theorem with hypotheses. The graded minimal polynomial has now been
-checked, on the lattice rather than at the source, and came out as Kuznetsov's
-$S^3=[5]$; the surface exclusion is Proposition~\ref{prop:step-iii}, which holds
-modulo two imported statements, both of which this route already uses elsewhere.
+than the two decomposition theorems --- though not the integral-structure
+enhancement, which its authors call difficult and defer to forthcoming work,
+while calling the Euler-pairing and Serre-automorphism enhancement a
+straightforward repeat of the undecorated theory. And their sentence is a worked example,
+not a theorem with hypotheses, although the statements it invokes ---
+Lemma~5.24, Claim~6.15, Proposition~5.30 and Theorem~4.11 --- have now been read
+at the source and say what is claimed of them here. The graded minimal
+polynomial has been checked on the lattice as well, and the two conventions
+differ as described above; the surface exclusion is
+Proposition~\ref{prop:step-iii}.
 Backing computations, and the exact record of what was and was not read at the
 source, are in `2026-08-15-c912-step-iii-serre-restatement.md' and
 `2026-08-15-c912-step-iii-surface-induction.md', with the scripts
