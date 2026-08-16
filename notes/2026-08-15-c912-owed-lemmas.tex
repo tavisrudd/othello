@@ -1,0 +1,242 @@
+\documentclass[11pt]{article}
+
+\usepackage[a4paper,margin=29mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools,mathrsfs}
+\usepackage{array,booktabs}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\C}{\mathbf C}
+\newcommand{\Q}{\mathbf Q}
+\newcommand{\Z}{\mathbf Z}
+\newcommand{\PP}{\mathbf P}
+\newcommand{\Eu}{\mathcal E}
+\newcommand{\Gr}{\mathsf{Gr}}
+\newcommand{\Nov}{\Lambda}
+
+\title{Owed lemmas for the rank-two atomic residue proof}
+\author{Tavis Rudd}
+\date{August 2026}
+
+\begin{document}
+\maketitle
+
+\noindent\emph{Purpose.} The argument transcribed in
+\texttt{2026-08-15-c912-atom-residue-proof.tex} uses, at its first and most
+load-bearing step, horizontality of the Poincar\'e pairing for the A-model
+connection. Its independent verification
+(\texttt{2026-08-15-c912-atom-residue-proof-verification.md}) found that this is
+\emph{not} an available import: Katzarkov--Kontsevich--Pantev--Yu state
+horizontality only after assuming convergence and passing to the
+complex-analytic bundle, whereas the $A$-model $F$-bundle of a projective
+variety is non-archimedean analytic. The step is therefore ours to prove. This
+note proves it, over the Novikov ring and with no convergence hypothesis, and
+lists what else that verification recorded as owed.
+
+\section{Setting}
+
+Let $T$ be a smooth projective variety over $\C$ of dimension $n$, and let
+$\Nov$ be the completed Novikov ring of its numerical curve lattice. All
+statements below are identities in $\Nov$-modules; no convergence of any
+Gromov--Witten generating function is used, and no base change to a
+complex-analytic bundle is performed.
+
+Write $H=H^{\mathrm{ev}}(T)\otimes\Nov$ for the even part, $(\,\cdot\,,\cdot\,)$
+for the Poincar\'e pairing extended $\Nov$-bilinearly, $\star_\tau$ for the
+genus-zero quantum product at a bulk parameter $\tau$, and
+\[
+  \Gr(\phi)=\tfrac12\bigl(\deg\phi-n\bigr)\phi
+  \qquad\text{for homogeneous }\phi,
+\]
+for the grading operator. The connection is
+\[
+  \nabla_{u\partial_u}=u\partial_u-u^{-1}\Eu\star_\tau+\Gr,
+  \qquad
+  \nabla_\xi=\xi+u^{-1}C_\xi,
+  \qquad C_\xi=\xi\star_\tau,
+  \tag{1}
+  \label{eq:connection}
+\]
+so that horizontal sections satisfy
+\[
+  u\partial_uy=A(u)y,\quad A(u)=u^{-1}U-\Gr,\ U:=\Eu\star_\tau;
+  \qquad
+  \xi y=B_\xi(u)y,\quad B_\xi(u)=-u^{-1}C_\xi.
+  \tag{2}
+  \label{eq:matrices}
+\]
+The pairing is taken in the usual twisted form: for sections $y,\tilde y$ one
+considers $\bigl(y(u),\tilde y(-u)\bigr)$.
+
+\section{The two adjointness identities}
+
+\begin{lemma}[Frobenius, over $\Nov$]
+\label{lem:frobenius}
+For all $a,b,c\in H$ and every bulk parameter $\tau$,
+\[
+  (a\star_\tau b,\,c)=(a,\,b\star_\tau c).
+\]
+In particular every quantum multiplication operator, including $U=\Eu\star_\tau$
+and each $C_\xi=\xi\star_\tau$, is self-adjoint for the Poincar\'e pairing.
+\end{lemma}
+
+\begin{proof}
+By definition the structure constants of $\star_\tau$ are
+\[
+  (a\star_\tau b,\,c)
+  =\sum_{d}\sum_{m\ge0}\frac{Q^d}{m!}
+   \bigl\langle a,b,c,\tau,\dots,\tau\bigr\rangle_{0,m+3,d},
+\]
+a formal sum over effective numerical classes $d$ with coefficients the
+genus-zero Gromov--Witten invariants. Those invariants are defined by
+integration against the virtual class of a moduli space of stable maps with
+\emph{unordered} marked-point labels up to the specified insertions, hence are
+symmetric under permuting their arguments; on the even part no Koszul signs
+arise. The displayed expression is therefore totally symmetric in $a,b,c$, and
+comparing it with the same expression for $(a,\,b\star_\tau c)$ gives the claim.
+
+Two remarks on what this does and does not use. The identity is an identity of
+formal series: it holds coefficientwise in $Q^d$ and in the bulk parameter, so
+it is a statement in $\Nov$ and requires no convergence. And it is exactly the
+total symmetry of the third derivatives of the genus-zero potential, so it is
+the Frobenius property in its usual form, not a strengthening of it.
+\end{proof}
+
+\begin{lemma}[The grading operator is anti-self-adjoint]
+\label{lem:grading}
+For all $a,b\in H$, $\bigl(\Gr a,\,b\bigr)+\bigl(a,\,\Gr b\bigr)=0$.
+\end{lemma}
+
+\begin{proof}
+Both sides are $\Nov$-bilinear, so it suffices to check on homogeneous classes.
+The Poincar\'e pairing of $\phi\in H^k$ with $\psi\in H^\ell$ vanishes unless
+$k+\ell=2n$. In that case
+\[
+  \bigl(\Gr\phi,\psi\bigr)+\bigl(\phi,\Gr\psi\bigr)
+  =\Bigl[\tfrac12(k-n)+\tfrac12(\ell-n)\Bigr](\phi,\psi)
+  =\tfrac12\bigl[(k+\ell)-2n\bigr](\phi,\psi)=0 .
+\]
+This is a statement about the cohomological grading and Poincar\'e duality
+alone; the Novikov variables play no role, and $\Gr$ is $\Nov$-linear because it
+acts on the coefficient ring trivially.
+\end{proof}
+
+\begin{remark}
+Lemma~\ref{lem:grading} is where the normalization of $\Gr$ by $-n/2$ earns its
+keep: with any other additive constant the operator would fail to be
+anti-self-adjoint, and horizontality below would acquire a scalar defect.
+\end{remark}
+
+\section{Horizontality}
+
+\begin{theorem}[The Poincar\'e pairing is horizontal, over $\Nov$]
+\label{thm:horizontal}
+Let $y,\tilde y$ be horizontal sections of \eqref{eq:connection}. Then
+\[
+  \bigl(y(u),\,\tilde y(-u)\bigr)
+\]
+is constant in $u$ and in every base direction. Equivalently, with $P_0$ the
+Gram matrix of the Poincar\'e pairing in a fixed basis,
+\[
+  A(u)^TP_0+P_0A(-u)=0,
+  \qquad
+  B_\xi(u)^TP_0+P_0B_\xi(-u)=0 .
+  \tag{3}
+  \label{eq:horizontality}
+\]
+\end{theorem}
+
+\begin{proof}
+Put $f(u)=y(u)^TP_0\,\tilde y(-u)$. Substituting $w=-u$ shows $u\partial_u$ is
+invariant under $u\mapsto-u$, so $(u\partial_u)\bigl(\tilde y(-u)\bigr)
+=A(-u)\tilde y(-u)$, and therefore
+\[
+  u\partial_uf
+  =y^T\bigl[A(u)^TP_0+P_0A(-u)\bigr]\tilde y(-u).
+\]
+Now compute the bracket from \eqref{eq:matrices}:
+\[
+  \bigl(u^{-1}U-\Gr\bigr)^TP_0+P_0\bigl(-u^{-1}U-\Gr\bigr)
+  =u^{-1}\bigl(U^TP_0-P_0U\bigr)-\bigl(\Gr^TP_0+P_0\Gr\bigr).
+\]
+The first bracket vanishes by Lemma~\ref{lem:frobenius}, since $U$ is a quantum
+multiplication operator, and the second by Lemma~\ref{lem:grading}. Hence
+$u\partial_uf=0$.
+
+For a base direction, $B_\xi(u)=-u^{-1}C_\xi$ has no $\Gr$ term and is odd in
+$u$, so
+\[
+  B_\xi(u)^TP_0+P_0B_\xi(-u)
+  =-u^{-1}\bigl(C_\xi^TP_0-P_0C_\xi\bigr)=0
+\]
+by Lemma~\ref{lem:frobenius} again, applied to $C_\xi=\xi\star_\tau$. So $f$ is
+constant in every base direction as well.
+\end{proof}
+
+\begin{corollary}[What the atomic residue proof needs]
+\label{cor:for-atom}
+In the notation of \texttt{2026-08-15-c912-atom-residue-proof.tex}, equation
+\textup{(7)} holds with the constant Gram matrix $P_0$, and hence so do its
+consequences \textup{(8)}, \textup{(10)} and \textup{(11)}.
+\end{corollary}
+
+\begin{proof}
+Equation (7) there is $u\partial_uP(u)+A(u)^TP(u)+P(u)A(-u)=0$ for a possibly
+$u$-dependent pairing $P(u)$. Theorem~\ref{thm:horizontal} gives it with
+$P(u)=P_0$ constant, so the $u\partial_uP$ term drops and the remaining identity
+is \eqref{eq:horizontality}. The $u^{-1}$ coefficient is $N^TP_0=P_0N$, which is
+(8); the $u^0$ coefficient with a constant pairing is
+$A_0^TP_0+P_0A_0=0$, which is (10) with $P_1=0$, and the sandwich argument
+producing $A_0L\subset L$ goes through unchanged --- indeed more simply, since
+the terms of (10) involving $N$ and $P_1$ are absent.
+\end{proof}
+
+\begin{remark}[What was actually at issue]
+The verification's concern was not that horizontality is false but that the
+source establishes it only after assuming convergence and passing to the
+complex-analytic bundle, while the object the proof works with is
+non-archimedean. Theorem~\ref{thm:horizontal} removes that dependence: both
+inputs are algebraic identities in $\Nov$-modules, one the total symmetry of
+genus-zero Gromov--Witten invariants and the other a statement about the
+cohomological grading. Neither refers to a topology on $\Nov$. In particular
+nothing here touches the Euler-pairing comparison or the Serre automorphism,
+which are the objects the source does defer.
+\end{remark}
+
+\section{Still owed}
+
+The same verification recorded four further unstated inputs. They are
+bookkeeping rather than substance, but none is written:
+
+\begin{enumerate}[label=(\roman*)]
+\item that the even part is a sub-$F$-bundle, so that restricting the whole
+  construction to it is legitimate;
+\item uniqueness and gluing of the spectral splitting;
+\item the identity principle on irreducible $k$-analytic spaces, which is what
+  the crossing-point argument uses when it propagates constancy from a nonempty
+  open subset;
+\item descent of the invariant through the blowup, projective-bundle and
+  disjoint-union equivalences, and not only through the two equivalences in the
+  source's own definition.
+\end{enumerate}
+
+Separately, and not bookkeeping: the parity ranks $(2,10)$ rest on the source's
+assertion that the zero-eigenvalue packet does not split further at the relevant
+point, whose cited support carries no proof and covers only a restricted case.
+That is the one place where the argument is genuinely conditional, and it is a
+finite splitting statement about a single packet rather than an invariance
+statement about arbitrary centres.
+
+\end{document}
