@@ -5,8 +5,9 @@
 **Date:** 2026-08-16
 
 **Status:** all six edits E1--E6 are applied, verified, and committed; a second
-referee round on the inserted material found four defects in the E1 lemma, all
-confirmed and repaired; the specification's post-edit checklist has been run.  Of its five closing audits,
+referee round on the inserted material found four defects in the E1 lemma and a
+third round found six more, all confirmed and repaired, with the third round
+returning minor revision and no remaining major defect; the specification's post-edit checklist has been run.  Of its five closing audits,
 the characteristic audit and the regression/diff audit were run in full here;
 the theorem-dependency, hostile-R10, and primary-source audits are the ones a
 second reader should still run, since running them on my own edits is not an
@@ -354,6 +355,63 @@ lemma applies directly to `f`, and its witness lands in `W_f` by repeated
 application of the lift identity, needing neither stagewise selection nor the
 intermediate lower packages.
 
+## Third referee round on the new material
+
+The same reader re-audited the repaired lemma and found no remaining major
+defect, returning minor revision.  Six items, all confirmed and applied.
+
+**The integrality statement quantified the wrong curve.**  Part (ii) proved
+integrality only after vertical factors are removed, while parts (iv) and (v)
+spoke of the full incidence curve, which genuinely has a vertical component
+whenever the pencil meets the twisted cubic.  The residual curve now has its own
+name and carries parts (iv) and (v); it has bidegree `(a,2)` with `a <= 2`,
+hence arithmetic genus at most one.  No deletion budget changes, because a
+parameter divided out as a vertical factor has all three coefficients vanishing
+and is therefore already charged to the `P_0 = 0` and `P_1 = 0` rows.
+
+**The tangent ruling needed its covering calculation --- and it proves more than
+the reader asked for.**  They observed that the selector used the complementary
+ruling factor for one ruling and nothing explicit for the other.  Printing the
+calculation settles both at once.  For the shift pencil the three coefficients
+of `P_1` are `e_1 = h_0h_3 + h_1h_2`, `e_2 = h_0h_4 + h_2^2` and
+`e_3 = h_1h_4 + h_2h_3`, and the terminal determinant satisfies the identity
+`D = h_1 e_3 + h_2 e_2 + h_3 e_1` outright.  So `P_1` vanishing identically ---
+which is exactly the condition that the pencil lie on the quadric, both rulings
+included --- forces `D = 0`.  I verified the identity by hand and then
+exhaustively over the two smallest binary fields.
+
+This is a deviation from their suggested repair, and it goes the other way from
+the previous round: rather than adding a factor, the ruling factor can be
+dropped.  The degeneracy locus is contained in the union of `D = 0` and the
+common-factor Veronese, so the selector is the two-factor product with
+individual root degrees `4` and `3`, total `7`.  Five disjoint eight-element
+blocks need 40 field elements, against `7*5 + 10 + 1 = 46` for
+Schwartz--Zippel, so the printed bound goes from 60 to `min{46, 40} = 40`.  The
+first binary field is still 64, now with room to spare rather than by four
+elements, and the deletion count and point count are untouched.  Dropping the
+factor also removed the complementary-ruling nonvanishing argument from the
+proof, which is where the page budget came back.
+
+**Malformed quantifiers.**  The lemma opened over an algebraically closed field
+and then concluded existence over `F_q`.  It now fixes `q` a power of two, takes
+`f` rational over `F_q`, sets `k` to the algebraic closure for the geometric
+assertions, and says that the selector polynomials are defined over `F_q`.
+
+**A stale number in the roadmap table.**  The overview table still carried the
+superseded binary selector bound; it now reads 40, matching the lemma and the
+escape proposition.  The field threshold is unchanged at 64.
+
+**The unipotent phrasing.**  Saying the comparison "forces `P_1 = 0`" understated
+it.  The factorized side has `XY` coefficient a multiple of `v^2` while `P_1` is
+a scalar multiple of `uv`, so the two cannot match at all; the vanishing case is
+the inseparable locus treated separately.
+
+**Affine versus projective degree.**  The proof charged the fibre over infinity
+on top of a divisor it called degree 23, mixing conventions.  The text now says
+the displayed degrees are those of the affine equations, and that at most two
+points lie over each such parameter with at most two more over infinity, giving
+`2*23 + 2 = 48`.
+
 ## Post-edit checklist
 
 Section A (build and reference integrity): both builds compile warning-free with
@@ -417,8 +475,9 @@ loosening of any gate:
 
 ## Page budget
 
-The TIT submission build now stands at exactly 50 of its 50-page gate.  It
-passes, with no headroom at all.  Any further printed mathematics in this
+The TIT submission build stands at exactly 50 of its 50-page gate.  It passes,
+with no headroom at all; dropping the redundant ruling factor in the third round
+paid for the material that round added.  Any further printed mathematics in this
 appendix forces a decision: a compression pass, moving material out of the
 submission build, or changing the gate.  Flagging rather than acting.
 

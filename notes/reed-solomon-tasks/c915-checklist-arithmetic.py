@@ -119,22 +119,22 @@ def main():
         print(f"  {name}: integer threshold {integer}, first prime power {power};"
               f" manuscript quotes the {kind} threshold {claimed}  {status}")
 
-    selector_60 = first_prime_power(200, lambda q: q >= 60 and q & (q - 1) == 0)
-    ok &= selector_60 == 64
-    print(f"  first binary field with at least 60 elements: {selector_60}"
-          f"  {'PASS' if selector_60 == 64 else 'FAIL'}")
+    selector_40 = first_prime_power(200, lambda q: q >= 40 and q & (q - 1) == 0)
+    ok &= selector_40 == 64
+    print(f"  first binary field with at least 40 elements: {selector_40}"
+          f"  {'PASS' if selector_40 == 64 else 'FAIL'}")
     char7 = next(7 ** m for m in range(1, 8) if 7 ** m > 102)
     ok &= char7 == 343
     print(f"  first power of seven above 102: {char7}"
           f"  {'PASS' if char7 == 343 else 'FAIL'}")
-    # Three selector factors of individual root degree 4, 4 and 3 over five
-    # roots: Schwartz-Zippel with the Vandermonde against block interpolation.
-    m, indiv = 5, 4 + 4 + 3
+    # Two selector factors of individual root degree 4 and 3 over five roots:
+    # Schwartz-Zippel with the Vandermonde against block interpolation.
+    m, indiv = 5, 4 + 3
     r10_selector = min(indiv * m + comb(m, 2) + 1, (indiv + 1) * m)
-    ok &= r10_selector == 60
+    ok &= r10_selector == 40
     print(f"  R10 binary selector min({indiv * m + comb(m, 2) + 1},"
           f" {(indiv + 1) * m}) = {r10_selector}"
-          f"  {'PASS' if r10_selector == 60 else 'FAIL'}")
+          f"  {'PASS' if r10_selector == 40 else 'FAIL'}")
 
     print("\nALL PASS" if ok else "\nFAILURES PRESENT")
     return 0 if ok else 1

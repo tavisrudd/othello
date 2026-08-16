@@ -48,8 +48,8 @@ undo the completed Version 1 publication record.
 | Source archive SHA-256 | computed from the immutable export archive |
 | Source archive bytes | computed from the immutable export archive |
 | PDF artifact | `prs-beyond-redundancy-four.pdf` |
-| Local built PDF SHA-256 | `7a67108433f4b68896fc6f35b9558bea1a79691dba3c585d203900bb0a406b57` |
-| Local built PDF bytes | `470588` |
+| Local built PDF SHA-256 | `11d30182663c036cc10cd93589e1abba2fb4aeb5d1417f4ac5d20abec4e5573d` |
+| Local built PDF bytes | `471618` |
 | PDF SHA-256 | computed from the immutable export build |
 | PDF bytes | computed from the immutable export build |
 | Toolchain lock | `supplement/toolchain/`; five pinned files with hashes below |
