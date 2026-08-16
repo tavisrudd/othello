@@ -1,0 +1,644 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1.1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathrsfs}
+\usepackage[colorlinks=true,linkcolor=black,urlcolor=black,citecolor=black,
+  hypertexnames=false]{hyperref}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\C}{\mathbf C}
+\newcommand{\Q}{\mathbf Q}
+\newcommand{\Z}{\mathbf Z}
+\newcommand{\PP}{\mathbf P}
+
+\title{An unconditional $m=1$ theorem via a rank-two atomic residue invariant}
+\author{Tavis Rudd}
+\date{August 2026}
+
+\begin{document}
+\maketitle
+
+\begin{quote}
+\emph{Editorial note (not part of the argument).} The text below is transcribed
+verbatim from an external review by Sol dated 15 August 2026; the wording,
+section headings, equation numbering and boxed statements are the reviewer's,
+and nothing has been paraphrased, corrected or added. The argument is
+\textbf{unverified} as of transcription, and a separate verification report is
+being prepared; until that report exists, no claim here should be relied on.
+The argument imports the ordinary, non-enhanced Hodge-atom results of
+Katzarkov--Kontsevich--Pantev--Yu as external inputs, and those results are
+presently available only as an arXiv preprint.
+\end{quote}
+
+\bigskip
+
+Yes. Subject to the ordinary Hodge-atom theorems of
+Katzarkov--Kontsevich--Pantev--Yu as external inputs, the following gives an
+unconditional proof of the $m=1$ theorem. It does not use Hypothesis 4.7H, the
+pro-Laurent gauge, divisor tagging, or transport of framed monodromy through
+weak factorization.
+
+I will distinguish the imported KKP(Y) results from the new argument.
+
+\subsection*{Theorem}
+
+Let $X\subset\PP^4_\C$ be any smooth cubic threefold. Then $X\times\PP^1$ is
+irrational.
+
+The only external atom-theoretic inputs are the ordinary, non-enhanced
+Hodge-atom results of KKP(Y): spectral decomposition of the non-archimedean
+$A$-model $F$-bundle; the map from Hodge atoms to geometric atomic $F$-bundles;
+invariance of the underlying Hodge representation; the projective-bundle
+chemical formula; and the non-rationality criterion. We do not use their
+enhanced Serre-automorphism argument in Example 6.21.
+
+\section{A rank-two invariant of an ordinary geometric Hodge atom}
+
+KKP(Y)'s $F$-bundles have, in their loop coordinate $u$, poles satisfying
+$\nabla_{u^2\partial_u}$, $\nabla_{u\xi}$ regular for every base vector field
+$\xi$. Their $A$-model connection is
+\[
+  \nabla_{u\partial_u}=u\partial_u-u^{-1}\mathrm{Eu}\star+\mathrm{Gr},
+  \qquad
+  \nabla_\xi=\xi+u^{-1}C_\xi,
+\]
+with the obvious form for Novikov directions.
+
+Let $\alpha$ be a geometric Hodge atom and suppose its even part $E$ has rank
+two. On the Hodge-fixed base its Euler operator has a single eigenvalue by the
+definition of an atomic $F$-bundle.
+
+Write $U$ for the leading Euler operator on $E|_{u=0}$, and put
+$\lambda=\tfrac12\operatorname{tr}U$, $N=U-\lambda I$.
+
+Since $U$ has only the eigenvalue $\lambda$ and has rank two,
+\begin{equation}
+  N^2=0.
+  \tag{1}
+\end{equation}
+
+We shall treat the case in which $N$ is not identically zero on the connected
+spectral component representing $\alpha$.
+
+Center the exponential factor. Replace the connection by
+\begin{equation}
+  \nabla^\circ=\nabla-d(\lambda/u)\,I.
+  \tag{2}
+\end{equation}
+
+This is only a device for defining the invariant. It uses the same underlying
+lattice and removes the scalar exponential factor.
+
+In a local frame, horizontal sections of the even factor satisfy
+\begin{equation}
+  u\partial_u y=A(u)\,y,\qquad \delta y=B_\delta(u)\,y,
+  \tag{3}
+\end{equation}
+where, because of the $F$-bundle pole conditions,
+\begin{equation}
+  A(u)=u^{-1}N+A_0+uA_1+u^2A_2+\cdots,
+  \tag{4}
+\end{equation}
+\begin{equation}
+  B_\delta(u)=u^{-1}C_\delta+C_{\delta,0}+uC_{\delta,1}+\cdots.
+  \tag{5}
+\end{equation}
+
+Flatness gives
+\begin{equation}
+  \delta A-u\partial_uB_\delta+[A,B_\delta]=0.
+  \tag{6}
+\end{equation}
+
+The Poincar\'e pairing forces $A_0$ to preserve $\ker N$.
+
+The Poincar\'e pairing is Frobenius for quantum multiplication;
+$\mathrm{Eu}\star$ is self-adjoint and $\mathrm{Gr}$ anti-self-adjoint. Hence it
+is horizontal for the quantum connection. KKP(Y) record exactly this
+calculation; it is algebraic in the quantum product and therefore applies
+equally to their formal/non-archimedean $A$-model.
+
+The spectral factors inherit nondegenerate pairings; more abstractly, KKP(Y)
+note that pairings are compatible with spectral decomposition. On the even
+rank-two factor write its matrix as $P(u)=P_0+uP_1+u^2P_2+\cdots$.
+
+Here $P_0$ is nondegenerate and symmetric. Centering by (2) does not alter
+horizontality, because the scalar terms at $u$ and $-u$ cancel.
+
+Horizontality in the $u$-direction says
+\begin{equation}
+  u\partial_uP(u)+A(u)^TP(u)+P(u)A(-u)=0.
+  \tag{7}
+\end{equation}
+
+The coefficient of $u^{-1}$ is
+\begin{equation}
+  N^TP_0=P_0N.
+  \tag{8}
+\end{equation}
+
+Thus $N$ is self-adjoint for $P_0$.
+
+On the locus where $N\ne0$, (1) implies $L:=\operatorname{im}N=\ker N$ is a
+line. Moreover it is isotropic: if $v=Nx$, $w=Ny$, then
+$(v,w)=(Nx,Ny)=(x,N^2y)=0$.
+
+As $P_0$ is nondegenerate on a two-dimensional space,
+\begin{equation}
+  L^\perp=L.
+  \tag{9}
+\end{equation}
+
+The coefficient of $u^0$ in (7) is
+\begin{equation}
+  A_0^TP_0+P_0A_0+N^TP_1-P_1N=0.
+  \tag{10}
+\end{equation}
+
+Take $0\ne x$ in $L=\ker N$ and sandwich (10) between $x$'s. The terms involving
+$N$ vanish, giving $2(A_0x,x)=0$.
+
+Therefore $A_0x\in L^\perp=L$. Hence
+\begin{equation}
+  \boxed{\,A_0L\subset L.\,}
+  \tag{11}
+\end{equation}
+
+This is the crucial pairing consequence. Notice that no pairing-preserving
+block-splitting gauge has been assumed.
+
+\section{The canonical elementary modification}
+
+Define, on the open locus $N\ne0$,
+\begin{equation}
+  E^\sharp=\{\,s\in E:\ s\bmod u\in L\,\}.
+  \tag{12}
+\end{equation}
+
+This is intrinsic: it is the elementary modification of the original $F$-bundle
+lattice along the canonical line $L=\operatorname{im}N$.
+
+Choose locally a basis $e_1,e_2$ such that
+\begin{equation}
+  L=\langle e_1\rangle,\qquad Ne_1=0,\qquad Ne_2=\nu e_1,\qquad
+  \nu\in\mathcal O^\times.
+  \tag{13}
+\end{equation}
+
+Then $E^\sharp$ has basis $e_1,ue_2$. Thus the change-of-lattice matrix is
+$S=\operatorname{diag}(1,u)$.
+
+The $u$-matrix in this lattice is
+\begin{equation}
+  A^\sharp=S^{-1}AS-S^{-1}u\partial_uS.
+  \tag{14}
+\end{equation}
+
+Since $S^{-1}E_{12}S=uE_{12}$, $S^{-1}E_{21}S=u^{-1}E_{21}$, the leading term
+$u^{-1}N=\nu u^{-1}E_{12}$ becomes the regular term $\nu E_{12}$.
+
+The only possible pole coming from $A_0$ would be its $E_{21}$-entry. But (11)
+says precisely that this entry is zero. Every term $u^mA_m$, $m\ge1$, can lose
+at most one power of $u$, and hence remains regular.
+
+Consequently
+\begin{equation}
+  A^\sharp(u)=R+uR_1+u^2R_2+\cdots.
+  \tag{15}
+\end{equation}
+
+Thus the elementary-modified $u$-connection is regular singular --- in fact
+$u\partial_u$ has a regular matrix --- and its residue matrix
+\begin{equation}
+  R=A^\sharp(0)
+  \tag{16}
+\end{equation}
+is intrinsically defined up to conjugacy.
+
+Indeed, under a regular change of frame $F(u)$ in $\mathrm{GL}_2(\mathcal
+O[[u]])$, $R\to F(0)^{-1}RF(0)$, because $u\partial_uF=0\bmod u$.
+
+So
+\begin{equation}
+  \chi^\sharp_\alpha(T):=\det(TI-R)
+  \tag{17}
+\end{equation}
+is intrinsic wherever $N\ne0$.
+
+\section{Flatness makes $\chi^\sharp_\alpha$ constant}
+
+We now prove the point that replaces the missing ``monodromy is constant on
+connected spectral components.''
+
+From (6), the $u^{-2}$-coefficient gives
+\begin{equation}
+  [N,C_\delta]=0.
+  \tag{18}
+\end{equation}
+
+The $u^{-1}$-coefficient is
+\begin{equation}
+  \delta N+C_\delta+[N,C_{\delta,0}]+[A_0,C_\delta]=0.
+  \tag{19}
+\end{equation}
+
+Taking traces and using $\operatorname{tr}N=0$ gives
+\begin{equation}
+  \operatorname{tr}C_\delta=0.
+  \tag{20}
+\end{equation}
+
+For a nonzero rank-one nilpotent $2\times2$ matrix, its commutant is
+$\mathcal OI\oplus\mathcal ON$. Hence (18) and (20) imply
+\begin{equation}
+  C_\delta=q_\delta N
+  \tag{21}
+\end{equation}
+for some local scalar $q_\delta$.
+
+Transform the base equation to the modified lattice. Because $u^{-1}q_\delta N$
+becomes regular, the only possible pole is produced by the $E_{21}$-entry of
+$C_{\delta,0}$. Therefore
+\begin{equation}
+  B^\sharp_\delta=u^{-1}K_\delta+G_\delta+O(u),\qquad
+  K_\delta=k_\delta E_{21}.
+  \tag{22}
+\end{equation}
+
+Flatness remains
+\begin{equation}
+  \delta A^\sharp-u\partial_uB^\sharp_\delta+[A^\sharp,B^\sharp_\delta]=0.
+  \tag{23}
+\end{equation}
+
+Its $u^{-1}$-coefficient is
+\begin{equation}
+  K_\delta+[R,K_\delta]=0.
+  \tag{24}
+\end{equation}
+
+Because the constant $E_{12}$-entry of $R$ comes from $N$, it is the unit $\nu$.
+Thus
+\begin{equation}
+  R=\begin{pmatrix}a&\nu\\c&d\end{pmatrix}.
+  \tag{25}
+\end{equation}
+
+For $K_\delta=k_\delta E_{21}$,
+$[R,K_\delta]=k_\delta\begin{pmatrix}\nu&0\\d-a&-\nu\end{pmatrix}$.
+
+The diagonal entries of the left side of (24) are therefore $\nu k_\delta$,
+$-\nu k_\delta$. Since $\nu$ is a unit,
+\begin{equation}
+  \boxed{\,K_\delta=0.\,}
+  \tag{26}
+\end{equation}
+
+So after the canonical elementary modification the connection is regular not
+only in $u$ but also in every base direction.
+
+The coefficient of $u^0$ in (23) now gives $\delta R+[R,G_\delta]=0$, or
+\begin{equation}
+  \boxed{\,\delta R=[G_\delta,R].\,}
+  \tag{27}
+\end{equation}
+
+It follows immediately that $\delta\operatorname{tr}R=0$,
+$\delta\operatorname{tr}(R^2)=0$, and therefore $\delta\det R=0$.
+
+Hence
+\begin{equation}
+  \boxed{\,\delta\chi^\sharp_\alpha(T)=0\,}
+  \tag{28}
+\end{equation}
+for every tangent vector $\delta$.
+
+This is finite-dimensional isomonodromy. No formal bulk gauge has appeared.
+
+\section{Crossing points where $N=0$}
+
+This is the point at which the memo's atom route stopped.
+
+Let $\mathfrak U$ be the connected component of the unramified spectral cover
+representing the atom. KKP(Y) define local atoms precisely as connected
+components of this cover and identify atomic $F$-bundle germs at two points when
+their spectral lifts lie in the same connected component.
+
+On the open locus $\mathfrak U^\times=\{N\ne0\}$ the preceding construction is
+canonical.
+
+If $N$ is not generically zero, the line $L=\operatorname{im}N$ is defined over
+the meromorphic function field of $\mathfrak U$. Thus $E^\sharp$, $R$, and the
+two coefficients of $\chi^\sharp_\alpha$ are meromorphic objects on
+$\mathfrak U$.
+
+On $\mathfrak U^\times$, (28) says those meromorphic functions are locally
+constant.
+
+The reduced spectral cover over the locus of maximal number of distinct
+eigenvalues is locally a disjoint union of eigenvalue branches; consequently a
+connected component is smooth and locally irreducible. Hence a connected
+component is integral. This is also exactly the setting in which KKP(Y)
+analytically continue one atomic factor along a connected spectral component.
+
+Choose any nonempty open subset of $\mathfrak U^\times$. There
+$\chi^\sharp_\alpha(T)=T^2+c_1T+c_0$ with $c_0,c_1$ constants. Since the two
+coefficients are meromorphic functions on the integral space $\mathfrak U$,
+equality with constants on a nonempty open forces equality as meromorphic
+functions everywhere.
+
+Therefore distinct components of $\mathfrak U^\times$, even if separated by
+points at which $N=0$, cannot acquire different values.
+
+So:
+\begin{equation}
+  \boxed{\ \chi^\sharp_\alpha\ \text{is an invariant of the entire connected
+  spectral component.}\ }
+  \tag{29}
+\end{equation}
+
+No assertion that $N$ itself remains nonzero pointwise is needed.
+
+If $N$ is generically zero, record that as a separate type. We will only use
+(17) for atoms for which $N$ is generically nonzero.
+
+\subsection*{Invariance under atomic $F$-bundle isomorphism}
+
+Let $F:(E,\nabla)\to(E',\nabla')$ be an isomorphism of geometric atomic
+$F$-bundles. Because $F$ is regular and invertible at $u=0$,
+$N'=F(0)^{-1}NF(0)$, so it carries $L=\operatorname{im}N$ to
+$L'=\operatorname{im}N'$, and hence carries $E^\sharp$ to $E'^\sharp$.
+
+The induced residue matrices are conjugate. Therefore
+\begin{equation}
+  \chi^\sharp_{\alpha'}=\chi^\sharp_\alpha.
+  \tag{30}
+\end{equation}
+
+Together, (29) and (30) show that $\chi^\sharp$ descends through both
+equivalences in KKP(Y)'s Definition 5.21.
+
+Finally, Proposition 5.22 maps every abstract Hodge atom to a well-defined
+geometric atomic $F$-bundle equivalence class. Thus:
+
+\medskip
+\noindent\textbf{Rank-two atomic residue lemma.} For a Hodge atom whose even
+geometric atomic $F$-bundle has rank two and whose centered leading operator is
+generically nonzero nilpotent, the characteristic polynomial
+$\chi^\sharp_\alpha(T)$ of the elementary-modified residue is a well-defined
+invariant of the ordinary Hodge atom.
+\medskip
+
+This uses the Poincar\'e pairing only to prove (11). The pairing is not being
+added to the atom as enhancement data.
+
+That distinction is important.
+
+\section{The cubic atom}
+
+KKP(Y), in Example 6.21, state for every smooth cubic threefold that at the
+hyperplane point the atomic composition consists of two one-dimensional
+nonzero-eigenvalue atoms and one zero-eigenvalue atom $\alpha(X)$, with no
+further local spectral splitting.
+
+Its even rank is two. For completeness, here is the dimension calculation.
+
+For a smooth cubic threefold, $c(TX)=(1+H)^5/(1+3H)=1+2H+4H^2-2H^3$, so
+$\chi_{\mathrm{top}}(X)=\int_Xc_3(TX)=-2\int_XH^3=-6$.
+
+By Lefschetz and Poincar\'e duality, $b_0=b_2=b_4=b_6=1$, $b_1=b_5=0$.
+
+Thus
+\begin{equation}
+  4-b_3=-6,\qquad b_3=10.
+  \tag{31}
+\end{equation}
+
+Hence total even and odd dimensions are respectively $4$, $10$.
+
+The two other cubic atoms are one-dimensional. Every Hodge atom has a nonzero
+even unit vector, so a one-dimensional atom is necessarily even. Consequently
+\begin{equation}
+  \operatorname{rk}\alpha(X)_{\bar0}=2,\qquad
+  \operatorname{rk}\alpha(X)_{\bar1}=10.
+  \tag{32}
+\end{equation}
+
+These parity dimensions themselves are invariants of the atom by KKP(Y)'s
+Proposition 5.23.
+
+\subsection*{Compute $\chi^\sharp_{\alpha(X)}$}
+
+The paper's unconditional cubic calculation block-diagonalizes the original-$z$
+small even connection. On the zero generalized eigenspace it obtains
+\[
+  z^2\partial_zY=(J_0+zD_0+z^2E_0+O(z^3))\,Y,
+\]
+with $J_0=\begin{pmatrix}0&2\\0&0\end{pmatrix}$,
+$D_0=\operatorname{diag}(-19/18,19/18)$, and $(E_0)_{21}=-8/81$.
+
+This part of Proposition 4.12 is unconditional.
+
+Dividing by $z$, $z\partial_zY=(z^{-1}J_0+D_0+zE_0+\cdots)Y$.
+
+Here $\lambda=0$ and $N=J_0=2E_{12}$, $L=\langle e_1\rangle$.
+
+The canonical elementary modification therefore uses
+$S=\operatorname{diag}(1,z)$.
+
+Its residue is
+\begin{equation}
+  R_X=2E_{12}+D_0-\tfrac{8}{81}E_{21}-\operatorname{diag}(0,1)
+  =\begin{pmatrix}-19/18&2\\-8/81&1/18\end{pmatrix}.
+  \tag{33}
+\end{equation}
+
+Thus $\operatorname{tr}R_X=-1$, $\det R_X=5/36$, and hence
+\begin{equation}
+  \boxed{\ \chi^\sharp_{\alpha(X)}(T)=T^2+T+\tfrac{5}{36}
+  =\bigl(T+\tfrac16\bigr)\bigl(T+\tfrac56\bigr).\ }
+  \tag{34}
+\end{equation}
+
+This is the same $-1/6$, $-5/6$ pair occurring in the paper's framed-monodromy
+calculation, but here it is being used as the residue spectrum of a canonical
+modification of the intrinsic atomic lattice, not as monodromy transported
+through a bulk gauge.
+
+\section{The only possible curve competitor is genus five}
+
+Suppose $\alpha(X)$ were represented by a smooth projective curve $C$.
+
+For $C=\PP^1$, $\PP^1=\PP_{\mathrm{pt}}(\mathcal O^{\oplus2})$, so the
+projective-bundle chemical formula says its atoms are two point atoms. Thus
+$\alpha(X)$ cannot occur.
+
+Let $g(C)\ge1$. Then $K_C$ is nef, so KKP(Y)'s Lemma 5.24 says $C$ has a single
+Hodge atom. Its underlying representation is therefore all of $H^\bullet(C)$.
+
+Its parity dimensions are $(2,2g)$. Comparison with (32) forces
+\begin{equation}
+  g=5.
+  \tag{35}
+\end{equation}
+
+This recovers directly the observation in KKP(Y) that the cubic atom ``looks
+like'' the genus-five curve atom at the ordinary Hodge-representation level.
+
+We now distinguish them using $\chi^\sharp$.
+
+\subsection*{Compute the curve residue invariant}
+
+Let $p\in H^2(C)$ satisfy $\int_Cp=1$. For $g\ge1$, there are no nonconstant
+genus-zero maps to $C$, so its genus-zero quantum product is the classical cup
+product.
+
+Put $a=2-2g$. Then $c_1(TC)=ap$.
+
+In the ordered even basis $1,p$, $c_1(TC)\cup(-)=aE_{21}$.
+
+For a curve, $\mathrm{Gr}=\operatorname{diag}(-1/2,1/2)$.
+
+Using the $A$-model connection formula of KKP(Y), horizontal sections satisfy
+\begin{equation}
+  u\partial_uY=\bigl[\,u^{-1}aE_{21}+\operatorname{diag}(1/2,-1/2)\,\bigr]Y.
+  \tag{36}
+\end{equation}
+
+This agrees with Cai's direct curve computation.
+
+For $g>1$, $a\ne0$, and $N=aE_{21}$, $L=\langle e_2\rangle$.
+
+The elementary modification has basis $ue_1,e_2$, so now
+$S=\operatorname{diag}(u,1)$.
+
+The modified residue is
+\begin{equation}
+  R_C=aE_{21}+\operatorname{diag}(1/2,-1/2)-\operatorname{diag}(1,0)
+  =aE_{21}-\tfrac12I.
+  \tag{37}
+\end{equation}
+
+Therefore
+\begin{equation}
+  \boxed{\ \chi^\sharp_C(T)=\bigl(T+\tfrac12\bigr)^2.\ }
+  \tag{38}
+\end{equation}
+
+For a genus-five curve in particular,
+\begin{equation}
+  \bigl(T+\tfrac12\bigr)^2\ne T^2+T+\tfrac{5}{36}.
+  \tag{39}
+\end{equation}
+
+Hence
+\begin{equation}
+  \boxed{\ \alpha(X)\ \text{cannot be represented by a curve.}\ }
+  \tag{40}
+\end{equation}
+
+\section{It cannot be represented by a surface}
+
+Suppose $\alpha(X)$ occurs in the atomic composition of a smooth projective
+surface $S$.
+
+Blowing down $(-1)$-curves to a minimal model only removes point atoms: for a
+point blowup the ordinary atom formula is
+\begin{equation}
+  \mathrm{CF}(\mathrm{Bl}_pS)=\mathrm{CF}(S)+\mathrm{CF}(p).
+  \tag{41}
+\end{equation}
+
+Since $\alpha(X)$ has total rank $12$, it is not a point atom. Therefore it must
+already occur on a minimal model.
+
+If the minimal surface has nef canonical bundle, Lemma 5.24 says its atomic
+composition consists of a single atom, whose underlying representation is its
+entire cohomology. Its even part has dimension at least three: $H^0(S)$,
+$\langle H\rangle\subset H^2(S)$, $H^4(S)$ give three independent even classes
+for any ample divisor $H$.
+
+But $\alpha(X)$ has even rank two by (32). Contradiction.
+
+If the minimal surface does not have nef canonical class, the surface
+classification gives either $\PP^2$ or a geometrically ruled surface
+$\PP_C(V)$. KKP(Y) use precisely this low-dimensional surface classification in
+their atom analysis.
+
+For $\PP^2$, $\mathrm{CF}(\PP^2)=3\,\mathrm{CF}(\mathrm{pt})$.
+
+For a ruled surface, $\mathrm{CF}(\PP_C(V))=2\,\mathrm{CF}(C)$.
+
+These are immediate applications of the projective-bundle formula. Thus their
+atoms are point or curve atoms, already excluded.
+
+Consequently
+\begin{equation}
+  \boxed{\ \alpha(X)\notin\mathrm{HAtoms}_{\dim\le2}.\ }
+  \tag{42}
+\end{equation}
+
+\section{One stabilization}
+
+Now $X\times\PP^1=\PP_X(\mathcal O_X^{\oplus2})$.
+
+KKP(Y)'s projective-bundle formula gives
+\begin{equation}
+  \mathrm{CF}(X\times\PP^1)=2\,\mathrm{CF}(X).
+  \tag{43}
+\end{equation}
+
+Hence the atom $\alpha(X)$ occurs, with positive multiplicity, in the atomic
+composition of $X\times\PP^1$.
+
+The latter is a smooth projective fourfold. KKP(Y)'s Proposition 5.30 says that
+if a smooth $d$-fold contains a Hodge atom not realizable by a smooth projective
+variety of dimension at most $d-2$, the variety is not rational.
+
+Here $d=4$, and (42) says precisely that
+$\alpha(X)\notin\mathrm{HAtoms}_{\dim\le2}$.
+
+Therefore
+\[
+  \boxed{\ X\times\PP^1\ \text{is irrational.}\ }
+\]
+
+This proves the theorem.
+
+\section*{What this means for \texttt{test3.pdf}}
+\addcontentsline{toc}{section}{What this means for \texttt{test3.pdf}}
+
+This gives a replacement for the current conditional proof of Theorem 1.1:
+\[
+  \boxed{\ \text{Theorem 1.1 can be made unconditional without proving 4.7H.}\ }
+\]
+
+The new ingredient is the rank-two atomic residue lemma above. The cubic
+calculation already present in Proposition 4.12 supplies its value
+$T^2+T+5/36$.
+
+The competing genus-five curve has value $(T+1/2)^2$.
+
+The ordinary KKP(Y) atom ledger then handles the stabilization and rationality
+obstruction.
+
+Hypothesis 4.7H would still matter if you want the much stronger
+summand-by-summand operation formulas of Proposition 4.7, the general $\nu_6$
+birational-invariance theorem, or the current genus-eight argument. But it is no
+longer needed for the cubic $m=1$ headline theorem.
+
+There is one source-level caveat rather than a mathematical hypothesis: KKP(Y)
+v2 is presently an arXiv preprint. This proof imports its ordinary atom
+decomposition/projective-bundle/non-rationality machinery as theorem. It does
+not import the enhanced Serre/integral-structure machinery used in their own
+Example 6.21.
+
+\end{document}
