@@ -115,8 +115,12 @@ proposition, theorem, or corollary labels in the TeX include graph.
 | `thm:e7` | companion endpoint terminal, outside the aggregate | Manuscript constructive proof and exact counting formula. |
 | `prop:m9-invariant-block` | no direct declaration | Manuscript proof through the rank-one constructions and all-field rank-two Artin--Schreier argument; exact certificates close the invariant block at \(q=16,32,64\). |
 | `prop:final-pair` | no direct declaration | Manuscript expansion and Cramer's-rule proof. |
+| `lem:m9-rank` | no direct declaration | Manuscript elimination on the six column relations of the coefficient matrix. |
+| `lem:m9-nonsquare` | no direct declaration | Manuscript divisor computation at rank four and derivative test with explicit elimination at rank three. |
+| `lem:m9-selector` | no direct declaration | Manuscript coefficient comparison, pseudo-remainder, and per-root degree bound with the grid argument. |
 | `thm:m9-shallow` | public Lucas M9 quotient certificates plus manuscript all-field proof | The finite certificates check the full carrier at \(q=16,32\) and only the invariant block at \(q=64\); the genus-one argument proves the complement for \(q\ge64\). Lean makes no carrier-exhaustion claim. |
 | `prop:r10-pointed-budgets` | no direct declaration | Manuscript degree calculation for all five retained-marker stages; the abstract finite-depth synthesis remains conditional in Lean. |
+| `lem:r10-hessian` | no direct declaration | Manuscript ordered-Hessian construction: degeneracy classification, selector nonvanishing and degree bound, integrality, deletion table, and the marker-avoiding lift. |
 | `prop:r10-escape` | 'PRSStableComponents' conditional interface | The fixed-depth package discharge and concrete R10 budgets are manuscript mathematics with Certificate R10 arithmetic replay. |
 | `prop:r10-char7-lift` | 'PRSPolarInduction.mem_modularContractionKernel_iff' | Contraction algebra is kernel checked; the R9 finite-root witness and marker-avoidance argument are printed mathematics. |
 | `cor:r10` | 'PRSStableComponents' and 'PRSUniformCoveringRadius' conditional interfaces | Derived manuscript corollary. The first-carrier arithmetic is supplied by 'thm:m9-shallow', not by Lean. |

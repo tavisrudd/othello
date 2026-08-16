@@ -4,10 +4,12 @@
 
 **Date:** 2026-08-16
 
-**Status:** in progress.  The four local edits E3--E6 and the first S1 repair E2
-are applied, verified, and committed.  The remaining S1 repair E1
-(characteristic-two R10 transverse proof for the R10 fixed-depth escape
-proposition) is open.
+**Status:** all six edits E1--E6 are applied, verified, and committed, and the
+specification's post-edit checklist has been run.  Of its five closing audits,
+the characteristic audit and the regression/diff audit were run in full here;
+the theorem-dependency, hostile-R10, and primary-source audits are the ones a
+second reader should still run, since running them on my own edits is not an
+independent check.
 
 **Input specification:** `notes/reed-solomon-tasks/c915-v2-referee-correction-input.md`
 (verbatim copy of the external correction package, SHA-256 prefix `a0f64ed87b90`).
@@ -190,24 +192,187 @@ Local variable collision avoided: the quadratic's coefficients are named
 `q_2, q_1, q_0` and the Borel parameters `lambda, mu`, since `a, b, c, d` already
 name the rank-two syndrome and the normalized slice in this section.
 
+### E1 (S1) --- characteristic-two ordered-Hessian slice at redundancy ten
+
+`sections/09-lucas-carriers.tex`, immediately before the proposition *R10
+fixed-depth escape* (`prop:r10-escape`, rendered as Proposition D.12).  The
+compressed characteristic-two paragraph asserted eight things without proof; it
+is replaced by a dependency statement, and a new lemma
+`lem:r10-hessian` proves them.
+
+The mathematics comes from C620's predecessor work on the characteristic-two
+Hessian layer: `notes/2026-07-23-c525-ordered-hessian-arf-pullback.md` and the
+manuscript section `sections/08-ordered-hessian.tex`, which is present in the
+repository but was dropped from the build during the Version 1 scope cut.  That
+is exactly why the referee found the paragraph unsupported: the proposition
+depended on machinery no longer printed anywhere in the manuscript.  The lemma
+restores it in the specialization the proposition actually uses, at syndrome
+degree nine.
+
+What the lemma prints, in the specification's order:
+
+1. **The object.**  For a squarefree `R` of degree five, the contracted pencil
+   `l_{f,R}` of divided cubics; the observation that the Hankel kernel of a
+   degree-three divided syndrome `(A,B,C,D)` is spanned by its signed maximal
+   minors `(BD+C^2, AD+BC, AC+B^2)`, which are the divided Hessian coefficients;
+   the three coefficient quadratics `P_0, P_1, P_2` in the pencil parameter; and
+   the ordered-Hessian incidence `P_0 X^2 + P_1 XY + P_2 Y^2 = 0` on
+   `P^1 x P^1`, of bidegree `(2,2)` and arithmetic genus one, with
+   Artin--Schreier class `P_0 P_2 / P_1^2` off `P_1 = 0`.  Writing the incidence
+   as the kernel quadratic rather than its coordinate reversal keeps it
+   consistent with the paper's own Hankel convention; the source note used the
+   reversed form, which has the same Artin--Schreier class.
+2. **The two ruling failures.**  Both are written by equations in the
+   Grassmannian of lines of `P(Gamma^3 E)`, in Plucker coordinates: the
+   common-quadratic Veronese surface by the `2x2` minors of the printed
+   symmetric matrix, whose member attached to a quadratic `Q` is the line of
+   cubics `c` with `H_c Q = 0`; the tangent ruling and the complementary Fano
+   ruling of the quadric `AD_3 + BC = 0` by their own linear and quadratic
+   equations.  The parametrization `[a^2 : ab : ac : b^2+ac : bc : c^2]` was
+   checked to satisfy both the printed minors and the Plucker relation, and the
+   complementary ruling was checked against the Plucker relation as well.
+3. **Selector nonvanishing.**  Proved, not asserted: if every pulled-back
+   Veronese minor vanished identically in `R`, the generic root-line lies in the
+   common-quadratic surface, and the contained-flag argument returns the
+   persistent rank-two carrier or, in the modular case, the Lucas nucleus flags;
+   if every pulled-back equation of the complementary ruling vanished, the two
+   consecutive identities `h_{-1}^2 = h_{-2} h_0` and `h_1^2 = h_0 h_2` hold
+   identically by density of split forms, unique factorization makes the five
+   contraction forms proportional, and proportional rows put `f` in the
+   rank-at-most-two catalecticant scheme.  Both land in the excluded union.
+4. **Degree eight and the number 45.**  Plucker coordinates are quadratic in the
+   coefficients of `R`, the ruling equations are quadratic in those, and each
+   coefficient of `R` is multi-affine in the five roots, so each selected
+   equation has degree at most four per root and the product at most eight.
+   Schwartz--Zippel with the Vandermonde needs `q > 8*5 + 10 = 50`; five
+   pairwise disjoint nine-element blocks need `q >= 45`.  The lemma says
+   explicitly that `45 = 9*5` counts available field elements used as candidate
+   root values, so it cannot be read as a deletion degree or a point count.
+5. **Integrality and genus.**  The degeneracy classification is printed with its
+   normal-form proof: vertical factors are exactly the intersections with the
+   twisted cubic, horizontal factors force a chord or tangent line, and after
+   removing them a separable factorization must be `(1,1)+(1,1)`, whose
+   projectivity comparison forces `c^2+c+1=0` and lands in the common-quadratic
+   surface, while the unipotent case is contradictory.  Inseparability is
+   exactly `P_1 = 0`, that is a line on the quadric, so off the selector the
+   curve is geometrically integral, its normalization has genus at most one, and
+   the Artin--Schreier class is nonconstant.
+6. **The deletion table.**  Five rows with their equations: `R(lambda) = 0`
+   (degree 5), `P_0(lambda) = 0` (2), `P_1(lambda) = 0` (2),
+   `Res_X(h_lambda, R) = 0` (10), `h_lambda(lambda) = 0` (4), total 23.  The
+   degree-10 row is the resultant of a quadratic with a quintic, degree two in
+   the coefficients of `R` and five in those of `h_lambda`, whose coefficients
+   are quadratic in the parameter.  Each row is shown not to vanish identically,
+   in every case because an integral `(2,2)` curve contains no horizontal line
+   and no diagonal.  With at most two points over each deleted parameter and two
+   over infinity, at most `2*23 + 2 = 48` rational points are lost.
+7. **The lift.**  A surviving point gives a rational `lambda` off the markers and
+   a rational root of `h_lambda`, hence both roots rational and distinct; since
+   `h_lambda` spans the Hankel kernel of the contracted syndrome, six
+   applications of the lift identity give `R lambda h_lambda` in `W_f`, of
+   degree `5 + 1 + 2 = 8`, split and squarefree, with all eight roots distinct
+   from each other and from the five markers.
+
+The escape proposition now states the dependency and the arithmetic: the
+selector needs 45 field elements, the slice deletes at most 48 rational points,
+`64 + 1 - 2 sqrt 64 = 49 > 48`, and 64 is the first binary field with at least
+45 elements, so `q = 64` is the first admissible binary field for both
+conditions at once.  PASS on every item.
+
+## Post-edit checklist
+
+Section A (build and reference integrity): both builds compile warning-free with
+no undefined reference or citation; all theorem references resolve through
+labels, so inserting four lemmas renumbers rendered statements without breaking
+any reference; the seven stale Blokhuis--Pellikaan--Szonyi locators have zero
+matches in the TeX and in the rendered PDF text.
+
+Sections D and E (Lucas supports and threshold arithmetic) were recomputed from
+the definition rather than read off the prose, by
+`notes/reed-solomon-tasks/c915-checklist-arithmetic.py`.  Replay:
+
+```text
+python3 notes/reed-solomon-tasks/c915-checklist-arithmetic.py
+```
+
+All eight supports agree with the manuscript --- R6 binary `P<e2,e3>`, R7 binary
+central point `P<e3>`, R8 characteristic three `P<e2,e5>`, R8 characteristic five
+`P<e3,e4>`, R9 characteristic five the point `P<e4>`, R9 characteristic seven
+`P<e2,...,e6>`, R10 characteristic two `P<e2,...,e7>`, R10 characteristic seven
+`P<e3,e4,e5,e6>` --- and every threshold holds at the quoted field, with the
+first prime power reported next to the first integer.  One item needed care: at
+redundancy five the manuscript quotes the integer threshold 20 while the first
+prime power satisfying the inequality is 23; there is no prime power between
+them, so the two describe the same set of fields, and the checklist item itself
+asks for the integer threshold.  The script prints both to keep that
+unambiguous.
+
+Sections B, C and H (coding logic, redundancy-five terminal model, source
+alignment) were checked against the source and are unchanged by this task: the
+split-witness count `#Y_f = 6 N_f + 3 d_2 + d_3`, the branch budgets
+`d_2 + 2 d_3 <= 4` and binary `d_2 + d_3 <= 2`, the thresholds `q >= 20` and
+`q >= 16`, the forced `q = 17, 19` statement, the Kaipa--Pradhan denominator-6
+diagnosis, the `q = 7, 8, 9` split-free-only status, and the remark separating a
+deep hole (span of no `r-2` columns, radius `r-1`) from a one-column extension
+(span of no `r-1` columns) all stand as before.  Sections F and G are the
+checklists for E2 and E1 and are satisfied item by item as recorded above.
+
 ## Validation
 
-Both manuscript builds pass warning-free after each edit.  After E3--E6 the
-canonical build was 64 pages and the TIT single-column build 45 of 50; after E2
-they are 67 and 47 of 50.  No undefined reference or citation.  The
-specification's full post-edit checklist and its five closing audits are deferred
-until E1 is done, since it touches the same theorem chain.
+Both manuscript builds pass warning-free after each edit, with no undefined
+reference or citation.  Page counts grew as the printed mathematics went in:
+canonical 64 then 67 then 70; TIT single-column 45, 47, then 49 of the
+Makefile's hard 50.
 
-Page budget to watch: the TIT submission build has a hard 50-page gate in the
-Makefile and now stands at 47.  E1 adds printed mathematics to the same appendix,
-so that gate may need either a compression pass or a decision to move material.
+The supplement verifier `python3 supplement/verify.py` passes.  Two of its
+fail-closed guards had to be brought in line with the four new statements, which
+is the intended workflow for adding theorem-like environments rather than a
+loosening of any gate:
 
-## Open
+- `supplement/LEAN-STATEMENTS.md` gains one row per new label, each recording
+  "no direct declaration" and naming the manuscript argument that carries it.
+  The verifier requires set equality between manuscript labels and mapped
+  labels, and that equality holds again.
+- `supplement/verify.py` carries a hard-coded adopted-label count, raised from
+  80 to 84.  The count is a drift alarm; the real gate is the set equality above.
+- `supplement/EVIDENCE-MANIFEST.json` and `supplement/EVIDENCE-ROWS.md` were
+  regenerated with `package_evidence_bundle.py --write`, because the manifest
+  hashes the two supplement files just edited, and the release-manifest local
+  PDF rows were refreshed with `verify.py --write-local-manifest`.
 
-- **E1 (S1)** --- supply the self-contained characteristic-two transverse proof for
-  the R10 fixed-depth escape proposition rendered as D.12, covering all eight
-  sub-facts the current paragraph asserts.
-- Full post-edit checklist and the five closing audits.
+## Page budget
+
+The TIT submission build now stands at 49 of its 50-page gate, one page of
+headroom.  Any further printed mathematics in this appendix needs either a
+compression pass or a decision about the gate.  Flagging rather than acting.
+
+## Closing audits
+
+Two of the specification's five audits were run here in full.
+
+The characteristic audit is the script above: every Lucas support recomputed
+from the Pascal row rather than the prose, including the redundancy-nine
+characteristic-five object that E3 corrected, which is the point `P<e4>`.
+
+The regression audit is a diff of the whole task against the pre-task commit
+`a0868c26e`.  Outside the Lucas-carriers section the only changes are the six
+citation locators, the terminal-carrier sign sentence, the Aubry--Perret
+sentence, the redundancy-nine modular-lift statement with its added row
+computation, and the literature-audit row.  Inside it, the only removed text is
+the two passages E2 and E1 replace.  No other equation, field range, orbit size,
+support basis, hypothesis, or citation-backed conclusion changed; in particular
+the Kaipa--Pradhan denominator diagnosis, the algebraic-closure convention in
+the geometric-coefficient-field proposition, and the `q = 7, 8, 9` radius status
+are untouched.
+
+The theorem-dependency audit, the hostile redundancy-ten re-derivation, and the
+primary-source citation audit remain for a second reader.  Running them against
+my own edits would not be an independent check, and the third one in particular
+means reopening Kaipa 2017, the earlier projective Reed--Solomon classification,
+Kaipa--Pradhan, Aubry--Perret, Gmainer--Havlicek and Wang--Wu--Hu at theorem
+level.  This task verified the Blokhuis--Pellikaan--Szonyi locators against the
+published article directly and the Aubry--Perret usage against its stated
+hypotheses; the rest were last checked in the C885 full review.
 
 ## Adjacent observation, not part of the package
 

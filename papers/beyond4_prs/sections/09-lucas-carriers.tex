@@ -904,6 +904,226 @@ cancellation, whose contained case is persistent.  Hence every factor in
 the bound \eqref{eq:binary-deletion-budget} is proper on the stated complement.
 \end{proof}
 
+The binary top step of the next proposition needs its own slice, because in
+characteristic two the divided cubic discriminant is the square
+$(AD_3+BC)^2$ and cannot separate a split cubic from a nonsplit one.  The
+replacement keeps an ordered residual root.
+
+\begin{lemma}[Characteristic-two ordered-Hessian slice and selector]
+\label{lem:r10-hessian}
+Let $k$ be algebraically closed of characteristic two, let
+$f\in\PP(\Gamma^9E)$ with $f\notin\cP_{10}\cup\cM^{\max}_{10,2}$, and for
+$R\in\Sym^5E^\vee$ squarefree let
+\[
+ \ell_{f,R}=\PP\{\,\iota_{R\lambda}f:\lambda\in E^\vee\,\}
+ \subset\PP(\Gamma^3E)
+ \autoeqtag{eq:hessian-root-line}
+\]
+be the pencil obtained by iterating the contraction of \eqref{eq:lift} along
+the six linear factors of $R\lambda$, spanned by the divided cubics
+$U=(A,B,C,D_3)$ and $V=(a,b,c,d)$, and write $c_{u,v}=uU+vV$.  Write $C_3$ for
+the twisted cubic of divided cubes in $\PP(\Gamma^3E)$, which is the base
+locus of the divided Hessian.  Then the following hold.
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item The Hankel kernel of $c_{u,v}$ is spanned by the divided Hessian
+      $P_0X^2+P_1XY+P_2Y^2$, where
+      \[
+      \begin{aligned}
+       P_0&=(BD_3+C^2)u^2+(Bd+bD_3)uv+(bd+c^2)v^2,\\
+       P_1&=(AD_3+BC)u^2+(Ad+aD_3+Bc+bC)uv+(ad+bc)v^2,\\
+       P_2&=(AC+B^2)u^2+(Ac+aC)uv+(ac+b^2)v^2 .
+      \end{aligned}
+      \autoeqtag{eq:hessian-coefficients}
+      \]
+      The ordered-Hessian incidence
+      \[
+       \cC_{f,R}:\quad P_0X^2+P_1XY+P_2Y^2=0
+       \subset\PP^1_{u:v}\times\PP^1_{X:Y}
+       \autoeqtag{eq:hessian-incidence}
+      \]
+      has bidegree $(2,2)$ and arithmetic genus one, and off $P_1=0$ it is
+      the Artin--Schreier cover of class $P_0P_2/P_1^2$.
+\item After the vertical factors $\ell_{f,R}\cap C_3$ are removed,
+      \eqref{eq:hessian-incidence} is geometrically integral unless
+      $\ell_{f,R}$ lies in the Veronese surface $\Sigma$ of common-quadratic
+      lines, whose member attached to $[Q]\in\PP(\Sym^2E^\vee)$ is the line
+      $\{[c]:H_cQ=0\}$, or in one of the two Fano rulings of the quadric
+      $\mathcal Q_0=\{AD_3+BC=0\}$.  In Pl\"ucker coordinates
+      $(z_0,\ldots,z_5)=(p_{01},p_{02},p_{03},p_{12},p_{13},p_{23})$ these
+      are cut out by the $2\times2$ minors of
+      \[
+       \begin{pmatrix}z_0&z_1&z_2\\ z_1&z_3+z_2&z_4\\ z_2&z_4&z_5\end{pmatrix},
+       \autoeqtag{eq:hessian-veronese-ideal}
+      \]
+      by $z_1=z_4=0$, $z_2=z_3$, $z_0z_5=z_2^2$ for the tangent ruling, and by
+      \[
+       \cN:\quad z_0=z_5=0,\quad z_2=z_3,\quad z_1z_4=z_2^2
+       \autoeqtag{eq:hessian-complementary-ruling}
+      \]
+      for the complementary ruling.
+\item There are a nonzero pullback $\mathcal A$ of a minor of
+      \eqref{eq:hessian-veronese-ideal} and a nonzero pullback $\mathcal B$ of
+      an equation of \eqref{eq:hessian-complementary-ruling}, each of degree at
+      most four in every root of $R$, whose product vanishes on the whole
+      reduced degeneracy locus and has degree at most eight in every root.
+      Consequently a squarefree $R$ with $\ell_{f,R}$ outside that locus exists
+      over $\F_q$ as soon as
+      \[
+       q\geq\min\{(9-4)(9+11)/2+1,\ 9(9-4)\}=\min\{51,45\}=45,
+       \autoeqtag{eq:hessian-selector-bound}
+      \]
+      where $45=9\cdot5$ counts field elements used as candidate root values,
+      split into five pairwise disjoint nine-element blocks.
+\item For such an $R$ the normalization of \eqref{eq:hessian-incidence} is
+      geometrically integral of genus at most one, and the parameters that fail
+      to produce a squarefree witness form a divisor of degree
+      $5+2+2+10+4=23$ on the base line.
+\item Every rational point of the normalized slice outside that divisor gives a
+      completely split squarefree octic in $W_f$ whose roots avoid the five
+      roots of $R$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(i)  For a divided cubic $c=(A,B,C,D_3)$ the Hankel matrix is
+$H_c=\left(\begin{smallmatrix}A&B&C\\B&C&D_3\end{smallmatrix}\right)$, so its
+kernel in $\Sym^2E^\vee$ is spanned by the signed maximal minors
+$(BD_3+C^2,\;AD_3+BC,\;AC+B^2)$, which are the coefficients of the divided
+Hessian of $c$.  Substituting $c=c_{u,v}$ makes each minor a binary quadratic
+in $(u,v)$: the $u^2$ and $v^2$ terms are the minors of $U$ and of $V$, and the
+$uv$ term is their polarization, which is
+\eqref{eq:hessian-coefficients}.  A point of
+\eqref{eq:hessian-incidence} is a member of the pencil together with one
+ordered root of its residual quadratic, the equation is of degree two in each
+factor, and a $(2,2)$ curve on $\PP^1\times\PP^1$ has arithmetic genus one.
+Dividing $P_0X^2+P_1XY+P_2Y^2=0$ by $P_1^2/P_0$ and setting $y=P_0X/(P_1Y)$
+turns it into $y^2+y=P_0P_2/P_1^2$.
+
+(ii)  A vertical factor divides $P_0,P_1,P_2$ simultaneously, that is, the
+divided Hessian vanishes at the corresponding member of the pencil; its base
+locus is the twisted cubic $C_3$, so the vertical factors are exactly
+$\ell_{f,R}\cap C_3$.  A horizontal factor fixes one Hessian root along the
+whole pencil; the cubics with a given Hessian root form the rank-three quadric
+cone swept by the secants through the corresponding point of $C_3$, and every
+line on that cone passes through its vertex, so a horizontal factor forces a
+chord or tangent line, already in $\Sigma$ or on its collision boundary.
+
+After those factors are removed, bidegree additivity makes any separable
+factorization $(1,1)+(1,1)$, so both factors are graphs of projectivities.
+Normalize the first to the identity by independent coordinate changes on the
+parameter and root lines.  Over an algebraically closed field of characteristic
+two the second projectivity is the identity, semisimple with two fixed points
+and conjugate to $g(t)=ct$ with $c\neq1$, or unipotent and conjugate to
+$g(t)=t+1$.  In the semisimple case normalize the two cubics at the fixed
+parameters to $U=(a,1,0,0)$ and $V=(0,0,\gamma,d)$; comparison with
+\[
+ (uX+vY)(uX+cvY)=u^2X^2+(1+c)uvXY+cv^2Y^2
+\]
+forces $d=a=0$, $\gamma=1+c$ and $\gamma^2=c$, hence $c^2+c+1=0$ and the
+normalized line is $XY\cdot\PP(E^\vee)$, which is a member of $\Sigma$; the
+identity is the case $c=1$ of the same comparison and fails it.  In the
+unipotent case comparison with $(uX+vY)((u+v)X+vY)$ forces
+$d=\gamma=0$ together with $a\gamma=1$, which is impossible.  Since the
+coordinate changes used are basis changes on $\ell_{f,R}$ and on $E$, and both
+\eqref{eq:hessian-incidence} and $\Sigma$ are equivariant for them, undoing the
+normalization introduces no further component.  Finally $P_1$ vanishes
+identically exactly when $\ell_{f,R}$ lies on the quadric $\mathcal Q_0$, whose Fano
+scheme is the two stated ruling conics; that is the inseparable case.  The
+Pl\"ucker equations are those of the parametrization
+$[z_0:\cdots:z_5]=[a^2:ab:ac:b^2+ac:bc:c^2]$ of $\Sigma$ attached to
+$Q=aX^2+bXY+cY^2$, and of the two rulings of $\mathcal Q_0$.
+
+(iii)  The pencil \eqref{eq:hessian-root-line} is spanned by
+$\iota_{Rx}f$ and $\iota_{Ry}f$, each linear in the coefficients of $R$,
+so its Pl\"ucker coordinates are quadratic in those coefficients, and the
+quadratic equations of \eqref{eq:hessian-veronese-ideal} and
+\eqref{eq:hessian-complementary-ruling} pull back to degree at most four in
+them.  Suppose every pullback of a minor of
+\eqref{eq:hessian-veronese-ideal} vanished identically in $R$.  Then the
+generic root-line lies in $\Sigma$, so every iterated contraction pencil has a
+common quadratic; Proposition~\ref{prop:contained-rank-two} applied to the
+overlapping contraction flags returns the persistent rank-two carrier, and
+when a consecutive contraction coefficient vanishes in the ground
+characteristic the same overlap equations and Lucas' theorem return the
+contraction-kernel nucleus flags, so $f\in\cP_{10}\cup\cM^{\max}_{10,2}$.
+Suppose instead every pullback of an equation of
+\eqref{eq:hessian-complementary-ruling} vanished identically.  Then the generic
+root-line lies in $\cN$, and its two linear equations give the consecutive
+identities
+\[
+ h_{-1}(R)^2=h_{-2}(R)h_0(R),\qquad h_1(R)^2=h_0(R)h_2(R)
+ \autoeqtag{eq:hessian-consecutive-identities}
+\]
+for the contraction forms $h_i(R)=\sum_jf_{i+j}R_j$, which are linear in the
+coefficients of $R$.  Split forms are dense, so
+\eqref{eq:hessian-consecutive-identities} holds identically; in the polynomial
+ring, which is a unique factorization domain, $L_1^2=L_0L_2$ with linear $L_i$
+forces a vanishing form or proportionality of the three, and the two
+overlapping triples propagate proportionality across $h_{-2},\ldots,h_2$.
+Proportional contraction forms are proportional rows of the consecutive
+catalecticant of $f$, so its rank is at most one and $f\in\cP_{10}$.  Both
+alternatives are excluded, so nonzero $\mathcal A$ and $\mathcal B$ exist; their
+product vanishes on the reduced degeneracy locus of (ii) and has degree at most
+eight in each root.
+
+Write $R=\prod_{i=1}^5(t+r_i)$, so each coefficient of $R$ is at most linear in
+each $r_i$ and $\mathcal{AB}$ has degree at most eight in each $r_i$.  The
+Vandermonde $\prod_{i<j}(r_i+r_j)$ has total degree $\binom52=10$, so
+Schwartz--Zippel gives a squarefree base once $q>8\cdot5+10=50$.  Alternatively
+partition $9\cdot5=45$ field elements into five pairwise disjoint nine-element
+blocks $S_1,\ldots,S_5$: a nonzero polynomial of degree at most eight in each
+variable cannot vanish on $S_1\times\cdots\times S_5$, since successive
+univariate interpolation would make it zero, and disjointness makes every tuple
+have distinct coordinates.  This gives
+\eqref{eq:hessian-selector-bound}; the quantity being counted is available
+field elements serving as candidate roots, not deleted points and not
+projective points.
+
+(iv)  For such an $R$ the reduced curve \eqref{eq:hessian-incidence} is
+geometrically integral by (ii), so its normalization has genus at most one,
+its Artin--Schreier class $P_0P_2/P_1^2$ is nonconstant, and the cover is
+neither reducible nor a constant-field extension.  Write $\lambda=(u:v)$ for
+the base parameter and $h_\lambda=P_0X^2+P_1XY+P_2Y^2$.  The parameters to
+delete are
+\[
+\begin{array}{lll}
+\text{failure}&\text{equation}&\deg_\lambda\\\hline
+\text{moving root meets a marker}&R(\lambda)=0&5\\
+\text{residual quadratic degenerates}&P_0(\lambda)=0&2\\
+\text{residual quadratic is a square}&P_1(\lambda)=0&2\\
+\text{a residual root meets a marker}&\Res_X(h_\lambda,R)=0&10\\
+\text{a residual root meets the moving root}&h_\lambda(\lambda)=0&4
+\end{array}
+\]
+of total degree $23$.  The degrees are read off from
+\eqref{eq:hessian-coefficients}: $P_0$ and $P_1$ are binary quadratics in
+$\lambda$; the resultant of the quadratic $h_\lambda$ with the quintic $R$ is
+of degree two in the coefficients of $R$ and of degree five in those of
+$h_\lambda$, hence of degree $10$ in $\lambda$; and evaluating $h_\lambda$ at
+$\lambda$ itself adds two to the degree two of its coefficients.  None of the
+five vanishes identically, and integrality is what rules each out: $R$ is
+squarefree of degree five and nonzero; $P_0\equiv0$ would leave
+$Y(P_1X+P_2Y)=0$, so $\cC_{f,R}$ would contain the horizontal line $Y=0$;
+$P_1\equiv0$ is the inseparable degeneracy already excluded by
+$\mathcal{AB}\neq0$; $\Res_X(h_\lambda,R)\equiv0$ would put one of the five
+horizontal lines $X=r_iY$ inside $\cC_{f,R}$; and $h_\lambda(\lambda)\equiv0$
+would put the diagonal inside it.  An integral curve of bidegree $(2,2)$
+contains no such component.  Each deleted base parameter
+carries at most two points of the slice, and at most two lie over the parameter
+at infinity, so at most $2\cdot23+2=48$ rational points are lost.
+
+(v)  A surviving rational point is a parameter $\lambda$ with
+$R(\lambda)\neq0$ together with a rational root of $h_\lambda$; since
+$P_0(\lambda)\neq0$ and the coefficients are rational, the second root is
+rational too, and $P_1(\lambda)\neq0$ makes the two distinct.  By (i) the
+quadratic $h_\lambda$ spans the Hankel kernel of $\iota_{R\lambda}f$, so six
+applications of \eqref{eq:lift} give $R\lambda h_\lambda\in W_f$.  Its degree
+is $5+1+2=8$, it
+splits completely, and the deleted divisors make its eight roots distinct: the
+markers are distinct because $R$ is squarefree, $\lambda$ avoids them, and both
+residual roots avoid the markers and $\lambda$.
+\end{proof}
+
 \begin{proposition}[R10 fixed-depth escape]\label{prop:r10-escape}
 For odd \(q\geq59\), and for even \(q\geq64\), every split-free
 redundancy-ten syndrome belongs to
@@ -931,18 +1151,17 @@ Since
                               q+1-2\sqrt q>42
 \]
 first holds at a prime power \(q=59\), the odd assertion follows.
-In characteristic two the ordered-Hessian base selector requires
-\[
-\min\{(9-4)(9+11)/2+1,\;9(9-4)\}=45
-\]
-parameters, and its reduced \((2,2)\) slice deletes
-\(5+2+2+10+4=23\) points.  The first binary field satisfying both
-conditions is \(64\).  The selector is obtained by pulling back one nonzero
-equation from each of the common-quadratic and complementary Fano rulings:
-their product has individual root degree eight, so Schwartz--Zippel or
-nine-element block interpolation gives the displayed bound.  The normalized
-\((2,2)\) ordered-Hessian slice has genus at most one, and its five deletion
-degrees are exactly the displayed summands.  Proposition~\ref{prop:recursive-component-selection}
+In characteristic two, Lemma~\ref{lem:r10-hessian} replaces that top step.  It
+supplies a nonzero base selector as soon as
+$q\geq\min\{51,45\}=45$ field elements are available as candidate roots, and
+for such a base a geometrically integral ordered-Hessian slice whose
+normalization has genus at most one and whose deletion divisor has degree
+$5+2+2+10+4=23$ on the base line, hence at most $2\cdot23+2=48$ deleted
+rational points.  Since $64+1-2\sqrt{64}=49>48$, and since $64$ is the first
+binary field with at least $45$ elements, both conditions first hold at
+$q=64$; part (v) of the lemma turns a surviving point into a split squarefree
+octic in $W_f$ avoiding all five markers.
+Proposition~\ref{prop:recursive-component-selection}
 then identifies the sole contained locus in either case as the displayed
 carrier union.
 \end{proof}
