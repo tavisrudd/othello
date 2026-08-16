@@ -1,0 +1,941 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1.1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathrsfs}
+\usepackage[colorlinks=true,linkcolor=black,urlcolor=black,citecolor=black]{hyperref}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\C}{\mathbf C}
+\newcommand{\Q}{\mathbf Q}
+\newcommand{\Z}{\mathbf Z}
+\newcommand{\PP}{\mathbf P}
+
+\title{Frame transport for framed formal monodromy:\\
+  the lemma, its hypotheses, and the receiver problem\\
+  \large Fifth version, closing the coalesced case}
+\author{Memo for a reader of \emph{Irrationality of Cubic Threefolds after One
+    Stabilization}}
+\date{15 August 2026}
+
+\begin{document}
+\title{Frame transport memo --- archive}
+\author{Tavis Rudd}
+\date{August 2026}
+\maketitle
+
+\noindent Append-only history for
+\texttt{2026-08-15-c912-frame-transport-memo.tex}.  Superseded routes,
+closed checks, and correction trails are kept here verbatim so the live
+memo can state current conclusions only.  Cross-references to statements
+that remain in the live memo are rendered as bracketed label names.
+
+
+\section{The scissors: hypotheses with no common instance}
+\noindent\emph{Archived from the live memo, lines 392--421.}
+
+\subsection*{The scissors: these hypotheses have no common instance in the
+application}
+
+
+Theorem~\textup{[thm:transport]} is true, and in the application it is empty. Its two
+hypotheses pull in opposite directions.
+
+\begin{itemize}
+\item If $\Gamma=0$, so $\mathcal H=\Omega_V(\!(z)\!)$, then Levelt--Turrittin
+  supplies solution matrices, but the pro-Laurent comparison gauge has
+  unbounded negative $z$-order and is not in $\mathrm{GL}_n(\mathcal H)$.
+\item If $\Gamma\ne0$ with the draft's coefficient-dominant order, the gauge
+  lies in $\mathcal H$, but $\mathcal H$ is not a formal Laurent series field
+  over its constants and Levelt--Turrittin is unavailable. Concretely, the
+  $e_z$-component of the Hahn valuation is not a valuation on $\mathcal H$:
+  for $f=x^{(0,0)}+x^{(1,-100)}$ and $g=-x^{(0,0)}$ its values on $f$ and $g$
+  are $0$ while its value on $f+g$ is $-100$. So there is no Newton polygon, no
+  slope filtration and no Turrittin algorithm. Nor can one descend to the
+  bounded-$z$-order elements: $f=1-zx^{-\gamma}$ has inverse
+  $-\sum_{k\ge1}z^{-k}x^{k\gamma}$, so they do not form a field.
+\end{itemize}
+
+An abstract Picard--Vessiot ring for a module over $\mathcal H$ does exist, with
+constants $\mathcal C$ after passing to the divisible hull. So the missing
+ingredient is \emph{not} a solution algebra. It is a canonical Levelt--Turrittin
+normal form over $\mathcal H$, singling out which element of the differential
+Galois group deserves to be called the turn. That is the precise shape of the
+remaining problem, and it also shows why a purely valuation-theoretic argument
+cannot supply it.
+
+
+\section{The receiver: tensor product, and a better receiver}
+\noindent\emph{Archived from the live memo, lines 433--462.}
+
+\subsection*{Why the tensor product cannot simply be dissolved}
+
+The map $a\otimes h\mapsto a\cdot h$ into the Hahn field with $\Omega_{V,j}$
+coefficients is not well defined: the copy of $H_{0,j}$ inside $\Omega_{V,j}$
+consists of degree-zero constants, the copy inside $H_{\mathrm{tot},j}$ of
+monomial series, and the tensor product exists precisely to identify them. Nor
+can the two copies be assigned different jobs, with module coefficients read as
+constants and gauge bookkeeping as monomials: the gauge relation
+$\Omega'=G\Omega G^{-1}-\theta(G)G^{-1}$ ties $G$ and $\Omega$ through the same
+Novikov variables, so one copy is forced. With the constants reading the gauge
+leaves the field; with the monomial reading the exponential factors become
+$\Gamma$-supported and Remark~\textup{[rem:constants-fails]} applies.
+
+Two things should also be said about $\mathscr R_j$ itself. It is a tensor
+product of two field extensions and need not be a domain, and the draft reads
+characteristic polynomials and algebraic multiplicities in $\mathscr R_j[X]$;
+that deserves an explicit remark, which the draft partly gives by proving each
+factor injects.
+
+\subsection*{A better receiver}
+
+Extend the $\Gamma$-valuation of $H_{0,j}$ to its algebraic closure and then to
+$\Omega_{V,j}$, and take the field of series $\sum_kc_kz^k$ with
+$c_k\in\Omega_{V,j}$ whose support $\{(v_\Omega(c_k),k)\}$ is well ordered in
+the chosen order. This has a single copy of the coefficients, is a field rather
+than a tensor product of two fields, hosts the pro-Laurent gauge, and hosts the
+exponential factors as honest units. It is strictly better than (4.4c). It does
+not by itself supply Levelt--Turrittin, and it does not remove the rate
+criterion below.
+
+
+\section{The iterated receiver}
+\noindent\emph{Archived from the live memo, lines 544--668.}
+
+\section{The iterated receiver}
+
+
+The criterion above is a consequence of one architectural choice, and a reader
+of the second version of this memo proposed the alternative: the draft puts the
+intrinsic Novikov variables of the endpoint and the new completion variables
+into a single ordered group, which is what gives an eigenvalue difference
+positive weight. Nothing forces that. Treat the intrinsic Novikov fraction field
+as \emph{coefficients}, and complete only in the new exceptional and bulk
+directions afterwards.
+
+Two facts make the proposal concrete, and both are visible in the draft.
+
+\begin{itemize}
+\item \emph{The unbounded negative $z$-order is bulk-driven, not
+  Novikov-driven.} In the recursion (4.1a) the coefficient $G_\alpha$ has no
+  power of $z$ below $-|\alpha|$, where $\alpha$ indexes the \emph{bulk}
+  parameter $\eta$, and the filtration depth is acquired by substituting
+  $\eta\in F^1B$. A completion in the bulk directions alone therefore already
+  hosts the pro-Laurent gauge; the Novikov directions are not needed for it.
+\item \emph{With the Novikov directions as coefficients, the pathology
+  disappears and the criterion is satisfied rather than evaded.} Eigenvalues of
+  $c_1\star$ become constants of weight zero, so $\exp(-\lambda/z)$ is not a
+  unit of the receiver but a genuine exponential symbol, the constant-coefficient
+  hypothesis of Definition~\textup{[def:solution-algebra]} holds, and
+  Remark~\textup{[rem:constants-fails]} evaporates. Since $w(\Delta\lambda)=0$, the
+  inequality $e\,w(\Delta\lambda)<\varepsilon$ holds trivially, and the product
+  $GP$ of Section~\textup{[sec:receiver]} converges coefficientwise.
+\end{itemize}
+
+The shifts that do involve the exceptional Novikov root do not force those
+directions back into the filtration. The rank-one unit twist attached to
+$-(c-1)\lambda_j$, the fixed divisor shift, and the ambient target's
+$\tau^\circ=O(q^{-1})$ all enter Lemma~4.5 as its $a_0$ and $a_2^\circ$ terms,
+which are required only to be \emph{constant in} the positive filtration, not to
+lie in it. With the Novikov directions as coefficients, $\exp(-a_0/z)$ is an
+honest exponential symbol rather than the object the draft must argue about
+separately.
+
+\subsection*{What the sources actually permit}
+
+I have checked this against the pinned sources rather than left it as a
+question, and the answer is positive for the comparison and negative for the
+gauge.
+
+Iritani's Theorem~5.18 states $\Psi$ as an isomorphism of
+$\C[z](\!(q^{-1/s})\!)[[Q,\widetilde\tau]]$-modules, with the change of
+variables defined over $\C(\!(q^{-1/(r-1)})\!)[[Q]]$. So the ring is
+\emph{Laurent} in the exceptional root and \emph{formal} in the ambient Novikov
+variables and the bulk. Two consequences.
+
+\emph{The comparison survives.} Inverting the Novikov monomials and completing
+in the exceptional and bulk directions is a ring homomorphism out of that ring.
+$\Psi$, its inverse, and the two inverse identities are module maps over it, so
+they base-change along it unchanged, and the framed operators' entries lie in
+the coefficient field, which injects. Nothing in the transport step needs
+Iritani's proof, only his statement, so the formality of his ring in $Q$ is not
+by itself an obstacle.
+
+\emph{The gauge does not.} The source's own reconstruction writes
+$\tau(\widetilde\tau)=\tau^\circ+t(\widetilde\tau)$ and
+$\varsigma_j(\widetilde\tau)=\varsigma_j^\circ+s_j(\widetilde\tau)$, with
+$t(\widetilde\tau)\in H^*(X)(\!(q^{-1})\!)[[Q,\widetilde\tau]]$ and $s_j$ of the
+same shape over $H^*(Z)$. The initial terms are harmless: $\tau^\circ$ and
+$\varsigma_j^\circ$ are by definition the values at $Q=\widetilde\tau=0$, hence
+carry no Novikov dependence at all, and the exceptional direction remains a
+completion direction as the draft already has it. But $t$ and $s_j$ vanish only
+at $Q=\widetilde\tau=0$, so at $\widetilde\tau=0$ they retain pure-Novikov
+terms. Those have to be removed by the normalized gauge of Lemma~4.5, and that
+construction converges by topological nilpotence of the bulk shift. Inverting
+the Novikov directions destroys exactly that.
+
+So the iterated receiver is not free, and the decisive question is now small and
+graded rather than general:
+
+\begin{quote}
+  Is the pure-Novikov part of the coordinate shift --- $t$ and $s_j$ restricted
+  to $\widetilde\tau=0$ --- confined to $H^0\oplus H^2$?
+\end{quote}
+
+If it is, the string and divisor equations absorb it into the $a_0$ and
+$a_2^\circ$ terms of Lemma~4.5, which are required only to be constant in the
+positive filtration, and the iterated receiver goes through for the ambient
+summand with $w(\Delta\lambda)=0$. If it is not, the Novikov directions must
+stay inside the filtration, eigenvalue differences reacquire positive weight,
+and the criterion of Section~\textup{[sec:receiver]} returns.
+
+The grading answers this, and the answer is negative in general. Iritani's
+Theorem~5.18(5) states that $\tau(\widetilde\tau)$ and
+$\varsigma_j(\widetilde\tau)$ are homogeneous of degree $2$, and his conventions
+are $\deg Q^d=2c_1(X)\cdot d$ and $\deg\tau_i=2-\deg\phi_i$. A pure-Novikov term
+$Q^d\phi$ therefore satisfies
+\[
+  \deg\phi=2-2\,c_1(X)\cdot d,
+\]
+so $c_1\cdot d=1$ contributes in $H^0$, $c_1\cdot d=0$ in $H^2$, and
+$c_1\cdot d=-1,-2,\dots$ in $H^4,H^6,\dots$; classes with $c_1\cdot d\ge2$
+cannot contribute at all. Hence the required confinement to $H^0\oplus H^2$
+follows exactly when every contributing effective class satisfies
+$c_1\cdot d\ge0$, and it is not automatic: Iritani's theorem is stated for an
+arbitrary smooth projective $X$, and after several blowups in a weak
+factorization there is no reason for the intermediate ambient variety to have
+nef anticanonical class.
+
+So the iterated receiver does not by itself remove arbitrary intermediate
+fourfolds from the problem. It removes them under a semipositivity hypothesis on
+the ambient, which the weak factorization does not supply. This is worth stating
+plainly, because it is the second proposed repair that fails on inspection, and
+it fails for a reason the draft would have inherited silently.
+
+For the center the same analysis applies, with the additional and unchanged
+difficulty that its Novikov map is the noninjective one, which is why divisor
+tagging exists.
+
+The scope consequence is the reason to try this first. If the ambient endpoint
+is handled this way, no inequality is needed for arbitrary intermediate
+fourfolds --- the case that looked least tractable. What remains is the center
+summands, and there the draft's own low-dimensional classification is
+restrictive: for nef canonical class it produces an integral-$z$ gauge to a
+regular-singular connection, so there is no exponential separation at all and
+$w(\Delta\lambda)=0$ again; the remaining minimal cases are $\PP^1$, $\PP^2$,
+ruled surfaces, and point blowups. Proving primitive-sixth vanishing directly
+for those, in the coordinates Iritani's specialization actually produces, is a
+smaller problem than a general transport theorem.
+
+
+\section{The framing route as proposed, and checks one to three}
+\noindent\emph{Archived from the live memo, lines 669--835.}
+
+\section{The framing route, checked against the sources and closed}
+
+
+The second version of this memo proposed the following route and called it the
+probable repair. I state it as it was proposed, then report the three checks,
+then state what survives. The checks were run against
+arXiv:2411.02266 as cached, arXiv:2307.03696v4, and arXiv:2307.13555v3; the
+full verdicts, locators and file hashes are in the companion report
+\emph{The three framing-compatibility checks, run against Iritani's
+decomposition}.
+
+\subsection*{The route as proposed}
+
+Everything above treats the pro-Laurent bulk gauge of Lemma~4.5 as unavoidable.
+It may not be. Hinault, Yu, Zhang and Zhang work with $F$-bundles on the formal
+$u$-disc, where a framing is a regular flat connection and, in a framing-flat
+trivialization, the meromorphic connection takes the normal form
+\[
+  \nabla_{u\partial_u}=u\partial_u+u^{-1}K+(\mu D+H).
+\]
+Their Theorem~4.34 characterizes when two connections of that shape are
+gauge-equivalent under
+\[
+  \Phi(u)\in\mathrm{GL}(H[[u]]),
+  \qquad \Phi_{ij}(u)\in k[c_1,\dots,c_r][[u]],
+\]
+with $\Phi$ then unique given its value at $u=0$; the conditions are that the
+leading operators $K$ be conjugate by a parameter-polynomial $\phi$, that the
+two $\mu$ agree, and that the diagonal entries of $H$ agree after conjugation
+modulo the parameter ideal. Their applications are uniqueness of the
+decomposition for projective bundles and for blowups, complementing the
+existence theorems of Iritani--Koto and Iritani.
+
+The shape of that gauge is exactly what this memo has been missing. A gauge in
+$\mathrm{GL}_n(K[[u]])$ has only nonnegative integral powers of the loop
+coordinate, adjoins no root of $u$, and is therefore fixed by the turn
+$u\mapsto e^{2\pi i}u$. Taking $\Gamma=0$, so that $\mathcal H=\Omega_V(\!(u)\!)$
+and Levelt--Turrittin is available, Theorem~\textup{[thm:transport]} applies with no
+further work:
+\[
+  \Phi\in\mathrm{GL}_n(K[[u]]),\quad
+  \nabla'=\Phi\nabla\Phi^{-1}-\theta(\Phi)\Phi^{-1}
+  \ \Longrightarrow\
+  M_{\mathrm f,V}(\nabla')\ \text{and}\ M_{\mathrm f,V}(\nabla)\ \text{conjugate}.
+\]
+No Hahn receiver, no product $GP$, and no inequality
+$e\,w(\Delta\lambda)<\varepsilon$, provided the decomposition of
+Proposition~4.7 can be identified with an $F$-bundle isomorphism of the class
+Theorem~4.34 governs. That identification, the matching of the $u=0$ datum, and
+the separation of the center specialization were the three checks.
+
+\subsection*{Check one: the identification does not exist as posed}
+
+It fails three times over, and the first two are independent of the draft.
+
+\emph{Domain.} Section~4.4 of Hinault--Yu--Zhang--Zhang is titled
+\emph{Equivalence of $F$-bundles over a point}, and both of its applications
+evaluate at the closed point $q=t=0$ of the base, the large-radius limit; the
+proof of their Theorem~5.16 opens by observing that there the quantum product
+reduces to the classical cup product, so that the leading operator $K_{\rm
+split}$ of their (5.18) is a cup-product operator, hence scalar-plus-nilpotent
+on each block rather than nilpotent outright. The
+draft's $\nu_6$ is not evaluated there. It is read where the eigenvalues of
+$c_1\star$ separate --- at the cubic, where the block carries $r=(3q)^{1/2}$ and
+the indicial roots $\pm1/6$, $\pm5/6$. At $q=0$ that separation collapses and
+the exponential blocks the framed operator is built from do not exist. Their
+Theorems~5.20 and 5.24 do reconstruct the isomorphism over the whole base from
+its restriction at the limit point, but that is uniqueness of a map whose
+existence is Iritani's and Iritani--Koto's theorem; it is not a transport of
+framed monodromy between base points.
+
+\emph{Hypotheses, for the blowup.} Section~4.4 assumes the generalized
+eigenspaces of $K$ all have the same dimension, and the matrix calculus of
+Definition~4.33 and Theorem~4.34 rests on the resulting splitting
+$H_0^{\oplus m}\cong H$. The blowup decomposition is
+$H^*(X)\oplus\bigoplus_{i=1}^{m-1}H^*(Z)[-2i]$, whose summands differ in
+dimension whenever $\dim H^*(Z)\ne\dim H^*(X)$; the authors write a general
+endomorphism there as a matrix with $\Phi_{1,1}\in\operatorname{End}(H^*(X))$
+and $\Phi_{i,i}\in\operatorname{End}(H^*(Z))$, so the mismatch is explicit in
+their own notation. Their blowup statement, Theorem~5.22, does assert existence
+of the isomorphism, and Theorem~5.24 gives the corresponding uniqueness; the
+point is not that it is unproved but that it is not \emph{derived from}
+Theorem~4.34, whose hypotheses do not cover the unequal block sizes, and that
+its existence is referred to the earlier decomposition work. So Theorem~5.22
+supplies no leverage of its own on the blowup half of Proposition~4.7 ---
+equation (4.3), the half the headline theorem cannot do without --- beyond what
+Iritani's theorem already gives. The projective-bundle half is genuinely covered:
+there the eigenspaces are $m$ copies of $H^*(X)$ by their Lemma~5.8, matching
+Section~4.4, and Theorem~5.16 is proved.
+
+\emph{Purpose.} Even where Theorem~4.34 applies, its conclusion compares the
+source at its base point with the target based at a shifted class $\Delta(a)$,
+pinned by their (5.17) for projective bundles and (5.23) for blowups. That
+shift is exactly what the pro-Laurent gauge of Lemma~4.5 exists to undo. The
+route relocates the bulk displacement rather than removing it.
+
+The two normalizations do agree on where the displacement sits, which is a
+useful check on the draft's reading of the sources. In their limit-point
+coordinates the eigenvalue $\lambda_i\in\C[c_1,\dots,c_m]$ is cohomology-valued,
+so $\Delta(a)$ acquires components in $H^{\ge4}$ from the higher Chern classes,
+while the $H^2$ components cancel identically --- their Lemma~5.8(2) gives
+$m\lambda_i\equiv m\xi^{i-1}-c_1V$, cancelling the $c_1V$ on the right of
+(5.17) --- and the $H^2$ part of $\Delta(a)$ is left free. In Iritani's
+coordinates the same data reads
+$\varsigma_j^\circ=-(c-1)\lambda_j+h_{Z,j}+O(q^{-1/(c-1)})$ with $\lambda_j$ a
+\emph{scalar} multiple of $q^{1/(c-1)}$, so the $H^0$ part is that scalar, the
+$H^2$ part is $h_{Z,j}$, and everything of degree at least four has moved into
+the tail. Same content, different bookkeeping; the draft's split of
+$\varsigma_j^\circ$ into unit twist, fixed divisor, and positive-filtration tail
+is right. The tail is present in general, but \emph{not} always: an earlier
+version of this passage inferred from the $O(q^{-1/r})$ symbol that even
+$X\times\PP^1$ carries a tail and so does not escape the bulk gauge. That
+inference was unsupported --- the $O(\cdot)$ symbol carries no information about
+$[z^{-1}]\log$ either way --- and it is contradicted by
+Theorem~\textup{[thm:trivial-displacement]} below, which shows that for a trivial
+bundle $\varsigma_j^\circ=r\lambda_j$ \emph{exactly}, with no $H^2$ term and no
+$H^{\ge4}$ tail. The claim is struck.
+
+\subsection*{Check two: the $u=0$ datum, which passes}
+
+Their Theorems~5.20(2) and 5.24(2) determine the base map from its restriction
+to the base point up to a multiplicative constant in the $q$ direction (the
+statement for all logarithmic directions is their Proposition~4.31(2));
+the proof of their Proposition~4.31 shows why, since $df$ is recovered through
+$\Psi(d\log p_i)=d\log f_i$ and integrating a logarithmic form leaves one
+constant. That ambiguity is a character of the Novikov lattice: $q\mapsto cq$ is
+$Q^d\mapsto c^{E\cdot d}Q^d$, which is the divisor substitution (4.1) of the
+draft with $a_2^\circ$ a logarithmic multiple of the dual class. The draft
+already proves such a substitution is a $z$-constant coefficient automorphism
+and leaves $\nu_6$ unchanged, and already checks it is well defined on the image
+monoid. The bundle map carries no ambiguity at all once its restriction is
+fixed.
+
+The ambiguity also never has to be tolerated, because the sources pin it.
+Iritani--Koto's (5.11) gives
+$\varsigma_j^\circ=r\lambda_j+[z^{-1}]\log\bigl(q^{c_1(V)/(rz)}F_j(1)\bigr)$ in
+closed form and their (5.12) gives $\Phi_j^\circ$; Iritani's Section~5.8.1 fixes
+$\Psi|_{Q=\widetilde\tau=0}$ from his Lemma~5.13 and the explicit $\lambda_j$.
+One manuscript sentence citing those, and noting that any residual constant is a
+divisor substitution already covered by (4.1), settles this point for good,
+whichever repair eventually lands.
+
+\subsection*{Check three: the center specialization, which stays separate}
+
+It stays separate more firmly than the check anticipated. Their $A$-model
+$F$-bundle is built throughout on the one-variable Novikov projection
+$q^\beta\mapsto q^{\beta\cdot\omega}$ of their (2.21), and in the blowup
+application the center copies are the maximal $F$-bundles of $Z$ associated to
+$\sigma^*\omega_X$ --- the Novikov direction pulled back from the ambient
+variety, which is the draft's specialization in a coarser form. No statement of
+theirs can therefore certify that a specialized center module carries an
+intrinsic framed monodromy. Divisor tagging remains the route, in the current
+manuscript, for identifying the specialized center contribution with the
+intrinsic invariant; route~3 of the list below bypasses that identification
+instead, by proving specialized vanishing directly in low dimension.
+
+One genuine gain came out of it. Their Lemma~2.24 proves that the collapsed
+potential determines the full genus-zero potential, by expanding in the $H^2$
+bulk directions and separating curve classes by their intersection numbers with
+an $H^2$ basis, under the finiteness of their Assumption~2.22. That is the
+mechanism of \texttt{lem:divisor-tagging}, in print, in a closely related
+setting. It does not close that lemma --- it works at the level of the potential
+over a base retaining all $H^2$ directions, whereas the draft needs the
+separation at the level of a framed operator at a fixed bulk point, and the
+draft's collapse is by the pair $(i_*,\rho_C\cdot)$ rather than by a single nef
+class --- but it makes the shape of the argument a cited one.
+
+
+\section{The corrected program (superseded by the rigidity section)}
+\noindent\emph{Archived from the live memo, lines 1121--1150.}
+
+\subsection*{The corrected program}
+
+\begin{enumerate}
+\item Flatness preserves the spectral decomposition of $U$ and gives the exact
+  evolution $D_aU_i=C_{a,i}+[C_{a,i},\mu_i]$, unconditionally.
+\item Multiplicity-one blocks contribute no cyclotomic monodromy
+  (Theorem~\textup{[thm:simple-blocks]}), so only coalesced blocks are in play.
+\item For a coalesced block the off-block projector equations are governed by the
+  full Sylvester operator $(u_j-u_i)+L_{N_j}-R_{N_i}$, invertible but not scalar.
+\item What must be deformed is the entire formal block normal form
+  $J+zD+z^2E+\cdots$, not the compressed pair, and the deformation theory has to
+  reproduce the cubic $2\times2$ example above.
+\end{enumerate}
+
+A caution on the literature before it is leaned on. The extension results for
+isomonodromic deformations with coalescing eigenvalues assume, among other
+hypotheses, that the leading matrix is diagonalizable at the coalescence point.
+The carrier here is nonsemisimple at leading order --- $J_0\ne0$ --- so those
+theorems do not apply off the shelf, and the coalescence question stated below
+is not answered by citing them.
+
+The risk that remains is unchanged in kind and now better located: a coalesced
+block can \emph{split} under the displacement, the splitting being governed by
+$D_aU_i$, and if the rank-two block carrying $\pm1/6$ split into simple blocks
+those would carry residue $0$ by Theorem~\textup{[thm:simple-blocks]} and $\nu_6$
+would drop by two. Proving that the reconstruction displacement does not do
+that, or does it in a count-preserving way, is the residual problem.
+Section~\textup{[sec:rigid]} now does exactly that, by shearing the block before
+deforming it.
+
+
+\section{A shorter route to the endpoint via the Serre decoration (not taken)}
+\noindent\emph{Archived from the live memo, lines 1542--1740.}
+
+\subsection*{A shorter route to the endpoint, in the sources' own terms}
+
+
+Two paragraphs of Katzarkov--Kontsevich--Pantev--Yu's Example 6.21 bear directly
+on this and should be on the record, because between them they suggest a route
+to the one-stabilization theorem that needs neither this memo's transport lemma
+nor its rigidity theorem.
+
+First, they compute the atomic composition of a smooth cubic threefold at the
+hyperplane point: two one-dimensional atoms for the nonzero eigenvalues of
+$\operatorname{Eu}\star$, and one atom $\alpha(X)$ for the eigenvalue $0$. That
+is the block structure used throughout this memo, in their language. They add
+that ``the Witt algebra argument from Remark~3.14 shows that there is no further
+splitting in a neighborhood of $b$'' --- which is
+Theorem~\textup{[thm:no-splitting]}, asserted rather than proved, and their
+Remark~3.14 introduces its finer clauses with ``more fine results can be
+proved''. Section~\textup{[sec:rigid]} supplies proofs of both the splitting
+statement and the finer one, for this block type, from flatness alone.
+
+Second, and more consequentially, they separate $\alpha(X)$ from a curve atom
+not by formal monodromy but by a Serre automorphism. They observe that
+$\alpha(X)$ looks like the atom of a smooth projective genus-five curve, then
+note that as a Hodge atom enhanced with its Serre automorphism $S$, the graded
+minimal polynomial forbids $S$ from having eigenvalue $-1$, so it cannot be the
+Serre automorphism of a genus-five curve. They conclude that every smooth cubic
+threefold is irrational, and remark that the same approach applies to other Fano
+threefolds.
+
+Their $S^5=[3]$ is quoted correctly above --- it is what Example 6.21 says --- but
+it is not the relation to use when computing on a K-group. Kuznetsov's fractional
+Calabi--Yau relation for the same category is $S^3=[5]$, and on the numerical
+Grothendieck group, where a shift $[k]$ acts by $(-1)^k$, the two predict
+$S^3=-I$ and $S^5=-I$ respectively; the Serre operator computed from
+Riemann--Roch satisfies the first exactly and fails the second, its
+characteristic polynomial being $\Phi_6$ and its order six, in agreement with the
+exponents $-1/6,-5/6$ recorded after \textup{[eq:sheared-data]}. The offset is
+systematic rather than a slip: their Example~6.19 gives $S^3=[4]$ for a very
+general quartic in $\PP^5$, whose Kuznetsov component is a K3 category with
+$S=[2]$ categorically. (An earlier version of this passage cited an
+``Example~6.20'' about a cubic fourfold; no such example exists, and the
+statement belongs to Example~6.19 and to the quartic.)
+The two are different objects --- the Serre automorphism of a Hodge atom in the
+cohomological $\mathbf Z$-grading, and the categorical Serre functor on a K-group
+--- so a citation should follow the object it is about. Locators and the full
+comparison are in `2026-08-15-c912-kkpy-imports-source-check.md'.
+
+A second normalization difference runs alongside it and explains a substitution
+this lane had observed but not accounted for. Their statements are made after the
+half-parity gauge $u^g$ of Claim~6.15, this memo's count before it. That gauge
+shifts exponents by half the cohomological degree, multiplying monodromy
+eigenvalues by a parity-dependent sign: primitive sixth roots become primitive
+cube roots and $\pm1$ swap. It is the $\lambda\mapsto-\lambda$ substitution
+between the prime-Fano classification's polynomial $R$ and the Serre side. Every
+separation used below distinguishes roots of unity of order at most two from
+roots of order three or six, which the gauge preserves.
+
+The consequence for the endpoint is worth stating plainly. Their argument is
+dimension three, where Proposition~5.30 requires excluding only points and
+curves. The one-stabilization statement is dimension four, where the same
+proposition requires excluding points, curves \emph{and surfaces}. Everything
+else --- the projective-bundle formula putting two copies of $\alpha(X)$ in
+$X\times\PP^1$, the non-rationality criterion, and the decoration itself ---
+is already theirs. So the endpoint theorem may reduce to one classification
+question, which in the terms of this memo reads:
+
+\begin{quote}
+\textbf{(iii)} Every atom of a smooth projective surface has formal monodromy of
+order at most two, its eigenvalues lying in $\{+1,-1\}$. In particular no such
+atom has a primitive sixth root of unity as an eigenvalue, and no Serre operator
+on such an atom's numerical Grothendieck group has $\Phi_6$ as a factor.
+\end{quote}
+
+The stronger form is the one Katzarkov--Kontsevich--Pantev--Yu's own dimension-four
+example uses, where the exclusion is unipotency against non-unipotency. Their
+Example~6.19 needs it only for surfaces of general type, the atom there being
+shaped like one; the endpoint needs every surface, because the cubic threefold's
+atom is shaped like a genus-five curve atom and nothing narrows the search in
+advance.
+
+Two reductions come with the statement, and one warning.
+
+\emph{Rank-one atoms are automatic.} For a rank-one lattice the Euler form is a
+$1\times1$ matrix, hence symmetric, so $S=E^{-1}E^T=1$. A semisimple small
+quantum cohomology has every block of rank one, so (iii) holds for every surface
+with semisimple small quantum cohomology with nothing to prove. For a surface
+with nef canonical class their Lemma~5.24 gives a single atom and Claim~6.15
+gives a regular singularity with nilpotent residue after the half-parity gauge,
+putting every eigenvalue at a root of unity of order at most two.
+
+\emph{The remaining surfaces, by the minimal model program.} These two
+reductions leave a short induction, which closes (iii) modulo three imported
+statements.
+
+\begin{remark}[This is Theorem~\textup{[thm:low-dim]}, and the two readings coincide]
+
+Statement (iii) is not new work: it is Theorem~\textup{[thm:low-dim]}, proved in
+Section~\textup{[sec:endpoint]} by exactly this induction --- blow down to a minimal
+model, use their Lemma~5.24 and Claim~6.15 for nef canonical class, and reduce
+$\PP^2$ and the geometrically ruled surfaces to point and curve atoms through the
+projective-bundle identity. What the present section adds is only that the
+Serre-decorated reading of (iii) is the same statement rather than a companion to
+it: Katzarkov--Kontsevich--Pantev--Yu \emph{define} the Serre automorphism as the
+monodromy in the $u$-direction, with $\chi(a,b)=\chi(b,S(a))$, so an atom's Serre
+eigenvalues are its formal monodromy eigenvalues and the shorter route's step
+(iii) is discharged by Theorem~\textup{[thm:low-dim]} as it stands.
+
+Two refinements are worth recording. First, the conclusion is sharper than
+$\nu_6=0$: in every case the proof produces monodromy of order at most two, which
+is the discriminator their own dimension-four example uses. Second, the blowup
+input can now be taken from Iritani's Theorem 5.18 directly, an isomorphism of
+quantum $D$-modules commuting with the connection and preserving the Euler
+vector fields, rather than only through the chemical-formula identity.
+\end{remark}
+
+The fake of the previous paragraph does not disturb the blow-down step: it mixes
+the new exceptional object with the ambient structure sheaf, which lie in
+different atoms, so the pair it generates is not an atom. Nor is the blow-down
+step resting on a multiplicity count: the computational literature --- Böhning,
+von Bothmer and Su'a --- verifies the blowup statement for multiplicity
+sequences and records that naive and small atomic decompositions can differ, but
+Iritani's theorem is at the level of the connection itself, which is the reading
+used above. The reading list, cache locators and hashes are in
+`2026-08-15-c912-blowup-formula-source-check.md'. Iritani also records that
+Gyenge and Szab\'o studied the asymptotics of the Euler eigenvalues under
+blowdowns to minimal models of surfaces, which is the configuration this
+induction runs through.
+
+\emph{The ambient category never sees it.} The Serre functor of a surface is
+tensor by $\omega$ followed by $[2]$, and $[2]$ acts by $+1$ on K-groups, so the
+ambient numerical Serre operator is multiplication by $\exp(K)$, which is
+unipotent. A primitive sixth eigenvalue on a surface can only come from a
+decomposition, never from the surface's own K-theory.
+
+\emph{The warning: admissible is not enough.} For a subcategory generated by an
+exceptional pair with $\chi(e_1,e_2)=x$ the numerical Serre operator has
+characteristic polynomial $\lambda^2+(x^2-2)\lambda+1$, which is $\Phi_6$ exactly
+when $x^2=1$. On any surface carrying a $(-1)$-curve $E$ --- that is, any
+non-minimal surface --- the sheaf $O_E(-1)$ is exceptional,
+$\operatorname{Hom}^\bullet(O_X,O_E(-1))=0$, and $\chi(O_E(-1),O_X)=-1$, using
+only $E^2=-1$ and $K_X\cdot E=-1$.
+So $\langle O_E(-1),O_X\rangle$ generates an admissible subcategory whose Serre
+operator has order six. Statement (iii) is therefore false if ``atom'' is
+weakened to ``admissible subcategory'', and no lattice argument ranging over
+admissible subcategories can prove it. The subcategory is not an atom: it is
+generated by an exceptional pair and splits into two rank-one pieces whose Serre
+operators are both the identity. Since the blowup is exactly what supplies this
+fake, the blowup step of any proof of (iii) is where the care is needed.
+
+With all four imports now read at the source, the route to
+``$X\times\PP^1$ is not rational'' runs in four steps. Their Example~6.21 gives
+the atom $\alpha(X)$ at the eigenvalue zero. Its formal monodromy has the two
+primitive sixth roots of unity as eigenvalues, by the exponents $-1/6,-5/6$
+computed after \textup{[eq:sheared-data]}; that is order six. Theorem~4.11 with
+$r=2$, applied to $X\times\PP^1=\PP(\mathcal O\oplus\mathcal O)$, puts two copies
+of $\alpha(X)$ in the atomic decomposition of $X\times\PP^1$. And no atom of a
+smooth projective variety of dimension at most two has monodromy of order six:
+points give the identity, curves give $-1$ twice, and surfaces have order at most
+two by Theorem~\textup{[thm:low-dim]}.
+
+The criterion applied at the end is \emph{not} their numbered Proposition~5.30,
+which excludes membership in $\mathrm{HAtoms}$ of low dimension for undecorated
+atoms, whereas the separation just made uses the monodromy, a decoration. It is
+the enhanced form, which the same section states as unnumbered prose: if a smooth
+projective variety has an enhanced atomic composition containing an enhanced atom
+that does not come from a smooth projective variety of dimension at most
+$\dim X-2$, then it is not rational. With $\dim(X\times\PP^1)=4$ the excluded
+dimensions are at most two, which is what the four steps supply. The numbered
+proposition is proved there as a special case of their Proposition~5.17; the
+enhanced version is asserted, on the ground that enhancement by Euler pairings
+and Serre automorphisms repeats the undecorated theory. So the load-bearing
+citation of this route is an assertion, and a manuscript using it must either
+prove the enhanced criterion in the generality it needs or say plainly that it
+quotes one. The route uses no transport lemma, none of
+Section~\textup{[sec:unconditional]}, and no integral structures.
+
+This is not the same invariant as $\nu_6$, and it is not obviously weaker or
+stronger; it is the sources' own, which is an argument for using it. Two
+cautions. It buys the Hodge-atom, motive and Serre-enhancement machinery that
+the earlier blueprint deliberately avoided, so the manuscript would import more
+than the two decomposition theorems. The deferral is wider than an earlier
+version of this passage recorded: in the non-archimedean analytic setting, which
+is the one an $A$-model $F$-bundle of a projective variety actually lives in, the
+authors defer the Euler pairing and the Serre automorphism themselves to
+forthcoming work, not merely the integral-structure enhancement. So the
+decoration the route turns on is not available off the shelf in the setting
+required. And their sentence is a worked example,
+not a theorem with hypotheses, although the statements it invokes ---
+Lemma~5.24, Claim~6.15, Proposition~5.30 and Theorem~4.11 --- have now been read
+at the source and say what is claimed of them here. The graded minimal
+polynomial has been checked on the lattice as well, and the two conventions
+differ as described above; the surface exclusion is
+Theorem~\textup{[thm:low-dim]}, with Remark~\textup{[rem:step-iii-is-low-dim]} for why the
+decorated reading needs nothing further.
+Backing computations, and the exact record of what was and was not read at the
+source, are in `2026-08-15-c912-step-iii-serre-restatement.md' and
+`2026-08-15-c912-step-iii-surface-induction.md', with the scripts
+`2026-08-15-c912-surface-atom-serre-check.py' and
+`2026-08-15-c912-step-iii-surface-induction-check.py'.
+
+
+\section{Which other routes also close (merged into the routes section)}
+\noindent\emph{Archived from the live memo, lines 2177--2259.}
+
+\subsection*{Which other routes also close}
+
+Three, at different costs.
+
+\emph{The draft's own presentation.} Keep the operation formulas and transport
+$\nu_6$ summand by summand. This needs the specialization-safe statement at
+every intermediate fourfold, so it needs Section~\textup{[sec:rigid]} generalized
+from a rank-two Jordan block to an arbitrary block. That generalization is
+plausible for a single Jordan block of any size by the same shearing, and needs
+a resonance hypothesis in the semisimple case; it is real work, and it is the
+only route that keeps the draft's current architecture.
+
+\emph{The sources' Serre decoration: restricted, referee-risky, and not taken.}
+On its face it avoids the gap of Section~\textup{[sec:endpoint-gap]} by construction,
+which is what made it look attractive; the reasons not to take it are recorded
+after the description. Their Proposition 5.23 proves that the
+isomorphism class of the fibre representation of an atom is independent of the
+representative, using rigidity of finite-dimensional representations of a
+proreductive group --- a global argument, valid across a connected component,
+which monodromy data does not enjoy. They then decorate with a Serre
+automorphism and state that the enhanced theory is a straightforward repeat of
+the undecorated one, with the corresponding strengthened non-rationality
+criterion.
+
+Their Example 6.21 separates $\alpha(X)$ from a genus-five curve atom by the
+graded minimal polynomial $S^5=[3]$ and concludes that every smooth cubic
+threefold is irrational. More to the point for the endpoint, their Example 6.17
+runs the same pattern in \emph{dimension four}, for a very general cubic
+fourfold containing a plane: there $\alpha(X)$ is shaped like the atom of a
+surface of general type, and they exclude it by playing $S^3=[4]$ against the
+unipotency that Claim 6.15 forces on the even cohomology of a nef-canonical
+surface. That is exactly the shape the one-stabilization argument needs, with
+$X\times\PP^1$ in place of their fourfold, and it pairs their globally
+well-defined decoration on the cubic side with a pointwise structural statement
+on the surface side --- the two halves whose mismatch is the gap above.
+
+Why it is not taken, in order of severity.
+
+\emph{The decoration is not defined in the category our atoms live in.} They
+define the duality automorphism $S$ for a \emph{complex analytic} F-bundle of
+exponential type with nondegenerate pairing, as the monodromy in the $u$
+direction, and then say that ``the definition in the case of non-archimedean
+analytic F-bundle requires extra work, and will be discussed in [49]''. But the
+A-model F-bundle of a projective variety is built over $k((y))$ and base changed
+to its algebraic closure, and is a non-archimedean analytic F-bundle in their own
+words. So in the setting where Hodge atoms of a projective variety live, the
+decoration this route turns on is not merely unproved but undefined as the paper
+stands. That is not a gap a lemma of ours can close; supplying the definition is
+the content of their deferred work.
+
+\emph{The enhanced theory is asserted, not written out.} The sentence that the
+enhanced theory ``is completely straightforward and is just a repeat of the
+theory of undecorated Hodge atoms'' is unnumbered running text. The
+corresponding strengthened non-rationality criterion, which is the one this route
+would apply, is stated in the same register; the numbered and proved
+Proposition~5.30 is the undecorated version, which does not separate atoms by a
+decoration. A manuscript may not stand on the unnumbered version.
+
+\emph{The statements live in three different categories.} Their Leray--Hirsch
+Theorem~4.11 is an isomorphism over analytic domains, their atomic statements
+hold near a chosen base point, and Iritani's blowup decomposition is formal over
+an extended Novikov ring with fractional powers of $q$. Any argument of ours
+would stitch formal, non-archimedean analytic and complex analytic statements
+together, and every stitch is a place a referee asks precisely what was
+transported.
+
+\emph{And the examples are examples.} Their Examples 6.17--6.21 are worked cases,
+not theorems with hypotheses, so the surface exclusion for $X\times\PP^1$ would
+have to be done rather than cited in any case.
+
+One way the first objection could be dodged is to work complex analytically,
+where $S$ is defined, which requires convergence of the relevant quantum
+cohomology and so trades Hypothesis 4.7H for a convergence hypothesis. That is a
+hypothesis of a more familiar kind, but it is still a hypothesis, and the formal
+treatment of this memo was chosen precisely to avoid needing one. The route is
+therefore recorded as a restricted and referee-risky alternative with heavy
+import costs, not as the plan.
+
+\emph{Both decorations at once.} They are independent invariants of the same
+atom, so proving the surface exclusion twice is a genuine referee-facing check
+rather than duplication. If the Serre computation is cheap it is worth having as
+a second column in the same table.
+
+
+\section{The trade between the two sides, and where it cancels}
+\noindent\emph{Archived from the live memo, lines 2372--2428.}
+
+\subsection*{The trade between the two sides, and where it cancels}
+
+
+It is worth being explicit about what is being traded, because the accounting
+localizes the remaining debt more sharply than the narrative does.
+
+\emph{Vertical motion is free; horizontal motion is the whole debt.} Each step of
+a factorization gives an exact identity
+$\nu_6(\mathrm{Bl}_ZV,w)=\nu_6(V,\tau(w))+\sum_j\nu_6(Z,\varsigma_j(w))$, and with
+$\dim Z\le2$ the centre terms vanish. So moving between varieties conserves the
+invariant exactly: nothing leaks into a centre and nothing is created. The only
+way the invariant can change anywhere in the ledger is by moving between two
+parameters of \emph{one} variety. Every obligation this memo has chased is a
+horizontal one, and the vertical steps have never been in doubt.
+
+\emph{Consequence, in contrapositive form.} Suppose $X\times\PP^1$ is rational.
+The left end carries $4$ and the right end carries $0$, and conservation across
+every vertical step then forces some valley of the zigzag to have a
+bulk-parameter-dependent primitive-sixth multiplicity. So the theorem is
+equivalent to: no smooth projective fourfold arising as a valley has a
+$\nu_6$-carrying block that degenerates along the displacement the chain
+produces. Stated this way the debt is a single negative statement about
+degeneration, not a positive statement about transport.
+
+\emph{The balance has slack, and the slack is three.} The left end supplies $4$,
+being two copies of the cubic's rank-two block, and the contradiction needs only
+$1$. So up to three of the four eigenvalues may be lost anywhere along the chain
+without harming the argument. What must be excluded is total collapse, not any
+loss --- a weaker statement than constancy, and one that Section~\textup{[sec:rigid]}
+overshoots, since it proves the characteristic polynomial exactly constant.
+
+\emph{Four places where the debt cancels outright.}
+\begin{enumerate}
+\item Any step whose accumulated displacement lies in $H^0\oplus H^2$. The string
+  and divisor equations are exact there, so such a step costs nothing. This is
+  not a rare case: it is exactly what makes the endpoint free, where the
+  displacement is $\pm2q^{1/2}$ and purely $H^0$.
+\item An adjacent blowup and blowdown of the same centre, where the composite
+  parameter map is the identity and no comparison of two parameters arises.
+\item Any valley whose Euler operator is semisimple, or more generally has only
+  multiplicity-one eigenvalues in the relevant range. There
+  Theorem~\textup{[thm:simple-blocks]} gives $\nu_6=0$ at every parameter
+  unconditionally, so the two incoming parameters agree trivially and the valley
+  is vacuous.
+\item Every centre, by the low-dimensional lemma. Centres are where a leak would
+  have to go, and they cannot receive one.
+\end{enumerate}
+
+\emph{What is left after the cancellations.} The debt sits only at valleys that
+simultaneously carry a nonzero $\nu_6$ and receive a displacement with a nonzero
+$H^{\ge4}$ part. By the dimension axiom each such displacement contributes
+finitely much per Novikov degree, so the surviving obligation is finite data at
+finitely many places, and by the slack it need only be shown not to annihilate
+all four eigenvalues at once. That is the sharpest available statement of what
+remains, and it is what a next attempt should target rather than constancy in
+general.
+
+
+\section{Corrections to the earlier versions of this memo}
+\noindent\emph{Archived from the live memo, lines 2570--2712.}
+
+\section{Corrections to the earlier versions of this memo}
+
+
+\subsection*{From the fifth version to this one}
+
+Nothing in the fifth version is retracted; one of its hypotheses is discharged
+and one of its expectations is corrected.
+
+\begin{enumerate}
+\item Standing hypothesis (H2) of Section~\textup{[sec:rigid]} is deleted. It is a
+  theorem: Lemma~\textup{[lem:duality-gauge]} shows the decoupling gauge is an
+  isometry of the Poincar\'e pairing, and Theorem~\textup{[thm:h2-automatic]} then
+  forces $f\equiv0$ pointwise on the germ, for every rank-two coalesced block of
+  every smooth projective target. Theorem~\textup{[thm:no-irregularity]} and
+  Corollary~\textup{[cor:cubic-closed]} now hold under (H1) alone. The flatness route
+  to $f\equiv0$ is kept as a remark, since it is what survives without the
+  Frobenius property.
+\item The shorter-endpoint-route subsection recorded the graded minimal
+  polynomial as $S^5=[3]$. On the numerical Grothendieck group that is
+  incompatible with the count: it forces order ten, where the Serre operator
+  computed from Riemann--Roch has characteristic polynomial $\Phi_6$ and order
+  six, matching Kuznetsov's $S^3=[5]$. The subsection now uses the verified
+  relation, and states the surface obligation as (iii) with its two reductions
+  and the non-minimal-surface counterexample to the weakened form. It also now
+  records that the shorter route's step (iii) is discharged by the existing
+  Theorem~\textup{[thm:low-dim]}, since their Serre automorphism is defined as the
+  monodromy and the two readings therefore coincide
+  (Remark~\textup{[rem:step-iii-is-low-dim]}); an intermediate version of this memo
+  carried a separate proposition duplicating that theorem, now removed.
+\item The scope remark expected the rank-two mechanism to extend to a Jordan
+  block of any size. It half does. Proposition~\textup{[prop:size-m-steps]} carries
+  the commutant and no-splitting steps to size $m$, but
+  Proposition~\textup{[prop:size-m-duality]} shows duality removes only the deepest
+  of the pole coefficients the general shearing produces, so rank two is special
+  rather than typical, and for $m\ge3$ the base point must be settled by the
+  grading, whose missing step is named there.
+\end{enumerate}
+
+\subsection*{From the fourth version to the fifth}
+
+Nothing in the fourth version is retracted. Section~\textup{[sec:rigid]} is added,
+and three of its consequences change earlier readings.
+
+\begin{enumerate}
+\item Section~\textup{[sec:not-yet]} said the coalesced case was not reduced and
+  named the block-splitting risk as the residual problem. Both are now settled
+  for a rank-two Jordan block: Theorem~\textup{[thm:no-splitting]} excludes the
+  splitting and Theorem~\textup{[thm:rigidity]} freezes the exponents. The section is
+  left standing because its diagnosis --- that the compressed pair is the wrong
+  object --- is what the shearing acts on.
+\item The residual gap of Section~\textup{[sec:hyzz]} is closed for the cubic
+  ambient summand by Corollary~\textup{[cor:cubic-closed]}. It remains open as
+  stated for arbitrary smooth projective $T$, which is a statement about
+  arbitrary blocks, not about transport.
+\item Cai's Proposition~6 already asserts the $\pm1/6$ exponents for the big
+  quantum connection, by a bulk gauge of exactly the pro-Laurent shape this memo
+  scrutinized. That argument is sound with the bulk kept formal; the receiver
+  discussion was always about specialization, not about the formal statement.
+  Section~\textup{[sec:rigid]} makes the point moot by producing constants.
+\end{enumerate}
+
+\subsection*{From the third version to the fourth}
+
+Both are in Section~\textup{[sec:blockwise]}, and both are at the coalesced blocks,
+which are the ones that matter.
+
+\begin{enumerate}
+\item The off-block projector equation was derived as
+  $(\partial_aU)_{ji}+(u_j-u_i+N_j)X_{ji}=0$, dropping the term $-X_{ji}N_i$.
+  The correct equation is $\mathcal S_{ji}(X_{ji})=-(\partial_aU)_{ji}$ with
+  $\mathcal S_{ji}(X)=(u_j-u_i)X+N_jX-XN_i$. The closed form
+  $D_a\mu_i=[C_{a,i},S_i]$ therefore holds only when the block itself is
+  semisimple, and the blocks carrying $\nu_6$ are exactly the ones where it is
+  not; in the draft's cubic block $J_0\ne0$.
+\item The block was modelled as $z\partial_z-z^{-1}U_i+\mu_i$. After formal
+  decoupling a nonsemisimple block carries higher powers of $z$, and its
+  exponents depend on them: in the cubic block the $z^2$ coefficient's entry
+  $-8/81$ enters $\rho^2+\rho+5/36=0$, and deleting it moves the exponents from
+  $\pm1/6$ to $\pm1/18$. So the isomonodromy criterion stated there is a
+  statement about semisimple blocks and is not a reduction of the residual
+  problem. It is restated with that hypothesis.
+\end{enumerate}
+
+The simple-block theorem survives, with one wording repair: the formal solution
+of a simple block is $e^{-u_i/z}$ times a single-valued formal unit, not times a
+constant, since decoupling can generate higher $z$-terms there too. The
+monodromy conclusion is unaffected.
+
+\subsection*{From the second version to the third}
+
+Both changes come from running the three checks against the sources.
+
+\begin{enumerate}
+\item The framing route of Section~\textup{[sec:hyzz]} was called the probable
+  repair. It is not a repair at all: its governing theorem lives at the
+  large-radius limit point; its blowup case, though stated with existence in
+  Theorem~5.22 and uniqueness in Theorem~5.24, is not derived from
+  Theorem~4.34, whose hypotheses do not cover the unequal block sizes, and its
+  existence is referred to the earlier decomposition work; and the gauge it
+  supplies lands at the shifted base point the bulk gauge exists to undo.
+\item The second version wrote that the unbounded negative loop order is the
+  draft's own choice rather than something the comparison theorems impose. That
+  is wrong, and it was the ground for the recommendation. Iritani--Koto
+  transport along the same object, their fundamental solution $M$ of
+  Section~5.8, with the same per-bulk-degree $z^{-1}$-polynomiality the draft
+  derives in (4.1a).
+\end{enumerate}
+
+Two findings were gained in exchange, and they narrow the problem rather than
+restate it: the comparison isomorphisms need no receiver, and the residual gap
+is one displacement statement. Both are in Section~\textup{[sec:hyzz]}.
+
+\subsection*{From the first version to the second}
+
+For readers of the first version, these are the substantive changes.
+
+\begin{enumerate}
+\item The Constants Lemma was stated without the constant-coefficient
+  hypothesis and is false without it; see Remark~\textup{[rem:constants-fails]}. The
+  framed-operator characterization inherits the hypothesis.
+\item The scissors were only implicit. The transport theorem has no verified
+  instance in the application, and that now appears where the theorem does.
+\item The claim that the criterion is scale-invariant, and the inference that
+  the separating parameter $L$ cannot be tuned, were both wrong. Tuning $L$ down
+  is now the first proposed route.
+\item The cubic-endpoint bullet compared two different normalizations. Corrected
+  above.
+\item The finite-tensor objection to the receiver was wrong twice over: the
+  pro-Laurent gauge lies in the Hahn factor alone, and the splitting gauge's
+  coefficients lie in one finite extension of $H_{0,j}$. It is replaced by the
+  gauge-relation argument.
+\item The remark that a tensor product of two fields is not a domain was
+  asserted as a general principle, which is false. The correct statement is that
+  $\mathscr R_j$ need not be one.
+\item The obstruction is now given in its order-free form, which answers two of
+  the questions the first version left open: no completion helps, and the
+  criterion is not an artifact of the ordered receiver.
+\item Smaller repairs: the freeness proof (the relevant quotient group has
+  torsion), the commutation of $\sigma$ with the derivation, the inverse of $M$,
+  the range of the exponents, the ramification factor in the splitting rate, and
+  the divisor-tagging observation, which is new.
+\end{enumerate}
+
+
+\end{document}
