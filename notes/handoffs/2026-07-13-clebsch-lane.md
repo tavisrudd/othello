@@ -189,7 +189,7 @@ automatically from any of the above.
 C756 optional stuck-state/review reading:
 [`c756-proof-expert-dossier.md`](../clebsch-tasks/c756-proof-expert-dossier.md).
 C682's dense working record is a separate lookup surface, not this table:
-[`2026-07-13-clebsch-c682-archive.md`](2026-07-13-clebsch-c682-archive.md).
+`2026-07-13-clebsch-c682-archive.md`.
 
 C321 remains conditional and is not triggered: the final Paper I review found
 no missing proof obligation.
