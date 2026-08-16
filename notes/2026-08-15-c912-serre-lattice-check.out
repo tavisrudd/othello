@@ -1,0 +1,19 @@
+Euler form E = [[-1, -1], [0, -1]]
+Serre operator S = E^-1 E^T = [[0, -1], [1, 1]]
+char poly of S: lam**2 - lam + 1
+  equals the sixth cyclotomic polynomial: True
+  eigenvalues: [1/2 - sqrt(3)*I/2, 1/2 + sqrt(3)*I/2]
+  in exponential form: exp(+- i pi/3), the two primitive sixth roots
+S^3 = [[-1, 0], [0, -1]]  -> equals -I: True
+S^6 = [[1, 0], [0, 1]]  -> equals  I: True
+
+basis-free version: rank 2, integral, S^3 = -I, tr S = 1
+  roots of lam^3 + 1:  {-1: 1, 1/2 - sqrt(3)*I/2: 1, 1/2 + sqrt(3)*I/2: 1}
+  lam = -1 excluded by the trace, so the pair is exp(+- i pi/3);
+  hence the primitive-sixth multiplicity is 2, which is nu_6 of the
+  cubic threefold as computed in the manuscript from Cai's connection.
+
+ambient contrast: S_X = (tensor omega)[3] acts on K_num as -1 times a
+unipotent (tensoring by a line bundle is unipotent on the Chern
+character), so every ambient eigenvalue is -1 and none is a primitive
+sixth root.  The count is a residual-component invariant.

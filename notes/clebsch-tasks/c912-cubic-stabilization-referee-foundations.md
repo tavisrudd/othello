@@ -48,6 +48,16 @@ question sits at `4q_2 = 27q_1`, and the count is not a Stokes-torsor invariant,
 so that hole and the Gamma-rank route's hole are different objects.  Report:
 `../2026-08-15-c912-m1-ambiguity-computation.md`, with committed script and
 output `../2026-08-15-c912-xp1-spectral-check.py` and `.out`.
+A following pass proves that standing hypothesis (H2) of the rigidity theorem is
+forced by the Frobenius structure, shows the sheared pairing is symplectic so
+that in rank two it gives `tr R = -1` and can never give `det R`, and identifies
+the count with the number of primitive-sixth eigenvalues of the Serre operator
+on the numerical K-group of the Kuznetsov component, whose characteristic
+polynomial for the cubic threefold is the sixth cyclotomic polynomial.  That
+identification is expected rather than proved, and the genus-six Gushel--Mukai
+threefold is the test that may refute it or the lane's provisional zero.
+Report: `../2026-08-15-c912-det-r-pairing-and-serre-lattice.md`, with
+`../2026-08-15-c912-serre-lattice-check.py` and `.out`.
 
 **Manuscript status change, 2026-08-15.**  On author instruction the paper no
 longer asserts the bulk-displacement step.  It is now the manually named
@@ -949,6 +959,10 @@ become manuscript edits.
 | C912-M20 | confirmed | The carrier block meets another sheet only at `4q_2 = 27q_1`, which equates two distinct Novikov monomials, so the formal germ is caustic-free by filtration rather than by genericity and the rigidity theorem applies at every point of it. | Same report, Proposition 4 and Section 4 |
 | C912-M21 | open | At `q_2 = 27q_1` two simple sheets coalesce at value zero, so the count can rise there. Harmless for the lower bound the one-stabilization theorem needs; a real gap in any equality form of birational invariance of the count. | Same report, Section 4; owner is whichever successor states the invariance as an equality |
 | C912-M22 | confirmed | The Stokes torsor of the `X x P^1` small even connection is 52-dimensional and acts trivially on the count, since the count is a formal invariant; the one-stabilization hole is a discriminant-crossing problem, not a Stokes-section problem. | Same report, Section 5 |
+| C912-M23 | resolved | Standing hypothesis (H2) of the rigidity theorem is forced by the Frobenius structure: the image of the nilpotent part is isotropic and the `z^0` coefficient is anti-self-adjoint, so the assumed entry vanishes pointwise rather than on a germ. | `../2026-08-15-c912-det-r-pairing-and-serre-lattice.md`, Theorem 2; the memo's Section 8 should be updated |
+| C912-M24 | confirmed | After the shearing the Poincare pairing is `z` times a symplectic form, and `sp(2) = sl(2)`, so in rank two the pairing gives exactly `tr R = -1` and can never determine `det R`. | Same report, Proposition 3 |
+| C912-M25 | open | The count equals the number of primitive-sixth eigenvalues of the Serre operator on the numerical K-group of the Kuznetsov component; for the cubic threefold that operator has characteristic polynomial `Phi_6` and cube `-I`, giving two. Expected correspondence, not proved; the genus-six Gushel--Mukai threefold is the refuting test. | Same report, Section 4 |
+| C912-M26 | open | The frame-transport memo records `S^5 = [3]` where Kuznetsov's relation for the same category is `S^3 = [5]`; only the latter yields primitive sixth roots, and the memo's shorter endpoint route leans on that sentence. | Same report, Section 5 |
 
 The final `ej`+`tt` closeout found no unresolved mystery in the completed
 WP1--WP3 tranche.  Removing the freestanding Hahn paragraph both repaired the
