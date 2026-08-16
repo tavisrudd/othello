@@ -9,6 +9,9 @@ Source: arXiv:2508.05105v2, cached, sha256
 Both eliminations below were machine-checked with sympy; the quadric one reproduces the
 paper's own displayed answer, which validates the method against their published case.
 
+**Boundary:** only the section headed *Paste-ready text* is for the authors. Everything after
+it is internal record and must not be sent.
+
 ## Paste-ready text
 
 Write `δ = u q ∂_q`. For a cubic threefold (`N = 5`, `k = 1`, `d = 3`, `d_tot = 3`), put an
@@ -40,11 +43,20 @@ Givental's equation (6.4), specialized to `N = 5`, `k = 1`, `d_1 = 3`, `d_tot = 
         = 3q (3δ + u)(3δ + 2u) φ
         = q (27 δ² + 27 u δ + 6 u²) φ ,
 
-with no `q²` term. The `δ²`, `δ` and constant coefficients agree between the two
-computations, which fixes the rest of the matrix and isolates the corner entry; comparing the
-`q²` terms forces
+with no `q²` term. Comparing the `q²` terms forces
 
     b = 36 .
+
+The comparison in fact determines the whole matrix, not just the corner. Carrying general
+entries `αq`, `βq`, `γq` in the slots `(1,2)`, `(2,3)`, `(3,4)` through the same elimination
+gives
+
+    δ⁴φ = q [ (α + β + γ) δ² + (β + 2γ) u δ + γ u² ] φ + (b − αγ) q² φ ,
+
+so matching against `q(27δ² + 27uδ + 6u²)` with no `q²` term is a triangular system: `γ = 6`
+from the constant term, then `β = 15`, then `α = 6`, and finally `b = αγ = 36`. The displayed
+entries are therefore confirmed by (6.4) rather than assumed, and the corner is the only slot
+where the display disagrees with it.
 
 With that entry, `χ_K(λ) = λ²(λ² − 108q)`, matching Example 6.21. Without it,
 `χ_K(λ) = λ⁴ − 108qλ² + 576q²`, which is regular semisimple for `q ≠ 0`.

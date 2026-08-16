@@ -49,6 +49,23 @@ assert sp.expand(rhs - (27 * (u * s) ** 2 + 27 * u * (u * s) + 6 * u ** 2)) == 0
 print("(6.4):   3q(3delta + u)(3delta + 2u) = q(27 delta^2 + 27 u delta + 6 u^2), no q^2 term  OK")
 print("         => b = 36, and chi_K(lam) = lam^2 (lam^2 - 108 q).")
 
+# --- the comparison determines every entry, not only the corner ----------------------------
+al, be, ga = sp.symbols("alpha beta gamma")
+g4 = f
+g3 = -delta(g4)
+g2 = sp.expand(delta(-g3) - ga * q * g4)
+g1 = sp.expand(delta(-g2) - be * q * g3)
+general = sp.expand(delta(g1) + al * q * g2 + b * q ** 2 * g4)
+closed = sp.expand(-d4(f)
+                   + q * ((al + be + ga) * delta(delta(f))
+                          + (be + 2 * ga) * u * delta(f) + ga * u ** 2 * f)
+                   + (b - al * ga) * q ** 2 * f)
+assert sp.simplify(general - closed) == 0
+sol = sp.solve([al + be + ga - 27, be + 2 * ga - 27, ga - 6], [al, be, ga], dict=True)[0]
+assert sol == {al: 6, be: 15, ga: 6}
+print("general: delta^4 phi = q[(a+b+c) delta^2 + (b+2c) u delta + c u^2] phi + (B - a c) q^2 phi")
+print("         matching (6.4) is triangular: c = 6, b = 15, a = 6, hence B = a c = 36.   OK")
+
 # --- quadric: N = 5, k = 1, d = 2, reproducing their Example 6.6(i) -------------------------
 p4 = f
 p3 = -delta(p4)
