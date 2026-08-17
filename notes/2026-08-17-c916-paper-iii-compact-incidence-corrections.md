@@ -311,3 +311,12 @@ passing hash, primary and independent replay, and
 aggregate fails only at the same pre-existing README vocabulary gate.
 `export-paper-repos.py verify` reports the mirror's 64 tracked files matching
 the manifest at source commit `3b8e2c11f`.  Nothing was pushed.
+
+The Proposition 4.1 follow-up went out the same way: authority commit
+`d4c535c8f`, audit `findings=0`, sync carrying five files to standalone commit
+`6b38a86`, mirror PDF SHA-256
+`1040bd977ab74c77c0f77b69e21ad5f391ed13ba46911c6234e67056b69bb5f1` equal to the
+authority's, statement identity CHECK OK, spacing lint OK, deterministic build
+PASS at 33 pages warning-free, all three evidence stems passing hash and
+independent replay, and `verify` reporting 64 tracked files at source commit
+`d4c535c8f`.  Nothing was pushed.
