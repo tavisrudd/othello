@@ -44,13 +44,6 @@ certificate-checked computations, or trusted executions. See
 [VERIFICATION.md](VERIFICATION.md) for links to the detailed paper-level
 evidence maps.
 
-- [selected headline results](#selected-headline-results)
-- [theorems over infinite families](#theorems-over-infinite-families)
-- [papers and entry points](#papers-and-entry-points)
-- [abstracts and non-specialist guides](#abstracts-and-non-specialist-guides)
-- [verification philosophy](#verification-philosophy)
-- [contact and disclosure](#contact-and-disclosure)
-
 ## Selected headline results
 
 These are selected headlines, not a ranking. They are grouped to show the
