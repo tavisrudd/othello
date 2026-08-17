@@ -52,6 +52,43 @@ These are selected headlines, not a ranking. They are grouped to show the
 range of the programme and to avoid counting several facets of one theorem
 complex as separate victories.
 
+### Algebraic geometry and rationality
+
+- **One-stabilization irrationality for every smooth cubic threefold.** The
+  fourfold `X × P¹` is irrational for every smooth complex cubic threefold
+  `X`, unconditionally, and likewise `V × P¹` for every smooth prime Fano
+  threefold `V` of genus eight. The proof reads the ordinary, non-enhanced
+  Hodge-atom package as a birational ledger and introduces a rank-two atomic
+  residue discriminant: the double zero packet of the cubic small quantum
+  connection is a single Hodge atom whose modified block has discriminant
+  `4/9`, a value no curve or surface representative can carry. A separate
+  framed-monodromy invariant gives `ν₆(X) = 2` and `ν₆(X × P¹) = 4`
+  unconditionally; its birational invariance through dimension four is
+  conditional on two stated hypotheses and yields a second proof. On an
+  explicit non-isotrivial `A₅`-invariant family, the cubic threefolds are
+  universally `CH₀`-trivial, so the usual decomposition-of-the-diagonal
+  detector and irrationality after one stabilization separate on the same
+  stabilized varieties.
+  [Irrationality of Cubic Threefolds after One Stabilization](https://github.com/tavisrudd/cubic-stabilization-epilogue/blob/main/irrationality_after_one_stabilization.pdf).
+
+- **Conditionally, every projective stabilization of a smooth cubic
+  threefold is irrational.** A common-open point has exact ambient coordinate
+  in the Gu--Yu--Yu simple-wall comparison, and projective ordinary-flop
+  continuation preserves its intrinsic row on a fixed continuation domain.
+  For a global cobordism, support collapse and coefficientwise Gamma-ratio
+  reduction combine with a rank-one derived-intersection theorem. In addition
+  to the stated gauged-admissibility conditions, the remaining unproved input
+  is one-object marked threshold compatibility for the cyclic Rees `z`-modules.
+  A crepant toric wall supplies a genuine neutral linear-toric calibration of
+  the intrinsic marked-continuation mechanism at the QDM/`I`-function level,
+  but not the arbitrary-master inverse system or the zero-mode nearby-cycle
+  comparison.
+  Under those assumptions, the point-row primary Boolean is birationally
+  invariant and distinguishes `X × P^m` from projective space for every smooth
+  cubic threefold `X` and every `m ≥ 0`.  That paper is an early draft, likely
+  to contain logical gaps and notational issues.
+  [Gamma Point Rows under Quantum Wall Crossing and a Criterion for Stable Irrationality](https://github.com/tavisrudd/cubic-stabilization-irrationality/blob/main/cubic_stabilization_irrationality.pdf).
+
 ### Finite geometry and reconstruction
 
 - **Universal secant-defect identity.** For every finite projective plane and
@@ -94,43 +131,6 @@ complex as separate victories.
   the normalized outer difference gives an exact oriented round trip once a
   chordal companion is selected.
   [Chordal and Conference Cubics: Reconstruction and a Residual C2-Torsor](../chordal-conference-reconstruction/chordal_conference_reconstruction.pdf).
-
-### Algebraic geometry and rationality
-
-- **One-stabilization irrationality for every smooth cubic threefold.** The
-  fourfold `X × P¹` is irrational for every smooth complex cubic threefold
-  `X`, unconditionally, and likewise `V × P¹` for every smooth prime Fano
-  threefold `V` of genus eight. The proof reads the ordinary, non-enhanced
-  Hodge-atom package as a birational ledger and introduces a rank-two atomic
-  residue discriminant: the double zero packet of the cubic small quantum
-  connection is a single Hodge atom whose modified block has discriminant
-  `4/9`, a value no curve or surface representative can carry. A separate
-  framed-monodromy invariant gives `ν₆(X) = 2` and `ν₆(X × P¹) = 4`
-  unconditionally; its birational invariance through dimension four is
-  conditional on two stated hypotheses and yields a second proof. On an
-  explicit non-isotrivial `A₅`-invariant family, the cubic threefolds are
-  universally `CH₀`-trivial, so the usual decomposition-of-the-diagonal
-  detector and irrationality after one stabilization separate on the same
-  stabilized varieties.
-  [Irrationality of Cubic Threefolds after One Stabilization](https://github.com/tavisrudd/cubic-stabilization-epilogue/blob/main/irrationality_after_one_stabilization.pdf).
-
-- **Conditionally, every projective stabilization of a smooth cubic
-  threefold is irrational.** A common-open point has exact ambient coordinate
-  in the Gu--Yu--Yu simple-wall comparison, and projective ordinary-flop
-  continuation preserves its intrinsic row on a fixed continuation domain.
-  For a global cobordism, support collapse and coefficientwise Gamma-ratio
-  reduction combine with a rank-one derived-intersection theorem. In addition
-  to the stated gauged-admissibility conditions, the remaining unproved input
-  is one-object marked threshold compatibility for the cyclic Rees `z`-modules.
-  A crepant toric wall supplies a genuine neutral linear-toric calibration of
-  the intrinsic marked-continuation mechanism at the QDM/`I`-function level,
-  but not the arbitrary-master inverse system or the zero-mode nearby-cycle
-  comparison.
-  Under those assumptions, the point-row primary Boolean is birationally
-  invariant and distinguishes `X × P^m` from projective space for every smooth
-  cubic threefold `X` and every `m ≥ 0`.  That paper is an early draft, likely
-  to contain logical gaps and notational issues.
-  [Gamma Point Rows under Quantum Wall Crossing and a Criterion for Stable Irrationality](https://github.com/tavisrudd/cubic-stabilization-irrationality/blob/main/cubic_stabilization_irrationality.pdf).
 
 ### Coding theory and quantum information
 
