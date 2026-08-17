@@ -143,6 +143,7 @@ After base change to \(E\), the pullback of the incidence double cover to
 components and the two conjugate charts.
 
 \subsection{A rational incidence model}
+\label{sec:rational-incidence-model}
 
 The function-field calculation requires a rational model, which can be
 given without descending either Clebsch chart.  Let \(W=\Q^3\) with the
@@ -158,7 +159,20 @@ These three rational skew forms define a closed subscheme
 \]
 Hitchin identifies \(X_{\mathbf C}\) with the Mukai--Umemura threefold
 \cite[\S\S4--5]{HitchinBundles}; in particular \(X\) is geometrically
-integral and smooth.  The incidence scheme used here is
+integral and smooth.
+
+Over \(\mathbf C\), the open \(\operatorname{SO}(3,\mathbf C)/A_5\)-orbit in
+\(X_{\mathbf C}\) parametrizes nondegenerate icosahedral configurations; its
+complement is Hitchin's degenerate divisor.  By
+\cite[\S6, Proposition~2]{HitchinBundles}, there is an
+\(\operatorname{SO}(3,\mathbf C)\)-invariant homogeneous polynomial
+\(\Delta\) of degree ten on \(H_{\mathbf C}\) such that a harmonic cubic
+\(f\) is orthogonal to a degenerate isotropic three-plane if and only if
+\(\Delta(f)=0\).  We use \(\Delta\) only to distinguish regular points of the
+compact incidence space from boundary points; no normalization or arithmetic
+square class of \(\Delta\) is used below.
+
+The incidence scheme used here is
 \[
  \mathcal I=\{([f],U)\in\mathbf P(H)\times X:
                    \langle f,U\rangle=0\}.
@@ -196,6 +210,7 @@ constructed below, the local comparison proves that this morphism carries
 \(\nu^{-1}([xyz])=\Spec E\) isomorphically onto the golden incidence fibre.
 
 \subsection{Proof of Theorem~\ref{thm:arithmetic-main}}
+\label{sec:arithmetic-main-proof}
 
 Hitchin realizes the Mukai--Umemura threefold as the zero locus of the
 three skew forms on \(\operatorname{Gr}(3,H)\).  The top Chern number of
@@ -246,22 +261,30 @@ index two and residue degree one, so each divisorial branch component occurs
 once in \(\pi_*R\); components of \(R\) contracted to codimension at least
 two do not contribute.
 
-Hitchin proves that a general real point of \(J_0=0\) has exactly one
-incidence configuration, whereas either side has respectively two or zero
-real regular configurations
-\cite[\S9, Proposition~10 and Theorem~11]{HitchinIcosahedron}.
-At such a general boundary point \(\pi\) is quasi-finite, hence finite after
-shrinking the target.  The source is smooth and the target regular of the
-same dimension, so miracle flatness makes this local finite map flat of
-degree two.  Its fibre has only one geometric point and therefore is
-ramified.  The real smooth
-points used here are Zariski dense in the irreducible sextic \(J_0=0\).
-Thus this sextic is a component of the branch cycle.  Equation~(2.1) shows
-that it exhausts that cycle, with multiplicity one.  In particular the
-normal quadratic incidence field is branched exactly along the reduced
-divisor \(J_0=0\).  This scheme-theoretic conclusion is the paper-local
-ramification calculation; the cited real classification supplies the dense
-set of boundary points, not the finite-cover assertion.
+Hitchin's compact trichotomy concerns the zero scheme of the section of the
+universal rank-three dual bundle on the Mukai--Umemura threefold itself
+\cite[\S\S3--4, 8--9, especially Theorems~4--5]{HitchinBundles}.  Its
+geometric fibres have two points, one point, or positive dimension, and the
+one-or-positive-dimensional locus is the invariant sextic.  The locus where
+\(\pi\) has positive-dimensional fibre is closed by upper semicontinuity and
+is not the whole sextic: on a fixed Clebsch chart,
+\cite[\S8.3, Theorem~4]{HitchinBundles} confines the positive-dimensional
+case to a degree-six rational curve and six lines inside the Clebsch cubic
+surface, so a point of that surface off the curve and those lines has a
+one-point compact fibre.  Hence, after base change to \(\mathbf C\), a
+general smooth point of
+the irreducible sextic \(J_0=0\) has exactly one geometric point in the
+compact incidence fibre.  At such a point \(\pi\) is quasi-finite, hence
+finite after shrinking the target.  The source is smooth and the target
+regular of the same dimension, so miracle flatness makes this local finite
+map flat of degree two.  Its fibre has only one geometric point and therefore
+is ramified.  Thus the irreducible sextic \(J_0=0\) is a component of the
+branch cycle.  Equation~(2.1) shows that it exhausts that cycle, with
+multiplicity one.  In particular the normal quadratic incidence field is
+branched exactly along the reduced divisor \(J_0=0\).  This scheme-theoretic
+conclusion uses the compact incidence trichotomy to establish
+quasi-finiteness; no count of regular icosahedra is used to exclude hidden
+boundary points.
 
 \smallskip
 \noindent\emph{Square class from one fibre.}\par
@@ -331,10 +354,14 @@ for some \(g\in K^\times\) and a unique
 \(K(\sqrt{cJ_0})\).
 
 \emph{The local comparison at \(xyz\).}
-Hitchin's classification gives exactly the two distinct configurations
-\(I_t\) and \(I_{1-t}\) over \([xyz]\)
-\cite[\S\S3, 7--9]{HitchinIcosahedron}.  Thus \(\pi\) is quasi-finite over
-this point.  Because \(\pi\) is proper, there is a Zariski neighborhood
+Because \(J_0\) is a scalar-normalized equation of Hitchin's invariant sextic
+and \(J_0(xyz)=(16/25)^2\ne0\), Hitchin's compact trichotomy
+\cite[\S\S3--4, 9, Theorem~5]{HitchinBundles} puts \([xyz]\) in the two-point
+case for the section on the Mukai--Umemura threefold.  The two points are the
+regular configurations \(I_t\) and \(I_{1-t}\) exhibited in
+\cite[\S\S3, 7--9]{HitchinIcosahedron}, so they exhaust the compact geometric
+fibre.  In particular \(\pi\) is quasi-finite over this point.
+Because \(\pi\) is proper, there is a Zariski neighborhood
 \(B\) of \([xyz]\) on which \(\pi\) is finite.  Let
 \(\widetilde B\) be the normalization of \(B\) in the quadratic generic
 field \(K(\sqrt{cJ_0})\).  The normal finite scheme
@@ -376,10 +403,18 @@ the direct summand \(\mathcal M\) is therefore a rank-one reflexive sheaf.
 Every such sheaf on projective space is a line bundle, say
 \(\mathcal M\simeq\mathcal O(-d)\).
 
-Multiplication on the anti-invariant summand is a section of
-\(\mathcal M^{-2}\simeq\mathcal O(2d)\).  Its zero divisor is the branch
-divisor, which is the sextic \(J_0=0\); hence \(d=3\), and multiplication is
-\(cJ_0\) for some \(c\in\Q^\times\).  The function-field calculation and
+Multiplication on the anti-invariant summand is a section \(a\) of
+\(\mathcal M^{-2}\simeq\mathcal O(2d)\).  At a codimension-one point of the
+regular base \(\mathbf P(H)\), trivialize \(\mathcal M\) over the
+corresponding discrete valuation ring \(R\), with uniformizer \(\varpi\).
+The quadratic algebra is then \(R[z]/(z^2-a)\).  Since \(\mathcal N\) is
+normal, \(v(a)\) cannot be at least two: otherwise \(z/\varpi\) is integral,
+because \((z/\varpi)^2=a/\varpi^2\in R\), but
+\(z/\varpi\notin R\oplus Rz\).  Thus every height-one zero of \(a\) has
+multiplicity one, so the zero divisor of the multiplication section is
+exactly the reduced branch divisor \(J_0=0\).  Hence \(2d=6\), so \(d=3\),
+and multiplication is \(cJ_0\) for some \(c\in\Q^\times\).
+The function-field calculation and
 the golden fibre give \(c=5\) modulo a rational square.  Rescaling the chosen
 isomorphism \(\mathcal M\simeq\mathcal O(-3)\) absorbs that square and gives
 the exact algebra
