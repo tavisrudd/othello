@@ -4,6 +4,18 @@
   "axiom_audit_module": "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Verification.AxiomAudit",
   "claims": [
     {
+      "manuscript_label": "thm:every-cubic",
+      "coverage": "conditional_deduction",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.irrational_of_nonzero_packet",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicThreefold_oneStep_irrational_of_packet_inputs"
+      ],
+      "objects": "An abstract geometric signature naming smooth complex cubic threefolds, product with projective one-space, projective four-space, and rationality, together with a natural-valued packet multiplicity.",
+      "hypotheses": "The carrier satisfies the smooth-cubic predicate, its packet equals two, the named product obeys the rank-two formula and dimension bound, projective four-space has zero packet, and rationality supplies the required birational relation.",
+      "conclusion": "The named product of the specified cubic carrier with projective one-space is not rational.",
+      "cautions": "The geometric signature and every quantum, weak-factorization, and rational-comparison fact remain typed premises rather than foundational constructions."
+    },
+    {
       "manuscript_label": "cor:voisin-separation",
       "coverage": "absent",
       "declarations": [],
@@ -42,16 +54,13 @@
       "cautions": "Lean checks only the final composition. It does not construct the nonstandard A5-invariant pencil, its connected smooth locus, the invariant cubic space, its fibres, intermediate Jacobians, Chow groups, projective-bundle formula, primitive minimal classes or their algebraicity, Voisin's criterion, the framed quantum packet and operation formulas, weak-factorization comparison, coarse moduli, or the nonconstant period map. The cycle conclusion is fibrewise, and no relative universal cycle is asserted. The typed irrationality input is the broader every-cubic input and does not use the A5 symmetry."
     },
     {
-      "manuscript_label": "thm:every-cubic",
-      "coverage": "conditional_deduction",
-      "declarations": [
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.irrational_of_nonzero_packet",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicThreefold_oneStep_irrational_of_packet_inputs"
-      ],
-      "objects": "An abstract geometric signature naming smooth complex cubic threefolds, product with projective one-space, projective four-space, and rationality, together with a natural-valued packet multiplicity.",
-      "hypotheses": "The carrier satisfies the smooth-cubic predicate, its packet equals two, the named product obeys the rank-two formula and dimension bound, projective four-space has zero packet, and rationality supplies the required birational relation.",
-      "conclusion": "The named product of the specified cubic carrier with projective one-space is not rational.",
-      "cautions": "The geometric signature and every quantum, weak-factorization, and rational-comparison fact remain typed premises rather than foundational constructions."
+      "manuscript_label": "lem:six-point-hearts",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "The six-point permutation module of the alternating group on five letters over the prime fields of characteristic two and three, its augmentation quotient by the all-ones vector, and the endomorphism algebra of that quotient.",
+      "hypotheses": "Only the six-point action of the alternating group; no geometric input.",
+      "conclusion": "Each quotient is a simple module, with endomorphism algebra the field of four elements in characteristic two and the field of three elements in characteristic three.",
+      "cautions": "Not formalized. The nearest formalized material is the coefficient-heart classification registered under the principal gluing packet, which takes the heart structures as given rather than proving simplicity."
     },
     {
       "manuscript_label": "prop:six-axis-polarization",
@@ -107,7 +116,7 @@
       ],
       "objects": "Lean represents projective lines over concrete fields F4, F5, and F3 as actual Mathlib projectivizations, using the vertical point plus scalar graph points as an affine chart; the concrete F2-bilinear trace-determinant form on F4^2; its induced alternating form on two multiplicity copies; arbitrary abstract coefficient pairings and slopes; the canonical Frobenius field automorphism of F4 and its actions both on affine-chart coordinates and directly on the actual projective line; the transported marked quadratic root and its conjugate; the determinant kernel defining the concrete group SL2(F4); its faithful action on the five points of the natural projective line; the ordinary alternating group on five labelled letters; continuous classifying maps from connected topological bases into finite discrete packets; and a concrete four-coordinate model for the characteristic-two augmentation hyperplane on six points modulo its constant line, with matrices induced by two explicit six-point permutations, an explicit one-factorization of the fifteen pairs of labels, all six Sylow-five subgroups of the concrete alternating group, their normalizers, and explicit dihedral models for those normalizers. The six labels are also mapped explicitly to P1(F5), with translation and inversion induced by two displayed determinant-one matrices, the faithful natural PSL2(F5) action, and the conjugation action of A5 on its six Sylow-five subgroups. The stable-half terminals additionally consider four-dimensional subspaces of two copies of the concrete coefficient heart under the diagonal action of the two displayed generators, the actual projective line P1(F4) with its marked vertical-plus-affine chart, and the explicit alternating polarization form induced on the two heart copies.",
       "hypotheses": "The projective classification uses only finiteness and the field axioms. The concrete F4 trace-determinant, maximal-isotropic, and group-order calculations have no added mathematical hypothesis. Matching the human proof, the public trace-rigidity implication takes a supplied unit d in F4 and assumes that multiplication by d preserves the trace against every test element. The more general polarization theorem assumes exactly that a supplied slope is self-adjoint for a supplied pairing; finite-dimensionality is used for its half-dimension statement. The generic persistence terminal assumes a connected base, a finite packet with the discrete topology, a continuous classifying map, and membership of one chosen fibre in a distinguished packet subset. One marked-F4 specialization takes a continuous classifier into the discrete affine chart Option F4; a stronger specialization takes a continuous classifier directly into Projectivization F4 (F4 x F4). These assume that one chosen fibre is one of the two scalar graphs defined by the transported marked root and its root+1 conjugate. The strongest persistence terminal replaces that marked-pair premise by the weaker premise that the chosen projective point is not fixed by coefficientwise Frobenius. The concrete stable-half terminal universally quantifies a subspace of two heart copies and characterizes the exact condition that it have F2-dimension four and be stable under the diagonal translation and inversion actions. The stronger polarization terminal requires no additional premise: it characterizes packet membership by diagonal stability and maximal isotropy. The explicit projective-line equivalence and its five marked chart values require no additional hypothesis.",
-      "conclusion": "Every projective-line point is uniquely vertical or a scalar graph; P1(F4) has five members and P1(F3) has four. The printed trace-determinant coefficient form and induced two-copy form are nondegenerate, every F4 scalar is self-adjoint, and every scalar graph equals its orthogonal complement, hence is maximal isotropic. Squaring on F4 is identified with the canonical Frobenius field automorphism; it fixes exactly 0 and 1, is involutive, and exchanges every other scalar with a distinct conjugate. On the affine projective chart it acts coefficientwise, fixes exactly the vertical point and graphs of 0 and 1, and its nonfixed locus is exactly the transported marked quadratic root together with root+1. Transporting that action through the proved affine-chart equivalence gives an involution directly on Projectivization F4 (F4 x F4), whose nonfixed locus is exactly the two scalar graph points of the marked root and root+1. The full five-letter symmetric group has order 120; its alternating subgroup has index two and full normalizer. Transported to this labelling, projective Frobenius is a transposition in the nontrivial coset, hence odd; its conjugation preserves both the alternating subgroup and the concrete PSL2(F4) projective image. A determinant unit whose multiplication preserves the trace against every test element is one. The concrete groups SL2(F4) and the alternating group on five letters both have order 60, the center of SL2(F4) is trivial, its faithful five-point projective image consists exactly of the even permutations, and the resulting construction gives an explicit abstract isomorphism SL2(F4) ≃ A5. Every continuous finite-discrete-packet classifying map on a connected base is constant, so membership in any distinguished subset at one fibre persists at every fibre. In particular, this is proved both for a continuous affine-chart F4 classifier and directly for a continuous classifier into the actual projective line when one chosen fibre lies in the marked two-point scalar-graph pair. More strongly, nonfixity under projective Frobenius at one fibre alone identifies that fibre with the marked pair and propagates the exact classification throughout the connected base. For the explicit six-point characteristic-two heart model, normalized representatives recover all four quotient coordinates, the coordinate kernel on the augmentation hyperplane is exactly the constant line, and translation and inversion induce the displayed matrices. The six labels are explicitly equivalent to the actual P1(F5); under this equivalence the two permutations are the projectivizations of (x,y) maps to (x,x+y) and (x,y) maps to (y,-x). These permutations preserve an explicit five-factor one-factorization; the induced factor words exhaust the alternating group on five letters and have exactly the same word kernel as the six-point words, so the generated six-point action is faithfully identified with a concrete A5. Lean constructs all six Sylow-five subgroups in this concrete A5 and proves that conjugation by the two generators acts on them by exactly the original six-point translation and inversion. The explicit P1(F5) labelling is therefore equivalent to the six-member Sylow-five packet. The faithful natural PSL2(F5) action has order 60; the two displayed permutations arise from explicit determinant-one matrices, and Lean constructs an isomorphism PSL2(F5) ≃ A5 that intertwines the full natural projective action with conjugation on the six Sylow-five subgroups. Both of these six-point actions are two-transitive. Every natural PSL2(F5) point stabilizer is proved to be the corresponding ten-element dihedral normalizer and is explicitly equivalent to D5. The six-label equivalence with the Sylow packet intertwines both generators with conjugation, and each point stabilizer is the corresponding normalizer. Each Sylow normalizer has ten elements and is explicitly equivalent to the dihedral group D5. Every subspace stable under both induced heart matrices is zero or the whole heart. A matrix commutes with every word matrix in the full generated heart action exactly when it is one of {0,1,W,W+1}, where W^2+W+1=0. A subspace of two heart copies is four-dimensional and stable under the diagonal generated action exactly when it is the vertical half or the graph of one of the four displayed commutant endomorphisms 0, 1, W, and W+1; the displayed packet has exactly five distinct members. An explicit equivalence with the actual P1(F4) sends the vertical chart point to the vertical half and the affine labels 0, 1, the transported marked root, and root+1 to the corresponding graphs of 0, 1, W, and W+1. The explicit alternating polarization form on the two heart copies is nondegenerate, and these five packet members are exactly the diagonally stable maximal-isotropic subspaces. The chosen linear equivalence from the standard rank-eight tensor discriminant coordinates to two heart copies preserves the bilinear form and transports this exact stable maximal-isotropic packet classification.",
+      "conclusion": "Every projective-line point is uniquely vertical or a scalar graph; P1(F4) has five members and P1(F3) has four. The printed trace-determinant coefficient form and induced two-copy form are nondegenerate, every F4 scalar is self-adjoint, and every scalar graph equals its orthogonal complement, hence is maximal isotropic. Squaring on F4 is identified with the canonical Frobenius field automorphism; it fixes exactly 0 and 1, is involutive, and exchanges every other scalar with a distinct conjugate. On the affine projective chart it acts coefficientwise, fixes exactly the vertical point and graphs of 0 and 1, and its nonfixed locus is exactly the transported marked quadratic root together with root+1. Transporting that action through the proved affine-chart equivalence gives an involution directly on Projectivization F4 (F4 x F4), whose nonfixed locus is exactly the two scalar graph points of the marked root and root+1. The full five-letter symmetric group has order 120; its alternating subgroup has index two and full normalizer. Transported to this labelling, projective Frobenius is a transposition in the nontrivial coset, hence odd; its conjugation preserves both the alternating subgroup and the concrete PSL2(F4) projective image. A determinant unit whose multiplication preserves the trace against every test element is one. The concrete groups SL2(F4) and the alternating group on five letters both have order 60, the center of SL2(F4) is trivial, its faithful five-point projective image consists exactly of the even permutations, and the resulting construction gives an explicit abstract isomorphism SL2(F4) \u2243 A5. Every continuous finite-discrete-packet classifying map on a connected base is constant, so membership in any distinguished subset at one fibre persists at every fibre. In particular, this is proved both for a continuous affine-chart F4 classifier and directly for a continuous classifier into the actual projective line when one chosen fibre lies in the marked two-point scalar-graph pair. More strongly, nonfixity under projective Frobenius at one fibre alone identifies that fibre with the marked pair and propagates the exact classification throughout the connected base. For the explicit six-point characteristic-two heart model, normalized representatives recover all four quotient coordinates, the coordinate kernel on the augmentation hyperplane is exactly the constant line, and translation and inversion induce the displayed matrices. The six labels are explicitly equivalent to the actual P1(F5); under this equivalence the two permutations are the projectivizations of (x,y) maps to (x,x+y) and (x,y) maps to (y,-x). These permutations preserve an explicit five-factor one-factorization; the induced factor words exhaust the alternating group on five letters and have exactly the same word kernel as the six-point words, so the generated six-point action is faithfully identified with a concrete A5. Lean constructs all six Sylow-five subgroups in this concrete A5 and proves that conjugation by the two generators acts on them by exactly the original six-point translation and inversion. The explicit P1(F5) labelling is therefore equivalent to the six-member Sylow-five packet. The faithful natural PSL2(F5) action has order 60; the two displayed permutations arise from explicit determinant-one matrices, and Lean constructs an isomorphism PSL2(F5) \u2243 A5 that intertwines the full natural projective action with conjugation on the six Sylow-five subgroups. Both of these six-point actions are two-transitive. Every natural PSL2(F5) point stabilizer is proved to be the corresponding ten-element dihedral normalizer and is explicitly equivalent to D5. The six-label equivalence with the Sylow packet intertwines both generators with conjugation, and each point stabilizer is the corresponding normalizer. Each Sylow normalizer has ten elements and is explicitly equivalent to the dihedral group D5. Every subspace stable under both induced heart matrices is zero or the whole heart. A matrix commutes with every word matrix in the full generated heart action exactly when it is one of {0,1,W,W+1}, where W^2+W+1=0. A subspace of two heart copies is four-dimensional and stable under the diagonal generated action exactly when it is the vertical half or the graph of one of the four displayed commutant endomorphisms 0, 1, W, and W+1; the displayed packet has exactly five distinct members. An explicit equivalence with the actual P1(F4) sends the vertical chart point to the vertical half and the affine labels 0, 1, the transported marked root, and root+1 to the corresponding graphs of 0, 1, W, and W+1. The explicit alternating polarization form on the two heart copies is nondegenerate, and these five packet members are exactly the diagonally stable maximal-isotropic subspaces. The chosen linear equivalence from the standard rank-eight tensor discriminant coordinates to two heart copies preserves the bilinear form and transports this exact stable maximal-isotropic packet classification.",
       "cautions": "Lean does not identify the six explicit Sylow-five subgroups and their dihedral normalizers with the manuscript's six geometrically named D5 normalizers. It therefore does not identify the proved concrete A5 permutation action, the resulting four-dimensional module, or its quadratic commutant with the manuscript's geometric A5 action, coefficient heart, and F4 commutant. It also does not prove that all geometrically A5-stable simple halves arise from the projective points, identify the geometric permutation stabilizer with the formalized SL2(F4), identify the manuscript's named A5 action with either formalized alternating-group model, prove that named subgroup lies in the stabilizer, classify the geometric S6 and A5 stabilizers, identify the manuscript's geometric odd normalizer element with the formalized Frobenius permutation, or construct the geometric local system, finite principal-kernel packet, or continuous classifying map needed to apply the connected-family persistence theorem. Thus the abstract generated-group, Sylow-five packet, dihedral normalizers, and six-point action identifications, six-point quotient coordinates and quadratic matrix commutant, finite-field enumeration, concrete polarization and maximal-isotropic algebra, determinant trace-rigidity, abstract exceptional-group identification, abstract Frobenius normalizer calculation, and exact connectedness deduction are checked, but the remaining geometric identifications remain absent."
     },
     {
@@ -222,6 +231,159 @@
       "cautions": "Lean proves only the universally quantified logical deduction. The cubic pencil, smooth fibres, intermediate Jacobians, primitive minimal classes, their algebraicity from the six-axis divided-power theorem, Chow groups, universal base change in the CH0 predicate, and Voisin's geometric equivalence are represented by supplied types, functions, predicates, and premises rather than constructed. The argument is fibrewise and asserts neither a horizontal cycle nor a relative decomposition of the diagonal."
     },
     {
+      "manuscript_label": "prop:A5-nonseparated",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "The coarse-moduli image of the nonstandard invariant cubic pencil of the alternating group on five letters, and cubic forms that split as sums of forms in pairwise disjoint nonempty groups of at most three variables.",
+      "hypotheses": "Smoothness of the pencil members, and the separated-variable criterion for universal CH0-triviality of Colliot-Thelene.",
+      "conclusion": "Only finitely many moduli points of the pencil are represented by cubics projectively equivalent to a separated-variable form, so all but finitely many are universally CH0-trivial for a reason the separated-variable criterion does not supply.",
+      "cautions": "Not formalized. The projective-equivalence and dimension arguments over the coarse moduli image are outside the companion's scope."
+    },
+    {
+      "manuscript_label": "lem:euler-sign",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "The maximal A-model F-bundle of the ordinary Hodge-atom package, its intrinsic Euler field, the residual endomorphism of the connection in the loop coordinate, and the reduced spectral cover.",
+      "hypotheses": "The A-model connection conventions of the ordinary Hodge-atom package of Katzarkov, Kontsevich, Pantev, and Yu.",
+      "conclusion": "The residual endomorphism equals Euler multiplication with reversed sign, so the two operators share generalized eigenspaces and eigenvalue counts, and their reduced spectral covers correspond under negation.",
+      "cautions": "Not formalized. The companion contains no F-bundle, F-manifold, or spectral cover."
+    },
+    {
+      "manuscript_label": "lem:hodge-base",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "The Hodge-fixed locus of the maximal A-model F-bundle of a smooth projective variety, its tangent space, and the restriction of quantum multiplication to it.",
+      "hypotheses": "The rational classes of Hodge type (i,i) span the relevant subspace after extension to the Novikov coefficient field.",
+      "conclusion": "The Hodge-fixed locus is an F-submanifold whose multiplication and intrinsic Euler endomorphism are the restrictions of the ambient ones; for a smooth cubic threefold the Lefschetz theorem identifies it explicitly.",
+      "cautions": "Not formalized."
+    },
+    {
+      "manuscript_label": "prop:cubic-block-data",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "Small even Euler multiplication of a smooth cubic threefold after adjoining the square root of three times the line Novikov variable, its characteristic polynomial, the zero generalized eigenspace, and the normalized gauge that splits the horizontal system.",
+      "hypotheses": "Smoothness of the cubic threefold, the hyperplane and line class conventions, and adjunction of the square root to the Novikov coefficient field.",
+      "conclusion": "The characteristic polynomial is the square of the coordinate times the difference of its square and one hundred eight times the line variable, the zero generalized eigenspace is a single rank-two Jordan block, and a constant change of basis followed by a unique normalized gauge in integral powers of the original loop coordinate splits the horizontal system into blocks.",
+      "cautions": "Not formalized here. The conditional Lean treatment of the resulting indicial factorization and framed eigenvalues is registered under the cubic packet claim, which starts from a supplied characteristic polynomial instead of constructing this block reduction."
+    },
+    {
+      "manuscript_label": "lem:disc",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "The residue discriminant of a rank-two spectral factor as a function on the base, and the vector fields of the Euler stratification acting on it.",
+      "hypotheses": "Regularity of Euler multiplication at the chosen base point.",
+      "conclusion": "The four displayed derivations of the discriminant hold on the germ, so the logarithmic differential of the discriminant is a regular one-form and the discriminant either is nowhere zero or vanishes identically on the germ.",
+      "cautions": "Not formalized."
+    },
+    {
+      "manuscript_label": "lem:spectrum-transfer",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "Eigenvalues of Euler multiplication on full cohomology and on even cohomology at an even point of the Hodge base.",
+      "hypotheses": "The base point lies in the even part of the Hodge base.",
+      "conclusion": "The two eigenvalue sets coincide.",
+      "cautions": "Not formalized."
+    },
+    {
+      "manuscript_label": "prop:cubic-atom",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "The small hyperplane point of the Hodge base of a smooth cubic threefold, the unramified reduced spectral cover above it, the parity ranks of its generalized eigenbundles, and the resulting ordinary Hodge atom.",
+      "hypotheses": "Smoothness of the cubic threefold and the block reduction of small even Euler multiplication.",
+      "conclusion": "The small hyperplane point lies in the maximal-eigenvalue locus; the cover has two rank-one branches and one branch of parity ranks two and ten, and that rank-twelve branch is a connected component and hence defines a Hodge atom.",
+      "cautions": "Not formalized. The companion has no notion of Hodge atom or spectral component."
+    },
+    {
+      "manuscript_label": "lem:horiz",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "The Poincare pairing and the non-archimedean quantum connection.",
+      "hypotheses": "None beyond the algebraic setting; no convergence is assumed.",
+      "conclusion": "The pairing is horizontal for the connection.",
+      "cautions": "Not formalized."
+    },
+    {
+      "manuscript_label": "lem:orthogonal",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "A local splitting of the F-bundle into factors with pairwise distinct leading Euler eigenvalues, and the horizontal Poincare pairing.",
+      "hypotheses": "The leading Euler eigenvalues of the factors are pairwise distinct.",
+      "conclusion": "The pairing is block diagonal for the splitting, and its restriction to each factor, and to the even part of each factor, is nondegenerate.",
+      "cautions": "Not formalized."
+    },
+    {
+      "manuscript_label": "lem:A0preserve",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "The regular coefficient of the centered rank-two connection and the nilpotent line of its leading operator over the punctured spectral component.",
+      "hypotheses": "The rank-two packet is separated from the rest of the spectrum and its leading operator is generically nonzero nilpotent.",
+      "conclusion": "The regular coefficient carries the nilpotent line into itself.",
+      "cautions": "Not formalized."
+    },
+    {
+      "manuscript_label": "prop:rank2-rigidity",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "The canonical elementary modification of the centered rank-two block, its residue, and the residue discriminant as a function on the punctured spectral component.",
+      "hypotheses": "The setting of the preceding lemmas on the punctured spectral component.",
+      "conclusion": "The modified connection is regular in every base direction, its residue varies by commutators with regular matrices, and the residue discriminant is annihilated by every base vector field.",
+      "cautions": "Not formalized."
+    },
+    {
+      "manuscript_label": "prop:residue-discriminant-exponents",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "The residue of the canonical modified lattice, its eigenvalues in an algebraic closure of the coefficient field, and the formal exponent classes of the centered rank-two differential module.",
+      "hypotheses": "The residue splits over the algebraic closure at the chosen point.",
+      "conclusion": "The residue eigenvalue classes modulo the integers are the formal exponent classes of the centered module, and the residue discriminant is the squared difference of those eigenvalues.",
+      "cautions": "Not formalized. The companion has no formal exponent theory for differential modules at this level of generality."
+    },
+    {
+      "manuscript_label": "lem:factor-glue",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "Local F-bundle factors over the unramified locus belonging to one connected component of the reduced spectral cover.",
+      "hypotheses": "The component is connected and the locus is unramified.",
+      "conclusion": "The factors glue up to regular block-diagonal change of frame, so any regular-gauge-invariant meromorphic expression built from the factor is a well-defined meromorphic function on the component.",
+      "cautions": "Not formalized."
+    },
+    {
+      "manuscript_label": "lem:crossing",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "The residue discriminant as a meromorphic function on a connected spectral component.",
+      "hypotheses": "The leading nilpotent part is generically nonzero on the component.",
+      "conclusion": "The residue discriminant extends meromorphically and is constant on the component, so it does not depend on the base point representing the local atom.",
+      "cautions": "Not formalized."
+    },
+    {
+      "manuscript_label": "prop:atom-invariant",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "An ordinary Hodge atom whose geometric atomic F-bundle has even rank two, and the residue discriminant attached to it.",
+      "hypotheses": "The centered leading operator of the atomic F-bundle is generically nonzero nilpotent.",
+      "conclusion": "The residue discriminant is a well-defined invariant of the ordinary Hodge atom.",
+      "cautions": "Not formalized. This is the invariant the one-stabilization theorem runs on, and no part of its construction is in the companion."
+    },
+    {
+      "manuscript_label": "prop:no-curve",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "The cubic atom and smooth projective varieties of dimension at most one.",
+      "hypotheses": "The computed values of the residue discriminant for the cubic atom and for curve atoms.",
+      "conclusion": "The cubic atom is represented by no smooth projective variety of dimension at most one.",
+      "cautions": "Not formalized."
+    },
+    {
+      "manuscript_label": "prop:no-surface",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "The cubic atom and smooth projective surfaces, together with the classification of minimal surfaces and parity ranks.",
+      "hypotheses": "The preceding curve exclusion and additivity of atoms for disjoint unions.",
+      "conclusion": "The cubic atom is represented by no smooth projective surface, hence by no smooth projective variety of dimension at most two.",
+      "cautions": "Not formalized. The surface classification input is imported classical geometry."
+    },
+    {
       "manuscript_label": "def:framed-sixth-multiplicity",
       "coverage": "fragment",
       "declarations": [
@@ -231,6 +393,198 @@
       "hypotheses": "The matrix is already the operator for one turn of the original unramified z-disc, on a labelled finite-dimensional complex vector space.",
       "conclusion": "The invariant is the sum of the characteristic-polynomial root multiplicities at exp(pi*i/3) and exp(-pi*i/3).",
       "cautions": "The type records the framed operator only after construction; it neither permits nor models adjoining roots of z, and it does not prove independence of the algebraic closure."
+    },
+    {
+      "manuscript_label": "lem:exact-low-degree-shifts",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "Bulk shifts of the even quantum connection by a multiple of the identity and by a divisor class, and the framed formal-monodromy eigenvalues on the original loop disc.",
+      "hypotheses": "The coefficient field contains the Novikov coefficients of the connection, and the divisor shift defines a multiplicative character on the numerical Novikov image.",
+      "conclusion": "The identity shift changes the connection only by a scalar irregular twist and leaves the framed eigenvalues unchanged; the divisor shift acts by a coefficient substitution fixing the complex numbers, so it preserves the algebraic multiplicity of every root of unity.",
+      "cautions": "Not formalized as stated. The manuscript no longer routes this through the pro-Laurent gauge machinery that the companion formalizes."
+    },
+    {
+      "manuscript_label": "lem:numerical-base-change",
+      "coverage": "fragment",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.numericalNovikov_finiteFiber_exact",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.numericalNovikov_coefficientPushforward_apply",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.numericalNovikov_completedCoefficientPushforward_apply_and_finiteBelow",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.numericalNovikov_completedCoefficientPushforward_add",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.numericalNovikov_completedCoefficientPushforward_eq_below_of_eq_below",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.completedNovikov_decompositions_exact",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.completedNovikov_convolution_coefficient_and_finiteBelow",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.completedNovikov_commRing_and_truncation_mul",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.completedNovikov_truncationFamily_roundTrips",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.numericalNovikov_truncationFamily_pushforward",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.numericalNovikov_cutoffContinuity",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.numericalNovikov_completedPushforward_ringHom_and_truncation",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.numericalNovikov_finiteCoefficientPacket_descends",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.numericalNovikov_logarithmicOperator_commutes_with_pushforward",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.numericalNovikov_logarithmicOperator_leibniz"
+      ],
+      "objects": "Three nested algebraic branches are represented. The general coefficient-pushforward branch has effective homological and numerical additive monoids, a possibly nonsurjective quotient, compatible natural-valued degree functions, finite bounded homological pieces, and ordinary or completed coefficient families. The completed-convolution branch has one additive monoid with an additive natural grading, finite bounded pieces, and compatible systems of finite additive-monoid-algebra truncations. The completed numerical-ring branch adds finite bounded numerical pieces, a surjective degree-compatible quotient, finite coefficient packets, and additive scalar-weight homomorphisms for logarithmic Novikov operators.",
+      "hypotheses": "In the general branch, ordinary pushforward uses additive-commutative-monoid coefficients, while completed additive pushforward uses additive-commutative-group coefficients; its elementary cutoff-agreement theorem assumes equality of the two source families through the chosen cutoff. The convolution, `AgreeThrough`, and cutoff-continuity terminals use commutative-ring coefficients. The finite-packet terminal uses additive-commutative-monoid coefficients and explicitly assumes that its coefficient function is constant on numerical fibers. The compatible-family pushforward terminal assumes a surjective quotient with exact degree compatibility, finite bounded gradings on both sides, and commutative-ring coefficients. The standalone Leibniz terminal assumes one finite-degree additive monoid, commutative-ring coefficients, and an additive scalar weight. Its numerical pushforward-commutation terminal additionally supplies an additive numerical weight whose homological weight is the quotient pullback.",
+      "conclusion": "Ordered additive decompositions are finite and exact; convolution gives completed coefficient families a commutative-ring structure and agrees through every cutoff with ordinary additive-monoid-algebra multiplication. Completed coefficient families are equivalent, by mutually inverse reconstruction maps, to compatible systems of finite degree truncations. Under this equivalence, numerical pushforward is levelwise the ordinary additive-monoid-algebra map induced by the quotient, and the completed/truncation square commutes exactly. Addition, convolution, and numerical pushforward preserve coefficient agreement through the same cutoff, so numerical pushforward satisfies the explicit cutoff-continuity predicate with identity modulus. Finite-fiber numerical summation preserves finite-below support and cutoff agreement, commutes exactly with finite truncation, preserves convolution and the unit, and defines a unital ring homomorphism. Finite coefficient packets constant on numerical fibers descend termwise and fiber sums are cardinality multiples of the descended coefficient. The coefficientwise operator associated to an additive scalar weight is an additive homomorphism and satisfies the Leibniz rule for completed convolution; completed pushforward commutes with this operator when the weight factors through the quotient.",
+      "cautions": "The general coefficient-pushforward quotient need not be surjective. The completed numerical pushforward is proved to be a ring homomorphism when its monoid quotient is surjective; Lean does not assert that this ring homomorphism is itself surjective. The formal completed rings are coefficient families with a finite-below support condition. Their explicit compatible-truncation object and type equivalence are coefficientwise. Cutoff continuity is a quantified coefficient-agreement predicate, not Mathlib topological continuity; no topology, uniform space, categorical limit cone, or universal property in a category of topological rings is represented. The finite-type Chow-variety proof of bounded finiteness is supplied as a hypothesis rather than formalized. Lean assumes rather than proves numerical invariance of the finite coefficient packet, and it does not identify that packet with Gromov--Witten invariants. The weighted operator is packaged additively but is not bundled as a scalar-linear derivation over a separately modeled coefficient subring. Quantum products and connections, curve pushforward and normal-bundle pairings, geometric construction of the additive curve-pairing weights, and base change of the quantum comparison isomorphisms are not represented."
+    },
+    {
+      "manuscript_label": "prop:ranktwo-framed-germ",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "The even quantum connection pulled back to a formal smooth bulk germ, an isolated rank-two Euler cluster, and the residue of its canonical elementary modification.",
+      "hypotheses": "The coefficient field is algebraically closed of characteristic zero, the cluster's nilpotent part is a single nonzero Jordan block at the closed point, and every other Euler eigenvalue differs from it by a unit.",
+      "conclusion": "The cluster stays a single nonzero Jordan block on the germ, the residue has constant characteristic polynomial there, and the primitive-sixth multiplicities contributed by the block are constant on the germ.",
+      "cautions": "Not formalized. The companion's formal-germ material treats gauge and base-change invariance rather than this rigidity statement."
+    },
+    {
+      "manuscript_label": "prop:framed-operations",
+      "coverage": "conditional_deduction",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.framedProjectiveBundle_sixthMultiplicity",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.framedBlowup_sixthMultiplicity",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.framedSixthMultiplicity_polynomial_pow",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.framedSixthMultiplicity_polynomial_list_prod"
+      ],
+      "objects": "A supplied type of geometric objects with relations for a rank-r projective bundle and a codimension-c smooth-center blowup; dependent numerical Novikov specializations; and intrinsic and specialized finite-dimensional complex framed-monodromy matrices.",
+      "hypotheses": "For r at least two, the projective-bundle relation is supplied together with equality of its intrinsic characteristic polynomial to the r-th power of the base polynomial. For c at least two, the blowup relation is supplied together with c-1 center specializations and equality of the total characteristic polynomial to the ambient polynomial times the finite product of the specialized center polynomials.",
+      "conclusion": "Lean proves the exact framed operation formulas: projective-bundle primitive-sixth multiplicity is r times the base multiplicity, and blowup multiplicity is the ambient multiplicity plus the sum of the c-1 specialized center multiplicities.",
+      "cautions": "The result is conditional on the geometric and characteristic-polynomial comparison inputs. Lean does not construct varieties, vector bundles, projective bundles, smooth centers, blowups, endpoint or specialized-center quantum connections, Iritani comparison coordinates, parity restrictions, numerical Novikov specializations, or the characteristic-polynomial block identities. No loop-coordinate root is represented."
+    },
+    {
+      "manuscript_label": "def:strict-novikov-admissible",
+      "coverage": "fragment",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.strictNovikovAdmissibleData"
+      ],
+      "objects": "Lean represents an effective additive monoid, a complete separated topological commutative domain, a multiplicative monomial-image function, a natural-valued length, and a natural-valued valuation.",
+      "hypotheses": "The monomial image preserves zero and addition, every monomial image is nonzero, valuation equals length on monomials, length is positive off zero and proper on bounded sets, and valuation is additive on products of nonzero target elements.",
+      "conclusion": "A typed certificate for the algebraic and topological core of strict Novikov admissibility.",
+      "cautions": "Lean does not construct the numerical Novikov completion or the associated graded ring; global valuation multiplicativity records the no-product-cancellation input but is not yet proved equivalent to the manuscript's domain associated-graded condition."
+    },
+    {
+      "manuscript_label": "prop:direct-specialized-lowdim",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "The specialized framed sixth-root count of a smooth projective target under a strictly Novikov-admissible specialization, for nef-canonical targets, the projective line and plane, and geometrically ruled surfaces over positive-genus curves.",
+      "hypotheses": "Strict Novikov admissibility of the specialization; for the ruled-surface case only, the reconstruction-tail hypothesis of this section.",
+      "conclusion": "The count vanishes unconditionally in the nef-canonical case and for the projective line and plane, and vanishes for ruled surfaces over positive-genus curves under the reconstruction-tail hypothesis.",
+      "cautions": "Not formalized. The Lean low-dimensional vanishing material is registered under the conditional low-dimensional vanishing claim, which is the combined statement rather than these direct cases."
+    },
+    {
+      "manuscript_label": "lem:divisor-tagging",
+      "coverage": "conditional_deduction",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.divisorTagging_vanishing_of_comparison_inputs",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.strictNovikov_injective_taggedMonomial",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.finiteDivisorPairing_exponentialCharacters_independent",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.integralDivisorPairing_exponentialCharacters_independent",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.completedNovikov_lowestSupport_nonempty",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.completedNovikov_lowestSupport_exponentialSum_ne_zero",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.associatedGradedTagging_taggedImage_ne_zero",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.associatedGradedTagging_taggedImage_eq_zero_iff",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.associatedGradedTagging_taggedImage_injective"
+      ],
+      "objects": "A supplied type of geometric objects with dependent strictly Novikov-admissible specializations and intrinsic, divisor-tagged, and specialized finite-dimensional complex framed-monodromy matrices, all over C; separately, the algebraic strict-Novikov certificate, an individual-class tag map, a finite injective vector family over an infinite characteristic-zero field, a completed coefficient family with finite support below every length cutoff, an injective integral divisor-pairing vector, an additive tagged-image map into an additive target, monomial initial coefficients, and direction-dependent initial-form detectors valued in one-variable formal power series.",
+      "hypotheses": "For every supplied strictly Novikov-admissible specialization, the final common-field polynomial equality resulting from the unformalized coefficient extension and algebraic-closure identifications is supplied, as is the final polynomial equality resulting from the unformalized divisor-equation formal bulk gauge. The individual-class theorem assumes that the tag separates numerical classes. The abstract finite-family theorem assumes an injective vector family over an infinite characteristic-zero field. For the completed tagging injection, the integral pairing vector is injective over an arbitrary characteristic-zero coefficient field; every monomial initial coefficient is nonzero; every direction detector sends zero to zero; and, for every nonzero completed series and integral direction, the detected initial form of its tagged image is supplied to equal the finite exponential-character combination on the formalized lowest support.",
+      "conclusion": "Lean proves equality of intrinsic and specialized primitive-sixth multiplicities and transfers intrinsic vanishing through every strictly Novikov-admissible specialization. It proves injectivity of the paired monomial/class tag on individual numerical classes. For every finite injective vector family, it chooses an abstract K-linear separator and proves finite exponential-character independence; for integral pairing families it constructs an integral direction. At coefficient level, every nonzero completed series has a nonempty finite lowest support and exponential-character noncancellation over every characteristic-zero field. From the supplied initial-form compatibility and nonzero monomial initial coefficients, Lean proves the tagged image of every nonzero series is nonzero, reflects zero, and is fully injective by applying noncancellation to differences.",
+      "cautions": "The vanishing result remains conditional on two final polynomial equalities over C. No source coefficient fields, common comparison field, embeddings, Polynomial.map scalar extension, or typed bulk-gauge witness occur in that theorem. The associated-graded tagging interface neither represents nor constructs the filtered target ring, associated graded ring, valuation, or geometric Novikov specialization. It supplies only proxy detector functions, their zero values, nonzero monomial initial coefficients, and the compatibility equality, and does not prove that they arise from the manuscript's filtered hypotheses. Lean proves the exact noncancellation and injectivity deduction from these proxy inputs. The individual-class injection alone does not imply completed-series injection; the latter uses the compatibility package. Construction of the integral divisors whose pairing vectors separate numerical curve classes, common algebraic closures, scalar extension of quantum connections, the divisor-equation bulk pullback, and compatible integral-loop-power finite-quotient gauges also remain unformalized."
+    },
+    {
+      "manuscript_label": "prop:low-dimensional-vanishing",
+      "coverage": "conditional_deduction",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.lowDimensionalVanishing_of_classification_and_specialization_inputs",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.lowDimensionalVanishing_of_characteristicRoots_sq_eq_one",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.lowDimensionalVanishing_of_involutiveFramedMonodromy"
+      ],
+      "objects": "A supplied type of geometric objects with a predicate for points, smooth projective curves, and smooth projective surfaces; a nef-seed predicate; a named point and projective-bundle and point-blowup relations; dependent strictly Novikov-admissible specializations; and intrinsic and specialized finite-dimensional complex framed-monodromy matrices.",
+      "hypotheses": "Every selected object has a supplied inductive classification witness built from a nef seed, the point, a positive-rank projective bundle, or a point blowup. Nef-seed characteristic roots are supplied to have square one; the point multiplicity is zero; the projective-bundle formula multiplies the base multiplicity by the rank; point blowup preserves multiplicity; and divisor tagging transfers intrinsic vanishing to each strictly Novikov-admissible specialization.",
+      "conclusion": "For every supplied point, smooth projective curve, or smooth projective surface and every strictly Novikov-admissible specialization, the specialized framed monodromy has primitive-sixth multiplicity zero. Lean proves the classification induction, including the exact root-square-one spectral endpoint, and the final specialization transfer. A separate corollary proves that matrix involutivity is a stronger sufficient condition for the spectral restriction.",
+      "cautions": "The result is conditional on every geometric and comparison input used by the human proof. Lean does not construct the varieties, quantum connections, framed monodromy, numerical Novikov rings, grading operator or parity correction; prove regular singularity and nilpotence of the residue; derive the plus-or-minus-one spectrum from nefness; prove the low-dimensional minimal-model classification; construct the projective bundles or blowups; establish their monodromy formulas; or prove divisor tagging and specialization comparison. The human proof restricts eigenvalues to {1,-1}; it does not assert involutivity of the full monodromy matrix, which is strictly stronger in the presence of possible Jordan parts and appears only in the separately marked sufficient corollary."
+    },
+    {
+      "manuscript_label": "thm:nu6-birational-invariance",
+      "coverage": "conditional_deduction",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.packet_multiplicity_eq_of_preserving_chain",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.packet_multiplicity_eq_of_typed_weak_factorization",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.packet_multiplicity_birational_in_dimension_four"
+      ],
+      "objects": "An arbitrary carrier type with natural-valued multiplicity and dimension, explicit smooth-projective-complex and smooth-center predicates, typed blowup steps in either orientation, and specialized center contributions.",
+      "hypotheses": "Smooth endpoints; source dimension at most four; every blowup step has codimension at least two, the center-plus-codimension dimension identity, preserved ambient dimension, and the displayed additive operation formula; every specialized contribution of a smooth center of dimension at most two vanishes; and a composable typed weak-factorization chain is supplied.",
+      "conclusion": "Equality of multiplicities at the endpoints, obtained by proving each typed blowup or blowdown link preserves multiplicity and telescoping the chain.",
+      "cautions": "Lean does not construct varieties, quantum connections, comparison specializations, operation formulas, low-dimensional vanishing, or the AKMW factorization chain; those remain typed data.  The older abstract preserving-chain terminal is retained and is strictly weaker than the typed telescope."
+    },
+    {
+      "manuscript_label": "lem:simple-euler-block",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "A rank-one generalized eigenspace of Euler multiplication for the even quantum connection at an even bulk point, and its contribution to framed regular monodromy.",
+      "hypotheses": "The target is smooth projective and the coefficient field is algebraically closed.",
+      "conclusion": "Such a block contributes only the eigenvalue one, so at the small point it contributes nothing to the framed sixth-root count.",
+      "cautions": "Not formalized."
+    },
+    {
+      "manuscript_label": "prop:projective-product-nu",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "The framed sixth-root count of a product of a smooth projective variety with a projective space.",
+      "hypotheses": "Smoothness and projectivity of the factor; the product formula for Gromov-Witten theory and the multiplicity-one Euler block lemma.",
+      "conclusion": "The count of the product is the count of the factor multiplied by one more than the dimension of the projective space, unconditionally.",
+      "cautions": "Not formalized as stated. The companion's projective-bundle formula is registered under the conditional framed operation claim and is proved under the reconstruction-tail hypothesis, whereas this product statement is unconditional."
+    },
+    {
+      "manuscript_label": "cor:p3-nu6",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "The framed sixth-root count of projective three-space.",
+      "hypotheses": "The multiplicity-one Euler block lemma applied to the small even quantum connection of projective three-space.",
+      "conclusion": "The count vanishes.",
+      "cautions": "Not formalized."
+    },
+    {
+      "manuscript_label": "prop:cubic-packet",
+      "coverage": "conditional_deduction",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicPacket_sixthMultiplicity_eq_two_of_charpoly",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicPacket_indicial_factorization_and_framed_eigenvalues"
+      ],
+      "objects": "A supplied type of cubic objects with a smooth-complex-cubic-threefold predicate and a finite-dimensional complex framed-monodromy matrix; Cai's rank-two indicial polynomial and the displayed characteristic polynomial with one factor for each primitive sixth root and two unit factors.",
+      "hypotheses": "For every supplied smooth cubic threefold, the framed-monodromy characteristic polynomial is supplied to equal the displayed four-factor polynomial arising from Cai's integral-loop-power block description.",
+      "conclusion": "Lean proves the indicial roots -1/6 and -5/6 give the negative and positive primitive sixth roots, proves those roots are distinct and each has algebraic multiplicity one while the two unit factors contribute nothing, and concludes that every supplied smooth cubic threefold has primitive-sixth multiplicity exactly two.",
+      "cautions": "The result is conditional on the characteristic-polynomial comparison. Lean does not construct a smooth cubic threefold, its numerical small even quantum connection, Cai's integral-loop-power block diagonalization, the rank-two zero-exponential block, the two remaining rank-one unit blocks, or the identification of their direct-sum characteristic polynomial with the supplied framed monodromy. Lean also does not prove that the cubic threefold's numerical curve lattice has rank one or that the manuscript's numerical-Novikov convention leaves Cai's calculation unchanged."
+    },
+    {
+      "manuscript_label": "cor:cubic-formal-germ",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "The primitive-sixth multiplicity of a smooth cubic threefold throughout the formal even bulk germ at the small hyperplane point.",
+      "hypotheses": "Extension of the cubic Novikov coefficient field making the square root of three times the line variable a unit, together with formal-germ rigidity of the isolated rank-two packet.",
+      "conclusion": "The multiplicity equals two throughout that germ.",
+      "cautions": "Not formalized. The Lean cubic packet material proves the value at the small point from a supplied characteristic polynomial and does not propagate it over a formal germ."
+    },
+    {
+      "manuscript_label": "cor:cubic-product-nu",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "The framed sixth-root count of the product of a smooth cubic threefold with the projective line.",
+      "hypotheses": "The cubic packet value and the unconditional product formula with projective space.",
+      "conclusion": "The count equals four, unconditionally.",
+      "cautions": "Not formalized as stated. The companion proves the projective-bundle formula only under the reconstruction-tail hypothesis, registered under the conditional framed operation claim."
+    },
+    {
+      "manuscript_label": "cor:v14-one-step",
+      "coverage": "conditional_deduction",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.rankTwoProjectiveBundle_packet_transport",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.genusEight_packet_eq_two_of_flop_inputs",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.genusEight_oneStep_irrational_of_flop_inputs"
+      ],
+      "objects": "An abstract geometric signature naming smooth prime genus-eight Fano threefolds, their associated Pfaffian cubics, both rank-two projective-bundle total spaces, product with projective one-space, projective four-space, and rationality.",
+      "hypotheses": "The specified carrier satisfies the genus-eight predicate, its associated cubic satisfies the smooth-cubic predicate, both named total spaces obey the rank-two formulas and are birational, the cubic packet is two, and the named stabilization and rational comparison have the stated properties.",
+      "conclusion": "The specified Fano carrier has packet multiplicity two and its named product with projective one-space is irrational.",
+      "cautions": "The geometric signature and the Kuznetsov, quantum, weak-factorization, and rational-comparison facts remain typed premises rather than foundational constructions."
     },
     {
       "manuscript_label": "def:pro-laurent-gauge-group",
@@ -307,126 +661,6 @@
       "hypotheses": "The completed divisor-substitution terminal assumes a finite-degree grading, commutative coefficient ring, and multiplicative character of effective curve classes. The scalar string-gauge terminal assumes a commutative rational algebra, finite matrix index, one scalar, and an arbitrary square matrix over one-variable formal power series. The quotient construction assumes a supplied commutative base ring, an antitone ideal filtration, and a supplied ring endomorphism preserving each ideal. The multiplicative-filtered composite additionally supplies F^0 equal to the whole ring and the product inclusion F^m F^n into F^(m+n). Its complete-separated specialization further assumes surjectivity of the canonical map onto compatible quotient families and zero intersection of all ideals. The adic multiplication terminal assumes an arbitrary ideal, natural orders m and n, and memberships x in I^m and y in I^n. The adic endomorphism terminal assumes a supplied ring endomorphism preserving the generating ideal, a level, and a class in the next quotient. The one-level constant-flat-gauge terminal assumes a finite square matrix over a commutative algebra over the rational numbers; its compatibility clause quantifies over arbitrary commutative rational algebras and rational-algebra homomorphisms. The compatible constant-gauge terminal supplies a commutative rational algebra at every natural-number level, adjacent rational-algebra reductions, a constant connection matrix at every level, and exact entrywise compatibility of those matrices. The one-level varying-gauge terminal assumes every coefficient of a one-variable finite square connection matrix over a commutative rational algebra. Its compatible-system terminal supplies such a rational algebra at every level, adjacent rational-algebra reductions, every connection coefficient at every level, and exact reduction compatibility for every degree. The filtered varying-gauge terminal supplies one commutative rational algebra, one antitone ideal filtration, and every coefficient of one connection over the base ring; quotient coefficients, canonical reductions, and their compatibility are constructed. The multivariable Laurent uniqueness terminal assumes that both supplied series have identity constant coefficient and satisfy the same coordinate equation for every coordinate. The constructive multivariable terminal assumes a commutative rational coefficient algebra and the exact pairwise zero-curvature identity for the coefficientwise formal partial derivatives. The product-identity curvature terminal instead assumes symmetric mixed formal derivatives of the connection matrices and pairwise commutativity of those matrices. Its filtered quotient terminal additionally supplies an antitone ideal filtration; quotient rings, reductions, mapped level connections, level gauges, and their compatibility are constructed. The Laurent-filtered terminal makes the same assumptions with the base bulk coefficients in ordinary Laurent series; Lean constructs coefficientwise Laurent quotient and reduction maps. Its uniform-bound terminal additionally assumes that the constructed gauge at the chosen level has finite bulk-monomial support. The total-degree-cutoff terminal supplies a natural cutoff, finite coordinate and matrix index types, and coefficient-matrix vanishing in every total bulk degree at or above the cutoff. The positive-bulk-monomial terminal supplies a normalized multiplicative ideal filtration, a parameter in level one for every bulk coordinate, a cutoff, one monomial degree, and the inequality that its total degree is at least the cutoff. The finite Laurent-evaluation terminal supplies finite coordinate and matrix index types, a normalized multiplicative filtration on a commutative rational algebra, one level-one parameter per coordinate, a quotient cutoff, an ordinary-Laurent-series-valued connection, and its exact zero-curvature equations. The Laurent-limit terminal further assumes coefficientwise completeness and zero-intersection separatedness, plus one Laurent lower bound uniform across quotient levels for the evaluated gauges and another for their chosen inverses. The positive-evaluated formal-base-shift terminal retains the filtration, positive parameters, Laurent connection, and exact zero curvature; it supplies compatible divisor substitutions and small monodromy matrices, while the gauge and inverse are constructed. Its filtered strengthening instead supplies one filtration-preserving base-ring endomorphism and constructs all compatible Laurent quotient substitutions, leaving only compatible small monodromy matrices as finite-level inputs. Its base-small strengthening supplies a single Laurent small-monodromy matrix over the base ring and constructs its entire compatible quotient family. The abstract curvature terminal assumes commuting coordinate derivations, an invertible supplied solution, and all coordinate flat equations. At one matrix level the bulk matrix is explicitly the conjugate of the coefficient-substituted small matrix. The abstract finite-level system supplies reductions, substitutions, their commuting square, small matrices, gauges and inverse gauges, every entrywise compatibility law, and both inverse equations. The filtered and multiplicative-filtered composites derive reductions and quotient substitutions from supplied filtered-ring data, but still assume the compatible small matrices, gauges and inverse gauges, and all their compatibility and inverse laws. The adic composite weakens the endomorphism premise to preservation of one generating ideal; it still supplies compatible small matrices, gauges, inverses, and their compatibility and inverse identities over the power-ideal quotients.",
       "conclusion": "Lean constructs the completed divisor substitution as the unital ring endomorphism multiplying the coefficient of each curve class by its supplied multiplicative character value, including exact preservation of zero, one, addition, and completed convolution. Lean constructs the scalar formal exponential with coefficients a^n/n!, proves that the opposite exponential gives a two-sided inverse scalar matrix gauge, and proves that this gauge conjugates every formal-power-series matrix trivially and preserves its characteristic polynomial. Lean constructs the quotient coefficient ring at every filtration level, its canonical adjacent reduction, and the endomorphism induced on every quotient, proving their actions on ring classes and the reduction-substitution commuting square. A normalized multiplicative filtration retains its unit-level and product-inclusion laws in the same composite that produces the quotient bulk matrix and characteristic-polynomial packet. With the explicitly supplied coefficientwise completeness and separatedness premises, the canonical ring homomorphism to compatible quotient families is bijective in that same composite. Lean constructs the adic filtration by powers of any ideal and proves that a product of elements in adic levels m and n lies in level m+n. A ring endomorphism preserving the generating ideal is proved to preserve every adic level, descend to every quotient, and commute with adjacent reductions. For a constant connection matrix, Lean constructs the normalized coefficients G_n=(-1)^n A^n/n!, assembles their entrywise formal power-series matrix, proves G_0=1, (n+1)G_(n+1)=-A G_n, and the exact entrywise differential equation dG/dt=-AG, proves that the series for -A is its two-sided inverse, and proves that every coefficient commutes with every rational-algebra homomorphism. For a supplied compatible constant-connection system, Lean proves that every coefficient and the entire entrywise formal series commute with each adjacent reduction, that the negated-connection series give compatible two-sided inverses, and that the differential equation holds at every level. For an arbitrary one-variable varying connection A(t), Lean constructs the recursively normalized formal solution G(t), proves dG/dt=-A(t)G(t), uniqueness among normalized solutions, invertibility as a power-series matrix, and naturality under rational-algebra homomorphisms. For a supplied compatible varying-connection system, Lean proves adjacent compatibility of every gauge coefficient, the full connection series, and the full gauge series, with the equation, uniqueness, and invertibility at every level. From a supplied rational algebra, decreasing ideal filtration, and base connection coefficients, Lean constructs that varying system on the actual quotients R/F^n and canonical reductions, then proves the same connection/gauge compatibility, equation, uniqueness, and invertibility at every quotient level. For any coordinate-indexed multivariable Laurent-coefficient connection, Lean proves that two supplied normalized formal gauges satisfying all the same coordinate equations are equal. Lean proves that the coefficientwise multivariate formal partial derivatives satisfy the Leibniz rule, packages them as commuting derivations, and specializes the necessary zero-curvature identity to them. Independently of a solution, symmetric mixed formal derivatives of the connection matrices together with pairwise commutativity of those matrices imply the same zero-curvature identity. Conversely, over a commutative rational algebra, the exact zero-curvature identity yields a recursively constructed unique normalized invertible multivariable formal gauge satisfying every coordinate equation, and this construction commutes with every rational-algebra coefficient homomorphism. With a supplied decreasing ideal filtration, Lean maps this connection into every actual quotient R/F^n, constructs the unique normalized invertible gauge at every level, proves that both connections and gauges commute with canonical adjacent reductions, and packages every entrywise monomial gauge coefficient as the compatible quotient family represented by its base-gauge coefficient. When the base bulk coefficients are ordinary Laurent series, Lean instead constructs the levels over LaurentSeries (R/F^n); every finite-level bulk coefficient therefore has integral loop exponents and an individual Laurent lower bound. A finite bulk-support premise at one level yields one Laurent lower bound for every matrix entry and bulk monomial of that level gauge. For a Laurent-valued multivariate matrix series with finitely many coordinates, coefficient-matrix vanishing at or above one supplied total-degree cutoff yields finite bulk support and one Laurent lower bound for every matrix entry and bulk monomial of that same series. Every monomial in supplied level-one parameters lies in the filtration level equal to its total degree and maps to zero in each quotient whose cutoff does not exceed that degree. For any formal series, the corresponding coefficient-times-parameter-monomial term maps to zero at every such cutoff. For a zero-curvature Laurent-valued connection, Lean additionally constructs its normalized invertible formal gauge and evaluates it by a ring homomorphism given by a finite exponent-box sum at each quotient cutoff. It proves all omitted high-degree terms zero, obtains one Laurent lower bound for every entry of each finite evaluated matrix, proves the evaluated gauges and chosen two-sided inverses commute with canonical adjacent quotient reductions, packages them as an explicit pro-Laurent gauge system, and packages every entrywise loop coefficient as an explicit compatible quotient family. Under the separately supplied completeness, separatedness, and two uniform Laurent-bound premises, Lean lifts the gauge and inverse coefficient families to Laurent-series matrices over the base ring, proves they are two-sided inverses, and proves their reductions equal the finite evaluated gauges and inverses at every level. Separately, the positive-evaluated formal-base-shift composite inserts the constructed compatible evaluated gauges and inverses into the matrix packet and derives the compatible bulk matrices, levelwise substituted characteristic-polynomial identity, compatible bulk polynomials, and explicit polynomial system from supplied small monodromy matrices and divisor substitutions. Its filtered strengthening derives every quotient-level Laurent divisor substitution and its compatibility from one preserving base-ring endomorphism, then produces the same bulk matrix and characteristic-polynomial conclusions. The base-small strengthening also constructs every quotient small-monodromy matrix and its compatibility from one supplied Laurent matrix over the base ring, then derives the same bulk and polynomial-system packet. More generally, commuting derivations and an invertible solution of all coordinate equations force the same identity. Compatible quotient families form a pointwise commutative ring, and the original ring maps to it by a canonical ring homomorphism. Lean proves that this map is injective exactly when the intersection of all filtration ideals is zero, defines completeness as surjectivity onto compatible families, and proves bijectivity exactly when completeness and separatedness both hold. At one matrix level, the bulk characteristic polynomial equals the coefficientwise divisor substitution in the small characteristic polynomial. Across an abstract finite-level matrix system, Lean derives compatibility of the bulk matrices, proves this characteristic-polynomial identity at every level, derives compatibility of the bulk characteristic polynomials under every adjacent reduction, and packages them as an explicit compatible polynomial system whose levels have both descriptions. A filtered composite constructs that entire coefficient/reduction/substitution part from a supplied base ring, ideal filtration, and filtration-preserving endomorphism. The adic composite additionally derives filtration multiplicativity, preservation of every power, and all quotient substitutions from preservation of one ideal, then produces the same bulk matrix and characteristic-polynomial packet. All composites retain the compatible small matrices, gauges and inverse gauges, and their compatibility and inverse proofs as supplied finite-level fields.",
       "cautions": "Lean does not prove that the supplied or manuscript filtration is complete or separated. It now represents a general normalized multiplicative filtration as explicit premise data, but does not prove the manuscript filtration has those properties or identify it geometrically. The separately constructed adic model is only one example. The arbitrary generating ideal and its preserving endomorphism are not identified with the manuscript's filtration or divisor substitution. The constant and varying constructive flat-gauge results use ordinary one-variable power series over supplied rational algebras. The separate multivariable Laurent terminal proves uniqueness for two supplied solutions. The constructive multivariable terminal proves existence, uniqueness, formal invertibility, and rational-algebra naturality from the exact formal zero-curvature premise. Its filtered branches construct actual ideal quotients, level connections, level gauges, and adjacent compatibility; the Laurent branch additionally represents every finite-level bulk coefficient by an ordinary Laurent series. Lean does not prove that the manuscript's geometric quantum connection supplies the base curvature premise or identify the resulting tower or its level connections with the manuscript's geometric objects. The finite positive-parameter Laurent evaluation is an explicitly defined finite sum at one cutoff and a ring homomorphism, not an infinite topological evaluation. Its evaluated gauges and chosen inverses form a pro-Laurent gauge system, but Lean does not identify the supplied level-one parameters with manuscript bulk coordinates, identify the formal gauge or finite evaluated matrices with the manuscript's gauge, or prove the two uniform Laurent lower bounds used by the conditional base-ring lift. The necessary curvature result for arbitrary commuting derivations does not provide a converse for arbitrary coefficient algebras; the converse construction uses the actual coefficientwise formal partials over a rational algebra. The abstract compatible towers supply coefficient rings, reductions, and compatible constant matrices or varying connection coefficients. The filtered one-variable and multivariable branches construct actual ideal quotients and canonical reductions from a supplied base ring and filtration, but neither identifies its tower or connection with the manuscript's geometric coefficient tower or quantum connection. Lean does not represent the manuscript's multivariable bulk quantum product or the geometric derivation of the varying connection coefficients. The manuscript's particular coefficient ring and filtration, identification of the constructed quotients with the geometric coefficient rings, unit and divisor decomposition, filtration-positive remainder, string and divisor equations, construction of the geometric multivariable Laurent bulk connection, and verification of its zero curvature are not represented. Nor does Lean construct the manuscript's finite-below graded Hahn receiver, separate its coefficient and loop-exponent lattices, pull the comparison data through the full nonlinear Iritani coordinate maps, or verify that the manuscript's gauges, comparison matrices, and framed operators coexist in that receiver. Analytic specialization and geometric identification remain unrepresented. The abstract matrix-system branch supplies its substitution data. The filtered matrix branches construct the quotient substitutions but still supply the base ring, filtration, preserving endomorphism, matrix and gauge families, and their compatibility and inverse laws. The positive-evaluated branch instead constructs its gauge and inverse from the supplied zero-curvature Laurent connection and positive parameters. Its filtered strengthening also constructs quotient divisor substitutions from a supplied preserving base endomorphism; compatible small monodromy remains supplied either levelwise or as one base Laurent matrix, and Lean does not derive the geometric origin of either the base endomorphism or the small monodromy."
-    },
-    {
-      "manuscript_label": "lem:numerical-base-change",
-      "coverage": "fragment",
-      "declarations": [
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.numericalNovikov_finiteFiber_exact",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.numericalNovikov_coefficientPushforward_apply",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.numericalNovikov_completedCoefficientPushforward_apply_and_finiteBelow",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.numericalNovikov_completedCoefficientPushforward_add",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.numericalNovikov_completedCoefficientPushforward_eq_below_of_eq_below",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.completedNovikov_decompositions_exact",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.completedNovikov_convolution_coefficient_and_finiteBelow",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.completedNovikov_commRing_and_truncation_mul",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.completedNovikov_truncationFamily_roundTrips",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.numericalNovikov_truncationFamily_pushforward",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.numericalNovikov_cutoffContinuity",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.numericalNovikov_completedPushforward_ringHom_and_truncation",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.numericalNovikov_finiteCoefficientPacket_descends",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.numericalNovikov_logarithmicOperator_commutes_with_pushforward",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.numericalNovikov_logarithmicOperator_leibniz"
-      ],
-      "objects": "Three nested algebraic branches are represented. The general coefficient-pushforward branch has effective homological and numerical additive monoids, a possibly nonsurjective quotient, compatible natural-valued degree functions, finite bounded homological pieces, and ordinary or completed coefficient families. The completed-convolution branch has one additive monoid with an additive natural grading, finite bounded pieces, and compatible systems of finite additive-monoid-algebra truncations. The completed numerical-ring branch adds finite bounded numerical pieces, a surjective degree-compatible quotient, finite coefficient packets, and additive scalar-weight homomorphisms for logarithmic Novikov operators.",
-      "hypotheses": "In the general branch, ordinary pushforward uses additive-commutative-monoid coefficients, while completed additive pushforward uses additive-commutative-group coefficients; its elementary cutoff-agreement theorem assumes equality of the two source families through the chosen cutoff. The convolution, `AgreeThrough`, and cutoff-continuity terminals use commutative-ring coefficients. The finite-packet terminal uses additive-commutative-monoid coefficients and explicitly assumes that its coefficient function is constant on numerical fibers. The compatible-family pushforward terminal assumes a surjective quotient with exact degree compatibility, finite bounded gradings on both sides, and commutative-ring coefficients. The standalone Leibniz terminal assumes one finite-degree additive monoid, commutative-ring coefficients, and an additive scalar weight. Its numerical pushforward-commutation terminal additionally supplies an additive numerical weight whose homological weight is the quotient pullback.",
-      "conclusion": "Ordered additive decompositions are finite and exact; convolution gives completed coefficient families a commutative-ring structure and agrees through every cutoff with ordinary additive-monoid-algebra multiplication. Completed coefficient families are equivalent, by mutually inverse reconstruction maps, to compatible systems of finite degree truncations. Under this equivalence, numerical pushforward is levelwise the ordinary additive-monoid-algebra map induced by the quotient, and the completed/truncation square commutes exactly. Addition, convolution, and numerical pushforward preserve coefficient agreement through the same cutoff, so numerical pushforward satisfies the explicit cutoff-continuity predicate with identity modulus. Finite-fiber numerical summation preserves finite-below support and cutoff agreement, commutes exactly with finite truncation, preserves convolution and the unit, and defines a unital ring homomorphism. Finite coefficient packets constant on numerical fibers descend termwise and fiber sums are cardinality multiples of the descended coefficient. The coefficientwise operator associated to an additive scalar weight is an additive homomorphism and satisfies the Leibniz rule for completed convolution; completed pushforward commutes with this operator when the weight factors through the quotient.",
-      "cautions": "The general coefficient-pushforward quotient need not be surjective. The completed numerical pushforward is proved to be a ring homomorphism when its monoid quotient is surjective; Lean does not assert that this ring homomorphism is itself surjective. The formal completed rings are coefficient families with a finite-below support condition. Their explicit compatible-truncation object and type equivalence are coefficientwise. Cutoff continuity is a quantified coefficient-agreement predicate, not Mathlib topological continuity; no topology, uniform space, categorical limit cone, or universal property in a category of topological rings is represented. The finite-type Chow-variety proof of bounded finiteness is supplied as a hypothesis rather than formalized. Lean assumes rather than proves numerical invariance of the finite coefficient packet, and it does not identify that packet with Gromov--Witten invariants. The weighted operator is packaged additively but is not bundled as a scalar-linear derivation over a separately modeled coefficient subring. Quantum products and connections, curve pushforward and normal-bundle pairings, geometric construction of the additive curve-pairing weights, and base change of the quantum comparison isomorphisms are not represented."
-    },
-    {
-      "manuscript_label": "prop:framed-operations",
-      "coverage": "conditional_deduction",
-      "declarations": [
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.framedProjectiveBundle_sixthMultiplicity",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.framedBlowup_sixthMultiplicity",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.framedSixthMultiplicity_polynomial_pow",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.framedSixthMultiplicity_polynomial_list_prod"
-      ],
-      "objects": "A supplied type of geometric objects with relations for a rank-r projective bundle and a codimension-c smooth-center blowup; dependent numerical Novikov specializations; and intrinsic and specialized finite-dimensional complex framed-monodromy matrices.",
-      "hypotheses": "For r at least two, the projective-bundle relation is supplied together with equality of its intrinsic characteristic polynomial to the r-th power of the base polynomial. For c at least two, the blowup relation is supplied together with c-1 center specializations and equality of the total characteristic polynomial to the ambient polynomial times the finite product of the specialized center polynomials.",
-      "conclusion": "Lean proves the exact framed operation formulas: projective-bundle primitive-sixth multiplicity is r times the base multiplicity, and blowup multiplicity is the ambient multiplicity plus the sum of the c-1 specialized center multiplicities.",
-      "cautions": "The result is conditional on the geometric and characteristic-polynomial comparison inputs. Lean does not construct varieties, vector bundles, projective bundles, smooth centers, blowups, endpoint or specialized-center quantum connections, Iritani comparison coordinates, parity restrictions, numerical Novikov specializations, or the characteristic-polynomial block identities. No loop-coordinate root is represented."
-    },
-    {
-      "manuscript_label": "def:strict-novikov-admissible",
-      "coverage": "fragment",
-      "declarations": [
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.strictNovikovAdmissibleData"
-      ],
-      "objects": "Lean represents an effective additive monoid, a complete separated topological commutative domain, a multiplicative monomial-image function, a natural-valued length, and a natural-valued valuation.",
-      "hypotheses": "The monomial image preserves zero and addition, every monomial image is nonzero, valuation equals length on monomials, length is positive off zero and proper on bounded sets, and valuation is additive on products of nonzero target elements.",
-      "conclusion": "A typed certificate for the algebraic and topological core of strict Novikov admissibility.",
-      "cautions": "Lean does not construct the numerical Novikov completion or the associated graded ring; global valuation multiplicativity records the no-product-cancellation input but is not yet proved equivalent to the manuscript's domain associated-graded condition."
-    },
-    {
-      "manuscript_label": "lem:divisor-tagging",
-      "coverage": "conditional_deduction",
-      "declarations": [
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.divisorTagging_vanishing_of_comparison_inputs",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.strictNovikov_injective_taggedMonomial",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.finiteDivisorPairing_exponentialCharacters_independent",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.integralDivisorPairing_exponentialCharacters_independent",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.completedNovikov_lowestSupport_nonempty",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.completedNovikov_lowestSupport_exponentialSum_ne_zero",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.associatedGradedTagging_taggedImage_ne_zero",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.associatedGradedTagging_taggedImage_eq_zero_iff",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.associatedGradedTagging_taggedImage_injective"
-      ],
-      "objects": "A supplied type of geometric objects with dependent strictly Novikov-admissible specializations and intrinsic, divisor-tagged, and specialized finite-dimensional complex framed-monodromy matrices, all over C; separately, the algebraic strict-Novikov certificate, an individual-class tag map, a finite injective vector family over an infinite characteristic-zero field, a completed coefficient family with finite support below every length cutoff, an injective integral divisor-pairing vector, an additive tagged-image map into an additive target, monomial initial coefficients, and direction-dependent initial-form detectors valued in one-variable formal power series.",
-      "hypotheses": "For every supplied strictly Novikov-admissible specialization, the final common-field polynomial equality resulting from the unformalized coefficient extension and algebraic-closure identifications is supplied, as is the final polynomial equality resulting from the unformalized divisor-equation formal bulk gauge. The individual-class theorem assumes that the tag separates numerical classes. The abstract finite-family theorem assumes an injective vector family over an infinite characteristic-zero field. For the completed tagging injection, the integral pairing vector is injective over an arbitrary characteristic-zero coefficient field; every monomial initial coefficient is nonzero; every direction detector sends zero to zero; and, for every nonzero completed series and integral direction, the detected initial form of its tagged image is supplied to equal the finite exponential-character combination on the formalized lowest support.",
-      "conclusion": "Lean proves equality of intrinsic and specialized primitive-sixth multiplicities and transfers intrinsic vanishing through every strictly Novikov-admissible specialization. It proves injectivity of the paired monomial/class tag on individual numerical classes. For every finite injective vector family, it chooses an abstract K-linear separator and proves finite exponential-character independence; for integral pairing families it constructs an integral direction. At coefficient level, every nonzero completed series has a nonempty finite lowest support and exponential-character noncancellation over every characteristic-zero field. From the supplied initial-form compatibility and nonzero monomial initial coefficients, Lean proves the tagged image of every nonzero series is nonzero, reflects zero, and is fully injective by applying noncancellation to differences.",
-      "cautions": "The vanishing result remains conditional on two final polynomial equalities over C. No source coefficient fields, common comparison field, embeddings, Polynomial.map scalar extension, or typed bulk-gauge witness occur in that theorem. The associated-graded tagging interface neither represents nor constructs the filtered target ring, associated graded ring, valuation, or geometric Novikov specialization. It supplies only proxy detector functions, their zero values, nonzero monomial initial coefficients, and the compatibility equality, and does not prove that they arise from the manuscript's filtered hypotheses. Lean proves the exact noncancellation and injectivity deduction from these proxy inputs. The individual-class injection alone does not imply completed-series injection; the latter uses the compatibility package. Construction of the integral divisors whose pairing vectors separate numerical curve classes, common algebraic closures, scalar extension of quantum connections, the divisor-equation bulk pullback, and compatible integral-loop-power finite-quotient gauges also remain unformalized."
-    },
-    {
-      "manuscript_label": "prop:low-dimensional-vanishing",
-      "coverage": "conditional_deduction",
-      "declarations": [
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.lowDimensionalVanishing_of_classification_and_specialization_inputs",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.lowDimensionalVanishing_of_characteristicRoots_sq_eq_one",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.lowDimensionalVanishing_of_involutiveFramedMonodromy"
-      ],
-      "objects": "A supplied type of geometric objects with a predicate for points, smooth projective curves, and smooth projective surfaces; a nef-seed predicate; a named point and projective-bundle and point-blowup relations; dependent strictly Novikov-admissible specializations; and intrinsic and specialized finite-dimensional complex framed-monodromy matrices.",
-      "hypotheses": "Every selected object has a supplied inductive classification witness built from a nef seed, the point, a positive-rank projective bundle, or a point blowup. Nef-seed characteristic roots are supplied to have square one; the point multiplicity is zero; the projective-bundle formula multiplies the base multiplicity by the rank; point blowup preserves multiplicity; and divisor tagging transfers intrinsic vanishing to each strictly Novikov-admissible specialization.",
-      "conclusion": "For every supplied point, smooth projective curve, or smooth projective surface and every strictly Novikov-admissible specialization, the specialized framed monodromy has primitive-sixth multiplicity zero. Lean proves the classification induction, including the exact root-square-one spectral endpoint, and the final specialization transfer. A separate corollary proves that matrix involutivity is a stronger sufficient condition for the spectral restriction.",
-      "cautions": "The result is conditional on every geometric and comparison input used by the human proof. Lean does not construct the varieties, quantum connections, framed monodromy, numerical Novikov rings, grading operator or parity correction; prove regular singularity and nilpotence of the residue; derive the plus-or-minus-one spectrum from nefness; prove the low-dimensional minimal-model classification; construct the projective bundles or blowups; establish their monodromy formulas; or prove divisor tagging and specialization comparison. The human proof restricts eigenvalues to {1,-1}; it does not assert involutivity of the full monodromy matrix, which is strictly stronger in the presence of possible Jordan parts and appears only in the separately marked sufficient corollary."
-    },
-    {
-      "manuscript_label": "thm:nu6-birational-invariance",
-      "coverage": "conditional_deduction",
-      "declarations": [
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.packet_multiplicity_eq_of_preserving_chain",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.packet_multiplicity_eq_of_typed_weak_factorization",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.packet_multiplicity_birational_in_dimension_four"
-      ],
-      "objects": "An arbitrary carrier type with natural-valued multiplicity and dimension, explicit smooth-projective-complex and smooth-center predicates, typed blowup steps in either orientation, and specialized center contributions.",
-      "hypotheses": "Smooth endpoints; source dimension at most four; every blowup step has codimension at least two, the center-plus-codimension dimension identity, preserved ambient dimension, and the displayed additive operation formula; every specialized contribution of a smooth center of dimension at most two vanishes; and a composable typed weak-factorization chain is supplied.",
-      "conclusion": "Equality of multiplicities at the endpoints, obtained by proving each typed blowup or blowdown link preserves multiplicity and telescoping the chain.",
-      "cautions": "Lean does not construct varieties, quantum connections, comparison specializations, operation formulas, low-dimensional vanishing, or the AKMW factorization chain; those remain typed data.  The older abstract preserving-chain terminal is retained and is strictly weaker than the typed telescope."
-    },
-    {
-      "manuscript_label": "prop:cubic-packet",
-      "coverage": "conditional_deduction",
-      "declarations": [
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicPacket_sixthMultiplicity_eq_two_of_charpoly",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicPacket_indicial_factorization_and_framed_eigenvalues"
-      ],
-      "objects": "A supplied type of cubic objects with a smooth-complex-cubic-threefold predicate and a finite-dimensional complex framed-monodromy matrix; Cai's rank-two indicial polynomial and the displayed characteristic polynomial with one factor for each primitive sixth root and two unit factors.",
-      "hypotheses": "For every supplied smooth cubic threefold, the framed-monodromy characteristic polynomial is supplied to equal the displayed four-factor polynomial arising from Cai's integral-loop-power block description.",
-      "conclusion": "Lean proves the indicial roots -1/6 and -5/6 give the negative and positive primitive sixth roots, proves those roots are distinct and each has algebraic multiplicity one while the two unit factors contribute nothing, and concludes that every supplied smooth cubic threefold has primitive-sixth multiplicity exactly two.",
-      "cautions": "The result is conditional on the characteristic-polynomial comparison. Lean does not construct a smooth cubic threefold, its numerical small even quantum connection, Cai's integral-loop-power block diagonalization, the rank-two zero-exponential block, the two remaining rank-one unit blocks, or the identification of their direct-sum characteristic polynomial with the supplied framed monodromy. Lean also does not prove that the cubic threefold's numerical curve lattice has rank one or that the manuscript's numerical-Novikov convention leaves Cai's calculation unchanged."
-    },
-    {
-      "manuscript_label": "cor:v14-one-step",
-      "coverage": "conditional_deduction",
-      "declarations": [
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.rankTwoProjectiveBundle_packet_transport",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.genusEight_packet_eq_two_of_flop_inputs",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.genusEight_oneStep_irrational_of_flop_inputs"
-      ],
-      "objects": "An abstract geometric signature naming smooth prime genus-eight Fano threefolds, their associated Pfaffian cubics, both rank-two projective-bundle total spaces, product with projective one-space, projective four-space, and rationality.",
-      "hypotheses": "The specified carrier satisfies the genus-eight predicate, its associated cubic satisfies the smooth-cubic predicate, both named total spaces obey the rank-two formulas and are birational, the cubic packet is two, and the named stabilization and rational comparison have the stated properties.",
-      "conclusion": "The specified Fano carrier has packet multiplicity two and its named product with projective one-space is irrational.",
-      "cautions": "The geometric signature and the Kuznetsov, quantum, weak-factorization, and rational-comparison facts remain typed premises rather than foundational constructions."
     }
   ]
 }

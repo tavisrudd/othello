@@ -22,19 +22,18 @@ reported as independently formalized.
 ## Interim coverage status
 
 This is a publishable partial companion, not a claim of complete
-formalization.  The machine-checked claim inventory currently contains all 23
-labelled theorem-like environments in the manuscript and classifies them as:
+formalization.  The machine-checked claim inventory contains every labelled
+theorem-like environment in the manuscript and classifies each one as absent
+from Lean, represented by an exact but strictly weaker fragment, represented by
+a conditional deduction with every external premise exposed in the theorem
+type, or completely formalized from the manuscript's stated hypotheses.  The
+atomic route to the one-stabilization theorem, added to the manuscript in
+August 2026, is entirely absent from Lean.
 
-- 0 absent from Lean;
-- 13 represented by exact but strictly weaker fragments;
-- 9 represented by conditional deductions with every external premise exposed
-  in the theorem type;
-- 1 completely formalized from the manuscript's stated hypotheses.
-
-Checked coverage snapshot: 26 claims; 3 absent; 13 fragmentary; 9 conditional;
+Checked coverage snapshot: 52 claims; 29 absent; 13 fragmentary; 9 conditional;
 1 complete; 168 reviewer terminals.
 
-The 168 reviewer-facing terminals currently verify:
+The reviewer-facing terminals currently verify:
 
 - the exact DVR rank-one generation equivalence for arbitrary finite symmetric
   matrix-of-ideals lattices;

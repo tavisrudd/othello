@@ -27,12 +27,14 @@ minimum-weight words recover a marked conic plane and its polarity.
 Golden interferometer paper are related unnumbered companions.
 
 Two further draft papers concern rationality of cubic threefolds.
-*Irrationality after one stabilization* uses the six-axis
-structure of the nonstandard `A₅`-invariant pencil to prove universal
-`CH₀`-triviality for its explicit family; its quantum results for all smooth
-cubic threefolds, both the unconditional packet computation and the
-irrationality theorem conditional on Hypothesis 4.7H, are independent of that
-special construction. *Gamma Point Rows under Quantum Wall Crossing* pursues
+*Irrationality after one stabilization* proves unconditionally that `X × P¹` is
+irrational for every smooth complex cubic threefold `X`, by way of ordinary
+Hodge atoms and a rank-two atomic residue discriminant; it also uses the
+six-axis structure of the nonstandard `A₅`-invariant pencil to prove universal
+`CH₀`-triviality for its explicit family. Its finer framed-monodromy invariant
+is computed unconditionally for cubics, while the birational-invariance
+refinement of that invariant is conditional on two stated hypotheses.
+*Gamma Point Rows under Quantum Wall Crossing* pursues
 the same quantum obstruction past the first stabilization, to a criterion
 covering every projective stabilization under explicit gauged-admissibility
 and marked threshold assumptions; it is an early draft.
@@ -95,17 +97,21 @@ complex as separate victories.
 
 ### Algebraic geometry and rationality
 
-- **Conditional one-stabilization irrationality for cubic threefolds;
-  unconditional computation of the primitive-sixth quantum packet.** The
-  framed-monodromy count `ν₆(X) = 2` is proved unconditionally for every
-  smooth complex cubic threefold `X`. Conditional on Hypothesis 4.7H
-  (reconstruction-displacement invariance), that count is birationally
-  invariant through dimension four, and the fourfold `X × P¹` is irrational,
-  as is `V × P¹` for every smooth prime Fano threefold `V` of genus eight. On
-  an explicit non-isotrivial `A₅`-invariant family, the cubic threefolds are
-  unconditionally universally `CH₀`-trivial, so under that hypothesis the
-  usual decomposition-of-the-diagonal detector and the quantum obstruction
-  separate on the same stabilized varieties.
+- **One-stabilization irrationality for every smooth cubic threefold.** The
+  fourfold `X × P¹` is irrational for every smooth complex cubic threefold
+  `X`, unconditionally, and likewise `V × P¹` for every smooth prime Fano
+  threefold `V` of genus eight. The proof reads the ordinary, non-enhanced
+  Hodge-atom package as a birational ledger and introduces a rank-two atomic
+  residue discriminant: the double zero packet of the cubic small quantum
+  connection is a single Hodge atom whose modified block has discriminant
+  `4/9`, a value no curve or surface representative can carry. A separate
+  framed-monodromy invariant gives `ν₆(X) = 2` and `ν₆(X × P¹) = 4`
+  unconditionally; its birational invariance through dimension four is
+  conditional on two stated hypotheses and yields a second proof. On an
+  explicit non-isotrivial `A₅`-invariant family, the cubic threefolds are
+  universally `CH₀`-trivial, so the usual decomposition-of-the-diagonal
+  detector and irrationality after one stabilization separate on the same
+  stabilized varieties.
   [Irrationality of Cubic Threefolds after One Stabilization](https://github.com/tavisrudd/cubic-stabilization-epilogue/blob/main/irrationality_after_one_stabilization.pdf).
 
 - **Conditionally, every projective stabilization of a smooth cubic
@@ -166,9 +172,10 @@ is conditional, its hypothesis is displayed in the theorem column.
 
 | Paper | General theorem | Quantifier range |
 |---|---|---|
+| Irrationality after one stabilization | `X × P¹` is irrational, by way of the rank-two atomic residue discriminant of the cubic Hodge atom. | Every smooth complex cubic threefold `X`. |
 | Irrationality after one stabilization | The primitive-sixth framed-monodromy multiplicity of the small even quantum connection equals two. | Every smooth complex cubic threefold `X`. |
-| Irrationality after one stabilization | Assuming Hypothesis 4.7H (reconstruction-displacement invariance), `X × P¹` is irrational. | Every smooth complex cubic threefold `X`. |
-| Irrationality after one stabilization | Assuming Hypothesis 4.7H, the primitive-sixth framed-monodromy multiplicity is birationally invariant. | All smooth projective varieties of dimension at most four. |
+| Irrationality after one stabilization | The primitive-sixth framed-monodromy multiplicity of a product with a projective space is that of the factor times one more than the dimension. | Every smooth projective variety and every projective space. |
+| Irrationality after one stabilization | Assuming Hypotheses 5.7R (reconstruction-tail invariance) and 5.7T (divisor-tagging specialization), the primitive-sixth framed-monodromy multiplicity is birationally invariant. | All smooth projective varieties of dimension at most four. |
 | Irrationality after one stabilization | Finite-etale graph slopes make every divided power of the marked graph divisor lattice an ordinary integral divisor product. | Every marked finite-etale graph quotient of an elliptic power satisfying the stated local depth and self-adjointness hypotheses, in every degree. |
 | Clebsch I | If an arc's uncovered locus is a nonsingular conic, then `q` is odd and `2k − 3 ≤ q ≤ (k(k − 1) + 3)/3`. | Every `k`-arc with `k ≥ 4`, over every finite field order `q`. |
 | Clebsch I companion | `q = 11` is the only field order admitting a conic-filling six-arc. | Every field order. |
@@ -194,7 +201,7 @@ boundary, and reproducible entry points.
 | <sub>*Clebsch: Rigidity from Sparse Shadows - III*</sub><br>Golden Descent and Operator Realizations of the Clebsch Cubic | Algebraic geometry / combinatorics | An exact arithmetic incidence cover selects a marked conference source whose cubic shadows return in degree-six harmonics; exchange rigidity and two-graph reconstruction follow independently. | [PDF](https://github.com/tavisrudd/clebsch-passages/blob/main/clebsch_passages.pdf) · [repo](https://github.com/tavisrudd/clebsch-passages) |
 | <sub>*Clebsch: Rigidity from Sparse Shadows - IV*</sub><br>Reconstructing PG(2,13), Its Conic, and Polarity from the Minimum Words of a Binary Conic Code | Coding / finite geometry | Weighted pair data on minimum words recover a marked projective plane, conic, and polarity. | [PDF](https://github.com/tavisrudd/q13-passant-code/blob/main/passant_code_q13.pdf) · [repo](https://github.com/tavisrudd/q13-passant-code) |
 | <sub>*Clebsch: Rigidity from Sparse Shadows - V*</sub><br>Chordal and Conference Cubics: Reconstruction and a Residual C2-Torsor | Invariant theory / algebraic combinatorics | Distinct chordal and conference cubics recover one marked six-axis carrier and admit an exact oriented marked return. | [PDF](../chordal-conference-reconstruction/chordal_conference_reconstruction.pdf) |
-| Irrationality of Cubic Threefolds after One Stabilization | Algebraic geometry / birational geometry | Unconditionally `ν₆ = 2` for every smooth cubic threefold; under Hypothesis 4.7H, every smooth cubic threefold remains irrational after multiplication by `P¹`, while an explicit family is unconditionally universally `CH₀`-trivial. | [PDF](https://github.com/tavisrudd/cubic-stabilization-epilogue/blob/main/irrationality_after_one_stabilization.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-epilogue) |
+| Irrationality of Cubic Threefolds after One Stabilization | Algebraic geometry / birational geometry | Every smooth cubic threefold stays irrational after multiplication by `P¹`, proved from a rank-two atomic residue discriminant of ordinary Hodge atoms, while an explicit family is universally `CH₀`-trivial; the framed count `ν₆ = 2` and its stabilization to `4` are separate unconditional computations. | [PDF](https://github.com/tavisrudd/cubic-stabilization-epilogue/blob/main/irrationality_after_one_stabilization.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-epilogue) |
 | Gamma Point Rows under Quantum Wall Crossing and a Criterion for Stable Irrationality | Algebraic geometry / quantum cohomology | A rank-one derived-clutching theorem, an exact simple-wall ambient point coordinate, ordinary-flop point-row transport, global support collapse, and Gamma reduction give an all-stabilizations criterion under explicit gauged-admissibility and marked threshold assumptions. | [PDF](https://github.com/tavisrudd/cubic-stabilization-irrationality/blob/main/cubic_stabilization_irrationality.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-irrationality) |
 | Standard Flips of Discrepancy One: Extremal J-Normalization and the Meijer Aperture at ν=1 | Algebraic geometry / quantum cohomology | An exact `z`-order count and the `ν=1` Barnes sector complete the discrepancy-one range in Shen--Shoemaker's extremal flip theorem. | [PDF](https://github.com/tavisrudd/discrepancy-one-flips/blob/main/discrepancy_one_flips.pdf) · [repo](https://github.com/tavisrudd/discrepancy-one-flips) |
 | Arcs Complete Outside a Conic: A Prescribed-Hole Defect Identity and Matching-Design Rigidity | Finite geometry / designs | A universal pointwise defect identity gives matching-design rigidity, stability, and conic-relative bounds. | [PDF](https://github.com/tavisrudd/arcs-complete-outside-conic/blob/main/arcs_complete_outside_conic.pdf) · [repo](https://github.com/tavisrudd/arcs-complete-outside-conic) |
@@ -491,26 +498,30 @@ into a global birational obstruction.
 
 [PDF](https://github.com/tavisrudd/cubic-stabilization-epilogue/blob/main/irrationality_after_one_stabilization.pdf) · [Repository](https://github.com/tavisrudd/cubic-stabilization-epilogue)
 
-**Standout results.** The framed-monodromy count `ν₆(X) = 2` is unconditional
-for every smooth complex cubic threefold `X`.  Conditional on Hypothesis 4.7H
-(reconstruction-displacement invariance), that count is birationally invariant
-through dimension four, every smooth complex cubic threefold remains
-irrational after multiplication by a projective line, and the same holds for
-every smooth prime Fano threefold of genus eight.  On an explicit
-non-isotrivial family, universal `CH₀`-triviality survives that stabilization
-unconditionally, so it does not detect the irrationality.
+**Standout results.** Every smooth complex cubic threefold stays irrational
+after multiplication by a projective line, unconditionally, and the same holds
+for every smooth prime Fano threefold of genus eight.  The proof runs on a new
+rank-two atomic residue discriminant of ordinary Hodge atoms, which
+distinguishes the cubic atom from every curve and surface atom.  The separate
+framed-monodromy count is `ν₆(X) = 2` for every smooth cubic threefold and
+`ν₆(X × P¹) = 4`, both unconditional; its birational invariance through
+dimension four is conditional on two stated hypotheses and gives a second
+proof of the theorem.  On an explicit non-isotrivial family, universal
+`CH₀`-triviality survives that stabilization, so it does not detect the
+irrationality.
 
-> *Abstract* Conditional on Hypothesis 4.7H below, we prove that X × P¹ is irrational for every smooth cubic threefold X, and likewise for every smooth prime Fano threefold of genus eight. The proof counts primitive-sixth eigenvalues of framed formal monodromy on the numerical small even quantum connection. The cubic calculation itself is unconditional: the count equals two for every smooth cubic threefold. The Iritani and Iritani–Koto comparison isomorphisms preserve the original-z-disc framing after coefficient-field extension; Hypothesis 4.7H is needed only for the positive-filtration reconstruction bulk displacements and the divisor-tagging step. Under that hypothesis, the count is a birational invariant through dimension four.
+> *Abstract* We prove unconditionally that X × P¹ is irrational for every smooth complex cubic threefold X. The proof uses the ordinary, non-enhanced Hodge-atom package of Katzarkov–Kontsevich–Pantev–Yu as a birational ledger and introduces a rank-two atomic residue discriminant. The double zero packet of the cubic small quantum connection is shown independently to define a single Hodge atom; a canonical elementary modification of its even rank-two block has residue discriminant 4/9. The only curve that could carry the same Hodge representation is a genus-five curve, for which the corresponding discriminant is zero, while surface representatives are excluded by parity rank and the classification of minimal surfaces. The projective-bundle atom formula then obstructs rationality of X × P¹.
 >
-> Under Hypothesis 4.7H, combining the theorem with any family of universally CH₀-trivial cubic threefolds separates universal CH₀-triviality from rationality after one stabilization. Voisin's loci of codimension at most three give that separation on subvarieties of dimension at least seven; Colliot-Thélène's almost-diagonal theorem gives the explicit example {x₁³ + ⋯ + x₅³ = 0} × P¹; and for the coprime-degree cubics of Yang–Yu–Zhu, under the same hypothesis it verifies the first nontrivial stabilization of their stable-rationality question.
+> We also retain a finer framed-formal-monodromy invariant ν₆ of the numerical small even quantum connection. Its cubic value is computed unconditionally, and the product formula for Gromov–Witten theory gives the unconditional stabilization identity ν₆(X × P¹) = 4. The string and divisor equations remove the degree-zero and fixed degree-two pieces of the comparison coordinates exactly. We isolate the two remaining issues as Hypotheses 5.7R and 5.7T: reconstruction-tail invariance and the separate divisor-tagging specialization step. The specialization issue is partly resolved directly: 5.7T is unnecessary for nef-canonical targets, P¹, P², and, assuming 5.7R, ruled surfaces over positive-genus curves; in the present proof it remains only for rational ruled and nonminimal surface centers. Conditional on the hypotheses actually used, ν₆ satisfies blowup and projective-bundle operation formulas and is birationally invariant through dimension four. This conditional refinement computes ν₆ = 2 for prime Fano threefolds of genus eight, although their irrationality after one stabilization already follows unconditionally from the cubic theorem and Kuznetsov's birational correspondence.
 >
-> We also prove an all-degree integral saturation theorem for marked finite-etale graph quotients of elliptic powers: divided powers of the marked divisor lattice are ordinary divisor products. The six-axis intermediate Jacobians of the nonstandard A₅-invariant cubic pencil satisfy its hypotheses, so every smooth member of that pencil is universally CH₀-trivial by an integral lattice saturation rather than by a unirational parametrization or an odd-degree isogeny to a curve Jacobian. Under Hypothesis 4.7H, the two detectors therefore diverge on the same smooth fourfolds. Stable irrationality stays out of reach: from the second stabilization onward the low-dimensional exclusion used here no longer applies.
+> Combining the unconditional one-stabilization theorem with independent universal CH₀-triviality inputs gives unconditional separations of universal CH₀-triviality from rationality after one stabilization. In particular this applies to Voisin's loci, the Fermat cubic, the coprime-degree family of Yang–Yu–Zhu, and every smooth member of the nonstandard A₅-invariant pencil. For the last family we give an independent integral proof of universal CH₀-triviality: an all-degree saturation theorem for marked finite-étale graph quotients of elliptic powers makes the primitive minimal class of the intermediate Jacobian an ordinary integral divisor product. Moreover, all but finitely many moduli points of this A₅-curve are not projectively equivalent to cubics of the separated-variable type covered by Colliot-Thélène's criterion.
 
-**Delivers.** An unconditional computation of the primitive-sixth quantum
-packet of every smooth cubic threefold; and, under Hypothesis 4.7H, a
-birational obstruction after one projective-line stabilization for every
-smooth cubic threefold, together with an explicit family showing that
-universal `CH₀`-triviality can hold while this obstruction remains nonzero.
+**Delivers.** An unconditional birational obstruction after one
+projective-line stabilization for every smooth cubic threefold, together with
+an explicit family showing that universal `CH₀`-triviality can hold while that
+irrationality persists; an unconditional computation of the primitive-sixth
+quantum packet and of its value after one stabilization; and, under two stated
+hypotheses, birational invariance of that count through dimension four.
 
 **Who cares.** Algebraic geometers working on rationality, stable rationality,
 intermediate Jacobians, algebraic cycles, quantum connections, or weak
@@ -518,12 +529,13 @@ factorization.
 
 **Why it matters.** Failure of universal `CH₀`-triviality is a standard
 obstruction to stable rationality, but its validity is not a parametrization.
-Under Hypothesis 4.7H, this paper makes that limitation concrete after an
-actual stabilization, and it introduces a quantum obstruction that applies to
-every smooth cubic threefold, not only the symmetric family used on the cycle
-side.  The one unresolved step is that hypothesis: invariance of the
-primitive-sixth framed multiplicity under the positive-filtration bulk
-displacements produced by the reconstruction formulas and by divisor tagging.
+This paper makes that limitation concrete after an actual stabilization, and
+its residue discriminant is a new numerical invariant of ordinary Hodge atoms
+that applies to every smooth cubic threefold, not only the symmetric family
+used on the cycle side.  Two hypotheses remain, and only for the finer framed
+invariant: invariance of the primitive-sixth framed multiplicity under the
+reconstruction tail of the operation formulas, and under the divisor-tagging
+specialization.
 
 ---
 

@@ -38,8 +38,10 @@ promoted mathematical assertion maps to a kernel-checked declaration.
 ## Current status
 
 - **C912 — referee-facing foundations for the epilogue, active, author-close
-  only.** Manuscript `papers/cubic-stabilization-epilogue/`, whose headline is
-  conditional on Hypothesis 4.7H. The owed frame-transport lemma
+  only.** Manuscript `papers/cubic-stabilization-epilogue/`, whose
+  one-stabilization headline became unconditional on 2026-08-16 through the
+  Section 4 atomic route; Hypotheses 5.7R and 5.7T now carry only the Section 5
+  framed-monodromy refinement. The owed frame-transport lemma
   for referee A is narrowed to invariance of the framed spectrum under one
   positive-filtration bulk displacement; card:
   [`c912-cubic-stabilization-referee-foundations.md`](../cubic-threefolds-tasks/c912-cubic-stabilization-referee-foundations.md),
@@ -123,7 +125,7 @@ Lean source follows automatically from any of the above.
 
 | surface | root | current state | owning task |
 |---|---|---|---|
-| Cubic-stabilization epilogue: `X x P^1` irrational, the `m = 1` statement | `papers/cubic-stabilization-epilogue/` | headline conditional on Hypothesis 4.7H since the author instruction of 2026-08-15; the cubic count itself unconditional; warning-free; Lean companion in progress under C910 | C907, C909, C910, C912, C913 |
+| Cubic-stabilization epilogue: `X x P^1` irrational, the `m = 1` statement | `papers/cubic-stabilization-epilogue/` | headline unconditional through the Section 4 atomic route since 2026-08-16; Hypotheses 5.7R and 5.7T carry only the Section 5 framed refinement; warning-free; Lean claim-map resync open under C910 | C907, C909, C910, C912, C913 |
 | Discrepancy-one flip correction | `papers/discrepancy-one-flips/` | published standalone note, DOI `10.5281/zenodo.21924799` | C911 (closed) |
 | *Irrationality of Cubic Threefolds after One Stabilization*: `X x P^m` for all `m`, the all-`m` statement | `papers/cubic-stabilization-irrationality/` | headline conditional on the marked-threshold wall and zero-mode hypotheses | C913 |
 

@@ -8,19 +8,23 @@
 
 **Title:** *Irrationality of cubic threefolds after one stabilization.*
 
-Conditional on Hypothesis 4.7H (reconstruction-displacement invariance), the
-paper proves irrationality after one stabilization for every smooth cubic
-threefold.  Unconditionally, it proves `nu_6(X) = 2` for every smooth cubic
-threefold and the cycle-theoretic universal-`CH_0`-triviality results stated in
-Sections 2--3.
+The paper proves unconditionally that `X x P^1` is irrational for every smooth
+cubic threefold `X`.  That proof runs on the ordinary Hodge-atom package of
+Katzarkov--Kontsevich--Pantev--Yu and a rank-two atomic residue discriminant.
+Also unconditional are `nu_6(X) = 2` and the stabilization identity
+`nu_6(X x P^1) = 4` for every smooth cubic threefold, irrationality of every
+smooth `V_14 x P^1`, and the cycle-theoretic universal-`CH_0`-triviality
+results stated in Sections 2--3.
 
-Under the same hypothesis, the quantum obstruction behind the irrationality
-theorem is birationally invariant through dimension four, and every smooth
-`V_14 x P^1` is irrational.  The paper then gives a non-isotrivial pencil of
-smooth cubic threefolds that are universally `CH_0`-trivial, where universal
-`CH_0`-triviality comes from an algebraic primitive minimal class on the
-intermediate Jacobian and is unconditional; their products with `P^1` are
-irrational under Hypothesis 4.7H.  Yang--Yu--Zhu (arXiv:2508.03623) already
+Hypotheses 5.7R (reconstruction-tail invariance) and 5.7T (divisor-tagging
+specialization) carry only the finer framed-monodromy refinement: under them
+the quantum obstruction `nu_6` satisfies blowup and projective-bundle
+operation formulas and is birationally invariant through dimension four, which
+gives a second proof of the irrationality theorem.  The paper then gives a
+non-isotrivial pencil of smooth cubic threefolds that are universally
+`CH_0`-trivial, where universal `CH_0`-triviality comes from an algebraic
+primitive minimal class on the intermediate Jacobian; their products with
+`P^1` are irrational.  Yang--Yu--Zhu (arXiv:2508.03623) already
 supply a two-dimensional family of universally `CH_0`-trivial cubic
 threefolds, by way of unirational parametrizations of coprime degrees; the
 pencil here is distinguished by its mechanism, not by being the first such
@@ -46,15 +50,18 @@ guarded commands documented in [`lean/README.md`](lean/README.md).
 ## Trust boundary
 
 The paper is proof-first.  Exact computations used during discovery are not
-part of its proof surface.  The current draft gives standalone proofs of
-the six-axis realization, all-degree finite-etale graph saturation, and the
-cubic framed-monodromy computation, all unconditional, together with the
-one-step irrationality argument, which is conditional on Hypothesis 4.7H.
-That hypothesis is the one unresolved step: invariance of the primitive-sixth
-framed multiplicity under the positive-filtration bulk displacements produced
-by the blowup and projective-bundle reconstruction formulas and by divisor
-tagging.  It is stated in Section 4, before Proposition 4.7, and every
-statement depending on it says so.
+part of its proof surface.  The current draft gives standalone unconditional
+proofs of the six-axis realization, all-degree finite-etale graph saturation,
+the cubic framed-monodromy computation, and the one-step irrationality
+theorem, the last through the atomic route of Section 4.
+
+Two hypotheses are used, and only in the framed-monodromy refinement of
+Section 5.  Hypothesis 5.7R asks for invariance of the primitive-sixth framed
+multiplicity under the reconstruction tail of the blowup and
+projective-bundle formulas; Hypothesis 5.7T asks that the divisor-tagging
+specialization preserve the two primitive-sixth multiplicities.  Both are
+stated where they are first used, and every statement depending on either
+says so.
 
 The Mathlib-only formal companion is in [`lean/`](lean/).  It is an explicitly
 partial reviewer artifact: its rejecting claim inventory covers every labelled

@@ -93,6 +93,34 @@ Exact
 partition, downgrades, and the README/ledger/summary residuals:
 `../2026-08-15-c912-hypothesis-4-7h-conditionalization.md`.
 
+**Manuscript status change, 2026-08-16.**  The atomic restructure landed at
+authority commit `3a7cb16ba`: Section 4 is now the unconditional Hodge-atom
+route to the one-stabilization theorem, Section 5 is the conditional framed
+refinement, Section 6 is the synthesis, and the superseded section sources
+`04-one-step.tex` and `05-synthesis.tex` are deleted.  Hypothesis 4.7H is gone;
+the two surviving hypotheses are 5.7R (reconstruction-tail invariance) and
+5.7T (divisor-tagging specialization), and they carry only Section 5.
+Unconditional now: `thm:every-cubic`, the separations of Corollaries 1.2--1.4
+and Theorem 1.5, `prop:cubic-packet`, `prop:projective-product-nu`,
+`cor:cubic-product-nu`, and the irrationality half of `cor:v14-one-step`.
+Conditional on 5.7R and 5.7T: `prop:framed-operations`, `lem:divisor-tagging`,
+`prop:low-dimensional-vanishing`, `thm:nu6-birational-invariance`, and the
+count `nu_6(V)=2` in `cor:v14-one-step`.  Warning-free at 48 pages.  The
+README, Zenodo description, and claim ledger were rewritten to this status.
+
+**Claim-map resync, open.**  The restructure added 26 labelled statements and
+dropped three (`def:pro-laurent-gauge-group`, `lem:pv-base-change`,
+`lem:formal-base-shift`).  The 26 additions are in
+`lean/verification/claims.json` as `absent` rows.  The three dropped labels
+leave 46 reviewer terminals with no manuscript claim, so `make check` still
+fails at `formal-static`, and export is blocked until the author picks among:
+retiring those terminals from `PaperInterface` and the axiom audit; restating
+the three statements in the manuscript as recorded machinery; or extending the
+claim-map schema with an explicit machinery bucket for kernel-checked
+declarations that no current manuscript claim uses.  The coverage-snapshot
+sentences in `lean/README.md` and `verification/README.md` need their counts
+refreshed once that is settled.
+
 **Lifecycle rule:** keep this card open until the author explicitly closes it.
 Passing implementation, review, export, and release gates does **not** authorize
 automatic closure.
