@@ -2,8 +2,13 @@
 
 **Lane:** `clebsch`
 
-**Status:** queued; author-supplied correction specification frozen, no
-manuscript edit made
+**Status:** complete 2026-08-17; all eight required edits applied and proved,
+authority commit `3b8e2c11f`, standalone commit `584322b`, nothing pushed.
+Report: `notes/2026-08-17-c916-paper-iii-compact-incidence-corrections.md`.
+The immutable-locator item and the C876--C878 citation corrections were
+excluded by author instruction, and Paper III's release aggregate remains red
+only at the pre-existing "Paper III" README vocabulary gate, which is not this
+task's to change.
 
 ## Objective
 

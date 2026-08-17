@@ -275,3 +275,25 @@ C916; every other check in the aggregate passes.  Changing a release gate needs
 explicit authority and the README wording belongs to the series-identity work,
 so neither was touched.  This is the one open item blocking a green aggregate
 for Paper III.
+
+## Export
+
+Authority commit `3b8e2c11f`.  Export audit returned `findings=0`, and
+
+```sh
+python3 papers/scripts/export-paper-repos.py sync --source-ref HEAD \
+  --repository clebsch-passages --root ~/src/math-papers/clebsch-passages
+```
+
+carried seven files (the three edited sections, the statement identity, the
+rebuilt PDF, and the exporter-maintained `PROVENANCE.md` and
+`export-manifest.json`) into the standalone repository as forward commit
+`584322b`, preserving its history.  The mirror's own replay agrees with the
+authority: identical PDF SHA-256
+`234046320443bffd0ccb97df239ecf61f80186110a10d83474474e212504e4a3`, statement
+identity CHECK OK, scaffold OK, spacing lint OK, all three evidence stems
+passing hash, primary and independent replay, and
+`check_manuscript_build.py` PASS at 33 pages warning-free.  The mirror's
+aggregate fails only at the same pre-existing README vocabulary gate.
+`export-paper-repos.py verify` reports the mirror's 64 tracked files matching
+the manifest at source commit `3b8e2c11f`.  Nothing was pushed.
