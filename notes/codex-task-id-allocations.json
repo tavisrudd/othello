@@ -3131,8 +3131,17 @@
       "last": 915,
       "purpose": "Apply the external referee correction package (E1-E6 + checklists) to the beyond-redundancy-four PRS Version 2 draft",
       "sequence": 348
+    },
+    {
+      "count": 1,
+      "first": 916,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 916,
+      "purpose": "Paper III referee correction spec: compact incidence/Delta repairs, proof, export",
+      "sequence": 349
     }
   ],
-  "next_id": 916,
+  "next_id": 917,
   "schema": "codex-task-id-allocations-v1"
 }
