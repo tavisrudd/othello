@@ -8,7 +8,8 @@
 
 ## Verdict
 
-All eight required mathematical edits are applied to
+All eight required mathematical edits, plus one author-directed follow-up edit
+in the proof of Proposition 4.1, are applied to
 `papers/clebsch-passages/`, each repaired step is checked against the cited
 Hitchin sections, and the manuscript rebuilds warning-free and
 deterministically at 33 pages.  The optional immutable-locator item is
@@ -22,9 +23,11 @@ Input PDF: SHA-256
 authority commit `b19233879`), which is exactly the referee's original PDF the
 specification's page numbers refer to.
 
-Output PDF: SHA-256
-`234046320443bffd0ccb97df239ecf61f80186110a10d83474474e212504e4a3`, 33 pages,
-warning-free, byte-identical to a deterministic scratch rebuild.
+Output PDF after the eight specification edits: SHA-256
+`234046320443bffd0ccb97df239ecf61f80186110a10d83474474e212504e4a3`.  Output PDF
+after the Proposition 4.1 follow-up: SHA-256
+`1040bd977ab74c77c0f77b69e21ad5f391ed13ba46911c6234e67056b69bb5f1`.  Both are
+33 pages, warning-free, and byte-identical to a deterministic scratch rebuild.
 
 ## What each edit did
 
@@ -96,6 +99,17 @@ reference.
    trichotomy, the sextic locus, the chart and its restriction, and the two
    regular configurations over \(xyz\); the compact completeness used here is
    pointed at Section 2.3 with Theorem 5 and \(J_0(xyz)\ne0\).
+
+9. **Proposition 4.1 proof, `sections/04-arithmetic-specialization.tex:50`
+   (author-directed, outside the specification).** The proof's closing sentence
+   said only that the final assertion "uses Hitchin's classification of the two
+   icosahedral sets on the orthogonal-plane cubic," which silently reopened the
+   gap the specification repairs.  It now reads that the final assertion is the
+   complete-fibre statement proved in Section 2.3: since \(J_0(xyz)\ne0\),
+   Hitchin's compact trichotomy `[3, Theorem 5]` gives exactly two compact
+   incidence points, and `[2, §§3, 7--9]` identifies them with \(I_t\) and
+   \(I_{1-t}\).  Proposition 4.1 now depends on the repaired argument by
+   reference.  No statement hash moved, since the change is inside a proof.
 
 ## Deliberate deviations from the specification text
 
