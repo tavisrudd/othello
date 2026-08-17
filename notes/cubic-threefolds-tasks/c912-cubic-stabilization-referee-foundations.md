@@ -93,8 +93,10 @@ Exact
 partition, downgrades, and the README/ledger/summary residuals:
 `../2026-08-15-c912-hypothesis-4-7h-conditionalization.md`.
 
-**Manuscript status change, 2026-08-16.**  The atomic restructure landed at
-authority commit `3a7cb16ba`: Section 4 is now the unconditional Hodge-atom
+**Manuscript status change, 2026-08-16.**  The author wrote the atomic
+restructure in ChatGPT and landed the new and edited section sources directly in
+the worktree; this session built, repaired, committed, and exported them, and
+did not author the mathematics.  It landed at authority commit `3a7cb16ba`: Section 4 is now the unconditional Hodge-atom
 route to the one-stabilization theorem, Section 5 is the conditional framed
 refinement, Section 6 is the synthesis, and the superseded section sources
 `04-one-step.tex` and `05-synthesis.tex` are deleted.  Hypothesis 4.7H is gone;
@@ -128,6 +130,15 @@ claim.  The coverage snapshot in `lean/README.md` and `verification/README.md`
 discloses the machinery count.  `make check` is green: 93 sources, 168
 terminals, 49 claims, 46 machinery, coverage 29 absent / 10 fragmentary /
 9 conditional / 1 complete.
+
+**Export done, unpushed, 2026-08-16.**  Authority `4ef6c743c`; audit zero
+findings; `verify` accepts 121 tracked files.  The paper repository took the
+section deletions as their own reviewable commit `ff56366` before the content
+refresh `8b1e149`, its own `make check` passes, and its rebuilt PDF is
+byte-identical to the authority's at SHA-256
+`0fcff2cdf09060129393f096953db81583befed49120438365a1d8094566e29e`.  The
+portfolio summary repository is at `0b9c78a` and its tree equals the authority's
+`papers/summary/`.  Nothing was pushed.
 
 **Lifecycle rule:** keep this card open until the author explicitly closes it.
 Passing implementation, review, export, and release gates does **not** authorize
