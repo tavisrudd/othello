@@ -8,23 +8,24 @@
 
 **Title:** *Irrationality of cubic threefolds after one stabilization.*
 
-The paper proves unconditionally that `X x P^1` is irrational for every smooth
-cubic threefold `X`.  That proof runs on the ordinary Hodge-atom package of
-Katzarkov--Kontsevich--Pantev--Yu and a rank-two atomic residue discriminant.
-Also unconditional are `nu_6(X) = 2` and the stabilization identity
-`nu_6(X x P^1) = 4` for every smooth cubic threefold, irrationality of every
-smooth `V_14 x P^1`, and the cycle-theoretic universal-`CH_0`-triviality
-results stated in Sections 2--3.
+The paper proves that `X x P^1` is irrational for every smooth cubic threefold
+`X`, by way of the ordinary Hodge-atom package of
+Katzarkov--Kontsevich--Pantev--Yu and a rank-two atomic residue discriminant
+whose value `4/9` on the cubic atom no curve or surface representative can
+carry.  Kuznetsov's birational correspondence extends the conclusion to every
+smooth `V_14 x P^1`.
 
-Hypotheses 5.7R (reconstruction-tail invariance) and 5.7T (divisor-tagging
-specialization) carry only the finer framed-monodromy refinement: under them
-the quantum obstruction `nu_6` satisfies blowup and projective-bundle
-operation formulas and is birationally invariant through dimension four, which
-gives a second proof of the irrationality theorem.  The paper then gives a
-non-isotrivial pencil of smooth cubic threefolds that are universally
-`CH_0`-trivial, where universal `CH_0`-triviality comes from an algebraic
-primitive minimal class on the intermediate Jacobian; their products with
-`P^1` are irrational.  Yang--Yu--Zhu (arXiv:2508.03623) already
+The finer framed-monodromy invariant `nu_6` gives `nu_6(X) = 2` and the
+stabilization identity `nu_6(X x P^1) = 4`.  Hypotheses 5.7R
+(reconstruction-tail invariance) and 5.7T (divisor-tagging specialization)
+carry only the refinement built on it: under them `nu_6` satisfies blowup and
+projective-bundle operation formulas and is birationally invariant through
+dimension four, which gives a second proof of the irrationality theorem.
+
+The paper then gives a non-isotrivial pencil of smooth cubic threefolds that
+are universally `CH_0`-trivial, where universal `CH_0`-triviality comes from an
+algebraic primitive minimal class on the intermediate Jacobian; their products
+with `P^1` are irrational.  Yang--Yu--Zhu (arXiv:2508.03623) already
 supply a two-dimensional family of universally `CH_0`-trivial cubic
 threefolds, by way of unirational parametrizations of coprime degrees; the
 pencil here is distinguished by its mechanism, not by being the first such
