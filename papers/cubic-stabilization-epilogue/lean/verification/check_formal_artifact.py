@@ -188,7 +188,7 @@ def main() -> None:
         )
 
     manifest = json.loads(CLAIMS.read_text(encoding="utf-8"))
-    if manifest.get("schema") != "cubic-stabilization-lean-claims-v2":
+    if manifest.get("schema") != "cubic-stabilization-lean-claims-v3":
         fail("unexpected claims schema")
     claims = manifest.get("claims", [])
     labels = [claim.get("manuscript_label") for claim in claims]
@@ -223,6 +223,18 @@ def main() -> None:
             if declaration in registered:
                 fail(f"terminal registered more than once: {declaration}")
             registered.add(declaration)
+    machinery = manifest.get("machinery")
+    if not isinstance(machinery, list):
+        fail("claim map has no machinery list")
+    for entry in machinery:
+        declaration = entry.get("declaration")
+        if declaration not in terminals:
+            fail(f"unresolved machinery declaration {declaration}")
+        if declaration in registered:
+            fail(f"terminal registered more than once: {declaration}")
+        if not isinstance(entry.get("reason"), str) or not entry["reason"].strip():
+            fail(f"machinery declaration {declaration} has no nonempty reason")
+        registered.add(declaration)
     if registered != terminals:
         fail(
             "claim-map terminal mismatch: "
@@ -251,7 +263,8 @@ def main() -> None:
         f"{coverage_counts['absent']} absent; "
         f"{coverage_counts['fragment']} fragmentary; "
         f"{coverage_counts['conditional_deduction']} conditional; "
-        f"{coverage_counts['complete']} complete; {len(terminals)} reviewer terminals."
+        f"{coverage_counts['complete']} complete; {len(terminals)} reviewer terminals, "
+        f"of which {len(machinery)} are machinery serving no current manuscript claim."
     )
     for readme in (LEAN_README, VERIFICATION_README):
         normalized = " ".join(readme.read_text(encoding="utf-8").split())
@@ -262,7 +275,8 @@ def main() -> None:
             )
     print(
         f"PASS mode={mode_name} sources={len(sources)} terminals={len(terminals)} "
-        f"manuscript_claims={len(claims)} coverage={coverage_counts}"
+        f"manuscript_claims={len(claims)} machinery={len(machinery)} "
+        f"coverage={coverage_counts}"
     )
 
 

@@ -73,8 +73,9 @@ commands.
 The authoritative claim-level map is
 [`lean/verification/claims.json`](lean/verification/claims.json).  It records
 the objects, hypotheses, conclusions, and cautions for every manuscript claim
-represented in Lean.  Kernel-reported dependencies are checked against the
-exact allowlist in
+represented in Lean, and separately lists the kernel-checked declarations that
+serve no current manuscript claim, each with the reason it stands apart.
+Kernel-reported dependencies are checked against the exact allowlist in
 [`lean/verification/expected_axioms.txt`](lean/verification/expected_axioms.txt).
 
 ## Repository contents

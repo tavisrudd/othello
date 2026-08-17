@@ -30,8 +30,18 @@ type, or completely formalized from the manuscript's stated hypotheses.  The
 atomic route to the one-stabilization theorem, added to the manuscript in
 August 2026, is entirely absent from Lean.
 
-Checked coverage snapshot: 52 claims; 29 absent; 13 fragmentary; 9 conditional;
-1 complete; 168 reviewer terminals.
+Checked coverage snapshot: 49 claims; 29 absent; 10 fragmentary; 9 conditional;
+1 complete; 168 reviewer terminals, of which 46 are machinery serving no current
+manuscript claim.
+
+Those 46 are kernel-checked and reusable, and the claim map records for each one
+why no current claim rests on it.  They formalize the pro-Laurent gauge tower,
+coefficientwise and flat base change of horizontal monodromy, ideal-filtration
+and adic quotient towers, existence and uniqueness of normalized flat gauges
+with their zero-curvature integrability identities, and the positive-filtration
+evaluation branch.  The manuscript reached its specialization and
+bulk-displacement steps through that route in an earlier draft and now assumes
+Hypotheses 5.7R and 5.7T at those points instead.
 
 The reviewer-facing terminals currently verify:
 
@@ -493,7 +503,8 @@ nix shell nixpkgs#python3 --command python3 \
 ```
 
 It requires one claim-map row for every theorem-like manuscript environment,
-an exact partition of the reviewer terminals among those rows, and an exact
+an exact partition of the reviewer terminals among those rows and the machinery
+bucket, a stated reason for every machinery declaration, and an exact
 expected-axiom row for every terminal.  After the guarded build of the axiom
 audit, pass its captured standard output back to the same checker:
 

@@ -108,18 +108,26 @@ Conditional on 5.7R and 5.7T: `prop:framed-operations`, `lem:divisor-tagging`,
 count `nu_6(V)=2` in `cor:v14-one-step`.  Warning-free at 48 pages.  The
 README, Zenodo description, and claim ledger were rewritten to this status.
 
-**Claim-map resync, open.**  The restructure added 26 labelled statements and
+**Claim-map resync, done.**  The restructure added 26 labelled statements and
 dropped three (`def:pro-laurent-gauge-group`, `lem:pv-base-change`,
 `lem:formal-base-shift`).  The 26 additions are in
-`lean/verification/claims.json` as `absent` rows.  The three dropped labels
-leave 46 reviewer terminals with no manuscript claim, so `make check` still
-fails at `formal-static`, and export is blocked until the author picks among:
-retiring those terminals from `PaperInterface` and the axiom audit; restating
-the three statements in the manuscript as recorded machinery; or extending the
-claim-map schema with an explicit machinery bucket for kernel-checked
-declarations that no current manuscript claim uses.  The coverage-snapshot
-sentences in `lean/README.md` and `verification/README.md` need their counts
-refreshed once that is settled.
+`lean/verification/claims.json` as `absent` rows: the whole atomic route to the
+one-stabilization theorem is unformalized.  The three dropped labels left 46
+reviewer terminals with no manuscript claim.  Rather than retire that
+kernel-checked work or restate the deleted statements, the claim map now has an
+explicit `machinery` bucket, schema `cubic-stabilization-lean-claims-v3`: each
+of the 46 declarations carries the reason no current claim rests on it, in six
+groups (pro-Laurent gauge tower, coefficientwise and flat base change,
+divisor and string substitution, ideal-filtration and adic quotient towers,
+normalized flat gauges with zero-curvature integrability, and the
+positive-filtration evaluation branch).  `check_formal_artifact.py` requires
+every terminal to be registered exactly once across claims and machinery, and
+requires a nonempty reason per machinery row, so the exact-partition property
+is preserved while the audit no longer implies every terminal serves a live
+claim.  The coverage snapshot in `lean/README.md` and `verification/README.md`
+discloses the machinery count.  `make check` is green: 93 sources, 168
+terminals, 49 claims, 46 machinery, coverage 29 absent / 10 fragmentary /
+9 conditional / 1 complete.
 
 **Lifecycle rule:** keep this card open until the author explicitly closes it.
 Passing implementation, review, export, and release gates does **not** authorize
