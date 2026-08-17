@@ -1,30 +1,19 @@
 # Reconstruction, Rigidity, and Rationality in Geometry, Coding, and Quantum Information
 
+- [selected headline results](#selected-headline-results)
+- [theorems over infinite families](#theorems-over-infinite-families)
+- [papers and entry points](#papers-and-entry-points)
+- [abstracts and non-specialist guides](#abstracts-and-non-specialist-guides)
+- [verification philosophy](#verification-philosophy)
+- [contact and disclosure](#contact-and-disclosure)
+
 This repository summarizes a collection of papers in algebraic and finite
 geometry, coding theory, algebraic combinatorics, and quantum information.
 They ask two related questions: how much structure can be recovered after most
 of the original information has been discarded, and which obstructions persist
 under operations, such as stabilization, that might be expected to weaken them?
 
-The strongest geometric statement in the collection concerns the first
-stabilization. Conditional on Hypothesis 4.7H (reconstruction-displacement
-invariance), *Irrationality after one stabilization* proves irrationality
-after one stabilization for every smooth cubic threefold; unconditionally, it
-proves `ν₆(X) = 2` for every smooth cubic threefold and the cycle-theoretic
-universal-`CH₀`-triviality results stated in its Sections 2--3. Among the
-latter is an explicit non-isotrivial family whose cubic-threefold fibres are
-universally `CH₀`-trivial. Failure of universal `CH₀`-triviality is a standard
-obstruction to stable rationality; under that hypothesis, this family shows
-that the obstruction can vanish while irrationality survives one
-stabilization.
-
-Elsewhere in the collection, the retained information may consist of the
-errors farthest from a code, minimum-weight words, local symmetries of an
-entangled state, low-order determinants, or measurements that hide an optical
-device's orientation. Across both the reconstruction and persistence
-questions, sparse data repeatedly force rich algebraic or geometric structure.
-The recurring mechanism is rigidity: identify an invariant that survives the
-loss of information, then prove that few possibilities remain.
+Every paper is intended to stand on its own mathematically.
 
 The numbered five-paper series *Clebsch: Rigidity from Sparse Shadows* asks how
 much of a structured object can be reconstructed from sparse code, matching,
@@ -37,8 +26,8 @@ minimum-weight words recover a marked conic plane and its polarity.
 *Diagonal Isoduality and Transversal Clifford Groups of MDS–CSS Codes* and the
 Golden interferometer paper are related unnumbered companions.
 
-Two further papers lie outside that series and concern rationality of cubic
-threefolds. *Irrationality after one stabilization* uses the six-axis
+Two further draft papers concern rationality of cubic threefolds.
+*Irrationality after one stabilization* uses the six-axis
 structure of the nonstandard `A₅`-invariant pencil to prove universal
 `CH₀`-triviality for its explicit family; its quantum results for all smooth
 cubic threefolds, both the unconditional packet computation and the
@@ -46,8 +35,7 @@ irrationality theorem conditional on Hypothesis 4.7H, are independent of that
 special construction. *Gamma Point Rows under Quantum Wall Crossing* pursues
 the same quantum obstruction past the first stabilization, to a criterion
 covering every projective stabilization under explicit gauged-admissibility
-and marked threshold assumptions; it is an early draft. Every paper is
-intended to stand on its own mathematically.
+and marked threshold assumptions; it is an early draft.
 
 Many structural components have independent Lean formalizations; coverage is
 claim-specific and generally not end-to-end. Each repository states which
