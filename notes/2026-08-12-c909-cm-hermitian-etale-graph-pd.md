@@ -1,0 +1,167 @@
+# C909 — CM Hermitian finite-etale graph saturation
+
+Date: 2026-08-12
+
+Status: positive extension for a power of one CM elliptic curve, including
+conductor, ramified, and dyadic local primes. No manuscript, PDF, mirror, or
+Lean edit.
+
+## Theorem
+
+Let \(E/\mathbf C\) have CM by an imaginary-quadratic order \(\mathcal O\),
+and put \(R_p=\mathcal O\otimes\mathbf Z_p\), with involution
+\(*\) induced by complex conjugation. For the product polarization,
+\[
+ \operatorname{NS}(E^g)\otimes\mathbf Z_p
+   =\operatorname{Herm}_g(R_p)
+   :=\{A\in M_g(R_p):A=A^*\}.                               \tag{1}
+\]
+
+Consider an \(\mathcal O\)-linear, Rosati-self-adjoint, block-respecting
+finite graph presentation of a polarized quotient of \(E^g\). At every
+positive depth assume the slope algebra is finite etale **over \(R_p\)**.
+Then, after a finite unramified faithfully flat extension of \(R_p\) which
+splits those etale algebras, its graph Neron--Severi coefficient lattice is
+generated over the coefficient ring by actual rank-one Hermitian forms
+\[
+                         xvv^* .                            \tag{2}
+\]
+Each such form is the pullback of a divisor from an elliptic quotient and
+has square zero. Hence every divided power of every graph Neron--Severi
+class is in the ordinary divisor-product image. Faithfully flat descent gives
+the same cohomological PD(NS) statement over \(\mathbf Z_p\), including:
+
+* \(p=2\);
+* primes ramified in the CM field; and
+* primes dividing the conductor of \(\mathcal O\).
+
+No inverse different or trace denominator occurs in this formulation.
+
+## Why the CM coefficient lattice has no different defect
+
+The Rosati identification is intrinsic:
+\[
+ \operatorname{NS}(E^g)
+  \xrightarrow{\lambda_E^{-1}\circ\lambda_{(-)}}
+  \operatorname{End}(E^g)^{\dagger}
+  =\operatorname{Herm}_g(\mathcal O).                       \tag{3}
+\]
+The different (and, for a nonmaximal order, its conductor correction) appears
+only when (3) is converted into alternating forms in a chosen
+\(\mathbf Z_p\)-basis of \(H_1(E,\mathbf Z_p)\): a trace pairing then writes
+the same integral Hermitian lattice using an inverse-different coordinate
+ideal. It is not an additional NS divisibility condition. Rank-one forms
+\(vv^*\) are actual divisor classes before that coordinate conversion.
+
+This distinction is essential. A theorem stated in alternating-coordinate
+entries may look ramified or dyadically defective even though its Hermitian
+Rosati lattice is not.
+
+## Local graph calculation
+
+The graph integrality calculation is the Hermitian version of the ordinary
+symmetric one. With \(P=\bigoplus_a p^aB_a\), each \(B_a\) unimodular
+Hermitian, and graph slope \(T\), the coefficient condition is
+\[
+ A=A^*,\qquad P^{-1}A\in M_g(R_p),\qquad
+ P^{-1}(AT^*-TA)P^{-1}\in M_g(R_p).                          \tag{4}
+\]
+The unit blocks \(B_a\) do not change the resulting entry ideals.
+
+After finite-etale splitting, write the depth/eigen blocks as
+\[
+ L=\bigoplus_iL_i,\qquad
+ T_i=t_iI+p^{a_i}S_i,                                       \tag{5}
+\]
+with integral \(S_i\). The diagonal \(ii\) slot of (4) contains the full
+\(p^{a_i}\operatorname{Herm}(L_i)\). Every cross slot is an \(R_p\)-submodule
+\[
+ I_{ij}\subseteq p^{\max(a_i,a_j)}
+                \operatorname{Hom}_{R_p}(L_j,L_i).          \tag{6}
+\]
+For scalar rank-one blocks the exact slot is
+\[
+ p^{\max(a,b)}R_p\cap
+ \bigl(p^{a+b}R_p:(t_j-t_i)\bigr),                           \tag{7}
+\]
+which is the right replacement for a DVR valuation formula at a ramified or
+conductor prime. No principality of (7) is needed below.
+
+Finite etaleness is used only to obtain the self-adjoint block decomposition
+(5). Over a complete local CM order this splitting is still available after
+a finite unramified extension: a finite etale algebra becomes split after a
+finite separable extension of the residue field, and the corresponding
+extension of the henselian coefficient ring is finite free and faithfully
+flat. This remains true at a conductor prime; \(R_p\) need not be a DVR.
+
+## Integral rank-one straightening
+
+The whole argument is the identity
+\[
+ \begin{aligned}
+ x\bigl(hE_{ij}+\bar hE_{ji}\bigr)
+ &=x(e_i+\bar h e_j)(e_i+\bar h e_j)^*\\
+ &\quad-xe_ie_i^*-x(h\bar h)e_je_j^* .                      \tag{8}
+ \end{aligned}
+\]
+There is no division by two.
+
+Indeed, take an arbitrary cross coefficient \(z\in I_{ij}\). By (6), with
+\(M=\max(a_i,a_j)\), write \(z=p^Mh\) for \(h\in R_p\). The three rank-one
+forms on the right of (8), multiplied by \(x=p^M\), are all actual elements
+of the graph coefficient lattice:
+
+* their cross coefficient is exactly \(z\in I_{ij}\);
+* their diagonal coefficients are \(p^M\) and
+  \(p^Mh\bar h\), which lie in \(p^{a_i}\mathbf Z_p\) and
+  \(p^{a_j}\mathbf Z_p\);
+* all other entries vanish.
+
+The same formula with basis vectors inside \(L_i,L_j\) generates every
+matrix entry of a higher-rank cross slot. Diagonal Hermitian blocks are
+generated by \(p^{a_i}vv^*\): for off-diagonal \(hE_{uv}+\bar hE_{vu}\)
+use (8) within one block, and the diagonal is immediate. Thus the full
+lattice in (4) is generated by (2).
+
+This proof never takes a valuation of \(R_p\), a trace, or a half. It
+therefore works unchanged for split, inert, ramified, dyadic, and nonmaximal
+conductor local orders.
+
+## Divided powers and descent
+
+For \(v\in\mathcal O^g\), the rank-one form \(vv^*\) is the divisor
+\(\varphi_v^*[0]\), where
+\(\varphi_v:E^g\to E\) is the corresponding \(\mathcal O\)-linear
+homomorphism. Its square is zero. The same remains true on the quotient:
+isogeny pullback is injective on torsion-free integral cohomology.
+
+After the finite unramified splitting, write any actual graph divisor as an
+integral sum of these square-zero classes. The usual identity
+\[
+ D^{[k]}=\sum_{|I|=k}\prod_{i\in I}R_i                      \tag{9}
+\]
+puts every divided power in the ordinary product image. Product-image
+quotients commute with finite free coefficient extension; faithful flatness
+therefore descends (9).
+
+## Exact boundary
+
+There is no CM ramified-prime counterexample for a power \(E^g\) under the
+theorem's hypotheses. The following broader claims are false or unproved and
+must not be silently folded in:
+
+1. If the graph slope is only \(\mathbf Z_p\)-linear, the quotient need not
+   carry the CM action and its NS lattice is not the Hermitian lattice (1).
+2. For a product of *nonisomorphic CM ideal factors*, coefficient modules are
+   fractional ideals rather than the free module \(\mathcal O^g\). The
+   rank-one statement then needs a projective Hermitian-module formulation;
+   the displayed \(vv^*\) coordinate proof is not a theorem there.
+3. Finite etaleness over \(\mathbf Z_p\) is not a substitute for finite
+   etaleness over \(R_p\) when the CM action is to be retained.
+
+## Mystery ledger
+
+The ej+tt pass resolves the apparent different/conductor mystery: it is a
+coordinate artifact, not a new CM saturation defect. The genuinely new
+boundary is ideal-class variation in nontrivial CM powers, outside this
+elliptic-power C909 task.

@@ -31,7 +31,10 @@ The target is not a slogan but a reconstruction-profile theorem.  For every
 passage, specify the source groupoid, shadow functor, exact reconstructed
 output, fibre, residual symmetry group, and a sharpness witness showing why
 weaker data cannot choose more.  The upper branch should exhibit a genuine
-\(C_2\)-torsor; Paper IV should exhibit a trivial fibre.
+\(C_2\)-torsor.  Paper IV should exhibit a trivial **structural** fibre after
+passing to the declared isomorphism groupoid; an unavoidable
+\(\operatorname{PGL}_2(13)\)-torsor remains if one insists on a coordinate
+normalization of the reconstructed conic.
 
 **Unexpected application.**  This gives a design principle for inverse
 problems: determine not only whether an invariant reconstructs its source,

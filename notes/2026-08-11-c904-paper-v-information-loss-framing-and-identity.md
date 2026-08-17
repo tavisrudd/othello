@@ -82,12 +82,12 @@ The standalone checkout was renamed in place to
 history, and its unpublished remote now names the new slug.  Content sync is
 performed only after the committed authority passes the exporter audit.
 
-## Prepared back patches
+## Series references
 
-The four earlier numbered papers still cite the historical title by explicit
-author instruction not to apply back patches yet.  The exact title-only edits
-are recorded in
-`notes/2026-08-11-c904-paper-v-title-backpatches.md`.
+After explicit author approval, the four earlier numbered papers were updated
+in the monorepo to cite the new title.  The exact title-only changes are
+recorded in `notes/2026-08-11-c904-paper-v-title-backpatches.md`; substantive
+series back patches remain deferred.
 
 ## Mystery ledger
 
@@ -99,7 +99,8 @@ are recorded in
 - **Settled by the abstract cold read:** all three general theorem headlines
   can coexist in one self-contained abstract without merging the two `C2`
   actions.
-- **Open by scope, not mathematics:** the title-only bibliography back patches
-  to Papers I--IV remain unapplied until the coordinated series patch round.
+- **Settled by author decision:** title-only bibliography back patches to
+  Papers I--IV are applied in the authority; substantive patches remain
+  separate.
 
 No mathematical mystery was created by this editorial revision.

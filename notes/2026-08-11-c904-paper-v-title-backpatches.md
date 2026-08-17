@@ -1,10 +1,9 @@
-# Prepared Paper V title back patches
+# Applied Paper V title back patches
 
 Date: 2026-08-11
 
-Do not apply these edits until the coordinated Papers I--IV back-patch round.
-They change bibliography metadata only; no theorem or series-promise prose is
-included here.
+These bibliography-only edits were applied in the monorepo after explicit
+author approval.  No theorem or series-promise prose is included here.
 
 Replace
 
@@ -26,7 +25,6 @@ in exactly these four authorities:
 3. `papers/clebsch-passages/sections/10-references.tex`;
 4. `papers/q13-passant-code/passant_code_q13.tex`.
 
-After applying, rebuild and validate each paper through its own manuscript
-gate and refresh its tracked PDF.  Do not combine the title update with the
-separately prepared substantive series back patches without an explicit
-coordinated release decision.
+Each paper is rebuilt and validated through its own manuscript gate before
+export.  The separately prepared substantive series back patches remain
+deferred.
