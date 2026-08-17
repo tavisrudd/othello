@@ -11,12 +11,15 @@
 \usetikzlibrary{arrows.meta,positioning}
 \usepackage[hidelinks]{hyperref}
 
+\numberwithin{equation}{section}
+
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{corollary}[theorem]{Corollary}
-\newtheorem*{hypothesisH}{Hypothesis 4.7H}
-\newtheorem*{lemmaOneA}{Lemma 4.1A}
+\newtheorem*{hypothesisR}{Hypothesis 5.7R}
+\newtheorem*{hypothesisT}{Hypothesis 5.7T}
+\newtheorem*{lemmaOneA}{Lemma 5.1A}
 \theoremstyle{definition}
 \newtheorem{definition}[theorem]{Definition}
 \theoremstyle{remark}
@@ -35,6 +38,21 @@
 \newcommand{\Alb}{\operatorname{Alb}}
 \newcommand{\CFF}{\operatorname{CFF}}
 \newcommand{\FM}{\operatorname{FM}}
+\newcommand{\kk}{\Bbbk}
+\newcommand{\OO}{\mathcal O}
+\newcommand{\Eu}{\mathsf{Eu}}
+\newcommand{\Gr}{\mathsf{Gr}}
+\newcommand{\Hod}{\mathsf{Hod}}
+\newcommand{\CF}{\mathsf{CF}}
+\newcommand{\HAtoms}{\mathsf{HAtoms}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\rk}{\operatorname{rk}}
+\newcommand{\Spec}{\operatorname{Spec}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\Bl}{\operatorname{Bl}}
+\newcommand{\disc}{\operatorname{disc}}
 
 \title{Irrationality of Cubic Threefolds after One Stabilization}
 \author{Tavis Rudd}
@@ -44,47 +62,61 @@
 \maketitle
 
 \begin{abstract}
-Conditional on Hypothesis~4.7H below, we prove that \(X\times\PP^1\) is
-irrational for every smooth cubic threefold \(X\), and likewise for every
-smooth prime Fano threefold of genus eight.  The proof counts primitive-sixth
-eigenvalues of framed formal monodromy on the numerical small even quantum
-connection.  The cubic calculation itself is unconditional: the count equals
-two for every smooth cubic threefold.  The Iritani and Iritani--Koto comparison
-isomorphisms preserve the original-\(z\)-disc framing after coefficient-field
-extension; Hypothesis~4.7H is needed only for the positive-filtration
-reconstruction bulk displacements and the divisor-tagging step.  Under that
-hypothesis, the count is a birational invariant through dimension four.
+We prove unconditionally that \(X\times\PP^1\) is irrational for every
+smooth complex cubic threefold \(X\).  The proof uses the ordinary,
+non-enhanced Hodge-atom package of Katzarkov--Kontsevich--Pantev--Yu as a
+birational ledger and introduces a rank-two atomic residue discriminant.
+The double zero packet of the cubic small quantum connection is shown
+independently to define a single Hodge atom; a canonical elementary
+modification of its even rank-two block has residue discriminant \(4/9\).
+The only curve that could carry the same Hodge representation is a
+genus-five curve, for which the corresponding discriminant is zero, while
+surface representatives are excluded by parity rank and the classification
+of minimal surfaces.  The projective-bundle atom formula then obstructs
+rationality of \(X\times\PP^1\).
 
-Under Hypothesis~4.7H, combining the theorem with any family of universally
-\(CH_0\)-trivial cubic threefolds separates universal \(CH_0\)-triviality from
-rationality after one stabilization.  Voisin's loci of codimension at most
-three give that separation on subvarieties of dimension at least seven;
-Colliot-Th\'el\`ene's almost-diagonal theorem gives the explicit example
-\(\{x_1^3+\cdots+x_5^3=0\}\times\PP^1\); and for the coprime-degree cubics of
-Yang--Yu--Zhu, under the same hypothesis it verifies the first nontrivial
-stabilization of their stable-rationality question.
+We also retain a finer framed-formal-monodromy invariant \(\nu_6\) of the
+numerical small even quantum connection.  Its cubic value is computed
+unconditionally, and the product formula for Gromov--Witten theory gives the
+unconditional stabilization identity \(\nu_6(X\times\PP^1)=4\).  The string
+and divisor equations remove the degree-zero and fixed degree-two pieces of
+the comparison coordinates exactly.  We isolate the two remaining issues as
+Hypotheses~5.7R and~5.7T: reconstruction-tail invariance and the separate
+divisor-tagging specialization step.  The specialization issue is partly
+resolved directly: 5.7T is unnecessary for nef-canonical targets,
+\(\PP^1\), \(\PP^2\), and, assuming 5.7R, ruled surfaces over
+positive-genus curves; in the present proof it remains only for rational
+ruled and nonminimal surface centers.  Conditional on the hypotheses actually
+used, \(\nu_6\) satisfies blowup and projective-bundle operation formulas and
+is birationally invariant through dimension four.  This conditional
+refinement computes \(\nu_6=2\) for prime Fano threefolds of genus eight,
+although their irrationality after one stabilization already follows
+unconditionally from the cubic theorem and Kuznetsov's birational
+correspondence.
 
-We also prove an all-degree integral saturation theorem for marked
-finite-etale graph quotients of elliptic powers: divided powers of the marked
-divisor lattice are ordinary divisor products.  The six-axis intermediate
-Jacobians of the nonstandard \(A_5\)-invariant cubic pencil satisfy its
-hypotheses, so every smooth member of that pencil is universally
-\(CH_0\)-trivial by an integral lattice saturation rather than by a
-unirational parametrization or an odd-degree isogeny to a curve Jacobian.
-Under Hypothesis~4.7H, the two detectors therefore diverge on the same smooth
-fourfolds.  Stable
-irrationality stays out of reach: from the second stabilization onward the
-low-dimensional exclusion used here no longer applies.
+Combining the unconditional one-stabilization theorem with independent
+universal \(CH_0\)-triviality inputs gives unconditional separations of
+universal \(CH_0\)-triviality from rationality after one stabilization.  In particular this applies to Voisin's loci, the Fermat
+cubic, the coprime-degree family of Yang--Yu--Zhu, and every smooth member
+of the nonstandard \(A_5\)-invariant pencil.  For the last family we give an
+independent integral proof of universal \(CH_0\)-triviality: an all-degree
+saturation theorem for marked finite-\'etale graph quotients of elliptic
+powers makes the primitive minimal class of the intermediate Jacobian an
+ordinary integral divisor product.  Moreover, all but finitely many moduli
+points of this \(A_5\)-curve are not projectively equivalent to cubics of the
+separated-variable type covered by Colliot-Th\'el\`ene's criterion.
 \end{abstract}
 
 \noindent\textbf{Keywords.} cubic threefold; universal \(CH_0\)-triviality;
-irrationality; intermediate Jacobian; quantum connection; weak factorization.
+irrationality; Hodge atoms; intermediate Jacobian; quantum connection;
+formal monodromy; weak factorization.
 
 \input{sections/01-introduction}
 \input{sections/02-envelope}
 \input{sections/03-minimal-class}
-\input{sections/04-one-step}
-\input{sections/05-synthesis}
+\input{sections/04-atomic-one-step}
+\input{sections/05-framed-monodromy}
+\input{sections/06-synthesis}
 
 \small
 \noindent Numbered statements are cited from the exact versions listed here.
@@ -92,6 +124,7 @@ Where both a journal and a preprint version appear, the numbering is that of
 the preprint.
 
 \begin{thebibliography}{99}
+
 
 \bibitem{AKMW}
 D.~Abramovich, K.~Karu, K.~Matsuki, and J.~W{\l}odarczyk,
@@ -108,6 +141,11 @@ T.~Beckmann and O.~de Gaay Fortman,
 \emph{Integral Fourier transforms and the integral Hodge conjecture for
 one-cycles on abelian varieties}, Compos. Math. 159 (2023), 1188--1213.
 
+\bibitem{BehrendProduct}
+K.~Behrend,
+\emph{The product formula for Gromov--Witten invariants},
+J. Algebraic Geom. 8 (1999), 529--541; arXiv:alg-geom/9710014.
+
 \bibitem{Cai}
 J.~Cai,
 \emph{The cubic threefold is symplectically irrational},
@@ -118,6 +156,18 @@ C.~H.~Clemens and P.~A.~Griffiths,
 \emph{The intermediate Jacobian of the cubic threefold},
 Ann. of Math. (2) 95 (1972), 281--356.
 
+
+\bibitem{Conrad}
+B.~Conrad,
+\emph{Irreducible components of rigid spaces},
+Ann. Inst. Fourier (Grenoble) 49 (1999), no.~2, 473--541.
+
+\bibitem{DavidHertling}
+L.~David and C.~Hertling,
+\emph{Regular \(F\)-manifolds: initial conditions and Frobenius metrics},
+Ann. Sc. Norm. Super. Pisa Cl. Sci. (5) 17 (2017), 1121--1152;
+arXiv:1411.4553.
+
 \bibitem{CT}
 J.-L.~Colliot-Th\'el\`ene,
 \emph{\(CH_0\)-trivialit\'e universelle d'hypersurfaces cubiques presque
@@ -127,6 +177,12 @@ diagonales}, Algebr. Geom. 4 (2017), 597--602; arXiv:1607.05673v3.
 P.~Engel, O.~de Gaay Fortman, and S.~Schreieder,
 \emph{Matroids and the integral Hodge conjecture for abelian varieties},
 arXiv:2507.15704v3 (2026).
+
+
+\bibitem{GonzalezAguileraLiendo}
+V.~Gonz\'alez-Aguilera and A.~Liendo,
+\emph{Automorphisms of prime order of smooth cubic \(n\)-folds},
+Arch. Math. 97 (2011), 25--37; arXiv:1002.4136v2.
 
 \bibitem{Grieve}
 N.~Grieve,

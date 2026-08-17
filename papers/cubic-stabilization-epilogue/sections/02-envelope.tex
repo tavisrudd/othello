@@ -7,18 +7,74 @@ the six Sylow-\(5\) subgroups with their normalizers, and put
  H_p=\operatorname{Aug}(\F_p^\Omega)/\langle\mathbf1\rangle
  \qquad(p=2,3).
 \]
-The modules \(H_2,H_3\) are simple, with
-\(\End_{A_5}(H_2)=\F_4\) and \(\End_{A_5}(H_3)=\F_3\)
-\cite[the \(A_5\) matrix-representation rows in characteristic two,
-\(\operatorname{GF}(4)\)-dimension two (IDs a,b) and
-\(\operatorname{GF}(2)\)-dimension four (IDs a,b), and in characteristic
-three, \(\operatorname{GF}(3)\)-dimension four]{AtlasBrauer}.
+We record the modular representation calculation used throughout the
+six-axis argument, so that the commutants do not have to be inferred from a
+table.
+
+\begin{lemma}[The six-point hearts]\label{lem:six-point-hearts}
+For $p=2,3$, the $\F_pA_5$-module $H_p$ is simple, and
+\[
+  \End_{A_5}(H_2)=\F_4,
+  \qquad
+  \End_{A_5}(H_3)=\F_3.
+\]
+\end{lemma}
+
+\begin{proof}
+Identify the six-point action with that of
+$A_5\simeq\operatorname{PSL}_2(\F_5)$ on
+$\PP^1(\F_5)$, whose points are $\infty,0,1,2,3,4$; the stabilizer of a
+point is the
+normalizer of a Sylow-$5$ subgroup.  Let
+$a(z)=z+1$ and $s(z)=-1/z$, which generate $\operatorname{PSL}_2(\F_5)$.
+In $H_p=\operatorname{Aug}(\F_p^\Omega)/\langle\mathbf1\rangle$, use the
+classes of
+\[
+ e_\infty-e_4,\quad e_0-e_4,\quad e_1-e_4,\quad e_2-e_4
+\]
+as a basis.  The two generators act, for $p=2$, by
+\[
+ A_2=\begin{pmatrix}
+ 1&0&0&1\\1&1&1&0\\0&1&0&1\\0&0&1&1
+ \end{pmatrix},\qquad
+ S_2=\begin{pmatrix}
+ 0&1&0&0\\1&0&0&0\\1&1&1&1\\0&0&0&1
+ \end{pmatrix},
+\]
+and, for $p=3$, by
+\[
+ A_3=\begin{pmatrix}
+ 1&0&0&2\\2&2&2&1\\0&1&0&2\\0&0&1&2
+ \end{pmatrix},\qquad
+ S_3=\begin{pmatrix}
+ 0&1&0&0\\1&0&0&0\\2&2&2&2\\0&0&0&1
+ \end{pmatrix}.
+\]
+In both characteristics $A_p$ has minimal polynomial
+$\Phi_5(t)=t^4+t^3+t^2+t+1$, which is irreducible over $\F_p$ because the
+order of $p$ in $(\Z/5\Z)^\times$ is four.  Hence any nonzero
+$A_5$-stable subspace, being $A_p$-stable, is all of $H_p$; thus $H_p$ is
+simple.
+
+It remains to compute the commutant.  Solving the linear equations
+$XA_p=A_pX$ and $XS_p=S_pX$ gives only scalar matrices for $p=3$.  For
+$p=2$ it gives the two-dimensional algebra spanned by $I$ and
+\[
+ T=\begin{pmatrix}
+ 1&1&1&0\\0&0&1&1\\1&0&1&1\\1&1&0&0
+ \end{pmatrix},
+ \qquad T^2+T+I=0.
+\]
+Thus the two commutants are $\F_3$ and $\F_2[T]/(T^2+T+1)=\F_4$,
+respectively.  This agrees with the modular matrix tables in
+\cite{AtlasBrauer}.
+\end{proof}
 
 The six axes arise from the Fano surface.  Let \(S\) be the
 Fano surface of a smooth member of the \(A_5\)-pencil and
 \((J,\Theta)=\Alb(S)\) its intermediate Jacobian.  Each of the six
-\(D_5\)-subgroups gives an elliptic quotient \(q_H:J\to E_H\) and its Rosati
-dual \(i_H:E_H\to J\).
+\(D_5\)-subgroups gives an elliptic quotient \(q_H:J\to E_H^{\rm quot}\) and its Rosati
+dual \(i_H^{\rm quot}:E_H^{\rm quot}\to J\).
 
 \noindent\textbf{Generic non-CM axis.}
 Hartlieb's elliptic isogeny factor, and hence every six-axis elliptic
@@ -29,9 +85,11 @@ After a finite base change the elliptic factor would then be isotrivial.
 Hartlieb's isogeny \(J_b\sim E_b^5\) would put the whole
 intermediate-Jacobian family in the countable isogeny class of one fixed
 abelian variety.  The image of an algebraic curve in a moduli space cannot be
-both positive-dimensional and countable.  This contradicts the fact that the
-closure of the intermediate-Jacobian image is a one-dimensional special
-subvariety \cite[Proposition~5.7 and Remark~5.8]{Hartlieb}.  Since the generic
+both positive-dimensional and countable: its image is constructible, and a
+positive-dimensional constructible subset contains a nonempty Zariski-open
+subset of an algebraic curve, hence has uncountably many complex points.
+This contradicts the fact that the closure of the intermediate-Jacobian
+image is a one-dimensional special subvariety \cite[Proposition~5.7 and Remark~5.8]{Hartlieb}.  Since the generic
 intermediate Jacobian is isotypic to \(E_b^5\), each nonzero elliptic quotient
 is isogenous to \(E_b\), and so is non-CM as well.  This is a statement about
 the geometric generic point, not about every member: individual fibres may
@@ -40,29 +98,28 @@ marked presentation can be smaller than the full Neron--Severi lattice.  Those
 fibres are covered by the prescribed-lattice reading of
 Theorem~\ref{thm:all-degree-graph-saturation} recorded after its proof.
 
-\begin{proposition}[Six-axis polarization]
+\begin{proposition}[Generic six-axis polarization]
 \label{prop:six-axis-polarization}
-After coherent identification of the elliptic factors, the Rosati Gram
+On the geometric generic fibre of the nonstandard $A_5$-pencil, after
+coherent identification of the six quotient elliptic curves, the Rosati Gram
 matrix of the six maps is
 \[
  G_6=6I_6-J_6.
 \]
-Any five axes therefore give an isogeny \(E^5\to J\) whose pulled-back
-polarization has Smith type \((1,6,6,6,6)\).
+Any five axes therefore give a generic-fibre isogeny \(E^5\to J\) whose
+pulled-back polarization has Smith type \((1,6,6,6,6)\).
 \end{proposition}
 
 \begin{proof}
-The Gram entries are computed at the geometric generic point, where the
-elliptic factor has only integer endomorphisms; they extend to every smooth
-fibre by the separatedness argument in
-Lemma~\ref{lem:relative-six-axis}.  We recall the numerical passage from
+The geometric generic elliptic factor has only integer endomorphisms.  We
+recall the numerical passage from
 Roulleau's genus-two configuration to the six elliptic fibres.  Let \(D_g\subset S\) be the curve indexed by an
 involution \(g\in A_5\), put \(D_{\mathrm{tot}}=\sum_gD_g\), and, for a
 dihedral subgroup \(H\) of order ten, put
 \[
  F_H=\sum_{g\in H,\;g^2=1}D_g.
 \]
-Roulleau proves that \(F_H\) is a fibre of \(S\to E_H\)
+Roulleau proves that \(F_H\) is a fibre of \(S\to E_H^{\rm quot}\)
 \cite[Theorem~11(D)]{Roulleau}, so \(F_H^2=0\).  His intersection table has
 \(D_g^2=-4\), and distinct curves meet with multiplicity zero, two, or one
 when the product of their labels has order two, three, or five, respectively;
@@ -87,16 +144,16 @@ integer endomorphisms.  After coherent identification of the generic elliptic qu
 two-transitivity makes the Rosati matrix have diagonal \(d\) and
 off-diagonal \(m\).  Put
 \[
- D_H=q_H^*[0]\in\NS(J),\qquad N_H=i_Hq_H\in\End(J).
+ D_H=q_H^*[0]\in\NS(J),\qquad N_H=i_H^{\rm quot}q_H\in\End(J).
 \]
 Then \(D_H|_S=F_H\), and \(N_H\) is the Rosati endomorphism attached to
-\(D_H\).  Coherent identification gives \(q_Hi_H=[d]\) and
-\(q_Hi_{H'}=[m]\) for \(H\ne H'\).  Each target identification is determined
+\(D_H\).  Coherent identification gives \(q_Hi_H^{\rm quot}=[d]\) and
+\(q_Hi_{H'}^{\rm quot}=[m]\) for \(H\ne H'\).  Each target identification is determined
 only up to a sign, and the ambiguity changes nothing used here.  Replacing the
-chosen isomorphism \(E_H\to\mathcal E\) by its negative replaces \(q_H\) by
-\(-q_H\) and, by functoriality of Rosati duality, \(i_H\) by \(-i_H\) at the
-same time.  Hence \(N_H=i_Hq_H\) is unchanged, and so is
-\(D_H=q_H^*[0]\), since \([-1]^*[0]=[0]\).  The diagonal entry \(q_Hi_H\) is
+chosen isomorphism \(E_H^{\rm quot}\to E\) by its negative replaces \(q_H\) by
+\(-q_H\) and, by functoriality of Rosati duality, \(i_H^{\rm quot}\) by \(-i_H^{\rm quot}\) at the
+same time.  Hence \(N_H=i_H^{\rm quot}q_H\) is unchanged, and so is
+\(D_H=q_H^*[0]\), since \([-1]^*[0]=[0]\).  The diagonal entry \(q_Hi_H^{\rm quot}\) is
 likewise unchanged, while the Gram matrix changes by a signed congruence
 \(DG_6D\) with \(D=\operatorname{diag}(\pm1)\), which alters neither the Smith
 type of the pulled-back polarization nor anything below.  The coherent choice
@@ -114,7 +171,7 @@ Riemann--Roch trace formula
 obtained by polarizing the reduced-norm Riemann--Roch polynomial
 \cite[Theorem~4.1]{Grieve}, gives the following identities.  Here
 \(\operatorname{tr}\) is the degree-five trace in the coefficient
-representation---the trace entering that reduced norm---rather than the
+representation, the trace entering that reduced norm, rather than the
 degree-ten trace on rational first homology:
 \[
  \operatorname{tr}(N_H)=d,
@@ -179,42 +236,47 @@ factorization commutes with base change
 the relative dimension is pinned by \(n_H^2=10n_H\), which makes
 \(n_H/10\) a projector, so on every fibre the image is the connected abelian
 subvariety it cuts out, of dimension one by \(\dim W_5^H=1\).  Thus the
-scheme-theoretic image \(\mathcal E_H\subset\mathcal J\) is an elliptic
-scheme.  Since \(hn_H=n_H\) for every
-\(h\in H\), the subgroup \(H\) acts trivially on \(\mathcal E_H\).  Moreover
+scheme-theoretic norm image \(\mathcal E_H^{\rm im}\subset\mathcal J\) is
+an elliptic scheme.  Since \(hn_H=n_H\) for every
+\(h\in H\), the subgroup \(H\) acts trivially on \(\mathcal E_H^{\rm im}\).  Moreover
 \(N_{A_5}(H)=H\), so transport by an element carrying \(H\) to \(H'\) is
-independent of the chosen transporter.  The six elliptic schemes are
-therefore coherently isomorphic; fix one of them as \(\mathcal E\).
+independent of the chosen transporter.  The six norm-image elliptic schemes are therefore coherently isomorphic;
+fix one of them as \(\mathcal E\).
 
-Write \(i_H:\mathcal E\to\mathcal J\) for the transported primitive
-inclusions.  On the geometric generic fibre, Hartlieb's isogeny decomposition
+Write \(i_H^{\rm im}:\mathcal E\to\mathcal J\) for the transported
+primitive norm-image inclusions.  On the geometric generic fibre, Hartlieb's isogeny decomposition
 identifies \(\operatorname{Hom}^0(E,J)\) with the irreducible module \(W_5\).
-The coherently transported maps \((i_H)_{H\in\Omega}\) form one \(A_5\)-orbit,
+The coherently transported maps \((i_H^{\rm im})_{H\in\Omega}\) form one
+\(A_5\)-orbit,
 so their sum is invariant.  Since \(W_5^{A_5}=0\), that sum is zero.  The
 connected smooth curve \(B^\circ\) is integral, \(\mathcal E\) is integral,
 and \(\mathcal J\) is separated over \(B^\circ\).  Two morphisms from an
 integral scheme to a separated one agree along a closed subscheme; here that
-subscheme contains the dense generic fibre, so \(\sum_Hi_H\) and the zero
-map agree everywhere and \(\sum_Hi_H=0\) over \(B^\circ\).  Hence
-\((i_H)_{H\in\Omega}\) descends from
+subscheme contains the dense generic fibre, so \(\sum_Hi_H^{\rm im}\) and the zero map agree everywhere and
+\(\sum_Hi_H^{\rm im}=0\) over \(B^\circ\).  Hence
+\((i_H^{\rm im})_{H\in\Omega}\) descends from
 \(\mathcal E^\Omega\) to the displayed map
 \(f:\mathcal A\to\mathcal J\), and the construction is
 \(A_5\)-equivariant.
 
 Roulleau constructs the \(D_5\)-fibration from an Albanese quotient
-\(q_H:J\to E_H\) by a connected four-dimensional abelian subvariety
-\cite[Lemma~17 and the following proof of Theorem~11(D)]{Roulleau}.  Thus
+\(q_H:J\to E_H^{\rm quot}\) by a connected four-dimensional abelian
+subvariety \cite[the sentence following Lemma~17 and the proof of
+Theorem~11(D)]{Roulleau}.  Thus
 \(F_H=q_H^*[0]|_S\).  The connected kernel makes the Rosati dual of \(q_H\) a
 primitive inclusion, and its image is the unique \(H\)-fixed elliptic
 subvariety.  It therefore agrees, up to an automorphism of the target
-elliptic curve, with the norm image \(\mathcal E_H\hookrightarrow\mathcal J\).
+elliptic curve, with the norm-image elliptic curve
+\(\mathcal E_H^{\rm im}\hookrightarrow\mathcal J\).
 This also identifies the norm-image axis, up to isogeny, with Hartlieb's
 generic elliptic isogeny factor.
-Consequently the fibre classes in
-Proposition~\ref{prop:six-axis-polarization} compute these relative
-homomorphisms, rather than merely isogenous quotients.  On the
-generic non-CM fibre they give diagonal entry \(5\) and off-diagonal entry
-\(-1\).  Applying the same generic-density and separatedness argument to
+The quotient curve \(E_H^{\rm quot}\) and the norm-image curve
+\(\mathcal E_H^{\rm im}\) are therefore kept distinct until this point;
+the Rosati dual identifies the latter with the image of the former, up to the
+target automorphism just described.  Consequently the generic-fibre classes
+computed in Proposition~\ref{prop:six-axis-polarization} are the classes of
+these relative homomorphisms.  They give diagonal entry \(5\) and
+off-diagonal entry \(-1\) on the geometric generic fibre.  Applying the same generic-density and separatedness argument to
 these homomorphisms gives the identities over \(B^\circ\), hence
 \eqref{eq:six-axis-polarization-pullback}.
 Choosing any five coordinate classes identifies the quotient lattice with
@@ -267,6 +329,13 @@ preceding order and isotropy calculation makes it a relative maximal
 isotropic subgroup of this rank-eight local system.
 \end{proof}
 
+Consequently the generic Gram calculation of
+Proposition~\ref{prop:six-axis-polarization} extends, by the relative
+homomorphisms and separatedness in Lemma~\ref{lem:relative-six-axis}, to
+every smooth fibre of the pencil.  Thus every smooth fibre has six-axis
+Rosati matrix $6I_6-J_6$, and any five axes have Smith type
+$(1,6,6,6,6)$.
+
 \begin{proposition}[Principal gluing packet]
 \label{prop:principal-gluing-packet}
 The \(A_5\)-stable two-primary principal kernels of the six-axis source are
@@ -283,7 +352,7 @@ scalar graph.
 \end{proposition}
 
 \begin{proof}
-At two the coefficient discriminant is the simple four-dimensional
+At two, by Lemma~\ref{lem:six-point-hearts}, the coefficient discriminant is the simple four-dimensional
 \(\F_2A_5\)-module \(H_2\), whose commutant is \(\F_4\).  The full
 discriminant is the semisimple module
 \(H_2\otimes_{\F_2}\F_2^2\simeq H_2^{\oplus2}\).  Every stable half is
@@ -348,7 +417,7 @@ is the identity on \(\mathcal E\) tensored with the faithful permutation
 action on the quotient lattice, would preserve the rational kernel: under
 \eqref{eq:primary-discriminants} it acts on \(H_2\) and trivially on
 \(\mathscr V_2\), so every member of
-\(\mathscr P_{\rm rat}\) is \(S_6\)-stable.  At three, the analogous
+\(\mathscr P_{\rm rat}\) is \(S_6\)-stable.  At three, Lemma~\ref{lem:six-point-hearts} says that the analogous
 coefficient heart \(H_3\) is simple and
 \(\End_{A_5}(H_3)=\F_3\).  The semisimple module
 \(H_3^{\oplus2}\) has stable halves parametrized by \(\PP^1(\F_3)\).

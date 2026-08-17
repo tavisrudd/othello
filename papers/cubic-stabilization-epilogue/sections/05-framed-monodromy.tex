@@ -1,0 +1,1254 @@
+\section{Framed formal monodromy: a conditional refinement}
+\label{sec:framed-monodromy}
+
+Section~\ref{sec:atomic-one-step} proved the one-stabilization theorem using
+one ordinary Hodge atom.  We now ask for a stronger statement about the
+entire numerical small even quantum connection: whether its
+primitive-sixth framed formal-monodromy multiplicity satisfies direct
+operation formulas under projective bundles and blowups.  The actual
+Iritani and Iritani--Koto comparison isomorphisms preserve the original
+loop framing after coefficient-field extension.  The string equation and
+divisor equation also remove, exactly, the scalar degree-zero term and any
+fixed degree-two term whose Novikov character descends to the coefficient
+ring.  What remains is narrower: a residual reconstruction-tail displacement,
+and a logically separate specialization step
+in the divisor-tagging argument.  We isolate these as Hypotheses~5.7R
+and~5.7T below.
+
+The results of this section are therefore logically separate from
+Theorem~\ref{thm:every-cubic}.  Definition~\ref{def:framed-sixth-multiplicity},
+the cubic computation, and the product-with-projective-space formula below
+are unconditional.  The projective-bundle and blowup operation formulas
+use Hypothesis~5.7R.  We prove specialized low-dimensional vanishing
+directly, without Hypothesis~5.7T, for nef-canonical targets, for
+\(\PP^1\) and \(\PP^2\), and---assuming only Hypothesis~5.7R---for ruled
+surfaces over curves of positive genus.  In the present proof
+Hypothesis~5.7T is used only for the remaining rational ruled and nonminimal
+surface cases.  Consequently the resulting birational invariance of
+\(\nu_6\), and the identification \(\nu_6(V)=2\) for genus-eight Fano
+threefolds, remain conditional on both hypotheses.
+
+
+Proposition~\ref{prop:residue-discriminant-exponents} explains how the two
+quantum invariants in this paper are related on the rank-two block that
+matters for the cubic.  The atomic invariant $\delta^\sharp$ is the square of
+the difference of the residue representatives selected by the canonical
+elementary modification, and therefore forgets a common scalar shift.  The
+framed invariant $\nu_6$ is finer: it tests the absolute cyclotomic placement
+of the formal exponent classes, together with the original-loop descent
+data when ramification is present.  For the cubic zero block, Section~\ref{sec:atomic-one-step}
+already finds the representatives $-1/6$ and $-5/6$; the calculation below
+recovers those same exponents directly from formal solutions and records
+that their classes give the two primitive sixth roots.  Thus Sections~4 and
+5 use two levels of the same formal data rather than unrelated numerical
+obstructions.
+
+Let \(T\) be a smooth projective variety.  Write
+\[
+ \Lambda_T=\C[[\operatorname{NE}^{\mathbf Z}_{\rm num}(T)]]
+\]
+for the completed monoid ring of the image of effective homology classes in
+the numerical curve lattice
+\[
+ N_1(T)=\operatorname{im}\!\left(
+ H_2(T,\mathbf Z)\longrightarrow
+ \operatorname{Hom}(\operatorname{NS}(T)/\mathrm{tors},\mathbf Z)\right).
+\]
+Thus \(N_1(T)\) is torsion-free and is separated by integral divisors.  The
+completed monoid ring \(\Lambda_T\) is a domain.  Indeed, the effective
+numerical monoid embeds in the torsion-free lattice \(N_1(T)\), hence is
+cancellative and its ordinary monoid algebra is a domain.  An ample degree
+is positive and proper on the effective numerical monoid, so every nonzero
+completed series has a lowest nonzero homogeneous part, with only finitely
+many monomials in that degree.  The lowest homogeneous part of a product is
+the product of the two lowest homogeneous parts and is nonzero in the monoid
+algebra.  Therefore \(\operatorname{Frac}(\Lambda_T)\) is defined.  Let
+\(\mathcal K_T\) be an algebraic closure of this fraction field.  The loop
+coordinate \(z\) remains independent: in particular, \(\mathcal K_T\)
+contains no chosen root of \(z\).  We first isolate the cyclotomic part of
+formal monodromy without choosing values for the exponentials of arbitrary
+elements of \(\mathcal K_T\).
+
+Let \(K\supset\C\) be an algebraically closed field of characteristic zero.
+Choose a complement \(K=\C\oplus V\) of \(\mathbf Q\)-vector spaces, let
+\(K[V]\) be the group algebra of the additive group of \(V\), and let
+\(\Omega_V\) be an algebraic closure of its fraction field.  Thus
+\(K\subset\Omega_V\).  The map
+\[
+ \operatorname{Exp}_V(c+v)=e^{2\pi i c}[v]
+ \colon (K,+)\longrightarrow\Omega_V^\times
+ \tag{5.0}
+ \label{eq:universal-exponential}
+\]
+is a group homomorphism.  Since \(V\) is torsion-free, \(K[V]\) is a domain,
+and its distinct monomials are linearly independent.  Consequently
+\[
+ \ker(\operatorname{Exp}_V)=\mathbf Z,
+ \qquad
+ \operatorname{Exp}_V(a)\text{ is a root of unity}
+ \Longleftrightarrow a\in\mathbf Q.
+ \tag{5.0a}
+ \label{eq:universal-exponential-torsion}
+\]
+
+Apply Levelt--Turrittin after a ramification \(z=w^e\).  In the formal
+decomposition, write the residue on a regular-singular block as
+\(R=R_s+R_n\), with commuting semisimple and nilpotent parts.  In the
+universal formal solution algebra, define a full turn of \(w\) on that block
+by
+\[
+ M_{\mathrm{RS},V}
+ =\operatorname{Exp}_V(R_s)\exp(2\pi iR_n),
+\]
+where \(\operatorname{Exp}_V\) is applied to the eigenvalues of \(R_s\).
+The lift of one turn of the original \(z\)-disc acts on the formal symbols by
+\(w\mapsto e^{2\pi i/e}w\), and on the blocks by their descent
+intertwiners.  Its \(e\)-th power is \(M_{\mathrm{RS},V}\) on every returned
+regular-singular block.  An integral change of residue representative
+multiplies the formal solution by an integral power of \(w\), so it conjugates
+this lifted action rather than changing it.  Since the coefficient and
+descent matrices lie in \(K\subset\Omega_V\), this defines the framed
+operator \(M_{\mathrm f,V}\) over \(\Omega_V\).  Ramified exponential factors
+are thereby permuted rather than made single-valued by changing the frame.
+
+\noindent\textbf{Choice independence.}
+For every root of unity \(\zeta\in\C\), its algebraic multiplicity as an
+eigenvalue of \(M_{\mathrm f,V}\) is independent of the complement \(V\), the
+Levelt--Turrittin ramification and decomposition, and the algebraic closure
+\(\Omega_V\).  It is also unchanged when the chosen algebraic closure of the
+original coefficient field is replaced by a common algebraically closed
+overfield.  When \(K=\C\), it is the usual multiplicity in the analytic
+formal monodromy on the original \(z\)-disc.
+We use here the functoriality and uniqueness of the ramified formal
+decomposition.  That statement holds over any algebraically closed coefficient
+field of characteristic zero, which is the algebraic form we need, and in that
+generality it is the formal classification of differential modules over
+\(K(\!(z)\!)\) \cite[Chapter~3]{PutSinger}.  Sabbah gives the
+complex-analytic account, where the same decomposition appears alongside the
+Riemann--Hilbert correspondence
+\cite[Lecture~5, Section~5.c, proofs of Theorem~5.8 and
+Proposition~5.10]{SabbahStokes}.
+Consider one orbit of Levelt--Turrittin blocks under a turn of the original
+disc, let \(d\) be its length, and write
+\(A_i:E_i\longrightarrow E_{i+1}\) for its successive deck/descent maps,
+with indices modulo \(d\).  Put
+\(U=A_{d-1}\cdots A_0\) on \(E_0\).  A cyclic-block determinant gives
+\[
+ \chi_{\bigoplus_iE_i}(X)=\det(X^dI-U).
+ \tag{5.0b}
+ \label{eq:deck-orbit-polynomial}
+\]
+Put \(r=e/d\).  Equivariance of the descent datum gives the intrinsic return
+relation
+\[
+ U^r=M_{\mathrm{RS},V}.
+ \tag{5.0c}
+ \label{eq:deck-return-power}
+\]
+Thus, if \(\mu\) is an eigenvalue of \(U\), then
+\(\mu^r=\operatorname{Exp}_V(\rho)\) for a residue exponent \(\rho\), with
+algebraic multiplicities read on the corresponding generalized eigenspaces.
+If a root of unity \(\zeta\) occurs in
+\eqref{eq:deck-orbit-polynomial}, then \(\mu=\zeta^d\) and
+\(\operatorname{Exp}_V(\rho)=\zeta^e\); hence \(\rho\in\mathbf Q\) by
+\eqref{eq:universal-exponential-torsion}.  Conversely, if \(\rho\) is
+rational, then \(\mu^r\) is torsion, so every corresponding \(\mu\), and
+hence every root of \(X^d-\mu\), is torsion.  On these rational residue
+classes \(\operatorname{Exp}_V\) is the usual complex exponential; the
+finite descent operator is the same intrinsic operator.  The exact roots of
+unity and their algebraic multiplicities are therefore those of the ordinary
+complex construction.  Nonrational residue classes contribute no root of
+unity.  This criterion does not depend on \(V\) and does not require a
+fractional residue factor to commute with the descent action.
+
+For completeness, compare two Levelt--Turrittin choices after pulling both to
+a common ramification \(z=\widetilde w^{\,E}\).  Equivariant uniqueness of the formal
+decomposition identifies their total horizontal solution spaces and carries
+the original-\(z\)-turn deck/descent operator for one choice to the scalar
+extension of the other.  Thus the product of all orbit polynomials
+\eqref{eq:deck-orbit-polynomial}, rather than any individually labelled
+return map, is invariant under refinement and re-decomposition.  The same
+argument after a common algebraically closed coefficient extension preserves
+the intrinsic multiset of residue classes and finite descent characters.
+The relation \eqref{eq:deck-return-power} is itself invariant under integral
+changes of residue representative.  Hence the cyclotomic test above and its
+algebraic multiplicities depend only on the original framed module, not on
+the coefficient closure or complement.  Finally, for \(K=\C\) one has
+\(V=0\) and
+\(\operatorname{Exp}_V(a)=e^{2\pi i a}\), which gives the usual analytic
+formal monodromy.
+
+\begin{definition}
+\label{def:framed-sixth-multiplicity}
+Apply the preceding construction to the small even quantum connection over
+\(\mathcal K_T((z))\), and put
+\[
+ \nu_6(T)=
+ \operatorname{mult}_{e^{\pi i/3}}M_{\mathrm f,V}(T)+
+ \operatorname{mult}_{e^{-\pi i/3}}M_{\mathrm f,V}(T).
+\]
+The multiplicities are algebraic multiplicities in the characteristic
+polynomial.  The choice-independence argument above makes their sum independent
+of all the auxiliary choices.
+\end{definition}
+
+The frame matters.  Adjoining roots of Novikov monomials is an algebraic
+coefficient extension and is harmless by choice independence.  Adjoining a root of
+\(z\), by contrast, would replace the original loop and could erase the deck
+part of the operator.
+
+\begin{lemmaOneA}[Frame transport over a coefficient field]
+Let \(K\supset\C\) be an algebraically closed field of characteristic zero,
+and let \(D,D'\) be differential modules over \(K(\!(z)\!)\).  Suppose
+\(G\in\operatorname{GL}_n(K(\!(z)\!))\) is a gauge isomorphism from \(D\) to
+\(D'\).  Then the framed operators \(M_{\mathrm f,V}(D)\) and
+\(M_{\mathrm f,V}(D')\), defined using the original \(z\)-disc turn, are
+conjugate after passage to a common coefficient extension.  In particular the
+algebraic multiplicity of every root of unity is the same for \(D\) and
+\(D'\).
+\end{lemmaOneA}
+
+\begin{proof}
+After a common Levelt--Turrittin ramification, choose a formal solution matrix
+\(Y\) for \(D\) in the formal solution algebra used in
+Definition~\ref{def:framed-sixth-multiplicity}, and let \(\sigma\) denote one
+turn of the original \(z\)-disc.  Since \(G\) has entries in
+\(K(\!(z)\!)\), \(\sigma(G)=G\).  Hence
+\[
+ \sigma(GY)=G\sigma(Y).
+\]
+Thus \(GY\) is a solution frame for \(D'\) in which the original-disc turn has
+the same matrix as in the frame \(Y\).  Comparing with any other solution frame
+for \(D'\) conjugates that matrix by a constant matrix.  Therefore the framed
+operators are conjugate and have the same characteristic polynomial.
+\end{proof}
+
+\begin{lemma}[Exact string and fixed-divisor shifts]
+\label{lem:exact-low-degree-shifts}
+Let a pullback of the even quantum connection of a smooth projective
+variety $T$ be defined over a coefficient field containing its Novikov
+coefficients.
+\begin{enumerate}[label=(\roman*)]
+\item Replacing a bulk point $\tau$ by $\tau+c\mathbf 1$ changes the
+$z$-connection only by the scalar irregular twist $e^{-c/z}$.  Hence it does
+not change the framed formal-monodromy eigenvalues on the original
+$z$-disc, for any coefficient $c$ for which the shifted connection is
+defined.
+\item Let $D\in H^2(T)\otimes K$ be a bulk shift such that
+$d\mapsto e^{\langle D,d\rangle}$ defines a multiplicative character on
+the numerical Novikov image in the coefficient field.  Then the connection
+at $\tau+D$ is obtained from that at $\tau$ by the coefficient
+substitution
+\[
+ Q^d\longmapsto e^{\langle D,d\rangle}Q^d.
+\]
+This substitution fixes $\C$, so it preserves the algebraic
+multiplicities of every root of unity in framed formal monodromy.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Write the quantum connection in the convention of
+\cite[(2.2)--(2.3) and Remark~2.3]{IritaniBlowup}.  The String Equation
+implies that the quantum product is independent of the $H^0$ coordinate,
+while the Euler field acquires $c\mathbf1$.  Thus the horizontal equation
+$z^2\partial_zY=(U-z\mu)Y$ acquires the scalar term $cI$, and multiplication
+of a solution by $e^{-c/z}$ gives the shifted equation.  This exponential is
+single-valued under a full turn of the original $z$-disc and changes no
+regular exponent or descent datum.
+
+For a degree-two shift, the Divisor Equation says that the quantum product
+depends on the divisor coordinate only through the combinations
+$Q^d e^{\langle D,d\rangle}$; the degree-two coordinate does not occur in
+the Euler field.  Therefore the full $z$-connection is the coefficient
+base change displayed above.  The induced embedding of coefficient fields
+fixes the complex roots of unity, and choice independence in
+Definition~\ref{def:framed-sixth-multiplicity} gives the last assertion.
+\end{proof}
+
+\begin{remark}[Why a residual hypothesis remains]
+\label{rem:residual-bulk-gap}
+Flatness does give a normalized gauge for a genuinely formal bulk germ.
+Writing the formal bulk variables collectively as $\eta$ and solving
+\[
+ \partial_{\eta_i}G=-z^{-1}(\phi_i\star_\eta)G,
+ \qquad G|_{\eta=0}=I,
+\]
+recursively, the coefficient of total bulk degree $m$ has no power of $z$
+below $-m$.  Thus every fixed bulk degree uses only integral powers of the
+original loop coordinate and is harmless for framing.  After substituting a
+reconstruction coordinate containing Novikov coefficients, however, the sum
+over all bulk degrees need not have a uniform lower Laurent bound in $z$.
+We therefore do not promote this degreewise gauge to an element of a Laurent
+series field and do not use it to identify intrinsic framed monodromy at a
+reconstruction value.  Hypotheses~5.7R and~5.7T below isolate exactly the two
+places where such an identification is still required.  The rank-two theorem
+below avoids this gauge altogether on the formal germ where it applies.
+\end{remark}
+
+\begin{lemma}[Numerical Novikov base change]
+\label{lem:numerical-base-change}
+The quotient from the effective homology monoid to its image in \(N_1(T)\)
+extends continuously to completed monoid rings, and the quantum connection
+and the two comparison theorems base-change along it.
+\end{lemma}
+
+\begin{proof}
+Filter both monoids by intersection with an ample divisor.  Effective homology
+classes below a fixed cutoff form a finite set, as follows from the finite-type
+Chow varieties of cycles of bounded degree.  The quotient is therefore defined
+on every truncated monoid ring and passes to the inverse limit.  Explicitly,
+the coefficient of \(Q^{\bar d}\) in the image of \(\sum_da_dQ^d\) is
+\[
+ \sum_{d\mapsto\bar d}a_d.
+\]
+The sum is finite at every cutoff, and additivity of the quotient makes this
+coefficientwise pushforward a unital homomorphism for completed convolution.
+Thus the quantum products descend by grouping Gromov--Witten coefficients with
+the same numerical class.  Pushforward of curves, pairing with
+\(c_1(N_{C/T})\), and the derivations \(Q\partial_Q\) are constant on these
+fibres.  At each cutoff, apply the resulting ring homomorphism to the
+comparison map and to its stated inverse.  Scalar extension preserves their
+two inverse identities.  Grouping coefficients identifies the scalar-extended
+quantum module with the numerical quantum module, and the preceding
+fiberwise constancy identifies its connection operators and divisor
+substitutions.  Passing through the compatible cutoffs proves the asserted
+completed base change.
+\end{proof}
+
+\begin{proposition}[Formal-germ rigidity of an isolated rank-two packet]
+\label{prop:ranktwo-framed-germ}
+Let $K$ be an algebraically closed coefficient field of characteristic zero
+and let the even quantum connection be pulled back to a formal smooth bulk
+germ $B=K[[t_1,\ldots,t_m]]$.  Suppose that at the closed point the Euler
+operator has an eigenvalue whose generalized eigenspace has rank two, its
+nilpotent part is a single nonzero Jordan block, and every other Euler
+eigenvalue differs from it by a unit of $K$.  Then the corresponding
+rank-two spectral cluster remains a single nonzero Jordan block on the
+formal germ.  After scalar centering and the canonical elementary
+modification of Section~\ref{sec:atomic-one-step}, its residue $R$ has
+constant characteristic polynomial on $B$.  Consequently the algebraic
+multiplicities of the primitive sixth roots contributed by this block are
+constant on the formal germ.
+\end{proposition}
+
+\begin{proof}
+The unit separation from the other Euler eigenvalues gives a formal spectral
+projector onto the rank-two cluster.  Put
+$U_0=\lambda I+N$ on this cluster, with $\operatorname{tr}N=0$, and let
+$C_a$ denote quantum multiplication by the bulk tangent vector
+$\partial_{t_a}$.  Flatness gives the coefficient identities
+\[
+ [U,C_a]=0,\qquad
+ \partial_{t_a}U=C_a+[C_a,\mu].
+\]
+Let $P$ be the formal spectral projector onto this cluster and use the
+induced connection $D_a$ on $P(H)$.  For an endomorphism preserving the
+cluster, $D_a$ is the projected derivative, so
+\[
+ D_aU_0=P(\partial_{t_a}U)P.
+\]
+Because $[U,C_a]=0$, the operator $C_a$ commutes with $P$.  Compressing the
+second flatness identity therefore gives
+\[
+ D_aU_0=C_{a,0}+[C_{a,0},\mu_0],
+ \qquad C_{a,0}=PC_aP,\quad \mu_0=P\mu P.
+\]
+Because the reduction of $U_0$ at the closed point is nonscalar, $U_0$ is a
+regular $2\times2$ matrix over the local ring $B$.  After choosing the
+closed-point Jordan frame, one off-diagonal entry of $N$ is a unit; solving
+$[N,X]=0$ directly in that frame gives the commutant $B I\oplus B N$.
+Hence
+\[
+ C_{a,0}=p_aI+q_aN.
+\]
+Taking traces in the block evolution gives $p_a=\partial_{t_a}\lambda$ and
+therefore
+\[
+ D_aN=q_aN+q_a[N,\mu_0].
+\]
+Set $d=\det N$.  Since determinant is invariant under change of frame,
+its ordinary derivative can be computed with the covariant derivative
+$D_a$.  For a traceless $2\times2$ matrix,
+$\operatorname{adj}(N)=-N$ and $N^2=-dI$.  Cyclicity of trace then gives
+\[
+ \partial_{t_a}d
+ =\operatorname{tr}(\operatorname{adj}(N)D_aN)
+ =2q_a d.
+\]
+Since $d$ vanishes at the closed point, a lowest-homogeneous-term argument
+in $K[[t_1,\ldots,t_m]]$ forces $d=0$.  Thus $N^2=0$ everywhere.  A matrix
+entry of $N$ is a unit at the closed point, so $N$ remains nonzero and its
+image is a line subbundle.
+
+The proof of Proposition~\ref{prop:rank2-rigidity} is purely algebraic: it
+uses only flatness, Frobenius self-adjointness, anti-self-adjointness of the
+grading operator, and the nondegenerate Poincar\'e pairing on the separated
+spectral factor.  Those identities hold coefficientwise over the present
+formal germ, so the same elementary modification is regular in every base
+direction and its residue satisfies
+\[
+ D_aR=[G_a,R].
+\]
+Hence $\operatorname{tr}R$ and $\det R$, and therefore the characteristic
+polynomial of $R$, are constant.  By
+Proposition~\ref{prop:residue-discriminant-exponents}, the residue
+eigenvalues are representatives of the formal exponent classes; the
+integral shear changes them only by integers.  The eigenvalues of the
+regular formal monodromy are therefore constant, including in resonant
+cases where only the unipotent part could vary.  This proves the cyclotomic
+multiplicity statement.
+\end{proof}
+
+\begin{remark}[Formal-germ scope]
+\label{rem:ranktwo-germ-scope}
+Proposition~\ref{prop:ranktwo-framed-germ} is deliberately a theorem over a
+formal bulk germ with a fixed coefficient field.  It does not identify an
+Iritani or Iritani--Koto reconstruction value with a point of that germ.
+The comparison theorems are formulated over graded Laurent completions in
+Novikov variables, whereas the proposition deforms genuinely formal bulk
+variables over $K$.  Substituting a Laurent-Novikov reconstruction expression
+for those formal variables is an additional operation, and no theorem
+legitimizing that substitution for framed monodromy is assumed here.  Thus
+the proposition proves the local rank-two mechanism behind
+Hypothesis~5.7R; it is not a proof of that hypothesis at a reconstruction
+value.
+\end{remark}
+
+\begin{hypothesisR}[Reconstruction-tail invariance]
+Consider only the residual reconstruction displacements that occur in the
+blowup and projective-bundle decompositions used in
+Proposition~\ref{prop:framed-operations}: the $O(u)+s_j$ tails on the target
+summands and the corresponding residual ambient shift, after the scalar
+$H^0$ term and every fixed $H^2$ term whose Novikov character descends to
+the relevant coefficient ring have been removed by
+Lemma~\ref{lem:exact-low-degree-shifts}.  After the coefficient
+specialization displayed in the construction, replacing zero bulk by one of
+these residual reconstruction displacements does not change the algebraic
+multiplicities of $e^{\pi i/3}$ and $e^{-\pi i/3}$ in framed formal
+monodromy on the original $z$-disc.
+
+No invariance under an arbitrary bulk displacement is asserted.
+\end{hypothesisR}
+
+
+
+\begin{proposition}[Framed operation formulas, conditional]
+\label{prop:framed-operations}
+Assume Hypothesis~5.7R.
+Let \(V\to T\) be a vector bundle of rank \(r\ge2\).  Then
+\[
+ \nu_6(\PP_T(V))=r\nu_6(T).
+ \tag{5.2}
+ \label{eq:projective-bundle-nu}
+\]
+Let \(\widetilde T=\operatorname{Bl}_C T\), where \(C\subset T\) is smooth of
+codimension \(c\ge2\).  In Iritani's comparison field one has
+\[
+ \nu_6(\widetilde T)=\nu_6(T)+
+ \sum_{j=0}^{c-2}\nu_6(C;\chi_j),
+ \tag{5.3}
+ \label{eq:blowup-nu}
+\]
+where \(\chi_j\) is the numerical Novikov specialization of the \(j\)-th
+center summand.  The endpoint terms in \eqref{eq:blowup-nu} are the intrinsic small
+invariants; the center terms are computed after the displayed specializations.
+\end{proposition}
+
+\begin{proof}
+We first treat the blowup.  Iritani's Theorem~5.18 gives a formal coordinate
+isomorphism and a quantum-$D$-module decomposition
+\[
+ \operatorname{QDM}(\widetilde T)\cong
+ \operatorname{QDM}(T)\oplus
+ \operatorname{QDM}(C)^{\oplus(c-1)}
+\]
+over a Laurent extension in the exceptional Novikov variable
+\cite[Theorem~5.18]{IritaniBlowup}.  The comparison map and its inverse use
+only integral powers of the original loop coordinate $z$.  After passing the
+coefficient ring to an algebraically closed Laurent coefficient field,
+Lemma~5.1A therefore transports framed formal monodromy across the comparison
+without ramifying the $z$-disc.
+
+For a center summand put $u=q^{-1/(c-1)}$.  Iritani's reconstruction
+coordinates have the initial form
+\[
+ \varsigma_j=\varsigma_j^\circ+s_j,
+ \qquad
+ \varsigma_j^\circ=-(c-1)\lambda_j+h_{C,j}+O(u),
+ \tag{5.4}
+ \label{eq:blowup-reconstruction-coordinate}
+\]
+with $\lambda_j=\zeta_j u^{-1}$
+\cite[Section~5.8.2 and (5.27)--(5.30)]{IritaniBlowup}.  The associated
+numerical Novikov specialization is
+\[
+ \chi_j(Q_C^d)=Q^{i_*d}u^{\rho_C\cdot d}.
+ \tag{5.4a}
+ \label{eq:center-novikov-specialization}
+\]
+The unnormalized connection is naturally read after the Laurent localization
+containing $u^{-1}$; in particular we make no claim that the term
+$\lambda_j$ belongs to a nonlocalized center ring.  Lemma~\ref{lem:exact-low-degree-shifts}
+removes the scalar $H^0$ term $-(c-1)\lambda_j$ and the fixed divisor
+$h_{C,j}$ exactly.  The latter character descends through
+\eqref{eq:center-novikov-specialization} because $h_{C,j}$ is a scalar
+multiple of $\rho_C$.  The remaining $O(u)+s_j$ reconstruction tail is the
+center instance covered by Hypothesis~5.7R.  The normalization of the
+logarithmic coordinate is fixed in \cite[Section~5.8.1]{IritaniBlowup}; a
+residual constant logarithmic character would again be a fixed divisor
+shift and hence is already covered by Lemma~\ref{lem:exact-low-degree-shifts}.
+
+The ambient summand is analogous.  Its reconstruction coordinate is
+$\tau=\tau^\circ+t$ with $\tau^\circ=O(q^{-1})$ in the Laurent expansion of
+Theorem~5.18.  Hypothesis~5.7R is invoked only for this residual ambient
+reconstruction tail.  Thus, after the exact low-degree normalizations, the
+ambient contribution has the intrinsic multiplicity of $T$, while the
+$j$-th center contribution has the intrinsic multiplicity of the small
+connection of $C$ after the specialization $\chi_j$.  Direct-sum additivity
+gives \eqref{eq:blowup-nu}.
+
+The coefficient extensions do not alter the endpoint invariants.  On
+numerical curve lattices the blowup map
+\[
+ \bar\beta\longmapsto
+ \bigl(\phi_*\bar\beta,-E\cdot\bar\beta\bigr)
+\]
+is injective because
+$N^1(\widetilde T)=\phi^*N^1(T)\oplus\mathbf Z[E]$.  Hence the numerical
+Novikov field of $\widetilde T$ embeds in the comparison field.  The center
+map \eqref{eq:center-novikov-specialization} need not be injective, which is
+why its contribution is denoted $\nu_6(C;\chi_j)$ rather than $\nu_6(C)$.
+
+For a projective bundle, Iritani--Koto's Theorem~5.1 gives the corresponding
+decomposition into $r$ copies of the quantum $D$-module of $T$ over a
+Laurent coefficient extension \cite[Theorem~5.1]{IritaniKoto}.  Again the
+comparison and its inverse use only integral powers of the same loop
+coordinate, so Lemma~5.1A applies.  With $u=q^{-1/r}$ their reconstruction
+coordinates satisfy
+\[
+ \varsigma_j=\varsigma_j^\circ+s_j,
+ \qquad
+ \varsigma_j^\circ
+ =r\lambda_j-\frac{2\pi\mathrm{i}j}{r}c_1(V)+O(u)
+\]
+\cite[Theorem~5.1(4), Proposition~5.6]{IritaniKoto}.  Lemma~\ref{lem:exact-low-degree-shifts}
+removes the scalar term and the fixed divisor term.  The initial-coordinate
+normalization is fixed by \cite[(5.11)--(5.12)]{IritaniKoto}.  Hypothesis~5.7R
+is then used only for the residual $O(u)+s_j$ reconstruction tail.  The base
+Novikov map is injective \cite[(1.1) and Remark~5.2]{IritaniKoto}; hence every
+summand contributes the intrinsic value $\nu_6(T)$, and direct-sum additivity
+gives \eqref{eq:projective-bundle-nu}.
+
+The projective-bundle theorem is stated after a global-generation
+normalization.  Tensoring $V$ by a sufficiently negative line bundle does
+not change $\PP_T(V)$, and the intrinsic Novikov embedding is unchanged by
+this twist \cite[Remark~1.2 and Remark~5.2]{IritaniKoto}.  Finally, both
+comparison decompositions preserve cohomological parity on the even
+restriction used here.  Iritani records this explicitly for blowups
+\cite[Section~2]{IritaniNotes}; for projective bundles it follows directly
+from the pullback, pushforward, Fourier-transform, and characteristic-class
+operations in Theorem~5.1 after odd bulk variables are set to zero.  The
+adjoined Novikov roots are coefficient variables, not roots of $z$.
+\end{proof}
+
+The center map in \eqref{eq:blowup-nu} is not necessarily injective
+\cite[(5.15)]{IritaniBlowup}.  Thus generic vanishing for \(C\) does not by
+itself imply that its specialized term vanishes.  The next lemma supplies the
+missing implication.
+
+\begin{definition}
+\label{def:strict-novikov-admissible}
+A monomial map \(\chi:\Lambda_T\to A\) is \emph{strictly
+Novikov-admissible} if \(A\) is a complete separated valued \(\C\)-domain
+with domain associated graded, every monomial has nonzero image, and
+\[
+ v(\chi(Q^d))=\ell(d),
+ \tag{5.5}
+ \label{eq:strict-novikov-valuation}
+\]
+where \(\ell\) is positive and proper on the effective numerical monoid.
+\end{definition}
+
+We write \(\nu_6(T;\chi)\) for the framed small-even invariant after scalar
+extension along such a map.
+
+The center maps in \eqref{eq:blowup-nu} are strictly admissible.  Give the exceptional
+Laurent variable valuation zero and use an ample divisor \(H\) on \(T\).  Then
+\[
+ v_H\!\left(Q^{i_*d}q^{-\rho_C\cdot d/(c-1)}\right)
+ =(H|_C)\cdot d.
+\]
+The restriction \(H|_C\) is ample, which gives positivity and properness; the
+associated graded Laurent monoid ring is a domain.
+
+\begin{proposition}[Direct specialized low-dimensional vanishing]
+\label{prop:direct-specialized-lowdim}
+Let \(\chi:\Lambda_T\to A\) be strictly Novikov-admissible.
+\begin{enumerate}[label=(\roman*)]
+\item If the canonical divisor \(K_T\) is nef, then
+\[
+  \nu_6(T;\chi)=0
+\]
+unconditionally.
+\item If \(T=\PP^1\) or \(T=\PP^2\), then
+\[
+  \nu_6(T;\chi)=0
+\]
+unconditionally.
+\item Let \(T=\PP_C(V)\) be a geometrically ruled surface with
+\(g(C)\ge1\).  Assuming Hypothesis~5.7R,
+\[
+  \nu_6(T;\chi)=0.
+\]
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+For (i), work after scalar extension to an algebraic closure of
+\(\operatorname{Frac}A\).  At small bulk write
+\[
+ \nabla_{z\partial_z}=z\partial_z-z^{-1}U+\operatorname{Gr},
+ \qquad
+ U=\sum_{\beta}\chi(Q^\beta)U_\beta,
+\]
+where \(U_\beta\) is the coefficient of Euler multiplication in numerical
+class \(\beta\).  Put
+\[
+ g=\operatorname{Gr}+\frac12E,
+\]
+with \(E\) equal to the identity on cohomological degrees of parity
+opposite to \(\dim T\) and zero on the other parity.  The operator \(g\) has
+integral eigenvalues.  The genus-zero dimension constraint gives
+\[
+ U_\beta:H^i(T)\longrightarrow
+ H^{i+2-2c_1(T)\cdot\beta}(T),
+\]
+so, because quantum multiplication preserves parity, \(U_\beta\) raises
+\(g\)-weight by
+\[
+ m_\beta=1-c_1(T)\cdot\beta.
+\]
+If \(K_T\) is nef, then \(m_\beta\ge1\) for every effective
+\(\beta\).  Make the half-parity correction explicitly by replacing the
+\(z\)-connection with
+\[
+ \nabla^{\mathrm{par}}_{z\partial_z}
+ =\nabla_{z\partial_z}+\frac12E
+ =z\partial_z-z^{-1}U+g.
+\]
+With the gauge convention \(G\nabla G^{-1}\), take \(G=z^g\).  Since
+\([g,U_\beta]=m_\beta U_\beta\), one has
+\[
+ z^gU_\beta z^{-g}=z^{m_\beta}U_\beta,
+ \qquad
+ z^g(z\partial_z)z^{-g}=z\partial_z-g,
+\]
+and therefore
+\[
+ z^g\nabla^{\mathrm{par}}_{z\partial_z}z^{-g}
+ =z\partial_z-
+   \sum_\beta \chi(Q^\beta)z^{m_\beta-1}U_\beta.
+\]
+Thus the specialized connection is regular singular.  This conclusion is
+unchanged when the noninjective map \(\chi\) groups several numerical
+classes: every grouped summand still has nonnegative \(z\)-order.
+The residue consists only of the terms with \(m_\beta=1\), equivalently
+\(c_1(T)\cdot\beta=0\).  Each such operator raises the finite
+\(g\)-filtration by one, so their sum is nilpotent.  The parity-corrected
+regular monodromy is therefore unipotent.  Undoing the half-parity correction
+permits only eigenvalues \(1\) and \(-1\), because the transformed residue
+preserves parity.  Hence no primitive sixth root occurs.  Strict
+Novikov-admissibility is used here only to ensure that the specialized small
+connection is a well-defined coefficientwise specialization; injectivity is
+not used.
+
+For (ii), let \(\ell\) be the line class and put
+\(a=\chi(Q^\ell)\).  Strict admissibility gives \(a\ne0\).  Over an
+algebraic closure of \(\operatorname{Frac}A\), the specialized small
+quantum relation for \(\PP^m\), \(m=1,2\), is
+\[
+ H^{m+1}=a.
+\]
+Euler multiplication by \((m+1)H\) therefore has the \(m+1\) distinct
+eigenvalues
+\[
+ (m+1)\zeta a^{1/(m+1)},
+ \qquad \zeta^{m+1}=1.
+\]
+Every spectral block has rank one, so
+Lemma~\ref{lem:simple-euler-block} gives trivial framed regular monodromy
+on every block.
+
+For (iii), let \(f\) be the fibre class.  Every map from a connected
+nodal genus-zero curve to \(C\) is constant: it is constant on every
+irreducible rational component, and connectedness forces the same image
+point on all components.  Hence every nonzero curve class contributing to
+the genus-zero quantum product of \(T\) is a positive multiple of \(f\).
+The small quantum differential module is therefore obtained by scalar
+extension from a one-variable module over \(\C[[Q^f]]\).  The restriction
+of \(\chi\) to the fibre ray is injective, because
+\[
+ v(\chi(Q^{nf}))=n\ell(f),
+ \qquad \ell(f)>0,
+\]
+so distinct powers have distinct valuation.  On the other hand,
+Hypothesis~5.7R and Proposition~\ref{prop:framed-operations} give the
+intrinsic projective-bundle identity
+\[
+ \nu_6(T)=2\nu_6(C)=0,
+\]
+where the last equality follows by applying (i) to the identity Novikov
+specialization of \(C\), since \(K_C\) is nef for \(g(C)\ge1\).
+The intrinsic small module and the \(\chi\)-specialized module are both
+scalar extensions of this same one-variable differential module.  More
+explicitly, let
+\[
+ K_f=\operatorname{Frac}(\C[[Q^f]]),
+ \qquad
+ K_{f,\chi}=\operatorname{Frac}(\chi(\C[[Q^f]]))
+ \subset\operatorname{Frac}(A).
+\]
+The injective restriction of \(\chi\) identifies \(K_f\) with
+\(K_{f,\chi}\).  Via this identification, choose a common algebraically
+closed overfield \(\Omega\) containing \(K_f\) and
+\(\operatorname{Frac}(A)\).  After scalar extension to \(\Omega\), the
+intrinsic one-variable module and its \(\chi\)-specialization become
+literally the same differential module.  Definition~\ref{def:framed-sixth-multiplicity} and
+its choice-independence under common coefficient-field extension therefore
+give identical root-of-unity multiplicities.  The specialized value also
+vanishes.
+\end{proof}
+
+\begin{remark}[Where the tagging hypothesis is still used]
+\label{rem:tagging-scope}
+Proposition~\ref{prop:direct-specialized-lowdim} shows that
+Hypothesis~5.7T is not needed for nef-canonical centers, for \(\PP^1\) or
+\(\PP^2\), or---assuming only Hypothesis~5.7R---for ruled surfaces over
+positive-genus curves.  In the present proof of four-dimensional birational
+invariance, its substantive use is confined to minimal rational ruled
+surfaces and to nonminimal surfaces.  Eliminating it there would require a
+separate support/base-change statement for applying the blowup or
+projective-bundle comparison after the external center specialization; no
+such statement is assumed here.
+\end{remark}
+
+\begin{hypothesisT}[Divisor-tagging specialization invariance]
+Let $\chi:\Lambda_T\to A$ be strictly Novikov-admissible.  Choose integral
+divisors $D_1,\ldots,D_\rho$ whose pairings separate $N_1(T)$ and define
+\[
+ \chi_{\boldsymbol t}(Q^d)
+ =\chi(Q^d)\exp\left(\sum_i t_i(D_i\cdot d)\right).
+\]
+After passing to algebraic closures of the relevant fraction fields, the
+intrinsic framed operator of the $\chi$-specialized small connection and
+the tagged module have the same algebraic multiplicities at
+$e^{\pi i/3}$ and $e^{-\pi i/3}$.
+
+This hypothesis concerns only the specialization step in this tagging
+family.  It does not assert reconstruction invariance or invariance under
+an arbitrary divisor-valued bulk deformation.
+\end{hypothesisT}
+
+\begin{lemma}[Divisor tagging, conditional]
+\label{lem:divisor-tagging}
+Assume Hypothesis~5.7T.
+Let \(\chi:\Lambda_T\to A\) be strictly Novikov-admissible.  If the intrinsic
+small even quantum connection of \(T\) has no primitive-sixth framed
+monodromy, neither does its specialization along \(\chi\).
+\end{lemma}
+
+\begin{proof}
+If \(N_1(T)=0\), then the numerical effective monoid is \(\{0\}\), so the
+coefficient map is already injective and there is nothing to tag.  Assume
+otherwise.
+Choose integral divisors \(D_1,\ldots,D_\rho\) whose pairings separate
+\(N_1(T)\), and introduce formal variables
+\(\boldsymbol t=(t_1,\ldots,t_\rho)\).  Define
+\[
+ \chi_{\boldsymbol t}(Q^d)=\chi(Q^d)
+ \exp\!\left(\sum_i t_i(D_i\cdot d)\right).
+ \tag{5.6}
+ \label{eq:divisor-tagging-map}
+\]
+This formula extends continuously from monomials to the completed Novikov
+ring.  Indeed, strict Novikov admissibility gives
+\(v(\chi(Q^d))=\ell(d)\), with \(\ell\) positive and proper on the
+effective numerical monoid.  Hence only finitely many classes contribute
+below any valuation cutoff, so the tagged sum converges coefficientwise in
+the complete ring \(A[[\boldsymbol t]]\) and defines a continuous unital
+homomorphism.  We now prove that it is injective.  Take
+\(f=\sum_d c_dQ^d\ne0\) and put
+\[
+ \mu=\min\{v(\chi(Q^d)):c_d\ne0\}
+     =\min\{\ell(d):c_d\ne0\},
+ \qquad
+ S_\mu=\{d:c_d\ne0,\ \ell(d)=\mu\}.
+ \label{eq:divisor-tagging-initial-support}
+\]
+Properness in \eqref{eq:strict-novikov-valuation} makes \(S_\mu\) finite
+and nonempty.  Write \(\operatorname{in}_v\) for the initial class in the
+associated graded.  The degree-\(\mu\) initial form is
+\[
+ \operatorname{in}_\mu\!\left(\chi_{\boldsymbol t}(f)\right)
+ =\sum_{d\in S_\mu}c_d\operatorname{in}_v\!\left(\chi(Q^d)\right)
+ \exp\!\left(\sum_i t_i(D_i\cdot d)\right)
+ \ \in\ \operatorname{gr}_v(A)[[\boldsymbol t]],
+ \label{eq:divisor-tagging-initial-form}
+\]
+and every displayed summand coefficient is nonzero.  Every term outside \(S_\mu\) has valuation
+strictly greater than \(\mu\), so a nonzero initial form proves
+\(\chi_{\boldsymbol t}(f)\ne0\).  This is a finite combination of distinct
+exponential characters.  The finitely many exponent vectors are distinct
+integral vectors.  Choose \(a=(a_i)\in\Z^\rho\) outside the finitely many
+integral hyperplanes on which two dot products agree, and substitute
+\(t_i=a_i s\).  The resulting exponents are distinct integers.  Their
+derivatives at \(s=0\) form a Vandermonde matrix with nonzero integer
+determinant, which stays invertible over
+\(\operatorname{Frac}(\operatorname{gr}_v A)\) because that field has
+characteristic zero.  The characters are therefore linearly independent, and
+the initial form displayed above is nonzero.
+
+The domain hypothesis on \(\operatorname{gr}_v(A)\) is used twice, and only
+twice.  It provides the field \(\operatorname{Frac}(\operatorname{gr}_v A)\)
+of the Vandermonde step just made, and it makes \(v\) multiplicative on
+\(A\), since initial forms of nonzero elements then have nonzero product.  The
+valuation of a monomial image is \(\ell(d)\) by hypothesis
+\eqref{eq:strict-novikov-valuation}; multiplicativity is what preserves that
+value after multiplication by the tag, a unit of valuation zero.  Terms with
+\(\ell(d)>\mu\) therefore contribute nothing in degree \(\mu\), and each
+\(d\in S_\mu\) contributes its initial form with \(c_d\) intact.  Were the
+associated graded to have zero divisors, \(v\) would be a filtration rather
+than a valuation, and the displayed degree-\(\mu\) identity could fail.
+
+Injectivity of
+\eqref{eq:divisor-tagging-map} embeds the intrinsic numerical Novikov
+fraction field into the fraction field of $A[[\boldsymbol t]]$, fixing
+$\C$.  Therefore the module obtained by the tagged map is a scalar extension
+of the intrinsic small module, and their framed characteristic polynomials
+have the same primitive-sixth multiplicities after passage to a common
+algebraic closure.
+
+On the other hand, setting $\boldsymbol t=0$ in the tagged family gives the
+$\chi$-specialized small connection.  Hypothesis~5.7T is precisely the
+remaining assertion that this specialization does not change the two
+primitive-sixth multiplicities.  Combining these two statements proves the
+lemma.  Notice that no pro-Laurent or Hahn-field framed operator is invoked:
+the hypothesis is attached directly to the specialization step for which it
+is needed.
+\end{proof}
+
+\begin{proposition}[Low-dimensional vanishing, conditional]
+\label{prop:low-dimensional-vanishing}
+Assume Hypotheses~5.7R and~5.7T.
+Let \(T\) be a point, a smooth projective curve, or a smooth projective
+surface.  For every strictly Novikov-admissible specialization \(\chi\),
+\[
+ \nu_6(T;\chi)=0.
+ \tag{5.7}
+ \label{eq:low-dimensional-vanishing}
+\]
+\end{proposition}
+
+\begin{proof}
+The direct specialized cases are already covered by
+Proposition~\ref{prop:direct-specialized-lowdim}: this includes points and
+curves of positive genus through the nef-canonical case, the two projective
+spaces \(\PP^1,\PP^2\), every minimal surface with nef canonical bundle,
+and, assuming Hypothesis~5.7R, ruled surfaces over positive-genus curves.
+
+It remains to treat minimal rational ruled surfaces and nonminimal surfaces.
+First work intrinsically, before the external specialization.  If
+\(T=\PP_{\PP^1}(V)\) is a minimal rational ruled surface, then
+Proposition~\ref{prop:framed-operations} and the unconditional value
+\(\nu_6(\PP^1)=0\) give \(\nu_6(T)=0\).  Every nonminimal smooth
+projective surface is obtained from a minimal surface by point blowups; under
+Hypothesis~5.7R the blowup formula
+\eqref{eq:blowup-nu} adds only point terms, and those are zero.  Thus the
+intrinsic small invariant vanishes for the remaining surfaces as well.
+
+For these remaining rational ruled and nonminimal cases we now use
+Hypothesis~5.7T through Lemma~\ref{lem:divisor-tagging}.  It carries the
+intrinsic vanishing to the strictly Novikov-admissible specialization
+\(\chi\), proving \eqref{eq:low-dimensional-vanishing}.  No use of
+Hypothesis~5.7T is made in the direct cases of
+Proposition~\ref{prop:direct-specialized-lowdim}.
+\end{proof}
+
+\begin{theorem}[Conditional birational invariance through dimension four]
+\label{thm:nu6-birational-invariance}
+Assume Hypotheses~5.7R and~5.7T.
+If \(Y\) and \(Y'\) are birational smooth projective complex varieties of
+the same dimension at most four, then
+\[
+ \nu_6(Y)=\nu_6(Y').
+ \tag{5.8}
+ \label{eq:nu-birational-invariance}
+\]
+Consequently, for smooth projective threefolds,
+\[
+ Y\times\PP^1\dashrightarrow Y'\times\PP^1
+ \quad\Longrightarrow\quad \nu_6(Y)=\nu_6(Y').
+\]
+\end{theorem}
+
+\begin{proof}
+Weak factorization decomposes a birational map between smooth varieties into
+blowups and blowdowns with smooth centers of codimension at least two
+\cite{AKMW}.  In dimension at most four every nontrivial center has dimension
+at most two.  The calculation following
+Definition~\ref{def:strict-novikov-admissible} shows that every center
+specialization in \eqref{eq:blowup-nu} is strictly admissible.
+Proposition~\ref{prop:low-dimensional-vanishing} therefore makes every center
+term zero, so the endpoint values agree at each step.
+
+If \(Y,Y'\) are smooth threefolds and
+\(Y\times\PP^1\dashrightarrow Y'\times\PP^1\), apply the first assertion in
+dimension four and \eqref{eq:projective-bundle-nu}:
+\[
+ 2\nu_6(Y)=\nu_6(Y\times\PP^1)
+ =\nu_6(Y'\times\PP^1)=2\nu_6(Y').
+\]
+Cancelling two in \(\Z\) proves the stabilization assertion.
+\end{proof}
+
+\begin{lemma}[Multiplicity-one Euler blocks]\label{lem:simple-euler-block}
+Let $T$ be smooth projective and consider its even quantum connection at an
+even bulk point over an algebraically closed coefficient field.  If a
+generalized eigenspace of Euler multiplication has rank one, that block
+contributes only the eigenvalue $1$ to framed regular monodromy.  In
+particular, at the small point it contributes nothing to $\nu_6(T)$.
+\end{lemma}
+
+\begin{proof}
+Write the horizontal system at the chosen even bulk point in the standard form
+\[
+ z^2\partial_zY=(U-z\mu)Y,
+\]
+where $U$ is Euler quantum multiplication and $\mu$ is the grading operator.
+The Frobenius property makes $U$ self-adjoint for the Poincar\'e pairing,
+while $\mu$ is anti-self-adjoint.  Generalized eigenspaces belonging to
+distinct eigenvalues of the self-adjoint operator $U$ are orthogonal, so the
+pairing restricts nondegenerately to the one-dimensional block.  If $P$ is
+its spectral projector, anti-self-adjointness on this nondegenerate line
+therefore gives
+\[
+ P\mu P=0.
+\]
+
+Formally split this line from the other Euler eigenspaces by the normalized
+gauge $g=I+zg_1+z^2g_2+\cdots$ whose positive coefficients are block-off-
+diagonal.  The coefficient of $z$ on the resulting scalar block is
+\[
+ -P\mu P+P[U,g_1]P=0;
+\]
+the logarithmic-derivative term of the gauge begins in order $z^2$.
+Consequently the scalar equation has the form
+\[
+ z^2\partial_zy=(u+z^2h(z))y,
+ \qquad h(z)\in K[[z]],
+\]
+for the corresponding Euler eigenvalue $u$.  Its normalized formal solution
+is $e^{-u/z}v(z)$ with $v(z)\in1+zK[[z]]$.  No fractional power of the
+original loop coordinate and no logarithm occurs, so the framed regular
+monodromy on this block is the identity.
+\end{proof}
+
+\begin{proposition}[Products with projective space]
+\label{prop:projective-product-nu}
+For every smooth projective variety $T$ and every $m\ge0$,
+\[
+ \nu_6(T\times\PP^m)=(m+1)\nu_6(T).
+\]
+This statement is unconditional.
+\end{proposition}
+
+\begin{proof}
+The product formula for Gromov--Witten theory
+\cite{BehrendProduct}, followed by the numerical Novikov base change of
+Lemma~\ref{lem:numerical-base-change}, identifies the small numerical
+quantum connection of $T\times\PP^m$ with the tensor-product quantum
+connection of the two factors.  On even cohomology this is simply
+$H^{\rm ev}(T)\otimes H^{\rm ev}(\PP^m)$, since projective space has no odd
+cohomology.  After adjoining $q^{1/(m+1)}$ in the projective-space Novikov
+coefficient field, quantum multiplication by
+$c_1(\PP^m)=(m+1)H$ has the $m+1$ distinct eigenvalues
+\[
+ (m+1)\zeta q^{1/(m+1)},\qquad \zeta^{m+1}=1.
+\]
+By Lemma~\ref{lem:simple-euler-block}, each corresponding rank-one formal
+factor has trivial framed regular monodromy.  The Levelt--Turrittin
+formal decomposition is compatible with tensor products of differential
+modules.  Hence tensoring a formal factor of the quantum differential module
+of $T$ with one of these rank-one projective-space factors only adds its
+scalar irregular exponential factor and leaves the original-$z$-disc
+regular framed operator of the $T$ factor unchanged.  The extension adjoining
+$q^{1/(m+1)}$ is in the coefficient field and is fixed by the $z$-turn.
+Consequently the product module has $m+1$ copies of every framed cyclotomic
+factor of $T$, counted with algebraic multiplicity.  This gives the formula.
+\end{proof}
+
+\begin{corollary}\label{cor:p3-nu6}
+The small even framed invariant of projective three-space satisfies
+\[
+ \nu_6(\PP^3)=0.
+\]
+\end{corollary}
+
+\begin{proof}
+Apply Proposition~\ref{prop:projective-product-nu} with $T=\operatorname{pt}$
+and $m=3$.
+\end{proof}
+
+\begin{proposition}[The cubic packet]
+\label{prop:cubic-packet}
+For every smooth cubic threefold \(X\),
+\[
+ \nu_6(X)=2.
+ \tag{5.9}
+ \label{eq:cubic-packet-value}
+\]
+\end{proposition}
+
+This proposition is unconditional and uses neither Hypothesis~5.7R nor
+Hypothesis~5.7T.
+
+\begin{proof}
+Use the notation of Proposition~\ref{prop:cubic-block-data} and put
+\(F_X=\overline{\operatorname{Frac}\C[[q]]}\).  That
+proposition separates the small even connection into two scalar blocks and
+the rank-two zero block \eqref{eq:cubic-integral-block-reduction}, using
+only an algebraic Novikov extension and integral powers of the original
+loop coordinate.  We treat the rank-two block first and return to the scalar
+blocks below.
+
+For the rank-two block, seek a formal solution in the form
+\[
+ \widetilde S_3=z^\rho(1+O(z)),
+ \qquad
+ \widetilde S_4=cz^{\rho+1}(1+O(z)).
+ \tag{5.9f}
+ \label{eq:cubic-indicial-ansatz}
+\]
+The coefficient of \(z^{\rho+1}\) in the first coordinate of
+\eqref{eq:cubic-integral-block-reduction}, and that of \(z^{\rho+2}\) in
+the second, give respectively
+\[
+ \rho=2c-\frac{19}{18},
+ \qquad
+ c(\rho+1)=\frac{19}{18}c-\frac8{81}.
+ \tag{5.9g}
+ \label{eq:cubic-indicial-coefficients}
+\]
+Eliminating \(c\) gives
+\[
+ \frac12\left(\rho+\frac{19}{18}\right)
+ \left(\rho-\frac1{18}\right)=-\frac8{81},
+ \qquad\text{hence}\qquad
+ \rho^2+\rho+\frac5{36}=0.
+ \tag{5.9h}
+ \label{eq:cubic-indicial-polynomial}
+\]
+This is the coefficient comparison in Cai's displayed rank-two
+ansatz~\cite[p.~6]{Cai}.
+
+The quadratic formula applied to \eqref{eq:cubic-indicial-polynomial} gives
+\[
+ \rho=-\frac16,\ -\frac56.
+ \tag{5.9i}
+ \label{eq:cubic-indicial-roots}
+\]
+These are exactly the two eigenvalues of the canonical modified residue
+$R_X$ computed in Section~\ref{sec:atomic-one-step}.  In particular,
+Proposition~\ref{prop:residue-discriminant-exponents} identifies their
+squared difference with $\delta^\sharp(\alpha_X)=4/9$; the present
+calculation independently recovers the same representatives from formal
+solutions.
+The constant matrix \(C\) adjoins only the algebraic Novikov coefficient
+\(r\), and \eqref{eq:cubic-integral-block-gauge} and its inverse use only
+integral powers of \(z\).  Hence they preserve each exponent class in
+\(\Q/\Z\): multiplication sends \(z^\rho F_X[[z]]\) to itself, and the same
+holds for the inverse.  Thus the two classes in
+\eqref{eq:cubic-indicial-roots} remain the classes in the original-\(z\)-disc
+frame.  By \eqref{eq:universal-exponential}, the repaired framed convention
+assigns to a rational exponent \(\rho\) the eigenvalue
+\(\operatorname{Exp}_V(\rho)=e^{2\pi i\rho}\).  Therefore these two classes
+give
+\[
+ \operatorname{Exp}_V\left(-\frac16\right)=e^{-\pi i/3},
+ \qquad
+ \operatorname{Exp}_V\left(-\frac56\right)
+ =e^{-5\pi i/3}=e^{\pi i/3}.
+ \tag{5.9j}
+ \label{eq:cubic-framed-eigenvalues}
+\]
+This agrees with Cai's rank-two calculation~\cite[p.~6]{Cai}.
+
+Put \(R=\C[r,r^{-1}]\).  For completeness the scalar blocks may equivalently be written as
+\[
+ z^2\partial_z\widetilde S_\pm
+ =\bigl(\pm6r+h_\pm(z)\bigr)\widetilde S_\pm,
+ \qquad h_\pm(z)\in z^2R[[z]].
+ \tag{5.9k}
+ \label{eq:cubic-rank-one-scalar-equations}
+\]
+Their normalized formal solutions are
+\[
+ \begin{aligned}
+ \widetilde S_+&=e^{-6r/z}u_+(z),
+ &u_+(z)&\in1+zR[[z]],\\
+ \widetilde S_-&=e^{6r/z}u_-(z),
+ &u_-(z)&\in1+zR[[z]].
+ \end{aligned}
+ \tag{5.9l}
+ \label{eq:cubic-rank-one-solutions}
+\]
+Indeed, after the displayed exponential is removed,
+\(\partial_zu_\pm=z^{-2}h_\pm(z)u_\pm\).  The coefficient
+\(z^{-2}h_\pm(z)\) lies in \(R[[z]]\), so integration with initial value
+one gives the asserted units.  The exponentials and these units use only
+integral powers of the original \(z\); neither adjoins a root of \(z\) nor
+produces a deck factor.  Thus each block is unramified and has framed
+regular-monodromy eigenvalue \(1\), so neither contributes a primitive sixth
+root.  This agrees
+with Cai's scalar solutions~\cite[pp.~5--6]{Cai}.
+
+It remains to count the rank-two solutions.  Write its ansatz as
+\(\widetilde S_3=z^\rho\sum_{n\ge0}a_nz^n\) and
+\(\widetilde S_4=z^{\rho+1}\sum_{n\ge0}b_nz^n\), with \(a_0=1\).
+At coefficient \(n\), the two equations have the form
+\[
+ L_{\rho+n}\begin{pmatrix}a_n\\b_n\end{pmatrix}
+ =\begin{pmatrix}\alpha_n\\\beta_n\end{pmatrix},
+ \qquad
+ L_s=
+ \begin{pmatrix}
+ s+19/18&-2\\
+ 8/81&s-1/18
+ \end{pmatrix},
+ \qquad
+ \det L_s=\left(s+\frac16\right)\left(s+\frac56\right).
+ \tag{5.9m}
+ \label{eq:cubic-frobenius-recursion}
+\]
+Here \((\alpha_n,\beta_n)\) depends only on coefficients of lower index;
+for \(n=0\) it is zero, and \eqref{eq:cubic-indicial-polynomial} is exactly
+the condition that \(L_\rho\) have a kernel.  The roots in
+\eqref{eq:cubic-indicial-roots} are distinct modulo \(\Z\), so
+\(L_{\rho+n}\) is invertible for every \(n\ge1\).  For either root,
+\(\ker L_\rho\) is one-dimensional and its first coordinate is nonzero;
+the normalization \(a_0=1\) fixes \(b_0\).  The recursion therefore gives
+one formal solution for each root and no further solution in its exponent
+class.  The two resulting solutions are independent, and exhaust the
+rank-two block.
+
+Consequently each eigenvalue in \eqref{eq:cubic-framed-eigenvalues} has
+algebraic multiplicity one, while
+\eqref{eq:cubic-rank-one-solutions} contributes neither primitive sixth root.
+Hence
+\[
+ \nu_6(X)=2.
+ \tag{5.9n}
+ \label{eq:cubic-packet-internal-count}
+\]
+This is a calculation in the small even connection, so no odd-cohomology block
+enters the count.  Moreover, \(N_1(X)=\Z\ell\), and the numerical Novikov
+ring is exactly \(\C[[Q^\ell]]=\C[[q]]\); thus the numerical-Novikov
+convention does not alter the calculation.
+
+The shared reduction in Proposition~\ref{prop:cubic-block-data} is proved
+internally from Cai's displayed small-even matrix; the argument above uses
+only that reduction and the ordinary formal recursion in the original loop
+coordinate.
+
+\end{proof}
+
+\begin{corollary}[Formal-germ persistence of the cubic packet]
+\label{cor:cubic-formal-germ}
+After extending the cubic Novikov coefficient field so that
+$r=(3q)^{1/2}$ is a unit, the primitive-sixth multiplicity is equal to $2$
+throughout the formal even bulk germ at the small hyperplane point.
+\end{corollary}
+
+\begin{proof}
+At the closed point the Euler eigenvalues are $6r,-6r,0$, with the zero
+cluster a single rank-two Jordan block and the two nonzero clusters of rank
+one.  The differences from the zero eigenvalue are units, so
+Proposition~\ref{prop:ranktwo-framed-germ} applies to the zero packet and
+freezes its two exponent classes $-1/6,-5/6$.  The two simple packets remain
+rank one on the formal germ and contribute no primitive sixth root by
+Lemma~\ref{lem:simple-euler-block}.  Proposition~\ref{prop:cubic-packet}
+sets the value at the closed point equal to $2$.
+\end{proof}
+
+\begin{corollary}[Framed count after one product stabilization]
+\label{cor:cubic-product-nu}
+For every smooth cubic threefold $X$,
+\[
+ \nu_6(X\times\PP^1)=4.
+\]
+This statement is unconditional.
+\end{corollary}
+
+\begin{proof}
+Combine Proposition~\ref{prop:projective-product-nu} with
+Proposition~\ref{prop:cubic-packet}.
+\end{proof}
+
+\begin{remark}[Conditional second proof of Theorem~\ref{thm:every-cubic}]
+Assuming Hypotheses~5.7R and 5.7T,
+Theorem~\ref{thm:nu6-birational-invariance} turns the unconditional value
+\(\nu_6(X\times\PP^1)=4\) from Corollary~\ref{cor:cubic-product-nu} into
+the original framed-monodromy proof: a rational smooth fourfold has
+\(\nu_6=0\).  This remains a second, stronger-invariant proof rather than
+the logical basis of Theorem~\ref{thm:every-cubic}.
+\end{remark}
+
+\subsection{A genus-eight Fano consequence}
+
+Kuznetsov associates to every smooth prime Fano threefold \(V\) of genus
+eight a smooth Pfaffian cubic threefold \(X\), together with rank-two vector
+bundles \(U\) on \(V\) and \(E^*\) on \(X\), whose projectivizations are
+related by a flop \cite[Theorems~2.17--2.18]{KuznetsovV14}.
+
+\begin{corollary}[One stabilization of \(V_{14}\)]
+\label{cor:v14-one-step}
+For every smooth prime Fano threefold \(V\) of genus eight,
+\[
+  V\times\PP^1\ \text{is irrational}.
+\]
+Assuming Hypotheses~5.7R and~5.7T, one moreover has
+\[
+  \nu_6(V)=2.
+  \tag{5.11}
+  \label{eq:v14-stabilization}
+\]
+\end{corollary}
+
+\begin{proof}
+The flop gives a birational map between \(\PP_V(U)\) and
+\(\PP_X(E^*)\).  A projective bundle is birational to the product of its
+base with the corresponding projective space, so
+\(V\times\PP^1\) is birational to \(X\times\PP^1\).  The latter is
+irrational by Theorem~\ref{thm:every-cubic}, proving the unconditional
+assertion.
+
+Assume now Hypotheses~5.7R and~5.7T.  Both projectivizations are smooth
+projective
+fourfolds.  By Theorem~\ref{thm:nu6-birational-invariance}, Proposition
+\ref{prop:framed-operations}, and Proposition~\ref{prop:cubic-packet},
+\[
+  2\nu_6(V)=\nu_6(\PP_V(U))
+  =\nu_6(\PP_X(E^*))=2\nu_6(X)=4.
+\]
+Hence \(\nu_6(V)=2\).
+\end{proof}
+
+The two-hypothesis framed refinement is sharp at this level.  In dimension five
+a weak-factorization center may have dimension three and may itself carry
+the cubic packet, so the low-dimensional vanishing used in
+Theorem~\ref{thm:nu6-birational-invariance} no longer prevents
+cancellation.  The ordinary atom obstruction has the parallel limitation
+recorded after Theorem~\ref{thm:every-cubic}: from the second stabilization
+onward the cubic atom is already allowed as a lower-dimensional
+representative.

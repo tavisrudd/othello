@@ -7,106 +7,129 @@ A smooth projective variety is universally \(CH_0\)-trivial if the degree map
 is an isomorphism for every field extension \(L/\C\).  This condition is a
 central consequence of stable rationality, and its failure is a standard
 stable-rationality obstruction.  Its validity, however, need not provide a
-rational parametrization.  Conditional on Hypothesis~4.7H, we exhibit smooth
-fourfolds \(X\times\PP^1\) that are universally \(CH_0\)-trivial and
-irrational.
+rational parametrization.  We prove that even after one explicit
+stabilization it does not predict rationality for smooth cubic threefolds.
 
-The small even quantum connection of every smooth cubic threefold has
-primitive-sixth framed formal monodromy, and
-Proposition~\ref{prop:cubic-packet} computes its multiplicity
-unconditionally.  Hypothesis~4.7H isolates the only unresolved transport step:
-invariance of that cyclotomic multiplicity under the positive-filtration bulk
-displacements produced by the reconstruction formulas.  Conditional on that
-hypothesis, the operation formulas and weak factorization give irrationality
-after one stabilization uniformly.
-
-\begin{theorem}[Conditional one-step irrationality]
+\begin{theorem}[One-step irrationality]
 \label{thm:every-cubic}
-Assume Hypothesis~4.7H.  For every smooth complex cubic threefold \(X\), the
-fourfold \(X\times\PP^1\) is irrational.
+For every smooth complex cubic threefold \(X\), the fourfold
+\(X\times\PP^1\) is irrational.
 \end{theorem}
 
-Under Hypothesis~4.7H, the conclusion depends only on the birational class: if \(Y\) is birational to
-a smooth cubic threefold then \(Y\times\PP^1\) is birational to
-\(X\times\PP^1\), so Theorem~\ref{thm:every-cubic} applies to \(Y\) as well.
-This covers the Fano threefolds of degree fourteen and Picard number one, and
-the blow-ups of \(X\) in a line or in a plane cubic curve; for the cubics of
-\cite[Theorem~1.1]{YYZ} those same varieties also inherit the coprime-degree
-parametrizations \cite[Remark~3.7]{YYZ}.  For genus eight the invariant itself is computed.  Under the same hypothesis,
-Corollary~\ref{cor:v14-one-step} gives \(\nu_6=2\) there, without using the
-classical birationality with a cubic.
+The proof uses ordinary Hodge atoms in the sense of
+Katzarkov--Kontsevich--Pantev--Yu \cite{KKPYY}.  Their blowup and
+projective-bundle formulas package weak factorization into a free abelian
+ledger on atoms, and their ordinary non-rationality criterion says that a
+smooth \(d\)-fold containing an atom not realizable in dimension at most
+\(d-2\) is irrational.  We construct such an atom for a cubic threefold.
+At the small hyperplane point, the two-dimensional even zero packet of the
+Euler multiplication is a single Jordan block.  A regular-
+\(F\)-manifold discriminant argument shows that the corresponding branch is
+indeed a connected component of the unramified spectral cover, rather than
+an accidental coalescence at one point.  On its even rank-two atomic
+\(F\)-bundle, a canonical elementary modification turns the nilpotent
+leading block into a logarithmic one.  The Poincar\'e pairing forces this
+modification to be regular and flatness forces its residue to move by
+conjugation.  The resulting residue discriminant \(\delta^\sharp\) is an
+ordinary atom invariant.  For the cubic atom
+\[
+  \delta^\sharp=\frac49,
+\]
+whereas the only possible curve representative, a genus-five curve, has
+\(\delta^\sharp=0\).  Surface representatives are excluded by parity rank
+and the classification of minimal surfaces.  Since
+\(\CF(X\times\PP^1)=2\CF(X)\), the cubic atom occurs on the stabilized
+fourfold and the ordinary atom criterion proves Theorem~\ref{thm:every-cubic}.
 
-Each separation statement below rests on two independent theorems.
-Irrationality must come from an invariant that does not vanish on the product,
-because universal \(CH_0\)-triviality of \(X\) passes to \(X\times\PP^1\) by the
-projective bundle formula for Chow groups, and with it the usual
-decomposition-of-the-diagonal obstructions.  Universal \(CH_0\)-triviality must
-then be proved for those same \(X\), integrally rather than up to a multiple,
-since the criterion used along the \(A_5\)-pencil below is algebraicity of an
-integral class.  Conditional Theorem~\ref{thm:every-cubic} counts eigenvalues
-of a formal monodromy operator attached to the quantum connection;
-Theorem~\ref{thm:six-axis-divided-powers} proves that divided powers of an
-integral lattice of divisor classes on the intermediate Jacobian are ordinary
-divisor products.  Each reads a different structure on the same \(X\), so the
-two inputs are logically independent.
+The theorem is unconditional relative to the numbered ordinary Hodge-atom
+theorems imported from \cite{KKPYY}, in the usual sense that a proof is
+relative to its cited external results.  At the time of writing that source
+is an unrefereed preprint, and its projective-bundle theorem ultimately
+uses the Iritani--Koto decomposition theorem \cite{IritaniKoto}.  No enhanced
+atom, Euler pairing, Serre automorphism, or non-archimedean
+Riemann--Hilbert statement is used in our proof.
 
-The universal \(CH_0\)-triviality assertions in the next statements are
-unconditional; their irrationality assertions are conditional on
-Hypothesis~4.7H.
+The conclusion propagates immediately through stabilized birational
+correspondences.  In particular, if \(Y\times\PP^1\) is birational to
+\(X\times\PP^1\) for a smooth cubic threefold \(X\), then
+\(Y\times\PP^1\) is irrational.  Kuznetsov's construction for a smooth
+prime Fano threefold \(V\) of genus eight gives rank-two projective bundles
+\(\PP_V(U)\) and \(\PP_X(E^*)\) related by a flop
+\cite[Theorems~2.17--2.18]{KuznetsovV14}; hence
+\(V\times\PP^1\) is birational to \(X\times\PP^1\) and is also
+irrational.  The finer equality \(\nu_6(V)=2\) below remains conditional on
+the reconstruction-tail and divisor-tagging hypotheses of
+Section~\ref{sec:framed-monodromy}.
 
-Universally \(CH_0\)-trivial cubic threefolds are known in abundance.  Under
-Hypothesis~4.7H, Theorem~\ref{thm:every-cubic} turns every such locus into a
-locus where the two properties separate.  Voisin proves that the moduli space of smooth cubic
-threefolds, which has dimension ten, contains a nonempty countable union of
-subvarieties of codimension at most three parametrizing threefolds with
-universally trivial \(CH_0\) \cite[Theorem~4.5]{Voisin}.
+\subsection*{Unconditional separation results}
 
-\begin{corollary}[Conditional separation in codimension three]
+Each separation statement rests on two independent inputs.  Irrationality
+comes from the cubic Hodge atom.  Universal \(CH_0\)-triviality is proved
+for the same cubic by a classical or cycle-theoretic theorem, and then
+passes to the product by the projective-bundle formula for Chow groups.
+Thus the vanishing of the usual decomposition-of-the-diagonal obstruction
+and the atom obstruction read genuinely different structures on the same
+fourfold.
+
+Universally \(CH_0\)-trivial cubic threefolds are known in abundance.
+Voisin proves that the ten-dimensional moduli space of smooth cubic
+threefolds contains a nonempty countable union of subvarieties of
+codimension at most three parametrizing threefolds with universally trivial
+\(CH_0\) \cite[Theorem~4.5]{Voisin}.
+
+\begin{corollary}[Separation in codimension three]
 \label{cor:voisin-separation}
 There is a nonempty countable union of subvarieties of codimension at most
 three in the moduli space of smooth cubic threefolds such that, for every
 member \(X\), both \(X\) and \(X\times\PP^1\) are universally
-\(CH_0\)-trivial.  Assuming Hypothesis~4.7H, \(X\times\PP^1\) is irrational.
+\(CH_0\)-trivial, while \(X\times\PP^1\) is irrational.
 \end{corollary}
 
-Independently of that construction, one cubic gives the same separation
-completely explicitly.  Colliot-Th\'el\`ene proves that a smooth cubic
-hypersurface whose equation is a sum of forms in separated groups of at most
-three variables is universally \(CH_0\)-trivial \cite{CT}, which applies to
-the Fermat equation directly.
+Independently, Colliot-Th\'el\`ene proves that a smooth cubic hypersurface
+whose equation is a sum of forms in separated groups of at most three
+variables is universally \(CH_0\)-trivial \cite{CT}, which applies to the
+Fermat equation directly.
 
 \begin{corollary}[Fermat]
 \label{cor:fermat-separation}
-The fourfold \(\{x_1^3+x_2^3+x_3^3+x_4^3+x_5^3=0\}\times\PP^1\) is
-universally \(CH_0\)-trivial.  Assuming Hypothesis~4.7H, it is irrational.
+The fourfold
+\[
+  \{x_1^3+x_2^3+x_3^3+x_4^3+x_5^3=0\}\times\PP^1
+\]
+is universally \(CH_0\)-trivial and irrational.
 \end{corollary}
 
-Yang--Yu--Zhu construct a two-dimensional family of smooth cubic threefolds
-admitting unirational parametrizations of degrees two and three
-\cite[Theorems~1.1 and 3.3]{YYZ}.  Unirational parametrizations of coprime
-degrees give a decomposition of the diagonal, so every member of that family
-is universally \(CH_0\)-trivial, and the same parametrizations persist on
+Yang--Yu--Zhu construct a two-dimensional family of smooth cubic
+threefolds admitting unirational parametrizations of degrees two and three
+\cite[Theorems~1.1 and 3.3]{YYZ}.  Parametrizations of coprime degrees give
+a decomposition of the diagonal, so every member of that family is
+universally \(CH_0\)-trivial; the same degrees persist on
 \(X\times\PP^m\) for every \(m\) \cite[Corollary~3.5]{YYZ}.
 
 \begin{corollary}[Coprime-degree cubics]
 \label{cor:coprime-separation}
 Let \(X\) be one of the cubic threefolds of \cite[Theorem~3.3]{YYZ}.  Then
-\(X\times\PP^1\) admits unirational parametrizations of coprime degrees and is
-universally \(CH_0\)-trivial.  Assuming Hypothesis~4.7H, it is irrational.
+\(X\times\PP^1\) admits unirational parametrizations of coprime degrees, is
+universally \(CH_0\)-trivial, and is irrational.
 \end{corollary}
 
 Yang--Yu--Zhu ask whether a variety with unirational parametrizations of
 coprime degrees can fail to be stably rational \cite[Question~1.4]{YYZ}.
-Under Hypothesis~4.7H, Corollary~\ref{cor:coprime-separation} verifies the
-first nontrivial stabilization of that question for their examples.  It does not settle it:
-rationality of \(X\times\PP^m\) for some \(m\ge2\) is not excluded, for the
-reason recorded after Theorem~\ref{thm:separation-family}.
+Corollary~\ref{cor:coprime-separation} settles the first nontrivial
+stabilization for their examples.  It does not settle stable irrationality:
+our atom obstruction ceases to exclude rationality from the second
+stabilization onward because a four- or five-dimensional stabilized variety
+may be allowed atoms represented in dimension three, and the cubic atom
+itself already has such a representative.
 
-For our second result we give a different uniform proof of universal
-\(CH_0\)-triviality, along the nonstandard \(A_5\)-invariant pencil.  There
-the primitive minimal class of the intermediate Jacobian is algebraic by an
-integral saturation theorem for the six-axis lattice, for every member at
-once.
+For our second separation result we give a different uniform proof of
+universal \(CH_0\)-triviality along the nonstandard \(A_5\)-invariant
+pencil.  There the primitive minimal class of the intermediate Jacobian is
+algebraic by an integral saturation theorem for the six-axis lattice, for
+every member at once.  This construction also reaches beyond the
+separated-variable criterion of Colliot-Th\'el\`ene: all but finitely many
+moduli points represented by the pencil are not projectively equivalent to
+a cubic of separated-variable type.
 
 \begin{theorem}[Separation on the \(A_5\)-pencil]
 \label{thm:separation-family}
@@ -116,138 +139,140 @@ Let \(W_5\) be the five-dimensional irreducible \(A_5\)-module, and let
  \PP\bigl((\operatorname{Sym}^3W_5^*)^{A_5}\bigr).
 \]
 For the resulting family \(\mathcal X\to B^\circ\) and every
- \(b\in B^\circ(\C)\),
+\(b\in B^\circ(\C)\),
 \[
  \mathcal X_b\text{ and }\mathcal X_b\times\PP^1
- \text{ are universally }CH_0\text{-trivial}.
+ \text{ are universally }CH_0\text{-trivial},
 \]
-Assuming Hypothesis~4.7H, \(\mathcal X_b\times\PP^1\) is irrational.  The
-family is non-isotrivial in coarse moduli.
+and \(\mathcal X_b\times\PP^1\) is irrational.  The family is
+non-isotrivial in coarse moduli.  All but finitely many points of its
+coarse-moduli image are not represented by cubics whose defining form is a
+sum of cubic forms in disjoint groups of at most three variables.
 \end{theorem}
 
 The invariant cubic space in Theorem~\ref{thm:separation-family} is
 two-dimensional.  Indeed, the character of \(W_5\) is
-\((5,1,-1,0,0)\) on the classes \(1,2A,3A,5A,5B\).  The symmetric-cube
+\((5,1,-1,0,0)\) on the classes \(1,2A,3A,5A,5B\), and the symmetric-cube
 character formula gives
 \[
  \dim \bigl(\operatorname{Sym}^3W_5^*\bigr)^{A_5}=2.
 \]
 Thus its projectivization is a pencil with connected smooth locus
-\(B^\circ\).  Hartlieb denotes it by \(M_{H_1}\); it is not the component
-associated with \(\mathbf1\oplus W_4\) \cite[Lemma~5.5]{Hartlieb}.  Since the
-family is non-isotrivial, its image in coarse moduli is a curve, one
-dimension below the locus of \cite{YYZ}.
+\(B^\circ\).  Its coarse-moduli image is Hartlieb's \(M_{H_1}\); this is
+not the component associated with \(\mathbf1\oplus W_4\)
+\cite[Lemma~5.5]{Hartlieb}.  Since the family is non-isotrivial, its image
+in coarse moduli is a curve, one dimension below the locus of \cite{YYZ}.
 
 \begin{remark}
 \label{rem:fermat-in-pencil}
 The pencil contains the Fermat cubic threefold; it is one of the two members
 that also admit the permutation action of \(A_5\)
-\cite[Lemma~5.5]{Hartlieb}.  The mechanism is that \(W_5\) is induced from a
-nontrivial cubic character \(\chi\) of a point stabilizer \(A_4\subset A_5\):
-Frobenius reciprocity gives
+\cite[Lemma~5.5]{Hartlieb}.  The mechanism is that \(W_5\) is induced from
+a nontrivial cubic character \(\chi\) of a point stabilizer
+\(A_4\subset A_5\): Frobenius reciprocity gives
 \[
  \bigl\langle\operatorname{Ind}_{A_4}^{A_5}\chi,\;W_5\bigr\rangle
  =\bigl\langle\chi,\;\operatorname{Res}_{A_4}W_5\bigr\rangle=1,
 \]
 and both sides have dimension five, so
-\(\operatorname{Ind}_{A_4}^{A_5}\chi\cong W_5\).  Induction from a character
-realizes \(W_5\) by monomial matrices whose nonzero entries are cube roots of
-unity, and such a matrix fixes \(x_1^3+\cdots+x_5^3\).  Corollary
-\ref{cor:fermat-separation} is therefore the member of
-Theorem~\ref{thm:separation-family} at which universal \(CH_0\)-triviality is
-also classical, and Yang--Yu--Zhu give that member an explicit degree-three
-unirational parametrization \cite[Remark~3.6]{YYZ}.
+\(\operatorname{Ind}_{A_4}^{A_5}\chi\cong W_5\).  Induction from a
+character realizes \(W_5\) by monomial matrices whose nonzero entries are
+cube roots of unity, and such a matrix fixes
+\(x_1^3+\cdots+x_5^3\).  Corollary~\ref{cor:fermat-separation} is therefore
+the member of Theorem~\ref{thm:separation-family} at which universal
+\(CH_0\)-triviality is also classical, and Yang--Yu--Zhu give that member
+an explicit degree-three unirational parametrization
+\cite[Remark~3.6]{YYZ}.
 \end{remark}
 
-We do not claim that \(X\) is stably irrational.  From the second
-stabilization onward, weak-factorization centers can themselves have cubic
-dimension, and the low-dimensional exclusion used here no longer applies.
+\subsection*{A finer conditional framed invariant}
 
-\subsection*{How the two proofs meet}
+The ordinary atom proof above is deliberately minimal: it follows one
+rank-two cubic atom and uses only the finite residue discriminant needed to
+exclude low-dimensional representatives.  We also study a finer invariant
+of the entire numerical small even quantum connection.  Definition
+\ref{def:framed-sixth-multiplicity} counts the primitive-sixth eigenvalues
+of framed formal monodromy on the original loop disc and gives an invariant
+\(\nu_6\).  The cubic packet calculation is unconditional and yields
+\(\nu_6(X)=2\).  More generally, the product formula for Gromov--Witten
+theory gives \(\nu_6(T\times\PP^m)=(m+1)\nu_6(T)\), so in particular
+\(\nu_6(X\times\PP^1)=4\) unconditionally.
 
-The two arguments meet only on the fourfold.
+The actual Iritani and Iritani--Koto comparison isomorphisms preserve the
+original-\(z\)-disc framing after coefficient extension.  The string and
+divisor equations exactly remove the scalar degree-zero and fixed
+degree-two pieces of their reconstruction coordinates.  We therefore split
+the remaining uncertainty into two statements in
+Section~\ref{sec:framed-monodromy}: Hypothesis~5.7R concerns only the
+residual reconstruction tail, while Hypothesis~5.7T is
+the separate specialization step in the divisor-tagging argument.  The latter
+is already unnecessary for nef-canonical targets, for \(\PP^1\) and
+\(\PP^2\), and---assuming 5.7R---for ruled surfaces over positive-genus
+curves; in the present low-dimensional proof it remains only for rational
+ruled and nonminimal surfaces.  A rank-two formal-germ theorem proves the
+local mechanism needed for the cubic packet, but we do not identify the
+reconstruction value with a point of that formal germ.
 
-The cycle argument starts from six elliptic quotients of the Fano surface.
-Their Rosati Gram matrix is \(6I-J\), and the geometric kernel lies in the
-exotic two-point complement of \(\PP^1(\F_2)\subset\PP^1(\F_4)\).  Its local
-graph slopes are finite etale at two and three.  The graph equations then
-make the descended divisor lattices rank-one generated.  Since rank-one
-coefficient divisors have square zero, \(\Theta^4/4!\) is an ordinary
-integral divisor product.
-
-The quantum argument counts primitive sixth-root eigenvalues of framed formal
-monodromy on the numerical small even quantum connection.  The actual Iritani
-and Iritani--Koto comparison isomorphisms use only integral powers of the
-original loop coordinate and preserve the framed operator after
-coefficient-field extension.  Hypothesis~4.7H supplies the remaining
-invariance under the positive-filtration reconstruction bulk displacements and
-the divisor-tagging step.  Under that hypothesis the count is additive through
-weak factorization.  Starting from Cai's displayed small-even matrix, the
-internal calculation gives the nonzero cubic count.  The special
-\(A_5\)-geometry enters only in the cycle argument; the unconditional cubic
-packet computation, Proposition~\ref{prop:cubic-packet}, applies to every
-smooth cubic threefold, while the one-stabilization conclusion remains
-conditional on Hypothesis~4.7H.
-
-On the pencil of Theorem~\ref{thm:separation-family} the universal
-\(CH_0\)-triviality conclusion holds unconditionally at every member; under
-Hypothesis~4.7H the one-stabilization irrationality conclusion holds there as
-well.
+Conditional on Hypothesis~5.7R, \(\nu_6\) satisfies the displayed
+projective-bundle and blowup formulas.  Conditional on both
+Hypotheses~5.7R and~5.7T, it is birationally invariant through dimension
+four.  These stronger results are not needed for
+Theorem~\ref{thm:every-cubic}; they supply instead a finer numerical package
+and, for genus eight, the conditional identity \(\nu_6(V)=2\).
 
 \subsection*{Relation with earlier rationality results}
 
 Clemens and Griffiths proved that every smooth complex cubic threefold is
-irrational by means of its intermediate Jacobian \cite{CG}.  That obstruction
-does not by itself control a product with projective space.  The very general
-cubic threefold is now known to be stably irrational
+irrational by means of its intermediate Jacobian \cite{CG}.  That
+obstruction does not by itself control a product with projective space.  The
+very general cubic threefold is now known to be stably irrational
 \cite[Corollary~1.4]{EdGFS}, but stable rationality remains open for an
-arbitrary smooth cubic threefold.  Cai recently recovered
-irrationality from the primitive-sixth-root formal monodromy of the cubic
-quantum connection \cite{Cai}.  Iritani and Iritani--Koto prove the quantum
+arbitrary smooth cubic threefold.  Cai recently recovered irrationality
+from the primitive-sixth-root formal monodromy of the cubic quantum
+connection \cite{Cai}.  Iritani and Iritani--Koto prove the quantum
 \(D\)-module decompositions for blowups and projective bundles
-\cite{IritaniBlowup,IritaniKoto}; Katzarkov--Kontsevich--Pantev--Yu identify
-the nef-canonical normal form used for low-dimensional centers
-\cite{KKPYY}.  Conditional Theorem~\ref{thm:every-cubic} combines these inputs
-at the next dimension; Hypothesis~4.7H isolates the remaining
-positive-filtration bulk-displacement step.
+\cite{IritaniBlowup,IritaniKoto}; the ordinary Hodge-atom package of
+Katzarkov--Kontsevich--Pantev--Yu \cite{KKPYY} packages these decompositions
+into birational atomic data.  Theorem~\ref{thm:every-cubic} uses that
+ordinary package together with the new rank-two residue discriminant,
+without the enhanced Serre-automorphism machinery of \cite{KKPYY} and
+without transporting framed monodromy through reconstruction displacements.
 
 On the cycle side, Voisin reduces universal \(CH_0\)-triviality of a cubic
 threefold to algebraicity of the primitive minimal class of its intermediate
-Jacobian \cite{Voisin}.  Beckmann--de Gaay Fortman place such minimal classes
-in a general integral-Fourier framework \cite{BdGF}.  For the very general
-cubic threefold the minimal class is not algebraic: every curve class on the
-intermediate Jacobian is an even multiple of it, so a very general cubic
-threefold admits no decomposition of the diagonal
-\cite[Theorem~1.3 and Corollary~1.4]{EdGFS}.  What Voisin's criterion leaves is
-the countable union of moduli subvarieties on which the class is algebraic.
-Known pieces of that locus include Voisin's components of codimension at most
-three, used in Corollary~\ref{cor:voisin-separation}
-\cite[Theorem~4.5 and Lemma~4.6]{Voisin}, the almost-diagonal cubics of
-\cite{CT}, and the coprime-degree family of \cite{YYZ}, which its authors
-already place inside Voisin's locus.  We do not claim that
-Theorem~\ref{thm:six-axis-divided-powers} produces universally
-\(CH_0\)-trivial cubic threefolds that were not already known.  Its
-contribution is a uniform proof along one explicit pencil, from the six-axis
-integral lattice rather than from an odd-degree isogeny to a curve Jacobian,
-from separated variables, or from a unirational parametrization.  One concrete
-distinction from Voisin's construction is the parity: hers begins with an
-odd-degree polarized isogeny from a curve Jacobian, while the six-axis isogeny
-has degree \(6^4\).  Another is the shape of the pulled-back polarization,
-which here is the nonscalar form \(6I_5-J_5\) rather than a multiple of a
-product principal polarization.  The six elliptic
-quotients supplied by Roulleau and the special period locus isolated by
-Hartlieb make the class explicit: it belongs to the
-ordinary integral divisor-product lattice for every smooth member of the
-nonstandard \(A_5\)-pencil.
+Jacobian \cite{Voisin}.  Beckmann--de Gaay Fortman place such minimal
+classes in a general integral-Fourier framework \cite{BdGF}.  For the very
+general cubic threefold the minimal class is not algebraic: every curve
+class on the intermediate Jacobian is an even multiple of it, so a very
+general cubic threefold admits no decomposition of the diagonal
+\cite[Theorem~1.3 and Corollary~1.4]{EdGFS}.  Known pieces of the algebraic
+locus include Voisin's components of codimension at most three, the
+almost-diagonal cubics of \cite{CT}, and the coprime-degree family of
+\cite{YYZ}.  Theorem~\ref{thm:six-axis-divided-powers} places the
+nonstandard \(A_5\)-curve in the same algebraic-minimal-class locus by a
+uniform integral argument, and
+Proposition~\ref{prop:A5-nonseparated} shows that all but finitely many
+moduli points on that pencil lie outside the separated-variable locus
+covered by \cite{CT}.  Thus for a general member the six-axis construction
+accounts for universal \(CH_0\)-triviality in a case not covered by that
+criterion.  We do not claim that the \(A_5\)-curve is generically disjoint
+from the coprime-degree locus of \cite{YYZ} or from every other previously
+known part of Voisin's algebraic-minimal-class locus.
 
 \subsection*{Proof map}
 
 Section~\ref{sec:envelope} computes the six-axis polarization and identifies
-the exotic cubic gluing.  Section~\ref{sec:minimal-class} proves
-the local divisor-product theorem and applies it to the primitive minimal
-class.  Section~\ref{sec:one-step} defines the framed multiplicity, proves its
-invariance under the regular comparison isomorphisms, computes \(\nu_6=2\) for
-every smooth cubic threefold, and reduces the one-stabilization irrationality
-statement to Hypothesis~4.7H on the positive-filtration reconstruction
-displacement.  The final section combines the two
-detectors and records the exact scope boundary.
+the exotic cubic gluing.  Section~\ref{sec:minimal-class} proves the local
+divisor-product theorem, applies it to the primitive minimal class, and
+shows that the resulting \(A_5\)-curve is generically outside the
+separated-variable locus.
+Section~\ref{sec:atomic-one-step} proves Theorem~\ref{thm:every-cubic}
+unconditionally from ordinary Hodge atoms and a rank-two residue
+discriminant, with the small cubic block reduction isolated for later reuse.
+Section~\ref{sec:framed-monodromy} defines the finer invariant \(\nu_6\),
+proves exact low-degree shift and projective-space product formulas, records
+the formal-germ rank-two rigidity theorem and the two residual hypotheses,
+and computes \(\nu_6(X)=2\) and \(\nu_6(X\times\PP^1)=4\) from the same
+cubic packet.  The final section combines the
+unconditional irrationality theorem with the cycle-theoretic results and
+records the exact scope of the conditional framed refinement.

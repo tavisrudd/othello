@@ -1,0 +1,98 @@
+\section{The separation theorem}
+\label{sec:synthesis}
+
+The irrationality input in this section is now unconditional:
+Theorem~\ref{thm:every-cubic} applies to every smooth cubic threefold.  The
+universal \(CH_0\)-triviality inputs are independent classical or
+cycle-theoretic statements, and pass to the product by the projective-bundle
+formula for Chow groups.
+
+\begin{proof}[Proof of Corollary~\ref{cor:voisin-separation}]
+Voisin produces a nonempty countable union of subvarieties of codimension at
+most three in the moduli space of smooth cubic threefolds along which the
+primitive minimal class \(\Theta^4/4!\) is algebraic, hence along which
+\(CH_0\) is universally trivial \cite[Theorem~4.5 and Lemma~4.6]{Voisin}.
+The projective-bundle formula supplies universal \(CH_0\)-triviality of the
+product, and Theorem~\ref{thm:every-cubic} supplies its irrationality.
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{cor:fermat-separation}]
+The Fermat equation is a sum of five forms in separated single variables, so
+\cite{CT} gives universal \(CH_0\)-triviality; the projective-bundle formula
+passes it to the product.  Irrationality follows from
+Theorem~\ref{thm:every-cubic}.
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{cor:coprime-separation}]
+The cubics of \cite[Theorem~3.3]{YYZ} carry unirational parametrizations of
+degrees two and three, and \cite[Corollary~3.5]{YYZ} keeps both degrees on
+\(X\times\PP^m\).  Parametrizations of coprime degrees give a decomposition
+of the diagonal and hence universal \(CH_0\)-triviality
+\cite[Section~1]{YYZ}.  Theorem~\ref{thm:every-cubic} gives irrationality of
+\(X\times\PP^1\).
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:separation-family}]
+Corollary~\ref{cor:universal-ch0} gives universal \(CH_0\)-triviality of
+\(X_b\), and the projective-bundle formula gives the same property for
+\(X_b\times\PP^1\).  Theorem~\ref{thm:every-cubic} proves that this
+fourfold is irrational.  Non-isotriviality follows from the nonconstant
+intermediate-Jacobian period map on the \(A_5\)-component: Hartlieb proves
+that the closure of its image is a one-dimensional special subvariety
+\cite[Proposition~5.7]{Hartlieb}.  Finally,
+Proposition~\ref{prop:A5-nonseparated} shows that all but finitely many
+points of this moduli curve lie outside the separated-variable locus.
+\end{proof}
+
+The two mechanisms are now independent without any standing hypothesis.  On
+the cycle side, algebraicity of \(\Theta^4/4!\) removes the
+universal-\(CH_0\) obstruction.  On the quantum side, the ordinary cubic
+Hodge atom \(\alpha_X\), decorated by
+\(\delta^\sharp(\alpha_X)=4/9\), cannot occur in dimension at most two and
+therefore obstructs rationality of the stabilized fourfold.  The special
+\(A_5\)-geometry enters only in the cycle argument; the atom obstruction
+applies to every smooth cubic threefold.  The cycle construction has an
+independent payoff: by Proposition~\ref{prop:A5-nonseparated}, for all but
+finitely many moduli points of the \(A_5\)-curve this universal
+\(CH_0\)-triviality is not accounted for by Colliot-Th\'el\`ene's
+separated-variable criterion.
+
+The framed invariant \(\nu_6\) supplies a finer, partially conditional
+view of the same small quantum packet.  Its values \(\nu_6(X)=2\) and
+\(\nu_6(X\times\PP^1)=4\) are unconditional for every smooth cubic
+threefold by Proposition~\ref{prop:cubic-packet} and
+Corollary~\ref{cor:cubic-product-nu}.  Hypothesis~5.7R is used only for the
+residual reconstruction-tail step in the operation formulas.  The direct
+specialization argument of Proposition~\ref{prop:direct-specialized-lowdim}
+removes Hypothesis~5.7T for nef-canonical targets, \(\PP^1\), \(\PP^2\),
+and, assuming 5.7R, ruled surfaces over positive-genus curves; 5.7T remains
+only for rational ruled and nonminimal surface centers in the present proof.
+Conditional on both hypotheses, \(\nu_6\) is birationally invariant through
+dimension four.  Neither hypothesis is a condition on any separation
+statement in this section.
+
+For comparison, the two threefold-level quantities are logically
+independent.  If \(U(Y)\) denotes the indicator of universal
+\(CH_0\)-triviality, Corollary~\ref{cor:p3-nu6} gives
+\(\nu_6(\PP^3)=0\) unconditionally, while
+Proposition~\ref{prop:cubic-packet} gives \(\nu_6=2\) for every cubic.
+Consequently
+\[
+ \bigl(U(Y),\nu_6(Y)\bigr)=
+ \begin{cases}
+  (1,0),&Y=\PP^3,\\
+  (1,2),&Y\text{ is a smooth member of the }A_5\text{-family},\\
+  (0,2),&Y\text{ is a very general cubic threefold}.
+ \end{cases}
+\]
+Voisin's criterion \cite[Corollary~4.4]{Voisin} and the evenness theorem
+\cite[Theorem~1.3 and Corollary~1.4]{EdGFS} give the last line.  Thus neither
+universal \(CH_0\)-triviality nor \(\nu_6\) determines the other.
+
+For \(X\times\PP^m\) with \(m\ge2\), neither obstruction used here proves
+stable irrationality.  The ordinary atom criterion permits a dimension-three
+representative, which the cubic atom already has, while the conditional
+framed weak-factorization argument may encounter dimension-three centers
+carrying primitive-sixth packets.  Likewise, the fibrewise minimal-class
+argument gives no relative universal cycle over the pencil.  These are
+separate problems and are not implicit in the theorem above.
