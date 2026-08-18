@@ -84,5 +84,8 @@ the orphaned machinery themes.
 
 ## Export status
 
-Not exported.  The paper repository under `~/src/math-papers/` is behind the
-authority.
+Exported.  The standalone paper repository
+`~/src/math-papers/cubic-stabilization-epilogue` was synchronized from authority
+`a470f773b` at its commit `d58e5a4`, the export manifest verifies, and the
+repository's own `make check`, pinned Lean build, and axiom-log replay agree
+with the authority over 190 reviewer terminals.
