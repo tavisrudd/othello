@@ -40,6 +40,7 @@ operator]\label{lem:euler-sign}
   characteristicDiscriminant_under_root_sign_reversal,%
   residueDiscriminant_under_sign_reversal,%
   characteristicDiscriminant_under_odd_coefficient_sign_reversal}%
+\imports{KKPYY:maximal-f-bundle, KKPYY:amodel-connection}%
 Let $(\mathcal H,\nabla)/B$ be the maximal $A$-model $F$-bundle in the
 conventions displayed in \cite{KKPYY}.  Let $E$ be the intrinsic Euler field
 of the associated maximal $F$-manifold and let
@@ -84,6 +85,7 @@ from the small point is used.
 \lean{hodgeFixedSubalgebra_closed_under_eulerMultiplication,%
   hodgeFixedSubalgebra_eigenvector_transfers,%
   hodgeFixedTangentSpace_span_and_finrank, truncatedHyperplaneAlgebra_model}%
+\imports{KKPYY:maximal-f-bundle, KKPYY:sec-5.2.2}%
 Let $B_X^{\Hod}$ be the Hodge-fixed locus of the maximal $A$-model
 $F$-bundle of a smooth projective variety $X$.  In the notation of
 \cite[Section~5.2.2]{KKPYY}, its tangent space is obtained from
@@ -131,6 +133,7 @@ is entirely a small-connection calculation and is unconditional.
 \coverage{fragment}%
 \lean{cubicSmallEven_blockReduction,%
   cubicZeroBlock_modifiedResidue_indicialPolynomial}%
+\imports{Cai:small-even-connection}%
 Let \(X\subset\PP^4\) be a smooth cubic threefold, let \(P=H|_X\), choose
 the line class \(\ell\) with \(P\cdot\ell=1\), and put \(q=Q^\ell\) and
 \(r=(3q)^{1/2}\).  After adjoining \(r\) to the Novikov coefficient field,
@@ -260,6 +263,7 @@ and let $\Delta=\disc(P)$.
   eulerFrame_discriminant_differential,%
   eulerFrame_discriminant_eq_zero_of_vanishing_at_base_point,%
   eulerFrame_data_nonempty}%
+\imports{DavidHertling:euler-witt-identities}%
 Assume $U$ is regular at $p\in M$.  On the germ of $M$ at $p$,
 \begin{align}
   X_0(\Delta)&=0,\label{eq:disc0}\\
@@ -454,6 +458,7 @@ example.
   cubicZeroPacket_component_excludes_rankOne_branches,%
   cubicZeroPacket_parityRanks_eq_two_and_ten,%
   cubicThreefold_totalChernClass_uniqueness}%
+\imports{KKPYY:def-5.21, KKPYY:prop-5.23}%
 For every smooth cubic threefold $X$, the small hyperplane point
 $b\in B_X^{\Hod}$ lies in the maximal-eigenvalue locus $U_X$.  Over $b$ the
 unramified reduced spectral cover has two rank-one branches corresponding to
@@ -507,6 +512,7 @@ complex-analytic discussion of the pairing.  Define the $u$-sesquilinear pairing
 \begin{lemma}[Algebraic horizontality]\label{lem:horiz}
 \coverage{fragment}%
 \lean{quantumPairing_horizontality_of_selfAdjoint_multiplication}%
+\imports{KKPYY:sec-3.5.2}%
 The pairing $\psi$ is horizontal for the non-archimedean quantum connection.
 No convergence assumption is required.
 \end{lemma}
@@ -777,6 +783,7 @@ then zero, so the function is constant on each connected chart.
 \label{prop:residue-discriminant-exponents}
 \coverage{fragment}%
 \lean{residueDiscriminant_eq_squared_eigenvalue_separation}%
+\imports{PutSinger:ch-3}%
 Fix a point of $\mathcal U^\times$.  Let $K$ be its coefficient field and
 work in an algebraic closure $\overline K$ over which the residue $R$ splits.
 Let $\rho_1,\rho_2$ be the eigenvalues of the residue of the canonical
@@ -837,6 +844,7 @@ first record the gluing point implicit in the spectral decomposition.
 \begin{lemma}[Gluing of a separated spectral factor]\label{lem:factor-glue}
 \coverage{fragment}%
 \lean{atomicFactor_residueDiscriminant_invariant_under_blockDiagonal_frame_change}%
+\imports{KKPYY:prop-5.23}%
 Over the unramified locus $U_X$, the local $F$-bundle factors belonging to a
 fixed connected component $\mathcal U$ of the reduced spectral cover glue,
 up to regular block-diagonal change of frame.  In particular any
@@ -873,6 +881,7 @@ factor glue along its connected component $\mathcal U$.
 \label{lem:crossing}
 \coverage{fragment}%
 \lean{atomicResidueDiscriminant_constant_on_formal_germ}%
+\imports{Conrad:lem-2.1.4}%
 Assume $N$ is generically nonzero on the connected spectral component
 $\mathcal U$.  Then $\delta^\sharp$ extends as a meromorphic function on
 $\mathcal U$ and is constant there.  In particular it is independent of the
@@ -915,6 +924,7 @@ by points at which $N=0$.
 \begin{proposition}[Atomic residue discriminant]\label{prop:atom-invariant}
 \coverage{fragment}%
 \lean{atomicResidueDiscriminant_invariant_under_frame_change}%
+\imports{KKPYY:prop-5.22}%
 Let $\alpha$ be an ordinary Hodge atom whose associated geometric atomic
 $F$-bundle has even rank two and whose centered leading operator is
 generically nonzero nilpotent.  Then the number $\delta^\sharp(\alpha)$
@@ -1062,6 +1072,7 @@ well-definedness of $\delta^\sharp$ on ordinary Hodge atoms.  We have proved:
 \begin{proposition}\label{prop:no-curve}
 \coverage{conditional_deduction}%
 \lean{cubicAtom_not_represented_by_curve}%
+\imports{Cai:curve-calculation}%
 The cubic atom $\alpha_X$ is not represented by any smooth projective
 variety of dimension at most one.
 \end{proposition}
@@ -1071,6 +1082,7 @@ variety of dimension at most one.
 \begin{proposition}\label{prop:no-surface}
 \coverage{conditional_deduction}%
 \lean{cubicAtom_not_represented_by_surface}%
+\imports{KKPYY:lem-5.24, KKPYY:prop-5.30}%
 The atom $\alpha_X$ is not represented by a smooth projective surface.
 Together with Proposition~\ref{prop:no-curve} and additivity for disjoint
 unions, this excludes every smooth projective variety of dimension at most

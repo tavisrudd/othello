@@ -29,6 +29,24 @@ formalization flag, because a statement here may also be represented by a
 strictly weaker fragment or by a conditional deduction whose external premises
 are exposed in the theorem type.
 
+Three further annotations record the rest of a statement's provenance, and take
+identifiers only.  `\uses` names the statements a result depends on, inside the
+statement body for a conceptual dependency and inside a proof for a logical one.
+`\imports` names the external results it uses, resolved in
+`verification/imported-sources.json`; each entry there records the bibliography
+key, the pinpoint, the form in which the result is used, and the conventions of
+framing, coordinates, and normalization that must be matched for the use to be
+valid, together with how this manuscript matches each one.  `\evidence` names
+the computational evidence bundles a statement rests on, resolved in
+`verification/evidence.json`; each entry there records the bundle's role, its
+tracked checksum manifest, and the commands that replay it.  No statement in
+this manuscript carries an evidence annotation, because its proof spine invokes
+no computation as a premise; the registry is present so that any statement which
+later does must name a bundle rather than describe one in prose.  The checker
+resolves every annotated identifier and rejects an unknown one, a bibliography
+key absent from the manuscript, an imported source with no recorded conventions,
+and an evidence bundle with no checksum manifest or no replay command.
+
 Checked coverage snapshot: 50 claims; 10 absent; 21 fragmentary; 18 conditional;
 1 complete; 220 reviewer terminals, of which 46 are machinery serving no current
 manuscript claim.

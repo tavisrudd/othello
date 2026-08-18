@@ -1,0 +1,5 @@
+{
+  "schema": "cubic-stabilization-epilogue-evidence-v1",
+  "note": "The proof spine of this manuscript is structural: no enumeration, certificate, or symbolic computation is invoked as a premise of any statement, so no statement carries an evidence annotation. The registry is present so that a statement which later rests on a computation must name a bundle here, with its role, its tracked checksum manifest, and the command that replays it.",
+  "evidence": {}
+}

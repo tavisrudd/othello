@@ -1,0 +1,193 @@
+{
+  "schema": "cubic-stabilization-epilogue-imported-sources-v1",
+  "sources": {
+    "KKPYY:maximal-f-bundle": {
+      "citation": "KKPYY",
+      "pinpoint": "Section 5.2, construction of the maximal A-model F-bundle",
+      "used": "Existence of the non-archimedean maximal A-model F-bundle of a smooth projective variety, its spectral decomposition, and the equivariance of its multiplication under the Hodge action.",
+      "conventions": [
+        {
+          "aspect": "coefficients",
+          "requirement": "The bundle is built over the Novikov coefficient field, not over a convergent or archimedean base.",
+          "matched": "All statements here are read over the same non-archimedean coefficients; no convergence is asserted anywhere in this section."
+        },
+        {
+          "aspect": "maximality",
+          "requirement": "The bundle is the maximal one, so its base carries the full bulk deformation rather than the small locus only.",
+          "matched": "The base point used here is the small hyperplane point of the Hodge-fixed locus inside that maximal base."
+        }
+      ]
+    },
+    "KKPYY:amodel-connection": {
+      "citation": "KKPYY",
+      "pinpoint": "Section 5.2, the displayed A-model connection",
+      "used": "The expansion of the connection in the loop coordinate, whose coefficient of the inverse square of that coordinate is Euler multiplication with a sign.",
+      "conventions": [
+        {
+          "aspect": "sign",
+          "requirement": "The displayed connection reads as the derivation in the loop coordinate minus the inverse square of that coordinate times Euler multiplication, plus terms of order at least minus one.",
+          "matched": "Lemma lem:euler-sign turns that sign into the dictionary between the residual endomorphism and Euler multiplication, and every spectral quantity used later is invariant under it."
+        },
+        {
+          "aspect": "loop coordinate",
+          "requirement": "The loop coordinate of the F-bundle is the one in which the connection is displayed.",
+          "matched": "It is identified with the loop coordinate of the cubic small even system when the abstract construction is specialized."
+        }
+      ]
+    },
+    "KKPYY:sec-5.2.2": {
+      "citation": "KKPYY",
+      "pinpoint": "Section 5.2.2",
+      "used": "The Hodge-fixed locus of the maximal A-model F-bundle and the description of its tangent space by the rational classes of Hodge type (i, i).",
+      "conventions": [
+        {
+          "aspect": "normalization",
+          "requirement": "The tangent space of the fixed locus is the Novikov extension of the rational (i, i) classes, not of the full even cohomology.",
+          "matched": "For a smooth cubic threefold the Lefschetz theorem makes the two agree, which is where that identification is used and nowhere else."
+        }
+      ]
+    },
+    "KKPYY:sec-3.5.2": {
+      "citation": "KKPYY",
+      "pinpoint": "Section 3.5.2",
+      "used": "In the non-archimedean construction, the inverse Gram matrix of the Poincare form is a constant analytic section and is used to define quantum multiplication.",
+      "conventions": [
+        {
+          "aspect": "framing",
+          "requirement": "Constancy of the Gram matrix holds in the standard cohomology frame.",
+          "matched": "Horizontality of the pairing is proved here directly and coefficientwise in that frame, rather than imported from the later convergent complex-analytic discussion."
+        }
+      ]
+    },
+    "KKPYY:def-5.21": {
+      "citation": "KKPYY",
+      "pinpoint": "Definition 5.21",
+      "used": "The definition of an ordinary Hodge atom as a connected component of the reduced spectral cover over the maximal-eigenvalue locus.",
+      "conventions": [
+        {
+          "aspect": "domain",
+          "requirement": "The atom is defined over the locus where the number of distinct eigenvalues is globally maximal.",
+          "matched": "Membership of the small hyperplane point in that locus is established before the atom is named."
+        }
+      ]
+    },
+    "KKPYY:prop-5.22": {
+      "citation": "KKPYY",
+      "pinpoint": "Proposition 5.22, and the blowup and projective-bundle formulas used in its proof",
+      "used": "A Hodge atom carries a well-defined geometric atomic F-bundle equivalence class, and the atomic composition transforms by the displayed formulas under a blowup and under a projective bundle.",
+      "conventions": [
+        {
+          "aspect": "equivalence",
+          "requirement": "The class is well defined up to isomorphism of atomic F-bundles, so any invariant read from it must be invariant under such an isomorphism.",
+          "matched": "The residue discriminant is proved invariant under the frame change and scalar recentering such an isomorphism induces."
+        }
+      ]
+    },
+    "KKPYY:prop-5.23": {
+      "citation": "KKPYY",
+      "pinpoint": "Proposition 5.23",
+      "used": "The underlying Hodge representation of an atom is an atom invariant, and its proof constructs the generalized-eigenspace subbundle attached to each component of the reduced spectral cover.",
+      "conventions": [
+        {
+          "aspect": "parity",
+          "requirement": "The invariant records the representation, hence the even and odd ranks separately.",
+          "matched": "The parity ranks two and ten are used only through that invariance."
+        }
+      ]
+    },
+    "KKPYY:lem-5.24": {
+      "citation": "KKPYY",
+      "pinpoint": "Lemma 5.24",
+      "used": "The atomic composition of a smooth projective variety with nef canonical class.",
+      "conventions": [
+        {
+          "aspect": "hypothesis",
+          "requirement": "Nefness is required of the canonical class of the variety carrying the atom.",
+          "matched": "It is applied only to minimal models produced by the classification step of the surface exclusion."
+        }
+      ]
+    },
+    "KKPYY:prop-5.30": {
+      "citation": "KKPYY",
+      "pinpoint": "Proposition 5.30",
+      "used": "The ordinary non-rationality criterion: a smooth projective variety carrying an atom that occurs on no variety of dimension at least two smaller is not rational.",
+      "conventions": [
+        {
+          "aspect": "dimension shift",
+          "requirement": "The criterion compares the carrier with varieties of dimension at most two below it.",
+          "matched": "The exclusion proved here is for representatives of dimension at most two below the stabilized fourfold, which is dimension at most two."
+        }
+      ]
+    },
+    "Cai:small-even-connection": {
+      "citation": "Cai",
+      "pinpoint": "Section 3, pages 4 to 5",
+      "used": "The small even quantum connection matrices of a smooth cubic threefold in the displayed frame.",
+      "conventions": [
+        {
+          "aspect": "coordinates",
+          "requirement": "The displayed system uses the loop coordinate of that source and the hyperplane class of the threefold.",
+          "matched": "The loop coordinate is identified with the loop coordinate of the abstract rank-two construction when it is specialized."
+        },
+        {
+          "aspect": "normalization",
+          "requirement": "The Novikov variable is the one attached to the line class normalized against the hyperplane class, and its square root of three times it is adjoined.",
+          "matched": "The line class is fixed by pairing one with the hyperplane class, and the square root is adjoined to the coefficient field before the eigenvalues are read."
+        },
+        {
+          "aspect": "framing",
+          "requirement": "The block reduction is performed in a frame reached by a constant change of basis followed by a normalized gauge that is the identity to leading order.",
+          "matched": "Both steps are carried out explicitly here, so the only imported datum is the connection matrix itself."
+        }
+      ]
+    },
+    "Cai:curve-calculation": {
+      "citation": "Cai",
+      "pinpoint": "Section 4",
+      "used": "The quantum connection of a smooth projective curve and the resulting residue data in the genus at least two case.",
+      "conventions": [
+        {
+          "aspect": "normalization",
+          "requirement": "The curve calculation is stated in the same loop coordinate and Novikov normalization as the threefold calculation.",
+          "matched": "The curve residue is used only through its discriminant, which is invariant under the rescalings those normalizations allow."
+        }
+      ]
+    },
+    "Conrad:lem-2.1.4": {
+      "citation": "Conrad",
+      "pinpoint": "Lemma 2.1.4",
+      "used": "On a connected normal rigid analytic space, an analytic subset containing a nonempty admissible open is the whole space.",
+      "conventions": [
+        {
+          "aspect": "hypothesis",
+          "requirement": "Connectedness and normality of the ambient rigid space are required.",
+          "matched": "The spectral components used here are smooth, and smooth rigid spaces are normal."
+        }
+      ]
+    },
+    "DavidHertling:euler-witt-identities": {
+      "citation": "DavidHertling",
+      "pinpoint": "Identities (19), (20), (24), and (25)",
+      "used": "The identities satisfied by the canonical powers of the Euler field of an F-manifold.",
+      "conventions": [
+        {
+          "aspect": "normalization",
+          "requirement": "The Euler field is normalized by the two identities that its Lie derivative reproduces the multiplication and that its bracket with the unit is the unit.",
+          "matched": "The intrinsic Euler field of the maximal F-manifold satisfies both, and no coordinate formula away from the small point is used."
+        }
+      ]
+    },
+    "PutSinger:ch-3": {
+      "citation": "PutSinger",
+      "pinpoint": "Chapter 3",
+      "used": "The formal classification of regular singular differential modules.",
+      "conventions": [
+        {
+          "aspect": "normalization",
+          "requirement": "Exponents are classified modulo the integers.",
+          "matched": "Only the difference of the two exponents of the modified rank-two module is used, and it is read modulo that ambiguity."
+        }
+      ]
+    }
+  }
+}

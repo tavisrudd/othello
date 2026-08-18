@@ -25,6 +25,9 @@ AXIOM_AUDIT = (
     / "Verification"
     / "AxiomAudit.lean"
 )
+IMPORTED_SOURCES = ROOT.parent / "verification" / "imported-sources.json"
+EVIDENCE = ROOT.parent / "verification" / "evidence.json"
+MANUSCRIPT = ROOT.parent / "cubic_stabilization_epilogue.tex"
 LEAN_README = ROOT / "README.md"
 VERIFICATION_README = ROOT.parent / "verification" / "README.md"
 
@@ -85,6 +88,65 @@ def annotation(label: str, body: str, macro: str, arity_optional: bool = False) 
     if len(matches) > 1:
         fail(f"{label} carries {len(matches)} \\{macro} annotations")
     return matches[0]
+
+
+def registry(path: Path, key: str, schema: str) -> dict[str, dict]:
+    """Read one identifier-keyed provenance registry."""
+    manifest = json.loads(path.read_text(encoding="utf-8"))
+    if manifest.get("schema") != schema:
+        fail(f"{path.name} has an unexpected schema")
+    entries = manifest.get(key)
+    if not isinstance(entries, dict):
+        fail(f"{path.name} has no {key} map")
+    return entries
+
+
+def check_imported_sources(entries: dict[str, dict]) -> None:
+    """Every imported source names a bibliography key, a pinpoint, and its conventions."""
+    bibliography = set(re.findall(r"\\bibitem\{([^}]+)\}", MANUSCRIPT.read_text(encoding="utf-8")))
+    for identifier, entry in entries.items():
+        for field in ("citation", "pinpoint", "used"):
+            if not isinstance(entry.get(field), str) or not entry[field].strip():
+                fail(f"imported source {identifier} has no nonempty {field}")
+        if entry["citation"] not in bibliography:
+            fail(f"imported source {identifier} cites unknown bibliography key {entry['citation']}")
+        conventions = entry.get("conventions")
+        if not isinstance(conventions, list) or not conventions:
+            fail(f"imported source {identifier} records no conventions")
+        for convention in conventions:
+            for field in ("aspect", "requirement", "matched"):
+                if not isinstance(convention.get(field), str) or not convention[field].strip():
+                    fail(f"imported source {identifier} has a convention with no {field}")
+
+
+def check_evidence(entries: dict[str, dict]) -> None:
+    """Every evidence bundle names its role, its checksum manifest, and its replay commands."""
+    for identifier, entry in entries.items():
+        for field in ("role", "checksum_manifest"):
+            if not isinstance(entry.get(field), str) or not entry[field].strip():
+                fail(f"evidence bundle {identifier} has no nonempty {field}")
+        manifest_path = ROOT.parent / entry["checksum_manifest"]
+        if not manifest_path.is_file():
+            fail(f"evidence bundle {identifier} names a missing checksum manifest")
+        commands = entry.get("commands")
+        if not isinstance(commands, list) or not commands:
+            fail(f"evidence bundle {identifier} records no replay command")
+
+
+def annotated_references(label: str, body: str, macro: str, known: set[str], kind: str) -> None:
+    """Every identifier annotated by one macro resolves in its registry."""
+    payload = annotation(label, body, macro, arity_optional=True)
+    if payload is None:
+        return
+    cleaned = re.sub(r"%.*", "", payload)
+    identifiers = [part.strip() for part in cleaned.split(",") if part.strip()]
+    if not identifiers:
+        fail(f"{label} annotates an empty {kind} list")
+    for identifier in identifiers:
+        if identifier not in known:
+            fail(f"{label} annotates unknown {kind} {identifier!r}")
+    if len(set(identifiers)) != len(identifiers):
+        fail(f"{label} annotates a repeated {kind}")
 
 
 def annotated_claim(label: str, body: str, namespace: str) -> tuple[str, list[str]]:
@@ -244,6 +306,19 @@ def main() -> None:
             f"missing={sorted(expected_labels - set(labels))} "
             f"extra={sorted(set(labels) - expected_labels)}"
         )
+    imported_sources = registry(
+        IMPORTED_SOURCES, "sources", "cubic-stabilization-epilogue-imported-sources-v1"
+    )
+    check_imported_sources(imported_sources)
+    evidence_bundles = registry(
+        EVIDENCE, "evidence", "cubic-stabilization-epilogue-evidence-v1"
+    )
+    check_evidence(evidence_bundles)
+    for label, body in environments.items():
+        annotated_references(label, body, "imports", set(imported_sources), "imported source")
+        annotated_references(label, body, "evidence", set(evidence_bundles), "evidence bundle")
+        annotated_references(label, body, "uses", expected_labels, "manuscript label")
+
     registered: set[str] = set()
     for claim in claims:
         label = claim.get("manuscript_label")
@@ -332,6 +407,7 @@ def main() -> None:
     print(
         f"PASS mode={mode_name} sources={len(sources)} terminals={len(terminals)} "
         f"manuscript_claims={len(claims)} machinery={len(machinery)} "
+        f"imported_sources={len(imported_sources)} evidence={len(evidence_bundles)} "
         f"coverage={coverage_counts}"
     )
 
