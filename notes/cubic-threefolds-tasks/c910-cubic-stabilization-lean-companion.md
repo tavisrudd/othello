@@ -111,12 +111,17 @@ route: the residue discriminant of the cubic zero packet is `4/9`, of every
 curve residue is `0`, that separation with the parity ranks excludes
 representatives of dimension at most two, and the ordinary non-rationality
 criterion then gives irrationality of the stabilized fourfold.  Coverage after the priority 0b and 0d passes below is
-50 claims and 46 machinery rows over 190 terminals: 20 absent, 16 fragmentary,
-13 conditional, 1 complete; the paper is warning-free at 49 pages.  Report:
+50 claims and 46 machinery rows over 192 terminals: 18 absent, 16 fragmentary,
+15 conditional, 1 complete; the paper is warning-free at 49 pages.  Report:
 [`../2026-08-18-c910-atom-route-anchor.md`](../2026-08-18-c910-atom-route-anchor.md).
 The remaining work from the audit is `lem:disc`, `lem:spectrum-transfer`, the
-even-part refinement of `lem:orthogonal`, terminals for `prop:no-curve` and
-`prop:no-surface`, and the orphaned machinery themes.
+even-part refinement of `lem:orthogonal`, and the orphaned machinery themes.
+`prop:no-curve` and `prop:no-surface` are proved in
+`Quantum/LowDimensionalAtomRepresentatives.lean` from premises matching the
+manuscript's citations: the curve dichotomy carrying the projective-line and
+nef-canonical cases, the point-blowup descent, and the minimal-model
+classification.  Report:
+[`../2026-08-18-c910-low-dimensional-exclusions.md`](../2026-08-18-c910-low-dimensional-exclusions.md).
 
 The integral algebra includes the arbitrary-size DVR rank-one criterion,
 flattened split-coordinate coefficient lattices, an explicit invertible
@@ -476,7 +481,7 @@ they are done; they come from the 2026-08-18 gap audit.
    open in this item: the even-part refinement of `lem:orthogonal`, which needs
    a parity model and the assembly of block pairings into one matrix, and
    terminals for `prop:no-curve` and `prop:no-surface` sliced out of the
-   atom-route exclusion.  Reports:
+   atom-route exclusion, which landed separately.  Reports:
    [`../2026-08-18-c910-framed-route-and-rank-two-rigidity.md`](../2026-08-18-c910-framed-route-and-rank-two-rigidity.md),
    [`../2026-08-18-c910-highest-risk-items.md`](../2026-08-18-c910-highest-risk-items.md), and
    [`../2026-08-18-c910-pairing-horizontality.md`](../2026-08-18-c910-pairing-horizontality.md).
