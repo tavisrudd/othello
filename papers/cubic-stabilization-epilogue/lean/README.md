@@ -41,8 +41,8 @@ deduction as well: from the product formula, taken as a typed premise, Lean
 obtains the value four for the product of a cubic threefold with a projective
 line and the value zero for every projective space.
 
-Checked coverage snapshot: 50 claims; 25 absent; 12 fragmentary; 12 conditional;
-1 complete; 180 reviewer terminals, of which 46 are machinery serving no current
+Checked coverage snapshot: 50 claims; 22 absent; 14 fragmentary; 13 conditional;
+1 complete; 184 reviewer terminals, of which 46 are machinery serving no current
 manuscript claim.
 
 Those 46 are kernel-checked and reusable, and the claim map records for each one
@@ -503,7 +503,16 @@ The reviewer-facing terminals currently verify:
   projective four-space are proved rather than assumed, leaving the product
   formula, the point comparison, the exponent-to-monodromy passage, the
   birational input, the dimension bound, and the birational comparison supplied
-  by rationality as its premises.
+  by rationality as its premises;
+- the rank-two algebra of the atomic route: from self-adjointness of the
+  square-zero leading operator for an invertible pairing coefficient and the
+  constant coefficient of horizontality, the regular coefficient preserves the
+  nilpotent line; the residual pole of the base connection in the modified
+  lattice vanishes when the upper-right residue entry is invertible; an
+  entrywise additive Leibniz map carrying the residue to a commutator
+  annihilates the residue discriminant, so that invariant is constant along the
+  base; and the discriminant is the squared separation of the residue
+  eigenvalues and is insensitive to a scalar shift.
 
 The authoritative per-claim account is
 [`verification/claims.json`](verification/claims.json).  In particular, the

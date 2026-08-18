@@ -65,6 +65,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.PositiveFil
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.PositiveFiltrationLaurentEvaluation
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.PositiveEvaluatedFormalBaseShift
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CubicPacket
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.RankTwoResidueRigidity
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.GenusEightThreefold
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.UniversalCH0
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.SeparationFamily
@@ -5068,5 +5069,72 @@ theorem cubicThreefold_oneStep_not_rational_of_framed_product_inputs
   Applications.cubicThreefold_oneStep_not_rational_of_framed_product_inputs geometry
     input dimension birationalInput Rational exponentMonodromy smooth
     stabilizedDimension rationalComparison
+
+/-- Reviewer-facing statement that the regular coefficient of an even rank-two
+atomic factor preserves the nilpotent line.  The line is the image of the
+square-zero part `N` of the centered leading Euler operator, and the conclusion
+is stated as the matrix identity `N * A₀ * N = 0`.  The premises are the ones
+the manuscript obtains from horizontality of the Poincare pairing on a
+separated spectral factor: the leading pairing coefficient is invertible, `N` is
+self-adjoint for it, and the constant coefficient of horizontality holds.  Lean
+constructs neither the pairing nor the factor. -/
+theorem atomicRankTwo_regularCoefficient_preserves_nilpotentLine
+    {K : Type*} [Field K] {N P₀ P₁ A₀ : Matrix (Fin 2) (Fin 2) K}
+    (twoNeZero : (2 : K) ≠ 0)
+    (squareZero : N * N = 0) (nonzero : N ≠ 0)
+    (nondegenerate : P₀.det ≠ 0)
+    (selfAdjoint : N.transpose * P₀ = P₀ * N)
+    (constantCoefficient :
+      A₀.transpose * P₀ + P₀ * A₀ + N.transpose * P₁ - P₁ * N = 0) :
+    N * A₀ * N = 0 :=
+  Quantum.regularCoefficient_preserves_nilpotentLine twoNeZero squareZero nonzero
+    nondegenerate selfAdjoint constantCoefficient
+
+/-- Reviewer-facing regularity of the base connection after the elementary
+modification.  In the adapted frame the only possible pole is a multiple of the
+lower-left matrix unit, and the order `u ^ (-1)` coefficient of flatness in the
+modified lattice forces that multiple to vanish, because the upper-right entry
+of the residue is the unit coming from the square-zero leading operator. -/
+theorem atomicRankTwo_modifiedBase_pole_eq_zero
+    {K : Type*} [Field K] {R : Matrix (Fin 2) (Fin 2) K} {value : K}
+    (upperRightUnit : R 0 1 ≠ 0)
+    (flatness : Quantum.modifiedBasePole value +
+      (R * Quantum.modifiedBasePole value -
+        Quantum.modifiedBasePole value * R) = 0) :
+    value = 0 :=
+  Quantum.modifiedBasePole_eq_zero upperRightUnit flatness
+
+/-- Reviewer-facing constancy of the residue discriminant along the base.  A
+map of the coefficient ring that is additive and satisfies the Leibniz rule,
+applied entrywise, models a base derivation; the modified flatness equation
+says it carries the residue to a commutator with a regular matrix.  Lean proves
+that such a map annihilates the residue discriminant, which is the rigidity
+conclusion of the manuscript.  The differential-geometric passage from flatness
+to that commutator equation is not formalized. -/
+theorem atomicRankTwo_residueDiscriminant_constant_along_base
+    {A : Type*} [CommRing A] {derivation : A → A}
+    (additive : ∀ x y, derivation (x + y) = derivation x + derivation y)
+    (leibniz : ∀ x y, derivation (x * y) = derivation x * y + x * derivation y)
+    (R G : Matrix (Fin 2) (Fin 2) A)
+    (lax : R.map derivation = G * R - R * G) :
+    derivation (Quantum.residueDiscriminant R) = 0 :=
+  Quantum.lax_residueDiscriminant_map_eq_zero additive leibniz R G lax
+
+/-- Reviewer-facing exponent interpretation of the residue discriminant.  Over
+a coefficient ring in which the residue of the canonical modified lattice has
+eigenvalues `r₁` and `r₂`, counted with algebraic multiplicity, the residue
+discriminant is their squared separation, and it is unchanged by adding a
+scalar multiple of the identity to the residue.  The identification of the
+eigenvalue classes modulo the integers with the formal exponent classes of the
+centered rank-two module is not formalized. -/
+theorem residueDiscriminant_eq_squared_eigenvalue_separation
+    {A : Type*} [CommRing A] (R : Matrix (Fin 2) (Fin 2) A) (r₁ r₂ : A)
+    (traceValue : Matrix.trace R = r₁ + r₂) (detValue : R.det = r₁ * r₂) :
+    Quantum.residueDiscriminant R = (r₁ - r₂) ^ 2 ∧
+      ∀ shift : A, Quantum.residueDiscriminant
+        (R + shift • (1 : Matrix (Fin 2) (Fin 2) A)) =
+          Quantum.residueDiscriminant R :=
+  ⟨Quantum.residueDiscriminant_eq_sq_sub_of_trace_det R r₁ r₂ traceValue detValue,
+    Quantum.residueDiscriminant_add_scalar R⟩
 
 end TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue

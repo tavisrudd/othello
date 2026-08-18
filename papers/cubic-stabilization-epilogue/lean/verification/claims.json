@@ -333,30 +333,37 @@
     },
     {
       "manuscript_label": "lem:A0preserve",
-      "coverage": "absent",
-      "declarations": [],
-      "objects": "The regular coefficient of the centered rank-two connection and the nilpotent line of its leading operator over the punctured spectral component.",
-      "hypotheses": "The rank-two packet is separated from the rest of the spectrum and its leading operator is generically nonzero nilpotent.",
-      "conclusion": "The regular coefficient carries the nilpotent line into itself.",
-      "cautions": "Not formalized."
+      "coverage": "conditional_deduction",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.atomicRankTwo_regularCoefficient_preserves_nilpotentLine"
+      ],
+      "objects": "The square-zero part of the centered leading Euler operator of an even rank-two atomic factor, the first two coefficients of the horizontal Poincare pairing in a chosen frame, and the regular coefficient of the connection in the loop direction, all as two-by-two matrices over a field in which two is invertible.",
+      "hypotheses": "The leading operator part squares to zero and is nonzero; the leading pairing coefficient is invertible; the leading operator part is self-adjoint for it; and the constant coefficient of horizontality relates the regular coefficient, the two pairing coefficients, and the leading operator part.",
+      "conclusion": "The regular coefficient carries the nilpotent line into itself, in the equivalent matrix form that the leading operator part, the regular coefficient, and the leading operator part again have vanishing product.",
+      "cautions": "Lean does not construct the A-model F-bundle, the spectral cover, the atomic factor, or the Poincare pairing, and does not prove horizontality or nondegeneracy on a separated spectral factor; those supply the hypotheses. The line is presented as the image of the leading operator part rather than as a subobject of a geometric bundle."
     },
     {
       "manuscript_label": "prop:rank2-rigidity",
-      "coverage": "absent",
-      "declarations": [],
-      "objects": "The canonical elementary modification of the centered rank-two block, its residue, and the residue discriminant as a function on the punctured spectral component.",
-      "hypotheses": "The setting of the preceding lemmas on the punctured spectral component.",
-      "conclusion": "The modified connection is regular in every base direction, its residue varies by commutators with regular matrices, and the residue discriminant is annihilated by every base vector field.",
-      "cautions": "Not formalized."
+      "coverage": "fragment",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.atomicRankTwo_modifiedBase_pole_eq_zero",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.atomicRankTwo_residueDiscriminant_constant_along_base"
+      ],
+      "objects": "The residual pole of the base connection in the modified lattice, written as a multiple of the lower-left matrix unit in the adapted frame; the residue of the modified lattice; and an additive Leibniz map of the coefficient ring applied entrywise, modelling a base derivation.",
+      "hypotheses": "For the first terminal, the upper-right entry of the residue is invertible, which it is, being the unit coming from the square-zero leading operator, and the order minus-one coefficient of flatness in the modified lattice vanishes. For the second, the entrywise derivation carries the residue to its commutator with a supplied regular matrix.",
+      "conclusion": "The residual pole vanishes, so the base connection is regular after the modification; and the derivation annihilates the residue discriminant, so that invariant is constant along the base.",
+      "cautions": "Lean formalizes the two algebraic steps and the conclusion, not the surrounding geometry: it does not construct the modified lattice, derive the displayed flatness coefficients from a connection, prove that the commutator equation follows from flatness, or run the completed-local-ring argument that upgrades a vanishing derivative to local constancy on a chart. The commutant computation identifying the leading base coefficient as a multiple of the leading operator part is also not formalized."
     },
     {
       "manuscript_label": "prop:residue-discriminant-exponents",
-      "coverage": "absent",
-      "declarations": [],
-      "objects": "The residue of the canonical modified lattice, its eigenvalues in an algebraic closure of the coefficient field, and the formal exponent classes of the centered rank-two differential module.",
-      "hypotheses": "The residue splits over the algebraic closure at the chosen point.",
-      "conclusion": "The residue eigenvalue classes modulo the integers are the formal exponent classes of the centered module, and the residue discriminant is the squared difference of those eigenvalues.",
-      "cautions": "Not formalized. The companion has no formal exponent theory for differential modules at this level of generality."
+      "coverage": "fragment",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.residueDiscriminant_eq_squared_eigenvalue_separation"
+      ],
+      "objects": "The residue of the canonical modified lattice as a two-by-two matrix over a commutative ring, together with two ring elements presented as its eigenvalues through its trace and determinant.",
+      "hypotheses": "The trace of the residue is the sum of the two supplied elements and its determinant is their product, which is what splitting the characteristic polynomial supplies.",
+      "conclusion": "The residue discriminant is the squared separation of the two eigenvalues, and it is unchanged by adding a scalar multiple of the identity to the residue, so it is insensitive to a scalar normalization.",
+      "cautions": "Only the second assertion of the proposition is formalized. The identification of the eigenvalue classes modulo the integers with the formal exponent classes of the centered rank-two module rests on the formal classification of regular-singular differential modules, which Lean does not construct, and the meromorphic gauge implementing the modification is not represented."
     },
     {
       "manuscript_label": "lem:factor-glue",
