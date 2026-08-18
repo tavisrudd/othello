@@ -130,10 +130,12 @@ Two precision repairs followed the proofread and are in the manuscript:
 
 1. The opening sentence now binds the notation, "its intermediate Jacobian
    `J(X)`", which the new paragraph then uses.
-2. The joint criterion is now described with its ambient hypothesis —
-   Hodge-general Fano fourfolds *that are hyperplane sections of smooth Fano
-   fivefolds* — matching their Theorem 4.1 rather than describing it as a
-   criterion for Fano fourfolds in general.
+2. The joint criterion is no longer described as applying to Fano fourfolds
+   in general. The author's tightening carries the restriction as a hedge,
+   "certain Hodge-general Fano fourfolds", rather than spelling out the
+   hyperplane-section-of-a-Fano-fivefold hypothesis, and says "their
+   hypotheses include `b_3 = 0`" rather than naming that as the criterion's
+   only assumption — Theorem 4.1 has three.
 
 The manuscript remains 49 pages with `make check` green, and the standalone
 repository was re-synchronized and verified at 132 tracked files.
