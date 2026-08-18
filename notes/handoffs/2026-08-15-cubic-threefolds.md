@@ -98,7 +98,7 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   `Verification/AxiomAudit`; no duplicate under the shared
   `lean/TavisRuddFiniteGeom/` tree or a second Lean repository. The sources
   build through the guarded queue; `make check` and the axiom-log gate green
-  over 50 claims, 46 machinery rows, and 189 reviewer terminals; coverage 20
+  over 50 claims, 46 machinery rows, and 190 reviewer terminals; coverage 20
   absent / 16 fragmentary / 13 conditional / 1 complete. `thm:every-cubic` is
   anchored to the atomic route, the framed spine answers to its own manuscript
   theorem `thm:every-cubic-conditional` and is now assembled end to end on the
@@ -109,8 +109,11 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   diagonality of a pairing on separated spectral factors, the order comparison
   that selects the exotic gluing, and the order-by-order derivation of both
   pairing systems from horizontality, which closes the link from `lem:horiz`
-  through `lem:orthogonal` to `lem:A0preserve`. Next step is `lem:disc` and
-  `lem:spectrum-transfer`, or the unconditional half of `cor:v14-one-step`.
+  through `lem:orthogonal` to `lem:A0preserve`. The unconditional half of
+  `cor:v14-one-step` is also proved: the genus-eight flop makes the two
+  stabilizations birational and irrationality transports back from the cubic.
+  Next step is `lem:disc` and `lem:spectrum-transfer`, or terminals for
+  `prop:no-curve` and `prop:no-surface`.
   Card:
   `../cubic-threefolds-tasks/c910-cubic-stabilization-lean-companion.md`; gap audit
   `../2026-08-18-c910-post-restructure-gap-audit.md`; anchor report
@@ -120,7 +123,9 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   rank-two rigidity report
   `../2026-08-18-c910-framed-route-and-rank-two-rigidity.md`; highest-risk-items
   report `../2026-08-18-c910-highest-risk-items.md`; pairing-horizontality
-  report `../2026-08-18-c910-pairing-horizontality.md`; interim release report
+  report `../2026-08-18-c910-pairing-horizontality.md`; genus-eight
+  unconditional report `../2026-08-18-c910-genus-eight-unconditional.md`;
+  interim release report
   `../2026-08-12-c910-partial-lean-release.md`.
 - **C914 — active.** The `A_5`-pencil is proved to contain the Fermat cubic
   threefold, so it meets the already-known universally `CH_0`-trivial

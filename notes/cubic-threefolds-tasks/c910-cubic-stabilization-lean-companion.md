@@ -111,12 +111,12 @@ route: the residue discriminant of the cubic zero packet is `4/9`, of every
 curve residue is `0`, that separation with the parity ranks excludes
 representatives of dimension at most two, and the ordinary non-rationality
 criterion then gives irrationality of the stabilized fourfold.  Coverage after the priority 0b and 0d passes below is
-50 claims and 46 machinery rows over 189 terminals: 20 absent, 16 fragmentary,
+50 claims and 46 machinery rows over 190 terminals: 20 absent, 16 fragmentary,
 13 conditional, 1 complete; the paper is warning-free at 49 pages.  Report:
 [`../2026-08-18-c910-atom-route-anchor.md`](../2026-08-18-c910-atom-route-anchor.md).
 The remaining work from the audit is `lem:disc`, `lem:spectrum-transfer`, the
-missing unconditional half of `cor:v14-one-step`, the even-part refinement of
-`lem:orthogonal`, and the orphaned machinery themes.
+even-part refinement of `lem:orthogonal`, terminals for `prop:no-curve` and
+`prop:no-surface`, and the orphaned machinery themes.
 
 The integral algebra includes the arbitrary-size DVR rank-one criterion,
 flattened split-coordinate coefficient lattices, an explicit invertible
@@ -425,9 +425,13 @@ they are done; they come from the 2026-08-18 gap audit.
 0a. **Re-anchor the headline — done 2026-08-18.**  The atom-route deduction is
    in `Applications/CubicAtomOneStep.lean` over the ledger in
    `Quantum/OrdinaryAtomLedger.lean`, and the residue arithmetic is in
-   `Quantum/AtomicResidueDiscriminant.lean`.  Still open from this item: the
-   unconditional half of `cor:v14-one-step`, which compares the two projective
-   bundles birationally and applies the atomic one-step theorem.
+   `Quantum/AtomicResidueDiscriminant.lean`.  The unconditional half of
+   `cor:v14-one-step` closed with it in `Applications/GenusEightThreefold.lean`:
+   the flop and the two projectivization-to-product comparisons make the two
+   stabilizations birational, and irrationality transports back from the cubic
+   through invariance of rationality, using no multiplicity, weak
+   factorization, or dimension bound.  Report:
+   [`../2026-08-18-c910-genus-eight-unconditional.md`](../2026-08-18-c910-genus-eight-unconditional.md).
 0b. **Tier-one arithmetic — done 2026-08-18.**  The two residue computations
    landed with 0a.  The product-formula corollaries `cor:p3-nu6` and
    `cor:cubic-product-nu` are in
