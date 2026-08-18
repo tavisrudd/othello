@@ -111,7 +111,7 @@ route: the residue discriminant of the cubic zero packet is `4/9`, of every
 curve residue is `0`, that separation with the parity ranks excludes
 representatives of dimension at most two, and the ordinary non-rationality
 criterion then gives irrationality of the stabilized fourfold.  Coverage after the priority 0b and 0d passes below is
-50 claims and 46 machinery rows over 184 terminals: 22 absent, 14 fragmentary,
+50 claims and 46 machinery rows over 186 terminals: 21 absent, 15 fragmentary,
 13 conditional, 1 complete; the paper is warning-free at 49 pages.  Report:
 [`../2026-08-18-c910-atom-route-anchor.md`](../2026-08-18-c910-atom-route-anchor.md).
 The remaining work from the audit is the rest of 0d — `lem:orthogonal` and the
@@ -461,8 +461,13 @@ they are done; they come from the 2026-08-18 gap audit.
    induction over the pairing coefficients; `lem:horiz`, whose matrix content
    is a substitution and whose mathematical content is the Frobenius property
    of quantum multiplication; and terminals for `prop:no-curve` and
-   `prop:no-surface` sliced out of the atom-route exclusion.  Report:
-   [`../2026-08-18-c910-framed-route-and-rank-two-rigidity.md`](../2026-08-18-c910-framed-route-and-rank-two-rigidity.md).
+   `prop:no-surface` sliced out of the atom-route exclusion.  `lem:orthogonal`
+   landed separately in `Quantum/SeparatedSpectralPairing.lean` as the Sylvester
+   step, the order-by-order induction, and the block-determinant consequence;
+   deriving those equations from horizontality and the even-part refinement stay
+   open.  Reports:
+   [`../2026-08-18-c910-framed-route-and-rank-two-rigidity.md`](../2026-08-18-c910-framed-route-and-rank-two-rigidity.md) and
+   [`../2026-08-18-c910-highest-risk-items.md`](../2026-08-18-c910-highest-risk-items.md).
 
 
 Completed in the current tranche: the **three-primary coefficient packet**,
@@ -512,6 +517,7 @@ papers/cubic-stabilization-epilogue/lean/
     GraphLattices/SixAxisGram.lean
     GraphLattices/SixPointStableHalves.lean
     GraphLattices/SixPointHeartEndomorphisms.lean
+    GraphLattices/SymmetricSixExclusion.lean
     Quantum/FramedMultiplicity.lean
     Quantum/ProLaurent.lean
     Quantum/CompatibleMonodromySystem.lean
@@ -534,6 +540,7 @@ papers/cubic-stabilization-epilogue/lean/
     Quantum/WeakFactorization.lean
     Quantum/CubicPacket.lean
     Quantum/RankTwoResidueRigidity.lean
+    Quantum/SeparatedSpectralPairing.lean
     Quantum/PacketInvariant.lean
     Quantum/BirationalDeduction.lean
     Applications/CubicThreefold.lean
