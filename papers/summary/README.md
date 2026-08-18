@@ -542,10 +542,10 @@ packets do not reach this geometry either, since they assume `b₃ = 0` and a
 large vanishing middle `H⁴`.  The paper claims no novelty for that broad
 philosophy; what is new is the rank-two residue discriminant and the
 observation that the atom carrying a Hodge representation can fail to be
-realizable by a surface even when the representation itself is realizable.  Two hypotheses remain, and only for the finer framed
-invariant: invariance of the primitive-sixth framed multiplicity under the
-reconstruction tail of the operation formulas, and under the divisor-tagging
-specialization.
+realizable by a surface even when the representation itself is realizable.
+Two hypotheses remain, and only for the finer framed invariant: invariance of
+the primitive-sixth framed multiplicity under the reconstruction tail of the
+operation formulas, and under the divisor-tagging specialization.
 
 ---
 
