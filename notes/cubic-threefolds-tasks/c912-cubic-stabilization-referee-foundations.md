@@ -4,7 +4,7 @@
 instruction; dated reports written before that date carry the old lane in their
 headers, which records where the work was done and is not a routing error)
 
-**Status:** active; author-close only
+**Status:** closed 2026-08-18 by author instruction
 
 **Current release gate:** GO for the repaired WP1--WP3 foundation tranche at
 authority commit `9ee4987c7`; full-paper copy, detritus, visual, build, and
@@ -1060,7 +1060,18 @@ features of this tranche.
 
 ## Close condition
 
-C912 has no automatic close condition. Even after every checkbox above is
-green and the reviewed standalone export is synchronized, its status remains
-`active; author-close only` until the author explicitly instructs that C912 be
-closed.
+C912 had no automatic close condition: its status stayed `active;
+author-close only` through every green gate until the author explicitly closed
+it.
+
+**Closed 2026-08-18 on author instruction.**  Final state: authority
+`4ef6c743c`, warning-free at 48 pages, Section 4 the unconditional Hodge-atom
+route to the one-stabilization theorem, Hypotheses 5.7R and 5.7T carrying only
+the Section 5 framed refinement.  Two residuals do not belong to any successor
+task and are simply not done: the standalone export is committed but unpushed
+(paper repository `ff56366` then `8b1e149`, portfolio summary `0b9c78a`), and
+the next Zenodo release must deposit the retitled paper as a new version, which
+follows automatically once the paper repository is pushed and released.  The
+Lean-side consequence of the 2026-08-16 restructure — 26 newly labelled
+statements recorded `absent`, so the whole atomic route is unformalized — is
+owned by C910, not by this card.
