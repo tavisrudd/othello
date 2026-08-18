@@ -129,3 +129,11 @@ cohomology and injectivity of the action on the cohomology unit are hypotheses.
 From the gap audit, still open in the atomic neighbourhood: the even-part
 refinement of `lem:orthogonal`, the absent geometric rows `lem:hodge-base` and
 `lem:euler-sign`, and the disposition of the orphaned machinery themes.
+
+## Export status
+
+Exported.  The standalone paper repository
+`~/src/math-papers/cubic-stabilization-epilogue` was synchronized from authority
+`3c2a343d8` at its commit `20a9f57`, the export manifest verifies over its
+tracked tree, and the repository's own `make check`, pinned Lean build, and
+axiom-log replay agree with the authority over 198 reviewer terminals.
