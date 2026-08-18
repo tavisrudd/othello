@@ -533,7 +533,16 @@ obstruction to stable rationality, but its validity is not a parametrization.
 This paper makes that limitation concrete after an actual stabilization, and
 its residue discriminant is a new numerical invariant of ordinary Hodge atoms
 that applies to every smooth cubic threefold, not only the symmetric family
-used on the cycle side.  Two hypotheses remain, and only for the finer framed
+used on the cycle side.  The classical route stops short here: after one
+stabilization the direct Clemens–Griffiths mechanism gives no contradiction,
+because `H³(X × P¹)` is still `H³(X)`, which the Fano surface of lines
+already carries as its `H¹` up to twist, while the middle `H⁴` is Tate.  The
+recent fourfold criteria that read Hodge data through quantum spectral
+packets do not reach this geometry either, since they assume `b₃ = 0` and a
+large vanishing middle `H⁴`.  The paper claims no novelty for that broad
+philosophy; what is new is the rank-two residue discriminant and the
+observation that the atom carrying a Hodge representation can fail to be
+realizable by a surface even when the representation itself is realizable.  Two hypotheses remain, and only for the finer framed
 invariant: invariance of the primitive-sixth framed multiplicity under the
 reconstruction tail of the operation formulas, and under the divisor-tagging
 specialization.
