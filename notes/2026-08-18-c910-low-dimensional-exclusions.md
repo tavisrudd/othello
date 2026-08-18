@@ -87,5 +87,8 @@ machinery themes.
 
 ## Export status
 
-Synchronized to `~/src/math-papers/cubic-stabilization-epilogue` with the
-following commit of this task's documentation.
+Exported.  The standalone paper repository
+`~/src/math-papers/cubic-stabilization-epilogue` was synchronized from authority
+`a76d0cc08` at its commit `6c0e39d`, the export manifest verifies, and the
+repository's own `make check`, pinned Lean build, and axiom-log replay agree
+with the authority over 192 reviewer terminals.
