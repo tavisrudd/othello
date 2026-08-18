@@ -111,17 +111,36 @@ route: the residue discriminant of the cubic zero packet is `4/9`, of every
 curve residue is `0`, that separation with the parity ranks excludes
 representatives of dimension at most two, and the ordinary non-rationality
 criterion then gives irrationality of the stabilized fourfold.  Coverage after the passes below is
-50 claims and 46 machinery rows over 198 terminals: 16 absent, 16 fragmentary,
-17 conditional, 1 complete; the paper is warning-free at 49 pages.  Report:
+50 claims and 46 machinery rows over 201 terminals: 16 absent, 15 fragmentary,
+18 conditional, 1 complete; the paper is warning-free at 49 pages.  Report:
 [`../2026-08-18-c910-atom-route-anchor.md`](../2026-08-18-c910-atom-route-anchor.md).
-The remaining work from the audit is the even-part refinement of
-`lem:orthogonal` and the orphaned machinery themes.
+The remaining work from the audit is the absent geometric rows
+`lem:hodge-base` and `lem:euler-sign` and the orphaned machinery themes.
 `prop:no-curve` and `prop:no-surface` are proved in
 `Quantum/LowDimensionalAtomRepresentatives.lean` from premises matching the
 manuscript's citations: the curve dichotomy carrying the projective-line and
 nef-canonical cases, the point-blowup descent, and the minimal-model
 classification.  Report:
 [`../2026-08-18-c910-low-dimensional-exclusions.md`](../2026-08-18-c910-low-dimensional-exclusions.md).
+
+`lem:orthogonal` is now a conditional deduction, proved in
+`Quantum/OrthogonalRestrictionNondegeneracy.lean` and
+`Quantum/BlockDiagonalHorizontalPairing.lean`.  A splitting is recorded by a
+label on a finite type of coordinates; when the residue and every regular
+coefficient of the connection vanish across labels, the block of the
+horizontality identity between two labels is the two-factor identity of the
+corresponding blocks, so the Sylvester induction kills the pairing across
+labels for arbitrarily many factors at once.  A pairing with nonzero determinant
+restricts to a nondegenerate pairing on any set of coordinates orthogonal to its
+complement, which covers both the restriction to one factor and, given that the
+form pairs only equal parities, the restriction to the even coordinates of a
+factor; transport along a bijection with a finite ordinal supplies the
+invertibility hypothesis of the rank-two rigidity theorem.  Distinctness of the
+leading eigenvalues cannot be dropped: two one-dimensional factors with the same
+scalar residue carry a horizontal nonzero pairing.  The two earlier modules were
+generalized from `Fin rank` to arbitrary finite index types so that the fibers of
+a label can serve as factors.  Report:
+[`../2026-08-18-c910-even-part-orthogonality.md`](../2026-08-18-c910-even-part-orthogonality.md).
 
 `lem:disc` and `lem:spectrum-transfer` are proved in
 `Quantum/QuarticDiscriminantDerivations.lean`,
@@ -496,11 +515,9 @@ they are done; they come from the 2026-08-18 gap audit.
    between separated factors vanishes.  `lem:horiz` became a fragment there:
    a constant pairing is horizontal once the residue is self-adjoint and the
    regular part is anti-self-adjoint in degree zero, which is the substitution
-   of the human proof and carries no content beyond those hypotheses.  Still
-   open in this item: the even-part refinement of `lem:orthogonal`, which needs
-   a parity model and the assembly of block pairings into one matrix, and
-   terminals for `prop:no-curve` and `prop:no-surface` sliced out of the
-   atom-route exclusion, which landed separately.  Reports:
+   of the human proof and carries no content beyond those hypotheses.  Terminals
+   for `prop:no-curve` and `prop:no-surface`, sliced out of the atom-route
+   exclusion, landed separately.  Reports:
    [`../2026-08-18-c910-framed-route-and-rank-two-rigidity.md`](../2026-08-18-c910-framed-route-and-rank-two-rigidity.md),
    [`../2026-08-18-c910-highest-risk-items.md`](../2026-08-18-c910-highest-risk-items.md), and
    [`../2026-08-18-c910-pairing-horizontality.md`](../2026-08-18-c910-pairing-horizontality.md).

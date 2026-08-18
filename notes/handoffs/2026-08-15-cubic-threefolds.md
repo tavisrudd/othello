@@ -98,8 +98,8 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   `Verification/AxiomAudit`; no duplicate under the shared
   `lean/TavisRuddFiniteGeom/` tree or a second Lean repository. The sources
   build through the guarded queue; `make check` and the axiom-log gate green
-  over 50 claims, 46 machinery rows, and 198 reviewer terminals; coverage 16
-  absent / 16 fragmentary / 17 conditional / 1 complete. `thm:every-cubic` is
+  over 50 claims, 46 machinery rows, and 201 reviewer terminals; coverage 16
+  absent / 15 fragmentary / 18 conditional / 1 complete. `thm:every-cubic` is
   anchored to the atomic route, the framed spine answers to its own manuscript
   theorem `thm:every-cubic-conditional` and is now assembled end to end on the
   product-formula signature, the small even block reduction is formalized from
@@ -119,8 +119,13 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   coefficient identities alone, those identities are exhibited in the universal
   root model, the vanishing half is proved in a formal power-series model of the
   germ, and the eigenvalue sets on the even algebra and on the full module
-  coincide. Next step is the even-part refinement of `lem:orthogonal`, or the
-  absent geometric rows `lem:hodge-base` and `lem:euler-sign`.
+  coincide. `lem:orthogonal` is also a conditional deduction now: block
+  diagonality holds for an arbitrary labelled splitting whose connection is
+  block diagonal, a nondegenerate pairing stays nondegenerate on any set of
+  coordinates orthogonal to its complement, which covers one factor and the even
+  part of a factor, and equal leading eigenvalues admit a horizontal nonzero
+  pairing. Next step is the absent geometric rows `lem:hodge-base` and
+  `lem:euler-sign`.
   Card:
   `../cubic-threefolds-tasks/c910-cubic-stabilization-lean-companion.md`; gap audit
   `../2026-08-18-c910-post-restructure-gap-audit.md`; anchor report
@@ -130,7 +135,9 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   rank-two rigidity report
   `../2026-08-18-c910-framed-route-and-rank-two-rigidity.md`; highest-risk-items
   report `../2026-08-18-c910-highest-risk-items.md`; pairing-horizontality
-  report `../2026-08-18-c910-pairing-horizontality.md`; genus-eight
+  report `../2026-08-18-c910-pairing-horizontality.md`; even-part
+  orthogonality report `../2026-08-18-c910-even-part-orthogonality.md`;
+  genus-eight
   unconditional report `../2026-08-18-c910-genus-eight-unconditional.md`;
   low-dimensional exclusions report
   `../2026-08-18-c910-low-dimensional-exclusions.md`; discriminant and
