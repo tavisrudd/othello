@@ -37,6 +37,12 @@ non-rationality criterion would be worth more than a second proof.
 **Evidence:** OPEN — no attempt made; his evaluation maps are related to but
 not identified with the atom construction, and the epilogue deliberately uses
 only the ordinary, non-enhanced package.
+**Recheck against Guéré v2 before use.** The heart invariant is read here from
+arXiv:2603.04518v1, and Benedetti--Fay--Guéré--Manivel--Perrin Remark 4.2
+announces a revision of that paper affecting exactly the evaluation-map
+formalism this lead would rely on. Re-read the current version and confirm the
+surface-carrier constraint still reads as stated before building anything on
+it.
 **Status:** open lead
 
 ### 2026-08-18 — a forthcoming revision of Guéré's paper is announced inside the joint criterion note
