@@ -130,7 +130,11 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   `prop:atom-invariant`, `lem:factor-glue`, and `lem:crossing` fragments. The
   three geometric rows `lem:euler-sign`, `lem:hodge-base`, and `prop:cubic-atom`
   are fragments as well, so every row of the unconditional atomic route carries
-  at least a fragment. Next step is the Section 5 framed-germ rows.
+  at least a fragment. The manuscript now carries gated provenance annotations
+  (`\coverage`, `\lean`, `\uses`, `\imports`, `\evidence`) resolved against the
+  claim map and two registries; next steps are filling the dependency edges,
+  statement-body digests, and the fifty-row claim-map review, ahead of new
+  coverage.
   Card:
   `../cubic-threefolds-tasks/c910-cubic-stabilization-lean-companion.md`; gap audit
   `../2026-08-18-c910-post-restructure-gap-audit.md`; anchor report
@@ -144,7 +148,8 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   orthogonality report `../2026-08-18-c910-even-part-orthogonality.md`;
   residue-discriminant invariance report
   `../2026-08-18-c910-residue-discriminant-invariance.md`; geometric-rows report
-  `../2026-08-18-c910-geometric-rows-of-the-atomic-route.md`;
+  `../2026-08-18-c910-geometric-rows-of-the-atomic-route.md`; annotation-layer
+  report `../2026-08-18-c910-manuscript-formal-annotations.md`;
   genus-eight
   unconditional report `../2026-08-18-c910-genus-eight-unconditional.md`;
   low-dimensional exclusions report
