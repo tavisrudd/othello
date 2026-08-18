@@ -98,13 +98,24 @@ deductions, and 1 complete.
 
 The gap audit against that restructure is
 [`../2026-08-18-c910-post-restructure-gap-audit.md`](../2026-08-18-c910-post-restructure-gap-audit.md).
-Its central finding is not the missing coverage but a mis-anchored row: the
-`thm:every-cubic` entry is byte-identical before and after the restructure, so
-its two terminals still formalize the packet-and-weak-factorization deduction
-that is no longer the paper's proof of that theorem.  The same mis-anchoring
-propagates to the separation corollaries, to the caution text on
-`thm:separation-family`, and to `cor:v14-one-step`, whose newly unconditional
-half has no terminal at all.  Repairing that is priority 0 below.
+Its central finding was a mis-anchored row rather than missing coverage: the
+`thm:every-cubic` entry was byte-identical before and after the restructure, so
+its two terminals still formalized the packet-and-weak-factorization deduction
+that is no longer the paper's proof of that theorem.
+
+**Anchor repaired, 2026-08-18, authority `5d537f713`.**  The framed spine is now
+its own manuscript theorem, `thm:every-cubic-conditional`, stated in the
+introduction and proved in Section 5, and it carries the two packet terminals.
+`thm:every-cubic` is anchored to four new terminals implementing the atomic
+route: the residue discriminant of the cubic zero packet is `4/9`, of every
+curve residue is `0`, that separation with the parity ranks excludes
+representatives of dimension at most two, and the ordinary non-rationality
+criterion then gives irrationality of the stabilized fourfold.  Coverage is now
+50 claims and 46 machinery rows over 172 terminals: 29 absent, 10 fragmentary,
+10 conditional, 1 complete; the paper is warning-free at 49 pages.  Report:
+[`../2026-08-18-c910-atom-route-anchor.md`](../2026-08-18-c910-atom-route-anchor.md).
+The remaining priorities are 0b through 0d below, plus the missing
+unconditional half of `cor:v14-one-step` and the orphaned machinery themes.
 
 The integral algebra includes the arbitrary-size DVR rank-one criterion,
 flattened split-coordinate coefficient lattices, an explicit invertible
@@ -410,19 +421,16 @@ Work in this order unless a later literature or library dependency changes the
 cost materially.  Priorities 0a--0d supersede the older ordering below until
 they are done; they come from the 2026-08-18 gap audit.
 
-0a. **Re-anchor the headline.**  Add an atom-route deduction to
-   `PaperInterface` whose typed premises are the projective-bundle chemical
-   formula, occurrence of the cubic atom with positive multiplicity,
-   non-representability in dimension at most two, and the ordinary
-   non-rationality criterion.  Point `thm:every-cubic` at it, re-point the
-   existing packet terminals to the Section 5 conditional second proof, rewrite
-   the caution text on the separation rows, and add the missing unconditional
-   half of `cor:v14-one-step`.
-0b. **Tier-one arithmetic.**  The cubic residue `R_X` with
-   `delta^sharp(alpha_X) = 4/9`, the curve residue with `delta^sharp(C) = 0`,
-   the two product-formula corollaries `cor:p3-nu6` and `cor:cubic-product-nu`,
-   and a terminal for `lem:six-point-hearts` assembled from declarations
-   already present in `GraphLattices`.
+0a. **Re-anchor the headline — done 2026-08-18.**  The atom-route deduction is
+   in `Applications/CubicAtomOneStep.lean` over the ledger in
+   `Quantum/OrdinaryAtomLedger.lean`, and the residue arithmetic is in
+   `Quantum/AtomicResidueDiscriminant.lean`.  Still open from this item: the
+   unconditional half of `cor:v14-one-step`, which compares the two projective
+   bundles birationally and applies the atomic one-step theorem.
+0b. **Tier-one arithmetic.**  The two residue computations landed with 0a.
+   Still open: the product-formula corollaries `cor:p3-nu6` and
+   `cor:cubic-product-nu`, and a terminal for `lem:six-point-hearts` assembled
+   from declarations already present in `GraphLattices`.
 0c. **`prop:cubic-block-data`.**  Formalize the constant change of basis and the
    unique normalized block-off-diagonal gauge, which discharges the standing
    characteristic-polynomial premise of `prop:cubic-packet` and serves the

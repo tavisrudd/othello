@@ -97,13 +97,16 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   reviewer entry point `PaperInterface` and machine audit
   `Verification/AxiomAudit`; no duplicate under the shared
   `lean/TavisRuddFiniteGeom/` tree or a second Lean repository. 93 sources
-  build through the guarded queue; `make check` green over 49 claims, 46
-  machinery rows, and 168 reviewer terminals; coverage 29 absent / 10
-  fragmentary / 9 conditional / 1 complete after the 2026-08-16 manuscript
-  restructure. Next step is the gap audit's priority 0: re-anchor
-  `thm:every-cubic` to the atom route it is now proved by. Card:
+  build through the guarded queue; `make check` and the axiom-log gate green
+  over 50 claims, 46 machinery rows, and 172 reviewer terminals; coverage 29
+  absent / 10 fragmentary / 10 conditional / 1 complete. `thm:every-cubic` is
+  anchored to the atomic route and the framed spine now answers to its own
+  manuscript theorem `thm:every-cubic-conditional`. Next step is the gap audit's
+  priority 0b onward, starting with `prop:cubic-block-data`, which discharges
+  the standing premise of `prop:cubic-packet`. Card:
   `../cubic-threefolds-tasks/c910-cubic-stabilization-lean-companion.md`; gap audit
-  `../2026-08-18-c910-post-restructure-gap-audit.md`; interim release report
+  `../2026-08-18-c910-post-restructure-gap-audit.md`; anchor report
+  `../2026-08-18-c910-atom-route-anchor.md`; interim release report
   `../2026-08-12-c910-partial-lean-release.md`.
 - **C914 — active.** The `A_5`-pencil is proved to contain the Fermat cubic
   threefold, so it meets the already-known universally `CH_0`-trivial
@@ -126,7 +129,7 @@ Lean source follows automatically from any of the above.
 
 | surface | root | current state | owning task |
 |---|---|---|---|
-| Cubic-stabilization epilogue: `X x P^1` irrational, the `m = 1` statement | `papers/cubic-stabilization-epilogue/` | headline unconditional through the Section 4 atomic route since 2026-08-16; Hypotheses 5.7R and 5.7T carry only the Section 5 framed refinement; warning-free; Lean claim-map resync open under C910 | C907, C909, C910, C913 (C912 closed) |
+| Cubic-stabilization epilogue: `X x P^1` irrational, the `m = 1` statement | `papers/cubic-stabilization-epilogue/` | headline unconditional through the Section 4 atomic route since 2026-08-16; Hypotheses 5.7R and 5.7T carry only the Section 5 framed refinement, now stated as `thm:every-cubic-conditional`; warning-free at 49 pages; Lean anchored to the atomic route, further coverage open under C910 | C907, C909, C910, C913 (C912 closed) |
 | Discrepancy-one flip correction | `papers/discrepancy-one-flips/` | published standalone note, DOI `10.5281/zenodo.21924799` | C911 (closed) |
 | *Irrationality of Cubic Threefolds after One Stabilization*: `X x P^m` for all `m`, the all-`m` statement | `papers/cubic-stabilization-irrationality/` | headline conditional on the marked-threshold wall and zero-mode hypotheses | C913 |
 
