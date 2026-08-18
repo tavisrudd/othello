@@ -69,6 +69,31 @@ carry a construction the citation graph hides. Until those are covered, public
 prose should say only what is proved and should avoid “first,” “new,” or “to
 our knowledge.”
 
+The 2026-08-18 positioning pass added two 2026 sources and the classical
+comparison the introduction had left implicit. Web search on
+"Guere cubic threefold irrationality Hodge quantum cohomology" recovered
+Guere, arXiv:2603.04518v1, and Benedetti--Fay--Guere--Manivel--Perrin,
+arXiv:2607.26718v1. Neither pre-empts anything in this paper: Guere states a
+necessary Hodge condition for *rational cubic fourfolds*, and the joint
+criterion assumes `b_1 = b_3 = 0` with a large vanishing middle `H^4`, which
+`X x P^1` fails on both counts (`b_3 = 10`, middle `H^4` Tate). Their
+existence does, however, bound the novelty posture: the joint paper derives
+irrationality from atoms, monodromy, and Hodge theory without explicit
+quantum-cohomology computations, so this paper claims no novelty for the
+broad idea of localizing Hodge data into quantum spectral packets, nor for
+"the first atomic refinement of a classical Hodge obstruction." What is
+claimed is the rank-two atomic residue discriminant, the uniform
+one-stabilization theorem, and the separation of surface-realizability of a
+Hodge representation from surface-realizability of the atom carrying it.
+
+The same pass records the classical comparison now printed in the
+introduction: after one stabilization the direct Clemens--Griffiths mechanism
+gives no contradiction, because `H^3(X x P^1) = H^3(X)` is already the `H^1`
+of the Fano surface up to twist and the middle `H^4` is Tate. This is a
+statement about the standard intermediate-Jacobian and blowup bookkeeping
+only; it does not assert that the Fano surface occurs as a blowup center, nor
+that every classical Hodge-theoretic obstruction fails.
+
 ## Read depth for principal sources
 
 - Jiaji Cai, *The cubic threefold is symplectically irrational*,
@@ -104,6 +129,17 @@ our knowledge.”
   3.4--3.8; and the universal `CH_0`-triviality paragraph preceding
   Question 1.3. The Noether--Cremona quotient computations in Sections 2 and
   3 were not verified line by line.
+- Jeremy Guere, *On the irrationality of cubic fourfolds*,
+  arXiv:2603.04518v1. **Read depth: partial.** Read the abstract,
+  Section 0 including the statement of Theorem 56 and the remark recording
+  that Hodge atoms are not used while the evaluation maps are closely related
+  to them, and the opening of Section 1.
+- Vladimiro Benedetti, Aideen Fay, Jeremy Guere, Laurent Manivel, and
+  Nicolas Perrin, *An atomic criterion for irrationality without quantum
+  computations*, arXiv:2607.26718v1. **Read depth: partial.** Read the
+  abstract, the introduction, and the statement of Theorem 4.1 with its
+  three hypotheses; Remark 4.2's maximal-spectrum subtlety was noted but is
+  not used here, since Section 4 does not use their evaluation argument.
 - Alexander Kuznetsov, *Derived categories of cubic and `V_14`
   threefolds*, arXiv:math/0303037v1. **Read depth: full text.** Section 2,
   especially Theorems 2.2 and 2.17--2.18 and Remark 2.19, is load-bearing.

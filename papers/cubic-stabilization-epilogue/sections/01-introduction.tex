@@ -238,8 +238,38 @@ gives the conditional identity \(\nu_6(V)=2\).
 \subsection*{Relation with earlier rationality results}
 
 Clemens and Griffiths proved that every smooth complex cubic threefold is
-irrational by means of its intermediate Jacobian \cite{CG}.  That
-obstruction does not by itself control a product with projective space.  The
+irrational by means of its intermediate Jacobian \cite{CG}.  The direct
+Clemens--Griffiths mechanism no longer yields a contradiction after one
+stabilization.  Indeed,
+\[
+ H^3(X\times\PP^1,\Q)\simeq H^3(X,\Q),
+ \qquad
+ H^4(X\times\PP^1,\Q)\simeq\Q(-2)^{\oplus2}.
+\]
+In a birational factorization of a fourfold, smooth surface centers may
+occur, and blowing up such a surface \(S\) contributes \(H^1(S,\Q)(-1)\) to
+\(H^3\).  For the cubic itself, the Fano surface of lines \(F(X)\) satisfies
+\(\Alb(F(X))\simeq J(X)\) \cite[Theorem~11.19]{CG}, hence
+\(H^1(F(X),\Q)(-1)\simeq H^3(X,\Q)\).  Thus the surviving weight-three Hodge
+structure is already realizable as the \(H^1\) of a smooth surface, exactly
+the form that a surface center may contribute, while the middle \(H^4\) is
+Tate.  The standard intermediate-Jacobian and blowup bookkeeping therefore
+gives no contradiction here, though this does not exclude more elaborate
+classical Hodge-theoretic obstructions.  The ordinary Hodge-atom argument
+below refines this raw Hodge bookkeeping by following the quantum spectral
+packet carrying the Hodge representation rather than \(H^3\) alone.
+
+For comparison, Gu\'er\'e obtains a projective-K3-type Hodge necessary
+condition for rational cubic fourfolds from evaluated quantum data
+\cite{Guere}, while Benedetti--Fay--Gu\'er\'e--Manivel--Perrin prove a
+monodromy and coarse-atom irrationality criterion for Hodge-general Fano
+fourfolds with large vanishing middle \(H^4\) \cite{BFGMP}.  Their criterion
+assumes \(b_3=0\), so it does not cover \(X\times\PP^1\), where
+\(b_3=10\), the middle \(H^4\) is Tate, and the surviving \(H^3\) is
+already of surface-center type; the proof below instead requires finer
+information internal to the ordinary cubic atom.
+
+The
 very general cubic threefold is now known to be stably irrational
 \cite[Corollary~1.4]{EdGFS}, but stable rationality remains open for an
 arbitrary smooth cubic threefold.  Cai recently recovered irrationality
