@@ -61,3 +61,29 @@ evaluation maps — including the lead logged above — should wait for or check
 that revision before relying on the v1 evaluation formalism.
 **Evidence:** CHECKED — read in the cached full text of arXiv:2607.26718v1.
 **Status:** open lead
+
+### 2026-08-18 — the spectrum-transfer proof needs no idempotent decomposition
+
+**Provenance:** formalizing `lem:spectrum-transfer` of the cubic-stabilization
+epilogue in Lean (`Quantum/ModuleSpectrumTransfer.lean`, terminal
+`eulerMultiplication_eigenvalues_module_eq_algebra`).
+**Was I looking for this?:** no — the task was to reach the manuscript's
+conclusion in Lean by whatever route, not to shorten its proof.
+**Observed / musing:** the manuscript proves equality of the eigenvalue sets by
+decomposing the even algebra into generalized eigenspaces, extracting orthogonal
+idempotents, and using nilpotence of `E - λᵢ` on each block. None of that is
+needed. An eigenvalue on the full module makes `E - λ` a non-unit of the even
+algebra; a non-unit of a finite-dimensional commutative algebra is a zero
+divisor, which is an eigenvector inside the algebra. Conversely an eigenvector
+of the algebra maps to a nonzero module element along the injection `b ↦ b · 1`,
+which exists because the module structure restricts to the algebra's own
+multiplication. Two lines, and it uses only finite dimensionality and that
+injection.
+**Why it may matter / strongest question:** it would shorten the corresponding
+paragraph of Section 4 and remove a place where a reader has to check that each
+`εᵢ M` is nonzero. The same non-unit argument may replace other spectral
+bookkeeping in the atomic route, wherever the point is only which scalars occur.
+**Evidence:** LEAN — the replacement argument is kernel checked for an arbitrary
+finite-dimensional commutative algebra and a module with an injective unit
+action.
+**Status:** open lead
