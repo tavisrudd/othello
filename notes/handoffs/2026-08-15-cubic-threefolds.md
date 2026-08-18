@@ -98,8 +98,8 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   `Verification/AxiomAudit`; no duplicate under the shared
   `lean/TavisRuddFiniteGeom/` tree or a second Lean repository. The sources
   build through the guarded queue; `make check` and the axiom-log gate green
-  over 50 claims, 46 machinery rows, and 204 reviewer terminals; coverage 13
-  absent / 18 fragmentary / 18 conditional / 1 complete. `thm:every-cubic` is
+  over 50 claims, 46 machinery rows, and 220 reviewer terminals; coverage 10
+  absent / 21 fragmentary / 18 conditional / 1 complete. `thm:every-cubic` is
   anchored to the atomic route, the framed spine answers to its own manuscript
   theorem `thm:every-cubic-conditional` and is now assembled end to end on the
   product-formula signature, the small even block reduction is formalized from
@@ -127,9 +127,10 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   pairing. The residue discriminant is also proved invariant under conjugation,
   under a block-diagonal change of frame on one factor, and constant over a
   formal germ whose residue derivatives are commutators, which makes
-  `prop:atom-invariant`, `lem:factor-glue`, and `lem:crossing` fragments. Next
-  step is the absent geometric rows `lem:hodge-base`, `lem:euler-sign`, and
-  `prop:cubic-atom`.
+  `prop:atom-invariant`, `lem:factor-glue`, and `lem:crossing` fragments. The
+  three geometric rows `lem:euler-sign`, `lem:hodge-base`, and `prop:cubic-atom`
+  are fragments as well, so every row of the unconditional atomic route carries
+  at least a fragment. Next step is the Section 5 framed-germ rows.
   Card:
   `../cubic-threefolds-tasks/c910-cubic-stabilization-lean-companion.md`; gap audit
   `../2026-08-18-c910-post-restructure-gap-audit.md`; anchor report
@@ -142,7 +143,8 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   report `../2026-08-18-c910-pairing-horizontality.md`; even-part
   orthogonality report `../2026-08-18-c910-even-part-orthogonality.md`;
   residue-discriminant invariance report
-  `../2026-08-18-c910-residue-discriminant-invariance.md`;
+  `../2026-08-18-c910-residue-discriminant-invariance.md`; geometric-rows report
+  `../2026-08-18-c910-geometric-rows-of-the-atomic-route.md`;
   genus-eight
   unconditional report `../2026-08-18-c910-genus-eight-unconditional.md`;
   low-dimensional exclusions report

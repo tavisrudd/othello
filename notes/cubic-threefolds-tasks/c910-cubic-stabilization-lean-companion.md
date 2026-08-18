@@ -111,18 +111,42 @@ route: the residue discriminant of the cubic zero packet is `4/9`, of every
 curve residue is `0`, that separation with the parity ranks excludes
 representatives of dimension at most two, and the ordinary non-rationality
 criterion then gives irrationality of the stabilized fourfold.  Coverage after the passes below is
-50 claims and 46 machinery rows over 204 terminals: 13 absent, 18 fragmentary,
+50 claims and 46 machinery rows over 220 terminals: 10 absent, 21 fragmentary,
 18 conditional, 1 complete; the paper is warning-free at 49 pages.  Report:
 [`../2026-08-18-c910-atom-route-anchor.md`](../2026-08-18-c910-atom-route-anchor.md).
-The remaining work from the audit is the absent geometric rows
-`lem:hodge-base`, `lem:euler-sign`, and `prop:cubic-atom`, and the orphaned
-machinery themes.
+The three geometric rows the audit left absent, `lem:euler-sign`,
+`lem:hodge-base`, and `prop:cubic-atom`, are fragments as of the pass recorded in
+[`../2026-08-18-c910-geometric-rows-of-the-atomic-route.md`](../2026-08-18-c910-geometric-rows-of-the-atomic-route.md),
+so every row of the unconditional atomic route carries at least a fragment.  The
+remaining absent rows are the Section 5 framed-monodromy statements and the
+separation corollaries, and the orphaned machinery themes still need a
+disposition.
 `prop:no-curve` and `prop:no-surface` are proved in
 `Quantum/LowDimensionalAtomRepresentatives.lean` from premises matching the
 manuscript's citations: the curve dichotomy carrying the projective-line and
 nef-canonical cases, the point-blowup descent, and the minimal-model
 classification.  Report:
 [`../2026-08-18-c910-low-dimensional-exclusions.md`](../2026-08-18-c910-low-dimensional-exclusions.md).
+
+The geometric rows of the atomic route are covered on their algebraic side by
+`Quantum/SpectralSignReversal.lean`, `Quantum/HodgeFixedSubalgebra.lean`, and
+`Applications/CubicZeroAtomRanks.lean`.  Sign reversal of an endomorphism
+preserves each generalized eigenspace under negation of the scalar, the
+eigenvalue count, the orbit submodule of a vector and hence regularity, the
+discriminant of a split monic quartic, and the rank-two residue discriminant, so
+the residual endomorphism of the connection and Euler multiplication carry the
+same spectral data.  The simultaneous fixed points of a family of algebra
+automorphisms form a subalgebra on which multiplication by a fixed element
+restricts, its eigenvectors are eigenvectors of the ambient multiplication, the
+powers of a fixed element lie in it, and four independent powers span a
+four-dimensional subspace, realized by the truncated polynomial algebra of
+exponent four.  For the cubic threefold the adjunction factor is a unit in the
+truncated ring, so the total Chern class is the unique solution of the adjunction
+equation and the top Chern number is `-6`; the third Betti number is then ten,
+the degree count places the whole degree-three cohomology in the zero packet, a
+locally constant rank separates the rank-twelve branch from both rank-one
+branches, and the parity ranks are two and ten.  Report:
+[`../2026-08-18-c910-geometric-rows-of-the-atomic-route.md`](../2026-08-18-c910-geometric-rows-of-the-atomic-route.md).
 
 The residue-discriminant invariance cluster is covered on its algebraic side by
 `Quantum/ResidueDiscriminantInvariance.lean`, moving `prop:atom-invariant`,
