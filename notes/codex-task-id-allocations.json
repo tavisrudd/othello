@@ -3140,8 +3140,17 @@
       "last": 916,
       "purpose": "Paper III referee correction spec: compact incidence/Delta repairs, proof, export",
       "sequence": 349
+    },
+    {
+      "count": 1,
+      "first": 917,
+      "kind": "reservation",
+      "lane": "cubic-threefolds",
+      "last": 917,
+      "purpose": "epilogue positioning re classical Hodge theory and Guere",
+      "sequence": 350
     }
   ],
-  "next_id": 917,
+  "next_id": 918,
   "schema": "codex-task-id-allocations-v1"
 }
