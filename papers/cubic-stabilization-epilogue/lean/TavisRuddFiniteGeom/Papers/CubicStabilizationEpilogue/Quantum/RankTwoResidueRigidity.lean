@@ -157,6 +157,16 @@ theorem regularCoefficient_preserves_nilpotentLine
     · exact absurd matrixZero productNonzero
   rw [sandwich, traceZero, zero_smul]
 
+/-- The vector form of the preceding identity: the regular coefficient carries
+every vector in the image of the square-zero leading operator back into its
+kernel.  For a nonzero square-zero rank-two matrix that image and that kernel
+are the same line, which is the nilpotent line of the manuscript. -/
+theorem regularCoefficient_image_subset_kernel
+    {N A₀ : Matrix (Fin 2) (Fin 2) K} (identity : N * A₀ * N = 0)
+    (vector : Fin 2 → K) :
+    N.mulVec (A₀.mulVec (N.mulVec vector)) = 0 := by
+  rw [Matrix.mulVec_mulVec, Matrix.mulVec_mulVec, identity, Matrix.zero_mulVec]
+
 /-- The residual pole of the base connection after the elementary modification.
 In the adapted frame the only possible pole is a multiple of the lower-left
 matrix unit. -/

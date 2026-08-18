@@ -5073,7 +5073,10 @@ theorem cubicThreefold_oneStep_not_rational_of_framed_product_inputs
 /-- Reviewer-facing statement that the regular coefficient of an even rank-two
 atomic factor preserves the nilpotent line.  The line is the image of the
 square-zero part `N` of the centered leading Euler operator, and the conclusion
-is stated as the matrix identity `N * A₀ * N = 0`.  The premises are the ones
+is stated as the matrix identity `N * A₀ * N = 0`, together with its vector
+form: the regular coefficient carries every vector in the image of `N` back
+into its kernel, and for a nonzero square-zero rank-two matrix that image and
+that kernel are the same line.  The premises are the ones
 the manuscript obtains from horizontality of the Poincare pairing on a
 separated spectral factor: the leading pairing coefficient is invertible, `N` is
 self-adjoint for it, and the constant coefficient of horizontality holds.  Lean
@@ -5086,9 +5089,14 @@ theorem atomicRankTwo_regularCoefficient_preserves_nilpotentLine
     (selfAdjoint : N.transpose * P₀ = P₀ * N)
     (constantCoefficient :
       A₀.transpose * P₀ + P₀ * A₀ + N.transpose * P₁ - P₁ * N = 0) :
-    N * A₀ * N = 0 :=
-  Quantum.regularCoefficient_preserves_nilpotentLine twoNeZero squareZero nonzero
-    nondegenerate selfAdjoint constantCoefficient
+    N * A₀ * N = 0 ∧
+      ∀ vector : Fin 2 → K,
+        N.mulVec (A₀.mulVec (N.mulVec vector)) = 0 :=
+  ⟨Quantum.regularCoefficient_preserves_nilpotentLine twoNeZero squareZero nonzero
+      nondegenerate selfAdjoint constantCoefficient,
+    Quantum.regularCoefficient_image_subset_kernel
+      (Quantum.regularCoefficient_preserves_nilpotentLine twoNeZero squareZero
+        nonzero nondegenerate selfAdjoint constantCoefficient)⟩
 
 /-- Reviewer-facing regularity of the base connection after the elementary
 modification.  In the adapted frame the only possible pole is a multiple of the

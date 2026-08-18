@@ -339,7 +339,7 @@
       ],
       "objects": "The square-zero part of the centered leading Euler operator of an even rank-two atomic factor, the first two coefficients of the horizontal Poincare pairing in a chosen frame, and the regular coefficient of the connection in the loop direction, all as two-by-two matrices over a field in which two is invertible.",
       "hypotheses": "The leading operator part squares to zero and is nonzero; the leading pairing coefficient is invertible; the leading operator part is self-adjoint for it; and the constant coefficient of horizontality relates the regular coefficient, the two pairing coefficients, and the leading operator part.",
-      "conclusion": "The regular coefficient carries the nilpotent line into itself, in the equivalent matrix form that the leading operator part, the regular coefficient, and the leading operator part again have vanishing product.",
+      "conclusion": "The regular coefficient carries the nilpotent line into itself, in the equivalent matrix form that the leading operator part, the regular coefficient, and the leading operator part again have vanishing product, together with its vector form: every vector in the image of the leading operator part is carried into its kernel.",
       "cautions": "Lean does not construct the A-model F-bundle, the spectral cover, the atomic factor, or the Poincare pairing, and does not prove horizontality or nondegeneracy on a separated spectral factor; those supply the hypotheses. The line is presented as the image of the leading operator part rather than as a subobject of a geometric bundle."
     },
     {
