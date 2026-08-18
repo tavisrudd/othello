@@ -41,8 +41,8 @@ deduction as well: from the product formula, taken as a typed premise, Lean
 obtains the value four for the product of a cubic threefold with a projective
 line and the value zero for every projective space.
 
-Checked coverage snapshot: 50 claims; 22 absent; 14 fragmentary; 13 conditional;
-1 complete; 184 reviewer terminals, of which 46 are machinery serving no current
+Checked coverage snapshot: 50 claims; 21 absent; 15 fragmentary; 13 conditional;
+1 complete; 186 reviewer terminals, of which 46 are machinery serving no current
 manuscript claim.
 
 Those 46 are kernel-checked and reusable, and the claim map records for each one
@@ -512,7 +512,16 @@ The reviewer-facing terminals currently verify:
   entrywise additive Leibniz map carrying the residue to a commutator
   annihilates the residue discriminant, so that invariant is constant along the
   base; and the discriminant is the squared separation of the residue
-  eigenvalues and is insensitive to a scalar shift.
+  eigenvalues and is insensitive to a scalar shift;
+- block diagonality of a horizontal pairing on two spectral factors whose
+  leading eigenvalues are distinct: the Sylvester equation at the leading order
+  has only the zero solution, the induction over later orders kills every
+  off-diagonal coefficient, and a pairing with vanishing off-diagonal blocks is
+  invertible exactly when both diagonal restrictions are;
+- the arithmetic excluding a faithful action of the symmetric group on six
+  letters on a classified automorphism group: its order is `720`, a group
+  receiving an injective homomorphism from it has order divisible by `720`, and
+  no group of smaller order and no group of order `9720` qualifies.
 
 The authoritative per-claim account is
 [`verification/claims.json`](verification/claims.json).  In particular, the

@@ -26,6 +26,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.Exoti
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.AlternatingFiveIdentification
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.FrobeniusNormalizer
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPointHeartEndomorphisms
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SymmetricSixExclusion
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FramedMultiplicity
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.LowDimensionalVanishingCore
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.WeakFactorization
@@ -66,6 +67,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.PositiveFil
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.PositiveEvaluatedFormalBaseShift
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CubicPacket
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.RankTwoResidueRigidity
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.SeparatedSpectralPairing
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.GenusEightThreefold
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.UniversalCH0
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.SeparationFamily
@@ -5144,5 +5146,71 @@ theorem residueDiscriminant_eq_squared_eigenvalue_separation
           Quantum.residueDiscriminant R :=
   ⟨Quantum.residueDiscriminant_eq_sq_sub_of_trace_det R r₁ r₂ traceValue detValue,
     Quantum.residueDiscriminant_add_scalar R⟩
+
+/-- Reviewer-facing block diagonality of a horizontal pairing on two spectral
+factors with distinct leading eigenvalues.  The first clause is the Sylvester
+step: the equation satisfied by an off-diagonal pairing coefficient at the
+leading order has only the zero solution when the two leading operators differ
+by a unit scalar and are otherwise nilpotent.  The second is the induction over
+the remaining orders, whose right-hand sides vanish once all strictly earlier
+coefficients do.  The third is the nondegeneracy consequence: a pairing with
+vanishing off-diagonal blocks is invertible exactly when both diagonal
+restrictions are.
+
+Lean does not construct the `F`-bundle, the spectral splitting, the connection,
+or the pairing, and does not derive the order-by-order equations from
+horizontality.  The refinement to the even part of a factor, which uses that the
+Poincare pairing pairs only equal parities, is not part of this statement. -/
+theorem separatedSpectralFactors_pairing_blockDiagonal
+    {K : Type*} [Field K] {leftRank rightRank : ℕ}
+    {leftOperator : Matrix (Fin leftRank) (Fin leftRank) K}
+    {rightOperator : Matrix (Fin rightRank) (Fin rightRank) K}
+    {leftEigenvalue rightEigenvalue : K}
+    (separated : leftEigenvalue ≠ rightEigenvalue)
+    (leftNilpotent : IsNilpotent (leftOperator - leftEigenvalue • 1))
+    (rightNilpotent : IsNilpotent (rightOperator - rightEigenvalue • 1)) :
+    (∀ block : Matrix (Fin leftRank) (Fin rightRank) K,
+        leftOperator.transpose * block = block * rightOperator → block = 0) ∧
+      (∀ coefficient rightHandSide : ℕ → Matrix (Fin leftRank) (Fin rightRank) K,
+        (∀ order, leftOperator.transpose * coefficient order -
+            coefficient order * rightOperator = rightHandSide order) →
+          (∀ order, (∀ smaller, smaller < order → coefficient smaller = 0) →
+            rightHandSide order = 0) →
+            ∀ order, coefficient order = 0) ∧
+      (∀ (leftBlock : Matrix (Fin leftRank) (Fin leftRank) K)
+          (rightBlock : Matrix (Fin rightRank) (Fin rightRank) K),
+        (Matrix.fromBlocks leftBlock 0 0 rightBlock).det ≠ 0 ↔
+          leftBlock.det ≠ 0 ∧ rightBlock.det ≠ 0) :=
+  ⟨fun _ sylvester =>
+      Quantum.sylvester_eq_zero_of_separated_eigenvalues separated leftNilpotent
+        rightNilpotent sylvester,
+    fun coefficient rightHandSide system earlierOrders =>
+      Quantum.offDiagonalCoefficients_eq_zero separated leftNilpotent rightNilpotent
+        coefficient rightHandSide system earlierOrders,
+    Quantum.blockDiagonal_det_ne_zero_iff⟩
+
+/-- Reviewer-facing exclusion of a faithful symmetric action on the classified
+automorphism groups.  The gluing argument rules out a rational two-primary
+discriminant kernel by showing it would make the symmetric group on six letters
+act faithfully on a smooth complex cubic threefold, which the classification of
+faithful automorphism groups forbids.  Lean computes the order of that symmetric
+group and proves the arithmetic that closes the argument: a group admitting an
+injective homomorphism from it has order divisible by that order, so no group
+whose order is smaller, and no group of order `9720`, admits one.
+
+The classification enters as the hypothesis that the ambient order is one of a
+supplied list, each entry of which is smaller than `720` or equal to `9720`.
+Lean constructs neither cubic threefolds nor their automorphism groups and does
+not prove the classification. -/
+theorem symmetricSix_no_faithful_action_on_classified_orders
+    {G : Type*} [Group G] [Finite G]
+    (classifiedOrders : List ℕ) (listed : Nat.card G ∈ classifiedOrders)
+    (classification : ∀ order ∈ classifiedOrders, order < 720 ∨ order = 9720) :
+    Nat.card (Equiv.Perm (Fin 6)) = 720 ∧
+      ¬ ∃ action : Equiv.Perm (Fin 6) →* G, Function.Injective action :=
+  ⟨GraphLattices.symmetricSix_card, by
+    rintro ⟨action, faithful⟩
+    exact GraphLattices.no_faithful_symmetricSix_of_classified_list classifiedOrders
+      listed classification action faithful⟩
 
 end TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue
