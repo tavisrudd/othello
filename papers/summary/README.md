@@ -131,7 +131,7 @@ complex as separate victories.
   exact stabilizer pairs. The two cubics occupy one invariant pencil, and
   the normalized outer difference gives an exact oriented round trip once a
   chordal companion is selected.
-  [Chordal and Conference Cubics: Reconstruction and a Residual C2-Torsor](../chordal-conference-reconstruction/chordal_conference_reconstruction.pdf).
+  [Chordal and Conference Cubics: Reconstruction and a Residual C2-Torsor](https://github.com/tavisrudd/chordal-conference-reconstruction/blob/main/chordal_conference_reconstruction.pdf).
 
 ### Coding theory and quantum information
 
@@ -201,7 +201,7 @@ boundary, and reproducible entry points.
 | <sub>*Clebsch: Rigidity from Sparse Shadows - II*</sub><br>Quadratic Trade Rigidity and Cubic Orientation in Conic Matching Quotients | Algebraic combinatorics | On the matching carrier, a two-valued quadratic trade classifies two exceptional geometries and a cubic orients their sheets. | [PDF](https://github.com/tavisrudd/clebsch-factorization/blob/main/clebsch_factorization.pdf) · [repo](https://github.com/tavisrudd/clebsch-factorization) |
 | <sub>*Clebsch: Rigidity from Sparse Shadows - III*</sub><br>Golden Descent and Operator Realizations of the Clebsch Cubic | Algebraic geometry / combinatorics | An exact arithmetic incidence cover selects a marked conference source whose cubic shadows return in degree-six harmonics; exchange rigidity and two-graph reconstruction follow independently. | [PDF](https://github.com/tavisrudd/clebsch-passages/blob/main/clebsch_passages.pdf) · [repo](https://github.com/tavisrudd/clebsch-passages) |
 | <sub>*Clebsch: Rigidity from Sparse Shadows - IV*</sub><br>Reconstructing PG(2,13), Its Conic, and Polarity from the Minimum Words of a Binary Conic Code | Coding / finite geometry | Weighted pair data on minimum words recover a marked projective plane, conic, and polarity. | [PDF](https://github.com/tavisrudd/q13-passant-code/blob/main/passant_code_q13.pdf) · [repo](https://github.com/tavisrudd/q13-passant-code) |
-| <sub>*Clebsch: Rigidity from Sparse Shadows - V*</sub><br>Chordal and Conference Cubics: Reconstruction and a Residual C2-Torsor | Invariant theory / algebraic combinatorics | Distinct chordal and conference cubics recover one marked six-axis carrier and admit an exact oriented marked return. | [PDF](../chordal-conference-reconstruction/chordal_conference_reconstruction.pdf) |
+| <sub>*Clebsch: Rigidity from Sparse Shadows - V*</sub><br>Chordal and Conference Cubics: Reconstruction and a Residual C2-Torsor | Invariant theory / algebraic combinatorics | Distinct chordal and conference cubics recover one marked six-axis carrier and admit an exact oriented marked return. | [PDF](https://github.com/tavisrudd/chordal-conference-reconstruction/blob/main/chordal_conference_reconstruction.pdf) · [repo](https://github.com/tavisrudd/chordal-conference-reconstruction) |
 | Irrationality of Cubic Threefolds after One Stabilization | Algebraic geometry / birational geometry | Every smooth cubic threefold stays irrational after multiplication by `P¹`, proved from a rank-two atomic residue discriminant of ordinary Hodge atoms, while an explicit family is universally `CH₀`-trivial; the framed count `ν₆ = 2` and its stabilization to `4` are separate computations. | [PDF](https://github.com/tavisrudd/cubic-stabilization-epilogue/blob/main/irrationality_after_one_stabilization.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-epilogue) |
 | Gamma Point Rows under Quantum Wall Crossing and a Criterion for Stable Irrationality | Algebraic geometry / quantum cohomology | A rank-one derived-clutching theorem, an exact simple-wall ambient point coordinate, ordinary-flop point-row transport, global support collapse, and Gamma reduction give an all-stabilizations criterion under explicit gauged-admissibility and marked threshold assumptions. | [PDF](https://github.com/tavisrudd/cubic-stabilization-irrationality/blob/main/cubic_stabilization_irrationality.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-irrationality) |
 | Standard Flips of Discrepancy One: Extremal J-Normalization and the Meijer Aperture at ν=1 | Algebraic geometry / quantum cohomology | An exact `z`-order count and the `ν=1` Barnes sector complete the discrepancy-one range in Shen--Shoemaker's extremal flip theorem. | [PDF](https://github.com/tavisrudd/discrepancy-one-flips/blob/main/discrepancy_one_flips.pdf) · [repo](https://github.com/tavisrudd/discrepancy-one-flips) |
@@ -346,7 +346,7 @@ reconstruction counterpart to the earlier Clebsch recognition work.
 
 #### V — Chordal and Conference Cubics: Reconstruction and a Residual C2-Torsor
 
-[PDF](../chordal-conference-reconstruction/chordal_conference_reconstruction.pdf)
+[PDF](https://github.com/tavisrudd/chordal-conference-reconstruction/blob/main/chordal_conference_reconstruction.pdf) · [Repository](https://github.com/tavisrudd/chordal-conference-reconstruction) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21895531-blue.svg)](https://doi.org/10.5281/zenodo.21895531)
 
 **Standout result.** The Paper-II signed cubic is a chordal Hankel companion,
 not the conference cubic of Papers I and III. Its singular quartic recovers

@@ -1769,3 +1769,29 @@ here, and no quantum-cohomology computation for `M` was attempted.
 
 **Status:** open, unpromoted. Incidental; surfaced when the C908 lane asked
 whether its asset helps C913. No identifier allocated.
+
+## 2026-08-18 (C918): a resolving DOI badge can still point at a pre-retitle record
+
+Verifying that a Zenodo badge returns HTTP 200 does not establish that it names
+the paper the badge sits next to. Paper V's badge DOI `10.5281/zenodo.21895531`
+resolves, but the record it resolves to is titled *The Golden Companion
+Correspondence* and archives a zip whose filenames are the retired
+`golden_companion_*` ones. The cause is ordinary and will recur across the
+series: the GitHub release that triggered the deposit was tagged 2026-08-10, and
+the retitle commits landed 2026-08-11, so Zenodo froze the pre-retitle metadata.
+Paper IV's deposit shows the same lag in milder form — its record title
+("Minimum-word reconstruction of PG(2,13) from a binary conic code") is a
+descriptive earlier phrasing rather than the published title.
+
+**Evidence:** MEASURED. `https://zenodo.org/api/records/21895531` returns
+`title` = "The Golden Companion Correspondence", `version` = v0.1.0, `conceptdoi`
+= `10.5281/zenodo.21895530`, single file
+`tavisrudd/chordal-conference-reconstruction-v0.1.0.zip`; the GitHub releases API
+for the same repository reports exactly one release, `v0.1.0`, created
+2026-08-10T13:23:13Z; the retitle commits are `e5d7ab8` and `a8ee939`, both dated
+2026-08-11 in `~/src/math-papers/chordal-conference-reconstruction`.
+
+**Status:** open, unpromoted. Incidental; surfaced while confirming the DOI
+supplied for the Paper V badge. Suggests a cheap standing check at release time —
+compare the Zenodo record title against the manuscript title for every deposited
+paper — but no identifier is allocated and no sweep was run.

@@ -3149,8 +3149,17 @@
       "last": 917,
       "purpose": "epilogue positioning re classical Hodge theory and Guere",
       "sequence": 350
+    },
+    {
+      "count": 1,
+      "first": 918,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 918,
+      "purpose": "Paper V summary links/DOI repair and series-epigraph provenance",
+      "sequence": 351
     }
   ],
-  "next_id": 918,
+  "next_id": 919,
   "schema": "codex-task-id-allocations-v1"
 }
