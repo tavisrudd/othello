@@ -110,18 +110,37 @@ introduction and proved in Section 5, and it carries the two packet terminals.
 route: the residue discriminant of the cubic zero packet is `4/9`, of every
 curve residue is `0`, that separation with the parity ranks excludes
 representatives of dimension at most two, and the ordinary non-rationality
-criterion then gives irrationality of the stabilized fourfold.  Coverage after the priority 0b and 0d passes below is
-50 claims and 46 machinery rows over 192 terminals: 18 absent, 16 fragmentary,
-15 conditional, 1 complete; the paper is warning-free at 49 pages.  Report:
+criterion then gives irrationality of the stabilized fourfold.  Coverage after the passes below is
+50 claims and 46 machinery rows over 198 terminals: 16 absent, 16 fragmentary,
+17 conditional, 1 complete; the paper is warning-free at 49 pages.  Report:
 [`../2026-08-18-c910-atom-route-anchor.md`](../2026-08-18-c910-atom-route-anchor.md).
-The remaining work from the audit is `lem:disc`, `lem:spectrum-transfer`, the
-even-part refinement of `lem:orthogonal`, and the orphaned machinery themes.
+The remaining work from the audit is the even-part refinement of
+`lem:orthogonal` and the orphaned machinery themes.
 `prop:no-curve` and `prop:no-surface` are proved in
 `Quantum/LowDimensionalAtomRepresentatives.lean` from premises matching the
 manuscript's citations: the curve dichotomy carrying the projective-line and
 nef-canonical cases, the point-blowup descent, and the minimal-model
 classification.  Report:
 [`../2026-08-18-c910-low-dimensional-exclusions.md`](../2026-08-18-c910-low-dimensional-exclusions.md).
+
+`lem:disc` and `lem:spectrum-transfer` are proved in
+`Quantum/QuarticDiscriminantDerivations.lean`,
+`Quantum/PowerSeriesLogarithmicVanishing.lean`, and
+`Quantum/ModuleSpectrumTransfer.lean`.  From the sixteen coefficient identities
+of a regular four-dimensional `F`-manifold alone, Lean derives the four
+logarithmic derivatives of the quartic discriminant and the statement that any
+ring-coefficient combination of the canonical frame multiplies the discriminant
+by the matching combination of factors; the coefficient discriminant polynomial
+is identified with the squared product of pairwise root differences; and the
+frame identities are exhibited in the universal root model, so the deduction is
+not vacuous.  In a formal power-series model of the germ over a characteristic-zero
+domain, a series whose every formal partial derivative is a multiple of itself and
+whose constant coefficient vanishes is zero, which gives the lemma's vanishing
+statement.  Spectrum transfer is proved for any element of a finite-dimensional
+commutative algebra acting on a module in which some vector generates an
+injective copy of the algebra, by the non-unit/zero-divisor argument rather than
+the manuscript's idempotent decomposition.  Report:
+[`../2026-08-18-c910-discriminant-and-spectrum-transfer.md`](../2026-08-18-c910-discriminant-and-spectrum-transfer.md).
 
 The integral algebra includes the arbitrary-size DVR rank-one criterion,
 flattened split-coordinate coefficient lattices, an explicit invertible

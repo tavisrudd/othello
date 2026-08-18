@@ -98,8 +98,8 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   `Verification/AxiomAudit`; no duplicate under the shared
   `lean/TavisRuddFiniteGeom/` tree or a second Lean repository. The sources
   build through the guarded queue; `make check` and the axiom-log gate green
-  over 50 claims, 46 machinery rows, and 192 reviewer terminals; coverage 18
-  absent / 16 fragmentary / 15 conditional / 1 complete. `thm:every-cubic` is
+  over 50 claims, 46 machinery rows, and 198 reviewer terminals; coverage 16
+  absent / 16 fragmentary / 17 conditional / 1 complete. `thm:every-cubic` is
   anchored to the atomic route, the framed spine answers to its own manuscript
   theorem `thm:every-cubic-conditional` and is now assembled end to end on the
   product-formula signature, the small even block reduction is formalized from
@@ -113,9 +113,14 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   `cor:v14-one-step` is also proved: the genus-eight flop makes the two
   stabilizations birational and irrationality transports back from the cubic.
   The curve and surface exclusions are proved from premises matching the
-  manuscript's citations rather than from two bundled implications. Next step is
-  `lem:disc` and `lem:spectrum-transfer`, or the even-part refinement of
-  `lem:orthogonal`.
+  manuscript's citations rather than from two bundled implications. `lem:disc`
+  and `lem:spectrum-transfer` are now conditional deductions: the four
+  logarithmic derivatives of the quartic discriminant follow from the
+  coefficient identities alone, those identities are exhibited in the universal
+  root model, the vanishing half is proved in a formal power-series model of the
+  germ, and the eigenvalue sets on the even algebra and on the full module
+  coincide. Next step is the even-part refinement of `lem:orthogonal`, or the
+  absent geometric rows `lem:hodge-base` and `lem:euler-sign`.
   Card:
   `../cubic-threefolds-tasks/c910-cubic-stabilization-lean-companion.md`; gap audit
   `../2026-08-18-c910-post-restructure-gap-audit.md`; anchor report
@@ -128,7 +133,9 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   report `../2026-08-18-c910-pairing-horizontality.md`; genus-eight
   unconditional report `../2026-08-18-c910-genus-eight-unconditional.md`;
   low-dimensional exclusions report
-  `../2026-08-18-c910-low-dimensional-exclusions.md`; interim release report
+  `../2026-08-18-c910-low-dimensional-exclusions.md`; discriminant and
+  spectrum-transfer report
+  `../2026-08-18-c910-discriminant-and-spectrum-transfer.md`; interim release report
   `../2026-08-12-c910-partial-lean-release.md`.
 - **C914 — active.** The `A_5`-pencil is proved to contain the Fermat cubic
   threefold, so it meets the already-known universally `CH_0`-trivial
