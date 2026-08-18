@@ -222,3 +222,67 @@ worth more than the coverage fraction suggests.
 Second, `prop:cubic-block-data` is shared by Sections 4 and 5.  Formalizing it
 once serves the unconditional atom route and the conditional framed route
 simultaneously, which no other single item does.
+
+## Addendum: the four labels this audit first omitted
+
+The tiering above covered the Section 4 and Section 5 additions and
+`lem:six-point-hearts`, but silently skipped `prop:A5-nonseparated` and the
+three separation corollaries.  The cause was a reading gap: the audit was
+written after reading Sections 1, 4, and 6 in full and Section 5 in part, with
+Sections 2 and 3 seen only through their label lists.  Both sections have now
+been read in full and the four labels are tiered here.
+
+**`prop:A5-nonseparated`: mostly citation plumbing, with one small reachable
+piece.  Low priority.**  The proposition says that the coarse-moduli image of
+the `A_5`-pencil meets the separated-variable locus in finitely many points.
+Its proof has five steps, and only two of them are Lean-shaped.  A form split
+into blocks of at most three variables in five variables must have a block of
+size one or two — that is a finite combinatorial statement about partitions of
+a five-element set and is reachable immediately, though it carries little
+weight on its own.  The closing deduction is also checkable once typed: a
+proper closed subset of an irreducible curve of finite type is finite, and a
+locus contained in the union of two such subsets is finite.  Everything in
+between is imported — Gonz\'alez-Aguilera and Liendo's classification of
+order-three families and their signatures, the Klein cubic's membership in the
+signature `(0, 0, 1, 1, 2)` family, and Hartlieb's closedness and
+irreducibility of the moduli images.  Formalizing the proposition would mean
+typing four external statements to check two short steps.
+
+**The three separation corollaries: mechanical, and worth doing for uniformity
+rather than for new checking.**  `cor:voisin-separation`,
+`cor:fermat-separation`, and `cor:coprime-separation` each combine an external
+universal `CH_0`-triviality input with the projective-bundle formula for Chow
+groups and the one-step irrationality theorem.  That is exactly the shape the
+package already implements for `cor:universal-ch0` and
+`thm:separation-family`, so each is a premise structure plus a two-line
+composition.  The reason to land them is that all four separation statements
+would then visibly consume the atomic irrationality terminal, which is what the
+manuscript now uses; at present they are `absent` rows whose only connection to
+the headline is prose.
+
+**`lem:six-point-hearts`, confirmed against the statement.**  The lemma asserts
+simplicity of the six-point heart over `F_2` and `F_3` together with the
+endomorphism algebras `F_4` and `F_3`.  The manuscript proves it by exhibiting
+the two generators as explicit four-by-four matrices in each characteristic,
+noting that the minimal polynomial of the order-five generator is the fifth
+cyclotomic polynomial and is irreducible because `p` has order four modulo
+five, and solving the commutant equations, with the modular Atlas cited as
+agreement rather than as evidence.  The Lean package proves the `p = 2`
+simplicity and commutant classification and carries the `p = 3` heart with its
+form and action.  A terminal stating the lemma as the manuscript states it
+would make it internal to the artifact.  The Tier 1 placement stands.
+
+**New finding: the exclusion that selects the exotic gluing ends in an
+unformalized arithmetic check.**  The proof of
+`prop:principal-gluing-packet` rules out a rational two-primary kernel by
+showing that `S_6` would then act faithfully on a smooth cubic threefold, and
+closes by comparing orders against Hartlieb's classification of faithful
+automorphism groups: `|S_6| = 720`, five of the six listed ambient groups are
+smaller, and the sixth has order `9720`, which is not divisible by `720`.  The
+claim row is `fragment` with fifteen terminals, and those cover the `F_4` and
+`A_5` side — the projective-line packets, isotropy, the Frobenius exchange, and
+the identification of the exceptional stabilizer with the alternating group of
+order sixty.  They do not cover this final comparison: neither `720` nor `9720`
+occurs anywhere in the Lean sources.  The check is Tier 1 arithmetic once the
+six group orders are supplied as a premise, and it is the step that actually
+selects the exotic pair, so it is worth more than its size suggests.
