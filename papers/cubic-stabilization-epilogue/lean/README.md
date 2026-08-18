@@ -41,8 +41,8 @@ deduction as well: from the product formula, taken as a typed premise, Lean
 obtains the value four for the product of a cubic threefold with a projective
 line and the value zero for every projective space.
 
-Checked coverage snapshot: 50 claims; 16 absent; 15 fragmentary; 18 conditional;
-1 complete; 201 reviewer terminals, of which 46 are machinery serving no current
+Checked coverage snapshot: 50 claims; 14 absent; 17 fragmentary; 18 conditional;
+1 complete; 203 reviewer terminals, of which 46 are machinery serving no current
 manuscript claim.
 
 Those 46 are kernel-checked and reusable, and the claim map records for each one
@@ -542,6 +542,16 @@ The reviewer-facing terminals currently verify:
   vector of a restriction extends by zero to a nonzero kernel vector of the
   whole pairing, and reindexing along a bijection with a finite ordinal
   preserves nonvanishing of the determinant;
+- invariance of the residue discriminant under a change of frame and a scalar
+  recentering of the residue, since conjugation preserves the trace and the
+  determinant;
+- constancy of the residue discriminant over a formal germ of the base: if each
+  formal partial derivative of the residue is its commutator with a regular
+  matrix, then every formal partial derivative of the residue discriminant
+  vanishes and the residue discriminant is the constant series with its own
+  constant coefficient.  The derivation calculus this uses, additivity and the
+  Leibniz rule for the coefficientwise formal partial derivative of a
+  multivariate formal power series, is proved alongside it;
 - the order-by-order content of horizontality for a sesquilinear pairing whose
   right argument is evaluated at the negated loop coordinate.  For a connection
   with a simple pole, the coefficient of the inverse loop coordinate is exactly

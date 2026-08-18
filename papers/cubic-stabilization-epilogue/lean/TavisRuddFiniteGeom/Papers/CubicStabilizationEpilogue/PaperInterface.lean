@@ -73,6 +73,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.OrthogonalR
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.BlockDiagonalHorizontalPairing
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.QuarticDiscriminantDerivations
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.PowerSeriesLogarithmicVanishing
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.ResidueDiscriminantInvariance
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.ModuleSpectrumTransfer
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.GenusEightThreefold
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.UniversalCH0
@@ -5239,6 +5240,59 @@ theorem residueDiscriminant_eq_squared_eigenvalue_separation
           Quantum.residueDiscriminant R :=
   ⟨Quantum.residueDiscriminant_eq_sq_sub_of_trace_det R r₁ r₂ traceValue detValue,
     Quantum.residueDiscriminant_add_scalar R⟩
+
+/-- Reviewer-facing invariance of the residue discriminant under a change of
+frame and a scalar recentering of the residue.  Conjugating a residue by
+mutually inverse matrices preserves its trace and its determinant, hence its
+residue discriminant, and adding any scalar multiple of the identity afterwards
+changes nothing further.  These are the two operations an isomorphism of even
+rank-two atomic `F`-bundles performs on the residue of the canonical elementary
+modification: conjugation by the value of the isomorphism, and the trace
+centering applied on both sides.
+
+Lean constructs no atomic `F`-bundle, no isomorphism of such, and no elementary
+modification, and does not prove that an isomorphism acts on the residue by
+conjugation; the statement is matrix algebra over an arbitrary commutative
+ring. -/
+theorem atomicResidueDiscriminant_invariant_under_frame_change
+    {K : Type*} [CommRing K] (R P Q : Matrix (Fin 2) (Fin 2) K)
+    (leftInverse : P * Q = 1) (rightInverse : Q * P = 1) (shift : K) :
+    Quantum.residueDiscriminant (P * R * Q) = Quantum.residueDiscriminant R ∧
+      Quantum.residueDiscriminant (P * R * Q + shift • (1 : Matrix (Fin 2) (Fin 2) K)) =
+        Quantum.residueDiscriminant R :=
+  ⟨Quantum.residueDiscriminant_conjugate R P Q leftInverse rightInverse,
+    Quantum.residueDiscriminant_conjugate_add_scalar R P Q leftInverse rightInverse shift⟩
+
+/-- Reviewer-facing constancy of the residue discriminant over a formal germ of
+the base.  The residue is a two-by-two matrix over a multivariate formal
+power-series ring over a characteristic-zero domain, and modified flatness enters
+as the hypothesis that each formal partial derivative of the residue is its
+commutator with a matrix regular in the germ.  Then the residue discriminant is
+the constant series with its own constant coefficient: a derivation annihilates
+the residue discriminant of a family satisfying that commutator equation, and a
+series all of whose formal partial derivatives vanish has no coefficient outside
+the constant term, because the coefficient of a derivative is a positive integer
+multiple of a coefficient of the series.
+
+Lean models the germ by a formal power-series ring.  It constructs no analytic or
+rigid-analytic germ, no spectral cover and no connected component of one, and
+proves neither the meromorphic extension across the locus where the leading
+operator degenerates nor the identification of the formal model with a geometric
+germ. -/
+theorem atomicResidueDiscriminant_constant_on_formal_germ
+    {σ : Type*} [DecidableEq σ] {K : Type*} [CommRing K] [IsDomain K] [CharZero K]
+    (residue : Matrix (Fin 2) (Fin 2) (MvPowerSeries σ K))
+    (regular : σ → Matrix (Fin 2) (Fin 2) (MvPowerSeries σ K))
+    (flatness : ∀ i, residue.map (Quantum.formalPartialDerivative i)
+      = regular i * residue - residue * regular i) :
+    Quantum.residueDiscriminant residue
+        = MvPowerSeries.C (MvPowerSeries.constantCoeff (Quantum.residueDiscriminant residue)) ∧
+      ∀ d : σ →₀ ℕ, d ≠ 0 →
+        MvPowerSeries.coeff d (Quantum.residueDiscriminant residue) = 0 := by
+  have constant := Quantum.residueDiscriminant_eq_constant_of_commutatorDerivative residue regular
+    flatness
+  refine ⟨constant, fun d nonzero => ?_⟩
+  rw [constant, MvPowerSeries.coeff_C, if_neg nonzero]
 
 /-- Reviewer-facing block diagonality of a horizontal pairing on two spectral
 factors with distinct leading eigenvalues.  The first clause is the Sylvester

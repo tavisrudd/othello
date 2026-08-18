@@ -394,21 +394,25 @@
     },
     {
       "manuscript_label": "lem:crossing",
-      "coverage": "absent",
-      "declarations": [],
-      "objects": "The residue discriminant as a meromorphic function on a connected spectral component.",
-      "hypotheses": "The leading nilpotent part is generically nonzero on the component.",
-      "conclusion": "The residue discriminant extends meromorphically and is constant on the component, so it does not depend on the base point representing the local atom.",
-      "cautions": "Not formalized."
+      "coverage": "fragment",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.atomicResidueDiscriminant_constant_on_formal_germ"
+      ],
+      "objects": "A two-by-two matrix over a ring of multivariate formal power series over a characteristic-zero domain, modelling the residue over a formal germ of the base; a family of matrices over the same ring, one for each variable, modelling the regular matrices of the modified flatness equation; and the coefficientwise formal partial derivatives of that ring, whose additivity and Leibniz rule are proved.",
+      "hypotheses": "Each formal partial derivative of the residue is its commutator with the regular matrix of that variable, which is what modified flatness asserts in each base direction.",
+      "conclusion": "Every formal partial derivative of the residue discriminant vanishes, and a series all of whose formal partial derivatives vanish has no coefficient outside the constant term, so the residue discriminant is the constant series with its own constant coefficient: it does not vary over the germ.",
+      "cautions": "The germ is modelled by a formal power-series ring. Lean constructs no analytic or rigid-analytic germ, no spectral cover and no connected component of one, and proves neither the meromorphic extension across the locus where the leading operator degenerates, nor normality, connectedness, or irreducibility of that component, nor the identification of the formal model with a geometric germ. Constancy on a formal germ is therefore weaker than constancy on the manuscript's connected component."
     },
     {
       "manuscript_label": "prop:atom-invariant",
-      "coverage": "absent",
-      "declarations": [],
-      "objects": "An ordinary Hodge atom whose geometric atomic F-bundle has even rank two, and the residue discriminant attached to it.",
-      "hypotheses": "The centered leading operator of the atomic F-bundle is generically nonzero nilpotent.",
-      "conclusion": "The residue discriminant is a well-defined invariant of the ordinary Hodge atom.",
-      "cautions": "Not formalized. This is the invariant the one-stabilization theorem runs on, and no part of its construction is in the companion."
+      "coverage": "fragment",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.atomicResidueDiscriminant_invariant_under_frame_change"
+      ],
+      "objects": "Two-by-two residue matrices over a commutative ring, a pair of mutually inverse matrices acting by conjugation, and the addition of a scalar multiple of the identity.",
+      "hypotheses": "The two conjugating matrices are mutually inverse.",
+      "conclusion": "The residue discriminant is unchanged by conjugation, because conjugation preserves the trace and the determinant, and is unchanged by conjugation followed by adding any scalar multiple of the identity.",
+      "cautions": "This is the first half of the manuscript proof, the invariance under an isomorphism of atomic F-bundles, reduced to its matrix algebra. Lean constructs no ordinary Hodge atom, atomic F-bundle, isomorphism of such, or elementary modification, and does not prove that an isomorphism acts on the residue by conjugation and trace recentering, that the even rank and the generic nonvanishing of the leading operator are preserved, or that the image of the leading operator is carried to the corresponding line. The second half, independence of the base point within a connected component of the spectral cover, is the separate crossing row, and the gluing of local factors over that component is a further separate row with no formal counterpart."
     },
     {
       "manuscript_label": "prop:no-curve",
