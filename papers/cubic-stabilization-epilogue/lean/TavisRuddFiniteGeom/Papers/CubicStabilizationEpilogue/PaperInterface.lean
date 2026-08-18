@@ -5925,4 +5925,34 @@ theorem cubicZeroPacket_parityRanks_eq_two_and_ten (betti : ℕ → ℤ) (topChe
     degreeOne degreeTwo degreeFour degreeFive degreeSix chernNumber eulerCharacteristic evenBlock
     oddPart
 
+/-- Reviewer-facing invariance of the rank-two residue discriminant under sign
+reversal.  Sign reversal negates the trace of a two-by-two matrix and fixes its
+determinant, so `(trace R) ^ 2 - 4 * det R` is unchanged and the atomic invariant
+may be read from either of the two operators that differ by the sign. -/
+theorem residueDiscriminant_under_sign_reversal {K : Type*} [CommRing K]
+    (R : Matrix (Fin 2) (Fin 2) K) :
+    Quantum.residueDiscriminant (-R) = Quantum.residueDiscriminant R :=
+  Quantum.residueDiscriminant_neg R
+
+/-- Reviewer-facing parity of the universal quartic discriminant in its odd
+characteristic coefficients.  Negating the coefficients of the linear and cubic
+terms of a monic quartic leaves its discriminant unchanged; this is the split-free
+form of the invariance used for the rank-four characteristic polynomial. -/
+theorem characteristicDiscriminant_under_odd_coefficient_sign_reversal {A : Type*} [CommRing A]
+    (l₀ l₁ l₂ l₃ : A) :
+    Quantum.quarticDiscriminant l₀ (-l₁) l₂ (-l₃) = Quantum.quarticDiscriminant l₀ l₁ l₂ l₃ :=
+  Quantum.quarticDiscriminant_neg_odd_coefficients l₀ l₁ l₂ l₃
+
+/-- Reviewer-facing uniqueness of the total Chern class of a smooth cubic
+threefold.  The adjunction factor `1 + 3 * P` is a unit in the truncated ring
+because the hyperplane class is nilpotent of exponent four, so the class solving
+the adjunction equation is exactly `1 + 2 * P + 4 * P ^ 2 - 2 * P ^ 3` and its
+degree-three component is `-2 * P ^ 3`. -/
+theorem cubicThreefold_totalChernClass_uniqueness {A : Type*} [CommRing A] (P chernClass : A)
+    (vanishing : P ^ 4 = 0) (adjunction : (1 + 3 * P) * chernClass = (1 + P) ^ 5) :
+    (1 + 3 * P) * (1 - 3 * P + 9 * P ^ 2 - 27 * P ^ 3) = 1 ∧
+      chernClass = 1 + 2 * P + 4 * P ^ 2 - 2 * P ^ 3 :=
+  ⟨Applications.cubicThreefold_adjunctionFactor_isUnit P vanishing,
+    Applications.cubicThreefold_totalChernClass_unique P chernClass vanishing adjunction⟩
+
 end TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue

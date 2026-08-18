@@ -55,6 +55,29 @@ theorem cubicThreefold_totalChernClass (P : A) (vanishing : P ^ 4 = 0) :
     (1 + 3 * P) * (1 + 2 * P + 4 * P ^ 2 - 2 * P ^ 3) = (1 + P) ^ 5 := by
   linear_combination (-11 - P) * vanishing
 
+/-- The adjunction factor is a unit in the truncated ring, with the displayed
+inverse, because the hyperplane class is nilpotent of exponent four. -/
+theorem cubicThreefold_adjunctionFactor_isUnit (P : A) (vanishing : P ^ 4 = 0) :
+    (1 + 3 * P) * (1 - 3 * P + 9 * P ^ 2 - 27 * P ^ 3) = 1 := by
+  linear_combination (-81 : A) * vanishing
+
+/-- The total Chern class of a smooth cubic threefold is the only solution of the
+adjunction equation.  Since the factor `1 + 3 * P` is a unit, any class whose
+product with it is the fifth power of `1 + P` equals
+`1 + 2 * P + 4 * P ^ 2 - 2 * P ^ 3`, so the third Chern class is `-2 * P ^ 3`
+rather than merely consistent with that value. -/
+theorem cubicThreefold_totalChernClass_unique (P chernClass : A) (vanishing : P ^ 4 = 0)
+    (adjunction : (1 + 3 * P) * chernClass = (1 + P) ^ 5) :
+    chernClass = 1 + 2 * P + 4 * P ^ 2 - 2 * P ^ 3 := by
+  have inverse := cubicThreefold_adjunctionFactor_isUnit P vanishing
+  have expanded : (1 - 3 * P + 9 * P ^ 2 - 27 * P ^ 3) * ((1 + 3 * P) * chernClass) =
+      (1 - 3 * P + 9 * P ^ 2 - 27 * P ^ 3) * (1 + P) ^ 5 := by rw [adjunction]
+  calc chernClass = ((1 + 3 * P) * (1 - 3 * P + 9 * P ^ 2 - 27 * P ^ 3)) * chernClass := by
+        rw [inverse, one_mul]
+    _ = (1 - 3 * P + 9 * P ^ 2 - 27 * P ^ 3) * ((1 + 3 * P) * chernClass) := by ring
+    _ = (1 - 3 * P + 9 * P ^ 2 - 27 * P ^ 3) * (1 + P) ^ 5 := expanded
+    _ = 1 + 2 * P + 4 * P ^ 2 - 2 * P ^ 3 := by linear_combination (-70 - 194 * P - 228 * P ^ 2 - 126 * P ^ 3 - 27 * P ^ 4) * vanishing
+
 end ChernClass
 
 section BettiNumbers

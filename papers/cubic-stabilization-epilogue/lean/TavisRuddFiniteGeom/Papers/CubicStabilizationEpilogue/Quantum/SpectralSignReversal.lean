@@ -1,6 +1,7 @@
 import Mathlib.Tactic
 import Mathlib.LinearAlgebra.Eigenspace.Basic
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.QuarticDiscriminantDerivations
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.AtomicResidueDiscriminant
 
 /-!
 # Spectral data under sign reversal of an endomorphism
@@ -24,7 +25,9 @@ of the endomorphism.
 Finally the discriminant of the characteristic polynomial is unchanged.  Every
 monomial of the universal quartic discriminant has even total degree in the two
 odd characteristic coefficients, and negating the roots of a monic quartic
-negates exactly those two coefficients.
+negates exactly those two coefficients.  In rank two the same holds for the
+residue discriminant `(trace R) ^ 2 - 4 * det R`, since sign reversal negates the
+trace and fixes the determinant.
 
 Lean constructs no `F`-bundle, no `F`-manifold, and no spectral cover here; the
 statements are about an endomorphism of a module and about the coefficients of a
@@ -143,6 +146,20 @@ theorem quarticDiscriminant_neg_roots (r₀ r₁ r₂ r₃ : A) :
         (-(r₀ + r₁ + r₂ + r₃)) := by
   rw [quarticDiscriminant_eq_squared_root_differences,
     quarticDiscriminant_eq_squared_root_differences]
+  ring
+
+/-- The residue discriminant of a two-by-two residue is unchanged by sign
+reversal: the trace changes sign and its square does not, and the determinant of
+a two-by-two matrix is unchanged.  The rank-two invariant of the manuscript can
+therefore be read from the residual endomorphism of the connection or from Euler
+multiplication without distinction. -/
+theorem residueDiscriminant_neg (R : Matrix (Fin 2) (Fin 2) A) :
+    residueDiscriminant (-R) = residueDiscriminant R := by
+  have traceReversed : Matrix.trace (-R) = -Matrix.trace R := by simp
+  have determinantUnchanged : (-R).det = R.det := by
+    rw [Matrix.det_neg]
+    simp
+  rw [residueDiscriminant, residueDiscriminant, traceReversed, determinantUnchanged]
   ring
 
 end Discriminant
