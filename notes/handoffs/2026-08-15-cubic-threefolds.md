@@ -97,10 +97,13 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   reviewer entry point `PaperInterface` and machine audit
   `Verification/AxiomAudit`; no duplicate under the shared
   `lean/TavisRuddFiniteGeom/` tree or a second Lean repository. 93 sources
-  build through the guarded queue; exact bijection among 23 manuscript
-  claims, 168 reviewer terminals, and expected axiom rows; coverage 0
-  absent / 13 fragmentary / 9 conditional / 1 complete. Card:
-  `../cubic-threefolds-tasks/c910-cubic-stabilization-lean-companion.md`; interim release report
+  build through the guarded queue; `make check` green over 49 claims, 46
+  machinery rows, and 168 reviewer terminals; coverage 29 absent / 10
+  fragmentary / 9 conditional / 1 complete after the 2026-08-16 manuscript
+  restructure. Next step is the gap audit's priority 0: re-anchor
+  `thm:every-cubic` to the atom route it is now proved by. Card:
+  `../cubic-threefolds-tasks/c910-cubic-stabilization-lean-companion.md`; gap audit
+  `../2026-08-18-c910-post-restructure-gap-audit.md`; interim release report
   `../2026-08-12-c910-partial-lean-release.md`.
 - **C914 — active.** The `A_5`-pencil is proved to contain the Fermat cubic
   threefold, so it meets the already-known universally `CH_0`-trivial
