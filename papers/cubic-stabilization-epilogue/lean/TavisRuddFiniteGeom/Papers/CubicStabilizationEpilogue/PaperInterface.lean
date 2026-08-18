@@ -25,6 +25,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.Trace
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.ExoticStabilizerCore
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.AlternatingFiveIdentification
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.FrobeniusNormalizer
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPointHeartEndomorphisms
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FramedMultiplicity
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.LowDimensionalVanishingCore
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.WeakFactorization
@@ -74,6 +75,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.CubicP
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.DivisorTaggingVanishing
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.CubicAtomOneStep
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.CubicPacketFromBlockReduction
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.ProjectiveProductMultiplicity
 
 /-!
 # Reviewer interface for the cubic-stabilization companion
@@ -4879,6 +4881,147 @@ theorem cubicPacket_sixthMultiplicity_eq_two_of_block_exponents
     ∀ cubic, geometry.isSmoothCubicThreefold cubic →
       (geometry.framedMonodromy cubic).sixthMultiplicity = 2 :=
   Applications.cubicPacket_sixthMultiplicity_eq_two_of_block_exponents geometry
+    exponentMonodromy
+
+/-- Reviewer-facing simplicity and endomorphism algebras of the two six-point
+hearts.  The six labels carry the six order-five subgroups of the alternating
+group on five letters, and the two generators permute them by conjugation
+exactly as they permute the labels; the generator words realize the whole
+alternating group.  For each of the characteristics two and three, the heart is
+the quotient of the augmentation hyperplane of the six-label permutation module
+by its constant line, presented in four explicit coordinates, and the two label
+permutations induce the displayed generator matrices.
+
+Every subspace stable under the generated action is zero or everything, so both
+hearts are simple.  In characteristic two the commutant of the generated action
+is `{0, 1, W, W + 1}` with `W ^ 2 + W + 1 = 0`, `W (W + 1) = 1`, and the four
+elements pairwise distinct, so it is the field with four elements; in
+characteristic three the commutant consists of the scalar matrices alone, which
+is the field with three elements.  The identification of the six labels with
+dihedral subgroups arising from a geometric object is not part of this
+statement. -/
+theorem sixPointHearts_simple_with_endomorphism_algebras :
+    (∀ heart : Fin 4 → GraphLattices.F2,
+        GraphLattices.sixPointHeartCoordinates
+          (GraphLattices.sixPointHeartRepresentative heart) = heart) ∧
+      (∀ vector : Fin 6 → GraphLattices.F2, ∑ point, vector point = 0 →
+        (GraphLattices.sixPointHeartCoordinates vector = 0 ↔
+          ∀ point, vector point = vector 5)) ∧
+      (∀ heart : Fin 4 → GraphLattices.F2,
+        GraphLattices.sixPointHeartCoordinates
+            (GraphLattices.sixPointHeartRepresentative heart ∘
+              GraphLattices.sixPointTranslationPreimage) =
+          Matrix.mulVec GraphLattices.sixPointHeartTranslation heart ∧
+        GraphLattices.sixPointHeartCoordinates
+            (GraphLattices.sixPointHeartRepresentative heart ∘
+              GraphLattices.sixPointInversionPreimage) =
+          Matrix.mulVec GraphLattices.sixPointHeartInversion heart) ∧
+      (∀ subspace : Submodule GraphLattices.F2 (Fin 4 → GraphLattices.F2),
+        (∀ (word : List Bool) (vector : Fin 4 → GraphLattices.F2),
+          vector ∈ subspace →
+            Matrix.mulVec (GraphLattices.sixPointHeartWordMatrix word) vector ∈
+              subspace) →
+          subspace = ⊥ ∨ subspace = ⊤) ∧
+      (∀ matrix : Matrix (Fin 4) (Fin 4) GraphLattices.F2,
+        (∀ word : List Bool,
+          matrix * GraphLattices.sixPointHeartWordMatrix word =
+            GraphLattices.sixPointHeartWordMatrix word * matrix) ↔
+          matrix = 0 ∨ matrix = 1 ∨
+            matrix = GraphLattices.sixPointHeartCommutantRoot ∨
+            matrix = GraphLattices.sixPointHeartCommutantRoot + 1) ∧
+      (GraphLattices.sixPointHeartCommutantRoot ^ 2 +
+            GraphLattices.sixPointHeartCommutantRoot + 1 = 0 ∧
+        GraphLattices.sixPointHeartCommutantRoot *
+            (GraphLattices.sixPointHeartCommutantRoot + 1) = 1 ∧
+        GraphLattices.sixPointHeartCommutantRoot ≠ 0 ∧
+        GraphLattices.sixPointHeartCommutantRoot ≠ 1 ∧
+        (0 : Matrix (Fin 4) (Fin 4) GraphLattices.F2) ≠ 1) ∧
+      (∀ vector : GraphLattices.SixPointThreeAugmentation,
+        GraphLattices.sixPointThreeAugmentationQuotientEquivHeart
+            (Submodule.Quotient.mk vector) =
+          GraphLattices.sixPointThreeHeartCoordinates vector.1) ∧
+      (∀ heart : GraphLattices.SixPointThreeAugmentationQuotient,
+        GraphLattices.sixPointThreeAugmentationQuotientEquivHeart
+              (GraphLattices.sixPointThreeAugmentationQuotientTranslation heart) =
+            Matrix.mulVec GraphLattices.sixPointThreeHeartTranslation
+              (GraphLattices.sixPointThreeAugmentationQuotientEquivHeart heart) ∧
+          GraphLattices.sixPointThreeAugmentationQuotientEquivHeart
+              (GraphLattices.sixPointThreeAugmentationQuotientInversion heart) =
+            Matrix.mulVec GraphLattices.sixPointThreeHeartInversion
+              (GraphLattices.sixPointThreeAugmentationQuotientEquivHeart heart)) ∧
+      (∀ subspace :
+          Submodule GraphLattices.F3 GraphLattices.SixPointThreeHeart,
+        (∀ (word : List Bool) (vector : GraphLattices.SixPointThreeHeart),
+          vector ∈ subspace →
+            Matrix.mulVec (GraphLattices.sixPointThreeHeartWordMatrix word)
+              vector ∈ subspace) →
+          subspace = ⊥ ∨ subspace = ⊤) ∧
+      (∀ matrix : Matrix (Fin 4) (Fin 4) GraphLattices.F3,
+        (∀ word : List Bool,
+          matrix * GraphLattices.sixPointThreeHeartWordMatrix word =
+            GraphLattices.sixPointThreeHeartWordMatrix word * matrix) ↔
+          ∃ value : GraphLattices.F3,
+            matrix = Matrix.scalar (Fin 4) value) :=
+  GraphLattices.sixPointHearts_simple_with_endomorphism_algebras
+
+/-- Reviewer-facing vanishing of the primitive-sixth multiplicity of every
+projective space.  The premises are the manuscript's product formula for a
+product with a projective space, the identification of a projective space with
+the product of a point with it, and involutivity of the framed monodromy of a
+point.  Lean deduces that the point and every projective space have vanishing
+multiplicity; dimension three is the value used in the universal triviality
+comparison, and dimension four is the value used by the framed-monodromy proof
+of one-step irrationality. -/
+theorem projectiveSpace_sixthMultiplicity_eq_zero_of_product_inputs
+    {Variety : Type*}
+    (geometry : Applications.ProjectiveProductGeometry Variety)
+    (input : Applications.ProjectiveProductInput geometry) :
+    (geometry.framedMonodromy geometry.point).sixthMultiplicity = 0 ∧
+      ∀ dimension : ℕ,
+        (geometry.framedMonodromy
+          (geometry.projectiveSpace dimension)).sixthMultiplicity = 0 :=
+  ⟨Applications.point_sixthMultiplicity_eq_zero geometry input,
+    Applications.projectiveSpace_sixthMultiplicity_eq_zero geometry input⟩
+
+/-- Reviewer-facing framed count after one product stabilization, from the
+packet value.  Under the manuscript's product formula, a variety of
+primitive-sixth multiplicity two has multiplicity four after multiplication by
+a projective line. -/
+theorem productProjectiveLine_sixthMultiplicity_eq_four
+    {Variety : Type*}
+    (geometry : Applications.ProjectiveProductGeometry Variety)
+    (input : Applications.ProjectiveProductInput geometry) {base : Variety}
+    (packet : (geometry.framedMonodromy base).sixthMultiplicity = 2) :
+    (geometry.framedMonodromy
+        (geometry.productWithProjectiveSpace base 1)).sixthMultiplicity = 4 :=
+  Applications.productProjectiveLine_sixthMultiplicity_eq_four geometry input packet
+
+/-- Reviewer-facing framed count after one product stabilization for a smooth
+cubic threefold.  The packet value two is not assumed: it is derived from the
+small even block reduction, so the premises are the manuscript's product
+formula, involutivity of the framed monodromy of a point, and the passage from
+the exponents of the reduced rank-two block to framed formal monodromy. -/
+theorem cubicProductProjectiveLine_sixthMultiplicity_eq_four_of_block_exponents
+    {Variety : Type*}
+    (geometry : Applications.ProjectiveProductGeometry Variety)
+    (input : Applications.ProjectiveProductInput geometry)
+    (exponentMonodromy : ∀ cubic, geometry.isSmoothCubicThreefold cubic →
+      ∀ firstExponent secondExponent : ℚ,
+        Quantum.cubicIndicialPolynomial =
+            (Polynomial.X - Polynomial.C firstExponent) *
+              (Polynomial.X - Polynomial.C secondExponent) →
+          (geometry.framedMonodromy cubic).operator.charpoly =
+            (Polynomial.X -
+                Polynomial.C
+                  (Complex.exp (2 * (Real.pi : ℂ) * Complex.I * (firstExponent : ℂ)))) *
+              (Polynomial.X -
+                Polynomial.C
+                  (Complex.exp (2 * (Real.pi : ℂ) * Complex.I * (secondExponent : ℂ)))) *
+                (Polynomial.X - Polynomial.C 1) ^ 2) :
+    ∀ cubic, geometry.isSmoothCubicThreefold cubic →
+      (geometry.framedMonodromy
+          (geometry.productWithProjectiveSpace cubic 1)).sixthMultiplicity = 4 :=
+  Applications.cubicProductProjectiveLine_sixthMultiplicity_eq_four geometry input
     exponentMonodromy
 
 end TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue
