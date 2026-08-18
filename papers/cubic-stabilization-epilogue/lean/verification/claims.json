@@ -401,21 +401,25 @@
     },
     {
       "manuscript_label": "prop:no-curve",
-      "coverage": "absent",
-      "declarations": [],
-      "objects": "The cubic atom and smooth projective varieties of dimension at most one.",
-      "hypotheses": "The computed values of the residue discriminant for the cubic atom and for curve atoms.",
-      "conclusion": "The cubic atom is represented by no smooth projective variety of dimension at most one.",
-      "cautions": "Not formalized."
+      "coverage": "conditional_deduction",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicAtom_not_represented_by_curve"
+      ],
+      "objects": "An ordinary Hodge-atom ledger with a dimension and an atomic multiplicity, the parity ranks and residue discriminant of an atom, the genus of a curve, and the explicit rational residue matrix of the cubic zero packet.",
+      "hypotheses": "The atom has even rank two, odd rank ten, and the residue discriminant of the displayed cubic residue matrix. On a variety of dimension at most one, every occurring atom is supplied to be either of even rank one, the point case, or of parity ranks two and twice the genus with vanishing residue discriminant, the nef-canonical curve case.",
+      "conclusion": "A variety of dimension at most one carrying the atom would have genus five, and no variety of dimension at most one carries it at all, because the residue discriminant of the cubic atom evaluates to four ninths while a curve atom has vanishing residue discriminant.",
+      "cautions": "Lean constructs no variety, atom, or atomic composition and proves none of the imported formulas: the projective-bundle formula for a projective line, the point calculation, the nef-canonical lemma, the classical cup product on a curve of positive genus, and the residue computation of the modified lattice all enter through the supplied dichotomy. The genus clause is vacuous once the exclusion is proved; it records the manuscript's intermediate step."
     },
     {
       "manuscript_label": "prop:no-surface",
-      "coverage": "absent",
-      "declarations": [],
-      "objects": "The cubic atom and smooth projective surfaces, together with the classification of minimal surfaces and parity ranks.",
-      "hypotheses": "The preceding curve exclusion and additivity of atoms for disjoint unions.",
-      "conclusion": "The cubic atom is represented by no smooth projective surface, hence by no smooth projective variety of dimension at most two.",
-      "cautions": "Not formalized. The surface classification input is imported classical geometry."
+      "coverage": "conditional_deduction",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicAtom_not_represented_by_surface"
+      ],
+      "objects": "The same ledger and atom invariants, together with a supplied passage from a surface to a minimal model.",
+      "hypotheses": "The atom has even rank two, odd rank ten, and the residue discriminant of the displayed cubic residue matrix. An atom of even rank at least two occurring on a variety of dimension at most two is supplied to occur on the minimal model, and an atom occurring on the minimal model is supplied to have even rank at least three or to occur already on a variety of dimension at most one. The curve dichotomy of the preceding row is also assumed.",
+      "conclusion": "No smooth projective variety of dimension at most two carries the cubic zero-packet atom.",
+      "cautions": "Lean constructs no variety, atom, atomic composition, blow-down, or minimal model, and proves neither the point-blowup formula, the nef-canonical lemma, the classification of minimal smooth complex projective surfaces, nor the projective-bundle formulas for the projective plane and a geometrically ruled surface; each enters as a supplied premise. Additivity for disjoint unions is not represented: the statement quantifies over varieties directly. The headline row reaches the same exclusion from two bundled implications rather than from these refined premises."
     },
     {
       "manuscript_label": "def:framed-sixth-multiplicity",

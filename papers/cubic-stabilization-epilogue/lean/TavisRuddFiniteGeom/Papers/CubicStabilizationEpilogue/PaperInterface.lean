@@ -4759,6 +4759,60 @@ theorem genusEight_oneStep_irrational_of_flop_inputs
   Applications.genusEight_oneStepStabilization_not_rational
     packet birationalInput geometry input
 
+/-- Reviewer-facing exclusion of curve representatives of the cubic zero-packet
+atom.  The atom has even rank two, odd rank ten, and the residue discriminant of
+the displayed cubic residue matrix, which Lean evaluates as four ninths.  On a
+smooth projective variety of dimension at most one an occurring atom is either a
+point atom, of even rank one, or the single nef-canonical atom of a curve, whose
+parity ranks are two and twice the genus and whose residue discriminant
+vanishes.  The first clause is the manuscript's intermediate step: only genus
+five is compatible with the parity ranks.  The second clause excludes even that
+genus, since the residue discriminant of the cubic atom is nonzero, which makes
+the first clause vacuous.
+
+Lean constructs no variety, atom, or atomic composition, and proves none of the
+imported formulas; the projective-bundle formula for a projective line, the
+nef-canonical lemma, and the residue computation for a curve enter through the
+supplied dichotomy. -/
+theorem cubicAtom_not_represented_by_curve
+    {Variety Atom : Type*}
+    {ledger : Quantum.OrdinaryAtomLedger Variety Atom}
+    {curveInput : Quantum.CurveRepresentativeInput ledger} {atom : Atom}
+    (input : Applications.CubicAtomRepresentativeInput ledger curveInput atom) :
+    (∀ curve : Variety, ledger.dimension curve ≤ 1 →
+        ledger.multiplicity curve atom ≠ 0 → curveInput.genus curve = 5) ∧
+      ∀ curve : Variety, ledger.dimension curve ≤ 1 →
+        ledger.multiplicity curve atom = 0 :=
+  ⟨fun curve curveDimension occurs =>
+      Applications.cubicAtom_genus_eq_five_of_representative input curve curveDimension occurs,
+    fun curve curveDimension =>
+      Applications.cubicAtom_multiplicity_eq_zero_of_dimension_le_one input curve
+        curveDimension⟩
+
+/-- Reviewer-facing exclusion of surface representatives of the cubic zero-packet
+atom, and hence of every representative of dimension at most two.  An atom of
+even rank at least two survives the blow-down to a minimal model; on a minimal
+model with nef canonical class the single atom has even rank at least three,
+which the cubic atom does not; and the remaining minimal surfaces, the
+projective plane and the geometrically ruled surfaces, carry only point and
+curve atoms, which the curve analysis excludes.
+
+Lean constructs no variety, atom, atomic composition, blow-down, or minimal
+model, and proves neither the point-blowup formula, the nef-canonical lemma, the
+classification of minimal smooth complex projective surfaces, nor the
+projective-bundle formulas; each enters through the supplied premises. -/
+theorem cubicAtom_not_represented_by_surface
+    {Variety Atom : Type*}
+    {ledger : Quantum.OrdinaryAtomLedger Variety Atom}
+    {curveInput : Quantum.CurveRepresentativeInput ledger}
+    (surfaceInput : Quantum.SurfaceRepresentativeInput ledger curveInput) {atom : Atom}
+    (input : Applications.CubicAtomRepresentativeInput ledger curveInput atom) :
+    ∀ witness : Variety, ledger.dimension witness ≤ 2 →
+      ledger.multiplicity witness atom = 0 :=
+  fun witness witnessDimension =>
+    Applications.cubicAtom_multiplicity_eq_zero_of_surface_analysis surfaceInput input witness
+      witnessDimension
+
 /-- Reviewer-facing unconditional one-step irrationality for a genus-eight Fano
 threefold.  A rank-two projectivization is birational to the product of its base
 with a projective line, so Kuznetsov's flop between the projectivizations of the

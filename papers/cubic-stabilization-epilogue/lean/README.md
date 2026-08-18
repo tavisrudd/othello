@@ -41,8 +41,8 @@ deduction as well: from the product formula, taken as a typed premise, Lean
 obtains the value four for the product of a cubic threefold with a projective
 line and the value zero for every projective space.
 
-Checked coverage snapshot: 50 claims; 20 absent; 16 fragmentary; 13 conditional;
-1 complete; 190 reviewer terminals, of which 46 are machinery serving no current
+Checked coverage snapshot: 50 claims; 18 absent; 16 fragmentary; 15 conditional;
+1 complete; 192 reviewer terminals, of which 46 are machinery serving no current
 manuscript claim.
 
 Those 46 are kernel-checked and reusable, and the claim map records for each one
@@ -439,6 +439,12 @@ The reviewer-facing terminals currently verify:
   equalities, without formal coefficient embeddings or a gauge witness;
 - typed blowup/blowdown telescoping in dimension four and the conditional cubic
   and genus-eight irrationality deductions;
+- the two low-dimensional exclusions of the atomic route in their refined form,
+  where the point-blowup formula, the passage to a minimal model, the
+  nef-canonical lemma, the classification of minimal surfaces, and the parity
+  ranks of a curve atom are separate premises: a variety of dimension at most
+  one carrying the cubic zero-packet atom would have genus five, no such variety
+  carries it, and no variety of dimension at most two does either;
 - the unconditional genus-eight route, which uses no multiplicity at all: since
   each rank-two projectivization is birational to the product of its base with a
   projective line, the flop makes one projective-line stabilization of the Fano
