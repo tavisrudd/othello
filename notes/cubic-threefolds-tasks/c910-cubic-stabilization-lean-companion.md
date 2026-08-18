@@ -111,17 +111,32 @@ route: the residue discriminant of the cubic zero packet is `4/9`, of every
 curve residue is `0`, that separation with the parity ranks excludes
 representatives of dimension at most two, and the ordinary non-rationality
 criterion then gives irrationality of the stabilized fourfold.  Coverage after the passes below is
-50 claims and 46 machinery rows over 201 terminals: 16 absent, 15 fragmentary,
+50 claims and 46 machinery rows over 204 terminals: 13 absent, 18 fragmentary,
 18 conditional, 1 complete; the paper is warning-free at 49 pages.  Report:
 [`../2026-08-18-c910-atom-route-anchor.md`](../2026-08-18-c910-atom-route-anchor.md).
 The remaining work from the audit is the absent geometric rows
-`lem:hodge-base` and `lem:euler-sign` and the orphaned machinery themes.
+`lem:hodge-base`, `lem:euler-sign`, and `prop:cubic-atom`, and the orphaned
+machinery themes.
 `prop:no-curve` and `prop:no-surface` are proved in
 `Quantum/LowDimensionalAtomRepresentatives.lean` from premises matching the
 manuscript's citations: the curve dichotomy carrying the projective-line and
 nef-canonical cases, the point-blowup descent, and the minimal-model
 classification.  Report:
 [`../2026-08-18-c910-low-dimensional-exclusions.md`](../2026-08-18-c910-low-dimensional-exclusions.md).
+
+The residue-discriminant invariance cluster is covered on its algebraic side by
+`Quantum/ResidueDiscriminantInvariance.lean`, moving `prop:atom-invariant`,
+`lem:factor-glue`, and `lem:crossing` from absent to fragments.  Conjugation by
+mutually inverse matrices preserves trace and determinant, hence the residue
+discriminant, and a further scalar recentering changes nothing; a change of frame
+that is block diagonal for a labelled splitting restricts on each factor to
+conjugation by mutually inverse diagonal blocks, so a rank-two factor's value is
+frame independent; and over a formal power-series germ in characteristic zero, a
+residue whose every formal partial derivative is a commutator with a regular
+matrix has constant residue discriminant.  The last needs the derivation calculus
+of the coefficientwise formal partial derivative, so additivity and the Leibniz
+rule for multivariate formal power series are proved here as well.  Report:
+[`../2026-08-18-c910-residue-discriminant-invariance.md`](../2026-08-18-c910-residue-discriminant-invariance.md).
 
 `lem:orthogonal` is now a conditional deduction, proved in
 `Quantum/OrthogonalRestrictionNondegeneracy.lean` and

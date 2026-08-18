@@ -98,8 +98,8 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   `Verification/AxiomAudit`; no duplicate under the shared
   `lean/TavisRuddFiniteGeom/` tree or a second Lean repository. The sources
   build through the guarded queue; `make check` and the axiom-log gate green
-  over 50 claims, 46 machinery rows, and 201 reviewer terminals; coverage 16
-  absent / 15 fragmentary / 18 conditional / 1 complete. `thm:every-cubic` is
+  over 50 claims, 46 machinery rows, and 204 reviewer terminals; coverage 13
+  absent / 18 fragmentary / 18 conditional / 1 complete. `thm:every-cubic` is
   anchored to the atomic route, the framed spine answers to its own manuscript
   theorem `thm:every-cubic-conditional` and is now assembled end to end on the
   product-formula signature, the small even block reduction is formalized from
@@ -124,8 +124,12 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   block diagonal, a nondegenerate pairing stays nondegenerate on any set of
   coordinates orthogonal to its complement, which covers one factor and the even
   part of a factor, and equal leading eigenvalues admit a horizontal nonzero
-  pairing. Next step is the absent geometric rows `lem:hodge-base` and
-  `lem:euler-sign`.
+  pairing. The residue discriminant is also proved invariant under conjugation,
+  under a block-diagonal change of frame on one factor, and constant over a
+  formal germ whose residue derivatives are commutators, which makes
+  `prop:atom-invariant`, `lem:factor-glue`, and `lem:crossing` fragments. Next
+  step is the absent geometric rows `lem:hodge-base`, `lem:euler-sign`, and
+  `prop:cubic-atom`.
   Card:
   `../cubic-threefolds-tasks/c910-cubic-stabilization-lean-companion.md`; gap audit
   `../2026-08-18-c910-post-restructure-gap-audit.md`; anchor report
@@ -137,6 +141,8 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   report `../2026-08-18-c910-highest-risk-items.md`; pairing-horizontality
   report `../2026-08-18-c910-pairing-horizontality.md`; even-part
   orthogonality report `../2026-08-18-c910-even-part-orthogonality.md`;
+  residue-discriminant invariance report
+  `../2026-08-18-c910-residue-discriminant-invariance.md`;
   genus-eight
   unconditional report `../2026-08-18-c910-genus-eight-unconditional.md`;
   low-dimensional exclusions report
