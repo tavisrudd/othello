@@ -120,6 +120,11 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   and testing odd-degree isogeny of `J(X_b)` to a curve Jacobian, then
   restate the pencil's contribution at its proved strength. Card:
   `../cubic-threefolds-tasks/c914-a5-pencil-vs-coprime-degree-locus.md`.
+- **C917 — epilogue positioning, active, scope pending author details.**
+  Add explicit positioning of the `m = 1` epilogue against the classical
+  Hodge-theoretic route to cubic irrationality and against Jérémy Guéré's
+  atom/quantum-cohomology work; prose and bibliography only. Card:
+  `../cubic-threefolds-tasks/c917-epilogue-hodge-and-guere-positioning.md`.
 - **C911 — closed.** Discrepancy-one flip correction, published as a
   standalone ten-page note (`papers/discrepancy-one-flips/`), DOI
   `10.5281/zenodo.21924799`. Independent cold read passed; authority and
