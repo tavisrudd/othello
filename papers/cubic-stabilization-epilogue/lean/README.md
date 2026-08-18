@@ -42,7 +42,7 @@ obtains the value four for the product of a cubic threefold with a projective
 line and the value zero for every projective space.
 
 Checked coverage snapshot: 50 claims; 16 absent; 15 fragmentary; 18 conditional;
-1 complete; 200 reviewer terminals, of which 46 are machinery serving no current
+1 complete; 201 reviewer terminals, of which 46 are machinery serving no current
 manuscript claim.
 
 Those 46 are kernel-checked and reusable, and the claim map records for each one

@@ -14,7 +14,7 @@ labels, claim-map declarations, public terminals, axiom-audit commands, or
 expected axiom rows must preserve their exact correspondence.
 
 Checked coverage snapshot: 50 claims; 16 absent; 15 fragmentary; 18 conditional;
-1 complete; 200 reviewer terminals, of which 46 are machinery serving no current
+1 complete; 201 reviewer terminals, of which 46 are machinery serving no current
 manuscript claim.
 
 The Lean modules and axiom audit can be built with the pinned package command

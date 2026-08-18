@@ -258,6 +258,38 @@ theorem evenPartOfFactor_leadingPairing_det_ne_zero
       0 row column different)
     parityOrthogonal leadingNondegenerate value
 
+/-- Two factors whose leading eigenvalues agree can carry a nonzero horizontal
+pairing, so distinctness of the leading eigenvalues cannot be dropped from the
+block-diagonality statement.  The witness is a pair of one-dimensional factors
+whose connections are the same scalar residue with vanishing regular part,
+paired by a constant pairing with invertible leading coefficient: every
+coefficient of the sesquilinear horizontality identity vanishes because the two
+residue terms cancel and every other term contains a vanishing factor, while the
+leading pairing coefficient is the identity. -/
+theorem equalEigenvalues_admit_nonzero_horizontalPairing (eigenvalue : K) :
+    ∃ (residue : Matrix (Fin 1) (Fin 1) K)
+      (regular pairing derivative : ℕ → Matrix (Fin 1) (Fin 1) K),
+      IsNilpotent (residue - eigenvalue • 1) ∧
+        (∀ order, pairing order = 0 → derivative order = 0) ∧
+        (∀ order, pairingHorizontalityCoefficient residue regular residue regular
+          pairing derivative order = 0) ∧
+        pairing 0 ≠ 0 := by
+  refine ⟨eigenvalue • 1, fun _ => 0, fun order => if order = 0 then 1 else 0, fun _ => 0,
+    ⟨1, by simp⟩, fun _ _ => rfl, ?_, ?_⟩
+  · intro order
+    cases order with
+    | zero =>
+        show (eigenvalue • (1 : Matrix (Fin 1) (Fin 1) K))ᵀ * (if (0 : ℕ) = 0 then 1 else 0)
+          - (if (0 : ℕ) = 0 then 1 else 0) * (eigenvalue • (1 : Matrix (Fin 1) (Fin 1) K)) = 0
+        simp
+    | succ order =>
+        rw [pairingHorizontalityCoefficient_succ]
+        simp
+  · intro leadingZero
+    have entry : (1 : Matrix (Fin 1) (Fin 1) K) 0 0 = (0 : Matrix (Fin 1) (Fin 1) K) 0 0 := by
+      simpa using congrFun (congrFun leadingZero 0) 0
+    simp at entry
+
 end Quantum
 
 end TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue

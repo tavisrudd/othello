@@ -5521,6 +5521,29 @@ theorem separatedSpectralFactors_evenPart_pairing_nondegenerate
     Matrix.nondegenerate_iff_det_ne_zero.mpr evenPart,
     fun _ frame => Quantum.det_frameSubmatrix_ne_zero frame evenPart⟩
 
+/-- Reviewer-facing witness that distinctness of the leading eigenvalues cannot
+be dropped from block diagonality of a horizontal pairing.  For any scalar there
+are two one-dimensional factors whose connections have that same scalar residue
+and vanishing regular part, and a pairing between them, constant with invertible
+leading coefficient, satisfying every coefficient of the sesquilinear
+horizontality identity while being nonzero.  The two residue terms cancel
+because the residues are equal scalars, and every remaining term contains a
+vanishing regular or pairing coefficient.
+
+This exhibits the failure of the conclusion, not of the manuscript proof: the
+Sylvester operator of the leading order is invertible precisely because the
+difference of the two scalars is a unit. -/
+theorem separatedSpectralFactors_equalEigenvalues_admit_nonzero_horizontalPairing
+    {K : Type*} [Field K] (eigenvalue : K) :
+    ∃ (residue : Matrix (Fin 1) (Fin 1) K)
+      (regular pairing derivative : ℕ → Matrix (Fin 1) (Fin 1) K),
+      IsNilpotent (residue - eigenvalue • 1) ∧
+        (∀ order, pairing order = 0 → derivative order = 0) ∧
+        (∀ order, Quantum.pairingHorizontalityCoefficient residue regular residue regular
+          pairing derivative order = 0) ∧
+        pairing 0 ≠ 0 :=
+  Quantum.equalEigenvalues_admit_nonzero_horizontalPairing eigenvalue
+
 /-- Reviewer-facing identification of the discriminant of a monic quartic with
 the squared product of the pairwise differences of its roots.  The coefficients
 are the signed elementary symmetric functions of `r₀, r₁, r₂, r₃`, so the
