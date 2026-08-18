@@ -69,6 +69,9 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CubicPacket
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.RankTwoResidueRigidity
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.SeparatedSpectralPairing
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.PairingHorizontality
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.QuarticDiscriminantDerivations
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.PowerSeriesLogarithmicVanishing
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.ModuleSpectrumTransfer
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.GenusEightThreefold
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.UniversalCH0
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.SeparationFamily
@@ -5419,5 +5422,94 @@ theorem separatedSpectralFactors_pairing_eq_zero_of_horizontality
     ∀ order, pairing order = 0 :=
   Quantum.offDiagonalPairing_eq_zero_of_horizontality separated leftNilpotent rightNilpotent
     derivativeVanishing horizontal
+
+/-- Reviewer-facing identification of the discriminant of a monic quartic with
+the squared product of the pairwise differences of its roots.  The coefficients
+are the signed elementary symmetric functions of `r₀, r₁, r₂, r₃`, so the
+identity says that the universal discriminant polynomial of
+`T ^ 4 + l₃ T ^ 3 + l₂ T ^ 2 + l₁ T + l₀` computes the squared separation of the
+four roots whenever the quartic splits.  This holds over an arbitrary
+commutative ring. -/
+theorem quarticDiscriminant_eq_squared_root_differences {A : Type*} [CommRing A]
+    (r₀ r₁ r₂ r₃ : A) :
+    Quantum.quarticDiscriminant (r₀ * r₁ * r₂ * r₃)
+        (-(r₀ * r₁ * r₂ + r₀ * r₁ * r₃ + r₀ * r₂ * r₃ + r₁ * r₂ * r₃))
+        (r₀ * r₁ + r₀ * r₂ + r₀ * r₃ + r₁ * r₂ + r₁ * r₃ + r₂ * r₃)
+        (-(r₀ + r₁ + r₂ + r₃)) =
+      ((r₀ - r₁) * (r₀ - r₂) * (r₀ - r₃) * (r₁ - r₂) * (r₁ - r₃) * (r₂ - r₃)) ^ 2 :=
+  Quantum.quarticDiscriminant_eq_squared_root_differences r₀ r₁ r₂ r₃
+
+/-- Reviewer-facing logarithmic derivatives of the discriminant of the
+characteristic polynomial of Euler multiplication along the canonical frame of a
+regular four-dimensional `F`-manifold.  The unit field annihilates the
+discriminant, the Euler field multiplies it by twelve, and the second and third
+powers of the Euler field multiply it by `-6 l₃` and by `6 l₃ ^ 2 - 10 l₂`.
+
+The hypotheses are carried by `Quantum.EulerCoefficientFrame`: four elements of a
+commutative ring, playing the role of the characteristic coefficients, four
+derivations of that ring, playing the role of the canonical frame, and the
+sixteen coefficient identities forced by Cayley--Hamilton and the Witt relations
+of a regular `F`-manifold.  Lean constructs no `F`-manifold, tangent sheaf, or
+Euler field, and derives none of those sixteen identities from geometry. -/
+theorem eulerFrame_discriminant_logarithmicDerivatives {A : Type*} [CommRing A]
+    (S : Quantum.EulerCoefficientFrame A) :
+    S.frameField 0 S.discriminant = 0 ∧
+      S.frameField 1 S.discriminant = 12 * S.discriminant ∧
+        S.frameField 2 S.discriminant = -6 * S.lam3 * S.discriminant ∧
+          S.frameField 3 S.discriminant =
+            (6 * S.lam3 ^ 2 - 10 * S.lam2) * S.discriminant :=
+  S.frameField_discriminant
+
+/-- Reviewer-facing form of the statement that the differential of the
+discriminant is the discriminant times a regular one-form.  Any operator written
+as a ring-coefficient combination of the canonical frame multiplies the
+discriminant by the corresponding combination of the four logarithmic factors,
+so on a manifold where the canonical frame is a frame every coordinate
+derivative of the discriminant is a multiple of the discriminant. -/
+theorem eulerFrame_discriminant_differential {A : Type*} [CommRing A]
+    (S : Quantum.EulerCoefficientFrame A) (D : A → A) (c : Fin 4 → A)
+    (frame : ∀ x, D x = ∑ s, c s * S.frameField s x) :
+    D S.discriminant =
+      (12 * c 1 - 6 * S.lam3 * c 2 + (6 * S.lam3 ^ 2 - 10 * S.lam2) * c 3) * S.discriminant :=
+  S.logarithmic_of_frame_combination D c frame
+
+/-- Reviewer-facing vanishing of the discriminant on a formal germ.  The germ is
+modelled by the ring of formal power series in the variables `σ` over a
+commutative domain of characteristic zero; the canonical frame is assumed to
+express every formal partial derivative with power-series coefficients, which is
+the regularity of Euler multiplication at the base point; and the discriminant
+is assumed to vanish at the base point, that is, to have zero constant
+coefficient.  Then the discriminant is the zero power series.
+
+Lean does not construct an analytic or rigid-analytic germ, the isomorphism of a
+completed local ring with a power-series ring, or the injection of a Noetherian
+local ring into its completion. -/
+theorem eulerFrame_discriminant_eq_zero_of_vanishing_at_base_point {K σ : Type*}
+    [CommRing K] [NoZeroDivisors K] [CharZero K]
+    (S : Quantum.EulerCoefficientFrame (MvPowerSeries σ K))
+    (c : σ → Fin 4 → MvPowerSeries σ K)
+    (frame : ∀ (i : σ) (F : MvPowerSeries σ K),
+      Quantum.formalPartialDerivative i F = ∑ s, c i s * S.frameField s F)
+    (vanishing : MvPowerSeries.coeff 0 S.discriminant = 0) :
+    S.discriminant = 0 :=
+  Quantum.EulerCoefficientFrame.discriminant_eq_zero_of_constantCoeff_eq_zero S c frame vanishing
+
+/-- Reviewer-facing transfer of the spectrum of Euler multiplication from the
+even part to the whole of cohomology.  For a finite-dimensional commutative
+algebra `A` over a field, an element `E` of it, and a module `M` over `A` in
+which some vector generates an injective copy of `A`, the eigenvalues of `E` on
+`M` and on `A` are the same set.
+
+In the application `A` is even quantum cohomology at an even point of the Hodge
+base, `M` is the full cohomology of the same variety, which is a module over `A`
+because the bulk point is even, and the generating vector is the unit of the
+cohomology ring.  Lean constructs no quantum cohomology and no Euler field. -/
+theorem eulerMultiplication_eigenvalues_module_eq_algebra {k A M : Type*} [Field k]
+    [CommRing A] [Algebra k A] [FiniteDimensional k A] [AddCommGroup M] [Module A M]
+    [Module k M] [IsScalarTower k A M] (E : A) (unit : M)
+    (generating : Function.Injective fun b : A => b • unit) :
+    {lam : k | ∃ m : M, m ≠ 0 ∧ E • m = lam • m} =
+      {lam : k | ∃ a : A, a ≠ 0 ∧ E * a = lam • a} :=
+  Quantum.eigenvalues_module_eq_eigenvalues_algebra E unit generating
 
 end TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue

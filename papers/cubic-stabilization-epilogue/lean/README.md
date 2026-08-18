@@ -41,8 +41,8 @@ deduction as well: from the product formula, taken as a typed premise, Lean
 obtains the value four for the product of a cubic threefold with a projective
 line and the value zero for every projective space.
 
-Checked coverage snapshot: 50 claims; 18 absent; 16 fragmentary; 15 conditional;
-1 complete; 192 reviewer terminals, of which 46 are machinery serving no current
+Checked coverage snapshot: 50 claims; 16 absent; 16 fragmentary; 17 conditional;
+1 complete; 197 reviewer terminals, of which 46 are machinery serving no current
 manuscript claim.
 
 Those 46 are kernel-checked and reusable, and the claim map records for each one

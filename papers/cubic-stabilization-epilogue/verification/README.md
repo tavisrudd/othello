@@ -13,8 +13,8 @@ The snapshot below is the exact current inventory; any change to manuscript
 labels, claim-map declarations, public terminals, axiom-audit commands, or
 expected axiom rows must preserve their exact correspondence.
 
-Checked coverage snapshot: 50 claims; 18 absent; 16 fragmentary; 15 conditional;
-1 complete; 192 reviewer terminals, of which 46 are machinery serving no current
+Checked coverage snapshot: 50 claims; 16 absent; 16 fragmentary; 17 conditional;
+1 complete; 197 reviewer terminals, of which 46 are machinery serving no current
 manuscript claim.
 
 The Lean modules and axiom audit can be built with the pinned package command
