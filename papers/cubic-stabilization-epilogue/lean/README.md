@@ -41,8 +41,20 @@ deduction as well: from the product formula, taken as a typed premise, Lean
 obtains the value four for the product of a cubic threefold with a projective
 line and the value zero for every projective space.
 
-Checked coverage snapshot: 50 claims; 13 absent; 18 fragmentary; 18 conditional;
-1 complete; 204 reviewer terminals, of which 46 are machinery serving no current
+The geometric rows of the atomic route are covered on their algebraic side.  The
+sign between the residual endomorphism of the connection in the loop coordinate
+and Euler multiplication is turned into an exact dictionary between their
+generalized eigenspaces, eigenvalue counts, regularity, and characteristic
+discriminants; the fixed points of a family of algebra automorphisms are shown to
+form a subalgebra on which multiplication by a fixed element restricts, with the
+truncated polynomial algebra of exponent four as an instance; and the parity
+ranks two and ten of the zero packet of a cubic threefold are derived from the
+truncated Chern class arithmetic, the Betti numbers, the degree count placing the
+whole odd cohomology in that packet, and the constancy of rank on a connected
+component.
+
+Checked coverage snapshot: 50 claims; 10 absent; 21 fragmentary; 18 conditional;
+1 complete; 217 reviewer terminals, of which 46 are machinery serving no current
 manuscript claim.
 
 Those 46 are kernel-checked and reusable, and the claim map records for each one
