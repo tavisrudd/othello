@@ -111,12 +111,12 @@ route: the residue discriminant of the cubic zero packet is `4/9`, of every
 curve residue is `0`, that separation with the parity ranks excludes
 representatives of dimension at most two, and the ordinary non-rationality
 criterion then gives irrationality of the stabilized fourfold.  Coverage after the priority 0b and 0d passes below is
-50 claims and 46 machinery rows over 186 terminals: 21 absent, 15 fragmentary,
+50 claims and 46 machinery rows over 189 terminals: 20 absent, 16 fragmentary,
 13 conditional, 1 complete; the paper is warning-free at 49 pages.  Report:
 [`../2026-08-18-c910-atom-route-anchor.md`](../2026-08-18-c910-atom-route-anchor.md).
-The remaining work from the audit is the rest of 0d — `lem:orthogonal` and the
-pairing induction — plus `lem:disc`, `lem:spectrum-transfer`, the missing
-unconditional half of `cor:v14-one-step`, and the orphaned machinery themes.
+The remaining work from the audit is `lem:disc`, `lem:spectrum-transfer`, the
+missing unconditional half of `cor:v14-one-step`, the even-part refinement of
+`lem:orthogonal`, and the orphaned machinery themes.
 
 The integral algebra includes the arbitrary-size DVR rank-one criterion,
 flattened split-coordinate coefficient lattices, an explicit invertible
@@ -456,18 +456,26 @@ they are done; they come from the 2026-08-18 gap audit.
    framed route to one-step irrationality is separately assembled in
    `Applications/CubicFramedOneStep.lean`, where the cubic's count, its
    doubling, and the vanishing on projective four-space are proved rather than
-   assumed.  Still open in this item: `lem:orthogonal`, whose content is
-   Sylvester invertibility for separated leading eigenvalues followed by an
-   induction over the pairing coefficients; `lem:horiz`, whose matrix content
-   is a substitution and whose mathematical content is the Frobenius property
-   of quantum multiplication; and terminals for `prop:no-curve` and
-   `prop:no-surface` sliced out of the atom-route exclusion.  `lem:orthogonal`
-   landed separately in `Quantum/SeparatedSpectralPairing.lean` as the Sylvester
-   step, the order-by-order induction, and the block-determinant consequence;
-   deriving those equations from horizontality and the even-part refinement stay
-   open.  Reports:
-   [`../2026-08-18-c910-framed-route-and-rank-two-rigidity.md`](../2026-08-18-c910-framed-route-and-rank-two-rigidity.md) and
-   [`../2026-08-18-c910-highest-risk-items.md`](../2026-08-18-c910-highest-risk-items.md).
+   assumed.  `lem:orthogonal` landed in
+   `Quantum/SeparatedSpectralPairing.lean` as the Sylvester step, the
+   order-by-order induction, and the block-determinant consequence.
+   `Quantum/PairingHorizontality.lean` then supplied the formal-coefficient
+   model of the sesquilinear pairing and derived both order-by-order systems
+   from horizontality: the coefficient of the inverse loop coordinate is
+   self-adjointness of the residue, the constant coefficient is the four-term
+   relation feeding `lem:A0preserve`, and each later order is the Sylvester
+   equation with a remainder in strictly earlier coefficients, so the pairing
+   between separated factors vanishes.  `lem:horiz` became a fragment there:
+   a constant pairing is horizontal once the residue is self-adjoint and the
+   regular part is anti-self-adjoint in degree zero, which is the substitution
+   of the human proof and carries no content beyond those hypotheses.  Still
+   open in this item: the even-part refinement of `lem:orthogonal`, which needs
+   a parity model and the assembly of block pairings into one matrix, and
+   terminals for `prop:no-curve` and `prop:no-surface` sliced out of the
+   atom-route exclusion.  Reports:
+   [`../2026-08-18-c910-framed-route-and-rank-two-rigidity.md`](../2026-08-18-c910-framed-route-and-rank-two-rigidity.md),
+   [`../2026-08-18-c910-highest-risk-items.md`](../2026-08-18-c910-highest-risk-items.md), and
+   [`../2026-08-18-c910-pairing-horizontality.md`](../2026-08-18-c910-pairing-horizontality.md).
 
 
 Completed in the current tranche: the **three-primary coefficient packet**,
