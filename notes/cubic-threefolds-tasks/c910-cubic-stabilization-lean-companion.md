@@ -110,12 +110,13 @@ introduction and proved in Section 5, and it carries the two packet terminals.
 route: the residue discriminant of the cubic zero packet is `4/9`, of every
 curve residue is `0`, that separation with the parity ranks excludes
 representatives of dimension at most two, and the ordinary non-rationality
-criterion then gives irrationality of the stabilized fourfold.  Coverage after the priority 0b pass below is
-50 claims and 46 machinery rows over 179 terminals: 25 absent, 12 fragmentary,
-12 conditional, 1 complete; the paper is warning-free at 49 pages.  Report:
+criterion then gives irrationality of the stabilized fourfold.  Coverage after the priority 0b and 0d passes below is
+50 claims and 46 machinery rows over 184 terminals: 22 absent, 14 fragmentary,
+13 conditional, 1 complete; the paper is warning-free at 49 pages.  Report:
 [`../2026-08-18-c910-atom-route-anchor.md`](../2026-08-18-c910-atom-route-anchor.md).
-The remaining priority is 0d below, plus the missing
-unconditional half of `cor:v14-one-step` and the orphaned machinery themes.
+The remaining work from the audit is the rest of 0d — `lem:orthogonal` and the
+pairing induction — plus `lem:disc`, `lem:spectrum-transfer`, the missing
+unconditional half of `cor:v14-one-step`, and the orphaned machinery themes.
 
 The integral algebra includes the arbitrary-size DVR rank-one criterion,
 flattened split-coordinate coefficient lattices, an explicit invertible
@@ -447,10 +448,21 @@ they are done; they come from the 2026-08-18 gap audit.
    formalized.  `prop:cubic-packet` gained a second terminal whose premise is
    only the passage from residue exponents to framed monodromy.  Report:
    [`../2026-08-18-c910-block-reduction.md`](../2026-08-18-c910-block-reduction.md).
-0d. **The rank-two invariant chain.**  `lem:horiz`, `lem:orthogonal`,
-   `lem:A0preserve`, `prop:rank2-rigidity`, and
-   `prop:residue-discriminant-exponents`, then `prop:no-curve` and
-   `prop:no-surface` as typed deductions on top.
+0d. **The rank-two invariant chain — largely done 2026-08-18.**
+   `lem:A0preserve`, the two algebraic steps of `prop:rank2-rigidity`, and the
+   discriminant assertion of `prop:residue-discriminant-exponents` are in
+   `Quantum/RankTwoResidueRigidity.lean`, together with rank-two
+   Cayley-Hamilton and the square-zero sandwich identity behind them.  The
+   framed route to one-step irrationality is separately assembled in
+   `Applications/CubicFramedOneStep.lean`, where the cubic's count, its
+   doubling, and the vanishing on projective four-space are proved rather than
+   assumed.  Still open in this item: `lem:orthogonal`, whose content is
+   Sylvester invertibility for separated leading eigenvalues followed by an
+   induction over the pairing coefficients; `lem:horiz`, whose matrix content
+   is a substitution and whose mathematical content is the Frobenius property
+   of quantum multiplication; and terminals for `prop:no-curve` and
+   `prop:no-surface` sliced out of the atom-route exclusion.  Report:
+   [`../2026-08-18-c910-framed-route-and-rank-two-rigidity.md`](../2026-08-18-c910-framed-route-and-rank-two-rigidity.md).
 
 
 Completed in the current tranche: the **three-primary coefficient packet**,
@@ -521,6 +533,7 @@ papers/cubic-stabilization-epilogue/lean/
     Quantum/AssociatedGradedTagging.lean
     Quantum/WeakFactorization.lean
     Quantum/CubicPacket.lean
+    Quantum/RankTwoResidueRigidity.lean
     Quantum/PacketInvariant.lean
     Quantum/BirationalDeduction.lean
     Applications/CubicThreefold.lean
@@ -530,6 +543,7 @@ papers/cubic-stabilization-epilogue/lean/
     Applications/FramedOperationFormulas.lean
     Applications/CubicPacketFormula.lean
     Applications/ProjectiveProductMultiplicity.lean
+    Applications/CubicFramedOneStep.lean
     Applications/DivisorTaggingVanishing.lean
     PaperInterface.lean
     Verification/AxiomAudit.lean
