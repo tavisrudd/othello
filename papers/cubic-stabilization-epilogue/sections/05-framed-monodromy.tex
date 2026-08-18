@@ -1195,14 +1195,21 @@ Combine Proposition~\ref{prop:projective-product-nu} with
 Proposition~\ref{prop:cubic-packet}.
 \end{proof}
 
-\begin{remark}[Conditional second proof of Theorem~\ref{thm:every-cubic}]
-Assuming Hypotheses~5.7R and 5.7T,
-Theorem~\ref{thm:nu6-birational-invariance} turns the unconditional value
-\(\nu_6(X\times\PP^1)=4\) from Corollary~\ref{cor:cubic-product-nu} into
-the original framed-monodromy proof: a rational smooth fourfold has
-\(\nu_6=0\).  This remains a second, stronger-invariant proof rather than
-the logical basis of Theorem~\ref{thm:every-cubic}.
-\end{remark}
+\begin{proof}[Proof of Theorem~\ref{thm:every-cubic-conditional}]
+Corollary~\ref{cor:cubic-product-nu} gives \(\nu_6(X\times\PP^1)=4\)
+unconditionally.  Let \(Y\) be a rational smooth projective fourfold.  Then
+\(Y\) is birational to \(\PP^4\), so
+Theorem~\ref{thm:nu6-birational-invariance} gives
+\(\nu_6(Y)=\nu_6(\PP^4)\), while
+Proposition~\ref{prop:projective-product-nu} with
+\(T=\operatorname{pt}\) and \(m=4\) gives
+\(\nu_6(\PP^4)=5\nu_6(\operatorname{pt})=0\).  Since \(4\ne0\), the
+fourfold \(X\times\PP^1\) is not rational.
+\end{proof}
+
+This is the framed-monodromy proof of one-step irrationality.  It is
+independent of the atomic argument of Section~\ref{sec:atomic-one-step},
+which proves the same conclusion without either hypothesis.
 
 \subsection{A genus-eight Fano consequence}
 

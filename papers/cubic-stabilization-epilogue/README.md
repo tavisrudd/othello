@@ -20,7 +20,9 @@ stabilization identity `nu_6(X x P^1) = 4`.  Hypotheses 5.7R
 (reconstruction-tail invariance) and 5.7T (divisor-tagging specialization)
 carry only the refinement built on it: under them `nu_6` satisfies blowup and
 projective-bundle operation formulas and is birationally invariant through
-dimension four, which gives a second proof of the irrationality theorem.
+dimension four.  That refinement is stated as its own theorem in the
+introduction and gives a second proof of the irrationality theorem, by a finer
+invariant and under those two hypotheses.
 
 The paper then gives a non-isotrivial pencil of smooth cubic threefolds that
 are universally `CH_0`-trivial, where universal `CH_0`-triviality comes from an

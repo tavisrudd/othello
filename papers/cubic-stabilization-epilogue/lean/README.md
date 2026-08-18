@@ -26,12 +26,16 @@ formalization.  The machine-checked claim inventory contains every labelled
 theorem-like environment in the manuscript and classifies each one as absent
 from Lean, represented by an exact but strictly weaker fragment, represented by
 a conditional deduction with every external premise exposed in the theorem
-type, or completely formalized from the manuscript's stated hypotheses.  The
-atomic route to the one-stabilization theorem, added to the manuscript in
-August 2026, is entirely absent from Lean.
+type, or completely formalized from the manuscript's stated hypotheses.  Of the
+atomic route to the one-stabilization theorem, Lean checks the residue
+discriminants of the cubic zero packet and of a curve, the resulting exclusion
+of low-dimensional representatives, and the final non-rationality deduction from
+the ordinary Hodge-atom premises; the construction of the F-bundle, the spectral
+cover, the atom, and the elementary modification is not formalized and appears
+as typed premises.
 
-Checked coverage snapshot: 49 claims; 29 absent; 10 fragmentary; 9 conditional;
-1 complete; 168 reviewer terminals, of which 46 are machinery serving no current
+Checked coverage snapshot: 50 claims; 29 absent; 10 fragmentary; 10 conditional;
+1 complete; 172 reviewer terminals, of which 46 are machinery serving no current
 manuscript claim.
 
 Those 46 are kernel-checked and reusable, and the claim map records for each one

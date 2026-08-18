@@ -72,6 +72,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.LowDim
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.FramedOperationFormulas
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.CubicPacketFormula
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.DivisorTaggingVanishing
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.CubicAtomOneStep
 
 /-!
 # Reviewer interface for the cubic-stabilization companion
@@ -4749,5 +4750,51 @@ theorem genusEight_oneStep_irrational_of_flop_inputs
     ¬ geometry.Rational (geometry.productWithProjectiveLine fano) :=
   Applications.genusEight_oneStepStabilization_not_rational
     packet birationalInput geometry input
+
+/-- Reviewer-facing value of the residue discriminant of the small even zero
+packet of a smooth cubic threefold.  The matrix is the residue of the canonical
+elementary modification in the adapted frame, and the invariant is the
+discriminant of its characteristic polynomial. -/
+theorem cubicZeroPacket_residueDiscriminant_eq :
+    Quantum.residueDiscriminant Quantum.cubicZeroPacketResidue = 4 / 9 :=
+  Quantum.residueDiscriminant_cubicZeroPacketResidue
+
+/-- Reviewer-facing vanishing of the residue discriminant of the even
+connection of a smooth projective curve of genus at least two, for every value
+of the Euler-characteristic parameter.  The modified residue has a repeated
+eigenvalue. -/
+theorem curve_residueDiscriminant_eq_zero (eulerCharacteristic : ℚ) :
+    Quantum.residueDiscriminant (Quantum.curveResidue eulerCharacteristic) = 0 :=
+  Quantum.residueDiscriminant_curveResidue eulerCharacteristic
+
+/-- Reviewer-facing exclusion of low-dimensional representatives of the cubic
+zero-packet atom.  Its residue discriminant is `4 / 9` while a curve
+representative would force `0`, and its even rank is two while a nef-canonical
+surface representative would force even rank at least three. -/
+theorem cubicAtom_not_represented_in_dimension_le_two
+    {Variety Atom : Type*}
+    {ledger : Quantum.OrdinaryAtomLedger Variety Atom}
+    {stabilization : Quantum.ProjectiveLineStabilizationInput ledger}
+    {exclusion : Quantum.LowDimensionalExclusionInput ledger}
+    {cubic : Variety} {atom : Atom}
+    (input : Applications.CubicAtomOneStepInput ledger stabilization exclusion cubic atom)
+    (witness : Variety) (witnessDimension : ledger.dimension witness ≤ 2) :
+    ledger.multiplicity witness atom = 0 :=
+  Applications.cubicAtom_multiplicity_eq_zero_of_dimension_le_two input witness witnessDimension
+
+/-- Reviewer-facing form of the atomic one-step irrationality deduction for a
+cubic threefold.  The input structure exposes the ordinary Hodge-atom premises:
+the projective-bundle formula for atomic compositions, the ordinary
+non-rationality criterion, the surface and curve analysis, and the parity ranks
+and residue discriminant of the cubic zero-packet atom. -/
+theorem cubicThreefold_oneStep_irrational_of_atom_inputs
+    {Variety Atom : Type*}
+    {ledger : Quantum.OrdinaryAtomLedger Variety Atom}
+    (stabilization : Quantum.ProjectiveLineStabilizationInput ledger)
+    {exclusion : Quantum.LowDimensionalExclusionInput ledger}
+    {cubic : Variety} {atom : Atom}
+    (input : Applications.CubicAtomOneStepInput ledger stabilization exclusion cubic atom) :
+    ¬ ledger.Rational (ledger.productWithProjectiveLine cubic) :=
+  Applications.cubicAtom_oneStepStabilization_not_rational stabilization input
 
 end TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue
