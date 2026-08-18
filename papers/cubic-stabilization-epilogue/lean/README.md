@@ -41,8 +41,8 @@ deduction as well: from the product formula, taken as a typed premise, Lean
 obtains the value four for the product of a cubic threefold with a projective
 line and the value zero for every projective space.
 
-Checked coverage snapshot: 50 claims; 14 absent; 17 fragmentary; 18 conditional;
-1 complete; 203 reviewer terminals, of which 46 are machinery serving no current
+Checked coverage snapshot: 50 claims; 13 absent; 18 fragmentary; 18 conditional;
+1 complete; 204 reviewer terminals, of which 46 are machinery serving no current
 manuscript claim.
 
 Those 46 are kernel-checked and reusable, and the claim map records for each one
@@ -545,6 +545,9 @@ The reviewer-facing terminals currently verify:
 - invariance of the residue discriminant under a change of frame and a scalar
   recentering of the residue, since conjugation preserves the trace and the
   determinant;
+- the same invariance for one factor of a labelled splitting under a change of
+  frame that is block diagonal for the splitting, whose diagonal blocks are
+  again mutually inverse and conjugate the factor's block;
 - constancy of the residue discriminant over a formal germ of the base: if each
   formal partial derivative of the residue is its commutator with a regular
   matrix, then every formal partial derivative of the residue discriminant

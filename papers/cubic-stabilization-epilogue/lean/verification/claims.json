@@ -385,12 +385,14 @@
     },
     {
       "manuscript_label": "lem:factor-glue",
-      "coverage": "absent",
-      "declarations": [],
-      "objects": "Local F-bundle factors over the unramified locus belonging to one connected component of the reduced spectral cover.",
-      "hypotheses": "The component is connected and the locus is unramified.",
-      "conclusion": "The factors glue up to regular block-diagonal change of frame, so any regular-gauge-invariant meromorphic expression built from the factor is a well-defined meromorphic function on the component.",
-      "cautions": "Not formalized."
+      "coverage": "fragment",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.atomicFactor_residueDiscriminant_invariant_under_blockDiagonal_frame_change"
+      ],
+      "objects": "Square matrices over a field on a finite type of coordinates carrying a factor label, a pair of mutually inverse matrices that are block diagonal for that label, the block of a matrix on the coordinates of one label, and a frame presenting an even rank-two factor as a two-by-two matrix.",
+      "hypotheses": "The two matrices of the change of frame are mutually inverse, and both vanish on entries whose row and column carry different labels.",
+      "conclusion": "The block of a conjugated matrix on one factor is the conjugate of that factor's block by the corresponding diagonal blocks, which are themselves mutually inverse; consequently the residue discriminant of an even rank-two factor, read through any frame, is unchanged by the change of frame.",
+      "cautions": "Lean constructs no F-bundle, spectral cover, connected component of one, or local factor, and proves no gluing: the transition data enter as a supplied block-diagonal pair of mutually inverse matrices, and the conclusion is the invariance of one conjugation-invariant expression rather than the existence of a glued factor or the meromorphy of an expression formed from it."
     },
     {
       "manuscript_label": "lem:crossing",

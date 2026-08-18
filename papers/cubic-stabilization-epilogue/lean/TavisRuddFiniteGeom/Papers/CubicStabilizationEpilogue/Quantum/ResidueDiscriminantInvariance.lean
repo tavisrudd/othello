@@ -1,5 +1,6 @@
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.RankTwoResidueRigidity
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.PowerSeriesLogarithmicVanishing
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.BlockDiagonalHorizontalPairing
 
 /-!
 # Invariance of the residue discriminant under frame change and along the base
@@ -81,6 +82,71 @@ theorem residueDiscriminant_conjugate_add_scalar (R P Q : Matrix (Fin 2) (Fin 2)
   rw [residueDiscriminant_add_scalar, residueDiscriminant_conjugate R P Q leftInverse rightInverse]
 
 end FrameChange
+
+section FactorGluing
+
+variable {K : Type*} [Field K]
+
+/-- A change of frame that is block diagonal for a labelled splitting acts on
+each factor by conjugation with the diagonal blocks, and those blocks are
+mutually inverse.  This is what makes a conjugation-invariant expression formed
+from one factor independent of the frame in which the factor is presented. -/
+theorem labelBlock_conjugate_of_blockDiagonal {coordinate : Type*} [Fintype coordinate]
+    [DecidableEq coordinate] {factorIndex : Type*} [DecidableEq factorIndex]
+    {label : coordinate → factorIndex} (R P Q : Matrix coordinate coordinate K)
+    (blockDiagonalFirst : ∀ row column, label row ≠ label column → P row column = 0)
+    (blockDiagonalSecond : ∀ row column, label row ≠ label column → Q row column = 0)
+    (leftInverse : P * Q = 1) (rightInverse : Q * P = 1) (value : factorIndex) :
+    labelBlock (P * R * Q) label value value
+        = labelBlock P label value value * labelBlock R label value value
+          * labelBlock Q label value value ∧
+      labelBlock P label value value * labelBlock Q label value value = 1 ∧
+      labelBlock Q label value value * labelBlock P label value value = 1 := by
+  have unitBlock : labelBlock (1 : Matrix coordinate coordinate K) label value value = 1 := by
+    ext row column
+    by_cases equal : row = column
+    · subst equal; simp [labelBlock]
+    · have distinct : (row : coordinate) ≠ (column : coordinate) := fun same =>
+        equal (Subtype.ext same)
+      simp [labelBlock, distinct, equal]
+  refine ⟨?_, ?_, ?_⟩
+  · rw [labelBlock_mul_of_blockDiagonal_right blockDiagonalSecond,
+      labelBlock_mul_of_blockDiagonal_left blockDiagonalFirst]
+  · rw [← labelBlock_mul_of_blockDiagonal_right blockDiagonalSecond, leftInverse, unitBlock]
+  · rw [← labelBlock_mul_of_blockDiagonal_right blockDiagonalFirst, rightInverse, unitBlock]
+
+/-- The residue discriminant of an even rank-two factor is unchanged by a
+block-diagonal change of frame.  The factor is presented by a frame, a bijection
+between a two-element index and the coordinates carrying the label; the change of
+frame conjugates the factor block by mutually inverse blocks, and the residue
+discriminant is conjugation invariant. -/
+theorem residueDiscriminant_labelBlock_conjugate {coordinate : Type*} [Fintype coordinate]
+    [DecidableEq coordinate] {factorIndex : Type*} [DecidableEq factorIndex]
+    {label : coordinate → factorIndex} (R P Q : Matrix coordinate coordinate K)
+    (blockDiagonalFirst : ∀ row column, label row ≠ label column → P row column = 0)
+    (blockDiagonalSecond : ∀ row column, label row ≠ label column → Q row column = 0)
+    (leftInverse : P * Q = 1) (rightInverse : Q * P = 1) (value : factorIndex)
+    (frame : Fin 2 ≃ {index // label index = value}) :
+    residueDiscriminant ((labelBlock (P * R * Q) label value value).submatrix frame frame)
+      = residueDiscriminant ((labelBlock R label value value).submatrix frame frame) := by
+  obtain ⟨conjugated, leftBlock, rightBlock⟩ :=
+    labelBlock_conjugate_of_blockDiagonal R P Q blockDiagonalFirst blockDiagonalSecond
+      leftInverse rightInverse value
+  have unitFrame : Matrix.submatrix
+      (1 : Matrix {index // label index = value} {index // label index = value} K)
+      frame frame = 1 := by
+    ext row column
+    by_cases equal : row = column
+    · subst equal; simp
+    · have distinct : frame row ≠ frame column := fun same => equal (frame.injective same)
+      simp [distinct, equal]
+  rw [conjugated, ← Matrix.submatrix_mul_equiv _ _ frame frame frame,
+    ← Matrix.submatrix_mul_equiv _ _ frame frame frame]
+  refine residueDiscriminant_conjugate _ _ _ ?_ ?_
+  · rw [Matrix.submatrix_mul_equiv _ _ frame frame frame, leftBlock, unitFrame]
+  · rw [Matrix.submatrix_mul_equiv _ _ frame frame frame, rightBlock, unitFrame]
+
+end FactorGluing
 
 section FormalDerivationCalculus
 

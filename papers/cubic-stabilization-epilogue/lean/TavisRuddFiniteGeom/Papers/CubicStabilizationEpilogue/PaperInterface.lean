@@ -5263,6 +5263,41 @@ theorem atomicResidueDiscriminant_invariant_under_frame_change
   ⟨Quantum.residueDiscriminant_conjugate R P Q leftInverse rightInverse,
     Quantum.residueDiscriminant_conjugate_add_scalar R P Q leftInverse rightInverse shift⟩
 
+/-- Reviewer-facing independence of a factor's residue discriminant from the
+frame in which the factor is presented.  A change of frame that is block diagonal
+for a labelled splitting restricts on each factor to conjugation by the diagonal
+blocks of the two mutually inverse matrices, and those blocks are again mutually
+inverse; for an even factor of rank two, presented by a bijection between a
+two-element index and the coordinates carrying the label, the residue
+discriminant of the factor is therefore unchanged.  This is why a
+conjugation-invariant expression formed from one factor is well defined
+independently of the block-diagonal frame chosen for it.
+
+Lean does not construct the local factors of an `F`-bundle over a component of a
+spectral cover, and does not prove that they glue; the transition data enter as a
+block-diagonal pair of mutually inverse matrices. -/
+theorem atomicFactor_residueDiscriminant_invariant_under_blockDiagonal_frame_change
+    {K : Type*} [Field K] {coordinate : Type*} [Fintype coordinate] [DecidableEq coordinate]
+    {factorIndex : Type*} [DecidableEq factorIndex] {label : coordinate → factorIndex}
+    (R P Q : Matrix coordinate coordinate K)
+    (blockDiagonalFirst : ∀ row column, label row ≠ label column → P row column = 0)
+    (blockDiagonalSecond : ∀ row column, label row ≠ label column → Q row column = 0)
+    (leftInverse : P * Q = 1) (rightInverse : Q * P = 1) (value : factorIndex) :
+    (Quantum.labelBlock (P * R * Q) label value value
+        = Quantum.labelBlock P label value value * Quantum.labelBlock R label value value
+          * Quantum.labelBlock Q label value value ∧
+      Quantum.labelBlock P label value value * Quantum.labelBlock Q label value value = 1 ∧
+      Quantum.labelBlock Q label value value * Quantum.labelBlock P label value value = 1) ∧
+      ∀ frame : Fin 2 ≃ {index // label index = value},
+        Quantum.residueDiscriminant
+            ((Quantum.labelBlock (P * R * Q) label value value).submatrix frame frame)
+          = Quantum.residueDiscriminant
+            ((Quantum.labelBlock R label value value).submatrix frame frame) :=
+  ⟨Quantum.labelBlock_conjugate_of_blockDiagonal R P Q blockDiagonalFirst blockDiagonalSecond
+      leftInverse rightInverse value,
+    fun frame => Quantum.residueDiscriminant_labelBlock_conjugate R P Q blockDiagonalFirst
+      blockDiagonalSecond leftInverse rightInverse value frame⟩
+
 /-- Reviewer-facing constancy of the residue discriminant over a formal germ of
 the base.  The residue is a two-by-two matrix over a multivariate formal
 power-series ring over a characteristic-zero domain, and modified flatness enters
