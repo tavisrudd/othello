@@ -5512,4 +5512,15 @@ theorem eulerMultiplication_eigenvalues_module_eq_algebra {k A M : Type*} [Field
       {lam : k | ∃ a : A, a ≠ 0 ∧ E * a = lam • a} :=
   Quantum.eigenvalues_module_eq_eigenvalues_algebra E unit generating
 
+/-- Reviewer-facing consistency witness for the frame data of the discriminant
+lemma.  The sixteen coefficient identities collected in
+`Quantum.EulerCoefficientFrame` are satisfied by the universal root model: the
+polynomial ring in four root variables over the rationals, with characteristic
+coefficients the signed elementary symmetric functions of those variables and
+with the `s`-th frame field acting by the derivation `∑ᵢ μᵢ ^ s ∂/∂μᵢ`.  Each
+result deduced from that frame data therefore has content. -/
+theorem eulerFrame_data_nonempty :
+    Nonempty (Quantum.EulerCoefficientFrame (MvPolynomial (Fin 4) ℚ)) :=
+  ⟨Quantum.rootEulerFrame⟩
+
 end TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue

@@ -196,3 +196,4 @@ TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.eulerFrame_discriminant_lo
 TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.eulerFrame_discriminant_differential: propext, Classical.choice, Quot.sound
 TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.eulerFrame_discriminant_eq_zero_of_vanishing_at_base_point: propext, Classical.choice, Quot.sound
 TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.eulerMultiplication_eigenvalues_module_eq_algebra: propext, Classical.choice, Quot.sound
+TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.eulerFrame_data_nonempty: propext, Classical.choice, Quot.sound

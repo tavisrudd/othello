@@ -1,5 +1,6 @@
 import Mathlib.Tactic
 import Mathlib.RingTheory.Derivation.Basic
+import Mathlib.Algebra.MvPolynomial.PDeriv
 
 /-!
 # Logarithmic derivatives of the discriminant of a quartic characteristic polynomial
@@ -219,6 +220,109 @@ theorem logarithmic_of_frame_combination (D : A → A) (c : Fin 4 → A)
   ring
 
 end EulerCoefficientFrame
+
+open MvPolynomial in
+/-- The derivation `∑ᵢ μᵢ ^ s ∂/∂μᵢ` of the polynomial ring in four root
+variables `μ₀, …, μ₃` over the rationals. -/
+private noncomputable def rootDerivation (s : ℕ) :
+    Derivation ℚ (MvPolynomial (Fin 4) ℚ) (MvPolynomial (Fin 4) ℚ) :=
+  (X 0 : MvPolynomial (Fin 4) ℚ) ^ s • pderiv (0 : Fin 4)
+    + (X 1 : MvPolynomial (Fin 4) ℚ) ^ s • pderiv (1 : Fin 4)
+    + (X 2 : MvPolynomial (Fin 4) ℚ) ^ s • pderiv (2 : Fin 4)
+    + (X 3 : MvPolynomial (Fin 4) ℚ) ^ s • pderiv (3 : Fin 4)
+
+open MvPolynomial in
+/-- The root derivation viewed as a derivation over the integers, which is the
+base ring used by the frame data. -/
+private noncomputable def rootFrameField (s : ℕ) :
+    Derivation ℤ (MvPolynomial (Fin 4) ℚ) (MvPolynomial (Fin 4) ℚ) :=
+  (rootDerivation s).restrictScalars ℤ
+
+open MvPolynomial in
+/-- Restriction of scalars does not change the underlying map. -/
+private theorem rootFrameField_apply (s : ℕ) (p : MvPolynomial (Fin 4) ℚ) :
+    rootFrameField s p = rootDerivation s p :=
+  rfl
+
+open MvPolynomial in
+/-- The universal root model of the frame data: the polynomial ring in four root
+variables over the rationals, with characteristic coefficients the signed
+elementary symmetric functions of those variables and with `Xₛ` acting by the
+derivation `∑ᵢ μᵢ ^ s ∂/∂μᵢ`.
+
+This model satisfies the sixteen coefficient identities, so the hypotheses
+collected in `EulerCoefficientFrame` are consistent and every theorem deduced
+from them has content. -/
+noncomputable def rootEulerFrame : EulerCoefficientFrame (MvPolynomial (Fin 4) ℚ) where
+  lam0 := X 0 * X 1 * X 2 * X 3
+  lam1 := -(X 0 * X 1 * X 2 + X 0 * X 1 * X 3 + X 0 * X 2 * X 3 + X 1 * X 2 * X 3)
+  lam2 := X 0 * X 1 + X 0 * X 2 + X 0 * X 3 + X 1 * X 2 + X 1 * X 3 + X 2 * X 3
+  lam3 := -(X 0 + X 1 + X 2 + X 3)
+  frameField := fun s => rootFrameField (s : ℕ)
+  unit_lam0 := by
+    show rootDerivation 0 (X 0 * X 1 * X 2 * X 3) = _
+    simp [rootDerivation, Derivation.leibniz]
+    ring
+  unit_lam1 := by
+    show rootDerivation 0 (-(X 0 * X 1 * X 2 + X 0 * X 1 * X 3 + X 0 * X 2 * X 3 + X 1 * X 2 * X 3)) = _
+    simp [rootDerivation, Derivation.leibniz]
+    ring
+  unit_lam2 := by
+    show rootDerivation 0 (X 0 * X 1 + X 0 * X 2 + X 0 * X 3 + X 1 * X 2 + X 1 * X 3 + X 2 * X 3) = _
+    simp [rootDerivation, Derivation.leibniz]
+    ring
+  unit_lam3 := by
+    show rootDerivation 0 (-(X 0 + X 1 + X 2 + X 3)) = _
+    simp [rootDerivation]
+    ring
+  euler_lam0 := by
+    show rootDerivation 1 (X 0 * X 1 * X 2 * X 3) = _
+    simp [rootDerivation, Derivation.leibniz]
+    ring
+  euler_lam1 := by
+    show rootDerivation 1 (-(X 0 * X 1 * X 2 + X 0 * X 1 * X 3 + X 0 * X 2 * X 3 + X 1 * X 2 * X 3)) = _
+    simp [rootDerivation, Derivation.leibniz]
+    ring
+  euler_lam2 := by
+    show rootDerivation 1 (X 0 * X 1 + X 0 * X 2 + X 0 * X 3 + X 1 * X 2 + X 1 * X 3 + X 2 * X 3) = _
+    simp [rootDerivation, Derivation.leibniz]
+    ring
+  euler_lam3 := by
+    show rootDerivation 1 (-(X 0 + X 1 + X 2 + X 3)) = _
+    simp [rootDerivation]
+    ring
+  square_lam0 := by
+    show rootDerivation 2 (X 0 * X 1 * X 2 * X 3) = _
+    simp [rootDerivation, Derivation.leibniz]
+    ring
+  square_lam1 := by
+    show rootDerivation 2 (-(X 0 * X 1 * X 2 + X 0 * X 1 * X 3 + X 0 * X 2 * X 3 + X 1 * X 2 * X 3)) = _
+    simp [rootDerivation, Derivation.leibniz]
+    ring
+  square_lam2 := by
+    show rootDerivation 2 (X 0 * X 1 + X 0 * X 2 + X 0 * X 3 + X 1 * X 2 + X 1 * X 3 + X 2 * X 3) = _
+    simp [rootDerivation, Derivation.leibniz]
+    ring
+  square_lam3 := by
+    show rootDerivation 2 (-(X 0 + X 1 + X 2 + X 3)) = _
+    simp [rootDerivation]
+    ring
+  cube_lam0 := by
+    show rootDerivation 3 (X 0 * X 1 * X 2 * X 3) = _
+    simp [rootDerivation, Derivation.leibniz]
+    ring
+  cube_lam1 := by
+    show rootDerivation 3 (-(X 0 * X 1 * X 2 + X 0 * X 1 * X 3 + X 0 * X 2 * X 3 + X 1 * X 2 * X 3)) = _
+    simp [rootDerivation, Derivation.leibniz]
+    ring
+  cube_lam2 := by
+    show rootDerivation 3 (X 0 * X 1 + X 0 * X 2 + X 0 * X 3 + X 1 * X 2 + X 1 * X 3 + X 2 * X 3) = _
+    simp [rootDerivation, Derivation.leibniz]
+    ring
+  cube_lam3 := by
+    show rootDerivation 3 (-(X 0 + X 1 + X 2 + X 3)) = _
+    simp [rootDerivation]
+    ring
 
 end Quantum
 
