@@ -39,7 +39,7 @@ Edits, all in `sections/01-introduction.tex` and
    representation rather than `H^3` alone.
 2. A new comparison paragraph cites Guere for a projective-K3-type Hodge
    necessary condition on rational cubic fourfolds and
-   Benedetti--Fay--Guere--Manivel--Perrin for a monodromy and coarse-atom
+   Benedetti--Fay--Guere--Manivel--Perrin for a monodromy/coarse-atom
    irrationality criterion, and records that the latter assumes `b_3 = 0`,
    which `X x P^1` fails with `b_3 = 10`.
 3. Two bibliography entries: `Guere` (arXiv:2603.04518v1) and `BFGMP`
