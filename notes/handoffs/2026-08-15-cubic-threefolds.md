@@ -98,15 +98,17 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   `Verification/AxiomAudit`; no duplicate under the shared
   `lean/TavisRuddFiniteGeom/` tree or a second Lean repository. 93 sources
   build through the guarded queue; `make check` and the axiom-log gate green
-  over 50 claims, 46 machinery rows, and 172 reviewer terminals; coverage 29
-  absent / 10 fragmentary / 10 conditional / 1 complete. `thm:every-cubic` is
-  anchored to the atomic route and the framed spine now answers to its own
-  manuscript theorem `thm:every-cubic-conditional`. Next step is the gap audit's
-  priority 0b onward, starting with `prop:cubic-block-data`, which discharges
-  the standing premise of `prop:cubic-packet`. Card:
+  over 50 claims, 46 machinery rows, and 175 reviewer terminals; coverage 28
+  absent / 11 fragmentary / 10 conditional / 1 complete. `thm:every-cubic` is
+  anchored to the atomic route, the framed spine answers to its own manuscript
+  theorem `thm:every-cubic-conditional`, and the small even block reduction is
+  formalized from Cai's connection matrices through the modified residue. Next
+  step is the rest of the gap audit's priority 0b: the product-formula
+  corollaries and a terminal for `lem:six-point-hearts`. Card:
   `../cubic-threefolds-tasks/c910-cubic-stabilization-lean-companion.md`; gap audit
   `../2026-08-18-c910-post-restructure-gap-audit.md`; anchor report
-  `../2026-08-18-c910-atom-route-anchor.md`; interim release report
+  `../2026-08-18-c910-atom-route-anchor.md`; block-reduction report
+  `../2026-08-18-c910-block-reduction.md`; interim release report
   `../2026-08-12-c910-partial-lean-release.md`.
 - **C914 — active.** The `A_5`-pencil is proved to contain the Fermat cubic
   threefold, so it meets the already-known universally `CH_0`-trivial

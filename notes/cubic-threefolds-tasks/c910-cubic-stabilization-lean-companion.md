@@ -110,8 +110,8 @@ introduction and proved in Section 5, and it carries the two packet terminals.
 route: the residue discriminant of the cubic zero packet is `4/9`, of every
 curve residue is `0`, that separation with the parity ranks excludes
 representatives of dimension at most two, and the ordinary non-rationality
-criterion then gives irrationality of the stabilized fourfold.  Coverage is now
-50 claims and 46 machinery rows over 172 terminals: 29 absent, 10 fragmentary,
+criterion then gives irrationality of the stabilized fourfold.  Coverage after the block-reduction pass below is
+50 claims and 46 machinery rows over 175 terminals: 28 absent, 11 fragmentary,
 10 conditional, 1 complete; the paper is warning-free at 49 pages.  Report:
 [`../2026-08-18-c910-atom-route-anchor.md`](../2026-08-18-c910-atom-route-anchor.md).
 The remaining priorities are 0b through 0d below, plus the missing
@@ -431,10 +431,14 @@ they are done; they come from the 2026-08-18 gap audit.
    Still open: the product-formula corollaries `cor:p3-nu6` and
    `cor:cubic-product-nu`, and a terminal for `lem:six-point-hearts` assembled
    from declarations already present in `GraphLattices`.
-0c. **`prop:cubic-block-data`.**  Formalize the constant change of basis and the
-   unique normalized block-off-diagonal gauge, which discharges the standing
-   characteristic-polynomial premise of `prop:cubic-packet` and serves the
-   framed route at the same time.
+0c. **`prop:cubic-block-data` — done 2026-08-18.**  The constant change of basis,
+   both conjugations, the two supplied gauge orders, and the modified residue
+   with its indicial polynomial are in
+   `Quantum/CubicSmallEvenBlockReduction.lean`, recorded as a fragment because
+   uniqueness of the normalized gauge and the orders beyond the second are not
+   formalized.  `prop:cubic-packet` gained a second terminal whose premise is
+   only the passage from residue exponents to framed monodromy.  Report:
+   [`../2026-08-18-c910-block-reduction.md`](../2026-08-18-c910-block-reduction.md).
 0d. **The rank-two invariant chain.**  `lem:horiz`, `lem:orthogonal`,
    `lem:A0preserve`, `prop:rank2-rigidity`, and
    `prop:residue-discriminant-exponents`, then `prop:no-curve` and
