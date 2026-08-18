@@ -80,9 +80,9 @@ visible in theorem types and in the claim map.
 
 ## Current state
 
-The package has a pinned standalone Nix and Mathlib environment.  Its 93 Lean
-sources build through the guarded queue.  The reviewer interface currently
-exports 168 audited terminals and `make check` is green.
+The package has a pinned standalone Nix and Mathlib environment.  Its Lean
+sources build through the guarded queue, and `make check` is green over the
+reviewer interface's audited terminals.
 
 **Post-restructure state, 2026-08-18.**  The author's 2026-08-16 atomic
 restructure of the manuscript replaced the proof of the headline: Theorem 1.1
@@ -110,11 +110,11 @@ introduction and proved in Section 5, and it carries the two packet terminals.
 route: the residue discriminant of the cubic zero packet is `4/9`, of every
 curve residue is `0`, that separation with the parity ranks excludes
 representatives of dimension at most two, and the ordinary non-rationality
-criterion then gives irrationality of the stabilized fourfold.  Coverage after the block-reduction pass below is
-50 claims and 46 machinery rows over 175 terminals: 28 absent, 11 fragmentary,
-10 conditional, 1 complete; the paper is warning-free at 49 pages.  Report:
+criterion then gives irrationality of the stabilized fourfold.  Coverage after the priority 0b pass below is
+50 claims and 46 machinery rows over 179 terminals: 25 absent, 12 fragmentary,
+12 conditional, 1 complete; the paper is warning-free at 49 pages.  Report:
 [`../2026-08-18-c910-atom-route-anchor.md`](../2026-08-18-c910-atom-route-anchor.md).
-The remaining priorities are 0b through 0d below, plus the missing
+The remaining priority is 0d below, plus the missing
 unconditional half of `cor:v14-one-step` and the orphaned machinery themes.
 
 The integral algebra includes the arbitrary-size DVR rank-one criterion,
@@ -427,10 +427,18 @@ they are done; they come from the 2026-08-18 gap audit.
    `Quantum/AtomicResidueDiscriminant.lean`.  Still open from this item: the
    unconditional half of `cor:v14-one-step`, which compares the two projective
    bundles birationally and applies the atomic one-step theorem.
-0b. **Tier-one arithmetic.**  The two residue computations landed with 0a.
-   Still open: the product-formula corollaries `cor:p3-nu6` and
-   `cor:cubic-product-nu`, and a terminal for `lem:six-point-hearts` assembled
-   from declarations already present in `GraphLattices`.
+0b. **Tier-one arithmetic — done 2026-08-18.**  The two residue computations
+   landed with 0a.  The product-formula corollaries `cor:p3-nu6` and
+   `cor:cubic-product-nu` are in
+   `Applications/ProjectiveProductMultiplicity.lean`, conditional on the
+   manuscript's product formula for a product with a projective space and on
+   involutive framed monodromy at a point; the value four after one
+   stabilization no longer assumes the cubic packet value, which comes from the
+   block reduction.  `lem:six-point-hearts` is in
+   `GraphLattices/SixPointHeartEndomorphisms.lean`, recorded as a fragment
+   because the endomorphism algebras are exhibited by generators and relations
+   rather than by an isomorphism with named field objects.  Report:
+   [`../2026-08-18-c910-hearts-and-product-corollaries.md`](../2026-08-18-c910-hearts-and-product-corollaries.md).
 0c. **`prop:cubic-block-data` — done 2026-08-18.**  The constant change of basis,
    both conjugations, the two supplied gauge orders, and the modified residue
    with its indicial polynomial are in
@@ -491,6 +499,7 @@ papers/cubic-stabilization-epilogue/lean/
     GraphLattices/DividedPowers.lean
     GraphLattices/SixAxisGram.lean
     GraphLattices/SixPointStableHalves.lean
+    GraphLattices/SixPointHeartEndomorphisms.lean
     Quantum/FramedMultiplicity.lean
     Quantum/ProLaurent.lean
     Quantum/CompatibleMonodromySystem.lean
@@ -520,6 +529,7 @@ papers/cubic-stabilization-epilogue/lean/
     Applications/LowDimensionalVanishing.lean
     Applications/FramedOperationFormulas.lean
     Applications/CubicPacketFormula.lean
+    Applications/ProjectiveProductMultiplicity.lean
     Applications/DivisorTaggingVanishing.lean
     PaperInterface.lean
     Verification/AxiomAudit.lean

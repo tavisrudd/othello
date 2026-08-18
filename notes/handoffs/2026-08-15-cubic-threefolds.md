@@ -96,19 +96,21 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   namespace `TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue`, with
   reviewer entry point `PaperInterface` and machine audit
   `Verification/AxiomAudit`; no duplicate under the shared
-  `lean/TavisRuddFiniteGeom/` tree or a second Lean repository. 93 sources
+  `lean/TavisRuddFiniteGeom/` tree or a second Lean repository. The sources
   build through the guarded queue; `make check` and the axiom-log gate green
-  over 50 claims, 46 machinery rows, and 175 reviewer terminals; coverage 28
-  absent / 11 fragmentary / 10 conditional / 1 complete. `thm:every-cubic` is
+  over 50 claims, 46 machinery rows, and 179 reviewer terminals; coverage 25
+  absent / 12 fragmentary / 12 conditional / 1 complete. `thm:every-cubic` is
   anchored to the atomic route, the framed spine answers to its own manuscript
-  theorem `thm:every-cubic-conditional`, and the small even block reduction is
-  formalized from Cai's connection matrices through the modified residue. Next
-  step is the rest of the gap audit's priority 0b: the product-formula
-  corollaries and a terminal for `lem:six-point-hearts`. Card:
+  theorem `thm:every-cubic-conditional`, the small even block reduction is
+  formalized from Cai's connection matrices through the modified residue, and
+  the gap audit's priority 0b is closed: both six-point hearts and both
+  product-formula corollaries now have terminals. Next step is the rank-two
+  invariant chain, priority 0d. Card:
   `../cubic-threefolds-tasks/c910-cubic-stabilization-lean-companion.md`; gap audit
   `../2026-08-18-c910-post-restructure-gap-audit.md`; anchor report
   `../2026-08-18-c910-atom-route-anchor.md`; block-reduction report
-  `../2026-08-18-c910-block-reduction.md`; interim release report
+  `../2026-08-18-c910-block-reduction.md`; hearts and product-corollary report
+  `../2026-08-18-c910-hearts-and-product-corollaries.md`; interim release report
   `../2026-08-12-c910-partial-lean-release.md`.
 - **C914 — active.** The `A_5`-pencil is proved to contain the Fermat cubic
   threefold, so it meets the already-known universally `CH_0`-trivial
