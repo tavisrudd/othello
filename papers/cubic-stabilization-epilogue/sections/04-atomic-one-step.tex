@@ -33,6 +33,13 @@ subset contains a nonempty admissible open, then it is all of $Y$; this is
 
 \begin{lemma}[The intrinsic Euler endomorphism and the A-model spectral
 operator]\label{lem:euler-sign}
+\coverage{fragment}%
+\lean{eulerOperator_generalizedEigenspaces_under_sign_reversal,%
+  eulerOperator_eigenvalue_count_under_sign_reversal,%
+  eulerOperator_cyclic_span_under_sign_reversal,%
+  characteristicDiscriminant_under_root_sign_reversal,%
+  residueDiscriminant_under_sign_reversal,%
+  characteristicDiscriminant_under_odd_coefficient_sign_reversal}%
 Let $(\mathcal H,\nabla)/B$ be the maximal $A$-model $F$-bundle in the
 conventions displayed in \cite{KKPYY}.  Let $E$ be the intrinsic Euler field
 of the associated maximal $F$-manifold and let
@@ -73,6 +80,10 @@ $\Eu\star$ used by KKPY.  No coordinate formula for the Euler field away
 from the small point is used.
 
 \begin{lemma}[The Hodge-fixed base]\label{lem:hodge-base}
+\coverage{fragment}%
+\lean{hodgeFixedSubalgebra_closed_under_eulerMultiplication,%
+  hodgeFixedSubalgebra_eigenvector_transfers,%
+  hodgeFixedTangentSpace_span_and_finrank, truncatedHyperplaneAlgebra_model}%
 Let $B_X^{\Hod}$ be the Hodge-fixed locus of the maximal $A$-model
 $F$-bundle of a smooth projective variety $X$.  In the notation of
 \cite[Section~5.2.2]{KKPYY}, its tangent space is obtained from
@@ -117,6 +128,9 @@ the framed-monodromy calculation of Section~\ref{sec:framed-monodromy}.  It
 is entirely a small-connection calculation and is unconditional.
 
 \begin{proposition}[Small-even cubic block reduction]\label{prop:cubic-block-data}
+\coverage{fragment}%
+\lean{cubicSmallEven_blockReduction,%
+  cubicZeroBlock_modifiedResidue_indicialPolynomial}%
 Let \(X\subset\PP^4\) be a smooth cubic threefold, let \(P=H|_X\), choose
 the line class \(\ell\) with \(P\cdot\ell=1\), and put \(q=Q^\ell\) and
 \(r=(3q)^{1/2}\).  After adjoining \(r\) to the Novikov coefficient field,
@@ -240,6 +254,12 @@ Write
 and let $\Delta=\disc(P)$.
 
 \begin{lemma}[Discriminant differential equation]\label{lem:disc}
+\coverage{conditional_deduction}%
+\lean{quarticDiscriminant_eq_squared_root_differences,%
+  eulerFrame_discriminant_logarithmicDerivatives,%
+  eulerFrame_discriminant_differential,%
+  eulerFrame_discriminant_eq_zero_of_vanishing_at_base_point,%
+  eulerFrame_data_nonempty}%
 Assume $U$ is regular at $p\in M$.  On the germ of $M$ at $p$,
 \begin{align}
   X_0(\Delta)&=0,\label{eq:disc0}\\
@@ -374,6 +394,8 @@ We must compare this count with the spectrum on all of $H^\bullet(X)$, since
 KKPY define the maximal-eigenvalue locus using the full $F$-bundle.
 
 \begin{lemma}[Spectrum transfer]\label{lem:spectrum-transfer}
+\coverage{conditional_deduction}%
+\lean{eulerMultiplication_eigenvalues_module_eq_algebra}%
 At every even point of the Hodge base, the set of eigenvalues of Euler
 multiplication on $H^\bullet(X)$ is the same as the set of eigenvalues on
 $H^{\mathrm{even}}(X)$.
@@ -426,6 +448,12 @@ We have therefore proved the following without using KKPY's worked cubic
 example.
 
 \begin{proposition}[The cubic zero atom]\label{prop:cubic-atom}
+\coverage{fragment}%
+\lean{cubicThreefold_totalChernClass_identity, cubicThreefold_bettiThree_eq_ten,%
+  cubicThreefold_eulerMultiplication_annihilates_degreeThree,%
+  cubicZeroPacket_component_excludes_rankOne_branches,%
+  cubicZeroPacket_parityRanks_eq_two_and_ten,%
+  cubicThreefold_totalChernClass_uniqueness}%
 For every smooth cubic threefold $X$, the small hyperplane point
 $b\in B_X^{\Hod}$ lies in the maximal-eigenvalue locus $U_X$.  Over $b$ the
 unramified reduced spectral cover has two rank-one branches corresponding to
@@ -477,6 +505,8 @@ complex-analytic discussion of the pairing.  Define the $u$-sesquilinear pairing
 \]
 
 \begin{lemma}[Algebraic horizontality]\label{lem:horiz}
+\coverage{fragment}%
+\lean{quantumPairing_horizontality_of_selfAdjoint_multiplication}%
 The pairing $\psi$ is horizontal for the non-archimedean quantum connection.
 No convergence assumption is required.
 \end{lemma}
@@ -507,6 +537,12 @@ We also need that the pairing restricts nondegenerately to a spectral factor,
 without assuming an isometric block-splitting gauge.
 
 \begin{lemma}[Orthogonality of separated spectral factors]\label{lem:orthogonal}
+\coverage{conditional_deduction}%
+\lean{separatedSpectralFactors_pairing_blockDiagonal,%
+  separatedSpectralFactors_pairing_eq_zero_of_horizontality,%
+  separatedSpectralFactors_labelledPairing_blockDiagonal_of_horizontality,%
+  separatedSpectralFactors_evenPart_pairing_nondegenerate,%
+  separatedSpectralFactors_equalEigenvalues_admit_nonzero_horizontalPairing}%
 Suppose locally the $F$-bundle is split into factors whose leading Euler
 eigenvalues $\lambda_i$ are pairwise distinct.  Then the horizontal Poincar\'e
 pairing is block diagonal for that splitting; in particular its restriction
@@ -582,6 +618,9 @@ is a line.
 
 \begin{lemma}[The regular coefficient preserves the nilpotent line]
 \label{lem:A0preserve}
+\coverage{conditional_deduction}%
+\lean{atomicRankTwo_regularCoefficient_preserves_nilpotentLine,%
+  atomicRankTwo_pairingEquations_of_loopHorizontality}%
 On $\mathcal U^\times$,
 \begin{equation}\label{eq:A0L}
   A_0L\subset L.
@@ -662,6 +701,9 @@ to harmless scalar residue normalizations.
 \subsubsection{Flatness freezes the residue discriminant}
 
 \begin{proposition}[Rank-two rigidity]\label{prop:rank2-rigidity}
+\coverage{fragment}%
+\lean{atomicRankTwo_modifiedBase_pole_eq_zero,%
+  atomicRankTwo_residueDiscriminant_constant_along_base}%
 On $\mathcal U^\times$, the modified connection is regular in every base
 direction and the residue satisfies
 \begin{equation}\label{eq:Lax}
@@ -733,6 +775,8 @@ then zero, so the function is constant on each connected chart.
 
 \begin{proposition}[Exponent interpretation of the residue discriminant]
 \label{prop:residue-discriminant-exponents}
+\coverage{fragment}%
+\lean{residueDiscriminant_eq_squared_eigenvalue_separation}%
 Fix a point of $\mathcal U^\times$.  Let $K$ be its coefficient field and
 work in an algebraic closure $\overline K$ over which the residue $R$ splits.
 Let $\rho_1,\rho_2$ be the eigenvalues of the residue of the canonical
@@ -791,6 +835,8 @@ The preceding calculation was made only where $N\ne0$.  That is enough.  We
 first record the gluing point implicit in the spectral decomposition.
 
 \begin{lemma}[Gluing of a separated spectral factor]\label{lem:factor-glue}
+\coverage{fragment}%
+\lean{atomicFactor_residueDiscriminant_invariant_under_blockDiagonal_frame_change}%
 Over the unramified locus $U_X$, the local $F$-bundle factors belonging to a
 fixed connected component $\mathcal U$ of the reduced spectral cover glue,
 up to regular block-diagonal change of frame.  In particular any
@@ -825,6 +871,8 @@ factor glue along its connected component $\mathcal U$.
 
 \begin{lemma}[Meromorphic continuation on a spectral component]
 \label{lem:crossing}
+\coverage{fragment}%
+\lean{atomicResidueDiscriminant_constant_on_formal_germ}%
 Assume $N$ is generically nonzero on the connected spectral component
 $\mathcal U$.  Then $\delta^\sharp$ extends as a meromorphic function on
 $\mathcal U$ and is constant there.  In particular it is independent of the
@@ -865,6 +913,8 @@ by points at which $N=0$.
 \subsubsection{Descent to ordinary Hodge atoms}
 
 \begin{proposition}[Atomic residue discriminant]\label{prop:atom-invariant}
+\coverage{fragment}%
+\lean{atomicResidueDiscriminant_invariant_under_frame_change}%
 Let $\alpha$ be an ordinary Hodge atom whose associated geometric atomic
 $F$-bundle has even rank two and whose centered leading operator is
 generically nonzero nilpotent.  Then the number $\delta^\sharp(\alpha)$
@@ -1010,6 +1060,8 @@ For the only possible competitor $g=5$, equations
 well-definedness of $\delta^\sharp$ on ordinary Hodge atoms.  We have proved:
 
 \begin{proposition}\label{prop:no-curve}
+\coverage{conditional_deduction}%
+\lean{cubicAtom_not_represented_by_curve}%
 The cubic atom $\alpha_X$ is not represented by any smooth projective
 variety of dimension at most one.
 \end{proposition}
@@ -1017,6 +1069,8 @@ variety of dimension at most one.
 \subsubsection{No surface represents the cubic atom}
 
 \begin{proposition}\label{prop:no-surface}
+\coverage{conditional_deduction}%
+\lean{cubicAtom_not_represented_by_surface}%
 The atom $\alpha_X$ is not represented by a smooth projective surface.
 Together with Proposition~\ref{prop:no-curve} and additivity for disjoint
 unions, this excludes every smooth projective variety of dimension at most

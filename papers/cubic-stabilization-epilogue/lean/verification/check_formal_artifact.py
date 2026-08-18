@@ -49,8 +49,9 @@ def fail(message: str) -> None:
     raise SystemExit(1)
 
 
-def manuscript_labels() -> set[str]:
-    labels: set[str] = set()
+def manuscript_environments() -> dict[str, str]:
+    """Map each theorem-like manuscript environment's semantic label to its body."""
+    environments: dict[str, str] = {}
     environment_pattern = re.compile(
         r"\\begin\{(" + "|".join(THEOREM_ENVIRONMENTS) + r")\}"
         r"(?:\[[^\]]*\])?(.*?)\\end\{\1\}",
@@ -68,10 +69,48 @@ def manuscript_labels() -> set[str]:
                     f"environment with {len(found)} semantic labels"
                 )
             label = found[0]
-            if label in labels:
+            if label in environments:
                 fail(f"duplicate manuscript label {label}")
-            labels.add(label)
-    return labels
+            environments[label] = match.group(2)
+    return environments
+
+
+def annotation(label: str, body: str, macro: str, arity_optional: bool = False) -> str | None:
+    """Read the single argument of one formal-annotation macro from an environment."""
+    matches = re.findall(r"\\" + macro + r"\{(.*?)\}", body, re.DOTALL)
+    if not matches:
+        if arity_optional:
+            return None
+        fail(f"{label} carries no \\{macro} annotation")
+    if len(matches) > 1:
+        fail(f"{label} carries {len(matches)} \\{macro} annotations")
+    return matches[0]
+
+
+def annotated_claim(label: str, body: str, namespace: str) -> tuple[str, list[str]]:
+    """Read the coverage and terminal annotations of one manuscript environment."""
+    coverage = annotation(label, body, "coverage")
+    if coverage not in ALLOWED_COVERAGE:
+        fail(f"{label} annotates invalid coverage {coverage!r}")
+    payload = annotation(label, body, "lean", arity_optional=True)
+    if payload is None:
+        declarations: list[str] = []
+    else:
+        cleaned = re.sub(r"%.*", "", payload)
+        names = [part.strip() for part in cleaned.split(",") if part.strip()]
+        if not names:
+            fail(f"{label} annotates an empty terminal list")
+        for name in names:
+            if not re.fullmatch(r"[A-Za-z0-9_'.]+", name):
+                fail(f"{label} annotates malformed terminal name {name!r}")
+        declarations = [f"{namespace}.{name}" for name in names]
+        if len(set(declarations)) != len(declarations):
+            fail(f"{label} annotates a repeated terminal")
+    if coverage == "absent" and declarations:
+        fail(f"absent claim {label} annotates terminals")
+    if coverage != "absent" and not declarations:
+        fail(f"covered claim {label} annotates no terminals")
+    return coverage, declarations
 
 
 def check_public_docstrings(source: Path, text: str) -> None:
@@ -188,13 +227,17 @@ def main() -> None:
         )
 
     manifest = json.loads(CLAIMS.read_text(encoding="utf-8"))
-    if manifest.get("schema") != "cubic-stabilization-lean-claims-v3":
+    if manifest.get("schema") != "cubic-stabilization-lean-claims-v4":
         fail("unexpected claims schema")
+    terminal_namespace = manifest.get("terminal_namespace")
+    if not isinstance(terminal_namespace, str) or not terminal_namespace:
+        fail("claim map declares no terminal namespace")
     claims = manifest.get("claims", [])
     labels = [claim.get("manuscript_label") for claim in claims]
     if len(labels) != len(set(labels)):
         fail("duplicate manuscript labels in claim map")
-    expected_labels = manuscript_labels()
+    environments = manuscript_environments()
+    expected_labels = set(environments)
     if set(labels) != expected_labels:
         fail(
             "manuscript claim-map mismatch: "
@@ -205,6 +248,19 @@ def main() -> None:
     for claim in claims:
         label = claim.get("manuscript_label")
         coverage = claim.get("coverage")
+        annotated_coverage, annotated_declarations = annotated_claim(
+            label, environments[label], terminal_namespace
+        )
+        if annotated_coverage != coverage:
+            fail(
+                f"{label} annotates coverage {annotated_coverage} but the claim map "
+                f"records {coverage}"
+            )
+        if annotated_declarations != claim.get("declarations"):
+            fail(
+                f"{label} annotates a terminal list differing from the claim map: "
+                f"annotated={annotated_declarations} recorded={claim.get('declarations')}"
+            )
         if coverage not in ALLOWED_COVERAGE:
             fail(f"invalid coverage for {label}")
         for field in ("objects", "hypotheses", "conclusion", "cautions"):

@@ -1,7 +1,8 @@
 {
-  "schema": "cubic-stabilization-lean-claims-v3",
+  "schema": "cubic-stabilization-lean-claims-v4",
   "reviewer_module": "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.PaperInterface",
   "axiom_audit_module": "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Verification.AxiomAudit",
+  "terminal_namespace": "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue",
   "claims": [
     {
       "manuscript_label": "thm:every-cubic",

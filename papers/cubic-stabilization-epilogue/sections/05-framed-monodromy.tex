@@ -180,6 +180,8 @@ formal monodromy.
 
 \begin{definition}
 \label{def:framed-sixth-multiplicity}
+\coverage{fragment}%
+\lean{framedSixthMultiplicity}%
 Apply the preceding construction to the small even quantum connection over
 \(\mathcal K_T((z))\), and put
 \[
@@ -225,6 +227,7 @@ operators are conjugate and have the same characteristic polynomial.
 
 \begin{lemma}[Exact string and fixed-divisor shifts]
 \label{lem:exact-low-degree-shifts}
+\coverage{absent}%
 Let a pullback of the even quantum connection of a smooth projective
 variety $T$ be defined over a coefficient field containing its Novikov
 coefficients.
@@ -288,6 +291,22 @@ below avoids this gauge altogether on the formal germ where it applies.
 
 \begin{lemma}[Numerical Novikov base change]
 \label{lem:numerical-base-change}
+\coverage{fragment}%
+\lean{numericalNovikov_finiteFiber_exact,%
+  numericalNovikov_coefficientPushforward_apply,%
+  numericalNovikov_completedCoefficientPushforward_apply_and_finiteBelow,%
+  numericalNovikov_completedCoefficientPushforward_add,%
+  numericalNovikov_completedCoefficientPushforward_eq_below_of_eq_below,%
+  completedNovikov_decompositions_exact,%
+  completedNovikov_convolution_coefficient_and_finiteBelow,%
+  completedNovikov_commRing_and_truncation_mul,%
+  completedNovikov_truncationFamily_roundTrips,%
+  numericalNovikov_truncationFamily_pushforward,%
+  numericalNovikov_cutoffContinuity,%
+  numericalNovikov_completedPushforward_ringHom_and_truncation,%
+  numericalNovikov_finiteCoefficientPacket_descends,%
+  numericalNovikov_logarithmicOperator_commutes_with_pushforward,%
+  numericalNovikov_logarithmicOperator_leibniz}%
 The quotient from the effective homology monoid to its image in \(N_1(T)\)
 extends continuously to completed monoid rings, and the quantum connection
 and the two comparison theorems base-change along it.
@@ -318,6 +337,7 @@ completed base change.
 
 \begin{proposition}[Formal-germ rigidity of an isolated rank-two packet]
 \label{prop:ranktwo-framed-germ}
+\coverage{absent}%
 Let $K$ be an algebraically closed coefficient field of characteristic zero
 and let the even quantum connection be pulled back to a formal smooth bulk
 germ $B=K[[t_1,\ldots,t_m]]$.  Suppose that at the closed point the Euler
@@ -435,6 +455,10 @@ No invariance under an arbitrary bulk displacement is asserted.
 
 \begin{proposition}[Framed operation formulas, conditional]
 \label{prop:framed-operations}
+\coverage{conditional_deduction}%
+\lean{framedProjectiveBundle_sixthMultiplicity, framedBlowup_sixthMultiplicity,%
+  framedSixthMultiplicity_polynomial_pow,%
+  framedSixthMultiplicity_polynomial_list_prod}%
 Assume Hypothesis~5.7R.
 Let \(V\to T\) be a vector bundle of rank \(r\ge2\).  Then
 \[
@@ -559,6 +583,8 @@ missing implication.
 
 \begin{definition}
 \label{def:strict-novikov-admissible}
+\coverage{fragment}%
+\lean{strictNovikovAdmissibleData}%
 A monomial map \(\chi:\Lambda_T\to A\) is \emph{strictly
 Novikov-admissible} if \(A\) is a complete separated valued \(\C\)-domain
 with domain associated graded, every monomial has nonzero image, and
@@ -584,6 +610,7 @@ associated graded Laurent monoid ring is a domain.
 
 \begin{proposition}[Direct specialized low-dimensional vanishing]
 \label{prop:direct-specialized-lowdim}
+\coverage{absent}%
 Let \(\chi:\Lambda_T\to A\) be strictly Novikov-admissible.
 \begin{enumerate}[label=(\roman*)]
 \item If the canonical divisor \(K_T\) is nef, then
@@ -752,6 +779,16 @@ an arbitrary divisor-valued bulk deformation.
 
 \begin{lemma}[Divisor tagging, conditional]
 \label{lem:divisor-tagging}
+\coverage{conditional_deduction}%
+\lean{divisorTagging_vanishing_of_comparison_inputs,%
+  strictNovikov_injective_taggedMonomial,%
+  finiteDivisorPairing_exponentialCharacters_independent,%
+  integralDivisorPairing_exponentialCharacters_independent,%
+  completedNovikov_lowestSupport_nonempty,%
+  completedNovikov_lowestSupport_exponentialSum_ne_zero,%
+  associatedGradedTagging_taggedImage_ne_zero,%
+  associatedGradedTagging_taggedImage_eq_zero_iff,%
+  associatedGradedTagging_taggedImage_injective}%
 Assume Hypothesis~5.7T.
 Let \(\chi:\Lambda_T\to A\) be strictly Novikov-admissible.  If the intrinsic
 small even quantum connection of \(T\) has no primitive-sixth framed
@@ -840,6 +877,10 @@ is needed.
 
 \begin{proposition}[Low-dimensional vanishing, conditional]
 \label{prop:low-dimensional-vanishing}
+\coverage{conditional_deduction}%
+\lean{lowDimensionalVanishing_of_classification_and_specialization_inputs,%
+  lowDimensionalVanishing_of_characteristicRoots_sq_eq_one,%
+  lowDimensionalVanishing_of_involutiveFramedMonodromy}%
 Assume Hypotheses~5.7R and~5.7T.
 Let \(T\) be a point, a smooth projective curve, or a smooth projective
 surface.  For every strictly Novikov-admissible specialization \(\chi\),
@@ -877,6 +918,10 @@ Proposition~\ref{prop:direct-specialized-lowdim}.
 
 \begin{theorem}[Conditional birational invariance through dimension four]
 \label{thm:nu6-birational-invariance}
+\coverage{conditional_deduction}%
+\lean{packet_multiplicity_eq_of_preserving_chain,%
+  packet_multiplicity_eq_of_typed_weak_factorization,%
+  packet_multiplicity_birational_in_dimension_four}%
 Assume Hypotheses~5.7R and~5.7T.
 If \(Y\) and \(Y'\) are birational smooth projective complex varieties of
 the same dimension at most four, then
@@ -913,6 +958,7 @@ Cancelling two in \(\Z\) proves the stabilization assertion.
 \end{proof}
 
 \begin{lemma}[Multiplicity-one Euler blocks]\label{lem:simple-euler-block}
+\coverage{absent}%
 Let $T$ be smooth projective and consider its even quantum connection at an
 even bulk point over an algebraically closed coefficient field.  If a
 generalized eigenspace of Euler multiplication has rank one, that block
@@ -956,6 +1002,7 @@ monodromy on this block is the identity.
 
 \begin{proposition}[Products with projective space]
 \label{prop:projective-product-nu}
+\coverage{absent}%
 For every smooth projective variety $T$ and every $m\ge0$,
 \[
  \nu_6(T\times\PP^m)=(m+1)\nu_6(T).
@@ -989,6 +1036,8 @@ factor of $T$, counted with algebraic multiplicity.  This gives the formula.
 \end{proof}
 
 \begin{corollary}\label{cor:p3-nu6}
+\coverage{conditional_deduction}%
+\lean{projectiveSpace_sixthMultiplicity_eq_zero_of_product_inputs}%
 The small even framed invariant of projective three-space satisfies
 \[
  \nu_6(\PP^3)=0.
@@ -1002,6 +1051,10 @@ and $m=3$.
 
 \begin{proposition}[The cubic packet]
 \label{prop:cubic-packet}
+\coverage{conditional_deduction}%
+\lean{cubicPacket_sixthMultiplicity_eq_two_of_charpoly,%
+  cubicPacket_indicial_factorization_and_framed_eigenvalues,%
+  cubicPacket_sixthMultiplicity_eq_two_of_block_exponents}%
 For every smooth cubic threefold \(X\),
 \[
  \nu_6(X)=2.
@@ -1165,6 +1218,7 @@ coordinate.
 
 \begin{corollary}[Formal-germ persistence of the cubic packet]
 \label{cor:cubic-formal-germ}
+\coverage{absent}%
 After extending the cubic Novikov coefficient field so that
 $r=(3q)^{1/2}$ is a unit, the primitive-sixth multiplicity is equal to $2$
 throughout the formal even bulk germ at the small hyperplane point.
@@ -1183,6 +1237,9 @@ sets the value at the closed point equal to $2$.
 
 \begin{corollary}[Framed count after one product stabilization]
 \label{cor:cubic-product-nu}
+\coverage{conditional_deduction}%
+\lean{productProjectiveLine_sixthMultiplicity_eq_four,%
+  cubicProductProjectiveLine_sixthMultiplicity_eq_four_of_block_exponents}%
 For every smooth cubic threefold $X$,
 \[
  \nu_6(X\times\PP^1)=4.
@@ -1220,6 +1277,11 @@ related by a flop \cite[Theorems~2.17--2.18]{KuznetsovV14}.
 
 \begin{corollary}[One stabilization of \(V_{14}\)]
 \label{cor:v14-one-step}
+\coverage{conditional_deduction}%
+\lean{rankTwoProjectiveBundle_packet_transport,%
+  genusEight_packet_eq_two_of_flop_inputs,%
+  genusEight_oneStep_irrational_of_flop_inputs,%
+  genusEight_oneStep_irrational_of_atom_inputs}%
 For every smooth prime Fano threefold \(V\) of genus eight,
 \[
   V\times\PP^1\ \text{is irrational}.

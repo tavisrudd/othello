@@ -12,6 +12,8 @@ six-axis argument, so that the commutants do not have to be inferred from a
 table.
 
 \begin{lemma}[The six-point hearts]\label{lem:six-point-hearts}
+\coverage{fragment}%
+\lean{sixPointHearts_simple_with_endomorphism_algebras}%
 For $p=2,3$, the $\F_pA_5$-module $H_p$ is simple, and
 \[
   \End_{A_5}(H_2)=\F_4,
@@ -100,6 +102,9 @@ Theorem~\ref{thm:all-degree-graph-saturation} recorded after its proof.
 
 \begin{proposition}[Generic six-axis polarization]
 \label{prop:six-axis-polarization}
+\coverage{fragment}%
+\lean{sixAxisGram_unit_and_augmentation_eigenvalues,%
+  sixAxisGram_integralSmithReduction, sixAxisPolarization_parameters_unique}%
 On the geometric generic fibre of the nonstandard $A_5$-pencil, after
 coherent identification of the six quotient elliptic curves, the Rosati Gram
 matrix of the six maps is
@@ -189,6 +194,15 @@ intermediate Jacobian.
 
 \begin{lemma}[Relative six-axis source]
 \label{lem:relative-six-axis}
+\coverage{fragment}%
+\lean{relativeSixAxis_of_supplied_relative_geometry,%
+  relativeSixAxis_sixPointAxis_fixedLine, relativeSixAxis_sixPointAxis_norm,%
+  relativeSixAxis_sixPointAxis_stabilizer_selfNormalizing,%
+  relativeSixAxis_sixPointAxis_transport_independent,%
+  relativeSixAxis_sixPointAxis_coefficientDescent,%
+  relativeSixAxis_integralCoefficientQuotient_and_form,%
+  relativeSixAxis_threePrimary_stableMaximalIsotropicPacket,%
+  relativeSixAxis_kernelCoordinates_classify_packet}%
 There are an elliptic scheme \(\mathcal E\to B^\circ\) and a relative
 isogeny
 \[
@@ -338,6 +352,23 @@ $(1,6,6,6,6)$.
 
 \begin{proposition}[Principal gluing packet]
 \label{prop:principal-gluing-packet}
+\coverage{fragment}%
+\lean{principalGluing_projectiveLine_packets,%
+  principalGluing_selfAdjointGraph_isotropic_halfDimension,%
+  principalGluing_f4Frobenius_fixed_and_exchanged,%
+  principalGluing_f4TraceDeterminant_maximalIsotropic,%
+  principalGluing_exoticStabilizer_algebraicCore,%
+  principalGluing_abstractExceptionalGroup,%
+  principalGluing_f4Frobenius_oddNormalizer,%
+  principalGluingPacket_connectedFamily_persistence,%
+  principalGluingPacket_markedF4Pair_connectedFamily_persistence,%
+  principalGluingPacket_markedProjectiveLine_connectedFamily_persistence,%
+  principalGluingPacket_projectiveLine_nonfixed_persists_as_markedPair,%
+  principalGluing_sixPointCoefficientHeart_quadraticCommutant,%
+  principalGluing_sixPointCoefficientHeart_stableHalf_classification,%
+  principalGluing_sixPointCoefficientHeart_projectiveLine_packet,%
+  principalGluing_sixPointCoefficientHeart_packet_maximalIsotropic,%
+  symmetricSix_no_faithful_action_on_classified_orders}%
 The \(A_5\)-stable two-primary principal kernels of the six-axis source are
 parametrized by
 \[

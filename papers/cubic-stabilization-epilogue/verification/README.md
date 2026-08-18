@@ -13,6 +13,22 @@ The snapshot below is the exact current inventory; any change to manuscript
 labels, claim-map declarations, public terminals, axiom-audit commands, or
 expected axiom rows must preserve their exact correspondence.
 
+The correspondence is recorded twice, and the check requires the two records to
+agree.  Every theorem-like environment in the manuscript carries two
+typographically empty annotations, defined in `formal-annotations.tex`:
+`\coverage`, whose argument is the strength at which the statement is
+formalized, and `\lean`, whose argument names the reviewer terminals carrying
+it.  The per-claim record in `lean/verification/claims.json` repeats those two
+fields and adds the objects, hypotheses, conclusion, and limitations of the
+formal statement.  The checker reads the annotations out of the manuscript
+source and rejects any disagreement with the claim map, so a statement cannot be
+rewritten, retitled, or re-proved while its recorded coverage silently continues
+to describe the previous version.  `\lean` follows the convention of the Lean
+blueprint system of P. Massot; `\coverage` replaces that system's two-valued
+formalization flag, because a statement here may also be represented by a
+strictly weaker fragment or by a conditional deduction whose external premises
+are exposed in the theorem type.
+
 Checked coverage snapshot: 50 claims; 10 absent; 21 fragmentary; 18 conditional;
 1 complete; 220 reviewer terminals, of which 46 are machinery serving no current
 manuscript claim.

@@ -92,6 +92,23 @@ positive-depth blocks.
 
 \begin{lemma}[The graph coefficient lattice]
 \label{lem:graph-coefficient-lattice}
+\coverage{fragment}%
+\lean{graphCoefficient_graphCoordinate_block_identity,%
+  graphCoefficient_dualForm_adjoint_iff,%
+  graphCoefficient_slopeCommutator_expansion,%
+  graphCoefficient_scalarDifference_divisibility,%
+  graphCoefficient_commutatorDepth_iff_truncated,%
+  graphCoefficient_crossDepth_iff_splitSlopeCommutator,%
+  graphCoefficient_rectangular_crossDepth_iff_splitSlopeCommutator,%
+  graphCoefficient_rectangular_unitPositive_commutator,%
+  graphCoefficient_symmetricFiniteBlockFamily_depth_iff_descent,%
+  graphCoefficient_crossDepth_intersection_and_midpoint,%
+  graphCoefficient_crossDepth_eq_of_effectiveSlopeDifference_eq,%
+  graphCoefficient_crossDepth_eq_of_dvr_scalar_lifts,%
+  graphCoefficient_unitCrossDepth,%
+  graphCoefficient_flattenedSplitPresentation_iff_descent,%
+  graphCoefficient_afterSplitBasisChange_iff_descent,%
+  graphCoefficient_splitPresentation_rankOneGenerated}%
 In the split basis, the coefficient lattice of descended graph divisors is
 the symmetric matrix-of-ideals lattice whose diagonal block \(i\) has depth
 \(p^{a_i}\) and whose \((i,j)\)-block has depth
@@ -157,6 +174,12 @@ is permitted.
 
 \begin{lemma}[Rank-one generation over a DVR]
 \label{lem:dvr-rank-one}
+\coverage{complete}%
+\lean{rankOne_mixed_coefficient_identity, rankOne_midpoint_exponents,%
+  rankOne_cross_coefficient_decomposition,%
+  rankOne_weightedPair_decomposition_of_midpoint,%
+  rankOne_finiteMatrix_generation_of_pairwise_midpoint,%
+  rankOne_finiteMatrix_generated_iff_pairwise_midpoint_of_dvr}%
 Let \(L\) be a symmetric matrix-of-ideals lattice over \(O\), with diagonal
 depths \(p^{a_i}\) and cross depths \(p^{e_{ij}}\).  Then \(L\) is generated
 by its rank-one forms if and only if
@@ -190,6 +213,26 @@ forms, these identities generate \(L\), without division by two.
 
 \begin{theorem}[All-degree graph saturation]
 \label{thm:all-degree-graph-saturation}
+\coverage{fragment}%
+\lean{squareZero_sum_pow_eq_factorial_mul_squarefreeProductSum,%
+  ordinaryDivisorProductSubmodule,%
+  squarefreeProductSum_mem_ordinaryDivisorProductSubmodule,%
+  decomposableTwoForm_squareZero,%
+  ellipticSource_rankOne_decomposable_and_squareZero,%
+  rankOne_squareZero_of_injectivePullback,%
+  rankOne_allDegree_squareZeroAssembly,%
+  faithfullyFlat_tensorQuotient_zero_implies_mem,%
+  rankOne_allDegree_integralProductMember_of_faithfullyFlatQuotient,%
+  rankOne_allDegree_of_injectivePullback_and_faithfullyFlatDescent,%
+  rankOne_allDegree_of_canonicalEllipticSourcePullback_and_faithfullyFlatDescent,%
+  rankOne_allDegree_ordinaryProduct_of_canonicalEllipticSourcePullback,%
+  graphLattice_coefficientExtension_preserves_member_and_rankOne,%
+  graphLattice_splitCoordinateBasisChange_rankOne_and_recovery,%
+  ordinaryDivisorProducts_baseChange_and_faithfullyFlatReflection,%
+  rankOne_allDegree_dividedPower_of_faithfullyFlatCoefficientExtension,%
+  rankOne_allDegree_dividedPower_of_splitGraphDVR,%
+  rankOne_allDegree_dividedPower_of_splitGraphDVR_afterBasisChange,%
+  rankOne_allDegree_dividedPower_of_markedGraphDescent_afterBasisChange}%
 For a marked finite-\'etale graph presentation, every divided power of a class
 in its prescribed graph divisor lattice is an ordinary integral divisor
 product.  Equivalently, after localization at \(p\), the divided-power
@@ -272,6 +315,14 @@ the depth decomposition.
 
 \begin{lemma}[Local chart for the six-axis quotient]
 \label{lem:six-axis-local-chart}
+\coverage{fragment}%
+\lean{sixAxisSmith_unit_line_and_depth_one_at_two_three,%
+  sixAxisLocalChart_orthogonal_block,%
+  sixAxisLocalChart_twoPrimary_quadraticSlopeModel,%
+  sixAxisLocalChart_twoPrimary_minimalPolynomialModel,%
+  sixAxisLocalChart_twoPrimary_splitsOverQuadraticRoot,%
+  sixAxisLocalChart_twoPrimary_concreteFiniteEtaleSplitting,%
+  sixAxisLocalChart_threePrimary_scalarSlopeModel}%
 Let \(G=6I_5-J_5\).  At each prime \(p\mid6\), the coefficient lattice has
 an orthogonal decomposition
 \[
@@ -324,6 +375,9 @@ No global choice of either slope is needed.
 
 \begin{theorem}[Divided powers for the six-axis family]
 \label{thm:six-axis-divided-powers}
+\coverage{fragment}%
+\lean{primeDenominatorMember_all_implies_mem,%
+  rankOne_allDegree_integralProductMember_of_primeDenominators}%
 For every smooth member \(X_b\) of the nonstandard \(A_5\)-cubic pencil, the
 prescribed six-axis graph divisor lattice on \(J_b\) has all its integral
 divided powers in the ordinary divisor-product image.  In particular,
@@ -361,6 +415,8 @@ for cubic threefolds.
 
 \begin{corollary}[Universal \(CH_0\)-triviality]
 \label{cor:universal-ch0}
+\coverage{conditional_deduction}%
+\lean{universalCH0_of_sixAxisMinimalClass_and_Voisin}%
 Every smooth member of the nonstandard \(A_5\)-cubic pencil is universally
 \(CH_0\)-trivial.
 \end{corollary}
@@ -374,6 +430,7 @@ equivalent to universal \(CH_0\)-triviality.
 
 \begin{proposition}[Finite separated-variable intersection]
 \label{prop:A5-nonseparated}
+\coverage{absent}%
 Let \(M_{H_1}\) be the coarse-moduli image of the nonstandard
 \(A_5\)-invariant cubic pencil.  Then only finitely many points of
 \(M_{H_1}\) are represented by smooth cubic threefolds that are

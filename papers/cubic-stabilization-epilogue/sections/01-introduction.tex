@@ -12,6 +12,10 @@ stabilization it does not predict rationality for smooth cubic threefolds.
 
 \begin{theorem}[One-step irrationality]
 \label{thm:every-cubic}
+\coverage{conditional_deduction}%
+\lean{cubicZeroPacket_residueDiscriminant_eq, curve_residueDiscriminant_eq_zero,%
+  cubicAtom_not_represented_in_dimension_le_two,%
+  cubicThreefold_oneStep_irrational_of_atom_inputs}%
 For every smooth complex cubic threefold \(X\), the fourfold
 \(X\times\PP^1\) is irrational.
 \end{theorem}
@@ -79,6 +83,7 @@ codimension at most three parametrizing threefolds with universally trivial
 
 \begin{corollary}[Separation in codimension three]
 \label{cor:voisin-separation}
+\coverage{absent}%
 There is a nonempty countable union of subvarieties of codimension at most
 three in the moduli space of smooth cubic threefolds such that, for every
 member \(X\), both \(X\) and \(X\times\PP^1\) are universally
@@ -92,6 +97,7 @@ Fermat equation directly.
 
 \begin{corollary}[Fermat]
 \label{cor:fermat-separation}
+\coverage{absent}%
 The fourfold
 \[
   \{x_1^3+x_2^3+x_3^3+x_4^3+x_5^3=0\}\times\PP^1
@@ -108,6 +114,7 @@ universally \(CH_0\)-trivial; the same degrees persist on
 
 \begin{corollary}[Coprime-degree cubics]
 \label{cor:coprime-separation}
+\coverage{absent}%
 Let \(X\) be one of the cubic threefolds of \cite[Theorem~3.3]{YYZ}.  Then
 \(X\times\PP^1\) admits unirational parametrizations of coprime degrees, is
 universally \(CH_0\)-trivial, and is irrational.
@@ -133,6 +140,8 @@ a cubic of separated-variable type.
 
 \begin{theorem}[Separation on the \(A_5\)-pencil]
 \label{thm:separation-family}
+\coverage{conditional_deduction}%
+\lean{separationFamily_of_sixAxis_packet_and_period_inputs}%
 Let \(W_5\) be the five-dimensional irreducible \(A_5\)-module, and let
 \(B^\circ\) be the smooth locus inside
 \[
@@ -221,6 +230,10 @@ invariant.
 
 \begin{theorem}[One-step irrationality from the framed invariant]
 \label{thm:every-cubic-conditional}
+\coverage{conditional_deduction}%
+\lean{irrational_of_nonzero_packet,%
+  cubicThreefold_oneStep_irrational_of_packet_inputs,%
+  cubicThreefold_oneStep_not_rational_of_framed_product_inputs}%
 Assume Hypotheses~5.7R and~5.7T of Section~\ref{sec:framed-monodromy}.  Let
 \(X\) be a smooth complex cubic threefold.  Then
 \(\nu_6(X\times\PP^1)=4\), every rational smooth projective fourfold has
