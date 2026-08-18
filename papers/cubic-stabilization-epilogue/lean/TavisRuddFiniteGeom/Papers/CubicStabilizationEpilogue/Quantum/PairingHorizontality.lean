@@ -21,7 +21,8 @@ the connection matrix `B` in that direction.  Substituting `-u` in the right
 factor makes the residue enter there with the opposite sign and multiplies the
 regular coefficient of order `m` by `(-1) ^ m`.
 
-This module represents such an identity coefficientwise.  Two factors are
+This module represents such an identity coefficientwise, for factors indexed by
+arbitrary finite types with decidable equality.  Two factors are
 allowed to differ, so that the same coefficients describe both the pairing of a
 factor with itself and the off-diagonal pairing between two factors of a local
 splitting: `leftResidue` and `leftRegular` are the connection data of the left
@@ -64,7 +65,8 @@ namespace Quantum
 
 open Matrix
 
-variable {R : Type*} [CommRing R] {leftRank rightRank : ℕ}
+variable {R : Type*} [CommRing R] {leftIndex rightIndex : Type*}
+  [Fintype leftIndex] [DecidableEq leftIndex] [Fintype rightIndex] [DecidableEq rightIndex]
 
 /-- The coefficient of `u ^ (index - 1)` in the horizontality expression
 `D P(u) + A(u)ᵀ * P(u) + P(u) * A(-u)` for a connection with a simple pole, a
@@ -73,12 +75,12 @@ possibly different connection data on the two sides of the pairing.  At index
 `0` this is the coefficient of `u⁻¹`, where only the two residue terms
 contribute; at index `order + 1` it is the coefficient of `u ^ order`. -/
 def pairingHorizontalityCoefficient
-    (leftResidue : Matrix (Fin leftRank) (Fin leftRank) R)
-    (leftRegular : ℕ → Matrix (Fin leftRank) (Fin leftRank) R)
-    (rightResidue : Matrix (Fin rightRank) (Fin rightRank) R)
-    (rightRegular : ℕ → Matrix (Fin rightRank) (Fin rightRank) R)
-    (pairing derivative : ℕ → Matrix (Fin leftRank) (Fin rightRank) R) :
-    ℕ → Matrix (Fin leftRank) (Fin rightRank) R
+    (leftResidue : Matrix leftIndex leftIndex R)
+    (leftRegular : ℕ → Matrix leftIndex leftIndex R)
+    (rightResidue : Matrix rightIndex rightIndex R)
+    (rightRegular : ℕ → Matrix rightIndex rightIndex R)
+    (pairing derivative : ℕ → Matrix leftIndex rightIndex R) :
+    ℕ → Matrix leftIndex rightIndex R
   | 0 => leftResidueᵀ * pairing 0 - pairing 0 * rightResidue
   | order + 1 =>
       derivative order
@@ -91,22 +93,22 @@ def pairingHorizontalityCoefficient
 /-- The horizontality coefficients of the loop direction `u ∂_u`, whose
 derivation multiplies the coefficient of `u ^ order` by `order`. -/
 def loopPairingHorizontalityCoefficient
-    (leftResidue : Matrix (Fin leftRank) (Fin leftRank) R)
-    (leftRegular : ℕ → Matrix (Fin leftRank) (Fin leftRank) R)
-    (rightResidue : Matrix (Fin rightRank) (Fin rightRank) R)
-    (rightRegular : ℕ → Matrix (Fin rightRank) (Fin rightRank) R)
-    (pairing : ℕ → Matrix (Fin leftRank) (Fin rightRank) R) :
-    ℕ → Matrix (Fin leftRank) (Fin rightRank) R :=
+    (leftResidue : Matrix leftIndex leftIndex R)
+    (leftRegular : ℕ → Matrix leftIndex leftIndex R)
+    (rightResidue : Matrix rightIndex rightIndex R)
+    (rightRegular : ℕ → Matrix rightIndex rightIndex R)
+    (pairing : ℕ → Matrix leftIndex rightIndex R) :
+    ℕ → Matrix leftIndex rightIndex R :=
   pairingHorizontalityCoefficient leftResidue leftRegular rightResidue rightRegular
     pairing fun order => (order : R) • pairing order
 
 section Coefficients
 
-variable {leftResidue : Matrix (Fin leftRank) (Fin leftRank) R}
-  {leftRegular : ℕ → Matrix (Fin leftRank) (Fin leftRank) R}
-  {rightResidue : Matrix (Fin rightRank) (Fin rightRank) R}
-  {rightRegular : ℕ → Matrix (Fin rightRank) (Fin rightRank) R}
-  {pairing derivative : ℕ → Matrix (Fin leftRank) (Fin rightRank) R}
+variable {leftResidue : Matrix leftIndex leftIndex R}
+  {leftRegular : ℕ → Matrix leftIndex leftIndex R}
+  {rightResidue : Matrix rightIndex rightIndex R}
+  {rightRegular : ℕ → Matrix rightIndex rightIndex R}
+  {pairing derivative : ℕ → Matrix leftIndex rightIndex R}
 
 /-- The `u⁻¹` coefficient of horizontality, written out. -/
 theorem pairingHorizontalityCoefficient_zero :
@@ -182,21 +184,21 @@ end Coefficients
 
 section SylvesterSystem
 
-variable {leftResidue : Matrix (Fin leftRank) (Fin leftRank) R}
-  {leftRegular : ℕ → Matrix (Fin leftRank) (Fin leftRank) R}
-  {rightResidue : Matrix (Fin rightRank) (Fin rightRank) R}
-  {rightRegular : ℕ → Matrix (Fin rightRank) (Fin rightRank) R}
-  {pairing derivative : ℕ → Matrix (Fin leftRank) (Fin rightRank) R}
+variable {leftResidue : Matrix leftIndex leftIndex R}
+  {leftRegular : ℕ → Matrix leftIndex leftIndex R}
+  {rightResidue : Matrix rightIndex rightIndex R}
+  {rightRegular : ℕ → Matrix rightIndex rightIndex R}
+  {pairing derivative : ℕ → Matrix leftIndex rightIndex R}
 
 /-- The remainder of the horizontality coefficient at one order after the two
 terms containing the pairing coefficient of that order are removed.  It involves
 only strictly earlier pairing coefficients, and it vanishes at the leading
 order. -/
 def pairingSylvesterRemainder
-    (leftRegular : ℕ → Matrix (Fin leftRank) (Fin leftRank) R)
-    (rightRegular : ℕ → Matrix (Fin rightRank) (Fin rightRank) R)
-    (pairing derivative : ℕ → Matrix (Fin leftRank) (Fin rightRank) R) :
-    ℕ → Matrix (Fin leftRank) (Fin rightRank) R
+    (leftRegular : ℕ → Matrix leftIndex leftIndex R)
+    (rightRegular : ℕ → Matrix rightIndex rightIndex R)
+    (pairing derivative : ℕ → Matrix leftIndex rightIndex R) :
+    ℕ → Matrix leftIndex rightIndex R
   | 0 => 0
   | order + 1 =>
       -(derivative order
@@ -275,11 +277,11 @@ coefficients, so the conclusion follows by induction on the order.  This is the
 block diagonality used to restrict a horizontal pairing to a single spectral
 factor. -/
 theorem offDiagonalPairing_eq_zero_of_horizontality {K : Type*} [Field K]
-    {leftResidue : Matrix (Fin leftRank) (Fin leftRank) K}
-    {leftRegular : ℕ → Matrix (Fin leftRank) (Fin leftRank) K}
-    {rightResidue : Matrix (Fin rightRank) (Fin rightRank) K}
-    {rightRegular : ℕ → Matrix (Fin rightRank) (Fin rightRank) K}
-    {pairing derivative : ℕ → Matrix (Fin leftRank) (Fin rightRank) K}
+    {leftResidue : Matrix leftIndex leftIndex K}
+    {leftRegular : ℕ → Matrix leftIndex leftIndex K}
+    {rightResidue : Matrix rightIndex rightIndex K}
+    {rightRegular : ℕ → Matrix rightIndex rightIndex K}
+    {pairing derivative : ℕ → Matrix leftIndex rightIndex K}
     {leftEigenvalue rightEigenvalue : K}
     (separated : leftEigenvalue ≠ rightEigenvalue)
     (leftNilpotent : IsNilpotent (leftResidue - leftEigenvalue • 1))
@@ -323,8 +325,9 @@ theorem regularCoefficient_preserves_nilpotentLine_of_loopHorizontality
 
 section ConstantPairing
 
-variable {rank : ℕ} {residue grading pairingValue : Matrix (Fin rank) (Fin rank) R}
-  {regular pairing derivative : ℕ → Matrix (Fin rank) (Fin rank) R}
+variable {index : Type*} [Fintype index] [DecidableEq index]
+  {residue grading pairingValue : Matrix index index R}
+  {regular pairing derivative : ℕ → Matrix index index R}
 
 /-- A pairing that is constant in the chosen frame is horizontal for a connection
 whose residue is self-adjoint and whose regular part is the anti-self-adjoint

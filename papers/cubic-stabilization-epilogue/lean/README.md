@@ -41,8 +41,8 @@ deduction as well: from the product formula, taken as a typed premise, Lean
 obtains the value four for the product of a cubic threefold with a projective
 line and the value zero for every projective space.
 
-Checked coverage snapshot: 50 claims; 16 absent; 16 fragmentary; 17 conditional;
-1 complete; 198 reviewer terminals, of which 46 are machinery serving no current
+Checked coverage snapshot: 50 claims; 16 absent; 15 fragmentary; 18 conditional;
+1 complete; 200 reviewer terminals, of which 46 are machinery serving no current
 manuscript claim.
 
 Those 46 are kernel-checked and reusable, and the claim map records for each one
@@ -530,6 +530,18 @@ The reviewer-facing terminals currently verify:
   has only the zero solution, the induction over later orders kills every
   off-diagonal coefficient, and a pairing with vanishing off-diagonal blocks is
   invertible exactly when both diagonal restrictions are;
+- block diagonality of a horizontal pairing for an arbitrary splitting, given
+  by a label on a finite type of coordinates, whose leading eigenvalues are
+  pairwise distinct and whose connection is block diagonal in the chosen frame:
+  the block of the horizontality identity between two labels is the two-factor
+  identity of the corresponding blocks, so every coefficient of the pairing
+  vanishes on every entry whose row and column carry different labels;
+- nondegeneracy of the restriction of such a pairing to the coordinates of one
+  factor, and, when the pairing also vanishes between coordinates of different
+  parity, to the coordinates of one factor and even parity: a nonzero kernel
+  vector of a restriction extends by zero to a nonzero kernel vector of the
+  whole pairing, and reindexing along a bijection with a finite ordinal
+  preserves nonvanishing of the determinant;
 - the order-by-order content of horizontality for a sesquilinear pairing whose
   right argument is evaluated at the negated loop coordinate.  For a connection
   with a simple pole, the coefficient of the inverse loop coordinate is exactly

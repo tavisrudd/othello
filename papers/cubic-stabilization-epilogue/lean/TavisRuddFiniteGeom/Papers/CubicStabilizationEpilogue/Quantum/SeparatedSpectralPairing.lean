@@ -29,11 +29,17 @@ off-diagonal blocks has determinant the product of the two diagonal
 determinants, so an invertible pairing restricts to invertible pairings on both
 factors.
 
+The two factors are indexed by arbitrary finite types with decidable equality,
+so the same statements apply to the fibers of a label on a common set of
+coordinates.
+
 Lean does not construct the `F`-bundle, the spectral splitting, the connection,
 or the pairing, and does not derive the displayed order-by-order equations from
 horizontality; those supply the hypotheses.  The refinement to the even part of
 a factor, which uses that the Poincare pairing pairs only equal parities, is
-not formalized.
+proved in
+`TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.OrthogonalRestrictionNondegeneracy`
+from block diagonality and the parity behaviour of the form.
 -/
 
 namespace TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue
@@ -42,17 +48,18 @@ namespace Quantum
 
 open Matrix
 
-variable {K : Type*} [Field K] {leftRank rightRank : ℕ}
+variable {K : Type*} [Field K] {leftIndex rightIndex : Type*}
+  [Fintype leftIndex] [DecidableEq leftIndex] [Fintype rightIndex] [DecidableEq rightIndex]
 
 /-- The transpose of a nilpotent square matrix is nilpotent. -/
-theorem isNilpotent_transpose {M : Matrix (Fin leftRank) (Fin leftRank) K}
+theorem isNilpotent_transpose {M : Matrix leftIndex leftIndex K}
     (nilpotent : IsNilpotent M) : IsNilpotent Mᵀ := by
   obtain ⟨exponent, vanishing⟩ := nilpotent
   exact ⟨exponent, by rw [← Matrix.transpose_pow, vanishing, Matrix.transpose_zero]⟩
 
 /-- A nonzero scalar multiple of the identity matrix is a unit. -/
 theorem isUnit_smul_one {scalar : K} (nonzero : scalar ≠ 0) :
-    IsUnit (scalar • (1 : Matrix (Fin leftRank) (Fin leftRank) K)) := by
+    IsUnit (scalar • (1 : Matrix leftIndex leftIndex K)) := by
   refine ⟨⟨scalar • 1, scalar⁻¹ • 1, ?_, ?_⟩, rfl⟩
   · rw [Matrix.smul_mul, Matrix.mul_smul, Matrix.one_mul, smul_smul,
       mul_inv_cancel₀ nonzero, one_smul]
@@ -64,18 +71,18 @@ has only the zero solution.  Here `U₁` and `U₂` are the leading operators, e
 the sum of a scalar and a nilpotent matrix, and `X` is the off-diagonal block of
 a pairing coefficient. -/
 theorem sylvester_eq_zero_of_separated_eigenvalues
-    {leftOperator : Matrix (Fin leftRank) (Fin leftRank) K}
-    {rightOperator : Matrix (Fin rightRank) (Fin rightRank) K}
+    {leftOperator : Matrix leftIndex leftIndex K}
+    {rightOperator : Matrix rightIndex rightIndex K}
     {leftEigenvalue rightEigenvalue : K}
     (separated : leftEigenvalue ≠ rightEigenvalue)
     (leftNilpotent : IsNilpotent (leftOperator - leftEigenvalue • 1))
     (rightNilpotent : IsNilpotent (rightOperator - rightEigenvalue • 1))
-    {block : Matrix (Fin leftRank) (Fin rightRank) K}
+    {block : Matrix leftIndex rightIndex K}
     (sylvester : leftOperatorᵀ * block = block * rightOperator) :
     block = 0 := by
-  set shiftedLeft := leftOperatorᵀ - rightEigenvalue • (1 : Matrix (Fin leftRank) (Fin leftRank) K)
+  set shiftedLeft := leftOperatorᵀ - rightEigenvalue • (1 : Matrix leftIndex leftIndex K)
     with shiftedLeftDefinition
-  set shiftedRight := rightOperator - rightEigenvalue • (1 : Matrix (Fin rightRank) (Fin rightRank) K)
+  set shiftedRight := rightOperator - rightEigenvalue • (1 : Matrix rightIndex rightIndex K)
     with shiftedRightDefinition
   have shifted : shiftedLeft * block = block * shiftedRight := by
     rw [shiftedLeftDefinition, shiftedRightDefinition, Matrix.sub_mul, Matrix.mul_sub,
@@ -100,7 +107,7 @@ theorem sylvester_eq_zero_of_separated_eigenvalues
   have blockVanishing : shiftedLeft ^ exponent * block = 0 := by
     rw [powers exponent, shiftedRightDefinition, rightVanishing, Matrix.mul_zero]
   have shiftedLeftDecomposition :
-      shiftedLeft = (leftEigenvalue - rightEigenvalue) • (1 : Matrix (Fin leftRank) (Fin leftRank) K) +
+      shiftedLeft = (leftEigenvalue - rightEigenvalue) • (1 : Matrix leftIndex leftIndex K) +
         (leftOperator - leftEigenvalue • 1)ᵀ := by
     rw [shiftedLeftDefinition, Matrix.transpose_sub, Matrix.transpose_smul,
       Matrix.transpose_one, sub_smul]
@@ -108,10 +115,10 @@ theorem sylvester_eq_zero_of_separated_eigenvalues
   have nilpotentPart : IsNilpotent ((leftOperator - leftEigenvalue • 1)ᵀ) :=
     isNilpotent_transpose leftNilpotent
   have scalarUnit : IsUnit ((leftEigenvalue - rightEigenvalue) •
-      (1 : Matrix (Fin leftRank) (Fin leftRank) K)) :=
+      (1 : Matrix leftIndex leftIndex K)) :=
     isUnit_smul_one (sub_ne_zero.mpr separated)
   have commuting : Commute ((leftOperator - leftEigenvalue • 1)ᵀ)
-      ((leftEigenvalue - rightEigenvalue) • (1 : Matrix (Fin leftRank) (Fin leftRank) K)) := by
+      ((leftEigenvalue - rightEigenvalue) • (1 : Matrix leftIndex leftIndex K)) := by
     unfold Commute SemiconjBy
     rw [Matrix.mul_smul, Matrix.smul_mul, Matrix.mul_one, Matrix.one_mul]
   have shiftedLeftUnit : IsUnit shiftedLeft := by
@@ -119,16 +126,16 @@ theorem sylvester_eq_zero_of_separated_eigenvalues
     exact nilpotentPart.isUnit_add_left_of_commute scalarUnit commuting
   obtain ⟨unitMatrix, unitEquality⟩ := shiftedLeftUnit.pow exponent
   have inverseEquation :
-      (↑unitMatrix⁻¹ : Matrix (Fin leftRank) (Fin leftRank) K) *
-        (↑unitMatrix : Matrix (Fin leftRank) (Fin leftRank) K) = 1 := unitMatrix.inv_mul
-  calc block = ((↑unitMatrix⁻¹ : Matrix (Fin leftRank) (Fin leftRank) K) *
-        (↑unitMatrix : Matrix (Fin leftRank) (Fin leftRank) K)) * block := by
+      (↑unitMatrix⁻¹ : Matrix leftIndex leftIndex K) *
+        (↑unitMatrix : Matrix leftIndex leftIndex K) = 1 := unitMatrix.inv_mul
+  calc block = ((↑unitMatrix⁻¹ : Matrix leftIndex leftIndex K) *
+        (↑unitMatrix : Matrix leftIndex leftIndex K)) * block := by
         rw [inverseEquation, Matrix.one_mul]
-    _ = (↑unitMatrix⁻¹ : Matrix (Fin leftRank) (Fin leftRank) K) *
-        ((↑unitMatrix : Matrix (Fin leftRank) (Fin leftRank) K) * block) := by
+    _ = (↑unitMatrix⁻¹ : Matrix leftIndex leftIndex K) *
+        ((↑unitMatrix : Matrix leftIndex leftIndex K) * block) := by
         rw [Matrix.mul_assoc]
-    _ = (↑unitMatrix⁻¹ : Matrix (Fin leftRank) (Fin leftRank) K) *
-        (0 : Matrix (Fin leftRank) (Fin rightRank) K) := by
+    _ = (↑unitMatrix⁻¹ : Matrix leftIndex leftIndex K) *
+        (0 : Matrix leftIndex rightIndex K) := by
         rw [unitEquality, blockVanishing]
     _ = 0 := Matrix.mul_zero _
 
@@ -137,13 +144,13 @@ all strictly earlier coefficients vanish has only the zero solution.  This is
 the induction the manuscript performs on the coefficients of the off-diagonal
 pairing block. -/
 theorem offDiagonalCoefficients_eq_zero
-    {leftOperator : Matrix (Fin leftRank) (Fin leftRank) K}
-    {rightOperator : Matrix (Fin rightRank) (Fin rightRank) K}
+    {leftOperator : Matrix leftIndex leftIndex K}
+    {rightOperator : Matrix rightIndex rightIndex K}
     {leftEigenvalue rightEigenvalue : K}
     (separated : leftEigenvalue ≠ rightEigenvalue)
     (leftNilpotent : IsNilpotent (leftOperator - leftEigenvalue • 1))
     (rightNilpotent : IsNilpotent (rightOperator - rightEigenvalue • 1))
-    (coefficient rightHandSide : ℕ → Matrix (Fin leftRank) (Fin rightRank) K)
+    (coefficient rightHandSide : ℕ → Matrix leftIndex rightIndex K)
     (system : ∀ order, leftOperatorᵀ * coefficient order -
       coefficient order * rightOperator = rightHandSide order)
     (earlierOrders : ∀ order,
@@ -167,8 +174,8 @@ theorem offDiagonalCoefficients_eq_zero
 diagonal restrictions are.  This is the nondegeneracy consequence of block
 diagonality. -/
 theorem blockDiagonal_det_ne_zero_iff
-    (leftBlock : Matrix (Fin leftRank) (Fin leftRank) K)
-    (rightBlock : Matrix (Fin rightRank) (Fin rightRank) K) :
+    (leftBlock : Matrix leftIndex leftIndex K)
+    (rightBlock : Matrix rightIndex rightIndex K) :
     (Matrix.fromBlocks leftBlock 0 0 rightBlock).det ≠ 0 ↔
       leftBlock.det ≠ 0 ∧ rightBlock.det ≠ 0 := by
   rw [Matrix.det_fromBlocks_zero₂₁]

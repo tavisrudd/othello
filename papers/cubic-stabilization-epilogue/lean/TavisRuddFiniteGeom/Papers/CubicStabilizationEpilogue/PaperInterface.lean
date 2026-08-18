@@ -69,6 +69,8 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CubicPacket
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.RankTwoResidueRigidity
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.SeparatedSpectralPairing
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.PairingHorizontality
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.OrthogonalRestrictionNondegeneracy
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.BlockDiagonalHorizontalPairing
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.QuarticDiscriminantDerivations
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.PowerSeriesLogarithmicVanishing
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.ModuleSpectrumTransfer
@@ -5422,6 +5424,102 @@ theorem separatedSpectralFactors_pairing_eq_zero_of_horizontality
     ∀ order, pairing order = 0 :=
   Quantum.offDiagonalPairing_eq_zero_of_horizontality separated leftNilpotent rightNilpotent
     derivativeVanishing horizontal
+
+/-- Reviewer-facing block diagonality of a horizontal pairing for a labelled
+spectral splitting with pairwise distinct leading eigenvalues, together with the
+nondegeneracy statements it produces.  A splitting into local factors is
+recorded by a label on the coordinates; a block-diagonalizing frame is the
+hypothesis that the residue and every regular coefficient of the connection
+vanish on entries whose row and column carry different labels; and the residue
+restricted to the coordinates of one label is that label's eigenvalue plus a
+nilpotent matrix.
+
+The first conclusion is that every coefficient of the pairing vanishes on every
+entry whose row and column carry different labels: the block of the
+horizontality identity between two labels is the two-factor horizontality
+identity of the corresponding blocks, whose Sylvester induction forces the
+off-diagonal block to vanish order by order.  The second is that, when the
+leading pairing coefficient is nondegenerate and pairs only coordinates of equal
+parity, its restriction to the coordinates of one label, and its restriction to
+those of one label and even parity, are again nondegenerate.
+
+Lean constructs neither the `F`-bundle, the spectral splitting, the connection,
+the cohomological grading, nor the Poincare pairing.  Horizontality is vanishing
+of the coefficients of a formal identity between matrix families, the parity of a
+coordinate is an arbitrary function to `ZMod 2` with `0` naming the even
+coordinates, and nondegeneracy is nonvanishing of a determinant. -/
+theorem separatedSpectralFactors_labelledPairing_blockDiagonal_of_horizontality
+    {K : Type*} [Field K] {coordinate : Type*} [Fintype coordinate] [DecidableEq coordinate]
+    {factorIndex : Type*} [DecidableEq factorIndex] {label : coordinate → factorIndex}
+    {residue : Matrix coordinate coordinate K}
+    {regular pairing derivative : ℕ → Matrix coordinate coordinate K}
+    {eigenvalue : factorIndex → K} {parity : coordinate → ZMod 2}
+    (separated : Function.Injective eigenvalue)
+    (residueBlockDiagonal : ∀ row column, label row ≠ label column → residue row column = 0)
+    (regularBlockDiagonal : ∀ order row column,
+      label row ≠ label column → regular order row column = 0)
+    (nilpotent : ∀ value : factorIndex,
+      IsNilpotent (Quantum.labelBlock residue label value value - eigenvalue value • 1))
+    (derivativeVanishing : ∀ order row column,
+      pairing order row column = 0 → derivative order row column = 0)
+    (horizontal : ∀ order, Quantum.pairingHorizontalityCoefficient residue regular residue
+      regular pairing derivative order = 0)
+    (parityOrthogonal : ∀ row column, parity row ≠ parity column → pairing 0 row column = 0)
+    (leadingNondegenerate : (pairing 0).det ≠ 0) :
+    (∀ order row column, label row ≠ label column → pairing order row column = 0) ∧
+      ∀ value : factorIndex,
+        (Quantum.restrictToCoordinates (pairing 0) fun index => label index = value).det ≠ 0 ∧
+          (Quantum.restrictToCoordinates (pairing 0)
+            fun index => label index = value ∧ parity index = 0).det ≠ 0 := by
+  have blockDiagonal : ∀ order row column,
+      label row ≠ label column → pairing order row column = 0 :=
+    fun order row column different =>
+      Quantum.labelledPairing_eq_zero_of_horizontality separated residueBlockDiagonal
+        regularBlockDiagonal nilpotent derivativeVanishing horizontal order row column different
+  exact ⟨blockDiagonal, fun value =>
+    ⟨Quantum.det_restrictToLabelFiber_ne_zero (blockDiagonal 0) leadingNondegenerate value,
+      Quantum.det_restrictToEvenPartOfFactor_ne_zero (blockDiagonal 0) parityOrthogonal
+        leadingNondegenerate value⟩⟩
+
+/-- Reviewer-facing nondegeneracy of a block-diagonal pairing on one spectral
+factor and on the even part of that factor.  The pairing vanishes on entries
+whose row and column carry different factor labels, which is block diagonality
+for the splitting, and on entries whose row and column carry different
+cohomological parities, which is the statement that the Poincare form pairs only
+classes of equal parity.  A nondegenerate such pairing restricts nondegenerately
+to the coordinates of one factor, and to the coordinates of one factor and even
+parity: a nonzero vector in the kernel of a restriction extends by zero to a
+nonzero kernel vector of the whole pairing.  Reindexing along any bijection
+between `Fin rank` and the even coordinates of the factor preserves the
+determinant, which supplies the invertibility hypothesis of the rank-two residue
+rigidity argument for an even factor of rank two.
+
+Lean constructs no `F`-bundle, spectral splitting, cohomological grading, or
+Poincare pairing; block diagonality and the parity behaviour are hypotheses
+about a matrix, the label and the parity are arbitrary functions with `0` naming
+the even coordinates, and nondegeneracy is nonvanishing of a determinant. -/
+theorem separatedSpectralFactors_evenPart_pairing_nondegenerate
+    {K : Type*} [Field K] {coordinate : Type*} [Fintype coordinate] [DecidableEq coordinate]
+    {factorIndex : Type*} [DecidableEq factorIndex] {label : coordinate → factorIndex}
+    {parity : coordinate → ZMod 2} {pairing : Matrix coordinate coordinate K}
+    (blockDiagonal : ∀ row column, label row ≠ label column → pairing row column = 0)
+    (parityOrthogonal : ∀ row column, parity row ≠ parity column → pairing row column = 0)
+    (nondegenerate : pairing.det ≠ 0) (value : factorIndex) :
+    (Quantum.restrictToCoordinates pairing fun index => label index = value).det ≠ 0 ∧
+      (Quantum.restrictToCoordinates pairing
+        fun index => label index = value ∧ parity index = 0).det ≠ 0 ∧
+      (Quantum.restrictToCoordinates pairing
+        fun index => label index = value ∧ parity index = 0).Nondegenerate ∧
+      ∀ (rank : ℕ) (frame : Fin rank ≃ {index // label index = value ∧ parity index = 0}),
+        (pairing.submatrix (fun position => (frame position).val)
+          (fun position => (frame position).val)).det ≠ 0 := by
+  have evenPart : (Quantum.restrictToCoordinates pairing
+      fun index => label index = value ∧ parity index = 0).det ≠ 0 :=
+    Quantum.det_restrictToEvenPartOfFactor_ne_zero blockDiagonal parityOrthogonal
+      nondegenerate value
+  exact ⟨Quantum.det_restrictToLabelFiber_ne_zero blockDiagonal nondegenerate value, evenPart,
+    Matrix.nondegenerate_iff_det_ne_zero.mpr evenPart,
+    fun _ frame => Quantum.det_frameSubmatrix_ne_zero frame evenPart⟩
 
 /-- Reviewer-facing identification of the discriminant of a monic quartic with
 the squared product of the pairwise differences of its roots.  The coefficients
