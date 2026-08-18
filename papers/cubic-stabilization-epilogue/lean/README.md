@@ -42,7 +42,7 @@ obtains the value four for the product of a cubic threefold with a projective
 line and the value zero for every projective space.
 
 Checked coverage snapshot: 50 claims; 25 absent; 12 fragmentary; 12 conditional;
-1 complete; 179 reviewer terminals, of which 46 are machinery serving no current
+1 complete; 180 reviewer terminals, of which 46 are machinery serving no current
 manuscript claim.
 
 Those 46 are kernel-checked and reusable, and the claim map records for each one
@@ -496,7 +496,14 @@ The reviewer-facing terminals currently verify:
   projective space has vanishing primitive-sixth multiplicity, and a smooth
   cubic threefold has multiplicity four after one product stabilization by a
   projective line, with the value two for the cubic threefold itself taken from
-  the block reduction rather than assumed.
+  the block reduction rather than assumed;
+- the framed-monodromy route to one-step irrationality assembled on that
+  signature, in which the count of the cubic threefold, its doubling under
+  multiplication by a projective line, and the vanishing of the count on
+  projective four-space are proved rather than assumed, leaving the product
+  formula, the point comparison, the exponent-to-monodromy passage, the
+  birational input, the dimension bound, and the birational comparison supplied
+  by rationality as its premises.
 
 The authoritative per-claim account is
 [`verification/claims.json`](verification/claims.json).  In particular, the

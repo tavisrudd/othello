@@ -76,6 +76,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.Diviso
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.CubicAtomOneStep
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.CubicPacketFromBlockReduction
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.ProjectiveProductMultiplicity
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.CubicFramedOneStep
 
 /-!
 # Reviewer interface for the cubic-stabilization companion
@@ -5023,5 +5024,49 @@ theorem cubicProductProjectiveLine_sixthMultiplicity_eq_four_of_block_exponents
           (geometry.productWithProjectiveSpace cubic 1)).sixthMultiplicity = 4 :=
   Applications.cubicProductProjectiveLine_sixthMultiplicity_eq_four geometry input
     exponentMonodromy
+
+/-- Reviewer-facing framed-monodromy route to one-step irrationality of a smooth
+cubic threefold.  Three numerical inputs of the earlier assembly of this route
+are now proved rather than assumed: the framed count two for the cubic
+threefold, which follows from the small even block reduction; its doubling under
+multiplication by a projective line; and the vanishing of the count on
+projective four-space.  The premises that remain are the manuscript's product
+formula for a product with a projective space, involutivity of the framed
+monodromy of a point, the passage from the exponents of the reduced rank-two
+block to framed formal monodromy, the birational input carrying weak
+factorization with vanishing center contributions, the dimension bound on the
+stabilized fourfold, and the birational comparison with projective four-space
+supplied by rationality. -/
+theorem cubicThreefold_oneStep_not_rational_of_framed_product_inputs
+    {Variety : Type*}
+    (geometry : Applications.ProjectiveProductGeometry Variety)
+    (input : Applications.ProjectiveProductInput geometry)
+    (dimension : Variety → ℕ)
+    (birationalInput : Quantum.DimensionFourBirationalInput
+      (Applications.framedProductPacketData geometry dimension))
+    (Rational : Variety → Prop)
+    (exponentMonodromy : ∀ cubic, geometry.isSmoothCubicThreefold cubic →
+      ∀ firstExponent secondExponent : ℚ,
+        Quantum.cubicIndicialPolynomial =
+            (Polynomial.X - Polynomial.C firstExponent) *
+              (Polynomial.X - Polynomial.C secondExponent) →
+          (geometry.framedMonodromy cubic).operator.charpoly =
+            (Polynomial.X -
+                Polynomial.C
+                  (Complex.exp (2 * (Real.pi : ℂ) * Complex.I * (firstExponent : ℂ)))) *
+              (Polynomial.X -
+                Polynomial.C
+                  (Complex.exp (2 * (Real.pi : ℂ) * Complex.I * (secondExponent : ℂ)))) *
+                (Polynomial.X - Polynomial.C 1) ^ 2)
+    {cubic : Variety} (smooth : geometry.isSmoothCubicThreefold cubic)
+    (stabilizedDimension :
+      dimension (geometry.productWithProjectiveSpace cubic 1) ≤ 4)
+    (rationalComparison : Rational (geometry.productWithProjectiveSpace cubic 1) →
+      birationalInput.birational (geometry.productWithProjectiveSpace cubic 1)
+        (geometry.projectiveSpace 4)) :
+    ¬ Rational (geometry.productWithProjectiveSpace cubic 1) :=
+  Applications.cubicThreefold_oneStep_not_rational_of_framed_product_inputs geometry
+    input dimension birationalInput Rational exponentMonodromy smooth
+    stabilizedDimension rationalComparison
 
 end TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue
