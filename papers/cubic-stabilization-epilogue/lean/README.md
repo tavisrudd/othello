@@ -42,7 +42,7 @@ obtains the value four for the product of a cubic threefold with a projective
 line and the value zero for every projective space.
 
 Checked coverage snapshot: 50 claims; 20 absent; 16 fragmentary; 13 conditional;
-1 complete; 189 reviewer terminals, of which 46 are machinery serving no current
+1 complete; 190 reviewer terminals, of which 46 are machinery serving no current
 manuscript claim.
 
 Those 46 are kernel-checked and reusable, and the claim map records for each one
@@ -439,6 +439,12 @@ The reviewer-facing terminals currently verify:
   equalities, without formal coefficient embeddings or a gauge witness;
 - typed blowup/blowdown telescoping in dimension four and the conditional cubic
   and genus-eight irrationality deductions;
+- the unconditional genus-eight route, which uses no multiplicity at all: since
+  each rank-two projectivization is birational to the product of its base with a
+  projective line, the flop makes one projective-line stabilization of the Fano
+  threefold birational to one projective-line stabilization of its associated
+  Pfaffian cubic, and irrationality transports back from the cubic, where the
+  ordinary Hodge-atom argument supplies it;
 - the exact fibrewise deduction from supplied primitive-minimal-class
   algebraicity and Voisin's supplied equivalence to universal `CH₀`-triviality;
 - the final conditional separation-family composition, including fibre and

@@ -4759,6 +4759,39 @@ theorem genusEight_oneStep_irrational_of_flop_inputs
   Applications.genusEight_oneStepStabilization_not_rational
     packet birationalInput geometry input
 
+/-- Reviewer-facing unconditional one-step irrationality for a genus-eight Fano
+threefold.  A rank-two projectivization is birational to the product of its base
+with a projective line, so Kuznetsov's flop between the projectivizations of the
+two rank-two bundles makes one projective-line stabilization of the Fano
+threefold birational to one projective-line stabilization of its associated
+Pfaffian cubic threefold; that is the first conclusion.  Irrationality of the
+stabilized cubic is supplied by the ordinary Hodge-atom argument, applied to the
+cubic zero-packet atom with the ledger and exclusion premises, and rationality
+is invariant under birational equivalence, which gives the second conclusion.
+
+This route uses no framed multiplicity, weak factorization, or quantum
+comparison, and no hypothesis beyond the ones displayed.  Lean constructs
+neither the Fano threefold, the Pfaffian cubic, the rank-two bundles, their
+projectivizations, nor the flop; the geometric statements are typed
+premises. -/
+theorem genusEight_oneStep_irrational_of_atom_inputs
+    {Variety Atom : Type*}
+    {ledger : Quantum.OrdinaryAtomLedger Variety Atom}
+    (stabilization : Quantum.ProjectiveLineStabilizationInput ledger)
+    {exclusion : Quantum.LowDimensionalExclusionInput ledger}
+    {geometry : Applications.GenusEightFlopGeometry Variety}
+    {rationality : Applications.BirationalRationalityInput Variety ledger.Rational}
+    {fano : Variety} {atom : Atom}
+    (input : Applications.GenusEightFlopInput ledger geometry rationality fano)
+    (cubicInput : Applications.CubicAtomOneStepInput ledger stabilization exclusion
+      (geometry.associatedPfaffianCubic fano) atom) :
+    rationality.birational (ledger.productWithProjectiveLine fano)
+        (ledger.productWithProjectiveLine (geometry.associatedPfaffianCubic fano)) ∧
+      ¬ ledger.Rational (ledger.productWithProjectiveLine fano) :=
+  ⟨Applications.genusEight_stabilization_birational_cubicStabilization input,
+    Applications.genusEight_oneStepStabilization_not_rational_of_atomInputs stabilization
+      input cubicInput⟩
+
 /-- Reviewer-facing value of the residue discriminant of the small even zero
 packet of a smooth cubic threefold.  The matrix is the residue of the canonical
 elementary modification in the adapted frame, and the invariant is the
