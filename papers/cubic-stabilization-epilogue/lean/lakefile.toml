@@ -93,6 +93,7 @@ roots = [
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.BirationalDeduction",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.AtomicResidueDiscriminant",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.OrdinaryAtomLedger",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CubicSmallEvenBlockReduction",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.CubicThreefold",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.UniversalCH0",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.SeparationFamily",
@@ -103,6 +104,7 @@ roots = [
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.DivisorTaggingVanishing",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.GenusEightThreefold",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.CubicAtomOneStep",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.CubicPacketFromBlockReduction",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.PaperInterface",
 ]
 

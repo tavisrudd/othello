@@ -273,12 +273,15 @@
     },
     {
       "manuscript_label": "prop:cubic-block-data",
-      "coverage": "absent",
-      "declarations": [],
-      "objects": "Small even Euler multiplication of a smooth cubic threefold after adjoining the square root of three times the line Novikov variable, its characteristic polynomial, the zero generalized eigenspace, and the normalized gauge that splits the horizontal system.",
-      "hypotheses": "Smoothness of the cubic threefold, the hyperplane and line class conventions, and adjunction of the square root to the Novikov coefficient field.",
-      "conclusion": "The characteristic polynomial is the square of the coordinate times the difference of its square and one hundred eight times the line variable, the zero generalized eigenspace is a single rank-two Jordan block, and a constant change of basis followed by a unique normalized gauge in integral powers of the original loop coordinate splits the horizontal system into blocks.",
-      "cautions": "Not formalized here. The conditional Lean treatment of the resulting indicial factorization and framed eigenvalues is registered under the cubic packet claim, which starts from a supplied characteristic polynomial instead of constructing this block reduction."
+      "coverage": "fragment",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicSmallEven_blockReduction",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicZeroBlock_modifiedResidue_indicialPolynomial"
+      ],
+      "objects": "The doubled Euler multiplication matrix and the grading matrix of the small even quantum connection of a smooth cubic threefold in the ordered classical basis, written over a characteristic-zero field in a nonzero square root r of three times the line-class Novikov variable; the constant separating change of basis; two explicit block-off-diagonal gauge coefficients; and the rank-two zero block with its canonical elementary modification.",
+      "hypotheses": "The field has characteristic zero and r is nonzero. No property of the two displayed connection matrices is assumed; they are the matrices exhibited in the source.",
+      "conclusion": "Lean proves that the separating change of basis has determinant -486 r^5, conjugates the Euler matrix to the diagonal pair 6r, -6r together with a single rank-two Jordan block at zero, and conjugates the grading matrix to the displayed separated form; that the two supplied gauge coefficients make the first and second coefficients of the transformed system block diagonal, with rank-two blocks diag(-19/18, 19/18) and the displayed second block; and that the residue of the canonical elementary modification is the displayed matrix, of trace -1 and determinant 5/36, whose characteristic polynomial is the rank-two indicial polynomial.",
+      "cautions": "This is a strictly weaker fragment of the manuscript statement. Lean verifies the supplied gauge coefficients rather than proving existence and uniqueness of the normalized gauge by the Sylvester recursion, and it stops at the second order, which is the order the residue needs. It does not construct the quantum connection and does not prove that the displayed matrices are the small even connection of a cubic threefold; that identification is the imported datum."
     },
     {
       "manuscript_label": "lem:disc",
@@ -562,12 +565,13 @@
       "coverage": "conditional_deduction",
       "declarations": [
         "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicPacket_sixthMultiplicity_eq_two_of_charpoly",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicPacket_indicial_factorization_and_framed_eigenvalues"
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicPacket_indicial_factorization_and_framed_eigenvalues",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicPacket_sixthMultiplicity_eq_two_of_block_exponents"
       ],
       "objects": "A supplied type of cubic objects with a smooth-complex-cubic-threefold predicate and a finite-dimensional complex framed-monodromy matrix; Cai's rank-two indicial polynomial and the displayed characteristic polynomial with one factor for each primitive sixth root and two unit factors.",
       "hypotheses": "For every supplied smooth cubic threefold, the framed-monodromy characteristic polynomial is supplied to equal the displayed four-factor polynomial arising from Cai's integral-loop-power block description.",
-      "conclusion": "Lean proves the indicial roots -1/6 and -5/6 give the negative and positive primitive sixth roots, proves those roots are distinct and each has algebraic multiplicity one while the two unit factors contribute nothing, and concludes that every supplied smooth cubic threefold has primitive-sixth multiplicity exactly two.",
-      "cautions": "The result is conditional on the characteristic-polynomial comparison. Lean does not construct a smooth cubic threefold, its numerical small even quantum connection, Cai's integral-loop-power block diagonalization, the rank-two zero-exponential block, the two remaining rank-one unit blocks, or the identification of their direct-sum characteristic polynomial with the supplied framed monodromy. Lean also does not prove that the cubic threefold's numerical curve lattice has rank one or that the manuscript's numerical-Novikov convention leaves Cai's calculation unchanged."
+      "conclusion": "Lean proves the indicial roots -1/6 and -5/6 give the negative and positive primitive sixth roots, proves those roots are distinct and each has algebraic multiplicity one while the two unit factors contribute nothing, and concludes that every supplied smooth cubic threefold has primitive-sixth multiplicity exactly two. A second terminal reaches the same value from a weaker premise: it assumes only that framed monodromy exponentiates the exponents of the reduced system, with two unit factors from the rank-one blocks, and proves which exponents occur from the block reduction.",
+      "cautions": "The result is conditional on the characteristic-polynomial comparison. Lean does not construct a smooth cubic threefold, its numerical small even quantum connection, Cai's integral-loop-power block diagonalization, the rank-two zero-exponential block, the two remaining rank-one unit blocks, or the identification of their direct-sum characteristic polynomial with the supplied framed monodromy. Lean also does not prove that the cubic threefold's numerical curve lattice has rank one or that the manuscript's numerical-Novikov convention leaves Cai's calculation unchanged. The second terminal removes the characteristic-polynomial assumption in favour of the exponent-to-monodromy passage, which remains external; the exponents themselves are now derived from the displayed connection matrices."
     },
     {
       "manuscript_label": "cor:cubic-formal-germ",

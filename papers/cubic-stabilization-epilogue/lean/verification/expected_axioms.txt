@@ -171,3 +171,6 @@ TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicZeroPacket_residueDis
 TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.curve_residueDiscriminant_eq_zero: propext, Classical.choice, Quot.sound
 TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicAtom_not_represented_in_dimension_le_two: propext, Classical.choice, Quot.sound
 TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicThreefold_oneStep_irrational_of_atom_inputs: propext, Classical.choice, Quot.sound
+TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicSmallEven_blockReduction: propext, Classical.choice, Quot.sound
+TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicZeroBlock_modifiedResidue_indicialPolynomial: propext, Classical.choice, Quot.sound
+TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicPacket_sixthMultiplicity_eq_two_of_block_exponents: propext, Classical.choice, Quot.sound

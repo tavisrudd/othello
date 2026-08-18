@@ -13,8 +13,8 @@ The snapshot below is the exact current inventory; any change to manuscript
 labels, claim-map declarations, public terminals, axiom-audit commands, or
 expected axiom rows must preserve their exact correspondence.
 
-Checked coverage snapshot: 50 claims; 29 absent; 10 fragmentary; 10 conditional;
-1 complete; 172 reviewer terminals, of which 46 are machinery serving no current
+Checked coverage snapshot: 50 claims; 28 absent; 11 fragmentary; 10 conditional;
+1 complete; 175 reviewer terminals, of which 46 are machinery serving no current
 manuscript claim.
 
 The Lean modules and axiom audit can be built with the pinned package command
@@ -265,3 +265,24 @@ objects, hypotheses, conclusions, and cautions recorded in
   headline deductions remain explicitly conditional until
   those premises are proved (`thm:every-cubic`,
   `thm:nu6-birational-invariance`, and `cor:v14-one-step`).
+
+## Derivation of the small even gauge coefficients
+
+`small_even_block_reduction.py` shows how the two block-off-diagonal gauge
+coefficients of the small even block reduction are obtained: it conjugates the
+displayed Euler and grading matrices into the separated basis and solves the
+Sylvester equations that make the first and second coefficients of the
+transformed system block diagonal.  Replay it with
+
+```sh
+uv run --with sympy python3 verification/small_even_block_reduction.py
+```
+
+and compare with the recorded output `small_even_block_reduction.txt`.
+
+The script is an exhibition of the derivation, not evidence for it.  The
+identities it produces are stated with those coefficients supplied explicitly
+and proved by exact matrix arithmetic in the Lean module
+`TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CubicSmallEvenBlockReduction`,
+whose theorems are checked by the Lean kernel independently of any symbolic
+algebra system.

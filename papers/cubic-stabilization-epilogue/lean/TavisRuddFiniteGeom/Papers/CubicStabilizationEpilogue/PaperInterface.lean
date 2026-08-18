@@ -73,6 +73,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.Framed
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.CubicPacketFormula
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.DivisorTaggingVanishing
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.CubicAtomOneStep
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.CubicPacketFromBlockReduction
 
 /-!
 # Reviewer interface for the cubic-stabilization companion
@@ -4796,5 +4797,88 @@ theorem cubicThreefold_oneStep_irrational_of_atom_inputs
     (input : Applications.CubicAtomOneStepInput ledger stabilization exclusion cubic atom) :
     ¬ ledger.Rational (ledger.productWithProjectiveLine cubic) :=
   Applications.cubicAtom_oneStepStabilization_not_rational stabilization input
+
+/-- Reviewer-facing small even block reduction of a smooth cubic threefold.
+Over a field of characteristic zero and for a nonzero square root `r` of three
+times the line-class Novikov variable, the displayed constant change of basis
+has determinant `-486 r ^ 5`, conjugates the doubled Euler multiplication
+matrix to `diag (6 r, -6 r, J)` with `J` a single rank-two Jordan block at the
+eigenvalue zero, and conjugates the grading matrix to the displayed separated
+form; the two supplied block-off-diagonal gauge coefficients then make the
+first and second coefficients of the transformed system block diagonal, with
+rank-two blocks `diag (-19 / 18, 19 / 18)` and
+`!![0, -14 / (81 r ^ 2); -8 / 81, 0]`.  Uniqueness of the normalized gauge and
+the orders beyond the second are not formalized. -/
+theorem cubicSmallEven_blockReduction {K : Type*} [Field K] [CharZero K]
+    (r : K) (hr : r ≠ 0) :
+    (Quantum.cubicBlockBasis r).det = -486 * r ^ 5 ∧
+      Quantum.cubicEulerMatrix r * Quantum.cubicBlockBasis r =
+        Quantum.cubicBlockBasis r * Quantum.cubicEulerBlockForm r ∧
+      Quantum.cubicGradingMatrix * Quantum.cubicBlockBasis r =
+        Quantum.cubicBlockBasis r * Quantum.cubicGradingBlockForm r ∧
+      Quantum.cubicEulerBlockForm r * Quantum.cubicGaugeFirst r -
+          Quantum.cubicGaugeFirst r * Quantum.cubicEulerBlockForm r +
+          Quantum.cubicGradingBlockForm r = Quantum.cubicReducedFirst ∧
+      Quantum.cubicEulerBlockForm r * Quantum.cubicGaugeSecond r -
+          Quantum.cubicGaugeSecond r * Quantum.cubicEulerBlockForm r +
+          (Quantum.cubicGradingBlockForm r * Quantum.cubicGaugeFirst r -
+            Quantum.cubicGaugeFirst r * Quantum.cubicReducedFirst -
+            Quantum.cubicGaugeFirst r) = Quantum.cubicReducedSecond r ∧
+      (Quantum.cubicZeroBlockLeading (K := K) * Quantum.cubicZeroBlockLeading = 0 ∧
+        Quantum.cubicZeroBlockLeading (K := K) ≠ 0) :=
+  ⟨Quantum.cubicBlockBasis_det r, Quantum.cubicEulerMatrix_mul_blockBasis r,
+    Quantum.cubicGradingMatrix_mul_blockBasis r hr,
+    Quantum.cubicReduction_first_order r hr, Quantum.cubicReduction_second_order r hr,
+    Quantum.cubicZeroBlockLeading_sq_eq_zero_and_ne_zero⟩
+
+/-- Reviewer-facing residue of the canonical elementary modification of the
+reduced rank-two zero block, computed from the block reduction rather than
+assumed: the residue is `!![-19 / 18, 2; -8 / 81, 1 / 18]`, its trace is `-1`,
+its determinant is `5 / 36`, and its characteristic polynomial is the rank-two
+indicial polynomial whose roots are the exponents `-1 / 6` and `-5 / 6`. -/
+theorem cubicZeroBlock_modifiedResidue_indicialPolynomial (r : ℚ) :
+    Quantum.modifiedBlockResidue (Quantum.cubicZeroBlockLeading (K := ℚ))
+          Quantum.cubicZeroBlockRegular (Quantum.cubicZeroBlockSecond r) =
+        !![-19 / 18, 2; -8 / 81, 1 / 18] ∧
+      Quantum.cubicZeroPacketResidue =
+        Quantum.modifiedBlockResidue (Quantum.cubicZeroBlockLeading (K := ℚ))
+          Quantum.cubicZeroBlockRegular (Quantum.cubicZeroBlockSecond r) ∧
+      Quantum.cubicIndicialPolynomial =
+        ((Polynomial.X ^ 2 -
+          Polynomial.C
+            (Quantum.modifiedBlockResidue (Quantum.cubicZeroBlockLeading (K := ℚ))
+              (Quantum.cubicZeroBlockRegular (K := ℚ))
+              (Quantum.cubicZeroBlockSecond r)).trace * Polynomial.X +
+          Polynomial.C
+            (Quantum.modifiedBlockResidue (Quantum.cubicZeroBlockLeading (K := ℚ))
+              (Quantum.cubicZeroBlockRegular (K := ℚ))
+              (Quantum.cubicZeroBlockSecond r)).det : Polynomial ℚ)) :=
+  ⟨Quantum.cubicModifiedBlockResidue r,
+    Quantum.cubicZeroPacketResidue_eq_modifiedBlockResidue r,
+    Quantum.cubicModifiedBlockResidue_indicialPolynomial r⟩
+
+/-- Reviewer-facing cubic packet theorem from the block reduction.  The premise
+supplies only that framed formal monodromy exponentiates the exponents of the
+reduced system, with two unit factors from the rank-one blocks; which exponents
+occur is proved from the reduction rather than assumed. -/
+theorem cubicPacket_sixthMultiplicity_eq_two_of_block_exponents
+    {Cubic : Type*} (geometry : Applications.CubicPacketGeometry Cubic)
+    (exponentMonodromy : ∀ cubic, geometry.isSmoothCubicThreefold cubic →
+      ∀ firstExponent secondExponent : ℚ,
+        Quantum.cubicIndicialPolynomial =
+            (Polynomial.X - Polynomial.C firstExponent) *
+              (Polynomial.X - Polynomial.C secondExponent) →
+          (geometry.framedMonodromy cubic).operator.charpoly =
+            (Polynomial.X -
+                Polynomial.C
+                  (Complex.exp (2 * (Real.pi : ℂ) * Complex.I * (firstExponent : ℂ)))) *
+              (Polynomial.X -
+                Polynomial.C
+                  (Complex.exp (2 * (Real.pi : ℂ) * Complex.I * (secondExponent : ℂ)))) *
+                (Polynomial.X - Polynomial.C 1) ^ 2) :
+    ∀ cubic, geometry.isSmoothCubicThreefold cubic →
+      (geometry.framedMonodromy cubic).sixthMultiplicity = 2 :=
+  Applications.cubicPacket_sixthMultiplicity_eq_two_of_block_exponents geometry
+    exponentMonodromy
 
 end TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue

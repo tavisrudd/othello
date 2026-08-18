@@ -32,10 +32,14 @@ discriminants of the cubic zero packet and of a curve, the resulting exclusion
 of low-dimensional representatives, and the final non-rationality deduction from
 the ordinary Hodge-atom premises; the construction of the F-bundle, the spectral
 cover, the atom, and the elementary modification is not formalized and appears
-as typed premises.
+as typed premises.  The small even block reduction behind the cubic packet is
+checked from the displayed connection matrices through the modified residue and
+its indicial polynomial, so the packet value no longer requires a supplied
+characteristic polynomial, only the passage from residue exponents to framed
+monodromy.
 
-Checked coverage snapshot: 50 claims; 29 absent; 10 fragmentary; 10 conditional;
-1 complete; 172 reviewer terminals, of which 46 are machinery serving no current
+Checked coverage snapshot: 50 claims; 28 absent; 11 fragmentary; 10 conditional;
+1 complete; 175 reviewer terminals, of which 46 are machinery serving no current
 manuscript claim.
 
 Those 46 are kernel-checked and reusable, and the claim map records for each one
