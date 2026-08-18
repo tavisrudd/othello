@@ -68,6 +68,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.PositiveEva
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CubicPacket
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.RankTwoResidueRigidity
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.SeparatedSpectralPairing
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.PairingHorizontality
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.GenusEightThreefold
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.UniversalCH0
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.SeparationFamily
@@ -5212,5 +5213,124 @@ theorem symmetricSix_no_faithful_action_on_classified_orders
     rintro ⟨action, faithful⟩
     exact GraphLattices.no_faithful_symmetricSix_of_classified_list classifiedOrders
       listed classification action faithful⟩
+
+/-- Reviewer-facing horizontality of a constant pairing for a connection with a
+simple pole.  In the standard cohomology frame the inverse Gram matrix of the
+Poincare form is constant, quantum multiplication operators are self-adjoint for
+that form by the Frobenius property, and the grading operator is
+anti-self-adjoint because Poincare duality pairs complementary cohomological
+degrees.  Substituting those two identities into the connection matrix, whose
+residue is a quantum multiplication operator and whose regular part is the
+grading operator in degree zero and vanishes in higher degrees, makes every
+coefficient of the sesquilinear horizontality identity vanish.  The first clause
+is the loop direction `u ∂_u`; the second is any base direction, whose
+derivation annihilates the constant pairing, and in particular the case in which
+the connection matrix has no regular part.
+
+Lean constructs neither the quantum product, the Poincare pairing, nor the
+grading operator, and proves neither the Frobenius property nor the
+degree-pairing property: self-adjointness of the residue and anti-self-adjointness
+of the regular part are hypotheses about matrices.  No convergence and no
+analytic structure are represented; the statement is an identity of formal
+coefficients. -/
+theorem quantumPairing_horizontality_of_selfAdjoint_multiplication
+    {R : Type*} [CommRing R] {rank : ℕ}
+    {multiplication grading pairingValue : Matrix (Fin rank) (Fin rank) R}
+    {regular pairing : ℕ → Matrix (Fin rank) (Fin rank) R}
+    (regularLeading : regular 0 = grading)
+    (regularHigher : ∀ order, regular (order + 1) = 0)
+    (pairingLeading : pairing 0 = pairingValue)
+    (pairingHigher : ∀ order, pairing (order + 1) = 0)
+    (selfAdjointMultiplication :
+      multiplication.transpose * pairingValue = pairingValue * multiplication)
+    (antiSelfAdjointGrading :
+      grading.transpose * pairingValue = -(pairingValue * grading)) :
+    (∀ order, Quantum.loopPairingHorizontalityCoefficient multiplication regular
+        multiplication regular pairing order = 0) ∧
+      ∀ derivative : ℕ → Matrix (Fin rank) (Fin rank) R,
+        (∀ order, derivative order = 0) →
+          ∀ order, Quantum.pairingHorizontalityCoefficient multiplication regular
+            multiplication regular pairing derivative order = 0 :=
+  ⟨Quantum.constantPairing_loopHorizontality_of_selfAdjoint regularLeading regularHigher
+      pairingLeading pairingHigher selfAdjointMultiplication antiSelfAdjointGrading,
+    fun _ derivativeVanishing =>
+      Quantum.constantPairing_horizontality_of_selfAdjoint regularLeading regularHigher
+        pairingLeading pairingHigher derivativeVanishing selfAdjointMultiplication
+        antiSelfAdjointGrading⟩
+
+/-- Reviewer-facing derivation of the rank-two pairing equations from
+horizontality, and of the nilpotent-line preservation they give.  The connection
+of the centered even rank-two atomic factor has square-zero residue `residue`
+and regular coefficients `regular`, and the pairing has coefficients `pairing`,
+the leading one invertible.  Vanishing of the coefficient of `u ^ (-1)` in the
+loop-direction horizontality identity is exactly self-adjointness of the residue
+for the leading pairing coefficient, and vanishing of the constant coefficient is
+the four-term relation between the regular coefficient, the first two pairing
+coefficients, and the residue.  Those are the two inputs of the rank-two
+rigidity argument, whose conclusion is that the residue, the regular
+coefficient, and the residue again have vanishing product, equivalently that the
+regular coefficient carries every vector in the image of the residue back into
+its kernel.
+
+Lean constructs neither the `A`-model `F`-bundle, the spectral cover, the atomic
+factor, nor the Poincare pairing; horizontality enters as the vanishing of two
+matrix coefficients. -/
+theorem atomicRankTwo_pairingEquations_of_loopHorizontality
+    {K : Type*} [Field K] {residue : Matrix (Fin 2) (Fin 2) K}
+    {regular pairing : ℕ → Matrix (Fin 2) (Fin 2) K}
+    (twoNeZero : (2 : K) ≠ 0)
+    (squareZero : residue * residue = 0) (nonzero : residue ≠ 0)
+    (nondegenerate : (pairing 0).det ≠ 0)
+    (leading : Quantum.loopPairingHorizontalityCoefficient residue regular residue regular
+      pairing 0 = 0)
+    (constant : Quantum.loopPairingHorizontalityCoefficient residue regular residue regular
+      pairing 1 = 0) :
+    residue.transpose * pairing 0 = pairing 0 * residue ∧
+      (regular 0).transpose * pairing 0 + pairing 0 * regular 0
+          + residue.transpose * pairing 1 - pairing 1 * residue = 0 ∧
+        residue * regular 0 * residue = 0 ∧
+          ∀ vector : Fin 2 → K,
+            residue.mulVec ((regular 0).mulVec (residue.mulVec vector)) = 0 := by
+  have preservation : residue * regular 0 * residue = 0 :=
+    Quantum.regularCoefficient_preserves_nilpotentLine_of_loopHorizontality twoNeZero
+      squareZero nonzero nondegenerate leading constant
+  exact ⟨Quantum.leadingResidue_selfAdjoint_of_horizontality leading,
+    Quantum.constantOrder_relation_of_loopHorizontality constant, preservation,
+    Quantum.regularCoefficient_image_subset_kernel preservation⟩
+
+/-- Reviewer-facing vanishing of the pairing between two spectral factors with
+separated leading eigenvalues, derived from horizontality.  Each residue is a
+scalar multiple of the identity plus a nilpotent matrix, and the two scalars are
+distinct.  Under vanishing of every coefficient of the sesquilinear
+horizontality identity between the two factors, every coefficient of the pairing
+between them vanishes: the coefficient of `u ^ (-1)` is a Sylvester equation
+whose operator is invertible because the difference of the scalars is a unit and
+the remaining parts are nilpotent, and the coefficient of each later power is
+the same Sylvester equation with a remainder built from strictly earlier pairing
+coefficients.  The direction's derivation is assumed only to annihilate a
+vanishing pairing coefficient, which holds for the loop direction `u ∂_u` and
+for a derivation in a base direction.
+
+Lean constructs neither the `F`-bundle, the spectral splitting, the connection,
+nor the pairing.  The refinement to the even part of a factor, which uses that
+the Poincare pairing pairs only equal parities, is not part of this
+statement. -/
+theorem separatedSpectralFactors_pairing_eq_zero_of_horizontality
+    {K : Type*} [Field K] {leftRank rightRank : ℕ}
+    {leftResidue : Matrix (Fin leftRank) (Fin leftRank) K}
+    {leftRegular : ℕ → Matrix (Fin leftRank) (Fin leftRank) K}
+    {rightResidue : Matrix (Fin rightRank) (Fin rightRank) K}
+    {rightRegular : ℕ → Matrix (Fin rightRank) (Fin rightRank) K}
+    {pairing derivative : ℕ → Matrix (Fin leftRank) (Fin rightRank) K}
+    {leftEigenvalue rightEigenvalue : K}
+    (separated : leftEigenvalue ≠ rightEigenvalue)
+    (leftNilpotent : IsNilpotent (leftResidue - leftEigenvalue • 1))
+    (rightNilpotent : IsNilpotent (rightResidue - rightEigenvalue • 1))
+    (derivativeVanishing : ∀ order, pairing order = 0 → derivative order = 0)
+    (horizontal : ∀ order, Quantum.pairingHorizontalityCoefficient leftResidue leftRegular
+      rightResidue rightRegular pairing derivative order = 0) :
+    ∀ order, pairing order = 0 :=
+  Quantum.offDiagonalPairing_eq_zero_of_horizontality separated leftNilpotent rightNilpotent
+    derivativeVanishing horizontal
 
 end TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue

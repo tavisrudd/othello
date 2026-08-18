@@ -41,8 +41,8 @@ deduction as well: from the product formula, taken as a typed premise, Lean
 obtains the value four for the product of a cubic threefold with a projective
 line and the value zero for every projective space.
 
-Checked coverage snapshot: 50 claims; 21 absent; 15 fragmentary; 13 conditional;
-1 complete; 186 reviewer terminals, of which 46 are machinery serving no current
+Checked coverage snapshot: 50 claims; 20 absent; 16 fragmentary; 13 conditional;
+1 complete; 189 reviewer terminals, of which 46 are machinery serving no current
 manuscript claim.
 
 Those 46 are kernel-checked and reusable, and the claim map records for each one
@@ -518,6 +518,19 @@ The reviewer-facing terminals currently verify:
   has only the zero solution, the induction over later orders kills every
   off-diagonal coefficient, and a pairing with vanishing off-diagonal blocks is
   invertible exactly when both diagonal restrictions are;
+- the order-by-order content of horizontality for a sesquilinear pairing whose
+  right argument is evaluated at the negated loop coordinate.  For a connection
+  with a simple pole, the coefficient of the inverse loop coordinate is exactly
+  self-adjointness of the residue for the leading pairing coefficient, and the
+  constant coefficient is the four-term relation between the regular
+  coefficient, the first two pairing coefficients, and the residue; those two
+  give the rank-two nilpotent-line preservation directly from horizontality.
+  Between two factors with separated leading eigenvalues, each order is that
+  Sylvester equation with a remainder built from strictly earlier coefficients,
+  so the whole pairing between them vanishes.  A pairing that is constant in the
+  frame is horizontal whenever the residue is self-adjoint and the regular part
+  is an anti-self-adjoint operator in degree zero, which is the substitution
+  behind horizontality of the Poincare pairing for the quantum connection;
 - the arithmetic excluding a faithful action of the symmetric group on six
   letters on a classified automorphism group: its order is `720`, a group
   receiving an injective homomorphism from it has order divisible by `720`, and

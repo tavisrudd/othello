@@ -96,6 +96,7 @@ roots = [
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.AtomicResidueDiscriminant",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.RankTwoResidueRigidity",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.SeparatedSpectralPairing",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.PairingHorizontality",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.OrdinaryAtomLedger",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CubicSmallEvenBlockReduction",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.CubicThreefold",
