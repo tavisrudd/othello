@@ -2,7 +2,11 @@
 
 **Lane:** `cubic-threefolds`
 
-**Status:** active; author-supplied edit specification below
+**Status:** closed 2026-08-18. The long classical paragraph (specification
+§1/§11) and the compact related-work pair (specification §12) are in the
+introduction, the two bibliography entries are in place, `make check` is green
+at 49 pages, and the standalone repository is synchronized and verified.
+Report: `../2026-08-18-c917-hodge-guere-positioning.md`.
 
 **Objective:** update the `m = 1` cubic-stabilization epilogue
 (`papers/cubic-stabilization-epilogue/`, build target
