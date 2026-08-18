@@ -106,3 +106,54 @@ green, tracked PDF byte-identical to the authority
 carried the C910 Lean companion deltas committed since the previous sync,
 because the standalone repository had been left unsynchronized at the close of
 C912. Nothing was pushed.
+
+## Proofreading and citation check (same day, after the first close)
+
+Every citation added by this task was checked against its source rather than
+against the specification:
+
+- `\cite[Theorem~11.19]{CG}` is exact. The Clemens--Griffiths paper reads
+  "THEOREM 11.19. `q': Alb(S) -> J(V)` is an isomorphism", with `S` the Fano
+  surface of lines and `V` the cubic threefold, verified in the
+  Institute-for-Advanced-Study-hosted scan of the published paper. The
+  Hodge consequence used in the manuscript follows: `H^1(J(X), Q) = H^3(X, Q)(1)`,
+  so `H^1(F(X), Q)(-1) = H^3(X, Q)`, and the weights agree.
+- The printed bibliography places Benedetti--Fay--Guere--Manivel--Perrin at
+  [5], between Behrend and Cai, and Guere at [14], between Grieve and
+  Hartlieb; both alphabetical, both with the correct arXiv identifiers,
+  versions, and years, and both rendering their accents correctly.
+- The Kuenneth statements are correct as printed:
+  `H^3(X x P^1) = H^3(X)` because `H^1(X) = 0`, and
+  `H^4(X x P^1) = H^4(X) + H^2(X)(-1) = Q(-2)^2`.
+
+Two precision repairs followed the proofread and are in the manuscript:
+
+1. The opening sentence now binds the notation, "its intermediate Jacobian
+   `J(X)`", which the new paragraph then uses.
+2. The joint criterion is now described with its ambient hypothesis —
+   Hodge-general Fano fourfolds *that are hyperplane sections of smooth Fano
+   fivefolds* — matching their Theorem 4.1 rather than describing it as a
+   criterion for Fano fourfolds in general.
+
+The manuscript remains 49 pages with `make check` green, and the standalone
+repository was re-synchronized and verified at 132 tracked files.
+
+## Portfolio summary
+
+`papers/summary/README.md` carries the paper's abstract as a verbatim
+blockquote; a normalized token comparison against the manuscript abstract
+shows no difference beyond accent and subscript encoding, and this task did
+not touch the abstract, so no update was needed there. The "Why it matters"
+paragraph now records the classical limit and the criterion mismatch, and
+states that no novelty is claimed for the broad quantum/Hodge philosophy —
+the posture already recorded in the paper's ledger. The summary's downstream
+copy at `~/src/math-papers/math-papers-summary` was refreshed from the
+authority and committed.
+
+## Concurrent-session note
+
+A second session committed C910 Lean work into this repository during the
+task (`83bc43d40`, rank-two residue rigidity) and continued editing that file
+afterwards. Both standalone synchronizations therefore carried C910's
+committed Lean state downstream. Nothing was pushed, and whoever closes C910
+should re-synchronize at that point.
