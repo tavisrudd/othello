@@ -3158,8 +3158,17 @@
       "last": 918,
       "purpose": "Paper V summary links/DOI repair and series-epigraph provenance",
       "sequence": 351
+    },
+    {
+      "count": 1,
+      "first": 919,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 919,
+      "purpose": "Series apparatus relocation, perspective-section merge, and epigraph rewrite across Papers I-V",
+      "sequence": 352
     }
   ],
-  "next_id": 919,
+  "next_id": 920,
   "schema": "codex-task-id-allocations-v1"
 }
