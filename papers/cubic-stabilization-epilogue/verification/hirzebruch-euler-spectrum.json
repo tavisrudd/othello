@@ -1,0 +1,329 @@
+{
+  "checks": {
+    "elimination": {
+      "even": {
+        "agrees": true,
+        "eliminated_relation": "X**4 - 8*X**2*u - 8*X**2*w + 16*u**2 - 32*u*w + 16*w**2"
+      },
+      "odd": {
+        "agrees": true,
+        "eliminated_relation": "X**4 + X**3*w - 8*X**2*u - 36*X*u*w + 16*u**2 - 27*u*w**2"
+      }
+    },
+    "frobenius": {
+      "even": {
+        "euler_selfadjoint": true,
+        "trace_form_nondegenerate_generically": true
+      },
+      "odd": {
+        "euler_selfadjoint": true,
+        "trace_form_nondegenerate_generically": true
+      }
+    },
+    "gromov_witten": {
+      "F_square": "qf*qs",
+      "S_F_product": "pt - qf*qs",
+      "S_square": "-2*pt + qf*qs + qf",
+      "deformed_section_square": "qf",
+      "matches_even_presentation": true
+    },
+    "homogeneity": [
+      {
+        "characteristic_polynomial_homogeneous": true,
+        "degree_w": 4,
+        "index": 0
+      },
+      {
+        "characteristic_polynomial_homogeneous": true,
+        "degree_w": 2,
+        "index": 1
+      },
+      {
+        "characteristic_polynomial_homogeneous": true,
+        "degree_w": 4,
+        "index": 2
+      },
+      {
+        "characteristic_polynomial_homogeneous": true,
+        "degree_w": 2,
+        "index": 3
+      },
+      {
+        "characteristic_polynomial_homogeneous": true,
+        "degree_w": 4,
+        "index": 4
+      },
+      {
+        "characteristic_polynomial_homogeneous": true,
+        "degree_w": 2,
+        "index": 5
+      },
+      {
+        "characteristic_polynomial_homogeneous": true,
+        "degree_w": 4,
+        "index": 6
+      },
+      {
+        "characteristic_polynomial_homogeneous": true,
+        "degree_w": 2,
+        "index": 7
+      },
+      {
+        "characteristic_polynomial_homogeneous": true,
+        "degree_w": 4,
+        "index": 8
+      },
+      {
+        "characteristic_polynomial_homogeneous": true,
+        "degree_w": 2,
+        "index": 9
+      },
+      {
+        "characteristic_polynomial_homogeneous": true,
+        "degree_w": 4,
+        "index": 10
+      },
+      {
+        "characteristic_polynomial_homogeneous": true,
+        "degree_w": 2,
+        "index": 11
+      },
+      {
+        "characteristic_polynomial_homogeneous": true,
+        "degree_w": 4,
+        "index": 12
+      }
+    ],
+    "presentation": [
+      {
+        "classical_relations_vanish": true,
+        "euler_class": "2*F + 2*S",
+        "euler_class_matches_anticanonical": true,
+        "index": 0
+      },
+      {
+        "classical_relations_vanish": true,
+        "euler_class": "3*F + 2*S",
+        "euler_class_matches_anticanonical": true,
+        "index": 1
+      },
+      {
+        "classical_relations_vanish": true,
+        "euler_class": "4*F + 2*S",
+        "euler_class_matches_anticanonical": true,
+        "index": 2
+      },
+      {
+        "classical_relations_vanish": true,
+        "euler_class": "5*F + 2*S",
+        "euler_class_matches_anticanonical": true,
+        "index": 3
+      },
+      {
+        "classical_relations_vanish": true,
+        "euler_class": "6*F + 2*S",
+        "euler_class_matches_anticanonical": true,
+        "index": 4
+      },
+      {
+        "classical_relations_vanish": true,
+        "euler_class": "7*F + 2*S",
+        "euler_class_matches_anticanonical": true,
+        "index": 5
+      },
+      {
+        "classical_relations_vanish": true,
+        "euler_class": "8*F + 2*S",
+        "euler_class_matches_anticanonical": true,
+        "index": 6
+      },
+      {
+        "classical_relations_vanish": true,
+        "euler_class": "9*F + 2*S",
+        "euler_class_matches_anticanonical": true,
+        "index": 7
+      },
+      {
+        "classical_relations_vanish": true,
+        "euler_class": "10*F + 2*S",
+        "euler_class_matches_anticanonical": true,
+        "index": 8
+      },
+      {
+        "classical_relations_vanish": true,
+        "euler_class": "11*F + 2*S",
+        "euler_class_matches_anticanonical": true,
+        "index": 9
+      },
+      {
+        "classical_relations_vanish": true,
+        "euler_class": "12*F + 2*S",
+        "euler_class_matches_anticanonical": true,
+        "index": 10
+      },
+      {
+        "classical_relations_vanish": true,
+        "euler_class": "13*F + 2*S",
+        "euler_class_matches_anticanonical": true,
+        "index": 11
+      },
+      {
+        "classical_relations_vanish": true,
+        "euler_class": "14*F + 2*S",
+        "euler_class_matches_anticanonical": true,
+        "index": 12
+      }
+    ]
+  },
+  "degeneracy": {
+    "even": {
+      "degeneracy_locus": "u = w",
+      "double_root": "0",
+      "eigenspace_dimension_at_double_root": 2,
+      "factorization_at_locus": "-X**2*(-X**2 + 16*u)",
+      "nilpotent_part_vanishes": true,
+      "repeated_factors": [
+        [
+          "X",
+          2
+        ]
+      ],
+      "root_multiplicities": [
+        1,
+        1,
+        2
+      ],
+      "semisimple_at_double_root": true
+    },
+    "odd": {
+      "degeneracy_locus": "256 u + 27 w^2 = 0",
+      "double_root": "-9*w/8",
+      "eigenspace_dimension_at_double_root": 2,
+      "factorization_at_locus": "(8*X + 9*w)**2*(64*X**2 - 80*X*w + 153*w**2)/4096",
+      "nilpotent_part_vanishes": true,
+      "repeated_factors": [
+        [
+          "8*X + 9*w",
+          2
+        ]
+      ],
+      "root_multiplicities": [
+        1,
+        1,
+        2
+      ],
+      "semisimple_at_double_root": true
+    }
+  },
+  "presentation": {
+    "even": {
+      "euler_class": "2 Sd + 2 F",
+      "relations": [
+        "Sd^2 = u",
+        "F^2 = w"
+      ]
+    },
+    "novikov_values": "u = chi(Q^f), w = chi(Q^(s + k f)) with k = a // 2",
+    "odd": {
+      "euler_class": "2 Sd + 3 F",
+      "relations": [
+        "Sd^2 + Sd F = u",
+        "F^2 = w Sd"
+      ]
+    }
+  },
+  "schema": "hirzebruch-euler-spectrum-v1",
+  "spectrum": {
+    "even": {
+      "characteristic_polynomial": "X**4 - 8*X**2*u - 8*X**2*w + 16*u**2 - 32*u*w + 16*w**2",
+      "coefficients": [
+        "16*u**2 - 32*u*w + 16*w**2",
+        "0",
+        "-8*u - 8*w",
+        "0"
+      ],
+      "discriminant": "16777216*u**2*w**2*(u - w)**2",
+      "independent_route": "explicit splitting 2(+-alpha+-beta) with alpha^2 = u, beta^2 = w",
+      "independent_route_agrees": true
+    },
+    "odd": {
+      "characteristic_polynomial": "X**4 + X**3*w - 8*X**2*u - 36*X*u*w + 16*u**2 - 27*u*w**2",
+      "coefficients": [
+        "16*u**2 - 27*u*w**2",
+        "-36*u*w",
+        "-8*u",
+        "w"
+      ],
+      "discriminant": "-u**2*w**2*(256*u + 27*w**2)**3",
+      "independent_route": "resultant with the parametrizing quartic t^4 + w t^3 - u w^2",
+      "independent_route_agrees": true
+    }
+  },
+  "valuation_exclusion": [
+    {
+      "compatible_with_positive_length": true,
+      "index": 0,
+      "valuation_condition": "l(s) = 1 l(f)"
+    },
+    {
+      "compatible_with_positive_length": true,
+      "index": 1,
+      "valuation_condition": "2 l(s) = 1 l(f)"
+    },
+    {
+      "compatible_with_positive_length": false,
+      "index": 2,
+      "valuation_condition": "l(s) = 0 l(f)"
+    },
+    {
+      "compatible_with_positive_length": false,
+      "index": 3,
+      "valuation_condition": "2 l(s) = -1 l(f)"
+    },
+    {
+      "compatible_with_positive_length": false,
+      "index": 4,
+      "valuation_condition": "l(s) = -1 l(f)"
+    },
+    {
+      "compatible_with_positive_length": false,
+      "index": 5,
+      "valuation_condition": "2 l(s) = -3 l(f)"
+    },
+    {
+      "compatible_with_positive_length": false,
+      "index": 6,
+      "valuation_condition": "l(s) = -2 l(f)"
+    },
+    {
+      "compatible_with_positive_length": false,
+      "index": 7,
+      "valuation_condition": "2 l(s) = -5 l(f)"
+    },
+    {
+      "compatible_with_positive_length": false,
+      "index": 8,
+      "valuation_condition": "l(s) = -3 l(f)"
+    },
+    {
+      "compatible_with_positive_length": false,
+      "index": 9,
+      "valuation_condition": "2 l(s) = -7 l(f)"
+    },
+    {
+      "compatible_with_positive_length": false,
+      "index": 10,
+      "valuation_condition": "l(s) = -4 l(f)"
+    },
+    {
+      "compatible_with_positive_length": false,
+      "index": 11,
+      "valuation_condition": "2 l(s) = -9 l(f)"
+    },
+    {
+      "compatible_with_positive_length": false,
+      "index": 12,
+      "valuation_condition": "l(s) = -5 l(f)"
+    }
+  ]
+}
