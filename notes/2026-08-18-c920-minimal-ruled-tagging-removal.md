@@ -4,7 +4,7 @@
 **Date:** 2026-08-18.
 **Manuscript:** `papers/cubic-stabilization-epilogue/`.
 **Authority commits:** `ee4f72d44`, `eb9b34622`, `b4d416a62`, `17e2d2a6f`,
-`2c030a8fc`, `b9ba88d26`.
+`2c030a8fc`, `b9ba88d26`, `a74cf275c`.
 **Card:** `cubic-threefolds-tasks/c920-minimal-ruled-tagging-removal.md`.
 
 Hypothesis 5.7T, the divisor-tagging specialization invariance of the epilogue,
@@ -68,7 +68,7 @@ Pezzo surface.
 ### Truncation
 
 The transported theory determines the small quantum product of `F_a` itself, and
-only three Novikov monomials survive.  A three-point invariant with two divisor
+only finitely many Novikov monomials survive.  A three-point invariant with two divisor
 insertions vanishes unless the first Chern number of the class lies between one
 and two, and by deformation invariance it vanishes unless the transported class
 is effective, that is unless `m >= n k` for `beta = m f + n s`.  Since
@@ -180,10 +180,10 @@ independent family with coefficients `256` and `27` cannot vanish.
 statements: the quadric surface through the product route and the two parities
 through the discriminant route.
 
-Twenty-two reviewer terminals were added, all reporting `propext,
+Twenty-three reviewer terminals were added, all reporting `propext,
 Classical.choice, Quot.sound`.  Coverage moved from 50 claims — 5 absent, 23
 fragmentary, 21 conditional, 1 complete over 241 terminals — to 56 claims — 6
-absent, 25 fragmentary, 24 conditional, 1 complete over 263 terminals.  The one
+absent, 25 fragmentary, 24 conditional, 1 complete over 264 terminals.  The one
 new absent row is `lem:center-maps-monomial`, the verification that the center
 specializations are graded-monomial, which has no formal counterpart because the
 package builds no associated graded ring.
@@ -249,7 +249,10 @@ three defects that are now repaired: the iterated deformation family was false
 for index at least four, the truncation of the quantum product was asserted
 without proof, and the intrinsic vanishing of the minimal model had been deleted
 while the surviving branch still used it.  It also found the terminology
-collision that renamed the class.
+collision that renamed the class: `F_1` is geometrically ruled without being
+minimal, so "minimal rational ruled" collided with the minimal-versus-nonminimal
+case split in the same proof.  Fixing it sharpened the scope claim, since the
+direct cases now visibly exhaust the minimal surfaces together with `F_1`.
 
 The Lean pass found one docstring asserting the converse of its own structure
 field, one module header claiming a coverage the module does not have, and a
