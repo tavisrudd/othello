@@ -54,7 +54,7 @@ whole odd cohomology in that packet, and the constancy of rank on a connected
 component.
 
 Checked coverage snapshot: 50 claims; 10 absent; 21 fragmentary; 18 conditional;
-1 complete; 220 reviewer terminals, of which 46 are machinery serving no current
+1 complete; 223 reviewer terminals, of which 46 are machinery serving no current
 manuscript claim.
 
 Those 46 are kernel-checked and reusable, and the claim map records for each one
@@ -123,6 +123,23 @@ The reviewer-facing terminals currently verify:
   and directly over that concrete `F4`; and a scalar block over `F3`,
   without identifying
   those models with the geometric principal kernel;
+- the depth-one lifting step of that chart, over a domain in which `p` and `2`
+  are nonzero and for a symmetric Gram matrix with a two-sided inverse over the
+  ring: every endomorphism of the reduction modulo `p` that is self-adjoint for
+  the reduced dual coefficient form is the reduction of a matrix self-adjoint for
+  the dual coefficient form, the witness correcting a chosen lift by `p` times
+  the Gram matrix times the strictly lower triangular part of the divided
+  adjointness defect, so the construction divides by nothing; with the two
+  statements that make it meet an orthogonal decomposition, namely that a
+  block-diagonal matrix is self-adjoint as soon as each block is, and that a
+  scalar matrix is self-adjoint for every dual form;
+- the location of the discriminant group of `6I-J`, the quotient by the image of
+  multiplication by that matrix: the constant vector lies in the image and has
+  value five under the form, every integral vector is congruent modulo the image
+  to a combination of the four remaining Smith basis vectors, whose entries have
+  exact depth one at two and three, and six annihilates the quotient, so at
+  either prime dividing six the primary part is supported on those four
+  coordinates, without identifying that quotient with a geometric isogeny kernel;
 - the projective-line classification into scalar graphs and the vertical
   line, the five- and four-member finite-field packet counts, and the
   isotropic half-dimension calculation for self-adjoint graph slopes;

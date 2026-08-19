@@ -8,6 +8,8 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.Local
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.DividedPowers
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisGram
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisLocalChart
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisDiscriminantSupport
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.DepthOneSelfAdjointLift
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisSlopeModels
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.ConnectedPacketPersistence
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPointProjectiveLine
@@ -5954,5 +5956,89 @@ theorem cubicThreefold_totalChernClass_uniqueness {A : Type*} [CommRing A] (P ch
       chernClass = 1 + 2 * P + 4 * P ^ 2 - 2 * P ^ 3 :=
   ⟨Applications.cubicThreefold_adjunctionFactor_isUnit P vanishing,
     Applications.cubicThreefold_totalChernClass_unique P chernClass vanishing adjunction⟩
+
+/-- The depth-one lifting step of the local chart, in the generality in which the
+manuscript states it.  Let the coefficient ring be a domain in which `p` and `2`
+are nonzero, and let the Gram matrix be symmetric with a two-sided inverse over
+that ring.  Every endomorphism of the reduction modulo `p` that is self-adjoint
+for the reduced dual coefficient form is the reduction of an endomorphism
+self-adjoint for the dual coefficient form itself.  The witness corrects a chosen
+lift by `p` times the Gram matrix times the strictly lower triangular part of the
+divided adjointness defect, so the construction divides by nothing.  The
+statement is about matrices over a ring; it does not identify the residue
+endomorphism with the slope of a geometric principal kernel. -/
+theorem sixAxisLocalChart_depthOne_selfAdjointLift
+    {R Index : Type*} [CommRing R] [IsDomain R] [Fintype Index] [DecidableEq Index]
+    [LinearOrder Index] {p : R} (nonzero : p ≠ 0) (twoNonzero : (2 : R) ≠ 0)
+    {gram inverseGram : Matrix Index Index R}
+    (symmetric : Matrix.transpose gram = gram)
+    (rightInverse : gram * inverseGram = 1)
+    (leftInverse : inverseGram * gram = 1)
+    (residue : Matrix Index Index (R ⧸ Ideal.span ({p} : Set R)))
+    (residueSelfAdjoint :
+      Matrix.transpose residue *
+          inverseGram.map (Ideal.Quotient.mk (Ideal.span ({p} : Set R))) =
+        inverseGram.map (Ideal.Quotient.mk (Ideal.span ({p} : Set R))) * residue) :
+    ∃ lift : Matrix Index Index R,
+      lift.map (Ideal.Quotient.mk (Ideal.span ({p} : Set R))) = residue ∧
+        Matrix.transpose lift * inverseGram = inverseGram * lift :=
+  GraphLattices.exists_selfAdjoint_lift_of_residue_selfAdjoint nonzero twoNonzero
+    symmetric rightInverse leftInverse residue residueSelfAdjoint
+
+/-- The two ways the depth-one lifting step meets an orthogonal decomposition of
+the coefficient lattice.  A block-diagonal matrix is self-adjoint for a
+block-diagonal inverse Gram matrix as soon as each block is self-adjoint for its
+own block, so lifts built separately on orthogonal summands assemble into one
+lift and the decomposition is preserved; and a scalar matrix is self-adjoint for
+every inverse Gram matrix, so a lift on one summand extends by a scalar on its
+orthogonal complement. -/
+theorem sixAxisLocalChart_selfAdjointLift_orthogonalSummands
+    {R First Second : Type*} [CommRing R] [Fintype First] [DecidableEq First]
+    [Fintype Second] [DecidableEq Second]
+    (firstInverseGram firstMatrix : Matrix First First R)
+    (secondInverseGram secondMatrix : Matrix Second Second R) (scalar : R)
+    (firstSelfAdjoint :
+      Matrix.transpose firstMatrix * firstInverseGram = firstInverseGram * firstMatrix)
+    (secondSelfAdjoint :
+      Matrix.transpose secondMatrix * secondInverseGram =
+        secondInverseGram * secondMatrix) :
+    Matrix.transpose (Matrix.fromBlocks firstMatrix 0 0 secondMatrix) *
+          Matrix.fromBlocks firstInverseGram 0 0 secondInverseGram =
+        Matrix.fromBlocks firstInverseGram 0 0 secondInverseGram *
+          Matrix.fromBlocks firstMatrix 0 0 secondMatrix ∧
+      Matrix.transpose (scalar • (1 : Matrix First First R)) * firstInverseGram =
+        firstInverseGram * (scalar • (1 : Matrix First First R)) :=
+  ⟨GraphLattices.fromBlocks_selfAdjoint firstInverseGram firstMatrix secondInverseGram
+      secondMatrix firstSelfAdjoint secondSelfAdjoint,
+    GraphLattices.smul_one_selfAdjoint scalar firstInverseGram⟩
+
+/-- The unimodular summand of the five-axis coefficient lattice carries no
+discriminant.  Multiplication by `6I₅-J₅` is the map to the dual lattice in the
+same coordinates, and the quotient by its image is the discriminant group.  Using
+the integral reduction to `diag(1,6,6,6,6)`, Lean proves that the constant vector
+is in that image; that the constant vector has value five under the form, the
+value of the first coordinate line of the local chart, so it spans a unimodular
+summand at two and at three; that every integral vector is congruent modulo the
+image to a combination of the four remaining reduced basis vectors, whose Smith
+entries have exact depth one at both primes; and that six annihilates the
+quotient.  The primary part at either prime dividing six is therefore supported
+on those four coordinates.  Lean constructs no abelian scheme, polarization, or
+isogeny kernel, and does not identify this discriminant group with a geometric
+kernel. -/
+theorem sixAxisLocalChart_unitSummand_carries_no_discriminant :
+    Matrix.mulVec (GraphLattices.sixAxisGram ℤ)
+          (Matrix.mulVec GraphLattices.sixAxisSmithRight (Pi.single 0 1)) =
+        (fun _ ↦ (1 : ℤ)) ∧
+      GraphLattices.sixAxisGramPairing (R := ℤ) (fun _ ↦ 1) (fun _ ↦ 1) = 5 ∧
+      (∀ value : Fin 5 → ℤ, ∃ source coordinates : Fin 5 → ℤ,
+        coordinates 0 = 0 ∧
+          value = Matrix.mulVec (GraphLattices.sixAxisGram ℤ) source +
+            Matrix.mulVec GraphLattices.sixAxisSmithLeftInverse coordinates) ∧
+      ∀ value : Fin 5 → ℤ, ∃ source : Fin 5 → ℤ,
+        (6 : ℤ) • value = Matrix.mulVec (GraphLattices.sixAxisGram ℤ) source :=
+  ⟨GraphLattices.sixAxisGram_unitLine_mem_image,
+    GraphLattices.sixAxisGram_constantVector_pairing,
+    GraphLattices.sixAxisGram_discriminant_supported_off_unitLine,
+    GraphLattices.sixAxisGram_six_smul_mem_image⟩
 
 end TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue

@@ -97,7 +97,7 @@ atomic route of Section 4, so a statement elsewhere that carries none has none
 recorded rather than none used.
 
 Checked coverage snapshot: 50 claims; 10 absent; 21 fragmentary; 18 conditional;
-1 complete; 220 reviewer terminals, of which 46 are machinery serving no current
+1 complete; 223 reviewer terminals, of which 46 are machinery serving no current
 manuscript claim.
 
 The Lean modules and axiom audit can be built with the pinned package command
@@ -165,7 +165,11 @@ objects, hypotheses, conclusions, and cautions recorded in
   actual projective line over `F4` and proves the connectedness deduction for
   any supplied continuous classifier into that projective line.  Nonfixity at
   one fibre suffices to identify and propagate the exact marked pair;
-  constructing the geometric kernel packet and classifier remains open.
+  constructing the geometric kernel packet and classifier remains open.  The
+  depth-one self-adjoint lift and the triviality of the principal quotient on
+  the unimodular summand are formalized as stated, the second through the
+  integral Smith reduction of `6I-J`; surjectivity of `Sp_2(Z_3)` onto
+  `Sp_2(F_3)`, used to lift a complementary symplectic ruling at three, is not.
 - Supply the away-from-six comparison and local-to-global integral membership
   that specializes the graph theorem to `Theta^4/4!`
   (`thm:six-axis-divided-powers`).
