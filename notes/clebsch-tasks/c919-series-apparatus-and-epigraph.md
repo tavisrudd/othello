@@ -41,21 +41,16 @@ the cutting-room floor.
 7. The sentence-level move/merge/cut test and its per-paper outcomes stand; the
    packet adopts them as requirements.
 
-8. Poem line IV keeps "from bare words, a plane rises" unless the author accepts
-   a replacement; "bare" is a deliberate poetic loosening of "minimum", not a
-   slip.
+8. Poem line IV reads **"from bare, whispered words, a plane rises"**, the
+   author's chosen wording and the only departure from the packet's poem text.
+   Paper IV's coda prose must name its minimum words plainly, so the exact term
+   stands beside the poem.
 9. Removing the banner creates no metadata divergence: every paper's
-   `.zenodo.json` already carries a bare title with no series label.
+   `.zenodo.json` already carries a bare title with no series label. A forward
+   Paper V release will therefore correct that paper's stale Zenodo record title
+   automatically, closing an open item from C918.
 
-## Open question for the author
-
-One only. Line IV of the poem: the author invited a truer and equally short
-replacement for "minimum". The plan proposes **"from lightest words, a plane
-rises"**, on the grounds that a codeword's *weight* is its number of nonzero
-positions, so Paper IV's minimum words are its minimum-weight words and
-"lightest" is the exact plain-English rendering rather than a loosening.
-Alternatives offered: "least words" and "sparse words". Keep "bare words" if all
-three are declined.
+No author decisions remain open. Execution can start.
 
 ## Origin
 

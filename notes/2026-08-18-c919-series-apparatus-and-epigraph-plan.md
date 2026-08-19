@@ -117,7 +117,7 @@ small light Roman numerals in a subordinate leading column:
 I    From deep holes, a form arises;
 II   beneath it, paired chords find their bearing;
 III  through changing guises, the golden source persists;
-IV   from bare words, a plane rises;
+IV   from bare, whispered words, a plane rises;
 V    beneath one form, two shadows, a hidden twist between.
 ```
 
@@ -136,26 +136,22 @@ substantive error in the old closing clause: "the scattered shadows gather home"
 implied a coalescence that Paper V explicitly rules out, whereas "two shadows, a
 hidden twist between" carries the residual `C_2`-torsor.
 
-**Line IV — resolved, with one proposal still open.** "Bare words" is the
-author's deliberate poetic loosening of "minimum words", not a slip. The author
-is open to a truer and equally short replacement.
+**Line IV — settled.** The author's chosen wording is **"from bare, whispered
+words, a plane rises"**, replacing the packet's "from bare words". This is the
+only departure from the packet's poem text; the other four lines stand exactly as
+the packet gives them.
 
-Proposal: **"from lightest words, a plane rises"**. In coding theory a
-codeword's *weight* is its number of nonzero positions, so Paper IV's minimum
-words are literally its minimum-weight words — the paper uses "minimum-weight"
-and weight-seven, weight-eight, weight-ten, and weight-twelve throughout. Plain
-English for "minimum weight" is therefore "lightest", which makes the line
-technically exact while reading as poetry rather than as jargon. It is also
-strictly more accurate than "bare", which suggests unadorned or, worse, "mere",
-whereas the point of the line is that these words are few and light and still
-sufficient. Dropping the article keeps the line parallel with "from deep holes"
-in line I.
+The line keeps the noun "words", which is the one word in it that preserves the
+coding-theory reading — a codeword is a word — and pairs "bare" with "whispered"
+so the line carries both the sparseness and the faintness of what survives. Paper
+IV's minimum words have weight twelve in a length-78 code, so the object named is
+few nonzero positions rather than brevity; any wording built on shortness would
+misstate the mathematics, since every codeword in the code has the same length.
 
-Second and third choices: "from least words, a plane rises" — "least" is the
-literal sense of minimum and carries an older, plainer register; and "from sparse
-words, a plane rises", which ties the line to the programme title *Rigidity from
-Sparse Shadows* at the cost of spending that word inside the poem. Use "bare
-words" as written if the author declines all three.
+**Consequent requirement.** Because "whispered" pulls "words" toward natural
+language, Paper IV's coda prose must name its minimum words plainly, so the exact
+term stands beside the poem in the paper's own voice. This is a requirement of the
+chosen wording, not an optional nicety.
 
 ## 4. Programme map changes
 
