@@ -1,7 +1,7 @@
 {
   "schema": "clebsch-orientation-statement-identity-v3",
   "main_source": "clebsch_passages.tex",
-  "main_source_sha256": "8c414393d40c281b31664c0473edcab7c85df55ff5cbefe29f431a346d9d46ef",
+  "main_source_sha256": "bbe56c103c974051d70419d85736ffa69f36d611ff6151d823de3a20ecd7e5c5",
   "section_sha256": {
     "sections/01-introduction.tex": "142696277ad67a18b91eeb6f277578a39cb5ad5fe84a8efb0dd26273ef83d7d5",
     "sections/02-orientation-cover.tex": "709fc2dadeafaf786ae84ef12deda78a9b4d65bc4a29727de16c2fc3c747a9b6",
@@ -10,7 +10,7 @@
     "sections/05-golden-operator.tex": "24a23bcf5ce7e831461232107ebbe39d747595d74ba9f4546652a1074fcf8186",
     "sections/05-harmonic-realization.tex": "f019d20c504ddd04b670abc39e69fd9790cf351af4419c138efb9967fcba04a1",
     "sections/09-conclusion.tex": "d8972b2be3eabeada385ecb4ca7ebde472dd43cd8d6fb5e05487a126c715f7ff",
-    "sections/09-programme-coda.tex": "72752120bd36026c2796929142b2e797635a50379b33582b885e21483810862a",
+    "sections/09-programme-coda.tex": "1613187ce3ef3f1a3526a3cf9570173d67375ab1c7536c68fc4a27ec6643fba4",
     "sections/07-marking-ambiguities.tex": "682f8c4189bb48c1b6127f3a06b668425243520532ce4ac0909021e22e9e70e0",
     "sections/08-verification.tex": "b2f6fc428f10c7ba34c5ac78cf8b0498cfdd838a089f237c3cd9c18b1e11e3de",
     "sections/10-references.tex": "95ceac3c1c52084415bd8fa1db6f689a4d2f679f65fb57c8e3bec75dfe06e85d"
