@@ -174,13 +174,71 @@ theorem gaugeResidual_congr {system gauge reduced gaugeOther reducedOther :
     loopDerivativeCoefficient_succ, loopDerivativeCoefficient_succ,
     gaugeAgreement order (by omega)]
 
+/-- One order of the normalized gauge is determined by its residual.  Given a
+block-diagonal leading operator with separated blocks, a block-diagonal
+coefficient of the reduced system and a block off-diagonal coefficient of the
+gauge satisfying the order's identity with a given residual are unique: the
+difference of the two reduced coefficients is block diagonal and, being the
+commutator of the leading operator with the difference of the two gauge
+coefficients, block off-diagonal, hence zero; the difference of the gauge
+coefficients then solves the homogeneous block Sylvester equation, whose only
+block off-diagonal solution is zero. -/
+theorem normalizedGauge_step_unique {label : coordinate → factorIndex} {scalar : factorIndex → R}
+    {leadingOperator gaugeValue gaugeOther reducedValue reducedOther residual :
+      Matrix coordinate coordinate R}
+    (separated : ∀ first second, first ≠ second → IsUnit (scalar first - scalar second))
+    (blockDiagonal : IsBlockDiagonal label leadingOperator)
+    (nilpotent : IsNilpotent
+      (leadingOperator - Matrix.diagonal fun index => scalar (label index)))
+    (reducedDiagonal : IsBlockDiagonal label reducedValue)
+    (reducedOtherDiagonal : IsBlockDiagonal label reducedOther)
+    (gaugeOffDiagonal : IsBlockOffDiagonal label gaugeValue)
+    (gaugeOtherOffDiagonal : IsBlockOffDiagonal label gaugeOther)
+    (firstIdentity :
+      reducedValue + (gaugeValue * leadingOperator - leadingOperator * gaugeValue) = residual)
+    (secondIdentity :
+      reducedOther + (gaugeOther * leadingOperator - leadingOperator * gaugeOther) = residual) :
+    gaugeValue = gaugeOther ∧ reducedValue = reducedOther := by
+  have difference : (reducedValue - reducedOther)
+      + ((gaugeValue - gaugeOther) * leadingOperator
+        - leadingOperator * (gaugeValue - gaugeOther)) = 0 := by
+    rw [Matrix.sub_mul, Matrix.mul_sub]
+    linear_combination (norm := abel) firstIdentity - secondIdentity
+  have gaugeDifferenceOffDiagonal : IsBlockOffDiagonal label (gaugeValue - gaugeOther) := by
+    intro row column sameLabel
+    rw [Matrix.sub_apply, gaugeOffDiagonal row column sameLabel,
+      gaugeOtherOffDiagonal row column sameLabel, sub_zero]
+  have commutatorOffDiagonal : IsBlockOffDiagonal label (reducedValue - reducedOther) := by
+    have identity : reducedValue - reducedOther
+        = sylvesterOperator leadingOperator leadingOperator (gaugeValue - gaugeOther) := by
+      rw [sylvesterOperator_apply]
+      linear_combination (norm := abel) difference
+    rw [identity]
+    exact isBlockOffDiagonal_sylvesterOperator blockDiagonal gaugeDifferenceOffDiagonal
+  have reducedVanishing : reducedValue - reducedOther = 0 :=
+    eq_zero_of_isBlockDiagonal_of_isBlockOffDiagonal
+      (isBlockDiagonal_sub reducedDiagonal reducedOtherDiagonal) commutatorOffDiagonal
+  have sylvesterVanishing : leadingOperator * (gaugeValue - gaugeOther)
+      - (gaugeValue - gaugeOther) * leadingOperator = 0 := by
+    rw [reducedVanishing] at difference
+    linear_combination (norm := abel) -difference
+  obtain ⟨witness, -, uniqueness⟩ := existsUnique_blockOffDiagonal_sylvester_solution
+    (label := label) (scalar := scalar) (leadingOperator := leadingOperator) separated
+    blockDiagonal nilpotent (target := 0) (fun row column _ => rfl)
+  have differenceIsSolution := uniqueness (gaugeValue - gaugeOther)
+    ⟨gaugeDifferenceOffDiagonal, sylvesterVanishing⟩
+  have zeroIsSolution := uniqueness 0 ⟨fun row column _ => rfl, by simp⟩
+  refine ⟨?_, ?_⟩
+  · have vanishing : gaugeValue - gaugeOther = 0 :=
+      differenceIsSolution.trans zeroIsSolution.symm
+    linear_combination (norm := abel) vanishing
+  · linear_combination (norm := abel) reducedVanishing
+
 /-- Uniqueness of the normalized gauge.  Two normalized gauges reducing the same
 system to block-diagonal form have the same coefficients, and so do the two
-reduced systems.  At each order the difference of the two reduced coefficients
-is both block diagonal and, being a commutator of the difference of the two
-gauge coefficients with the leading coefficient, block off-diagonal, hence zero;
-the difference of the gauge coefficients then solves the homogeneous block
-Sylvester equation and vanishes. -/
+reduced systems.  The two coefficients of one order have the same residual as
+soon as all strictly earlier coefficients agree, and one order is determined by
+its residual, so the conclusion follows by strong induction. -/
 theorem normalizedGauge_unique {label : coordinate → factorIndex} {scalar : factorIndex → R}
     {system gauge reduced gaugeOther reducedOther : ℕ → Matrix coordinate coordinate R}
     (separated : ∀ first second, first ≠ second → IsUnit (scalar first - scalar second))
@@ -209,48 +267,10 @@ theorem normalizedGauge_unique {label : coordinate → factorIndex} {scalar : fa
         have secondIdentity := (gaugeTransform_succ_iff second.leading
           (reduced_zero_eq second.leading second.transform) step).mp (second.transform (step + 1))
         rw [residualAgreement] at firstIdentity
-        have difference :
-            (reduced (step + 1) - reducedOther (step + 1))
-              + ((gauge (step + 1) - gaugeOther (step + 1)) * system 0
-                - system 0 * (gauge (step + 1) - gaugeOther (step + 1))) = 0 := by
-          rw [Matrix.sub_mul, Matrix.mul_sub]
-          linear_combination (norm := abel) firstIdentity - secondIdentity
-        have commutatorDiagonal : IsBlockDiagonal label
-            (reduced (step + 1) - reducedOther (step + 1)) :=
-          isBlockDiagonal_sub (first.reducedDiagonal (step + 1))
-            (second.reducedDiagonal (step + 1))
-        have gaugeDifferenceOffDiagonal : IsBlockOffDiagonal label
-            (gauge (step + 1) - gaugeOther (step + 1)) := by
-          intro row column sameLabel
-          rw [Matrix.sub_apply, first.gaugeOffDiagonal (step + 1) (by omega) row column sameLabel,
-            second.gaugeOffDiagonal (step + 1) (by omega) row column sameLabel, sub_zero]
-        have commutatorOffDiagonal : IsBlockOffDiagonal label
-            (reduced (step + 1) - reducedOther (step + 1)) := by
-          have identity : reduced (step + 1) - reducedOther (step + 1)
-              = sylvesterOperator (system 0) (system 0)
-                (gauge (step + 1) - gaugeOther (step + 1)) := by
-            rw [sylvesterOperator_apply]
-            linear_combination (norm := abel) difference
-          rw [identity]
-          exact isBlockOffDiagonal_sylvesterOperator blockDiagonal gaugeDifferenceOffDiagonal
-        have reducedVanishing : reduced (step + 1) - reducedOther (step + 1) = 0 :=
-          eq_zero_of_isBlockDiagonal_of_isBlockOffDiagonal commutatorDiagonal commutatorOffDiagonal
-        have sylvesterVanishing :
-            system 0 * (gauge (step + 1) - gaugeOther (step + 1))
-              - (gauge (step + 1) - gaugeOther (step + 1)) * system 0 = 0 := by
-          rw [reducedVanishing] at difference
-          linear_combination (norm := abel) -difference
-        obtain ⟨witness, -, uniqueness⟩ := existsUnique_blockOffDiagonal_sylvester_solution
-          (label := label) (scalar := scalar) (leadingOperator := system 0) separated
-          blockDiagonal nilpotent (target := 0) (fun row column _ => rfl)
-        have differenceIsSolution := uniqueness (gauge (step + 1) - gaugeOther (step + 1))
-          ⟨gaugeDifferenceOffDiagonal, sylvesterVanishing⟩
-        have zeroIsSolution := uniqueness 0 ⟨fun row column _ => rfl, by simp⟩
-        refine ⟨?_, ?_⟩
-        · have vanishing : gauge (step + 1) - gaugeOther (step + 1) = 0 :=
-            differenceIsSolution.trans zeroIsSolution.symm
-          linear_combination (norm := abel) vanishing
-        · linear_combination (norm := abel) reducedVanishing
+        exact normalizedGauge_step_unique separated blockDiagonal nilpotent
+          (first.reducedDiagonal (step + 1)) (second.reducedDiagonal (step + 1))
+          (first.gaugeOffDiagonal (step + 1) (by omega))
+          (second.gaugeOffDiagonal (step + 1) (by omega)) firstIdentity secondIdentity
 
 section Existence
 
