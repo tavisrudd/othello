@@ -1,6 +1,6 @@
 # C919 — De-brand the paper fronts and move the programme to a post-conclusion coda: plan
 
-**Lane:** `clebsch` · **Date:** 2026-08-18 · **State:** plan agreed, execution not
+**Lane:** `clebsch` · **Original date:** 2026-08-18 · **Revised:** 2026-08-19 · **State:** plan agreed, execution not
 started. No manuscript edited.
 
 The author's implementation packet, preserved verbatim at
@@ -12,11 +12,11 @@ superseded. The superseded reasoning is recoverable from
 `git log -p -- notes/2026-08-18-c919-series-apparatus-and-epigraph-plan.md`.
 
 **Precedence.** The packet governs except where this plan records a later author
-decision. Three such decisions exist: the poem text in §3 below (lines II, III,
-and IV differ from the packet), the programme-map labels for Papers I and III in
-§4, and the coda placement in Papers II and III in §2. Where they differ, this
-plan wins; everywhere else the packet is controlling and this plan only
-elaborates it.
+decision or a source-state correction. The authoritative differences are: the
+poem text in §3; the programme-map labels, target, and caption in §4; the coda
+placement in Papers II and III in §2; and the Paper-II source reconciliation in
+§0 and §5. Where they differ, this plan wins; everywhere else the packet is
+controlling and this plan only elaborates it.
 
 ## Decisions now fixed
 
@@ -29,10 +29,32 @@ elaborates it.
 3. The poem's wording is fixed by the block in §3 below and is not open for
    redrafting.
 4. C919 edits all five papers in one pass; Paper III is not handed to C816.
-5. Paper II gains the conclusion it currently lacks.
+5. Paper II's existing conclusion is preserved. Do not draft, replace, or add a
+   second conclusion under C919.
 6. The sentence-level move/merge/cut test and its per-paper outcomes, agreed
    before the packet arrived, stand unchanged; the packet adopts them as
    requirements.
+7. Wherever this plan supplies exact replacement/coda prose, use it as the
+   default text. Do not ask a downstream drafting agent to synthesize prose that
+   has already been settled here.
+
+## 0. Preflight: reconcile the checkout with current source
+
+This plan was first prepared against a stale Paper-II source state. A public
+source check on 2026-08-19 found that current `main` already contains a substantial
+`\section*{Conclusion}` immediately before `\appendix` in
+`clebsch_factorization.tex`. It closes on the two surviving balanced matching
+orbits, the sharp perfect-matching boundary, recovery of the unordered sheets,
+the cubic orientation, and the Macaulay inverse system.
+
+Before editing, confirm that the implementation checkout contains that conclusion.
+If it does not, synchronize/reconcile the checkout with the current source rather
+than inventing a new conclusion as part of C919. C919 is a presentation and
+series-apparatus refactor, not the vehicle for independently recreating missing
+mathematical prose.
+
+Line numbers in this note are therefore advisory. Match passages by content and
+labels when the current checkout has moved.
 
 ## 1. What is on the page today
 
@@ -88,7 +110,7 @@ preceded by `\Needspace{27\baselineskip}` (18 in Paper V).
 | paper | interlude line | conclusion | appendices |
 |---|---|---|---|
 | I   | 109 | §Conclusion, line 2007 | none |
-| II  |  97 | **none — to be written** | yes, from line 2078 |
+| II  |  97 | `\section*{Conclusion}`, immediately before `\appendix` | yes |
 | III |  27 of `sections/01-introduction.tex` | `sections/09-conclusion.tex` | yes |
 | IV  |  92 | §Conclusion, line 1051 | none |
 | V   | 178 | §Conclusion, line 1555 | none |
@@ -107,7 +129,7 @@ mathematics in the same place in all five papers. The rejected alternative —
 coda after the appendices, immediately before the references — would bury the map
 behind thirty-odd pages of appendix in Paper II.
 
-With Paper II's new conclusion written, the resulting order is uniform:
+With Paper II's existing conclusion preserved, the resulting order is uniform:
 last main section → Conclusion → coda → (appendices, where present) →
 AI-assistance disclosure → references.
 
@@ -115,6 +137,16 @@ Formatting per the packet: unnumbered `\section*`, no ornamental border, no
 oversized numerals, no color, no icons, no poem-to-box connector arrows, no second
 legend. The linkage is carried by repetition of I–V, matching emphasis,
 adjacency, and layout.
+
+Within every coda, use this exact order:
+
+1. `\section*{Clebsch: Rigidity from Sparse Shadows}`
+2. five-line poem with the owning line emphasized;
+3. programme map with the owning box emphasized;
+4. the standard logical-independence sentence from §4;
+5. the paper-specific coda prose fixed in §5/§6.
+
+Do not insert explanatory prose between the poem and the map.
 
 ## 3. The poem
 
@@ -195,31 +227,52 @@ chosen wording, not an optional nicety.
   because the map records relations among independent papers rather than a proof
   dependency chain.
 - **Highlighting.** The current paper's box is the shaded box, as Papers I and V
-  already do; the same style in all five.
+  already do; use the same style in all five.
 - **Cluster separation.** Increase vertical whitespace between the Paper III and
-  Paper IV nodes so I–III read as the upper cluster feeding Paper V and IV reads
-  as the independent lower branch. Whitespace only — no enclosing boxes or
-  cluster labels.
+  Paper IV nodes so I--III read as the upper cubic-shadow cluster feeding Paper V
+  and IV reads as the independent lower branch. Whitespace only -- no enclosing
+  boxes or cluster labels.
 - **Paper V as hinge.** A slightly stronger border on the V node is acceptable if
   the TikZ makes it clean; do not over-style.
-- **Distinguish I from III — decided.** Both currently read "conference
-  companion", which makes them look duplicated. Use `deep-hole conference
-  source` for Paper I and `golden-descent conference source` for Paper III.
-  Every word is already in use: "conference source" is Paper III's own phrase
-  from its introduction, "deep-hole" and "golden descent" are verbatim from the
-  two papers' titles, and Paper I uses "conference matrix" and "conference
-  identity" in its body. This also stops the map borrowing "companion", which
-  Paper V gives a precise technical sense — the chordal companion of the
-  conference cubic. Paper II's node keeps "chordal companion", where that sense
-  is the correct one.
-- **Targets.** Do not homogenize the Paper I and Paper V lower-right node texts
-  if the mathematical targets genuinely differ; reconcile only if they do not.
-- **Independence sentence.** Add, in the coda prose rather than the caption: the
-  five papers are logically independent, and the map records reconstruction
-  correspondences and thematic relations, not proof dependencies.
+- **Upper-node labels -- decided.** Replace the mixed/duplicated
+  "conference companion" / "chordal companion" vocabulary with parallel labels
+  naming the cubic shadows:
+  - Paper I: `deep-hole conference cubic`
+  - Paper II: `matching-quotient chordal cubic`
+  - Paper III: `golden-descent conference cubic`
+  - Paper V: `marked cubic correspondence`
 
-If the TikZ ends up copied five times, consider centralizing it with a
-highlighting parameter, provided that does not destabilize the builds.
+  This is preferable to calling I and III "conference sources": in the logic of
+  Paper V, the cubic objects are the visible shadows and the six-axis object is
+  the common carrier/source recovered from them. The new labels also reserve
+  "companion" for places where Paper V uses it technically.
+- **Lower target -- decided.** Use one common two-line Paper-IV target in all five
+  maps:
+  ```text
+  marked conic plane and polarity
+  with an F_8-marking
+  ```
+  Typeset `F_8` mathematically. This keeps both levels that the current two map
+  copies split: pair data recover the marked conic plane and polarity, while the
+  recovered binary relation algebra carries the residual `F_8` marking.
+- **Caption -- use this wording in all five papers:**
+
+  > **Programme map.** The upper double arrows are Paper V's marked transports
+  > and returns between the chordal and conference shadows; the right arrow is
+  > its common-carrier reconstruction. The lower solid arrow is Paper IV's
+  > independent minimum-word reconstruction. Only the residual \(C_2\)- and
+  > Frobenius-orbit markings are compared across the two branches.
+
+  Adapt only TeX syntax (`Paper~V`, `\F_8`, etc.), not the prose.
+- **Independence sentence -- use this wording immediately after the figure:**
+
+  > The five papers are logically independent; the map records reconstruction
+  > correspondences and thematic relations, not proof dependencies.
+
+If the TikZ ends up copied five times, centralize it with a current-paper
+highlighting parameter if that can be done without destabilizing the builds.
+The poem and map should remain adjacent; put the independence sentence and
+paper-specific coda prose after the map.
 
 ## 5. The interludes, sentence by sentence
 
@@ -253,6 +306,16 @@ redundancy-three MDS code."
 Stays put: the computational-companion sentences at lines 274–278. That companion
 is Paper I's own and is not a numbered series paper.
 
+
+**Coda prose -- use this as the paper-specific paragraph after the standard
+independence sentence:**
+
+> The sparse datum here is the maximum-distance syndrome locus. It recovers the
+> Clebsch code together with its conic, polarity, and golden orientation; the
+> later papers study other shadows of related sources, but none is used in the
+> proofs here. The order-eleven Clebsch code is the rigid exceptional answer,
+> while the chord-defect identity and conic-filling bounds are field-uniform.
+
 ### Paper II
 
 Moves to the coda: "The classification and reconstruction are standalone; no
@@ -262,18 +325,27 @@ Merges into the introduction: "The classification ranges over every odd prime
 power", and "The Clebsch-related `H_3/F_11` case is one exceptional output, not an
 input", which carries the paper's sharpest framing claim.
 
-Cut as duplication: "It determines when the affine quotient configuration recovers
-the missing pairing and when its first odd tensor orients the recovered sheets"
-restates both the preceding paragraph and the following one.
+Cut as duplication: "It determines when the affine quotient configuration
+recovers the missing pairing and when its first odd tensor orients the recovered
+sheets" restates both the preceding paragraph and the following one.
 
-**New conclusion.** Paper II is the only one of the five without a conclusion, and
-the author has asked for one. It should close on the paper's own results: the
-two-valued strength-two trade classification and its exactly two surviving orbits,
-the sharpness of the restriction to perfect matchings, recovery of the two
-complementary sheets without a self-association or Gorenstein premise, and the
-first odd tensor restoring the orientation. Draft it from the abstract and the
-existing §4 material rather than from any cross-paper text; no series content
-belongs in it.
+**Conclusion -- preserve, do not draft.** Current `main` already has a
+`\section*{Conclusion}` immediately before `\appendix`. It is Paper-II-local and
+already closes on exactly the right material: the two surviving balanced matching
+orbits \(B_3/\F_7\) and \(H_3/\F_{11}\), the sharp matching-carrier boundary, the
+two-valued quadratic trade and recovery of the unordered sheets, the first signed
+tensor moment being cubic and restoring orientation, and the Macaulay inverse
+system/Gorenstein interpretation. Do not redraft, shorten, or replace it under
+C919. Insert the programme coda immediately after it.
+
+**Coda prose -- use this as the paper-specific paragraph after the standard
+independence sentence:**
+
+> The classification here ranges over every odd prime power. The Clebsch-related
+> \(H_3/\F_{11}\) case is an exceptional output, not an input, and no companion
+> construction is used in the proof. On the two surviving matching orbits,
+> quadratic data recover the unordered sheets and the first surviving signed
+> cubic restores their orientation.
 
 ### Paper III
 
@@ -285,6 +357,15 @@ marked, independent — plus "The Clebsch and icosahedral models are the meeting
 point of the first two questions." This is a genuine roadmap of Paper III's own
 structure and the strongest of the five interludes; it stays where it is with the
 label removed and the prose integrated into the ordinary flow.
+
+
+**Coda prose -- use this as the paper-specific paragraph after the standard
+independence sentence:**
+
+> This paper follows a marked conference source through its arithmetic, operator,
+> and harmonic realizations. Paper V later compares the resulting conference
+> shadow with a chordal shadow after an additional marking; that comparison
+> supplies no hypothesis here.
 
 ### Paper IV
 
@@ -304,31 +385,84 @@ Rephrase on merge: "This is a standalone fixed-field inverse problem" is half
 local scope and half independence disclaimer. Keep "fixed-field inverse problem"
 in the introduction and let "standalone" go to the coda.
 
+
+**Coda prose -- use these two paragraphs after the standard independence
+sentence.** The first paragraph is required by the word "words" in poem line IV,
+so that a coding theorist sees the literal referent beside the poetic line:
+
+> Here the sparse shadow is literal: the \(364\) minimum words of the binary
+> conic code are the starting data. Unary support data are constant, while
+> weighted pair concurrences recover the marked conic plane and its polarity, so
+> the exact reconstruction arity is two.
+>
+> The theorem is logically independent of the other Clebsch papers; its place in
+> the programme is methodological.
+
 ### Paper V
 
 Its interlude is entirely series placement and moves to the coda whole.
 
+Use the exact standalone conclusion and programme-wrap prose in §6 below; do not ask the implementer to synthesize either from bullet points.
+
 ## 6. Paper V: split the conclusion from the programme wrap
 
-Paper V's current conclusion (lines 1555–1576) is almost all programme-level. It
-opens "The scattered shadows gather on one carrier, but not by becoming equal",
-walks through Papers I–III, and its second paragraph is the information-loss
-principle spanning the upper branch and Paper IV. Split it:
+Paper V's current conclusion is mostly programme-level: it opens "The scattered
+shadows gather on one carrier, but not by becoming equal", walks through
+Papers I--III, and then states the information-loss principle spanning the upper
+branch and Paper IV. Split those functions cleanly.
 
-**Stays in the conclusion**, as Paper V's own result: the marked correspondence,
-the selected-line correspondence being an equivalence with the bare correspondence
-exactly its `C_2`-quotient, the complete information-loss statement with its
-scalar and outer sharpness, and the nonidentification of the two invariant cubic
-lines.
+### 6.1 Standalone Paper-V conclusion
 
-**Moves to the coda**: the "scattered shadows" opening sentence, the walk through
-Papers I–III, the broader information-loss principle, the `C_2` versus `C_3`
-comparison with the Paper IV branch, and "Distinct shadows need not become
-isomorphic in order to encode equivalent source data."
+Replace the current conclusion prose with the following two paragraphs, preserving
+the existing `\section{Conclusion}` heading and label:
 
-The "gather on one carrier, but not by becoming equal" sentence carries the right
-corrective idea and should be preserved in the coda. It must not return to the
-poem in any form: line V is deliberately worded to avoid implying coalescence.
+> The chordal and conference cubics are geometrically distinct, but after a
+> chordal line is selected they recover the same marked six-axis carrier. The
+> singular quartic of the chordal cubic recovers the constant double cover
+> \(A_5/C_5\to A_5/D_{10}\), and the normalized outer difference gives mutually
+> inverse reconstruction between a normalized chordal generator and an oriented
+> conference generator. Forgetting the selected chordal line is exactly the free
+> \(C_2\)-quotient. Thus the result identifies the source information retained by
+> the two cubic shadows without identifying the two invariant cubic lines
+> themselves.
+>
+> The recovered six-set also controls the integral normalization. The rank-five
+> augmentation and rank-six root--weight lattices remain distinct, while their
+> common binary heart carries the \(\F_4\)-structure on which conference reversal
+> is Frobenius. Together these results determine both the common marked carrier
+> and the precise residual ambiguity left by the reconstruction.
+
+This is the mathematical conclusion of Paper V. It may mention the chordal and
+conference objects, but it should not walk the reader through Papers I--IV as a
+series.
+
+### 6.2 Programme coda prose for Paper V
+
+After the poem, programme map, and standard independence sentence, use:
+
+> The scattered shadows gather on one carrier, but not by becoming equal.
+> Papers I and III reach the conference shadow from deep-hole and golden-descent
+> data; Paper II reaches the chordal shadow from matching-quotient data. Paper V
+> shows that these distinct cubic shadows recover the same marked six-axis
+> carrier, with a residual \(C_2\)-torsor when the selected chordal line is
+> forgotten.
+>
+> Paper IV forms an independent branch. There the sparse data are minimum-word
+> pairs rather than cubic data, and weighted pair concurrences recover a marked
+> conic plane and polarity. Its residual marking is governed instead by
+> Frobenius on the \(\F_8\)-commutant. The two branches therefore illustrate the
+> same information-loss principle without sharing a geometric carrier:
+> reconstruction can recover the source while leaving a small, rigid residual
+> marking.
+>
+> Distinct shadows need not become isomorphic in order to encode equivalent
+> source data; what matters is whether the ambiguity left after reconstruction
+> can itself be isolated and rigidified.
+
+The first sentence is intentionally retained from the existing conclusion because
+"but not by becoming equal" states the corrective point cleanly. It must not
+return to the poem: line V's "two shadows, a hidden twist between" is the settled
+poetic formulation.
 
 ## 7. Execution gates
 
@@ -336,9 +470,8 @@ poem in any form: line V is deliberately worded to avoid implying coalescence.
   `extract_statement_identity.py` hashes only theorem-like environments
   (`theorem`, `proposition`, `lemma`, `corollary`) by label, so a presentation
   refactor must leave every hash fixed. Treat "no statement hash moved" as an
-  acceptance gate; a moved hash means a theorem was touched by accident. Paper
-  II's new conclusion must contain no theorem-like environment, or this gate will
-  fire legitimately and need an explicit manifest update.
+  acceptance gate; a moved hash means a theorem was touched by accident. No new
+  theorem-like environment is required anywhere in C919.
 - **Build gates are strict.** `check_manuscript_build.py` fails on any LaTeX
   warning in each root, so all five need clean rebuilds. Drop or retune the
   `\Needspace` glue, which is tuned for the interludes' current position, and
@@ -362,12 +495,22 @@ poem in any form: line V is deliberately worded to avoid implying coalescence.
   a forward Paper V release will correct the live Zenodo record's stale title
   automatically, with no manual metadata edit.
 - **Style guide.** `papers/style-guide.md` has no rule about series front matter.
-  Add one recording the convention adopted here so the next paper in the series
-  does not reinvent it.
+  Add the following convention (adjust Markdown punctuation only if the style
+  guide has a fixed house format):
+
+  > **Programme papers.** Papers belonging to a thematic programme must retain
+  > standalone title-page identity: do not place programme banners, ordinal
+  > paper numbers, programme epigraphs, or programme maps in the front matter.
+  > Local mathematical motivation and roadmaps belong in the introduction;
+  > cross-paper placement belongs in an unnumbered coda after the mathematical
+  > conclusion. Programme numbering may appear in that coda, its programme map,
+  > and repository-level metadata.
 
 ## 8. Reporting required on completion
 
-Per the packet: a per-paper summary of what moved and what was cut; the wording
-decision taken for the distinct Paper I and Paper III map labels; any place where
-the source structure prevented the requested layout; and the list of the five
-rebuilt PDFs for review.
+Per the packet: a per-paper summary of what moved and what was cut; confirmation
+that the settled upper-node map labels and common lower target were used; any
+place where the source structure prevented the requested layout; and the list of
+the five rebuilt PDFs for review. Also report the Paper-II preflight result:
+whether the checkout already contained the current conclusion or had to be
+reconciled before C919 edits began.
