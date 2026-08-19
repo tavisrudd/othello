@@ -203,7 +203,10 @@ eight: one projective-line stabilization of it is not rational.  Irrationality
 of the stabilized associated Pfaffian cubic comes from the ordinary Hodge-atom
 argument, applied to the cubic zero-packet atom of that cubic, and the flop
 transports it to the Fano carrier.  No framed multiplicity, weak factorization,
-or quantum comparison is used. -/
+or quantum comparison is used, and no hypothesis beyond the ones displayed: the
+flop, the two projectivization comparisons, the ordinary Hodge-atom premises, and
+the birational invariance of rationality are hypotheses about supplied data, and
+Lean constructs none of the geometry they speak about. -/
 theorem genusEight_oneStepStabilization_not_rational_of_atomInputs
     {ledger : Quantum.OrdinaryAtomLedger Variety Atom}
     (stabilization : Quantum.ProjectiveLineStabilizationInput ledger)
