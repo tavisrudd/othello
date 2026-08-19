@@ -85,6 +85,7 @@ digraph manuscript {
   "YYZ:coprime-degree-family" [shape=note, fillcolor="#eeeeee"];
   "YYZ:coprime-degrees-persist" [shape=note, fillcolor="#eeeeee"];
   "a5-pencil-eckardt" [shape=note, fillcolor="#eeeeee"];
+  "a5-pencil-eckardt-locus" [shape=note, fillcolor="#eeeeee"];
   "hirzebruch-euler-spectrum" [shape=note, fillcolor="#eeeeee"];
   "Batyrev:fano-toric-presentation" -> "lem:hirzebruch-euler-spectrum" [style=dotted];
   "BehrendProduct:small-product-formula" -> "lem:hirzebruch-euler-spectrum" [style=dotted];
@@ -115,6 +116,7 @@ digraph manuscript {
   "YYZ:coprime-degree-family" -> "cor:coprime-separation" [style=dotted];
   "YYZ:coprime-degrees-persist" -> "cor:coprime-separation" [style=dotted];
   "a5-pencil-eckardt" -> "prop:A5-not-coprime" [style=dotted];
+  "a5-pencil-eckardt-locus" -> "prop:A5-not-coprime" [style=dotted];
   "cor:universal-ch0" -> "prop:A5-nonseparated" [style=solid];
   "def:framed-sixth-multiplicity" -> "lem:exact-low-degree-shifts" [style=dashed];
   "hirzebruch-euler-spectrum" -> "lem:hirzebruch-euler-spectrum" [style=dotted];

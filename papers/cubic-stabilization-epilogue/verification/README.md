@@ -1,7 +1,15 @@
 # Verification boundary
 
-The manuscript is intended to have a wholly human proof spine.  No certificate,
-enumeration, or symbolic program is invoked as a premise.
+The proof spine of the manuscript is structural apart from the computations in
+`evidence.json`, which are the only places a symbolic program is invoked as a
+premise.  None of them is certificate-checked; each is a trusted execution,
+cross-checked as its registry entry records.  Exactly two statements invoke
+one: `prop:A5-not-coprime`, which locates the pencil's Eckardt locus and
+through which `prop:A5-nonseparated` inherits the dependency, and
+`lem:hirzebruch-euler-spectrum` in the conditional framed refinement.  No
+irrationality statement, and nothing on the unconditional atomic route, rests
+on any of them.  Both are marked by `\evidence` in the source, so the boundary
+is visible from the manuscript and not only from here.
 
 `make check` performs the source-only Lean correspondence check, deterministic
 PDF construction, and warning rejection.  The

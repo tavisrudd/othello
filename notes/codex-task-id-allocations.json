@@ -3194,8 +3194,17 @@
       "last": 922,
       "purpose": "repair the C920 audit findings: Cotti citation, stale claim-map scope, ledger, prose",
       "sequence": 355
+    },
+    {
+      "count": 1,
+      "first": 923,
+      "kind": "reservation",
+      "lane": "cubic-threefolds",
+      "last": 923,
+      "purpose": "structural proof that the A_5-pencil Eckardt locus is exactly the two Fermat members, replacing the Groebner elimination",
+      "sequence": 356
     }
   ],
-  "next_id": 923,
+  "next_id": 924,
   "schema": "codex-task-id-allocations-v1"
 }

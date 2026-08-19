@@ -672,10 +672,49 @@ an automorphism of order five, up to isogeny, as an elliptic curve times the
 square of an abelian surface.  The proposition is compatible with that: their
 splitting is an isogeny, and what fails here is its realization by an
 odd-degree isogeny matching the polarizations.  Two routes into Voisin's
-construction therefore remain, one for each case of the proposition: the
+construction therefore remain, one for each case of the proposition: a
 four-dimensional factor of the second case may be the Jacobian of an
 irreducible curve of genus four, or \(J\) itself may be odd-degree isogenous
 to the Jacobian of an irreducible curve of genus five.  Both are open, so this
-pencil is not known to lie in one of those components, and
+pencil is not known to lie in one of those components.
+Remark~\ref{rem:four-dimensional-factor} says which principally polarized
+fourfolds the first route ranges over, which is not immediate: the second case
+admits six of them, and the intrinsic factor they are isogenous to is not one.
 Section~\ref{sec:minimal-class} does not depend on the question: the
 algebraicity of the primitive minimal class is proved there directly.
+
+\begin{remark}[Which fourfolds the second case admits]
+\label{rem:four-dimensional-factor}
+Fix an axis \(H\) with class \(v\), so that \(\kappa(v,v)=5\), and let
+\(N=v^\perp\subset\Lambda\).  In the basis of the five remaining axes,
+\(N=\{x\in\mathbf Z^5:\sum x_i=0\}\) carries the form \(6\langle x,y\rangle\):
+six times the \(A_4\) root lattice.  Since \(5\) is a unit at two and at three,
+\(\Lambda\) splits orthogonally as \(\mathbf Zv\perp N\) over \(\mathbf Z_2\)
+and over \(\mathbf Z_3\), so the whole discriminant group of \(\Lambda\) is
+carried by \(N\) and the kernel of
+Proposition~\ref{prop:principal-gluing-packet} lies in \(N\otimes M\).  What
+separates the two summands is five-adic:
+\([\Lambda:\mathbf Zv+N]=5\), and tensoring with the rank-two lattice \(M\)
+squares that to \(25\).
+
+Write \(L_1=L\cap(\mathbf Qv\otimes M_{\mathbf Q})\) and
+\(L_4=L\cap(N_{\mathbf Q}\otimes M_{\mathbf Q})\) for the two primitive
+summands, so that \(A_1\) and the intrinsic four-dimensional factor of the
+second case have these as their integral homology.  Then \(L_1=\mathbf Zv\otimes
+M\) carries \(5\) times a unimodular alternating form, so \(\det L_1=25\); since
+\(L\) is unimodular and \([L:L_1\oplus L_4]=25\), we get
+\(\det L_1\cdot\det L_4=25^2\) and hence \(\det L_4=25\).  A rank-eight
+alternating lattice of determinant \(25\) has elementary divisors
+\((1,1,1,5)\), so \(L_4\) is not unimodular and the intrinsic four-dimensional
+factor is not principally polarized.  Its discriminant group is glued to that
+of \(L_1\), which is \(M/5M=E[5]\); the discriminant pairing is alternating, so
+every subgroup of order five is isotropic, and each of the six gives a
+unimodular overlattice of \(L_4\).  The second case of the proposition
+therefore admits exactly six principally polarized abelian fourfolds, each
+five-isogenous to the intrinsic factor, one for each order-five subgroup of
+\(E[5]\).  The stabilizer \(D_5\) of the axis acts on \(\operatorname{disc}L_4\)
+through \(\pm1\), since it preserves \(N\) and acts trivially on \(M\), so it
+fixes all six and the \(A_5\)-structure selects none of them.  A genus-four
+question about the second case is therefore a question about a choice among
+these six fourfolds.
+\end{remark}

@@ -311,9 +311,9 @@
       "declarations": [],
       "objects": "The coarse-moduli image of the nonstandard invariant cubic pencil of the alternating group on five letters, the Eckardt points of its members, and the coprime-degree family of Yang, Yu and Zhu.",
       "hypotheses": "Smoothness of the members, the Eckardt criterion of the preceding lemma, and the computed emptiness of the Eckardt scheme of the members listed in the registered evidence bundle.",
-      "conclusion": "Only finitely many moduli points of the pencil are represented by cubic threefolds carrying an Eckardt point, and in particular only finitely many by cubics projectively equivalent to a member of that family.",
-      "cautions": "Not formalized.  It rests on the registered evidence bundle, which exhibits Eckardt-free members but does not compute the finite exceptional set.",
-      "statement_digest": "a93bee56ced626f32904bf6581ee57eded87db639c75bb5383a95a6c18782293"
+      "conclusion": "Exactly two members of the pencil are smooth cubic threefolds carrying an Eckardt point, the roots of b^2+3b+9 in the six-point model, and they are the two Fermat members, so they represent a single moduli point; every other moduli point is represented only by cubics with no Eckardt point, and in particular by none projectively equivalent to a member of that family.",
+      "cautions": "Not formalized.  The two loci are computed by a Groebner basis elimination over Q, trusted as an execution of Singular rather than certificate-checked; the registered bundles record two independent cross-checks, the same eliminations over a large finite field and a separate enumeration over five small ones.  Identifying the two Eckardt members with the Fermat members is argued in the manuscript from Remark rem:fermat-in-pencil, not computed.",
+      "statement_digest": "74ad7b50fe8fdcd3f171d99ba94aee094c02b4c4f17950c4a4fe76f0cd1341e7"
     },
     {
       "manuscript_label": "prop:no-elliptic-product",
@@ -334,10 +334,10 @@
       "coverage": "absent",
       "declarations": [],
       "objects": "The coarse-moduli image of the nonstandard invariant cubic pencil of the alternating group on five letters, and cubic forms that split as sums of forms in pairwise disjoint nonempty groups of at most three variables.",
-      "hypotheses": "Smoothness of the pencil members, the separated-variable criterion for universal CH0-triviality of Colliot-Thelene, and the Eckardt criterion together with the registered Eckardt computation inherited through the preceding proposition; the order-three signature route printed after the proof gives the same finiteness without any computation.",
-      "conclusion": "Only finitely many moduli points of the pencil are represented by cubics projectively equivalent to a separated-variable form, so all but finitely many are universally CH0-trivial for a reason the separated-variable criterion does not supply.",
-      "cautions": "Not formalized.  The projective-equivalence argument over the coarse moduli image is outside the companion's scope.  Its printed proof runs through the Eckardt criterion and therefore through the registered evidence bundle; the computation-free route is recorded after it.",
-      "statement_digest": "0fafc5c5cfe654c78bbf43a92d87e5183228a4190d9e47ecf2bbaad826505905"
+      "hypotheses": "Smoothness of the pencil members, the separated-variable criterion for universal CH0-triviality of Colliot-Thelene, and the Eckardt criterion together with the registered Eckardt computations inherited through the preceding proposition; the order-three signature route printed after the proof recovers finiteness of the locus without any computation, but not its identification as the single Fermat point, which is computation-dependent.",
+      "conclusion": "Exactly one moduli point of the pencil is represented by a cubic projectively equivalent to a separated-variable form, the Fermat point, so every other moduli point is universally CH0-trivial for a reason the separated-variable criterion does not supply.",
+      "cautions": "Not formalized.  The projective-equivalence argument over the coarse moduli image is outside the companion's scope.  Its printed proof runs through the Eckardt criterion and therefore through the registered evidence bundles, including the elimination that locates the exceptional point; the computation-free route is recorded after it.",
+      "statement_digest": "048cabc7314451ac21726cdf35c1bf86433f297e54c7a5ee946fbc5fe367a2fb"
     },
     {
       "manuscript_label": "lem:euler-sign",
