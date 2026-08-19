@@ -6496,9 +6496,11 @@ theorem hirzebruch_degenerate_rootMultiplicity_eq_two {repeated first second : �
           * (Polynomial.X - Polynomial.C second))).rootMultiplicity repeated = 2 :=
   Quantum.rootMultiplicity_eq_two_of_squared_linear_mul_quadratic firstNe secondNe
 
-/-- The two remaining roots on each degeneracy locus are simple.  This is the
-statement that composes with the multiplicity of the repeated root to give the
-whole multiplicity pattern two, one, one. -/
+/-- A root of `(X - r) ^ 2 (X - c) (X - d)` that differs from `r` and from the
+other unrepeated root is simple: the multiplicity at `c` is one when `r ≠ c` and
+`d ≠ c`.  No matrix occurs; the statement is about the polynomial.  Applying it
+to both remaining roots of a degenerate Euler quartic is done in
+`TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.HirzebruchEulerSpectrum`. -/
 theorem hirzebruch_degenerate_rootMultiplicity_eq_one {repeated first second : ℂ}
     (repeatedNe : repeated ≠ first) (secondNe : second ≠ first) :
     (((Polynomial.X - Polynomial.C repeated) ^ 2)
@@ -6511,7 +6513,10 @@ distinctness hypotheses discharged: if the specialized value is nonzero, no
 maximal generalized eigenspace has dimension more than two, the one at the
 repeated root `0` has dimension exactly two, and the ones at the two remaining
 roots have dimension exactly one.  The degenerate spectrum is one block of rank
-two and two blocks of rank one. -/
+two and two blocks of rank one: the three eigenvalues account for all four
+dimensions, so these are all the blocks, by the completeness of the generalized
+eigenspace decomposition of a complex endomorphism, which is standard and is not
+restated here. -/
 theorem hirzebruchEven_degenerate_blockShape (euler : Matrix (Fin 4) (Fin 4) ℂ)
     (fibreRoot : ℂ) (nonzero : fibreRoot ≠ 0)
     (quantumRelation : euler.charpoly
@@ -6530,7 +6535,11 @@ theorem hirzebruchEven_degenerate_blockShape (euler : Matrix (Fin 4) (Fin 4) ℂ
 distinctness hypotheses discharged: if the scale parameter is nonzero, no maximal
 generalized eigenspace has dimension more than two, the one at the repeated root
 `-18 s` has dimension exactly two, and the ones at the two remaining roots have
-dimension exactly one. -/
+dimension exactly one.  The degenerate spectrum is one block of rank two and two
+blocks of rank one: the three eigenvalues account for all four dimensions, so
+these are all the blocks, by the completeness of the generalized eigenspace
+decomposition of a complex endomorphism, which is standard and is not restated
+here. -/
 theorem hirzebruchOdd_degenerate_blockShape (euler : Matrix (Fin 4) (Fin 4) ℂ)
     (sectionScale squareRoot : ℂ) (root : squareRoot ^ 2 = -(2 * sectionScale ^ 2))
     (nonzero : sectionScale ≠ 0)

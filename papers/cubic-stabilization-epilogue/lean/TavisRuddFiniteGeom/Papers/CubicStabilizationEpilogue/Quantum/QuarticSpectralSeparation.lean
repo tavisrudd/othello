@@ -27,8 +27,9 @@ eigenvalue in the characteristic polynomial, which gives the statement about `M`
 
 The module also proves a bound valid at a degenerate quartic: if the quartic is
 `(X - r) ^ 2 (X - c) (X - d)` with `c ≠ r` and `d ≠ r` — no relation between `c`
-and `d` is assumed — then no root has multiplicity three or more, and `r` has
-multiplicity exactly two.  That is the shape a degenerate specialization of a
+and `d` is assumed — then no root has multiplicity three or more, `r` has
+multiplicity exactly two, and each of `c`, `d` is a simple root when it differs
+from the other.  That is the shape a degenerate specialization of a
 Hirzebruch surface produces.
 
 Lean constructs no quantum connection and no Euler multiplication here; `M` is

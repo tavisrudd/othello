@@ -32,11 +32,11 @@ dimension at most one, so every spectral block has rank one.
 
 On them the spectrum is described completely.  The even quartic becomes
 `X ^ 2 (X ^ 2 - 16 u)`, whose double root is `0` and whose two remaining roots
-are the square roots of `16 u`; these differ from `0` exactly when `u` does.  The
+are the square roots of `16 u`; these differ from `0` whenever `u` does.  The
 odd locus is parametrized by writing the section value as `16 s`, so that the
 fibre value is `-27 s ^ 2`; the quartic then has double root `-18 s` and
 remaining roots `10 s ± 16 e` for a square root `e` of `-2 s ^ 2`, and those
-differ from `-18 s` exactly when `s` does.  Composing the splittings with those
+differ from `-18 s` whenever `s` does.  Composing the splittings with those
 distinctness statements gives, on each locus, root multiplicities two, one and
 one, hence maximal generalized eigenspaces of dimension at most two with the one
 at the repeated root of dimension exactly two and the two others of dimension
@@ -74,14 +74,16 @@ section Discriminants
 
 variable (u w : ℂ)
 
-/-- Discriminant of the even quartic. -/
+/-- The discriminant of the even quartic, on the coefficients of
+`hirzebruchEvenEulerCharpoly`: `2 ^ 24 u ^ 2 w ^ 2 (u - w) ^ 2`. -/
 theorem hirzebruchEvenEuler_discriminant :
     quarticDiscriminant (16 * (u - w) ^ 2) 0 (-(8 * (u + w))) 0
       = 16777216 * (u ^ 2 * w ^ 2 * (u - w) ^ 2) := by
   unfold quarticDiscriminant
   ring
 
-/-- Discriminant of the odd quartic. -/
+/-- The discriminant of the odd quartic, on the coefficients of
+`hirzebruchOddEulerCharpoly`: `- u ^ 2 w ^ 2 (256 u + 27 w ^ 2) ^ 3`. -/
 theorem hirzebruchOddEuler_discriminant :
     quarticDiscriminant (16 * u ^ 2 - 27 * u * w ^ 2) (-(36 * u * w)) (-(8 * u)) w
       = -(u ^ 2 * w ^ 2 * (256 * u + 27 * w ^ 2) ^ 3) := by
@@ -130,8 +132,9 @@ end Discriminants
 
 section SimpleBlocks
 
-/-- Off the degeneracy locus every spectral block of Euler multiplication on a
-Hirzebruch surface of even index has rank one. -/
+/-- Off the degeneracy locus every maximal generalized eigenspace of Euler
+multiplication on a Hirzebruch surface of even index is at most one-dimensional:
+every spectral block has rank one. -/
 theorem hirzebruchEvenEuler_finrank_maxGenEigenspace_le_one
     (operator : Matrix (Fin 4) (Fin 4) ℂ) (u w : ℂ)
     (characteristic : operator.charpoly = hirzebruchEvenEulerCharpoly u w)
@@ -142,8 +145,9 @@ theorem hirzebruchEvenEuler_finrank_maxGenEigenspace_le_one
   exact fun vanishing => separated
     ((hirzebruchEvenEuler_discriminant_eq_zero_iff u w nonzeroFibre nonzeroSection).mp vanishing)
 
-/-- Off the degeneracy locus every spectral block of Euler multiplication on a
-Hirzebruch surface of odd index has rank one. -/
+/-- Off the degeneracy locus every maximal generalized eigenspace of Euler
+multiplication on a Hirzebruch surface of odd index is at most one-dimensional:
+every spectral block has rank one. -/
 theorem hirzebruchOddEuler_finrank_maxGenEigenspace_le_one
     (operator : Matrix (Fin 4) (Fin 4) ℂ) (u w : ℂ)
     (characteristic : operator.charpoly = hirzebruchOddEulerCharpoly u w)
@@ -161,8 +165,9 @@ section Splittings
 
 /-- At `u = fibreRoot ^ 2` and `w = sectionRoot ^ 2` the even quartic is the
 product of the four linear factors with roots `2 (± fibreRoot ± sectionRoot)`;
-these are the eigenvalues of Euler multiplication in the even case, and they need
-not be distinct.  The letter `a` is reserved for the index of the surface. -/
+these are the roots of the quartic the manuscript identifies with the eigenvalues
+of Euler multiplication in the even case, and they need not be distinct.  The
+letter `a` is reserved for the index of the surface. -/
 theorem hirzebruchEvenEuler_splitting (fibreRoot sectionRoot : ℂ) :
     hirzebruchEvenEulerCharpoly (fibreRoot ^ 2) (sectionRoot ^ 2)
       = (X - C (2 * (fibreRoot + sectionRoot))) * (X - C (2 * (fibreRoot - sectionRoot)))
@@ -173,8 +178,9 @@ theorem hirzebruchEvenEuler_splitting (fibreRoot sectionRoot : ℂ) :
 
 /-- On the even degeneracy locus the quartic is a squared linear factor times a
 quadratic: the repeated root is `0` and the two remaining roots are
-`± 4 fibreRoot`, which differ from the repeated one, and from each other, exactly
-when `fibreRoot` is nonzero. -/
+`± 4 fibreRoot`, which differ from the repeated one, and from each other,
+whenever `fibreRoot` is nonzero; that is discharged inside
+`hirzebruchEvenEuler_degenerate_rootMultiplicity_eq_one`. -/
 theorem hirzebruchEvenEuler_degenerate_splitting (fibreRoot : ℂ) :
     hirzebruchEvenEulerCharpoly (fibreRoot ^ 2) (fibreRoot ^ 2)
       = (X - C 0) ^ 2 * ((X - C (4 * fibreRoot)) * (X - C (-(4 * fibreRoot)))) := by
@@ -337,7 +343,8 @@ theorem hirzebruchOddEuler_degenerate_rootMultiplicity_eq_one (s e : ℂ)
 generalized eigenspace has dimension more than two, the one at the repeated root
 `0` has dimension exactly two, and the ones at the two remaining roots
 `± 4 fibreRoot` have dimension exactly one.  The degenerate spectrum is therefore
-one block of rank two and two blocks of rank one. -/
+one block of rank two and two blocks of rank one, the three eigenvalues
+accounting for all four dimensions. -/
 theorem hirzebruchEvenEuler_degenerate_finrank_maxGenEigenspace
     (operator : Matrix (Fin 4) (Fin 4) ℂ) (fibreRoot : ℂ) (nonzero : fibreRoot ≠ 0)
     (characteristic :
@@ -366,7 +373,8 @@ theorem hirzebruchEvenEuler_degenerate_finrank_maxGenEigenspace
 generalized eigenspace has dimension more than two, the one at the repeated root
 `-18 s` has dimension exactly two, and the ones at the two remaining roots
 `10 s ± 16 e` have dimension exactly one.  The degenerate spectrum is therefore
-one block of rank two and two blocks of rank one. -/
+one block of rank two and two blocks of rank one, the three eigenvalues
+accounting for all four dimensions. -/
 theorem hirzebruchOddEuler_degenerate_finrank_maxGenEigenspace
     (operator : Matrix (Fin 4) (Fin 4) ℂ) (s e : ℂ) (root : e ^ 2 = -(2 * s ^ 2))
     (nonzero : s ≠ 0)

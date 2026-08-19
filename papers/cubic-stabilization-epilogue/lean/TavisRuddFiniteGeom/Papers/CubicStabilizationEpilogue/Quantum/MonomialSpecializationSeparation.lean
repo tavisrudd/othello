@@ -155,8 +155,8 @@ theorem StrictNovikovAdmissible.combination_ne_zero_of_valuation_ne
   exact different (by rw [← firstValuation, opposite, secondValuation])
 
 /-- The specialized fibre value and the specialized shifted-section value are
-distinct once the shift is positive: this is the even degeneracy locus, and it
-is excluded by the valuation law alone. -/
+distinct, for nonzero fibre and section classes and a positive shift: this is
+the even degeneracy locus, and it is excluded by the valuation law alone. -/
 theorem StrictNovikovAdmissible.fibre_ne_shiftedSection
     {fibre sectionClass : Curve} (fibreNonzero : fibre ≠ 0) (sectionNonzero : sectionClass ≠ 0)
     {shift : ℕ} (positiveShift : 0 < shift) :
@@ -171,9 +171,10 @@ theorem StrictNovikovAdmissible.fibre_ne_shiftedSection
     Nat.le_mul_of_pos_left _ positiveShift
   omega
 
-/-- The odd degeneracy locus is not met once the shift is positive: the fibre
-value and the square of the shifted-section value have different valuations, so
-no combination of them with unit coefficients vanishes. -/
+/-- The odd degeneracy locus is not met, for nonzero fibre and section classes
+and a positive shift: the fibre value and the square of the shifted-section value
+have different valuations, so no combination of them with unit coefficients
+vanishes. -/
 theorem StrictNovikovAdmissible.oddCombination_ne_zero
     {fibre sectionClass : Curve} (fibreNonzero : fibre ≠ 0) (sectionNonzero : sectionClass ≠ 0)
     {shift : ℕ} (positiveShift : 0 < shift)
@@ -266,7 +267,10 @@ coefficient ring, a linearly independent family of monomials of the graded
 target, and for every effective class a leading term belonging to that family.
 This is the structure the associated graded of a completed monoid ring supplies,
 with the monomials of that monoid ring as the family; Lean constructs neither the
-monoid ring nor its associated graded. -/
+monoid ring nor its associated graded.  The manuscript calls such a
+specialization monomial; the adjective "graded-monomial" used in these docstrings
+records that the condition is imposed on the associated graded rather than on the
+source. -/
 structure MonomialSpecializationData {Curve Target Index Graded : Type*}
     [AddCommMonoid Curve] [CommRing Target] [AddCommGroup Graded] [Module ℂ Graded]
     (leadingTerm : Target → Graded) (monomialImage : Curve → Target)

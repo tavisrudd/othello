@@ -771,8 +771,9 @@ spectrum instead.  The quadric surface \(F_0=\PP^1\times\PP^1\) is handled
 separately by the Gromov--Witten product formula, because \(\chi\) may send its
 two ruling classes to the same value and the quartic below then degenerates.  For
 \(a\ge1\) two facts carry the computation: one deformation carries the
-genus-zero theory of \(F_a\) to that of \(F_0\) or \(F_1\), under an explicit
-change of Novikov variables, and the resulting rank-four Euler quartic is
+genus-zero theory of \(F_a\) to that of \(F_0\) or \(F_1\), whose quantum
+relations serve as the base cases, under an explicit change of Novikov
+variables, and the resulting rank-four Euler quartic is
 separable away from one explicit locus that no center specialization meets.
 
 One case, the surface \(F_1\), needs a mild extra condition on \(\chi\), used
@@ -872,8 +873,10 @@ locally free quotient, necessarily \(\OO(a)\) by degree.  Let
 resulting extension and consider the extensions \(E_t\) with class
 \(t\varepsilon\), \(t\in\A^1\), that is the pullback of the universal
 extension along \(t\mapsto t\varepsilon\).  These form a vector bundle on
-\(\PP^1\times\A^1\), and scaling a nonzero extension class by a unit leaves
-the middle term unchanged, so \(E_t\cong E_1\) for every \(t\ne0\); and its
+\(\PP^1\times\A^1\).  Scaling a nonzero extension class by a unit leaves the
+middle term unchanged, so \(E_t\cong E_1\) for every \(t\ne0\).  The
+extension is nonsplit, since \(\OO(k)\oplus\OO(a-k)\) is not
+\(\OO\oplus\OO(a)\); and its
 projectivization is a smooth projective family
 with
 \[
@@ -890,7 +893,8 @@ deformation-invariant for this family.  The invariants therefore agree under
 the parallel
 transport \(\psi\) of \(N_1\) along the family.  The ruling is global over the
 base, so \(\psi\) fixes \(f\); writing \(\psi(s)=\alpha s_0+\beta f\) with
-\(s_0\) the negative-section class of \(F_{a-2k}\), pairing with \(f\) gives
+\(s_0\) the negative-section class of \(F_{a-2k}\), which for \(F_0\) means
+the other ruling class, pairing with \(f\) gives
 \(\alpha=1\) and \(\psi(s)^2=-a\) gives \(\beta=-k\).  Thus
 \[
  \psi(mf+ns)=(m-nk)f+ns_0,
@@ -915,8 +919,9 @@ theorem \cite[Theorem~0.1]{Givental}---gives
 \]
 The same two relations can be read off directly from the genus-zero invariants
 of \(F_1\), which is how we use them; the toric presentation is recorded as a
-check.  There \(c_1\cdot(mf+ns_0)=2m+n\), so a three-point invariant
-with two divisor insertions is nonzero only for \(2m+n\le2\); the contributing
+check.  On \(F_1\), \(c_1\cdot(mf+ns_0)=2m+n\), so a three-point invariant
+with two divisor insertions and \(\beta\ne0\) is nonzero only for
+\(1\le 2m+n\le2\); the contributing
 classes are \(s_0\), with \(\langle\;\rangle_{s_0}=1\) because the negative
 section is the unique curve in its class, and \(f\), with
 \(\langle\mathrm{pt}\rangle_f=1\) because one fibre passes through a general
@@ -994,10 +999,11 @@ multiplication has rank one.
 two simple roots, so Euler multiplication has one spectral block of rank two,
 whose nilpotent part squares to zero, and two blocks of rank one.
 \end{enumerate}
-No other block shape occurs.  Case~(b) is recorded so that a degenerate
-specialization is described rather than assumed away; by
-Lemma~\ref{lem:center-specialization-nondegenerate} it does not arise for any
-center specialization.
+No other block shape occurs.  By
+Lemma~\ref{lem:center-specialization-nondegenerate}, case~(b) does not arise for
+a center specialization when \(a\ge1\); for \(F_0\) it can, which is why that
+surface is treated by the product formula in
+Proposition~\ref{prop:hirzebruch-specialized-vanishing}.
 \end{lemma}
 
 \begin{proof}
@@ -1024,7 +1030,7 @@ multiplicity exactly two.  A block of rank two has a single eigenvalue
 Cayley--Hamilton its centered matrix \(M-\lambda\) squares to zero.
 \end{proof}
 
-\begin{lemma}[Strictly admissible specializations avoid the degeneracy locus]
+\begin{lemma}[Strictly admissible specializations avoid the degeneracy locus for \(a\ge1\)]
 \label{lem:center-specialization-nondegenerate}
 \coverage{conditional_deduction}%
 \lean{centerSpecialization_fibre_ne_shiftedSection,%
@@ -1078,7 +1084,9 @@ Novikov-admissible, and graded-monomial if \(a=1\).  Then
 \end{proposition}
 
 \begin{proof}
-Let \(a=0\), so \(T=\PP^1\times\PP^1\).  The Gromov--Witten product formula
+Let \(a=0\), so \(T=\PP^1\times\PP^1\); this case is the \(\chi\)-specialized
+analogue of Proposition~\ref{prop:projective-product-nu} below.  The
+Gromov--Witten product formula
 \cite{BehrendProduct} identifies the small quantum differential module of a
 product with the tensor product of those of its factors over
 \(\Lambda_{\PP^1}\otimes\Lambda_{\PP^1}=\Lambda_T\).  Every entry of the
@@ -1093,8 +1101,7 @@ spectrum and, by Lemma~\ref{lem:simple-euler-block}, trivial framed regular
 monodromy.  As in the proof of
 Proposition~\ref{prop:projective-product-nu} below, the Levelt--Turrittin formal
 decomposition is compatible with tensor products of differential modules, so the
-framed operator of \(T\) is the tensor product of two identities.  This case is
-the \(\chi\)-specialized analogue of that proposition.  The argument uses no
+framed operator of \(T\) is the tensor product of two identities.  The argument uses no
 relation between the two specialized values, which is what the product route
 buys: \(\chi\) may identify the two ruling classes, and the discriminant of
 Lemma~\ref{lem:hirzebruch-euler-spectrum} then vanishes.
@@ -1116,14 +1123,13 @@ Proposition~\ref{prop:hirzebruch-specialized-vanishing} removes it for the
 rational geometrically ruled centers as well.  Those cases exhaust the minimal
 surfaces, and also cover \(F_1\), which is geometrically ruled without being
 minimal.  In the present proof of four-dimensional birational invariance, the
-substantive use of Hypothesis~5.7T is therefore confined to centers that are
-neither minimal nor geometrically ruled.  Every such surface is an iterated point
+substantive use of Hypothesis~5.7T is therefore confined to surface centers
+that are neither minimal nor geometrically ruled.  Every such surface is an iterated point
 blowup, so eliminating it there would require a separate support or base-change
 statement for applying the blowup comparison after the external center
 specialization; no such statement is assumed here.  The quartic of
 Lemma~\ref{lem:hirzebruch-euler-spectrum} was derived for the Hirzebruch
-surfaces and is not available for such a center, whose even cohomology has rank
-greater than four.
+surfaces and is not available for such a center.
 \end{remark}
 
 \begin{hypothesisT}[Divisor-tagging specialization invariance]
