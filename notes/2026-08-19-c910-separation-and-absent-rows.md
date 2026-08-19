@@ -251,6 +251,37 @@ make formal-audit AXIOM_LOG=<run directory>/logs/<audit target>.quiet/<run>/<inv
 The last command's argument is the elaboration transcript, not the wrapper
 summary of the same name without the `.quiet` path.
 
+## The standalone export
+
+The standalone repository had lagged since before the minimal-ruled tagging
+removal. It is now synchronized and verified at `da7ec8e8f`, through
+`papers/scripts/export-paper-repos.py`: plan and audit clean, `sync` writing 14
+paths with no deletions, one ordinary forward commit in the standalone
+repository, and `verify` agreeing at 186 tracked files against the export
+manifest.
+
+Agreement was then checked on every surface that carries a hash rather than
+only by the standalone gate passing. Its source-only correspondence check
+reports numbers identical to the authority's; its manuscript rebuild, through
+its own pinned flake, reproduces the tracked PDF byte for byte and leaves the
+tree clean; the two Lean trees are byte identical outside the build directory;
+the Eckardt-locus certificate hashes check there as they do here; and the
+axiom-log gate passes on the transcript captured from the authority's guarded
+build, which is the same elaboration because the sources are identical. Lean
+was not rebuilt inside the standalone repository, and this record does not claim
+that it was.
+
+One refusal was hit and resolved at its source rather than worked around. The
+first attempt at the current content refused with seven audit findings: the
+Eckardt-locus generator carried task identifiers and two citations of internal
+note files, and its emitted banner wrote both into the tracked Singular
+certificate. Both were cleaned in the authority by the task that owns them, the
+certificate regenerated so its banner names its in-paper generator, and the
+checksum manifest refreshed. Worth recording for whoever maintains the
+exporter: the audit's extension coverage does not reach `.sing`, so the
+certificate's copy of the task identifier passed the scan and was found only by
+reading the file. Cleaning the generator alone would have shipped it.
+
 ## Commits
 
 - `d76daafc6` — the three separation corollaries as conditional deductions.
