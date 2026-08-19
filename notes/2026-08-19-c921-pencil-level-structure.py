@@ -74,7 +74,7 @@ from itertools import combinations
 
 import numpy as np
 
-PRIMES = [11, 19, 29, 31, 41]
+PRIMES = [11, 19, 29, 31, 41, 43]
 
 
 def a5_on_six_points():
@@ -257,6 +257,28 @@ def main():
         check(f"(b) rational three-isogeny: {lab}", not viol_b,
               "" if not viol_b else f"{len(viol_b)} violations, e.g. {viol_b[:3]}")
         verdict_b &= not viol_b
+
+        # (c) the Fermat members, the roots of b^2 + 3b + 9, should have an
+        # elliptic factor with complex multiplication by Q(sqrt -3), that is
+        # j = 0, since the Fermat cubic threefold has a CM Hodge structure.
+        # Over F_q that reads a^2 - 4q = -3 c^2.
+        fermat = [r for r in range(q) if (r * r + 3 * r + 9) % q == 0]
+        cm = []
+        for r in fermat:
+            if (1, r) not in traces:
+                continue
+            a = traces[(1, r)]
+            t = 4 * q - a * a
+            ok = t > 0 and t % 3 == 0 and round((t // 3) ** 0.5) ** 2 == t // 3
+            cm.append((r, a, t, ok))
+        if fermat:
+            check("(c) the Fermat members have an elliptic factor with complex "
+                  "multiplication by Q(sqrt -3)",
+                  bool(cm) and all(o for (_, _, _, o) in cm),
+                  f"{[(r, a, f'4q-a^2={t}') for (r, a, t, _) in cm]}")
+        else:
+            say(f"  (c) the Fermat members are not F_{q}-rational here"
+                f" (q = 2 mod 3)")
 
         say(f"  traces a_b = {[traces[m] for m in sorted(traces)]}")
         say()

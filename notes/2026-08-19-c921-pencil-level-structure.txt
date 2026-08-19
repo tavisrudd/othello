@@ -14,6 +14,7 @@ q = 11   (q = 2 mod 3)
   singular at (a:b) = ['1:0', '1:1', '1:2', '1:5']
   [OK  ] (a) #E_b(F_q) is never 2 mod 4, so the discriminant is a square
   [OK  ] (b) rational three-isogeny: 3 divides a_b
+  (c) the Fermat members are not F_11-rational here (q = 2 mod 3)
   traces a_b = [-3, -3, -3, -3, -3, -3, -3, -3]
 
 q = 19   (q = 1 mod 3)
@@ -24,6 +25,7 @@ q = 19   (q = 1 mod 3)
   singular at (a:b) = ['1:0', '1:1', '1:4', '1:7', '1:13', '1:15']
   [OK  ] (a) #E_b(F_q) is never 2 mod 4, so the discriminant is a square
   [OK  ] (b) rational three-isogeny: 3 does not divide a_b
+  [OK  ] (c) the Fermat members have an elliptic factor with complex multiplication by Q(sqrt -3)   [(2, -7, '4q-a^2=27'), (14, -7, '4q-a^2=27')]
   traces a_b = [1, -7, -4, -5, -7, -4, -1, -5, -5, -1, -7, 1, -7, -5]
 
 q = 29   (q = 2 mod 3)
@@ -34,6 +36,7 @@ q = 29   (q = 2 mod 3)
   singular at (a:b) = ['1:0', '1:14', '1:18', '1:23']
   [OK  ] (a) #E_b(F_q) is never 2 mod 4, so the discriminant is a square
   [OK  ] (b) rational three-isogeny: 3 divides a_b
+  (c) the Fermat members are not F_29-rational here (q = 2 mod 3)
   traces a_b = [-6, 3, -9, -3, -9, -3, -6, -3, 3, -3, -3, 3, 6, -3, 6, -9, -9, -9, -3, 3, -9, -3, -9, -6, -6, -9]
 
 q = 31   (q = 1 mod 3)
@@ -44,6 +47,7 @@ q = 31   (q = 1 mod 3)
   singular at (a:b) = ['1:0', '1:6', '1:8', '1:25', '1:26', '1:29']
   [OK  ] (a) #E_b(F_q) is never 2 mod 4, so the discriminant is a square
   [OK  ] (b) rational three-isogeny: 3 does not divide a_b
+  [OK  ] (c) the Fermat members have an elliptic factor with complex multiplication by Q(sqrt -3)   [(13, -4, '4q-a^2=108'), (15, -4, '4q-a^2=108')]
   traces a_b = [7, -8, -7, 5, -1, -7, -8, -5, 1, -5, 1, -4, 5, -4, -1, -8, -5, -5, -5, -5, -5, -5, -5, -5, 7, -8]
 
 q = 41   (q = 2 mod 3)
@@ -54,7 +58,19 @@ q = 41   (q = 2 mod 3)
   singular at (a:b) = ['1:0', '1:21', '1:23', '1:35']
   [OK  ] (a) #E_b(F_q) is never 2 mod 4, so the discriminant is a square
   [OK  ] (b) rational three-isogeny: 3 divides a_b
+  (c) the Fermat members are not F_41-rational here (q = 2 mod 3)
   traces a_b = [-6, -3, -6, -3, -9, -9, 3, -6, -9, -9, -9, 3, 9, -9, 9, -3, 6, 3, -3, -3, 3, -3, 3, -9, -6, -6, -3, -6, -3, -9, 6, -3, -9, -9, -6, -6, 3, -3]
+
+q = 43   (q = 1 mod 3)
+  [OK  ] every smooth member has 5q dividing the deficit
+  [OK  ] Weil bound |a| <= 2 sqrt(q) on every smooth member   max |a| = 11
+  [OK  ] the Segre member (1,0) is singular
+  members: 40 smooth, 4 singular over F_43, 0 anomalous
+  singular at (a:b) = ['1:0', '1:2', '1:16', '1:37']
+  [OK  ] (a) #E_b(F_q) is never 2 mod 4, so the discriminant is a square
+  [OK  ] (b) rational three-isogeny: 3 does not divide a_b
+  [OK  ] (c) the Fermat members have an elliptic factor with complex multiplication by Q(sqrt -3)   [(18, 8, '4q-a^2=108'), (22, 8, '4q-a^2=108')]
+  traces a_b = [-4, 1, -1, 1, -1, -5, -5, -1, -4, 1, -7, 7, -7, -11, -1, -1, 8, -1, -1, -4, 8, 1, -8, -1, -8, -11, -5, 1, -4, -4, 7, -1, -1, -4, -11, -11, -4, -4, -5, 1]
 
 ======================================================================
 prediction (a), square discriminant : CONFIRMED

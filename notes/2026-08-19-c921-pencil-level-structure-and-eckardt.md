@@ -24,6 +24,10 @@ fields, the second by elimination over `Q`.
    elimination: exactly six members, `b = 0` (the Segre cubic), `b = -6`, the two
    roots of `b^2 - 3b - 9` in `Q(sqrt 5)`, and the two roots of `7b^2 + 3b + 9` in
    `Q(sqrt -3)`. The previous report could only bound this.
+4. **The Fermat members' elliptic factor has complex multiplication by
+   `Q(sqrt -3)`**, that is `j = 0`. Over every field where those members are
+   rational, `4q - a_b^2` is three times a square. This ties three separate facts
+   together, in section 6.
 
 The second result is negative for the upgrade it was meant to support, and the
 negative is the useful part. The qualifier "all but finitely many" in the
@@ -199,7 +203,31 @@ would be a one-in-three coincidence repeated thirty-eight times.
 `q ≡ 1 mod 3` and four when `q ≡ 2 mod 3`, always including `b = 0`. Section 3
 explains that exactly, and the sweep now gates on it.
 
-## 6. What is and is not proved
+## 6. Complex multiplication at the Fermat members, and what it explains
+
+The Fermat cubic threefold has a complex-multiplication Hodge structure, so its
+elliptic factor should be the curve with `j = 0` and complex multiplication by
+`Q(sqrt -3)`. Over `F_q` that reads `a_b^2 - 4q = -3 c^2`, and it holds at both
+Fermat members over `F_19`, `F_31` and `F_43`, the fields in the sweep where they
+are rational. The check is in the certificate.
+
+Three facts that were separate now have one source.
+
+- **Why C914's argument stops exactly where it does.** Its step "every sub-Hodge
+  structure is `U tensor H_1(E,Q)`" needs `E` to have no complex multiplication,
+  and its report names the Fermat member as the fibre where that fails. The
+  failure is not incidental to the Fermat member: it is the *only* fibre of the
+  pencil where it can fail through the Eckardt/extra-symmetry mechanism, and the
+  same two members are the Eckardt locus.
+- **Why the Eckardt quadratic is `b^2 + 3b + 9`.** Its discriminant is `-27`, so
+  its roots generate `Q(sqrt -3)` — the complex-multiplication field. The Eckardt
+  locus, the complex-multiplication locus and the extra-automorphism locus of the
+  pencil are the same two points, and they are defined over the field the
+  multiplication is by.
+- **A third identification of the Fermat members**, independent of the thirty
+  Eckardt points and of the manuscript's Remark.
+
+## 7. What is and is not proved
 
 The Eckardt and singular loci are determined by elimination over `Q`, so they are
 geometric statements, not statements about `F_q`-rational points. What they rest
@@ -220,12 +248,12 @@ consistency check on that proposition; the value was in the possibility of a
 disagreement, which would have been a defect in a manuscript proposition. There
 was none.
 
-## 6. Evidence bundle
+## 8. Evidence bundle
 
 | artifact | bytes | sha256 |
 |---|---|---|
-| `2026-08-19-c921-pencil-level-structure.py`  | 10288 | `e535191f6dc0537ed34028c6840a8fe70d2edeb53c10cc2aefd001249e233ba0` |
-| `2026-08-19-c921-pencil-level-structure.txt` |  3222 | `8ce95325009aa387bc0f4082787b17b0453f41c458fda03fba530591d8193528` |
+| `2026-08-19-c921-pencil-level-structure.py`  | 11327 | `8ec576b60449224f3478e12424a4e0503c25bcf9f620f55ceb338c359c89db4f` |
+| `2026-08-19-c921-pencil-level-structure.txt` |  4473 | `b9d72241110eeb37f53f4f11b3f8cb697ab26bd9d0745ef3729f9ae8ca5ca919` |
 | `2026-08-19-c921-pencil-eckardt-sweep.py`    | 12425 | `5e299457c3def06ebe84c6f4f16987588d928e6a5b98404545bb774dd3d692b2` |
 | `2026-08-19-c921-pencil-eckardt-sweep.txt`   |  4445 | `e529c0cfe934dd37770d622dda5195bd4711806af12ceee49ecd2ed374cb1a8c` |
 | `2026-08-19-c921-eckardt-elimination.py`     |  6543 | `e1030b2ff826aaa5fee38ff4ab3a62326ab0e99d3401d4b163d37ddadb894d3f` |
@@ -302,6 +330,27 @@ prime, which is the gate tying the two independent computations together. The
   and the `Q(sqrt -3)` pair, each to multiplicity one in the eliminated ideal.
   This is the input any future degeneration analysis of the Schottky pullback
   needs, and it is now available.
+- **The recurring three.** The base covers the modular curve of the forced level
+  structure three to one; the three-primary glue needs a rational three-isogeny;
+  the complex multiplication is by `Q(sqrt -3)`; the Eckardt locus is defined over
+  the same field. These are not obviously one phenomenon and no attempt is made
+  here to make them one. Logged rather than claimed.
+- **The Euler-number budget.** `deg lambda_E = 2` makes the elliptic surface of
+  the elliptic factor have Euler number twenty-four, and its discriminant is
+  supported on exactly the six singular members, in Galois orbits of sizes one,
+  one, two and two. Whether the twenty-four splits evenly, four to each member, is
+  a sharp question that a closed form for the elliptic factor would settle at
+  once. Open, and cheap once that form exists.
+- **The lattice attack proposed for the remaining branch has no grip.** The card
+  suggests obstructing the genus-five route with the exotic gluing kernel, as
+  C914 did for the product routes. That will not work. An odd-degree isogeny
+  from a genus-five Jacobian requires a sublattice of odd index carrying `m` times
+  a unimodular form, and such sublattices exist in abundance in any unimodular
+  symplectic lattice — take `m e_i` together with `f_i` in a symplectic basis. The
+  glue had purchase in C914 only because an orthogonal *splitting* into sub-Hodge
+  structures forces conditions on the discriminant form, and an irreducible
+  genus-five curve gives no splitting. The discriminating data for the remaining
+  branch is the position of the period point, not the lattice.
 - **The upgrade this pass was aimed at is closed negative, for a structural
   reason.** The separation theorem's qualifier is necessary because the Fermat
   member is in the pencil and is of separated-variable type. No mystery remains

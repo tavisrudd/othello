@@ -81,11 +81,17 @@ Jacobian.
 
 ## Suggested attacks on the remaining branch
 
-- The lattice side, the instrument that decided the product routes in C914: which
-  odd-degree isogenies from a genus-five Jacobian are compatible with the exotic
-  two-primary gluing kernel of the packet proposition? Torelli is unavailable
-  once the comparison is an isogeny of degree greater than one, so the gluing
-  data is the natural replacement.
+- ~~The lattice side, the instrument that decided the product routes in C914:
+  which odd-degree isogenies from a genus-five Jacobian are compatible with the
+  exotic two-primary gluing kernel?~~ **Withdrawn 2026-08-19.** This has no grip.
+  An odd-degree isogeny from a genus-five Jacobian needs a sublattice of odd
+  index carrying `m` times a unimodular form, and those exist in abundance in any
+  unimodular symplectic lattice — take `m e_i` with `f_i` in a symplectic basis.
+  The glue bit in C914 only because an orthogonal splitting into sub-Hodge
+  structures constrains the discriminant form; an irreducible genus-five curve
+  gives no splitting. The discriminating data is the position of the period
+  point, not the lattice. See
+  `../2026-08-19-c921-pencil-level-structure-and-eckardt.md`.
 - Roulleau's `D_5`-fibration of the Fano surface, now aimed at exhibiting or
   excluding a genus-five curve whose Jacobian receives `J(X_b)`.
 - The Klein cubic threefold is a member of this pencil with a complex-multiplication
