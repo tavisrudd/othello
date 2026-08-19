@@ -126,7 +126,7 @@ any of the above.
 
 | task | state | next gate |
 |---|---|---|
-| [C919 — series apparatus, perspective merge, and epigraph rewrite](../clebsch-tasks/c919-series-apparatus-and-epigraph.md) | planning delivered, no manuscript edited; spans all five papers | author decides placement, epigraph proposal, and whether Paper III is edited here or by C816 |
+| [C919 — de-brand the paper fronts, move the programme to a post-conclusion coda](../clebsch-tasks/c919-series-apparatus-and-epigraph.md) | plan agreed against the author's implementation packet, no manuscript edited; all five papers in one pass | execute the de-branding, codas, interlude redistribution, Paper II conclusion, and Paper V conclusion split |
 | [C855 — Paper I Lean referee-artifact standards remediation](../clebsch-tasks/c855-paper-i-lean-referee-artifact-remediation.md) | active; authority repair, exact 51-terminal rigidity and 24-terminal orientation facts, guarded replays, and exporter-only finitegeom adoption complete | resume theorem-completeness, correspondence, distribution, and release closure |
 | [C800 — Paper III operator and formal-release closure](../clebsch-tasks/c800-paper-iii-operator-formal-release-closure.md) | fourth Paper III route task; wait for C799/C815/C823 source freezes | formalize retained identities, reconcile Paper III formal maps onto one source closure |
 | [C815 — four-shadow Lean formalization](../clebsch-tasks/c815-four-shadow-lean-formalization.md) | reopened; all three gates green with no compiled-evaluation axiom; four-shadow recognition and aligned-design faithfulness formalized | formalize gap class B (arithmetic, orientation, harmonic rows) and the reduced weighted-Jacobian bridge, then hand the API to C823 |
