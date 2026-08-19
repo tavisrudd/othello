@@ -2,14 +2,14 @@ digraph manuscript {
   rankdir=BT;
   node [shape=box, style=filled, fontname="Helvetica", fontsize=10];
   edge [fontname="Helvetica", fontsize=8];
-  "cor:coprime-separation" [fillcolor="#ffffff", tooltip="absent"];
+  "cor:coprime-separation" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
   "cor:cubic-formal-germ" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
   "cor:cubic-product-nu" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
-  "cor:fermat-separation" [fillcolor="#ffffff", tooltip="absent"];
+  "cor:fermat-separation" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
   "cor:p3-nu6" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
   "cor:universal-ch0" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
   "cor:v14-one-step" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
-  "cor:voisin-separation" [fillcolor="#ffffff", tooltip="absent"];
+  "cor:voisin-separation" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
   "def:framed-sixth-multiplicity" [fillcolor="#fde8c8", tooltip="fragment"];
   "def:monomial-specialization" [fillcolor="#fde8c8", tooltip="fragment"];
   "def:strict-novikov-admissible" [fillcolor="#fde8c8", tooltip="fragment"];
@@ -63,6 +63,7 @@ digraph manuscript {
   "thm:six-axis-divided-powers" [fillcolor="#fde8c8", tooltip="fragment"];
   "Batyrev:fano-toric-presentation" [shape=note, fillcolor="#eeeeee"];
   "BehrendProduct:small-product-formula" [shape=note, fillcolor="#eeeeee"];
+  "CT:separated-variable-criterion" [shape=note, fillcolor="#eeeeee"];
   "Cai:curve-calculation" [shape=note, fillcolor="#eeeeee"];
   "Cai:small-even-connection" [shape=note, fillcolor="#eeeeee"];
   "Conrad:lem-2.1.4" [shape=note, fillcolor="#eeeeee"];
@@ -80,11 +81,15 @@ digraph manuscript {
   "KKPYY:sec-5.2.2" [shape=note, fillcolor="#eeeeee"];
   "McDuffSalamon:deformation-invariance" [shape=note, fillcolor="#eeeeee"];
   "PutSinger:ch-3" [shape=note, fillcolor="#eeeeee"];
+  "Voisin:minimal-class-locus" [shape=note, fillcolor="#eeeeee"];
+  "YYZ:coprime-degree-family" [shape=note, fillcolor="#eeeeee"];
+  "YYZ:coprime-degrees-persist" [shape=note, fillcolor="#eeeeee"];
   "a5-pencil-eckardt" [shape=note, fillcolor="#eeeeee"];
   "hirzebruch-euler-spectrum" [shape=note, fillcolor="#eeeeee"];
   "Batyrev:fano-toric-presentation" -> "lem:hirzebruch-euler-spectrum" [style=dotted];
   "BehrendProduct:small-product-formula" -> "lem:hirzebruch-euler-spectrum" [style=dotted];
   "BehrendProduct:small-product-formula" -> "prop:hirzebruch-specialized-vanishing" [style=dotted];
+  "CT:separated-variable-criterion" -> "cor:fermat-separation" [style=dotted];
   "Cai:curve-calculation" -> "prop:no-curve" [style=dotted];
   "Cai:small-even-connection" -> "prop:cubic-block-data" [style=dotted];
   "Conrad:lem-2.1.4" -> "lem:crossing" [style=dotted];
@@ -106,6 +111,9 @@ digraph manuscript {
   "KKPYY:sec-5.2.2" -> "lem:hodge-base" [style=dotted];
   "McDuffSalamon:deformation-invariance" -> "lem:hirzebruch-euler-spectrum" [style=dotted];
   "PutSinger:ch-3" -> "prop:residue-discriminant-exponents" [style=dotted];
+  "Voisin:minimal-class-locus" -> "cor:voisin-separation" [style=dotted];
+  "YYZ:coprime-degree-family" -> "cor:coprime-separation" [style=dotted];
+  "YYZ:coprime-degrees-persist" -> "cor:coprime-separation" [style=dotted];
   "a5-pencil-eckardt" -> "prop:A5-not-coprime" [style=dotted];
   "cor:universal-ch0" -> "prop:A5-nonseparated" [style=solid];
   "hirzebruch-euler-spectrum" -> "lem:hirzebruch-euler-spectrum" [style=dotted];
@@ -146,5 +154,8 @@ digraph manuscript {
   "prop:residue-discriminant-exponents" -> "prop:no-curve" [style=dashed];
   "prop:six-axis-polarization" -> "prop:no-elliptic-product" [style=dashed];
   "prop:six-axis-polarization" -> "prop:no-elliptic-product" [style=solid];
+  "thm:every-cubic" -> "cor:coprime-separation" [style=dashed];
+  "thm:every-cubic" -> "cor:fermat-separation" [style=dashed];
+  "thm:every-cubic" -> "cor:voisin-separation" [style=dashed];
   "thm:separation-family" -> "prop:A5-not-coprime" [style=solid];
 }

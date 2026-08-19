@@ -83,7 +83,11 @@ codimension at most three parametrizing threefolds with universally trivial
 
 \begin{corollary}[Separation in codimension three]
 \label{cor:voisin-separation}
-\coverage{absent}%
+\coverage{conditional_deduction}%
+\lean{primitiveMinimalClassFamily_universalCH0_and_irrational_stabilization,%
+ exists_universalCH0_cubic_with_irrational_stabilization}%
+\uses{thm:every-cubic}%
+\imports{Voisin:minimal-class-locus}%
 There is a nonempty countable union of subvarieties of codimension at most
 three in the moduli space of smooth cubic threefolds such that, for every
 member \(X\), both \(X\) and \(X\times\PP^1\) are universally
@@ -97,7 +101,10 @@ Fermat equation directly.
 
 \begin{corollary}[Fermat]
 \label{cor:fermat-separation}
-\coverage{absent}%
+\coverage{conditional_deduction}%
+\lean{fermatCubic_universalCH0_and_irrational_stabilization}%
+\uses{thm:every-cubic}%
+\imports{CT:separated-variable-criterion}%
 The fourfold
 \[
   \{x_1^3+x_2^3+x_3^3+x_4^3+x_5^3=0\}\times\PP^1
@@ -114,7 +121,10 @@ universally \(CH_0\)-trivial; the same degrees persist on
 
 \begin{corollary}[Coprime-degree cubics]
 \label{cor:coprime-separation}
-\coverage{absent}%
+\coverage{conditional_deduction}%
+\lean{coprimeUnirationalDegrees_universalCH0_and_irrational_stabilization}%
+\uses{thm:every-cubic}%
+\imports{YYZ:coprime-degree-family, YYZ:coprime-degrees-persist}%
 Let \(X\) be one of the cubic threefolds of \cite[Theorem~3.3]{YYZ}.  Then
 \(X\times\PP^1\) admits unirational parametrizations of coprime degrees, is
 universally \(CH_0\)-trivial, and is irrational.

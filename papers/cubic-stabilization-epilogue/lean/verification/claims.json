@@ -37,33 +37,43 @@
     },
     {
       "manuscript_label": "cor:voisin-separation",
-      "coverage": "absent",
-      "declarations": [],
-      "objects": "The moduli space of smooth complex cubic threefolds, the countable union of subvarieties of codimension at most three along which the primitive minimal class is algebraic, the product with projective one-space, universal CH0-triviality, and rationality.",
-      "hypotheses": "Voisin's construction of the codimension-at-most-three components, the projective bundle formula for Chow groups, and the one-step irrationality theorem of this paper.",
-      "conclusion": "Along that countable union both the threefold and its product with projective one-space are universally CH0-trivial while the product is irrational.",
-      "cautions": "Not formalized. The cited Voisin construction is an imported classical input and is not reproved here.",
-      "statement_digest": "639c4ac95c72a642c2ec64c48d3fe1957c7127e1ae0cb77bf2f69ad49a3b08de"
+      "coverage": "conditional_deduction",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.primitiveMinimalClassFamily_universalCH0_and_irrational_stabilization",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.exists_universalCH0_cubic_with_irrational_stabilization"
+      ],
+      "objects": "A parameter type indexing the family; one typed family of variety objects carrying a named projective-line product operation, a rationality predicate, a natural-valued atom multiplicity and a dimension; a separate type of intermediate-Jacobian objects with predicates for smooth complex cubic status, algebraicity of the primitive minimal class, and universal CH0-triviality; and the cubic zero-packet atom, recorded by its parity ranks and the value of its residue discriminant.",
+      "hypotheses": "Every indexed fibre is a smooth complex cubic threefold whose intermediate Jacobian has algebraic primitive minimal class; Voisin's equivalence between that algebraicity and universal CH0-triviality, for every smooth cubic under consideration; preservation of universal CH0-triviality under the named projective-line product; and, for every fibre, the atom input of the unconditional atomic route together with the ledger's projective-line stabilization and low-dimensional exclusion premises.  The existential form additionally assumes the parameter type nonempty.",
+      "conclusion": "Every fibre is universally CH0-trivial, its projective-line stabilization is universally CH0-trivial, and that stabilization is not rational; and, when the parameter type is nonempty, some cubic threefold with all three properties exists.",
+      "cautions": "Lean checks only the composition.  It constructs no moduli space, no countable union of subvarieties, no Chow group, no projective-bundle formula, no intermediate Jacobian, no primitive minimal class, and no quantum connection.  Voisin's criterion, the existence of the locus, and its codimension bound are imported; codimension is not represented at all, since the parameter type carries no dimension, and the existential statement rests on a supplied nonemptiness assumption.  Irrationality enters through the typed premises of the atomic route, so this row is no stronger than the row of thm:every-cubic.",
+      "statement_digest": "639c4ac95c72a642c2ec64c48d3fe1957c7127e1ae0cb77bf2f69ad49a3b08de",
+      "terminal_digest": "93be2ca7a8b1f6854b1e5764f7ec352cb989d9abb6e5c02e789f0eadc7630385"
     },
     {
       "manuscript_label": "cor:fermat-separation",
-      "coverage": "absent",
-      "declarations": [],
-      "objects": "The Fermat cubic threefold, its product with projective one-space, universal CH0-triviality, and rationality.",
-      "hypotheses": "Colliot-Thelene's almost-diagonal theorem applied to the Fermat equation, the projective bundle formula for Chow groups, and the one-step irrationality theorem of this paper.",
-      "conclusion": "The named fourfold is universally CH0-trivial and irrational.",
-      "cautions": "Not formalized. Universal CH0-triviality of the threefold is an imported classical input.",
-      "statement_digest": "5181875068f9603708f42592697e31e2853ae3f942b17c5bf6f2df14dbfdbcb2"
+      "coverage": "conditional_deduction",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.fermatCubic_universalCH0_and_irrational_stabilization"
+      ],
+      "objects": "A typed variety object with a named projective-line product operation and a rationality predicate; a supplied universal CH0-triviality predicate; an assignment of a defining polynomial in five variables over a nontrivial commutative coefficient ring; the notion of a decomposition of such a polynomial as a sum of polynomials in pairwise disjoint groups of at most three variables; the Fermat form, the sum of the cubes of the five variables; and the cubic zero-packet atom with its ledger.",
+      "hypotheses": "The almost-diagonal criterion, in the form that a variety whose defining polynomial admits such a decomposition is universally CH0-trivial; preservation of universal CH0-triviality under the named projective-line product; the identification of the defining polynomial of the given variety with the Fermat form; and the atom input of the atomic route with the ledger's stabilization and low-dimensional exclusion premises.",
+      "conclusion": "The projective-line stabilization of that variety is universally CH0-trivial and is not rational.",
+      "cautions": "Lean constructs no hypersurface, no Chow group, and no projective-bundle formula, and proves nothing about smoothness: the criterion enters as a premise about the supplied predicate, and the ground field of the geometric statement is not represented.  What is proved rather than assumed is the combinatorial hypothesis of that criterion, that the sum of the cubes of five variables is a sum of forms in pairwise disjoint singleton groups of variables, hence in groups of at most three.  The coefficient ring is an arbitrary nontrivial commutative ring.  Irrationality enters through the typed premises of the atomic route.",
+      "statement_digest": "5181875068f9603708f42592697e31e2853ae3f942b17c5bf6f2df14dbfdbcb2",
+      "terminal_digest": "00ba7985fc8a6d68e97b71096df8be7475023521ae184353a893d846ae5f0423"
     },
     {
       "manuscript_label": "cor:coprime-separation",
-      "coverage": "absent",
-      "declarations": [],
-      "objects": "The Yang-Yu-Zhu cubic threefolds with unirational parametrizations of degrees two and three, their products with projective spaces, universal CH0-triviality, and rationality.",
-      "hypotheses": "The Yang-Yu-Zhu parametrization theorem and its persistence under multiplication by projective space, the diagonal-decomposition consequence of coprime degrees, and the one-step irrationality theorem of this paper.",
-      "conclusion": "For those threefolds the product with projective one-space carries unirational parametrizations of coprime degrees, is universally CH0-trivial, and is irrational.",
-      "cautions": "Not formalized. The parametrizations and their coprime-degree consequence are imported inputs; the statement does not address stable rationality.",
-      "statement_digest": "05bb980d4dbd39b643610c3717227049567ab08cefea8ede9d8deddf802ec684"
+      "coverage": "conditional_deduction",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.coprimeUnirationalDegrees_universalCH0_and_irrational_stabilization"
+      ],
+      "objects": "A typed variety object with a named projective-line product operation and a rationality predicate; supplied predicates for universal CH0-triviality and for admitting a unirational parametrization of a given natural-number degree; and the cubic zero-packet atom with its ledger.",
+      "hypotheses": "The passage from two unirational parametrizations of coprime degrees to universal CH0-triviality; persistence of each parametrization degree under the named projective-line product; unirational parametrizations of degrees two and three on the given cubic threefold; and the atom input of the atomic route with the ledger's stabilization and low-dimensional exclusion premises.",
+      "conclusion": "The projective-line stabilization admits unirational parametrizations of degrees two and three, is universally CH0-trivial, and is not rational.",
+      "cautions": "Lean constructs no unirational parametrization, no decomposition of the diagonal, and no Chow group; the degree predicate is opaque and the criterion is a premise.  Coprimality of two and three is the only arithmetic proved.  The statement is about one supplied cubic threefold, asserts nothing about other members of the cited family, and addresses stable rationality nowhere.  Irrationality enters through the typed premises of the atomic route.",
+      "statement_digest": "05bb980d4dbd39b643610c3717227049567ab08cefea8ede9d8deddf802ec684",
+      "terminal_digest": "a5f212d93180288b2778adbfd5fa9121174ef93282c857d37b3e209d333fed20"
     },
     {
       "manuscript_label": "thm:separation-family",
