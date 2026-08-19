@@ -86,17 +86,25 @@ are both `I₄+J₄`, and the companion model does not commute with it, so that
 model is a model of the slope *type* only and cannot be the slope of a kernel in
 these chart coordinates.
 
-Adapted models do exist: an exhaustive enumeration of the two-power-sixteen
-four-by-four matrices over the two-element field finds twelve that satisfy both
-`T²+T+1=0` and self-adjointness for `I₄+J₄`, for instance the matrix with rows
-`(0,0,1,1)`, `(1,1,0,1)`, `(1,1,0,0)`, `(0,1,1,1)`.  That enumeration is a
-scratch check, not tracked evidence: nothing in the paper or in Lean rests on
-it, and promoting it would need the usual committed bundle.  Its use here is to
-say that the successor step is available and cheap — exhibit an adapted slope,
-diagonalize it over the unramified quadratic extension where its two eigenvalues
-differ by a unit, and the change of basis, the scalars, and the error terms stop
-being supplied.  At three the corresponding step is easier still, because the
-slope is scalar and the depth-one summand stays one block.
+Adapted models do exist modulo two: an exhaustive enumeration of the
+two-power-sixteen four-by-four matrices over the two-element field finds twelve
+that satisfy both `T²+T+1=0` and self-adjointness for `I₄+J₄`, for instance the
+matrix with rows `(0,0,1,1)`, `(1,1,0,1)`, `(1,1,0,0)`, `(0,1,1,1)`.  That
+enumeration is a scratch check, not tracked evidence: nothing in the paper or in
+Lean rests on it, and promoting it would need the usual committed bundle.
+
+**Correction, same day.**  The successor step this suggested is not cheap, and
+the follow-up pass below settles why.  No adapted slope exists over the
+integers, or over any ordered coefficient ring at all: the depth-one block and
+its dual form are both positive semidefinite, and a self-adjoint operator for a
+semidefinite form cannot satisfy the relation of a primitive cube root of unity.
+The twelve residue solutions do lift two-adically — a Hensel-style linear
+solve lifts each of them through `2⁸` without obstruction — so the slope exists
+over the two-adic integers, but with no closed form.  Exhibiting it in Lean
+therefore needs genuine two-adic coefficients or an abstract complete local ring
+with idempotent lifting, not a matrix one can write down.  At three the
+corresponding step is genuinely easy, because the slope is scalar and the
+depth-one summand stays one block; that half is now done.
 
 ## Coverage
 
@@ -179,3 +187,46 @@ geometry item of the backlog.
 Not exported.  The standalone paper repository was last synchronized from
 `8455eb6d1` and now lags this pass and the concurrent Eckardt work; the next
 export should carry both rather than either alone.
+
+
+## Follow-up passes, same day
+
+**The separated-variable clause of the separation theorem, authority
+`140930f1f`.**  The manuscript's separation theorem ended with a clause that was
+in no Lean terminal, and the Eckardt work of the concurrent task had sharpened
+its content from a finiteness statement to an exact one.  The clause is now
+formalized in `Applications/SeparatedVariableModuliExclusion.lean`: a member
+projectively equivalent to a cubic of separated-variable type carries an Eckardt
+point, hence lies over the family's single Eckardt moduli point, and that point
+is attained, so the separated-variable locus of the family in coarse moduli is
+exactly that point.  The Eckardt criterion for separated-variable cubics, its
+invariance under projective equivalence, the Eckardt locus of the pencil, and
+the witness at the distinguished point are the four typed premises; coarse
+moduli is an opaque type whose points are compared only by equality.  The
+conclusion structure of the separation theorem carries the two new clauses, so
+the manuscript theorem, its introduction paragraph, and the synthesis discussion
+now name the Fermat point instead of saying all but finitely many, and
+`prop:A5-nonseparated` moves from absent to a conditional deduction.
+
+**The depth-one slope at three and its bound at two, authority `c78c66558`.**
+A slope whose reduction modulo the uniformizer is scalar is proved to equal that
+scalar plus the uniformizer times an integral error term, assembled from the
+divisibility witnesses of the entries with nothing divided, and for a slope in
+that form the split-slope commutator of the graph-coordinate descent conditions
+is the commutator of the coefficient block with the actual slope.  At three the
+depth-one summand is a single block, so this determines the split presentation
+data from the slope itself, which is the one algebraic premise the earlier pass
+had to supply.  At two the same pass records the obstruction: the depth-one
+block pairs a vector to the sum of the squares of its coordinates and of their
+pairwise differences, its dual form to the inverse of five times the sum of the
+squares and the square of the coordinate sum, both positive semidefinite over a
+linearly ordered commutative ring and positive on the first coordinate vector,
+and no matrix satisfying the relation of a primitive cube root of unity is
+self-adjoint for either.  That statement supports no manuscript claim and is
+registered as machinery, with its reason recorded: it says why the exotic slope
+cannot be exhibited as an integral matrix.
+
+Coverage after both passes is 62 claims over 290 reviewer terminals, 5 absent,
+27 fragmentary, 29 conditional, 1 complete, with 47 machinery rows.  All gates
+green, including the deterministic manuscript rebuild, which the first pass had
+deliberately skipped while the concurrent session held the same sections.

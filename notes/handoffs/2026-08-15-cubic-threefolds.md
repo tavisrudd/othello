@@ -173,7 +173,11 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   directly: the depth decomposition, the split coordinates, and the depth,
   scalar, and slope-error families are constructed from the chart instead of
   supplied, and the eigenblocks of a self-adjoint depth-one slope are proved
-  orthogonal.
+  orthogonal.  At three those data come from the slope itself; at two the
+  exotic slope is proved to have no model over an ordered coefficient ring.
+  The separated-variable clause of the separation theorem is also formalized,
+  so the manuscript names the Fermat point instead of saying all but finitely
+  many.
   Card:
   `../cubic-threefolds-tasks/c910-cubic-stabilization-lean-companion.md`; gap audit
   `../2026-08-18-c910-post-restructure-gap-audit.md`; anchor report

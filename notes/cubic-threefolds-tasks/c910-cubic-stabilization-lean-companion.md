@@ -666,6 +666,28 @@ three terminals and `thm:six-axis-divided-powers` one; both stay fragments, and
 the snapshot moves to 287 reviewer terminals.  Report:
 [`../2026-08-19-c910-six-axis-chart-split-presentation.md`](../2026-08-19-c910-six-axis-chart-split-presentation.md).
 
+**The separation theorem's last clause and the depth-one slope, 2026-08-19,
+authorities `140930f1f` and `c78c66558`.**  The separated-variable clause of
+`thm:separation-family` is formalized in
+`Applications/SeparatedVariableModuliExclusion.lean`: a member projectively
+equivalent to a cubic of separated-variable type carries an Eckardt point, hence
+lies over the family's single Eckardt moduli point, and that point is attained,
+so the separated-variable locus is exactly it.  The manuscript theorem and the
+surrounding discussion now name the Fermat point instead of saying all but
+finitely many, and `prop:A5-nonseparated` moves from absent to a conditional
+deduction.  On the chart side, a slope with scalar residue is proved to split as
+that scalar plus the uniformizer times an integral error term, with the
+split-slope commutator identified with the commutator of the coefficient block
+with the actual slope, so at three the split presentation data come from the
+slope itself.  At two no such matrix exists over an ordered coefficient ring:
+the depth-one block and its dual form are positive semidefinite, and no matrix
+satisfying the relation of a primitive cube root of unity is self-adjoint for
+either, so the exotic slope is intrinsically two-adic.  That statement is
+registered as machinery.  Coverage is 62 claims over 290 reviewer terminals: 5
+absent, 27 fragmentary, 29 conditional, 1 complete, with 47 machinery rows.
+Report:
+[`../2026-08-19-c910-six-axis-chart-split-presentation.md`](../2026-08-19-c910-six-axis-chart-split-presentation.md).
+
 ## Prioritized Lean backlog
 
 Work in this order unless a later literature or library dependency changes the
@@ -737,13 +759,16 @@ quotient action, tensor symplectic model, the exact four-half classification
 priority 2 below.
 
 1. **Explicit six-axis local-chart bridge — done 2026-08-19.**  The concrete
-   `6I-J` lattice now reaches the graph-coordinate and self-adjoint lifting
-   theorems through `GraphLattices/SixAxisMarkedPresentation.lean`, as recorded
-   above.  What is left of this item is the adapted two-primary slope,
-   self-adjoint for the depth-one block and of exotic type, with its eigenbasis
-   over a ring containing a primitive cube root of unity, and the parallel
-   scalar statement at three; those remove the change of basis, the scalars, and
-   the slope errors from the supplied data.
+   `6I-J` lattice reaches the graph-coordinate and self-adjoint lifting theorems
+   through `GraphLattices/SixAxisMarkedPresentation.lean`, and the three-primary
+   slope data are derived from the slope itself.  The two-primary eigenblock
+   decomposition stays supplied, and not for want of effort: no slope of exotic
+   type is self-adjoint for the depth-one block over an ordered coefficient
+   ring, so it cannot be exhibited by an integral matrix.  Removing that premise
+   needs two-adic coefficients, either `PadicInt` with an explicit unramified
+   quadratic extension or an abstract complete local ring with idempotent
+   lifting, which is a separate piece of infrastructure rather than a matrix to
+   write down.
 2. **Relative six-axis geometry.**  Replace opaque inputs by actual elliptic
    schemes, quotient and inclusion maps, the relative isogeny, polarization
    pullback, discriminant kernels, and continuous packet classifier.
