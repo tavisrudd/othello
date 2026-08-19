@@ -239,15 +239,28 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   only through an isogeny of degree greater than one. The integral glued model
   of the four-dimensional factor is derived and the Schottky count evaluated;
   that pass also corrects C914's description of the factor, which is of
-  symplectic type `(1,1,1,5)` rather than principally polarized. By elimination
-  over `Q` the pencil's Eckardt locus is exactly the two Fermat members and its
-  singular locus is exactly six members, so the epilogue's separation theorem
-  keeps a qualifier but can name the single exceptional moduli point instead of
-  saying "all but finitely many". Card:
+  symplectic type `(1,1,1,5)` rather than principally polarized. That pass also
+  located the pencil's Eckardt locus at the two Fermat members and its singular
+  locus at six members, by elimination over `Q`; C923 has since reproved the
+  Eckardt half structurally, so the epilogue's separation theorem keeps a
+  qualifier but can name the single exceptional moduli point instead of saying
+  "all but finitely many". Card:
   `../cubic-threefolds-tasks/c921-four-dimensional-factor-jacobian.md`; reports
   and evidence bundles `../2026-08-19-c921-genus-four-branch.md`,
   `../2026-08-19-c921-integral-glued-model.md` and
   `../2026-08-19-c921-pencil-level-structure-and-eckardt.md`.
+- **C923 — closed 2026-08-19.** The pencil's Eckardt locus is now proved from
+  complex reflection groups rather than from the elimination, and
+  `prop:A5-not-coprime` is sharper for it: exactly two members, interchanged by
+  the normalizer of `A_5`, each with exactly thirty Eckardt points, both the
+  Fermat cubic threefold. The manuscript's only remaining premise-level
+  computation is `lem:hirzebruch-euler-spectrum`. Naming the Fermat point in
+  `thm:separation-family` is no longer blocked by any computation; the
+  remaining gate is C910 sharpening
+  `Applications.SeparationFamilyConclusion`, without which that row would drop
+  to a fragment. Card:
+  `../cubic-threefolds-tasks/c923-eckardt-locus-structural-proof.md`; report
+  `../2026-08-19-c923-eckardt-locus-structural-proof.md`.
 - **C917 — closed 2026-08-18.** The epilogue introduction now says why the
   direct Clemens--Griffiths mechanism gives no contradiction after one
   stabilization and where the result sits relative to Guéré
