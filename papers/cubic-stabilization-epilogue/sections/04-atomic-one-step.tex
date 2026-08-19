@@ -712,8 +712,12 @@ to harmless scalar residue normalizations.
 \subsubsection{Flatness freezes the residue discriminant}
 
 \begin{proposition}[Rank-two rigidity]\label{prop:rank2-rigidity}
-\coverage{fragment}%
-\lean{atomicRankTwo_modifiedBase_pole_eq_zero,%
+\coverage{conditional_deduction}%
+\lean{atomicRankTwo_modifiedBase_regular_of_flat_connection,%
+  atomicRankTwo_modifiedResidue_lax_of_flat_connection,%
+  atomicRankTwo_residueDiscriminant_frozen_by_horizontality_and_flatness,%
+  atomicRankTwo_residueDiscriminant_constant_over_formal_germ,%
+  atomicRankTwo_modifiedBase_pole_eq_zero,%
   atomicRankTwo_residueDiscriminant_constant_along_base}%
 On $\mathcal U^\times$, the modified connection is regular in every base
 direction and the residue satisfies

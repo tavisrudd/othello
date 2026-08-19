@@ -101,6 +101,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.CubicZ
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.HirzebruchEulerSpectrum
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.MonomialSpecializationSeparation
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.HirzebruchSpecializedVanishing
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.AtomicRankTwoFlatRigidity
 
 /-!
 # Reviewer interface for the cubic-stabilization companion
@@ -5237,6 +5238,104 @@ theorem atomicRankTwo_residueDiscriminant_constant_along_base
     (lax : R.map derivation = G * R - R * G) :
     derivation (Quantum.residueDiscriminant R) = 0 :=
   Quantum.lax_residueDiscriminant_map_eq_zero additive leibniz R G lax
+
+/-- Reviewer-facing regularity of the base direction after the elementary
+modification, derived from flatness of the connection rather than from a
+supplied coefficient equation.  The connection of a centered rank-two factor is
+presented by the two power series `loop = u * A(u)` and `base = u * B(u)`
+obtained from its loop and base connection matrices by clearing their simple
+poles, and flatness is the single series identity `IsFlatPair`.  In an adapted
+frame, where the leading coefficient of the loop direction is the square-zero
+matrix with a unit in its upper-right entry and the regular coefficient
+preserves the nilpotent line, flatness forces the leading coefficient of the
+modified base direction to vanish: the modified connection has no pole in the
+base direction.  Lean constructs no `F`-bundle, spectral cover, or atomic
+factor; that such a factor supplies a connection of this shape in an adapted
+frame is the geometric input. -/
+theorem atomicRankTwo_modifiedBase_regular_of_flat_connection
+    {B : Type*} [CommRing B] {derivation : B → B}
+    (additive : ∀ x y, derivation (x + y) = derivation x + derivation y)
+    (leibniz : ∀ x y, derivation (x * y) = derivation x * y + x * derivation y)
+    {loop base : PowerSeries (Matrix (Fin 2) (Fin 2) B)} {unitValue : B}
+    (unitProperty : IsUnit unitValue) (twoUnit : IsUnit (2 : B))
+    (adapted : PowerSeries.coeff 0 loop = Quantum.adaptedLeadingOperator unitValue)
+    (nilpotentLine : (PowerSeries.coeff 1 loop) 1 0 = 0)
+    (flat : Quantum.IsFlatPair derivation loop base) :
+    PowerSeries.coeff 0 (Quantum.modifiedBase base) = 0 :=
+  Quantum.modifiedBase_leadingCoefficient_eq_zero_of_isFlatPair additive leibniz
+    unitProperty twoUnit adapted nilpotentLine flat
+
+/-- Reviewer-facing Lax equation for the residue of the modified lattice,
+derived from flatness.  With no pole left in the base direction, the next order
+of flatness in the modified lattice says that the derivation of the coefficient
+ring carries the modified residue to its commutator with the regular
+coefficient of the modified base direction, which is the manuscript's Lax
+equation.  The regular coefficient is not supplied: it is the first coefficient
+of the modified base direction. -/
+theorem atomicRankTwo_modifiedResidue_lax_of_flat_connection
+    {B : Type*} [CommRing B] {derivation : B → B}
+    (additive : ∀ x y, derivation (x + y) = derivation x + derivation y)
+    (leibniz : ∀ x y, derivation (x * y) = derivation x * y + x * derivation y)
+    {loop base : PowerSeries (Matrix (Fin 2) (Fin 2) B)} {unitValue : B}
+    (unitProperty : IsUnit unitValue) (twoUnit : IsUnit (2 : B))
+    (adapted : PowerSeries.coeff 0 loop = Quantum.adaptedLeadingOperator unitValue)
+    (nilpotentLine : (PowerSeries.coeff 1 loop) 1 0 = 0)
+    (flat : Quantum.IsFlatPair derivation loop base) :
+    (Quantum.modifiedResidue loop).map derivation
+      = PowerSeries.coeff 1 (Quantum.modifiedBase base) * Quantum.modifiedResidue loop
+        - Quantum.modifiedResidue loop * PowerSeries.coeff 1 (Quantum.modifiedBase base) :=
+  Quantum.modifiedResidue_lax_of_isFlatPair additive leibniz unitProperty twoUnit
+    adapted nilpotentLine flat
+
+/-- Reviewer-facing rank-two rigidity chain in one statement.  For a centered
+rank-two factor in an adapted frame, with a pairing that is horizontal for the
+loop direction and whose leading coefficient has invertible determinant, and
+with a flat pair of connection matrices, every derivation of the coefficient
+ring annihilates the residue discriminant of the canonical elementary
+modification.  Horizontality supplies the property of the regular coefficient
+that makes the modification regular, and flatness supplies both the vanishing of
+the residual base pole and the Lax equation; neither is assumed. -/
+theorem atomicRankTwo_residueDiscriminant_frozen_by_horizontality_and_flatness
+    {B : Type*} [CommRing B] {derivation : B → B}
+    (additive : ∀ x y, derivation (x + y) = derivation x + derivation y)
+    (leibniz : ∀ x y, derivation (x * y) = derivation x * y + x * derivation y)
+    {loop base pairing : PowerSeries (Matrix (Fin 2) (Fin 2) B)} {unitValue : B}
+    (unitProperty : IsUnit unitValue) (twoUnit : IsUnit (2 : B))
+    (adapted : PowerSeries.coeff 0 loop = Quantum.adaptedLeadingOperator unitValue)
+    (nondegenerate : IsUnit ((PowerSeries.coeff 0 pairing).det))
+    (horizontal : Quantum.IsHorizontalPairing loop pairing)
+    (flat : Quantum.IsFlatPair derivation loop base) :
+    derivation (Quantum.residueDiscriminant (Quantum.modifiedResidue loop)) = 0 :=
+  Quantum.residueDiscriminant_modifiedResidue_map_eq_zero_of_horizontal_flat additive
+    leibniz unitProperty twoUnit adapted nondegenerate horizontal flat
+
+/-- Reviewer-facing constancy of the residue discriminant over a formal germ of
+the base.  The germ is modelled by the ring of multivariate formal power series
+in its coordinates over a field of characteristic zero.  For a centered rank-two
+factor in an adapted frame whose leading operator has an invertible upper-right
+entry, with a horizontal pairing whose leading coefficient has invertible
+determinant and a connection flat in every coordinate direction, the residue
+discriminant of the canonical elementary modification is a constant series.  No
+property of the regular coefficient is assumed: it is supplied by horizontality,
+and two is invertible in the germ ring because it is the image of an invertible
+scalar.  Lean does not identify this formal model with a rigid-analytic germ,
+and constructs neither the connection nor the pairing. -/
+theorem atomicRankTwo_residueDiscriminant_constant_over_formal_germ
+    {σ : Type*} [DecidableEq σ] {K : Type*} [Field K] [CharZero K]
+    {loop pairing : PowerSeries (Matrix (Fin 2) (Fin 2) (MvPowerSeries σ K))}
+    {baseDirection : σ → PowerSeries (Matrix (Fin 2) (Fin 2) (MvPowerSeries σ K))}
+    {unitValue : MvPowerSeries σ K} (unitProperty : IsUnit unitValue)
+    (adapted : PowerSeries.coeff 0 loop = Quantum.adaptedLeadingOperator unitValue)
+    (nondegenerate : IsUnit ((PowerSeries.coeff 0 pairing).det))
+    (horizontal : Quantum.IsHorizontalPairing loop pairing)
+    (flat : ∀ direction, Quantum.IsFlatPair (Quantum.formalPartialDerivative direction)
+      loop (baseDirection direction)) :
+    Quantum.residueDiscriminant (Quantum.modifiedResidue loop)
+      = MvPowerSeries.C
+          (MvPowerSeries.constantCoeff
+            (Quantum.residueDiscriminant (Quantum.modifiedResidue loop))) :=
+  Quantum.residueDiscriminant_modifiedResidue_eq_constant_of_horizontal_flat unitProperty
+    adapted nondegenerate horizontal flat
 
 /-- Reviewer-facing exponent interpretation of the residue discriminant.  Over
 a coefficient ring in which the residue of the canonical modified lattice has
