@@ -129,12 +129,16 @@ def blockOffDiagonalProjection (label : coordinate → factorIndex) :
     ext row column
     by_cases sameLabel : label row = label column <;> simp [sameLabel]
 
+/-- The block-diagonal projection keeps the entries whose row and column carry
+the same label and sets the others to zero. -/
 @[simp]
 theorem blockDiagonalProjection_apply (label : coordinate → factorIndex)
     (matrix : Matrix coordinate coordinate R) (row column : coordinate) :
     blockDiagonalProjection label matrix row column
       = if label row = label column then matrix row column else 0 := rfl
 
+/-- The block off-diagonal projection keeps the entries whose row and column
+carry different labels and sets the others to zero. -/
 @[simp]
 theorem blockOffDiagonalProjection_apply (label : coordinate → factorIndex)
     (matrix : Matrix coordinate coordinate R) (row column : coordinate) :
@@ -347,6 +351,9 @@ def blockSeparationInverse (label : coordinate → factorIndex)
     ext row column
     by_cases sameLabel : label row = label column <;> simp [sameLabel, mul_left_comm]
 
+/-- The entrywise inverse of the separation multiplies each entry with
+different labels by the supplied inverse of the difference of the two scalars,
+and sets the entries with equal labels to zero. -/
 @[simp]
 theorem blockSeparationInverse_apply (label : coordinate → factorIndex)
     (witness : factorIndex → factorIndex → R) (matrix : Matrix coordinate coordinate R)

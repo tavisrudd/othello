@@ -60,10 +60,12 @@ def rightMultiplication [Fintype columnIndex] (V : Matrix columnIndex columnInde
   map_smul' scalar X := by
     simp [Matrix.smul_mul]
 
+/-- Left multiplication acts by multiplying on the left. -/
 @[simp]
 theorem leftMultiplication_apply [Fintype rowIndex] (U : Matrix rowIndex rowIndex R)
     (X : Matrix rowIndex columnIndex R) : leftMultiplication U X = U * X := rfl
 
+/-- Right multiplication acts by multiplying on the right. -/
 @[simp]
 theorem rightMultiplication_apply [Fintype columnIndex] (V : Matrix columnIndex columnIndex R)
     (X : Matrix rowIndex columnIndex R) : rightMultiplication V X = X * V := rfl
@@ -201,6 +203,7 @@ def sylvesterOperator [Fintype rowIndex] [Fintype columnIndex]
     Module.End R (Matrix rowIndex columnIndex R) :=
   leftMultiplication U - rightMultiplication V
 
+/-- The Sylvester operator acts by the difference of the two multiplications. -/
 @[simp]
 theorem sylvesterOperator_apply [Fintype rowIndex] [Fintype columnIndex]
     (U : Matrix rowIndex rowIndex R)

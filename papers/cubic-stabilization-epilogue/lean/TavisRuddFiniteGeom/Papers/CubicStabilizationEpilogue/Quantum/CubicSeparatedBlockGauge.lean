@@ -54,14 +54,19 @@ def cubicSeparatedSystem (r : K) : ℕ → Matrix (Fin 4) (Fin 4) K
   | 1 => cubicGradingBlockForm r
   | _ + 2 => 0
 
+/-- The leading coefficient of the separated system is the separated Euler
+matrix. -/
 @[simp]
 theorem cubicSeparatedSystem_zero (r : K) :
     cubicSeparatedSystem r 0 = cubicEulerBlockForm r := rfl
 
+/-- The first coefficient of the separated system is the separated grading
+matrix. -/
 @[simp]
 theorem cubicSeparatedSystem_one (r : K) :
     cubicSeparatedSystem r 1 = cubicGradingBlockForm r := rfl
 
+/-- The separated system has no coefficient beyond the first. -/
 @[simp]
 theorem cubicSeparatedSystem_add_two (r : K) (order : ℕ) :
     cubicSeparatedSystem r (order + 2) = 0 := rfl

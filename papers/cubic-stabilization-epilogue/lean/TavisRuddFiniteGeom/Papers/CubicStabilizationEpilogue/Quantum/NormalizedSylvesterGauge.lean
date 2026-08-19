@@ -59,11 +59,14 @@ def loopDerivativeCoefficient (gauge : ℕ → Matrix coordinate coordinate R) :
   | order + 1 => order • gauge order
 
 omit [Fintype coordinate] [DecidableEq coordinate] in
+/-- The derivative term contributes nothing at order zero. -/
 @[simp]
 theorem loopDerivativeCoefficient_zero (gauge : ℕ → Matrix coordinate coordinate R) :
     loopDerivativeCoefficient gauge 0 = 0 := rfl
 
 omit [Fintype coordinate] [DecidableEq coordinate] in
+/-- At a positive order the derivative term is the preceding gauge coefficient
+multiplied by its index. -/
 @[simp]
 theorem loopDerivativeCoefficient_succ (gauge : ℕ → Matrix coordinate coordinate R) (order : ℕ) :
     loopDerivativeCoefficient gauge (order + 1) = order • gauge order := rfl
@@ -290,6 +293,9 @@ def gaugePrefix : ℕ → ℕ → Matrix coordinate coordinate R × Matrix coord
           (fun order => (gaugePrefix step order).2) (step + 1))
       else gaugePrefix step index
 
+/-- One step of the prefix construction: at the new order the value is the
+solver applied to the residual of the previous step's data, and below it the
+previous step's values are kept. -/
 theorem gaugePrefix_succ (step index : ℕ) :
     gaugePrefix solve system (step + 1) index
       = if index = step + 1 then

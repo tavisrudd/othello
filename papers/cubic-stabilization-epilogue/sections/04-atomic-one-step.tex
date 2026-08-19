@@ -134,7 +134,9 @@ is entirely a small-connection calculation and is unconditional.
 \begin{proposition}[Small-even cubic block reduction]\label{prop:cubic-block-data}
 \coverage{fragment}%
 \lean{cubicSmallEven_blockReduction,%
-  cubicZeroBlock_modifiedResidue_indicialPolynomial}%
+  cubicZeroBlock_modifiedResidue_indicialPolynomial,%
+  cubicSmallEven_normalizedGauge_exists_and_unique,%
+  cubicSmallEven_normalizedGauge_coefficients}%
 \imports{Cai:small-even-connection}%
 Let \(X\subset\PP^4\) be a smooth cubic threefold, let \(P=H|_X\), choose
 the line class \(\ell\) with \(P\cdot\ell=1\), and put \(q=Q^\ell\) and
@@ -854,7 +856,11 @@ first record the gluing point implicit in the spectral decomposition.
 
 \begin{lemma}[Gluing of a separated spectral factor]\label{lem:factor-glue}
 \coverage{fragment}%
-\lean{atomicFactor_residueDiscriminant_invariant_under_blockDiagonal_frame_change}%
+\lean{atomicFactor_residueDiscriminant_invariant_under_blockDiagonal_frame_change,%
+  sylvesterEquation_unique_solution_of_separated_spectra,%
+  blockSylvesterEquation_unique_blockOffDiagonal_solution,%
+  exists_normalizedBlockGauge_of_separated_blocks,%
+  normalizedBlockGauge_unique_of_separated_blocks}%
 \imports{KKPYY:prop-5.23}%
 Over the unramified locus $U_X$, the local $F$-bundle factors belonging to a
 fixed connected component $\mathcal U$ of the reduced spectral cover glue,

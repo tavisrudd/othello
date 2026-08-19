@@ -102,6 +102,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.HirzebruchE
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.MonomialSpecializationSeparation
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.HirzebruchSpecializedVanishing
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.AtomicRankTwoFlatRigidity
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CubicSeparatedBlockGauge
 
 /-!
 # Reviewer interface for the cubic-stabilization companion
@@ -6813,5 +6814,132 @@ theorem monomialSpecialization_oddCombination_ne_zero {Index Graded Target : Typ
     256 * fibreValue + 27 * sectionValue ^ 2 ≠ 0 :=
   Quantum.oddCombination_ne_zero_of_monomialLeadingTerms leadingTerm leadingTerm_zero
     independent leading
+
+/-- Reviewer-facing invertibility of the Sylvester operator of two leading
+operators with separated spectra.  Over a commutative ring, if two square
+matrices are each a scalar multiple of the identity plus a nilpotent matrix, and
+the two scalars differ by a unit, then the equation `U * X - X * V = Y` between
+rectangular matrices has exactly one solution for every right-hand side.  This is
+the step the manuscript invokes at each order of a normalizing gauge and at each
+order of the pairing between two spectral factors. -/
+theorem sylvesterEquation_unique_solution_of_separated_spectra
+    {R : Type*} [CommRing R] {rowIndex columnIndex : Type*} [Fintype rowIndex]
+    [DecidableEq rowIndex] [Fintype columnIndex] [DecidableEq columnIndex]
+    {leftOperator : Matrix rowIndex rowIndex R} {rightOperator : Matrix columnIndex columnIndex R}
+    {leftScalar rightScalar : R} (separated : IsUnit (leftScalar - rightScalar))
+    (leftNilpotent : IsNilpotent (leftOperator - leftScalar • 1))
+    (rightNilpotent : IsNilpotent (rightOperator - rightScalar • 1))
+    (target : Matrix rowIndex columnIndex R) :
+    ∃! solution : Matrix rowIndex columnIndex R,
+      leftOperator * solution - solution * rightOperator = target :=
+  Quantum.existsUnique_sylvester_solution separated leftNilpotent rightNilpotent target
+
+/-- Reviewer-facing unique solvability of the block Sylvester equation.  A
+splitting of the coordinates into blocks is a labelling; a matrix is block
+diagonal when it vanishes on entries whose row and column carry different labels,
+and block off-diagonal when it vanishes on entries whose row and column carry the
+same label.  For a block-diagonal leading operator whose blocks have separated
+spectra — the scalars attached to two distinct labels differ by a unit, and the
+operator differs from the diagonal matrix of those scalars by a nilpotent matrix
+— every block off-diagonal matrix is the commutator of the leading operator with
+exactly one block off-diagonal matrix. -/
+theorem blockSylvesterEquation_unique_blockOffDiagonal_solution
+    {R : Type*} [CommRing R] {coordinate : Type*} [Fintype coordinate] [DecidableEq coordinate]
+    {factorIndex : Type*} [DecidableEq factorIndex] {label : coordinate → factorIndex}
+    {scalar : factorIndex → R} {leadingOperator : Matrix coordinate coordinate R}
+    (separated : ∀ first second, first ≠ second → IsUnit (scalar first - scalar second))
+    (blockDiagonal : Quantum.IsBlockDiagonal label leadingOperator)
+    (nilpotent : IsNilpotent
+      (leadingOperator - Matrix.diagonal fun index => scalar (label index)))
+    {target : Matrix coordinate coordinate R}
+    (targetOffDiagonal : Quantum.IsBlockOffDiagonal label target) :
+    ∃! solution : Matrix coordinate coordinate R,
+      Quantum.IsBlockOffDiagonal label solution ∧
+        leadingOperator * solution - solution * leadingOperator = target :=
+  Quantum.existsUnique_blockOffDiagonal_sylvester_solution separated blockDiagonal nilpotent
+    targetOffDiagonal
+
+/-- Reviewer-facing existence of the normalized gauge of a block-separated
+system.  A system with a second-order pole in the loop coordinate is given by the
+family of coefficients of the matrix `M(z)` of `z ^ 2 * ∂_z S = M(z) * S`; a gauge
+`A(z)` acts by `S = A(z) * S̃`, and the transformed system's matrix `M̃(z)`
+satisfies the inverse-free identity `A(z) * M̃(z) + z ^ 2 * A'(z) = M(z) * A(z)`,
+recorded coefficient by coefficient.  The gauge is normalized when it starts at
+the identity and every positive coefficient is block off-diagonal, and the
+transformed system is reduced when every coefficient is block diagonal.  If the
+leading coefficient of the system is block diagonal with separated blocks, such a
+gauge exists.  Lean constructs no connection, `F`-bundle, or analytic gauge: the
+system is a family of matrices and the identity is the displayed family of
+coefficient identities. -/
+theorem exists_normalizedBlockGauge_of_separated_blocks
+    {R : Type*} [CommRing R] {coordinate : Type*} [Fintype coordinate] [DecidableEq coordinate]
+    {factorIndex : Type*} [DecidableEq factorIndex] {label : coordinate → factorIndex}
+    {scalar : factorIndex → R} {system : ℕ → Matrix coordinate coordinate R}
+    (separated : ∀ first second, first ≠ second → IsUnit (scalar first - scalar second))
+    (blockDiagonal : Quantum.IsBlockDiagonal label (system 0))
+    (nilpotent : IsNilpotent (system 0 - Matrix.diagonal fun index => scalar (label index))) :
+    ∃ gauge reduced : ℕ → Matrix coordinate coordinate R,
+      Quantum.IsNormalizedGauge label system gauge reduced :=
+  Quantum.exists_normalizedGauge separated blockDiagonal nilpotent
+
+/-- Reviewer-facing uniqueness of the normalized gauge of a block-separated
+system.  Two normalized gauges reducing the same system to block-diagonal form
+agree at every order, and so do the two reduced systems.  This is the
+normalization the manuscript imposes to make the splitting of a connection into
+spectral factors unique. -/
+theorem normalizedBlockGauge_unique_of_separated_blocks
+    {R : Type*} [CommRing R] {coordinate : Type*} [Fintype coordinate] [DecidableEq coordinate]
+    {factorIndex : Type*} [DecidableEq factorIndex] {label : coordinate → factorIndex}
+    {scalar : factorIndex → R} {system gauge reduced gaugeOther reducedOther :
+      ℕ → Matrix coordinate coordinate R}
+    (separated : ∀ first second, first ≠ second → IsUnit (scalar first - scalar second))
+    (blockDiagonal : Quantum.IsBlockDiagonal label (system 0))
+    (nilpotent : IsNilpotent (system 0 - Matrix.diagonal fun index => scalar (label index)))
+    (first : Quantum.IsNormalizedGauge label system gauge reduced)
+    (second : Quantum.IsNormalizedGauge label system gaugeOther reducedOther) :
+    ∀ order, gauge order = gaugeOther order ∧ reduced order = reducedOther order :=
+  Quantum.normalizedGauge_unique separated blockDiagonal nilpotent first second
+
+/-- Reviewer-facing existence and uniqueness of the normalized gauge of the
+separated small even system of a smooth cubic threefold.  The system is the
+separated Euler matrix at order zero and the separated grading matrix at order
+one, over a field of characteristic zero in a nonzero square root of three times
+the line-class variable; the coordinates are partitioned into the two simple
+Euler eigenvalues and the rank-two zero block.  Lean proves that the separated
+Euler matrix is block diagonal for that partition, that its three eigenvalues
+have unit pairwise differences and that it differs from their diagonal matrix by
+a square-zero matrix, so the general theorem applies.  The identification of
+these two matrices with the small even quantum connection of a cubic threefold
+is the imported datum. -/
+theorem cubicSmallEven_normalizedGauge_exists_and_unique {K : Type*} [Field K] [CharZero K]
+    {r : K} (nonzero : r ≠ 0) :
+    (∃ gauge reduced : ℕ → Matrix (Fin 4) (Fin 4) K,
+        Quantum.IsNormalizedGauge Quantum.cubicBlockLabel (Quantum.cubicSeparatedSystem r)
+          gauge reduced) ∧
+      ∀ gauge reduced gaugeOther reducedOther : ℕ → Matrix (Fin 4) (Fin 4) K,
+        Quantum.IsNormalizedGauge Quantum.cubicBlockLabel (Quantum.cubicSeparatedSystem r)
+            gauge reduced →
+          Quantum.IsNormalizedGauge Quantum.cubicBlockLabel (Quantum.cubicSeparatedSystem r)
+              gaugeOther reducedOther →
+            ∀ order, gauge order = gaugeOther order ∧ reduced order = reducedOther order :=
+  ⟨Quantum.exists_normalizedGauge_cubicSeparatedSystem nonzero,
+    fun _ _ _ _ first second =>
+      Quantum.normalizedGauge_cubicSeparatedSystem_unique nonzero first second⟩
+
+/-- Reviewer-facing identification of the exhibited coefficients of the small
+even block reduction with the coefficients of the unique normalized gauge.  For
+every normalized gauge of the separated small even system, the first two gauge
+coefficients are the two matrices exhibited by the block reduction and the first
+two coefficients of the reduced system are the exhibited block-diagonal ones,
+whose rank-two blocks are the displayed `D₀` and `E₀`.  The exhibited matrices
+are therefore not one admissible choice among many: they are the coefficients of
+the normalized gauge. -/
+theorem cubicSmallEven_normalizedGauge_coefficients {K : Type*} [Field K] [CharZero K]
+    {r : K} (nonzero : r ≠ 0) {gauge reduced : ℕ → Matrix (Fin 4) (Fin 4) K}
+    (normalized : Quantum.IsNormalizedGauge Quantum.cubicBlockLabel
+      (Quantum.cubicSeparatedSystem r) gauge reduced) :
+    gauge 1 = Quantum.cubicGaugeFirst r ∧ reduced 1 = Quantum.cubicReducedFirst
+      ∧ gauge 2 = Quantum.cubicGaugeSecond r ∧ reduced 2 = Quantum.cubicReducedSecond r :=
+  Quantum.normalizedGauge_cubicSeparatedSystem_coefficients nonzero normalized
 
 end TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue
