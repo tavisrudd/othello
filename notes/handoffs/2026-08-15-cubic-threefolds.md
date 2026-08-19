@@ -146,8 +146,14 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   Section 5 framed-germ rows are covered as well: formal-germ rigidity of an
   isolated rank-two cluster and the multiplicity-one Euler block are fragments,
   formal-germ persistence of the cubic packet and the projective-space product
-  formula are conditional deductions. Next are the remaining absent rows, of
-  which `prop:direct-specialized-lowdim` is the cheapest.
+  formula are conditional deductions. Direct specialized low-dimensional
+  vanishing is a conditional deduction as well: a weight-raising residue is
+  nilpotent, the exponential of a nilpotent matrix is unipotent, a parity factor
+  of square one leaves only characteristic roots of square one, and separability
+  of the specialized quantum relation of a projective space makes every Euler
+  block simple. The five absent rows left are the four separation corollaries and
+  `lem:exact-low-degree-shifts`; neither cluster is a composition of formalized
+  algebra.
   Card:
   `../cubic-threefolds-tasks/c910-cubic-stabilization-lean-companion.md`; gap audit
   `../2026-08-18-c910-post-restructure-gap-audit.md`; anchor report
@@ -167,7 +173,9 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   `../2026-08-18-c910-cycle-side-and-absent-rows-review.md`; local-chart lift and
   unit-summand report
   `../2026-08-18-c910-local-chart-lift-and-unit-summand.md`; framed-germ rows
-  report `../2026-08-18-c910-framed-germ-rows.md`;
+  report `../2026-08-18-c910-framed-germ-rows.md`; direct specialized
+  low-dimensional vanishing report
+  `../2026-08-18-c910-direct-specialized-lowdim.md`;
   genus-eight
   unconditional report `../2026-08-18-c910-genus-eight-unconditional.md`;
   low-dimensional exclusions report

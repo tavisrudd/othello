@@ -87,3 +87,30 @@ bookkeeping in the atomic route, wherever the point is only which scalars occur.
 finite-dimensional commutative algebra and a module with an injective unit
 action.
 **Status:** open lead
+
+### 2026-08-18 — Mathlib has no unipotence of the exponential of a nilpotent element
+
+**Provenance:** formalizing the nef-canonical clause of
+`prop:direct-specialized-lowdim` of the cubic-stabilization epilogue in Lean
+(`Quantum/ParityCorrectedUnipotentMonodromy.lean`, terminal
+`specializedLowDimensional_exp_nilpotentResidue_unipotent`).
+**Was I looking for this?:** no — the search was for an existing lemma to cite,
+and the absence is the observation.
+**Observed / musing:** at the pinned Mathlib revision nothing connects
+`IsNilpotent x` to `IsNilpotent (NormedSpace.exp x - 1)`, in the matrix files or
+the general exponential file; neither carries the word nilpotent at all. The
+proof is short and needs no analysis beyond the tsum: with `x ^ k = 0` the
+series is the finite sum of its first `k` terms, that sum is `1 + x * s` with `s`
+a polynomial in `x`, and a commuting product with a nilpotent factor is
+nilpotent. The statement holds verbatim in any topological ℚ-algebra where the
+series is defined, not only for matrices.
+**Why it may matter / strongest question:** it is the standard bridge from a
+nilpotent residue of a regular-singular connection to unipotent monodromy, so
+any later formalization of Levelt--Turrittin in this repository will want it,
+and it is a small upstream contribution if the general form is proved. The open
+question is how far the hypothesis can be weakened: for a topologically
+nilpotent element the difference need not be nilpotent, so the finite-support
+argument is the whole content.
+**Evidence:** LEAN — the matrix form is kernel checked; the general
+topological-algebra form is not stated.
+**Status:** open lead

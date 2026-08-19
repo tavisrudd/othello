@@ -111,15 +111,15 @@ route: the residue discriminant of the cubic zero packet is `4/9`, of every
 curve residue is `0`, that separation with the parity ranks excludes
 representatives of dimension at most two, and the ordinary non-rationality
 criterion then gives irrationality of the stabilized fourfold.  Coverage after the passes below is
-50 claims and 46 machinery rows over 233 terminals: 6 absent, 23 fragmentary,
-20 conditional, 1 complete; the paper is warning-free at 49 pages.  Report:
+50 claims and 46 machinery rows over 241 terminals: 5 absent, 23 fragmentary,
+21 conditional, 1 complete; the paper is warning-free at 49 pages.  Report:
 [`../2026-08-18-c910-atom-route-anchor.md`](../2026-08-18-c910-atom-route-anchor.md).
 The three geometric rows the audit left absent, `lem:euler-sign`,
 `lem:hodge-base`, and `prop:cubic-atom`, are fragments as of the pass recorded in
 [`../2026-08-18-c910-geometric-rows-of-the-atomic-route.md`](../2026-08-18-c910-geometric-rows-of-the-atomic-route.md),
 so every row of the unconditional atomic route carries at least a fragment.  The
-remaining absent rows are the separation corollaries,
-`lem:exact-low-degree-shifts`, and `prop:direct-specialized-lowdim`, and the
+remaining absent rows are the separation corollaries and
+`lem:exact-low-degree-shifts`, and the
 orphaned machinery themes still need a disposition.
 `prop:no-curve` and `prop:no-surface` are proved in
 `Quantum/LowDimensionalAtomRepresentatives.lean` from premises matching the
@@ -249,6 +249,28 @@ rather than a raw premise.  The rows stay a fragment, a fragment, and two
 conditional deductions: no quantum connection, spectral projector, elementary
 modification, or Levelt--Turrittin solution algebra is constructed.  Report:
 [`../2026-08-18-c910-framed-germ-rows.md`](../2026-08-18-c910-framed-germ-rows.md).
+
+`prop:direct-specialized-lowdim` is a conditional deduction, proved in
+`Quantum/ParityCorrectedUnipotentMonodromy.lean`,
+`Quantum/ProjectiveSpaceEulerSpectrum.lean`, and
+`Applications/DirectSpecializedVanishing.lean`.  The grading operator enters only
+as an integral weight on the index type: a matrix raising that weight in every
+nonzero entry is nilpotent on a finite index type, and the condition is closed
+under finite sums, which covers both the residue formed from the effective
+classes of vanishing first Chern number and the grouped summands of a
+noninjective specialization.  The exponential of a nilpotent complex matrix
+differs from the identity by a nilpotent matrix, so the parity-corrected regular
+monodromy is unipotent; a parity factor of square one commuting with it leaves
+only characteristic roots of square one, and neither primitive sixth root has
+square one.  For a projective space the specialized quantum relation is separable
+when the line coefficient is nonzero, so every maximal generalized eigenspace of
+Euler multiplication is at most one-dimensional and the polynomial has exactly
+the displayed number of distinct roots; the multiplicity-one Euler block lemma
+then enters as the implication from simple blocks to identity framed monodromy.
+The ruled-surface clause composes the projective-bundle formula, the
+nef-canonical vanishing of the base curve, and equality of the specialized and
+intrinsic framed characteristic polynomials.  Report:
+[`../2026-08-18-c910-direct-specialized-lowdim.md`](../2026-08-18-c910-direct-specialized-lowdim.md).
 
 The integral algebra includes the arbitrary-size DVR rank-one criterion,
 flattened split-coordinate coefficient lattices, an explicit invertible
