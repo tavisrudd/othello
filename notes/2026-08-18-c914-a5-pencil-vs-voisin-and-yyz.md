@@ -2,6 +2,25 @@
 
 **Lane:** `cubic-threefolds` · **Date:** 2026-08-18 · **Task:** C914
 
+> **Correction, 2026-08-19, from C921.** Two descriptions below are of the
+> partially glued lattice rather than of `H_1(J(X_b), Z)`, because the script
+> `2026-08-18-c914-a5-pencil-voisin-locus.py` glues only the two-primary kernel.
+> With the three-primary glue included, the rank-eight factor has determinant
+> `25` and symplectic type `(1,1,1,5)`, not elementary divisors
+> `(3,3,3,3,3,3,15,15)`; and the four-dimensional factor is **not** principally
+> polarized — the principally polarized `A_b` named in section 3.2 is one of the
+> six five-isogenous choices, which correspond to the six order-five subgroups of
+> `E_b[5]`, with the axis stabilizer `D_5` fixing all six. The verdicts above are
+> unaffected and in fact strengthened: the argument needs the divisors to be odd,
+> and removing the threes leaves them odder. Derivation, and a reproduction of
+> `(3,3,3,3,3,3,15,15)` by switching the three-primary glue back off:
+> `2026-08-19-c921-integral-glued-model.md`.
+>
+> The manuscript's `prop:no-elliptic-product` is **not** affected. It quantifies
+> over isogenies from products of principally polarized varieties, so its
+> four-dimensional factor is principally polarized by hypothesis of the shape;
+> nothing in it asserts that the canonical factor is.
+
 ## Verdicts
 
 1. **Yang--Yu--Zhu: no.** All but finitely many members of the nonstandard

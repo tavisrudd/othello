@@ -38,6 +38,16 @@ five elliptic curves is impossible because every `F_4`-line of the coefficient
 heart is its own perpendicular for the discriminant pairing. The `1 + 4`
 factorization itself exists, with odd index `25`.
 
+**Correction, 2026-08-19, from C921.** The four-dimensional factor of that
+`1 + 4` splitting is of symplectic type `(1,1,1,5)`, not principally polarized;
+its six principal polarizations correspond to the six order-five subgroups of
+`E_b[5]`. The report's rank-eight elementary divisors `(3,3,3,3,3,3,15,15)` are
+those of a lattice glued only at two, since that is what its script builds. The
+verdicts are unaffected and strengthened — they need odd divisors, and the
+three-primary glue removes the threes. The manuscript's `prop:no-elliptic-product`
+is correct as written and needs no repair. See
+`../2026-08-19-c921-integral-glued-model.md`.
+
 Report and replay: `../2026-08-18-c914-a5-pencil-vs-voisin-and-yyz.md`; scripts
 `../2026-08-18-c914-a5-pencil-eckardt.py` and
 `../2026-08-18-c914-a5-pencil-voisin-locus.py` with their tracked outputs.
