@@ -262,3 +262,4 @@ TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.centerSpecialization_fibre
 TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.centerSpecialization_oddCombination_ne_zero: propext, Classical.choice, Quot.sound
 TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.monomialSpecializationData: propext, Classical.choice, Quot.sound
 TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.monomialSpecialization_oddCombination_ne_zero: propext, Classical.choice, Quot.sound
+TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.hirzebruch_degenerate_rootMultiplicity_eq_one: propext, Classical.choice, Quot.sound

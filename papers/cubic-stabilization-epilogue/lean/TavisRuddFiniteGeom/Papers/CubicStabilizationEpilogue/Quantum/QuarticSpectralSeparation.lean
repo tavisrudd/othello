@@ -153,8 +153,8 @@ theorem monicQuartic_rootMultiplicity_le_one (l₀ l₁ l₂ l₃ : ℂ)
 
 /-- Every maximal generalized eigenspace of a four-by-four complex matrix whose
 characteristic polynomial is a monic quartic of nonvanishing discriminant has
-dimension at most one: the spectral decomposition consists of four blocks of
-rank one. -/
+dimension at most one.  The number of distinct eigenvalues is not part of the
+statement. -/
 theorem finrank_maxGenEigenspace_le_one_of_quarticDiscriminant_ne_zero
     (operator : Matrix (Fin 4) (Fin 4) ℂ) (l₀ l₁ l₂ l₃ : ℂ)
     (characteristic : operator.charpoly = monicQuartic l₀ l₁ l₂ l₃)
@@ -236,6 +236,37 @@ theorem rootMultiplicity_eq_two_of_squared_linear_mul_quadratic
       simp only [IsRoot, eval_sub, eval_X, eval_C, sub_eq_zero]
       exact fun h => firstNe h.symm)
   have zeroSecond : rootMultiplicity repeated (X - C second) = 0 :=
+    rootMultiplicity_eq_zero (by
+      simp only [IsRoot, eval_sub, eval_X, eval_C, sub_eq_zero]
+      exact fun h => secondNe h.symm)
+  omega
+
+/-- A root of `(X - r) ^ 2 (X - c) (X - d)` that is the root of exactly one of
+the two unrepeated factors is simple.  Together with the multiplicity of the
+repeated root this pins the whole multiplicity pattern of a degenerate
+quartic. -/
+theorem rootMultiplicity_eq_one_of_squared_linear_mul_quadratic
+    {repeated first second : ℂ} (repeatedNe : repeated ≠ first) (secondNe : second ≠ first) :
+    (((X - C repeated) ^ 2) * ((X - C first) * (X - C second))).rootMultiplicity first = 1 := by
+  classical
+  have nonzero : (((X - C repeated) ^ 2) * ((X - C first) * (X - C second))) ≠ 0 :=
+    mul_ne_zero (pow_ne_zero _ (X_sub_C_ne_zero repeated))
+      (mul_ne_zero (X_sub_C_ne_zero first) (X_sub_C_ne_zero second))
+  have squared : ((X - C repeated) ^ 2 : Polynomial ℂ) = (X - C repeated) * (X - C repeated) :=
+    sq (X - C repeated)
+  have expand : rootMultiplicity first (((X - C repeated) ^ 2) * ((X - C first) * (X - C second)))
+      = rootMultiplicity first (X - C repeated) + rootMultiplicity first (X - C repeated)
+        + (rootMultiplicity first (X - C first) + rootMultiplicity first (X - C second)) := by
+    rw [squared] at nonzero ⊢
+    rw [rootMultiplicity_mul nonzero,
+      rootMultiplicity_mul (mul_ne_zero (X_sub_C_ne_zero repeated) (X_sub_C_ne_zero repeated)),
+      rootMultiplicity_mul (mul_ne_zero (X_sub_C_ne_zero first) (X_sub_C_ne_zero second))]
+  have self : rootMultiplicity first (X - C first) = 1 := rootMultiplicity_X_sub_C_self
+  have zeroRepeated : rootMultiplicity first (X - C repeated) = 0 :=
+    rootMultiplicity_eq_zero (by
+      simp only [IsRoot, eval_sub, eval_X, eval_C, sub_eq_zero]
+      exact fun h => repeatedNe h.symm)
+  have zeroSecond : rootMultiplicity first (X - C second) = 0 :=
     rootMultiplicity_eq_zero (by
       simp only [IsRoot, eval_sub, eval_X, eval_C, sub_eq_zero]
       exact fun h => secondNe h.symm)

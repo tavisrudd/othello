@@ -270,3 +270,4 @@ currently exported by the reviewer interface.
 #print axioms TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.centerSpecialization_oddCombination_ne_zero
 #print axioms TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.monomialSpecializationData
 #print axioms TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.monomialSpecialization_oddCombination_ne_zero
+#print axioms TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.hirzebruch_degenerate_rootMultiplicity_eq_one

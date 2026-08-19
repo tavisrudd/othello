@@ -261,7 +261,7 @@ theorem oddCombination_ne_zero_of_monomialLeadingTerms {Target : Type*} [CommRin
   exact monomialCombination_ne_zero independent (by norm_num) (by norm_num)
 
 
-/-- Data exhibiting a specialization as monomial: a leading-term map on the
+/-- Data exhibiting a specialization as graded-monomial: a leading-term map on the
 coefficient ring, a linearly independent family of monomials of the graded
 target, and for every effective class a leading term belonging to that family.
 This is the structure the associated graded of a completed monoid ring supplies,
@@ -281,10 +281,13 @@ structure MonomialSpecializationData {Curve Target Index Graded : Type*}
   leadingTerm_monomialImage :
     ∀ degree, leadingTerm (monomialImage degree) = monomial (index degree)
 
-/-- The odd degeneracy locus is not met by a monomial specialization.  The
-premise is that the leading term of the combination is the combination of the
-leading terms of its two summands, which can hold only when those summands have
-equal valuation; when they do not, the valuation argument already applies. -/
+/-- Under the displayed premises the odd degeneracy locus is not met by a
+graded-monomial specialization.  Here `sectionClass` is the effective class whose
+monomial image has the same leading term as the square of the shifted-section
+value, that is twice the shifted section class.  The additivity premise is that
+the leading term of the combination is the combination of the leading terms of
+its two summands, which can hold only when those summands have equal valuation;
+when they do not, the valuation argument already applies. -/
 theorem MonomialSpecializationData.oddCombination_ne_zero
     {Curve Target Index Graded : Type*}
     [AddCommMonoid Curve] [CommRing Target] [AddCommGroup Graded] [Module ℂ Graded]

@@ -6412,9 +6412,10 @@ theorem hirzebruchOdd_eulerSpectrum_discriminant (fibreValue sectionValue : ℂ)
       = -(fibreValue ^ 2 * sectionValue ^ 2 * (256 * fibreValue + 27 * sectionValue ^ 2) ^ 3) :=
   Quantum.hirzebruchOddEuler_discriminant fibreValue sectionValue
 
-/-- At `u = a ^ 2` and `w = b ^ 2` the even quartic is the product of the four
-linear factors with roots `2 (± a ± b)`; these are the eigenvalues of Euler
-multiplication in the even case, and they need not be distinct. -/
+/-- At `u = fibreRoot ^ 2` and `w = sectionRoot ^ 2` the even quartic is the
+product of the four linear factors with roots `2 (± fibreRoot ± sectionRoot)`;
+these are the eigenvalues of Euler multiplication in the even case, and they need
+not be distinct.  The letter `a` is reserved for the index of the surface. -/
 theorem hirzebruchEven_eulerSpectrum_splitting (fibreRoot sectionRoot : ℂ) :
     Quantum.hirzebruchEvenEulerCharpoly (fibreRoot ^ 2) (sectionRoot ^ 2)
       = (Polynomial.X - Polynomial.C (2 * (fibreRoot + sectionRoot)))
@@ -6445,8 +6446,9 @@ theorem hirzebruchOdd_degenerate_iff (fibreValue sectionValue : ℂ)
     sectionNonzero
 
 /-- On the even degeneracy locus the quartic is a squared linear factor times a
-quadratic: the repeated root is `0` and the two remaining roots are `± 4 a`,
-where `a` is a square root of the common specialized value. -/
+quadratic: the repeated root is `0` and the two remaining roots are
+`± 4 fibreRoot`, where `fibreRoot` is a square root of the common specialized
+value. -/
 theorem hirzebruchEven_degenerate_splitting (fibreRoot : ℂ) :
     Quantum.hirzebruchEvenEulerCharpoly (fibreRoot ^ 2) (fibreRoot ^ 2)
       = (Polynomial.X - Polynomial.C 0) ^ 2
@@ -6494,25 +6496,41 @@ theorem hirzebruch_degenerate_rootMultiplicity_eq_two {repeated first second : �
           * (Polynomial.X - Polynomial.C second))).rootMultiplicity repeated = 2 :=
   Quantum.rootMultiplicity_eq_two_of_squared_linear_mul_quadratic firstNe secondNe
 
+/-- The two remaining roots on each degeneracy locus are simple.  This is the
+statement that composes with the multiplicity of the repeated root to give the
+whole multiplicity pattern two, one, one. -/
+theorem hirzebruch_degenerate_rootMultiplicity_eq_one {repeated first second : ℂ}
+    (repeatedNe : repeated ≠ first) (secondNe : second ≠ first) :
+    (((Polynomial.X - Polynomial.C repeated) ^ 2)
+        * ((Polynomial.X - Polynomial.C first)
+          * (Polynomial.X - Polynomial.C second))).rootMultiplicity first = 1 :=
+  Quantum.rootMultiplicity_eq_one_of_squared_linear_mul_quadratic repeatedNe secondNe
+
 /-- Block shape of Euler multiplication on the even degeneracy locus, with the
 distinctness hypotheses discharged: if the specialized value is nonzero, no
-maximal generalized eigenspace has dimension more than two and the one at the
-double root `0` has dimension exactly two.  The degenerate spectrum is one block
-of rank two and two blocks of rank one. -/
+maximal generalized eigenspace has dimension more than two, the one at the
+repeated root `0` has dimension exactly two, and the ones at the two remaining
+roots have dimension exactly one.  The degenerate spectrum is one block of rank
+two and two blocks of rank one. -/
 theorem hirzebruchEven_degenerate_blockShape (euler : Matrix (Fin 4) (Fin 4) ℂ)
     (fibreRoot : ℂ) (nonzero : fibreRoot ≠ 0)
     (quantumRelation : euler.charpoly
       = Quantum.hirzebruchEvenEulerCharpoly (fibreRoot ^ 2) (fibreRoot ^ 2)) :
     (∀ value : ℂ,
         Module.finrank ℂ (Module.End.maxGenEigenspace (Matrix.toLin' euler) value) ≤ 2) ∧
-      Module.finrank ℂ (Module.End.maxGenEigenspace (Matrix.toLin' euler) 0) = 2 :=
+      Module.finrank ℂ (Module.End.maxGenEigenspace (Matrix.toLin' euler) 0) = 2 ∧
+      Module.finrank ℂ
+        (Module.End.maxGenEigenspace (Matrix.toLin' euler) (4 * fibreRoot)) = 1 ∧
+      Module.finrank ℂ
+        (Module.End.maxGenEigenspace (Matrix.toLin' euler) (-(4 * fibreRoot))) = 1 :=
   Quantum.hirzebruchEvenEuler_degenerate_finrank_maxGenEigenspace euler fibreRoot nonzero
     quantumRelation
 
 /-- Block shape of Euler multiplication on the odd degeneracy locus, with the
 distinctness hypotheses discharged: if the scale parameter is nonzero, no maximal
-generalized eigenspace has dimension more than two and the one at the double root
-`-18 s` has dimension exactly two. -/
+generalized eigenspace has dimension more than two, the one at the repeated root
+`-18 s` has dimension exactly two, and the ones at the two remaining roots have
+dimension exactly one. -/
 theorem hirzebruchOdd_degenerate_blockShape (euler : Matrix (Fin 4) (Fin 4) ℂ)
     (sectionScale squareRoot : ℂ) (root : squareRoot ^ 2 = -(2 * sectionScale ^ 2))
     (nonzero : sectionScale ≠ 0)
@@ -6521,7 +6539,11 @@ theorem hirzebruchOdd_degenerate_blockShape (euler : Matrix (Fin 4) (Fin 4) ℂ)
     (∀ value : ℂ,
         Module.finrank ℂ (Module.End.maxGenEigenspace (Matrix.toLin' euler) value) ≤ 2) ∧
       Module.finrank ℂ
-        (Module.End.maxGenEigenspace (Matrix.toLin' euler) (-(18 * sectionScale))) = 2 :=
+        (Module.End.maxGenEigenspace (Matrix.toLin' euler) (-(18 * sectionScale))) = 2 ∧
+      Module.finrank ℂ (Module.End.maxGenEigenspace (Matrix.toLin' euler)
+        (10 * sectionScale + 16 * squareRoot)) = 1 ∧
+      Module.finrank ℂ (Module.End.maxGenEigenspace (Matrix.toLin' euler)
+        (10 * sectionScale - 16 * squareRoot)) = 1 :=
   Quantum.hirzebruchOddEuler_degenerate_finrank_maxGenEigenspace euler sectionScale squareRoot
     root nonzero quantumRelation
 

@@ -209,7 +209,7 @@
     "Givental:toric-mirror-theorem": {
       "citation": "Givental",
       "pinpoint": "Theorem 0.1, the mirror theorem for toric complete intersections",
-      "used": "That the quantum Stanley--Reisner presentation of a smooth Fano toric manifold is a theorem rather than a conjecture.",
+      "used": "That the quantum Stanley--Reisner presentation of a smooth Fano toric manifold is a theorem rather than a conjecture. As with the Batyrev entry, the import corroborates a computation the manuscript also performs directly from the genus-zero invariants, rather than carrying it.",
       "conventions": [
         {
           "aspect": "hypothesis",
@@ -226,7 +226,7 @@
     "McDuffSalamon:deformation-invariance": {
       "citation": "McDuffSalamon",
       "pinpoint": "Chapter 7, invariance of the genus-zero Gromov--Witten invariants under deformation of the symplectic form",
-      "used": "That the genus-zero Gromov--Witten invariants of a Hirzebruch surface and of the Hirzebruch surface obtained from it by subtracting twice the integer part of half its index agree under the parallel transport of the curve-class lattice along a smooth projective family joining them.",
+      "used": "That the genus-zero Gromov--Witten invariants of the Hirzebruch surfaces F_a and F_{a mod 2} agree under the parallel transport of the curve-class lattice along a smooth projective family joining them.",
       "conventions": [
         {
           "aspect": "framing",
@@ -236,7 +236,7 @@
         {
           "aspect": "domain",
           "requirement": "The two fibres must lie in one connected family of symplectic manifolds.",
-          "matched": "The family is the projectivization of the extensions with class a multiple of one fixed extension class over the affine line, chosen so that the nonzero fibres are the split bundle of the target surface; it is a smooth projective family with a relatively ample class, and its zero fibre and every nonzero fibre are the two surfaces."
+          "matched": "The family is the projectivization of the extensions with class a multiple of one fixed extension class over the affine line, chosen so that the nonzero fibres are the split bundle of the target surface; it is a smooth projective family with a relatively ample class, its zero fibre is F_a, and every nonzero fibre is F_{a mod 2}."
         },
         {
           "aspect": "hypothesis",

@@ -38,9 +38,10 @@ fibre value is `-27 s ^ 2`; the quartic then has double root `-18 s` and
 remaining roots `10 s ± 16 e` for a square root `e` of `-2 s ^ 2`, and those
 differ from `-18 s` exactly when `s` does.  Composing the splittings with those
 distinctness statements gives, on each locus, root multiplicities two, one and
-one, and hence maximal generalized eigenspaces of dimension at most two with the
-one at the double root of dimension exactly two: one spectral block of rank two
-and two of rank one, and no block of rank three or four.  A rank-two block over
+one, hence maximal generalized eigenspaces of dimension at most two with the one
+at the repeated root of dimension exactly two and the two others of dimension
+exactly one: one spectral block of rank two and two of rank one, and no block of
+rank three or four.  A rank-two block over
 the complex numbers has square-zero nilpotent part, by Cayley--Hamilton in rank
 two.  Whether such a block is in fact semisimple is not proved here.
 -/
@@ -158,34 +159,39 @@ end SimpleBlocks
 
 section Splittings
 
-/-- At `u = a ^ 2` and `w = b ^ 2` the even quartic is the product of the four
-linear factors with roots `2 (± a ± b)`; these are the eigenvalues of Euler
-multiplication in the even case, and they need not be distinct. -/
-theorem hirzebruchEvenEuler_splitting (a b : ℂ) :
-    hirzebruchEvenEulerCharpoly (a ^ 2) (b ^ 2)
-      = (X - C (2 * (a + b))) * (X - C (2 * (a - b))) * (X - C (-(2 * (a - b))))
-        * (X - C (-(2 * (a + b)))) := by
+/-- At `u = fibreRoot ^ 2` and `w = sectionRoot ^ 2` the even quartic is the
+product of the four linear factors with roots `2 (± fibreRoot ± sectionRoot)`;
+these are the eigenvalues of Euler multiplication in the even case, and they need
+not be distinct.  The letter `a` is reserved for the index of the surface. -/
+theorem hirzebruchEvenEuler_splitting (fibreRoot sectionRoot : ℂ) :
+    hirzebruchEvenEulerCharpoly (fibreRoot ^ 2) (sectionRoot ^ 2)
+      = (X - C (2 * (fibreRoot + sectionRoot))) * (X - C (2 * (fibreRoot - sectionRoot)))
+        * (X - C (-(2 * (fibreRoot - sectionRoot))))
+        * (X - C (-(2 * (fibreRoot + sectionRoot)))) := by
   rw [prod_four_linear_eq_monicQuartic, hirzebruchEvenEulerCharpoly]
   congr 1 <;> ring
 
 /-- On the even degeneracy locus the quartic is a squared linear factor times a
-quadratic: the repeated root is `0` and the two remaining roots are `± 4 a`,
-which differ from the repeated one exactly when `a` is nonzero. -/
-theorem hirzebruchEvenEuler_degenerate_splitting (a : ℂ) :
-    hirzebruchEvenEulerCharpoly (a ^ 2) (a ^ 2)
-      = (X - C 0) ^ 2 * ((X - C (4 * a)) * (X - C (-(4 * a)))) := by
-  have expand : ((X - C 0) ^ 2 * ((X - C (4 * a)) * (X - C (-(4 * a)))) : Polynomial ℂ)
-      = (X - C 0) * (X - C 0) * (X - C (4 * a)) * (X - C (-(4 * a))) := by
+quadratic: the repeated root is `0` and the two remaining roots are
+`± 4 fibreRoot`, which differ from the repeated one, and from each other, exactly
+when `fibreRoot` is nonzero. -/
+theorem hirzebruchEvenEuler_degenerate_splitting (fibreRoot : ℂ) :
+    hirzebruchEvenEulerCharpoly (fibreRoot ^ 2) (fibreRoot ^ 2)
+      = (X - C 0) ^ 2 * ((X - C (4 * fibreRoot)) * (X - C (-(4 * fibreRoot)))) := by
+  have expand : ((X - C 0) ^ 2 * ((X - C (4 * fibreRoot))
+        * (X - C (-(4 * fibreRoot)))) : Polynomial ℂ)
+      = (X - C 0) * (X - C 0) * (X - C (4 * fibreRoot)) * (X - C (-(4 * fibreRoot))) := by
     ring
   rw [expand, prod_four_linear_eq_monicQuartic, hirzebruchEvenEulerCharpoly]
   congr 1 <;> ring
 
 /-- On the odd degeneracy locus the quartic is a squared linear factor times a
 quadratic.  Writing the section value as `16 s`, the locus `256 u + 27 w ^ 2 = 0`
-reads `u = -27 s ^ 2`; the double eigenvalue is then `-18 s` and the two simple
-eigenvalues are `10 s ± 16 e` for a square root `e` of `-2 s ^ 2`.  Every point of
-the locus with nonzero section value is of this form, since `s` is a sixteenth of
-that value. -/
+reads `u = -27 s ^ 2`; the repeated root is then `-18 s` and the two remaining
+roots are `10 s ± 16 e` for a square root `e` of `-2 s ^ 2`.  They differ from the
+repeated root exactly when `s` is nonzero, which is
+`hirzebruchOddEuler_degenerate_simple_ne`; that the parametrization covers the
+whole locus is `hirzebruchOddEuler_degeneracyLocus_parametrized`. -/
 theorem hirzebruchOddEuler_degenerate_splitting (s e : ℂ) (root : e ^ 2 = -(2 * s ^ 2)) :
     hirzebruchOddEulerCharpoly (-(27 * s ^ 2)) (16 * s)
       = (X - C (-(18 * s))) ^ 2
@@ -204,8 +210,8 @@ theorem hirzebruchOddEuler_degenerate_splitting (s e : ℂ) (root : e ^ 2 = -(2 
       | ring
 
 /-- The parametrization of the odd degeneracy locus is surjective: a pair of
-specialized values on that locus, with the section value nonzero, is
-`(-(27 s ^ 2), 16 s)` for `s` a sixteenth of the section value. -/
+specialized values on that locus is `(-(27 s ^ 2), 16 s)` for `s` a sixteenth of
+the section value. -/
 theorem hirzebruchOddEuler_degeneracyLocus_parametrized (u w : ℂ)
     (locus : 256 * u + 27 * w ^ 2 = 0) :
     u = -(27 * (w / 16) ^ 2) ∧ w = 16 * (w / 16) := by
@@ -243,8 +249,9 @@ section DegenerateBlocks
 most two, so no spectral block of rank three or four occurs there.  The
 hypothesis is that the specialized fibre value is nonzero, which is what makes
 the two remaining roots differ from the double root `0`. -/
-theorem hirzebruchEvenEuler_degenerate_rootMultiplicity_le_two (a : ℂ) (nonzero : a ≠ 0) (value : ℂ) :
-    (hirzebruchEvenEulerCharpoly (a ^ 2) (a ^ 2)).rootMultiplicity value ≤ 2 := by
+theorem hirzebruchEvenEuler_degenerate_rootMultiplicity_le_two (fibreRoot : ℂ)
+    (nonzero : fibreRoot ≠ 0) (value : ℂ) :
+    (hirzebruchEvenEulerCharpoly (fibreRoot ^ 2) (fibreRoot ^ 2)).rootMultiplicity value ≤ 2 := by
   rw [hirzebruchEvenEuler_degenerate_splitting]
   exact rootMultiplicity_le_two_of_squared_linear_mul_quadratic
     (by simpa using mul_ne_zero (by norm_num : (4 : ℂ) ≠ 0) nonzero)
@@ -252,8 +259,9 @@ theorem hirzebruchEvenEuler_degenerate_rootMultiplicity_le_two (a : ℂ) (nonzer
 
 /-- The double root of the even quartic on its degeneracy locus has multiplicity
 exactly two. -/
-theorem hirzebruchEvenEuler_degenerate_rootMultiplicity_eq_two (a : ℂ) (nonzero : a ≠ 0) :
-    (hirzebruchEvenEulerCharpoly (a ^ 2) (a ^ 2)).rootMultiplicity 0 = 2 := by
+theorem hirzebruchEvenEuler_degenerate_rootMultiplicity_eq_two (fibreRoot : ℂ)
+    (nonzero : fibreRoot ≠ 0) :
+    (hirzebruchEvenEulerCharpoly (fibreRoot ^ 2) (fibreRoot ^ 2)).rootMultiplicity 0 = 2 := by
   rw [hirzebruchEvenEuler_degenerate_splitting]
   exact rootMultiplicity_eq_two_of_squared_linear_mul_quadratic
     (by simpa using mul_ne_zero (by norm_num : (4 : ℂ) ≠ 0) nonzero)
@@ -278,26 +286,87 @@ theorem hirzebruchOddEuler_degenerate_rootMultiplicity_eq_two (s e : ℂ)
   rw [hirzebruchOddEuler_degenerate_splitting s e root]
   exact rootMultiplicity_eq_two_of_squared_linear_mul_quadratic firstNe secondNe
 
-/-- On the even degeneracy locus no maximal generalized eigenspace of Euler
-multiplication has dimension more than two, and the one at the double root has
-dimension exactly two: the degenerate spectrum is one block of rank two and two
-blocks of rank one. -/
+/-- The two remaining roots on the even degeneracy locus are simple.  Together
+with the multiplicity of the repeated root this gives the full multiplicity
+pattern two, one, one. -/
+theorem hirzebruchEvenEuler_degenerate_rootMultiplicity_eq_one (fibreRoot : ℂ)
+    (nonzero : fibreRoot ≠ 0) :
+    (hirzebruchEvenEulerCharpoly (fibreRoot ^ 2) (fibreRoot ^ 2)).rootMultiplicity
+        (4 * fibreRoot) = 1
+      ∧ (hirzebruchEvenEulerCharpoly (fibreRoot ^ 2) (fibreRoot ^ 2)).rootMultiplicity
+        (-(4 * fibreRoot)) = 1 := by
+  have positive : (4 : ℂ) * fibreRoot ≠ 0 := mul_ne_zero (by norm_num) nonzero
+  have negative : -(4 * fibreRoot) ≠ 4 * fibreRoot := by
+    intro equality
+    exact positive (by linear_combination -equality / 2)
+  have zeroNePositive : (0 : ℂ) ≠ 4 * fibreRoot := Ne.symm positive
+  have zeroNeNegative : (0 : ℂ) ≠ -(4 * fibreRoot) := Ne.symm (neg_ne_zero.mpr positive)
+  constructor
+  · rw [hirzebruchEvenEuler_degenerate_splitting]
+    exact rootMultiplicity_eq_one_of_squared_linear_mul_quadratic zeroNePositive negative
+  · rw [hirzebruchEvenEuler_degenerate_splitting,
+      mul_comm (X - C (4 * fibreRoot)) (X - C (-(4 * fibreRoot)))]
+    exact rootMultiplicity_eq_one_of_squared_linear_mul_quadratic zeroNeNegative
+      (Ne.symm negative)
+
+/-- The two remaining roots on the odd degeneracy locus are simple. -/
+theorem hirzebruchOddEuler_degenerate_rootMultiplicity_eq_one (s e : ℂ)
+    (root : e ^ 2 = -(2 * s ^ 2)) (nonzero : s ≠ 0) :
+    (hirzebruchOddEulerCharpoly (-(27 * s ^ 2)) (16 * s)).rootMultiplicity
+        (10 * s + 16 * e) = 1
+      ∧ (hirzebruchOddEulerCharpoly (-(27 * s ^ 2)) (16 * s)).rootMultiplicity
+        (10 * s - 16 * e) = 1 := by
+  obtain ⟨firstNe, secondNe⟩ := hirzebruchOddEuler_degenerate_simple_ne s e root nonzero
+  have squareNonzero : e ≠ 0 := by
+    intro vanishing
+    rw [vanishing] at root
+    have square : s ^ 2 = 0 := by linear_combination root / 2
+    exact nonzero (pow_eq_zero_iff (n := 2) (by norm_num) |>.mp square)
+  have separated : 10 * s - 16 * e ≠ 10 * s + 16 * e := by
+    intro equality
+    exact squareNonzero (by linear_combination -equality / 32)
+  constructor
+  · rw [hirzebruchOddEuler_degenerate_splitting s e root]
+    exact rootMultiplicity_eq_one_of_squared_linear_mul_quadratic (Ne.symm firstNe) separated
+  · rw [hirzebruchOddEuler_degenerate_splitting s e root,
+      mul_comm (X - C (10 * s + 16 * e)) (X - C (10 * s - 16 * e))]
+    exact rootMultiplicity_eq_one_of_squared_linear_mul_quadratic (Ne.symm secondNe)
+      (Ne.symm separated)
+
+/-- Block shape of Euler multiplication on the even degeneracy locus: no maximal
+generalized eigenspace has dimension more than two, the one at the repeated root
+`0` has dimension exactly two, and the ones at the two remaining roots
+`± 4 fibreRoot` have dimension exactly one.  The degenerate spectrum is therefore
+one block of rank two and two blocks of rank one. -/
 theorem hirzebruchEvenEuler_degenerate_finrank_maxGenEigenspace
-    (operator : Matrix (Fin 4) (Fin 4) ℂ) (a : ℂ) (nonzero : a ≠ 0)
-    (characteristic : operator.charpoly = hirzebruchEvenEulerCharpoly (a ^ 2) (a ^ 2)) :
+    (operator : Matrix (Fin 4) (Fin 4) ℂ) (fibreRoot : ℂ) (nonzero : fibreRoot ≠ 0)
+    (characteristic :
+      operator.charpoly = hirzebruchEvenEulerCharpoly (fibreRoot ^ 2) (fibreRoot ^ 2)) :
     (∀ value : ℂ,
         Module.finrank ℂ (Module.End.maxGenEigenspace (Matrix.toLin' operator) value) ≤ 2) ∧
-      Module.finrank ℂ (Module.End.maxGenEigenspace (Matrix.toLin' operator) 0) = 2 := by
-  constructor
+      Module.finrank ℂ (Module.End.maxGenEigenspace (Matrix.toLin' operator) 0) = 2 ∧
+      Module.finrank ℂ
+        (Module.End.maxGenEigenspace (Matrix.toLin' operator) (4 * fibreRoot)) = 1 ∧
+      Module.finrank ℂ
+        (Module.End.maxGenEigenspace (Matrix.toLin' operator) (-(4 * fibreRoot))) = 1 := by
+  obtain ⟨simpleFirst, simpleSecond⟩ :=
+    hirzebruchEvenEuler_degenerate_rootMultiplicity_eq_one fibreRoot nonzero
+  refine ⟨?_, ?_, ?_, ?_⟩
   · intro value
     rw [LinearMap.finrank_maxGenEigenspace_eq, Matrix.charpoly_toLin', characteristic]
-    exact hirzebruchEvenEuler_degenerate_rootMultiplicity_le_two a nonzero value
+    exact hirzebruchEvenEuler_degenerate_rootMultiplicity_le_two fibreRoot nonzero value
   · rw [LinearMap.finrank_maxGenEigenspace_eq, Matrix.charpoly_toLin', characteristic]
-    exact hirzebruchEvenEuler_degenerate_rootMultiplicity_eq_two a nonzero
+    exact hirzebruchEvenEuler_degenerate_rootMultiplicity_eq_two fibreRoot nonzero
+  · rw [LinearMap.finrank_maxGenEigenspace_eq, Matrix.charpoly_toLin', characteristic]
+    exact simpleFirst
+  · rw [LinearMap.finrank_maxGenEigenspace_eq, Matrix.charpoly_toLin', characteristic]
+    exact simpleSecond
 
-/-- On the odd degeneracy locus no maximal generalized eigenspace of Euler
-multiplication has dimension more than two, and the one at the double root
-`-18 s` has dimension exactly two. -/
+/-- Block shape of Euler multiplication on the odd degeneracy locus: no maximal
+generalized eigenspace has dimension more than two, the one at the repeated root
+`-18 s` has dimension exactly two, and the ones at the two remaining roots
+`10 s ± 16 e` have dimension exactly one.  The degenerate spectrum is therefore
+one block of rank two and two blocks of rank one. -/
 theorem hirzebruchOddEuler_degenerate_finrank_maxGenEigenspace
     (operator : Matrix (Fin 4) (Fin 4) ℂ) (s e : ℂ) (root : e ^ 2 = -(2 * s ^ 2))
     (nonzero : s ≠ 0)
@@ -306,13 +375,23 @@ theorem hirzebruchOddEuler_degenerate_finrank_maxGenEigenspace
     (∀ value : ℂ,
         Module.finrank ℂ (Module.End.maxGenEigenspace (Matrix.toLin' operator) value) ≤ 2) ∧
       Module.finrank ℂ
-        (Module.End.maxGenEigenspace (Matrix.toLin' operator) (-(18 * s))) = 2 := by
-  constructor
+        (Module.End.maxGenEigenspace (Matrix.toLin' operator) (-(18 * s))) = 2 ∧
+      Module.finrank ℂ
+        (Module.End.maxGenEigenspace (Matrix.toLin' operator) (10 * s + 16 * e)) = 1 ∧
+      Module.finrank ℂ
+        (Module.End.maxGenEigenspace (Matrix.toLin' operator) (10 * s - 16 * e)) = 1 := by
+  obtain ⟨simpleFirst, simpleSecond⟩ :=
+    hirzebruchOddEuler_degenerate_rootMultiplicity_eq_one s e root nonzero
+  refine ⟨?_, ?_, ?_, ?_⟩
   · intro value
     rw [LinearMap.finrank_maxGenEigenspace_eq, Matrix.charpoly_toLin', characteristic]
     exact hirzebruchOddEuler_degenerate_rootMultiplicity_le_two s e root nonzero value
   · rw [LinearMap.finrank_maxGenEigenspace_eq, Matrix.charpoly_toLin', characteristic]
     exact hirzebruchOddEuler_degenerate_rootMultiplicity_eq_two s e root nonzero
+  · rw [LinearMap.finrank_maxGenEigenspace_eq, Matrix.charpoly_toLin', characteristic]
+    exact simpleFirst
+  · rw [LinearMap.finrank_maxGenEigenspace_eq, Matrix.charpoly_toLin', characteristic]
+    exact simpleSecond
 
 end DegenerateBlocks
 
@@ -320,7 +399,7 @@ section RankTwoBlock
 
 /-- The nilpotent part of a rank-two block is square-zero.  A two-by-two complex
 matrix with a single eigenvalue has trace twice and determinant the square of
-that eigenvalue, and Cayley--Hamilton in rank two then says that the centerd
+that eigenvalue, and Cayley--Hamilton in rank two then says that the centered
 matrix squares to zero. -/
 theorem rankTwo_centered_sq_eq_zero (block : Matrix (Fin 2) (Fin 2) ℂ) (eigenvalue : ℂ)
     (traceValue : Matrix.trace block = 2 * eigenvalue)

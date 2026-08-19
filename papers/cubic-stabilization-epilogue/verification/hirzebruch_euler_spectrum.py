@@ -1,20 +1,23 @@
 #!/usr/bin/env python3
-"""Euler spectrum of a specialized minimal rational ruled surface.
+"""Euler spectrum of a specialized Hirzebruch surface.
 
-A minimal rational ruled surface is the Hirzebruch surface
-`F_a = P(O + O(a))` over the projective line, `a >= 0`.  Its even cohomology
-`H^0 + H^2 + H^4` has rank four, with `H^2` spanned by the class `F` of a fibre
+The Hirzebruch surface `F_a = P(O + O(a))` over the projective line, `a >= 0`, is
+the general rational geometrically ruled surface; these are the minimal ones
+apart from `F_1`, which is the projective plane blown up at a point.  Its even
+cohomology `H^0 + H^2 + H^4` has rank four, with `H^2` spanned by the class `F` of a fibre
 and the class `S` of the section of self-intersection `-a`; the curve classes
 are the fibre class `f` and the negative-section class `s`, with
 `f.f = 0`, `f.s = 1`, `s.s = -a`, and first Chern number `c_1.f = 2`,
 `c_1.s = 2 - a`.
 
-Genus-zero Gromov--Witten invariants are deformation invariant and `F_a`
-deforms to `F_{a-2}`; the deformation identifies the curve classes by
-`f -> f`, `s -> s - f`, which is the unique identification preserving the
-intersection form and the first Chern number.  Iterating `k = a // 2` times
-carries `F_a` to `F_0` or to `F_1`, and carries the divisor class `S + k F`,
-whose self-intersection is `-a + 2k`, to the negative section there.  Writing
+Genus-zero Gromov--Witten invariants are deformation invariant, and for `a >= 2`
+one smooth projective family joins `F_a` to `F_{a - 2k}` with `k = a // 2`: the
+extensions of `O(a)` by `O` whose class is a multiple of the class of a nowhere
+vanishing pair of sections of `O(k)` and `O(a - k)`.  The parallel transport of
+the curve-class lattice fixes the fibre class and, being determined by the
+intersection form, sends `s` to `s_0 - k f`; so it sends `s + k f` to the
+negative section `s_0` of `F_{a - 2k}`, and the divisor class `S + k F`, whose
+self-intersection is `-a + 2k`, to the negative section there.  Writing
 
     u = the specialized Novikov value of the fibre class f,
     w = the specialized Novikov value of the class s + k f,
@@ -61,8 +64,12 @@ CHECKS
   frobenius         a self-consistency check of the multiplication matrix
                     against an independently built multiplication operator;
                     self-adjointness for the trace form holds for any
-                    commutative presentation, so the flag tests agreement of the
-                    two constructions rather than a property of this ring
+                    commutative presentation, so that flag tests agreement of
+                    the two constructions rather than a property of this ring.
+                    The recorded nondegeneracy of the trace form is a structural
+                    comparison of its determinant against the literal zero, so
+                    it certifies that the determinant does not simplify to zero,
+                    not that it is nonzero at every specialization
   gromov_witten     for F_2 the presentation agrees with the relations computed
                     directly from the genus-zero invariants <pt>_f = 1,
                     <pt>_{f+s} = 1, all other point invariants in classes of

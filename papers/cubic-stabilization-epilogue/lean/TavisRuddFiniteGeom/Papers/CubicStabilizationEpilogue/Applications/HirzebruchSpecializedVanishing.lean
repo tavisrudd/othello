@@ -26,10 +26,11 @@ The second route is the discriminant of the rank-four Euler spectrum, and it
 applies to every Hirzebruch surface at a specialization with both values nonzero
 that avoids the degeneracy locus of the discriminant.  The characteristic
 polynomial of Euler
-multiplication is one of the two quartics of the module on the Euler spectrum of
-a Hirzebruch surface, and off the degeneracy locus of its
-discriminant every spectral block has rank one, so the multiplicity-one Euler
-block lemma trivializes the framed regular monodromy and the count vanishes.
+multiplication is one of the two quartics of
+`TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.HirzebruchEulerSpectrum`,
+and off the degeneracy locus of its discriminant every spectral block has rank
+one, so the multiplicity-one Euler block lemma makes the framed regular monodromy
+unipotent and the count vanishes.
 
 Lean constructs no target variety, product, quantum connection, Novikov
 specialization, or Levelt--Turrittin decomposition.  The specialized quantum
