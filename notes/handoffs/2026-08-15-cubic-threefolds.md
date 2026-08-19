@@ -230,10 +230,11 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   only through an isogeny of degree greater than one. The integral glued model
   of the four-dimensional factor is derived and the Schottky count evaluated;
   that pass also corrects C914's description of the factor, which is of
-  symplectic type `(1,1,1,5)` rather than principally polarized. The pencil's
-  Eckardt locus is exactly the two Fermat members, so the epilogue's separation
-  theorem keeps its "all but finitely many" qualifier and can only be sharpened
-  to name them. Card:
+  symplectic type `(1,1,1,5)` rather than principally polarized. By elimination
+  over `Q` the pencil's Eckardt locus is exactly the two Fermat members and its
+  singular locus is exactly six members, so the epilogue's separation theorem
+  keeps a qualifier but can name the single exceptional moduli point instead of
+  saying "all but finitely many". Card:
   `../cubic-threefolds-tasks/c921-four-dimensional-factor-jacobian.md`; reports
   and evidence bundles `../2026-08-19-c921-genus-four-branch.md`,
   `../2026-08-19-c921-integral-glued-model.md` and

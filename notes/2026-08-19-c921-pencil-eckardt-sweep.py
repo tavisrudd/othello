@@ -241,6 +241,19 @@ def main():
             say(f"  Eckardt at (a:b) = "
                 f"{[f'{a}:{b} ({n} points)' for (a, b, n) in eckardt]}")
 
+        # cross-check against the independent Singular elimination over Q of
+        # notes/2026-08-19-c921-eckardt-elimination.py, which gives the
+        # singular locus as b (b+6) (b^2-3b-9) (7b^2+3b+9)
+        def disc_poly(r):
+            return (r * (r + 6) * (r * r - 3 * r - 9)
+                    * (7 * r * r + 3 * r + 9)) % q
+
+        predicted = sorted(r for r in range(q) if disc_poly(r) == 0)
+        observed = sorted(b for (a, b) in singular if a == 1)
+        check("the singular members match the elimination's discriminant "
+              "b (b+6) (b^2-3b-9) (7b^2+3b+9)",
+              observed == predicted, f"observed {observed}, predicted {predicted}")
+
         # the Eckardt locus is predicted to be the root set of b^2 + 3b + 9,
         # that is b = 3 omega for a primitive cube root of unity omega
         roots = sorted(r for r in range(q) if (r * r + 3 * r + 9) % q == 0)

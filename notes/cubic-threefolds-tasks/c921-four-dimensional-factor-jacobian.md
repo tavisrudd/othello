@@ -144,12 +144,19 @@ Frobenius trace through `#X_b(F_q) = q^3+q^2+q+1-5q a_b`, whose divisibility by
 `5q` on every smooth member independently confirms the isotypic decomposition
 `H^3 = W_5 tensor H^1(E_b)(-1)`.
 
-The Eckardt locus of the pencil is **not** empty: it is exactly the conjugate
-pair `b = 3 omega, 3 omega-bar`, the roots of `b^2 + 3b + 9`, each carrying
-thirty Eckardt points, which the Fermat control identifies as the two Fermat
-members. So the epilogue's `prop:A5-not-coprime` and `prop:A5-nonseparated`
-cannot be upgraded from "only finitely many" to "none", and
-`thm:separation-family` keeps its qualifier — necessarily, since the Fermat
-member is of separated-variable type. The available sharpening is to replace
-"only finitely many" with the named pair, which needs the elimination over `Q`
-described in that report. No manuscript edit follows automatically.
+The Eckardt locus of the pencil is **not** empty. By elimination over `Q`, the
+smooth members carrying an Eckardt point are exactly the conjugate pair
+`b = 3 omega, 3 omega-bar`, the roots of `b^2 + 3b + 9`, each carrying thirty
+Eckardt points — the two Fermat members, which represent a single point of the
+coarse-moduli image. The same elimination gives the pencil's singular locus
+exactly: six members, `b = 0` (the Segre cubic), `b = -6`, the `Q(sqrt 5)` pair
+`b^2 - 3b - 9`, and the `Q(sqrt -3)` pair `7b^2 + 3b + 9`. An independent point-
+count sweep over five primes agrees with both loci.
+
+So the epilogue's `prop:A5-not-coprime` and `prop:A5-nonseparated` cannot be
+upgraded to "none", and `thm:separation-family` keeps a qualifier — necessarily,
+since the Fermat member is of separated-variable type. What is available instead
+is exact: both propositions can name the Fermat pair rather than say "only
+finitely many", and `thm:separation-family` can say "every point of its
+coarse-moduli image except the Fermat point". No manuscript edit follows
+automatically; adopting it is the author's call.
