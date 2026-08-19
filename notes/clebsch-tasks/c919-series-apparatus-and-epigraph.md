@@ -32,10 +32,16 @@ where prose is explicitly being moved or a redundant sentence explicitly cut.
   before editing; it holds the file-and-line map of what is on the page today,
   the sentence-by-sentence disposition of all five interludes, and the gates.
 
-The packet governs **except** where the plan records a later author decision.
-Three such decisions exist — the poem text, the programme-map labels for Papers
-I and III, and the coda placement in Papers II and III. Where they differ, the
-plan wins. Do not "correct" any of the three back to the packet's wording.
+The packet governs **except** where the plan records a later author decision or a
+source-state correction. The authoritative differences are the poem text (plan
+§3); the programme-map labels, target, and caption (§4); the coda placement in
+Papers II and III (§2); and the Paper II source reconciliation (§0 and §5). Where
+they differ, the plan wins. Do not "correct" any of them back to the packet.
+
+Two further standing rules from the plan. Wherever it supplies exact replacement
+or coda prose, use that text as the default rather than synthesizing new prose.
+And its line numbers are advisory: run the §0 preflight and match passages by
+content and label, since the checkout may have moved.
 
 ## The poem
 
@@ -62,18 +68,22 @@ poem's shape.
 1. No banner, no Roman series number, no poem on page 1 of any of the five.
 2. Coda in all five, immediately after the conclusion, and before `\appendix` in
    Papers II and III, which have appendices.
-3. Coda contents in this order: poem, programme map, explanatory prose, then any
-   other series material moved out of the old interlude. Poem and map adjacent,
-   with no long prose block between them.
+3. Coda contents in this exact order: the `\section*` heading, the five-line poem
+   with the owning line emphasized, the programme map with the owning box
+   emphasized, the standard logical-independence sentence from plan §4, then the
+   paper-specific coda prose fixed in plan §5 and §6. No prose between poem and
+   map.
 4. Map renamed "Programme map", the current paper's box highlighted, Papers I–III
    separated from Paper IV by whitespace, and the duplicated Paper I and Paper III
    labels replaced by `deep-hole conference source` and `golden-descent
    conference source`. Paper II keeps "chordal companion", where Paper V's
    technical sense of that word is the correct reading.
 5. All five papers in one pass; Paper III is not handed to C816.
-6. Paper II gains the conclusion it currently lacks, written from its own
-   abstract and §4 material. No series content in it, and no theorem-like
-   environment (see the statement-identity gate below).
+6. Paper II's existing conclusion is preserved. It is a `\section*{Conclusion}`
+   sitting immediately before `\appendix` in `clebsch_factorization.tex`; an
+   earlier revision of this card wrongly reported it as missing, because the
+   search that established the section list matched only unstarred `\section{`.
+   Do not draft, replace, or add a second conclusion under C919.
 7. Paper V's conclusion is split: its own results stay, and the programme-level
    material moves to its coda.
 8. The sentence-level move/merge/cut test and its per-paper outcomes stand; the
@@ -89,6 +99,9 @@ poem's shape.
 
 ## Acceptance gates
 
+- **Preflight first.** Run plan §0: confirm the checkout matches current source,
+  above all Paper II's existing conclusion, and treat every line number in the
+  plan as advisory, matching by content and label instead.
 - **No statement-identity hash moves.** Each paper's
   `extract_statement_identity.py` hashes only theorem-like environments by label,
   so a presentation refactor must leave every hash fixed. A moved hash means a
