@@ -134,6 +134,9 @@ roots = [
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.HirzebruchEulerSpectrum",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.MonomialSpecializationSeparation",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.HirzebruchSpecializedVanishing",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FormalLoopConnection",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.AtomicElementaryModification",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.AtomicRankTwoFlatRigidity",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.PaperInterface",
 ]
 
