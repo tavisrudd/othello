@@ -1,0 +1,67 @@
+C921 - integral glued model of the four-dimensional factor
+====================================================================
+
+A. The six-axis lattice Lambda
+  [OK  ] det G = 6^4   det = 1296
+  [OK  ] Smith(G) = (1,6,6,6,6)   [1, 6, 6, 6, 6]
+  [OK  ] kappa(v,v) = 5
+  [OK  ] disc(Lambda) = (Z/6)^4   orders [1, 6, 6, 6, 6]
+  [OK  ] disc generators have order 6
+
+B. N = v^perp is the A_4 root lattice scaled by six
+  [OK  ] rank N = 4
+  [OK  ] det N = 6^4 * 5   det = 6480
+  [OK  ] Gram(N) is six times an integral matrix
+  [OK  ] Gram(N)/6 is even
+  [OK  ] det(Gram(N)/6) = 5
+  [OK  ] twenty vectors of norm two, so A_4   count 20
+
+C. The splitting Zv + N inside Lambda
+  [OK  ] [Lambda : Zv + N] = 5   index 5
+  [OK  ] that index is prime to six
+
+D. The primary coefficient hearts and the field-of-four scalar
+  [OK  ] |A_5| = 60   order 60
+  [OK  ] A_5 preserves kappa
+  [OK  ] H_2 is a simple F_2A_5-module of dimension four
+  [OK  ] dim End_(A_5)(H_2) = 2   dim 2
+  [OK  ] H_3 is a simple F_3A_5-module of dimension four
+  [OK  ] dim End_(A_5)(H_3) = 1   dim 1
+  [OK  ] the field-of-four scalar omega exists, omega^2 + omega + 1 = 0
+
+E. Gluing
+  [OK  ] [exotic] L is an integral lattice
+  [OK  ] [exotic] det Gram(L) = 1   det 1
+  [OK  ] [exotic] [L : Lambda tensor M] = 6^4   index 1296
+  [OK  ] [exotic] L is A_5-stable
+  [OK  ] [rational] L is an integral lattice
+  [OK  ] [rational] det Gram(L) = 1   det 1
+  [OK  ] [rational] [L : Lambda tensor M] = 6^4   index 1296
+  [OK  ] [rational] L is A_5-stable
+
+F. The elliptic factor and the four-dimensional factor
+  [OK  ] [exotic] rank L_1 = 2, rank L_4 = 8   2, 8
+  [OK  ] [exotic] L_1 has symplectic type (5)   [5, 5]
+  [OK  ] [exotic] det L_4 = 25   det 25
+  [OK  ] [exotic] L_4 has symplectic type (1,1,1,5)   [1, 1, 1, 1, 1, 1, 5, 5]
+  [OK  ] [exotic] [L : L_1 + L_4] = 25   index 25
+  [OK  ] [rational] rank L_1 = 2, rank L_4 = 8   2, 8
+  [OK  ] [rational] L_1 has symplectic type (5)   [5, 5]
+  [OK  ] [rational] det L_4 = 25   det 25
+  [OK  ] [rational] L_4 has symplectic type (1,1,1,5)   [1, 1, 1, 1, 1, 1, 5, 5]
+  [OK  ] [rational] [L : L_1 + L_4] = 25   index 25
+
+G. The six principal polarizations of the fourfold
+  [OK  ] disc(L_4) = (Z/5)^2   [5, 5]
+  [OK  ] two generators of order five
+  [OK  ] six lines in (Z/5)^2
+  [OK  ] all six lines are isotropic   count 6
+  [OK  ] each gives a unimodular (principally polarized) overlattice   count 6
+  [OK  ] |D_5| = 10   order 10
+  [OK  ] D_5 fixes every one of the six lines
+
+H. Reproducing C914's rank-eight divisors without the three-primary glue
+  [OK  ] elementary divisors (3,3,3,3,3,3,15,15)   [3, 3, 3, 3, 3, 3, 15, 15]
+
+====================================================================
+failures: 0

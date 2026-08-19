@@ -227,9 +227,13 @@ promoted mathematical assertion maps to a kernel-checked declaration.
 - **C921 — residual Voisin gate, active; genus-four branch closed negative
   2026-08-19.** For all but finitely many members the four-dimensional factor
   `A_b` is not a genus-four Jacobian. What is left is the genus-five route, and
-  only through an isogeny of degree greater than one. Card:
-  `../cubic-threefolds-tasks/c921-four-dimensional-factor-jacobian.md`; report
-  and evidence bundle `../2026-08-19-c921-genus-four-branch.md`.
+  only through an isogeny of degree greater than one. The integral glued model
+  of the four-dimensional factor is derived and the Schottky count evaluated;
+  that pass also corrects C914's description of the factor, which is of
+  symplectic type `(1,1,1,5)` rather than principally polarized. Card:
+  `../cubic-threefolds-tasks/c921-four-dimensional-factor-jacobian.md`; reports
+  and evidence bundles `../2026-08-19-c921-genus-four-branch.md` and
+  `../2026-08-19-c921-integral-glued-model.md`.
 - **C917 — closed 2026-08-18.** The epilogue introduction now says why the
   direct Clemens--Griffiths mechanism gives no contradiction after one
   stabilization and where the result sits relative to Guéré

@@ -17,8 +17,16 @@ odd-degree isogeny
     m odd,
 
 with `E'` an elliptic curve isogenous to Hartlieb's factor `E_b` and `A_b` a
-four-dimensional principally polarized abelian variety isogenous to `E_b^4`;
-the sublattice has odd index `25`. No further orthogonal odd-index splitting
+four-dimensional abelian variety isogenous to `E_b^4`;
+the sublattice has odd index `25`. **Corrected 2026-08-19:** `A_b` is not
+principally polarized; its integral model has determinant `25` and symplectic
+type `(1,1,1,5)`, and the six principal polarizations available to it
+correspond to the six order-five subgroups of `E_b[5]`. C914's report calls it
+principally polarized and records rank-eight elementary divisors
+`(3,3,3,3,3,3,15,15)`; its script glues only the two-primary kernel, so those
+divisors belong to a partially glued lattice. C914's conclusion is unaffected
+and strengthened, since it needed the divisors to be odd. See
+`../2026-08-19-c921-integral-glued-model.md`. No further orthogonal odd-index splitting
 exists: the two-primary gluing kernel is an `F_4`-graph, and every `F_4`-line
 of the coefficient heart is its own perpendicular for the discriminant pairing,
 so an elliptic-product route is impossible. Report:
@@ -88,27 +96,39 @@ The attacks that settled the genus-four branch are recorded in
 `../2026-08-19-c921-genus-four-branch.md`; the Schottky-form route listed here
 before was not needed.
 
-## Structural handle found 2026-08-19
+## The integral glued model and the Schottky count (2026-08-19)
 
-In the basis of the five axes other than the chosen one, the orthogonal
-complement of the axis class is `{ x in Z^5 : sum x_i = 0 }` with the form
-`6 <x,y>`: six times the `A_4` root lattice. So `A_b` is isogenous to
-`E_b tensor_Z A_4`, uniformly in `b`. Two consequences to chase before more
-computation: whether the literature on Jacobians isogenous to powers of an
-elliptic curve settles `E tensor A_4` for every `b` rather than the generic one,
-and whether the exceptional finite set is an intersection number of two cycles on
-the Hilbert modular surface for `Q(sqrt 5)`.
+Both are done. Report and evidence bundle:
+`../2026-08-19-c921-integral-glued-model.md`.
 
-## Counting the exceptional set (2026-08-19)
+The model is `L_4 = (A_4(6) tensor M) + K_2 + K_3`, rank eight, determinant `25`,
+symplectic type `(1,1,1,5)`, where `A_4(6)` is the `A_4` root lattice with its
+form multiplied by six, `M = H_1(E_b, Z)`, `K_2` is the exotic `F_4`-graph and
+`K_3 = H_3 tensor C` for a line `C` in `E_b[3]`. Because `kappa(v,v) = 5` is a
+unit at two and three, the whole `6^4` glue lies inside the four-dimensional
+factor and the index-`25` separation from the elliptic factor is purely
+five-adic.
 
-Igusa's Schottky form is a weight-eight cusp form on `Sp_8(Z)` cutting out the
-closure of the genus-four Jacobian locus. Pulled back along the modular embedding
-`E_b -> A_b`, whose Hodge bundle is four copies of `lambda_{E_b}`, it becomes a
-section of `lambda_E^{32}`, nonzero because the generic member is not a Jacobian.
-So the exceptional set has size `32 deg lambda_E = (8/3)[SL_2(Z):Gamma]` counted
-with multiplicity, `Gamma` the stabilizer of the glue. The epilogue's `|ker f| =
-6^4` and Smith type `(1,6,6,6,6)` give `Gamma` containing `Gamma(6)`, hence at
-most `384` points; the odd multiplier of C914 may raise the glue exponent to `30`
-and the crude bound to `46080`. Open input: the integral glued model of the
-four-dimensional factor, recorded in the epilogue only two-adically and by
-scalarity at three. Derivation in `../2026-08-19-c921-genus-four-branch.md`.
+The count is `32 deg lambda_E = 64` per choice of principal polarization, and
+`384` on the six-sheeted five-torsion cover carrying all six. It never depended
+on the glue exponent: `deg lambda_E = 2` is a Griffiths-residue computation on
+the pencil, `H^{2,1} = W_5 tensor O_B(2)`. The earlier bounds of `384` under a
+glue exponent of six and `46080` under a glue exponent of thirty were bounds on
+the wrong invariant. `64` is an upper bound rather than a value: the Schottky
+divisor also contains the decomposable locus, the count is with multiplicity,
+and the Schottky form is a cusp form so it vanishes at the pencil's singular
+members.
+
+Two by-products. The pencil's elliptic factor must have square discriminant
+(mod-two monodromy inside the order-three subgroup of `GL_2(F_2)`, forced by the
+exotic kernel being a section) and a rational three-isogeny; neither has been
+checked against an explicit Weierstrass model. And the standing literature
+question — for which lattices `L` is `E tensor L` a Jacobian — should be asked
+about the glued overlattice carrying one of the six principal polarizations,
+not about the naive product `E_b tensor A_4`.
+
+**Highest-value follow-up.** Compute the vanishing orders of the Schottky
+pullback at the pencil's singular members. If they total `64`, no smooth member
+has a four-dimensional factor in the closure of the Jacobian locus for any of
+the six polarizations, which upgrades the genus-four verdict from "all but
+finitely many" to "every".
