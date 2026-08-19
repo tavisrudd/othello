@@ -173,3 +173,9 @@ from the supplied data at `p = 2`, and the parallel scalar statement at `p = 3`
 removes them there.  After that, the remaining premises of the six-axis
 divided-power terminal are geometric only, which is the relative six-axis
 geometry item of the backlog.
+
+## Export status
+
+Not exported.  The standalone paper repository was last synchronized from
+`8455eb6d1` and now lags this pass and the concurrent Eckardt work; the next
+export should carry both rather than either alone.
