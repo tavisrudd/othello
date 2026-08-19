@@ -3,13 +3,20 @@
 **Lane:** `clebsch` · **Date:** 2026-08-18 · **State:** plan agreed, execution not
 started. No manuscript edited.
 
-The author's implementation packet
-(`/tmp/persistent/tavis/clebsch_rebranding_opus_instructions.md`, copied below as
-the governing specification) supersedes this note's first revision. The earlier
-draft recommended keeping the verse on Paper V's title page, proposed three
-candidate rewrites of the verse, and named the new block "The series"; all three
-are superseded. The superseded reasoning is recoverable from
+The author's implementation packet, preserved verbatim at
+`2026-08-18-c919-author-implementation-packet.md`, is the governing
+specification and supersedes this note's first revision. The earlier draft
+recommended keeping the verse on Paper V's title page, proposed three candidate
+rewrites of the verse, and named the new block "The series"; all three are
+superseded. The superseded reasoning is recoverable from
 `git log -p -- notes/2026-08-18-c919-series-apparatus-and-epigraph-plan.md`.
+
+**Precedence.** The packet governs except where this plan records a later author
+decision. Three such decisions exist: the poem text in §3 below (lines II, III,
+and IV differ from the packet), the programme-map labels for Papers I and III in
+§4, and the coda placement in Papers II and III in §2. Where they differ, this
+plan wins; everywhere else the packet is controlling and this plan only
+elaborates it.
 
 ## Decisions now fixed
 
@@ -19,7 +26,8 @@ are superseded. The superseded reasoning is recoverable from
    `\section*{Clebsch: Rigidity from Sparse Shadows}`, containing the poem, then
    the programme map, then the explanatory prose, then any other series material
    moved out of the old interlude.
-3. The poem's wording is fixed by the packet and is not open for redrafting.
+3. The poem's wording is fixed by the block in §3 below and is not open for
+   redrafting.
 4. C919 edits all five papers in one pass; Paper III is not handed to C816.
 5. Paper II gains the conclusion it currently lacks.
 6. The sentence-level move/merge/cut test and its per-paper outcomes, agreed

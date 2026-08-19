@@ -4,7 +4,8 @@
 **Papers:** I (`clebsch-rigidity`), II (`clebsch-factorization`),
 III (`clebsch-passages`), IV (`q13-passant-code`), V
 (`chordal-conference-reconstruction`) — all five in one pass.
-**State:** plan agreed, execution not started. No manuscript edited.
+**State:** plan agreed, no author decision open, execution not started. No
+manuscript edited.
 
 ## Goal
 
@@ -17,43 +18,98 @@ programme map, and the series prose; and each "Reconstruction perspective"
 interlude is redistributed sentence by sentence between introduction, coda, and
 the cutting-room floor.
 
-## Governing documents
+This is a presentation and structure refactor. Do not change mathematical
+claims, theorem statements, proofs, notation, or bibliography content except
+where prose is explicitly being moved or a redundant sentence explicitly cut.
 
-- Author's implementation packet, verbatim:
+## Governing documents and precedence
+
+- **Author's implementation packet, verbatim:**
   `../2026-08-18-c919-author-implementation-packet.md`. This is the
-  specification; the plan below elaborates it and does not override it.
-- Plan and per-paper decisions:
-  `../2026-08-18-c919-series-apparatus-and-epigraph-plan.md`.
+  specification.
+- **Plan and per-paper decisions:**
+  `../2026-08-18-c919-series-apparatus-and-epigraph-plan.md`. Read it in full
+  before editing; it holds the file-and-line map of what is on the page today,
+  the sentence-by-sentence disposition of all five interludes, and the gates.
+
+The packet governs **except** where the plan records a later author decision.
+Three such decisions exist — the poem text, the programme-map labels for Papers
+I and III, and the coda placement in Papers II and III. Where they differ, the
+plan wins. Do not "correct" any of the three back to the packet's wording.
+
+## The poem
+
+Final text, identical in all five papers, set as five real lines with small
+light Roman numerals as a subordinate leading column:
+
+```text
+I    From deep holes, a form arises;
+II   beneath it, paired chords turn true;
+III  through many veils, the golden thread runs;
+IV   from bare, whispered words, a plane rises;
+V    beneath one form, two shadows, a hidden twist between.
+```
+
+Lines II, III, and IV are author amendments to the packet's text; only I and V
+are packet-original. Each paper emphasizes its whole line, and its matching map
+box, with one restrained mechanism used consistently across all five — no
+phrase-level bolding, and the poem must still read naturally when the emphasis
+is ignored. Do not let the typesetting wrap a line; the line lengths carry the
+poem's shape.
 
 ## Fixed decisions
 
-1. No banner, no Roman number, no poem on page 1 of any of the five.
+1. No banner, no Roman series number, no poem on page 1 of any of the five.
 2. Coda in all five, immediately after the conclusion, and before `\appendix` in
    Papers II and III, which have appendices.
-3. Poem wording is fixed by the packet; five real lines with subordinate Roman
-   numerals, whole-line emphasis for the owning paper, no phrase-level bolding.
-4. Map renamed "Programme map", current paper's box highlighted, I–III separated
-   from IV by whitespace, and the duplicated Paper I and Paper III labels
-   replaced by `deep-hole conference source` and `golden-descent conference
-   source`. Paper II keeps "chordal companion".
+3. Coda contents in this order: poem, programme map, explanatory prose, then any
+   other series material moved out of the old interlude. Poem and map adjacent,
+   with no long prose block between them.
+4. Map renamed "Programme map", the current paper's box highlighted, Papers I–III
+   separated from Paper IV by whitespace, and the duplicated Paper I and Paper III
+   labels replaced by `deep-hole conference source` and `golden-descent
+   conference source`. Paper II keeps "chordal companion", where Paper V's
+   technical sense of that word is the correct reading.
 5. All five papers in one pass; Paper III is not handed to C816.
-6. Paper II gains the conclusion it currently lacks.
-7. The sentence-level move/merge/cut test and its per-paper outcomes stand; the
-   packet adopts them as requirements.
+6. Paper II gains the conclusion it currently lacks, written from its own
+   abstract and §4 material. No series content in it, and no theorem-like
+   environment (see the statement-identity gate below).
+7. Paper V's conclusion is split: its own results stay, and the programme-level
+   material moves to its coda.
+8. The sentence-level move/merge/cut test and its per-paper outcomes stand; the
+   packet adopts them as requirements. The test is: does the sentence describe
+   this paper's mathematics, or where this paper sits? Per-sentence dispositions
+   are in the plan.
+9. Paper IV's coda prose must name its minimum words plainly, so the exact term
+   stands beside the poem's "bare, whispered words".
+10. Removing the banner creates no metadata divergence: every paper's
+    `.zenodo.json` already carries a bare title with no series label. A forward
+    Paper V release will therefore correct that paper's stale Zenodo record title
+    automatically, closing an open item from C918.
 
-8. The poem carries three author amendments to the packet's text: line II is
-   **"beneath it, paired chords turn true"**, line III is **"through many veils,
-   the golden thread runs"**, and line IV is **"from bare, whispered words, a
-   plane rises"**. Only lines I and V are packet-original. The plan's poem block
-   is authoritative; do not restore the packet's wording for any line. Paper IV's
-   coda prose must name its minimum words plainly, so the exact term stands
-   beside the poem.
-9. Removing the banner creates no metadata divergence: every paper's
-   `.zenodo.json` already carries a bare title with no series label. A forward
-   Paper V release will therefore correct that paper's stale Zenodo record title
-   automatically, closing an open item from C918.
+## Acceptance gates
 
-No author decisions remain open. Execution can start.
+- **No statement-identity hash moves.** Each paper's
+  `extract_statement_identity.py` hashes only theorem-like environments by label,
+  so a presentation refactor must leave every hash fixed. A moved hash means a
+  theorem was touched by accident.
+- **Clean rebuild of all five.** `check_manuscript_build.py` fails on any LaTeX
+  warning. Retune or drop the `\Needspace` glue that is tuned for the interludes'
+  current position, and preserve Paper IV's `\vspace*{12mm}` page-1 spacing,
+  which lives inside its banner group but is spacing rather than branding.
+- **No stale references.** `Figure~\ref{fig:series-map}` is forward referenced
+  from the introductions of Papers I and V today; those sentences move with the
+  figure, so no forward reference should survive. Check that the coda's
+  unnumbered heading produces no misleading PDF bookmark or contents entry.
+- **Path scope.** C919 owns the five paper roots' manuscript sources and
+  `papers/style-guide.md`, which gains a rule recording the front-matter
+  convention adopted here. The `~/src/math-papers/` repositories are downstream:
+  validate the monorepo authority first, then forward-commit each copy per
+  `notes/export-and-mirror-conventions.md`.
+- **Completion report**, per the packet: a per-paper summary of what moved and
+  what was cut, the wording decision taken for the Paper I and Paper III map
+  labels, any place where the source structure prevented the requested layout,
+  and the list of the five rebuilt PDFs for review.
 
 ## Origin
 
