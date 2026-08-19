@@ -6270,6 +6270,19 @@ theorem specializedLowDimensional_weightRaising_residue_isNilpotent {rank : ℕ}
     (raises : Quantum.RaisesWeight weight residue) : IsNilpotent residue :=
   raises.isNilpotent
 
+/-- The residue of the gauged connection of a target with nef canonical class is
+a finite sum of weight-raising matrices, one for each effective class of
+vanishing first Chern number, and such a sum raises the weight.  A specialization
+that groups several numerical classes into one coefficient contributes a grouped
+summand, which is again a sum of weight-raising matrices, so the conclusion is
+unaffected. -/
+theorem specializedLowDimensional_weightRaising_sum {rank : ℕ} {index : Type*}
+    (weight : Fin rank → ℤ) (support : Finset index)
+    (family : index → Matrix (Fin rank) (Fin rank) ℂ)
+    (raises : ∀ i ∈ support, Quantum.RaisesWeight weight (family i)) :
+    Quantum.RaisesWeight weight (∑ i ∈ support, family i) :=
+  Quantum.RaisesWeight.sum raises
+
 /-- Unipotence of the regular monodromy of a nilpotent residue: the exponential
 of a nilpotent complex matrix differs from the identity by a nilpotent matrix.
 This is the passage from nilpotence of the residue of a regular-singular
