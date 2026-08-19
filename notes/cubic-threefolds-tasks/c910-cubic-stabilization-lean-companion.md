@@ -111,16 +111,16 @@ route: the residue discriminant of the cubic zero packet is `4/9`, of every
 curve residue is `0`, that separation with the parity ranks excludes
 representatives of dimension at most two, and the ordinary non-rationality
 criterion then gives irrationality of the stabilized fourfold.  Coverage after the passes below is
-50 claims and 46 machinery rows over 224 terminals: 10 absent, 21 fragmentary,
-18 conditional, 1 complete; the paper is warning-free at 49 pages.  Report:
+50 claims and 46 machinery rows over 233 terminals: 6 absent, 23 fragmentary,
+20 conditional, 1 complete; the paper is warning-free at 49 pages.  Report:
 [`../2026-08-18-c910-atom-route-anchor.md`](../2026-08-18-c910-atom-route-anchor.md).
 The three geometric rows the audit left absent, `lem:euler-sign`,
 `lem:hodge-base`, and `prop:cubic-atom`, are fragments as of the pass recorded in
 [`../2026-08-18-c910-geometric-rows-of-the-atomic-route.md`](../2026-08-18-c910-geometric-rows-of-the-atomic-route.md),
 so every row of the unconditional atomic route carries at least a fragment.  The
-remaining absent rows are the Section 5 framed-monodromy statements and the
-separation corollaries, and the orphaned machinery themes still need a
-disposition.
+remaining absent rows are the separation corollaries,
+`lem:exact-low-degree-shifts`, and `prop:direct-specialized-lowdim`, and the
+orphaned machinery themes still need a disposition.
 `prop:no-curve` and `prop:no-surface` are proved in
 `Quantum/LowDimensionalAtomRepresentatives.lean` from premises matching the
 manuscript's citations: the curve dichotomy carrying the projective-line and
@@ -222,6 +222,33 @@ reduction, where the constant vector is the unimodular reduced basis vector and
 six annihilates the quotient.  The row stays a fragment: no geometric kernel,
 slope, or isogeny is constructed.  Report:
 [`../2026-08-18-c910-local-chart-lift-and-unit-summand.md`](../2026-08-18-c910-local-chart-lift-and-unit-summand.md).
+
+The Section 5 framed-germ rows are covered in
+`Quantum/RankTwoClusterGermRigidity.lean`, `Quantum/SimpleEulerBlock.lean`, and
+`Applications/CubicFormalGermPacket.lean`.  Over a formal power-series germ in
+characteristic zero, an isolated rank-two cluster whose nilpotent part has an
+invertible off-diagonal entry and vanishing determinant at the closed point, and
+whose compressed quantum multiplications commute with the leading operator and
+satisfy compressed flatness, keeps a square-zero nonzero nilpotent part
+throughout: the commutant of the nilpotent part is spanned by the identity and
+itself, traces identify the scalar coefficient with the derivative of the
+eigenvalue, Jacobi's formula in rank two turns the evolution into the logarithmic
+equation for the determinant, and the power-series vanishing theorem kills it.
+The residue of the modified lattice has constant trace and determinant, hence
+constant characteristic polynomial, and two blocks with the same monic split
+exponent polynomial contribute the same primitive-sixth multiplicity.  For a
+rank-one block the grading operator vanishes on the nondegenerate line, a
+projector commuting with Euler multiplication kills the compression of its
+commutator with a block-off-diagonal gauge coefficient, and the resulting scalar
+equation has exactly one normalized formal power-series solution, so the block's
+framed regular monodromy is the identity and it contributes nothing.  The cubic
+packet then stays at two over the germ, with the closed-point value taken from
+the packet terminal rather than assumed, and the product formula for a product
+with a projective space is now a deduction from the framed tensor decomposition
+rather than a raw premise.  The rows stay a fragment, a fragment, and two
+conditional deductions: no quantum connection, spectral projector, elementary
+modification, or Levelt--Turrittin solution algebra is constructed.  Report:
+[`../2026-08-18-c910-framed-germ-rows.md`](../2026-08-18-c910-framed-germ-rows.md).
 
 The integral algebra includes the arbitrary-size DVR rank-one criterion,
 flattened split-coordinate coefficient lattices, an explicit invertible

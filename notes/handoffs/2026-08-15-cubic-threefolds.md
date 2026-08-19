@@ -98,8 +98,8 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   `Verification/AxiomAudit`; no duplicate under the shared
   `lean/TavisRuddFiniteGeom/` tree or a second Lean repository. The sources
   build through the guarded queue; `make check` and the axiom-log gate green
-  over 50 claims, 46 machinery rows, and 224 reviewer terminals; coverage 10
-  absent / 21 fragmentary / 18 conditional / 1 complete. `thm:every-cubic` is
+  over 50 claims, 46 machinery rows, and 233 reviewer terminals; coverage 6
+  absent / 23 fragmentary / 20 conditional / 1 complete. `thm:every-cubic` is
   anchored to the atomic route, the framed spine answers to its own manuscript
   theorem `thm:every-cubic-conditional` and is now assembled end to end on the
   product-formula signature, the small even block reduction is formalized from
@@ -142,8 +142,12 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   now covered: the depth-one lift of a residue endomorphism to a self-adjoint
   integral one, and triviality of the principal quotient on the unimodular
   summand, the latter both in the chart, whose decomposition is now proved as a
-  change of basis, and over the integers through the Smith reduction. Next is
-  new coverage of the Section 5 framed-monodromy rows.
+  change of basis, and over the integers through the Smith reduction. The
+  Section 5 framed-germ rows are covered as well: formal-germ rigidity of an
+  isolated rank-two cluster and the multiplicity-one Euler block are fragments,
+  formal-germ persistence of the cubic packet and the projective-space product
+  formula are conditional deductions. Next are the remaining absent rows, of
+  which `prop:direct-specialized-lowdim` is the cheapest.
   Card:
   `../cubic-threefolds-tasks/c910-cubic-stabilization-lean-companion.md`; gap audit
   `../2026-08-18-c910-post-restructure-gap-audit.md`; anchor report
@@ -162,7 +166,8 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   `../2026-08-18-c910-claim-map-review.md` and
   `../2026-08-18-c910-cycle-side-and-absent-rows-review.md`; local-chart lift and
   unit-summand report
-  `../2026-08-18-c910-local-chart-lift-and-unit-summand.md`;
+  `../2026-08-18-c910-local-chart-lift-and-unit-summand.md`; framed-germ rows
+  report `../2026-08-18-c910-framed-germ-rows.md`;
   genus-eight
   unconditional report `../2026-08-18-c910-genus-eight-unconditional.md`;
   low-dimensional exclusions report
