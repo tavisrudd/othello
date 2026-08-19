@@ -11,6 +11,8 @@
 %   \uses{...}      the labels of the statements this one depends on, listed
 %                   inside the statement body for a conceptual dependency and
 %                   inside a proof for a logical one;
+%   \proves{...}    the label a proof establishes, for a proof separated from
+%                   its statement, where the two cannot be paired by position;
 %   \imports{...}   the identifiers of the external results this statement uses,
 %                   resolved in verification/imported-sources.json, which records
 %                   each one's citation key, pinpoint, the form in which it is
@@ -34,8 +36,9 @@
 % by lean/verification/check_formal_artifact.py, which resolves every identifier
 % and rejects any disagreement with the per-claim record in
 % lean/verification/claims.json.
-\newcommand{\lean}[1]{\ignorespaces}
-\newcommand{\coverage}[1]{\ignorespaces}
-\newcommand{\uses}[1]{\ignorespaces}
-\newcommand{\imports}[1]{\ignorespaces}
-\newcommand{\evidence}[1]{\ignorespaces}
+\newcommand{\lean}[1]{}
+\newcommand{\coverage}[1]{}
+\newcommand{\uses}[1]{}
+\newcommand{\imports}[1]{}
+\newcommand{\evidence}[1]{}
+\newcommand{\proves}[1]{}

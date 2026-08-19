@@ -28,6 +28,8 @@ AXIOM_AUDIT = (
 IMPORTED_SOURCES = ROOT.parent / "verification" / "imported-sources.json"
 EVIDENCE = ROOT.parent / "verification" / "evidence.json"
 MANUSCRIPT = ROOT.parent / "cubic_stabilization_epilogue.tex"
+GRAPH_GENERATOR = ROOT.parent / "verification" / "dependency_graph.py"
+GRAPH = ROOT.parent / "verification" / "dependency-graph.dot"
 LEAN_README = ROOT / "README.md"
 VERIFICATION_README = ROOT.parent / "verification" / "README.md"
 
@@ -76,6 +78,40 @@ def manuscript_environments() -> dict[str, str]:
                 fail(f"duplicate manuscript label {label}")
             environments[label] = match.group(2)
     return environments
+
+
+def manuscript_proofs(labels: set[str]) -> dict[str, str]:
+    """Map each proof block to the statement it establishes.
+
+    A proof is paired with the statement it follows, unless it carries a
+    \\proves annotation naming the statement it establishes, which is how a proof
+    separated from its statement is paired with it.
+    """
+    proofs: dict[str, str] = {}
+    for section in sorted(SECTIONS.glob("*.tex")):
+        text = section.read_text(encoding="utf-8")
+        position = 0
+        for match in re.finditer(r"\\begin\{proof\}(.*?)\\end\{proof\}", text, re.DOTALL):
+            body = match.group(1)
+            named = re.findall(r"\\proves\{([^}]*)\}", body)
+            if len(named) > 1:
+                fail(f"{section.name} has a proof with {len(named)} \\proves annotations")
+            if named:
+                owner = named[0].strip()
+                if owner not in labels:
+                    fail(f"{section.name} has a proof of unknown statement {owner!r}")
+            else:
+                preceding = re.findall(
+                    r"\\label\{((?:thm|prop|lem|cor|def):[^}]+)\}", text[position:match.start()]
+                )
+                if not preceding:
+                    continue
+                owner = preceding[-1]
+            if owner in proofs:
+                fail(f"statement {owner} has more than one proof")
+            proofs[owner] = body
+            position = match.end()
+    return proofs
 
 
 def annotation(label: str, body: str, macro: str, arity_optional: bool = False) -> str | None:
@@ -131,6 +167,15 @@ def check_evidence(entries: dict[str, dict]) -> None:
         commands = entry.get("commands")
         if not isinstance(commands, list) or not commands:
             fail(f"evidence bundle {identifier} records no replay command")
+
+
+def annotated_identifiers(body: str, macro: str) -> list[str]:
+    """The identifiers listed by one annotation macro, in source order."""
+    payload = re.findall(r"\\" + macro + r"\{(.*?)\}", body, re.DOTALL)
+    if not payload:
+        return []
+    cleaned = re.sub(r"%.*", "", payload[0])
+    return [part.strip() for part in cleaned.split(",") if part.strip()]
 
 
 def annotated_references(label: str, body: str, macro: str, known: set[str], kind: str) -> None:
@@ -314,10 +359,27 @@ def main() -> None:
         EVIDENCE, "evidence", "cubic-stabilization-epilogue-evidence-v1"
     )
     check_evidence(evidence_bundles)
+    generator: dict[str, object] = {"__file__": str(GRAPH_GENERATOR), "__name__": "dependency_graph"}
+    exec(compile(GRAPH_GENERATOR.read_text(encoding="utf-8"), str(GRAPH_GENERATOR), "exec"),
+         generator)
+    regenerated = generator["emit"](*generator["collect"]())
+    if regenerated != GRAPH.read_text(encoding="utf-8"):
+        fail(
+            "verification/dependency-graph.dot does not match the manuscript annotations; "
+            "regenerate it with verification/dependency_graph.py"
+        )
+
+    proofs = manuscript_proofs(expected_labels)
     for label, body in environments.items():
         annotated_references(label, body, "imports", set(imported_sources), "imported source")
         annotated_references(label, body, "evidence", set(evidence_bundles), "evidence bundle")
         annotated_references(label, body, "uses", expected_labels, "manuscript label")
+    for label, body in proofs.items():
+        annotated_references(label, body, "imports", set(imported_sources), "imported source")
+        annotated_references(label, body, "evidence", set(evidence_bundles), "evidence bundle")
+        annotated_references(label, body, "uses", expected_labels, "manuscript label")
+        if label in annotated_identifiers(body, "uses"):
+            fail(f"the proof of {label} lists {label} among its dependencies")
 
     registered: set[str] = set()
     for claim in claims:

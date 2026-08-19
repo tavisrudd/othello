@@ -86,6 +86,7 @@ from the small point is used.
   hodgeFixedSubalgebra_eigenvector_transfers,%
   hodgeFixedTangentSpace_span_and_finrank, truncatedHyperplaneAlgebra_model}%
 \imports{KKPYY:maximal-f-bundle, KKPYY:sec-5.2.2}%
+\uses{lem:euler-sign}%
 Let $B_X^{\Hod}$ be the Hodge-fixed locus of the maximal $A$-model
 $F$-bundle of a smooth projective variety $X$.  In the notation of
 \cite[Section~5.2.2]{KKPYY}, its tangent space is obtained from
@@ -120,6 +121,7 @@ structure on the smooth fixed locus.  For a cubic threefold,
 $H^{2i}(X,\Q)=\Q P^i$ for $0\le i\le3$, so the displayed definition of
 $H(X)^{\Hod}$ is exactly the even cohomology.  The final assertion follows
 from Lemma~\ref{lem:euler-sign}.
+\uses{lem:euler-sign}%
 \end{proof}
 
 
@@ -483,6 +485,7 @@ component over $b$ therefore consists only of the zero spectral point; in
 particular the component is the atomic component determined by the zero
 packet (and has degree one over its image in a neighborhood of $b$).  Its
 parity ranks are \eqref{eq:parity-ranks}.
+\uses{prop:cubic-block-data, lem:euler-sign, lem:hodge-base, lem:disc, lem:spectrum-transfer}%
 \end{proof}
 
 By KKPY's invariance of the $\Hod$-representation of an atom, the parity ranks
@@ -574,6 +577,7 @@ coefficients, already zero.  Thus $P_{ij}(u)=0$ identically.  Since the full
 pairing is nondegenerate, every diagonal restriction is nondegenerate.  The
 Poincar\'e form pairs only equal parity, so the even restriction is also
 nondegenerate.
+\uses{lem:horiz}%
 \end{proof}
 
 \subsubsection{The elementary modification}
@@ -662,6 +666,7 @@ For $0\ne x\in L=\ker N$, sandwiching
 \eqref{eq:constant-pair} between $x$ on both sides kills the two terms
 containing $N$ and gives $2(A_0x,x)=0$.  Thus
 $A_0x\in x^\perp=L^\perp=L$, proving \eqref{eq:A0L}.
+\uses{lem:horiz, lem:orthogonal}%
 \end{proof}
 
 Define the elementary modification
@@ -777,6 +782,7 @@ rigid chart with regular parameters $t_1,\ldots,t_m$, apply
 \eqref{eq:dresdisc} to the coordinate derivations.  In the completed local
 ring every positive-degree coefficient of the resulting power series is
 then zero, so the function is constant on each connected chart.
+\uses{lem:A0preserve}%
 \end{proof}
 
 \begin{proposition}[Exponent interpretation of the residue discriminant]
@@ -834,6 +840,7 @@ Finally,
  = (\rho_1-\rho_2)^2,
 \]
 which proves \eqref{eq:res-disc-exponents}.
+\uses{prop:rank2-rigidity}%
 \end{proof}
 
 \subsubsection{Crossing the locus where \texorpdfstring{$N$}{N} vanishes}
@@ -917,6 +924,7 @@ on any nonempty admissible open, $\delta^\sharp-c=0$ in its meromorphic
 function field.  In particular the same value is obtained on every
 component of $\mathcal U^\times$, even if those components are separated
 by points at which $N=0$.
+\uses{lem:factor-glue, prop:rank2-rigidity}%
 \end{proof}
 
 \subsubsection{Descent to ordinary Hodge atoms}
@@ -965,6 +973,7 @@ the rank-two/generic-nilpotence domain condition and $\delta^\sharp$ have
 already been shown to be well defined on that target set, composing with the
 map of Proposition~5.22 gives a well-defined invariant on precisely the
 ordinary Hodge-atom classes satisfying the stated domain condition.
+\uses{lem:crossing, prop:rank2-rigidity}%
 \end{proof}
 
 \begin{remark}
@@ -1073,6 +1082,7 @@ well-definedness of $\delta^\sharp$ on ordinary Hodge atoms.  We have proved:
 \coverage{conditional_deduction}%
 \lean{cubicAtom_not_represented_by_curve}%
 \imports{Cai:curve-calculation}%
+\uses{prop:cubic-atom, prop:cubic-block-data, prop:residue-discriminant-exponents, prop:atom-invariant}%
 The cubic atom $\alpha_X$ is not represented by any smooth projective
 variety of dimension at most one.
 \end{proposition}
@@ -1083,6 +1093,7 @@ variety of dimension at most one.
 \coverage{conditional_deduction}%
 \lean{cubicAtom_not_represented_by_surface}%
 \imports{KKPYY:lem-5.24, KKPYY:prop-5.30}%
+\uses{prop:no-curve, prop:cubic-atom}%
 The atom $\alpha_X$ is not represented by a smooth projective surface.
 Together with Proposition~\ref{prop:no-curve} and additivity for disjoint
 unions, this excludes every smooth projective variety of dimension at most
@@ -1119,6 +1130,7 @@ $\PP_C(V)$.  By KKPY's projective-bundle formula,
 Thus every atom occurring there is a point or curve atom.  Proposition
 \ref{prop:no-curve} excludes $\alpha_X$ in both cases.  This proves
 \eqref{eq:not-lowdim}.
+\uses{prop:no-curve, prop:cubic-atom, prop:atom-invariant}%
 \end{proof}
 
 
@@ -1148,6 +1160,9 @@ dimension at most \(d-2\), then the \(d\)-fold is not rational.  Here
   \alpha_X\notin\HAtoms_{\dim\le2}.
 \]
 Therefore \(X\times\PP^1\) is irrational.
+\proves{thm:every-cubic}%
+\uses{prop:no-surface, prop:cubic-atom}%
+\imports{KKPYY:prop-5.22, KKPYY:prop-5.30}%
 \end{proof}
 
 \begin{remark}[Scope of the atom obstruction]

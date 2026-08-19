@@ -47,6 +47,32 @@ resolves every annotated identifier and rejects an unknown one, a bibliography
 key absent from the manuscript, an imported source with no recorded conventions,
 and an evidence bundle with no checksum manifest or no replay command.
 
+A proof is paired with the statement it follows, so `\uses` inside it records a
+logical dependency of that statement.  A proof separated from its statement
+carries `\proves` naming the statement it establishes; the proof of the
+one-stabilization theorem, which appears at the end of the atomic section while
+its statement is in the introduction, is paired that way.  Annotations inside a
+proof are written at its end rather than after its opening, because the run-in
+proof header ends by skipping following spaces and a macro placed there stops
+that skip, which perturbs the typeset output; placed at the end they leave the
+built document unchanged, which the deterministic rebuild confirms.
+
+`verification/dependency-graph.dot` renders the resulting graph: statements
+coloured by the strength at which they are formalized, imported sources and
+evidence bundles as separate nodes, and edges dashed for a conceptual
+dependency, solid for a logical one, and dotted for an import.  It is generated
+by `verification/dependency_graph.py`, deterministically and with no timestamp
+or path in its output, by
+
+```text
+python3 verification/dependency_graph.py verification/dependency-graph.dot
+```
+
+and the correspondence check regenerates it and rejects a stale copy, so the
+graph cannot fall behind the annotations.  Dependency edges are currently
+recorded for the atomic route of Section 4 and the proof of the one-stabilization
+theorem; a statement carrying no edge has none recorded rather than none.
+
 Checked coverage snapshot: 50 claims; 10 absent; 21 fragmentary; 18 conditional;
 1 complete; 220 reviewer terminals, of which 46 are machinery serving no current
 manuscript claim.
