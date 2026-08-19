@@ -9,6 +9,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.Divid
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisGram
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisLocalChart
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisDiscriminantSupport
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisMarkedPresentation
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.DepthOneSelfAdjointLift
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisSlopeModels
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.ConnectedPacketPersistence
@@ -6193,6 +6194,205 @@ theorem sixAxisLocalChart_orthogonalDecomposition_and_unitLine
     GraphLattices.sixAxisChartBasis_congruence inverseFive inverse,
     GraphLattices.sixAxisChart_unitLine_mem_image inverseFive inverse,
     GraphLattices.sixAxisChart_discriminant_supported_off_unitLine inverseFive inverse⟩
+
+/-- The depth decomposition carried by the local chart, and unimodularity of its
+depth-one summand.  Over a coefficient ring in which five is invertible and in
+which `6/5` is the uniformizer times an invertible scalar — at `p = 2` with unit
+multiple `3/5`, at `p = 3` with unit multiple `2/5` — the chart Gram matrix has
+value five on the first coordinate line, vanishes between that line and the
+other four coordinates, and equals the uniformizer times the unit multiple of
+the block `5I₄-J₄` on those four coordinates.  That block is symmetric and has
+the two-sided inverse `(1/5)(I₄+J₄)`, so the depth-one summand is unimodular
+after division by the uniformizer.  This is the depth prescription `(Z_p⁵,G) ≃
+U₀ ⊥ pU₁` of the local chart, at the level of coefficient matrices; no lattice,
+polarization, or isogeny kernel is constructed. -/
+theorem sixAxisLocalChart_depthOneBlock_unimodular
+    {R : Type*} [CommRing R] (inverseFive uniformizer unitPart inverseUnitPart : R)
+    (inverse : 5 * inverseFive = 1) (unitInverse : unitPart * inverseUnitPart = 1)
+    (scale : 6 * inverseFive = uniformizer * unitPart) :
+    GraphLattices.sixAxisChartGram inverseFive 0 0 = 5 ∧
+      (∀ column : Fin 4, GraphLattices.sixAxisChartGram inverseFive 0 column.succ = 0) ∧
+      (∀ row : Fin 4, GraphLattices.sixAxisChartGram inverseFive row.succ 0 = 0) ∧
+      (∀ row column : Fin 4,
+        GraphLattices.sixAxisChartGram inverseFive row.succ column.succ =
+          uniformizer * (unitPart * GraphLattices.sixAxisComplementBlock R row column)) ∧
+      Matrix.transpose (unitPart • GraphLattices.sixAxisComplementBlock R) =
+          unitPart • GraphLattices.sixAxisComplementBlock R ∧
+        (unitPart • GraphLattices.sixAxisComplementBlock R) *
+            (inverseUnitPart • GraphLattices.sixAxisComplementBlockInverse inverseFive) = 1 ∧
+          (inverseUnitPart • GraphLattices.sixAxisComplementBlockInverse inverseFive) *
+              (unitPart • GraphLattices.sixAxisComplementBlock R) = 1 :=
+  ⟨(GraphLattices.sixAxisChartGram_depthDecomposition inverseFive uniformizer unitPart
+      scale).1,
+    (GraphLattices.sixAxisChartGram_depthDecomposition inverseFive uniformizer unitPart
+      scale).2.1,
+    (GraphLattices.sixAxisChartGram_depthDecomposition inverseFive uniformizer unitPart
+      scale).2.2.1,
+    (GraphLattices.sixAxisChartGram_depthDecomposition inverseFive uniformizer unitPart
+      scale).2.2.2,
+    (GraphLattices.sixAxisDepthOneBlock_symmetric_and_invertible inverseFive unitPart
+      inverseUnitPart inverse unitInverse).1,
+    (GraphLattices.sixAxisDepthOneBlock_symmetric_and_invertible inverseFive unitPart
+      inverseUnitPart inverse unitInverse).2.1,
+    (GraphLattices.sixAxisDepthOneBlock_symmetric_and_invertible inverseFive unitPart
+      inverseUnitPart inverse unitInverse).2.2⟩
+
+/-- The depth-one lifting construction at the actual depth-one summand of the
+local chart.  Over a domain in which the uniformizer and two are nonzero and
+five and the unit multiple of the block `5I₄-J₄` are invertible, every
+endomorphism of the reduction of that summand modulo the uniformizer which is
+self-adjoint for its reduced dual form is the reduction of an endomorphism
+self-adjoint for the dual form itself.  Nothing is divided.  Unlike the general
+lifting terminal, no invertible Gram matrix is supplied here: the one the
+manuscript uses is exhibited.  The residue endomorphism is still an arbitrary
+matrix and is not identified with the slope of a geometric principal kernel. -/
+theorem sixAxisLocalChart_depthOneBlock_selfAdjointLift
+    {R : Type*} [CommRing R] [IsDomain R] {uniformizer : R}
+    (uniformizerNonzero : uniformizer ≠ 0) (twoNonzero : (2 : R) ≠ 0)
+    (inverseFive unitPart inverseUnitPart : R)
+    (inverse : 5 * inverseFive = 1) (unitInverse : unitPart * inverseUnitPart = 1)
+    (residue : Matrix (Fin 4) (Fin 4) (R ⧸ Ideal.span ({uniformizer} : Set R)))
+    (residueSelfAdjoint :
+      Matrix.transpose residue *
+          (inverseUnitPart • GraphLattices.sixAxisComplementBlockInverse inverseFive).map
+            (Ideal.Quotient.mk (Ideal.span ({uniformizer} : Set R))) =
+        (inverseUnitPart • GraphLattices.sixAxisComplementBlockInverse inverseFive).map
+            (Ideal.Quotient.mk (Ideal.span ({uniformizer} : Set R))) * residue) :
+    ∃ lift : Matrix (Fin 4) (Fin 4) R,
+      lift.map (Ideal.Quotient.mk (Ideal.span ({uniformizer} : Set R))) = residue ∧
+        Matrix.transpose lift *
+            (inverseUnitPart • GraphLattices.sixAxisComplementBlockInverse inverseFive) =
+          (inverseUnitPart • GraphLattices.sixAxisComplementBlockInverse inverseFive) * lift :=
+  GraphLattices.exists_selfAdjoint_lift_sixAxisDepthOneBlock uniformizerNonzero
+    twoNonzero inverseFive unitPart inverseUnitPart inverse unitInverse residue
+    residueSelfAdjoint
+
+/-- The six-axis coefficient form in the split coordinates of the local chart,
+and orthogonality of the eigenblocks of the depth-one slope.  The split
+coordinates are the chart coordinates followed by a supplied change of basis of
+the depth-one summand.  In them the form is again the unit line of value five
+orthogonal to the depth-one part, whose block is the multiple `6/5` of the
+transported block `5I₄-J₄`.  Two depth-one coordinates that are eigenvectors of
+a slope self-adjoint for `5I₄-J₄`, with eigenvalues whose difference is
+cancellable, pair to zero, which is the step making the eigenblocks orthogonal
+summands.  The slope, its eigenvectors, and the change of basis are supplied
+matrices; no geometric principal kernel is constructed. -/
+theorem sixAxisLocalChart_splitCoordinates_orthogonalBlocks
+    {S : Type*} [CommRing S] (inverseFive : S) (inverse : 5 * inverseFive = 1)
+    (slope block : Matrix (Fin 4) (Fin 4) S)
+    (selfAdjoint : Matrix.transpose slope * GraphLattices.sixAxisComplementBlock S =
+      GraphLattices.sixAxisComplementBlock S * slope)
+    (first second : Fin 4) (firstValue secondValue : S)
+    (firstEigen : Matrix.mulVec slope (fun index ↦ block index first) =
+      firstValue • fun index ↦ block index first)
+    (secondEigen : Matrix.mulVec slope (fun index ↦ block index second) =
+      secondValue • fun index ↦ block index second)
+    (cancellable : ∀ scalar : S, (firstValue - secondValue) * scalar = 0 → scalar = 0) :
+    Matrix.transpose (GraphLattices.sixAxisSplitBasisMatrix inverseFive block) *
+            GraphLattices.sixAxisGram S *
+            GraphLattices.sixAxisSplitBasisMatrix inverseFive block =
+          GraphLattices.sixAxisBlockDiagonal 5
+            ((6 * inverseFive) •
+              (Matrix.transpose block * GraphLattices.sixAxisComplementBlock S * block)) ∧
+      (Matrix.transpose (GraphLattices.sixAxisSplitBasisMatrix inverseFive block) *
+          GraphLattices.sixAxisGram S *
+          GraphLattices.sixAxisSplitBasisMatrix inverseFive block)
+        first.succ second.succ = 0 :=
+  ⟨GraphLattices.sixAxisSplitBasisMatrix_congruence inverseFive inverse block,
+    GraphLattices.sixAxisSplitBasisMatrix_congruence_eq_zero inverseFive inverse slope
+      block selfAdjoint first second firstValue secondValue firstEigen secondEigen
+      cancellable⟩
+
+/-- Divided-power saturation of the six-axis graph divisor lattice, with the
+split presentation supplied by the local chart rather than as an abstract
+premise.  The coordinates are the five chart coordinates followed by a supplied
+change of basis of the depth-one summand, distributed over the unimodular line
+and the blocks of the depth-one slope; the depth is zero on that line and one on
+every depth-one block; and the slope scalars and error terms are those of the
+split slope.  Under the three graph-coordinate descent conditions for exactly
+these data, every divided power of a class in the lattice is an ordinary
+integral divisor product.  What remains supplied is geometric: the cohomological
+realization of coefficient matrices, the injective pullback to the
+elliptic-power source, the divisor submodule, and the compatibility of the class
+and its divided power with that realization. -/
+theorem sixAxisChart_allDegree_dividedPower_of_markedGraphDescent
+    {R S Target DepthIndex : Type} {DepthBlock : DepthIndex → Type}
+    [CommRing R] [CommRing S] [Algebra R S] [Module.FaithfullyFlat R S]
+    [IsDomain S] [IsDiscreteValuationRing S] [CommRing Target] [Algebra R Target]
+    [∀ index, Fintype (DepthBlock index)] [∀ index, DecidableEq (DepthBlock index)]
+    [Fintype (GraphLattices.SplitGraphAxis (GraphLattices.sixAxisSplitBlock DepthBlock))]
+    [DecidableEq (GraphLattices.SplitGraphAxis (GraphLattices.sixAxisSplitBlock DepthBlock))]
+    [LinearOrder (GraphLattices.SplitGraphAxis (GraphLattices.sixAxisSplitBlock DepthBlock))]
+    (depthEquiv : (Σ index, DepthBlock index) ≃ Fin 4)
+    (inverseFive : S) (block blockInverse : Matrix (Fin 4) (Fin 4) S)
+    (blockRightInverse : block * blockInverse = 1)
+    (blockLeftInverse : blockInverse * block = 1)
+    (uniformizer : R)
+    (extendedUniformizerIrreducible : Irreducible (algebraMap R S uniformizer))
+    (scalar : DepthIndex → S)
+    (slopeError : ∀ index, Matrix (DepthBlock index) (DepthBlock index) S)
+    (extendedRealization :
+      Matrix (GraphLattices.SplitGraphAxis (GraphLattices.sixAxisSplitBlock DepthBlock))
+          (GraphLattices.SplitGraphAxis (GraphLattices.sixAxisSplitBlock DepthBlock)) S →+
+        TensorProduct R S Target)
+    (pullback : TensorProduct R S Target →+*
+      ExteriorAlgebra S (GraphLattices.EllipticSourceHOne S
+        (GraphLattices.SplitGraphAxis (GraphLattices.sixAxisSplitBlock DepthBlock))))
+    (pullbackInjective : Function.Injective pullback)
+    (sourceCompatible : ∀ candidate,
+      pullback (extendedRealization candidate) =
+        GraphLattices.ellipticSourceCoefficientRealization candidate)
+    (divisors : Submodule R Target)
+    (extendedRealizationMember : ∀ candidate,
+      candidate ∈ GraphLattices.weightedMatrixSubmodule (algebraMap R S uniformizer)
+          (fun axis ↦ GraphLattices.sixAxisSplitDepth axis.1)
+          (GraphLattices.splitGraphCrossDepth (GraphLattices.sixAxisSplitBlock DepthBlock)
+            (IsDiscreteValuationRing.addVal S) GraphLattices.sixAxisSplitDepth
+            (GraphLattices.sixAxisSplitScalar scalar)) →
+        extendedRealization candidate ∈
+          GraphLattices.scalarExtendedSubmodule S
+            (Algebra.TensorProduct.includeRight (R := R) (A := S) (B := Target))
+            divisors)
+    (form : Matrix (Fin 5) (Fin 5) R) (formSymmetric : form.IsSymm)
+    (graphDescent : GraphLattices.GraphBlockDescentCondition
+      (GraphLattices.sixAxisSplitBlock DepthBlock) (algebraMap R S uniformizer)
+      GraphLattices.sixAxisSplitDepth (GraphLattices.sixAxisSplitScalar scalar)
+      (GraphLattices.sixAxisSplitSlopeError slopeError)
+      (GraphLattices.blockCoefficientOfMatrix (GraphLattices.sixAxisSplitBlock DepthBlock)
+        (GraphLattices.splitCoordinateCoefficientExtension
+          (GraphLattices.sixAxisSplitBasis depthEquiv inverseFive block blockInverse
+            blockRightInverse blockLeftInverse).toSplit form)))
+    (baseClass dividedPower : Target)
+    (baseClassCompatible :
+      extendedRealization
+          (GraphLattices.splitCoordinateCoefficientExtension
+            (GraphLattices.sixAxisSplitBasis depthEquiv inverseFive block blockInverse
+              blockRightInverse blockLeftInverse).toSplit form) =
+        Algebra.TensorProduct.includeRight baseClass)
+    (degree : ℕ)
+    (dividedPowerCompatible :
+      ∀ forms : List (Matrix
+          (GraphLattices.SplitGraphAxis (GraphLattices.sixAxisSplitBlock DepthBlock))
+          (GraphLattices.SplitGraphAxis (GraphLattices.sixAxisSplitBlock DepthBlock)) S),
+      (∀ candidate ∈ forms,
+        candidate ∈ GraphLattices.weightedRankOneSet (algebraMap R S uniformizer)
+          (fun axis ↦ GraphLattices.sixAxisSplitDepth axis.1)
+          (GraphLattices.splitGraphCrossDepth (GraphLattices.sixAxisSplitBlock DepthBlock)
+            (IsDiscreteValuationRing.addVal S) GraphLattices.sixAxisSplitDepth
+            (GraphLattices.sixAxisSplitScalar scalar))) →
+      forms.sum = GraphLattices.splitCoordinateCoefficientExtension
+          (GraphLattices.sixAxisSplitBasis depthEquiv inverseFive block blockInverse
+            blockRightInverse blockLeftInverse).toSplit form →
+      Algebra.TensorProduct.includeRight dividedPower =
+        GraphLattices.squarefreeProductSum (forms.map extendedRealization) degree) :
+    dividedPower ∈ ordinaryDivisorProductSubmodule divisors degree ∧
+      baseClass ^ degree = (degree.factorial : Target) * dividedPower :=
+  GraphLattices.sixAxisChart_allDegree_dividedPowerMember depthEquiv inverseFive block
+    blockInverse blockRightInverse blockLeftInverse uniformizer
+    extendedUniformizerIrreducible scalar slopeError extendedRealization pullback
+    pullbackInjective sourceCompatible divisors extendedRealizationMember form
+    formSymmetric graphDescent baseClass dividedPower baseClassCompatible degree
+    dividedPowerCompatible
 
 /-- Formal-germ rigidity of an isolated rank-two Euler cluster, in the matrix
 model of a formal bulk germ.  The leading operator of the cluster is

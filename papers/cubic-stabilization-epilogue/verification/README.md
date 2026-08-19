@@ -119,7 +119,7 @@ atomic route of Section 4, so a statement elsewhere that carries none has none
 recorded rather than none used.
 
 Checked coverage snapshot: 59 claims; 3 absent; 27 fragmentary; 28 conditional;
-1 complete; 283 reviewer terminals, of which 46 are machinery serving no current
+1 complete; 287 reviewer terminals, of which 46 are machinery serving no current
 manuscript claim.
 
 The Lean modules and axiom audit can be built with the pinned package command
