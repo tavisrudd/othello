@@ -281,7 +281,8 @@ therefore maximal among isotropic subgroups.  These are the manuscript's order
 of the kernel of the source polarization, degree of the relative isogeny, and
 maximal isotropy of its kernel, proved for the supplied integral matrices; no
 abelian scheme, isogeny, Weil pairing, or geometric commutator pairing is
-constructed, and the primary decomposition of the kernel is not represented. -/
+constructed.  The primary refinement is
+`relativeSixAxis_primaryDiscriminantSplitting_maximalIsotropicKernels`. -/
 theorem relativeSixAxis_discriminantGroup_maximalIsotropicKernel
     (realization : Applications.RelativeSixAxisHomologyRealization) :
     Nat.card GraphLattices.sixAxisSourceDiscriminantGroup = 6 ^ 8 ∧
@@ -300,6 +301,60 @@ theorem relativeSixAxis_discriminantGroup_maximalIsotropicKernel
     GraphLattices.sixAxisSourceKernelSubgroup_eq_perp
       realization.jacobianPolarizationPrincipal realization.polarizationPullback,
     Applications.relativeSixAxisKernelSubgroup_isMaximalIsotropic realization⟩
+
+/-- Primary splitting of the six-axis source discriminant group, and relative
+maximal isotropy of each primary part of the lattice model of the isogeny
+kernel.  The source polarization times its integral cofactor — the Kronecker
+product of `I₅+J₅` with the inverse of the rank-two elliptic homology pairing —
+is six times the identity, so six annihilates the discriminant group.  Two and
+three are coprime, so Bezout's identity splits that group into its two- and
+three-torsion parts, which meet only in zero; a class annihilated by a power of
+one of the two primes is annihilated by that prime itself, so these parts are
+the primary parts in the usual sense.  They are orthogonal for the `ℚ/ℤ`-valued
+discriminant pairing, since a value annihilated by two and by three vanishes.
+From a fibre's homology realization the lattice model of the isogeny kernel
+splits along the same decomposition, and each of its primary parts equals its
+own orthogonal complement taken inside the corresponding primary part of the
+discriminant group, hence is maximal among the isotropic subgroups of that
+part.  This is the manuscript's assertion that the `p`-primary part of the
+kernel of the relative isogeny is a relative maximal isotropic subgroup of the
+`p`-primary discriminant, proved for the supplied integral matrices; no abelian
+scheme, isogeny, torsion local system, Weil pairing, or geometric commutator
+pairing is constructed, and no order of a primary part is claimed. -/
+theorem relativeSixAxis_primaryDiscriminantSplitting_maximalIsotropicKernels
+    (realization : Applications.RelativeSixAxisHomologyRealization) :
+    (∀ element : GraphLattices.sixAxisSourceDiscriminantGroup,
+        (element ∈ GraphLattices.sixAxisSourceDiscriminantPrimaryPart 2 ↔
+            ∃ exponent : ℕ, ((2 : ℤ) ^ exponent) • element = 0) ∧
+          (element ∈ GraphLattices.sixAxisSourceDiscriminantPrimaryPart 3 ↔
+            ∃ exponent : ℕ, ((3 : ℤ) ^ exponent) • element = 0)) ∧
+      (GraphLattices.sixAxisSourceDiscriminantPrimaryPart 2 ⊔
+            GraphLattices.sixAxisSourceDiscriminantPrimaryPart 3 = ⊤ ∧
+          GraphLattices.sixAxisSourceDiscriminantPrimaryPart 2 ⊓
+            GraphLattices.sixAxisSourceDiscriminantPrimaryPart 3 = ⊥ ∧
+          ∀ left ∈ GraphLattices.sixAxisSourceDiscriminantPrimaryPart 2,
+            ∀ right ∈ GraphLattices.sixAxisSourceDiscriminantPrimaryPart 3,
+              GraphLattices.sixAxisSourceDiscriminantPairing left right = 0) ∧
+        (Applications.relativeSixAxisKernelSubgroup realization =
+              Applications.relativeSixAxisPrimaryKernelSubgroup realization 2 ⊔
+                Applications.relativeSixAxisPrimaryKernelSubgroup realization 3 ∧
+            Applications.relativeSixAxisPrimaryKernelSubgroup realization 2 ⊓
+              Applications.relativeSixAxisPrimaryKernelSubgroup realization 3 = ⊥) ∧
+          GraphLattices.IsRelativeMaximalIsotropicSubgroup
+              (GraphLattices.sixAxisSourcePolarization_transpose ℤ)
+              GraphLattices.sixAxisSourcePolarization_det_ne_zero
+              (GraphLattices.sixAxisSourceDiscriminantPrimaryPart 2)
+              (Applications.relativeSixAxisPrimaryKernelSubgroup realization 2) ∧
+            GraphLattices.IsRelativeMaximalIsotropicSubgroup
+              (GraphLattices.sixAxisSourcePolarization_transpose ℤ)
+              GraphLattices.sixAxisSourcePolarization_det_ne_zero
+              (GraphLattices.sixAxisSourceDiscriminantPrimaryPart 3)
+              (Applications.relativeSixAxisPrimaryKernelSubgroup realization 3) :=
+  ⟨GraphLattices.mem_sixAxisSourceDiscriminantPrimaryPart_iff_exists_pow,
+    Applications.relativeSixAxisDiscriminantGroup_primaryDecomposition,
+    Applications.relativeSixAxisKernelSubgroup_primaryDecomposition realization,
+    (Applications.relativeSixAxisPrimaryKernelSubgroup_isRelativeMaximalIsotropic realization).1,
+    (Applications.relativeSixAxisPrimaryKernelSubgroup_isRelativeMaximalIsotropic realization).2⟩
 
 /-- The discriminant pairing of the six-axis source polarization on integral
 representatives, and its nondegeneracy.  On the classes of two integral

@@ -180,9 +180,13 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   many.
   The discriminant group of the source polarization is now built as well, with
   its `Q/Z`-valued pairing, order `6^8`, and maximal isotropy of the order-`6^4`
-  kernel subgroup of any comparison matrix satisfying the pullback identity;
-  the per-prime form of that assertion and the geometric commutator pairing
-  remain supplied.
+  kernel subgroup of any comparison matrix satisfying the pullback identity.
+  The per-prime form is proved too: the explicit cofactor `I5+J5` makes six
+  annihilate the group, so it splits as `D_2 + D_3` with orthogonal, separately
+  nondegenerate parts, the kernel splits the same way, and each `K_p` is a
+  relative maximal isotropic subgroup of `D_p`. The orders of the primary
+  parts, `A_5`-stability of `K_p`, and the geometric commutator pairing remain
+  supplied.
   Card:
   `../cubic-threefolds-tasks/c910-cubic-stabilization-lean-companion.md`; gap audit
   `../2026-08-18-c910-post-restructure-gap-audit.md`; anchor report
@@ -216,6 +220,8 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   `../2026-08-19-c910-six-axis-chart-split-presentation.md`;
   source-discriminant-group report
   `../2026-08-19-c910-source-discriminant-group.md`;
+  primary-splitting report
+  `../2026-08-19-c910-primary-discriminant-splitting.md`;
   interim release report
   `../2026-08-12-c910-partial-lean-release.md`.
 - **C920 — closed 2026-08-18.** Hypothesis 5.7T of the epilogue is now used only
