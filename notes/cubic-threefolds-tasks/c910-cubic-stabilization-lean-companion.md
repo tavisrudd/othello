@@ -581,7 +581,9 @@ inverting the gauge, and proves that flatness passes to the modified lattice.
 `Quantum/AtomicRankTwoFlatRigidity.lean` then runs the manuscript's chain: the
 commutant computation, vanishing of the residual base pole, the Lax equation, and
 constancy of the residue discriminant, over a formal germ as well.
-Horizontality supplies the nilpotent-line property over a domain.  The geometric
+Horizontality supplies the nilpotent-line property from invertibility of the
+leading pairing determinant alone, so the germ statement assumes no
+nilpotent-line hypothesis.  The geometric
 inputs are unchanged, and the claim map, reviewer terminals, and coverage value
 of the rank-two rigidity row are not yet updated.  Report:
 [`../2026-08-18-c910-rank-two-flat-rigidity.md`](../2026-08-18-c910-rank-two-flat-rigidity.md).
