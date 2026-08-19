@@ -1,5 +1,6 @@
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.UniversalCH0
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.CubicThreefold
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.SeparatedVariableModuliExclusion
 
 /-!
 # Separation after one stabilization
@@ -9,8 +10,10 @@ family of cubic objects is used simultaneously by the cycle-triviality and
 one-step irrationality interfaces.  Universal `CH₀`-triviality of each fibre
 is obtained from the primitive minimal class and Voisin's criterion; its
 stabilization is supplied by the projective-bundle formula; irrationality is
-obtained from the packet input; and non-isotriviality is retained as the
-explicit period-map premise used by the human proof.
+obtained from the packet input; non-isotriviality is retained as the
+explicit period-map premise used by the human proof; and the moduli points
+represented by cubics of separated-variable type are pinned to the single
+distinguished point by the Eckardt-locus premises.
 
 No invariant pencil, Chow group, period map, or quantum connection is
 constructed here.
@@ -22,11 +25,14 @@ namespace Applications
 
 /-- The four conclusions asserted for a family in the separation theorem. -/
 structure SeparationFamilyConclusion
-    {Base Variety Jacobian : Type*}
+    {Base Variety Jacobian Moduli : Type*}
     (cycleGeometry : CubicCycleTrivialityGeometry Variety Jacobian)
     (rationalGeometry : CubicThreefoldGeometry Variety)
     (isNonIsotrivial : (Base → Variety) → Prop)
-    (fibre : Base → Variety) : Prop where
+    (fibre : Base → Variety) (moduliPoint : Base → Moduli)
+    (separatedVariableType : Variety → Prop)
+    (projectivelyEquivalent : Variety → Variety → Prop)
+    (distinguishedPoint : Moduli) : Prop where
   /-- Every fibre is universally `CH₀`-trivial. -/
   fibreUniversallyCH0Trivial : ∀ parameter,
     cycleGeometry.universallyCH0Trivial (fibre parameter)
@@ -40,16 +46,31 @@ structure SeparationFamilyConclusion
       (rationalGeometry.productWithProjectiveLine (fibre parameter))
   /-- The family is non-isotrivial in coarse moduli. -/
   familyNonIsotrivial : isNonIsotrivial fibre
+  /-- A member represented by a cubic of separated-variable type has the
+  distinguished moduli point. -/
+  separatedVariableOnlyAtDistinguishedPoint : ∀ parameter,
+    RepresentedBySeparatedVariable separatedVariableType projectivelyEquivalent
+        (fibre parameter) →
+      moduliPoint parameter = distinguishedPoint
+  /-- The distinguished moduli point is itself represented by such a cubic, so
+  the separated-variable locus of the family is exactly that point. -/
+  distinguishedPointRepresented : ∃ parameter,
+    moduliPoint parameter = distinguishedPoint ∧
+      RepresentedBySeparatedVariable separatedVariableType projectivelyEquivalent
+        (fibre parameter)
 
 /-- Exact external inputs used when assembling the separation theorem. -/
 structure SeparationFamilyInput
-    {Base Variety Jacobian : Type*}
+    {Base Variety Jacobian Moduli : Type*}
     (packet : Quantum.PacketData Variety)
     (birationalInput : Quantum.DimensionFourBirationalInput packet)
     (cycleGeometry : CubicCycleTrivialityGeometry Variety Jacobian)
     (rationalGeometry : CubicThreefoldGeometry Variety)
     (isNonIsotrivial : (Base → Variety) → Prop)
-    (fibre : Base → Variety) where
+    (fibre : Base → Variety) (moduliPoint : Base → Moduli)
+    (hasEckardtPoint separatedVariableType : Variety → Prop)
+    (projectivelyEquivalent : Variety → Variety → Prop)
+    (distinguishedPoint : Moduli) where
   /-- Six-axis minimal-class input for every fibre. -/
   minimalClassInput : SixAxisMinimalClassFamilyInput cycleGeometry fibre
   /-- Voisin's equivalence for smooth complex cubic threefolds. -/
@@ -68,21 +89,31 @@ structure SeparationFamilyInput
   /-- Non-isotriviality supplied by the nonconstant intermediate-Jacobian
   period map on the family component. -/
   nonIsotrivial : isNonIsotrivial fibre
+  /-- Eckardt-locus inputs pinning the separated-variable locus of the family
+  to the distinguished moduli point. -/
+  separatedVariableInput : SeparatedVariableModuliInput fibre moduliPoint
+    hasEckardtPoint separatedVariableType projectivelyEquivalent
+    distinguishedPoint
 
 /-- Conditional separation theorem with every geometric, Chow-theoretic,
 quantum, and period-map input visible in the theorem type. -/
 theorem separationFamily_of_cycle_packet_and_period_inputs
-    {Base Variety Jacobian : Type*}
+    {Base Variety Jacobian Moduli : Type*}
     (packet : Quantum.PacketData Variety)
     (birationalInput : Quantum.DimensionFourBirationalInput packet)
     (cycleGeometry : CubicCycleTrivialityGeometry Variety Jacobian)
     (rationalGeometry : CubicThreefoldGeometry Variety)
     (isNonIsotrivial : (Base → Variety) → Prop)
-    (fibre : Base → Variety)
+    (fibre : Base → Variety) (moduliPoint : Base → Moduli)
+    (hasEckardtPoint separatedVariableType : Variety → Prop)
+    (projectivelyEquivalent : Variety → Variety → Prop)
+    (distinguishedPoint : Moduli)
     (input : SeparationFamilyInput packet birationalInput cycleGeometry
-      rationalGeometry isNonIsotrivial fibre) :
+      rationalGeometry isNonIsotrivial fibre moduliPoint hasEckardtPoint
+      separatedVariableType projectivelyEquivalent distinguishedPoint) :
     SeparationFamilyConclusion cycleGeometry rationalGeometry
-      isNonIsotrivial fibre := by
+      isNonIsotrivial fibre moduliPoint separatedVariableType
+      projectivelyEquivalent distinguishedPoint := by
   have fibreCH0 : ∀ parameter,
       cycleGeometry.universallyCH0Trivial (fibre parameter) :=
     universalCH0Triviality_of_primitiveMinimalClassFamily
@@ -94,7 +125,15 @@ theorem separationFamily_of_cycle_packet_and_period_inputs
       stabilizationIrrational := fun parameter ↦
         cubicThreefold_oneStepStabilization_not_rational packet
           birationalInput rationalGeometry (input.oneStepInput parameter)
-      familyNonIsotrivial := input.nonIsotrivial }
+      familyNonIsotrivial := input.nonIsotrivial
+      separatedVariableOnlyAtDistinguishedPoint :=
+        (separatedVariableModuli_eq_distinguishedPoint fibre moduliPoint
+          hasEckardtPoint separatedVariableType projectivelyEquivalent
+          distinguishedPoint input.separatedVariableInput).1
+      distinguishedPointRepresented :=
+        (separatedVariableModuli_eq_distinguishedPoint fibre moduliPoint
+          hasEckardtPoint separatedVariableType projectivelyEquivalent
+          distinguishedPoint input.separatedVariableInput).2 }
 
 end Applications
 

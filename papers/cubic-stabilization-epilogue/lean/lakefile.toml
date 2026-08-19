@@ -108,6 +108,7 @@ roots = [
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.ModuleSpectrumTransfer",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.CubicThreefold",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.UniversalCH0",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.SeparatedVariableModuliExclusion",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.SeparationFamily",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.RelativeSixAxis",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.LowDimensionalVanishing",

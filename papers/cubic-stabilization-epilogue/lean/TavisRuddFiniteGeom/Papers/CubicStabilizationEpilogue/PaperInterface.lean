@@ -149,20 +149,69 @@ transports it to the stabilization; the typed packet input gives irrationality;
 and a supplied period-map conclusion gives non-isotriviality.  Every
 geometric, Chow-theoretic, quantum, and moduli premise remains visible. -/
 theorem separationFamily_of_sixAxis_packet_and_period_inputs
-    {Base Variety Jacobian : Type*}
+    {Base Variety Jacobian Moduli : Type*}
     (packet : Quantum.PacketData Variety)
     (birationalInput : Quantum.DimensionFourBirationalInput packet)
     (cycleGeometry : Applications.CubicCycleTrivialityGeometry
       Variety Jacobian)
     (rationalGeometry : Applications.CubicThreefoldGeometry Variety)
     (isNonIsotrivial : (Base → Variety) → Prop)
-    (fibre : Base → Variety)
+    (fibre : Base → Variety) (moduliPoint : Base → Moduli)
+    (hasEckardtPoint separatedVariableType : Variety → Prop)
+    (projectivelyEquivalent : Variety → Variety → Prop)
+    (distinguishedPoint : Moduli)
     (input : Applications.SeparationFamilyInput packet birationalInput
-      cycleGeometry rationalGeometry isNonIsotrivial fibre) :
+      cycleGeometry rationalGeometry isNonIsotrivial fibre moduliPoint
+      hasEckardtPoint separatedVariableType projectivelyEquivalent
+      distinguishedPoint) :
     Applications.SeparationFamilyConclusion cycleGeometry rationalGeometry
-      isNonIsotrivial fibre :=
+      isNonIsotrivial fibre moduliPoint separatedVariableType
+      projectivelyEquivalent distinguishedPoint :=
   Applications.separationFamily_of_cycle_packet_and_period_inputs packet
-    birationalInput cycleGeometry rationalGeometry isNonIsotrivial fibre input
+    birationalInput cycleGeometry rationalGeometry isNonIsotrivial fibre
+    moduliPoint hasEckardtPoint separatedVariableType projectivelyEquivalent
+    distinguishedPoint input
+
+/-- Exact conditional form of the separated-variable exclusion along the
+family.  A cubic threefold whose defining form is a sum of cubic forms in
+pairwise disjoint groups of at most three variables carries an Eckardt point,
+carrying one is invariant under projective equivalence, and the Eckardt locus of
+the family lies over a single moduli point; Lean concludes that a member
+projectively equivalent to such a cubic has that moduli point, and, with the
+supplied witness at that point, that the separated-variable locus of the family
+is exactly it.  Every geometric statement — the Eckardt criterion, its
+projective invariance, the Eckardt locus of the pencil, and the witness — is an
+explicit premise, and no cubic form, Eckardt point, pencil, or coarse moduli
+space is constructed. -/
+theorem separatedVariableLocus_of_eckardtLocus_inputs
+    {Base Variety Moduli : Type*}
+    (fibre : Base → Variety) (moduliPoint : Base → Moduli)
+    (hasEckardtPoint separatedVariableType : Variety → Prop)
+    (projectivelyEquivalent : Variety → Variety → Prop)
+    (distinguishedPoint : Moduli)
+    (input : Applications.SeparatedVariableModuliInput fibre moduliPoint
+      hasEckardtPoint separatedVariableType projectivelyEquivalent
+      distinguishedPoint) :
+    (∀ parameter,
+        Applications.RepresentedBySeparatedVariable separatedVariableType
+            projectivelyEquivalent (fibre parameter) →
+          moduliPoint parameter = distinguishedPoint) ∧
+      (∃ parameter, moduliPoint parameter = distinguishedPoint ∧
+        Applications.RepresentedBySeparatedVariable separatedVariableType
+          projectivelyEquivalent (fibre parameter)) ∧
+      ∀ parameter, moduliPoint parameter ≠ distinguishedPoint →
+        ¬ Applications.RepresentedBySeparatedVariable separatedVariableType
+          projectivelyEquivalent (fibre parameter) :=
+  ⟨(Applications.separatedVariableModuli_eq_distinguishedPoint fibre moduliPoint
+      hasEckardtPoint separatedVariableType projectivelyEquivalent
+      distinguishedPoint input).1,
+    (Applications.separatedVariableModuli_eq_distinguishedPoint fibre moduliPoint
+      hasEckardtPoint separatedVariableType projectivelyEquivalent
+      distinguishedPoint input).2,
+    fun parameter distinct ↦
+      Applications.not_representedBySeparatedVariable_of_ne_distinguishedPoint
+        fibre moduliPoint hasEckardtPoint separatedVariableType
+        projectivelyEquivalent distinguishedPoint input parameter distinct⟩
 
 /-- Organizational interface for the relative six-axis source, accepting supplied
 types, functions, and proposition fields with opaque scheme-theoretic semantics for the

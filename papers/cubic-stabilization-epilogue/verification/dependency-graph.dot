@@ -38,7 +38,7 @@ digraph manuscript {
   "lem:six-axis-local-chart" [fillcolor="#fde8c8", tooltip="fragment"];
   "lem:six-point-hearts" [fillcolor="#fde8c8", tooltip="fragment"];
   "lem:spectrum-transfer" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
-  "prop:A5-nonseparated" [fillcolor="#ffffff", tooltip="absent"];
+  "prop:A5-nonseparated" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
   "prop:A5-not-coprime" [fillcolor="#ffffff", tooltip="absent"];
   "prop:atom-invariant" [fillcolor="#fde8c8", tooltip="fragment"];
   "prop:cubic-atom" [fillcolor="#fde8c8", tooltip="fragment"];
