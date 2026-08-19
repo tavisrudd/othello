@@ -105,6 +105,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.AtomicRankT
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CubicSeparatedBlockGauge
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.UniversalCH0Separation
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.BulkShiftFramedInvariance
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.EckardtHessianRank
 
 /-!
 # Reviewer interface for the cubic-stabilization companion
@@ -7117,5 +7118,25 @@ theorem divisorSubstitution_sixthMultiplicity_eq
     Quantum.sixthMultiplicityPolynomial input.bulkMonodromy.charpoly =
       Quantum.sixthMultiplicityPolynomial input.smallMonodromy.charpoly :=
   Quantum.sixthMultiplicity_eq_of_divisorShift input injective fixesPositive fixesNegative
+
+/-- Reviewer-facing rank criterion behind the Eckardt condition.  In
+coordinates adapted to a point of a cubic hypersurface, the defining form reads
+`x₀²L + x₀Q + C` and the Hessian at that point is the bordered symmetric matrix
+whose distinguished entry is zero, whose border is the coefficient vector of the
+linear part `L`, and whose remaining block is the matrix of the quadratic part
+`Q`.  Over a field in which two is invertible, and for a nonzero border and a
+symmetric block, that matrix has rank at most two exactly when the block is the
+symmetrized outer product of the border with a single vector, which is the
+matrix form of `Q` being a multiple of `L`.  Lean constructs no cubic form,
+hypersurface, tangent hyperplane section, cone, or Eckardt point, and does not
+carry out the passage from a point of a smooth cubic threefold to this normal
+form. -/
+theorem borderedHessian_rank_le_two_iff_borderDivides
+    {K Index : Type*} [Field K] [Fintype Index] [DecidableEq Index]
+    {v : Index → K} {block : Matrix Index Index K} (nonzeroBorder : v ≠ 0)
+    (symmetric : block.IsSymm) (twoNeZero : (2 : K) ≠ 0) :
+    (Applications.borderedMatrix v block).rank ≤ 2 ↔
+      ∃ w, block = Applications.symmetrizedOuterProduct v w :=
+  Applications.borderedMatrix_rank_le_two_iff nonzeroBorder symmetric twoNeZero
 
 end TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue

@@ -20,7 +20,7 @@ digraph manuscript {
   "lem:disc" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
   "lem:divisor-tagging" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
   "lem:dvr-rank-one" [fillcolor="#cdeccd", tooltip="complete"];
-  "lem:eckardt-rank" [fillcolor="#ffffff", tooltip="absent"];
+  "lem:eckardt-rank" [fillcolor="#fde8c8", tooltip="fragment"];
   "lem:euler-sign" [fillcolor="#fde8c8", tooltip="fragment"];
   "lem:exact-low-degree-shifts" [fillcolor="#fde8c8", tooltip="fragment"];
   "lem:factor-glue" [fillcolor="#fde8c8", tooltip="fragment"];

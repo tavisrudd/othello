@@ -294,13 +294,16 @@
     },
     {
       "manuscript_label": "lem:eckardt-rank",
-      "coverage": "absent",
-      "declarations": [],
-      "objects": "Smooth cubic threefolds in projective four-space, a point of such a threefold, the tangent hyperplane section there, the Hessian matrix of the defining form, the class of forms that split as sums of cubic forms in pairwise disjoint nonempty groups of at most three variables, and the coprime-degree normal form of Yang, Yu and Zhu.",
-      "hypotheses": "Smoothness of the cubic threefold; for the two families, membership in the separated-variable class or in the normal form of that family.",
-      "conclusion": "The tangent hyperplane section at a point is a cone with that point as vertex if and only if the Hessian of the defining form there has rank at most two, and every smooth cubic threefold in either named class carries such a point.",
-      "cautions": "Not formalized.  The argument is a coordinate computation together with the projective geometry of cubic threefolds, which is outside the companion's scope.",
-      "statement_digest": "c33eb644e9fae5b20244edaaffca9683ce83bb5e21af4071900be18a8d00cdf0"
+      "coverage": "fragment",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.borderedHessian_rank_le_two_iff_borderDivides"
+      ],
+      "objects": "A field in which two is invertible, a finite index type for the coordinates other than the distinguished one, a nonzero border vector in the role of the coefficient vector of the linear part of the defining form in adapted coordinates, a symmetric block in the role of the matrix of its quadratic part, the bordered symmetric matrix built from them in the role of the Hessian at the point, its matrix rank, and the symmetrized outer product of two vectors in the role of a quadratic form divisible by a given linear one.",
+      "hypotheses": "The border vector is nonzero, which is the smoothness of the hypersurface at the point in the adapted coordinates; the block is symmetric; and two is invertible in the coefficient field.",
+      "conclusion": "The bordered matrix has rank at most two exactly when the block is the symmetrized outer product of the border vector with some vector.",
+      "cautions": "A fragment.  Lean constructs no projective space, cubic form, hypersurface, smooth point, tangent hyperplane section, cone, or Eckardt point, and does not carry out the passage from a point of a smooth cubic threefold to the adapted normal form or the identification of the bordered matrix with the Hessian of the form.  The equivalence proved is the linear algebra behind the criterion, between matrix rank and divisibility of the quadratic part by the linear part, in the matrix form of both conditions.  The second assertion of the manuscript's lemma, that every smooth cubic threefold in the separated-variable class and in the coprime-degree family carries such a point, is not formalized: it needs the geometry the companion does not construct.",
+      "statement_digest": "c33eb644e9fae5b20244edaaffca9683ce83bb5e21af4071900be18a8d00cdf0",
+      "terminal_digest": "f59e25dbc38285f2dce54fc54ae3d318881c0e0fd07ee0abbbe46d180cbfb2d5"
     },
     {
       "manuscript_label": "prop:A5-not-coprime",

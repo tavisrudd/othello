@@ -279,3 +279,4 @@ TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.fermatCubic_universalCH0_a
 TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.coprimeUnirationalDegrees_universalCH0_and_irrational_stabilization: propext, Classical.choice, Quot.sound
 TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.invariantScalarTwist_framedMonodromy_eq: propext, Classical.choice, Quot.sound
 TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.divisorSubstitution_sixthMultiplicity_eq: propext, Classical.choice, Quot.sound
+TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.borderedHessian_rank_le_two_iff_borderDivides: propext, Classical.choice, Quot.sound
