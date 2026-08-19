@@ -54,10 +54,10 @@ whole odd cohomology in that packet, and the constancy of rank on a connected
 component.
 
 Checked coverage snapshot: 62 claims; 5 absent; 27 fragmentary; 29 conditional;
-1 complete; 293 reviewer terminals, of which 47 are machinery serving no current
+1 complete; 295 reviewer terminals, of which 48 are machinery serving no current
 manuscript claim.
 
-Those 46 are kernel-checked and reusable, and the claim map records for each one
+Those machinery terminals are kernel-checked and reusable, and the claim map records for each one
 why no current claim rests on it.  They formalize the pro-Laurent gauge tower,
 coefficientwise and flat base change of horizontal monodromy, ideal-filtration
 and adic quotient towers, existence and uniqueness of normalized flat gauges

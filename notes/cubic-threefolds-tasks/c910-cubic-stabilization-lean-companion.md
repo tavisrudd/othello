@@ -715,6 +715,28 @@ isogeny kernel and the symplectic compatibility of both identifications remain
 open and need the discriminant group `Λ^#/Λ`.  Report:
 [`../2026-08-19-c910-relative-six-axis-homology-realization.md`](../2026-08-19-c910-relative-six-axis-homology-realization.md).
 
+**The discriminant group of the source polarization and maximal isotropy of the
+isogeny kernel, 2026-08-19.**  `GraphLattices/IntegralDiscriminantGroup.lean`
+builds the discriminant group `Λ^#/Λ` of an integral lattice pairing as the
+cokernel of its matrix, with the `ℚ/ℤ`-valued discriminant pairing
+`(1/det F)·xᵀ adj(F) y` on representatives, nondegeneracy, and order `|det F|`
+through Mathlib's Smith-form cardinality theorem.  For an integral `C` pulling a
+unimodular `T` back to `F`, the cokernel of `C` embeds through `Cᵀ T` and its
+image is isotropic, equal to its own orthogonal complement, and maximal among
+isotropic subgroups, of order `|det C|` whose square is `|det F|`.  Maximal
+isotropy is the adjugate identity `C adj(F) Cᵀ = (det C)² adj(T)` and a
+multiplication by `Cᵀ T adj(Tᵀ)`, so the manuscript's order count is a
+consequence rather than a step.  `GraphLattices/SixAxisDiscriminantGroup.lean`
+specializes to order `6⁸`, kernel order `6⁴`, and maximal isotropy, and
+`Applications/RelativeSixAxis.lean` carries the per-fibre statements into the
+packaged conclusion.  Two terminals were added, one on the row and one
+machinery, and the snapshot moves to 295 reviewer terminals and 48 machinery
+rows with unchanged coverage counts.  What is still supplied: the commutator
+pairing of the abelian scheme, hence the identification of this lattice pairing
+and this kernel with the geometric ones, and the primary decomposition, so the
+lemma's per-prime form of the assertion.  Report:
+[`../2026-08-19-c910-source-discriminant-group.md`](../2026-08-19-c910-source-discriminant-group.md).
+
 ## Prioritized Lean backlog
 
 Work in this order unless a later literature or library dependency changes the
@@ -799,15 +821,18 @@ priority 2 below.
 2. **Relative six-axis geometry — started 2026-08-19.**  The polarization
    pullback, isogeny degree and finiteness, and both primary discriminant
    kernels are now proved from an integral first-homology realization rather
-   than supplied, and the manuscript's normalized primary pairings are
-   formalized.  What remains: the discriminant group `Λ^#/Λ` of the source
-   polarization, with the order and isotropy count that makes the isogeny kernel
-   maximal isotropic; the symplectic compatibility of both primary
-   identifications with that discriminant pairing; equivariance of the
+   than supplied, the manuscript's normalized primary pairings are formalized,
+   and the discriminant group `Λ^#/Λ` of the source polarization is built with
+   its `ℚ/ℤ`-valued pairing, its order `6⁸`, and maximal isotropy of the
+   order-`6⁴` kernel subgroup.  What remains: the primary decomposition
+   `D = D₂ ⊕ D₃`, which carries maximal isotropy to each `𝒦_p` in `𝒟_p` as the
+   lemma states it; the symplectic compatibility of both primary
+   identifications with the discriminant pairing; equivariance of the
    constructed identifications; the elliptic quotient and inclusion maps and the
    continuous packet classifier; and, beyond Mathlib's present reach, semantics
    for the assertion that the displayed matrices are induced by the relative
-   geometry.
+   geometry and that the discriminant pairing is the geometric commutator
+   pairing.
 3. **Geometric cohomology realization.**  Identify the formal graph divisor
    lattice with the intermediate-Jacobian divisor lattice and transport the
    all-degree saturation theorem to the principal minimal class.

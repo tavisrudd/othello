@@ -1,5 +1,6 @@
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPointStableHalves
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisSourcePolarization
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisDiscriminantGroup
 
 /-!
 # The relative six-axis packet over its integral homology realization
@@ -16,13 +17,17 @@ against the Kronecker polarization of the six-axis source.  From that data
 Lean proves the degree and finiteness of the comparison — its determinant has
 absolute value `6⁴` and it is injective — and, after choosing coordinates on
 the two-torsion fibres, produces the two-primary discriminant identification
-`D₂ ≃ H₂ ⊗ E[2]` rather than assuming it.
+`D₂ ≃ H₂ ⊗ E[2]` rather than assuming it.  The same data also determines the
+discriminant group of the source polarization, of order `6⁸`, together with the
+image of the comparison cokernel in it: that image has order `6⁴` and is a
+maximal isotropic subgroup for the `ℚ/ℤ`-valued discriminant pairing.
 
 The second layer remains supplied: the assertion that these integral matrices
 are the ones induced on homology by an actual elliptic scheme, relative
-morphism, and polarization, together with the equivariance, kernel, and
-maximal-isotropy assertions of the lemma.  Those fields are propositions
-carried by the structure, not proofs, and Lean gives them no
+morphism, and polarization, together with the equivariance assertions of the
+lemma and its assertions about the geometric two-primary kernel, whose
+splitting off from the full kernel is not represented here.  Those fields are
+propositions carried by the structure, not proofs, and Lean gives them no
 scheme-theoretic semantics.
 
 Lean also independently proves the full integral Smith witness for the
@@ -173,6 +178,37 @@ theorem relativeSixAxisHomologyRealization_comparison_injective
   GraphLattices.sixAxisPolarizationPullback_mulVec_injective
     realization.jacobianPolarizationPrincipal realization.polarizationPullback
 
+/-- The image, in the discriminant group of the six-axis source polarization,
+of the cokernel of one fibre's comparison matrix.  This is the lattice model of
+the kernel of the relative isogeny, seen inside the kernel of the source
+polarization. -/
+def relativeSixAxisKernelSubgroup (realization : RelativeSixAxisHomologyRealization) :
+    Submodule ℤ GraphLattices.sixAxisSourceDiscriminantGroup :=
+  GraphLattices.comparisonKernelSubgroup realization.polarizationPullback
+
+/-- The lattice model of the isogeny kernel has order `6⁴` in the discriminant
+group, which has order `6⁸`. -/
+theorem relativeSixAxisKernelSubgroup_natCard
+    (realization : RelativeSixAxisHomologyRealization) :
+    Nat.card GraphLattices.sixAxisSourceDiscriminantGroup = 6 ^ 8 ∧
+      Nat.card (relativeSixAxisKernelSubgroup realization) = 6 ^ 4 :=
+  ⟨GraphLattices.natCard_sixAxisSourceDiscriminantGroup,
+    GraphLattices.natCard_sixAxisSourceKernelSubgroup
+      realization.jacobianPolarizationPrincipal realization.polarizationPullback⟩
+
+/-- The lattice model of the isogeny kernel is a maximal isotropic subgroup of
+the discriminant group of the source polarization: it equals its own orthogonal
+complement for the `ℚ/ℤ`-valued discriminant pairing, and no larger subgroup is
+isotropic. -/
+theorem relativeSixAxisKernelSubgroup_isMaximalIsotropic
+    (realization : RelativeSixAxisHomologyRealization) :
+    GraphLattices.IsMaximalIsotropicSubgroup
+      (GraphLattices.sixAxisSourcePolarization_transpose ℤ)
+      GraphLattices.sixAxisSourcePolarization_det_ne_zero
+      (relativeSixAxisKernelSubgroup realization) :=
+  GraphLattices.sixAxisSourceKernelSubgroup_isMaximalIsotropic
+    realization.jacobianPolarizationPrincipal realization.polarizationPullback
+
 /-- The two-primary discriminant identification `D₂ ≃ H₂ ⊗ E[2]`, constructed
 from the two-torsion coordinates and from the computed kernel of the realized
 source polarization rather than supplied. -/
@@ -295,6 +331,18 @@ structure RelativeSixAxisConclusion
     ∀ (geometry : RelativeSixAxisGeometricInput objects) (parameter : Base),
       (geometry.homology parameter).comparison.det.natAbs = 6 ^ 4 ∧
         Function.Injective (geometry.homology parameter).comparison.mulVec
+  /-- On every fibre the discriminant group of the realized source polarization
+  has order `6⁸`, the lattice model of the isogeny kernel inside it has order
+  `6⁴`, and that subgroup is maximal isotropic for the `ℚ/ℤ`-valued
+  discriminant pairing. -/
+  discriminantGroupAndKernel :
+    ∀ (geometry : RelativeSixAxisGeometricInput objects) (parameter : Base),
+      Nat.card GraphLattices.sixAxisSourceDiscriminantGroup = 6 ^ 8 ∧
+        Nat.card (relativeSixAxisKernelSubgroup (geometry.homology parameter)) = 6 ^ 4 ∧
+          GraphLattices.IsMaximalIsotropicSubgroup
+            (GraphLattices.sixAxisSourcePolarization_transpose ℤ)
+            GraphLattices.sixAxisSourcePolarization_det_ne_zero
+            (relativeSixAxisKernelSubgroup (geometry.homology parameter))
   /-- The two-primary discriminant identification `D₂ ≃ H₂ ⊗ E[2]` is
   constructed from the realized polarization rather than supplied: in the
   supplied two-torsion coordinates it is the computed kernel equivalence of the
@@ -411,6 +459,10 @@ theorem relativeSixAxis_of_geometricInputs
           (otherGeometry.homology parameter),
         relativeSixAxisHomologyRealization_comparison_injective
           (otherGeometry.homology parameter)⟩,
+    fun otherGeometry parameter ↦
+      ⟨(relativeSixAxisKernelSubgroup_natCard (otherGeometry.homology parameter)).1,
+        (relativeSixAxisKernelSubgroup_natCard (otherGeometry.homology parameter)).2,
+        relativeSixAxisKernelSubgroup_isMaximalIsotropic (otherGeometry.homology parameter)⟩,
     fun otherGeometry parameter _ ↦
       (otherGeometry.heartTensorTorsionCoordinates parameter).apply_symm_apply _,
     fun otherGeometry parameter _ ↦

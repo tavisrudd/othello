@@ -178,6 +178,11 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   The separated-variable clause of the separation theorem is also formalized,
   so the manuscript names the Fermat point instead of saying all but finitely
   many.
+  The discriminant group of the source polarization is now built as well, with
+  its `Q/Z`-valued pairing, order `6^8`, and maximal isotropy of the order-`6^4`
+  kernel subgroup of any comparison matrix satisfying the pullback identity;
+  the per-prime form of that assertion and the geometric commutator pairing
+  remain supplied.
   Card:
   `../cubic-threefolds-tasks/c910-cubic-stabilization-lean-companion.md`; gap audit
   `../2026-08-18-c910-post-restructure-gap-audit.md`; anchor report
@@ -209,6 +214,8 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   absent-rows report `../2026-08-19-c910-separation-and-absent-rows.md`;
   chart split-presentation report
   `../2026-08-19-c910-six-axis-chart-split-presentation.md`;
+  source-discriminant-group report
+  `../2026-08-19-c910-source-discriminant-group.md`;
   interim release report
   `../2026-08-12-c910-partial-lean-release.md`.
 - **C920 — closed 2026-08-18.** Hypothesis 5.7T of the epilogue is now used only

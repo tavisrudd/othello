@@ -269,6 +269,74 @@ theorem relativeSixAxis_polarizationPullback_degree
     Applications.relativeSixAxisHomologyRealization_comparison_natAbs_det realization,
     Applications.relativeSixAxisHomologyRealization_comparison_injective realization⟩
 
+/-- The discriminant group of the six-axis source polarization and the lattice
+model of the isogeny kernel inside it.  The discriminant group is the dual
+quotient `Λ^#/Λ` of the integral source lattice, presented as the cokernel of
+the polarization; it has order `6⁸`.  From a fibre's homology realization —
+a unimodular alternating polarization matrix for the Jacobian fibre, an
+integral comparison matrix, and the pullback identity between them — the image
+of the comparison cokernel in that group has order `6⁴`, equals its own
+orthogonal complement for the `ℚ/ℤ`-valued discriminant pairing, and is
+therefore maximal among isotropic subgroups.  These are the manuscript's order
+of the kernel of the source polarization, degree of the relative isogeny, and
+maximal isotropy of its kernel, proved for the supplied integral matrices; no
+abelian scheme, isogeny, Weil pairing, or geometric commutator pairing is
+constructed, and the primary decomposition of the kernel is not represented. -/
+theorem relativeSixAxis_discriminantGroup_maximalIsotropicKernel
+    (realization : Applications.RelativeSixAxisHomologyRealization) :
+    Nat.card GraphLattices.sixAxisSourceDiscriminantGroup = 6 ^ 8 ∧
+      Nat.card (Applications.relativeSixAxisKernelSubgroup realization) = 6 ^ 4 ∧
+        Applications.relativeSixAxisKernelSubgroup realization =
+            GraphLattices.discriminantPerp
+              (GraphLattices.sixAxisSourcePolarization_transpose ℤ)
+              GraphLattices.sixAxisSourcePolarization_det_ne_zero
+              (Applications.relativeSixAxisKernelSubgroup realization) ∧
+          GraphLattices.IsMaximalIsotropicSubgroup
+            (GraphLattices.sixAxisSourcePolarization_transpose ℤ)
+            GraphLattices.sixAxisSourcePolarization_det_ne_zero
+            (Applications.relativeSixAxisKernelSubgroup realization) :=
+  ⟨(Applications.relativeSixAxisKernelSubgroup_natCard realization).1,
+    (Applications.relativeSixAxisKernelSubgroup_natCard realization).2,
+    GraphLattices.sixAxisSourceKernelSubgroup_eq_perp
+      realization.jacobianPolarizationPrincipal realization.polarizationPullback,
+    Applications.relativeSixAxisKernelSubgroup_isMaximalIsotropic realization⟩
+
+/-- The discriminant pairing of the six-axis source polarization on integral
+representatives, and its nondegeneracy.  On the classes of two integral
+vectors the pairing is the class modulo one of the rational number
+`(1/6⁸)·xᵀ adj(A) y`, where `A` is the integral source polarization, so it
+vanishes exactly when `6⁸` divides that integral numerator; and a class pairing
+to zero with every class is zero.  This is the discriminant pairing of the
+lattice, not the commutator pairing of a polarized abelian scheme, which is not
+constructed. -/
+theorem sixAxisSourceDiscriminantPairing_values_and_nondegeneracy :
+    (∀ left right : Fin 5 × Fin 2 → ℤ,
+        GraphLattices.sixAxisSourceDiscriminantPairing (Submodule.Quotient.mk left)
+            (Submodule.Quotient.mk right) =
+          Submodule.Quotient.mk
+            (GraphLattices.discriminantValue (GraphLattices.sixAxisSourcePolarization ℤ)
+              left right)) ∧
+      (∀ left right : Fin 5 × Fin 2 → ℤ,
+        GraphLattices.sixAxisSourceDiscriminantPairing (Submodule.Quotient.mk left)
+              (Submodule.Quotient.mk right) = 0 ↔
+          (6 : ℤ) ^ 8 ∣
+            dotProduct left
+              ((GraphLattices.sixAxisSourcePolarization ℤ).adjugate.mulVec right)) ∧
+      ∀ element : GraphLattices.sixAxisSourceDiscriminantGroup,
+        (∀ other : GraphLattices.sixAxisSourceDiscriminantGroup,
+            GraphLattices.sixAxisSourceDiscriminantPairing element other = 0) →
+          element = 0 :=
+  ⟨fun left right ↦
+      GraphLattices.discriminantPairing_mk (GraphLattices.sixAxisSourcePolarization_transpose ℤ)
+        GraphLattices.sixAxisSourcePolarization_det_ne_zero left right,
+    fun left right ↦ by
+      rw [← GraphLattices.sixAxisSourcePolarization_det]
+      exact GraphLattices.discriminantPairing_mk_eq_zero_iff
+        (GraphLattices.sixAxisSourcePolarization_transpose ℤ)
+        GraphLattices.sixAxisSourcePolarization_det_ne_zero left right,
+    fun _ orthogonal ↦
+      GraphLattices.sixAxisSourceDiscriminantPairing_eq_zero_of_forall orthogonal⟩
+
 /-- Both primary discriminants of the six-axis source polarization in
 coordinates.  The kernel of the two-torsion reduction of the Kronecker
 polarization is linearly equivalent to four copies of the rank-two two-torsion
