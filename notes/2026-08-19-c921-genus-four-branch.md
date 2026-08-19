@@ -193,16 +193,16 @@ have to preserve all four of those invariants simultaneously.
 
 ## Extra juice from the same frame
 
-**The genus-five route needs a genuine isogeny.** If `J(X_b)` were *isomorphic* as a
-principally polarized variety to `J(C)` for an irreducible genus-five curve, Torelli would
-give `C` a faithful `A_5`-action. Riemann--Hurwitz then reads `8 = 60(2g'-2) + R` with
-contributions `30, 40, 48` for element orders `2, 3, 5`; quotient genus zero forces
-`R = 128` and `40b + 48c = 128` with `b = 2, c = 1`, so the branch datum is `(3,3,5)` and
-is unique. Three branch points on a rational curve leave no modulus, so such curves are
-rigid: finitely many up to isomorphism. The pencil is not isotrivial, so at most finitely
-many of its members could be hit. The second route therefore requires an isogeny of degree
-greater than one, which is how C914 stated it, and no isomorphism-level attack can settle
-it.
+**The genus-five route needs a genuine isogeny — but this was already classical.**
+Clemens and Griffiths prove that the intermediate Jacobian of a smooth cubic threefold is
+neither the Jacobian of a curve nor a product of Jacobians; that is the content of their
+irrationality theorem. So `J(X_b)` is never isomorphic to a genus-five Jacobian, for every
+member, and the second route was never open at the isomorphism level. The dihedral frame
+above reproves a weaker form of this by rigidity — if `J(X_b)` were isomorphic to `J(C)`,
+Torelli would give `C` a faithful `A_5`-action, Riemann--Hurwitz forces the unique branch
+datum `(3,3,5)` over the line, three branch points leave no modulus, so such curves are
+rigid and a non-isotrivial family can meet them only finitely often. Worth recording as a
+consistency check on the frame, not as a new statement.
 
 **Why every Weil polynomial came out a square.** Over the rationals `D_5` has one
 four-dimensional irreducible representation, namely `V_1 + V_2` with character field
@@ -213,18 +213,60 @@ representation theory and carries no extra information — in particular it is *
 evidence that the curve-side and pencil-side families agree, even though C914 records the
 same `B^2` shape for `A_b` through van Geemen and Yamauchi.
 
+## What the factor actually is, and where that leads
+
+Write `Lambda = Z^Omega / Z 1` in the basis `f_i = e_i mod 1` for the five axes other than
+`H`. Then `v = -(f_1 + ... + f_5)`, `kappa(f_i, v) = -1`, so
+
+    v^perp = { x in Z^5 : sum x_i = 0 }  with  kappa(x,y) = 6 <x,y>,
+
+which is **six times the `A_4` root lattice**, exactly. So the four-dimensional factor is
+
+    A_b  isogenous to  E_b tensor_Z A_4,
+
+with the polarization form `6 kappa_{A_4}` tensor the symplectic form of `H_1(E_b)`; the
+principal polarization of C914 lives on a finite-index overlattice of `A_4 tensor M`.
+`kappa(v,v) = 5` is the discriminant of `A_4`, as it must be.
+
+This is a better handle than the moduli comparison used above, because it is uniform in
+`b`. Three things follow that are worth queueing rather than closing here.
+
+- The question "for which even lattices `L` is `E tensor L` a Jacobian" has a literature —
+  Jacobians isogenous or isomorphic to powers of an elliptic curve, in the line of
+  Ekedahl--Serre and of Kani's work on Jacobians isomorphic to products of elliptic curves.
+  A hit for `L = A_4` would replace "all but finitely many `b`" with "every `b`", and would
+  do it structurally.
+- The two-dimensional moduli of `D_5`-fourfolds carrying `V_1 + V_2` is a Hilbert modular
+  surface for `Q(sqrt 5)`. Our family is the locus of tensor-type points, a modular curve
+  in it; the curve-side family is another curve in it. Their intersection number is the
+  size of the exceptional set, and Hirzebruch--Zagier theory computes intersection numbers
+  of exactly such cycles. That would locate, or at least bound, the finite set this report
+  leaves unlocated.
+- Deligne--Mostow describe the monodromy of cyclic quintic covers of the line branched at
+  four points as an explicit lattice in `PU(1,1)`, for each exponent vector. Zariski
+  density of that monodromy would give the generic endomorphism algebra directly, and would
+  replace the point-count step of this report with a citation. The two exponent vectors
+  needed are `(1,4,1,4)/5` and `(1,4,2,3)/5`.
+
 ## Mystery ledger
 
 - **Why the two one-dimensional families are so close and still distinct.** Both live in
   the same two-dimensional moduli of `D_5`-fourfolds, both are isogenous to squares of
   real-multiplication surfaces, and both carry the identical analytic representation. What
   separates them is only whether that surface is isogenous to the square of an elliptic
-  curve. Settled by the computation, not by a structural invariant; a structural
-  separator would be a better statement and is not in hand.
+  curve. Partly settled by the closeout pass above: the pencil side is the tensor locus
+  `E_b tensor A_4` in a Hilbert modular surface for `Q(sqrt 5)`, which is a modular curve
+  in it, so the separation is between two named cycles rather than between a family and a
+  computation. Turning that into a proof still needs the generic endomorphism algebra of
+  the curve side, which the point count supplies and Deligne--Mostow monodromy would
+  supply better.
 - **The exceptional finite set is unlocated.** The argument gives no bound on how many
   pencil members could have `A_b` a genus-four Jacobian, and no method to find them. The
-  same gap sits in C914's two finiteness propositions, so it is a pattern in this program
-  rather than a defect of this step.
+  closeout pass names a route that did not exist when the result was proved — an
+  intersection number of two cycles on a Hilbert modular surface, in the range of
+  Hirzebruch--Zagier theory — but it has not been carried out. The same gap sits in C914's
+  two finiteness propositions, so it is a pattern in this program rather than a defect of
+  this step.
 - **The genus-five route has no frame yet.** Torelli is unavailable once the comparison is
   an isogeny of degree greater than one, and nothing here replaces it. The natural next
   move is the lattice side: ask which odd-degree isogenies from a genus-five Jacobian are

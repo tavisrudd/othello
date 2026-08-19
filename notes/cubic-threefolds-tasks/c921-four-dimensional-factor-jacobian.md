@@ -43,10 +43,10 @@ exactly if one of these does:
   bundle: `../2026-08-19-c921-genus-four-branch.md`.
 - [ ] `J(X_b)` is odd-degree isogenous to the Jacobian of an irreducible
   genus-five curve, with no product decomposition involved. The isogeny must have
-  degree greater than one: genus-five curves with a faithful `A_5`-action have
-  the unique branch datum `(3,3,5)` over the line and are therefore rigid, while
-  the pencil is not isotrivial, so no isomorphism-level comparison can hold for
-  more than finitely many members.
+  degree greater than one, since Clemens--Griffiths already rule out an
+  isomorphism for every smooth cubic threefold; that is what makes this the hard
+  branch, and it is why Voisin's criterion is stated up to odd-degree isogeny in
+  the first place.
 
 A positive answer puts the pencil inside a Voisin component and demotes the
 epilogue's separation corollary on the pencil to a reproof; a negative answer
@@ -87,3 +87,14 @@ Jacobian.
 The attacks that settled the genus-four branch are recorded in
 `../2026-08-19-c921-genus-four-branch.md`; the Schottky-form route listed here
 before was not needed.
+
+## Structural handle found 2026-08-19
+
+In the basis of the five axes other than the chosen one, the orthogonal
+complement of the axis class is `{ x in Z^5 : sum x_i = 0 }` with the form
+`6 <x,y>`: six times the `A_4` root lattice. So `A_b` is isogenous to
+`E_b tensor_Z A_4`, uniformly in `b`. Two consequences to chase before more
+computation: whether the literature on Jacobians isogenous to powers of an
+elliptic curve settles `E tensor A_4` for every `b` rather than the generic one,
+and whether the exceptional finite set is an intersection number of two cycles on
+the Hilbert modular surface for `Q(sqrt 5)`.
