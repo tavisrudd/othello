@@ -1,0 +1,13 @@
+{
+  "mode": "marginal",
+  "m": 6,
+  "known_points": 1,
+  "new_points": 5,
+  "two_graphs": 1024,
+  "x_pairs_checked": 507904,
+  "masks_minimal": 1185,
+  "marginal_cost": 12,
+  "three_per_new_point": 15,
+  "optimal_triples": [[0,1,2],[0,1,3],[0,1,4],[0,1,5],[0,2,3],[0,2,4],[0,2,5],[0,3,4],[0,3,5],[1,2,3],[1,2,4],[1,3,5]],
+  "search_nodes": 5540159
+}

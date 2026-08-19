@@ -30,11 +30,17 @@ def solve_highs(nvars, masks):
     import numpy as np
     from scipy.optimize import milp, LinearConstraint, Bounds
 
+    from scipy.sparse import csc_matrix
+
     rows = len(masks)
-    a = np.zeros((rows, nvars))
+    ri, ci = [], []
     for i, m in enumerate(masks):
         for t in m:
-            a[i, t] = 1.0
+            ri.append(i)
+            ci.append(t)
+    a = csc_matrix(
+        (np.ones(len(ri)), (np.array(ri), np.array(ci))), shape=(rows, nvars)
+    )
     con = LinearConstraint(a, lb=np.ones(rows), ub=np.full(rows, np.inf))
     res = milp(
         c=np.ones(nvars),
@@ -89,11 +95,16 @@ def main():
         assert mm and all(0 <= t < tc for t in mm)
     # Keep only inclusion-minimal masks; supersets are redundant constraints.
     masks.sort(key=lambda mm: (len(mm), mm))
-    kept = []
-    for mm in masks:
-        s = set(mm)
-        if not any(set(k) <= s for k in kept):
-            kept.append(mm)
+    if len(masks) <= 5000:
+        kept = []
+        for mm in masks:
+            s = set(mm)
+            if not any(set(k) <= s for k in kept):
+                kept.append(mm)
+    else:
+        # The generator already emitted an inclusion-minimal family; re-running
+        # the quadratic filter here would dominate the solve.
+        kept = [list(mm) for mm in dict.fromkeys(tuple(mm) for mm in masks)]
 
     k_highs, sol_highs, status = solve_highs(tc, kept)
     assert all(any(t in sol_highs for t in mm) for mm in kept), "HiGHS solution is not a hitting set"

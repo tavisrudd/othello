@@ -1,0 +1,26 @@
+{
+  "cbc_agrees": true,
+  "cbc_optimum": 9,
+  "full_family_separates": true,
+  "g_lower_bound": 9,
+  "highs_optimum": 9,
+  "highs_solution": [
+    0,
+    1,
+    2,
+    3,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "highs_status": 0,
+  "m": 5,
+  "mask_maxweight": 0,
+  "masks_in_file": 45,
+  "masks_minimal": 45,
+  "source": "2026-08-19-c880-masks-g5.json",
+  "source_sha256": "1b750156f05e7c301863d196230418779a9fbb29161326ce7fccb60f054d5814",
+  "triples": 10
+}

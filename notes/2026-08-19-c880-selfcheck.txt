@@ -1,0 +1,2 @@
+selfcheck: degree-parity identity holds on all 64 four-point graphs
+selfcheck: attachment identity holds on all 655360 (two-graph, x, triple) cases at m=6

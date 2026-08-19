@@ -1,0 +1,9 @@
+{
+  "mode": "verifymarginal",
+  "m": 9,
+  "known_points": 1,
+  "new_points": 8,
+  "two_graphs": 268435456,
+  "size": 18,
+  "determines_new_attachment": true
+}

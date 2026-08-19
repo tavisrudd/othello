@@ -26,14 +26,30 @@
 // the answers determine x.  The report proves 30 + sum_{m=7}^{n-1} g(m) is an
 // upper bound for the nonadaptive query complexity at n points.
 //
-// Modes:
-//   selfcheck                       identities behind the reduction
-//   attach --m M [--maxweight K] [--out F]   exact/bracketed g(M)
-//   verifyfamily --m M --family "t1,t2,..." [--out F]
-//   totals --nmax N [--out F]       assemble the construction's size
+// Modes.  Every one of these is deterministic: canonical enumeration, no
+// randomness, and every collection is sorted before use, so the thread count
+// does not affect a byte of the output.
+//   selfcheck                        the identities the reduction rests on
+//   marginal --m M --known K         exact P(K, M-K); with C880NC_DUMP set it
+//                                    writes the constraint file instead, and
+//                                    with C880NC_POOL set the value is only a
+//                                    lower bound
+//   verifymarginal --m M --known K --family "a,b,c;..."
+//                                    does a named family determine the new
+//                                    attachment, over every two-graph?
+//   template --m M --t0 a,b,c        the attachment lemma's own 3m-6 family
+//   fullverify --n N                 the whole n-point family, evaluated from
+//                                    the four-triples definition of alignment
+//   blocktotals --nmax N             the construction's size at each n
+//   lowerbound --m M --maxweight W   min hitting set of the weight-capped
+//                                    difference masks: a lower bound for g(M)
+//
+// NOT deterministic, and not used as evidence: `build --m M`, a lazy greedy
+// search whose violation sampling depends on thread scheduling.  It was used
+// to FIND the g(7) and g(8) witness families; those are certified by
+// `verifymarginal`.
 //
 // Build:  rustc -O -o $S/c880nc 2026-08-19-c880-nonadaptive-constant.rs
-// Everything is deterministic: canonical enumeration, no randomness anywhere.
 
 use std::collections::HashSet;
 use std::env;
@@ -105,7 +121,6 @@ fn aligned_direct<F: Fn(usize, usize) -> u32>(
 // ---------------------------------------------------------------- attachment core
 
 struct Attach {
-    m: usize,
     tri: Vec<(usize, usize, usize)>,
     tc: usize,
     xc: usize,  // 2^(m-1)
@@ -160,7 +175,7 @@ impl Attach {
             vword[x] = v;
         }
         let full = if tc == 128 { !0u128 } else { (1u128 << tc) - 1 };
-        Attach { m, tri, tc, xc, eb, tpq, tpr, tqr, uword, vword, full }
+        Attach { tri, tc, xc, eb, tpq, tpr, tqr, uword, vword, full }
     }
 
     fn ebit(&self, e: u64, idx: Option<usize>) -> u128 {
@@ -322,8 +337,20 @@ fn mode_marginal(m: usize, k: usize, out: Option<String>) {
         println!("dumped {} minimal marginal masks to {}", minimal.len(), p);
         return;
     }
+    // A capped pool gives a valid LOWER bound only: dropping constraints can
+    // only lower a hitting number.  Uncapped, the optimum is exact.
+    let cap: usize = env::var("C880NC_POOL").ok().and_then(|v| v.parse().ok()).unwrap_or(usize::MAX);
+    let mut minimal = minimal;
+    let capped = minimal.len() > cap;
+    if capped {
+        minimal.sort_by_key(|x| (x.count_ones(), *x));
+        minimal.truncate(cap);
+    }
     let ub = greedy_hitting(&minimal, at.tc).count_ones() as usize;
     let (kk, sol, nodes) = exact_hitting(&minimal, at.tc, 1, ub);
+    if capped {
+        eprintln!("NOTE: mask pool capped at {}; the value is a lower bound only", cap);
+    }
     let list = bits_to_list(sol, at.tc);
     let tri_list: Vec<String> = list
         .iter()
@@ -348,9 +375,39 @@ fn mode_marginal(m: usize, k: usize, out: Option<String>) {
     write_out(&out, &body);
 }
 
-// Verify a family exhaustively over every two-graph and every pair of x.
+// Verify a family exhaustively over every two-graph and every pair of x, by
+// sorting the answer vectors rather than comparing all pairs.
 fn verify_family(at: &Attach, fam: u128) -> bool {
-    find_violations(at, fam, 1).is_empty()
+    let ecount: u64 = 1u64 << at.eb;
+    let nt = nthreads();
+    let ok = Mutex::new(true);
+    let atr = at;
+    std::thread::scope(|s| {
+        for tid in 0..nt {
+            let okr = &ok;
+            s.spawn(move || {
+                let mut good = true;
+                let mut a = vec![0u128; atr.xc];
+                let mut buf: Vec<u128> = vec![0u128; atr.xc];
+                let mut e = tid as u64;
+                while e < ecount {
+                    atr.answers(e, &mut a);
+                    for x in 0..atr.xc {
+                        buf[x] = a[x] & fam;
+                    }
+                    buf.sort_unstable();
+                    for i in 1..buf.len() {
+                        if buf[i] == buf[i - 1] {
+                            good = false;
+                        }
+                    }
+                    e += nt as u64;
+                }
+                *okr.lock().unwrap() &= good;
+            });
+        }
+    });
+    ok.into_inner().unwrap()
 }
 
 // Exhaustive sweep; returns distinct difference masks of colliding x-pairs,
@@ -492,6 +549,175 @@ fn exact_hitting(masks: &[u128], ground: usize, lo: usize, hi: usize) -> (usize,
         }
     }
     (usize::MAX, 0, nodes)
+}
+
+// ---------------------------------------------------------------- full family
+
+// Verified attachment families for the small cases, as triples on the local
+// points 0..m-1 with local 0 the gauge/anchor point.
+const FAM_G5: [[usize; 3]; 9] = [
+    [0, 1, 2], [0, 1, 3], [0, 1, 4], [0, 2, 3], [0, 2, 4], [0, 3, 4],
+    [1, 2, 3], [1, 2, 4], [1, 3, 4],
+];
+const FAM_G6: [[usize; 3]; 12] = CORE6;
+const FAM_G7: [[usize; 3]; 15] = [
+    [0, 1, 2], [0, 1, 4], [0, 1, 6], [0, 2, 4], [0, 2, 6], [0, 4, 6],
+    [1, 2, 4], [1, 2, 6], [1, 3, 4], [1, 3, 6], [1, 4, 5], [1, 5, 6],
+    [2, 4, 6], [3, 4, 6], [4, 5, 6],
+];
+const FAM_G8: [[usize; 3]; 17] = [
+    [0, 1, 2], [0, 1, 4], [0, 1, 5], [0, 2, 4], [0, 2, 5], [0, 4, 5],
+    [1, 2, 3], [1, 2, 5], [1, 2, 6], [1, 2, 7], [1, 3, 6], [1, 3, 7],
+    [1, 4, 5], [1, 6, 7], [2, 3, 6], [2, 3, 7], [2, 5, 6],
+];
+
+fn small_family(s: usize) -> Vec<[usize; 3]> {
+    match s {
+        4 => FAM_G5.to_vec(),
+        5 => FAM_G6.to_vec(),
+        6 => FAM_G7.to_vec(),
+        7 => FAM_G8.to_vec(),
+        _ => panic!("no stored family for a block of {} points", s),
+    }
+}
+
+// The attachment layer for the new point v, on the old points 0..v-1: blocks
+// of four fresh points against the gauge point 0, and one final block of 4..7.
+fn attachment_layer(v: usize) -> Vec<[usize; 3]> {
+    let t = v - 1; // points 1..v-1 to be covered
+    assert!(t >= 4);
+    let s = 4 + ((t - 4) % 4);
+    let q = (t - s) / 4;
+    let mut out: Vec<[usize; 3]> = Vec::new();
+    let mut next = 1usize;
+    for _ in 0..q {
+        let b: Vec<usize> = (next..next + 4).collect();
+        next += 4;
+        for tr in FAM_G5.iter() {
+            let mut w = [0usize; 3];
+            for i in 0..3 {
+                w[i] = if tr[i] == 0 { 0 } else { b[tr[i] - 1] };
+            }
+            w.sort();
+            out.push(w);
+        }
+    }
+    let b: Vec<usize> = (next..next + s).collect();
+    for tr in small_family(s).iter() {
+        let mut w = [0usize; 3];
+        for i in 0..3 {
+            w[i] = if tr[i] == 0 { 0 } else { b[tr[i] - 1] };
+        }
+        w.sort();
+        out.push(w);
+    }
+    out.sort();
+    out.dedup();
+    out
+}
+
+// The whole family at n points: the optimal 30 on {0..6} (every 4-subset
+// meeting {5,6}) plus one attachment layer per further point.
+fn full_family(n: usize) -> Vec<[usize; 4]> {
+    assert!(n >= 7);
+    let mut fam: Vec<[usize; 4]> = Vec::new();
+    for a in 0..7 {
+        for b in (a + 1)..7 {
+            for c in (b + 1)..7 {
+                for d in (c + 1)..7 {
+                    if c >= 5 || d >= 5 {
+                        fam.push([a, b, c, d]);
+                    }
+                }
+            }
+        }
+    }
+    for v in 7..n {
+        for tr in attachment_layer(v) {
+            fam.push([tr[0], tr[1], tr[2], v]);
+        }
+    }
+    fam.sort();
+    fam.dedup();
+    fam
+}
+
+// Verify the whole family from the alignment definition, over every two-graph
+// on n points.  Fibres must be exactly the complement pairs.
+fn mode_fullverify(n: usize, out: Option<String>) {
+    let fam = full_family(n);
+    assert!(fam.len() <= 128);
+    let eb = (n - 1) * (n - 2) / 2; // graphs on 1..n-1, point 0 isolated
+    assert!(eb <= 30, "too large to enumerate");
+    let pi = pair_index(n);
+    let ei = ebit_index(n);
+    let count: usize = 1 << eb;
+    let mut vecs: Vec<u128> = vec![0u128; count];
+    let nt = nthreads();
+    let chunk = (count + nt - 1) / nt;
+    {
+        let famr = &fam;
+        let pir = &pi;
+        let eir = &ei;
+        let mut slices: Vec<&mut [u128]> = vecs.chunks_mut(chunk).collect();
+        std::thread::scope(|s| {
+            for (ci, sl) in slices.iter_mut().enumerate() {
+                let base = ci * chunk;
+                s.spawn(move || {
+                    for (off, cell) in sl.iter_mut().enumerate() {
+                        let g = (base + off) as u64;
+                        let bit = |p: usize, q: usize| -> u32 {
+                            match eir[pir[p][q]] {
+                                None => 0,
+                                Some(k) => ((g >> k) & 1) as u32,
+                            }
+                        };
+                        let mut w: u128 = 0;
+                        for (t, f) in famr.iter().enumerate() {
+                            let mut d = [0u32; 4];
+                            for i in 0..4 {
+                                for j in 0..4 {
+                                    if i != j {
+                                        d[i] += bit(f[i], f[j]);
+                                    }
+                                }
+                                d[i] &= 1;
+                            }
+                            if d[0] == d[1] && d[0] == d[2] && d[0] == d[3] {
+                                w |= 1u128 << t;
+                            }
+                        }
+                        *cell = w;
+                    }
+                });
+            }
+        });
+    }
+    let allones: usize = count - 1;
+    let mut complement_ok = true;
+    for gph in 0..count {
+        if vecs[gph] != vecs[gph ^ allones] {
+            complement_ok = false;
+            break;
+        }
+    }
+    let mut sorted = vecs.clone();
+    sorted.sort_unstable();
+    sorted.dedup();
+    let distinct = sorted.len();
+    let expected = count / 2;
+    let body = format!(
+        "{{\n  \"mode\": \"fullverify\",\n  \"n\": {},\n  \"family_size\": {},\n  \"two_graphs\": {},\n  \"complement_pairs\": {},\n  \"distinct_answer_vectors\": {},\n  \"complement_invariant\": {},\n  \"separates_up_to_complement\": {},\n  \"anchor_family_size\": {}\n}}",
+        n,
+        fam.len(),
+        count,
+        expected,
+        distinct,
+        complement_ok,
+        complement_ok && distinct == expected,
+        3 * n * n - 23 * n + 45
+    );
+    write_out(&out, &body);
 }
 
 // ---------------------------------------------------------------- json
@@ -733,80 +959,7 @@ fn mode_build(m: usize, maxweight: u32, out: Option<String>) {
     write_out(&out, &body);
 }
 
-#[allow(dead_code)]
-fn mode_attach(m: usize, maxweight: u32, out: Option<String>) {
-    let at = Attach::new(m);
-    let entropy_floor = {
-        // ceil((m-1)/H(1/4))
-        let h = -0.25f64 * (0.25f64).log2() - 0.75f64 * (0.75f64).log2();
-        (((m - 1) as f64) / h).ceil() as usize
-    };
-    let (masks0, pairs, full_ok) = sweep_masks(&at, maxweight);
-    // Lazy constraint generation: solve the exact minimum hitting set of the
-    // masks collected so far, verify the solution exhaustively, and on failure
-    // fold the violated masks in and re-solve.  The hitting number never
-    // decreases, so the first verified solution is the exact optimum.
-    const POOL_CAP: usize = 12000;
-    let mut pool: HashSet<u128> = masks0.clone();
-    let mut lo = entropy_floor.max(1);
-    let mut rounds = 0usize;
-    let mut nodes = 0u64;
-    let mut minimal_final: Vec<u128> = Vec::new();
-    let (k, sol) = loop {
-        rounds += 1;
-        let mut minimal = minimalize(&pool);
-        minimal.sort_by_key(|m| (m.count_ones(), *m));
-        minimal.truncate(POOL_CAP);
-        pool = minimal.iter().cloned().collect();
-        let (k, sol, nd) = exact_hitting(&minimal, at.tc, lo, at.tc);
-        nodes += nd;
-        assert!(k != usize::MAX, "no hitting set exists");
-        let viol = find_violations(&at, sol, 20_000);
-        eprintln!("round {}: |masks|={} k={} violations={}", rounds, minimal.len(), k, viol.len());
-        if viol.is_empty() {
-            minimal_final = minimal;
-            break (k, sol);
-        }
-        lo = k;
-        for v in viol {
-            pool.insert(v);
-        }
-    };
-    let ub_greedy = greedy_hitting(&minimal_final, at.tc).count_ones() as usize;
-    let verified = true;
-    let list = bits_to_list(sol, at.tc);
-    let tri_list: Vec<String> = list
-        .iter()
-        .map(|&t| {
-            let (p, q, r) = at.tri[t];
-            format!("[{},{},{}]", p, q, r)
-        })
-        .collect();
-    let body = format!(
-        "{{\n  \"mode\": \"attach\",\n  \"m\": {},\n  \"triples\": {},\n  \"two_graphs\": {},\n  \"x_classes\": {},\n  \"x_pairs_checked\": {},\n  \"full_family_separates\": {},\n  \"mask_seed_maxweight\": {},\n  \"masks_seeded\": {},\n  \"masks_minimal_final\": {},\n  \"lazy_rounds\": {},\n  \"entropy_floor\": {},\n  \"anchor_bound_6m_minus_20\": {},\n  \"greedy_upper_bound\": {},\n  \"witness_verified_exhaustively\": {},\n  \"g\": {},\n  \"witness_triple_indices\": {},\n  \"witness_triples\": [{}],\n  \"search_nodes\": {}\n}}",
-        m,
-        at.tc,
-        1u64 << at.eb,
-        at.xc,
-        pairs,
-        full_ok,
-        maxweight,
-        masks0.len(),
-        minimal_final.len(),
-        rounds,
-        entropy_floor,
-        6 * m - 20,
-        ub_greedy,
-        verified,
-        k,
-        json_usizes(&list),
-        tri_list.join(","),
-        nodes
-    );
-    write_out(&out, &body);
-}
-
-// The conjectured general family:  a six-point core carrying a verified
+// The attachment lemma's own family: a six-point core carrying the verified
 // optimal 12-triple attachment family, plus, for each old point outside the
 // core, the three triples {a,b,w} with {a,b} a pair of one fixed core triple.
 // Size 12 + 3(m-6) = 3m-6.
@@ -863,6 +1016,94 @@ fn mode_template(m: usize, t0s: &str, out: Option<String>) {
     write_out(&out, &body);
 }
 
+fn mode_verifymarginal(m: usize, k: usize, fam: &str, out: Option<String>) {
+    let at = Attach::new(m);
+    let mut kbits = 0usize;
+    for p in 1..k {
+        kbits |= 1 << (p - 1);
+    }
+    let mut idx = std::collections::HashMap::new();
+    for (t, &(p, q, r)) in at.tri.iter().enumerate() {
+        idx.insert((p, q, r), t);
+    }
+    let mut mask: u128 = 0;
+    let mut size = 0;
+    for tok in fam.split(';') {
+        let v: Vec<usize> = tok.split(',').map(|s| s.trim().parse().unwrap()).collect();
+        let mut v = [v[0], v[1], v[2]];
+        v.sort();
+        mask |= 1u128 << idx[&(v[0], v[1], v[2])];
+        size += 1;
+    }
+    assert_eq!(size, mask.count_ones() as usize, "duplicate triple in the family");
+    let ecount: u64 = 1u64 << at.eb;
+    let nt = nthreads();
+    let ok = Mutex::new(true);
+    let atr = &at;
+    std::thread::scope(|s| {
+        for tid in 0..nt {
+            let okr = &ok;
+            s.spawn(move || {
+                // Injectivity within each class of attachments agreeing on the
+                // known points, by sorting the masked answer vectors.
+                let newbits = (atr.xc - 1) & !kbits;
+                let mut bases: Vec<usize> = Vec::new();
+                {
+                    let mut s = kbits;
+                    loop {
+                        bases.push(s);
+                        if s == 0 {
+                            break;
+                        }
+                        s = (s - 1) & kbits;
+                    }
+                }
+                let mut offs: Vec<usize> = Vec::new();
+                {
+                    let mut s = newbits;
+                    loop {
+                        offs.push(s);
+                        if s == 0 {
+                            break;
+                        }
+                        s = (s - 1) & newbits;
+                    }
+                }
+                let mut good = true;
+                let mut a = vec![0u128; atr.xc];
+                let mut buf: Vec<u128> = vec![0u128; offs.len()];
+                let mut e = tid as u64;
+                while e < ecount {
+                    atr.answers(e, &mut a);
+                    for &b in &bases {
+                        for (i, &d) in offs.iter().enumerate() {
+                            buf[i] = a[b | d] & mask;
+                        }
+                        buf.sort_unstable();
+                        for i in 1..buf.len() {
+                            if buf[i] == buf[i - 1] {
+                                good = false;
+                            }
+                        }
+                    }
+                    e += nt as u64;
+                }
+                *okr.lock().unwrap() &= good;
+            });
+        }
+    });
+    let body = format!(
+        "{{\n  \"mode\": \"verifymarginal\",\n  \"m\": {},\n  \"known_points\": {},\n  \"new_points\": {},\n  \"two_graphs\": {},\n  \"size\": {},\n  \"determines_new_attachment\": {}\n}}",
+        m,
+        k,
+        m - k,
+        ecount,
+        size,
+        ok.into_inner().unwrap()
+    );
+    write_out(&out, &body);
+}
+
 fn mode_verifyfamily(m: usize, fam: &str, out: Option<String>) {
     let at = Attach::new(m);
     let mut mask: u128 = 0;
@@ -882,6 +1123,69 @@ fn mode_verifyfamily(m: usize, fam: &str, out: Option<String>) {
         list.len(),
         json_usizes(&list),
         ok
+    );
+    write_out(&out, &body);
+}
+
+// The block bound.  A block of four fresh points costs 9 tests against the
+// gauge point alone (P(1,4) = g(5) = 9, exact); the leftover 4..7 points form
+// one final block whose cost is the measured g(s+1).  Blocks share only the
+// gauge point, so they compose without interaction.
+fn g_block_bound(m: usize) -> Option<usize> {
+    // measured exact / verified upper bounds for the small attachment problems
+    let small = |s: usize| -> Option<usize> {
+        match s {
+            4 => Some(9),  // g(5), exact
+            5 => Some(12), // g(6), exact
+            6 => Some(15), // g(7), verified family
+            7 => Some(17), // g(8), verified family
+            _ => None,
+        }
+    };
+    if m >= 5 && m <= 8 {
+        return small(m - 1);
+    }
+    let mut best: Option<usize> = None;
+    for s in 4..=7 {
+        if m < 1 + s {
+            continue;
+        }
+        let rest = m - 1 - s;
+        if rest % 4 != 0 {
+            continue;
+        }
+        let c = 9 * (rest / 4) + small(s).unwrap();
+        best = Some(match best {
+            None => c,
+            Some(b) => b.min(c),
+        });
+    }
+    best
+}
+
+fn mode_blocktotals(nmax: usize, out: Option<String>) {
+    let h = -0.25f64 * (0.25f64).log2() - 0.75f64 * (0.75f64).log2();
+    let mut rows: Vec<String> = Vec::new();
+    let mut total = 30usize;
+    for n in 7..=nmax {
+        if n > 7 {
+            total += g_block_bound(n - 1).expect("no block bound");
+        }
+        let anchor = 3 * n * n - 23 * n + 45;
+        let d = ((n - 1) * (n - 2)) / 2 - 1;
+        let floor = ((d as f64) / h).ceil() as usize;
+        rows.push(format!(
+            "    {{\"n\": {}, \"block_construction\": {}, \"anchor_family\": {}, \"entropy_floor\": {}, \"counting_bound\": {}}}",
+            n, total, anchor, floor, n * (n - 3) / 2
+        ));
+    }
+    let gs: Vec<String> = (5..=nmax.max(5))
+        .filter_map(|m| g_block_bound(m).map(|g| format!("{{\"m\": {}, \"g_upper\": {}}}", m, g)))
+        .collect();
+    let body = format!(
+        "{{\n  \"mode\": \"blocktotals\",\n  \"base_seven_points\": 30,\n  \"block_cost_P_1_4\": 9,\n  \"g_upper_bounds\": [{}],\n  \"rows\": [\n{}\n  ]\n}}",
+        gs.join(","),
+        rows.join(",\n")
     );
     write_out(&out, &body);
 }
@@ -943,15 +1247,16 @@ fn main() {
     let out = getopt("--out");
     match args[1].as_str() {
         "selfcheck" => mode_selfcheck(),
-        "attach" => {
-            let m: usize = getopt("--m").expect("--m").parse().unwrap();
-            let w: u32 = getopt("--maxweight").unwrap_or("8".into()).parse().unwrap();
-            mode_attach(m, w, out);
-        }
         "lowerbound" => {
             let m: usize = getopt("--m").expect("--m").parse().unwrap();
             let w: u32 = getopt("--maxweight").unwrap_or("8".into()).parse().unwrap();
             mode_lowerbound(m, w, out);
+        }
+        "verifymarginal" => {
+            let m: usize = getopt("--m").expect("--m").parse().unwrap();
+            let k: usize = getopt("--known").expect("--known").parse().unwrap();
+            let f = getopt("--family").expect("--family");
+            mode_verifymarginal(m, k, &f, out);
         }
         "marginal" => {
             let m: usize = getopt("--m").expect("--m").parse().unwrap();
@@ -972,6 +1277,14 @@ fn main() {
             let m: usize = getopt("--m").expect("--m").parse().unwrap();
             let f = getopt("--family").expect("--family");
             mode_verifyfamily(m, &f, out);
+        }
+        "fullverify" => {
+            let n: usize = getopt("--n").expect("--n").parse().unwrap();
+            mode_fullverify(n, out);
+        }
+        "blocktotals" => {
+            let nmax: usize = getopt("--nmax").expect("--nmax").parse().unwrap();
+            mode_blocktotals(nmax, out);
         }
         "totals" => {
             let nmax: usize = getopt("--nmax").expect("--nmax").parse().unwrap();

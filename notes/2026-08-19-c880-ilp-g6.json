@@ -1,0 +1,29 @@
+{
+  "cbc_agrees": true,
+  "cbc_optimum": 12,
+  "full_family_separates": true,
+  "g_lower_bound": 12,
+  "highs_optimum": 12,
+  "highs_solution": [
+    0,
+    2,
+    3,
+    5,
+    6,
+    9,
+    10,
+    11,
+    13,
+    15,
+    16,
+    18
+  ],
+  "highs_status": 0,
+  "m": 6,
+  "mask_maxweight": 0,
+  "masks_in_file": 1185,
+  "masks_minimal": 1185,
+  "source": "2026-08-19-c880-masks-g6.json",
+  "source_sha256": "55f22b0cba7fccbc5fd77288405270f0fe3b9152f0d09ed5f8710cd0b78d12d3",
+  "triples": 20
+}

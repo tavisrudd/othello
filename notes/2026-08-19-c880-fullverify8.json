@@ -1,0 +1,11 @@
+{
+  "mode": "fullverify",
+  "n": 8,
+  "family_size": 45,
+  "two_graphs": 2097152,
+  "complement_pairs": 1048576,
+  "distinct_answer_vectors": 1048576,
+  "complement_invariant": true,
+  "separates_up_to_complement": true,
+  "anchor_family_size": 53
+}
