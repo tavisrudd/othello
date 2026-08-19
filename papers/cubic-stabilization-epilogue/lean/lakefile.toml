@@ -130,6 +130,10 @@ roots = [
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.ParityCorrectedUnipotentMonodromy",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.ProjectiveSpaceEulerSpectrum",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.DirectSpecializedVanishing",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.QuarticSpectralSeparation",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.MinimalRuledEulerSpectrum",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.MonomialSpecializationSeparation",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.MinimalRuledSpecializedVanishing",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.PaperInterface",
 ]
 
