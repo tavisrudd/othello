@@ -1,4 +1,5 @@
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FormalLoopConnection
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.RankTwoResidueRigidity
 
 /-!
 # The canonical elementary modification of a rank-two atomic factor
@@ -58,6 +59,14 @@ namespace Quantum
 open Matrix PowerSeries
 
 variable {B : Type*} [CommRing B]
+
+/-- A map of the coefficient ring obeying the Leibniz rule annihilates one. -/
+theorem map_one_of_leibniz {derivation : B → B}
+    (leibniz : ∀ x y, derivation (x * y) = derivation x * y + x * derivation y) :
+    derivation 1 = 0 := by
+  have doubled := leibniz 1 1
+  simp only [mul_one, one_mul] at doubled
+  linear_combination -doubled
 
 /-- The idempotent projecting onto the first coordinate. -/
 def firstCoordinateProjector : Matrix (Fin 2) (Fin 2) B := !![1, 0; 0, 0]
@@ -317,7 +326,6 @@ multiplies the transformed flatness expression by the gauge, replaces every
 transformed factor using the transformation laws, and cancels the gauge, which
 is injective on the left. -/
 theorem isFlatPair_modified {derivation : B → B}
-    (zeroValue : derivation 0 = 0) (oneValue : derivation 1 = 0)
     (additive : ∀ x y, derivation (x + y) = derivation x + derivation y)
     (leibniz : ∀ x y, derivation (x * y) = derivation x * y + x * derivation y)
     {loop base : PowerSeries (Matrix (Fin 2) (Fin 2) B)}
@@ -328,6 +336,8 @@ theorem isFlatPair_modified {derivation : B → B}
     (baseLeadingLowerLeft : (coeff 0 base) 1 0 = 0)
     (flat : IsFlatPair derivation loop base) :
     IsFlatPair derivation (PowerSeries.X * modifiedLoop loop) (modifiedBase base) := by
+  have zeroValue : derivation 0 = 0 := map_zero_of_additive additive
+  have oneValue : derivation 1 = 0 := map_one_of_leibniz leibniz
   set gauge := (modificationGauge : PowerSeries (Matrix (Fin 2) (Fin 2) B)) with gaugeDefinition
   set pole := PowerSeries.C (secondCoordinateProjector : Matrix (Fin 2) (Fin 2) B)
     with poleDefinition

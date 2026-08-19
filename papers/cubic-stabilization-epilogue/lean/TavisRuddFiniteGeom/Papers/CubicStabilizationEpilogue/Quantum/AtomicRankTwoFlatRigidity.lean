@@ -1,5 +1,6 @@
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.AtomicElementaryModification
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.RankTwoResidueRigidity
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.ResidueDiscriminantInvariance
 
 /-!
 # Flatness freezes the residue discriminant of a rank-two atomic factor
@@ -144,13 +145,13 @@ of the leading loop coefficient: its lower-left entry and both diagonal entries
 vanish.  The commutation comes from the coefficient of `u ^ (-2)` of flatness
 and the vanishing trace from the coefficient of `u ^ (-1)`. -/
 theorem baseLeadingCoefficient_entries_eq_zero_of_isFlatPair {derivation : B → B}
-    (zeroValue : derivation 0 = 0)
     (additive : ∀ x y, derivation (x + y) = derivation x + derivation y)
     {loop base : PowerSeries (Matrix (Fin 2) (Fin 2) B)} {unitValue : B}
     (unitProperty : IsUnit unitValue) (twoUnit : IsUnit (2 : B))
     (adapted : coeff 0 loop = adaptedLeadingOperator unitValue)
     (flat : IsFlatPair derivation loop base) :
     (coeff 0 base) 1 0 = 0 ∧ (coeff 0 base) 0 0 = 0 ∧ (coeff 0 base) 1 1 = 0 := by
+  have zeroValue : derivation 0 = 0 := map_zero_of_additive additive
   have commuting : adaptedLeadingOperator unitValue * coeff 0 base
       = coeff 0 base * adaptedLeadingOperator unitValue := by
     have identity := leadingCoefficients_commute_of_isFlatPair flat
@@ -179,7 +180,6 @@ coefficient of `u ^ (-1)` of flatness in the modified lattice is the identity
 `K + [R, K] = 0` for the residual pole `K` and the modified residue `R`, and the
 upper-right entry of `R` is a unit, so `K` vanishes. -/
 theorem modifiedBase_leadingCoefficient_eq_zero_of_isFlatPair {derivation : B → B}
-    (zeroValue : derivation 0 = 0) (oneValue : derivation 1 = 0)
     (additive : ∀ x y, derivation (x + y) = derivation x + derivation y)
     (leibniz : ∀ x y, derivation (x * y) = derivation x * y + x * derivation y)
     {loop base : PowerSeries (Matrix (Fin 2) (Fin 2) B)} {unitValue : B}
@@ -188,8 +188,9 @@ theorem modifiedBase_leadingCoefficient_eq_zero_of_isFlatPair {derivation : B �
     (nilpotentLine : (coeff 1 loop) 1 0 = 0)
     (flat : IsFlatPair derivation loop base) :
     coeff 0 (modifiedBase base) = 0 := by
+  have zeroValue : derivation 0 = 0 := map_zero_of_additive additive
   obtain ⟨baseLowerLeft, baseUpperLeft, baseLowerRight⟩ :=
-    baseLeadingCoefficient_entries_eq_zero_of_isFlatPair zeroValue additive unitProperty twoUnit
+    baseLeadingCoefficient_entries_eq_zero_of_isFlatPair additive unitProperty twoUnit
       adapted flat
   have leadingUpperLeft : (coeff 0 loop) 0 0 = 0 := by
     rw [adapted]; simp [adaptedLeadingOperator]
@@ -197,7 +198,7 @@ theorem modifiedBase_leadingCoefficient_eq_zero_of_isFlatPair {derivation : B �
     rw [adapted]; simp [adaptedLeadingOperator]
   have leadingLowerRight : (coeff 0 loop) 1 1 = 0 := by
     rw [adapted]; simp [adaptedLeadingOperator]
-  have modifiedFlat := isFlatPair_modified zeroValue oneValue additive leibniz
+  have modifiedFlat := isFlatPair_modified additive leibniz
     leadingUpperLeft leadingLowerLeft leadingLowerRight nilpotentLine baseLowerLeft flat
   have identity := firstOrder_identity_of_isFlatPair modifiedFlat
   have zeroLoop : coeff 0 (PowerSeries.X * modifiedLoop loop) = 0 :=
@@ -234,7 +235,6 @@ pole, the next order of flatness in the modified lattice says that a derivation
 of the coefficient ring carries the modified residue to its commutator with the
 regular coefficient of the modified base direction. -/
 theorem modifiedResidue_lax_of_isFlatPair {derivation : B → B}
-    (zeroValue : derivation 0 = 0) (oneValue : derivation 1 = 0)
     (additive : ∀ x y, derivation (x + y) = derivation x + derivation y)
     (leibniz : ∀ x y, derivation (x * y) = derivation x * y + x * derivation y)
     {loop base : PowerSeries (Matrix (Fin 2) (Fin 2) B)} {unitValue : B}
@@ -246,7 +246,7 @@ theorem modifiedResidue_lax_of_isFlatPair {derivation : B → B}
       = coeff 1 (modifiedBase base) * modifiedResidue loop
         - modifiedResidue loop * coeff 1 (modifiedBase base) := by
   obtain ⟨baseLowerLeft, _, _⟩ :=
-    baseLeadingCoefficient_entries_eq_zero_of_isFlatPair zeroValue additive unitProperty twoUnit
+    baseLeadingCoefficient_entries_eq_zero_of_isFlatPair additive unitProperty twoUnit
       adapted flat
   have leadingUpperLeft : (coeff 0 loop) 0 0 = 0 := by
     rw [adapted]; simp [adaptedLeadingOperator]
@@ -254,10 +254,10 @@ theorem modifiedResidue_lax_of_isFlatPair {derivation : B → B}
     rw [adapted]; simp [adaptedLeadingOperator]
   have leadingLowerRight : (coeff 0 loop) 1 1 = 0 := by
     rw [adapted]; simp [adaptedLeadingOperator]
-  have modifiedFlat := isFlatPair_modified zeroValue oneValue additive leibniz
+  have modifiedFlat := isFlatPair_modified additive leibniz
     leadingUpperLeft leadingLowerLeft leadingLowerRight nilpotentLine baseLowerLeft flat
   have poleVanishes : coeff 0 (modifiedBase base) = 0 :=
-    modifiedBase_leadingCoefficient_eq_zero_of_isFlatPair zeroValue oneValue additive leibniz
+    modifiedBase_leadingCoefficient_eq_zero_of_isFlatPair additive leibniz
       unitProperty twoUnit adapted nilpotentLine flat
   have identity := secondOrder_identity_of_isFlatPair modifiedFlat
   have zeroLoop : coeff 0 (PowerSeries.X * modifiedLoop loop) = 0 :=
@@ -277,7 +277,6 @@ residue of the canonical elementary modification, because that residue satisfies
 a Lax equation and the trace and determinant of a matrix are unchanged by an
 infinitesimal conjugation. -/
 theorem residueDiscriminant_modifiedResidue_map_eq_zero_of_isFlatPair {derivation : B → B}
-    (zeroValue : derivation 0 = 0) (oneValue : derivation 1 = 0)
     (additive : ∀ x y, derivation (x + y) = derivation x + derivation y)
     (leibniz : ∀ x y, derivation (x * y) = derivation x * y + x * derivation y)
     {loop base : PowerSeries (Matrix (Fin 2) (Fin 2) B)} {unitValue : B}
@@ -288,8 +287,140 @@ theorem residueDiscriminant_modifiedResidue_map_eq_zero_of_isFlatPair {derivatio
     derivation (residueDiscriminant (modifiedResidue loop)) = 0 :=
   lax_residueDiscriminant_map_eq_zero additive leibniz (modifiedResidue loop)
     (coeff 1 (modifiedBase base))
-    (modifiedResidue_lax_of_isFlatPair zeroValue oneValue additive leibniz unitProperty twoUnit
+    (modifiedResidue_lax_of_isFlatPair additive leibniz unitProperty twoUnit
       adapted nilpotentLine flat)
+
+/-- Horizontality of the pairing forces the regular coefficient of the loop
+direction to preserve the nilpotent line.  In the adapted frame the leading
+coefficient of the pairing is forced to have vanishing upper-left entry and equal
+off-diagonal entries, so its determinant is the negative of the square of the
+off-diagonal entry; nondegeneracy therefore makes that entry nonzero, and the
+upper-left entry of the constant coefficient of horizontality reads
+`2 * a * p = 0` for the lower-left entry `a` of the regular coefficient.  This is
+the manuscript's statement that the regular coefficient carries the nilpotent
+line into itself, in the frame where that line is the first coordinate line. -/
+theorem nilpotentLine_of_isHorizontalPairing [IsDomain B]
+    {loop pairing : PowerSeries (Matrix (Fin 2) (Fin 2) B)} {unitValue : B}
+    (twoNonzero : (2 : B) ≠ 0) (unitNonzero : unitValue ≠ 0)
+    (adapted : coeff 0 loop = adaptedLeadingOperator unitValue)
+    (nondegenerate : (coeff 0 pairing).det ≠ 0)
+    (horizontal : IsHorizontalPairing loop pairing) :
+    (coeff 1 loop) 1 0 = 0 := by
+  have upperLeftEntry : adaptedLeadingOperator unitValue 0 0 = 0 := by
+    simp [adaptedLeadingOperator]
+  have upperRightEntry : adaptedLeadingOperator unitValue 0 1 = unitValue := by
+    simp [adaptedLeadingOperator]
+  have lowerLeftEntry : adaptedLeadingOperator unitValue 1 0 = 0 := by
+    simp [adaptedLeadingOperator]
+  have lowerRightEntry : adaptedLeadingOperator unitValue 1 1 = 0 := by
+    simp [adaptedLeadingOperator]
+  have selfAdjoint := leadingCoefficient_selfAdjoint_of_isHorizontalPairing horizontal
+  rw [adapted] at selfAdjoint
+  have upperLeftPairing : (coeff 0 pairing) 0 0 = 0 := by
+    have entry := congrFun (congrFun selfAdjoint 0) 1
+    have equation : unitValue * (coeff 0 pairing) 0 0 = 0 := by
+      simp only [Matrix.sub_apply, Matrix.mul_apply, Fin.sum_univ_two, Matrix.zero_apply,
+        Matrix.transpose_apply, upperLeftEntry, upperRightEntry, lowerLeftEntry,
+        lowerRightEntry] at entry
+      linear_combination -entry
+    rcases mul_eq_zero.mp equation with value | value
+    · exact absurd value unitNonzero
+    · exact value
+  have offDiagonalPairing : (coeff 0 pairing) 0 1 = (coeff 0 pairing) 1 0 := by
+    have entry := congrFun (congrFun selfAdjoint 1) 1
+    have equation : unitValue * ((coeff 0 pairing) 0 1 - (coeff 0 pairing) 1 0) = 0 := by
+      simp only [Matrix.sub_apply, Matrix.mul_apply, Fin.sum_univ_two, Matrix.zero_apply,
+        Matrix.transpose_apply, upperLeftEntry, upperRightEntry, lowerLeftEntry,
+        lowerRightEntry] at entry
+      linear_combination entry
+    rcases mul_eq_zero.mp equation with value | value
+    · exact absurd value unitNonzero
+    · linear_combination value
+  have lowerLeftPairing : (coeff 0 pairing) 1 0 ≠ 0 := by
+    intro vanishing
+    apply nondegenerate
+    rw [Matrix.det_fin_two, upperLeftPairing, vanishing]
+    ring
+  have constantCoefficient := regularCoefficient_identity_of_isHorizontalPairing horizontal
+  rw [adapted] at constantCoefficient
+  have entry := congrFun (congrFun constantCoefficient 0) 0
+  have product : 2 * ((coeff 1 loop) 1 0 * (coeff 0 pairing) 1 0) = 0 := by
+    simp only [Matrix.add_apply, Matrix.sub_apply, Matrix.mul_apply, Fin.sum_univ_two,
+      Matrix.zero_apply, Matrix.transpose_apply, upperLeftEntry, upperRightEntry,
+      lowerLeftEntry, lowerRightEntry, upperLeftPairing, offDiagonalPairing] at entry
+    linear_combination entry
+  rcases mul_eq_zero.mp product with two | factor
+  · exact absurd two twoNonzero
+  · rcases mul_eq_zero.mp factor with value | pairingValue
+    · exact value
+    · exact absurd pairingValue lowerLeftPairing
+
+/-- The rank-two rigidity chain in one statement.  For a centered rank-two
+factor in an adapted frame over a domain, with a horizontal nondegenerate
+pairing and a flat pair of connection matrices, every derivation of the
+coefficient ring annihilates the residue discriminant of the canonical
+elementary modification.  Horizontality supplies the property of the regular
+coefficient that makes the modification regular, and flatness supplies the
+vanishing of the residual base pole and the Lax equation for the residue. -/
+theorem residueDiscriminant_modifiedResidue_map_eq_zero_of_horizontal_flat [IsDomain B]
+    {derivation : B → B}
+    (additive : ∀ x y, derivation (x + y) = derivation x + derivation y)
+    (leibniz : ∀ x y, derivation (x * y) = derivation x * y + x * derivation y)
+    {loop base pairing : PowerSeries (Matrix (Fin 2) (Fin 2) B)} {unitValue : B}
+    (unitProperty : IsUnit unitValue) (twoUnit : IsUnit (2 : B))
+    (adapted : coeff 0 loop = adaptedLeadingOperator unitValue)
+    (nondegenerate : (coeff 0 pairing).det ≠ 0)
+    (horizontal : IsHorizontalPairing loop pairing)
+    (flat : IsFlatPair derivation loop base) :
+    derivation (residueDiscriminant (modifiedResidue loop)) = 0 :=
+  residueDiscriminant_modifiedResidue_map_eq_zero_of_isFlatPair additive leibniz unitProperty
+    twoUnit adapted
+    (nilpotentLine_of_isHorizontalPairing twoUnit.ne_zero unitProperty.ne_zero adapted
+      nondegenerate horizontal)
+    flat
+
+section FormalGerm
+
+variable {σ : Type*} [DecidableEq σ] {K : Type*} [Field K] [CharZero K]
+
+/-- Rank-two rigidity over a formal germ.  Model the base germ by the ring of
+multivariate formal power series in the germ's coordinates over a
+characteristic-zero field, and let the connection of the centered rank-two
+factor be flat in every coordinate direction, in an adapted frame whose leading
+operator has a unit upper-right entry and whose regular coefficient preserves the
+nilpotent line.  Then the residue discriminant of the canonical elementary
+modification is a constant series: it does not vary over the germ.
+
+This is the conclusion the manuscript draws from the Lax equation together with
+the argument in the completed local ring; here the completed local ring is the
+formal power-series ring itself, and the step from vanishing derivatives to
+constancy is the statement that a series whose formal partial derivatives all
+vanish has no coefficient outside its constant term. -/
+theorem residueDiscriminant_modifiedResidue_eq_constant_of_isFlatPair
+    {loop : PowerSeries (Matrix (Fin 2) (Fin 2) (MvPowerSeries σ K))}
+    {baseDirection : σ → PowerSeries (Matrix (Fin 2) (Fin 2) (MvPowerSeries σ K))}
+    {unitValue : MvPowerSeries σ K} (unitProperty : IsUnit unitValue)
+    (adapted : coeff 0 loop = adaptedLeadingOperator unitValue)
+    (nilpotentLine : (coeff 1 loop) 1 0 = 0)
+    (flat : ∀ direction,
+      IsFlatPair (formalPartialDerivative direction) loop (baseDirection direction)) :
+    residueDiscriminant (modifiedResidue loop)
+      = MvPowerSeries.C
+          (MvPowerSeries.constantCoeff (residueDiscriminant (modifiedResidue loop))) := by
+  have twoUnit : IsUnit (2 : MvPowerSeries σ K) := by
+    have scalar : IsUnit ((MvPowerSeries.C : K →+* MvPowerSeries σ K) 2) :=
+      (isUnit_iff_ne_zero.mpr (two_ne_zero : (2 : K) ≠ 0)).map _
+    have castTwo : (MvPowerSeries.C : K →+* MvPowerSeries σ K) 2 = 2 := by
+      rw [show (2 : K) = 1 + 1 from by norm_num, map_add, map_one]
+      norm_num
+    rwa [castTwo] at scalar
+  refine residueDiscriminant_eq_constant_of_commutatorDerivative _
+    (fun direction => coeff 1 (modifiedBase (baseDirection direction))) fun direction => ?_
+  exact modifiedResidue_lax_of_isFlatPair (formalPartialDerivative_add direction)
+    (formalPartialDerivative_mul direction) unitProperty twoUnit adapted nilpotentLine
+    (flat direction)
+
+end FormalGerm
 
 end Quantum
 
