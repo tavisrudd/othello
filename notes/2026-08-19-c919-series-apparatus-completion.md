@@ -227,6 +227,39 @@ caption, and the coda's placement prose keep the Roman numbering, which is the
 device the coda is built on and which the style-guide rule explicitly permits
 there.
 
+## Authorized follow-up pass
+
+Five changes were authorized after the cold read and are in the manuscripts:
+
+- **Independence language deduplicated.** The byte-identical boilerplate
+  sentence stays under every map; the paper-specific paragraphs no longer
+  reassert independence. Paper IV's second independence statement became "Its
+  place in the programme is methodological: minimum-word pairs give a separate
+  instance in which sparse data recover a substantially richer marked source",
+  Paper I lost "but none is used in the proofs here", and Paper III's clause now
+  says the Paper V comparison "is downstream of the results proved here".
+- **Paper II's map box renamed and its coda rewritten.** The box reads
+  `matching-quotient cubic moment` in all five maps, because Paper II never uses
+  the word "chordal"; the chordal identification is made in Paper V, after the
+  marked five-isotypic bridge. The coda paragraph now explains why Paper II has
+  an arrow into Paper V instead of re-summarizing Paper II's conclusion.
+- **Paper V's sharpness statement restored,** in the stronger form that names
+  the two losses: fibre \(K^\times\) before scalar normalization, and the free
+  \(C_2\)-action \(uq\) after it, matching the paper's own dependency-lattice
+  table.
+- **Paper IV's back matter reordered** so the AI-assistance disclosure precedes
+  the references, as in the other four.
+- **Paper II's conclusion is numbered** rather than starred, matching the other
+  four and separating it visually from the unnumbered coda that follows.
+
+One gate consequence to record: Papers I–IV's theorem-like environments remain
+byte-identical to their pre-C919 text, but three of Paper V's contain a naming
+change, because the instruction to replace series numbers with titles and
+citations reaches inside a theorem item, the source-return corollary, and its
+table. No hypothesis, quantifier, or conclusion changed; only the way a cited
+companion is named. Paper V has no statement-identity extractor, so no manifest
+records the old wording.
+
 ## Later refinements
 
 Commit `5d54c316d` replaced the coda's `\Needspace` glue with an explicit page
