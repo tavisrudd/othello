@@ -3,27 +3,36 @@
 The proof spine of the manuscript is structural apart from the computations in
 `evidence.json`, which are the only places a symbolic program is invoked as a
 premise.  None of them is certificate-checked; each is a trusted execution,
-cross-checked as its registry entry records.  Two statements invoke one
-directly: `prop:A5-not-coprime`, which locates the pencil's Eckardt locus, and
-`lem:hirzebruch-euler-spectrum` in the conditional framed refinement.  Two more
-inherit the first through their printed proofs, `prop:A5-nonseparated` and, in
-turn, `thm:separation-family`; the theorem's finiteness is independently
-obtainable from the order-three signature route recorded after
-`prop:A5-nonseparated`, which uses no computation, but its printed proof does
-not take that route.
+cross-checked as its registry entry records.  Exactly one statement now invokes
+one as a premise: `lem:hirzebruch-euler-spectrum`, in the conditional framed
+refinement.
 
-Nothing on the unconditional atomic route rests on any of them, so the
+The pencil's Eckardt locus used to be a second such place.  It no longer is.
+`prop:A5-not-coprime` is proved from `lem:eckardt-involution` and
+`prop:eckardt-reflection-group`: an Eckardt point is a reflection fixing the
+defining form, the reflections generate an irreducible complex reflection
+group of rank five, and three occurs among the invariant degrees of only two
+such groups, one of which gives the singular Segre cubic threefold and the
+other the Fermat cubic threefold.  The count of two members is a cohomological
+count of complements inside the Fermat automorphism group.  Both statements
+`prop:A5-nonseparated` and `thm:separation-family`, which inherit from
+`prop:A5-not-coprime`, are therefore free of the elimination as well.  The two
+Groebner bundles that determined the locus remain tracked and are now attached
+to `lem:pencil-loci-coordinates`, which records the members' coordinates on the
+parameter line and which no other statement uses.
+
+Nothing on the unconditional atomic route rests on any bundle, so the
 irrationality theorem `thm:every-cubic` does not.  The conditional framed
 route's second proof of one-step irrationality does, through
 `lem:hirzebruch-euler-spectrum`.
 
-Both direct statements are marked by `\evidence` in the source.  That macro is
-typographically empty, so a reader of the rendered paper sees the boundary at
-the proof of `prop:A5-not-coprime`, which names the trust level in prose,
-rather than at the annotation.  This enumeration is a reading of the printed
-proofs, not a fact read off `dependency-graph.dot`: as recorded below, edges
-are filled for the atomic route and the one-stabilization theorem only, and a
-statement carrying no edge has none recorded rather than none.
+Statements resting on a bundle are marked by `\evidence` in the source.  That
+macro is typographically empty, so a reader of the rendered paper sees the
+boundary in the prose of the proof that names the trust level rather than at
+the annotation.  This enumeration is a reading of the printed proofs, not a
+fact read off `dependency-graph.dot`: as recorded below, edges are filled for
+the atomic route and the one-stabilization theorem only, and a statement
+carrying no edge has none recorded rather than none.
 
 `make check` performs the source-only Lean correspondence check, deterministic
 PDF construction, and warning rejection.  The
@@ -118,7 +127,7 @@ The same holds of the imported-source annotations: they are recorded for the
 atomic route of Section 4, so a statement elsewhere that carries none has none
 recorded rather than none used.
 
-Checked coverage snapshot: 59 claims; 3 absent; 27 fragmentary; 28 conditional;
+Checked coverage snapshot: 62 claims; 6 absent; 27 fragmentary; 28 conditional;
 1 complete; 287 reviewer terminals, of which 46 are machinery serving no current
 manuscript claim.
 

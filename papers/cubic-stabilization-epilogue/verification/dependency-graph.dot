@@ -20,6 +20,7 @@ digraph manuscript {
   "lem:disc" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
   "lem:divisor-tagging" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
   "lem:dvr-rank-one" [fillcolor="#cdeccd", tooltip="complete"];
+  "lem:eckardt-involution" [fillcolor="#ffffff", tooltip="absent"];
   "lem:eckardt-rank" [fillcolor="#fde8c8", tooltip="fragment"];
   "lem:euler-sign" [fillcolor="#fde8c8", tooltip="fragment"];
   "lem:exact-low-degree-shifts" [fillcolor="#fde8c8", tooltip="fragment"];
@@ -30,6 +31,7 @@ digraph manuscript {
   "lem:horiz" [fillcolor="#fde8c8", tooltip="fragment"];
   "lem:numerical-base-change" [fillcolor="#fde8c8", tooltip="fragment"];
   "lem:orthogonal" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
+  "lem:pencil-loci-coordinates" [fillcolor="#ffffff", tooltip="absent"];
   "lem:relative-six-axis" [fillcolor="#fde8c8", tooltip="fragment"];
   "lem:ruled-degeneracy-dichotomy" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
   "lem:simple-euler-block" [fillcolor="#fde8c8", tooltip="fragment"];
@@ -43,6 +45,7 @@ digraph manuscript {
   "prop:cubic-block-data" [fillcolor="#fde8c8", tooltip="fragment"];
   "prop:cubic-packet" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
   "prop:direct-specialized-lowdim" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
+  "prop:eckardt-reflection-group" [fillcolor="#ffffff", tooltip="absent"];
   "prop:framed-operations" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
   "prop:hirzebruch-specialized-vanishing" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
   "prop:low-dimensional-vanishing" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
@@ -81,7 +84,9 @@ digraph manuscript {
   "KKPYY:sec-5.2.2" [shape=note, fillcolor="#eeeeee"];
   "McDuffSalamon:deformation-invariance" [shape=note, fillcolor="#eeeeee"];
   "PutSinger:ch-3" [shape=note, fillcolor="#eeeeee"];
+  "ShephardTodd:rank-five-degrees" [shape=note, fillcolor="#eeeeee"];
   "Voisin:minimal-class-locus" [shape=note, fillcolor="#eeeeee"];
+  "WeiYu:fermat-automorphisms" [shape=note, fillcolor="#eeeeee"];
   "YYZ:coprime-degree-family" [shape=note, fillcolor="#eeeeee"];
   "YYZ:coprime-degrees-persist" [shape=note, fillcolor="#eeeeee"];
   "a5-pencil-eckardt" [shape=note, fillcolor="#eeeeee"];
@@ -112,17 +117,23 @@ digraph manuscript {
   "KKPYY:sec-5.2.2" -> "lem:hodge-base" [style=dotted];
   "McDuffSalamon:deformation-invariance" -> "lem:hirzebruch-euler-spectrum" [style=dotted];
   "PutSinger:ch-3" -> "prop:residue-discriminant-exponents" [style=dotted];
+  "ShephardTodd:rank-five-degrees" -> "prop:eckardt-reflection-group" [style=dotted];
   "Voisin:minimal-class-locus" -> "cor:voisin-separation" [style=dotted];
+  "WeiYu:fermat-automorphisms" -> "prop:A5-not-coprime" [style=dotted];
   "YYZ:coprime-degree-family" -> "cor:coprime-separation" [style=dotted];
   "YYZ:coprime-degrees-persist" -> "cor:coprime-separation" [style=dotted];
-  "a5-pencil-eckardt" -> "prop:A5-not-coprime" [style=dotted];
-  "a5-pencil-eckardt-locus" -> "prop:A5-not-coprime" [style=dotted];
+  "a5-pencil-eckardt" -> "lem:pencil-loci-coordinates" [style=dotted];
+  "a5-pencil-eckardt-locus" -> "lem:pencil-loci-coordinates" [style=dotted];
   "cor:universal-ch0" -> "prop:A5-nonseparated" [style=solid];
   "def:framed-sixth-multiplicity" -> "lem:exact-low-degree-shifts" [style=dashed];
   "hirzebruch-euler-spectrum" -> "lem:hirzebruch-euler-spectrum" [style=dotted];
   "lem:A0preserve" -> "prop:rank2-rigidity" [style=solid];
   "lem:crossing" -> "prop:atom-invariant" [style=solid];
   "lem:disc" -> "prop:cubic-atom" [style=solid];
+  "lem:eckardt-involution" -> "prop:eckardt-reflection-group" [style=dashed];
+  "lem:eckardt-rank" -> "lem:eckardt-involution" [style=dashed];
+  "lem:eckardt-rank" -> "lem:pencil-loci-coordinates" [style=dashed];
+  "lem:eckardt-rank" -> "lem:pencil-loci-coordinates" [style=solid];
   "lem:eckardt-rank" -> "prop:A5-nonseparated" [style=solid];
   "lem:eckardt-rank" -> "prop:A5-not-coprime" [style=dashed];
   "lem:eckardt-rank" -> "prop:A5-not-coprime" [style=solid];
@@ -137,6 +148,8 @@ digraph manuscript {
   "lem:relative-six-axis" -> "prop:no-elliptic-product" [style=dashed];
   "lem:relative-six-axis" -> "prop:no-elliptic-product" [style=solid];
   "lem:spectrum-transfer" -> "prop:cubic-atom" [style=solid];
+  "prop:A5-not-coprime" -> "lem:pencil-loci-coordinates" [style=dashed];
+  "prop:A5-not-coprime" -> "lem:pencil-loci-coordinates" [style=solid];
   "prop:A5-not-coprime" -> "prop:A5-nonseparated" [style=solid];
   "prop:atom-invariant" -> "prop:no-curve" [style=dashed];
   "prop:atom-invariant" -> "prop:no-surface" [style=solid];
@@ -146,6 +159,8 @@ digraph manuscript {
   "prop:cubic-atom" -> "thm:every-cubic" [style=solid];
   "prop:cubic-block-data" -> "prop:cubic-atom" [style=solid];
   "prop:cubic-block-data" -> "prop:no-curve" [style=dashed];
+  "prop:eckardt-reflection-group" -> "prop:A5-not-coprime" [style=dashed];
+  "prop:eckardt-reflection-group" -> "prop:A5-not-coprime" [style=solid];
   "prop:no-curve" -> "prop:no-surface" [style=dashed];
   "prop:no-curve" -> "prop:no-surface" [style=solid];
   "prop:no-surface" -> "thm:every-cubic" [style=solid];
@@ -160,5 +175,4 @@ digraph manuscript {
   "thm:every-cubic" -> "cor:coprime-separation" [style=dashed];
   "thm:every-cubic" -> "cor:fermat-separation" [style=dashed];
   "thm:every-cubic" -> "cor:voisin-separation" [style=dashed];
-  "thm:separation-family" -> "prop:A5-not-coprime" [style=solid];
 }
