@@ -178,16 +178,6 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   The separated-variable clause of the separation theorem is also formalized,
   so the manuscript names the Fermat point instead of saying all but finitely
   many.
-  The relative six-axis row now rests on an integral first-homology realization
-  instead of opaque elliptic-scheme and isogeny placeholders: the source
-  polarization is the Kronecker product of `6I₅-J₅` with the standard
-  alternating rank-two elliptic pairing, with determinant `6⁸`, and the
-  polarization pullback identity forces the comparison matrix to have
-  determinant of absolute value `6⁴` and be injective. Both primary
-  discriminants are computed and the identifications `D₂ ≃ H₂ ⊗ E[2]` and
-  `D₃ ≃ H₃ ⊗ E[3]` are constructed through supplied torsion coordinates, and
-  the manuscript's normalized primary pairings are proved. Maximal isotropy of
-  the isogeny kernel needs the discriminant group and is the successor step.
   Card:
   `../cubic-threefolds-tasks/c910-cubic-stabilization-lean-companion.md`; gap audit
   `../2026-08-18-c910-post-restructure-gap-audit.md`; anchor report
@@ -219,8 +209,6 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   absent-rows report `../2026-08-19-c910-separation-and-absent-rows.md`;
   chart split-presentation report
   `../2026-08-19-c910-six-axis-chart-split-presentation.md`;
-  relative six-axis homology-realization report
-  `../2026-08-19-c910-relative-six-axis-homology-realization.md`;
   interim release report
   `../2026-08-12-c910-partial-lean-release.md`.
 - **C920 — closed 2026-08-18.** Hypothesis 5.7T of the epilogue is now used only
