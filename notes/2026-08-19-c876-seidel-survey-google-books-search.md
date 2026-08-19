@@ -39,14 +39,39 @@ The last two are the coverage calibration: both the 1976 survey and the 1981 Sei
 survey are inside the indexed portion of the volume, so the zero-hit results above bear on both
 surveys and not merely on the first.
 
+Second round, OCR-robust re-queries, same session:
+
+```
+recon                    -> 0
+is determined by         -> hits; the one outside the p. 299 statement is quoted below
+```
+
+The `recon` miss adds little on its own: Google Books matches words and prefixes rather than
+arbitrary substrings, so it is not a reliable way to reach "reconstruction" past a garbled ending.
+The direct `reconstruction` miss above remains the load-bearing one.
+
+The second `is determined by` hit, transcribed with its OCR errors:
+
+> ... Γ, which has 9, 15, 27 vertices, respectively, is a uniquely determined ...
+> Remark 2.11. Similar methods may be used to prove the characterization ...
+
+This is a uniqueness-of-a-strongly-regular-graph characterization on fixed parameter sets, not a
+reconstruction from local data. It does not bear on `thm:aligned-faithfulness`.
+
 The `determined by its` hit, transcribed from the snippet with its OCR errors left in place:
 
 > For any w ∈ Ω, the triple set Δ of any two-graph (Ω,Δ) is determined by its triples containing ω.
 > Indeed, {ω,ω₁,ω₂,ω₃} ∈ Δ whenever an odd number of the other 3-subsets of {ω,ω₁,ω₂,ω₃} belong
 > to Δ.
 
-Page number not yet captured; provenance within the volume is unlocated, so it is not yet known
-which of the reprinted papers this sits in.
+The hit is on **page 299** of the reprint volume. Which reprinted paper that is has not been
+confirmed. The volume's table of contents, read from the publisher's listing, places the two
+surveys in Part II, *Lines with Few Angles*, as items 10 and 14; secondary listings give their
+reprint ranges as roughly 146--176 and 231--254, which are unverified search-summary numbers rather
+than a checked source. On those numbers page 299 falls in Part III, *Matrices and Forms*, whose
+two-graph-bearing items are *Quadratic Forms over GF(2)* and *On Two-Graphs and Shult's
+Characterization of Symplectic and Orthogonal Geometries Over GF(2)*. Confirming this needs only
+the running head or nearest chapter opening at page 299.
 
 ## Verdict
 
