@@ -28,11 +28,11 @@ four-point two-graph identity and transform by
  \qquad(g\in S_X).
 \]
 Writing \(\epsilon_T(S)=(-1)^{\tau_T(S)}\), the four-point identity is
-\[
- \sum_{S\in\binom Q3}\tau_T(S)=0
- \qquad\left(Q\in\binom X4\right).                         \tag{5.2}
+\begin{equation}
  \label{eq:two-graph-parity}
-\]
+ \sum_{S\in\binom Q3}\tau_T(S)=0
+ \qquad\left(Q\in\binom X4\right).
+\end{equation}
 This is the two-graph parity equation.  Switching a graph representative
 leaves \(\tau_T\) unchanged; complementing \(\tau_T\) reverses every triangle
 sign while preserving \eqref{eq:two-graph-parity}.
@@ -62,7 +62,8 @@ headed ``coefficient word'', the signs occur in the order
 012,013,014,015,023,024,025,034,035,045,
 123,124,125,134,135,145,234,235,245,345.
 \]
-\[
+\begin{equation}
+\label{tab:outer-coefficient-words}
 \begingroup
 \newcommand{\sgminus}{\mathord{-}}
 \newcommand{\sgplus}{\mathord{+}}
@@ -74,10 +75,9 @@ r&p_r&\text{coefficient word of }J_{T_r}\\ \hline
 3&012453&\sgminus\sgplus\sgminus\sgplus\sgplus\sgplus\sgminus\sgminus\sgminus\sgplus\sgminus\sgplus\sgplus\sgplus\sgminus\sgminus\sgminus\sgplus\sgminus\sgplus\\
 4&012534&\sgminus\sgplus\sgplus\sgminus\sgminus\sgplus\sgplus\sgminus\sgplus\sgminus\sgplus\sgminus\sgplus\sgminus\sgminus\sgplus\sgplus\sgminus\sgminus\sgplus\\
 5&012543&\sgplus\sgminus\sgminus\sgplus\sgminus\sgplus\sgminus\sgplus\sgplus\sgminus\sgplus\sgminus\sgminus\sgplus\sgminus\sgplus\sgminus\sgplus\sgplus\sgminus
-\end{array}                                                     \tag{5.1}
-\label{tab:outer-coefficient-words}
+\end{array}
 \endgroup
-\]
+\end{equation}
 Indeed,
 \(\epsilon_{pT_0}(S)=\operatorname{sgn}(p)
 \epsilon_{T_0}(p^{-1}S)\); applying this to the twenty triangle products of
@@ -296,7 +296,7 @@ Comparison with \(16Z_T^2\) gives
 displayed sign.
 
 The matching expansion gives \(Z_T=J_T\) coefficient by coefficient.
-Table~\eqref{tab:outer-coefficient-words} therefore identifies the six operator cubics with the signed
+The table in \eqref{tab:outer-coefficient-words} therefore identifies the six operator cubics with the signed
 Joubert coordinates, including their normalization and the rule
 \(gZ_T=\operatorname{sgn}(g)Z_{gT}\).  Their Segre relations are classical
 \cite[Sections~2.1--2.2]{HMSVOuter}, so
@@ -578,12 +578,12 @@ We record the remaining finite step explicitly.  For outside points \(x,y\),
 put \(p=p_x\), \(s=p_y\), \(e=e_{xy}\), and let
 \(\mathcal B(p,s,e)\) be the set of pairs \(ij\subset Q\) for which
 \(\{i,j,x,y\}\) is aligned.  Its four triangle values give
-\[
+\begin{equation}
+ \label{eq:aligned-pair-criterion}
  ij\in\mathcal B(p,s,e)
  \quad\Longleftrightarrow\quad
- p_i+s_i=p_j+s_j\ \text{ and }\ e=p_j+s_i.                 \tag{5.3}
- \label{eq:aligned-pair-criterion}
-\]
+ p_i+s_i=p_j+s_j\ \text{ and }\ e=p_j+s_i.
+\end{equation}
 This criterion gives a complete classification.  If \(p\) and \(s\) are
 already known, some pair has \(p_i+s_i=p_j+s_j\), and exactly one value of
 \(e\) makes that pair aligned.  If exactly one cut is balanced, relabelling

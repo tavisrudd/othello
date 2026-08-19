@@ -3,11 +3,11 @@
   "main_source": "clebsch_passages.tex",
   "main_source_sha256": "bbe56c103c974051d70419d85736ffa69f36d611ff6151d823de3a20ecd7e5c5",
   "section_sha256": {
-    "sections/01-introduction.tex": "142696277ad67a18b91eeb6f277578a39cb5ad5fe84a8efb0dd26273ef83d7d5",
+    "sections/01-introduction.tex": "745ca970d49f3e789b11f12dd9e4c5935bd108e3a7f286f528a2c62660a5dcbd",
     "sections/02-orientation-cover.tex": "709fc2dadeafaf786ae84ef12deda78a9b4d65bc4a29727de16c2fc3c747a9b6",
     "sections/03-orientation-source.tex": "2ea744bfb964840e48533b0320db20128c43e6121cdd10469c71ed93f6161201",
     "sections/04-arithmetic-specialization.tex": "4ae82f831aafb77c2ac7e1114df559b2c711eae79e82363361e5576368f260f4",
-    "sections/05-golden-operator.tex": "24a23bcf5ce7e831461232107ebbe39d747595d74ba9f4546652a1074fcf8186",
+    "sections/05-golden-operator.tex": "296ced89918403326abea2c9d1c867e50acddb9bab5a18463a3795cb270a9997",
     "sections/05-harmonic-realization.tex": "f019d20c504ddd04b670abc39e69fd9790cf351af4419c138efb9967fcba04a1",
     "sections/09-conclusion.tex": "d8972b2be3eabeada385ecb4ca7ebde472dd43cd8d6fb5e05487a126c715f7ff",
     "sections/09-programme-coda.tex": "1206d26f844fd17d717d18cfe0ef542a046fec9aebe2c5ed6f0d8bb8b63605f8",
@@ -22,7 +22,7 @@
       "environment": "theorem",
       "title": "Arithmetic incidence cover",
       "source": "sections/01-introduction.tex",
-      "source_line": 114,
+      "source_line": 115,
       "sha256": "6d903edd8afda2dfcabeca11638ed302f19edfb75d50fbb001e36983d4eac34a",
       "tex": "\\begin{theorem}[Arithmetic incidence cover]\n\\label{thm:arithmetic-main}\nThe function field of Hitchin's incidence cover is\n\\[\n \\Q(\\mathbf P(H))\\bigl(\\sqrt{5J_0}\\bigr).\n\\]\nIf \\(\\mathcal N\\to\\mathbf P(H)\\) is its finite Stein normalization, then,\nafter normalizing the anti-invariant summand, its algebra is\n\\[\n \\mathcal O\\oplus\\mathcal O(-3),\\qquad z^2=5J_0.\n\\]\nFor the Clebsch chart\n\\(\\iota_t:\\mathbf P(V_{\\Q(\\sqrt5)})\\to\\mathbf P(H_{\\Q(\\sqrt5)})\\)\ndefined in Section~\\ref{sec:cover},\n\\[\n \\iota_t^*J_0=16\\sigma_3^2.\n\\]\nThe chart is not defined over \\(\\Q\\); Galois conjugation carries it to the\nchart of the conjugate icosahedron.  The fibre over the rational point\n\\([xyz]\\) is nevertheless a complete reduced fibre with residue algebra\n\\(\\Q(\\sqrt5)\\).\n\\end{theorem}"
     },
@@ -31,7 +31,7 @@
       "environment": "proposition",
       "title": "Relative marked orientation bridge",
       "source": "sections/01-introduction.tex",
-      "source_line": 181,
+      "source_line": 182,
       "sha256": "20e7953afb03295b88f1f9afcda8309a94b10dad8b477b74204bf088b3619a62",
       "tex": "\\begin{proposition}[Relative marked orientation bridge]\n\\label{thm:orientation-source}\nFix a marked bridge datum \\(\\mathfrak m\\).  Let\n\\(B=\\mathbf P(V_E)\\), where \\(E=\\Q(\\sqrt5)\\), and pull Hitchin's\nincidence normalization back along \\(\\iota_t:B\\to\\mathbf P(H_E)\\).\nThe normalization of this pullback is a disjoint union\n\\[\n B_+\\amalg B_-.\n\\]\nThe fixed isotropic plane selects \\(B_+\\), and incidence deck exchange\ninterchanges the components.  For an odd generator normalized on \\(B_+\\),\ntheir equations are\n\\[\n z=4\\sqrt5\\,\\sigma_3,\n \\qquad z=-4\\sqrt5\\,\\sigma_3.\n\\]\nOn \\(D(\\sigma_3)\\) the pulled-back finite cover is split etale and has two\ndistinct compact incidence points.  Away from Hitchin's degree-ten\ndegeneracy locus (defined in Section~\\ref{sec:rational-incidence-model}),\nboth are regular\nicosahedral six-axis configurations; on that degeneracy locus with\n\\(\\sigma_3\\ne0\\), the fixed \\(U_t\\)-branch is regular and the other compact\nincidence point is degenerate.\nOn the Clebsch cubic the unnormalized branches meet, while the normalization\nremains disjoint.\n\nRelative to \\(\\mathfrak m\\), equip \\(B_+\\) with the source\n\\([C_{\\mathfrak m},Z_{\\mathfrak m}]_{\\rm or}\\) and equip \\(B_-\\) with its\ndeck-opposite.  At \\([xyz]\\), the golden\nexchanger identifies this opposite with the conjugate configuration and\nthe representative\n\\((-C_{\\mathfrak m},-Z_{\\mathfrak m})\\).  Under the marked primitive\npair-sum map\n\\[\n \\beta:V\\longrightarrow\\Q^{\\binom52},\n \\qquad \\beta(y)_{ij}=y_i+y_j,\n\\]\nthe same relative convention fixes the sign of the degree-six cubic in\nTheorem~\\ref{thm:harmonic-main}.  The normalized component alone is not\nasserted to determine \\(\\mathfrak m\\).\n\\end{proposition}"
     },
