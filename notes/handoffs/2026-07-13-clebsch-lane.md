@@ -170,17 +170,27 @@ card itself or the archive for closure detail — none is a live frontier.
 
 ## Released-paper corrections and novelty tracks (C866–C878, need cards)
 
-Two clusters of open, math/audit-only work currently have no task card of
-their own — a lane-hygiene gap, not a routing decision. Until cards exist,
-the pointers below are authoritative; do not re-derive this from git history.
+The exceptional-code-ladder cluster below still has no task card of its own — a
+lane-hygiene gap, not a routing decision. Until a card exists, the pointer is
+authoritative; do not re-derive it from git history.
 
-- **Released-paper corrections owed (C876, C877, C878).** Paper IV's
-  operator-field paragraph is pre-empted by its own cited source and needs a
-  rewrite; Paper III (`clebsch-passages`) cites the wrong benchmark and is
-  missing a two-graph attribution to Higman/Taylor/Seidel via Brouwer and Van
-  Maldeghem. Neither edit has been made. Detail: inline in this file's prior
-  revision, recoverable via `git log -p -- notes/handoffs/2026-07-13-clebsch-lane.md`,
-  or re-derive from `../2026-08-05-c869-paper-iv-series-literature-audit.md`.
+- **Released-paper corrections (C876, C877, C878) — applied and verified
+  2026-08-19; nothing owed in any manuscript.** Paper III's benchmark sentence
+  and two-graph attribution landed in `efc76fb98` and `a9f14ebf6`
+  (`papers/clebsch-passages/sections/05-golden-operator.tex`), the same
+  attribution repair landed in Paper I, and Paper IV now credits Madison–Wu's
+  module theorem at the published pinpoints Theorem 5.1(i) and Corollary 5.4
+  (C877's report quotes the arXiv preprint numbering 6.1(i)/6.3; C901's
+  2026-08-09 audit reconciled the two). Two residuals, neither a manuscript
+  edit: the C878 certificate pins a SHA-256 of `05-golden-operator.tex` that
+  drifted in `b19233879`, so
+  `notes/2026-08-05-c878-aligned-faithfulness-independence.py --write` plus a
+  refreshed `.sha256` is owed once C919's page-1 de-branding settles — its
+  mathematics replays green; and C876's "biangular tight frame" citation and
+  `2-(10,5,16)` enumeration items belong to the golden-operator programme, not
+  to any Clebsch manuscript. The standing bounded negative is unchanged: the two
+  Seidel two-graph surveys remain unobtained, as `literature-boundaries.md`
+  records.
 - **Exceptional code ladder (C865–C875).** Research track, no manuscript.
   Novelty is largely dissolved — do not start a manuscript on this track; the
   tower `120-56-28-27` is classical (Gosset/Schlafli/E6 graphs), and the fold
@@ -195,8 +205,8 @@ the pointers below are authoritative; do not re-derive this from git history.
   `../2026-08-05-c869-paper-iv-series-literature-audit.md`,
   `../2026-08-05-c871-fold-tower-literature-audit.md`.
 
-Next lane-hygiene step: allocate cards for these clusters (one per cluster is
-enough — do not split into thirteen one-line cards) and retire this section.
+Next lane-hygiene step: allocate one card for the exceptional-code-ladder
+cluster — do not split it into one-line cards — and retire this section.
 
 ## Companion-export chain
 
