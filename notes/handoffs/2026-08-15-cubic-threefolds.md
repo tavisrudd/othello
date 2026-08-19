@@ -98,8 +98,8 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   `Verification/AxiomAudit`; no duplicate under the shared
   `lean/TavisRuddFiniteGeom/` tree or a second Lean repository. The sources
   build through the guarded queue; `make check` and the axiom-log gate green
-  over 59 claims, 46 machinery rows, and 281 reviewer terminals; coverage 4
-  absent / 26 fragmentary / 28 conditional / 1 complete. `thm:every-cubic` is
+  over 59 claims, 46 machinery rows, and 283 reviewer terminals; coverage 3
+  absent / 27 fragmentary / 28 conditional / 1 complete. `thm:every-cubic` is
   anchored to the atomic route, the framed spine answers to its own manuscript
   theorem `thm:every-cubic-conditional` and is now assembled end to end on the
   product-formula signature, the small even block reduction is formalized from

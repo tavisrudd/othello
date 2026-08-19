@@ -611,7 +611,7 @@ splitting is constructed.  Report:
 **Full gate re-run and the absent rows, 2026-08-19.**  The complete aggregate
 gate was run here at `b991d168d`, the commit where the concurrent Section 5 edits
 landed, and passed at every stage including the axiom transcript over all
-terminals.  Five of the nine absent claim rows were then taken.  The three
+terminals.  Six of the nine absent claim rows were then taken.  The three
 separation corollaries `cor:voisin-separation`, `cor:fermat-separation` and
 `cor:coprime-separation` are conditional deductions in
 `Applications/UniversalCH0Separation.lean`: universal `CH₀`-triviality passes to
@@ -627,14 +627,18 @@ leaves the monodromy matrix of an invertible frame unchanged, and an injective
 coefficient substitution preserves the multiplicity of every root it fixes, hence
 the primitive-sixth multiplicity.  `lem:eckardt-rank` is a fragment through
 `Applications/EckardtHessianRank.lean`, where the bordered-matrix rank criterion
-is proved as an equivalence over any field in which two is invertible.  Coverage
-is now 4 absent, 26 fragmentary, 28 conditional, 1 complete over 281 reviewer
-terminals.  The four rows left absent are the two `A_5`-moduli propositions,
-which rest on projective equivalence over a coarse moduli image and on the
-registered Eckardt evidence bundle; `prop:no-elliptic-product`, deliberately held
-while the lattice model behind it is being corrected; and
-`lem:center-maps-monomial`, which needs a completed monoid ring and its
-associated graded.  Report:
+is proved as an equivalence over any field in which two is invertible.
+`prop:no-elliptic-product` is a fragment through
+`GraphLattices/HeartOrthogonalLines.lean`, which covers its two steps inside the
+two-primary heart: a line over the four-element field is totally isotropic for
+the trace-determinant pairing, so two orthogonal lines coincide and the
+one-and-one pattern of the orthogonal decomposition is impossible, and a
+subspace small enough to be cyclic of exponent two is trivial.  Coverage is now 3
+absent, 27 fragmentary, 28 conditional, 1 complete over 283 reviewer terminals.
+The three rows left absent are the two `A_5`-moduli propositions, which rest on
+projective equivalence over a coarse moduli image and on the registered Eckardt
+evidence bundle, and `lem:center-maps-monomial`, which needs a completed monoid
+ring and its associated graded.  Report:
 [`../2026-08-19-c910-separation-and-absent-rows.md`](../2026-08-19-c910-separation-and-absent-rows.md).
 
 ## Prioritized Lean backlog

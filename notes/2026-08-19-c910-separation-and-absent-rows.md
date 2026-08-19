@@ -10,7 +10,7 @@ Two things. First, it re-ran the complete epilogue gate at the commit where a
 concurrent session's Section 5 edits landed, which the previous C910 pass could
 not do: that session held uncommitted edits whose claim-map digest was stale, so
 the correspondence checker stopped at the first stale row. Second, it took the
-absent rows of the claim map that are within the companion's scope, moving five
+absent rows of the claim map that are within the companion's scope, moving six
 of the nine absent rows to a recorded coverage strength.
 
 ## The gate, re-run in full
@@ -38,8 +38,8 @@ One practical note for anyone repeating this. The guarded queue's per-target
 
 ## The absent rows taken
 
-Coverage after this pass is 4 absent, 26 fragmentary, 28 conditional deductions,
-1 complete, over 281 reviewer terminals. Every added terminal depends on exactly
+Coverage after this pass is 3 absent, 27 fragmentary, 28 conditional deductions,
+1 complete, over 283 reviewer terminals. Every added terminal depends on exactly
 `propext`, `Classical.choice`, `Quot.sound`.
 
 ### The three separation corollaries, now conditional deductions
@@ -140,23 +140,61 @@ adapted normal form is not carried out, and the lemma's second assertion — tha
 every smooth cubic threefold in the separated-variable class and in the
 coprime-degree family carries such a point — is not formalized.
 
-## The four rows left absent, and why
+### The elliptic-product exclusion, now a fragment
+
+`prop:no-elliptic-product` was first left absent here, on the reading that the
+lattice description behind it was about to be corrected. That reading was wrong,
+and the C921 session established why: the proposition quantifies over an isogeny
+from a product of principally polarized abelian varieties with the polarization
+pulling back to an odd multiple of the product polarization, so the principal
+polarization of the four-dimensional factor is part of the shape being
+quantified over, not an assertion about the canonical factor of the intermediate
+Jacobian. Nothing in the statement or its proof quotes lattice invariants. The
+statement needs no repair, so the row was taken.
+
+`GraphLattices/HeartOrthogonalLines.lean` covers the two steps of the proof that
+live entirely in the two-primary coefficient heart, modelled concretely as a
+two-dimensional space over the four-element field with the trace-determinant
+pairing to the two-element field.
+
+The first is that the pattern of one-dimensional summands is impossible. A line
+over the four-element field is totally isotropic, because the determinant of a
+vector against itself vanishes and the scalars come out of the determinant. If
+the lines spanned by two vectors are orthogonal, then the determinant of those
+two vectors is killed by the trace of every multiple of it, and the trace form
+of the four-element field over the two-element field is nondegenerate, so that
+determinant vanishes and the second vector is a multiple of the first. Two
+orthogonal lines therefore coincide and are never complementary.
+
+The second is the parity step behind the last assertion: a subspace over the
+four-element field with at most two elements is trivial, since a nonzero one
+contains the four multiples of any of its nonzero elements. That is the formal
+content of "cyclic, killed by two, and stable under the four-element field,
+hence zero".
+
+The row is a fragment. The classification of the isogeny shape is not
+formalized: not the passage from an odd-degree isogeny to an orthogonal
+decomposition of the heart, not the generator count bounding the dimension of
+the summand that carries it, not the realization of the two-factor case by an
+axis, and not the final contradiction with the order of the heart. Nothing
+registered asserts a polarization on any factor of the intermediate Jacobian or
+any lattice invariant of it.
+
+Two manuscript sentences are worth the author's attention here, raised by the
+C921 session and not touched in this pass: the sentences in the introduction and
+in the envelope section saying that the four-dimensional factor of the second
+case may be the Jacobian of an irreducible curve of genus four. Which principal
+polarization is meant is a genuine choice among six, corresponding to the six
+order-five subgroups of the five-torsion of the elliptic factor, all of them
+fixed by the axis stabilizer. No claim-map row leans on either sentence.
+
+## The three rows left absent, and why
 
 - `prop:A5-not-coprime` and `prop:A5-nonseparated` rest on projective equivalence
   over a coarse moduli image and on the registered Eckardt evidence bundle. The
   companion constructs no moduli space and gives the evidence bundle no formal
   semantics, so a Lean row here would restate the computation rather than check
   it.
-- `prop:no-elliptic-product` is a statement about the lattice model of the
-  intermediate Jacobian of the generic pencil member. It is left absent
-  deliberately: the C921 session reports that the lattice C914 computed glues
-  only the two-primary kernel, so its elementary divisors `(3,3,3,3,3,3,15,15)`
-  belong to a partially glued object rather than to `H₁(J)`, and that the
-  four-dimensional factor is not principally polarized — its six principal
-  polarizations correspond to the six order-five subgroups of `E_b[5]`, and the
-  axis stabilizer fixes all six. Recording a claim-map row now would freeze a
-  description that is about to change. Nothing registered in this pass mentions
-  those divisors or asserts a principal polarization on that factor.
 - `lem:center-maps-monomial` needs a completed monoid ring and its associated
   graded, which the package does not build; the C922 session recorded that
   reasoning in `lean/README.md` in the same pass that added the row.
@@ -219,3 +257,4 @@ summary of the same name without the `.quiet` path.
 - `8833c76e2` — the two low-degree bulk shifts covered by their framed invariance
   algebra.
 - `d7e38e503` — the rank criterion behind the Eckardt condition.
+- `f10ace199` — the two-primary heart steps of the elliptic-product exclusion.
