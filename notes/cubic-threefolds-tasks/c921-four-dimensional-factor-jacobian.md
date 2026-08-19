@@ -41,6 +41,24 @@ epilogue's separation corollary on the pencil to a reproof; a negative answer
 leaves the family outside every currently effective route and is the stronger
 statement for the manuscript.
 
+## What the literature already gives (2026-08-18)
+
+Hartlieb's Remark 5.8 records that the intermediate Jacobians of the whole
+family are isogenous to the fifth power of an elliptic curve, and its footnote
+credits van Geemen and Yamauchi with a sharper statement for any cubic
+threefold carrying an automorphism of order five: `J(Y)` is isogenous to
+`E x B^2` with `B` an abelian surface, described explicitly there for the
+general such threefold. Every member of this pencil carries such an
+automorphism, so the four-dimensional factor `A_b` is isogenous to `B^2`.
+
+That is consistent with C914 rather than in tension with it: the splitting of
+`A_b` into two abelian surfaces exists as an isogeny, and what C914 rules out
+is its realization by an odd-degree isogeny under which the principal
+polarization pulls back to an odd multiple of the product polarization. The
+sharpened question for this task is therefore whether the polarized
+four-dimensional factor, not merely the underlying abelian variety, is a curve
+Jacobian.
+
 ## Suggested attacks
 
 - Roulleau's `D_5`-fibration of the Fano surface: identify `A_b` as a Prym or
