@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import re
 import sys
@@ -112,6 +113,65 @@ def manuscript_proofs(labels: set[str]) -> dict[str, str]:
             proofs[owner] = body
             position = match.end()
     return proofs
+
+
+ANNOTATIONS = ("coverage", "lean", "uses", "imports", "evidence", "proves")
+
+
+def statement_digest(body: str) -> str:
+    """Digest of a manuscript statement, ignoring its annotations and layout.
+
+    The annotations are removed before hashing, because the annotation gate
+    already compares them with the claim map; what this digest fixes is the
+    mathematical text of the statement, so that rewriting it forces the row
+    describing its formal coverage to be re-examined.
+    """
+    stripped = body
+    for macro in ANNOTATIONS:
+        stripped = re.sub(r"\\" + macro + r"\{.*?\}", "", stripped, flags=re.DOTALL)
+    stripped = re.sub(r"(?m)%.*$", "", stripped)
+    return hashlib.sha256(" ".join(stripped.split()).encode("utf-8")).hexdigest()
+
+
+def terminal_signatures() -> dict[str, str]:
+    """The elaborated statement text of each reviewer terminal, by name.
+
+    A terminal's signature runs from its declaration keyword to the assignment
+    that opens its proof; the docstring above it is deliberately excluded, so a
+    prose improvement does not read as a change of statement.
+    """
+    lines = PAPER_INTERFACE.read_text(encoding="utf-8").splitlines()
+    signatures: dict[str, str] = {}
+    current: str | None = None
+    collected: list[str] = []
+    for line in lines:
+        opening = re.match(
+            r"^(?:noncomputable\s+)?(?:theorem|def)\s+([A-Za-z0-9_']+)", line
+        )
+        if opening:
+            current = opening.group(1)
+            collected = [line]
+            if ":=" in line:
+                signatures[current] = " ".join(" ".join(collected).split())
+                current = None
+            continue
+        if current is not None:
+            collected.append(line)
+            if ":=" in line:
+                signatures[current] = " ".join(" ".join(collected).split())
+                current = None
+    return signatures
+
+
+def terminal_digest(declarations: list[str], signatures: dict[str, str], namespace: str) -> str:
+    """Digest of the statements of one row's terminals, in the recorded order."""
+    payload = []
+    for declaration in declarations:
+        name = declaration[len(namespace) + 1:]
+        if name not in signatures:
+            fail(f"no signature found for terminal {declaration}")
+        payload.append(signatures[name])
+    return hashlib.sha256("\n".join(payload).encode("utf-8")).hexdigest()
 
 
 def annotation(label: str, body: str, macro: str, arity_optional: bool = False) -> str | None:
@@ -334,7 +394,7 @@ def main() -> None:
         )
 
     manifest = json.loads(CLAIMS.read_text(encoding="utf-8"))
-    if manifest.get("schema") != "cubic-stabilization-lean-claims-v4":
+    if manifest.get("schema") != "cubic-stabilization-lean-claims-v5":
         fail("unexpected claims schema")
     terminal_namespace = manifest.get("terminal_namespace")
     if not isinstance(terminal_namespace, str) or not terminal_namespace:
@@ -393,6 +453,13 @@ def main() -> None:
                 f"{label} annotates coverage {annotated_coverage} but the claim map "
                 f"records {coverage}"
             )
+        recorded_statement = claim.get("statement_digest")
+        current_statement = statement_digest(environments[label])
+        if recorded_statement != current_statement:
+            fail(
+                f"the statement of {label} has changed since its claim-map row was "
+                f"reviewed: recorded {recorded_statement}, current {current_statement}"
+            )
         if annotated_declarations != claim.get("declarations"):
             fail(
                 f"{label} annotates a terminal list differing from the claim map: "
@@ -416,6 +483,20 @@ def main() -> None:
             if declaration in registered:
                 fail(f"terminal registered more than once: {declaration}")
             registered.add(declaration)
+    signatures = terminal_signatures()
+    for claim in claims:
+        if not claim["declarations"]:
+            if claim.get("terminal_digest") is not None:
+                fail(f"absent claim {claim['manuscript_label']} records a terminal digest")
+            continue
+        recorded = claim.get("terminal_digest")
+        current = terminal_digest(claim["declarations"], signatures, terminal_namespace)
+        if recorded != current:
+            fail(
+                f"the terminals of {claim['manuscript_label']} have changed since its "
+                f"claim-map row was reviewed: recorded {recorded}, current {current}"
+            )
+
     machinery = manifest.get("machinery")
     if not isinstance(machinery, list):
         fail("claim map has no machinery list")
@@ -427,6 +508,13 @@ def main() -> None:
             fail(f"terminal registered more than once: {declaration}")
         if not isinstance(entry.get("reason"), str) or not entry["reason"].strip():
             fail(f"machinery declaration {declaration} has no nonempty reason")
+        recorded = entry.get("terminal_digest")
+        current = terminal_digest([declaration], signatures, terminal_namespace)
+        if recorded != current:
+            fail(
+                f"the statement of machinery terminal {declaration} has changed since its "
+                f"row was reviewed: recorded {recorded}, current {current}"
+            )
         registered.add(declaration)
     if registered != terminals:
         fail(

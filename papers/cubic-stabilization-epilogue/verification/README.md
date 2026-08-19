@@ -57,6 +57,26 @@ proof header ends by skipping following spaces and a macro placed there stops
 that skip, which perturbs the typeset output; placed at the end they leave the
 built document unchanged, which the deterministic rebuild confirms.
 
+Each claim-map row also pins the two things it describes, by digest.  One digest
+covers the manuscript statement, taken with its annotations removed and its
+layout normalized, so that rewriting the mathematics of a statement fails the
+check until the row describing its formal coverage has been re-examined.  The
+other covers the elaborated statements of the terminals the row registers,
+excluding their docstrings, so that changing what a terminal proves has the same
+effect while improving how it is documented does not.  Machinery terminals carry
+the second digest as well, since the reason recorded for one describes what it
+states.  After re-examining a row, record its current digests with
+
+```text
+python3 lean/verification/refresh_claim_digests.py LABEL
+```
+
+The digests cover the theorem-like environments and the terminals, not the prose
+between statements.  Where a manuscript derivation runs in the text between two
+environments, as parts of the atomic argument do, a change there is caught by
+neither digest; the dependency edges recorded in the proofs are what make such a
+derivation visible at all.
+
 `verification/dependency-graph.dot` renders the resulting graph: statements
 coloured by the strength at which they are formalized, imported sources and
 evidence bundles as separate nodes, and edges dashed for a conceptual
