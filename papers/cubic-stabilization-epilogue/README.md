@@ -45,18 +45,28 @@ From this directory, run:
 make check
 ```
 
-This lints the TeX sources, checks the exact manuscript-to-Lean claim
-inventory, builds the PDF in the pinned environment, and rejects manuscript
-warnings.  The Lean kernel and axiom audit are replayed separately using the
+This checks the exact manuscript-to-Lean claim inventory, builds the PDF in
+the pinned environment, and rejects manuscript warnings.  In the development
+repository it also lints the TeX sources; the released repository drops that
+step, whose helper lies outside the paper directory.  The Lean kernel and axiom audit are replayed separately using the
 guarded commands documented in [`lean/README.md`](lean/README.md).
 
 ## Trust boundary
 
-The paper is proof-first.  Exact computations used during discovery are not
-part of its proof surface.  The current draft gives standalone unconditional
-proofs of the six-axis realization, all-degree finite-etale graph saturation,
-the cubic framed-monodromy computation, and the one-step irrationality
-theorem, the last through the atomic route of Section 4.
+The paper is proof-first.  Its unconditional spine invokes no symbolic
+computation as a premise: the six-axis realization, all-degree finite-etale
+graph saturation, the cubic framed-monodromy computation, and the one-step
+irrationality theorem of Section 4 are proved without additional hypotheses
+beyond the cited external theorems, on which they are of course conditional in
+the usual sense; for the irrationality theorem the decisive import is the
+package of ordinary Hodge-atom theorems.  Exactly one statement invokes a
+symbolic program as a premise, `lem:hirzebruch-euler-spectrum`, in the
+conditional framed refinement of Section 5, and one coordinate lemma of
+Section 3 rests on an exact elimination that nothing else depends on.  Both
+computations, their cross-checks, and their replay commands are registered in
+[`verification/evidence.json`](verification/evidence.json), and
+[`verification/README.md`](verification/README.md) states the boundary in
+full.
 
 Two hypotheses are used, and only in the framed-monodromy refinement of
 Section 5.  Hypothesis 5.7R asks for invariance of the primitive-sixth framed

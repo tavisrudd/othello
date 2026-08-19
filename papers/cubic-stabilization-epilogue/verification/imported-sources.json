@@ -395,6 +395,28 @@
           "matched": "It is applied to the Fermat cubic threefold alone, as the member of the pencil identified by the reflection-group classification."
         }
       ]
+    },
+    "Hartlieb:period-image-dimension": {
+      "citation": "Hartlieb",
+      "pinpoint": "Proposition 5.7, with Lemma 5.5 for the identification of the component",
+      "used": "The closure of the image of the intermediate-Jacobian period map on the A5-family component is a one-dimensional special subvariety of the period domain, so the family is not isotrivial and its image in coarse moduli is a curve.",
+      "conventions": [
+        {
+          "aspect": "domain",
+          "requirement": "The statement concerns the component of the classification of A5-actions denoted M_{H_1}, and not the component associated with the reducible representation 1 + W_4.",
+          "matched": "The family of the separation theorem is the smooth locus of the pencil of A5-invariant cubics on the irreducible five-dimensional representation, whose coarse-moduli image is identified with M_{H_1} through Lemma 5.5 of the same source, and the manuscript states that identification where the theorem is discussed."
+        },
+        {
+          "aspect": "normalization",
+          "requirement": "Special subvariety is meant in the sense of the period domain of intermediate Jacobians, and the assertion used is about the dimension of the closure of the image, not about the image itself being closed.",
+          "matched": "Only positivity of that dimension is used, through the statement that the period map is nonconstant on the component; no property of the closure beyond its dimension enters the separation theorem."
+        },
+        {
+          "aspect": "hypothesis",
+          "requirement": "The proposition is about the family of smooth members, so the parameter must avoid the singular members of the pencil.",
+          "matched": "The family of the theorem is indexed by the smooth locus of the pencil, which is exactly the complement of its finitely many singular members."
+        }
+      ]
     }
   }
 }

@@ -1,7 +1,7 @@
 % Formal annotations.
 %
 % Each theorem-like environment in this manuscript carries a machine-readable
-% record of its provenance.  All five macros below are typographically empty and
+% record of its provenance.  All six macros below are typographically empty and
 % take comma-separated identifiers only:
 %
 %   \coverage{...}  the strength at which the statement is formalized, one of
@@ -21,8 +21,8 @@
 %   \evidence{...}  the identifiers of the computational evidence bundles a
 %                   statement rests on, resolved in verification/evidence.json,
 %                   which records each one's role, checksum manifest, and replay
-%                   command.  No statement in this manuscript carries one: its
-%                   proof spine invokes no computation as a premise.
+%                   command.  A statement carrying one rests on a trusted
+%                   execution rather than on a certificate.
 %
 % \lean, \uses, and \proves-style association follow the conventions of the Lean
 % blueprint system of P. Massot, whose print-mode macros are likewise empty, and

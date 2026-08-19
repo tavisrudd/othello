@@ -73,6 +73,7 @@ digraph manuscript {
   "Cotti:hirzebruch-quantum-presentations" [shape=note, fillcolor="#eeeeee"];
   "DavidHertling:euler-witt-identities" [shape=note, fillcolor="#eeeeee"];
   "Givental:toric-mirror-theorem" [shape=note, fillcolor="#eeeeee"];
+  "Hartlieb:period-image-dimension" [shape=note, fillcolor="#eeeeee"];
   "KKPYY:amodel-connection" [shape=note, fillcolor="#eeeeee"];
   "KKPYY:def-5.21" [shape=note, fillcolor="#eeeeee"];
   "KKPYY:lem-5.24" [shape=note, fillcolor="#eeeeee"];
@@ -102,6 +103,7 @@ digraph manuscript {
   "Cotti:hirzebruch-quantum-presentations" -> "lem:hirzebruch-euler-spectrum" [style=dotted];
   "DavidHertling:euler-witt-identities" -> "lem:disc" [style=dotted];
   "Givental:toric-mirror-theorem" -> "lem:hirzebruch-euler-spectrum" [style=dotted];
+  "Hartlieb:period-image-dimension" -> "thm:separation-family" [style=dotted];
   "KKPYY:amodel-connection" -> "lem:euler-sign" [style=dotted];
   "KKPYY:def-5.21" -> "prop:cubic-atom" [style=dotted];
   "KKPYY:lem-5.24" -> "prop:no-surface" [style=dotted];
@@ -125,6 +127,7 @@ digraph manuscript {
   "a5-pencil-eckardt" -> "lem:pencil-loci-coordinates" [style=dotted];
   "a5-pencil-eckardt-locus" -> "lem:pencil-loci-coordinates" [style=dotted];
   "cor:universal-ch0" -> "prop:A5-nonseparated" [style=solid];
+  "cor:universal-ch0" -> "thm:separation-family" [style=solid];
   "def:framed-sixth-multiplicity" -> "lem:exact-low-degree-shifts" [style=dashed];
   "hirzebruch-euler-spectrum" -> "lem:hirzebruch-euler-spectrum" [style=dotted];
   "lem:A0preserve" -> "prop:rank2-rigidity" [style=solid];
@@ -148,6 +151,7 @@ digraph manuscript {
   "lem:relative-six-axis" -> "prop:no-elliptic-product" [style=dashed];
   "lem:relative-six-axis" -> "prop:no-elliptic-product" [style=solid];
   "lem:spectrum-transfer" -> "prop:cubic-atom" [style=solid];
+  "prop:A5-nonseparated" -> "thm:separation-family" [style=solid];
   "prop:A5-not-coprime" -> "lem:pencil-loci-coordinates" [style=dashed];
   "prop:A5-not-coprime" -> "lem:pencil-loci-coordinates" [style=solid];
   "prop:A5-not-coprime" -> "prop:A5-nonseparated" [style=solid];
@@ -173,6 +177,10 @@ digraph manuscript {
   "prop:six-axis-polarization" -> "prop:no-elliptic-product" [style=dashed];
   "prop:six-axis-polarization" -> "prop:no-elliptic-product" [style=solid];
   "thm:every-cubic" -> "cor:coprime-separation" [style=dashed];
+  "thm:every-cubic" -> "cor:coprime-separation" [style=solid];
   "thm:every-cubic" -> "cor:fermat-separation" [style=dashed];
+  "thm:every-cubic" -> "cor:fermat-separation" [style=solid];
   "thm:every-cubic" -> "cor:voisin-separation" [style=dashed];
+  "thm:every-cubic" -> "cor:voisin-separation" [style=solid];
+  "thm:every-cubic" -> "thm:separation-family" [style=solid];
 }

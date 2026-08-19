@@ -14,6 +14,9 @@ primitive minimal class \(\Theta^4/4!\) is algebraic, hence along which
 \(CH_0\) is universally trivial \cite[Theorem~4.5 and Lemma~4.6]{Voisin}.
 The projective-bundle formula supplies universal \(CH_0\)-triviality of the
 product, and Theorem~\ref{thm:every-cubic} supplies its irrationality.
+\proves{cor:voisin-separation}%
+\uses{thm:every-cubic}%
+\imports{Voisin:minimal-class-locus}%
 \end{proof}
 
 \begin{proof}[Proof of Corollary~\ref{cor:fermat-separation}]
@@ -21,6 +24,9 @@ The Fermat equation is a sum of five forms in separated single variables, so
 \cite{CT} gives universal \(CH_0\)-triviality; the projective-bundle formula
 passes it to the product.  Irrationality follows from
 Theorem~\ref{thm:every-cubic}.
+\proves{cor:fermat-separation}%
+\uses{thm:every-cubic}%
+\imports{CT:separated-variable-criterion}%
 \end{proof}
 
 \begin{proof}[Proof of Corollary~\ref{cor:coprime-separation}]
@@ -30,6 +36,9 @@ degrees two and three, and \cite[Corollary~3.5]{YYZ} keeps both degrees on
 of the diagonal and hence universal \(CH_0\)-triviality
 \cite[Section~1]{YYZ}.  Theorem~\ref{thm:every-cubic} gives irrationality of
 \(X\times\PP^1\).
+\proves{cor:coprime-separation}%
+\uses{thm:every-cubic}%
+\imports{YYZ:coprime-degree-family, YYZ:coprime-degrees-persist}%
 \end{proof}
 
 \begin{proof}[Proof of Theorem~\ref{thm:separation-family}]
@@ -42,6 +51,9 @@ that the closure of its image is a one-dimensional special subvariety
 \cite[Proposition~5.7]{Hartlieb}.  Finally,
 Proposition~\ref{prop:A5-nonseparated} shows that every point of this moduli
 curve except the Fermat point lies outside the separated-variable locus.
+\proves{thm:separation-family}%
+\uses{cor:universal-ch0, thm:every-cubic, prop:A5-nonseparated}%
+\imports{Hartlieb:period-image-dimension}%
 \end{proof}
 
 The two mechanisms are now independent without any standing hypothesis.  On

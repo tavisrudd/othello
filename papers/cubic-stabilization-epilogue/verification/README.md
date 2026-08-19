@@ -70,10 +70,10 @@ framing, coordinates, and normalization that must be matched for the use to be
 valid, together with how this manuscript matches each one.  `\evidence` names
 the computational evidence bundles a statement rests on, resolved in
 `verification/evidence.json`; each entry there records the bundle's role, its
-tracked checksum manifest, and the commands that replay it.  No statement in
-this manuscript carries an evidence annotation, because its proof spine invokes
-no computation as a premise; the registry is present so that any statement which
-later does must name a bundle rather than describe one in prose.  The checker
+tracked checksum manifest, and the commands that replay it.  Two statements
+carry one: `lem:hirzebruch-euler-spectrum`, whose premise is a symbolic
+computation, and `lem:pencil-loci-coordinates`, whose exact elimination nothing
+else depends on.  The checker
 resolves every annotated identifier and rejects an unknown one, a bibliography
 key absent from the manuscript, an imported source with no recorded conventions,
 and an evidence bundle with no checksum manifest or no replay command.
@@ -120,12 +120,13 @@ python3 verification/dependency_graph.py verification/dependency-graph.dot
 ```
 
 and the correspondence check regenerates it and rejects a stale copy, so the
-graph cannot fall behind the annotations.  Dependency edges are currently
-recorded for the atomic route of Section 4 and the proof of the one-stabilization
-theorem; a statement carrying no edge has none recorded rather than none.
-The same holds of the imported-source annotations: they are recorded for the
-atomic route of Section 4, so a statement elsewhere that carries none has none
-recorded rather than none used.
+graph cannot fall behind the annotations.  Dependency edges and imported-source
+annotations are authored, not harvested from cross-references, so they are
+recorded where they have been authored and nowhere else: densely along the
+atomic route of Section 4 and the one-stabilization proof, and more sparsely in
+the introduction, the envelope section, the minimal-class section, the framed
+refinement, and the separation section.  A statement carrying no edge has none
+recorded rather than none used, and the same holds of an imported source.
 
 Checked coverage snapshot: 62 claims; 5 absent; 27 fragmentary; 29 conditional;
 1 complete; 290 reviewer terminals, of which 47 are machinery serving no current
