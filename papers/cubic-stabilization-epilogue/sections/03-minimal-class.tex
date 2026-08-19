@@ -595,6 +595,23 @@ and the first paragraph, and an irreducible reflection group has
 \(\sum_i(d_i-1)\) reflections, here \(2+5+8+11+4=30\).
 \end{proof}
 
+\begin{remark}
+\label{rem:eckardt-reflection-other-dimensions}
+The argument does not use the dimension until the last two steps, and running
+it for a smooth cubic hypersurface in \(\PP^N\) with \(N\ge3\) leaves the
+Fermat cubic together with the diagonal cubic \(\{e_1=e_3=0\}\), the invariant
+of the symmetric group on \(N+2\) letters acting on the sum-zero subspace of
+\(\C^{N+2}\).  The diagonal cubic is singular exactly when \(N\) is even: a
+singular point forces all \(x_i^2\) equal, hence coordinates \(\pm t\) in equal
+numbers.  For \(N=3\) both survive, as the Fermat and Clebsch cubic surfaces,
+with \(\sum_i(d_i-1)\) equal to eighteen and ten reflections; those are their
+classical Eckardt counts.  For \(N=4\) the diagonal cubic is the Segre cubic
+threefold and only the Fermat member survives, which is the case used above.
+The restriction \(N\ge3\) is needed: for plane cubics the group \(G(3,3,3)\)
+has degree three twice, its invariants of that degree are the Hesse pencil, and
+every smooth plane cubic accordingly has inflection points.
+\end{remark}
+
 \begin{proposition}[The Eckardt locus of the pencil]
 \label{prop:A5-not-coprime}
 \coverage{absent}%
@@ -725,8 +742,10 @@ and a constructible subset of the affine line with finite closure is itself
 finite, hence closed.
 
 The factor \(b\) common to the two eliminated ideals is the Segre cubic
-threefold, which is singular, so it is not a member of \(B^\circ\) and
-Lemma~\ref{lem:eckardt-rank} does not apply to it.  The roots of \(b^2+3b+9\)
+threefold, the second branch of
+Proposition~\ref{prop:eckardt-reflection-group}, which is singular, so it is
+not a member of \(B^\circ\) and Lemma~\ref{lem:eckardt-rank} does not apply to
+it.  The roots of \(b^2+3b+9\)
 are prime to the second polynomial, so those two members are smooth and carry
 an Eckardt point; by Proposition~\ref{prop:A5-not-coprime} they are all of
 them.
