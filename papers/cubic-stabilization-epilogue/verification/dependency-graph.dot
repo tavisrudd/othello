@@ -3,7 +3,7 @@ digraph manuscript {
   node [shape=box, style=filled, fontname="Helvetica", fontsize=10];
   edge [fontname="Helvetica", fontsize=8];
   "cor:coprime-separation" [fillcolor="#ffffff", tooltip="absent"];
-  "cor:cubic-formal-germ" [fillcolor="#ffffff", tooltip="absent"];
+  "cor:cubic-formal-germ" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
   "cor:cubic-product-nu" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
   "cor:fermat-separation" [fillcolor="#ffffff", tooltip="absent"];
   "cor:p3-nu6" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
@@ -26,7 +26,7 @@ digraph manuscript {
   "lem:numerical-base-change" [fillcolor="#fde8c8", tooltip="fragment"];
   "lem:orthogonal" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
   "lem:relative-six-axis" [fillcolor="#fde8c8", tooltip="fragment"];
-  "lem:simple-euler-block" [fillcolor="#ffffff", tooltip="absent"];
+  "lem:simple-euler-block" [fillcolor="#fde8c8", tooltip="fragment"];
   "lem:six-axis-local-chart" [fillcolor="#fde8c8", tooltip="fragment"];
   "lem:six-point-hearts" [fillcolor="#fde8c8", tooltip="fragment"];
   "lem:spectrum-transfer" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
@@ -43,7 +43,7 @@ digraph manuscript {
   "prop:principal-gluing-packet" [fillcolor="#fde8c8", tooltip="fragment"];
   "prop:projective-product-nu" [fillcolor="#ffffff", tooltip="absent"];
   "prop:rank2-rigidity" [fillcolor="#fde8c8", tooltip="fragment"];
-  "prop:ranktwo-framed-germ" [fillcolor="#ffffff", tooltip="absent"];
+  "prop:ranktwo-framed-germ" [fillcolor="#fde8c8", tooltip="fragment"];
   "prop:residue-discriminant-exponents" [fillcolor="#fde8c8", tooltip="fragment"];
   "prop:six-axis-polarization" [fillcolor="#fde8c8", tooltip="fragment"];
   "thm:all-degree-graph-saturation" [fillcolor="#fde8c8", tooltip="fragment"];

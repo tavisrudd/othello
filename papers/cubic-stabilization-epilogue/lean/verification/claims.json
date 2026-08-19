@@ -576,13 +576,18 @@
     },
     {
       "manuscript_label": "prop:ranktwo-framed-germ",
-      "coverage": "absent",
-      "declarations": [],
-      "objects": "The even quantum connection pulled back to a formal smooth bulk germ, an isolated rank-two Euler cluster, and the residue of its canonical elementary modification.",
-      "hypotheses": "The coefficient field is algebraically closed of characteristic zero, the cluster's nilpotent part is a single nonzero Jordan block at the closed point, and every other Euler eigenvalue differs from it by a unit.",
-      "conclusion": "The cluster stays a single nonzero Jordan block on the germ, the residue has constant characteristic polynomial there, and the primitive-sixth multiplicities contributed by the block are constant on the germ.",
-      "cautions": "Not formalized. The companion's formal-germ material treats gauge and base-change invariance rather than this rigidity statement.",
-      "statement_digest": "3ca08f375564e927d750b61d537b5c82a19b7e0f97597d13a7d840d735f6ecca"
+      "coverage": "fragment",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.rankTwoCluster_nilpotent_persists_on_formal_germ",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.rankTwoCluster_residue_charpoly_constant_on_formal_germ",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.rankTwoCluster_sixthMultiplicity_constant_of_equal_exponents"
+      ],
+      "objects": "A rank-two cluster over a formal power-series germ, presented by matrices over that ring: the leading operator as a scalar plus a traceless nilpotent part, the grading operator, a connection form in a chosen frame, the compression of quantum multiplication in each base direction, and the residue of an elementary modification.",
+      "hypotheses": "The coefficient field is of characteristic zero, the nilpotent part has an invertible off-diagonal entry and vanishing determinant at the closed point, the compressed multiplications commute with the leading operator and satisfy the compressed flatness identity, and, for the residue, each formal partial derivative is its commutator with a matrix regular in the germ.",
+      "conclusion": "The nilpotent part stays square-zero and nonzero over the germ, the residue has a characteristic polynomial with coefficients constant on the germ, and two blocks with the same monic split exponent polynomial have the same framed primitive-sixth multiplicity.",
+      "cautions": "Fragment.  Lean constructs no quantum connection, Euler operator, spectral projector, or elementary modification, and does not prove that a compression of a connection to an isolated cluster satisfies the displayed identities.  The germ is modelled by a multivariate formal power-series ring rather than an analytic or rigid-analytic germ, and the passage from residue eigenvalues to the exponents of framed monodromy is not formalized: the multiplicity statement takes the exponent multiset as data.",
+      "statement_digest": "3ca08f375564e927d750b61d537b5c82a19b7e0f97597d13a7d840d735f6ecca",
+      "terminal_digest": "7c2c2d0beb06372090435a140075eec081c14b325232acdda9aca49a8b9733cb"
     },
     {
       "manuscript_label": "prop:framed-operations",
@@ -676,13 +681,19 @@
     },
     {
       "manuscript_label": "lem:simple-euler-block",
-      "coverage": "absent",
-      "declarations": [],
-      "objects": "A rank-one generalized eigenspace of Euler multiplication for the even quantum connection at an even bulk point, and its contribution to framed regular monodromy.",
-      "hypotheses": "The target is smooth projective and the coefficient field is algebraically closed.",
-      "conclusion": "Such a block contributes only the eigenvalue one, so at the small point it contributes nothing to the framed sixth-root count.",
-      "cautions": "Not formalized. It is the shared input of three further uncovered statements in this section: the product formula for the framed sixth-root count, the projective-line and projective-plane cases of direct specialized low-dimensional vanishing, and formal-germ persistence of the cubic packet. None of those is covered either, so this cluster is uncovered as a whole.",
-      "statement_digest": "c17d08a51dc57a7c248160973947b0b291d2adec7e3723812a77de2618349ff2"
+      "coverage": "fragment",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.simpleEulerBlock_grading_eq_zero",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.simpleEulerBlock_linearCoefficient_eq_zero",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.simpleEulerBlock_regularFactor_exists_unique",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.simpleEulerBlock_sixthMultiplicity_eq_zero"
+      ],
+      "objects": "A rank-one block presented by a one-by-one pairing and grading matrix, the compression of a commutator by a projector, the scalar equation of the block as a formal power-series equation, and the characteristic polynomial of a framed monodromy that is the identity.",
+      "hypotheses": "Two is invertible in the coefficient field, the pairing compressed to the block is nonzero, the grading operator is anti-self-adjoint there, the projector commutes with Euler multiplication and annihilates the first gauge coefficient on both sides, and, for the scalar equation, the coefficient field has characteristic zero.",
+      "conclusion": "The grading operator vanishes on the block, the order-`z` coefficient of the scalar equation vanishes, that equation has exactly one formal power-series solution with constant coefficient one, and a block whose framed monodromy is the identity contributes nothing to the primitive-sixth count.",
+      "cautions": "Fragment.  Lean constructs no quantum connection, Euler multiplication, Poincare pairing, Levelt--Turrittin decomposition, or splitting gauge, and does not derive the characteristic polynomial of the block's framed monodromy from the scalar equation; the unit contribution is proved for a polynomial that is a power of `X - 1`.",
+      "statement_digest": "c17d08a51dc57a7c248160973947b0b291d2adec7e3723812a77de2618349ff2",
+      "terminal_digest": "8131ae55d4795ee1588aba1cfd554989aa3517369053d588f88ed0869240d413"
     },
     {
       "manuscript_label": "prop:projective-product-nu",
@@ -724,13 +735,16 @@
     },
     {
       "manuscript_label": "cor:cubic-formal-germ",
-      "coverage": "absent",
-      "declarations": [],
-      "objects": "The primitive-sixth multiplicity of a smooth cubic threefold throughout the formal even bulk germ at the small hyperplane point.",
-      "hypotheses": "Extension of the cubic Novikov coefficient field making the square root of three times the line variable a unit, together with formal-germ rigidity of the isolated rank-two packet.",
-      "conclusion": "The multiplicity equals two throughout that germ.",
-      "cautions": "Not formalized. The Lean cubic packet material proves the value at the small point from a supplied characteristic polynomial and does not propagate it over a formal germ.",
-      "statement_digest": "e6700d0a17e88929e307d7beecadbf98195481c703e613659522f587315aec6e"
+      "coverage": "conditional_deduction",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicPacket_sixthMultiplicity_eq_two_on_formal_germ"
+      ],
+      "objects": "Framed spectral data of the small even quantum connection of a smooth cubic threefold over a formal even bulk germ: a point of the germ carries a framed formal-monodromy matrix and the multiset of formal exponents of the rank-two zero cluster, together with the total rank of the clusters at the nonzero Euler eigenvalues.",
+      "hypotheses": "The framed characteristic polynomial at every point splits as the polynomial of the exponentials of the zero cluster's exponents times that power of `X - 1`, the exponent polynomial of the zero cluster is the same at every point as at the closed point, and at the closed point the framed characteristic polynomial is the displayed four-factor polynomial of the cubic packet.",
+      "conclusion": "The primitive-sixth multiplicity equals two at every point of the germ.",
+      "cautions": "Conditional deduction.  The germ is an arbitrary type with a distinguished point and the spectral data are supplied, so neither the coefficient-field extension making the square root of three times the line variable a unit, nor the quantum connection, nor the identification of the supplied rigidity with the formal-germ theorem proved for matrices over a power-series ring, is formalized.",
+      "statement_digest": "e6700d0a17e88929e307d7beecadbf98195481c703e613659522f587315aec6e",
+      "terminal_digest": "ed5d0c4733edd49700d716781f4305e8aba679ba703b89330ab9f2970f0d77dc"
     },
     {
       "manuscript_label": "cor:cubic-product-nu",

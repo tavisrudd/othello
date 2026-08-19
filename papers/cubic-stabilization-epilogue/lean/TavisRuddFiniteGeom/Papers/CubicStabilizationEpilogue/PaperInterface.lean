@@ -30,6 +30,9 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.Frobe
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPointHeartEndomorphisms
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SymmetricSixExclusion
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FramedMultiplicity
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.RankTwoClusterGermRigidity
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.SimpleEulerBlock
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.CubicFormalGermPacket
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.LowDimensionalVanishingCore
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.WeakFactorization
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NovikovAdmissibility
@@ -6080,5 +6083,158 @@ theorem sixAxisLocalChart_orthogonalDecomposition_and_unitLine
     GraphLattices.sixAxisChartBasis_congruence inverseFive inverse,
     GraphLattices.sixAxisChart_unitLine_mem_image inverseFive inverse,
     GraphLattices.sixAxisChart_discriminant_supported_off_unitLine inverseFive inverse⟩
+
+/-- Formal-germ rigidity of an isolated rank-two Euler cluster, in the matrix
+model of a formal bulk germ.  The leading operator of the cluster is
+`eigenvalue • 1 + nilpotent` with traceless nilpotent part; `compressed` is the
+compression to the cluster of quantum multiplication by a bulk tangent vector,
+`connection` records the covariant derivative in a chosen frame, and `grading`
+is the grading operator.  From the two compressed flatness identities, an
+invertible off-diagonal entry of the nilpotent part, and its vanishing
+determinant at the closed point, Lean proves that the nilpotent part stays
+square-zero and nonzero over the whole germ, which is the matrix form of
+remaining a single nonzero Jordan block.  No quantum connection, Euler operator,
+or spectral projector is constructed. -/
+theorem rankTwoCluster_nilpotent_persists_on_formal_germ
+    {coordinate : Type*} [DecidableEq coordinate] {field : Type*} [Field field] [CharZero field]
+    {eigenvalue : MvPowerSeries coordinate field}
+    {nilpotent grading : Matrix (Fin 2) (Fin 2) (MvPowerSeries coordinate field)}
+    {connection compressed :
+      coordinate → Matrix (Fin 2) (Fin 2) (MvPowerSeries coordinate field)}
+    (traceless : Matrix.trace nilpotent = 0)
+    (unitEntry : IsUnit (nilpotent 0 1))
+    (nilpotentAtClosedPoint : MvPowerSeries.coeff 0 nilpotent.det = 0)
+    (commutes : ∀ direction,
+      compressed direction * nilpotent = nilpotent * compressed direction)
+    (flatness : ∀ direction,
+      (eigenvalue • (1 : Matrix (Fin 2) (Fin 2) (MvPowerSeries coordinate field))
+            + nilpotent).map (Quantum.formalPartialDerivative direction)
+          + connection direction * (eigenvalue • 1 + nilpotent)
+          - (eigenvalue • 1 + nilpotent) * connection direction
+        = compressed direction
+          + (compressed direction * grading - grading * compressed direction)) :
+    nilpotent * nilpotent = 0 ∧ nilpotent ≠ 0 :=
+  Quantum.rankTwoCluster_nilpotent_persists_on_germ traceless unitEntry
+    nilpotentAtClosedPoint commutes flatness
+
+/-- The residue of the canonical elementary modification has constant
+characteristic polynomial over a formal bulk germ.  The premise is modified
+flatness in every base direction, which makes each formal partial derivative of
+the residue a commutator with a matrix regular in the germ; the conclusion
+exhibits the characteristic polynomial as the one attached to two scalars of the
+coefficient field, so neither the trace nor the determinant varies.  The
+elementary modification itself is not constructed. -/
+theorem rankTwoCluster_residue_charpoly_constant_on_formal_germ
+    {coordinate : Type*} [DecidableEq coordinate] {field : Type*} [Field field] [CharZero field]
+    {residue : Matrix (Fin 2) (Fin 2) (MvPowerSeries coordinate field)}
+    {regular : coordinate → Matrix (Fin 2) (Fin 2) (MvPowerSeries coordinate field)}
+    (modifiedFlatness : ∀ direction,
+      residue.map (Quantum.formalPartialDerivative direction)
+        = regular direction * residue - residue * regular direction) :
+    ∃ traceValue determinantValue : field,
+      residue.charpoly = Polynomial.X ^ 2
+          - Polynomial.C (MvPowerSeries.C traceValue) * Polynomial.X
+        + Polynomial.C (MvPowerSeries.C determinantValue) :=
+  Quantum.residue_charpoly_constant_of_lax modifiedFlatness
+
+/-- Constancy of the primitive-sixth count contributed by a block with constant
+exponents.  Two multisets of formal exponents with the same monic split
+polynomial contribute the same framed primitive-sixth multiplicity, because the
+multiset is recovered from that polynomial as its multiset of roots and framed
+monodromy attaches to each exponent the eigenvalue of one turn of the unramified
+loop coordinate.  Over a formal germ the hypothesis is supplied by constancy of
+the residue characteristic polynomial. -/
+theorem rankTwoCluster_sixthMultiplicity_constant_of_equal_exponents
+    {first second : Multiset ℂ}
+    (equalExponentPolynomials :
+      Quantum.splitMonicPolynomial first = Quantum.splitMonicPolynomial second) :
+    Quantum.sixthMultiplicityPolynomial
+        (Quantum.splitMonicPolynomial (first.map Quantum.framedEigenvalue))
+      = Quantum.sixthMultiplicityPolynomial
+        (Quantum.splitMonicPolynomial (second.map Quantum.framedEigenvalue)) :=
+  Quantum.sixthMultiplicity_eq_of_exponent_polynomial_eq equalExponentPolynomials
+
+/-- The grading operator vanishes on a rank-one Euler block.  On the block the
+Poincare pairing is a single nonzero scalar, because generalized eigenspaces of
+distinct eigenvalues of an operator self-adjoint for a nondegenerate pairing are
+orthogonal; anti-self-adjointness of the grading operator on that line then
+forces its value to vanish. -/
+theorem simpleEulerBlock_grading_eq_zero
+    {field : Type*} [Field field] (twoNeZero : (2 : field) ≠ 0)
+    {pairing grading : Matrix (Fin 1) (Fin 1) field}
+    (nondegenerate : pairing 0 0 ≠ 0)
+    (antiSelfAdjoint : Matrix.transpose grading * pairing + pairing * grading = 0) :
+    grading = 0 :=
+  Quantum.rankOne_grading_eq_zero twoNeZero nondegenerate antiSelfAdjoint
+
+/-- The order-`z` coefficient of the scalar equation on a rank-one Euler block
+vanishes.  It is the compression of the grading operator, with a minus sign, plus
+the compression of the commutator of Euler multiplication with the first
+coefficient of the normalized gauge splitting the block off; the first vanishes
+on a rank-one block and the second vanishes because the projector commutes with
+Euler multiplication and annihilates a block-off-diagonal gauge coefficient on
+both sides. -/
+theorem simpleEulerBlock_linearCoefficient_eq_zero
+    {index : Type*} [Fintype index] {ring : Type*} [CommRing ring]
+    (projector euler gauge grading : Matrix index index ring)
+    (commutes : projector * euler = euler * projector)
+    (offDiagonal : projector * gauge * projector = 0)
+    (gradingCompression : projector * grading * projector = 0) :
+    -(projector * grading * projector)
+        + projector * (euler * gauge - gauge * euler) * projector = 0 :=
+  Quantum.rankOne_linearCoefficient_eq_zero projector euler gauge grading commutes
+    offDiagonal gradingCompression
+
+/-- The regular factor of a rank-one Euler block is an ordinary power series in
+the loop coordinate.  Once the order-`z` coefficient vanishes, removing the
+irregular exponential factor from the scalar equation leaves
+`solution' = logarithmic * solution`, which over a field of characteristic zero
+has exactly one formal solution with constant coefficient one.  No logarithm and
+no fractional power occurs, so the framed regular monodromy of the block is the
+identity. -/
+theorem simpleEulerBlock_regularFactor_exists_unique
+    {field : Type*} [Field field] [CharZero field] (logarithmic : PowerSeries field) :
+    ∃! solution : PowerSeries field,
+      PowerSeries.coeff 0 solution = 1 ∧
+        PowerSeries.derivativeFun solution = logarithmic * solution :=
+  ⟨Quantum.normalizedExponential logarithmic,
+    ⟨Quantum.normalizedExponential_constantCoeff logarithmic,
+      Quantum.normalizedExponential_derivative logarithmic⟩,
+    fun _ condition =>
+      Quantum.eq_normalizedExponential_of_derivative condition.1 condition.2⟩
+
+/-- A block whose framed regular monodromy is the identity contributes nothing to
+the primitive-sixth count: its characteristic polynomial is a power of `X - 1`,
+and neither primitive sixth root is a root of it. -/
+theorem simpleEulerBlock_sixthMultiplicity_eq_zero (rank : ℕ) :
+    Quantum.sixthMultiplicityPolynomial
+        ((Polynomial.X - Polynomial.C (1 : ℂ)) ^ rank) = 0 :=
+  Quantum.sixthMultiplicityPolynomial_unitPower_eq_zero rank
+
+/-- Persistence of the cubic packet over the formal even bulk germ.  The framed
+characteristic polynomial at every point of the germ splits as the exponential
+polynomial of the rank-two zero cluster times the unit power contributed by the
+rank-one clusters at the nonzero Euler eigenvalues; the exponent polynomial of
+the zero cluster does not vary over the germ; and at the closed point the framed
+characteristic polynomial is the displayed four-factor polynomial of the cubic
+packet.  Lean then proves that the primitive-sixth multiplicity equals two at
+every point.  The germ, the connection, and the identification of these data with
+them are not constructed. -/
+theorem cubicPacket_sixthMultiplicity_eq_two_on_formal_germ
+    {Point : Type*} (germ : Applications.CubicFormalGermPacket Point)
+    (blockFactorization : ∀ point,
+      (germ.framedMonodromy point).operator.charpoly
+        = Quantum.splitMonicPolynomial
+            ((germ.zeroClusterExponents point).map Quantum.framedEigenvalue)
+          * (Polynomial.X - Polynomial.C (1 : ℂ)) ^ germ.simpleClusterRank)
+    (exponentRigidity : ∀ point,
+      Quantum.splitMonicPolynomial (germ.zeroClusterExponents point)
+        = Quantum.splitMonicPolynomial (germ.zeroClusterExponents germ.closedPoint))
+    (closedPointPacket :
+      (germ.framedMonodromy germ.closedPoint).operator.charpoly
+        = Applications.cubicPacketCharacteristicPolynomial) :
+    ∀ point, (germ.framedMonodromy point).sixthMultiplicity = 2 :=
+  Applications.cubicFormalGerm_sixthMultiplicity_eq_two germ blockFactorization
+    exponentRigidity closedPointPacket
 
 end TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue

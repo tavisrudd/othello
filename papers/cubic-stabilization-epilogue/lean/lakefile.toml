@@ -124,6 +124,9 @@ roots = [
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.CubicZeroAtomRanks",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.DepthOneSelfAdjointLift",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisDiscriminantSupport",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.RankTwoClusterGermRigidity",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.SimpleEulerBlock",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.CubicFormalGermPacket",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.PaperInterface",
 ]
 

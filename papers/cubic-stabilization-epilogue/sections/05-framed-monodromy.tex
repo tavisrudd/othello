@@ -337,7 +337,10 @@ completed base change.
 
 \begin{proposition}[Formal-germ rigidity of an isolated rank-two packet]
 \label{prop:ranktwo-framed-germ}
-\coverage{absent}%
+\coverage{fragment}%
+\lean{rankTwoCluster_nilpotent_persists_on_formal_germ,%
+  rankTwoCluster_residue_charpoly_constant_on_formal_germ,%
+  rankTwoCluster_sixthMultiplicity_constant_of_equal_exponents}%
 Let $K$ be an algebraically closed coefficient field of characteristic zero
 and let the even quantum connection be pulled back to a formal smooth bulk
 germ $B=K[[t_1,\ldots,t_m]]$.  Suppose that at the closed point the Euler
@@ -958,7 +961,11 @@ Cancelling two in \(\Z\) proves the stabilization assertion.
 \end{proof}
 
 \begin{lemma}[Multiplicity-one Euler blocks]\label{lem:simple-euler-block}
-\coverage{absent}%
+\coverage{fragment}%
+\lean{simpleEulerBlock_grading_eq_zero,%
+  simpleEulerBlock_linearCoefficient_eq_zero,%
+  simpleEulerBlock_regularFactor_exists_unique,%
+  simpleEulerBlock_sixthMultiplicity_eq_zero}%
 Let $T$ be smooth projective and consider its even quantum connection at an
 even bulk point over an algebraically closed coefficient field.  If a
 generalized eigenspace of Euler multiplication has rank one, that block
@@ -1218,7 +1225,8 @@ coordinate.
 
 \begin{corollary}[Formal-germ persistence of the cubic packet]
 \label{cor:cubic-formal-germ}
-\coverage{absent}%
+\coverage{conditional_deduction}%
+\lean{cubicPacket_sixthMultiplicity_eq_two_on_formal_germ}%
 After extending the cubic Novikov coefficient field so that
 $r=(3q)^{1/2}$ is a unit, the primitive-sixth multiplicity is equal to $2$
 throughout the formal even bulk germ at the small hyperplane point.

@@ -53,8 +53,8 @@ truncated Chern class arithmetic, the Betti numbers, the degree count placing th
 whole odd cohomology in that packet, and the constancy of rank on a connected
 component.
 
-Checked coverage snapshot: 50 claims; 10 absent; 21 fragmentary; 18 conditional;
-1 complete; 224 reviewer terminals, of which 46 are machinery serving no current
+Checked coverage snapshot: 50 claims; 7 absent; 23 fragmentary; 19 conditional;
+1 complete; 232 reviewer terminals, of which 46 are machinery serving no current
 manuscript claim.
 
 Those 46 are kernel-checked and reusable, and the claim map records for each one
