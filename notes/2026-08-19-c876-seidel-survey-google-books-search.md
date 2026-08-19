@@ -64,14 +64,12 @@ The `determined by its` hit, transcribed from the snippet with its OCR errors le
 > Indeed, {ω,ω₁,ω₂,ω₃} ∈ Δ whenever an odd number of the other 3-subsets of {ω,ω₁,ω₂,ω₃} belong
 > to Δ.
 
-The hit is on **page 299** of the reprint volume. Which reprinted paper that is has not been
-confirmed. The volume's table of contents, read from the publisher's listing, places the two
-surveys in Part II, *Lines with Few Angles*, as items 10 and 14; secondary listings give their
-reprint ranges as roughly 146--176 and 231--254, which are unverified search-summary numbers rather
-than a checked source. On those numbers page 299 falls in Part III, *Matrices and Forms*, whose
-two-graph-bearing items are *Quadratic Forms over GF(2)* and *On Two-Graphs and Shult's
-Characterization of Symplectic and Orthogonal Geometries Over GF(2)*. Confirming this needs only
-the running head or nearest chapter opening at page 299.
+The hit is on **page 299** of the reprint volume, and its running head reads *Matrices and Forms*.
+That is Part III of the volume. Both surveys are in Part II, *Lines with Few Angles*, as items 10
+and 14 of the publisher's table of contents, so **the descendant statement is not in either
+survey**. Part III's two-graph-bearing items are *Quadratic Forms over GF(2)* and *On Two-Graphs
+and Shult's Characterization of Symplectic and Orthogonal Geometries Over GF(2)*; the statement is
+in one of those two, which is enough for the purpose here and was not narrowed further.
 
 ## Verdict
 
@@ -94,6 +92,15 @@ primary source rather than disturbing it. No manuscript change follows.
 in this volume it means a coherent configuration in Higman's sense, an association-scheme notion
 unrelated to four-set alignment.
 
+## Status of C876's access gap
+
+The gap is closed to the strength this route can give. Both surveys are inside the indexed portion
+of the volume, every decisive query returns nothing in them, and the two substantive hits the
+volume does return sit outside both — one in Part III at page 299, one a strongly-regular-graph
+uniqueness remark. C876's entry for these two sources therefore moves from **could not access** to
+**searched at snippet level, no predecessor located, bounded by OCR quality**. A clean copy would
+still be worth having, but it is no longer the lane's single most valuable acquisition.
+
 ## Bound on the negative
 
 The negative is stronger than it was, but it is not clean, and the reason is OCR rather than
@@ -103,10 +110,11 @@ zero-hit result on a term like `reconstruction` therefore cannot be read as abse
 image — the index may simply never have seen the word. The queries that returned hits prove the
 volume is indexed and searchable; they do not prove the misses are real.
 
-Carried forward as the remaining gap: OCR-robust re-queries — a `recon` substring for the whole
-reconstruct family, `is determined by` as a calibrated phrase already known to be indexed here, and
-a size-naming query pairing `subsets of` with a numeral. A clean library copy of either original
-volume, or of this reprint, would close it outright.
+The OCR-robust re-queries have now been run and change nothing: `recon` is empty, and the calibrated
+`is determined by` returns only the page-299 statement and the strongly-regular uniqueness remark.
+What survives is a residual risk rather than an open task — a page image whose OCR dropped the word
+"reconstruction" entirely would be invisible to every query above. A clean library copy of either
+original volume, or of this reprint, would retire that risk outright.
 
 ## Downstream consequence, not yet applied
 

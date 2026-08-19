@@ -634,6 +634,10 @@ here rather than leaving it implicit. **No earlier verdict was reversed by the l
   **These are the principal limitation on the A.4 negative** and the single most valuable
   acquisition for this lane. A library copy of the Bolyai volume or of Seidel's *Geometry and
   Combinatorics: Selected Works* would close it.
+  **Superseded 2026-08-19** by `2026-08-19-c876-seidel-survey-google-books-search.md`: both
+  surveys were searched at snippet level inside the *Selected Works* reprint, every decisive query
+  came back empty in them, and the entry now reads *searched, no predecessor located, bounded by
+  OCR quality* rather than *could not access*.
 - **MathSciNet review layer.** Tested, not assumed (D.1). Bibliographic layer now covered via MR
   Lookup.
 - **Chakravarti IMA chapter.** Open since C866; access problem, not a search problem.
