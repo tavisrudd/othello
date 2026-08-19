@@ -54,7 +54,7 @@ whole odd cohomology in that packet, and the constancy of rank on a connected
 component.
 
 Checked coverage snapshot: 62 claims; 5 absent; 27 fragmentary; 29 conditional;
-1 complete; 288 reviewer terminals, of which 46 are machinery serving no current
+1 complete; 290 reviewer terminals, of which 47 are machinery serving no current
 manuscript claim.
 
 Those 46 are kernel-checked and reusable, and the claim map records for each one

@@ -620,7 +620,244 @@ theorem sixAxisChart_allDegree_dividedPowerMember
     extendedRealizationMember form formSymmetric graphDescent baseClass dividedPower
     baseClassCompatible degree dividedPowerCompatible
 
+/-- A slope whose reduction modulo the uniformizer is scalar splits integrally as
+that scalar plus the uniformizer times an integral error term, which is the split
+form the graph-coordinate descent conditions consume.  Nothing is divided: the
+error term is assembled from the divisibility witnesses of the entries. -/
+theorem exists_slopeError_of_residue_scalar {Index : Type*} [Fintype Index]
+    [DecidableEq Index] (uniformizer scalar : S) (slope : Matrix Index Index S)
+    (residue : slope.map (Ideal.Quotient.mk (Ideal.span ({uniformizer} : Set S))) =
+      (Ideal.Quotient.mk (Ideal.span ({uniformizer} : Set S)) scalar) •
+        (1 : Matrix Index Index (S ⧸ Ideal.span ({uniformizer} : Set S)))) :
+    ∃ error : Matrix Index Index S,
+      slope = scalar • (1 : Matrix Index Index S) + uniformizer • error := by
+  have divisible : ∀ row column : Index, ∃ coefficient : S,
+      slope row column - (scalar • (1 : Matrix Index Index S)) row column =
+        uniformizer * coefficient := by
+    intro row column
+    have entry := congrFun (congrFun residue row) column
+    have vanishing :
+        Ideal.Quotient.mk (Ideal.span ({uniformizer} : Set S))
+          (slope row column - (scalar • (1 : Matrix Index Index S)) row column) = 0 := by
+      rw [map_sub, sub_eq_zero]
+      simpa [Matrix.map_apply, Matrix.smul_apply, Matrix.one_apply, smul_eq_mul,
+        apply_ite (Ideal.Quotient.mk (Ideal.span ({uniformizer} : Set S)))] using entry
+    exact Ideal.mem_span_singleton.mp (Ideal.Quotient.eq_zero_iff_mem.mp vanishing)
+  choose coefficient property using divisible
+  refine ⟨Matrix.of coefficient, ?_⟩
+  ext row column
+  have entry := property row column
+  simp only [Matrix.add_apply, Matrix.smul_apply, Matrix.of_apply, smul_eq_mul]
+  simp only [Matrix.smul_apply, smul_eq_mul] at entry
+  linear_combination entry
+
+/-- For a slope in split form, the split-slope commutator of the graph-coordinate
+descent conditions is the commutator `A Tᵗ - T A` of the manuscript's descent
+matrix.  The depth-one blocks therefore impose exactly the manuscript's condition
+on the actual slope, not on its scalar and error parts separately. -/
+theorem rectangularSplitSlopeCommutator_eq_slopeCommutator {Index : Type*}
+    [Fintype Index] [DecidableEq Index] (uniformizer scalar : S)
+    (slope error coefficient : Matrix Index Index S)
+    (splitForm : slope = scalar • (1 : Matrix Index Index S) + uniformizer • error) :
+    rectangularSplitSlopeCommutator uniformizer 1 1 coefficient scalar scalar error
+        error =
+      coefficient * slopeᵀ - slope * coefficient := by
+  subst splitForm
+  rw [rectangularSplitSlopeCommutator_expansion, sub_self, zero_smul, zero_add,
+    pow_one]
+  simp only [Matrix.transpose_add, Matrix.transpose_smul, Matrix.transpose_one,
+    Matrix.mul_add, Matrix.add_mul, Matrix.mul_smul, Matrix.smul_mul,
+    Matrix.mul_one, Matrix.one_mul]
+  abel
+
+/-- Multiplication by the all-ones block replaces every coordinate by the
+coordinate sum. -/
+theorem allOnesBlock_mulVec (vector : Fin 4 → S) :
+    allOnesBlock S *ᵥ vector = fun _ ↦ ∑ index, vector index := by
+  funext row
+  simp [allOnesBlock, Matrix.mulVec, dotProduct]
+
+/-- Multiplication by the depth-one block `5I₄-J₄` sends a vector to five times
+itself minus its coordinate sum. -/
+theorem sixAxisComplementBlock_mulVec (vector : Fin 4 → S) :
+    sixAxisComplementBlock S *ᵥ vector =
+      fun row ↦ 5 * vector row - ∑ index, vector index := by
+  rw [sixAxisComplementBlock, Matrix.sub_mulVec, Matrix.smul_mulVec,
+    Matrix.one_mulVec, allOnesBlock_mulVec]
+  funext row
+  simp [smul_eq_mul]
+
+/-- Multiplication by the dual form `(1/5)(I₄+J₄)` sends a vector to the supplied
+inverse of five times the vector plus its coordinate sum. -/
+theorem sixAxisComplementBlockInverse_mulVec (inverseFive : S) (vector : Fin 4 → S) :
+    sixAxisComplementBlockInverse inverseFive *ᵥ vector =
+      fun row ↦ inverseFive * (vector row + ∑ index, vector index) := by
+  rw [sixAxisComplementBlockInverse, Matrix.smul_mulVec, Matrix.add_mulVec,
+    Matrix.one_mulVec, allOnesBlock_mulVec]
+  funext row
+  simp [smul_eq_mul]
+
+/-- The pairing of the depth-one block `5I₄-J₄` is the sum of the squares of the
+coordinates and of their pairwise differences. -/
+theorem sixAxisComplementBlock_dotProduct (vector : Fin 4 → S) :
+    vector ⬝ᵥ (sixAxisComplementBlock S *ᵥ vector) =
+      vector 0 ^ 2 + vector 1 ^ 2 + vector 2 ^ 2 + vector 3 ^ 2 +
+        ((vector 0 - vector 1) ^ 2 + (vector 0 - vector 2) ^ 2 +
+          (vector 0 - vector 3) ^ 2 + (vector 1 - vector 2) ^ 2 +
+          (vector 1 - vector 3) ^ 2 + (vector 2 - vector 3) ^ 2) := by
+  rw [sixAxisComplementBlock_mulVec]
+  simp only [dotProduct, Fin.sum_univ_four]
+  ring
+
+/-- The pairing of the dual form `(1/5)(I₄+J₄)` is the supplied inverse of five
+times the sum of the squares of the coordinates and the square of their sum. -/
+theorem sixAxisComplementBlockInverse_dotProduct (inverseFive : S)
+    (vector : Fin 4 → S) :
+    vector ⬝ᵥ (sixAxisComplementBlockInverse inverseFive *ᵥ vector) =
+      inverseFive *
+        (vector 0 ^ 2 + vector 1 ^ 2 + vector 2 ^ 2 + vector 3 ^ 2 +
+          (vector 0 + vector 1 + vector 2 + vector 3) ^ 2) := by
+  rw [sixAxisComplementBlockInverse_mulVec]
+  simp only [dotProduct, Fin.sum_univ_four]
+  ring
+
 end SplitCoordinates
+
+section OrderedCoefficients
+
+variable {R : Type*} [CommRing R] [LinearOrder R] [IsStrictOrderedRing R]
+
+/-- No slope satisfying the relation of a primitive cube root of unity is
+self-adjoint for a coefficient form that is positive semidefinite and positive on
+one vector.  Writing `base`, `mixed`, and `top` for the pairings of that vector
+with itself, with its image, and of the image with itself, self-adjointness and
+the relation give `top = -mixed - base`, while semidefiniteness applied to
+`base • image - mixed • vector` gives `mixed² ≤ base * top`; together these force
+`base² + base * mixed + mixed² ≤ 0`, impossible for `base > 0`.  A slope of this
+type over the depth-one summand therefore exists only over a coefficient ring
+carrying no compatible order. -/
+theorem not_selfAdjoint_of_cubeRootRelation {Index : Type*} [Fintype Index]
+    [DecidableEq Index] (form slope : Matrix Index Index R)
+    (selfAdjoint : slopeᵀ * form = form * slope)
+    (semidefinite : ∀ vector : Index → R, 0 ≤ vector ⬝ᵥ (form *ᵥ vector))
+    (vector : Index → R) (positive : 0 < vector ⬝ᵥ (form *ᵥ vector))
+    (cubeRootRelation : slope * slope + slope + 1 = 0) : False := by
+  have adjointStep : ∀ first second : Index → R,
+      (slope *ᵥ first) ⬝ᵥ (form *ᵥ second) =
+        first ⬝ᵥ (form *ᵥ (slope *ᵥ second)) := by
+    intro first second
+    calc (slope *ᵥ first) ⬝ᵥ (form *ᵥ second)
+        = (first ᵥ* slopeᵀ) ⬝ᵥ (form *ᵥ second) := by rw [Matrix.vecMul_transpose]
+      _ = first ⬝ᵥ (slopeᵀ *ᵥ (form *ᵥ second)) :=
+          (Matrix.dotProduct_mulVec first slopeᵀ (form *ᵥ second)).symm
+      _ = first ⬝ᵥ ((slopeᵀ * form) *ᵥ second) := by rw [Matrix.mulVec_mulVec]
+      _ = first ⬝ᵥ ((form * slope) *ᵥ second) := by rw [selfAdjoint]
+      _ = first ⬝ᵥ (form *ᵥ (slope *ᵥ second)) := by rw [Matrix.mulVec_mulVec]
+  have relation : slope * slope = -slope - 1 := by
+    have step : slope * slope + (slope + 1) = 0 := by
+      rw [← add_assoc]; exact cubeRootRelation
+    have negation := eq_neg_of_add_eq_zero_left step
+    rw [negation]
+    abel
+  have squareImage : slope *ᵥ (slope *ᵥ vector) = -(slope *ᵥ vector) - vector := by
+    rw [Matrix.mulVec_mulVec, relation, Matrix.sub_mulVec, Matrix.neg_mulVec,
+      Matrix.one_mulVec]
+  have topValue : (slope *ᵥ vector) ⬝ᵥ (form *ᵥ (slope *ᵥ vector)) =
+      -(vector ⬝ᵥ (form *ᵥ (slope *ᵥ vector))) - vector ⬝ᵥ (form *ᵥ vector) := by
+    rw [adjointStep vector (slope *ᵥ vector), squareImage, Matrix.mulVec_sub,
+      Matrix.mulVec_neg, dotProduct_sub, dotProduct_neg]
+  have crossValue : (slope *ᵥ vector) ⬝ᵥ (form *ᵥ vector) =
+      vector ⬝ᵥ (form *ᵥ (slope *ᵥ vector)) := adjointStep vector vector
+  have expansion :
+      ((vector ⬝ᵥ (form *ᵥ vector)) • (slope *ᵥ vector) -
+            (vector ⬝ᵥ (form *ᵥ (slope *ᵥ vector))) • vector) ⬝ᵥ
+          (form *ᵥ ((vector ⬝ᵥ (form *ᵥ vector)) • (slope *ᵥ vector) -
+            (vector ⬝ᵥ (form *ᵥ (slope *ᵥ vector))) • vector)) =
+        (vector ⬝ᵥ (form *ᵥ vector)) *
+          ((vector ⬝ᵥ (form *ᵥ vector)) *
+              ((slope *ᵥ vector) ⬝ᵥ (form *ᵥ (slope *ᵥ vector))) -
+            (vector ⬝ᵥ (form *ᵥ (slope *ᵥ vector))) *
+              (vector ⬝ᵥ (form *ᵥ (slope *ᵥ vector)))) := by
+    simp only [Matrix.mulVec_sub, Matrix.mulVec_smul, sub_dotProduct, dotProduct_sub,
+      smul_dotProduct, dotProduct_smul, smul_eq_mul]
+    rw [crossValue]
+    ring
+  have nonneg := semidefinite
+    ((vector ⬝ᵥ (form *ᵥ vector)) • (slope *ᵥ vector) -
+      (vector ⬝ᵥ (form *ᵥ (slope *ᵥ vector))) • vector)
+  rw [expansion, topValue] at nonneg
+  set base := vector ⬝ᵥ (form *ᵥ vector) with baseDefinition
+  set mixed := vector ⬝ᵥ (form *ᵥ (slope *ᵥ vector)) with mixedDefinition
+  have baseSquare : 0 < base ^ 2 := pow_pos positive 2
+  have squarePositive : 0 < (2 * mixed + base) ^ 2 + 3 * base ^ 2 := by
+    nlinarith [sq_nonneg (2 * mixed + base), baseSquare]
+  nlinarith [nonneg, mul_pos positive squarePositive]
+
+/-- The depth-one block `5I₄-J₄` is positive semidefinite over an ordered
+coefficient ring. -/
+theorem sixAxisComplementBlock_semidefinite (vector : Fin 4 → R) :
+    0 ≤ vector ⬝ᵥ (sixAxisComplementBlock R *ᵥ vector) := by
+  rw [sixAxisComplementBlock_dotProduct]
+  positivity
+
+/-- The depth-one block is positive on the first coordinate vector, where its
+value is four. -/
+theorem sixAxisComplementBlock_positive_on_firstCoordinate :
+    0 < (Pi.single 0 1 : Fin 4 → R) ⬝ᵥ
+      (sixAxisComplementBlock R *ᵥ (Pi.single 0 1 : Fin 4 → R)) := by
+  rw [sixAxisComplementBlock_dotProduct]
+  norm_num [Pi.single_apply, Fin.ext_iff]
+
+/-- The dual form `(1/5)(I₄+J₄)` is positive semidefinite whenever the supplied
+inverse of five is nonnegative. -/
+theorem sixAxisComplementBlockInverse_semidefinite {inverseFive : R}
+    (nonnegative : 0 ≤ inverseFive) (vector : Fin 4 → R) :
+    0 ≤ vector ⬝ᵥ (sixAxisComplementBlockInverse inverseFive *ᵥ vector) := by
+  rw [sixAxisComplementBlockInverse_dotProduct]
+  have squares : 0 ≤ vector 0 ^ 2 + vector 1 ^ 2 + vector 2 ^ 2 + vector 3 ^ 2 +
+      (vector 0 + vector 1 + vector 2 + vector 3) ^ 2 := by positivity
+  exact mul_nonneg nonnegative squares
+
+/-- The dual form is positive on the first coordinate vector whenever the
+supplied inverse of five is positive. -/
+theorem sixAxisComplementBlockInverse_positive_on_firstCoordinate {inverseFive : R}
+    (positive : 0 < inverseFive) :
+    0 < (Pi.single 0 1 : Fin 4 → R) ⬝ᵥ
+      (sixAxisComplementBlockInverse inverseFive *ᵥ (Pi.single 0 1 : Fin 4 → R)) := by
+  rw [sixAxisComplementBlockInverse_dotProduct]
+  have value : ((Pi.single 0 1 : Fin 4 → R) 0 ^ 2 + (Pi.single 0 1 : Fin 4 → R) 1 ^ 2 +
+      (Pi.single 0 1 : Fin 4 → R) 2 ^ 2 + (Pi.single 0 1 : Fin 4 → R) 3 ^ 2 +
+      ((Pi.single 0 1 : Fin 4 → R) 0 + (Pi.single 0 1 : Fin 4 → R) 1 +
+        (Pi.single 0 1 : Fin 4 → R) 2 + (Pi.single 0 1 : Fin 4 → R) 3) ^ 2) = 2 := by
+    norm_num [Pi.single_apply, Fin.ext_iff]
+  rw [value]
+  linarith
+
+/-- Over an ordered coefficient ring no endomorphism of the depth-one summand of
+the local chart satisfies the relation of a primitive cube root of unity while
+being self-adjoint for that summand, and none does for the dual form either when
+five is positive.  The exotic two-primary slope of the chart therefore has no
+model over an ordered coefficient ring; it exists only after passing to a ring
+carrying no compatible order, such as a two-adic one. -/
+theorem no_cubeRootRelation_selfAdjoint_slope (slope : Matrix (Fin 4) (Fin 4) R)
+    (cubeRootRelation : slope * slope + slope + 1 = 0) :
+    (slopeᵀ * sixAxisComplementBlock R ≠ sixAxisComplementBlock R * slope) ∧
+      ∀ inverseFive : R, 0 < inverseFive →
+        slopeᵀ * sixAxisComplementBlockInverse inverseFive ≠
+          sixAxisComplementBlockInverse inverseFive * slope := by
+  constructor
+  · intro selfAdjoint
+    exact not_selfAdjoint_of_cubeRootRelation (sixAxisComplementBlock R) slope
+      selfAdjoint sixAxisComplementBlock_semidefinite (Pi.single 0 1)
+      sixAxisComplementBlock_positive_on_firstCoordinate cubeRootRelation
+  · intro inverseFive positive selfAdjoint
+    exact not_selfAdjoint_of_cubeRootRelation
+      (sixAxisComplementBlockInverse inverseFive) slope selfAdjoint
+      (sixAxisComplementBlockInverse_semidefinite positive.le) (Pi.single 0 1)
+      (sixAxisComplementBlockInverse_positive_on_firstCoordinate positive)
+      cubeRootRelation
+
+end OrderedCoefficients
 
 end GraphLattices
 

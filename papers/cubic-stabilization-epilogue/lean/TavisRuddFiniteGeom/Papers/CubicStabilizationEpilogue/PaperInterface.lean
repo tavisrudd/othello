@@ -6352,6 +6352,70 @@ theorem sixAxisLocalChart_splitCoordinates_orthogonalBlocks
       block selfAdjoint first second firstValue secondValue firstEigen secondEigen
       cancellable⟩
 
+/-- The split form of a depth-one slope whose residue is scalar, which is the
+case of the local chart at three.  Over any coefficient ring, a matrix whose
+reduction modulo the uniformizer is the scalar matrix of a residue class is that
+scalar plus the uniformizer times an integral error term; nothing is divided,
+since the error term is assembled from the divisibility witnesses of the
+entries.  For a slope in that form the split-slope commutator of the
+graph-coordinate descent conditions is the commutator of the coefficient block
+with the actual slope, so the depth-one blocks impose exactly the manuscript's
+descent condition on the slope itself.  At three the depth-one summand is a
+single block, so this determines the split presentation data from the slope; no
+geometric principal kernel or its residue is constructed. -/
+theorem sixAxisLocalChart_scalarResidueSlope_splitForm
+    {S Index : Type*} [CommRing S] [Fintype Index] [DecidableEq Index]
+    (uniformizer scalar : S) (slope : Matrix Index Index S)
+    (residue : slope.map (Ideal.Quotient.mk (Ideal.span ({uniformizer} : Set S))) =
+      (Ideal.Quotient.mk (Ideal.span ({uniformizer} : Set S)) scalar) •
+        (1 : Matrix Index Index (S ⧸ Ideal.span ({uniformizer} : Set S))))
+    (coefficient : Matrix Index Index S) :
+    ∃ error : Matrix Index Index S,
+      slope = scalar • (1 : Matrix Index Index S) + uniformizer • error ∧
+        GraphLattices.rectangularSplitSlopeCommutator uniformizer 1 1 coefficient
+            scalar scalar error error =
+          coefficient * Matrix.transpose slope - slope * coefficient := by
+  obtain ⟨error, splitForm⟩ :=
+    GraphLattices.exists_slopeError_of_residue_scalar uniformizer scalar slope residue
+  exact ⟨error, splitForm,
+    GraphLattices.rectangularSplitSlopeCommutator_eq_slopeCommutator uniformizer
+      scalar slope error coefficient splitForm⟩
+
+/-- The exotic depth-one slope of the local chart at two has no model over an
+ordered coefficient ring.  The depth-one block `5I₄-J₄` pairs a vector to the sum
+of the squares of its coordinates and of their pairwise differences, and the dual
+form `(1/5)(I₄+J₄)` pairs it to the inverse of five times the sum of the squares
+of the coordinates and the square of their sum; both are therefore positive
+semidefinite over a linearly ordered commutative ring and positive on the first
+coordinate vector.  No matrix satisfying the relation of a primitive cube root of
+unity is self-adjoint for either form, by the discriminant inequality on the
+three pairings of a vector and its image.  A slope of the manuscript's exotic
+type therefore exists only over a coefficient ring carrying no compatible order,
+which is where the manuscript places it. -/
+theorem sixAxisLocalChart_exoticSlope_not_selfAdjoint_over_orderedRing
+    {R : Type*} [CommRing R] [LinearOrder R] [IsStrictOrderedRing R]
+    (slope : Matrix (Fin 4) (Fin 4) R)
+    (cubeRootRelation : slope * slope + slope + 1 = 0) :
+    (∀ vector : Fin 4 → R,
+        0 ≤ dotProduct vector
+          (Matrix.mulVec (GraphLattices.sixAxisComplementBlock R) vector)) ∧
+      Matrix.transpose slope * GraphLattices.sixAxisComplementBlock R ≠
+          GraphLattices.sixAxisComplementBlock R * slope ∧
+        ∀ inverseFive : R, 0 < inverseFive →
+          (∀ vector : Fin 4 → R,
+              0 ≤ dotProduct vector
+                (Matrix.mulVec
+                  (GraphLattices.sixAxisComplementBlockInverse inverseFive) vector)) ∧
+            Matrix.transpose slope *
+                GraphLattices.sixAxisComplementBlockInverse inverseFive ≠
+              GraphLattices.sixAxisComplementBlockInverse inverseFive * slope :=
+  ⟨GraphLattices.sixAxisComplementBlock_semidefinite,
+    (GraphLattices.no_cubeRootRelation_selfAdjoint_slope slope cubeRootRelation).1,
+    fun inverseFive positive ↦
+      ⟨GraphLattices.sixAxisComplementBlockInverse_semidefinite positive.le,
+        (GraphLattices.no_cubeRootRelation_selfAdjoint_slope slope
+          cubeRootRelation).2 inverseFive positive⟩⟩
+
 /-- Divided-power saturation of the six-axis graph divisor lattice, with the
 split presentation supplied by the local chart rather than as an abstract
 premise.  The coordinates are the five chart coordinates followed by a supplied
