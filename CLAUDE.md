@@ -152,6 +152,12 @@ search and every consulted source must be recorded.
 
 ## Research records and computational reproducibility
 
+A paper's statements are linked to their Lean coverage, imported literature, and
+computational evidence by the gated annotation layer in
+`notes/formal-annotation-conventions.md`; read it completely before adding or changing an
+annotation, a claim-map row, a registry entry, or the checker that gates them, and before
+adopting the layer in another paper. This is a routed read, not startup context.
+
 Before any paper-facing computational claim you MUST follow
 `notes/research-reproducibility-conventions.md`: commit the report, the exact script/generator, and
 a compact certificate as one atomic, git-visible bundle, with the exact replay command,

@@ -3,6 +3,12 @@
 CLAUDE.md routes here before any paper-facing computational claim and keeps the always-on rule (an
 untracked `/tmp` file or a claimed run is never sole evidence). This file holds the mechanics.
 
+When a manuscript statement rests on a bundle, the manuscript also names it: the statement carries
+an `\evidence` annotation whose identifier resolves in the paper's evidence registry, which records
+the bundle's role, its tracked checksum manifest, and its replay commands. That linkage and its gate
+are in `notes/formal-annotation-conventions.md`; it adds a naming and checking surface and relaxes
+nothing here.
+
 ## Evidence bundle
 
 **Claude:** follow the evidence discipline in recent C-task reports. Treat every computational
