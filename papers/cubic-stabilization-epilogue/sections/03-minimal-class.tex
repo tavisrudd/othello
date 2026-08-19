@@ -512,7 +512,8 @@ Theorem~\ref{thm:separation-family}, and \(F_b\) the defining form of
 \(p\in X_b\) and \(\operatorname{rank}\operatorname{Hess}F_b(p)\le2\) is
 closed, and the projection to \(B^\circ\) is proper, so the set of parameters
 whose member carries such a point is closed.  By the computation quoted above
-it is a proper subset, and \(B^\circ\) is a connected curve, so it is finite;
+it is a proper subset, and \(B^\circ\) is an irreducible curve, being a
+nonempty open subset of a \(\PP^1\), so it is finite;
 \(M_{H_1}\) is the image of \(B^\circ\), so finitely many of its points are
 covered.  By Lemma~\ref{lem:eckardt-rank} those are exactly the points
 represented by a member carrying an Eckardt point.  Every member of the family
@@ -549,22 +550,48 @@ it.
 \end{proof}
 
 The order-three signatures give the same finiteness by a route that uses no
-computation.  Multiplying the variables of a block of size one or two by
-\(\zeta_3\) fixes a separated-variable form, so such a cubic admits an
-order-three automorphism of signature \((0,0,0,0,1)\) or \((0,0,0,1,1)\);
-Gonz\'alez-Aguilera--Liendo identify these as their families \(T_3^1\) and
-\(T_3^2\) \cite[Theorem~2.5]{GonzalezAguileraLiendo}.  Each is the image in
+computation.  Fix a primitive cube root of unity \(\zeta_3\).  The signature
+of an order-three automorphism of a smooth cubic threefold is the tuple of
+exponents of \(\zeta_3\) in a diagonalization of a linear lift of order three;
+it is well defined up to permutation of the entries, replacement of
+\(\zeta_3\) by \(\zeta_3^2\), and multiplication of the lift by a cube root of
+unity \cite[Definition~2.1]{GonzalezAguileraLiendo}.  In a separated-variable
+form, as in Proposition~\ref{prop:A5-nonseparated}, the groups of variables
+are disjoint, nonempty and of size at most three, and they cover all five
+variables, since a cubic threefold whose form omits a variable is singular at
+the corresponding coordinate point; as five is not a multiple of three, at
+least one group has size one or two.  Multiplying the variables of such a
+group by \(\zeta_3\) fixes the form, so such a cubic admits an
+order-three automorphism of signature \((0,0,0,0,1)\) or \((0,0,0,1,1)\).
+Gonz\'alez-Aguilera--Liendo identify these two signatures as their families
+\(T_3^1\) and \(T_3^2\) \cite[Theorem~2.5]{GonzalezAguileraLiendo}.  The union
+of the two families therefore contains every point of \(M_{H_1}\) represented
+by a cubic projectively equivalent to a separated-variable form.  Each family
+is the image in
 moduli of \(U^G/N_{\operatorname{GL}_5(\C)}(G)\), for \(U^G\) the locus of
-smooth cubics fixed by the relevant group \(G\), under a finite morphism,
+smooth cubics fixed by the relevant group \(G\) and
+\(N_{\operatorname{GL}_5(\C)}(G)\) its normalizer, under a finite morphism,
 hence closed \cite[Lemmas~2.6--2.7]{Hartlieb}.  The
 Klein cubic lies in the pencil \cite[Lemmas~2.6--2.7 and
 Proposition~5.7]{Hartlieb}, its automorphism group
 \(\operatorname{PSL}(2,\F_{11})\) has a single conjugacy class of elements of
 order three, and its signature is \((0,0,1,1,2)\)
-\cite[Proposition~2.6]{GonzalezAguileraLiendo}, so it lies in neither family.
-The pencil is an irreducible curve, so it meets each of the two loci in a
-finite set.  The finiteness of the separated-variable locus therefore does not
-depend on the registered computation.
+\cite[Proposition~2.6]{GonzalezAguileraLiendo}.  The multiplicities of the
+eigenvalues \(1,\zeta_3,\zeta_3^2\) are \((2,2,1)\) for that signature and
+\((4,1,0)\) and \((3,2,0)\) for the two signatures above.  Permuting the
+entries leaves these triples unchanged, multiplying the lift by a cube root of
+unity permutes them cyclically, and replacing \(\zeta_3\) by \(\zeta_3^2\)
+transposes the last two, so the three moves compare the triples only as
+multisets; as \(\{1,2,2\}\), \(\{0,1,4\}\) and \(\{0,2,3\}\) are distinct, the
+Klein cubic lies in neither family.  Some \(b\in B^\circ\) has \(X_b\)
+projectively equivalent to the Klein cubic, by the membership just recorded,
+and \(B^\circ\) is a nonempty open subset of a \(\PP^1\), hence an irreducible
+curve.  The preimage in \(B^\circ\) of each of the two loci under the map to
+moduli is closed and omits that \(b\), so it is a proper closed subset of
+\(B^\circ\) and therefore finite.  Since \(M_{H_1}\) is the image of
+\(B^\circ\), each locus meets \(M_{H_1}\) in a finite set.  The finiteness of the
+separated-variable locus therefore does not depend on the registered
+computation.
 
 All but finitely many moduli points of the pencil escape the
 separated-variable mechanism of \cite{CT} by

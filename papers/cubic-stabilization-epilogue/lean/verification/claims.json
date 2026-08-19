@@ -307,10 +307,10 @@
       "coverage": "absent",
       "declarations": [],
       "objects": "The intermediate Jacobian of the geometric generic member of the pencil, the six-axis source lattice with the form six times the identity minus the all-ones matrix, its two-primary coefficient heart with commutant the field of four elements, and odd-degree isogenies onto the intermediate Jacobian from products of principally polarized abelian varieties.",
-      "hypotheses": "The exotic two-primary gluing kernel of the packet proposition, the elliptic factor without complex multiplication at the geometric generic point, odd isogeny degree, and an odd multiple of the product polarization.",
-      "conclusion": "Such an isogeny has either one factor or two, of dimensions one and four; the second case is realized by every axis; and, with no hypothesis on the polarizations of the factors, the intermediate Jacobian receives no odd-degree isogeny from a product of five elliptic curves.",
+      "hypotheses": "The exotic two-primary gluing kernel of the packet proposition, the elliptic factor without complex multiplication at the geometric generic point, odd isogeny degree, and an odd multiple of the product polarization; the last conclusion drops only the polarization condition and keeps the gluing kernel, the non-CM elliptic factor, and odd degree.",
+      "conclusion": "Such an isogeny has either one factor or two, of dimensions one and four; the second case is realized by every axis, with the one-dimensional factor isogenous to that elliptic factor; and, with no condition imposed on the pulled-back polarization, the intermediate Jacobian receives no odd-degree isogeny from a product of five elliptic curves, even though it is isogenous to the fifth power of that elliptic factor.",
       "cautions": "Not formalized.  The statement is about the lattice model established earlier in the same section, and members whose elliptic factor has complex multiplication are excluded by hypothesis.",
-      "statement_digest": "1c3fcfe46a738273c198523e457f3989510f6deed4bd8c4434c46f64bdb78db8"
+      "statement_digest": "4f1a8a7440ed3ba2e3b3e6ed844e4f3c96fc118e72ca8fbdcdb52b109ccba99b"
     },
     {
       "manuscript_label": "prop:A5-nonseparated",

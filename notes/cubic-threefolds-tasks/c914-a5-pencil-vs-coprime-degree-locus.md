@@ -42,14 +42,28 @@ Report and replay: `../2026-08-18-c914-a5-pencil-vs-voisin-and-yyz.md`; scripts
 `../2026-08-18-c914-a5-pencil-eckardt.py` and
 `../2026-08-18-c914-a5-pencil-voisin-locus.py` with their tracked outputs.
 
+## Applied, 2026-08-19
+
+The restatement is in the epilogue: the Eckardt criterion and the two finiteness
+propositions, the computation-free order-three route printed after them,
+`prop:no-elliptic-product` with its polarization-free last conclusion, the
+introduction sentences, the evidence-registry entry and the claim-map rows.
+Four cold reads drove the repairs. Round four found no mathematical error and
+verified the two load-bearing citations against the sources; its precision and
+consistency findings are applied, including the signature normalization
+restricted to cube roots of unity, the multiset form of the Klein-cubic
+exclusion, the finiteness argument run in `B^\circ` rather than in moduli, and
+the split of the module-level decomposition from the polarization hypothesis.
+Reports: `../2026-08-18-c914-manuscript-cold-read.md` for rounds one to three,
+`../2026-08-19-c914-round-four-mathematics.md` and
+`../2026-08-19-c914-round-four-consistency.md`.
+
 ## Open
 
-- [ ] Apply the prepared restatement pass to the epilogue:
-  `../2026-08-18-c914-epilogue-restatement-draft.md` holds the two new
-  statements, the introduction replacement, the evidence-registry entry, the
-  claim-map rows and the apply order. It was not applied on 2026-08-18 because
-  the manuscript, its claim map and its registries were under active concurrent
-  edit; the paper tree carries no C914 change.
+- [ ] González-Aguilera and Liendo, *Automorphisms of prime order of smooth
+  cubic n-folds*, Arch. Math. 97 (2011) 25--37, arXiv:1002.4136v2, is now cited
+  for two load-bearing facts and is not in the shared literature cache at
+  `/tmp/persistent/tavis/lit-search/`. Add it.
 - [ ] C921 owns the residual Voisin gate: whether the four-dimensional factor
   `A_b` is the Jacobian of an irreducible genus-four curve, or `J(X_b)` is
   odd-degree isogenous to an irreducible genus-five Jacobian.

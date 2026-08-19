@@ -543,9 +543,9 @@ be an isogeny from a product of principally polarized abelian varieties with
 \(m\) is.  If \(m\) is odd then either \(k=1\), or \(k=2\) and the two
 factors have dimensions one and four.  The second case occurs: every axis
 \(H\in\Omega\) gives such a \(\mu\), with \(A_1\) an elliptic curve
-isogenous to \(E\).  Moreover \(J\) receives no odd-degree isogeny at all
-from a product of five elliptic curves, whatever polarizations those factors
-carry, although \(J\) is isogenous to \(E^5\).
+isogenous to \(E\).  Finally, no product of five elliptic curves admits an
+odd-degree isogeny onto \(J\) at all, whatever the pullback of \(\Theta\),
+even though \(J\) is isogenous to \(E^5\).
 \end{proposition}
 
 \begin{proof}
@@ -584,14 +584,20 @@ Let \(U_i\subseteq W_5\) be the subspace with
 \[
  \mu_*H_1(A_i,\mathbf Q)=U_i\otimes M_{\mathbf Q},
 \]
-and put \(L'=\mu_*\bigl(\bigoplus_iH_1(A_i,\mathbf Z)\bigr)\).  It is an
-orthogonal direct sum of sublattices of the sub-Hodge structures
-\(L\cap(U_i\otimes M_{\mathbf Q})\), each summand carrying \(m\) times a
-unimodular alternating form.  The index of \(L'\) in \(L\) is odd because the
+and put \(L'=\mu_*\bigl(\bigoplus_iH_1(A_i,\mathbf Z)\bigr)\).  It is the
+direct sum of sublattices of the sub-Hodge structures
+\(L\cap(U_i\otimes M_{\mathbf Q})\), and its index in \(L\) is odd because the
 degree of \(\mu\) is, so localizing at two turns those inclusions into
-equalities: \(L\otimes\mathbf Z_2\) is the orthogonal direct sum of the
-\(P_i=\bigl(L\cap(U_i\otimes M_{\mathbf Q})\bigr)\otimes\mathbf Z_2\), each
-unimodular.  Apply the displayed description of \(L\otimes\mathbf Z_2\) in two
+equalities:
+\(L\otimes\mathbf Z_2=\bigoplus_iP_i\) with
+\(P_i=\bigl(L\cap(U_i\otimes M_{\mathbf Q})\bigr)\otimes\mathbf Z_2\).  Under
+the polarization hypothesis the subspaces \(U_i\) are moreover
+\(\kappa\)-orthogonal, since \(\mu^*\Theta=m\sum_i\Theta_i\) makes the
+polarization form block diagonal on \(\bigoplus_iH_1(A_i,\mathbf Z)\); the
+decomposition \(L\otimes\mathbf Z_2=\bigoplus_iP_i\) is then orthogonal and
+each \(P_i\) unimodular, and each summand of \(L'\) carries \(m\) times a
+unimodular alternating form.  Apply the displayed description of
+\(L\otimes\mathbf Z_2\) in two
 ways.  Its first-coordinate projection is all of
 \(\Lambda_1\otimes\mathbf Z_2\) and carries \(P_i\) into
 \((\Lambda_1\cap U_i)\otimes\mathbf Z_2\); summing over \(i\) and comparing
@@ -642,10 +648,17 @@ For the last assertion drop the polarization hypothesis and let
 \(\mu:\prod_{i=1}^5E_i\to J\) be any isogeny of odd degree from a product of
 elliptic curves.  The argument above through
 \(H_2=\bigoplus_iH_2^{(i)}\) with each summand \(\omega\)-stable uses only
-that the index is odd, not orthogonality, so it applies.  Each \(U_i\) is now
-a line, so \(H_2^{(i)}=(\Lambda_1\cap U_i)/(\Lambda\cap U_i)\) is a
-quotient of a rank-one lattice pair and therefore cyclic; being killed by two
-and \(\F_4\)-stable, it has even dimension over \(\F_2\), hence vanishes.
+that the index is odd -- neither the orthogonality of the \(P_i\) nor their
+unimodularity enters it -- so it applies.  Each \(U_i\) is now a line, so the
+decompositions
+\(\Lambda_1\otimes\mathbf Z_2=\bigoplus_i(\Lambda_1\cap U_i)\otimes\mathbf Z_2\)
+and
+\(\Lambda\otimes\mathbf Z_2=\bigoplus_i(\Lambda\cap U_i)\otimes\mathbf Z_2\)
+force \(\Lambda_1\cap U_i\)
+and \(\Lambda\cap U_i\) to have rank one, and
+\(H_2^{(i)}=(\Lambda_1\cap U_i)/(\Lambda\cap U_i)\) is therefore cyclic; it is
+killed by two because \(\Lambda_1\subseteq\tfrac12\Lambda\), and being
+\(\F_4\)-stable it has even dimension over \(\F_2\), hence vanishes.
 Then \(H_2=0\), against \(|H_2|=16\).
 \uses{prop:principal-gluing-packet, lem:relative-six-axis,%
   prop:six-axis-polarization}%
