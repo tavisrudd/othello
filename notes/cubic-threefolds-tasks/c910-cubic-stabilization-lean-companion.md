@@ -111,7 +111,7 @@ route: the residue discriminant of the cubic zero packet is `4/9`, of every
 curve residue is `0`, that separation with the parity ranks excludes
 representatives of dimension at most two, and the ordinary non-rationality
 criterion then gives irrationality of the stabilized fourfold.  Coverage after the passes below is
-50 claims and 46 machinery rows over 220 terminals: 10 absent, 21 fragmentary,
+50 claims and 46 machinery rows over 224 terminals: 10 absent, 21 fragmentary,
 18 conditional, 1 complete; the paper is warning-free at 49 pages.  Report:
 [`../2026-08-18-c910-atom-route-anchor.md`](../2026-08-18-c910-atom-route-anchor.md).
 The three geometric rows the audit left absent, `lem:euler-sign`,
@@ -199,6 +199,29 @@ commutative algebra acting on a module in which some vector generates an
 injective copy of the algebra, by the non-unit/zero-divisor argument rather than
 the manuscript's idempotent decomposition.  Report:
 [`../2026-08-18-c910-discriminant-and-spectrum-transfer.md`](../2026-08-18-c910-discriminant-and-spectrum-transfer.md).
+
+The two clauses of `lem:six-axis-local-chart` that had neither a terminal nor a
+fragment are now covered, in `GraphLattices/DepthOneSelfAdjointLift.lean`,
+`GraphLattices/SixAxisDiscriminantSupport.lean`, and additions to
+`GraphLattices/SixAxisLocalChart.lean`.  Over a domain in which `p` and `2` are
+nonzero, and for a symmetric Gram matrix with a two-sided inverse, every
+endomorphism of the reduction modulo `p` that is self-adjoint for the reduced
+dual form is the reduction of a self-adjoint matrix, the witness correcting a
+chosen lift by `p` times the Gram matrix times the strictly lower triangular part
+of the divided adjointness defect, so nothing is divided; a block-diagonal matrix
+is self-adjoint as soon as each block is, and a scalar matrix always is, which is
+how the lift meets an orthogonal decomposition and extends by a scalar on the
+unit summand.  The chart change of basis is proved invertible over any
+coefficient ring in which five has an inverse and to carry `6I₅-J₅` to the block
+matrix with the unit line of value five and the block `(6/5)(5I₄-J₄)`, so the
+lemma's decomposition is now a congruence rather than a list of pairing values;
+the first chart dual vector lies in the image of the form and every vector is
+congruent modulo that image to a combination of the four dual vectors orthogonal
+to it.  The same conclusion is recorded over the integers through the Smith
+reduction, where the constant vector is the unimodular reduced basis vector and
+six annihilates the quotient.  The row stays a fragment: no geometric kernel,
+slope, or isogeny is constructed.  Report:
+[`../2026-08-18-c910-local-chart-lift-and-unit-summand.md`](../2026-08-18-c910-local-chart-lift-and-unit-summand.md).
 
 The integral algebra includes the arbitrary-size DVR rank-one criterion,
 flattened split-coordinate coefficient lattices, an explicit invertible

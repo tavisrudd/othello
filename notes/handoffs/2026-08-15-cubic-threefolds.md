@@ -98,7 +98,7 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   `Verification/AxiomAudit`; no duplicate under the shared
   `lean/TavisRuddFiniteGeom/` tree or a second Lean repository. The sources
   build through the guarded queue; `make check` and the axiom-log gate green
-  over 50 claims, 46 machinery rows, and 220 reviewer terminals; coverage 10
+  over 50 claims, 46 machinery rows, and 224 reviewer terminals; coverage 10
   absent / 21 fragmentary / 18 conditional / 1 complete. `thm:every-cubic` is
   anchored to the atomic route, the framed spine answers to its own manuscript
   theorem `thm:every-cubic-conditional` and is now assembled end to end on the
@@ -137,7 +137,13 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   annotated graph emitted and gated. Every claim-map row has now been reviewed
   against its statement and its terminals, which completes the adoption order of
   the annotation conventions; the review left the coverage labels unchanged and
-  corrected nine recorded descriptions. Next is new coverage.
+  corrected nine recorded descriptions. The two clauses of
+  `lem:six-axis-local-chart` that carried neither a terminal nor a fragment are
+  now covered: the depth-one lift of a residue endomorphism to a self-adjoint
+  integral one, and triviality of the principal quotient on the unimodular
+  summand, the latter both in the chart, whose decomposition is now proved as a
+  change of basis, and over the integers through the Smith reduction. Next is
+  new coverage of the Section 5 framed-monodromy rows.
   Card:
   `../cubic-threefolds-tasks/c910-cubic-stabilization-lean-companion.md`; gap audit
   `../2026-08-18-c910-post-restructure-gap-audit.md`; anchor report
@@ -154,7 +160,9 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   `../2026-08-18-c910-geometric-rows-of-the-atomic-route.md`; annotation-layer
   report `../2026-08-18-c910-manuscript-formal-annotations.md`; claim-map reviews
   `../2026-08-18-c910-claim-map-review.md` and
-  `../2026-08-18-c910-cycle-side-and-absent-rows-review.md`;
+  `../2026-08-18-c910-cycle-side-and-absent-rows-review.md`; local-chart lift and
+  unit-summand report
+  `../2026-08-18-c910-local-chart-lift-and-unit-summand.md`;
   genus-eight
   unconditional report `../2026-08-18-c910-genus-eight-unconditional.md`;
   low-dimensional exclusions report
