@@ -260,6 +260,43 @@ table. No hypothesis, quantifier, or conclusion changed; only the way a cited
 companion is named. Paper V has no statement-identity extractor, so no manifest
 records the old wording.
 
+## Third pass: what the re-check found and how it was closed
+
+The cold read was resumed against the repaired manuscripts and appended a
+re-check section to `2026-08-19-c919-cold-read.md`. It closed eight of its nine
+original findings and caught that the de-numbering pass had been done half-way:
+the possessive and subject forms had been converted, but twelve hyphenated
+attributive uses of the ordinal survived in Paper V's body, with the sentence
+that had introduced the referent rewritten away. All are now
+matching-quotient descriptions, and the proposition and figure node that
+carried the ordinal are renamed. A single sentence in Paper V's roadmap now
+names all four companions by title with citations, so every later descriptive
+tag has an anchor.
+
+The other repairs: nouns restored before the citations that had become
+grammatical subjects, the source-return table re-keyed by the programme map's
+own tags rather than bracketed numbers, the two demonstratives the rewrite
+stranded bound to \(W\) and \(\mu_3\), Paper IV's orphaned pronoun promoted,
+Paper II's coda taught to call itself "this paper", the duplicated
+\(C_2\) clause dropped from Paper V's new sharpness sentence in favour of the
+explicit involution, a citation added at each companion's first coda mention,
+one duplicate citation removed, and Paper III's roadmap given the lead-in
+sentence its removed label used to supply.
+
+Two surfaces outside the five main bodies were de-numbered on the same rule by
+author instruction. Paper I's computational companion now names the geometric
+paper and the minimum-word reconstruction by title or citation, and its two
+bibliography entries drop their ordinals. Paper II's verification appendix
+calls its Lean gate the structural gate; the gate's module name,
+`RelativeConicArcs.Gates.ClebschPaperIIStructural`, is the real identifier and
+is unchanged.
+
+Separately, Paper III's golden-operator section had three displays with
+hard-coded `\tag{5.1}`–`\tag{5.3}`, which the style guide forbids. They are now
+numbered `equation` environments, which also fixes a real defect: the
+hard-coded numbers ran out of document order, so the display printed as (5.2)
+appeared before the one printed as (5.1). Every `\eqref` to them resolves.
+
 ## Later refinements
 
 Commit `5d54c316d` replaced the coda's `\Needspace` glue with an explicit page
