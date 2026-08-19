@@ -188,6 +188,74 @@
           "matched": "Only the difference of the two exponents of the modified rank-two module is used, and it is read modulo that ambiguity."
         }
       ]
+    },
+    "Batyrev:fano-toric-presentation": {
+      "citation": "Batyrev",
+      "pinpoint": "Section 5, the quantum cohomology ring of a smooth Fano toric manifold as its quantum Stanley--Reisner ring",
+      "used": "The presentation of the small quantum cohomology of the Hirzebruch surface of index one by the two toric quantum Stanley--Reisner relations of its primitive collections.",
+      "conventions": [
+        {
+          "aspect": "hypothesis",
+          "requirement": "The presentation is asserted for a smooth toric manifold with ample anticanonical class; it is not asserted for a general smooth projective toric variety, where the ring of the primitive relations can even have the wrong rank.",
+          "matched": "It is applied only to the Hirzebruch surface of index one, which is a del Pezzo surface, and to the quadric surface, for which the product formula is used instead. Every larger index is reduced to those two by deformation, not by the toric presentation."
+        },
+        {
+          "aspect": "normalization",
+          "requirement": "The Novikov variable attached to a primitive relation is the curve class whose pairings with the toric divisors are the coefficients of that relation.",
+          "matched": "The two primitive collections of the Hirzebruch surface of index one give the fibre class and the negative-section class with exactly those pairings, and the relations are stated in those two variables."
+        }
+      ]
+    },
+    "Givental:toric-mirror-theorem": {
+      "citation": "Givental",
+      "pinpoint": "Theorem 0.1, the mirror theorem for toric complete intersections",
+      "used": "That the quantum Stanley--Reisner presentation of a smooth Fano toric manifold is a theorem rather than a conjecture.",
+      "conventions": [
+        {
+          "aspect": "hypothesis",
+          "requirement": "The mirror theorem identifies the small J-function with the hypergeometric series without a mirror transformation only when the anticanonical class is nef and the degree-two part of the map is trivial; outside that range a mirror map intervenes.",
+          "matched": "It is used only for the del Pezzo surface of degree eight, where the anticanonical class is ample; the surfaces of higher index are reached by deformation invariance of genus-zero invariants, which does not invoke the mirror theorem."
+        },
+        {
+          "aspect": "coefficients",
+          "requirement": "The identification is over the Novikov ring of the target, with the Novikov variable of each curve class of positive degree.",
+          "matched": "The presentation is read over the Novikov ring of the surface and specialized only afterwards, along a strictly Novikov-admissible map."
+        }
+      ]
+    },
+    "McDuffSalamon:deformation-invariance": {
+      "citation": "McDuffSalamon",
+      "pinpoint": "Chapter 7, invariance of the genus-zero Gromov--Witten invariants under deformation of the symplectic form",
+      "used": "That the genus-zero Gromov--Witten invariants of the Hirzebruch surfaces of indices differing by two agree under the parallel transport of the curve-class lattice along a smooth projective family joining them.",
+      "conventions": [
+        {
+          "aspect": "framing",
+          "requirement": "Invariance is invariance of the invariants as functions on the lattice of curve classes carried along by parallel transport, not of the invariants indexed by a fixed geometric description of a class.",
+          "matched": "The transport is computed explicitly: it fixes the fibre class and sends the negative-section class of one surface to the negative-section class of the other minus a fibre, which is the unique identification preserving the intersection form and the first Chern number."
+        },
+        {
+          "aspect": "domain",
+          "requirement": "The two fibres must lie in one connected family of symplectic manifolds.",
+          "matched": "The family is the projectivization of the universal extension of the two line bundles over the space of extension classes, which is a smooth projective family with a relatively ample class, and its zero fibre and general fibre are the two surfaces."
+        }
+      ]
+    },
+    "BehrendProduct:small-product-formula": {
+      "citation": "BehrendProduct",
+      "pinpoint": "The product formula for genus-zero Gromov--Witten invariants of a product of smooth projective varieties",
+      "used": "That the small quantum differential module of a product of two projective lines is the tensor product of the modules of the factors over the Novikov ring of the product.",
+      "conventions": [
+        {
+          "aspect": "coefficients",
+          "requirement": "The Novikov ring of the product is the tensor product of the Novikov rings of the factors, and the curve classes of the product are the pairs of curve classes of the factors.",
+          "matched": "The specialization is applied entrywise to a connection matrix with entries in that tensor product, so it restricts to each factor and the identification commutes with it."
+        },
+        {
+          "aspect": "framing",
+          "requirement": "The formula is an identity of quantum products; the passage to formal decompositions of the associated connections is a separate step.",
+          "matched": "That passage is stated as the premise consumed by the formal statement, namely that the framed operator of the product is the tensor product of the framed operators of the factors."
+        }
+      ]
     }
   }
 }

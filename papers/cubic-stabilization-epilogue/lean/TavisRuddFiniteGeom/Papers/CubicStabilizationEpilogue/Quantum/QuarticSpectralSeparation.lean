@@ -48,31 +48,37 @@ open Polynomial
 noncomputable def monicQuartic (l₀ l₁ l₂ l₃ : ℂ) : Polynomial ℂ :=
   X ^ 4 + C l₃ * X ^ 3 + C l₂ * X ^ 2 + C l₁ * X + C l₀
 
+/-- The constant coefficient of the monic quartic is the argument recording it. -/
 @[simp]
 theorem monicQuartic_coeff_zero (l₀ l₁ l₂ l₃ : ℂ) :
     (monicQuartic l₀ l₁ l₂ l₃).coeff 0 = l₀ := by
   simp [monicQuartic]
 
+/-- The linear coefficient of the monic quartic is the argument recording it. -/
 @[simp]
 theorem monicQuartic_coeff_one (l₀ l₁ l₂ l₃ : ℂ) :
     (monicQuartic l₀ l₁ l₂ l₃).coeff 1 = l₁ := by
   simp [monicQuartic]
 
+/-- The quadratic coefficient of the monic quartic is the argument recording it. -/
 @[simp]
 theorem monicQuartic_coeff_two (l₀ l₁ l₂ l₃ : ℂ) :
     (monicQuartic l₀ l₁ l₂ l₃).coeff 2 = l₂ := by
   simp [monicQuartic]
 
+/-- The cubic coefficient of the monic quartic is the argument recording it. -/
 @[simp]
 theorem monicQuartic_coeff_three (l₀ l₁ l₂ l₃ : ℂ) :
     (monicQuartic l₀ l₁ l₂ l₃).coeff 3 = l₃ := by
   simp [monicQuartic]
 
+/-- The monic quartic has degree four. -/
 theorem monicQuartic_natDegree (l₀ l₁ l₂ l₃ : ℂ) :
     (monicQuartic l₀ l₁ l₂ l₃).natDegree = 4 := by
   unfold monicQuartic
   compute_degree!
 
+/-- The monic quartic is monic. -/
 theorem monicQuartic_monic (l₀ l₁ l₂ l₃ : ℂ) : (monicQuartic l₀ l₁ l₂ l₃).Monic := by
   unfold monicQuartic
   monicity!

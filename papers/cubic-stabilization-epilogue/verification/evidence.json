@@ -1,5 +1,14 @@
 {
   "schema": "cubic-stabilization-epilogue-evidence-v1",
-  "note": "The proof spine of this manuscript is structural: no enumeration, certificate, or symbolic computation is invoked as a premise of any statement, so no statement carries an evidence annotation. The registry is present so that a statement which later rests on a computation must name a bundle here, with its role, its tracked checksum manifest, and the command that replays it.",
-  "evidence": {}
+  "note": "The proof spine of this manuscript is structural.  One statement rests on a symbolic computation: the characteristic polynomial and discriminant of Euler multiplication on the rank-four even cohomology of a minimal rational ruled surface, computed from the presented small quantum cohomology.  Its bundle is registered below.  Every other statement invokes no enumeration, certificate, or symbolic program as a premise.",
+  "evidence": {
+    "hirzebruch-euler-spectrum": {
+      "role": "Computes the matrix of Euler multiplication on the rank-four even cohomology of a Hirzebruch surface in the two specialized Novikov values, together with its characteristic polynomial, the discriminant of that quartic, the factorization of the quartic on the degeneracy locus of the discriminant, and the dimension of the eigenspace at the repeated root. Cross-checks the presentation against the classical cohomology ring at the origin, against the Novikov grading, against an independent elimination of the two divisor generators, against an independent splitting or resultant computation of the discriminant, against self-adjointness of Euler multiplication for the trace form, and against the relations obtained directly from the genus-zero invariants of the surface of index two. It does not establish that the presented ring is the small quantum cohomology of the surface; that reduction is argued in the manuscript.",
+      "checksum_manifest": "verification/hirzebruch-euler-spectrum.sha256",
+      "commands": [
+        "uv run --with sympy python3 verification/hirzebruch_euler_spectrum.py",
+        "uv run --with sympy python3 verification/hirzebruch_euler_spectrum.py --check"
+      ]
+    }
+  }
 }

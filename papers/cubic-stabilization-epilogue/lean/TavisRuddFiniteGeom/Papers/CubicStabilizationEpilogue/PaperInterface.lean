@@ -98,6 +98,9 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.CubicF
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.SpectralSignReversal
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.HodgeFixedSubalgebra
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.CubicZeroAtomRanks
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.MinimalRuledEulerSpectrum
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.MonomialSpecializationSeparation
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.MinimalRuledSpecializedVanishing
 
 /-!
 # Reviewer interface for the cubic-stabilization companion
@@ -6384,5 +6387,246 @@ theorem specializedLowDimensional_ruledSurface_sixthMultiplicity_eq_zero
   Applications.ruledSurface_specialized_sixthMultiplicity_eq_zero_of_nefCanonical_base
     base total specialized weight parity residue residueRaisesWeight parityInvolution
     parityCommutes baseFactorization projectiveBundleFormula specializationComparison
+
+
+/-- Discriminant of the specialized Euler quartic of a minimal rational ruled
+surface of even index.  With `u` the specialized value of the fibre class and `w`
+that of the section class shifted by half the index in fibres, the characteristic
+polynomial of Euler multiplication on the rank-four even cohomology has
+discriminant `2 ^ 24 u ^ 2 w ^ 2 (u - w) ^ 2`.  Lean does not construct quantum
+cohomology; the quartic is the displayed one. -/
+theorem minimalRuledEven_eulerSpectrum_discriminant (fibreValue sectionValue : ℂ) :
+    Quantum.quarticDiscriminant (16 * (fibreValue - sectionValue) ^ 2) 0
+        (-(8 * (fibreValue + sectionValue))) 0
+      = 16777216 * (fibreValue ^ 2 * sectionValue ^ 2 * (fibreValue - sectionValue) ^ 2) :=
+  Quantum.evenRuledEuler_discriminant fibreValue sectionValue
+
+/-- Discriminant of the specialized Euler quartic of a minimal rational ruled
+surface of odd index: `- u ^ 2 w ^ 2 (256 u + 27 w ^ 2) ^ 3`. -/
+theorem minimalRuledOdd_eulerSpectrum_discriminant (fibreValue sectionValue : ℂ) :
+    Quantum.quarticDiscriminant (16 * fibreValue ^ 2 - 27 * fibreValue * sectionValue ^ 2)
+        (-(36 * fibreValue * sectionValue)) (-(8 * fibreValue)) sectionValue
+      = -(fibreValue ^ 2 * sectionValue ^ 2 * (256 * fibreValue + 27 * sectionValue ^ 2) ^ 3) :=
+  Quantum.oddRuledEuler_discriminant fibreValue sectionValue
+
+/-- The four eigenvalues of Euler multiplication in the even case are
+`2 (± a ± b)` for square roots `a` and `b` of the two specialized values. -/
+theorem minimalRuledEven_eulerSpectrum_splitting (fibreRoot sectionRoot : ℂ) :
+    Quantum.evenRuledEulerCharpoly (fibreRoot ^ 2) (sectionRoot ^ 2)
+      = (Polynomial.X - Polynomial.C (2 * (fibreRoot + sectionRoot)))
+        * (Polynomial.X - Polynomial.C (2 * (fibreRoot - sectionRoot)))
+        * (Polynomial.X - Polynomial.C (-(2 * (fibreRoot - sectionRoot))))
+        * (Polynomial.X - Polynomial.C (-(2 * (fibreRoot + sectionRoot)))) :=
+  Quantum.evenRuledEuler_splitting fibreRoot sectionRoot
+
+/-- Degeneracy criterion in the even case: for a specialization with both values
+nonzero the Euler quartic has a repeated root exactly when the two values
+agree. -/
+theorem minimalRuledEven_degenerate_iff (fibreValue sectionValue : ℂ)
+    (fibreNonzero : fibreValue ≠ 0) (sectionNonzero : sectionValue ≠ 0) :
+    Quantum.quarticDiscriminant (16 * (fibreValue - sectionValue) ^ 2) 0
+        (-(8 * (fibreValue + sectionValue))) 0 = 0 ↔ fibreValue = sectionValue :=
+  Quantum.evenRuledEuler_discriminant_eq_zero_iff fibreValue sectionValue fibreNonzero
+    sectionNonzero
+
+/-- Degeneracy criterion in the odd case: for a specialization with both values
+nonzero the Euler quartic has a repeated root exactly on the quadratic locus
+`256 u + 27 w ^ 2 = 0`. -/
+theorem minimalRuledOdd_degenerate_iff (fibreValue sectionValue : ℂ)
+    (fibreNonzero : fibreValue ≠ 0) (sectionNonzero : sectionValue ≠ 0) :
+    Quantum.quarticDiscriminant (16 * fibreValue ^ 2 - 27 * fibreValue * sectionValue ^ 2)
+        (-(36 * fibreValue * sectionValue)) (-(8 * fibreValue)) sectionValue = 0
+      ↔ 256 * fibreValue + 27 * sectionValue ^ 2 = 0 :=
+  Quantum.oddRuledEuler_discriminant_eq_zero_iff fibreValue sectionValue fibreNonzero
+    sectionNonzero
+
+/-- Block shape on the even degeneracy locus: the quartic is the square of a
+linear factor times a quadratic, with double eigenvalue `0` and simple
+eigenvalues the two square roots of `16 u`. -/
+theorem minimalRuledEven_degenerate_splitting (fibreRoot : ℂ) :
+    Quantum.evenRuledEulerCharpoly (fibreRoot ^ 2) (fibreRoot ^ 2)
+      = (Polynomial.X - Polynomial.C 0) ^ 2
+        * ((Polynomial.X - Polynomial.C (4 * fibreRoot))
+          * (Polynomial.X - Polynomial.C (-(4 * fibreRoot)))) :=
+  Quantum.evenRuledEuler_degenerate_splitting fibreRoot
+
+/-- Block shape on the odd degeneracy locus, parametrized by writing the section
+value as `16 s`, so that the fibre value is `-27 s ^ 2`: the double eigenvalue is
+`-18 s` and the simple eigenvalues are `10 s ± 16 e` for a square root `e` of
+`-2 s ^ 2`. -/
+theorem minimalRuledOdd_degenerate_splitting (sectionScale squareRoot : ℂ)
+    (root : squareRoot ^ 2 = -(2 * sectionScale ^ 2)) :
+    Quantum.oddRuledEulerCharpoly (-(27 * sectionScale ^ 2)) (16 * sectionScale)
+      = (Polynomial.X - Polynomial.C (-(18 * sectionScale))) ^ 2
+        * ((Polynomial.X - Polynomial.C (10 * sectionScale + 16 * squareRoot))
+          * (Polynomial.X - Polynomial.C (10 * sectionScale - 16 * squareRoot))) :=
+  Quantum.oddRuledEuler_degenerate_splitting sectionScale squareRoot root
+
+/-- No spectral block of rank three or four occurs at a degenerate
+specialization: a quartic that is a squared linear factor times a quadratic whose
+roots differ from the repeated one has every root multiplicity at most two. -/
+theorem minimalRuled_degenerate_rootMultiplicity_le_two {repeated first second : ℂ}
+    (firstNe : first ≠ repeated) (secondNe : second ≠ repeated) (value : ℂ) :
+    (((Polynomial.X - Polynomial.C repeated) ^ 2)
+        * ((Polynomial.X - Polynomial.C first)
+          * (Polynomial.X - Polynomial.C second))).rootMultiplicity value ≤ 2 :=
+  Quantum.rootMultiplicity_le_two_of_squared_linear_mul_quadratic firstNe secondNe value
+
+/-- The repeated eigenvalue of a degenerate specialization has multiplicity
+exactly two, so the degenerate spectrum is one block of rank two and two blocks
+of rank one. -/
+theorem minimalRuled_degenerate_rootMultiplicity_eq_two {repeated first second : ℂ}
+    (firstNe : first ≠ repeated) (secondNe : second ≠ repeated) :
+    (((Polynomial.X - Polynomial.C repeated) ^ 2)
+        * ((Polynomial.X - Polynomial.C first)
+          * (Polynomial.X - Polynomial.C second))).rootMultiplicity repeated = 2 :=
+  Quantum.rootMultiplicity_eq_two_of_squared_linear_mul_quadratic firstNe secondNe
+
+/-- The nilpotent part of a rank-two block is square-zero: Cayley--Hamilton in
+rank two for a matrix whose trace is twice and whose determinant is the square of
+its single eigenvalue. -/
+theorem minimalRuled_rankTwoBlock_nilpotent_sq_eq_zero (block : Matrix (Fin 2) (Fin 2) ℂ)
+    (eigenvalue : ℂ) (traceValue : Matrix.trace block = 2 * eigenvalue)
+    (determinantValue : block.det = eigenvalue ^ 2) :
+    (block - eigenvalue • (1 : Matrix (Fin 2) (Fin 2) ℂ))
+        * (block - eigenvalue • (1 : Matrix (Fin 2) (Fin 2) ℂ)) = 0 :=
+  Quantum.rankTwo_centered_sq_eq_zero block eigenvalue traceValue determinantValue
+
+/-- Off the degeneracy locus every spectral block of Euler multiplication of a
+minimal rational ruled surface of even index has rank one. -/
+theorem minimalRuledEven_eulerBlocks_simple (euler : Matrix (Fin 4) (Fin 4) ℂ)
+    (fibreValue sectionValue : ℂ)
+    (quantumRelation : euler.charpoly = Quantum.evenRuledEulerCharpoly fibreValue sectionValue)
+    (fibreNonzero : fibreValue ≠ 0) (sectionNonzero : sectionValue ≠ 0)
+    (separated : fibreValue ≠ sectionValue) (value : ℂ) :
+    Module.finrank ℂ (Module.End.maxGenEigenspace (Matrix.toLin' euler) value) ≤ 1 :=
+  Quantum.evenRuledEuler_finrank_maxGenEigenspace_le_one euler fibreValue sectionValue
+    quantumRelation fibreNonzero sectionNonzero separated value
+
+/-- Off the degeneracy locus every spectral block of Euler multiplication of a
+minimal rational ruled surface of odd index has rank one. -/
+theorem minimalRuledOdd_eulerBlocks_simple (euler : Matrix (Fin 4) (Fin 4) ℂ)
+    (fibreValue sectionValue : ℂ)
+    (quantumRelation : euler.charpoly = Quantum.oddRuledEulerCharpoly fibreValue sectionValue)
+    (fibreNonzero : fibreValue ≠ 0) (sectionNonzero : sectionValue ≠ 0)
+    (separated : 256 * fibreValue + 27 * sectionValue ^ 2 ≠ 0) (value : ℂ) :
+    Module.finrank ℂ (Module.End.maxGenEigenspace (Matrix.toLin' euler) value) ≤ 1 :=
+  Quantum.oddRuledEuler_finrank_maxGenEigenspace_le_one euler fibreValue sectionValue
+    quantumRelation fibreNonzero sectionNonzero separated value
+
+/-- Direct vanishing of the specialized primitive-sixth count for the quadric
+surface, the product of two projective lines.  Lean proves that both factors have
+simple Euler spectrum; the conclusion drawn from the Gromov--Witten product
+formula and the multiplicity-one Euler block lemma, that the framed monodromy of
+the specialized product is then the identity, is a hypothesis.  No relation
+between the two specialized values is assumed. -/
+theorem minimalRuled_quadricSurface_sixthMultiplicity_eq_zero
+    (firstEuler secondEuler : Matrix (Fin 2) (Fin 2) ℂ) (firstValue secondValue : ℂ)
+    (firstNonzero : firstValue ≠ 0) (secondNonzero : secondValue ≠ 0)
+    (firstRelation : firstEuler.charpoly = Polynomial.X ^ 2 - Polynomial.C firstValue)
+    (secondRelation : secondEuler.charpoly = Polynomial.X ^ 2 - Polynomial.C secondValue)
+    (product : Quantum.FramedMonodromyMatrix)
+    (tensorTriviality :
+      (∀ value : ℂ,
+          Module.finrank ℂ (Module.End.maxGenEigenspace (Matrix.toLin' firstEuler) value) ≤ 1) →
+        (∀ value : ℂ,
+          Module.finrank ℂ (Module.End.maxGenEigenspace (Matrix.toLin' secondEuler) value) ≤ 1) →
+          product.operator.charpoly = (Polynomial.X - Polynomial.C (1 : ℂ)) ^ product.rank) :
+    product.sixthMultiplicity = 0 :=
+  Applications.quadricSurface_specialized_sixthMultiplicity_eq_zero firstEuler secondEuler
+    firstValue secondValue firstNonzero secondNonzero firstRelation secondRelation product
+    tensorTriviality
+
+/-- Direct vanishing of the specialized primitive-sixth count for a minimal
+rational ruled surface of even index at a nondegenerate specialization. -/
+theorem minimalRuledEven_sixthMultiplicity_eq_zero (euler : Matrix (Fin 4) (Fin 4) ℂ)
+    (fibreValue sectionValue : ℂ) (fibreNonzero : fibreValue ≠ 0)
+    (sectionNonzero : sectionValue ≠ 0) (separated : fibreValue ≠ sectionValue)
+    (quantumRelation : euler.charpoly = Quantum.evenRuledEulerCharpoly fibreValue sectionValue)
+    (monodromy : Quantum.FramedMonodromyMatrix)
+    (simpleBlockMonodromy :
+      (∀ value : ℂ,
+          Module.finrank ℂ (Module.End.maxGenEigenspace (Matrix.toLin' euler) value) ≤ 1) →
+        monodromy.operator.charpoly
+          = (Polynomial.X - Polynomial.C (1 : ℂ)) ^ monodromy.rank) :
+    monodromy.sixthMultiplicity = 0 :=
+  Applications.minimalRuledEven_specialized_sixthMultiplicity_eq_zero euler fibreValue
+    sectionValue fibreNonzero sectionNonzero separated quantumRelation monodromy
+    simpleBlockMonodromy
+
+/-- Direct vanishing of the specialized primitive-sixth count for a minimal
+rational ruled surface of odd index at a nondegenerate specialization. -/
+theorem minimalRuledOdd_sixthMultiplicity_eq_zero (euler : Matrix (Fin 4) (Fin 4) ℂ)
+    (fibreValue sectionValue : ℂ) (fibreNonzero : fibreValue ≠ 0)
+    (sectionNonzero : sectionValue ≠ 0)
+    (separated : 256 * fibreValue + 27 * sectionValue ^ 2 ≠ 0)
+    (quantumRelation : euler.charpoly = Quantum.oddRuledEulerCharpoly fibreValue sectionValue)
+    (monodromy : Quantum.FramedMonodromyMatrix)
+    (simpleBlockMonodromy :
+      (∀ value : ℂ,
+          Module.finrank ℂ (Module.End.maxGenEigenspace (Matrix.toLin' euler) value) ≤ 1) →
+        monodromy.operator.charpoly
+          = (Polynomial.X - Polynomial.C (1 : ℂ)) ^ monodromy.rank) :
+    monodromy.sixthMultiplicity = 0 :=
+  Applications.minimalRuledOdd_specialized_sixthMultiplicity_eq_zero euler fibreValue
+    sectionValue fibreNonzero sectionNonzero separated quantumRelation monodromy
+    simpleBlockMonodromy
+
+/-- The even degeneracy locus is not met by a strictly Novikov-admissible
+specialization once the section class is shifted by at least one fibre: the
+lengths of the fibre class and of the shifted section class differ, so the two
+specialized values have different valuations. -/
+theorem centerSpecialization_fibre_ne_shiftedSection {Curve Target : Type*}
+    [AddCommMonoid Curve] [CommRing Target] [IsDomain Target] [UniformSpace Target]
+    [CompleteSpace Target] [T2Space Target] [IsTopologicalRing Target]
+    (specialization : Quantum.StrictNovikovAdmissible (Curve := Curve) (Target := Target))
+    {fibre sectionClass : Curve} (fibreNonzero : fibre ≠ 0) (sectionNonzero : sectionClass ≠ 0)
+    {shift : ℕ} (positiveShift : 0 < shift) :
+    specialization.monomialImage fibre
+      ≠ specialization.monomialImage (sectionClass + shift • fibre) :=
+  specialization.fibre_ne_shiftedSection fibreNonzero sectionNonzero positiveShift
+
+/-- The odd degeneracy locus is not met by a strictly Novikov-admissible
+specialization once the section class is shifted by at least one fibre: the fibre
+value and the square of the shifted-section value have different valuations, so
+no combination of them with unit coefficients vanishes. -/
+theorem centerSpecialization_oddCombination_ne_zero {Curve Target : Type*}
+    [AddCommMonoid Curve] [CommRing Target] [IsDomain Target] [UniformSpace Target]
+    [CompleteSpace Target] [T2Space Target] [IsTopologicalRing Target]
+    (specialization : Quantum.StrictNovikovAdmissible (Curve := Curve) (Target := Target))
+    {fibre sectionClass : Curve} (fibreNonzero : fibre ≠ 0) (sectionNonzero : sectionClass ≠ 0)
+    {shift : ℕ} (positiveShift : 0 < shift)
+    {coefficientFibre coefficientSection : Target}
+    (fibreUnit : IsUnit coefficientFibre) (sectionUnit : IsUnit coefficientSection) :
+    coefficientFibre * specialization.monomialImage fibre
+        + coefficientSection * specialization.monomialImage (sectionClass + shift • fibre) ^ 2
+      ≠ 0 :=
+  specialization.oddCombination_ne_zero fibreNonzero sectionNonzero positiveShift fibreUnit
+    sectionUnit
+
+/-- Reviewer-facing type of monomial-specialization certificates: a leading-term
+map, a linearly independent family of monomials of the graded target, and a
+leading term in that family for every effective class. -/
+def monomialSpecializationData {Curve Target Index Graded : Type*}
+    [AddCommMonoid Curve] [CommRing Target] [AddCommGroup Graded] [Module ℂ Graded]
+    (leadingTerm : Target → Graded) (monomialImage : Curve → Target)
+    (monomial : Index → Graded) : Type _ :=
+  Quantum.MonomialSpecializationData leadingTerm monomialImage monomial
+
+/-- The odd degeneracy locus is not met by a monomial specialization, whatever
+the shift.  The premise is that the leading term of the combination is the
+corresponding combination of two members of a linearly independent family of
+monomials of the associated graded ring; the coefficients `256` and `27` are
+positive, so their sum does not vanish and the combination cannot. -/
+theorem monomialSpecialization_oddCombination_ne_zero {Index Graded Target : Type*}
+    [AddCommGroup Graded] [Module ℂ Graded] [CommRing Target]
+    (leadingTerm : Target → Graded) (leadingTerm_zero : leadingTerm 0 = 0)
+    {monomial : Index → Graded} (independent : LinearIndependent ℂ monomial)
+    {first second : Index} {fibreValue sectionValue : Target}
+    (leading : leadingTerm (256 * fibreValue + 27 * sectionValue ^ 2)
+      = (256 : ℂ) • monomial first + (27 : ℂ) • monomial second) :
+    256 * fibreValue + 27 * sectionValue ^ 2 ≠ 0 :=
+  Quantum.oddCombination_ne_zero_of_monomialLeadingTerms leadingTerm leadingTerm_zero
+    independent leading
 
 end TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue

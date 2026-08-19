@@ -26,7 +26,7 @@ blowup comparison are monomial: the image of each effective monomial has, in the
 associated graded ring, a leading term belonging to one linearly independent
 family.  A vanishing combination of two such leading terms with coefficients
 `256` and `27` would force the two leading terms to be equal, since distinct
-members of a linearly independent family admit no vanishing combination with
+members of a linearly independent family have no vanishing combination with
 nonzero coefficients, and then `256 + 27` would have to vanish.
 
 Lean constructs no completed monoid ring, no associated graded ring, and no
@@ -206,7 +206,7 @@ section LeadingTerms
 
 variable {Index Graded : Type*} [AddCommGroup Graded] [Module ℂ Graded]
 
-/-- No combination of two members of a linearly independent family vanishes when
+/-- No combination of two members of a linearly independent family is zero when
 the first coefficient and the sum of the two coefficients are nonzero.  For
 members with a common index the statement is that the sum of the coefficients
 does not annihilate a nonzero vector; for distinct indices it is linear
@@ -251,6 +251,48 @@ theorem oddCombination_ne_zero_of_monomialLeadingTerms {Target : Type*} [CommRin
   refine ne_zero_of_leadingTerm_ne_zero leadingTerm leadingTerm_zero ?_
   rw [leading]
   exact monomialCombination_ne_zero independent (by norm_num) (by norm_num)
+
+
+/-- Data exhibiting a specialization as monomial: a leading-term map on the
+coefficient ring, a linearly independent family of monomials of the graded
+target, and for every effective class a leading term belonging to that family.
+This is the structure the associated graded of a completed monoid ring supplies,
+with the monomials of that monoid ring as the family; Lean constructs neither the
+monoid ring nor its associated graded. -/
+structure MonomialSpecializationData {Curve Target Index Graded : Type*}
+    [AddCommMonoid Curve] [CommRing Target] [AddCommGroup Graded] [Module ℂ Graded]
+    (leadingTerm : Target → Graded) (monomialImage : Curve → Target)
+    (monomial : Index → Graded) where
+  /-- The index of the monomial that is the leading term of an effective class. -/
+  index : Curve → Index
+  /-- The family of monomials is linearly independent over the complex numbers. -/
+  independent : LinearIndependent ℂ monomial
+  /-- Only the zero element has vanishing leading term at the relevant degree. -/
+  leadingTerm_zero : leadingTerm 0 = 0
+  /-- The leading term of an effective monomial is a member of the family. -/
+  leadingTerm_monomialImage :
+    ∀ degree, leadingTerm (monomialImage degree) = monomial (index degree)
+
+/-- The odd degeneracy locus is not met by a monomial specialization.  The
+premise is that the leading term of the combination is the combination of the
+leading terms of its two summands, which holds exactly when those summands have
+equal valuation; when they do not, the valuation argument already applies. -/
+theorem MonomialSpecializationData.oddCombination_ne_zero
+    {Curve Target Index Graded : Type*}
+    [AddCommMonoid Curve] [CommRing Target] [AddCommGroup Graded] [Module ℂ Graded]
+    {leadingTerm : Target → Graded} {monomialImage : Curve → Target}
+    {monomial : Index → Graded}
+    (data : MonomialSpecializationData leadingTerm monomialImage monomial)
+    {fibre sectionClass : Curve} {fibreValue sectionValue : Target}
+    (fibreLeading : leadingTerm fibreValue = leadingTerm (monomialImage fibre))
+    (sectionLeading : leadingTerm (sectionValue ^ 2) = leadingTerm (monomialImage sectionClass))
+    (additive : leadingTerm (256 * fibreValue + 27 * sectionValue ^ 2)
+      = (256 : ℂ) • leadingTerm fibreValue + (27 : ℂ) • leadingTerm (sectionValue ^ 2)) :
+    256 * fibreValue + 27 * sectionValue ^ 2 ≠ 0 := by
+  refine oddCombination_ne_zero_of_monomialLeadingTerms leadingTerm data.leadingTerm_zero
+    data.independent (first := data.index fibre) (second := data.index sectionClass) ?_
+  rw [additive, fibreLeading, sectionLeading, data.leadingTerm_monomialImage,
+    data.leadingTerm_monomialImage]
 
 end LeadingTerms
 

@@ -31,8 +31,8 @@
       "objects": "An abstract geometric signature naming smooth complex cubic threefolds, product with projective one-space, projective four-space, and rationality, together with a natural-valued framed primitive-sixth multiplicity; and, for the third terminal, the product-formula signature carrying a distinguished point, the projective spaces, and the product of a variety with a projective space.",
       "hypotheses": "For the first two terminals: the carrier satisfies the smooth-cubic predicate, its framed multiplicity equals two, the named product obeys the rank-two formula and dimension bound, projective four-space has zero multiplicity, and rationality supplies the required birational relation. The third terminal assumes instead the product formula for a product with a projective space, involutivity of the framed monodromy of a point, and the passage from the exponents of the reduced rank-two block to framed formal monodromy, and derives from them the multiplicity two of the cubic, its doubling under multiplication by a projective line, and the vanishing on projective four-space. Birational invariance of the multiplicity through dimension four, which the manuscript proves under its two residual hypotheses, is part of the supplied birational input in every case.",
       "conclusion": "The named product of the specified cubic carrier with projective one-space is not rational.",
-      "cautions": "This is the framed-monodromy route, conditional in the manuscript on the reconstruction-tail and divisor-tagging hypotheses and, in Lean, on every quantum, weak-factorization, and rational-comparison fact as a typed premise. It is independent of the unconditional atomic route recorded under thm:every-cubic and is not a formalization of that route. The third terminal removes three numerical assumptions in favour of the product formula and the exponent-to-monodromy passage; neither of those is formalized.",
-      "statement_digest": "44b24bfe5779d40e92b6f5cc16c15ef1edcf576fbac77a13abe691bbe1e5b150",
+      "cautions": "This is the framed-monodromy route, conditional in the manuscript on the reconstruction-tail hypothesis and on the divisor-tagging hypothesis for nonminimal surface centers only and, in Lean, on every quantum, weak-factorization, and rational-comparison fact as a typed premise. It is independent of the unconditional atomic route recorded under thm:every-cubic and is not a formalization of that route. The third terminal removes three numerical assumptions in favour of the product formula and the exponent-to-monodromy passage; neither of those is formalized.",
+      "statement_digest": "82cf73e5ff4daa7bf8b888772bea7dd910455674169807134b4023bf7bb1ba67",
       "terminal_digest": "79aca35ea9e3f1b088f7defd419f2755cffef8a3e580c75c5485152849583eb0"
     },
     {
@@ -668,10 +668,10 @@
         "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.lowDimensionalVanishing_of_involutiveFramedMonodromy"
       ],
       "objects": "A supplied type of geometric objects with a predicate for points, smooth projective curves, and smooth projective surfaces; a nef-seed predicate; a named point and projective-bundle and point-blowup relations; dependent strictly Novikov-admissible specializations; and intrinsic and specialized finite-dimensional complex framed-monodromy matrices.",
-      "hypotheses": "Every selected object has a supplied inductive classification witness built from a nef seed, the point, a positive-rank projective bundle, or a point blowup. Nef-seed characteristic roots are supplied to have square one; the point multiplicity is zero; the projective-bundle formula multiplies the base multiplicity by the rank; point blowup preserves multiplicity; and divisor tagging transfers intrinsic vanishing to each strictly Novikov-admissible specialization.",
+      "hypotheses": "Every selected object has a supplied inductive classification witness built from a nef seed, the point, a positive-rank projective bundle, or a point blowup. Nef-seed characteristic roots are supplied to have square one; the point multiplicity is zero; the projective-bundle formula multiplies the base multiplicity by the rank; point blowup preserves multiplicity; and divisor tagging transfers intrinsic vanishing to each monomial strictly Novikov-admissible specialization.",
       "conclusion": "For every supplied point, smooth projective curve, or smooth projective surface and every strictly Novikov-admissible specialization, the specialized framed monodromy has primitive-sixth multiplicity zero. Lean proves the classification induction, including the exact root-square-one spectral endpoint, and the final specialization transfer. A separate corollary proves that matrix involutivity is a stronger sufficient condition for the spectral restriction.",
-      "cautions": "The result is conditional on every geometric and comparison input used by the human proof. Lean does not construct the varieties, quantum connections, framed monodromy, numerical Novikov rings, grading operator or parity correction; prove regular singularity and nilpotence of the residue; derive the plus-or-minus-one spectrum from nefness; prove the low-dimensional minimal-model classification; construct the projective bundles or blowups; establish their monodromy formulas; or prove divisor tagging and specialization comparison. The human proof restricts eigenvalues to {1,-1}; it does not assert involutivity of the full monodromy matrix, which is strictly stronger in the presence of possible Jordan parts and appears only in the separately marked sufficient corollary.",
-      "statement_digest": "0f073805c84d35111f0b15fd504106978577d16bbda67fc7d28a801fe66e6619",
+      "cautions": "The result is conditional on every geometric and comparison input used by the human proof. Lean does not construct the varieties, quantum connections, framed monodromy, numerical Novikov rings, grading operator or parity correction; prove regular singularity and nilpotence of the residue; derive the plus-or-minus-one spectrum from nefness; prove the low-dimensional minimal-model classification; construct the projective bundles or blowups; establish their monodromy formulas; or prove divisor tagging and specialization comparison. The human proof restricts eigenvalues to {1,-1}; it does not assert involutivity of the full monodromy matrix, which is strictly stronger in the presence of possible Jordan parts and appears only in the separately marked sufficient corollary. The manuscript now uses divisor tagging only for nonminimal surface targets; minimal rational ruled targets are covered by the direct specialized argument, whose formal content is recorded under prop:minimal-ruled-specialized-vanishing. The Lean statement retains divisor tagging as one typed premise of the classification witness and does not distinguish the two cases.",
+      "statement_digest": "e256c8047014c6cb293d98371cf160f6cd136d30abf88575c6214ccaad727497",
       "terminal_digest": "13b28c87fae9641c855287f0b0ba7453f8311ec788c5a6e5e7238d2b5ab77c98"
     },
     {
@@ -685,8 +685,8 @@
       "objects": "An arbitrary carrier type with natural-valued multiplicity and dimension, explicit smooth-projective-complex and smooth-center predicates, typed blowup steps in either orientation, and specialized center contributions.",
       "hypotheses": "Smooth endpoints; source dimension at most four; every blowup step has codimension at least two, the center-plus-codimension dimension identity, preserved ambient dimension, and the displayed additive operation formula; every specialized contribution of a smooth center of dimension at most two vanishes; and a composable typed weak-factorization chain is supplied.",
       "conclusion": "Equality of multiplicities at the endpoints, obtained by proving each typed blowup or blowdown link preserves multiplicity and telescoping the chain.",
-      "cautions": "Lean does not construct varieties, quantum connections, comparison specializations, operation formulas, low-dimensional vanishing, or the AKMW factorization chain; those remain typed data.  The older abstract preserving-chain terminal is retained and is strictly weaker than the typed telescope.",
-      "statement_digest": "bf30db6c06b6b9bcd27bc26f1f4d7248993ebbdb9e596aaab37d8f166b7318f1",
+      "cautions": "Lean does not construct varieties, quantum connections, comparison specializations, operation formulas, low-dimensional vanishing, or the AKMW factorization chain; those remain typed data.  The older abstract preserving-chain terminal is retained and is strictly weaker than the typed telescope. The manuscript states the theorem under the reconstruction-tail hypothesis and the divisor-tagging hypothesis for nonminimal surface centers only; the vanishing of the center contributions is a typed premise here either way.",
+      "statement_digest": "fa89ef1672cd7580c11d08e8fa67f2e0cedd82624d7e5a04ef5aadc44b131879",
       "terminal_digest": "615127bbdba6a64b972231b0d65604119a655642226263440332222b99cff8a2"
     },
     {
@@ -785,9 +785,88 @@
       "objects": "An abstract geometric signature naming smooth prime genus-eight Fano threefolds, their associated Pfaffian cubics, both rank-two projective-bundle total spaces, product with projective one-space, projective four-space, and rationality; for the unconditional route, additionally a birational relation on varieties and the ordinary Hodge-atom ledger of the atomic argument.",
       "hypotheses": "For the framed route: the specified carrier satisfies the genus-eight predicate, its associated cubic satisfies the smooth-cubic predicate, both named total spaces obey the rank-two formulas and are birational, the cubic packet is two, and the named stabilization and rational comparison have the stated properties. For the unconditional route: each rank-two projectivization is birational to the product of its base with a projective line, the two projectivizations are birational through the flop, birational equivalence is symmetric and transitive and carries rationality forward, and the associated cubic satisfies the atom, ledger, and exclusion premises of the atomic one-step theorem.",
       "conclusion": "The specified Fano carrier has packet multiplicity two and its named product with projective one-space is irrational. Independently of the framed route, that product is birational to the corresponding product of the associated cubic and is not rational, with irrationality supplied by the ordinary Hodge-atom argument for the cubic zero-packet atom.",
-      "cautions": "The geometric signature and the Kuznetsov, quantum, weak-factorization, and rational-comparison facts remain typed premises rather than foundational constructions. Lean constructs neither the Fano threefold, the Pfaffian cubic, the rank-two bundles, their projectivizations, nor the flop, and does not prove that a rank-two projectivization is birational to the product of its base with a projective line. The unconditional route consumes only symmetry and transitivity of the supplied birational relation and invariance of rationality under it; the framed route, which the manuscript states conditionally, carries the multiplicity statement.",
-      "statement_digest": "1a4a209e8882dbf0d56ab42b63e62bad8ee4775a6a318a05b234925ec6a082c5",
+      "cautions": "The geometric signature and the Kuznetsov, quantum, weak-factorization, and rational-comparison facts remain typed premises rather than foundational constructions. Lean constructs neither the Fano threefold, the Pfaffian cubic, the rank-two bundles, their projectivizations, nor the flop, and does not prove that a rank-two projectivization is birational to the product of its base with a projective line. The unconditional route consumes only symmetry and transitivity of the supplied birational relation and invariance of rationality under it; the framed route, which the manuscript states conditionally on the reconstruction-tail hypothesis and on the divisor-tagging hypothesis for nonminimal surface centers only, carries the multiplicity statement.",
+      "statement_digest": "11832619f9d82aa9cad7b490d02f6a79d0b2688223d346f5f05b0aa9d0ecc3a9",
       "terminal_digest": "8e6e03b979bbad5b113482cf4d007615f02025feeecc8ae51e7def9b2335ab0f"
+    },
+    {
+      "manuscript_label": "def:monomial-specialization",
+      "coverage": "fragment",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.monomialSpecializationData"
+      ],
+      "objects": "A leading-term map from a coefficient ring to a complex vector space of graded pieces, a family of monomials of that space indexed by an abstract type, and a map assigning to every effective class the index of its leading monomial.",
+      "hypotheses": "The family of monomials is linearly independent over the complex numbers, the leading term of zero vanishes, and the leading term of the image of every effective class is the monomial of its assigned index.",
+      "conclusion": "The reviewer-facing type of certificates that a specialization is monomial, in the form its consumers use.",
+      "cautions": "Lean constructs no completed monoid ring, no associated graded ring, and no Novikov specialization, and does not prove that the associated graded of the coefficient ring of a center specialization is a monoid algebra whose monomials form such a family. The type records the properties of the leading-term data that the arithmetic below consumes, not their geometric origin.",
+      "statement_digest": "14d4bb3371ad551f7e2bb9f05b1bc18a270edc6ea039d13be74914c380ca7d4d",
+      "terminal_digest": "b1adb3bce29a897278d37ebd2f8cfc1f6fbe5fc46bd1f9421f385c8e26a0bf96"
+    },
+    {
+      "manuscript_label": "lem:minimal-ruled-euler-spectrum",
+      "coverage": "fragment",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.minimalRuledEven_eulerSpectrum_discriminant",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.minimalRuledOdd_eulerSpectrum_discriminant",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.minimalRuledEven_eulerSpectrum_splitting"
+      ],
+      "objects": "The two monic quartics displayed in the statement, in two complex parameters standing for the specialized values of the fibre class and of the section class shifted by half the index in fibres, and the universal discriminant of a monic quartic in its coefficients.",
+      "hypotheses": "None beyond the displayed coefficients; the even splitting takes square roots of the two parameters.",
+      "conclusion": "Lean evaluates the universal quartic discriminant on the coefficients of each displayed quartic, obtaining two to the twenty-fourth times the square of the product of the two parameters and their difference in the even case, and minus the square of that product times the cube of the displayed quadratic in the odd case, and exhibits the even quartic as the product of the four linear factors with roots twice the four sums and differences of the square roots.",
+      "cautions": "The manuscript's conclusion is that these quartics are the characteristic polynomial of Euler multiplication on the even cohomology of a Hirzebruch surface. Lean constructs no variety, no quantum cohomology, no Novikov specialization and no Euler multiplication, and proves nothing about the deformation reduction to index at most one or about the toric presentation there; the quartics enter as displayed polynomials. The symbolic derivation of the quartics from the presented ring, together with its cross-checks, is the registered evidence bundle.",
+      "statement_digest": "e21f4c04a7e6118cc71b2bde83aaa74eaef8764f18cf4ebb0b13d423e243593c",
+      "terminal_digest": "3554d64a4e2c480efc1035231a2addc4b9bdcec72630390d8fb3795adfd7cdd0"
+    },
+    {
+      "manuscript_label": "lem:ruled-degeneracy-trichotomy",
+      "coverage": "conditional_deduction",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.minimalRuledEven_degenerate_iff",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.minimalRuledOdd_degenerate_iff",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.minimalRuledEven_eulerBlocks_simple",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.minimalRuledOdd_eulerBlocks_simple",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.minimalRuledEven_degenerate_splitting",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.minimalRuledOdd_degenerate_splitting",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.minimalRuled_degenerate_rootMultiplicity_le_two",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.minimalRuled_degenerate_rootMultiplicity_eq_two",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.minimalRuled_rankTwoBlock_nilpotent_sq_eq_zero"
+      ],
+      "objects": "A four-by-four complex matrix standing for Euler multiplication, its characteristic polynomial, the maximal generalized eigenspaces of the associated endomorphism, and a two-by-two complex matrix standing for a rank-two spectral block.",
+      "hypotheses": "The characteristic polynomial of the matrix is the displayed even or odd quartic; both specialized values are nonzero; for the rank-two statement the block has trace twice and determinant the square of a single eigenvalue.",
+      "conclusion": "Lean proves that the discriminant vanishes exactly when the two values agree in the even case and exactly on the displayed quadratic locus in the odd case; that off those loci every maximal generalized eigenspace has dimension at most one; that on them the quartic is a squared linear factor times a quadratic with two roots distinct from the repeated one, so that the repeated root has multiplicity exactly two and no root has multiplicity three or more; and that the centred matrix of a rank-two block squares to zero.",
+      "cautions": "The passage from the multiplicity of an eigenvalue of Euler multiplication to the rank of a spectral block of the connection is the identification of the algebraic multiplicity with the dimension of the maximal generalized eigenspace, which Lean proves for the supplied matrix; that the supplied matrix is Euler multiplication of a Hirzebruch surface is not proved. The odd degeneracy locus is parametrized by writing the section value as sixteen times a scale parameter, which is no restriction over the complex numbers.",
+      "statement_digest": "f4d13f8fbd53bca3d6befaa9b1a7d4fee42fb5c6c87e1908a152b318bc52c9fe",
+      "terminal_digest": "8e0781965d536e4b049b8c905b217e75b9c1b9226d01822f8c5c7e2c684dde2b"
+    },
+    {
+      "manuscript_label": "lem:center-specialization-nondegenerate",
+      "coverage": "conditional_deduction",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.centerSpecialization_fibre_ne_shiftedSection",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.centerSpecialization_oddCombination_ne_zero",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.monomialSpecialization_oddCombination_ne_zero"
+      ],
+      "objects": "The algebraic core of a strictly Novikov-admissible specialization: an effective numerical monoid, a complete separated topological domain, the monomial image map, its length and valuation functions; and, for the third statement, a leading-term map together with a linearly independent family of monomials.",
+      "hypotheses": "The fibre class and the section class are nonzero, the shift is positive, and the two coefficients are units of the coefficient ring; for the third statement the leading term of the combination is the corresponding combination of two members of the family.",
+      "conclusion": "Lean derives from the valuation law that lengths are additive and multiples of a class have multiples of its length, that units and negatives leave a valuation unchanged, and hence that the specialized fibre value differs from the specialized shifted-section value and that no unit combination of the fibre value with the square of the shifted-section value vanishes. For a vanishing shift it proves instead that a combination of two members of a linearly independent family with coefficients two hundred fifty-six and twenty-seven cannot vanish, since distinct members are independent and the coefficients sum to a nonzero number.",
+      "cautions": "That the center specializations of the blowup comparison have this algebraic core, and that their associated graded is a monoid algebra whose monomials form a linearly independent family containing the leading term of every effective monomial, are manuscript statements about the geometry and are not formalized. The additivity of the leading-term map on two summands of equal valuation enters as a hypothesis.",
+      "statement_digest": "c480cbcf9f23cd6dd70361a719c114a2d31e255794de0413aa9a1a6f6f9cde9c",
+      "terminal_digest": "a5dbcf5274c559e01d536472312820b7cd4067946d2aa88e21a9ff062f8ac522"
+    },
+    {
+      "manuscript_label": "prop:minimal-ruled-specialized-vanishing",
+      "coverage": "conditional_deduction",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.minimalRuled_quadricSurface_sixthMultiplicity_eq_zero",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.minimalRuledEven_sixthMultiplicity_eq_zero",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.minimalRuledOdd_sixthMultiplicity_eq_zero"
+      ],
+      "objects": "Framed monodromy matrices with their primitive-sixth multiplicity, a four-by-four complex matrix standing for Euler multiplication on the even cohomology of the surface, and two two-by-two matrices standing for Euler multiplication on the two projective-line factors of the quadric surface.",
+      "hypotheses": "The characteristic polynomial of Euler multiplication is the displayed quartic, or, for the quadric surface, is the specialized quantum relation of a projective line on each factor; both specialized values are nonzero; the surface of positive index has nondegenerate discriminant; and the conclusion of the multiplicity-one Euler block lemma is supplied, in the tensor form for the quadric surface and in the direct form otherwise.",
+      "conclusion": "Lean proves that the Euler spectra are simple, applies the supplied implication to obtain a framed characteristic polynomial that is a power of the linear polynomial with root one, and concludes that the primitive-sixth multiplicity vanishes.",
+      "cautions": "No variety, product, quantum connection, Novikov specialization or Levelt--Turrittin decomposition is constructed. The Gromov--Witten product formula, the compatibility of the formal decomposition with tensor products, and the multiplicity-one Euler block lemma enter as hypotheses; the quadric statement assumes no relation between the two specialized values, which is what makes it cover the specializations identifying the two rulings.",
+      "statement_digest": "ae2276088eed9f00d9cd065b6017d70f4ae5e1612b3131496d03b788051cb308",
+      "terminal_digest": "685cbd1a87bda47c6bfef3f26e726467b359785a30da560666c5e87e53b7a8a1"
     }
   ],
   "machinery": [
