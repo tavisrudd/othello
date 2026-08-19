@@ -42,8 +42,8 @@ the cutting-room floor.
    packet adopts them as requirements.
 
 8. The poem carries three author amendments to the packet's text: line II is
-   **"beneath it, paired chords turn true"**, line III is **"through many masks,
-   the golden thread holds"**, and line IV is **"from bare, whispered words, a
+   **"beneath it, paired chords turn true"**, line III is **"through many veils,
+   the golden thread runs"**, and line IV is **"from bare, whispered words, a
    plane rises"**. Only lines I and V are packet-original. The plan's poem block
    is authoritative; do not restore the packet's wording for any line. Paper IV's
    coda prose must name its minimum words plainly, so the exact term stands

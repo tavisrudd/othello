@@ -116,7 +116,7 @@ small light Roman numerals in a subordinate leading column:
 ```text
 I    From deep holes, a form arises;
 II   beneath it, paired chords turn true;
-III  through many masks, the golden thread holds;
+III  through many veils, the golden thread runs;
 IV   from bare, whispered words, a plane rises;
 V    beneath one form, two shadows, a hidden twist between.
 ```
@@ -147,23 +147,27 @@ bring it into exact alignment, which is a closer image for Paper II than a
 bearing: what the first surviving odd tensor restores is the orientation of the
 recovered sheets, a determinate choice rather than a direction of travel.
 
-**Line III — settled.** "through many masks, the golden thread holds", replacing
-the packet's "through changing guises, the golden source persists". "Masks" is
-the better word for Paper III's content than "guises": its cubic has four exact
-operator descriptions — triangle holonomy, middle-exterior diagonal, commutator
-Pfaffian, oriented cross-golden determinant — so one object genuinely wears
-several faces. The substitution of "thread" for "source" removes the programme's
-own term from the line; the source-and-shadow spine survives in line V, where
-"one form" carries the source role against "two shadows".
+**Line III — settled.** "through many veils, the golden thread runs", replacing
+the packet's "through changing guises, the golden source persists". The line is
+built on one coherent image: a veil and a thread are both fabric, and a thread
+runs through veils. It also matches Paper III's own relation, which is transport
+— a chosen sign is carried *through* the conference, operator, and harmonic
+realizations, and Paper III's cubic has four exact operator descriptions
+(triangle holonomy, middle-exterior diagonal, commutator Pfaffian, oriented
+cross-golden determinant). A veil is seen through rather than worn, which is the
+right relation for a realization the source remains visible in. The substitution
+of "thread" for "source" removes the programme's own term from the line; the
+source-and-shadow spine survives in line V, where "one form" carries the source
+role against "two shadows".
 
 **Line IV — settled.** "from bare, whispered words, a plane rises", replacing the
 packet's "from bare words".
 
 **Shape.** With the three amendments the line lengths run roughly 8, 7, 9, 10,
-13 syllables, so the poem now builds to its longest line at Paper V rather than
-peaking in the middle. Lines II and III both close on a firm monosyllable.
-Preserve this when setting the five lines; do not let the typesetting wrap any
-line, which would destroy the shape.
+13 syllables, so the poem builds to its longest line at Paper V rather than
+peaking in the middle. Preserve this when setting the five lines; do not let the
+typesetting wrap any line, which would destroy the shape. The small Roman
+numerals required by the packet stay as a subordinate leading column.
 
 The line keeps the noun "words", which is the one word in it that preserves the
 coding-theory reading — a codeword is a word — and pairs "bare" with "whispered"
