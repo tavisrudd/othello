@@ -182,6 +182,11 @@ belongs in an unnumbered coda after the mathematical conclusion. Programme
 numbering may appear in that coda, its programme map, and repository-level
 metadata.
 
+In the body of a programme paper, name a companion by its own title at first
+mention and cite it thereafter, and refer to the current paper as "this paper".
+Do not use the programme's ordinal numbers as names in running text, tables, or
+bibliography entries.
+
 ## Theorem and proof architecture
 
 - Lead with the form of the result that carries the contribution—qualitative

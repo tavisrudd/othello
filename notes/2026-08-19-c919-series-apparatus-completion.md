@@ -211,6 +211,22 @@ and left alone by explicit instruction.
   title 34 pt below the other four. The whole title group is gone; all five
   first-word baselines now measure 124.95 pt. Paper IV returns to 16 pages.
 
+## Series numbers removed from the running text
+
+By later author instruction, a paper's main body no longer refers to itself or
+to its companions by series number. Each paper now names a companion by its own
+title at first mention and cites it thereafter, and refers to itself as "this
+paper". Paper V carried nearly all of these references, and its source-return
+table now keys its rows by citation rather than by Roman numeral. Paper I's
+bridge-repository link text lost its series number, and the two bibliography
+entries that described a companion as "Paper IV/V, companion manuscript" now
+read "companion preprint", the title already being part of the entry.
+
+The programme coda and its map are the exception: the poem, the map boxes, the
+caption, and the coda's placement prose keep the Roman numbering, which is the
+device the coda is built on and which the style-guide rule explicitly permits
+there.
+
 ## Later refinements
 
 Commit `5d54c316d` replaced the coda's `\Needspace` glue with an explicit page
