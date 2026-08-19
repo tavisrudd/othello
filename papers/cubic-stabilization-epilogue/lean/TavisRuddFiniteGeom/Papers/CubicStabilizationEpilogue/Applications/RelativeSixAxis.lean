@@ -2,6 +2,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPo
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisSourcePolarization
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisDiscriminantGroup
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisPrimaryDiscriminantSplitting
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisTwoPrimaryLatticeComparison
 
 /-!
 # The relative six-axis packet over its integral homology realization

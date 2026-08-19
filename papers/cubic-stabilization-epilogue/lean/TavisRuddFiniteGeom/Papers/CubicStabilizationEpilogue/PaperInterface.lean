@@ -356,6 +356,38 @@ theorem relativeSixAxis_primaryDiscriminantSplitting_maximalIsotropicKernels
     (Applications.relativeSixAxisPrimaryKernelSubgroup_isRelativeMaximalIsotropic realization).1,
     (Applications.relativeSixAxisPrimaryKernelSubgroup_isRelativeMaximalIsotropic realization).2⟩
 
+/-- The two-primary part of the source discriminant group is the kernel of the
+two-torsion reduction of the source polarization.  Two models of the
+two-primary discriminant occur in this development: the two-torsion part of the
+cokernel of the integral polarization, and the kernel of that polarization
+reduced modulo two, which is the model carrying the coefficient heart, the
+rank-eight tensor form, and the classification of stable maximal-isotropic
+subspaces.  The comparison between them is division free: the polarization has
+an integral cofactor `C` with `F C = C F = 6`, so the reduction modulo two of
+`C v` depends only on the class of `v`.  That map kills exactly the
+three-primary part, lands in the kernel of the reduced polarization, and is
+onto it, so it restricts to an isomorphism of abelian groups from the
+two-primary part of the discriminant group onto that kernel, and hence onto
+four copies of the rank-two two-torsion module in the normalized coefficient
+coordinates.  This is the lattice-level form of the manuscript's two-primary
+identification `D₂ ≃ H₂ ⊗ E[2]`; no elliptic two-torsion group scheme, Weil
+pairing, or geometric discriminant is constructed, and no compatibility with a
+pairing is asserted here. -/
+theorem relativeSixAxis_twoPrimaryDiscriminantLatticeModel :
+    LinearMap.ker GraphLattices.sixAxisSourceTwoPrimaryComparison =
+        GraphLattices.sixAxisSourceDiscriminantPrimaryPart 3 ∧
+      (∀ element : GraphLattices.sixAxisSourceDiscriminantGroup,
+          GraphLattices.sixAxisSourceTwoPrimaryComparison element ∈
+            GraphLattices.sixAxisSourceTwoPrimaryDiscriminant) ∧
+        Nonempty (GraphLattices.sixAxisSourceDiscriminantPrimaryPart 2 ≃+
+            GraphLattices.sixAxisSourceTwoPrimaryDiscriminant) ∧
+          Nonempty (GraphLattices.sixAxisSourceDiscriminantPrimaryPart 2 ≃+
+            (Fin 4 → Fin 2 → GraphLattices.F2)) :=
+  ⟨GraphLattices.sixAxisSourceTwoPrimaryComparison_ker,
+    GraphLattices.sixAxisSourceTwoPrimaryComparison_mem_kernel,
+    ⟨GraphLattices.sixAxisSourceTwoPrimaryLatticeEquiv⟩,
+    ⟨GraphLattices.sixAxisSourceTwoPrimaryLatticeCoordinates⟩⟩
+
 /-- The discriminant pairing of the six-axis source polarization on integral
 representatives, and its nondegeneracy.  On the classes of two integral
 vectors the pairing is the class modulo one of the rational number
