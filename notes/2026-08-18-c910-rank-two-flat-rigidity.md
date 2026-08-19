@@ -70,12 +70,15 @@ for the cubic residue with `ν = 2`, `A₀ = D₀`, `A₁ = E₀`.
 5. trace and determinant are unchanged by an infinitesimal conjugation, so every
    derivation annihilates the residue discriminant.
 
-Horizontality enters through a separate lemma: over a domain, in the adapted
-frame, the leading pairing coefficient has vanishing upper-left entry and equal
-off-diagonal entries, so nondegeneracy makes the off-diagonal entry nonzero, and
-the upper-left entry of the four-term relation reads `2·a·p = 0` for the
+Horizontality enters through a separate lemma.  In the adapted frame the leading
+pairing coefficient has vanishing upper-left entry and equal off-diagonal
+entries, so its determinant is the negative of the square of the off-diagonal
+entry; nondegeneracy — invertibility of that determinant, which is the right
+condition over a germ ring — therefore makes the off-diagonal entry invertible,
+and the upper-left entry of the four-term relation reads `2·a·p = 0` for the
 lower-left entry `a` of the regular coefficient.  Hence `a = 0`, which is
-exactly the input the modification needs.  The chain from horizontality and
+exactly the input the modification needs.  Only invertibility is used, so the
+lemma holds over any commutative coefficient ring.  The chain from horizontality and
 flatness to a derivation-annihilated residue discriminant is assembled in one
 statement.
 
@@ -83,14 +86,16 @@ Over a formal germ — multivariate formal power series in the germ's coordinate
 over a characteristic-zero field — flatness in every coordinate direction makes
 the residue discriminant a constant series, using the existing result that a
 series whose formal partial derivatives all vanish has no coefficient outside
-its constant term.
+its constant term.  Because the pairing lemma needs only invertibility, the germ
+statement is self-supporting: from an adapted frame whose leading operator has an
+invertible upper-right entry, a horizontal pairing with invertible leading
+determinant, and flatness in every coordinate direction, the residue
+discriminant is constant over the germ, with no nilpotent-line hypothesis
+assumed.  Two is invertible there because it is the image of an invertible
+scalar.
 
 ## What remains for this row
 
-* The pairing lemma is proved over a domain with a nonvanishing determinant.
-  Mathlib has no instance making multivariate formal power series over a field a
-  domain, so the germ-level statement takes the nilpotent-line property as a
-  hypothesis rather than deriving it from horizontality over the germ.
 * The geometric inputs are unchanged and remain hypotheses: that an atomic
   factor of the `A`-model `F`-bundle supplies a connection of this shape in an
   adapted frame, that the Poincaré pairing is the horizontal pairing of that

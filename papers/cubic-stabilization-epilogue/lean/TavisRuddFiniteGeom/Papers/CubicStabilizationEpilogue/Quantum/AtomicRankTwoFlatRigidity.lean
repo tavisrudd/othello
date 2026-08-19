@@ -57,6 +57,13 @@ open Matrix PowerSeries
 
 variable {B : Type*} [CommRing B]
 
+/-- A factor that is a unit can be cancelled from a vanishing product. -/
+theorem eq_zero_of_isUnit_mul {factor value : B} (unitProperty : IsUnit factor)
+    (vanishing : factor * value = 0) : value = 0 := by
+  rcases unitProperty.exists_left_inv with ⟨inverse, inverseProperty⟩
+  calc value = inverse * (factor * value) := by rw [← mul_assoc, inverseProperty, one_mul]
+    _ = 0 := by rw [vanishing, mul_zero]
+
 /-- The leading operator of a rank-two atomic factor in an adapted frame: the
 matrix whose only nonzero entry is the upper-right one. -/
 def adaptedLeadingOperator (unitValue : B) : Matrix (Fin 2) (Fin 2) B := !![0, unitValue; 0, 0]
@@ -294,16 +301,19 @@ theorem residueDiscriminant_modifiedResidue_map_eq_zero_of_isFlatPair {derivatio
 direction to preserve the nilpotent line.  In the adapted frame the leading
 coefficient of the pairing is forced to have vanishing upper-left entry and equal
 off-diagonal entries, so its determinant is the negative of the square of the
-off-diagonal entry; nondegeneracy therefore makes that entry nonzero, and the
-upper-left entry of the constant coefficient of horizontality reads
-`2 * a * p = 0` for the lower-left entry `a` of the regular coefficient.  This is
-the manuscript's statement that the regular coefficient carries the nilpotent
-line into itself, in the frame where that line is the first coordinate line. -/
-theorem nilpotentLine_of_isHorizontalPairing [IsDomain B]
+off-diagonal entry; an invertible determinant therefore makes that entry
+invertible, and the upper-left entry of the constant coefficient of horizontality
+reads `2 * a * p = 0` for the lower-left entry `a` of the regular coefficient.
+This is the manuscript's statement that the regular coefficient carries the
+nilpotent line into itself, in the frame where that line is the first coordinate
+line.  Nondegeneracy of the pairing is invertibility of the determinant, which
+over a germ ring is the condition the manuscript uses; no assumption is made on
+the coefficient ring beyond commutativity. -/
+theorem nilpotentLine_of_isHorizontalPairing
     {loop pairing : PowerSeries (Matrix (Fin 2) (Fin 2) B)} {unitValue : B}
-    (twoNonzero : (2 : B) ≠ 0) (unitNonzero : unitValue ≠ 0)
+    (twoUnit : IsUnit (2 : B)) (unitProperty : IsUnit unitValue)
     (adapted : coeff 0 loop = adaptedLeadingOperator unitValue)
-    (nondegenerate : (coeff 0 pairing).det ≠ 0)
+    (nondegenerate : IsUnit ((coeff 0 pairing).det))
     (horizontal : IsHorizontalPairing loop pairing) :
     (coeff 1 loop) 1 0 = 0 := by
   have upperLeftEntry : adaptedLeadingOperator unitValue 0 0 = 0 := by
@@ -323,9 +333,7 @@ theorem nilpotentLine_of_isHorizontalPairing [IsDomain B]
         Matrix.transpose_apply, upperLeftEntry, upperRightEntry, lowerLeftEntry,
         lowerRightEntry] at entry
       linear_combination -entry
-    rcases mul_eq_zero.mp equation with value | value
-    · exact absurd value unitNonzero
-    · exact value
+    exact eq_zero_of_isUnit_mul unitProperty equation
   have offDiagonalPairing : (coeff 0 pairing) 0 1 = (coeff 0 pairing) 1 0 := by
     have entry := congrFun (congrFun selfAdjoint 1) 1
     have equation : unitValue * ((coeff 0 pairing) 0 1 - (coeff 0 pairing) 1 0) = 0 := by
@@ -333,14 +341,15 @@ theorem nilpotentLine_of_isHorizontalPairing [IsDomain B]
         Matrix.transpose_apply, upperLeftEntry, upperRightEntry, lowerLeftEntry,
         lowerRightEntry] at entry
       linear_combination entry
-    rcases mul_eq_zero.mp equation with value | value
-    · exact absurd value unitNonzero
-    · linear_combination value
-  have lowerLeftPairing : (coeff 0 pairing) 1 0 ≠ 0 := by
-    intro vanishing
-    apply nondegenerate
-    rw [Matrix.det_fin_two, upperLeftPairing, vanishing]
-    ring
+    have difference := eq_zero_of_isUnit_mul unitProperty equation
+    linear_combination difference
+  have lowerLeftPairing : IsUnit ((coeff 0 pairing) 1 0) := by
+    have determinant : (coeff 0 pairing).det
+        = -((coeff 0 pairing) 1 0 * (coeff 0 pairing) 1 0) := by
+      rw [Matrix.det_fin_two, upperLeftPairing, offDiagonalPairing]
+      ring
+    rw [determinant, IsUnit.neg_iff] at nondegenerate
+    exact isUnit_of_mul_isUnit_left nondegenerate
   have constantCoefficient := regularCoefficient_identity_of_isHorizontalPairing horizontal
   rw [adapted] at constantCoefficient
   have entry := congrFun (congrFun constantCoefficient 0) 0
@@ -349,11 +358,9 @@ theorem nilpotentLine_of_isHorizontalPairing [IsDomain B]
       Matrix.zero_apply, Matrix.transpose_apply, upperLeftEntry, upperRightEntry,
       lowerLeftEntry, lowerRightEntry, upperLeftPairing, offDiagonalPairing] at entry
     linear_combination entry
-  rcases mul_eq_zero.mp product with two | factor
-  · exact absurd two twoNonzero
-  · rcases mul_eq_zero.mp factor with value | pairingValue
-    · exact value
-    · exact absurd pairingValue lowerLeftPairing
+  have factored := eq_zero_of_isUnit_mul twoUnit product
+  refine eq_zero_of_isUnit_mul lowerLeftPairing ?_
+  linear_combination factored
 
 /-- The rank-two rigidity chain in one statement.  For a centered rank-two
 factor in an adapted frame over a domain, with a horizontal nondegenerate
@@ -362,26 +369,36 @@ coefficient ring annihilates the residue discriminant of the canonical
 elementary modification.  Horizontality supplies the property of the regular
 coefficient that makes the modification regular, and flatness supplies the
 vanishing of the residual base pole and the Lax equation for the residue. -/
-theorem residueDiscriminant_modifiedResidue_map_eq_zero_of_horizontal_flat [IsDomain B]
+theorem residueDiscriminant_modifiedResidue_map_eq_zero_of_horizontal_flat
     {derivation : B → B}
     (additive : ∀ x y, derivation (x + y) = derivation x + derivation y)
     (leibniz : ∀ x y, derivation (x * y) = derivation x * y + x * derivation y)
     {loop base pairing : PowerSeries (Matrix (Fin 2) (Fin 2) B)} {unitValue : B}
     (unitProperty : IsUnit unitValue) (twoUnit : IsUnit (2 : B))
     (adapted : coeff 0 loop = adaptedLeadingOperator unitValue)
-    (nondegenerate : (coeff 0 pairing).det ≠ 0)
+    (nondegenerate : IsUnit ((coeff 0 pairing).det))
     (horizontal : IsHorizontalPairing loop pairing)
     (flat : IsFlatPair derivation loop base) :
     derivation (residueDiscriminant (modifiedResidue loop)) = 0 :=
   residueDiscriminant_modifiedResidue_map_eq_zero_of_isFlatPair additive leibniz unitProperty
     twoUnit adapted
-    (nilpotentLine_of_isHorizontalPairing twoUnit.ne_zero unitProperty.ne_zero adapted
-      nondegenerate horizontal)
+    (nilpotentLine_of_isHorizontalPairing twoUnit unitProperty adapted nondegenerate horizontal)
     flat
 
 section FormalGerm
 
 variable {σ : Type*} [DecidableEq σ] {K : Type*} [Field K] [CharZero K]
+
+omit [DecidableEq σ] in
+/-- Two is invertible in the germ ring: it is the image of an invertible scalar
+under the inclusion of constants. -/
+theorem isUnit_two_of_formalGerm : IsUnit (2 : MvPowerSeries σ K) := by
+  have scalar : IsUnit ((MvPowerSeries.C : K →+* MvPowerSeries σ K) 2) :=
+    (isUnit_iff_ne_zero.mpr (two_ne_zero : (2 : K) ≠ 0)).map _
+  have castTwo : (MvPowerSeries.C : K →+* MvPowerSeries σ K) 2 = 2 := by
+    rw [show (2 : K) = 1 + 1 from by norm_num, map_add, map_one]
+    norm_num
+  rwa [castTwo] at scalar
 
 /-- Rank-two rigidity over a formal germ.  Model the base germ by the ring of
 multivariate formal power series in the germ's coordinates over a
@@ -407,18 +424,38 @@ theorem residueDiscriminant_modifiedResidue_eq_constant_of_isFlatPair
     residueDiscriminant (modifiedResidue loop)
       = MvPowerSeries.C
           (MvPowerSeries.constantCoeff (residueDiscriminant (modifiedResidue loop))) := by
-  have twoUnit : IsUnit (2 : MvPowerSeries σ K) := by
-    have scalar : IsUnit ((MvPowerSeries.C : K →+* MvPowerSeries σ K) 2) :=
-      (isUnit_iff_ne_zero.mpr (two_ne_zero : (2 : K) ≠ 0)).map _
-    have castTwo : (MvPowerSeries.C : K →+* MvPowerSeries σ K) 2 = 2 := by
-      rw [show (2 : K) = 1 + 1 from by norm_num, map_add, map_one]
-      norm_num
-    rwa [castTwo] at scalar
+  have twoUnit : IsUnit (2 : MvPowerSeries σ K) := isUnit_two_of_formalGerm
   refine residueDiscriminant_eq_constant_of_commutatorDerivative _
     (fun direction => coeff 1 (modifiedBase (baseDirection direction))) fun direction => ?_
   exact modifiedResidue_lax_of_isFlatPair (formalPartialDerivative_add direction)
     (formalPartialDerivative_mul direction) unitProperty twoUnit adapted nilpotentLine
     (flat direction)
+
+/-- Rank-two rigidity over a formal germ, with the nilpotent-line property
+supplied by the pairing rather than assumed.  For a centered rank-two factor
+over the germ ring, in an adapted frame whose leading operator has an invertible
+upper-right entry, with a horizontal pairing whose leading coefficient has
+invertible determinant and a connection flat in every coordinate direction, the
+residue discriminant of the canonical elementary modification is a constant
+series.  This is the manuscript's rank-two rigidity statement over the germ, with
+only the identification of the germ and the geometric origin of the connection
+and the pairing left as inputs. -/
+theorem residueDiscriminant_modifiedResidue_eq_constant_of_horizontal_flat
+    {loop pairing : PowerSeries (Matrix (Fin 2) (Fin 2) (MvPowerSeries σ K))}
+    {baseDirection : σ → PowerSeries (Matrix (Fin 2) (Fin 2) (MvPowerSeries σ K))}
+    {unitValue : MvPowerSeries σ K} (unitProperty : IsUnit unitValue)
+    (adapted : coeff 0 loop = adaptedLeadingOperator unitValue)
+    (nondegenerate : IsUnit ((coeff 0 pairing).det))
+    (horizontal : IsHorizontalPairing loop pairing)
+    (flat : ∀ direction,
+      IsFlatPair (formalPartialDerivative direction) loop (baseDirection direction)) :
+    residueDiscriminant (modifiedResidue loop)
+      = MvPowerSeries.C
+          (MvPowerSeries.constantCoeff (residueDiscriminant (modifiedResidue loop))) :=
+  residueDiscriminant_modifiedResidue_eq_constant_of_isFlatPair unitProperty adapted
+    (nilpotentLine_of_isHorizontalPairing isUnit_two_of_formalGerm unitProperty adapted
+      nondegenerate horizontal)
+    flat
 
 end FormalGerm
 
