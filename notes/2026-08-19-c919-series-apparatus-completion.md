@@ -116,9 +116,12 @@ independence sentence use the plan's exact wording.
   inside the text block, "deep-hole conference cubic" hyphenated as
   "con-ference"; each upper label now breaks explicitly after its first word
   group.
-- Each coda is preceded by `\Needspace{34\baselineskip}` so the heading, poem,
-  and map never split across a page turn. Without it, Paper IV stranded the
-  poem at the foot of one page and pushed the map to the next. This is the
+- Each coda begins on its own page. The first attempt used
+  `\Needspace{34\baselineskip}`, which kept the heading, poem, and map together
+  but left three papers starting the coda mid-page and two with a half-blank
+  page before it. A `\clearpage` before the heading makes the break uniform and
+  deliberate in all five, and a second `\clearpage` before `\appendix` in
+  Papers II and III keeps appendix front matter off the coda page. This is the
   glue the plan asked to be retuned; the interludes' own `\Needspace` lines
   were removed with them.
 - The coda is an unnumbered `\section*`, so it produces no PDF bookmark and no
@@ -134,7 +137,7 @@ independence sentence use the plan's exact wording.
   task with the same "the theorem-like statements do not match the published
   claim map" error, which is C855's open remediation, not a C919 regression.
 - **Builds.** All five rebuild warning-free through their own gates: Paper I 29
-  pages (companion 14), Paper II 46, Paper III 35, Paper IV 17, Paper V 22. The
+  pages (companion 14), Paper II 47, Paper III 35, Paper IV 17, Paper V 22. The
   page-count constants in the manuscript checkers of Papers II, III, and IV
   were updated to match, and every tracked PDF was refreshed through the
   checker's `--update` mode rather than by hand.
@@ -169,7 +172,15 @@ first of the two decisions C918 left open.
 ## Rebuilt PDFs for review
 
 - `papers/clebsch-rigidity/clebsch_rigidity.pdf` — coda on page 27 of 29.
-- `papers/clebsch-factorization/clebsch_factorization.pdf` — coda on page 26 of 46.
+- `papers/clebsch-factorization/clebsch_factorization.pdf` — coda on page 27 of 47.
 - `papers/clebsch-passages/clebsch_passages.pdf` — coda on page 30 of 35.
 - `papers/q13-passant-code/passant_code_q13.pdf` — coda on page 16 of 17.
 - `papers/chordal-conference-reconstruction/chordal_conference_reconstruction.pdf` — coda on page 21 of 22.
+
+## Later refinements
+
+Commit `5d54c316d` replaced the coda's `\Needspace` glue with an explicit page
+break in all five papers and started the appendices of Papers II and III on the
+page after the coda. Paper II grew from 46 to 47 pages; the other four kept
+their page counts. All five standalone repositories were re-synced from
+`92486f293` and verified against their export manifests.
