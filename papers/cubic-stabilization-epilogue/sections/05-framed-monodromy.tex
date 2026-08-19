@@ -814,7 +814,8 @@ variable, and its monomials form a \(\C\)-basis.  Each
   hirzebruchOdd_eulerSpectrum_discriminant,%
   hirzebruchEven_eulerSpectrum_splitting}%
 \imports{Batyrev:fano-toric-presentation, Givental:toric-mirror-theorem,%
-  McDuffSalamon:deformation-invariance, BehrendProduct:small-product-formula}%
+  McDuffSalamon:deformation-invariance, BehrendProduct:small-product-formula,%
+  Cotti:hirzebruch-quantum-presentations}%
 \evidence{hirzebruch-euler-spectrum}%
 Let \(T=F_a=\PP_{\PP^1}(\OO\oplus\OO(a))\) with \(a\ge0\), let \(f\) and \(s\) be
 the class of a fibre and the class of a section of self-intersection \(-a\) in
@@ -863,8 +864,7 @@ Write \(F\) and \(S\) for the divisor classes corresponding to \(f\) and
  \end{cases}
 \]
 
-\emph{A single deformation to \(a\le1\).}  Let \(a\ge2\).  One family is used
-rather than \(k\) successive ones, which keeps the transport explicit.  Since
+\emph{A single deformation to \(a\le1\).}  Let \(a\ge2\).  Since
 \(k\ge1\) and
 \(a-k\ge1\), a general pair of sections of \(\OO(k)\) and \(\OO(a-k)\) has no
 common zero, so it defines an injection \(\OO\to\OO(k)\oplus\OO(a-k)\) with
@@ -876,9 +876,8 @@ extension along \(t\mapsto t\varepsilon\).  These form a vector bundle on
 \(\PP^1\times\A^1\).  Scaling a nonzero extension class by a unit leaves the
 middle term unchanged, so \(E_t\cong E_1\) for every \(t\ne0\).  The
 extension is nonsplit, since \(\OO(k)\oplus\OO(a-k)\) is not
-\(\OO\oplus\OO(a)\); and its
-projectivization is a smooth projective family
-with
+\(\OO\oplus\OO(a)\), so \(\varepsilon\ne0\).  The projectivization of the
+family is smooth and projective, with
 \[
  \PP(E_0)=\PP(\OO\oplus\OO(a))=F_a,
  \qquad
@@ -956,6 +955,15 @@ resulting surjection from the presented algebra, which is free of rank four,
 onto the specialized quantum cohomology, also free of rank four, is an
 isomorphism.
 
+The two transported presentations are those of
+\cite[Theorems~9.3.1 and~9.3.3]{Cotti}, obtained there by the same
+identification of the genus-zero theory of \(F_a\) with that of
+\(F_{a\bmod2}\) and, in that paper's generators, by a shift of the section
+class by a multiple of the fibre class.  What the quartic consumes, however, is
+the presentation of the \emph{specialized} ring over \(A\), and it is the
+truncation above that makes the transported product finite and identifies the
+presented algebra with that ring.
+
 \emph{The quartic.}  Specializing along \(\chi\) and substituting
 \(Q^f\mapsto u\) and \(Q^{s+kf}\mapsto w\) in the transported presentation,
 the specialized small quantum cohomology of \(F_a\) is
@@ -1000,7 +1008,8 @@ two simple roots, so Euler multiplication has one spectral block of rank two,
 whose nilpotent part squares to zero, and two blocks of rank one.
 \end{enumerate}
 No other block shape occurs.  By
-Lemma~\ref{lem:center-specialization-nondegenerate}, case~(b) does not arise for
+Lemmas~\ref{lem:center-maps-monomial}
+and~\ref{lem:center-specialization-nondegenerate}, case~(b) does not arise for
 a center specialization when \(a\ge1\); for \(F_0\) it can, which is why that
 surface is treated by the product formula in
 Proposition~\ref{prop:hirzebruch-specialized-vanishing}.

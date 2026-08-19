@@ -474,6 +474,33 @@ The reviewer-facing terminals currently verify:
 - the conditional common-field endpoint of divisor-tagging vanishing from
   supplied final intrinsic, tagged, and specialized characteristic-polynomial
   equalities, without formal coefficient embeddings or a gauge witness;
+- the separation of the rank-four Euler spectrum of a Hirzebruch surface by the
+  discriminant of its characteristic polynomial: for a monic complex quartic,
+  that the discriminant is the squared product of the six pairwise root
+  differences and that a nonzero discriminant makes every maximal generalized
+  eigenspace a line; the evaluation of the discriminant on the two displayed
+  quartics; the two degeneracy criteria for nonzero specialized values, the
+  surjectivity of the parametrization of the odd locus, and on each locus a
+  factorization exhibiting root multiplicities two, one and one, carried to
+  generalized eigenspaces of dimensions two, one and one and to a rank-two block
+  whose nilpotent part squares to zero.  No variety, quantum cohomology, Novikov
+  specialization or Euler multiplication is constructed; the quartics enter as
+  displayed polynomials, and neither the deformation reduction nor the toric
+  presentation is formalized;
+- the algebraic core of strict Novikov admissibility used to exclude those
+  degeneracy loci: that lengths are additive and scale, that units and negation
+  leave a valuation unchanged, hence the two valuation exclusions for a positive
+  shift, and separately that a combination of two members of a linearly
+  independent family with coefficients `256` and `27` cannot vanish, which is
+  what a graded-monomial specialization supplies at equal valuations.  That the
+  center specializations are graded-monomial is argued in the manuscript only:
+  the package builds no associated graded ring, so `lem:center-maps-monomial`
+  is recorded as absent from Lean;
+- the assembled specialized vanishing statements for the rational geometrically
+  ruled centers, the quadric surface through the product route and the two
+  parities through the discriminant route, with the Gromov--Witten product
+  formula, the tensor compatibility of the formal decomposition, and the
+  conclusion of the multiplicity-one Euler block lemma as typed premises;
 - typed blowup/blowdown telescoping in dimension four and the conditional cubic
   and genus-eight irrationality deductions;
 - the two low-dimensional exclusions of the atomic route in their refined form,

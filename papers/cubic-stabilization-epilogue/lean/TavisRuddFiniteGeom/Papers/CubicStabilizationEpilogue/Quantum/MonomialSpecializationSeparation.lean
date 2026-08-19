@@ -245,11 +245,12 @@ theorem monomialCombination_ne_zero {monomial : Index → Graded}
       coefficientFirst coefficientSecond vanishing
     exact firstNonzero firstZero
 
-/-- The odd degeneracy locus is not met by a monomial specialization, whatever
-the shift.  The premise is that the leading term of the combination is the
+/-- Under the displayed premise the odd degeneracy locus is not met by a
+graded-monomial specialization; the statement mentions no shift and no curve
+class.  The premise is that the leading term of the combination is the
 corresponding combination of two members of a linearly independent family of
-monomials, which is what a specialization with monomial associated graded image
-supplies once the two terms have equal valuation. -/
+monomials, which is what a graded-monomial specialization supplies once the two
+terms have equal valuation. -/
 theorem oddCombination_ne_zero_of_monomialLeadingTerms {Target : Type*} [CommRing Target]
     (leadingTerm : Target → Graded) (leadingTerm_zero : leadingTerm 0 = 0)
     {monomial : Index → Graded} (independent : LinearIndependent ℂ monomial)

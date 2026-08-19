@@ -66,6 +66,7 @@ digraph manuscript {
   "Cai:curve-calculation" [shape=note, fillcolor="#eeeeee"];
   "Cai:small-even-connection" [shape=note, fillcolor="#eeeeee"];
   "Conrad:lem-2.1.4" [shape=note, fillcolor="#eeeeee"];
+  "Cotti:hirzebruch-quantum-presentations" [shape=note, fillcolor="#eeeeee"];
   "DavidHertling:euler-witt-identities" [shape=note, fillcolor="#eeeeee"];
   "Givental:toric-mirror-theorem" [shape=note, fillcolor="#eeeeee"];
   "KKPYY:amodel-connection" [shape=note, fillcolor="#eeeeee"];
@@ -87,6 +88,7 @@ digraph manuscript {
   "Cai:curve-calculation" -> "prop:no-curve" [style=dotted];
   "Cai:small-even-connection" -> "prop:cubic-block-data" [style=dotted];
   "Conrad:lem-2.1.4" -> "lem:crossing" [style=dotted];
+  "Cotti:hirzebruch-quantum-presentations" -> "lem:hirzebruch-euler-spectrum" [style=dotted];
   "DavidHertling:euler-witt-identities" -> "lem:disc" [style=dotted];
   "Givental:toric-mirror-theorem" -> "lem:hirzebruch-euler-spectrum" [style=dotted];
   "KKPYY:amodel-connection" -> "lem:euler-sign" [style=dotted];

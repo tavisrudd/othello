@@ -3185,8 +3185,17 @@
       "last": 921,
       "purpose": "decide whether the four-dimensional odd-degree factor of the A5-pencil intermediate Jacobian is a genus-four curve Jacobian",
       "sequence": 354
+    },
+    {
+      "count": 1,
+      "first": 922,
+      "kind": "reservation",
+      "lane": "cubic-threefolds",
+      "last": 922,
+      "purpose": "repair the C920 audit findings: Cotti citation, stale claim-map scope, ledger, prose",
+      "sequence": 355
     }
   ],
-  "next_id": 922,
+  "next_id": 923,
   "schema": "codex-task-id-allocations-v1"
 }

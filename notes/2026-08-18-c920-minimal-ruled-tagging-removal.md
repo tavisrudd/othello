@@ -7,6 +7,17 @@
 `2c030a8fc`, `b9ba88d26`, `a74cf275c`, `f06c3da38`.
 **Card:** `cubic-threefolds-tasks/c920-minimal-ruled-tagging-removal.md`.
 
+**Corrected by C922 (2026-08-19), see `2026-08-19-c920-tex-edit-audit.md`.** Two
+statements below do not survive audit. The two quantum presentations of the
+Hirzebruch surfaces, and the transport that produces them, are published as
+Cotti, *Cyclic stratum of Frobenius manifolds*, Mem. Eur. Math. Soc. 2 (2022),
+Chapter 9, Theorems 9.3.1 and 9.3.3, by the same route; no literature search was
+run here, and the manuscript now cites them. Consequently the mystery-ledger
+item claiming that this pass settled the failure of the toric quantum
+Stanley--Reisner presentation for index at least two records a rediscovery, not a
+new result. Three referee items reported here as applied were not; C922 applied
+them.
+
 Hypothesis 5.7T, the divisor-tagging specialization invariance of the epilogue,
 previously carried two of the center classes that weak factorization produces in
 dimension four: the rational geometrically ruled surfaces and the nonminimal
