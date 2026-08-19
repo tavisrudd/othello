@@ -96,8 +96,8 @@ The same holds of the imported-source annotations: they are recorded for the
 atomic route of Section 4, so a statement elsewhere that carries none has none
 recorded rather than none used.
 
-Checked coverage snapshot: 55 claims; 5 absent; 25 fragmentary; 24 conditional;
-1 complete; 260 reviewer terminals, of which 46 are machinery serving no current
+Checked coverage snapshot: 56 claims; 6 absent; 25 fragmentary; 24 conditional;
+1 complete; 263 reviewer terminals, of which 46 are machinery serving no current
 manuscript claim.
 
 The Lean modules and axiom audit can be built with the pinned package command

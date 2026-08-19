@@ -12,8 +12,8 @@ characteristic polynomial is the monic quartic
   `X ^ 4 + l₃ X ^ 3 + l₂ X ^ 2 + l₁ X + l₀`.
 
 This module proves that a nonvanishing discriminant of that quartic forces every
-maximal generalized eigenspace of `M` to have dimension at most one, so that the
-spectral decomposition of `M` consists of four blocks of rank one.
+maximal generalized eigenspace of `M` to be at most one-dimensional.  The count
+of four distinct eigenvalues is not formalized.
 
 The route is the classical one.  Over the complex numbers the quartic splits, so
 it is the product of four monic linear factors; comparing coefficients writes
@@ -25,16 +25,17 @@ multiset of roots has no repetition and every root multiplicity is at most one.
 The dimension of a maximal generalized eigenspace is the multiplicity of the
 eigenvalue in the characteristic polynomial, which gives the statement about `M`.
 
-The complementary bound is proved as well: whatever the discriminant, a root of
-a quartic that is not a fourfold root of a perfect square has multiplicity at
-most three; the statement recorded here is the sharp one needed downstream,
-namely that a quartic with exactly one repeated root has no root of multiplicity
-three or more.  It is stated for a quartic presented as a squared linear factor
-times a quadratic with distinct roots, which is the shape the degenerate
-specializations of a minimal rational ruled surface produce.
+The module also proves a bound valid at a degenerate quartic: if the quartic is
+`(X - r) ^ 2 (X - c) (X - d)` with `c ≠ r` and `d ≠ r` — no relation between `c`
+and `d` is assumed — then no root has multiplicity three or more, and `r` has
+multiplicity exactly two.  That is the shape a degenerate specialization of a
+Hirzebruch surface produces.
 
 Lean constructs no quantum connection and no Euler multiplication here; `M` is
 an arbitrary complex matrix and its characteristic polynomial is a hypothesis.
+The module sits in the `Quantum` namespace, which collects the linear-algebraic
+facts the manuscript's quantum-connection arguments consume; none of them
+mentions a connection.
 -/
 
 namespace TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue
@@ -43,8 +44,8 @@ namespace Quantum
 
 open Polynomial
 
-/-- The monic quartic with constant coefficient `l₀` and leading coefficients
-`l₁, l₂, l₃` in ascending degree. -/
+/-- The monic quartic `X ^ 4 + l₃ X ^ 3 + l₂ X ^ 2 + l₁ X + l₀`, with
+coefficients listed in ascending degree. -/
 noncomputable def monicQuartic (l₀ l₁ l₂ l₃ : ℂ) : Polynomial ℂ :=
   X ^ 4 + C l₃ * X ^ 3 + C l₂ * X ^ 2 + C l₁ * X + C l₀
 
@@ -105,7 +106,9 @@ theorem prod_four_linear_eq_monicQuartic (r₀ r₁ r₂ r₃ : ℂ) :
   ring
 
 /-- The discriminant of a monic complex quartic is the squared product of the
-pairwise differences of its four roots. -/
+pairwise differences of its four roots.  The statement also exhibits the quartic
+as the product of the four corresponding linear factors and identifies its root
+multiset with `{r₀, r₁, r₂, r₃}`; both are consumed downstream. -/
 theorem monicQuartic_discriminant_eq_squared_root_differences (l₀ l₁ l₂ l₃ : ℂ) :
     ∃ r₀ r₁ r₂ r₃ : ℂ,
       monicQuartic l₀ l₁ l₂ l₃ = (X - C r₀) * (X - C r₁) * (X - C r₂) * (X - C r₃) ∧
@@ -160,10 +163,11 @@ theorem finrank_maxGenEigenspace_le_one_of_quarticDiscriminant_ne_zero
   rw [LinearMap.finrank_maxGenEigenspace_eq, Matrix.charpoly_toLin', characteristic]
   exact monicQuartic_rootMultiplicity_le_one l₀ l₁ l₂ l₃ nondegenerate value
 
-/-- A quartic presented as a squared linear factor times a quadratic whose roots
-differ from the repeated one has no root of multiplicity three or more.  Applied
-to a degenerate specialization of a minimal rational ruled surface, this excludes
-every spectral block of rank three or four. -/
+/-- A quartic of the form `(X - r) ^ 2 (X - c) (X - d)` with `c ≠ r` and `d ≠ r`
+has every root multiplicity at most two.  No relation between `c` and `d` is
+assumed.  Instantiating this at a degenerate Euler quartic requires the
+distinctness hypotheses separately; that is done in the module on the Euler
+spectrum of a Hirzebruch surface. -/
 theorem rootMultiplicity_le_two_of_squared_linear_mul_quadratic
     {repeated first second : ℂ} (firstNe : first ≠ repeated) (secondNe : second ≠ repeated)
     (value : ℂ) :
@@ -204,9 +208,10 @@ theorem rootMultiplicity_le_two_of_squared_linear_mul_quadratic
         exact atRepeated)
     omega
 
-/-- The repeated factor of such a quartic contributes a root of multiplicity
-exactly two: the degenerate specialization has one spectral block of rank two,
-and its remaining two blocks have rank one. -/
+/-- The repeated factor of such a quartic contributes root multiplicity exactly
+two.  Nothing about eigenspace dimensions is asserted here: the statement is
+about the polynomial, and the two remaining factors are not assumed distinct from
+each other. -/
 theorem rootMultiplicity_eq_two_of_squared_linear_mul_quadratic
     {repeated first second : ℂ} (firstNe : first ≠ repeated) (secondNe : second ≠ repeated) :
     (((X - C repeated) ^ 2) * ((X - C first) * (X - C second))).rootMultiplicity repeated = 2 := by

@@ -197,7 +197,7 @@
         {
           "aspect": "hypothesis",
           "requirement": "The presentation is asserted for a smooth toric manifold with ample anticanonical class; it is not asserted for a general smooth projective toric variety, where the ring of the primitive relations can even have the wrong rank.",
-          "matched": "It is applied only to the Hirzebruch surface of index one, which is a del Pezzo surface, and to the quadric surface, for which the product formula is used instead. Every larger index is reduced to those two by deformation, not by the toric presentation."
+          "matched": "It is applied only to the Hirzebruch surface of index one, which is Fano, and the same two relations are read off directly from the genus-zero invariants of that surface, so the import corroborates a computation rather than carrying it.  The quadric surface is not covered by this import; it is handled by the Gromov--Witten product formula.  Every larger index is reduced to those two by deformation, not by the toric presentation."
         },
         {
           "aspect": "normalization",
@@ -214,7 +214,7 @@
         {
           "aspect": "hypothesis",
           "requirement": "The mirror theorem identifies the small J-function with the hypergeometric series without a mirror transformation only when the anticanonical class is nef and the degree-two part of the map is trivial; outside that range a mirror map intervenes.",
-          "matched": "It is used only for the del Pezzo surface of degree eight, where the anticanonical class is ample; the surfaces of higher index are reached by deformation invariance of genus-zero invariants, which does not invoke the mirror theorem."
+          "matched": "It is used only for the Hirzebruch surface of index one, whose anticanonical class is ample; the surfaces of higher index are reached by deformation invariance of genus-zero invariants, which does not invoke the mirror theorem."
         },
         {
           "aspect": "coefficients",
@@ -226,17 +226,22 @@
     "McDuffSalamon:deformation-invariance": {
       "citation": "McDuffSalamon",
       "pinpoint": "Chapter 7, invariance of the genus-zero Gromov--Witten invariants under deformation of the symplectic form",
-      "used": "That the genus-zero Gromov--Witten invariants of the Hirzebruch surfaces of indices differing by two agree under the parallel transport of the curve-class lattice along a smooth projective family joining them.",
+      "used": "That the genus-zero Gromov--Witten invariants of a Hirzebruch surface and of the Hirzebruch surface obtained from it by subtracting twice the integer part of half its index agree under the parallel transport of the curve-class lattice along a smooth projective family joining them.",
       "conventions": [
         {
           "aspect": "framing",
           "requirement": "Invariance is invariance of the invariants as functions on the lattice of curve classes carried along by parallel transport, not of the invariants indexed by a fixed geometric description of a class.",
-          "matched": "The transport is computed explicitly: it fixes the fibre class and sends the negative-section class of one surface to the negative-section class of the other minus a fibre, which is the unique identification preserving the intersection form and the first Chern number."
+          "matched": "The transport is computed explicitly: it fixes the fibre class, and pairing with the fibre class together with the self-intersection determines it on the section class, sending it to the negative-section class of the other surface minus the shift times the fibre."
         },
         {
           "aspect": "domain",
           "requirement": "The two fibres must lie in one connected family of symplectic manifolds.",
-          "matched": "The family is the projectivization of the universal extension of the two line bundles over the space of extension classes, which is a smooth projective family with a relatively ample class, and its zero fibre and general fibre are the two surfaces."
+          "matched": "The family is the projectivization of the extensions with class a multiple of one fixed extension class over the affine line, chosen so that the nonzero fibres are the split bundle of the target surface; it is a smooth projective family with a relatively ample class, and its zero fibre and every nonzero fibre are the two surfaces."
+        },
+        {
+          "aspect": "hypothesis",
+          "requirement": "The genus-zero invariants are constructed there for semipositive symplectic manifolds, and the family must be symplectic rather than merely algebraic.",
+          "matched": "A smooth projective family carries a smooth family of Kaehler forms, and every symplectic four-manifold is semipositive, so both conditions hold for a family of surfaces."
         }
       ]
     },
@@ -253,7 +258,7 @@
         {
           "aspect": "framing",
           "requirement": "The formula is an identity of quantum products; the passage to formal decompositions of the associated connections is a separate step.",
-          "matched": "That passage is stated as the premise consumed by the formal statement, namely that the framed operator of the product is the tensor product of the framed operators of the factors."
+          "matched": "The manuscript uses the product formula only for the quantum products.  Compatibility of the Levelt--Turrittin decomposition with tensor products is invoked separately, in the same form as in the proof of the product-with-projective-space formula, and is stated as the premise consumed by the formal statement."
         }
       ]
     }

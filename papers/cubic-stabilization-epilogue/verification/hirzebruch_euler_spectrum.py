@@ -48,7 +48,9 @@ CHECKS
                     S.S = -a
   homogeneity       the presentation and the characteristic polynomial are
                     homogeneous for the Novikov grading deg X = 2, deg u = 4,
-                    deg w = 4 - 2 * (a mod 2)
+                    deg w = 4 - 2 * (a mod 2); recorded once per index for
+                    uniformity, though the quartic depends on a only through its
+                    parity
   elimination       the characteristic polynomial obtained from the
                     multiplication matrix agrees with the one obtained by
                     eliminating the two divisor generators from the ideal
@@ -56,17 +58,21 @@ CHECKS
   discriminant      the discriminant obtained from the quartic coefficients
                     agrees with the squared product of the pairwise root
                     differences of an explicit splitting
-  frobenius         Euler multiplication is self-adjoint for the trace form of
-                    the presented ring, as it must be in a Frobenius algebra
+  frobenius         a self-consistency check of the multiplication matrix
+                    against an independently built multiplication operator;
+                    self-adjointness for the trace form holds for any
+                    commutative presentation, so the flag tests agreement of the
+                    two constructions rather than a property of this ring
   gromov_witten     for F_2 the presentation agrees with the relations computed
                     directly from the genus-zero invariants <pt>_f = 1,
                     <pt>_{f+s} = 1, all other point invariants in classes of
                     first Chern number two being zero
-  degeneracy        for u, w nonzero the quartic has either four simple roots
-                    or exactly one double root, and at a double root the
-                    matrix of Euler multiplication is semisimple
+  degeneracy        on the degeneracy locus the quartic has root multiplicities
+                    1, 1, 2 and the matrix of Euler multiplication is semisimple
+                    at the double root; simplicity of the spectrum off the locus
+                    follows from the recorded discriminant, not from this check
 
-Replay:
+Replay, from the paper directory `papers/cubic-stabilization-epilogue`:
 
     uv run --with sympy python3 verification/hirzebruch_euler_spectrum.py
 
@@ -452,6 +458,8 @@ def assert_all_checks_pass(record: dict) -> None:
             failures.append(f"elimination {parity}")
         if not record["checks"]["frobenius"][parity]["euler_selfadjoint"]:
             failures.append(f"frobenius {parity}")
+        if not record["checks"]["frobenius"][parity]["trace_form_nondegenerate_generically"]:
+            failures.append(f"trace form {parity}")
         if not record["spectrum"][parity]["independent_route_agrees"]:
             failures.append(f"discriminant {parity}")
         block = record["degeneracy"][parity]

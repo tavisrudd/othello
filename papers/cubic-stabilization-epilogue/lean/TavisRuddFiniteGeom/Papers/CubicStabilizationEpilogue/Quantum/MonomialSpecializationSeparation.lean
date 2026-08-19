@@ -1,15 +1,23 @@
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NovikovAdmissibility
-import Mathlib.LinearAlgebra.LinearIndependent.Basic
-import Mathlib.Analysis.SpecialFunctions.Complex.Circle
+import Mathlib.LinearAlgebra.LinearIndependent.Lemmas
+import Mathlib.Data.Complex.Basic
+import Mathlib.Tactic.LinearCombination
 
 /-!
-# Separating the specialized Novikov values of a minimal rational ruled surface
+# Separating the specialized Novikov values of a Hirzebruch surface
 
-The Euler spectrum of a specialized minimal rational ruled surface degenerates
-exactly on one locus in the two specialized values `u`, the image of the fibre
-monomial, and `w`, the image of the section monomial shifted by `k` fibres:
-`u = w` when the index is even, and `256 u + 27 w ^ 2 = 0` when it is odd.  This
-module proves that neither locus is met, by two arguments of different strength.
+The Euler spectrum of a specialized Hirzebruch surface `F_a`, `a` its index,
+degenerates exactly on one locus in
+the two specialized values `u`, the image of the fibre monomial, and `w`, the
+image of the section monomial shifted by `k` fibres, `k` being the integer part
+of `a / 2`: the locus is `u = w` when the index is even and
+`256 u + 27 w ^ 2 = 0` when it is odd.
+
+This module proves two exclusion statements for those loci, of different strength
+and different scope; both are conditional, and neither covers the surface of
+index zero, where the shift vanishes and the even locus `u = w` is compatible
+with the valuation law.  That case is settled instead by the product
+decomposition of the quadric surface.
 
 The first argument uses only the valuation law of a strictly Novikov-admissible
 specialization.  The length of the shifted section class is the length of the
@@ -21,12 +29,12 @@ combination would make one the negative of the other and the valuation of a
 negative is unchanged.  This settles every index of at least two.
 
 The second argument is needed only for index one, where the shift is zero and
-the two lengths may agree.  It uses that the specializations produced by the
-blowup comparison are monomial: the image of each effective monomial has, in the
-associated graded ring, a leading term belonging to one linearly independent
-family.  A vanishing combination of two such leading terms with coefficients
-`256` and `27` would force the two leading terms to be equal, since distinct
-members of a linearly independent family have no vanishing combination with
+the two lengths may agree.  It uses only that the specialization has a
+leading-term map whose image on every effective class lies in a fixed linearly
+independent family, and that the leading term of the combination is the
+corresponding combination of the two leading terms.  A vanishing combination of
+two members of such a family with coefficients `256` and `27` would force the two
+members to be equal, since distinct members have no vanishing combination with
 nonzero coefficients, and then `256 + 27` would have to vanish.
 
 Lean constructs no completed monoid ring, no associated graded ring, and no
@@ -267,7 +275,7 @@ structure MonomialSpecializationData {Curve Target Index Graded : Type*}
   index : Curve → Index
   /-- The family of monomials is linearly independent over the complex numbers. -/
   independent : LinearIndependent ℂ monomial
-  /-- Only the zero element has vanishing leading term at the relevant degree. -/
+  /-- The leading term of the zero element of the coefficient ring vanishes. -/
   leadingTerm_zero : leadingTerm 0 = 0
   /-- The leading term of an effective monomial is a member of the family. -/
   leadingTerm_monomialImage :
@@ -275,7 +283,7 @@ structure MonomialSpecializationData {Curve Target Index Graded : Type*}
 
 /-- The odd degeneracy locus is not met by a monomial specialization.  The
 premise is that the leading term of the combination is the combination of the
-leading terms of its two summands, which holds exactly when those summands have
+leading terms of its two summands, which can hold only when those summands have
 equal valuation; when they do not, the valuation argument already applies. -/
 theorem MonomialSpecializationData.oddCombination_ne_zero
     {Curve Target Index Graded : Type*}

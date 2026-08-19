@@ -131,9 +131,9 @@ roots = [
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.ProjectiveSpaceEulerSpectrum",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.DirectSpecializedVanishing",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.QuarticSpectralSeparation",
-  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.MinimalRuledEulerSpectrum",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.HirzebruchEulerSpectrum",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.MonomialSpecializationSeparation",
-  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.MinimalRuledSpecializedVanishing",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.HirzebruchSpecializedVanishing",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.PaperInterface",
 ]
 
