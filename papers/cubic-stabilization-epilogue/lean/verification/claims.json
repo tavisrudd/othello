@@ -589,13 +589,17 @@
     },
     {
       "manuscript_label": "lem:exact-low-degree-shifts",
-      "coverage": "absent",
-      "declarations": [],
-      "objects": "Bulk shifts of the even quantum connection by a multiple of the identity and by a divisor class, and the framed formal-monodromy eigenvalues on the original loop disc.",
-      "hypotheses": "The coefficient field contains the Novikov coefficients of the connection, and the divisor shift defines a multiplicative character on the numerical Novikov image.",
-      "conclusion": "The identity shift changes the connection only by a scalar irregular twist and leaves the framed eigenvalues unchanged; the divisor shift acts by a coefficient substitution fixing the complex numbers, so it preserves the algebraic multiplicity of every root of unity.",
-      "cautions": "Not formalized as stated. The manuscript no longer routes this through the pro-Laurent gauge machinery that the companion formalizes.",
-      "statement_digest": "ce13e179c833917dae23bb114b97878f7470cc5d4c9a0f6f8de3d2a9b3bbf5f3"
+      "coverage": "fragment",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.invariantScalarTwist_framedMonodromy_eq",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.divisorSubstitution_sixthMultiplicity_eq"
+      ],
+      "objects": "For the identity shift: a commutative solution algebra with a ring automorphism in the role of one turn of the original loop coordinate, an invertible square matrix over it in the role of a fundamental solution frame, an invertible scalar of that algebra in the role of the irregular twist, and a constant matrix in the role of the framed monodromy of a frame.  For the divisor shift: two square complex matrices in the roles of the framed monodromy before and after the shift, a ring endomorphism of the complex numbers in the role of the coefficient substitution, an invertible frame gauge, and the sum of the algebraic multiplicities of the two primitive sixth roots of unity in a characteristic polynomial.",
+      "hypotheses": "For the identity shift: the turn fixes the scalar, which is the single-valuedness of the twist on the original loop disc; the frame and the scalar are invertible; the constants embed injectively in the solution algebra; and both the frame and its twist satisfy the frame relation defining their monodromy.  For the divisor shift: the shifted monodromy is the substituted original one conjugated by an invertible frame gauge; the substitution is injective and fixes both primitive sixth roots of unity, as one fixing the complex numbers does.",
+      "conclusion": "The twisted frame has the same framed monodromy matrix as the original frame, hence the same characteristic polynomial and the same eigenvalues; and the shifted framed characteristic polynomial has the same primitive-sixth multiplicity as the original.",
+      "cautions": "A fragment, on both clauses.  Lean constructs no quantum connection, no bulk point, no Euler field, no string or divisor equation, no exponential twist, and no Novikov coefficient ring, so neither clause is about the shifted connection of the manuscript.  The identity-shift clause replaces the irregular twist by an arbitrary invertible scalar that the turn fixes, and the solution algebra by an arbitrary commutative ring with a ring automorphism; single-valuedness is a hypothesis, not a property of an exponential.  The divisor-shift clause takes the comparison of the two monodromy matrices as a supplied datum rather than deriving it from the divisor equation, and takes the substitution's fixing of the two primitive sixth roots as a hypothesis rather than deriving it from an embedding of coefficient fields over the complex numbers.  The manuscript's statement is about all roots of unity; the formal statement covers an arbitrary fixed root for a single polynomial and the primitive sixth roots for the framed multiplicity.",
+      "statement_digest": "ce13e179c833917dae23bb114b97878f7470cc5d4c9a0f6f8de3d2a9b3bbf5f3",
+      "terminal_digest": "21c6dbdea3e5a1afbd67c465423a2e9c5031ed3bb12e9af0187ca67a4efd1545"
     },
     {
       "manuscript_label": "lem:numerical-base-change",

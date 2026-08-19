@@ -22,7 +22,7 @@ digraph manuscript {
   "lem:dvr-rank-one" [fillcolor="#cdeccd", tooltip="complete"];
   "lem:eckardt-rank" [fillcolor="#ffffff", tooltip="absent"];
   "lem:euler-sign" [fillcolor="#fde8c8", tooltip="fragment"];
-  "lem:exact-low-degree-shifts" [fillcolor="#ffffff", tooltip="absent"];
+  "lem:exact-low-degree-shifts" [fillcolor="#fde8c8", tooltip="fragment"];
   "lem:factor-glue" [fillcolor="#fde8c8", tooltip="fragment"];
   "lem:graph-coefficient-lattice" [fillcolor="#fde8c8", tooltip="fragment"];
   "lem:hirzebruch-euler-spectrum" [fillcolor="#fde8c8", tooltip="fragment"];
@@ -116,6 +116,7 @@ digraph manuscript {
   "YYZ:coprime-degrees-persist" -> "cor:coprime-separation" [style=dotted];
   "a5-pencil-eckardt" -> "prop:A5-not-coprime" [style=dotted];
   "cor:universal-ch0" -> "prop:A5-nonseparated" [style=solid];
+  "def:framed-sixth-multiplicity" -> "lem:exact-low-degree-shifts" [style=dashed];
   "hirzebruch-euler-spectrum" -> "lem:hirzebruch-euler-spectrum" [style=dotted];
   "lem:A0preserve" -> "prop:rank2-rigidity" [style=solid];
   "lem:crossing" -> "prop:atom-invariant" [style=solid];

@@ -104,6 +104,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.Hirzeb
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.AtomicRankTwoFlatRigidity
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CubicSeparatedBlockGauge
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.UniversalCH0Separation
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.BulkShiftFramedInvariance
 
 /-!
 # Reviewer interface for the cubic-stabilization companion
@@ -7067,5 +7068,54 @@ theorem coprimeUnirationalDegrees_universalCH0_and_irrational_stabilization
       quadraticParametrization cubicParametrization input
   exact ⟨stabilizedQuadratic, stabilizedCubic, separation.stabilizationUniversallyCH0Trivial,
     separation.stabilizationNotRational⟩
+
+/-- Reviewer-facing invariance of a framed monodromy matrix under a scalar
+twist of the solution frame that one turn of the loop coordinate fixes.  This
+is the algebraic step behind the bulk shift by a multiple of the identity
+class, where the string equation makes the shifted connection differ by the
+scalar irregular twist and that twist is single-valued on the original loop
+disc.  Lean constructs no quantum connection, no exponential, and no solution
+of a differential equation: the solution algebra is an abstract commutative
+ring, the turn is a ring automorphism of it, single-valuedness is the
+hypothesis that the turn fixes the scalar, and the frame relation defining the
+monodromy of a frame is a hypothesis. -/
+theorem invariantScalarTwist_framedMonodromy_eq
+    {SolutionAlgebra Constant Index : Type*}
+    [CommRing SolutionAlgebra] [CommRing Constant] [Algebra Constant SolutionAlgebra]
+    [Fintype Index] [DecidableEq Index]
+    (turn : SolutionAlgebra ≃+* SolutionAlgebra)
+    (frame : (Matrix Index Index SolutionAlgebra)ˣ)
+    (twist : SolutionAlgebraˣ) (invariant : turn twist.val = twist.val)
+    (monodromy twistedMonodromy : Matrix Index Index Constant)
+    (constantsInjective : Function.Injective (algebraMap Constant SolutionAlgebra))
+    (frameTurn : frame.val.map turn =
+      frame.val * monodromy.map (algebraMap Constant SolutionAlgebra))
+    (twistedTurn : (twist.val • frame.val).map turn =
+      (twist.val • frame.val) * twistedMonodromy.map (algebraMap Constant SolutionAlgebra)) :
+    twistedMonodromy = monodromy :=
+  Quantum.framedMonodromy_eq_of_invariant_scalarTwist turn frame twist invariant monodromy
+    twistedMonodromy constantsInjective frameTurn twistedTurn
+
+/-- Reviewer-facing invariance of primitive-sixth multiplicity under the bulk
+shift by a divisor class.  The divisor equation makes the shifted connection
+the image of the original one under the coefficient substitution that
+multiplies the Novikov monomial of a curve class by the character value there,
+so the shifted framed characteristic polynomial is the image of the original.
+An injective substitution preserves the algebraic multiplicity of every root it
+fixes, and a substitution fixing the complex numbers fixes both primitive sixth
+roots of unity, so the primitive-sixth multiplicity is unchanged.  The
+comparison of the two monodromy matrices up to an invertible frame gauge is a
+supplied datum; no quantum connection or divisor equation is constructed. -/
+theorem divisorSubstitution_sixthMultiplicity_eq
+    {Index : Type*} [Fintype Index] [DecidableEq Index]
+    (input : Quantum.FormalBaseShiftMatrixInput Index ℂ)
+    (injective : Function.Injective input.divisorSubstitution)
+    (fixesPositive : input.divisorSubstitution Quantum.primitiveSixthRootPositive =
+      Quantum.primitiveSixthRootPositive)
+    (fixesNegative : input.divisorSubstitution Quantum.primitiveSixthRootNegative =
+      Quantum.primitiveSixthRootNegative) :
+    Quantum.sixthMultiplicityPolynomial input.bulkMonodromy.charpoly =
+      Quantum.sixthMultiplicityPolynomial input.smallMonodromy.charpoly :=
+  Quantum.sixthMultiplicity_eq_of_divisorShift input injective fixesPositive fixesNegative
 
 end TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue
