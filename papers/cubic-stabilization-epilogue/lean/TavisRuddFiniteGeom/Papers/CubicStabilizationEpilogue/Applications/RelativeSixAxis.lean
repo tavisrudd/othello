@@ -1,25 +1,47 @@
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPointStableHalves
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisSourcePolarization
 
 /-!
-# Opaque organizational relative six-axis packet
+# The relative six-axis packet over its integral homology realization
 
-The relative abelian-scheme construction in the manuscript lies beyond the
-current Mathlib API.  This module provides an opaque organizational signature
-for its supplied geometric assertions.  Lean independently proves the full
-integral Smith witness for the displayed five-axis Gram matrix and computes
-the two-primary coefficient discriminant after tensoring with any `F₂`-module.
-For a two-dimensional symplectic tensor factor, it also identifies the
-rank-eight discriminant with two copies of the coefficient heart and proves
-that the five projective-line packet members are exactly the diagonally stable
-maximal-isotropic subspaces.
+The relative abelian-scheme construction of the manuscript lies beyond the
+current Mathlib API, so this module separates the geometry into two layers.
 
-No relative scheme, isogeny, torsion local system, geometric group action, or
-Weil pairing is constructed here.
+The first layer is explicit.  Each fibre supplies an integral first-homology
+realization: a unimodular alternating form standing for the principal
+polarization of the intermediate Jacobian, an integral comparison matrix
+standing for the map induced by the relative morphism, and the polarization
+pullback identity between them, stated as an equation of integral matrices
+against the Kronecker polarization of the six-axis source.  From that data
+Lean proves the degree and finiteness of the comparison — its determinant has
+absolute value `6⁴` and it is injective — and, after choosing coordinates on
+the two-torsion fibres, produces the two-primary discriminant identification
+`D₂ ≃ H₂ ⊗ E[2]` rather than assuming it.
+
+The second layer remains supplied: the assertion that these integral matrices
+are the ones induced on homology by an actual elliptic scheme, relative
+morphism, and polarization, together with the equivariance, kernel, and
+maximal-isotropy assertions of the lemma.  Those fields are propositions
+carried by the structure, not proofs, and Lean gives them no
+scheme-theoretic semantics.
+
+Lean also independently proves the full integral Smith witness for the
+displayed five-axis Gram matrix and computes the two-primary coefficient
+discriminant after tensoring with any `F₂`-module.  For a two-dimensional
+symplectic tensor factor, it identifies the rank-eight discriminant with two
+copies of the coefficient heart and proves that the five projective-line
+packet members are exactly the diagonally stable maximal-isotropic subspaces.
+
+No relative scheme, torsion local system, geometric group action, or Weil
+pairing of an actual elliptic curve is constructed here, and no three-primary
+geometric identification is made.
 -/
 
 namespace TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue
 
 namespace Applications
+
+open scoped Matrix
 
 universe u v
 
@@ -39,52 +61,67 @@ structure RelativeSixAxisObjects (Base : Type u) where
   /-- Two-primary kernel fibres of the relative isogeny. -/
   KernelTwo : Base → Type v
 
-/-- Opaque proposition fields corresponding to the geometric assertions of
-the relative six-axis source lemma.  Their scheme-theoretic semantics are not
-defined in this companion. -/
+/-- Integral first-homology realization of one fibre of the relative six-axis
+source, together with its comparison with the intermediate Jacobian.  The
+coefficient lattice is the five-axis chart of the six-coordinate quotient, and
+the elliptic factor contributes the rank-two homology coordinates, so all three
+matrices are indexed by an axis together with an elliptic homology
+coordinate. -/
+structure RelativeSixAxisHomologyRealization where
+  /-- The principal polarization of the intermediate Jacobian fibre, written as
+  an integral alternating form on its first homology. -/
+  jacobianPolarization : Matrix (Fin 5 × Fin 2) (Fin 5 × Fin 2) ℤ
+  /-- The target polarization is principal, that is, unimodular. -/
+  jacobianPolarizationPrincipal : jacobianPolarization.det = 1
+  /-- The map induced on integral first homology by the relative morphism. -/
+  comparison : Matrix (Fin 5 × Fin 2) (Fin 5 × Fin 2) ℤ
+  /-- Pullback of the principal target polarization is the source polarization,
+  the homology form of the manuscript's identity `f*λ_Θ = λ_A`. -/
+  polarizationPullback :
+    comparisonᵀ * jacobianPolarization * comparison =
+      GraphLattices.sixAxisSourcePolarization ℤ
+
+/-- Fibrewise geometric input of the relative six-axis source lemma.  The
+homology realization and the two-torsion coordinate identifications are
+explicit data; the remaining fields are propositions carried by the structure,
+recording the assertions whose scheme-theoretic semantics this companion does
+not define. -/
 structure RelativeSixAxisGeometricInput
     {Base : Type*} (objects : RelativeSixAxisObjects Base) where
   /-- The parameter carrier is the connected smooth locus in question. -/
   connectedSmoothLocus : Prop
-  /-- The displayed elliptic family is an elliptic scheme over the base. -/
-  ellipticScheme : Prop
+  /-- Integral first-homology realization of each fibre of the source, its
+  polarization, and its comparison with the intermediate Jacobian. -/
+  homology : Base → RelativeSixAxisHomologyRealization
+  /-- The displayed matrices are the ones induced on first homology by an
+  elliptic scheme, the tensor-product source, the relative morphism, and the
+  principal polarization of the intermediate Jacobian. -/
+  homologyRealizesRelativeGeometry : Prop
   /-- Fibrewise map from the augmentation-lattice source to the intermediate
   Jacobian. -/
   relativeMap : ∀ parameter, objects.Source parameter → objects.Jacobian parameter
-  /-- The source is the tensor product of the elliptic scheme with the integral
-  augmentation quotient. -/
-  sourceIsAugmentationTensor : Prop
-  /-- The relative map is an isogeny. -/
-  relativeMapIsIsogeny : Prop
-  /-- The isogeny is finite and flat. -/
-  relativeMapFiniteFlat : Prop
   /-- The relative map is equivariant for the named `A₅` action. -/
   relativeMapA5Equivariant : Prop
   /-- Source and coefficient form carry their natural `S₆` actions. -/
   naturalS6Actions : Prop
-  /-- The coefficient form on the augmentation quotient is induced by
-  `6I₆-J₆`. -/
-  coefficientFormIsSixAxisAugmentationForm : Prop
-  /-- Pullback of the principal target polarization equals the source
-  polarization. -/
-  polarizationPullbackIdentity : Prop
-  /-- Omitting one axis identifies the source with five elliptic factors and
-  identifies the coefficient form with `6I₅-J₅`. -/
-  fiveAxisGramIdentification : Prop
-  /-- Relative symplectic identification `D₂ ≃ H₂ ⊗ E[2]`. -/
-  discriminantEquivalence : ∀ parameter,
-    objects.DiscriminantTwo parameter ≃ objects.HeartTensorTorsion parameter
+  /-- Coordinates identifying each two-primary discriminant fibre with the
+  two-torsion kernel of the realized source polarization. -/
+  discriminantTwoCoordinates : ∀ parameter,
+    objects.DiscriminantTwo parameter ≃
+      GraphLattices.sixAxisSourceTwoPrimaryDiscriminant
+  /-- Coordinates identifying each `H₂ ⊗ E[2]` fibre with four copies of the
+  rank-two two-torsion module, after choosing a symplectic basis of the
+  elliptic two-torsion. -/
+  heartTensorTorsionCoordinates : ∀ parameter,
+    objects.HeartTensorTorsion parameter ≃ (Fin 4 → Fin 2 → GraphLattices.F2)
   /-- The discriminant type represents the two-primary kernel of the source
   polarization. -/
   discriminantIsSourcePolarizationKernel : Prop
   /-- The named tensor type represents `H₂ ⊗ E[2]` for the supplied elliptic
   family. -/
   heartTensorTorsionIsH2TensorEllipticTwoTorsion : Prop
-  /-- The discriminant equivalence is `A₅`-equivariant. -/
+  /-- The discriminant identification is `A₅`-equivariant. -/
   discriminantEquivalenceA5Equivariant : Prop
-  /-- The preceding relative identification respects the alternating
-  pairings. -/
-  discriminantEquivalenceSymplectic : Prop
   /-- Inclusion of the two-primary isogeny kernel in the discriminant. -/
   kernelInclusion : ∀ parameter,
     objects.KernelTwo parameter → objects.DiscriminantTwo parameter
@@ -98,6 +135,34 @@ structure RelativeSixAxisGeometricInput
   kernelA5Stable : Prop
   /-- The relative two-primary kernel is maximal isotropic. -/
   kernelMaximalIsotropic : Prop
+
+/-- The polarization pullback identity forces the realized comparison matrix to
+have determinant of absolute value `6⁴`, which is the degree of the relative
+isogeny onto the principally polarized intermediate Jacobian. -/
+theorem relativeSixAxisHomologyRealization_comparison_natAbs_det
+    (realization : RelativeSixAxisHomologyRealization) :
+    realization.comparison.det.natAbs = 6 ^ 4 :=
+  GraphLattices.sixAxisPolarizationPullback_natAbs_det
+    realization.jacobianPolarizationPrincipal realization.polarizationPullback
+
+/-- The realized comparison matrix is injective on the integral source lattice,
+the homology form of finiteness of the relative isogeny. -/
+theorem relativeSixAxisHomologyRealization_comparison_injective
+    (realization : RelativeSixAxisHomologyRealization) :
+    Function.Injective realization.comparison.mulVec :=
+  GraphLattices.sixAxisPolarizationPullback_mulVec_injective
+    realization.jacobianPolarizationPrincipal realization.polarizationPullback
+
+/-- The two-primary discriminant identification `D₂ ≃ H₂ ⊗ E[2]`, constructed
+from the two-torsion coordinates and from the computed kernel of the realized
+source polarization rather than supplied. -/
+noncomputable def relativeSixAxisDiscriminantEquivalence
+    {Base : Type*} {objects : RelativeSixAxisObjects Base}
+    (geometry : RelativeSixAxisGeometricInput objects) (parameter : Base) :
+    objects.DiscriminantTwo parameter ≃ objects.HeartTensorTorsion parameter :=
+  (geometry.discriminantTwoCoordinates parameter).trans
+    (GraphLattices.sixAxisSourceTwoPrimaryDiscriminantCoordinates.toEquiv.trans
+      (geometry.heartTensorTorsionCoordinates parameter).symm)
 
 /-- Fibrewise standard-coordinate data identifying the supplied geometric
 two-primary kernel with a diagonally stable maximal-isotropic subspace of the
@@ -180,13 +245,36 @@ theorem relativeSixAxisKernelCoordinateInput_packet
       (input.kernelSubspace parameter)).mpr
         ⟨input.diagonalStable parameter, input.maximalIsotropic parameter⟩
 
-/-- Organizational relative-six-axis packet.  Its geometric component is
-supplied wholesale; the integral Smith witness, two-primary coefficient
-discriminant, and explicit stable maximal-isotropic packet are proved by Lean. -/
+/-- Relative-six-axis packet.  The scheme-theoretic assertions are supplied,
+while the degree and finiteness of the comparison, the determinant of the
+source polarization, the two-primary discriminant identification, the integral
+Smith witness, the two-primary coefficient discriminant, and the explicit
+stable maximal-isotropic packet are proved by Lean. -/
 structure RelativeSixAxisConclusion
     {Base : Type*} (objects : RelativeSixAxisObjects Base) : Prop where
   /-- All relative geometric assertions of the lemma. -/
   geometryExists : Nonempty (RelativeSixAxisGeometricInput objects)
+  /-- The integral source polarization has determinant `6⁸`, so the source
+  polarization has kernel of that order. -/
+  sourcePolarizationDeterminant :
+    (GraphLattices.sixAxisSourcePolarization ℤ).det = 6 ^ 8
+  /-- On every fibre the realized comparison matrix has determinant of
+  absolute value `6⁴` and is injective on the source lattice. -/
+  comparisonDegreeAndFiniteness :
+    ∀ (geometry : RelativeSixAxisGeometricInput objects) (parameter : Base),
+      (geometry.homology parameter).comparison.det.natAbs = 6 ^ 4 ∧
+        Function.Injective (geometry.homology parameter).comparison.mulVec
+  /-- The two-primary discriminant identification `D₂ ≃ H₂ ⊗ E[2]` is
+  constructed from the realized polarization rather than supplied: in the
+  supplied two-torsion coordinates it is the computed kernel equivalence of the
+  two-torsion source polarization. -/
+  twoPrimaryDiscriminantEquivalence :
+    ∀ (geometry : RelativeSixAxisGeometricInput objects) (parameter : Base)
+      (fibre : objects.DiscriminantTwo parameter),
+      geometry.heartTensorTorsionCoordinates parameter
+          (relativeSixAxisDiscriminantEquivalence geometry parameter fibre) =
+        GraphLattices.sixAxisSourceTwoPrimaryDiscriminantCoordinates
+          (geometry.discriminantTwoCoordinates parameter fibre)
   /-- Kernel-checked integral reduction of `6I₅-J₅` to
   `diag(1,6,6,6,6)`. -/
   integralSmithWitness :
@@ -266,13 +354,23 @@ structure RelativeSixAxisConclusion
           GraphLattices.IsMaximalIsotropic
             GraphLattices.sixAxisStandardDiscriminantBilinForm subspace
 
-/-- Package the supplied opaque relative-six-axis fields with the independently
-proved integral Smith witness and two-primary coefficient calculation. -/
+/-- Package the supplied relative-six-axis fields with the degree, finiteness,
+and two-primary discriminant consequences of the realized polarization pullback
+and with the independently proved integral Smith witness and two-primary
+coefficient calculation. -/
 theorem relativeSixAxis_of_geometricInputs
     {Base : Type*} (objects : RelativeSixAxisObjects Base)
     (geometry : RelativeSixAxisGeometricInput objects) :
     RelativeSixAxisConclusion objects :=
   ⟨⟨geometry⟩,
+    GraphLattices.sixAxisSourcePolarization_det,
+    fun otherGeometry parameter ↦
+      ⟨relativeSixAxisHomologyRealization_comparison_natAbs_det
+          (otherGeometry.homology parameter),
+        relativeSixAxisHomologyRealization_comparison_injective
+          (otherGeometry.homology parameter)⟩,
+    fun otherGeometry parameter _ ↦
+      (otherGeometry.heartTensorTorsionCoordinates parameter).apply_symm_apply _,
     ⟨GraphLattices.sixAxisGram_smith_reduction,
       GraphLattices.sixAxisSmithLeft_mul_inverse,
       GraphLattices.sixAxisSmithLeft_inverse_mul,

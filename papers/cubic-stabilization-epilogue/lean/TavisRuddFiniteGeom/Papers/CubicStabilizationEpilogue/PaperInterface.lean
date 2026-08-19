@@ -213,16 +213,24 @@ theorem separatedVariableLocus_of_eckardtLocus_inputs
         fibre moduliPoint hasEckardtPoint separatedVariableType
         projectivelyEquivalent distinguishedPoint input parameter distinct⟩
 
-/-- Organizational interface for the relative six-axis source, accepting supplied
-types, functions, and proposition fields with opaque scheme-theoretic semantics for the
-packet: elliptic/source/Jacobian families, relative
-isogeny, finite-flatness, `A₅`/`S₆` actions, polarization identity,
-two-primary symplectic discriminant description, and `A₅`-stable maximal-isotropic
-kernel.  Lean contributes the integral Smith reduction of the identified
-five-axis Gram matrix and, for every `F₂`-module `T`, an explicit linear equivalence
-between the tensor-extended two-primary coefficient kernel and four copies of
-`T`.  In particular, a two-dimensional tensor factor gives a kernel of order
-`2⁸`, and the scalar coordinates agree with the six-point coefficient heart.
+/-- Interface for the relative six-axis source.  The supplied geometric input
+now carries an integral first-homology realization of every fibre — a
+unimodular alternating form for the intermediate Jacobian, an integral
+comparison matrix, and the polarization pullback identity between them — and
+two-torsion coordinates on the discriminant and on the `H₂ ⊗ E[2]` fibres.
+From that data Lean proves the source polarization has determinant `6⁸`, every
+comparison matrix has determinant of absolute value `6⁴` and is injective, and
+the two-primary discriminant identification is the computed kernel equivalence
+in those coordinates.  The families of elliptic, source, Jacobian, and kernel
+fibres, the assertion that the displayed matrices are the ones induced by the
+relative geometry, the `A₅`/`S₆` equivariance, the kernel description, and its
+maximal isotropy remain supplied propositions with no scheme-theoretic
+semantics.  Lean further contributes the integral Smith reduction of the
+identified five-axis Gram matrix and, for every `F₂`-module `T`, an explicit
+linear equivalence between the tensor-extended two-primary coefficient kernel
+and four copies of `T`.  In particular, a two-dimensional tensor factor gives a
+kernel of order `2⁸`, and the scalar coordinates agree with the six-point
+coefficient heart.
 The normalized heart dot product is proved bilinear, alternating, and
 nondegenerate, and every word in the generated six-point action preserves it.
 After choosing a symplectic basis of a two-dimensional tensor factor, the
@@ -232,13 +240,62 @@ isotropic.  Under the explicit symplectic coordinate equivalence with two
 heart copies, the five projective-line packet members are exactly the
 diagonally stable maximal-isotropic subspaces of this rank-eight model.
 The named proposition fields do not define
-scheme-theoretic semantics, and Lean constructs none of the relative
-geometry. -/
+scheme-theoretic semantics, and Lean constructs no relative scheme, torsion
+local system, or geometric group action. -/
 theorem relativeSixAxis_of_supplied_relative_geometry
     {Base : Type*} (objects : Applications.RelativeSixAxisObjects Base)
     (geometry : Applications.RelativeSixAxisGeometricInput objects) :
     Applications.RelativeSixAxisConclusion objects :=
   Applications.relativeSixAxis_of_geometricInputs objects geometry
+
+/-- Degree and finiteness of the six-axis comparison from its polarization
+pullback identity.  For an integral first-homology realization — a unimodular
+alternating form standing for the principal polarization of the intermediate
+Jacobian, an integral comparison matrix, and the identity that the comparison
+pulls the former back to the Kronecker polarization of the six-axis source —
+the source polarization has determinant `6⁸`, the comparison has determinant of
+absolute value `6⁴`, and the comparison is injective on the integral source
+lattice.  These are the homology-level forms of the manuscript's kernel order
+`6⁸`, isogeny degree `6⁴`, and finiteness; the identification of the displayed
+matrices with the maps induced by an actual elliptic scheme and relative
+morphism is supplied, not proved. -/
+theorem relativeSixAxis_polarizationPullback_degree
+    (realization : Applications.RelativeSixAxisHomologyRealization) :
+    (GraphLattices.sixAxisSourcePolarization ℤ).det = 6 ^ 8 ∧
+      realization.comparison.det.natAbs = 6 ^ 4 ∧
+        Function.Injective realization.comparison.mulVec :=
+  ⟨GraphLattices.sixAxisSourcePolarization_det,
+    Applications.relativeSixAxisHomologyRealization_comparison_natAbs_det realization,
+    Applications.relativeSixAxisHomologyRealization_comparison_injective realization⟩
+
+/-- The normalized primary discriminant pairings of the six-axis coefficient
+form.  On a lift with vanishing coordinate sum the six-coordinate form
+`6 Σ xᵢyᵢ - (Σx)(Σy)` is six times the dot product.  Its half therefore reduces
+modulo two to the dot product, its third reduces modulo three to the negative of
+the dot product, and against such a lift the form is divisible by six, so
+neither normalization depends on the chosen lift.  These are statements about
+the integral coefficient form; no Weil pairing or geometric discriminant is
+constructed. -/
+theorem relativeSixAxis_normalizedPrimaryPairings
+    (left right : Fin 6 → ℤ) (augmentation : ∑ index, left index = 0) :
+    GraphLattices.sixPointIntegralQuotientPairing left right =
+        6 * ∑ index, left index * right index ∧
+      (GraphLattices.sixPointIntegralQuotientPairing left right =
+          2 * (3 * ∑ index, left index * right index) ∧
+        ((3 * ∑ index, left index * right index : ℤ) : ZMod 2) =
+          ((∑ index, left index * right index : ℤ) : ZMod 2)) ∧
+      (GraphLattices.sixPointIntegralQuotientPairing left right =
+          3 * (2 * ∑ index, left index * right index) ∧
+        ((2 * ∑ index, left index * right index : ℤ) : ZMod 3) =
+          - ((∑ index, left index * right index : ℤ) : ZMod 3)) ∧
+      ∀ test : Fin 6 → ℤ,
+        (6 : ℤ) ∣ GraphLattices.sixPointIntegralQuotientPairing test left :=
+  ⟨GraphLattices.sixPointIntegralQuotientPairing_of_sum_zero left right augmentation,
+    GraphLattices.sixPointIntegralQuotientPairing_two_normalization left right augmentation,
+    GraphLattices.sixPointIntegralQuotientPairing_three_normalization left right augmentation,
+    fun test ↦
+      GraphLattices.sixPointIntegralQuotientPairing_dvd_six_of_sum_zero test left
+        augmentation⟩
 
 /-- Exact rank-one fixed-line calculation for the six axis stabilizers.  For
 each label, its stabilizer in the concrete alternating-group action has ten

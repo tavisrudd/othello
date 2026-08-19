@@ -54,7 +54,7 @@ whole odd cohomology in that packet, and the constancy of rank on a connected
 component.
 
 Checked coverage snapshot: 62 claims; 5 absent; 27 fragmentary; 29 conditional;
-1 complete; 290 reviewer terminals, of which 47 are machinery serving no current
+1 complete; 292 reviewer terminals, of which 47 are machinery serving no current
 manuscript claim.
 
 Those 46 are kernel-checked and reusable, and the claim map records for each one
@@ -105,6 +105,16 @@ The reviewer-facing terminals currently verify:
   through a supplied invertible splitting-ring basis, with weighted membership
   derived from supplied formal blockwise graph-descent conditions; and automatic
   rank-one generation of that graph lattice over a DVR;
+- the polarized six-axis source lattice on integral first homology: the
+  Kronecker product of `6I-J` with the standard alternating rank-two elliptic
+  homology pairing, its alternation and determinant `6^8`; the consequence that
+  a comparison matrix pulling a unimodular alternating form back to it has
+  determinant of absolute value `6^4` and is injective; the identification of
+  the kernel of its two-torsion reduction with four copies of the rank-two
+  two-torsion module; and the six-coordinate form on augmentation lifts, which
+  is six times the dot product and so has half reducing modulo two to the dot
+  product and third reducing modulo three to its negative, independently of the
+  chosen lift;
 - the `6I-J` eigenspaces, an explicit integral Smith reduction to
   `diag(1,6,6,6,6)`, uniqueness of the polarization parameters, the explicit
   orthogonal local block, its exact depth-one arithmetic at two and three, and
@@ -639,7 +649,13 @@ The reviewer-facing terminals currently verify:
 
 The authoritative per-claim account is
 [`verification/claims.json`](verification/claims.json).  In particular, the
-companion does not yet formalize the relative six-axis geometry, identification
+companion formalizes the relative six-axis source only through its integral
+first homology: the degree and injectivity of a comparison matrix satisfying the
+polarization pullback identity, and the two-primary discriminant identification
+in supplied two-torsion coordinates, are proved, while the elliptic scheme, the
+relative morphism inducing those matrices, the Weil and commutator pairings, and
+maximal isotropy of the actual isogeny kernel are supplied.  It does not
+formalize the identification
 of the explicitly constructed quadratic finite-etale splitting field and
 eigenbasis with the manuscript's marked geometric splitting extension, or the
 construction of its geometric coefficient lattice, or the geometric
