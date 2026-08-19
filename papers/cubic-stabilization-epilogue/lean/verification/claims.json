@@ -317,13 +317,17 @@
     },
     {
       "manuscript_label": "prop:no-elliptic-product",
-      "coverage": "absent",
-      "declarations": [],
-      "objects": "The intermediate Jacobian of the geometric generic member of the pencil, the six-axis source lattice with the form six times the identity minus the all-ones matrix, its two-primary coefficient heart with commutant the field of four elements, and odd-degree isogenies onto the intermediate Jacobian from products of principally polarized abelian varieties.",
-      "hypotheses": "The exotic two-primary gluing kernel of the packet proposition, the elliptic factor without complex multiplication at the geometric generic point, odd isogeny degree, and an odd multiple of the product polarization; the last conclusion drops only the polarization condition and keeps the gluing kernel, the non-CM elliptic factor, and odd degree.",
-      "conclusion": "Such an isogeny has either one factor or two, of dimensions one and four; the second case is realized by every axis, with the one-dimensional factor isogenous to that elliptic factor; and, with no condition imposed on the pulled-back polarization, the intermediate Jacobian receives no odd-degree isogeny from a product of five elliptic curves, even though it is isogenous to the fifth power of that elliptic factor.",
-      "cautions": "Not formalized.  The statement is about the lattice model established earlier in the same section, and members whose elliptic factor has complex multiplication are excluded by hypothesis.",
-      "statement_digest": "4f1a8a7440ed3ba2e3b3e6ed844e4f3c96fc118e72ca8fbdcdb52b109ccba99b"
+      "coverage": "fragment",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.twoPrimaryHeart_orthogonal_lines_coincide",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.twoPrimaryHeart_smallStableSubspace_eq_bot"
+      ],
+      "objects": "The concrete two-dimensional model of the two-primary coefficient heart over the four-element field, the trace-determinant pairing on it with values in the two-element field, the lines spanned by its vectors, and its subspaces over the four-element field.",
+      "hypotheses": "For the first statement: a nonzero vector, and vanishing of the pairing between every multiple of it and every multiple of a second vector, which is orthogonality of the two lines they span.  For the second: a subspace over the four-element field with at most two elements, which is the size a cyclic subgroup killed by two can have.",
+      "conclusion": "The second vector is a multiple of the first, so two orthogonal lines coincide and are never complementary; and a subspace with at most two elements is trivial.",
+      "cautions": "A fragment covering two algebraic steps of the proof, not the proposition.  Lean constructs no intermediate Jacobian, elliptic curve, abelian variety, isogeny, polarization, Hodge structure, or integral homology lattice, and does not identify the concrete model used here with the discriminant heart of the six-axis lattice.  The classification of the isogeny shape is not formalized: neither the passage from an odd-degree isogeny to an orthogonal decomposition of the heart into subspaces stable under the four-element field, nor the generator count bounding the dimension of the summand carrying the heart, nor the realization of the two-factor case by an axis, nor the final contradiction with the order of the heart.  What is checked is that the one-and-one pattern of that decomposition is impossible, and that a summand small enough to be cyclic of exponent two vanishes.  Nothing here asserts a polarization on any factor of the intermediate Jacobian or any lattice invariant of it.",
+      "statement_digest": "4f1a8a7440ed3ba2e3b3e6ed844e4f3c96fc118e72ca8fbdcdb52b109ccba99b",
+      "terminal_digest": "2ae89d21de20017134800388518030d210e6762584330f454ab601e0be35fb68"
     },
     {
       "manuscript_label": "prop:A5-nonseparated",

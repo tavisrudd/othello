@@ -280,3 +280,5 @@ TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.coprimeUnirationalDegrees_
 TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.invariantScalarTwist_framedMonodromy_eq: propext, Classical.choice, Quot.sound
 TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.divisorSubstitution_sixthMultiplicity_eq: propext, Classical.choice, Quot.sound
 TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.borderedHessian_rank_le_two_iff_borderDivides: propext, Classical.choice, Quot.sound
+TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.twoPrimaryHeart_orthogonal_lines_coincide: propext, Classical.choice, Quot.sound
+TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.twoPrimaryHeart_smallStableSubspace_eq_bot: propext, Classical.choice, Quot.sound

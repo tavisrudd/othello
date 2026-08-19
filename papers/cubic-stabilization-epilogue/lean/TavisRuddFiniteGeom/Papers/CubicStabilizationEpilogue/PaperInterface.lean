@@ -106,6 +106,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CubicSepara
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.UniversalCH0Separation
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.BulkShiftFramedInvariance
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.EckardtHessianRank
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.HeartOrthogonalLines
 
 /-!
 # Reviewer interface for the cubic-stabilization companion
@@ -7138,5 +7139,35 @@ theorem borderedHessian_rank_le_two_iff_borderDivides
     (Applications.borderedMatrix v block).rank ≤ 2 ↔
       ∃ w, block = Applications.symmetrizedOuterProduct v w :=
   Applications.borderedMatrix_rank_le_two_iff nonzeroBorder symmetric twoNeZero
+
+/-- Reviewer-facing exclusion of two orthogonal lines in the two-primary
+coefficient heart.  The heart is modelled as a two-dimensional space over the
+four-element field with the trace-determinant pairing to the two-element field.
+A line over the four-element field is totally isotropic for that pairing, and
+two such lines orthogonal to one another coincide: the second spanning vector is
+a multiple of the first.  So an orthogonal decomposition of the heart into
+subspaces over the four-element field cannot have two one-dimensional summands,
+and one summand carries the whole heart.  Lean constructs no abelian variety,
+isogeny, polarization, or integral homology lattice, and does not identify this
+model with the discriminant heart of the six-axis lattice. -/
+theorem twoPrimaryHeart_orthogonal_lines_coincide
+    {left right : GraphLattices.F4 × GraphLattices.F4} (nonzero : left ≠ 0)
+    (orthogonal : ∀ first second : GraphLattices.F4,
+      GraphLattices.f4TraceDeterminantPairing (first • left) (second • right) = 0) :
+    ∃ scalar : GraphLattices.F4, right = scalar • left :=
+  GraphLattices.orthogonal_lines_coincide nonzero orthogonal
+
+/-- Reviewer-facing vanishing of a small stable subspace of the two-primary
+coefficient heart.  A subspace over the four-element field with at most two
+elements is trivial, since a nonzero one contains the four multiples of any of
+its nonzero elements.  This is the parity step excluding an odd-degree isogeny
+from a product of five elliptic curves: each of the five summands of the heart
+would be cyclic of exponent two, hence trivial, and the heart would vanish.
+Lean constructs no elliptic curve, isogeny, or summand decomposition of the
+heart. -/
+theorem twoPrimaryHeart_smallStableSubspace_eq_bot
+    {subspace : Submodule GraphLattices.F4 (GraphLattices.F4 × GraphLattices.F4)}
+    (small : Nat.card subspace ≤ 2) : subspace = ⊥ :=
+  GraphLattices.eq_bot_of_natCard_le_two small
 
 end TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue

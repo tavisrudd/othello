@@ -141,6 +141,7 @@ roots = [
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.BlockSylvesterSolvability",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NormalizedSylvesterGauge",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CubicSeparatedBlockGauge",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.HeartOrthogonalLines",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.BulkShiftFramedInvariance",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.SeparatedVariableCubicForms",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.UniversalCH0Separation",
