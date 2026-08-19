@@ -143,3 +143,32 @@ point are *not* separated-variable, i.e. how far the converse fails.
 `notes/2026-08-18-c914-a5-pencil-vs-voisin-and-yyz.md`.
 **Status:** open lead — promotion into the manuscript is a paper edit, not
 allocated here.
+
+### 2026-08-18 — the Hirzebruch Euler degeneracy is a degeneracy of the spectral cover, not of the eigenvalue map
+
+**Provenance:** C920, while building an independent second route to the
+discriminant of the odd Euler quartic of a Hirzebruch surface for the evidence
+bundle `hirzebruch-euler-spectrum`.
+**Was I looking for this?:** no — the task was to decide whether the specialized
+Euler spectrum is separable at the centre specializations, and any correct
+computation of the discriminant would have served.
+**Observed / musing:** for odd index the four points of the specialized spectrum
+are parametrized by the roots of `t^4 + w t^3 - u w^2`, through `S = t^2 / w` and
+eigenvalue `2 t^2 / w + 3 t`, and that parametrizing quartic has discriminant
+`-u^2 w^6 (256 u + 27 w^2)`.  Its degeneracy factor is exactly the factor
+appearing cubed in the discriminant `-u^2 w^2 (256 u + 27 w^2)^3` of the Euler
+quartic.  So the Euler spectrum degenerates precisely when the spectral cover
+does, and never because the two-to-one map `t -> 2 t^2 / w + 3 t` identifies two
+distinct points of the cover — even though that map is generically two-to-one
+and a collision of the second kind is what one would expect to have to exclude.
+**Why it may matter / strongest question:** it suggests that for a toric surface
+the collision locus of Euler multiplication can be read off the spectral cover
+alone, without forming the characteristic polynomial of the rank-four operator.
+If that holds in general it would replace a quartic discriminant by a
+lower-degree resultant in any similar specialization argument.  Strongest
+question: for which toric surfaces is the eigenvalue map injective on the
+spectral cover, and does injectivity have a fan-level characterization?
+**Evidence:** CHECKED — the discriminant of the parametrizing quartic was
+computed symbolically; the Euler discriminant is in the tracked certificate
+`papers/cubic-stabilization-epilogue/verification/hirzebruch-euler-spectrum.json`.
+**Status:** open lead
