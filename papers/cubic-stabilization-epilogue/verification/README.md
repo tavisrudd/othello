@@ -3,13 +3,27 @@
 The proof spine of the manuscript is structural apart from the computations in
 `evidence.json`, which are the only places a symbolic program is invoked as a
 premise.  None of them is certificate-checked; each is a trusted execution,
-cross-checked as its registry entry records.  Exactly two statements invoke
-one: `prop:A5-not-coprime`, which locates the pencil's Eckardt locus and
-through which `prop:A5-nonseparated` inherits the dependency, and
-`lem:hirzebruch-euler-spectrum` in the conditional framed refinement.  No
-irrationality statement, and nothing on the unconditional atomic route, rests
-on any of them.  Both are marked by `\evidence` in the source, so the boundary
-is visible from the manuscript and not only from here.
+cross-checked as its registry entry records.  Two statements invoke one
+directly: `prop:A5-not-coprime`, which locates the pencil's Eckardt locus, and
+`lem:hirzebruch-euler-spectrum` in the conditional framed refinement.  Two more
+inherit the first through their printed proofs, `prop:A5-nonseparated` and, in
+turn, `thm:separation-family`; the theorem's finiteness is independently
+obtainable from the order-three signature route recorded after
+`prop:A5-nonseparated`, which uses no computation, but its printed proof does
+not take that route.
+
+Nothing on the unconditional atomic route rests on any of them, so the
+irrationality theorem `thm:every-cubic` does not.  The conditional framed
+route's second proof of one-step irrationality does, through
+`lem:hirzebruch-euler-spectrum`.
+
+Both direct statements are marked by `\evidence` in the source.  That macro is
+typographically empty, so a reader of the rendered paper sees the boundary at
+the proof of `prop:A5-not-coprime`, which names the trust level in prose,
+rather than at the annotation.  This enumeration is a reading of the printed
+proofs, not a fact read off `dependency-graph.dot`: as recorded below, edges
+are filled for the atomic route and the one-stabilization theorem only, and a
+statement carrying no edge has none recorded rather than none.
 
 `make check` performs the source-only Lean correspondence check, deterministic
 PDF construction, and warning rejection.  The

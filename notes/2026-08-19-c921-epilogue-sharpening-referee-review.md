@@ -521,3 +521,504 @@ Stated briefly so these are not re-litigated.
   cover, and `notes/formal-annotation-conventions.md` names that blind spot
   ("The digests cover theorem-like environments and terminals, not the prose
   between them"). This change is a live instance of it.
+
+---
+---
+
+# Second pass — 2026-08-19, against commits `d7553b2be` and `da7ec8e8f`
+
+Same hostile standard. Re-review of the committed state: `d7553b2be` (the
+response to the nine first-pass findings, including the revert of
+`thm:separation-family`) and `da7ec8e8f` (removal of task IDs and internal-note
+paths from the generator and its certificate). The first pass above is
+unmodified.
+
+## Verdict
+
+Six of the nine findings are genuinely closed, and two of the closures are
+better than what I asked for: the Chevalley paragraph is correct and sufficient,
+and the rewritten `rem:four-dimensional-factor` now carries a determinant
+derivation that I checked line by line and that is right — including the index
+25, which I had doubted. Finding 1 did dissolve; the theorem, its coverage, its
+claim-map row and its proof are back to the pre-change state and no section
+prose ties the theorem to the Fermat point. But three things did not get fixed
+and one got worse. `verification/evidence.json` was not touched at all, so the
+first pass's findings 11 and 12(d) stand untouched and the registry now
+contradicts the body it registers: the proof says the eliminated ideal is "the
+radical of the pencil's discriminant rather than the discriminant itself" while
+the registry still calls it "the pencil's discriminant", and the registry `note`
+is now the one remaining place in the repository that says the elimination
+"locates the single exceptional point of the separation theorem" — a dependency
+the revert was performed to remove. `da7ec8e8f` cleaned the artifact's
+provenance but, by dropping both cross-check citations without tracking the
+runs, left a three-link chain — proof body, registry, docstring — each asserting
+that two independent cross-checks are recorded and none reaching an artifact a
+referee can open. The new `verification/README.md` boundary paragraph is the
+right idea and makes three claims that do not survive checking: that the
+boundary is "visible from the manuscript" (the `\evidence` macro is
+typographically empty, so it is visible only in the source), that exactly two
+statements invoke a computation (`thm:separation-family` inherits one through
+its own printed proof), and that no irrationality statement rests on one
+(`thm:every-cubic-conditional` does, through the framed route). None of this is
+caught by `make check`, which passes.
+
+Gate at both commits: `PASS mode=source-only sources=139 terminals=283
+manuscript_claims=59 machinery=46 imported_sources=23 evidence=3
+coverage={'absent': 3, 'complete': 1, 'conditional_deduction': 28,
+'fragment': 27}`. Checksums verify and the generator reproduces the `.sing`
+byte-for-byte.
+
+---
+
+## A. Closed
+
+**Finding 1 — dissolved, correctly and completely.** Verified against the
+committed tree, not against the commit message. `sections/01-introduction.tex:153`
+carries `\coverage{conditional_deduction}`; the statement's last sentence is
+again "All but finitely many points of its coarse-moduli image are not
+represented by cubics whose defining form is a sum of cubic forms in disjoint
+groups of at most three variables"; `sections/06-synthesis.tex:42-44` still ends
+"Proposition~\ref{prop:A5-nonseparated} shows that all but finitely many points
+of this moduli curve lie outside the separated-variable locus", which is now
+adequate for what it proves; the claim-map row and both coverage snapshots (27
+fragmentary, 28 conditional) are unchanged from the pre-change state.
+`grep -rn "Fermat" sections/` finds no site where the theorem is said to name the
+Fermat point. The one exception is outside `sections/` and is finding N1 below.
+
+**Finding 3 — closed.** The object is now named correctly and the three sites
+agree. `rem:four-dimensional-factor` now says "The second case of the
+proposition therefore admits exactly six principally polarized abelian
+fourfolds, each five-isogenous to the intrinsic factor, one for each order-five
+subgroup of \(E[5]\)", and the self-contradiction is gone: the intrinsic factor
+is not principally polarized, and the six are different varieties.
+`sections/02-envelope.tex:675-681` now reads "a four-dimensional factor of the
+second case may be the Jacobian" with "Both are open", and adds "the second case
+admits six of them, and the intrinsic factor they are isogenous to is not one".
+`sections/01-introduction.tex:345-346` reads "no four-dimensional factor admitted
+by Proposition~\ref{prop:no-elliptic-product} may be the Jacobian of an
+irreducible curve of genus four". The genus-four route reads as open. Two
+residual nits are in finding B4.
+
+**Finding 5 — closed in the manuscript body**, not in the registry; see C1.
+`sections/03-minimal-class.tex:512-514` now reads "whose zero set is the reduced
+locus of singular parameters, that is the radical of the pencil's discriminant
+rather than the discriminant itself", and "both are squarefree" is gone. Right
+fix.
+
+**Finding 6 — closed, and the added argument is correct and sufficient.**
+
+> Elimination computes the ideal of the Zariski closure of the projection, so
+> this identifies the set of parameters sought only up to closure.  Here the two
+> agree: the set is constructible by Chevalley's theorem, its closure is finite,
+> and a constructible subset of the affine line with finite closure is itself
+> finite, hence closed.
+
+That is exactly the missing step, stated at the right length, and it gives the
+reverse inclusion the "exactly two" claim needs. Nothing to add.
+
+**Finding 7 — closed on all three sub-points**, with one residual gap (B3). The
+statement no longer attributes two Fermat members to `rem:fermat-in-pencil`
+("Both are projectively equivalent over \(\C\) to the Fermat cubic threefold");
+the proof cites the remark only for what it says ("the pencil contains the
+Fermat cubic threefold"); the model-transport clause is present ("the two models
+of the pencil used there and here present the same pencil over \(\C\)"); and the
+Galois step is now stated in the form that carries weight:
+
+> Now if a variety is
+> projectively equivalent over \(\C\) to one defined over \(\mathbf Q\), so is
+> each of its Galois conjugates: apply \(\sigma\) to the equivalence and use that
+> \(\sigma\) fixes the \(\mathbf Q\)-form.
+
+**Finding 9 — closed.** `sections/03-minimal-class.tex:591` now reads "The
+order-three signatures give finiteness, though not the exact locus, by a route
+that uses no computation", and the paragraph's closing sentence now draws the
+line where it belongs: "The finiteness of the separated-variable locus therefore
+does not depend on the registered computation; identifying that finite set as
+the single Fermat point ... does." `prop:A5-nonseparated`'s claim-map
+`hypotheses` was updated to match. The sibling row was not; see B5.
+
+**Finding 10(b) — dissolved.** `thm:separation-family`'s claim-map row is
+byte-identical to the pre-change state, so the deleted per-clause audit prose
+and the dated to-do are both gone.
+
+**Finding 12(a) — closed.** The `.sing` banner now reads "Generated file; do not
+edit.  Its generator is verification/a5_pencil_eckardt_locus.py", which lives
+inside the exported directory. See D3 for the banner's adequacy.
+
+---
+
+## B. Not closed, or closed with a residue
+
+### B1. BLOCKER — the two cross-checks are now unreachable, and three places assert they are recorded
+
+The proof body, newly added at `sections/03-minimal-class.tex:515-518`:
+
+> the registered evidence bundle records
+> the replay commands and two independent cross-checks.
+
+`verification/evidence.json`, unchanged:
+
+> Two independent cross-checks are recorded: the same eliminations over F_32003
+> return the same Eckardt polynomial and the same factor shape for the
+> discriminant, and a separate enumeration of P^4(F_q) over F_11, F_19, F_29,
+> F_31 and F_41, sharing no code with this script, finds the same two loci
+
+Neither is reachable. `verification/a5-pencil-eckardt-locus.sha256` lists three
+files, all from the run over **Q**; there is no `F_32003` output anywhere in the
+repository, tracked or otherwise. The enumeration over the five small fields
+exists as `notes/2026-08-19-c921-pencil-eckardt-sweep.py` and its tracked output,
+but `da7ec8e8f` deleted the only pointers to it, so nothing in the paper
+directory names it. `notes/research-reproducibility-conventions.md` is explicit
+that a claimed run is never sole evidence for a paper-facing result.
+
+This is worse after `da7ec8e8f`, not better. Before it, a reader inside the
+repository could follow the docstring to the sweep. Now the manuscript tells a
+referee the bundle records two cross-checks, the bundle repeats it, and the
+docstring says the agreement "is recorded here as a statement about the
+mathematics, not as a dependency" — which is candid about its status but does not
+rescue the two claims upstream of it that say "recorded".
+
+**Required:** either move the sweep script and its output (and an `F_32003` run)
+into `verification/` and into the checksum manifest, or delete the cross-check
+sentence from `evidence.json` and from the proof body. The middle course —
+claiming cross-checks that exist only in the author's working notes — is the one
+option that should not survive.
+
+Two accuracy problems in the same sentence, also unfixed from the first pass:
+the enumeration finds `F_q`-**rational** Eckardt points, not "the same two
+loci"; and at `q=11` and `q=29` it finds none at all, because `b^2+3b+9` is
+irreducible there. And no Singular version is recorded anywhere, against the
+style guide's "toolchain version ... archival version" for a trusted execution.
+
+### B2. SHOULD-FIX — the new `verification/README.md` boundary paragraph makes three claims that do not check out
+
+The rewrite is the right move and mostly good. Three problems.
+
+**(a) "so the boundary is visible from the manuscript and not only from here" is
+false for a reader of the PDF.** `formal-annotations.tex:40,43` define
+`\coverage` and `\evidence` as `\newcommand{...}[1]{}` — typographically empty,
+as `notes/formal-annotation-conventions.md` requires. A referee reading the
+rendered paper sees no `\evidence` mark anywhere. What such a referee *does* see
+is the new sentence in the proof of `prop:A5-not-coprime`, which is the real
+mechanism and is not what the README points at. Say "visible in the source, and
+in the manuscript at the proof of `prop:A5-not-coprime`", or point at the proof
+sentence.
+
+**(b) "Exactly two statements invoke one" omits `thm:separation-family`.** The
+README continues "`prop:A5-not-coprime` ... and through which
+`prop:A5-nonseparated` inherits the dependency". By the same inheritance, the
+printed proof of `thm:separation-family` (`06-synthesis.tex:42-44`) cites
+`prop:A5-nonseparated`, whose printed proof runs through `prop:A5-not-coprime`
+and the elimination. The theorem therefore inherits it too. The escape is real —
+the order-three signature route gives the theorem's finiteness with no
+computation — but the theorem's proof does not cite that route, so as printed
+the chain runs through the elimination. Either point the theorem's proof at the
+signature paragraph, or say the theorem inherits the dependency and is
+independently obtainable without it.
+
+**(c) "No irrationality statement ... rests on any of them" is contradicted by
+the paper's own framing.** `lem:hirzebruch-euler-spectrum` carries
+`\evidence{hirzebruch-euler-spectrum}` (`05-framed-monodromy.tex:822`) and is a
+lemma of the framed route, which `cubic_stabilization_epilogue.tex:87` describes
+as "giving a second proof of the theorem" and which
+`01-introduction.tex:241-243` describes as reproving the one-step conclusion,
+landing on `thm:every-cubic-conditional`, "One-step irrationality from the framed
+invariant". That is an irrationality statement. The sentence should read "No
+irrationality statement on the unconditional atomic route rests on any of them;
+the conditional framed route's second proof does."
+
+**(d) The exhaustiveness is unsupported by the recorded layer, and the README
+says so eighty lines later.** The opening paragraph asserts a negative
+reachability fact about the whole manuscript. `dependency-graph.dot` has **no
+outgoing edge from `lem:hirzebruch-euler-spectrum` at all**, and
+`verification/README.md:99-101` states "Dependency edges are currently recorded
+for the atomic route of Section 4 and the proof of the one-stabilization
+theorem; a statement carrying no edge has none recorded rather than none." So
+the recorded data can neither confirm nor refute the new opening claim. That is
+allowed, but the opening should say the enumeration is the author's reading of
+the proofs rather than a fact read off the graph.
+
+### B3. SHOULD-FIX — the Galois step still needs σ to act on **C**
+
+`sections/03-minimal-class.tex:536-541`. σ is introduced as "the nontrivial
+element \(\sigma\) of \(\operatorname{Gal}(\mathbf Q(\sqrt{-3})/\mathbf Q)\)",
+and the next sentence says "apply \(\sigma\) to the equivalence". The
+equivalence is a **C**-linear change of coordinates; an automorphism of a
+quadratic number field does not act on it. One clause fixes this: either choose
+an extension of σ to an automorphism of **C**, or note that the projective
+equivalence may be taken over \(\overline{\mathbf Q}\). As printed the step is
+one symbol short of well defined.
+
+Related, smaller: "the two models of the pencil used there and here present the
+same pencil over \(\C\)" is asserted. It follows in one clause from what the
+paper already proved — the invariant cubic space is two-dimensional and \(W_5\)
+is irreducible, so any two models differ by an \(A_5\)-equivariant isomorphism,
+unique up to scalar by Schur — and would cost nothing to say.
+
+### B4. SHOULD-FIX — `rem:four-dimensional-factor`: the derivation is right, one step is elided, and three smaller things
+
+I checked the whole chain independently and **it is correct**, which corrects my
+first-pass suspicion about the index. Recorded here so it is not re-litigated,
+using `sections/02-envelope.tex:554-566` for the definitions
+(\(\Lambda=\mathbf Z^\Omega/\mathbf Z\mathbf 1\) with \(\kappa\) of matrix
+\(6I_6-J_6\), \(M=H_1(E,\mathbf Z)\), \(L=H_1(J,\mathbf Z)\),
+\(\Lambda\otimes M\subseteq L\) with quotient \(\ker f\), polarization form
+\(\kappa\otimes\)(symplectic form of \(M\))):
+
+- images of \(e_1,\dots,e_5\) are a basis of \(\Lambda\) with \(e_6=-(e_1+\dots+e_5)\),
+  \(\kappa(e_i,e_i)=5\), \(\kappa(e_i,e_j)=-1\), so \(\det\Lambda=\det(6I_5-J_5)=6^4=1296\);
+- \(N=v^\perp=\{\sum x_i=0\}\) with form \(6\langle\,,\rangle\), and \([\Lambda:\mathbf Zv+N]=5\), both as stated;
+- \(\det(\Lambda\otimes M)=(\det\Lambda)^2=1296^2\), so \(L\) unimodular forces \([L:\Lambda\otimes M]=1296\);
+- the first paragraph's "the kernel ... lies in \(N\otimes M\)" is what makes \(L_1=\mathbf Zv\otimes M\), and it is stated;
+- \([\Lambda\otimes M:(\mathbf Zv\otimes M)\oplus(N\otimes M)]=25\), so \([L:(\mathbf Zv\otimes M)\oplus(N\otimes M)]=1296\cdot25=32400\), and \([L_4:N\otimes M]=|\ker f|=1296\), giving \([L:L_1\oplus L_4]=32400/1296=25\);
+- \(\det L_1=25\), so \(\det L_1\cdot\det L_4=1\cdot25^2\) gives \(\det L_4=25\);
+- \(\det L_4=25\) on rank eight forces polarization type \((1,1,1,5)\); \(\operatorname{disc}L_1=M/5M=E[5]\); the discriminant pairing is alternating so cyclic subgroups are isotropic; each of the six order-five subgroups gives an overlattice of determinant \(25/25=1\).
+
+All correct. The problems are in the presentation.
+
+**(a) One step is elided.** "\([\Lambda:\mathbf Zv+N]=5\), and tensoring with the
+rank-two lattice \(M\) squares that to \(25\)" computes an index inside
+\(\Lambda\otimes M\); the next paragraph uses \([L:L_1\oplus L_4]=25\), an index
+inside \(L\). They agree only because the passage from \(\Lambda\otimes M\) to
+\(L\) enlarges the \(N\)-summand alone, which is the first paragraph's kernel
+claim. A referee has to reconstruct that; one clause would supply it.
+
+**(b) "A rank-eight alternating lattice of determinant \(25\) has elementary
+divisors \((1,1,1,5)\)" conflates two things.** Its elementary divisors are
+\(1,1,1,1,1,1,5,5\); \((1,1,1,5)\) is the polarization type. Say type.
+
+**(c) "acts on \(\operatorname{disc}L_4\) through \(\pm1\), since it preserves
+\(N\) and acts trivially on \(M\)" — the stated reason proves more than the
+stated conclusion.** If \(D_5\) is trivial on \(M\) then it is trivial on
+\(\operatorname{disc}L_1=M/5M\) and, through the equivariant gluing, on
+\(\operatorname{disc}L_4\). "Trivially" is both stronger and simpler than
+"through \(\pm1\)"; as written the reader cannot tell whether the hedge is
+deliberate.
+
+**(d) "exactly six" counts overlattices, and the genus-four question is about
+isomorphism classes.** Six unimodular overlattices, yes. Whether they give six
+pairwise non-isomorphic principally polarized fourfolds is not addressed; the
+\(D_5\)-invariance rules out an identification from the symmetry and nothing
+else. "At most six, and exactly six unless two coincide" is the checkable claim.
+
+**(e) Unreconciled with the proposition it serves.** The proof of
+`prop:no-elliptic-product` builds its second-case factors by shrinking each
+summand so that "both forms \(m\) times a unimodular one"; the remark's
+\(L_4=L\cap(N_{\mathbf Q}\otimes M_{\mathbf Q})\) is the intrinsic abelian
+subvariety. Whether the proposition's constructed factor is one of the six or
+merely isogenous to them is the first thing a referee will ask, and the remark
+does not say.
+
+### B5. SHOULD-FIX — `prop:A5-not-coprime`'s claim-map `hypotheses` was not updated
+
+First-pass finding 10(a) is still open. `lean/verification/claims.json`, the row
+for `prop:A5-not-coprime`, `hypotheses`, unchanged:
+
+> Smoothness of the members, the Eckardt criterion of the preceding lemma, and
+> the computed emptiness of the Eckardt scheme of the members listed in the
+> registered evidence bundle.
+
+The `conclusion` and `cautions` of the same row were rewritten and the statement
+digest refreshed to `74ad7b50...`; only `hypotheses` was left. The new proof does
+not use the emptiness of the Eckardt scheme of a list of members — that bundle is
+now corroboration — it uses the elimination over the whole pencil. The sibling
+row's `hypotheses` was updated in the same commit, so this is an omission rather
+than a decision.
+
+Two smaller things in the same row: `conclusion` says "they are the two Fermat
+members", the phrasing the manuscript statement deliberately dropped; and
+`cautions` says "argued in the manuscript from Remark rem:fermat-in-pencil",
+which is now accurate for the proof but reads as though the statement still
+attributes it there.
+
+### B6. SHOULD-FIX — three "all but finitely many" citations now understate the propositions they name
+
+With the theorem reverted, the theorem-level sites are consistent and correctly
+left alone. These three are proposition-level and are not:
+
+- `sections/01-introduction.tex:331`: "Proposition~\ref{prop:A5-nonseparated}
+  shows that all but finitely many moduli points on that pencil lie outside the
+  separated-variable locus covered by \cite{CT}." Three lines below,
+  `01:334-335` was updated to "Proposition~\ref{prop:A5-not-coprime} places every
+  moduli point of that pencil except the Fermat point outside the explicit
+  family". One paragraph, two propositions, cited at two different strengths.
+- `sections/03-minimal-class.tex:634-636`: "All but finitely many moduli points
+  of the pencil escape the separated-variable mechanism of \cite{CT} by
+  Proposition~\ref{prop:A5-nonseparated} and the explicit family of \cite{YYZ}
+  by Proposition~\ref{prop:A5-not-coprime}" — immediately after the section
+  proved the sharper statement.
+- `sections/06-synthesis.tex:55-58`: "by Proposition~\ref{prop:A5-nonseparated},
+  for all but finitely many moduli points of the \(A_5\)-curve this universal
+  \(CH_0\)-triviality is not accounted for".
+
+None is false. All three name a proposition and then state less than it proves,
+which is the reverse of the style guide's "State claims at their natural
+strength".
+
+Separately, the **abstract** (`cubic_stabilization_epilogue.tex:94-95`) still
+says only "All but finitely many moduli points of this pencil lie outside the
+separated-variable locus". With the theorem reverted this is defensible, but the
+paper now proves that the exceptional set is the single Fermat point and the
+abstract gives the reader no signal that it does. That is a deliberate call to
+make, not an oversight to leave unmade.
+
+### B7. MINOR — "prime to the discriminant" now sits awkwardly against the sentence that precedes it
+
+`sections/03-minimal-class.tex:522-523`: "The roots of \(b^2+3b+9\) are prime to
+the discriminant". Six lines earlier the proof made a point of distinguishing the
+computed polynomial from the discriminant. Coprimality to the radical and to the
+discriminant are the same condition, so this is not wrong, but naming "the
+discriminant" here undoes the distinction just drawn. Say "prime to that
+polynomial".
+
+### B8. MINOR — line overrun in new prose
+
+`sections/03-minimal-class.tex:591` runs to 96 columns against the file's
+consistent ~76, because "though not the exact locus," was inserted without
+rewrapping.
+
+---
+
+## C. New defects introduced by the fixes
+
+### C1. SHOULD-FIX — `evidence.json` was not touched, and now contradicts the body it registers
+
+The registry's `a5-pencil-eckardt-locus.role` still says:
+
+> The same computation on the Jacobian ideal alone gives the pencil's
+> discriminant b(b+6)(b^2-3b-9)(7b^2+3b+9).  Both eliminated ideals are
+> squarefree.
+
+The proof body now says the opposite about the first clause and dropped the
+second. A registry entry whose job is to record what the bundle establishes now
+disagrees with the manuscript sentence it backs. Fixing the body and not the
+registry is the failure mode the annotation layer exists to prevent, and no gate
+catches it because the registry's `role` is free prose.
+
+Also still unfixed from the first pass: the entry's indentation is 3/1 spaces
+against the file's 4/6, which is why the diff shows the neighbouring
+`a5-pencil-eckardt` key as changed when only its position moved.
+
+### C2. SHOULD-FIX — the registry `note` is now the only place tying the Fermat point to the separation theorem
+
+`evidence.json`'s top-level `note`, added in `d7553b2be` and not revised when the
+theorem was reverted:
+
+> ... and the elimination determining the Eckardt locus and the singular locus of
+> that pencil as a whole, which is what separates it from the explicit
+> coprime-degree family of Yang, Yu and Zhu and which locates the single
+> exceptional point of the separation theorem.
+
+The separation theorem no longer names a single exceptional point. The
+elimination locates the exceptional point of the two propositions. This is the
+exact dependency the revert was performed to remove, surviving in the one file
+that describes the computation's role. It should read "of
+`prop:A5-not-coprime` and `prop:A5-nonseparated`".
+
+### C3. MINOR — the graph edge at `thm:separation-family` now reads backwards
+
+`prop:A5-not-coprime`'s proof still carries
+`\uses{lem:eckardt-rank, thm:separation-family}` (`03-minimal-class.tex:580`),
+and the rewritten proof uses the theorem only for the name \(B^\circ\). The graph
+therefore records `"thm:separation-family" -> "prop:A5-not-coprime"`, showing the
+theorem as an input to the proposition, while the printed logical dependency runs
+the other way through `prop:A5-nonseparated` and is recorded nowhere. Detaching
+\(B^\circ\) from the theorem (it is a two-word definition) would let the real
+edge be added without making the graph cyclic, and would remove the reason the
+README's enumeration in B2(b) reads as complete.
+
+---
+
+## D. The `da7ec8e8f` cleanup, judged on its own
+
+### D1. The docstring does tell a referee what the script computes, the model, and both ideals — and it now asserts one thing it does not compute
+
+On the coordinator's first question: yes, adequate. It states both eliminated
+ideals up front, gives the model
+(\(A_5=\mathrm{PSL}(2,5)\) on \(\PP^1(\F_5)\), the sum-zero subspace, \(T_1\) as
+the orbit sum, the \(y\)-coordinatization), states each ideal and its saturation,
+explains why the saturation is by \(\langle y_1..y_5\rangle\) and not the maximal
+ideal, and gives the replay commands. It leans on nothing it no longer cites; the
+one external pointer left is "the manuscript's lem:eckardt-rank", a stable
+semantic label, which is the right kind of reference and resolves inside the
+exported directory. Good.
+
+One over-reach, new in this commit:
+
+> The Eckardt locus comes out as b(b^2 + 3b + 9), whose
+> factor b is the Segre cubic and is singular, so on the smooth locus of the
+> pencil the Eckardt members are the conjugate pair b = 3 omega
+
+The script computes `b(b^2+3b+9)`. That the factor `b` is the Segre cubic, that
+it is singular, and therefore that the smooth Eckardt members are the conjugate
+pair, are the manuscript's argument, not this script's output — and the Segre
+identification is asserted without citation in both places. A referee-facing
+artifact should not open by stating a conclusion it does not establish. Attribute
+it: "the manuscript identifies the factor b as the Segre cubic".
+
+### D2. SHOULD-FIX — the artifact carries no trust marker
+
+Neither the docstring, nor the `.sing`, nor the `.txt` says anywhere that this is
+a trusted execution rather than a certificate-checked computation. That statement
+lives only in `evidence.json` and in the proof body. Under the referee-facing
+standard the coordinator invoked — and given the new banner explicitly directs a
+reader to the generator for documentation — the docstring is the natural home for
+one sentence: a Gröbner elimination over **Q**, trusted as an execution, no
+certificate produced. Its absence is more visible now that the docstring has been
+rewritten to be self-contained.
+
+### D3. The banner is adequate; two things it does not carry
+
+> // Eckardt locus and singular locus of the nonstandard A_5-cubic pencil,
+> // by elimination.  Generated file; do not edit.  Its generator is
+> // verification/a5_pencil_eckardt_locus.py, which documents the model,
+> // the two ideals, and the replay commands.
+
+Names the object, marks the file generated, names an in-directory generator, and
+says where the documentation is. That is what a generated-file header owes a
+reader, and it fixes first-pass finding 12(a). It does not record the toolchain
+version or the run date, which matters here because of D4.
+
+### D4. SHOULD-FIX — first-pass findings 12(b) and 12(c) survived a regeneration
+
+`da7ec8e8f` regenerated the `.sing` and reran Singular, so both were free.
+
+**(b) The certificate's legend still contradicts its own numbers.** The tracked
+`.txt` prints "dimension of its singular locus (-1 empty, so smooth):" followed
+by `-2`, and the same for the Eckardt scheme. Singular returns `-1` for the
+dimension of the unit ideal, so an empty projective scheme prints `-2`. The value
+is right; the legend tells the reader the wrong number means empty.
+
+**(c) 140 of the 168 lines of the certificate are `// ** redefining ...`
+warnings** from `LIB "primdec.lib";`, which the script never uses — `sat` comes
+from `elim.lib`, `minor` and `factorize` are builtins. The mathematics occupies
+28 lines. This also makes the tracked SHA-256 hostage to any Singular library
+update, which is the practical cost of D3's missing version pin.
+
+---
+
+## E. Checked and sound, second pass
+
+Recorded so these are not reopened.
+
+- The revert is complete and consistent across the statement, the annotation,
+  the claim-map row, the proof, the dependency graph colouring, and both
+  coverage snapshots. Nothing in `sections/` claims the theorem names the Fermat
+  point.
+- The Chevalley paragraph is correct and sufficient for the reverse inclusion.
+- The determinant chain in `rem:four-dimensional-factor` is correct end to end,
+  verified independently against the definitions at `02-envelope.tex:554-566`;
+  see B4 for the working. \([L:L_1\oplus L_4]=25\) is right, which I had
+  doubted.
+- The Galois argument is now in the right form, modulo the extension of σ to
+  **C** (B3).
+- `\evidence` appears at exactly two sites, `03-minimal-class.tex:502` and
+  `05-framed-monodromy.tex:822`, as the README claims; it is the reachability
+  conclusions drawn from that, not the count, that fail (B2).
+- Checksums verify, `python3 verification/a5_pencil_eckardt_locus.py` reproduces
+  the tracked `.sing` byte-for-byte, and the eliminated ideals in the reran
+  `.txt` are unchanged: `7b^6+24b^5-171b^4-432b^3-405b^2-486b` factoring as
+  `b`, `b+6`, `b^2-3b-9`, `7b^2+3b+9`, and `b^3+3b^2+9b` factoring as `b`,
+  `b^2+3b+9`.
+- `make check`'s source-only gate passes at both commits, and again catches none
+  of the above.

@@ -695,7 +695,10 @@ carried by \(N\) and the kernel of
 Proposition~\ref{prop:principal-gluing-packet} lies in \(N\otimes M\).  What
 separates the two summands is five-adic:
 \([\Lambda:\mathbf Zv+N]=5\), and tensoring with the rank-two lattice \(M\)
-squares that to \(25\).
+squares that to
+\([\Lambda\otimes M:(\mathbf Zv\otimes M)\oplus(N\otimes M)]=25\).
+Passing from \(\Lambda\otimes M\) to \(L\) enlarges the \(N\)-summand alone, by
+the previous sentence, so this index is also the index in \(L\) used below.
 
 Write \(L_1=L\cap(\mathbf Qv\otimes M_{\mathbf Q})\) and
 \(L_4=L\cap(N_{\mathbf Q}\otimes M_{\mathbf Q})\) for the two primitive
@@ -705,16 +708,20 @@ M\) carries \(5\) times a unimodular alternating form, so \(\det L_1=25\); since
 \(L\) is unimodular and \([L:L_1\oplus L_4]=25\), we get
 \(\det L_1\cdot\det L_4=25^2\) and hence \(\det L_4=25\).  A rank-eight
 alternating lattice of determinant \(25\) has elementary divisors
-\((1,1,1,5)\), so \(L_4\) is not unimodular and the intrinsic four-dimensional
-factor is not principally polarized.  Its discriminant group is glued to that
+\(1,1,1,1,1,1,5,5\), that is polarization type \((1,1,1,5)\), so \(L_4\) is not
+unimodular and the intrinsic four-dimensional factor is not principally
+polarized.  Its discriminant group is glued to that
 of \(L_1\), which is \(M/5M=E[5]\); the discriminant pairing is alternating, so
 every subgroup of order five is isotropic, and each of the six gives a
 unimodular overlattice of \(L_4\).  The second case of the proposition
-therefore admits exactly six principally polarized abelian fourfolds, each
+therefore admits at most six principally polarized abelian fourfolds, each
 five-isogenous to the intrinsic factor, one for each order-five subgroup of
-\(E[5]\).  The stabilizer \(D_5\) of the axis acts on \(\operatorname{disc}L_4\)
-through \(\pm1\), since it preserves \(N\) and acts trivially on \(M\), so it
-fixes all six and the \(A_5\)-structure selects none of them.  A genus-four
-question about the second case is therefore a question about a choice among
-these six fourfolds.
+\(E[5]\), and exactly six unless two of the overlattices are isomorphic as
+polarized varieties.  The stabilizer \(D_5\) of the axis acts trivially on
+\(\operatorname{disc}L_4\), since it acts trivially on \(M\) and the gluing is
+equivariant, so it fixes each of the six and the \(A_5\)-structure selects none
+of them.  The factors the proof of the proposition constructs are obtained from
+these by a further shrink of odd index, so they are odd-degree isogenous to
+them rather than equal to them; a genus-four question about the second case is
+a question about this finite list.
 \end{remark}
