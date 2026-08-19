@@ -139,6 +139,7 @@ roots = [
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.AtomicRankTwoFlatRigidity",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.SylvesterOperator",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.BlockSylvesterSolvability",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NormalizedSylvesterGauge",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.PaperInterface",
 ]
 
