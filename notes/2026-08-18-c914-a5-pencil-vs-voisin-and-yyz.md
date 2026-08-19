@@ -262,6 +262,21 @@ SHA-256 (byte counts in parentheses):
 | `notes/2026-08-18-c914-a5-pencil-voisin-locus.py` | c67016f21b770990052863e710ba5c894f59f95016895a1b602ebd61887fd79e | 18383 |
 | `notes/2026-08-18-c914-a5-pencil-voisin-locus.json` | 546b1d4484d3b8eea5cb16e84b18c0e14e8600640148a3f6cf27db4eea98ba7c | 11474 |
 
+## 4b. Promotion into the manuscript
+
+The Eckardt bundle now also lives inside the paper, at
+`papers/cubic-stabilization-epilogue/verification/`, as
+`a5_pencil_eckardt.py` with two tracked outputs — `a5-pencil-models.txt` for
+the model checks and `a5-pencil-eckardt.txt` for the Singular run — a checksum
+manifest covering all three, a `--check` mode that recomputes the model checks
+and compares them with the tracked file, and an entry in the paper's evidence
+registry. That copy is the authority for the manuscript's statements; the files
+under `notes/` are the frozen artifacts of this task's run, and the two Singular
+inputs they generate are byte-identical. The manuscript statements resting on
+it are `prop:A5-not-coprime` and, through the second proof recorded there,
+`prop:A5-nonseparated`. An independent cold read of the manuscript change is at
+`2026-08-18-c914-manuscript-cold-read.md`.
+
 ## 5. Negative results, with their exact domain
 
 * No Eckardt point exists on the five rational-model members and the three
