@@ -172,6 +172,16 @@ shape:
 Treat this sequence as the default. In a short paper, it may occupy a few
 well-shaped paragraphs instead of five labeled subsections.
 
+### Programme papers
+
+Papers belonging to a thematic programme must retain standalone title-page
+identity: do not place programme banners, ordinal paper numbers, programme
+epigraphs, or programme maps in the front matter. Local mathematical
+motivation and roadmaps belong in the introduction; cross-paper placement
+belongs in an unnumbered coda after the mathematical conclusion. Programme
+numbering may appear in that coda, its programme map, and repository-level
+metadata.
+
 ## Theorem and proof architecture
 
 - Lead with the form of the result that carries the contribution—qualitative

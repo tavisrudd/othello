@@ -37,21 +37,7 @@ from its deep-hole syndrome locus}
 \date{July 2026}
 
 \begin{document}
-\begingroup
-\makeatletter
-\let\clebschmaintitle\@title
-\def\@title{\large\textsc{Clebsch: Rigidity from Sparse Shadows --- }\textbf{I}\\[0.7em]
-  \LARGE\clebschmaintitle}
-\makeatother
 \maketitle
-\endgroup
-
-\begin{center}
-\small\itshape
-From deep holes, a cubic \textbf{takes shape}; its companion finds its bearings,\\
-the carrier stands fixed while their shadows move; from minimum words, the plane returns,\\
-and the scattered shadows gather home.
-\end{center}
 
 \begin{abstract}
 Let $A$ be a six-arc in $\PG(2,11)$, and let $\cU(A)$ be the projective
@@ -97,53 +83,16 @@ conic; monomial equivalence; two-graph; golden ratio.
 
 A recurring inverse problem in coding theory and finite geometry is to
 determine how much of a projective system can be reconstructed from coarse
-metric data.  Here the retained datum is the projective locus of
+metric data.  The motivating question is not specific to the Clebsch
+configuration: when can a sparse invariant determine the object that produced
+it?  Here the retained datum is the projective locus of
 maximum-distance syndromes of a redundancy-three MDS code.  For a six-arc in
 $\PG(2,11)$, containment of that locus in an arbitrary conic forces the
 Clebsch hexagon; decoder data then recover its polarity, symmetry, and golden
 orientation.  The exceptional configuration is therefore the output of a
-recognition theorem, not part of its input.
-
-\Needspace{27\baselineskip}
-\medskip
-\noindent\textbf{Reconstruction perspective.}
-The motivating question is not specific to the Clebsch configuration: when
-can a sparse invariant determine the object that produced it?  Here the
-invariant is the maximum-distance syndrome locus and the source is a
-projective MDS code.  The order-eleven Clebsch code is the rigid exceptional
-answer, while the chord-defect identity and conic-filling bounds are
-field-uniform.  The later papers study other shadows of related sources;
-none is used in the proofs here.  Figure~\ref{fig:series-map} records the
-programme and the independent lower branch.
-
-\begin{figure}[H]
-\centering
-\begin{tikzpicture}[
-  x=1cm,y=1cm,>=Latex,
-  paper/.style={draw,rounded corners=1.5pt,fill=black!2,
-    align=center,font=\footnotesize,minimum height=8mm,text width=29mm,
-    inner sep=2.5pt},
-  active/.style={paper,very thick,fill=black!12},
-  package/.style={paper,text width=38mm}
-]
-\node[active]  (p1) at (0,1.45) {\textbf{I}\\conference companion};
-\node[paper]   (p2) at (0,0.35) {\textbf{II}\\chordal companion};
-\node[paper]   (p3) at (0,-0.75) {\textbf{III}\\conference companion};
-\node[paper]   (p5) at (5.25,0.35) {\textbf{V}\\marked companion correspondence};
-\node[package] (gold) at (10.5,0.35) {one six-axis carrier\\conference \(+\) chordal};
-\node[paper]   (p4) at (0,-2.05) {\textbf{IV}\\minimum-word pairs};
-\node[package] (plane) at (5.25,-2.05) {marked conic plane\\and polarity};
-\draw[<->] (p1.east) -- ([yshift=3mm]p5.west);
-\draw[<->] (p2.east) -- (p5.west);
-\draw[<->] (p3.east) -- ([yshift=-3mm]p5.west);
-\draw[->,thick] (p5.east) -- (gold.west);
-\draw[->,thick] (p4.east) -- (plane.west);
-\end{tikzpicture}
-\caption{Series map.  Upper double arrows are the marked transports and
-returns proved in Paper~V; its right arrow is the common-carrier theorem.
-The lower solid arrow is Paper~IV's independent reconstruction.}
-\label{fig:series-map}
-\end{figure}
+recognition theorem, not part of its input.  The order-eleven Clebsch code is
+the rigid exceptional answer, while the chord-defect identity and
+conic-filling bounds are field-uniform.
 
 Let $C$ be a linear $[n,k,d]_q$ code with covering radius $\rho$ and
 full-rank parity-check matrix $H$. For a received word $v$, write
@@ -275,12 +224,7 @@ order.  A separate computational companion
 degree-three characterization and numerical gap at $q=11$, uniqueness of
 $q=11$ among conic-filling six-arcs, classification through eight points,
 and the original computational form of an exact $q=13$ binary incidence-code
-theorem.  Paper~IV gives the structural and reproducible account of that
-$q=13$ consequence~\cite{RuddPassant2026}.
-
-The remaining cross-paper architecture is recorded in
-Figure~\ref{fig:series-map}; none of those companion constructions is used in
-the present proof.
+theorem.
 
 \section{The Clebsch hexagon}
 \label{sec:hexagon}
@@ -2034,6 +1978,62 @@ The determinant pencil makes the bridge visible: its quadratic identity
 $B^2=5I$ controls every symmetric layer, while triangle holonomy is exactly
 the remaining cubic term.  In particular, decoder support data recover a
 nontrivial integral endomorphism order, not only a projective configuration.
+
+\Needspace{34\baselineskip}
+\section*{Clebsch: Rigidity from Sparse Shadows}
+
+\begin{center}
+\begin{tabular}{@{}r@{\hskip 1.4em}l@{}}
+{\scriptsize I}   & \textbf{From deep holes, a form arises;}\\
+{\scriptsize II}  & beneath it, paired chords turn true;\\
+{\scriptsize III} & through many veils, the golden thread runs;\\
+{\scriptsize IV}  & from bare, whispered words, a plane rises;\\
+{\scriptsize V}   & beneath one form, two shadows, a hidden twist between.
+\end{tabular}
+\end{center}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+  x=1cm,y=1cm,>=Latex,
+  paper/.style={draw,rounded corners=1.5pt,fill=black!2,
+    align=center,font=\footnotesize,minimum height=9mm,text width=34mm,
+    inner sep=2.5pt},
+  active/.style={paper,very thick,fill=black!12},
+  hinge/.style={paper,thick},
+  package/.style={paper,text width=48mm}
+]
+\node[active]  (p1) at (0,1.9) {\textbf{I}\\deep-hole\\conference cubic};
+\node[paper]   (p2) at (0,0.35) {\textbf{II}\\matching-quotient\\chordal cubic};
+\node[paper]   (p3) at (0,-1.2) {\textbf{III}\\golden-descent\\conference cubic};
+\node[hinge]   (p5) at (5.5,0.35) {\textbf{V}\\marked cubic\\correspondence};
+\node[package] (gold) at (10.6,0.35) {one six-axis carrier\\conference \(+\) chordal};
+\node[paper]   (p4) at (0,-3.6) {\textbf{IV}\\minimum-word pairs};
+\node[package] (plane) at (5.5,-3.6) {marked conic plane and polarity\\with an \(\F_8\)-marking};
+\draw[<->] (p1.east) -- ([yshift=3mm]p5.west);
+\draw[<->] (p2.east) -- (p5.west);
+\draw[<->] (p3.east) -- ([yshift=-3mm]p5.west);
+\draw[->,thick] (p5.east) -- (gold.west);
+\draw[->,thick] (p4.east) -- (plane.west);
+\end{tikzpicture}
+\caption{Programme map.  The upper double arrows are Paper~V's marked
+transports and returns between the chordal and conference shadows; the right
+arrow is its common-carrier reconstruction.  The lower solid arrow is
+Paper~IV's independent minimum-word reconstruction.  Only the residual
+\(C_2\)- and Frobenius-orbit markings are compared across the two branches.}
+\label{fig:programme-map}
+\end{figure}
+
+The five papers are logically independent; the map records reconstruction
+correspondences and thematic relations, not proof dependencies.
+
+The sparse datum here is the maximum-distance syndrome locus.  It recovers
+the Clebsch code together with its conic, polarity, and golden orientation;
+the later papers study other shadows of related sources, but none is used in
+the proofs here.  The order-eleven Clebsch code is the rigid exceptional
+answer, while the chord-defect identity and conic-filling bounds are
+field-uniform.  Paper~IV gives the structural and reproducible account of the
+\(q=13\) consequence recorded above~\cite{RuddPassant2026}.
 
 \section*{AI assistance disclosure}
 

@@ -19,6 +19,7 @@
     "sections/07-marking-ambiguities.tex",
     "sections/08-verification.tex",
     "sections/09-conclusion.tex",
+    "sections/09-programme-coda.tex",
     "sections/10-references.tex",
     "verification/README.md",
     "verification/check_manuscript_build.py",
