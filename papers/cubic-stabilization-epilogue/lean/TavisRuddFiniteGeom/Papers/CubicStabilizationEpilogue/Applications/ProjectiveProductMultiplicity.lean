@@ -129,6 +129,28 @@ theorem cubicProductProjectiveLine_sixthMultiplicity_eq_four
     (cubicPacket_sixthMultiplicity_eq_two_of_block_exponents
       geometry.toCubicPacketGeometry exponentMonodromy cubic smooth)
 
+/-- The product formula for the primitive-sixth count, from the framed tensor
+decomposition.  The premise is the conclusion of the manuscript's
+Levelt--Turrittin computation for the product: after adjoining the root of the
+projective-space Novikov variable, quantum multiplication by the first Chern
+class of the projective space of dimension `m` has `m + 1` distinct eigenvalues,
+each rank-one block has trivial framed regular monodromy, and tensoring a formal
+factor of the base with one of them leaves the framed regular operator of the
+base factor unchanged.  The framed characteristic polynomial of the product is
+therefore the `(m + 1)`-st power of that of the base, and Lean concludes that the
+primitive-sixth multiplicity is multiplied by `m + 1`.  The Gromov--Witten product
+formula, the numerical Novikov base change, and the tensor compatibility of the
+formal decomposition are not proved here. -/
+theorem projectiveProduct_sixthMultiplicity_of_charpoly_power
+    (base product : Quantum.FramedMonodromyMatrix) (dimension : ℕ)
+    (tensorDecomposition :
+      product.operator.charpoly = base.operator.charpoly ^ (dimension + 1)) :
+    product.sixthMultiplicity = (dimension + 1) * base.sixthMultiplicity := by
+  have nonzero : base.operator.charpoly ≠ 0 := base.operator.charpoly_monic.ne_zero
+  change Quantum.sixthMultiplicityPolynomial product.operator.charpoly = _
+  rw [tensorDecomposition, Quantum.sixthMultiplicityPolynomial_pow _ nonzero]
+  rfl
+
 end Applications
 
 end TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue

@@ -6237,4 +6237,22 @@ theorem cubicPacket_sixthMultiplicity_eq_two_on_formal_germ
   Applications.cubicFormalGerm_sixthMultiplicity_eq_two germ blockFactorization
     exponentRigidity closedPointPacket
 
+/-- The product formula for the primitive-sixth count of a product with a
+projective space, from the framed tensor decomposition.  The premise is that the
+framed characteristic polynomial of the product is the `(m + 1)`-st power of that
+of the base, which is what the manuscript's Levelt--Turrittin computation
+produces once the rank-one blocks at the `m + 1` eigenvalues of quantum
+multiplication by the first Chern class of the projective space are seen to have
+trivial framed regular monodromy.  Lean concludes that the multiplicity is
+multiplied by `m + 1`.  The Gromov--Witten product formula, the numerical Novikov
+base change, and the tensor compatibility of the formal decomposition are not
+proved. -/
+theorem projectiveProduct_sixthMultiplicity_of_framed_tensor_decomposition
+    (base product : Quantum.FramedMonodromyMatrix) (dimension : ℕ)
+    (tensorDecomposition :
+      product.operator.charpoly = base.operator.charpoly ^ (dimension + 1)) :
+    product.sixthMultiplicity = (dimension + 1) * base.sixthMultiplicity :=
+  Applications.projectiveProduct_sixthMultiplicity_of_charpoly_power base product
+    dimension tensorDecomposition
+
 end TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue

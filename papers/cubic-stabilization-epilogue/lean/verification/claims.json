@@ -697,13 +697,16 @@
     },
     {
       "manuscript_label": "prop:projective-product-nu",
-      "coverage": "absent",
-      "declarations": [],
-      "objects": "The framed sixth-root count of a product of a smooth projective variety with a projective space.",
-      "hypotheses": "Smoothness and projectivity of the factor; the product formula for Gromov-Witten theory and the multiplicity-one Euler block lemma.",
-      "conclusion": "The count of the product is the count of the factor multiplied by one more than the dimension of the projective space, unconditionally.",
-      "cautions": "Not formalized as stated. The formula enters the two product-formula corollaries as an explicit typed premise, and the companion's projective-bundle formula is registered under the conditional framed operation claim and is proved under the reconstruction-tail hypothesis, whereas this product statement is unconditional.",
-      "statement_digest": "47f023307c3bcf1a997b1e867683aed60bee4757841cd3622fa7c57f8f79d6a6"
+      "coverage": "conditional_deduction",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.projectiveProduct_sixthMultiplicity_of_framed_tensor_decomposition"
+      ],
+      "objects": "Framed formal-monodromy matrices of a smooth projective variety and of its product with a projective space, and their primitive-sixth multiplicities.",
+      "hypotheses": "The framed characteristic polynomial of the product is the power of that of the factor with exponent one more than the dimension of the projective space.",
+      "conclusion": "The count of the product is the count of the factor multiplied by one more than the dimension of the projective space.",
+      "cautions": "Conditional deduction.  The premise is the conclusion of the manuscript's Levelt--Turrittin computation for the product, which rests on the Gromov--Witten product formula, the numerical Novikov base change, the distinctness of the eigenvalues of quantum multiplication by the first Chern class of the projective space, and the multiplicity-one Euler block lemma; none of those is proved, and no variety, product, or quantum connection is constructed.",
+      "statement_digest": "47f023307c3bcf1a997b1e867683aed60bee4757841cd3622fa7c57f8f79d6a6",
+      "terminal_digest": "c34441bec5693f6e571cc20d0c26bc40711dab8816f8ab975d5b79eaccf0e3d2"
     },
     {
       "manuscript_label": "cor:p3-nu6",

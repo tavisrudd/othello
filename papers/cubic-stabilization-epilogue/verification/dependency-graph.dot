@@ -41,7 +41,7 @@ digraph manuscript {
   "prop:no-curve" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
   "prop:no-surface" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
   "prop:principal-gluing-packet" [fillcolor="#fde8c8", tooltip="fragment"];
-  "prop:projective-product-nu" [fillcolor="#ffffff", tooltip="absent"];
+  "prop:projective-product-nu" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
   "prop:rank2-rigidity" [fillcolor="#fde8c8", tooltip="fragment"];
   "prop:ranktwo-framed-germ" [fillcolor="#fde8c8", tooltip="fragment"];
   "prop:residue-discriminant-exponents" [fillcolor="#fde8c8", tooltip="fragment"];
