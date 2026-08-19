@@ -183,6 +183,19 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   spectrum-transfer report
   `../2026-08-18-c910-discriminant-and-spectrum-transfer.md`; interim release report
   `../2026-08-12-c910-partial-lean-release.md`.
+- **C920 — closed 2026-08-18.** Hypothesis 5.7T of the epilogue is now used only
+  for surface centers that are neither minimal nor geometrically ruled: the
+  specialized primitive-sixth count vanishes for every Hirzebruch surface, by one
+  deformation to index at most one, the rank-four Euler quartic and its
+  discriminant, and a non-collision argument for the center specializations; the
+  quadric surface goes through the Gromov--Witten product formula instead, which
+  needs no relation between its two specialized values. The residual use of 5.7T
+  is a single named obstruction, a support or base-change statement for the
+  blowup comparison after external specialization. Card:
+  `../cubic-threefolds-tasks/c920-minimal-ruled-tagging-removal.md`; report
+  `../2026-08-18-c920-minimal-ruled-tagging-removal.md`. Not yet exported to the
+  standalone repository.
+
 - **C914 — both comparisons decided, manuscript restatement open.** The
   pencil contains the Fermat cubic threefold. All but finitely many of its
   members lie outside the Yang--Yu--Zhu coprime-degree locus: every member of
@@ -221,7 +234,7 @@ mirror, or Lean source follows automatically from any of the above.
 
 | surface | root | current state | owning task |
 |---|---|---|---|
-| Cubic-stabilization epilogue: `X x P^1` irrational, the `m = 1` statement | `papers/cubic-stabilization-epilogue/` | headline unconditional through the Section 4 atomic route since 2026-08-16; Hypotheses 5.7R and 5.7T carry only the Section 5 framed refinement, now stated as `thm:every-cubic-conditional`; warning-free at 49 pages; Lean anchored to the atomic route, further coverage open under C910 | C907, C909, C910, C913 (C912 closed) |
+| Cubic-stabilization epilogue: `X x P^1` irrational, the `m = 1` statement | `papers/cubic-stabilization-epilogue/` | headline unconditional through the Section 4 atomic route since 2026-08-16; Hypothesis 5.7R and, since C920, Hypothesis 5.7T only for surface centers that are neither minimal nor geometrically ruled carry the Section 5 framed refinement stated as `thm:every-cubic-conditional`; Lean anchored to the atomic route, further coverage open under C910; the standalone export lags C920 | C907, C909, C910, C913 (C912 closed) |
 | Discrepancy-one flip correction | `papers/discrepancy-one-flips/` | published standalone note, DOI `10.5281/zenodo.21924799` | C911 (closed) |
 | *Irrationality of Cubic Threefolds after One Stabilization*: `X x P^m` for all `m`, the all-`m` statement | `papers/cubic-stabilization-irrationality/` | headline conditional on the marked-threshold wall and zero-mode hypotheses | C913 |
 
