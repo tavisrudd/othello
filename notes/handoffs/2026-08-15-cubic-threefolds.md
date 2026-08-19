@@ -154,6 +154,13 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   block simple. The five absent rows left are the four separation corollaries and
   `lem:exact-low-degree-shifts`; neither cluster is a composition of formalized
   algebra.
+  The rank-two step of the atomic route is now derived from a formal model of
+  the connection rather than assumed: flatness and pairing horizontality are
+  single power-series identities, the elementary modification is constructed as
+  a gauge identity without inverses, flatness passes to the modified lattice,
+  and the commutant computation, the vanishing of the residual base pole, the
+  Lax equation, and constancy of the residue discriminant follow, over a formal
+  germ as well.  Manuscript-side integration of those terminals is open.
   Card:
   `../cubic-threefolds-tasks/c910-cubic-stabilization-lean-companion.md`; gap audit
   `../2026-08-18-c910-post-restructure-gap-audit.md`; anchor report

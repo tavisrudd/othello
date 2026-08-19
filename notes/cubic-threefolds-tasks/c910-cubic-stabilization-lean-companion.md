@@ -570,6 +570,22 @@ semantics producing the supplied divisor-tagging equalities, operation
 comparisons, the geometric argument producing the `{1,-1}` spectrum in low
 dimensions, and Cai's actual integral-`z` block diagonalization.
 
+The rank-two step of the atomic route is now derived from the connection rather
+than assumed.  `Quantum/FormalLoopConnection.lean` represents the loop and base
+connection matrices and the sesquilinear pairing as formal power series obtained
+by clearing the simple pole, so flatness and horizontality are single series
+identities and the four coefficient equations of the manuscript are consequences
+of them.  `Quantum/AtomicElementaryModification.lean` constructs the gauge
+`diag(1, u)` and the transformed matrices, states their defining property without
+inverting the gauge, and proves that flatness passes to the modified lattice.
+`Quantum/AtomicRankTwoFlatRigidity.lean` then runs the manuscript's chain: the
+commutant computation, vanishing of the residual base pole, the Lax equation, and
+constancy of the residue discriminant, over a formal germ as well.
+Horizontality supplies the nilpotent-line property over a domain.  The geometric
+inputs are unchanged, and the claim map, reviewer terminals, and coverage value
+of the rank-two rigidity row are not yet updated.  Report:
+[`../2026-08-18-c910-rank-two-flat-rigidity.md`](../2026-08-18-c910-rank-two-flat-rigidity.md).
+
 ## Prioritized Lean backlog
 
 Work in this order unless a later literature or library dependency changes the
