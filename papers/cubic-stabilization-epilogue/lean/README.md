@@ -54,7 +54,7 @@ whole odd cohomology in that packet, and the constancy of rank on a connected
 component.
 
 Checked coverage snapshot: 50 claims; 10 absent; 21 fragmentary; 18 conditional;
-1 complete; 223 reviewer terminals, of which 46 are machinery serving no current
+1 complete; 224 reviewer terminals, of which 46 are machinery serving no current
 manuscript claim.
 
 Those 46 are kernel-checked and reusable, and the claim map records for each one
@@ -133,6 +133,14 @@ The reviewer-facing terminals currently verify:
   statements that make it meet an orthogonal decomposition, namely that a
   block-diagonal matrix is self-adjoint as soon as each block is, and that a
   scalar matrix is self-adjoint for every dual form;
+- the orthogonal decomposition of the coefficient lattice in that chart as an
+  actual change of basis, over any coefficient ring in which five has an
+  inverse: the chart matrix is invertible, its columns are the first coordinate
+  vector and the displayed complement vectors, and it carries `6I-J` to the
+  block matrix with the unit line of value five and the complementary block
+  `(6/5)(5I-J)`, whence the first chart dual vector lies in the image of `6I-J`
+  and every vector is congruent modulo that image to a combination of the four
+  chart dual vectors orthogonal to it;
 - the location of the discriminant group of `6I-J`, the quotient by the image of
   multiplication by that matrix: the constant vector lies in the image and has
   value five under the form, every integral vector is congruent modulo the image

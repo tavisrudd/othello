@@ -13,6 +13,8 @@ namespace TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue
 
 namespace GraphLattices
 
+open Matrix
+
 variable {R : Type*} [CommRing R]
 
 /-- The first standard vector in the five-axis coefficient lattice. -/
@@ -128,6 +130,118 @@ theorem sixAxisComplementVector_pairing
     calc
       _ = (inverseFive + 1) * (5 * inverseFive - 1) := by ring
       _ = 0 := by rw [inverse, sub_self, mul_zero]
+
+/-- The pairing represented by the five-axis Gram matrix is symmetric. -/
+theorem sixAxisGramPairing_comm (left right : Fin 5 → R) :
+    sixAxisGramPairing left right = sixAxisGramPairing right left := by
+  rw [sixAxisGramPairing_eq, sixAxisGramPairing_eq, dotProduct_comm]
+  ring
+
+/-- The elementary matrix that adds a multiple of the first coordinate to every
+other coordinate. -/
+def sixAxisChartShift (inverseFive : R) : Matrix (Fin 5) (Fin 5) R :=
+  fun row column ↦ if row = 0 ∧ column ≠ 0 then inverseFive else 0
+
+/-- The chart change of basis: its first column is the first coordinate vector
+and its other columns are the displayed complement vectors. -/
+def sixAxisChartBasis (inverseFive : R) : Matrix (Fin 5) (Fin 5) R :=
+  1 + sixAxisChartShift inverseFive
+
+/-- The inverse chart change of basis, subtracting the same multiple. -/
+def sixAxisChartBasisInverse (inverseFive : R) : Matrix (Fin 5) (Fin 5) R :=
+  1 - sixAxisChartShift inverseFive
+
+/-- Any two of the elementary shift matrices compose to zero. -/
+theorem sixAxisChartShift_mul (first second : R) :
+    sixAxisChartShift (R := R) first * sixAxisChartShift second = 0 := by
+  ext row column
+  rw [Matrix.mul_apply]
+  refine Finset.sum_eq_zero fun index _ ↦ ?_
+  by_cases first_zero : index = 0
+  · simp [sixAxisChartShift, first_zero]
+  · simp [sixAxisChartShift, first_zero]
+
+/-- The chart change of basis is invertible over any coefficient ring, with the
+displayed inverse. -/
+theorem sixAxisChartBasis_mul_inverse (inverseFive : R) :
+    sixAxisChartBasis inverseFive * sixAxisChartBasisInverse inverseFive = 1 ∧
+      sixAxisChartBasisInverse inverseFive * sixAxisChartBasis inverseFive = 1 := by
+  constructor <;>
+    simp [sixAxisChartBasis, sixAxisChartBasisInverse, Matrix.add_mul, Matrix.mul_add,
+      Matrix.sub_mul, Matrix.mul_sub, sixAxisChartShift_mul]
+
+/-- The first column of the chart change of basis is the first coordinate
+vector. -/
+theorem sixAxisChartBasis_column_zero (inverseFive : R) :
+    (fun index ↦ sixAxisChartBasis inverseFive index 0) =
+      sixAxisFirstVector (R := R) := by
+  funext index
+  fin_cases index <;>
+    simp [sixAxisChartBasis, sixAxisChartShift, sixAxisFirstVector]
+
+/-- Every other column of the chart change of basis is the corresponding
+complement vector. -/
+theorem sixAxisChartBasis_column_succ (inverseFive : R) (column : Fin 4) :
+    (fun index ↦ sixAxisChartBasis inverseFive index column.succ) =
+      sixAxisComplementVector inverseFive column := by
+  funext index
+  fin_cases index <;> fin_cases column <;>
+    simp [sixAxisChartBasis, sixAxisChartShift, sixAxisComplementVector,
+      Fin.succ]
+
+/-- Every congruence entry of a change of basis against the five-axis Gram
+matrix is the pairing of the corresponding two columns. -/
+theorem congruence_apply_eq_pairing
+    (basis : Matrix (Fin 5) (Fin 5) R) (row column : Fin 5) :
+    (basisᵀ * sixAxisGram R * basis) row column =
+      sixAxisGramPairing (fun index ↦ basis index row)
+        (fun index ↦ basis index column) := by
+  simp only [Matrix.mul_apply, Matrix.transpose_apply, sixAxisGramPairing, dotProduct,
+    Matrix.mulVec, Finset.sum_mul, Finset.mul_sum]
+  rw [Finset.sum_comm]
+  refine Finset.sum_congr rfl fun first _ ↦ Finset.sum_congr rfl fun second _ ↦ ?_
+  ring
+
+/-- The Gram matrix of the chart basis: a unit line of value five, orthogonal to
+a four-dimensional block equal to `(6/5)(5I-J)`. -/
+def sixAxisChartGram (inverseFive : R) : Matrix (Fin 5) (Fin 5) R :=
+  fun row column ↦
+    if row = 0 then (if column = 0 then 5 else 0)
+    else if column = 0 then 0
+    else 6 * inverseFive * (if row = column then 4 else -1)
+
+/-- The exact orthogonal decomposition of the coefficient lattice in the chart
+basis: over any coefficient ring in which five has the displayed inverse, the
+chart change of basis is invertible and carries the five-axis Gram matrix to the
+block matrix with the unit line of value five and the four-dimensional depth-one
+block. -/
+theorem sixAxisChartBasis_congruence
+    (inverseFive : R) (inverse : 5 * inverseFive = 1) :
+    (sixAxisChartBasis inverseFive)ᵀ * sixAxisGram R * sixAxisChartBasis inverseFive =
+      sixAxisChartGram inverseFive := by
+  ext row column
+  rw [congruence_apply_eq_pairing]
+  induction row using Fin.cases with
+  | zero =>
+    induction column using Fin.cases with
+    | zero =>
+      rw [sixAxisChartBasis_column_zero]
+      simpa [sixAxisChartGram] using sixAxisFirstVector_pairing (R := R)
+    | succ column =>
+      rw [sixAxisChartBasis_column_zero, sixAxisChartBasis_column_succ]
+      simp [sixAxisChartGram,
+        sixAxisFirstVector_pairing_complement inverseFive inverse column]
+  | succ row =>
+    induction column using Fin.cases with
+    | zero =>
+      rw [sixAxisChartBasis_column_zero, sixAxisChartBasis_column_succ,
+        sixAxisGramPairing_comm]
+      simp [sixAxisChartGram, Fin.succ_ne_zero,
+        sixAxisFirstVector_pairing_complement inverseFive inverse row]
+    | succ column =>
+      rw [sixAxisChartBasis_column_succ, sixAxisChartBasis_column_succ,
+        sixAxisComplementVector_pairing inverseFive inverse row column]
+      simp [sixAxisChartGram, Fin.succ_ne_zero, Fin.succ_inj]
 
 /-- The integral arithmetic in the polarization proof uniquely determines
 the diagonal and off-diagonal entries once positivity and the vanishing

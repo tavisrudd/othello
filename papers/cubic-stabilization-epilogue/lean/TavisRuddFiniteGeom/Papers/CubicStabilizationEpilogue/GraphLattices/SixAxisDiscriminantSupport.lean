@@ -199,6 +199,60 @@ theorem sixAxisGram_six_smul_mem_image (value : Fin 5 → ℤ) :
   exact smul_mem_gramImage_of_reduced_smul sixAxisGram_smith_reduction
     sixAxisSmithLeft_inverse_mul divisible value
 
+section Chart
+
+variable {R : Type*} [CommRing R]
+
+/-- In the chart basis the coefficient form sends the multiple `1/5` of the
+first coordinate to the first dual coordinate. -/
+theorem sixAxisChartGram_mulVec_single_zero
+    (inverseFive : R) (inverse : 5 * inverseFive = 1) :
+    sixAxisChartGram inverseFive *ᵥ Pi.single 0 inverseFive =
+      Pi.single 0 (1 : R) := by
+  ext row
+  rw [Matrix.mulVec_single]
+  by_cases zero : row = 0
+  · subst zero
+    simpa [sixAxisChartGram] using inverse
+  · simp [sixAxisChartGram, zero]
+
+/-- The transposed inverse chart basis is a left inverse of the transposed chart
+basis. -/
+theorem sixAxisChartBasisInverse_transpose_mul (inverseFive : R) :
+    (sixAxisChartBasisInverse inverseFive)ᵀ * (sixAxisChartBasis inverseFive)ᵀ = 1 := by
+  rw [← Matrix.transpose_mul, (sixAxisChartBasis_mul_inverse inverseFive).1,
+    Matrix.transpose_one]
+
+/-- The unit line of the local chart carries no discriminant: over any
+coefficient ring in which five is invertible, the first chart dual vector lies in
+the image of the five-axis coefficient matrix.  At the primes two and three, five
+is a unit, so this is the manuscript's unimodular summand `U₀`. -/
+theorem sixAxisChart_unitLine_mem_image
+    (inverseFive : R) (inverse : 5 * inverseFive = 1) :
+    sixAxisGram R *ᵥ (sixAxisChartBasis inverseFive *ᵥ Pi.single 0 inverseFive) =
+      (sixAxisChartBasisInverse inverseFive)ᵀ *ᵥ Pi.single 0 (1 : R) :=
+  gram_mulVec_eq_of_reduced_preimage (sixAxisChartBasis_congruence inverseFive inverse)
+    (sixAxisChartBasisInverse_transpose_mul inverseFive)
+    (sixAxisChartGram_mulVec_single_zero inverseFive inverse)
+
+/-- Every vector is congruent, modulo the image of the five-axis coefficient
+matrix, to a combination of the four chart dual vectors orthogonal to the unit
+line.  Over the two-adic or three-adic integers this is the manuscript's
+statement that the principal quotient is trivial on the unimodular summand and
+the primary kernel is supported on the depth-one block. -/
+theorem sixAxisChart_discriminant_supported_off_unitLine
+    (inverseFive : R) (inverse : 5 * inverseFive = 1) (value : Fin 5 → R) :
+    ∃ source coordinates : Fin 5 → R,
+      coordinates 0 = 0 ∧
+        value = sixAxisGram R *ᵥ source +
+          (sixAxisChartBasisInverse inverseFive)ᵀ *ᵥ coordinates :=
+  exists_gramImage_decomposition_off_hit_coordinate
+    (sixAxisChartBasis_congruence inverseFive inverse)
+    (sixAxisChartBasisInverse_transpose_mul inverseFive)
+    (sixAxisChartGram_mulVec_single_zero inverseFive inverse) value
+
+end Chart
+
 end GraphLattices
 
 end TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue

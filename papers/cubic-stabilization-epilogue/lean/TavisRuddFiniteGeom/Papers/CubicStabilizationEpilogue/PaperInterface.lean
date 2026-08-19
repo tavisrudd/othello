@@ -6041,4 +6041,44 @@ theorem sixAxisLocalChart_unitSummand_carries_no_discriminant :
     GraphLattices.sixAxisGram_discriminant_supported_off_unitLine,
     GraphLattices.sixAxisGram_six_smul_mem_image⟩
 
+/-- The orthogonal decomposition of the coefficient lattice in the local chart,
+as a change of basis, together with the triviality of the principal quotient on
+its unimodular summand.  Over any coefficient ring in which five has an inverse —
+in particular over the two-adic and three-adic integers, the two cases the
+manuscript needs — the chart change of basis is invertible, and it carries
+`6I₅-J₅` to the block matrix `sixAxisChartGram` whose first row and column are
+the unit line of value five and whose complementary four-by-four block is
+`(6/5)(5I₄-J₄)`.  The first chart dual vector then lies in the image of
+`6I₅-J₅`, and every vector is congruent modulo that image to a combination of the
+four chart dual vectors orthogonal to it.  Lean constructs no abelian scheme,
+polarization, or isogeny kernel, and does not identify this quotient with a
+geometric kernel. -/
+theorem sixAxisLocalChart_orthogonalDecomposition_and_unitLine
+    {R : Type*} [CommRing R] (inverseFive : R) (inverse : 5 * inverseFive = 1) :
+    GraphLattices.sixAxisChartBasis inverseFive *
+          GraphLattices.sixAxisChartBasisInverse inverseFive = 1 ∧
+      GraphLattices.sixAxisChartBasisInverse inverseFive *
+          GraphLattices.sixAxisChartBasis inverseFive = 1 ∧
+      Matrix.transpose (GraphLattices.sixAxisChartBasis inverseFive) *
+            GraphLattices.sixAxisGram R *
+            GraphLattices.sixAxisChartBasis inverseFive =
+          GraphLattices.sixAxisChartGram inverseFive ∧
+      Matrix.mulVec (GraphLattices.sixAxisGram R)
+            (Matrix.mulVec (GraphLattices.sixAxisChartBasis inverseFive)
+              (Pi.single 0 inverseFive)) =
+          Matrix.mulVec
+            (Matrix.transpose (GraphLattices.sixAxisChartBasisInverse inverseFive))
+            (Pi.single 0 (1 : R)) ∧
+      ∀ value : Fin 5 → R, ∃ source coordinates : Fin 5 → R,
+        coordinates 0 = 0 ∧
+          value = Matrix.mulVec (GraphLattices.sixAxisGram R) source +
+            Matrix.mulVec
+              (Matrix.transpose (GraphLattices.sixAxisChartBasisInverse inverseFive))
+              coordinates :=
+  ⟨(GraphLattices.sixAxisChartBasis_mul_inverse inverseFive).1,
+    (GraphLattices.sixAxisChartBasis_mul_inverse inverseFive).2,
+    GraphLattices.sixAxisChartBasis_congruence inverseFive inverse,
+    GraphLattices.sixAxisChart_unitLine_mem_image inverseFive inverse,
+    GraphLattices.sixAxisChart_discriminant_supported_off_unitLine inverseFive inverse⟩
+
 end TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue
