@@ -31,7 +31,13 @@ quadruple                -> 0
 4-subset                 -> hits only inside a Steiner-system definition
 coherent                 -> 1 hit, "coherent configuration" in Higman's sense (false friend)
 switching                -> hits, definitional (switching with respect to a vertex)
+Bolyai                   -> hits
+second survey            -> hits
 ```
+
+The last two are the coverage calibration: both the 1976 survey and the 1981 Seidel--Taylor second
+survey are inside the indexed portion of the volume, so the zero-hit results above bear on both
+surveys and not merely on the first.
 
 The `determined by its` hit, transcribed from the snippet with its OCR errors left in place:
 
@@ -72,5 +78,15 @@ zero-hit result on a term like `reconstruction` therefore cannot be read as abse
 image — the index may simply never have seen the word. The queries that returned hits prove the
 volume is indexed and searchable; they do not prove the misses are real.
 
-Carried forward as the remaining gap: OCR-robust re-queries, listed with the successor task.
-A clean library copy of either original volume, or of this reprint, would close it outright.
+Carried forward as the remaining gap: OCR-robust re-queries — a `recon` substring for the whole
+reconstruct family, `is determined by` as a calibrated phrase already known to be indexed here, and
+a size-naming query pairing `subsets of` with a numeral. A clean library copy of either original
+volume, or of this reprint, would close it outright.
+
+## Downstream consequence, not yet applied
+
+Once the OCR-robust re-queries are run, C876's access-gap entry for the two surveys moves from
+*could not access* to *searched, with a stated OCR caveat*, and the corresponding scope sentence in
+`papers/clebsch-passages/literature-boundaries.md` — which currently names both surveys as the
+bound on the negative — should be revised to match. That file is a released-paper surface owned by
+C816 and C824, so the edit is theirs to make, not this record's.
