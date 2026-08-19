@@ -33,6 +33,9 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FramedMulti
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.RankTwoClusterGermRigidity
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.SimpleEulerBlock
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.CubicFormalGermPacket
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.ParityCorrectedUnipotentMonodromy
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.ProjectiveSpaceEulerSpectrum
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.DirectSpecializedVanishing
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.LowDimensionalVanishingCore
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.WeakFactorization
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NovikovAdmissibility
@@ -6254,5 +6257,119 @@ theorem projectiveProduct_sixthMultiplicity_of_framed_tensor_decomposition
     product.sixthMultiplicity = (dimension + 1) * base.sixthMultiplicity :=
   Applications.projectiveProduct_sixthMultiplicity_of_charpoly_power base product
     dimension tensorDecomposition
+
+/-- Nilpotence of the residue of the gauged connection of a target with nef
+canonical class.  The residue is recorded as a complex matrix whose nonzero
+entries raise by at least one the integral weight function given by the
+eigenvalues of the grading operator; on a finite index type such a matrix is
+nilpotent, because the weights of finitely many basis vectors have bounded
+spread.  The grading operator, Euler multiplication, and the gauge are not
+constructed. -/
+theorem specializedLowDimensional_weightRaising_residue_isNilpotent {rank : ℕ}
+    (weight : Fin rank → ℤ) (residue : Matrix (Fin rank) (Fin rank) ℂ)
+    (raises : Quantum.RaisesWeight weight residue) : IsNilpotent residue :=
+  raises.isNilpotent
+
+/-- Unipotence of the regular monodromy of a nilpotent residue: the exponential
+of a nilpotent complex matrix differs from the identity by a nilpotent matrix.
+This is the passage from nilpotence of the residue of a regular-singular
+connection to unipotence of its regular monodromy, at the level of the
+exponential of a matrix. -/
+theorem specializedLowDimensional_exp_nilpotentResidue_unipotent {rank : ℕ}
+    {residue : Matrix (Fin rank) (Fin rank) ℂ} (nilpotent : IsNilpotent residue) :
+    IsNilpotent (NormedSpace.exp residue - 1) :=
+  Quantum.isNilpotent_exp_sub_one nilpotent
+
+/-- Direct vanishing of the specialized primitive-sixth count for a target whose
+canonical class is nef.  The framed monodromy is supplied as the product of a
+parity correction of square one with the exponential of `2πi` times a residue
+raising the integral weight filtration of the grading operator, and the parity
+correction commutes with the residue.  Lean proves that the residue is nilpotent,
+hence that the second factor is unipotent, hence that every characteristic root
+of the product has square one, so neither primitive sixth root occurs.  The
+quantum connection, the grading operator, the gauge making the connection regular
+singular, and the identification of the parity factor with the monodromy of the
+half-parity correction are not formalized. -/
+theorem specializedLowDimensional_nefCanonical_sixthMultiplicity_eq_zero
+    (monodromy : Quantum.FramedMonodromyMatrix) (weight : Fin monodromy.rank → ℤ)
+    (parity residue : Matrix (Fin monodromy.rank) (Fin monodromy.rank) ℂ)
+    (residueRaisesWeight : Quantum.RaisesWeight weight residue)
+    (parityInvolution : parity * parity = 1)
+    (parityCommutes : Commute parity residue)
+    (factorization : monodromy.operator
+      = parity * NormedSpace.exp ((2 * Real.pi * Complex.I) • residue)) :
+    monodromy.sixthMultiplicity = 0 :=
+  Quantum.sixthMultiplicity_eq_zero_of_weightRaising_residue monodromy weight parity residue
+    residueRaisesWeight parityInvolution parityCommutes factorization
+
+/-- Simplicity of the Euler spectrum of a specialized projective space.  If the
+characteristic polynomial of Euler multiplication is `X ^ (m + 1) - a` with `a`
+nonzero, that polynomial is separable, so every maximal generalized eigenspace
+has dimension at most one: every spectral block has rank one. -/
+theorem specializedLowDimensional_projectiveSpace_eulerBlocks_simple {dimension : ℕ}
+    (euler : Matrix (Fin (dimension + 1)) (Fin (dimension + 1)) ℂ)
+    (lineCoefficient : ℂ) (lineCoefficientNonzero : lineCoefficient ≠ 0)
+    (quantumRelation : euler.charpoly
+      = Polynomial.X ^ (dimension + 1) - Polynomial.C lineCoefficient)
+    (value : ℂ) :
+    Module.finrank ℂ (Module.End.maxGenEigenspace (Matrix.toLin' euler) value) ≤ 1 :=
+  Quantum.projectiveSpaceEuler_finrank_maxGenEigenspace_le_one euler lineCoefficient
+    lineCoefficientNonzero quantumRelation value
+
+/-- The specialized quantum relation of projective `m`-space has exactly `m + 1`
+distinct roots, which are the eigenvalues of Euler multiplication up to the
+scaling by `m + 1` used in the manuscript. -/
+theorem specializedLowDimensional_projectiveSpace_distinctEigenvalues (dimension : ℕ)
+    (lineCoefficient : ℂ) (lineCoefficientNonzero : lineCoefficient ≠ 0) :
+    (Polynomial.X ^ (dimension + 1)
+        - Polynomial.C lineCoefficient).roots.toFinset.card = dimension + 1 :=
+  Quantum.projectiveSpaceRelation_card_distinct_roots dimension lineCoefficient
+    lineCoefficientNonzero
+
+/-- Direct vanishing of the specialized primitive-sixth count for the projective
+line and the projective plane.  From the specialized quantum relation with
+nonzero line coefficient, Lean proves that every spectral block of Euler
+multiplication has rank one, and the supplied conclusion of the multiplicity-one
+Euler block lemma then makes the framed monodromy the identity, which contributes
+nothing to the count. -/
+theorem specializedLowDimensional_projectiveSpace_sixthMultiplicity_eq_zero {dimension : ℕ}
+    (euler : Matrix (Fin (dimension + 1)) (Fin (dimension + 1)) ℂ)
+    (lineCoefficient : ℂ) (lineCoefficientNonzero : lineCoefficient ≠ 0)
+    (quantumRelation : euler.charpoly
+      = Polynomial.X ^ (dimension + 1) - Polynomial.C lineCoefficient)
+    (monodromy : Quantum.FramedMonodromyMatrix)
+    (simpleBlockMonodromy :
+      (∀ value : ℂ,
+          Module.finrank ℂ (Module.End.maxGenEigenspace (Matrix.toLin' euler) value) ≤ 1) →
+        monodromy.operator.charpoly
+          = (Polynomial.X - Polynomial.C (1 : ℂ)) ^ monodromy.rank) :
+    monodromy.sixthMultiplicity = 0 :=
+  Applications.projectiveSpace_specialized_sixthMultiplicity_eq_zero euler lineCoefficient
+    lineCoefficientNonzero quantumRelation monodromy simpleBlockMonodromy
+
+/-- Direct vanishing of the specialized primitive-sixth count for a geometrically
+ruled surface over a curve of positive genus.  The base curve has nef canonical
+class, so the spectral argument applies to it; the intrinsic projective-bundle
+formula doubles its count; and the specialized and intrinsic framed
+characteristic polynomials agree, which is the manuscript's identification of the
+two one-variable modules after scalar extension to a common algebraically closed
+overfield.  The projective-bundle formula and that identification are
+hypotheses. -/
+theorem specializedLowDimensional_ruledSurface_sixthMultiplicity_eq_zero
+    (base total specialized : Quantum.FramedMonodromyMatrix)
+    (weight : Fin base.rank → ℤ)
+    (parity residue : Matrix (Fin base.rank) (Fin base.rank) ℂ)
+    (residueRaisesWeight : Quantum.RaisesWeight weight residue)
+    (parityInvolution : parity * parity = 1)
+    (parityCommutes : Commute parity residue)
+    (baseFactorization : base.operator
+      = parity * NormedSpace.exp ((2 * Real.pi * Complex.I) • residue))
+    (projectiveBundleFormula : total.sixthMultiplicity = 2 * base.sixthMultiplicity)
+    (specializationComparison :
+      specialized.operator.charpoly = total.operator.charpoly) :
+    specialized.sixthMultiplicity = 0 :=
+  Applications.ruledSurface_specialized_sixthMultiplicity_eq_zero_of_nefCanonical_base
+    base total specialized weight parity residue residueRaisesWeight parityInvolution
+    parityCommutes baseFactorization projectiveBundleFormula specializationComparison
 
 end TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue

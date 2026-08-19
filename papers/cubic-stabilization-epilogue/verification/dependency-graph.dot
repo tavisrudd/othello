@@ -35,7 +35,7 @@ digraph manuscript {
   "prop:cubic-atom" [fillcolor="#fde8c8", tooltip="fragment"];
   "prop:cubic-block-data" [fillcolor="#fde8c8", tooltip="fragment"];
   "prop:cubic-packet" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
-  "prop:direct-specialized-lowdim" [fillcolor="#ffffff", tooltip="absent"];
+  "prop:direct-specialized-lowdim" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
   "prop:framed-operations" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
   "prop:low-dimensional-vanishing" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
   "prop:no-curve" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];

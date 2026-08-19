@@ -127,6 +127,9 @@ roots = [
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.RankTwoClusterGermRigidity",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.SimpleEulerBlock",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.CubicFormalGermPacket",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.ParityCorrectedUnipotentMonodromy",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.ProjectiveSpaceEulerSpectrum",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.DirectSpecializedVanishing",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.PaperInterface",
 ]
 
