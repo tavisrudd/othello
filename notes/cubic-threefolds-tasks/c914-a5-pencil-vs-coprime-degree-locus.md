@@ -44,12 +44,12 @@ Report and replay: `../2026-08-18-c914-a5-pencil-vs-voisin-and-yyz.md`; scripts
 
 ## Open
 
-- [ ] Restate the pencil's contribution in the epilogue introduction at its
-  proved strength — not reached by the coprime-degree mechanism, and not
-  reached by an elliptic-product isogeny — and record the verdict in the
-  paper's novelty ledger. Needs the gated annotation layer if the Eckardt
-  computation is cited; the Voisin-side statement is structural and needs no
-  evidence bundle.
+- [ ] Apply the prepared restatement pass to the epilogue:
+  `../2026-08-18-c914-epilogue-restatement-draft.md` holds the two new
+  statements, the introduction replacement, the evidence-registry entry, the
+  claim-map rows and the apply order. It was not applied on 2026-08-18 because
+  the manuscript, its claim map and its registries were under active concurrent
+  edit; the paper tree carries no C914 change.
 - [ ] C921 owns the residual Voisin gate: whether the four-dimensional factor
   `A_b` is the Jacobian of an irreducible genus-four curve, or `J(X_b)` is
   odd-degree isogenous to an irreducible genus-five Jacobian.
