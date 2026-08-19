@@ -1795,3 +1795,44 @@ for the same repository reports exactly one release, `v0.1.0`, created
 supplied for the Paper V badge. Suggests a cheap standing check at release time —
 compare the Zenodo record title against the manuscript title for every deposited
 paper — but no identifier is allocated and no sweep was run.
+
+## 2026-08-19 — Paper III's public-vocabulary gate scans every allowlisted `.tex`, not just prose files
+
+**Context:** noticed while replaying `papers/clebsch-passages/verification/verify_release.py`
+after inserting the C919 programme coda.
+
+**Observation:** `check_public_vocabulary` compiles a `Paper\s+III` pattern
+(case-insensitive) and applies it to every allowlisted file with a `.md`, `.tex`,
+`.json`, `.py`, or `.sha256` suffix, plus `Makefile`. The manuscript therefore
+cannot contain the literal string "Paper III" in any spacing that a regular
+space matches. The new coda passes only because its cross-references are written
+`Paper~V` and `Paper~IV` with ties, and because the map boxes carry bare Roman
+numerals. A future edit that writes "Paper III" in ordinary prose would fail the
+release gate rather than a prose review, and the failure message would name the
+manuscript rather than the vocabulary rule.
+
+**Evidence:** MEASURED. The gate is at `verification/verify_release.py:54-77`;
+the run on 2026-08-19 reported `FAIL [superseded paper name in README.md]` after
+`PASS [release allowlist: 60 files]`, so the allowlist check saw the new
+`sections/09-programme-coda.tex`.
+
+**Status:** open, unpromoted. Raises the question of whether the tie-versus-space
+distinction is the intended enforcement boundary, since it makes a typographic
+choice load-bearing for a release gate. No identifier allocated.
+
+## 2026-08-19 — Paper IV's evidence verifier stops on a Lean path that is not in the repository
+
+**Context:** noticed while running `papers/q13-passant-code/verification/verify_evidence.py`
+to confirm C919's manuscript edit had not disturbed Paper IV's gates.
+
+**Observation:** the verifier raises `FileNotFoundError` for
+`lean/RelativeConicArcs/PassantCodeQ13/StructuralUpgrade.lean`, so it never
+reaches any evidence check. The failure is independent of the manuscript and
+predates C919; it means Paper IV currently has no runnable local evidence gate,
+which is worth knowing before C834 or C857 report on that surface.
+
+**Evidence:** MEASURED. Direct run on 2026-08-19 from
+`papers/q13-passant-code`, traceback ending in `os.stat` on that path.
+
+**Status:** open, unpromoted. Belongs to C834/C857 if promoted; logged here only
+because it was found off to the side of a presentation refactor.

@@ -4,8 +4,10 @@
 **Papers:** I (`clebsch-rigidity`), II (`clebsch-factorization`),
 III (`clebsch-passages`), IV (`q13-passant-code`), V
 (`chordal-conference-reconstruction`) — all five in one pass.
-**State:** plan agreed, no author decision open, execution not started. No
-manuscript edited.
+**State:** complete, reported 2026-08-19. All five manuscripts edited, rebuilt
+warning-free, committed in `1142b4bad`, and forward-committed to their
+standalone repositories. Completion report:
+`../2026-08-19-c919-series-apparatus-completion.md`.
 
 ## Goal
 
