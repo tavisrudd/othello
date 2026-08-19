@@ -197,6 +197,16 @@ For the three `F_2`-rational kernels the obstruction disappears: the splitting
 with `W`-dimensions `(1,2,2)` has odd index `225` there. The verdict therefore
 depends on the manuscript's identification of the geometric kernel as exotic.
 
+**Where the argument stops.** The step "every sub-Hodge structure is
+`U tensor H_1(E,Q)`" uses that `E` has no complex multiplication, which the
+epilogue proves only at the geometric generic point of the pencil. At a fibre
+whose elliptic factor has complex multiplication the endomorphism algebra of
+the multiplicity module is an imaginary quadratic field, there are strictly
+more sub-Hodge structures, and the obstruction below does not apply. The Fermat
+member is such a fibre, and it is universally `CH_0`-trivial for three older
+reasons. So the Voisin verdict here is about the generic member, exactly as the
+Yang--Yu--Zhu verdict is.
+
 ### 3.3 What remains open
 
 Voisin's criterion holds for the pencil exactly if one of the following does:
