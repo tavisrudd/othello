@@ -2,11 +2,24 @@
 
 **Lane:** `cubic-threefolds`
 
-**Status:** queued
+**Status:** closed 2026-08-18
 
-**Objective:** close the minimal rational ruled half of the residual use of
+**Objective:** close the rational geometrically ruled half of the residual use of
 Hypothesis 5.7T in `papers/cubic-stabilization-epilogue/`, so that specialized
 primitive-sixth vanishing for those centers is proved rather than assumed.
+
+**Outcome:** done.  Hypothesis 5.7T is now used only for surface centers that
+are neither minimal nor geometrically ruled.  Report:
+`../2026-08-18-c920-minimal-ruled-tagging-removal.md`.
+
+Two things went differently from the plan below.  Strand one could not be
+carried out as written: the toric quantum Stanley--Reisner presentation is a
+theorem only for Fano toric manifolds and is false for `F_a` with `a` at least
+two, so the reduction to `F_0` and `F_1` is by one deformation and invariance of
+genus-zero Gromov--Witten invariants, with the toric presentation used only for
+`F_1` and even there only as a check.  And the class is the rational
+geometrically ruled surfaces, not the minimal ones: `F_1` belongs to it without
+being minimal, which is why the residual scope is stated as it is.
 
 ## Why this is the residual
 
