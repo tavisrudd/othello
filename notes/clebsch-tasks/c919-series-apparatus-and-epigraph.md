@@ -5,8 +5,11 @@
 III (`clebsch-passages`), IV (`q13-passant-code`), V
 (`chordal-conference-reconstruction`) — all five in one pass.
 **State:** complete, reported 2026-08-19. All five manuscripts edited, rebuilt
-warning-free, committed in `1142b4bad`, and forward-committed to their
-standalone repositories. Completion report:
+warning-free, and forward-committed to their standalone repositories. The
+refactor landed in `1142b4bad`; an independent cold read
+(`../2026-08-19-c919-cold-read.md`) then drove seam repairs, the removal of
+series numbers from the running text in favour of titles and citations, and an
+authorized follow-up pass on the codas. Completion report:
 `../2026-08-19-c919-series-apparatus-completion.md`.
 
 ## Goal
