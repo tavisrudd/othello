@@ -132,3 +132,24 @@ pullback at the pencil's singular members. If they total `64`, no smooth member
 has a four-dimensional factor in the closure of the Jacobian locus for any of
 the six polarizations, which upgrades the genus-four verdict from "all but
 finitely many" to "every".
+
+## Level structure and Eckardt locus (2026-08-19)
+
+Report: `../2026-08-19-c921-pencil-level-structure-and-eckardt.md`.
+
+Both predictions above are confirmed against the explicit rational model of the
+pencil, over 112 smooth members across five finite fields: the elliptic factor
+has square discriminant and a rational three-isogeny. Point counts recover its
+Frobenius trace through `#X_b(F_q) = q^3+q^2+q+1-5q a_b`, whose divisibility by
+`5q` on every smooth member independently confirms the isotypic decomposition
+`H^3 = W_5 tensor H^1(E_b)(-1)`.
+
+The Eckardt locus of the pencil is **not** empty: it is exactly the conjugate
+pair `b = 3 omega, 3 omega-bar`, the roots of `b^2 + 3b + 9`, each carrying
+thirty Eckardt points, which the Fermat control identifies as the two Fermat
+members. So the epilogue's `prop:A5-not-coprime` and `prop:A5-nonseparated`
+cannot be upgraded from "only finitely many" to "none", and
+`thm:separation-family` keeps its qualifier — necessarily, since the Fermat
+member is of separated-variable type. The available sharpening is to replace
+"only finitely many" with the named pair, which needs the elimination over `Q`
+described in that report. No manuscript edit follows automatically.

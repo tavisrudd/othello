@@ -230,10 +230,14 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   only through an isogeny of degree greater than one. The integral glued model
   of the four-dimensional factor is derived and the Schottky count evaluated;
   that pass also corrects C914's description of the factor, which is of
-  symplectic type `(1,1,1,5)` rather than principally polarized. Card:
+  symplectic type `(1,1,1,5)` rather than principally polarized. The pencil's
+  Eckardt locus is exactly the two Fermat members, so the epilogue's separation
+  theorem keeps its "all but finitely many" qualifier and can only be sharpened
+  to name them. Card:
   `../cubic-threefolds-tasks/c921-four-dimensional-factor-jacobian.md`; reports
-  and evidence bundles `../2026-08-19-c921-genus-four-branch.md` and
-  `../2026-08-19-c921-integral-glued-model.md`.
+  and evidence bundles `../2026-08-19-c921-genus-four-branch.md`,
+  `../2026-08-19-c921-integral-glued-model.md` and
+  `../2026-08-19-c921-pencil-level-structure-and-eckardt.md`.
 - **C917 — closed 2026-08-18.** The epilogue introduction now says why the
   direct Clemens--Griffiths mechanism gives no contradiction after one
   stabilization and where the result sits relative to Guéré

@@ -1,0 +1,62 @@
+C921 - level structure of the nonstandard A_5-cubic pencil
+======================================================================
+
+Model
+  [OK  ] |A_5| = 60   order 60
+  [OK  ] the twenty triples split into two A_5-orbits of ten   sizes [10, 10]
+  T_1 = sum over ['123', '125', '136', '145', '146', '234', '246', '256', '345', '356']
+
+q = 11   (q = 2 mod 3)
+  [OK  ] every smooth member has 5q dividing the deficit
+  [OK  ] Weil bound |a| <= 2 sqrt(q) on every smooth member   max |a| = 3
+  [OK  ] the Segre member (1,0) is singular
+  members: 8 smooth, 4 singular over F_11, 0 anomalous
+  singular at (a:b) = ['1:0', '1:1', '1:2', '1:5']
+  [OK  ] (a) #E_b(F_q) is never 2 mod 4, so the discriminant is a square
+  [OK  ] (b) rational three-isogeny: 3 divides a_b
+  traces a_b = [-3, -3, -3, -3, -3, -3, -3, -3]
+
+q = 19   (q = 1 mod 3)
+  [OK  ] every smooth member has 5q dividing the deficit
+  [OK  ] Weil bound |a| <= 2 sqrt(q) on every smooth member   max |a| = 7
+  [OK  ] the Segre member (1,0) is singular
+  members: 14 smooth, 6 singular over F_19, 0 anomalous
+  singular at (a:b) = ['1:0', '1:1', '1:4', '1:7', '1:13', '1:15']
+  [OK  ] (a) #E_b(F_q) is never 2 mod 4, so the discriminant is a square
+  [OK  ] (b) rational three-isogeny: 3 does not divide a_b
+  traces a_b = [1, -7, -4, -5, -7, -4, -1, -5, -5, -1, -7, 1, -7, -5]
+
+q = 29   (q = 2 mod 3)
+  [OK  ] every smooth member has 5q dividing the deficit
+  [OK  ] Weil bound |a| <= 2 sqrt(q) on every smooth member   max |a| = 9
+  [OK  ] the Segre member (1,0) is singular
+  members: 26 smooth, 4 singular over F_29, 0 anomalous
+  singular at (a:b) = ['1:0', '1:14', '1:18', '1:23']
+  [OK  ] (a) #E_b(F_q) is never 2 mod 4, so the discriminant is a square
+  [OK  ] (b) rational three-isogeny: 3 divides a_b
+  traces a_b = [-6, 3, -9, -3, -9, -3, -6, -3, 3, -3, -3, 3, 6, -3, 6, -9, -9, -9, -3, 3, -9, -3, -9, -6, -6, -9]
+
+q = 31   (q = 1 mod 3)
+  [OK  ] every smooth member has 5q dividing the deficit
+  [OK  ] Weil bound |a| <= 2 sqrt(q) on every smooth member   max |a| = 8
+  [OK  ] the Segre member (1,0) is singular
+  members: 26 smooth, 6 singular over F_31, 0 anomalous
+  singular at (a:b) = ['1:0', '1:6', '1:8', '1:25', '1:26', '1:29']
+  [OK  ] (a) #E_b(F_q) is never 2 mod 4, so the discriminant is a square
+  [OK  ] (b) rational three-isogeny: 3 does not divide a_b
+  traces a_b = [7, -8, -7, 5, -1, -7, -8, -5, 1, -5, 1, -4, 5, -4, -1, -8, -5, -5, -5, -5, -5, -5, -5, -5, 7, -8]
+
+q = 41   (q = 2 mod 3)
+  [OK  ] every smooth member has 5q dividing the deficit
+  [OK  ] Weil bound |a| <= 2 sqrt(q) on every smooth member   max |a| = 9
+  [OK  ] the Segre member (1,0) is singular
+  members: 38 smooth, 4 singular over F_41, 0 anomalous
+  singular at (a:b) = ['1:0', '1:21', '1:23', '1:35']
+  [OK  ] (a) #E_b(F_q) is never 2 mod 4, so the discriminant is a square
+  [OK  ] (b) rational three-isogeny: 3 divides a_b
+  traces a_b = [-6, -3, -6, -3, -9, -9, 3, -6, -9, -9, -9, 3, 9, -9, 9, -3, 6, 3, -3, -3, 3, -3, 3, -9, -6, -6, -3, -6, -3, -9, 6, -3, -9, -9, -6, -6, 3, -3]
+
+======================================================================
+prediction (a), square discriminant : CONFIRMED
+prediction (b), rational 3-isogeny  : CONFIRMED
+failures: 0
