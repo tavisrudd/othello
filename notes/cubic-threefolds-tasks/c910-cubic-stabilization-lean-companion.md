@@ -608,6 +608,35 @@ the six new terminals and stay fragments: no `F`-bundle, connection, or analytic
 splitting is constructed.  Report:
 [`../2026-08-19-c910-normalized-sylvester-gauge.md`](../2026-08-19-c910-normalized-sylvester-gauge.md).
 
+**Full gate re-run and the absent rows, 2026-08-19.**  The complete aggregate
+gate was run here at `b991d168d`, the commit where the concurrent Section 5 edits
+landed, and passed at every stage including the axiom transcript over all
+terminals.  Five of the nine absent claim rows were then taken.  The three
+separation corollaries `cor:voisin-separation`, `cor:fermat-separation` and
+`cor:coprime-separation` are conditional deductions in
+`Applications/UniversalCH0Separation.lean`: universal `CH₀`-triviality passes to
+the stabilization by a supplied projective-bundle premise and the stabilization
+is irrational through the atomic route's terminal, with the three sources of
+universal `CH₀`-triviality as the only difference between them.  Two of the three
+discharge content rather than assume it: the almost-diagonal criterion's
+hypothesis for the Fermat equation is proved in
+`Applications/SeparatedVariableCubicForms.lean`, and coprimality of the two
+parametrization degrees is decided.  `lem:exact-low-degree-shifts` is a fragment
+through `Quantum/BulkShiftFramedInvariance.lean`: a scalar twist the turn fixes
+leaves the monodromy matrix of an invertible frame unchanged, and an injective
+coefficient substitution preserves the multiplicity of every root it fixes, hence
+the primitive-sixth multiplicity.  `lem:eckardt-rank` is a fragment through
+`Applications/EckardtHessianRank.lean`, where the bordered-matrix rank criterion
+is proved as an equivalence over any field in which two is invertible.  Coverage
+is now 4 absent, 26 fragmentary, 28 conditional, 1 complete over 281 reviewer
+terminals.  The four rows left absent are the two `A_5`-moduli propositions,
+which rest on projective equivalence over a coarse moduli image and on the
+registered Eckardt evidence bundle; `prop:no-elliptic-product`, deliberately held
+while the lattice model behind it is being corrected; and
+`lem:center-maps-monomial`, which needs a completed monoid ring and its
+associated graded.  Report:
+[`../2026-08-19-c910-separation-and-absent-rows.md`](../2026-08-19-c910-separation-and-absent-rows.md).
+
 ## Prioritized Lean backlog
 
 Work in this order unless a later literature or library dependency changes the

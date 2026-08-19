@@ -98,8 +98,8 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   `Verification/AxiomAudit`; no duplicate under the shared
   `lean/TavisRuddFiniteGeom/` tree or a second Lean repository. The sources
   build through the guarded queue; `make check` and the axiom-log gate green
-  over 50 claims, 46 machinery rows, and 233 reviewer terminals; coverage 6
-  absent / 23 fragmentary / 20 conditional / 1 complete. `thm:every-cubic` is
+  over 59 claims, 46 machinery rows, and 281 reviewer terminals; coverage 4
+  absent / 26 fragmentary / 28 conditional / 1 complete. `thm:every-cubic` is
   anchored to the atomic route, the framed spine answers to its own manuscript
   theorem `thm:every-cubic-conditional` and is now assembled end to end on the
   product-formula signature, the small even block reduction is formalized from
@@ -196,7 +196,9 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   low-dimensional exclusions report
   `../2026-08-18-c910-low-dimensional-exclusions.md`; discriminant and
   spectrum-transfer report
-  `../2026-08-18-c910-discriminant-and-spectrum-transfer.md`; interim release report
+  `../2026-08-18-c910-discriminant-and-spectrum-transfer.md`; separation and
+  absent-rows report `../2026-08-19-c910-separation-and-absent-rows.md`;
+  interim release report
   `../2026-08-12-c910-partial-lean-release.md`.
 - **C920 — closed 2026-08-18.** Hypothesis 5.7T of the epilogue is now used only
   for surface centers that are neither minimal nor geometrically ruled: the
