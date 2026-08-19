@@ -254,11 +254,13 @@ summary of the same name without the `.quiet` path.
 ## The standalone export
 
 The standalone repository had lagged since before the minimal-ruled tagging
-removal. It is now synchronized and verified at `da7ec8e8f`, through
-`papers/scripts/export-paper-repos.py`: plan and audit clean, `sync` writing 14
-paths with no deletions, one ordinary forward commit in the standalone
-repository, and `verify` agreeing at 186 tracked files against the export
-manifest.
+removal. It is now synchronized and verified at `8455eb6d1`, through
+`papers/scripts/export-paper-repos.py`: plan and audit clean, `sync` writing with no deletions, one ordinary forward
+commit in the standalone repository per refresh, and `verify` agreeing at 190
+tracked files against the export manifest.  Three refreshes were needed as the
+Eckardt-locus work closed successive referee passes; the last carries the
+finite-field sweep and the large-characteristic repetition of the elimination as
+tracked evidence, and its seven manifest hashes verify in both trees.
 
 Agreement was then checked on every surface that carries a hash rather than
 only by the standalone gate passing. Its source-only correspondence check
