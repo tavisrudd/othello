@@ -814,7 +814,7 @@
       "hypotheses": "None beyond the displayed coefficients; the even splitting takes square roots of the two parameters.",
       "conclusion": "Lean evaluates the universal quartic discriminant on the coefficients of each displayed quartic, obtaining two to the twenty-fourth times the square of the product of the two parameters and their difference in the even case, and minus the square of that product times the cube of the displayed quadratic in the odd case, and exhibits the even quartic as the product of the four linear factors with roots twice the four sums and differences of the square roots.",
       "cautions": "The manuscript's conclusion is that these quartics are the characteristic polynomial of Euler multiplication on the even cohomology of a Hirzebruch surface. Lean constructs no variety, no quantum cohomology, no Novikov specialization and no Euler multiplication, and proves nothing about the deformation reduction to index at most one or about the toric presentation there; the quartics enter as displayed polynomials. The symbolic derivation of the quartics from the presented ring, together with its cross-checks, is the registered evidence bundle.",
-      "statement_digest": "e21f4c04a7e6118cc71b2bde83aaa74eaef8764f18cf4ebb0b13d423e243593c",
+      "statement_digest": "288d84db17407ff069b2fc2714e3e89f9fb94e2ca5477aba8c545e892392e04a",
       "terminal_digest": "3554d64a4e2c480efc1035231a2addc4b9bdcec72630390d8fb3795adfd7cdd0"
     },
     {
