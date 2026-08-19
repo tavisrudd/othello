@@ -115,7 +115,7 @@ small light Roman numerals in a subordinate leading column:
 
 ```text
 I    From deep holes, a form arises;
-II   beneath it, paired chords find their bearing;
+II   beneath it, paired chords turn true;
 III  through changing guises, the golden source persists;
 IV   from bare, whispered words, a plane rises;
 V    beneath one form, two shadows, a hidden twist between.
@@ -136,10 +136,20 @@ substantive error in the old closing clause: "the scattered shadows gather home"
 implied a coalescence that Paper V explicitly rules out, whereas "two shadows, a
 hidden twist between" carries the residual `C_2`-torsor.
 
-**Line IV — settled.** The author's chosen wording is **"from bare, whispered
-words, a plane rises"**, replacing the packet's "from bare words". This is the
-only departure from the packet's poem text; the other four lines stand exactly as
-the packet gives them.
+**Two author amendments to the packet's poem text.** The text above is
+authoritative, and an implementer must not "correct" either line back to the
+packet.
+
+**Line II — settled.** "beneath it, paired chords turn true", replacing the
+packet's "beneath it, paired chords find their bearing". To true something is to
+bring it into exact alignment, which is a closer image for Paper II than a
+bearing: what the first surviving odd tensor restores is the orientation of the
+recovered sheets, a determinate choice rather than a direction of travel. The
+shorter line also gives the poem a crisp early beat against the longer lines III
+and V.
+
+**Line IV — settled.** "from bare, whispered words, a plane rises", replacing the
+packet's "from bare words".
 
 The line keeps the noun "words", which is the one word in it that preserves the
 coding-theory reading — a codeword is a word — and pairs "bare" with "whispered"

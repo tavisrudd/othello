@@ -41,10 +41,11 @@ the cutting-room floor.
 7. The sentence-level move/merge/cut test and its per-paper outcomes stand; the
    packet adopts them as requirements.
 
-8. Poem line IV reads **"from bare, whispered words, a plane rises"**, the
-   author's chosen wording and the only departure from the packet's poem text.
-   Paper IV's coda prose must name its minimum words plainly, so the exact term
-   stands beside the poem.
+8. The poem carries two author amendments to the packet's text: line II is
+   **"beneath it, paired chords turn true"** and line IV is **"from bare,
+   whispered words, a plane rises"**. The plan's poem block is authoritative;
+   do not restore the packet's wording for either line. Paper IV's coda prose
+   must name its minimum words plainly, so the exact term stands beside the poem.
 9. Removing the banner creates no metadata divergence: every paper's
    `.zenodo.json` already carries a bare title with no series label. A forward
    Paper V release will therefore correct that paper's stale Zenodo record title
