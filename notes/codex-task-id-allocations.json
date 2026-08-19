@@ -3167,8 +3167,17 @@
       "last": 919,
       "purpose": "Series apparatus relocation, perspective-section merge, and epigraph rewrite across Papers I-V",
       "sequence": 352
+    },
+    {
+      "count": 1,
+      "first": 920,
+      "kind": "reservation",
+      "lane": "cubic-threefolds",
+      "last": 920,
+      "purpose": "remove Hypothesis 5.7T for minimal rational ruled surface centers: Lean rank-four separability and collision trichotomy plus the Hirzebruch specialized quantum relation",
+      "sequence": 353
     }
   ],
-  "next_id": 920,
+  "next_id": 921,
   "schema": "codex-task-id-allocations-v1"
 }
