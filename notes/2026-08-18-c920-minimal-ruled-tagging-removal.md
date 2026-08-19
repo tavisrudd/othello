@@ -4,7 +4,7 @@
 **Date:** 2026-08-18.
 **Manuscript:** `papers/cubic-stabilization-epilogue/`.
 **Authority commits:** `ee4f72d44`, `eb9b34622`, `b4d416a62`, `17e2d2a6f`,
-`2c030a8fc`, `b9ba88d26`, `a74cf275c`.
+`2c030a8fc`, `b9ba88d26`, `a74cf275c`, `f06c3da38`.
 **Card:** `cubic-threefolds-tasks/c920-minimal-ruled-tagging-removal.md`.
 
 Hypothesis 5.7T, the divisor-tagging specialization invariance of the epilogue,
@@ -260,6 +260,16 @@ real gap: the degenerate splittings and the multiplicity bounds were separate
 statements, never composed, so the manuscript's degenerate case was not
 formalized.  That gap was closed by proving the composition rather than by
 weakening the prose.
+
+The third round confirmed the repairs and found three defective sentences, one
+of them introduced by a second-round repair: a claim that the degenerate case
+never arises for a center specialization, which is false for the quadric surface
+and contradicted the manuscript's own quadric paragraph; a surviving false claim
+that a center which is neither minimal nor geometrically ruled has even
+cohomology of rank above four, refuted by a one-point blowup of a fake
+projective plane; and a scope phrase missing the word "surface" in the
+introduction.  All three are fixed.  The third round reported nothing else in
+the new mathematics as false, unproved, or overclaimed.
 
 ## Validation
 
