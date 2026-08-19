@@ -277,10 +277,22 @@ Eckardt-locus generator carried task identifiers and two citations of internal
 note files, and its emitted banner wrote both into the tracked Singular
 certificate. Both were cleaned in the authority by the task that owns them, the
 certificate regenerated so its banner names its in-paper generator, and the
-checksum manifest refreshed. Worth recording for whoever maintains the
-exporter: the audit's extension coverage does not reach `.sing`, so the
-certificate's copy of the task identifier passed the scan and was found only by
-reading the file. Cleaning the generator alone would have shipped it.
+checksum manifest refreshed. The certificate's own copy of the task identifier
+passed the scan and was found only by reading the file, because the audit's
+extension coverage did not reach `.sing`; cleaning the generator alone would
+have shipped it.
+
+That gap is closed, in `papers/scripts/export-paper-repos.py` as of
+`f15277c26`, which adds Lean, Singular, Graphviz and Nix sources to the scanned
+suffixes. The Singular certificate was the small half of it: Lean sources were
+not scanned either, and this paper's companion ships 139 of them, so the bulk of
+the exported artifact had been exempt from the task-identifier and
+private-reference checks in every audit run before that commit. Checked here
+rather than taken on report: with the widened scanner the pre-cleanup commit
+reports nine findings against the old seven, the two extra being exactly the
+certificate lines that had to be found by reading, and the current tree reports
+none. The export recorded above therefore stands under the stronger scan, with
+every Lean source read.
 
 ## Commits
 
