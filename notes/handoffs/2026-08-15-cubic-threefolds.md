@@ -203,22 +203,25 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   `../2026-08-18-c920-minimal-ruled-tagging-removal.md`. Not yet exported to the
   standalone repository.
 
-- **C914 — both comparisons decided, manuscript restatement open.** The
+- **C914 — both comparisons decided, restatement applied 2026-08-19.** The
   pencil contains the Fermat cubic threefold. All but finitely many of its
   members lie outside the Yang--Yu--Zhu coprime-degree locus: every member of
   their normal form carries an Eckardt point, and the generic pencil member
   carries none. Voisin's criterion is unreachable by any elliptic-product
   route: with the exotic two-primary gluing kernel, the only odd-degree product
   factorization of the intermediate Jacobian is `1 + 4`, realized at odd index
-  `25`, so the pencil is not known to lie in a Voisin component. What remains
-  here is restating the pencil's contribution in the epilogue introduction and
-  novelty ledger. Card:
+  `25`, so the pencil is not known to lie in a Voisin component. The restatement
+  is in the manuscript and its registries, through four cold-read rounds. Card:
   `../cubic-threefolds-tasks/c914-a5-pencil-vs-coprime-degree-locus.md`;
-  report `../2026-08-18-c914-a5-pencil-vs-voisin-and-yyz.md`.
-- **C921 — residual Voisin gate, active.** Decide whether the four-dimensional
-  odd-degree factor `A_b` is an irreducible genus-four Jacobian, or whether
-  `J(X_b)` is odd-degree isogenous to an irreducible genus-five Jacobian. Card:
-  `../cubic-threefolds-tasks/c921-four-dimensional-factor-jacobian.md`.
+  report `../2026-08-18-c914-a5-pencil-vs-voisin-and-yyz.md`; round-four reads
+  `../2026-08-19-c914-round-four-mathematics.md` and
+  `../2026-08-19-c914-round-four-consistency.md`.
+- **C921 — residual Voisin gate, active; genus-four branch closed negative
+  2026-08-19.** For all but finitely many members the four-dimensional factor
+  `A_b` is not a genus-four Jacobian. What is left is the genus-five route, and
+  only through an isogeny of degree greater than one. Card:
+  `../cubic-threefolds-tasks/c921-four-dimensional-factor-jacobian.md`; report
+  and evidence bundle `../2026-08-19-c921-genus-four-branch.md`.
 - **C917 — closed 2026-08-18.** The epilogue introduction now says why the
   direct Clemens--Griffiths mechanism gives no contradiction after one
   stabilization and where the result sits relative to Guéré

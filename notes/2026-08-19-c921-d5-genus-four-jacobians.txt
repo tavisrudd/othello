@@ -1,0 +1,63 @@
+C921: genus-four D_5 curves y^5 = (x-1)^m (x+1)^(5-m) (x-t)^n (x+t)^(5-n)
+Question: is the Jacobian isogenous to the fourth power of an elliptic curve?
+
+p = 11, t = 3, (m,n) = (1,1)
+  branch points [1, 10, 3, 8] with exponents [1, 4, 1, 4]
+  point counts over F_(p^k), k = 1..4: [14, 204, 1274, 13924]
+  Weil polynomial: T**8 + 2*T**7 + 43*T**6 + 64*T**5 + 705*T**4 + 704*T**3 + 5203*T**2 + 2662*T + 14641
+  factorization: (T**4 + T**3 + 21*T**2 + 11*T + 121)^2
+  distinct eigenvalues: 4
+  fourth power of a quadratic over the base field: no
+  orders m <= 210 merging two distinct eigenvalues: none
+  isogenous to a power of an elliptic curve over any extension: no
+  invariant checks:
+    independent recount of #C(F_p) by a double loop: 14 (agrees)
+    Weil bound |#C(F_(p^k)) - p^k - 1| <= 8 p^(k/2): holds
+    functional equation a_(8-i) = a_i p^(4-i): holds
+    every root has absolute value sqrt(p): deviation 3.9443e-31
+
+p = 11, t = 3, (m,n) = (1,2)
+  branch points [1, 10, 3, 8] with exponents [1, 4, 2, 3]
+  point counts over F_(p^k), k = 1..4: [24, 154, 1224, 14634]
+  Weil polynomial: T**8 + 12*T**7 + 88*T**6 + 444*T**5 + 1710*T**4 + 4884*T**3 + 10648*T**2 + 15972*T + 14641
+  factorization: (T**4 + 6*T**3 + 26*T**2 + 66*T + 121)^2
+  distinct eigenvalues: 4
+  fourth power of a quadratic over the base field: no
+  orders m <= 210 merging two distinct eigenvalues: none
+  isogenous to a power of an elliptic curve over any extension: no
+  invariant checks:
+    independent recount of #C(F_p) by a double loop: 24 (agrees)
+    Weil bound |#C(F_(p^k)) - p^k - 1| <= 8 p^(k/2): holds
+    functional equation a_(8-i) = a_i p^(4-i): holds
+    every root has absolute value sqrt(p): deviation 3.9443e-31
+
+p = 31, t = 3, (m,n) = (1,1)
+  branch points [1, 30, 3, 28] with exponents [1, 4, 1, 4]
+  point counts over F_(p^k), k = 1..4: [44, 1154, 28964, 921274]
+  Weil polynomial: T**8 + 12*T**7 + 168*T**6 + 1164*T**5 + 8510*T**4 + 36084*T**3 + 161448*T**2 + 357492*T + 923521
+  factorization: (T**4 + 6*T**3 + 66*T**2 + 186*T + 961)^2
+  distinct eigenvalues: 4
+  fourth power of a quadratic over the base field: no
+  orders m <= 210 merging two distinct eigenvalues: none
+  isogenous to a power of an elliptic curve over any extension: no
+  invariant checks:
+    independent recount of #C(F_p) by a double loop: 44 (agrees)
+    Weil bound |#C(F_(p^k)) - p^k - 1| <= 8 p^(k/2): holds
+    functional equation a_(8-i) = a_i p^(4-i): holds
+    every root has absolute value sqrt(p): deviation 7.8886e-31
+
+p = 31, t = 3, (m,n) = (1,2)
+  branch points [1, 30, 3, 28] with exponents [1, 4, 2, 3]
+  point counts over F_(p^k), k = 1..4: [64, 934, 29344, 925894]
+  Weil polynomial: T**8 + 32*T**7 + 498*T**6 + 4864*T**5 + 32435*T**4 + 150784*T**3 + 478578*T**2 + 953312*T + 923521
+  factorization: (T**4 + 16*T**3 + 121*T**2 + 496*T + 961)^2
+  distinct eigenvalues: 4
+  fourth power of a quadratic over the base field: no
+  orders m <= 210 merging two distinct eigenvalues: none
+  isogenous to a power of an elliptic curve over any extension: no
+  invariant checks:
+    independent recount of #C(F_p) by a double loop: 64 (agrees)
+    Weil bound |#C(F_(p^k)) - p^k - 1| <= 8 p^(k/2): holds
+    functional equation a_(8-i) = a_i p^(4-i): holds
+    every root has absolute value sqrt(p): deviation 0.0
+

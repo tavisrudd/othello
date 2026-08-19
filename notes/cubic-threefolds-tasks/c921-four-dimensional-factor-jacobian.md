@@ -29,12 +29,24 @@ so an elliptic-product route is impossible. Report:
 Voisin's criterion (arXiv:1407.7261, proof of Theorem 4.5) holds for the pencil
 exactly if one of these does:
 
-- [ ] `A_b` is the Jacobian of an irreducible genus-four curve. The `D_5`
-  stabilizer of the chosen axis acts on `A_b`, and genus-four curves with a
-  faithful `D_5`-action form a one-dimensional family, so the dimensions match;
-  the Jacobian locus is a divisor in `A_4`, cut out by the Schottky form.
+- [x] **Closed negative, 2026-08-19.** `A_b` is the Jacobian of an irreducible
+  genus-four curve for at most finitely many `b`. Torelli makes such a curve
+  carry a faithful `D_5`-action; Riemann--Hurwitz leaves the single branch datum
+  `(2,2,5,5)` over the line, so the curve is a cyclic quintic cover branched at
+  four points with an involution inverting the deck group, and the Eichler trace
+  formula forces its analytic representation to be `V_1 + V_2`, the same as
+  `A_b`, so no character comparison can obstruct. Both the curve family and the
+  pencil family are one-dimensional inside the two-dimensional moduli of
+  `D_5`-fourfolds, and a Weil-polynomial computation shows a member of each of
+  the two curve families whose Jacobian is not isogenous, over any extension, to
+  a power of an elliptic curve — which every `A_b` is. Report and evidence
+  bundle: `../2026-08-19-c921-genus-four-branch.md`.
 - [ ] `J(X_b)` is odd-degree isogenous to the Jacobian of an irreducible
-  genus-five curve, with no product decomposition involved.
+  genus-five curve, with no product decomposition involved. The isogeny must have
+  degree greater than one: genus-five curves with a faithful `A_5`-action have
+  the unique branch datum `(3,3,5)` over the line and are therefore rigid, while
+  the pencil is not isotrivial, so no isomorphism-level comparison can hold for
+  more than finitely many members.
 
 A positive answer puts the pencil inside a Voisin component and demotes the
 epilogue's separation corollary on the pencil to a reproof; a negative answer
@@ -59,13 +71,19 @@ sharpened question for this task is therefore whether the polarized
 four-dimensional factor, not merely the underlying abelian variety, is a curve
 Jacobian.
 
-## Suggested attacks
+## Suggested attacks on the remaining branch
 
-- Roulleau's `D_5`-fibration of the Fano surface: identify `A_b` as a Prym or
-  as the Jacobian of the quotient curve, which would settle the first bullet
-  geometrically rather than numerically.
-- Evaluate the Schottky form on a numerically computed period matrix of `A_b`
-  for one non-CM member, as a decisive negative if it does not vanish.
-- The Klein cubic threefold is a member of this pencil with CM factor; its
-  `A_b` may be recognizable in the literature and is a cheap test case, though
-  a single CM member decides nothing about the generic one.
+- The lattice side, the instrument that decided the product routes in C914: which
+  odd-degree isogenies from a genus-five Jacobian are compatible with the exotic
+  two-primary gluing kernel of the packet proposition? Torelli is unavailable
+  once the comparison is an isogeny of degree greater than one, so the gluing
+  data is the natural replacement.
+- Roulleau's `D_5`-fibration of the Fano surface, now aimed at exhibiting or
+  excluding a genus-five curve whose Jacobian receives `J(X_b)`.
+- The Klein cubic threefold is a member of this pencil with a complex-multiplication
+  factor and a cheap test case, though a single such member decides nothing about
+  the generic one.
+
+The attacks that settled the genus-four branch are recorded in
+`../2026-08-19-c921-genus-four-branch.md`; the Schottky-form route listed here
+before was not needed.
