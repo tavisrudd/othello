@@ -54,7 +54,7 @@ whole odd cohomology in that packet, and the constancy of rank on a connected
 component.
 
 Checked coverage snapshot: 62 claims; 5 absent; 27 fragmentary; 29 conditional;
-1 complete; 292 reviewer terminals, of which 47 are machinery serving no current
+1 complete; 293 reviewer terminals, of which 47 are machinery serving no current
 manuscript claim.
 
 Those 46 are kernel-checked and reusable, and the claim map records for each one
@@ -110,8 +110,9 @@ The reviewer-facing terminals currently verify:
   homology pairing, its alternation and determinant `6^8`; the consequence that
   a comparison matrix pulling a unimodular alternating form back to it has
   determinant of absolute value `6^4` and is injective; the identification of
-  the kernel of its two-torsion reduction with four copies of the rank-two
-  two-torsion module; and the six-coordinate form on augmentation lifts, which
+  the kernels of its two- and three-torsion reductions with four copies of the
+  rank-two module over the respective prime field; and the six-coordinate form
+  on augmentation lifts, which
   is six times the dot product and so has half reducing modulo two to the dot
   product and third reducing modulo three to its negative, independently of the
   chosen lift;

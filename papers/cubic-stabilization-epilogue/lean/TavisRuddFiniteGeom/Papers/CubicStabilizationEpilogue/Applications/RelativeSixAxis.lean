@@ -58,6 +58,10 @@ structure RelativeSixAxisObjects (Base : Type u) where
   DiscriminantTwo : Base → Type v
   /-- Fibres of `H₂ ⊗ E[2]`. -/
   HeartTensorTorsion : Base → Type v
+  /-- Three-primary discriminant fibres of the source polarization. -/
+  DiscriminantThree : Base → Type v
+  /-- Fibres of `H₃ ⊗ E[3]`. -/
+  HeartThreeTensorTorsion : Base → Type v
   /-- Two-primary kernel fibres of the relative isogeny. -/
   KernelTwo : Base → Type v
 
@@ -120,6 +124,22 @@ structure RelativeSixAxisGeometricInput
   /-- The named tensor type represents `H₂ ⊗ E[2]` for the supplied elliptic
   family. -/
   heartTensorTorsionIsH2TensorEllipticTwoTorsion : Prop
+  /-- Coordinates identifying each three-primary discriminant fibre with the
+  three-torsion kernel of the realized source polarization. -/
+  discriminantThreeCoordinates : ∀ parameter,
+    objects.DiscriminantThree parameter ≃
+      GraphLattices.sixAxisSourceThreePrimaryDiscriminant
+  /-- Coordinates identifying each `H₃ ⊗ E[3]` fibre with four copies of the
+  rank-two three-torsion module, after choosing a symplectic basis of the
+  elliptic three-torsion. -/
+  heartThreeTensorTorsionCoordinates : ∀ parameter,
+    objects.HeartThreeTensorTorsion parameter ≃ (Fin 4 → Fin 2 → GraphLattices.F3)
+  /-- The three-primary discriminant type represents the three-primary kernel
+  of the source polarization. -/
+  discriminantThreeIsSourcePolarizationKernel : Prop
+  /-- The named tensor type represents `H₃ ⊗ E[3]` for the supplied elliptic
+  family. -/
+  heartThreeTensorTorsionIsH3TensorEllipticThreeTorsion : Prop
   /-- The discriminant identification is `A₅`-equivariant. -/
   discriminantEquivalenceA5Equivariant : Prop
   /-- Inclusion of the two-primary isogeny kernel in the discriminant. -/
@@ -163,6 +183,17 @@ noncomputable def relativeSixAxisDiscriminantEquivalence
   (geometry.discriminantTwoCoordinates parameter).trans
     (GraphLattices.sixAxisSourceTwoPrimaryDiscriminantCoordinates.toEquiv.trans
       (geometry.heartTensorTorsionCoordinates parameter).symm)
+
+/-- The three-primary discriminant identification `D₃ ≃ H₃ ⊗ E[3]`, constructed
+from the three-torsion coordinates and from the computed kernel of the realized
+source polarization rather than supplied. -/
+noncomputable def relativeSixAxisThreePrimaryDiscriminantEquivalence
+    {Base : Type*} {objects : RelativeSixAxisObjects Base}
+    (geometry : RelativeSixAxisGeometricInput objects) (parameter : Base) :
+    objects.DiscriminantThree parameter ≃ objects.HeartThreeTensorTorsion parameter :=
+  (geometry.discriminantThreeCoordinates parameter).trans
+    (GraphLattices.sixAxisSourceThreePrimaryDiscriminantCoordinates.toEquiv.trans
+      (geometry.heartThreeTensorTorsionCoordinates parameter).symm)
 
 /-- Fibrewise standard-coordinate data identifying the supplied geometric
 two-primary kernel with a diagonally stable maximal-isotropic subspace of the
@@ -275,6 +306,17 @@ structure RelativeSixAxisConclusion
           (relativeSixAxisDiscriminantEquivalence geometry parameter fibre) =
         GraphLattices.sixAxisSourceTwoPrimaryDiscriminantCoordinates
           (geometry.discriminantTwoCoordinates parameter fibre)
+  /-- The three-primary discriminant identification `D₃ ≃ H₃ ⊗ E[3]` is
+  likewise constructed: in the supplied three-torsion coordinates it is the
+  computed kernel equivalence of the three-torsion source polarization. -/
+  threePrimaryDiscriminantEquivalence :
+    ∀ (geometry : RelativeSixAxisGeometricInput objects) (parameter : Base)
+      (fibre : objects.DiscriminantThree parameter),
+      geometry.heartThreeTensorTorsionCoordinates parameter
+          (relativeSixAxisThreePrimaryDiscriminantEquivalence geometry parameter
+            fibre) =
+        GraphLattices.sixAxisSourceThreePrimaryDiscriminantCoordinates
+          (geometry.discriminantThreeCoordinates parameter fibre)
   /-- Kernel-checked integral reduction of `6I₅-J₅` to
   `diag(1,6,6,6,6)`. -/
   integralSmithWitness :
@@ -371,6 +413,8 @@ theorem relativeSixAxis_of_geometricInputs
           (otherGeometry.homology parameter)⟩,
     fun otherGeometry parameter _ ↦
       (otherGeometry.heartTensorTorsionCoordinates parameter).apply_symm_apply _,
+    fun otherGeometry parameter _ ↦
+      (otherGeometry.heartThreeTensorTorsionCoordinates parameter).apply_symm_apply _,
     ⟨GraphLattices.sixAxisGram_smith_reduction,
       GraphLattices.sixAxisSmithLeft_mul_inverse,
       GraphLattices.sixAxisSmithLeft_inverse_mul,

@@ -1,6 +1,7 @@
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisTwoPrimaryDiscriminant
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisDiscriminantSupport
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPointIntegralQuotient
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPointThreePrimary
 import Mathlib.LinearAlgebra.Matrix.Kronecker
 import Mathlib.LinearAlgebra.Matrix.NonsingularInverse
 
@@ -309,6 +310,168 @@ noncomputable def sixAxisSourceTwoPrimaryDiscriminantCoordinates :
   (sixAxisSourceCurry.submoduleMap sixAxisSourceTwoPrimaryDiscriminant).trans
     ((LinearEquiv.ofEq _ _ sixAxisSourceTwoPrimaryDiscriminant_map_curry).trans
       (sixAxisTwoPrimaryDiscriminantLinearEquiv (Fin 2 → F2)).symm)
+
+/-- The coordinate-sum map on five copies of a module. -/
+def fiveCoordinateSum (R T : Type*) [CommRing R] [AddCommGroup T] [Module R T] :
+    (Fin 5 → T) →ₗ[R] T :=
+  ∑ index : Fin 5, LinearMap.proj index
+
+/-- The coordinate-sum map is the sum of the five coordinates. -/
+theorem fiveCoordinateSum_apply
+    {R T : Type*} [CommRing R] [AddCommGroup T] [Module R T]
+    (vector : Fin 5 → T) :
+    fiveCoordinateSum R T vector = ∑ index, vector index := by
+  simp [fiveCoordinateSum, LinearMap.sum_apply]
+
+/-- The submodule of five-coordinate vectors whose coordinate sum vanishes. -/
+def fiveCoordinateSumZero (R T : Type*) [CommRing R] [AddCommGroup T]
+    [Module R T] : Submodule R (Fin 5 → T) :=
+  LinearMap.ker (fiveCoordinateSum R T)
+
+/-- Four free coordinates determine a vector of vanishing coordinate sum; the
+fifth coordinate is the negative of their sum. -/
+def fiveCoordinateSumZeroRepresentative
+    {T : Type*} [AddCommGroup T] (coordinates : Fin 4 → T) : Fin 5 → T :=
+  ![coordinates 0, coordinates 1, coordinates 2, coordinates 3,
+    -(∑ index, coordinates index)]
+
+/-- The displayed representative has vanishing coordinate sum. -/
+theorem fiveCoordinateSumZeroRepresentative_sum
+    {T : Type*} [AddCommGroup T] (coordinates : Fin 4 → T) :
+    ∑ index, fiveCoordinateSumZeroRepresentative coordinates index = 0 := by
+  simp [fiveCoordinateSumZeroRepresentative, Fin.sum_univ_succ]
+  abel
+
+/-- Vanishing coordinate sum is exactly four free coordinates. -/
+def fiveCoordinateSumZeroEquiv (R T : Type*) [CommRing R] [AddCommGroup T]
+    [Module R T] : (Fin 4 → T) ≃ₗ[R] fiveCoordinateSumZero R T where
+  toFun coordinates :=
+    ⟨fiveCoordinateSumZeroRepresentative coordinates, by
+      simp [fiveCoordinateSumZero, LinearMap.mem_ker, fiveCoordinateSum_apply,
+        fiveCoordinateSumZeroRepresentative_sum]⟩
+  invFun vector := fun index ↦ vector.1 index.castSucc
+  left_inv coordinates := by
+    funext index
+    fin_cases index <;> rfl
+  right_inv vector := by
+    apply Subtype.ext
+    funext index
+    have sumZero : ∑ coordinate : Fin 5, vector.1 coordinate = 0 := by
+      have membership : fiveCoordinateSum R T vector.1 = 0 :=
+        LinearMap.mem_ker.mp vector.2
+      rwa [fiveCoordinateSum_apply] at membership
+    fin_cases index
+    · rfl
+    · rfl
+    · rfl
+    · rfl
+    · show -(∑ coordinate : Fin 4, vector.1 coordinate.castSucc) = vector.1 4
+      have expanded :
+          (∑ coordinate : Fin 4, vector.1 coordinate.castSucc) + vector.1 4 = 0 := by
+        calc
+          (∑ coordinate : Fin 4, vector.1 coordinate.castSucc) + vector.1 4 =
+              ∑ coordinate : Fin 5, vector.1 coordinate := by
+            simp [Fin.sum_univ_succ]
+            abel
+          _ = 0 := sumZero
+      linear_combination (norm := abel) -expanded
+  map_add' left right := by
+    apply Subtype.ext
+    funext index
+    fin_cases index <;>
+      (simp [fiveCoordinateSumZeroRepresentative, Finset.sum_add_distrib]; try abel)
+  map_smul' scalar vector := by
+    apply Subtype.ext
+    funext index
+    fin_cases index <;>
+      simp [fiveCoordinateSumZeroRepresentative, Finset.smul_sum]
+
+/-- Modulo three the five-axis coefficient matrix has every entry minus one. -/
+theorem sixAxisGram_three_eq_neg_one (row column : Fin 5) :
+    sixAxisGram F3 row column = -1 := by
+  have expanded : sixAxisGram F3 row column =
+      6 * (if row = column then 1 else 0) - 1 := rfl
+  rw [expanded]
+  by_cases equalIndices : row = column
+  · rw [if_pos equalIndices]; decide
+  · rw [if_neg equalIndices]; decide
+
+/-- Modulo three the source polarization acts through the elliptic homology
+pairing on the negated axis-wise coordinate sums. -/
+theorem sixAxisSourcePolarization_three_mulVec_apply
+    (vector : Fin 5 × Fin 2 → F3) (axis : Fin 5) (spin : Fin 2) :
+    (sixAxisSourcePolarization F3).mulVec vector (axis, spin) =
+      ∑ otherSpin : Fin 2, (-1 : F3) * ellipticWeilPairing F3 spin otherSpin *
+        ∑ otherAxis : Fin 5, vector (otherAxis, otherSpin) := by
+  rw [Matrix.mulVec, dotProduct, Fintype.sum_prod_type]
+  rw [Finset.sum_comm]
+  refine Finset.sum_congr rfl ?_
+  intro otherSpin _
+  rw [Finset.mul_sum]
+  refine Finset.sum_congr rfl ?_
+  intro otherAxis _
+  rw [sixAxisSourcePolarization_apply, sixAxisGram_three_eq_neg_one]
+
+/-- Modulo three the source polarization is degenerate exactly on the vectors
+whose coordinate sum vanishes along every elliptic homology coordinate. -/
+theorem sixAxisSourcePolarization_three_mulVec_eq_zero_iff
+    (vector : Fin 5 × Fin 2 → F3) :
+    (sixAxisSourcePolarization F3).mulVec vector = 0 ↔
+      ∀ spin : Fin 2, ∑ axis : Fin 5, vector (axis, spin) = 0 := by
+  constructor
+  · intro vanishing spin
+    have firstRow := congrFun vanishing (0, 0)
+    have secondRow := congrFun vanishing (0, 1)
+    rw [sixAxisSourcePolarization_three_mulVec_apply] at firstRow secondRow
+    simp [Fin.sum_univ_two, ellipticWeilPairing] at firstRow secondRow
+    fin_cases spin
+    · simpa using secondRow
+    · simpa using firstRow
+  · intro sumsVanish
+    funext index
+    obtain ⟨axis, spin⟩ := index
+    rw [sixAxisSourcePolarization_three_mulVec_apply]
+    simp [sumsVanish]
+
+/-- The three-primary discriminant of the six-axis source polarization: the
+kernel of its three-torsion reduction. -/
+def sixAxisSourceThreePrimaryDiscriminant : Submodule F3 (Fin 5 × Fin 2 → F3) :=
+  LinearMap.ker (Matrix.mulVecLin (sixAxisSourcePolarization F3))
+
+/-- Currying the three-torsion source coordinates. -/
+def sixAxisSourceThreeCurry :
+    (Fin 5 × Fin 2 → F3) ≃ₗ[F3] (Fin 5 → Fin 2 → F3) :=
+  LinearEquiv.curry F3 F3 (Fin 5) (Fin 2)
+
+/-- Under currying, the three-primary discriminant of the source polarization
+is the coordinate-sum-zero submodule of five copies of the rank-two
+three-torsion module. -/
+theorem sixAxisSourceThreePrimaryDiscriminant_map_curry :
+    Submodule.map (sixAxisSourceThreeCurry : (Fin 5 × Fin 2 → F3) →ₗ[F3] _)
+        sixAxisSourceThreePrimaryDiscriminant =
+      fiveCoordinateSumZero F3 (Fin 2 → F3) := by
+  ext curried
+  rw [Submodule.mem_map_equiv]
+  simp only [sixAxisSourceThreePrimaryDiscriminant, fiveCoordinateSumZero,
+    LinearMap.mem_ker, Matrix.mulVecLin_apply, fiveCoordinateSum_apply]
+  rw [sixAxisSourcePolarization_three_mulVec_eq_zero_iff]
+  constructor
+  · intro sums
+    funext spin
+    simpa [sixAxisSourceThreeCurry] using sums spin
+  · intro sumZero spin
+    simpa [sixAxisSourceThreeCurry] using congrFun sumZero spin
+
+/-- The three-primary discriminant of the source polarization is linearly
+equivalent to four copies of the rank-two three-torsion module.  This is the
+coefficient-side identification of the three-primary discriminant with
+`H₃ ⊗ E[3]`, with the coefficient heart in its four-coordinate
+normalization. -/
+noncomputable def sixAxisSourceThreePrimaryDiscriminantCoordinates :
+    sixAxisSourceThreePrimaryDiscriminant ≃ₗ[F3] (Fin 4 → Fin 2 → F3) :=
+  (sixAxisSourceThreeCurry.submoduleMap sixAxisSourceThreePrimaryDiscriminant).trans
+    ((LinearEquiv.ofEq _ _ sixAxisSourceThreePrimaryDiscriminant_map_curry).trans
+      (fiveCoordinateSumZeroEquiv F3 (Fin 2 → F3)).symm)
 
 /-- On augmentation lifts the six-coordinate coefficient form is six times the
 dot product. -/

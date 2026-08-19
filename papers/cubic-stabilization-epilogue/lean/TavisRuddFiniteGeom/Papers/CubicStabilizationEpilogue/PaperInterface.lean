@@ -217,10 +217,11 @@ theorem separatedVariableLocus_of_eckardtLocus_inputs
 now carries an integral first-homology realization of every fibre — a
 unimodular alternating form for the intermediate Jacobian, an integral
 comparison matrix, and the polarization pullback identity between them — and
-two-torsion coordinates on the discriminant and on the `H₂ ⊗ E[2]` fibres.
+torsion coordinates on the two- and three-primary discriminants and on the
+`H₂ ⊗ E[2]` and `H₃ ⊗ E[3]` fibres.
 From that data Lean proves the source polarization has determinant `6⁸`, every
 comparison matrix has determinant of absolute value `6⁴` and is injective, and
-the two-primary discriminant identification is the computed kernel equivalence
+each primary discriminant identification is the computed kernel equivalence
 in those coordinates.  The families of elliptic, source, Jacobian, and kernel
 fibres, the assertion that the displayed matrices are the ones induced by the
 relative geometry, the `A₅`/`S₆` equivariance, the kernel description, and its
@@ -267,6 +268,23 @@ theorem relativeSixAxis_polarizationPullback_degree
   ⟨GraphLattices.sixAxisSourcePolarization_det,
     Applications.relativeSixAxisHomologyRealization_comparison_natAbs_det realization,
     Applications.relativeSixAxisHomologyRealization_comparison_injective realization⟩
+
+/-- Both primary discriminants of the six-axis source polarization in
+coordinates.  The kernel of the two-torsion reduction of the Kronecker
+polarization is linearly equivalent to four copies of the rank-two two-torsion
+module, and the kernel of its three-torsion reduction to four copies of the
+rank-two three-torsion module.  These are the coefficient-side halves of the
+manuscript's identifications `D₂ ≃ H₂ ⊗ E[2]` and `D₃ ≃ H₃ ⊗ E[3]`; the
+two-torsion and three-torsion modules here are free rank-two modules over the
+respective prime field, not the torsion of a constructed elliptic curve, and no
+Weil pairing is constructed. -/
+theorem relativeSixAxis_primaryDiscriminantCoordinates :
+    Nonempty (GraphLattices.sixAxisSourceTwoPrimaryDiscriminant ≃ₗ[GraphLattices.F2]
+        (Fin 4 → Fin 2 → GraphLattices.F2)) ∧
+      Nonempty (GraphLattices.sixAxisSourceThreePrimaryDiscriminant ≃ₗ[GraphLattices.F3]
+        (Fin 4 → Fin 2 → GraphLattices.F3)) :=
+  ⟨⟨GraphLattices.sixAxisSourceTwoPrimaryDiscriminantCoordinates⟩,
+    ⟨GraphLattices.sixAxisSourceThreePrimaryDiscriminantCoordinates⟩⟩
 
 /-- The normalized primary discriminant pairings of the six-axis coefficient
 form.  On a lift with vanishing coordinate sum the six-coordinate form
