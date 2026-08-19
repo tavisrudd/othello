@@ -14,6 +14,25 @@ mask bound and why that route is capped at 30),
 `notes/2026-08-07-c880-adaptive-and-wording-referee-review.md` (MAJOR 1 and
 MAJOR 3 — the two arguments that looked right and were not).
 
+## Result
+
+The bracket narrows from above, by a factor of \(8/3\):
+
+\[
+  0.616\,n^2\;\le\;\mathrm{minimum}(n)\;\le\;\tfrac98n^2+O(n)
+  \qquad\text{in place of}\qquad
+  \mathrm{minimum}(n)\;\le\;3n^2-23n+45 .
+\]
+
+The construction is a base of 30 tests on seven points plus one layer per
+further point, and a layer is built from blocks of four points costing nine
+tests each. Its correctness is a proof — an attachment lemma and a composition
+argument — resting on two exhaustively computed constants, \(g(5)=9\) and
+\(g(6)=12\), each obtained by three independent solvers. The remaining gap
+against the entropy floor is a factor \(1.827\) rather than \(4.87\), and every
+exactly computed cost in this report says the floor rather than the
+construction is now the loose end.
+
 ## Objective and plan, written before any computation
 
 The card names two live routes. This report takes **route (a), a construction
@@ -189,13 +208,14 @@ facts make \(P\) the right object.
 | 3 | \(P(k,3)=8\) | 2.667 | exact |
 | **4** | **\(P(1,4)=g(5)=9\)** | **2.25** | exact |
 | 5 | \(P(1,5)=g(6)=12\); \(P(2,5)=12\) | 2.4 | exact |
-| 6 | \(g(7)\le15\) | \(\le2.5\) | verified family |
+| 6 | \(P(1,6)=g(7)=15\) | 2.5 | exact |
 | 7 | \(g(8)\le17\) | \(\le2.43\) | verified family |
 
-Every entry is a minimum hitting set of the **complete** family of difference
-masks — every pair of attachments agreeing on the known set, over every
-two-graph — so each is exact, not a bound from a truncated constraint set. The
-\(j=4\) row is the best ratio, and the optimal family is transparent:
+Every entry marked exact is a minimum hitting set of the **complete** family of
+difference masks — every pair of attachments agreeing on the known set, over
+every two-graph — so it is a true minimum, not a bound from a truncated
+constraint set; only the last row is an upper bound. The \(j=4\) row is the
+best ratio, and the optimal family is transparent:
 
 > **The block of four.** For a block \(B=\{b_1,b_2,b_3,b_4\}\) of fresh points
 > and the anchor \(0\), take the six triples \(\{0,b_i,b_j\}\) and the three
@@ -261,9 +281,11 @@ names the possibility that minimum-weight differences are always inherited from
 a seven-point subconfiguration, in which case the hitting-set route is capped at
 30 for **every** \(n\) and yields nothing asymptotically. Nothing found here
 contradicts that, and the enumeration that would decide it — the minimum-weight
-difference spectrum at nine points, \(2^{28}\) two-graphs against 126 tests — is
-the same computation the predecessor recorded as out of reach of its
-representation.
+difference spectrum at nine points, a scan over pairs drawn from \(2^{28}\)
+two-graphs, of order \(10^{16}\) — is the computation the predecessor recorded
+as out of reach of its program, and nothing in this report's toolkit makes it
+cheaper. The \(2^{28}\) sweeps run here are single passes over the two-graphs,
+not passes over their pairs.
 
 Weighed against that, route (a) had a concrete testable mechanism (sharing,
 which the link criterion says any improvement must use), it moves the quantity
@@ -309,7 +331,9 @@ a factor of **1.827** rather than the 4.87 the task card recorded. The lower end
 is unchanged — the entropy floor of the predecessor report, whose content is the
 measured quarter marginal — and the upper end is the block construction above,
 proved and machine-checked layer by layer and end-to-end at seven and eight
-points.
+points. The whole replay list was re-run from the committed generator in a
+clean environment after its last edit, and every certificate reproduced byte
+for byte.
 
 Against the other two reference numbers: the counting bound \(n(n-3)/2\) is a
 factor \(2.25\) below the construction, and the adaptive decoder's
@@ -341,18 +365,21 @@ numbers suggest.
   is dominated by the entropy floor.
 
 **Exact, by exhaustive computation over a complete constraint family.**
-\(g(5)=9\), \(g(6)=12\), and the marginal values \(P(k,1)=3\), \(P(k,2)=6\),
-\(P(k,3)=8\), \(P(k,4)=9\), \(P(2,5)=12\) for the \(k\) listed in section 3.
+\(g(5)=9\), \(g(6)=12\), \(g(7)=15\), and the marginal values \(P(k,1)=3\),
+\(P(k,2)=6\), \(P(k,3)=8\), \(P(k,4)=9\), \(P(2,5)=12\) for the \(k\) listed in
+section 3.
 Each is a minimum hitting set of every difference mask arising from any
 two-graph and any pair of attachments agreeing on the known set, so the value
 is both a lower bound (every mask must be hit) and an upper bound (the hitting
 set is checked to separate). \(g(5)\) and \(g(6)\) are confirmed a second and
-third time by HiGHS and by CBC on the same committed constraint files.
+third time by HiGHS and by CBC on the same committed constraint files, and
+\(g(7)=15\) is HiGHS on the complete \(m=7\) constraint file — 46,837
+inclusion-minimal masks — matching the family the search had already found and
+`verifymarginal` had already certified.
 
-**Upper bounds with a verified witness, not proved optimal.** \(g(7)\le15\) and
-\(g(8)\le17\): explicit families, each checked against every two-graph on 7 and
-8 points. They enter only the additive constant of the construction, never its
-leading term.
+**Upper bound with a verified witness, not proved optimal.** \(g(8)\le17\): an
+explicit family checked against every two-graph on eight points. It enters only
+the additive constant of the construction, never its leading term.
 
 **Not deterministic, and therefore not evidence.** The generator's `build` mode
 is a lazy greedy search whose violation sampling depends on thread scheduling;
@@ -368,8 +395,8 @@ final family from the four-triples definition alone, so the end-to-end check
 does not reuse the identity the construction was designed around.
 
 **What the computations do not certify.** Nothing here is exhaustive above the
-sizes listed: \(g(m)\) is bounded, not computed, for \(m\ge7\); the block
-values are exact only for block size at most 5; and the end-to-end check of the
+sizes listed: \(g(m)\) is bounded, not computed, for \(m\ge8\); the block
+values are exact only for block size at most 6; and the end-to-end check of the
 whole family runs at \(n=7\) and \(n=8\) only, with the \(m=9\) attachment
 layer checked separately over all \(2^{28}\) two-graphs. Everything at larger
 \(n\) rests on the composition proof.
@@ -380,7 +407,7 @@ layer checked separately over all \(2^{28}\) two-graphs. Everything at larger
 Every exactly computed cost in this report sits between 2.25 and 3 tests per
 recovered bit, where the entropy floor licenses 1.2326: the exact nonadaptive
 minimum at seven points is 30 against a floor of 18, and the exact block costs
-are 3, 3, 2.667, 2.25 and 2.4 tests per bit. There is a heuristic reason to
+are 3, 3, 2.667, 2.25, 2.4 and 2.5 tests per bit. There is a heuristic reason to
 expect the truth near 2.4 rather than near 1.23. A **no** answer removes a
 quarter of the candidates, so covering all but the antipodal pair of a
 \(d\)-dimensional space with such quarters takes about
@@ -394,13 +421,17 @@ reads.
 **Blocks of four are the sweet spot, and the reason is visible.** The block
 family spends \(\binom j2\) anchored tests plus a linear number of internal
 ones, so its cost per point falls while \(j\le4\) and the quadratic term takes
-over after; \(j=5\) already costs 2.4 per point against 2.25.
+over after; \(j=5\) already costs 2.4 per point and \(j=6\) costs 2.5, against
+2.25.
 
-**The layered shape is slightly lossy.** At eight points it gives 45 where
-iterated local search found 44, so restricting to base-plus-layers costs at
-least one test there. Whether it costs a constant factor asymptotically is
-open, and it is the first thing a successor should ask, because the whole
-\(9/8\) rests on that shape.
+**The construction is not optimal at the one size where both numbers exist.**
+At eight points it gives 45 where iterated local search found 44, and with
+\(g(7)=15\) exact neither of its two parts is slack. What that does *not* show
+is that the base-plus-layers shape is itself lossy: a layered family need not
+have a base that separates on its own, since the layer's answers also depend on
+the earlier two-graph. Whether the shape costs a constant factor asymptotically
+is open, and it is the first thing a successor should ask, because the whole
+\(9/8\) rests on it.
 
 **Two consequences outside this task.** First, the manuscript's factor-six
 statement — that an adaptive decoder beats the exhibited family by a factor
@@ -421,9 +452,9 @@ C824, and the predecessor report is another task's record.
 | open item | what is surprising or unexplained | what the closeout settled | exact evidence gap or successor |
 |---|---|---|---|
 | The factor 1.83 between \(0.616\,n^2\) and \(\tfrac98n^2\) | Every exactly computed cost in this report is 2.25 to 3 tests per recovered bit, never near the entropy floor's 1.2326 — including the exact seven-point minimum, 30 against a floor of 18. | The closeout supplies a reason to expect the floor to be the loose end: covering a \(d\)-dimensional space by quarter-sized flats, which is what a **no** answer does, costs about \(\log2/\log(4/3)=2.409\) per dimension for random flats, and every measured design sits just under that. | Not a bound. What is wanted is a covering lower bound for this specific family of codimension-two flats. Section 5 shows the direct polynomial-method version caps at \(\tfrac14n^2\), below the entropy floor, so a sharper argument has to use that the flats come from alignment tests. Unowned. |
-| Whether some block larger than four beats \(9/4\) | Costs per point run 3, 3, 2.667, **2.25**, 2.4 for block sizes 1 to 5, so the minimum is interior and might recur. | Block sizes 1 through 5 are exact; subadditivity gives \(P(2,6)\le15\), so a block of six would have to cost at most 13 to beat \(9/4\). | Not decided. The exhaustive route is the \(2^{21}\)-two-graph sweep at \(m=8\) with a two-point anchor, which yields 752,179 inclusion-minimal masks; neither the branch and bound on a 1,500-mask capped pool (killed at 100 s) nor HiGHS on the full family (killed at 6 GB resident) resolved it. Successor: a symmetry-reduced integer program, or a structural cost formula for a block. |
-| Whether the base-plus-layers shape is lossy | At eight points the layered optimum is \(30+g(7)=45\), while the predecessor's iterated local search found a separating family of 44. | Confirmed as a real loss of at least one test at \(n=8\); the layered construction is not optimal at the only size where both numbers are known. | Whether the loss is \(O(1)\) or a constant factor is open, and it is the assumption the whole \(9/8\) rests on. Deciding it needs the exact nonadaptive minimum at \(n=8\) or \(n=9\), which the predecessor already recorded as out of reach by its method. |
-| Exact \(g(7)\) and \(g(8)\) | The attachment cost is exact at \(m=5,6\) (9 and 12) and only bracketed above. | \(g(7)\ge12\) from the exact minimum hitting set of the difference masks of weight at most 8 at \(m=7\), and \(g(7)\le15\), \(g(8)\le17\) from verified families. | The full \(m=7\) attachment mask family has 46,837 inclusion-minimal masks; the integer program on it was launched and did not return within this session. These constants change only the additive \(O(n)\) term, never the \(9/8\). |
+| Whether some block larger than four beats \(9/4\) | Costs per point run 3, 3, 2.667, **2.25**, 2.4, 2.5 for block sizes 1 to 6, so the minimum is interior and might recur. | Block sizes 1 through 6 are exact against a single anchor, and none beats 2.25; the two-anchor value \(P(2,6)\) satisfies \(P(2,6)\le P(1,6)=15\) and would have to be at most 13 to beat \(9/4\). | Not decided. The exhaustive route is the \(2^{21}\)-two-graph sweep at \(m=8\) with a two-point anchor, which yields 752,179 inclusion-minimal masks; neither the branch and bound on a 1,500-mask capped pool (killed at 100 s) nor HiGHS on the full family (killed at 6 GB resident) resolved it. Successor: a symmetry-reduced integer program, or a structural cost formula for a block. |
+| Whether the base-plus-layers shape is lossy | The construction gives \(30+g(7)=45\) at eight points, while the predecessor's iterated local search found a separating family of 44. | The construction is not optimal at the only size where both numbers are known, and with \(g(7)=15\) now exact the 45 is not slack in either of its two parts. But the shape itself is not proved lossy: a layered family need not have a base that separates on its own, since the layer's answers also depend on the earlier two-graph, so 45 is not a lower bound for the shape. | Whether the loss is \(O(1)\) or a constant factor is open, and it is the assumption the whole \(9/8\) rests on. Deciding it needs the exact nonadaptive minimum at \(n=8\) or \(n=9\), which the predecessor already recorded as out of reach by its method. |
+| Exact \(g(8)\) | The attachment cost is exact at \(m=5,6,7\) (9, 12, 15) and only bounded above at \(m=8\). | **Settled for \(m=7\):** \(g(7)=15\), by HiGHS on the complete family of 46,837 inclusion-minimal masks, matching the certified witness. So \(g(5),g(6),g(7)=9,12,15\) rises by exactly the attachment lemma's three per extra old point, even though the four-point block shows the eventual marginal is 2.25; the \(g(8)\le17\) witness is the first step that does better than three. | \(g(8)\) is still only bounded above. The \(m=8\) mask sweep is affordable but its constraint family is two orders of magnitude larger than the \(m=7\) one; the same HiGHS route is the obvious successor. These constants change only the additive \(O(n)\) term, never the \(9/8\). |
 | Why the marginal cost stops depending on the known set | \(P(k,j)\) is the same for every \(k\) measured — \(P(4,2)=P(5,2)=P(6,2)\), \(P(3,3)=P(4,3)=P(5,3)\), \(P(3,4)=P(4,4)\), and even \(P(1,4)=P(2,4)\). | Explained on one side: the block family that realises the optimum uses only the gauge point, so extra known points are simply unused. Why they cannot help at all is not explained. | A proof that the optimum never uses more than one anchor would make the composition argument cleaner and is finitely checkable at each \(j\); not attempted. |
 
 No mystery is manufactured here: the first row is the one that matters, and it
@@ -432,9 +463,9 @@ above.
 
 ## 10. Reproduction
 
-The block below is self-contained: it assumes nothing but a shell whose working
-directory is `notes/` inside this repository and a writable scratch directory
-in `$S`, both set by its first two lines. `rustc 1.93.1`, `rustc -O`, no
+The block below is self-contained: it assumes nothing but `rustc` and `uv` on
+the path, and sets its own working directory and scratch directory in its first
+two lines. `rustc 1.93.1`, `rustc -O`, no
 external crates; every mode is deterministic — canonical enumeration, no
 randomness, and the thread count changes nothing because every collection is
 sorted before use. Run in place, the block rewrites exactly the committed
@@ -453,7 +484,7 @@ $S/c880nc selfcheck > 2026-08-19-c880-selfcheck.txt
 $S/c880nc marginal --m 5 --known 1 --out 2026-08-19-c880-attach-g5.json
 $S/c880nc marginal --m 6 --known 1 --out 2026-08-19-c880-attach-g6.json
 
-# exact marginal costs P(k,j): 3, 6, 8, 9, 12 for j = 1..5
+# exact marginal costs P(k,j): 3, 6, 8, 9, 12, 15 for j = 1..6
 $S/c880nc marginal --m 8 --known 7 --out 2026-08-19-c880-marginal-k7j1.json
 $S/c880nc marginal --m 6 --known 4 --out 2026-08-19-c880-marginal-k4j2.json
 $S/c880nc marginal --m 7 --known 5 --out 2026-08-19-c880-marginal-k5j2.json
@@ -471,13 +502,18 @@ $S/c880nc template --m 7 --t0 0,1,2 --out 2026-08-19-c880-template7.json
 $S/c880nc template --m 8 --t0 0,1,2 --out 2026-08-19-c880-template8.json
 $S/c880nc template --m 9 --t0 0,1,2 --out 2026-08-19-c880-template9.json
 
-# verified witnesses for g(7) <= 15 and g(8) <= 17
+# the witness families realising g(7) = 15 and g(8) <= 17
 $S/c880nc verifymarginal --m 7 --known 1 \
   --family "0,1,2;0,1,4;0,1,6;0,2,4;0,2,6;0,4,6;1,2,4;1,2,6;1,3,4;1,3,6;1,4,5;1,5,6;2,4,6;3,4,6;4,5,6" \
   --out 2026-08-19-c880-attach-g7-witness.json
 $S/c880nc verifymarginal --m 8 --known 1 \
   --family "0,1,2;0,1,4;0,1,5;0,2,4;0,2,5;0,4,5;1,2,3;1,2,5;1,2,6;1,2,7;1,3,6;1,3,7;1,4,5;1,6,7;2,3,6;2,3,7;2,5,6" \
   --out 2026-08-19-c880-attach-g8-witness.json
+
+# a block family keeps working inside a larger known set
+$S/c880nc verifymarginal --m 8 --known 4 \
+  --family "0,4,5;0,4,6;0,4,7;0,5,6;0,5,7;0,6,7;4,5,6;4,5,7;4,6,7" \
+  --out 2026-08-19-c880-blocktransfer.json
 
 # two blocks of four compose: g(9) <= 18, over every two-graph on nine points (~4 min)
 $S/c880nc verifymarginal --m 9 --known 1 \
@@ -498,25 +534,40 @@ uv run --with numpy --with scipy --with pulp python3 2026-08-19-c880-attach-ilp.
     --masks 2026-08-19-c880-masks-g5.json --out 2026-08-19-c880-ilp-g5.json --cbc
 uv run --with numpy --with scipy --with pulp python3 2026-08-19-c880-attach-ilp.py \
     --masks 2026-08-19-c880-masks-g6.json --out 2026-08-19-c880-ilp-g6.json --cbc
+
+# exact g(7) = 15 on the complete m=7 constraint family (HiGHS, ~40 min)
+C880NC_DUMP=2026-08-19-c880-masks-g7.json $S/c880nc marginal --m 7 --known 1
+uv run --with numpy --with scipy --with pulp python3 2026-08-19-c880-attach-ilp.py \
+    --masks 2026-08-19-c880-masks-g7.json --out 2026-08-19-c880-ilp-g7.json
 ```
 
-Everything except `marginal --m 7 --known 2` and `verifymarginal --m 9` runs in
-seconds to a couple of minutes on 24 threads.
+Everything except `marginal --m 7 --known 2`, `verifymarginal --m 9` and the
+final integer program runs in seconds to a couple of minutes on 24 threads.
 
 **Independent replay.** \(g(5)=9\) and \(g(6)=12\) are each produced three
 times: by the generator's own branch and bound, by HiGHS through
 `scipy.optimize.milp`, and by CBC through PuLP, the last two on committed
 constraint files that the Python driver re-checks against a freshly derived
-triple indexing before solving. The composition that turns those two numbers
+triple indexing before solving. \(g(7)=15\) is produced twice, by HiGHS on the
+complete constraint file and by the certified witness family, which pin the
+value from below and above. The composition that turns these numbers
 into the bound at every \(n\) is proved by hand, and separately confirmed at
 \(m=9\) by exhaustive sweep and at \(n=7,8\) end-to-end from the alignment
 definition. The `build` mode has no independent replay and is not used as
 evidence; the families it found are certified by the deterministic
 `verifymarginal` runs above.
 
-**What is not replayed.** The exact value of \(P(2,6)\), and hence whether a
-block of six beats a block of four, is undecided; the searched domain and stop
-conditions are in the mystery ledger.
+**Replay status.** The block above was run verbatim in a clean environment —
+fresh scratch directory, generator rebuilt from the committed source — after
+the generator's last edit. Every certificate it writes came back byte for byte
+identical to the committed file, so the bundle contains no output of a
+superseded code path.
+
+**What is not replayed.** \(g(8)\) is bounded, not computed, and the two-anchor
+value \(P(2,6)\) is undecided — though the one-anchor value \(P(1,6)=g(7)=15\)
+is now exact, so a block of six does not beat a block of four in the shape the
+construction actually uses. The searched domains and stop conditions are in the
+mystery ledger.
 
 ### Artifacts
 
@@ -543,6 +594,7 @@ either the generator, its driver, or an output of the replay list above.
 | `2026-08-19-c880-marginal-k3j4.json` | 328 | 1bdccbbca036062ae271c8b8cde7a93bb884058ff8ae70b35d02499fed744f98 |
 | `2026-08-19-c880-marginal-k4j4.json` | 334 | 72d757ffa6ca2a1ceb974d5f8470ee8b2b6fd14dd22a7df41a459ff3d4053519 |
 | `2026-08-19-c880-marginal-k2j5.json` | 356 | ee7b7ea6268b3951a9fa2843a239dc89f65bd46c956c3b85590765a161a94f79 |
+| `2026-08-19-c880-blocktransfer.json` | 156 | 18662b03bcec60ecf1cb1b338ca47191ddecc6c18b0c56cabc09c7fcf00aa69f |
 | `2026-08-19-c880-template7.json` | 332 | 366b4fdbd8bc343187bffff7620ce6b7266c227568d65950e1510f2a9e32fa84 |
 | `2026-08-19-c880-template8.json` | 359 | 5fee0081f0a6099ec3380b3a7e2e6811a8ea88494fefb56e4b1112d02bf23112 |
 | `2026-08-19-c880-template9.json` | 385 | 5cf162922ad6216ffdb4e92a20f4868e5ef21ba4f202ec29e312824a2a84888a |
@@ -554,6 +606,8 @@ either the generator, its driver, or an output of the replay list above.
 | `2026-08-19-c880-masks-g6.json` | 25878 | 55f22b0cba7fccbc5fd77288405270f0fe3b9152f0d09ed5f8710cd0b78d12d3 |
 | `2026-08-19-c880-ilp-g5.json` | 460 | 7dde02a289907f68126243e29317c34ce87430760678a82077529a1d81a8811e |
 | `2026-08-19-c880-ilp-g6.json` | 494 | 26e68a30a06a86414d87cb3dee2c80afbb1f2929093c3964f9ef9e9c4c284e2f |
+| `2026-08-19-c880-masks-g7.json` | 1960509 | f8f8a68d1263e1666a86b2571e50f36a0e14a9988b46b0143bb94c0aadaa0c34 |
+| `2026-08-19-c880-ilp-g7.json` | 479 | 2c2e7f6e80e9a1cbb549407fe56f7c6690d742e7c5f7b92bee11ea7270f989ae |
 
 Every one of these outputs was regenerated from the committed generator after
 its last edit and compared byte for byte against the committed file.

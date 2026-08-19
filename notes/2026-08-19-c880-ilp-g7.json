@@ -1,0 +1,30 @@
+{
+  "full_family_separates": true,
+  "g_lower_bound": 15,
+  "highs_optimum": 15,
+  "highs_solution": [
+    2,
+    3,
+    7,
+    9,
+    10,
+    11,
+    13,
+    14,
+    15,
+    17,
+    22,
+    26,
+    31,
+    32,
+    34
+  ],
+  "highs_status": 0,
+  "m": 7,
+  "mask_maxweight": 0,
+  "masks_in_file": 46837,
+  "masks_minimal": 46837,
+  "source": "2026-08-19-c880-masks-g7.json",
+  "source_sha256": "f8f8a68d1263e1666a86b2571e50f36a0e14a9988b46b0143bb94c0aadaa0c34",
+  "triples": 35
+}
