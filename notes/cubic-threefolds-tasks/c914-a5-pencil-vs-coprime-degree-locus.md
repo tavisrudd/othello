@@ -2,7 +2,7 @@
 
 **Lane:** `cubic-threefolds`
 
-**Status:** active; first question answered, successor question open
+**Status:** active; both comparisons decided, manuscript restatement open
 
 **Objective:** locate the nonstandard `A_5`-invariant cubic pencil relative to
 the loci of smooth cubic threefolds already known to be universally
@@ -23,14 +23,33 @@ Colliot-Thélène 2017, Yang--Yu--Zhu 2025 Remark 3.6).
 
 The Eckardt-point separator hypothesis is refuted; see the report.
 
+## Answered, 2026-08-18
+
+The generic member does **not** lie in the Yang--Yu--Zhu locus: every member of
+their normal form has an Eckardt point, and all but finitely many members of
+the pencil have none. Verified in two independent models of the pencil, with
+the Fermat cubic threefold as a control returning its thirty Eckardt points.
+
+Voisin's criterion is not met by any elliptic-product route. With the exotic
+two-primary gluing kernel that the epilogue's packet proposition assigns to
+this family, every odd-degree isogeny onto `J(X_b)` from a product of
+principally polarized factors has exactly the shape `1 + 4`; a splitting into
+five elliptic curves is impossible because every `F_4`-line of the coefficient
+heart is its own perpendicular for the discriminant pairing. The `1 + 4`
+factorization itself exists, with odd index `25`.
+
+Report and replay: `../2026-08-18-c914-a5-pencil-vs-voisin-and-yyz.md`; scripts
+`../2026-08-18-c914-a5-pencil-eckardt.py` and
+`../2026-08-18-c914-a5-pencil-voisin-locus.py` with their tracked outputs.
+
 ## Open
 
-- [ ] Decide whether the generic member of the pencil lies in the
-  Yang--Yu--Zhu locus (arXiv:2508.03623, Theorem 3.3), by comparing the two
-  explicit normal forms rather than by a discrete invariant.
-- [ ] Decide whether the pencil lies inside one of Voisin's
-  codimension-at-most-three components, that is, whether `J(X_b)` is
-  isogenous by an odd-degree isogeny to a curve Jacobian uniformly in `b`.
-- [ ] If either answer is negative, restate the pencil's contribution in the
-  epilogue at its proved strength and record the verdict in the paper's
-  novelty ledger.
+- [ ] Restate the pencil's contribution in the epilogue introduction at its
+  proved strength — not reached by the coprime-degree mechanism, and not
+  reached by an elliptic-product isogeny — and record the verdict in the
+  paper's novelty ledger. Needs the gated annotation layer if the Eckardt
+  computation is cited; the Voisin-side statement is structural and needs no
+  evidence bundle.
+- [ ] C921 owns the residual Voisin gate: whether the four-dimensional factor
+  `A_b` is the Jacobian of an irreducible genus-four curve, or `J(X_b)` is
+  odd-degree isogenous to an irreducible genus-five Jacobian.

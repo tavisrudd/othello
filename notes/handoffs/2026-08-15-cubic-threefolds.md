@@ -183,14 +183,22 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   spectrum-transfer report
   `../2026-08-18-c910-discriminant-and-spectrum-transfer.md`; interim release report
   `../2026-08-12-c910-partial-lean-release.md`.
-- **C914 — active.** The `A_5`-pencil is proved to contain the Fermat cubic
-  threefold, so it meets the already-known universally `CH_0`-trivial
-  examples; decide next whether its generic member lies in the
-  Yang–Yu–Zhu coprime-degree locus (arXiv:2508.03623, Theorem 3.3) or one of
-  Voisin's codimension-at-most-three components, by comparing normal forms
-  and testing odd-degree isogeny of `J(X_b)` to a curve Jacobian, then
-  restate the pencil's contribution at its proved strength. Card:
-  `../cubic-threefolds-tasks/c914-a5-pencil-vs-coprime-degree-locus.md`.
+- **C914 — both comparisons decided, manuscript restatement open.** The
+  pencil contains the Fermat cubic threefold. All but finitely many of its
+  members lie outside the Yang--Yu--Zhu coprime-degree locus: every member of
+  their normal form carries an Eckardt point, and the generic pencil member
+  carries none. Voisin's criterion is unreachable by any elliptic-product
+  route: with the exotic two-primary gluing kernel, the only odd-degree product
+  factorization of the intermediate Jacobian is `1 + 4`, realized at odd index
+  `25`, so the pencil is not known to lie in a Voisin component. What remains
+  here is restating the pencil's contribution in the epilogue introduction and
+  novelty ledger. Card:
+  `../cubic-threefolds-tasks/c914-a5-pencil-vs-coprime-degree-locus.md`;
+  report `../2026-08-18-c914-a5-pencil-vs-voisin-and-yyz.md`.
+- **C921 — residual Voisin gate, active.** Decide whether the four-dimensional
+  odd-degree factor `A_b` is an irreducible genus-four Jacobian, or whether
+  `J(X_b)` is odd-degree isogenous to an irreducible genus-five Jacobian. Card:
+  `../cubic-threefolds-tasks/c921-four-dimensional-factor-jacobian.md`.
 - **C917 — closed 2026-08-18.** The epilogue introduction now says why the
   direct Clemens--Griffiths mechanism gives no contradiction after one
   stabilization and where the result sits relative to Guéré
@@ -206,8 +214,8 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   clean standalone gates pass; portfolio summary synchronized. Card:
   `../cubic-threefolds-tasks/c911-shen-shoemaker-flip-repair-note.md`.
 
-No C907, C908, C909, or C914 promotion into any manuscript, PDF, mirror, or
-Lean source follows automatically from any of the above.
+No C907, C908, C909, C914, or C921 promotion into any manuscript, PDF,
+mirror, or Lean source follows automatically from any of the above.
 
 ## Program state
 

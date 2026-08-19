@@ -114,3 +114,32 @@ argument is the whole content.
 **Evidence:** LEAN — the matrix form is kernel checked; the general
 topological-algebra form is not stated.
 **Status:** open lead
+
+### 2026-08-18 — every separated-variable cubic threefold has an Eckardt point
+
+**Provenance:** C914, while looking for a projective invariant separating the
+nonstandard `A_5`-pencil from the Yang--Yu--Zhu coprime-degree family.
+**Was I looking for this?:** no — the target was the Yang--Yu--Zhu comparison;
+the separated-variable statement fell out of the same criterion.
+**Observed / musing:** a point `p` of a smooth cubic threefold is an Eckardt
+point exactly when the Hessian at `p` has rank at most two. If the equation is
+a sum of cubic forms in pairwise disjoint groups of at most three variables,
+then some group has size at most two; a point supported on that group and lying
+on the threefold exists because a binary cubic has a root, and at such a point
+every other diagonal Hessian block vanishes. So every member of
+Colliot-Thélène's separated-variable class carries an Eckardt point. There is a
+companion group-theoretic form: an Eckardt point produces an involution acting
+on the ambient module with eigenvalue multiplicities `(4,1)`, so a cubic whose
+automorphism group has no such reflection — for instance one with automorphism
+group exactly `A_5` acting through `W_5`, where involutions have multiplicities
+`(3,2)` — has no Eckardt point.
+**Why it may matter / strongest question:** it reproves the epilogue's
+Proposition `prop:A5-nonseparated` in three lines, replacing the present
+argument through Hartlieb's closedness and irreducibility statements, and it
+gives a cheap invariant for locating any explicit family against the
+separated-variable class. Open question: which cubic threefolds with an Eckardt
+point are *not* separated-variable, i.e. how far the converse fails.
+**Evidence:** PROOF for both statements; the pencil side is computational, see
+`notes/2026-08-18-c914-a5-pencil-vs-voisin-and-yyz.md`.
+**Status:** open lead — promotion into the manuscript is a paper edit, not
+allocated here.

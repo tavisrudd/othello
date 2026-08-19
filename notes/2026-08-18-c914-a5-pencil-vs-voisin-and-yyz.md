@@ -95,6 +95,18 @@ exceptional members, and it does not identify them: the exceptional set was not
 computed. It also says nothing about the closure of the Yang--Yu--Zhu locus in
 moduli beyond the members themselves.
 
+**Why the generic member is Eckardt-free, structurally.** An Eckardt point
+`p` with tangent hyperplane `H` gives an involution of `X`: in coordinates
+where the quadratic part vanishes, `F = x_0^2 L + C` and `x_0 -> -x_0` fixes
+`X`. That involution acts on the ambient five-dimensional module with
+eigenvalue multiplicities `(4,1)`, so a cubic threefold has an Eckardt point
+only if its automorphism group contains such a reflection. Every involution of
+`A_5` acts on `W_5` with character value `1`, hence with multiplicities
+`(3,2)`, and is not a reflection. So any member whose automorphism group is
+exactly `A_5` has no Eckardt point at all. The computation below is the
+unconditional form of this: it does not need to know the generic automorphism
+group.
+
 **Free corollary, not used above.** Every smooth cubic threefold whose equation
 is a sum of cubic forms in pairwise disjoint groups of at most three variables
 has an Eckardt point. Any partition of five into parts of size at most three
