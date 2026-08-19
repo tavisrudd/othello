@@ -184,9 +184,29 @@ geometry item of the backlog.
 
 ## Export status
 
-Not exported.  The standalone paper repository was last synchronized from
-`8455eb6d1` and now lags this pass and the concurrent Eckardt work; the next
-export should carry both rather than either alone.
+Exported at `da1d8641b`, carrying four passes at once: the chart split
+presentation, the separated-variable clause of the separation theorem, the
+depth-one slope results, and the trust-boundary corrections, together with the
+concurrent Eckardt work that landed between them.  The export plan and audit
+report no findings over 189 scanned files, `sync` wrote twenty-two paths with no
+deletions and one ordinary forward commit in the standalone repository, and
+`verify` agrees at 192 tracked files against the export manifest.
+
+Agreement was checked on every surface that carries a number rather than by the
+standalone gate passing alone.  Its source-only correspondence check reports the
+authority's numbers exactly — 141 sources, 290 reviewer terminals, 62 claims, 47
+machinery rows, 26 imported sources, 3 evidence bundles — its manuscript rebuild
+through its own pinned flake reproduces the tracked PDF byte for byte and leaves
+its tree clean, the two Lean trees are byte identical outside the build
+directory, and the axiom-log gate passes there on the transcript captured from
+the authority's guarded build, which is the same elaboration because the sources
+are identical.  Lean was not rebuilt inside the standalone repository, and this
+record does not claim that it was.
+
+The portfolio summary was stale in one sentence: it quoted the epilogue's
+abstract from before the exact Fermat-point sharpening.  The quote is refreshed
+in the authority under `papers/summary/` and copied to its own repository, which
+is not carried by the paper exporter.
 
 
 ## Follow-up passes, same day
