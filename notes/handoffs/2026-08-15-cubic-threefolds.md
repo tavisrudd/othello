@@ -134,9 +134,10 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   (`\coverage`, `\lean`, `\uses`, `\imports`, `\evidence`, `\proves`) resolved
   against the claim map, two registries, and per-row statement and terminal
   digests, with the dependency edges of the atomic route recorded and the
-  annotated graph emitted and gated. The conditional and complete claim-map rows
-  are reviewed; next is the nine cycle-side fragments and the ten absent rows,
-  ahead of new coverage.
+  annotated graph emitted and gated. Every claim-map row has now been reviewed
+  against its statement and its terminals, which completes the adoption order of
+  the annotation conventions; the review left the coverage labels unchanged and
+  corrected nine recorded descriptions. Next is new coverage.
   Card:
   `../cubic-threefolds-tasks/c910-cubic-stabilization-lean-companion.md`; gap audit
   `../2026-08-18-c910-post-restructure-gap-audit.md`; anchor report
@@ -151,8 +152,9 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   residue-discriminant invariance report
   `../2026-08-18-c910-residue-discriminant-invariance.md`; geometric-rows report
   `../2026-08-18-c910-geometric-rows-of-the-atomic-route.md`; annotation-layer
-  report `../2026-08-18-c910-manuscript-formal-annotations.md`; claim-map review
-  `../2026-08-18-c910-claim-map-review.md`;
+  report `../2026-08-18-c910-manuscript-formal-annotations.md`; claim-map reviews
+  `../2026-08-18-c910-claim-map-review.md` and
+  `../2026-08-18-c910-cycle-side-and-absent-rows-review.md`;
   genus-eight
   unconditional report `../2026-08-18-c910-genus-eight-unconditional.md`;
   low-dimensional exclusions report

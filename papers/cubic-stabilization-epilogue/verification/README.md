@@ -92,6 +92,9 @@ and the correspondence check regenerates it and rejects a stale copy, so the
 graph cannot fall behind the annotations.  Dependency edges are currently
 recorded for the atomic route of Section 4 and the proof of the one-stabilization
 theorem; a statement carrying no edge has none recorded rather than none.
+The same holds of the imported-source annotations: they are recorded for the
+atomic route of Section 4, so a statement elsewhere that carries none has none
+recorded rather than none used.
 
 Checked coverage snapshot: 50 claims; 10 absent; 21 fragmentary; 18 conditional;
 1 complete; 220 reviewer terminals, of which 46 are machinery serving no current
