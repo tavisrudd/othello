@@ -10,6 +10,21 @@ Work items 1, 2, 4, 6 and 7 are closed, item 3 is closed on the adaptive
 side, and item 5 is closed on the promised-anchor side and reduced to a single
 open counting question on the regular side. Only item 8, the nonadaptive
 constant, and that counting question remain.
+
+**2026-08-19: the nonadaptive bracket narrowed by a factor 8/3 from above.**
+It now reads \(0.616\,n^2\le\mathrm{minimum}(n)\le\frac98n^2+O(n)\), a factor of
+1.827 rather than the 4.87 recorded below. A nonadaptive family decomposes as a
+seven-point base of 30 tests plus one attachment layer per further point, and a
+layer is built from blocks of four fresh points costing nine tests each against
+the gauge point alone; correctness is an attachment lemma by pigeonhole plus a
+composition argument, resting on exhaustive constants \(g(5)=9\), \(g(6)=12\),
+\(g(7)=15\). Route (b), the weight-four difference masks, was dropped: it is
+proved capped at 30 at seven and eight points and deciding it at nine is a
+\(10^{16}\)-pair scan. A second lower bound by covering and the polynomial
+method was derived and settled negatively at \(\approx n^2/4\), dominated by the
+entropy floor at every \(n\) because the yes-count cancels. Report:
+`notes/2026-08-19-c880-nonadaptive-constant.md`.
+
 Reports: `notes/2026-08-07-c880-alignment-separation.md` (computation),
 `notes/2026-08-07-c880-mask-ilp-bound.md` (the exact eight-point mask bound),
 `notes/2026-08-07-c880-literature-audit.md` (audit, verdict per claim),
@@ -212,14 +227,26 @@ smaller; the \(+2\) switch allowance can be charged more carefully.
 
 ### 3. The nonadaptive constant — the remaining research question
 
-Still bracketed between \(0.616\,n^2\) and the exhibited \(3n^2-23n+45\). The
-difference-mask route is exhausted: its constraints at eight points are the
-seven-point ones in disguise and cannot exceed 30. The routes left are a
-construction sharing tests between outside pairs — the link criterion says any
-improvement must, since six private tests per outside pair are forced inside the
-single-anchor shape — and a structural account of the weight-four difference
-masks at general \(n\), which is what produced the exact eight-point lower
-bound.
+Superseded on the upper side by the 2026-08-19 round: the sharing construction
+the link criterion demanded was found, and the bracket is now \(0.616\,n^2\) to
+\(\frac98n^2+O(n)\). The difference-mask route stays exhausted for the reason
+already recorded here, and the 2026-08-19 round added that deciding it at nine
+points is a \(10^{16}\)-pair scan.
+
+**The loose end has moved to the lower bound.** Every exactly measured cost is
+between 2.25 and 3 tests per recovered bit while the entropy floor licenses
+1.2326, and a covering heuristic predicts about 2.409, so the floor rather than
+the construction is now the likely slack side. The successor question is a
+covering lower bound specific to alignment-test flats. Two subsidiary questions
+come with it: whether the base-plus-layers shape is itself asymptotically lossy
+— the whole \(9/8\) rests on it, and a layered family need not have a base that
+separates on its own — and `P(2,6)`, undecided after a capped branch and bound
+and a 6 GB HiGHS run, which cannot help the construction because the one-anchor
+value it would have to beat is now exact.
+
+The construction is known non-optimal at the one size where both numbers exist:
+45 against 44 at eight points, with neither of its two parts slack now that
+\(g(7)=15\) is exact.
 
 ### 4. Items 5 and 8
 
