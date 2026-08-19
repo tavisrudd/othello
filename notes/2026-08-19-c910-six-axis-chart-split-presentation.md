@@ -230,3 +230,43 @@ Coverage after both passes is 62 claims over 290 reviewer terminals, 5 absent,
 27 fragmentary, 29 conditional, 1 complete, with 47 machinery rows.  All gates
 green, including the deterministic manuscript rebuild, which the first pass had
 deliberately skipped while the concurrent session held the same sections.
+
+## External review of the released repository, and what it found
+
+A review of the released repository raised fifteen findings against a snapshot
+three passes old.  Six were already resolved: the claim map's omission of the
+separated-variable clause, closed by the follow-up above; a backwards dependency
+edge from the coprime-degree proposition to the separation theorem, removed when
+that proof was rewritten; the exact Eckardt locus as a trusted elimination,
+which is no longer a premise of anything since the reflection-group proof
+replaced it; the evidence registry's overstatement of the thirty-point count,
+already rewritten as a control; and two consequent requests to qualify the
+abstract, moot for the same reason.
+
+Five were live and are now fixed, all in the documentation of the trust
+boundary.  The paper README said that exact computations are not part of the
+proof surface, which is false while `lem:hirzebruch-euler-spectrum` invokes a
+symbolic program as a premise, and said that `make check` lints the TeX sources,
+which is false in the released repository, whose Makefile drops that step by an
+export rewrite recorded in its own manifest.  The verification README and the
+annotation header both still said that no statement carries an evidence
+annotation — the verification README contradicting its own opening paragraph —
+and both described the annotation scope as the Section 4 atomic route alone,
+while five of the six sections carry edges or imported sources.  The annotation
+header counted five macros and documented six.
+
+One finding was under-called rather than wrong.  The review noticed an incorrect
+dependency edge into the separation theorem; the larger problem was that the
+separation section carried no edges at all.  Its four detached proofs now record
+what they prove and what they use, and the non-isotriviality input is registered
+with its pinpoint and its three conventions, so the separation theorem has
+provenance instead of being a graph orphan.
+
+The remaining accepted finding was expository: the residue calculation for the
+cubic atom identified the abstract loop coordinate with the one of the small
+even system without saying why the normalized block is the germ of the separated
+spectral factor.  Section 4 now says it, and cites the gluing lemma that makes
+the factor unique up to regular block-diagonal gauge, so the residue
+discriminant is visibly an invariant of the atom.
+
+Authority `8b200b9ac`; the manuscript rebuilds warning-free and all gates pass.
