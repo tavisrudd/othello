@@ -584,9 +584,29 @@ constancy of the residue discriminant, over a formal germ as well.
 Horizontality supplies the nilpotent-line property from invertibility of the
 leading pairing determinant alone, so the germ statement assumes no
 nilpotent-line hypothesis.  The geometric
-inputs are unchanged, and the claim map, reviewer terminals, and coverage value
-of the rank-two rigidity row are not yet updated.  Report:
+inputs are unchanged.  Those terminals are now registered: `prop:rank2-rigidity`
+is a conditional deduction over six terminals, the four derived ones exposing the
+adapted frame, the horizontal pairing and flatness as typed premises.  Report:
 [`../2026-08-18-c910-rank-two-flat-rigidity.md`](../2026-08-18-c910-rank-two-flat-rigidity.md).
+
+The normalized Sylvester gauge shared by the block reduction and the
+factor gluing is formalized.  `Quantum/SylvesterOperator.lean` proves that
+`X ↦ U X - X V` is invertible over a commutative ring when the two leading
+operators are scalars plus nilpotents whose scalars differ by a unit;
+`Quantum/BlockSylvesterSolvability.lean` gives the block form, that every block
+off-diagonal matrix is the commutator of a block-diagonal leading operator with
+separated blocks with exactly one block off-diagonal matrix;
+`Quantum/NormalizedSylvesterGauge.lean` proves that a system whose leading
+coefficient is block diagonal with separated blocks has a normalized
+block-off-diagonal gauge reducing it to block-diagonal form, unique at every
+order; and `Quantum/CubicSeparatedBlockGauge.lean` instantiates this at the
+separated small even cubic system and identifies the exhibited gauge and reduced
+coefficients as the first two coefficients of that unique gauge.  Everything is
+over a coefficient ring rather than a field, which is what the manuscript's
+integrality remark needs.  `lem:factor-glue` and `prop:cubic-block-data` carry
+the six new terminals and stay fragments: no `F`-bundle, connection, or analytic
+splitting is constructed.  Report:
+[`../2026-08-19-c910-normalized-sylvester-gauge.md`](../2026-08-19-c910-normalized-sylvester-gauge.md).
 
 ## Prioritized Lean backlog
 

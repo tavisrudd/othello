@@ -160,7 +160,15 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   a gauge identity without inverses, flatness passes to the modified lattice,
   and the commutant computation, the vanishing of the residual base pole, the
   Lax equation, and constancy of the residue discriminant follow, over a formal
-  germ as well.  Manuscript-side integration of those terminals is open.
+  germ as well; those terminals are registered, and the rank-two rigidity row is
+  now a conditional deduction.  The normalized Sylvester gauge shared by the
+  cubic block reduction and the spectral-factor gluing is formalized over a
+  coefficient ring: the Sylvester operator of two separated leading operators is
+  invertible, the block equation has exactly one block off-diagonal solution, a
+  normalized block-off-diagonal gauge reducing a block-separated system exists
+  and is unique, and for the separated small even cubic system the exhibited
+  gauge and reduced coefficients are the first two coefficients of that unique
+  gauge.
   Card:
   `../cubic-threefolds-tasks/c910-cubic-stabilization-lean-companion.md`; gap audit
   `../2026-08-18-c910-post-restructure-gap-audit.md`; anchor report
