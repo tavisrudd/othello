@@ -433,5 +433,38 @@ reason = "private analysis workspace"
             exporter.verify_materialized_tree(candidate)
 
 
+class ScannableSuffixTest(unittest.TestCase):
+    """Every tracked prose-bearing file type must reach the reference scan.
+
+    A suffix missing from TEXT_SUFFIXES is silently exempt from the task-ID and
+    private-reference checks, so a shipped artifact can carry either through a
+    clean audit.  Lean sources, generated Singular input, the emitted dependency
+    graph and the Nix build files all carry author-written prose.
+    """
+
+    def test_prose_bearing_suffixes_are_scanned(self) -> None:
+        for suffix in (".lean", ".sing", ".dot", ".nix", ".py", ".tex", ".md"):
+            with self.subTest(suffix=suffix):
+                self.assertTrue(
+                    exporter.is_scannable(f"verification/artifact{suffix}", 1024),
+                    f"{suffix} is not scanned for task IDs or private references",
+                )
+
+    def test_oversized_and_binary_files_stay_unscanned(self) -> None:
+        self.assertFalse(exporter.is_scannable("verification/artifact.lean", 3_000_000))
+        self.assertFalse(exporter.is_scannable("figures/diagram.png", 1024))
+
+    def test_a_task_id_in_singular_input_is_found(self) -> None:
+        entry = exporter.TreeEntry(
+            mode="100644",
+            kind="blob",
+            oid="0" * 40,
+            size=64,
+            path="verification/locus.sing",
+        )
+        self.assertTrue(exporter.is_scannable(entry.path, entry.size))
+        self.assertTrue(exporter.TASK_ID_RE.search("// C921: eliminated ideal"))
+
+
 if __name__ == "__main__":
     unittest.main()

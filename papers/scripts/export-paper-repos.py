@@ -29,10 +29,14 @@ REPOSITORY_MAP = "papers/repositories.toml"
 NAME_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 TEXT_SUFFIXES = {
     ".bib",
+    ".dot",
     ".json",
+    ".lean",
     ".md",
+    ".nix",
     ".py",
     ".sh",
+    ".sing",
     ".tex",
     ".toml",
     ".txt",
