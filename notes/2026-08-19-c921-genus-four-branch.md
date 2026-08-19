@@ -238,15 +238,65 @@ This is a better handle than the moduli comparison used above, because it is uni
   do it structurally.
 - The two-dimensional moduli of `D_5`-fourfolds carrying `V_1 + V_2` is a Hilbert modular
   surface for `Q(sqrt 5)`. Our family is the locus of tensor-type points, a modular curve
-  in it; the curve-side family is another curve in it. Their intersection number is the
-  size of the exceptional set, and Hirzebruch--Zagier theory computes intersection numbers
-  of exactly such cycles. That would locate, or at least bound, the finite set this report
-  leaves unlocated.
+  in it; the curve-side family is another curve in it, but not a Hirzebruch--Zagier cycle,
+  so that theory does not compute the intersection. The section below replaces it with a
+  Schottky-form divisor degree, which does bound the exceptional set.
 - Deligne--Mostow describe the monodromy of cyclic quintic covers of the line branched at
   four points as an explicit lattice in `PU(1,1)`, for each exponent vector. Zariski
   density of that monodromy would give the generic endomorphism algebra directly, and would
   replace the point-count step of this report with a citation. The two exponent vectors
   needed are `(1,4,1,4)/5` and `(1,4,2,3)/5`.
+
+## Bounding the exceptional set
+
+Hirzebruch--Zagier does **not** apply as I first suggested: those cycles are loci where the
+endomorphism ring of a real-multiplication surface jumps, and the curve-side family is a
+family of Jacobians whose generic member has no extra endomorphisms, so it is not one of
+them. The instrument that does apply is the Schottky form, and it turns the exceptional set
+into a divisor degree.
+
+Igusa's Schottky form is a cusp form of weight eight on `Sp_8(Z)` whose zero divisor in the
+moduli of principally polarized fourfolds is the closure of the Jacobian locus. A Siegel
+form of weight `k` is a section of the `k`-th power of the determinant of the Hodge bundle,
+so pulling it back along our family gives a section of `lambda_A^8`.
+
+The family is a modular embedding. `A_b` depends on `b` only through `E_b`, since its
+integral homology is a fixed glued overlattice of `A_4 tensor H_1(E_b)`, so the Hodge bundle
+of `A_b` is four copies of the Hodge bundle of `E_b` and
+
+    deg lambda_A^8 = 32 deg lambda_E .
+
+The pulled-back section is not identically zero — that is exactly what the point count of
+this report establishes, since a family inside the Jacobian locus would have every member a
+Jacobian. Hence the number of exceptional points, counted with multiplicity on the base
+modular curve `X_Gamma`, is
+
+    32 deg lambda_E = 32 [SL_2(Z) : Gamma] / 12 = (8/3) [SL_2(Z) : Gamma],
+
+where `Gamma` is the stabilizer in `SL_2(Z)` of the glue data, acting through
+`SL_2(Z/N)` for `N` the exponent of that glue.
+
+What this gives now. The kernel of the six-axis map has order `6^4`
+(`sections/02-envelope.tex`, the `|ker f| = deg f = 6^4` display), and the pulled-back
+polarization has Smith type `(1,6,6,6,6)`, so the glue of the *whole* intermediate Jacobian
+has exponent dividing six and `Gamma` contains `Gamma(6)`, of index `144`. That bounds the
+exceptional set by `32 * 144 / 12 = 384` points on the base, counted with multiplicity, and
+each exceptional point of the base contributes at most `deg(b -> E_b)` pencil parameters.
+
+What this does not give yet. The bound is for the glue of `J`; the four-dimensional factor
+carries the polarization scaled by the odd multiplier `m` of C914, realized at odd index
+`25` at an axis, so its own glue may have exponent dividing `6m` rather than six. With
+exponent `30` the same formula gives at most `32 * 17280 / 12 = 46080`. Pinning the exponent
+— and with it the true index, which is the index of the stabilizer of the glue rather than
+of the full congruence subgroup, hence much smaller — needs the integral model of the glued
+lattice. The epilogue records that model two-adically, as the graph of the field-of-four
+scalar, and at three only through scalarity of the possible stable graphs. Deriving the
+integral model is the next concrete step, and it is the same object C907 and C909 work with.
+
+Two further reductions the count needs before it is exact rather than an upper bound: the
+zero divisor also picks up points where `A_b` degenerates or becomes decomposable, since
+decomposable fourfolds lie in the closure of the Jacobian locus, and it counts with
+multiplicity.
 
 ## Mystery ledger
 
@@ -260,13 +310,13 @@ This is a better handle than the moduli comparison used above, because it is uni
   computation. Turning that into a proof still needs the generic endomorphism algebra of
   the curve side, which the point count supplies and Deligne--Mostow monodromy would
   supply better.
-- **The exceptional finite set is unlocated.** The argument gives no bound on how many
-  pencil members could have `A_b` a genus-four Jacobian, and no method to find them. The
-  closeout pass names a route that did not exist when the result was proved — an
-  intersection number of two cycles on a Hilbert modular surface, in the range of
-  Hirzebruch--Zagier theory — but it has not been carried out. The same gap sits in C914's
-  two finiteness propositions, so it is a pattern in this program rather than a defect of
-  this step.
+- **The exceptional finite set is bounded but not located.** The Schottky-form count above
+  turns it into a divisor degree, `32 deg lambda_E`, and gives at most `384` points on the
+  base under the glue exponent the epilogue records for the whole intermediate Jacobian.
+  The exact number needs the integral glued model of the four-dimensional factor, which is
+  the same object C907 and C909 work with. The same gap sits in C914's two finiteness
+  propositions, and the same instrument may close it there: both are Eckardt or
+  separated-variable divisors pulled back along the same modular embedding.
 - **The genus-five route has no frame yet.** Torelli is unavailable once the comparison is
   an isogeny of degree greater than one, and nothing here replaces it. The natural next
   move is the lattice side: ask which odd-degree isogenies from a genus-five Jacobian are

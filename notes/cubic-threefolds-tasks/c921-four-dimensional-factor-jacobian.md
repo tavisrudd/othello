@@ -98,3 +98,17 @@ computation: whether the literature on Jacobians isogenous to powers of an
 elliptic curve settles `E tensor A_4` for every `b` rather than the generic one,
 and whether the exceptional finite set is an intersection number of two cycles on
 the Hilbert modular surface for `Q(sqrt 5)`.
+
+## Counting the exceptional set (2026-08-19)
+
+Igusa's Schottky form is a weight-eight cusp form on `Sp_8(Z)` cutting out the
+closure of the genus-four Jacobian locus. Pulled back along the modular embedding
+`E_b -> A_b`, whose Hodge bundle is four copies of `lambda_{E_b}`, it becomes a
+section of `lambda_E^{32}`, nonzero because the generic member is not a Jacobian.
+So the exceptional set has size `32 deg lambda_E = (8/3)[SL_2(Z):Gamma]` counted
+with multiplicity, `Gamma` the stabilizer of the glue. The epilogue's `|ker f| =
+6^4` and Smith type `(1,6,6,6,6)` give `Gamma` containing `Gamma(6)`, hence at
+most `384` points; the odd multiplier of C914 may raise the glue exponent to `30`
+and the crude bound to `46080`. Open input: the integral glued model of the
+four-dimensional factor, recorded in the epilogue only two-adically and by
+scalarity at three. Derivation in `../2026-08-19-c921-genus-four-branch.md`.
