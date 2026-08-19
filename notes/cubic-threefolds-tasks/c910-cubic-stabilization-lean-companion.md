@@ -641,6 +641,31 @@ evidence bundle, and `lem:center-maps-monomial`, which needs a completed monoid
 ring and its associated graded.  Report:
 [`../2026-08-19-c910-separation-and-absent-rows.md`](../2026-08-19-c910-separation-and-absent-rows.md).
 
+**The chart feeds the saturation theorem, 2026-08-19, authority `d4193b00f`.**
+`GraphLattices/SixAxisMarkedPresentation.lean` closes the passage from the local
+chart to the split presentation consumed by
+`thm:all-degree-graph-saturation`.  The four-dimensional block `5I₄-J₄` carries
+the explicit inverse `(1/5)(I₄+J₄)`; whenever `6/5` is a uniformizer times an
+invertible scalar — `3/5` at two, `2/5` at three — the chart Gram matrix is the
+unit line of value five orthogonal to the uniformizer times that unit multiple
+of the block, so `(Z_p⁵,G) ≃ U₀ ⊥ pU₁` holds as an identity of coefficient
+matrices and the depth-one lifting construction is instantiated at an exhibited
+Gram matrix rather than a supplied one.  The split coordinates, their
+identification with the chart, the invertible composite change of basis, and the
+depth, scalar, and slope-error families are constructed, and two depth-one
+coordinates that are eigenvectors of a slope self-adjoint for `5I₄-J₄` with
+cancellable eigenvalue difference are proved orthogonal, which is the
+manuscript's orthogonality of the split idempotent images.  Divided-power
+saturation then runs on those data: only the geometric realization, pullback,
+divisor submodule, and class compatibilities remain supplied, together with the
+eigenblock decomposition itself.  The pass also found that the package's
+concrete two-primary slope model is not self-adjoint for the reduced dual form
+of the depth-one block, so it models the slope type only; adapted models exist
+and exhibiting one is the successor step.  `lem:six-axis-local-chart` gains
+three terminals and `thm:six-axis-divided-powers` one; both stay fragments, and
+the snapshot moves to 287 reviewer terminals.  Report:
+[`../2026-08-19-c910-six-axis-chart-split-presentation.md`](../2026-08-19-c910-six-axis-chart-split-presentation.md).
+
 ## Prioritized Lean backlog
 
 Work in this order unless a later literature or library dependency changes the
@@ -711,9 +736,14 @@ quotient action, tensor symplectic model, the exact four-half classification
 `P¹(F₃)`, and maximal isotropy.  Its geometric discriminant identification remains part of
 priority 2 below.
 
-1. **Explicit six-axis local-chart bridge.**  Connect the concrete `6I-J`
-   lattice and both primary packets to the abstract graph-coordinate and
-   self-adjoint lifting theorems, reducing the supplied local-chart premises.
+1. **Explicit six-axis local-chart bridge — done 2026-08-19.**  The concrete
+   `6I-J` lattice now reaches the graph-coordinate and self-adjoint lifting
+   theorems through `GraphLattices/SixAxisMarkedPresentation.lean`, as recorded
+   above.  What is left of this item is the adapted two-primary slope,
+   self-adjoint for the depth-one block and of exotic type, with its eigenbasis
+   over a ring containing a primitive cube root of unity, and the parallel
+   scalar statement at three; those remove the change of basis, the scalars, and
+   the slope errors from the supplied data.
 2. **Relative six-axis geometry.**  Replace opaque inputs by actual elliptic
    schemes, quotient and inclusion maps, the relative isogeny, polarization
    pullback, discriminant kernels, and continuous packet classifier.

@@ -169,6 +169,11 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   and is unique, and for the separated small even cubic system the exhibited
   gauge and reduced coefficients are the first two coefficients of that unique
   gauge.
+  The six-axis local chart now feeds the all-degree graph saturation theorem
+  directly: the depth decomposition, the split coordinates, and the depth,
+  scalar, and slope-error families are constructed from the chart instead of
+  supplied, and the eigenblocks of a self-adjoint depth-one slope are proved
+  orthogonal.
   Card:
   `../cubic-threefolds-tasks/c910-cubic-stabilization-lean-companion.md`; gap audit
   `../2026-08-18-c910-post-restructure-gap-audit.md`; anchor report
@@ -198,6 +203,8 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   spectrum-transfer report
   `../2026-08-18-c910-discriminant-and-spectrum-transfer.md`; separation and
   absent-rows report `../2026-08-19-c910-separation-and-absent-rows.md`;
+  chart split-presentation report
+  `../2026-08-19-c910-six-axis-chart-split-presentation.md`;
   interim release report
   `../2026-08-12-c910-partial-lean-release.md`.
 - **C920 — closed 2026-08-18.** Hypothesis 5.7T of the epilogue is now used only
