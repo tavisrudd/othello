@@ -1,6 +1,6 @@
 {
   "schema": "cubic-stabilization-epilogue-evidence-v1",
-  "note": "The proof spine of this manuscript is structural apart from one symbolic computation: the characteristic polynomial and discriminant of Euler multiplication on the rank-four even cohomology of a Hirzebruch surface, computed from the presented small quantum cohomology.  Its bundle is registered below.  Every other statement invokes no enumeration, certificate, or symbolic program as a premise.",
+  "note": "The proof spine of this manuscript is structural apart from two computations, both registered below: the characteristic polynomial and discriminant of Euler multiplication on the rank-four even cohomology of a minimal rational ruled surface, computed from the presented small quantum cohomology; and the emptiness of the Eckardt scheme of explicit members of the nonstandard A_5-cubic pencil, which is what separates that pencil from the explicit coprime-degree family of Yang, Yu and Zhu.  Every other statement invokes no enumeration, certificate, or symbolic program as a premise.",
   "evidence": {
     "hirzebruch-euler-spectrum": {
       "role": "Computes the matrix of Euler multiplication on the rank-four even cohomology of a Hirzebruch surface in the two specialized Novikov values, together with its characteristic polynomial, the discriminant of that quartic, the factorization of the quartic on the degeneracy locus of the discriminant, and the dimension of the eigenspace at the repeated root.  It runs six independent cross-checks on the presentation: the classical cohomology ring at the origin; the Novikov grading; an elimination of the two divisor generators; a splitting or resultant computation of the discriminant; self-adjointness of Euler multiplication for the trace form; and the relations computed directly from the genus-zero invariants of the Hirzebruch surface of index two.  It does not establish that the presented ring is the small quantum cohomology of the surface; that reduction is argued in the manuscript.",
@@ -8,6 +8,15 @@
       "commands": [
         "uv run --with sympy python3 verification/hirzebruch_euler_spectrum.py",
         "uv run --with sympy python3 verification/hirzebruch_euler_spectrum.py --check"
+      ]
+    },
+    "a5-pencil-eckardt": {
+      "role": "Two tracked outputs.  The first records the model checks: that the six-point action of A_5 on P^1(F_5) has the stated triple orbits, that the invariant cubics on the sum-zero subspace form a pencil, that the second generator T_1 is A_5-invariant and not S_6-invariant, and that the monomial model induced from a cubic character of a point stabilizer has two invariant directions, both fixed by all sixty group elements, one of them the Fermat form.  The second records, for explicit members of both models, the dimension of the affine cone cut out by the equation together with its Jacobian ideal, and the dimension and degree of the cone cut out by the equation together with the three-by-three minors of the Hessian: the first certifies smoothness, the second the emptiness or the degree of the Eckardt scheme.  Five members of the six-coordinate model and three of the monomial model are smooth with empty Eckardt scheme; the Fermat cubic threefold, which is a member of the pencil and appears explicitly in the monomial model, returns thirty Eckardt points as a control in both rings; and two members of the coprime-degree normal form of Yang, Yu and Zhu return nonempty Eckardt schemes.  It does not compute the finite exceptional set of the pencil, and it certifies nothing about singular members.",
+      "checksum_manifest": "verification/a5-pencil-eckardt.sha256",
+      "commands": [
+        "python3 verification/a5_pencil_eckardt.py --report verification/a5-pencil-models.txt --sing /tmp/a5-pencil.sing",
+        "nix shell nixpkgs#singular --command Singular -q /tmp/a5-pencil.sing > verification/a5-pencil-eckardt.txt",
+        "python3 verification/a5_pencil_eckardt.py --check verification/a5-pencil-models.txt"
       ]
     }
   }

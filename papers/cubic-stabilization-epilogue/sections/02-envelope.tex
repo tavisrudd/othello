@@ -514,3 +514,153 @@ map is a locally closed embedding, the resulting smooth family is
 non-isotrivial.  Only this landing and nonconstancy are used below; no
 identification of compactified parameter curves is needed for the separation
 theorem.
+
+The exotic kernel also limits how \(J\) can be assembled from
+lower-dimensional principally polarized pieces.  Voisin's components of
+codimension at most three are produced by an odd-degree isogeny from the
+Jacobian of a possibly reducible curve \cite[proof of Theorem~4.5]{Voisin}.
+A principally polarized abelian variety of dimension at most three is such a
+Jacobian, so the route is automatic whenever the intermediate Jacobian
+receives an odd-degree isogeny from a product of factors of dimension at most
+three under which the polarization pulls back to an odd multiple of the
+product polarization.  Here it is not available.
+
+\begin{proposition}[No elliptic-product route]
+\label{prop:no-elliptic-product}
+\coverage{absent}%
+\uses{prop:principal-gluing-packet, lem:relative-six-axis,%
+  prop:six-axis-polarization}%
+Let \(J\) be the intermediate Jacobian of the geometric generic fibre of the
+nonstandard \(A_5\)-pencil, let \(E\) be the geometric generic fibre of
+\(\mathcal E\), and let
+\[
+ \mu:\prod_{i=1}^{k}(A_i,\Theta_i)\longrightarrow(J,\Theta)
+\]
+be an isogeny from a product of principally polarized abelian varieties with
+\(\mu^*\Theta=m\sum_i\Theta_i\); its degree is \(m^5\), since
+\(\deg\lambda_{\mu^*\Theta}=(\deg\mu)^2\deg\lambda_\Theta\) while
+\(\deg\lambda_{m\sum_i\Theta_i}=m^{10}\), so the degree is odd exactly when
+\(m\) is.  If \(m\) is odd then either \(k=1\), or \(k=2\) and the two
+factors have dimensions one and four.  The second case occurs: every axis
+\(H\in\Omega\) gives such a \(\mu\), with \(A_1\) an elliptic curve
+isogenous to \(E\).  Moreover \(J\) receives no odd-degree isogeny at all
+from a product of five elliptic curves, whatever polarizations those factors
+carry, although \(J\) is isogenous to \(E^5\).
+\end{proposition}
+
+\begin{proof}
+Write \(\Lambda=\mathbf Z^\Omega/\mathbf Z\mathbf1\) with the symmetric form
+\(\kappa\) of matrix \(6I_6-J_6\) from
+Proposition~\ref{prop:six-axis-polarization}, put \(M=H_1(E,\mathbf Z)\) and
+\(L=H_1(J,\mathbf Z)\), and let \(\Lambda_1=\Lambda^\vee\cap\tfrac12\Lambda\),
+where \(\Lambda^\vee\) is the \(\kappa\)-dual.  Doubling identifies
+\(\Lambda_1/\Lambda\) with the kernel of \(\kappa\) modulo two inside
+\(\Lambda/2\Lambda\), equivariantly, hence with the two-primary coefficient
+heart \(H_2\) of \eqref{eq:primary-discriminants}; the \(\F_4\)-scalars and
+the pairing \(b\) are transported along that identification.  By
+Lemma~\ref{lem:relative-six-axis}, \(f_*\) identifies
+\(H_1(\mathcal A,\mathbf Z)\) on the geometric generic fibre with
+\(\Lambda\otimes M\subseteq L\), with quotient \(\ker f\), and the
+polarization form is the tensor product of \(\kappa\) with the symplectic form
+of \(M\).  Fix a basis of \(M\otimes\mathbf Z_2\).  By
+Proposition~\ref{prop:principal-gluing-packet} the two-primary kernel is one
+of the two exotic graphs, so in that basis
+\[
+ L\otimes\mathbf Z_2
+ =\bigl\{(u,u')\in(\Lambda_1\otimes\mathbf Z_2)^{\oplus2}:
+   [u']=\omega^{\pm1}[u]\bigr\},
+\]
+where \([\;\cdot\;]\) is the class in \(H_2\) and \(\omega\) is the
+\(\F_4\)-scalar of order three.
+
+At the geometric generic point \(E\) has no complex multiplication, so the
+endomorphism algebra of the weight-one Hodge structure \(M_{\mathbf Q}\) is
+\(\mathbf Q\).  As \(H_1(J,\mathbf Q)=W_5\otimes M_{\mathbf Q}\), every
+sub-Hodge structure is \(U\otimes M_{\mathbf Q}\) for a subspace
+\(U\subseteq W_5\), and two of them are orthogonal exactly when the subspaces
+are \(\kappa\)-orthogonal.
+
+Let \(U_i\subseteq W_5\) be the subspace with
+\[
+ \mu_*H_1(A_i,\mathbf Q)=U_i\otimes M_{\mathbf Q},
+\]
+and put \(L'=\mu_*\bigl(\bigoplus_iH_1(A_i,\mathbf Z)\bigr)\).  It is an
+orthogonal direct sum of sublattices of the sub-Hodge structures
+\(L\cap(U_i\otimes M_{\mathbf Q})\), each summand carrying \(m\) times a
+unimodular alternating form.  The index of \(L'\) in \(L\) is odd because the
+degree of \(\mu\) is, so localizing at two turns those inclusions into
+equalities: \(L\otimes\mathbf Z_2\) is the orthogonal direct sum of the
+\(P_i=\bigl(L\cap(U_i\otimes M_{\mathbf Q})\bigr)\otimes\mathbf Z_2\), each
+unimodular.  Apply the displayed description of \(L\otimes\mathbf Z_2\) in two
+ways.  Its first-coordinate projection is all of
+\(\Lambda_1\otimes\mathbf Z_2\) and carries \(P_i\) into
+\((\Lambda_1\cap U_i)\otimes\mathbf Z_2\); summing over \(i\) and comparing
+with that surjectivity gives
+\(\Lambda_1\otimes\mathbf Z_2
+ =\bigoplus_i(\Lambda_1\cap U_i)\otimes\mathbf Z_2\), with equality in each
+piece.  Its intersection with
+the first coordinate subspace is \(\Lambda\otimes\mathbf Z_2\), and that
+subspace is the direct sum of its intersections with the
+\(U_i\otimes M_{\mathbf Q}\), so
+\(\Lambda\otimes\mathbf Z_2=\bigoplus_i(\Lambda\cap U_i)\otimes\mathbf Z_2\).
+Hence \(H_2=\bigoplus_iH_2^{(i)}\) with
+\(H_2^{(i)}=(\Lambda_1\cap U_i)/(\Lambda\cap U_i)\).  For \((u,u')\in P_i\)
+both classes lie in \(H_2^{(i)}\) and, by that same projection, \(u\) runs
+over all of \(\Lambda_1\cap U_i\); so \(\omega H_2^{(i)}\subseteq H_2^{(i)}\)
+and every summand is an \(\F_4\)-subspace.
+
+That decomposition is orthogonal for the trace-determinant pairing \(b\) used
+above, and \(H_2\) has \(\F_4\)-dimension two, so at most two summands are
+nonzero, with \(\F_4\)-dimensions \(2\) and \(0\), or \(1\) and \(1\).  The
+second pattern is impossible.  An \(\F_4\)-line \(\ell=\F_4x\) is totally
+isotropic for \(b\), since \(\det(x,ax)=a\det(x,x)=0\), and \(b\) is
+nondegenerate, so \(\ell^\perp=\ell\); two \(\F_4\)-lines orthogonal to one
+another therefore coincide, and cannot be complementary.  One summand
+consequently carries the whole heart.  The discriminant group of a lattice of
+rank \(r\) needs at most \(r\) generators and \(H_2\) needs four, so that
+summand has \(\dim U_i\ge4\).  This leaves \(k=1\), or \(k=2\) with dimensions
+four and one.
+
+For the second case let \(v\in\Lambda\) be the class of an axis, so
+\(\kappa(v,v)=5\).  As \(5\) is a unit at two,
+\(\Lambda\otimes\mathbf Z_2\) is the orthogonal sum of \(\mathbf Z_2v\) and
+\((\Lambda\cap v^\perp)\otimes\mathbf Z_2\), and the first summand is
+unimodular, so the whole coefficient heart is carried by the second.  By the
+same display, \(L\otimes\mathbf Z_2\) is then the orthogonal sum of the
+localizations of \(L\cap(\mathbf Qv\otimes M_{\mathbf Q})\) and
+\(L\cap(v^\perp\otimes M_{\mathbf Q})\), and both are unimodular, so the index
+of that sum in \(L\) is odd.  On each summand the alternating form has odd
+elementary divisors \(d_1\mid\dots\mid d_g\); passing to the sublattice
+spanned by \(d_ge_i/d_i\) and \(f_i\) in a symplectic basis makes it \(d_g\)
+times a unimodular form, at the odd index \(\prod_i(d_g/d_i)\).  Taking
+\(m\) to be the product of the two resulting multipliers and shrinking each
+summand again by the complementary odd factor makes both forms \(m\) times a
+unimodular one.  The first summand has rank two and gives an elliptic curve
+isogenous to \(E\); the second has rank eight.
+
+For the last assertion drop the polarization hypothesis and let
+\(\mu:\prod_{i=1}^5E_i\to J\) be any isogeny of odd degree from a product of
+elliptic curves.  The argument above through
+\(H_2=\bigoplus_iH_2^{(i)}\) with each summand \(\omega\)-stable uses only
+that the index is odd, not orthogonality, so it applies.  Each \(U_i\) is now
+a line, so \(H_2^{(i)}=(\Lambda_1\cap U_i)/(\Lambda\cap U_i)\) is a
+quotient of a rank-one lattice pair and therefore cyclic; being killed by two
+and \(\F_4\)-stable, it has even dimension over \(\F_2\), hence vanishes.
+Then \(H_2=0\), against \(|H_2|=16\).
+\uses{prop:principal-gluing-packet, lem:relative-six-axis,%
+  prop:six-axis-polarization}%
+\end{proof}
+
+Hartlieb records, in the footnote to \cite[Remark~5.8]{Hartlieb}, that van
+Geemen and Yamauchi split the intermediate Jacobian of a cubic threefold with
+an automorphism of order five, up to isogeny, as an elliptic curve times the
+square of an abelian surface.  The proposition is compatible with that: their
+splitting is an isogeny, and what fails here is its realization by an
+odd-degree isogeny matching the polarizations.  Two routes into Voisin's
+construction therefore remain, one for each case of the proposition: the
+four-dimensional factor of the second case may be the Jacobian of an
+irreducible curve of genus four, or \(J\) itself may be odd-degree isogenous
+to the Jacobian of an irreducible curve of genus five.  Both are open, so this
+pencil is not known to lie in one of those components, and
+Section~\ref{sec:minimal-class} does not depend on the question: the
+algebraicity of the primitive minimal class is proved there directly.

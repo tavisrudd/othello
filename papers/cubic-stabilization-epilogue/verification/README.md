@@ -96,7 +96,7 @@ The same holds of the imported-source annotations: they are recorded for the
 atomic route of Section 4, so a statement elsewhere that carries none has none
 recorded rather than none used.
 
-Checked coverage snapshot: 56 claims; 6 absent; 25 fragmentary; 24 conditional;
+Checked coverage snapshot: 59 claims; 9 absent; 25 fragmentary; 24 conditional;
 1 complete; 264 reviewer terminals, of which 46 are machinery serving no current
 manuscript claim.
 

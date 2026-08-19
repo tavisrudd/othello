@@ -20,6 +20,7 @@ digraph manuscript {
   "lem:disc" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
   "lem:divisor-tagging" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
   "lem:dvr-rank-one" [fillcolor="#cdeccd", tooltip="complete"];
+  "lem:eckardt-rank" [fillcolor="#ffffff", tooltip="absent"];
   "lem:euler-sign" [fillcolor="#fde8c8", tooltip="fragment"];
   "lem:exact-low-degree-shifts" [fillcolor="#ffffff", tooltip="absent"];
   "lem:factor-glue" [fillcolor="#fde8c8", tooltip="fragment"];
@@ -36,6 +37,7 @@ digraph manuscript {
   "lem:six-point-hearts" [fillcolor="#fde8c8", tooltip="fragment"];
   "lem:spectrum-transfer" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
   "prop:A5-nonseparated" [fillcolor="#ffffff", tooltip="absent"];
+  "prop:A5-not-coprime" [fillcolor="#ffffff", tooltip="absent"];
   "prop:atom-invariant" [fillcolor="#fde8c8", tooltip="fragment"];
   "prop:cubic-atom" [fillcolor="#fde8c8", tooltip="fragment"];
   "prop:cubic-block-data" [fillcolor="#fde8c8", tooltip="fragment"];
@@ -45,6 +47,7 @@ digraph manuscript {
   "prop:hirzebruch-specialized-vanishing" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
   "prop:low-dimensional-vanishing" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
   "prop:no-curve" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
+  "prop:no-elliptic-product" [fillcolor="#ffffff", tooltip="absent"];
   "prop:no-surface" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
   "prop:principal-gluing-packet" [fillcolor="#fde8c8", tooltip="fragment"];
   "prop:projective-product-nu" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
@@ -76,6 +79,7 @@ digraph manuscript {
   "KKPYY:sec-5.2.2" [shape=note, fillcolor="#eeeeee"];
   "McDuffSalamon:deformation-invariance" [shape=note, fillcolor="#eeeeee"];
   "PutSinger:ch-3" [shape=note, fillcolor="#eeeeee"];
+  "a5-pencil-eckardt" [shape=note, fillcolor="#eeeeee"];
   "hirzebruch-euler-spectrum" [shape=note, fillcolor="#eeeeee"];
   "Batyrev:fano-toric-presentation" -> "lem:hirzebruch-euler-spectrum" [style=dotted];
   "BehrendProduct:small-product-formula" -> "lem:hirzebruch-euler-spectrum" [style=dotted];
@@ -100,10 +104,15 @@ digraph manuscript {
   "KKPYY:sec-5.2.2" -> "lem:hodge-base" [style=dotted];
   "McDuffSalamon:deformation-invariance" -> "lem:hirzebruch-euler-spectrum" [style=dotted];
   "PutSinger:ch-3" -> "prop:residue-discriminant-exponents" [style=dotted];
+  "a5-pencil-eckardt" -> "prop:A5-not-coprime" [style=dotted];
+  "cor:universal-ch0" -> "prop:A5-nonseparated" [style=solid];
   "hirzebruch-euler-spectrum" -> "lem:hirzebruch-euler-spectrum" [style=dotted];
   "lem:A0preserve" -> "prop:rank2-rigidity" [style=solid];
   "lem:crossing" -> "prop:atom-invariant" [style=solid];
   "lem:disc" -> "prop:cubic-atom" [style=solid];
+  "lem:eckardt-rank" -> "prop:A5-nonseparated" [style=solid];
+  "lem:eckardt-rank" -> "prop:A5-not-coprime" [style=dashed];
+  "lem:eckardt-rank" -> "prop:A5-not-coprime" [style=solid];
   "lem:euler-sign" -> "lem:hodge-base" [style=dashed];
   "lem:euler-sign" -> "lem:hodge-base" [style=solid];
   "lem:euler-sign" -> "prop:cubic-atom" [style=solid];
@@ -112,7 +121,10 @@ digraph manuscript {
   "lem:horiz" -> "lem:A0preserve" [style=solid];
   "lem:horiz" -> "lem:orthogonal" [style=solid];
   "lem:orthogonal" -> "lem:A0preserve" [style=solid];
+  "lem:relative-six-axis" -> "prop:no-elliptic-product" [style=dashed];
+  "lem:relative-six-axis" -> "prop:no-elliptic-product" [style=solid];
   "lem:spectrum-transfer" -> "prop:cubic-atom" [style=solid];
+  "prop:A5-not-coprime" -> "prop:A5-nonseparated" [style=solid];
   "prop:atom-invariant" -> "prop:no-curve" [style=dashed];
   "prop:atom-invariant" -> "prop:no-surface" [style=solid];
   "prop:cubic-atom" -> "prop:no-curve" [style=dashed];
@@ -124,8 +136,13 @@ digraph manuscript {
   "prop:no-curve" -> "prop:no-surface" [style=dashed];
   "prop:no-curve" -> "prop:no-surface" [style=solid];
   "prop:no-surface" -> "thm:every-cubic" [style=solid];
+  "prop:principal-gluing-packet" -> "prop:no-elliptic-product" [style=dashed];
+  "prop:principal-gluing-packet" -> "prop:no-elliptic-product" [style=solid];
   "prop:rank2-rigidity" -> "lem:crossing" [style=solid];
   "prop:rank2-rigidity" -> "prop:atom-invariant" [style=solid];
   "prop:rank2-rigidity" -> "prop:residue-discriminant-exponents" [style=solid];
   "prop:residue-discriminant-exponents" -> "prop:no-curve" [style=dashed];
+  "prop:six-axis-polarization" -> "prop:no-elliptic-product" [style=dashed];
+  "prop:six-axis-polarization" -> "prop:no-elliptic-product" [style=solid];
+  "thm:separation-family" -> "prop:A5-not-coprime" [style=solid];
 }

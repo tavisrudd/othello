@@ -283,14 +283,44 @@
       "terminal_digest": "70a9dccb5a112dbb5eff5c412e96b1d02bd7f6682478fd6f7c52b149ef3b6515"
     },
     {
+      "manuscript_label": "lem:eckardt-rank",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "Smooth cubic threefolds in projective four-space, a point of such a threefold, the tangent hyperplane section there, the Hessian matrix of the defining form, the class of forms that split as sums of cubic forms in pairwise disjoint nonempty groups of at most three variables, and the coprime-degree normal form of Yang, Yu and Zhu.",
+      "hypotheses": "Smoothness of the cubic threefold; for the two families, membership in the separated-variable class or in the normal form of that family.",
+      "conclusion": "The tangent hyperplane section at a point is a cone with that point as vertex if and only if the Hessian of the defining form there has rank at most two, and every smooth cubic threefold in either named class carries such a point.",
+      "cautions": "Not formalized.  The argument is a coordinate computation together with the projective geometry of cubic threefolds, which is outside the companion's scope.",
+      "statement_digest": "c33eb644e9fae5b20244edaaffca9683ce83bb5e21af4071900be18a8d00cdf0"
+    },
+    {
+      "manuscript_label": "prop:A5-not-coprime",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "The coarse-moduli image of the nonstandard invariant cubic pencil of the alternating group on five letters, the Eckardt points of its members, and the coprime-degree family of Yang, Yu and Zhu.",
+      "hypotheses": "Smoothness of the members, the Eckardt criterion of the preceding lemma, and the computed emptiness of the Eckardt scheme of the members listed in the registered evidence bundle.",
+      "conclusion": "Only finitely many moduli points of the pencil are represented by cubic threefolds carrying an Eckardt point, and in particular only finitely many by cubics projectively equivalent to a member of that family.",
+      "cautions": "Not formalized.  It rests on the registered evidence bundle, which exhibits Eckardt-free members but does not compute the finite exceptional set.",
+      "statement_digest": "a93bee56ced626f32904bf6581ee57eded87db639c75bb5383a95a6c18782293"
+    },
+    {
+      "manuscript_label": "prop:no-elliptic-product",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "The intermediate Jacobian of the geometric generic member of the pencil, the six-axis source lattice with the form six times the identity minus the all-ones matrix, its two-primary coefficient heart with commutant the field of four elements, and odd-degree isogenies onto the intermediate Jacobian from products of principally polarized abelian varieties.",
+      "hypotheses": "The exotic two-primary gluing kernel of the packet proposition, the elliptic factor without complex multiplication at the geometric generic point, odd isogeny degree, and an odd multiple of the product polarization.",
+      "conclusion": "Such an isogeny has either one factor or two, of dimensions one and four; the second case is realized by every axis; and, with no hypothesis on the polarizations of the factors, the intermediate Jacobian receives no odd-degree isogeny from a product of five elliptic curves.",
+      "cautions": "Not formalized.  The statement is about the lattice model established earlier in the same section, and members whose elliptic factor has complex multiplication are excluded by hypothesis.",
+      "statement_digest": "1c3fcfe46a738273c198523e457f3989510f6deed4bd8c4434c46f64bdb78db8"
+    },
+    {
       "manuscript_label": "prop:A5-nonseparated",
       "coverage": "absent",
       "declarations": [],
       "objects": "The coarse-moduli image of the nonstandard invariant cubic pencil of the alternating group on five letters, and cubic forms that split as sums of forms in pairwise disjoint nonempty groups of at most three variables.",
-      "hypotheses": "Smoothness of the pencil members, and the separated-variable criterion for universal CH0-triviality of Colliot-Thelene.",
+      "hypotheses": "Smoothness of the pencil members, the separated-variable criterion for universal CH0-triviality of Colliot-Thelene, and the Eckardt criterion together with the registered Eckardt computation inherited through the preceding proposition; the order-three signature route printed after the proof gives the same finiteness without any computation.",
       "conclusion": "Only finitely many moduli points of the pencil are represented by cubics projectively equivalent to a separated-variable form, so all but finitely many are universally CH0-trivial for a reason the separated-variable criterion does not supply.",
-      "cautions": "Not formalized. The projective-equivalence and dimension arguments over the coarse moduli image are outside the companion's scope.",
-      "statement_digest": "a05521d81d7ce8b050d58c63dff9bc731ed3001104ba22b1d9ac3710f1df25ca"
+      "cautions": "Not formalized.  The projective-equivalence argument over the coarse moduli image is outside the companion's scope.  Its printed proof runs through the Eckardt criterion and therefore through the registered evidence bundle; the computation-free route is recorded after it.",
+      "statement_digest": "0fafc5c5cfe654c78bbf43a92d87e5183228a4190d9e47ecf2bbaad826505905"
     },
     {
       "manuscript_label": "lem:euler-sign",

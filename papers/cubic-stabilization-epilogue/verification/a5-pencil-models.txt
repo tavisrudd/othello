@@ -1,0 +1,8 @@
+group order (six-point model): 60
+triple orbit sizes: [10, 10]
+dimension of the invariant cubics: 2
+T_1 is A_5-invariant and not S_6-invariant: True
+orbit used for T_1: [(0, 1, 2), (0, 1, 4), (0, 2, 5), (0, 3, 4), (0, 3, 5), (1, 2, 3), (1, 3, 5), (1, 4, 5), (2, 3, 4), (2, 4, 5)]
+monomial-model invariant directions: 2
+each monomial-model invariant is fixed by all of A_5: True
+the Fermat form is one of them: True

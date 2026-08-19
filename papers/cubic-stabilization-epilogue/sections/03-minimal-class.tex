@@ -432,12 +432,101 @@ the intermediate Jacobian is algebraic.  Voisin's Corollary~4.4
 equivalent to universal \(CH_0\)-triviality.
 \end{proof}
 
+Two comparisons place the pencil against the parts of the algebraic locus that
+were known before.  Write \(M_{H_1}\) for the coarse-moduli image of the
+pencil, as in Hartlieb's notation.  Both comparisons run through one classical
+criterion.
+
+\begin{lemma}[Eckardt criterion]
+\label{lem:eckardt-rank}
+\coverage{absent}%
+Let \(X=\{F=0\}\subset\PP^4\) be a smooth cubic threefold and let \(p\in X\).
+The tangent hyperplane section \(T_pX\cap X\) is a cone with vertex \(p\) --
+that is, \(p\) is an \emph{Eckardt point} of \(X\) -- if and only if the
+Hessian matrix of \(F\) at \(p\) has rank at most two.  Every smooth cubic
+threefold in either of two classes carries an Eckardt point: those whose
+defining form is a sum of cubic forms in pairwise disjoint nonempty groups of
+at most three variables, and the members of the family of
+\cite[Theorem~3.3]{YYZ}.
+\end{lemma}
+
+\begin{proof}
+Choose coordinates with \(p=[1:0:0:0:0]\) and write \(F=x_0^2L+x_0Q+C\) with
+\(L\), \(Q\) and \(C\) in \(x_1,\dots,x_4\).  Smoothness at \(p\) makes \(L\)
+nonzero, the tangent hyperplane is \(\{L=0\}\), and the section is a cone with
+vertex \(p\) exactly when \(Q\) vanishes on \(\{L=0\}\), that is when
+\(Q\in(L)\).  The Hessian of \(F\) at \(p\) is the matrix of the quadric
+\(4x_0L+2Q\).  If \(Q=LR\) for a linear form \(R\), that quadric is
+\(L(4x_0+2R)\), of rank at most two.  Conversely a quadric of rank at most
+two is a product of two linear forms; the coefficient of \(x_0^2\) vanishes,
+so at most one factor involves \(x_0\), and if neither did then \(L\) would
+vanish.  Comparing the terms
+linear in \(x_0\) shows that the other factor is proportional to \(L\), so
+\(Q\in(L)\).
+
+Let \(F=\sum_jF_j\) be separated, with the \(j\)-th form in \(n_j\le3\)
+variables and \(\sum_jn_j=5\).  Either some \(n_j=2\), or the parts are
+\(3,1,1\) or \(1,1,1,1,1\) and at least two of them are singletons.  In the
+first case the binary cubic \(F_j\) has a nonzero root, and the corresponding
+point of \(\PP^4\), supported on those two variables, lies on \(X\).  In the
+second, let \(cx^3\) and \(c'y^3\) be two singleton summands, with \(c\) and
+\(c'\) nonzero because \(X\) is smooth, and take the point supported on \(x\)
+and \(y\) with coordinates satisfying \(ca^3+c'b^3=0\).  In both cases every
+diagonal block of the Hessian belonging to another part vanishes there, since
+a cubic form has vanishing Hessian at the origin, so the rank is at most two.
+
+For the family of \cite[Theorem~3.3]{YYZ} work in their coordinates
+\(x_1,\dots,x_5\) and take \(p\) to be the point where \(x_1=1\) and the
+other four vanish.  It lies on the threefold; every partial derivative of
+their form vanishes at \(p\) except the one in \(x_3\), whose value is their
+nonzero coefficient \(t_1\), so the tangent hyperplane is \(\{x_3=0\}\); and
+the restriction of their form to that hyperplane does not involve \(x_1\), so
+the section is a cone with vertex \(p\).
+\end{proof}
+
+The general member of the pencil carries no such point.  That is a
+computation, recorded in the evidence bundle named in the next proposition: in
+two independent models of \(W_5\), the sum-zero subspace of the permutation
+module on the six points of \(\PP^1(\F_5)\) over \(\mathbf Q\) and the
+monomial model induced from a cubic character of a point stabilizer over
+\(\mathbf Q(\zeta_3)\), explicit members are smooth with empty Eckardt
+scheme.  The Fermat cubic threefold, which is a member of the pencil and
+appears explicitly in the monomial model, returns its thirty Eckardt points in
+both rings as a control.
+
+\begin{proposition}[Finite Eckardt locus]
+\label{prop:A5-not-coprime}
+\coverage{absent}%
+\uses{lem:eckardt-rank}%
+\evidence{a5-pencil-eckardt}%
+Only finitely many points of the coarse-moduli image \(M_{H_1}\) of the
+pencil are represented by smooth cubic threefolds carrying an Eckardt point.
+In particular only finitely many are represented by cubics projectively
+equivalent to a member of the family of \cite[Theorem~3.3]{YYZ}.
+\end{proposition}
+
+\begin{proof}
+Let \(B^\circ\) be the smooth locus of the pencil, as in
+Theorem~\ref{thm:separation-family}, and \(F_b\) the defining form of
+\(X_b\).  Inside \(B^\circ\times\PP^4\) the locus of pairs \((b,p)\) with
+\(p\in X_b\) and \(\operatorname{rank}\operatorname{Hess}F_b(p)\le2\) is
+closed, and the projection to \(B^\circ\) is proper, so the set of parameters
+whose member carries such a point is closed.  By the computation quoted above
+it is a proper subset, and \(B^\circ\) is a connected curve, so it is finite;
+\(M_{H_1}\) is the image of \(B^\circ\), so finitely many of its points are
+covered.  By Lemma~\ref{lem:eckardt-rank} those are exactly the points
+represented by a member carrying an Eckardt point.  Every member of the family
+of \cite[Theorem~3.3]{YYZ} carries one, again by
+Lemma~\ref{lem:eckardt-rank}, and carrying one is invariant under projective
+equivalence, which gives the second claim.
+\uses{lem:eckardt-rank, thm:separation-family}%
+\end{proof}
+
 \begin{proposition}[Finite separated-variable intersection]
 \label{prop:A5-nonseparated}
 \coverage{absent}%
-Let \(M_{H_1}\) be the coarse-moduli image of the nonstandard
-\(A_5\)-invariant cubic pencil.  Then only finitely many points of
-\(M_{H_1}\) are represented by smooth cubic threefolds that are
+Only finitely many points of \(M_{H_1}\) are
+represented by smooth cubic threefolds that are
 projectively equivalent to a cubic whose defining form is a sum of cubic
 forms in pairwise disjoint nonempty groups of at most three variables.
 Consequently, all but finitely many points of \(M_{H_1}\) are represented
@@ -447,73 +536,45 @@ separated-variable criterion of Colliot-Th\'el\`ene \cite{CT}.
 \end{proposition}
 
 \begin{proof}
-Let \(M\) be the coarse moduli space of smooth cubic threefolds and put
-\[
- G_1=\left\langle\operatorname{diag}(1,1,1,1,\zeta_3)\right\rangle,
- \qquad
- G_2=\left\langle\operatorname{diag}(1,1,1,\zeta_3,\zeta_3)\right\rangle.
-\]
-For the finite subgroups \(G\subset\operatorname{GL}_5(\C)\) considered
-here, whose projection to \(\operatorname{PGL}_5(\C)\) is injective,
-Hartlieb writes \(M_G\subset M\) for the image of the smooth \(G\)-fixed
-cubic locus.  The morphism
-\[
- U^G/N_{\operatorname{GL}_5(\C)}(G)\longrightarrow M
-\]
-is finite; hence \(M_G\) is closed.  Hartlieb also proves that \(M_G\) is
-irreducible, and for the nonstandard \(A_5\)-representation \(H_1\),
-\(M_{H_1}\) is a one-dimensional family containing the Klein cubic
-\cite[Lemmas~2.6--2.7 and Proposition~5.7]{Hartlieb}.
-
-Now let a smooth cubic be projectively equivalent to a separated-variable
-form
-\[
- F=F_1(x_{I_1})+\cdots+F_r(x_{I_r}),
-\]
-where the \(I_\nu\) form a partition of the five variables into nonempty
-blocks and \(|I_\nu|\le3\).  At least one block has size one or two.
-Multiplying exactly the variables in that block by \(\zeta_3\) fixes its
-cubic summand, because \(\zeta_3^3=1\), and fixes every other summand.
-Thus the cubic admits an order-three automorphism whose signature, up to
-permutation of the coordinates, replacement of the chosen generator by its
-inverse, and multiplication of the linear lift by a scalar, is
-\[
- (0,0,0,0,1)\qquad\text{or}\qquad(0,0,0,1,1).
-\]
-Gonz\'alez-Aguilera--Liendo identify these as the order-three families
-\(T_3^1\) and \(T_3^2\), with normal forms
-\[
- L_3(x_0,x_1,x_2,x_3)+x_4^3,
- \qquad
- L_3(x_0,x_1,x_2)+M_3(x_3,x_4),
-\]
-respectively \cite[Theorem~2.5]{GonzalezAguileraLiendo}.  Hence the
-separated-variable locus is contained in \(M_{G_1}\cup M_{G_2}\).
-
-The Klein cubic lies in neither of these two order-three loci.  Indeed,
-Gonz\'alez-Aguilera--Liendo recall that its automorphism group is
-\(\operatorname{PSL}(2,\F_{11})\), which has a single conjugacy class of
-elements of order three, and compute that the Klein cubic belongs to the
-order-three family \(T_3^4\), of signature \((0,0,1,1,2)\)
-\cite[Proposition~2.6]{GonzalezAguileraLiendo}.  Since the Klein cubic
-belongs to \(M_{H_1}\), this proves
-\[
- M_{H_1}\not\subset M_{G_1},
- \qquad
- M_{H_1}\not\subset M_{G_2}.
-\]
-Each intersection \(M_{H_1}\cap M_{G_i}\) is therefore a proper closed
-subset of the irreducible curve \(M_{H_1}\).  It is zero-dimensional and,
-since the moduli space is of finite type over \(\C\), finite.  Their union
-contains every separated-variable point of \(M_{H_1}\), proving the
-claim.
+By Lemma~\ref{lem:eckardt-rank} a smooth cubic threefold of
+separated-variable type carries an Eckardt point, and carrying one is
+invariant under projective equivalence, so
+Proposition~\ref{prop:A5-not-coprime} leaves only finitely many points of
+\(M_{H_1}\) represented by such cubics.  Every remaining point is
+represented by a universally \(CH_0\)-trivial cubic threefold by
+Corollary~\ref{cor:universal-ch0}, and by no cubic projectively equivalent to
+a separated-variable form, so the criterion of \cite{CT} does not apply to
+it.
+\uses{lem:eckardt-rank, prop:A5-not-coprime, cor:universal-ch0}%
 \end{proof}
 
-Proposition~\ref{prop:A5-nonseparated} excludes only the
-separated-variable mechanism of \cite{CT}.  It does not assert that the
-\(A_5\)-curve is generically disjoint from the coprime-degree family of
-\cite{YYZ} or from every other known part of Voisin's
-algebraic-minimal-class locus.
+The order-three signatures give the same finiteness by a route that uses no
+computation.  Multiplying the variables of a block of size one or two by
+\(\zeta_3\) fixes a separated-variable form, so such a cubic admits an
+order-three automorphism of signature \((0,0,0,0,1)\) or \((0,0,0,1,1)\);
+Gonz\'alez-Aguilera--Liendo identify these as their families \(T_3^1\) and
+\(T_3^2\) \cite[Theorem~2.5]{GonzalezAguileraLiendo}.  Each is the image in
+moduli of \(U^G/N_{\operatorname{GL}_5(\C)}(G)\), for \(U^G\) the locus of
+smooth cubics fixed by the relevant group \(G\), under a finite morphism,
+hence closed \cite[Lemmas~2.6--2.7]{Hartlieb}.  The
+Klein cubic lies in the pencil \cite[Lemmas~2.6--2.7 and
+Proposition~5.7]{Hartlieb}, its automorphism group
+\(\operatorname{PSL}(2,\F_{11})\) has a single conjugacy class of elements of
+order three, and its signature is \((0,0,1,1,2)\)
+\cite[Proposition~2.6]{GonzalezAguileraLiendo}, so it lies in neither family.
+The pencil is an irreducible curve, so it meets each of the two loci in a
+finite set.  The finiteness of the separated-variable locus therefore does not
+depend on the registered computation.
+
+All but finitely many moduli points of the pencil escape the
+separated-variable mechanism of \cite{CT} by
+Proposition~\ref{prop:A5-nonseparated} and the explicit family of \cite{YYZ}
+by Proposition~\ref{prop:A5-not-coprime}, and
+Proposition~\ref{prop:no-elliptic-product} closes the product route into
+Voisin's components.  None of them asserts that the \(A_5\)-curve is disjoint
+from every known part of Voisin's algebraic-minimal-class locus; the two
+questions left open there are recorded after
+Proposition~\ref{prop:no-elliptic-product}.
 
 The argument is fibrewise.  It constructs neither a horizontal minimal cycle
 over the pencil nor a relative decomposition of the diagonal.  Neither is
