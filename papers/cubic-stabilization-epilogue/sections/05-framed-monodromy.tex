@@ -23,13 +23,13 @@ use Hypothesis~5.7R.  We prove specialized low-dimensional vanishing
 directly, without Hypothesis~5.7T, for nef-canonical targets, for
 \(\PP^1\) and \(\PP^2\), for every rational geometrically ruled surface---for
 \(F_1\) on specializations that are graded-monomial in the sense of
-Definition~\ref{def:monomial-specialization}, as every centre specialization
+Definition~\ref{def:monomial-specialization}, as every center specialization
 is---and, assuming only Hypothesis~5.7R, for ruled surfaces over curves of
 positive genus.  In the present proof Hypothesis~5.7T is used only
-for surface centres that are neither minimal nor geometrically ruled.  Consequently the resulting birational invariance
+for surface centers that are neither minimal nor geometrically ruled.  Consequently the resulting birational invariance
 of \(\nu_6\), and the identification \(\nu_6(V)=2\) for genus-eight Fano
 threefolds, remain conditional on Hypothesis~5.7R and on Hypothesis~5.7T for
-those centres.
+those centers.
 
 
 Proposition~\ref{prop:residue-discriminant-exponents} explains how the two
@@ -770,7 +770,7 @@ two ruling classes to the same value and the quartic below then degenerates.  Fo
 \(a\ge1\) two facts carry the computation: one deformation carries the
 genus-zero theory of \(F_a\) to that of \(F_0\) or \(F_1\), under a monomial
 substitution of Novikov variables, and the resulting rank-four Euler quartic is
-separable away from one explicit locus that no centre specialization meets.
+separable away from one explicit locus that no center specialization meets.
 
 One case, the surface \(F_1\), needs a mild extra condition on \(\chi\), used
 only to rule out a single algebraic coincidence in the associated graded ring.
@@ -788,7 +788,7 @@ containing the leading term \(\operatorname{gr}\chi(Q^d)\) of \(\chi(Q^d)\) for
 every effective class \(d\).
 \end{definition}
 
-\begin{lemma}[Centre specializations are graded-monomial]
+\begin{lemma}[Center specializations are graded-monomial]
 \label{lem:center-maps-monomial}
 \coverage{absent}%
 The specializations \eqref{eq:center-novikov-specialization} are graded-monomial.
@@ -1000,7 +1000,7 @@ and \(81\sigma^2=0\).  In both cases
 the multiplicity of every root is at most two and the repeated root has
 multiplicity exactly two.  A block of rank two has a single eigenvalue
 \(\lambda\), hence trace \(2\lambda\) and determinant \(\lambda^2\); by
-Cayley--Hamilton its centred matrix \(M-\lambda\) squares to zero.
+Cayley--Hamilton its centerd matrix \(M-\lambda\) squares to zero.
 \end{proof}
 
 \begin{lemma}[Strictly admissible specializations avoid the degeneracy locus]
@@ -1042,7 +1042,7 @@ coefficients, and equal ones would require \(256+27=0\), so the symbol is
 nonzero and therefore \(256u+27w^2\ne0\).
 \end{proof}
 
-\begin{proposition}[Direct specialized vanishing for rational geometrically ruled centres]
+\begin{proposition}[Direct specialized vanishing for rational geometrically ruled centers]
 \label{prop:hirzebruch-specialized-vanishing}
 \coverage{conditional_deduction}%
 \lean{hirzebruch_quadricSurface_sixthMultiplicity_eq_zero,%
@@ -1088,14 +1088,14 @@ framed regular monodromy trivial on each.  Hence no primitive sixth root occurs.
 \begin{remark}[Where the tagging hypothesis is still used]
 \label{rem:tagging-scope}
 Proposition~\ref{prop:direct-specialized-lowdim} shows that
-Hypothesis~5.7T is not needed for nef-canonical centres, for \(\PP^1\) or
+Hypothesis~5.7T is not needed for nef-canonical centers, for \(\PP^1\) or
 \(\PP^2\), or---assuming only Hypothesis~5.7R---for ruled surfaces over
 positive-genus curves, and
 Proposition~\ref{prop:hirzebruch-specialized-vanishing} removes it for the
-rational geometrically ruled centres as well.  Those cases exhaust the minimal
+rational geometrically ruled centers as well.  Those cases exhaust the minimal
 surfaces, and also cover \(F_1\), which is geometrically ruled without being
 minimal.  In the present proof of four-dimensional birational invariance, the
-substantive use of Hypothesis~5.7T is therefore confined to centres that are
+substantive use of Hypothesis~5.7T is therefore confined to centers that are
 neither minimal nor geometrically ruled.  Every such surface is an iterated point
 blowup, so eliminating it there would require a separate support or base-change
 statement for applying the blowup comparison after the external center
@@ -1226,7 +1226,7 @@ is needed.
 \lean{lowDimensionalVanishing_of_classification_and_specialization_inputs,%
   lowDimensionalVanishing_of_characteristicRoots_sq_eq_one,%
   lowDimensionalVanishing_of_involutiveFramedMonodromy}%
-Assume Hypothesis~5.7R, and Hypothesis~5.7T only for surface centres that are
+Assume Hypothesis~5.7R, and Hypothesis~5.7T only for surface centers that are
 neither minimal nor geometrically ruled.  Let \(T\) be a point, a smooth projective curve, or a smooth projective
 surface.  For every strictly Novikov-admissible specialization \(\chi\),
 graded-monomial if \(T\cong F_1\),
@@ -1270,7 +1270,7 @@ to \(\chi\), proving \eqref{eq:low-dimensional-vanishing}.
 \lean{packet_multiplicity_eq_of_preserving_chain,%
   packet_multiplicity_eq_of_typed_weak_factorization,%
   packet_multiplicity_birational_in_dimension_four}%
-Assume Hypothesis~5.7R, and Hypothesis~5.7T only for surface centres that are
+Assume Hypothesis~5.7R, and Hypothesis~5.7T only for surface centers that are
 neither minimal nor geometrically ruled.
 If \(Y\) and \(Y'\) are birational smooth projective complex varieties of
 the same dimension at most four, then
@@ -1642,7 +1642,7 @@ For every smooth prime Fano threefold \(V\) of genus eight,
 \[
   V\times\PP^1\ \text{is irrational}.
 \]
-Assuming Hypothesis~5.7R, and Hypothesis~5.7T only for surface centres that are
+Assuming Hypothesis~5.7R, and Hypothesis~5.7T only for surface centers that are
 neither minimal nor geometrically ruled, one moreover has
 \[
   \nu_6(V)=2.
@@ -1659,7 +1659,7 @@ base with the corresponding projective space, so
 irrational by Theorem~\ref{thm:every-cubic}, proving the unconditional
 assertion.
 
-Assume now Hypothesis~5.7R, and Hypothesis~5.7T only for surface centres that are
+Assume now Hypothesis~5.7R, and Hypothesis~5.7T only for surface centers that are
 neither minimal nor geometrically ruled.  Both projectivizations are smooth
 projective
 fourfolds.  By Theorem~\ref{thm:nu6-birational-invariance}, Proposition

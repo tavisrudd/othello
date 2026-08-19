@@ -6622,7 +6622,7 @@ theorem hirzebruchOdd_sixthMultiplicity_eq_zero (euler : Matrix (Fin 4) (Fin 4) 
     sectionValue fibreNonzero sectionNonzero separated quantumRelation monodromy
     simpleBlockMonodromy
 
-/-- For a specialization attached to a blowup centre, the even degeneracy locus
+/-- For a specialization attached to a blowup center, the even degeneracy locus
 is not met once the section class is shifted by at least one fibre: the lengths
 of the fibre class and of the shifted section class differ, so the two specialized
 values have different valuations.  The statement holds for any strictly
@@ -6637,7 +6637,7 @@ theorem centerSpecialization_fibre_ne_shiftedSection {Curve Target : Type*}
       ≠ specialization.monomialImage (sectionClass + shift • fibre) :=
   specialization.fibre_ne_shiftedSection fibreNonzero sectionNonzero positiveShift
 
-/-- For a specialization attached to a blowup centre, the odd degeneracy locus is
+/-- For a specialization attached to a blowup center, the odd degeneracy locus is
 not met once the section class is shifted by at least one fibre: the fibre value
 and the square of the shifted-section value have different valuations, so no
 combination of them with unit coefficients vanishes.  The statement holds for any

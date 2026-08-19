@@ -320,7 +320,7 @@ section RankTwoBlock
 
 /-- The nilpotent part of a rank-two block is square-zero.  A two-by-two complex
 matrix with a single eigenvalue has trace twice and determinant the square of
-that eigenvalue, and Cayley--Hamilton in rank two then says that the centred
+that eigenvalue, and Cayley--Hamilton in rank two then says that the centerd
 matrix squares to zero. -/
 theorem rankTwo_centered_sq_eq_zero (block : Matrix (Fin 2) (Fin 2) ℂ) (eigenvalue : ℂ)
     (traceValue : Matrix.trace block = 2 * eigenvalue)
