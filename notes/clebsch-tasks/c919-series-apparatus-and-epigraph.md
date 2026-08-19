@@ -76,10 +76,12 @@ poem's shape.
    paper-specific coda prose fixed in plan §5 and §6. No prose between poem and
    map.
 4. Map renamed "Programme map", the current paper's box highlighted, Papers I–III
-   separated from Paper IV by whitespace, and the duplicated Paper I and Paper III
-   labels replaced by `deep-hole conference source` and `golden-descent
-   conference source`. Paper II keeps "chordal companion", where Paper V's
-   technical sense of that word is the correct reading.
+   separated from Paper IV by whitespace, and the duplicated labels replaced by
+   the four settled in plan §4 and shipped: `deep-hole conference cubic`,
+   `matching-quotient chordal cubic`, `golden-descent conference cubic`, and
+   `marked cubic correspondence`. An earlier revision of this card named
+   "conference source" labels and kept "chordal companion" for Paper II; those
+   were superseded before implementation and never used.
 5. All five papers in one pass; Paper III is not handed to C816.
 6. Paper II's existing conclusion is preserved. It is a `\section*{Conclusion}`
    sitting immediately before `\appendix` in `clebsch_factorization.tex`; an

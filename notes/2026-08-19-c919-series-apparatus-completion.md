@@ -59,16 +59,16 @@ numbers, all of which had moved.
 
 ### Paper IV — `q13-passant-code`
 
-- Removed the banner text while keeping the `\par\vspace*{12mm}\noindent`
-  page-1 spacing inside the surviving title group, so the title still sits
-  where it did.
+- Removed the whole title group. The first attempt kept its
+  `\par\vspace*{12mm}\noindent`, which the plan read as page-1 spacing; the
+  cold read showed that spacing was added with the banner and now pushed the
+  title below the other four, so it went too.
 - Interlude: the fixed-field framing and the least-arity question merged into
   the opening paragraph; the exact-arity sentence landed in the introduction as
-  required, shortened to "Unary data are constant there, while weighted pair
-  data recover that plane and its polarity, so the exact arity is two" because
-  the preceding sentence already names \(q=13\) and the recovered plane. The
-  independence sentence and the different-sparse-shadow sentence moved to the
-  coda.
+  required, shortened to "Unary data there are constant, so the exact
+  reconstruction arity is two" because the preceding sentence already names
+  \(q=13\) and the recovered plane and polarity. The independence sentence and
+  the different-sparse-shadow sentence moved to the coda.
 - Coda inserted between the conclusion and the bibliography, and its first
   paragraph names the 364 minimum words plainly, as poem line IV requires.
 - Gained the programme map.
@@ -137,7 +137,7 @@ independence sentence use the plan's exact wording.
   task with the same "the theorem-like statements do not match the published
   claim map" error, which is C855's open remediation, not a C919 regression.
 - **Builds.** All five rebuild warning-free through their own gates: Paper I 29
-  pages (companion 14), Paper II 47, Paper III 35, Paper IV 17, Paper V 22. The
+  pages (companion 14), Paper II 47, Paper III 35, Paper IV 16, Paper V 22. The
   page-count constants in the manuscript checkers of Papers II, III, and IV
   were updated to match, and every tracked PDF was refreshed through the
   checker's `--update` mode rather than by hand.
@@ -174,8 +174,42 @@ first of the two decisions C918 left open.
 - `papers/clebsch-rigidity/clebsch_rigidity.pdf` — coda on page 27 of 29.
 - `papers/clebsch-factorization/clebsch_factorization.pdf` — coda on page 27 of 47.
 - `papers/clebsch-passages/clebsch_passages.pdf` — coda on page 30 of 35.
-- `papers/q13-passant-code/passant_code_q13.pdf` — coda on page 16 of 17.
+- `papers/q13-passant-code/passant_code_q13.pdf` — coda on page 15 of 16.
 - `papers/chordal-conference-reconstruction/chordal_conference_reconstruction.pdf` — coda on page 21 of 22.
+
+## Cold-read repairs
+
+An independent cold read of the five built PDFs is recorded in
+`2026-08-19-c919-cold-read.md`. Its findings that this task caused were repaired
+in the manuscripts; findings about text C919 did not touch are documented there
+and left alone by explicit instruction.
+
+- **Paper V's stale map reference.** Page 19 still read "explains the last
+  arrow in the series map", a positional pointer into a figure that C919 renamed
+  and moved to the coda. The clause is gone; the sentence keeps its
+  mathematical content. The earlier all-clear missed it because the check was
+  case-sensitive and the surviving phrase is lowercase.
+- **Paper I's dangling back reference.** The coda said "the \(q=13\) consequence
+  recorded above", whose antecedent had stayed twenty-five pages behind. It now
+  names the theorem and says where it was noted.
+- **Paper I's motivating-question sentence** was merged too early, disclaiming
+  specificity to a configuration the introduction had not yet named. It now
+  follows the recognition-theorem sentence, where it widens the scope instead.
+- **Verbatim repeats between introduction and coda.** Plan §5 merged several
+  sentences into the introduction and plan §6's coda prose then contained them
+  again. The coda copies were cut: Paper I's field-uniformity sentence and
+  Paper IV's arity sentence, the latter of which the reader met on the facing
+  page in the conclusion and twice earlier. Paper II's introduction lost the
+  merged "The classification ranges over every odd prime power", which restated
+  "Over all odd finite fields" three clauses earlier in the same sentence.
+- **Paper V's contrastless "itself".** The merged clause "The classification
+  itself is formulated on the fixed metric carrier" had lost the foil it
+  contrasted with; it now states the contrast locally.
+- **Paper IV's title height.** The `\par\vspace*{12mm}` kept inside its title
+  group was added in the same commit that introduced the banner, to clear the
+  banner from the top margin, and with the banner gone it pushed Paper IV's
+  title 34 pt below the other four. The whole title group is gone; all five
+  first-word baselines now measure 124.95 pt. Paper IV returns to 16 pages.
 
 ## Later refinements
 
