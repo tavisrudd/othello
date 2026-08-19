@@ -91,13 +91,13 @@ The packet asks for the coda after the paper's mathematical conclusion and befor
 the bibliography, and its checklist reads Conclusion → coda → references. That
 holds exactly for Papers I, IV, and V, which have no appendices.
 
-Papers II and III have appendices, so the two readings diverge. **Recommendation:
-place the coda immediately after the conclusion and before `\appendix` in both.**
-Conclusion-to-coda adjacency is the stronger of the two signals the checklist
-cares about, and it keeps the reader's exit from the mathematics in the same place
-in all five papers. The alternative — coda after the appendices, immediately
-before the references — buries the map behind thirty-odd pages of appendix in
-Paper II. Author's call if this is wrong.
+Papers II and III have appendices, so the two readings diverge there. **Decided
+by the author: place the coda immediately after the conclusion and before
+`\appendix` in both.** Conclusion-to-coda adjacency is the stronger of the two
+signals the checklist cares about, and it keeps the reader's exit from the
+mathematics in the same place in all five papers. The rejected alternative —
+coda after the appendices, immediately before the references — would bury the map
+behind thirty-odd pages of appendix in Paper II.
 
 With Paper II's new conclusion written, the resulting order is uniform:
 last main section → Conclusion → coda → (appendices, where present) →
@@ -136,11 +136,26 @@ substantive error in the old closing clause: "the scattered shadows gather home"
 implied a coalescence that Paper V explicitly rules out, whereas "two shadows, a
 hidden twist between" carries the residual `C_2`-torsor.
 
-**One question for the author.** Line IV reads "from bare words, a plane rises",
-where Paper IV's subject is its *minimum* words — minimum-weight codewords, the
-paper's central technical term and the object named in its title. "Bare" drops
-that term. Implement as written, but confirm this is intended rather than a slip
-for "minimum words".
+**Line IV — resolved, with one proposal still open.** "Bare words" is the
+author's deliberate poetic loosening of "minimum words", not a slip. The author
+is open to a truer and equally short replacement.
+
+Proposal: **"from lightest words, a plane rises"**. In coding theory a
+codeword's *weight* is its number of nonzero positions, so Paper IV's minimum
+words are literally its minimum-weight words — the paper uses "minimum-weight"
+and weight-seven, weight-eight, weight-ten, and weight-twelve throughout. Plain
+English for "minimum weight" is therefore "lightest", which makes the line
+technically exact while reading as poetry rather than as jargon. It is also
+strictly more accurate than "bare", which suggests unadorned or, worse, "mere",
+whereas the point of the line is that these words are few and light and still
+sufficient. Dropping the article keeps the line parallel with "from deep holes"
+in line I.
+
+Second and third choices: "from least words, a plane rises" — "least" is the
+literal sense of minimum and carries an older, plainer register; and "from sparse
+words, a plane rises", which ties the line to the programme title *Rigidity from
+Sparse Shadows* at the cost of spending that word inside the poem. Use "bare
+words" as written if the author declines all three.
 
 ## 4. Programme map changes
 
@@ -155,17 +170,16 @@ for "minimum words".
   cluster labels.
 - **Paper V as hinge.** A slightly stronger border on the V node is acceptable if
   the TikZ makes it clean; do not over-style.
-- **Distinguish I from III.** Both currently read "conference companion", which
-  makes them look duplicated. Recommend the packet's own fallback pair, `I:
-  deep-hole conference companion` and `III: golden conference companion`. Both
-  adjectives are verbatim from those papers' titles — Paper I's is
-  *…its golden orientation from its deep-hole syndrome locus* and Paper III's is
-  *Golden Descent and Operator Realizations* — and keeping "companion" preserves
-  the existing scheme, in which all three source papers are companions of the
-  Paper V correspondence. Flagged for the author: "companion" is also Paper V's
-  technical term for the chordal cubic, so if that collision matters, the
-  paper-native alternative is `deep-hole conference source` and `golden-descent
-  conference source`.
+- **Distinguish I from III — decided.** Both currently read "conference
+  companion", which makes them look duplicated. Use `deep-hole conference
+  source` for Paper I and `golden-descent conference source` for Paper III.
+  Every word is already in use: "conference source" is Paper III's own phrase
+  from its introduction, "deep-hole" and "golden descent" are verbatim from the
+  two papers' titles, and Paper I uses "conference matrix" and "conference
+  identity" in its body. This also stops the map borrowing "companion", which
+  Paper V gives a precise technical sense — the chordal companion of the
+  conference cubic. Paper II's node keeps "chordal companion", where that sense
+  is the correct one.
 - **Targets.** Do not homogenize the Paper I and Paper V lower-right node texts
   if the mathematical targets genuinely differ; reconcile only if they do not.
 - **Independence sentence.** Add, in the coda prose rather than the caption: the
@@ -306,12 +320,15 @@ poem in any form: line V is deliberately worded to avoid implying coalescence.
   releases and Paper IV a manuscript-only pre-release, so none of this is visible
   publicly without forward releases. Paper V is already due one for the stale
   Zenodo record recorded in C918.
-- **Public identity.** Removing the Roman numeral and banner changes each paper's
-  first-page identity while the deposited Zenodo titles, the GitHub repository
-  names, and the `papers/summary/` table still carry the series label. The packet
-  keeps programme identity strong at repository and README level, so the summary
-  table stays as it is — but the next release will make the deposited titles and
-  the PDFs disagree. Decide at release time whether to restate the deposit titles.
+- **Public identity — no action needed.** All five `.zenodo.json` files in
+  `~/src/math-papers/` already carry bare titles with no series label, so
+  removing the banner introduces no divergence between the PDFs and the deposit
+  metadata; the deposits were never branded. The `papers/summary/` table keeps
+  its series labels, which is what the packet intends by holding programme
+  identity at repository and README level. One consequence worth carrying to
+  C918: because the deposit title is taken from `.zenodo.json` at release time,
+  a forward Paper V release will correct the live Zenodo record's stale title
+  automatically, with no manual metadata edit.
 - **Style guide.** `papers/style-guide.md` has no rule about series front matter.
   Add one recording the convention adopted here so the next paper in the series
   does not reinvent it.
