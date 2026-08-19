@@ -688,6 +688,33 @@ absent, 27 fragmentary, 29 conditional, 1 complete, with 47 machinery rows.
 Report:
 [`../2026-08-19-c910-six-axis-chart-split-presentation.md`](../2026-08-19-c910-six-axis-chart-split-presentation.md).
 
+**The relative six-axis source over its integral homology, 2026-08-19,
+authorities `e7f7ad4ea` and `fd04e5f1f`.**  The elliptic-scheme and isogeny
+placeholders of `lem:relative-six-axis` are replaced by an explicit integral
+first-homology layer in
+`GraphLattices/SixAxisSourcePolarization.lean`: the source polarization is the
+Kronecker product of `6I₅-J₅` with the standard alternating rank-two elliptic
+homology pairing, it is alternating with determinant `6⁸`, and a comparison
+matrix pulling a unimodular form back to it has determinant of absolute value
+`6⁴` and is injective — the lemma's degree and finiteness claims, which turn out
+to be determinant identities.  Modulo two the polarization reduces to the
+coordinate-sum map and modulo three to its negative, so both primary
+discriminants are computed as four copies of the rank-two module over the
+respective prime field, and `D₂ ≃ H₂ ⊗ E[2]` and `D₃ ≃ H₃ ⊗ E[3]` are now
+constructed from those kernels through supplied torsion coordinates instead of
+supplied outright.  The normalized pairings of the manuscript's displayed
+formula are proved: on an augmentation lift the six-coordinate form is six times
+the dot product, its half is the dot product modulo two, its third is the
+negative of the dot product modulo three, and the form against such a lift is
+divisible by six, so neither normalization depends on the lift.  Five `Prop`
+placeholders are gone and the scheme-theoretic content is concentrated in one
+dictionary proposition, that the displayed matrices are the ones induced by the
+relative geometry.  Three terminals were added and the snapshot moves to 293
+reviewer terminals with unchanged coverage counts.  Maximal isotropy of the
+isogeny kernel and the symplectic compatibility of both identifications remain
+open and need the discriminant group `Λ^#/Λ`.  Report:
+[`../2026-08-19-c910-relative-six-axis-homology-realization.md`](../2026-08-19-c910-relative-six-axis-homology-realization.md).
+
 ## Prioritized Lean backlog
 
 Work in this order unless a later literature or library dependency changes the
@@ -769,9 +796,18 @@ priority 2 below.
    quadratic extension or an abstract complete local ring with idempotent
    lifting, which is a separate piece of infrastructure rather than a matrix to
    write down.
-2. **Relative six-axis geometry.**  Replace opaque inputs by actual elliptic
-   schemes, quotient and inclusion maps, the relative isogeny, polarization
-   pullback, discriminant kernels, and continuous packet classifier.
+2. **Relative six-axis geometry — started 2026-08-19.**  The polarization
+   pullback, isogeny degree and finiteness, and both primary discriminant
+   kernels are now proved from an integral first-homology realization rather
+   than supplied, and the manuscript's normalized primary pairings are
+   formalized.  What remains: the discriminant group `Λ^#/Λ` of the source
+   polarization, with the order and isotropy count that makes the isogeny kernel
+   maximal isotropic; the symplectic compatibility of both primary
+   identifications with that discriminant pairing; equivariance of the
+   constructed identifications; the elliptic quotient and inclusion maps and the
+   continuous packet classifier; and, beyond Mathlib's present reach, semantics
+   for the assertion that the displayed matrices are induced by the relative
+   geometry.
 3. **Geometric cohomology realization.**  Identify the formal graph divisor
    lattice with the intermediate-Jacobian divisor lattice and transport the
    all-degree saturation theorem to the principal minimal class.
