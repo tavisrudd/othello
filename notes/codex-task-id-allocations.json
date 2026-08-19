@@ -3176,8 +3176,17 @@
       "last": 920,
       "purpose": "remove Hypothesis 5.7T for minimal rational ruled surface centers: Lean rank-four separability and collision trichotomy plus the Hirzebruch specialized quantum relation",
       "sequence": 353
+    },
+    {
+      "count": 1,
+      "first": 921,
+      "kind": "reservation",
+      "lane": "cubic-threefolds",
+      "last": 921,
+      "purpose": "decide whether the four-dimensional odd-degree factor of the A5-pencil intermediate Jacobian is a genus-four curve Jacobian",
+      "sequence": 354
     }
   ],
-  "next_id": 921,
+  "next_id": 922,
   "schema": "codex-task-id-allocations-v1"
 }
