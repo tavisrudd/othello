@@ -46,6 +46,7 @@ No manuscript or Lean source is part of this packet.
 | 39 | \(m=2\) receiver-overlap localization, crossed defect law, and neutral-slope sieve | notes/2026-08-20-c925-m2-receiver-overlap-localization.md |
 | 40 | resonant GKZ saturation, closed-support torsion, and overlap valuation | notes/2026-08-20-c925-resonant-gkz-saturation.md |
 | 41 | raw discrepancy obstruction and canonical completion of the unit overlap | notes/2026-08-20-c925-unit-overlap-canonical-completion.md |
+| 42 | quantum-Serre rank annihilation and the canonical-completion normal jet | notes/2026-08-20-c925-canonical-completion-normal-jet.md |
 | frontier | open experiments and provider targets | notes/2026-08-20-c925-exploration-frontier.md |
 
 ## Dependency spine
@@ -72,7 +73,7 @@ Modules 19--23 prove reusable categorical consequences:
 - universal center-null quotients and minimal sufficient shadows; and
 - the conditional Section 6 argument as a separate specialization.
 
-Modules 24--41 isolate the higher-stabilization frontier:
+Modules 24--42 isolate the higher-stabilization frontier:
 
 - irrationality on any unbounded stabilization set implies irrationality for
   every index;
@@ -186,7 +187,13 @@ theorem.  Module 41 proves that discrepancy forces this failure, then
 isolates five genuine unit-wall canonically completed quasi-symmetric
 \((1,1)\) signatures without total unimodularity: one for three ordered types
 and two for flip--flip.  Their extra coordinate still needs marked saturated
-descent through Module 40.
+descent through Module 40.  Module 42 proves that the raw quantum-Serre
+bridge has forced valuation one and kills the non-equivariant point/rank
+shadow.  Retaining the fibre-scaling parameter and its first normal jet
+restores that sparse row in a new jet-line consumer; the ordinary raw special
+fibre remains zero.  The open calculation is residual valuation zero after
+removing the universal factor, together with a typed identification of the
+jet transition.
 
 ### ExactTop provider
 

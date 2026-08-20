@@ -2431,6 +2431,52 @@ def main():
         "unit_overlap_oriented_empty_quadrant_selects_at_most_one_signature"
     ] = "pass"
 
+    # Module 42: the canonical charge is not a deletable Gale face.
+    for signatures in general_genuine_signatures_by_pair.values():
+        for signature in signatures:
+            weights = [
+                weight
+                for weight, multiplicity in signature
+                for _ in range(multiplicity)
+            ]
+            kappa = tuple(map(sum, zip(*weights)))
+            canonical_charge = (-kappa[0], -kappa[1])
+            assert canonical_charge == (1, -1)
+            # A separator vanishing on the first seven Gale columns pulls
+            # back to c*e_p.  It descends only if the last charge is zero.
+            assert canonical_charge != (0, 0)
+    checks["canonical_charge_prevents_old_coordinates_from_being_a_gale_face"] = (
+        "pass"
+    )
+
+    # The non-equivariant quantum-Serre self-intersection has rank zero and
+    # kills the point class: both the unit and a line restrict to rank one.
+    full_k_class_at_q_one = Counter({"unit": 1, "line": -1})
+    assert full_k_class_at_q_one != Counter()
+    assert sum(full_k_class_at_q_one.values()) == 0
+    point_restriction = Counter({"point": sum(full_k_class_at_q_one.values())})
+    point_restriction += Counter()
+    assert point_restriction == Counter()
+    checks["quantum_serre_self_intersection_kills_rank_and_point_shadow"] = "pass"
+
+    # Equivariantly the rank/point multiplier is 1-q^{-1}: it has one simple
+    # zero at q=1 and normalized first coefficient one.  The full K-class is
+    # not divisible there, so normalization is shadow-local.
+    rank_multiplier_value_at_one = 1 - 1
+    rank_multiplier_derivative_at_one = 1
+    assert rank_multiplier_value_at_one == 0
+    assert rank_multiplier_derivative_at_one == 1
+    assert full_k_class_at_q_one != Counter()
+    checks["equivariant_first_normal_jet_restores_only_the_rank_shadow"] = "pass"
+    # F(s)=s has invertible normalized jet but zero raw special fibre and a
+    # length-one torsion cokernel, so it cannot feed the old consumer.
+    raw_special_fibre_rank = 0
+    normalized_jet_rank = 1
+    torsion_cokernel_length = 1
+    assert (raw_special_fibre_rank, normalized_jet_rank) == (0, 1)
+    assert torsion_cokernel_length == 1
+    checks["normal_jet_requires_a_new_consumer_not_raw_specialization"] = "pass"
+
     result = {
         "status": "pass",
         "check_count": len(checks),

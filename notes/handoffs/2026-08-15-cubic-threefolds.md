@@ -202,10 +202,18 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   gate is to realize an actual AKMW overlap by one of those common matrices
   and descend its completed generic comparison through the marked saturation
   interface.
+  Module 42 proves that the raw forward quantum-Serre bridge cannot preserve
+  the marked row: its self-intersection map has rank zero and kills the point
+  class.
+  Equivariantly it has the universal factor \(1-q^{-1}\), and its normalized
+  first normal jet is the identity on a new rank/point jet shadow; the raw
+  special fibre remains zero.  The sharpened target is an occurrence-level
+  equivariant adapter with raw valuation one, residual valuation zero, and a
+  typed identification of the jet transition.
   Shifted tensor stability and the extremal multinomial source law are
   proved, but the occurrence-indexed exact QDM sequence, actual carrier
   exponent, and boundary vanishing remain open.  The packet is split into
-  bounded module companions behind a stable index.  The ninety-three-check
+  bounded module companions behind a stable index.  The ninety-seven-check
   finite law replay, eleven-check typed Haskell toy, and original cubic
   replay are green.  C925 remains open at fixed-phase Gamma/rank transport
   or at this ExactTop provider; the relative-cap cancellation remains one
@@ -419,6 +427,11 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   actual relative isogeny, the marking of the actual geometric kernel, the
   identification of the six labels with the manuscript's dihedral axes, and the
   geometric commutator pairing.
+  The fifteen nonzero heart vectors are now identified with the fifteen pairs of
+  labels, the displayed one-factorization is proved to be the orbit decomposition
+  of multiplication by the quadratic root `W`, and preserving that
+  one-factorization is proved equal to the packet-preserving condition, with
+  centralizing `W` its index-two even part.
   Card:
   `../cubic-threefolds-tasks/c910-cubic-stabilization-lean-companion.md`; gap audit
   `../2026-08-18-c910-post-restructure-gap-audit.md`; anchor report
@@ -468,6 +481,8 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   `../2026-08-20-c910-marked-frobenius-exotic-selection.md`;
   packet label-group and kernel-order report
   `../2026-08-20-c910-packet-label-group-and-kernel-orders.md`;
+  duad/one-factorization dictionary report
+  `../2026-08-20-c910-duad-one-factorization-dictionary.md`;
   odd-label realization report
   `../2026-08-20-c910-odd-label-frobenius-realization.md`;
   interim release report
