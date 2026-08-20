@@ -1,7 +1,7 @@
 # Work Summary — Week-by-Week Timeline
 
 Companion to [`2026-07-31-work-summary.md`](2026-07-31-work-summary.md) (the timeless scope report).
-Activity spans **2026-06-14 → 2026-08-12**, with quiet stretches Jun 28–30 and Jul 27.
+Activity spans **2026-06-14 → 2026-08-20**, with quiet stretches Jun 28–30, Jul 27, and Aug 16–17.
 This is the *chronological* view; the scope report is the *state* view.
 
 ## Content split between the two documents — binding rule
@@ -1088,6 +1088,115 @@ marking rather than absolute.
   demoted the proposed `V₁₄` equality to conditional nonvanishing pending comparison-locus,
   atom-transport, and full-atom upper-bound closure. No manuscript, Lean, mirror, or export edit was
   made.
+
+## Week 13 — Aug 13–16 · A note published, a second manuscript drafted, and the cubic work gets its own lane
+
+- **Aug 13 — C911 turns the Shen–Shoemaker repair into a published standalone note.** The
+  discrepancy-one flip correction left the epilogue's research body and became its own ten-page
+  manuscript at `papers/discrepancy-one-flips/`, with DOI `10.5281/zenodo.21924799`, Zenodo
+  metadata, and the standard AI disclosure. It passed an independent cold read after explicit
+  nonsplit-descent and formal-endpoint repairs, and the clean paper and portfolio-summary
+  repositories were synchronized without pushing. This is the first externally released item to come
+  out of the stabilization programme.
+
+- **Aug 13 — C907 runs its longest negative chain.** Dozens of dated gate passes on the tropical,
+  Rees, carrier, and Stokes routes to `m = 2`, most of them closing a route rather than opening one:
+  the marked ratio fan obstruction, the nodal Clifford carrier, the del Pezzo primitive-monodromy
+  obstruction, the Picard–Lefschetz stationary-Rees countermodel, the punctual Fourier corner no-go.
+  Two `ej`+`tt` closeout passes and a hostile audit ran inside the same day. The task's own cold-read
+  cluster on the Gamma point row — four independent reads plus a synthesis, a reviewer dossier, and
+  a theorem-package red team — fed straight into the next item.
+
+- **Aug 13–14 — the all-`m` manuscript is drafted from that package.** The Gamma rank-functional
+  draft was revised after cold review, sharpened into a point-row theorem package, and became
+  `papers/cubic-stabilization-irrationality/`, retitled *Gamma Point Rows under Quantum Wall
+  Crossing and a Criterion for Stable Irrationality*. C913 was allocated to referee-revise it, and
+  the work ran through Claude Fable referee reports with a recorded disposition, four independent
+  cold reads (birational-quantum, counting-failure, cubic-endpoint, derived-gauged), and source
+  extractions from Włodarczyk and Woodward that were read at the source rather than quoted from the
+  draft. C914 opened alongside it on where Roulleau's pencil sits relative to the known loci,
+  starting from an explicit Fermat-membership computation.
+
+- **Aug 15 — the `cubic-threefolds` lane splits off from `clebsch`.** C907, C908, C909, C910, C911
+  and C914 were re-pegged to the new lane, and C912 and C913 were pegged there by author
+  instruction, taking both stabilization manuscripts with them. The `clebsch` lane kept the five
+  numbered papers. The same day carried the heaviest single audit chain of the week, on C912's
+  Hypothesis 4.7H: a red team with per-item provenance, an evidence ledger, a source-exactness audit
+  of every imported claim, a normalization statement reducing the hypothesis to two named
+  obligations, then a hostile referee pass that **withdrew** the base-change transport argument and
+  logged the roof and gauge-uniqueness defects. The frame-transport memo was split, superseded routes
+  archived, and the unconditional `X × P¹` computation promoted to its own section. An independent
+  verification of the rank-two atomic residue proof found the mechanism correct but the parity ranks
+  resting on an unproved splitting assertion in the source; horizontality of the Poincaré pairing
+  over the Novikov ring was then proved directly, discharging the one imported-but-unavailable step.
+
+- **Aug 16 — the atomic restructure, and an erratum sent upstream.** The cubic zero-atom splitting
+  objection turned out to be repairable: the discriminant of the Euler characteristic polynomial
+  satisfies `X_s(disc) = c_s·disc` on any regular F-manifold, re-run formally over the Novikov base
+  rather than imported, with base integrality by Conrad's identity principle. A source re-read of the
+  KKPY erratum items withdrew one scope objection, confirmed the matrix error is derivable from their
+  own Givental equation, and produced a machine-checked scalar-ODE follow-up validated against their
+  own worked quadric example. After this the epilogue's Section 4 gives an unconditional Hodge-atom
+  route to the one-stabilization theorem, and only two hypotheses remain, carrying the Section 5
+  framed refinement. Elsewhere the same day: the `ame-lu` lane applied a user-supplied external
+  referee edit packet in full — all twelve anchors matched verbatim against the exact PDF rendering
+  the reviewer read — and the `reed-solomon` lane was routed to C915 while its referee package
+  finishes independent dependency, hostile, and primary-source audits.
+
+## Week 13 continues — Aug 17–20 · Five closures, a prior-art catch, and the node count proved structurally
+
+- **Aug 17 — C916 lands the Paper III referee corrections.** The author's frozen correction
+  specification was applied to `papers/clebsch-passages/`: Hitchin's degenerate divisor and
+  degree-ten invariant introduced without a normalization, the reduced-branch-cycle and `xyz`-fibre
+  arguments rebuilt on the compact trichotomy instead of a count of real regular configurations, the
+  height-one normality lemma added, and the two-regular locus restated as a principal open set. Every
+  imported Hitchin statement was verified against the cached source; exactly one statement-identity
+  hash moved; the standalone export was synchronized without pushing. Two items were excluded by
+  author instruction.
+
+- **Aug 18 — C912 closes and three tasks land on top of it.** All twelve C912 work packages passed,
+  with independent quantum, geometry, and general cold reads plus copy-edit and detritus audits all
+  GO. C917 then landed the author's positioning specification in the introduction — why the direct
+  Clemens–Griffiths mechanism gives no contradiction after one stabilization, and where the result
+  sits relative to Guéré and Benedetti–Fay–Guéré–Manivel–Perrin, whose criterion assumes `b₃ = 0` and
+  so does not reach `X × P¹` — with both sources verified in the shared literature cache. C920 proved
+  specialized primitive-sixth vanishing for every Hirzebruch surface, narrowing the divisor-tagging
+  hypothesis to surface centres that are neither minimal nor geometrically ruled, behind four Lean
+  modules, an evidence bundle with six independent cross-checks, and three rounds of referee cold
+  reads. C918 repaired Paper V's links in the published summary index and traced the series epigraph's
+  disappearance to a single deliberate anti-over-branding commit. C910's Lean companion advanced
+  through the atom-route anchor, the small even block reduction, the six-point hearts, and the
+  rank-two residue rigidity algebra.
+
+- **Aug 19 — an audit catches uncited prior art, and two computations are replaced by proofs.**
+  C922 re-derived every quantum presentation, Euler matrix, quartic, and discriminant behind C920's
+  manuscript edits independently and found the mathematics correct — then found that the two
+  Hirzebruch presentations and the deformation route producing them are published as Cotti,
+  Mem. Eur. Math. Soc. 2 (2022), Chapter 9, uncited because no literature search had been run, and
+  that one round-three referee blocker reported as applied never was. All seven findings were
+  repaired, and the self-re-review corrected two of its own overstatements before commit. C923
+  replaced the Gröbner elimination behind the pencil's Eckardt proposition with a proof from complex
+  reflection groups, leaving the manuscript with exactly one premise-level computation. C924 read the
+  epilogue, the direct-QDM packet, and every load-bearing primary source, and found one real defect:
+  a claimed embedding of the full fibre-variable completion into the opposite Laurent completion does
+  not exist, and the comparison must run through Iritani–Koto's common faithful ring. C919 de-branded
+  all five Clebsch paper fronts and moved the series apparatus into post-conclusion codas, recording
+  the convention in the style guide. C880 narrowed the nonadaptive query-complexity bracket by a
+  factor of `8/3` and then measured which end is loose. C921 closed the genus-four branch of the
+  residual Voisin gate negatively and corrected C914's description of the four-dimensional factor.
+
+- **Aug 20 — the conference node count is proved twice, and the second proof wins.** C926 certified
+  over `F₁₁` that the singular scheme of the `A₅`-invariant conference triangle cubic is exactly six
+  reduced ordinary nodes, by a Gröbner dimension-and-degree computation closed against six distinct
+  rational singular points with rank-four Hessians, with the chordal sheet cubic as a control. C927
+  then proved the same count without a computer, determinantally and in every characteristic outside
+  `{2,3,5}` in which five is a square, superseding C926's Gröbner step as the authority while keeping
+  it as an independent replay. Both left the manuscript unedited by user instruction. The same day,
+  C816 ran its first review gate — a theorem-level red team of Paper III's operator section that
+  confirmed every mathematical assertion and returned two proof-level repairs — C910 formalized the
+  odd-label Frobenius marking that selects the exotic member, and C925 continued the modular
+  direct-QDM proof packet, whose `m = 2` ambiguity is now localized to consecutive discrepant
+  receiver overlaps.
 
 ---
 

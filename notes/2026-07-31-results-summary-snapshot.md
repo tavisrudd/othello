@@ -1,6 +1,6 @@
 # Portfolio results summary snapshot
 
-**Date:** 2026-08-12
+**Date:** 2026-08-20
 
 A self-contained summary of the major results of an ongoing programme in
 finite geometry, coding theory, and combinatorial game theory. It is written
@@ -41,11 +41,13 @@ The results are grouped as follows.
 5. *The Golden Companion Correspondence* — the marked chordal member of the
    same \(A_5\)-invariant cubic pencil as the conference member in sections 1
    and 3, with an exact oriented return to the six-axis carrier.
-6. The geometric epilogue programme — the exotic cubic realization of the
-   golden carrier. Every smooth \(A_5\)-invariant cubic threefold in Roulleau's
-   pencil is universally \(CH_0\)-trivial, while its product with a projective
-   line is irrational. This is quarantined research feeding a planned
-   unnumbered epilogue to the numbered series, not a manuscript of its own.
+6. The cubic-threefold stabilization programme — the exotic cubic realization
+   of the golden carrier, now carried by two of its own manuscripts. For every
+   smooth complex cubic threefold \(X\), the product \(X\times\mathbf P^1\) is
+   irrational; and every smooth \(A_5\)-invariant cubic threefold in Roulleau's
+   pencil is universally \(CH_0\)-trivial. The one-stabilization manuscript is
+   an unnumbered epilogue to the numbered series; a second manuscript states
+   the all-\(m\) claim conditionally.
 7. The golden conference operator source programme — one marked order-six
    conference operator and the cubic, polar, determinantal, fermionic,
    anomaly, and lattice shadows it generates. This is a source-development
@@ -69,10 +71,14 @@ The results are grouped as follows.
 14. *The Clebsch Schur--Sarkisov spine* — the conic deep-hole port
     Schur-generates the two outer Fano modules, while the conic-link code is
     their defect-two jet modification.
-15. Unassigned adjacent results: a residual-multiplier exclusion for Hadamard
-    matrices of order 668, and a ladder of binary codes along the exceptional
-    root systems that is proved but closed as a publication route.
-16. Two open programmes with substantial partial results: complete arcs of
+15. *The discrepancy-one case of the Shen--Shoemaker extremal flip spectrum* —
+    a short standalone correction note that supplies the two steps their proof
+    chain omits, so their conclusions cover every codimension-two blow-up.
+16. Unassigned adjacent results: a residual-multiplier exclusion for Hadamard
+    matrices of order 668, the query complexity of reconstructing an aligned
+    design, and a ladder of binary codes along the exceptional root systems
+    that is proved but closed as a publication route.
+17. Two open programmes with substantial partial results: complete arcs of
     square-root size relative to a conic, and the outcome of the cap game on
     odd projective planes.
 
@@ -1083,8 +1089,8 @@ heart \(\operatorname{Aug}(\mathbf F_2^6)/\langle\mathbf1\rangle\), and
 \(\varphi\mapsto1-\varphi\) and \(\omega\mapsto\omega^2\), which is exactly how
 the outer coset of \(N_{S_6}(A_5)/A_5\) acts. So the golden orientation torsor
 this series reconstructs *is* the exotic \(\mathbf F_4\)-gluing torsor
-\(\{\omega,\omega^2\}\). That identification is the hinge the geometric epilogue
-below turns on.
+\(\{\omega,\omega^2\}\). That identification is the hinge the stabilization
+programme below turns on.
 
 There is a further proved arithmetic consequence that is not yet in the paper.
 The extension-field census is the inertia stratification of the tame
@@ -1096,15 +1102,19 @@ certificate are closed. The higher relative theorem over a localization of
 \(\mathbb Z[\sqrt5]\) is also open; its obstruction is integral good reduction,
 not another finite-field census.
 
-## The geometric epilogue programme: the exotic cubic realization
+## The cubic-threefold stabilization programme: the exotic cubic realization
 
-Nothing in this section is in any manuscript. It is a quarantined research body
-built after the fifth paper was frozen, aimed at an unnumbered epilogue —
-working title *Irrationality after one stabilization of universally
-\(CH_0\)-trivial cubic threefolds* — that would import the marked structural
-bridge above and realize the golden carrier geometrically. It is deliberately
-not a sixth numbered paper, and the frozen manuscripts are unchanged by any of
-it. Priority closure is not complete for most of what follows.
+This began as quarantined research built after the fifth paper was frozen, and
+it now has two manuscripts of its own. The **one-stabilization epilogue** proves
+that \(X\times\mathbf P^1\) is irrational for every smooth complex cubic
+threefold \(X\), and carries the universal \(CH_0\)-triviality of Roulleau's
+pencil alongside it; it is an unnumbered epilogue to the numbered series and
+deliberately not a sixth numbered paper. A **second manuscript** states the
+all-\(m\) claim, that \(X\times\mathbf P^m\) is irrational for every \(m\), and
+is explicitly conditional on two stated hypotheses about a marked continuation
+across the thresholds of one equivariant cobordism. Both manuscripts are
+complete drafts under referee-style revision; neither has been submitted, and
+priority closure is not complete for the research material around them.
 
 ### Which cubics, and why the exotic sheet is forced
 
@@ -1207,37 +1217,124 @@ odd primes, so the live classification is by \(p\)-typical nilpotent height.
 
 ### One-step stabilization: the irrationality half
 
-The companion half concerns the quantum-monodromy atom of a cubic threefold,
-where "quantum" refers to quantum cohomology and the computations are classical
-and exact. At the small quantum point, the odd \(H^3\)-summand is
-quantum-trivial and Cai's even calculation gives exactly \(\nu_6=2\). The
-equality persists on a connected reduced unramified parity-fixed spectral
-component once the required formal-isomonodromy and atom-comparison transport is
-supplied. With the KKPYY blow-up/projective-bundle identities and the
-low-dimensional spectral lemma in force, a nef-canonical surface block can only
-have fractional exponents \(0\) or \(1/2\), and every weak-factorization centre
-in a fourfold has dimension at most two, so the cubic block cannot be cancelled.
-Thus **\(X\times\mathbf P^1\) is irrational for every smooth cubic threefold**
-under that stated quantum package. The bridge invariant is the additive
-multiplicity \(\nu_6\) of primitive sixth-root formal-monodromy eigenvalues,
-not a Boolean flag; the projective-bundle formula carries it into the product
-with coefficient two, and every admissible centre has \(\nu_6=0\).
+The companion half concerns the quantum cohomology of a cubic threefold; the
+computations are classical and exact. The argument that carries the headline is
+the **atomic route**, and it is unconditional. Working inside the ordinary,
+non-enhanced Hodge-atom package of Katzarkov, Kontsevich, Pantev and Yu, one
+isolates the atom carried by the double zero packet of the cubic small quantum
+connection and attaches to it a rank-two *atomic residue discriminant*
+\(\delta^\sharp\), defined through a canonical elementary modification of the
+even rank-two block. For the cubic atom \(\delta^\sharp=4/9\). The only curve
+whose atom could carry the same Hodge representation has genus five, and there
+\(\delta^\sharp=0\); surface representatives are excluded by parity ranks
+together with the classification of minimal surfaces. The ordinary Hodge-atom
+non-rationality criterion then obstructs rationality after one stabilization,
+so **\(X\times\mathbf P^1\) is irrational for every smooth complex cubic
+threefold \(X\)**. Kuznetsov's birational correspondence extends the same
+conclusion to every smooth prime Fano threefold of genus eight.
 
-Full stable irrationality is **not** proved and starts to fail this argument at
-\(m=2\), where cubic self-carrier centres enter. A source-level audit also
-settled what the ambient object is: the full reduced cubic quantum module is the
-irreducible hypergeometric module \(H(0,0,0,0;1/3,2/3)\) with local formal ranks
-\(1,1,2\), so globalizing the rank-two block as a proper subobject is dead,
-while the local sectorial Stokes lift has ordered ranks \(1,2,1\) and isolates
-the zero-exponential rank-two atom canonically. The remaining gates are analytic
-— a \(\Gamma\)-integral, Stokes-filtered blow-up theorem composable through weak
-factorization — rather than combinatorial.
+The finer invariant \(\nu_6\) — the number of primitive-sixth framed
+formal-monodromy eigenvalues of the numerical small even quantum connection —
+gives a second, conditional proof of the same theorem. Here \(\nu_6(X)=2\) and
+\(\nu_6(X\times\mathbf P^1)=4\); the product formula is unconditional, while the
+blow-up and projective-bundle formulas each rest on one stated hypothesis, on
+the reconstruction tail and on divisor-tagging specialization respectively.
+Under those two hypotheses \(\nu_6\) is birationally invariant through dimension
+four. The divisor-tagging hypothesis has since been narrowed: specialized
+primitive-sixth vanishing is now proved for every Hirzebruch surface, by one
+deformation to index at most one, an explicit rank-four Euler quartic and its
+discriminant, and a non-collision argument for the centre specializations, with
+the quadric surface handled instead by the Gromov–Witten product formula. What
+is left of that hypothesis is a single named obstruction — a support or
+base-change statement for the blow-up comparison after external specialization —
+and it is now invoked only for surface centres that are neither minimal nor
+geometrically ruled.
+
+Full stable irrationality is **not** proved by the epilogue, and the
+\(\nu_6\) argument first fails at \(m=2\), where cubic self-carrier centres
+enter. A source-level audit settled what the ambient object is: the full reduced
+cubic quantum module is the irreducible hypergeometric module
+\(H(0,0,0,0;1/3,2/3)\) with local formal ranks \(1,1,2\), so globalizing the
+rank-two block as a proper subobject is dead, while the local sectorial Stokes
+lift has ordered ranks \(1,2,1\) and isolates the zero-exponential rank-two atom
+canonically.
+
+### The separation, and where the pencil sits
 
 Together the two halves give an exact contrast for every smooth member of the
 family: \(X\) is universally \(CH_0\)-trivial while \(X\times\mathbf P^1\) is
 irrational. That is a strong separation between universal \(CH_0\)-triviality
 and one-step stable rationality, and it is explicitly not a claim of stable
 irrationality.
+
+The separation is genuinely new for this pencil, and both natural ways of
+dismissing it are closed. The pencil is not covered by Colliot-Thélène's
+separated-variable criterion at any moduli point but one, and that exception is
+the Fermat point — the qualifier is now a single named member rather than "all
+but finitely many". It is likewise outside the coprime-degree locus of Yang, Yu
+and Zhu for all but finitely many members, because every member of their normal
+form carries an Eckardt point while the generic pencil member carries none. The
+Eckardt statement is proved from complex reflection groups rather than by
+elimination: an Eckardt point of a smooth cubic threefold is the centre of a
+reflection fixing the defining form; when the automorphism group acts
+irreducibly those reflections generate an irreducible rank-five complex
+reflection group; and three is an invariant degree of only \(W(A_5)\), giving the
+singular Segre cubic threefold, and \(G(3,p,5)\), giving the Fermat cubic
+threefold. Exactly two members of the pencil carry Eckardt points, interchanged
+by the normalizer of \(A_5\), each with exactly thirty of them, and both are the
+Fermat cubic threefold. Voisin's criterion is unreachable by any
+elliptic-product route: with the exotic two-primary gluing kernel the only
+odd-degree product factorization of the intermediate Jacobian is \(1+4\),
+realized at odd index twenty-five, so the pencil is not known to lie in a Voisin
+component. The residual question there — whether the four-dimensional
+odd-degree factor is a Jacobian — is closed negatively in genus four for all but
+finitely many members, leaving only a genus-five route through an isogeny of
+degree greater than one.
+
+### The all-\(m\) manuscript, stated conditionally
+
+The second manuscript asks when vanishing of the flat covector that the Gamma
+integral structure attaches to the class of a point is a birational invariant,
+and reduces that question to one marked continuation problem at each threshold
+of a single equivariant cobordism. Granting that continuation — a
+gauged-admissible marked Włodarczyk completion together with two stated marked
+threshold-compatibility hypotheses, at every finite Artin truncation —
+\(X\times\mathbf P^m\) is irrational for every smooth complex cubic threefold and
+every \(m\ge0\). The endpoint contrast is unconditional and the transport
+mechanism is proved under the gauged-admissibility conditions; what is not
+proved is the comparison across thresholds, an isomorphism of the two adjacent
+cyclic Rees \(z\)-modules intertwining formal monodromy and carrying the marked
+row. A marked Gamma/window continuation conjecture, new to that paper, would
+imply them.
+
+An independent audit of an alternative *direct* route through the ordinary
+quantum \(D\)-module confirms it proves the one-stabilization theorem after one
+local repair: the intrinsic and asymptotic projective-bundle modules must be
+compared inside Iritani and Koto's common faithful ring, not through a
+nonexistent embedding of one completion into the other. That route compresses
+the input to even rank two, nonzero nilpotent, and nonzero modified-residue
+discriminant.
+
+### Formal verification of the epilogue
+
+The one-stabilization epilogue has a Lean companion bundled with it, held to the
+same standard as the numbered series: no `sorry`, no compiled-evaluation axiom
+at any terminal, and no project axiom standing in for a proof. The headline is
+anchored to the atomic route, and the machinery underneath it is kernel-checked:
+the rank-two residue rigidity algebra, the normalized Sylvester gauge shared by
+the cubic block reduction and the spectral-factor gluing, block diagonality of a
+pairing on separated spectral factors, the order comparison that selects the
+exotic gluing, invariance of the residue discriminant, the all-degree graph
+saturation theorem fed directly by the six-axis local chart, and the
+unconditional half of the genus-eight corollary. The discriminant group of the
+source polarization is built with its \(\mathbf Q/\mathbf Z\)-valued pairing and
+splits at two and at three, and the selection of the exotic member is
+formalized as Frobenius marking: scaling by a non-square scalar is an odd
+permutation of the six labels whose action on the discriminant heart is exactly
+the transported Frobenius involution, so no group-invariance hypothesis can
+replace the marking. What remains supplied rather than proved is the
+identification of that matrix-level equivariance with the equivariance of an
+actual relative isogeny, and the marking of the actual geometric kernel.
 
 ## The golden conference operator source programme
 
@@ -2949,6 +3046,38 @@ rows and realizes the definition-field tower
 \(\mathbf Q(\sqrt5)\subset\mathbf Q(\zeta_5)\), which is not a monodromy
 trace-field statement.
 
+## *Standard Flips of Discrepancy One: Extremal \(J\)-Normalization*
+
+This is a short standalone correction note, published locally with a DOI, and
+the only externally released item to come out of the stabilization programme so
+far. Shen and Shoemaker compute the extremal quantum spectrum of a standard flip
+and show that the Gamma-class decomposition attached to the
+Belmans–Fu–Raedschelders semiorthogonal decomposition is a decomposition into
+asymptotic classes. Their identification of an explicit hypergeometric series
+with the extremal \(J\)-function of the local model assumes \(r-s>1\), and their
+Barnes asymptotic expansion is applied under the same inequality, while several
+of their later theorems are stated in a range that includes blow-ups. The
+printed proof chain therefore does not reach the discrepancy-one case
+\(r=s+1\), \(s\ge1\), which contains **every codimension-two blow-up**.
+
+The note supplies the two missing steps. First, the degree-\(d\) summand of
+their series has \(z\)-order at most \(1-s-(r-s)d\), so at \(r=s+1\), \(s\ge1\)
+it is at most \(-1\) for every \(d\ge1\); the series is therefore already
+\(J\)-normalized with no mirror-map correction, and uniqueness of the
+\(J\)-slice of Givental's cone identifies it with the extremal \(J\)-function.
+The cone membership this uses is proved rather than quoted: for projective
+bundles it follows from Brown's toric-fibration theorem with the twisted theory
+of Coates and Givental, and the general case from a flag-bundle pullback and a
+deformation to the associated graded, none of which restricts \(r-s\). The only
+remaining formal failure is the degenerate endpoint \((r,s)=(1,0)\), whose point
+fibres contain no extremal line. Second, at \(\nu=r-s=1\) the printed Barnes
+sector is unavailable, because their own aperture theorem holds with the wider
+opening only for \(\nu>1\); the correct half-width sector still meets the
+neighbouring sector in an open sector of opening \(2\pi\) containing both the
+nonzero-eigenvalue ray and the tame ray. With those two inputs repaired, their
+conclusions extend to every standard flip of discrepancy one. Nothing else in
+their argument is altered.
+
 ## Unassigned adjacent results
 
 ### Residual multipliers for Hadamard order 668
@@ -3079,6 +3208,45 @@ located predecessor for this particular construction, but an adjacent
 code-conformal-field-theory literature builds stabilizer codes from \(E_8\) root
 lattices, so no blanket absence claim is available there and that literature must
 be cited rather than treated as unrelated.
+
+### The query complexity of reconstructing an aligned design
+
+The third paper proves that aligned four-sets determine a two-graph. That
+raises a quantitative question the paper does not ask: how many alignment tests
+does a reconstruction actually cost? A two-graph on \(n\) points carries
+\(D=\binom{n-1}{2}\) bits, a 4-set is *aligned* when its four triples carry
+equal \(\tau\), and a family of 4-sets is *separating* when the answers
+determine the two-graph.
+
+Adaptively the constant is exact. An explicit decoder reads the two-graph in
+\(\binom n2+n-4\) alignment tests on every instance, against a counting lower
+bound of \(\binom n2-n\), so the adaptive constant is exactly \(1/2\) and the
+coherence restriction costs nothing to leading order. Nonadaptively the
+constant is bracketed rather than known,
+and the bracket has been narrowed by a factor of \(8/3\) from above, to
+
+\[
+  0.616\,n^2\;\le\;\mathrm{minimum}(n)\;\le\;\tfrac98n^2+O(n),
+\]
+
+replacing an earlier upper bound of \(3n^2-23n+45\). The upper bound is a
+proved construction, not a search: nonadaptivity constrains the queries and not
+the decoding, so a separating family may be built as a base on seven points plus
+one attachment layer per further point, and the layer is assembled from blocks
+of four points costing nine tests each. Correctness is an attachment lemma plus
+a composition argument, resting on the exhaustively computed attachment
+constants \(g(5)=9\) and \(g(6)=12\), each obtained from three independent
+solvers, with \(g(7)=15\) exact and \(g(8)\) bracketed between 15 and 17.
+
+Which end of the bracket is loose is settled in favour of the floor. A star-flip
+argument gives \(\mathrm{minimum}(n)\ge\lceil n\,g(n-1)/4\rceil\), which already
+beats the entropy floor wherever \(g\) is known exactly — 21 against 18 at seven
+points, 30 against 25 at eight — but it caps out there, and the two natural
+lower-bound routes, the polynomial method and a covering argument, are both
+closed for stated reasons. Every exactly measured family costs between 2.25 and
+3 alignment tests per recovered bit while the entropy floor licenses 1.2326, so
+the remaining mechanism worth trying is a bound from the distance distribution of
+the alignment code itself. None of this is in any manuscript.
 
 ## Two open programmes
 
@@ -3244,7 +3412,17 @@ are vacuous because a natural number can encode the whole residual.
   determinant-versus-permanent boundary; the released versions one and two are
   unchanged and keep the earlier title. The strongest bridge is explicitly
   relative to a marked datum with a complete ambiguity ledger; artifact locator
-  and author metadata remain.
+  and author metadata remain. A referee correction pass has since replaced the
+  count of real regular configurations by the compact incidence trichotomy in
+  both the reduced-branch-cycle and \(xyz\)-fibre arguments, introduced
+  Hitchin's degenerate divisor and degree-ten invariant without a normalization,
+  added the height-one normality lemma that fixes the Stein algebra's dimension,
+  and restated the two-regular locus as a principal open set. A theorem-level
+  red team of the operator section then found every mathematical assertion
+  correct, with two proof-level repairs owed before the next cold read: a
+  tangent-space dimension asserted where the text claims it is forced, and a
+  local rigidity conclusion attributed to the constant-rank theorem without its
+  hypothesis being established.
 - ***Minimum-word reconstruction of \(\operatorname{PG}(2,13)\) from a binary
   conic code*** (formerly *A binary [78,36,12] code from the passant lines of a
   conic over \(\mathbb F_{13}\)*): minimum distance, the 364-word minimum layer
@@ -3269,24 +3447,52 @@ are vacuous because a natural number can encode the whole residual.
   normalization–residue theorem on the \(D_6\) weight lattice is now proved and
   assigned as the paper's closing structural theorem: the golden orientation
   torsor is canonically the exotic \(\mathbf F_4\)-gluing torsor, through the
-  unique nonsplit \(\mathbf F_4A_5\)-extension.
-- **The geometric epilogue programme:** quarantined and in no manuscript. Every
-  smooth \(A_5\)-invariant cubic threefold in Roulleau's pencil is proved
-  universally \(CH_0\)-trivial, with the integral Hodge conjecture for one-cycles
-  on its intermediate Jacobian, and its product with a projective line is proved
-  irrational — a strong separation between universal \(CH_0\)-triviality and
-  one-step stable rationality, and not a claim of stable irrationality. The
-  exotic sheet is forced by strong Torelli and matches the golden orientation
-  torsor. The single surviving smooth-family crown is whether the relative
-  Abel–Jacobi lift has odd index, an exact one-versus-two dichotomy; every cheap
-  route to it is closed by an exact calculation. Two uniform theorems were
-  extracted — the Jordan-scalar minimal-class theorem and the prime-by-prime
-  boundary on gluing defects — and priority closure is still open for most of it.
-  A new integration blueprint proposes a low-dimensional birational
-  \(\nu_6\)-invariance lemma and a genus-eight \(V_{14}\) application, but neither
-  is yet an epilogue claim: the latter is only conditionally nonvanishing until
-  its all-smooth comparison locus, atom transport, and full-atom upper bound
-  are source-closed.
+  unique nonsplit \(\mathbf F_4A_5\)-extension. The paper's six-node count for
+  the conference triangle cubic is now a structural theorem rather than a
+  characteristic-zero computation: the cubic is the determinant of the
+  three-by-three matrix of linear forms built from the coordinate functionals on
+  the two eigenspaces of the conference matrix, its singular locus is the
+  rank-at-most-one locus of that matrix, and that locus is exactly the six
+  coordinate tensors — so the cubic has exactly six ordinary nodes in every
+  characteristic outside \(\{2,3,5\}\) in which five is a square. This recasts
+  the paper's geometric contrast as Segre against Veronese and supersedes an
+  earlier Gröbner certification over \(\mathbf F_{11}\), which survives as an
+  independent replay.
+- **The cubic-threefold stabilization programme:** now two manuscripts rather
+  than quarantined research. The one-stabilization epilogue proves
+  unconditionally that \(X\times\mathbf P^1\) is irrational for every smooth
+  complex cubic threefold, through the ordinary Hodge-atom package and a
+  rank-two atomic residue discriminant equal to \(4/9\) on the cubic atom, and
+  extends the conclusion to every smooth prime Fano threefold of genus eight by
+  Kuznetsov's correspondence. It carries alongside it the proof that every
+  smooth \(A_5\)-invariant cubic threefold in Roulleau's pencil is universally
+  \(CH_0\)-trivial, with the integral Hodge conjecture for one-cycles on its
+  intermediate Jacobian — a strong separation between universal
+  \(CH_0\)-triviality and one-step stable rationality, and not a claim of stable
+  irrationality. The separation is not reachable by the known criteria: every
+  moduli point of the pencil but the Fermat point lies outside
+  Colliot-Thélène's separated-variable locus, all but finitely many members lie
+  outside the Yang–Yu–Zhu coprime-degree locus because Eckardt points separate
+  them, and no elliptic-product route reaches Voisin's criterion. The second
+  manuscript states the all-\(m\) claim conditionally, on a marked continuation
+  across the thresholds of one equivariant cobordism; the endpoint contrast
+  there is unconditional and the transport is proved, but the threshold
+  comparison is not. The finer invariant \(\nu_6\) gives a second proof of the
+  one-stabilization theorem under two stated hypotheses, one of which is now
+  needed only for surface centres that are neither minimal nor geometrically
+  ruled. A Lean companion is bundled with the epilogue and anchored to the
+  atomic route. On the cycle side the surviving crown is unchanged — whether the
+  relative Abel–Jacobi lift has odd index, an exact one-versus-two dichotomy,
+  with every cheap route closed by exact calculation — and two uniform theorems
+  extracted along the way, the Jordan-scalar minimal-class theorem and the
+  prime-by-prime boundary on gluing defects, still lack priority closure.
+- ***Standard Flips of Discrepancy One:*** a short standalone correction note,
+  published locally with a DOI, supplying the two steps Shen and Shoemaker's
+  proof chain omits — the \(J\)-normalization of the extremal hypergeometric
+  series at \(r=s+1\), proved through cone membership rather than quoted, and
+  the corrected Barnes aperture at discrepancy one — so that their conclusions
+  reach every codimension-two blow-up. An independent cold read passed after
+  explicit nonsplit-descent and formal-endpoint repairs.
 - **The golden conference operator source programme:** mathematics proved and
   frozen across the cubic, polar, determinantal, pure-spinor, Boolean,
   measurement, fermionic, anomaly, Clifford, and lattice shadows, with the
@@ -3324,6 +3530,11 @@ are vacuous because a natural number can encode the whole residual.
   companion. The marginal-to-rigidity chain and coset/syndrome dictionary are
   formally verified; encoder and exact transversal-group consequences remain
   human proofs. Uniform semilinear reconstruction is false even at zero error.
+  An external referee edit packet has been applied in full: a phase-sign and
+  empty-complement correction in the quadratic-growth corollary, the missing
+  \(c=0\) branch of the rounding lemma, explicit traceless local logarithms in
+  the main rounding theorem, a direct binary-MDS argument replacing an appeal to
+  the general case, and five attribution and bibliography corrections.
 - ***Frobenius-equivariant pair extension and robust repair of eight-arcs:*** foundational
   theorem chain and the exact minimum for \(PG(2,25)\) proved; the
   orbit-replacement graph remains future work.
@@ -3353,7 +3564,12 @@ are vacuous because a natural number can encode the whole residual.
 - **Unassigned adjacent results:** \(25\) of the \(30\) mod-\(3\)-compatible
   fixed common multiplier subgroups for Hadamard order \(668\) are impossible,
   by a nine-compression congruence and a shift-\(111\) orbit lock; five cases
-  remain, no matrix is constructed, and the order remains open. The exceptional
+  remain, no matrix is constructed, and the order remains open. The query
+  complexity of reconstructing a two-graph from alignment tests is settled
+  adaptively — the constant is exactly \(1/2\), so the coherence restriction is
+  free to leading order — and bracketed nonadaptively between \(0.616\,n^2\) and
+  \(\tfrac98n^2+O(n)\), with the evidence pointing at the floor rather than the
+  construction as the loose end. The exceptional
   code ladder from \(E_{10}\) down to \(E_6\) is proved and its three quantum and
   symmetry barriers are closed by proof, but the track is **pre-empted**: the
   level codes are Calderbank--Kantor two-weight codes, the fold is
