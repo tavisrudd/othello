@@ -4,6 +4,11 @@
 
 **Status:** active; split from C908 by author instruction on 2026-08-20
 
+## Stable entry points
+
+- structural saturation theorem:
+  `notes/2026-08-20-c928-structural-saturation.md`
+
 ## Goal
 
 Produce a self-contained standalone paper on the integral cohomology of the
@@ -99,6 +104,6 @@ authoritative monorepo paper passes its acceptance gates.
 
 ## Next
 
-Audit the theorem dependency graph and isolate the exact general symplectic-
-lattice statements replacing the certificate-backed saturation and glue
-steps.
+Prove the endpoint Pontryagin/divided-power identity for
+`b_*q_*mu^*(beta tensor 1)` and use the integral cylinder isomorphism to
+close the onto half of the glue map.
