@@ -41,9 +41,47 @@ decisions the promotion left open.
 
 1. Read `papers/style-guide.md` before touching the manuscript.
 2. Work item 1 gates every novelty or priority sentence about the recognition
-   theorem, and gates work item 4 entirely.
+   theorem, and gates work item 4 entirely. **Gate open since 2026-08-20:** the
+   audit is discharged and row `OPER-5` exists, so novelty-sensitive prose may be
+   written provided it preserves that row's boundary.
 
-## Work item 1 — the recognition theorem's literature audit
+## Work item 1 — the recognition theorem's literature audit — DISCHARGED 2026-08-20
+
+**Outcome:** nothing pre-empts the recognition theorem, so no adjacent-crown
+extraction is triggered and work item 4 is ungated. Row `OPER-5` is in
+`papers/clebsch-passages/literature-boundaries.md`; the search record, read
+depths, screened citing sets, and access gaps are in
+`notes/2026-08-20-c816-recognition-theorem-literature-audit.md`. The audit
+licenses "we prove" and "we have not located", never "first" or "new", and every
+negative keeps "to our knowledge".
+
+Three findings bear on the manuscript and are recommendations for this task's
+owner, not applied by the audit pass:
+
+1. The ingredients now have named classical owners the manuscript does not cite.
+   Beauville settles in general which forms are Pfaffians of skew matrices of
+   linear forms and Tanturri gives the constructive cubic-surface case, so a
+   \(6\times6\) linear Pfaffian representation is a known object; the triangle
+   cubic's coefficients are order-three cycle products, half the principal
+   \(3\times3\) minors of a hollow symmetric matrix, in Huang and Oeding's
+   cycle-sum coordinates. Adding the identity \(\det A[S,S]=2a_{ij}a_{jk}a_{ki}\)
+   is what tells a referee the two cubics are minors of the same matrix.
+2. The conclusion \(A^2=\lambda I\) has a standard name: a scaled hollow
+   symmetric involution, equivalently a constant-diagonal rank-three projection,
+   equivalently an equal-norm tight frame of six vectors in \(\mathbf R^3\); the
+   equal-modulus case is the classical conference, regular-two-graph, and
+   equiangular-tight-frame correspondence.
+3. The boundary sentence after the theorem names the wrong set. The solutions of
+   \(A^2=\lambda I\) at order six form a family of dimension at least four; what
+   is unclassified is the set of weighted solutions of the *proportionality*,
+   which Theorem D pins to the scaling line at either golden representative.
+
+The audit's sharpest limitation, carried forward: MathSciNet is unauthenticated
+and Google Scholar blocks automated access, so no article-body index was
+searched and the negative rests on title, abstract, and metadata indexes plus
+term searches of cached full texts.
+
+The original scope statement follows, retained for provenance.
 
 **This is the exposed item.** The theorem is in print-track prose with no
 priority boundary of its own. `papers/clebsch-passages/literature-boundaries.md`

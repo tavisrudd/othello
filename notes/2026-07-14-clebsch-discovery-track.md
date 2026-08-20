@@ -1836,3 +1836,35 @@ which is worth knowing before C834 or C857 report on that surface.
 
 **Status:** open, unpromoted. Belongs to C834/C857 if promoted; logged here only
 because it was found off to the side of a presentation refactor.
+
+## 2026-08-20 — the recognition theorem's conclusion is an equal-norm tight frame, and its ambient set is four-dimensional
+
+**Context:** noticed while running C816 work item 1, the priority audit of
+`thm:triangle-pfaffian-recognition`, when deciding which frame literature the
+audit had to cover. The audit was looking for predecessors, not for a reading of
+the theorem's conclusion.
+
+**Observation:** for real symmetric hollow `A`, the condition `A^2 = lambda I` is
+equivalent to `A/sqrt(lambda) = 2P - I` where `P` is an orthogonal projection of
+rank `n/2` with every diagonal entry `1/2` — equivalently, the rows of any
+factorization of `P` form an equal-norm tight frame of `n` vectors in
+`R^(n/2)`. At order six the solution set therefore has dimension at least four:
+`dim Gr(3,6) = 9` minus the at most five independent constant-diagonal
+equations, the trace being automatic. It is nonempty at the conference point,
+where all entries are nonzero, an open condition, so weighted non-conference
+solutions of `A^2 = lambda I` with no vanishing entry exist in abundance. This
+is much larger than the proportionality locus, which Theorem D pins to the
+scaling line at either oriented golden representative.
+
+**Evidence:** REASONED, from `P = (A/sqrt(lambda) + I)/2` and a dimension count;
+the frame reading is standard, but no source consulted in the audit states it
+for this equation. A floating-point construction of a hollow involution of order
+six with off-diagonal moduli spread over two orders of magnitude was run as a
+sanity check and is not retained as evidence.
+
+**Status:** open, unpromoted. The audit report
+`notes/2026-08-20-c816-recognition-theorem-literature-audit.md` carries the
+manuscript-facing consequence as a recommendation to C816's owner: the boundary
+sentence after the theorem should name the weighted solutions of the
+*proportionality*, not of `A^2 = lambda I`. Whether the frame vocabulary itself
+enters the manuscript is C816 work item 4's decision. No identifier allocated.
