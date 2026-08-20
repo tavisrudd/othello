@@ -253,6 +253,53 @@ Replay, from the paper root:
 make evidence   # third terminal prints CHECK OK (DETERMINANTAL_PRESENTATION_CONFIRMED)
 ```
 
+## Implications for Paper I
+
+Paper I (`papers/clebsch-rigidity/`) already asserts the exact count, in its
+corollary *Nodes, symmetry, and integral commutant*: the support cubic has
+exactly six singular points \([\mathbf 1-6e_a]\), all ordinary nodes, forming a
+projective frame. Nothing found here contradicts it, and no correction is owed.
+Four things follow anyway; none is a Paper V decision, and Paper I's C855 stream
+owns any action.
+
+1. **Paper I's completeness proof is characteristic-zero only, and that is why
+   Paper V lost the citation.** The manuscript proves completeness by stratifying
+   \(\PP^4\) by largest nonzero coordinate and displaying a reduced lexicographic
+   Gröbner basis in each of the five charts. The kernel-checked companion,
+   `RelativeConicArcs.SupportOrientationNodes.singularPoints_crossGoldenDeterminant_eq_axisClasses`,
+   carries an explicit `[CharZero K]` hypothesis. That restriction is exactly
+   what forced commit `f34fefd15` to weaken Paper V's sentence from "six isolated
+   nodes by \cite{RuddRigidity2026}" to "isolated nodes" and to prove persistence
+   modulo eleven by hand.
+2. **The cheapest repair is probably in the Lean, not in the mathematics.** The
+   chart exhaustion uses nothing about characteristic beyond invertibility of
+   small integers, so relaxing `[CharZero K]` to explicit invertibility of two,
+   three, and five is plausibly a bounded edit to an existing proof. If it goes
+   through, Paper V can cite Paper I again, and the C926 Gröbner certificate
+   becomes redundant even as a cross-check. C927 supplies the mathematical
+   licence for that generalization: the statement is true in every such
+   characteristic, so the Lean generalization is not a gamble.
+3. **Paper I already owns the two ingredients the new proof needs.** Its final
+   stage proves \(L^-\otimes\mathbf Q(\sqrt5)\cong V_3\oplus V_{3'}\) with the
+   golden operator acting by \(\pm\sqrt5\) — that is precisely the splitting
+   \(W_+\oplus W_-\) used here — and its "cross-golden determinant" is already a
+   determinantal presentation of the same cubic, tied to Hassett–Tschinkel's
+   trace-orthogonal pairing. The proof above is therefore expressible in Paper I's
+   existing vocabulary, and its Lean development may already carry the splitting.
+4. **Do not rip out the formalized chart argument.** It is kernel-checked and
+   cheap; the new proof's third ingredient, that the icosahedral group has no
+   orbit of size six on \(\PP^1\), is materially harder to formalize than a finite
+   chart exhaustion. The right relationship is the one this report already takes:
+   a conceptual proof for generality and for exposition, with the finite
+   certificate retained.
+
+One caution before any priority language anywhere. Paper I cites Hassett–Tschinkel
+Proposition 10 and Cheltsov–Tschinkel–Zhang's six-nodal \(S_5\) model as context,
+noting that the latter assumes six-nodality rather than proving it. The
+equivariant construction of \(M\) from the two eigenspaces is close enough to that
+literature that its novelty is unestablished; it must go through
+`notes/literature-audit-conventions.md` before being called new anywhere.
+
 ## Open, and deliberately not done
 
 - **No manuscript edit.** Where this lands — a new proposition replacing the
