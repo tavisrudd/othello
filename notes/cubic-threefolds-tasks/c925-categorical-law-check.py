@@ -94,6 +94,10 @@ def matrix_multiply(left, right):
     ]
 
 
+def transpose(matrix):
+    return [list(column) for column in zip(*matrix)]
+
+
 def identity(size):
     return [[Fraction(i == j) for j in range(size)] for i in range(size)]
 
@@ -297,6 +301,28 @@ def main():
     assert upper_then_right == left_then_lower
     checks["indexed_base_change_and_beck_chevalley_shadow"] = "pass"
 
+    # Formal coordinate transport is a third marker law, distinct from field
+    # extension.  The uncentered eigenvalue function u is not literally equal
+    # to u'+5, but it is its pullback along u=u'+5.  A marker comparing the
+    # raw coefficient tuples would therefore be unlawful.
+    def pullback_linear(linear_polynomial, translation):
+        slope, intercept = linear_polynomial
+        return slope, intercept + slope * translation
+
+    eigenvalue_in_u = (Fraction(1), Fraction(0))
+    eigenvalue_in_u_prime = (Fraction(1), Fraction(5))
+    assert eigenvalue_in_u != eigenvalue_in_u_prime
+    assert pullback_linear(eigenvalue_in_u, Fraction(5)) == eigenvalue_in_u_prime
+    centered_eigenvalue = lambda eigenvalue, unit: (
+        eigenvalue[0] - unit[0],
+        eigenvalue[1] - unit[1],
+    )
+    assert centered_eigenvalue(eigenvalue_in_u, eigenvalue_in_u) == (0, 0)
+    assert centered_eigenvalue(
+        eigenvalue_in_u_prime, eigenvalue_in_u_prime
+    ) == (0, 0)
+    checks["formal_coordinate_pseudonaturality_not_raw_equality"] = "pass"
+
     # Center localization is idempotent and nested cutoffs compose by max.
     dimensions = {"point": 0, "curve": 1, "surface": 2, "cubic": 3}
     spectrum = Counter({"point": 2, "curve": 1, "surface": 3, "cubic": 2})
@@ -417,8 +443,9 @@ def main():
         ]
     checks["ga_clebsch_gordan_and_higher_pb_coherence"] = "pass"
 
-    # Ideal-quotient telescope: elementary shears whose targets are killed by
-    # the row marker remain invisible under arbitrary composition.
+    # Row-stabilizer telescope: actual row-preserving transitions remain
+    # row-preserving under ordered composition.  This does not need an
+    # ambient quotient by a two-sided ideal.
     transition_1 = [
         [Fraction(1), Fraction(0), Fraction(0)],
         [Fraction(2), Fraction(1), Fraction(0)],
@@ -434,7 +461,294 @@ def main():
     assert transition_1[0] == rank_row
     assert transition_2[0] == rank_row
     assert composite_transition[0] == rank_row
-    checks["ideal_quotient_composition_telescope"] = "pass"
+    checks["row_stabilizer_composition_telescope"] = "pass"
+
+    # The raw row kernel {e : r e = 0} is generally only a right ideal.  It
+    # cannot be used as the two-sided ideal in an ambient category quotient.
+    row_2 = [[Fraction(1), Fraction(0)]]
+    row_null = [
+        [Fraction(0), Fraction(0)],
+        [Fraction(1), Fraction(0)],
+    ]
+    hostile_left_factor = [
+        [Fraction(0), Fraction(1)],
+        [Fraction(0), Fraction(0)],
+    ]
+    assert matrix_multiply(row_2, row_null) == [
+        [Fraction(0), Fraction(0)]
+    ]
+    assert matrix_multiply(
+        row_2, matrix_multiply(row_null, hostile_left_factor)
+    ) == [[Fraction(0), Fraction(0)]]
+    assert matrix_multiply(
+        row_2, matrix_multiply(hostile_left_factor, row_null)
+    ) == [[Fraction(1), Fraction(0)]]
+    generated_e11 = matrix_multiply(hostile_left_factor, row_null)
+    generated_e22 = matrix_multiply(row_null, hostile_left_factor)
+    assert matrix_add(generated_e11, generated_e22) == identity(2)
+    checks["row_kernel_two_sided_closure_trivializes_m2"] = "pass"
+
+    # Correct repair: in the operator-enriched arrow category, a morphism is
+    # a commuting square r_B f = ell r_A.  The output-line component ell is
+    # functorial, so its kernel is automatically a two-sided ideal.  Allowing
+    # nonzero ell also proves that exact row normalization is unnecessary.
+    row_a = [[Fraction(1), Fraction(0)]]
+    row_b = [[Fraction(1), Fraction(0)]]
+    arrow_f = [
+        [Fraction(2), Fraction(0)],
+        [Fraction(3), Fraction(4)],
+    ]
+    arrow_g = [
+        [Fraction(5), Fraction(0)],
+        [Fraction(7), Fraction(6)],
+    ]
+    assert matrix_multiply(row_b, arrow_f) == [
+        [Fraction(2), Fraction(0)]
+    ]
+    assert matrix_multiply(row_b, arrow_g) == [
+        [Fraction(5), Fraction(0)]
+    ]
+    arrow_gf = matrix_multiply(arrow_g, arrow_f)
+    assert matrix_multiply(row_b, arrow_gf) == [
+        [Fraction(10), Fraction(0)]
+    ]
+    compatible_left = arrow_g
+    compatible_right = arrow_f
+    assert matrix_multiply(
+        row_b, matrix_multiply(compatible_left, row_null)
+    ) == [[Fraction(0), Fraction(0)]]
+    assert matrix_multiply(
+        row_b, matrix_multiply(row_null, compatible_right)
+    ) == [[Fraction(0), Fraction(0)]]
+    # A morphism can be invertible only after the output-kernel quotient.
+    # Its output scalar is still invertible and the nonzero row Boolean is
+    # unchanged, even though the carrier map itself is singular.
+    quotient_iso_representative = [
+        [Fraction(1), Fraction(0)],
+        [Fraction(0), Fraction(0)],
+    ]
+    quotient_inverse_representative = quotient_iso_representative
+    quotient_inverse_error = matrix_add(
+        matrix_multiply(
+            quotient_inverse_representative, quotient_iso_representative
+        ),
+        [[Fraction(-1), Fraction(0)], [Fraction(0), Fraction(-1)]],
+    )
+    assert matrix_multiply(row_a, quotient_iso_representative) == row_a
+    assert matrix_multiply(row_a, quotient_inverse_error) == [
+        [Fraction(0), Fraction(0)]
+    ]
+    assert rational_rank(quotient_iso_representative) == 1
+    checks["augmented_row_output_kernel_is_two_sided"] = "pass"
+
+    # Zero-mode quotient descent for a dual cyclic row.  A T-stable
+    # vanishing submodule V contained in ker(r) is annihilated by every rT^k;
+    # the quotient pullback therefore identifies the whole Krylov row module,
+    # without choosing a complement or converting the row to a column.
+    nearby_operator = jordan(4)
+    reduced_operator = jordan(3)
+    nearby_row = [[Fraction(0), Fraction(1), Fraction(0), Fraction(0)]]
+    reduced_row = [[Fraction(1), Fraction(0), Fraction(0)]]
+    quotient_map = [
+        [Fraction(0), Fraction(1), Fraction(0), Fraction(0)],
+        [Fraction(0), Fraction(0), Fraction(1), Fraction(0)],
+        [Fraction(0), Fraction(0), Fraction(0), Fraction(1)],
+    ]
+    assert matrix_multiply(quotient_map, nearby_operator) == matrix_multiply(
+        reduced_operator, quotient_map
+    )
+    for exponent in range(4):
+        assert matrix_multiply(
+            matrix_multiply(reduced_row, matrix_power(reduced_operator, exponent)),
+            quotient_map,
+        ) == matrix_multiply(
+            nearby_row, matrix_power(nearby_operator, exponent)
+        )
+    assert matrix_multiply(nearby_row, [[Fraction(1)], [0], [0], [0]]) == [
+        [Fraction(0)]
+    ]
+    checks["zero_mode_dual_cyclic_row_descends_through_quotient"] = "pass"
+
+    # The row-annihilation hypothesis is necessary.  Since the first column
+    # of q is zero, no row on the quotient can pull back to a row that is
+    # nonzero on the discarded stable line.
+    non_descending_row = [[Fraction(1), Fraction(1), Fraction(0), Fraction(0)]]
+    assert non_descending_row[0][0] != 0
+    assert all(
+        pulled_back[0][0] == 0
+        for pulled_back in (
+            matrix_multiply(candidate, quotient_map)
+            for candidate in (
+                [[Fraction(1), Fraction(0), Fraction(0)]],
+                [[Fraction(1), Fraction(1), Fraction(0)]],
+                [[Fraction(0), Fraction(1), Fraction(1)]],
+            )
+        )
+    )
+    checks["zero_mode_row_annihilation_is_necessary"] = "pass"
+
+    # K-theoretic forcing of the blowup point row.  The first two source
+    # coordinates are ambient K(Y), the last two exceptional K(Z) copies.
+    # Generic rank kills the exceptional columns of the Orlov matrix.  Any
+    # analytic comparison lifting that matrix therefore preserves the rank
+    # row up to the ambient normalization (here, the scalar 2).
+    orlov_matrix = [
+        [Fraction(1), 0, 0, 0],
+        [Fraction(2), 1, 0, 0],
+        [Fraction(3), 0, 1, 0],
+        [Fraction(4), 5, 6, 1],
+    ]
+    analytic_comparison = [
+        [Fraction(2), 0, 0, 0],
+        [Fraction(-6), 3, 0, 0],
+        [Fraction(-12), 0, 4, 0],
+        [Fraction(120), -25, -30, 5],
+    ]
+    gamma_block_scaling = [
+        [Fraction(2), 0, 0, 0],
+        [Fraction(0), 3, 0, 0],
+        [Fraction(0), 0, 4, 0],
+        [Fraction(0), 0, 0, 5],
+    ]
+    rank_blowup = [[Fraction(1), 0, 0, 0]]
+    rank_decomposition = [[Fraction(1), 0, 0, 0]]
+    assert matrix_multiply(rank_blowup, orlov_matrix) == rank_decomposition
+    assert matrix_multiply(analytic_comparison, orlov_matrix) == gamma_block_scaling
+    assert matrix_multiply(rank_decomposition, analytic_comparison) == [
+        [Fraction(2), 0, 0, 0]
+    ]
+    checks["orlov_gamma_lift_forces_blowup_rank_row"] = "pass"
+
+    # Provider implications are not reversible.  A lower shear preserves
+    # the row while leaving its action on the row kernel undetermined.  An
+    # upper shear and its inverse preserve the row only in aggregate, so a
+    # path-level Boolean cannot be promoted to edgewise compatibility.
+    provider_row = [[Fraction(1), Fraction(0)]]
+    lower_shear = [[Fraction(1), Fraction(0)], [Fraction(7), Fraction(3)]]
+    upper_shear = [[Fraction(1), Fraction(1)], [Fraction(0), Fraction(1)]]
+    upper_shear_inverse = [
+        [Fraction(1), Fraction(-1)],
+        [Fraction(0), Fraction(1)],
+    ]
+    assert matrix_multiply(provider_row, lower_shear) == provider_row
+    assert matrix_multiply(provider_row, upper_shear) != provider_row
+    assert matrix_multiply(
+        matrix_multiply(provider_row, upper_shear), upper_shear_inverse
+    ) == provider_row
+    checks["provider_implications_are_not_reversible"] = "pass"
+
+    # Affine-parabolic coordinates for the row-line stabilizer.  Relative to
+    # V = K.s + ker(r), (c,u,A)(d,v,B) = (cd,d*u+A*v,A*B), and the displayed
+    # inverse follows from the same law.
+    affine_row_map = [
+        [Fraction(2), 0, 0],
+        [Fraction(3), 1, 2],
+        [Fraction(5), 0, 1],
+    ]
+    second_affine_row_map = [
+        [Fraction(7), 0, 0],
+        [Fraction(11), 2, 0],
+        [Fraction(13), 1, 1],
+    ]
+    assert matrix_multiply(affine_row_map, second_affine_row_map) == [
+        [Fraction(14), 0, 0],
+        [Fraction(58), 4, 2],
+        [Fraction(48), 1, 1],
+    ]
+    affine_row_inverse = [
+        [Fraction(1, 2), 0, 0],
+        [Fraction(7, 2), 1, -2],
+        [Fraction(-5, 2), 0, 1],
+    ]
+    assert matrix_multiply(affine_row_map, affine_row_inverse) == identity(3)
+    checks["row_line_stabilizer_affine_group_law"] = "pass"
+
+    # Four sectorial half-space shadows jointly recover the zero-exponent
+    # block.  Any one shadow retains decaying nonzero exponents, while the
+    # intersection excludes each nonzero lattice exponent in some direction.
+    exponent_labels = {
+        "zero": (0, 0),
+        "east": (1, 0),
+        "west": (-1, 0),
+        "north": (0, 1),
+        "south": (0, -1),
+        "northeast": (1, 1),
+    }
+    separating_directions = ((1, 0), (-1, 0), (0, 1), (0, -1))
+    half_space_shadows = [
+        {
+            label
+            for label, exponent in exponent_labels.items()
+            if direction[0] * exponent[0] + direction[1] * exponent[1] <= 0
+        }
+        for direction in separating_directions
+    ]
+    assert len(half_space_shadows[0]) > 1
+    assert set.intersection(*half_space_shadows) == {"zero"}
+    checks["multi_sector_sparse_shadows_recover_zero_exponent"] = "pass"
+
+    # Coherent transport of sectorial fibers does not identify their
+    # filtration embeddings.  A Stokes shear can turn the formal zero line
+    # into a graph that survives every transported shadow while retaining an
+    # exceptional coordinate.
+    formal_zero_line = {(Fraction(t), Fraction(0)) for t in (-1, 0, 1)}
+    stokes_sheared_line = {(Fraction(t), Fraction(t)) for t in (-1, 0, 1)}
+    whole_plane_sample = {
+        (Fraction(a), Fraction(b)) for a in (-1, 0, 1) for b in (-1, 0, 1)
+    }
+    assert formal_zero_line != stokes_sheared_line
+    assert stokes_sheared_line & whole_plane_sample == stokes_sheared_line
+    assert (Fraction(1), Fraction(1)) in stokes_sheared_line
+    checks["sector_path_transport_needs_stokes_optic_residual"] = "pass"
+
+    # Hodge equivariance, a preserved pairing, and an intertwined primary
+    # operator do not by themselves preserve a point/rank row.  All four
+    # basis directions may be Tate, so the Hodge action is trivial.  The
+    # isometry below commutes with the displayed semisimple operator, but it
+    # shears the point vector p to p+e and changes the row <p,->.  A geometric
+    # point/Gamma compatibility theorem is therefore a genuine extra input.
+    pairing = [
+        [Fraction(0), Fraction(1), Fraction(0), Fraction(0)],
+        [Fraction(1), Fraction(0), Fraction(0), Fraction(0)],
+        [Fraction(0), Fraction(0), Fraction(0), Fraction(1)],
+        [Fraction(0), Fraction(0), Fraction(1), Fraction(0)],
+    ]
+    hodge_equivariant_isometry = [
+        [Fraction(1), Fraction(0), Fraction(0), Fraction(-1)],
+        [Fraction(0), Fraction(1), Fraction(0), Fraction(0)],
+        [Fraction(0), Fraction(1), Fraction(1), Fraction(0)],
+        [Fraction(0), Fraction(0), Fraction(0), Fraction(1)],
+    ]
+    primary_operator = [
+        [Fraction(1, 2), Fraction(0), Fraction(0), Fraction(0)],
+        [Fraction(0), Fraction(2), Fraction(0), Fraction(0)],
+        [Fraction(0), Fraction(0), Fraction(2), Fraction(0)],
+        [Fraction(0), Fraction(0), Fraction(0), Fraction(1, 2)],
+    ]
+    point_vector = [Fraction(0), Fraction(1), Fraction(0), Fraction(0)]
+    point_row = [Fraction(1), Fraction(0), Fraction(0), Fraction(0)]
+    assert matrix_multiply(
+        matrix_multiply(transpose(hodge_equivariant_isometry), pairing),
+        hodge_equivariant_isometry,
+    ) == pairing
+    assert matrix_multiply(
+        hodge_equivariant_isometry, primary_operator
+    ) == matrix_multiply(primary_operator, hodge_equivariant_isometry)
+    assert matrix_vector(hodge_equivariant_isometry, point_vector) == [
+        Fraction(0),
+        Fraction(1),
+        Fraction(1),
+        Fraction(0),
+    ]
+    transported_row = matrix_multiply([point_row], hodge_equivariant_isometry)[0]
+    assert transported_row == [
+        Fraction(1),
+        Fraction(0),
+        Fraction(0),
+        Fraction(-1),
+    ]
+    assert transported_row != point_row
+    checks["hodge_pairing_operator_do_not_force_point_row"] = "pass"
 
     # A nilpotent matrix may be forgotten after retaining only its kernel
     # dimensions: that sparse integer profile reconstructs every Jordan block.
@@ -476,13 +790,13 @@ def main():
     # path certificates retain their order.  Parenthesization does not matter.
     environment = {
         "coefficient_spine": "C[q][[Q,t]]",
-        "global_ideal": "rank_zero",
+        "retained_output": "augmented_row_output",
     }
 
     def effect_step(delta, evidence, path_label):
         def run(env, state):
             assert env is environment
-            assert env["global_ideal"] == "rank_zero"
+            assert env["retained_output"] == "augmented_row_output"
             return state + delta, frozenset({evidence}), (path_label,)
 
         return run

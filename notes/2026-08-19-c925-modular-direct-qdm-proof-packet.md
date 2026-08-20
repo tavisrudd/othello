@@ -32,8 +32,9 @@ chooses:
 2. which observed blocks to retain; and
 3. what value each retained block contributes to a commutative monoid.
 
-The cubic proof instantiates this interface with the smallest sufficient
-observation:
+The cubic proof instantiates this interface with the following compact
+sufficient observation (no minimality order on all possible observations is
+claimed):
 \[
 \boxed{
 \text{even rank }2,\qquad
@@ -75,6 +76,8 @@ class CommutativeMonoid (Value m) => QDMMarker m where
   -- laws, not executable fields
   regularGaugeLaw :: RegularGauge b b' -> mark b == mark b'
   baseChangeLaw   :: FieldExtension k l -> mark (b `baseChange` l) == mark b
+  coordinateLaw   :: InvertibleBulkChange phi
+                  -> mark (pullback phi b) ~= reindex phi (mark b)
 ```
 
 Here
@@ -278,7 +281,7 @@ A **lawful QDM marker package** \(\mathcal M\) consists of:
    \operatorname{emit}_{\mathcal M}:O_{\mathcal M}\to A;
    \]
 
-subject to two laws.
+subject to three laws.
 
 ### Regular-isomorphism law
 
@@ -302,6 +305,30 @@ extension, then
 Here equality means the canonical identification prescribed by the package;
 for example, a conjugacy class is extended to \(L\), while a rank or a Boolean
 property is literally unchanged.
+
+### Formal-coordinate pseudonaturality law
+
+If \(\phi:S'\xrightarrow{\sim}S\) is an invertible formal bulk-coordinate
+change and \(B'\cong\phi^*B\) by a regular connection isomorphism, then
+
+\[
+\operatorname{obs}_{\mathcal M}(B')
+\cong \phi^*\operatorname{obs}_{\mathcal M}(B),
+\tag{2.2a}
+\]
+
+and the selector and emitter agree under this canonical reindexing.  For a
+scalar rank, Jordan partition, or Boolean this is literal equality.  For an
+observation such as an Euler-eigenvalue function, it is pullback of the
+function, not equality at unrelated coordinate names.  Identity and composite
+coordinate changes must satisfy the usual pseudonaturality coherence.
+
+This third law is load-bearing in every adapter that uses the formal maps
+\(\tau\) or \(\varsigma_j\).  Without it, an observer of an uncentered
+eigenvalue function would satisfy (2.1)--(2.2) but would change under an
+independent unit translation, so the universal claims in Modules 5 and 8
+would be false.  The concrete cubic marker is coordinate-insensitive, but the
+parameterized interface records the stronger law explicitly.
 
 Define the value of a block by
 \[
@@ -811,8 +838,12 @@ Let
 \[
 \Pi=\pi_0\bigl(\mathsf{QBlock}^{\mathrm{ev}}\bigr)
 \]
-be the set of regular-isomorphism and generic-base-change classes of even
-blocks.  Let
+be the set of even-block classes in the localization of the indexed
+Grothendieck construction of Module 7.5 by regular isomorphisms, generic
+base changes, and invertible formal-coordinate pullbacks.  Thus a
+coordinate-dependent observation remains an indexed section and is compared
+by pullback; it is never identified by evaluating two unrelated coordinate
+names.  Let
 \[
 \mathbf N^{(\Pi)}
 \]
@@ -829,7 +860,8 @@ Define
 \tag{7.1}
 \]
 
-Every lawful marker package determines a unique monoid homomorphism
+Every lawful marker package, including the coordinate-pseudonaturality law
+of Definition 2.1, determines a unique monoid homomorphism
 \[
 W_{\mathcal M}:\mathbf N^{(\Pi)}\longrightarrow A,
 \qquad
@@ -1007,11 +1039,15 @@ for each coefficient or coordinate square used in a spine, the two routes
 \qquad
 \text{compare then base change}
 \]
-are canonically isomorphic.  This is the Beck--Chevalley law needed here.  It
+are canonically isomorphic.  This is the Beck--Chevalley law required of a
+fully indexed comparison theory.  It
 implies that a composite of comparison spans can be formed by a fibre product
 over a common coefficient context and that changing the chosen common
 algebraic closure cannot change the resulting block ledger.  Modules 3, 5,
-and 6 verify this law for the two adapters actually used in the cubic proof.
+and 6 verify the comparison-specific scalar-extension and coordinate-pullback
+identities used in the cubic \(m=1\) ledger.  They do **not** by themselves
+construct a global atlas of comparison 2-cells for arbitrary spans; any later
+use of that stronger bicategorical structure lists it as provider data.
 
 ## 7.6 Probe-indexed block theories
 
@@ -1789,7 +1825,7 @@ retention.
 | `ParityProfile` | even/odd ranks plus residue profile | caller supplied | free multiset | parity-enriched signatures |
 | `Universal` | full block class | keep all | \(\mathbf N^{(\Pi)}\) | complete generic even-block multiset |
 
-## 14.1 Boolean existence: the smallest sufficient consumer
+## 14.1 Boolean existence: a compact sufficient consumer
 
 Let
 \[
@@ -1962,6 +1998,15 @@ invertible.  Their even-even blocks remain invertible on the even slice, so
 the summands have independent unit coordinates.  Lemma 5.1 separates their
 Euler spectra by a nonzero resultant.
 
+## H2A. Does separation make every coordinate-dependent observer lawful?
+
+No.  Independent unit translations separate spectra, but they also change an
+uncentered Euler-eigenvalue function.  Definition 2.1 therefore includes the
+formal-coordinate pseudonaturality law, and the universal ledger localizes
+the indexed Grothendieck construction by coordinate pullback.  The cubic
+marker is centered and coordinate-insensitive; the general interface may not
+silently compare values at unrelated coordinate names.
+
 ## H3. Is an opposite Laurent completion treated as a localization?
 
 No.  Module 3 uses the common spine
@@ -2051,7 +2096,9 @@ quotient an explicit parameter rather than a default.
 
 No.  It proves the constituent-additive no-go, the ideal-quotient composition
 theorem, and the \(\mathbf G_a\) coherence laws.  The enriched QDM comparison
-functor or global rank-zero ideal is still a geometric/analytic input.
+functor landing in the augmented-row category is still a geometric/analytic
+input.  Once that functor exists, its row-output kernel ideal is formal by
+Theorem 19.3A.
 
 ## H17. Can finite deck monodromy replace the nilpotent operation?
 
@@ -2062,9 +2109,12 @@ operation lives in the commuting \(\mathbf G_a\) factor.
 
 ## H18. Is wall-local annihilation enough for a long factorization?
 
-No.  Theorem 19.3 applies only after all receivers and overlap 2-cells map to
-one quotient by a two-sided ideal.  Constructing that global quotient is the
-composition gate, not a formal consequence of local row identities.
+Not when the identities live in separately chosen receivers.  Actual
+row-line-compatible isomorphisms in one augmented category compose and invert
+without a quotient.  Alternatively, Theorem 19.3 applies after all receivers
+and overlap 2-cells map through one retained-shadow functor, whose kernel is
+then two-sided.  Constructing that global provider, not constructing the
+ideal algebra, is the composition gate.
 
 ## H19. May higher-codimension exceptional copies remain split?
 
@@ -2101,6 +2151,23 @@ No.  A path translator must preserve identities and composition, at least up
 to coherent 2-cells, and the shadow map must be natural with respect to it.
 Without that naturality square, mapping a route and mapping the payload are
 unrelated operations.
+
+## H24. Is the naked row annihilator a two-sided ideal?
+
+No.  The \(2\times2\) matrix counterexample before Theorem 19.3A disproves
+this, and its two-sided closure can contain the identity.  A lawful quotient
+uses the kernel of the augmented-row output functor or another named additive
+retained-shadow functor.  For an ordered path of actual row-compatible
+isomorphisms, no quotient is needed.
+
+## H25. Is the point row transported covariantly?
+
+No.  On column carriers it is a covector.  The typed comparison law is
+\[
+r_{\mathrm{target}}\circ f=\ell\circ r_{\mathrm{source}},
+\]
+with \(fT= T'f\).  Exact normalization is unnecessary for the nonvanishing
+Boolean when \(\ell\) is invertible.
 
 ---
 
@@ -2590,13 +2657,124 @@ and the parenthesized term lies in \(\mathcal I\).  Induction proves the
 claim. ∎
 
 This theorem imports the standard quotient-by-an-ideal mechanism into the
-weak-factorization problem.  For the rank-framed Stokes/Gamma route, the
-candidate ideal consists of complete exceptional residue blocks with
-rank-zero output.  Once all wall and receiver changes live in one category
-and their discrepancies lie in that ideal, composition is automatic; one
-does not need equality of the full Stokes matrices.  The unresolved analytic
-gate is precisely the construction of that global category/ideal and the
-proof that overlap 2-cells also die in the quotient.
+weak-factorization problem.  It does **not** make the naked class
+\(\{e:r e=0\}\) into a two-sided ideal.  In the full matrix category, take
+\[
+r=(1,0),\qquad e=E_{21},\qquad a=E_{12}.
+\]
+Then \(re=0\), but \(r(ae)=rE_{11}\ne0\).  In fact the two-sided ideal
+generated by \(E_{21}\) in \(M_2(K)\) is the whole matrix algebra, since it
+contains both \(E_{11}=E_{12}E_{21}\) and
+\(E_{22}=E_{21}E_{12}\).  Forcing two-sided closure can therefore trivialize
+the proposed quotient.
+
+The lawful repair packages the row as an output arrow before taking a
+kernel.
+
+## Theorem 19.3A — augmented-row output and canonical kernel ideal
+
+Let \(\mathsf{AugOp}_K\) have objects
+\[
+A=(V_A,T_A,L_A,r_A:V_A\to L_A)
+\tag{19.7a}
+\]
+and morphisms \((f,\ell):A\to B\) satisfying
+\[
+fT_A=T_Bf,
+\qquad
+r_Bf=\ell r_A.
+\tag{19.7b}
+\]
+Then \(\mathsf{AugOp}_K\) is preadditive.  The output functor
+\[
+\mathsf{Out}:\mathsf{AugOp}_K\to\mathsf{Vect}_K,
+\qquad
+(V,T,L,r)\mapsto L,\quad(f,\ell)\mapsto\ell
+\tag{19.7c}
+\]
+is additive, so
+\[
+\mathcal J=\ker(\mathsf{Out})
+\tag{19.7d}
+\]
+on Hom spaces is a canonical two-sided ideal.
+
+If \((f,\ell)\) is an isomorphism and \(p\in K[t]\), then
+\[
+r_Ap(T_A)\ne0
+\quad\Longleftrightarrow\quad
+r_Bp(T_B)\ne0.
+\tag{19.7e}
+\]
+The same equivalence holds when the class of \((f,\ell)\) is an isomorphism
+in \(\mathsf{AugOp}_K/\mathcal J\), and also when \(f\) is surjective and
+\(\ell\) is invertible.
+
+### Proof
+
+The two equations in (19.7b) are closed under addition and composition, so
+the category is preadditive and \(\mathsf{Out}\) is additive.  The kernel of
+an additive functor is a two-sided ideal.  Polynomial naturality gives
+\[
+r_Bp(T_B)f=r_Bfp(T_A)=\ell r_Ap(T_A).
+\]
+For an isomorphism, both \(f\) and \(\ell\) are invertible, proving
+(19.7e).  If only the quotient class is invertible, choose a quotient inverse
+\((g,m)\).  Applying \(\mathsf{Out}\) to the two inverse equations gives
+\(m\ell=1\) and \(\ell m=1\).  Equation (19.7e) in the forward direction
+shows that a nonzero source row forces a nonzero target row; applying the
+same argument to \((g,m)\) gives the converse.
+
+For the final case, the polynomial identity shows that vanishing of the
+target row implies vanishing of the source row.  If the source row vanishes,
+the target row vanishes after precomposition with the surjection \(f\), hence
+vanishes. ∎
+
+For a one-dimensional output \(L=K\), \(\ell\) is the allowed scalar change
+of row normalization.  Thus the primitive-row Boolean needs preservation of
+the row **line**, not equality of one normalized row vector.  The case
+\(r=0\) is also typed correctly.  If exact normalization is desired, restrict
+to the groupoid with \(\ell=1\); it is closed under composition and inverse,
+so no ideal quotient is needed for one ordered path.
+
+The rank-framed Stokes/Gamma application of Theorem 19.3 is legitimate only
+after a geometric provider lands in \(\mathsf{AugOp}_K\), or after a separate
+additive retained-shadow functor \(R\) has been constructed and one sets
+\(\mathcal I=\ker R\).  The ideal then comes for free.  The unresolved
+analytic gate is the construction of the row-line-compatible provider and
+its overlap 2-cells, not an abstract ideal axiom.
+
+### Proposition 19.3B -- the residual row stabilizer is affine-linear
+
+Let \(V\) be finite-dimensional over \(K\), let \(0\ne r:V\to K\), choose
+\(s\in V\) with \(r(s)=1\), and put \(H=\ker r\).  Every invertible
+\(T\) preserving the row line has unique coordinates
+
+\[
+T(s)=c s+u,\qquad T|_H=A,qquad
+(c,u,A)\in K^\times\times H\times\operatorname{GL}(H).
+\tag{19.7f}
+\]
+
+Composition and inverse are
+
+\[
+(c,u,A)(d,v,B)=(cd,\,d u+A v,\,AB),
+\qquad
+(c,u,A)^{-1}=(c^{-1},-c^{-1}A^{-1}u,A^{-1}).
+\tag{19.7g}
+\]
+
+Thus the row-line stabilizer is the corresponding affine parabolic; the
+exact-row stabilizer is the subgroup \(c=1\), isomorphic to
+\(H\rtimes\operatorname{GL}(H)\).  The proof is obtained by applying \(r\)
+to \(T(s)\) and \(T(H)\), followed by direct composition.
+
+This identifies the optic residual precisely.  The Boolean consumer sees
+only the scalar \(c\); the translation \(u\) and kernel automorphism \(A\)
+are lawful hidden state.  A provider therefore need not calculate them, but
+row preservation cannot reconstruct them.  This is the group-level version
+of the non-implications in (21.24).
 
 ## 19.4 The monadic nilpotent-operation specialization
 
@@ -2692,9 +2870,9 @@ This is a real gain in organization, but not a new unconditional
 irrationality theorem.  For \(m=2\), product naturality supplies the endpoint
 \(J_3\); the unresolved inputs are strict transport of the operation through
 arbitrary comparisons and the arbitrary-threefold carrier bound.  The
-rank-framed ideal-quotient route of Theorem 19.3 bypasses the carrier bound
-and is currently the stronger route: if its one global rank-zero ideal exists,
-the same argument is uniform in \(m\).
+rank-framed augmented-row route of Theorem 19.3A bypasses the carrier bound
+and is currently the stronger route: if its one global row-line-compatible
+provider exists, the same argument is uniform in \(m\).
 
 ## 19.6 Further useful specializations
 
@@ -2734,19 +2912,21 @@ three concrete things:
    work;
 2. the exact operation-framed target category and its compulsory
    projective/blowup coherence identities; and
-3. an ideal-quotient composition theorem showing that a global rank-zero
-   error ideal is enough--literal equality of every local analytic comparison
-   is unnecessary.
+3. an augmented-row composition theorem showing that row-line-compatible
+   isomorphisms suffice, with any global error ideal derived as the kernel of
+   an honest output functor--literal equality of row normalizations is
+   unnecessary.
 
 The missing step is geometric/analytic, not categorical: construct one of
 the two enriched provider functors and prove its comparison 2-cells.  Once
 that exists, the obstruction and its composition are formal consequences of
-Theorems 19.3 or 19.4.
+Theorems 19.3A or 19.4.
 
 The finite law replay checks Theorem 19.2 for \(2\le m\le6\), verifies
 (19.12) for \(1\le a,b\le5\) and (19.13) through \(m=6\) by exact rational
-Jordan-kernel calculations, and composes two nontrivial rank-invisible
-shears as a model of Theorem 19.3.
+Jordan-kernel calculations, disproves two-sidedness of the naked row kernel,
+and checks both ordered row-stabilizer composition and the canonical
+augmented-row output-kernel repair.
 
 ---
 
@@ -2880,7 +3060,7 @@ Three recurring mechanisms emerge:
 \]
 
 This is a more precise design rule than "retain everything."  One should
-retain the smallest collection for which the target marker satisfies the
+seek a compact collection for which the target marker satisfies the
 kernel-pair criterion (20.3) or its groupoid descent refinement (20.4).
 
 ## 20.4 Reader, indexed State, and Writer
@@ -2893,7 +3073,7 @@ data Env keep = Env
   { coefficientSpine :: FaithfulCommonSpine
   , probePolicy       :: Filter (Probe keep)
   , centerCutoff      :: Dimension
-  , globalErrorIdeal  :: TwoSidedIdeal
+  , retainedOutput    :: AdditiveRetainedShadowFunctor keep
   , coherenceAtlas    :: BeckChevalleyAtlas
   }
 
@@ -2912,8 +3092,10 @@ newtype ProofM keep source target a = ProofM
 ```
 
 `Env` is Reader data: it is fixed for the entire factorization.  In
-particular, Theorem 19.3 requires **one global error ideal**; allowing each
-wall to mutate that ideal in State would invalidate the telescope.
+particular, if Theorem 19.3 is used, its global error ideal is derived as
+`ker retainedOutput`; it is not an unexplained field and cannot mutate from
+wall to wall.  If the path already consists of isomorphisms in
+the augmented-row category, Theorem 19.3A composes it without a quotient.
 
 `Ledger keep source` is indexed State.  A wall, base change, or specialization
 can change the type of the state, so the correct bind has the form
@@ -3036,9 +3218,9 @@ class PathFunctor f where
 
 In ordinary categories the two displayed comparisons are equalities.  For
 QDM comparison bicategories they are coherent invertible 2-cells, so
-`mapPath` is a pseudofunctor.  If comparison errors vanish only modulo the
-ideal of Theorem 19.3, it is first a lax path map and becomes an honest
-functor after passing to the quotient path category.
+`mapPath` is a pseudofunctor.  If comparison errors vanish only after one
+additive retained-shadow functor, its kernel ideal permits the quotient of
+Theorem 19.3.  A naked row annihilator does not.
 
 A path functor alone still transports only provenance.  It must be paired
 with a shadow transformation
@@ -3248,6 +3430,105 @@ automatic: the incomplete-Gamma and Fourier-boundary countermodels show that
 formal monodromy, integrality, or support without the cyclic-row reconstruction
 law are insufficient.
 
+## Theorem 20.3A -- dual cyclic rows descend through stable quotients
+
+Let \(R\) be a commutative ring, let \(T\in\operatorname{End}_R(M)\), and let
+\(r:M\to L\) be a row.  Suppose \(V\subset M\) is \(T\)-stable and
+\(r(V)=0\).  Write \(q:M\to\overline M=M/V\).  Then \(T\) and \(r\) descend
+uniquely to \(\overline T\) and \(\overline r\), and pullback along \(q\)
+identifies the dual cyclic modules
+\[
+q^*:C_{\overline T}(\overline r)
+\xrightarrow{\ \sim\ }C_T(r).
+\tag{20.20a}
+\]
+In particular, for every \(p\in R[t]\),
+\[
+\overline r\,p(\overline T)\ne0
+\quad\Longleftrightarrow\quad
+r\,p(T)\ne0.
+\tag{20.20b}
+\]
+If a deck group stabilizes \(V\), the same result holds after adjoining the
+full deck orbits of the rows.
+
+### Proof
+
+The quotient universal property gives
+\(\overline r q=r\), and \(T\)-stability gives
+\(qT=\overline Tq\).  Hence
+\[
+(\overline r\,\overline T^k)q=rT^k
+\]
+for every \(k\).  Pullback on Hom modules is injective because \(q\) is
+surjective, and the displayed identities identify the two generated
+submodules.  Polynomial linearity proves (20.20b).  Deck stability gives the
+same argument orbitwise. ∎
+
+Categorically, this is the elementary law that the contravariant
+representable functor \(\operatorname{Hom}(-,L)\) sends the cokernel
+\(M\to M/V\) to the kernel of restriction
+\(\operatorname{Hom}(M,L)\to\operatorname{Hom}(V,L)\).  The \(T\)-stability
+of \(V\) makes that kernel a \(K[t]\)-submodule.  Thus the needed information
+was not reconstructed after being forgotten: it already lay in the exact
+dual shadow of the quotient.
+
+This is a variance-sensitive zero-mode lemma.  No complementary summand and
+no conversion of the row into a column via a pairing is needed.  At the
+finite-module level, a \(T\)-stable vanishing-cycle submodule contained in the
+kernel of the point row removes no part of the **dual** cyclic row module.
+For Rees--Stokes objects, existence of one marked meromorphic family,
+strictness of the quotient, finite local freeness, and compatibility of the
+two boundary maps remain analytic provider obligations; Theorem 20.3A does
+not assert them.
+
+### Corollary 20.3B -- the exact hypothesis for strict decoration
+
+Let the data of Theorem 20.3A live in a \(K\)-linear exact category equipped
+with whatever Rees, connection, deck, or Stokes decoration is to be retained.
+Assume that
+
+1. \(0\to V\to M\xrightarrow q\overline M\to0\) is an admissible strict
+   exact sequence in that decorated category;
+2. \(T\), \(r\), and the deck action are morphisms of the retained
+   decoration; and
+3. the contravariant row functor \(D_L=\operatorname{Hom}(-,L)\) sends this
+   particular sequence to the strict exact sequence
+
+   \[
+   0\longrightarrow D_L(\overline M)
+   \xrightarrow{q^*}D_L(M)\longrightarrow D_L(V).
+   \tag{20.20c}
+   \]
+
+Then (20.20a) is an isomorphism of decorated cyclic-row objects, not merely
+of underlying modules.
+
+Indeed, the proof of Theorem 20.3A takes place inside the strict kernel in
+(20.20c), and every displayed generator is decoration-compatible.  This
+corollary is deliberately conditional on strict dual exactness.  Finite local
+freeness of the underlying quotient does not by itself prove compatibility
+with a Stokes filtration or identify the two endpoint boundary maps.  Thus
+(20.20c) is the exact categorical interface an analytic zero-mode provider
+must implement; it is not supplied by the algebraic quotient lemma.
+
+### Corollary 20.3C -- rigid exact categories discharge dual exactness
+
+In Corollary 20.3B, condition 3 is automatic if the retained decorated
+category is rigid exact and \(D_L=(-)^\vee\otimes L\) is an exact
+contravariant duality.  Indeed, an exact duality sends every admissible
+cokernel diagram to an admissible kernel diagram.  This includes the
+finite-dimensional filtered/Stokes setting once the proposed sequence is
+already known to be strict and the objects are dualizable; it is also the
+local algebra behind dualizing a short exact sequence of finite locally free
+Rees modules with locally free quotient.
+
+The order of quantifiers matters.  Rigidity does **not** construct the
+zero-mode subobject, prove that the quotient remains finite locally free, or
+show that a proposed boundary map is strict.  It says only that after those
+facts have placed the sequence inside the exact category, the dual-row
+descent requires no further analytic theorem.
+
 ## 20.8 Consequences for \(m=2\) and higher
 
 The sparse-shadow viewpoint changes the provider question but does not erase
@@ -3260,7 +3541,7 @@ it.
    \(J_2\oplus J_1\), and \(J_1^{\oplus3}\).  Theorem 20.1 fails there.
 2. The kernel-profile functor keeps no basis and no matrix entries, yet is
    complete for nilpotent conjugacy and is additive under strict biproducts.
-   This is the smallest currently justified operation-level replacement for
+   This is the most compressed operation-level replacement justified here for
    retaining the full \(\mathbf G_a\)-module.
 3. On a certified cyclic primary row, dimension plus cyclicity reconstructs
    the whole nilpotent string.  For \(X\times\mathbf P^2\), the desired
@@ -3269,6 +3550,10 @@ it.
 4. A common-source optic can transport that sparse row shadow through a
    parallel specialization only when the marked Beck--Chevalley square is
    proved.  Path provenance selects the square; it does not prove the square.
+   At a quotient zero mode, however, Theorem 20.3A reduces the internal
+   survival check to \(V_t(\mathcal M)\subset\ker r\), together with
+   \(T\)- and deck stability; a pairing-based complementary-summand argument
+   is unnecessary for the dual consumer.
 5. If every low-dimensional center has vanishing top Krylov rank, Theorem
    19.4 may be restated using this sparse rank rather than a full Jordan-block
    object.  The arbitrary-center vanishing and threshold transport remain the
@@ -3329,14 +3614,19 @@ primitive-sixth primary factor.  The useful chain is
 \mathsf{CycRees}^{\mathrm{pointed}}_{T,G}
 \xrightarrow{\ e_{\zeta_6}(T)\ }
 \mathsf{CycPrim}^{\mathrm{pointed}}_{\zeta_6}
-\xrightarrow{\ Q_{\mathrm{row\text{-}null}}\ }
-\mathsf{CycPrim}^{\mathrm{pointed}}_{\zeta_6}/\mathcal I_r
+\xrightarrow{\ \operatorname{AugRow}\ }
+\mathsf{AugPrim}_{\zeta_6}
 \xrightarrow{\ \ne0\ }
 \mathbf B.
 \tag{21.2}
 \]
-Here \(\mathcal I_r\) is a single global ideal of comparison errors whose
-targets are killed by the point row.  The final Boolean is
+Here an object of \(\mathsf{AugPrim}_{\zeta_6}\) is the
+operator-row arrow
+\[
+(V,T,L,r:V\to L)
+\]
+of Theorem 19.3A after primitive-sixth projection.  A comparison is a pair
+\((f,\ell)\) with \(fT=T'f\) and \(r'f=\ell r\).  The final Boolean is
 \[
 b_{\zeta_6}(Y)
 =\begin{cases}
@@ -3350,11 +3640,14 @@ The first two categories in (21.2) are provider categories.  They retain
 analytic structure needed to construct a lawful comparison.  The final two
 are consumer categories.  Once comparison has been proved, they forget the
 complementary QDM, bases, matrix entries, exact Barnes coefficients, and all
-primary factors except \(\zeta_6\).
+primary factors except \(\zeta_6\).  If a quotient presentation is useful,
+one may further divide \(\mathsf{AugPrim}_{\zeta_6}\) by the legitimate
+two-sided ideal \(\ker\mathsf{Out}\).  The naked class
+\(\{e:r e=0\}\) in an unrestricted matrix category is not used.
 
 ## 21.2 What must actually be retained
 
-The minimal proved consumer payload is:
+One compact proved consumer payload is:
 
 1. the primitive-sixth label, with its half-Tate normalization;
 2. the row-generated Krylov subspace
@@ -3364,8 +3657,11 @@ The minimal proved consumer payload is:
    \]
 3. the action of \(T\) on that subspace, only far enough to form
    \(e_{\zeta_6}(T)\);
-4. the distinguished row \(r\), normalized as the Euler rank functional; and
-5. a certificate that every mapped path carries \(r\) and intertwines \(T\).
+4. the distinguished Euler-rank row line \(Kr\), with any convenient nonzero
+   normalization; and
+5. a certificate that every mapped path intertwines \(T\) and satisfies
+   \(r_{\mathrm{target}}f=\ell r_{\mathrm{source}}\) for an invertible output
+   scalar \(\ell\).
 
 The provider temporarily retains more:
 
@@ -3373,7 +3669,8 @@ The provider temporarily retains more:
 7. one common equivariant input and derivative frame;
 8. compatible Artin reductions; and
 9. at a zero mode, the reduced nearby-cycle object and proof that its
-   vanishing-cycle submodule removes no part of (21.4).
+   variation-generated submodule is \(T\)- and deck-stable, is annihilated by
+   the point row, and admits compatible strict boundary maps.
 
 This distinction matters.  The Boolean (21.3) is enough to state the
 obstruction but not enough to manufacture or compose threshold maps.  The
@@ -3406,28 +3703,51 @@ its boundary restrictions.  Parallel transport gives
 \qquad
 \Phi_jT_j^-=T_j^+\Phi_j,
 \qquad
-\Phi_j(r_j^-)=r_j^+.
+c_j\in K^\times,
+\qquad
+r_j^+\circ\Phi_j=c_jr_j^-.
 \tag{21.6}
 \]
 Polynomial naturality then gives
 \[
-\Phi_j\bigl(r_j^-e_{\zeta_6}(T_j^-)\bigr)
-=r_j^+e_{\zeta_6}(T_j^+),
+r_j^+e_{\zeta_6}(T_j^+)\Phi_j
+=c_jr_j^-e_{\zeta_6}(T_j^-),
 \tag{21.7}
 \]
 so the Boolean crosses the threshold.
 
 At a zero-mode rank change, the middle object in (21.5) must be replaced by
-the **row-generated reduced nearby-cycle module**.  The two adjacent tail
-modules must specialize strictly into that one receiver before the parallel
-read is taken.  A span of ambient modules of unequal rank, or two separately
-chosen cyclic models with the same annihilator, does not suffice.
+the **row-generated reduced nearby-cycle module**.  Theorem 20.3A shows that
+the internal quotient step needs no chosen complement: if the
+variation-generated submodule \(V_t(\mathcal M_j)\) is \(T\)- and deck-stable
+and the common point row annihilates it, the entire dual cyclic row descends
+unchanged to the quotient.  This removes the additional pairing-based demand
+to prove that a column realization has zero intersection with \(V_t\).
 
-The residual ultimately comes from the point of the common birational open.
-Its skyscraper class defines the Euler rank row.  Exceptional Orlov or wall
-summands are supported away from that point and are orthogonal to the row.
-This is why the common-source lift retains provenance that the unmarked
-formal spectrum appears to forget.
+It does not construct the common meromorphic family or its boundary maps.
+The two adjacent tails must still enter that one receiver through strict
+row-line-compatible specializations which reflect the projected-row
+nonvanishing.  Isomorphisms of the dual cyclic row modules are sufficient; a
+carrier epimorphism with invertible output-line map is another sufficient
+finite-module condition.  A span of ambient modules of unequal rank, or two
+separately chosen cyclic models with the same annihilator, does not suffice.
+
+Consequently, a one-object Gamma/window theorem which identifies
+\(V_t(\mathcal M_j)\) with a strict module generated by wall-supported
+classes would have a shorter implication for this consumer than for a
+column-framed invariant.  Euler orthogonality of the common-open skyscraper
+would give \(r(V_t)=0\), and Theorem 20.3A would then descend the dual cyclic
+row without an additional spanning hypothesis.  This is a conditional
+reduction of the zero-mode gate, not a proof that the Gamma/window object or
+its strict boundary maps exist.
+
+The residual is expected to come from the point of the common birational
+open.  Algebraically, its skyscraper class defines the Euler rank row, and
+exceptional Orlov summands supported away from that point are orthogonal to
+it.  Identifying this algebraic row with the intrinsic large-radius
+Gamma/Stokes row through an arbitrary wall is **not** formal; it is precisely
+part of the provider theorem.  Once that theorem holds, the common-source
+lift retains provenance that the unmarked formal spectrum appears to forget.
 
 ## 21.4 The path functor for the fivefold proof
 
@@ -3436,7 +3756,7 @@ The desired map of path types is
 \mathsf{CobPath}_5
 \xrightarrow{\ F_{\mathrm{cyc}}\ }
 \mathsf{Path}
-  \left(\mathsf{CycPrim}^{\mathrm{pointed}}_{\zeta_6}/\mathcal I_r\right).
+  \left(\mathsf{AugPrim}_{\zeta_6}\right).
 \tag{21.8}
 \]
 A Włodarczyk/VGIT threshold path is sent to the comparison (21.6), or to
@@ -3444,11 +3764,13 @@ its reduced-nearby-cycle analogue.  The accompanying shadow transformation
 sends the orbit-cylinder point class to the row-generated cyclic module.
 Its pseudonaturality square is exactly (21.7).
 
-This path functor should be defined **after** quotienting by the one global
-row-null ideal whenever the unquotiented transition is only
-\(1+\text{exceptional error}\).  Theorem 19.3 then makes any finite composite
-row-invisible, while Proposition 20.1A pulls the target Boolean back to a
-path-invariant marker on fivefold cobordisms.
+The preferred construction lands directly in row-line-compatible
+isomorphisms of \(\mathsf{AugPrim}_{\zeta_6}\); Theorem 19.3A then composes
+them.  If the provider first supplies an additive retained-shadow functor and
+the transitions become invertible only after killing its kernel, Theorem
+19.3 supplies an optional quotient.  A raw row-null class in unrestricted
+linear maps supplies neither construction.  Proposition 20.1A then pulls the
+target Boolean back to a path-invariant marker on fivefold cobordisms.
 
 In software form the essential method is:
 
@@ -3469,10 +3791,12 @@ naturality :: mapShadow (transportQDM p q)
            ~= transportCyclic (mapPath p) (mapShadow q)
 ```
 
-The global ideal, primitive character, coefficient spine, common input frame,
-and path translator live in Reader.  The current pointed cyclic module lives
-in indexed State.  The finite ordered comparison stays in the certificate;
-only discharged support and rank-nullity facts enter the commutative Writer.
+The augmented-row retained-output functor, primitive character, coefficient
+spine, common input frame, and path translator live in Reader.  Any global
+kernel ideal is derived from that functor.  The current pointed cyclic module
+lives in indexed State.  The finite ordered comparison stays in the
+certificate; only discharged support and rank-nullity facts enter the
+commutative Writer.
 
 ## 21.5 Endpoint contrast for \(m=2\)
 
@@ -3504,18 +3828,19 @@ The unmarked rational side can acquire the same primitive-sixth packet from
 the cubic threefold center.  Hence multiplicity and every other positive
 constituent-additive marker fail exactly as Theorem 19.2 predicts.
 
-The point row distinguishes **where the packet lands**.  Exceptional classes
-have ambient rank zero, equivalently they pair trivially with the skyscraper
-of a point in the common open.  They may survive as unmarked blocks while
-mapping to zero under (21.3).  This is the key example of information which
-appears forgotten in a local spectrum but is retained by a higher common
-source and recovered through a parallel pointed projection.
+The point row is designed to distinguish **where the packet lands**.
+Exceptional classes have algebraic ambient rank zero, equivalently they pair
+trivially with the skyscraper of a point in the common open.  Under the
+missing Gamma/Stokes row-line provider, they may survive as unmarked blocks
+while mapping to zero under (21.3).  This is the key proposed example of
+information which appears forgotten in a local spectrum but is retained by a
+higher common source and recovered through a parallel pointed projection.
 
 The two current \(m=2\) routes therefore have different gates:
 
 | route | retained specialization | advantage | unresolved gate |
 | --- | --- | --- | --- |
-| pointed Gamma/rank | \((C_T(r),T,r)_{\zeta_6}\) modulo one row-null ideal | exceptional cubic-center packets are invisible; uniform in \(m\) | construct the one-object threshold and zero-mode parallel projections for arbitrary admissible masters |
+| pointed Gamma/rank | augmented row arrow \((C_T(r),T,L,r)_{\zeta_6}\) | row-line rescaling is harmless; exceptional cubic-center packets are predicted to be invisible; uniform in \(m\) | construct the one-object row-line-compatible threshold and zero-mode parallel projections for arbitrary admissible masters |
 | operation/Jordan | primitive-sixth \(K[N]\)-module or kernel profile | no Gamma row in final cancellation; \(J_3\) is a sharp \(m=2\) object | construct strict \(N\)-transport and prove no threefold center supplies the forbidden \(J_3\) carrier |
 
 The pointed Gamma/rank route is presently higher value because its marking
@@ -3528,26 +3853,29 @@ which extension information the unmarked spectrum destroys.
 The full ambient QDM need not cross a threshold.  It is enough to construct
 one common marked cyclic object whose boundary restrictions satisfy (21.6).
 Within that object, it is enough for the \(\zeta_6\)-projected row itself to
-survive.  Equivalently, one may prove that every elementary transition has
-the form
+survive.  A sufficient local normal form--not an equivalent characterization
+of every row-preserving automorphism--is
 \[
 1+v\otimes\lambda,
 \qquad r(v)=0,
 \tag{21.12}
 \]
-in one common receiver.  Then the row fixes every factor and the full
-transition by Theorem 19.3.
+in one common receiver, with the displayed shear invertible and
+\(T\)-compatible.  Then the row fixes that factor directly.  More generally,
+the exact condition is the augmented-row square (21.6), and finite
+composition follows from Theorem 19.3A.
 
 When a common column gives the nondegenerate realization of Theorem 20.3,
 finite Krylov moments can serve as a certificate **inside this common
 object**.  Equality of separately computed moment lists on the two tails is
-not enough.  The minimal credible target for \(m=2\) is therefore:
+not enough.  The current compact credible target for \(m=2\) is therefore:
 
 \[
 \boxed{
 \begin{gathered}
 \text{one common row-generated Rees object at each threshold,}\\
-\text{one global row-null ideal, and one path functor satisfying (21.7).}
+\text{one global row-line-compatible retained-output functor,}\\
+\text{and one path functor satisfying (21.7).}
 \end{gathered}}
 \tag{21.13}
 \]
@@ -3576,6 +3904,352 @@ missing threshold theorem.
 | `papers/cubic-stabilization-irrationality/sections/09-cubic-endpoint.tex` | primitive-sixth Barnes row and projective-stabilization endpoint contrast | `3421b4bc17f13af73696c1366869ddc0aeefa7d5595beac89126530b8542626b` |
 | `notes/cubic-threefolds-tasks/c907-solver-dossier.md` | rank-row strategy, failure models, and current analytic gate | `0e4fcedb4513c4c4ecf61d2ea68e5102133d4191fe3a952d4f63cf1468702958` |
 | `notes/cubic-threefolds-tasks/c907-quantum-monodromy-stabilization.md` | \(m=2\) route comparison and minimal \(K[N]\) alternative | `a9b65f9155bc0501846a87c2ffac47f52607e6596a800444308c89c9c0b115b2` |
+| `notes/2026-08-13-c907-coniveau-principal-symbol-repair.md` | exceptional-cusp point symbol, exact rank reduction, cubic/split-CI pilots, and fixed-phase gap | `f478acc6d85ac83f0ede0f5b8ab328c70c619488360c3070a20d98584af3a1fe` |
+| `notes/2026-08-13-c907-formal-point-covector-frame-gap.md` | two-completion obstruction and one-row large-radius-to-cusp reduction | `736360a5a231157ff953d24ab4218800c5e882450960fbf761a466e515275d97` |
+
+## 21.9 Iritani 2026: useful specialization, not the missing row theorem
+
+Hiroshi Iritani's 2026 note *Notes on the decomposition theorem for blowups*
+(arXiv:2604.10028v2) adds two unconditional structures to the formal blowup
+decomposition:
+
+1. the coordinate changes and decomposition maps are defined over the stated
+   cyclotomic extensions and the center branches are related by cyclotomic
+   monodromy; and
+2. they are equivariant for the universal Hodge group, hence preserve the
+   complexified Hodge-class subspaces and, by the same construction, the
+   algebraic-class subspaces.
+
+This gives a lawful Hodge--cyclotomic specialization of the modular compiler.
+It does not give Gamma-integral, \(K\)-theoretic, Orlov, Euler-rank-row, or
+common-open point compatibility.  Every Tate direction is Hodge-fixed, so
+Hodge equivariance cannot distinguish the ambient point direction from
+exceptional Tate directions.  The finite replay includes an exact
+pairing-preserving, operator-intertwining Tate shear that moves the point row.
+
+The explicit initial asymptotics do prove one useful local statement.  For
+\(\varphi:\widetilde Y\to Y\) the blowup along a proper center \(i:Z\to Y\),
+\[
+\Psi_Y(\varphi^*[p_Y])=[p_Y]+O(\mathfrak q^{-1}),
+\qquad
+\operatorname{in}\!\left(q_{Z,j}^{-1}
+\Psi_{Z,j}(\varphi^*[p_Y])\right)=i^*[p_Y]=0.
+\tag{21.14}
+\]
+Thus the cohomological point column is pure in the exceptional-cusp
+principal symbol.  This is not the intrinsic large-radius Gamma point row:
+the two frames live at \(\mathfrak q=\infty\) and \(\mathfrak q=0\),
+respectively, and the formal theorem supplies no continuous identification of
+their solution completions.  The missing datum is the center coefficient of
+that frame-change matrix, branch by branch.
+
+Consequently the 2026 theorem strengthens the available unmarked
+Hodge--cyclotomic specialization and confirms the local cusp shadow, but it
+does not evade Theorem 19.2 or close the augmented-row provider gate for
+\(m=2\).
+
+## 21.10 Direct blowup path: no master or zero mode required
+
+There are two distinct ways to supply the conditional path functor in
+Module 21.4.  The gauged-master route passes through thresholds and therefore
+needs the zero-mode analysis above.  Weak factorization itself suggests a
+smaller direct route.
+
+## Theorem 21.1 -- direct augmented-row blowup criterion
+
+Fix a primary polynomial \(e_{\zeta_6}\) on a common normalized coefficient
+spine.  Suppose that for every smooth blowup
+\(\varphi:\widetilde Y=\operatorname{Bl}_Z Y\to Y\) occurring in a weak
+factorization, the analytic continuation of Iritani's blowup decomposition
+induces an isomorphism in \(\mathsf{AugPrim}_{\zeta_6}\)
+\[
+\left(V_{\widetilde Y},T_{\widetilde Y},K,r_{\widetilde Y}\right)
+\xrightarrow{\ \sim\ }
+\left(
+V_Y\oplus\bigoplus_{j=0}^{c-2}V_{Z,j},
+T_Y\oplus\bigoplus_jT_{Z,j},
+K,
+c_\varphi(r_Y,0,\ldots,0)
+\right)
+\tag{21.15}
+\]
+for some \(c_\varphi\in K^\times\).  Then
+\[
+b_{\zeta_6}(\widetilde Y)=b_{\zeta_6}(Y).
+\tag{21.16}
+\]
+Consequently \(b_{\zeta_6}\) is invariant along the entire weak
+factorization.  In particular, the endpoint contrast (21.9)--(21.10) implies
+that \(X\times\mathbf P^2\) is irrational.
+
+### Proof
+
+Theorem 19.3A and polynomial naturality identify nonvanishing of the
+projected row on the two sides of (21.15).  The exceptional coordinates have
+zero row, so the right-hand Boolean is exactly \(b_{\zeta_6}(Y)\).  Invert the
+same augmented-row isomorphism for a backward weak-factorization arrow and
+compose along the finite path.  The endpoint contradiction is immediate. ∎
+
+Theorem 21.1 is conditional, but its provider is strictly smaller than the
+gauged-master package:
+
+- it needs no arbitrary-master gauged admissibility;
+- it needs no threshold atlas, reduced nearby cycles, or zero-mode theorem;
+- it needs no global ideal or quotient; and
+- it permits a nonzero scalar rescaling \(c_\varphi\).
+
+Its sole analytic input is still substantial: identify the intrinsic
+large-radius Gamma row with the exceptional-cusp formal decomposition and
+prove that every exceptional primitive-sixth branch has ambient row zero.
+Equation (21.14) proves only cusp-frame point purity.  The cubic-center and
+split-nef codimension-two Kummer calculations verify the first nonvacuous
+pilots; arbitrary nonsplit normal bundles and arbitrary smooth centers remain
+open.  Thus Theorem 21.1 sharpens the direct \(m=2\) landing without claiming
+the missing one-row blowup theorem.
+
+## 21.11 K-theoretic forcing of the missing blowup row
+
+The row part of (21.15) is formal once the analytic blowup comparison is
+known to lift the Orlov \(K\)-theory decomposition.  This separates the
+remaining analytic content from the elementary rank calculation.
+
+### Theorem 21.2 -- an Orlov-compatible Gamma lift forces point-row purity
+
+Let \(\varphi:\widetilde Y=\operatorname{Bl}_Z Y\to Y\) be the blowup of a
+smooth center of codimension \(c\ge2\).  Write
+
+\[
+\Theta_K:K_0(Y)\oplus\bigoplus_{j=0}^{c-2}K_0(Z)
+\xrightarrow{\ \sim\ }K_0(\widetilde Y)
+\tag{21.17}
+\]
+
+for the \(K_0\)-isomorphism induced by Orlov's blowup decomposition: the
+first component is \(L\varphi^*\), and every other component is a pushforward
+from the exceptional divisor.  Suppose:
+
+1. Gamma integral-structure maps \(\Psi_Y,\Psi_Z,\Psi_{\widetilde Y}\) span
+   the corresponding solution spaces after scalar extension;
+2. the point rows satisfy
+   \(r_W\Psi_W(a)=u_W\operatorname{rk}_W(a)\), with \(u_W\ne0\); and
+3. an analytic blowup isomorphism
+   \(A:V_{\widetilde Y}\to V_Y\oplus\bigoplus_jV_{Z,j}\) makes the square
+
+   \[
+   A\Psi_{\widetilde Y}\Theta_K
+   =D\bigl(\Psi_Y\oplus\textstyle\bigoplus_j\Psi_Z\bigr)
+   \tag{21.18}
+   \]
+
+   commute, where \(D\) is block diagonal and acts on the ambient block by
+   a nonzero scalar.
+
+Then, after harmless normalization of the row lines,
+
+\[
+r_{\widetilde Y}
+=c_A(r_Y,0,\ldots,0)A
+\qquad(c_A\in K^\times).
+\tag{21.19}
+\]
+
+### Proof
+
+For \(a\in K_0(Y)\), derived pullback preserves generic rank:
+
+\[
+\operatorname{rk}_{\widetilde Y}(L\varphi^*a)
+=\operatorname{rk}_Y(a).
+\]
+
+Every exceptional Orlov component is represented by a complex supported on
+the exceptional divisor, so it has generic rank zero on \(\widetilde Y\).
+Consequently
+
+\[
+\operatorname{rk}_{\widetilde Y}\Theta_K
+=(\operatorname{rk}_Y,0,\ldots,0).
+\tag{21.20}
+\]
+
+Apply the rows to (21.18) and use hypotheses 2 and (21.20).  The two
+functionals agree up to the nonzero ambient normalization.  Hypothesis 1
+extends this equality from the Gamma lattice to the whole solution space,
+which is (21.19). ∎
+
+This theorem is not the missing provider.  Iritani's formal QDM
+decomposition gives the underlying \(A\) at the exceptional cusp, while
+Orlov gives (21.17), but the audited sources do not prove the
+Gamma/integral-structure square (21.18) after analytic continuation from the
+large-radius frame.  Theorem 21.2 gives one clean sufficient naturality
+package for Theorem 21.1: an Orlov-compatible Gamma lift, rather than a
+separate calculation of every exceptional row or a global marked-threshold
+theorem.  It is not the smallest possible provider.  The C907 shadow audit
+isolates the strictly weaker one-row Stokes/window statement
+\(r(T-1)=0\); a full commuting Gamma--Orlov square implies that statement but
+is not known, and should not be presented as necessary.
+
+The proof only used an additive character \(\epsilon\) satisfying
+
+\[
+\epsilon_{\widetilde Y}\Theta_K
+=(a\epsilon_Y,0,\ldots,0),\qquad a\ne0.
+\tag{21.21}
+\]
+
+Hence the same forcing lemma applies to any support-null character: generic
+rank, restriction to the common open followed by rank, the top-dimensional
+generic-stalk character, or a localizing additive invariant followed by a
+functional that kills the boundary-supported subcategory.  In software
+language, (21.21) is the getter law; (21.18) is the path-map naturality law.
+The higher \(K\)-theory/SOD path retains the value that the bare QDM
+projection forgot, and the Gamma square reads it back without choosing a
+complement.
+
+The resulting categorical spine is the commutative diagram
+
+\[
+\begin{CD}
+K_0(Y)\oplus K_0(Z)^{\oplus(c-1)} @>{\Theta_K}>> K_0(\widetilde Y)\\
+@V{\Psi_Y\oplus\Psi_Z^{\oplus(c-1)}}VV
+ @VV{\Psi_{\widetilde Y}}V\\
+V_Y\oplus V_Z^{\oplus(c-1)} @<{A}<< V_{\widetilde Y}\\
+@V{(\operatorname{rk},0)}VV @VV{r_{\widetilde Y}}V\\
+K @= K,
+\end{CD}
+\tag{21.22}
+\]
+
+where the harmless block normalization \(D\) from (21.18) is suppressed.
+The upper square is the unproved provider; the lower triangle is Theorem
+21.2.  Thus the diagram displays rather than hides the exact missing edge.
+
+## 21.12 Provider morphisms and non-implications
+
+The competing routes fit into the implication diagram
+
+\[
+\begin{CD}
+\mathsf{GammaOrlovSquare}
+ @>>> \mathsf{DirectAugBlowup}\\
+ @. @VVV\\
+\mathsf{TwoWallRankQuotient}
+ @>>> \mathsf{RowStabilizerPath}
+ @>>> \mathsf{BooleanInvariant}.
+\end{CD}
+\tag{21.23}
+\]
+
+The top arrow is Theorem 21.2, the right vertical arrow is Theorem 21.1,
+and the bottom-left arrow is the common-open/rank-zero-target Stokes lemma.
+The bottom route needs only the aggregate transition at each incompatible
+pair of incident receivers; it need not lift every arrow to an integral
+Gamma square.
+
+None of the displayed arrows may be reversed formally.  For example, with
+\(r=(1,0)\), every matrix
+
+\[
+T_{a,b}=\begin{pmatrix}1&0\\a&b\end{pmatrix},\qquad b\ne0,
+\]
+
+preserves \(r\), while the action on \(\ker r\) is invisible to the row and
+cannot reconstruct a Gamma--Orlov lift.  Conversely, an aggregate path can
+preserve \(r\) by cancellation even when its individual factors do not:
+
+\[
+U=\begin{pmatrix}1&1\\0&1\end{pmatrix},\qquad
+U^{-1}=\begin{pmatrix}1&-1\\0&1\end{pmatrix},\qquad
+rU\ne r,\quad rUU^{-1}=r.
+\tag{21.24}
+\]
+
+Thus a theorem only at the final Boolean level cannot be silently promoted
+to edgewise marked compatibility.  Diagram (21.23) is also the modular
+choice point: the caller may provide rich integral lifts, direct augmented
+arrows, or only the smallest common-open row quotient, and the downstream
+Boolean consumer is unchanged.
+
+## 21.13 Multi-sector reconstruction from sparse Stokes shadows
+
+There is one precise way in which parallel projections can recover a block
+that no single sector sees conservatively.
+
+### Theorem 21.3 -- jointly separating half-space shadows recover the zero block
+
+Let \(\Phi\) be a finite subset of a real vector space containing \(0\), and
+let
+
+\[
+W=\bigoplus_{\phi\in\Phi}W_\phi.
+\]
+
+For a real linear functional \(\lambda\), put
+
+\[
+F_\lambda^{\le0}W
+=\bigoplus_{\lambda(\phi)\le0}W_\phi.
+\tag{21.25}
+\]
+
+If a finite family \(\Lambda\) satisfies
+
+\[
+\forall\phi\ne0\quad\exists\lambda\in\Lambda
+\quad\lambda(\phi)>0,
+\tag{21.26}
+\]
+
+then
+
+\[
+\bigcap_{\lambda\in\Lambda}F_\lambda^{\le0}W=W_0.
+\tag{21.27}
+\]
+
+Indeed, the \(W_0\)-summand belongs to every half-space shadow.  Condition
+(21.26) excludes every other summand from at least one of them. ∎
+
+This is a finite-limit reconstruction theorem: the inclusions
+\(F_\lambda^{\le0}W\hookrightarrow W\) form a jointly monic family whose
+pullback is exactly \(W_0\).  A single shadow is normally insufficient,
+because it retains every strictly decaying exponential on that ray.
+
+For a Stokes-filtered local system, apply the theorem on the **dual** formal
+solution space, where the Gamma point row is a section.  The normalized
+ambient exponent is \(0\), and the exceptional blowup exponents are the
+nonzero elements of \(\Phi\).  If one can
+
+1. map a finite set of sectorial paths to one common dual fiber coherently;
+2. supply a simultaneous splitting, or an equivalent Beck--Chevalley
+   comparison, identifying the transported Stokes subspaces with the formal
+   half-space subspaces (21.25);
+3. prove that the continued Gamma point section lies in
+   \(F_\lambda^{\le0}\) for every chosen direction; and
+4. choose directions satisfying (21.26),
+
+then (21.27) forces point-row purity without computing any Stokes
+multiplier.  The path maps in item 1 are the requested functor between path
+types; the transported section is indexed State, and the intersection is
+the lens getter from the family of Reader-supplied sectorial orders.
+
+Coherent path transport alone does not supply item 2.  For instance, with
+\(W=Ke_0\oplus Ke_1\), the formal shadows
+\(Ke_0\subset W\) have intersection \(Ke_0\), but a Stokes shear can replace
+the first inclusion by \(K(e_0+e_1)\subset W\).  Their transported
+intersection is then \(K(e_0+e_1)\), which retains a nonzero exceptional
+component.  The shear is exactly the optic residual that the bare path map
+forgot.
+
+Only the finite reconstruction theorem is unconditional.  For an arbitrary
+smooth blowup, items 2--3 are genuine analytic assertions.  The split-nef
+Kummer calculation proves it in its pilot cases because the normalized
+point solution is polynomial.  For a split negative normal degree, the raw
+slice \((e^R-1)/R\) leaves a nonzero \(e^{-R}/R\) branch after normalization,
+so one cannot assert the required multi-sector moderation.  In the nonsplit
+case the relative-cap point-purity lemma would supply items 2--3, but that
+lemma is currently open.  Thus Theorem 21.3 is a new alternative interface
+for the same missing analytic content, not an \(m=2\) proof.
 
 ---
 
@@ -3586,7 +4260,7 @@ are:
 
 1. **Proof-carrying record or type class?**  The mathematical object is more
    faithfully a record containing `observe`, `select`, `emit`, and proofs of
-   the two laws.  A Haskell implementation could expose a type class for
+   the three laws.  A Haskell implementation could expose a type class for
    ergonomic instance selection while storing the laws in a refinement layer.
 2. **Free monoidal category or only its decategorification?**  The
    \(\operatorname{Sym}(\mathsf{QBlock})\) formulation records actual block
@@ -3626,10 +4300,11 @@ are:
     Theorem 19.2 proves that such a marking is mandatory.  The two precise
     candidates are the \(\mathbf G_a\)-operation producing \(J_{m+1}\) and
     the pointed Gamma rank row; their provider theorems remain open.
-11. **Does the rank-zero error class form one global two-sided ideal?**
-    Theorem 19.3 makes this the exact composition question.  Wall-local
-    annihilation is insufficient until receiver overlap 2-cells also lie in
-    the ideal.
+11. **Can the provider land in one augmented-row category?**  Theorem 19.3A
+    then makes the row-output kernel automatically two-sided, or avoids a
+    quotient entirely.  Wall-local annihilation in separately chosen
+    receivers is insufficient until the overlap 2-cells are row-line
+    compatible.
 12. **Can the projective and blowup lifts be made one rig pseudofunctor?**
     Equation (19.13) is the first compulsory regression.  For \(m\ge3\), it
     forces the exceptional copies into a non-split \(J_{m-1}\) string.
@@ -3643,14 +4318,23 @@ are:
     For \(m=2\), vanishing of the top rank \(\operatorname{rank}D^2\) is much
     smaller than classification of every center's full Stokes object, but it
     still needs a geometric proof.
-16. **Can the fivefold path functor be built directly in the row-null
-    quotient?**  This would avoid choosing ambient threshold isomorphisms
-    that the final Boolean never consumes, while retaining the one-object and
-    zero-mode conditions that the countermodels show are essential.
+16. **Can the fivefold path functor be built directly in the augmented
+    primitive-row category?**  This would avoid choosing ambient threshold
+    isomorphisms that the final Boolean never consumes, while retaining the
+    one-object and zero-mode conditions that the countermodels show are
+    essential.
 17. **Can the rank-zero-target Stokes lemma be promoted to an optic law?**
-    Equation (21.12) is exactly the local condition.  The remaining issue is
-    to place every wall and overlap map in one common receiver and one global
-    two-sided ideal.
+    Equation (21.12) is one sufficient rank-one local normal form.  The exact
+    condition is the augmented-row square (21.6).  The remaining issue is to
+    place every wall and overlap map in one common row-line-compatible
+    receiver.
+18. **Can the large-radius/cusp frame coefficient be controlled directly?**
+    Iritani's formal point column is pure at the exceptional Laurent cusp,
+    but this does not identify the intrinsic large-radius Gamma point row.
+    The first nonvacuous scalar is the point/exceptional coefficient for the
+    blowup of projective five-space along the cubic; split
+    complete-intersection pilots vanish, while nonsplit rank-two normal
+    degeneration remains open.
 
 None of these questions blocks the proof in Modules 0--16 or the
 transport-level specialization audit in Module 17.  Modules 18--21 isolate

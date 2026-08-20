@@ -99,7 +99,7 @@ data Ledger (s :: SourceStage) where
 deriving instance Show (Ledger s)
 
 data Env = Env
-  { globalIdeal :: String,
+  { retainedOutput :: String,
     coefficientSpine :: String
   }
   deriving (Eq, Show)
@@ -142,9 +142,9 @@ forgetStep = ProofM $ \env (RichLedger rich) ->
 
 inspectStep :: String -> ProofM 'SourceCoarse 'SourceCoarse String
 inspectStep label = ProofM $ \env ledger ->
-  ( globalIdeal env,
+  ( retainedOutput env,
     ledger,
-    singletonEvidence ("inspect:" ++ label ++ "@" ++ globalIdeal env),
+    singletonEvidence ("inspect:" ++ label ++ "@" ++ retainedOutput env),
     SId
   )
 
@@ -214,7 +214,7 @@ main = do
         == targetTransport (mapPath composite) (mapShadow 7)
     )
 
-  let env = Env "rank-zero" "C[q][[Q,t]]"
+  let env = Env "augmented-row-output" "C[q][[Q,t]]"
       initial = RichLedger (Rich "six-axes" Plus)
       leftAssociated =
         (forgetStep `ibind` const (inspectStep "a"))

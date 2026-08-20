@@ -2,7 +2,7 @@
 
 **Lane:** `cubic-threefolds`
 
-**Status:** active 2026-08-19
+**Status:** active 2026-08-20
 
 **Objective:** write a self-contained alternative proof packet for cubic
 one-stabilization irrationality in which the QDM block information retained by
@@ -18,7 +18,7 @@ interface.
    direct-sum separation, blowups, projective bundles, and weak factorization.
 3. Prove that forgetful/coarsening maps between marker data commute with every
    ledger operation.
-4. Instantiate the framework with the smallest marker sufficient for a cubic
+4. Instantiate the framework with a compact marker sufficient for a cubic
    threefold: even rank two, nonzero centered nilpotent, and nonzero modified
    residue discriminant.
 5. Include the corrected common-coefficient-spine argument from C924; never
@@ -73,18 +73,29 @@ It currently contains:
   translation; and
 - a concrete \(m=2\) specialization through the pointed formal-monodromy
   cyclic shadow, its common-threshold/reduced-nearby-cycle parallel
-  projections, and the global row-null quotient; and
+  projections, and the augmented operator-row category whose output kernel
+  repairs the false naked row-null quotient; and
+- a complete-source audit of Iritani's 2026 Hodge/cyclotomic blowup note,
+  including the proved exceptional-cusp point symbol and the remaining
+  large-radius Gamma frame gap; and
 - an explicit exploration frontier.
 
 The finite categorical law model is
 `notes/cubic-threefolds-tasks/c925-categorical-law-check.py`, with exact
 checked output
 `notes/cubic-threefolds-tasks/c925-categorical-law-check.json`.  It passes
-sixteen tests, including a negative collision test showing why Guéré's
+twenty-seven tests, including a negative collision test showing why Guéré's
 unit-shift separation contract is mandatory, the \(m\ge2\) constituent
 no-go, \(\mathbf G_a\) Clebsch--Gordan through size five, and composition of
-rank-invisible shears, plus exact kernel-profile, Krylov, effect-stack, and
-optic/path-functor and pointed \(m=2\) endpoint checks.  A separate executable Haskell toy at
+row-preserving shears, plus exact coordinate-pseudonaturality,
+pairing/Hodge/operator and two-sided-row-kernel countermodels, the lawful
+augmented-row output-kernel repair, positive and negative zero-mode
+dual-row quotient tests, kernel-profile, Krylov, effect-stack,
+optic/path-functor, the affine row-stabilizer group law, Orlov/Gamma rank-row
+forcing, nonreversible provider
+implications, positive and Stokes-sheared negative multi-sector
+reconstruction tests, and pointed \(m=2\) endpoint
+checks.  A separate executable Haskell toy at
 `notes/cubic-threefolds-tasks/c925-sparse-shadow-path-toy.hs` verifies the
 typed path translator, payload naturality, indexed bind laws, lens laws, and
 the necessity of an optic residual.  The original exact cubic residue replay
