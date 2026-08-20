@@ -1313,6 +1313,74 @@ def main():
     )
     checks["joint_sparse_shadows_retain_marker_without_object"] = "pass"
 
+    # Rationality is upward closed in the stabilization index.  Hence any
+    # hypothetical rational seed meets every unbounded arithmetic progression
+    # in its rational tail, so irrationality on one progression forces all
+    # indices.  Check the exact ceiling arithmetic over a broad finite range.
+    for step in range(1, 13):
+        for residue in range(step):
+            for rational_seed in range(61):
+                progression_index = residue
+                if progression_index < rational_seed:
+                    progression_index += (
+                        rational_seed - progression_index + step - 1
+                    ) // step * step
+                assert progression_index >= rational_seed
+                assert progression_index % step == residue
+    checks["unbounded_stabilization_progression_forces_all_indices"] = "pass"
+
+    # A fixed P^k operation contributes J_(k+1).  Repeated tensoring has the
+    # unique top string J_(kr+1); all remaining strings are shorter.  This is
+    # the representation-theoretic source recursion behind Module 24.
+    def tensor_partition_with_block(partition, block_size):
+        result = []
+        for left_size in partition:
+            result.extend(
+                left_size + block_size - 2 * index + 1
+                for index in range(1, min(left_size, block_size) + 1)
+            )
+        return sorted(result, reverse=True)
+
+    for projective_dimension in range(1, 6):
+        partition = [1]
+        for power in range(1, 8):
+            partition = tensor_partition_with_block(
+                partition, projective_dimension + 1
+            )
+            expected_top = projective_dimension * power + 1
+            assert partition[0] == expected_top
+            assert partition.count(expected_top) == 1
+            assert all(size < expected_top for size in partition[1:])
+    checks["fixed_projective_factor_has_unique_top_jordan_string"] = "pass"
+
+    # Mixed fixed factors have the same additive highest-weight law:
+    # tensor_j J_(a_j) has one top string of length 1 + sum_j(a_j - 1).
+    for factor_count in range(1, 6):
+        for block_sizes in product(range(1, 7), repeat=factor_count):
+            partition = [1]
+            for block_size in block_sizes:
+                partition = tensor_partition_with_block(partition, block_size)
+            expected_top = 1 + sum(size - 1 for size in block_sizes)
+            assert partition[0] == expected_top
+            assert partition.count(expected_top) == 1
+            assert all(size < expected_top for size in partition[1:])
+    checks["heterogeneous_fixed_factors_have_unique_top_jordan_string"] = "pass"
+
+    # The center carrier bound and its codimension-(c-1) exceptional string
+    # combine to length m, exactly one below the source J_(m+1).
+    for stabilization in range(1, 13):
+        ambient_dimension = stabilization + 3
+        for center_dimension in range(2, stabilization + 2):
+            codimension = ambient_dimension - center_dimension
+            maximal_center_length = center_dimension - 1
+            exceptional_length = codimension - 1
+            maximal_exceptional_contribution = (
+                maximal_center_length + exceptional_length - 1
+            )
+            assert maximal_exceptional_contribution == stabilization
+            assert maximal_exceptional_contribution < stabilization + 1
+    checks["uniform_carrier_bound_leaves_one_jordan_step"] = "pass"
+
     # The m=2 specialization retains primitive-sixth support seen by the
     # point row, not the unmarked primitive packet count.  Row-null exceptional
     # packets can change the latter while leaving the former unchanged.

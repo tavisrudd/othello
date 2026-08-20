@@ -103,13 +103,21 @@ It currently contains:
   marker family has a canonical minimal operation-stable shadow, and that
   parallel sparse shadows descend a marker exactly when their joint fibres
   do; and
+- an updated \(m=2\) roadmap which replaces the raw irregular triangle and
+  bare deck orbit by the exact Gamma/rank-row leakage gate or the strict
+  operation-framed carrier gate, proves that any unbounded stabilization
+  subsequence suffices, recodes \(\mathbf P^m\) birationally as
+  \((\mathbf P^1)^m\), and derives the unique top \(J_{m+1}\) together with a
+  conditional all-\(m\) dimension-versus-length criterion whose minimal
+  consumer is the Boolean high-length shadow and whose providers need only
+  exist on one cofinal fixed-factor family; and
 - an explicit exploration frontier.
 
 The finite categorical law model is
 `notes/cubic-threefolds-tasks/c925-categorical-law-check.py`, with exact
 checked output
 `notes/cubic-threefolds-tasks/c925-categorical-law-check.json`.  It passes
-forty-two tests, including a negative collision test showing why Guéré's
+forty-six tests, including a negative collision test showing why Guéré's
 unit-shift separation contract is mandatory, the \(m\ge2\) constituent
 no-go, \(\mathbf G_a\) Clebsch--Gordan through size five, and composition of
 row-preserving shears, plus exact coordinate-pseudonaturality,
@@ -135,6 +143,11 @@ richer sufficient shadow to the joint marker image, and verify a case where
 two projections jointly retain a marker although neither retains it alone
 and the rich object is still forgotten.  The proof, not the example,
 establishes terminality among all sufficient shadows.
+The stabilization additions check the exact arithmetic-progression ceiling
+logic, the unique top \(J_{kr+1}\) in bounded tensor powers of the fixed
+\(J_{k+1}\) projective operation, and the one-step gap after the
+codimension-dependent exceptional string, together with the heterogeneous
+fixed-factor highest-string law.
 A separate executable
 Haskell toy at
 `notes/cubic-threefolds-tasks/c925-sparse-shadow-path-toy.hs` verifies the
@@ -167,3 +180,6 @@ The framed-\(m=1\) specialization audit is
 
 The broader non-\(m=2\) categorical dividend and Theorems 23.1--23.3 are
 audited in `notes/2026-08-20-c925-non-m2-categorical-dividends.md`.
+
+The reconciled \(m=2\) roadmap and unbounded-stabilization/all-\(m\) criterion
+are in `notes/2026-08-20-c925-m2-roadmap-and-unbounded-stabilizations.md`.

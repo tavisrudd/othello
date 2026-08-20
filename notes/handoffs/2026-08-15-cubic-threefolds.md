@@ -69,10 +69,21 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   promoted: the indexed center-null quotient represents and detects every
   center-null marker, every small marker family has a canonical minimal
   sufficient shadow, and parallel sparse shadows satisfy an exact joint-fibre
-  descent criterion without reconstructing the rich object.  The
-  forty-two-check finite law replay, eleven-check typed Haskell toy, and
-  original cubic replay are green.  C925 remains open at the one-object
-  fixed-phase Gamma/support or relative-cap cancellation provider.
+  descent criterion without reconstructing the rich object.  The updated
+  \(m=2\) roadmap now records the raw triangle/deck-orbit failures and the two
+  exact replacement gates.  Any unbounded stabilization subsequence already
+  implies all \(m\); the binary model
+  \(X\times(\mathbf P^1)^m\) has a unique top \(J_{m+1}\), while a
+  codimension-\(c\) center occurrence satisfying the indexed bound
+  \(\ell_\theta(Z;\sigma)\le\dim Z-1\) contributes at most \(J_m\) after its
+  exceptional \(J_{c-1}\) factor.  The minimal consumer is the Boolean
+  high-length shadow, and the three conditional inputs need only exist on one
+  cofinal fixed-factor family.  This is not a proof of any source, carrier, or
+  transport input.  The
+  forty-six-check finite law replay, eleven-check typed Haskell toy, and
+  original cubic replay are green.  C925 remains open at fixed-phase
+  Gamma/rank transport or at the operation-framed source/carrier/strictness
+  package; the relative-cap cancellation remains one possible rank provider.
   Mathematics only; no manuscript or Lean edits.  Card:
   `../cubic-threefolds-tasks/c925-modular-direct-qdm-proof-packet.md`.
 - **C924 — closed 2026-08-19.** The direct ordinary-QDM route proves
