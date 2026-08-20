@@ -11,6 +11,7 @@ from collections import Counter
 from fractions import Fraction
 from itertools import permutations, product
 import json
+from math import factorial
 
 
 def bag(xs):
@@ -177,6 +178,13 @@ def nilpotent_tensor(left_size, right_size):
     return matrix_add(
         kronecker(jordan(left_size), identity(right_size)),
         kronecker(identity(left_size), jordan(right_size)),
+    )
+
+
+def diagonal_tensor(left, right):
+    return matrix_add(
+        kronecker(left, identity(len(right))),
+        kronecker(identity(len(left)), right),
     )
 
 
@@ -1365,6 +1373,149 @@ def main():
             assert partition.count(expected_top) == 1
             assert all(size < expected_top for size in partition[1:])
     checks["heterogeneous_fixed_factors_have_unique_top_jordan_string"] = "pass"
+
+    # For 0 -> J_b -> B_x -> J_a -> 0, represent the extension class
+    # x=t^valuation in Ext^1(J_a,J_b).  At threshold m >= max(a,b), the
+    # snake boundary for N^m has image dimension
+    # max(0,a+b-m-valuation).  This equals the increase in rank(im N^m).
+    def cyclic_extension_matrix(quotient_size, sub_size, valuation=None):
+        extension = block_diagonal(
+            [jordan(sub_size), jordan(quotient_size)]
+        )
+        if valuation is not None:
+            extension[sub_size - 1 - valuation][sub_size] += 1
+        return extension
+
+    for threshold in range(1, 6):
+        for quotient_size in range(1, threshold + 1):
+            for sub_size in range(1, threshold + 1):
+                valuations = [None] + list(
+                    range(min(quotient_size, sub_size))
+                )
+                for valuation in valuations:
+                    extension = cyclic_extension_matrix(
+                        quotient_size, sub_size, valuation
+                    )
+                    top_rank = rational_rank(
+                        matrix_power(extension, threshold)
+                    )
+                    expected_leakage_rank = (
+                        0
+                        if valuation is None
+                        else max(
+                            0,
+                            quotient_size
+                            + sub_size
+                            - threshold
+                            - valuation,
+                        )
+                    )
+                    assert top_rank == expected_leakage_rank
+    checks["power_bockstein_rank_equals_top_image_leakage"] = "pass"
+
+    # The m=2 hostile extension creates J_3 and has nonzero leakage, whereas
+    # the nonsplit J_2 extension is harmless at the same threshold.
+    hostile_j3 = cyclic_extension_matrix(2, 1, 0)
+    harmless_j2 = cyclic_extension_matrix(1, 1, 0)
+    assert nilpotent_jordan_partition(hostile_j3) == [3]
+    assert rational_rank(matrix_power(hostile_j3, 2)) == 1
+    assert nilpotent_jordan_partition(harmless_j2) == [2]
+    assert rational_rank(matrix_power(harmless_j2, 2)) == 0
+    checks["m2_power_leakage_separates_j3_from_harmless_j2"] = "pass"
+
+    # Zero power leakage transports only Top_m, not the whole module or a
+    # splitting.  Add the harmless nonsplit J_2 extension beside a retained
+    # J_3: the partitions differ but im(N^2) has the same rank one.
+    retained_before = block_diagonal([jordan(3), jordan(1)])
+    retained_after = block_diagonal([jordan(3), harmless_j2])
+    assert nilpotent_jordan_partition(retained_before) == [3, 1]
+    assert nilpotent_jordan_partition(retained_after) == [3, 2]
+    assert rational_rank(matrix_power(retained_before, 2)) == 1
+    assert rational_rank(matrix_power(retained_after, 2)) == 1
+    checks["top_image_shadow_forgets_harmless_nonsplit_extensions"] = "pass"
+
+    # Zero leakage persists after tensoring by J_(k+1) when the consumer
+    # threshold is shifted from m to m+k.  Retain a source J_(m+1) so the
+    # transported top image is nonzero rather than vacuous.
+    for threshold in range(1, 5):
+        retained = jordan(threshold + 1)
+        for quotient_size in range(1, threshold + 1):
+            for sub_size in range(1, threshold + 1):
+                valuations = [None] + list(
+                    range(min(quotient_size, sub_size))
+                )
+                for valuation in valuations:
+                    leakage_rank = (
+                        0
+                        if valuation is None
+                        else max(
+                            0,
+                            quotient_size
+                            + sub_size
+                            - threshold
+                            - valuation,
+                        )
+                    )
+                    if leakage_rank:
+                        continue
+                    extension = cyclic_extension_matrix(
+                        quotient_size, sub_size, valuation
+                    )
+                    before = block_diagonal(
+                        [retained, jordan(sub_size)]
+                    )
+                    after = block_diagonal([retained, extension])
+                    for shift in range(3):
+                        factor = jordan(shift + 1)
+                        shifted_threshold = threshold + shift
+                        before_product = diagonal_tensor(before, factor)
+                        after_product = diagonal_tensor(after, factor)
+                        correction_product = diagonal_tensor(
+                            jordan(quotient_size), factor
+                        )
+                        assert rational_rank(
+                            matrix_power(
+                                correction_product, shifted_threshold
+                            )
+                        ) == 0
+                        assert rational_rank(
+                            matrix_power(before_product, shifted_threshold)
+                        ) == rational_rank(
+                            matrix_power(after_product, shifted_threshold)
+                        )
+    checks["zero_power_leakage_survives_shifted_tensor_products"] = "pass"
+
+    # At the extremal exponent, the multinomial expansion has exactly one
+    # surviving term.  This computes the canonical source top line without
+    # retaining the full image filtration.
+    for factor_count in range(1, 4):
+        for block_sizes in product(range(1, 5), repeat=factor_count):
+            diagonal = jordan(block_sizes[0])
+            extremal_tensor = matrix_power(
+                jordan(block_sizes[0]), block_sizes[0] - 1
+            )
+            extremal_exponent = block_sizes[0] - 1
+            for block_size in block_sizes[1:]:
+                diagonal = diagonal_tensor(diagonal, jordan(block_size))
+                extremal_tensor = kronecker(
+                    extremal_tensor,
+                    matrix_power(jordan(block_size), block_size - 1),
+                )
+                extremal_exponent += block_size - 1
+            multinomial = factorial(extremal_exponent)
+            for block_size in block_sizes:
+                multinomial //= factorial(block_size - 1)
+            expected = [
+                [Fraction(multinomial) * entry for entry in row]
+                for row in extremal_tensor
+            ]
+            actual = matrix_power(diagonal, extremal_exponent)
+            assert actual == expected
+            assert rational_rank(actual) == 1
+            assert rational_rank(
+                matrix_power(diagonal, extremal_exponent + 1)
+            ) == 0
+    checks["extremal_multinomial_computes_source_top_line"] = "pass"
 
     # The center carrier bound and its codimension-(c-1) exceptional string
     # combine to length m, exactly one below the source J_(m+1).

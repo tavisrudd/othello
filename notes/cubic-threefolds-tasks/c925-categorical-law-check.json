@@ -1,5 +1,5 @@
 {
-  "check_count": 46,
+  "check_count": 51,
   "checks": {
     "augmented_row_output_kernel_is_two_sided": "pass",
     "bittner_relation_codimension_2_through_6": "pass",
@@ -8,6 +8,7 @@
     "conditional_framed_m1_telescope_with_specialized_center_null": "pass",
     "cyclic_krylov_moments_reconstruct_nilpotent_string": "pass",
     "exponential_initial_face_filtered_monoidal_laws": "pass",
+    "extremal_multinomial_computes_source_top_line": "pass",
     "finite_kan_coarsening_composition": "pass",
     "fixed_projective_factor_has_unique_top_jordan_string": "pass",
     "formal_coordinate_pseudonaturality_not_raw_equality": "pass",
@@ -23,10 +24,12 @@
     "kkpyy_atomization_and_chemical_formula": "pass",
     "laurent_grading_shift_collides_row_character": "pass",
     "m2_pointed_primary_shadow_ignores_row_null_packets": "pass",
+    "m2_power_leakage_separates_j3_from_harmless_j2": "pass",
     "minimal_sufficient_shadow_is_joint_marker_image": "pass",
     "multi_sector_sparse_shadows_recover_zero_exponent": "pass",
     "optic_residual_and_path_functor_naturality": "pass",
     "orlov_gamma_lift_forces_blowup_rank_row": "pass",
+    "power_bockstein_rank_equals_top_image_leakage": "pass",
     "provider_implications_are_not_reversible": "pass",
     "rank_leakage_covector_is_sole_quotient_defect": "pass",
     "reader_indexed_state_writer_composition": "pass",
@@ -38,6 +41,7 @@
     "simple_retained_character_forces_row_line": "pass",
     "sparse_kernel_profile_reconstructs_jordan_type": "pass",
     "split_vs_exact_k0_retention": "pass",
+    "top_image_shadow_forgets_harmless_nonsplit_extensions": "pass",
     "torsor_path_holonomy_and_endpoint_obstruction": "pass",
     "unbounded_stabilization_progression_forces_all_indices": "pass",
     "uniform_carrier_bound_leaves_one_jordan_step": "pass",
@@ -46,7 +50,8 @@
     "unmarked_constituent_no_go_m_2_through_6": "pass",
     "wall_mutations_fix_common_open_point": "pass",
     "zero_mode_dual_cyclic_row_descends_through_quotient": "pass",
-    "zero_mode_row_annihilation_is_necessary": "pass"
+    "zero_mode_row_annihilation_is_necessary": "pass",
+    "zero_power_leakage_survives_shifted_tensor_products": "pass"
   },
   "scope": "finite algebraic law model only; external comparison theorems are inputs",
   "status": "pass"
