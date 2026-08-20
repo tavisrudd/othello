@@ -35,6 +35,7 @@ roots = [
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisPrimaryDiscriminantSplitting",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisTwoPrimaryLatticeComparison",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisTwoPrimaryPairing",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisTwoPrimaryStandardCoordinates",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisLocalChart",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisSlopeModels",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.ConnectedPacketPersistence",

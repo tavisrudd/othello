@@ -4,6 +4,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAx
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisPrimaryDiscriminantSplitting
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisTwoPrimaryLatticeComparison
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisTwoPrimaryPairing
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisTwoPrimaryStandardCoordinates
 
 /-!
 # The relative six-axis packet over its integral homology realization
@@ -300,6 +301,35 @@ theorem relativeSixAxisTwoPrimaryKernelImage_eq_perp
       GraphLattices.sixAxisSourceTwoPrimaryKernelImage_eq_perp
         realization.jacobianPolarizationPrincipal realization.polarizationPullback member⟩
 
+/-- The two-primary part of the lattice model of the isogeny kernel on one
+fibre, carried into the standard symplectic coordinates of the rank-eight
+tensor model. -/
+def relativeSixAxisTwoPrimaryKernelCoordinates
+    (realization : RelativeSixAxisHomologyRealization) :
+    Submodule GraphLattices.F2 GraphLattices.SixAxisStandardDiscriminantCoordinates :=
+  GraphLattices.sixAxisSourceTwoPrimaryKernelCoordinates realization.polarizationPullback
+
+/-- The transported two-primary kernel is maximal isotropic for the rank-eight
+tensor form, and is therefore one of the five members of the projective-line
+packet as soon as it is stable under the two diagonal generators.  Maximal
+isotropy is no longer an input: it comes from the lattice-level self-duality of
+the two-primary kernel through the isometry of the normalized two-primary form
+with the rank-eight tensor form. -/
+theorem relativeSixAxisTwoPrimaryKernelCoordinates_isMaximalIsotropic
+    (realization : RelativeSixAxisHomologyRealization) :
+    GraphLattices.IsMaximalIsotropic GraphLattices.sixAxisStandardDiscriminantBilinForm
+        (relativeSixAxisTwoPrimaryKernelCoordinates realization) ∧
+      (GraphLattices.SixAxisStandardDiscriminantGeneratorStable
+          (relativeSixAxisTwoPrimaryKernelCoordinates realization) →
+        (relativeSixAxisTwoPrimaryKernelCoordinates realization).map
+            GraphLattices.sixAxisStandardDiscriminantPairLinearEquiv.toLinearMap ∈
+          GraphLattices.SixPointHeartStableHalfPacket) :=
+  ⟨GraphLattices.sixAxisSourceTwoPrimaryKernelCoordinates_isMaximalIsotropic
+      realization.jacobianPolarizationPrincipal realization.polarizationPullback,
+    fun stable ↦
+      GraphLattices.sixAxisSourceTwoPrimaryKernelCoordinates_stablePacket
+        realization.jacobianPolarizationPrincipal realization.polarizationPullback stable⟩
+
 /-- The two-primary discriminant identification `D₂ ≃ H₂ ⊗ E[2]`, constructed
 from the two-torsion coordinates and from the computed kernel of the realized
 source polarization rather than supplied. -/
@@ -484,6 +514,20 @@ structure RelativeSixAxisConclusion
               relativeSixAxisTwoPrimaryKernelImage (geometry.homology parameter),
                 GraphLattices.sixAxisReducedTensorForm vector other = 0) ↔
             vector ∈ relativeSixAxisTwoPrimaryKernelImage (geometry.homology parameter))
+  /-- On every fibre the two-primary part of the lattice model of the isogeny
+  kernel, carried into the standard symplectic coordinates, is maximal
+  isotropic for the rank-eight tensor form, and belongs to the five-member
+  projective-line packet as soon as it is stable under the two diagonal
+  generators. -/
+  twoPrimaryKernelStandardCoordinates :
+    ∀ (geometry : RelativeSixAxisGeometricInput objects) (parameter : Base),
+      GraphLattices.IsMaximalIsotropic GraphLattices.sixAxisStandardDiscriminantBilinForm
+          (relativeSixAxisTwoPrimaryKernelCoordinates (geometry.homology parameter)) ∧
+        (GraphLattices.SixAxisStandardDiscriminantGeneratorStable
+            (relativeSixAxisTwoPrimaryKernelCoordinates (geometry.homology parameter)) →
+          (relativeSixAxisTwoPrimaryKernelCoordinates (geometry.homology parameter)).map
+              GraphLattices.sixAxisStandardDiscriminantPairLinearEquiv.toLinearMap ∈
+            GraphLattices.SixPointHeartStableHalfPacket)
   /-- The two-primary discriminant identification `D₂ ≃ H₂ ⊗ E[2]` is
   constructed from the realized polarization rather than supplied: in the
   supplied two-torsion coordinates it is the computed kernel equivalence of the
@@ -613,6 +657,9 @@ theorem relativeSixAxis_of_geometricInputs
           (otherGeometry.homology parameter)).2⟩,
     fun otherGeometry parameter ↦
       relativeSixAxisTwoPrimaryKernelImage_eq_perp (otherGeometry.homology parameter),
+    fun otherGeometry parameter ↦
+      relativeSixAxisTwoPrimaryKernelCoordinates_isMaximalIsotropic
+        (otherGeometry.homology parameter),
     fun otherGeometry parameter _ ↦
       (otherGeometry.heartTensorTorsionCoordinates parameter).apply_symm_apply _,
     fun otherGeometry parameter _ ↦

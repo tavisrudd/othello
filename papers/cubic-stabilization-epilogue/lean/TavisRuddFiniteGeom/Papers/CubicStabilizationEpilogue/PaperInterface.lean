@@ -425,6 +425,40 @@ theorem relativeSixAxis_twoPrimaryDiscriminantPairing
     (Applications.relativeSixAxisTwoPrimaryKernelImage_eq_perp realization).1,
     (Applications.relativeSixAxisTwoPrimaryKernelImage_eq_perp realization).2⟩
 
+/-- The two-primary kernel in the standard symplectic coordinates, and its
+membership in the projective-line packet.  The coordinate equivalence on the
+kernel of the reduced polarization is an isometry from the normalized
+two-primary form onto the rank-eight tensor form of the coefficient heart: a
+kernel vector has vanishing axis coordinate sum along each elliptic homology
+coordinate, so in characteristic two its fifth axis coordinate is the sum of
+the other four, which is exactly the fifth entry of the normalized heart
+representative, and the five-term dot product of two kernel slices is the
+six-term dot product of the corresponding heart representatives.  Carrying the
+two-primary part of the lattice model of the isogeny kernel across that
+isometry therefore gives a subspace of the standard coordinates that is maximal
+isotropic for the rank-eight tensor form, and it belongs to the five-member
+projective-line packet as soon as it is stable under the two diagonal
+generators.  Stability is the only remaining input; no elliptic two-torsion
+group scheme, Weil pairing, geometric group action, or geometric classifying
+map is constructed. -/
+theorem relativeSixAxis_twoPrimaryKernelStandardCoordinates
+    (realization : Applications.RelativeSixAxisHomologyRealization) :
+    (∀ left right : GraphLattices.sixAxisSourceTwoPrimaryDiscriminant,
+        GraphLattices.sixAxisReducedTensorForm left.1 right.1 =
+          GraphLattices.sixAxisStandardDiscriminantForm
+            (GraphLattices.sixAxisSourceTwoPrimaryDiscriminantCoordinates left)
+            (GraphLattices.sixAxisSourceTwoPrimaryDiscriminantCoordinates right)) ∧
+      GraphLattices.IsMaximalIsotropic GraphLattices.sixAxisStandardDiscriminantBilinForm
+          (Applications.relativeSixAxisTwoPrimaryKernelCoordinates realization) ∧
+        (GraphLattices.SixAxisStandardDiscriminantGeneratorStable
+            (Applications.relativeSixAxisTwoPrimaryKernelCoordinates realization) →
+          (Applications.relativeSixAxisTwoPrimaryKernelCoordinates realization).map
+              GraphLattices.sixAxisStandardDiscriminantPairLinearEquiv.toLinearMap ∈
+            GraphLattices.SixPointHeartStableHalfPacket) :=
+  ⟨GraphLattices.sixAxisReducedTensorForm_eq_standardForm,
+    (Applications.relativeSixAxisTwoPrimaryKernelCoordinates_isMaximalIsotropic realization).1,
+    (Applications.relativeSixAxisTwoPrimaryKernelCoordinates_isMaximalIsotropic realization).2⟩
+
 /-- The discriminant pairing of the six-axis source polarization on integral
 representatives, and its nondegeneracy.  On the classes of two integral
 vectors the pairing is the class modulo one of the rational number
