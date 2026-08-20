@@ -163,6 +163,7 @@ def main() -> int:
         ("arithmetic_cover", "arithmetic cover"),
         ("orientation_source", "orientation source"),
         ("harmonic_clebsch", "harmonic bridge"),
+        ("aligned_faithfulness", "aligned faithfulness"),
     ):
         evidence = PAPER / "verification" / "evidence"
         run(

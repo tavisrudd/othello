@@ -68,6 +68,24 @@ Scheme normalization, extension
 across the branch divisor, and the complete geometric bad-prime set remain
 human boundaries.
 
+The aligned-faithfulness bundle is replayed with
+
+```text
+python3 papers/clebsch-passages/verification/evidence/aligned_faithfulness.py --check
+python3 papers/clebsch-passages/verification/evidence/aligned_faithfulness_replay.py
+sha256sum -c papers/clebsch-passages/verification/evidence/aligned_faithfulness.sha256
+```
+
+It enumerates the two-graphs on four to seven points, groups them by aligned
+family, and records the fibres, so it confirms both the theorem and the
+sharpness of its seven-point hypothesis without using the Lean proof.  It also
+reproduces the printed six-point witness pair and the seven-point pair that
+separates the aligned hypothesis from graph four-hypomorphy.  The independent
+replay mentions no graph: it builds each two-graph from its descendant at one
+point and validates the two-graph axiom on every four-set before use.  Eight
+points and beyond are outside the bundle; the theorem is proved for all sizes
+in the text and in Lean.
+
 The aggregate gate does not compare either theorem with a finite matching
 tensor.  It also does not turn the abstract integral equation into a global
 incidence model at \(11\).  The mod-\(11\) claim is the exact reduction of

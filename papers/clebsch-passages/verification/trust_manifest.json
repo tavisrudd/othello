@@ -172,13 +172,19 @@
         "verification/passages_formal.json",
         "verification/passages_axioms.txt",
         "verification/golden_return_formal.json",
-        "verification/golden_return_axioms.txt"
+        "verification/golden_return_axioms.txt",
+        "verification/evidence/aligned_faithfulness.py",
+        "verification/evidence/aligned_faithfulness_replay.py",
+        "verification/evidence/aligned_faithfulness.json",
+        "verification/evidence/aligned_faithfulness.sha256"
       ],
       "id": "OPER-4",
       "modes": [
         "conceptual",
         "classical-input",
-        "formal-partial"
+        "formal-partial",
+        "certificate",
+        "independent-replay"
       ],
       "proof_role": "seven-point cut reconstruction from one-point and pair signatures, followed by a common seven-point restriction for any two triples; Lean checks the whole two-graph half of the row, namely faithfulness up to a global complement bit for every two-graph on a finite point set with at least seven points, including anchor existence through both bounds behind the triangle Ramsey equality, the normalization of an arbitrary labelled two-graph onto the cut classifier, distinctness of the anchor points and their separation from the root, symbolic third-point disambiguation, the finite-set extension, and the overlap agreement of complement bits, together with the switching transport, determinant identity, query polynomial, calibration, and the cardinality of the explicitly defined selected query family; the identification of the marked determinant-minus-three family of a Seidel matrix with the aligned family of its two-graph, the two values minus three and five taken by a principal four-by-four minor on distinct labels, the recovery of such a matrix from that family up to diagonal switching and one global sign, and the sufficiency of the selected query family for a decoder working from a single anchor are proved as well; the anchor search enters as the existence of an aligned four-set among the twenty four-sets through a root and six further points together with the count of those tests, and is not formalized as a procedure",
       "statement": "For every two-graph on at least seven labelled vertices, the four-sets on which all four triangle values agree determine the two-graph up to global complement. Consequently, from order ten onward the marked determinant-minus-three design of a symmetric conference matrix determines its signing up to diagonal switching and global negation; relative to an aligned anchor, 3n squared minus 23n plus 45 selected determinant predicates suffice, an anchor costs at most twenty deterministic tests, and one calibrated triangle product selects the orientation.",

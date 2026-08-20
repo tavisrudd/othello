@@ -1,0 +1,120 @@
+{
+  "levels": [
+    {
+      "aligned_families": 2,
+      "class_sizes": [
+        2,
+        6
+      ],
+      "determines_up_to_complement": false,
+      "fibres_are_complement_pairs": false,
+      "points": 4,
+      "two_graphs": 8
+    },
+    {
+      "aligned_families": 17,
+      "class_sizes": [
+        2,
+        6,
+        12
+      ],
+      "determines_up_to_complement": false,
+      "fibres_are_complement_pairs": false,
+      "points": 5,
+      "two_graphs": 64
+    },
+    {
+      "aligned_families": 462,
+      "class_sizes": [
+        2,
+        4,
+        12
+      ],
+      "determines_up_to_complement": false,
+      "fibres_are_complement_pairs": false,
+      "points": 6,
+      "two_graphs": 1024
+    },
+    {
+      "aligned_families": 16384,
+      "class_sizes": [
+        2
+      ],
+      "determines_up_to_complement": true,
+      "fibres_are_complement_pairs": true,
+      "points": 7,
+      "two_graphs": 32768
+    }
+  ],
+  "representation": "two-graphs are enumerated by the graphs on {1, ..., n-1}, one per switching class, with tau the edge parity on triples",
+  "six_point_witness": {
+    "distinct_two_graphs": true,
+    "graph_G": [
+      [
+        1,
+        2
+      ],
+      [
+        1,
+        5
+      ],
+      [
+        2,
+        4
+      ],
+      [
+        2,
+        5
+      ],
+      [
+        3,
+        5
+      ]
+    ],
+    "graph_H": [
+      [
+        1,
+        3
+      ],
+      [
+        1,
+        4
+      ],
+      [
+        2,
+        4
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        3,
+        5
+      ]
+    ],
+    "not_complementary": true,
+    "shared_aligned_family": [
+      [
+        0,
+        1,
+        2,
+        5
+      ],
+      [
+        0,
+        1,
+        3,
+        4
+      ]
+    ]
+  },
+  "switching_witness": {
+    "four_sets": 35,
+    "four_sets_with_differing_induced_type": 20,
+    "points": 7,
+    "same_aligned_family": true,
+    "same_two_graph": true
+  },
+  "theorem": "for at least seven points the aligned family determines the two-graph up to complement; six points do not suffice, so seven is sharp"
+}
