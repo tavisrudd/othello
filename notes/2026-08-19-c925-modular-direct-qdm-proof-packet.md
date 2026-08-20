@@ -56,6 +56,7 @@ No manuscript or Lean source is part of this packet.
 | 49 | failure of the naive canonical total-space phase in all five pilots | notes/2026-08-20-c925-canonical-completion-phase-no-go.md |
 | 50 | opposite-cone obstruction to every ordinary multi-coordinate repair | notes/2026-08-20-c925-multicoordinate-phase-no-go.md |
 | 51 | mixed-support obstruction to descent of the completed kernel | notes/2026-08-20-c925-open-restriction-mixed-support-no-go.md |
+| 52 | LG/\(p\)-field bypass and invariant-quadratic character obstruction | notes/2026-08-20-c925-lg-pfield-completion-gate.md |
 | frontier | open experiments and provider targets | notes/2026-08-20-c925-exploration-frontier.md |
 
 ## Dependency spine
@@ -82,7 +83,7 @@ Modules 19--23 prove reusable categorical consequences:
 - universal center-null quotients and minimal sufficient shadows; and
 - the conditional Section 6 argument as a separate specialization.
 
-Modules 24--51 isolate the higher-stabilization frontier:
+Modules 24--52 isolate the higher-stabilization frontier:
 
 - irrationality on any unbounded stabilization set implies irrationality for
   every index;
@@ -197,6 +198,13 @@ Modules 24--51 isolate the higher-stabilization frontier:
   categories.  Generic/divided rank annihilates that boundary leakage, so
   the sparse route survives but collapses back to the same occurrence-level
   fixed-phase row adapter as the normal-jet route; and
+- LG factorization categories can ignore the mixed boundary when a
+  superpotential has critical locus inside the intended open, but any purely
+  added gauge-invariant nondegenerate quadratic fibre has total character
+  zero and cannot cancel the pilot discrepancy.  The evident
+  \(p x_\kappa\) potential removes a genuine raw direction together with the
+  added one, so a GLSM bypass needs a new critical target and a new
+  QDM/Gamma realization; and
 - the rank-row route remains the higher-EV uniform alternative.
 
 ## Current \(m=2\) alternatives
@@ -282,6 +290,16 @@ perfect subcategory and cannot descend by localization.  Its rank map still
 kills every strict-boundary class, so no new scalar obstruction appears;
 the surviving statement is exactly the vertical fixed-phase QDM/Gamma
 identification already required by the normalized-jet route.
+Module 52 tests the remaining relative/\(p\)-field suggestion.  BFK's
+crepant LG window theorem can indeed compare factorization categories
+without ordinary phase equality, and a potential can make the mixed boundary
+critical-free.  But an invariant nondegenerate quadratic added fibre has
+weight sum zero, whereas the completion must add \((1,-1)\).  Pairing that
+coordinate with the existing discrepancy coordinate removes the raw
+coordinate as well.  Current \(p\)-field theorems recover hypersurface or
+complete-intersection theories, not the original overlap QDM.  Hence this
+route is no shorter unless a geometrically meaningful critical target and
+its fixed-phase QDM/Gamma realization are first supplied.
 
 ### ExactTop provider
 
@@ -346,6 +364,8 @@ vanishing remain open.
   notes/2026-08-20-c925-multicoordinate-phase-no-go.md
 - mixed-support obstruction to descent of the completed kernel:
   notes/2026-08-20-c925-open-restriction-mixed-support-no-go.md
+- LG/\(p\)-field bypass and invariant-quadratic obstruction:
+  notes/2026-08-20-c925-lg-pfield-completion-gate.md
 
 ## Executable witnesses
 

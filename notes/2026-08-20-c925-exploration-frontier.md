@@ -155,9 +155,18 @@ are:
     from this kernel; the exact surviving test is the occurrence-level
     fixed-phase row identification of the normal-jet route.  A genuinely
     relative/enlarged-group construction remains separate.
+24. **Can a superpotential erase the mixed boundary without changing the
+    endpoint?**  BFK's crepant LG window theorem and critical-locus
+    localization show that the boundary can be made invisible to matrix
+    factorizations.  Module 52 proves the cheap stabilization impossible:
+    a gauge-invariant nondegenerate quadratic added fibre has zero total
+    character, so it cannot supply the correction \((1,-1)\), while
+    \(p x_\kappa\) deletes a genuine raw coordinate.  A viable GLSM route
+    must name a new critical target and prove that its fixed-phase QDM/Gamma
+    row is the original cubic packet.
 
 None of these questions blocks the proof in Modules 0--16 or the
-transport-level specialization audit in Module 17.  Modules 18--51 isolate
+transport-level specialization audit in Module 17.  Modules 18--52 isolate
 the general consequences without claiming the missing enriched provider.
 The open questions control whether the interface can be promoted from a
 lawful compiler to a canonical equivalence with the complete external

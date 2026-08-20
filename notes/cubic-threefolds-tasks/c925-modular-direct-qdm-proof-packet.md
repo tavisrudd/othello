@@ -219,6 +219,13 @@ index row.
   the other.  Generic/divided rank kills the resulting boundary leakage, so
   this failure does not create another scalar gate; it reduces the sparse
   route to the same fixed-phase vertical row adapter as the normal jet.
+- A Landau--Ginzburg potential can make the extra boundary critical-free,
+  and BFK supplies crepant factorization-category wall crossing in that
+  setting.  It is not a free repair: every purely added invariant
+  nondegenerate quadratic fibre has total character zero, so it cannot cancel
+  the nonzero discrepancy.  The obvious \(p x_\kappa\) potential deletes a
+  genuine raw direction as well.  Existing \(p\)-field theorems recover
+  hypersurface/complete-intersection theories, not the original overlap QDM.
 
 ## Open geometric providers
 
@@ -297,9 +304,10 @@ advertised algebraic laws and countermodels, never an external QDM provider.
    row transition, with exact coimage base change and adjacent reindexing.
    Module 51 shows that the rank-row consumer is already insensitive to all
    mixed boundary support, so no full open-category equivalence is needed.
-2. In parallel, test a genuinely relative \(p\)-field or enlarged-group
-   master-space comparison, where the fibre coordinate is not allowed to
-   alter the raw stability condition.
+2. Pursue a relative \(p\)-field or enlarged-group master-space comparison
+   only after naming a nontrivial critical target whose QDM/Gamma realization
+   is the original cubic packet.  A metabolic quadratic stabilization cannot
+   do this.
 3. Do not search for another finite ordinary multi-coordinate completion:
    Module 50 rules out that entire class, and Module 51 rules out localization
    descent of the natural completed kernel.

@@ -300,3 +300,9 @@ coincidentally equivalent restricted kernel or a different relative or
 master-space comparison.  The rank-row quotient remains insensitive to the
 mixed boundary, but identifying that quotient with the actual fixed-phase
 cubic QDM packet is still the open local theorem.
+
+**Successor.**  Module 52 shows that an LG potential can make the mixed
+boundary critical-free, but no purely added nondegenerate quadratic fibre
+can both cancel the nonzero discrepancy character and disappear without
+changing the raw endpoint.  Thus a \(p\)-field bypass would require a new
+critical target and its own QDM/Gamma realization.

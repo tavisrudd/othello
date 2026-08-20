@@ -263,6 +263,14 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   intended opens.  Generic/divided rank kills this mixed boundary leakage,
   reducing the surviving sparse route exactly to the fixed-phase vertical
   row identification required by the normal jet.
+  Module 52 tests the remaining LG/\(p\)-field escape.  BFK factorization
+  windows can ignore an ordinary phase mismatch when a superpotential makes
+  the boundary critical-free, but an invariant nondegenerate quadratic
+  added fibre has total character zero and cannot cancel \((1,-1)\).
+  Pairing the canonical coordinate with the existing discrepancy coordinate
+  deletes that raw direction too.  A GLSM proof therefore needs a genuinely
+  new critical target and an independent fixed-phase QDM/Gamma
+  identification; it is not a shorter formal bypass.
   Shifted tensor stability and the extremal multinomial source law are
   proved, but the occurrence-indexed exact QDM sequence, actual carrier
   exponent, and boundary vanishing remain open.  The packet is split into
