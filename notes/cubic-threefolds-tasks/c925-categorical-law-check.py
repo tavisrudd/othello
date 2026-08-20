@@ -1623,6 +1623,84 @@ def main():
     assert not pointed_primary_boolean(projective5_with_exceptional)
     checks["m2_pointed_primary_shadow_ignores_row_null_packets"] = "pass"
 
+    # ExactTop consumes the image of the threshold power, not equality of
+    # the power maps.  On J_2 a diagonal comparison can rescale N without
+    # changing its image.
+    threshold_one = jordan(2)
+    comparison_one = [
+        [Fraction(2), Fraction(0)],
+        [Fraction(0), Fraction(1)],
+    ]
+    left_power_one = matrix_multiply(comparison_one, threshold_one)
+    right_power_one = matrix_multiply(threshold_one, comparison_one)
+    assert left_power_one != right_power_one
+    assert left_power_one == matrix_add(right_power_one, right_power_one)
+    assert rational_rank(left_power_one) == rational_rank(right_power_one) == 1
+    checks["exacttop_needs_image_equality_not_map_equality"] = "pass"
+
+    # Full N-equivariance is also stronger than threshold equivariance.  On
+    # J_3 the comparison diag(1,2,1) fails to commute with N but commutes
+    # with N^2, exactly the m=2 consumer threshold.
+    threshold_two = jordan(3)
+    comparison_two = [
+        [Fraction(1), Fraction(0), Fraction(0)],
+        [Fraction(0), Fraction(2), Fraction(0)],
+        [Fraction(0), Fraction(0), Fraction(1)],
+    ]
+    assert matrix_multiply(comparison_two, threshold_two) != (
+        matrix_multiply(threshold_two, comparison_two)
+    )
+    assert matrix_multiply(comparison_two, matrix_power(threshold_two, 2)) == (
+        matrix_multiply(matrix_power(threshold_two, 2), comparison_two)
+    )
+    checks["threshold_power_equivariance_is_weaker_than_full_equivariance"] = (
+        "pass"
+    )
+
+    # In the opposite orientation, a zero Bockstein may retain the top as a
+    # non-horizontal graph.  Here E=J_1 is stable and B/E=J_3, while
+    # N_B^2(B)=span(y_0+e) projects isomorphically to span(y_0) but is not
+    # literally Top_2(J_3) plus zero.
+    opposite_graph_operator = [
+        [Fraction(0), Fraction(1), Fraction(0), Fraction(0)],
+        [Fraction(0), Fraction(0), Fraction(1), Fraction(0)],
+        [Fraction(0), Fraction(0), Fraction(0), Fraction(0)],
+        [Fraction(0), Fraction(1), Fraction(0), Fraction(0)],
+    ]
+    opposite_graph_top = matrix_power(opposite_graph_operator, 2)
+    strict_horizontal_top = [
+        [Fraction(0), Fraction(0), Fraction(1), Fraction(0)],
+        [Fraction(0), Fraction(0), Fraction(0), Fraction(0)],
+        [Fraction(0), Fraction(0), Fraction(0), Fraction(0)],
+        [Fraction(0), Fraction(0), Fraction(0), Fraction(0)],
+    ]
+    assert rational_rank(opposite_graph_top) == 1
+    assert opposite_graph_top != strict_horizontal_top
+    assert opposite_graph_top[0] == strict_horizontal_top[0]
+    assert opposite_graph_top[3] == strict_horizontal_top[0]
+    checks["opposite_exacttop_allows_harmless_graph"] = "pass"
+
+    # Commuting with N^m does not force the induced top isomorphism to
+    # commute with N.  On J_4, the reversal in adjacent pairs commutes with
+    # N^2 but not with N on im(N^2).
+    threshold_action = jordan(4)
+    comparison_action = [
+        [Fraction(0), Fraction(1), Fraction(0), Fraction(0)],
+        [Fraction(1), Fraction(0), Fraction(0), Fraction(0)],
+        [Fraction(0), Fraction(0), Fraction(0), Fraction(1)],
+        [Fraction(0), Fraction(0), Fraction(1), Fraction(0)],
+    ]
+    assert matrix_multiply(
+        comparison_action, matrix_power(threshold_action, 2)
+    ) == matrix_multiply(matrix_power(threshold_action, 2), comparison_action)
+    top_generator = [Fraction(0), Fraction(1), Fraction(0), Fraction(0)]
+    assert matrix_vector(
+        comparison_action, matrix_vector(threshold_action, top_generator)
+    ) != matrix_vector(
+        threshold_action, matrix_vector(comparison_action, top_generator)
+    )
+    checks["threshold_equivariance_does_not_preserve_top_N_action"] = "pass"
+
     result = {
         "status": "pass",
         "check_count": len(checks),

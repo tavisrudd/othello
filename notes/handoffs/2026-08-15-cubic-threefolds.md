@@ -94,10 +94,17 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   primary-source precedent audit promotes source/target-indexed provider
   arrows and occurrence-safe lawful reindexing; types make illegal
   compositions unrepresentable but do not manufacture local geometry.
+  A direct re-audit of Iritani's Theorem 5.18 isolates a cheaper formal
+  target: it does not state compatibility with the current
+  tensor-by-line-bundle operation, but the rank/Boolean ExactTop consumer
+  needs only that the transported threshold image be a graph over the
+  ambient top.  The cubic/product source needs no further point/Gamma row;
+  the comparison still needs a compatible cyclotomic operation realization
+  and the independent exceptional exponent certificate.
   Shifted tensor stability and the extremal multinomial source law are
   proved, but the occurrence-indexed exact QDM sequence, actual carrier
   exponent, and boundary vanishing remain open.  The packet is split into
-  bounded module companions behind a stable index.  The fifty-three-check
+  bounded module companions behind a stable index.  The fifty-seven-check
   finite law replay, eleven-check typed Haskell toy, and original cubic
   replay are green.  C925 remains open at fixed-phase Gamma/rank transport
   or at this ExactTop provider; the relative-cap cancellation remains one

@@ -1,5 +1,5 @@
 {
-  "check_count": 53,
+  "check_count": 57,
   "checks": {
     "augmented_row_output_kernel_is_two_sided": "pass",
     "bittner_relation_codimension_2_through_6": "pass",
@@ -7,6 +7,7 @@
     "comma_bridge_forces_descended_augmented_row": "pass",
     "conditional_framed_m1_telescope_with_specialized_center_null": "pass",
     "cyclic_krylov_moments_reconstruct_nilpotent_string": "pass",
+    "exacttop_needs_image_equality_not_map_equality": "pass",
     "exponential_initial_face_filtered_monoidal_laws": "pass",
     "extremal_multinomial_computes_source_top_line": "pass",
     "finite_kan_coarsening_composition": "pass",
@@ -27,6 +28,7 @@
     "m2_power_leakage_separates_j3_from_harmless_j2": "pass",
     "minimal_sufficient_shadow_is_joint_marker_image": "pass",
     "multi_sector_sparse_shadows_recover_zero_exponent": "pass",
+    "opposite_exacttop_allows_harmless_graph": "pass",
     "optic_residual_and_path_functor_naturality": "pass",
     "oriented_quiver_kernel_closure_is_load_bearing": "pass",
     "oriented_quiver_orthogonality_kills_opposite_boundary": "pass",
@@ -43,6 +45,8 @@
     "simple_retained_character_forces_row_line": "pass",
     "sparse_kernel_profile_reconstructs_jordan_type": "pass",
     "split_vs_exact_k0_retention": "pass",
+    "threshold_equivariance_does_not_preserve_top_N_action": "pass",
+    "threshold_power_equivariance_is_weaker_than_full_equivariance": "pass",
     "top_image_shadow_forgets_harmless_nonsplit_extensions": "pass",
     "torsor_path_holonomy_and_endpoint_obstruction": "pass",
     "unbounded_stabilization_progression_forces_all_indices": "pass",

@@ -26,6 +26,8 @@ exact \(m=2\) and all-\(m\) transport gates.
   notes/2026-08-20-c925-dependent-provider-typing.md
 - type-level precedent audit:
   notes/2026-08-20-c925-type-level-precedents.md
+- Iritani provider-gap and threshold-image audit:
+  notes/2026-08-20-c925-iritani-provider-gap.md
 - non-\(m=2\) categorical dividends:
   notes/2026-08-20-c925-non-m2-categorical-dividends.md
 - conditional Section 6 specialization:
@@ -57,6 +59,14 @@ index row.
   exponent, component/kernel typing, and exact realization.  It proves no
   extra source augmentation is consumed and prevents those fields from
   being silently identified.
+- The cubic/product source \((\chi,N,N^{m+1}=0,N^mV\ne0)\) is sufficient
+  for the ExactTop endpoint.  Bare formal QDM is not yet comparison-sufficient:
+  the current \(N_L=1-\tau_L\) uses tensor-by-\(L\) on \(K_0\), so the
+  provider needs a compatible cyclotomic operation realization.  No extra
+  point/Gamma row is consumed.
+- For a fixed Iritani direct-sum comparison, rank/Boolean ExactTop transport
+  needs only that the transported top image be a graph over the ambient top.
+  Full \(N\)-equivariance and even strict image equality are stronger.
 
 ## Open geometric providers
 
@@ -106,15 +116,18 @@ Typed replay:
       | diff -u \
           notes/cubic-threefolds-tasks/c925-sparse-shadow-path-toy-output.txt -
 
-The finite model currently has fifty-three checks.  It verifies only the
+The finite model currently has fifty-seven checks.  It verifies only the
 advertised algebraic laws and countermodels, never an external QDM provider.
 
 ## Next
 
-1. Construct the opposite-oriented cyclotomic QDM blowup sequence
-   \(0\to E\to B\to A\to0\) in the enriched operation-framed heart.
-2. Prove the actual \(m=2\) exceptional term is square-zero and compute the
-   opposite boundary for the base-ideal or normal-splitting Rees sequence.
-3. Continue the higher-EV rank-row common-receiver audit in parallel.
+1. Construct the cyclotomic realization square carrying tensor-by-\(L\)
+   through Iritani's formal comparison, and compute the transported
+   \(\widehat N_L\) plus its threshold graph.
+2. If that formal route is unavailable, construct the opposite-oriented
+   cyclotomic QDM sequence \(0\to E\to B\to A\to0\) in the enriched heart.
+3. Prove the actual \(m=2\) exceptional term is square-zero and compute the
+   resulting projection defect or opposite boundary.
+4. Continue the higher-EV rank-row common-receiver audit in parallel.
 
 C925 remains active until the user closes it.

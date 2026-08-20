@@ -32,6 +32,7 @@ No manuscript or Lean source is part of this packet.
 | 25 | power-image functor, Bockstein leakage, ExactTop provider | notes/2026-08-20-c925-power-image-module.md |
 | 26 | left-orthogonal exact-heart adapter and nonsplit quiver model | notes/2026-08-20-c925-oriented-heart-adapter.md |
 | 27 | dependent occurrence/orientation typing of the provider crux | notes/2026-08-20-c925-dependent-provider-typing.md |
+| 28 | Iritani source scope, operation realization, and threshold graph criterion | notes/2026-08-20-c925-iritani-provider-gap.md |
 | frontier | open experiments and provider targets | notes/2026-08-20-c925-exploration-frontier.md |
 
 ## Dependency spine
@@ -58,7 +59,7 @@ Modules 19--23 prove reusable categorical consequences:
 - universal center-null quotients and minimal sufficient shadows; and
 - the conditional Section 6 argument as a separate specialization.
 
-Modules 24--27 isolate the higher-stabilization frontier:
+Modules 24--28 isolate the higher-stabilization frontier:
 
 - irrationality on any unbounded stabilization set implies irrationality for
   every index;
@@ -70,6 +71,10 @@ Modules 24--27 isolate the higher-stabilization frontier:
   an enriched exact heart kills that boundary formally; and
 - a dependent provider record makes occurrence, variance, kernel stability,
   and exact QDM realization load-bearing indices rather than prose; and
+- Iritani's formal Laurent direct sum does not state compatibility with the
+  retained tensor-by-line-bundle operation; for the rank/Boolean consumer,
+  the weakest comparison law is the exact projection/graph criterion on
+  \(\operatorname{im}N^m\), not full operator equivariance; and
 - the rank-row route remains the higher-EV uniform alternative.
 
 ## Current \(m=2\) alternatives
@@ -118,6 +123,8 @@ vanishing remain open.
   notes/2026-08-20-c925-dependent-provider-typing.md
 - primary-source type-level precedent audit:
   notes/2026-08-20-c925-type-level-precedents.md
+- Iritani provider-gap and threshold-image audit:
+  notes/2026-08-20-c925-iritani-provider-gap.md
 - conditional \(m=1\) specialization:
   notes/2026-08-20-c925-framed-m1-specialization.md
 - non-\(m=2\) categorical dividends:
