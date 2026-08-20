@@ -159,3 +159,103 @@ merges:
 3. **"switching" vs "diagonal switching".** The theorem says "diagonal switching" (`sections/05-golden-operator.tex:531`); all abstract variants say "switching". Standard shorthand; one word would restore verbatim fidelity if C816 prefers.
 4. **Section file naming.** `sections/` contains two files with prefix 05 (05-golden-operator, 05-harmonic-realization), no 06, and two with prefix 09 (09-conclusion, 09-programme-coda); input order in `clebsch_passages.tex:73–84` is correct, so this is cosmetic residue of the C919 de-numbering, not a build issue.
 5. **Preamble macro asymmetry.** This paper defines `\PSL` but not `\PGL`/`\PG`/`\PP` (`clebsch_passages.tex:21–24`), while the proposal's blanket style instruction assumes those exist "in each repository". Harmless here (unused in the Paper III block), but a cross-paper copy-paste hazard.
+
+## 7. 2026-08-20 — vetting the compressed C816 characterization sentence (state at commit 8c421cbd1)
+
+**Verdict (one line):** The compressed sentence is faithful to the Triangle–Pfaffian recognition theorem, "already" and "characterizes" are both earned, the dropped refinements lose nothing an abstract needs, and "also" is accurate — no change.
+
+Context: C816's commit ea29209f4 inserted four sentences advertising the
+recognition, rigidity, and minors results in the abstract's second paragraph;
+commit 8c421cbd1 compressed them to one sentence, now standing at
+`papers/clebsch-passages/clebsch_passages.tex:49–52`:
+
+> Proportionality of the commutator Pfaffian to the triangle cubic already
+> characterizes order six, forcing a scalar square, for real symmetric
+> zero-diagonal matrices with nonzero off-diagonal entries.
+
+All findings below are against the working tree at HEAD = 8c421cbd1.
+
+### 7.1 The advertised theorem, and faithfulness of the compression
+
+The sentence advertises **Theorem (Triangle–Pfaffian recognition)**,
+`sections/05-golden-operator.tex:311–329` (label
+`thm:triangle-pfaffian-recognition` at `:312`). Statement: for A real symmetric
+of **even order n ≥ 4**, zero diagonal, every off-diagonal entry nonzero, if
+`\Phi_A=\operatorname{Pf}[D_x,A]` is a nonzero scalar multiple of the triangle
+cubic `\mathcal T_A`, then n = 6 and A² = λI with λ > 0; in the equal-modulus
+case A is the pentagon conference matrix up to scale, switching, and
+relabelling, and conversely `\Phi_A=\pm4\mathcal T_A` with the sign the
+orientation character.
+
+- **Hypothesis class.** The abstract's "real symmetric zero-diagonal matrices with nonzero off-diagonal entries" matches the theorem except for dropping "even order n ≥ 4". The omission is mathematically harmless: [D_x,A] is antisymmetric, so its Pfaffian vanishes identically in odd order while `\mathcal T_A` does not (all triangle coefficients are products of nonzero entries), and at n = 2 there is no triangle cubic — so nonzero proportionality is impossible outside even n ≥ 4 and the wide-class statement is a trivial corollary. Decisively for house consistency, the paper's own introduction paraphrase makes the identical omission (`sections/01-introduction.tex:237–241`: "Among real symmetric zero-diagonal matrices with nonzero off-diagonal entries, proportionality … already forces order six and a scalar square"). Faithful.
+- **Order-six conclusion.** Matches `:322` ("then \(n=6\)").
+- **Scalar-square conclusion.** "forcing a scalar square" matches `:322–323` ("\(A^2=\lambda I\) for some \(\lambda>0\)"); positivity is dropped, but it is automatic (λ is a sum of squares of nonzero entries, proof at `:341–342`), and the phrase mirrors the introduction's own wording.
+
+### 7.2 "already" — keep
+
+The theorem's hypotheses involve exactly two of the four operator languages:
+the commutator Pfaffian `\Phi_A` and the triangle cubic `\mathcal T_A`
+(`sections/05-golden-operator.tex:314–321`). The middle-exterior diagonal and
+the cross-golden determinant appear nowhere in the statement or its proof
+(`:331–347` — the proof runs on degree counting and translation invariance).
+So "already" says precisely what was intended: two of the four descriptions
+suffice, and the sentence reads as a strengthening of the four-description
+list before it. The introduction uses the same "already forces"
+(`sections/01-introduction.tex:240`). Keep.
+
+### 7.3 "characterizes" — right, not an overclaim
+
+The characterization is of the **order**, and at that level the implication is
+two-way within the stated class:
+
+- Forward: nonzero proportionality forces n = 6 (theorem, `:322`).
+- Existence at six: the golden representative C satisfies `\Phi_C=4\mathcal T_C` — C lies in the oriented equality locus `X_{+1}` (`sections/05-golden-operator.tex:359–367`), and the theorem's second paragraph gives the converse `\Phi_A=\pm4\mathcal T_A` for the conference class (`:324–328`).
+
+What would be an overclaim — "proportionality characterizes the conference
+matrix" — is exactly what the paper disclaims: which *weighted* scalar-square
+matrices satisfy the proportionality is stated as unclassified in the
+post-proof remark (`sections/05-golden-operator.tex:350–353`). The compressed
+sentence does not make that claim: "forcing a scalar square" is grammatically a
+further consequence, not the second half of an equivalence. One residual
+misparse risk — a reader taking "characterizes order six, forcing a scalar
+square" as an iff with "order six and scalar square" — is real but small, and
+the body corrects it immediately; not worth abstract words.
+
+### 7.4 Dropping local rigidity and the twenty-minors equivalence — nothing lost that an abstract needs
+
+Both dropped items are *refinements*, not scope qualifications: omitting them
+does not make the retained sentence claim more than the paper proves, which is
+the test that matters for an abstract. Both remain advertised in the
+introduction (`sections/01-introduction.tex:242–249`) and the conclusion
+(`sections/09-conclusion.tex:17–21`), so a reader meets them within a page.
+Two further reasons the cut is right:
+
+- The rigidity theorem (`sections/05-golden-operator.tex:368–374`: Jacobian rank fourteen at C, kernel the scaling line) cannot be stated in an abstract without the equality-locus apparatus; ea29209f4's "locally rigid at either oriented golden representative" was accurate but content-thin at that compression.
+- The minors proposition (`sections/05-golden-operator.tex:486–493`) holds only on the sign (±1-entry) locus, so ea29209f4's third sentence carried a scope qualifier of its own ("On the sign locus…") that cost words to keep safe. Dropping the claim entirely is safer than shortening it.
+
+### 7.5 "also singles out order six" — accurate
+
+The two routes to order six are genuinely independent, not two faces of one
+argument:
+
+- The Pfaffian recognition works in the general zero-diagonal matrix class with no conference hypothesis; its proof is degree counting plus translation invariance of the triangle cubic, deriving A² = λI as a *conclusion* (`sections/05-golden-operator.tex:331–347`).
+- Balanced exchange rigidity (`sections/05-golden-operator.tex:580–591`) starts from a symmetric conference matrix (C² = qI as a *hypothesis*) and singles out order six among realized conference orders by cut-independence of Spec(RRᵀ/q) over balanced cuts, via principal-block spectral relations.
+
+Different hypothesis classes, different proofs, and the paper places them in
+different threads — recognition in the four-shadows/marked-datum thread,
+exchange rigidity among the standalone consequences that "neither assume
+Hitchin's cover nor supply a hypothesis to the source–shadow–return argument"
+(`sections/01-introduction.tex` closing paragraphs, `sections/09-conclusion.tex:30–36`).
+Since the abstract now reaches order six twice, "also" is the correct signal
+that the second arrival is a separate route; it does not collide with
+"independent" in the same sentence, which scopes independence from Hitchin's
+cover.
+
+### 7.6 Net
+
+No substitute sentence proposed; the 274-word abstract at 8c421cbd1 stands as
+committed. Minor observations, none requiring action: (i) the missing "even
+order n ≥ 4" is shared with the introduction's paraphrase, so any future
+tightening of one should touch both or neither; (ii) "a scalar square" is
+slightly unusual English for "A² scalar", but it is now the house phrase in
+abstract and introduction alike.
