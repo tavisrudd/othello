@@ -1,0 +1,594 @@
+{
+  "C_coordinates_in_displayed_basis": [
+    1,
+    1,
+    1,
+    -1,
+    -1
+  ],
+  "C_is_symmetric_conference": true,
+  "C_lies_in_X_plus_one": true,
+  "aligned_family_fibres": {
+    "6": {
+      "expected_two_graphs": 1024,
+      "fibre_sizes": {
+        "12": 1,
+        "2": 416,
+        "4": 45
+      },
+      "two_graphs": 1024
+    },
+    "7": {
+      "expected_two_graphs": 32768,
+      "fibre_sizes": {
+        "2": 16384
+      },
+      "two_graphs": 32768
+    },
+    "8": {
+      "expected_two_graphs": 2097152,
+      "fibre_sizes": {
+        "2": 1048576
+      },
+      "two_graphs": 2097152
+    }
+  },
+  "balanced_pair_swap_invariant": true,
+  "both_balanced_table": {
+    "B12|B12": {
+      "e0": [
+        "12",
+        "34"
+      ],
+      "e1": [
+        "13",
+        "14",
+        "23",
+        "24"
+      ]
+    },
+    "B12|B13": {
+      "e0": [
+        "23"
+      ],
+      "e1": [
+        "14"
+      ]
+    },
+    "B12|B14": {
+      "e0": [
+        "13"
+      ],
+      "e1": [
+        "24"
+      ]
+    },
+    "B13|B13": {
+      "e0": [
+        "13",
+        "24"
+      ],
+      "e1": [
+        "12",
+        "14",
+        "23",
+        "34"
+      ]
+    },
+    "B13|B14": {
+      "e0": [
+        "12"
+      ],
+      "e1": [
+        "34"
+      ]
+    },
+    "B14|B14": {
+      "e0": [
+        "14",
+        "23"
+      ],
+      "e1": [
+        "12",
+        "13",
+        "24",
+        "34"
+      ]
+    }
+  },
+  "conference_orders": {
+    "order10": {
+      "aligned_density": "1/7",
+      "aligned_four_sets": 30,
+      "c_Y_distribution": [
+        [
+          0,
+          36
+        ],
+        [
+          1,
+          90
+        ]
+      ],
+      "cuts": 126,
+      "det_block_identity_failures": 0,
+      "distinct_exchange_spectra_over_all_cuts": 2,
+      "is_conference": true,
+      "mean_c_Y": "5/7",
+      "mean_c_Y_formula": "5/7",
+      "rho_formula": "1/7",
+      "three_design_lambda_expected": "1",
+      "three_design_lambda_values": [
+        1
+      ],
+      "var_c_Y": "10/49",
+      "var_c_Y_formula": "10/49"
+    },
+    "order14": {
+      "aligned_density": "2/11",
+      "aligned_four_sets": 182,
+      "c_Y_distribution": [
+        [
+          5,
+          546
+        ],
+        [
+          7,
+          1170
+        ]
+      ],
+      "cuts": 1716,
+      "det_block_identity_failures": 0,
+      "is_conference": true,
+      "mean_c_Y": "70/11",
+      "mean_c_Y_formula": "70/11",
+      "rho_formula": "2/11",
+      "three_design_lambda_expected": "2",
+      "three_design_lambda_values": [
+        2
+      ],
+      "var_c_Y": "105/121",
+      "var_c_Y_formula": "105/121"
+    },
+    "order18": {
+      "aligned_density": "1/5",
+      "aligned_four_sets": 612,
+      "c_Y_distribution": [
+        [
+          22,
+          918
+        ],
+        [
+          23,
+          3672
+        ],
+        [
+          24,
+          2448
+        ],
+        [
+          25,
+          6120
+        ],
+        [
+          26,
+          7344
+        ],
+        [
+          27,
+          2584
+        ],
+        [
+          29,
+          1224
+        ]
+      ],
+      "cuts": 24310,
+      "det_block_identity_failures": 0,
+      "is_conference": true,
+      "mean_c_Y": "126/5",
+      "mean_c_Y_formula": "126/5",
+      "rho_formula": "1/5",
+      "three_design_lambda_expected": "3",
+      "three_design_lambda_values": [
+        3
+      ],
+      "var_c_Y": "9072/3575",
+      "var_c_Y_formula": "9072/3575"
+    },
+    "order6": {
+      "aligned_density": "0",
+      "aligned_four_sets": 0,
+      "c_Y_distribution": [
+        [
+          0,
+          10
+        ]
+      ],
+      "cuts": 10,
+      "det_block_identity_failures": 0,
+      "distinct_exchange_spectra_over_all_cuts": 1,
+      "exchange_spectrum": [
+        "1/5",
+        "4/5",
+        "4/5"
+      ],
+      "is_conference": true,
+      "mean_c_Y": "0",
+      "mean_c_Y_formula": "0",
+      "rho_formula": "0",
+      "three_design_lambda_expected": "0",
+      "three_design_lambda_values": [
+        0
+      ],
+      "var_c_Y": "0",
+      "var_c_Y_formula": "not applicable (d < 4)"
+    }
+  },
+  "counting_lower_bound_matches_binomial_form": true,
+  "derivative_inside_S": {
+    "01": "-4*a1*a5",
+    "02": "-4*a0*a5",
+    "12": "-4*a0*a1"
+  },
+  "derivative_inside_S_complement_vanishes": true,
+  "dim_W_fixed_by_h": 5,
+  "dim_conjugation_eigenspace_minus": 4,
+  "dim_conjugation_eigenspace_plus": 6,
+  "dim_tangent_space_of_scalar_square_locus": 5,
+  "displayed_basis_is_h_fixed_and_independent": true,
+  "displayed_four_by_four_minor": -5,
+  "displayed_order_three_element_is_in_G": true,
+  "edge_module_character_by_element_order": {
+    "1": [
+      15
+    ],
+    "2": [
+      3
+    ],
+    "3": [
+      0
+    ],
+    "5": [
+      0
+    ]
+  },
+  "edge_module_multiplicities": {
+    "1": 1,
+    "3a": 0,
+    "3b": 0,
+    "4": 1,
+    "5": 2
+  },
+  "first_moment_is_d_squared_over_q": true,
+  "generic_pfaffian_coefficient_is_signed_complementary_minor": true,
+  "inverse_binary_entropy_at_one_quarter": 1.2326229068073113,
+  "jacobian_kernel_dimension": 1,
+  "jacobian_kernel_is_scaling_line": true,
+  "jacobian_rank_at_C": 14,
+  "negated_representative_lies_in_X_plus_one": true,
+  "odd_relabelling_lies_in_X_minus_one": true,
+  "one_known_cut_table": {
+    "0000|B12": {
+      "e0": [
+        "34"
+      ],
+      "e1": [
+        "12"
+      ]
+    },
+    "0000|B13": {
+      "e0": [
+        "24"
+      ],
+      "e1": [
+        "13"
+      ]
+    },
+    "0000|B14": {
+      "e0": [
+        "14"
+      ],
+      "e1": [
+        "23"
+      ]
+    },
+    "1000|B12": {
+      "e0": [
+        "34"
+      ],
+      "e1": [
+        "13",
+        "14"
+      ]
+    },
+    "1000|B13": {
+      "e0": [
+        "24"
+      ],
+      "e1": [
+        "12",
+        "14"
+      ]
+    },
+    "1000|B14": {
+      "e0": [
+        "12",
+        "13"
+      ],
+      "e1": [
+        "23"
+      ]
+    }
+  },
+  "orbit_representatives": {
+    "012": {
+      "block": [
+        [
+          1,
+          -1,
+          1
+        ],
+        [
+          -1,
+          -1,
+          1
+        ],
+        [
+          -1,
+          -1,
+          -1
+        ]
+      ],
+      "determinant": 4,
+      "hodge_sign_Sc_S": -1,
+      "triangle_product": -1
+    },
+    "014": {
+      "block": [
+        [
+          1,
+          -1,
+          1
+        ],
+        [
+          1,
+          -1,
+          -1
+        ],
+        [
+          -1,
+          -1,
+          -1
+        ]
+      ],
+      "determinant": -4,
+      "hodge_sign_Sc_S": -1,
+      "triangle_product": 1
+    }
+  },
+  "order_three_char_poly_factors": [
+    "(t - 2)*(t + 1)**2",
+    "(t - 1)**2*(t + 2)"
+  ],
+  "pfaffian_is_homogeneous_cubic_in_x": true,
+  "query_count_polynomial_identity": true,
+  "query_ratio_limit": 4.867668746754797,
+  "reduced_jacobian_table": [
+    {
+      "row": [
+        1,
+        0,
+        -1,
+        -1,
+        1
+      ],
+      "triples": [
+        "012",
+        "045",
+        "234"
+      ]
+    },
+    {
+      "row": [
+        2,
+        -1,
+        1,
+        3,
+        -1
+      ],
+      "triples": [
+        "013",
+        "145",
+        "235"
+      ]
+    },
+    {
+      "row": [
+        -2,
+        -1,
+        -1,
+        -3,
+        -1
+      ],
+      "triples": [
+        "014",
+        "023",
+        "245"
+      ]
+    },
+    {
+      "row": [
+        -1,
+        1,
+        1,
+        1,
+        0
+      ],
+      "triples": [
+        "015",
+        "123",
+        "345"
+      ]
+    },
+    {
+      "row": [
+        -1,
+        2,
+        0,
+        1,
+        0
+      ],
+      "triples": [
+        "024"
+      ]
+    },
+    {
+      "row": [
+        3,
+        -1,
+        -1,
+        2,
+        -1
+      ],
+      "triples": [
+        "025",
+        "034",
+        "124"
+      ]
+    },
+    {
+      "row": [
+        -3,
+        -1,
+        1,
+        -2,
+        -1
+      ],
+      "triples": [
+        "035",
+        "125",
+        "134"
+      ]
+    },
+    {
+      "row": [
+        1,
+        0,
+        0,
+        -1,
+        2
+      ],
+      "triples": [
+        "135"
+      ]
+    }
+  ],
+  "reduced_jacobian_table_matches_manuscript": true,
+  "reduced_table_kernel": [
+    [
+      -1,
+      -1,
+      -1,
+      1,
+      1
+    ]
+  ],
+  "reduced_table_rank": 4,
+  "schema": "c816-theorem-red-team/1",
+  "second_moment_numerator_matches_F_d_plus_32c": true,
+  "seven_point_signature_table": {
+    "0000": [
+      "123",
+      "124",
+      "134",
+      "234"
+    ],
+    "0010": [
+      "124"
+    ],
+    "0100": [
+      "134"
+    ],
+    "0110": [],
+    "1000": [
+      "234"
+    ],
+    "1010": [],
+    "1100": [],
+    "1110": [
+      "123"
+    ]
+  },
+  "sign_census_complementary_minor_absolute_values": [
+    0,
+    4
+  ],
+  "sign_census_complementary_minors_all_nonzero": 384,
+  "sign_census_conference": 384,
+  "sign_census_disagreements": 0,
+  "sign_census_domain": "all 2^15 symmetric hollow sign matrices of order six",
+  "sign_census_proportional": 384,
+  "sign_census_proportionality_constants": [
+    -4,
+    4
+  ],
+  "six_point_witness": {
+    "H_equals_G": false,
+    "H_equals_complement_of_G": false,
+    "aligned_family_G": [
+      [
+        0,
+        1,
+        2,
+        5
+      ],
+      [
+        0,
+        1,
+        3,
+        4
+      ]
+    ],
+    "aligned_family_H": [
+      [
+        0,
+        1,
+        2,
+        5
+      ],
+      [
+        0,
+        1,
+        3,
+        4
+      ]
+    ],
+    "both_are_two_graphs": true,
+    "families_agree": true
+  },
+  "stabilizer_element_order_profile": {
+    "1": 1,
+    "2": 15,
+    "3": 20,
+    "5": 24
+  },
+  "stabilizer_order": 60,
+  "tangent_space_character_by_element_order": {
+    "1": [
+      5
+    ],
+    "2": [
+      1
+    ],
+    "3": [
+      2
+    ],
+    "5": [
+      0
+    ]
+  },
+  "triangle_word_row_0": "--+++-++--++--+---++",
+  "whole_matrix_pin": "-3/(2*d - 3)",
+  "whole_matrix_pin_is_minus_three_over_2d_minus_3": true
+}

@@ -313,9 +313,49 @@ been reserved.
 
 ## Review and release gates
 
-1. Run theorem-level red-team review focused on hypotheses, proportionality
-   versus equality, the nonzero-shadow clause, orientation covariance, and the
-   global weighted boundary.
+1. Theorem-level red-team review focused on hypotheses, proportionality versus
+   equality, the nonzero-shadow clause, orientation covariance, and the global
+   weighted boundary. **RUN 2026-08-20; report and evidence bundle in
+   `notes/2026-08-20-c816-theorem-red-team.{md,py,json,sha256}`.** No claim was
+   withdrawn: the section's mathematics was recomputed independently from the
+   manuscript's own representative and conventions and came through intact,
+   including the reduced Jacobian table entry for entry, the order-ten cut split
+   36/90, the 384-matrix order-six census, and exhaustive aligned-family
+   faithfulness at six, seven, and eight points. Eight findings, none requiring
+   new mathematics; four of them should land before the cold read of gate 4:
+
+   1. The tangent space `T` to `{A^2 = lambda I}` is proved five-dimensional only
+      from below; "Equality holds" has no upper bound anywhere, and the module
+      decomposition does not supply one. The upper bound is one sentence: `mu` is
+      linear on the linearized space, its kernel lies in the `-1`-eigenspace of
+      conjugation by `C/sqrt5`, and that eigenspace is four-dimensional
+      (verified). Without it, "the four-dimensional constituent" is unsupported,
+      so this is the load-bearing repair for work item 2 sub-item 1.
+   2. The local rigidity conclusion cites the constant-rank theorem, whose
+      hypothesis is never established; the implicit-function theorem applied to
+      fourteen of the twenty functions is what the proof actually needs, and is
+      weaker. The card's own sentence about the remaining external ingredient
+      should follow.
+   3. "The opposite oriented representative" in Theorem D reads as `-C` by this
+      paper's usage, and under that reading the sentence is false, since the whole
+      scaling line lies in `X_{+1}`. It means the odd signed-permutation image.
+   4. The abstract states the recognition theorem more loosely than the theorem
+      does — it drops nonzero proportionality and even order, and "characterizes"
+      reads as an equivalence beside a genuine equivalence. The introduction and
+      conclusion already say "forces order six and a scalar square".
+   5. Work item 1's positioning follow-through is still owed: `OPER-5` exists, but
+      no priority sentence sits near the recognition theorem, and none of the
+      classical owners the audit named (Beauville, Tanturri, Huang--Oeding) is
+      cited or connected by the principal-minor identity the audit recommended.
+   6. The factor-four paragraph overstates what nondegeneracy replaces: it fixes
+      the magnitude, while the converse's uniform sign across the twenty triples
+      still comes from the two orbit computations.
+   7. The inclusion-rank descent asserts the endpoint of a four-step induction in
+      half a sentence; the descent alone leaves a threefold difference, and the
+      return leg is what gives pointwise vanishing.
+   8. Two wording items: the introduction drops "nontrivial" from the exchange
+      characterization, and the universal Pfaffian identity is quantified over
+      "every symmetric matrix" when it needs order six.
 2. Run a Milnor--Serre exposition pass on every affected passage.
 3. Build and visually inspect the PDF; replay the paper-local evidence gate,
    formal gate, axiom audit, source/hash checks, and complete aggregate.
