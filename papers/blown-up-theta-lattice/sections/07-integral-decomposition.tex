@@ -22,7 +22,10 @@ Lemma~\ref{lem:link-cohomology}.
 We use a standard intersection-form description of point summands.  By
 adjunction, morphisms from and to \(\Z_0[m]\) are Borel--Moore classes of
 the fibre, and their composition is the corresponding fibre intersection
-form.  Over a field this is
+form.  De Cataldo and Migliorini develop the rational mechanism for
+projective resolutions, including isolated fourfold singularities
+\cite[Sections~2.4 and~4.4]{deCataldoMigliorini}.  Over a field the modular
+rank criterion is
 \cite[Proposition~3.2 and Corollary~3.5]{JuteauMautnerWilliamson}; the same
 adjunction calculation over \(\Z\) applies when the displayed rank-one form
 is a unit.  The first and third blocks of
@@ -35,6 +38,9 @@ The cross-compositions vanish for degree reasons.  The remaining object has
 stalk cohomology only in degrees \(-4,-1,0\), costalk cohomology only in
 degrees \(0,1,4\), and restriction \(\Z_U[4]\).  These are the support and
 cosupport conditions for \(\mathcal P\) to be perverse.
+All its displayed stalk and costalk groups are free.  Consequently derived
+reduction modulo three preserves these degree bounds and hence perversity;
+the same freeness excludes a torsion point summand of \(\mathcal P\).
 
 Its central attachment is the exact sequence
 \begin{equation}\label{eq:central-zigzag}
@@ -59,7 +65,7 @@ extension.  Thus
  \Z[1/3]_0[2]\oplus\Z[1/3]_0\oplus\Z[1/3]_0[-2].
 \end{equation}
 The same proof works over every field of characteristic different from
-three.  Integrally, a central point summand would contribute a unit block
+three.  Integrally, a free central point summand would contribute a unit block
 \(\Z\to\Z\).  Since \(A\) and \(B\) both have rank one, this contradicts
 the Smith factor three in \eqref{eq:central-zigzag}.
 
@@ -74,17 +80,55 @@ The derived reduction of \eqref{eq:central-zigzag} is
  \F_3^{11}\twoheadrightarrow\F_3
  \xrightarrow{0}\F_3\hookrightarrow\F_3^{11}.
 \end{equation}
+Write \(\mathcal P_3=\mathcal P\otimes^{L}_{\Z}\F_3\); the freeness noted
+above shows directly that \(\mathcal P_3\) is perverse.
 The extra degree-three class is the Tor, or Bockstein, companion of
 \(\tau\).  The zero middle form rules out a point summand.  Any direct-sum
-decomposition of the residual perverse sheaf has at most one summand with
+decomposition of \(\mathcal P_3\) has at most one summand with
 nonzero restriction to \(U\), because that restriction is the simple
 rank-one local system; every other summand would be point-supported.
 Therefore the residual object is indecomposable.  Its nonzero kernel and
 cokernel in \eqref{eq:mod-three-zigzag} show that it is not the intermediate
 extension of that simple local system, hence is not simple.  An
 indecomposable semisimple object is simple, so the residual object is
-nonsemisimple.  This proves the modular assertion of
+nonsemisimple.
+This direct argument is the point-stratum case of Cipriani's general
+small-extension criterion
+\cite[Lemma~3.12, Theorem~3.21, and Corollary~3.22]{Cipriani}; the link
+cohomology, Smith factor three, and the two dimensions \(11\) are the
+example-specific inputs here.
+
+The same criterion gives the full Loewy structure.  Put
+\(\delta=\F_{3,0}\), and write
+\(A={}^pH^0(i^!\mathcal P_3)\) and
+\(B={}^pH^0(i^*\mathcal P_3)\).  Equation
+\eqref{eq:mod-three-zigzag} says that \(A=B=\F_3\) and that the canonical
+map \(A\to B\) is zero.  Cipriani's projection sequences therefore give a
+canonical filtration
+\[
+ 0\subset\delta\subset\mathcal Q
+   \subset\mathcal P_3
+\]
+whose successive quotients are
+\(\delta\), \(\IC_\Theta(\F_3)\), and \(\delta\).  The first adjacent
+extension cannot split because \(\mathcal Q\) has no point quotient; the
+second cannot split because \(\mathcal P_3/\delta\) has no point subobject.
+The canonical projection sequences make this the unique composition series.
+Thus \(\mathcal P_3\) is uniserial of length three, completing the proof of
 Theorem~\ref{thm:integral-decomposition}.
+
+\begin{proof}[Proof of Corollary~\ref{cor:modular-rhl}]
+The class \(\eta=c_1(\mathcal O_M(-X))\) restricts to \(h\) on the
+exceptional cubic.  Under the unit-normalized outer splittings above,
+\({}^pH^{-2}(\mathcal K)\) and \({}^pH^2(\mathcal K)\) correspond on the
+central stalk to the generators \(h\in H^2(X,\Z)\) and
+\([\mathrm{pt}]\in H^6(X,\Z)\), respectively.  Therefore
+\[
+ \eta^2(h)=h^3=3[\mathrm{pt}].
+\]
+The relative Lefschetz map is multiplication by three, so its reduction
+modulo three is zero rather than an isomorphism.
+\end{proof}
 
 We finish by recording the global fate of \(\tau\).  Apply
 Lemma~\ref{lem:clean-base-change} to

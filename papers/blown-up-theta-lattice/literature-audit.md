@@ -20,18 +20,27 @@ The paper's priority verdict is `PARTIAL OVERLAP / SURVIVING INTEGRAL RESULT`.
   drop when a form degenerates.  It does not state the present cubic-theta
   matrices, the integral two-summand splitting, the characteristic-three
   attachment, or the degree-four Fano lift.
+- de Cataldo--Migliorini (2007) develop the rational intersection-form
+  mechanism for projective resolutions, including isolated fourfold
+  singularities.  The checked splitting statements use rational
+  coefficients and do not compute the present integral blocks.
+- Cipriani (2026), Lemma 3.12, Theorem 3.21, and Corollary 3.22, gives the
+  general field-coefficient classification of small indecomposable
+  extensions over a closed stratum.  It contains no cubic-threefold,
+  theta-divisor, Smith-form, or intersection-form computation.
 
 The surviving paper claim is the geometric realization of the integral
 rank-130 lattice `IH^3(Theta,Z)`: its canonical mod-two fibre-product glue,
 its Fano-labelled saturated image in the intermediate Jacobian, and its dual
 free rank-ten escape lattice.  It now also includes the integral resolution
-complex with central Smith factor three, its indecomposable
-characteristic-three reduction, and the Fano realization of the local
-order-three boundary.  No checked source states these simultaneous integral
-and modular data for the cubic-threefold theta divisor.
+complex with central Smith factor three, its length-three characteristic-
+three Loewy structure, the modular failure of relative hard Lefschetz, and
+the Fano realization of the local order-three boundary.  No checked source
+states these simultaneous integral and modular data for the cubic-threefold
+theta divisor.
 
-The full audit, including read depths, cache keys, hashes, gaps, and the
-bounded novelty extraction, is
+The mod-two audit is
 [`notes/2026-08-20-c928-priority-audit.md`](../../notes/2026-08-20-c928-priority-audit.md).
-The modular delta audit is recorded in
-[`notes/2026-08-20-c934-integral-decomposition-complex.md`](../../notes/2026-08-20-c934-integral-decomposition-complex.md).
+The integral/modular audit, including read depths, cache keys, hashes, and
+bounded searches, is
+[`notes/2026-08-20-c934-priority-audit.md`](../../notes/2026-08-20-c934-priority-audit.md).

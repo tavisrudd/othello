@@ -8,6 +8,8 @@ of the exceptional cubic.  The paper also computes the dual free rank-ten
 escape lattice and the integral direct image of the resolution.  Its two
 outer point summands split integrally, while the central perverse attachment
 is multiplication by three and becomes indecomposable in characteristic
+three.  More precisely, the reduction is uniserial of length three, and the
+same cubic intersection number makes relative hard Lefschetz fail modulo
 three.
 
 ## Build
