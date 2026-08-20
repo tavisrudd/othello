@@ -26,15 +26,20 @@ minimum-weight words recover a marked conic plane and its polarity.
 *Diagonal Isoduality and Transversal Clifford Groups of MDS–CSS Codes* and the
 Golden interferometer paper are related unnumbered companions.
 
-Two further draft papers concern rationality of cubic threefolds.
+Two main draft papers and a short companion concern rationality of cubic
+threefolds.
 *Irrationality after one stabilization* proves that `X × P¹` is
-irrational for every smooth complex cubic threefold `X`, by way of ordinary
-Hodge atoms and a rank-two atomic residue discriminant; it also uses the
+irrational for every smooth complex cubic threefold `X`, by way of an
+occurrence-indexed categorical marker ledger and a rank-two direct-QDM residue
+discriminant; it also uses the
 six-axis structure of the nonstandard `A₅`-invariant pencil to prove universal
 `CH₀`-triviality for its explicit family. Its finer framed-monodromy invariant
 is computed for cubics and their products with `P¹`, while the
 birational-invariance refinement of that invariant is conditional on two
 stated hypotheses.
+*Hodge Atoms as Occurrence-Indexed Marker Ledgers* develops the same
+categorical occurrence/groupoid/fold mechanism for the standard abstract
+Hodge-atom construction and derives only its one-step rank-two consequence.
 *Gamma Point Rows under Quantum Wall Crossing* pursues
 the same quantum obstruction past the first stabilization, to a criterion
 covering every projective stabilization under explicit gauged-admissibility
@@ -58,11 +63,11 @@ complex as separate victories.
 - **One-stabilization irrationality for every smooth cubic threefold.** The
   fourfold `X × P¹` is irrational for every smooth complex cubic threefold
   `X`, and likewise `V × P¹` for every smooth prime Fano
-  threefold `V` of genus eight. The proof reads the ordinary, non-enhanced
-  Hodge-atom package as a birational ledger and introduces a rank-two atomic
-  residue discriminant: the double zero packet of the cubic small quantum
-  connection is a single Hodge atom whose modified block has discriminant
-  `4/9`, a value no curve or surface representative can carry. A separate
+  threefold `V` of genus eight. The proof develops an occurrence-indexed
+  categorical ledger for generic even quantum `D`-module blocks and applies
+  its unconditional rank-two residue marker: the modified cubic zero block
+  has discriminant `4/9`, while every point, curve, and surface contribution
+  vanishes. A separate
   framed-monodromy invariant gives `ν₆(X) = 2` and `ν₆(X × P¹) = 4`; its
   birational invariance through dimension four is
   conditional on two stated hypotheses and yields a second proof. On an
@@ -173,7 +178,7 @@ is conditional, its hypothesis is displayed in the theorem column.
 
 | Paper | General theorem | Quantifier range |
 |---|---|---|
-| Irrationality after one stabilization | `X × P¹` is irrational, by way of the rank-two atomic residue discriminant of the cubic Hodge atom. | Every smooth complex cubic threefold `X`. |
+| Irrationality after one stabilization | `X × P¹` is irrational, by way of the rank-two residue marker of the cubic zero block in the categorical direct-QDM ledger. | Every smooth complex cubic threefold `X`. |
 | Irrationality after one stabilization | The primitive-sixth framed-monodromy multiplicity of the small even quantum connection equals two. | Every smooth complex cubic threefold `X`. |
 | Irrationality after one stabilization | The primitive-sixth framed-monodromy multiplicity of a product with a projective space is that of the factor times one more than the dimension. | Every smooth projective variety and every projective space. |
 | Irrationality after one stabilization | Assuming Hypotheses 5.7R (reconstruction-tail invariance) and 5.7T (divisor-tagging specialization), the primitive-sixth framed-monodromy multiplicity is birationally invariant. | All smooth projective varieties of dimension at most four. |
@@ -202,7 +207,8 @@ boundary, and reproducible entry points.
 | <sub>*Clebsch: Rigidity from Sparse Shadows - III*</sub><br>Golden Descent and Operator Realizations of the Clebsch Cubic | Algebraic geometry / combinatorics | An exact arithmetic incidence cover selects a marked conference source whose cubic shadows return in degree-six harmonics; exchange rigidity and two-graph reconstruction follow independently. | [PDF](https://github.com/tavisrudd/clebsch-passages/blob/main/clebsch_passages.pdf) · [repo](https://github.com/tavisrudd/clebsch-passages) |
 | <sub>*Clebsch: Rigidity from Sparse Shadows - IV*</sub><br>Reconstructing PG(2,13), Its Conic, and Polarity from the Minimum Words of a Binary Conic Code | Coding / finite geometry | Weighted pair data on minimum words recover a marked projective plane, conic, and polarity. | [PDF](https://github.com/tavisrudd/q13-passant-code/blob/main/passant_code_q13.pdf) · [repo](https://github.com/tavisrudd/q13-passant-code) |
 | <sub>*Clebsch: Rigidity from Sparse Shadows - V*</sub><br>Chordal and Conference Cubics: Reconstruction and a Residual C2-Torsor | Invariant theory / algebraic combinatorics | Distinct chordal and conference cubics recover one marked six-axis carrier and admit an exact oriented marked return. | [PDF](https://github.com/tavisrudd/chordal-conference-reconstruction/blob/main/chordal_conference_reconstruction.pdf) · [repo](https://github.com/tavisrudd/chordal-conference-reconstruction) |
-| Irrationality of Cubic Threefolds after One Stabilization | Algebraic geometry / birational geometry | Every smooth cubic threefold stays irrational after multiplication by `P¹`, proved from a rank-two atomic residue discriminant of ordinary Hodge atoms, while an explicit family is universally `CH₀`-trivial; the framed count `ν₆ = 2` and its stabilization to `4` are separate computations. | [PDF](https://github.com/tavisrudd/cubic-stabilization-epilogue/blob/main/irrationality_after_one_stabilization.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-epilogue) |
+| Hodge Atoms as Occurrence-Indexed Marker Ledgers | Algebraic geometry / quantum cohomology | The standard abstract Hodge-atom chemical formula is the Hodge specialization of an occurrence-indexed categorical marker ledger, with an effective weak-factorization quotient and a strictly one-step rank-two obstruction. | [PDF](https://github.com/tavisrudd/hodge-atom-marker-ledger/blob/main/hodge_atom_marker_ledger.pdf) · [repo](https://github.com/tavisrudd/hodge-atom-marker-ledger) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.22036391-blue.svg)](https://doi.org/10.5281/zenodo.22036391) |
+| Irrationality of Cubic Threefolds after One Stabilization | Algebraic geometry / birational geometry | Every smooth cubic threefold stays irrational after multiplication by `P¹`, proved from the rank-two residue marker of a categorical direct-QDM ledger, while an explicit family is universally `CH₀`-trivial; the framed count `ν₆ = 2` and its stabilization to `4` are separate computations. | [PDF](https://github.com/tavisrudd/cubic-stabilization-epilogue/blob/main/irrationality_after_one_stabilization.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-epilogue) |
 | Gamma Point Rows under Quantum Wall Crossing and a Criterion for Stable Irrationality | Algebraic geometry / quantum cohomology | A rank-one derived-clutching theorem, an exact simple-wall ambient point coordinate, ordinary-flop point-row transport, global support collapse, and Gamma reduction give an all-stabilizations criterion under explicit gauged-admissibility and marked threshold assumptions. | [PDF](https://github.com/tavisrudd/cubic-stabilization-irrationality/blob/main/cubic_stabilization_irrationality.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-irrationality) |
 | Standard Flips of Discrepancy One: Extremal J-Normalization and the Meijer Aperture at ν=1 | Algebraic geometry / quantum cohomology | An exact `z`-order count and the `ν=1` Barnes sector complete the discrepancy-one range in Shen--Shoemaker's extremal flip theorem. | [PDF](https://github.com/tavisrudd/discrepancy-one-flips/blob/main/discrepancy_one_flips.pdf) · [repo](https://github.com/tavisrudd/discrepancy-one-flips) |
 | Arcs Complete Outside a Conic: A Prescribed-Hole Defect Identity and Matching-Design Rigidity | Finite geometry / designs | A universal pointwise defect identity gives matching-design rigidity, stability, and conic-relative bounds. | [PDF](https://github.com/tavisrudd/arcs-complete-outside-conic/blob/main/arcs_complete_outside_conic.pdf) · [repo](https://github.com/tavisrudd/arcs-complete-outside-conic) |
@@ -495,15 +501,42 @@ into a global birational obstruction.
 
 ---
 
+#### Hodge Atoms as Occurrence-Indexed Marker Ledgers
+
+[PDF](https://github.com/tavisrudd/hodge-atom-marker-ledger/blob/main/hodge_atom_marker_ledger.pdf) · [Repository](https://github.com/tavisrudd/hodge-atom-marker-ledger) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.22036391-blue.svg)](https://doi.org/10.5281/zenodo.22036391)
+
+**Standout result.** The standard abstract Hodge-atom chemical formula is the
+universal fold of an occurrence-indexed thin groupoid.  Killing atom classes
+carried in dimension at most `d - 2` produces an effective quotient that is
+birationally invariant by weak factorization, and the resulting obstruction
+is stated only for one rank-two projective-bundle step.
+
+> *Abstract* Hodge atoms are defined from connected components of the reduced unramified Euler spectral cover of a maximal non-archimedean A-model F-bundle, followed by elementary identifications supplied by disjoint unions, blowups, and projective bundles. We isolate the categorical mechanism behind this construction. Expanding the degree of each spectral component into labelled occurrences, we form the thin groupoid generated by the elementary correspondences and the free commutative monoid on its connected components. Its universal fold recovers the Hodge-atom chemical formula, makes the three operation laws formal, and separates the abstract atom quotient from the generally coarser quotient by isomorphism of geometric atomic F-bundles. Killing the generators carried in dimension at most d − 2 gives an effective quotient in which weak factorization makes the ledger birationally invariant for smooth projective d-folds. As a one-step consequence, if an atom of a smooth n-fold cannot be carried in dimension at most n − 1, then every rank-two projective bundle carrying that occurrence is irrational. All quantum-cohomological comparison results enter only through an explicit provider record.
+
+**Delivers.** A compact categorical proof spine for standard Hodge atoms,
+including the occurrence carrier, effective monoid, operation folds,
+dimension filtration, and exact abstract-to-geometric type boundary.
+
+**Who cares.** Algebraic geometers working on Hodge-theoretic birational
+invariants, quantum cohomology, weak factorization, or stabilization problems.
+
+**Why it matters.** It makes multiplicity and effectivity explicit, isolates
+the cited quantum-cohomological providers from the formal ledger argument, and
+shows exactly what the standard atom construction proves after one rank-two
+projective-bundle step.
+
+---
+
 #### Irrationality of Cubic Threefolds after One Stabilization
 
 [PDF](https://github.com/tavisrudd/cubic-stabilization-epilogue/blob/main/irrationality_after_one_stabilization.pdf) · [Repository](https://github.com/tavisrudd/cubic-stabilization-epilogue)
 
 **Standout results.** Every smooth complex cubic threefold stays irrational
 after multiplication by a projective line, and the same holds
-for every smooth prime Fano threefold of genus eight.  The proof runs on a new
-rank-two atomic residue discriminant of ordinary Hodge atoms, which
-distinguishes the cubic atom from every curve and surface atom.  The separate
+for every smooth prime Fano threefold of genus eight.  The proof runs on an
+occurrence-indexed categorical ledger for generic even quantum `D`-module
+blocks and its rank-two residue marker, which vanishes in dimensions at most
+two and survives on the modified cubic zero block.  The separate
 framed-monodromy count is `ν₆(X) = 2` for every smooth cubic threefold and
 `ν₆(X × P¹) = 4`; its birational invariance through
 dimension four is conditional on two stated hypotheses and gives a second
@@ -511,9 +544,9 @@ proof of the theorem.  On an explicit non-isotrivial family, universal
 `CH₀`-triviality survives that stabilization, so it does not detect the
 irrationality.
 
-> *Abstract* We prove that X × P¹ is irrational for every smooth complex cubic threefold X. Working in the ordinary, non-enhanced Hodge-atom package of Katzarkov–Kontsevich–Pantev–Yu, we isolate the atom carried by the double zero packet of the cubic small quantum connection and introduce a rank-two atomic residue discriminant δ♯. A canonical elementary modification of the even rank-two block gives δ♯ = 4/9 for the cubic atom. The only curve whose atom could carry the same Hodge representation has genus five, and there δ♯ = 0; surface representatives are excluded by parity ranks and the classification of minimal surfaces. The ordinary Hodge-atom non-rationality criterion then obstructs rationality after one stabilization. Kuznetsov's birational correspondence extends the conclusion to every smooth prime Fano threefold of genus eight.
+> *Abstract* We prove that X × P¹ is irrational for every smooth complex cubic threefold X. We first prove an occurrence-indexed categorical ledger theorem for markers of generic even quantum D-module blocks. Iritani's blowup decomposition and the Iritani–Koto projective-bundle decomposition give its two operation laws; weak factorization then makes every marker whose low-dimensional center terms vanish a birational invariant. The unconditional specialization counts rank-two nilpotent blocks whose canonical elementary modification has nonzero residue discriminant δ♯. Beauville's small quantum algebra gives δ♯ = 4/9 on the cubic zero block. The marker vanishes for points, curves, and surfaces, but survives on X × P¹, while it vanishes on P⁴. Kuznetsov's birational correspondence extends the conclusion to every smooth prime Fano threefold of genus eight.
 >
-> We also study the finer invariant ν₆, the number of primitive-sixth framed formal-monodromy eigenvalues of the numerical small even quantum connection. We compute ν₆(X) = 2 and ν₆(X × P¹) = 4, and establish product, blowup, and projective-bundle formulas, the last two under two stated hypotheses on the reconstruction tail and on divisor-tagging specialization. Under those hypotheses ν₆ is birationally invariant through dimension four, giving a second proof of the theorem.
+> The finer specialization applies the same ledger theorem to blocks that also retain a marked small section and the original loop framing; its fold counts primitive-sixth formal-monodromy eigenvalues of the numerical small even quantum connection. We compute ν₆(X) = 2 and ν₆(X × P¹) = 4. Its blowup and projective-bundle providers retain two stated hypotheses on reconstruction tails and divisor-tagging specialization. Under those hypotheses the same categorical theorem makes ν₆ birationally invariant through dimension four and gives a conditional second proof.
 >
 > Finally, an integral six-axis construction proves universal CH₀-triviality for every smooth member of the nonstandard A₅-invariant pencil: an all-degree saturation theorem for marked finite-étale graph quotients of elliptic powers makes the primitive minimal class of the intermediate Jacobian an integral divisor product. Every moduli point of this pencil but one lies outside the separated-variable locus covered by Colliot-Thélène's criterion; the exception is the Fermat point. Universal CH₀-triviality and irrationality after one stabilization therefore coexist in an explicit nontrivial family, as they also do for Voisin's loci, the Fermat cubic, and the coprime-degree family of Yang–Yu–Zhu.
 
@@ -522,7 +555,9 @@ projective-line stabilization for every smooth cubic threefold, together with
 an explicit family showing that universal `CH₀`-triviality can hold while that
 irrationality persists; an unconditional computation of the primitive-sixth
 quantum packet and of its value after one stabilization; and, under two stated
-hypotheses, birational invariance of that count through dimension four.
+hypotheses, birational invariance of that count through dimension four.  The
+two marker specializations share one categorical occurrence/groupoid/fold
+theorem.
 
 **Who cares.** Algebraic geometers working on rationality, stable rationality,
 intermediate Jacobians, algebraic cycles, quantum connections, or weak
@@ -531,9 +566,9 @@ factorization.
 **Why it matters.** Failure of universal `CH₀`-triviality is a standard
 obstruction to stable rationality, but its validity is not a parametrization.
 This paper makes that limitation concrete after an actual stabilization, and
-its residue discriminant is a new numerical invariant of ordinary Hodge atoms
-that applies to every smooth cubic threefold, not only the symmetric family
-used on the cycle side.  The classical route stops short here: after one
+its residue marker is a direct quantum-`D`-module invariant that applies to
+every smooth cubic threefold, not only the symmetric family used on the cycle
+side.  The classical route stops short here: after one
 stabilization the direct Clemens–Griffiths mechanism gives no contradiction,
 because `H³(X × P¹)` is still `H³(X)`, which the Fano surface of lines
 already carries as its `H¹` up to twist, while the middle `H⁴` is Tate.  The
@@ -541,8 +576,8 @@ recent fourfold criteria that read Hodge data through quantum spectral
 packets do not reach this geometry either, since they assume `b₃ = 0` and a
 large vanishing middle `H⁴`.  The paper claims no novelty for that broad
 philosophy; what is new is the rank-two residue discriminant and the
-observation that the atom carrying a Hodge representation can fail to be
-realizable by a surface even when the representation itself is realizable.
+categorical occurrence-ledger mechanism that carries it through one
+stabilization.
 Two hypotheses remain, and only for the finer framed invariant: invariance of
 the primitive-sixth framed multiplicity under the reconstruction tail of the
 operation formulas, and under the divisor-tagging specialization.

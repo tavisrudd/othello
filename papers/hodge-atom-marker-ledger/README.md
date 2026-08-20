@@ -1,5 +1,7 @@
 # Hodge atoms as occurrence-indexed marker ledgers
 
+[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.22036391-blue.svg)](https://doi.org/10.5281/zenodo.22036391)
+
 [Download the paper (PDF)](hodge_atom_marker_ledger.pdf)
 
 This short companion note identifies the standard Hodge-atom construction
