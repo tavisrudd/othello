@@ -39,6 +39,8 @@ roots = [
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisThreePrimaryLatticeComparison",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisThreePrimaryPairing",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisThreePrimaryHeartCoordinates",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisSourcePermutationAction",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisPrimaryKernelStability",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisLocalChart",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisSlopeModels",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.ConnectedPacketPersistence",

@@ -551,6 +551,90 @@ theorem relativeSixAxis_threePrimaryKernelHeartCoordinates
     (Applications.relativeSixAxisThreePrimaryKernelHeartCoordinates_isMaximalIsotropic
       realization).2.2⟩
 
+/-- The six-label permutation action on the polarized source lattice.  A
+permutation acts on coordinate families by inverse precomposition; in the
+five-coordinate chart of the six-label quotient by the constant line the
+induced map has an explicit integral matrix, these matrices carry the identity
+to the identity and products to products, and each of them preserves the
+coefficient matrix `6I₅-J₅`.  Acting trivially on the rank-two elliptic
+homology coordinate extends the representation to the source lattice, where it
+preserves the source polarization; the contragredient action, the transpose of
+the matrix of the inverse permutation, intertwines the polarization with the
+action and commutes in the same sense with the integral cofactor, which is what
+makes it descend to the discriminant group in its cokernel presentation.  The
+alternating action in question is the restriction to the two displayed
+permutations of the six labels and their words, which realize, faithfully and
+onto, the alternating group on the five matchings of the displayed
+one-factorization.  This is an action on explicit integral matrices; no
+geometric group action, abelian scheme, or identification of the six labels
+with the manuscript's dihedral axes is constructed. -/
+theorem relativeSixAxis_sourceLatticePermutationAction :
+    (∀ permutation : Equiv.Perm (Fin 6),
+        Matrix.transpose (GraphLattices.sixAxisSourcePermutationMatrix ℤ permutation) *
+            GraphLattices.sixAxisSourcePolarization ℤ *
+              GraphLattices.sixAxisSourcePermutationMatrix ℤ permutation =
+          GraphLattices.sixAxisSourcePolarization ℤ) ∧
+      (GraphLattices.sixPointChartMatrix ℤ 1 = 1 ∧
+          ∀ left right : Equiv.Perm (Fin 6),
+            GraphLattices.sixPointChartMatrix ℤ (left * right) =
+              GraphLattices.sixPointChartMatrix ℤ left *
+                GraphLattices.sixPointChartMatrix ℤ right) ∧
+        (∀ permutation : Equiv.Perm (Fin 6),
+            Matrix.transpose (GraphLattices.sixPointChartMatrix ℤ permutation) *
+                GraphLattices.sixAxisGram ℤ *
+                  GraphLattices.sixPointChartMatrix ℤ permutation =
+              GraphLattices.sixAxisGram ℤ) ∧
+          ∀ permutation : Equiv.Perm (Fin 6),
+            GraphLattices.sixAxisSourceDualPermutationMatrix permutation *
+                  GraphLattices.sixAxisSourcePolarization ℤ =
+                GraphLattices.sixAxisSourcePolarization ℤ *
+                  GraphLattices.sixAxisSourcePermutationMatrix ℤ permutation ∧
+              GraphLattices.sixAxisSourcePolarizationCofactor *
+                  GraphLattices.sixAxisSourceDualPermutationMatrix permutation =
+                GraphLattices.sixAxisSourcePermutationMatrix ℤ permutation *
+                  GraphLattices.sixAxisSourcePolarizationCofactor :=
+  ⟨GraphLattices.sixAxisSourcePermutationMatrix_polarization,
+    ⟨GraphLattices.sixPointChartMatrix_one, fun left right ↦
+      GraphLattices.sixPointChartMatrix_mul left right⟩,
+    GraphLattices.sixPointChartMatrix_gram,
+    fun permutation ↦
+      ⟨GraphLattices.sixAxisSourceDualPermutationMatrix_mul_polarization permutation,
+        GraphLattices.sixAxisSourcePolarizationCofactor_mul_dual permutation⟩⟩
+
+/-- Diagonal stability of both primary kernels from equivariance of the
+comparison matrix.  Suppose one fibre's integral comparison matrix pulls a
+unimodular alternating form back to the source polarization and is equivariant
+for the two displayed generators of the six-label action, in the sense that
+each source action is carried to some integral action of the target lattice.
+Then the contragredient action descends to the discriminant group, preserves
+the lattice model of the isogeny kernel and each of its primary parts, and is
+carried by the two primary comparisons to the reduced source action; on chart
+vectors of vanishing coordinate sum that action is the heart action of the same
+permutation.  Hence both transported primary kernels are stable under the two
+diagonal generators, and with the maximal isotropy already proved the
+two-primary kernel is one of the five members of the projective-line packet
+over the field with four elements and the three-primary kernel is the vertical
+copy or one of the three scalar graphs.  Stability is no longer an input at
+either prime.  Equivariance of the comparison matrix is a hypothesis: no
+relative isogeny, geometric group action, torsion group scheme, or Weil pairing
+is constructed. -/
+theorem relativeSixAxis_primaryKernelEquivariantPackets
+    (realization : Applications.RelativeSixAxisHomologyRealization)
+    (equivariant : realization.alternatingEquivariant) :
+    (GraphLattices.SixAxisStandardDiscriminantGeneratorStable
+          (Applications.relativeSixAxisTwoPrimaryKernelCoordinates realization) ∧
+        (Applications.relativeSixAxisTwoPrimaryKernelCoordinates realization).map
+            GraphLattices.sixAxisStandardDiscriminantPairLinearEquiv.toLinearMap ∈
+          GraphLattices.SixPointHeartStableHalfPacket) ∧
+      GraphLattices.SixPointThreeHeartPairGeneratorStable
+          (Applications.relativeSixAxisThreePrimaryKernelHeartCoordinates realization) ∧
+        Applications.relativeSixAxisThreePrimaryKernelHeartCoordinates realization ∈
+          GraphLattices.SixPointThreeHeartStableHalfPacket :=
+  ⟨Applications.relativeSixAxisTwoPrimaryKernelCoordinates_equivariantPacket realization
+      equivariant,
+    Applications.relativeSixAxisThreePrimaryKernelHeartCoordinates_equivariantPacket realization
+      equivariant⟩
+
 /-- The discriminant pairing of the six-axis source polarization on integral
 representatives, and its nondegeneracy.  On the classes of two integral
 vectors the pairing is the class modulo one of the rational number

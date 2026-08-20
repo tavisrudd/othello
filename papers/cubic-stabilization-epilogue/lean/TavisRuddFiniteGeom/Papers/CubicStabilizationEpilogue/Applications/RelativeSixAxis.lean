@@ -8,6 +8,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAx
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisThreePrimaryLatticeComparison
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisThreePrimaryPairing
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisThreePrimaryHeartCoordinates
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisPrimaryKernelStability
 
 /-!
 # The relative six-axis packet over its integral homology realization
@@ -137,6 +138,15 @@ structure RelativeSixAxisGeometricInput
   relativeMapA5Equivariant : Prop
   /-- Source and coefficient form carry their natural `S₆` actions. -/
   naturalS6Actions : Prop
+  /-- First-homology form of that equivariance: on every fibre the comparison
+  matrix carries the source action of each of the two displayed generators of
+  the six-label permutation group to some integral action of the target
+  lattice.  Words in those two generators realize, faithfully and onto, the
+  alternating group on the five matchings of the displayed one-factorization of
+  the six labels. -/
+  homologyComparisonEquivariant : ∀ parameter,
+    GraphLattices.SixAxisComparisonAlternatingEquivariant
+      (homology parameter).comparison
   /-- Coordinates identifying each two-primary discriminant fibre with the
   two-torsion kernel of the realized source polarization. -/
   discriminantTwoCoordinates : ∀ parameter,
@@ -412,6 +422,64 @@ theorem relativeSixAxisThreePrimaryKernelHeartCoordinates_isMaximalIsotropic
       GraphLattices.sixAxisSourceThreePrimaryKernelHeartCoordinates_stablePacket
         realization.jacobianPolarizationPrincipal realization.polarizationPullback stable⟩
 
+/-- Equivariance of one fibre's comparison matrix for the two displayed
+generators of the six-label permutation action, whose words realize the
+alternating group on the five matchings of the displayed one-factorization. -/
+def RelativeSixAxisHomologyRealization.alternatingEquivariant
+    (realization : RelativeSixAxisHomologyRealization) : Prop :=
+  GraphLattices.SixAxisComparisonAlternatingEquivariant realization.comparison
+
+/-- Every permutation of the six labels acts on the source lattice by an
+isometry of the source polarization, and the actions compose: the chart
+matrices form a monoid homomorphism from the six-label permutation group.  The
+alternating action in question is the restriction to the two displayed
+permutations and their words. -/
+theorem relativeSixAxisSourceLatticeAction :
+    (∀ permutation : Equiv.Perm (Fin 6),
+        (GraphLattices.sixAxisSourcePermutationMatrix ℤ permutation)ᵀ *
+            GraphLattices.sixAxisSourcePolarization ℤ *
+              GraphLattices.sixAxisSourcePermutationMatrix ℤ permutation =
+          GraphLattices.sixAxisSourcePolarization ℤ) ∧
+      GraphLattices.sixPointChartMatrix ℤ 1 = 1 ∧
+        ∀ left right : Equiv.Perm (Fin 6),
+          GraphLattices.sixPointChartMatrix ℤ (left * right) =
+            GraphLattices.sixPointChartMatrix ℤ left *
+              GraphLattices.sixPointChartMatrix ℤ right :=
+  ⟨GraphLattices.sixAxisSourcePermutationMatrix_polarization,
+    GraphLattices.sixPointChartMatrix_one,
+    fun left right ↦ GraphLattices.sixPointChartMatrix_mul left right⟩
+
+/-- For an equivariant comparison matrix the transported two-primary kernel is
+diagonally generator stable, and is therefore one of the five members of the
+projective-line packet.  Stability is no longer an input on this fibre. -/
+theorem relativeSixAxisTwoPrimaryKernelCoordinates_equivariantPacket
+    (realization : RelativeSixAxisHomologyRealization)
+    (equivariant : realization.alternatingEquivariant) :
+    GraphLattices.SixAxisStandardDiscriminantGeneratorStable
+        (relativeSixAxisTwoPrimaryKernelCoordinates realization) ∧
+      (relativeSixAxisTwoPrimaryKernelCoordinates realization).map
+          GraphLattices.sixAxisStandardDiscriminantPairLinearEquiv.toLinearMap ∈
+        GraphLattices.SixPointHeartStableHalfPacket :=
+  ⟨GraphLattices.sixAxisSourceTwoPrimaryKernelCoordinates_generatorStable
+      realization.jacobianPolarizationPrincipal realization.polarizationPullback equivariant,
+    GraphLattices.sixAxisSourceTwoPrimaryKernelCoordinates_equivariantPacket
+      realization.jacobianPolarizationPrincipal realization.polarizationPullback equivariant⟩
+
+/-- For an equivariant comparison matrix the transported three-primary kernel
+is diagonally generator stable, and is therefore the vertical copy or one of
+the three scalar graphs.  Stability is no longer an input on this fibre. -/
+theorem relativeSixAxisThreePrimaryKernelHeartCoordinates_equivariantPacket
+    (realization : RelativeSixAxisHomologyRealization)
+    (equivariant : realization.alternatingEquivariant) :
+    GraphLattices.SixPointThreeHeartPairGeneratorStable
+        (relativeSixAxisThreePrimaryKernelHeartCoordinates realization) ∧
+      relativeSixAxisThreePrimaryKernelHeartCoordinates realization ∈
+        GraphLattices.SixPointThreeHeartStableHalfPacket :=
+  ⟨GraphLattices.sixAxisSourceThreePrimaryKernelHeartCoordinates_generatorStable
+      realization.jacobianPolarizationPrincipal realization.polarizationPullback equivariant,
+    GraphLattices.sixAxisSourceThreePrimaryKernelHeartCoordinates_equivariantPacket
+      realization.jacobianPolarizationPrincipal realization.polarizationPullback equivariant⟩
+
 /-- The two-primary discriminant identification `D₂ ≃ H₂ ⊗ E[2]`, constructed
 from the two-torsion coordinates and from the computed kernel of the realized
 source polarization rather than supplied. -/
@@ -646,6 +714,35 @@ structure RelativeSixAxisConclusion
                 (geometry.homology parameter)) →
             relativeSixAxisThreePrimaryKernelHeartCoordinates (geometry.homology parameter) ∈
               GraphLattices.SixPointThreeHeartStableHalfPacket)
+  /-- Every permutation of the six labels acts on the source lattice by an
+  isometry of the source polarization, and the chart matrices compose. -/
+  sourceLatticePermutationAction :
+    (∀ permutation : Equiv.Perm (Fin 6),
+        (GraphLattices.sixAxisSourcePermutationMatrix ℤ permutation)ᵀ *
+            GraphLattices.sixAxisSourcePolarization ℤ *
+              GraphLattices.sixAxisSourcePermutationMatrix ℤ permutation =
+          GraphLattices.sixAxisSourcePolarization ℤ) ∧
+      GraphLattices.sixPointChartMatrix ℤ 1 = 1 ∧
+        ∀ left right : Equiv.Perm (Fin 6),
+          GraphLattices.sixPointChartMatrix ℤ (left * right) =
+            GraphLattices.sixPointChartMatrix ℤ left *
+              GraphLattices.sixPointChartMatrix ℤ right
+  /-- On every fibre both transported primary kernels are diagonally generator
+  stable, and therefore belong to their packets: the two-primary kernel to the
+  five-member projective-line packet and the three-primary kernel to the
+  four-member one.  Stability is derived from equivariance of the comparison
+  matrix, not assumed. -/
+  primaryKernelEquivariantPackets :
+    ∀ (geometry : RelativeSixAxisGeometricInput objects) (parameter : Base),
+      (GraphLattices.SixAxisStandardDiscriminantGeneratorStable
+            (relativeSixAxisTwoPrimaryKernelCoordinates (geometry.homology parameter)) ∧
+          (relativeSixAxisTwoPrimaryKernelCoordinates (geometry.homology parameter)).map
+              GraphLattices.sixAxisStandardDiscriminantPairLinearEquiv.toLinearMap ∈
+            GraphLattices.SixPointHeartStableHalfPacket) ∧
+        GraphLattices.SixPointThreeHeartPairGeneratorStable
+            (relativeSixAxisThreePrimaryKernelHeartCoordinates (geometry.homology parameter)) ∧
+          relativeSixAxisThreePrimaryKernelHeartCoordinates (geometry.homology parameter) ∈
+            GraphLattices.SixPointThreeHeartStableHalfPacket
   /-- The two-primary discriminant identification `D₂ ≃ H₂ ⊗ E[2]` is
   constructed from the realized polarization rather than supplied: in the
   supplied two-torsion coordinates it is the computed kernel equivalence of the
@@ -783,6 +880,14 @@ theorem relativeSixAxis_of_geometricInputs
     fun otherGeometry parameter ↦
       relativeSixAxisThreePrimaryKernelHeartCoordinates_isMaximalIsotropic
         (otherGeometry.homology parameter),
+    relativeSixAxisSourceLatticeAction,
+    fun otherGeometry parameter ↦
+      ⟨relativeSixAxisTwoPrimaryKernelCoordinates_equivariantPacket
+          (otherGeometry.homology parameter)
+          (otherGeometry.homologyComparisonEquivariant parameter),
+        relativeSixAxisThreePrimaryKernelHeartCoordinates_equivariantPacket
+          (otherGeometry.homology parameter)
+          (otherGeometry.homologyComparisonEquivariant parameter)⟩,
     fun otherGeometry parameter _ ↦
       (otherGeometry.heartTensorTorsionCoordinates parameter).apply_symm_apply _,
     fun otherGeometry parameter _ ↦
