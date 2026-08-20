@@ -247,6 +247,17 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   the identification of the actual cubic packet with one common based loop
   or typed deck path, with explicit character reindexing between
   occurrences.
+  Module 48 separates numerical crepancy from geometric phase: adjoining the
+  negative total character makes every toric wall crepant without
+  quasi-symmetry or total unimodularity.  Modules 49--50 then close the naive
+  realization negatively.  The added coordinate creates new semistable
+  supports in every admissible five-signature chamber, and every phase-safe
+  ordinary added weight must lie in the opposite chamber cone.  Their sum
+  therefore cannot equal the required correction \((1,-1)\).  No finite
+  ordinary multi-coordinate refinement repairs the phase.  The next exact
+  choice is open restriction of the completed FM/Gamma comparison with a
+  divided-rank-zero complement, a genuinely relative/enlarged-group master
+  space, or the occurrence-level normal-jet adapter.
   Shifted tensor stability and the extremal multinomial source law are
   proved, but the occurrence-indexed exact QDM sequence, actual carrier
   exponent, and boundary vanishing remain open.  The packet is split into

@@ -197,6 +197,22 @@ index row.
   reconstructs the source rank row.  A pairing-preserving narrow-QDM
   comparison carrying that shifted line would therefore close the same
   local gate.  Its occurrence and fixed-phase realization are still open.
+- Proper Fourier--Mukai transport and the Coates--Iritani--Jiang Gamma gauge
+  restrict to this paired narrow image under the explicit Shoemaker,
+  spanning, same-map, and exact-base-change hypotheses.  Equivariant rank
+  divided by the universal Thom zero \((1-q^{-1})^r\) is exactly its rank
+  row, so rank and pairing transport remove a separate shifted-line scalar
+  calculation.  A horizontal gauge also transports the whole generalized
+  primitive sector; the remaining phase input is the actual common-loop or
+  typed deck identification.
+- Canonical-character completion is numerically crepant for every toric wall
+  without quasi-symmetry or total unimodularity.  It nevertheless fails the
+  intended total-space phase for all five admissible pilots: the added
+  coordinate creates new semistable supports.  More strongly, every
+  phase-safe ordinary added weight must lie in the cone opposite the chamber,
+  so no finite multi-coordinate refinement can have the required total
+  character.  The live alternatives are open restriction/relative stability,
+  an enlarged-group master space, or the independent normal-jet adapter.
 
 ## Open geometric providers
 
@@ -270,19 +286,17 @@ advertised algebraic laws and countermodels, never an external QDM provider.
 
 ## Next
 
-1. Decide whether an actual primitive \((1,1)\) AKMW overlap admits one
-   effective common rank-two genuine-unit matrix.  Module 41 leaves only five
-   signatures without total unimodularity and four with it; the oriented
-   chamber selects at most one for a typed occurrence.
-2. If so, construct an equivariant QDM/Gamma realization square retaining the
-   fibre character \(q\) and the first normal jet at \(q=1\).  Module 43 has
-   already computed the completed algebraic window side: its raw valuation is
-   one and its normalized jet is a unit for all five signatures.
-3. Identify that universal completed-window jet with the actual endpoint row
-   transition, with exact coimage base change and adjacent reindexing.  It
-   does not make the raw special fibre invertible; any extra torsion must now
-   occur in this vertical QDM realization rather than in the completed rank
-   window.
+1. Test whether the CIJ Fourier--Mukai/Gamma comparison on the completed
+   quotient restricts to the intended total-space opens and whether the
+   complement is divided-rank-zero.  This is the only surviving direct use
+   of the ordinary canonical completion.
+2. In parallel, construct the occurrence-level fixed-phase QDM/Gamma square
+   identifying Module 43's universal normalized jet with the actual endpoint
+   row transition, with exact coimage base change and adjacent reindexing.
+3. If neither adapter exists, move to a genuinely relative \(p\)-field or
+   enlarged-group master-space comparison.  Do not search for another finite
+   ordinary multi-coordinate completion: Module 50 rules out that entire
+   class.
 4. In parallel, test the narrower non-equivariant adapter of Module 44:
    realize the actual primitive packet in a common narrow QDM, preserve its
    compact-support pairing, and carry the shifted-point/Thom line across the

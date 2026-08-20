@@ -140,9 +140,20 @@ are:
     geometric identification of the actual cubic packet with one common
     based loop or typed deck path, including the explicit character mapping
     under adjacent reindexing.
+23. **Can the completed comparison be restricted to the intended
+    total-space open?**  Module 48 proves that canonical-character completion
+    is numerically crepant for every toric wall, independently of
+    quasi-symmetry and total unimodularity.  Modules 49--50 show why this does
+    not finish the narrow route: every admissible pilot gains new semistable
+    supports, and no finite ordinary multi-coordinate completion with the
+    same torus, linearization, raw phase, and total correction character can
+    avoid them.  The exact surviving test is whether the CIJ FM/Gamma
+    comparison restricts to the desired open total spaces with
+    divided-rank-zero complement.  Otherwise use a relative/enlarged-group
+    construction or return to the normal-jet adapter.
 
 None of these questions blocks the proof in Modules 0--16 or the
-transport-level specialization audit in Module 17.  Modules 18--47 isolate
+transport-level specialization audit in Module 17.  Modules 18--50 isolate
 the general consequences without claiming the missing enriched provider.
 The open questions control whether the interface can be promoted from a
 lawful compiler to a canonical equivalence with the complete external

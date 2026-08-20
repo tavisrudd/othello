@@ -52,6 +52,9 @@ No manuscript or Lean source is part of this packet.
 | 45 | proper Fourier--Mukai restriction to the paired narrow QDM | notes/2026-08-20-c925-toric-crepant-narrow-restriction.md |
 | 46 | divided equivariant rank, narrow row transport, and automatic shifted line | notes/2026-08-20-c925-divided-rank-narrow-line.md |
 | 47 | horizontal transport of primitive sectors and typed deck-character reindexing | notes/2026-08-20-c925-narrow-phase-projector-transport.md |
+| 48 | signature-free numerical crepancy of canonical-character completion | notes/2026-08-20-c925-signature-free-canonical-completion.md |
+| 49 | failure of the naive canonical total-space phase in all five pilots | notes/2026-08-20-c925-canonical-completion-phase-no-go.md |
+| 50 | opposite-cone obstruction to every ordinary multi-coordinate repair | notes/2026-08-20-c925-multicoordinate-phase-no-go.md |
 | frontier | open experiments and provider targets | notes/2026-08-20-c925-exploration-frontier.md |
 
 ## Dependency spine
@@ -78,7 +81,7 @@ Modules 19--23 prove reusable categorical consequences:
 - universal center-null quotients and minimal sufficient shadows; and
 - the conditional Section 6 argument as a separate specialization.
 
-Modules 24--47 isolate the higher-stabilization frontier:
+Modules 24--50 isolate the higher-stabilization frontier:
 
 - irrationality on any unbounded stabilization set implies irrationality for
   every index;
@@ -182,6 +185,12 @@ Modules 24--47 isolate the higher-stabilization frontier:
   row.  This replaces the normal jet by a paired narrow-image optic, but
   still needs transport of that shifted line in a fixed-phase occurrence
   realization; and
+- canonical-character completion makes every toric wall numerically
+  crepant without quasi-symmetry or total unimodularity, but this does not
+  preserve the intended total-space phase.  All five admissible pilots gain
+  new semistable supports, and an opposite-cone argument rules out every
+  finite ordinary multi-coordinate repair with the same torus,
+  linearization, raw phase, and total correction character; and
 - the rank-row route remains the higher-EV uniform alternative.
 
 ## Current \(m=2\) alternatives
@@ -246,6 +255,19 @@ multiplicity-one hypothesis.  A deck reindexing may rename the character
 only through its explicit group isomorphism.  What remains is to identify
 the actual cubic primitive packet with one such common loop or typed deck
 path at every occurrence.
+Module 48 observes that the completed toric wall is numerically crepant for
+every signature because its total character vanishes; no quasi-symmetry or
+total-unimodularity hypothesis is needed for that clause.  Modules 49--50
+then close the naive geometric realization negatively.  The added canonical
+coordinate creates new semistable supports in every admissible five-pilot
+chamber, and any phase-safe ordinary added coordinate would have to lie in
+the cone opposite that chamber.  Their sum cannot equal the required
+correction \((1,-1)\).  Thus neither one coordinate nor any finite ordinary
+multi-coordinate refinement supplies the desired total-space phase.  The
+live completion-side route is restriction of the completed comparison to
+the intended open (with divided-row-zero complement), a genuinely relative
+or enlarged-group master-space theorem, or the independent normal-jet
+adapter.
 
 ### ExactTop provider
 
@@ -302,6 +324,12 @@ vanishing remain open.
   notes/2026-08-20-c925-divided-rank-narrow-line.md
 - horizontal primitive-phase and deck-character transport:
   notes/2026-08-20-c925-narrow-phase-projector-transport.md
+- signature-free numerical crepancy of canonical completions:
+  notes/2026-08-20-c925-signature-free-canonical-completion.md
+- failure of the naive canonical total-space phase:
+  notes/2026-08-20-c925-canonical-completion-phase-no-go.md
+- opposite-cone obstruction to every ordinary multi-coordinate repair:
+  notes/2026-08-20-c925-multicoordinate-phase-no-go.md
 
 ## Executable witnesses
 
