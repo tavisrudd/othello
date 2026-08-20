@@ -759,6 +759,33 @@ coverage counts.  Still supplied: diagonal stability, standing for
 `A₅`-equivariance, at both primes, and every geometric identification.  Report:
 [`../2026-08-19-c910-three-primary-analogue.md`](../2026-08-19-c910-three-primary-analogue.md).
 
+**The six-label action on the source lattice and diagonal stability of both
+primary kernels, 2026-08-20.**  `GraphLattices/SixAxisSourcePermutationAction.lean`
+represents the six-label permutation group on the five-coordinate chart of the
+integral quotient by the constant line: an explicit integral matrix per
+permutation, a monoid homomorphism, and preservation of `6I₅-J₅`, all from one
+lemma saying that the matrix implements inverse precomposition on difference
+coordinates.  Kronecker multiplication by the identity on the elliptic homology
+coordinate extends the representation to the source lattice, where it preserves
+the source polarization.  The contragredient matrix intertwines the polarization
+with the action and commutes in the same sense with the integral cofactor, so it
+descends to the discriminant group in its cokernel presentation and is compatible
+with the primary comparisons.  `GraphLattices/SixAxisPrimaryKernelStability.lean`
+then proves that for a comparison matrix equivariant for the two displayed
+generators — carrying each source action to some integral target matrix, with no
+isometry required on the target side — the descended action preserves the lattice
+model of the isogeny kernel and each of its primary parts, and that the primary
+comparisons carry it to the reduced source action, which on chart vectors of
+vanishing coordinate sum is the heart action of the same permutation.  Both
+transported primary kernels are therefore diagonally generator stable: the
+two-primary kernel is one of the five members of the projective-line packet and
+the three-primary kernel is the vertical copy or one of the three scalar graphs,
+with no stability hypothesis at either prime.  Two terminals were added and the
+snapshot moves to 304 reviewer terminals with unchanged coverage counts.  Still
+supplied: the identification of matrix-level equivariance with equivariance of an
+actual relative isogeny, and every geometric identification.  Report:
+[`../2026-08-20-c910-six-label-action-and-kernel-stability.md`](../2026-08-20-c910-six-label-action-and-kernel-stability.md).
+
 ## Prioritized Lean backlog
 
 Work in this order unless a later literature or library dependency changes the
@@ -840,13 +867,17 @@ priority 2 below.
    quadratic extension or an abstract complete local ring with idempotent
    lifting, which is a separate piece of infrastructure rather than a matrix to
    write down.
-2. **Relative six-axis geometry — started 2026-08-19.**  The polarization
+2. **Relative six-axis geometry — started 2026-08-19, stability closed
+   2026-08-20.**  The polarization
    pullback, isogeny degree and finiteness, and both primary discriminant
    kernels are now proved from an integral first-homology realization rather
    than supplied, the manuscript's normalized primary pairings are formalized,
    and the discriminant group `Λ^#/Λ` of the source polarization is built with
    its `ℚ/ℤ`-valued pairing, its order `6⁸`, and maximal isotropy of the
-   order-`6⁴` kernel subgroup.  What remains: the primary decomposition
+   order-`6⁴` kernel subgroup.  The six-label action on the source lattice is
+   represented and diagonal stability of both primary kernels is proved from
+   equivariance of the comparison matrix, so both packet memberships are
+   unconditional.  What remains: the primary decomposition
    `D = D₂ ⊕ D₃`, which carries maximal isotropy to each `𝒦_p` in `𝒟_p` as the
    lemma states it; the symplectic compatibility of both primary
    identifications with the discriminant pairing; equivariance of the

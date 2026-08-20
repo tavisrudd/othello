@@ -78,12 +78,20 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   \(\ell_\theta(Z;\sigma)\le\dim Z-1\) contributes at most \(J_m\) after its
   exceptional \(J_{c-1}\) factor.  The minimal consumer is the Boolean
   high-length shadow, and the three conditional inputs need only exist on one
-  cofinal fixed-factor family.  This is not a proof of any source, carrier, or
-  transport input.  The
-  forty-six-check finite law replay, eleven-check typed Haskell toy, and
-  original cubic replay are green.  C925 remains open at fixed-phase
-  Gamma/rank transport or at the operation-framed source/carrier/strictness
-  package; the relative-cap cancellation remains one possible rank provider.
+  cofinal fixed-factor family.  The strict-splitting transport gate has now
+  been weakened exactly: for \(\operatorname{Top}_m=N^mV\), one canonical
+  snake/Bockstein boundary is the sole extension defect.  Standard Orlov
+  semiorthogonality has the variance of the opposite sequence
+  \(0\to E\to B\to A\to0\); its ambient-to-exceptional Hom must vanish in an
+  enriched operation-framed exact heart, not in plain \(K[N]\)-modules.
+  Shifted tensor stability and the extremal multinomial source law are
+  proved, but the occurrence-indexed exact QDM sequence, actual carrier
+  exponent, and boundary vanishing remain open.  The packet is split into
+  bounded module companions behind a stable index.  The fifty-one-check
+  finite law replay, eleven-check typed Haskell toy, and original cubic
+  replay are green.  C925 remains open at fixed-phase Gamma/rank transport
+  or at this ExactTop provider; the relative-cap cancellation remains one
+  possible rank provider.
   Mathematics only; no manuscript or Lean edits.  Card:
   `../cubic-threefolds-tasks/c925-modular-direct-qdm-proof-packet.md`.
 - **C924 — closed 2026-08-19.** The direct ordinary-QDM route proves
@@ -261,9 +269,15 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   and therefore four-dimensional, hence the vertical copy or one of the three
   scalar graphs once diagonal stability is granted. The orders `2^8` and `3^8`
   of the primary parts of the discriminant group follow from those two
-  comparisons. Stability, standing for `A_5`-equivariance, is the only
-  remaining input at either prime; the orders of the primary parts of the
-  kernel and the geometric commutator pairing remain supplied.
+  comparisons. Stability is no longer an input at either prime: the six-label
+  permutation group is represented on the source lattice by explicit integral
+  matrices preserving the polarization, its contragredient descends to the
+  discriminant group, and for a comparison matrix equivariant for the two
+  displayed generators both transported primary kernels are diagonally stable
+  and therefore unconditionally in their packets. What remains supplied is the
+  identification of that matrix-level equivariance with equivariance of an
+  actual relative isogeny; the orders of the primary parts of the kernel and
+  the geometric commutator pairing also remain open.
   Card:
   `../cubic-threefolds-tasks/c910-cubic-stabilization-lean-companion.md`; gap audit
   `../2026-08-18-c910-post-restructure-gap-audit.md`; anchor report
@@ -307,6 +321,8 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   `../2026-08-19-c910-two-primary-standard-coordinates.md`;
   three-primary analogue report
   `../2026-08-19-c910-three-primary-analogue.md`;
+  six-label action and kernel-stability report
+  `../2026-08-20-c910-six-label-action-and-kernel-stability.md`;
   interim release report
   `../2026-08-12-c910-partial-lean-release.md`.
 - **C920 — closed 2026-08-18.** Hypothesis 5.7T of the epilogue is now used only
