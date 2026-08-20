@@ -42,6 +42,8 @@ exact \(m=2\) and all-\(m\) transport gates.
   notes/2026-08-20-c925-rank-quotient-path-compression.md
 - point-line duality compression:
   notes/2026-08-20-c925-point-line-duality-compression.md
+- commuting-unipotent point-line no-go:
+  notes/2026-08-20-c925-unipotent-point-line-no-go.md
 - non-\(m=2\) categorical dividends:
   notes/2026-08-20-c925-non-m2-categorical-dividends.md
 - conditional Section 6 specialization:
@@ -118,6 +120,11 @@ index row.
   exceptional coordinate.  Iritani's formal comparison has the required
   point shape, and the full Gamma point section is line-bundle-monodromy
   invariant; the remaining calibration is fixed-phase Gamma-to-formal.
+- Picard monodromy cannot prove that calibration by fixed-line uniqueness:
+  every nonzero exceptional unipotent module, even for an arbitrary
+  commuting family pointwise, has a common fixed vector.  A selector must
+  instead use a multiplicity-one filtered/semisimple/support-sensitive
+  quotient or a genuinely different operation.
 
 ## Open geometric providers
 
@@ -167,14 +174,15 @@ Typed replay:
       | diff -u \
           notes/cubic-threefolds-tasks/c925-sparse-shadow-path-toy-output.txt -
 
-The finite model currently has sixty-five checks.  It verifies only the
+The finite model currently has sixty-six checks.  It verifies only the
 advertised algebraic laws and countermodels, never an external QDM provider.
 
 ## Next
 
 1. Prove the local fixed-phase QDM point-line law of Module 35: commute the
    primitive projector with the chosen monodromy, identify the Gamma and
-   formally normalized point lines, and provide lawful adjacent/endpoint
+   formally normalized point lines using a non-Picard selector or strict
+   multiplicity-one filtration quotient, and provide lawful adjacent/endpoint
    reindexing along one chosen factorization.
 2. As the ExactTop alternative, construct a **corrected intrinsic**
    support/Gysin realization for Module 32; ordinary Gamma or residual

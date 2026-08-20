@@ -1,10 +1,11 @@
 {
-  "check_count": 65,
+  "check_count": 66,
   "checks": {
     "augmented_row_output_kernel_is_two_sided": "pass",
     "bittner_relation_codimension_2_through_6": "pass",
     "center_localization_idempotent_and_nested": "pass",
     "comma_bridge_forces_descended_augmented_row": "pass",
+    "commuting_unipotent_jordan_shifts_have_common_fixed_vector": "pass",
     "conditional_framed_m1_telescope_with_specialized_center_null": "pass",
     "cyclic_krylov_moments_reconstruct_nilpotent_string": "pass",
     "exacttop_needs_image_equality_not_map_equality": "pass",

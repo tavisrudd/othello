@@ -241,7 +241,8 @@ Uniqueness on the ambient cubic block alone proves nothing upstairs.
 | Is its primitive projection invariant? | **conditional** | primitive projector must commute with the monodromy |
 | Does the formal comparison have the desired point shape? | **yes formally** | audited initial condition (35.13) |
 | Are the Gamma and formal point lines identified sectorially? | **open** | equation (35.14) |
-| Can operation-fixed-line uniqueness prove it? | **open** | exclude exceptional fixed directions without circular splitting |
+| Can commuting Picard fixed-line uniqueness prove it? | **no when the exceptional sector is nonzero** | Module 36 common-fixed-vector theorem |
+| Can a filtered or non-Picard selector prove it? | **open** | multiplicity-one selector without circular splitting |
 
 ## Boundary
 

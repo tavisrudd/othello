@@ -40,6 +40,7 @@ No manuscript or Lean source is part of this packet.
 | 33 | Gamma support collision and fixed-phase rank-row replacement | notes/2026-08-20-c925-gamma-support-collision-and-rank-route.md |
 | 34 | rank quotient line, one-path telescope, and coherence compression | notes/2026-08-20-c925-rank-quotient-path-compression.md |
 | 35 | pairing-dual point-line compression of the local rank law | notes/2026-08-20-c925-point-line-duality-compression.md |
+| 36 | commuting-unipotent no-go for point-line uniqueness | notes/2026-08-20-c925-unipotent-point-line-no-go.md |
 | frontier | open experiments and provider targets | notes/2026-08-20-c925-exploration-frontier.md |
 
 ## Dependency spine
@@ -66,7 +67,7 @@ Modules 19--23 prove reusable categorical consequences:
 - universal center-null quotients and minimal sufficient shadows; and
 - the conditional Section 6 argument as a separate specialization.
 
-Modules 24--35 isolate the higher-stabilization frontier:
+Modules 24--36 isolate the higher-stabilization frontier:
 
 - irrationality on any unbounded stabilization set implies irrationality for
   every index;
@@ -107,6 +108,11 @@ Modules 24--35 isolate the higher-stabilization frontier:
   line-bundle-monodromy invariant, while its fixed-phase primitive
   projection still needs operation-projector commutation and
   Gamma-to-formal calibration; and
+- no finite commuting family of unipotent Picard operations can uniquely
+  select that point line when the exceptional sector is nonzero, because it
+  always has a common exceptional fixed vector; a successful selector must
+  use a multiplicity-one filtered/semisimple/support-sensitive quotient or
+  another non-Picard operation; and
 - the rank-row route remains the higher-EV uniform alternative.
 
 ## Current \(m=2\) alternatives

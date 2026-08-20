@@ -132,10 +132,15 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   line-bundle-monodromy invariant; the remaining local gate is commutation
   of the primitive projector and fixed-phase Gamma-to-formal point-line
   calibration.
+  Picard fixed-line uniqueness is now closed negatively: every nonzero
+  exceptional unipotent module has a common fixed vector for any commuting
+  family.  The remaining selector must be a multiplicity-one
+  filtered/semisimple/support-sensitive quotient or a genuinely non-Picard
+  operation.
   Shifted tensor stability and the extremal multinomial source law are
   proved, but the occurrence-indexed exact QDM sequence, actual carrier
   exponent, and boundary vanishing remain open.  The packet is split into
-  bounded module companions behind a stable index.  The sixty-five-check
+  bounded module companions behind a stable index.  The sixty-six-check
   finite law replay, eleven-check typed Haskell toy, and original cubic
   replay are green.  C925 remains open at fixed-phase Gamma/rank transport
   or at this ExactTop provider; the relative-cap cancellation remains one

@@ -1873,6 +1873,20 @@ def main():
                 assert pairing_row_law == point_vector_law
     checks["point_line_pairing_is_equivalent_to_ambient_rank_row"] = "pass"
 
+    # Coordinate Jordan shifts on a tensor product commute.  Their common
+    # fixed/kernel basis always contains the all-zero multi-index, modeling
+    # the exceptional fixed line that defeats a Picard-only selector.
+    for operation_count in range(1, 4):
+        for jordan_dimensions in product(range(1, 5), repeat=operation_count):
+            basis = tuple(product(*(range(dimension) for dimension in jordan_dimensions)))
+            common_kernel_basis = tuple(
+                basis_vector
+                for basis_vector in basis
+                if all(basis_vector[index] == 0 for index in range(operation_count))
+            )
+            assert common_kernel_basis == ((0,) * operation_count,)
+    checks["commuting_unipotent_jordan_shifts_have_common_fixed_vector"] = "pass"
+
     result = {
         "status": "pass",
         "check_count": len(checks),
