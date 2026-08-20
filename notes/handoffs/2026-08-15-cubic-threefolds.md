@@ -37,18 +37,18 @@ promoted mathematical assertion maps to a kernel-checked declaration.
 
 ## Current status
 
-- **C931 -- C928 referee batch complete; minor revision required.** Six
-  isolated reports and a separate evidence synthesis leave every theorem
-  intact.  The adopted local repairs are exact FVME credit for the abstract
-  Smith data, a printed integral-IH truncation convention/citation, one short
-  dual exact-sequence bridge for the escape lattice, and noncanonical wording
-  for Kraemer's rational splitting.  The default verdict is *Proceedings of
-  the AMS* after minor revision and a fresh focused batch; the current scope is
-  not recommended for *Algebraic Geometry*.  The abstract passes at 179 tokens
-  below the 250-word ceiling.  No manuscript edit has yet been made.  Card:
+- **C931 -- closed 2026-08-20; C928 repaired, re-refereed, and submission-ready.**
+  The four adopted local findings were repaired without changing a theorem or
+  proof mechanism: exact FVME credit, the integral-IH truncation convention and
+  citation, the dual exact-sequence bridge, and noncanonical wording for
+  Krämer's rational splitting.  Six fresh mutually isolated packets all return
+  A with no required finding; Theorems 1.1 and 1.2 and Corollary 1.3 survive
+  integrally, the eight-page PDF is clean, and every abstract count is below
+  250 words.  Submit to *Proceedings of the AMS*; do not expand the present
+  focused paper merely to chase the *Algebraic Geometry* stretch venue.  Card:
   `../cubic-threefolds-tasks/c931-c928-referee-dossier.md`; dossier:
-  `../2026-08-20-c931-c928-referee-dossier.md`; synthesis:
-  `../2026-08-20-c931-c928-referee-synthesis.md`.
+  `../2026-08-20-c931-c928-referee-dossier.md`; final synthesis:
+  `../2026-08-20-c931-c928-rerun-synthesis.md`.
 - **C930 — corrected epilogue overlay ready for manuscript refounding.**
   C930 owns only `papers/cubic-stabilization-epilogue/`, strictly at `m=1`.
   Its common occurrence-indexed marker theorem and both specializations pass

@@ -2,7 +2,7 @@
 
 **Lane:** cubic-threefolds
 
-**Status:** active; referee batch complete, minor manuscript revision required
+**Status:** closed 2026-08-20; repaired and independently re-refereed, six of six fresh verdicts A
 
 ## Goal
 
@@ -60,9 +60,9 @@ rerun protocols.  No report or paper edit was made in this phase.
 
 ## Next
 
-Apply the four adopted local repairs in
-`../2026-08-20-c931-c928-referee-synthesis.md`, rebuild and freeze a new PDF,
-then run the six focused regression packets specified there.
+Prepare the frozen eight-page paper for submission to *Proceedings of the
+American Mathematical Society*.  The current scope is not recommended for the
+*Algebraic Geometry* stretch venue.
 
 ## Referee-batch result
 
@@ -85,3 +85,23 @@ fresh focused batch.  The present scope is not recommended for the
 *Algebraic Geometry* stretch venue.  The frozen abstract passes the requested
 limit at 179 whitespace-delimited tokens, below 250.  No manuscript or paper
 artifact was edited during the batch.
+
+## Repair and rerun result
+
+All four adopted findings were repaired at authority commit
+`aa31d3ab6f6b266d9f09d4ba5f26ffaf16b6ae02`: exact FVME theorem-level credit,
+the integral middle-perversity truncation convention and citation, the dual
+exact-sequence bridge, and the noncanonical qualification and spelling for
+Krämer's rational splitting.  The rebuilt eight-page PDF has SHA-256
+`efb81f1dfa0802c2311a96d8312f5ab3b8ba5cbe85103f3d8b24bf225eb2b382`.
+
+Six new mutually isolated packets then returned A with no required finding.
+The fresh synthesis is
+`../2026-08-20-c931-c928-rerun-synthesis.md`.  It verifies that Theorems 1.1
+and 1.2 and Corollary 1.3 survive integrally, the abstract remains below 250
+words under every recorded count, and the paper is ready for a *Proceedings*
+submission package.  Two optional proof-expansion phrases were not adopted;
+neither affects correctness.  The explicit `ej` + `tt` closeout found no
+remaining mathematical mystery on the frozen theorem surface.  The bounded
+global-literature limit and journal taste remain uncertainties, not manuscript
+debts.  No incidental observation met the discovery-track discriminator.
