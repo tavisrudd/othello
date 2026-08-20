@@ -2582,6 +2582,30 @@ theorem principalGluingPacket_projectiveLine_nonfixed_persists_as_markedPair
     GraphLattices.connectedBase_f4ProjectiveLine_nonfixed_persists_as_markedPair
       packetClass continuous basePoint nonfixed
 
+/-- Marking at one base point suffices on the packet of stable halves.  A
+supplied continuous classifier from a connected base into the five-member packet
+of diagonally stable halves of the coefficient heart is assumed only to be moved
+by the Frobenius involution of the packet at one base point.  Lean proves the
+classifier constant and identifies every fibre with one of the two exotic
+members.  Construction of the geometric principal-kernel classifier and proof
+that its chosen fibre is marked remain outside this theorem. -/
+theorem principalGluingPacket_stableHalf_marked_persists_as_exotic
+    {Base : Type*} [TopologicalSpace Base] [ConnectedSpace Base]
+    [TopologicalSpace {subspace // subspace ∈
+      GraphLattices.SixPointHeartStableHalfPacket}]
+    [DiscreteTopology {subspace // subspace ∈
+      GraphLattices.SixPointHeartStableHalfPacket}]
+    (packetClass : Base → {subspace // subspace ∈
+      GraphLattices.SixPointHeartStableHalfPacket})
+    (continuous : Continuous packetClass) (basePoint : Base)
+    (marked : GraphLattices.sixPointHeartStableHalfPacketFrobenius
+        (packetClass basePoint) ≠ packetClass basePoint) :
+    (∀ first second, packetClass first = packetClass second) ∧
+      ∀ point, (packetClass point).1 ∈
+        GraphLattices.SixPointHeartExoticHalfPair := by
+  exact GraphLattices.connectedBase_stableHalfPacket_marked_persists_as_exotic
+    packetClass continuous basePoint marked
+
 /-- Explicit model of the characteristic-three residue-field slope type
 appearing in the manuscript, represented on four coordinates modeling the
 four-dimensional depth-one block.  It is literally a scalar-algebra image and

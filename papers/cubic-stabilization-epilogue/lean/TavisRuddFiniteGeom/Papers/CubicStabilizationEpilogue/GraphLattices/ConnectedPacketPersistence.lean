@@ -1,4 +1,5 @@
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisSlopeModels
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPointStableHalfFrobenius
 import Mathlib.Topology.Connected.TotallyDisconnected
 
 /-!
@@ -121,6 +122,30 @@ theorem connectedBase_f4ProjectiveLine_nonfixed_persists_as_markedPair
     packetClass continuous basePoint
   exact (f4ProjectiveLineFrobenius_nonfixed_iff_markedGraphPair
     (packetClass basePoint)).mp nonfixed
+
+/-- Frobenius marking at a single base point suffices.  A continuous classifier
+into the five-member packet of diagonally stable halves of the coefficient
+heart whose value at one base point is moved by the Frobenius involution of the
+packet is constant, and every fibre is one of the two exotic members.  The
+classifier and its topology remain supplied data. -/
+theorem connectedBase_stableHalfPacket_marked_persists_as_exotic
+    {Base : Type*} [TopologicalSpace Base] [ConnectedSpace Base]
+    [TopologicalSpace {subspace // subspace ∈ SixPointHeartStableHalfPacket}]
+    [DiscreteTopology {subspace // subspace ∈ SixPointHeartStableHalfPacket}]
+    (packetClass : Base → {subspace // subspace ∈ SixPointHeartStableHalfPacket})
+    (continuous : Continuous packetClass) (basePoint : Base)
+    (marked : sixPointHeartStableHalfPacketFrobenius (packetClass basePoint) ≠
+      packetClass basePoint) :
+    (∀ first second, packetClass first = packetClass second) ∧
+      ∀ point, (packetClass point).1 ∈ SixPointHeartExoticHalfPair := by
+  haveI : Finite {subspace // subspace ∈ SixPointHeartStableHalfPacket} :=
+    (Set.toFinite SixPointHeartStableHalfPacket).to_subtype
+  refine ⟨connectedBase_finiteDiscretePacket_constant packetClass continuous, ?_⟩
+  intro point
+  rw [connectedBase_finiteDiscretePacket_constant packetClass continuous point
+    basePoint]
+  exact (sixPointHeartStableHalfPacketFrobenius_nonfixed_iff_exotic
+    (packetClass basePoint)).mp marked
 
 end GraphLattices
 
