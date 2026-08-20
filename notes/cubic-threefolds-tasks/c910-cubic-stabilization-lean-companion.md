@@ -2,7 +2,7 @@
 
 **Lane:** `cubic-threefolds`
 
-**Status:** active
+**Status:** active; categorical proof-spine rebase is the governing plan
 
 ## Objective
 
@@ -18,6 +18,17 @@ The public library and namespace follow the C879 paper-facing convention:
 CubicStabilizationEpilogue
 TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue
 ```
+
+The current plan is `notes/2026-08-20-c910-categorical-proof-spine-plan.md`.
+It supersedes the quantum-side ordering below wherever that ordering treats the
+ordinary Hodge-atom ledger and the framed packet as separate proof routes.  The
+integral cycle programme and its validated terminals are unchanged.
+
+The epilogue's TeX provenance layer is also in scope.  Its six commands
+(`\lean`, `\coverage`, `\uses`, `\imports`, `\evidence`, and `\proves`) must
+survive statement rewrites and remain exactly synchronized with the claim map.
+They are intentionally invisible in the typeset paper and are enforced by the
+source-only formal-artifact checker.
 
 ## Formal standard
 
@@ -62,21 +73,28 @@ formalized separately from those inputs.
 
 ### Quantum and birational spine
 
-Formalize the paper's deduction at the natural abstract level:
+Formalize one occurrence-indexed categorical compiler, followed by two literal
+specializations:
 
-1. an additive nonnegative packet multiplicity on smooth projective objects;
-2. blow-up and projective-bundle operation formulas;
-3. the low-dimensional vanishing implication for weak-factorization centers;
-4. birational invariance through dimension four;
-5. one-projective-line stabilization obstruction for threefolds;
-6. transport across the genus-eight projective-bundle flop;
-7. logical independence of universal `CH_0`-triviality and the packet invariant.
+1. a regular-isomorphism presentation of typed generic even QDM blocks;
+2. the effective free commutative monoid on its connected components, with no
+   group completion or cancellation hypothesis;
+3. additive folds from that ledger to an arbitrary commutative additive monoid;
+4. projective-bundle and blowup providers whose center terms are indexed by the
+   actual comparison occurrences;
+5. weak-factorization descent in arbitrary ambient dimension `d`, assuming
+   vanishing for centers satisfying `centerDimension + 2 ≤ d`;
+6. the rank-two residue fold and the framed primitive-sixth fold as instances
+   of the same ledger, provider, and descent theorem;
+7. the cubic and genus-eight one-projective-line consequences as applications
+   of those instances.
 
-The existence and properties of framed quantum monodromy, divisor tagging,
-Iritani comparison maps, Cai's cubic packet, weak factorization, and Kuznetsov's
-geometric correspondence remain separately named external mathematical inputs
-until formalized from foundations.  The artifact must make this boundary
-visible in theorem types and in the claim map.
+The actual QDM blocks, regular comparison isomorphisms, Iritani and
+Iritani--Koto operation decompositions, weak factorization, and Kuznetsov's
+geometric correspondence remain separately typed external inputs until they
+are formalized.  The generic ledger algebra and telescope are kernel-checked;
+the claim map must not report the geometric providers as constructed.  This
+spine is strictly `m = 1` and does not consume or modify Gamma-row work.
 
 ## Current state
 

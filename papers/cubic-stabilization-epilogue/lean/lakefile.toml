@@ -72,6 +72,8 @@ roots = [
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPointHeartEndomorphisms",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SymmetricSixExclusion",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FramedMultiplicity",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.EffectiveBlockLedger",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.OccurrenceIndexedMarker",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.LowDimensionalVanishingCore",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.WeakFactorization",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.NovikovAdmissibility",

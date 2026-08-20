@@ -1,0 +1,274 @@
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.EffectiveBlockLedger
+import Mathlib.Algebra.BigOperators.Group.Finset.Basic
+import Mathlib.Tactic
+
+/-!
+# Occurrence-indexed marker descent
+
+This module isolates the categorical bookkeeping used by marker arguments in
+weak factorization.  A variety and every actual comparison occurrence receive
+effective block ledgers.  An arbitrary additive fold supplies their marker
+values.  A blowup formula keeps its `c - 1` center occurrences separately
+indexed until after the fold.
+
+If all smooth centers of dimension at most `d - 2` have zero occurrence
+markers, each blowup or blowdown link in ambient dimension `d` preserves the
+marker.  Preservation then telescopes along a factorization chain and descends
+to the quotient by the supplied birational equivalence relation.  Only the
+additive monoid laws are used; no cancellation is required.
+-/
+
+namespace TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue
+
+namespace Quantum
+
+open scoped BigOperators
+
+universe u v w x
+
+/-- Ledger data for varieties and for the actual specialized center
+occurrences appearing in operation formulas. -/
+structure OccurrenceIndexedLedger
+    (Variety : Type u) (Center Occurrence : Type v)
+    (presentation : BlockPresentation.{w}) where
+  varietyLedger : Variety → presentation.EffectiveLedger
+  occurrenceLedger : Occurrence → presentation.EffectiveLedger
+  occurrenceSource : Occurrence → Center
+  dimension : Variety → ℕ
+  centerDimension : Center → ℕ
+  smoothProjective : Variety → Prop
+  smoothCenter : Center → Prop
+
+namespace OccurrenceIndexedLedger
+
+variable {Variety : Type u} {Center Occurrence : Type v}
+variable {presentation : BlockPresentation.{w}}
+
+/-- The marker of a variety obtained by folding its effective ledger. -/
+def varietyMarker {A : Type x} [AddCommMonoid A]
+    (data : OccurrenceIndexedLedger Variety Center Occurrence presentation)
+    (fold : presentation.EffectiveLedger →+ A) (variety : Variety) : A :=
+  fold (data.varietyLedger variety)
+
+/-- The marker of one actual specialized center occurrence. -/
+def occurrenceMarker {A : Type x} [AddCommMonoid A]
+    (data : OccurrenceIndexedLedger Variety Center Occurrence presentation)
+    (fold : presentation.EffectiveLedger →+ A) (occurrence : Occurrence) : A :=
+  fold (data.occurrenceLedger occurrence)
+
+end OccurrenceIndexedLedger
+
+/-- The folded numerical content of a projective-bundle comparison.  The
+geometric comparison theorem is supplied as data rather than asserted here. -/
+structure ProjectiveBundleMarkerFormula
+    {Variety : Type u} {Center Occurrence : Type v}
+    {presentation : BlockPresentation.{w}}
+    (data : OccurrenceIndexedLedger Variety Center Occurrence presentation)
+    {A : Type x} [AddCommMonoid A]
+    (fold : presentation.EffectiveLedger →+ A)
+    (base total : Variety) (rank : ℕ) : Prop where
+  baseSmooth : data.smoothProjective base
+  totalSmooth : data.smoothProjective total
+  rankPositive : 1 ≤ rank
+  dimensionFormula : data.dimension total = data.dimension base + rank - 1
+  markerFormula : data.varietyMarker fold total = rank • data.varietyMarker fold base
+
+/-- A directed blowup formula from `lower` to `upper`.  The function
+`occurrence` names every one of the `codimension - 1` comparison occurrences;
+it is not replaced by a set of possible marker values. -/
+structure OccurrenceBlowupStep
+    {Variety : Type u} {Center Occurrence : Type v}
+    {presentation : BlockPresentation.{w}}
+    (data : OccurrenceIndexedLedger Variety Center Occurrence presentation)
+    {A : Type x} [AddCommMonoid A]
+    (fold : presentation.EffectiveLedger →+ A)
+    (ambientDimension : ℕ) (lower upper : Variety) where
+  center : Center
+  codimension : ℕ
+  occurrence : Fin (codimension - 1) → Occurrence
+  occurrenceSource : ∀ index, data.occurrenceSource (occurrence index) = center
+  lowerSmooth : data.smoothProjective lower
+  upperSmooth : data.smoothProjective upper
+  centerSmooth : data.smoothCenter center
+  lowerDimension : data.dimension lower = ambientDimension
+  upperDimension : data.dimension upper = ambientDimension
+  codimensionAtLeastTwo : 2 ≤ codimension
+  centerAmbientDimension :
+    data.centerDimension center + codimension = ambientDimension
+  markerFormula :
+    data.varietyMarker fold upper = data.varietyMarker fold lower +
+      ∑ index, data.occurrenceMarker fold (occurrence index)
+
+/-- Vanishing for every actual occurrence whose smooth source has codimension
+at least two in ambient dimension `d`. -/
+def LowDimensionalOccurrenceNullity
+    {Variety : Type u} {Center Occurrence : Type v}
+    {presentation : BlockPresentation.{w}}
+    (data : OccurrenceIndexedLedger Variety Center Occurrence presentation)
+    {A : Type x} [AddCommMonoid A]
+    (fold : presentation.EffectiveLedger →+ A) (d : ℕ) : Prop :=
+  ∀ occurrence,
+    data.smoothCenter (data.occurrenceSource occurrence) →
+    data.centerDimension (data.occurrenceSource occurrence) + 2 ≤ d →
+    data.occurrenceMarker fold occurrence = 0
+
+namespace OccurrenceBlowupStep
+
+variable {Variety : Type u} {Center Occurrence : Type v}
+variable {presentation : BlockPresentation.{w}}
+variable (data : OccurrenceIndexedLedger Variety Center Occurrence presentation)
+variable {A : Type x} [AddCommMonoid A]
+variable (fold : presentation.EffectiveLedger →+ A)
+variable {d : ℕ} {lower upper : Variety}
+
+/-- Low-dimensional occurrence nullity removes every correction term in one
+directed blowup formula. -/
+theorem marker_eq
+    (step : OccurrenceBlowupStep data fold d lower upper)
+    (nullity : LowDimensionalOccurrenceNullity data fold d) :
+    data.varietyMarker fold upper = data.varietyMarker fold lower := by
+  have centerBound : data.centerDimension step.center + 2 ≤ d := by
+    calc
+      data.centerDimension step.center + 2 ≤
+          data.centerDimension step.center + step.codimension :=
+        Nat.add_le_add_left step.codimensionAtLeastTwo _
+      _ = d := step.centerAmbientDimension
+  have occurrenceZero : ∀ index,
+      data.occurrenceMarker fold (step.occurrence index) = 0 := by
+    intro index
+    apply nullity
+    · simpa [step.occurrenceSource index] using step.centerSmooth
+    · simpa [step.occurrenceSource index] using centerBound
+  rw [step.markerFormula]
+  simp [occurrenceZero]
+
+end OccurrenceBlowupStep
+
+/-- One unoriented link in a weak-factorization chain. -/
+inductive OccurrenceBlowupLink
+    {Variety : Type u} {Center Occurrence : Type v}
+    {presentation : BlockPresentation.{w}}
+    (data : OccurrenceIndexedLedger Variety Center Occurrence presentation)
+    {A : Type x} [AddCommMonoid A]
+    (fold : presentation.EffectiveLedger →+ A) (d : ℕ) :
+    Variety → Variety → Type (max u v w x)
+  | forward {lower upper}
+      (step : OccurrenceBlowupStep data fold d lower upper) :
+      OccurrenceBlowupLink data fold d lower upper
+  | backward {lower upper}
+      (step : OccurrenceBlowupStep data fold d lower upper) :
+      OccurrenceBlowupLink data fold d upper lower
+
+namespace OccurrenceBlowupLink
+
+variable {Variety : Type u} {Center Occurrence : Type v}
+variable {presentation : BlockPresentation.{w}}
+variable (data : OccurrenceIndexedLedger Variety Center Occurrence presentation)
+variable {A : Type x} [AddCommMonoid A]
+variable (fold : presentation.EffectiveLedger →+ A)
+variable {d : ℕ} {left right : Variety}
+
+/-- Every oriented blowup or blowdown link preserves the folded marker under
+the common center-nullity hypothesis. -/
+theorem marker_eq
+    (link : OccurrenceBlowupLink data fold d left right)
+    (nullity : LowDimensionalOccurrenceNullity data fold d) :
+    data.varietyMarker fold left = data.varietyMarker fold right := by
+  cases link with
+  | forward step => exact (step.marker_eq data fold nullity).symm
+  | backward step => exact step.marker_eq data fold nullity
+
+end OccurrenceBlowupLink
+
+/-- A composable chain of occurrence-indexed blowup and blowdown links. -/
+inductive OccurrenceFactorizationChain
+    {Variety : Type u} {Center Occurrence : Type v}
+    {presentation : BlockPresentation.{w}}
+    (data : OccurrenceIndexedLedger Variety Center Occurrence presentation)
+    {A : Type x} [AddCommMonoid A]
+    (fold : presentation.EffectiveLedger →+ A) (d : ℕ) :
+    Variety → Variety → Type (max u v w x)
+  | refl (variety : Variety) : OccurrenceFactorizationChain data fold d variety variety
+  | step {source middle target}
+      (link : OccurrenceBlowupLink data fold d source middle)
+      (tail : OccurrenceFactorizationChain data fold d middle target) :
+      OccurrenceFactorizationChain data fold d source target
+
+namespace OccurrenceFactorizationChain
+
+variable {Variety : Type u} {Center Occurrence : Type v}
+variable {presentation : BlockPresentation.{w}}
+variable (data : OccurrenceIndexedLedger Variety Center Occurrence presentation)
+variable {A : Type x} [AddCommMonoid A]
+variable (fold : presentation.EffectiveLedger →+ A)
+variable {d : ℕ} {source target : Variety}
+
+/-- Marker preservation telescopes along an occurrence-indexed factorization
+chain. -/
+theorem marker_eq
+    (chain : OccurrenceFactorizationChain data fold d source target)
+    (nullity : LowDimensionalOccurrenceNullity data fold d) :
+    data.varietyMarker fold source = data.varietyMarker fold target := by
+  induction chain with
+  | refl => rfl
+  | step link tail inductionHypothesis =>
+      exact (link.marker_eq data fold nullity).trans inductionHypothesis
+
+end OccurrenceFactorizationChain
+
+/-- A factorization provider for a chosen birational equivalence relation. -/
+structure BirationalFactorizationProvider
+    {Variety : Type u} {Center Occurrence : Type v}
+    {presentation : BlockPresentation.{w}}
+    (data : OccurrenceIndexedLedger Variety Center Occurrence presentation)
+    {A : Type x} [AddCommMonoid A]
+    (fold : presentation.EffectiveLedger →+ A) (d : ℕ)
+    (birational : Setoid Variety) where
+  factorization : ∀ {left right}, birational.r left right →
+    Nonempty (OccurrenceFactorizationChain data fold d left right)
+
+namespace BirationalFactorizationProvider
+
+variable {Variety : Type u} {Center Occurrence : Type v}
+variable {presentation : BlockPresentation.{w}}
+variable (data : OccurrenceIndexedLedger Variety Center Occurrence presentation)
+variable {A : Type x} [AddCommMonoid A]
+variable (fold : presentation.EffectiveLedger →+ A) (d : ℕ)
+variable (birational : Setoid Variety)
+
+/-- The generic categorical marker theorem: a factorization provider and
+low-dimensional occurrence nullity make the folded marker birationally
+invariant in ambient dimension `d`. -/
+theorem marker_eq_of_related
+    (provider : BirationalFactorizationProvider data fold d birational)
+    (nullity : LowDimensionalOccurrenceNullity data fold d)
+    {left right : Variety} (related : birational.r left right) :
+    data.varietyMarker fold left = data.varietyMarker fold right := by
+  obtain ⟨chain⟩ := provider.factorization related
+  exact chain.marker_eq data fold nullity
+
+/-- The object-set descent map from birational classes to marker values. -/
+def descendedMarker
+    (provider : BirationalFactorizationProvider data fold d birational)
+    (nullity : LowDimensionalOccurrenceNullity data fold d) :
+    Quotient birational → A :=
+  Quotient.lift (data.varietyMarker fold)
+    (fun _ _ related => provider.marker_eq_of_related data fold d birational nullity related)
+
+/-- The descended marker evaluates a represented birational class by the
+marker of its representative. -/
+@[simp]
+theorem descendedMarker_mk
+    (provider : BirationalFactorizationProvider data fold d birational)
+    (nullity : LowDimensionalOccurrenceNullity data fold d)
+    (variety : Variety) :
+    provider.descendedMarker data fold d birational nullity
+        (Quotient.mk birational variety) =
+      data.varietyMarker fold variety :=
+  rfl
+
+end BirationalFactorizationProvider
+
+end Quantum
+
+end TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue
