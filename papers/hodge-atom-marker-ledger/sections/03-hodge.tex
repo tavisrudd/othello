@@ -1,0 +1,101 @@
+\section{The Hodge-atom specialization}
+\label{sec:hodge}
+
+We now apply the preceding construction to the standard Hodge atoms of
+Katzarkov--Kontsevich--Pantev--Yu.  Only the data needed for the type map are
+recalled; the non-archimedean A-model comparison theorems remain geometric
+inputs.
+
+For a smooth complex projective variety $X$, let $B_X^{\mathrm{Hod}}$ be
+the Hodge-fixed locus in the base of its maximal non-archimedean A-model
+$F$-bundle.  On the open set $U_X\subset B_X^{\mathrm{Hod}}$ where the
+reduced Euler spectral cover is unramified, write
+\[
+ \widetilde U_X\longrightarrow U_X
+ \tag{3.1}\label{eq:hodge-cover}
+\]
+for that finite cover.  Its connected components are the local Hodge atoms,
+and the multiplicity of a component is its degree over $U_X$
+\cite[Definition~5.10 and Section~5.4]{KKPY}.  Accordingly, set
+\[
+ A_X:=\pi_0(\widetilde U_X),
+ \qquad
+ m_X(a):=\deg(\widetilde U_{X,a}/U_X).
+ \tag{3.2}\label{eq:hodge-occurrences}
+\]
+Automorphisms of $X$ act on this weighted set.  In the construction of
+Section~\ref{sec:ledger}, their orbits are imposed by isomorphism
+correspondences rather than silently discarded.
+
+The required provider record is as follows.
+\begin{center}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.22\textwidth}
+                    >{\raggedright\arraybackslash}p{0.36\textwidth}
+                    >{\raggedright\arraybackslash}p{0.30\textwidth}@{}}
+\toprule
+Operation & $F$-bundle decomposition & Occurrence consequence \\
+\midrule
+Disjoint union & external direct sum & disjoint union of covers \\
+Blowup in codimension $c$ & ambient summand plus $c-1$ center summands &
+  \eqref{eq:blowup} \\
+Rank-$r$ projective bundle & $r$ base summands &
+  \eqref{eq:projective} \\
+\bottomrule
+\end{tabular}
+\end{center}
+The spectral decomposition is \cite[Theorem~4.1]{KKPY}.  The blowup row is
+\cite[Theorem~4.5]{KKPY}, based on Iritani's blowup decomposition
+\cite[Theorem~5.18]{Iritani}.  The projective-bundle row is
+\cite[Theorem~4.11]{KKPY}, based on the Iritani--Koto decomposition
+\cite[Theorem~5.1]{IritaniKoto}.  These theorems identify the relevant
+spectral covers over connected nonempty domains and preserve the degrees of
+their components.  Expanding equal degrees supplies occurrence bijections;
+different choices differ only by the internal relabellings already imposed in
+Section~\ref{sec:ledger}.
+
+\begin{theorem}[Hodge atoms are a ledger specialization]
+\label{thm:hodge}
+For the provider \eqref{eq:hodge-occurrences}, the set
+\(H=\pi_0(\Pi)\) of Section~\ref{sec:ledger} is the abstract Hodge-atom set
+\(\HAtoms\) of \cite[Definition~5.16 and Section~5.4]{KKPY}.  Under this
+identification,
+\[
+ \mathcal B(X)=\sum_{\alpha\in\HAtoms}m_\alpha(X)[\alpha]
+ =:\CF_{\mathrm{Hdg}}(X)
+ \tag{3.3}\label{eq:chemical-formula}
+\]
+is its Hodge-atom chemical formula, and
+\(H_{\le e}=\HAtoms_{\dim\le e}\).
+\end{theorem}
+
+\begin{proof}
+The objects of \(\Pi\) are precisely the local components of
+\eqref{eq:hodge-cover}, expanded by their degrees.  After the internal
+occurrence labels are identified, its remaining generating arrows are the
+isomorphism, disjoint-union, blowup, and projective-bundle elementary
+correspondences used to define abstract atoms in
+\cite[Sections~5.2.3--5.2.6]{KKPY}.  Passing to connected components of the
+thin groupoid is therefore the same generated quotient.  Summing its
+occurrences gives \eqref{eq:chemical-formula}.  Finally, both dimension
+filtrations ask whether the same abstract class has a representative on a
+smooth projective variety of dimension at most $e$.
+\end{proof}
+
+Combining Theorems~\ref{thm:hodge} and
+\ref{thm:birational-quotient} recovers the Hodge-atom non-rationality
+criterion \cite[Proposition~5.30]{KKPY}.  The ledger proof additionally
+exhibits the universal fold: every commutative-monoid-valued statistic of
+Hodge-atom occurrences that is constant on the elementary correspondences
+factors uniquely through \(\mathcal L\).
+
+\begin{remark}[Abstract and geometric atoms]
+\label{rem:two-quotients}
+The geometric atomic $F$-bundles of \cite[Definition~5.21]{KKPY} form a
+different quotient.  Their Proposition~5.22 gives a map from abstract atoms
+to geometric atomic $F$-bundle classes, but does not assert that it is
+injective.  The groupoid \(\Pi\), the chemical formula
+\eqref{eq:chemical-formula}, and the dimension filtration use abstract
+classes.  Consequently an invariant first defined on geometric $F$-bundle
+classes becomes an atom marker only after its invariance under every
+elementary correspondence has been proved.
+\end{remark}

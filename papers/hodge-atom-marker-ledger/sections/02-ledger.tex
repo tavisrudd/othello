@@ -1,0 +1,143 @@
+\section{The occurrence-indexed ledger}
+\label{sec:ledger}
+
+Fix a universe of smooth projective varieties over a characteristic-zero
+field and choose a skeleton.  This harmless choice only avoids set-theoretic
+duplication; isomorphisms remain among the generating correspondences.
+
+\begin{definition}[Occurrence provider]
+\label{def:provider}
+An occurrence provider assigns to every smooth projective $X$ a finite set
+$A_X$ and a function $m_X:A_X\to\N_{>0}$.  Its expanded occurrence set is
+\[
+ \Occ(X):=\{(a,j):a\in A_X,\ 1\le j\le m_X(a)\}.
+ \tag{2.1}
+\]
+The provider includes bijections, compatible with isomorphisms, of the
+following forms:
+\begin{align}
+ \Occ(X\sqcup Y)&\simeq \Occ(X)\sqcup\Occ(Y),
+                                                        \tag{2.2}\label{eq:disjoint}\\
+ \Occ(\Bl_ZX)&\simeq
+   \Occ(X)\sqcup\bigl(\Occ(Z)\times\{1,\ldots,c-1\}\bigr),
+                                                        \tag{2.3}\label{eq:blowup}\\
+ \Occ(\PP_X(E))&\simeq
+   \Occ(X)\times\{0,\ldots,r-1\},
+                                                        \tag{2.4}\label{eq:projective}
+\end{align}
+where $Z\subset X$ is smooth of codimension $c\ge2$ and $E$ has rank
+$r\ge2$.
+The labels $j$ have no structure: a provider bijection is used only up to
+permuting the occurrences above a fixed element of $A_X$.
+\end{definition}
+
+Let \(\mathscr O\) be the disjoint union of the sets \(\Occ(X)\).  First
+identify $(a,j)$ with $(a,j')$ for all labels over the same local block.
+Then use isomorphisms and each provider bijection, in either direction, to
+generate an equivalence relation on \(\mathscr O\).  Let
+\(\Pi\) be the associated thin groupoid: its objects are \(\mathscr O\), and
+there is a unique arrow $x\to y$ exactly when the two occurrences are
+equivalent.  Put
+\[
+ H:=\pi_0(\Pi),
+ \qquad
+ \mathcal L:=\Sym^{\sqcup}(H)=\N^{(H)}.
+ \tag{2.5}\label{eq:ledger}
+\]
+Thus \(\mathcal L\) is the free commutative monoid on the occurrence classes.
+Write $q:\mathscr O\to H$ for the quotient map and define
+\[
+ \mathcal B(X):=\sum_{x\in\Occ(X)}[q(x)]\in\mathcal L.
+ \tag{2.6}\label{eq:block-ledger}
+\]
+
+The blowup correspondence gives the commutative square
+\begin{equation}
+\begin{CD}
+ \Occ(\Bl_ZX) @>{\sim}>>
+ \Occ(X)\sqcup\bigl(\Occ(Z)\times\{1,\ldots,c-1\}\bigr)\\
+ @V{q}VV @VV{q^{\sqcup}}V\\
+ H @= H .
+\end{CD}
+\tag{2.7}\label{diag:occurrence-descent}
+\end{equation}
+It records descent on objects.  It does not assert an isomorphism between
+unrelated representatives of a common class.
+
+\begin{theorem}[Universal marker ledger]
+\label{thm:ledger}
+The assignment \(\mathcal B\) satisfies
+\begin{align}
+ \mathcal B(X\sqcup Y)&=\mathcal B(X)+\mathcal B(Y),
+                                                        \tag{2.8}\label{eq:ledger-disjoint}\\
+ \mathcal B(\Bl_ZX)&=\mathcal B(X)+(c-1)\mathcal B(Z),
+                                                        \tag{2.9}\label{eq:ledger-blowup}\\
+ \mathcal B(\PP_X(E))&=r\mathcal B(X).                 \tag{2.10}\label{eq:ledger-projective}
+\end{align}
+For every commutative monoid $M$, a function $w_0:\mathscr O\to M$ that
+is constant on the generating correspondences factors uniquely as
+\[
+ \mathscr O\xrightarrow{q}H\xrightarrow{w}M.
+\]
+The function $w$ in turn extends uniquely to a monoid homomorphism
+\(\overline w:\mathcal L\to M\), and
+\(I_w(X):=\overline w(\mathcal B(X))\) satisfies the folded versions of
+\eqref{eq:ledger-disjoint}--\eqref{eq:ledger-projective}.
+\end{theorem}
+
+\begin{proof}
+The provider bijections match every occurrence, including multiplicity.
+Changing a copy index is one of the generating arrows, so the construction is
+independent of the temporary labelling.  After applying $q$, summing the two sides of
+\eqref{eq:disjoint}--\eqref{eq:projective} gives
+\eqref{eq:ledger-disjoint}--\eqref{eq:ledger-projective}.  A function on
+\(\mathscr O\) is constant on the generated equivalence relation precisely
+when it factors uniquely through $H$.  The universal property of the free
+commutative monoid then gives the unique extension \(\overline w\).  Applying
+that homomorphism to the three ledger identities proves the last assertion.
+\end{proof}
+
+This formulation makes multiplicity bookkeeping literal.  If a component has
+degree $m$, it contributes $m$ objects to \(\Occ(X)\) and hence $m$
+copies of one generator to \(\mathcal B(X)\).  No symmetric-algebra convention
+or passage to a Grothendieck group is needed.
+
+\subsection{The effective dimension quotient}
+
+For $e\ge0$, let $H_{\le e}\subset H$ be the classes represented by an
+occurrence on some smooth projective variety of dimension at most $e$.  The
+projection
+\[
+ \rho_e:\mathcal L=\N^{(H)}\longrightarrow
+ \mathcal L_{>e}:=\N^{(H\setminus H_{\le e})}
+ \tag{2.11}\label{eq:dimension-quotient}
+\]
+deletes the low-dimensional coordinates.  Because both monoids are free and
+effective, \(\rho_e(\ell)\ne0\) exactly when \(\ell\) has a positive
+coefficient on a class outside $H_{\le e}$.
+
+\begin{theorem}[Weak-factorization quotient]
+\label{thm:birational-quotient}
+Let $d\ge2$.  The assignment
+\[
+ X\longmapsto \rho_{d-2}(\mathcal B(X))
+ \tag{2.12}\label{eq:birational-ledger}
+\]
+is a birational invariant of smooth projective $d$-folds.  In particular,
+if \(\rho_{d-2}(\mathcal B(X))\ne0\), then $X$ is irrational.
+\end{theorem}
+
+\begin{proof}
+Projective weak factorization expresses a birational map between smooth
+projective $d$-folds as blowups and blowdowns along smooth centers of
+codimension at least two \cite[Theorem~0.1.1]{AKMW}.  Every center has
+dimension at most $d-2$, so \(\rho_{d-2}(\mathcal B(Z))=0\).
+Equation~\eqref{eq:ledger-blowup} therefore shows that
+\eqref{eq:birational-ledger} is unchanged at each step.
+
+For projective space, \eqref{eq:ledger-projective} applied over a point gives
+\(\mathcal B(\PP^d)=(d+1)\mathcal B(\operatorname{Spec}k)\).  The point
+classes lie in $H_{\le d-2}$, since $d\ge2$, so the quotient ledger of
+\(\PP^d\) is zero.  A rational $X$ has the same quotient ledger, proving the
+contrapositive.
+\end{proof}

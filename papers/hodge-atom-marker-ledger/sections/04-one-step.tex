@@ -1,0 +1,79 @@
+\section{The one-step carrier criterion}
+\label{sec:one-step}
+
+For $h\in H$, define its carrier height by
+\[
+ \operatorname{ht}(h):=
+ \min\{\dim W:h\text{ occurs in }\mathcal B(W),\ W
+             \text{ smooth projective}\}.
+ \tag{4.1}\label{eq:height}
+\]
+Equivalently, $h\in H_{\le e}$ if and only if
+\(\operatorname{ht}(h)\le e\).  This is the dimension of a smallest carrier,
+not the dimension of a spectral-cover component or of the base of an atomic
+$F$-bundle.
+
+\begin{corollary}[Rank-two one-step criterion]
+\label{cor:one-step}
+Let $Z$ be a smooth projective $n$-fold with $n\ge1$, let $E\to Z$ be
+a vector bundle of rank two, and let $h$ occur in \(\mathcal B(Z)\).  If
+\[
+ \operatorname{ht}(h)>n-1,
+ \tag{4.2}\label{eq:height-bound}
+\]
+then \(\PP_Z(E)\) is irrational.  In particular, a top-height class
+\(\operatorname{ht}(h)=n\) obstructs rationality after this one projective
+step.
+\end{corollary}
+
+\begin{proof}
+The total dimension is $d=n+1\ge2$.  By
+\eqref{eq:ledger-projective},
+\[
+ \mathcal B(\PP_Z(E))=2\mathcal B(Z),
+\]
+so the coefficient of $h$ remains positive.  Condition
+\eqref{eq:height-bound} says $h\notin H_{\le d-2}$.  Hence
+\[
+ \rho_{d-2}(\mathcal B(\PP_Z(E)))\ne0,
+\]
+and Theorem~\ref{thm:birational-quotient} applies.
+\end{proof}
+
+For Hodge atoms, Corollary~\ref{cor:one-step} is the rank-two specialization
+of the standard carrier-filtration criterion.  The role of the categorical
+construction is exact but modest: it proves that the chemical formula and
+every lawful marker are folds of one occurrence ledger.  It does not prove
+that a particular Hodge atom has the required carrier height; that remains a
+geometric exclusion statement.
+
+The relation with the direct-QDM specialization of \cite{Epilogue} can now be
+stated without conflating their objects.
+\begin{center}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.20\textwidth}
+                    >{\raggedright\arraybackslash}p{0.34\textwidth}
+                    >{\raggedright\arraybackslash}p{0.34\textwidth}@{}}
+\toprule
+Datum & Hodge-atom specialization & Direct-QDM specialization \\
+\midrule
+Local object & component of the reduced unramified Euler spectral cover &
+  typed generic numerical small-QDM block \\
+Generated relation & elementary geometric correspondences &
+  regular block isomorphisms supplied by QDM comparison \\
+Effective fold & chemical formula and dimension quotient &
+  chosen numerical block marker \\
+One-step input & carrier-height exclusion & low-dimensional marker nullity \\
+\bottomrule
+\end{tabular}
+\end{center}
+Both columns instantiate Theorem~\ref{thm:ledger}.  They do not use the same
+groupoid, and a class in one column is not automatically a class in the
+other.  This typed distinction is what permits the companion to clarify the
+standard atom specialization without enlarging the proof of cubic one-step
+irrationality.
+
+The general projective-bundle correspondence in
+Definition~\ref{def:provider} is part of the standard Hodge-atom quotient and
+is also needed to evaluate projective space.  The stabilization consequence
+of this note is only Corollary~\ref{cor:one-step}, for a rank-two bundle; no
+claim is made for two or more projective stabilization factors.
