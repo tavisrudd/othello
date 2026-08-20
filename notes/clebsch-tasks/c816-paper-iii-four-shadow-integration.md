@@ -358,6 +358,25 @@ been reserved.
    8. Two wording items: the introduction drops "nontrivial" from the exchange
       characterization, and the universal Pfaffian identity is quantified over
       "every symmetric matrix" when it needs order six.
+
+   **Refereed and landed 2026-08-20 in `89b046502`.** A separate referee pass
+   tightened all eight replacements and checked their mathematics
+   independently; report in `notes/2026-08-20-c816-suggested-edits-referee.md`.
+   It confirmed every chain and found one thing the red team missed: the
+   introduction and conclusion carried the same missing "nonzero", and there it
+   was a falsehood, since the order-four all-ones matrix has identically
+   vanishing commutator Pfaffian and a nonzero triangle cubic. The hypothesis
+   was restored at all three sites, and the conclusion also gained the
+   nonvanishing-entry qualifier it never carried. Two consequences for this
+   card: work item 2's original scope says "the only external ingredient left is
+   the ordinary constant-rank theorem", which is now the implicit function
+   theorem; and the paper stands at thirty-nine pages, so
+   `verification/check_manuscript_build.py` pins `EXPECTED_PAGES = 39` and the
+   tracked PDF was refreshed by its supported `--update` path. Paper-local
+   scaffold, statement-identity, spacing, and manuscript-build gates pass
+   warning-free, and the release aggregate passes every check except the Lean
+   gates, which were not replayed because no statement label, claim identifier,
+   or trust-manifest row changed.
 2. Run a Milnor--Serre exposition pass on every affected passage.
 3. Build and visually inspect the PDF; replay the paper-local evidence gate,
    formal gate, axiom audit, source/hash checks, and complete aggregate.
