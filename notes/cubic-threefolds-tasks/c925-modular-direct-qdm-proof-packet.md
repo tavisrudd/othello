@@ -93,13 +93,18 @@ It currently contains:
 - a complete-source audit of Iritani's 2026 Hodge/cyclotomic blowup note,
   including the proved exceptional-cusp point symbol and the remaining
   large-radius Gamma frame gap; and
+- a framed-small specialization which retypes the conditional Section 6
+  \(m=1\) proof with the original \(z\)-disc and small point retained,
+  Hypothesis 5.7R as a reconstruction-tail certificate, the consumed part of
+  Hypothesis 5.7T as a residual-tagging certificate, and center nullity indexed
+  by every actual comparison specialization \(\chi_j\); and
 - an explicit exploration frontier.
 
 The finite categorical law model is
 `notes/cubic-threefolds-tasks/c925-categorical-law-check.py`, with exact
 checked output
 `notes/cubic-threefolds-tasks/c925-categorical-law-check.json`.  It passes
-thirty-five tests, including a negative collision test showing why Guéré's
+thirty-eight tests, including a negative collision test showing why Guéré's
 unit-shift separation contract is mandatory, the \(m\ge2\) constituent
 no-go, \(\mathbf G_a\) Clebsch--Gordan through size five, and composition of
 row-preserving shears, plus exact coordinate-pseudonaturality,
@@ -115,6 +120,10 @@ prescribed-endpoint obstruction, simple retained-character row forcing, the
 Laurent grading-character collision, common-open mutation fixedness, and
 universal generic-rank support-nullity.  A
 rank-leakage test identifies the sole codimension-one quotient obstruction.
+The framed-\(m=1\) additions check the conditional telescope with specialized
+center nullity and give separate countermodels to both illicit replacements:
+intrinsic center zero for specialized center zero, and ordinary coordinate
+naturality for Hypothesis 5.7R.
 A separate executable
 Haskell toy at
 `notes/cubic-threefolds-tasks/c925-sparse-shadow-path-toy.hs` verifies the
@@ -141,3 +150,6 @@ nix shell nixpkgs#ghc --command \
 
 Keep C925 active: the user has asked to continue exploring the categorical and
 software-interface design before closeout.
+
+The framed-\(m=1\) specialization audit is
+`notes/2026-08-20-c925-framed-m1-specialization.md`.

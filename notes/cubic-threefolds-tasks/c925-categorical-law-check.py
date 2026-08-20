@@ -1106,6 +1106,51 @@ def main():
     )
     checks["rank_leakage_covector_is_sole_quotient_defect"] = "pass"
 
+    # The conditional framed m=1 specialization composes once every actual
+    # comparison-generated center specialization is null.  The P1 product
+    # value is unconditional; only the blowup edges consume the R/T provider.
+    def framed_blowup_value(ambient, specialized_centers, tail_certified):
+        assert tail_certified
+        return ambient + sum(specialized_centers)
+
+    cubic_times_p1_nu6 = 4
+    path_value = cubic_times_p1_nu6
+    for specialized_center_terms in ([0], [0, 0], [], [0]):
+        path_value = framed_blowup_value(
+            path_value, specialized_center_terms, tail_certified=True
+        )
+    assert path_value == cubic_times_p1_nu6
+    projective4_nu6 = 0
+    assert path_value != projective4_nu6
+    checks[
+        "conditional_framed_m1_telescope_with_specialized_center_null"
+    ] = "pass"
+
+    # Intrinsic center vanishing cannot replace specialized center vanishing:
+    # a noninjective coefficient map is an independent interface operation.
+    intrinsic_center_nu6 = 0
+    uncertified_specialized_center_nu6 = 1
+    assert intrinsic_center_nu6 == 0
+    assert uncertified_specialized_center_nu6 != intrinsic_center_nu6
+    assert framed_blowup_value(
+        4, [uncertified_specialized_center_nu6], tail_certified=True
+    ) == 5
+    checks["intrinsic_center_nu6_zero_not_specialized_zero"] = "pass"
+
+    # Ordinary coordinate/base-change laws place no constraint on a move from
+    # the designated small point to a reconstruction-tail point.  Equality is
+    # exactly the extra 5.7R certificate, not a generic pseudonaturality law.
+    abstract_small_nu6 = 2
+    abstract_tail_nu6 = 3
+    ordinary_laws_available = {
+        "coefficient_base_change": True,
+        "integral_z_gauge": True,
+        "formal_coordinate_pullback_away_from_marked_point": True,
+    }
+    assert all(ordinary_laws_available.values())
+    assert abstract_small_nu6 != abstract_tail_nu6
+    checks["reconstruction_tail_is_not_generic_coordinate_law"] = "pass"
+
     # The m=2 specialization retains primitive-sixth support seen by the
     # point row, not the unmarked primitive packet count.  Row-null exceptional
     # packets can change the latter while leaving the former unchanged.

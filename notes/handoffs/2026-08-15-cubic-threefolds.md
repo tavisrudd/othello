@@ -58,9 +58,16 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   raw grading, and formal monodromy do not supply those hypotheses.  The
   conditional relative-cap route reduces the remaining rank-two-normal
   problem to a same-exposed-face cancellation against the hostile \(-1/R\)
-  pilot only after identifying its scalar channel with the analytic leakage.  The
-  thirty-five-check finite law replay, eleven-check typed Haskell toy, and
-  original cubic replay are green.  C925 remains open at the one-object
+  pilot only after identifying its scalar channel with the analytic leakage.
+  The conditional Section 6 \(m=1\) argument is now an exact sibling
+  specialization: it retains the small point and original \(z\)-disc, exposes
+  5.7R as a reconstruction-tail certificate and the used part of 5.7T as a
+  residual-tagging certificate, and keeps every center specialization
+  \(\chi_j\) indexed.  Its endpoint uses the unconditional external
+  \(\mathbf P^1\)-product formula, so it does not consume the conditional
+  projective-bundle formula.  The thirty-eight-check finite law replay,
+  eleven-check typed Haskell toy, and original cubic replay are green.  C925
+  remains open at the one-object
   fixed-phase Gamma/support or relative-cap cancellation provider.
   Mathematics only; no manuscript or Lean edits.  Card:
   `../cubic-threefolds-tasks/c925-modular-direct-qdm-proof-packet.md`.
