@@ -1,0 +1,27 @@
+{
+  "title": "Integral Cohomology and Modular Decomposition for the Theta Divisor of a Cubic Threefold",
+  "description": "This paper computes the integral middle lattice of the theta divisor of the intermediate Jacobian of a smooth complex cubic threefold. The lattice is free of rank 130, and its Lefschetz saturation quotient is (Z/2)^10. The Fano difference map identifies this mod-two glue and its dual escape lattice. The paper also determines the integral direct image of the blow-up resolution. Two outer point objects split over Z, while the residual perverse factor has central attachment given by multiplication by -3. After inverting three it acquires a third point summand; modulo three it is uniserial of length three, with successive factors a point sheaf, the intersection complex, and a point sheaf. The same cubic intersection number forces relative hard Lefschetz to fail modulo three. Finally, an infinite-order Fano class lifts the local order-three link class, and ordinary and intersection cohomology agree in degrees at least four.",
+  "creators": [
+    {
+      "name": "Rudd, Tavis",
+      "orcid": "0009-0003-6405-3275",
+      "affiliation": "Independent researcher"
+    }
+  ],
+  "access_right": "open",
+  "license": "cc-by-4.0",
+  "upload_type": "publication",
+  "publication_type": "preprint",
+  "keywords": [
+    "cubic threefolds",
+    "intermediate Jacobians",
+    "theta divisors",
+    "intersection cohomology",
+    "perverse sheaves",
+    "decomposition theorem",
+    "relative hard Lefschetz",
+    "Fano surfaces",
+    "integral lattices"
+  ],
+  "notes": "Correspondence: tavisrudd@damnsimple.com"
+}
