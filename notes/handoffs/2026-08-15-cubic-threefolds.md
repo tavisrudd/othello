@@ -37,6 +37,15 @@ promoted mathematical assertion maps to a kernel-checked declaration.
 
 ## Current status
 
+- **C928 — standalone blown-up-theta lattice paper, active.** Extract the
+  C908 theorem on `M = Bl_0 Theta` into a self-contained paper.  Replace the
+  certificate-dependent saturation and glue-surjectivity steps by structural
+  proofs, derive the `IH^*(Theta)` corollary, close the inherited relative-Ext
+  and attribution debts that affect the note, complete the bounded primary-
+  source and priority audit, and commit a replayable manuscript/evidence
+  bundle.  C908 retains its original relative Chow-index and `p`-typical
+  crowns.  Card:
+  `../cubic-threefolds-tasks/c928-blown-up-theta-lattice-paper.md`.
 - **C925 — modular direct-QDM proof packet, active.** Write a self-contained
   alternative packet organized like a parameterized software interface: a
   caller chooses which generic even-block data to observe, which blocks to
@@ -232,15 +241,15 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   `../cubic-threefolds-tasks/c907-quantum-monodromy-stabilization.md`; solver dossier:
   `../cubic-threefolds-tasks/c907-solver-dossier.md`; closed-phase archive:
   `../cubic-threefolds-tasks/c907-quantum-monodromy-stabilization-archive.md`.
-- **C908 — Annals-upgrade mathematics, active.** Continues the highest-ceiling
+- **C908 — Annals-upgrade mathematics, active.** Retains the highest-ceiling
   mathematics left by C904/Paper V after the fibrewise minimal-class theorem
   and the one-stabilization epilogue: priority A is the intrinsic relative
   Chow index of the generic unordered-theta fibre (`ind(Y)=1` vs `2`);
   priority B is the intrinsic `p`-typical divisor-product classification.
-  Proved an integral lattice theorem for `H^3(Bl_0Θ,Z)` (torsion-free rank
+  Its integral lattice theorem for `H^3(Bl_0Θ,Z)` (torsion-free rank
   130, escape group free of rank ten, correcting a prior `(Z/2)^10`
-  misidentification) — a candidate for its own paper, scoping pending the
-  user. The priority-A `(1,5)` Chow-index channel is closed negative for
+  misidentification) and the resulting standalone paper were split to C928
+  by author instruction on 2026-08-20. The priority-A `(1,5)` Chow-index channel is closed negative for
   every named source; priority A itself remains undecided. Card:
   `../cubic-threefolds-tasks/c908-annals-math-upgrades.md`.
 - **C909 — cycle-side crown, active.** Extracts intrinsic cofactor-saturation
