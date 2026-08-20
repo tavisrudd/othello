@@ -10,6 +10,8 @@
   `notes/2026-08-20-c928-structural-saturation.md`
 - structural glue and saturation realization:
   `notes/2026-08-20-c928-structural-glue.md`
+- frozen dependency graph and trust boundary:
+  `notes/2026-08-20-c928-dependency-audit.md`
 
 ## Goal
 
