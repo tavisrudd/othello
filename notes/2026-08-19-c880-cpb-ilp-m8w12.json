@@ -1,0 +1,29 @@
+{
+  "full_family_separates": true,
+  "g_lower_bound": 14,
+  "highs_optimum": 14,
+  "highs_solution": [
+    8,
+    10,
+    11,
+    13,
+    15,
+    16,
+    20,
+    22,
+    24,
+    31,
+    40,
+    44,
+    45,
+    47
+  ],
+  "highs_status": 0,
+  "m": 8,
+  "mask_maxweight": 12,
+  "masks_in_file": 728,
+  "masks_minimal": 728,
+  "source": "2026-08-19-c880-cpb-masks-m8w12.json",
+  "source_sha256": "07373f2d59eb8ab7399397b94eb15310727a065d515d2138c758714274e7815c",
+  "triples": 56
+}

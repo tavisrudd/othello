@@ -1,0 +1,10 @@
+{
+  "mode": "flatcover",
+  "m": 5,
+  "universe": 30,
+  "candidate_flats": 120,
+  "c2": 6,
+  "polynomial_bound_m_over_2": 3,
+  "seven_flats_of_a_three_space_cover_everything": true,
+  "search_nodes": 2156266
+}

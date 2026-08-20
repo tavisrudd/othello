@@ -1,0 +1,1 @@
+selfcheck: attachment identity holds on all 655360 (two-graph, attachment, triple) cases at m=6

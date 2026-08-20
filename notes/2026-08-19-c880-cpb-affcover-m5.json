@@ -1,0 +1,11 @@
+{
+  "mode": "affcover",
+  "m": 5,
+  "universe": 31,
+  "candidate_flats": 465,
+  "c2aff": 6,
+  "polynomial_bound_ceil_m_over_2": 3,
+  "pairing_construction": 8,
+  "pairing_covers_all": true,
+  "search_nodes": 12307682312
+}

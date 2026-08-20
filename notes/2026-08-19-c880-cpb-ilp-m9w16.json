@@ -1,0 +1,28 @@
+{
+  "cbc_agrees": true,
+  "cbc_optimum": 11,
+  "full_family_separates": true,
+  "g_lower_bound": 11,
+  "highs_optimum": 11,
+  "highs_solution": [
+    1,
+    5,
+    9,
+    11,
+    16,
+    37,
+    59,
+    74,
+    76,
+    78,
+    81
+  ],
+  "highs_status": 0,
+  "m": 9,
+  "mask_maxweight": 16,
+  "masks_in_file": 1071,
+  "masks_minimal": 1071,
+  "source": "2026-08-19-c880-cpb-masks-m9w16.json",
+  "source_sha256": "445a27460b129cccda4d119c5cf187af2d8a0fcf56703690ea4852696cfced1f",
+  "triples": 84
+}
