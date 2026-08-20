@@ -37,6 +37,15 @@ promoted mathematical assertion maps to a kernel-checked declaration.
 
 ## Current status
 
+- **C934 -- full integral theta decomposition complex, active.** Test the one
+  upgrade capable of raising C928's ceiling: compute the link, resolution,
+  ordinary cohomology, and integral intersection cohomology in every degree;
+  decide whether the local `Z/3` in degree four survives globally; and identify
+  the actual derived extension in `R sigma_* Z_M[4]` behind Krämer's rational
+  skyscraper splitting. The frozen eight-page paper stays unchanged until the
+  theorem and priority gates pass. Secondary tests are full Fano-transfer
+  surjectivity and a monodromy-equivariant family form. Card:
+  `../cubic-threefolds-tasks/c934-integral-theta-decomposition-complex.md`.
 - **C933 — short Hodge-atom marker-ledger companion, active.**  C933 owns a
   new strictly `m=1` companion under `papers/hodge-atom-marker-ledger/` and one
   non-load-bearing cross-reference sentence in the epilogue.  It must give a
