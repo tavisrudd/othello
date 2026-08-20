@@ -3239,8 +3239,17 @@
       "last": 927,
       "purpose": "Determinantal structural proof of the conference node count",
       "sequence": 360
+    },
+    {
+      "count": 1,
+      "first": 928,
+      "kind": "reservation",
+      "lane": "cubic-threefolds",
+      "last": 928,
+      "purpose": "standalone blown-up theta-divisor integral lattice paper",
+      "sequence": 361
     }
   ],
-  "next_id": 928,
+  "next_id": 929,
   "schema": "codex-task-id-allocations-v1"
 }
