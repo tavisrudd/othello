@@ -1,11 +1,20 @@
 \section{Intersection cohomology of the theta divisor}\label{sec:intersection}
 
-For an isolated singularity in a complex fourfold, the middle-perversity
-Deligne sheaf agrees below the middle degree with the cohomology of the
-smooth locus.  Thus
+Let \(j:U\hookrightarrow\Theta\).  For traditional middle perversity,
+\(\bar m(8)=3\), and the unshifted Deligne construction for this isolated
+singularity is
+\[
+ \mathcal P_{\bar m}=\tau_{\leq3}Rj_*\Z_U;
+\]
+see \cite[Section~3.1 and Theorem~3.5]{GoreskyMacPhersonIHII}.  Hence its
+degree-three hypercohomology is ordinary restriction to the smooth locus,
+so
 \begin{equation}\label{eq:ih-smooth-locus}
  IH^3(\Theta,\Z)\cong H^3(U,\Z).
 \end{equation}
+The \(\Z/3\) term in the link occurs in degree four by
+Lemma~\ref{lem:link-cohomology}; it lies beyond this truncation and does not
+enter \eqref{eq:ih-smooth-locus}.
 The Mayer--Vietoris proof of Proposition~\ref{prop:topological-exact}
 identifies \(H^3(M,\Z)\to H^3(U,\Z)\) with an isomorphism.  This proves the
 first assertion of Corollary~\ref{cor:main-ih}.  Under that identification,
@@ -19,8 +28,8 @@ Proposition~\ref{prop:endpoint-lifts} give
 which proves the corollary.
 
 For comparison, the rational decomposition of this resolution is already
-known.  Kraemer proves, with complex coefficients,
-\cite[Corollary~6]{KraemerE6}
+known.  Krämer proves, with complex coefficients, the following noncanonical
+derived-category decomposition \cite[Corollary~6]{KraemerE6}:
 \begin{equation}\label{eq:kraemer-decomposition}
  R\sigma_*\Q_M[4]
  \cong\IC_\Theta\oplus\Q_0[2]\oplus\Q_0\oplus\Q_0[-2],
