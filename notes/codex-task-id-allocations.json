@@ -3257,8 +3257,17 @@
       "last": 929,
       "purpose": "Relax CharZero to characteristic not 2,3,5 on the Paper I node classification",
       "sequence": 362
+    },
+    {
+      "count": 1,
+      "first": 930,
+      "kind": "reservation",
+      "lane": "cubic-threefolds",
+      "last": 930,
+      "purpose": "categorical direct-QDM paper readiness and proof-narrative spine adaptation",
+      "sequence": 363
     }
   ],
-  "next_id": 930,
+  "next_id": 931,
   "schema": "codex-task-id-allocations-v1"
 }
