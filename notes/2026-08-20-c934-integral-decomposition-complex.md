@@ -2,9 +2,11 @@
 
 **Date:** 2026-08-20
 
-**Status:** structural derived theorem proved.  The resolution complex splits
-off its two outer point summands over `Z`; its central perverse summand carries
-the sole nonunit local intersection block, at the prime three.
+**Status:** structural derived theorem proved, merged into the 11-page paper,
+and accepted by a fresh three-packet rereview.  The residual mod-three object
+is now identified as length-three uniserial, and the outer relative Lefschetz
+map is exactly multiplication by three.  The standalone export is materialized
+and verified.  The original all-degree additive-table gate remains open.
 
 ## The theorem
 
@@ -151,17 +153,18 @@ nonunit local intersection block.
 ## Relative Lefschetz warning
 
 The two outer point objects split as objects, but relative multiplication by
-`h^2` between them is multiplication by three:
+`h^2` between their perverse cohomology sheaves is multiplication by three.
+For `eta=c_1(O_M(-X))`, the central-stalk calculation is
 
 \[
- H^0(X,\mathbf Z)\xrightarrow{h^2}H^4(X,\mathbf Z),
- \qquad 1\longmapsto3\ell.
+ H^2(X,\mathbf Z)\xrightarrow{h^2}H^6(X,\mathbf Z),
+ \qquad h\longmapsto h^3=3[\mathrm{pt}].
 \]
 
-Thus integral relative hard Lefschetz also fails exactly at three.  This is
-the same coefficient defect as (2), seen across perverse degrees rather than
-inside the central perverse sheaf.  It must not be described as a second,
-independent torsion phenomenon.
+Thus relative hard Lefschetz fails after reduction modulo three.  This is the
+same cubic intersection factor as (2), seen across perverse degrees rather
+than inside the central perverse sheaf.  It is not a second independent
+torsion phenomenon.
 
 ## Ordinary versus intersection complex
 
@@ -217,9 +220,9 @@ groups attach to the singular point and to the resolution.
    to `U` is the simple rank-one local system, the residual perverse sheaf is
    indecomposable and nonsemisimple.  Thus the rational decomposition has no
    characteristic-three specialization.
-3. The local order-three class is killed globally by the point-class Fano
-   lift `u_4` of the first C934 report; it therefore measures an index-three
-   attachment, not torsion in the boundary image.
+3. The local order-three class is lifted by the infinite-order point-class
+   Fano class `u_4`; it therefore measures an index-three attachment, not
+   global torsion.
 4. The paper's mod-two degree-three fibre product and the present mod-three
    perverse attachment are distinct parts of one integral resolution: the
    former is global Lefschetz placement, the latter local decomposition
@@ -227,11 +230,44 @@ groups attach to the singular point and to the resolution.
 
 ## Remaining global gate
 
-The derived theorem no longer depends on an all-degree Betti calculation.
-For the manuscript-strength global corollary, C934 still needs to record the
-integral ranks and torsion status of `H^4(Theta)=IH^4`, `H^4(U)`, and their
-duals, and to print the exact index-three maps.  The local class and its fate
-are already settled.
+The manuscript-strength gate is closed: the paper prints the exact
+index-three sequence and proves `H^k(Theta,Z) -> IH^k(Theta,Z)` is an
+isomorphism for `k >= 4`.  The original C934 acceptance gate was broader: it
+asked for an additive table of every local and global integral group, with
+all ranks and torsion.  That enumeration remains open and must not be
+represented as proved.  It is no longer needed for the derived theorem or
+the submitted paper spine.
+
+## Referee and export outcome
+
+The repaired PDF at SHA-256
+`98b8669dce44baa12f5bf21235d32a6aa850a50b9daf622aa5790ea90288d655`
+received fresh A verdicts from the modular/perverse, cubic/Fano, and
+editorial/priority packets.  The title passed unchanged.  The active-voice
+abstract has 147 PDF-extracted whitespace tokens.  The strongest venue call
+is *Mathematische Zeitschrift*, with *Algebraic Geometry* a credible stretch
+and *Proceedings of the AMS* a conservative fallback.
+
+The guarded exporter materialized and verified the clean standalone tree at
+`/home/tavis/src/math-papers/blown-up-theta-lattice`; its first commit is
+`a4d8b1a51339149147b81f3a00d65a1d90bda578`, and its rebuilt PDF is
+byte-identical to the monorepo authority.
+
+## `ej` + `tt` closeout pass
+
+The cheap extra value was real and is now adopted.  The zero characteristic-
+three attachment determines the complete canonical Loewy chain
+`delta_0 -- IC_Theta(F_3) -- delta_0`, with both adjacent extensions
+nonsplit; the paper no longer stops at “indecomposable nonsemisimple.”  The
+same factor three also determines the outer relative Lefschetz map and its
+mod-three failure.  This answers the main Tao-style structural question:
+the central decomposition obstruction and outer hard-Lefschetz failure are
+two faces of the same cubic intersection number, not unrelated defects.
+
+No genuine mystery remains in the adopted manuscript spine.  The broader
+all-degree additive table, full Fano-transfer surjectivity, and a
+monodromy-equivariant family form remain outside the proved paper theorem;
+they stay explicit C934 debts rather than implicit claims.
 
 ## Priority boundary
 
@@ -279,4 +315,7 @@ example-specific pre-emption; its full record is
 | Where is the factor three? | the central costalk-to-stalk form and, equivalently, relative `h^2` |
 | Does an integral direct-sum decomposition exist? | no; central Smith factor is `3` |
 | Is three the only bad prime? | yes for the local derived object; (4) has factors `1,3,1` |
-| Are the full global groups torsion-free? | still to be proved in the all-degree corollary |
+| What is the exact mod-three object? | settled by the canonical nonsplit `delta_0`--`IC`--`delta_0` Loewy chain |
+| Why does modular relative hard Lefschetz fail? | settled: `eta^2(h)=h^3=3[pt]` |
+| Are all local and global groups known additively in every degree? | no; this is the remaining original C934 acceptance debt |
+| Does the full Fano transfer surject, or does the construction globalize in a monodromy-equivariant family? | open secondary tests; neither is needed or claimed in the paper |
