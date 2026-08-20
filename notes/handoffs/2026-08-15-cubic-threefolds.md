@@ -37,6 +37,13 @@ promoted mathematical assertion maps to a kernel-checked declaration.
 
 ## Current status
 
+- **C930 — categorical direct-QDM proof memo, queued.** Write an overlay memo
+  against the current cubic-stabilization manuscript, turning C925's modular
+  mathematics into the smallest honest categorical theorem/application spine.
+  Red-team every load-bearing arrow and its strongest hostile countermodel,
+  map the existing components into a severe proof and narrative order, and
+  expose every conditional geometric provider before any manuscript edit. Card:
+  `../cubic-threefolds-tasks/c930-categorical-direct-qdm-paper-preparation.md`.
 - **C928 — standalone blown-up-theta lattice paper, active.** Extract the
   C908 theorem on `M = Bl_0 Theta` into a self-contained paper.  Replace the
   certificate-dependent saturation and glue-surjectivity steps by structural
