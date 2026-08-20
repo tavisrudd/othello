@@ -171,9 +171,16 @@ index row.
   scope; for a discrepant QDM overlap, a canonical trait lattice and
   saturation with exact closed-fibre base change are additional gates.  On a
   nonzero marked primitive-packet rank coimage the entire defect is one
-  additive DVR valuation, computable from
-  Smith invariants or normalized Gamma pole/zero orders once the actual
-  overlap matrix is available.
+  additive DVR valuation, computable from Smith invariants or normalized
+  Gamma pole/zero orders once the actual overlap matrix is available.
+- Raw discrepancy rules out quasi-symmetry, even at a neutral slope, so the
+  current nonresonant schober theorem cannot directly supply the generic
+  calibration.  Under an effective genuine-unit \((1,1)\) two-ray pilot,
+  adding the negative total-character coordinate produces five
+  quasi-symmetric eight-weight signatures without total unimodularity and
+  four with it.  A typed oriented chamber selects at most one for each actual
+  occurrence; the occurrence model and marked saturated descent are not yet
+  proved.
 
 ## Open geometric providers
 
@@ -242,38 +249,40 @@ Typed replay:
       | diff -u \
           notes/cubic-threefolds-tasks/c925-sparse-shadow-path-toy-output.txt -
 
-The finite model currently has eighty-eight checks.  It verifies only the
+The finite model currently has ninety-three checks.  It verifies only the
 advertised algebraic laws and countermodels, never an external QDM provider.
 
 ## Next
 
-1. Compute the normalized overlap matrix for the opposite-sign unit pair
-   with primitive slope \((1,1)\), deform its integral parameter, and compute
-   the Smith/Gamma valuation on the marked packet rank coimage.  Zero valuation is
-   the exact marked-saturation certificate; positive valuation identifies
-   the resonant punctual obstruction.
-2. Audit whether that generic deformation is genuinely in a proven
-   quasi-symmetric/window scope.  Neutral \(c_1\)-degree alone is
-   insufficient; the first known neutral charge matrix is not
-   quasi-symmetric.
-3. Prove that the two incident sectorial gauges identify their actual
+1. Decide whether an actual primitive \((1,1)\) AKMW overlap admits one
+   effective common rank-two genuine-unit matrix.  Module 41 leaves only five
+   signatures without total unimodularity and four with it; the oriented
+   chamber selects at most one for a typed occurrence.
+2. If so, identify its signature, adjoin the canonical-character coordinate,
+   and construct the QDM descent square from the resulting quasi-symmetric
+   eight-weight model.
+3. Compute that completed model's normalized generic overlap matrix and its
+   closed Smith/Gamma valuation on the marked packet rank coimage.  Zero
+   valuation plus exact coimage base change is the saturation certificate;
+   positive valuation identifies the resonant punctual obstruction.
+4. Prove that the two incident sectorial gauges identify their actual
    row-null supported spans, then compare their induced ambient quotients.
    A common nonturning Hom-system with identical formal asymptotics would
    kill the full overlap by multisummation uniqueness.
-4. Treat the arbitrary relative-cap lift and same-receiver lower-center
+5. Treat the arbitrary relative-cap lift and same-receiver lower-center
    charge adapter as alternative routes, not prerequisites for the rank-row
    overlap route.
-5. Prove the local fixed-phase QDM point-line law of Module 35: commute the
+6. Prove the local fixed-phase QDM point-line law of Module 35: commute the
    primitive projector with the chosen monodromy, identify the Gamma and
    formally normalized point lines using a non-Picard selector or strict
    multiplicity-one filtration quotient, and provide lawful adjacent/endpoint
    reindexing along one chosen factorization.
-6. As the ExactTop alternative, construct a **corrected intrinsic**
+7. As the ExactTop alternative, construct a **corrected intrinsic**
    support/Gysin realization for Module 32; ordinary Gamma or residual
    projection is ruled out by the point regression.
-7. Prove the sharp occurrence-indexed exceptional exponent/carrier bound.
-8. If the monodromy route fails, construct the opposite-oriented enriched
+8. Prove the sharp occurrence-indexed exceptional exponent/carrier bound.
+9. If the monodromy route fails, construct the opposite-oriented enriched
    exact sequence and use the Module 25/26 boundary adapter.
-9. Continue the higher-EV rank-row common-receiver audit in parallel.
+10. Continue the higher-EV rank-row common-receiver audit in parallel.
 
 C925 remains active until the user closes it.

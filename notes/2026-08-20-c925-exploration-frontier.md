@@ -103,10 +103,15 @@ are:
     the six neutral slopes, starting with \((1,1)\), and test whether its
     marked Smith/Gamma index is zero.  The first separate gate is whether the
     discrepant generic family lies in any proved window/GKZ comparison scope;
-    neutral \(c_1\)-degree does not imply quasi-symmetry.
+    neutral \(c_1\)-degree does not imply quasi-symmetry.  Module 41 closes
+    the raw route negative and isolates five genuine unit-wall canonically
+    completed quasi-symmetric eight-weight signatures without total
+    unimodularity: one for three ordered types and two for flip--flip.  Test
+    whether actual AKMW overlap data realize these matrices and whether
+    removal of the extra coordinate is marked-saturated.
 
 None of these questions blocks the proof in Modules 0--16 or the
-transport-level specialization audit in Module 17.  Modules 18--40 isolate
+transport-level specialization audit in Module 17.  Modules 18--41 isolate
 the general consequences without claiming the missing enriched provider.
 The open questions control whether the interface can be promoted from a
 lawful compiler to a canonical equivalence with the complete external

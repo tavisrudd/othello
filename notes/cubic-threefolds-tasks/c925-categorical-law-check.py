@@ -2218,6 +2218,219 @@ def main():
     assert gamma_product_order(((-1, 2), (0, -1)), (1, 1)) == 1
     checks["integral_gamma_orders_reduce_to_finite_signed_counts"] = "pass"
 
+    # Module 41: raw discrepancy and canonical-character completion.
+    def signed_line_key(weight):
+        left, right = weight
+        if left == right == 0:
+            return (0, 0)
+        divisor = gcd(abs(left), abs(right))
+        left //= divisor
+        right //= divisor
+        if left < 0 or (left == 0 and right < 0):
+            left, right = -left, -right
+        return (left, right)
+
+    def is_quasi_symmetric(weights):
+        line_sums = {}
+        for left, right in weights:
+            key = signed_line_key((left, right))
+            old_left, old_right = line_sums.get(key, (0, 0))
+            line_sums[key] = (old_left + left, old_right + right)
+        return all(
+            key == (0, 0) or total == (0, 0)
+            for key, total in line_sums.items()
+        )
+
+    unit_pair_assignment_counts = {
+        (1, 1): 105,
+        (1, 2): 210,
+        (2, 1): 105,
+        (2, 2): 210,
+    }
+    unit_pair_labelled_completion_counts = {
+        (1, 1): 24,
+        (1, 2): 24,
+        (2, 1): 12,
+        (2, 2): 12,
+    }
+    unit_pair_general_genuine_labelled_counts = {
+        (1, 1): 24,
+        (1, 2): 12,
+        (2, 1): 6,
+        (2, 2): 36,
+    }
+
+    unit_pair_rows = {}
+    for negative_type in (1, 2):
+        for positive_type in (1, 2):
+            first_row = (
+                (1,) * negative_type
+                + (-1,) * (negative_type + 1)
+                + (0,) * (6 - 2 * negative_type)
+            )
+            second_rows = set(permutations(
+                (1,) * (positive_type + 1)
+                + (-1,) * positive_type
+                + (0,) * (6 - 2 * positive_type)
+            ))
+            pair = (negative_type, positive_type)
+            assert len(second_rows) == unit_pair_assignment_counts[pair]
+            unit_pair_rows[pair] = (first_row, second_rows)
+            for second_row in second_rows:
+                weights = list(zip(first_row, second_row))
+                assert tuple(map(sum, zip(*weights))) == (-1, 1)
+                assert not is_quasi_symmetric(weights)
+    checks["nonzero_discrepancy_character_excludes_raw_quasi_symmetry"] = "pass"
+
+    general_genuine_signatures_by_pair = {}
+    for pair, (first_row, second_rows) in unit_pair_rows.items():
+        negative_type, positive_type = pair
+        expected_signatures = set()
+        expected_genuine_wall_signatures = set()
+        expected_general_genuine_signatures = set()
+        lower = max(0, negative_type + positive_type - 3)
+        upper = min(negative_type, positive_type)
+        for antidiagonal_count in range(lower, upper + 1):
+            if pair == (antidiagonal_count, antidiagonal_count):
+                continue
+            signature = Counter({
+                (1, 0): negative_type - antidiagonal_count,
+                (-1, 0): negative_type - antidiagonal_count,
+                (0, 1): positive_type - antidiagonal_count,
+                (0, -1): positive_type - antidiagonal_count,
+                (1, -1): antidiagonal_count,
+                (-1, 1): antidiagonal_count + 1,
+                (0, 0): 2 * (
+                    3 - negative_type - positive_type + antidiagonal_count
+                ),
+            })
+            encoded_signature = tuple(sorted(
+                (weight, multiplicity)
+                for weight, multiplicity in signature.items()
+                if multiplicity
+            ))
+            expected_signatures.add(encoded_signature)
+            if antidiagonal_count < min(negative_type, positive_type):
+                expected_genuine_wall_signatures.add(encoded_signature)
+
+        for total_diagonal_count in range(
+            lower, min(negative_type, positive_type)
+        ):
+            for diagonal_count in range(total_diagonal_count + 1):
+                antidiagonal_count = total_diagonal_count - diagonal_count
+                signature = Counter({
+                    (1, 0): negative_type - total_diagonal_count,
+                    (-1, 0): negative_type - total_diagonal_count,
+                    (0, 1): positive_type - total_diagonal_count,
+                    (0, -1): positive_type - total_diagonal_count,
+                    (1, 1): diagonal_count,
+                    (-1, -1): diagonal_count,
+                    (1, -1): antidiagonal_count,
+                    (-1, 1): antidiagonal_count + 1,
+                    (0, 0): 2 * (
+                        3
+                        - negative_type
+                        - positive_type
+                        + total_diagonal_count
+                    ),
+                })
+                expected_general_genuine_signatures.add(tuple(sorted(
+                    (weight, multiplicity)
+                    for weight, multiplicity in signature.items()
+                    if multiplicity
+                )))
+
+        completed_assignment_count = 0
+        completed_signatures = set()
+        genuine_wall_signatures = set()
+        general_genuine_assignment_count = 0
+        general_genuine_signatures = set()
+        for second_row in second_rows:
+            weights = list(zip(first_row, second_row))
+            determinants = [
+                left[0] * right[1] - left[1] * right[0]
+                for left in weights
+                for right in weights
+            ]
+            effective = any(determinant != 0 for determinant in determinants)
+            totally_unimodular = all(
+                abs(determinant) <= 1 for determinant in determinants
+            )
+            kappa = tuple(map(sum, zip(*weights)))
+            completed_weights = weights + [(-kappa[0], -kappa[1])]
+            first_wall_spans = any(
+                left == 0 and right != 0 for left, right in weights
+            )
+            second_wall_spans = any(
+                right == 0 and left != 0 for left, right in weights
+            )
+            encoded_signature = tuple(sorted(Counter(weights).items()))
+            if (
+                effective
+                and first_wall_spans
+                and second_wall_spans
+                and is_quasi_symmetric(completed_weights)
+            ):
+                general_genuine_assignment_count += 1
+                general_genuine_signatures.add(encoded_signature)
+            if (
+                effective
+                and totally_unimodular
+                and is_quasi_symmetric(completed_weights)
+            ):
+                completed_assignment_count += 1
+                completed_signatures.add(encoded_signature)
+                if first_wall_spans and second_wall_spans:
+                    genuine_wall_signatures.add(encoded_signature)
+        assert (
+            completed_assignment_count
+            == unit_pair_labelled_completion_counts[pair]
+        )
+        assert completed_signatures == expected_signatures
+        assert len(expected_genuine_wall_signatures) == 1
+        assert genuine_wall_signatures == expected_genuine_wall_signatures
+        assert (
+            general_genuine_assignment_count
+            == unit_pair_general_genuine_labelled_counts[pair]
+        )
+        assert general_genuine_signatures == expected_general_genuine_signatures
+        general_genuine_signatures_by_pair[pair] = general_genuine_signatures
+    checks[
+        "unit_overlap_completed_signatures_match_symbolic_classification"
+    ] = "pass"
+    checks[
+        "unit_overlap_genuine_wall_condition_selects_one_signature_per_type"
+    ] = "pass"
+    checks[
+        "unit_overlap_general_genuine_wall_classification_has_five_signatures"
+    ] = "pass"
+
+    quadrant_expected_candidate_counts = {
+        (1, 1): 1,
+        (1, -1): 1,
+        (-1, -1): 1,
+        (-1, 1): 0,
+    }
+    for signatures in general_genuine_signatures_by_pair.values():
+        for quadrant, expected_count in quadrant_expected_candidate_counts.items():
+            first_sign, second_sign = quadrant
+            available_count = 0
+            for signature in signatures:
+                weights = [
+                    weight
+                    for weight, multiplicity in signature
+                    for _ in range(multiplicity)
+                ]
+                quadrant_has_weight_ray = any(
+                    first_sign * left > 0 and second_sign * right > 0
+                    for left, right in weights
+                )
+                available_count += not quadrant_has_weight_ray
+            assert available_count == expected_count
+    checks[
+        "unit_overlap_oriented_empty_quadrant_selects_at_most_one_signature"
+    ] = "pass"
+
     result = {
         "status": "pass",
         "check_count": len(checks),

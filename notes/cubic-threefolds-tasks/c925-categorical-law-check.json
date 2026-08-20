@@ -1,5 +1,5 @@
 {
-  "check_count": 88,
+  "check_count": 93,
   "checks": {
     "ambient_target_shear_changes_primitive_row_restriction": "pass",
     "augmented_row_output_kernel_is_two_sided": "pass",
@@ -44,6 +44,7 @@
     "negative_exponential_pilot_has_positive_oriented_charge": "pass",
     "negative_line_tail_charge_survives_displayed_reindexing": "pass",
     "nonpointed_opposite_charges_can_create_charge_zero": "pass",
+    "nonzero_discrepancy_character_excludes_raw_quasi_symmetry": "pass",
     "only_internal_discrepant_run_overlaps_remain": "pass",
     "opposite_exacttop_allows_harmless_graph": "pass",
     "optic_residual_and_path_functor_naturality": "pass",
@@ -80,6 +81,10 @@
     "torsor_path_holonomy_and_endpoint_obstruction": "pass",
     "unbounded_stabilization_progression_forces_all_indices": "pass",
     "uniform_carrier_bound_leaves_one_jordan_step": "pass",
+    "unit_overlap_completed_signatures_match_symbolic_classification": "pass",
+    "unit_overlap_general_genuine_wall_classification_has_five_signatures": "pass",
+    "unit_overlap_genuine_wall_condition_selects_one_signature_per_type": "pass",
+    "unit_overlap_oriented_empty_quadrant_selects_at_most_one_signature": "pass",
     "universal_center_localization_represents_center_null_markers": "pass",
     "universal_center_quotient_detects_all_retained_equalities": "pass",
     "unmarked_constituent_no_go_m_2_through_6": "pass",

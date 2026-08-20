@@ -199,12 +199,21 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   discrepant model is not quasi-symmetric.  For every remaining overlap the
   exact replacement is a canonical trait realization and marked saturation
   with exact base change of the primitive-packet rank-coimage comparison; on
-  a nonzero line this is one additive DVR valuation, reducible to Smith/Gamma pole-zero arithmetic
-  after the actual overlap matrix is constructed.
+  a nonzero line this is one additive DVR valuation, reducible to Smith/Gamma
+  pole-zero arithmetic after the actual overlap matrix is constructed.
+  Raw discrepancy itself excludes quasi-symmetry, so the current
+  nonresonant schober theorem cannot directly calibrate any discrepant
+  overlap.  Under an effective genuine-unit \((1,1)\) two-ray pilot,
+  adjoining the negative total-character coordinate yields only five
+  genuine unit-wall quasi-symmetric eight-weight signatures without total
+  unimodularity: one for three ordered types and two for flip--flip.  The next
+  gate is to realize an actual AKMW overlap by one of those common matrices
+  and descend its completed generic comparison through the marked saturation
+  interface.
   Shifted tensor stability and the extremal multinomial source law are
   proved, but the occurrence-indexed exact QDM sequence, actual carrier
   exponent, and boundary vanishing remain open.  The packet is split into
-  bounded module companions behind a stable index.  The eighty-eight-check
+  bounded module companions behind a stable index.  The ninety-three-check
   finite law replay, eleven-check typed Haskell toy, and original cubic
   replay are green.  C925 remains open at fixed-phase Gamma/rank transport
   or at this ExactTop provider; the relative-cap cancellation remains one

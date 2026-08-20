@@ -45,6 +45,7 @@ No manuscript or Lean source is part of this packet.
 | 38 | Kummer charge trace and higher-codimension stationary polygon obstruction | notes/2026-08-20-c925-kummer-charge-regression.md |
 | 39 | \(m=2\) receiver-overlap localization, crossed defect law, and neutral-slope sieve | notes/2026-08-20-c925-m2-receiver-overlap-localization.md |
 | 40 | resonant GKZ saturation, closed-support torsion, and overlap valuation | notes/2026-08-20-c925-resonant-gkz-saturation.md |
+| 41 | raw discrepancy obstruction and canonical completion of the unit overlap | notes/2026-08-20-c925-unit-overlap-canonical-completion.md |
 | frontier | open experiments and provider targets | notes/2026-08-20-c925-exploration-frontier.md |
 
 ## Dependency spine
@@ -71,7 +72,7 @@ Modules 19--23 prove reusable categorical consequences:
 - universal center-null quotients and minimal sufficient shadows; and
 - the conditional Section 6 argument as a separate specialization.
 
-Modules 24--39 isolate the higher-stabilization frontier:
+Modules 24--41 isolate the higher-stabilization frontier:
 
 - irrationality on any unbounded stabilization set implies irrationality for
   every index;
@@ -150,7 +151,16 @@ Modules 24--39 isolate the higher-stabilization frontier:
   nonzero rank line this is one additive DVR valuation, and
   normalized Gamma products
   reduce it to a finite signed pole/zero count once the actual overlap matrix
-  is known; and
+  is known;
+- raw discrepant wall representations are never quasi-symmetric, so the
+  current nonresonant schober theorem cannot directly supply their generic
+  overlap calibration.  For an effective genuine-unit primitive \((1,1)\)
+  two-ray pilot, adjoining the single negative total-character
+  weight yields only five genuine unit-wall quasi-symmetric signatures even
+  without total unimodularity: one for three ordered types and two for
+  flip--flip.  Total unimodularity removes the determinant-two flip--flip
+  model.  Occurrence realization and marked saturated descent back to the
+  original QDM overlap remain open; and
 - the rank-row route remains the higher-EV uniform alternative.
 
 ## Current \(m=2\) alternatives
@@ -170,8 +180,13 @@ Module 40 gives a possible bypass of the direct resonant transition theorem:
 deform the overlap to a generically calibrated GKZ/window comparison and
 prove that its comparison on the primitive-packet rank coimage has a
 canonical trait lattice, no parameter torsion, and exact closed-fibre base
-change.  This is not automatic at resonance, and the first neutral discrepant model is not in the
-quasi-symmetric scope of the current generic theorem.
+change.  This is not automatic at resonance, and the first neutral
+discrepant model is not in the quasi-symmetric scope of the current generic
+theorem.  Module 41 proves that discrepancy forces this failure, then
+isolates five genuine unit-wall canonically completed quasi-symmetric
+\((1,1)\) signatures without total unimodularity: one for three ordered types
+and two for flip--flip.  Their extra coordinate still needs marked saturated
+descent through Module 40.
 
 ### ExactTop provider
 
