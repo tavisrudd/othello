@@ -37,6 +37,13 @@ promoted mathematical assertion maps to a kernel-checked declaration.
 
 ## Current status
 
+- **C933 — short Hodge-atom marker-ledger companion, active.**  C933 owns a
+  new strictly `m=1` companion under `papers/hodge-atom-marker-ledger/` and one
+  non-load-bearing cross-reference sentence in the epilogue.  It must give a
+  self-contained standard Hodge-atom specialization, keep its thin-groupoid
+  and filtration types explicit, and leave both the epilogue theorem graph and
+  the Gamma-row manuscript unchanged.  Card:
+  `../cubic-threefolds-tasks/c933-hodge-atom-marker-ledger-companion.md`.
 - **C931 -- closed 2026-08-20; C928 repaired, re-refereed, and submission-ready.**
   The four adopted local findings were repaired without changing a theorem or
   proof mechanism: exact FVME credit, the integral-IH truncation convention and
