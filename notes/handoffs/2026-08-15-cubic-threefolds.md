@@ -37,6 +37,13 @@ promoted mathematical assertion maps to a kernel-checked declaration.
 
 ## Current status
 
+- **C924 — direct-QDM proof audit, active.** Rigorously verify the proposed
+  direct quantum-`D`-module route to the epilogue's one-stabilization theorem,
+  beginning with a complete read of the manuscript, the unified proof packet,
+  its research memo, and every cited source actually used.  This is a
+  mathematics-only audit: no manuscript edits.  Only after the route passes
+  the proof gate does the task turn to simplification or compression.  Card:
+  `../cubic-threefolds-tasks/c924-direct-qdm-proof-audit.md`.
 - **C912 — closed 2026-08-18 by author instruction.** Referee-facing
   foundations for the epilogue: all twelve work packages landed, every
   implementation, review, copy-edit, detritus, build, and export gate green.
