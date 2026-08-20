@@ -233,16 +233,39 @@ the link criterion demanded was found, and the bracket is now \(0.616\,n^2\) to
 already recorded here, and the 2026-08-19 round added that deciding it at nine
 points is a \(10^{16}\)-pair scan.
 
-**The loose end has moved to the lower bound.** Every exactly measured cost is
-between 2.25 and 3 tests per recovered bit while the entropy floor licenses
-1.2326, and a covering heuristic predicts about 2.409, so the floor rather than
-the construction is now the likely slack side. The successor question is a
-covering lower bound specific to alignment-test flats. Two subsidiary questions
-come with it: whether the base-plus-layers shape is itself asymptotically lossy
-— the whole \(9/8\) rests on it, and a layered family need not have a base that
-separates on its own — and `P(2,6)`, undecided after a capped branch and bound
-and a 6 GB HiGHS run, which cannot help the construction because the one-anchor
-value it would have to beat is now exact.
+**The loose end is the lower bound, and the second 2026-08-19 round settled why**
+— report `notes/2026-08-19-c880-cost-per-bit-constant.md`, commit `e02221130`.
+
+- The apparent agreement of three arguments near 2.4 was not three arguments.
+  The covering heuristic's 2.409 is the random model's cost for a requirement an
+  optimal family can dodge; the deterministic covering constant is 1, since
+  \(c_2^{\mathrm{aff}}(m)=m+1\) exactly for \(m\le5\) and seven codimension-two
+  flats cover \(\mathbf F_2^m\) for every \(m\). What survives is measurement:
+  2.00 tests per bit at \(n=7\), the one exactly known size.
+- A new proved lower bound, by star flips: the tests through any point restrict
+  to an attachment family for the other points, so
+  \(\mathrm{minimum}(n)\ge\lceil n\,g(n-1)/4\rceil\). That is 21 against the
+  entropy floor's 18 at \(n=7\) and 30 against 25 at \(n=8\), re-deriving the
+  lane's best eight-point bound in two lines rather than by a partial-spread
+  argument in \(\mathrm{PG}(3,2)\). It is capped at \(0.5625\,n^2\) by the block
+  construction's own \(g(m)\le\frac94m\), so it never beats the floor
+  asymptotically. Corollary: base-plus-layers is within a factor two of optimal,
+  unconditionally.
+- Both natural lower-bound routes are therefore closed with exact reasons: a
+  cancellation theorem kills the covering route whatever its constant, and the
+  star-flip route is capped by the construction. A third mechanism must come
+  from the alignment code's distance distribution, which is the only mechanism
+  ever tight in this lane — it gives exactly 30 at \(n=7\), the true minimum.
+- \(g(8)\) is bracketed, not settled: \(15\le g(8)\le17\). The 15 is proved from
+  two weight-capped mask families, but the complete family was never built, so
+  the route is stalled rather than exhausted; the branch and bound was killed at
+  900 s and HiGHS took about 25 minutes to return 15 again. The \(+3\)
+  progression is now a theorem in the form \(P(k,1)=3\), and is proved broken at
+  \(m=8\) by the certified witness of 17 regardless of where \(g(8)\) lands. The
+  escape from it is batching, already visible at \(g(5)=9\).
+- `P(2,6)` remains undecided after a capped branch and bound and a 6 GB HiGHS
+  run, and cannot help the construction, because the one-anchor value it would
+  have to beat is now exact.
 
 The construction is known non-optimal at the one size where both numbers exist:
 45 against 44 at eight points, with neither of its two parts slack now that
