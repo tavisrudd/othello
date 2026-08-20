@@ -2,7 +2,7 @@
 
 **Lane:** cubic-threefolds
 
-**Status:** active; referee repair applied; second independent review pending before author decision on phase 2 manuscript adaptation
+**Status:** active; repaired phase-1 memo passes independent review; awaiting author decision on phase 2 manuscript adaptation
 
 ## Stable entry point
 
@@ -10,6 +10,8 @@
   `notes/2026-08-20-c930-categorical-direct-qdm-proof-memo.md`
 - independent referee report:
   `notes/2026-08-20-c930-independent-referee-report.md`
+- second independent referee pass after repair and exposition audit:
+  `notes/2026-08-20-c930-second-referee-pass.md`
 
 ## Phase 1 result
 
@@ -28,12 +30,16 @@
   preserved outside the new paper.
 - All three existing exact replays passed, and both corrected `amscd` diagrams
   compile together.  No manuscript source was edited.
+- A Milnor-style pass now gives the one-blowup mechanism before abstraction,
+  states Theorem A immediately after its provider record, and moves the
+  categorical quotient after the proof as its reformulation.  A compact
+  notation table separates Iritani's reconstruction, Novikov, and bundle
+  conventions from the paper's cubic notation.
+- The repaired memo passed the resumed independent referee with no remaining
+  blocker, major, or minor finding.
 
-**Next:** rerun the independent referee on the repaired marker-level theorem,
-occurrence-indexed center quotient, normalized cubic fork, exact ruled-surface
-boundary, and generalized chemical-formula routing.  If that passes, stop for
-the author's decision whether and how to enter phase 2 under this same C930
-item.  The repair remains strictly \(m=1\).
+**Next:** stop for the author's decision whether and how to enter phase 2 under
+this same C930 item.  The repair remains strictly \(m=1\).
 
 ## Goal
 

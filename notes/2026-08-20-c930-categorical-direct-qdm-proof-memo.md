@@ -10,10 +10,13 @@ extend any \(m=2\) or all-\(m\) provider.
 
 ## Verdict
 
-There is a short, honest paper spine.  Its central theorem is not a theorem
-about Gamma point rows and not the all-stabilizations theorem of the current
-48-page draft.  It is a center-localized compiler for block markers of quantum
-\(D\)-modules.  The compiler has two primary paper-facing instances:
+There is a short paper spine.  Choose an additive marker of the local blocks of
+a quantum \(D\)-module.  A blowup adds the marker values of its center blocks.
+If the marker vanishes on every center that can occur in weak factorization,
+the blowup formula telescopes and the marker is birationally invariant.
+
+Both cubic proofs follow this argument.  They differ only in what their marker
+remembers and in the comparison results used to prove the blowup formula:
 
 1. an unconditional **atomic direct-QDM marker** which proves
    \(X\times\mathbf P^1\) irrational for every smooth cubic threefold; and
@@ -21,12 +24,12 @@ about Gamma point rows and not the all-stabilizations theorem of the current
    conditional framed proof with Hypotheses 5.7R and 5.7T as explicit provider
    fields.
 
-The first proof uses Beauville's small quantum algebra, the internally derived
-rank-two connection and residue calculation, the Iritani and Iritani--Koto
-comparison theorems, weak factorization, and surface classification.  The
-cubic connection and residue calculation are derived directly from
-Beauville's small quantum algebra.  The generalized compiler also admits the
-chemical-formula construction as a sibling specialization.
+The first proof uses Beauville's small quantum algebra, an internal derivation
+of the rank-two connection and residue, the Iritani and Iritani--Koto
+comparison theorems, weak factorization, and surface classification.  The same
+cubic calculation supplies the exponents for the second proof.  The generalized
+construction also includes the chemical-formula invariant as a sibling
+specialization.
 
 This architecture should shorten the paper substantially.  The present
 `papers/cubic-stabilization-irrationality/` source has 3,634 TeX lines and its
@@ -38,6 +41,13 @@ layer above them.
 
 ## 1. The common theorem
 
+The model case is one blowup \(\operatorname{Bl}_Z Y\to Y\).  Its block
+decomposition is the block decomposition of \(Y\), together with finitely many
+specialized copies of the center theory.  Once a marker kills those copies, it
+has the same value on the two ends of the arrow.  The theorem below says only
+that this local equality may be repeated along weak factorization; all of the
+work lies in constructing the decomposition and proving center nullity.
+
 Let \(\mathsf{SPVar}_n\) denote smooth projective complex varieties of
 dimension at most \(n\), with the geometric operations needed below.  A
 **marked block theory with occurrence-indexed comparison providers** consists
@@ -45,16 +55,24 @@ of the following data.
 
 1. For every \(Y\), a finite split object
    \[
-     \mathcal B(Y)\in\operatorname{Sym}(\Pi),
+     \mathcal B(Y)\in\operatorname{Sym}^{\sqcup}(\Pi),
    \]
    where \(\Pi\) is a groupoid, thin groupoid, or indexed groupoid of local
-   blocks.
+   blocks and \(\operatorname{Sym}^{\sqcup}(\Pi)\) denotes its free symmetric
+   monoidal groupoid.
+   Put
+   \[
+     \mathcal L_{\mathcal T}
+       =\pi_0\operatorname{Sym}^{\sqcup}(\Pi_{\mathcal T}),
+   \]
+   the commutative monoid of isomorphism classes of finite split objects, and
+   write \(\mathcal B(Y)\) also for its class in \(\mathcal L_{\mathcal T}\).
 2. Lawful base change and coordinate reindexing.  If blocks depend on a probe,
    small point, original loop coordinate, or center specialization, those data
    remain indices; they are not erased in prose.
 3. A commutative monoid \((A,+,0)\) and a lawful marker fold
    \[
-     w:\operatorname{Sym}(\Pi)\longrightarrow A,
+     w:\mathcal L_{\mathcal T}\longrightarrow A,
      \qquad I_w(Y)=w(\mathcal B(Y)).
      \tag{C930.0}
    \]
@@ -67,70 +85,19 @@ of the following data.
 5. For every actual blowup arrow
    \(\beta:\operatorname{Bl}_Z Y\to Y\), where \(Z\) is smooth of
    codimension \(c\ge2\), retain its occurrence family
-   \(\omega_j=(\beta,Z,j,\chi_j)\) and supply a certified
+   \(\omega_j=(\beta,Z,j,\varsigma_j,\chi_j)\).  Here \(\varsigma_j\) is the
+   center bulk parameter and \(\chi_j\) is the numerical Novikov
+   specialization.  Supply a certified
    **marker-level** comparison
    \[
      I_w(\operatorname{Bl}_Z Y)
        =I_w(Y)+\sum_{j=0}^{c-2}c_w(\omega_j),
-     \qquad
-     c_w(\omega_j)=w(\mathcal B(Z;\chi_j)).
+     \qquad c_w(\omega_j)=w(\mathcal B(Z;\omega_j)).
      \tag{C930.2}
    \]
    The certificate need not lift to equality in
-   \(\operatorname{Sym}(\Pi)\).  A stronger block-level comparison may produce
+   \(\operatorname{Sym}^{\sqcup}(\Pi)\).  A stronger block-level comparison may produce
    it after applying \(w\), but marker-level equality is the common interface.
-
-For a marked theory \((\mathcal T,w)\), let \(K_w\) be the commutative-monoid
-congruence generated, for each provider certificate (C930.2), by the pair
-\[
- \mathcal B(\operatorname{Bl}_Z Y)
- \sim
- \mathcal B(Y)+\sum_{j=0}^{c-2}\mathcal B(Z;\chi_j).
- \tag{C930.2a}
-\]
-The certificate says exactly that \(w\) takes the same value on the two sides,
-so \(w\) descends through \(K_w\); equality before quotienting is not assumed.
-For dimension \(n\), let \(J_{w,n}\) be generated by
-\[
- x+\mathcal B(Z;\chi_\omega)\sim x
- \quad
- \text{for every actual occurrence \(\omega\) with \(\dim Z\le n-2\)}.
- \tag{C930.3}
-\]
-Set
-\[
- \mathcal Q_{\mathcal T,w,n}
- =\operatorname{Sym}(\Pi_{\mathcal T})/(K_w\vee J_{w,n}).
- \tag{C930.3a}
-\]
-The \(\chi_\omega\)-index is part of the relation.  No intrinsic unindexed
-center class is substituted for it.
-
-When the center-null certificates (C930.4) below hold, \(w\) also descends
-through \(J_{w,n}\).  The source-grade descent diagram is then
-\[
-\begin{CD}
-\mathsf{SPVar}_n^{\mathcal E}
-@>{\mathcal B_{\mathcal T}}>>
-\operatorname{Sym}(\Pi_{\mathcal T})
-@>{q_{w,n}}>>
-\mathcal Q_{\mathcal T,w,n}
-@>{\overline w}>> A\\
-@V{\mathrm{bir}}VV
-@V{q_{w,n}}VV
-@| @|\\
-\mathsf{Bir}_n^{\mathcal E}
-@>{\overline{\mathcal B}_{\mathcal T,w}}>>
-\mathcal Q_{\mathcal T,w,n}
-@=\mathcal Q_{\mathcal T,w,n}
-@>{\overline w}>> A.
-\end{CD}
-\tag{C930.I}
-\]
-Here \(\mathcal E\) is the proof-carrying environment of actual comparison
-occurrences.  In the atomic instance its certificates come from stronger
-block comparisons.  In the framed instance they are supplied directly after
-applying \(\nu_6\).
 
 ### Theorem A -- occurrence-indexed marker-ledger compiler
 
@@ -144,12 +111,127 @@ Assume the marker-level certificates (C930.2) and
 Then \(I_w\) is a birational invariant of smooth projective \(n\)-folds.  If
 \(I_w(Y)\ne I_w(\mathbf P^n)\), then \(Y\) is irrational.
 
-The proof is one paragraph.  A projective weak factorization has nontrivial
-smooth centers of dimension at most \(n-2\).  For each actual arrow and each
-of its indexed center occurrences, (C930.4) kills the correction in (C930.2).
-The value is unchanged in either orientation and telescopes along the chosen
-factorization.  Equivalently, \(q_{w,n}\mathcal B_{\mathcal T}\) factors
-through the bottom row of (C930.I).  ∎
+A projective weak factorization has nontrivial smooth centers of dimension at
+most \(n-2\).  For each arrow and each indexed center occurrence, (C930.4)
+kills the correction in (C930.2).  The value is unchanged in either
+orientation and therefore telescopes along the factorization.  ∎
+
+The quotient below records the same proof categorically.  It is useful because
+both cubic markers and the chemical formula factor through it.
+
+For a marked theory \((\mathcal T,w)\), let \(K_w\) be the congruence on
+\(\mathcal L_{\mathcal T}\) generated, for each provider certificate
+(C930.2), by the pair
+\[
+ \mathcal B(\operatorname{Bl}_Z Y)
+ \sim
+ \mathcal B(Y)+\sum_{j=0}^{c-2}\mathcal B(Z;\omega_j).
+ \tag{C930.2a}
+\]
+The certificate says exactly that \(w\) takes the same value on the two sides,
+so \(w\) descends through \(K_w\); equality before quotienting is not assumed.
+For dimension \(n\), let \(J_{w,n}\) be generated by
+\[
+ x+\mathcal B(Z;\omega)\sim x
+ \quad
+ \text{for every actual occurrence \(\omega\) with \(\dim Z\le n-2\)}.
+ \tag{C930.3}
+\]
+Set
+\[
+ \mathcal Q_{\mathcal T,w,n}
+ =\mathcal L_{\mathcal T}/(K_w\vee J_{w,n}).
+ \tag{C930.3a}
+\]
+The full occurrence \(\omega\), including \(\varsigma_\omega\) and
+\(\chi_\omega\), is part of the relation.  No intrinsic unindexed center
+class is substituted for it.
+
+The notation used in both specializations is summarized here.  The last column
+records the nearest source convention when there is one.
+
+| symbol | role | convention or translation |
+|---|---|---|
+| \(\Pi_{\mathcal T}\) | groupoid of local blocks retained by the theory | custom; \(\operatorname{Sym}^{\sqcup}\) is explicitly the free symmetric monoidal groupoid, not a symmetric algebra |
+| \(\mathcal L_{\mathcal T}\) | commutative monoid of isomorphism classes of finite split block objects | \(\pi_0\) prevents a category/monoid ambiguity |
+| \(\mathcal B(Y)\) | block ledger of \(Y\), viewed in \(\mathcal L_{\mathcal T}\) | custom notation, introduced only after the one-blowup model |
+| \(\omega_j=(\beta,Z,j,\varsigma_j,\chi_j)\) | one actual center occurrence in one blowup formula | the arrow and all source indices are retained, as weak-factorization readers expect |
+| \(\varsigma_j\) | center bulk parameter | Iritani's \(\varsigma_j(\widetilde\tau)\) |
+| \(\chi_j\) | numerical Novikov specialization of the \(j\)-th center summand | distinct from both \(\varsigma_j(\widetilde\tau)\) and the auxiliary divisor-character variables |
+| \(w\), \(I_w\) | marker fold and its value on a variety | custom; \(w\) is a monoid map, not a weight grading |
+| \(\mathcal Q_{\mathcal T,w,n}\) | ledger quotient imposing comparison and center-null relations | an effective monoid quotient, not a Grothendieck group |
+
+### 1.1 Conventions at the three interfaces
+
+The geometric notation follows birational geometry except where it would
+collide with the cubic.  Iritani writes
+\(\widetilde X=\operatorname{Bl}_Z X\) for a center of codimension \(r\).
+Here \(X\) is reserved for the cubic threefold, so a generic blowup is
+\(\operatorname{Bl}_Z Y\to Y\); its codimension is \(c\), while \(r\) remains
+available for the rank of a projective bundle.  This translation should be
+stated once where the blowup theorem is imported.
+
+For quantum-cohomology readers, retain Iritani's
+\(\operatorname{QDM}(Y)\), the connection variable \(z\), the bulk parameter
+\(\tau\), and the center maps \(\varsigma_j(\widetilde\tau)\) in the statement
+of the comparison theorem.  After 5.7R removes the reconstruction tail at
+marker level, the ledger correction is indexed by the separate numerical
+specialization \(\chi_j\).  Divisor-character tagging is a faithful-extension
+adapter used to prove center nullity; it is not part of \(\chi_j\).  The
+occurrence symbol \(\omega_j\) abbreviates the full provider input only after
+these data have been defined.
+
+Three Novikov variables otherwise compete for the letter \(q\).  Write
+\(q_{\mathrm{exc}}\) for Iritani's exceptional-line variable,
+\(q_{\mathrm{fib}}\) for Iritani--Koto's vertical fibre-line variable, and
+reserve \(q\) for the cubic small quantum relation.  At the blowup interface,
+retain \(Q,\widetilde Q,Q_Z\) for the ambient, blowup, and center Novikov
+variables.  Iritani--Koto's convention
+\(\mathbf P(V)\) for lines, with
+\(p=c_1(\mathcal O_{\mathbf P(V)}(1))\), should be stated when their theorem is
+used.
+
+For category-theory readers, the construction stops at the object level:
+\(\Pi_{\mathcal T}\) is a groupoid,
+\(\operatorname{Sym}^{\sqcup}(\Pi_{\mathcal T})\) is its free symmetric
+monoidal groupoid, and \(\mathcal L_{\mathcal T}\) is its monoid of connected
+components.  The birational quotient below is a quotient of an object set; no
+localization category, universal property, or functor on birational arrows is
+claimed.  These conventions make the diagram legible to all three audiences
+without enlarging the theorem.
+
+Let
+\[
+ \operatorname{BirOb}_n^{\mathcal E}
+ =\operatorname{Ob}(\mathsf{SPVar}_n^{\mathcal E})/\!\sim_{\mathrm{bir}}
+\]
+be the object set modulo birational equivalence; no localization category is
+asserted.  When the center-null certificates (C930.4) hold, \(w\) also
+descends through \(J_{w,n}\).  The descent diagram is then
+\[
+\begin{CD}
+\operatorname{Ob}(\mathsf{SPVar}_n^{\mathcal E})
+@>{\mathcal B_{\mathcal T}}>>
+\mathcal L_{\mathcal T}
+@>{q_{w,n}}>>
+\mathcal Q_{\mathcal T,w,n}
+@>{\overline w}>> A\\
+@V{\mathrm{quot}}VV
+@V{q_{w,n}}VV
+@| @|\\
+\operatorname{BirOb}_n^{\mathcal E}
+@>{\overline{\mathcal B}_{\mathcal T,w}}>>
+\mathcal Q_{\mathcal T,w,n}
+@=\mathcal Q_{\mathcal T,w,n}
+@>{\overline w}>> A.
+\end{CD}
+\tag{C930.I}
+\]
+Here \(\mathcal E\) is the proof-carrying environment of actual comparison
+occurrences.  In the atomic instance its certificates come from stronger
+block comparisons.  In the framed instance they are supplied directly after
+applying \(\nu_6\).  Diagram (C930.I) is the categorical form of the telescope
+in Theorem A.
 
 This is the severe skeleton.  Symmetric-monoidal categories, indexed probes,
 Beck--Chevalley, and the universal center quotient justify the three displayed
@@ -193,16 +275,19 @@ KKPYY Hodge atom.
 
 ### 2.2 Comparison providers
 
-Iritani--Koto's projective-bundle comparison gives (C930.1).  Iritani's blowup
-comparison gives (C930.2), after four repairs which must remain visible:
+Iritani--Koto's projective-bundle comparison gives (C930.1).  Its common
+faithful coefficient spine is
+\(\mathbf C[q_{\mathrm{fib}}][[Q,\widehat\tau]]\); the proof does not map one
+opposite outer completion into the other.  Iritani's blowup comparison gives
+(C930.2), with \(q_{\mathrm{exc}}\) and the source variables
+\(Q,\widetilde Q,Q_Z\) kept distinct.  Four adapters must remain visible:
 
-1. compare the intrinsic and asymptotic theories through the common faithful
-   ring \(\mathbf C[q][[Q,t]]\), not through a nonexistent map between the
-   opposite outer completions;
-2. restrict the invertible bulk Jacobian to the even slice and retain the
+1. restrict the invertible bulk Jacobian to the even slice and retain the
    independent unit coordinates which separate summand spectra;
-3. use only gauges regular and invertible at \(z=0\), so the modified residue
+2. use only gauges regular and invertible at \(z=0\), so the modified residue
    changes by conjugacy; and
+3. retain \(\varsigma_j(\widetilde\tau)\) until the reconstruction-tail
+   comparison has been applied; and
 4. repair the noninjective raw center Novikov map by numerical reduction and
    divisor-character tagging.
 
@@ -230,7 +315,7 @@ M_P=
 \chi_{2M_P}(T)=T^2(T^2-108q).
 \tag{C930.7}
 \]
-After adjoining \(r=(3q)^{1/2}\), the even spectral ranks are \(1,1,2\), and
+After adjoining \(\kappa=(3q)^{1/2}\), the even spectral ranks are \(1,1,2\), and
 the zero block has nonzero nilpotent leading term.  The internal normalized
 gauge calculation gives
 \[
@@ -327,14 +412,17 @@ Theorem A.
   which are neither minimal nor geometrically ruled, intrinsic zero passes to
   the tagged specialized value.
 
-The center-null assertion is indexed:
+Write \(\nu_6(Z;\omega)\) for the framed marker evaluated on the center theory
+at both source indices carried by \(\omega\).  The center-null assertion is
+indexed:
 \[
- \nu_6(Z;\chi)=0
- \quad(\dim Z\le2,\ \chi\text{ generated by the actual blowup arrow}).
+ \nu_6(Z;\omega)=0
+ \quad(\dim Z\le2,\ \omega\text{ generated by the actual blowup arrow}).
  \tag{C930.12}
 \]
-Discarding \(\chi\) would make the proof invalid because a noninjective center
-map can merge Novikov classes.
+Discarding \(\chi_\omega\) would make the proof invalid because a noninjective
+center map can merge Novikov classes; discarding \(\varsigma_\omega\) would
+erase the reconstruction point at which 5.7R is applied.
 
 With 5.7R, the blowup comparison has the form (C930.2).  Direct specialized
 computations handle points, curves, \(\mathbf P^2\), nef-canonical surfaces,
@@ -424,7 +512,7 @@ instance.
 | The framed theory is a generic-bulk marker | move the designated small point | False. Small point and original \(z\)-disc belong to the object's type. |
 | 5.7R proves arbitrary reconstruction invariance | quantify over every tail | False. Restrict it to generated residual tails. |
 | 5.7T is needed for every surface | apply it to minimal and ruled centers | False. Direct computations and 5.7R remove those cases; retain 5.7T only for the residual class. |
-| Intrinsic center zero implies specialized zero | forget the index \(\chi\) | False for noninjective specializations. State center nullity for every actual \(\chi\). |
+| Intrinsic center zero implies specialized zero | forget \(\varsigma\) or \(\chi\) | False: \(\varsigma\) records the reconstruction point, while a noninjective Novikov map can merge classes unless \(\chi\) is retained. State center nullity for every actual occurrence. |
 | The framed proof needs the conditional projective-bundle formula | use it for \(X\times\mathbf P^1\) | Avoid it. The external product formula is unconditional. |
 | A categorical diagram proves its analytic providers | hide comparison existence in a functor arrow | False. Label every provider as imported, proved, or conditional at the arrow where used. |
 | Group completion is harmless | send Boolean `or` to a group | False: its group completion is trivial. Keep the effective commutative monoid; Bittner is optional. |
@@ -493,8 +581,10 @@ Proposed structure:
 
 1. **Introduction and results** (2--3 pages): Theorems B, A, and C in that
    order; one mechanism paragraph; exact source/conditional boundary.
-2. **The marker compiler** (3--4 pages): blocks, lawful folds, indexed centers,
-   Theorem A, and the occurrence-indexed descent square (C930.I).
+2. **The marker compiler** (3--4 pages): the one-blowup model, one compact
+   notation table, lawful folds, indexed centers, Theorem A, and the
+   occurrence-indexed descent square (C930.I).  Source-notation translations
+   belong where the comparison theorems enter, not in a separate survey.
 3. **Quantum comparison ledgers** (4--5 pages): common coefficient spine,
    direct sums, projective bundles, blowups, and divisor tagging.
 4. **The cubic atomic marker** (5--6 pages): Beauville matrix, rank-two
@@ -569,8 +659,8 @@ research material cannot be lost.
 
 ## 10. Validation of the memo
 
-Three independent exact replays passed against the current C925/C924
-artifacts on 2026-08-20:
+Three independent exact replays and one source compilation passed against the
+current C925/C924 artifacts on 2026-08-20:
 
 1. the ninety-six-check categorical law model matched
    `c925-categorical-law-check.json` exactly;
@@ -580,6 +670,15 @@ artifacts on 2026-08-20:
    `c924-finite-cubic-check.json` exactly under SymPy 1.14.0.
 4. the occurrence-indexed descent square and normalized cubic fork compiled
    together under `amscd` with `pdflatex` from TeX Live 2025.
+
+The notation audit used Iritani's *Quantum cohomology of blowups*,
+arXiv:2307.13555v3 (cached SHA-256
+`c16f56b2...a934b`), and Iritani--Koto's *Quantum cohomology of projective
+bundles*, arXiv:2307.03696v4 (cached SHA-256 `5139f8e0...57624`).  It also
+checked the notation already used by the epilogue.  The audit separates
+Iritani's center bulk parameter \(\varsigma_j\) from the epilogue's numerical
+Novikov specialization \(\chi_j\), reserves \(X\) for the cubic, and makes the
+free symmetric-monoidal and object-quotient conventions explicit.
 
 These replays certify the finite algebra advertised by their artifacts.  They
 do not certify the imported QDM comparison theorems or the conditional 5.7R
@@ -613,7 +712,7 @@ to enter manuscript editing:
 
 ## 12. `ej` + `tt` closeout and mystery ledger
 
-The closeout produces three cheap upgrades.
+The closeout produces five cheap upgrades.
 
 1. The atomic direct-QDM and framed-sixth arguments share not only the final
    weak-factorization paragraph but also the coefficient, comparison, and
@@ -626,6 +725,12 @@ The closeout produces three cheap upgrades.
 3. Removing the Gamma point row from the \(m=1\) proof also removes the Barnes
    point coefficient, sectorial lift, wall-overlap, and one-chart burdens.
    These are one architectural deletion, not several local editorial cuts.
+4. Theorem A can be stated and proved immediately after the provider record;
+   the categorical quotient then explains the proof instead of delaying it.
+5. The notation audit separates the reconstruction parameter \(\varsigma_j\),
+   the numerical specialization \(\chi_j\), and the auxiliary character
+   variables.  It also gives distinct names to the three Novikov variables
+   otherwise called \(q\).  These distinctions remove genuine typing traps.
 
 ### Mystery ledger
 
@@ -633,6 +738,7 @@ The closeout produces three cheap upgrades.
 |---|---|---|
 | Does the one cubic calculation feed both markers? | Settled | Beauville's matrix plus the normalized-gauge and indicial recursion gives both \(\delta^\sharp\) and \(\zeta_6^{\pm1}\). |
 | Will the categorical layer look decorative? | Settled at the design level | Keep only the indexed block groupoid, free symmetric monoid, provider record, and center quotient; every retained abstraction is used by both specializations, and the telescope is described as elementary. |
+| Can source notation be compressed into one center index? | Settled negatively | The occurrence retains both \(\varsigma_j\) and \(\chi_j\); auxiliary divisor-character variables remain a proof adapter rather than a ledger index. |
 | Does the common spine remove 5.7R or 5.7T? | No | The compiler locates them but does not prove them. They remain the exact provider fields of Theorem C. |
 | Does C930 take on higher stabilization? | No | Its mathematical and manuscript scope ends at \(m=1\); higher-stabilization material is only preserved outside the proposed paper. |
 | Should the current all-\(m\) draft be refounded in place or preserved as a separate research manuscript? | Open by instruction | Author decision before C930 phase 2. |

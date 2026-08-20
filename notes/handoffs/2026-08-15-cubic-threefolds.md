@@ -46,17 +46,19 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   edit has yet been made.  Card:
   `../cubic-threefolds-tasks/c931-c928-referee-dossier.md`; dossier:
   `../2026-08-20-c931-c928-referee-dossier.md`.
-- **C930 — referee repair applied; second review pending.** The common theorem
-  now consumes occurrence-indexed marker-level comparison certificates rather
-  than demanding block equality, so both atomic and framed providers inhabit
-  it at their exact strength.  The ruled-surface boundary and generalized
-  chemical-formula routing are corrected.  The source-grade diagram set is
-  exactly one occurrence-indexed descent square and one normalized cubic fork;
-  both compile under `amscd`.  Rerun the independent referee before any
-  manuscript decision.  C930 remains strictly `m=1`, and no manuscript was
-  edited.  Memo:
-  `../2026-08-20-c930-categorical-direct-qdm-proof-memo.md`; referee report:
-  `../2026-08-20-c930-independent-referee-report.md`. Card:
+- **C930 — repaired memo passes resumed referee; fresh blind review running.**
+  The atomic and framed arguments now inhabit one occurrence-indexed marker-
+  level theorem at their exact strength.  A Milnor-style pass states the
+  one-blowup mechanism and theorem before the categorical quotient; a compact
+  notation guide separates Iritani's reconstruction and Novikov variables from
+  the cubic notation.  The ruled-surface boundary and generalized chemical-
+  formula routing are exact, and both `amscd` diagrams compile.  The resumed
+  referee reports no remaining finding; a fresh referee has been asked for one
+  final blind round before the author's manuscript decision.  C930 remains
+  strictly `m=1`, and no manuscript was edited.  Memo:
+  `../2026-08-20-c930-categorical-direct-qdm-proof-memo.md`; reports:
+  `../2026-08-20-c930-independent-referee-report.md` and
+  `../2026-08-20-c930-second-referee-pass.md`. Card:
   `../cubic-threefolds-tasks/c930-categorical-direct-qdm-paper-preparation.md`.
 - **C925 — modular direct-QDM proof packet, active.** Write a self-contained
   alternative packet organized like a parameterized software interface: a
@@ -215,13 +217,16 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   class.
   Equivariantly it has the universal factor \(1-q^{-1}\), and its normalized
   first normal jet is the identity on a new rank/point jet shadow; the raw
-  special fibre remains zero.  The sharpened target is an occurrence-level
-  equivariant adapter with raw valuation one, residual valuation zero, and a
-  typed identification of the jet transition.
+  special fibre remains zero.  Module 43 proves that common-open completed
+  window comparisons contribute no further defect: all five signatures,
+  including the determinant-two flip--flip pilot, have residual valuation
+  zero and the same unit normalized jet.  The sharpened target is solely an
+  occurrence-level fixed-phase QDM/Gamma adapter identifying that algebraic
+  jet with the actual endpoint transition.
   Shifted tensor stability and the extremal multinomial source law are
   proved, but the occurrence-indexed exact QDM sequence, actual carrier
   exponent, and boundary vanishing remain open.  The packet is split into
-  bounded module companions behind a stable index.  The ninety-seven-check
+  bounded module companions behind a stable index.  The one-hundred-check
   finite law replay, eleven-check typed Haskell toy, and original cubic
   replay are green.  C925 remains open at fixed-phase Gamma/rank transport
   or at this ExactTop provider; the relative-cap cancellation remains one
