@@ -2,7 +2,7 @@
 
 **Lane:** cubic-threefolds
 
-**Status:** active; phase 2 manuscript refounding authorized; 48-page baseline frozen; fresh blind referee round running
+**Status:** active; target corrected to the epilogue; full-paper read and phase-1 memo repair in progress before manuscript edits
 
 ## Stable entry point
 
@@ -12,8 +12,6 @@
   `notes/2026-08-20-c930-independent-referee-report.md`
 - second independent referee pass after repair and exposition audit:
   `notes/2026-08-20-c930-second-referee-pass.md`
-- pre-refounding source/PDF baseline:
-  `notes/2026-08-20-c930-manuscript-baseline.md`
 
 ## Phase 1 result
 
@@ -25,11 +23,10 @@
   and surface classification, deriving the cubic packet internally.
 - Its finer framed-sixth specialization uses the same compiler and retains
   5.7R and the residual part of 5.7T as explicit provider fields.
-- The chemical-formula proof is an exact sibling specialization of the same
-  compiler, with its carrier kept distinct from the direct-QDM marker.
-- The current 48-page draft should be refounded rather than layered: target
-  24--28 pages, with the global all-`m` transport and one-chart branches
-  preserved outside the new paper.
+- The chemical-formula construction is only a candidate sibling pending a
+  theorem-level source map; it is not on the manuscript's theorem path.
+- The prior page estimate and migration ledger targeted the wrong manuscript
+  and are withdrawn pending a complete read of the epilogue.
 - All three existing exact replays passed, and both corrected `amscd` diagrams
   compile together.  No manuscript source was edited.
 - A Milnor-style pass now gives the one-blowup mechanism before abstraction,
@@ -37,18 +34,19 @@
   categorical quotient after the proof as its reformulation.  A compact
   notation table separates Iritani's reconstruction, Novikov, and bundle
   conventions from the paper's cubic notation.
-- The repaired memo passed the resumed independent referee with no remaining
-  blocker, major, or minor finding.
+- The repaired memo passed the resumed and fresh blind referees after bounded
+  local corrections, but its manuscript overlay must be redone against the
+  epilogue before it governs edits.
 
-**Next:** refound the authoritative manuscript around the approved theorem
-order and strictly \(m=1\) proof spine, preserving the disconnected all-\(m\)
-sources until their durable destination is decided.  Run the fresh blind
-referee result against the implementation as soon as it lands.
+**Next:** read the complete epilogue, freeze its actual source/PDF baseline,
+and rewrite the memo's theorem inventory, migration ledger, deletion ledger,
+and page estimate against that paper.  Only then begin authorized manuscript
+edits.
 
 ## Goal
 
 Write a proof memo on top of the current
-`papers/cubic-stabilization-irrationality/` manuscript that turns C925's
+`papers/cubic-stabilization-epilogue/` manuscript that turns C925's
 modular categorical direct-QDM packet into one candidate paper proof.  Use the
 memo to determine how the manuscript's proof and narrative should eventually
 be adapted around the smallest honest categorical transport theorem, with the
@@ -60,15 +58,16 @@ proofs joined only at the conclusion.
 ## Scope
 
 This item owns the bridge from C925's mathematics-only module library to a
-coherent overlay proof memo and manuscript plan.  The current manuscript is
-the fixed comparison surface during this phase, with the atom and framed routes
-in `papers/cubic-stabilization-epilogue/` supplying the two required
-specialization tests.  The item does not silently close any open geometric
-provider in C925 or weaken a hypothesis.  During phase 1 it does not edit
-either manuscript.  After the memo and adversarial audit are delivered, the
-author decides whether and when this same C930 item changes phase and owns the
-resulting categorical-paper manuscript edits; no successor task is required
-for implementation.
+coherent overlay proof memo and manuscript plan for
+`papers/cubic-stabilization-epilogue/`.  Its atomic and framed routes are the
+two required specialization tests.  The item does not silently close any open
+geometric provider in C925 or weaken a hypothesis.  Phase 2 manuscript edits
+are authorized only in that epilogue authority.
+
+The Gamma-row manuscript at `papers/cubic-stabilization-irrationality/` is
+explicitly outside C930.  C930 must not edit it, use it as the page baseline,
+or migrate its all-stabilization proof branches.  Any future work there needs
+its own owning instruction.
 
 C930 is strictly an \(m=1\) task.  It may identify current \(m=2\) or all-
 \(m\) material for preservation outside the proposed paper, but it does not
@@ -77,7 +76,7 @@ investigate, repair, or extend any higher-stabilization provider.
 ## Deliverables
 
 1. Audit the present theorem, section, and dependency spine of
-   `papers/cubic-stabilization-irrationality/` against C925's stable modules.
+   `papers/cubic-stabilization-epilogue/` against C925's stable modules.
 2. State the memo's candidate headline theorem at the smallest categorical
    level of generality actually supported: the reusable marked-row/point-line
    transport theorem first, followed by the cubic endpoint application.
@@ -147,8 +146,6 @@ investigate, repair, or extend any higher-stabilization provider.
 
 - `notes/cubic-threefolds-tasks/c925-modular-direct-qdm-proof-packet.md`
 - `notes/2026-08-19-c925-modular-direct-qdm-proof-packet.md`
-- `papers/cubic-stabilization-irrationality/cubic_stabilization_irrationality.tex`
-- `papers/cubic-stabilization-irrationality/sections/`
 - `papers/cubic-stabilization-epilogue/cubic_stabilization_epilogue.tex`
 - the atom and conditional framed-route sections under
   `papers/cubic-stabilization-epilogue/sections/`

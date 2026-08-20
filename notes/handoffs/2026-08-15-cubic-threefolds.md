@@ -46,16 +46,15 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   edit has yet been made.  Card:
   `../cubic-threefolds-tasks/c931-c928-referee-dossier.md`; dossier:
   `../2026-08-20-c931-c928-referee-dossier.md`.
-- **C930 — repaired memo passes resumed referee; fresh blind review running.**
-  The atomic and framed arguments now inhabit one occurrence-indexed marker-
-  level theorem at their exact strength.  A Milnor-style pass states the
-  one-blowup mechanism and theorem before the categorical quotient; a compact
-  notation guide separates Iritani's reconstruction and Novikov variables from
-  the cubic notation.  The ruled-surface boundary and generalized chemical-
-  formula routing are exact, and both `amscd` diagrams compile.  The resumed
-  referee reports no remaining finding; a fresh referee has been asked for one
-  final blind round before the author's manuscript decision.  C930 remains
-  strictly `m=1`, and no manuscript was edited.  Memo:
+- **C930 — target corrected to the epilogue; full read and memo repair active.**
+  C930 owns only `papers/cubic-stabilization-epilogue/`, strictly at `m=1`.
+  Its common occurrence-indexed marker theorem and both specializations pass
+  resumed and fresh blind review, but the memo's migration and page analysis
+  mistakenly used the separate Gamma-row manuscript as its comparison surface.
+  That analysis is withdrawn.  Read the complete epilogue, freeze its actual
+  baseline, and rebuild the overlay before using the author's phase-2 editing
+  authorization.  The Gamma-row manuscript is explicitly out of C930 scope and
+  was not edited.  Memo:
   `../2026-08-20-c930-categorical-direct-qdm-proof-memo.md`; reports:
   `../2026-08-20-c930-independent-referee-report.md` and
   `../2026-08-20-c930-second-referee-pass.md`. Card:
