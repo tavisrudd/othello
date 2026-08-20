@@ -133,15 +133,14 @@ span/incidence dictionary, `c_4` of either the span model or the `ℰ`-model —
 is excluded: `λ_𝒢 = λ_ℰ = 0`. Byproduct: codimension-four sheaf defects can
 never affect a mod-two `c_4` readout. The `(2,4)` channel is untouched.
 
-**Two live debts on prior C908 work.** (1) The pass-5 twist lemma's rank-three
-branch is false on the corrected lattice (an explicit witness refutes it); the
-item-F argument doesn't need that branch, but the lemma's other use — the
-relative Ext object `E` on `M×M`, at ranks other than three — is not repaired
-and still rests on the refuted step, weakening (not voiding — Theorem C covers
-pencil-defined classes) the `{0,I}` pinning there. (2) The λ-reduction note's
-claim that the span-model sheaf doesn't descend along the degree-six map `q`
-is false; correcting it strengthens the verdict chain, but the wrong statement
-still stands in the report text.
+**Two prior audit debts are closed.** (1) C928 retracts the unsupported
+relative-Ext twist-invariance claim and narrows Theorem E to classes whose
+normalization independence is proved separately; the valid rank-three
+universal-family branch remains covered by the direct Chern calculation.
+(2) The lambda-reduction note now correctly proves that the span-model sheaf
+descends along the degree-six map `q`; the earlier non-descent reasoning is
+recorded there as superseded. Neither correction supplies a new priority-A
+channel.
 
 **Against this card's acceptance criteria:** priority A remains undecided (no
 odd horizontal multisection constructed; the accumulated negatives exclude

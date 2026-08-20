@@ -14,6 +14,8 @@
   `notes/2026-08-20-c928-dependency-audit.md`
 - integral and rational intersection-cohomology corollaries:
   `notes/2026-08-20-c928-intersection-cohomology.md`
+- inherited debt closure and quarantine:
+  `notes/2026-08-20-c928-inherited-debt-closure.md`
 
 ## Goal
 
@@ -110,6 +112,5 @@ authoritative monorepo paper passes its acceptance gates.
 
 ## Next
 
-Close or quarantine the inherited relative-Ext twist branch, correct the
-lambda-note non-descent sentence, and begin the primary-source audit before
-manuscript assembly.
+Complete the primary-source and novelty audit, then assemble the manuscript
+from the structural theorem spine.

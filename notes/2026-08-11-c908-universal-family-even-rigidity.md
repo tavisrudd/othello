@@ -7,6 +7,15 @@ classical loci); the reposed construction target is reduced to a single bit
 `λ ∈ {0,1}` with an explicit computation plan.** C908 mathematics only; no
 manuscript, PDF, mirror, Lean, or C904-surface edit.
 
+**Correction of record (C928, 2026-08-20).** The rank-three twist conclusion
+for the universal family is repaired by the direct Chern calculation in
+`notes/2026-08-12-c908-e-model-mutation-comparison.md`, but the analogous
+claim for the relative Ext object on `M × M` was never proved: its
+degree-three odd leg can lie in the corrected half-integral enlargement of
+`H^3(M,Z)`.  The relative-Ext examples and the blanket Ext clause of Theorem
+E below are therefore retracted.  The rigidity argument remains valid for
+classes whose twist-independent residue has been established separately.
+
 Notation as in the pass-2 note (`m-cross-m-exceptional-residue`) and pass-4
 note (`unmarked-closure-and-w-twist`): `X` a smooth cubic threefold,
 `J = J(X)`, `Θ ⊂ J` the canonical theta divisor with unique singular point at
@@ -116,11 +125,12 @@ lower `c_j` have no `(3,5)` component for degree reasons.
 
 ### 3.2 Twist lemma
 
-*Statement.* The class of the `(3,5)`-leg of `c_4(ℰ)` in `Q_15` (hence
-`N mod 2`) is unchanged under `ℰ ↦ ℰ ⊗ p_M^*N`. Likewise for the `(1,5)`-leg
-residue of any polynomial in Chern classes of the relative Ext object
-`E = RHom_{π_{12}}(π_{13}^*ℰ, π_{23}^*ℰ)[1]` on `M × M` under its induced
-ambiguity `E ↦ pr_1^*N^∨ ⊗ pr_2^*N ⊗ E`.
+*Corrected statement.* The class of the `(3,5)`-leg of `c_4(ℰ)` in `Q_15`
+(hence `N mod 2`) is unchanged under `ℰ ↦ ℰ ⊗ p_M^*N`; the valid proof is
+the rank-three formula in the later mutation-comparison note.  No analogous
+twist-invariance claim is made here for the relative Ext object
+`E = RHom_{π_{12}}(π_{13}^*ℰ, π_{23}^*ℰ)[1]` on `M × M` under
+`E ↦ pr_1^*N^∨ ⊗ pr_2^*N ⊗ E`.
 
 *Proof.* `c_4(ℰ⊗p_M^*N) − c_4(ℰ)` is a `Z`-polynomial in `c_j(ℰ)` and
 `n := c_1(N)` in which every term carries `n^k`, `k ≥ 1`. A `(3,5)`-term is
@@ -131,8 +141,10 @@ correction leg is a product of `b^*(odd)` with classes `b^*t` and `[X]`.
 Then `b_*` of the correction is either `Θ∧(…) ∈ L∧^5Λ` (no `[X]` factor) or
 zero: `b_*(b^*α·[X]^k) = α·b_*[X]^k`, and `b_*[X]^k = (b∘e_X)_*((-H)^{k-1})`
 vanishes because `b∘e_X` is constant and the classes pushed live below
-`H^6(X)`. Both kinds die in the readout. The `E`-statement is identical on
-the second leg, and first-leg corrections cannot stay in degree one. ∎
+`H^6(X)`. Both kinds die in the readout only when the odd leg lies in the
+ambient Lefschetz image.  That premise fails for the corrected degree-three
+lattice.  The later rank-three Chern calculation proves the universal-family
+conclusion without this premise; it supplies no relative-Ext conclusion. ∎
 
 This is the pass-2 Theorem 3 mechanism again: the readout is blind to the
 exceptional divisor and to `L∧^5Λ`, and every normalization ambiguity lands
@@ -146,10 +158,9 @@ Two canonical productions, both integral and both twist-robust by §3.2:
   of a `c_2(ℰ)`-combination, carrying the `(1,3)`-coupling) and
   `B = c_4(ℰ) ∈ CH^4(X × M)`, the composite `B ∘ A ∈ CH^{2+4-3}(M×M) =
   CH^3(M×M)` has `(1,5)` component the `X`-contraction of the two odd legs.
-- **Ext convolution**: `c_3(E) ∈ CH^3(M × M)` and the products
-  `c_1(E)c_2(E)`, `c_1(E)^3`. Since `ch` components have even total degree,
-  `ch(E)_{(1,5)}` receives only `H^3(X)`-contractions of
-  `ch(ℰ)^∨_{(3,1)} ⊗ ch(ℰ)_{(3,5)}`-type terms.
+- **Retracted Ext branch**: the proposed classes `c_3(E)`,
+  `c_1(E)c_2(E)`, and `c_1(E)^3` do not enter the theorem without a new
+  normalization-independent calculation for the two-sided twist.
 
 In either shape, the resulting `(1,5)` residue is an integer matrix built
 from `N` and the integral `(3,1)`-coupling; §4 constrains them all at once,
@@ -163,8 +174,9 @@ Let `U ⊂ P(H^0(P^4, O(3)))` be the parameter space of smooth cubic forms,
 `𝒳 → U` the universal smooth cubic threefold. Call a cohomology class
 `W_t ∈ H^{2c}((M×M)_t, Z)` (or on `(X×M)_t`) **deformation-canonical** if it
 is defined for every `t ∈ U` by a construction commuting with base change on
-germs, up to the twist ambiguity of §3.2. Examples: all `c_j(ℰ_t)`,
-`c_j(E_t)`, their `Z`-polynomials and convolutions. The data needed to make
+germs, up to the twist ambiguity of §3.2. Examples include those
+`c_j(ℰ_t)` and their convolutions whose residue is covered by the corrected
+rank-three calculation. Relative-Ext Chern classes are excluded. The data needed to make
 sense of this over `U`:
 
 - The family `ℳ → U`: the relative Gieseker moduli space of semistable
@@ -249,11 +261,12 @@ develop) even the `{0, I}` pinning; the full-monodromy proof needs neither.
 
 ### 4.3 Theorem E — evenness of the universal source
 
-> **Theorem E.** Every deformation-canonical codimension-three class on
-> `M × M` — in particular every integral polynomial in Chern classes of the
-> universal family `ℰ` and of its relative Ext convolution `E`, and every
-> convolution of such classes through `X` — has **even** `(1,5)` contribution
-> to the unordered degree.
+> **Theorem E (corrected scope).** Every deformation-canonical
+> codimension-three class on `M × M` whose `(1,5)` residue is independently
+> invariant under the universal-family normalization twist has **even**
+> `(1,5)` contribution to the unordered degree. This includes the rank-three
+> universal-family classes covered by the later direct Chern calculation; it
+> does not include the relative Ext convolution without a further proof.
 
 *Proof.* By rigidity `φ(W) ∈ {0, I_10}`; `tr_{F_2}(I_10) = 10 ≡ 0`. Under
 the pass-3 ruling the `(1,5)` degree contribution is `tr_{F_2}(φ(W))`. ∎

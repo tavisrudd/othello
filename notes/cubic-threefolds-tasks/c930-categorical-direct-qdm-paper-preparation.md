@@ -2,7 +2,7 @@
 
 **Lane:** cubic-threefolds
 
-**Status:** queued; proof memo and adversarial paper-readiness audit
+**Status:** queued; phase 1 proof memo and adversarial audit, then phase 2 manuscript adaptation
 
 ## Goal
 
@@ -19,7 +19,9 @@ This item owns the bridge from C925's mathematics-only module library to a
 coherent overlay proof memo and manuscript plan.  The current manuscript is
 the fixed comparison surface during this phase.  The item does not silently
 close any open geometric provider in C925, weaken a hypothesis, or edit the
-manuscript before the memo has survived the adversarial audit.
+manuscript before the memo has survived the adversarial audit.  Once that gate
+passes, this same C930 item changes phase and owns the resulting manuscript
+edits; no successor task is required for implementation.
 
 ## Deliverables
 
@@ -51,9 +53,10 @@ manuscript before the memo has survived the adversarial audit.
    the narrative-order audit must test whether a reader can see the mechanism,
    conditional boundary, and cubic payoff without reading optional machinery.
 9. Record notation, audience, source, verification, and figure/table needs.
-10. End with a bounded implementation plan for a later manuscript pass,
-   including
-   build, cold-read, literature, and standalone-mirror gates where applicable.
+10. End phase 1 with a bounded implementation plan.  After the memo and both
+   audits pass, carry out that plan under C930: adapt the manuscript, then run
+   the scoped build, proof-consistency, cold-read, literature, and
+   standalone-mirror gates where applicable.
 
 ## Acceptance gate
 
@@ -66,8 +69,10 @@ manuscript before the memo has survived the adversarial audit.
   abstraction and keeps the cubic theorem visible in the opening pages.
 - A red-team ledger records every challenged arrow, the attempted break, the
   result, and the exact remaining evidence gap or repaired statement.
-- No manuscript edit is authorized merely by completing this memo; a later
-  implementation pass begins only after its proof and narrative audits pass.
+- No manuscript edit begins before the proof and narrative audits pass.  Their
+  passage transitions C930 directly into its manuscript-editing phase, whose
+  completion requires the implemented source and all applicable validation
+  gates—not merely the memo.
 
 ## Starting points
 
