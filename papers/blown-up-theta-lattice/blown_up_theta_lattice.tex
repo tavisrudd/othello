@@ -26,14 +26,14 @@
 \newcommand{\cO}{\mathcal O}
 \newcommand{\IC}{\operatorname{IC}}
 
-\title{The Integral Middle Cohomology of the Theta Divisor\\
-  of a Cubic Threefold}
+\title{Integral Cohomology and Modular Decomposition\\
+  for the Theta Divisor of a Cubic Threefold}
 \author{Tavis Rudd\thanks{\texttt{tavisrudd@damnsimple.com}}}
 \date{August 2026}
 \hypersetup{
-  pdftitle={The Integral Middle Cohomology of the Theta Divisor of a Cubic Threefold},
+  pdftitle={Integral Cohomology and Modular Decomposition for the Theta Divisor of a Cubic Threefold},
   pdfauthor={Tavis Rudd},
-  pdfsubject={Integral cohomology and intersection cohomology of the cubic-threefold theta divisor},
+  pdfsubject={Integral cohomology and modular decomposition for the cubic-threefold theta divisor},
   pdfkeywords={cubic threefold, intermediate Jacobian, theta divisor,
     intersection cohomology, symplectic lattice, Fano surface}
 }
@@ -45,23 +45,23 @@
 Let \(\Theta\) be the theta divisor of the intermediate Jacobian of a
 smooth complex cubic threefold \(X\), and let
 \(M=\operatorname{Bl}_0\Theta\).  We compute the integral middle lattice of
-\(M\), equivalently the degree-three intersection cohomology of \(\Theta\).
-It is free of rank \(130\) and fits into an abstractly split exact sequence
-with terms \(\bigwedge^3H^1(J,\Z)\) and \(H^3(X,\Z)\).  Its simultaneous
-restriction to \(X\) and Gysin image in \(J\) has nontrivial mod-two glue.
-If \(L(\alpha)=\theta\wedge\alpha\), then
+\(M\), equivalently \(IH^3(\Theta,\Z)\).  It is free of rank \(130\), and
+its simultaneous restriction to \(X\) and Gysin image in \(J\) has
+nontrivial mod-two glue.  If \(L(\alpha)=\theta\wedge\alpha\), then
 \[
  b_*H^3(M,\Z)=
  \Sat\bigl(L\textstyle\bigwedge^3H^1(J,\Z)\bigr)
  =L\textstyle\bigwedge^3H^1(J,\Z)
   +\theta^{[2]}\wedge H^1(J,\Z),
 \]
-and the saturation quotient is \((\Z/2)^{10}\).  The proof reduces the
-integral Lefschetz defect to the unsigned vertex--edge incidence matrix of a
-complete graph.  The degree-six difference map of the Fano surface then
-identifies the geometric glue through a Pontryagin-product formula.  By
-duality, the degree-five quotient not pulled back from \(J\) is free of rank
-ten, while exceptional Gysin classes form its doubled sublattice.
+and the saturation quotient is \((\Z/2)^{10}\).  The Fano difference map
+identifies the geometric glue and its dual escape lattice.  We also
+determine the integral direct image of the resolution.  Two outer point
+objects split over \(\Z\), while the central perverse factor has
+costalk-to-stalk map \(\Z\xrightarrow{3}\Z\).  Thus the rational central
+point summand does not split integrally, and in characteristic three it is
+replaced by an indecomposable nonsemisimple perverse sheaf.  This gives one
+resolution with distinct global mod-two and local mod-three defects.
 \end{abstract}
 
 \noindent\textbf{Keywords.} Cubic threefold; intermediate Jacobian; theta
@@ -73,6 +73,7 @@ divisor; intersection cohomology; symplectic lattice; Fano surface.
 \input{sections/04-glue}
 \input{sections/05-duality}
 \input{sections/06-intersection}
+\input{sections/07-integral-decomposition}
 
 \section*{AI assistance disclosure}
 

@@ -14,13 +14,24 @@ The paper's priority verdict is `PARTIAL OVERLAP / SURVIVING INTEGRAL RESULT`.
   abstract `Lambda/2Lambda` saturation defect.  The manuscript retains its
   direct complete-graph blocks and divided-power representatives because the
   Fano endpoint realizes those representatives geometrically.
+- Juteau--Mautner--Williamson (2014), Proposition 3.2 and Corollary 3.5,
+  identify point-summand multiplicities and costalk-to-stalk maps with fibre
+  intersection forms over a field.  Their framework predicts a modular rank
+  drop when a form degenerates.  It does not state the present cubic-theta
+  matrices, the integral two-summand splitting, the characteristic-three
+  attachment, or the degree-four Fano lift.
 
 The surviving paper claim is the geometric realization of the integral
 rank-130 lattice `IH^3(Theta,Z)`: its canonical mod-two fibre-product glue,
 its Fano-labelled saturated image in the intermediate Jacobian, and its dual
-free rank-ten escape lattice.  No checked source states those simultaneous
-integral data.
+free rank-ten escape lattice.  It now also includes the integral resolution
+complex with central Smith factor three, its indecomposable
+characteristic-three reduction, and the Fano realization of the local
+order-three boundary.  No checked source states these simultaneous integral
+and modular data for the cubic-threefold theta divisor.
 
 The full audit, including read depths, cache keys, hashes, gaps, and the
 bounded novelty extraction, is
 [`notes/2026-08-20-c928-priority-audit.md`](../../notes/2026-08-20-c928-priority-audit.md).
+The modular delta audit is recorded in
+[`notes/2026-08-20-c934-integral-decomposition-complex.md`](../../notes/2026-08-20-c934-integral-decomposition-complex.md).

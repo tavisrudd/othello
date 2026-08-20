@@ -100,6 +100,36 @@ Under these identifications, Theorem~\ref{thm:main-lattice} computes the
 integral lattice \(IH^3(\Theta,\Z)\).
 \end{corollary}
 
+The same resolution has a different integral defect in even degree.  Put
+\(\mathcal K=R\sigma_*\Z_M[4]\), and let \(\Z_0\) denote the skyscraper
+sheaf at the singular point.
+
+\begin{theorem}[Integral and modular decomposition]\label{thm:integral-decomposition}
+There is a decomposition
+\[
+ \mathcal K\cong\Z_0[2]\oplus\mathcal P\oplus\Z_0[-2],
+\]
+where \(\mathcal P\) is perverse, restricts to \(\Z_U[4]\), and has central
+costalk-to-stalk map
+\[
+ \Z\xrightarrow{\,-3\,}\Z.
+\]
+After inverting three, \(\mathcal P\) splits as
+\(\IC_\Theta\oplus\Z_0\), recovering Kr\"amer's three rational point
+summands.  It has no integral point summand.  Over \(\F_3\), its derived
+reduction is an indecomposable nonsemisimple perverse sheaf.
+\end{theorem}
+
+The order-three link class is not global torsion: a degree-four class from
+the Fano difference map restricts to it.  Consequently
+\[
+ 0\longrightarrow H^4(\Theta,\Z)\longrightarrow H^4(U,\Z)
+ \longrightarrow\Z/3\longrightarrow0,
+\]
+and the natural map \(H^k(\Theta,\Z)\to IH^k(\Theta,\Z)\) is an isomorphism
+for \(k\geq4\).  Section~\ref{sec:integral-decomposition} proves these
+statements.
+
 The proof has three parts.  First, the link of the triple point is the circle
 bundle of \(\cO_X(-1)\); its Gysin sequence and Mayer--Vietoris give
 \eqref{eq:main-exact}.  Second, a symplectic-basis decomposition turns

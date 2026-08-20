@@ -242,8 +242,12 @@ identify point-summand multiplicities and the costalk-to-stalk map with the
 fibre intersection forms over a field; this exactly corroborates the
 characteristic-three rank drop, but does not print this cubic-theta example
 or an integral splitting.  MacPherson--Vilonen's zig-zag formalism is used as
-language for (2), not as an unverified equivalence over `Z`.  No novelty claim
-is licensed until the remaining C934 priority pass is complete.
+language for (2), not as an unverified equivalence over `Z`.  Cipriani's 2026
+classification of small extensions supplies a modern general
+field-coefficient framework for the indecomposability statement, but has no
+cubic or theta example.  The bounded C934 priority pass found no
+example-specific pre-emption; its full record is
+`notes/2026-08-20-c934-priority-audit.md`.
 
 ## Source depth
 
@@ -262,6 +266,10 @@ is licensed until the remaining C934 priority pass is complete.
   for normal *surface* singularities and does not contain the present
   fourfold resolution calculation; cache SHA-256
   `d8b93ed5ee08256307cbb3d1ab2cb132a79cf46827cb58ac44e20798840167fe`.
+- Cipriani, arXiv:2607.09379, full 15-page text; its general classification
+  of indecomposable extensions over a closed stratum does not contain the
+  present geometric calculation; cache SHA-256
+  `2d8774913c1b33c0c255e6aa67309ddffcccd1e5869f8c28da76eead524d4a77`.
 
 ## Mystery ledger
 

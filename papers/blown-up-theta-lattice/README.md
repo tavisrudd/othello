@@ -1,11 +1,14 @@
-# The integral middle cohomology of the theta divisor of a cubic threefold
+# Integral cohomology and modular decomposition for the theta divisor of a cubic threefold
 
 This paper computes the integral lattice
 `IH^3(Theta,Z) = H^3(Bl_0 Theta,Z)` for the theta divisor of the intermediate
 Jacobian of a smooth cubic threefold.  The rank-130 group has a canonical
 mod-two glue between the ambient exterior algebra and the middle cohomology
 of the exceptional cubic.  The paper also computes the dual free rank-ten
-escape lattice.
+escape lattice and the integral direct image of the resolution.  Its two
+outer point summands split integrally, while the central perverse attachment
+is multiplication by three and becomes indecomposable in characteristic
+three.
 
 ## Build
 

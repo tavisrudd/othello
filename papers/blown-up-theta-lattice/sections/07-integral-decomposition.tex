@@ -1,0 +1,133 @@
+\section{The integral decomposition complex}\label{sec:integral-decomposition}
+
+Let \(i:\{0\}\hookrightarrow\Theta\).  Proper base change and Thom
+excision identify
+\begin{equation}\label{eq:stalk-costalk}
+ i^*\mathcal K\cong R\Gamma(X,\Z)[4],\qquad
+ i^!\mathcal K\cong R\Gamma(X,\Z)[2].
+\end{equation}
+Under these identifications, the natural map from costalk to stalk is cup
+product by the Euler class \(-h\).  On the algebraic cohomology of \(X\),
+its three nonzero blocks are
+\begin{equation}\label{eq:three-intersection-blocks}
+ H^0(X)\xrightarrow{-h}H^2(X),\qquad
+ H^2(X)\xrightarrow{-h}H^4(X),\qquad
+ H^4(X)\xrightarrow{-h}H^6(X),
+\end{equation}
+with matrices \([-1],[-3],[-1]\) in the generators
+\(1,h,\ell,[\mathrm{pt}]\).  The cone is
+\(R\Gamma(K,\Z)[4]\), so this is also the Gysin triangle behind
+Lemma~\ref{lem:link-cohomology}.
+
+We use a standard intersection-form description of point summands.  By
+adjunction, morphisms from and to \(\Z_0[m]\) are Borel--Moore classes of
+the fibre, and their composition is the corresponding fibre intersection
+form.  Over a field this is
+\cite[Proposition~3.2 and Corollary~3.5]{JuteauMautnerWilliamson}; the same
+adjunction calculation over \(\Z\) applies when the displayed rank-one form
+is a unit.  The first and third blocks of
+\eqref{eq:three-intersection-blocks} therefore give inclusion--projection
+pairs with identity composite.  Splitting their idempotents yields
+\[
+ \mathcal K\cong\Z_0[2]\oplus\mathcal P\oplus\Z_0[-2].
+\]
+The cross-compositions vanish for degree reasons.  The remaining object has
+stalk cohomology only in degrees \(-4,-1,0\), costalk cohomology only in
+degrees \(0,1,4\), and restriction \(\Z_U[4]\).  These are the support and
+cosupport conditions for \(\mathcal P\) to be perverse.
+
+Its central attachment is the exact sequence
+\begin{equation}\label{eq:central-zigzag}
+ H^3(K,\Z)\longrightarrow
+ A=\Z h\xrightarrow{-3}B=\Z\ell
+ \longrightarrow H^4(K,\Z).
+\end{equation}
+The first arrow is zero, while the last sends \(\ell\) to
+\(\tau=p^*\ell\), the order-three class in the link.  Indeed,
+\eqref{eq:central-zigzag} is the degree-three/four part of the Gysin
+sequence.  This proves the integral decomposition and attachment asserted
+in Theorem~\ref{thm:integral-decomposition}.
+
+Over \(\Z[1/3]\), the middle map in
+\eqref{eq:central-zigzag} is a unit.  Its normalized inclusion--projection
+pair splits a central point sheaf.  The complement extends \(\Z_U[4]\) and
+has neither a point subobject nor a point quotient, hence is the intermediate
+extension.  Thus
+\begin{equation}\label{eq:localized-decomposition}
+ R\sigma_*\Z[1/3]_M[4]\cong
+ \IC_\Theta(\Z[1/3])\oplus
+ \Z[1/3]_0[2]\oplus\Z[1/3]_0\oplus\Z[1/3]_0[-2].
+\end{equation}
+The same proof works over every field of characteristic different from
+three.  Integrally, a central point summand would contribute a unit block
+\(\Z\to\Z\).  Since \(A\) and \(B\) both have rank one, this contradicts
+the Smith factor three in \eqref{eq:central-zigzag}.
+
+In characteristic three, the universal-coefficient sequence and
+Lemma~\ref{lem:link-cohomology} give
+\[
+ \dim_{\F_3}H^3(K,\F_3)=
+ \dim_{\F_3}H^4(K,\F_3)=11.
+\]
+The derived reduction of \eqref{eq:central-zigzag} is
+\begin{equation}\label{eq:mod-three-zigzag}
+ \F_3^{11}\twoheadrightarrow\F_3
+ \xrightarrow{0}\F_3\hookrightarrow\F_3^{11}.
+\end{equation}
+The extra degree-three class is the Tor, or Bockstein, companion of
+\(\tau\).  The zero middle form rules out a point summand.  Any direct-sum
+decomposition of the residual perverse sheaf has at most one summand with
+nonzero restriction to \(U\), because that restriction is the simple
+rank-one local system; every other summand would be point-supported.
+Therefore the residual object is indecomposable.  Its nonzero kernel and
+cokernel in \eqref{eq:mod-three-zigzag} show that it is not the intermediate
+extension of that simple local system, hence is not simple.  An
+indecomposable semisimple object is simple, so the residual object is
+nonsemisimple.  This proves the modular assertion of
+Theorem~\ref{thm:integral-decomposition}.
+
+We finish by recording the global fate of \(\tau\).  Apply
+Lemma~\ref{lem:clean-base-change} to
+\(T=[\mathrm{pt}]\otimes1\in H^4(F\times F,\Z)\), and put
+\[
+ u_4=q_*\mu^*T\in H^4(M,\Z).
+\]
+Then
+\begin{equation}\label{eq:degree-four-fano-lift}
+ e^*u_4=\ell,\qquad b_*u_4=[F]=\theta^{[3]}.
+\end{equation}
+The restriction of \(u_4|_U\) to the link is \(\tau\).  This class has
+infinite order: if it vanished rationally, then \(u_4\) would be rationally
+supported on the contracted divisor and would have zero pushforward to
+\(J\), contrary to \eqref{eq:degree-four-fano-lift}.
+
+Rationally, \(H^4(U)\to H^4(K)\) is zero.  One way to see this is to combine
+\eqref{eq:kraemer-decomposition} with the pair sequence for \((M,U)\): the
+exceptional map \(H^2(X,\Q)\to H^4(M,\Q)\) is injective, and
+\(H^3(X,\Q)\to H^5(M,\Q)\) is injective by
+Theorem~\ref{thm:main-escape}.  Hence \(H^4(U,\Q)\) and
+\(IH^4(\Theta,\Q)\) have the same dimension, while the truncation map from
+the latter to the former is injective.  Thus the integral boundary image is
+torsion, and \eqref{eq:degree-four-fano-lift} shows that it is exactly
+\(\langle\tau\rangle\).  The truncation triangle now gives
+\begin{equation}\label{eq:degree-four-index-three}
+ 0\longrightarrow IH^4(\Theta,\Z)\longrightarrow H^4(U,\Z)
+ \longrightarrow\Z/3\longrightarrow0.
+\end{equation}
+
+Finally, normality and the Deligne model give a triangle
+\[
+ \Z_\Theta[4]\longrightarrow\IC_\Theta(\Z)
+ \longrightarrow H^3(K,\Z)_0[1]\xrightarrow{+1}.
+\]
+The map \(IH^3(\Theta,\Z)=H^3(U,\Z)\to H^3(K,\Z)\) is surjective by
+Propositions~\ref{prop:topological-exact} and
+\ref{prop:endpoint-lifts}.  The connecting map to \(H^4(\Theta,\Z)\)
+therefore vanishes.  It follows that
+\begin{equation}\label{eq:ordinary-equals-intersection-above-middle}
+ H^k(\Theta,\Z)\xrightarrow{\sim}IH^k(\Theta,\Z)
+ \qquad(k\geq4).
+\end{equation}
+Together, \eqref{eq:degree-four-index-three} and
+\eqref{eq:ordinary-equals-intersection-above-middle} show that the local
+order-three class is an index-three attachment, not a global torsion class.
