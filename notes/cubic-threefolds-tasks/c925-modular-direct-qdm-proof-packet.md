@@ -98,13 +98,18 @@ It currently contains:
   Hypothesis 5.7R as a reconstruction-tail certificate, the consumed part of
   Hypothesis 5.7T as a residual-tagging certificate, and center nullity indexed
   by every actual comparison specialization \(\chi_j\); and
+- a universal sufficient-shadow module proving that the indexed center-null
+  ledger represents and detects all center-null markers, that every small
+  marker family has a canonical minimal operation-stable shadow, and that
+  parallel sparse shadows descend a marker exactly when their joint fibres
+  do; and
 - an explicit exploration frontier.
 
 The finite categorical law model is
 `notes/cubic-threefolds-tasks/c925-categorical-law-check.py`, with exact
 checked output
 `notes/cubic-threefolds-tasks/c925-categorical-law-check.json`.  It passes
-thirty-eight tests, including a negative collision test showing why Guéré's
+forty-two tests, including a negative collision test showing why Guéré's
 unit-shift separation contract is mandatory, the \(m\ge2\) constituent
 no-go, \(\mathbf G_a\) Clebsch--Gordan through size five, and composition of
 row-preserving shears, plus exact coordinate-pseudonaturality,
@@ -123,7 +128,13 @@ rank-leakage test identifies the sole codimension-one quotient obstruction.
 The framed-\(m=1\) additions check the conditional telescope with specialized
 center nullity and give separate countermodels to both illicit replacements:
 intrinsic center zero for specialized center zero, and ordinary coordinate
-naturality for Hypothesis 5.7R.
+naturality for Hypothesis 5.7R.  In the finite
+\((\mathbf Z/2)^3\) model, the universal-shadow additions exhaustively check
+center-quotient factorization and detection, exhibit the factor from one
+richer sufficient shadow to the joint marker image, and verify a case where
+two projections jointly retain a marker although neither retains it alone
+and the rich object is still forgotten.  The proof, not the example,
+establishes terminality among all sufficient shadows.
 A separate executable
 Haskell toy at
 `notes/cubic-threefolds-tasks/c925-sparse-shadow-path-toy.hs` verifies the
@@ -153,3 +164,6 @@ software-interface design before closeout.
 
 The framed-\(m=1\) specialization audit is
 `notes/2026-08-20-c925-framed-m1-specialization.md`.
+
+The broader non-\(m=2\) categorical dividend and Theorems 23.1--23.3 are
+audited in `notes/2026-08-20-c925-non-m2-categorical-dividends.md`.

@@ -1151,6 +1151,168 @@ def main():
     assert abstract_small_nu6 != abstract_tail_nu6
     checks["reconstruction_tail_is_not_generic_coordinate_law"] = "pass"
 
+    # Decategorified center localization is the quotient which sends every
+    # indexed center generator to zero.  Work exhaustively in (Z/2)^3, whose
+    # coordinates are the ambient generator, a point-center generator, and a
+    # surface-center generator.
+    bit_states = list(product((0, 1), repeat=3))
+
+    def bit_add(left, right):
+        return tuple(x ^ y for x, y in zip(left, right))
+
+    finite_ledgers = bit_states
+
+    def point_localization(ledger):
+        return (ledger[0], ledger[2])
+
+    def surface_localization(ledger):
+        return (ledger[0],)
+
+    assert all(
+        point_localization(bit_add(left, right))
+        == bit_add(point_localization(left), point_localization(right))
+        and surface_localization(bit_add(left, right))
+        == bit_add(surface_localization(left), surface_localization(right))
+        for left in finite_ledgers
+        for right in finite_ledgers
+    )
+    assert all(
+        surface_localization(ledger)
+        == (point_localization(ledger)[0],)
+        for ledger in finite_ledgers
+    )
+    def binary_weight_value(weight, ledger):
+        value = 0
+        for coefficient, coordinate in zip(weight, ledger):
+            value ^= coefficient & coordinate
+        return value
+
+    center_null_weights = [(weight, 0, 0) for weight in (0, 1)]
+    for weight in center_null_weights:
+        for ledger in finite_ledgers:
+            direct = binary_weight_value(weight, ledger)
+            factored = weight[0] & surface_localization(ledger)[0]
+            assert direct == factored
+    checks[
+        "universal_center_localization_represents_center_null_markers"
+    ] = "pass"
+
+    # The universal quotient is jointly complete for the entire class of
+    # center-null markers: equality in it is equivalent to equality under all
+    # such markers.  The identity-weight consumer already detects every
+    # unequal pair of ambient coordinates.
+    for left in finite_ledgers:
+        for right in finite_ledgers:
+            quotient_equal = surface_localization(left) == surface_localization(
+                right
+            )
+            every_marker_equal = all(
+                binary_weight_value(weight, left)
+                == binary_weight_value(weight, right)
+                for weight in center_null_weights
+            )
+            assert quotient_equal == every_marker_equal
+    checks["universal_center_quotient_detects_all_retained_equalities"] = (
+        "pass"
+    )
+
+    # A finite model of the kernel congruence identifies the joint marker
+    # image as a factor of a richer sufficient shadow.  The theorem proof,
+    # rather than this one example, supplies terminality among all shadows.
+    def marker_family(state):
+        x, y, z = state
+        return (x ^ y, y ^ z)
+
+    def richer_shadow(state):
+        return (*marker_family(state), state[2])
+
+    assert all(
+        marker_family(bit_add(left, right))
+        == bit_add(marker_family(left), marker_family(right))
+        for left in bit_states
+        for right in bit_states
+    )
+    richer_image = {richer_shadow(state) for state in bit_states}
+    assert all(
+        richer_shadow(bit_add(left, right))
+        == bit_add(richer_shadow(left), richer_shadow(right))
+        for left in bit_states
+        for right in bit_states
+    )
+    induced_to_minimal = {
+        shadow: marker_family(state)
+        for shadow in richer_image
+        for state in bit_states
+        if richer_shadow(state) == shadow
+    }
+    assert all(
+        induced_to_minimal[richer_shadow(state)] == marker_family(state)
+        for state in bit_states
+    )
+    assert all(
+        marker_family(left) == marker_family(right)
+        for left in bit_states
+        for right in bit_states
+        if richer_shadow(left) == richer_shadow(right)
+    )
+    checks["minimal_sufficient_shadow_is_joint_marker_image"] = "pass"
+
+    # Two projections may jointly retain a marker even though neither does,
+    # while still forgetting the rich object.  This is the sparse-shadow
+    # phenomenon rather than ordinary object reconstruction.
+    def first_shadow(state):
+        return state[0]
+
+    def second_shadow(state):
+        return state[1]
+
+    def xor_marker(state):
+        return state[0] ^ state[1]
+
+    assert all(
+        first_shadow(bit_add(left, right))
+        == (first_shadow(left) ^ first_shadow(right))
+        and second_shadow(bit_add(left, right))
+        == (second_shadow(left) ^ second_shadow(right))
+        and xor_marker(bit_add(left, right))
+        == (xor_marker(left) ^ xor_marker(right))
+        for left in bit_states
+        for right in bit_states
+    )
+    assert any(
+        first_shadow(left) == first_shadow(right)
+        and xor_marker(left) != xor_marker(right)
+        for left in bit_states
+        for right in bit_states
+    )
+    assert any(
+        second_shadow(left) == second_shadow(right)
+        and xor_marker(left) != xor_marker(right)
+        for left in bit_states
+        for right in bit_states
+    )
+    assert all(
+        xor_marker(left) == xor_marker(right)
+        for left in bit_states
+        for right in bit_states
+        if (
+            first_shadow(left),
+            second_shadow(left),
+        )
+        == (
+            first_shadow(right),
+            second_shadow(right),
+        )
+    )
+    assert any(
+        left != right
+        and first_shadow(left) == first_shadow(right)
+        and second_shadow(left) == second_shadow(right)
+        for left in bit_states
+        for right in bit_states
+    )
+    checks["joint_sparse_shadows_retain_marker_without_object"] = "pass"
+
     # The m=2 specialization retains primitive-sixth support seen by the
     # point row, not the unmarked primitive packet count.  Row-null exceptional
     # packets can change the latter while leaving the former unchanged.

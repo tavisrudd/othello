@@ -1,5 +1,5 @@
 {
-  "check_count": 38,
+  "check_count": 42,
   "checks": {
     "augmented_row_output_kernel_is_two_sided": "pass",
     "bittner_relation_codimension_2_through_6": "pass",
@@ -17,9 +17,11 @@
     "hodge_pairing_operator_do_not_force_point_row": "pass",
     "indexed_base_change_and_beck_chevalley_shadow": "pass",
     "intrinsic_center_nu6_zero_not_specialized_zero": "pass",
+    "joint_sparse_shadows_retain_marker_without_object": "pass",
     "kkpyy_atomization_and_chemical_formula": "pass",
     "laurent_grading_shift_collides_row_character": "pass",
     "m2_pointed_primary_shadow_ignores_row_null_packets": "pass",
+    "minimal_sufficient_shadow_is_joint_marker_image": "pass",
     "multi_sector_sparse_shadows_recover_zero_exponent": "pass",
     "optic_residual_and_path_functor_naturality": "pass",
     "orlov_gamma_lift_forces_blowup_rank_row": "pass",
@@ -35,6 +37,8 @@
     "sparse_kernel_profile_reconstructs_jordan_type": "pass",
     "split_vs_exact_k0_retention": "pass",
     "torsor_path_holonomy_and_endpoint_obstruction": "pass",
+    "universal_center_localization_represents_center_null_markers": "pass",
+    "universal_center_quotient_detects_all_retained_equalities": "pass",
     "unmarked_constituent_no_go_m_2_through_6": "pass",
     "wall_mutations_fix_common_open_point": "pass",
     "zero_mode_dual_cyclic_row_descends_through_quotient": "pass",

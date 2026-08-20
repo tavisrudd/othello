@@ -65,9 +65,13 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   residual-tagging certificate, and keeps every center specialization
   \(\chi_j\) indexed.  Its endpoint uses the unconditional external
   \(\mathbf P^1\)-product formula, so it does not consume the conditional
-  projective-bundle formula.  The thirty-eight-check finite law replay,
-  eleven-check typed Haskell toy, and original cubic replay are green.  C925
-  remains open at the one-object
+  projective-bundle formula.  The non-\(m=2\) categorical dividend is now
+  promoted: the indexed center-null quotient represents and detects every
+  center-null marker, every small marker family has a canonical minimal
+  sufficient shadow, and parallel sparse shadows satisfy an exact joint-fibre
+  descent criterion without reconstructing the rich object.  The
+  forty-two-check finite law replay, eleven-check typed Haskell toy, and
+  original cubic replay are green.  C925 remains open at the one-object
   fixed-phase Gamma/support or relative-cap cancellation provider.
   Mathematics only; no manuscript or Lean edits.  Card:
   `../cubic-threefolds-tasks/c925-modular-direct-qdm-proof-packet.md`.
