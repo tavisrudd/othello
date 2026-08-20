@@ -240,7 +240,13 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   Thom representative.  For a realized toric completion no independent
   scalar or Euler-square calculation remains; the open completed-model gates
   are only the occurrence/fixed-phase and Thom/framing identifications with
-  exact base change.
+  exact base change.  Module 47 removes a separate projector-commutation
+  proof: any single-valued horizontal narrow gauge carries the whole
+  generalized primitive sector, and the divided row quotient needs no
+  multiplicity-one eigenspace.  The remaining fixed-phase datum is exactly
+  the identification of the actual cubic packet with one common based loop
+  or typed deck path, with explicit character reindexing between
+  occurrences.
   Shifted tensor stability and the extremal multinomial source law are
   proved, but the occurrence-indexed exact QDM sequence, actual carrier
   exponent, and boundary vanishing remain open.  The packet is split into

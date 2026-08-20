@@ -372,3 +372,8 @@ identify the actual cubic primitive phase inside the narrow QDM, or provide
 adjacent reindexing along a weak factorization.  Those are now the only
 completed-route gates; no local scalar, Euler-square, or first-jet value
 remains to be computed once their typed realizations exist.
+
+**Successor.**  Module 47 proves that a single-valued horizontal realization
+automatically transports every generalized primitive sector.  Thus the
+fixed-phase part of item 4 reduces to identifying the actual packet with one
+common loop or typed deck path and its explicit character reindexing.

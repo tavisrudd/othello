@@ -293,7 +293,11 @@ advertised algebraic laws and countermodels, never an external QDM provider.
    therefore preserved by that same rank-preserving Fourier--Mukai map; the
    pairing then preserves its shifted Thom representative.  The remaining
    gate is the occurrence/fixed-phase and Thom/framing identification, not a
-   scalar or Euler-square computation.
+   scalar or Euler-square computation.  Module 47 makes the phase part
+   smaller still: a single-valued horizontal gauge carries every generalized
+   character sector automatically, so identify the actual cubic packet with
+   one common based loop or typed deck path and record the induced character
+   map under reindexing.
 5. Prove that the two incident sectorial gauges identify their actual
    row-null supported spans, then compare their induced ambient quotients.
    A common nonturning Hom-system with identical formal asymptotics would

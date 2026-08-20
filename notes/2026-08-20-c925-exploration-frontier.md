@@ -133,9 +133,16 @@ are:
     its shifted Thom representative.  No independent scalar or Euler-square
     calculation remains after the occurrence/fixed-phase, Thom/framing, and
     exact-base-change identifications are supplied.
+    Module 47 further shows that a single-valued horizontal realization
+    automatically transports the whole generalized primitive sector; the
+    divided row quotient removes any multiplicity.  Thus the fixed-phase
+    gate is no longer a projector-commutation calculation.  It is the
+    geometric identification of the actual cubic packet with one common
+    based loop or typed deck path, including the explicit character mapping
+    under adjacent reindexing.
 
 None of these questions blocks the proof in Modules 0--16 or the
-transport-level specialization audit in Module 17.  Modules 18--46 isolate
+transport-level specialization audit in Module 17.  Modules 18--47 isolate
 the general consequences without claiming the missing enriched provider.
 The open questions control whether the interface can be promoted from a
 lawful compiler to a canonical equivalence with the complete external

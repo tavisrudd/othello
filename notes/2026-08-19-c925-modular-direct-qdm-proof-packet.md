@@ -51,6 +51,7 @@ No manuscript or Lean source is part of this packet.
 | 44 | Euler coimage, narrow QDM, and shifted point/rank reconstruction | notes/2026-08-20-c925-narrow-qdm-shifted-rank.md |
 | 45 | proper Fourier--Mukai restriction to the paired narrow QDM | notes/2026-08-20-c925-toric-crepant-narrow-restriction.md |
 | 46 | divided equivariant rank, narrow row transport, and automatic shifted line | notes/2026-08-20-c925-divided-rank-narrow-line.md |
+| 47 | horizontal transport of primitive sectors and typed deck-character reindexing | notes/2026-08-20-c925-narrow-phase-projector-transport.md |
 | frontier | open experiments and provider targets | notes/2026-08-20-c925-exploration-frontier.md |
 
 ## Dependency spine
@@ -77,7 +78,7 @@ Modules 19--23 prove reusable categorical consequences:
 - universal center-null quotients and minimal sufficient shadows; and
 - the conditional Section 6 argument as a separate specialization.
 
-Modules 24--46 isolate the higher-stabilization frontier:
+Modules 24--47 isolate the higher-stabilization frontier:
 
 - irrationality on any unbounded stabilization set implies irrationality for
   every index;
@@ -115,14 +116,15 @@ Modules 24--46 isolate the higher-stabilization frontier:
   path-independent comparison coherence are not consumed; and
 - perfect dual-sector pairing makes the local rank-row law equivalent to
   transport of one projective Gamma point line; the full point section is
-  line-bundle-monodromy invariant, while its fixed-phase primitive
-  projection still needs operation-projector commutation and
-  Gamma-to-formal calibration; and
+  line-bundle-monodromy invariant; Module 47 shows that a single-valued
+  common-loop narrow gauge transports the whole generalized primitive
+  sector automatically, so the remaining fixed-phase input is its typed
+  identification with the actual cubic packet and deck reindexing; and
 - no finite commuting family of unipotent Picard operations can uniquely
   select that point line when the exceptional sector is nonzero, because it
-  always has a common exceptional fixed vector; a successful selector must
-  use a multiplicity-one filtered/semisimple/support-sensitive quotient or
-  another non-Picard operation; and
+  always has a common exceptional fixed vector; this still rules out the
+  standalone fixed-line selector route, but the divided-row coimage route
+  no longer requires multiplicity-one selection; and
 - a common pointed charge filtration makes every positive-charge exceptional
   Stokes factor invisible to the degree-zero rank quotient, uniformly under
   ordered products and inverses; the exact new provider is zero-reflecting
@@ -236,6 +238,14 @@ Fourier--Mukai map from Modules 43 and 45 preserves the divided row, and
 pairing preservation carries its shifted Thom representative.  The
 completed route now needs only the occurrence/fixed-phase identification,
 Thom/framing realization, and exact base change already named there.
+Module 47 removes a separate projector-commutation calculation as well.  A
+single-valued horizontal narrow gauge intertwines every common-loop
+monodromy and therefore carries the whole generalized primitive sector; the
+divided row then gives a zero-or-line quotient without any
+multiplicity-one hypothesis.  A deck reindexing may rename the character
+only through its explicit group isomorphism.  What remains is to identify
+the actual cubic primitive packet with one such common loop or typed deck
+path at every occurrence.
 
 ### ExactTop provider
 
@@ -290,6 +300,8 @@ vanishing remain open.
   notes/2026-08-20-c925-toric-crepant-narrow-restriction.md
 - divided equivariant rank and automatic narrow shifted-line transport:
   notes/2026-08-20-c925-divided-rank-narrow-line.md
+- horizontal primitive-phase and deck-character transport:
+  notes/2026-08-20-c925-narrow-phase-projector-transport.md
 
 ## Executable witnesses
 
