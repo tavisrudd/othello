@@ -12,7 +12,8 @@
   `notes/2026-08-20-c928-structural-glue.md`
 - frozen dependency graph and trust boundary:
   `notes/2026-08-20-c928-dependency-audit.md`
-- integral and rational intersection-cohomology corollaries:
+- integral intersection-cohomology corollary and the attributed rational
+  predecessor:
   `notes/2026-08-20-c928-intersection-cohomology.md`
 - inherited debt closure and quarantine:
   `notes/2026-08-20-c928-inherited-debt-closure.md`
@@ -67,8 +68,9 @@ Authority notes begin with:
    needed at `g=5`.
 3. Reassemble the geometric theorem, including integral base change through
    the degree-six Fano model and the corrected free escape lattice.
-4. Derive `IH^*(Theta,Z)` to the strongest coefficient level justified by
-   the decomposition theorem and the local singularity calculation.
+4. Derive the integral middle group `IH^3(Theta,Z)` from the local
+   singularity calculation; recall Kraemer's rational decomposition with
+   explicit attribution.
 5. Close the two inherited debts that affect paper correctness: the false
    relative-Ext twist-lemma branch and the incorrect non-descent statement in
    the lambda note.  Quarantine material not used by the paper rather than

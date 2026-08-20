@@ -2,8 +2,8 @@
 
 **Date:** 2026-08-20
 
-**Status:** corollary proved; integral statement isolated in degree three,
-full decomposition stated over `Q`
+**Status:** integral degree-three corollary proved; the rational decomposition
+is recalled from Kraemer, Corollary 6, rather than claimed as new
 
 ## Setup
 
@@ -82,7 +82,13 @@ The pair sequence for `(Theta,U)`, weak Lefschetz
 
 No integral decomposition theorem is used.
 
-## Rational decomposition theorem
+## Rational decomposition theorem (Kraemer)
+
+Kraemer, *Cubic threefolds, Fano surfaces and the monodromy of the
+Gauss map*, Corollary 6, already records the decomposition-theorem
+calculation below (with complex coefficients).  We recall it over `Q`, where
+the same proof applies.  It is context for the integral middle-degree result,
+not part of C928's novelty claim.
 
 Over `Q`, the complete contribution of the exceptional fibre is
 
@@ -109,7 +115,7 @@ H^k(M,\mathbf Q)
 \tag{5}
 \]
 
-### Stalk calculation
+### Recollection of the stalk calculation
 
 The rational cohomology of the exceptional cubic threefold is
 
@@ -167,7 +173,8 @@ factor-three Euler map `H^2(X,Z)->H^4(X,Z)`.
 2. The rank-ten correction has a geometric interpretation: it is the middle
    cohomology of the exceptional cubic entering through the link.
 3. The three rational skyscraper summands are algebraic and separate from
-   the rank-ten odd correction.
+   the rank-ten odd correction; they must be attributed to Kraemer,
+   Corollary 6.
 
 ## Mystery ledger
 
@@ -175,5 +182,5 @@ factor-three Euler map `H^2(X,Z)->H^4(X,Z)`.
 |---|---|---|
 | Is the rank-130 lattice intrinsic to `Theta`? | settled | integral identification (1) |
 | Where do its ten extra directions come from? | settled | exact sequence (2), quotient `H^3(X,Z)` |
-| What does the resolution add rationally outside middle degree? | settled | three point summands in degrees 2, 4, 6 |
+| What does the resolution add rationally outside middle degree? | prior result | Kraemer, Corollary 6: three point summands in degrees 2, 4, 6 |
 | Does the rational splitting hold integrally? | not claimed | decomposition theorem used only over `Q`; integral Euler map has a factor three |
