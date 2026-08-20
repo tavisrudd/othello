@@ -3,10 +3,17 @@ import RelativeConicArcs.GoldenCubicNodeElimination
 /-!
 # Singular cone of the centered Golden cubic
 
-This module classifies the rational zero set of the five gradient quadrics of
-the centered Golden orientation cubic.  It is the union of the six lines
-through the vectors \(1-6e_i\).  Consequently the associated projective cubic
-has exactly the six displayed rational singular points.
+Let `K` be a field in which `30` is nonzero, equivalently one whose
+characteristic is none of `2`, `3`, `5`.  This module classifies the zero set in
+`Fin 5 → K` of the five gradient quadrics of the centered Golden orientation
+cubic.  It is the union of the six lines through the vectors \(1-6e_i\).
+Consequently the associated projective cubic has exactly the six displayed
+`K`-rational singular points.
+
+The hypothesis is exactly what the case analysis needs: the eliminant of the
+last centered coordinate factors as \((x_3-1)(x_3+5)(5x_3+1)\), whose three
+roots \(1\), \(-5\), \(-1/5\) are pairwise distinct precisely when `2`, `3`, and
+`5` are invertible, and the branch at \(-1/5\) divides by `5`.
 
 The proof uses exact ideal-membership identities from
 GoldenCubicNodeElimination; Lean checks those identities by polynomial
@@ -25,7 +32,7 @@ theorem gradient_smul {K : Type*} [CommRing K] (c : K) (x : Fin 5 → K) :
   fin_cases j <;> simp [gradient] <;> ring
 
 private theorem chart_classification
-    {K : Type*} [Field K] [CharZero K] (x0 x1 x2 x3 : K)
+    {K : Type*} [Field K] (h30 : (30 : K) ≠ 0) (x0 x1 x2 x3 : K)
     (h0 : chartGradient x0 x1 x2 x3 0 = 0)
     (h1 : chartGradient x0 x1 x2 x3 1 = 0)
     (h2 : chartGradient x0 x1 x2 x3 2 = 0)
@@ -33,7 +40,8 @@ private theorem chart_classification
     (h4 : chartGradient x0 x1 x2 x3 4 = 0) :
     ∃ c : K, ∃ i : Fin 6,
       ![x0, x1, x2, x3, 1] = c • centeredNode i := by
-  have hz := x3_factor x0 x1 x2 x3 h0 h1 h2 h3 h4
+  have hfive : (5 : K) ≠ 0 := fun h => h30 (by linear_combination (6 : K) * h)
+  have hz := x3_factor h30 x0 x1 x2 x3 h0 h1 h2 h3 h4
   have hz' : (x3 - 1) * (x3 + 5) * (5*x3 + 1) = 0 := by
     ring_nf at hz ⊢
     exact hz
@@ -41,7 +49,7 @@ private theorem chart_classification
   · rcases mul_eq_zero.mp hz' with h31 | h35
     · have h31e : (1 : K) * x3 + (-1) * 1 = 0 := by
         simpa [sub_eq_add_neg] using h31
-      have hx2 := x2_factor_of_x3_eq_one x0 x1 x2 x3 h0 h1 h2 h3 h4 h31e
+      have hx2 := x2_factor_of_x3_eq_one h30 x0 x1 x2 x3 h0 h1 h2 h3 h4 h31e
       have hx2' : (x2 - 1) * (x2 + 5) = 0 := by
         ring_nf at hx2 ⊢
         exact hx2
@@ -56,7 +64,7 @@ private theorem chart_classification
         rcases mul_eq_zero.mp hx1' with h11 | h15
         · have h11e : (1 : K) * x1 + (-1) * 1 = 0 := by
             simpa [sub_eq_add_neg] using h11
-          have hx0 := x0_factor_of_x3_x2_x1_eq_one
+          have hx0 := x0_factor_of_x3_x2_x1_eq_one h30
             x0 x1 x2 x3 h0 h1 h2 h3 h4 h31e h21e h11e
           have hx0' : (x0 - 1) * (x0 + 5) = 0 := by
             ring_nf at hx0 ⊢
@@ -76,7 +84,7 @@ private theorem chart_classification
             refine ⟨1, 0, ?_⟩
             funext j
             fin_cases j <;> simp [centeredNode, hx0v, hx1v, hx2v, hx3v]
-        · have hx0 := x0_eq_one_of_x3_x2_one_x1_neg_five
+        · have hx0 := x0_eq_one_of_x3_x2_one_x1_neg_five h30
             x0 x1 x2 x3 h0 h1 h2 h3 h4 h31e h21e (by simpa using h15)
           have hx0v : x0 = 1 := by linear_combination hx0
           have hx1v : x1 = -5 := by linear_combination h15
@@ -85,9 +93,9 @@ private theorem chart_classification
           refine ⟨1, 1, ?_⟩
           funext j
           fin_cases j <;> simp [centeredNode, hx0v, hx1v, hx2v, hx3v]
-      · have hx1 := x1_eq_one_of_x3_one_x2_neg_five
+      · have hx1 := x1_eq_one_of_x3_one_x2_neg_five h30
           x0 x1 x2 x3 h0 h1 h2 h3 h4 h31e (by simpa using h25)
-        have hx0 := x0_eq_one_of_x3_one_x2_neg_five
+        have hx0 := x0_eq_one_of_x3_one_x2_neg_five h30
           x0 x1 x2 x3 h0 h1 h2 h3 h4 h31e (by simpa using h25)
         have hx0v : x0 = 1 := by linear_combination hx0
         have hx1v : x1 = 1 := by linear_combination hx1
@@ -97,9 +105,9 @@ private theorem chart_classification
         funext j
         fin_cases j <;> simp [centeredNode, hx0v, hx1v, hx2v, hx3v]
     · have h35e : (1 : K) * x3 + 5 * 1 = 0 := by simpa using h35
-      have hx2 := x2_eq_one_of_x3_neg_five x0 x1 x2 x3 h0 h1 h2 h3 h4 h35e
-      have hx1 := x1_eq_one_of_x3_neg_five x0 x1 x2 x3 h0 h1 h2 h3 h4 h35e
-      have hx0 := x0_eq_one_of_x3_neg_five x0 x1 x2 x3 h0 h1 h2 h3 h4 h35e
+      have hx2 := x2_eq_one_of_x3_neg_five h30 x0 x1 x2 x3 h0 h1 h2 h3 h4 h35e
+      have hx1 := x1_eq_one_of_x3_neg_five h30 x0 x1 x2 x3 h0 h1 h2 h3 h4 h35e
+      have hx0 := x0_eq_one_of_x3_neg_five h30 x0 x1 x2 x3 h0 h1 h2 h3 h4 h35e
       have hx0v : x0 = 1 := by linear_combination hx0
       have hx1v : x1 = 1 := by linear_combination hx1
       have hx2v : x2 = 1 := by linear_combination hx2
@@ -108,32 +116,36 @@ private theorem chart_classification
       funext j
       fin_cases j <;> simp [centeredNode, hx0v, hx1v, hx2v, hx3v]
   · have hz'e : (5 : K) * x3 + 1 * 1 = 0 := by simpa using hz'
-    have hx2 := five_x2_add_one_of_five_x3_add_one
+    have hx2 := five_x2_add_one_of_five_x3_add_one h30
       x0 x1 x2 x3 h0 h1 h2 h3 h4 hz'e
-    have hx1 := five_x1_add_one_of_five_x3_add_one
+    have hx1 := five_x1_add_one_of_five_x3_add_one h30
       x0 x1 x2 x3 h0 h1 h2 h3 h4 hz'e
-    have hx0 := five_x0_add_one_of_five_x3_add_one
+    have hx0 := five_x0_add_one_of_five_x3_add_one h30
       x0 x1 x2 x3 h0 h1 h2 h3 h4 hz'e
     have hx0v : x0 = -(1 : K) / 5 := by
-      field_simp
+      rw [eq_div_iff hfive]
       linear_combination hx0
     have hx1v : x1 = -(1 : K) / 5 := by
-      field_simp
+      rw [eq_div_iff hfive]
       linear_combination hx1
     have hx2v : x2 = -(1 : K) / 5 := by
-      field_simp
+      rw [eq_div_iff hfive]
       linear_combination hx2
     have hx3v : x3 = -(1 : K) / 5 := by
-      field_simp
+      rw [eq_div_iff hfive]
       linear_combination hz'
     refine ⟨-(1 : K) / 5, 4, ?_⟩
     funext j
     fin_cases j <;> simp [centeredNode, hx0v, hx1v, hx2v, hx3v]
+    field_simp
 
 /-- The affine cone cut out by the five gradient quadrics is exactly the
-union of the six rational lines spanned by the centered node vectors. -/
+union of the six lines spanned by the centered node vectors.
+
+The base field `K` is assumed to satisfy `(30 : K) ≠ 0`, that is, to have
+characteristic different from `2`, `3`, and `5`. -/
 theorem gradient_eq_zero_iff_smul_centeredNode
-    {K : Type*} [Field K] [CharZero K] (x : Fin 5 → K) :
+    {K : Type*} [Field K] (h30 : (30 : K) ≠ 0) (x : Fin 5 → K) :
     (∀ j, gradient x j = 0) ↔
       ∃ c : K, ∃ i : Fin 6, x = c • centeredNode i := by
   constructor
@@ -151,16 +163,16 @@ theorem gradient_eq_zero_iff_smul_centeredNode
         simpa [gradient, hx4] using h 4
       have hx0 : x 0 = 0 :=
         (pow_eq_zero_iff (n := 3) (by norm_num)).mp
-          (boundary_x0_cube (x 0) (x 1) (x 2) (x 3) g0 g1 g2 g3 g4)
+          (boundary_x0_cube h30 (x 0) (x 1) (x 2) (x 3) g0 g1 g2 g3 g4)
       have hx1 : x 1 = 0 :=
         (pow_eq_zero_iff (n := 3) (by norm_num)).mp
-          (boundary_x1_cube (x 0) (x 1) (x 2) (x 3) g0 g1 g2 g3 g4)
+          (boundary_x1_cube h30 (x 0) (x 1) (x 2) (x 3) g0 g1 g2 g3 g4)
       have hx2 : x 2 = 0 :=
         (pow_eq_zero_iff (n := 3) (by norm_num)).mp
-          (boundary_x2_cube (x 0) (x 1) (x 2) (x 3) g0 g1 g2 g3 g4)
+          (boundary_x2_cube h30 (x 0) (x 1) (x 2) (x 3) g0 g1 g2 g3 g4)
       have hx3 : x 3 = 0 :=
         (pow_eq_zero_iff (n := 3) (by norm_num)).mp
-          (boundary_x3_cube (x 0) (x 1) (x 2) (x 3) g0 g1 g2 g3 g4)
+          (boundary_x3_cube h30 (x 0) (x 1) (x 2) (x 3) g0 g1 g2 g3 g4)
       refine ⟨0, 0, ?_⟩
       funext j
       fin_cases j <;> simp [centeredNode, hx0, hx1, hx2, hx3, hx4]
@@ -176,7 +188,7 @@ theorem gradient_eq_zero_iff_smul_centeredNode
         have hz : (x 4)^2 * gradient y j = 0 := by
           simpa using hs.symm.trans (h j)
         exact (mul_eq_zero.mp hz).resolve_left (pow_ne_zero 2 hx4)
-      have hc := chart_classification (x 0 / x 4) (x 1 / x 4)
+      have hc := chart_classification h30 (x 0 / x 4) (x 1 / x 4)
         (x 2 / x 4) (x 3 / x 4)
         (by simpa [chartGradient, y] using hy 0)
         (by simpa [chartGradient, y] using hy 1)
@@ -197,13 +209,15 @@ theorem gradient_eq_zero_iff_smul_centeredNode
       fin_cases i <;> fin_cases j <;> norm_num [gradient, centeredNode]
     simp [hnode]
 
-/-- A nonzero rational singular vector lies on one of the six centered node
-lines. -/
+/-- A nonzero singular vector lies on one of the six centered node lines.
+
+The base field `K` is assumed to satisfy `(30 : K) ≠ 0`, that is, to have
+characteristic different from `2`, `3`, and `5`. -/
 theorem nonzero_gradient_zero_iff_projective_centeredNode
-    {K : Type*} [Field K] [CharZero K] (x : Fin 5 → K) (hx : x ≠ 0) :
+    {K : Type*} [Field K] (h30 : (30 : K) ≠ 0) (x : Fin 5 → K) (hx : x ≠ 0) :
     (∀ j, gradient x j = 0) ↔
       ∃ c : K, c ≠ 0 ∧ ∃ i : Fin 6, x = c • centeredNode i := by
-  rw [gradient_eq_zero_iff_smul_centeredNode]
+  rw [gradient_eq_zero_iff_smul_centeredNode h30]
   constructor
   · rintro ⟨c, i, hi⟩
     refine ⟨c, ?_, i, hi⟩

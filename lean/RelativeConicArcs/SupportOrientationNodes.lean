@@ -5,7 +5,8 @@ import RelativeConicArcs.GoldenCubicNodeHessians
 /-!
 # Singular locus and ordinary-node type of the determinantal cubic threefold
 
-Fix a field `K` of characteristic zero containing a root `t` of `t^2 = t + 1`.
+Fix a field `K` in which `30` is nonzero — equivalently, whose characteristic is none of
+`2`, `3`, `5` — containing a root `t` of `t^2 = t + 1`.
 Five centered coordinates `x 0, …, x 4` describe the augmentation hyperplane of
 the six labelled golden axes, the omitted sixth coordinate being
 `-(x 0 + ⋯ + x 4)`; `GoldenCubicNodesBase.centeredLift` performs that
@@ -26,9 +27,16 @@ deleted five-by-five Hessian block has rank four and its dehomogenized Hessian
 is nonsingular.
 
 Terminal results: `singularPoints_crossGoldenDeterminant_eq_axisClasses`,
-`supportCubic_singularLocus_eq_frame`, `supportCubic_framePoints_ordinaryNodes`.
-Everything below is proved from the definitions; nothing in this module is
-assumed or discharged outside the kernel.
+`supportCubic_singularLocus_eq_frame`, `supportCubic_framePoints_ordinaryNodes`,
+together with their specializations to the prime field `ZMod 11`, where the
+golden root is `t = 8`.  Everything below is proved from the definitions;
+nothing in this module is assumed or discharged outside the kernel.
+
+The ordinary-node statement over a general base field is restricted to
+characteristic zero, inherited from the Hessian determinant evaluation in
+`RelativeConicArcs.GoldenCubicNodeHessians`; the `ZMod 11` ordinary-node
+statement below is instead obtained by evaluating the same determinant in that
+prime field.
 -/
 
 namespace RelativeConicArcs.SupportOrientationNodes
@@ -212,7 +220,8 @@ theorem derivative_crossGoldenDeterminantLine_eval
 /-- The singular points of the cross-golden determinantal cubic threefold are
 exactly the six axis classes.
 
-Let `K` be a field of characteristic zero containing a root `t` of
+Let `K` be a field in which `30` is nonzero — equivalently, whose characteristic
+is none of `2`, `3`, `5` — containing a root `t` of
 `t^2 = t + 1`, and let `x : Fin 5 → K` be a nonzero centered five-vector.  All
 five partial derivatives of the cubic form `x ↦ det (crossGoldenBlock t
 (centeredLift x))` vanish at `x` if and only if `x` is a nonzero scalar multiple
@@ -237,7 +246,7 @@ in linear general position.  That result is not used here: the statement above i
 established for the cross-golden family directly, without its smoothness or
 transversality hypotheses. -/
 theorem singularPoints_crossGoldenDeterminant_eq_axisClasses
-    {K : Type*} [Field K] [CharZero K] (t : K) (ht : t ^ 2 = t + 1)
+    {K : Type*} [Field K] (h30 : (30 : K) ≠ 0) (t : K) (ht : t ^ 2 = t + 1)
     (x : Fin 5 → K) (hx : x ≠ 0) :
     (∀ j, (crossGoldenDeterminantLine t x j).derivative.eval (x j) = 0) ↔
       ∃ c : K, c ≠ 0 ∧ ∃ i : Fin 6, x = c • centeredNode i := by
@@ -245,19 +254,28 @@ theorem singularPoints_crossGoldenDeterminant_eq_axisClasses
       (crossGoldenDeterminantLine t x j).derivative.eval (x j) = -gradient x j :=
     fun j => derivative_crossGoldenDeterminantLine_eval t ht x j
   simp only [hderiv, neg_eq_zero]
-  exact nonzero_gradient_zero_iff_projective_centeredNode x hx
+  exact nonzero_gradient_zero_iff_projective_centeredNode h30 x hx
 
-/-- The nonzero singular cone is exactly the six projective frame lines. -/
+/-- The nonzero singular cone is exactly the six projective frame lines, over
+any field in which `30` is nonzero. -/
 theorem supportCubic_singularLocus_eq_frame
-    {K : Type*} [Field K] [CharZero K] (x : Fin 5 → K) (hx : x ≠ 0) :
+    {K : Type*} [Field K] (h30 : (30 : K) ≠ 0) (x : Fin 5 → K) (hx : x ≠ 0) :
     (∀ j, gradient x j = 0) ↔
       ∃ c : K, c ≠ 0 ∧ ∃ i : Fin 6, x = c • centeredNode i :=
-  nonzero_gradient_zero_iff_projective_centeredNode x hx
+  nonzero_gradient_zero_iff_projective_centeredNode h30 x hx
 
 /-- Every displayed projective frame point has the structural rank-four
 deleted block forced by `B²=5I`; the small chart normalization then identifies
 this block with a nondegenerate dehomogenized Hessian, so the point is an
-ordinary double point. -/
+ordinary double point.
+
+The characteristic-zero hypothesis here is inherited from the evaluation of the
+dehomogenized Hessian determinants in
+`RelativeConicArcs.GoldenCubicNodeHessians.det_chartHessian_chartNode`, not from
+the singular-locus classification, which needs only `(30 : K) ≠ 0`.  The
+determinants in question are `1296 / 5` and `6480`, whose only prime factors are
+`2`, `3`, `5`; `supportCubic_framePoints_ordinaryNodes_zmod_eleven` records the
+corresponding statement in the prime field of eleven elements. -/
 theorem supportCubic_framePoints_ordinaryNodes
     {K : Type*} [Field K] [CharZero K] (i : Fin 6) :
     Module.finrank ℚ
@@ -265,6 +283,58 @@ theorem supportCubic_framePoints_ordinaryNodes
       Matrix.det (chartHessian (chartNode (K := K) i)) ≠ 0 :=
   ⟨finrank_deletedPrincipalBlock_range i,
     det_chartHessian_chartNode_ne_zero i⟩
+
+/-- Eleven is prime, so `ZMod 11` is the prime field of eleven elements and in
+particular a field. -/
+instance factPrimeEleven : Fact (Nat.Prime 11) := ⟨by norm_num⟩
+
+/-- The prime field of eleven elements contains a golden root: `8 ^ 2 = 64 = 9 = 8 + 1`
+there. -/
+theorem golden_root_zmod_eleven : (8 : ZMod 11) ^ 2 = 8 + 1 := by decide
+
+/-- Eleven avoids the three excluded primes: `30 = 8 ≠ 0` in the prime field of
+eleven elements. -/
+theorem thirty_ne_zero_zmod_eleven : (30 : ZMod 11) ≠ 0 := by decide
+
+/-- The singular points of the cross-golden determinantal cubic threefold over
+the prime field of eleven elements, taken at the golden root `t = 8`, are exactly
+the six axis classes.
+
+This is `singularPoints_crossGoldenDeterminant_eq_axisClasses` specialized to
+`K = ZMod 11`, a field of characteristic eleven in which the golden root is
+rational: `30 = 8 ≠ 0` and `8 ^ 2 = 8 + 1` there.  The six axis classes are
+`[1:1:1:1:1]` together with the five classes carrying a single `6 = -5`. -/
+theorem singularPoints_crossGoldenDeterminant_eq_axisClasses_zmod_eleven
+    (x : Fin 5 → ZMod 11) (hx : x ≠ 0) :
+    (∀ j, (crossGoldenDeterminantLine (8 : ZMod 11) x j).derivative.eval (x j) = 0) ↔
+      ∃ c : ZMod 11, c ≠ 0 ∧ ∃ i : Fin 6, x = c • centeredNode i :=
+  singularPoints_crossGoldenDeterminant_eq_axisClasses thirty_ne_zero_zmod_eleven
+    (8 : ZMod 11) golden_root_zmod_eleven x hx
+
+/-- The nonzero singular cone of the centered Golden cubic over the prime field
+of eleven elements is exactly the six frame lines. -/
+theorem supportCubic_singularLocus_eq_frame_zmod_eleven
+    (x : Fin 5 → ZMod 11) (hx : x ≠ 0) :
+    (∀ j, gradient x j = 0) ↔
+      ∃ c : ZMod 11, c ≠ 0 ∧ ∃ i : Fin 6, x = c • centeredNode i :=
+  supportCubic_singularLocus_eq_frame thirty_ne_zero_zmod_eleven x hx
+
+/-- Each of the six frame points is an ordinary double point over the prime field
+of eleven elements: the deleted five-by-five principal block has rank four, and
+the dehomogenized Hessian determinant at the normalized node is nonzero in that
+field.  The determinant is evaluated there by kernel reduction of the explicit
+four-by-four expansion. -/
+theorem supportCubic_framePoints_ordinaryNodes_zmod_eleven (i : Fin 6) :
+    Module.finrank ℚ
+        (LinearMap.range (deletedPrincipalBlock i).mulVecLin) = 4 ∧
+      Matrix.det (chartHessian (chartNode (K := ZMod 11) i)) ≠ 0 := by
+  have hinv : (-5 : ZMod 11)⁻¹ = 2 := inv_eq_of_mul_eq_one_right (by decide)
+  refine ⟨finrank_deletedPrincipalBlock_range i, ?_⟩
+  rw [← GoldenMatchingJacobian.detFour_eq_det]
+  fin_cases i <;>
+    simp [chartNode, centeredNode, chartHessian, hinv,
+      GoldenMatchingJacobian.detFour, GoldenMatchingJacobian.detThree] <;>
+    decide
 
 #print axioms derivative_crossGoldenDeterminantLine_eval
 #print axioms singularPoints_crossGoldenDeterminant_eq_axisClasses
@@ -274,5 +344,10 @@ theorem supportCubic_framePoints_ordinaryNodes
 #print axioms deletedPrincipalBlock_sq
 #print axioms deletedPrincipalBlock_mulVec_eq_zero_iff
 #print axioms finrank_deletedPrincipalBlock_range
+#print axioms golden_root_zmod_eleven
+#print axioms thirty_ne_zero_zmod_eleven
+#print axioms singularPoints_crossGoldenDeterminant_eq_axisClasses_zmod_eleven
+#print axioms supportCubic_singularLocus_eq_frame_zmod_eleven
+#print axioms supportCubic_framePoints_ordinaryNodes_zmod_eleven
 
 end RelativeConicArcs.SupportOrientationNodes

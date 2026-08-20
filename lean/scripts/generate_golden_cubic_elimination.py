@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 from fractions import Fraction
 from itertools import combinations
+from math import gcd
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -180,6 +181,47 @@ def lean_fraction(value: Fraction) -> str:
     return f"({value.numerator} / {value.denominator} : K)"
 
 
+def common_denominator(polys: list[Poly]) -> int:
+    """Smallest positive integer clearing every coefficient denominator."""
+    scale_factor = 1
+    for poly in polys:
+        for coefficient in poly.values():
+            denominator = coefficient.denominator
+            scale_factor = (
+                scale_factor * denominator // gcd(scale_factor, denominator)
+            )
+    return scale_factor
+
+
+def smooth_factorization(value: int) -> tuple[int, int, int]:
+    """Write a positive integer as 2^a * 3^b * 5^c, or fail."""
+    remaining = value
+    exponents = []
+    for prime in (2, 3, 5):
+        exponent = 0
+        while remaining % prime == 0:
+            remaining //= prime
+            exponent += 1
+        exponents.append(exponent)
+    if remaining != 1:
+        raise ValueError(f"denominator {value} is divisible by a prime beyond 2, 3, 5")
+    return exponents[0], exponents[1], exponents[2]
+
+
+def scale_factor_lemma(scale_factor: int, indent: str) -> str:
+    """Lean proof that the clearing factor is invertible when 30 is."""
+    a, b, c = smooth_factorization(scale_factor)
+    return (
+        f"{indent}have hscale : ({scale_factor} : K) ≠ 0 := by\n"
+        f"{indent}  obtain ⟨htwo, hthree, hfive⟩ := two_three_five_ne_zero h30\n"
+        f"{indent}  have hfactor : ({scale_factor} : K) = 2 ^ {a} * 3 ^ {b} * 5 ^ {c} :="
+        " by norm_num\n"
+        f"{indent}  rw [hfactor]\n"
+        f"{indent}  exact mul_ne_zero (mul_ne_zero (pow_ne_zero _ htwo)"
+        " (pow_ne_zero _ hthree)) (pow_ne_zero _ hfive)\n"
+    )
+
+
 def lean_poly(poly: Poly) -> str:
     if not poly:
         return "0"
@@ -200,6 +242,8 @@ def render_theorem(
 ) -> str:
     generators = chart_gradient + branches
     multipliers = solve_membership(generators, target)
+    scale_factor = common_denominator(multipliers)
+    scaled = [scale(multiplier, scale_factor) for multiplier in multipliers]
     gradient_names = [
         f"{'' if multipliers[index] else '_'}h{index}" for index in range(5)
     ]
@@ -211,17 +255,34 @@ def render_theorem(
         f"    ({branch_names[index]} : {lean_poly(branch)} = 0)"
         for index, branch in enumerate(branches)
     )
-    combination = " +\n      ".join(
+    integral = scale_factor == 1
+    indent = "  " if integral else "    "
+    combination = f" +\n      {indent}".join(
         f"({lean_poly(multiplier)}) * "
         + (gradient_names[index] if index < 5 else branch_names[index - 5])
-        for index, multiplier in enumerate(multipliers)
+        for index, multiplier in enumerate(scaled)
         if multiplier
     )
-    changes = ("  simp [chartGradient, GoldenCubicNodesBase.gradient] at "
+    changes = (f"{indent}simp [chartGradient, GoldenCubicNodesBase.gradient] at "
                + " ".join(gradient_names))
+    binders = ("{K : Type*} [CommRing K]" if integral
+               else "{K : Type*} [Field K] (h30 : (30 : K) ≠ 0)")
+    if integral:
+        proof = f"""{changes}
+  linear_combination
+      {combination}
+"""
+    else:
+        proof = f"""{scale_factor_lemma(scale_factor, "  ")}\
+  have key : ({scale_factor} : K) * ({lean_poly(target)}) = 0 := by
+{changes}
+    linear_combination
+        {combination}
+  exact (mul_eq_zero.mp key).resolve_left hscale
+"""
     return f"""/-- Exact ideal-membership identity for one branch of the
 centered Golden gradient scheme. -/
-theorem {name} {{K : Type*}} [Field K] [CharZero K] (x0 x1 x2 x3 : K)
+theorem {name} {binders} (x0 x1 x2 x3 : K)
     ({gradient_names[0]} : chartGradient x0 x1 x2 x3 0 = 0)
     ({gradient_names[1]} : chartGradient x0 x1 x2 x3 1 = 0)
     ({gradient_names[2]} : chartGradient x0 x1 x2 x3 2 = 0)
@@ -229,10 +290,7 @@ theorem {name} {{K : Type*}} [Field K] [CharZero K] (x0 x1 x2 x3 : K)
     ({gradient_names[4]} : chartGradient x0 x1 x2 x3 4 = 0)
 {assumptions} :
     {lean_poly(target)} = 0 := by
-{changes}
-  linear_combination
-      {combination}
-"""
+{proof}"""
 
 
 def generated_source() -> str:
@@ -280,18 +338,20 @@ def generated_source() -> str:
     for coordinate in range(4):
         target = product(*([variable(4, coordinate)] * 3))
         multipliers = solve_membership(boundary_gradient, target)
+        scale_factor = common_denominator(multipliers)
+        scaled = [scale(multiplier, scale_factor) for multiplier in multipliers]
         names = [
             f"{'' if multiplier else '_'}h{index}"
             for index, multiplier in enumerate(multipliers)
         ]
-        combination = " +\n      ".join(
+        combination = " +\n        ".join(
             f"({lean_poly(multiplier)}) * {names[index]}"
-            for index, multiplier in enumerate(multipliers)
+            for index, multiplier in enumerate(scaled)
             if multiplier
         )
         boundary_theorems.append(f"""/-- On the boundary chart, the cube of
 coordinate {coordinate} belongs to the Golden gradient ideal. -/
-theorem boundary_x{coordinate}_cube {{K : Type*}} [Field K] [CharZero K]
+theorem boundary_x{coordinate}_cube {{K : Type*}} [Field K] (h30 : (30 : K) ≠ 0)
     (x0 x1 x2 x3 : K)
     ({names[0]} : gradient ![x0, x1, x2, x3, 0] 0 = 0)
     ({names[1]} : gradient ![x0, x1, x2, x3, 0] 1 = 0)
@@ -299,9 +359,12 @@ theorem boundary_x{coordinate}_cube {{K : Type*}} [Field K] [CharZero K]
     ({names[3]} : gradient ![x0, x1, x2, x3, 0] 3 = 0)
     ({names[4]} : gradient ![x0, x1, x2, x3, 0] 4 = 0) :
     x{coordinate}^3 = 0 := by
-  simp [gradient] at {" ".join(names)}
-  linear_combination
-      {combination}
+{scale_factor_lemma(scale_factor, "  ")}\
+  have key : ({scale_factor} : K) * (x{coordinate}^3) = 0 := by
+    simp [gradient] at {" ".join(names)}
+    linear_combination
+        {combination}
+  exact (mul_eq_zero.mp key).resolve_left hscale
 """)
     theorems = "\n".join(
         render_theorem(name, target, branches, chart_gradient)
@@ -313,9 +376,21 @@ theorem boundary_x{coordinate}_cube {{K : Type*}} [Field K] [CharZero K]
 # Elimination identities for the centered Golden cubic
 
 This file is generated by scripts/generate_golden_cubic_elimination.py.
-It contains exact rational ideal-membership identities for the five gradient
-quadrics.  Lean rechecks every identity with linear_combination; the
-generator and its linear algebra are not part of the trusted proof.
+It contains exact ideal-membership identities for the five gradient quadrics of
+the centered Golden orientation cubic.  Lean rechecks every identity with
+linear_combination; the generator and its linear algebra are not part of the
+trusted proof.
+
+Each certificate is displayed with integer polynomial coefficients: the
+rational combination produced by elimination is cleared by its common
+denominator, so the displayed identity is a polynomial identity valid over every
+commutative ring.  The stated conclusion is then recovered by dividing by that
+clearing factor, and this division is the only place a hypothesis on the base
+field is used.  Every clearing factor occurring here has the form
+`2 ^ a * 3 ^ b * 5 ^ c`, so the hypothesis is exactly that 2, 3, and 5 are
+invertible, which for a field is the single condition `(30 : K) ≠ 0`.  A
+certificate whose combination is already integral carries no such hypothesis and
+holds over any commutative ring.
 -/
 
 namespace RelativeConicArcs.GoldenCubicNodeElimination
@@ -323,6 +398,15 @@ namespace RelativeConicArcs.GoldenCubicNodeElimination
 open GoldenCubicNodesBase
 
 set_option maxRecDepth 100000
+
+/-- In a commutative ring in which `30` is nonzero, each of `2`, `3`, and `5` is
+nonzero.  These are the three primes whose invertibility the elimination
+certificates below consume. -/
+private theorem two_three_five_ne_zero {{K : Type*}} [CommRing K] (h30 : (30 : K) ≠ 0) :
+    (2 : K) ≠ 0 ∧ (3 : K) ≠ 0 ∧ (5 : K) ≠ 0 :=
+  ⟨fun h => h30 (by linear_combination (15 : K) * h),
+    fun h => h30 (by linear_combination (10 : K) * h),
+    fun h => h30 (by linear_combination (6 : K) * h)⟩
 
 /-- The five gradient quadrics on the affine chart whose last centered
 coordinate equals one. -/
