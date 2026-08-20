@@ -9,6 +9,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAx
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisThreePrimaryPairing
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisThreePrimaryHeartCoordinates
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisPrimaryKernelStability
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisTwoPrimaryExoticSelection
 
 /-!
 # The relative six-axis packet over its integral homology realization
@@ -59,6 +60,14 @@ Each is a member of the corresponding packet — the five-member projective-line
 packet at two, the vertical copy or one of the three scalar graphs at three —
 as soon as it is stable under the two diagonal generators, which is the single
 remaining input on either side.
+
+Which member of the two-primary packet the kernel is cannot be decided by any
+hypothesis of stability under the packet-preserving group, since all five
+members are stable.  The fibrewise input that decides it is Frobenius marking:
+the assertion that the packet class of the transported kernel is moved by the
+Frobenius involution of the packet.  A marked class is one of the two exotic
+members, and its graph slope then has minimal polynomial `t²+t+1` over the field
+with two elements.
 
 No relative scheme, torsion local system, geometric group action, or Weil
 pairing of an actual elliptic curve is constructed here.  The three-primary
@@ -192,6 +201,20 @@ structure RelativeSixAxisGeometricInput
     Function.Injective (kernelInclusion parameter)
   /-- The relative two-primary kernel is `A₅`-stable. -/
   kernelA5Stable : Prop
+  /-- Frobenius marking of the two-primary kernel.  On every fibre the packet
+  class of the transported two-primary kernel — the two-primary part of the
+  lattice model of the isogeny kernel, carried into the standard symplectic
+  coordinates and then into two copies of the coefficient heart — is moved by
+  the Frobenius involution of the packet of diagonally stable halves.
+  Equivalently, that class is not one of the three members defined over the
+  prime field.  This is the coefficient-side form of the assertion that the
+  component in question uses the exotic pair; the packet-preserving group
+  cannot express it, since all five members are stable. -/
+  twoPrimaryKernelFrobeniusMarked : ∀ parameter,
+    GraphLattices.SixPointHeartFrobeniusMarked
+      ((GraphLattices.sixAxisSourceTwoPrimaryKernelCoordinates
+            (homology parameter).polarizationPullback).map
+        GraphLattices.sixAxisStandardDiscriminantPairLinearEquiv.toLinearMap)
 
 /-- The polarization pullback identity forces the realized comparison matrix to
 have determinant of absolute value `6⁴`, which is the degree of the relative
@@ -480,6 +503,32 @@ theorem relativeSixAxisThreePrimaryKernelHeartCoordinates_equivariantPacket
     GraphLattices.sixAxisSourceThreePrimaryKernelHeartCoordinates_equivariantPacket
       realization.jacobianPolarizationPrincipal realization.polarizationPullback equivariant⟩
 
+/-- Marked selection of the exotic member on one fibre.  For an equivariant
+comparison matrix whose transported two-primary kernel is moved by the
+Frobenius involution of the packet, that kernel is one of the two exotic
+members, hence the graph of a slope whose minimal polynomial over the field
+with two elements is the irreducible quadratic `t²+t+1`. -/
+theorem relativeSixAxisTwoPrimaryKernelCoordinates_exoticSelection
+    (realization : RelativeSixAxisHomologyRealization)
+    (equivariant : realization.alternatingEquivariant)
+    (marked : GraphLattices.SixPointHeartFrobeniusMarked
+      ((relativeSixAxisTwoPrimaryKernelCoordinates realization).map
+        GraphLattices.sixAxisStandardDiscriminantPairLinearEquiv.toLinearMap)) :
+    (relativeSixAxisTwoPrimaryKernelCoordinates realization).map
+          GraphLattices.sixAxisStandardDiscriminantPairLinearEquiv.toLinearMap ∈
+        GraphLattices.SixPointHeartExoticHalfPair ∧
+      ∃ slope : Matrix (Fin 4) (Fin 4) GraphLattices.F2,
+        (relativeSixAxisTwoPrimaryKernelCoordinates realization).map
+            GraphLattices.sixAxisStandardDiscriminantPairLinearEquiv.toLinearMap =
+            LinearMap.range (GraphLattices.graphEmbedding (K := GraphLattices.F2)
+              (Matrix.toLin' slope)) ∧
+          slope ^ 2 + slope + 1 = 0 ∧
+          minpoly GraphLattices.F2 slope =
+            GraphLattices.sixAxisQuadraticSlopePolynomial :=
+  GraphLattices.sixAxisSourceTwoPrimaryKernelCoordinates_exoticSelection
+    realization.jacobianPolarizationPrincipal realization.polarizationPullback
+    equivariant marked
+
 /-- The two-primary discriminant identification `D₂ ≃ H₂ ⊗ E[2]`, constructed
 from the two-torsion coordinates and from the computed kernel of the realized
 source polarization rather than supplied. -/
@@ -743,6 +792,24 @@ structure RelativeSixAxisConclusion
             (relativeSixAxisThreePrimaryKernelHeartCoordinates (geometry.homology parameter)) ∧
           relativeSixAxisThreePrimaryKernelHeartCoordinates (geometry.homology parameter) ∈
             GraphLattices.SixPointThreeHeartStableHalfPacket
+  /-- On every fibre the marked transported two-primary kernel is one of the two
+  exotic members of the packet, and is therefore the graph of a slope whose
+  minimal polynomial over the field with two elements is the irreducible
+  quadratic `t²+t+1`.  The marking is supplied; equivariance alone cannot select
+  a member, since all five are stable. -/
+  twoPrimaryKernelExoticSelection :
+    ∀ (geometry : RelativeSixAxisGeometricInput objects) (parameter : Base),
+      (relativeSixAxisTwoPrimaryKernelCoordinates (geometry.homology parameter)).map
+            GraphLattices.sixAxisStandardDiscriminantPairLinearEquiv.toLinearMap ∈
+          GraphLattices.SixPointHeartExoticHalfPair ∧
+        ∃ slope : Matrix (Fin 4) (Fin 4) GraphLattices.F2,
+          (relativeSixAxisTwoPrimaryKernelCoordinates (geometry.homology parameter)).map
+              GraphLattices.sixAxisStandardDiscriminantPairLinearEquiv.toLinearMap =
+              LinearMap.range (GraphLattices.graphEmbedding (K := GraphLattices.F2)
+                (Matrix.toLin' slope)) ∧
+            slope ^ 2 + slope + 1 = 0 ∧
+            minpoly GraphLattices.F2 slope =
+              GraphLattices.sixAxisQuadraticSlopePolynomial
   /-- The two-primary discriminant identification `D₂ ≃ H₂ ⊗ E[2]` is
   constructed from the realized polarization rather than supplied: in the
   supplied two-torsion coordinates it is the computed kernel equivalence of the
@@ -888,6 +955,11 @@ theorem relativeSixAxis_of_geometricInputs
         relativeSixAxisThreePrimaryKernelHeartCoordinates_equivariantPacket
           (otherGeometry.homology parameter)
           (otherGeometry.homologyComparisonEquivariant parameter)⟩,
+    fun otherGeometry parameter ↦
+      relativeSixAxisTwoPrimaryKernelCoordinates_exoticSelection
+        (otherGeometry.homology parameter)
+        (otherGeometry.homologyComparisonEquivariant parameter)
+        (otherGeometry.twoPrimaryKernelFrobeniusMarked parameter),
     fun otherGeometry parameter _ ↦
       (otherGeometry.heartTensorTorsionCoordinates parameter).apply_symm_apply _,
     fun otherGeometry parameter _ ↦

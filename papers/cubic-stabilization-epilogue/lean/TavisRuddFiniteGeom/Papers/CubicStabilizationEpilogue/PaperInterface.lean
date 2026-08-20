@@ -635,6 +635,41 @@ theorem relativeSixAxis_primaryKernelEquivariantPackets
     Applications.relativeSixAxisThreePrimaryKernelHeartCoordinates_equivariantPacket realization
       equivariant⟩
 
+/-- Marked selection of the exotic member for the two-primary kernel of one
+fibre.  Suppose the fibre's integral comparison matrix pulls a unimodular
+alternating form back to the source polarization, is equivariant for the two
+displayed generators of the six-label action, and its transported two-primary
+kernel is Frobenius marked, that is, its packet class is moved by the Frobenius
+involution of the packet of diagonally stable halves.  Then that class is one of
+the two exotic members, hence the graph of a slope annihilated by `t²+t+1`,
+whose minimal polynomial over the field with two elements is that irreducible
+quadratic; this is the coefficient-side slope datum of the marked finite-etale
+graph presentation at the prime two.  Equivariance alone cannot select a member,
+because the packet is exactly the set of diagonally stable maximal-isotropic
+subspaces and so all five members satisfy the same group hypothesis.  The
+marking is a hypothesis on explicit matrices: no relative isogeny, torsion group
+scheme, Weil pairing, geometric group action, or arithmetic Frobenius of a
+family is constructed. -/
+theorem relativeSixAxis_twoPrimaryKernelExoticSelection
+    (realization : Applications.RelativeSixAxisHomologyRealization)
+    (equivariant : realization.alternatingEquivariant)
+    (marked : GraphLattices.SixPointHeartFrobeniusMarked
+      ((Applications.relativeSixAxisTwoPrimaryKernelCoordinates realization).map
+        GraphLattices.sixAxisStandardDiscriminantPairLinearEquiv.toLinearMap)) :
+    (Applications.relativeSixAxisTwoPrimaryKernelCoordinates realization).map
+          GraphLattices.sixAxisStandardDiscriminantPairLinearEquiv.toLinearMap ∈
+        GraphLattices.SixPointHeartExoticHalfPair ∧
+      ∃ slope : Matrix (Fin 4) (Fin 4) GraphLattices.F2,
+        (Applications.relativeSixAxisTwoPrimaryKernelCoordinates realization).map
+            GraphLattices.sixAxisStandardDiscriminantPairLinearEquiv.toLinearMap =
+            LinearMap.range (GraphLattices.graphEmbedding (K := GraphLattices.F2)
+              (Matrix.toLin' slope)) ∧
+          slope ^ 2 + slope + 1 = 0 ∧
+          minpoly GraphLattices.F2 slope =
+            GraphLattices.sixAxisQuadraticSlopePolynomial :=
+  Applications.relativeSixAxisTwoPrimaryKernelCoordinates_exoticSelection
+    realization equivariant marked
+
 /-- The discriminant pairing of the six-axis source polarization on integral
 representatives, and its nondegeneracy.  On the classes of two integral
 vectors the pairing is the class modulo one of the rational number
@@ -2954,6 +2989,71 @@ theorem principalGluing_f4Frobenius_fixed_and_exchanged :
     GraphLattices.f4ProjectiveFrobenius_nonfixed_iff_markedProjectivePair,
     GraphLattices.f4ProjectiveLineFrobenius_involutive,
     GraphLattices.f4ProjectiveLineFrobenius_nonfixed_iff_markedGraphPair⟩
+
+/-- Frobenius marking on the packet of diagonally stable halves of the
+coefficient heart.  Frobenius of the labelling field, transported to the packet
+through its affine-chart equivalence, is an involution whose fixed members are
+exactly the three defined over the prime field — the vertical copy and the
+graphs of the slopes `0` and `1` — and which exchanges the two remaining
+members, the graphs of `W` and `W+1`.  On a graph member it squares the slope.
+Marking a subspace means asserting that it is moved by this involution; for a
+packet member that is equivalent to being one of the two exotic members, and
+the slope of either has minimal polynomial `t²+t+1` over the field with two
+elements, so it generates a quadratic finite-etale extension.  Stability under
+the packet-preserving group cannot make this distinction, since every packet
+member is stable.  This statement identifies no geometric Galois or normalizer
+action with the transported involution. -/
+theorem principalGluing_stableHalfPacket_frobeniusMarking :
+    Function.Involutive
+        GraphLattices.sixPointHeartStableHalfPacketFrobenius ∧
+    (∀ member : {subspace // subspace ∈
+        GraphLattices.SixPointHeartStableHalfPacket},
+      GraphLattices.sixPointHeartStableHalfPacketFrobenius member = member ↔
+        member.1 ∈ GraphLattices.SixPointHeartPrimeFieldHalfTriple) ∧
+    (∀ member : {subspace // subspace ∈
+        GraphLattices.SixPointHeartStableHalfPacket},
+      GraphLattices.sixPointHeartStableHalfPacketFrobenius member ≠ member ↔
+        member.1 ∈ GraphLattices.SixPointHeartExoticHalfPair) ∧
+    (GraphLattices.sixPointHeartStableHalfPacketFrobenius
+        (GraphLattices.sixPointHeartProjectiveChartEquivStableHalfPacket
+          (some GraphLattices.sixAxisQuadraticSlopeRootInF4))).1 =
+        LinearMap.range
+          (GraphLattices.graphEmbedding (K := GraphLattices.F2)
+            (Matrix.toLin'
+              (GraphLattices.sixPointHeartCommutantRoot + 1))) ∧
+    (GraphLattices.sixPointHeartStableHalfPacketFrobenius
+        (GraphLattices.sixPointHeartProjectiveChartEquivStableHalfPacket
+          (some (GraphLattices.sixAxisQuadraticSlopeRootInF4 + 1)))).1 =
+        LinearMap.range
+          (GraphLattices.graphEmbedding (K := GraphLattices.F2)
+            (Matrix.toLin' GraphLattices.sixPointHeartCommutantRoot)) ∧
+    (∀ scalar : GraphLattices.F4,
+      GraphLattices.sixPointHeartCommutantMatrixOfF4
+          (GraphLattices.f4Frobenius scalar) =
+        GraphLattices.sixPointHeartCommutantMatrixOfF4 scalar ^ 2) ∧
+    (∀ subspace : Submodule GraphLattices.F2
+        (GraphLattices.SixPointHeart × GraphLattices.SixPointHeart),
+      subspace ∈ GraphLattices.SixPointHeartStableHalfPacket →
+        (GraphLattices.SixPointHeartFrobeniusMarked subspace ↔
+          subspace ∈ GraphLattices.SixPointHeartExoticHalfPair)) ∧
+    ∀ subspace : Submodule GraphLattices.F2
+        (GraphLattices.SixPointHeart × GraphLattices.SixPointHeart),
+      subspace ∈ GraphLattices.SixPointHeartExoticHalfPair →
+        ∃ slope : Matrix (Fin 4) (Fin 4) GraphLattices.F2,
+          subspace = LinearMap.range
+              (GraphLattices.graphEmbedding (K := GraphLattices.F2)
+                (Matrix.toLin' slope)) ∧
+            slope ^ 2 + slope + 1 = 0 ∧
+            minpoly GraphLattices.F2 slope =
+              GraphLattices.sixAxisQuadraticSlopePolynomial := by
+  exact ⟨GraphLattices.sixPointHeartStableHalfPacketFrobenius_involutive,
+    GraphLattices.sixPointHeartStableHalfPacketFrobenius_fixed_iff,
+    GraphLattices.sixPointHeartStableHalfPacketFrobenius_nonfixed_iff_exotic,
+    GraphLattices.sixPointHeartStableHalfPacketFrobenius_exchanges_exoticPair.1,
+    GraphLattices.sixPointHeartStableHalfPacketFrobenius_exchanges_exoticPair.2,
+    GraphLattices.sixPointHeartCommutantMatrixOfF4_frobenius,
+    fun _ member ↦ GraphLattices.sixPointHeartFrobeniusMarked_iff_exotic member,
+    fun _ member ↦ GraphLattices.sixPointHeartExoticHalfPair_graphSlope member⟩
 
 /-- Concrete polarization calculation from the principal-gluing proof.  The
 trace of the determinant on `F4²` is nondegenerate over `F2`; the induced
