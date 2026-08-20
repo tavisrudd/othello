@@ -57,6 +57,7 @@ No manuscript or Lean source is part of this packet.
 | 50 | opposite-cone obstruction to every ordinary multi-coordinate repair | notes/2026-08-20-c925-multicoordinate-phase-no-go.md |
 | 51 | mixed-support obstruction to descent of the completed kernel | notes/2026-08-20-c925-open-restriction-mixed-support-no-go.md |
 | 52 | LG/\(p\)-field bypass and invariant-quadratic character obstruction | notes/2026-08-20-c925-lg-pfield-completion-gate.md |
+| 53 | saturated confluence and normalized primary-row coimages | notes/2026-08-20-c925-saturated-confluence-primary-coimage.md |
 | frontier | open experiments and provider targets | notes/2026-08-20-c925-exploration-frontier.md |
 
 ## Dependency spine
@@ -83,7 +84,7 @@ Modules 19--23 prove reusable categorical consequences:
 - universal center-null quotients and minimal sufficient shadows; and
 - the conditional Section 6 argument as a separate specialization.
 
-Modules 24--52 isolate the higher-stabilization frontier:
+Modules 24--53 isolate the higher-stabilization frontier:
 
 - irrationality on any unbounded stabilization set implies irrationality for
   every index;
@@ -205,6 +206,15 @@ Modules 24--52 isolate the higher-stabilization frontier:
   \(p x_\kappa\) potential removes a genuine raw direction together with the
   added one, so a GLSM bypass needs a new critical target and a new
   QDM/Gamma realization; and
+- inside one canonical trait lattice, the saturated closure of every
+  generically rank-null supported span has a flat quotient and remains
+  row-null on the closed fibre.  Thus the Boolean rank consumer does not need
+  a full comparison of incident Stokes splittings: it needs both actual
+  fixed-phase packets to be read faithfully in that one quotient.  The same
+  module proves that the normalized quantum-Serre/conormal primary-row map is
+  a unit, including the exact ramification order; the only remaining local
+  gates are the common canonical trait receiver and closed packet/coimage
+  quotient-fidelity with exact base change; and
 - the rank-row route remains the higher-EV uniform alternative.
 
 ## Current \(m=2\) alternatives
@@ -300,6 +310,16 @@ coordinate as well.  Current \(p\)-field theorems recover hypersurface or
 complete-intersection theories, not the original overlap QDM.  Hence this
 route is no shorter unless a geometrically meaningful critical target and
 its fixed-phase QDM/Gamma realization are first supplied.
+Module 53 gives the source-extension replacement for that realization gate.
+In a fixed trait receiver, quotient by the saturated closure of the generic
+row-null supported span.  The quotient is automatically finite free, the row
+descends, and no punctual rank class can appear.  Separately, the universal
+quantum-Serre/conormal factor has an exactly invertible normalized primary
+row coimage.  Consequently a full two-arrow Stokes-mutation calculation and
+a separate scalar calculation are unnecessary.  What remains is to
+construct one canonical occurrence trait receiver and prove that both actual
+closed fixed-phase packets, projectors, rows, and adjacent reindexings are
+faithfully identified with its saturated quotient.
 
 ### ExactTop provider
 
@@ -366,6 +386,8 @@ vanishing remain open.
   notes/2026-08-20-c925-open-restriction-mixed-support-no-go.md
 - LG/\(p\)-field bypass and invariant-quadratic obstruction:
   notes/2026-08-20-c925-lg-pfield-completion-gate.md
+- saturated confluence and normalized primary-coimage source extension:
+  notes/2026-08-20-c925-saturated-confluence-primary-coimage.md
 
 ## Executable witnesses
 

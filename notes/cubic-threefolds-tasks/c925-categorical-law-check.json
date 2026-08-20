@@ -1,5 +1,5 @@
 {
-  "check_count": 103,
+  "check_count": 108,
   "checks": {
     "all_five_completed_window_rank_jets_are_the_same_unit": "pass",
     "ambient_target_shear_changes_primitive_row_restriction": "pass",
@@ -53,6 +53,9 @@
     "nonpointed_opposite_charges_can_create_charge_zero": "pass",
     "nonzero_discrepancy_character_excludes_raw_quasi_symmetry": "pass",
     "normal_jet_requires_a_new_consumer_not_raw_specialization": "pass",
+    "normalized_primary_coimage_respects_generalized_character_block": "pass",
+    "normalized_primary_coimages_compose_order_and_unit_separately": "pass",
+    "normalized_primary_row_records_ramified_order_exactly": "pass",
     "only_internal_discrepant_run_overlaps_remain": "pass",
     "opposite_exacttop_allows_harmless_graph": "pass",
     "optic_residual_and_path_functor_naturality": "pass",
@@ -60,6 +63,7 @@
     "oriented_quiver_orthogonality_kills_opposite_boundary": "pass",
     "orlov_gamma_lift_forces_blowup_rank_row": "pass",
     "orlov_helix_wrap_threshold_matches_projective_window": "pass",
+    "parameter_torsion_is_closed_visible_but_generic_invisible": "pass",
     "perfect_generic_equivalence_can_gain_two_closed_cohomologies": "pass",
     "point_is_killed_as_input_but_survives_in_euler_image": "pass",
     "point_line_pairing_is_equivalent_to_ambient_rank_row": "pass",
@@ -79,6 +83,7 @@
     "row_kernel_two_sided_closure_trivializes_m2": "pass",
     "row_line_stabilizer_affine_group_law": "pass",
     "row_stabilizer_composition_telescope": "pass",
+    "saturated_row_null_closure_has_flat_closed_quotient": "pass",
     "sector_path_transport_needs_stokes_optic_residual": "pass",
     "simple_retained_character_forces_row_line": "pass",
     "sparse_kernel_profile_reconstructs_jordan_type": "pass",

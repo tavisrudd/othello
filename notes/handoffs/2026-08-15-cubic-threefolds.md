@@ -46,13 +46,13 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   theorem and priority gates pass. Secondary tests are full Fano-transfer
   surjectivity and a monodromy-equivariant family form. Card:
   `../cubic-threefolds-tasks/c934-integral-theta-decomposition-complex.md`.
-- **C933 — short Hodge-atom marker-ledger companion, active.**  C933 owns a
-  new strictly `m=1` companion under `papers/hodge-atom-marker-ledger/` and one
-  non-load-bearing cross-reference sentence in the epilogue.  It must give a
-  self-contained standard Hodge-atom specialization, keep its thin-groupoid
-  and filtration types explicit, and leave both the epilogue theorem graph and
-  the Gamma-row manuscript unchanged.  Card:
-  `../cubic-threefolds-tasks/c933-hodge-atom-marker-ledger-companion.md`.
+- **C933 — closed 2026-08-20; six-page Hodge-atom marker-ledger companion.**
+  The standard atom construction is now a self-contained, strictly `m=1`
+  specialization of the categorical occurrence/groupoid/fold spine; the
+  epilogue has one non-load-bearing cross-reference and remains fifty pages,
+  Gamma-row is untouched, and both standalone repositories are synchronized
+  and verified.  Report:
+  `../2026-08-20-c933-hodge-atom-marker-ledger-companion.md`.
 - **C931 -- closed 2026-08-20; C928 repaired, re-refereed, and submission-ready.**
   The four adopted local findings were repaired without changing a theorem or
   proof mechanism: exact FVME credit, the integral-IH truncation convention and
@@ -287,11 +287,23 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   deletes that raw direction too.  A GLSM proof therefore needs a genuinely
   new critical target and an independent fixed-phase QDM/Gamma
   identification; it is not a shorter formal bypass.
+  Module 53 replaces the remaining vague two-arrow Stokes theorem by a
+  smaller source extension.  Inside one canonical finite-free trait receiver,
+  the saturated closure of the generically rank-null supported span has a
+  flat quotient and remains row-null on the closed fibre.  Both incident
+  Boolean markers therefore agree as soon as their actual closed primitive
+  packets, rows, projectors, and reindexings are faithfully identified with
+  that one quotient.  The same module proves that the normalized
+  quantum-Serre/conormal map is a unit on every saturated primary row
+  coimage, with exact ramification order.  Thus neither a full Stokes-mutation
+  matrix nor another scalar computation is required.  The live local gate is
+  now exactly a common canonical occurrence trait receiver plus closed
+  packet/coimage quotient-fidelity and exact base change.
   Shifted tensor stability and the extremal multinomial source law are
   proved, but the occurrence-indexed exact QDM sequence, actual carrier
   exponent, and boundary vanishing remain open.  The packet is split into
   bounded module companions behind a stable index.  The
-  one-hundred-three-check
+  one-hundred-eight-check
   finite law replay, eleven-check typed Haskell toy, and original cubic
   replay are green.  C925 remains open at fixed-phase Gamma/rank transport
   or at this ExactTop provider; the relative-cap cancellation remains one

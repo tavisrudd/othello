@@ -54,6 +54,8 @@ exact \(m=2\) and all-\(m\) transport gates.
   notes/2026-08-20-c925-non-m2-categorical-dividends.md
 - conditional Section 6 specialization:
   notes/2026-08-20-c925-framed-m1-specialization.md
+- saturated-confluence and normalized-primary-coimage source extension:
+  notes/2026-08-20-c925-saturated-confluence-primary-coimage.md
 
 The packet index owns the module-to-file map.  Do not append another large
 module to this card or to the index; add one focused companion file and one
@@ -226,6 +228,15 @@ index row.
   the nonzero discrepancy.  The obvious \(p x_\kappa\) potential deletes a
   genuine raw direction as well.  Existing \(p\)-field theorems recover
   hypersurface/complete-intersection theories, not the original overlap QDM.
+- In one canonical trait receiver, the saturated closure of the generically
+  row-null supported span has a finite-free quotient and stays row-null after
+  specialization.  Hence the Boolean consumer does not require a full
+  comparison of two Stokes splittings.  The normalized quantum-Serre or
+  conormal map is also exactly a unit on the primary row coimage, with
+  ramification order recorded.  The complete residual local gate is now the
+  construction of that common occurrence trait receiver and faithful exact
+  identification of both actual closed fixed-phase packets with its
+  saturated quotient.
 
 ## Open geometric providers
 
@@ -294,16 +305,18 @@ Typed replay:
       | diff -u \
           notes/cubic-threefolds-tasks/c925-sparse-shadow-path-toy-output.txt -
 
-The finite model currently has one hundred three checks.  It verifies only the
+The finite model currently has one hundred eight checks.  It verifies only the
 advertised algebraic laws and countermodels, never an external QDM provider.
 
 ## Next
 
-1. Construct the occurrence-level fixed-phase QDM/Gamma square
-   identifying Module 43's universal normalized jet with the actual endpoint
-   row transition, with exact coimage base change and adjacent reindexing.
-   Module 51 shows that the rank-row consumer is already insensitive to all
-   mixed boundary support, so no full open-category equivalence is needed.
+1. Construct the Module 53 common canonical trait receiver for every
+   consecutive-discrepant overlap.  Put both incident one-arrow receivers in
+   its generic fibre, take the saturated closure of their row-null supported
+   span, and identify both actual closed fixed-phase primitive packets with
+   the resulting quotient, including projector, row, coimage base change,
+   deck character, and adjacent reindexing.  This is now strictly smaller
+   than a full two-arrow Stokes-mutation theorem.
 2. Pursue a relative \(p\)-field or enlarged-group master-space comparison
    only after naming a nontrivial critical target whose QDM/Gamma realization
    is the original cubic packet.  A metabolic quadratic stabilization cannot
@@ -326,24 +339,24 @@ advertised algebraic laws and countermodels, never an external QDM provider.
    character sector automatically, so identify the actual cubic packet with
    one common based loop or typed deck path and record the induced character
    map under reindexing.
-5. Prove that the two incident sectorial gauges identify their actual
-   row-null supported spans, then compare their induced ambient quotients.
-   A common nonturning Hom-system with identical formal asymptotics would
-   kill the full overlap by multisummation uniqueness.
-5. Treat the arbitrary relative-cap lift and same-receiver lower-center
+5. Use the normalized-primary-coimage theorem to identify Module 43's
+   universal conormal jet with the actual endpoint row transition.  The
+   scalar and ramification orders are already proved; only occurrence
+   realization and exact quotient-fidelity remain.
+6. Treat the arbitrary relative-cap lift and same-receiver lower-center
    charge adapter as alternative routes, not prerequisites for the rank-row
    overlap route.
-6. Prove the local fixed-phase QDM point-line law of Module 35: commute the
+7. Prove the local fixed-phase QDM point-line law of Module 35: commute the
    primitive projector with the chosen monodromy, identify the Gamma and
    formally normalized point lines using a non-Picard selector or strict
    multiplicity-one filtration quotient, and provide lawful adjacent/endpoint
    reindexing along one chosen factorization.
-7. As the ExactTop alternative, construct a **corrected intrinsic**
+8. As the ExactTop alternative, construct a **corrected intrinsic**
    support/Gysin realization for Module 32; ordinary Gamma or residual
    projection is ruled out by the point regression.
-8. Prove the sharp occurrence-indexed exceptional exponent/carrier bound.
-9. If the monodromy route fails, construct the opposite-oriented enriched
+9. Prove the sharp occurrence-indexed exceptional exponent/carrier bound.
+10. If the monodromy route fails, construct the opposite-oriented enriched
    exact sequence and use the Module 25/26 boundary adapter.
-10. Continue the higher-EV rank-row common-receiver audit in parallel.
+11. Continue the higher-EV rank-row common-receiver audit in parallel.
 
 C925 remains active until the user closes it.

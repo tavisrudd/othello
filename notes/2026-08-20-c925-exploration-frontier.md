@@ -140,6 +140,18 @@ are:
     geometric identification of the actual cubic packet with one common
     based loop or typed deck path, including the explicit character mapping
     under adjacent reindexing.
+    Module 53 now proves the strongest source-side extension available
+    without constructing that occurrence.  In one canonical trait receiver,
+    quotient by the saturated closure of the generic row-null supported span.
+    This quotient is automatically flat, its row survives exact
+    specialization, and both incident Boolean markers agree if their actual
+    closed packets are faithfully read there.  The normalized
+    quantum-Serre/conormal primary row is already a unit, including under
+    ramification.  The highest-EV test is therefore no longer a six-case
+    Stokes-matrix or scalar calculation: construct the common trait receiver
+    and prove closed packet/projector/coimage quotient-fidelity for one
+    consecutive-discrepant pilot, then show the construction is
+    occurrence-uniform.
 23. **Can the completed comparison be restricted to the intended
     total-space open?**  Module 48 proves that canonical-character completion
     is numerically crepant for every toric wall, independently of
@@ -166,7 +178,7 @@ are:
     row is the original cubic packet.
 
 None of these questions blocks the proof in Modules 0--16 or the
-transport-level specialization audit in Module 17.  Modules 18--52 isolate
+transport-level specialization audit in Module 17.  Modules 18--53 isolate
 the general consequences without claiming the missing enriched provider.
 The open questions control whether the interface can be promoted from a
 lawful compiler to a canonical equivalence with the complete external
