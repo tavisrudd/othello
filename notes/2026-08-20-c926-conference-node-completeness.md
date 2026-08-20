@@ -176,6 +176,15 @@ checker, its schema `paper-v-conference-node-completeness-v1`, and its accepted
 terminal line `CHECK OK (EXACTLY_SIX_REDUCED_NODES)`, since that appendix
 currently describes `make evidence` as returning a single verdict.
 
+> **Superseded as authority by [C927](2026-08-20-c927-determinantal-node-count.md)
+> on the same day.** The route sketched below was carried out: the count is now a
+> theorem with no machine step, valid in every characteristic outside
+> \(\{2,3,5\}\) in which five is a square. The certificate in this report remains
+> valid and is now an independent cross-check rather than the reason to believe
+> the count. The section below is kept as the derivation record; the finished
+> proof, which replaced the refined-Bézout step of item 4 by an elementary rank
+> analysis, is in the C927 report.
+
 ## Structural route, found after closeout
 
 The Gröbner delegation is removable. The conference cubic is a determinant of a
