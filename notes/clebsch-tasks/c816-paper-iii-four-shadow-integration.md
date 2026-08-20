@@ -208,7 +208,20 @@ the modular kernel in the conference tangent space is the real fact and is
 stronger than the coincidence it was mistaken for. Neither the coincidence nor
 any sentence resting on it may enter the manuscript.
 
-## Work item 3 — the shorter balanced exchange rigidity proof
+## Work item 3 — the shorter balanced exchange rigidity proof — APPLIED 2026-08-20
+
+The replacement text is in the manuscript. The switching normalization and
+`R(3,3)=6` are gone from this proof; the inclusion-matrix rank formula is now
+attribution rather than a dependency, with the one-element swap descent proved
+in the text; and the whole-matrix fourth-trace pin `(2d-3)w = -3` both excludes
+the large orders and identifies order six as the one carrying weight `-1` on
+every four-set. It costs one page rather than saving space, which the
+simplification note predicted the other way round. The trust manifest's
+`OPER-3` row already described this proof, so the manuscript and its evidence
+map now agree. Detail in
+`notes/2026-08-20-c816-exchange-rigidity-and-abstract-decision.md`.
+
+### Original scope
 
 Still unlanded, verified 2026-08-19: the proof at
 `sections/05-golden-operator.tex:455-470` continues to switch \(C\) so that all
@@ -238,7 +251,30 @@ dependency, since the swap descent is proved in
 Note that the other two uses of \(R(3,3)=6\) in the section, at lines 551 and
 635, belong to the reconstruction argument's aligned anchor and stay.
 
-## Work item 4 — abstract and theorem hierarchy
+## Work item 4 — abstract and theorem hierarchy — DECIDED 2026-08-20
+
+**Necessity is stated in the abstract; the theorem hierarchy is not
+restructured.** The abstract's four-descriptions sentence is now followed by the
+characterization, the local rigidity, and the sign-locus nondegeneracy form; the
+introduction gained a paragraph naming the three statements after the operator
+stage; and the conclusion says the agreement of the four descriptions identifies
+the carrier. The source--shadow--return spine, the figure, the reading map, the
+section order, and the claim identifiers are unchanged, because the recognition
+theorem characterizes the carrier rather than standing on the main route and
+would compete with it as a headline. No novelty adjective was introduced; row
+`OPER-5` licenses "we prove" and "we have not located" only. Reasoning and the
+exact changes in
+`notes/2026-08-20-c816-exchange-rigidity-and-abstract-decision.md`.
+
+Registering the two new statements was a four-file operation the scaffold gate
+does not enforce: `EXPECTED_LABELS` in
+`verification/extract_statement_identity.py`, the `OPER-1` row in
+`verification/trust_manifest.json`, a regenerated
+`verification/statement_identity.json`, and the removal of repository `notes/`
+paths and a numbered workflow identifier from release-visible text. The
+intermediate commit left the statement-identity gate red until these landed.
+
+### Original scope
 
 Gated on work item 1. The abstract still presents the source cubic as having
 "four exact descriptions" — coincident realizations — and says nothing about
