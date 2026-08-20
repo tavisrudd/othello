@@ -3230,8 +3230,17 @@
       "last": 926,
       "purpose": "Paper V mod-11 completeness certificate for the conference node count",
       "sequence": 359
+    },
+    {
+      "count": 1,
+      "first": 927,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 927,
+      "purpose": "Determinantal structural proof of the conference node count",
+      "sequence": 360
     }
   ],
-  "next_id": 927,
+  "next_id": 928,
   "schema": "codex-task-id-allocations-v1"
 }
