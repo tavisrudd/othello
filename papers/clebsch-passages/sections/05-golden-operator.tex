@@ -345,8 +345,197 @@ gives the class.  Its complementary-minor calculation gives the factor \(4\);
 a signed relabelling multiplies it by that relabelling's determinant.
 \end{proof}
 
-The hypotheses exclude zero proportionality and vanishing off-diagonal entries;
-the remaining weighted solutions of \(A^2=\lambda I\) are not classified.
+The hypotheses exclude zero proportionality and vanishing off-diagonal entries.
+What the theorem leaves open is not the conclusion \(A^2=\lambda I\), whose
+solutions are described below, but which weighted matrices among them satisfy
+the proportionality; those are not classified.
+
+\paragraph{Rigidity of the equality.}
+Let \(W\) be the fifteen-dimensional space of real symmetric order-six matrices
+with zero diagonal, coordinatized by the entries \(a_{ij}\), and for a
+\(3\)-subset \(S\) let \(h_S(A)\) be the coefficient of \(x_S\) in
+\(\operatorname{Pf}[D_x,A]\).  Both \(h_S\) and
+\(\tau_S(A)=a_{ij}a_{jk}a_{ki}\) are homogeneous cubics in the entries, so the
+oriented equality locus
+\[
+ X_\varepsilon=\{A\in W:h_S(A)=4\varepsilon\tau_S(A)\ \text{for all twenty}\ S\},
+ \qquad\varepsilon=\pm1,
+\]
+is a cone.  The representative \(C\) of Section~\ref{sec:orientation-source}
+lies in \(X_{+1}\), and with it the whole line \(\mathbf R\,C\).  Nothing else
+lies nearby.
+
+\begin{theorem}[Rigidity at the golden representative]
+\label{thm:golden-equality-rigidity}
+The twenty functions \(F_S=h_S-4\tau_S\) have Jacobian of rank fourteen at
+\(C\), with kernel the scaling line \(\mathbf R\,C\).  Near \(C\) the locus
+\(X_{+1}\) is therefore exactly that line, and the same holds for
+\(h_S+4\tau_S\) at the opposite oriented representative.
+\end{theorem}
+
+\begin{proof}
+Euler's relation gives \(\mathrm dF_S(C)[C]=3F_S(C)=0\), so the kernel contains
+\(\mathbf R\,C\) and the rank is at most fourteen.  The content is the reverse
+inequality.
+
+Each \(F_S\) is multilinear in the entries: \(\tau_S\) uses each edge inside
+\(S\) once, and \(h_S\) is the complementary minor \(\det A[S^c,S]\) up to sign,
+a determinant with one entry from each row and column of the cross block.  So
+every partial derivative is the difference of two values of \(F_S\), at
+\(a_e=1\) and at \(a_e=0\), and is an exact integer.  Only twelve of the fifteen
+edges occur: for \(e=\{i,j\}\subset S=\{i,j,k\}\) one gets
+\(\partial F_S/\partial a_e=-4\varepsilon a_{ik}a_{jk}\); for \(e\) joining
+\(S\) to \(S^c\) the derivative is the corresponding signed \(2\times2\) cofactor
+of \(A[S^c,S]\); and for \(e\) inside \(S^c\) it vanishes.
+
+Let \(G\) be the stabilizer of \(C\) among the signed permutations
+\(A\mapsto D_\epsilon P_\sigma AP_\sigma^{\mathsf T}D_\epsilon\), taken modulo
+the global sign, which acts trivially on edge weights.  Triangle products are
+invariant up to relabelling, since each vertex of a triangle carries two of its
+edges and the two signs cancel, while \(h_S\) acquires
+\(\operatorname{sgn}(\sigma)\det D_\epsilon\).  Both factors are \(+1\)
+throughout \(G\), so \(G\) permutes the \(F_S\) and the Jacobian
+\(J\colon W\to\mathbf R^{20}\) is \(G\)-equivariant.  Here \(G\) has order sixty,
+with element orders \(1,2,3,5\) occurring \(1,15,20,24\) times, so it is the
+alternating group of degree five: the orientation-preserving half of the
+two-graph automorphism group recovered in the pentagon normalization above.
+
+Hence \(\ker J\) is a \(G\)-submodule.  Every irreducible representation of that
+group has a nonzero vector fixed by a subgroup of order three---the fixed-space
+dimensions \((\chi(1)+2\chi(c_3))/3\) are \(1,1,1,2,1\) in dimensions
+\(1,3,3,4,5\)---so if \(\ker J\) were larger than \(\mathbf R\,C\), complete
+reducibility would split off a nonzero complementary submodule and give
+\[
+ \dim\bigl(\ker J\cap W^{\langle h\rangle}\bigr)\ge2
+\]
+for any \(h\in G\) of order three.  The computation therefore takes place in
+\(W^{\langle h\rangle}\) rather than in \(W\).
+
+Take \(h=(0\,2\,4)(1\,3\,5)\) with signs \((+,-,-,-,-,+)\).  Its five edge
+orbits carry trivial sign holonomy, so their signed sums
+\[
+\begin{aligned}
+ u_1&=e_{01}+e_{23}-e_{45}, &
+ u_2&=e_{02}-e_{04}+e_{24}, &
+ u_3&=e_{03}-e_{14}-e_{25},\\
+ u_4&=e_{05}+e_{12}+e_{34}, &
+ u_5&=e_{13}+e_{15}-e_{35} &&
+\end{aligned}
+\]
+are a basis of the five-dimensional space \(W^{\langle h\rangle}\), in which
+\(C=u_1+u_2+u_3-u_4-u_5\).  On this basis the twenty rows of \(J\) collapse to
+eight, each divided by the content of its entries:
+\begin{equation}
+\label{tab:reduced-jacobian}
+\begin{array}{c|rrrrr}
+ \text{triples} & u_1 & u_2 & u_3 & u_4 & u_5\\\hline
+ 012,\,045,\,234 &  1 &  0 & -1 & -1 &  1\\
+ 013,\,145,\,235 &  2 & -1 &  1 &  3 & -1\\
+ 014,\,023,\,245 & -2 & -1 & -1 & -3 & -1\\
+ 015,\,123,\,345 & -1 &  1 &  1 &  1 &  0\\
+ 024             & -1 &  2 &  0 &  1 &  0\\
+ 025,\,034,\,124 &  3 & -1 & -1 &  2 & -1\\
+ 035,\,125,\,134 & -3 & -1 &  1 & -2 & -1\\
+ 135             &  1 &  0 &  0 & -1 &  2
+\end{array}
+\end{equation}
+Every row annihilates \((1,1,1,-1,-1)\), as Euler's relation requires.  The rows
+from \(012\), \(013\), \(015\) and \(024\) have determinant \(-5\) in the columns
+\(u_1,\dots,u_4\), so the rank on \(W^{\langle h\rangle}\) is four and
+\(\ker J\cap W^{\langle h\rangle}\) is the line through \(C\).  That contradicts
+the displayed inequality unless \(\ker J=\mathbf R\,C\).
+
+The constant-rank theorem confines \(X_{+1}\) to a one-dimensional manifold near
+\(C\); the scaling line is a one-dimensional submanifold of \(X_{+1}\), so the
+two agree there.  An odd signed permutation negates \(h_S\) and fixes
+\(\tau_S\), carrying the whole argument to \(X_{-1}\).
+\end{proof}
+
+The rigidity has a module form, which says what the equality does to the
+conference directions.  Write \(T\) for the tangent space at \(C\) to the locus
+\(\{A^2=\lambda I\}\).  Its dimension is forced rather than computed.  A real
+symmetric hollow \(A\) satisfies \(A^2=\lambda I\) exactly when
+\(A/\sqrt\lambda=2P-I\) for an orthogonal projection \(P\) of rank three with
+every diagonal entry \(\tfrac12\), that is, exactly when the rows of any
+factorization of \(P\) form an equal-norm tight frame of six vectors in
+\(\mathbf R^3\).  Those projections are cut out of \(\mathrm{Gr}(3,\mathbf R^6)\),
+of dimension nine, by the six equations \(P_{ii}=\tfrac12\), whose sum holds
+identically on the Grassmannian; at most five are independent, so the projections
+form a family of dimension at least four, and \(\dim T\ge5\) after the scaling
+direction is added.
+
+Equality holds, and the splitting is visible.  As a \(G\)-module
+\(W\cong\mathbf1\oplus\mathbf4\oplus\mathbf5\oplus\mathbf5\), from the character
+\((15,3,0,0,0)\) on the classes of orders \(1,2,3,5,5\), and \(T\) is exactly
+\(\mathbf1\oplus\mathbf4\).  This is an eigenspace decomposition rather than a
+character computation: differentiating \(A^2=\lambda I\) gives
+\(CX+XC=\mu(X)I\) for \(X\in T\), and multiplying by \(C\) and using
+\(C^2=5I\) gives
+\[
+ CXC=\mu(X)C-5X,
+\]
+so \(X\mapsto\tfrac15CXC\) is an involution of \(T\) with \(+1\)-eigenspace
+\(\mathbf R\,C\) and \(-1\)-eigenspace \(\ker\mu\).  By
+Theorem~\ref{thm:golden-equality-rigidity} the Jacobian \(J\) is injective on
+\(\ker\mu\): the conference deformations the cubic equality kills are exactly
+the scalings.  This makes the conference count and the cubic count one
+statement about the four-dimensional constituent.
+
+On the sign locus the cubic identity can be dropped altogether.
+
+\begin{proposition}[Nonsingular complementary minors]
+\label{prop:nonsingular-complementary-minors}
+Let \(A\) be symmetric of order six with zero diagonal and every off-diagonal
+entry \(\pm1\).  Then \(A^2=5I\) if and only if \(\det A[S^c,S]\ne0\) for every
+\(3\)-subset \(S\), and in that case every one of those twenty determinants is
+\(\pm4\).
+\end{proposition}
+
+\begin{proof}
+A \(3\times3\) matrix with entries \(\pm1\) has determinant \(0\) or \(\pm4\):
+subtracting its first row from the other two leaves entries in \(\{0,\pm2\}\)
+there, so the determinant is divisible by \(4\), while Hadamard's inequality
+bounds it by \(3\sqrt3<6\).  Such a matrix is singular exactly when two of its
+rows are equal or opposite.  One direction is clear.  For the other, let
+\(g_1,g_2,g_3\) be the pairwise inner products of the rows; if no two rows are
+equal or opposite then each \(g_i=\pm1\), and the Gram determinant
+\(27+2g_1g_2g_3-3(g_1^2+g_2^2+g_3^2)=18+2g_1g_2g_3\) lies in \(\{16,20\}\).  It
+is the square of the determinant, hence lies in \(\{0,16\}\), so it is \(16\).
+
+Now fix \(p\ne q\), let \(r\) be any index other than \(p\) and \(q\), and put
+\(S=\{1,\dots,6\}\setminus\{p,q,r\}\), so that \(S^c=\{p,q,r\}\).  The rows of
+\(A[S^c,S]\) indexed by \(p\) and \(q\) are \((a_{pm})_{m\in S}\) and
+\((a_{qm})_{m\in S}\), and since the sum defining \((A^2)_{pq}\) omits
+\(m=p,q\) and runs over \(S\cup\{r\}\),
+\begin{equation}
+\label{eq:complementary-inner-product}
+ \sum_{m\in S}a_{pm}a_{qm}=(A^2)_{pq}-a_{pr}a_{qr}.
+\end{equation}
+
+Suppose every complementary minor is nonzero.  Then no two rows of
+\(A[S^c,S]\) are equal or opposite, so the left side of
+\eqref{eq:complementary-inner-product}, a sum of three signs, is not \(\pm3\);
+hence \(\lvert(A^2)_{pq}-a_{pr}a_{qr}\rvert=1\) for each of the four admissible
+\(r\).  Put \(t_r=a_{pr}a_{qr}\in\{\pm1\}\) and let \(k\) be the number of
+\(r\) with \(t_r=1\), so \((A^2)_{pq}=\sum_rt_r=2k-4\).  If \(k\ge1\) some
+\(t_r=1\) and \(\lvert2k-5\rvert=1\), forcing \(k\in\{2,3\}\); if \(k\le3\) some
+\(t_r=-1\) and \(\lvert2k-3\rvert=1\), forcing \(k\in\{1,2\}\).  Every
+\(k\in\{0,\dots,4\}\) meets at least one of the two hypotheses, and only
+\(k=2\) survives both.  Hence \((A^2)_{pq}=0\), while
+\((A^2)_{pp}=\sum_{m\ne p}a_{pm}^2=5\).
+
+Conversely, if \(A^2=5I\) then \eqref{eq:complementary-inner-product} gives
+\(\sum_{m\in S}a_{pm}a_{qm}=-a_{pr}a_{qr}=\pm1\) for every pair of rows of every
+complementary block, so no such block has two equal or opposite rows and all
+twenty determinants are \(\pm4\).
+\end{proof}
+
+This is where the factor \(4\) in
+Theorem~\ref{thm:triangle-pfaffian-recognition} comes from.  It is not the
+output of the two orbit computations displayed earlier: a \(3\times3\) sign
+matrix has determinant \(0\) or \(\pm4\) and nothing else, so once the
+complementary minors are forced away from zero the constant has no freedom
+left.
 
 \paragraph{Why the determinant.}
 The restricted determinant above is intrinsic; its scalar is fixed by the

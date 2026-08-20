@@ -133,7 +133,23 @@ repeated: `notes/2026-08-05-c876-two-graph-literature-audit.md` for the
 two-graph side, and `notes/2026-08-07-c880-literature-audit.md` for the
 principal-minor and determinantal side.
 
-## Work item 2 — Theorem D promotion
+## Work item 2 — Theorem D promotion — LANDED 2026-08-20
+
+Theorem D is in the manuscript as `thm:golden-equality-rigidity`, stated as
+proved rather than certified, with the constant-rank step, the derivation of the
+reduced table, and the table itself carried in the text. Sub-items 1, 2 and 3
+were taken; sub-item 4 was superseded by the stronger
+`prop:nonsingular-complementary-minors`, which also explains the factor \(4\)
+where the recognition proof produces it; sub-item 5's characteristic-five
+material was declined as that report recommended. The frame dimension count went
+in with it. The table is certified against the manuscript's own representative
+and sign convention by
+`notes/2026-08-20-c816-theorem-d-table.{md,py,json}`; the paper-local scaffold
+and manuscript-build gates pass at thirty-seven pages, warning-free.
+
+The original scope statement follows, retained for provenance.
+
+### Original scope
 
 Theorem D is C809's local ambient rigidity statement: the Jacobian of the twenty
 equality equations has rank fourteen at either oriented golden representative,
@@ -233,7 +249,15 @@ update the claim map, trust table, provenance text, bibliography, artifact
 guide, and verification manifests to point at C815 and C809 with exact proof
 ownership. If it does not, say so on the card and change nothing.
 
-## Work item 5 — retire the hard-coded equation numbers
+## Work item 5 — retire the hard-coded equation numbers — DONE 2026-08-20
+
+The three `\tag` uses this item names in `sections/05-golden-operator.tex` were
+already gone when the pass reached them. One survivor elsewhere in the paper,
+`\tag{2.1}` in `sections/02-orientation-cover.tex` with a prose reference reading
+"Equation~(2.1)", is now `\label{eq:branch-cycle}` and an `\eqref`. No `\tag`
+remains in the paper.
+
+### Original scope
 
 `sections/05-golden-operator.tex` hard-codes `\tag{5.1}`, `\tag{5.2}` and
 `\tag{5.3}` at lines 77, 33 and 584. The style guide forbids this because

@@ -44,14 +44,26 @@ of the three pairwise inner products of its rows equals \(-1\). That turns condi
 condition on triples of rows, which is the shape a two-graph condition takes, and is the most
 promising route to a structural proof of the census's content.
 
-## Status of the claim
+## Status of the claim — proved, later the same day
 
-**Census-verified at order six, not proved.** The equivalence of conditions 1 and 3 at order six is
-the manuscript's theorem and is proved there. The new content is that condition 2 alone suffices, and
-that is currently supported by exhaustive enumeration only. No structural proof is in hand, and the
-census says nothing at any other order and nothing about weighted matrices. Do not promote condition
-2 into the manuscript as a theorem on this evidence; promote it only with a proof, or state it
-explicitly as a census over order six with this bundle cited.
+**Superseded: condition 2 now has a structural proof, and the statement is in the manuscript.** When
+this report was first written the equivalence of conditions 1 and 2 rested on the census alone. The
+parity reduction below was the route, and it worked. The proposition is now
+`prop:nonsingular-complementary-minors` in
+`papers/clebsch-passages/sections/05-golden-operator.tex`, proved in the text, with the argument
+recorded in `notes/2026-08-20-c816-theorem-d-table.md`.
+
+The proof turns on the identity \(\sum_{m\in S}a_{pm}a_{qm}=(A^2)_{pq}-a_{pr}a_{qr}\) for
+\(S^c=\{p,q,r\}\), which holds because the sum defining \((A^2)_{pq}\) runs over \(S\cup\{r\}\).
+Nonsingularity of the complementary block keeps the left side away from \(\pm3\) for each of the four
+admissible \(r\); writing \(t_r=a_{pr}a_{qr}\) and letting \(k\) count the \(r\) with \(t_r=1\), the
+four conditions force \(k=2\) and hence \((A^2)_{pq}=0\).
+
+The census keeps two jobs. It is the independent check on the proposition at order six, and it
+certifies the two facts the proof and the manuscript quote: that a \(3\times3\) sign matrix has
+absolute determinant \(0\) or \(4\) and nothing else, and that the 384 matrices satisfying the three
+conditions are exactly the pentagon's switching-and-relabelling orbit. It still says nothing at any
+other order and nothing about weighted matrices.
 
 ## Replay
 
@@ -122,12 +134,11 @@ the boundary.
 
 None applied here.
 
-1. Replace "its complementary-minor calculation gives the factor \(4\)" in the proof of
-   `thm:triangle-pfaffian-recognition` with the reason: a \(3\times3\) sign matrix has absolute
-   determinant \(0\) or \(4\), so on the locus the constant has no freedom. One sentence, and it
-   removes the theorem's last unexplained number.
-2. Consider stating the equal-modulus half with the nondegeneracy hypothesis, but only after a
-   structural proof. The parity reduction above is the route to try first.
-3. If neither lands, the census is still worth a remark with this bundle cited, because a referee who
-   wonders whether the cubic identity is doing real work in the equal-modulus case deserves the
-   answer that at order six it is not.
+All three were taken the same day; see `notes/2026-08-20-c816-theorem-d-table.md`.
+
+1. **Done.** The factor \(4\) is now explained where it appears: a \(3\times3\) sign matrix has
+   absolute determinant \(0\) or \(4\), so once the complementary minors are forced away from zero
+   the constant has no freedom.
+2. **Done, with the proof.** The nondegeneracy statement is
+   `prop:nonsingular-complementary-minors` in the manuscript. The parity reduction was the route.
+3. Moot: the proposition supersedes the remark.
