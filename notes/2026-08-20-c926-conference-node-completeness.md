@@ -176,6 +176,77 @@ checker, its schema `paper-v-conference-node-completeness-v1`, and its accepted
 terminal line `CHECK OK (EXACTLY_SIX_REDUCED_NODES)`, since that appendix
 currently describes `make evidence` as returning a single verdict.
 
+## Structural route, found after closeout
+
+The Gröbner delegation is removable. The conference cubic is a determinant of a
+three-by-three matrix of linear forms, and its node count is then a degree of a
+Segre variety rather than a machine computation. Everything below was derived by
+hand and spot-checked over \(\F_{11}\) with throwaway runs; none of it is in the
+committed bundle, and none of it is claimed as proved yet.
+
+Let \(k\) contain \(\sqrt 5\) with \(2,3,5\) invertible, let \(B\) be a symmetric
+conference matrix of order six, so \(B^2=5I\) and \(\operatorname{tr}B=0\). Then
+\(k^6=W_+\oplus W_-\), the \(\pm\sqrt5\) eigenspaces, each of dimension three and
+each the orthogonal complement of the other. Write \(\ell_i\) and \(m_i\) for the
+\(i\)-th coordinate functional restricted to \(W_+\) and to \(W_-\), and set
+
+\[ M(x)=\sum_{i\in\Omega_0} x_i\,\ell_i\otimes m_i \in W_+^*\otimes W_-^*. \]
+
+1. **\(M\) lives on \(A_0\).** \(\sum_i \ell_i(w)m_i(v)=\langle w,v\rangle=0\) for
+   \(w\in W_+\), \(v\in W_-\), so \(\sum_i\ell_i\otimes m_i=0\) and \(M\) kills the
+   all-ones vector. Orthogonality of the eigenspaces is the entire content of
+   that relation.
+2. **The frame points are the six coordinate tensors.**
+   \(M(\mathbf 1-6e_a)=-6\,\ell_a\otimes m_a\), which has rank one. So each node is
+   literally one of the six rank-one tensors spanning the image of \(A_0\).
+3. **The determinant is the conference cubic.** \(\det M\) is an
+   \(A_5\)-invariant cubic on \(A_0\), hence lies in the two-dimensional invariant
+   pencil \(\Pi\), and it is singular at \(p_0\). The chordal generators are
+   singular exactly along the rational normal quartic \(R\), and \(A_5\) acting on
+   \(R\cong\PP^1\) is the icosahedral action, whose exceptional orbits have sizes
+   twelve, twenty, and thirty — never six. So no chordal generator is singular at
+   \(p_0\), the member of the pencil singular there is unique, and
+   \(\det M=\kappa\,c_B\). Confirmed numerically: the interpolated cubic
+   \(\det M\) equals the tracked conference cubic projectively, and does not equal
+   the chordal one.
+4. **Six, structurally.** The rank-at-most-one locus of \(M\) is
+   \(\PP(A_0)\cap\operatorname{Segre}(\PP(W_+)\times\PP(W_-))\) inside
+   \(\PP(W_+^*\otimes W_-^*)=\PP^8\). The Segre fourfold has degree
+   \(\binom{4}{2}=6\). The six points \(p_a\) lie in the intersection and are
+   isolated in it, already by the Hessian argument of
+   `prop:nodes-mod-eleven`. Fulton's refined Bézout bounds the total degree of the
+   distinguished varieties of the intersection by \(6\cdot 1\), which the six
+   isolated points already exhaust, so there is no further component and each
+   point is reduced. Confirmed numerically: the rank-at-most-one locus over
+   \(\F_{11}\) is exactly the six frame points.
+5. **Sing equals the rank locus.** For \(x\) of rank exactly two,
+   \(\partial_k\det M=\operatorname{tr}(\operatorname{adj}M(x)\,M_k)\) with
+   \(\operatorname{adj}M(x)=p\otimes q\) of rank one, so vanishing for all \(k\)
+   would force \(\ell_i(p)m_i(q)=0\) for every \(i\); both \(W_\pm\) are
+   \([6,3,4]\) maximum-distance-separable codes over \(\F_{11}\) (every
+   three-by-three minor is nonzero, minimum weight four, both checked), which
+   leaves no room for that. This is the one step I have not written out cleanly.
+
+The same frame explains the chordal side and the paper's central contrast. The
+chordal cubic is the three-by-three Hankel determinant, a *symmetric* matrix of
+linear forms; the rank-at-most-one locus of a symmetric three-by-three is the
+Veronese surface of degree four in \(\PP^5\), and the Hankel matrices form a
+hyperplane in that \(\PP^5\), so the chordal singular locus is a hyperplane
+section of the Veronese — a curve of degree four with Hilbert polynomial
+\(4d+1\), which is exactly the rational normal quartic the manuscript computes by
+hand, and exactly what the chordal control returned. The two geometries are then
+one statement: both pencil members are determinantal, and the difference is
+whether the ambient rank-one variety is the Segre fourfold met properly in six
+points or the Veronese surface met in a curve.
+
+This route proves the count in every characteristic with \(2,3,5\) invertible and
+\(\sqrt5\) present, not only modulo eleven, so it would also give the
+characteristic-zero six-node statement of \cite{RuddRigidity2026} a second and
+self-contained proof. It needs its own task: items 3 and 5 above are the real
+work, and the manuscript consequences (which proposition absorbs it, whether the
+Gröbner certificate then becomes a redundant cross-check rather than the
+authority) are a separate decision.
+
 ## Mystery ledger
 
 - **Settled by this pass.** Whether reduction modulo 11 could acquire extra

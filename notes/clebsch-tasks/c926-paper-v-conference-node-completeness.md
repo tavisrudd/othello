@@ -54,3 +54,12 @@ manuscript remark, and the mystery ledger are in
    one appendix sentence naming the second checker.
 2. Whether the five standalone Paper V repositories under `~/src/math-papers/`
    should receive the new verification files; nothing was propagated.
+3. Whether to allocate a successor for the structural route found after closeout:
+   the conference cubic is \(\det M\) for the canonical \(A_5\)-equivariant
+   three-by-three matrix of linear forms \(M(x)=\sum_i x_i\,\ell_i\otimes m_i\)
+   built from the two eigenspaces of \(B\), its six nodes are the six rank-one
+   coordinate tensors, and the count six is the degree of the Segre fourfold.
+   That would remove the Gröbner delegation entirely and prove the count in every
+   characteristic with \(2,3,5\) invertible. Derivation, numerical spot checks,
+   and the two remaining proof obligations are in the closeout section of the
+   dated report.
