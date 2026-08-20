@@ -12,7 +12,7 @@
     "sections/09-conclusion.tex": "d8972b2be3eabeada385ecb4ca7ebde472dd43cd8d6fb5e05487a126c715f7ff",
     "sections/09-programme-coda.tex": "1206d26f844fd17d717d18cfe0ef542a046fec9aebe2c5ed6f0d8bb8b63605f8",
     "sections/07-marking-ambiguities.tex": "682f8c4189bb48c1b6127f3a06b668425243520532ce4ac0909021e22e9e70e0",
-    "sections/08-verification.tex": "b2f6fc428f10c7ba34c5ac78cf8b0498cfdd838a089f237c3cd9c18b1e11e3de",
+    "sections/08-verification.tex": "81fbce6119705d3d63db38d70955185a246748503491fff15f00f18a385a11d0",
     "sections/10-references.tex": "8c55a3c27e318db418b1acea1dc9cd308e682b22c3818641e827b656f1eedbf8"
   },
   "statement_count": 9,
@@ -99,7 +99,7 @@
       "tex": "\\begin{theorem}[Degree-six harmonic restriction]\n\\label{thm:harmonic-main}\nLet \\(u_{ij}\\), \\(1\\leq i<j\\leq5\\), be the explicitly labelled unit axes\nthrough opposite icosahedral faces in \\eqref{eq:face-axis-labels}, and set\n\\[\n F_y(\\omega)=\\sum_{i<j}(y_i+y_j)P_6(u_{ij}\\mathbin{\\cdot}\\omega).\n\\]\nThe coefficient vectors \\((y_i+y_j)_{i<j}\\) form the Petersen\n\\((-2)\\)-eigenspace, and their zonal harmonics give an injective copy of\n\\(V\\) in the real degree-six spherical-harmonic space \\(\\mathcal H_6\\).\nThe spherical cubic on this copy is\n\\[\n \\frac1{4\\pi}\\int_{S^2}F_y(\\omega)^3\\,d\\omega\n =-\\frac{784000}{1247103}\\sigma_3(y).\n\\]\n\\end{theorem}"
     }
   ],
-  "trust_rows_sha256": "98e860ba9fd709a993c5cdac6fb2a14125db88edda4c296a47b218766395c80b",
+  "trust_rows_sha256": "bbd764e31dee9cab11bbc3268b3eab5d667c70ccc2f33074bf31cd4b4feb15f7",
   "trust_rows": [
     {
       "id": "ARITH-1",
@@ -277,7 +277,9 @@
       "modes": [
         "conceptual",
         "classical-input",
-        "formal-partial"
+        "formal-partial",
+        "certificate",
+        "independent-replay"
       ],
       "proof_role": "seven-point cut reconstruction from one-point and pair signatures, followed by a common seven-point restriction for any two triples; Lean checks the whole two-graph half of the row, namely faithfulness up to a global complement bit for every two-graph on a finite point set with at least seven points, including anchor existence through both bounds behind the triangle Ramsey equality, the normalization of an arbitrary labelled two-graph onto the cut classifier, distinctness of the anchor points and their separation from the root, symbolic third-point disambiguation, the finite-set extension, and the overlap agreement of complement bits, together with the switching transport, determinant identity, query polynomial, calibration, and the cardinality of the explicitly defined selected query family; the identification of the marked determinant-minus-three family of a Seidel matrix with the aligned family of its two-graph, the two values minus three and five taken by a principal four-by-four minor on distinct labels, the recovery of such a matrix from that family up to diagonal switching and one global sign, and the sufficiency of the selected query family for a decoder working from a single anchor are proved as well; the anchor search enters as the existence of an aligned four-set among the twenty four-sets through a root and six further points together with the count of those tests, and is not formalized as a procedure",
       "evidence": [
@@ -285,7 +287,11 @@
         "verification/passages_formal.json",
         "verification/passages_axioms.txt",
         "verification/golden_return_formal.json",
-        "verification/golden_return_axioms.txt"
+        "verification/golden_return_axioms.txt",
+        "verification/evidence/aligned_faithfulness.py",
+        "verification/evidence/aligned_faithfulness_replay.py",
+        "verification/evidence/aligned_faithfulness.json",
+        "verification/evidence/aligned_faithfulness.sha256"
       ]
     },
     {
