@@ -34,6 +34,8 @@ exact \(m=2\) and all-\(m\) transport gates.
   notes/2026-08-20-c925-mobile-line-bundle-state.md
 - logarithmic exceptional-correction pencil:
   notes/2026-08-20-c925-logarithmic-pencil-law.md
+- Orlov helix-wrap and thickened-center leakage:
+  notes/2026-08-20-c925-orlov-helix-wrap.md
 - non-\(m=2\) categorical dividends:
   notes/2026-08-20-c925-non-m2-categorical-dividends.md
 - conditional Section 6 specialization:
@@ -88,6 +90,13 @@ index row.
   no Jordan data and replaces \(1-AC^a\) by \(X+aY\).  At \(m=2\) the
   correction is one mixed term after the pure exponent certificates; for
   general \(m\) it is a finite mixed-word interface.
+- Orlov ambient projection makes both branches of the mobile correction
+  explicit.  Exceptional helix wraps are center Gysin terms, while twisting
+  an ambient input differs from the identity by a thickened-center object
+  filtered by symmetric normal-bundle coefficients.  Hence one exact
+  whole-center-null receiver kills every base multiplicity on the
+  correction side; constructing that primitive-character receiver remains
+  open.
 
 ## Open geometric providers
 
@@ -137,16 +146,16 @@ Typed replay:
       | diff -u \
           notes/cubic-threefolds-tasks/c925-sparse-shadow-path-toy-output.txt -
 
-The finite model currently has sixty-two checks.  It verifies only the
+The finite model currently has sixty-three checks.  It verifies only the
 advertised algebraic laws and countermodels, never an external QDM provider.
 
 ## Next
 
 1. Instantiate the descending-line cocharacter and formal Levelt monodromy
    functor for Iritani's completed comparison.
-2. In the same primitive-character receiver, compute the projected
-   exceptional logarithm \(Y\) and the contextual mixed graph/boundary
-   defect of \(X+aY\) for every actual mobile occurrence.
+2. Construct the exact primitive-character supported/Gysin realization
+   which kills the thickened-center terms of Module 32; in that same
+   receiver compute the projected mixed graph/boundary defect of \(X+aY\).
 3. Prove the sharp occurrence-indexed exceptional exponent/carrier bound.
 4. If the monodromy route fails, construct the opposite-oriented enriched
    exact sequence and use the Module 25/26 boundary adapter.

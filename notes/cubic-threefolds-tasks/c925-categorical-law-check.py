@@ -1813,6 +1813,19 @@ def main():
         )
     checks["square_zero_logarithmic_pencil_is_single_cross_composite"] = "pass"
 
+    # Twisting Phi_j by O(-aE) changes its E-exponent from -j to a-j.
+    # Before a reaches j this remains in the acyclic Orlov window; at and
+    # after j it is exactly the nonnegative ambient-wrap regime.
+    for codimension in range(2, 9):
+        for exceptional_index in range(1, codimension):
+            for base_order in range(13):
+                shifted_exponent = base_order - exceptional_index
+                if base_order < exceptional_index:
+                    assert -codimension < shifted_exponent < 0
+                else:
+                    assert shifted_exponent >= 0
+    checks["orlov_helix_wrap_threshold_matches_projective_window"] = "pass"
+
     result = {
         "status": "pass",
         "check_count": len(checks),
