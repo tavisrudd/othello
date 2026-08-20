@@ -2,7 +2,7 @@
 
 **Lane:** cubic-threefolds
 
-**Status:** active; source audit and paper design in progress
+**Status:** complete and reported 2026-08-20
 
 ## Goal
 
@@ -49,3 +49,17 @@ inside the companion.  Keep the paper strictly at \(m=1\).
 - `notes/2026-08-20-c930-categorical-direct-qdm-proof-memo.md`
 - `notes/cubic-threefolds-tasks/c925-modular-direct-qdm-proof-packet.md`
 - `papers/cubic-stabilization-epilogue/sections/04-categorical-one-step.tex`
+
+## Result
+
+- Companion authority: [Hodge-atom marker-ledger paper](../../papers/hodge-atom-marker-ledger/)
+  and [six-page PDF](../../papers/hodge-atom-marker-ledger/hodge_atom_marker_ledger.pdf).
+- Archival DOI: [10.5281/zenodo.22036391](https://doi.org/10.5281/zenodo.22036391).
+- Epilogue authority: [cubic-stabilization epilogue](../../papers/cubic-stabilization-epilogue/)
+  and [fifty-page PDF](../../papers/cubic-stabilization-epilogue/irrationality_after_one_stabilization.pdf).
+- Source audit: `notes/2026-08-20-c933-hodge-atom-source-audit.md`.
+- Closeout and hostile-read record:
+  `notes/2026-08-20-c933-hodge-atom-marker-ledger-companion.md`.
+- Standalone exports:
+  `~/src/math-papers/hodge-atom-marker-ledger/` and
+  `~/src/math-papers/cubic-stabilization-epilogue/`.
