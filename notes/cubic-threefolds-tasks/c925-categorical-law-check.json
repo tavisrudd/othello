@@ -1,5 +1,5 @@
 {
-  "check_count": 64,
+  "check_count": 65,
   "checks": {
     "augmented_row_output_kernel_is_two_sided": "pass",
     "bittner_relation_codimension_2_through_6": "pass",
@@ -36,6 +36,7 @@
     "oriented_quiver_orthogonality_kills_opposite_boundary": "pass",
     "orlov_gamma_lift_forces_blowup_rank_row": "pass",
     "orlov_helix_wrap_threshold_matches_projective_window": "pass",
+    "point_line_pairing_is_equivalent_to_ambient_rank_row": "pass",
     "power_bockstein_rank_equals_top_image_leakage": "pass",
     "provider_implications_are_not_reversible": "pass",
     "pure_exceptional_multiplicity_preserves_jordan_type": "pass",

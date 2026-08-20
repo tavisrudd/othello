@@ -1848,6 +1848,31 @@ def main():
             assert Fraction(0) * path_scalar == 0
     checks["rank_quotient_writer_scalars_compose_without_normalization"] = "pass"
 
+    # With a perfect diagonal pairing, a rank row is represented by its dual
+    # point vector.  The row is ambient-only exactly when that vector has the
+    # prescribed ambient coordinate and zero exceptional coordinate.
+    for ambient_point in ((Fraction(1), Fraction(2)), (Fraction(0), Fraction(0))):
+        for point_scale in (Fraction(-1), Fraction(1)):
+            for dual_vector in product(range(-3, 4), repeat=3):
+                pairing_row_law = all(
+                    dual_vector[0] * test_vector[0]
+                    + dual_vector[1] * test_vector[1]
+                    + dual_vector[2] * test_vector[2]
+                    == point_scale
+                    * (
+                        ambient_point[0] * test_vector[0]
+                        + ambient_point[1] * test_vector[1]
+                    )
+                    for test_vector in product(range(-1, 2), repeat=3)
+                )
+                point_vector_law = dual_vector == (
+                    point_scale * ambient_point[0],
+                    point_scale * ambient_point[1],
+                    0,
+                )
+                assert pairing_row_law == point_vector_law
+    checks["point_line_pairing_is_equivalent_to_ambient_rank_row"] = "pass"
+
     result = {
         "status": "pass",
         "check_count": len(checks),

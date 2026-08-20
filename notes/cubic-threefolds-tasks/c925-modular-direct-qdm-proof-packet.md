@@ -40,6 +40,8 @@ exact \(m=2\) and all-\(m\) transport gates.
   notes/2026-08-20-c925-gamma-support-collision-and-rank-route.md
 - rank-quotient one-path compression:
   notes/2026-08-20-c925-rank-quotient-path-compression.md
+- point-line duality compression:
+  notes/2026-08-20-c925-point-line-duality-compression.md
 - non-\(m=2\) categorical dividends:
   notes/2026-08-20-c925-non-m2-categorical-dividends.md
 - conditional Section 6 specialization:
@@ -111,6 +113,11 @@ index row.
   factorization, local comparison-induced line isomorphisms and lawful
   adjacent reindexing telescope automatically.  Scalar normalization,
   trivial holonomy, and equality of unrelated paths are unnecessary.
+- With the perfect \(\chi^{-1}\)-by-\(\chi\) pairing, that local row law is
+  equivalent to transporting one projective Gamma point line with zero
+  exceptional coordinate.  Iritani's formal comparison has the required
+  point shape, and the full Gamma point section is line-bundle-monodromy
+  invariant; the remaining calibration is fixed-phase Gamma-to-formal.
 
 ## Open geometric providers
 
@@ -160,14 +167,15 @@ Typed replay:
       | diff -u \
           notes/cubic-threefolds-tasks/c925-sparse-shadow-path-toy-output.txt -
 
-The finite model currently has sixty-four checks.  It verifies only the
+The finite model currently has sixty-five checks.  It verifies only the
 advertised algebraic laws and countermodels, never an external QDM provider.
 
 ## Next
 
-1. Prove the local fixed-phase QDM row-line law of Modules 33--34: calibrate
-   the ambient rank row, kill each exceptional scalar, and provide lawful
-   adjacent and endpoint reindexing along one chosen factorization.
+1. Prove the local fixed-phase QDM point-line law of Module 35: commute the
+   primitive projector with the chosen monodromy, identify the Gamma and
+   formally normalized point lines, and provide lawful adjacent/endpoint
+   reindexing along one chosen factorization.
 2. As the ExactTop alternative, construct a **corrected intrinsic**
    support/Gysin realization for Module 32; ordinary Gamma or residual
    projection is ruled out by the point regression.

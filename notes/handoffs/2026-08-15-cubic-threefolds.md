@@ -126,10 +126,16 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   factorization, local comparison-induced line isomorphisms and adjacent
   row reindexing compose automatically, so scalar normalization, loop
   holonomy, and path-independent coherence are unnecessary.
+  Perfect dual-sector pairing compresses each local row law further to
+  transport of one projective Gamma point line.  The formal comparison has
+  the desired point-plus-zero shape and the full Gamma point section is
+  line-bundle-monodromy invariant; the remaining local gate is commutation
+  of the primitive projector and fixed-phase Gamma-to-formal point-line
+  calibration.
   Shifted tensor stability and the extremal multinomial source law are
   proved, but the occurrence-indexed exact QDM sequence, actual carrier
   exponent, and boundary vanishing remain open.  The packet is split into
-  bounded module companions behind a stable index.  The sixty-four-check
+  bounded module companions behind a stable index.  The sixty-five-check
   finite law replay, eleven-check typed Haskell toy, and original cubic
   replay are green.  C925 remains open at fixed-phase Gamma/rank transport
   or at this ExactTop provider; the relative-cap cancellation remains one
