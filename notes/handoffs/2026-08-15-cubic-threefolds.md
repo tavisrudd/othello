@@ -37,20 +37,18 @@ promoted mathematical assertion maps to a kernel-checked declaration.
 
 ## Current status
 
-- **C930 — categorical direct-QDM proof memo ready; awaiting author decision
-  on manuscript phase.** The adversarial audit leaves one center-localized
-  marker compiler with an unconditional atomic direct-QDM instance, a finer
-  framed-sixth instance conditional exactly on 5.7R and the residual part of
-  5.7T, and a distinct chemical-formula instance.  The cubic packet is derived
-  internally from Beauville's small quantum algebra.
-  C930 is strictly `m=1`: higher-stabilization branches are preserved outside
-  the proposed paper, with no provider work under this item.
-  Refounding the current 48-page draft around this spine targets 24--28 pages;
-  the global all-`m` transport and one-chart branches move out rather than
-  survive under a new abstraction layer.  Three exact replays pass and no
-  manuscript was edited.  Memo:
-  `../2026-08-20-c930-categorical-direct-qdm-proof-memo.md`.  If the author
-  directs phase 2, C930 itself owns adaptation and validation. Card:
+- **C930 — independent referee requires memo repair before manuscript
+  phase.** The unconditional atomic direct-QDM route survives, but the common
+  compiler is not yet type-correct for the framed instance: it asks for a
+  block-level equality where 5.7R/5.7T supply only marker-level certified
+  edges.  Repair it to an occurrence-indexed marker ledger, narrow the cubic
+  fork, correct the ruled-surface boundary, and route the chemical-formula
+  instance through the generalized compiler.  The source-grade diagram set is
+  exactly one corrected descent square and one normalized cubic fork.  Rerun a
+  short independent referee before any manuscript decision.  C930 remains
+  strictly `m=1`, and no manuscript was edited.  Memo:
+  `../2026-08-20-c930-categorical-direct-qdm-proof-memo.md`; referee report:
+  `../2026-08-20-c930-independent-referee-report.md`. Card:
   `../cubic-threefolds-tasks/c930-categorical-direct-qdm-paper-preparation.md`.
 - **C925 — modular direct-QDM proof packet, active.** Write a self-contained
   alternative packet organized like a parameterized software interface: a

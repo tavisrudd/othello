@@ -2,12 +2,14 @@
 
 **Lane:** cubic-threefolds
 
-**Status:** active; phase 1 memo complete and adversarially audited; awaiting author decision on phase 2 manuscript adaptation
+**Status:** active; phase 1 memo independently refereed; major revision required before author decision on phase 2 manuscript adaptation
 
 ## Stable entry point
 
 - proof memo and paper architecture:
   `notes/2026-08-20-c930-categorical-direct-qdm-proof-memo.md`
+- independent referee report:
+  `notes/2026-08-20-c930-independent-referee-report.md`
 
 ## Phase 1 result
 
@@ -26,6 +28,11 @@
 
 **Next:** stop for the author's decision whether and how to enter phase 2
 under this same C930 item.
+
+The independent referee blocks that transition until the memo's common
+compiler is weakened from a block-level equality to a certified marker-level
+ledger, its center quotient is occurrence-indexed, and its two LaTeX diagrams
+are corrected and re-refereed.  This repair remains strictly \(m=1\).
 
 ## Goal
 
