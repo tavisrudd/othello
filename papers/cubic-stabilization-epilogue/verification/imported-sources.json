@@ -76,40 +76,6 @@
         }
       ]
     },
-    "Cai:small-even-connection": {
-      "citation": "Cai",
-      "pinpoint": "Section 3, pages 4 to 5",
-      "used": "The small even quantum connection matrices of a smooth cubic threefold in the displayed frame.",
-      "conventions": [
-        {
-          "aspect": "coordinates",
-          "requirement": "The displayed system uses the loop coordinate of that source and the hyperplane class of the threefold.",
-          "matched": "The loop coordinate is identified with the loop coordinate of the abstract rank-two construction when it is specialized."
-        },
-        {
-          "aspect": "normalization",
-          "requirement": "The Novikov variable is the one attached to the line class normalized against the hyperplane class, and its square root of three times it is adjoined.",
-          "matched": "The line class is fixed by pairing one with the hyperplane class, and the square root is adjoined to the coefficient field before the eigenvalues are read."
-        },
-        {
-          "aspect": "framing",
-          "requirement": "The block reduction is performed in a frame reached by a constant change of basis followed by a normalized gauge that is the identity to leading order.",
-          "matched": "Both steps are carried out explicitly here, so the only imported datum is the connection matrix itself."
-        }
-      ]
-    },
-    "Cai:curve-calculation": {
-      "citation": "Cai",
-      "pinpoint": "Section 4",
-      "used": "The quantum connection of a smooth projective curve and the resulting residue data in the genus at least two case.",
-      "conventions": [
-        {
-          "aspect": "normalization",
-          "requirement": "The curve calculation is stated in the same loop coordinate and Novikov normalization as the threefold calculation.",
-          "matched": "The curve residue is used only through its discriminant, which is invariant under the rescalings those normalizations allow."
-        }
-      ]
-    },
     "Conrad:lem-2.1.4": {
       "citation": "Conrad",
       "pinpoint": "Lemma 2.1.4",
@@ -137,12 +103,17 @@
     "PutSinger:ch-3": {
       "citation": "PutSinger",
       "pinpoint": "Chapter 3",
-      "used": "The formal classification of regular singular differential modules.",
+      "used": "The formal classification of differential modules, including regular-singular exponents and the ramified Levelt--Turrittin factors used in the tensor-product argument.",
       "conventions": [
         {
           "aspect": "normalization",
           "requirement": "Exponents are classified modulo the integers.",
           "matched": "Only the difference of the two exponents of the modified rank-two module is used, and it is read modulo that ambiguity."
+        },
+        {
+          "aspect": "tensor products",
+          "requirement": "After a common ramification, exponential factors add and their regular-singular factors tensor.",
+          "matched": "The projective-line product proof writes this operation explicitly and observes that the rank-one projective factor changes only the scalar irregular exponential."
         }
       ]
     },

@@ -829,7 +829,7 @@
       "hypotheses": "Every step preserves the marker, or equivalently every actual center correction through dimension two vanishes in the supplied dimension-four factorization input.",
       "conclusion": "The marker values at the endpoints agree by telescoping along the factorization chain.",
       "cautions": "Fragment. The manuscript theorem allows an arbitrary effective commutative target monoid and constructs its geometric input from weak factorization; Lean models only a natural-valued packet and takes the typed factorization and operation laws as premises.",
-      "statement_digest": "0b731e19a5ea45c40e934e9f594c42edab7e7d75124e63d7933bfb9ccd0b016f",
+      "statement_digest": "2bb9891d902b7d680b3e27c41fc85124396cac2dd7783e4733564570f00eff1b",
       "terminal_digest": "8ab2ceca143537057f227bba0e03a83a2ba115c46cc77b63b86144d93539cc3b"
     },
     {

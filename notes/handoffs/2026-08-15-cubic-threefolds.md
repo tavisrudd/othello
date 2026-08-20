@@ -49,15 +49,15 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   `../cubic-threefolds-tasks/c931-c928-referee-dossier.md`; dossier:
   `../2026-08-20-c931-c928-referee-dossier.md`; final synthesis:
   `../2026-08-20-c931-c928-rerun-synthesis.md`.
-- **C930 — corrected epilogue overlay ready for manuscript refounding.**
+- **C930 — 50-page epilogue refounding passes hostile manuscript review.**
   C930 owns only `papers/cubic-stabilization-epilogue/`, strictly at `m=1`.
-  Its common occurrence-indexed marker theorem and both specializations pass
-  resumed and fresh blind review.  The complete 60-page epilogue has now been
-  read and frozen, and the corrected overlay retains its 18-page cycle core
-  while refounding the 34-page quantum pair through the common compiler.  The
-  working target is 46--50 pages and the author's phase-2 editing authorization
-  is active.  The Gamma-row manuscript is explicitly out of C930 scope and was
-  not edited.  Baseline: `../2026-08-20-c930-epilogue-baseline.md`; memo:
+  The common occurrence-indexed marker theorem is now instantiated on distinct
+  atomic and framed block types, and both specializations pass resumed, fresh
+  blind, and hostile manuscript review.  The implementation retains the
+  18-page cycle core and refounds the quantum pair through the common compiler,
+  shortening the frozen 60-page epilogue to 50 pages.  The full integrated
+  check passes.  The Gamma-row manuscript is explicitly out of C930 scope and
+  was not edited.  Baseline: `../2026-08-20-c930-epilogue-baseline.md`; memo:
   `../2026-08-20-c930-categorical-direct-qdm-proof-memo.md`; reports:
   `../2026-08-20-c930-independent-referee-report.md` and
   `../2026-08-20-c930-second-referee-pass.md`. Card:

@@ -747,7 +747,7 @@ Phase 2 is authorized for the epilogue authority only.
 
 ## 12. `ej` + `tt` closeout and mystery ledger
 
-The closeout produces five cheap upgrades.
+The post-implementation closeout confirms five cheap upgrades.
 
 1. The atomic direct-QDM and framed-sixth arguments share not only the final
    weak-factorization paragraph but also the coefficient, comparison, and
@@ -772,13 +772,14 @@ The closeout produces five cheap upgrades.
 | feature | status | exact gap or owner |
 |---|---|---|
 | Does the one cubic calculation feed both markers? | Settled | Beauville's matrix plus the normalized-gauge and indicial recursion gives both \(\delta^\sharp\) and \(\zeta_6^{\pm1}\). |
-| Will the categorical layer look decorative? | Settled at the design level | Keep only the indexed block groupoid, free symmetric monoid, provider record, and center quotient; every retained abstraction is used by both quantum specializations, and the cycle half does not pretend to depend on it. |
+| Will the categorical layer look decorative? | Settled in the manuscript | The paper keeps only the indexed block groupoid, free symmetric monoid, provider record, and center quotient.  Each is used by both quantum specializations, and the cycle half does not pretend to depend on it. |
 | Can source notation be compressed into one center index? | Settled negatively | The occurrence retains both \(\varsigma_j\) and \(\chi_j\); auxiliary divisor-character variables remain a proof adapter rather than a ledger index. |
 | Does the common spine remove 5.7R or 5.7T? | No | The compiler locates them but does not prove them. They remain the exact provider fields of Theorem C. |
 | Does C930 take on higher stabilization? | No | Its mathematical and manuscript scope ends at \(m=1\); higher-stabilization material is only preserved outside the proposed paper. |
-| Can the two crowns read as one paper rather than juxtaposed papers? | Open but testable | The introduction and synthesis must make the separation theorem the causal meeting point; a cycle/QDM coherence cold read owns the gate. |
-| Can the final paper reach 46--50 pages without hiding a provider or trimming the cycle proof? | Open but testable | Phase-2 rendered page gate; 52 pages triggers an itemized compression audit, while 44 is only a stretch target. |
+| Can the two crowns read as one paper rather than juxtaposed papers? | Settled for the referee gate | The rewritten introduction and synthesis make the separation theorem the causal meeting point, and the hostile manuscript pass found no coherence defect. |
+| Can the final paper reach 46--50 pages without hiding a provider or trimming the cycle proof? | Settled | The integrated warning-free manuscript is 50 pages, down from the frozen 60-page baseline, with the cycle core retained. |
+| Should the direct-QDM section move ahead of the cycle core? | Author decision, not a proof gap | The categorical proof currently begins on page 23.  Moving it after the introduction could foreground the headline mechanism but would change the paper's narrative architecture. |
 
-No further mathematical mystery blocks the phase-1 memo.  The remaining open
-items are either explicitly conditional mathematics owned by C925/C907 or the
-author's phase-2 manuscript decision.
+No further mathematical mystery blocks the implemented (m=1) proof spine.
+The remaining open items are either explicitly conditional mathematics owned
+by C925/C907 or the author's narrative and submission decisions.

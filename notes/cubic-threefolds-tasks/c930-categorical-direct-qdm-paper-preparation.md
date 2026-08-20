@@ -2,7 +2,7 @@
 
 **Lane:** cubic-threefolds
 
-**Status:** active; epilogue manuscript refounded, integrated checks passing, author review next
+**Status:** active; epilogue manuscript refounded and hostile referee repairs passed
 
 ## Stable entry point
 
@@ -30,6 +30,11 @@
 - The paper has one occurrence-indexed marker-ledger compiler.  A provider
   need certify equality only after the chosen marker is applied; block-level
   comparison is an optional stronger input.
+- The atomic and framed proofs instantiate the same marker-ledger theorem and
+  effective-monoid construction, but not an identical typed groupoid.  The
+  atomic type \(\mathcal T_{\mathrm{at}}\) retains the QDM data; the framed
+  refinement \(\mathcal T_{\mathrm{fr}}\) also retains the marked small
+  section and original loop framing, and its morphisms preserve both.
 - Its unconditional atomic direct-QDM specialization proves cubic one-step
   irrationality from Beauville, Iritani, Iritani--Koto, weak factorization,
   and surface classification, deriving the cubic packet internally.
@@ -43,16 +48,20 @@
   pair through one compiler, and rewrite the introduction and synthesis.
 - The authorized manuscript refounding is implemented in the epilogue only.
   The Gamma-row manuscript remains untouched.  The generic marker ledger, its
-  two `amscd` diagrams, the direct rank-two residue fold, and the framed
-  primitive-sixth fold now appear in the paper itself.
+  typed descent and fold-additivity diagrams, the direct rank-two residue fold,
+  and the framed primitive-sixth fold now appear in the paper itself.
 - A Milnor-style pass now gives the one-blowup mechanism before abstraction,
   states Theorem A immediately after its provider record, and moves the
   categorical quotient after the proof as its reformulation.  A compact
   notation table separates Iritani's reconstruction, Novikov, and bundle
   conventions from the paper's cubic notation.
-- The theorem spine passed the resumed and fresh blind referees after bounded
-  local corrections.  Its corrected epilogue overlay now governs the
-  authorized manuscript edits.
+- Two blind memo referees passed the repaired proof overlay.  A hostile
+  manuscript referee found that the paper had collapsed the atomic and framed
+  types into one groupoid and had drawn an unjustified pre-fold ledger arrow.
+  The numerical proofs survived; the manuscript now keeps the two types
+  distinct and states their commonality at the theorem/interface level.  A
+  bounded re-referee of those repairs and the copy-edited cubic packet passes
+  with no remaining finding.
 - The QDM literature audit is complete at theorem and equation level for the
   current \(m=1\) theorem graph.  It added the missing Beauville bibliography
   entry and fixes the required point-of-use citations for phase 2.

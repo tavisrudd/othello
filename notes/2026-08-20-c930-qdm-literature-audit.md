@@ -46,11 +46,12 @@ so all manuscript citations and calculations must continue to name v4.
 | Blowup reconstruction displacement | `IritaniBlowup`, (5.27)--(5.30), Sections 5.8.1--5.8.2 | exact scalar/divisor leading terms and the residual generated tail | imported asymptotics; framed residual tail is exactly Hypothesis 5.7R |
 | Projective-bundle QDM direct-sum decomposition | `IritaniKoto`, Theorem 5.1(1)--(2) | horizontal, pairing-compatible sum of \(r\) base QDMs | imported theorem |
 | Projective-bundle coordinate independence | `IritaniKoto`, Theorem 5.1(4)--(6) | leading roots, invertible bulk Jacobian, and summand separation | imported theorem |
-| Projective-bundle coefficient embedding and bundle-twist convention | `IritaniKoto`, (1.1), (5.2), Remarks 1.2 and 5.2 | injective base Novikov map and invariance under tensoring the bundle by a line bundle | imported formulas |
+| Projective-bundle coefficient embedding and bundle-twist convention | `IritaniKoto`, (1.1), (5.2), Remarks 1.2 and 5.2 | injective base Novikov map, the Laurent variable \(q^{-1/r'}\) with \(r'=r\) or \(2r\) according to parity, and invariance under tensoring the bundle by a line bundle | imported formulas |
 | Projective-bundle reconstruction displacement | `IritaniKoto`, Proposition 5.6 and (5.11)--(5.12) | exact scalar/divisor leading terms and normalized initial coordinate | imported asymptotics; framed residual tail is exactly Hypothesis 5.7R |
 | Regularity at the connection variable \(z=0\) | both comparison theorems as isomorphisms of `C[z]`-modules; `IritaniKoto`, Remark 5.3 | comparison and inverse introduce no negative powers or roots of \(z\) | imported ring statement; formal-monodromy consequence proved in the paper |
 | Even restriction | homogeneity in `IritaniBlowup`, Theorem 5.18(3), and `IritaniKoto`, Theorem 5.1(3), together with the explicit Fourier/pull-push formulas | after odd bulk variables are set to zero, the comparison preserves parity and the even-even Jacobian is invertible | author-proved parity adapter |
 | External-product QDM | `BehrendProduct`, main product formula | genus-zero invariants of a product are the tensor product of those of the factors | imported theorem; numerical base change is internal |
+| Formal tensor decomposition | `PutSinger`, Chapter 3 | after common ramification, exponential factors add and regular-singular factors tensor | imported formal classification; tensor identity written explicitly in the proof |
 | \(\mathbf P^n\) and Fano toric small quantum presentations | `Batyrev`, Section 5, and `Givental`, Theorem 0.1 | endpoint \(\mathbf P^4\), \(\mathbf P^2\), and Hirzebruch base calculations | imported presentation in stated Fano scope |
 | Hirzebruch-surface transported presentations | `Cotti`, Theorems 9.3.1 and 9.3.3; `McDuffSalamon`, Chapter 7 | the two parity families and deformation invariance used in the framed center audit | imported results plus internal quartic calculation |
 | Primitive-sixth cubic exponents | `Beauville` for the starting matrix; compare `Cai`, Sections 3--4 | the indicial polynomial and both exponent classes are derived in the manuscript | internal proof; Cai is corroborating context only |
@@ -101,6 +102,8 @@ minimal-surface alternative, and van der Put--Singer at the exponent
 interpretation.  Section 5 cites Behrend at the projective-line product and
 uses Cai only after the internal indicial calculation as a comparison.
 
-The imported-source registry and generated dependency graph have been migrated
-to those same edges.  `make check` passes with no undefined citation or
-reference warning.
+The imported-source registry now records Beauville, rather than Cai, as the
+source of the cubic matrix; Cai remains comparison only.  It also records the
+van der Put--Singer formal tensor input.  The projective-bundle coefficient
+ring has been checked against Iritani--Koto v4 and uses their parity-dependent
+\(r'\).  The generated dependency graph has been migrated to the same edges.
