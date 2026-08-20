@@ -2,7 +2,7 @@
 
 **Lane:** cubic-threefolds
 
-**Status:** active; split from C908 by author instruction on 2026-08-20
+**Status:** complete 2026-08-20; split from C908 by author instruction
 
 ## Stable entry points
 
@@ -17,6 +17,12 @@
   `notes/2026-08-20-c928-intersection-cohomology.md`
 - inherited debt closure and quarantine:
   `notes/2026-08-20-c928-inherited-debt-closure.md`
+- full-text priority audit:
+  `notes/2026-08-20-c928-priority-audit.md`
+- hostile proof and release closeout:
+  `notes/2026-08-20-c928-closeout.md`
+- paper authority:
+  `papers/blown-up-theta-lattice/`
 
 ## Goal
 
@@ -113,7 +119,9 @@ Authority notes begin with:
 Standalone-mirror creation or synchronization is not authorized until the
 authoritative monorepo paper passes its acceptance gates.
 
-## Next
+## Completion
 
-Complete the primary-source and novelty audit, then assemble the manuscript
-from the structural theorem spine.
+All acceptance criteria are met.  The warning-free eight-page manuscript is
+committed, the rational predecessor and modern integral-Lefschetz boundary are
+credited, and the optional full-transfer strengthening remains explicitly
+outside the headline theorem.

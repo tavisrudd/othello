@@ -256,3 +256,26 @@ from the axes rather than assumed.
 their agreement with the displayed factorization table were verified by direct
 computation over the field with two elements; none of it is formalized.
 **Status:** open lead
+
+## 2026-08-20 — the factor-three boundary beyond the middle theta lattice
+
+**Provenance:** C928, while separating the integral `IH^3` theorem from
+Kraemer's rational decomposition of the blown-up theta divisor.
+**Was I looking for this?:** no — the task only required the middle lattice,
+and the issue appeared while checking whether the rational skyscraper
+decomposition could be strengthened integrally.
+**Observed / musing:** the link of the ordinary triple point is the circle
+bundle of `O_X(-1)`.  Its Gysin sequence is unimodular in degree three but in
+the algebraic degrees contains `h -> h^2 = 3 ell`; accordingly
+`H^4(link,Z)` has a `Z/3` summand.  Thus the rational three-skyscraper
+decomposition suppresses a genuine three-primary coefficient boundary outside
+the middle degree.
+**Why it may matter / strongest question:** a full computation of
+`IH^*(Theta,Z)` and `H^*(Bl_0 Theta,Z)` as integral groups and pairings could
+exhibit a small three-primary correction complementary to C928's mod-two
+middle glue.  Strongest question: what is the integral decomposition complex
+of the resolution, including extension data at the singular point, and does
+the `Z/3` link class survive globally or die in the pair sequence?
+**Evidence:** CHECKED in the local link Gysin sequence; global degrees other
+than three were not computed.
+**Status:** open lead

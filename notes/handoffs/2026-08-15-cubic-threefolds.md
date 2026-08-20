@@ -49,15 +49,6 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   directed to proceed, C930 itself owns the manuscript adaptation and
   validation; no successor implementation item is needed. Card:
   `../cubic-threefolds-tasks/c930-categorical-direct-qdm-paper-preparation.md`.
-- **C928 — standalone blown-up-theta lattice paper, active.** Extract the
-  C908 theorem on `M = Bl_0 Theta` into a self-contained paper.  Replace the
-  certificate-dependent saturation and glue-surjectivity steps by structural
-  proofs, derive the `IH^*(Theta)` corollary, close the inherited relative-Ext
-  and attribution debts that affect the note, complete the bounded primary-
-  source and priority audit, and commit a replayable manuscript/evidence
-  bundle.  C908 retains its original relative Chow-index and `p`-typical
-  crowns.  Card:
-  `../cubic-threefolds-tasks/c928-blown-up-theta-lattice-paper.md`.
 - **C925 — modular direct-QDM proof packet, active.** Write a self-contained
   alternative packet organized like a parameterized software interface: a
   caller chooses which generic even-block data to observe, which blocks to
@@ -480,6 +471,18 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   `../2026-08-20-c910-odd-label-frobenius-realization.md`;
   interim release report
   `../2026-08-12-c910-partial-lean-release.md`.
+- **C928 — closed 2026-08-20.** The integral middle lattice of the
+  cubic-threefold theta divisor is now a self-contained warning-free
+  eight-page paper.  Pair occupancy and complete-graph incidence replace the
+  saturation certificate; the universal line and a Pontryagin endpoint formula
+  replace the glue certificate; `IH^3(Theta,Z)` is free of rank 130 with the
+  canonical mod-two fibre-product glue; and the dual escape lattice is free of
+  rank ten with exceptional image `2E`.  Kraemer's rational decomposition is
+  credited as prior art, the modern integral-Lefschetz boundary is explicit,
+  and C908 retains its Chow-index and `p`-typical crowns.  Card:
+  `../cubic-threefolds-tasks/c928-blown-up-theta-lattice-paper.md`; report:
+  `../2026-08-20-c928-closeout.md`; paper:
+  `../../papers/blown-up-theta-lattice/`.
 - **C920 — closed 2026-08-18.** Hypothesis 5.7T of the epilogue is now used only
   for surface centers that are neither minimal nor geometrically ruled: the
   specialized primitive-sixth count vanishes for every Hirzebruch surface, by one
