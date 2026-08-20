@@ -112,6 +112,27 @@ typographically empty.
   shadow is exactly this sign, so a geometric input marking the kernel must
   determine the parity of the Galois action on the six axes, and nothing weaker
   will do.
+- **Reframing worth recording: this is Sylvester's duads-and-synthemes
+  duality.** Six labels carrying a distinguished one-factorization is the
+  classical presentation of the outer automorphism of the symmetric group on six
+  letters, and the module gives it a linear model: the fifteen duads are the
+  nonzero vectors of the heart, a syntheme is an orbit of `W`, and the
+  one-factorization is the four-element-field structure on the heart. The
+  package proves the linear model; the combinatorial duality itself is classical
+  and is not claimed as new anywhere in the artifact. What this buys is a sharp
+  form of the geometric question: the six dihedral axes are the six Sylow-five
+  subgroups of one alternating group on five letters, a one-factorization of
+  them amounts to a second such structure exchanged with the first by the outer
+  automorphism, and marking the kernel asks whether the geometric Galois action
+  distinguishes those two classes. That is the same two-valued datum as the
+  parity above.
+- **Cheap upgrade left on the table.** The packet-preserving group acts
+  faithfully on the five matchings, and that action is the symmetric group on
+  five letters, with the centralizer of `W` its alternating subgroup; the
+  alternating half is already formalized through the factor words of the
+  alternating-action module, so only the induced factor permutation of the
+  scaling permutation is missing. Adding it would state the classical
+  five-letter picture directly rather than through the sign character.
 - **Open, unchanged: the geometric side.** No relative isogeny, torsion group
   scheme, Weil pairing, geometric Galois action, or identification of the six
   labels with the manuscript's dihedral axes is constructed, so the marking of
