@@ -10,6 +10,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAx
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisThreePrimaryHeartCoordinates
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisPrimaryKernelStability
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisTwoPrimaryExoticSelection
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisPrimaryKernelOrders
 
 /-!
 # The relative six-axis packet over its integral homology realization
@@ -316,6 +317,17 @@ theorem relativeSixAxisPrimaryKernelSubgroup_isRelativeMaximalIsotropic
         (GraphLattices.sixAxisSourceDiscriminantPrimaryPart 3)
         (relativeSixAxisPrimaryKernelSubgroup realization 3) :=
   GraphLattices.sixAxisSourcePrimaryKernelSubgroup_isRelativeMaximalIsotropic
+    realization.jacobianPolarizationPrincipal realization.polarizationPullback
+
+/-- The two- and three-primary parts of the lattice model of the isogeny kernel
+have orders `2⁴` and `3⁴`.  The whole lattice model has order `6⁴` and is the
+direct sum of those parts, and each of them sits inside the corresponding
+primary part of the discriminant group, of order `2⁸` or `3⁸`. -/
+theorem relativeSixAxisPrimaryKernelSubgroup_natCard
+    (realization : RelativeSixAxisHomologyRealization) :
+    Nat.card (relativeSixAxisPrimaryKernelSubgroup realization 2) = 2 ^ 4 ∧
+      Nat.card (relativeSixAxisPrimaryKernelSubgroup realization 3) = 3 ^ 4 :=
+  GraphLattices.natCard_sixAxisSourcePrimaryKernelSubgroup
     realization.jacobianPolarizationPrincipal realization.polarizationPullback
 
 /-- The image, in the kernel of the two-torsion reduction of the source
