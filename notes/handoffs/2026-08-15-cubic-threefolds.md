@@ -99,12 +99,21 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   tensor-by-line-bundle operation, but the rank/Boolean ExactTop consumer
   needs only that the transported threshold image be a graph over the
   ambient top.  The cubic/product source needs no further point/Gamma row;
-  the comparison still needs a compatible cyclotomic operation realization
-  and the independent exceptional exponent certificate.
+  the comparison still needs the exact divisor-cocharacter/Levelt
+  realization and the independent exceptional exponent certificate.
+  Gamma framing factors tensor-by-line-bundle through large-radius
+  monodromy, so the comparison need not preserve the Gamma lattice.
+  A hypothetical birational map supplies a canonical mobile hyperplane
+  state along its factorization; its signed exceptional corrections are the
+  whole path defect.  Raw correction-nullity is false by the linear
+  projection \(J_3\) counterexample, so the remaining theorem must be
+  primitive-character projected.  For commuting unipotent line-bundle
+  actions, logarithm compresses every correction to \(X+aY\): one mixed
+  cross term at \(m=2\), and finitely many mixed words for general \(m\).
   Shifted tensor stability and the extremal multinomial source law are
   proved, but the occurrence-indexed exact QDM sequence, actual carrier
   exponent, and boundary vanishing remain open.  The packet is split into
-  bounded module companions behind a stable index.  The fifty-seven-check
+  bounded module companions behind a stable index.  The sixty-two-check
   finite law replay, eleven-check typed Haskell toy, and original cubic
   replay are green.  C925 remains open at fixed-phase Gamma/rank transport
   or at this ExactTop provider; the relative-cap cancellation remains one

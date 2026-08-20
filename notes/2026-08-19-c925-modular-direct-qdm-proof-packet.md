@@ -33,6 +33,9 @@ No manuscript or Lean source is part of this packet.
 | 26 | left-orthogonal exact-heart adapter and nonsplit quiver model | notes/2026-08-20-c925-oriented-heart-adapter.md |
 | 27 | dependent occurrence/orientation typing of the provider crux | notes/2026-08-20-c925-dependent-provider-typing.md |
 | 28 | Iritani source scope, operation realization, and threshold graph criterion | notes/2026-08-20-c925-iritani-provider-gap.md |
+| 29 | Gamma--monodromy detour and local divisor-cocharacter audit | notes/2026-08-20-c925-gamma-monodromy-detour.md |
+| 30 | mobile hyperplane path state and exceptional-twist localization | notes/2026-08-20-c925-mobile-line-bundle-state.md |
+| 31 | logarithmic pencil and finite mixed-word correction law | notes/2026-08-20-c925-logarithmic-pencil-law.md |
 | frontier | open experiments and provider targets | notes/2026-08-20-c925-exploration-frontier.md |
 
 ## Dependency spine
@@ -59,7 +62,7 @@ Modules 19--23 prove reusable categorical consequences:
 - universal center-null quotients and minimal sufficient shadows; and
 - the conditional Section 6 argument as a separate specialization.
 
-Modules 24--28 isolate the higher-stabilization frontier:
+Modules 24--31 isolate the higher-stabilization frontier:
 
 - irrationality on any unbounded stabilization set implies irrationality for
   every index;
@@ -75,6 +78,14 @@ Modules 24--28 isolate the higher-stabilization frontier:
   retained tensor-by-line-bundle operation; for the rank/Boolean consumer,
   the weakest comparison law is the exact projection/graph criterion on
   \(\operatorname{im}N^m\), not full operator equivariance; and
+- Gamma framing factors tensor-by-line-bundle through large-radius
+  monodromy, so the comparison need not preserve the Gamma lattice;
+- the strict transforms of a hypothetical birational map's hyperplane
+  system supply a coherent signed Picard-groupoid path state, while the raw
+  exceptional-twist correction is provably not ExactTop-null; and
+- logarithm compresses every commuting unipotent exceptional correction to
+  the pencil \(X+aY\), with one mixed square at \(m=2\) and finitely many
+  mixed words at general \(m\); and
 - the rank-row route remains the higher-EV uniform alternative.
 
 ## Current \(m=2\) alternatives
@@ -125,6 +136,12 @@ vanishing remain open.
   notes/2026-08-20-c925-type-level-precedents.md
 - Iritani provider-gap and threshold-image audit:
   notes/2026-08-20-c925-iritani-provider-gap.md
+- Gamma--monodromy detour:
+  notes/2026-08-20-c925-gamma-monodromy-detour.md
+- mobile hyperplane line-bundle state:
+  notes/2026-08-20-c925-mobile-line-bundle-state.md
+- logarithmic exceptional-correction pencil:
+  notes/2026-08-20-c925-logarithmic-pencil-law.md
 - conditional \(m=1\) specialization:
   notes/2026-08-20-c925-framed-m1-specialization.md
 - non-\(m=2\) categorical dividends:

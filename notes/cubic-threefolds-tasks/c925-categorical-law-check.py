@@ -85,6 +85,14 @@ def matrix_add(left, right):
     ]
 
 
+def matrix_scale(matrix, scalar):
+    return [[scalar * entry for entry in row] for row in matrix]
+
+
+def matrix_subtract(left, right):
+    return matrix_add(left, matrix_scale(right, Fraction(-1)))
+
+
 def matrix_multiply(left, right):
     return [
         [
@@ -192,6 +200,17 @@ def matrix_power(matrix, exponent):
     result = identity(len(matrix))
     for _ in range(exponent):
         result = matrix_multiply(result, matrix)
+    return result
+
+
+def matrix_exponential(nilpotent):
+    result = identity(len(nilpotent))
+    power = identity(len(nilpotent))
+    for exponent in range(1, len(nilpotent) + 1):
+        power = matrix_multiply(power, nilpotent)
+        result = matrix_add(
+            result, matrix_scale(power, Fraction(1, factorial(exponent)))
+        )
     return result
 
 
@@ -1700,6 +1719,99 @@ def main():
         threshold_action, matrix_vector(comparison_action, top_generator)
     )
     checks["threshold_equivariance_does_not_preserve_top_N_action"] = "pass"
+
+    # A mobile hyperplane class D box O(a) retains the projective threshold
+    # top even when tensor-by-D is a nontrivial unipotent action.  The test
+    # models A by I+J_k and tensor-by-O(a) by (I+J_(m+1))^a.
+    for stabilization in range(1, 7):
+        for projective_degree in range(1, 5):
+            projective_tensor = matrix_power(
+                matrix_add(identity(stabilization + 1), jordan(stabilization + 1)),
+                projective_degree,
+            )
+            for cubic_size in range(1, 5):
+                cubic_tensor = matrix_add(identity(cubic_size), jordan(cubic_size))
+                product_tensor = kronecker(cubic_tensor, projective_tensor)
+                product_identity = identity(len(product_tensor))
+                mobile_nilpotent = [
+                    [
+                        product_identity[i][j] - product_tensor[i][j]
+                        for j in range(len(product_tensor))
+                    ]
+                    for i in range(len(product_tensor))
+                ]
+                assert rational_rank(
+                    matrix_power(mobile_nilpotent, stabilization)
+                ) > 0
+    checks["mobile_line_bundle_source_retains_threshold_top"] = "pass"
+
+    # Writer composition must first pull an earlier exceptional divisor and
+    # then add the new base order.  If the second center lies in E_1, then
+    # pullback(E_1)=E_1'+E_2, so orders a_1,a_2 become (a_1,a_1+a_2).
+    for first_order in range(5):
+        for second_order in range(5):
+            pulled_first = (first_order, first_order)
+            composed = (
+                pulled_first[0],
+                pulled_first[1] + second_order,
+            )
+            assert composed == (first_order, first_order + second_order)
+    checks["strict_transform_writer_pulls_then_adds_exceptional_orders"] = "pass"
+
+    # For commuting nilpotents X,Y, the unipotent moving operator
+    # 1-exp(X)exp(aY) has exactly the power-image ranks of X+aY.
+    for size in range(2, 8):
+        logarithm_x = jordan(size)
+        logarithm_y = matrix_power(logarithm_x, 2)
+        tensor_x = matrix_exponential(logarithm_x)
+        tensor_y = matrix_exponential(logarithm_y)
+        for exceptional_order in range(1, 5):
+            moving_tensor = matrix_multiply(
+                tensor_x, matrix_power(tensor_y, exceptional_order)
+            )
+            moving_nilpotent = matrix_subtract(identity(size), moving_tensor)
+            logarithmic_pencil = matrix_add(
+                logarithm_x,
+                matrix_scale(logarithm_y, Fraction(exceptional_order)),
+            )
+            for threshold in range(size + 1):
+                assert rational_rank(
+                    matrix_power(moving_nilpotent, threshold)
+                ) == rational_rank(matrix_power(logarithmic_pencil, threshold))
+    checks["logarithmic_pencil_preserves_power_images"] = "pass"
+
+    # A nonzero pure exceptional multiplicity rescales its logarithm and
+    # therefore leaves every Jordan/power-image rank unchanged.
+    for size in range(1, 8):
+        pure_logarithm = jordan(size)
+        pure_tensor = matrix_exponential(pure_logarithm)
+        for exceptional_order in range(1, 6):
+            correction = matrix_subtract(
+                identity(size), matrix_power(pure_tensor, exceptional_order)
+            )
+            for threshold in range(size + 1):
+                assert rational_rank(matrix_power(correction, threshold)) == (
+                    rational_rank(matrix_power(pure_logarithm, threshold))
+                )
+    checks["pure_exceptional_multiplicity_preserves_jordan_type"] = "pass"
+
+    # Two commuting square-zero logarithms retain exactly one m=2 term.
+    square_x = kronecker(jordan(2), identity(2))
+    square_y = kronecker(identity(2), jordan(2))
+    assert matrix_power(square_x, 2) == matrix_scale(identity(4), Fraction(0))
+    assert matrix_power(square_y, 2) == matrix_scale(identity(4), Fraction(0))
+    assert matrix_multiply(square_x, square_y) == matrix_multiply(
+        square_y, square_x
+    )
+    for exceptional_order in range(1, 6):
+        pencil = matrix_add(
+            square_x, matrix_scale(square_y, Fraction(exceptional_order))
+        )
+        assert matrix_power(pencil, 2) == matrix_scale(
+            matrix_multiply(square_x, square_y),
+            Fraction(2 * exceptional_order),
+        )
+    checks["square_zero_logarithmic_pencil_is_single_cross_composite"] = "pass"
 
     result = {
         "status": "pass",

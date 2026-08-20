@@ -28,6 +28,12 @@ exact \(m=2\) and all-\(m\) transport gates.
   notes/2026-08-20-c925-type-level-precedents.md
 - Iritani provider-gap and threshold-image audit:
   notes/2026-08-20-c925-iritani-provider-gap.md
+- Gamma--monodromy detour:
+  notes/2026-08-20-c925-gamma-monodromy-detour.md
+- mobile hyperplane line-bundle state:
+  notes/2026-08-20-c925-mobile-line-bundle-state.md
+- logarithmic exceptional-correction pencil:
+  notes/2026-08-20-c925-logarithmic-pencil-law.md
 - non-\(m=2\) categorical dividends:
   notes/2026-08-20-c925-non-m2-categorical-dividends.md
 - conditional Section 6 specialization:
@@ -67,6 +73,21 @@ index row.
 - For a fixed Iritani direct-sum comparison, rank/Boolean ExactTop transport
   needs only that the transported top image be a graph over the ambient top.
   Full \(N\)-equivariance and even strict image equality are stronger.
+- Gamma framing identifies tensor-by-line-bundle with large-radius
+  monodromy, so a horizontal common-loop comparison can transport the
+  complex operation without preserving the Gamma lattice.  Iritani's
+  Fourier projections already expose the correct local divisor directions;
+  the exact cocharacter/Levelt instantiation remains typed provider work.
+- A hypothetical birational map supplies its own coherent mobile hyperplane
+  state.  Its strict-transform corrections form a signed
+  Picard-groupoid/Cartier-\(b\)-divisor Writer law, and its source retains
+  nonzero \(\operatorname{Top}_m\).  Raw exceptional corrections are not
+  null—the linear-projection resolution creates a hostile \(J_3\)—so the
+  open theorem must live in the common primitive-character receiver.
+- For commuting unipotent pullback and exceptional actions, logarithm loses
+  no Jordan data and replaces \(1-AC^a\) by \(X+aY\).  At \(m=2\) the
+  correction is one mixed term after the pure exponent certificates; for
+  general \(m\) it is a finite mixed-word interface.
 
 ## Open geometric providers
 
@@ -116,18 +137,19 @@ Typed replay:
       | diff -u \
           notes/cubic-threefolds-tasks/c925-sparse-shadow-path-toy-output.txt -
 
-The finite model currently has fifty-seven checks.  It verifies only the
+The finite model currently has sixty-two checks.  It verifies only the
 advertised algebraic laws and countermodels, never an external QDM provider.
 
 ## Next
 
-1. Construct the cyclotomic realization square carrying tensor-by-\(L\)
-   through Iritani's formal comparison, and compute the transported
-   \(\widehat N_L\) plus its threshold graph.
-2. If that formal route is unavailable, construct the opposite-oriented
-   cyclotomic QDM sequence \(0\to E\to B\to A\to0\) in the enriched heart.
-3. Prove the actual \(m=2\) exceptional term is square-zero and compute the
-   resulting projection defect or opposite boundary.
-4. Continue the higher-EV rank-row common-receiver audit in parallel.
+1. Instantiate the descending-line cocharacter and formal Levelt monodromy
+   functor for Iritani's completed comparison.
+2. In the same primitive-character receiver, compute the projected
+   exceptional logarithm \(Y\) and the contextual mixed graph/boundary
+   defect of \(X+aY\) for every actual mobile occurrence.
+3. Prove the sharp occurrence-indexed exceptional exponent/carrier bound.
+4. If the monodromy route fails, construct the opposite-oriented enriched
+   exact sequence and use the Module 25/26 boundary adapter.
+5. Continue the higher-EV rank-row common-receiver audit in parallel.
 
 C925 remains active until the user closes it.
