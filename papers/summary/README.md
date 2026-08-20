@@ -65,6 +65,17 @@ complex as separate victories.
 
 ### Algebraic geometry and rationality
 
+- **Integral and modular decomposition for the cubic-threefold theta
+  divisor.** For the theta divisor of every smooth complex cubic threefold,
+  the integral middle lattice is free of rank `130` with Lefschetz saturation
+  quotient `(Z/2)^10`.  The resolution has two integral outer point summands
+  and a residual perverse factor with central map `Z --(-3)--> Z`; modulo
+  three that factor is uniserial with successive factors
+  `delta_0`, `IC`, `delta_0`.  The same factor three makes relative hard
+  Lefschetz fail modulo three, while an infinite-order Fano class lifts the
+  local order-three link class.
+  [Integral Cohomology and Modular Decomposition for the Theta Divisor of a Cubic Threefold](https://github.com/tavisrudd/blown-up-theta-lattice/blob/main/blown_up_theta_lattice.pdf).
+
 - **One-stabilization irrationality for every smooth cubic threefold.** The
   fourfold `X × P¹` is irrational for every smooth complex cubic threefold
   `X`, and likewise `V × P¹` for every smooth prime Fano
@@ -186,6 +197,7 @@ is conditional, its hypothesis is displayed in the theorem column.
 
 | Paper | General theorem | Quantifier range |
 |---|---|---|
+| Integral Cohomology and Modular Decomposition for the Theta Divisor of a Cubic Threefold | The integral middle lattice has rank `130` and saturation quotient `(Z/2)^10`; the integral resolution complex has central Smith factor three, a length-three mod-three Loewy chain, and modular relative-hard-Lefschetz failure. | The theta divisor of every smooth complex cubic threefold. |
 | Irrationality of Cubic Threefolds after One Stabilization | `X × P¹` is irrational, by way of the rank-two residue marker of the cubic zero block in the categorical direct-QDM ledger. | Every smooth complex cubic threefold `X`. |
 | Irrationality of Cubic Threefolds after One Stabilization | The primitive-sixth framed-monodromy multiplicity of the small even quantum connection equals two. | Every smooth complex cubic threefold `X`. |
 | Irrationality of Cubic Threefolds after One Stabilization | The primitive-sixth framed-monodromy multiplicity of a product with a projective space is that of the factor times one more than the dimension. | Every smooth projective variety and every projective space. |
@@ -210,6 +222,7 @@ boundary, and reproducible entry points.
 
 | Paper | Area | Central result | Public entry |
 |---|---|---|---|
+| Integral Cohomology and Modular Decomposition for the Theta Divisor of a Cubic Threefold | Algebraic geometry / topology | The rank-130 integral middle lattice has canonical mod-two glue, while the same resolution carries a factor-three integral perverse attachment, a length-three modular Loewy chain, and failure of relative hard Lefschetz modulo three. | [PDF](https://github.com/tavisrudd/blown-up-theta-lattice/blob/main/blown_up_theta_lattice.pdf) · [repo](https://github.com/tavisrudd/blown-up-theta-lattice) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.22036586-blue.svg)](https://doi.org/10.5281/zenodo.22036586) |
 | Reconstructing the Clebsch Code and Its Golden Orientation from Its Deep-Hole Syndrome Locus | Finite geometry / coding | Deep-hole data recognize the Clebsch code and golden orientation. | [PDF](https://github.com/tavisrudd/clebsch-rigidity/blob/main/clebsch_rigidity.pdf) · [repo](https://github.com/tavisrudd/clebsch-rigidity) |
 | Quadratic Trade Rigidity and Cubic Orientation in Conic Matching Quotients | Algebraic combinatorics | On the matching carrier, a two-valued quadratic trade classifies two exceptional geometries and a cubic orients their sheets. | [PDF](https://github.com/tavisrudd/clebsch-factorization/blob/main/clebsch_factorization.pdf) · [repo](https://github.com/tavisrudd/clebsch-factorization) |
 | Golden Descent and Operator Realizations of the Clebsch Cubic | Algebraic geometry / combinatorics | An exact arithmetic incidence cover selects a marked conference source whose cubic shadows return in degree-six harmonics; exchange rigidity and two-graph reconstruction follow independently. | [PDF](https://github.com/tavisrudd/clebsch-passages/blob/main/clebsch_passages.pdf) · [repo](https://github.com/tavisrudd/clebsch-passages) |
@@ -416,6 +429,49 @@ public mirror.
 ---
 
 ### Other papers
+
+#### Integral Cohomology and Modular Decomposition for the Theta Divisor of a Cubic Threefold
+
+[PDF](https://github.com/tavisrudd/blown-up-theta-lattice/blob/main/blown_up_theta_lattice.pdf) · [Repository](https://github.com/tavisrudd/blown-up-theta-lattice) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.22036586-blue.svg)](https://doi.org/10.5281/zenodo.22036586)
+
+**Standout result.** The blow-up resolution of the cubic-threefold theta
+divisor exhibits two distinct integral coefficient defects.  Its rank-130
+middle lattice has a canonical `(Z/2)^10` saturation quotient, while its
+integral direct image has central map `Z --(-3)--> Z`.  Modulo three the
+residual perverse factor is uniserial of length three, and relative hard
+Lefschetz fails.
+
+> *Abstract* Let Θ be the theta divisor of the intermediate Jacobian of a
+> smooth complex cubic threefold, and let σ: M = Bl₀Θ → Θ be its resolution.
+> We compute the integral middle lattice IH³(Θ,Z): it is free of rank 130,
+> and its Lefschetz saturation quotient is (Z/2)¹⁰. The Fano difference map
+> identifies the glue and its dual escape lattice. We determine Rσ_*Z_M[4],
+> split off two point objects over Z and prove that the residual perverse
+> factor has central map Z → Z given by multiplication by −3. It acquires a
+> third point summand after inverting three, but none integrally; modulo three
+> it becomes length-three uniserial. Finally, we lift the local order-three
+> link class to an infinite-order Fano class and prove that ordinary and
+> intersection cohomology agree in degrees at least four. The factor three
+> also forces relative hard Lefschetz to fail modulo three.
+
+**Delivers.** An integral middle-lattice theorem with geometric Fano-labelled
+glue; the complete integral point-summand decomposition and central
+attachment of the resolution complex; the exact mod-three Loewy chain; a
+modular relative-hard-Lefschetz counterexample; and the global fate of the
+local order-three link class.
+
+**Who cares.** Algebraic geometers and topologists working on cubic
+threefolds, intermediate Jacobians, theta divisors, integral intersection
+cohomology, perverse sheaves, or modular decomposition phenomena.
+
+**Priority boundary.** The paper's claim ledger records “cubic-theta integral
+object and central Smith factor retained,” “canonical `delta_0`--`IC`--
+`delta_0` filtration and both nonsplit extensions retained,” and “explicit
+multiplier three and failure over `F_3` retained.”  The manuscript separately
+credits the general rational intersection-form, modular rank, and
+small-extension frameworks on which the example-specific calculation sits.
+
+---
 
 #### Standard Flips of Discrepancy One: Extremal J-Normalization and the Meijer Aperture at ν=1
 

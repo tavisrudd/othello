@@ -1,5 +1,9 @@
 # Integral cohomology and modular decomposition for the theta divisor of a cubic threefold
 
+[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.22036586-blue.svg)](https://doi.org/10.5281/zenodo.22036586)
+
+[Download the paper (PDF)](blown_up_theta_lattice.pdf)
+
 This paper computes the integral lattice
 `IH^3(Theta,Z) = H^3(Bl_0 Theta,Z)` for the theta divisor of the intermediate
 Jacobian of a smooth cubic threefold.  The rank-130 group has a canonical
