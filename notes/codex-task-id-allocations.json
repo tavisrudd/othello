@@ -3284,8 +3284,17 @@
       "last": 932,
       "purpose": "generalize Golden cubic Hessian module beyond characteristic zero",
       "sequence": 365
+    },
+    {
+      "count": 1,
+      "first": 933,
+      "kind": "reservation",
+      "lane": "cubic-threefolds",
+      "last": 933,
+      "purpose": "self-contained m=1 Hodge-atom marker-ledger companion paper",
+      "sequence": 366
     }
   ],
-  "next_id": 933,
+  "next_id": 934,
   "schema": "codex-task-id-allocations-v1"
 }
