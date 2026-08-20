@@ -62,3 +62,16 @@ Full statement, proof, and consequences:
 4. Optional successor: prove ordinariness of the nodes inside the determinantal
    picture (transversality of the perturbation onto the two-by-two cofactor
    block) so that the Hessian computation is no longer cited at all.
+
+## Literature audit
+
+Run inside this task per `notes/literature-audit-conventions.md`; the report is
+`../2026-08-20-c927-determinantal-node-count-literature-audit.md`. Verdict: the
+proof mechanism is prior art (C. Segre, restated and proved as Propositions 8, 10
+and 19 of Hassett–Tschinkel), and must never be called new. Not located, at the
+coverage the report states and with MathSciNet unreachable: the equivariant
+construction of the matrix from conference-matrix eigenspaces, and any link at
+all between two-graphs and determinantal cubic threefolds. The unconditional
+verification replacing Hassett–Tschinkel's transversality hypothesis is ours for
+this cubic. No novelty ledger row exists; one is required before any novelty
+sentence appears on any surface.

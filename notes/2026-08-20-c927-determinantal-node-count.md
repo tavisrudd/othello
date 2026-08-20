@@ -293,12 +293,30 @@ owns any action.
    a conceptual proof for generality and for exposition, with the finite
    certificate retained.
 
-One caution before any priority language anywhere. Paper I cites Hassett–Tschinkel
-Proposition 10 and Cheltsov–Tschinkel–Zhang's six-nodal \(S_5\) model as context,
-noting that the latter assumes six-nodality rather than proving it. The
-equivariant construction of \(M\) from the two eigenspaces is close enough to that
-literature that its novelty is unestablished; it must go through
-`notes/literature-audit-conventions.md` before being called new anywhere.
+## Priority: the mechanism is classical
+
+A literature audit was run on this report and is the owning record:
+[`2026-08-20-c927-determinantal-node-count-literature-audit.md`](2026-08-20-c927-determinantal-node-count-literature-audit.md).
+Its verdict changes how everything above must be described, and nothing about
+whether it is true.
+
+The mechanism — six-nodal cubic threefold as a three-by-three determinant, its
+singular locus as the rank-one locus, that locus as a linear section of the Segre
+fourfold cut in six points — is **prior art**, due to C. Segre and restated as
+Proposition 8 of Hassett–Tschinkel, who prove it in their Propositions 10 and 19
+by the same \(\Sigma_1\subset\Sigma_2\) and Bézout argument used here. It must
+never be presented as new.
+
+Two narrow things were not located in the literature and survive as ours, subject
+to the audit's coverage limits, which include MathSciNet being unreachable.
+First, Hassett–Tschinkel's argument carries an explicit transversality
+hypothesis, while §6 above proves the corresponding statement unconditionally for
+this particular cubic — the same gap Paper I identified when it proved
+singular-locus completeness independently rather than importing it. Second, the
+construction of \(M\) from the eigenspaces of a conference matrix, and more
+generally any link between two-graphs and determinantal cubic threefolds, was not
+found. No claim–proof–novelty ledger row exists for either; one must be written
+before any novelty sentence appears on any surface.
 
 ## Open, and deliberately not done
 
