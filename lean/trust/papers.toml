@@ -289,3 +289,9 @@ id = "passant_code_q13"
 dir = "papers/q13-passant-code"
 main = "passant_code_q13.tex"
 lane = "clebsch"
+
+[[paper]]
+id = "blown_up_theta_lattice"
+dir = "papers/blown-up-theta-lattice"
+main = "blown_up_theta_lattice.tex"
+lane = "cubic-threefolds"

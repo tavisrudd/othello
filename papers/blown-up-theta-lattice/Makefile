@@ -1,7 +1,7 @@
 export SOURCE_DATE_EPOCH = 1785715200
 export FORCE_SOURCE_DATE = 1
 
-TEXSHELL ?= nix develop ..\#manuscript --command
+TEXSHELL ?= nix develop .\#manuscript --command
 LATEXMK ?= $(TEXSHELL) latexmk
 LATEXMK_FLAGS ?= -xelatex -interaction=nonstopmode -halt-on-error
 PYTHON ?= nix shell nixpkgs\#python3 -c python3

@@ -529,3 +529,47 @@ old = "passant_code_q13.pdf: $(SOURCE)\n\tpython3 ../scripts/lint_tex_spacing.py
 new = "passant_code_q13.pdf: $(SOURCE)\n"
 expected_count = 1
 reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
+
+[[repository]]
+name = "blown-up-theta-lattice"
+include_release_pdfs = true
+release_output_policy = "immutable-source"
+source = "papers/blown-up-theta-lattice"
+paper_ids = ["blown_up_theta_lattice"]
+disposition = "active"
+
+[[repository.exclude_path]]
+path = "claim-proof-novelty-ledger.md"
+reason = "private claim and priority ledger, not part of the public manuscript repository"
+
+[[repository.exclude_path]]
+path = "literature-audit.md"
+reason = "private literature-audit record, not part of the public manuscript repository"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = ".PHONY: all check lint manuscript warnings clean distclean"
+new = ".PHONY: all check manuscript warnings clean distclean"
+expected_count = 1
+reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = "all: lint manuscript\n\ncheck: lint manuscript warnings"
+new = "all: manuscript\n\ncheck: manuscript warnings"
+expected_count = 1
+reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = "lint:\n\t$(PYTHON) ../scripts/lint_tex_spacing.py $(SOURCE) sections/*.tex\n\n"
+new = ""
+expected_count = 1
+reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = "manuscript: $(SOURCE) sections/*.tex refs.bib\n\t$(PYTHON) ../scripts/lint_tex_spacing.py $(SOURCE) sections/*.tex\n"
+new = "manuscript: $(SOURCE) sections/*.tex refs.bib\n"
+expected_count = 1
+reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
