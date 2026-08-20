@@ -3275,8 +3275,17 @@
       "last": 931,
       "purpose": "C928 named-referee dossier and simulated reports",
       "sequence": 364
+    },
+    {
+      "count": 1,
+      "first": 932,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 932,
+      "purpose": "generalize Golden cubic Hessian module beyond characteristic zero",
+      "sequence": 365
     }
   ],
-  "next_id": 932,
+  "next_id": 933,
   "schema": "codex-task-id-allocations-v1"
 }
