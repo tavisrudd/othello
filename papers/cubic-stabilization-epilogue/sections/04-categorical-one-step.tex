@@ -1,0 +1,508 @@
+\section{Categorical QDM markers and one stabilization}
+\label{sec:atomic-one-step}
+
+We prove the unconditional theorem by applying the quantum \(D\)-module
+decomposition formulas directly.  The common argument is stated first for an
+arbitrary additive marker.  The rest of the section constructs the smallest
+marker needed for a cubic threefold and verifies its center nullity.  The
+framed invariant of Section~\ref{sec:framed-monodromy} will be a second fold
+of the same ledger.
+
+\subsection{The one-blowup model}
+
+Let \(Y\) be smooth and projective.  Pass to numerical Novikov variables,
+restrict the big quantum connection to even bulk variables, and then pass to
+its generic coefficient field.  After an algebraic extension, multiplication
+by the Euler field has a primary decomposition.  We call the resulting
+connection summands the \emph{generic even QDM blocks} of \(Y\).  A block
+retains its connection, grading, pairing, and Euler endomorphism; morphisms are
+regular connection isomorphisms, after scalar extension and formal change of
+bulk coordinates.  In particular, they use neither negative nor fractional
+powers of the connection variable \(z\).
+
+Fix a block type \(\mathcal T\).  Let \(\Pi_{\mathcal T}\) be the
+regular-isomorphism groupoid of blocks of that type and put
+\[
+ \mathcal L_{\mathcal T}
+ :=\pi_0\operatorname{Sym}^{\sqcup}(\Pi_{\mathcal T}),
+\]
+the effective free commutative monoid on their isomorphism classes.  Direct
+sum gives each \(Y\) a block ledger
+\(\mathcal B_{\mathcal T}(Y)\in\mathcal L_{\mathcal T}\).  A
+\emph{marker fold} is a commutative-monoid homomorphism
+\[
+ w:\mathcal L_{\mathcal T}\longrightarrow A,
+ \qquad I_w(Y):=w(\mathcal B_{\mathcal T}(Y)),
+\]
+where \(A\) is an effective commutative monoid.  No group completion is
+made: it can destroy useful folds, including Boolean ones.
+
+For reference, the notation used by both specializations is
+\[
+\begin{array}{c|l}
+ \Pi_{\mathcal T}&\text{regular-isomorphism groupoid of typed QDM blocks}\cr
+ \mathcal L_{\mathcal T}&\pi_0\operatorname{Sym}^{\sqcup}(\Pi_{\mathcal T}),
+   \text{ the effective block monoid}\cr
+ \mathcal B_{\mathcal T}(Y)&\text{block ledger of }Y\cr
+ w:\mathcal L_{\mathcal T}\to A&\text{additive marker fold into an effective monoid}\cr
+ \omega_j&\text{the }j\text{-th center occurrence in one blowup}\cr
+ c_w(\omega_j)&\text{the marker of that actual center occurrence.}
+\end{array}
+\tag{4.0}
+\label{tab:marker-notation}
+\]
+
+Consider one blowup
+\(\beta:\widetilde Y=\Bl_ZY\to Y\) along a smooth center of codimension
+\(c\ge2\).  Iritani's comparison has one ambient summand and \(c-1\) center
+summands.  The latter are not anonymous copies.  For the \(j\)-th summand
+record
+\[
+ \omega_j=(\beta,Z,j,\varsigma_j,\chi_j),
+ \qquad 0\le j\le c-2,
+\]
+where \(\varsigma_j\) is Iritani's center reconstruction parameter and
+\(\chi_j\) is the induced numerical Novikov specialization.  Its correction
+is
+\(c_w(\omega_j):=w(\mathcal B_{\mathcal T}(Z;\omega_j))\).  Equality is
+required only after applying \(w\); distinct block multisets may have the same
+marker.
+
+\begin{theorem}[Occurrence-indexed marker ledger]
+\label{thm:marker-ledger}
+\coverage{fragment}%
+\lean{packet_multiplicity_eq_of_preserving_chain,%
+  packet_multiplicity_eq_of_typed_weak_factorization}%
+\imports{AKMW:weak-factorization}%
+Let \(w:\mathcal L_{\mathcal T}\to A\) be a marker fold whose block
+condition is preserved by regular scalar extension and formal coordinate
+change.  Suppose
+\begin{align}
+ I_w(\PP_Y(V))&=rI_w(Y),
+ &&\rk V=r,                                      \label{eq:marker-pbundle}\\
+ I_w(\Bl_ZY)&=I_w(Y)+\sum_{j=0}^{c-2}c_w(\omega_j),
+ &&\operatorname{codim}_YZ=c\ge2.                \label{eq:marker-blowup}
+\end{align}
+If every actual smooth center occurrence of dimension at most \(d-2\) has
+zero correction, then \(I_w\) is a birational invariant of smooth projective
+\(d\)-folds.
+\end{theorem}
+
+\begin{proof}
+Projective weak factorization writes a birational map of smooth projective
+\(d\)-folds as a zigzag of blowups and blowdowns along smooth centers of
+codimension at least two \cite[Theorem~0.1.1]{AKMW}.  Formula
+\eqref{eq:marker-blowup} and center nullity give equality at each arrow, so
+the equalities telescope.  Disconnected centers are treated componentwise;
+a divisor blowup is an isomorphism.
+\end{proof}
+
+Equivalently, the marker descends on object sets:
+\begin{equation}
+\begin{CD}
+ \operatorname{Ob}(\mathsf{SmProj}_d) @>{I_w}>> A\\
+ @VVV @|\\
+ \operatorname{Ob}(\mathsf{SmProj}_d)/{\sim_{\mathrm{bir}}}
+ @>>{\overline I_w}> A.
+\end{CD}
+\label{diag:marker-descent}
+\end{equation}
+This square reformulates the proof; it is not an additional input.
+
+\subsection{The QDM operation providers}
+
+Three adapters place the comparison theorems in the preceding interface.
+First, the intrinsic ample-adic completion and the Laurent neighborhood of a
+fibre or exceptional cusp need not map to one another.  Both receive an
+injective map from the algebraic coefficient algebra on which the finite
+connection matrix is defined.  Its fraction field is a common generic spine.
+Rank, primary factors, nilpotence, regular formal gauges, and conjugacy
+invariants are unchanged after either field extension.
+
+Second, the comparisons are regular in \(z\).  Iritani's Theorem~5.18 and
+Iritani--Koto's Theorem~5.1 are respectively defined over rings of the form
+\[
+ \C[z]((q_{\mathrm{exc}}^{-1/s}))[[Q,\widetilde\tau]],
+ \qquad
+ \C[z]((q_{\mathrm{fib}}^{-1/r}))[[Q,\widehat\tau]].
+\]
+Their inverses use
+no negative powers of \(z\); see also
+\cite[Remark~5.3]{IritaniKoto}.  Homogeneity and the explicit pull-push and
+Fourier formulas preserve parity after odd variables are set to zero.  The
+combined bulk Jacobians are invertible, hence so are their even-even blocks.
+
+Third, Iritani's center map need not be injective
+\cite[(5.15)]{IritaniBlowup}.  After numerical reduction it has the form
+\begin{equation}
+ Q_Z^d\longmapsto
+ Q^{i_*d}q_{\mathrm{exc}}^{-\rho_Z\cdot d/(c-1)}.
+ \label{eq:center-novikov-map-atomic}
+\end{equation}
+Choose divisors \(D_1,\ldots,D_\rho\) separating \(N_1(Z)\) and retain the
+characters \(\exp(\sum_k(D_k\cdot d)s_k)\).  Every fibre of
+\eqref{eq:center-novikov-map-atomic} is finite: an ample degree from \(Y\)
+bounds the lattice points in the corresponding slice of
+\(\overline{NE}(Z)\).  On one fibre, a generic one-parameter restriction gives
+distinct exponentials, whose first derivatives form an invertible
+Vandermonde matrix.  The character-tagged map is therefore injective.
+Remarks~2.3 and 5.6 of \cite{IritaniBlowup} show that divisor and Novikov
+variables occur in precisely these combinations.  Each center summand is a
+faithful scalar extension and formal reparametrization of the intrinsic
+generic numerical QDM of \(Z\).
+
+\begin{proposition}[QDM operation ledgers]
+\label{prop:qdm-operation-ledgers}
+\coverage{absent}%
+\imports{IritaniKoto:thm-5.1,IritaniBlowup:thm-5.18}%
+Let a marker fold be preserved by the regular scalar extensions and formal
+coordinate changes described above.  The projective-bundle and blowup QDM
+comparisons then supply \eqref{eq:marker-pbundle} and
+\eqref{eq:marker-blowup}; each center marker is evaluated at its actual
+occurrence \(\omega_j\).
+\end{proposition}
+
+\begin{proof}
+For a rank-\(r\) bundle, Iritani--Koto's Theorem~5.1 gives \(r\) copies of
+the base QDM after Laurent extension \cite[Theorem~5.1]{IritaniKoto}.  Its
+invertible bulk Jacobian separates their unit coordinates.  The regularity,
+parity, and generic-spine adapters carry the marker across the comparison,
+and additivity gives \eqref{eq:marker-pbundle}.  Tensoring the bundle by a
+line bundle, when needed for the global-generation convention, changes
+neither the projective bundle nor the intrinsic Novikov embedding
+\cite[Remark~1.2 and Remark~5.2]{IritaniKoto}.
+
+For a codimension-\(c\) blowup, Iritani's Theorem~5.18 gives one ambient QDM
+and \(c-1\) center QDMs \cite[Theorem~5.18]{IritaniBlowup}.  Parts (4), (6),
+and (7) give separated leading branches and an invertible combined bulk
+Jacobian.  Apply the same regularity and parity adapters, and apply the
+faithful character adapter to each center copy.  Additivity then gives
+\eqref{eq:marker-blowup}.  Each new arrow is evaluated from its own
+coefficient spine; Laurent comparisons are never recursively composed.
+\end{proof}
+
+The marker-level fork is
+\begin{equation}
+\begin{CD}
+ \mathcal B_{\mathcal T}(\widetilde Y)
+ @>{\text{Iritani}}>>
+ \mathcal B_{\mathcal T}(Y)\sqcup
+ \displaystyle\coprod_{j=0}^{c-2}\mathcal B_{\mathcal T}(Z;\omega_j)\\
+ @V{w}VV @VV{w}V\\
+ A @= A.
+\end{CD}
+\label{diag:qdm-marker-fork}
+\end{equation}
+
+\subsection{The rank-two residue marker}
+
+We specialize to \(A=\mathbf N\).  Let \(E\) be a generic even block with
+centered connection
+\begin{equation}
+ z\partial_z y=A(z)y,
+ \qquad A(z)=z^{-1}N+A_0+zA_1+z^2A_2+\cdots.
+ \label{eq:atomic-block-expansion}
+\end{equation}
+Assume \(\rk E=2\), \(N\ne0\), and \(N^2=0\).  Then
+\(L=\im N=\ker N\) is a line.  Define
+\begin{equation}
+ E^\sharp=\{s\in E:s\bmod z\in L\}.
+ \label{eq:atomic-modification}
+\end{equation}
+
+\begin{lemma}[The regular coefficient preserves the nilpotent line]
+\label{lem:A0preserve}
+\coverage{conditional_deduction}%
+\lean{atomicRankTwo_regularCoefficient_preserves_nilpotentLine,%
+  atomicRankTwo_pairingEquations_of_loopHorizontality}%
+The Poincar\'e pairing implies \(A_0L\subset L\).
+\end{lemma}
+
+\begin{proof}
+Separated spectral factors are orthogonal for the horizontal Poincar\'e
+pairing: coefficientwise horizontality kills every off-diagonal block by an
+invertible Sylvester operator.  Hence the restriction to \(E\) is
+nondegenerate.  Write it as \(P(z)=P_0+zP_1+\cdots\).  Horizontality gives
+\[
+ z\partial_zP(z)+A(z)^TP(z)+P(z)A(-z)=0.
+\]
+The \(z^{-1}\) coefficient says \(N^TP_0=P_0N\).  Thus \(L\) is isotropic
+and, in dimension two, \(L^\perp=L\).  The constant coefficient is
+\[
+ A_0^TP_0+P_0A_0+N^TP_1-P_1N=0.
+\]
+Sandwiching it between \(x\in L=\ker N\) gives \((A_0x,x)=0\), hence
+\(A_0x\in L\).
+\end{proof}
+
+Choose a frame with \(L=\langle e_1\rangle\) and
+\(Ne_2=\nu e_1\), \(\nu\ne0\).  The modified frame is \(e_1,ze_2\), so
+\begin{equation}
+ A^\sharp=S^{-1}AS-S^{-1}z\partial_zS,
+ \qquad S=\diag(1,z).
+ \label{eq:Asharp}
+\end{equation}
+The term \(z^{-1}N\) becomes regular.  The only possible new pole is the
+\(E_{21}\)-coefficient of \(A_0\), which vanishes by
+Lemma~\ref{lem:A0preserve}.  Thus
+\(A^\sharp=R+zR_1+\cdots\).  Define
+\begin{equation}
+ \delta^\sharp(E):=(\tr R)^2-4\det R.
+ \label{eq:res-disc}
+\end{equation}
+
+\begin{proposition}[Rank-two rigidity]
+\label{prop:rank2-rigidity}
+\coverage{conditional_deduction}%
+\lean{atomicRankTwo_modifiedBase_regular_of_flat_connection,%
+  atomicRankTwo_modifiedResidue_lax_of_flat_connection,%
+  atomicRankTwo_residueDiscriminant_frozen_by_horizontality_and_flatness,%
+  atomicRankTwo_residueDiscriminant_constant_over_formal_germ,%
+  atomicRankTwo_modifiedBase_pole_eq_zero,%
+  atomicRankTwo_residueDiscriminant_constant_along_base}%
+Under formal change of even bulk coordinates, the modified connection is
+regular in every base direction and
+\begin{equation}
+ \partial R=[G_\partial,R]
+ \label{eq:atomic-lax}
+\end{equation}
+for a regular matrix \(G_\partial\).  Consequently
+\(\partial(\delta^\sharp)=0\).  Regular connection isomorphisms preserve the
+domain and value of \(\delta^\sharp\).
+\end{proposition}
+
+\begin{proof}
+Write a centered base equation as
+\(\partial y=(z^{-1}C_\partial+C_{\partial,0}+O(z))y\).  The
+\(z^{-2}\) coefficient of flatness gives \([N,C_\partial]=0\), and the trace
+of the \(z^{-1}\) coefficient gives \(\tr C_\partial=0\).  The commutant of a
+nonzero rank-one nilpotent \(2\times2\) matrix is \(\C I\oplus\C N\), so
+\(C_\partial=q_\partial N\).  After modification, the only possible base
+pole is \(z^{-1}kE_{21}\).  If
+\(R=\left(\begin{smallmatrix}a&\nu\\c&d\end{smallmatrix}\right)\), the
+\(z^{-1}\) flatness equation is
+\(kE_{21}+[R,kE_{21}]=0\).  Its diagonal entries are \(\nu k\) and
+\(-\nu k\), so \(k=0\).  Constant flatness is now
+\eqref{eq:atomic-lax}; trace and determinant are constant under infinitesimal
+conjugation.  A regular isomorphism carries \(N\), \(L\), and the modified
+lattice to their counterparts and conjugates the residue.
+\end{proof}
+
+\begin{proposition}[Exponent interpretation]
+\label{prop:residue-discriminant-exponents}
+\coverage{fragment}%
+\lean{residueDiscriminant_eq_squared_eigenvalue_separation}%
+\imports{PutSinger:ch-3}%
+If \(\rho_1,\rho_2\) are the eigenvalues of \(R\), their classes modulo
+\(\Z\) are the formal exponent classes of the original centered block and
+\[
+ \delta^\sharp=(\rho_1-\rho_2)^2.
+\]
+\end{proposition}
+
+\begin{proof}
+The elementary modification uses integral powers of \(z\), hence preserves
+formal exponent classes modulo \(\Z\).  The modified connection is regular
+singular with residue \(R\); the regular-singular classification identifies
+the exponent classes with the residue eigenvalues modulo \(\Z\)
+\cite[Chapter~3]{PutSinger}.  The identity is the discriminant formula.
+\end{proof}
+
+Define the fold on each block by
+\begin{equation}
+ w_{\mathrm{at}}(E)=
+ \begin{cases}
+ 1,&\rk E=2,\ N\ne0,\ N^2=0,\ \delta^\sharp(E)\ne0,\\
+ 0,&\text{otherwise},
+ \end{cases}
+ \label{eq:atomic-fold}
+\end{equation}
+and extend it additively to
+\(w_{\mathrm{at}}:\mathcal L_{\mathcal T}\to\mathbf N\).  Put
+\(I_{\mathrm{at}}(Y)=w_{\mathrm{at}}(\mathcal B_{\mathcal T}(Y))\).
+Proposition~\ref{prop:rank2-rigidity} makes this a lawful marker for
+Proposition~\ref{prop:qdm-operation-ledgers}.
+
+\subsection{The cubic block}
+\label{subsec:shared-cubic-packet}
+
+Let \(X\subset\PP^4\) be a smooth cubic threefold, let \(P=H|_X\), and put
+\(q=Q^\ell\) for the line class and \(r=(3q)^{1/2}\).  Beauville's formulas
+give \cite[main theorem and (2.1)--(2.3)]{Beauville}
+\begin{equation}
+ P\star P=P^2+6q,\qquad
+ P\star P^2=P^3+15qP,\qquad
+ P\star P^3=6qP^2+36q^2.
+ \label{eq:beauville-cubic-products}
+\end{equation}
+Thus, in the basis \((1,P,P^2,P^3)\),
+\begin{equation}
+ K_X=2\begin{pmatrix}
+ 0&6q&0&36q^2\\1&0&15q&0\\0&1&0&6q\\0&0&1&0
+ \end{pmatrix},
+ \qquad G_X=\frac12\diag(3,1,-1,-3),
+ \label{eq:cubic-small-even-connection}
+\end{equation}
+and \(z^2\partial_zS=(K_X+zG_X)S\).  This agrees with
+\cite[Section~3]{Cai}.
+
+\begin{proposition}[Small-even cubic block reduction]
+\label{prop:cubic-block-data}
+\coverage{fragment}%
+\lean{cubicSmallEven_blockReduction,%
+  cubicZeroBlock_modifiedResidue_indicialPolynomial,%
+  cubicSmallEven_normalizedGauge_exists_and_unique,%
+  cubicSmallEven_normalizedGauge_coefficients}%
+\imports{Beauville:quantum-products}%
+The characteristic and minimal polynomials of \(K_X\) are both
+\(T^2(T^2-108q)\).  After adjoining \(r\), its eigenvalues are
+\(6r,-6r,0,0\), and the zero generalized eigenspace is one rank-two Jordan
+block.  A normalized gauge regular in \(z\) gives
+\begin{equation}
+ \begin{aligned}
+ z^2\partial_z\widetilde S_+&=(6r+O(z^2))\widetilde S_+,\\
+ z^2\partial_z\widetilde S_-&=(-6r+O(z^2))\widetilde S_-,\\
+ z^2\partial_z
+ \begin{pmatrix}\widetilde S_3\\\widetilde S_4\end{pmatrix}
+ &=\bigl[J_0+zD_0+z^2E_0+O(z^3)\bigr]
+ \begin{pmatrix}\widetilde S_3\\\widetilde S_4\end{pmatrix},
+ \end{aligned}
+ \label{eq:cubic-integral-block-reduction}
+\end{equation}
+where
+\begin{equation}
+ J_0=\begin{pmatrix}0&2\\0&0\end{pmatrix},\quad
+ D_0=\begin{pmatrix}-19/18&0\\0&19/18\end{pmatrix},\quad
+ E_0=\begin{pmatrix}0&-14/(81r^2)\\-8/81&0\end{pmatrix}.
+ \label{eq:cubic-shared-block-data}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+The matrix
+\[
+ C=\begin{pmatrix}
+ 6r^3&-6r^3&0&-7r^2\\7r^2&7r^2&-2r^2&0\\
+ 3r&-3r&0&1\\1&1&1&0
+ \end{pmatrix},
+ \qquad \det C=-486r^5,
+\]
+puts \(K_X\) into
+\[
+ C^{-1}K_XC=
+ \begin{pmatrix}6r&0&0&0\\0&-6r&0&0\\0&0&0&2\\0&0&0&0\end{pmatrix}.
+\]
+Partition as \(1\mid1\mid2\).  At each positive order in \(z\), the
+off-diagonal gauge coefficient is the unique solution of a Sylvester
+equation between blocks with disjoint scalar spectra.  The gauge and inverse
+are regular in \(z\); explicitly, it has the normalized form
+\begin{equation}
+ A(z)=I+\sum_{n\ge1}A_nz^n,
+ \qquad A_n\text{ block-off-diagonal}.
+ \label{eq:cubic-integral-block-gauge}
+\end{equation}
+Direct multiplication through order \(z^2\) gives
+\eqref{eq:cubic-shared-block-data}; the checked symbolic artifact replays the
+same finite calculation.
+\end{proof}
+
+For the zero block, \(N=J_0=2E_{12}\).  With \(S=\diag(1,z)\),
+\begin{equation}
+ R_X
+ =2E_{12}+D_0-\frac8{81}E_{21}-\diag(0,1)
+ =\begin{pmatrix}-19/18&2\\-8/81&1/18\end{pmatrix}.
+ \label{eq:RX}
+\end{equation}
+Its characteristic polynomial is
+\((T+1/6)(T+5/6)\), so
+\begin{equation}
+ \boxed{\delta^\sharp(X)=\frac49},
+ \qquad I_{\mathrm{at}}(X)=1.
+ \label{eq:cubic-delta}
+\end{equation}
+
+\subsection{Center nullity through dimension two}
+
+\begin{proposition}[Low-dimensional nullity]
+\label{prop:atomic-lowdim}
+\coverage{conditional_deduction}%
+\lean{cubicAtom_not_represented_by_curve,%
+  cubicAtom_not_represented_by_surface}%
+\uses{prop:rank2-rigidity}%
+\imports{BeauvilleSurfaces:minimal-surface-classification}%
+For every smooth projective \(Z\) of dimension at most two and every actual
+QDM comparison occurrence \(\omega\),
+\(I_{\mathrm{at}}(Z;\omega)=0\).
+\end{proposition}
+
+\begin{proof}
+A point has one rank-one block.  For \(\PP^1\), the relation
+\(p\star p=Qe^{t_p}\) gives two rank-one generic blocks.
+
+Let \(C\) have genus \(g\ge1\).  There is no nonconstant genus-zero map to
+\(C\), so its even big quantum product is classical.  With
+\(\int_Cp=1\) and \(a=2-2g\), its centered even connection is
+\[
+ z\partial_zY=
+ \left[z^{-1}aE_{21}+\diag(1/2,-1/2)\right]Y.
+\]
+For \(g=1\), \(N=0\).  For \(g>1\), the modification
+\(S=\diag(z,1)\) gives residue \(aE_{21}-\tfrac12I\), of discriminant zero.
+Thus every curve has zero marker.
+
+Let \(S\) be a surface with \(K_S\) nef.  For a quantum-product term with
+input degree \(b\), non-scalar Euler degree \(a\ge2\), curve class \(d\), and
+nonunit even bulk degrees \(e_\nu\ge2\), the dimension axiom gives output
+degree
+\[
+ a+b-2c_1(S)\cdot d+\sum_\nu(e_\nu-2)\ge b+2.
+\]
+The centered Euler operator strictly raises ordinary degree.  Its only block
+is the whole even cohomology, of rank \(b_0+b_2+b_4\ge3\), so its marker is
+zero.
+
+A minimal surface with non-nef canonical class is \(\PP^2\) or a ruled
+surface \(\PP_C(V)\) \cite[Chapter~VI]{BeauvilleSurfaces}.  The relation
+\(H^{\star3}=Q\) makes \(\PP^2\) generically semisimple.  Formula
+\eqref{eq:marker-pbundle} and the curve case give zero for ruled surfaces.
+Every nonminimal surface is obtained from a minimal one by point blowups;
+Formula~\eqref{eq:marker-blowup} adds only zero point terms.  This proves
+intrinsic nullity.  The faithful character adapter identifies every actual
+center term with a faithful scalar extension of the intrinsic generic block,
+and the marker is unchanged by that extension.
+\end{proof}
+
+\subsection{The projective endpoint and the contradiction}
+
+Formula~\eqref{eq:marker-pbundle} applied to
+\(X\times\PP^1=\PP_X(\OO_X^{\oplus2})\) gives
+\begin{equation}
+ I_{\mathrm{at}}(X\times\PP^1)=2.
+ \label{eq:atomic-product-value}
+\end{equation}
+On the other hand,
+\(QH^\bullet(\PP^4)=\Lambda[H]/(H^5-Q)\).  At \(Q\ne0\), multiplication
+by \(5H\) has five distinct eigenvalues after algebraic closure.  Thus
+\begin{equation}
+ I_{\mathrm{at}}(\PP^4)=0.
+ \label{eq:atomic-projective-value}
+\end{equation}
+
+\begin{proof}[Proof of Theorem~\ref{thm:every-cubic}]
+Proposition~\ref{prop:atomic-lowdim} kills every actual center correction in
+a weak factorization of smooth projective fourfolds.  Hence
+Theorem~\ref{thm:marker-ledger} makes \(I_{\mathrm{at}}\) birationally
+invariant.  If \(X\times\PP^1\) were rational, then
+\[
+ 2=I_{\mathrm{at}}(X\times\PP^1)
+ =I_{\mathrm{at}}(\PP^4)=0,
+\]
+a contradiction.
+\proves{thm:every-cubic}%
+\end{proof}
+
+\begin{remark}[Scope]
+The marker, center theorem, and weak-factorization application above are
+strictly for one stabilization.  No statement concerns a second or an
+arbitrary stabilization.
+\end{remark}

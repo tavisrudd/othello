@@ -13,10 +13,10 @@
         "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicAtom_not_represented_in_dimension_le_two",
         "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicThreefold_oneStep_irrational_of_atom_inputs"
       ],
-      "objects": "An abstract ordinary Hodge-atom ledger: a type of varieties with a dimension, a rationality predicate, the product with a projective line, and the multiplicity with which an atom occurs in the atomic composition of a variety; together with the residue discriminant and the parity ranks of an atom, and the explicit rational residue matrices of the cubic zero packet and of a curve of genus at least two.",
-      "hypotheses": "The projective-bundle formula doubles every atomic multiplicity on the product with a projective line; the ordinary non-rationality criterion excludes rationality of a variety carrying an atom that occurs on no variety of dimension at most two below it; on a variety of dimension at most two every occurring atom either already occurs in dimension at most one or has even rank at least three; an atom of even rank two and odd rank at least four occurring in dimension at most one has vanishing residue discriminant; and the cubic carrier has dimension three and carries an atom of even rank two, odd rank ten, and residue discriminant equal to that of the displayed cubic residue matrix.",
-      "conclusion": "Lean evaluates the residue discriminant of the cubic zero-packet residue as four ninths and of every curve residue as zero, derives from that separation and the parity ranks that the cubic atom occurs on no variety of dimension at most two, and concludes that the product of the cubic threefold with a projective line is not rational.",
-      "cautions": "The geometric signature and every ordinary Hodge-atom input remain typed premises rather than foundational constructions: Lean does not construct varieties, the A-model F-bundle, the spectral cover, atoms or atomic compositions, the elementary modification, or the residue of a geometric connection, and does not prove that either displayed matrix is that residue. The surface and curve analysis of the manuscript, which uses the point-blowup and projective-bundle formulas, the nef-canonical lemma, and the classification of minimal smooth projective surfaces, enters as the two exclusion premises.",
+      "objects": "An abstract effective additive marker ledger (retaining the historical Lean type name OrdinaryAtomLedger), a dimension and rationality predicate, projective-line stabilization, low-dimensional marker exclusion, and the explicit cubic and curve residue matrices.",
+      "hypotheses": "The marker doubles under product with a projective line, vanishes on every center of dimension at most two, is birationally invariant by the supplied ledger criterion, and the cubic rank-two block has nonzero residue discriminant while the projective endpoint has zero marker.",
+      "conclusion": "Lean checks the cubic residue value 4/9, the curve value zero, the abstract low-dimensional exclusion, and the final contradiction proving that the cubic threefold times a projective line is not rational.",
+      "cautions": "Conditional deduction at the formal boundary. Lean does not construct the categorical QDM groupoid, Iritani comparison maps, marker fold, actual center occurrences, weak factorization, or cubic quantum connection. Those are proved or imported in the manuscript; the formal terminal checks their final typed composition. The word Atom in legacy terminal names denotes the abstract marked block and is not an imported Hodge-atom theorem.",
       "statement_digest": "90fbb0916c1f7b4e7b7e57bb8ea581e3d45f3914e6a6f66d4aba23e241428af4",
       "terminal_digest": "edf2c1b78e663380e1dbea55deb2ce075e1d7edfc66b778c3a24410344af42d4"
     },
@@ -31,7 +31,7 @@
       "objects": "An abstract geometric signature naming smooth complex cubic threefolds, product with projective one-space, projective four-space, and rationality, together with a natural-valued framed primitive-sixth multiplicity; and, for the third terminal, the product-formula signature carrying a distinguished point, the projective spaces, and the product of a variety with a projective space.",
       "hypotheses": "For the first two terminals: the carrier satisfies the smooth-cubic predicate, its framed multiplicity equals two, the named product obeys the rank-two formula and dimension bound, projective four-space has zero multiplicity, and rationality supplies the required birational relation. The third terminal assumes instead the product formula for a product with a projective space, involutivity of the framed monodromy of a point, and the passage from the exponents of the reduced rank-two block to framed formal monodromy, and derives from them the multiplicity two of the cubic, its doubling under multiplication by a projective line, and the vanishing on projective four-space. Birational invariance of the multiplicity through dimension four, which the manuscript proves under its two residual hypotheses, is part of the supplied birational input in every case.",
       "conclusion": "The named product of the specified cubic carrier with projective one-space is not rational.",
-      "cautions": "This is the framed-monodromy route, conditional in the manuscript on the reconstruction-tail hypothesis and on the divisor-tagging hypothesis only for surface centers that are neither minimal nor geometrically ruled and, in Lean, on every quantum, weak-factorization, and rational-comparison fact as a typed premise. It is independent of the unconditional atomic route recorded under thm:every-cubic and is not a formalization of that route. The third terminal removes three numerical assumptions in favour of the product formula and the exponent-to-monodromy passage; neither of those is formalized.",
+      "cautions": "This is the finer framed specialization of the same categorical marker ledger. It is conditional in the manuscript on 5.7R and on 5.7T only for surface centers neither minimal nor geometrically ruled. Lean treats the QDM comparisons, actual occurrence nullity, and birational comparison as typed premises and checks the numerical endpoint contradiction.",
       "statement_digest": "a7216fd631de449d08be8f4158a70ab0c1760a55acabe8c2126c431d4a38b633",
       "terminal_digest": "79aca35ea9e3f1b088f7defd419f2755cffef8a3e580c75c5485152849583eb0"
     },
@@ -398,40 +398,6 @@
       "terminal_digest": "d3b1c82ebf8bea80563a2ea5074eb98168c9e8ea97e17c75c7fb1ca725f47401"
     },
     {
-      "manuscript_label": "lem:euler-sign",
-      "coverage": "fragment",
-      "declarations": [
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.eulerOperator_generalizedEigenspaces_under_sign_reversal",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.eulerOperator_eigenvalue_count_under_sign_reversal",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.eulerOperator_cyclic_span_under_sign_reversal",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.characteristicDiscriminant_under_root_sign_reversal",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.residueDiscriminant_under_sign_reversal",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.characteristicDiscriminant_under_odd_coefficient_sign_reversal"
-      ],
-      "objects": "An endomorphism of a module over a commutative ring and its negative; the kernels of the powers of the endomorphism shifted by a scalar, which are its generalized eigenspaces; the set of its eigenvalues; the submodule generated by the orbit of a vector, whose equality with the whole module is regularity; and the universal discriminant of a monic quartic in its characteristic coefficients.",
-      "hypotheses": "Only the ring and module structure, and for the discriminant statement that the quartic splits with the four displayed roots.",
-      "conclusion": "The generalized eigenspace of the negated endomorphism at the negated scalar is the generalized eigenspace of the original one, for every exponent; the eigenvalue set of the negated endomorphism is the image of the original eigenvalue set under negation and has the same cardinality; the submodule generated by the orbit of a vector is the same for both, so the two endomorphisms are regular together; and negating the four roots of a split monic quartic leaves its discriminant unchanged.  The residue discriminant of a two-by-two residue is likewise unchanged by sign reversal, and the universal quartic discriminant is unchanged when the coefficients of the linear and cubic terms are negated, without assuming the quartic splits.",
-      "cautions": "Fragment. The companion contains no F-bundle, F-manifold, or spectral cover, and does not prove that the residual endomorphism of the A-model connection in the loop coordinate is the negative of Euler multiplication; that reading of the connection is the content of the manuscript's lemma and is assumed. What is proved is the linear algebra and the coefficient identity that the reading is then used for.",
-      "statement_digest": "2d71e914f54c88630c47e8b809143d5553c65ec2082fcd9e0547c731b44f62ad",
-      "terminal_digest": "1722a350c2e22e5545c5d91890701afb664080b05945ba8c6672b29f0e095541"
-    },
-    {
-      "manuscript_label": "lem:hodge-base",
-      "coverage": "fragment",
-      "declarations": [
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.hodgeFixedSubalgebra_closed_under_eulerMultiplication",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.hodgeFixedSubalgebra_eigenvector_transfers",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.hodgeFixedTangentSpace_span_and_finrank",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.truncatedHyperplaneAlgebra_model"
-      ],
-      "objects": "A commutative algebra over a commutative ring with a family of algebra automorphisms, the subalgebra of its simultaneous fixed points, multiplication by a fixed element and its restriction to that subalgebra, the span of the first four powers of a fixed element, and the truncated polynomial algebra of exponent four over a field.",
-      "hypotheses": "That the family acts by algebra automorphisms, that the distinguished element is fixed, and, for the dimension count, that its first four powers are linearly independent.",
-      "conclusion": "The fixed points form a subalgebra; multiplication by a fixed element preserves it and the restricted product is the product of the subalgebra, so an eigenvector of the restriction is an eigenvector of the ambient multiplication with the same eigenvalue; the powers of a fixed element lie in the fixed subalgebra and four independent powers span a four-dimensional subspace; and the truncated polynomial algebra of exponent four realizes that configuration, with vanishing fourth power and dimension four.",
-      "cautions": "Fragment. Lean constructs no cohomology, no quantum product, and no F-bundle, and does not prove that the Hodge-fixed locus of the maximal A-model F-bundle is smooth, that its tangent space is the Novikov extension of the rational classes of Hodge type (i, i), or that the Lefschetz theorem identifies that space with the even cohomology of a cubic threefold. Equivariance of the multiplication appears as the hypothesis of an action by algebra automorphisms, and the identification of the resulting algebra with the truncated polynomial algebra is not proved.",
-      "statement_digest": "3c2e898adae5dc79b6c29bd5fe38312479ac4295adef9264afd47eff75522827",
-      "terminal_digest": "8d5640a0d0bf89189bb870da4e705c02f260a3a3267fbb47ffd8c3489a74508d"
-    },
-    {
       "manuscript_label": "prop:cubic-block-data",
       "coverage": "fragment",
       "declarations": [
@@ -440,90 +406,12 @@
         "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicSmallEven_normalizedGauge_exists_and_unique",
         "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicSmallEven_normalizedGauge_coefficients"
       ],
-      "objects": "The doubled Euler multiplication matrix and the grading matrix of the small even quantum connection of a smooth cubic threefold in the ordered classical basis, written over a characteristic-zero field in a nonzero square root r of three times the line-class Novikov variable; the constant separating change of basis; two explicit block-off-diagonal gauge coefficients; the rank-two zero block with its canonical elementary modification; and, for the gauge statements, the partition of the four coordinates into the two simple Euler eigenvalues and the rank-two zero block, the separated system whose coefficients are the separated Euler matrix and the separated grading matrix, and the notion of a normalized gauge: one starting at the identity whose positive coefficients are block off-diagonal, carrying the system to one whose every coefficient is block diagonal, through the inverse-free coefficientwise identity relating the two systems.",
-      "hypotheses": "The field has characteristic zero and r is nonzero. No property of the two displayed connection matrices is assumed; they are the matrices exhibited in the source.",
-      "conclusion": "Lean proves that the separating change of basis has determinant -486 r^5, conjugates the Euler matrix to the diagonal pair 6r, -6r together with a single rank-two Jordan block at zero, and conjugates the grading matrix to the displayed separated form; that the two supplied gauge coefficients make the first and second coefficients of the transformed system block diagonal, with rank-two blocks diag(-19/18, 19/18) and the displayed second block; and that the residue of the canonical elementary modification is the displayed matrix, of trace -1 and determinant 5/36, whose characteristic polynomial is the rank-two indicial polynomial. Lean also proves that the separated system has a normalized gauge and that any two normalized gauges of it agree at every order, the separated Euler matrix being block diagonal for the partition with unit differences of its three eigenvalues and a square-zero difference from their diagonal matrix; and that for every normalized gauge the first two gauge coefficients are the two exhibited matrices and the first two coefficients of the reduced system are the exhibited block-diagonal ones.",
-      "cautions": "This is a strictly weaker fragment of the manuscript statement. The normalized gauge is now proved to exist and to be unique, and the exhibited coefficients are identified as its first two, but the reduction is carried out only to the second order, which is the order the residue needs; no third or higher coefficient is computed. Lean does not construct the quantum connection and does not prove that the displayed matrices are the small even connection of a cubic threefold; that identification is the imported datum.",
-      "statement_digest": "c8635322df91f89651a62ccb7133d84148bc7bf563a031432d8dd2036751ee50",
+      "objects": "The Euler and grading matrices derived in the manuscript from Beauville’s small quantum products for a cubic threefold, the constant separating basis, the normalized regular block gauge, and the rank-two zero block with its canonical elementary modification.",
+      "hypotheses": "A characteristic-zero field and a nonzero square root r of three times the line-class Novikov variable. Lean takes the two displayed matrices as data and checks the finite matrix and normalized-gauge calculations.",
+      "conclusion": "The Euler matrix has eigenvalues 6r, -6r, 0, 0 with one rank-two Jordan block at zero; the first two reduced coefficients and the modified residue have the displayed values and indicial polynomial; the normalized block gauge exists and is unique coefficientwise.",
+      "cautions": "Fragment. Lean checks the algebraic reduction but does not derive the quantum products or identify the input matrices with the cubic QDM. That identification is now derived in the manuscript from Beauville’s published formulas. Higher gauge coefficients are established recursively rather than explicitly computed.",
+      "statement_digest": "1fe93b862ceb29729b7554896e246b5650c24941cb3d3de726efe107141f6bc4",
       "terminal_digest": "cab42cab0b334ab7d8a1b957224eec5147c916d8377df49cd3db37bcde6c5993"
-    },
-    {
-      "manuscript_label": "lem:disc",
-      "coverage": "conditional_deduction",
-      "declarations": [
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.quarticDiscriminant_eq_squared_root_differences",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.eulerFrame_discriminant_logarithmicDerivatives",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.eulerFrame_discriminant_differential",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.eulerFrame_discriminant_eq_zero_of_vanishing_at_base_point",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.eulerFrame_data_nonempty"
-      ],
-      "objects": "The discriminant of the characteristic polynomial of Euler multiplication on a four-dimensional F-manifold, presented as the universal discriminant polynomial in four ring elements playing the role of the characteristic coefficients, four derivations of that ring playing the role of the canonical frame of powers of the Euler field, and, for the vanishing statement, the ring of formal power series over a commutative domain of characteristic zero as a model of the germ at the base point.",
-      "hypotheses": "The sixteen coefficient identities by which the canonical frame acts on the characteristic coefficients, in the conventions that the leading coefficient is one and coefficients of negative index vanish; for the differential statement, an expression of the operator as a ring-coefficient combination of the frame; for the vanishing statement, such an expression of every formal partial derivative, which is regularity of Euler multiplication at the base point, together with vanishing of the constant coefficient of the discriminant.",
-      "conclusion": "The unit field annihilates the discriminant, the Euler field multiplies it by twelve, and the second and third powers of the Euler field multiply it by minus six times the cubic coefficient and by six times the square of the cubic coefficient minus ten times the quadratic coefficient; every frame combination therefore multiplies the discriminant by a ring element, which is the statement that the differential of the discriminant is the discriminant times a regular one-form; and a discriminant vanishing at the base point is the zero power series. The universal discriminant polynomial is also identified with the squared product of the pairwise root differences of a split quartic. The frame data is also exhibited in the universal root model, the polynomial ring in four root variables with the s-th frame field acting by the derivation given by the sum of the s-th powers of the variables against the corresponding partial derivatives, so the sixteen coefficient identities are consistent.",
-      "cautions": "Lean constructs no F-manifold, tangent sheaf, Euler field, or spectral cover, and derives the sixteen coefficient identities from neither Cayley-Hamilton nor the Witt relations of a regular F-manifold: they are hypotheses of the frame data. The germ is modelled by a formal power-series ring; the completion of the local ring of a rigid-analytic germ, its isomorphism with that ring, and the injectivity supplied by Krull's intersection theorem are not formalized.",
-      "statement_digest": "5f75107c15ebf369073ccc6f32816ecaa1d704ad10851536b62560f506b8d6bb",
-      "terminal_digest": "5f112f210d936776af9b0c27b08b409aebebfda9f24006a23ce02a7b79eb659f"
-    },
-    {
-      "manuscript_label": "lem:spectrum-transfer",
-      "coverage": "conditional_deduction",
-      "declarations": [
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.eulerMultiplication_eigenvalues_module_eq_algebra"
-      ],
-      "objects": "A finite-dimensional commutative algebra over a field, an element of that algebra, a module over it carrying a compatible base-field structure, and a module vector along which the algebra acts injectively.",
-      "hypotheses": "The algebra is finite dimensional over the base field, and the map sending an algebra element to its action on the chosen vector is injective.",
-      "conclusion": "The set of base-field eigenvalues of the element acting on the module equals its set of eigenvalues acting on the algebra.",
-      "cautions": "Lean constructs no quantum cohomology, F-bundle, Hodge base, or Euler field, and proves neither that even quantum cohomology is finite dimensional over its coefficient field nor that the unit of the cohomology ring generates an injective copy of the even part. The formal proof replaces the manuscript's decomposition into generalized eigenspaces by the fact that a non-unit of a finite-dimensional commutative algebra is a zero divisor, so the idempotent decomposition is neither formalized nor needed.",
-      "statement_digest": "c8cfab43bffeeab5c2a86d379ffa7b3aa342e992b48d7383b56e5839082bbbe5",
-      "terminal_digest": "bf9099529354f39f215e0466209151cdd18b044861be44e5bde6af6497508ffc"
-    },
-    {
-      "manuscript_label": "prop:cubic-atom",
-      "coverage": "fragment",
-      "declarations": [
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicThreefold_totalChernClass_identity",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicThreefold_bettiThree_eq_ten",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicThreefold_eulerMultiplication_annihilates_degreeThree",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicZeroPacket_component_excludes_rankOne_branches",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicZeroPacket_parityRanks_eq_two_and_ten",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicThreefold_totalChernClass_uniqueness"
-      ],
-      "objects": "The truncated Chern class arithmetic of a cubic hypersurface in projective four-space in a commutative ring where the fourth power of the hyperplane class vanishes; the Betti numbers of the threefold as an integer-valued function of the degree; the cohomological degree reached by Euler multiplication from degree three in a given Novikov degree; and a locally constant rank function on a topological space modelling the generalized eigenbundle rank on the spectral cover.",
-      "hypotheses": "Vanishing of the fourth power of the hyperplane class; the Lefschetz Betti numbers in the even degrees and in degrees one and five; the equality of the alternating sum of the Betti numbers with the top Chern number, whose value comes from the Chern class identity and the degree three of the hyperplane class cubed; even rank two from the block reduction of the small even connection; local constancy of the rank on the cover; and the three fibre ranks twelve, one, and one.",
-      "conclusion": "The adjunction quotient of the fifth power of one plus the hyperplane class by one plus three times it is one plus two times it plus four times its square minus twice its cube, so the third Chern class is minus twice the cube; the third Betti number is ten; the cohomology vanishes in every degree Euler multiplication reaches from degree three, so the whole degree-three cohomology lies in the zero packet; the branch of rank twelve lies in a connected component containing neither rank-one branch; and the parity ranks of the zero packet are two and ten, of total rank twelve.  The adjunction factor is a unit in the truncated ring, so that Chern class is the unique solution of the adjunction equation rather than one consistent value.",
-      "cautions": "Fragment. Lean constructs no variety, cohomology, Chern class, quantum product, spectral cover, or Hodge atom. That the small hyperplane point lies in the maximal-eigenvalue locus, that the reduced spectral cover is finite etale there, that the generalized eigenbundles are locally free with locally constant rank, and that a connected component of the cover defines a Hodge atom are geometric inputs and appear only as the hypotheses displayed above.",
-      "statement_digest": "091c04ed1b66d0820b6e76534b7b68dfb32aa4ee1b6fc4d076d6275d2e4a1240",
-      "terminal_digest": "f99434695e16638a888dee3310083eb811b1eafd44f9b4efe75193496ac73527"
-    },
-    {
-      "manuscript_label": "lem:horiz",
-      "coverage": "fragment",
-      "declarations": [
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.quantumPairing_horizontality_of_selfAdjoint_multiplication"
-      ],
-      "objects": "Square matrices over a commutative ring: a connection matrix with a simple pole in the loop coordinate, presented by its residue and the coefficient family of its regular part; the coefficient family of a sesquilinear pairing whose right argument is evaluated at the negated loop coordinate; and the coefficientwise image of the pairing under the derivation of the chosen direction.",
-      "hypotheses": "The pairing is constant in the chosen frame: its leading coefficient is a supplied matrix and every higher coefficient vanishes. The residue of the connection is self-adjoint for that matrix, and the regular part is a supplied anti-self-adjoint matrix in degree zero and vanishes in every higher degree. For a base direction, the derivation is assumed to annihilate every pairing coefficient.",
-      "conclusion": "Every coefficient of the sesquilinear horizontality identity vanishes, both in the loop direction, whose derivation multiplies the coefficient of the loop coordinate to the power of an order by that order, and in every direction whose derivation annihilates the pairing.",
-      "cautions": "Lean constructs no F-bundle, quantum product, Poincare pairing, or grading operator, and proves neither the Frobenius property of quantum multiplication nor anti-self-adjointness of the grading operator; both enter as hypotheses about matrices. The terminal proves the substitution step of the manuscript proof: granted self-adjointness of the residue and anti-self-adjointness of the regular part in degree zero, the coefficients of the horizontality identity cancel term by term. Both adjointness statements are hypotheses here, and what they stand for is where the mathematical content of the manuscript lemma lies: the Frobenius property of the non-archimedean quantum product together with constancy of the inverse Gram matrix in the standard cohomology frame, neither of which is formalized. No convergence, analytic structure, or cohomological grading is represented.",
-      "statement_digest": "7c30bfb9c53f3d37b4eb142506bb7bacbf3facf6a96666ba7b687d7891522fa8",
-      "terminal_digest": "67d5325f5dc85d59bd98ee8cc56800bd2ae2a6340d21574481d3e220829164f0"
-    },
-    {
-      "manuscript_label": "lem:orthogonal",
-      "coverage": "conditional_deduction",
-      "declarations": [
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.separatedSpectralFactors_pairing_blockDiagonal",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.separatedSpectralFactors_pairing_eq_zero_of_horizontality",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.separatedSpectralFactors_labelledPairing_blockDiagonal_of_horizontality",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.separatedSpectralFactors_evenPart_pairing_nondegenerate",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.separatedSpectralFactors_equalEigenvalues_admit_nonzero_horizontalPairing"
-      ],
-      "objects": "The leading operators of two local spectral factors, each a scalar plus a nilpotent matrix over a field, the coefficient families of the connections on the two factors and of the pairing between them, the coefficientwise image of that pairing under the derivation of the chosen direction, and block matrices assembled from two diagonal blocks and vanishing off-diagonal blocks; and, for an arbitrary splitting, a finite type of coordinates carrying a factor label and a parity in the integers modulo two, a connection whose residue and regular coefficients vanish on entries with differently labelled row and column, an injective family of leading eigenvalues, and the restriction of a matrix to the coordinates satisfying a predicate.",
-      "hypotheses": "The two leading eigenvalues are distinct and the remaining parts of both leading operators are nilpotent. For the derived form, every coefficient of the sesquilinear horizontality identity between the two factors vanishes, and the direction's derivation annihilates a vanishing pairing coefficient; for the abstract form, the leading order of horizontality is supplied as a Sylvester equation and each later order as the same equation with a right-hand side that vanishes once all strictly earlier off-diagonal coefficients vanish. For an arbitrary labelled splitting: the leading eigenvalues are pairwise distinct, the residue restricted to the coordinates of one label is that eigenvalue plus a nilpotent matrix, the residue and every regular coefficient are block diagonal for the label, every coefficient of the horizontality identity vanishes, and the derivation annihilates an entry at which the pairing vanishes. For the nondegeneracy statements: the pairing vanishes on entries whose row and column carry different labels and on entries whose row and column carry different parities, and its determinant is nonzero.",
-      "conclusion": "The Sylvester equation has only the zero solution; horizontality is order by order that equation for one pairing coefficient with a remainder built from strictly earlier coefficients, so every coefficient of the pairing between the two factors vanishes by induction on the order; and a pairing with vanishing off-diagonal blocks is invertible exactly when both diagonal restrictions are. For an arbitrary labelled splitting, the block of the horizontality identity between two labels is the two-factor identity of the corresponding blocks, so every coefficient of the pairing vanishes on every entry whose row and column carry different labels. A nondegenerate pairing that is block diagonal for the labels and pairs only coordinates of equal parity restricts to a nondegenerate pairing on the coordinates of one label, and on the coordinates of one label and even parity; reindexing the latter along any bijection with a finite ordinal preserves nonvanishing of the determinant, which is the invertibility hypothesis of the rank-two residue rigidity argument. Distinctness of the leading eigenvalues cannot be dropped: for any scalar, two one-dimensional factors with that same scalar residue, vanishing regular part, and a constant pairing with invertible leading coefficient satisfy every coefficient of the horizontality identity while the pairing between them is nonzero.",
-      "cautions": "Lean does not construct the F-bundle, the spectral splitting, the connection, the cohomological grading, or the Poincare pairing; the connection is represented by a residue and a regular coefficient family, the pairing by a coefficient family of matrices, the splitting by a label on a finite type of coordinates, and the parity by an arbitrary function to the integers modulo two with zero naming the even coordinates. Block diagonality of the connection in the chosen frame, and the vanishing of the pairing between coordinates of different parity, are hypotheses rather than consequences of a geometric construction; nondegeneracy is nonvanishing of a determinant rather than a property transported from a geometric pairing.",
-      "statement_digest": "a4d60fa3a82b75a7b96f662f8117261382f9faf5274c10364c67e3067867045e",
-      "terminal_digest": "87e40b3d7b345f6b6a4771a11129ef306f671d4e0aa157683ced7fc9215c6967"
     },
     {
       "manuscript_label": "lem:A0preserve",
@@ -536,7 +424,7 @@
       "hypotheses": "The leading operator part squares to zero and is nonzero, and the leading pairing coefficient is invertible. Horizontality enters either as the two displayed matrix equations -- self-adjointness of the leading operator part for the leading pairing coefficient, and the constant coefficient relating the regular coefficient, the two leading pairing coefficients, and the leading operator part -- or, in the derived form, as vanishing of the coefficients of the loop-direction horizontality identity at the order of the inverse loop coordinate and at the constant order.",
       "conclusion": "The coefficient of the inverse loop coordinate is exactly self-adjointness of the leading operator part, and the constant coefficient is exactly the four-term relation; from those, the regular coefficient carries the nilpotent line into itself, in the equivalent matrix form that the leading operator part, the regular coefficient, and the leading operator part again have vanishing product, together with its vector form: every vector in the image of the leading operator part is carried into its kernel.",
       "cautions": "Lean does not construct the A-model F-bundle, the spectral cover, the atomic factor, or the Poincare pairing, and does not prove nondegeneracy of the pairing on a separated spectral factor; those supply the hypotheses. Horizontality of the pairing is represented as vanishing of the coefficients of a formal identity between matrix coefficient families, not as a property of a geometric connection. The line is presented as the image of the leading operator part rather than as a subobject of a geometric bundle.",
-      "statement_digest": "93725fd3e51cfbd4f644a782e3cd60e1ae22e0972125366b3bd12e55f6267afb",
+      "statement_digest": "e0b964ff21fb10b4b4c5ece1f223092664a8078a7d0aa9ef1349b9190012daa8",
       "terminal_digest": "636d008ee5d71fced91f521728e2e23e434c1674ea3623786e7a45c7ad228c82"
     },
     {
@@ -554,7 +442,7 @@
       "hypotheses": "The frame is adapted: the leading coefficient of the loop direction is the square-zero matrix whose only nonzero entry is an invertible upper-right entry, the unit coming from the leading Euler operator. Two is invertible in the coefficient ring, which over the germ ring is automatic. The pairing is horizontal for the loop direction and its leading coefficient has invertible determinant, which is nondegeneracy in the form the germ ring supports; and the pair of connection matrices is flat, in every coordinate direction for the germ statement. The two final terminals instead assume the coefficient equations directly: for the first, that the upper-right entry of the residue is invertible and that the order minus-one coefficient of flatness in the modified lattice vanishes; for the second, that the entrywise derivation carries the residue to its commutator with a supplied regular matrix.",
       "conclusion": "Flatness forces the leading coefficient of the modified base direction to vanish, so the modified connection is regular in that direction; the next order of flatness is then the Lax equation, with the regular coefficient of the modified base direction itself as the conjugating matrix rather than a supplied one; consequently every derivation of the coefficient ring annihilates the residue discriminant, and over the germ that discriminant equals the constant series with its own constant coefficient, so it does not vary over the germ. Horizontality of the pairing, not an assumption on the connection, supplies the property of the regular coefficient that the modification needs. The two final terminals record the same vanishing of the residual pole and the same annihilation of the discriminant from the supplied coefficient equations alone.",
       "cautions": "The geometry is not constructed and remains the input, exposed as typed premises: that an atomic factor of the A-model F-bundle supplies a connection of this shape in an adapted frame, that the Poincare pairing of that factor is the horizontal pairing of the connection, and that the formal power-series model computes the germ of the spectral component. Lean builds no F-bundle, spectral cover, connected component of one, or geometric lattice, and the centering of the scalar irregular part is part of the presentation rather than a formalized step. Constancy is proved over the formal germ, not analytic local constancy on a rigid chart.",
-      "statement_digest": "a497c71ff6e340ebb2ee55c2c57967bd4c4e68497bb2155464ce16758772ce27",
+      "statement_digest": "a9e102c963f5aedef2c9fb90f0eb1b5fa447b70a6914aa8cb3996af8c59522d9",
       "terminal_digest": "b00cc1f9bab60ae27069c500c8fbeab2130c6537b9b1a87fc3b13f22fe1a1259"
     },
     {
@@ -567,77 +455,8 @@
       "hypotheses": "The trace of the residue is the sum of the two supplied elements and its determinant is their product, which is what splitting the characteristic polynomial supplies.",
       "conclusion": "The residue discriminant is the squared separation of the two eigenvalues, and it is unchanged by adding a scalar multiple of the identity to the residue, so it is insensitive to a scalar normalization.",
       "cautions": "Only the second assertion of the proposition is formalized. The identification of the eigenvalue classes modulo the integers with the formal exponent classes of the centered rank-two module rests on the formal classification of regular-singular differential modules, which Lean does not construct, and the meromorphic gauge implementing the modification is not represented.",
-      "statement_digest": "f715bc7e2f72b069bcd7074161baa23f0d97ced1d2a2cf24f2ab9271a22d5b0d",
+      "statement_digest": "d93548b632b19351b2f21a2821dc0aeb276829755522f70f659fab2bc1924ae2",
       "terminal_digest": "ff3a9d84c57fb1dd354aa9d771aed0a61293478dfa67507c982d9bfdf2d90470"
-    },
-    {
-      "manuscript_label": "lem:factor-glue",
-      "coverage": "fragment",
-      "declarations": [
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.atomicFactor_residueDiscriminant_invariant_under_blockDiagonal_frame_change",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.sylvesterEquation_unique_solution_of_separated_spectra",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.blockSylvesterEquation_unique_blockOffDiagonal_solution",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.exists_normalizedBlockGauge_of_separated_blocks",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.normalizedBlockGauge_unique_of_separated_blocks"
-      ],
-      "objects": "Square matrices over a field on a finite type of coordinates carrying a factor label, a pair of mutually inverse matrices that are block diagonal for that label, the block of a matrix on the coordinates of one label, and a frame presenting an even rank-two factor as a two-by-two matrix; and, for the normalization statements, matrices over a commutative ring split into blocks by a labelling of the coordinates, the Sylvester operator of two leading operators, a system with a second-order pole given by the family of its coefficients, and a gauge acting on it through the inverse-free coefficientwise identity, normalized by starting at the identity with block off-diagonal positive coefficients.",
-      "hypotheses": "The two matrices of the change of frame are mutually inverse, and both vanish on entries whose row and column carry different labels. For the Sylvester statement, each of the two leading operators is a scalar multiple of the identity plus a nilpotent matrix and the two scalars differ by a unit; for the block and gauge statements, the leading operator is block diagonal, the scalars attached to distinct labels differ by units, and the operator differs from the diagonal matrix of those scalars by a nilpotent matrix.",
-      "conclusion": "The block of a conjugated matrix on one factor is the conjugate of that factor's block by the corresponding diagonal blocks, which are themselves mutually inverse; consequently the residue discriminant of an even rank-two factor, read through any frame, is unchanged by the change of frame. Separately, the Sylvester equation of two operators with separated spectra has exactly one solution for every right-hand side; every block off-diagonal matrix is the commutator of the leading operator with exactly one block off-diagonal matrix; and a system whose leading coefficient is block diagonal with separated blocks admits a normalized gauge reducing it to block-diagonal form, unique in the sense that two normalized gauges agree at every order and so do the two reduced systems.",
-      "cautions": "Lean constructs no F-bundle, spectral cover, connected component of one, or local factor, and proves no gluing: the transition data enter as a supplied block-diagonal pair of mutually inverse matrices, and the invariance conclusion is that of one conjugation-invariant expression rather than the existence of a glued factor or the meromorphy of an expression formed from it. The normalization statements are the algebra of the manuscript's uniqueness argument, at the level of formal coefficient families: no connection, analytic gauge, or local analytic splitting is constructed, the existence of the analytic splittings being the imported datum, and nothing is proved about convergence or about the overlaps on which the imported splittings are compared.",
-      "statement_digest": "576cdf3883cc85a5dbe5d37f54664e4fe6cd109d5ba2b092b810df2c0859af8a",
-      "terminal_digest": "479b164bd6526ceaff087b4cc14b278ad6a5705541dc96a060f90229dd17894a"
-    },
-    {
-      "manuscript_label": "lem:crossing",
-      "coverage": "fragment",
-      "declarations": [
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.atomicResidueDiscriminant_constant_on_formal_germ"
-      ],
-      "objects": "A two-by-two matrix over a ring of multivariate formal power series over a characteristic-zero domain, modelling the residue over a formal germ of the base; a family of matrices over the same ring, one for each variable, modelling the regular matrices of the modified flatness equation; and the coefficientwise formal partial derivatives of that ring, whose additivity and Leibniz rule are proved.",
-      "hypotheses": "Each formal partial derivative of the residue is its commutator with the regular matrix of that variable, which is what modified flatness asserts in each base direction.",
-      "conclusion": "Every formal partial derivative of the residue discriminant vanishes, and a series all of whose formal partial derivatives vanish has no coefficient outside the constant term, so the residue discriminant is the constant series with its own constant coefficient: it does not vary over the germ.",
-      "cautions": "The germ is modelled by a formal power-series ring. Lean constructs no analytic or rigid-analytic germ, no spectral cover and no connected component of one, and proves neither the meromorphic extension across the locus where the leading operator degenerates, nor normality, connectedness, or irreducibility of that component, nor the identification of the formal model with a geometric germ. Constancy on a formal germ is therefore weaker than constancy on the manuscript's connected component.",
-      "statement_digest": "f5c959ceb91eb2e76d278e5859a48aa936fabf13b9b60e91c853d0d427a70da6",
-      "terminal_digest": "65ec570a2aa9b7c7a6c1da1abac03b8854fa6902c5ac7ec386ced6e425b80f15"
-    },
-    {
-      "manuscript_label": "prop:atom-invariant",
-      "coverage": "fragment",
-      "declarations": [
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.atomicResidueDiscriminant_invariant_under_frame_change"
-      ],
-      "objects": "Two-by-two residue matrices over a commutative ring, a pair of mutually inverse matrices acting by conjugation, and the addition of a scalar multiple of the identity.",
-      "hypotheses": "The two conjugating matrices are mutually inverse.",
-      "conclusion": "The residue discriminant is unchanged by conjugation, because conjugation preserves the trace and the determinant, and is unchanged by conjugation followed by adding any scalar multiple of the identity.",
-      "cautions": "This is the first half of the manuscript proof, the invariance under an isomorphism of atomic F-bundles, reduced to its matrix algebra. Lean constructs no ordinary Hodge atom, atomic F-bundle, isomorphism of such, or elementary modification, and does not prove that an isomorphism acts on the residue by conjugation and trace recentering, that the even rank and the generic nonvanishing of the leading operator are preserved, or that the image of the leading operator is carried to the corresponding line. The second half, independence of the base point within a connected component of the spectral cover, is the separate crossing row, and the gluing of local factors over that component is a further separate row with no formal counterpart.",
-      "statement_digest": "193cd7919aaa7b1f1a927dba9723be242585297c0925e9878751862c615749e9",
-      "terminal_digest": "76485992b885237b206670214c62cb9ea4fe2968be6580b70ac7769972b03638"
-    },
-    {
-      "manuscript_label": "prop:no-curve",
-      "coverage": "conditional_deduction",
-      "declarations": [
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicAtom_not_represented_by_curve"
-      ],
-      "objects": "An ordinary Hodge-atom ledger with a dimension and an atomic multiplicity, the parity ranks and residue discriminant of an atom, the genus of a curve, and the explicit rational residue matrix of the cubic zero packet.",
-      "hypotheses": "The atom has even rank two, odd rank ten, and the residue discriminant of the displayed cubic residue matrix. On a variety of dimension at most one, every occurring atom is supplied to be either of even rank one, the point case, or of parity ranks two and twice the genus with vanishing residue discriminant, the nef-canonical curve case.",
-      "conclusion": "A variety of dimension at most one carrying the atom would have genus five, and no variety of dimension at most one carries it at all, because the residue discriminant of the cubic atom evaluates to four ninths while a curve atom has vanishing residue discriminant.",
-      "cautions": "Lean constructs no variety, atom, or atomic composition and proves none of the imported formulas: the projective-bundle formula for a projective line, the point calculation, the nef-canonical lemma, the classical cup product on a curve of positive genus, and the residue computation of the modified lattice all enter through the supplied dichotomy. The genus clause is vacuous once the exclusion is proved; it records the manuscript's intermediate step.",
-      "statement_digest": "c863ecf1ec3b7f94f8afe2b1a08b50319abcc50260c7927087204de7af09cf4c",
-      "terminal_digest": "67dfed9de644c7671343d6ab2ae55640dcf122ea8cba63d8d13b9ee9bd788001"
-    },
-    {
-      "manuscript_label": "prop:no-surface",
-      "coverage": "conditional_deduction",
-      "declarations": [
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicAtom_not_represented_by_surface"
-      ],
-      "objects": "The same ledger and atom invariants, together with a supplied passage from a surface to a minimal model.",
-      "hypotheses": "The atom has even rank two, odd rank ten, and the residue discriminant of the displayed cubic residue matrix. An atom of even rank at least two occurring on a variety of dimension at most two is supplied to occur on the minimal model, and an atom occurring on the minimal model is supplied to have even rank at least three or to occur already on a variety of dimension at most one. The curve dichotomy of the preceding row is also assumed.",
-      "conclusion": "No smooth projective variety of dimension at most two carries the cubic zero-packet atom.",
-      "cautions": "Lean constructs no variety, atom, atomic composition, blow-down, or minimal model, and proves neither the point-blowup formula, the nef-canonical lemma, the classification of minimal smooth complex projective surfaces, nor the projective-bundle formulas for the projective plane and a geometrically ruled surface; each enters as a supplied premise. Additivity for disjoint unions is not represented: the statement quantifies over varieties directly. The headline row reaches the same exclusion from two bundled implications rather than from these refined premises.",
-      "statement_digest": "4330f1b0c081fd0c3c7f92b53fdc3959ce658dc37be451f8914f4dd21cb3bc7e",
-      "terminal_digest": "136147200cc93735ffc3466dbe5a82f810b656e79b3d437e182eb15bd736ea5c"
     },
     {
       "manuscript_label": "def:framed-sixth-multiplicity",
@@ -797,16 +616,14 @@
       "manuscript_label": "thm:nu6-birational-invariance",
       "coverage": "conditional_deduction",
       "declarations": [
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.packet_multiplicity_eq_of_preserving_chain",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.packet_multiplicity_eq_of_typed_weak_factorization",
         "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.packet_multiplicity_birational_in_dimension_four"
       ],
-      "objects": "An arbitrary carrier type with natural-valued multiplicity and dimension, explicit smooth-projective-complex and smooth-center predicates, typed blowup steps in either orientation, and specialized center contributions.",
-      "hypotheses": "Smooth endpoints; source dimension at most four; every blowup step has codimension at least two, the center-plus-codimension dimension identity, preserved ambient dimension, and the displayed additive operation formula; every specialized contribution of a smooth center of dimension at most two vanishes; and a composable typed weak-factorization chain is supplied.",
-      "conclusion": "Equality of multiplicities at the endpoints, obtained by proving each typed blowup or blowdown link preserves multiplicity and telescoping the chain.",
-      "cautions": "Lean does not construct varieties, quantum connections, comparison specializations, operation formulas, low-dimensional vanishing, or the AKMW factorization chain; those remain typed data.  The older abstract preserving-chain terminal is retained and is strictly weaker than the typed telescope. The manuscript states the theorem under the reconstruction-tail hypothesis and the divisor-tagging hypothesis only for surface centers that are neither minimal nor geometrically ruled; the vanishing of the center contributions is a typed premise here either way.",
+      "objects": "The natural-valued primitive-sixth marker fold on the occurrence-indexed QDM block ledger, together with a typed dimension-four birational comparison input.",
+      "hypotheses": "The manuscript residual hypotheses 5.7R and 5.7T provide the framed projective-bundle and blowup laws and low-dimensional occurrence nullity. Lean packages the resulting birational comparison as a typed premise and checks its application.",
+      "conclusion": "Birational smooth projective varieties through dimension four have equal primitive-sixth marker, and the manuscript then cancels the projective-line factor for threefolds.",
+      "cautions": "Conditional deduction. Lean does not construct the QDM block groupoid, the fold, the Iritani comparisons, weak factorization, or low-dimensional vanishing; those are the mathematical content of the manuscript and typed premises of the terminal. The generic telescope is registered separately under thm:marker-ledger.",
       "statement_digest": "f06d4c4134c117aa3dad0eb06c8fbb0b8091d4d757911468a8bd774ba005888b",
-      "terminal_digest": "615127bbdba6a64b972231b0d65604119a655642226263440332222b99cff8a2"
+      "terminal_digest": "9445d5061e7256e4cea77570e05429effc39f3cf75eb89f064b1f764580a7437"
     },
     {
       "manuscript_label": "lem:simple-euler-block",
@@ -830,11 +647,11 @@
       "declarations": [
         "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.projectiveProduct_sixthMultiplicity_of_framed_tensor_decomposition"
       ],
-      "objects": "Framed formal-monodromy matrices of a smooth projective variety and of its product with a projective space, and their primitive-sixth multiplicities.",
-      "hypotheses": "The framed characteristic polynomial of the product is the power of that of the factor with exponent one more than the dimension of the projective space.",
-      "conclusion": "The count of the product is the count of the factor multiplied by one more than the dimension of the projective space.",
-      "cautions": "Conditional deduction.  The premise is the conclusion of the manuscript's Levelt--Turrittin computation for the product, which rests on the Gromov--Witten product formula, the numerical Novikov base change, the distinctness of the eigenvalues of quantum multiplication by the first Chern class of the projective space, and the multiplicity-one Euler block lemma; none of those is proved, and no variety, product, or quantum connection is constructed.",
-      "statement_digest": "47f023307c3bcf1a997b1e867683aed60bee4757841cd3622fa7c57f8f79d6a6",
+      "objects": "Framed formal-monodromy matrices of a smooth projective variety and of its product with a projective line, and their primitive-sixth multiplicities.",
+      "hypotheses": "The framed characteristic polynomial of the product is the square of that of the factor.",
+      "conclusion": "The primitive-sixth count doubles after product with a projective line.",
+      "cautions": "Conditional deduction. The Lean terminal is more general than the strict m=1 manuscript statement. Its premise is the conclusion of the manuscript's Levelt--Turrittin computation for the projective-line product, which rests on the Gromov--Witten product formula, numerical Novikov base change, the two distinct Euler eigenvalues of the projective line, and the multiplicity-one block lemma; none of those geometric inputs is constructed in Lean.",
+      "statement_digest": "0d8bac86648d0d9c9a0a4f25c145fffbdd081bec81c433b6f2703ed3e81e8900",
       "terminal_digest": "c34441bec5693f6e571cc20d0c26bc40711dab8816f8ab975d5b79eaccf0e3d2"
     },
     {
@@ -847,7 +664,7 @@
       "hypotheses": "The product formula multiplies the count of a variety by one more than the dimension of the projective factor; a projective space is the product of the point with that projective space; and the framed monodromy of the point is involutive.",
       "conclusion": "Lean deduces that the point has vanishing count and hence that every projective space has vanishing count, including three-space and four-space.",
       "cautions": "The product formula is a typed premise: Lean does not construct varieties, products, quantum connections, or framed monodromy, and does not prove the Gromov-Witten product formula or the compatibility of the formal decomposition with tensor products used in the manuscript's proof of that formula. Involutivity of the framed monodromy of the point stands for the manuscript's rank-one trivial connection at a point.",
-      "statement_digest": "e2f1e501fc75b88c3b6eb7b1881e826e073e195d73916fa2b5ca1ddf58733b3e",
+      "statement_digest": "53bf41611e0339a63cbb541938fc8a68d3db6b6bc8563333c9f0a262dee3e14d",
       "terminal_digest": "375f884903a99bf91c27109bcdaea116b71acdcee980a0fc6a01d6bf8c8c581c"
     },
     {
@@ -1000,6 +817,44 @@
       "conclusion": "Each of them is monomial: the associated graded is a Laurent monoid ring whose monomials form a complex basis, and the image of every effective monomial is one of them with coefficient one.",
       "cautions": "No terminal. Lean constructs no completed monoid ring, no associated graded ring, and no blowup comparison, so the statement that the center specializations have monomial associated graded image has no formal counterpart; the type of monomial-specialization certificates recorded under def:monomial-specialization records only the properties such data must have.",
       "statement_digest": "4ae731e5a7d406edcfa0bb8ff47a70a3975e967801b1d1f76194bfef9b74d47f"
+    },
+    {
+      "manuscript_label": "thm:marker-ledger",
+      "coverage": "fragment",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.packet_multiplicity_eq_of_preserving_chain",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.packet_multiplicity_eq_of_typed_weak_factorization"
+      ],
+      "objects": "A natural-valued additive packet marker on abstract varieties, a chain of marker-preserving steps, and a typed weak-factorization chain recording smooth endpoints, codimension, center dimensions, specializations, and correction terms.",
+      "hypotheses": "Every step preserves the marker, or equivalently every actual center correction through dimension two vanishes in the supplied dimension-four factorization input.",
+      "conclusion": "The marker values at the endpoints agree by telescoping along the factorization chain.",
+      "cautions": "Fragment. The manuscript theorem allows an arbitrary effective commutative target monoid and constructs its geometric input from weak factorization; Lean models only a natural-valued packet and takes the typed factorization and operation laws as premises.",
+      "statement_digest": "0b731e19a5ea45c40e934e9f594c42edab7e7d75124e63d7933bfb9ccd0b016f",
+      "terminal_digest": "8ab2ceca143537057f227bba0e03a83a2ba115c46cc77b63b86144d93539cc3b"
+    },
+    {
+      "manuscript_label": "prop:qdm-operation-ledgers",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "The generic even QDM block groupoid and an additive marker fold transported across projective-bundle and blowup comparison isomorphisms.",
+      "hypotheses": "Regularity in z, parity preservation, a common generic coefficient spine, invertible bulk Jacobians, and faithful occurrence-indexed center specialization.",
+      "conclusion": "The QDM comparison theorems supply the projective-bundle and blowup marker formulas.",
+      "cautions": "No Lean terminal formalizes the categorical QDM comparisons or their coefficient and reconstruction adapters; this proposition rests on the precisely cited theorems of Iritani and Iritani–Koto plus the manuscript’s adapter arguments.",
+      "statement_digest": "cf4ca20a8441fcd9519cc73b6f5c8e6ef2b944fe9224fd9bd27a1d5f945afd1c"
+    },
+    {
+      "manuscript_label": "prop:atomic-lowdim",
+      "coverage": "conditional_deduction",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicAtom_not_represented_by_curve",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicAtom_not_represented_by_surface"
+      ],
+      "objects": "An abstract additive marked-block ledger, the cubic rank-two residue marker, varieties of dimension at most two, and supplied curve and minimal-surface reduction data.",
+      "hypotheses": "The curve marker has zero residue discriminant; nef-canonical surface blocks have incompatible rank; projective spaces and ruled surfaces reduce by the operation formulas; point blowups preserve nullity; and actual occurrence specialization is faithful.",
+      "conclusion": "The selected cubic rank-two marker has zero multiplicity on every possible point, curve, or surface center.",
+      "cautions": "Conditional deduction. Lean proves the abstract curve and surface exclusions from typed premises, but does not construct QDM blocks, prove the surface classification, the projective-bundle or blowup formulas, the nef-canonical degree argument, or the faithful occurrence adapter.",
+      "statement_digest": "254a0d5feb586c95a1d3345c2063b77362355b2f9d1bd4abda1284026a14956a",
+      "terminal_digest": "ff3c224d18e3169afbe2ba09e85c1fa482998ae3eeff079ff74badd6afe85811"
     }
   ],
   "machinery": [
@@ -1242,6 +1097,181 @@
       "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.sixAxisSourceDiscriminantPairing_values_and_nondegeneracy",
       "reason": "States what the discriminant pairing of the six-axis source polarization is and that it is nondegenerate. On the classes of two integral vectors the pairing is the class modulo one of (1/6^8) times x^t adj(A) y, where A is the integral source polarization, so it vanishes exactly when 6^8 divides that integral numerator; and a class pairing to zero against every class is zero. The manuscript does not state these properties of the lattice pairing separately: it uses the commutator pairing of the polarized abelian scheme, which this package does not construct. The declaration is registered as machinery because it fixes the meaning of the pairing under which the isogeny-kernel row asserts maximal isotropy, and nondegeneracy is what makes an orthogonal complement the right notion there.",
       "terminal_digest": "b29c3094fb924ea77e29d07eef1923707cf42e593af81cdc511d2b65111deffe"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.eulerOperator_generalizedEigenspaces_under_sign_reversal",
+      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "terminal_digest": "1224e711a9b208a602ac9550818525db82509b397486a8f9579723dc1b64e8f0"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.eulerOperator_eigenvalue_count_under_sign_reversal",
+      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "terminal_digest": "c984cc5cd64bdea868d9a5293365b64e9dba6603a8ead60925057d7124e9093e"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.eulerOperator_cyclic_span_under_sign_reversal",
+      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "terminal_digest": "52e9871ce08ab3a2188e82fc0e542b20d8ab779ab2090b2884fc74f57d4edbe7"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.characteristicDiscriminant_under_root_sign_reversal",
+      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "terminal_digest": "d08fb0b4b90bf024baef8d3dcf4472714745c59e546b28bdba0890baf019f752"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.residueDiscriminant_under_sign_reversal",
+      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "terminal_digest": "f15cfa314182becba211ec2bcdfdeca65f4d51bb242a6d812bdf39aac5cb4785"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.characteristicDiscriminant_under_odd_coefficient_sign_reversal",
+      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "terminal_digest": "f6bbae5c37aa4fc5ae2e5961b0e57566413b439c273858842d0b51e9f8c3c27a"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.hodgeFixedSubalgebra_closed_under_eulerMultiplication",
+      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "terminal_digest": "6f9410b3295b9a3e5298a69baaeadbaa020f9f787a77d054420be0307da70a61"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.hodgeFixedSubalgebra_eigenvector_transfers",
+      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "terminal_digest": "9c39be62fad9b348fa562e89fa86020d09c1a38f817b1a081c67c3a07b8aff97"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.hodgeFixedTangentSpace_span_and_finrank",
+      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "terminal_digest": "b8966215ed938bf11bbd97f367d6530a383ca11e4c1c74c45f5b44afab5051a0"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.truncatedHyperplaneAlgebra_model",
+      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "terminal_digest": "274fc8b3da483f68e16e3f8ae22877b13dc4ae06b51ff5e15ac4bffc1c74be59"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.quarticDiscriminant_eq_squared_root_differences",
+      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "terminal_digest": "33c381b66dac6d2dab02b97b57172546614505e60028ae5989748d4fd7592762"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.eulerFrame_discriminant_logarithmicDerivatives",
+      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "terminal_digest": "eee41653461791adb3705898ddc9f89e704e62ee226e5467c70cab3a92e07cc6"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.eulerFrame_discriminant_differential",
+      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "terminal_digest": "0dda57182e20a639cf467b4f3cc8835d4975fc53720dee56c686c56362324c38"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.eulerFrame_discriminant_eq_zero_of_vanishing_at_base_point",
+      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "terminal_digest": "6325f57fe2f9501f7b3dd92858d50fb3d33ebb9b6e364b51ea607236ca13dec5"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.eulerFrame_data_nonempty",
+      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "terminal_digest": "e523da02c91c54df5b7c6a42d4da42f446d4d9df29d4c7b3ee31524ec0bb9b0a"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.eulerMultiplication_eigenvalues_module_eq_algebra",
+      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "terminal_digest": "bf9099529354f39f215e0466209151cdd18b044861be44e5bde6af6497508ffc"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicThreefold_totalChernClass_identity",
+      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "terminal_digest": "ca51f5637b43a6d86aa1731a8833b63c3cdd01218b70bcc0a036d2d1edbd156b"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicThreefold_bettiThree_eq_ten",
+      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "terminal_digest": "c7690f34ffaffb7955d57af1f83e580a0e1bef783a9f677b3b4fb243ff4cd12c"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicThreefold_eulerMultiplication_annihilates_degreeThree",
+      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "terminal_digest": "cb325801aa2889196019a0fcab9fd26cf8b65862d60172737da3af0ee28d7628"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicZeroPacket_component_excludes_rankOne_branches",
+      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "terminal_digest": "406dce06e89d74f33920aa9dd50819b608bbea1602615464d2b08aca8bb6d714"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicZeroPacket_parityRanks_eq_two_and_ten",
+      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "terminal_digest": "12b69a0a3b9bc59c7b207cdc53d3e3293af5890e9aaa519fa669b28e3554f293"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicThreefold_totalChernClass_uniqueness",
+      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "terminal_digest": "1d5a2dfe8c1b04d91829670e4a4d6f74ee0fb958296c35c5ebbc37f96b90e31d"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.quantumPairing_horizontality_of_selfAdjoint_multiplication",
+      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "terminal_digest": "67d5325f5dc85d59bd98ee8cc56800bd2ae2a6340d21574481d3e220829164f0"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.separatedSpectralFactors_pairing_blockDiagonal",
+      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "terminal_digest": "f1ee8dba85f5040b274034b5336bb7d4f7c754f86529dd3cf8b0b50b88639c22"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.separatedSpectralFactors_pairing_eq_zero_of_horizontality",
+      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "terminal_digest": "a878a3cb4b586e3d3c115dd19e740e618a7b0acf0fbe522a8457aaa8690fabf0"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.separatedSpectralFactors_labelledPairing_blockDiagonal_of_horizontality",
+      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "terminal_digest": "e7d76e1c17ab0d2c0ec195b25c9f3fc7f0bd9c1a94729a51fbd7a5736a92ee9f"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.separatedSpectralFactors_evenPart_pairing_nondegenerate",
+      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "terminal_digest": "180536f8f4fa82dc254aed0fc85852499bed72c482feb5a4a000dab51f6823d7"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.separatedSpectralFactors_equalEigenvalues_admit_nonzero_horizontalPairing",
+      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "terminal_digest": "af2775034359d3bdedbebdb828b54847e881d4ad779671e3e4a70e7c021dac2f"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.atomicFactor_residueDiscriminant_invariant_under_blockDiagonal_frame_change",
+      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "terminal_digest": "3bf37d0af1c14f0285bdb1e0a1e22a952659bc1f05027634c6af96fc98beaee6"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.sylvesterEquation_unique_solution_of_separated_spectra",
+      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "terminal_digest": "e8ba71c54da4da8ab8c1683c34eea8f1da10c87807ae5b218d2b716a67c3502b"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.blockSylvesterEquation_unique_blockOffDiagonal_solution",
+      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "terminal_digest": "d14fff7774df92103a3c0d2cc7eb40d72b74997f4c72dae6b42aa704f1933a76"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.exists_normalizedBlockGauge_of_separated_blocks",
+      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "terminal_digest": "4bca414859a100b87c9453b60582794401c300a8dcffee57e05e36527f3e2fbe"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.normalizedBlockGauge_unique_of_separated_blocks",
+      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "terminal_digest": "9076d495a38dcfe44c468419fa7eae7fe6698804230b843dd7713dfb70ea746b"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.atomicResidueDiscriminant_constant_on_formal_germ",
+      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "terminal_digest": "65ec570a2aa9b7c7a6c1da1abac03b8854fa6902c5ac7ec386ced6e425b80f15"
+    },
+    {
+      "declaration": "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.atomicResidueDiscriminant_invariant_under_frame_change",
+      "reason": "Retained checked algebra from the superseded Hodge-atom presentation; it is no longer claimed as direct coverage of a manuscript statement after the categorical QDM refounding.",
+      "terminal_digest": "76485992b885237b206670214c62cb9ea4fe2968be6580b70ac7769972b03638"
     }
   ]
 }

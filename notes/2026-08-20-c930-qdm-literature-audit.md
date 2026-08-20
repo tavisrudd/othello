@@ -90,3 +90,17 @@ reference.  No adjacent geometric bibliography choice remains open.
 This audit certifies literature coverage and the fidelity of the source map.
 It does not certify the imported theorems themselves.  It also makes no claim
 about higher stabilization, Gamma-row transport, or any all-\(m\) provider.
+
+## Post-refounding point-of-use check
+
+Completed after the 50-page manuscript refounding.  Section 4 now cites
+Beauville at the displayed cubic products, Iritani Theorem 5.18 at the blowup
+provider, Iritani--Koto Theorem 5.1 at the projective-bundle provider, AKMW at
+the categorical factorization theorem, Beauville's surface text at the
+minimal-surface alternative, and van der Put--Singer at the exponent
+interpretation.  Section 5 cites Behrend at the projective-line product and
+uses Cai only after the internal indicial calculation as a comparison.
+
+The imported-source registry and generated dependency graph have been migrated
+to those same edges.  `make check` passes with no undefined citation or
+reference warning.

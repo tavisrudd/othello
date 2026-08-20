@@ -4,7 +4,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage{microtype}
-\usepackage{amsmath,amssymb,amsthm,mathtools,mathrsfs}
+\usepackage{amsmath,amssymb,amsthm,amscd,mathtools,mathrsfs}
 \usepackage{array,booktabs}
 \usepackage{enumitem}
 \usepackage{tikz}
@@ -65,26 +65,26 @@
 
 \begin{abstract}
 We prove that \(X\times\PP^1\) is irrational for every smooth complex cubic
-threefold \(X\).  Working in the ordinary, non-enhanced Hodge-atom package of
-Katzarkov--Kontsevich--Pantev--Yu, we isolate the atom carried by the double
-zero packet of the cubic small quantum connection and introduce a rank-two
-atomic residue discriminant \(\delta^\sharp\).  A canonical elementary
-modification of the even rank-two block gives \(\delta^\sharp=4/9\) for the
-cubic atom.  The only curve whose atom could carry the same Hodge
-representation has genus five, and there \(\delta^\sharp=0\); surface
-representatives are excluded by parity ranks and the classification of
-minimal surfaces.  The ordinary Hodge-atom non-rationality criterion then
-obstructs rationality after one stabilization.  Kuznetsov's birational
-correspondence extends the conclusion to every smooth prime Fano threefold of
-genus eight.
+threefold \(X\).  We first prove an occurrence-indexed categorical ledger
+theorem for markers of generic even quantum \(D\)-module blocks.  Iritani's
+blowup decomposition and the Iritani--Koto projective-bundle decomposition
+give its two operation laws; weak factorization then makes every marker whose
+low-dimensional center terms vanish a birational invariant.  The
+unconditional specialization counts rank-two nilpotent blocks whose canonical
+elementary modification has nonzero residue discriminant
+\(\delta^\sharp\).  Beauville's small quantum algebra gives
+\(\delta^\sharp=4/9\) on the cubic zero block.  The marker vanishes for points,
+curves, and surfaces, but survives on \(X\times\PP^1\), while it vanishes on
+\(\PP^4\).  Kuznetsov's birational correspondence extends the conclusion to
+every smooth prime Fano threefold of genus eight.
 
-We also study the finer invariant \(\nu_6\), the number of primitive-sixth
-framed formal-monodromy eigenvalues of the numerical small even quantum
-connection.  We compute \(\nu_6(X)=2\) and \(\nu_6(X\times\PP^1)=4\), and
-establish product, blowup, and projective-bundle formulas, the last two under
-two stated hypotheses on the reconstruction tail and on divisor-tagging
-specialization.  Under those hypotheses \(\nu_6\) is birationally invariant
-through dimension four, giving a second proof of the theorem.
+The finer specialization of the same ledger counts primitive-sixth framed
+formal-monodromy eigenvalues of the numerical small even quantum connection.
+We compute \(\nu_6(X)=2\) and \(\nu_6(X\times\PP^1)=4\).  Its blowup and
+projective-bundle providers retain two stated hypotheses on reconstruction
+tails and divisor-tagging specialization.  Under those hypotheses the same
+categorical theorem makes \(\nu_6\) birationally invariant through dimension
+four and gives a conditional second proof.
 
 Finally, an integral six-axis construction proves universal
 \(CH_0\)-triviality for every smooth member of the nonstandard
@@ -101,13 +101,13 @@ Yang--Yu--Zhu.
 \end{abstract}
 
 \noindent\textbf{Keywords.} cubic threefold; universal \(CH_0\)-triviality;
-irrationality; Hodge atoms; intermediate Jacobian; quantum connection;
-formal monodromy; weak factorization.
+irrationality; quantum \(D\)-modules; categorical markers; intermediate
+Jacobian; formal monodromy; weak factorization.
 
 \input{sections/01-introduction}
 \input{sections/02-envelope}
 \input{sections/03-minimal-class}
-\input{sections/04-atomic-one-step}
+\input{sections/04-categorical-one-step}
 \input{sections/05-framed-monodromy}
 \input{sections/06-synthesis}
 
@@ -255,11 +255,6 @@ arXiv:2604.10028v2 (2026).
 H.~Iritani and Y.~Koto,
 \emph{Quantum cohomology of projective bundles},
 arXiv:2307.03696v4 (2026).
-
-\bibitem{KKPYY}
-L.~Katzarkov, M.~Kontsevich, T.~Pantev, and T.~Y.~Yu,
-\emph{Birational invariants from Hodge structures and quantum
-multiplication}, arXiv:2508.05105v2 (2026).
 
 \bibitem{KuznetsovV14}
 A.~Kuznetsov,

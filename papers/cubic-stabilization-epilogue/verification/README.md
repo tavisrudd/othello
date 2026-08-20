@@ -21,7 +21,8 @@ Groebner bundles that determined the locus remain tracked and are now attached
 to `lem:pencil-loci-coordinates`, which records the members' coordinates on the
 parameter line and which no other statement uses.
 
-Nothing on the unconditional atomic route rests on any bundle, so the
+Nothing on the unconditional rank-two residue route rests on any evidence
+bundle, so the
 irrationality theorem `thm:every-cubic` does not.  The conditional framed
 route's second proof of one-step irrationality does, through
 `lem:hirzebruch-euler-spectrum`.
@@ -31,7 +32,7 @@ macro is typographically empty, so a reader of the rendered paper sees the
 boundary in the prose of the proof that names the trust level rather than at
 the annotation.  This enumeration is a reading of the printed proofs, not a
 fact read off `dependency-graph.dot`: as recorded below, edges are filled for
-the atomic route and the one-stabilization theorem only, and a statement
+the categorical marker route and the one-stabilization theorem only, and a statement
 carrying no edge has none recorded rather than none.
 
 `make check` performs the source-only Lean correspondence check, deterministic
@@ -128,8 +129,8 @@ the introduction, the envelope section, the minimal-class section, the framed
 refinement, and the separation section.  A statement carrying no edge has none
 recorded rather than none used, and the same holds of an imported source.
 
-Checked coverage snapshot: 62 claims; 5 absent; 27 fragmentary; 29 conditional;
-1 complete; 311 reviewer terminals, of which 48 are machinery serving no current
+Checked coverage snapshot: 53 claims; 6 absent; 21 fragmentary; 25 conditional;
+1 complete; 311 reviewer terminals, of which 83 are machinery serving no current
 manuscript claim.
 
 The Lean modules and axiom audit can be built with the pinned package command

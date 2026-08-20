@@ -20,36 +20,29 @@ For every smooth complex cubic threefold \(X\), the fourfold
 \(X\times\PP^1\) is irrational.
 \end{theorem}
 
-The proof uses ordinary Hodge atoms in the sense of
-Katzarkov--Kontsevich--Pantev--Yu \cite{KKPYY}.  Their blowup and
-projective-bundle formulas package weak factorization into a free abelian
-ledger on atoms, and their ordinary non-rationality criterion says that a
-smooth \(d\)-fold containing an atom not realizable in dimension at most
-\(d-2\) is irrational.  We construct such an atom for a cubic threefold.
-At the small hyperplane point, the two-dimensional even zero packet of the
-Euler multiplication is a single Jordan block.  A regular-
-\(F\)-manifold discriminant argument shows that the corresponding branch is
-indeed a connected component of the unramified spectral cover, rather than
-an accidental coalescence at one point.  On its even rank-two atomic
-\(F\)-bundle, a canonical elementary modification turns the nilpotent
-leading block into a logarithmic one.  The Poincar\'e pairing forces this
-modification to be regular and flatness forces its residue to move by
-conjugation.  The resulting residue discriminant \(\delta^\sharp\) is an
-ordinary atom invariant.  For the cubic atom
+The proof begins with one blowup.  Split the generic even quantum
+\(D\)-module into spectral blocks and place their regular-isomorphism classes
+in a free commutative monoid.  A marker is any monoid-valued fold of this
+block ledger.  Iritani's blowup theorem identifies the marker of the blowup
+with the marker of the ambient variety plus the occurrence-indexed markers
+of the center; Iritani--Koto gives the parallel projective-bundle formula.
+Consequently, if the center markers vanish in dimensions at most \(d-2\),
+weak factorization makes the marker birationally invariant for smooth
+projective \(d\)-folds.
+
+For the unconditional specialization, a block is marked when its rank is
+two, its centered leading Euler operator is nonzero nilpotent, and its
+canonical elementary modification has nonzero residue discriminant
+\(\delta^\sharp\).  Pairing horizontality makes the modification regular,
+and flatness makes the residue move by conjugation.  Beauville's small
+quantum algebra yields one marked cubic block with
 \[
   \delta^\sharp=\frac49,
 \]
-whereas the only possible curve representative, a genus-five curve, has
-\(\delta^\sharp=0\).  Surface representatives are excluded by parity rank
-and the classification of minimal surfaces.  Since
-\(\CF(X\times\PP^1)=2\CF(X)\), the cubic atom occurs on the stabilized
-fourfold and the ordinary atom criterion proves Theorem~\ref{thm:every-cubic}.
-
-The theorem uses the numbered ordinary Hodge-atom theorems imported from
-\cite{KKPYY}; their projective-bundle theorem ultimately uses the
-Iritani--Koto decomposition theorem \cite{IritaniKoto}.  No enhanced
-atom, Euler pairing, Serre automorphism, or non-archimedean
-Riemann--Hilbert statement is used in our proof.
+while the marker vanishes for every point, curve, and surface.  The
+projective-bundle formula gives a nonzero value on \(X\times\PP^1\), whereas
+\(\PP^4\) has value zero.  The categorical ledger theorem therefore proves
+Theorem~\ref{thm:every-cubic}.
 
 The conclusion propagates immediately through stabilized birational
 correspondences.  In particular, if \(Y\times\PP^1\) is birational to
@@ -66,11 +59,11 @@ Section~\ref{sec:framed-monodromy}.
 \subsection*{Unconditional separation results}
 
 Each separation statement rests on two independent inputs.  Irrationality
-comes from the cubic Hodge atom.  Universal \(CH_0\)-triviality is proved
+comes from the cubic direct-QDM marker.  Universal \(CH_0\)-triviality is proved
 for the same cubic by a classical or cycle-theoretic theorem, and then
 passes to the product by the projective-bundle formula for Chow groups.
 Thus the vanishing of the usual decomposition-of-the-diagonal obstruction
-and the atom obstruction read genuinely different structures on the same
+and the quantum marker read genuinely different structures on the same
 fourfold.
 
 Universally \(CH_0\)-trivial cubic threefolds are known in abundance.
@@ -115,7 +108,7 @@ threefolds admitting unirational parametrizations of degrees two and three
 \cite[Theorems~1.1 and 3.3]{YYZ}.  Parametrizations of coprime degrees give
 a decomposition of the diagonal, so every member of that family is
 universally \(CH_0\)-trivial; the same degrees persist on
-\(X\times\PP^m\) for every \(m\) \cite[Corollary~3.5]{YYZ}.
+\(X\times\PP^1\) \cite[Corollary~3.5]{YYZ}.
 
 \begin{corollary}[Coprime-degree cubics]
 \label{cor:coprime-separation}
@@ -132,10 +125,8 @@ Yang--Yu--Zhu ask whether a variety with unirational parametrizations of
 coprime degrees can fail to be stably rational \cite[Question~1.4]{YYZ}.
 Corollary~\ref{cor:coprime-separation} settles the first nontrivial
 stabilization for their examples.  It does not settle stable irrationality:
-our atom obstruction ceases to exclude rationality from the second
-stabilization onward because a four- or five-dimensional stabilized variety
-may be allowed atoms represented in dimension three, and the cubic atom
-itself already has such a representative.
+the marker and center-nullity theorem used here is an \(m=1\) statement and
+has no asserted higher-stabilization consequence.
 
 For our second separation result we give a different uniform proof of
 universal \(CH_0\)-triviality along the nonstandard \(A_5\)-invariant
@@ -205,15 +196,15 @@ an explicit degree-three unirational parametrization
 
 \subsection*{A finer conditional framed invariant}
 
-The ordinary atom proof above is deliberately minimal: it follows one
-rank-two cubic atom and uses only the finite residue discriminant needed to
-exclude low-dimensional representatives.  We also study a finer invariant
-of the entire numerical small even quantum connection.  Definition
+The unconditional proof above is deliberately minimal: its marker retains
+only rank, generic nilpotence, and the residue discriminant.  A second fold
+of the same block ledger retains finer data from the entire numerical small
+even quantum connection.  Definition
 \ref{def:framed-sixth-multiplicity} counts the primitive-sixth eigenvalues
 of framed formal monodromy on the original loop disc and gives an invariant
 \(\nu_6\).  The cubic packet calculation is unconditional and yields
-\(\nu_6(X)=2\).  More generally, the product formula for Gromov--Witten
-theory gives \(\nu_6(T\times\PP^m)=(m+1)\nu_6(T)\), so in particular
+\(\nu_6(X)=2\).  The product formula for Gromov--Witten theory gives
+\(\nu_6(T\times\PP^1)=2\nu_6(T)\), so
 \(\nu_6(X\times\PP^1)=4\) unconditionally.
 
 The actual Iritani and Iritani--Koto comparison isomorphisms preserve the
@@ -256,12 +247,11 @@ geometrically ruled.  Let
 \end{theorem}
 
 Theorem~\ref{thm:every-cubic-conditional} is not the logical basis of
-Theorem~\ref{thm:every-cubic}: it reaches the same conclusion under two
-hypotheses, through an invariant of the whole small even quantum connection
-rather than one atom.  Its interest is that the invariant is finer.  It
-separates a cubic threefold from projective three-space at the level of
-threefolds, where the atom argument gives nothing, and for genus eight it
-gives the conditional identity \(\nu_6(V)=2\).
+Theorem~\ref{thm:every-cubic}: it is a finer specialization of the common
+ledger theorem and reaches the same conclusion under two hypotheses.  At the
+threefold level it refines the direct marker's presence-or-absence value to an
+exact multiplicity, and for genus eight it gives the conditional identity
+\(\nu_6(V)=2\).
 
 \subsection*{Relation with earlier rationality results}
 
@@ -284,9 +274,8 @@ structure is already realizable as the \(H^1\) of a smooth surface, exactly
 the form that a surface center may contribute, while the middle \(H^4\) is
 Tate.  The standard intermediate-Jacobian and blowup bookkeeping therefore
 gives no contradiction here, though this does not exclude more elaborate
-classical Hodge-theoretic obstructions.  The ordinary Hodge-atom argument
-below refines this raw Hodge bookkeeping by following the quantum spectral
-packet carrying the Hodge representation rather than \(H^3\) alone.
+classical Hodge-theoretic obstructions.  The direct-QDM marker instead
+follows the rank-two quantum spectral block and its modified residue.
 
 For comparison, Gu\'er\'e obtains a projective-K3-type Hodge necessary
 condition for rational cubic fourfolds from evaluated quantum data
@@ -296,8 +285,8 @@ fourfolds with large vanishing middle \(H^4\) \cite{BFGMP}.  Their
 hypotheses include \(b_3=0\), so the criterion does not cover
 \(X\times\PP^1\), where
 \(b_3=10\), the middle \(H^4\) is Tate, and the surviving \(H^3\) is
-already of surface-center type; the proof below instead requires finer
-information internal to the ordinary cubic atom.
+already of surface-center type; the proof below instead uses the modified
+residue of the cubic even QDM block.
 
 The
 very general cubic threefold is now known to be stably irrational
@@ -308,12 +297,9 @@ connection \cite{Cai}; the small quantum algebra from which the cubic
 connection is derived was computed by Beauville \cite{Beauville}.  Iritani
 and Iritani--Koto prove the quantum
 \(D\)-module decompositions for blowups and projective bundles
-\cite{IritaniBlowup,IritaniKoto}; the ordinary Hodge-atom package of
-Katzarkov--Kontsevich--Pantev--Yu \cite{KKPYY} packages these decompositions
-into birational atomic data.  Theorem~\ref{thm:every-cubic} uses that
-ordinary package together with the new rank-two residue discriminant,
-without the enhanced Serre-automorphism machinery of \cite{KKPYY} and
-without transporting framed monodromy through reconstruction displacements.
+\cite{IritaniBlowup,IritaniKoto}.  We apply their decompositions directly to
+the block marker and derive the cubic matrix and both of its markers from
+Beauville's relations.
 
 On the cycle side, Voisin reduces universal \(CH_0\)-triviality of a cubic
 threefold to algebraicity of the primitive minimal class of its intermediate
@@ -356,13 +342,14 @@ Section~\ref{sec:minimal-class} proves the local divisor-product theorem,
 applies it to the primitive minimal class, and shows that the resulting
 \(A_5\)-curve is generically outside both the separated-variable locus and
 the explicit coprime-degree family.
-Section~\ref{sec:atomic-one-step} proves Theorem~\ref{thm:every-cubic}
-unconditionally from ordinary Hodge atoms and a rank-two residue
-discriminant, with the small cubic block reduction isolated for later reuse.
+Section~\ref{sec:atomic-one-step} proves the occurrence-indexed categorical
+ledger theorem, specializes it to the rank-two residue marker, and proves
+Theorem~\ref{thm:every-cubic} unconditionally.  Its Beauville-derived cubic
+block is isolated for reuse.
 Section~\ref{sec:framed-monodromy} defines the finer invariant \(\nu_6\),
-proves exact low-degree shift and projective-space product formulas, records
-the formal-germ rank-two rigidity theorem and the two residual hypotheses,
-and computes \(\nu_6(X)=2\) and \(\nu_6(X\times\PP^1)=4\) from the same
-cubic packet.  The final section combines the
+identifies it as a second fold of the same ledger, proves exact low-degree
+shift and projective-space product formulas, records the formal-germ
+rank-two rigidity theorem and the two residual hypotheses, and computes
+\(\nu_6(X)=2\) and \(\nu_6(X\times\PP^1)=4\) from the same cubic packet.  The final section combines the
 unconditional irrationality theorem with the cycle-theoretic results and
 records the exact scope of the conditional framed refinement.

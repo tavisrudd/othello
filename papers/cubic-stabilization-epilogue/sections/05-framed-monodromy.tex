@@ -1,21 +1,22 @@
 \section{Framed formal monodromy: a conditional refinement}
 \label{sec:framed-monodromy}
 
-Section~\ref{sec:atomic-one-step} proved the one-stabilization theorem using
-one ordinary Hodge atom.  We now ask for a stronger statement about the
-entire numerical small even quantum connection: whether its
-primitive-sixth framed formal-monodromy multiplicity satisfies direct
-operation formulas under projective bundles and blowups.  The actual
-Iritani and Iritani--Koto comparison isomorphisms preserve the original
-loop framing after coefficient-field extension.  The string equation and
-divisor equation also remove, exactly, the scalar degree-zero term and any
-fixed degree-two term whose Novikov character descends to the coefficient
-ring.  What remains is narrower: a residual reconstruction-tail displacement,
-and a logically separate specialization step
-in the divisor-tagging argument.  We isolate these as Hypotheses~5.7R
-and~5.7T below.
+Section~\ref{sec:atomic-one-step} proved the occurrence-indexed marker-ledger
+theorem and applied its coarsest useful fold.  Here we keep the same block
+groupoid, free commutative ledger, and target monoid \(A=\mathbf N\), but
+replace the atomic fold by the primitive-sixth framed formal-monodromy
+multiplicity.  Thus the argument below is a second specialization of
+Theorem~\ref{thm:marker-ledger}, not a parallel weak-factorization proof.
 
-The results of this section are therefore logically separate from
+The Iritani and Iritani--Koto comparison isomorphisms preserve the original
+loop framing after coefficient-field extension.  The string and divisor
+equations remove the scalar degree-zero term and every fixed degree-two term
+whose Novikov character descends to the coefficient ring.  The additional
+provider data retained by this finer fold are precisely a residual
+reconstruction-tail displacement and a logically separate specialization
+step in the divisor-tagging argument.  These are Hypotheses~5.7R and~5.7T.
+
+The framed conclusion is logically subordinate to
 Theorem~\ref{thm:every-cubic}.  Definition~\ref{def:framed-sixth-multiplicity},
 the cubic computation, and the product-with-projective-space formula below
 are unconditional.  The projective-bundle and blowup operation formulas
@@ -34,8 +35,8 @@ those centers.
 
 
 Proposition~\ref{prop:residue-discriminant-exponents} explains how the two
-quantum invariants in this paper are related on the rank-two block that
-matters for the cubic.  The atomic invariant $\delta^\sharp$ is the square of
+folds are related on the cubic rank-two block.  The atomic invariant
+$\delta^\sharp$ is the square of
 the difference of the residue representatives selected by the canonical
 elementary modification, and therefore forgets a common scalar shift.  The
 framed invariant $\nu_6$ is finer: it tests the absolute cyclotomic placement
@@ -197,6 +198,22 @@ The multiplicities are algebraic multiplicities in the characteristic
 polynomial.  The choice-independence argument above makes their sum independent
 of all the auxiliary choices.
 \end{definition}
+
+For a framed generic even block \(E\), let \(w_6(E)\) be the same sum of
+the two primitive-sixth algebraic multiplicities, and extend blockwise:
+\[
+ w_6:\mathcal L_{\mathcal T}\longrightarrow\mathbf N,
+ \qquad
+ \nu_6(T)=w_6(\mathcal B_{\mathcal T}(T)).
+ \tag{5.0d}
+ \label{eq:framed-fold}
+\]
+Direct-sum additivity of characteristic polynomials makes \(w_6\) a
+commutative-monoid fold.  Lemma~5.1A below shows that it is preserved by the
+regular scalar extensions and formal-coordinate isomorphisms in the common
+QDM ledger.  Its extra type data are the chosen small section and the
+original \(z\)-disc framing; neither is forgotten when passing to
+\(\mathcal L_{\mathcal T}\).
 
 The frame matters.  Adjoining roots of Novikov monomials is an algebraic
 coefficient extension and is harmless by choice independence.  Adjoining a root of
@@ -490,22 +507,14 @@ invariants; the center terms are computed after the displayed specializations.
 \end{proposition}
 
 \begin{proof}
-We first treat the blowup.  Iritani's Theorem~5.18 gives a formal coordinate
-isomorphism and a quantum-$D$-module decomposition
-\[
- \operatorname{QDM}(\widetilde T)\cong
- \operatorname{QDM}(T)\oplus
- \operatorname{QDM}(C)^{\oplus(c-1)}
-\]
-over a Laurent extension in the exceptional Novikov variable
-\cite[Theorem~5.18]{IritaniBlowup}.  The comparison map and its inverse use
-only integral powers of the original loop coordinate $z$.  After passing the
-coefficient ring to an algebraically closed Laurent coefficient field,
-Lemma~5.1A therefore transports framed formal monodromy across the comparison
-without ramifying the $z$-disc.
+Proposition~\ref{prop:qdm-operation-ledgers} supplies the common direct-sum,
+coefficient-spine, parity, and occurrence bookkeeping.  Lemma~5.1A shows
+that the fold \(w_6\) crosses its regular comparison maps without changing
+the original \(z\)-disc.  It remains only to compare the reconstructed bulk
+points with the intrinsic small sections.
 
-For a center summand put $u=q^{-1/(c-1)}$.  Iritani's reconstruction
-coordinates have the initial form
+For a blowup center summand put \(u=q^{-1/(c-1)}\).  Iritani's coordinates
+have the initial form
 \[
  \varsigma_j=\varsigma_j^\circ+s_j,
  \qquad
@@ -514,51 +523,24 @@ coordinates have the initial form
  \label{eq:blowup-reconstruction-coordinate}
 \]
 with $\lambda_j=\zeta_j u^{-1}$
-\cite[Section~5.8.2 and (5.27)--(5.30)]{IritaniBlowup}.  The associated
-numerical Novikov specialization is
+\cite[Section~5.8.2 and (5.27)--(5.30)]{IritaniBlowup}, with numerical
+specialization
 \[
  \chi_j(Q_C^d)=Q^{i_*d}u^{\rho_C\cdot d}.
  \tag{5.4a}
  \label{eq:center-novikov-specialization}
 \]
-The unnormalized connection is naturally read after the Laurent localization
-containing $u^{-1}$; in particular we make no claim that the term
-$\lambda_j$ belongs to a nonlocalized center ring.  Lemma~\ref{lem:exact-low-degree-shifts}
-removes the scalar $H^0$ term $-(c-1)\lambda_j$ and the fixed divisor
-$h_{C,j}$ exactly.  The latter character descends through
+Lemma~\ref{lem:exact-low-degree-shifts} removes the scalar term and the fixed
+divisor \(h_{C,j}\) exactly.  The latter character descends through
 \eqref{eq:center-novikov-specialization} because $h_{C,j}$ is a scalar
-multiple of $\rho_C$.  The remaining $O(u)+s_j$ reconstruction tail is the
-center instance covered by Hypothesis~5.7R.  The normalization of the
-logarithmic coordinate is fixed in \cite[Section~5.8.1]{IritaniBlowup}; a
-residual constant logarithmic character would again be a fixed divisor
-shift and hence is already covered by Lemma~\ref{lem:exact-low-degree-shifts}.
+multiple of $\rho_C$.  Section~5.8.1 of \cite{IritaniBlowup} fixes the
+logarithmic normalization.  Hypothesis~5.7R is invoked exactly for the
+remaining \(O(u)+s_j\) tail, and analogously for the residual ambient tail
+\(\tau^\circ=O(q^{-1})\).  Additivity of \(w_6\) now gives
+\eqref{eq:blowup-nu}.  The center term retains \(\chi_j\), since the map
+\eqref{eq:center-novikov-specialization} need not be injective.
 
-The ambient summand is analogous.  Its reconstruction coordinate is
-$\tau=\tau^\circ+t$ with $\tau^\circ=O(q^{-1})$ in the Laurent expansion of
-Theorem~5.18.  Hypothesis~5.7R is invoked only for this residual ambient
-reconstruction tail.  Thus, after the exact low-degree normalizations, the
-ambient contribution has the intrinsic multiplicity of $T$, while the
-$j$-th center contribution has the intrinsic multiplicity of the small
-connection of $C$ after the specialization $\chi_j$.  Direct-sum additivity
-gives \eqref{eq:blowup-nu}.
-
-The coefficient extensions do not alter the endpoint invariants.  On
-numerical curve lattices the blowup map
-\[
- \bar\beta\longmapsto
- \bigl(\phi_*\bar\beta,-E\cdot\bar\beta\bigr)
-\]
-is injective because
-$N^1(\widetilde T)=\phi^*N^1(T)\oplus\mathbf Z[E]$.  Hence the numerical
-Novikov field of $\widetilde T$ embeds in the comparison field.  The center
-map \eqref{eq:center-novikov-specialization} need not be injective, which is
-why its contribution is denoted $\nu_6(C;\chi_j)$ rather than $\nu_6(C)$.
-
-For a projective bundle, Iritani--Koto's Theorem~5.1 gives the corresponding
-decomposition into $r$ copies of the quantum $D$-module of $T$ over a
-Laurent coefficient extension \cite[Theorem~5.1]{IritaniKoto}.  Again the
-comparison and its inverse use only integral powers of the same loop
-coordinate, so Lemma~5.1A applies.  With $u=q^{-1/r}$ their reconstruction
+For a projective bundle put \(u=q^{-1/r}\).  Iritani--Koto's reconstruction
 coordinates satisfy
 \[
  \varsigma_j=\varsigma_j^\circ+s_j,
@@ -566,24 +548,12 @@ coordinates satisfy
  \varsigma_j^\circ
  =r\lambda_j-\frac{2\pi\mathrm{i}j}{r}c_1(V)+O(u)
 \]
-\cite[Theorem~5.1(4), Proposition~5.6]{IritaniKoto}.  Lemma~\ref{lem:exact-low-degree-shifts}
-removes the scalar term and the fixed divisor term.  The initial-coordinate
-normalization is fixed by \cite[(5.11)--(5.12)]{IritaniKoto}.  Hypothesis~5.7R
-is then used only for the residual $O(u)+s_j$ reconstruction tail.  The base
-Novikov map is injective \cite[(1.1) and Remark~5.2]{IritaniKoto}; hence every
-summand contributes the intrinsic value $\nu_6(T)$, and direct-sum additivity
-gives \eqref{eq:projective-bundle-nu}.
-
-The projective-bundle theorem is stated after a global-generation
-normalization.  Tensoring $V$ by a sufficiently negative line bundle does
-not change $\PP_T(V)$, and the intrinsic Novikov embedding is unchanged by
-this twist \cite[Remark~1.2 and Remark~5.2]{IritaniKoto}.  Finally, both
-comparison decompositions preserve cohomological parity on the even
-restriction used here.  Iritani records this explicitly for blowups
-\cite[Section~2]{IritaniNotes}; for projective bundles it follows directly
-from the pullback, pushforward, Fourier-transform, and characteristic-class
-operations in Theorem~5.1 after odd bulk variables are set to zero.  The
-adjoined Novikov roots are coefficient variables, not roots of $z$.
+\cite[Theorem~5.1(4), Proposition~5.6]{IritaniKoto}.  The exact shift lemma
+removes the first two terms, while \cite[(5.11)--(5.12)]{IritaniKoto} fixes
+the initial coordinate.  Hypothesis~5.7R is used only for the residual
+\(O(u)+s_j\) tail.  The base Novikov map is injective
+\cite[(1.1) and Remark~5.2]{IritaniKoto}, so each of the \(r\) ledger blocks
+contributes \(\nu_6(T)\).  This proves \eqref{eq:projective-bundle-nu}.
 \end{proof}
 
 The center map in \eqref{eq:blowup-nu} is not necessarily injective
@@ -711,16 +681,9 @@ not used.
 For (ii), let \(\ell\) be the line class and put
 \(a=\chi(Q^\ell)\).  Strict admissibility gives \(a\ne0\).  Over an
 algebraic closure of \(\operatorname{Frac}A\), the specialized small
-quantum relation for \(\PP^m\), \(m=1,2\), is
-\[
- H^{m+1}=a.
-\]
-Euler multiplication by \((m+1)H\) therefore has the \(m+1\) distinct
-eigenvalues
-\[
- (m+1)\zeta a^{1/(m+1)},
- \qquad \zeta^{m+1}=1.
-\]
+quantum relations are \(H^2=a\) for \(\PP^1\) and \(H^3=a\) for
+\(\PP^2\).  Thus Euler multiplication has respectively two and three
+distinct eigenvalues.
 Every spectral block has rank one, so
 Lemma~\ref{lem:simple-euler-block} gives trivial framed regular monodromy
 on every block.
@@ -1311,9 +1274,7 @@ to \(\chi\), proving \eqref{eq:low-dimensional-vanishing}.
 \begin{theorem}[Conditional birational invariance through dimension four]
 \label{thm:nu6-birational-invariance}
 \coverage{conditional_deduction}%
-\lean{packet_multiplicity_eq_of_preserving_chain,%
-  packet_multiplicity_eq_of_typed_weak_factorization,%
-  packet_multiplicity_birational_in_dimension_four}%
+\lean{packet_multiplicity_birational_in_dimension_four}%
 Assume Hypothesis~5.7R, and Hypothesis~5.7T only for surface centers that are
 neither minimal nor geometrically ruled.
 If \(Y\) and \(Y'\) are birational smooth projective complex varieties of
@@ -1331,15 +1292,16 @@ Consequently, for smooth projective threefolds,
 \end{theorem}
 
 \begin{proof}
-Weak factorization decomposes a birational map between smooth varieties into
-blowups and blowdowns with smooth centers of codimension at least two
-\cite{AKMW}.  In dimension at most four every nontrivial center has dimension
-at most two.  The calculation following
-Definition~\ref{def:strict-novikov-admissible} shows that every center
-specialization in \eqref{eq:blowup-nu} is strictly admissible, and
-Lemma~\ref{lem:center-maps-monomial} shows that it is graded-monomial.
-Proposition~\ref{prop:low-dimensional-vanishing} therefore makes every center
-term zero, so the endpoint values agree at each step.
+The fold \(w_6:\mathcal L_{\mathcal T}\to\mathbf N\) in
+\eqref{eq:framed-fold} uses the same occurrence-indexed block ledger as
+Section~\ref{sec:atomic-one-step}.  Proposition~\ref{prop:framed-operations}
+supplies its projective-bundle and blowup laws, including each actual center
+specialization.  Those specializations are strictly admissible by the
+calculation following Definition~\ref{def:strict-novikov-admissible} and are
+graded-monomial by Lemma~\ref{lem:center-maps-monomial}.  In dimension at
+most four their centers have dimension at most two, so
+Proposition~\ref{prop:low-dimensional-vanishing} kills every correction.
+Theorem~\ref{thm:marker-ledger} now gives the first assertion.
 
 If \(Y,Y'\) are smooth threefolds and
 \(Y\times\PP^1\dashrightarrow Y'\times\PP^1\), apply the first assertion in
@@ -1398,13 +1360,13 @@ original loop coordinate and no logarithm occurs, so the framed regular
 monodromy on this block is the identity.
 \end{proof}
 
-\begin{proposition}[Products with projective space]
+\begin{proposition}[Product with a projective line]
 \label{prop:projective-product-nu}
 \coverage{conditional_deduction}%
 \lean{projectiveProduct_sixthMultiplicity_of_framed_tensor_decomposition}%
-For every smooth projective variety $T$ and every $m\ge0$,
+For every smooth projective variety $T$,
 \[
- \nu_6(T\times\PP^m)=(m+1)\nu_6(T).
+ \nu_6(T\times\PP^1)=2\nu_6(T).
 \]
 This statement is unconditional.
 \end{proposition}
@@ -1413,14 +1375,13 @@ This statement is unconditional.
 The product formula for Gromov--Witten theory
 \cite{BehrendProduct}, followed by the numerical Novikov base change of
 Lemma~\ref{lem:numerical-base-change}, identifies the small numerical
-quantum connection of $T\times\PP^m$ with the tensor-product quantum
+quantum connection of $T\times\PP^1$ with the tensor-product quantum
 connection of the two factors.  On even cohomology this is simply
-$H^{\rm ev}(T)\otimes H^{\rm ev}(\PP^m)$, since projective space has no odd
-cohomology.  After adjoining $q^{1/(m+1)}$ in the projective-space Novikov
-coefficient field, quantum multiplication by
-$c_1(\PP^m)=(m+1)H$ has the $m+1$ distinct eigenvalues
+$H^{\rm ev}(T)\otimes H^{\rm ev}(\PP^1)$.  After adjoining $q^{1/2}$ in
+the projective-line Novikov coefficient field, quantum multiplication by
+$c_1(\PP^1)=2H$ has the two distinct eigenvalues
 \[
- (m+1)\zeta q^{1/(m+1)},\qquad \zeta^{m+1}=1.
+ 2q^{1/2},\qquad -2q^{1/2}.
 \]
 By Lemma~\ref{lem:simple-euler-block}, each corresponding rank-one formal
 factor has trivial framed regular monodromy.  The Levelt--Turrittin
@@ -1429,23 +1390,24 @@ modules.  Hence tensoring a formal factor of the quantum differential module
 of $T$ with one of these rank-one projective-space factors only adds its
 scalar irregular exponential factor and leaves the original-$z$-disc
 regular framed operator of the $T$ factor unchanged.  The extension adjoining
-$q^{1/(m+1)}$ is in the coefficient field and is fixed by the $z$-turn.
-Consequently the product module has $m+1$ copies of every framed cyclotomic
+$q^{1/2}$ is in the coefficient field and is fixed by the $z$-turn.
+Consequently the product module has two copies of every framed cyclotomic
 factor of $T$, counted with algebraic multiplicity.  This gives the formula.
 \end{proof}
 
 \begin{corollary}\label{cor:p3-nu6}
 \coverage{conditional_deduction}%
 \lean{projectiveSpace_sixthMultiplicity_eq_zero_of_product_inputs}%
-The small even framed invariant of projective three-space satisfies
+The small even framed invariants of the two projective endpoints satisfy
 \[
- \nu_6(\PP^3)=0.
+ \nu_6(\PP^3)=\nu_6(\PP^4)=0.
 \]
 \end{corollary}
 
 \begin{proof}
-Apply Proposition~\ref{prop:projective-product-nu} with $T=\operatorname{pt}$
-and $m=3$.
+For $n=3,4$, the relation $H^{\star(n+1)}=q$ makes multiplication by
+$(n+1)H$ generically semisimple after adjoining $q^{1/(n+1)}$.  Every Euler
+block has rank one, so Lemma~\ref{lem:simple-euler-block} gives the claim.
 \end{proof}
 
 \begin{proposition}[The cubic packet]
@@ -1501,7 +1463,7 @@ Eliminating \(c\) gives
  \tag{5.9h}
  \label{eq:cubic-indicial-polynomial}
 \]
-This is the coefficient comparison in Cai's displayed rank-two
+This internal coefficient comparison agrees with Cai's rank-two
 ansatz~\cite[p.~6]{Cai}.
 
 The quadratic formula applied to \eqref{eq:cubic-indicial-polynomial} gives
@@ -1513,7 +1475,7 @@ The quadratic formula applied to \eqref{eq:cubic-indicial-polynomial} gives
 These are exactly the two eigenvalues of the canonical modified residue
 $R_X$ computed in Section~\ref{sec:atomic-one-step}.  In particular,
 Proposition~\ref{prop:residue-discriminant-exponents} identifies their
-squared difference with $\delta^\sharp(\alpha_X)=4/9$; the present
+squared difference with $\delta^\sharp(X)=4/9$; the present
 calculation independently recovers the same representatives from formal
 solutions.
 The constant matrix \(C\) adjoins only the algebraic Novikov coefficient
@@ -1608,10 +1570,10 @@ enters the count.  Moreover, \(N_1(X)=\Z\ell\), and the numerical Novikov
 ring is exactly \(\C[[Q^\ell]]=\C[[q]]\); thus the numerical-Novikov
 convention does not alter the calculation.
 
-The shared reduction in Proposition~\ref{prop:cubic-block-data} is proved
-internally from Cai's displayed small-even matrix; the argument above uses
-only that reduction and the ordinary formal recursion in the original loop
-coordinate.
+The shared reduction in Proposition~\ref{prop:cubic-block-data} was derived
+from Beauville's quantum-product relations.  The argument above uses only
+that reduction and the ordinary formal recursion in the original loop
+coordinate; the citations to Cai record agreement, not an input.
 
 \end{proof}
 
@@ -1657,16 +1619,15 @@ Corollary~\ref{cor:cubic-product-nu} gives \(\nu_6(X\times\PP^1)=4\)
 unconditionally.  Let \(Y\) be a rational smooth projective fourfold.  Then
 \(Y\) is birational to \(\PP^4\), so
 Theorem~\ref{thm:nu6-birational-invariance} gives
-\(\nu_6(Y)=\nu_6(\PP^4)\), while
-Proposition~\ref{prop:projective-product-nu} with
-\(T=\operatorname{pt}\) and \(m=4\) gives
-\(\nu_6(\PP^4)=5\nu_6(\operatorname{pt})=0\).  Since \(4\ne0\), the
+\(\nu_6(Y)=\nu_6(\PP^4)=0\) by Corollary~\ref{cor:p3-nu6}.
+Since \(4\ne0\), the
 fourfold \(X\times\PP^1\) is not rational.
 \end{proof}
 
-This is the framed-monodromy proof of one-step irrationality.  It is
-independent of the atomic argument of Section~\ref{sec:atomic-one-step},
-which proves the same conclusion without either hypothesis.
+This is the framed specialization of the common marker ledger.  Its fold is
+finer but conditional; the rank-two residue fold of
+Section~\ref{sec:atomic-one-step} proves the same irrationality statement
+without either hypothesis.
 
 \subsection{A genus-eight Fano consequence}
 
@@ -1715,11 +1676,5 @@ fourfolds.  By Theorem~\ref{thm:nu6-birational-invariance}, Proposition
 Hence \(\nu_6(V)=2\).
 \end{proof}
 
-The two-hypothesis framed refinement is sharp at this level.  In dimension five
-a weak-factorization center may have dimension three and may itself carry
-the cubic packet, so the low-dimensional vanishing used in
-Theorem~\ref{thm:nu6-birational-invariance} no longer prevents
-cancellation.  The ordinary atom obstruction has the parallel limitation
-recorded after Theorem~\ref{thm:every-cubic}: from the second stabilization
-onward the cubic atom is already allowed as a lower-dimensional
-representative.
+The scope of this refinement is exactly one product stabilization.  No claim
+is made here about any further stabilization.

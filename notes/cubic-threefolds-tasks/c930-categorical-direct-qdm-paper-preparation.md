@@ -2,14 +2,16 @@
 
 **Lane:** cubic-threefolds
 
-**Status:** active; complete 60-page epilogue read and corrected phase-1 overlay finished; manuscript refounding authorized
+**Status:** active; epilogue manuscript refounded, integrated checks passing, author review next
 
 ## Stable entry point
 
 - authoritative manuscript:
-  `papers/cubic-stabilization-epilogue/`
+  [cubic-stabilization-epilogue](../../papers/cubic-stabilization-epilogue/)
 - manuscript main source:
-  `papers/cubic-stabilization-epilogue/cubic_stabilization_epilogue.tex`
+  [cubic_stabilization_epilogue.tex](../../papers/cubic-stabilization-epilogue/cubic_stabilization_epilogue.tex)
+- current review PDF:
+  [irrationality_after_one_stabilization.pdf](../../papers/cubic-stabilization-epilogue/irrationality_after_one_stabilization.pdf)
 - frozen 60-page epilogue baseline:
   `notes/2026-08-20-c930-epilogue-baseline.md`
 - proof memo and paper architecture:
@@ -23,7 +25,7 @@
 - completed claim-level QDM literature audit:
   `notes/2026-08-20-c930-qdm-literature-audit.md`
 
-## Phase 1 result
+## Current result
 
 - The paper has one occurrence-indexed marker-ledger compiler.  A provider
   need certify equality only after the chosen marker is applied; block-level
@@ -39,8 +41,10 @@
   manuscript are withdrawn.  The replacement ledger follows the complete
   60-page epilogue: retain the 18-page cycle core, refound the 34-page quantum
   pair through one compiler, and rewrite the introduction and synthesis.
-- All three existing exact replays passed, and both corrected `amscd` diagrams
-  compile together.  No manuscript source was edited.
+- The authorized manuscript refounding is implemented in the epilogue only.
+  The Gamma-row manuscript remains untouched.  The generic marker ledger, its
+  two `amscd` diagrams, the direct rank-two residue fold, and the framed
+  primitive-sixth fold now appear in the paper itself.
 - A Milnor-style pass now gives the one-blowup mechanism before abstraction,
   states Theorem A immediately after its provider record, and moves the
   categorical quotient after the proof as its reformulation.  A compact
@@ -53,10 +57,15 @@
   current \(m=1\) theorem graph.  It added the missing Beauville bibliography
   entry and fixes the required point-of-use citations for phase 2.
 
-**Next:** begin the epilogue manuscript refounding from the abstract, theorem
-inventory, and section-opening skeleton; then rebuild the quantum pair while
-leaving the cycle core mathematically intact.  The working target is 46--50
-rendered pages, with 52 as an author-review ceiling and 44 only a stretch.
+The integrated manuscript is 50 pages, down from the frozen 60-page baseline.
+`make check` passes: spacing lint, source-only formal correspondence, manuscript
+build, and warning rejection.  The verification map now assigns the generic
+factorization terminals to the common marker theorem and records the Iritani,
+Iritani--Koto, Beauville, weak-factorization, and surface-classification imports
+at their points of use.
+
+**Next:** author review of the 50-page PDF, followed by any requested prose or
+proof revisions and a final standalone release check.
 
 ## Goal
 
