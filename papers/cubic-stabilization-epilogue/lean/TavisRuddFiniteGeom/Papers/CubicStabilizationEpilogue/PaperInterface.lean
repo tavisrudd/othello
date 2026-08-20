@@ -459,6 +459,83 @@ theorem relativeSixAxis_twoPrimaryKernelStandardCoordinates
     (Applications.relativeSixAxisTwoPrimaryKernelCoordinates_isMaximalIsotropic realization).1,
     (Applications.relativeSixAxisTwoPrimaryKernelCoordinates_isMaximalIsotropic realization).2⟩
 
+/-- The three-primary part of the source discriminant as the kernel of the
+polarization reduced modulo three, and the normalized three-primary pairing on
+it.  The reduction modulo three of the cofactor image is defined on the
+discriminant group because `C F = 6`; its kernel is exactly the two-primary
+part, so it embeds the three-primary part into the kernel of the reduced
+polarization, and every vector of that kernel is reached.  On three-torsion
+classes, written as thirds `3 v = F y` of polarization images, the discriminant
+pairing vanishes exactly when nine divides `y ⬝ F z`, and the value
+`(y ⬝ F z)/3` reduces modulo three to minus the dot product on axis
+coordinates tensored with the reduced elliptic pairing, which is the
+manuscript's normalized three-primary form; the comparison sends the class of
+`v` to `-ȳ`, and that form is unchanged by negating both arguments.
+Consequently the image of the three-primary part of the lattice model of the
+isogeny kernel is exactly its own orthogonal complement inside the kernel of
+the reduced polarization, which is the relative maximal isotropy of the
+three-primary kernel read in the model carrying the three-primary coefficient
+heart.  No elliptic three-torsion group scheme, Weil pairing, or geometric
+commutator pairing is constructed, and the normalized form is not here
+identified with the two-copy polarization form of the heart. -/
+theorem relativeSixAxis_threePrimaryDiscriminantPairing
+    (realization : Applications.RelativeSixAxisHomologyRealization) :
+    LinearMap.ker GraphLattices.sixAxisSourceThreePrimaryComparison =
+        GraphLattices.sixAxisSourceDiscriminantPrimaryPart 2 ∧
+      (∀ leftClass ∈ GraphLattices.sixAxisSourceDiscriminantPrimaryPart 3,
+          ∀ rightClass ∈ GraphLattices.sixAxisSourceDiscriminantPrimaryPart 3,
+            (GraphLattices.sixAxisSourceDiscriminantPairing leftClass rightClass = 0 ↔
+              GraphLattices.sixAxisThreeReducedTensorForm
+                (GraphLattices.sixAxisSourceThreePrimaryComparison leftClass)
+                (GraphLattices.sixAxisSourceThreePrimaryComparison rightClass) = 0)) ∧
+        ∀ vector ∈ GraphLattices.sixAxisSourceThreePrimaryDiscriminant,
+          ((∀ other ∈ Applications.relativeSixAxisThreePrimaryKernelImage realization,
+              GraphLattices.sixAxisThreeReducedTensorForm vector other = 0) ↔
+            vector ∈ Applications.relativeSixAxisThreePrimaryKernelImage realization) :=
+  ⟨GraphLattices.sixAxisSourceThreePrimaryComparison_ker,
+    (Applications.relativeSixAxisThreePrimaryKernelImage_eq_perp realization).1,
+    (Applications.relativeSixAxisThreePrimaryKernelImage_eq_perp realization).2⟩
+
+/-- The three-primary kernel in the two-heart coordinates, and its membership
+in the vertical-and-scalar-graph packet.  The coordinate equivalence on the
+kernel of the reduced polarization is an isometry from the normalized
+three-primary form onto the two-copy polarization form of the three-primary
+coefficient heart: a kernel vector has vanishing axis coordinate sum along each
+elliptic homology coordinate, so its fifth axis coordinate is minus the sum of
+the other four, which is exactly the fifth entry of the normalized heart
+representative, and minus the five-term dot product of two kernel slices is the
+coefficient form of the corresponding heart vectors.  Carrying the three-primary
+part of the lattice model of the isogeny kernel across that isometry therefore
+gives a subspace of two heart copies that is maximal isotropic and, by the
+half-dimension count in an eight-dimensional nondegenerate alternating space,
+four-dimensional; it is the vertical copy or one of the three scalar graphs as
+soon as it is stable under the two diagonal generators.  Stability is the only
+remaining input; no elliptic three-torsion group scheme, Weil pairing,
+geometric group action, or geometric classifying map is constructed. -/
+theorem relativeSixAxis_threePrimaryKernelHeartCoordinates
+    (realization : Applications.RelativeSixAxisHomologyRealization) :
+    (∀ left right : GraphLattices.sixAxisSourceThreePrimaryDiscriminant,
+        GraphLattices.sixAxisThreeReducedTensorForm left.1 right.1 =
+          GraphLattices.sixPointThreeHeartPairPolarizationForm
+            (GraphLattices.sixAxisSourceThreePrimaryHeartCoordinates left)
+            (GraphLattices.sixAxisSourceThreePrimaryHeartCoordinates right)) ∧
+      GraphLattices.IsMaximalIsotropic
+          GraphLattices.sixPointThreeHeartPairPolarizationBilinForm
+          (Applications.relativeSixAxisThreePrimaryKernelHeartCoordinates realization) ∧
+        Module.finrank GraphLattices.F3
+            (Applications.relativeSixAxisThreePrimaryKernelHeartCoordinates realization) = 4 ∧
+          (GraphLattices.SixPointThreeHeartPairGeneratorStable
+              (Applications.relativeSixAxisThreePrimaryKernelHeartCoordinates realization) →
+            Applications.relativeSixAxisThreePrimaryKernelHeartCoordinates realization ∈
+              GraphLattices.SixPointThreeHeartStableHalfPacket) :=
+  ⟨GraphLattices.sixAxisThreeReducedTensorForm_eq_pairPolarizationForm,
+    (Applications.relativeSixAxisThreePrimaryKernelHeartCoordinates_isMaximalIsotropic
+      realization).1,
+    (Applications.relativeSixAxisThreePrimaryKernelHeartCoordinates_isMaximalIsotropic
+      realization).2.1,
+    (Applications.relativeSixAxisThreePrimaryKernelHeartCoordinates_isMaximalIsotropic
+      realization).2.2⟩
+
 /-- The discriminant pairing of the six-axis source polarization on integral
 representatives, and its nondegeneracy.  On the classes of two integral
 vectors the pairing is the class modulo one of the rational number

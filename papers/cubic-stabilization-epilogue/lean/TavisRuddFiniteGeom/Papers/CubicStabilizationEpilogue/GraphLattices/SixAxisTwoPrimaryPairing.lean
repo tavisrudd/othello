@@ -20,7 +20,8 @@ elliptic pairing.  This is the manuscript's normalized two-primary pairing.
 
 Results.  The adjugate of the source polarization is `6⁷ C`, so the
 discriminant pairing of two classes vanishes exactly when six divides
-`v ⬝ C w`.  For two-torsion classes, written as halves `2 v = F y` and
+`v ⬝ C w`; that prime-free step is proved with the cofactor identities and is
+used here as stated.  For two-torsion classes, written as halves `2 v = F y` and
 `2 w = F z` of polarization images, that condition becomes divisibility of
 `y ⬝ F z` by four, and the halved value `(y ⬝ F z)/2` reduces modulo two to
 `b(ȳ, z̄)`.  Since the comparison sends the class of `v` to `ȳ`, the
@@ -40,133 +41,6 @@ namespace GraphLattices
 open scoped BigOperators
 open scoped Kronecker
 open scoped Matrix
-
-/-- The five-axis coefficient form on two integral vectors: six times the dot
-product minus the product of the coordinate sums. -/
-theorem sixAxisGram_dotProduct_mulVec (left right : Fin 5 → ℤ) :
-    left ⬝ᵥ (sixAxisGram ℤ *ᵥ right) =
-      6 * (∑ index : Fin 5, left index * right index) -
-        (∑ index : Fin 5, left index) * (∑ index : Fin 5, right index) := by
-  rw [dotProduct]
-  have expanded : ∀ index : Fin 5,
-      left index * (sixAxisGram ℤ *ᵥ right) index =
-        6 * (left index * right index) -
-          left index * (∑ column : Fin 5, right column) := by
-    intro index
-    rw [sixAxisGram_mulVec]
-    ring
-  rw [Finset.sum_congr rfl (fun index _ ↦ expanded index), Finset.sum_sub_distrib,
-    ← Finset.mul_sum, ← Finset.sum_mul]
-
-/-- The source polarization form on two integral vectors, resolved into the
-elliptic homology coordinates: the elliptic pairing applied to the coefficient
-form of the axis slices. -/
-theorem sixAxisSourcePolarization_dotProduct_mulVec (left right : Fin 5 × Fin 2 → ℤ) :
-    left ⬝ᵥ (sixAxisSourcePolarization ℤ *ᵥ right) =
-      ∑ leftSpin : Fin 2, ∑ rightSpin : Fin 2,
-        ellipticWeilPairing ℤ leftSpin rightSpin *
-          (6 * (∑ axis : Fin 5, left (axis, leftSpin) * right (axis, rightSpin)) -
-            (∑ axis : Fin 5, left (axis, leftSpin)) *
-              (∑ axis : Fin 5, right (axis, rightSpin))) := by
-  have slice : ∀ leftSpin rightSpin : Fin 2,
-      ellipticWeilPairing ℤ leftSpin rightSpin *
-          (6 * (∑ axis : Fin 5, left (axis, leftSpin) * right (axis, rightSpin)) -
-            (∑ axis : Fin 5, left (axis, leftSpin)) *
-              (∑ axis : Fin 5, right (axis, rightSpin))) =
-        ∑ axis : Fin 5, ∑ column : Fin 5,
-          left (axis, leftSpin) *
-            (sixAxisGram ℤ axis column * ellipticWeilPairing ℤ leftSpin rightSpin *
-              right (column, rightSpin)) := by
-    intro leftSpin rightSpin
-    have inner : ∑ axis : Fin 5, ∑ column : Fin 5,
-        left (axis, leftSpin) *
-          (sixAxisGram ℤ axis column * ellipticWeilPairing ℤ leftSpin rightSpin *
-            right (column, rightSpin)) =
-        ellipticWeilPairing ℤ leftSpin rightSpin *
-          ((fun axis ↦ left (axis, leftSpin)) ⬝ᵥ
-            (sixAxisGram ℤ *ᵥ fun column ↦ right (column, rightSpin))) := by
-      rw [dotProduct, Finset.mul_sum]
-      refine Finset.sum_congr rfl ?_
-      intro axis _
-      rw [Matrix.mulVec, dotProduct, Finset.mul_sum, Finset.mul_sum]
-      refine Finset.sum_congr rfl ?_
-      intro column _
-      ring
-    rw [inner, sixAxisGram_dotProduct_mulVec]
-  rw [Finset.sum_congr rfl (fun leftSpin _ ↦
-    Finset.sum_congr rfl (fun rightSpin _ ↦ slice leftSpin rightSpin))]
-  rw [dotProduct, Fintype.sum_prod_type]
-  rw [Finset.sum_comm]
-  refine Finset.sum_congr rfl ?_
-  intro leftSpin _
-  rw [Finset.sum_comm]
-  refine Finset.sum_congr rfl ?_
-  intro axis _
-  rw [Matrix.mulVec, dotProduct, Fintype.sum_prod_type, Finset.mul_sum, Finset.sum_comm]
-  refine Finset.sum_congr rfl ?_
-  intro column _
-  rw [Finset.mul_sum]
-  refine Finset.sum_congr rfl ?_
-  intro rightSpin _
-  rw [sixAxisSourcePolarization_apply]
-
-/-- The adjugate of the source polarization is `6⁷` times its integral
-cofactor. -/
-theorem sixAxisSourcePolarization_adjugate :
-    (sixAxisSourcePolarization ℤ).adjugate =
-      (6 ^ 7 : ℤ) • sixAxisSourcePolarizationCofactor := by
-  have adjugateProduct : (sixAxisSourcePolarization ℤ).adjugate * sixAxisSourcePolarization ℤ =
-      (6 ^ 8 : ℤ) • (1 : Matrix (Fin 5 × Fin 2) (Fin 5 × Fin 2) ℤ) := by
-    rw [Matrix.adjugate_mul, sixAxisSourcePolarization_det]
-  have cofactorProduct :
-      ((6 ^ 7 : ℤ) • sixAxisSourcePolarizationCofactor) * sixAxisSourcePolarization ℤ =
-        (6 ^ 8 : ℤ) • (1 : Matrix (Fin 5 × Fin 2) (Fin 5 × Fin 2) ℤ) := by
-    rw [Matrix.smul_mul, sixAxisSourcePolarizationCofactor_mul, smul_smul]
-    norm_num
-  have difference :
-      ((sixAxisSourcePolarization ℤ).adjugate -
-        (6 ^ 7 : ℤ) • sixAxisSourcePolarizationCofactor) * sixAxisSourcePolarization ℤ = 0 := by
-    rw [Matrix.sub_mul, adjugateProduct, cofactorProduct, sub_self]
-  have scaled : (6 ^ 8 : ℤ) •
-      ((sixAxisSourcePolarization ℤ).adjugate -
-        (6 ^ 7 : ℤ) • sixAxisSourcePolarizationCofactor) = 0 := by
-    calc (6 ^ 8 : ℤ) •
-          ((sixAxisSourcePolarization ℤ).adjugate -
-            (6 ^ 7 : ℤ) • sixAxisSourcePolarizationCofactor)
-        = ((sixAxisSourcePolarization ℤ).adjugate -
-              (6 ^ 7 : ℤ) • sixAxisSourcePolarizationCofactor) *
-            ((sixAxisSourcePolarization ℤ).det •
-              (1 : Matrix (Fin 5 × Fin 2) (Fin 5 × Fin 2) ℤ)) := by
-          rw [sixAxisSourcePolarization_det, Matrix.mul_smul, Matrix.mul_one]
-      _ = ((sixAxisSourcePolarization ℤ).adjugate -
-              (6 ^ 7 : ℤ) • sixAxisSourcePolarizationCofactor) *
-            (sixAxisSourcePolarization ℤ * (sixAxisSourcePolarization ℤ).adjugate) := by
-          rw [Matrix.mul_adjugate]
-      _ = 0 := by rw [← Matrix.mul_assoc, difference, Matrix.zero_mul]
-  have vanishing : (sixAxisSourcePolarization ℤ).adjugate -
-      (6 ^ 7 : ℤ) • sixAxisSourcePolarizationCofactor = 0 := by
-    refine smul_right_injective (Matrix (Fin 5 × Fin 2) (Fin 5 × Fin 2) ℤ)
-      (by norm_num : (6 ^ 8 : ℤ) ≠ 0) ?_
-    show (6 ^ 8 : ℤ) • ((sixAxisSourcePolarization ℤ).adjugate -
-      (6 ^ 7 : ℤ) • sixAxisSourcePolarizationCofactor) = (6 ^ 8 : ℤ) • 0
-    rw [scaled, smul_zero]
-  exact sub_eq_zero.mp vanishing
-
-/-- The discriminant pairing of two classes vanishes exactly when six divides
-the cofactor form of two representatives. -/
-theorem sixAxisSourceDiscriminantPairing_mk_eq_zero_iff
-    (left right : Fin 5 × Fin 2 → ℤ) :
-    sixAxisSourceDiscriminantPairing (Submodule.Quotient.mk left)
-          (Submodule.Quotient.mk right) = 0 ↔
-      (6 : ℤ) ∣ left ⬝ᵥ (sixAxisSourcePolarizationCofactor *ᵥ right) := by
-  rw [sixAxisSourceDiscriminantPairing,
-    discriminantPairing_mk_eq_zero_iff (sixAxisSourcePolarization_transpose ℤ)
-      sixAxisSourcePolarization_det_ne_zero,
-    sixAxisSourcePolarization_det, sixAxisSourcePolarization_adjugate,
-    Matrix.smul_mulVec, dotProduct_smul, smul_eq_mul,
-    show (6 : ℤ) ^ 8 = 6 ^ 7 * 6 by ring]
-  exact mul_dvd_mul_iff_left (by norm_num : (6 ^ 7 : ℤ) ≠ 0)
-
 
 /-- Reduction of an integral vector, coordinatewise. -/
 theorem integralTwoReduction_apply (vector : Fin 5 × Fin 2 → ℤ) (index : Fin 5 × Fin 2) :

@@ -44,31 +44,6 @@ namespace GraphLattices
 open scoped Kronecker
 open scoped Matrix
 
-/-- The five-axis coefficient cofactor commutes with the coefficient matrix, so
-their product is six times the identity on either side. -/
-theorem sixAxisGramCofactor_mul :
-    sixAxisGramCofactor * sixAxisGram ℤ = (6 : ℤ) • (1 : Matrix (Fin 5) (Fin 5) ℤ) := by
-  ext row column
-  fin_cases row <;> fin_cases column <;>
-    norm_num [sixAxisGram, sixAxisGramCofactor, Matrix.mul_apply, Fin.sum_univ_succ,
-      Matrix.smul_apply, Matrix.one_apply] <;> decide
-
-/-- The negative of the elliptic homology pairing is also its left inverse. -/
-theorem neg_ellipticWeilPairing_mul :
-    (- ellipticWeilPairing ℤ) * ellipticWeilPairing ℤ = 1 := by
-  ext row column
-  fin_cases row <;> fin_cases column <;>
-    norm_num [ellipticWeilPairing, Matrix.mul_apply, Fin.sum_univ_succ, Matrix.one_apply]
-
-/-- The integral cofactor of the source polarization multiplies it to six times
-the identity on the left as well. -/
-theorem sixAxisSourcePolarizationCofactor_mul :
-    sixAxisSourcePolarizationCofactor * sixAxisSourcePolarization ℤ =
-      (6 : ℤ) • (1 : Matrix (Fin 5 × Fin 2) (Fin 5 × Fin 2) ℤ) := by
-  rw [sixAxisSourcePolarization, sixAxisSourcePolarizationCofactor,
-    ← Matrix.mul_kronecker_mul, sixAxisGramCofactor_mul, neg_ellipticWeilPairing_mul,
-    Matrix.smul_kronecker, Matrix.one_kronecker_one]
-
 /-- Reducing the entries of the integral source polarization modulo two gives
 the two-torsion source polarization. -/
 theorem sixAxisSourcePolarization_map_intCast :
@@ -117,13 +92,6 @@ theorem integralTwoReduction_apply_eq_zero_iff (vector : Fin 5 × Fin 2 → ℤ)
   show ((vector index : ℤ) : F2) = 0 ↔ (2 : ℤ) ∣ vector index
   rw [ZMod.intCast_zmod_eq_zero_iff_dvd]
   norm_num
-
-/-- Scalar multiplication passes through the cokernel presentation of the
-discriminant group. -/
-theorem sixAxisSourceDiscriminant_mk_smul (scalar : ℤ) (vector : Fin 5 × Fin 2 → ℤ) :
-    (Submodule.Quotient.mk (scalar • vector) : sixAxisSourceDiscriminantGroup) =
-      scalar • Submodule.Quotient.mk vector :=
-  rfl
 
 /-- The comparison of the two models: the reduction modulo two of the cofactor
 image of a representative.  The cofactor identity `C F = 6` makes it depend

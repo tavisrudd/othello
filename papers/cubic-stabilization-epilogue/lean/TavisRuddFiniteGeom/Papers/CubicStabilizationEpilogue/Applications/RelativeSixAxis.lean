@@ -5,6 +5,9 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAx
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisTwoPrimaryLatticeComparison
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisTwoPrimaryPairing
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisTwoPrimaryStandardCoordinates
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisThreePrimaryLatticeComparison
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisThreePrimaryPairing
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisThreePrimaryHeartCoordinates
 
 /-!
 # The relative six-axis packet over its integral homology realization
@@ -46,9 +49,21 @@ symplectic tensor factor, it identifies the rank-eight discriminant with two
 copies of the coefficient heart and proves that the five projective-line
 packet members are exactly the diagonally stable maximal-isotropic subspaces.
 
+Both primary parts are then read in their coefficient models.  The two-primary
+part of the kernel image, carried into the standard symplectic coordinates, is
+maximal isotropic for the rank-eight tensor form; the three-primary part,
+carried into two copies of the three-primary coefficient heart, is maximal
+isotropic for the two-copy polarization form and therefore four-dimensional.
+Each is a member of the corresponding packet — the five-member projective-line
+packet at two, the vertical copy or one of the three scalar graphs at three —
+as soon as it is stable under the two diagonal generators, which is the single
+remaining input on either side.
+
 No relative scheme, torsion local system, geometric group action, or Weil
-pairing of an actual elliptic curve is constructed here, and no three-primary
-geometric identification is made.
+pairing of an actual elliptic curve is constructed here.  The three-primary
+statements are lattice-level in the same sense as the two-primary ones: no
+geometric three-torsion discriminant is identified with the coefficient model,
+and no group action realizing the stability hypothesis is constructed.
 -/
 
 namespace TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue
@@ -330,6 +345,73 @@ theorem relativeSixAxisTwoPrimaryKernelCoordinates_isMaximalIsotropic
       GraphLattices.sixAxisSourceTwoPrimaryKernelCoordinates_stablePacket
         realization.jacobianPolarizationPrincipal realization.polarizationPullback stable⟩
 
+/-- The image, in the kernel of the three-torsion reduction of the source
+polarization, of the three-primary part of the lattice model of the isogeny
+kernel on one fibre. -/
+def relativeSixAxisThreePrimaryKernelImage
+    (realization : RelativeSixAxisHomologyRealization) :
+    Set (Fin 5 × Fin 2 → GraphLattices.F3) :=
+  GraphLattices.sixAxisSourceThreePrimaryKernelImage realization.polarizationPullback
+
+/-- Across the identification of the two three-primary models, the discriminant
+pairing of three-torsion classes vanishes exactly when the normalized
+three-primary form of their comparison images does, and the image of the
+three-primary kernel is exactly its own orthogonal complement for that form
+inside the kernel of the reduced polarization. -/
+theorem relativeSixAxisThreePrimaryKernelImage_eq_perp
+    (realization : RelativeSixAxisHomologyRealization) :
+    (∀ leftClass ∈ GraphLattices.sixAxisSourceDiscriminantPrimaryPart 3,
+        ∀ rightClass ∈ GraphLattices.sixAxisSourceDiscriminantPrimaryPart 3,
+          (GraphLattices.sixAxisSourceDiscriminantPairing leftClass rightClass = 0 ↔
+            GraphLattices.sixAxisThreeReducedTensorForm
+              (GraphLattices.sixAxisSourceThreePrimaryComparison leftClass)
+              (GraphLattices.sixAxisSourceThreePrimaryComparison rightClass) = 0)) ∧
+      ∀ vector ∈ GraphLattices.sixAxisSourceThreePrimaryDiscriminant,
+        ((∀ other ∈ relativeSixAxisThreePrimaryKernelImage realization,
+            GraphLattices.sixAxisThreeReducedTensorForm vector other = 0) ↔
+          vector ∈ relativeSixAxisThreePrimaryKernelImage realization) :=
+  ⟨fun _ leftMember _ rightMember ↦
+      GraphLattices.sixAxisSourceThreePrimaryPairing_eq_zero_iff_reducedForm leftMember
+        rightMember,
+    fun _ member ↦
+      GraphLattices.sixAxisSourceThreePrimaryKernelImage_eq_perp
+        realization.jacobianPolarizationPrincipal realization.polarizationPullback member⟩
+
+/-- The three-primary part of the lattice model of the isogeny kernel on one
+fibre, carried into two copies of the three-primary coefficient heart. -/
+def relativeSixAxisThreePrimaryKernelHeartCoordinates
+    (realization : RelativeSixAxisHomologyRealization) :
+    Submodule GraphLattices.F3
+      (GraphLattices.SixPointThreeHeart × GraphLattices.SixPointThreeHeart) :=
+  GraphLattices.sixAxisSourceThreePrimaryKernelHeartCoordinates
+    realization.polarizationPullback
+
+/-- The transported three-primary kernel is maximal isotropic for the two-copy
+polarization form, hence four-dimensional, and is therefore the vertical copy
+or one of the three scalar graphs as soon as it is stable under the two
+diagonal generators.  Neither the dimension nor maximal isotropy is an input:
+both come from the lattice-level self-duality of the three-primary kernel
+through the isometry of the normalized three-primary form with the two-copy
+polarization form. -/
+theorem relativeSixAxisThreePrimaryKernelHeartCoordinates_isMaximalIsotropic
+    (realization : RelativeSixAxisHomologyRealization) :
+    GraphLattices.IsMaximalIsotropic
+        GraphLattices.sixPointThreeHeartPairPolarizationBilinForm
+        (relativeSixAxisThreePrimaryKernelHeartCoordinates realization) ∧
+      Module.finrank GraphLattices.F3
+          (relativeSixAxisThreePrimaryKernelHeartCoordinates realization) = 4 ∧
+        (GraphLattices.SixPointThreeHeartPairGeneratorStable
+            (relativeSixAxisThreePrimaryKernelHeartCoordinates realization) →
+          relativeSixAxisThreePrimaryKernelHeartCoordinates realization ∈
+            GraphLattices.SixPointThreeHeartStableHalfPacket) :=
+  ⟨GraphLattices.sixAxisSourceThreePrimaryKernelHeartCoordinates_isMaximalIsotropic
+      realization.jacobianPolarizationPrincipal realization.polarizationPullback,
+    GraphLattices.sixAxisSourceThreePrimaryKernelHeartCoordinates_finrank
+      realization.jacobianPolarizationPrincipal realization.polarizationPullback,
+    fun stable ↦
+      GraphLattices.sixAxisSourceThreePrimaryKernelHeartCoordinates_stablePacket
+        realization.jacobianPolarizationPrincipal realization.polarizationPullback stable⟩
+
 /-- The two-primary discriminant identification `D₂ ≃ H₂ ⊗ E[2]`, constructed
 from the two-torsion coordinates and from the computed kernel of the realized
 source polarization rather than supplied. -/
@@ -528,6 +610,42 @@ structure RelativeSixAxisConclusion
           (relativeSixAxisTwoPrimaryKernelCoordinates (geometry.homology parameter)).map
               GraphLattices.sixAxisStandardDiscriminantPairLinearEquiv.toLinearMap ∈
             GraphLattices.SixPointHeartStableHalfPacket)
+  /-- On every fibre, and across the identification of the two three-primary
+  models, the discriminant pairing of three-torsion classes vanishes exactly
+  when the normalized three-primary form of their comparison images does, and
+  the image of the three-primary kernel is exactly its own orthogonal
+  complement for that form inside the kernel of the reduced polarization. -/
+  threePrimaryPairingAndKernelImage :
+    ∀ (geometry : RelativeSixAxisGeometricInput objects) (parameter : Base),
+      (∀ leftClass ∈ GraphLattices.sixAxisSourceDiscriminantPrimaryPart 3,
+          ∀ rightClass ∈ GraphLattices.sixAxisSourceDiscriminantPrimaryPart 3,
+            (GraphLattices.sixAxisSourceDiscriminantPairing leftClass rightClass = 0 ↔
+              GraphLattices.sixAxisThreeReducedTensorForm
+                (GraphLattices.sixAxisSourceThreePrimaryComparison leftClass)
+                (GraphLattices.sixAxisSourceThreePrimaryComparison rightClass) = 0)) ∧
+        ∀ vector ∈ GraphLattices.sixAxisSourceThreePrimaryDiscriminant,
+          ((∀ other ∈
+              relativeSixAxisThreePrimaryKernelImage (geometry.homology parameter),
+                GraphLattices.sixAxisThreeReducedTensorForm vector other = 0) ↔
+            vector ∈ relativeSixAxisThreePrimaryKernelImage (geometry.homology parameter))
+  /-- On every fibre the three-primary part of the lattice model of the isogeny
+  kernel, carried into two copies of the three-primary coefficient heart, is
+  maximal isotropic for the two-copy polarization form and four-dimensional,
+  and is the vertical copy or one of the three scalar graphs as soon as it is
+  stable under the two diagonal generators. -/
+  threePrimaryKernelHeartCoordinates :
+    ∀ (geometry : RelativeSixAxisGeometricInput objects) (parameter : Base),
+      GraphLattices.IsMaximalIsotropic
+          GraphLattices.sixPointThreeHeartPairPolarizationBilinForm
+          (relativeSixAxisThreePrimaryKernelHeartCoordinates (geometry.homology parameter)) ∧
+        Module.finrank GraphLattices.F3
+            (relativeSixAxisThreePrimaryKernelHeartCoordinates
+              (geometry.homology parameter)) = 4 ∧
+          (GraphLattices.SixPointThreeHeartPairGeneratorStable
+              (relativeSixAxisThreePrimaryKernelHeartCoordinates
+                (geometry.homology parameter)) →
+            relativeSixAxisThreePrimaryKernelHeartCoordinates (geometry.homology parameter) ∈
+              GraphLattices.SixPointThreeHeartStableHalfPacket)
   /-- The two-primary discriminant identification `D₂ ≃ H₂ ⊗ E[2]` is
   constructed from the realized polarization rather than supplied: in the
   supplied two-torsion coordinates it is the computed kernel equivalence of the
@@ -659,6 +777,11 @@ theorem relativeSixAxis_of_geometricInputs
       relativeSixAxisTwoPrimaryKernelImage_eq_perp (otherGeometry.homology parameter),
     fun otherGeometry parameter ↦
       relativeSixAxisTwoPrimaryKernelCoordinates_isMaximalIsotropic
+        (otherGeometry.homology parameter),
+    fun otherGeometry parameter ↦
+      relativeSixAxisThreePrimaryKernelImage_eq_perp (otherGeometry.homology parameter),
+    fun otherGeometry parameter ↦
+      relativeSixAxisThreePrimaryKernelHeartCoordinates_isMaximalIsotropic
         (otherGeometry.homology parameter),
     fun otherGeometry parameter _ ↦
       (otherGeometry.heartTensorTorsionCoordinates parameter).apply_symm_apply _,
