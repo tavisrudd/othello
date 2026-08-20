@@ -2,7 +2,7 @@
 
 **Lane:** `cubic-threefolds`
 
-**Date:** 2026-08-19
+**Date:** 2026-08-20
 
 > **LIVE MAP ONLY.** This is the routing and state surface for this lane.
 > Per-task detail belongs in the task cards under `notes/cubic-threefolds-tasks/`;
@@ -42,23 +42,26 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   caller chooses which generic even-block data to observe, which blocks to
   mark, and what commutative-monoid value to retain, while the coefficient,
   comparison, ledger, and weak-factorization modules remain reusable.  The
-  first concrete instance is the smallest marker proving cubic
-  one-stabilization irrationality.  The interface now has a probe-indexed
-  marked-block layer, free symmetric-monoidal 2-monad, Beck--Chevalley and
-  center-localization laws, plus audited sibling instances for Guéré/BFGMP
-  evaluated coarse blocks and the KKPYY chemical formula.  A bicategory of
-  theory morphisms now yields an additive \(m\ge2\) no-go, an ideal-quotient
-  telescope, and the operation-framed \(\operatorname{Rep}(\mathbf G_a)\)
-  specialization with its compulsory higher exceptional strings.  The
-  sparse-shadow extension now separates object reconstruction, marker
-  descent, residual torsors, and genuine loss; it includes kernel-profile and
-  cyclic-Krylov reconstruction, Reader/indexed-State/Writer effects, residual
-  optics, and pseudofunctorial mapping between path types.  The concrete
-  \(m=2\) target is now the pointed formal-monodromy cyclic shadow projected
-  through one common threshold or reduced-nearby-cycle object and then
-  quotiented by one global row-null ideal; this is distinguished explicitly
-  from the secondary \(J_3\) route.  A sixteen-check finite law replay, an
-  eleven-check typed Haskell toy, and the original cubic replay are green.
+  first concrete instance is the minimal marker proving cubic
+  one-stabilization irrationality; Guéré/BFGMP and KKPYY are audited
+  specializations.  The sparse-shadow extension includes kernel profiles,
+  cyclic Krylov data, Reader/indexed-State/Writer effects, optics, path
+  functors, torsor holonomy, and a semilinear simple-character criterion.
+  The false naked row-null ideal has been removed: comparison now lands in an
+  augmented operator-row category, whose output-kernel ideal is genuinely
+  two-sided.  For \(m=2\), the pointed primitive-sixth endpoint contrast and
+  fivefold center reduction are exact, but no unconditional blowup provider
+  is known.  Generic-point localization proves rank is the universal
+  support-null \(K_0\)-character, and the whole full-rank comparison defect is
+  one boundary-to-rank leakage covector.  Wall mutations and multiplicity-one
+  characters kill that covector when their analytic hypotheses hold; Hodge,
+  raw grading, and formal monodromy do not supply those hypotheses.  The
+  conditional relative-cap route reduces the remaining rank-two-normal
+  problem to a same-exposed-face cancellation against the hostile \(-1/R\)
+  pilot only after identifying its scalar channel with the analytic leakage.  The
+  thirty-five-check finite law replay, eleven-check typed Haskell toy, and
+  original cubic replay are green.  C925 remains open at the one-object
+  fixed-phase Gamma/support or relative-cap cancellation provider.
   Mathematics only; no manuscript or Lean edits.  Card:
   `../cubic-threefolds-tasks/c925-modular-direct-qdm-proof-packet.md`.
 - **C924 — closed 2026-08-19.** The direct ordinary-QDM route proves

@@ -1,5 +1,5 @@
 {
-  "check_count": 31,
+  "check_count": 35,
   "checks": {
     "augmented_row_output_kernel_is_two_sided": "pass",
     "bittner_relation_codimension_2_through_6": "pass",
@@ -11,15 +11,18 @@
     "formal_coordinate_pseudonaturality_not_raw_equality": "pass",
     "free_sym_monad_and_fold_fusion": "pass",
     "ga_clebsch_gordan_and_higher_pb_coherence": "pass",
+    "generic_rank_is_universal_support_null_character": "pass",
     "guere_cofinite_probe_and_collision_guard": "pass",
     "hodge_pairing_operator_do_not_force_point_row": "pass",
     "indexed_base_change_and_beck_chevalley_shadow": "pass",
     "kkpyy_atomization_and_chemical_formula": "pass",
+    "laurent_grading_shift_collides_row_character": "pass",
     "m2_pointed_primary_shadow_ignores_row_null_packets": "pass",
     "multi_sector_sparse_shadows_recover_zero_exponent": "pass",
     "optic_residual_and_path_functor_naturality": "pass",
     "orlov_gamma_lift_forces_blowup_rank_row": "pass",
     "provider_implications_are_not_reversible": "pass",
+    "rank_leakage_covector_is_sole_quotient_defect": "pass",
     "reader_indexed_state_writer_composition": "pass",
     "row_kernel_two_sided_closure_trivializes_m2": "pass",
     "row_line_stabilizer_affine_group_law": "pass",
@@ -30,6 +33,7 @@
     "split_vs_exact_k0_retention": "pass",
     "torsor_path_holonomy_and_endpoint_obstruction": "pass",
     "unmarked_constituent_no_go_m_2_through_6": "pass",
+    "wall_mutations_fix_common_open_point": "pass",
     "zero_mode_dual_cyclic_row_descends_through_quotient": "pass",
     "zero_mode_row_annihilation_is_necessary": "pass"
   },

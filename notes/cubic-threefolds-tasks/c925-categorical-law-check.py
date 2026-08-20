@@ -9,7 +9,7 @@ from __future__ import annotations
 
 from collections import Counter
 from fractions import Fraction
-from itertools import permutations
+from itertools import permutations, product
 import json
 
 
@@ -722,13 +722,13 @@ def main():
 
     negative_degree_tail = {0: Fraction(1), -1: Fraction(-1)}
     second_factor = {0: Fraction(1), 2: Fraction(3)}
-    product = exponential_product(negative_degree_tail, second_factor)
+    convolution_product = exponential_product(negative_degree_tail, second_factor)
     growth_weight = lambda exponent: -exponent
     tail_face = max(negative_degree_tail, key=growth_weight)
     second_face = max(second_factor, key=growth_weight)
-    product_face = max(product, key=growth_weight)
+    product_face = max(convolution_product, key=growth_weight)
     assert product_face == tail_face + second_face
-    assert product[product_face] == (
+    assert convolution_product[product_face] == (
         negative_degree_tail[tail_face] * second_factor[second_face]
     )
     cancelling_top_face = {-1: Fraction(1), 0: Fraction(2)}
@@ -1011,6 +1011,100 @@ def main():
         [[Fraction(1), Fraction(0)]], repeated_character_shear
     )[0] == [Fraction(1), Fraction(1)]
     checks["simple_retained_character_forces_row_line"] = "pass"
+
+    # The Rees/Laurent grading z*d/dz + mu is not separating when two base
+    # weights differ by an allowed Laurent exponent: the exponent shifts one
+    # branch into the same total character as the other.
+    ramification_degree = 2
+    ambient_mu = Fraction(1)
+    center_mu = Fraction(1, 2)
+    center_laurent_power = ambient_mu - center_mu
+    assert center_laurent_power * ramification_degree == Fraction(1)
+    ambient_total_weight = Fraction(0) + ambient_mu
+    center_total_weight = center_laurent_power + center_mu
+    assert ambient_total_weight == center_total_weight
+    checks["laurent_grading_shift_collides_row_character"] = "pass"
+
+    # A wall transvection/mutation fixes a common-open point vector when the
+    # point is Euler-orthogonal to the wall.  Removing orthogonality allows the
+    # same rank-one operation to move the point and its pairing row.
+    point = [Fraction(1), Fraction(0), Fraction(0)]
+    wall = [Fraction(0), Fraction(1), Fraction(0)]
+    euler_pairing = [
+        [Fraction(1), Fraction(0), Fraction(0)],
+        [Fraction(0), Fraction(1), Fraction(0)],
+        [Fraction(0), Fraction(0), Fraction(1)],
+    ]
+    assert dot(point, matrix_vector(euler_pairing, wall)) == 0
+    wall_mutation = [
+        [Fraction(1), Fraction(0), Fraction(0)],
+        [Fraction(0), Fraction(1), Fraction(1)],
+        [Fraction(0), Fraction(0), Fraction(1)],
+    ]
+    assert matrix_vector(wall_mutation, point) == point
+    nonorthogonal_mutation = [
+        [Fraction(1), Fraction(0), Fraction(0)],
+        [Fraction(1), Fraction(1), Fraction(0)],
+        [Fraction(0), Fraction(0), Fraction(1)],
+    ]
+    assert matrix_vector(nonorthogonal_mutation, point) != point
+    checks["wall_mutations_fix_common_open_point"] = "pass"
+
+    # Modding numerical K0 out by every proper-support direction leaves the
+    # one-dimensional generic-rank quotient.  Hence a support-null additive
+    # row is uniquely a scalar multiple of rank.
+    support_basis = [
+        [Fraction(0), Fraction(1), Fraction(0), Fraction(0)],
+        [Fraction(0), Fraction(0), Fraction(1), Fraction(0)],
+        [Fraction(0), Fraction(0), Fraction(0), Fraction(1)],
+    ]
+    support_null_rows = []
+    for candidate in product(range(-1, 2), repeat=4):
+        row_candidate = [Fraction(value) for value in candidate]
+        if all(dot(row_candidate, basis) == 0 for basis in support_basis):
+            support_null_rows.append(row_candidate)
+    assert all(row[1:] == [Fraction(0)] * 3 for row in support_null_rows)
+    assert [Fraction(1), Fraction(0), Fraction(0), Fraction(0)] in support_null_rows
+    checks["generic_rank_is_universal_support_null_character"] = "pass"
+
+    # For codimension-one rank quotients, the only obstruction to descending
+    # an isomorphism is its boundary-to-rank leakage row (the top-right block).
+    rank_row = [Fraction(1), Fraction(0), Fraction(0)]
+    zero_leakage = [
+        [Fraction(2), Fraction(0), Fraction(0)],
+        [Fraction(3), Fraction(1), Fraction(1)],
+        [Fraction(4), Fraction(0), Fraction(1)],
+    ]
+    second_zero_leakage = [
+        [Fraction(5), Fraction(0), Fraction(0)],
+        [Fraction(1), Fraction(1), Fraction(0)],
+        [Fraction(2), Fraction(1), Fraction(1)],
+    ]
+    leaking_map = [
+        [Fraction(1), Fraction(1), Fraction(0)],
+        [Fraction(0), Fraction(1), Fraction(0)],
+        [Fraction(0), Fraction(0), Fraction(1)],
+    ]
+    boundary_basis = (
+        [Fraction(0), Fraction(1), Fraction(0)],
+        [Fraction(0), Fraction(0), Fraction(1)],
+    )
+    assert all(
+        dot(rank_row, matrix_vector(zero_leakage, basis)) == 0
+        for basis in boundary_basis
+    )
+    zero_leakage_composite = matrix_multiply(
+        second_zero_leakage, zero_leakage
+    )
+    assert all(
+        dot(rank_row, matrix_vector(zero_leakage_composite, basis)) == 0
+        for basis in boundary_basis
+    )
+    assert any(
+        dot(rank_row, matrix_vector(leaking_map, basis)) != 0
+        for basis in boundary_basis
+    )
+    checks["rank_leakage_covector_is_sole_quotient_defect"] = "pass"
 
     # The m=2 specialization retains primitive-sixth support seen by the
     # point row, not the unmarked primitive packet count.  Row-null exceptional

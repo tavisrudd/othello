@@ -817,7 +817,7 @@ This unifies three useful prospective projections:
 
 | retained action | selected character | remaining provider obligation |
 |---|---|---|
-| common-open support idempotent | generic component | construct a QDM realization of localization and prove comparison linearity |
+| generic-point localization quotient | generic rank | construct a QDM bridge to the quotient and prove comparison naturality; there is no canonical QDM idempotent |
 | cohomological/asymptotic grading | unique top/rank weight | prove the fixed-phase Gamma comparison preserves that grading |
 | finite Fourier-support algebra | evaluation at exponent zero | identify one global normalized Gamma channel with this realization |
 
@@ -895,3 +895,172 @@ was also accepted through the explicit strict-saturation hypothesis.
 reduced the provider to either one multiplicity-one retained character or one
 finite same-face cancellation.  Neither geometric input is in the audited
 sources, and neither has been assumed.
+
+## Block 6 -- generic localization and the one-covector defect
+
+The last source pass tested the simple-character candidates against the
+actual fixed-phase structures rather than their decategorified names.
+
+1. The semilinear version of Theorem 5.2 is exact: an algebra isomorphism
+   \(\alpha:A_-\to A_+\), compatible characters, and an
+   \(\alpha\)-semilinear comparison still force the row line when both
+   character-Hom spaces are one-dimensional.  Over an Artin base those Hom
+   objects should be invertible line modules; choosing scalar frames creates
+   a holonomy residual rather than removing it.
+2. Formal monodromy fails multiplicity one already at the endpoint:
+   \(X\times\mathbf P^2\) contains three copies of each primitive-sixth
+   character.  Adding a center can only add occurrences.
+3. The raw top cohomology line is one-dimensional, but the Gamma point row is
+   a calibrated flat section, not a bare \(\mu\)-eigenrow.  On a ramified
+   Laurent/Rees module, \(z\partial_z+\mu\) has character collisions whenever
+   two \(\mu\)-weights differ by an allowed Laurent exponent.  The exact toy
+   is green.  A bounded lattice could restore extremality only if its
+   preservation were separately proved.
+4. A common-open skyscraper is fixed by every left or right mutation through
+   a wall-supported admissible subcategory, because it is orthogonal to that
+   subcategory in both directions.  Pairing preservation then forces the row
+   if analytic continuation is known on that one Gamma section to realize the
+   mutation word.  The source proves this in its toric/ordinary-flop
+   calibrations and labels the arbitrary-window continuation conjectural.
+
+### Theorem 6.1 -- generic rank is universal among support-null characters
+
+For smooth integral \(Y\), quotienting \(K_0(Y)\) by the classes supported on
+proper closed subsets gives
+
+\[
+K_0(Y)/K_0^{\mathrm{proper}}(Y)\cong K_0(K(Y))\cong\mathbf Z,
+\]
+
+via generic rank.  This follows by spreading a generic stable isomorphism to
+a dense open and applying localization.  Hence every additive character
+killing all proper-supported classes is uniquely a scalar multiple of rank.
+The exact finite quotient test is green.
+
+This theorem completes the high \(K_0\)-quotient and its uniqueness:
+birational maps identify function fields canonically and every Orlov
+exceptional component dies in the quotient.  It does **not** construct the
+QDM realization map or prove its naturality under analytic continuation, so
+it does not complete the high bridge.
+
+By devissage, a normalized additive row equals rank once it vanishes on
+\([\mathcal O_Z]\) for every proper integral closed subscheme \(Z\).  This is
+a concrete coniveau checklist for an already-defined additive \(K_0\)
+functional, not a solution: the Gamma realization and fixed-phase
+support-nullity are analytic claims.  For \(m=2\), the fivefold dimension
+reduction permits checking only the exceptional primitive generators that
+survive only after a common primitive projector and its intertwining have
+been supplied.  Identifying that restricted target with a relative-cap
+channel is another provider input, not a consequence of the exposed-face
+law.
+
+### Proposition 6.2 -- boundary-to-rank leakage is the sole full-row defect
+
+For exact rows \(0\to N_\pm\to V_\pm\xrightarrow{r_\pm}K\to0\) and an
+isomorphism \(\Phi:V_-\to V_+\), define
+
+\[
+\delta_\Phi=r_+\Phi|_{N_-}.
+\]
+
+Then \(\delta_\Phi=0\) exactly when \(\Phi\) descends to the generic-rank
+quotients, equivalently \(r_+\Phi=c r_-\) for \(c\ne0\).  Zero leakage is
+closed under composition and inverse.  The 35-check finite harness verifies
+this and the source-to-boundary counterexample.
+
+This is the full Gamma--rank provider, stronger than the minimal \(m=2\)
+primary Boolean.  On the primitive-sixth projection, only primary leakage is
+relevant, and a zero projected row must be handled in the zero-row
+\(\mathsf{AugPrim}\) interface rather than by a codimension-one quotient.
+After an analytic identification of the scalar relative-cap channel with the
+leakage, the \(-1/R\) term is a candidate associated-graded component of the
+full point-row leakage.  The group-algebra theorem neither supplies that
+identification nor proves that the component survives after all relative
+channels are summed.
+
+## Hostile audit 6 -- final two-hour boundary
+
+This audit was taken at 7209 seconds of active goal time.
+
+| item | final status | hostile conclusion |
+|---|---|---|
+| \(X\times\mathbf P^2\) versus \(\mathbf P^5\) pointed endpoint | **proved** | The primitive-sixth pointed row is nonzero on the cubic stabilization and zero on projective space. |
+| fivefold center reduction | **proved** | Only rank-two normals of threefold centers remain capable of carrying the relevant primitive packet. |
+| augmented operator-row consumer | **proved/tested** | It replaces the false naked row-null ideal and composes with correct variance. |
+| dual zero-mode quotient | **proved algebraically** | Decorated Rees/Stokes descent still needs strict exactness and functorial strict saturation. |
+| generic-point \(K_0\) quotient | **proved/tested** | Rank is the universal proper-support-null additive character; this proves high-quotient uniqueness only. |
+| Gamma/QDM bridge to that quotient | **open** | Objectwise rank calibration does not prove naturality of arbitrary fixed-phase blowup continuation. |
+| simple/semilinear character route | **proved interface** | Every audited candidate either has multiplicity greater than one, does not identify the Gamma row, or lacks comparison linearity. |
+| wall-mutation route | **proved categorical implication** | Arbitrary-blowup one-object Gamma/window compatibility remains conjectural outside the stated calibrations. |
+| Laurent grading route | **refuted as stated** | Laurent shifts collide total grading characters; a bounded lattice would itself need a preservation theorem. |
+| relative-cap exposed-face route | **proved algebraic test only** | The scalar channel has not been identified with analytic leakage, and no same-face \(+1/R\) cancellation is proved. |
+| primitive-sixth restriction | **conditional** | It requires a common projector, \(T\)-intertwining, and identification of the projected analytic kernel; zero rows remain in \(\mathsf{AugPrim}\). |
+| \(m=2\) | **not proved** | The arbitrary rank-two-normal fixed-phase provider remains absent. |
+
+### No-smuggling checklist
+
+- Marked threshold compatibility was never inferred from tailwise equality or
+  path provenance.
+- The module zero-mode lemma was not promoted to strict Stokes descent.
+- The naked row kernel was explicitly falsified as a two-sided ideal and
+  replaced by a lawful output-kernel category.
+- No arbitrary-master gauged admissibility was assumed; the direct blowup
+  criterion remains conditional on its own end-to-end analytic map.
+- Contractibility of a weak-factorization chain was used only to propagate a
+  chosen lift, never to identify the canonical endpoint.
+- Hodge equivariance, pairing, formal monodromy, raw grading, and support were
+  each tested for multiplicity/marking failure before use.
+- Generic rank uniqueness was not confused with existence or naturality of a
+  Gamma--QDM bridge.
+- Primitive projection and relative-cap leakage identification were retained
+  as explicit provider inputs.
+
+### Final EJ -- extra juice
+
+1. The software-style interface now has a minimal proof-carrying state:
+   generic-rank quotient, analytic comparison, and one leakage covector.  The
+   large ambient comparison matrix is optic residual.
+2. Semilinear character forcing handles coordinate pullbacks correctly; over
+   a base, its character Hom is a line bundle whose holonomy is the residual
+   torsor.
+3. Generic-point localization and coniveau devissage give a concrete support
+   checklist.  Once an additive Gamma/\(K_0\) functional exists, one
+   normalization and vanishing on proper-support generators force rank.
+4. The next calculation can be scalar and face-local: on a rank-two normal of
+   a threefold center, identify the first forbidden relative-cap coefficient
+   with primary leakage and search for the required same-face \(+1/R\)
+   channel.
+
+### Final TT -- Terence-Tao pass
+
+- Attack \(\delta_\Phi\), not the whole Stokes or Gamma--Orlov matrix.
+- Before using a reconstruction shadow, state whether it is complete or name
+  the residual torsor/line and its endpoint condition.
+- Before using a character, compute its multiplicity on the actual stabilized
+  and exceptional packets.
+- Before using support or associated grading, construct the realization map
+  that makes the analytic row an additive functional there.
+- A decisive hostile example remains valuable: compute the fixed-phase point
+  leakage for the simplest nonsplit rank-two normal.  A nonzero coefficient
+  kills the universal one-row conjecture; a structural zero reveals the
+  missing theorem.
+
+## Mystery ledger
+
+| mystery | status after EJ/TT | exact remaining evidence/gate |
+|---|---|---|
+| Is a naked row-null class an ideal? | **settled: no** | \(M_2\) counterexample; use the augmented output functor or row-stabilizer groupoid. |
+| Can sparse shadows recover an unmarked lift generically? | **settled: no** | The surveyed positive papers prove completeness or retain a bridge/frame; torsor holonomy gives the exact obstruction. |
+| Do Hodge, monodromy, or grading select the Gamma row? | **settled: no with current data** | Repeated Tate/primitive characters and Laurent grading collisions give exact countermodels. |
+| Is the high support-null character canonical? | **settled: yes on \(K_0\)** | Generic-point localization gives the rank quotient; no QDM naturality follows. |
+| Does arbitrary fixed-phase blowup continuation have zero primary leakage? | **open, owned by C925** | Need one-object Gamma/window compatibility, a strict support bridge, or a direct primary row calculation for every rank-two normal of a threefold center. |
+| What cancels the hostile \(-1/R\) face? | **open, owned by C925** | Identify relative-cap coefficients with analytic leakage and exhibit a same-face \(+1/R\) contribution. |
+| Can a bounded grading lattice restore multiplicity one? | **open but lower EV** | Must construct a common preserved lattice/filtration; raw grading connection is insufficient. |
+| Does the full rank bridge extend to all \(m\)? | **conditional implication settled; provider open** | The categorical implication is dimension-free, but no arbitrary-dimensional Gamma/support bridge exists; higher centers also obstruct the \(J_{m+1}\) route. |
+
+### Final boundary
+
+The two-hour objective is complete as a rigorous search and reduction, not as
+an \(m=2\) theorem.  **No unconditional proof of irrationality for
+\(X\times\mathbf P^2\) was obtained.**  C925 remains active at the
+one-object fixed-phase Gamma/support or identified relative-cap leakage gate.

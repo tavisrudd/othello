@@ -84,7 +84,12 @@ It currently contains:
   transports a chosen lift but cannot identify it with a canonical endpoint
   without a bridge/Beck--Chevalley certificate, and a simple-character
   criterion under which a genuinely separating retained action forces the row
-  line; and
+  line, together with the Laurent-grading collision which rules out retaining
+  only \(z\partial_z+\mu\), and the orthogonal common-open point theorem for
+  wall-supported mutations, plus the generic-point localization theorem
+  making rank the universal support-null additive character and the canonical
+  boundary-to-rank leakage covector measuring the entire comparison defect;
+  and
 - a complete-source audit of Iritani's 2026 Hodge/cyclotomic blowup note,
   including the proved exceptional-cusp point symbol and the remaining
   large-radius Gamma frame gap; and
@@ -94,7 +99,7 @@ The finite categorical law model is
 `notes/cubic-threefolds-tasks/c925-categorical-law-check.py`, with exact
 checked output
 `notes/cubic-threefolds-tasks/c925-categorical-law-check.json`.  It passes
-thirty-one tests, including a negative collision test showing why Guéré's
+thirty-five tests, including a negative collision test showing why Guéré's
 unit-shift separation contract is mandatory, the \(m\ge2\) constituent
 no-go, \(\mathbf G_a\) Clebsch--Gordan through size five, and composition of
 row-preserving shears, plus exact coordinate-pseudonaturality,
@@ -106,9 +111,11 @@ forcing, nonreversible provider
 implications, positive and Stokes-sheared negative multi-sector
 reconstruction tests, pointed \(m=2\) endpoint checks, exposed
 exponential-face filtration and comma-bridge laws, the torsor-holonomy and
-prescribed-endpoint obstruction, and simple retained-character row forcing.
-A
-separate executable
+prescribed-endpoint obstruction, simple retained-character row forcing, the
+Laurent grading-character collision, common-open mutation fixedness, and
+universal generic-rank support-nullity.  A
+rank-leakage test identifies the sole codimension-one quotient obstruction.
+A separate executable
 Haskell toy at
 `notes/cubic-threefolds-tasks/c925-sparse-shadow-path-toy.hs` verifies the
 typed path translator, payload naturality, indexed bind laws, lens laws, and
