@@ -3248,8 +3248,17 @@
       "last": 928,
       "purpose": "standalone blown-up theta-divisor integral lattice paper",
       "sequence": 361
+    },
+    {
+      "count": 1,
+      "first": 929,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 929,
+      "purpose": "Relax CharZero to characteristic not 2,3,5 on the Paper I node classification",
+      "sequence": 362
     }
   ],
-  "next_id": 929,
+  "next_id": 930,
   "schema": "codex-task-id-allocations-v1"
 }
