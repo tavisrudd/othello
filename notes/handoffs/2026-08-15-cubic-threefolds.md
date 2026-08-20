@@ -43,8 +43,12 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   mark, and what commutative-monoid value to retain, while the coefficient,
   comparison, ledger, and weak-factorization modules remain reusable.  The
   first concrete instance is the smallest marker proving cubic
-  one-stabilization irrationality.  Mathematics only; no manuscript or Lean
-  edits.  Card:
+  one-stabilization irrationality.  The interface now has a probe-indexed
+  marked-block layer, free symmetric-monoidal 2-monad, Beck--Chevalley and
+  center-localization laws, plus audited sibling instances for Guéré/BFGMP
+  evaluated coarse blocks and the KKPYY chemical formula; an eight-check
+  finite law replay and the original cubic replay are green.  Mathematics
+  only; no manuscript or Lean edits.  Card:
   `../cubic-threefolds-tasks/c925-modular-direct-qdm-proof-packet.md`.
 - **C924 — closed 2026-08-19.** The direct ordinary-QDM route proves
   irrationality of `X x P^1` after one mandatory local repair: compare the

@@ -48,11 +48,12 @@ full formal type.
 
 | Goal | Modules |
 | --- | --- |
-| Understand or implement the marker interface | 0, 2, 7, 14 |
+| Understand or implement the marker interface | 0, 2, 7, 14, 17 |
 | Audit coefficient and transport safety | 1, 3--6, 8 |
-| Reuse the fourfold birational obstruction | 7--9 and Theorem 16.1 |
+| Reuse the fourfold birational obstruction | 7--9 and Theorem 18.1 |
 | Check only the cubic instance | 4, 10--13 |
 | See the whole proof in one diagram | Diagram 13.1 |
+| Compare Guéré/BFGMP and KKPYY | 7.6 and 17 |
 
 ---
 
@@ -87,6 +88,40 @@ qdmInvariant y = foldMap mark (genericEvenSpectralBlocks y).
 The rest of the packet proves that the Iritani comparison theorems act as
 lawful adapters for this interface and that weak factorization consumes only
 the resulting monoid-valued ledger.
+
+The direct-QDM instance has only one generic probe.  To encompass evaluated
+or analytic atom theories as well, the outer interface is slightly more
+general:
+
+```haskell
+class IndexedBirationalBlockTheory t where
+  data Context t
+  data Probe t
+  data LocalBlock t
+  data Mark t
+  data Atom t
+
+  probes        :: Geometry -> Filter (Probe t)
+  splitAt       :: Probe t -> Geometry -> FreeSym (LocalBlock t)
+  retainMark    :: LocalBlock t -> Groupoid (Mark t)
+  atomize       :: LocalBlock t -> Atom t
+  compareSum    :: Comparison -> Span (FreeSym (LocalBlock t))
+  separate      :: FiniteFamily (LocalBlock t) -> Eventually (Probe t)
+
+  -- laws, not executable fields
+  baseChange    :: PseudofunctorLaw t
+  comparisonBC  :: BeckChevalleyLaw t
+  sumCoherence  :: SymmetricMonoidalLaw t
+  atomNaturality :: ComparisonCongruenceLaw t
+```
+
+Here `Filter` specifies what counts as a sufficiently general probe,
+`FreeSym` is the finite-multiset construction, and `Span` allows comparison
+theorems that canonically identify blocks only after passing to a common
+domain.  The direct-QDM proof uses the singleton filter, honest comparison
+isomorphisms, and the identity atomizer.  Module 17 gives the nontrivial
+Guéré and KKPYY instances.  The extra parameters are dormant in Modules
+1--16, so they do not enlarge the hypotheses of the cubic proof.
 
 ---
 
@@ -892,6 +927,201 @@ Thus the category-theoretic proof has three layers:
 \]
 and the numerical contradiction is obtained only after applying \(\pi_0\).
 
+## 7.4 The finite-multiset 2-monad
+
+The construction \(\operatorname{Sym}\) is the free symmetric-monoidal
+2-monad on groupoids.  Its unit and multiplication are
+\[
+\eta_{\mathcal G}:\mathcal G\longrightarrow\operatorname{Sym}(\mathcal G),
+\qquad B\longmapsto[B],
+\tag{7.12}
+\]
+and
+\[
+\mu_{\mathcal G}:
+\operatorname{Sym}(\operatorname{Sym}(\mathcal G))
+\longrightarrow\operatorname{Sym}(\mathcal G),
+\tag{7.13}
+\]
+where \(\mu\) flattens a finite multiset of finite multisets.  Up to the
+canonical symmetric-monoidal coherence isomorphisms, they satisfy
+\[
+\mu\circ\operatorname{Sym}(\eta)=1
+=\mu\circ\eta_{\operatorname{Sym}},
+\qquad
+\mu\circ\operatorname{Sym}(\mu)
+=\mu\circ\mu_{\operatorname{Sym}}.
+\tag{7.14}
+\]
+
+These are the exact analogues of `singleton`, `flatten`, and associativity in
+the software interface.  A marker functor is the unique symmetric-monoidal
+extension of its value on one block.  Consequently its fold obeys
+\[
+\operatorname{fold}_w(0)=0,
+\quad
+\operatorname{fold}_w(x\oplus y)
+=\operatorname{fold}_w(x)+\operatorname{fold}_w(y),
+\tag{7.15}
+\]
+and, for every monoid map \(f:A\to A'\), the fusion law
+\[
+f\circ\operatorname{fold}_w
+=\operatorname{fold}_{f\circ w}.
+\tag{7.16}
+\]
+Equation (7.16) is Proposition 2.5 in universal form.  Mac Lane coherence
+means that no ledger can depend on the bracketing or ordering chosen for a
+finite direct sum.
+
+## 7.5 Indexed blocks and Beck--Chevalley
+
+Let \(\mathsf{Coeff}\) be the category whose arrows are the lawful generic
+field extensions and formal coordinate changes used by the comparison
+theorems.  Scalar extension defines a covariant pseudofunctor
+\[
+\mathscr Q:\mathsf{Coeff}\longrightarrow\mathsf{Gpd},
+\qquad K\longmapsto\mathsf{QBlock}^{\mathrm{ev}}_K.
+\tag{7.17}
+\]
+Its identity and composition constraints say
+\[
+B_K\cong B,
+\qquad
+(B_L)_M\cong B_M
+\quad(K\to L\to M).
+\tag{7.18}
+\]
+The Grothendieck construction \(\int\mathscr Q\to\mathsf{Coeff}\) is an
+opfibration: a block and every one of its scalar extensions are one indexed
+object, not unrelated copies.
+
+Every comparison adapter is required to be pseudonatural in this index.  Thus
+for each coefficient or coordinate square used in a spine, the two routes
+\[
+\text{base change then compare},
+\qquad
+\text{compare then base change}
+\]
+are canonically isomorphic.  This is the Beck--Chevalley law needed here.  It
+implies that a composite of comparison spans can be formed by a fibre product
+over a common coefficient context and that changing the chosen common
+algebraic closure cannot change the resulting block ledger.  Modules 3, 5,
+and 6 verify this law for the two adapters actually used in the cubic proof.
+
+## 7.6 Probe-indexed block theories
+
+An **indexed birational block theory** consists of the following data.
+
+1. A category of coefficient contexts and an indexed groupoid of decorated
+   carriers as in (7.17).
+2. For every variety \(Y\), a set \(P(Y)\) of probes with a filter
+   \(\mathfrak F_Y\).  A statement is *eventual* if it holds on a member of
+   \(\mathfrak F_Y\).
+3. For every \(p\in P(Y)\), a finite split object
+   \[
+   \operatorname{Split}_p(Y)
+   \in\operatorname{Sym}(\mathsf{Block}_p).
+   \tag{7.19}
+   \]
+4. Comparison spans that commute with reindexing, preserve finite sums, obey
+   Beck--Chevalley, and preserve and reflect eventual marker classes.  A
+   filter-cofinal span is sufficient; a direct eventual-equivalence theorem
+   is also allowed.
+5. A **separation contract**: for each finite collection of comparison
+   summands, there is an eventual set of probes on which the relevant spectra
+   are disjoint, or else the summands remain explicitly labelled and are not
+   merged.
+6. Optionally, a marking fibration
+   \(\mathsf{MarkedBlock}_p\to\mathsf{Block}_p\), whose fibre records the
+   labels, vectors, or subobjects the caller elects to retain.
+7. An atomizer from marked or unmarked local blocks to a quotient set or
+   groupoid, natural for all comparison spans.
+
+The present direct-QDM theory is the special case in which \(P(Y)\) is a
+singleton generic point, the filter is trivial, the separation contract is
+Lemma 5.1, and the atomizer identifies only regular isomorphisms and generic
+base changes.  Evaluation theories use a nontrivial probe filter.  Analytic
+atom theories use connected components of an unramified spectral cover and a
+larger atomizing congruence.  These specializations are audited in Module 17.
+
+The separation contract is essential.  At a special probe, two different
+summand eigenvalues may coincide and their generalized eigenspaces merge.
+Additivity of blockwise observations is therefore asserted only after
+separation or in a labelled-summand category.  This is precisely the point at
+which Guéré's evaluation method is more general than the singleton-generic
+interface.
+
+## 7.7 Symmetric-monoidal center localization
+
+Let \(L_d\) freely adjoin an isomorphism
+\[
+\mathscr B(Z)\cong\mathbbm 1
+\qquad(\dim Z\le d)
+\tag{7.20}
+\]
+and close under tensor product.  This localization has the universal
+property
+\[
+\operatorname{Fun}^{\otimes}
+\bigl(L_d\operatorname{Sym}(\mathsf{QBlock}^{\mathrm{ev}}),\mathcal A\bigr)
+\simeq
+\left\{
+F:\operatorname{Sym}(\mathsf{QBlock}^{\mathrm{ev}})\to\mathcal A:
+F\mathscr B(Z)\cong\mathbbm1
+\right\}.
+\tag{7.21}
+\]
+On the right, the functor is equipped with coherent choices of the displayed
+trivializations.  For a discrete target \(\underline A\), such a
+trivialization exists uniquely exactly when the marker value is zero.
+It follows formally that
+\[
+L_dL_d\simeq L_d,
+\qquad
+L_eL_d\simeq L_e\quad(d\le e).
+\tag{7.22}
+\]
+On connected components, (7.20) is exactly the monoid congruence (9.1).
+Thus center annihilation, factorization of center-vanishing markers,
+idempotence, and compatibility of nested dimension cutoffs are consequences
+of one universal construction.
+
+## 7.8 The optional Bittner backend
+
+Let \(G(\mathcal L)\) be the Grothendieck group of the universal block monoid.
+For a blowup of a smooth projective \(Y\) along a smooth codimension-\(r\)
+center \(Z\), let
+\(E=\mathbf P_Z(N_{Z/Y})\) be its exceptional divisor.  The two ledgers give
+\[
+\mathcal B(\operatorname{Bl}_ZY)
+=\mathcal B(Y)+(r-1)\mathcal B(Z),
+\qquad
+\mathcal B(E)=r\mathcal B(Z).
+\tag{7.23}
+\]
+Therefore in \(G(\mathcal L)\),
+\[
+\mathcal B(\operatorname{Bl}_ZY)-\mathcal B(E)
+=\mathcal B(Y)-\mathcal B(Z).
+\tag{7.24}
+\]
+Bittner's presentation now gives a unique additive homomorphism
+\[
+K_0(\mathsf{Var}_{\mathbf C})
+\longrightarrow G(\mathcal L)
+\tag{7.25}
+\]
+whose value on a smooth projective variety is its block ledger.
+The empty variety maps to the empty block sum, so the remaining Bittner
+relation is satisfied as well.
+
+This is an optional backend, not the foundation of the proof.  It loses every
+noncancellative consumer: for example, the group completion of the Boolean
+`or` monoid is trivial.  Nor is (7.25) asserted to be a ring homomorphism; that
+would require a product/Künneth law for the relevant generic big QDMs, which
+has not been proved here.
+
 ## Marker coarsening as postcomposition
 
 If \(F:\mathcal M\to\mathcal N\) is a forgetful morphism, the triangle
@@ -901,7 +1131,7 @@ If \(F:\mathcal M\to\mathcal N\) is a forgetful morphism, the triangle
 &\searrow_{W_{\mathcal N}}&\downarrow F_*\\
 &&B
 \end{array}
-\tag{7.11}
+\tag{7.26}
 \]
 commutes.  Thus exact signatures, multisets, counts, and existence markers are
 different consumers of the same universal block spectrum.
@@ -1657,6 +1887,60 @@ The dependency direction is therefore
 \tag{14.3}
 \]
 
+## 14.6 Coarsening by finite Kan extension
+
+Let \(f:O_{\mathrm{rich}}\to O_{\mathrm{coarse}}\) forget part of an
+observation.  On free commutative monoids it induces
+\[
+f_!: \mathbf N^{(O_{\mathrm{rich}})}
+\longrightarrow \mathbf N^{(O_{\mathrm{coarse}})},
+\qquad
+(f_!m)(c)=\sum_{f(o)=c}m(o).
+\tag{14.4}
+\]
+This is the finite-support left Kan extension along the map of discrete
+observation categories.  It gives aggregation automatically: all rich
+signatures with the same coarse signature have their multiplicities added.
+For Boolean-valued predicates the same left-Kan formula uses `or` and means
+"there exists a rich signature over \(c\)"; the right-Kan formula uses `and`
+and means "every rich signature over \(c\)".  Infinite fibres require the
+corresponding target colimits or limits, so this packet uses only finite
+support or explicitly supplies that completeness.
+
+Postcomposition from Definition 2.4 and Kan aggregation solve different
+problems.  Postcomposition changes the answer attached to each block.  The
+map \(f_!\) changes the indexing set on which a whole signature multiset is
+reported.  Their standard mate/fusion square commutes, so one may aggregate
+before or after applying a compatible monoid-valued marker.
+
+## 14.7 Retention through endomorphism categories
+
+For a nilpotent leading term, a block may be regarded first as an object
+\((V,N)\) of the category of finite-length \(K[t]\)-modules, with \(t\)
+acting as \(N\).  There is a strict retention ladder
+\[
+\text{isomorphism groupoid}
+\longrightarrow K_0^{\mathrm{split}}
+\longrightarrow K_0^{\mathrm{exact}}
+\longrightarrow \mathbf Z.
+\tag{14.5}
+\]
+Over an algebraically closed field, Krull--Schmidt makes the split group free
+on the Jordan blocks \(J_n\), so it retains the Jordan partition.  The exact
+group of nilpotent finite-length \(K[t]\)-modules remembers only total length,
+because every composition factor is \(K[t]/(t)\).  Thus passing from split to
+exact \(K_0\) destroys precisely the extension data that distinguish Jordan
+blocks.
+
+Likewise, an invertible formal-monodromy operator is an object of
+\(\operatorname{Rep}_K(\mathbf Z)\), equivalently a finite-dimensional
+\(K[t,t^{-1}]\)-module.  Direct sum sends it to multiplication of
+characteristic polynomials.  One may therefore retain the full representation
+groupoid, its split class, or only the characteristic polynomial.  This
+categorical ladder explains why a higher-stabilization theory should not pass
+to an exact Grothendieck group before deciding whether extension classes are
+part of the marking.
+
 ---
 
 # Module 15. Hostile audit
@@ -1726,6 +2010,39 @@ No.  Raw block spectra may differ by center summands.  Equality occurs only in
 the center quotient \(\mathcal L_{>2}\), after which any center-vanishing
 marker functor may be applied.
 
+## H11. Does group completion silently discard Boolean obstructions?
+
+No.  Center localization is performed in the effective symmetric-monoidal
+category or its commutative monoid.  The Bittner/Grothendieck-group backend is
+optional and explicitly unavailable for Boolean `or`, whose group completion
+is trivial.
+
+## H12. Is Guéré's evaluation map being treated as a field extension?
+
+No.  It is a probe in an indexed theory.  Its cofinite quantifier and possible
+spectral collisions are retained.  The direct-sum law is invoked only after
+the unit-shift separation used in Guéré's own proof.
+
+## H13. Does the KKPYY specialization invent a category of atoms?
+
+No.  Local spectral blocks form the categorified input.  The published atom
+equivalence is then represented by its presented thin groupoid solely so that
+the free symmetric-monoidal compiler may act on it.  No natural atom
+morphisms are asserted.
+
+## H14. Does the generalized compiler prove the imported frameworks?
+
+No.  It subsumes their transport, atomization, marking, and retention laws.
+Non-Archimedean convergence, motivic actions, monodromy irreducibility, and
+the Iritani comparison theorems remain provider obligations.
+
+## H15. Can a coarsening destroy extension data accidentally?
+
+Yes, unless its target is chosen deliberately.  Module 14.7 records the exact
+loss: split \(K_0\) retains Jordan-block multiplicities, while exact \(K_0\)
+retains only total length.  The interface therefore makes the retention
+quotient an explicit parameter rather than a default.
+
 ---
 
 # Module 16. Source boundary
@@ -1744,8 +2061,16 @@ The proof uses the following external inputs.
 5. The standard classification of minimal smooth projective surfaces with
    non-nef canonical class.
 
-The proof does not use Cai, KKPY/HYZZ reconstruction, Hodge atoms,
+The optional backend in Module 7.8 additionally uses F. Bittner,
+*The universal Euler characteristic for varieties of characteristic zero*,
+Compositio Math. 140 (2004), for the smooth-projective blowup presentation of
+\(K_0(\mathsf{Var}_{\mathbf C})\).  It is not an input to the cubic proof.
+
+The proof does not use Cai, KKPYY/HYZZ reconstruction, Hodge atoms,
 David--Hertling, or a recursive comparison of asymptotic completions.
+Module 17 cites Guéré, Benedetti--Fay--Guéré--Manivel--Perrin, and
+KKPYY only to test the general interface against their frameworks; none is an
+additional input to Modules 10--13.
 
 The exact identities in §10.3 were replayed in rational symbolic arithmetic by
 `notes/cubic-threefolds-tasks/c924-finite-cubic-check.py`; its checked output is
@@ -1754,11 +2079,280 @@ matrix calculation remains the mathematical proof.
 
 ---
 
-# Final modular statement
+# Module 17. External-framework specialization audit
+
+This module asks for literal law-preserving instances of Module 7.6.  It does
+not count a shared slogan or a similar blowup formula as subsumption.
+
+## 17.1 Guéré's evaluated coarse-block instance
+
+Fix the morphism and coefficient ring used to define Guéré's evaluations.
+The instance data are as follows.
+
+- A probe is a nonvanishing \(K\)-evaluation map
+  \[
+  \mathrm{ev}:\widehat R^*_{Z,K}\longrightarrow S_K^*.
+  \tag{17.1}
+  \]
+  The filter is the cofinite filter: a statement is eventual when it fails for
+  only finitely many evaluation maps.
+- The local blocks are the generalized eigenspaces
+  \[
+  E^Y_{\mathrm{ev},\alpha}
+  =\ker(\mathrm{ev}(\kappa_\tau)-\alpha)^m,
+  \qquad m\gg0.
+  \tag{17.2}
+  \]
+- The decoration remembers Guéré's tuple
+  \[
+  o_Y(\mathrm{ev},\alpha)
+  =(\rho,\nu,\nu',\gamma),
+  \tag{17.3}
+  \]
+  measuring the Hodge-class part, Hochschild-degree-two and degree-one
+  parts, and the rank of \(\mathrm{ev}(\kappa_\tau)-\alpha\) on the block.
+- Scaling an evaluation and translating it in the unit direction reindex the
+  spectrum by a bijection and preserve (17.3).  They are therefore lawful
+  probe morphisms, not changes to the retained value.
+
+Define Boolean violation markers
+\[
+\begin{aligned}
+\operatorname{bad}_{\clubsuit}(\rho,\nu,\nu',\gamma)
+&=[\nu\ne0\ \text{and}\ \rho\le2],\\
+\operatorname{bad}_{\heartsuit}(\rho,\nu,\nu',\gamma)
+&=[\nu\ne0,\ \nu'=0,\ \gamma\le1].
+\end{aligned}
+\tag{17.4}
+\]
+For each probe, fold these values with Boolean `or` over all eigenblocks.
+The resulting function on probes is considered in the quotient Boolean
+algebra
+\[
+\{0,1\}^{P(Y)}/\mathrm{Fin},
+\tag{17.5}
+\]
+where two functions agree if they differ on only finitely many probes.  Then
+Guéré's Properties \(\clubsuit\) and \(\heartsuit\) are exactly the
+statements that the corresponding violation class in (17.5) is zero.
+
+Iritani's evaluated blowup isomorphism, in Guéré's Corollary 37, gives the
+comparison span and adds the four measurements at a fixed eigenvalue.  A
+unit translation of a center evaluation can make its finite spectrum disjoint
+from any prescribed finite collection.  Guéré's Proposition 38 uses exactly
+this separation operation, and Corollary 41 composes it along weak
+factorization.  Thus the \(\clubsuit/\heartsuit\) formalism is a genuine
+instance of the probe-indexed interface.
+
+Equivalently, let \(V_\diamond(Y)\) be `true` when the support of the
+violation function is infinite, i.e. when its class in (17.5) is nonzero.
+Guéré's Proposition 38 is exactly the Boolean blowup law
+\[
+V_\diamond(\operatorname{Bl}_Z Y)
+=V_\diamond(Y)\lor V_\diamond(Z),
+\qquad \diamond\in\{\clubsuit,\heartsuit\}.
+\tag{17.6}
+\]
+Multiplicity \(r-1\) is invisible to the idempotent `or` consumer.
+
+It is **not** an instance of Definition 2.1 without the extension in Module
+7.6: evaluation is a specialization rather than a generic field extension,
+specialized spectra can collide, and the invariant contains a cofinite
+quantifier over probes.
+
+## 17.2 The Benedetti--Fay--Guéré--Manivel--Perrin marked instance
+
+The BFGMP criterion uses the same evaluated blocks, but adds a transported
+mark.  For a Hodge-general Fano fourfold in their hypotheses, monodromy
+irreducibility and equivariance put the whole vanishing cohomology into one
+generalized eigenspace.  Define a marked local block to be
+\[
+(E_{\mathrm{ev},\alpha},
+  H^4_{\mathrm{van}}\hookrightarrow E_{\mathrm{ev},\alpha}),
+\tag{17.7}
+\]
+and retain its Hochschild-degree pieces and the codimension of its Hodge
+classes.  Their pairwise-disjoint maximal-spectrum choice supplies the
+separation contract along a chosen weak factorization.  Surface inequalities
+then rule out every possible carrier of the marked block.
+
+This is a specialization of the **pointed** or **marked** version of Module
+7.6, in which the fibre over a local block is a groupoid of retained labels or
+subobjects and comparison spans must transport the label.  It demonstrates
+why `select` cannot always be merely a predicate on an unmarked isomorphism
+class: the distinguished monodromy subrepresentation is part of the proof
+state.
+
+The framework recovers the architecture of BFGMP Theorem 4.1, conditional on
+its geometric inputs (Hodge generality, monodromy irreducibility, and the
+surface bounds).  It does not turn those inputs into formal consequences of
+the QDM ledger.
+
+## 17.3 The KKPYY atom and chemical-formula instance
+
+For a \((G,\epsilon_G)\)-symmetric Weil cohomology theory, take as carrier the
+non-Archimedean maximal \(G\)-equivariant A-model \(F\)-bundle on the
+\(G\)-fixed base.  Over the locus where the reduced spectral cover is
+unramified, a local block is a connected component of that cover together
+with its generalized-eigenvalue \(F\)-bundle and \(G\)-representation.
+The split object records such a component with multiplicity equal to the
+degree of that component over the base; this is the multiplicity in the
+chemical formula.
+
+The atomizer is the quotient generated by:
+
+1. automorphisms and disjoint-union identifications;
+2. the local correspondence induced by the canonical blowup decomposition;
+3. the local correspondence induced by the projective-bundle decomposition.
+
+This is precisely KKPYY Definition 5.16.  Since KKPYY explicitly note that
+atoms have no natural morphisms and do not themselves form a category, the
+categorical implementation uses the **thin groupoid presented by this
+equivalence relation**.  It does not invent morphisms between the underlying
+atoms.
+
+Applying \(\operatorname{Sym}\) and \(\pi_0\) gives
+\[
+\operatorname{CF}_G(Y)
+\in\mathbf N^{(\operatorname{Atoms}^K_G)},
+\tag{17.8}
+\]
+the KKPYY chemical formula.  Their spectral, blowup, and projective-bundle
+Theorems 4.1, 4.5, and 4.11 discharge the split/comparison laws.  Their
+dimension filtration
+\[
+\operatorname{Atoms}_{G,\dim\le0}^K
+\subset\operatorname{Atoms}_{G,\dim\le1}^K
+\subset\cdots
+\tag{17.9}
+\]
+is the atom-level form of center localization, and Proposition 5.17 is the
+corresponding non-rationality theorem.
+
+Thus the positive chemical-formula and dimension-filtration portion of
+KKPYY is an exact specialization of the generalized compiler.  The internal
+construction of maximal analytic \(F\)-bundles, motivic \(G\)-actions,
+pairings, integral structures, and enhanced Serre operators remains inside
+the carrier provider.  The compiler organizes and forgets such data; it does
+not derive it.
+
+## 17.4 Subsumption theorem
+
+Let a probe-indexed block theory satisfy:
+
+1. pseudofunctorial base change and Beck--Chevalley;
+2. coherent finite splitting under \(\operatorname{Sym}\);
+3. a filter-exact comparison span for every geometric adapter enabled by the
+   instance, meaning that it preserves and reflects eventual marker classes;
+4. spectral separation or persistent summand labels; and
+5. a comparison-natural atomizer and marker.
+
+Then its variety assignment, atomized spectrum, marker folds, and
+center-localized birational obstructions are obtained functorially from the
+single pipeline
+\[
+\boxed{
+\mathsf{Geometry}
+\longrightarrow
+\int_{p\in P(-)}\operatorname{Sym}(\mathsf{MarkedBlock}_p)
+\longrightarrow
+\operatorname{Sym}(\mathsf{Atom})
+\xrightarrow{L_d}
+\operatorname{Sym}(\mathsf{Atom})_{>d}
+\longrightarrow\underline A.}
+\tag{17.10}
+\]
+
+### Proof
+
+Pseudofunctoriality and Beck--Chevalley make the first two arrows independent
+of coefficient refinements and of how comparison spans are composed.
+The 2-monad laws make all finite decompositions coherent.  Separation makes
+the atomizer blockwise; naturality lets it descend through comparisons.
+The universal property (7.21) gives the last factorization for every marker
+that kills centers through dimension \(d\).  Fold fusion proves compatibility
+with every subsequent coarsening. ∎
+
+The principal instances are:
+
+| instance | probes | local block | atomizer | final consumer | exact scope |
+| --- | --- | --- | --- | --- | --- |
+| direct QDM in this packet | one algebraic generic point | regular even QDM spectral block | regular isomorphism and generic base change | arbitrary lawful monoid marker | all of Modules 1--16 |
+| Guéré \(\clubsuit/\heartsuit\) | nonvanishing evaluations, cofinite filter | evaluated generalized eigenspace with \((\rho,\nu,\nu',\gamma)\) | evaluation equivalence and separated comparison | eventual Boolean violation | Definitions 20, 25, 27; Proposition 38; Corollary 41 |
+| BFGMP coarse criterion | separated maximal evaluations along a factorization | evaluated eigenspace marked by vanishing cohomology | transport of the mark | surface-carrier inequality | Theorem 4.1, given its Hodge/monodromy inputs |
+| KKPYY | connected non-Archimedean analytic domains | component of the unramified reduced spectral cover with \(G\)-decoration | generated elementary atom equivalence | positive chemical formula or dimension cutoff | Theorems 4.1, 4.5, 4.11; Definition 5.16; Proposition 5.17 |
+
+The verdict is therefore:
+\[
+\boxed{
+\text{one generalized compiler has direct QDM, Guéré/BFGMP, and KKPYY
+as sibling specializations of its transport-and-retention layer}.}
+\tag{17.11}
+\]
+It would be inaccurate to say that the current unindexed marker package alone
+subsumes the other two, or that the compiler reproduces their analytic,
+motivic, or monodromy theorems.
+
+## 17.5 Law-test matrix
+
+| law | direct QDM witness | Guéré/BFGMP witness | KKPYY witness |
+| --- | --- | --- | --- |
+| identity/composite base change | Definition 2.1 and Module 3 | equivalence and extension of evaluation maps | analytic base change of maximal \(F\)-bundles |
+| Beck--Chevalley for comparison | common spines, Modules 3 and 6 | Iritani comparison plus variable changes in Corollary 37 | canonical comparison on common analytic domains |
+| finite-sum coherence | Lemma 5.1 and Proposition 5.2 | direct sums after unit-shift separation | disjoint unions of spectral-cover components |
+| separation | independent generic unit coordinates | chosen unit translations; maximal pairwise-disjoint spectra | restriction to the unramified cover and connected domains |
+| atomizer naturality | regular gauge/base change | preservation of \((\rho,\nu,\nu',\gamma)\) | elementary equivalences defining \(\operatorname{Atoms}^K_G\) |
+| center localization | Theorem 9.2 | center satisfies the relevant eventual property | dimension filtration and Proposition 5.17 |
+| coarsening/fusion | Proposition 2.5 | change of violation predicate | forgetful maps from enhanced to coarse atoms |
+
+## 17.6 Primary-source check
+
+The comparison above was checked against the following cached primary-source
+texts, not against secondary descriptions.
+
+1. J. Guéré, *On the irrationality of cubic fourfolds*,
+   arXiv:2603.04518v1: Definitions 20, 25, 27; Corollary 37; Proposition 38;
+   Corollary 41; Theorem 56.  Cached PDF SHA-256:
+   `eb84753911c97a6b618975be5da4dc3b5bdec2b66edf11063d09d75e475abfdc`.
+2. V. Benedetti, A. Fay, J. Guéré, L. Manivel, N. Perrin,
+   *An atomic criterion for irrationality without quantum computations*,
+   arXiv:2607.26718v1: Definition 2.1, Theorem 4.1, Remarks 4.2 and 4.5.
+   Cached PDF SHA-256:
+   `bb1ee656bd55008a5403e057d0856e65c81b100f2fa07d1c90e184766dd0f407`.
+3. L. Katzarkov, M. Kontsevich, T. Pantev, T. Y. Yu,
+   *Birational invariants from Hodge structures and quantum multiplication*,
+   arXiv:2508.05105v2: Theorems 4.1, 4.5, 4.11; Definition 5.16;
+   Proposition 5.17; Example 6.21.  Cached PDF SHA-256:
+   `2c5c9f0a2f9eaf230605eaf844c3b7d08e0181e6dbc921153156a071d616ff64`.
+
+The finite algebraic shadow of the laws in Modules 7 and 17 is replayed by
+`notes/cubic-threefolds-tasks/c925-categorical-law-check.py`; its checked
+output is `notes/cubic-threefolds-tasks/c925-categorical-law-check.json`.
+This replay tests coherence and the collision guard.  It is not evidence for
+the analytic comparison theorems, which remain primary inputs.
+
+Exact replay:
+
+```bash
+nix shell nixpkgs#python3 --command \
+  python3 notes/cubic-threefolds-tasks/c925-categorical-law-check.py \
+  | diff -u notes/cubic-threefolds-tasks/c925-categorical-law-check.json -
+```
+
+The SHA-256 hashes are
+`6478c57160fc3a83524a74ae14c60364b59c7e580c216228aab3c35365147fd3`
+for the script and
+`2b4503d6744e5eb197816c08529457ab3105508593ec8918f7653992d256f65a`
+for the checked output.
+
+---
+
+
+# Module 18. Final modular statement
 
 The proof is an instance of the following schema.
 
-## Theorem 16.1 — parameterized fourfold obstruction
+## Theorem 18.1 — parameterized fourfold obstruction
 
 Let \(\mathcal M\) be any lawful QDM marker package with values in a
 commutative monoid \(A\).  Suppose:
@@ -1813,7 +2407,27 @@ are:
    category presented by comparison correspondences.  A more intrinsic
    version might use a bicategory of coefficient spines and regular QDM
    correspondences, with the Iritani maps as invertible 1-cells.
+7. **What is the canonical category of evaluation probes?**  Guéré's
+   evaluation maps depend on a morphism \(Y\to Z\), and BFGMP Remark 4.2
+   warns that maximality relative to an embedding is weaker than maximality
+   relative to the identity.  A full implementation should index probes on
+   arrows, probably by a double category or equipment, rather than only by
+   varieties.
+8. **Should KKPYY elementary equivalences retain path data?**  The thin
+   groupoid is exactly sufficient for their atom set and chemical formula.
+   A theory of specific birational maps would need the non-thin groupoid or
+   bicategory of actual comparison spans, together with its 2-cells.
+9. **When is the Bittner backend multiplicative?**  Equation (7.25) is only
+   additive.  A ring-valued motivic measure requires a generic-big-QDM
+   Künneth theorem compatible with the chosen atomizer and coefficient
+   spines.
+10. **Can a correlated marking beat the \(m=1\) constituent threshold?**
+    BFGMP shows that transported subobjects fit naturally in the interface;
+    the open higher-stabilization problem is to choose a mark relating all
+    projective-space copies that no low-dimensional center can carry.
 
-None of these questions blocks the proof in Modules 0--16.  They control how
-far the modular interface can be reused beyond this one-stabilization
-application.
+None of these questions blocks the proof in Modules 0--16 or the
+transport-level specialization audit in Module 17.  They control whether the
+interface can be promoted from a lawful compiler to a canonical equivalence
+with the complete external theories, and how far it can be reused beyond this
+one-stabilization application.

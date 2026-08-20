@@ -47,15 +47,39 @@ The active packet is
 It currently contains:
 
 - a lawful observer/selector/emitter interface with commutative-monoid values;
-- a free symmetric-monoidal category of generic even blocks and its universal
-  block-multiset decategorification;
+- a probe-indexed, marked-block extension whose singleton-generic instance is
+  the direct-QDM proof;
+- a free symmetric-monoidal 2-monad of blocks, indexed scalar-extension
+  pseudofunctor, Beck--Chevalley law, and universal center localization;
 - a monoidal center quotient through which center-vanishing markers factor;
+- optional Bittner/group-completion, finite-Kan-coarsening, and
+  endomorphism-category retention backends, with explicit information-loss
+  cautions;
 - corrected coefficient-spine, blowup, projective-bundle, and divisor-character
   adapters;
 - counting, Boolean, exact-profile, parity-enriched, monodromy, and universal
   configuration examples;
 - the minimal cubic instance and a category-theoretic summary diagram; and
+- exact specialization audits for Guéré's evaluated
+  \(\clubsuit/\heartsuit\) properties, the marked BFGMP coarse-atom criterion,
+  and the KKPYY chemical-formula/dimension-filtration layer; and
 - an explicit exploration frontier.
+
+The finite categorical law model is
+`notes/cubic-threefolds-tasks/c925-categorical-law-check.py`, with exact
+checked output
+`notes/cubic-threefolds-tasks/c925-categorical-law-check.json`.  It passes
+eight tests, including a negative collision test showing why Guéré's
+unit-shift separation contract is mandatory.  The original exact cubic
+residue replay also remains green.
+
+Replay the categorical test with:
+
+```bash
+nix shell nixpkgs#python3 --command \
+  python3 notes/cubic-threefolds-tasks/c925-categorical-law-check.py \
+  | diff -u notes/cubic-threefolds-tasks/c925-categorical-law-check.json -
+```
 
 Keep C925 active: the user has asked to continue exploring the categorical and
 software-interface design before closeout.
