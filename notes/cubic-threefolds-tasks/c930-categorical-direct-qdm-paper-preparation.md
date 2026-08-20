@@ -2,7 +2,7 @@
 
 **Lane:** cubic-threefolds
 
-**Status:** active; repaired phase-1 memo passes independent review; awaiting author decision on phase 2 manuscript adaptation
+**Status:** active; phase 2 manuscript refounding authorized; 48-page baseline frozen; fresh blind referee round running
 
 ## Stable entry point
 
@@ -12,6 +12,8 @@
   `notes/2026-08-20-c930-independent-referee-report.md`
 - second independent referee pass after repair and exposition audit:
   `notes/2026-08-20-c930-second-referee-pass.md`
+- pre-refounding source/PDF baseline:
+  `notes/2026-08-20-c930-manuscript-baseline.md`
 
 ## Phase 1 result
 
@@ -38,8 +40,10 @@
 - The repaired memo passed the resumed independent referee with no remaining
   blocker, major, or minor finding.
 
-**Next:** stop for the author's decision whether and how to enter phase 2 under
-this same C930 item.  The repair remains strictly \(m=1\).
+**Next:** refound the authoritative manuscript around the approved theorem
+order and strictly \(m=1\) proof spine, preserving the disconnected all-\(m\)
+sources until their durable destination is decided.  Run the fresh blind
+referee result against the implementation as soon as it lands.
 
 ## Goal
 
