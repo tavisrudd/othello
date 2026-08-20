@@ -4,12 +4,11 @@
 
 **Phase:** 1 -- proof and narrative design only; no manuscript edits
 
-**Target correction:** the sole manuscript authority is
-`papers/cubic-stabilization-epilogue/`.  The theorem-level categorical spine
-below has passed independent review, but the page count, table of contents,
-migration ledger, and implementation plan were drafted against the separate
-Gamma-row manuscript and are withdrawn pending the complete epilogue read.
-Nothing in this memo authorizes an edit to the Gamma-row manuscript.
+**Target:** the sole manuscript authority is
+`papers/cubic-stabilization-epilogue/`.  The complete 60-page paper has now
+been read.  The theorem inventory, page count, table of contents, migration
+ledger, and implementation plan below refer only to that paper.  The separate
+Gamma-row manuscript is outside C930 and must not be edited.
 
 **Scope:** strictly \(m=1\).  Higher-stabilization material is classified only
 for preservation outside this paper; C930 does not investigate, repair, or
@@ -34,17 +33,21 @@ remembers and in the comparison results used to prove the blowup formula:
 The first proof uses Beauville's small quantum algebra, an internal derivation
 of the rank-two connection and residue, the Iritani and Iritani--Koto
 comparison theorems, weak factorization, and surface classification.  The same
-cubic calculation supplies the exponents for the second proof.  The generalized
-construction also includes the chemical-formula invariant as a sibling
-specialization.
+cubic calculation supplies the exponents for the second proof.  The
+chemical-formula construction is only a candidate neighboring specialization
+until it receives a theorem-level source map; it is not on the paper's proof
+path.
 
-This architecture should shorten the paper substantially.  The present
-`papers/cubic-stabilization-irrationality/` source has 3,634 TeX lines and its
-checked log records 48 pages.  A categorical direct-QDM paper should target
-1,600--2,000 TeX lines and 24--28 pages, with 30 pages an author-review ceiling.
-The saving comes from deleting the global gauged-cobordism, one-chart,
-simple-wall, flop, and two-wall branches rather than placing a categorical
-layer above them.
+This architecture should shorten the quantum half substantially without
+displacing the paper's independent cycle-theoretic crown.  The checked
+epilogue has 5,305 TeX lines and 60 pages: five pages of introduction, eighteen
+pages of six-axis and minimal-class mathematics, fourteen pages of atomic
+proof, twenty pages of framed proof, and three pages of synthesis.  The
+realistic categorical target is 46--50 pages, with 52 an author-review ceiling
+and 44 a stretch target.  The saving comes from replacing the duplicated
+fourteen- and twenty-page proof organizations by one compiler, one common
+cubic calculation, and two specialization records.  Sections 2--3 are not
+page-budget collateral.
 
 ## 1. The common theorem
 
@@ -528,7 +531,7 @@ theorem path or state it only as a conditional remark.
 | A categorical diagram proves its analytic providers | hide comparison existence in a functor arrow | False. Label every provider as imported, proved, or conditional at the arrow where used. |
 | Group completion is harmless | send Boolean `or` to a group | False: its group completion is trivial. Keep the effective commutative monoid; Bittner is optional. |
 | The \(m=1\) compiler proves \(m=2\) or all \(m\) | retain only constituent multiplicities | False. Extension leakage and rank-row transport remain open. State no higher-stabilization consequence. |
-| The current Gamma-row global proof can remain as a second route | leave Sections 2--8 and add the compiler | This defeats the paper. It preserves the 48-page conditional architecture and makes the categorical theorem decorative. Remove or relocate that route. |
+| The current atomic and framed proofs can remain intact beneath a new compiler section | add the compiler but retain both full proof organizations | This defeats the refounding.  The compiler must replace their duplicated comparison, transport, and weak-factorization layers, while each specialization retains only its genuinely distinct carrier calculations and hypotheses. |
 
 The failed implications have concrete hostile witnesses, not merely missing
 proofs.
@@ -583,62 +586,65 @@ second proof spine.
 
 ## 7. Narrative-order audit and proposed table of contents
 
-The opening should state the cubic theorem before the abstract machinery,
-then explain the mechanism in ordinary mathematical language: isolate a
-small spectral packet, prove that all possible fourfold centers are invisible
-to the chosen marker, and telescope the blowup formula along a factorization.
+The opening must preserve the actual paper's synthesis.  It should state the
+one-step irrationality theorem and the separation theorem on the
+\(A_5\)-pencil before either technical language, then explain the two
+independent mechanisms: integral divisor products prove universal
+\(CH_0\)-triviality, while a center-null QDM marker proves irrationality after
+one stabilization.  The categorical theorem is the organizing principle of
+the quantum half, not the organizing principle of the six-axis half.
 
 Proposed structure:
 
-1. **Introduction and results** (2--3 pages): Theorems B, A, and C in that
-   order; one mechanism paragraph; exact source/conditional boundary.
-2. **The marker compiler** (3--4 pages): the one-blowup model, one compact
-   notation table, lawful folds, indexed centers, Theorem A, and the
-   occurrence-indexed descent square (C930.I).  Source-notation translations
-   belong where the comparison theorems enter, not in a separate survey.
-3. **Quantum comparison ledgers** (4--5 pages): common coefficient spine,
-   direct sums, projective bundles, blowups, and divisor tagging.
-4. **The cubic atomic marker** (5--6 pages): Beauville matrix, rank-two
-   modification, discriminant, low-dimensional center audit, and Theorem B.
-5. **The framed-sixth specialization** (4--5 pages): original-disc carrier,
-   exact roles of 5.7R/5.7T, the normalized cubic fork (C930.II), internal
-   indicial roots, and Theorem C.
-6. **Scope and neighboring frameworks** (2 pages): the chemical-formula
-   specialization, the internal cubic calculation, and the sharp boundary at
-   higher stabilization.
-7. **Appendix: exact cubic reduction** (3--4 pages), only if the matrix algebra
-   would interrupt Section 4.
+1. **Introduction and results** (3--4 pages): one-step irrationality,
+   separation on the \(A_5\)-pencil, the marker theorem, and the conditional
+   framed refinement; one paragraph showing how the cycle and quantum halves
+   meet.
+2. **The six-axis polarization and exotic packet** (7--8 pages): retain the
+   present Section 2 proof hierarchy.
+3. **Integral divisor products and the primitive minimal class** (9--10
+   pages): retain the graph-saturation theorem, six-axis application, and
+   exact separation from the neighboring loci.
+4. **The categorical QDM ledger** (4--5 pages): the one-blowup model, compact
+   notation table, Theorem A, its quotient square, coefficient spines, and
+   comparison adapters.
+5. **The cubic marker** (6--8 pages): the common small-even block calculation,
+   elementary modification, residue discriminant, direct low-dimensional
+   nullity, and unconditional one-step irrationality.
+6. **The framed-sixth specialization** (10--12 pages): original-disc carrier,
+   exact low-degree shifts, 5.7R/5.7T, specialized center audit including the
+   Hirzebruch quartic, the normalized cubic fork, and the conditional theorem.
+7. **The separation theorem** (2--3 pages): combine the unchanged cycle
+   theorem with the new unconditional marker proof and state the exact framed
+   boundary.
 
-This gives a 23--29 page estimate; editing should target 24--28 and treat 30 as
-the review ceiling.
+This gives a 41--50 page component estimate before rendered-float effects.
+Editing should target 46--50 pages, treat 52 as the review ceiling, and regard
+44 as a stretch target rather than a gate.
 
 ## 8. Migration and deletion ledger
 
-The current draft is a useful research store but not a viable base if its
-present proof hierarchy is retained intact.
+The epilogue remains one paper.  The cycle side is already a coherent proof;
+the quantum side is the refounding surface.
 
 | current component | action in categorical paper | reason |
 |---|---|---|
-| Main file and abstract | rewrite | Replace the conditional all-\(m\) headline by unconditional one-step irrationality and the compiler theorem. |
-| `01-introduction.tex` | rewrite to roughly half its length | Keep the point-row motivation only as boundary context; remove the global-cobordism roadmap. |
-| `02-point-row.tex` | cut or compress to one remark | The direct and framed markers do not consume the Gamma point covector. |
-| `03-simple-wall.tex` | relocate out of the paper | It belongs to the open all-\(m\) rank-row programme. |
-| `04-ordinary-flop.tex` | relocate out of the paper | It is a local theorem for the other programme and is unused here. |
-| `05-incomplete-gamma.tex` | compress to at most one warning paragraph | It can motivate regularity/receiver typing but is not needed for Theorem A. |
-| `06-fourier-boundary.tex` | relocate out of the paper | The localized-Fourier countermodel addresses an unused route. |
-| `07-two-wall-criterion.tex` | relocate out of the paper | The one-row assembly theorem is not consumed by either \(m=1\) specialization. |
-| `08-global-transport.tex` | remove from this paper intact | Its 1,395 lines prove a different conditional all-\(m\) programme and would swamp the compiler. Preserve it in a research note or branch, not as an appendix. |
-| `09-cubic-endpoint.tex` | retain only the algebraic block and indicial calculation | Cut the Barnes/Gamma point-row coefficient calculation; the marker proofs do not consume it. |
-| `08-scope.tex` | replace by a two-page scope and hypothesis boundary | Preserve exact conditionality, but only for the new theorem graph. |
-| `appendix-one-chart.tex` | remove from this paper intact | The 808-line gauged one-chart proof belongs with the global all-\(m\) route. |
-| C925 Modules 0--13 | compress into Sections 2--4 | These contain the load-bearing unconditional proof. |
-| C925 Module 22 | compress into Section 5 | This is already the correct typed framed specialization. |
-| C925 Modules 19--41 | omit from main text | They are dividends or higher-stabilization research, not prerequisites. |
+| Main file and abstract | rewrite | Preserve all three crowns: one-step irrationality, six-axis universal \(CH_0\)-triviality, and their separation.  Present the categorical marker as the mechanism of the quantum crown. |
+| `01-introduction.tex` (5 pages) | rewrite to 3--4 pages | State the separation synthesis first; replace the Hodge-atom roadmap by the direct marker mechanism; keep the framed result visibly conditional and subordinate. |
+| `02-envelope.tex` (8 pages) | retain, light Milnor pass only | The polarization, principal gluing packet, and no-elliptic-product theorem are an independent load-bearing crown. |
+| `03-minimal-class.tex` (10 pages) | retain proof; compress local orientation where free | Graph saturation, the six-axis minimal class, and the exact Eckardt/separation analysis prove the cycle half.  None is replaced by the QDM compiler. |
+| `04-atomic-one-step.tex` (14 pages) | refound as the direct atomic specialization | Keep the common cubic block, elementary modification, pairing/flatness rigidity, residue calculation, and low-dimensional exclusion.  Replace the Hodge-fixed base, global atom construction, chemical-formula globalization, and atom non-rationality criterion by Theorem A and direct QDM center nullity. |
+| `05-framed-monodromy.tex` (20 pages) | refound as the finer specialization of the same compiler | Keep the framed carrier, exact string/divisor shifts, formal-germ theorem, 5.7R/5.7T, specialized center audit, Hirzebruch quartic, product formula, and cubic exponents.  Remove repeated compiler, weak-factorization, and cubic setup already established in Sections 4--5. |
+| `06-synthesis.tex` (3 pages) | rewrite locally | Replace the atom language by the direct marker while keeping the cycle/quantum independence and the exact higher-stabilization boundary. |
+| Formal annotations and registries | migrate statement by statement after prose stabilizes | Stable labels and source/evidence edges must follow the new theorem graph; no bulk relabeling before the statements settle. |
+| Bibliography | prune only after the new source map is complete | Retain every source used by the cycle side and direct QDM adapters; remove a citation only when no surviving claim imports it. |
+| C925 Modules 0--13 | compress into the compiler and atomic sections | These contain the load-bearing direct proof and adapters. |
+| C925 Module 22 | compress into the framed section | It types the exact conditional specialization already present in Section 5. |
+| C925 higher-stabilization modules | omit | They are not prerequisites and C930 is strictly \(m=1\). |
 
-The migration is not a line edit.  It is a controlled refounding which retains
-the current paper's repository identity only if the author chooses that path.
-Before phase 2, freeze the current PDF and source identity so the all-\(m\)
-research material cannot be lost.
+The pre-edit authority is frozen by source commit and the tracked 60-page PDF
+in `notes/2026-08-20-c930-epilogue-baseline.md`.  No file in the separate
+Gamma-row manuscript is part of this migration.
 
 ## 9. Mathematical inputs and conditional boundary
 
@@ -696,30 +702,36 @@ do not certify the imported QDM comparison theorems or the conditional 5.7R
 and 5.7T providers.  The proof-order audit above separately traces those
 trust boundaries.
 
-The current manuscript source and log were inspected without modification.
-The source count is 3,634 lines over the main file and included sections; the
-log's last completed build records 48 pages.
+The complete epilogue source was read without manuscript modification: the
+main file, all six included sections, the formal-annotation macros, and the
+bibliography.  The main file and sections contain 5,305 lines.  The checked
+job-name log records 60 pages, with section starts at pages 1, 6, 14, 24, 38,
+and 58.  The tracked PDF hash and source commit are recorded in
+`notes/2026-08-20-c930-epilogue-baseline.md`.
 
 ## 11. Phase-2 implementation plan
 
-Phase 1 stops with this memo for the author's decision.  If C930 is directed
-to enter manuscript editing:
+Phase 2 is authorized for the epilogue authority only.
 
-1. freeze the current 48-page PDF and record its source commit;
-2. choose whether to refound the existing manuscript tree or create a new
-   authority while preserving the all-\(m\) draft;
-3. write theorem statements and section openings first, then cold-read only
-   that skeleton;
-4. implement Sections 2--5 from the bounded C925 modules, with semantic labels
-   and an explicit source map;
-5. delete or relocate every row in the migration ledger before prose polish;
-6. replay the existing finite cubic calculation and categorical law checks;
-7. build from the guarded paper entry point, inspect the rendered page budget,
-   references, and floats;
-8. run separate mathematical, source-verification, and adjacent-reader cold
-   reads; and
-9. synchronize a standalone mirror only after authority, annotation,
-   reproducibility, and export conventions have been loaded and passed.
+1. The 60-page PDF and source identity are frozen.
+2. Rewrite the abstract, theorem statements, and section openings first; cold-
+   read that skeleton while Sections 2--3 remain connected.
+3. Introduce Theorem A and the descent square before the technical QDM
+   adapters, then make the atomic and framed theorem statements explicit
+   specialization records.
+4. Refound Sections 4--5 from the bounded C925 modules and retained epilogue
+   proofs.  Preserve every load-bearing calculation named in the migration
+   ledger.
+5. Rewrite the synthesis and introduction against the new theorem graph.
+6. After prose stabilizes, read and follow the formal-annotation conventions,
+   then migrate stable labels, claims, imports, and evidence rows.
+7. Replay the finite cubic calculation and categorical law checks; build from
+   the paper's guarded Makefile; inspect pages, references, warnings, tables,
+   and diagrams.
+8. Run separate mathematical, source-verification, cycle/QDM coherence, and
+   adjacent-reader cold reads.
+9. Synchronize a standalone mirror only after the export conventions have
+   been loaded and all authority gates pass.
 
 ## 12. `ej` + `tt` closeout and mystery ledger
 
@@ -733,9 +745,9 @@ The closeout produces five cheap upgrades.
    markers on the cubic packet: its squared exponent difference is
    \(\delta^\sharp=4/9\), while its individual exponent classes give
    \(\zeta_6^{\pm1}\).  One calculation feeds both specializations.
-3. Removing the Gamma point row from the \(m=1\) proof also removes the Barnes
-   point coefficient, sectorial lift, wall-overlap, and one-chart burdens.
-   These are one architectural deletion, not several local editorial cuts.
+3. The cycle half needs no categorical rewrite.  Keeping its eighteen-page
+   proof intact makes the paper shorter by concentrating every structural edit
+   on the thirty-four-page quantum pair.
 4. Theorem A can be stated and proved immediately after the provider record;
    the categorical quotient then explains the proof instead of delaying it.
 5. The notation audit separates the reconstruction parameter \(\varsigma_j\),
@@ -748,12 +760,12 @@ The closeout produces five cheap upgrades.
 | feature | status | exact gap or owner |
 |---|---|---|
 | Does the one cubic calculation feed both markers? | Settled | Beauville's matrix plus the normalized-gauge and indicial recursion gives both \(\delta^\sharp\) and \(\zeta_6^{\pm1}\). |
-| Will the categorical layer look decorative? | Settled at the design level | Keep only the indexed block groupoid, free symmetric monoid, provider record, and center quotient; every retained abstraction is used by both specializations, and the telescope is described as elementary. |
+| Will the categorical layer look decorative? | Settled at the design level | Keep only the indexed block groupoid, free symmetric monoid, provider record, and center quotient; every retained abstraction is used by both quantum specializations, and the cycle half does not pretend to depend on it. |
 | Can source notation be compressed into one center index? | Settled negatively | The occurrence retains both \(\varsigma_j\) and \(\chi_j\); auxiliary divisor-character variables remain a proof adapter rather than a ledger index. |
 | Does the common spine remove 5.7R or 5.7T? | No | The compiler locates them but does not prove them. They remain the exact provider fields of Theorem C. |
 | Does C930 take on higher stabilization? | No | Its mathematical and manuscript scope ends at \(m=1\); higher-stabilization material is only preserved outside the proposed paper. |
-| Should the current all-\(m\) draft be refounded in place or preserved as a separate research manuscript? | Open by instruction | Author decision before C930 phase 2. |
-| Can the final paper remain below 28 pages after full source-level proofs are inserted? | Open but testable | Phase 2 page-budget gate; 30 pages requires an itemized indispensable-content exception. |
+| Can the two crowns read as one paper rather than juxtaposed papers? | Open but testable | The introduction and synthesis must make the separation theorem the causal meeting point; a cycle/QDM coherence cold read owns the gate. |
+| Can the final paper reach 46--50 pages without hiding a provider or trimming the cycle proof? | Open but testable | Phase-2 rendered page gate; 52 pages triggers an itemized compression audit, while 44 is only a stretch target. |
 
 No further mathematical mystery blocks the phase-1 memo.  The remaining open
 items are either explicitly conditional mathematics owned by C925/C907 or the

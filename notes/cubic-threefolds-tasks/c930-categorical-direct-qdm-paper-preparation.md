@@ -2,16 +2,24 @@
 
 **Lane:** cubic-threefolds
 
-**Status:** active; target corrected to the epilogue; full-paper read and phase-1 memo repair in progress before manuscript edits
+**Status:** active; complete 60-page epilogue read and corrected phase-1 overlay finished; manuscript refounding authorized
 
 ## Stable entry point
 
+- authoritative manuscript:
+  `papers/cubic-stabilization-epilogue/`
+- manuscript main source:
+  `papers/cubic-stabilization-epilogue/cubic_stabilization_epilogue.tex`
+- frozen 60-page epilogue baseline:
+  `notes/2026-08-20-c930-epilogue-baseline.md`
 - proof memo and paper architecture:
   `notes/2026-08-20-c930-categorical-direct-qdm-proof-memo.md`
 - independent referee report:
   `notes/2026-08-20-c930-independent-referee-report.md`
 - second independent referee pass after repair and exposition audit:
   `notes/2026-08-20-c930-second-referee-pass.md`
+- complete pre-refounding page and source baseline:
+  `notes/2026-08-20-c930-epilogue-baseline.md`
 
 ## Phase 1 result
 
@@ -25,8 +33,10 @@
   5.7R and the residual part of 5.7T as explicit provider fields.
 - The chemical-formula construction is only a candidate sibling pending a
   theorem-level source map; it is not on the manuscript's theorem path.
-- The prior page estimate and migration ledger targeted the wrong manuscript
-  and are withdrawn pending a complete read of the epilogue.
+- The prior page estimate and migration ledger that targeted the wrong
+  manuscript are withdrawn.  The replacement ledger follows the complete
+  60-page epilogue: retain the 18-page cycle core, refound the 34-page quantum
+  pair through one compiler, and rewrite the introduction and synthesis.
 - All three existing exact replays passed, and both corrected `amscd` diagrams
   compile together.  No manuscript source was edited.
 - A Milnor-style pass now gives the one-blowup mechanism before abstraction,
@@ -34,14 +44,14 @@
   categorical quotient after the proof as its reformulation.  A compact
   notation table separates Iritani's reconstruction, Novikov, and bundle
   conventions from the paper's cubic notation.
-- The repaired memo passed the resumed and fresh blind referees after bounded
-  local corrections, but its manuscript overlay must be redone against the
-  epilogue before it governs edits.
+- The theorem spine passed the resumed and fresh blind referees after bounded
+  local corrections.  Its corrected epilogue overlay now governs the
+  authorized manuscript edits.
 
-**Next:** read the complete epilogue, freeze its actual source/PDF baseline,
-and rewrite the memo's theorem inventory, migration ledger, deletion ledger,
-and page estimate against that paper.  Only then begin authorized manuscript
-edits.
+**Next:** begin the epilogue manuscript refounding from the abstract, theorem
+inventory, and section-opening skeleton; then rebuild the quantum pair while
+leaving the cycle core mathematically intact.  The working target is 46--50
+rendered pages, with 52 as an author-review ceiling and 44 only a stretch.
 
 ## Goal
 

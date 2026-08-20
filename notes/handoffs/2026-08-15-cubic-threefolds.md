@@ -46,15 +46,15 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   edit has yet been made.  Card:
   `../cubic-threefolds-tasks/c931-c928-referee-dossier.md`; dossier:
   `../2026-08-20-c931-c928-referee-dossier.md`.
-- **C930 — target corrected to the epilogue; full read and memo repair active.**
+- **C930 — corrected epilogue overlay ready for manuscript refounding.**
   C930 owns only `papers/cubic-stabilization-epilogue/`, strictly at `m=1`.
   Its common occurrence-indexed marker theorem and both specializations pass
-  resumed and fresh blind review, but the memo's migration and page analysis
-  mistakenly used the separate Gamma-row manuscript as its comparison surface.
-  That analysis is withdrawn.  Read the complete epilogue, freeze its actual
-  baseline, and rebuild the overlay before using the author's phase-2 editing
-  authorization.  The Gamma-row manuscript is explicitly out of C930 scope and
-  was not edited.  Memo:
+  resumed and fresh blind review.  The complete 60-page epilogue has now been
+  read and frozen, and the corrected overlay retains its 18-page cycle core
+  while refounding the 34-page quantum pair through the common compiler.  The
+  working target is 46--50 pages and the author's phase-2 editing authorization
+  is active.  The Gamma-row manuscript is explicitly out of C930 scope and was
+  not edited.  Baseline: `../2026-08-20-c930-epilogue-baseline.md`; memo:
   `../2026-08-20-c930-categorical-direct-qdm-proof-memo.md`; reports:
   `../2026-08-20-c930-independent-referee-report.md` and
   `../2026-08-20-c930-second-referee-pass.md`. Card:
@@ -221,11 +221,16 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   including the determinant-two flip--flip pilot, have residual valuation
   zero and the same unit normalized jet.  The sharpened target is solely an
   occurrence-level fixed-phase QDM/Gamma adapter identifying that algebraic
-  jet with the actual endpoint transition.
+  jet with the actual endpoint transition.  Module 44 gives a second
+  augmentation: the Euler coimage is the narrow state space, the point class
+  survives in that image, and its compact-support pairing recovers the source
+  rank row.  A common fixed-phase paired narrow-QDM realization would bypass
+  the normal derivative, but is not yet constructed.
   Shifted tensor stability and the extremal multinomial source law are
   proved, but the occurrence-indexed exact QDM sequence, actual carrier
   exponent, and boundary vanishing remain open.  The packet is split into
-  bounded module companions behind a stable index.  The one-hundred-check
+  bounded module companions behind a stable index.  The
+  one-hundred-three-check
   finite law replay, eleven-check typed Haskell toy, and original cubic
   replay are green.  C925 remains open at fixed-phase Gamma/rank transport
   or at this ExactTop provider; the relative-cap cancellation remains one
