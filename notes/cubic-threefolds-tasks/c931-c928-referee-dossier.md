@@ -2,7 +2,7 @@
 
 **Lane:** cubic-threefolds
 
-**Status:** active; dossier sealed, referee batch not yet run
+**Status:** active; referee batch complete, minor manuscript revision required
 
 ## Goal
 
@@ -60,5 +60,28 @@ rerun protocols.  No report or paper edit was made in this phase.
 
 ## Next
 
-Run the five independent specialist reports against the frozen PDF, freeze
-them, then run the independent editorial-ceiling report and synthesis.
+Apply the four adopted local repairs in
+`../2026-08-20-c931-c928-referee-synthesis.md`, rebuild and freeze a new PDF,
+then run the six focused regression packets specified there.
+
+## Referee-batch result
+
+Six isolated reports and a separate evidence synthesis are frozen under
+`notes/2026-08-20-c931-*`.  Verdicts were A for cubic/Fano geometry, integral
+topology/IH, and the abelian endpoint; B for the integral lattice, priority,
+and editorial-ceiling packets.  All mathematical claims survive.  Submission
+is blocked only by four local repairs:
+
+1. credit FVME Theorem 2.9, Corollary 2.10, and Proposition 2.14 as already
+   implying the abstract Smith factors and `Lambda/2Lambda` defect;
+2. print the integral middle-perversity truncation convention and a precise
+   theorem-level citation before the `IH^3` identification;
+3. expose the short dual exact-sequence step behind the escape lattice; and
+4. label Kraemer's rational derived splitting noncanonical and standardize the
+   spelling.
+
+The recommended route is *Proceedings of the AMS* after minor revision and a
+fresh focused batch.  The present scope is not recommended for the
+*Algebraic Geometry* stretch venue.  The frozen abstract passes the requested
+limit at 179 whitespace-delimited tokens, below 250.  No manuscript or paper
+artifact was edited during the batch.

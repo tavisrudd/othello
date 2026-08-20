@@ -37,15 +37,18 @@ promoted mathematical assertion maps to a kernel-checked declaration.
 
 ## Current status
 
-- **C931 -- C928 named-referee batch, active; dossier sealed.** The closed
-  eight-page theta-lattice paper is frozen at commit `ac04f826c` and PDF hash
-  `3822f928...e36e5`.  The dossier names and sources independent
-  cubic/Fano, integral topology/IH, abelian/Pontryagin, integral symplectic
-  lattice, closest-prior-art, and editorial-ceiling packets, with explicit
-  source-adjacency and conflict cautions.  No simulated report or manuscript
-  edit has yet been made.  Card:
+- **C931 -- C928 referee batch complete; minor revision required.** Six
+  isolated reports and a separate evidence synthesis leave every theorem
+  intact.  The adopted local repairs are exact FVME credit for the abstract
+  Smith data, a printed integral-IH truncation convention/citation, one short
+  dual exact-sequence bridge for the escape lattice, and noncanonical wording
+  for Kraemer's rational splitting.  The default verdict is *Proceedings of
+  the AMS* after minor revision and a fresh focused batch; the current scope is
+  not recommended for *Algebraic Geometry*.  The abstract passes at 179 tokens
+  below the 250-word ceiling.  No manuscript edit has yet been made.  Card:
   `../cubic-threefolds-tasks/c931-c928-referee-dossier.md`; dossier:
-  `../2026-08-20-c931-c928-referee-dossier.md`.
+  `../2026-08-20-c931-c928-referee-dossier.md`; synthesis:
+  `../2026-08-20-c931-c928-referee-synthesis.md`.
 - **C930 — corrected epilogue overlay ready for manuscript refounding.**
   C930 owns only `papers/cubic-stabilization-epilogue/`, strictly at `m=1`.
   Its common occurrence-indexed marker theorem and both specializations pass
