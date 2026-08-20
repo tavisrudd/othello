@@ -87,6 +87,13 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   left-orthogonal exact-heart adapter now makes boundary vanishing formal
   once that orientation and component typing exist; a quiver model shows
   this may preserve the top shadow without splitting the heart extension.
+  A dependent typing audit packages occurrence, orientation, exponent,
+  kernel/component membership, and exact QDM realization separately; it
+  shows no further ExactTop source augmentation or faithful/full receiver is
+  consumed, but exact \(N\)-compatible realization is load-bearing.  A
+  primary-source precedent audit promotes source/target-indexed provider
+  arrows and occurrence-safe lawful reindexing; types make illegal
+  compositions unrepresentable but do not manufacture local geometry.
   Shifted tensor stability and the extremal multinomial source law are
   proved, but the occurrence-indexed exact QDM sequence, actual carrier
   exponent, and boundary vanishing remain open.  The packet is split into

@@ -31,6 +31,7 @@ No manuscript or Lean source is part of this packet.
 | 24 | corrected \(m=2\) roadmap, cofinal stabilizations, all-\(m\) criterion | notes/2026-08-20-c925-m2-cofinal-module.md |
 | 25 | power-image functor, Bockstein leakage, ExactTop provider | notes/2026-08-20-c925-power-image-module.md |
 | 26 | left-orthogonal exact-heart adapter and nonsplit quiver model | notes/2026-08-20-c925-oriented-heart-adapter.md |
+| 27 | dependent occurrence/orientation typing of the provider crux | notes/2026-08-20-c925-dependent-provider-typing.md |
 | frontier | open experiments and provider targets | notes/2026-08-20-c925-exploration-frontier.md |
 
 ## Dependency spine
@@ -57,7 +58,7 @@ Modules 19--23 prove reusable categorical consequences:
 - universal center-null quotients and minimal sufficient shadows; and
 - the conditional Section 6 argument as a separate specialization.
 
-Modules 24--26 isolate the higher-stabilization frontier:
+Modules 24--27 isolate the higher-stabilization frontier:
 
 - irrationality on any unbounded stabilization set implies irrationality for
   every index;
@@ -67,6 +68,8 @@ Modules 24--26 isolate the higher-stabilization frontier:
   certificate; and
 - in the opposite orientation, ambient-to-exceptional Hom orthogonality in
   an enriched exact heart kills that boundary formally; and
+- a dependent provider record makes occurrence, variance, kernel stability,
+  and exact QDM realization load-bearing indices rather than prose; and
 - the rank-row route remains the higher-EV uniform alternative.
 
 ## Current \(m=2\) alternatives
@@ -111,6 +114,10 @@ vanishing remain open.
   notes/2026-08-20-c925-power-image-leakage.md
 - oriented-heart adapter and augmentation audit:
   notes/2026-08-20-c925-oriented-heart-adapter.md
+- dependent provider typing and realization-transfer theorem:
+  notes/2026-08-20-c925-dependent-provider-typing.md
+- primary-source type-level precedent audit:
+  notes/2026-08-20-c925-type-level-precedents.md
 - conditional \(m=1\) specialization:
   notes/2026-08-20-c925-framed-m1-specialization.md
 - non-\(m=2\) categorical dividends:

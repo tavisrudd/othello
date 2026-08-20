@@ -22,6 +22,10 @@ exact \(m=2\) and all-\(m\) transport gates.
   notes/2026-08-20-c925-power-image-leakage.md
 - oriented-heart adapter:
   notes/2026-08-20-c925-oriented-heart-adapter.md
+- dependent provider typing:
+  notes/2026-08-20-c925-dependent-provider-typing.md
+- type-level precedent audit:
+  notes/2026-08-20-c925-type-level-precedents.md
 - non-\(m=2\) categorical dividends:
   notes/2026-08-20-c925-non-m2-categorical-dividends.md
 - conditional Section 6 specialization:
@@ -49,6 +53,10 @@ index row.
 - In an opposite-oriented exact heart, ambient-to-exceptional Hom
   orthogonality kills that boundary; a nonsplit quiver model shows this is
   weaker than splitting at the heart level.
+- The minimal dependent provider record separates occurrence, orientation,
+  exponent, component/kernel typing, and exact realization.  It proves no
+  extra source augmentation is consumed and prevents those fields from
+  being silently identified.
 
 ## Open geometric providers
 
