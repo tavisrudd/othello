@@ -2,8 +2,26 @@
 
 **Lane:** `clebsch`
 **Paper stream:** Paper I (`papers/clebsch-rigidity/`), Lean development only
-**State:** dispatched to a sub-agent 2026-08-20; report due at
+**State:** complete 2026-08-20, landed in `0a6f3695d`. Report:
 `../2026-08-20-c929-node-classification-characteristic-generalization.md`.
+
+Outcome: `[CharZero K]` is gone from the classification chain, replaced by
+`(h30 : (30 : K) ≠ 0)`, and the theorem is instantiated at `ZMod 11` with golden
+root eight, sorry-free and with no compiled-evaluation axiom. The characteristic
+input was not where it looked: Mathlib's `ring` normalizer rationalizes a numeral
+inverse only when it finds a `CharZero` instance, so the elimination certificates
+had to lose their denominators rather than their instance, which meant changing
+the generator `lean/scripts/generate_golden_cubic_elimination.py` — a scope
+expansion over the dispatch allowlist, taken because the elimination module is
+generated and must not be hand-edited.
+
+Two follow-ups, both deliberately not done. `supportCubic_framePoints_ordinaryNodes`
+still requires characteristic zero because its Hessian determinants are computed
+in `RelativeConicArcs/GoldenCubicNodeHessians.lean`, outside the allowlist; the
+numbers involved are nonzero under the same hypothesis, so that module is the
+obvious successor and would make the ordinary-node statement uniform. And
+`Gates/GoldenCubicNodes.lean` still opens by describing itself as auditing "the
+exact characteristic-zero formalization", which now misdescribes what it audits.
 
 ## Scope
 

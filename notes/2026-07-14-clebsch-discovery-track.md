@@ -1869,6 +1869,35 @@ sentence after the theorem should name the weighted solutions of the
 *proportionality*, not of `A^2 = lambda I`. Whether the frame vocabulary itself
 enters the manuscript is C816 work item 4's decision. No identifier allocated.
 
+## 2026-08-20 — `ring` needs `CharZero` to rationalize a numeral inverse, so denominators, not instances, are what pin an elimination certificate to characteristic zero
+
+**Provenance:** C929, while relaxing `[CharZero K]` on the Golden cubic node
+classification. Expected the instance to be inherited boilerplate on the
+`linear_combination` identities; it was not.
+
+**Observation:** Mathlib's `ring` normalizer turns a numeral inverse such as
+`(1 / 60 : K)` into a rational coefficient only when it can find a `CharZero`
+instance — `Ring.RatCoeff.inv` takes `czα : Option Q(CharZero $α)`. Without one it
+treats the inverse as an atom and `linear_combination` fails. So a certificate
+with rational coefficients silently carries a characteristic-zero requirement that
+has nothing to do with its mathematics. The repair is to clear the certificate by
+its common denominator, prove `(N : K) * target = 0` with integer coefficients,
+and divide once at the end, which isolates the characteristic input to the single
+step where it belongs.
+
+**Why it may matter:** any other generated certificate family in this repository
+that carries `[CharZero K]` may be characteristic-free for the same reason, and
+the same denominator-clearing trick would free it. The elimination generator now
+asserts each clearing factor is `2^a 3^b 5^c` and fails otherwise, which is a
+pattern worth copying.
+
+**Evidence:** VERIFIED — the reworked generator's output builds green through the
+guarded queue with no `sorry` and no compiled-evaluation axiom, and the resulting
+theorem instantiates at `ZMod 11`.
+
+**Status:** open as a lead for other certificate families; no identifier
+allocated. See `notes/2026-08-20-c929-node-classification-characteristic-generalization.md`.
+
 ## 2026-08-20 — the conference triangle cubic is a trace form, and its singular locus is a diagonal condition on `B D B D B`
 
 **Provenance:** C926 (Paper V mod-11 node-count certificate), while looking for a
