@@ -224,3 +224,35 @@ into equal halves?
 **Evidence:** CHECKED — the singularity criterion is proved in the manuscript
 remark; the Eckardt counts follow from the reflection-group degrees.
 **Status:** open lead
+
+## 2026-08-20 — the commutant root is the one-factorization
+
+**Provenance:** C910, while computing the order of the group of label
+permutations centralizing the distinguished commutant element `W` of the
+characteristic-two coefficient heart.
+**Was I looking for this?:** no — the order was obtained from a twelve-element
+conjugation orbit, and this combinatorial reading of the same number turned up
+afterwards while checking the answer.
+**Observed / musing:** the fifteen nonzero vectors of the four-dimensional
+heart are exactly the fifteen pairs of the six labels, a pair going to the class
+of its indicator vector.  Under that identification `W` acts freely, with five
+orbits of size three, and each orbit is a triple of pairwise disjoint pairs
+covering the six labels.  Those five triples are exactly the five perfect
+matchings of the one-factorization already displayed for the alternating action.
+So an `F4`-structure on the heart and a one-factorization of the six labels are
+the same datum, centralizing `W` is preserving the factorization, and preserving
+the unordered pair `{W, W+1}` is preserving it as well; the twelve conjugates of
+`W` fall into six pairs, on which the symmetric group on six labels acts
+transitively with point stabilizer of order one hundred twenty, which is the
+outer automorphism of that group in its classical guise.
+**Why it may matter / strongest question:** it gives a proof of the same orders
+with no matrix computation at all, and it explains why the answer is the
+alternating image and its normalizer rather than something accidental.
+Strongest question: does the geometric side carry a one-factorization of the six
+dihedral axes directly — a canonical way of pairing them off in five ways — in
+which case the label identification that is still supplied might be constructed
+from the axes rather than assumed.
+**Evidence:** CHECKED — the fifteen-vector identification, the five orbits, and
+their agreement with the displayed factorization table were verified by direct
+computation over the field with two elements; none of it is formalized.
+**Status:** open lead
