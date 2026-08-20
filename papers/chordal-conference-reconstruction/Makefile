@@ -15,6 +15,7 @@ check: evidence lint manuscript warnings
 
 evidence:
 	$(PYTHON) verification/evidence/paper_ii_chordal_axis.py --check
+	$(PYTHON) verification/evidence/conference_node_completeness.py --check
 
 lint:
 	$(PYTHON) ../scripts/lint_tex_spacing.py $(SOURCE)

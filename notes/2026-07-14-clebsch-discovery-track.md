@@ -1868,3 +1868,40 @@ manuscript-facing consequence as a recommendation to C816's owner: the boundary
 sentence after the theorem should name the weighted solutions of the
 *proportionality*, not of `A^2 = lambda I`. Whether the frame vocabulary itself
 enters the manuscript is C816 work item 4's decision. No identifier allocated.
+
+## 2026-08-20 — the conference triangle cubic is a trace form, and its singular locus is a diagonal condition on `B D B D B`
+
+**Provenance:** C926 (Paper V mod-11 node-count certificate), while looking for a
+structural alternative to the Gröbner completeness computation. Not found in time,
+and the task shipped the computation instead.
+
+**Observation:** for a hollow symmetric conference matrix `B` of order six and
+`D_x = diag(x_0,...,x_5)`, the triangle cubic is a trace form,
+
+    c(x) = (1/6) tr((B D_x)^3),
+
+because the vanishing diagonal of `B` kills every degenerate index pattern in the
+expansion of the trace. Differentiating gives
+
+    d c / d x_m = (1/2) (B D_x B D_x B)_{mm}.
+
+Restricted to the augmentation hyperplane `sum x = 0`, the singular locus of
+`{c = 0}` is therefore the projective locus where the diagonal of `B D_x B D_x B`
+is a constant vector — a five-condition system with `B^2 = 5I` available as an
+extra relation, rather than five unrelated quadrics.
+
+**Why it may matter:** the mod-11 exactness certified in C926 is currently
+machine-delegated at exactly one step, the dimension-and-degree computation. The
+trace form is the obvious handle for replacing that step by a structural argument,
+uniformly in the characteristic and independent of the order-six case, since
+`B^2 = 5I` and hollowness are the only inputs used above. It would also give the
+characteristic-zero node count of the rigidity paper a second, self-contained
+proof.
+
+**Evidence:** REASONED and spot-checked. Both identities were derived by hand and
+then confirmed over the integers at random points for the pentagon-normalized `B`
+of `conference_node_completeness.py`; that spot check was a throwaway run and is
+not retained in the committed bundle.
+
+**Status:** open, unpromoted, no identifier allocated. Nothing in Paper V depends
+on it; the committed certificate stands on its own.
