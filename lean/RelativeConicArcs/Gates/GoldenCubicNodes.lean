@@ -6,10 +6,11 @@ import RelativeConicArcs.GoldenMatchingCarrier
 /-!
 # Trust gate for the Golden cubic nodes and frame carrier
 
-This gate audits the exact characteristic-zero formalization of the centered
-Golden triangle cubic.  The imported modules identify its coordinate gradient,
-classify its nonzero gradient-zero vectors as six projective lines, check a
-nondegenerate dehomogenized Hessian at each node, and establish the
+This gate audits the centered Golden triangle cubic.  The imported modules
+identify its coordinate gradient, classify its nonzero gradient-zero vectors
+as six projective lines over every field of characteristic different from two,
+three, and five, check a nondegenerate dehomogenized Hessian at each node in
+the same range, and establish the
 five-dimensional squarefree cubic system double at a six-point projective
 frame together with its fifteen base edges.  The five centered matching forms
 are independently proved linearly independent and double at that node frame.
@@ -30,6 +31,7 @@ determinantal Milnor-number theorem.
 #print axioms RelativeConicArcs.GoldenCubicNodes.smul_centeredNode_injective
 
 #print axioms RelativeConicArcs.GoldenCubicNodeHessians.det_chartHessian_chartNode
+#print axioms RelativeConicArcs.GoldenCubicNodeHessians.det_chartHessian_chartNode_ne_zero_iff
 #print axioms RelativeConicArcs.GoldenCubicNodeHessians.det_chartHessian_chartNode_ne_zero
 #print axioms RelativeConicArcs.GoldenCubicNodeHessians.derivative_gradientCoordinatePolynomial_chart
 

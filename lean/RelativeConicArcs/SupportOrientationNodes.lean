@@ -32,11 +32,9 @@ together with their specializations to the prime field `ZMod 11`, where the
 golden root is `t = 8`.  Everything below is proved from the definitions;
 nothing in this module is assumed or discharged outside the kernel.
 
-The ordinary-node statement over a general base field is restricted to
-characteristic zero, inherited from the Hessian determinant evaluation in
-`RelativeConicArcs.GoldenCubicNodeHessians`; the `ZMod 11` ordinary-node
-statement below is instead obtained by evaluating the same determinant in that
-prime field.
+The ordinary-node statement holds over every field in which `30` is nonzero.
+The Hessian calculation itself needs only that five is nonzero; its determinant
+is nonzero after also excluding characteristics two and three.
 -/
 
 namespace RelativeConicArcs.SupportOrientationNodes
@@ -269,20 +267,16 @@ deleted block forced by `B²=5I`; the small chart normalization then identifies
 this block with a nondegenerate dehomogenized Hessian, so the point is an
 ordinary double point.
 
-The characteristic-zero hypothesis here is inherited from the evaluation of the
-dehomogenized Hessian determinants in
-`RelativeConicArcs.GoldenCubicNodeHessians.det_chartHessian_chartNode`, not from
-the singular-locus classification, which needs only `(30 : K) ≠ 0`.  The
-determinants in question are `1296 / 5` and `6480`, whose only prime factors are
-`2`, `3`, `5`; `supportCubic_framePoints_ordinaryNodes_zmod_eleven` records the
-corresponding statement in the prime field of eleven elements. -/
+The determinants are `1296 / 5` and `6480`.  Thus the same hypothesis
+`(30 : K) ≠ 0` used by the singular-locus classification is exactly enough
+for their nonvanishing. -/
 theorem supportCubic_framePoints_ordinaryNodes
-    {K : Type*} [Field K] [CharZero K] (i : Fin 6) :
+    {K : Type*} [Field K] (h30 : (30 : K) ≠ 0) (i : Fin 6) :
     Module.finrank ℚ
         (LinearMap.range (deletedPrincipalBlock i).mulVecLin) = 4 ∧
       Matrix.det (chartHessian (chartNode (K := K) i)) ≠ 0 :=
   ⟨finrank_deletedPrincipalBlock_range i,
-    det_chartHessian_chartNode_ne_zero i⟩
+    det_chartHessian_chartNode_ne_zero h30 i⟩
 
 /-- Eleven is prime, so `ZMod 11` is the prime field of eleven elements and in
 particular a field. -/
@@ -322,19 +316,13 @@ theorem supportCubic_singularLocus_eq_frame_zmod_eleven
 /-- Each of the six frame points is an ordinary double point over the prime field
 of eleven elements: the deleted five-by-five principal block has rank four, and
 the dehomogenized Hessian determinant at the normalized node is nonzero in that
-field.  The determinant is evaluated there by kernel reduction of the explicit
-four-by-four expansion. -/
+field.  This is the characteristic-eleven specialization of the uniform
+ordinary-node theorem. -/
 theorem supportCubic_framePoints_ordinaryNodes_zmod_eleven (i : Fin 6) :
     Module.finrank ℚ
         (LinearMap.range (deletedPrincipalBlock i).mulVecLin) = 4 ∧
-      Matrix.det (chartHessian (chartNode (K := ZMod 11) i)) ≠ 0 := by
-  have hinv : (-5 : ZMod 11)⁻¹ = 2 := inv_eq_of_mul_eq_one_right (by decide)
-  refine ⟨finrank_deletedPrincipalBlock_range i, ?_⟩
-  rw [← GoldenMatchingJacobian.detFour_eq_det]
-  fin_cases i <;>
-    simp [chartNode, centeredNode, chartHessian, hinv,
-      GoldenMatchingJacobian.detFour, GoldenMatchingJacobian.detThree] <;>
-    decide
+      Matrix.det (chartHessian (chartNode (K := ZMod 11) i)) ≠ 0 :=
+  supportCubic_framePoints_ordinaryNodes thirty_ne_zero_zmod_eleven i
 
 #print axioms derivative_crossGoldenDeterminantLine_eval
 #print axioms singularPoints_crossGoldenDeterminant_eq_axisClasses
