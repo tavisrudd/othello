@@ -160,10 +160,21 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   the new \(m=2\) codimension-two gate only after same-receiver lower-center
   nullity; the naive all-branch all-\(m\) exponent cone is closed negative,
   though a finer charge lattice remains a separate provider possibility.
+  The rank-row route now bypasses that local center problem: the audited
+  one-arrow receiver handles isolated discrepant walls, so the remaining
+  \(m=2\) ambiguity lies only at consecutive discrepant receiver overlaps.
+  The overlap defect is a crossed Writer cocycle.  Its first gate is
+  compatibility of the actual row-null supported spans; after that,
+  center-image mutations are safe.  An opposite-sign fivefold two-ray face
+  has one of six primitive neutral slopes up to exchange and is dangerous
+  only if its mixed boundary tower couples the cubic packet to a rank-visible
+  ambient target.  The slope test is necessary only; the positive analytic
+  alternative retains the full \(P_6\)-faithful carrier face and
+  oriented-path hypotheses.
   Shifted tensor stability and the extremal multinomial source law are
   proved, but the occurrence-indexed exact QDM sequence, actual carrier
   exponent, and boundary vanishing remain open.  The packet is split into
-  bounded module companions behind a stable index.  The seventy-seven-check
+  bounded module companions behind a stable index.  The eighty-two-check
   finite law replay, eleven-check typed Haskell toy, and original cubic
   replay are green.  C925 remains open at fixed-phase Gamma/rank transport
   or at this ExactTop provider; the relative-cap cancellation remains one

@@ -48,6 +48,8 @@ exact \(m=2\) and all-\(m\) transport gates.
   notes/2026-08-20-c925-charge-filtered-stokes-specialization.md
 - Kummer charge regression and stationary polygon obstruction:
   notes/2026-08-20-c925-kummer-charge-regression.md
+- \(m=2\) receiver-overlap localization and neutral-slope sieve:
+  notes/2026-08-20-c925-m2-receiver-overlap-localization.md
 - non-\(m=2\) categorical dividends:
   notes/2026-08-20-c925-non-m2-categorical-dividends.md
 - conditional Section 6 specialization:
@@ -152,6 +154,16 @@ index row.
   same-receiver lower-center nullity, but the naive all-branch all-\(m\)
   exponent-valued charge cone is impossible; a finer charge lattice would
   require an additional lawful Stokes realization.
+- The rank-row route does not consume the proposed universal
+  threefold-center transport lemma.  The imported one-arrow receiver handles
+  every isolated discrepant wall.  The remaining \(m=2\) defect occurs only
+  between consecutive discrepant wall receivers, obeys a crossed Writer law,
+  and first asks whether the actual row-null supported spans match.  After
+  that typing, the remaining danger is an ambient-to-ambient rank-visible
+  shear and center-image mutations are safe.  Opposite-sign fivefold two-ray
+  faces have only six primitive neutral slopes up to exchange.  That
+  arithmetic is only a sieve: analytic closure uses the full
+  \(P_6\)-faithful \(K\)-positive carrier-face and oriented-path theorem.
 
 ## Open geometric providers
 
@@ -210,28 +222,33 @@ Typed replay:
       | diff -u \
           notes/cubic-threefolds-tasks/c925-sparse-shadow-path-toy-output.txt -
 
-The finite model currently has seventy-seven checks.  It verifies only the
+The finite model currently has eighty-two checks.  It verifies only the
 advertised algebraic laws and countermodels, never an external QDM provider.
 
 ## Next
 
-1. Decide whether the negative-degree relative-cap series is realized by the
-   actual ancestor/Gamma/Stokes degeneration map.  If so, retain its unique
-   codimension-two exponent through the fixed-phase receiver.
-2. Construct the same-receiver lower-center adapter required to remove the
-   higher-codimension stationary polygons from the \(m=2\) primitive row
-   consumer.
-3. Prove the local fixed-phase QDM point-line law of Module 35: commute the
+1. Compute the smallest consecutive-discrepant overlap: enumerate its mixed
+   neutral tower and test whether every boundary-to-ambient coupling factors
+   through the supported rank-zero span.  The first candidate is the
+   opposite-sign unit pair with primitive slope \((1,1)\).
+2. Prove that the two incident sectorial gauges identify their actual
+   row-null supported spans, then compare their induced ambient quotients.
+   A common nonturning Hom-system with identical formal asymptotics would
+   kill the full overlap by multisummation uniqueness.
+3. Treat the arbitrary relative-cap lift and same-receiver lower-center
+   charge adapter as alternative routes, not prerequisites for the rank-row
+   overlap route.
+4. Prove the local fixed-phase QDM point-line law of Module 35: commute the
    primitive projector with the chosen monodromy, identify the Gamma and
    formally normalized point lines using a non-Picard selector or strict
    multiplicity-one filtration quotient, and provide lawful adjacent/endpoint
    reindexing along one chosen factorization.
-4. As the ExactTop alternative, construct a **corrected intrinsic**
+5. As the ExactTop alternative, construct a **corrected intrinsic**
    support/Gysin realization for Module 32; ordinary Gamma or residual
    projection is ruled out by the point regression.
-5. Prove the sharp occurrence-indexed exceptional exponent/carrier bound.
-6. If the monodromy route fails, construct the opposite-oriented enriched
+6. Prove the sharp occurrence-indexed exceptional exponent/carrier bound.
+7. If the monodromy route fails, construct the opposite-oriented enriched
    exact sequence and use the Module 25/26 boundary adapter.
-7. Continue the higher-EV rank-row common-receiver audit in parallel.
+8. Continue the higher-EV rank-row common-receiver audit in parallel.
 
 C925 remains active until the user closes it.

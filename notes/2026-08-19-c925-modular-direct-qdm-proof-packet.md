@@ -43,6 +43,7 @@ No manuscript or Lean source is part of this packet.
 | 36 | commuting-unipotent no-go for point-line uniqueness | notes/2026-08-20-c925-unipotent-point-line-no-go.md |
 | 37 | charge-filtered Stokes augmentation and zero-charge collision test | notes/2026-08-20-c925-charge-filtered-stokes-specialization.md |
 | 38 | Kummer charge trace and higher-codimension stationary polygon obstruction | notes/2026-08-20-c925-kummer-charge-regression.md |
+| 39 | \(m=2\) receiver-overlap localization, crossed defect law, and neutral-slope sieve | notes/2026-08-20-c925-m2-receiver-overlap-localization.md |
 | frontier | open experiments and provider targets | notes/2026-08-20-c925-exploration-frontier.md |
 
 ## Dependency spine
@@ -69,7 +70,7 @@ Modules 19--23 prove reusable categorical consequences:
 - universal center-null quotients and minimal sufficient shadows; and
 - the conditional Section 6 argument as a separate specialization.
 
-Modules 24--38 isolate the higher-stabilization frontier:
+Modules 24--39 isolate the higher-stabilization frontier:
 
 - irrationality on any unbounded stabilization set implies irrationality for
   every index;
@@ -128,6 +129,16 @@ Modules 24--38 isolate the higher-stabilization frontier:
   every higher-codimension full center packet forms a roots-of-unity polygon
   summing to zero, obstructing the naive uniform all-branch exponent cone;
   a finer charge lattice would be additional provider data; and
+- for the rank-row route, the one-arrow receiver already handles an isolated
+  discrepant wall; all remaining \(m=2\) ambiguity localizes to overlaps of
+  consecutive discrepant receivers.  Their row defect is a crossed Writer
+  cocycle.  Each overlap must first preserve the actual row-null supported
+  span; center-image mutations are then quotient-trivial, and a dangerous
+  fivefold two-ray tower must have one of six primitive neutral slopes up to
+  exchange and must survive as a mixed boundary-to-ambient rank-visible
+  coupling.  Absence of a neutral slope is a sieve, while an analytic closure
+  still needs the full \(P_6\)-faithful \(K\)-positive carrier-face and
+  oriented-path hypotheses; and
 - the rank-row route remains the higher-EV uniform alternative.
 
 ## Current \(m=2\) alternatives
@@ -138,6 +149,11 @@ Transport the fixed-phase Gamma/rank quotient through every actual blowup
 step.  The complete defect is the boundary-to-rank leakage covector.
 This route avoids a universal threefold carrier theorem but still needs the
 analytic Gamma/Stokes/Orlov comparison in one coherent receiver.
+Module 39 sharpens “one coherent receiver”: the existing one-arrow theorem
+leaves only adjacent discrepant receiver overlaps.  It is enough to prove
+supported-span compatibility and rank safety of each induced ambient-
+quotient transition; ordinary overlaps and isolated discrepant walls are
+already removed, while center-image mutations are safe after that typing.
 
 ### ExactTop provider
 

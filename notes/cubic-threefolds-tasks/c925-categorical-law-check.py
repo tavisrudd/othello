@@ -12,7 +12,7 @@ import cmath
 from fractions import Fraction
 from itertools import permutations, product
 import json
-from math import factorial, pi
+from math import factorial, gcd, pi
 
 
 def bag(xs):
@@ -2030,6 +2030,120 @@ def main():
         )
         assert abs(sum(stationary_charges)) < 1e-12
     checks["higher_codimension_stationary_charges_sum_to_zero"] = "pass"
+
+    # Module 39: receiver-overlap localization and the crossed defect law.
+    receiver_row = [[Fraction(1), Fraction(0)]]
+    receiver_g = [
+        [Fraction(1), Fraction(2)],
+        [Fraction(0), Fraction(1)],
+    ]
+    receiver_h = [
+        [Fraction(1), Fraction(-3)],
+        [Fraction(0), Fraction(1)],
+    ]
+    receiver_gh = matrix_multiply(receiver_g, receiver_h)
+    defect_g = matrix_add(
+        matrix_multiply(receiver_row, receiver_g),
+        matrix_scale(receiver_row, Fraction(-1)),
+    )
+    defect_h = matrix_add(
+        matrix_multiply(receiver_row, receiver_h),
+        matrix_scale(receiver_row, Fraction(-1)),
+    )
+    defect_gh = matrix_add(
+        matrix_multiply(receiver_row, receiver_gh),
+        matrix_scale(receiver_row, Fraction(-1)),
+    )
+    crossed_writer_rhs = matrix_add(
+        matrix_multiply(defect_g, receiver_h),
+        defect_h,
+    )
+    assert defect_gh == crossed_writer_rhs
+    checks["receiver_row_defect_obeys_crossed_writer_law"] = "pass"
+
+    for edge_count in range(1, 9):
+        for wall_word in product(("O", "D"), repeat=edge_count):
+            adjacent_dd = sum(
+                left == right == "D"
+                for left, right in zip(wall_word, wall_word[1:])
+            )
+            run_defects = 0
+            run_length = 0
+            for wall_type in wall_word + ("O",):
+                if wall_type == "D":
+                    run_length += 1
+                else:
+                    run_defects += max(0, run_length - 1)
+                    run_length = 0
+            assert adjacent_dd == run_defects
+    checks["only_internal_discrepant_run_overlaps_remain"] = "pass"
+
+    rank_row_three = [[Fraction(1), Fraction(0), Fraction(0)]]
+    center_image_mutation_left = [
+        [Fraction(1), Fraction(0), Fraction(0)],
+        [Fraction(0), Fraction(1), Fraction(0)],
+        [Fraction(2), Fraction(0), Fraction(1)],
+    ]
+    center_image_mutation_right = [
+        [Fraction(1), Fraction(0), Fraction(0)],
+        [Fraction(0), Fraction(1), Fraction(0)],
+        [Fraction(0), Fraction(-3), Fraction(1)],
+    ]
+    center_mutation_product = matrix_multiply(
+        center_image_mutation_left, center_image_mutation_right
+    )
+    assert matrix_multiply(rank_row_three, center_mutation_product) == rank_row_three
+    checks["center_image_mutations_are_rank_quotient_trivial"] = "pass"
+
+    primitive_zero_row = [[Fraction(0), Fraction(1)]]
+    ambient_target_shear = [
+        [Fraction(1), Fraction(0)],
+        [Fraction(5), Fraction(1)],
+    ]
+    assert primitive_zero_row[0][0] == 0
+    assert matrix_multiply(primitive_zero_row, ambient_target_shear)[0][0] == 5
+    checks["ambient_target_shear_changes_primitive_row_restriction"] = "pass"
+
+    expected_ordered_slopes = {
+        (1, 1),
+        (2, 1),
+        (1, 2),
+        (3, 1),
+        (1, 3),
+        (4, 1),
+        (1, 4),
+        (3, 2),
+        (2, 3),
+        (4, 3),
+        (3, 4),
+    }
+    computed_ordered_slopes = {
+        (negative_degree // gcd(positive_degree, negative_degree),
+         positive_degree // gcd(positive_degree, negative_degree))
+        for positive_degree in range(1, 5)
+        for negative_degree in range(1, 5)
+    }
+    assert computed_ordered_slopes == expected_ordered_slopes
+    for positive_degree in range(1, 5):
+        for negative_degree in range(1, 5):
+            divisor = gcd(positive_degree, negative_degree)
+            primitive = (
+                negative_degree // divisor,
+                positive_degree // divisor,
+            )
+            for multiple in range(8):
+                x_degree, y_degree = (
+                    multiple * primitive[0],
+                    multiple * primitive[1],
+                )
+                assert positive_degree * x_degree == negative_degree * y_degree
+            assert all(
+                positive_degree * x_degree + negative_degree * y_degree != 0
+                or (x_degree, y_degree) == (0, 0)
+                for x_degree in range(8)
+                for y_degree in range(8)
+            )
+    checks["fivefold_neutral_slope_sieve_is_finite_and_exact"] = "pass"
 
     # If opposite charges are both admitted, their product contains a new
     # zero-charge coefficient: (1+z)(1+z^-1) has constant term 2.

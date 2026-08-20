@@ -231,6 +231,12 @@ Thus charge filtration remains a possible bypass for the genuinely new
 codimension-two threefold gate, but it is not presently a uniform all-\(m\)
 bypass.
 
+Module 39 gives a separate rank-row bypass: its imported one-arrow theorem
+already handles each center locally and moves the remaining \(m=2\) problem
+to overlaps of consecutive discrepant wall receivers.  Therefore the
+relative-cap lift and the same-receiver higher-codimension charge adapter are
+not prerequisites for that route.
+
 ## 38.6 What the existing sectorial receiver already supplies
 
 Import the one-arrow theorem of
