@@ -1,5 +1,5 @@
 {
-  "check_count": 100,
+  "check_count": 103,
   "checks": {
     "all_five_completed_window_rank_jets_are_the_same_unit": "pass",
     "ambient_target_shear_changes_primitive_row_restriction": "pass",
@@ -17,6 +17,7 @@
     "coordinate_and_determinant_two_jet_pilots_are_classified": "pass",
     "cyclic_krylov_moments_reconstruct_nilpotent_string": "pass",
     "equivariant_first_normal_jet_restores_only_the_rank_shadow": "pass",
+    "euler_kernel_is_rank_null_in_projective_space_models": "pass",
     "exacttop_needs_image_equality_not_map_equality": "pass",
     "exponential_initial_face_filtered_monoidal_laws": "pass",
     "extremal_multinomial_computes_source_top_line": "pass",
@@ -46,6 +47,7 @@
     "minimal_sufficient_shadow_is_joint_marker_image": "pass",
     "mobile_line_bundle_source_retains_threshold_top": "pass",
     "multi_sector_sparse_shadows_recover_zero_exponent": "pass",
+    "narrow_point_pairing_reconstructs_source_rank": "pass",
     "negative_exponential_pilot_has_positive_oriented_charge": "pass",
     "negative_line_tail_charge_survives_displayed_reindexing": "pass",
     "nonpointed_opposite_charges_can_create_charge_zero": "pass",
@@ -59,6 +61,7 @@
     "orlov_gamma_lift_forces_blowup_rank_row": "pass",
     "orlov_helix_wrap_threshold_matches_projective_window": "pass",
     "perfect_generic_equivalence_can_gain_two_closed_cohomologies": "pass",
+    "point_is_killed_as_input_but_survives_in_euler_image": "pass",
     "point_line_pairing_is_equivalent_to_ambient_rank_row": "pass",
     "positive_charge_inverses_preserve_augmentation": "pass",
     "positive_charge_products_preserve_augmentation": "pass",

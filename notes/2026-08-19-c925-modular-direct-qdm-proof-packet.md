@@ -48,6 +48,7 @@ No manuscript or Lean source is part of this packet.
 | 41 | raw discrepancy obstruction and canonical completion of the unit overlap | notes/2026-08-20-c925-unit-overlap-canonical-completion.md |
 | 42 | quantum-Serre rank annihilation and the canonical-completion normal jet | notes/2026-08-20-c925-canonical-completion-normal-jet.md |
 | 43 | common-window rank preservation and the universal completed normal jet | notes/2026-08-20-c925-completed-window-rank-jet.md |
+| 44 | Euler coimage, narrow QDM, and shifted point/rank reconstruction | notes/2026-08-20-c925-narrow-qdm-shifted-rank.md |
 | frontier | open experiments and provider targets | notes/2026-08-20-c925-exploration-frontier.md |
 
 ## Dependency spine
@@ -74,7 +75,7 @@ Modules 19--23 prove reusable categorical consequences:
 - universal center-null quotients and minimal sufficient shadows; and
 - the conditional Section 6 argument as a separate specialization.
 
-Modules 24--43 isolate the higher-stabilization frontier:
+Modules 24--44 isolate the higher-stabilization frontier:
 
 - irrationality on any unbounded stabilization set implies irrationality for
   every index;
@@ -169,7 +170,14 @@ Modules 24--43 isolate the higher-stabilization frontier:
   the coordinate-wall, determinant-two, and remaining three signatures all
   give the same answer.  Any further residual defect must therefore occur in
   the vertical fixed-phase QDM/Gamma occurrence realization, not in the
-  completed algebraic rank window; and
+  completed algebraic rank window;
+- alternatively, the non-equivariant Euler coimage is exactly the narrow
+  state space.  Although Euler multiplication kills the source base point,
+  a shifted-point class represented by a compact Thom lift survives in the
+  narrow image, and its intrinsic pairing reconstructs the preimage rank
+  row.  This replaces the normal jet by a paired narrow-image optic, but
+  still needs transport of that shifted line in a fixed-phase occurrence
+  realization; and
 - the rank-row route remains the higher-EV uniform alternative.
 
 ## Current \(m=2\) alternatives
@@ -205,6 +213,11 @@ wall, the determinant-two flip--flip model, and all three remaining
 signatures have the same unit normalized jet.  The open gate is now the
 vertical occurrence-level identification of that algebraic jet with the
 actual fixed-phase QDM transition.
+Module 44 supplies a parallel non-equivariant route: pass to the Euler
+coimage/narrow QDM and recover rank by pairing with its surviving
+shifted-point class.  Shoemaker proves that this is a paired QDM under his
+hypotheses, but the actual overlap still needs a common fixed-phase narrow
+realization transporting that compact Thom line.
 
 ### ExactTop provider
 

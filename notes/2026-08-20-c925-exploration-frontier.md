@@ -116,10 +116,15 @@ are:
     including both the coordinate-wall and determinant-two pilots.  The raw
     special fibre is still zero: the remaining test is the vertical
     identification of this universal algebraic jet with the actual endpoint
-    QDM row transition.
+    QDM row transition.  A parallel non-equivariant route is now available:
+    realize the occurrence inside Shoemaker's narrow QDM.  The Euler coimage
+    retains a shifted-point class represented by a compact Thom lift whose
+    narrow pairing reconstructs the preimage rank row.  Transport of this
+    shifted line in a common paired narrow receiver would replace the
+    first-jet adapter.
 
 None of these questions blocks the proof in Modules 0--16 or the
-transport-level specialization audit in Module 17.  Modules 18--43 isolate
+transport-level specialization audit in Module 17.  Modules 18--44 isolate
 the general consequences without claiming the missing enriched provider.
 The open questions control whether the interface can be promoted from a
 lawful compiler to a canonical equivalence with the complete external

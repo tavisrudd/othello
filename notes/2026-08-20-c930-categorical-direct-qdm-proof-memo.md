@@ -650,10 +650,15 @@ Gamma-row manuscript is part of this migration.
 
 ### Load-bearing imported mathematics
 
-- Beauville's complete-intersection quantum product formulas;
-- Iritani's blowup QDM comparison in the exact regular coefficient scope used;
-- Iritani--Koto's projective-bundle QDM comparison in the corrected common
-  coefficient spine;
+- Beauville's complete-intersection quantum product formulas, main theorem
+  and (2.1)--(2.3);
+- Iritani's blowup QDM comparison, Theorem 5.18 together with Remarks 2.3 and
+  5.6 and equations (5.15), (5.27)--(5.30), and (5.38)--(5.43), in the exact
+  regular coefficient scope used;
+- Iritani--Koto's projective-bundle QDM comparison, Theorem 5.1 together with
+  Remark 1.2, equations (1.1), (5.2), and (5.11)--(5.12), Remarks 5.2--5.3,
+  and Proposition 5.6, in the corrected common coefficient spine;
+- Behrend's product formula for genus-zero Gromov--Witten invariants;
 - projective weak factorization; and
 - the standard classification of minimal smooth projective surfaces with
   non-nef canonical class.
@@ -696,6 +701,13 @@ checked the notation already used by the epilogue.  The audit separates
 Iritani's center bulk parameter \(\varsigma_j\) from the epilogue's numerical
 Novikov specialization \(\chi_j\), reserves \(X\) for the cubic, and makes the
 free symmetric-monoidal and object-quotient conventions explicit.
+
+The completed claim-level source ledger is
+`notes/2026-08-20-c930-qdm-literature-audit.md`.  It records the exact latest
+source versions, cached PDF hashes, theorem/equation locators, point-of-use
+citation requirements, and the distinction between imported results and
+author-proved adapters.  Its QDM verdict is PASS for the current \(m=1\)
+theorem graph.
 
 These replays certify the finite algebra advertised by their artifacts.  They
 do not certify the imported QDM comparison theorems or the conditional 5.7R

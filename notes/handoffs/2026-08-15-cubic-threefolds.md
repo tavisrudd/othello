@@ -222,10 +222,11 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   zero and the same unit normalized jet.  The sharpened target is solely an
   occurrence-level fixed-phase QDM/Gamma adapter identifying that algebraic
   jet with the actual endpoint transition.  Module 44 gives a second
-  augmentation: the Euler coimage is the narrow state space, the point class
-  survives in that image, and its compact-support pairing recovers the source
-  rank row.  A common fixed-phase paired narrow-QDM realization would bypass
-  the normal derivative, but is not yet constructed.
+  augmentation: the Euler coimage is the narrow state space, a shifted-point
+  class represented by a compact Thom lift survives in that image, and its
+  narrow pairing recovers the source rank row.  A common fixed-phase paired
+  narrow-QDM realization transporting that shifted line would bypass the
+  normal derivative, but is not yet constructed.
   Shifted tensor stability and the extremal multinomial source law are
   proved, but the occurrence-indexed exact QDM sequence, actual carrier
   exponent, and boundary vanishing remain open.  The packet is split into

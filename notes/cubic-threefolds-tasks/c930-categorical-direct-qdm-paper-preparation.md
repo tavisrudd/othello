@@ -20,6 +20,8 @@
   `notes/2026-08-20-c930-second-referee-pass.md`
 - complete pre-refounding page and source baseline:
   `notes/2026-08-20-c930-epilogue-baseline.md`
+- completed claim-level QDM literature audit:
+  `notes/2026-08-20-c930-qdm-literature-audit.md`
 
 ## Phase 1 result
 
@@ -47,6 +49,9 @@
 - The theorem spine passed the resumed and fresh blind referees after bounded
   local corrections.  Its corrected epilogue overlay now governs the
   authorized manuscript edits.
+- The QDM literature audit is complete at theorem and equation level for the
+  current \(m=1\) theorem graph.  It added the missing Beauville bibliography
+  entry and fixes the required point-of-use citations for phase 2.
 
 **Next:** begin the epilogue manuscript refounding from the abstract, theorem
 inventory, and section-opening skeleton; then rebuild the quantum pair while

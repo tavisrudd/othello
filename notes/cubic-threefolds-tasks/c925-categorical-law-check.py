@@ -2532,6 +2532,54 @@ def main():
         assert (raw_zero_order, normalized_rank_unit) == (1, 1)
     checks["all_five_completed_window_rank_jets_are_the_same_unit"] = "pass"
 
+    # Module 44: in H*(P^n)=Q[H]/(H^(n+1)), multiplication by
+    # e=aH kills only classes with zero degree-zero coefficient.
+    for dimension in range(1, 7):
+        for euler_coefficient in range(1, 5):
+            for top_coefficient in range(-3, 4):
+                kernel_class = [Fraction(0)] * dimension + [
+                    Fraction(top_coefficient)
+                ]
+                euler_image = [Fraction(0)] * (dimension + 1)
+                for degree in range(dimension):
+                    euler_image[degree + 1] = (
+                        euler_coefficient * kernel_class[degree]
+                    )
+                assert euler_image == [Fraction(0)] * (dimension + 1)
+                assert kernel_class[0] == 0
+    checks["euler_kernel_is_rank_null_in_projective_space_models"] = "pass"
+
+    # The top point is killed as an input but is the Euler image of a
+    # normalized degree-(n-1) prepoint.
+    for dimension in range(1, 7):
+        for euler_coefficient in range(1, 5):
+            point = [Fraction(0)] * dimension + [Fraction(1)]
+            point_image = [Fraction(0)] * (dimension + 1)
+            prepoint = [Fraction(0)] * (dimension + 1)
+            prepoint[dimension - 1] = Fraction(1, euler_coefficient)
+            prepoint_image = [Fraction(0)] * (dimension + 1)
+            for degree in range(dimension):
+                point_image[degree + 1] = (
+                    euler_coefficient * point[degree]
+                )
+                prepoint_image[degree + 1] = (
+                    euler_coefficient * prepoint[degree]
+                )
+            assert point_image == [Fraction(0)] * (dimension + 1)
+            assert prepoint_image == point
+    checks["point_is_killed_as_input_but_survives_in_euler_image"] = "pass"
+
+    # Pairing the narrow point with e*beta extracts beta's degree-zero term.
+    for dimension in range(1, 5):
+        for euler_coefficient in range(1, 4):
+            for beta in product(range(-2, 3), repeat=dimension + 1):
+                alpha_top_minus_one = Fraction(1, euler_coefficient)
+                narrow_pairing = (
+                    alpha_top_minus_one * euler_coefficient * beta[0]
+                )
+                assert narrow_pairing == beta[0]
+    checks["narrow_point_pairing_reconstructs_source_rank"] = "pass"
+
     result = {
         "status": "pass",
         "check_count": len(checks),

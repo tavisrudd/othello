@@ -191,6 +191,12 @@ index row.
   the same unit normalized jet.  The remaining target is an occurrence-level
   equivariant QDM/Gamma adapter identifying that algebraic jet with the
   endpoint transition.
+- There is a second augmentation which needs no normal derivative.  The
+  Euler coimage is the narrow state space; a shifted-point class represented
+  by a compact Thom lift survives there, and its narrow pairing exactly
+  reconstructs the source rank row.  A pairing-preserving narrow-QDM
+  comparison carrying that shifted line would therefore close the same
+  local gate.  Its occurrence and fixed-phase realization are still open.
 
 ## Open geometric providers
 
@@ -259,7 +265,7 @@ Typed replay:
       | diff -u \
           notes/cubic-threefolds-tasks/c925-sparse-shadow-path-toy-output.txt -
 
-The finite model currently has one hundred checks.  It verifies only the
+The finite model currently has one hundred three checks.  It verifies only the
 advertised algebraic laws and countermodels, never an external QDM provider.
 
 ## Next
@@ -277,7 +283,11 @@ advertised algebraic laws and countermodels, never an external QDM provider.
    does not make the raw special fibre invertible; any extra torsion must now
    occur in this vertical QDM realization rather than in the completed rank
    window.
-4. Prove that the two incident sectorial gauges identify their actual
+4. In parallel, test the narrower non-equivariant adapter of Module 44:
+   realize the actual primitive packet in a common narrow QDM, preserve its
+   compact-support pairing, and carry the shifted-point/Thom line across the
+   overlap.  This would reconstruct rank without dividing by \(1-q^{-1}\).
+5. Prove that the two incident sectorial gauges identify their actual
    row-null supported spans, then compare their induced ambient quotients.
    A common nonturning Hom-system with identical formal asymptotics would
    kill the full overlap by multisummation uniqueness.
