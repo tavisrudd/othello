@@ -286,7 +286,12 @@ advertised algebraic laws and countermodels, never an external QDM provider.
 4. In parallel, test the narrower non-equivariant adapter of Module 44:
    realize the actual primitive packet in a common narrow QDM, preserve its
    compact-support pairing, and carry the shifted-point/Thom line across the
-   overlap.  This would reconstruct rank without dividing by \(1-q^{-1}\).
+   overlap.  Module 45 now supplies the rich paired narrow comparison under
+   the explicit toric-CIJ/Shoemaker realization, spanning, and exact
+   non-equivariant base-change hypotheses.  The remaining marked calculation
+   is the single shifted Thom point-line law, or equivalently the
+   Euler-intertwining rank square.  This would reconstruct rank without
+   dividing by \(1-q^{-1}\).
 5. Prove that the two incident sectorial gauges identify their actual
    row-null supported spans, then compare their induced ambient quotients.
    A common nonturning Hom-system with identical formal asymptotics would

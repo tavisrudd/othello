@@ -121,10 +121,17 @@ are:
     retains a shifted-point class represented by a compact Thom lift whose
     narrow pairing reconstructs the preimage rank row.  Transport of this
     shifted line in a common paired narrow receiver would replace the
-    first-jet adapter.
+    first-jet adapter.  Module 45 proves that proper Fourier--Mukai transport
+    preserves the compact-to-ordinary K-theory image and that the
+    Coates--Iritani--Jiang Gamma comparison restricts to this paired narrow
+    QDM under the explicit Shoemaker realization, spanning, and exact
+    non-equivariant base-change hypotheses.  Thus the rich bottom comparison
+    is already available for a realized toric completion; the remaining
+    marked gate is only its shifted Thom point line, equivalently the
+    Euler-intertwining rank square.
 
 None of these questions blocks the proof in Modules 0--16 or the
-transport-level specialization audit in Module 17.  Modules 18--44 isolate
+transport-level specialization audit in Module 17.  Modules 18--45 isolate
 the general consequences without claiming the missing enriched provider.
 The open questions control whether the interface can be promoted from a
 lawful compiler to a canonical equivalence with the complete external

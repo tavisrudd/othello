@@ -49,6 +49,7 @@ No manuscript or Lean source is part of this packet.
 | 42 | quantum-Serre rank annihilation and the canonical-completion normal jet | notes/2026-08-20-c925-canonical-completion-normal-jet.md |
 | 43 | common-window rank preservation and the universal completed normal jet | notes/2026-08-20-c925-completed-window-rank-jet.md |
 | 44 | Euler coimage, narrow QDM, and shifted point/rank reconstruction | notes/2026-08-20-c925-narrow-qdm-shifted-rank.md |
+| 45 | proper Fourier--Mukai restriction to the paired narrow QDM | notes/2026-08-20-c925-toric-crepant-narrow-restriction.md |
 | frontier | open experiments and provider targets | notes/2026-08-20-c925-exploration-frontier.md |
 
 ## Dependency spine
@@ -75,7 +76,7 @@ Modules 19--23 prove reusable categorical consequences:
 - universal center-null quotients and minimal sufficient shadows; and
 - the conditional Section 6 argument as a separate specialization.
 
-Modules 24--44 isolate the higher-stabilization frontier:
+Modules 24--45 isolate the higher-stabilization frontier:
 
 - irrationality on any unbounded stabilization set implies irrationality for
   every index;
@@ -218,6 +219,14 @@ coimage/narrow QDM and recover rank by pairing with its surviving
 shifted-point class.  Shoemaker proves that this is a paired QDM under his
 hypotheses, but the actual overlap still needs a common fixed-phase narrow
 realization transporting that compact Thom line.
+Module 45 proves that a proper Fourier--Mukai correspondence preserves the
+compact-to-ordinary K-theory image and its compact/ordinary Euler pairing.
+Consequently the Coates--Iritani--Jiang Gamma-compatible toric crepant
+continuation restricts to the paired narrow QDM whenever the explicit
+Shoemaker realization, spanning, and exact non-equivariant base-change
+hypotheses hold.  For a realized canonical completion, the completed-model
+gate is therefore only the shifted Thom point-line law (or the equivalent
+Euler-intertwining rank square), not existence of the rich comparison.
 
 ### ExactTop provider
 
@@ -268,6 +277,8 @@ vanishing remain open.
   notes/2026-08-20-c925-framed-m1-specialization.md
 - non-\(m=2\) categorical dividends:
   notes/2026-08-20-c925-non-m2-categorical-dividends.md
+- toric crepant Fourier--Mukai restriction to the paired narrow image:
+  notes/2026-08-20-c925-toric-crepant-narrow-restriction.md
 
 ## Executable witnesses
 

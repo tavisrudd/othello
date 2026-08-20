@@ -229,7 +229,13 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   class represented by a compact Thom lift survives in that image, and its
   narrow pairing recovers the source rank row.  A common fixed-phase paired
   narrow-QDM realization transporting that shifted line would bypass the
-  normal derivative, but is not yet constructed.
+  normal derivative.  Module 45 proves that proper Fourier--Mukai transport
+  preserves the compact-to-ordinary K-theory image and pairing, so the
+  Coates--Iritani--Jiang Gamma comparison restricts to the paired narrow QDM
+  under explicit Shoemaker realization, spanning, and exact non-equivariant
+  base-change hypotheses.  For a realized toric completion only the shifted
+  Thom point-line law, equivalently the Euler-intertwining rank square,
+  remains open on the completed-model side.
   Shifted tensor stability and the extremal multinomial source law are
   proved, but the occurrence-indexed exact QDM sequence, actual carrier
   exponent, and boundary vanishing remain open.  The packet is split into
