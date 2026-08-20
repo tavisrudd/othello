@@ -12,6 +12,8 @@
   `notes/2026-08-20-c928-structural-glue.md`
 - frozen dependency graph and trust boundary:
   `notes/2026-08-20-c928-dependency-audit.md`
+- integral and rational intersection-cohomology corollaries:
+  `notes/2026-08-20-c928-intersection-cohomology.md`
 
 ## Goal
 
@@ -108,6 +110,6 @@ authoritative monorepo paper passes its acceptance gates.
 
 ## Next
 
-Prove that diagonal-zero transfer classes generate the kernel
-`b^* wedge^3 Lambda` integrally, then freeze the complete theorem dependency
-graph for manuscript assembly.
+Close or quarantine the inherited relative-Ext twist branch, correct the
+lambda-note non-descent sentence, and begin the primary-source audit before
+manuscript assembly.
