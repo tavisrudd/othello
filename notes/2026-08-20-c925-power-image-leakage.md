@@ -439,7 +439,7 @@ the nonsplit \(J_3\) leakage.
 
 ## Finite validation
 
-The shared categorical replay now has sixty-six checks.  Its
+The shared categorical replay now has seventy-three checks.  Its
 Module-25-specific exact checks:
 
 1. enumerate cyclic extensions with \(1\le a,b\le m\le5\) and verify that

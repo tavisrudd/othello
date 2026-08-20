@@ -1887,6 +1887,113 @@ def main():
             assert common_kernel_basis == ((0,) * operation_count,)
     checks["commuting_unipotent_jordan_shifts_have_common_fixed_vector"] = "pass"
 
+    # Module 37: positive charge is an augmentation ideal.  Truncated scalar
+    # series witness the completed-algebra laws; the hand proof is general.
+    max_charge = 6
+
+    def charge_multiply(left, right):
+        return tuple(
+            sum(
+                left[index] * right[degree - index]
+                for index in range(degree + 1)
+            )
+            for degree in range(max_charge + 1)
+        )
+
+    def charge_inverse(series):
+        assert series[0] == 1
+        inverse = [Fraction(1)] + [Fraction(0)] * max_charge
+        for degree in range(1, max_charge + 1):
+            inverse[degree] = -sum(
+                series[index] * inverse[degree - index]
+                for index in range(1, degree + 1)
+            )
+        return tuple(inverse)
+
+    positive_factors = (
+        (1, 2, -3, 0, 1, 0, 0),
+        (1, -5, 0, 7, 0, 0, 0),
+        (1, 0, 11, 0, -13, 0, 0),
+    )
+    forward_product = positive_factors[0]
+    reverse_product = positive_factors[-1]
+    for factor in positive_factors[1:]:
+        forward_product = charge_multiply(forward_product, factor)
+    for factor in reversed(positive_factors[:-1]):
+        reverse_product = charge_multiply(reverse_product, factor)
+    assert forward_product[0] == reverse_product[0] == 1
+    checks["positive_charge_products_preserve_augmentation"] = "pass"
+
+    for factor in positive_factors:
+        inverse = charge_inverse(tuple(map(Fraction, factor)))
+        assert charge_multiply(tuple(map(Fraction, factor)), inverse) == (
+            Fraction(1),
+        ) + (Fraction(0),) * max_charge
+        assert inverse[0] == 1
+    checks["positive_charge_inverses_preserve_augmentation"] = "pass"
+
+    # Signed coefficients and noncommuting factor order may alter higher
+    # charge, never charge zero.
+    e12 = [[Fraction(0), Fraction(1)], [Fraction(0), Fraction(0)]]
+    e21 = [[Fraction(0), Fraction(0)], [Fraction(1), Fraction(0)]]
+    identity2 = [[Fraction(1), Fraction(0)], [Fraction(0), Fraction(1)]]
+    zero2 = [[Fraction(0), Fraction(0)], [Fraction(0), Fraction(0)]]
+
+    def matrix_charge_multiply(left, right):
+        output = []
+        for degree in range(3):
+            coefficient = zero2
+            for index in range(degree + 1):
+                coefficient = matrix_add(
+                    coefficient,
+                    matrix_multiply(left[index], right[degree - index]),
+                )
+            output.append(coefficient)
+        return tuple(output)
+
+    left_matrix_factor = (identity2, e12, zero2)
+    right_matrix_factor = (identity2, e21, zero2)
+    left_then_right = matrix_charge_multiply(left_matrix_factor, right_matrix_factor)
+    right_then_left = matrix_charge_multiply(right_matrix_factor, left_matrix_factor)
+    assert left_then_right[0] == right_then_left[0] == identity2
+    assert left_then_right[2] != right_then_left[2]
+    assert forward_product[0] == reverse_product[0]
+    checks["charge_augmentation_forgets_order_and_coefficient_signs"] = "pass"
+
+    for path_scale in range(1, 7):
+        for occurrence_charge in range(0, 7):
+            path_charge = path_scale * occurrence_charge
+            assert (path_charge == 0) == (occurrence_charge == 0)
+    checks["zero_reflecting_path_maps_preserve_positive_charge"] = "pass"
+
+    pilot_exponential_support = (0, -1)
+    pilot_oriented_degrees = tuple(-exponent for exponent in pilot_exponential_support)
+    assert pilot_oriented_degrees == (0, 1)
+    checks["negative_exponential_pilot_has_positive_oriented_charge"] = "pass"
+
+    # If opposite charges are both admitted, their product contains a new
+    # zero-charge coefficient: (1+z)(1+z^-1) has constant term 2.
+    laurent_left = {0: 1, 1: 1}
+    laurent_right = {0: 1, -1: 1}
+    laurent_product = Counter()
+    for left_degree, left_coefficient in laurent_left.items():
+        for right_degree, right_coefficient in laurent_right.items():
+            laurent_product[left_degree + right_degree] += (
+                left_coefficient * right_coefficient
+            )
+    assert laurent_product[0] == 2
+    checks["nonpointed_opposite_charges_can_create_charge_zero"] = "pass"
+
+    rank_row = [[Fraction(1), Fraction(0)]]
+    zero_charge_shear = [
+        [Fraction(1), Fraction(1)],
+        [Fraction(0), Fraction(1)],
+    ]
+    assert matrix_multiply(rank_row, zero_charge_shear) == [
+        [Fraction(1), Fraction(1)]
+    ]
+    checks["zero_charge_exceptional_shear_changes_rank_row"] = "pass"
+
     result = {
         "status": "pass",
         "check_count": len(checks),

@@ -137,10 +137,23 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   family.  The remaining selector must be a multiplicity-one
   filtered/semisimple/support-sensitive quotient or a genuinely non-Picard
   operation.
+  A mathematical-physics Stokes detour now has an exact algebraic target:
+  in a common pointed charge completion, positive-charge exceptional factors
+  form an augmentation congruence and cannot alter the degree-zero rank
+  quotient through any ordered product, inverse, or refactorization retained
+  in that common positive congruence.  This
+  could bypass local \(m=2\) boundary vanishing uniformly in \(m\), but it
+  replaces it with a zero-reflecting occurrence-charge provider.  Bare
+  Kontsevich--Soibelman support is insufficient; opposite charges and a
+  zero-charge exceptional shear are sharp countermodels.  The hostile
+  \(-1/R\) coefficient itself lies on nonzero exponent \(-1\) and therefore
+  passes the finite exponential-support regression after orienting the
+  one-sided cone.  The next charge regression is analytic retention of
+  that label and exclusion of opposite/zero charges over every occurrence.
   Shifted tensor stability and the extremal multinomial source law are
   proved, but the occurrence-indexed exact QDM sequence, actual carrier
   exponent, and boundary vanishing remain open.  The packet is split into
-  bounded module companions behind a stable index.  The sixty-six-check
+  bounded module companions behind a stable index.  The seventy-three-check
   finite law replay, eleven-check typed Haskell toy, and original cubic
   replay are green.  C925 remains open at fixed-phase Gamma/rank transport
   or at this ExactTop provider; the relative-cap cancellation remains one

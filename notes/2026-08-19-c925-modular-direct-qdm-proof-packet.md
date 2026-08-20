@@ -41,6 +41,7 @@ No manuscript or Lean source is part of this packet.
 | 34 | rank quotient line, one-path telescope, and coherence compression | notes/2026-08-20-c925-rank-quotient-path-compression.md |
 | 35 | pairing-dual point-line compression of the local rank law | notes/2026-08-20-c925-point-line-duality-compression.md |
 | 36 | commuting-unipotent no-go for point-line uniqueness | notes/2026-08-20-c925-unipotent-point-line-no-go.md |
+| 37 | charge-filtered Stokes augmentation and zero-charge collision test | notes/2026-08-20-c925-charge-filtered-stokes-specialization.md |
 | frontier | open experiments and provider targets | notes/2026-08-20-c925-exploration-frontier.md |
 
 ## Dependency spine
@@ -67,7 +68,7 @@ Modules 19--23 prove reusable categorical consequences:
 - universal center-null quotients and minimal sufficient shadows; and
 - the conditional Section 6 argument as a separate specialization.
 
-Modules 24--36 isolate the higher-stabilization frontier:
+Modules 24--37 isolate the higher-stabilization frontier:
 
 - irrationality on any unbounded stabilization set implies irrationality for
   every index;
@@ -113,6 +114,13 @@ Modules 24--36 isolate the higher-stabilization frontier:
   always has a common exceptional fixed vector; a successful selector must
   use a multiplicity-one filtered/semisimple/support-sensitive quotient or
   another non-Picard operation; and
+- a common pointed charge filtration makes every positive-charge exceptional
+  Stokes factor invisible to the degree-zero rank quotient, uniformly under
+  ordered products and inverses; the exact new provider is zero-reflecting
+  occurrence charge, not coefficientwise positivity or a bare KS support
+  property; the hostile \(-1/R\) coefficient is already nonzero exponent
+  degree, leaving analytic label retention and a global one-sided cone as the
+  open regressions; and
 - the rank-row route remains the higher-EV uniform alternative.
 
 ## Current \(m=2\) alternatives

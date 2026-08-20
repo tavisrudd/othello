@@ -44,6 +44,8 @@ exact \(m=2\) and all-\(m\) transport gates.
   notes/2026-08-20-c925-point-line-duality-compression.md
 - commuting-unipotent point-line no-go:
   notes/2026-08-20-c925-unipotent-point-line-no-go.md
+- charge-filtered Stokes specialization:
+  notes/2026-08-20-c925-charge-filtered-stokes-specialization.md
 - non-\(m=2\) categorical dividends:
   notes/2026-08-20-c925-non-m2-categorical-dividends.md
 - conditional Section 6 specialization:
@@ -125,6 +127,18 @@ index row.
   commuting family pointwise, has a common fixed vector.  A selector must
   instead use a multiplicity-one filtered/semisimple/support-sensitive
   quotient or a genuinely different operation.
+- A common pointed charge filtration would supply such a quotient: every
+  positive-charge exceptional Stokes factor acts trivially on degree zero,
+  through products, inverses, and refactorizations whose factors remain in
+  the same positive congruence and common receiver.  This is an
+  exact uniform replacement for local zero leakage, but it requires a new
+  occurrence-indexed, zero-reflecting charge realization.  Bare KS support
+  and coefficientwise Stokes positivity are insufficient.  The hostile
+  \(-1/R\) coefficient passes the finite exponential-support regression: it
+  lies on exponent \(-1\), hence in positive degree after orienting the
+  one-sided cone.  The remaining regression is whether the analytic Stokes
+  factor retains this label and whether all occurrences avoid opposite or
+  zero charge.
 
 ## Open geometric providers
 
@@ -134,6 +148,15 @@ Construct one coherent fixed-phase Gamma/Stokes/Orlov comparison which
 preserves the rank quotient through every actual blowup occurrence.  This is
 the highest-EV route because it avoids a universal threefold carrier theorem
 and is uniform in \(m\).
+
+### Charge-filtered Stokes
+
+Construct one occurrence-indexed pointed action/charge cone for the
+master-space Fourier comparison, prove that every exceptional Stokes factor
+has strictly positive charge after all lawful reindexings, and identify the
+degree-zero augmentation with the fixed-phase rank row.  This may bypass
+local boundary vanishing; a zero-charge exceptional shear is a sharp
+countermodel.
 
 ### ExactTop
 
@@ -174,22 +197,26 @@ Typed replay:
       | diff -u \
           notes/cubic-threefolds-tasks/c925-sparse-shadow-path-toy-output.txt -
 
-The finite model currently has sixty-six checks.  It verifies only the
+The finite model currently has seventy-three checks.  It verifies only the
 advertised algebraic laws and countermodels, never an external QDM provider.
 
 ## Next
 
-1. Prove the local fixed-phase QDM point-line law of Module 35: commute the
+1. Lift the nonzero exponent of the hostile \(-1/R\) relative-cap channel to
+   the actual point-to-exceptional Stokes factor, then test whether all toric
+   and \(\operatorname{Bl}_X\mathbf P^5\) occurrence charges lie in one
+   pointed cone.
+2. Prove the local fixed-phase QDM point-line law of Module 35: commute the
    primitive projector with the chosen monodromy, identify the Gamma and
    formally normalized point lines using a non-Picard selector or strict
    multiplicity-one filtration quotient, and provide lawful adjacent/endpoint
    reindexing along one chosen factorization.
-2. As the ExactTop alternative, construct a **corrected intrinsic**
+3. As the ExactTop alternative, construct a **corrected intrinsic**
    support/Gysin realization for Module 32; ordinary Gamma or residual
    projection is ruled out by the point regression.
-3. Prove the sharp occurrence-indexed exceptional exponent/carrier bound.
-4. If the monodromy route fails, construct the opposite-oriented enriched
+4. Prove the sharp occurrence-indexed exceptional exponent/carrier bound.
+5. If the monodromy route fails, construct the opposite-oriented enriched
    exact sequence and use the Module 25/26 boundary adapter.
-5. Continue the higher-EV rank-row common-receiver audit in parallel.
+6. Continue the higher-EV rank-row common-receiver audit in parallel.
 
 C925 remains active until the user closes it.
