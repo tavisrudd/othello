@@ -362,7 +362,8 @@ raw-\(K_0\) shortcuts failed.
 | When does an exceptional shift reach the ambient block? | **settled** | exactly \(a\ge j\), Corollary 32.1A |
 | Through what does the ambient term factor? | **settled** | center Gysin with \(Rp_*\mathcal O_E(a-j)\), Theorem 32.1 |
 | Can a center-null tensor ideal kill every multiplicity? | **settled formally** | Corollary 32.2A |
-| Does existing low-dimensional QDM vanishing define that tensor ideal/Gysin receiver? | **open** | construct the supported cyclotomic realization |
+| Does ordinary Gamma projection define that tensor ideal/Gysin receiver? | **no** | Module 33 point-support collision |
+| Can a corrected intrinsic support/Gysin receiver do so? | **open** | construct the relative framed localizing quantum motive |
 | What remains for a threefold center at \(m=2\)? | **open** | projected mixed graph/boundary plus carrier exponent |
 | What is the uniform all-\(m\) law? | **open** | tensor ideal or filtration killing all mixed Gysin words |
 
@@ -371,4 +372,6 @@ raw-\(K_0\) shortcuts failed.
 Theorems 32.1--32.2 and Corollaries 32.1A and 32.2A are proved at the derived/exact
 interface.  They identify the exact center-supported shape of mobile
 exceptional leakage but do not construct its cyclotomic QDM realization.
+Module 33 proves that ordinary Gamma projection cannot be that realization;
+only a corrected intrinsic Gysin theory remains open on this branch.
 No unconditional \(m=2\) or all-\(m\) theorem follows.

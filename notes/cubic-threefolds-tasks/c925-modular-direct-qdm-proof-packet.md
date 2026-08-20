@@ -36,6 +36,8 @@ exact \(m=2\) and all-\(m\) transport gates.
   notes/2026-08-20-c925-logarithmic-pencil-law.md
 - Orlov helix-wrap and thickened-center leakage:
   notes/2026-08-20-c925-orlov-helix-wrap.md
+- Gamma support collision and rank-row replacement:
+  notes/2026-08-20-c925-gamma-support-collision-and-rank-route.md
 - non-\(m=2\) categorical dividends:
   notes/2026-08-20-c925-non-m2-categorical-dividends.md
 - conditional Section 6 specialization:
@@ -97,6 +99,12 @@ index row.
   whole-center-null receiver kills every base multiplicity on the
   correction side; constructing that primitive-character receiver remains
   open.
+- Ordinary Gamma projection cannot supply that receiver: the point class on
+  a cubic has nonzero projection to both primitive-sixth branches.  The
+  same calculation proves the fixed-phase ambient-rank row is nonzero.  On
+  algebraic \(K_0\), that row kills every exceptional Orlov image; promoting
+  this square through the sectorial QDM comparison is the leading uniform
+  all-\(m\) gate.
 
 ## Open geometric providers
 
@@ -151,11 +159,12 @@ advertised algebraic laws and countermodels, never an external QDM provider.
 
 ## Next
 
-1. Instantiate the descending-line cocharacter and formal Levelt monodromy
-   functor for Iritani's completed comparison.
-2. Construct the exact primitive-character supported/Gysin realization
-   which kills the thickened-center terms of Module 32; in that same
-   receiver compute the projected mixed graph/boundary defect of \(X+aY\).
+1. Prove the fixed-phase QDM row law of Module 33: calibrate the ambient
+   rank row, kill each exceptional scalar, and verify product,
+   composition, and inverse coherence.
+2. As the ExactTop alternative, construct a **corrected intrinsic**
+   support/Gysin realization for Module 32; ordinary Gamma or residual
+   projection is ruled out by the point regression.
 3. Prove the sharp occurrence-indexed exceptional exponent/carrier bound.
 4. If the monodromy route fails, construct the opposite-oriented enriched
    exact sequence and use the Module 25/26 boundary adapter.
