@@ -3293,8 +3293,17 @@
       "last": 933,
       "purpose": "self-contained m=1 Hodge-atom marker-ledger companion paper",
       "sequence": 366
+    },
+    {
+      "count": 1,
+      "first": 934,
+      "kind": "reservation",
+      "lane": "cubic-threefolds",
+      "last": 934,
+      "purpose": "full integral decomposition complex for the cubic-threefold theta divisor",
+      "sequence": 367
     }
   ],
-  "next_id": 934,
+  "next_id": 935,
   "schema": "codex-task-id-allocations-v1"
 }
