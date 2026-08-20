@@ -8,6 +8,7 @@ Iritani, Guere, BFGMP, or KKPYY comparison theorems.
 from __future__ import annotations
 
 from collections import Counter
+from fractions import Fraction
 from itertools import permutations
 import json
 
@@ -74,6 +75,105 @@ def vector(**entries):
 
 def scale(counter, scalar):
     return Counter({key: scalar * value for key, value in counter.items()})
+
+
+def matrix_add(left, right):
+    return [
+        [a + b for a, b in zip(left_row, right_row)]
+        for left_row, right_row in zip(left, right)
+    ]
+
+
+def matrix_multiply(left, right):
+    return [
+        [
+            sum(left[i][k] * right[k][j] for k in range(len(right)))
+            for j in range(len(right[0]))
+        ]
+        for i in range(len(left))
+    ]
+
+
+def identity(size):
+    return [[Fraction(i == j) for j in range(size)] for i in range(size)]
+
+
+def jordan(size):
+    return [
+        [Fraction(1 if j == i + 1 else 0) for j in range(size)]
+        for i in range(size)
+    ]
+
+
+def kronecker(left, right):
+    rows = len(left) * len(right)
+    columns = len(left[0]) * len(right[0])
+    result = [[Fraction(0) for _ in range(columns)] for _ in range(rows)]
+    for i, left_row in enumerate(left):
+        for j, coefficient in enumerate(left_row):
+            for u, right_row in enumerate(right):
+                for v, entry in enumerate(right_row):
+                    result[i * len(right) + u][j * len(right[0]) + v] = (
+                        coefficient * entry
+                    )
+    return result
+
+
+def rational_rank(matrix):
+    work = [list(map(Fraction, row)) for row in matrix]
+    if not work:
+        return 0
+    rows = len(work)
+    columns = len(work[0])
+    pivot_row = 0
+    for column in range(columns):
+        pivot = next(
+            (row for row in range(pivot_row, rows) if work[row][column]), None
+        )
+        if pivot is None:
+            continue
+        work[pivot_row], work[pivot] = work[pivot], work[pivot_row]
+        pivot_value = work[pivot_row][column]
+        work[pivot_row] = [entry / pivot_value for entry in work[pivot_row]]
+        for row in range(rows):
+            if row == pivot_row:
+                continue
+            coefficient = work[row][column]
+            if coefficient:
+                work[row] = [
+                    entry - coefficient * pivot_entry
+                    for entry, pivot_entry in zip(work[row], work[pivot_row])
+                ]
+        pivot_row += 1
+        if pivot_row == rows:
+            break
+    return pivot_row
+
+
+def nilpotent_jordan_partition(matrix):
+    size = len(matrix)
+    power = identity(size)
+    kernel_dimensions = [0]
+    for _ in range(size):
+        power = matrix_multiply(power, matrix)
+        kernel_dimensions.append(size - rational_rank(power))
+    blocks_at_least = [
+        kernel_dimensions[k] - kernel_dimensions[k - 1]
+        for k in range(1, size + 1)
+    ]
+    partition = []
+    for block_size in range(1, size + 1):
+        next_count = blocks_at_least[block_size] if block_size < size else 0
+        exact_count = blocks_at_least[block_size - 1] - next_count
+        partition.extend([block_size] * exact_count)
+    return sorted(partition, reverse=True)
+
+
+def nilpotent_tensor(left_size, right_size):
+    return matrix_add(
+        kronecker(jordan(left_size), identity(right_size)),
+        kronecker(identity(left_size), jordan(right_size)),
+    )
 
 
 def main():
@@ -197,6 +297,56 @@ def main():
     length_b = sum(size * multiplicity for size, multiplicity in partition_b.items())
     assert length_a == length_b == 5
     checks["split_vs_exact_k0_retention"] = "pass"
+
+    # The unmarked constituent theory cannot pass the center-vanishing gate
+    # after two or more stabilizations: the threefold carrier itself is then
+    # an allowed center.
+    for stabilization in range(2, 7):
+        center_cutoff = 3 + stabilization - 2
+        assert 3 <= center_cutoff
+        stabilized = Counter({"cubic": stabilization + 1})
+        assert localize(stabilized, {"cubic": 3}, center_cutoff) == Counter()
+    checks["unmarked_constituent_no_go_m_2_through_6"] = "pass"
+
+    # Rep(G_a) Clebsch-Gordan law for nilpotent Jordan blocks in characteristic
+    # zero, including the projective/blowup coherence J_m tensor J_2.
+    for left_size in range(1, 6):
+        for right_size in range(1, 6):
+            expected = sorted(
+                [
+                    left_size + right_size - 2 * index + 1
+                    for index in range(1, min(left_size, right_size) + 1)
+                ],
+                reverse=True,
+            )
+            assert nilpotent_jordan_partition(
+                nilpotent_tensor(left_size, right_size)
+            ) == expected
+    for size in range(2, 7):
+        assert nilpotent_jordan_partition(nilpotent_tensor(size, 2)) == [
+            size + 1,
+            size - 1,
+        ]
+    checks["ga_clebsch_gordan_and_higher_pb_coherence"] = "pass"
+
+    # Ideal-quotient telescope: elementary shears whose targets are killed by
+    # the row marker remain invisible under arbitrary composition.
+    transition_1 = [
+        [Fraction(1), Fraction(0), Fraction(0)],
+        [Fraction(2), Fraction(1), Fraction(0)],
+        [Fraction(3), Fraction(0), Fraction(1)],
+    ]
+    transition_2 = [
+        [Fraction(1), Fraction(0), Fraction(0)],
+        [Fraction(0), Fraction(1), Fraction(4)],
+        [Fraction(5), Fraction(0), Fraction(1)],
+    ]
+    composite_transition = matrix_multiply(transition_2, transition_1)
+    rank_row = [Fraction(1), Fraction(0), Fraction(0)]
+    assert transition_1[0] == rank_row
+    assert transition_2[0] == rank_row
+    assert composite_transition[0] == rank_row
+    checks["ideal_quotient_composition_telescope"] = "pass"
 
     result = {
         "status": "pass",

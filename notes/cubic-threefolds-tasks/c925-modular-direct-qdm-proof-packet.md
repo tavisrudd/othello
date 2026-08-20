@@ -63,15 +63,21 @@ It currently contains:
 - exact specialization audits for Guéré's evaluated
   \(\clubsuit/\heartsuit\) properties, the marked BFGMP coarse-atom criterion,
   and the KKPYY chemical-formula/dimension-filtration layer; and
+- a bicategory of theory morphisms, an additive \(m\ge2\) no-go theorem, an
+  ideal-quotient composition theorem, and a monadic
+  \(\operatorname{Rep}(\mathbf G_a)\) specialization whose Clebsch--Gordan
+  law forces the higher exceptional strings; and
 - an explicit exploration frontier.
 
 The finite categorical law model is
 `notes/cubic-threefolds-tasks/c925-categorical-law-check.py`, with exact
 checked output
 `notes/cubic-threefolds-tasks/c925-categorical-law-check.json`.  It passes
-eight tests, including a negative collision test showing why Guéré's
-unit-shift separation contract is mandatory.  The original exact cubic
-residue replay also remains green.
+eleven tests, including a negative collision test showing why Guéré's
+unit-shift separation contract is mandatory, the \(m\ge2\) constituent
+no-go, \(\mathbf G_a\) Clebsch--Gordan through size five, and composition of
+rank-invisible shears.  The original exact cubic residue replay also remains
+green.
 
 Replay the categorical test with:
 

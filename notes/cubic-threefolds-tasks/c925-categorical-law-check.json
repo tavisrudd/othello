@@ -1,14 +1,17 @@
 {
-  "check_count": 8,
+  "check_count": 11,
   "checks": {
     "bittner_relation_codimension_2_through_6": "pass",
     "center_localization_idempotent_and_nested": "pass",
     "finite_kan_coarsening_composition": "pass",
     "free_sym_monad_and_fold_fusion": "pass",
+    "ga_clebsch_gordan_and_higher_pb_coherence": "pass",
     "guere_cofinite_probe_and_collision_guard": "pass",
+    "ideal_quotient_composition_telescope": "pass",
     "indexed_base_change_and_beck_chevalley_shadow": "pass",
     "kkpyy_atomization_and_chemical_formula": "pass",
-    "split_vs_exact_k0_retention": "pass"
+    "split_vs_exact_k0_retention": "pass",
+    "unmarked_constituent_no_go_m_2_through_6": "pass"
   },
   "scope": "finite algebraic law model only; external comparison theorems are inputs",
   "status": "pass"
