@@ -251,7 +251,8 @@ Thus \(W\) is the Segre--Igusa polar map.
 
 \begin{proof}
 The tight-frame argument in Section~\ref{sec:orientation-source} gives
-\(C_T^2=5I\).  Its off-diagonal entries are the pair-balance identities
+\(C_T^2=5I\).  The off-diagonal entries of that equation are the pair-balance
+identities
 \[
  \sum_{k\ne i,j}(C_T)_{ij}(C_T)_{jk}(C_T)_{ki}=0.
 \]
@@ -278,8 +279,7 @@ the displayed matrix.  For these representatives the complementary blocks
 Their determinants are \(4\) and \(-4\); the Hodge signs
 \(\operatorname{sgn}(S^c,S)\) are both \(-1\), while the internal triangle
 products are \(-1\) and \(+1\).  Hence in both orbits
-\((K_T)_{SS}=4(C_T)_{ij}(C_T)_{jk}(C_T)_{ki}\).  This exposes the
-complementary-minor step rather than treating it as formal.  The Pfaffian is
+\((K_T)_{SS}=4(C_T)_{ij}(C_T)_{jk}(C_T)_{ki}\).  The Pfaffian is
 therefore \(4Z_T\); squaring gives the determinant identity.
 
 The projectors split the axis space into two three-spaces.  Relative to that
@@ -780,7 +780,7 @@ that it satisfies \eqref{eq:two-graph-parity} with \(X\) replaced by \(V\).
 Let \(\mathcal A(\tau)\) be the four-sets on which the four values of
 \(\tau\) are all equal.  Complementing \(\tau\) preserves this family.
 
-Equation~\eqref{eq:two-graph-parity} is the definition of a two-graph, and the
+Equation~\eqref{eq:two-graph-parity} is the definition of a two-graph.  The
 correspondence between two-graphs and switching classes of graphs, used below
 as the two-graph equation, is likewise standard: two-graphs are due to Higman,
 with Taylor the standard reference and Seidel's switching the graph-side
@@ -897,6 +897,7 @@ For larger \(V\), apply the seven-point result to every seven-set.  Adjacent
 seven-sets in the connected Johnson graph share six vertices.  On any triple
 in that intersection the two restrictions cannot choose opposite complement
 conventions, so their complement choices agree.  This proves faithfulness.
+
 This proof is also the promised decoder.  Fix a root and six other vertices
 and test the twenty four-sets formed by the root and a triple of the six;
 \(R(3,3)=6\) supplies an aligned anchor \(Q\).  Query all four-sets meeting
@@ -1006,13 +1007,12 @@ measure different work and are not compared here.
 
 \smallskip
 \noindent\emph{The same statement in principal minors.}\par
-For a Seidel matrix the theorem is a statement about principal minors, and it
-is worth recording which ones it uses.  The principal minors of order at most three trivialize the
-problem: the \(1\times1\) minors vanish, the \(2\times2\) minors are all
+For a Seidel matrix the theorem is a statement about principal minors.  Those
+of order at most three trivialize the problem: the \(1\times1\) minors vanish, the \(2\times2\) minors are all
 \(-1\), and the third-order minors return the two-graph outright, as
 Remark~\ref{rem:alignment-query-count} records.  The theorem consults none of
 them.  Its data are the fourth-order principal minors, through
-\(\det C[Q]=3-2w(Q)\) below; that these take only the two values \(-3\) and
+\(\det C[Q]=3-2w(Q)\) above; that these take only the two values \(-3\) and
 \(5\) is Greaves and Suda's Table~1, and the \(-3\) fibre is their design.
 They are invariant under global negation, so they cannot distinguish \(C\)
 from \(-C\) and see each four-set only through the single bit
@@ -1056,5 +1056,5 @@ archive and summarized in Section~\ref{sec:verification}.
 This exchange invariant deliberately forgets signs: it sees \(A^2\), or
 equivalently \(RR^{\mathsf T}\).  The cubic stage above retains the
 determinant-line orientation.  Cut-independent squared singular spectrum,
-determinant orientation, and the later cubic shadows are therefore distinct
+determinant orientation, and the cubic shadows are therefore distinct
 claims.
