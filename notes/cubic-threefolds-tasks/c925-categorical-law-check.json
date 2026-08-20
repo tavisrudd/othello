@@ -1,8 +1,9 @@
 {
-  "check_count": 11,
+  "check_count": 16,
   "checks": {
     "bittner_relation_codimension_2_through_6": "pass",
     "center_localization_idempotent_and_nested": "pass",
+    "cyclic_krylov_moments_reconstruct_nilpotent_string": "pass",
     "finite_kan_coarsening_composition": "pass",
     "free_sym_monad_and_fold_fusion": "pass",
     "ga_clebsch_gordan_and_higher_pb_coherence": "pass",
@@ -10,6 +11,10 @@
     "ideal_quotient_composition_telescope": "pass",
     "indexed_base_change_and_beck_chevalley_shadow": "pass",
     "kkpyy_atomization_and_chemical_formula": "pass",
+    "m2_pointed_primary_shadow_ignores_row_null_packets": "pass",
+    "optic_residual_and_path_functor_naturality": "pass",
+    "reader_indexed_state_writer_composition": "pass",
+    "sparse_kernel_profile_reconstructs_jordan_type": "pass",
     "split_vs_exact_k0_retention": "pass",
     "unmarked_constituent_no_go_m_2_through_6": "pass"
   },

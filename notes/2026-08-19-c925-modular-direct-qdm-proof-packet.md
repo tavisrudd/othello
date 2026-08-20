@@ -55,6 +55,9 @@ full formal type.
 | See the whole proof in one diagram | Diagram 13.1 |
 | Compare Guéré/BFGMP and KKPYY | 7.6 and 17 |
 | Study morphisms, compositions, and \(m\ge2\) | 14.7 and 19 |
+| Reconstruct retained data from sparse shadows | 20 |
+| Implement Reader/indexed-State/Writer/optic effects | 20.3--20.5 |
+| Follow the concrete route to \(m=2\) | 21 |
 
 ---
 
@@ -2070,6 +2073,35 @@ Jordan type to be \(J_{m-1}\).  Treating them as
 \(J_1^{\oplus(m-1)}\) is compatible only after forgetting the operation, or
 in the accidental case \(m=2\).
 
+## H20. Does a lens invert a forgetful map?
+
+No.  An ordinary lens can update a focus while the original source, including
+its residual context, is still present.  It does not reconstruct the source
+from the focus alone.  Reconstruction requires either a retained residual, a
+contractible forgetful fibre, or a second jointly conservative shadow.
+
+## H21. Does recording the name of a forgetting path preserve its payload?
+
+No.  A path label supplies provenance and selects possible Beck--Chevalley
+transport, but two rich objects can traverse the same path to the same shadow.
+The path becomes reconstructive only when it carries an optic residual or a
+cartesian lift to a common source on which the desired marker is constant.
+
+## H22. Is every sparse reconstruction shadow closed under composition?
+
+No.  The complete nilpotent kernel profile is closed under direct sums and,
+in characteristic zero, determines the tensor decomposition.  The single bit
+\(D^m\ne0\) detects the desired endpoint string but is not by itself a lawful
+provider for arbitrary tensors or wall comparisons.  Consumer sufficiency
+must not be confused with provider closure.
+
+## H23. Is a function on path labels enough to transport retained data?
+
+No.  A path translator must preserve identities and composition, at least up
+to coherent 2-cells, and the shadow map must be natural with respect to it.
+Without that naturality square, mapping a route and mapping the payload are
+unrelated operations.
+
 ---
 
 # Module 16. Source boundary
@@ -2352,11 +2384,15 @@ texts, not against secondary descriptions.
    Proposition 5.17; Example 6.21.  Cached PDF SHA-256:
    `2c5c9f0a2f9eaf230605eaf844c3b7d08e0181e6dbc921153156a071d616ff64`.
 
-The finite algebraic shadow of the laws in Modules 7 and 17 is replayed by
+The finite algebraic shadow of the laws in Modules 7, 17, and 19--21 is replayed by
 `notes/cubic-threefolds-tasks/c925-categorical-law-check.py`; its checked
 output is `notes/cubic-threefolds-tasks/c925-categorical-law-check.json`.
-This replay tests coherence and the collision guard.  It is not evidence for
-the analytic comparison theorems, which remain primary inputs.
+The typed effect/optic toy is
+`notes/cubic-threefolds-tasks/c925-sparse-shadow-path-toy.hs`, with checked
+output in the adjacent `-output.txt` file.  These replays test finite
+coherence, collision, sparse reconstruction, and type-level path laws.  They
+are not evidence for the analytic comparison theorems, which remain primary
+inputs.
 
 Exact replay:
 
@@ -2364,13 +2400,22 @@ Exact replay:
 nix shell nixpkgs#python3 --command \
   python3 notes/cubic-threefolds-tasks/c925-categorical-law-check.py \
   | diff -u notes/cubic-threefolds-tasks/c925-categorical-law-check.json -
+
+nix shell nixpkgs#ghc --command \
+  runghc notes/cubic-threefolds-tasks/c925-sparse-shadow-path-toy.hs \
+  | diff -u \
+      notes/cubic-threefolds-tasks/c925-sparse-shadow-path-toy-output.txt -
 ```
 
 The SHA-256 hashes are
-`a66cc3746b5d1d044a3c26acb393755e4ccd774734abd9ed008af7d5d8e80854`
+`cd4129e493e5b98393ed7e59e2fb56de149675fbc762c3d1279c888c5977ffcd`
 for the script and
-`860c7132e9f1ba8c860aa0afa9e15f2d4db79f1208577400a9bc5ba8716bd54d`
-for the checked output.
+`a13e408408432ff5c36323998157d475ae9f9d9484158591c97eab201186631d`
+for its checked output; and
+`4d77f6d103b20bacd3ecdc7a30a2dc78039018c69c7c119ff301cd5612af8adb`
+and
+`9406cab21b4e8536ec42403e84accb39e67556f017df2d69c52821413d706360`
+for the Haskell toy and its checked output respectively.
 
 ---
 
@@ -2705,6 +2750,835 @@ shears as a model of Theorem 19.3.
 
 ---
 
+# Module 20. Sparse-shadow reconstruction, effects, and optics
+
+The other papers in the reconstruction programme suggest a distinction that
+the retention ladder in Module 14.7 did not yet make.  Information can be
+absent from the displayed shadow without being mathematically destroyed.
+Sometimes the shadow determines the rich object on a rigid locus; sometimes
+only the marker descends; sometimes the fibre is a finite torsor; and
+sometimes the information is genuinely lost.  These four cases must not be
+called by the same name.
+
+## 20.1 Marker descent through a forgetful shadow
+
+Let
+\[
+U:\mathcal C\longrightarrow\mathcal S
+\tag{20.1}
+\]
+be a functor from rich objects to shadows, and let
+\(M:\operatorname{Ob}(\mathcal C)/\!\cong\;\to A\) be an isomorphism-invariant
+marker with values in a set \(A\).  Write \(\operatorname{im}_0(U)\) for the
+image of \(U\) on isomorphism classes.
+
+## Theorem 20.1 -- sparse-shadow descent criterion
+
+There is a unique function
+\[
+\overline M:\operatorname{im}_0(U)\longrightarrow A,
+\qquad
+M=\overline M\circ U,
+\tag{20.2}
+\]
+if and only if
+\[
+Ux\cong Uy\quad\Longrightarrow\quad M(x)=M(y).
+\tag{20.3}
+\]
+
+### Proof
+
+Necessity follows by applying \(\overline M\) to an isomorphism of shadows.
+Conversely, define \(\overline M([Ux])=M(x)\).  Condition (20.3) makes this
+independent of the chosen lift, and uniqueness holds because every class in
+\(\operatorname{im}_0(U)\) has such a lift. ∎
+
+Thus **the object need not be reconstructible for its marker to be
+reconstructible**.  In the groupoid-valued refinement, one replaces (20.3)
+by an isomorphism
+\[
+p_1^*M\;\xRightarrow{\ \theta\ }\;p_2^*M
+\quad\text{on}\quad
+\mathcal C\times_{\mathcal S}\mathcal C
+\tag{20.4}
+\]
+satisfying the usual identity and cocycle laws on the triple fibre product.
+When \(U\) is an effective descent morphism for the target, this datum
+descends \(M\) to \(\mathcal S\).  Equation (20.4), rather than a choice of
+inverse to \(U\), is the categorical form of "the shadow forgot it, but the
+invariant did not."
+
+For a family of shadows \(U_i:\mathcal C\to\mathcal S_i\), replace \(U\) by
+the joint functor
+\[
+U_{\mathrm{joint}}=(U_i)_i:
+\mathcal C\longrightarrow\prod_i\mathcal S_i.
+\tag{20.5}
+\]
+Two individually lossy projections can be jointly conservative, or merely
+jointly sufficient for one marker.  This is the exact role of companion
+cubics, signed higher moments, marked contractions, and operator-valued
+atlases in the other papers.
+
+## 20.2 Four different forgetful fibres
+
+The fibre of \(U\) over a shadow separates four situations.
+
+1. **Contractible fibre.**  On a rigid stratum there is, up to unique
+   isomorphism, one lift.  A reconstruction functor \(R\) with
+   \(RU\simeq\mathrm{id}\) and \(UR\simeq\mathrm{id}\) makes \(U\) an
+   equivalence on that stratum.  The shadow has forgotten only a
+   presentation.
+2. **Marker-contractible fibre.**  Several inequivalent lifts remain, but
+   the desired marker is constant on the fibre.  Theorem 20.1 reconstructs
+   the marker without reconstructing the object.
+3. **Torsorial fibre.**  The lifts form a principal homogeneous space for a
+   group such as \(C_2\).  The shadow reconstructs the ambiguity but supplies
+   no canonical choice.  A marking, companion shadow, or section trivializes
+   the torsor.
+4. **Marker-varying fibre.**  Two lifts have the same shadow and different
+   marker.  The marker is genuinely destroyed.  Recording only the name of
+   the forgetful functor cannot repair this case.
+
+The restriction to a rigid carrier is part of the theorem, not decoration.
+Paper II's nonmatching fixed-line examples are an exact warning: a quadratic
+trade that reconstructs on the matching carrier does not reconstruct in the
+ambient fibre.
+
+## 20.3 Reconstruction patterns already present in the programme
+
+The following table is a structural synthesis of the complete local portfolio
+summary `papers/summary/README.md`, SHA-256
+`4184dc9e270a97e585d07a56d3f4d7a01f5fac480ef29e7c297f3b8f7c069a5e`.
+It does not import the papers' individual reconstruction theorems as inputs
+to the cubic proof.
+
+| source | sparse shadow | what is reconstructed | residual or gate |
+| --- | --- | --- | --- |
+| Clebsch I | deep-hole syndrome locus and nearest-word ambiguity | code, conic, polarity, golden operator | recognition is on the Clebsch rigidity locus; ambiguity data, not the point set alone, carries orientation |
+| Clebsch II | two-valued quadratic trade | unordered sheets | only on the perfect-matching carrier; complete splitting excludes the nonmatching fixed-line counterexamples; a signed cubic orients |
+| Clebsch III | incidence-cover sheet plus operator shadows | a conference source and its equivalent operator realizations | the sheet alone supplies none of the bridge marking |
+| Clebsch IV | weighted pair concurrences of minimum words | incidence matrix, code, association scheme, marked plane, conic, polarity | pair data are sufficient; triple concurrence is genuinely unnecessary |
+| Clebsch V | singular shadow of either invariant cubic | common six-axis carrier | the oriented round trip needs a chordal companion; the remaining ambiguity is a \(C_2\)-torsor |
+| PRS recursive carriers | polar contraction with the removed root retained | a lower split witness lifts coherently | the pointed lower packages are the stated existence gate |
+| stabilizer AME | one \((m+1)\)-party support atlas | complete local Weyl frame | recovered up to local symplectic frame change |
+| MDS--CSS | operator-valued Weyl atlas | equivalence data invisible to bounded scalar contractions | scalar contractions alone are constant on generic fibres and fail (20.3) |
+| golden exchange | singular values, then determinant sign, then calibrated amplitudes | successively the unframed carrier, orientation, and framed device | each added shadow shrinks the forgetful fibre |
+| cubic epilogue | QDM atom plus intrinsic line and modified residue | the obstruction not determined by the bare Hodge representation | the ordinary representation is realizable by a surface, while its atomic residue profile is not |
+
+Three recurring mechanisms emerge:
+
+\[
+\boxed{
+\text{rigid carrier restriction}
+\quad+\quad
+\text{jointly conservative shadows}
+\quad+\quad
+\text{a small residual marking}.}
+\tag{20.6}
+\]
+
+This is a more precise design rule than "retain everything."  One should
+retain the smallest collection for which the target marker satisfies the
+kernel-pair criterion (20.3) or its groupoid descent refinement (20.4).
+
+## 20.4 Reader, indexed State, and Writer
+
+The proof compiler has three different kinds of information, so an undivided
+ordinary `State` monad is the wrong software analogy.
+
+```haskell
+data Env keep = Env
+  { coefficientSpine :: FaithfulCommonSpine
+  , probePolicy       :: Filter (Probe keep)
+  , centerCutoff      :: Dimension
+  , globalErrorIdeal  :: TwoSidedIdeal
+  , coherenceAtlas    :: BeckChevalleyAtlas
+  }
+
+data Ledger keep stage = Ledger
+  { currentContext :: ContextAt stage
+  , currentBlocks  :: FreeSym (Shadow keep stage)
+  , currentMark    :: Maybe (MarkedRow keep stage)
+  }
+
+newtype ProofM keep source target a = ProofM
+  { runProofM :: Env keep
+              -> Ledger keep source
+              -> Either Failure
+                   (a, Ledger keep target, Certificate source target)
+  }
+```
+
+`Env` is Reader data: it is fixed for the entire factorization.  In
+particular, Theorem 19.3 requires **one global error ideal**; allowing each
+wall to mutate that ideal in State would invalidate the telescope.
+
+`Ledger keep source` is indexed State.  A wall, base change, or specialization
+can change the type of the state, so the correct bind has the form
+
+```haskell
+return :: a -> ProofM keep s s a
+(>>=)  :: ProofM keep s t a
+       -> (a -> ProofM keep t u b)
+       -> ProofM keep s u b
+```
+
+rather than the bind of ordinary `State s`.  The left-unit, right-unit, and
+associativity laws are exactly identity and associativity of comparison
+paths.  Certificates are 1-cells; the comparison coherence maps are 2-cells
+identifying different parenthesizations and allowed path refinements.
+
+Only path-independent summaries belong in a commutative Writer:
+
+```haskell
+data Evidence keep = Evidence
+  { observedProfiles :: FiniteSet (Profile keep)
+  , usedInputs        :: FiniteSet SourceId
+  , dischargedGates  :: FiniteSet GateId
+  }
+```
+
+Its union law makes accumulation associative, commutative, and idempotent.
+The raw ordered comparison path must not be flattened into this Writer; it
+lives in `Certificate source target`, where order and 2-cell coherence remain
+visible.
+
+Finally, retention is a capability, not a nullable record field:
+
+```haskell
+class Retention keep where
+  type Shadow keep stage
+  observe :: RichBlock stage -> Shadow keep stage
+  descent :: KernelPairLaw keep
+
+class Retention keep => HasNilpotentProfile keep where
+  kernelProfile :: Shadow keep stage -> [Nat]
+
+class Retention keep => HasPointRow keep where
+  rowShadow :: Shadow keep stage -> CyclicRowProfile
+```
+
+Parametricity then prevents a consumer configured for a coarse shadow from
+silently inspecting a forgotten Gamma row or nilpotent operator.
+
+## 20.5 Lenses, residuals, and parallel projections
+
+A lawful lens
+\[
+\operatorname{get}:A\to S,
+\qquad
+\operatorname{put}:A\times S\to A
+\tag{20.7}
+\]
+satisfies `GetPut`, `PutGet`, and `PutPut`.  These laws permit focused updates
+while \(A\) is still available.  They do **not** give a map \(S\to A\).
+
+The reconstructive version is a residual optic.  In a symmetric monoidal
+category, a representative has a residual \(R\) and maps of the shape
+\[
+A\longrightarrow R\otimes S,
+\qquad
+R\otimes S'\longrightarrow A'.
+\tag{20.8}
+\]
+When the first map is an isomorphism, the pair consisting of the visible
+shadow and the retained residual reconstructs the source.  A zipper is the
+corresponding data-structural example.  In the Clebsch series, a bridge
+marking, a companion cubic, or an orientation torsor is precisely such a
+residual.
+
+For QDM comparisons the product form (20.8) is often too restrictive.  The
+correct general optic is a common-source span
+\[
+\begin{array}{ccc}
+& \mathcal E & \\
+{}^{p}\swarrow && \searrow^{q}\\
+\mathcal S && \mathcal T,
+\end{array}
+\tag{20.9}
+\]
+where \(\mathcal E\) is a common coefficient spine, gauged master object, or
+marked comparison category.  To read a parallel shadow in \(\mathcal T\), one
+must retain either a lift \(e\in\mathcal E\) over the observed
+\(s=p(e)\), or enough residual data to choose such a lift.  Then the other
+shadow is \(q(e)\).  If no lift is retained, \(q(e)\) is nevertheless
+well-defined from \(s\) exactly when it is constant on the fibres of \(p\),
+which is Theorem 20.1 again.
+
+Tracking the route is therefore useful, but only in the following typed form:
+\[
+(\text{current shadow},\ \text{cartesian lift or residual},\
+  \text{path 1-cell},\ \text{coherence 2-cells}).
+\tag{20.10}
+\]
+The Grothendieck construction of the indexed block pseudofunctor in Module
+7.5 is a natural home for (20.10).  A Beck--Chevalley square lets a retained
+lift be pulled along one specialization and read through a parallel one.
+Different routes give the same marker only after the specified 2-cell is
+checked.
+
+The path itself can change type.  A morphism from one comparison theory to
+another therefore includes an indexed path translator:
+
+```haskell
+class PathFunctor f where
+  type FStage f source
+
+  mapPath :: Path source target
+          -> Path' (FStage f source) (FStage f target)
+
+  mapId      :: mapPath (identity @source) ~= identity
+  mapCompose :: mapPath (q . p) ~= mapPath q . mapPath p
+  mapTwoCell :: TwoCell p q -> TwoCell (mapPath p) (mapPath q)
+```
+
+In ordinary categories the two displayed comparisons are equalities.  For
+QDM comparison bicategories they are coherent invertible 2-cells, so
+`mapPath` is a pseudofunctor.  If comparison errors vanish only modulo the
+ideal of Theorem 19.3, it is first a lax path map and becomes an honest
+functor after passing to the quotient path category.
+
+A path functor alone still transports only provenance.  It must be paired
+with a shadow transformation
+
+```haskell
+mapShadow :: Shadow keep source
+          -> Shadow keep' (FStage f source)
+
+naturality :: mapShadow (transport p x)
+           ~= transport (mapPath p) (mapShadow x)
+```
+
+or, diagrammatically,
+\[
+\begin{array}{ccc}
+\operatorname{Shadow}(s)
+  &\xrightarrow{\operatorname{transport}(p)}&
+  \operatorname{Shadow}(t)\\
+{\scriptstyle\Phi_s}\,\big\downarrow&&
+  \big\downarrow\,{\scriptstyle\Phi_t}\\
+\operatorname{Shadow}'(Fs)
+  &\xrightarrow{\operatorname{transport}(Fp)}&
+  \operatorname{Shadow}'(Ft).
+\end{array}
+\tag{20.10a}
+\]
+This is the pseudonaturality component already required of a 1-cell in
+\(\mathsf{BlkTh}\).  When paths come in two kinds--vertical specializations
+and horizontal comparison spans--the faithful structure is a double functor
+or equipment morphism, with Beck--Chevalley squares mapped to squares.  This
+is the precise version of mapping one type of path to another while reading a
+retained focus through a parallel projection.
+
+In the effect interface, `PathFunctor` and its naturality certificate belong
+in `Env`; `Certificate source target` records which mapped path was actually
+used.  This keeps the translator global and lawful while allowing the indexed
+State to move through different source and target types.
+
+## Proposition 20.1A -- pullback along a path functor
+
+Let \(B:\mathcal P\to\mathsf{Gpd}\) and
+\(B':\mathcal P'\to\mathsf{Gpd}\) be indexed block theories, let
+\(F:\mathcal P\to\mathcal P'\) be a pseudofunctor on path types, and let
+\[
+\Phi:B\Longrightarrow B'F
+\tag{20.10b}
+\]
+be a pseudonatural shadow map.  If \(m'\) is invariant under every
+\(\mathcal P'\)-transport, then
+\[
+m_s(x):=m'_{Fs}(\Phi_sx)
+\tag{20.10c}
+\]
+is invariant under every \(\mathcal P\)-transport.  These pullbacks compose
+associatively, up to the inherited coherence 2-cells.
+
+### Proof
+
+For \(p:s\to t\), pseudonaturality identifies
+\(\Phi_t(B(p)x)\) with \(B'(F(p))\Phi_s(x)\).  The latter has the same
+\(m'\)-value as \(\Phi_s(x)\) by path invariance, which proves the first
+claim.  For two path functors, substitution in (20.10c) gives the composite
+shadow map; pseudofunctor associativity supplies the unique required 2-cell.
+∎
+
+This proposition is the reusable payoff of a path-mapping function: a lawful
+marker in the target path theory becomes a lawful marker in the source theory
+without re-proving every path comparison.  It does not rescue a target marker
+that already varies on the target's forgetful fibres.
+
+This exactly diagnoses the all-stabilizations Gamma route.  The common-open
+or gauged source is \(\mathcal E\), the endpoint theories are parallel
+projections, and the point row is the retained focus.  The missing marked
+threshold theorem is not the assertion that a path exists; it is the
+assertion that the relevant square carries a cartesian lift of the entire
+row-generated cyclic module, including the zero-mode nearby-cycle case.
+
+## 20.6 The nilpotent operator has a much smaller complete shadow
+
+The full matrix of \(D=\log\tau\) is unnecessary if only its conjugacy class
+or its longest strings matter.  For a nilpotent endomorphism of an
+\(n\)-dimensional vector space define
+\[
+k_j(D)=\dim\ker D^j,
+\qquad 0\le j\le n,
+\qquad k_0=0.
+\tag{20.11}
+\]
+
+## Theorem 20.2 -- kernel-profile reconstruction
+
+The integer vector
+\[
+\operatorname{KP}(D)=(k_1(D),\ldots,k_n(D))
+\tag{20.12}
+\]
+determines the nilpotent Jordan partition.  More precisely,
+\[
+\#\{\text{blocks of size at least }j\}=k_j-k_{j-1},
+\tag{20.13}
+\]
+and hence
+\[
+\operatorname{mult}(J_j)
+=2k_j-k_{j-1}-k_{j+1},
+\tag{20.14}
+\]
+where \(k_{n+1}=k_n\).  The profile is additive under direct sums.
+
+### Proof
+
+A block \(J_r\) contributes \(\min(j,r)\) to \(k_j\).  Its contribution to
+\(k_j-k_{j-1}\) is therefore one exactly when \(r\ge j\), proving (20.13).
+Taking the difference between the counts for \(j\) and \(j+1\) gives
+(20.14).  Kernel dimensions add under direct sums. ∎
+
+If \(D^r=0\), this compresses further:
+\[
+\operatorname{mult}(J_r)=\operatorname{rank}D^{r-1}.
+\tag{20.15}
+\]
+Indeed, among blocks of size at most \(r\), only \(J_r\) contributes to the
+rank of \(D^{r-1}\), and it contributes one.
+
+For \(m=2\), under the exponent bound \(D^3=0\), the single sparse Boolean
+\[
+\operatorname{rank}D^2>0
+\tag{20.16}
+\]
+detects a \(J_3\) string.  It distinguishes
+\(J_3\) from \(J_2\oplus J_1\) and \(J_1^{\oplus3}\), although all three have
+the same three-dimensional shadow after forgetting \(D\).  Thus the matrix
+entries of \(D\) may be forgotten while the exact information needed later is
+retained by three small integers, or by one rank under a certified exponent
+bound.
+
+The whole profile, unlike the one-bit consumer, is closed under the
+characteristic-zero tensor rule: it reconstructs the Jordan partition, and
+the Clebsch--Gordan formula (19.12) then computes the tensor profile.  It is
+therefore a genuine candidate for `Shadow keep`; (20.16) alone is generally
+only a final consumer.
+
+## 20.7 Cyclic rows are reconstructible from Krylov shadows
+
+The Gamma paper already singles out the **row-generated cyclic module**.  A
+cyclic module has a stronger sparse reconstruction theorem.
+
+## Theorem 20.3 -- pointed cyclic reconstruction
+
+Let \((M,D,v)\) be a pointed cyclic \(K[t]\)-module of dimension \(n\), with
+\(t\) acting by \(D\).  The monic annihilator \(p(t)\) of \(v\) has degree
+\(n\), and
+\[
+(M,D,v)\cong(K[t]/(p),\ t,\ 1)
+\tag{20.17}
+\]
+as a pointed module.  In particular, if \(D\) is nilpotent, cyclicity and the
+single number \(n\) force \(p=t^n\) and hence force \(J_n\).  The dual
+statement holds for a row that cyclically generates \(M^\vee\).
+
+### Proof
+
+The map \(K[t]\to M\), \(f\mapsto f(D)v\), is surjective by cyclicity.  Its
+kernel is a principal ideal \((p)\).  The quotient has dimension
+\(\deg p\), so \(\deg p=n\), giving (20.17).  If \(D\) is nilpotent then
+\(p\) divides a power of \(t\); being monic of degree \(n\), it is \(t^n\).
+∎
+
+There is also a purely scalar version.  Given a vector \(v\), a row
+\(\lambda\), and
+\[
+h_i=\lambda D^i v,
+\tag{20.18}
+\]
+form the \(n\times n\) Hankel matrix \(H=(h_{i+j})_{0\le i,j<n}\).  If
+\(H\) is invertible, then the \(2n\) moments
+\(h_0,\ldots,h_{2n-1}\) determine the monic relation
+\[
+p(t)=t^n+c_{n-1}t^{n-1}+\cdots+c_0
+\tag{20.19}
+\]
+by the linear system
+\[
+H(c_0,\ldots,c_{n-1})^{\mathsf T}
+=-(h_n,\ldots,h_{2n-1})^{\mathsf T}.
+\tag{20.20}
+\]
+Nondegeneracy makes the Krylov realization both cyclic and cocyclic, so this
+relation reconstructs the pointed realization up to unique similarity.
+
+This suggests a strictly smaller analytic provider target than a full
+Stokes-filtered object:
+
+```haskell
+data CyclicRowShadow = CyclicRowShadow
+  { dimension       :: Nat
+  , annihilator     :: MonicPolynomial
+  , primaryDeckType :: CyclotomicCharacter
+  , rankNormalization :: NonzeroScalar
+  }
+```
+
+or, when a common point column supplies a nondegenerate pairing, the finite
+moment list in (20.18).  Proving that these data cross every threshold may be
+easier than constructing an isomorphism of all ambient objects.  It is not
+automatic: the incomplete-Gamma and Fourier-boundary countermodels show that
+formal monodromy, integrality, or support without the cyclic-row reconstruction
+law are insufficient.
+
+## 20.8 Consequences for \(m=2\) and higher
+
+The sparse-shadow viewpoint changes the provider question but does not erase
+it.
+
+1. The bare functor
+   \(\operatorname{Rep}(\boldsymbol\mu_6\times\mathbf G_a)
+   \to\operatorname{Rep}(\boldsymbol\mu_6)\) genuinely loses the
+   \(J_3\) marker: its fibre contains \(J_3\),
+   \(J_2\oplus J_1\), and \(J_1^{\oplus3}\).  Theorem 20.1 fails there.
+2. The kernel-profile functor keeps no basis and no matrix entries, yet is
+   complete for nilpotent conjugacy and is additive under strict biproducts.
+   This is the smallest currently justified operation-level replacement for
+   retaining the full \(\mathbf G_a\)-module.
+3. On a certified cyclic primary row, dimension plus cyclicity reconstructs
+   the whole nilpotent string.  For \(X\times\mathbf P^2\), the desired
+   endpoint check can therefore be compressed to a nonzero top Krylov iterate
+   or to \(\operatorname{rank}D^2>0\).
+4. A common-source optic can transport that sparse row shadow through a
+   parallel specialization only when the marked Beck--Chevalley square is
+   proved.  Path provenance selects the square; it does not prove the square.
+5. If every low-dimensional center has vanishing top Krylov rank, Theorem
+   19.4 may be restated using this sparse rank rather than a full Jordan-block
+   object.  The arbitrary-center vanishing and threshold transport remain the
+   two substantive gates.
+
+The highest-value next test is therefore not "retain more."  It is:
+\[
+\boxed{
+\text{construct one common realization of the point-row cyclic module, then
+test whether its projected row satisfies marked threshold descent}.}
+\tag{20.21}
+\]
+Inside such a common realization, an annihilator or finite Krylov moments may
+be enough to certify the desired primary or nilpotent shadow.  Separately
+matching those data on two tails is not enough.  If two lifts through the same
+proposed shadow have different primary rows, annihilators, or top Krylov
+ranks, Theorem 20.1 supplies an exact counterexample and tells us which
+residual datum must be restored.
+
+The finite replay now tests kernel-profile reconstruction over every integer
+partition through total size eight, exact nilpotent Krylov reconstruction
+through size six, the Reader/indexed-State/Writer composition laws, and the
+fact that an optic residual--not a path label alone--recovers a parallel
+projection.
+
+---
+
+# Module 21. The concrete specialization from here to \(m=2\)
+
+Module 20 shows how information may descend through a sparse shadow.  The
+existing all-stabilizations draft identifies the particular shadow needed for
+the fivefold case.  It is not the unpointed Jordan partition by itself.  It is
+the **pointed formal-monodromy cyclic shadow**.
+
+## 21.1 The specialization chain
+
+At a finite Artin level and fixed ordinary degree, let an ambient marked QDM
+object carry:
+
+- half-Tate-normalized formal monodromy \(T\);
+- finite ramified deck group \(G\);
+- the horizontal Gamma point/rank row \(r\); and
+- the Rees connection and Stokes filtration needed to construct strict
+  comparison maps.
+
+First take the strict row-generated cyclic saturation
+\[
+\operatorname{Cyc}(H,T,G,r)
+=\operatorname{Sat}^{\mathrm{str}}_H
+  \left\langle g(rT^k):g\in G,\ 0\le k<\operatorname{rk}H\right\rangle.
+\tag{21.1}
+\]
+Then use polynomial B\'ezout functional calculus to project to the
+primitive-sixth primary factor.  The useful chain is
+\[
+\mathsf{StokesGamma}^{\mathrm{pointed}}
+\xrightarrow{\ \operatorname{Cyc}\ }
+\mathsf{CycRees}^{\mathrm{pointed}}_{T,G}
+\xrightarrow{\ e_{\zeta_6}(T)\ }
+\mathsf{CycPrim}^{\mathrm{pointed}}_{\zeta_6}
+\xrightarrow{\ Q_{\mathrm{row\text{-}null}}\ }
+\mathsf{CycPrim}^{\mathrm{pointed}}_{\zeta_6}/\mathcal I_r
+\xrightarrow{\ \ne0\ }
+\mathbf B.
+\tag{21.2}
+\]
+Here \(\mathcal I_r\) is a single global ideal of comparison errors whose
+targets are killed by the point row.  The final Boolean is
+\[
+b_{\zeta_6}(Y)
+=\begin{cases}
+1,&r_Ye_{\zeta_6}(T_Y)\ne0,\\
+0,&r_Ye_{\zeta_6}(T_Y)=0.
+\end{cases}
+\tag{21.3}
+\]
+
+The first two categories in (21.2) are provider categories.  They retain
+analytic structure needed to construct a lawful comparison.  The final two
+are consumer categories.  Once comparison has been proved, they forget the
+complementary QDM, bases, matrix entries, exact Barnes coefficients, and all
+primary factors except \(\zeta_6\).
+
+## 21.2 What must actually be retained
+
+The minimal proved consumer payload is:
+
+1. the primitive-sixth label, with its half-Tate normalization;
+2. the row-generated Krylov subspace
+   \[
+   C_T(r)=\operatorname{span}\{r,rT,rT^2,\ldots\};
+   \tag{21.4}
+   \]
+3. the action of \(T\) on that subspace, only far enough to form
+   \(e_{\zeta_6}(T)\);
+4. the distinguished row \(r\), normalized as the Euler rank functional; and
+5. a certificate that every mapped path carries \(r\) and intertwines \(T\).
+
+The provider temporarily retains more:
+
+6. strict Rees--Stokes saturation and deck action;
+7. one common equivariant input and derivative frame;
+8. compatible Artin reductions; and
+9. at a zero mode, the reduced nearby-cycle object and proof that its
+   vanishing-cycle submodule removes no part of (21.4).
+
+This distinction matters.  The Boolean (21.3) is enough to state the
+obstruction but not enough to manufacture or compose threshold maps.  The
+two-tail counterexample in the all-stabilizations draft shows that matching
+recurrences or tailwise holonomicity do not produce one common continuation.
+
+The nilpotent kernel profile of Module 20 is an optional parallel consumer:
+it can detect a coherent \(J_3\) refinement when such an operation has been
+constructed.  It is **not required** for the point-row Boolean (21.3), whose
+operator is formal monodromy \(T\) and whose purpose is spectral support, not
+Jordan length.
+
+## 21.3 The required parallel projection
+
+At a nonzero sign or stability threshold the optic has one middle object:
+\[
+\begin{array}{ccccc}
+&& (\mathcal K_j,\mathfrak r_j,T_j) &&\\
+&\swarrow\scriptstyle{\operatorname{res}^-}&&
+  \searrow\scriptstyle{\operatorname{res}^+}&\\
+(K_j^-,r_j^-,T_j^-)&&&& (K_j^+,r_j^+,T_j^+).
+\end{array}
+\tag{21.5}
+\]
+The residual in the sense of Module 20.5 is the common marked object
+\((\mathcal K_j,\mathfrak r_j,T_j)\) together with the oriented path between
+its boundary restrictions.  Parallel transport gives
+\[
+\Phi_j:K_j^-\xrightarrow{\sim}K_j^+,
+\qquad
+\Phi_jT_j^-=T_j^+\Phi_j,
+\qquad
+\Phi_j(r_j^-)=r_j^+.
+\tag{21.6}
+\]
+Polynomial naturality then gives
+\[
+\Phi_j\bigl(r_j^-e_{\zeta_6}(T_j^-)\bigr)
+=r_j^+e_{\zeta_6}(T_j^+),
+\tag{21.7}
+\]
+so the Boolean crosses the threshold.
+
+At a zero-mode rank change, the middle object in (21.5) must be replaced by
+the **row-generated reduced nearby-cycle module**.  The two adjacent tail
+modules must specialize strictly into that one receiver before the parallel
+read is taken.  A span of ambient modules of unequal rank, or two separately
+chosen cyclic models with the same annihilator, does not suffice.
+
+The residual ultimately comes from the point of the common birational open.
+Its skyscraper class defines the Euler rank row.  Exceptional Orlov or wall
+summands are supported away from that point and are orthogonal to the row.
+This is why the common-source lift retains provenance that the unmarked
+formal spectrum appears to forget.
+
+## 21.4 The path functor for the fivefold proof
+
+The desired map of path types is
+\[
+\mathsf{CobPath}_5
+\xrightarrow{\ F_{\mathrm{cyc}}\ }
+\mathsf{Path}
+  \left(\mathsf{CycPrim}^{\mathrm{pointed}}_{\zeta_6}/\mathcal I_r\right).
+\tag{21.8}
+\]
+A Włodarczyk/VGIT threshold path is sent to the comparison (21.6), or to
+its reduced-nearby-cycle analogue.  The accompanying shadow transformation
+sends the orbit-cylinder point class to the row-generated cyclic module.
+Its pseudonaturality square is exactly (21.7).
+
+This path functor should be defined **after** quotienting by the one global
+row-null ideal whenever the unquotiented transition is only
+\(1+\text{exceptional error}\).  Theorem 19.3 then makes any finite composite
+row-invisible, while Proposition 20.1A pulls the target Boolean back to a
+path-invariant marker on fivefold cobordisms.
+
+In software form the essential method is:
+
+```haskell
+data PointedPrimary = PointedPrimary
+  { character  :: PrimitiveCharacter
+  , monodromy  :: Endomorphism
+  , pointRow   :: Row
+  , cyclicCert :: CyclicSaturationCertificate
+  }
+
+mapPath :: CobordismPath y0 y1
+        -> CyclicPath (PrimaryShadow y0) (PrimaryShadow y1)
+
+mapShadow :: MarkedQDM y -> PointedPrimary y
+
+naturality :: mapShadow (transportQDM p q)
+           ~= transportCyclic (mapPath p) (mapShadow q)
+```
+
+The global ideal, primitive character, coefficient spine, common input frame,
+and path translator live in Reader.  The current pointed cyclic module lives
+in indexed State.  The finite ordered comparison stays in the certificate;
+only discharged support and rank-nullity facts enter the commutative Writer.
+
+## 21.5 Endpoint contrast for \(m=2\)
+
+The endpoint computation is already unconditional.  Quantum K\"unneth gives
+three copies of each cubic primitive-sixth line on
+\(X\times\mathbf P^2\), and multiplicativity of the Gamma framing makes the
+point row nonzero on that primary packet.  Thus
+\[
+b_{\zeta_6}(X\times\mathbf P^2)=1.
+\tag{21.9}
+\]
+Every formal factor of \(\mathbf P^5\) has normalized exponent zero, so
+\[
+b_{\zeta_6}(\mathbf P^5)=0.
+\tag{21.10}
+\]
+If (21.8) exists for the unknown birational map supplied by a hypothetical
+rationality of \(X\times\mathbf P^2\), Proposition 20.1A makes (21.9) and
+(21.10) equal, a contradiction.
+
+## 21.6 Why this beats the unmarked and \(J_3\)-only routes
+
+The decisive regression is
+\[
+\operatorname{Bl}_X\mathbf P^5.
+\tag{21.11}
+\]
+The unmarked rational side can acquire the same primitive-sixth packet from
+the cubic threefold center.  Hence multiplicity and every other positive
+constituent-additive marker fail exactly as Theorem 19.2 predicts.
+
+The point row distinguishes **where the packet lands**.  Exceptional classes
+have ambient rank zero, equivalently they pair trivially with the skyscraper
+of a point in the common open.  They may survive as unmarked blocks while
+mapping to zero under (21.3).  This is the key example of information which
+appears forgotten in a local spectrum but is retained by a higher common
+source and recovered through a parallel pointed projection.
+
+The two current \(m=2\) routes therefore have different gates:
+
+| route | retained specialization | advantage | unresolved gate |
+| --- | --- | --- | --- |
+| pointed Gamma/rank | \((C_T(r),T,r)_{\zeta_6}\) modulo one row-null ideal | exceptional cubic-center packets are invisible; uniform in \(m\) | construct the one-object threshold and zero-mode parallel projections for arbitrary admissible masters |
+| operation/Jordan | primitive-sixth \(K[N]\)-module or kernel profile | no Gamma row in final cancellation; \(J_3\) is a sharp \(m=2\) object | construct strict \(N\)-transport and prove no threefold center supplies the forbidden \(J_3\) carrier |
+
+The pointed Gamma/rank route is presently higher value because its marking
+was designed for the concrete fivefold self-carrier (21.11).  The Jordan
+route remains useful as an independent specialization and as a diagnostic of
+which extension information the unmarked spectrum destroys.
+
+## 21.7 A smaller but still legitimate threshold target
+
+The full ambient QDM need not cross a threshold.  It is enough to construct
+one common marked cyclic object whose boundary restrictions satisfy (21.6).
+Within that object, it is enough for the \(\zeta_6\)-projected row itself to
+survive.  Equivalently, one may prove that every elementary transition has
+the form
+\[
+1+v\otimes\lambda,
+\qquad r(v)=0,
+\tag{21.12}
+\]
+in one common receiver.  Then the row fixes every factor and the full
+transition by Theorem 19.3.
+
+When a common column gives the nondegenerate realization of Theorem 20.3,
+finite Krylov moments can serve as a certificate **inside this common
+object**.  Equality of separately computed moment lists on the two tails is
+not enough.  The minimal credible target for \(m=2\) is therefore:
+
+\[
+\boxed{
+\begin{gathered}
+\text{one common row-generated Rees object at each threshold,}\\
+\text{one global row-null ideal, and one path functor satisfying (21.7).}
+\end{gathered}}
+\tag{21.13}
+\]
+
+This formulation does not prove the missing analytic theorem.  It removes
+irrelevant ambient structure from its statement and identifies exactly which
+parallel projection must retain the information needed for \(m=2\).
+
+The finite replay includes the endpoint shadow of this specialization: six
+unmarked primitive-sixth lines on \(X\times\mathbf P^2\) collapse to the
+single nonzero pointed Boolean, \(\mathbf P^5\) gives zero, and adding an
+arbitrary primitive-sixth block killed by the point row changes the unmarked
+count without changing the pointed marker.
+
+## 21.8 Internal source audit
+
+The specialization in this module is extracted from, and was checked against,
+the following complete local source files.  It is a reorganization of their
+proved endpoint and conditional transport interface, not a promotion of the
+missing threshold theorem.
+
+| source | role | SHA-256 |
+| --- | --- | --- |
+| `papers/cubic-stabilization-irrationality/sections/01-introduction.tex` | fivefold self-carrier obstruction and point-row Boolean | `6bc03390ed53c42a19db8e50428c455df1cb087ae06ba496416c9709b7285b50` |
+| `papers/cubic-stabilization-irrationality/sections/08-global-transport.tex` | finite dual cyclic Rees module, marked threshold and zero-mode hypotheses, cyclic-row support, conditional birational invariance | `92a45fdc9f2e9046795570ba129562c1c27d1bcbcaf963aa49376505381e1ae8` |
+| `papers/cubic-stabilization-irrationality/sections/09-cubic-endpoint.tex` | primitive-sixth Barnes row and projective-stabilization endpoint contrast | `3421b4bc17f13af73696c1366869ddc0aeefa7d5595beac89126530b8542626b` |
+| `notes/cubic-threefolds-tasks/c907-solver-dossier.md` | rank-row strategy, failure models, and current analytic gate | `0e4fcedb4513c4c4ecf61d2ea68e5102133d4191fe3a952d4f63cf1468702958` |
+| `notes/cubic-threefolds-tasks/c907-quantum-monodromy-stabilization.md` | \(m=2\) route comparison and minimal \(K[N]\) alternative | `a9b65f9155bc0501846a87c2ffac47f52607e6596a800444308c89c9c0b115b2` |
+
+---
+
 # Exploration frontier
 
 This packet deliberately remains open under C925.  The next design questions
@@ -2759,9 +3633,27 @@ are:
 12. **Can the projective and blowup lifts be made one rig pseudofunctor?**
     Equation (19.13) is the first compulsory regression.  For \(m\ge3\), it
     forces the exceptional copies into a non-split \(J_{m-1}\) string.
+13. **Does the point-row marker descend through a finite Krylov shadow?**
+    Theorem 20.3 reduces this to cyclicity, a nondegenerate common point
+    column, and preservation of one finite recurrence at every threshold.
+14. **Which comparison paths admit lawful optics?**  A useful path must retain
+    a cartesian lift or residual and satisfy the relevant Beck--Chevalley
+    2-cell.  Provenance without that residual is not reconstructive.
+15. **Can the arbitrary-center gate be stated in kernel-profile language?**
+    For \(m=2\), vanishing of the top rank \(\operatorname{rank}D^2\) is much
+    smaller than classification of every center's full Stokes object, but it
+    still needs a geometric proof.
+16. **Can the fivefold path functor be built directly in the row-null
+    quotient?**  This would avoid choosing ambient threshold isomorphisms
+    that the final Boolean never consumes, while retaining the one-object and
+    zero-mode conditions that the countermodels show are essential.
+17. **Can the rank-zero-target Stokes lemma be promoted to an optic law?**
+    Equation (21.12) is exactly the local condition.  The remaining issue is
+    to place every wall and overlap map in one common receiver and one global
+    two-sided ideal.
 
 None of these questions blocks the proof in Modules 0--16 or the
-transport-level specialization audit in Module 17.  Modules 18--19 isolate
+transport-level specialization audit in Module 17.  Modules 18--21 isolate
 the general consequences without claiming the missing enriched provider.
 The open questions control whether the interface can be promoted from a
 lawful compiler to a canonical equivalence with the complete external

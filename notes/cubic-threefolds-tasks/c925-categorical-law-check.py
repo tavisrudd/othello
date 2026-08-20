@@ -176,6 +176,94 @@ def nilpotent_tensor(left_size, right_size):
     )
 
 
+def matrix_power(matrix, exponent):
+    result = identity(len(matrix))
+    for _ in range(exponent):
+        result = matrix_multiply(result, matrix)
+    return result
+
+
+def block_diagonal(blocks):
+    size = sum(len(block) for block in blocks)
+    result = [[Fraction(0) for _ in range(size)] for _ in range(size)]
+    offset = 0
+    for block in blocks:
+        for row, entries in enumerate(block):
+            for column, entry in enumerate(entries):
+                result[offset + row][offset + column] = entry
+        offset += len(block)
+    return result
+
+
+def integer_partitions(total, maximum=None):
+    if total == 0:
+        yield ()
+        return
+    if maximum is None:
+        maximum = total
+    for first in range(min(total, maximum), 0, -1):
+        for tail in integer_partitions(total - first, first):
+            yield (first,) + tail
+
+
+def kernel_profile(matrix):
+    size = len(matrix)
+    return [
+        size - rational_rank(matrix_power(matrix, exponent))
+        for exponent in range(1, size + 1)
+    ]
+
+
+def partition_from_kernel_profile(profile):
+    kernels = [0] + profile + [profile[-1]]
+    partition = []
+    for block_size in range(1, len(profile) + 1):
+        exact_count = (
+            2 * kernels[block_size]
+            - kernels[block_size - 1]
+            - kernels[block_size + 1]
+        )
+        partition.extend([block_size] * exact_count)
+    return sorted(partition, reverse=True)
+
+
+def matrix_vector(matrix, vector):
+    return [
+        sum(entry * coordinate for entry, coordinate in zip(row, vector))
+        for row in matrix
+    ]
+
+
+def dot(left, right):
+    return sum(a * b for a, b in zip(left, right))
+
+
+def solve_square(matrix, vector):
+    size = len(matrix)
+    work = [
+        list(map(Fraction, row)) + [Fraction(value)]
+        for row, value in zip(matrix, vector)
+    ]
+    for column in range(size):
+        pivot = next(
+            (row for row in range(column, size) if work[row][column]), None
+        )
+        assert pivot is not None
+        work[column], work[pivot] = work[pivot], work[column]
+        pivot_value = work[column][column]
+        work[column] = [entry / pivot_value for entry in work[column]]
+        for row in range(size):
+            if row == column:
+                continue
+            coefficient = work[row][column]
+            if coefficient:
+                work[row] = [
+                    entry - coefficient * pivot_entry
+                    for entry, pivot_entry in zip(work[row], work[column])
+                ]
+    return [work[row][-1] for row in range(size)]
+
+
 def main():
     checks = {}
 
@@ -347,6 +435,161 @@ def main():
     assert transition_2[0] == rank_row
     assert composite_transition[0] == rank_row
     checks["ideal_quotient_composition_telescope"] = "pass"
+
+    # A nilpotent matrix may be forgotten after retaining only its kernel
+    # dimensions: that sparse integer profile reconstructs every Jordan block.
+    for dimension in range(1, 9):
+        for partition in integer_partitions(dimension):
+            matrix = block_diagonal([jordan(size) for size in partition])
+            profile = kernel_profile(matrix)
+            assert partition_from_kernel_profile(profile) == list(partition)
+    j3 = jordan(3)
+    j2_plus_j1 = block_diagonal([jordan(2), jordan(1)])
+    split_three = block_diagonal([jordan(1), jordan(1), jordan(1)])
+    assert rational_rank(matrix_power(j3, 2)) == 1
+    assert rational_rank(matrix_power(j2_plus_j1, 2)) == 0
+    assert rational_rank(matrix_power(split_three, 2)) == 0
+    checks["sparse_kernel_profile_reconstructs_jordan_type"] = "pass"
+
+    # In a cyclic/cocyclic realization, 2n scalar Krylov moments recover the
+    # monic annihilator.  The standard J_n realization recovers t^n exactly.
+    for size in range(1, 7):
+        operator = jordan(size)
+        cyclic_vector = [Fraction(0)] * (size - 1) + [Fraction(1)]
+        row = [Fraction(1)] + [Fraction(0)] * (size - 1)
+        moments = []
+        iterate = cyclic_vector
+        for _ in range(2 * size):
+            moments.append(dot(row, iterate))
+            iterate = matrix_vector(operator, iterate)
+        hankel = [
+            [moments[i + j] for j in range(size)] for i in range(size)
+        ]
+        assert rational_rank(hankel) == size
+        coefficients = solve_square(
+            hankel, [-moments[size + i] for i in range(size)]
+        )
+        assert coefficients == [Fraction(0)] * size
+    checks["cyclic_krylov_moments_reconstruct_nilpotent_string"] = "pass"
+
+    # Reader is fixed, State changes index, Writer summaries commute, and raw
+    # path certificates retain their order.  Parenthesization does not matter.
+    environment = {
+        "coefficient_spine": "C[q][[Q,t]]",
+        "global_ideal": "rank_zero",
+    }
+
+    def effect_step(delta, evidence, path_label):
+        def run(env, state):
+            assert env is environment
+            assert env["global_ideal"] == "rank_zero"
+            return state + delta, frozenset({evidence}), (path_label,)
+
+        return run
+
+    def effect_identity(env, state):
+        assert env is environment
+        return state, frozenset(), ()
+
+    def effect_compose(first, second):
+        def run(env, state):
+            middle, evidence_1, path_1 = first(env, state)
+            target, evidence_2, path_2 = second(env, middle)
+            return target, evidence_1 | evidence_2, path_1 + path_2
+
+        return run
+
+    step_a = effect_step(2, "a", "wall-a")
+    step_b = effect_step(3, "b", "wall-b")
+    step_c = effect_step(5, "c", "wall-c")
+    left_associated = effect_compose(effect_compose(step_a, step_b), step_c)
+    right_associated = effect_compose(step_a, effect_compose(step_b, step_c))
+    assert left_associated(environment, 7) == right_associated(environment, 7)
+    assert effect_compose(effect_identity, step_a)(environment, 7) == step_a(
+        environment, 7
+    )
+    assert effect_compose(step_a, effect_identity)(environment, 7) == step_a(
+        environment, 7
+    )
+    ab = effect_compose(step_a, step_b)(environment, 7)
+    ba = effect_compose(step_b, step_a)(environment, 7)
+    assert ab[:2] == ba[:2]
+    assert ab[2] != ba[2]
+    checks["reader_indexed_state_writer_composition"] = "pass"
+
+    # A path functor maps identities and composites, while payload naturality
+    # is a separate required law.  A residual, unlike a path label alone,
+    # recovers a parallel projection.
+    def map_path(path):
+        return tuple(2 * increment for increment in path)
+
+    def source_transport(path, value):
+        return value + sum(path)
+
+    def target_transport(path, value):
+        return value + sum(path)
+
+    def map_shadow(value):
+        return 2 * value
+
+    path_p = (1, 3)
+    path_q = (2,)
+    assert map_path(()) == ()
+    assert map_path(path_p + path_q) == map_path(path_p) + map_path(path_q)
+    assert map_shadow(source_transport(path_p, 11)) == target_transport(
+        map_path(path_p), map_shadow(11)
+    )
+    rich_plus = ("six_axes", "+")
+    rich_minus = ("six_axes", "-")
+    coarse = lambda rich: rich[0]
+    path_label = lambda _rich: "forget_orientation"
+    parallel = lambda rich: (rich[0], "chordal_" + rich[1])
+    residualize = lambda rich: (rich[1], coarse(rich))
+    reconstruct = lambda residual_shadow: (
+        residual_shadow[1],
+        residual_shadow[0],
+    )
+    assert coarse(rich_plus) == coarse(rich_minus)
+    assert path_label(rich_plus) == path_label(rich_minus)
+    assert parallel(rich_plus) != parallel(rich_minus)
+    assert reconstruct(residualize(rich_plus)) == rich_plus
+    assert reconstruct(residualize(rich_minus)) == rich_minus
+    checks["optic_residual_and_path_functor_naturality"] = "pass"
+
+    # The m=2 specialization retains primitive-sixth support seen by the
+    # point row, not the unmarked primitive packet count.  Row-null exceptional
+    # packets can change the latter while leaving the former unchanged.
+    cubic_times_p2 = [
+        {"character": character, "point_row": True}
+        for character in ("zeta6", "zeta6_bar")
+        for _ in range(3)
+    ]
+    projective5 = [
+        {"character": "trivial", "point_row": True} for _ in range(6)
+    ]
+    projective5_with_exceptional = projective5 + [
+        {"character": "zeta6", "point_row": False}
+    ]
+
+    def unmarked_primitive_count(blocks):
+        return sum(
+            block["character"] in {"zeta6", "zeta6_bar"} for block in blocks
+        )
+
+    def pointed_primary_boolean(blocks):
+        return any(
+            block["character"] in {"zeta6", "zeta6_bar"}
+            and block["point_row"]
+            for block in blocks
+        )
+
+    assert unmarked_primitive_count(cubic_times_p2) == 6
+    assert pointed_primary_boolean(cubic_times_p2)
+    assert unmarked_primitive_count(projective5) == 0
+    assert not pointed_primary_boolean(projective5)
+    assert unmarked_primitive_count(projective5_with_exceptional) == 1
+    assert not pointed_primary_boolean(projective5_with_exceptional)
+    checks["m2_pointed_primary_shadow_ignores_row_null_packets"] = "pass"
 
     result = {
         "status": "pass",

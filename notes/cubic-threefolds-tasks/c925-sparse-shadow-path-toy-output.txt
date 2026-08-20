@@ -1,0 +1,11 @@
+path_functor_identity: pass
+path_functor_composition: pass
+path_payload_naturality: pass
+reader_indexed_state_writer_associativity: pass
+reader_indexed_state_writer_units: pass
+lens_laws: pass
+path_label_alone_is_not_reconstructive: pass
+optic_residual_recovers_parallel_projection: pass
+kernel_profile_reconstructs_jordan_partition: pass
+sparse_top_rank_detects_j3: pass
+m2_pointed_primary_specialization: pass

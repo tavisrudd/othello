@@ -67,17 +67,28 @@ It currently contains:
   ideal-quotient composition theorem, and a monadic
   \(\operatorname{Rep}(\mathbf G_a)\) specialization whose Clebsch--Gordan
   law forces the higher exceptional strings; and
+- a sparse-shadow descent criterion, four-way reconstruction-fibre audit,
+  kernel-profile and cyclic-Krylov reconstruction theorems, and a typed
+  Reader/indexed-State/Writer/optic interface with pseudofunctorial path
+  translation; and
+- a concrete \(m=2\) specialization through the pointed formal-monodromy
+  cyclic shadow, its common-threshold/reduced-nearby-cycle parallel
+  projections, and the global row-null quotient; and
 - an explicit exploration frontier.
 
 The finite categorical law model is
 `notes/cubic-threefolds-tasks/c925-categorical-law-check.py`, with exact
 checked output
 `notes/cubic-threefolds-tasks/c925-categorical-law-check.json`.  It passes
-eleven tests, including a negative collision test showing why Guéré's
+sixteen tests, including a negative collision test showing why Guéré's
 unit-shift separation contract is mandatory, the \(m\ge2\) constituent
 no-go, \(\mathbf G_a\) Clebsch--Gordan through size five, and composition of
-rank-invisible shears.  The original exact cubic residue replay also remains
-green.
+rank-invisible shears, plus exact kernel-profile, Krylov, effect-stack, and
+optic/path-functor and pointed \(m=2\) endpoint checks.  A separate executable Haskell toy at
+`notes/cubic-threefolds-tasks/c925-sparse-shadow-path-toy.hs` verifies the
+typed path translator, payload naturality, indexed bind laws, lens laws, and
+the necessity of an optic residual.  The original exact cubic residue replay
+also remains green.
 
 Replay the categorical test with:
 
@@ -85,6 +96,15 @@ Replay the categorical test with:
 nix shell nixpkgs#python3 --command \
   python3 notes/cubic-threefolds-tasks/c925-categorical-law-check.py \
   | diff -u notes/cubic-threefolds-tasks/c925-categorical-law-check.json -
+```
+
+Replay the typed Haskell toy with:
+
+```bash
+nix shell nixpkgs#ghc --command \
+  runghc notes/cubic-threefolds-tasks/c925-sparse-shadow-path-toy.hs \
+  | diff -u \
+      notes/cubic-threefolds-tasks/c925-sparse-shadow-path-toy-output.txt -
 ```
 
 Keep C925 active: the user has asked to continue exploring the categorical and

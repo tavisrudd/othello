@@ -49,8 +49,16 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   evaluated coarse blocks and the KKPYY chemical formula.  A bicategory of
   theory morphisms now yields an additive \(m\ge2\) no-go, an ideal-quotient
   telescope, and the operation-framed \(\operatorname{Rep}(\mathbf G_a)\)
-  specialization with its compulsory higher exceptional strings; an
-  eleven-check finite law replay and the original cubic replay are green.
+  specialization with its compulsory higher exceptional strings.  The
+  sparse-shadow extension now separates object reconstruction, marker
+  descent, residual torsors, and genuine loss; it includes kernel-profile and
+  cyclic-Krylov reconstruction, Reader/indexed-State/Writer effects, residual
+  optics, and pseudofunctorial mapping between path types.  The concrete
+  \(m=2\) target is now the pointed formal-monodromy cyclic shadow projected
+  through one common threshold or reduced-nearby-cycle object and then
+  quotiented by one global row-null ideal; this is distinguished explicitly
+  from the secondary \(J_3\) route.  A sixteen-check finite law replay, an
+  eleven-check typed Haskell toy, and the original cubic replay are green.
   Mathematics only; no manuscript or Lean edits.  Card:
   `../cubic-threefolds-tasks/c925-modular-direct-qdm-proof-packet.md`.
 - **C924 — closed 2026-08-19.** The direct ordinary-QDM route proves
