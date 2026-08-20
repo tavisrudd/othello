@@ -233,9 +233,14 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   preserves the compact-to-ordinary K-theory image and pairing, so the
   Coates--Iritani--Jiang Gamma comparison restricts to the paired narrow QDM
   under explicit Shoemaker realization, spanning, and exact non-equivariant
-  base-change hypotheses.  For a realized toric completion only the shifted
-  Thom point-line law, equivalently the Euler-intertwining rank square,
-  remains open on the completed-model side.
+  base-change hypotheses.  Module 46 identifies the narrow row with
+  equivariant rank divided by the universal Thom zero
+  \((1-q^{-1})^r\).  The same rank-preserving Fourier--Mukai map therefore
+  transports that row automatically, and pairing transports its shifted
+  Thom representative.  For a realized toric completion no independent
+  scalar or Euler-square calculation remains; the open completed-model gates
+  are only the occurrence/fixed-phase and Thom/framing identifications with
+  exact base change.
   Shifted tensor stability and the extremal multinomial source law are
   proved, but the occurrence-indexed exact QDM sequence, actual carrier
   exponent, and boundary vanishing remain open.  The packet is split into

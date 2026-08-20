@@ -126,12 +126,16 @@ are:
     Coates--Iritani--Jiang Gamma comparison restricts to this paired narrow
     QDM under the explicit Shoemaker realization, spanning, and exact
     non-equivariant base-change hypotheses.  Thus the rich bottom comparison
-    is already available for a realized toric completion; the remaining
-    marked gate is only its shifted Thom point line, equivalently the
-    Euler-intertwining rank square.
+    is already available for a realized toric completion.  Module 46 then
+    identifies the narrow rank row with equivariant rank divided by the
+    universal Thom zero \((1-q^{-1})^r\).  Rank preservation therefore
+    transports the row automatically, and the paired comparison transports
+    its shifted Thom representative.  No independent scalar or Euler-square
+    calculation remains after the occurrence/fixed-phase, Thom/framing, and
+    exact-base-change identifications are supplied.
 
 None of these questions blocks the proof in Modules 0--16 or the
-transport-level specialization audit in Module 17.  Modules 18--45 isolate
+transport-level specialization audit in Module 17.  Modules 18--46 isolate
 the general consequences without claiming the missing enriched provider.
 The open questions control whether the interface can be promoted from a
 lawful compiler to a canonical equivalence with the complete external

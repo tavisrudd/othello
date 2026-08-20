@@ -288,10 +288,12 @@ advertised algebraic laws and countermodels, never an external QDM provider.
    compact-support pairing, and carry the shifted-point/Thom line across the
    overlap.  Module 45 now supplies the rich paired narrow comparison under
    the explicit toric-CIJ/Shoemaker realization, spanning, and exact
-   non-equivariant base-change hypotheses.  The remaining marked calculation
-   is the single shifted Thom point-line law, or equivalently the
-   Euler-intertwining rank square.  This would reconstruct rank without
-   dividing by \(1-q^{-1}\).
+   non-equivariant base-change hypotheses.  Module 46 proves that the narrow
+   row is equivariant rank divided by the universal Thom zero and is
+   therefore preserved by that same rank-preserving Fourier--Mukai map; the
+   pairing then preserves its shifted Thom representative.  The remaining
+   gate is the occurrence/fixed-phase and Thom/framing identification, not a
+   scalar or Euler-square computation.
 5. Prove that the two incident sectorial gauges identify their actual
    row-null supported spans, then compare their induced ambient quotients.
    A common nonturning Hom-system with identical formal asymptotics would

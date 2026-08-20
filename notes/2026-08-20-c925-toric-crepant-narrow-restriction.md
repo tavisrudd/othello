@@ -7,7 +7,8 @@ notes/2026-08-19-c925-modular-direct-qdm-proof-packet.md
 compact-to-ordinary K-theory image, and the Gamma-compatible toric crepant
 transformation therefore restricts to a paired narrow-QDM comparison under
 explicit spanning and realization hypotheses.  Preservation of the shifted
-rank line remains open.
+rank line is not a consequence of this module alone; Module 46 proves it
+after adding equivariant Thom, rank, pairing, and exact-specialization data.
 
 ## 45.1 The compact-support image is functorial
 
@@ -326,3 +327,8 @@ plus the compact-support square.  The completed-model frontier then
 contracts to one marked statement: transport the shifted Thom point line,
 or equivalently prove the Euler-intertwining rank square.  Occurrence
 realization and the fixed primitive phase remain separate external gates.
+
+**Successor.**  Module 46 identifies the missing narrow row with equivariant
+rank divided by the universal Thom zero.  For the same rank-preserving
+Fourier--Mukai comparison, this removes (45.17) after the explicitly named
+Thom/framing, pairing, and exact-base-change identifications.

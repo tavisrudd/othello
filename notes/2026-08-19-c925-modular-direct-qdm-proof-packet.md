@@ -50,6 +50,7 @@ No manuscript or Lean source is part of this packet.
 | 43 | common-window rank preservation and the universal completed normal jet | notes/2026-08-20-c925-completed-window-rank-jet.md |
 | 44 | Euler coimage, narrow QDM, and shifted point/rank reconstruction | notes/2026-08-20-c925-narrow-qdm-shifted-rank.md |
 | 45 | proper Fourier--Mukai restriction to the paired narrow QDM | notes/2026-08-20-c925-toric-crepant-narrow-restriction.md |
+| 46 | divided equivariant rank, narrow row transport, and automatic shifted line | notes/2026-08-20-c925-divided-rank-narrow-line.md |
 | frontier | open experiments and provider targets | notes/2026-08-20-c925-exploration-frontier.md |
 
 ## Dependency spine
@@ -76,7 +77,7 @@ Modules 19--23 prove reusable categorical consequences:
 - universal center-null quotients and minimal sufficient shadows; and
 - the conditional Section 6 argument as a separate specialization.
 
-Modules 24--45 isolate the higher-stabilization frontier:
+Modules 24--46 isolate the higher-stabilization frontier:
 
 - irrationality on any unbounded stabilization set implies irrationality for
   every index;
@@ -227,6 +228,14 @@ Shoemaker realization, spanning, and exact non-equivariant base-change
 hypotheses hold.  For a realized canonical completion, the completed-model
 gate is therefore only the shifted Thom point-line law (or the equivalent
 Euler-intertwining rank square), not existence of the rich comparison.
+Module 46 removes even that separate scalar calculation.  On the
+equivariant Thom image, ordinary \(R\)-valued rank is divisible by the
+universal factor \((1-q^{-1})^r\); its quotient is exactly the narrow rank
+row after exact specialization.  Hence the same rank-preserving
+Fourier--Mukai map from Modules 43 and 45 preserves the divided row, and
+pairing preservation carries its shifted Thom representative.  The
+completed route now needs only the occurrence/fixed-phase identification,
+Thom/framing realization, and exact base change already named there.
 
 ### ExactTop provider
 
@@ -279,6 +288,8 @@ vanishing remain open.
   notes/2026-08-20-c925-non-m2-categorical-dividends.md
 - toric crepant Fourier--Mukai restriction to the paired narrow image:
   notes/2026-08-20-c925-toric-crepant-narrow-restriction.md
+- divided equivariant rank and automatic narrow shifted-line transport:
+  notes/2026-08-20-c925-divided-rank-narrow-line.md
 
 ## Executable witnesses
 
