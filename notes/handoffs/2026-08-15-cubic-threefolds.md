@@ -299,12 +299,27 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   matrix nor another scalar computation is required.  The live local gate is
   now exactly a common canonical occurrence trait receiver plus closed
   packet/coimage quotient-fidelity and exact base change.
+  Module 54 gives a smaller alternative source theorem.  Sabbah's explicit
+  Malgrange block shows that the normalized row consumes only the directed
+  projected variation
+  \(\rho_j(1-T_j)|_{\operatorname{im}(1-T_i)}\), or dually one point-covector
+  equation; full CDG block vanishing is stronger.  A normalized
+  intermediate-extension line on the resonance trait is the second exact
+  adapter, but it must not be confused with Sabbah's middle extension in the
+  pre-Laplace variable.  Existing QDM and nonresonant GKZ sources supply
+  neither occurrence identification.  Module 55 pushes this distinction to
+  the source boundary: a concrete closed GADT indexes occurrence, phase,
+  based loop, direction, resonance, normalization, row fidelity, and exact
+  closed reading.  The telescope can consume only one of the two safe source
+  constructors; types prevent laundering but do not create their geometric
+  witnesses.
   Shifted tensor stability and the extremal multinomial source law are
   proved, but the occurrence-indexed exact QDM sequence, actual carrier
   exponent, and boundary vanishing remain open.  The packet is split into
   bounded module companions behind a stable index.  The
-  one-hundred-eight-check
-  finite law replay, eleven-check typed Haskell toy, and original cubic
+  one-hundred-twelve-check
+  finite law replay, the eleven-check path toy, the four-check source-typed
+  Haskell toy, and original cubic
   replay are green.  C925 remains open at fixed-phase Gamma/rank transport
   or at this ExactTop provider; the relative-cap cancellation remains one
   possible rank provider.

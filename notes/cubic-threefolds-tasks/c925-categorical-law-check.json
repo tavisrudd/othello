@@ -1,5 +1,5 @@
 {
-  "check_count": 108,
+  "check_count": 112,
   "checks": {
     "all_five_completed_window_rank_jets_are_the_same_unit": "pass",
     "ambient_target_shear_changes_primitive_row_restriction": "pass",
@@ -70,6 +70,10 @@
     "positive_charge_inverses_preserve_augmentation": "pass",
     "positive_charge_products_preserve_augmentation": "pass",
     "power_bockstein_rank_equals_top_image_leakage": "pass",
+    "projected_row_fixing_stokes_shears_form_a_subgroup": "pass",
+    "projected_stokes_row_can_kill_a_nonzero_full_block": "pass",
+    "projected_stokes_row_detects_the_hostile_shear": "pass",
+    "projective_row_line_does_not_hide_target_visible_shear": "pass",
     "provider_implications_are_not_reversible": "pass",
     "pure_exceptional_multiplicity_preserves_jordan_type": "pass",
     "quantum_serre_self_intersection_kills_rank_and_point_shadow": "pass",

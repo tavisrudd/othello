@@ -58,6 +58,8 @@ No manuscript or Lean source is part of this packet.
 | 51 | mixed-support obstruction to descent of the completed kernel | notes/2026-08-20-c925-open-restriction-mixed-support-no-go.md |
 | 52 | LG/\(p\)-field bypass and invariant-quadratic character obstruction | notes/2026-08-20-c925-lg-pfield-completion-gate.md |
 | 53 | saturated confluence and normalized primary-row coimages | notes/2026-08-20-c925-saturated-confluence-primary-coimage.md |
+| 54 | row-projected Malgrange--Sabbah variation and middle-extension saturation | notes/2026-08-20-c925-projected-stokes-variation.md |
+| 55 | source-typed safe-overlap providers and compile-checked GADT | notes/2026-08-20-c925-source-typed-overlap-provider.md |
 | frontier | open experiments and provider targets | notes/2026-08-20-c925-exploration-frontier.md |
 
 ## Dependency spine
@@ -84,7 +86,7 @@ Modules 19--23 prove reusable categorical consequences:
 - universal center-null quotients and minimal sufficient shadows; and
 - the conditional Section 6 argument as a separate specialization.
 
-Modules 24--53 isolate the higher-stabilization frontier:
+Modules 24--55 isolate the higher-stabilization frontier:
 
 - irrationality on any unbounded stabilization set implies irrationality for
   every index;
@@ -215,6 +217,18 @@ Modules 24--53 isolate the higher-stabilization frontier:
   a unit, including the exact ramification order; the only remaining local
   gates are the common canonical trait receiver and closed packet/coimage
   quotient-fidelity with exact base change; and
+- the Malgrange--Sabbah block formula reduces a consecutive-discrepant
+  Stokes edge further to the row-projected cross variation
+  \(\rho_j(1-T_j)|_{\operatorname{im}(1-T_i)}\).  A full Stokes block may be
+  nonzero while this covector vanishes.  Alternatively, a normalized
+  intermediate-extension coimage with an exact closed reader excludes the
+  punctual defect; the two middle-extension variables must not be confused;
+  and
+- a closed source GADT now indexes occurrence, side, based loop, character,
+  direction, resonance, and raw/residual normalization.  The generic
+  telescope can consume only a projected-zero provider or an integral-trait
+  normalized-middle-extension provider; constructing either trusted source
+  witness remains the analytic theorem; and
 - the rank-row route remains the higher-EV uniform alternative.
 
 ## Current \(m=2\) alternatives
@@ -320,6 +334,21 @@ a separate scalar calculation are unnecessary.  What remains is to
 construct one canonical occurrence trait receiver and prove that both actual
 closed fixed-phase packets, projectors, rows, and adjacent reindexings are
 faithfully identified with its saturated quotient.
+Module 54 gives a second, more local source extension.  Sabbah's explicit
+Malgrange block shows that the normalized rank row sees only
+\(\rho_j(1-T_j)|_{\operatorname{im}(1-T_i)}\), or dually one transported
+point covector.  Full CDG block vanishing is stronger.  For the first genuine
+\((1,1)\) overlap it is enough to compute the directed projected variation
+actually crossed; a two-sided sector-independent statement uses the reverse
+one too.  The trait alternative is a normalized intermediate-extension line
+with an exact actual-packet reader.  Neither identification is supplied by
+the current QDM or nonresonant GKZ sources.
+Module 55 moves these distinctions upstream.  The source constructors for
+the \(\lambda\)-line projected route and the integral resonance-trait route
+are nominally distinct and share only a safe-overlap eliminator.  Wrong
+variables, resonance, normalization, occurrence, loop, character, direction,
+or row reader cannot be passed to the telescope.  Types localize the missing
+geometry; they do not manufacture either source adapter.
 
 ### ExactTop provider
 
@@ -388,6 +417,10 @@ vanishing remain open.
   notes/2026-08-20-c925-lg-pfield-completion-gate.md
 - saturated confluence and normalized primary-coimage source extension:
   notes/2026-08-20-c925-saturated-confluence-primary-coimage.md
+- projected Stokes variation and middle-extension saturation:
+  notes/2026-08-20-c925-projected-stokes-variation.md
+- source-typed overlap providers:
+  notes/2026-08-20-c925-source-typed-overlap-provider.md
 
 ## Executable witnesses
 
@@ -400,6 +433,11 @@ The typed path/effect toy and output are:
 
 - notes/cubic-threefolds-tasks/c925-sparse-shadow-path-toy.hs
 - notes/cubic-threefolds-tasks/c925-sparse-shadow-path-toy-output.txt
+
+The source-typed overlap GADT and output are:
+
+- notes/cubic-threefolds-tasks/c925-source-typed-overlap-toy.hs
+- notes/cubic-threefolds-tasks/c925-source-typed-overlap-toy-output.txt
 
 These validate the advertised finite algebra only.  QDM comparison,
 reconstruction, carrier, Stokes, Gamma, and weak-factorization provider

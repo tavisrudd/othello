@@ -1,0 +1,4 @@
+projected_source_provider_is_fully_indexed: pass
+trait_source_requires_normalized_residual: pass
+source_routes_share_only_the_safe_eliminator: pass
+hostile_indices_exist_but_cannot_fill_the_safe_constructor: pass

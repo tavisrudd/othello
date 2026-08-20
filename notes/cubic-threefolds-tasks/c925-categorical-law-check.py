@@ -2645,6 +2645,83 @@ def main():
         "pass"
     )
 
+    # Module 54: a full cross-variation block may be nonzero while its
+    # consumed row projection vanishes.  Here im(1-T_1)=<e_1> and
+    # (1-T_2)e_1=-e_2, while the safe row sees only e_3.
+    n1 = [
+        [Fraction(0), Fraction(1), Fraction(0)],
+        [Fraction(0), Fraction(0), Fraction(0)],
+        [Fraction(0), Fraction(0), Fraction(0)],
+    ]
+    n2 = [
+        [Fraction(0), Fraction(0), Fraction(0)],
+        [Fraction(1), Fraction(0), Fraction(0)],
+        [Fraction(0), Fraction(1), Fraction(0)],
+    ]
+    c2v1 = matrix_vector(matrix_scale(n2, Fraction(-1)), [1, 0, 0])
+    assert c2v1 == [0, -1, 0]
+    assert dot([0, 0, 1], c2v1) == 0
+    checks["projected_stokes_row_can_kill_a_nonzero_full_block"] = "pass"
+
+    # Changing only the retained row exposes the same block as a hostile
+    # rank-visible shear.
+    assert dot([0, 1, 0], c2v1) == -1
+    checks["projected_stokes_row_detects_the_hostile_shear"] = "pass"
+
+    # Projectivizing the row cannot hide a shear landing in a block on which
+    # the row is already nonzero: that unchanged block forces scalar one.
+    target_visible_shear = matrix_add(
+        identity(3),
+        [
+            [Fraction(0), Fraction(0), Fraction(0)],
+            [Fraction(1), Fraction(0), Fraction(0)],
+            [Fraction(0), Fraction(0), Fraction(0)],
+        ],
+    )
+    target_row = [Fraction(0), Fraction(1), Fraction(0)]
+
+    def row_times(row, matrix):
+        return [
+            sum(row[index] * matrix[index][column] for index in range(len(row)))
+            for column in range(len(row))
+        ]
+
+    transported_target_row = row_times(target_row, target_visible_shear)
+    assert transported_target_row == [1, 1, 0]
+    assert transported_target_row != target_row
+    assert transported_target_row[1] == target_row[1]
+    checks["projective_row_line_does_not_hide_target_visible_shear"] = "pass"
+
+    # Row-fixing Stokes shears form a subgroup even when they do not commute.
+    kernel_shear_a = [
+        [Fraction(0), Fraction(0), Fraction(0)],
+        [Fraction(1), Fraction(0), Fraction(0)],
+        [Fraction(0), Fraction(0), Fraction(0)],
+    ]
+    kernel_shear_b = [
+        [Fraction(0), Fraction(1), Fraction(0)],
+        [Fraction(0), Fraction(0), Fraction(0)],
+        [Fraction(0), Fraction(0), Fraction(0)],
+    ]
+    shear_a = matrix_add(identity(3), kernel_shear_a)
+    shear_b = matrix_add(identity(3), kernel_shear_b)
+    inverse_a = matrix_subtract(identity(3), kernel_shear_a)
+    inverse_b = matrix_subtract(identity(3), kernel_shear_b)
+    retained_row = [Fraction(0), Fraction(0), Fraction(1)]
+
+    for transition in (
+        shear_a,
+        shear_b,
+        inverse_a,
+        inverse_b,
+        matrix_multiply(shear_a, shear_b),
+        matrix_multiply(shear_b, shear_a),
+    ):
+        assert row_times(retained_row, transition) == retained_row
+    assert matrix_multiply(shear_a, inverse_a) == identity(3)
+    assert matrix_multiply(shear_b, inverse_b) == identity(3)
+    checks["projected_row_fixing_stokes_shears_form_a_subgroup"] = "pass"
+
     result = {
         "status": "pass",
         "check_count": len(checks),

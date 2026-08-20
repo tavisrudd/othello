@@ -148,10 +148,17 @@ are:
     closed packets are faithfully read there.  The normalized
     quantum-Serre/conormal primary row is already a unit, including under
     ramification.  The highest-EV test is therefore no longer a six-case
-    Stokes-matrix or scalar calculation: construct the common trait receiver
-    and prove closed packet/projector/coimage quotient-fidelity for one
-    consecutive-discrepant pilot, then show the construction is
-    occurrence-uniform.
+    Stokes-matrix or scalar calculation.  Module 54 derives the exact
+    row-projected Malgrange--Sabbah target
+    \(\rho_j(1-T_j)|_{\operatorname{im}(1-T_i)}\), with a dual
+    point-covector form; one directed covector suffices for the chosen path.
+    The alternative is a normalized intermediate-extension line on the
+    resonance trait with an exact actual-packet reader.  Module 55 makes
+    wrong variables, resonance, normalization, occurrence, phase path, row,
+    and direction unrepresentable to the telescope.  Construct the trusted
+    projected source adapter for the first \((1,1)\) pilot; if that fails,
+    construct the common trait receiver and normalized intermediate-
+    extension reader, then make either construction occurrence-uniform.
 23. **Can the completed comparison be restricted to the intended
     total-space open?**  Module 48 proves that canonical-character completion
     is numerically crepant for every toric wall, independently of

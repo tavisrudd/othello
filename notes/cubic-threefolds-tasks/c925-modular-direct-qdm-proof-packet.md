@@ -56,6 +56,10 @@ exact \(m=2\) and all-\(m\) transport gates.
   notes/2026-08-20-c925-framed-m1-specialization.md
 - saturated-confluence and normalized-primary-coimage source extension:
   notes/2026-08-20-c925-saturated-confluence-primary-coimage.md
+- projected Stokes variation and middle-extension saturation:
+  notes/2026-08-20-c925-projected-stokes-variation.md
+- source-typed safe-overlap provider:
+  notes/2026-08-20-c925-source-typed-overlap-provider.md
 
 The packet index owns the module-to-file map.  Do not append another large
 module to this card or to the index; add one focused companion file and one
@@ -237,6 +241,23 @@ index row.
   construction of that common occurrence trait receiver and faithful exact
   identification of both actual closed fixed-phase packets with its
   saturated quotient.
+- Sabbah's explicit Malgrange block formula gives a strictly smaller local
+  Stokes target: the normalized row consumes only
+  \(\rho_j(1-T_j)|_{\operatorname{im}(1-T_i)}\), or dually one point-covector
+  equation.  Full two-sided Stokes-block vanishing is stronger, and a finite
+  countermodel separates the two.  For the first \((1,1)\) pilot, compute the
+  directed projected variation actually crossed, or identify the normalized
+  marked coimage as an intermediate extension on the resonance trait with an
+  exact actual-packet reader.  Existing QDM, CDG, and nonresonant GKZ sources
+  do not supply either occurrence-level identification.
+- The source interface now makes every known upstream mismatch
+  unrepresentable to the telescope.  A closed GADT indexes occurrence, side,
+  based loop, character, direction, resonance, and raw/residual
+  normalization; its only constructors consume either a projected-zero
+  \(\lambda\)-line provider or an integral-trait normalized-middle-extension
+  provider.  The compile-checked toy is concrete, not tagless-final.  Types
+  prevent hypothesis laundering but do not create the two geometric source
+  witnesses.
 
 ## Open geometric providers
 
@@ -305,26 +326,39 @@ Typed replay:
       | diff -u \
           notes/cubic-threefolds-tasks/c925-sparse-shadow-path-toy-output.txt -
 
-The finite model currently has one hundred eight checks.  It verifies only the
+Source-typed overlap replay:
+
+    nix shell nixpkgs#ghc --command \
+      runghc notes/cubic-threefolds-tasks/c925-source-typed-overlap-toy.hs \
+      | diff -u \
+          notes/cubic-threefolds-tasks/c925-source-typed-overlap-toy-output.txt -
+
+The finite model currently has one hundred twelve checks.  It verifies only the
 advertised algebraic laws and countermodels, never an external QDM provider.
 
 ## Next
 
-1. Construct the Module 53 common canonical trait receiver for every
+1. For the first genuine \((1,1)\) overlap, construct the Module 55 projected
+   source adapter: identify the actual two fixed-phase packet blocks and
+   compute the directed covector
+   \(\rho_j(1-T_j)|_{\operatorname{im}(1-T_i)}\).  The chosen path needs only
+   its traversed direction; full CDG block vanishing is unnecessary.
+2. As the trait alternative, construct the Module 53 common canonical trait
+   receiver for every
    consecutive-discrepant overlap.  Put both incident one-arrow receivers in
    its generic fibre, take the saturated closure of their row-null supported
    span, and identify both actual closed fixed-phase primitive packets with
    the resulting quotient, including projector, row, coimage base change,
    deck character, and adjacent reindexing.  This is now strictly smaller
    than a full two-arrow Stokes-mutation theorem.
-2. Pursue a relative \(p\)-field or enlarged-group master-space comparison
+3. Pursue a relative \(p\)-field or enlarged-group master-space comparison
    only after naming a nontrivial critical target whose QDM/Gamma realization
    is the original cubic packet.  A metabolic quadratic stabilization cannot
    do this.
-3. Do not search for another finite ordinary multi-coordinate completion:
+4. Do not search for another finite ordinary multi-coordinate completion:
    Module 50 rules out that entire class, and Module 51 rules out localization
    descent of the natural completed kernel.
-4. In parallel, test the narrower non-equivariant adapter of Module 44:
+5. In parallel, test the narrower non-equivariant adapter of Module 44:
    realize the actual primitive packet in a common narrow QDM, preserve its
    compact-support pairing, and carry the shifted-point/Thom line across the
    overlap.  Module 45 now supplies the rich paired narrow comparison under
@@ -339,24 +373,24 @@ advertised algebraic laws and countermodels, never an external QDM provider.
    character sector automatically, so identify the actual cubic packet with
    one common based loop or typed deck path and record the induced character
    map under reindexing.
-5. Use the normalized-primary-coimage theorem to identify Module 43's
+6. Use the normalized-primary-coimage theorem to identify Module 43's
    universal conormal jet with the actual endpoint row transition.  The
    scalar and ramification orders are already proved; only occurrence
    realization and exact quotient-fidelity remain.
-6. Treat the arbitrary relative-cap lift and same-receiver lower-center
+7. Treat the arbitrary relative-cap lift and same-receiver lower-center
    charge adapter as alternative routes, not prerequisites for the rank-row
    overlap route.
-7. Prove the local fixed-phase QDM point-line law of Module 35: commute the
+8. Prove the local fixed-phase QDM point-line law of Module 35: commute the
    primitive projector with the chosen monodromy, identify the Gamma and
    formally normalized point lines using a non-Picard selector or strict
    multiplicity-one filtration quotient, and provide lawful adjacent/endpoint
    reindexing along one chosen factorization.
-8. As the ExactTop alternative, construct a **corrected intrinsic**
+9. As the ExactTop alternative, construct a **corrected intrinsic**
    support/Gysin realization for Module 32; ordinary Gamma or residual
    projection is ruled out by the point regression.
-9. Prove the sharp occurrence-indexed exceptional exponent/carrier bound.
-10. If the monodromy route fails, construct the opposite-oriented enriched
+10. Prove the sharp occurrence-indexed exceptional exponent/carrier bound.
+11. If the monodromy route fails, construct the opposite-oriented enriched
    exact sequence and use the Module 25/26 boundary adapter.
-11. Continue the higher-EV rank-row common-receiver audit in parallel.
+12. Continue the higher-EV rank-row common-receiver audit in parallel.
 
 C925 remains active until the user closes it.
