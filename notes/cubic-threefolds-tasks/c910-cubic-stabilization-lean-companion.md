@@ -786,6 +786,30 @@ supplied: the identification of matrix-level equivariance with equivariance of a
 actual relative isogeny, and every geometric identification.  Report:
 [`../2026-08-20-c910-six-label-action-and-kernel-stability.md`](../2026-08-20-c910-six-label-action-and-kernel-stability.md).
 
+**Marked-Frobenius selection of the exotic two-primary member, 2026-08-20.**
+`GraphLattices/SixPointStableHalfFrobenius.lean` transports Frobenius of the
+four-element labelling field to the five-member packet of diagonally stable
+halves of the characteristic-two coefficient heart.  The transported map is an
+involution whose fixed members are exactly the vertical copy and the graphs of
+the prime-field slopes, and which exchanges the graphs of `W` and `W+1`; on a
+graph member it squares the slope.  Marking a packet member — asserting that the
+involution moves it — is therefore equivalent to lying in that exotic pair, and
+either exotic member is the graph of a slope whose minimal polynomial over `F₂`
+is the irreducible `t²+t+1`, which is the coefficient-side slope datum
+`lem:six-axis-local-chart` states at two, now for the kernel rather than for a
+display model.  `GraphLattices/SixAxisTwoPrimaryExoticSelection.lean` applies
+this to the transported two-primary kernel of an equivariant comparison matrix,
+and `GraphLattices/ConnectedPacketPersistence.lean` gains the statement that one
+marked fibre over a connected base makes every fibre exotic.
+`Applications/RelativeSixAxis.lean` carries the selection per fibre: the
+geometric input gains the marking field, the conclusion gains the selection.
+Equivariance provably cannot select a member, since the packet is exactly the
+set of diagonally stable maximal-isotropic subspaces.  Three terminals were
+added and the snapshot moves to 307 reviewer terminals with unchanged coverage
+counts.  Still supplied: the marking of the actual geometric kernel, together
+with every geometric identification.  Report:
+[`../2026-08-20-c910-marked-frobenius-exotic-selection.md`](../2026-08-20-c910-marked-frobenius-exotic-selection.md).
+
 ## Prioritized Lean backlog
 
 Work in this order unless a later literature or library dependency changes the

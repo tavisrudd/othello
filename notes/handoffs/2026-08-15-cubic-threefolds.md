@@ -291,9 +291,18 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   matrices preserving the polarization, its contragredient descends to the
   discriminant group, and for a comparison matrix equivariant for the two
   displayed generators both transported primary kernels are diagonally stable
-  and therefore unconditionally in their packets. What remains supplied is the
+  and therefore unconditionally in their packets. Which member the two-primary
+  kernel is cannot be settled that way, since every packet member is stable; the
+  selecting input is now formalized as Frobenius marking. Frobenius of the
+  labelling field transported to the packet is an involution fixing exactly the
+  three members defined over the prime field and exchanging the two exotic
+  graphs, so a marked member is exotic and its graph slope has minimal
+  polynomial `t^2+t+1`, which is the slope datum the local-chart lemma states at
+  two; one marked fibre over a connected base makes every fibre exotic. What
+  remains supplied is the
   identification of that matrix-level equivariance with equivariance of an
-  actual relative isogeny; the orders of the primary parts of the kernel and
+  actual relative isogeny, and the marking of the actual geometric kernel; the
+  orders of the primary parts of the kernel and
   the geometric commutator pairing also remain open.
   Card:
   `../cubic-threefolds-tasks/c910-cubic-stabilization-lean-companion.md`; gap audit
@@ -340,6 +349,8 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   `../2026-08-19-c910-three-primary-analogue.md`;
   six-label action and kernel-stability report
   `../2026-08-20-c910-six-label-action-and-kernel-stability.md`;
+  marked-Frobenius selection report
+  `../2026-08-20-c910-marked-frobenius-exotic-selection.md`;
   interim release report
   `../2026-08-12-c910-partial-lean-release.md`.
 - **C920 — closed 2026-08-18.** Hypothesis 5.7T of the epilogue is now used only
