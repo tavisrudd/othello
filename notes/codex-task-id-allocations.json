@@ -3203,8 +3203,17 @@
       "last": 923,
       "purpose": "structural proof that the A_5-pencil Eckardt locus is exactly the two Fermat members, replacing the Groebner elimination",
       "sequence": 356
+    },
+    {
+      "count": 1,
+      "first": 924,
+      "kind": "reservation",
+      "lane": "cubic-threefolds",
+      "last": 924,
+      "purpose": "rigorous verification and compression study of the direct-QDM proof route for the epilogue",
+      "sequence": 357
     }
   ],
-  "next_id": 924,
+  "next_id": 925,
   "schema": "codex-task-id-allocations-v1"
 }
