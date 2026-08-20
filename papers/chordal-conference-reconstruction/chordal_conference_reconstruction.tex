@@ -486,10 +486,9 @@ Indeed, the coefficients of
 \(z_0z_2z_4,z_0z_3^2,z_1^2z_4,z_2^3,z_1z_2z_3\) are respectively
 \(8,-8,-8,-8,16\), and every other coefficient is zero.  Thus the equality
 is visible term by term, rather than inferred from a singular-point census.
-The conference cubic has six isolated nodes
-by \cite{RuddRigidity2026} and therefore spans a different line.  This proves
-the
-placement without an exhaustive cubic comparison.
+The conference cubic has isolated nodes by
+Proposition~\ref{prop:nodes-mod-eleven} and therefore spans a different line.  This
+proves the placement without an exhaustive cubic comparison.
 \end{proof}
 
 The displayed matrices only fix the bridge between the frozen matching-quotient basis
@@ -540,6 +539,26 @@ opens cover the projective Jacobian scheme, since \(z_0=z_2=z_4=0\) and the
 outer two derivatives force \(z_1=z_3=0\).  Hence the saturated Jacobian
 ideal equals \(I_R\), proving the scheme-theoretic assertion.
 \end{proof}
+
+\begin{proposition}[Nodes persist in characteristic eleven]
+\label{prop:nodes-mod-eleven}
+The six points \(p_a=[\mathbf 1-6e_a]\) are distinct in \(\PP(A_0)\), and each
+is an ordinary node of \(c_B=0\) over \(\overline{\F}_{11}\).  The gradient and
+Hessian evaluations of \cite{RuddRigidity2026}, stated there over
+\(\mathbf Q\), are identities of integer matrices and reduce modulo \(11\).
+The Hessian block at \(p_a\) is switching-equivalent to a principal
+\(5\)-by-\(5\) minor \(M\) of \(B\), and \(B^2=5I\) gives \(Mu=0\) together
+with \(M^2=5I\) on \(u^\perp\), where \(u\) is the deleted row.  Since \(2\),
+\(3\), and \(5\) are invertible in \(\F_{11}\), the induced form on the
+projective tangent space at \(p_a\) is nondegenerate, and nondegeneracy
+survives field extension; each \(p_a\) is therefore an isolated point of the
+singular scheme.  By Lemma~\ref{lem:hankel-singular-locus} and the
+projectivity \(U(h_M)=8H\), each chordal cubic is singular exactly along a
+rational normal quartic after any base change, and such a curve carries no
+isolated point.  A projective isomorphism carries singular scheme to singular
+scheme, so over \(\overline{\F}_{11}\) the conference cubic is not
+projectively isomorphic to either chordal cubic.
+\end{proposition}
 
 \begin{proposition}[The special orbit and its stabilizer quotient]
 \label{prop:special-orbit}
@@ -687,10 +706,8 @@ empty-alignment fibre at that sharp six-point boundary: it is precisely the
 unmarked conference locus.  The recovered \(A_5\)-action then selects the
 opposite pair needed here.
 
-The corollary \emph{Nodes, symmetry, and integral commutant} of
-\cite{RuddRigidity2026} proves
-that this triangle cubic has exactly six ordinary nodes in projective-frame
-position.  Since \(H_M\) is singular along a curve,
+By Proposition~\ref{prop:nodes-mod-eleven} this triangle cubic has six ordinary
+nodes in projective-frame position.  Since \(H_M\) is singular along a curve,
 the conference and chordal lines are distinct.  The point is causal: the
 conference pair was constructed from the recovered six-set, not inserted
 among the recognition axioms.
