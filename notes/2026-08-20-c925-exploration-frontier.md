@@ -95,9 +95,18 @@ are:
     \((-1,0)\) pilot contributes \(-1/R\).  A positive proof must identify a
     same-face channel contributing \(+1/R\); lower faces, grading, and path
     provenance cannot affect this coefficient.
+22. **Is the consecutive-discrepant overlap saturated at resonance?**  A
+    generic nonresonant window/GKZ comparison forgets parameter-torsion
+    supported at the integral point.  Module 40 reduces the retained marked
+    primitive-packet rank coimage to one DVR valuation, after a canonical
+    trait lattice and exact closed-fibre base change are supplied.  Compute the normalized overlap matrix for
+    the six neutral slopes, starting with \((1,1)\), and test whether its
+    marked Smith/Gamma index is zero.  The first separate gate is whether the
+    discrepant generic family lies in any proved window/GKZ comparison scope;
+    neutral \(c_1\)-degree does not imply quasi-symmetry.
 
 None of these questions blocks the proof in Modules 0--16 or the
-transport-level specialization audit in Module 17.  Modules 18--21 isolate
+transport-level specialization audit in Module 17.  Modules 18--40 isolate
 the general consequences without claiming the missing enriched provider.
 The open questions control whether the interface can be promoted from a
 lawful compiler to a canonical equivalence with the complete external

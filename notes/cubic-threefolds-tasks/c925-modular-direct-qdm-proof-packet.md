@@ -164,6 +164,16 @@ index row.
   faces have only six primitive neutral slopes up to exchange.  That
   arithmetic is only a sieve: analytic closure uses the full
   \(P_6\)-faithful \(K\)-positive carrier-face and oriented-path theorem.
+- A nonresonant GKZ/window comparison does not specialize automatically to
+  the geometric integral parameter.  The missing closed-support object is
+  finite parameter torsion in the comparison cone.  Crepant toric HMS
+  protects an independent trivial-parameter GKZ rank quotient in its own
+  scope; for a discrepant QDM overlap, a canonical trait lattice and
+  saturation with exact closed-fibre base change are additional gates.  On a
+  nonzero marked primitive-packet rank coimage the entire defect is one
+  additive DVR valuation, computable from
+  Smith invariants or normalized Gamma pole/zero orders once the actual
+  overlap matrix is available.
 
 ## Open geometric providers
 
@@ -173,6 +183,16 @@ Construct one coherent fixed-phase Gamma/Stokes/Orlov comparison which
 preserves the rank quotient through every actual blowup occurrence.  This is
 the highest-EV route because it avoids a universal threefold carrier theorem
 and is uniform in \(m\).
+
+### Resonant saturation
+
+For each consecutive-discrepant overlap, deform the integral GKZ parameter
+to a generically calibrated window comparison and prove that the induced
+comparison on the marked primitive-packet rank coimage has a canonical trait
+lattice, torsion-free cone cohomology, and exact closed-fibre base change.
+Generic acyclicity then forces the cone to vanish and the closed-fibre marker
+law follows.  Generic comparison alone is insufficient: parameter torsion
+is invisible away from resonance.
 
 ### Charge-filtered Stokes
 
@@ -222,33 +242,38 @@ Typed replay:
       | diff -u \
           notes/cubic-threefolds-tasks/c925-sparse-shadow-path-toy-output.txt -
 
-The finite model currently has eighty-two checks.  It verifies only the
+The finite model currently has eighty-eight checks.  It verifies only the
 advertised algebraic laws and countermodels, never an external QDM provider.
 
 ## Next
 
-1. Compute the smallest consecutive-discrepant overlap: enumerate its mixed
-   neutral tower and test whether every boundary-to-ambient coupling factors
-   through the supported rank-zero span.  The first candidate is the
-   opposite-sign unit pair with primitive slope \((1,1)\).
-2. Prove that the two incident sectorial gauges identify their actual
+1. Compute the normalized overlap matrix for the opposite-sign unit pair
+   with primitive slope \((1,1)\), deform its integral parameter, and compute
+   the Smith/Gamma valuation on the marked packet rank coimage.  Zero valuation is
+   the exact marked-saturation certificate; positive valuation identifies
+   the resonant punctual obstruction.
+2. Audit whether that generic deformation is genuinely in a proven
+   quasi-symmetric/window scope.  Neutral \(c_1\)-degree alone is
+   insufficient; the first known neutral charge matrix is not
+   quasi-symmetric.
+3. Prove that the two incident sectorial gauges identify their actual
    row-null supported spans, then compare their induced ambient quotients.
    A common nonturning Hom-system with identical formal asymptotics would
    kill the full overlap by multisummation uniqueness.
-3. Treat the arbitrary relative-cap lift and same-receiver lower-center
+4. Treat the arbitrary relative-cap lift and same-receiver lower-center
    charge adapter as alternative routes, not prerequisites for the rank-row
    overlap route.
-4. Prove the local fixed-phase QDM point-line law of Module 35: commute the
+5. Prove the local fixed-phase QDM point-line law of Module 35: commute the
    primitive projector with the chosen monodromy, identify the Gamma and
    formally normalized point lines using a non-Picard selector or strict
    multiplicity-one filtration quotient, and provide lawful adjacent/endpoint
    reindexing along one chosen factorization.
-5. As the ExactTop alternative, construct a **corrected intrinsic**
+6. As the ExactTop alternative, construct a **corrected intrinsic**
    support/Gysin realization for Module 32; ordinary Gamma or residual
    projection is ruled out by the point regression.
-6. Prove the sharp occurrence-indexed exceptional exponent/carrier bound.
-7. If the monodromy route fails, construct the opposite-oriented enriched
+7. Prove the sharp occurrence-indexed exceptional exponent/carrier bound.
+8. If the monodromy route fails, construct the opposite-oriented enriched
    exact sequence and use the Module 25/26 boundary adapter.
-8. Continue the higher-EV rank-row common-receiver audit in parallel.
+9. Continue the higher-EV rank-row common-receiver audit in parallel.
 
 C925 remains active until the user closes it.

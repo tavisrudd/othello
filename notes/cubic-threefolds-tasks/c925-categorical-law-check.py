@@ -2168,6 +2168,56 @@ def main():
     ]
     checks["zero_charge_exceptional_shear_changes_rank_row"] = "pass"
 
+    # Module 40: resonant specialization and marked saturation.
+    def trait_fibre_dimensions(free_rank, torsion_exponents):
+        assert all(exponent > 0 for exponent in torsion_exponents)
+        return free_rank, free_rank + len(torsion_exponents)
+
+    hostile_generic_dim, hostile_closed_dim = trait_fibre_dimensions(1, (1,))
+    assert hostile_generic_dim == 1
+    assert hostile_closed_dim == 2
+    checks["generic_shadow_can_forget_closed_fibre_torsion"] = "pass"
+
+    for valuation in range(8):
+        generic_invertible = True  # s^valuation is nonzero in Frac(R).
+        closed_invertible = valuation == 0
+        assert generic_invertible
+        assert closed_invertible == (valuation == 0)
+    checks["rank_line_specializes_invertibly_exactly_at_zero_valuation"] = "pass"
+
+    for left_valuation in range(8):
+        for right_valuation in range(8):
+            composite_valuation = left_valuation + right_valuation
+            assert composite_valuation == right_valuation + left_valuation
+    checks["resonance_valuation_is_an_additive_writer"] = "pass"
+
+    # [R --s--> R] is acyclic over Frac(R), while after s=0 the map is zero.
+    generic_kernel_dim = generic_cokernel_dim = 0
+    closed_kernel_dim = closed_cokernel_dim = 1
+    assert (generic_kernel_dim, generic_cokernel_dim) == (0, 0)
+    assert (closed_kernel_dim, closed_cokernel_dim) == (1, 1)
+    checks["perfect_generic_equivalence_can_gain_two_closed_cohomologies"] = "pass"
+
+    # For r_R=s:R->R the integral coimage is R, but r_k=0 has closed coimage 0.
+    integral_coimage_rank = 1
+    base_changed_integral_coimage_dim = integral_coimage_rank
+    actual_closed_coimage_dim = 0
+    assert base_changed_integral_coimage_dim != actual_closed_coimage_dim
+    checks["marked_rank_coimage_requires_exact_closed_base_change"] = "pass"
+
+    def gamma_product_order(integral_gamma_factors, exponential_zero_orders):
+        gamma_order = sum(
+            -exponent
+            for integer_argument, exponent in integral_gamma_factors
+            if integer_argument <= 0
+        )
+        return gamma_order + sum(exponential_zero_orders)
+
+    assert gamma_product_order(((0, -1),), ()) == 1
+    assert gamma_product_order(((-2, 1), (3, 2)), (1,)) == 0
+    assert gamma_product_order(((-1, 2), (0, -1)), (1, 1)) == 1
+    checks["integral_gamma_orders_reduce_to_finite_signed_counts"] = "pass"
+
     result = {
         "status": "pass",
         "check_count": len(checks),

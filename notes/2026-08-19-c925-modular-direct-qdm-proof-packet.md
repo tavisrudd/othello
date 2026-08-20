@@ -44,6 +44,7 @@ No manuscript or Lean source is part of this packet.
 | 37 | charge-filtered Stokes augmentation and zero-charge collision test | notes/2026-08-20-c925-charge-filtered-stokes-specialization.md |
 | 38 | Kummer charge trace and higher-codimension stationary polygon obstruction | notes/2026-08-20-c925-kummer-charge-regression.md |
 | 39 | \(m=2\) receiver-overlap localization, crossed defect law, and neutral-slope sieve | notes/2026-08-20-c925-m2-receiver-overlap-localization.md |
+| 40 | resonant GKZ saturation, closed-support torsion, and overlap valuation | notes/2026-08-20-c925-resonant-gkz-saturation.md |
 | frontier | open experiments and provider targets | notes/2026-08-20-c925-exploration-frontier.md |
 
 ## Dependency spine
@@ -138,7 +139,18 @@ Modules 24--39 isolate the higher-stabilization frontier:
   exchange and must survive as a mixed boundary-to-ambient rank-visible
   coupling.  Absence of a neutral slope is a sieve, while an analytic closure
   still needs the full \(P_6\)-faithful \(K\)-positive carrier-face and
-  oriented-path hypotheses; and
+  oriented-path hypotheses;
+- a generic nonresonant GKZ/window theorem cannot simply be specialized to
+  the geometric integral parameter: closed-support parameter torsion is
+  invisible on the punctured trait.  Crepant toric HMS does protect the
+  trivial-parameter GKZ rank quotient in its scope, independently of the QDM
+  occurrence map.  For a discrepant overlap, the exact missing datum is a
+  canonical trait model and saturation of the marked primitive-packet rank
+  coimage comparison, together with exact closed-fibre base change; on a
+  nonzero rank line this is one additive DVR valuation, and
+  normalized Gamma products
+  reduce it to a finite signed pole/zero count once the actual overlap matrix
+  is known; and
 - the rank-row route remains the higher-EV uniform alternative.
 
 ## Current \(m=2\) alternatives
@@ -154,6 +166,12 @@ leaves only adjacent discrepant receiver overlaps.  It is enough to prove
 supported-span compatibility and rank safety of each induced ambient-
 quotient transition; ordinary overlaps and isolated discrepant walls are
 already removed, while center-image mutations are safe after that typing.
+Module 40 gives a possible bypass of the direct resonant transition theorem:
+deform the overlap to a generically calibrated GKZ/window comparison and
+prove that its comparison on the primitive-packet rank coimage has a
+canonical trait lattice, no parameter torsion, and exact closed-fibre base
+change.  This is not automatic at resonance, and the first neutral discrepant model is not in the
+quasi-symmetric scope of the current generic theorem.
 
 ### ExactTop provider
 
