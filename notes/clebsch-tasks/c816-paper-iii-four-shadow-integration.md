@@ -377,12 +377,51 @@ been reserved.
    warning-free, and the release aggregate passes every check except the Lean
    gates, which were not replayed because no statement label, claim identifier,
    or trust-manifest row changed.
-2. Run a Milnor--Serre exposition pass on every affected passage.
+2. Milnor--Serre exposition pass. **RUN 2026-08-20 over the whole operator
+   section, landed in `d7abea96d`**; report in
+   `notes/2026-08-20-c816-operator-section-milnor-serre.md`. The architecture
+   held, so the pass came out as seven prose repairs. Every math-mode fragment
+   was verified byte-identical before and after, independently of the pass's own
+   check. Three recommendations were left unapplied and are still owed: two
+   wording defects inside the pinned `rem:alignment-query-count` ("a price of
+   fixing" should be "the price of fixing"; "a new old vertex" is garbled), and
+   the tight-frame description of the solutions of \(A^2=\lambda I\) is now
+   stated twice, in the priority paragraph and in the module paragraph.
 3. Build and visually inspect the PDF; replay the paper-local evidence gate,
    formal gate, axiom audit, source/hash checks, and complete aggregate.
-4. Obtain a fresh context-free independent cold read of the revised PDF. Repair
-   and regrade until the additions are judged an upgrade rather than an
-   appendage.
+4. Fresh context-free independent cold read. **RUN 2026-08-20 on the
+   thirty-nine-page PDF; report in `notes/2026-08-20-c816-cold-read.md`.** The
+   reader saw only the PDF, with sources, notes, and git history withheld, and
+   recomputed twenty-odd claims independently: it found no false statement
+   anywhere in the paper.
+
+   **This task's gate-4 question is answered yes.** The reader, not knowing
+   which passages were new, judged the recognition theorem, the rigidity
+   theorem, and the nondegeneracy proposition "a genuinely coherent unit and
+   the best mathematics in Section 5", singling out the rigidity proof's
+   reduction of a twenty-by-fifteen rank computation to an eight-by-five one as
+   elegant. Nothing this task added was called an appendage.
+
+   The grade is 62/100 against 75 for acceptance, and the whole gap is
+   architecture and exposition of the manuscript as a whole, which is outside
+   this card. Those findings belong to a successor and are summarized in the
+   report: the source--shadow--return route is a sign convention rather than a
+   derivation and the text retracts it in six places; the balanced exchange and
+   aligned-faithfulness results are a separable combinatorics paper the
+   manuscript itself says supply no hypothesis to anything; the constant
+   sixteen is fixed by fiat in one sentence and reported as read from Hitchin in
+   the next, when the real invariant is the square class of the product with
+   five; and "four exact descriptions" is one matrix-specific identity plus two
+   facts true of every symmetric matrix of order six plus a sign convention,
+   which the body says and the abstract does not.
+
+   Two items land inside this card's subject matter and are owed here or in its
+   successor: the recognition theorem's proof consumes only degree matching and
+   translation invariance, so its content should be stated in the theorem rather
+   than disclaimed after it; and the cold reader missed the dropped "even order"
+   hypothesis in the abstract, which was removed deliberately because an
+   odd-order Pfaffian vanishes, so the omission costs a first-time reader
+   something and may be worth the three words.
 5. Synchronize any configured downstream standalone release only by the lane's
    forward workflow and only after the authoritative root is green. Do not alter
    immutable released versions.
