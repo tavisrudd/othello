@@ -316,6 +316,21 @@ would carry a novelty sentence about the recognition theorem, checked rather tha
 | `notes/handoffs/2026-07-13-clebsch-lane.md` | Routing only; carries no novelty sentence and needs none |
 | Public released versions 1 and 2 of Paper III | Carry no novelty sentence about the recognition theorem, which is not in them; nothing stale |
 
+## Closeout pass: a sixth domain, and what forced it
+
+The `ej` closeout on this work item produced a reformulation of the theorem's equal-modulus half that
+the five named domains do not reach, and the domain it points at — maximal determinants of sign
+matrices and D-optimal designs — was therefore searched as well, with the queries and the same
+bounded negative recorded in `notes/2026-08-20-c816-extremal-minor-census.md`. Nothing was located
+there either, and row `OPER-5` covers both.
+
+The reformulation itself: over all 32768 hollow symmetric sign matrices of order six, being a
+conference matrix, having every complementary \(3\times3\) minor nonzero, and satisfying the cubic
+proportionality hold on exactly the same 384 matrices. The constant \(4\) is forced rather than
+computed, because a \(3\times3\) sign matrix has absolute determinant \(0\) or \(4\) and nothing else.
+That is census evidence at order six, not a proof; the bundle report states the limit explicitly and
+recommends against promoting the nondegeneracy form into the manuscript without one.
+
 ## Discovery-track candidates
 
 Logged separately in `notes/2026-07-14-clebsch-discovery-track.md`: the equal-norm-tight-frame reading

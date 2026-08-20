@@ -1,0 +1,21 @@
+{
+  "abs_determinants_of_3x3_sign_matrices": [
+    0,
+    4
+  ],
+  "count_all_complementary_minors_extremal": 384,
+  "count_conference": 384,
+  "count_pfaffian_proportional_to_triangle": 384,
+  "count_satisfying_all_three": 384,
+  "matrices_enumerated": 32768,
+  "matrices_where_extremal_differs_from_nonsingular": 0,
+  "matrices_where_the_three_disagree": 0,
+  "order": 6,
+  "pentagon_switching_relabelling_orbit_size": 384,
+  "pfaffian_versus_complementary_minor_cross_check_failures": 0,
+  "proportionality_constants": [
+    -4,
+    4
+  ],
+  "schema": "c816-extremal-minor-census/1"
+}

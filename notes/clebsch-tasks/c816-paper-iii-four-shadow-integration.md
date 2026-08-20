@@ -76,6 +76,23 @@ owner, not applied by the audit pass:
    is unclassified is the set of weighted solutions of the *proportionality*,
    which Theorem D pins to the scaling line at either golden representative.
 
+The closeout pass added a fourth item, with its own evidence bundle in
+`notes/2026-08-20-c816-extremal-minor-census.{md,py,json}`. Over all 32768
+hollow symmetric sign matrices of order six, being a conference matrix, having
+every complementary \(3\times3\) minor nonzero, and satisfying the cubic
+proportionality hold on exactly the same 384 matrices — the pentagon's
+switching-and-relabelling orbit — with proportionality constants exactly
+\(\pm4\). Two consequences for this task. The factor \(4\) in the proof is
+forced, not calculated: a \(3\times3\) sign matrix has absolute determinant
+\(0\) or \(4\) and nothing else, so replacing "its complementary-minor
+calculation gives the factor \(4\)" with that reason costs one sentence and
+removes the theorem's last unexplained number. And the equal-modulus half may
+admit a bare nondegeneracy hypothesis in place of the cubic identity — but that
+is census evidence at order six, not a proof, and must not enter the manuscript
+as a theorem without one. The route to try is the parity reduction in the bundle
+report: a \(3\times3\) sign matrix is nonsingular exactly when the product of
+the three pairwise inner products of its rows is \(-1\).
+
 The audit's sharpest limitation, carried forward: MathSciNet is unauthenticated
 and Google Scholar blocks automated access, so no article-body index was
 searched and the negative rests on title, abstract, and metadata indexes plus
