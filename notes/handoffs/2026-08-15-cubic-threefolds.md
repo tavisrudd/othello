@@ -37,6 +37,15 @@ promoted mathematical assertion maps to a kernel-checked declaration.
 
 ## Current status
 
+- **C931 -- C928 named-referee batch, active; dossier sealed.** The closed
+  eight-page theta-lattice paper is frozen at commit `ac04f826c` and PDF hash
+  `3822f928...e36e5`.  The dossier names and sources independent
+  cubic/Fano, integral topology/IH, abelian/Pontryagin, integral symplectic
+  lattice, closest-prior-art, and editorial-ceiling packets, with explicit
+  source-adjacency and conflict cautions.  No simulated report or manuscript
+  edit has yet been made.  Card:
+  `../cubic-threefolds-tasks/c931-c928-referee-dossier.md`; dossier:
+  `../2026-08-20-c931-c928-referee-dossier.md`.
 - **C930 — independent referee requires memo repair before manuscript
   phase.** The unconditional atomic direct-QDM route survives, but the common
   compiler is not yet type-correct for the framed instance: it asks for a

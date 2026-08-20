@@ -2,7 +2,7 @@
 
 **Lane:** cubic-threefolds
 
-**Status:** active; dossier construction in progress
+**Status:** active; dossier sealed, referee batch not yet run
 
 ## Goal
 
@@ -47,7 +47,18 @@ are frozen and an adopted-finding ledger exists.
   and public sources, not C908/C928 research notes or other reports.
 - Conflicts and source-author proximity are explicit; no outreach is implied.
 
+## Phase-one result
+
+The sealed dossier is
+`../2026-08-20-c931-c928-referee-dossier.md`.  It freezes authority commit
+`ac04f826c179b53a599d95b4bac7534ba6a900a1` and PDF SHA-256
+`3822f928217df38e4ed3f4feb687d9036637dbc751bda3f792906df1196e36e5`;
+records a named primary slate and focused alternates; splits the cold read into
+cubic/Fano, integral topology/IH, abelian/Pontryagin, integral lattice,
+priority, and editorial packets; and seals the source, conflict, verdict, and
+rerun protocols.  No report or paper edit was made in this phase.
+
 ## Next
 
-Freeze the paper surface and build the named slate from verified public and
-literature evidence.
+Run the five independent specialist reports against the frozen PDF, freeze
+them, then run the independent editorial-ceiling report and synthesis.
