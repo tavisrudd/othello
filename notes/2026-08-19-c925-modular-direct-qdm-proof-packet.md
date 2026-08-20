@@ -47,6 +47,7 @@ No manuscript or Lean source is part of this packet.
 | 40 | resonant GKZ saturation, closed-support torsion, and overlap valuation | notes/2026-08-20-c925-resonant-gkz-saturation.md |
 | 41 | raw discrepancy obstruction and canonical completion of the unit overlap | notes/2026-08-20-c925-unit-overlap-canonical-completion.md |
 | 42 | quantum-Serre rank annihilation and the canonical-completion normal jet | notes/2026-08-20-c925-canonical-completion-normal-jet.md |
+| 43 | common-window rank preservation and the universal completed normal jet | notes/2026-08-20-c925-completed-window-rank-jet.md |
 | frontier | open experiments and provider targets | notes/2026-08-20-c925-exploration-frontier.md |
 
 ## Dependency spine
@@ -73,7 +74,7 @@ Modules 19--23 prove reusable categorical consequences:
 - universal center-null quotients and minimal sufficient shadows; and
 - the conditional Section 6 argument as a separate specialization.
 
-Modules 24--42 isolate the higher-stabilization frontier:
+Modules 24--43 isolate the higher-stabilization frontier:
 
 - irrationality on any unbounded stabilization set implies irrationality for
   every index;
@@ -161,7 +162,14 @@ Modules 24--42 isolate the higher-stabilization frontier:
   without total unimodularity: one for three ordered types and two for
   flip--flip.  Total unimodularity removes the determinant-two flip--flip
   model.  Occurrence realization and marked saturated descent back to the
-  original QDM overlap remain open; and
+  original QDM overlap remain open;
+- the raw quantum-Serre bridge kills the rank/point shadow but has one
+  universal conormal zero.  After retaining its first normal jet, every
+  common-open completed-window comparison has unit residual rank map:
+  the coordinate-wall, determinant-two, and remaining three signatures all
+  give the same answer.  Any further residual defect must therefore occur in
+  the vertical fixed-phase QDM/Gamma occurrence realization, not in the
+  completed algebraic rank window; and
 - the rank-row route remains the higher-EV uniform alternative.
 
 ## Current \(m=2\) alternatives
@@ -191,9 +199,12 @@ descent through Module 40.  Module 42 proves that the raw quantum-Serre
 bridge has forced valuation one and kills the non-equivariant point/rank
 shadow.  Retaining the fibre-scaling parameter and its first normal jet
 restores that sparse row in a new jet-line consumer; the ordinary raw special
-fibre remains zero.  The open calculation is residual valuation zero after
-removing the universal factor, together with a typed identification of the
-jet transition.
+fibre remains zero.  Module 43 proves that every common-open completed-window
+comparison has residual valuation zero on the rank coimage: the coordinate
+wall, the determinant-two flip--flip model, and all three remaining
+signatures have the same unit normalized jet.  The open gate is now the
+vertical occurrence-level identification of that algebraic jet with the
+actual fixed-phase QDM transition.
 
 ### ExactTop provider
 

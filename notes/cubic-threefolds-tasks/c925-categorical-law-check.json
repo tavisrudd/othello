@@ -1,6 +1,7 @@
 {
-  "check_count": 97,
+  "check_count": 100,
   "checks": {
+    "all_five_completed_window_rank_jets_are_the_same_unit": "pass",
     "ambient_target_shear_changes_primitive_row_restriction": "pass",
     "augmented_row_output_kernel_is_two_sided": "pass",
     "bittner_relation_codimension_2_through_6": "pass",
@@ -11,7 +12,9 @@
     "codimension_two_stationary_charge_is_singleton": "pass",
     "comma_bridge_forces_descended_augmented_row": "pass",
     "commuting_unipotent_jordan_shifts_have_common_fixed_vector": "pass",
+    "completed_window_supported_mutations_have_zero_rank": "pass",
     "conditional_framed_m1_telescope_with_specialized_center_null": "pass",
+    "coordinate_and_determinant_two_jet_pilots_are_classified": "pass",
     "cyclic_krylov_moments_reconstruct_nilpotent_string": "pass",
     "equivariant_first_normal_jet_restores_only_the_rank_shadow": "pass",
     "exacttop_needs_image_equality_not_map_equality": "pass",

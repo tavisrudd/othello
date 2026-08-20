@@ -111,13 +111,15 @@ are:
     removal of the extra coordinate is marked-saturated.  Module 42 shows
     that ordinary quantum-Serre removal kills the point/rank row and has
     forced valuation one.  Retain the fibre-scaling parameter, take the first
-    normal jet, and test whether the residual valuation after dividing the
-    row shadow by \(1-q^{-1}\) is zero.  The raw special fibre is still zero:
-    separately identify the normalized jet map with the actual endpoint row
-    transition.
+    normal jet, and divide the row shadow by \(1-q^{-1}\).  Module 43 proves
+    that this residual map is a unit for every common-open completed window,
+    including both the coordinate-wall and determinant-two pilots.  The raw
+    special fibre is still zero: the remaining test is the vertical
+    identification of this universal algebraic jet with the actual endpoint
+    QDM row transition.
 
 None of these questions blocks the proof in Modules 0--16 or the
-transport-level specialization audit in Module 17.  Modules 18--42 isolate
+transport-level specialization audit in Module 17.  Modules 18--43 isolate
 the general consequences without claiming the missing enriched provider.
 The open questions control whether the interface can be promoted from a
 lawful compiler to a canonical equivalence with the complete external

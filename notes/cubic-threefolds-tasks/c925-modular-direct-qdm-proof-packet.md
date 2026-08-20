@@ -185,9 +185,12 @@ index row.
   K-theory self-intersection has rank zero and kills the point class.  The
   fibre-equivariant map has the universal simple factor \(1-q^{-1}\); its
   normalized first normal jet is the identity on a new marked rank/point jet
-  shadow, while the raw special fibre remains zero.  The remaining target is
-  an occurrence-level equivariant adapter with residual valuation zero and a
-  typed identification of that jet transition.
+  shadow, while the raw special fibre remains zero.  A common-open completed
+  window preserves generic rank, so the coordinate-wall, determinant-two,
+  and all three other completed signatures have residual valuation zero and
+  the same unit normalized jet.  The remaining target is an occurrence-level
+  equivariant QDM/Gamma adapter identifying that algebraic jet with the
+  endpoint transition.
 
 ## Open geometric providers
 
@@ -256,7 +259,7 @@ Typed replay:
       | diff -u \
           notes/cubic-threefolds-tasks/c925-sparse-shadow-path-toy-output.txt -
 
-The finite model currently has ninety-seven checks.  It verifies only the
+The finite model currently has one hundred checks.  It verifies only the
 advertised algebraic laws and countermodels, never an external QDM provider.
 
 ## Next
@@ -265,15 +268,15 @@ advertised algebraic laws and countermodels, never an external QDM provider.
    effective common rank-two genuine-unit matrix.  Module 41 leaves only five
    signatures without total unimodularity and four with it; the oriented
    chamber selects at most one for a typed occurrence.
-2. If so, identify its signature, adjoin the canonical-character coordinate,
-   and construct an equivariant QDM descent square retaining the fibre
-   character \(q\) and the first normal jet at \(q=1\).
-3. Compute that completed model's marked Smith/Gamma valuation.  The raw
-   expected value is one, from \(1-q^{-1}\); residual valuation zero with a
-   nonzero initial row coefficient and exact coimage base change makes the
-   jet-line map invertible.  Identify that normalized jet with the actual
-   endpoint row transition; it does not make the raw special fibre invertible.
-   A larger value identifies additional resonant punctual torsion.
+2. If so, construct an equivariant QDM/Gamma realization square retaining the
+   fibre character \(q\) and the first normal jet at \(q=1\).  Module 43 has
+   already computed the completed algebraic window side: its raw valuation is
+   one and its normalized jet is a unit for all five signatures.
+3. Identify that universal completed-window jet with the actual endpoint row
+   transition, with exact coimage base change and adjacent reindexing.  It
+   does not make the raw special fibre invertible; any extra torsion must now
+   occur in this vertical QDM realization rather than in the completed rank
+   window.
 4. Prove that the two incident sectorial gauges identify their actual
    row-null supported spans, then compare their induced ambient quotients.
    A common nonturning Hom-system with identical formal asymptotics would

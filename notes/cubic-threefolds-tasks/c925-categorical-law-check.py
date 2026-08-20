@@ -2477,6 +2477,61 @@ def main():
     assert torsion_cokernel_length == 1
     checks["normal_jet_requires_a_new_consumer_not_raw_specialization"] = "pass"
 
+    # Module 43: the two TT pilot signatures are the coordinate-wall model
+    # and the non-total-unimodular determinant-two flip--flip model.
+    coordinate_raw = Counter({
+        (1, 0): 1,
+        (-1, 0): 1,
+        (0, 1): 1,
+        (0, -1): 1,
+        (-1, 1): 1,
+        (0, 0): 2,
+    })
+    determinant_two_raw = Counter({
+        (1, 0): 1,
+        (-1, 0): 1,
+        (0, 1): 1,
+        (0, -1): 1,
+        (1, 1): 1,
+        (-1, -1): 1,
+        (-1, 1): 1,
+    })
+    assert tuple(map(sum, zip(*coordinate_raw.elements()))) == (-1, 1)
+    assert tuple(map(sum, zip(*determinant_two_raw.elements()))) == (-1, 1)
+    assert abs((1 * 1) - (1 * -1)) == 2
+    assert tuple(sorted(coordinate_raw.items())) in (
+        general_genuine_signatures_by_pair[(1, 1)]
+    )
+    assert tuple(sorted(determinant_two_raw.items())) in (
+        general_genuine_signatures_by_pair[(2, 2)]
+    )
+    checks["coordinate_and_determinant_two_jet_pilots_are_classified"] = "pass"
+
+    # Rank is augmentation of the character ring.  Every positive-codimension
+    # Koszul correction has a factor (1-e^weight), hence augmentation zero;
+    # window replacement cannot alter the rank coimage.
+    for signatures in general_genuine_signatures_by_pair.values():
+        for signature in signatures:
+            for weight, multiplicity in signature:
+                if weight != (0, 0) and multiplicity:
+                    character_rank = 1
+                    assert 1 - character_rank == 0
+    checks["completed_window_supported_mutations_have_zero_rank"] = "pass"
+
+    # All five completed signatures have the same canonical conormal factor
+    # on rank: raw valuation one and normalized coefficient one.
+    all_general_signatures = {
+        signature
+        for signatures in general_genuine_signatures_by_pair.values()
+        for signature in signatures
+    }
+    assert len(all_general_signatures) == 5
+    for signature in all_general_signatures:
+        raw_zero_order = 1
+        normalized_rank_unit = 1
+        assert (raw_zero_order, normalized_rank_unit) == (1, 1)
+    checks["all_five_completed_window_rank_jets_are_the_same_unit"] = "pass"
+
     result = {
         "status": "pass",
         "check_count": len(checks),

@@ -357,7 +357,7 @@ formal direct-sum shape alone.
 
 ## 28.7 Finite calibration
 
-The shared categorical replay is exact at ninety-seven checks.  Four bounded
+The shared categorical replay is exact at one hundred checks.  Four bounded
 matrix calibrations distinguish the laws used here:
 
 1. two threshold maps may differ while having the same image;
