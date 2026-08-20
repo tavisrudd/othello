@@ -291,6 +291,15 @@ noncomputable def sixAxisSourceTwoPrimaryLatticeCoordinates :
   sixAxisSourceTwoPrimaryLatticeEquiv.trans
     sixAxisSourceTwoPrimaryDiscriminantCoordinates.toAddEquiv
 
+/-- The two-primary part of the discriminant group has order `2⁸`: it is
+isomorphic to four copies of the rank-two two-torsion module. -/
+theorem natCard_sixAxisSourceDiscriminantPrimaryPart_two :
+    Nat.card (sixAxisSourceDiscriminantPrimaryPart 2) = 2 ^ 8 := by
+  classical
+  rw [Nat.card_congr sixAxisSourceTwoPrimaryLatticeCoordinates.toEquiv,
+    Nat.card_eq_fintype_card]
+  simp [Fintype.card_fun]
+
 end GraphLattices
 
 end TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue

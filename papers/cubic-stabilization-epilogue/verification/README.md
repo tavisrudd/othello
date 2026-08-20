@@ -129,7 +129,7 @@ refinement, and the separation section.  A statement carrying no edge has none
 recorded rather than none used, and the same holds of an imported source.
 
 Checked coverage snapshot: 62 claims; 5 absent; 27 fragmentary; 29 conditional;
-1 complete; 301 reviewer terminals, of which 48 are machinery serving no current
+1 complete; 302 reviewer terminals, of which 48 are machinery serving no current
 manuscript claim.
 
 The Lean modules and axiom audit can be built with the pinned package command

@@ -459,6 +459,21 @@ theorem relativeSixAxis_twoPrimaryKernelStandardCoordinates
     (Applications.relativeSixAxisTwoPrimaryKernelCoordinates_isMaximalIsotropic realization).1,
     (Applications.relativeSixAxisTwoPrimaryKernelCoordinates_isMaximalIsotropic realization).2⟩
 
+/-- The orders of the two primary parts of the source discriminant group.
+Each primary part is carried by the reduction of the cofactor image
+isomorphically onto the kernel of the polarization reduced at that prime, and
+that kernel is four copies of the rank-two module over the prime field, so the
+two-primary part has order `2⁸` and the three-primary part has order `3⁸`.
+Together with the order `6⁸` of the whole discriminant group this is the
+splitting of that order into its prime-power factors.  These are orders of
+subgroups of the cokernel of an explicit integral matrix; no geometric torsion
+local system is constructed. -/
+theorem relativeSixAxis_primaryDiscriminantOrders :
+    Nat.card (GraphLattices.sixAxisSourceDiscriminantPrimaryPart 2) = 2 ^ 8 ∧
+      Nat.card (GraphLattices.sixAxisSourceDiscriminantPrimaryPart 3) = 3 ^ 8 :=
+  ⟨GraphLattices.natCard_sixAxisSourceDiscriminantPrimaryPart_two,
+    GraphLattices.natCard_sixAxisSourceDiscriminantPrimaryPart_three⟩
+
 /-- The three-primary part of the source discriminant as the kernel of the
 polarization reduced modulo three, and the normalized three-primary pairing on
 it.  The reduction modulo three of the cofactor image is defined on the

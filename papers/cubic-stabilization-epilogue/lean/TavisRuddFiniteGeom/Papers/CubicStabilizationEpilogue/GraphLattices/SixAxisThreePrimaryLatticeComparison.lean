@@ -304,6 +304,15 @@ noncomputable def sixAxisSourceThreePrimaryLatticeCoordinates :
   sixAxisSourceThreePrimaryLatticeEquiv.trans
     sixAxisSourceThreePrimaryDiscriminantCoordinates.toAddEquiv
 
+/-- The three-primary part of the discriminant group has order `3⁸`: it is
+isomorphic to four copies of the rank-two three-torsion module. -/
+theorem natCard_sixAxisSourceDiscriminantPrimaryPart_three :
+    Nat.card (sixAxisSourceDiscriminantPrimaryPart 3) = 3 ^ 8 := by
+  classical
+  rw [Nat.card_congr sixAxisSourceThreePrimaryLatticeCoordinates.toEquiv,
+    Nat.card_eq_fintype_card]
+  simp [Fintype.card_fun]
+
 end GraphLattices
 
 end TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue
