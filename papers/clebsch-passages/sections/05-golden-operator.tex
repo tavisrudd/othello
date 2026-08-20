@@ -168,7 +168,7 @@ orientation is normalized by the cross-golden formula.}
 
 \smallskip
 \noindent\emph{What the four descriptions do and do not assert.}\par
-For every symmetric matrix \(A\), the coefficient of \(x_S\) in
+For every symmetric matrix \(A\) of order six, the coefficient of \(x_S\) in
 \(\operatorname{Pf}[D_x,A]\) is the signed complementary minor
 \(\det A[S^c,S]\), hence the corresponding diagonal entry of
 \(*\!\bigwedge^3A\).  The cross-golden determinant is the spectral-block form
@@ -350,6 +350,33 @@ What the theorem leaves open is not the conclusion \(A^2=\lambda I\), whose
 solutions are described below, but which weighted matrices among them satisfy
 the proportionality; those are not classified.
 
+Both halves of the theorem have classical ingredients.  Which forms are
+Pfaffians of skew matrices of linear forms is settled in general by Beauville
+\cite{BeauvilleDeterminantal}, with the cubic-surface case constructive in
+Tanturri \cite{TanturriPfaffian}, so a \(6\times6\) linear Pfaffian
+representation of a cubic surface is a known object.  The triangle cubic's
+coefficients are the order-three cycle products, half the principal
+three-by-three minors of a hollow symmetric matrix
+(\(\det A[S,S]=2a_{ij}a_{jk}a_{ki}\) for \(S=\{i,j,k\}\)), and cycle-sum
+coordinates on principal minors are Huang and Oeding's \cite{HuangOeding}.
+The conclusion is likewise classical as a description: \(A^2=\lambda I\)
+makes \(A/\sqrt\lambda\) a hollow symmetric involution, equivalently a
+constant-diagonal rank-three projection or an equal-norm tight frame of six
+vectors in \(\mathbf R^3\), and the equal-modulus case is the classical
+correspondence between conference matrices, regular two-graphs, and
+equiangular tight frames.  What we prove is the converse direction: nonzero
+proportionality of the two cubics forces the order and the scalar square,
+with the order-six nondegeneracy form in
+Proposition~\ref{prop:nonsingular-complementary-minors}.  We have not located
+either statement in the bounded audit documented with the distributed source
+archive, whose scope and access gaps are summarized in
+Section~\ref{sec:verification}; to our knowledge neither appears in the
+Pfaffian-commutator, compound-minor, determinantal-representation,
+conference-matrix, tight-frame, or maximal-determinant design literature.
+Greaves and Suda's two-valued fourth-order spectrum, used in
+Section~\ref{sec:reconstruct-signing}, concerns principal \(4\times4\)
+minors, not these complementary \(3\times3\) minors.
+
 \paragraph{Rigidity of the equality.}
 Let \(W\) be the fifteen-dimensional space of real symmetric order-six matrices
 with zero diagonal, coordinatized by the entries \(a_{ij}\), and for a
@@ -370,7 +397,8 @@ lies nearby.
 The twenty functions \(F_S=h_S-4\tau_S\) have Jacobian of rank fourteen at
 \(C\), with kernel the scaling line \(\mathbf R\,C\).  Near \(C\) the locus
 \(X_{+1}\) is therefore exactly that line, and the same holds for
-\(h_S+4\tau_S\) at the opposite oriented representative.
+\(h_S+4\tau_S\) near every odd signed-permutation image of \(C\), the
+representatives that reverse the orientation of the signed label space.
 \end{theorem}
 
 \begin{proof}
@@ -445,9 +473,12 @@ from \(012\), \(013\), \(015\) and \(024\) have determinant \(-5\) in the column
 \(\ker J\cap W^{\langle h\rangle}\) is the line through \(C\).  That contradicts
 the displayed inequality unless \(\ker J=\mathbf R\,C\).
 
-The constant-rank theorem confines \(X_{+1}\) to a one-dimensional manifold near
-\(C\); the scaling line is a one-dimensional submanifold of \(X_{+1}\), so the
-two agree there.  An odd signed permutation negates \(h_S\) and fixes
+Fourteen of the twenty differentials \(\mathrm dF_S(C)\) are independent, so
+by the implicit function theorem the common zero set of those fourteen
+functions is a one-dimensional submanifold near \(C\).  It contains
+\(X_{+1}\), which contains the scaling line; two one-dimensional
+submanifolds, one inside the other through \(C\), coincide near \(C\), so all
+three sets do.  An odd signed permutation negates \(h_S\) and fixes
 \(\tau_S\), carrying the whole argument to \(X_{-1}\).
 \end{proof}
 
@@ -464,18 +495,41 @@ identically on the Grassmannian; at most five are independent, so the projection
 form a family of dimension at least four, and \(\dim T\ge5\) after the scaling
 direction is added.
 
-Equality holds, and the splitting is visible.  As a \(G\)-module
-\(W\cong\mathbf1\oplus\mathbf4\oplus\mathbf5\oplus\mathbf5\), from the character
-\((15,3,0,0,0)\) on the classes of orders \(1,2,3,5,5\), and \(T\) is exactly
-\(\mathbf1\oplus\mathbf4\).  This is an eigenspace decomposition rather than a
-character computation: differentiating \(A^2=\lambda I\) gives
-\(CX+XC=\mu(X)I\) for \(X\in T\), and multiplying by \(C\) and using
-\(C^2=5I\) gives
+Equality holds, by the same mechanism that drives the recognition theorem.
+Differentiating \(A^2=\lambda I\) gives \(CX+XC=\mu(X)I\) for \(X\in T\), so
+\(T\) lies in the linear space
+\[
+ L=\{X\in W:CX+XC\in\mathbf R\,I\},
+\]
+on which \(\mu\) is a linear functional.  Writing \(P_\pm=(I\pm C/\sqrt5)/2\)
+for the spectral projections of \(C\), so that
+\(CX+XC=2\sqrt5\,(P_+XP_+-P_-XP_-)\), membership in \(L\) says
+\(P_+XP_+=cP_+\) and \(P_-XP_-=-cP_-\) for a single scalar \(c\); the scalar
+part is \(c(P_+-P_-)=cC/\sqrt5\), so \(L=\mathbf R\,C\oplus\ker\mu\) with
+\(\ker\mu=\{X\in W:P_+XP_+=P_-XP_-=0\}\).  Forgetting hollowness, a symmetric
+\(X\) with both spectral blocks zero is \(B+B^{\mathsf T}\) for an arbitrary
+\(B\colon\operatorname{im}P_-\to\operatorname{im}P_+\), nine parameters, with
+diagonal \(X_{ii}=2\langle p_i,Bq_i\rangle\) where \(p_i=P_+e_i\) and
+\(q_i=P_-e_i\).  Hollowness pairs \(B\) against the six matrices
+\(p_iq_i^{\mathsf T}\), and a relation
+\(\sum_ic_ip_iq_i^{\mathsf T}=P_+D_cP_-=0\) makes the diagonal matrix \(D_c\)
+commute with \(P_+\), hence with \(C\), hence forces \(c\) constant, since no
+off-diagonal entry of \(C\) vanishes; as \(\sum_ip_iq_i^{\mathsf T}=P_+P_-=0\),
+the relations are exactly the constants.  Five of the six conditions are
+therefore independent, \(\dim\ker\mu=4\) and \(\dim L=5\), and the lower bound
+gives \(T=L\).
+
+The splitting is an eigenspace decomposition: multiplying \(CX+XC=\mu(X)I\)
+by \(C\) and using \(C^2=5I\) gives
 \[
  CXC=\mu(X)C-5X,
 \]
 so \(X\mapsto\tfrac15CXC\) is an involution of \(T\) with \(+1\)-eigenspace
-\(\mathbf R\,C\) and \(-1\)-eigenspace \(\ker\mu\).  By
+\(\mathbf R\,C\) and \(-1\)-eigenspace \(\ker\mu\).  As a \(G\)-module
+\(W\cong\mathbf1\oplus\mathbf4\oplus\mathbf5\oplus\mathbf5\), from the
+character \((15,3,0,0,0)\) on the classes of orders \(1,2,3,5,5\); the only
+four-dimensional submodule is the irreducible \(\mathbf4\), so \(T\) is
+exactly \(\mathbf1\oplus\mathbf4\).  By
 Theorem~\ref{thm:golden-equality-rigidity} the Jacobian \(J\) is injective on
 \(\ker\mu\): the conference deformations the cubic equality kills are exactly
 the scalings.  This makes the conference count and the cubic count one
@@ -530,12 +584,12 @@ complementary block, so no such block has two equal or opposite rows and all
 twenty determinants are \(\pm4\).
 \end{proof}
 
-This is where the factor \(4\) in
-Theorem~\ref{thm:triangle-pfaffian-recognition} comes from.  It is not the
-output of the two orbit computations displayed earlier: a \(3\times3\) sign
-matrix has determinant \(0\) or \(\pm4\) and nothing else, so once the
-complementary minors are forced away from zero the constant has no freedom
-left.
+This is where the magnitude of the factor \(4\) in
+Theorem~\ref{thm:triangle-pfaffian-recognition} comes from: a \(3\times3\)
+sign matrix has determinant \(0\) or \(\pm4\) and nothing else, so once the
+complementary minors are forced away from zero the magnitude has no freedom
+left.  The two orbit computations displayed earlier supply what nondegeneracy
+cannot, the single sign shared by all twenty triples.
 
 \paragraph{Why the determinant.}
 The restricted determinant above is intrinsic; its scalar is fixed by the
@@ -652,9 +706,16 @@ equal sums, so
    \bigl(f(S\cup\{a\})-f(S\cup\{b\})\bigr)=0
 \]
 for the aligned indicator \(f\).  That is the same hypothesis one subset size
-lower, for the difference function on the remaining \(2d-2\) points;
-descending on the subset size makes the difference vanish pointwise, and
-one-element exchanges connect all four-sets.
+lower, for the difference function on the remaining \(2d-2\) points.  Two
+more exchanges of the same kind leave a function of single points whose sum
+over every \((d-3)\)-subset vanishes; comparing two such subsets differing in
+one element makes it constant, hence zero.  Now climb back up: a function
+whose one-element differences all vanish is constant, since one-element
+exchanges connect the subsets of a fixed size, and a constant with vanishing
+sum over a nonempty family is zero.  Applied to the second and then the first
+difference this makes both vanish identically, and vanishing first
+differences make \(f\) constant on four-sets.  Every subset and exchange used
+exists because \(d\geq4\).
 
 Let \(w\) be the common value of \(w(K)\) and apply the closed-walk count to
 the whole matrix rather than to a half.  Reading the diagonal of \(C^2=qI\)
