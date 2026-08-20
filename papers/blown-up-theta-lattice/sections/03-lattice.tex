@@ -1,0 +1,88 @@
+\section{The integral Lefschetz defect}\label{sec:lattice}
+
+We first work with a unimodular symplectic lattice \(\Lambda\) of rank
+\(2g\), \(g\geq4\), and polarization \(\theta\).  This isolates the only
+integral linear algebra in the paper.
+
+\begin{theorem}\label{thm:symplectic-saturation}
+For
+\[
+ L_3:\bigwedge^3\Lambda\longrightarrow\bigwedge^5\Lambda,
+ \qquad \alpha\longmapsto\theta\wedge\alpha,
+\]
+one has
+\begin{equation}\label{eq:general-saturation}
+ \Sat(\im L_3)=im L_3+\theta^{[2]}\wedge\Lambda.
+\end{equation}
+Moreover
+\begin{equation}\label{eq:tau-isomorphism}
+ \tau:\Lambda/2\Lambda\xrightarrow{\sim}
+ \Sat(\im L_3)/\im L_3,
+ \qquad z\longmapsto[\theta^{[2]}\wedge z]
+\end{equation}
+is symplectically natural.  The nonzero Smith factors of \(L_3\) are all
+one except for exactly \(2g\) factors equal to two.
+\end{theorem}
+
+\begin{proof}
+Choose a symplectic basis \(e_1,f_1,\ldots,e_g,f_g\), and put
+\(x_i=e_i\wedge f_i\).  Label an exterior monomial by the symplectic pairs
+that occur as singletons and by those that occur as full pairs.  Fix a
+singleton set \(A\), choose \(e_i\) or \(f_i\) for each \(i\in A\), and
+write \(u_A\) for their product.  For \(T\cap A=\varnothing\), put
+\(x_T=\prod_{i\in T}x_i\).  Multiplication by
+\(\theta=\sum_i x_i\) preserves the singleton label and acts by
+\begin{equation}\label{eq:up-incidence}
+ u_Ax_T\longmapsto
+ \sum_{j\notin A\cup T}u_Ax_{T\cup\{j\}}.
+\end{equation}
+These are integral direct-sum blocks; no rational primitive decomposition is
+being used.
+
+In degree three there are two cases.  If \(|A|=3\), then \(T\) is empty,
+and \eqref{eq:up-incidence} sends one basis vector to an all-ones vector.
+Its image is primitive.  If \(|A|=1\), then \(|T|=1\), and the block is the
+unsigned vertex--edge incidence map of the complete graph on
+\(n=g-1\) vertices:
+\[
+ U_n:\Z^n\longrightarrow\Z^{\binom n2},
+ \qquad [i]\longmapsto\sum_{j\ne i}[\{i,j\}].
+\]
+
+For \(n\geq3\), \(U_n\) is injective: the equations
+\(a_i+a_j=0\) on a triangle force every \(a_i\) to vanish.  An
+\((n-1)\)-minor is one, using the rows \(\{1,j\}\), \(2\leq j\leq n\),
+and columns \(2,\ldots,n\).  Every \(n\)-minor is even because modulo two
+the sum of all columns is zero.  Finally, the rows of one triangle together
+with \(\{1,k\}\), \(4\leq k\leq n\), give an \(n\)-minor of determinant
+\(\pm2\).  Hence
+\begin{equation}\label{eq:complete-graph-smith}
+ \operatorname{SNF}(U_n)=\operatorname{diag}(1^{n-1},2).
+\end{equation}
+The order-two class is represented by the sum of all edge vectors: twice
+that vector is the sum of all vertex columns, while the triangle equations
+show that it is not itself in the image.
+
+There is one such block for each of the \(2g\) choices of a singleton
+basis vector.  Since
+\[
+ \theta^{[2]}=\sum_{i<j}x_i\wedge x_j,
+\]
+the vector \(\theta^{[2]}\wedge e_k\), or
+\(\theta^{[2]}\wedge f_k\), is precisely the all-edge vector in the
+corresponding block.  The blocks are independent, so these \(2g\) vectors
+exhaust the saturation defect and prove \eqref{eq:general-saturation} and
+\eqref{eq:tau-isomorphism}.
+
+Although the calculation used a basis, \(\tau\) is defined by the
+polarization and its integral divided square.  It therefore commutes with
+every element of \(\operatorname{Sp}(\Lambda,\theta)\).
+\end{proof}
+
+For \(g=5\), the domain has rank \(\binom{10}{3}=120\).  Theorem
+\ref{thm:symplectic-saturation} gives ten factors of two and 110 factors of
+one, proving the algebraic part of \eqref{eq:main-saturation}.  This is an
+off-central integral Lefschetz map.  The general filtration of
+\cite{FaulknerMiller} provides a broader representation-theoretic setting;
+the occupancy proof above identifies the exact elementary divisors and
+their divided-power representatives in the degree required here.

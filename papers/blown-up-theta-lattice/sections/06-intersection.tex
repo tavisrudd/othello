@@ -1,0 +1,47 @@
+\section{Intersection cohomology of the theta divisor}\label{sec:intersection}
+
+For an isolated singularity in a complex fourfold, the middle-perversity
+Deligne sheaf agrees below the middle degree with the cohomology of the
+smooth locus.  Thus
+\begin{equation}\label{eq:ih-smooth-locus}
+ IH^3(\Theta,\Z)\cong H^3(U,\Z).
+\end{equation}
+The Mayer--Vietoris proof of Proposition~\ref{prop:topological-exact}
+identifies \(H^3(M,\Z)\to H^3(U,\Z)\) with an isomorphism.  This proves the
+first assertion of Corollary~\ref{cor:main-ih}.  Under that identification,
+the pair sequence \eqref{eq:theta-pair} and the surjectivity supplied by
+Proposition~\ref{prop:endpoint-lifts} give
+\[
+ 0\longrightarrow H^3(\Theta,\Z)
+ \longrightarrow IH^3(\Theta,\Z)
+ \longrightarrow H^3(X,\Z)\longrightarrow0,
+\]
+which proves the corollary.
+
+For comparison, the rational decomposition of this resolution is already
+known.  Kraemer proves, with complex coefficients,
+\cite[Corollary~6]{KraemerE6}
+\begin{equation}\label{eq:kraemer-decomposition}
+ R\sigma_*\Q_M[4]
+ \cong\IC_\Theta\oplus\Q_0[2]\oplus\Q_0\oplus\Q_0[-2],
+\end{equation}
+where the same argument works over \(\Q\).  Equivalently,
+\[
+ H^k(M,\Q)\cong IH^k(\Theta,\Q)\oplus
+ \begin{cases}
+  \Q,&k=2,4,6,\\
+  0,&\text{otherwise}.
+ \end{cases}
+\]
+The three skyscraper summands come from the algebraic cohomology of the
+exceptional cubic.  Equation \eqref{eq:kraemer-decomposition} does not split
+the integral sequence in a manner compatible with \((b_*,e^*)\), nor does
+it determine the mod-two coset in \eqref{eq:main-fibre-product}.
+
+The integral calculation outside degree three has an additional coefficient
+issue: in the link Gysin sequence, multiplication by the hyperplane class
+sends \(h\) to \(3\ell\).  We make no integral decomposition-theorem claim
+in those degrees.  The conclusion here is exactly that the rank-130 lattice
+of Theorem~\ref{thm:main-lattice} is the intrinsic middle intersection
+cohomology of \(\Theta\), while its rational even-degree correction is the
+prior result \eqref{eq:kraemer-decomposition}.

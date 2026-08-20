@@ -1,0 +1,51 @@
+\section{The dual escape lattice}\label{sec:duality}
+
+We prove Theorem~\ref{thm:main-escape}.  Poincare duality identifies
+\(H^5(M,\Z)/\operatorname{tors}\) unimodularly with
+\(\operatorname{Hom}(H^3(M,\Z),\Z)\).  Under this identification,
+\(b_*:H^5(M,\Z)/\operatorname{tors}\to H^7(J,\Z)\) is restriction of
+functionals along \(b^*:\bigwedge^3\Lambda\to H^3(M,\Z)\), followed by
+the wedge duality \((\bigwedge^3\Lambda)^\vee\cong\bigwedge^7\Lambda\).
+Since \(b^*\bigwedge^3\Lambda\) is a direct summand,
+\begin{equation}\label{eq:degree-five-push}
+ b_*:H^5(M,\Z)/\operatorname{tors}\longrightarrow\bigwedge^7\Lambda
+\end{equation}
+is surjective with primitive rank-ten kernel.
+
+The exceptional Gysin map corresponds to
+\[
+ \beta\longmapsto\left(u\longmapsto
+ \langle\beta,e^*u\rangle_X\right).
+\]
+Surjectivity of \(e^*\) and unimodularity of the middle pairing on \(X\)
+identify its image with the kernel of \eqref{eq:degree-five-push}.
+
+It remains to quotient by pullbacks from \(J\).  For
+\(w\in H^5(J,\Z)=\bigwedge^5\Lambda\), the functional defined by \(b^*w\)
+is
+\[
+ u\longmapsto\langle w,b_*u\rangle_J.
+\]
+The lattice \(S=b_*H^3(M,\Z)\) is saturated in
+\(\bigwedge^5\Lambda\), so unimodularity of the middle wedge pairing shows
+that \(\bigwedge^5\Lambda\to S^\vee\) is surjective.  Therefore
+\begin{equation}\label{eq:escape-dual}
+ E_M\cong\operatorname{Hom}(\ker(b_*:H^3(M,\Z)\to S),\Z).
+\end{equation}
+
+In the fibre-product coordinates \eqref{eq:main-fibre-product},
+\[
+ \ker b_*=\{(0,\gamma):y(\gamma)\equiv0\pmod2\}.
+\]
+Since \(y\) is unimodular, restriction identifies this kernel with
+\(2H^3(X,\Z)\).  Thus \eqref{eq:escape-dual} is free of rank ten.  An
+exceptional Gysin functional pairs against \(2H^3(X,\Z)\), so its image in
+\eqref{eq:escape-dual} is exactly twice the unimodular dual lattice.  This
+is \(2E_M\), proving Theorem~\ref{thm:main-escape}.
+
+\begin{remark}\label{rem:two-torsion-location}
+The group \((\Z/2)^{10}\) occurs twice for dual reasons.  In degree three
+it is the saturation quotient of the image in \(J\).  In degree five it is
+the quotient of a free rank-ten lattice by the exceptional sublattice.
+The escape lattice itself is not torsion.
+\end{remark}

@@ -40,8 +40,9 @@ must not claim to solve either crown.
 ## Theorem package in hand
 
 - `H^3(M,Z)` is torsion-free of rank 130.
-- It is a nonsplit integral extension of `H^3(X,Z)` by `wedge^3 Lambda`, with
-  glue described by the mod-two map `rho`.
+- It is an abstractly split extension of `H^3(X,Z)` by `wedge^3 Lambda`;
+  the simultaneous pair `(b_*,e_X^*)` has nontrivial glue described by the
+  mod-two map `rho`.
 - `b_*H^3(M,Z)` is the saturation of
   `Theta wedge wedge^3 Lambda` in `wedge^5 Lambda`, of index `2^10`.
 - The degree-six Fano-surface model transfers integrally onto the full

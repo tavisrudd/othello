@@ -1,0 +1,132 @@
+\section{Introduction}\label{sec:introduction}
+
+Let \(X\subset\mathbf P^4_{\C}\) be a smooth cubic threefold and let
+\((J,\Theta)\) be its principally polarized intermediate Jacobian.  The
+theta divisor has a unique singular point, an ordinary triple point at the
+origin, and its projectivized tangent cone is \(X\)
+\cite[Theorem~1]{BeauvilleTheta}.  Its blow-up
+\[
+ \sigma:M=\operatorname{Bl}_0\Theta\longrightarrow\Theta
+\]
+is smooth, with exceptional divisor \(X\) and normal bundle
+\(\cO_X(-1)\).  Write \(i:\Theta\hookrightarrow J\), \(b=i\sigma\),
+\(e:X\hookrightarrow M\), and
+\[
+ \Lambda=H^1(J,\Z),\qquad
+ \theta=[\Theta]\in\bigwedge^2\Lambda.
+\]
+The principal polarization makes \(\Lambda\) a unimodular symplectic lattice
+of rank ten.  We use the divided powers
+\(\theta^{[r]}=\theta^r/r!\), which are integral.
+
+The ordinary group \(H^3(\Theta,\Z)\) is \(\bigwedge^3\Lambda\) by singular
+weak Lefschetz.  Blowing up the triple point adds ten generators, but their
+placement relative to restriction to \(X\) and pushforward to \(J\) is not a
+direct sum.  The following theorem describes that placement.
+
+Define
+\[
+ L:\bigwedge^3\Lambda\longrightarrow\bigwedge^5\Lambda,
+ \qquad L(\alpha)=\theta\wedge\alpha,
+\]
+and let \(S=\Sat(L\bigwedge^3\Lambda)\) inside
+\(\bigwedge^5\Lambda\).  The cylinder correspondence of the universal line
+on \(X\) and the principal polarization give an integral isomorphism
+\[
+ y:H^3(X,\Z)\xrightarrow{\sim}\Lambda;
+\]
+we fix its global sign in Section~\ref{sec:geometric-glue}.
+
+\begin{theorem}[Integral middle lattice]\label{thm:main-lattice}
+There is an exact sequence of free abelian groups
+\begin{equation}\label{eq:main-exact}
+ 0\longrightarrow\bigwedge^3\Lambda
+ \xrightarrow{\ b^*\ }H^3(M,\Z)
+ \xrightarrow{\ e^*\ }H^3(X,\Z)\longrightarrow0.
+\end{equation}
+It splits as a sequence of abelian groups.  The Gysin image is
+\begin{equation}\label{eq:main-saturation}
+ b_*H^3(M,\Z)=S
+ =L\bigwedge^3\Lambda+\theta^{[2]}\wedge\Lambda,
+ \qquad S/L\bigwedge^3\Lambda\cong\Lambda/2\Lambda.
+\end{equation}
+More precisely, \((b_*,e^*)\) embeds \(H^3(M,\Z)\) in
+\(S\oplus H^3(X,\Z)\), with image
+\begin{equation}\label{eq:main-fibre-product}
+ \left\{(s,\gamma):
+ [s]=[\theta^{[2]}\wedge y(\gamma)]
+ \text{ in }S/L\bigwedge^3\Lambda\right\}.
+\end{equation}
+In particular, \(H^3(M,\Z)\) is torsion-free of rank \(130\), and the
+nonzero Smith factors of \(L\) are \(1^{110},2^{10}\).
+\end{theorem}
+
+The split sequence \eqref{eq:main-exact} alone does not see the arithmetic
+content: any lift of \(\gamma\) has pushforward in the mod-two coset
+\([\theta^{[2]}\wedge y(\gamma)]\).  Thus ``glue'' below always means the
+simultaneous lattice \eqref{eq:main-fibre-product}, not a nonsplit extension
+of abstract abelian groups.
+
+The dual statement corrects another tempting reading of the ten factors of
+two.  Put
+\begin{equation}\label{eq:escape-definition}
+ E_M=H^5(M,\Z)\big/
+ \bigl(b^*H^5(J,\Z)+\operatorname{tors}\bigr).
+\end{equation}
+
+\begin{theorem}[Escape lattice]\label{thm:main-escape}
+The group \(E_M\) is free of rank ten.  The image of
+\(e_*H^3(X,\Z)\) in \(E_M\) is exactly \(2E_M\).  Consequently
+\[
+ \frac{H^5(M,\Z)}{b^*H^5(J,\Z)+e_*H^3(X,\Z)+\operatorname{tors}}
+ \cong(\Z/2)^{10}.
+\]
+\end{theorem}
+
+The lattice is intrinsic to the singular theta divisor in middle degree.
+
+\begin{corollary}[Integral intersection cohomology]\label{cor:main-ih}
+There are natural isomorphisms
+\[
+ IH^3(\Theta,\Z)\cong H^3(M,\Z)
+\]
+and an exact sequence
+\[
+ 0\longrightarrow H^3(\Theta,\Z)
+ \longrightarrow IH^3(\Theta,\Z)
+ \longrightarrow H^3(X,\Z)\longrightarrow0.
+\]
+Under these identifications, Theorem~\ref{thm:main-lattice} computes the
+integral lattice \(IH^3(\Theta,\Z)\).
+\end{corollary}
+
+The proof has three parts.  First, the link of the triple point is the circle
+bundle of \(\cO_X(-1)\); its Gysin sequence and Mayer--Vietoris give
+\eqref{eq:main-exact}.  Second, a symplectic-basis decomposition turns
+\(L:\bigwedge^3\Lambda\to\bigwedge^5\Lambda\) into primitive blocks and
+unsigned incidence matrices of complete graphs.  Each incidence block has
+Smith form \(1^{n-1},2\), and its order-two class is exactly a divided-power
+vector \(\theta^{[2]}\wedge z\).  Third, the difference map of the Fano
+surface produces lifts of all ten quotient directions.  The identity
+\[
+ \xi\star\theta^{[3]}=\pm\theta^{[2]}\wedge y(\xi)
+\]
+for the Pontryagin product identifies their pushforwards and yields
+\eqref{eq:main-fibre-product}.  No finite Smith-form computation enters the
+proof.
+
+Beauville established the singularity and degree-six Fano geometry used
+here \cite{BeauvilleTheta}; Clemens and Griffiths supply the integral
+cylinder isomorphism and the minimal class of the Fano surface
+\cite{ClemensGriffiths}.  Kraemer already computed the rational
+decomposition-theorem correction for this resolution
+\cite[Corollary~6]{KraemerE6}; Section~\ref{sec:intersection} explains why
+that calculation does not determine the integral middle lattice.  The
+integral Lefschetz filtration of Faulkner Valiente and Miller Eismeier is
+the nearest general algebraic framework \cite{FaulknerMiller}.  We give the
+short off-central specialization needed here because it exposes the ten
+complete-graph parity defects directly.
+
+The stronger assertion that the full degree-six Fano transfer surjects onto
+\(H^3(M,\Z)\) is not needed and is not claimed.  Only ten endpoint classes,
+whose images in \(H^3(X,\Z)\) form a basis, enter the argument.

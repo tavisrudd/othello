@@ -1,0 +1,77 @@
+\section{The topology of the resolution}\label{sec:topology}
+
+Set \(U=\Theta\setminus\{0\}=M\setminus X\), and let \(K\) be the link of
+the singular point.  Since the blow-up is an isomorphism away from \(X\), a
+punctured neighborhood of the singular point is a punctured tubular
+neighborhood of \(X\) in \(M\).  Hence \(K\) is the unit-circle bundle of
+\(N_{X/M}=\cO_X(-1)\).
+
+\begin{lemma}\label{lem:link-cohomology}
+The integral cohomology of the link in degrees at most four is
+\[
+ H^1(K)=H^2(K)=0,\qquad
+ H^3(K)\cong H^3(X)\cong\Z^{10},\qquad
+ H^4(K)\cong\Z^{10}\oplus\Z/3.
+\]
+The isomorphism in degree three is pullback along \(K\to X\).
+\end{lemma}
+
+\begin{proof}
+Let \(h\in H^2(X,\Z)\) be the hyperplane class and let
+\(\ell\in H^4(X,\Z)\) be the class of a line.  The integral cohomology of a
+smooth cubic threefold is
+\[
+ H^k(X,\Z)=\Z,0,\Z h,\Z^{10},\Z\ell,0,\Z
+ \quad(0\leq k\leq6),
+\]
+and multiplication by \(h\) sends \(1\) to \(h\), \(h\) to
+\(3\ell\), and \(\ell\) to the point class.  Apply the Gysin sequence of
+the circle bundle, whose Euler class is \(-h\).  The asserted groups and
+the degree-three pullback isomorphism follow at once.
+\end{proof}
+
+The singular weak Lefschetz theorem for the support of an ample divisor
+gives
+\begin{equation}\label{eq:weak-lefschetz}
+ H^3(\Theta,\Z)\cong H^3(J,\Z)=\bigwedge^3\Lambda;
+\end{equation}
+one may use the relative homotopy form of stratified Morse theory
+\cite[Part~II, \S1.2]{GoreskyMacPherson}.
+
+\begin{proposition}\label{prop:topological-exact}
+The maps \(b^*\) and \(e^*\) give the exact sequence
+\eqref{eq:main-exact}.
+\end{proposition}
+
+\begin{proof}
+Excision at the isolated singularity identifies
+\(H^k(\Theta,U;\Z)\) with \(\widetilde H^{k-1}(K,\Z)\).  Since
+\(H^2(K)=0\), the pair sequence gives
+\begin{equation}\label{eq:theta-pair}
+ 0\longrightarrow H^3(\Theta,\Z)
+ \longrightarrow H^3(U,\Z)
+ \longrightarrow H^3(K,\Z).
+\end{equation}
+Now cover \(M\) by \(U\) and a tubular neighborhood of \(X\).  Their
+intersection retracts to \(K\), and Mayer--Vietoris begins
+\[
+ 0\longrightarrow H^3(M,\Z)
+ \longrightarrow H^3(U,\Z)\oplus H^3(X,\Z)
+ \longrightarrow H^3(K,\Z).
+\]
+The restriction \(H^3(X,\Z)\to H^3(K,\Z)\) is an isomorphism by
+Lemma~\ref{lem:link-cohomology}.  Projection therefore identifies
+\(H^3(M,\Z)\) with \(H^3(U,\Z)\).  Under this identification the kernel of
+\(e^*\) is the image of \(H^3(\Theta,\Z)\), hence is
+\(b^*\bigwedge^3\Lambda\) by \eqref{eq:weak-lefschetz}.
+
+Surjectivity of \(e^*\) will follow in
+Proposition~\ref{prop:endpoint-lifts} from the universal-line
+correspondence.  Since its target is free, the resulting exact sequence
+splits abstractly.  It also proves that \(H^3(M,\Z)\) is free of rank
+\(120+10=130\).
+\end{proof}
+
+The argument deliberately postpones surjectivity.  Local topology reduces
+it to the survival of all link classes; the Fano correspondence supplies
+integral lifts and fixes their global position in \(J\) at the same time.

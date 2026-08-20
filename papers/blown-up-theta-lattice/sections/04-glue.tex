@@ -1,0 +1,136 @@
+\section{The Fano surface and the geometric glue}\label{sec:geometric-glue}
+
+Let \(F\) be the Fano surface of lines on \(X\), and let
+\(a:F\hookrightarrow J\) be its Albanese embedding.  The difference map
+\[
+ \psi:F\times F\longrightarrow\Theta,
+ \qquad (r,s)\longmapsto a(s)-a(r)
+\]
+is generically finite of degree six.  Blowing up the diagonal gives a
+commutative diagram
+\[
+ \begin{array}{ccc}
+ Y=\operatorname{Bl}_{\Delta}(F\times F)&\xrightarrow{q}&M\\
+ \downarrow\mu&&\downarrow b\\
+ F\times F&\xrightarrow{\psi}&J.
+ \end{array}
+\]
+The exceptional divisor of \(\mu\) is
+\(P=\mathbf P(T_F)\), the universal line
+\(\{(\ell,x):x\in\ell\}\subset F\times X\).  Write
+\(\pi:P\to F\) and \(p:P\to X\) for its projections.  These facts, as
+well as \([F]=\theta^{[3]}\), are classical
+\cite{ClemensGriffiths,BeauvilleTheta}.
+
+The cylinder map
+\[
+ \pi_*p^*:H^3(X,\Z)\longrightarrow H^1(F,\Z)
+\]
+is an integral isomorphism by Clemens--Griffiths
+\cite[\S2 and \S11]{ClemensGriffiths}.  Its adjoint for the unimodular
+pairings is therefore an isomorphism
+\begin{equation}\label{eq:cylinder-adjoint}
+ p_*\pi^*:H^3(F,\Z)/\operatorname{tors}
+ \xrightarrow{\sim}H^3(X,\Z).
+\end{equation}
+
+\begin{lemma}[Clean exceptional restriction]\label{lem:clean-base-change}
+For \(T\in H^3(F\times F,\Z)\),
+\begin{equation}\label{eq:clean-base-change}
+ e^*q_*\mu^*T=p_*\pi^*\Delta^*T,
+ \qquad
+ b_*q_*\mu^*T=\psi_*T.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The equality \(\psi^{-1}(0)=\Delta\) follows from injectivity of the
+Albanese embedding.  Thus \(q^{-1}(X)=P\) set-theoretically.  It has
+multiplicity one: on a fibre \(C\) of \(P\to F\), both \(q^*X\) and the
+exceptional divisor have degree \(-1\).  Hence \(q^*X=P\) as Cartier
+divisors and the normal bundles agree.  Naturality of Thom classes gives
+\(q^*e_*=j_*p^*\), where \(j:P\hookrightarrow Y\).  The first identity of
+\eqref{eq:clean-base-change} follows by adjunction and the projection
+formula; the second follows from \(bq=\psi\mu\) and
+\(\mu_*\mu^*=1\).
+\end{proof}
+
+We next calculate the endpoint of the difference correspondence.  The
+Pontryagin product on \(J\) is denoted by \(\star\).
+
+\begin{lemma}[Pontryagin endpoint]\label{lem:pontryagin-endpoint}
+For a principally polarized abelian fivefold and
+\(\xi\in\bigwedge^9\Lambda\), let \(y(\xi)\in\Lambda\) be its integral
+symplectic wedge-dual.  With one global sign depending on orientation and
+Pontryagin conventions,
+\begin{equation}\label{eq:pontryagin-endpoint}
+ \xi\star\theta^{[3]}=\pm\theta^{[2]}\wedge y(\xi).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Choose a symplectic basis.  It suffices to take \(\xi\) to be the oriented
+top monomial with one basis vector omitted.  In the adjunction formula
+\[
+ \int_J(\xi\star\theta^{[3]})\wedge\eta
+ =\int_{J\times J}\operatorname{pr}_1^*\xi\wedge
+ \operatorname{pr}_2^*\theta^{[3]}\wedge m^*\eta,
+\]
+the first factor must receive the omitted vector, while the second receives
+the two complementary full symplectic pairs.  Each admissible term occurs
+once because \(\theta^{[3]}\) is a divided power.  The result is the pairing
+of \(\pm\theta^{[2]}\wedge y(\xi)\) with \(\eta\).  The degree-five wedge
+pairing is unimodular, which proves the identity.
+\end{proof}
+
+For \(\beta\in H^3(F,\Z)/\operatorname{tors}\), put
+\(\xi=a_*\beta\in H^9(J,\Z)\).  The Albanese isomorphism, Poincare duality,
+and the principal polarization identify \(\beta\mapsto y(\xi)\) with an
+integral isomorphism from the free part of \(H^3(F,\Z)\) to \(\Lambda\).
+Combining it with the inverse of \eqref{eq:cylinder-adjoint}, and absorbing
+the global sign, defines the isomorphism
+\(y:H^3(X,\Z)\to\Lambda\) used in the introduction.
+
+\begin{proposition}[Endpoint lifts]\label{prop:endpoint-lifts}
+For every \(\gamma\in H^3(X,\Z)\), there is
+\(u_\gamma\in H^3(M,\Z)\) such that
+\begin{equation}\label{eq:endpoint-lift}
+ e^*u_\gamma=\gamma,
+ \qquad
+ b_*u_\gamma=\theta^{[2]}\wedge y(\gamma).
+\end{equation}
+The common choice of sign is included in the definition of \(y\).
+\end{proposition}
+
+\begin{proof}
+Choose \(\beta\) with \(p_*\pi^*\beta=\gamma\), and take
+\(u_\gamma=q_*\mu^*(\beta\otimes1)\), exchanging the two factors if needed
+to match the sign convention.  Lemma~\ref{lem:clean-base-change} gives the
+restriction.  Since the difference map is addition composed with
+\((-a)\times a\), the pushforward is
+\[
+ \psi_*(\beta\otimes1)=(-1)^*(a_*\beta)\star[F].
+\]
+Now \([F]=\theta^{[3]}\), and
+Lemma~\ref{lem:pontryagin-endpoint} gives the second identity.
+\end{proof}
+
+Proposition~\ref{prop:endpoint-lifts} completes the proof of surjectivity in
+Proposition~\ref{prop:topological-exact}.  Choose a basis of \(H^3(X,\Z)\)
+and the corresponding lifts.  Together with
+\(b^*\bigwedge^3\Lambda\), they form a basis of \(H^3(M,\Z)\).  Their
+pushforwards are, respectively,
+\(\theta^{[2]}\wedge\Lambda\) and
+\[
+ b_*b^*\alpha=\theta\wedge\alpha.
+\]
+Theorem~\ref{thm:symplectic-saturation} therefore proves
+\eqref{eq:main-saturation}.
+
+Finally, \((b_*,e^*)\) is injective.  Indeed, on \(\ker e^*=\im b^*\), its
+first component is \(L\), and \(L\) is injective by the block calculation
+in Section~\ref{sec:lattice}.  Changing a lift of \(\gamma\) adds
+\(b^*\alpha\), hence changes its pushforward by \(L\alpha\).  Equation
+\eqref{eq:endpoint-lift} and the isomorphism \eqref{eq:tau-isomorphism} now
+give exactly the fibre product \eqref{eq:main-fibre-product}.  This proves
+Theorem~\ref{thm:main-lattice}.

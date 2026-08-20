@@ -1,0 +1,89 @@
+\documentclass[11pt]{article}
+
+\usepackage[a4paper,margin=29mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Z}{\mathbf Z}
+\newcommand{\Q}{\mathbf Q}
+\newcommand{\C}{\mathbf C}
+\newcommand{\F}{\mathbf F}
+\newcommand{\Sat}{\operatorname{Sat}}
+\newcommand{\rk}{\operatorname{rk}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\cO}{\mathcal O}
+\newcommand{\IC}{\operatorname{IC}}
+
+\title{The Integral Middle Cohomology of the Theta Divisor\\
+  of a Cubic Threefold}
+\author{Tavis Rudd\thanks{\texttt{tavisrudd@damnsimple.com}}}
+\date{August 2026}
+\hypersetup{
+  pdftitle={The Integral Middle Cohomology of the Theta Divisor of a Cubic Threefold},
+  pdfauthor={Tavis Rudd},
+  pdfsubject={Integral cohomology and intersection cohomology of the cubic-threefold theta divisor},
+  pdfkeywords={cubic threefold, intermediate Jacobian, theta divisor,
+    intersection cohomology, symplectic lattice, Fano surface}
+}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Let \(\Theta\) be the theta divisor of the intermediate Jacobian of a
+smooth complex cubic threefold \(X\), and let
+\(M=\operatorname{Bl}_0\Theta\).  We compute the integral middle lattice of
+\(M\), equivalently the degree-three intersection cohomology of \(\Theta\).
+It is free of rank \(130\) and fits into an abstractly split exact sequence
+with terms \(\bigwedge^3H^1(J,\Z)\) and \(H^3(X,\Z)\).  Its simultaneous
+restriction to \(X\) and Gysin image in \(J\) has nontrivial mod-two glue.
+If \(L(\alpha)=\theta\wedge\alpha\), then
+\[
+ b_*H^3(M,\Z)=
+ \Sat\bigl(L\textstyle\bigwedge^3H^1(J,\Z)\bigr)
+ =L\textstyle\bigwedge^3H^1(J,\Z)
+  +\theta^{[2]}\wedge H^1(J,\Z),
+\]
+and the saturation quotient is \((\Z/2)^{10}\).  The proof reduces the
+integral Lefschetz defect to the unsigned vertex--edge incidence matrix of a
+complete graph.  The degree-six difference map of the Fano surface then
+identifies the geometric glue through a Pontryagin-product formula.  By
+duality, the degree-five quotient not pulled back from \(J\) is free of rank
+ten, while exceptional Gysin classes form its doubled sublattice.
+\end{abstract}
+
+\noindent\textbf{Keywords.} Cubic threefold; intermediate Jacobian; theta
+divisor; intersection cohomology; symplectic lattice; Fano surface.
+
+\input{sections/01-introduction}
+\input{sections/02-topology}
+\input{sections/03-lattice}
+\input{sections/04-glue}
+\input{sections/05-duality}
+\input{sections/06-intersection}
+
+\section*{AI assistance disclosure}
+
+This project was developed with extensive assistance from OpenAI Codex and
+Anthropic Claude. Under the author's direction, the systems assisted with
+proof exploration, literature research, exact computation, verification,
+and manuscript drafting and revision. The author checked the resulting
+arguments, computations, code, and cited sources, reviewed and edited all
+AI-assisted material, and assumes responsibility for all content.
+
+\bibliographystyle{alpha}
+\bibliography{refs}
+
+\end{document}
