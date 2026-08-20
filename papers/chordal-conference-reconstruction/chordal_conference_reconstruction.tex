@@ -49,56 +49,41 @@ Reconstruction and a Residual \(C_2\)-Torsor}
 
 \begin{abstract}
 Different lossy invariants of the same source need not have the same
-geometry.  We ask when two such cubic shadows nevertheless reconstruct one
-another and their common six-axis data.
-Let \(\Omega\) be the six Sylow-\(5\) subgroups of \(A_5\), and let \(V\) be
-the five-dimensional augmentation module of \(\F_{11}^{\Omega}\), with its
-standard quadratic form.  The \(A_5\)-invariant cubic pencil in \(\PP(V)\)
-contains a conference cubic with six isolated nodes and two chordal cubics,
-each singular along a rational normal quartic.  Over
-\(\overline{\F}_{11}\), the conference cubic is not projectively isomorphic
-to either chordal cubic.  We prove that they nevertheless encode the same
-marked carrier.  The singular quartic recovers the constant double cover
-\(A_5/C_5\to\Omega=A_5/D_{10}\).  If either chordal line \(L\) is selected,
-where \(L\) is a one-dimensional subspace of the invariant pencil, the outer
-involution \(q\) of that pencil gives mutually inverse reconstruction functors
-between a normalized chordal generator \(h\in L\) and an oriented conference
-generator \(c\), for neutral scalar extensions over every field extension of
-\(\F_{11}\).  Forgetting \(L\)
-quotients by the free involution
-\((L,h,c)\mapsto(qL,-qh,c)\), which fixes \(c\); this is distinct from the
-conference-orientation torsor below.
+geometry.  Let \(\Omega\) be the six Sylow-\(5\) subgroups of \(A_5\) and
+\(V\) the five-dimensional augmentation module of \(\F_{11}^{\Omega}\) with
+its standard quadratic form.  The \(A_5\)-invariant cubic pencil in
+\(\PP(V)\) contains a conference cubic with six isolated nodes and two
+chordal cubics, each singular along a rational normal quartic; over
+\(\overline{\F}_{11}\) the conference cubic is not projectively isomorphic
+to either chordal cubic.  We prove that they nevertheless recover the same
+marked six-axis carrier.  From the singular quartic we recover the constant
+double cover \(A_5/C_5\to\Omega=A_5/D_{10}\).  If either chordal line \(L\)
+of the invariant pencil is selected, we construct from the outer involution
+\(q\) mutually inverse reconstruction functors between a normalized chordal
+generator \(h\in L\) and an oriented conference generator \(c\), for neutral
+scalar extensions over every field extension of \(\F_{11}\).  Forgetting
+\(L\) is exactly the free quotient \((L,h,c)\mapsto(qL,-qh,c)\), which fixes
+\(c\): a residual \(C_2\)-torsor distinct from the conference-orientation
+torsor.
 
-The conference locus also has an intrinsic six-point recognition theorem.
-Let \(S\) represent a two-graph \(\Delta\) on a six-set \(X\), with
-\(S_{xx}=0\) and \(S_{xy}=S_{yx}\in\{\pm1\}\).  Put
-\(\sigma(xyz)=S_{xy}S_{yz}S_{zx}\) and
-\(m(xy)=\sum_{z\notin\{x,y\}}\sigma(xyz)\).  If \(A(\Delta)\) is the family
-of four-subsets on which all four triple signs agree, then
-\[
-       16|A(\Delta)|=
-       \sum_{\{x,y\}\in\binom X2}m(xy)^2.
-\]
-Consequently \(A(\Delta)=\varnothing\) exactly when \(S^2=5I\), the
-conference condition.
+We also prove an intrinsic six-point recognition criterion.  If a Seidel
+matrix \(S\) represents a two-graph \(\Delta\) on a six-set, with triple
+signs \(\sigma(xyz)=S_{xy}S_{yz}S_{zx}\), pair defects
+\(m(xy)=\sum_{z\notin\{x,y\}}\sigma(xyz)\), and \(A(\Delta)\) the family of
+four-sets with constant triple sign, then
+\(16|A(\Delta)|=\sum_{\{x,y\}}m(xy)^2\), so \(A(\Delta)=\varnothing\)
+exactly when \(S^2=5I\).
 
-The recovered six-set also controls an integral normalization.  For every
-symmetric conference matrix \(B\) of order \(n\equiv2\pmod4\), normalized so
-that the off-diagonal entries in its first row are \(+1\),
-\(D_n^\vee=\Z^n+\Z\mathbf1/2\) is the least \(\varphi=(I+B)/2\)-stable lattice
-containing \(\Z^n\).  Moreover
-\(\varphi^2-\varphi=(n-2)I/4\), so
-the algebra \(\F_2[\bar\varphi]\) induced on
-\(D_n^\vee/2D_n^\vee\) is \(\F_4\) for \(n\equiv6\pmod8\) and
-\(\F_2\times\F_2\) for \(n\equiv2\pmod8\).  At \(n=6\), the residue is the
-unique nonsplit extension, up to isomorphism of \(\F_4A_5\)-modules, of a
-trivial line by the natural module \(H\), with
-\(\End_{A_5}(H)=\F_4\).  The map
-\([B]\mapsto\bar\varphi|_H\) identifies
-\(\{[B],[-B]\}\) with the two primitive scalars
-\(\{\omega,\omega^2\}\subset\F_4\); conference reversal corresponds to
-Frobenius \(z\mapsto z^2\).  This is an equivariant identification of
-principal \(C_2\)-torsors.
+Finally, for every normalized symmetric conference matrix \(B\) of order
+\(n\equiv2\pmod4\), we determine the least \(\varphi=(I+B)/2\)-stable
+lattice containing \(\Z^n\), namely \(D_n^\vee=\Z^n+\Z\mathbf1/2\), and the
+algebra \(\F_2[\bar\varphi]\) it induces on \(D_n^\vee/2D_n^\vee\):
+\(\F_4\) for \(n\equiv6\pmod8\) and \(\F_2\times\F_2\) for
+\(n\equiv2\pmod8\).  At \(n=6\) the binary heart is the natural
+\(\F_4A_5\)-module \(H\); the map \([B]\mapsto\bar\varphi|_H\) identifies
+\(\{[B],[-B]\}\) with \(\{\omega,\omega^2\}\subset\F_4\), and conference
+reversal acts by Frobenius, an equivariant identification of principal
+\(C_2\)-torsors.
 \end{abstract}
 
 \noindent\textbf{Keywords.} chordal cubic; conference matrix; reconstruction;
