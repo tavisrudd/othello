@@ -1,5 +1,5 @@
 {
-  "check_count": 63,
+  "check_count": 64,
   "checks": {
     "augmented_row_output_kernel_is_two_sided": "pass",
     "bittner_relation_codimension_2_through_6": "pass",
@@ -40,6 +40,7 @@
     "provider_implications_are_not_reversible": "pass",
     "pure_exceptional_multiplicity_preserves_jordan_type": "pass",
     "rank_leakage_covector_is_sole_quotient_defect": "pass",
+    "rank_quotient_writer_scalars_compose_without_normalization": "pass",
     "reader_indexed_state_writer_composition": "pass",
     "reconstruction_tail_is_not_generic_coordinate_law": "pass",
     "row_kernel_two_sided_closure_trivializes_m2": "pass",

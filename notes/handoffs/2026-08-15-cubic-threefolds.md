@@ -120,11 +120,16 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   branches.  The same hostile point calculation proves that the surviving
   fixed-phase ambient-rank row is nonzero.  Algebraic Orlov images have rank
   zero, so the leading uniform all-\(m\) gate is now the typed sectorial
-  promotion of that row, including exceptional scalars and path coherence.
+  promotion of that row, including exceptional scalars and adjacent row
+  identification.
+  The final consumer is only the rank quotient line: on one chosen weak
+  factorization, local comparison-induced line isomorphisms and adjacent
+  row reindexing compose automatically, so scalar normalization, loop
+  holonomy, and path-independent coherence are unnecessary.
   Shifted tensor stability and the extremal multinomial source law are
   proved, but the occurrence-indexed exact QDM sequence, actual carrier
   exponent, and boundary vanishing remain open.  The packet is split into
-  bounded module companions behind a stable index.  The sixty-three-check
+  bounded module companions behind a stable index.  The sixty-four-check
   finite law replay, eleven-check typed Haskell toy, and original cubic
   replay are green.  C925 remains open at fixed-phase Gamma/rank transport
   or at this ExactTop provider; the relative-cap cancellation remains one

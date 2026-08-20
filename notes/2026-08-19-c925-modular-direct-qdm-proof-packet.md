@@ -38,6 +38,7 @@ No manuscript or Lean source is part of this packet.
 | 31 | logarithmic pencil and finite mixed-word correction law | notes/2026-08-20-c925-logarithmic-pencil-law.md |
 | 32 | Orlov helix wrap and thickened-center-supported leakage | notes/2026-08-20-c925-orlov-helix-wrap.md |
 | 33 | Gamma support collision and fixed-phase rank-row replacement | notes/2026-08-20-c925-gamma-support-collision-and-rank-route.md |
+| 34 | rank quotient line, one-path telescope, and coherence compression | notes/2026-08-20-c925-rank-quotient-path-compression.md |
 | frontier | open experiments and provider targets | notes/2026-08-20-c925-exploration-frontier.md |
 
 ## Dependency spine
@@ -64,7 +65,7 @@ Modules 19--23 prove reusable categorical consequences:
 - universal center-null quotients and minimal sufficient shadows; and
 - the conditional Section 6 argument as a separate specialization.
 
-Modules 24--33 isolate the higher-stabilization frontier:
+Modules 24--34 isolate the higher-stabilization frontier:
 
 - irrationality on any unbounded stabilization set implies irrationality for
   every index;
@@ -96,6 +97,10 @@ Modules 24--33 isolate the higher-stabilization frontier:
   primitive-sixth branches, ruling out naive center-null Gamma realization;
   the compatible replacement is the fixed-phase ambient-rank output row,
   whose general blowup transport is one conditional all-\(m\) gate; and
+- the rank consumer descends to a quotient line, so one chosen
+  weak-factorization path needs only typed local line isomorphisms and
+  adjacent row reindexing; scalar normalization, loop holonomy, and
+  path-independent comparison coherence are not consumed; and
 - the rank-row route remains the higher-EV uniform alternative.
 
 ## Current \(m=2\) alternatives

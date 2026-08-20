@@ -1826,6 +1826,28 @@ def main():
                     assert shifted_exponent >= 0
     checks["orlov_helix_wrap_threshold_matches_projective_window"] = "pass"
 
+    # The quotient-line consumer retains only whether a one-dimensional row
+    # quotient is zero.  Nonzero edge scalars compose, and reversed edges
+    # contribute inverses, without requiring normalized or trivial holonomy.
+    writer_scalars = (
+        Fraction(1),
+        Fraction(-1),
+        Fraction(2),
+        Fraction(1, 2),
+    )
+    writer_edges = tuple(product(writer_scalars, (1, -1)))
+    for word_length in range(7):
+        for word in product(writer_edges, repeat=word_length):
+            path_scalar = Fraction(1)
+            for edge_scalar, orientation in word:
+                path_scalar *= (
+                    edge_scalar if orientation == 1 else Fraction(1, edge_scalar)
+                )
+            assert path_scalar != 0
+            assert Fraction(1) * path_scalar != 0
+            assert Fraction(0) * path_scalar == 0
+    checks["rank_quotient_writer_scalars_compose_without_normalization"] = "pass"
+
     result = {
         "status": "pass",
         "check_count": len(checks),

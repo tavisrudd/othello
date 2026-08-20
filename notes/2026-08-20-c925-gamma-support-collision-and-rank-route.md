@@ -191,6 +191,10 @@ phase, product normalization, and composition/inverse coherence.  Even this
 package is weaker than full Gamma-lattice, Stokes, or Orlov compatibility,
 but stronger than Iritani's proved formal direct-sum comparison.
 
+Module 34 observes that a single weak-factorization contradiction does not
+need the full global coherence package: local row-line transport plus lawful
+adjacent reindexing suffices along one chosen path.
+
 The regression \(\operatorname{Bl}_X\mathbf P^5\) passes by the reciprocal-
 Gamma zero already computed in C907.  The unresolved geometric scope is an
 arbitrary normally nonsplit center occurrence and coherent composition.
@@ -244,7 +248,7 @@ construction of a universal localizing quantum motive.
 | Can ordinary Gamma projection be whole-center-null? | **no** | Proposition 33.1 and point coefficient (33.3) |
 | Is the rank row nonzero on the cubic source? | **settled** | pairing identity (33.4) |
 | Does rank kill actual exceptional Orlov images? | **settled algebraically** | Proposition 33.2 |
-| Does the general analytic comparison preserve that row? | **open** | scalar vanishing (33.8), products, and composition |
+| Does each actual analytic comparison preserve that row? | **open** | scalar vanishing (33.8), calibration, and adjacent reindexing; Module 34 removes global path coherence |
 
 ## Boundary
 

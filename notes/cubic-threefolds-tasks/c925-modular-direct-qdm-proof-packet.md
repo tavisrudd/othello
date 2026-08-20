@@ -38,6 +38,8 @@ exact \(m=2\) and all-\(m\) transport gates.
   notes/2026-08-20-c925-orlov-helix-wrap.md
 - Gamma support collision and rank-row replacement:
   notes/2026-08-20-c925-gamma-support-collision-and-rank-route.md
+- rank-quotient one-path compression:
+  notes/2026-08-20-c925-rank-quotient-path-compression.md
 - non-\(m=2\) categorical dividends:
   notes/2026-08-20-c925-non-m2-categorical-dividends.md
 - conditional Section 6 specialization:
@@ -105,6 +107,10 @@ index row.
   algebraic \(K_0\), that row kills every exceptional Orlov image; promoting
   this square through the sectorial QDM comparison is the leading uniform
   all-\(m\) gate.
+- The rank consumer is only the line \(V/\ker\rho\).  Along one chosen weak
+  factorization, local comparison-induced line isomorphisms and lawful
+  adjacent reindexing telescope automatically.  Scalar normalization,
+  trivial holonomy, and equality of unrelated paths are unnecessary.
 
 ## Open geometric providers
 
@@ -154,14 +160,14 @@ Typed replay:
       | diff -u \
           notes/cubic-threefolds-tasks/c925-sparse-shadow-path-toy-output.txt -
 
-The finite model currently has sixty-three checks.  It verifies only the
+The finite model currently has sixty-four checks.  It verifies only the
 advertised algebraic laws and countermodels, never an external QDM provider.
 
 ## Next
 
-1. Prove the fixed-phase QDM row law of Module 33: calibrate the ambient
-   rank row, kill each exceptional scalar, and verify product,
-   composition, and inverse coherence.
+1. Prove the local fixed-phase QDM row-line law of Modules 33--34: calibrate
+   the ambient rank row, kill each exceptional scalar, and provide lawful
+   adjacent and endpoint reindexing along one chosen factorization.
 2. As the ExactTop alternative, construct a **corrected intrinsic**
    support/Gysin realization for Module 32; ordinary Gamma or residual
    projection is ruled out by the point regression.
