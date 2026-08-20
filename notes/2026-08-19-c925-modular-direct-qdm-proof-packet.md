@@ -42,6 +42,7 @@ No manuscript or Lean source is part of this packet.
 | 35 | pairing-dual point-line compression of the local rank law | notes/2026-08-20-c925-point-line-duality-compression.md |
 | 36 | commuting-unipotent no-go for point-line uniqueness | notes/2026-08-20-c925-unipotent-point-line-no-go.md |
 | 37 | charge-filtered Stokes augmentation and zero-charge collision test | notes/2026-08-20-c925-charge-filtered-stokes-specialization.md |
+| 38 | Kummer charge trace and higher-codimension stationary polygon obstruction | notes/2026-08-20-c925-kummer-charge-regression.md |
 | frontier | open experiments and provider targets | notes/2026-08-20-c925-exploration-frontier.md |
 
 ## Dependency spine
@@ -68,7 +69,7 @@ Modules 19--23 prove reusable categorical consequences:
 - universal center-null quotients and minimal sufficient shadows; and
 - the conditional Section 6 argument as a separate specialization.
 
-Modules 24--37 isolate the higher-stabilization frontier:
+Modules 24--38 isolate the higher-stabilization frontier:
 
 - irrationality on any unbounded stabilization set implies irrationality for
   every index;
@@ -121,6 +122,12 @@ Modules 24--37 isolate the higher-stabilization frontier:
   property; the hostile \(-1/R\) coefficient is already nonzero exponent
   degree, leaving analytic label retention and a global one-sided cone as the
   open regressions; and
+- the actual split toric and cubic-center pilots have zero exceptional point
+  coefficient, while the hostile negative-degree tail has stable nonzero
+  formal exponent; codimension two has one pointed stationary charge, but
+  every higher-codimension full center packet forms a roots-of-unity polygon
+  summing to zero, obstructing the naive uniform all-branch exponent cone;
+  a finer charge lattice would be additional provider data; and
 - the rank-row route remains the higher-EV uniform alternative.
 
 ## Current \(m=2\) alternatives

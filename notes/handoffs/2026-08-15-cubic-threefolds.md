@@ -148,12 +148,22 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   zero-charge exceptional shear are sharp countermodels.  The hostile
   \(-1/R\) coefficient itself lies on nonzero exponent \(-1\) and therefore
   passes the finite exponential-support regression after orienting the
-  one-sided cone.  The next charge regression is analytic retention of
-  that label and exclusion of opposite/zero charges over every occurrence.
+  one-sided cone.  That bounded charge regression is now complete.  The
+  actual split toric and
+  cubic-center pilots have zero exceptional point coefficient after Kummer
+  normalization; the hostile negative-degree substitution has stable
+  exponent \(-1\), but no audited source realizes it as an actual
+  relative-cap Stokes factor.  More decisively, Iritani's codimension-two
+  center has a single pointed stationary charge, while the \(r-1\) charges
+  of every codimension-\(r\ge3\) full center packet form a roots-of-unity
+  polygon summing to zero.  The charge route therefore remains plausible for
+  the new \(m=2\) codimension-two gate only after same-receiver lower-center
+  nullity; the naive all-branch all-\(m\) exponent cone is closed negative,
+  though a finer charge lattice remains a separate provider possibility.
   Shifted tensor stability and the extremal multinomial source law are
   proved, but the occurrence-indexed exact QDM sequence, actual carrier
   exponent, and boundary vanishing remain open.  The packet is split into
-  bounded module companions behind a stable index.  The seventy-three-check
+  bounded module companions behind a stable index.  The seventy-seven-check
   finite law replay, eleven-check typed Haskell toy, and original cubic
   replay are green.  C925 remains open at fixed-phase Gamma/rank transport
   or at this ExactTop provider; the relative-cap cancellation remains one

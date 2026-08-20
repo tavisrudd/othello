@@ -46,6 +46,8 @@ exact \(m=2\) and all-\(m\) transport gates.
   notes/2026-08-20-c925-unipotent-point-line-no-go.md
 - charge-filtered Stokes specialization:
   notes/2026-08-20-c925-charge-filtered-stokes-specialization.md
+- Kummer charge regression and stationary polygon obstruction:
+  notes/2026-08-20-c925-kummer-charge-regression.md
 - non-\(m=2\) categorical dividends:
   notes/2026-08-20-c925-non-m2-categorical-dividends.md
 - conditional Section 6 specialization:
@@ -139,6 +141,17 @@ index row.
   one-sided cone.  The remaining regression is whether the analytic Stokes
   factor retains this label and whether all occurrences avoid opposite or
   zero charge.
+- The bounded pilot trace now separates three facts.  The actual split toric
+  and \(\operatorname{Bl}_X\mathbf P^5\) point coefficients have no
+  exceptional exponential after Kummer normalization.  The hostile
+  negative-degree substitution has stable exponent \(-1\), but is not yet an
+  actual relative-cap Stokes factor.  Iritani's codimension-two center has
+  one pointed stationary charge, whereas all \(r-1\) charges of a
+  codimension-\(r\ge3\) center sum to zero.  Hence this route remains
+  plausible for the new \(m=2\) codimension-two gate, subject to
+  same-receiver lower-center nullity, but the naive all-branch all-\(m\)
+  exponent-valued charge cone is impossible; a finer charge lattice would
+  require an additional lawful Stokes realization.
 
 ## Open geometric providers
 
@@ -197,26 +210,28 @@ Typed replay:
       | diff -u \
           notes/cubic-threefolds-tasks/c925-sparse-shadow-path-toy-output.txt -
 
-The finite model currently has seventy-three checks.  It verifies only the
+The finite model currently has seventy-seven checks.  It verifies only the
 advertised algebraic laws and countermodels, never an external QDM provider.
 
 ## Next
 
-1. Lift the nonzero exponent of the hostile \(-1/R\) relative-cap channel to
-   the actual point-to-exceptional Stokes factor, then test whether all toric
-   and \(\operatorname{Bl}_X\mathbf P^5\) occurrence charges lie in one
-   pointed cone.
-2. Prove the local fixed-phase QDM point-line law of Module 35: commute the
+1. Decide whether the negative-degree relative-cap series is realized by the
+   actual ancestor/Gamma/Stokes degeneration map.  If so, retain its unique
+   codimension-two exponent through the fixed-phase receiver.
+2. Construct the same-receiver lower-center adapter required to remove the
+   higher-codimension stationary polygons from the \(m=2\) primitive row
+   consumer.
+3. Prove the local fixed-phase QDM point-line law of Module 35: commute the
    primitive projector with the chosen monodromy, identify the Gamma and
    formally normalized point lines using a non-Picard selector or strict
    multiplicity-one filtration quotient, and provide lawful adjacent/endpoint
    reindexing along one chosen factorization.
-3. As the ExactTop alternative, construct a **corrected intrinsic**
+4. As the ExactTop alternative, construct a **corrected intrinsic**
    support/Gysin realization for Module 32; ordinary Gamma or residual
    projection is ruled out by the point regression.
-4. Prove the sharp occurrence-indexed exceptional exponent/carrier bound.
-5. If the monodromy route fails, construct the opposite-oriented enriched
+5. Prove the sharp occurrence-indexed exceptional exponent/carrier bound.
+6. If the monodromy route fails, construct the opposite-oriented enriched
    exact sequence and use the Module 25/26 boundary adapter.
-6. Continue the higher-EV rank-row common-receiver audit in parallel.
+7. Continue the higher-EV rank-row common-receiver audit in parallel.
 
 C925 remains active until the user closes it.

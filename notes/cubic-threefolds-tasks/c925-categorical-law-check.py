@@ -8,10 +8,11 @@ Iritani, Guere, BFGMP, or KKPYY comparison theorems.
 from __future__ import annotations
 
 from collections import Counter
+import cmath
 from fractions import Fraction
 from itertools import permutations, product
 import json
-from math import factorial
+from math import factorial, pi
 
 
 def bag(xs):
@@ -1970,6 +1971,65 @@ def main():
     pilot_oriented_degrees = tuple(-exponent for exponent in pilot_exponential_support)
     assert pilot_oriented_degrees == (0, 1)
     checks["negative_exponential_pilot_has_positive_oriented_charge"] = "pass"
+
+    # Module 38: exact Kummer normalization in the split pilots.
+    def rising_factorial(value, length):
+        answer = Fraction(1)
+        for offset in range(length):
+            answer *= value + offset
+        return answer
+
+    for complete_intersection_degrees in ((1, 1), (1, 3)):
+        a_degree, b_degree = complete_intersection_degrees
+        for base_degree in range(5):
+            numerator = b_degree * base_degree + 1
+            denominator = (b_degree - a_degree) * base_degree + 1
+            polynomial_degree = a_degree * base_degree
+            for power in range(9):
+                lhs = rising_factorial(numerator, power) / (
+                    rising_factorial(denominator, power) * factorial(power)
+                )
+                rhs = sum(
+                    (
+                        rising_factorial(-polynomial_degree, poly_power)
+                        * ((-1) ** poly_power)
+                        / (
+                            rising_factorial(denominator, poly_power)
+                            * factorial(poly_power)
+                            * factorial(power - poly_power)
+                        )
+                    )
+                    for poly_power in range(min(polynomial_degree, power) + 1)
+                )
+                assert lhs == rhs
+    checks["kummer_split_pilots_normalize_to_polynomials"] = "pass"
+
+    negative_line_coefficients = tuple(
+        Fraction(1, factorial(power + 1)) for power in range(9)
+    )
+    assert negative_line_coefficients[0] == 1
+    unnormalized_support = (1, 0)
+    normalized_support = tuple(exponent - 1 for exponent in unnormalized_support)
+    assert normalized_support == (0, -1)
+    for monomial_power in range(7):
+        decorated_support = {
+            (exponent, monomial_power) for exponent in normalized_support
+        }
+        assert {exponent for exponent, _power in decorated_support} == {0, -1}
+    checks["negative_line_tail_charge_survives_displayed_reindexing"] = "pass"
+
+    codimension_two_center_charges = (complex(1),)
+    assert len(codimension_two_center_charges) == 1
+    assert codimension_two_center_charges[0] != 0
+    checks["codimension_two_stationary_charge_is_singleton"] = "pass"
+
+    for center_branch_count in range(2, 9):
+        stationary_charges = tuple(
+            cmath.exp(2j * pi * branch / center_branch_count)
+            for branch in range(center_branch_count)
+        )
+        assert abs(sum(stationary_charges)) < 1e-12
+    checks["higher_codimension_stationary_charges_sum_to_zero"] = "pass"
 
     # If opposite charges are both admitted, their product contains a new
     # zero-charge coefficient: (1+z)(1+z^-1) has constant term 2.

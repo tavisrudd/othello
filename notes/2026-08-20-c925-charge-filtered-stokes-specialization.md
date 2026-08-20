@@ -461,6 +461,14 @@ For the toric blowup calibration and then
 An opposite exponential charge or a lawful reindexing which maps \(-1\) to
 zero would still collapse the route.
 
+Module 38 executes this bounded regression.  The two actual split pilots
+have zero exceptional point coefficient; the negative-degree exponent
+survives the displayed formal reparametrizations but has no proved
+relative-cap Stokes lift.  It also proves that the full stationary charge
+set of every codimension-\(r\ge3\) center is nonpointed.  Thus the naive
+uniform all-branch charge provider is unavailable, while the unique
+codimension-two charge remains a possible \(m=2\) specialization.
+
 ## 37.8 Executable calibration
 
 The shared finite replay checks:
@@ -494,7 +502,7 @@ irrelevant; pointedness and zero-reflection are the exact laws.
 | Can one exceptional zero-charge arrow change the row? | **yes** | countermodel (37.10) |
 | Does existing BPS/WKB/wild-Stokes theory supply the Iritani charge realization? | **not known** | no cited source identifies the blowup comparison with the required occurrence-indexed pointed charge receiver |
 | Does the hostile \(-1/R\) coefficient itself have charge zero? | **no in the finite exponential-support model** | Proposition 37.3A |
-| What is the next charge regression? | **open** | identify that exponent label with the analytic Stokes factor and exclude opposite/zero charges over every occurrence |
+| What did the bounded charge regression find? | **split pilots zero; negative formal label survives; higher-codimension full packet nonpointed** | Module 38 |
 | What remains for the full provider? | **open** | convergence/completion, degree-zero ambient row law, typed adjacent reindexing, and endpoint calibration in one receiver |
 
 ## Boundary
