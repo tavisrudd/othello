@@ -322,7 +322,9 @@ been reserved.
    including the reduced Jacobian table entry for entry, the order-ten cut split
    36/90, the 384-matrix order-six census, and exhaustive aligned-family
    faithfulness at six, seven, and eight points. Eight findings, none requiring
-   new mathematics; four of them should land before the cold read of gate 4:
+   new mathematics; the report's "Suggested paper edits" section carries a
+   ready-to-paste replacement for each, keyed to file and line. Four of them
+   should land before the cold read of gate 4:
 
    1. The tangent space `T` to `{A^2 = lambda I}` is proved five-dimensional only
       from below; "Equality holds" has no upper bound anywhere, and the module

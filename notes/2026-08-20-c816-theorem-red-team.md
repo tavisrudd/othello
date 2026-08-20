@@ -292,6 +292,353 @@ twice by different code paths. The `--check` mode reproduced the tracked
 certificate byte for byte, hash
 `361710dafcd73139210216447232f7532597628534c7edc569a21233109f1b5f`.
 
+## Suggested paper edits
+
+Ready-to-paste replacements for the eight findings, in the order the findings are
+listed above. Line numbers are those of the working tree at commit `49502dcff`,
+where the manuscript stands unchanged since `2abe343c4`. Nothing here was applied;
+this pass did not edit any file under `papers/`.
+
+### Edit A — prove the tangent-space dimension (finding 1)
+
+`sections/05-golden-operator.tex:467-478`. Replace from "Equality holds, and the
+splitting is visible." through "\(-1\)-eigenspace \(\ker\mu\)."; the two
+sentences that follow it, on the Jacobian's injectivity on \(\ker\mu\), stay as
+they are.
+
+Current:
+
+```tex
+Equality holds, and the splitting is visible.  As a \(G\)-module
+\(W\cong\mathbf1\oplus\mathbf4\oplus\mathbf5\oplus\mathbf5\), from the character
+\((15,3,0,0,0)\) on the classes of orders \(1,2,3,5,5\), and \(T\) is exactly
+\(\mathbf1\oplus\mathbf4\).  This is an eigenspace decomposition rather than a
+character computation: differentiating \(A^2=\lambda I\) gives
+\(CX+XC=\mu(X)I\) for \(X\in T\), and multiplying by \(C\) and using
+\(C^2=5I\) gives
+\[
+ CXC=\mu(X)C-5X,
+\]
+so \(X\mapsto\tfrac15CXC\) is an involution of \(T\) with \(+1\)-eigenspace
+\(\mathbf R\,C\) and \(-1\)-eigenspace \(\ker\mu\).
+```
+
+Proposed:
+
+```tex
+Equality holds, for the same reason that drives the recognition theorem.
+Differentiating \(A^2=\lambda I\) gives \(CX+XC=\mu(X)I\) for \(X\in T\), so
+\(T\) lies in the linear space
+\[
+ L=\{X\in W:CX+XC\in\mathbf R\,I\},
+\]
+on which \(\mu\) is a linear functional.  Write \(C=\sqrt5\,(P-Q)\) for the
+spectral projections \(P+Q=I\) of the preceding subsection, so that
+\(CX+XC=2\sqrt5\,(PXP-QXQ)\).  Membership in \(L\) therefore says
+\(PXP=cP\) and \(QXQ=-cQ\) for a single scalar \(c\), the scalar recovering
+\(\mathbf R\,C\), so that
+\[
+ L=\mathbf R\,C\oplus\ker\mu,
+ \qquad
+ \ker\mu=\{X\in W:PXP=QXQ=0\}.
+\]
+Such an \(X\) is exactly \(B+B^{\mathsf T}\) for an arbitrary map
+\(B\colon\operatorname{im}Q\to\operatorname{im}P\), nine parameters, and writing
+\(p_i=Pe_i\) and \(q_i=Qe_i\) its diagonal is
+\(X_{ii}=2\langle p_i,Bq_i\rangle\).  The six hollowness conditions are thus the
+pairings of \(B\) against \(p_iq_i^{\mathsf T}\), and a relation
+\(\sum_ic_ip_iq_i^{\mathsf T}=PD_cQ=0\) holds exactly when \(D_c\) commutes with
+\(P\), hence with \(C\), hence exactly when \(c\) is constant, since no
+off-diagonal entry of \(C\) vanishes.  Five of the six conditions are therefore
+independent, \(\dim\ker\mu=4\) and \(\dim L=5\); with the lower bound above,
+\(T=L\) and \(\dim T=5\).
+
+The splitting is then visible as an eigenspace decomposition rather than a
+character computation: multiplying \(CX+XC=\mu(X)I\) by \(C\) and using
+\(C^2=5I\) gives
+\[
+ CXC=\mu(X)C-5X,
+\]
+so \(X\mapsto\tfrac15CXC\) is an involution of \(T\) with \(+1\)-eigenspace
+\(\mathbf R\,C\) and \(-1\)-eigenspace \(\ker\mu\).  As a \(G\)-module
+\(W\cong\mathbf1\oplus\mathbf4\oplus\mathbf5\oplus\mathbf5\), from the character
+\((15,3,0,0,0)\) on the classes of orders \(1,2,3,5,5\), and the only
+four-dimensional submodule of that is the irreducible \(\mathbf4\), so \(T\) is
+exactly \(\mathbf1\oplus\mathbf4\).
+```
+
+This is a strengthening rather than a patch. The upper bound now comes from the
+same mechanism as the recognition theorem — a diagonal matrix commuting with a
+conference matrix whose entries are all nonzero is scalar — so the section's two
+rigidity statements rest on one hypothesis instead of two unrelated ones, and the
+paragraph's opening claim that the dimension is forced rather than computed
+becomes true of both bounds. It also removes the character table from the load
+path: the module identification is now used only to name the four-dimensional
+constituent, not to establish its dimension.
+
+### Edit B — name the right theorem for the local conclusion (finding 2)
+
+`sections/05-golden-operator.tex:448-450`.
+
+Current:
+
+```tex
+The constant-rank theorem confines \(X_{+1}\) to a one-dimensional manifold near
+\(C\); the scaling line is a one-dimensional submanifold of \(X_{+1}\), so the
+two agree there.
+```
+
+Proposed:
+
+```tex
+Fourteen of the twenty differentials \(\mathrm dF_S(C)\) are independent, so by
+the implicit function theorem their common zero set is a one-dimensional
+submanifold \(N\) near \(C\).  It contains \(X_{+1}\), which in turn contains the
+scaling line, and a one-dimensional submanifold containing a one-dimensional
+submanifold through the same point agrees with it near that point; so all three
+agree near \(C\).
+```
+
+The constant-rank theorem needs the rank to be locally constant, which the proof
+never establishes and does not need. Note also that the C816 card's summary
+sentence, "the only external ingredient left is the ordinary constant-rank
+theorem", should be updated to name the implicit function theorem once this
+lands.
+
+### Edit C — say which representative carries the opposite orientation (finding 3)
+
+`sections/05-golden-operator.tex:370-373`, the last clause of the theorem
+statement.
+
+Current:
+
+```tex
+The twenty functions \(F_S=h_S-4\tau_S\) have Jacobian of rank fourteen at
+\(C\), with kernel the scaling line \(\mathbf R\,C\).  Near \(C\) the locus
+\(X_{+1}\) is therefore exactly that line, and the same holds for
+\(h_S+4\tau_S\) at the opposite oriented representative.
+```
+
+Proposed:
+
+```tex
+The twenty functions \(F_S=h_S-4\tau_S\) have Jacobian of rank fourteen at
+\(C\), with kernel the scaling line \(\mathbf R\,C\).  Near \(C\) the locus
+\(X_{+1}\) is therefore exactly that line, and the same holds for
+\(h_S+4\tau_S\) near \(P_\sigma CP_\sigma^{\mathsf T}\) for any odd
+permutation \(\sigma\), the representative carrying the reversed Hodge
+orientation.  The reversal is of the orientation, not of the matrix: \(-C\)
+again lies in \(X_{+1}\), since that locus is a cone.
+```
+
+As it stands the clause is false under this paper's own use of "opposite", which
+`sections/03-orientation-source.tex` fixes as the deck-opposite source \(-C\);
+the paragraph immediately above the theorem already puts the whole line
+\(\mathbf R\,C\) inside \(X_{+1}\).
+
+### Edit D — bring the abstract back to the theorem (finding 4)
+
+`clebsch_passages.tex:48-51`.
+
+Current:
+
+```tex
+Proportionality of the commutator
+Pfaffian to the triangle cubic already characterizes order six, forcing a
+scalar square, for real symmetric zero-diagonal matrices with nonzero
+off-diagonal entries.
+```
+
+Proposed:
+
+```tex
+Among real symmetric zero-diagonal matrices of even order with nonzero
+off-diagonal entries, nonzero proportionality of the commutator Pfaffian to the
+triangle cubic already forces order six and a scalar square.
+```
+
+This restores the two dropped hypotheses and drops "characterizes", which reads
+as an equivalence next to the abstract's genuine equivalence about the exchange
+spectrum. The wording now matches the introduction and the conclusion, which both
+already say "forces order six and a scalar square".
+
+### Edit E — give the recognition theorem its priority boundary (finding 5)
+
+`sections/05-golden-operator.tex`, after the boundary paragraph at lines 348-351
+and before `\paragraph{Rigidity of the equality.}`. This is new text, licensed by
+row `OPER-5` of `literature-boundaries.md`, which permits "we prove" and "we have
+not located" and forbids "first" and "new".
+
+Proposed:
+
+```tex
+Both halves of this statement have classical ingredients.  Which forms are
+Pfaffians of skew matrices of linear forms is settled in general by Beauville
+\cite{BeauvilleDeterminantal}, and the cubic-surface case is constructive in
+Tanturri \cite{TanturriPfaffian}, so a \(6\times6\) linear Pfaffian
+representation of a cubic surface is a known object.  On the other side, the
+triangle cubic's coefficients are the order-three cycle products, which for a
+hollow symmetric matrix are half the principal three-by-three minors,
+\[
+ \det A[S,S]=2a_{ij}a_{jk}a_{ki}
+ \qquad(S=\{i,j,k\}),
+\]
+and cycle-sum coordinates on principal minors are Huang and Oeding's
+\cite{HuangOeding}.  The conclusion is classical as a description too: after
+scaling, \(A^2=\lambda I\) says that \(A\) is a hollow symmetric involution,
+equivalently a constant-diagonal rank-three projection, equivalently an
+equal-norm tight frame of six vectors in \(\mathbf R^3\), and in the
+equal-modulus case this is the classical correspondence between conference
+matrices, regular two-graphs, and equiangular lines.  What we prove here is the
+converse direction, that proportionality of the two cubics forces the order and
+the scalar square, together with its order-six nondegeneracy form in
+Proposition~\ref{prop:nonsingular-complementary-minors}.  We have not located
+either statement in the bounded audit recorded with the distributed source
+archive, whose scope and access gaps are summarized in
+Section~\ref{sec:verification}; to our knowledge neither appears in the
+Pfaffian, principal-minor, determinantal-representation, conference-matrix, or
+tight-frame literature.  Note that Greaves and Suda's two-valued fourth-order
+spectrum, used in Section~\ref{sec:reconstruct-signing}, concerns the principal
+\(4\times4\) minors and not these complementary \(3\times3\) minors.
+```
+
+With three bibliography entries in the house style of `sections/10-references.tex`:
+
+```tex
+\bibitem{BeauvilleDeterminantal}
+A.~Beauville,
+\emph{Determinantal hypersurfaces},
+Michigan Mathematical Journal \textbf{48} (2000), 39--64;
+arXiv:math/9910030.
+
+\bibitem{TanturriPfaffian}
+F.~Tanturri,
+\emph{Pfaffian representations of cubic surfaces},
+Geometriae Dedicata \textbf{168} (2014), 69--86,
+\href{https://doi.org/10.1007/s10711-012-9818-x}{doi:10.1007/s10711-012-9818-x};
+arXiv:1203.0999.
+
+\bibitem{HuangOeding}
+H.~Huang and L.~Oeding,
+\emph{Symmetrization of principal minors and cycle-sums},
+Linear and Multilinear Algebra \textbf{65} (2017), 1194--1219,
+\href{https://doi.org/10.1080/03081087.2016.1233932}{doi:10.1080/03081087.2016.1233932};
+arXiv:1510.02515.
+```
+
+Two cautions on this edit. The audit read all three sources at `partial` depth
+from arXiv preprints rather than the published versions, so the volume, year and
+page data above should be confirmed against the journal records before the edit
+is committed; the digital object identifiers and arXiv identifiers are the parts
+the audit verified. And the closing negative must keep "to our knowledge" and
+must not acquire "first" or "new", which is what row `OPER-5` licenses and
+forbids.
+
+### Edit F — say what nondegeneracy actually replaces (finding 6)
+
+`sections/05-golden-operator.tex:533-538`.
+
+Current:
+
+```tex
+This is where the factor \(4\) in
+Theorem~\ref{thm:triangle-pfaffian-recognition} comes from.  It is not the
+output of the two orbit computations displayed earlier: a \(3\times3\) sign
+matrix has determinant \(0\) or \(\pm4\) and nothing else, so once the
+complementary minors are forced away from zero the constant has no freedom
+left.
+```
+
+Proposed:
+
+```tex
+This is where the magnitude of the factor \(4\) in
+Theorem~\ref{thm:triangle-pfaffian-recognition} comes from, and it owes nothing
+to the two orbit computations displayed earlier: a \(3\times3\) sign matrix has
+determinant \(0\) or \(\pm4\) and nothing else, so once the complementary minors
+are forced away from zero the magnitude has no freedom left.  What the orbit
+computations supply is the remaining half, that the sign is the same for all
+twenty triples; nondegeneracy alone constrains each triple separately.
+```
+
+### Edit G — make the inclusion-rank descent checkable (finding 7)
+
+`sections/05-golden-operator.tex:654-657`.
+
+Current:
+
+```tex
+That is the same hypothesis one subset size lower, for the difference function
+on the remaining \(2d-2\) points; descending on the subset size makes the
+difference vanish pointwise, and one-element exchanges connect all four-sets.
+```
+
+Proposed:
+
+```tex
+That is the same hypothesis one subset size lower, for the difference function
+on the remaining \(2d-2\) points.  Two more exchanges of the same kind reach
+subsets of size one, where the hypothesis says that the third difference has
+vanishing sum over every subset of size \(d-3\); comparing two such subsets that
+differ in one element makes that difference constant, and its vanishing sum then
+makes it zero.  Now read the chain upwards.  At each level a function whose
+one-element differences all vanish is constant, since one-element exchanges
+connect the subsets of a fixed size, and a constant with vanishing sum over a
+nonempty family is zero.  Applying this at sizes one, two and three in turn makes
+\(f\) constant on four-sets.  Every subset and exchange used exists because
+\(d\geq4\).
+```
+
+The descent by itself terminates with a threefold difference vanishing, which is
+weaker than pointwise vanishing; the return leg is what closes it. This is the
+one place in the section where a citation was deliberately replaced by a proof,
+so the proof should be legible.
+
+### Edit H — two wording repairs (finding 8)
+
+`sections/01-introduction.tex:264-266`:
+
+```tex
+Theorem~\ref{thm:balanced-exchange-rigidity} characterizes order six among
+```
+
+becomes
+
+```tex
+Theorem~\ref{thm:balanced-exchange-rigidity} characterizes order six among
+nontrivial
+```
+
+so that the sentence reads "characterizes order six among nontrivial symmetric
+conference matrices by cut-independent balanced exchange spectrum", matching the
+qualifier the theorem statement and the conclusion both carry; order two has the
+property trivially.
+
+`sections/05-golden-operator.tex:171`:
+
+```tex
+For every symmetric matrix \(A\), the coefficient of \(x_S\) in
+```
+
+becomes
+
+```tex
+For every symmetric matrix \(A\) of order six, the coefficient of \(x_S\) in
+```
+
+since the sentence needs even order for the Pfaffian and order six for the middle
+exterior power.
+
+### What these edits cost
+
+Edit A adds roughly fifteen lines and Edit E roughly twenty, including the three
+bibliography entries; Edit G adds five, and the rest are net neutral or shorter.
+The page count should absorb this at the current thirty-eight pages, but the
+paper-local build gate is the check. No edit changes a theorem's content, a claim
+identifier, a statement label, or the trust manifest, so the statement-identity
+gate and `EXPECTED_LABELS` are untouched. Edit E adds bibliography keys, which
+the reference and citation checks will see.
+
 ## The global weighted boundary: probe, and why it settles nothing
 
 The boundary sentence after the recognition theorem is now correct — what is
