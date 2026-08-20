@@ -39,3 +39,23 @@ interface.
 - A hostile final pass checks variance, additivity, coefficient topology,
   parity, and all low-dimensional cases.
 - No manuscript or Lean file is edited.
+
+## Current draft
+
+The active packet is
+[`2026-08-19-c925-modular-direct-qdm-proof-packet.md`](../2026-08-19-c925-modular-direct-qdm-proof-packet.md).
+It currently contains:
+
+- a lawful observer/selector/emitter interface with commutative-monoid values;
+- a free symmetric-monoidal category of generic even blocks and its universal
+  block-multiset decategorification;
+- a monoidal center quotient through which center-vanishing markers factor;
+- corrected coefficient-spine, blowup, projective-bundle, and divisor-character
+  adapters;
+- counting, Boolean, exact-profile, parity-enriched, monodromy, and universal
+  configuration examples;
+- the minimal cubic instance and a category-theoretic summary diagram; and
+- an explicit exploration frontier.
+
+Keep C925 active: the user has asked to continue exploring the categorical and
+software-interface design before closeout.
