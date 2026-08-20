@@ -3266,8 +3266,17 @@
       "last": 930,
       "purpose": "categorical direct-QDM paper readiness and proof-narrative spine adaptation",
       "sequence": 363
+    },
+    {
+      "count": 1,
+      "first": 931,
+      "kind": "reservation",
+      "lane": "cubic-threefolds",
+      "last": 931,
+      "purpose": "C928 named-referee dossier and simulated reports",
+      "sequence": 364
     }
   ],
-  "next_id": 931,
+  "next_id": 932,
   "schema": "codex-task-id-allocations-v1"
 }
