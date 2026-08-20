@@ -48,6 +48,7 @@ roots = [
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPointCoefficientHeart",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPointStableHalves",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPointStableHalfFrobenius",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPointOddLabelHeartAction",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPointThreePrimary",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPointAlternatingAction",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPointSylowFiveAction",

@@ -810,6 +810,31 @@ counts.  Still supplied: the marking of the actual geometric kernel, together
 with every geometric identification.  Report:
 [`../2026-08-20-c910-marked-frobenius-exotic-selection.md`](../2026-08-20-c910-marked-frobenius-exotic-selection.md).
 
+**The packet involution realized by an odd six-label permutation, 2026-08-20.**
+`GraphLattices/SixPointOddLabelHeartAction.lean` displays scaling by the
+non-square scalar `2` on the six-point projective-line labelling, the odd
+four-cycle `(1 2 4 3)` of the labels, and its induced heart matrix; conjugation
+by that matrix exchanges `W` and `W+1` and fixes the slopes `0` and `1`, while
+the two even displayed generators commute with the whole commutant.  Hence the
+diagonal heart action of that one odd label permutation on two copies of the
+coefficient heart is exactly the transported Frobenius involution of the packet,
+and Frobenius marking is restated without the labelling field as being moved by
+that action.  The identity is then proved for arbitrary words: permuting the six
+labels acts on the heart coordinates of every augmentation vector through the
+word's matrix, the sign of a word's label permutation is the parity of its
+number of scaling letters, and the packet action of the generated label group
+factors through that sign — even words fix every member, odd words act as the
+involution.  The converse half is proved as well: each of the three members
+defined over the prime field is fixed by the diagonal action of every invertible
+heart matrix, so a packet member moved by any such action is exotic, and no
+group-invariance hypothesis can separate the three rational members.  One
+terminal was added, `principalGluing_stableHalfPacket_frobeniusIsOddLabelAction`
+on `prop:principal-gluing-packet`, and the snapshot moves to 308 reviewer
+terminals with unchanged coverage counts.  Still supplied: every geometric
+identification, including that of the six labels with the manuscript's dihedral
+axes, and hence the marking of the actual kernel.  Report:
+[`../2026-08-20-c910-odd-label-frobenius-realization.md`](../2026-08-20-c910-odd-label-frobenius-realization.md).
+
 ## Prioritized Lean backlog
 
 Work in this order unless a later literature or library dependency changes the
