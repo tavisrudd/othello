@@ -1,7 +1,7 @@
 {
   "schema": "clebsch-orientation-statement-identity-v3",
   "main_source": "clebsch_passages.tex",
-  "main_source_sha256": "bbe56c103c974051d70419d85736ffa69f36d611ff6151d823de3a20ecd7e5c5",
+  "main_source_sha256": "c65772fa8f6f360e272625cdd95200c90f6e704258c9e5a24148d84eafe68317",
   "section_sha256": {
     "sections/01-introduction.tex": "745ca970d49f3e789b11f12dd9e4c5935bd108e3a7f286f528a2c62660a5dcbd",
     "sections/02-orientation-cover.tex": "709fc2dadeafaf786ae84ef12deda78a9b4d65bc4a29727de16c2fc3c747a9b6",
