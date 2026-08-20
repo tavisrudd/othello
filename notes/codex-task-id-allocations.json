@@ -3221,8 +3221,17 @@
       "last": 925,
       "purpose": "write a modular parameterized direct-QDM proof packet with selectable block markers",
       "sequence": 358
+    },
+    {
+      "count": 1,
+      "first": 926,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 926,
+      "purpose": "Paper V mod-11 completeness certificate for the conference node count",
+      "sequence": 359
     }
   ],
-  "next_id": 926,
+  "next_id": 927,
   "schema": "codex-task-id-allocations-v1"
 }
