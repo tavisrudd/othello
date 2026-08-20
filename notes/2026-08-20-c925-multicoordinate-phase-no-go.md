@@ -195,7 +195,8 @@ that cone before attempting any derived or quantum comparison.
 | Can several ordinary coordinates repair the one-coordinate failure? | **no** | Theorem 50.2 |
 | Does this depend on total unimodularity? | **no** | only the signed boundary rays from (41.15f) are used |
 | Can an enlarged group or relative stability evade it? | **open** | outside Proposition 50.1's fixed-torus support syntax |
-| Is open restriction still viable? | **open** | requires restriction of the FM/Gamma comparison and divided-rank-zero complement |
+| Does the natural completed equivalence descend to the intended opens? | **no** | Module 51 mixed-support theorem |
+| Is the boundary invisible to the sparse rank row? | **yes conditionally** | Module 51 under the completed-rank/Thom realization |
 | Is the normal-jet route affected? | **no** | it does not require phase equality |
 
 ## Boundary
@@ -205,3 +206,8 @@ completion of the five pilot overlaps that keeps the original torus,
 linearization, and semistable base locus.  It does not rule out relative,
 master-space, open-restriction, or normal-jet constructions, and it does not
 produce the missing fixed-phase QDM adapter.
+
+**Successor.**  Module 51 rules out Verdier descent of the natural completed
+kernel to the intended opens, while proving that the generic/divided rank
+consumer remains boundary-null.  Thus the surviving sparse route is the
+same occurrence-level fixed-phase row adapter as the normal-jet route.

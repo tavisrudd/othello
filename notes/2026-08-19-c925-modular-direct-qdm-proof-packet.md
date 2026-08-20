@@ -55,6 +55,7 @@ No manuscript or Lean source is part of this packet.
 | 48 | signature-free numerical crepancy of canonical-character completion | notes/2026-08-20-c925-signature-free-canonical-completion.md |
 | 49 | failure of the naive canonical total-space phase in all five pilots | notes/2026-08-20-c925-canonical-completion-phase-no-go.md |
 | 50 | opposite-cone obstruction to every ordinary multi-coordinate repair | notes/2026-08-20-c925-multicoordinate-phase-no-go.md |
+| 51 | mixed-support obstruction to descent of the completed kernel | notes/2026-08-20-c925-open-restriction-mixed-support-no-go.md |
 | frontier | open experiments and provider targets | notes/2026-08-20-c925-exploration-frontier.md |
 
 ## Dependency spine
@@ -81,7 +82,7 @@ Modules 19--23 prove reusable categorical consequences:
 - universal center-null quotients and minimal sufficient shadows; and
 - the conditional Section 6 argument as a separate specialization.
 
-Modules 24--50 isolate the higher-stabilization frontier:
+Modules 24--51 isolate the higher-stabilization frontier:
 
 - irrationality on any unbounded stabilization set implies irrationality for
   every index;
@@ -191,6 +192,11 @@ Modules 24--50 isolate the higher-stabilization frontier:
   new semistable supports, and an opposite-cone argument rules out every
   finite ordinary multi-coordinate repair with the same torus,
   linearization, raw phase, and total correction character; and
+- the natural completed wall kernel also has mixed boundary--open support on
+  every pilot adjacency and therefore does not descend to the intended open
+  categories.  Generic/divided rank annihilates that boundary leakage, so
+  the sparse route survives but collapses back to the same occurrence-level
+  fixed-phase row adapter as the normal-jet route; and
 - the rank-row route remains the higher-EV uniform alternative.
 
 ## Current \(m=2\) alternatives
@@ -268,6 +274,14 @@ live completion-side route is restriction of the completed comparison to
 the intended open (with divided-row-zero complement), a genuinely relative
 or enlarged-group master-space theorem, or the independent normal-jet
 adapter.
+Module 51 closes the first of those as a full categorical shortcut for the
+natural kernel.  On both sides of every coordinate wall there is an explicit
+common completed-stable support which is raw-open on exactly one side.
+Consequently the completed equivalence does not preserve the boundary
+perfect subcategory and cannot descend by localization.  Its rank map still
+kills every strict-boundary class, so no new scalar obstruction appears;
+the surviving statement is exactly the vertical fixed-phase QDM/Gamma
+identification already required by the normalized-jet route.
 
 ### ExactTop provider
 
@@ -330,6 +344,8 @@ vanishing remain open.
   notes/2026-08-20-c925-canonical-completion-phase-no-go.md
 - opposite-cone obstruction to every ordinary multi-coordinate repair:
   notes/2026-08-20-c925-multicoordinate-phase-no-go.md
+- mixed-support obstruction to descent of the completed kernel:
+  notes/2026-08-20-c925-open-restriction-mixed-support-no-go.md
 
 ## Executable witnesses
 

@@ -255,9 +255,14 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   ordinary added weight must lie in the opposite chamber cone.  Their sum
   therefore cannot equal the required correction \((1,-1)\).  No finite
   ordinary multi-coordinate refinement repairs the phase.  The next exact
-  choice is open restriction of the completed FM/Gamma comparison with a
-  divided-rank-zero complement, a genuinely relative/enlarged-group master
-  space, or the occurrence-level normal-jet adapter.
+  choice is a genuinely relative/enlarged-group master space or the
+  occurrence-level normal-jet adapter.  Module 51 closes naive open
+  restriction too: on every pilot adjacency the completed common stable
+  locus contains a point which is raw-boundary on one side and raw-open on
+  the other, so the natural completed equivalence does not descend to the
+  intended opens.  Generic/divided rank kills this mixed boundary leakage,
+  reducing the surviving sparse route exactly to the fixed-phase vertical
+  row identification required by the normal jet.
   Shifted tensor stability and the extremal multinomial source law are
   proved, but the occurrence-indexed exact QDM sequence, actual carrier
   exponent, and boundary vanishing remain open.  The packet is split into

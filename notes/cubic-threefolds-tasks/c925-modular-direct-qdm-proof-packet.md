@@ -211,8 +211,14 @@ index row.
   coordinate creates new semistable supports.  More strongly, every
   phase-safe ordinary added weight must lie in the cone opposite the chamber,
   so no finite multi-coordinate refinement can have the required total
-  character.  The live alternatives are open restriction/relative stability,
-  an enlarged-group master space, or the independent normal-jet adapter.
+  character.  The live alternatives are relative stability, an enlarged-group
+  master space, or the independent normal-jet adapter.
+- The natural completed wall equivalence does not descend to the intended
+  open total spaces either: every pilot adjacency contains a common
+  completed-stable point which is raw-boundary on one side and raw-open on
+  the other.  Generic/divided rank kills the resulting boundary leakage, so
+  this failure does not create another scalar gate; it reduces the sparse
+  route to the same fixed-phase vertical row adapter as the normal jet.
 
 ## Open geometric providers
 
@@ -286,17 +292,17 @@ advertised algebraic laws and countermodels, never an external QDM provider.
 
 ## Next
 
-1. Test whether the CIJ Fourier--Mukai/Gamma comparison on the completed
-   quotient restricts to the intended total-space opens and whether the
-   complement is divided-rank-zero.  This is the only surviving direct use
-   of the ordinary canonical completion.
-2. In parallel, construct the occurrence-level fixed-phase QDM/Gamma square
+1. Construct the occurrence-level fixed-phase QDM/Gamma square
    identifying Module 43's universal normalized jet with the actual endpoint
    row transition, with exact coimage base change and adjacent reindexing.
-3. If neither adapter exists, move to a genuinely relative \(p\)-field or
-   enlarged-group master-space comparison.  Do not search for another finite
-   ordinary multi-coordinate completion: Module 50 rules out that entire
-   class.
+   Module 51 shows that the rank-row consumer is already insensitive to all
+   mixed boundary support, so no full open-category equivalence is needed.
+2. In parallel, test a genuinely relative \(p\)-field or enlarged-group
+   master-space comparison, where the fibre coordinate is not allowed to
+   alter the raw stability condition.
+3. Do not search for another finite ordinary multi-coordinate completion:
+   Module 50 rules out that entire class, and Module 51 rules out localization
+   descent of the natural completed kernel.
 4. In parallel, test the narrower non-equivariant adapter of Module 44:
    realize the actual primitive packet in a common narrow QDM, preserve its
    compact-support pairing, and carry the shifted-point/Thom line across the

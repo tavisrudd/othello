@@ -223,6 +223,11 @@ that the complement contributes only divided-rank-zero terms.  Proper
 support and exact base change would have to be redone for this open
 restriction; CIJ does not state it automatically.
 
+Module 51 closes this direct restriction negatively for the natural
+completed wall kernel: every pilot adjacency has mixed boundary--open
+support, so the completed equivalence does not descend through the intended
+boundary localizations.  Only the weaker rank-row quotient survives.
+
 ### B. Use a relative or \(p\)-field stability condition
 
 One may impose stability only on the \(W\)-coordinate, treating the

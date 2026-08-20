@@ -147,13 +147,17 @@ are:
     not finish the narrow route: every admissible pilot gains new semistable
     supports, and no finite ordinary multi-coordinate completion with the
     same torus, linearization, raw phase, and total correction character can
-    avoid them.  The exact surviving test is whether the CIJ FM/Gamma
-    comparison restricts to the desired open total spaces with
-    divided-rank-zero complement.  Otherwise use a relative/enlarged-group
-    construction or return to the normal-jet adapter.
+    avoid them.  Module 51 then gives a correspondence-level no-go: the
+    natural completed kernel has mixed boundary--open support on every pilot
+    adjacency and does not descend through the intended boundary
+    localizations.  Generic/divided rank nevertheless kills the mixed
+    boundary classes.  Thus no full open equivalence is needed or available
+    from this kernel; the exact surviving test is the occurrence-level
+    fixed-phase row identification of the normal-jet route.  A genuinely
+    relative/enlarged-group construction remains separate.
 
 None of these questions blocks the proof in Modules 0--16 or the
-transport-level specialization audit in Module 17.  Modules 18--50 isolate
+transport-level specialization audit in Module 17.  Modules 18--51 isolate
 the general consequences without claiming the missing enriched provider.
 The open questions control whether the interface can be promoted from a
 lawful compiler to a canonical equivalence with the complete external
