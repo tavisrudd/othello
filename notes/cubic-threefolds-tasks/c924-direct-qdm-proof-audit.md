@@ -2,7 +2,7 @@
 
 **Lane:** `cubic-threefolds`
 
-**Status:** active 2026-08-19
+**Status:** completed 2026-08-19
 
 **Objective:** decide whether the proposed direct quantum-`D`-module proof in
 `/home/tavis/Downloads/direct_qdm_proof_packet_unified_stronger.md` proves the
@@ -50,3 +50,14 @@ After that prerequisite read:
 This task does not edit either stabilization manuscript, their mirrors, or the
 existing Lean companion.  Any later promotion requires a separate instruction
 and the owning task's normal gates.
+
+## Outcome
+
+The route is mathematically verified after one local coefficient-spine repair:
+the projective-bundle comparison must pass through the common faithful ring
+`C[q][[Q,t]]` used by Iritani--Koto, rather than a nonexistent map from the
+full `q`-adic completion to the opposite Laurent completion.  Two minor
+proof-text corrections and the complete claim-by-claim audit are recorded in
+[`2026-08-19-c924-direct-qdm-proof-audit.md`](../2026-08-19-c924-direct-qdm-proof-audit.md).
+The report also gives the exact finite-algebra replay and the safe even-only
+compression.  No paper or Lean source was edited.

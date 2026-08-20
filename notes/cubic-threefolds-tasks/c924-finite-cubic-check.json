@@ -1,0 +1,19 @@
+{
+  "checks": {
+    "beauville_euler_characteristic_polynomial": "t^2*(t^2-108*q)",
+    "beauville_euler_minimal_polynomial": "t^2*(t^2-108*q)",
+    "constant_basis_determinant": "-486*r^5",
+    "first_normalized_gauge": "verified",
+    "modified_residue_determinant": "5/36",
+    "modified_residue_discriminant": "4/9",
+    "modified_residue_eigenvalues": [
+      "-1/6",
+      "-5/6"
+    ],
+    "modified_residue_trace": "-1",
+    "zero_block_E0_12": "-14/(81*r^2)",
+    "zero_block_E0_21": "-8/81"
+  },
+  "schema": "c924-finite-cubic-check-v1",
+  "sympy_version": "1.14.0"
+}

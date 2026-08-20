@@ -2,7 +2,7 @@
 
 **Lane:** `cubic-threefolds`
 
-**Date:** 2026-08-15
+**Date:** 2026-08-19
 
 > **LIVE MAP ONLY.** This is the routing and state surface for this lane.
 > Per-task detail belongs in the task cards under `notes/cubic-threefolds-tasks/`;
@@ -37,13 +37,16 @@ promoted mathematical assertion maps to a kernel-checked declaration.
 
 ## Current status
 
-- **C924 — direct-QDM proof audit, active.** Rigorously verify the proposed
-  direct quantum-`D`-module route to the epilogue's one-stabilization theorem,
-  beginning with a complete read of the manuscript, the unified proof packet,
-  its research memo, and every cited source actually used.  This is a
-  mathematics-only audit: no manuscript edits.  Only after the route passes
-  the proof gate does the task turn to simplification or compression.  Card:
-  `../cubic-threefolds-tasks/c924-direct-qdm-proof-audit.md`.
+- **C924 — closed 2026-08-19.** The direct ordinary-QDM route proves
+  irrationality of `X x P^1` after one mandatory local repair: compare the
+  intrinsic and asymptotic projective-bundle QDMs through Iritani--Koto's
+  common faithful ring `C[q][[Q,t]]`, not through a nonexistent embedding of
+  the full `q`-adic completion into the `q^{-1}`-Laurent completion.  Every
+  other load-bearing step and primary source passed, the finite cubic algebra
+  replayed exactly, and the route compresses further to even rank two,
+  nonzero nilpotent, and nonzero modified-residue discriminant.  No manuscript
+  or Lean file was edited.  Report:
+  [`2026-08-19-c924-direct-qdm-proof-audit.md`](../2026-08-19-c924-direct-qdm-proof-audit.md).
 - **C912 — closed 2026-08-18 by author instruction.** Referee-facing
   foundations for the epilogue: all twelve work packages landed, every
   implementation, review, copy-edit, detritus, build, and export gate green.
