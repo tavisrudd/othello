@@ -46,16 +46,15 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   edit has yet been made.  Card:
   `../cubic-threefolds-tasks/c931-c928-referee-dossier.md`; dossier:
   `../2026-08-20-c931-c928-referee-dossier.md`.
-- **C930 — independent referee requires memo repair before manuscript
-  phase.** The unconditional atomic direct-QDM route survives, but the common
-  compiler is not yet type-correct for the framed instance: it asks for a
-  block-level equality where 5.7R/5.7T supply only marker-level certified
-  edges.  Repair it to an occurrence-indexed marker ledger, narrow the cubic
-  fork, correct the ruled-surface boundary, and route the chemical-formula
-  instance through the generalized compiler.  The source-grade diagram set is
-  exactly one corrected descent square and one normalized cubic fork.  Rerun a
-  short independent referee before any manuscript decision.  C930 remains
-  strictly `m=1`, and no manuscript was edited.  Memo:
+- **C930 — referee repair applied; second review pending.** The common theorem
+  now consumes occurrence-indexed marker-level comparison certificates rather
+  than demanding block equality, so both atomic and framed providers inhabit
+  it at their exact strength.  The ruled-surface boundary and generalized
+  chemical-formula routing are corrected.  The source-grade diagram set is
+  exactly one occurrence-indexed descent square and one normalized cubic fork;
+  both compile under `amscd`.  Rerun the independent referee before any
+  manuscript decision.  C930 remains strictly `m=1`, and no manuscript was
+  edited.  Memo:
   `../2026-08-20-c930-categorical-direct-qdm-proof-memo.md`; referee report:
   `../2026-08-20-c930-independent-referee-report.md`. Card:
   `../cubic-threefolds-tasks/c930-categorical-direct-qdm-paper-preparation.md`.

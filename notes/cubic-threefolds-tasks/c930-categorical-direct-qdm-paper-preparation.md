@@ -2,7 +2,7 @@
 
 **Lane:** cubic-threefolds
 
-**Status:** active; phase 1 memo independently refereed; major revision required before author decision on phase 2 manuscript adaptation
+**Status:** active; referee repair applied; second independent review pending before author decision on phase 2 manuscript adaptation
 
 ## Stable entry point
 
@@ -13,7 +13,9 @@
 
 ## Phase 1 result
 
-- The paper has one center-localized block-marker compiler.
+- The paper has one occurrence-indexed marker-ledger compiler.  A provider
+  need certify equality only after the chosen marker is applied; block-level
+  comparison is an optional stronger input.
 - Its unconditional atomic direct-QDM specialization proves cubic one-step
   irrationality from Beauville, Iritani, Iritani--Koto, weak factorization,
   and surface classification, deriving the cubic packet internally.
@@ -24,15 +26,14 @@
 - The current 48-page draft should be refounded rather than layered: target
   24--28 pages, with the global all-`m` transport and one-chart branches
   preserved outside the new paper.
-- All three existing exact replays passed.  No manuscript source was edited.
+- All three existing exact replays passed, and both corrected `amscd` diagrams
+  compile together.  No manuscript source was edited.
 
-**Next:** stop for the author's decision whether and how to enter phase 2
-under this same C930 item.
-
-The independent referee blocks that transition until the memo's common
-compiler is weakened from a block-level equality to a certified marker-level
-ledger, its center quotient is occurrence-indexed, and its two LaTeX diagrams
-are corrected and re-refereed.  This repair remains strictly \(m=1\).
+**Next:** rerun the independent referee on the repaired marker-level theorem,
+occurrence-indexed center quotient, normalized cubic fork, exact ruled-surface
+boundary, and generalized chemical-formula routing.  If that passes, stop for
+the author's decision whether and how to enter phase 2 under this same C930
+item.  The repair remains strictly \(m=1\).
 
 ## Goal
 
