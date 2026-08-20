@@ -737,6 +737,28 @@ and this kernel with the geometric ones, and the primary decomposition, so the
 lemma's per-prime form of the assertion.  Report:
 [`../2026-08-19-c910-source-discriminant-group.md`](../2026-08-19-c910-source-discriminant-group.md).
 
+**The three-primary analogue and the orders of the primary parts,
+2026-08-19.**  `GraphLattices/SixAxisThreePrimaryLatticeComparison.lean`,
+`GraphLattices/SixAxisThreePrimaryPairing.lean`, and
+`GraphLattices/SixAxisThreePrimaryHeartCoordinates.lean` mirror the two-primary
+chain at three: the reduction modulo three of the cofactor image identifies the
+three-primary part of the discriminant group with the kernel of the polarization
+reduced modulo three, the discriminant pairing becomes minus the dot product on
+axis coordinates tensored with the reduced elliptic pairing, and the coordinate
+equivalence onto two copies of the three-primary heart is an isometry for the
+two-copy polarization form.  The transported kernel is its own orthogonal
+complement, hence maximal isotropic, hence four-dimensional by a general
+half-dimension theorem, so it is the vertical copy or one of the three scalar
+graphs as soon as it is diagonally stable; unlike at two, no dimension is
+supplied anywhere.  The prime-free cofactor, adjugate, and pairing-criterion
+lemmas moved into `GraphLattices/SixAxisPrimaryDiscriminantSplitting.lean`, so
+both chains share one layer.  The two lattice comparisons also give the orders
+`2⁸` and `3⁸` of the primary parts of the discriminant group.  Three terminals
+were added and the snapshot moves to 302 reviewer terminals with unchanged
+coverage counts.  Still supplied: diagonal stability, standing for
+`A₅`-equivariance, at both primes, and every geometric identification.  Report:
+[`../2026-08-19-c910-three-primary-analogue.md`](../2026-08-19-c910-three-primary-analogue.md).
+
 ## Prioritized Lean backlog
 
 Work in this order unless a later literature or library dependency changes the

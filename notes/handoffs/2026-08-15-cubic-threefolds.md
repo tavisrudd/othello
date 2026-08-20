@@ -212,9 +212,18 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   isometric to the rank-eight tensor form in the standard coordinates. So the
   two-primary kernel, carried into those coordinates, is proved maximal
   isotropic and belongs to the five-member projective-line packet as soon as
-  diagonal stability is granted; stability, standing for `A_5`-equivariance, is
-  the only remaining input on that side. The three-primary analogue, the orders
-  of the primary parts, and the geometric commutator pairing remain supplied.
+  diagonal stability is granted. The same chain now runs at three: the
+  reduction modulo three of the cofactor image identifies the three-primary
+  part with the kernel of the polarization reduced modulo three, carries the
+  discriminant pairing to minus the dot product tensored with the reduced
+  elliptic pairing, and is an isometry onto the two-copy polarization form of
+  the three-primary heart, where the transported kernel is maximal isotropic
+  and therefore four-dimensional, hence the vertical copy or one of the three
+  scalar graphs once diagonal stability is granted. The orders `2^8` and `3^8`
+  of the primary parts of the discriminant group follow from those two
+  comparisons. Stability, standing for `A_5`-equivariance, is the only
+  remaining input at either prime; the orders of the primary parts of the
+  kernel and the geometric commutator pairing remain supplied.
   Card:
   `../cubic-threefolds-tasks/c910-cubic-stabilization-lean-companion.md`; gap audit
   `../2026-08-18-c910-post-restructure-gap-audit.md`; anchor report
@@ -256,6 +265,8 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   `../2026-08-19-c910-two-primary-pairing.md`;
   two-primary standard-coordinate report
   `../2026-08-19-c910-two-primary-standard-coordinates.md`;
+  three-primary analogue report
+  `../2026-08-19-c910-three-primary-analogue.md`;
   interim release report
   `../2026-08-12-c910-partial-lean-release.md`.
 - **C920 — closed 2026-08-18.** Hypothesis 5.7T of the epilogue is now used only
