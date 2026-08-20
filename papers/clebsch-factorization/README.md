@@ -2,7 +2,7 @@
 
 [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21682217-blue.svg)](https://doi.org/10.5281/zenodo.21682217)
 
-**Clebsch portfolio:** Paper II of the five-paper *Clebsch: Rigidity from Sparse
+**Clebsch portfolio:** part of the five-paper *Clebsch: Rigidity from Sparse
 Shadows* series. Related companions include *Diagonal Isoduality and
 Transversal Clifford Groups of MDS--CSS Codes* and the Golden interferometer
 paper. The shared
