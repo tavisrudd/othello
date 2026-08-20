@@ -1517,6 +1517,62 @@ def main():
             ) == 0
     checks["extremal_multinomial_computes_source_top_line"] = "pass"
 
+    # In Rep_{K[t]}(1 -> 2), let ambient objects be (A -> 0) and
+    # exceptional objects (0 -> E).  Their ambient-to-exceptional Hom is
+    # zero.  The object (J_3 -> J_2) defined by the quotient is a nonsplit
+    # opposite-oriented extension, but at m=2 its exceptional top vanishes
+    # and its retained top is exactly that of J_3.
+    quiver_ambient = jordan(3)
+    quiver_exceptional = jordan(2)
+    quiver_arrow = [
+        [Fraction(0), Fraction(1), Fraction(0)],
+        [Fraction(0), Fraction(0), Fraction(1)],
+    ]
+    zero_arrow = [[Fraction(0) for _ in range(3)] for _ in range(2)]
+    assert matrix_multiply(quiver_exceptional, quiver_arrow) == (
+        matrix_multiply(quiver_arrow, quiver_ambient)
+    )
+    assert quiver_arrow != zero_arrow
+    assert 3 * 0 + 0 * 2 == 0
+    ambient_top_rank = rational_rank(matrix_power(quiver_ambient, 2))
+    exceptional_top_rank = rational_rank(
+        matrix_power(quiver_exceptional, 2)
+    )
+    assert ambient_top_rank == 1
+    assert exceptional_top_rank == 0
+    assert matrix_multiply(
+        quiver_arrow, matrix_power(quiver_ambient, 2)
+    ) == zero_arrow
+    assert ambient_top_rank + exceptional_top_rank == ambient_top_rank
+    checks["oriented_quiver_orthogonality_kills_opposite_boundary"] = "pass"
+
+    # Objectwise Hom(A,E)=0 is insufficient if ker(N_A^m) leaves the
+    # ambient class.  Over R=K[t]/(t^2), C=(R --id--> R) maps onto
+    # A=(R --q--> K) with kernel E=(0 -> tR).  Hom(A,E)=0 because q is
+    # surjective, but ker(t_A) has zero arrow and maps to E; the retained
+    # top drops rank by one.
+    dual_numbers = jordan(2)
+    residue_field = jordan(1)
+    residue_quotient = [[Fraction(0), Fraction(1)]]
+    assert matrix_multiply(residue_field, residue_quotient) == (
+        matrix_multiply(residue_quotient, dual_numbers)
+    )
+    assert rational_rank(residue_quotient) == 1
+    assert matrix_vector(residue_quotient, [Fraction(1), Fraction(0)]) == [
+        Fraction(0)
+    ]
+    middle_top_rank = rational_rank(
+        matrix_power(block_diagonal([dual_numbers, dual_numbers]), 1)
+    )
+    quotient_top_rank = rational_rank(
+        matrix_power(block_diagonal([dual_numbers, residue_field]), 1)
+    )
+    assert rational_rank(matrix_power(residue_field, 1)) == 0
+    assert middle_top_rank == 2
+    assert quotient_top_rank == 1
+    assert middle_top_rank - quotient_top_rank == 1
+    checks["oriented_quiver_kernel_closure_is_load_bearing"] = "pass"
+
     # The center carrier bound and its codimension-(c-1) exceptional string
     # combine to length m, exactly one below the source J_(m+1).
     for stabilization in range(1, 13):

@@ -83,11 +83,14 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   snake/Bockstein boundary is the sole extension defect.  Standard Orlov
   semiorthogonality has the variance of the opposite sequence
   \(0\to E\to B\to A\to0\); its ambient-to-exceptional Hom must vanish in an
-  enriched operation-framed exact heart, not in plain \(K[N]\)-modules.
+  enriched operation-framed exact heart, not in plain \(K[N]\)-modules.  A
+  left-orthogonal exact-heart adapter now makes boundary vanishing formal
+  once that orientation and component typing exist; a quiver model shows
+  this may preserve the top shadow without splitting the heart extension.
   Shifted tensor stability and the extremal multinomial source law are
   proved, but the occurrence-indexed exact QDM sequence, actual carrier
   exponent, and boundary vanishing remain open.  The packet is split into
-  bounded module companions behind a stable index.  The fifty-one-check
+  bounded module companions behind a stable index.  The fifty-three-check
   finite law replay, eleven-check typed Haskell toy, and original cubic
   replay are green.  C925 remains open at fixed-phase Gamma/rank transport
   or at this ExactTop provider; the relative-cap cancellation remains one

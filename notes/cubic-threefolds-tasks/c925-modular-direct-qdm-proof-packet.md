@@ -20,6 +20,8 @@ exact \(m=2\) and all-\(m\) transport gates.
   notes/2026-08-20-c925-m2-roadmap-and-unbounded-stabilizations.md
 - power-image/ExactTop report:
   notes/2026-08-20-c925-power-image-leakage.md
+- oriented-heart adapter:
+  notes/2026-08-20-c925-oriented-heart-adapter.md
 - non-\(m=2\) categorical dividends:
   notes/2026-08-20-c925-non-m2-categorical-dividends.md
 - conditional Section 6 specialization:
@@ -44,6 +46,9 @@ index row.
 - Fixed-factor products have the unique extremal source line.
 - The power-image functor and its snake boundary give the exact minimal
   extension leakage seen by the Jordan endpoint consumer.
+- In an opposite-oriented exact heart, ambient-to-exceptional Hom
+  orthogonality kills that boundary; a nonsplit quiver model shows this is
+  weaker than splitting at the heart level.
 
 ## Open geometric providers
 
@@ -93,7 +98,7 @@ Typed replay:
       | diff -u \
           notes/cubic-threefolds-tasks/c925-sparse-shadow-path-toy-output.txt -
 
-The finite model currently has fifty-one checks.  It verifies only the
+The finite model currently has fifty-three checks.  It verifies only the
 advertised algebraic laws and countermodels, never an external QDM provider.
 
 ## Next

@@ -30,6 +30,7 @@ No manuscript or Lean source is part of this packet.
 | 23 | universal sufficient shadows and non-\(m=2\) dividends | notes/2026-08-19-c925-universal-sufficient-shadows.md |
 | 24 | corrected \(m=2\) roadmap, cofinal stabilizations, all-\(m\) criterion | notes/2026-08-20-c925-m2-cofinal-module.md |
 | 25 | power-image functor, Bockstein leakage, ExactTop provider | notes/2026-08-20-c925-power-image-module.md |
+| 26 | left-orthogonal exact-heart adapter and nonsplit quiver model | notes/2026-08-20-c925-oriented-heart-adapter.md |
 | frontier | open experiments and provider targets | notes/2026-08-20-c925-exploration-frontier.md |
 
 ## Dependency spine
@@ -56,7 +57,7 @@ Modules 19--23 prove reusable categorical consequences:
 - universal center-null quotients and minimal sufficient shadows; and
 - the conditional Section 6 argument as a separate specialization.
 
-Modules 24--25 isolate the higher-stabilization frontier:
+Modules 24--26 isolate the higher-stabilization frontier:
 
 - irrationality on any unbounded stabilization set implies irrationality for
   every index;
@@ -64,6 +65,8 @@ Modules 24--25 isolate the higher-stabilization frontier:
 - the strict Jordan transport gate may be weakened to an occurrence-indexed
   exact sequence, an exponent certificate, and one snake-boundary
   certificate; and
+- in the opposite orientation, ambient-to-exceptional Hom orthogonality in
+  an enriched exact heart kills that boundary formally; and
 - the rank-row route remains the higher-EV uniform alternative.
 
 ## Current \(m=2\) alternatives
@@ -106,6 +109,8 @@ vanishing remain open.
   notes/2026-08-20-c925-m2-roadmap-and-unbounded-stabilizations.md
 - power-image/Bockstein theorem and ExactTop audit:
   notes/2026-08-20-c925-power-image-leakage.md
+- oriented-heart adapter and augmentation audit:
+  notes/2026-08-20-c925-oriented-heart-adapter.md
 - conditional \(m=1\) specialization:
   notes/2026-08-20-c925-framed-m1-specialization.md
 - non-\(m=2\) categorical dividends:

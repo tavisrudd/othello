@@ -439,7 +439,7 @@ the nonsplit \(J_3\) leakage.
 
 ## Finite validation
 
-The categorical replay now has fifty-one checks.  The new exact checks:
+The categorical replay now has fifty-three checks.  The new exact checks:
 
 1. enumerate cyclic extensions with \(1\le a,b\le m\le5\) and verify that
    the rank increase of \(N^mV\) equals
