@@ -279,6 +279,12 @@ main = "golden_quantum_statistics.tex"
 lane = "golden"
 
 [[paper]]
+id = "hodge_atom_marker_ledger"
+dir = "papers/hodge-atom-marker-ledger"
+main = "hodge_atom_marker_ledger.tex"
+lane = "cubic-threefolds"
+
+[[paper]]
 id = "passant_code_q13"
 dir = "papers/q13-passant-code"
 main = "passant_code_q13.tex"

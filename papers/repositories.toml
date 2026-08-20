@@ -456,6 +456,42 @@ disposition = "gated"
 gate = "source programme is not adopted as a standalone publication"
 
 [[repository]]
+name = "hodge-atom-marker-ledger"
+include_release_pdfs = true
+release_output_policy = "immutable-source"
+source = "papers/hodge-atom-marker-ledger"
+paper_ids = ["hodge_atom_marker_ledger"]
+disposition = "active"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = ".PHONY: all check lint manuscript warnings clean distclean"
+new = ".PHONY: all check manuscript warnings clean distclean"
+expected_count = 1
+reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = "all: lint manuscript\n\ncheck: lint manuscript warnings"
+new = "all: manuscript\n\ncheck: manuscript warnings"
+expected_count = 1
+reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = "lint:\n\t$(PYTHON) ../scripts/lint_tex_spacing.py $(SOURCE) sections/*.tex\n\n"
+new = ""
+expected_count = 1
+reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = "manuscript: $(SOURCE) sections/*.tex\n\t$(PYTHON) ../scripts/lint_tex_spacing.py $(SOURCE) sections/*.tex\n"
+new = "manuscript: $(SOURCE) sections/*.tex\n"
+expected_count = 1
+reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
+
+[[repository]]
 name = "q13-passant-code"
 include_release_pdfs = true
 source = "papers/q13-passant-code"

@@ -1,0 +1,26 @@
+{
+  "title": "Hodge atoms as occurrence-indexed marker ledgers",
+  "description": "This note identifies the standard Hodge-atom construction with an occurrence-indexed marker ledger. Degrees of connected components of the reduced unramified Euler spectral cover are expanded into labelled occurrences; the elementary disjoint-union, blowup, and projective-bundle correspondences generate a thin groupoid; and the free commutative monoid on its connected components recovers the Hodge-atom chemical formula. Deleting atom classes carried in dimension at most d - 2 gives an effective quotient that is birationally invariant by weak factorization. As a strictly one-step consequence, a top-height atom on a smooth n-fold obstructs rationality of every rank-two projective bundle carrying it. The note also separates abstract Hodge atoms from geometric atomic F-bundle classes and from the sibling direct quantum-D-module marker specialization.",
+  "creators": [
+    {
+      "name": "Rudd, Tavis",
+      "orcid": "0009-0003-6405-3275",
+      "affiliation": "Independent researcher"
+    }
+  ],
+  "access_right": "open",
+  "license": "cc-by-4.0",
+  "upload_type": "publication",
+  "publication_type": "preprint",
+  "keywords": [
+    "Hodge atoms",
+    "quantum cohomology",
+    "quantum D-modules",
+    "marker ledgers",
+    "weak factorization",
+    "projective bundles",
+    "birational geometry",
+    "irrationality"
+  ],
+  "notes": "Correspondence: tavisrudd@damnsimple.com"
+}
