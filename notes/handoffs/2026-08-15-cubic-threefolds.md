@@ -37,14 +37,19 @@ promoted mathematical assertion maps to a kernel-checked declaration.
 
 ## Current status
 
-- **C934 -- full integral theta decomposition complex, active.** Test the one
-  upgrade capable of raising C928's ceiling: compute the link, resolution,
-  ordinary cohomology, and integral intersection cohomology in every degree;
-  decide whether the local `Z/3` in degree four survives globally; and identify
-  the actual derived extension in `R sigma_* Z_M[4]` behind Krämer's rational
-  skyscraper splitting. The frozen eight-page paper stays unchanged until the
-  theorem and priority gates pass. Secondary tests are full Fano-transfer
-  surjectivity and a monodromy-equivariant family form. Card:
+- **C934 -- paper upgrade/export complete; all-degree table active.** The
+  11-page paper now proves the integral derived splitting, central Smith
+  factor three, canonical mod-three `delta_0`--`IC`--`delta_0` Loewy chain,
+  Fano lift of the link class, and exact modular failure of relative hard
+  Lefschetz.  Fresh modular, geometric, and editorial packets are unanimous A;
+  the active-voice abstract is 147 tokens; *Mathematische Zeitschrift* is the
+  strongest target.  The clean standalone repository is
+  `~/src/math-papers/blown-up-theta-lattice` and includes `.zenodo.json`.
+  DOI `10.5281/zenodo.22036586` and the standard badge are recorded in the
+  paper README; the public portfolio summary is synchronized.
+  Original acceptance debt remains: enumerate all local/global integral groups
+  in every degree.  Full Fano-transfer surjectivity and a monodromy-equivariant
+  family form remain secondary tests.  Card:
   `../cubic-threefolds-tasks/c934-integral-theta-decomposition-complex.md`.
 - **C933 — closed 2026-08-20; six-page Hodge-atom marker-ledger companion.**
   The standard atom construction is now a self-contained, strictly `m=1`

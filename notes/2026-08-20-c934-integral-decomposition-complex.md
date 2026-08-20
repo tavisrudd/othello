@@ -251,7 +251,12 @@ and *Proceedings of the AMS* a conservative fallback.
 The guarded exporter materialized and verified the clean standalone tree at
 `/home/tavis/src/math-papers/blown-up-theta-lattice`; its first commit is
 `a4d8b1a51339149147b81f3a00d65a1d90bda578`, and its rebuilt PDF is
-byte-identical to the monorepo authority.
+byte-identical to the monorepo authority.  The authority and standalone now
+both carry `.zenodo.json`; the current standalone commit is
+`700fa3d39b55a24c84a43ae94869ed86958f553b`.  The public portfolio-summary
+authority and its `math-papers-summary` mirror now include the paper, its DOI
+`10.5281/zenodo.22036586`, and the ledger-bounded priority statement; the
+summary mirror commit is `04b62a8a4429a3793c950c7a8b4908f61f139e33`.
 
 ## `ej` + `tt` closeout pass
 

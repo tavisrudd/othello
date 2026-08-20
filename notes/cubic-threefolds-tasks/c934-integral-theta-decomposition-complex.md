@@ -2,7 +2,8 @@
 
 **Lane:** cubic-threefolds
 
-**Status:** active; bounded theorem-feasibility pass
+**Status:** active; paper upgrade and standalone export complete, original
+all-degree additive-table gate still open
 
 ## Goal
 
@@ -17,8 +18,29 @@ complex of
 Compute the local and global integral groups in every degree, determine
 whether the `Z/3` class in degree four of the link survives globally, and
 identify the extension data in `R sigma_* Z_M[4]` which Kraemer's rational
-skyscraper decomposition suppresses. Do not edit the frozen manuscript until
-this theorem gate and a fresh priority audit are positive.
+skyscraper decomposition suppresses.  The structural theorem and priority
+gates are now positive and have been adopted in the manuscript; the complete
+all-degree additive enumeration remains the unclosed part of this goal.
+
+## Current state
+
+- The link and the three intersection blocks `[-1],[-3],[-1]` are computed
+  integrally.
+- The paper proves
+  `R sigma_* Z_M[4] = Z_0[2] + P + Z_0[-2]`, with central attachment
+  `Z --(-3)--> Z`, and identifies the mod-three reduction of `P` as the
+  canonical nonsplit `delta_0`--`IC`--`delta_0` uniserial object.
+- The local order-three class lifts to an infinite-order Fano class; the
+  exact index-three sequence and the ordinary-to-intersection comparison in
+  degrees at least four are printed.
+- The outer relative Lefschetz map is multiplication by three and therefore
+  fails modulo three.
+- The 11-page manuscript has a 147-token abstract and unanimous A rereview.
+  Its clean standalone export is
+  `/home/tavis/src/math-papers/blown-up-theta-lattice`.
+- Open acceptance debt: enumerate every remaining local/global integral group
+  and its torsion in every degree.  The full Fano-transfer and family forms
+  remain secondary tests, not paper claims.
 
 ## Initial evidence
 
