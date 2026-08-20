@@ -4,10 +4,10 @@
   "main_source_sha256": "c65772fa8f6f360e272625cdd95200c90f6e704258c9e5a24148d84eafe68317",
   "section_sha256": {
     "sections/01-introduction.tex": "745ca970d49f3e789b11f12dd9e4c5935bd108e3a7f286f528a2c62660a5dcbd",
-    "sections/02-orientation-cover.tex": "709fc2dadeafaf786ae84ef12deda78a9b4d65bc4a29727de16c2fc3c747a9b6",
+    "sections/02-orientation-cover.tex": "c714b229d1948509c133b28d9cc90b94166eb2cf37e21cfba5fcc694abcbe3c1",
     "sections/03-orientation-source.tex": "2ea744bfb964840e48533b0320db20128c43e6121cdd10469c71ed93f6161201",
     "sections/04-arithmetic-specialization.tex": "4ae82f831aafb77c2ac7e1114df559b2c711eae79e82363361e5576368f260f4",
-    "sections/05-golden-operator.tex": "296ced89918403326abea2c9d1c867e50acddb9bab5a18463a3795cb270a9997",
+    "sections/05-golden-operator.tex": "e5dfd650fa762491be28d987b6a99df84a47667151a910f3a5cafe619f0c147b",
     "sections/05-harmonic-realization.tex": "f019d20c504ddd04b670abc39e69fd9790cf351af4419c138efb9967fcba04a1",
     "sections/09-conclusion.tex": "d8972b2be3eabeada385ecb4ca7ebde472dd43cd8d6fb5e05487a126c715f7ff",
     "sections/09-programme-coda.tex": "1206d26f844fd17d717d18cfe0ef542a046fec9aebe2c5ed6f0d8bb8b63605f8",
@@ -15,7 +15,7 @@
     "sections/08-verification.tex": "81fbce6119705d3d63db38d70955185a246748503491fff15f00f18a385a11d0",
     "sections/10-references.tex": "8c55a3c27e318db418b1acea1dc9cd308e682b22c3818641e827b656f1eedbf8"
   },
-  "statement_count": 9,
+  "statement_count": 11,
   "statements": [
     {
       "label": "thm:arithmetic-main",
@@ -72,11 +72,29 @@
       "tex": "\\begin{theorem}[Triangle--Pfaffian recognition]\n\\label{thm:triangle-pfaffian-recognition}\nLet \\(A=(a_{ij})\\) be real symmetric of even order \\(n\\geq4\\), with zero\ndiagonal and every off-diagonal entry nonzero.  Put\n\\[\n \\mathcal T_A(x)=\\sum_{|S|=3}\n \\left(\\prod_{\\{i,j\\}\\subset S}a_{ij}\\right)x_S,\n \\qquad\n \\Phi_A(x)=\\operatorname{Pf}[D_x,A],\n \\qquad x_S=\\prod_{i\\in S}x_i.\n\\]\nIf \\(\\Phi_A=\\mu\\mathcal T_A\\) for some \\(\\mu\\ne0\\), then \\(n=6\\) and\n\\(A^2=\\lambda I\\) for some \\(\\lambda>0\\).\n\nIf the off-diagonal entries also have a common absolute value, then, up to scale, switching,\nand relabelling, \\(A\\) is the pentagon conference matrix; conversely\n\\(\\Phi_A=\\pm4\\mathcal T_A\\); relative to an orientation of the signed label space,\nthe sign is that space's two-valued orientation character.\n\\end{theorem}"
     },
     {
+      "label": "thm:golden-equality-rigidity",
+      "environment": "theorem",
+      "title": "Rigidity at the golden representative",
+      "source": "sections/05-golden-operator.tex",
+      "source_line": 368,
+      "sha256": "893aff88fa0ad5dff763c056eec0e8cca804c570bd0782bd43dd217603234164",
+      "tex": "\\begin{theorem}[Rigidity at the golden representative]\n\\label{thm:golden-equality-rigidity}\nThe twenty functions \\(F_S=h_S-4\\tau_S\\) have Jacobian of rank fourteen at\n\\(C\\), with kernel the scaling line \\(\\mathbf R\\,C\\).  Near \\(C\\) the locus\n\\(X_{+1}\\) is therefore exactly that line, and the same holds for\n\\(h_S+4\\tau_S\\) at the opposite oriented representative.\n\\end{theorem}"
+    },
+    {
+      "label": "prop:nonsingular-complementary-minors",
+      "environment": "proposition",
+      "title": "Nonsingular complementary minors",
+      "source": "sections/05-golden-operator.tex",
+      "source_line": 486,
+      "sha256": "ea4f03b3317a8e558556eb24ef90af8b843312088a4bbdde20e842cb47a53335",
+      "tex": "\\begin{proposition}[Nonsingular complementary minors]\n\\label{prop:nonsingular-complementary-minors}\nLet \\(A\\) be symmetric of order six with zero diagonal and every off-diagonal\nentry \\(\\pm1\\).  Then \\(A^2=5I\\) if and only if \\(\\det A[S^c,S]\\ne0\\) for every\n\\(3\\)-subset \\(S\\), and in that case every one of those twenty determinants is\n\\(\\pm4\\).\n\\end{proposition}"
+    },
+    {
       "label": "thm:balanced-exchange-rigidity",
       "environment": "theorem",
       "title": "Balanced exchange rigidity",
       "source": "sections/05-golden-operator.tex",
-      "source_line": 391,
+      "source_line": 580,
       "sha256": "8db1d1d4a438052ec1bc1af41686716f8f2832b86900159762882f278b6dc5a5",
       "tex": "\\begin{theorem}[Balanced exchange rigidity]\n\\label{thm:balanced-exchange-rigidity}\nWith the notation above,\n\\[\n \\Spec(H_Y)=\\Spec\\!\\left(\\frac1qRR^{\\mathsf T}\\right)\n =\\left\\{1-\\frac{\\alpha_1^2}{q},\\ldots,\n          1-\\frac{\\alpha_d^2}{q}\\right\\},\n\\]\nwhere \\(\\alpha_1,\\ldots,\\alpha_d\\) are the eigenvalues of \\(A\\).  The\nspectrum is independent of the balanced half \\(Y\\) if and only if\n\\(d\\leq3\\).  Thus order six is the unique nontrivial realized symmetric\nconference order with this property, and its exchange spectrum is\n\\[\n \\left\\{\\frac15,\\frac45,\\frac45\\right\\}.\n\\]\n\nFor a four-set \\(K\\), let \\(w(K)\\) be the sum of its three signed\nHamilton-cycle products.  Call \\(K\\) \\emph{aligned} if \\(w(K)=3\\); in\nstandard two-graph terminology this is the union of the coherent and\nincoherent four-set types.  Let \\(c_Y\\) count the aligned four-sets in\n\\(Y\\).  Then\n\\[\n \\operatorname{tr}(H_Y)=\\frac{d^2}{q},\\qquad\n \\operatorname{tr}(H_Y^2)=\\frac{F_d+32c_Y}{q^2},\n\\]\nwhere\n\\[\n F_d=dq^2-2qd(d-1)+d(d-1)+12\\binom d3-8\\binom d4.\n\\]\nHence the first exchange moment is universal, whereas the second is\ncut-independent exactly in the stated small orders.\n\\end{theorem}"
     },
@@ -85,7 +103,7 @@
       "environment": "theorem",
       "title": "Aligned-design faithfulness",
       "source": "sections/05-golden-operator.tex",
-      "source_line": 523,
+      "source_line": 729,
       "sha256": "c38edb7d919b509024ba4bdc20386dfc82be05fe1506ec15b1569f11ab7f4708",
       "tex": "\\begin{theorem}[Aligned-design faithfulness]\n\\label{thm:aligned-faithfulness}\nIf \\(|V|\\geq7\\), then \\(\\mathcal A(\\tau)\\) determines \\(\\tau\\) up to\ncomplement, and seven is the least bound with this property.\n\nFor a symmetric conference matrix of order \\(n\\geq10\\), its marked family of\nprincipal four-subsets with determinant \\(-3\\), which is the design of\nGreaves and Suda \\cite[Table~1 and Example~2.3]{GreavesSuda}, therefore\ndetermines its signing up to diagonal switching and global negation.  After\none aligned four-set \\(Q\\) is known, the\n\\[\n 1+4(n-4)+6\\binom{n-4}{2}=3n^2-23n+45\n\\]\ntests on four-sets meeting \\(Q\\) in at least two points suffice, and the\ndecoder in the proof uses exactly this many.  An aligned anchor is found\ndeterministically with at most twenty tests.  Each of those queries reads one\nbit, whether a single fourth-order principal minor equals \\(-3\\); the\nreconstruction consumes no minor value and no minor of any other order.\nOne calibrated triangle product selects between the two global orientations.\n\\end{theorem}"
     },
@@ -99,7 +117,7 @@
       "tex": "\\begin{theorem}[Degree-six harmonic restriction]\n\\label{thm:harmonic-main}\nLet \\(u_{ij}\\), \\(1\\leq i<j\\leq5\\), be the explicitly labelled unit axes\nthrough opposite icosahedral faces in \\eqref{eq:face-axis-labels}, and set\n\\[\n F_y(\\omega)=\\sum_{i<j}(y_i+y_j)P_6(u_{ij}\\mathbin{\\cdot}\\omega).\n\\]\nThe coefficient vectors \\((y_i+y_j)_{i<j}\\) form the Petersen\n\\((-2)\\)-eigenspace, and their zonal harmonics give an injective copy of\n\\(V\\) in the real degree-six spherical-harmonic space \\(\\mathcal H_6\\).\nThe spherical cubic on this copy is\n\\[\n \\frac1{4\\pi}\\int_{S^2}F_y(\\omega)^3\\,d\\omega\n =-\\frac{784000}{1247103}\\sigma_3(y).\n\\]\n\\end{theorem}"
     }
   ],
-  "trust_rows_sha256": "bbd764e31dee9cab11bbc3268b3eab5d667c70ccc2f33074bf31cd4b4feb15f7",
+  "trust_rows_sha256": "cceab0cc4d5792acc2193471da1f46ed4785be78a914244d52e9c7fba5da8d15",
   "trust_rows": [
     {
       "id": "ARITH-1",
@@ -188,22 +206,26 @@
       "id": "OPER-1",
       "theorem_labels": [
         "thm:operator-shadows",
-        "thm:triangle-pfaffian-recognition"
+        "thm:triangle-pfaffian-recognition",
+        "thm:golden-equality-rigidity",
+        "prop:nonsingular-complementary-minors"
       ],
       "clauses": [
         "conference square, triangle holonomy, switching reconstruction, and middle-exterior diagonal",
         "commutator Pfaffian and determinant-square identities",
         "cross-golden determinant description and determinant-line norm over Q(sqrt(5))",
-        "nondegenerate real triangle-Pfaffian proportionality forces order six and a scalar square, with exact sign-locus recognition"
+        "nondegenerate real triangle-Pfaffian proportionality forces order six and a scalar square, with exact sign-locus recognition",
+        "local rigidity of the oriented equality at the golden representative: Jacobian rank fourteen with kernel the scaling line",
+        "sign-locus nondegeneracy characterization: all twenty complementary three-by-three minors nonzero iff the square is five times the identity"
       ],
-      "statement": "For a fully marked golden presentation, the triangle cubic, the diagonal of the middle exterior return, the commutator Pfaffian, and the determinant of the cross-golden block define the same oriented cubic, with Pf[D_x,C_T]=4Z_T, det[D_x,C_T]=16Z_T^2=-8000 N(det(B_T)), and Z_T=plus-or-minus 10 sqrt(5) det(B_T). Conversely, for a real symmetric even-order zero-diagonal matrix with nonzero off-diagonal entries, nonzero proportionality of its commutator Pfaffian and triangle cubic forces order six and A^2=lambda I; on the equal-absolute-value locus this is exactly the pentagon conference class, with the two proportionality signs recording relative orientation.",
+      "statement": "For a fully marked golden presentation, the triangle cubic, the diagonal of the middle exterior return, the commutator Pfaffian, and the determinant of the cross-golden block define the same oriented cubic, with Pf[D_x,C_T]=4Z_T, det[D_x,C_T]=16Z_T^2=-8000 N(det(B_T)), and Z_T=plus-or-minus 10 sqrt(5) det(B_T). Conversely, for a real symmetric even-order zero-diagonal matrix with nonzero off-diagonal entries, nonzero proportionality of its commutator Pfaffian and triangle cubic forces order six and A^2=lambda I; on the equal-absolute-value locus this is exactly the pentagon conference class, with the two proportionality signs recording relative orientation. The equality is locally rigid at either oriented golden representative, its Jacobian having rank fourteen with kernel the scaling line; and on the sign locus the cubic identity may be replaced by the nondegeneracy of all twenty complementary three-by-three minors, which forces the same class and makes the proportionality constant plus or minus four the only value available.",
       "status": "proven",
       "modes": [
         "conceptual",
         "classical-input",
         "formal-partial"
       ],
-      "proof_role": "tight-frame recovery of the classical Bussemaker--Mathon--Seidel order-six switching normal form, matching expansion of the Pfaffian, Hodge middle-exterior comparison, and the golden eigenspace block decomposition.  The scalar-square implication and sign-matrix converse are formalized in the four-shadow gate; the manuscript proves the real positivity statement by translation invariance of the triangle cubic: its tx_i x_j coefficients force A^2 diagonal, and commutation makes that diagonal scalar; equal absolute values then recover the pentagon gauge.  The coherence of the outer six-family and the cross-golden comparison are formalized: each of the six relabelled conference matrices is symmetric with vanishing diagonal, unit off-diagonal squares and square 5*I, the six sign words are distinct and each obeys the four-point identity, and over a commutative ring with two invertible and an invertible square root s of five the commutator of the diagonal matrix with the conference matrix is 2s times the antisymmetric part of the cross-golden block, whence Z^2 = 500 det(B - B^T) and, exactly, Z = 10 s Pf(B - B^T), an identity unchanged by using the other square root of five.  The determinant of the induced map between the two spectral spaces is a determinant-line element; after compatible orientations, the odd-rank contraction is minus its ordinary quadratic field norm.",
+      "proof_role": "tight-frame recovery of the classical Bussemaker--Mathon--Seidel order-six switching normal form, matching expansion of the Pfaffian, Hodge middle-exterior comparison, and the golden eigenspace block decomposition.  The scalar-square implication and sign-matrix converse are formalized in the four-shadow gate; the manuscript proves the real positivity statement by translation invariance of the triangle cubic: its tx_i x_j coefficients force A^2 diagonal, and commutation makes that diagonal scalar; equal absolute values then recover the pentagon gauge.  The coherence of the outer six-family and the cross-golden comparison are formalized: each of the six relabelled conference matrices is symmetric with vanishing diagonal, unit off-diagonal squares and square 5*I, the six sign words are distinct and each obeys the four-point identity, and over a commutative ring with two invertible and an invertible square root s of five the commutator of the diagonal matrix with the conference matrix is 2s times the antisymmetric part of the cross-golden block, whence Z^2 = 500 det(B - B^T) and, exactly, Z = 10 s Pf(B - B^T), an identity unchanged by using the other square root of five.  The determinant of the induced map between the two spectral spaces is a determinant-line element; after compatible orientations, the odd-rank contraction is minus its ordinary quadratic field norm.  The rigidity statement is proved in the manuscript by Euler homogeneity, the multilinear difference rule for the twenty equations, equivariance under the order-sixty stabilizer, a fixed-vector reduction to a five-dimensional space, the displayed reduced table with its minus-five minor, and the constant-rank theorem; its table is certified against the manuscript's own representative and sign convention by a dated evidence bundle retained in the source archive, and the rank statement itself is not formalized.  The sign-locus characterization is proved in the manuscript from two elementary facts about three-by-three sign matrices and the identity relating a complementary block's row inner products to the square, with an exhaustive order-six census as the independent check.",
       "evidence": [
         "sections/05-golden-operator.tex",
         "verification/golden_return_formal.json",

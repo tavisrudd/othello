@@ -23,6 +23,8 @@ EXPECTED_LABELS = (
     "prop:spinor-specialization",
     "thm:operator-shadows",
     "thm:triangle-pfaffian-recognition",
+    "thm:golden-equality-rigidity",
+    "prop:nonsingular-complementary-minors",
     "thm:balanced-exchange-rigidity",
     "thm:aligned-faithfulness",
     "thm:harmonic-main",

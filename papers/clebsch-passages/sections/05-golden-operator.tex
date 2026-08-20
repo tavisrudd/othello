@@ -642,20 +642,37 @@ closed-walk organization used for conference-frame subensembles in
 
 Suppose now that \(d\geq4\) and even the second exchange moment is independent
 of \(Y\).  Then the sums of the aligned-four-set indicator over all balanced
-halves are equal.  The characteristic-zero inclusion matrix from four-sets
-to \(d\)-sets has full column rank \cite[Theorem~1]{JolliffeInclusion}; hence
-the indicator itself is constant on four-sets.  Switch \(C\) so that all
-edges incident with one vertex \(\infty\) are positive.  On
-\(\{\infty,i,j,k\}\), if the remaining edge signs are \(x,y,z\), then
+halves are equal, and the indicator is therefore constant on four-sets.  Only
+this consequence of the rank formula for inclusion matrices
+\cite[Theorem~1]{JolliffeInclusion} is needed, and it follows from a
+one-element exchange: two balanced halves differing in \(a\) versus \(b\) have
+equal sums, so
 \[
- w=xy+xz+yz.
+ \sum_{\substack{S\subset Y\cap Y'\\ |S|=3}}
+   \bigl(f(S\cup\{a\})-f(S\cup\{b\})\bigr)=0
 \]
-If the common value is \(3\), every triangle on the other \(2d-1\) vertices
-is monochromatic.  All its edges have one sign, making the inner product of
-two corresponding conference rows equal to \(2d-2\), a contradiction.  If
-the common value is \(-1\), that two-colouring has no monochromatic triangle;
-the elementary equality \(R(3,3)=6\) gives \(2d-1\leq5\), again a
-contradiction.
+for the aligned indicator \(f\).  That is the same hypothesis one subset size
+lower, for the difference function on the remaining \(2d-2\) points;
+descending on the subset size makes the difference vanish pointwise, and
+one-element exchanges connect all four-sets.
+
+Let \(w\) be the common value of \(w(K)\) and apply the closed-walk count to
+the whole matrix rather than to a half.  Reading the diagonal of \(C^2=qI\)
+gives \(q=2d-1\), so \(\operatorname{tr}(C^4)=2d(2d-1)^2\), while the count
+gives
+\[
+ \operatorname{tr}(C^4)=2d(2d-1)+12\binom{2d}3+8w\binom{2d}4 .
+\]
+Since \(2d(2d-1)^2-2d(2d-1)-12\binom{2d}3=-2d(2d-1)(2d-2)\) and
+\(8\binom{2d}4=2d(2d-1)(2d-2)(2d-3)/3\), dividing by
+\(2d(2d-1)(2d-2)\neq0\) leaves
+\[
+ (2d-3)\,w=-3 .
+\]
+Hence \(w=3\) forces \(2d=2\) and \(w=-1\) forces \(2d=6\), and neither is
+compatible with \(d\geq4\).  At the surviving order the same equation says
+that every four-set of the order-six conference matrix carries weight \(-1\),
+so that matrix has no aligned four-set.
 
 For \(d=1\) the conclusion is immediate, and for \(d=2\) every possible
 two-by-two principal sign block squares to \(I\).  For \(d=3\), if \(\tau\)
