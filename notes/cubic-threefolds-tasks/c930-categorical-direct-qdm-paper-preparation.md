@@ -2,7 +2,30 @@
 
 **Lane:** cubic-threefolds
 
-**Status:** queued; phase 1 proof memo and adversarial audit, then phase 2 manuscript adaptation
+**Status:** active; phase 1 memo complete and adversarially audited; awaiting author decision on phase 2 manuscript adaptation
+
+## Stable entry point
+
+- proof memo and paper architecture:
+  `notes/2026-08-20-c930-categorical-direct-qdm-proof-memo.md`
+
+## Phase 1 result
+
+- The paper has one center-localized block-marker compiler.
+- Its unconditional atomic direct-QDM specialization proves cubic one-step
+  irrationality from Beauville, Iritani, Iritani--Koto, weak factorization,
+  and surface classification, deriving the cubic packet internally.
+- Its finer framed-sixth specialization uses the same compiler and retains
+  5.7R and the residual part of 5.7T as explicit provider fields.
+- The chemical-formula proof is an exact sibling specialization of the same
+  compiler, with its carrier kept distinct from the direct-QDM marker.
+- The current 48-page draft should be refounded rather than layered: target
+  24--28 pages, with the global all-`m` transport and one-chart branches
+  preserved outside the new paper.
+- All three existing exact replays passed.  No manuscript source was edited.
+
+**Next:** stop for the author's decision whether and how to enter phase 2
+under this same C930 item.
 
 ## Goal
 
@@ -28,6 +51,10 @@ either manuscript.  After the memo and adversarial audit are delivered, the
 author decides whether and when this same C930 item changes phase and owns the
 resulting categorical-paper manuscript edits; no successor task is required
 for implementation.
+
+C930 is strictly an \(m=1\) task.  It may identify current \(m=2\) or all-
+\(m\) material for preservation outside the proposed paper, but it does not
+investigate, repair, or extend any higher-stabilization provider.
 
 ## Deliverables
 
