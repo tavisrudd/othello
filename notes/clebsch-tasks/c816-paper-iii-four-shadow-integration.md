@@ -70,7 +70,16 @@ owner, not applied by the audit pass:
    symmetric involution, equivalently a constant-diagonal rank-three projection,
    equivalently an equal-norm tight frame of six vectors in \(\mathbf R^3\); the
    equal-modulus case is the classical conference, regular-two-graph, and
-   equiangular-tight-frame correspondence.
+   equiangular-tight-frame correspondence. **This confirms Theorem D's counts
+   from an independent direction and is a free upgrade to work item 2 sub-item
+   1.** The frame description gives the conference tangent space dimension
+   \(1+(9-5)=5\) — one scaling direction plus \(\dim\mathrm{Gr}(3,6)=9\) minus
+   the five independent constant-diagonal equations — which is exactly the
+   five-dimensional kernel the sixteen-variable conference count reports, and
+   its non-scaling part is exactly the "four" that sub-item 1 wants to stop
+   presenting as a numerical coincidence. Sub-item 1's module statement then
+   says *which* four-dimensional space that is; the dimension itself no longer
+   needs a computation.
 3. The boundary sentence after the theorem names the wrong set. The solutions of
    \(A^2=\lambda I\) at order six form a family of dimension at least four; what
    is unclassified is the set of weighted solutions of the *proportionality*,
