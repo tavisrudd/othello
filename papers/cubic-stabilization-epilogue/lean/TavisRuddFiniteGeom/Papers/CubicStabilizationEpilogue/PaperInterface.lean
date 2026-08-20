@@ -388,6 +388,43 @@ theorem relativeSixAxis_twoPrimaryDiscriminantLatticeModel :
     ⟨GraphLattices.sixAxisSourceTwoPrimaryLatticeEquiv⟩,
     ⟨GraphLattices.sixAxisSourceTwoPrimaryLatticeCoordinates⟩⟩
 
+/-- The discriminant pairing on the two-primary part of the source
+discriminant, read in the kernel of the reduced polarization, and the resulting
+self-duality of the two-primary kernel there.  The adjugate of the source
+polarization is `6⁷` times its integral cofactor, so the discriminant pairing
+of two classes vanishes exactly when six divides the cofactor form of two
+representatives.  Writing two-torsion classes as halves of polarization images,
+`2 v = F y`, that condition becomes divisibility of `y ⬝ F z` by four, and the
+halved value reduces modulo two to the tensor of the dot product on axis
+coordinates with the reduced elliptic homology pairing — the manuscript's
+normalized two-primary pairing.  Since the comparison sends the class of `v` to
+the reduction of `y`, the discriminant pairing of two two-torsion classes
+vanishes exactly when that normalized form of their comparison images does.
+Consequently the image of the two-primary part of the lattice model of the
+isogeny kernel is exactly its own orthogonal complement inside the kernel of
+the reduced polarization, which is the relative maximal isotropy of the
+two-primary kernel read in the model carrying the coefficient heart.  No
+elliptic two-torsion group scheme, Weil pairing, or geometric commutator
+pairing is constructed, and the normalized form is not here identified with the
+rank-eight tensor form in the standard symplectic coordinates. -/
+theorem relativeSixAxis_twoPrimaryDiscriminantPairing
+    (realization : Applications.RelativeSixAxisHomologyRealization) :
+    (GraphLattices.sixAxisSourcePolarization ℤ).adjugate =
+        (6 ^ 7 : ℤ) • GraphLattices.sixAxisSourcePolarizationCofactor ∧
+      (∀ leftClass ∈ GraphLattices.sixAxisSourceDiscriminantPrimaryPart 2,
+          ∀ rightClass ∈ GraphLattices.sixAxisSourceDiscriminantPrimaryPart 2,
+            (GraphLattices.sixAxisSourceDiscriminantPairing leftClass rightClass = 0 ↔
+              GraphLattices.sixAxisReducedTensorForm
+                (GraphLattices.sixAxisSourceTwoPrimaryComparison leftClass)
+                (GraphLattices.sixAxisSourceTwoPrimaryComparison rightClass) = 0)) ∧
+        ∀ vector ∈ GraphLattices.sixAxisSourceTwoPrimaryDiscriminant,
+          ((∀ other ∈ Applications.relativeSixAxisTwoPrimaryKernelImage realization,
+              GraphLattices.sixAxisReducedTensorForm vector other = 0) ↔
+            vector ∈ Applications.relativeSixAxisTwoPrimaryKernelImage realization) :=
+  ⟨GraphLattices.sixAxisSourcePolarization_adjugate,
+    (Applications.relativeSixAxisTwoPrimaryKernelImage_eq_perp realization).1,
+    (Applications.relativeSixAxisTwoPrimaryKernelImage_eq_perp realization).2⟩
+
 /-- The discriminant pairing of the six-axis source polarization on integral
 representatives, and its nondegeneracy.  On the classes of two integral
 vectors the pairing is the class modulo one of the rational number

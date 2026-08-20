@@ -3,6 +3,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAx
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisDiscriminantGroup
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisPrimaryDiscriminantSplitting
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisTwoPrimaryLatticeComparison
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixAxisTwoPrimaryPairing
 
 /-!
 # The relative six-axis packet over its integral homology realization
@@ -268,6 +269,37 @@ theorem relativeSixAxisPrimaryKernelSubgroup_isRelativeMaximalIsotropic
   GraphLattices.sixAxisSourcePrimaryKernelSubgroup_isRelativeMaximalIsotropic
     realization.jacobianPolarizationPrincipal realization.polarizationPullback
 
+/-- The image, in the kernel of the two-torsion reduction of the source
+polarization, of the two-primary part of the lattice model of the isogeny
+kernel on one fibre. -/
+def relativeSixAxisTwoPrimaryKernelImage
+    (realization : RelativeSixAxisHomologyRealization) :
+    Set (Fin 5 × Fin 2 → GraphLattices.F2) :=
+  GraphLattices.sixAxisSourceTwoPrimaryKernelImage realization.polarizationPullback
+
+/-- Across the identification of the two two-primary models, the discriminant
+pairing of two-torsion classes vanishes exactly when the normalized two-primary
+form of their comparison images does, and the image of the two-primary kernel
+is exactly its own orthogonal complement for that form inside the kernel of the
+reduced polarization. -/
+theorem relativeSixAxisTwoPrimaryKernelImage_eq_perp
+    (realization : RelativeSixAxisHomologyRealization) :
+    (∀ leftClass ∈ GraphLattices.sixAxisSourceDiscriminantPrimaryPart 2,
+        ∀ rightClass ∈ GraphLattices.sixAxisSourceDiscriminantPrimaryPart 2,
+          (GraphLattices.sixAxisSourceDiscriminantPairing leftClass rightClass = 0 ↔
+            GraphLattices.sixAxisReducedTensorForm
+              (GraphLattices.sixAxisSourceTwoPrimaryComparison leftClass)
+              (GraphLattices.sixAxisSourceTwoPrimaryComparison rightClass) = 0)) ∧
+      ∀ vector ∈ GraphLattices.sixAxisSourceTwoPrimaryDiscriminant,
+        ((∀ other ∈ relativeSixAxisTwoPrimaryKernelImage realization,
+            GraphLattices.sixAxisReducedTensorForm vector other = 0) ↔
+          vector ∈ relativeSixAxisTwoPrimaryKernelImage realization) :=
+  ⟨fun _ leftMember _ rightMember ↦
+      GraphLattices.sixAxisSourceTwoPrimaryPairing_eq_zero_iff_reducedForm leftMember rightMember,
+    fun _ member ↦
+      GraphLattices.sixAxisSourceTwoPrimaryKernelImage_eq_perp
+        realization.jacobianPolarizationPrincipal realization.polarizationPullback member⟩
+
 /-- The two-primary discriminant identification `D₂ ≃ H₂ ⊗ E[2]`, constructed
 from the two-torsion coordinates and from the computed kernel of the realized
 source polarization rather than supplied. -/
@@ -434,6 +466,24 @@ structure RelativeSixAxisConclusion
               GraphLattices.sixAxisSourcePolarization_det_ne_zero
               (GraphLattices.sixAxisSourceDiscriminantPrimaryPart 3)
               (relativeSixAxisPrimaryKernelSubgroup (geometry.homology parameter) 3)
+  /-- On every fibre, and across the identification of the two two-primary
+  models, the discriminant pairing of two-torsion classes vanishes exactly when
+  the normalized two-primary form of their comparison images does, and the
+  image of the two-primary kernel is exactly its own orthogonal complement for
+  that form inside the kernel of the reduced polarization. -/
+  twoPrimaryPairingAndKernelImage :
+    ∀ (geometry : RelativeSixAxisGeometricInput objects) (parameter : Base),
+      (∀ leftClass ∈ GraphLattices.sixAxisSourceDiscriminantPrimaryPart 2,
+          ∀ rightClass ∈ GraphLattices.sixAxisSourceDiscriminantPrimaryPart 2,
+            (GraphLattices.sixAxisSourceDiscriminantPairing leftClass rightClass = 0 ↔
+              GraphLattices.sixAxisReducedTensorForm
+                (GraphLattices.sixAxisSourceTwoPrimaryComparison leftClass)
+                (GraphLattices.sixAxisSourceTwoPrimaryComparison rightClass) = 0)) ∧
+        ∀ vector ∈ GraphLattices.sixAxisSourceTwoPrimaryDiscriminant,
+          ((∀ other ∈
+              relativeSixAxisTwoPrimaryKernelImage (geometry.homology parameter),
+                GraphLattices.sixAxisReducedTensorForm vector other = 0) ↔
+            vector ∈ relativeSixAxisTwoPrimaryKernelImage (geometry.homology parameter))
   /-- The two-primary discriminant identification `D₂ ≃ H₂ ⊗ E[2]` is
   constructed from the realized polarization rather than supplied: in the
   supplied two-torsion coordinates it is the computed kernel equivalence of the
@@ -561,6 +611,8 @@ theorem relativeSixAxis_of_geometricInputs
           (otherGeometry.homology parameter)).1,
         (relativeSixAxisPrimaryKernelSubgroup_isRelativeMaximalIsotropic
           (otherGeometry.homology parameter)).2⟩,
+    fun otherGeometry parameter ↦
+      relativeSixAxisTwoPrimaryKernelImage_eq_perp (otherGeometry.homology parameter),
     fun otherGeometry parameter _ ↦
       (otherGeometry.heartTensorTorsionCoordinates parameter).apply_symm_apply _,
     fun otherGeometry parameter _ ↦

@@ -188,9 +188,12 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   two-primary discriminant are also identified: reduction modulo two of the
   cofactor image carries the two-torsion part of the cokernel isomorphically
   onto the kernel of the polarization reduced modulo two, hence onto four
-  copies of the rank-two two-torsion module. The orders of the primary parts,
-  `A_5`-stability of `K_p`, compatibility of that identification with the
-  pairing, and the geometric commutator pairing remain supplied.
+  copies of the rank-two two-torsion module, and that identification carries the
+  discriminant pairing to the normalized two-primary form, so the self-duality
+  of `K_2` transports to it. The orders of the primary parts, `A_5`-stability
+  of `K_p`, the isometry with the standard rank-eight form that would apply the
+  five-member packet classification, and the geometric commutator pairing
+  remain supplied.
   Card:
   `../cubic-threefolds-tasks/c910-cubic-stabilization-lean-companion.md`; gap audit
   `../2026-08-18-c910-post-restructure-gap-audit.md`; anchor report
@@ -228,6 +231,8 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   `../2026-08-19-c910-primary-discriminant-splitting.md`;
   two-primary lattice-model report
   `../2026-08-19-c910-two-primary-lattice-model.md`;
+  two-primary pairing report
+  `../2026-08-19-c910-two-primary-pairing.md`;
   interim release report
   `../2026-08-12-c910-partial-lean-release.md`.
 - **C920 — closed 2026-08-18.** Hypothesis 5.7T of the epilogue is now used only
