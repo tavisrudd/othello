@@ -37,6 +37,15 @@ promoted mathematical assertion maps to a kernel-checked declaration.
 
 ## Current status
 
+- **C925 — modular direct-QDM proof packet, active.** Write a self-contained
+  alternative packet organized like a parameterized software interface: a
+  caller chooses which generic even-block data to observe, which blocks to
+  mark, and what commutative-monoid value to retain, while the coefficient,
+  comparison, ledger, and weak-factorization modules remain reusable.  The
+  first concrete instance is the smallest marker proving cubic
+  one-stabilization irrationality.  Mathematics only; no manuscript or Lean
+  edits.  Card:
+  `../cubic-threefolds-tasks/c925-modular-direct-qdm-proof-packet.md`.
 - **C924 — closed 2026-08-19.** The direct ordinary-QDM route proves
   irrationality of `X x P^1` after one mandatory local repair: compare the
   intrinsic and asymptotic projective-bundle QDMs through Iritani--Koto's
