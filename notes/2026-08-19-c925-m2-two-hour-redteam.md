@@ -653,3 +653,245 @@ graph \(K(e_0+e_1)\), which belongs to the transported shadows while retaining
 an exceptional component.  Therefore a simultaneous-splitting/Beck--Chevalley
 comparison, or a direct global moderation theorem, is required in addition
 to the path functor.  The exact sheared-shadow countermodel is green.
+
+### Theorem 4.2 -- punctual Fourier support from global growth
+
+For a finite exponential polynomial
+
+\[
+f(z)=\sum_{\phi\in\Phi}p_\phi(z)e^{\phi z},
+\]
+
+polynomial growth on every complex ray forces \(p_\phi=0\) for every
+\(\phi\ne0\).  Choose a nonzero exposed vertex of the convex hull of the
+remaining exponent support and a ray on which it is the unique positive
+maximum; its term exponentially dominates.  This is the holonomic/Fourier
+version of Theorem 4.1: the inverse Fourier support must be punctual at zero.
+
+The theorem does not say that an arbitrary relative-cap Gamma channel is a
+finite exponential polynomial or has global polynomial growth.  Those are
+the new provider obligations.  The negative-degree tail fails the growth
+test exactly on the ray where \(e^{-R}\) grows.
+
+### Theorem 4.3 -- exposed-face filtration law
+
+For a scalar finite-support group algebra over a domain and an additive real
+weight \(w:\Gamma\to\mathbf R\), the top weight and initial face satisfy
+
+\[
+\nu_w(fg)=\nu_w(f)+\nu_w(g),\qquad
+\operatorname{in}_w(fg)
+=\operatorname{in}_w(f)\operatorname{in}_w(g).
+\]
+
+Set \(\nu_w(0)=-\infty\) and \(\operatorname{in}_w(0)=0\).  Under addition,
+equal top weights drop exactly when the two top initial forms sum to zero;
+unequal top weights cannot cancel.  The 28-check harness verifies a finite
+convolution and an exact top-face cancellation.  This gives a bounded target
+for the relative-cap route: group only the relative channels on the forbidden
+exposed face and prove that their scalar point-row initial forms sum to zero.
+Lower-weight channels cannot help.  The domain condition is essential, so
+the operation must be performed after scalar point pairing rather than
+blindly in a cohomology ring with zero divisors.  What is proved here is an
+algebraic multiplicative shadow; a categorical filtered-monoidal functor
+would additionally require a specified category and morphism action.
+
+## Hostile audit 4 -- splitting and many sectors do not erase Stokes data
+
+This audit was taken at the eighty-minute boundary.
+
+### Step verdicts
+
+| step | status | hostile finding |
+|---|---|---|
+| fivefold center-dimension reduction | **proved** | Only codimension-two threefold centers can carry primitive-sixth multiplicity. |
+| birational normal splitting | **proved reduction** | Ambient modifications produce a line filtration and a deformation to a split bundle; every inserted correction center has empty primitive-sixth multiplicity. |
+| row purity on inserted arrows | **open** | Empty center multiplicity does not prevent a Stokes shear from changing the ambient Gamma row. |
+| split-nef Kummer theorem | **proved in its stated scope** | The reciprocal-Gamma zero kills the exceptional point coefficient for two nef line-bundle sections. |
+| arbitrary split or nonsplit normal bundle | **open** | The \((-1,0)\) pilot leaves a nonzero exponential tail; relative contact-order cancellations are required and unproved. |
+| multi-sector formal intersection | **proved/tested** | Jointly separating coordinate half-space shadows recover the zero formal block. |
+| multi-sector Stokes application | **conditional** | Parallel transport alone forgets the filtration embedding.  A graph shear is an exact countermodel; a simultaneous splitting or global growth theorem is still needed. |
+| punctual Fourier/growth criterion | **proved for finite exponential polynomials** | It is useful only after proving that the actual Gamma channel has that form and the required raywise growth. |
+| exposed-face filtration | **proved/tested over a scalar domain** | It reduces cancellation to the top relative channels but does not prove their initial forms cancel. |
+| \(m=2\) | **not proved** | The relative-cap point-purity/output-support provider remains absent. |
+
+The first attempted multi-sector shortcut failed its hostile test.  A family
+of formal half-space projections is jointly conservative, but the actual
+sectorial inclusions carry a Stokes optic residual.  Mapping all paths to one
+fiber without mapping that residual is precisely the kind of forgotten-path
+hypothesis the framework was designed to expose.
+
+The holonomic reformulation is honest but not cheaper for free.  Global
+polynomial growth of a finite exponential polynomial forces punctual inverse
+Fourier support, yet no source proves either finiteness of the relevant
+relative-cap exponential support or global moderation of the normalized
+Gamma point channel.  The raw negative-degree model violates the proposed
+growth condition and is therefore a falsifier, not evidence.
+
+### EJ -- extra juice
+
+1. The relative-cap gate now has a finite associated-graded target at each
+   retained Novikov coefficient: compute only the forbidden exposed face and
+   its scalar point-row coefficient.  Lower faces are irrelevant.
+2. Any cancellation proof must exhibit another relative channel on the same
+   exponent face with coefficient \(+1/R\) against the pilot's \(-1/R\).
+   This is a far smaller search than reconstructing the full Stokes matrix.
+3. The fivefold dimension bound remains valuable: only rank-two normals of
+   threefold centers require this analysis.  Higher-codimension correction
+   centers are regressions for row purity, not new primitive carriers.
+
+### TT -- Terence-Tao pass
+
+- Do not replace “normally crossing” by “split normal,” or “split” by
+  “split nef.”  Each lost adjective is a distinct false implication.
+- Do not infer point-row purity from empty unmarked center spectrum.
+- Treat the contact-order filtration as an associated graded object and ask
+  for the first nonzero forbidden face.  A unique nonzero face would be an
+  immediate counterexample; a cancellation must be shown at that face.
+- Before promoting the relative-cap route, read and audit the actual
+  degeneration/ancestor formulas; deformation invariance of scalar GW
+  invariants does not track a fixed-phase Gamma row.
+
+### Audit-4 boundary
+
+**No unconditional \(m=2\) theorem has been obtained.**  The new formal and
+holonomic theorems supply useful specializations and a sharp bounded
+falsifier, but the same analytic content reappears as either simultaneous
+Stokes splitting, global moderation/punctual Fourier support, or exposed-face
+relative-cap cancellation.  None is currently proved for arbitrary
+codimension-two centers.
+
+## Block 5 -- sparse-shadow reconstruction and endpoint forcing
+
+The full `papers/summary/README.md` was read through before importing any
+cross-paper analogy.  Its successful sparse reconstructions share one of two
+features:
+
+1. a completeness theorem proves that the selected shadows have singleton
+   reconstruction fibres; or
+2. an explicit marking, frame, orientation, or bridge is retained to choose a
+   lift through a residual fibre.
+
+The counterexamples in that corpus have the complementary form.  A sheet
+without its marked bridge does not recover a source; chordal and conference
+shadows retain a residual \(C_2\)-torsor before marking; unframed singular
+values forget orientation; and scalar contractions can be constant while an
+operator-valued frame still varies.  The lesson is not a generic theorem that
+many shadows reconstruct everything.  It is that reconstruction succeeds
+only after joint conservativity or the missing residual has itself been made
+part of the data.
+
+### Theorem 5.1 -- torsor holonomy is the exact path obstruction
+
+For a connected graph equipped with right \(G\)-torsor fibres and
+\(G\)-equivariant edge transports, a chosen base lift extends to a compatible
+global lift exactly when every based-loop holonomy fixes it.  A tree always
+admits propagation from one base choice, but with both endpoint lifts fixed an
+interval admits a compatible lift exactly when transport maps the first
+endpoint to the second.  A path functor pulls this obstruction back; it does
+not make it vanish.
+
+This theorem is exact and its \(C_2\) tree/triangle/endpoint model is green.
+Its QDM use is conditional: the candidate affine row-line stabilizer becomes
+the fibre group only after a common row carrier and its transports have been
+constructed.  Weak factorization being a chain therefore permits propagation
+of an arbitrary row lift but does not identify the propagated endpoint with
+the intrinsic Gamma row.  Overlap squares add precisely the holonomy whose
+triviality is the marked Beck--Chevalley gate.
+
+### Theorem 5.2 -- a simple retained character forces the row
+
+Let \(A\) be a \(K\)-algebra with character \(\chi:A\to K\).  If
+
+\[
+\operatorname{Hom}_A(V_\pm,K_\chi)=K r_\pm
+\]
+
+and \(\Phi:V_-\to V_+\) is an \(A\)-linear isomorphism, then
+\(r_+\Phi=c r_-\) for a unique \(c\ne0\).  This is the augmented row law, and
+the scalars compose.  The proof is the one-dimensionality of the displayed
+Hom spaces.  The exact finite test is green; a repeated-character shear shows
+why multiplicity one is necessary.
+
+This unifies three useful prospective projections:
+
+| retained action | selected character | remaining provider obligation |
+|---|---|---|
+| common-open support idempotent | generic component | construct a QDM realization of localization and prove comparison linearity |
+| cohomological/asymptotic grading | unique top/rank weight | prove the fixed-phase Gamma comparison preserves that grading |
+| finite Fourier-support algebra | evaluation at exponent zero | identify one global normalized Gamma channel with this realization |
+
+Hodge equivariance does not meet the theorem: its trivial character is
+repeated on all Tate directions.  Primitive-sixth formal monodromy also has a
+repeated covector space on exceptional packets.  No audited source proves
+linearity for one of the separating actions in the table.
+
+### Corollary 5.3 -- finite rational growth certificate
+
+The exposed-vertex theorem also works for rational coefficients such as
+\(1/R\), since a nonzero rational function has only polynomial growth or
+decay along a ray away from finitely many poles.  For a fixed finite candidate
+exponent set, finitely many rays suffice: choose an exposing ray for every
+possible nonempty residual support.  This places the pilot coefficient
+\(-1/R\) directly inside the theorem and turns global moderation into a
+finite test once one global finite-support channel has been built.  The
+existence and growth of that channel remain open.
+
+## Hostile audit 5 -- a path lift is not the canonical row
+
+This audit was taken after 6008 seconds of active goal time, just beyond the
+one-hundred-minute boundary.
+
+| step | status | hostile finding |
+|---|---|---|
+| full sparse-shadow summary audit | **completed** | No forgotten generic reconstruction theorem appears.  Each positive precedent proves completeness or retains the residual marking/frame. |
+| torsor-holonomy theorem | **proved/tested** | It controls lifts only after a torsor local system has been supplied. |
+| weak-factorization path is a tree | **proved but insufficient** | A tree propagates any base lift; it does not force the propagated lift to equal the independently canonical Gamma endpoint. |
+| QDM row lifts form the candidate affine torsor | **conditional** | Proposition 19.3B identifies the stabilizer after a common carrier exists; it does not construct the carrier or transition maps. |
+| simple-character row theorem | **proved/tested** | One-dimensional \(\operatorname{Hom}_A(-,K_\chi)\) forces the row line under an \(A\)-linear comparison. |
+| Hodge or formal-monodromy specialization supplies that character | **false/unproved** | Hodge has repeated trivial Tate characters; formal monodromy has no proved multiplicity-one row character on the relevant exceptional packets. |
+| common-open, grading, or punctual action | **conditional candidates** | No audited fixed-phase Gamma blowup comparison is known to preserve one of these separating actions. |
+| rational/finite-ray growth certificate | **proved** | It includes \(1/R\) and reduces a known finite support to finitely many rays, but it neither constructs nor bounds the actual global relative-cap channel. |
+| strict decorated dual descent | **conditional with repaired typing** | Exact duality and strict kernels are insufficient unless the generated cyclic-row objects have functorial strict saturations. |
+| exposed-face law | **proved after repair** | The weight must be additive, zero has value \(-\infty\), and equal top weights drop exactly on cancellation.  The result is algebraically multiplicative, not automatically a categorical monoidal functor. |
+| \(m=2\) | **not proved** | Every new route still needs either a separating-action provider or the same-face relative-cap cancellation theorem. |
+
+The independent modular red-team checked Proposition 19.3B, Theorems
+21.1--21.4, and the repaired strict-duality statements.  It found no hidden
+Gamma/Orlov or Stokes promotion.  Its one load-bearing algebraic objection to
+Theorem 21.5 was accepted: an arbitrary function called a weight does not make
+the valuation multiplicative.  The statement now requires a group
+homomorphism and includes the zero convention.  Its exact-category objection
+was also accepted through the explicit strict-saturation hypothesis.
+
+### EJ -- extra juice
+
+1. The provider can now be compressed in a third way: instead of a full
+   Gamma--Orlov square or full Stokes object, it is enough to give one
+   separating \(A\)-action with a multiplicity-one row character and prove
+   comparison linearity.
+2. Generic-open support is the cleanest such candidate because every Orlov
+   exceptional object is already killed there.  The exact missing datum is a
+   QDM realization of that localization, not another abstract category.
+3. The relative-cap alternative is finite once its exponent support is
+   bounded: only the forbidden exposed face and finitely many rays remain.
+
+### TT -- Terence-Tao pass
+
+- Ask for a uniqueness characterization of the row, not a coordinate formula
+  for the whole comparison matrix.
+- Check the multiplicity of the proposed character before claiming that an
+  intertwiner preserves a distinguished line.  Repeated Tate or
+  primitive-sixth characters permit shears.
+- Do not use contractibility of a comparison path to erase prescribed
+  endpoint data.  This is the boundary-value version of hypothesis smuggling.
+- For the next geometric pass, test whether the actual fixed-phase map
+  preserves a top-degree/asymptotic-rank filtration.  If it does not, return
+  to the scalar exposed face rather than adding more categorical structure.
+
+### Audit-5 boundary
+
+**No unconditional \(m=2\) theorem has been obtained.**  Category theory has
+reduced the provider to either one multiplicity-one retained character or one
+finite same-face cancellation.  Neither geometric input is in the audited
+sources, and neither has been assumed.

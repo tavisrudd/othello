@@ -701,6 +701,82 @@ def main():
     assert (Fraction(1), Fraction(1)) in stokes_sheared_line
     checks["sector_path_transport_needs_stokes_optic_residual"] = "pass"
 
+    # Exposed exponential faces are multiplicative; addition is only
+    # filtered because equal top faces may cancel.  Exponents are integers
+    # and coefficients exact rationals in this finite group-algebra model.
+    def exponential_product(
+        left: dict[int, Fraction], right: dict[int, Fraction]
+    ) -> dict[int, Fraction]:
+        answer: dict[int, Fraction] = {}
+        for left_exponent, left_coefficient in left.items():
+            for right_exponent, right_coefficient in right.items():
+                exponent = left_exponent + right_exponent
+                answer[exponent] = answer.get(exponent, Fraction(0)) + (
+                    left_coefficient * right_coefficient
+                )
+        return {
+            exponent: coefficient
+            for exponent, coefficient in answer.items()
+            if coefficient != 0
+        }
+
+    negative_degree_tail = {0: Fraction(1), -1: Fraction(-1)}
+    second_factor = {0: Fraction(1), 2: Fraction(3)}
+    product = exponential_product(negative_degree_tail, second_factor)
+    growth_weight = lambda exponent: -exponent
+    tail_face = max(negative_degree_tail, key=growth_weight)
+    second_face = max(second_factor, key=growth_weight)
+    product_face = max(product, key=growth_weight)
+    assert product_face == tail_face + second_face
+    assert product[product_face] == (
+        negative_degree_tail[tail_face] * second_factor[second_face]
+    )
+    cancelling_top_face = {-1: Fraction(1), 0: Fraction(2)}
+    summed = {
+        exponent: negative_degree_tail.get(exponent, Fraction(0))
+        + cancelling_top_face.get(exponent, Fraction(0))
+        for exponent in negative_degree_tail.keys() | cancelling_top_face.keys()
+    }
+    summed = {exponent: value for exponent, value in summed.items() if value != 0}
+    assert max(summed, key=growth_weight) == 0
+    checks["exponential_initial_face_filtered_monoidal_laws"] = "pass"
+
+    # Comma-bridge descent: a high retained carrier surjects onto the QDM
+    # carrier, its output kills the realization kernel, and a commuting
+    # bridge square forces the row law downstairs.  If the output does not
+    # kill the kernel, no descended row can exist.
+    gamma_realization = [
+        [Fraction(1), 0, 0],
+        [Fraction(0), 1, 0],
+    ]
+    high_transition = [
+        [Fraction(1), 0, 0],
+        [Fraction(2), 3, 0],
+        [Fraction(0), 0, 4],
+    ]
+    qdm_transition = [
+        [Fraction(1), 0],
+        [Fraction(2), 3],
+    ]
+    high_output = [[Fraction(1), 0, 0]]
+    descended_row = [[Fraction(1), 0]]
+    assert matrix_multiply(qdm_transition, gamma_realization) == matrix_multiply(
+        gamma_realization, high_transition
+    )
+    assert matrix_multiply(descended_row, gamma_realization) == high_output
+    assert matrix_multiply(high_output, high_transition) == high_output
+    assert matrix_multiply(descended_row, qdm_transition) == descended_row
+    non_descending_output = [[Fraction(1), 0, 1]]
+    realization_kernel_vector = [[Fraction(0)], [Fraction(0)], [Fraction(1)]]
+    assert matrix_multiply(gamma_realization, realization_kernel_vector) == [
+        [Fraction(0)],
+        [Fraction(0)],
+    ]
+    assert matrix_multiply(
+        non_descending_output, realization_kernel_vector
+    ) == [[Fraction(1)]]
+    checks["comma_bridge_forces_descended_augmented_row"] = "pass"
+
     # Hodge equivariance, a preserved pairing, and an intertwined primary
     # operator do not by themselves preserve a point/rank row.  All four
     # basis directions may be Tate, so the Hodge action is trivial.  The
@@ -869,6 +945,72 @@ def main():
     assert reconstruct(residualize(rich_plus)) == rich_plus
     assert reconstruct(residualize(rich_minus)) == rich_minus
     checks["optic_residual_and_path_functor_naturality"] = "pass"
+
+    # A residual torsor can be propagated along a tree, but a loop has a
+    # compatible global lift exactly when its holonomy is trivial.  Pulling a
+    # path theory back changes which loops are visible; it does not turn a
+    # prescribed endpoint mismatch into a proof.
+    def z2_transport(label, value):
+        return (value + label) % 2
+
+    tree_edge_labels = (1, 0)
+    tree_lift = [0]
+    for edge_label in tree_edge_labels:
+        tree_lift.append(z2_transport(edge_label, tree_lift[-1]))
+    assert tree_lift == [0, 1, 1]
+    assert z2_transport(sum(tree_edge_labels) % 2, tree_lift[0]) == tree_lift[-1]
+
+    triangle_edge_labels = (1, 0, 0)
+    triangle_holonomy = sum(triangle_edge_labels) % 2
+    assert triangle_holonomy == 1
+    assert all(
+        z2_transport(triangle_holonomy, base_lift) != base_lift
+        for base_lift in (0, 1)
+    )
+
+    pulled_interval_labels = triangle_edge_labels[:2]
+    pulled_endpoint = 0
+    for edge_label in pulled_interval_labels:
+        pulled_endpoint = z2_transport(edge_label, pulled_endpoint)
+    assert pulled_endpoint == 1
+    assert pulled_endpoint != 0  # a prescribed canonical endpoint mismatch
+    checks["torsor_path_holonomy_and_endpoint_obstruction"] = "pass"
+
+    # If a retained algebra character occurs on a unique covector line, every
+    # intertwiner preserves that row line.  Repeated characters permit the
+    # Hodge/Tate shear above and therefore do not meet this hypothesis.
+    separating_operator = [
+        [Fraction(0), Fraction(0), Fraction(0)],
+        [Fraction(0), Fraction(1), Fraction(0)],
+        [Fraction(0), Fraction(0), Fraction(2)],
+    ]
+    separating_intertwiner = [
+        [Fraction(3), Fraction(0), Fraction(0)],
+        [Fraction(0), Fraction(4), Fraction(0)],
+        [Fraction(0), Fraction(0), Fraction(5)],
+    ]
+    unique_character_row = [Fraction(1), Fraction(0), Fraction(0)]
+    assert matrix_multiply(
+        separating_intertwiner, separating_operator
+    ) == matrix_multiply(separating_operator, separating_intertwiner)
+    assert matrix_multiply(
+        [unique_character_row], separating_intertwiner
+    )[0] == [Fraction(3), Fraction(0), Fraction(0)]
+    repeated_character_operator = [
+        [Fraction(0), Fraction(0)],
+        [Fraction(0), Fraction(0)],
+    ]
+    repeated_character_shear = [
+        [Fraction(1), Fraction(1)],
+        [Fraction(0), Fraction(1)],
+    ]
+    assert matrix_multiply(
+        repeated_character_shear, repeated_character_operator
+    ) == matrix_multiply(repeated_character_operator, repeated_character_shear)
+    assert matrix_multiply(
+        [[Fraction(1), Fraction(0)]], repeated_character_shear
+    )[0] == [Fraction(1), Fraction(1)]
+    checks["simple_retained_character_forces_row_line"] = "pass"
 
     # The m=2 specialization retains primitive-sixth support seen by the
     # point row, not the unmarked primitive packet count.  Row-null exceptional

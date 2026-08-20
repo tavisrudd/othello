@@ -2770,11 +2770,13 @@ exact-row stabilizer is the subgroup \(c=1\), isomorphic to
 \(H\rtimes\operatorname{GL}(H)\).  The proof is obtained by applying \(r\)
 to \(T(s)\) and \(T(H)\), followed by direct composition.
 
-This identifies the optic residual precisely.  The Boolean consumer sees
-only the scalar \(c\); the translation \(u\) and kernel automorphism \(A\)
-are lawful hidden state.  A provider therefore need not calculate them, but
-row preservation cannot reconstruct them.  This is the group-level version
-of the non-implications in (21.24).
+These coordinates depend on the choice of \(s\), although the parabolic and
+its row-line character are canonical.  The augmented output functor records
+the scalar \(c\); the final nonzero Boolean ignores its value once
+\(c\in K^\times\) has been certified.  The translation \(u\) and kernel
+automorphism \(A\) are lawful hidden state.  A provider therefore need not
+calculate them, but row preservation cannot reconstruct them.  This is the
+group-level version of the non-implications in (21.24).
 
 ## 19.4 The monadic nilpotent-operation specialization
 
@@ -3484,42 +3486,53 @@ not assert them.
 
 ### Corollary 20.3B -- the exact hypothesis for strict decoration
 
-Let the data of Theorem 20.3A live in a \(K\)-linear exact category equipped
-with whatever Rees, connection, deck, or Stokes decoration is to be retained.
-Assume that
+Let the data of Theorem 20.3A live in a \(K\)-linear exact category
+\(\mathcal E\) equipped with whatever Rees, connection, deck, or Stokes
+decoration is to be retained.  Fix an exact category \(\mathcal E^\vee\) of
+decorated rows and a contravariant functor
+\(D_L:\mathcal E^{\mathrm{op}}\to\mathcal E^\vee\) whose underlying module
+functor is \(\operatorname{Hom}(-,L)\).  Assume that
 
 1. \(0\to V\to M\xrightarrow q\overline M\to0\) is an admissible strict
    exact sequence in that decorated category;
 2. \(T\), \(r\), and the deck action are morphisms of the retained
    decoration; and
-3. the contravariant row functor \(D_L=\operatorname{Hom}(-,L)\) sends this
-   particular sequence to the strict exact sequence
+3. \(D_L\) sends this particular sequence to the strict exact sequence in
+   \(\mathcal E^\vee\)
 
    \[
    0\longrightarrow D_L(\overline M)
    \xrightarrow{q^*}D_L(M)\longrightarrow D_L(V).
    \tag{20.20c}
    \]
+4. the row-generated cyclic objects are defined by strict saturation in
+   \(\mathcal E^\vee\), these strict saturations exist, and strict
+   isomorphisms preserve them.
 
 Then (20.20a) is an isomorphism of decorated cyclic-row objects, not merely
 of underlying modules.
 
 Indeed, the proof of Theorem 20.3A takes place inside the strict kernel in
-(20.20c), and every displayed generator is decoration-compatible.  This
-corollary is deliberately conditional on strict dual exactness.  Finite local
+(20.20c), every displayed generator is decoration-compatible, and condition
+4 promotes the resulting equality of generated underlying modules to the
+required strict cyclic-row subobjects.  This corollary is deliberately
+conditional on strict dual exactness and strict saturation.  Finite local
 freeness of the underlying quotient does not by itself prove compatibility
 with a Stokes filtration or identify the two endpoint boundary maps.  Thus
-(20.20c) is the exact categorical interface an analytic zero-mode provider
-must implement; it is not supplied by the algebraic quotient lemma.
+(20.20c), together with condition 4, is the exact categorical interface an
+analytic zero-mode provider must implement; it is not supplied by the
+algebraic quotient lemma.
 
 ### Corollary 20.3C -- rigid exact categories discharge dual exactness
 
 In Corollary 20.3B, condition 3 is automatic if the retained decorated
-category is rigid exact and \(D_L=(-)^\vee\otimes L\) is an exact
-contravariant duality.  Indeed, an exact duality sends every admissible
-cokernel diagram to an admissible kernel diagram.  This includes the
-finite-dimensional filtered/Stokes setting once the proposed sequence is
-already known to be strict and the objects are dualizable; it is also the
+category is rigid exact monoidal, dualization is exact, and tensoring by
+\(L\) is exact, so that \(D_L=(-)^\vee\otimes L\) is an exact
+contravariant functor.  Indeed, such an exact dual sends every admissible
+cokernel diagram to an admissible kernel diagram.  This applies to the
+finite-dimensional filtered/Stokes setting only after exactness of the
+decorated dual and tensor functors has been verified and the proposed
+sequence is already known to be strict; it is also the
 local algebra behind dualizing a short exact sequence of finite locally free
 Rees modules with locally free quotient.
 
@@ -3615,9 +3628,11 @@ primitive-sixth primary factor.  The useful chain is
 \xrightarrow{\ e_{\zeta_6}(T)\ }
 \mathsf{CycPrim}^{\mathrm{pointed}}_{\zeta_6}
 \xrightarrow{\ \operatorname{AugRow}\ }
-\mathsf{AugPrim}_{\zeta_6}
-\xrightarrow{\ \ne0\ }
-\mathbf B.
+\mathsf{AugPrim}_{\zeta_6},
+\qquad
+\operatorname{Core}(\mathsf{AugPrim}_{\zeta_6})
+\xrightarrow{\ [r\ne0]\ }
+\mathbf B_{\mathrm{disc}}.
 \tag{21.2}
 \]
 Here an object of \(\mathsf{AugPrim}_{\zeta_6}\) is the
@@ -3635,6 +3650,11 @@ b_{\zeta_6}(Y)
 \end{cases}
 \tag{21.3}
 \]
+
+The Boolean is an isomorphism-class marker on the core, not a functor on the
+full preadditive category: a zero morphism can exist between objects with
+different Booleans.  Every path comparison used below is an isomorphism in
+this core, or in the core of the lawful quotient category.
 
 The first two categories in (21.2) are provider categories.  They retain
 analytic structure needed to construct a lawful comparison.  The final two
@@ -3990,13 +4010,18 @@ zero row, so the right-hand Boolean is exactly \(b_{\zeta_6}(Y)\).  Invert the
 same augmented-row isomorphism for a backward weak-factorization arrow and
 compose along the finite path.  The endpoint contradiction is immediate. ∎
 
-Theorem 21.1 is conditional, but its provider is strictly smaller than the
-gauged-master package:
+Theorem 21.1 is conditional.  Its statement names fewer intermediate
+structures than the gauged-master package:
 
 - it needs no arbitrary-master gauged admissibility;
 - it needs no threshold atlas, reduced nearby cycles, or zero-mode theorem;
 - it needs no global ideal or quotient; and
 - it permits a nonzero scalar rescaling \(c_\varphi\).
+
+This is a comparison of interface fields, not a proved logical ordering of
+hypotheses.  Constructing the end-to-end analytic continuation in (21.15)
+may require the same Stokes or zero-mode analysis hidden inside a different
+provider.
 
 Its sole analytic input is still substantial: identify the intrinsic
 large-radius Gamma row with the exceptional-cusp formal decomposition and
@@ -4250,6 +4275,423 @@ so one cannot assert the required multi-sector moderation.  In the nonsplit
 case the relative-cap point-purity lemma would supply items 2--3, but that
 lemma is currently open.  Thus Theorem 21.3 is a new alternative interface
 for the same missing analytic content, not an \(m=2\) proof.
+
+## 21.14 A holonomic/Fourier specialization of the same reconstruction law
+
+The multi-sector criterion has a useful exact analytic avatar.
+
+### Theorem 21.4 -- global polynomial growth forces punctual exponential support
+
+Let \(E\) be a finite-dimensional complex vector space and let
+
+\[
+f(z)=\sum_{\phi\in\Phi}p_\phi(z)e^{\phi z},
+\tag{21.28}
+\]
+
+where \(\Phi\subset\mathbf C\) is finite and every \(p_\phi\) is an
+\(E\)-valued polynomial.  Suppose that on every ray
+\(z=re^{i\theta}\), the function \(f\) has polynomial growth as
+\(r\to+\infty\).  Then \(p_\phi=0\) for every \(\phi\ne0\); equivalently,
+\(f\) is a polynomial.
+
+### Proof
+
+Assume some nonzero exponential remains.  The finite polytope
+\(\operatorname{conv}(\{0\}\cup\{\phi:p_\phi\ne0\})\) has a nonzero exposed
+vertex \(\phi_0\).  Choose \(\theta\) so that
+\(\operatorname{Re}(e^{i\theta}\phi)\) has a unique positive maximum at
+\(\phi_0\).  After applying a linear functional on \(E\) which does not kill
+the leading coefficient of \(p_{\phi_0}\), the \(\phi_0\)-term dominates
+all other terms by an exponential factor on that ray.  It cannot have
+polynomial growth, a contradiction. ∎
+
+### Corollary 21.4A -- rational coefficients and finitely many test rays
+
+The same conclusion holds when the nonzero \(p_\phi\) are \(E\)-valued
+rational functions: choose the exposing ray away from their finitely many
+poles.  After a scalar functional has selected a nonzero coordinate, a
+rational coefficient has a nonzero Laurent leading term at infinity, hence
+only polynomial growth or decay; it cannot cancel exponential domination.
+This includes coefficients such as \(1/R\) in the negative-degree pilot.
+
+Moreover, for a fixed finite candidate set \(\Phi\), polynomial growth need
+only be tested on finitely many rays.  For every nonempty subset
+\(S\subseteq\Phi\setminus\{0\}\), choose one direction which has a unique
+positive maximum at a nonzero exposed vertex of
+\(\operatorname{conv}(\{0\}\cup S)\).  The resulting finite family contains
+an exposing ray for the actual nonzero support, whatever subset it is.
+
+This is a finite analytic certificate only after one global function with
+candidate support contained in \(\Phi\) has been constructed.  Unrelated
+sectorial germs do not meet the premise, and the corollary supplies neither
+their gluing nor their growth estimates.
+
+Under Fourier--Laplace transform, (21.28) is the solution generated by a
+finite-length holonomic object supported on \(\Phi\); Theorem 21.4 says that
+global polynomial growth forces that support to be punctual at the ambient
+exponent \(0\).  Thus another lawful specialization of the modular packet is
+
+\[
+\mathsf{ExpHol}
+\xrightarrow{\ \operatorname{FL}^{-1}\ }
+\mathsf{Hol}_{\mathrm{fin}}(\mathbf A^1)
+\xrightarrow{\ \Gamma_{\{0\}}\ }
+\mathsf{Vect},
+\tag{21.29}
+\]
+
+where the middle functor takes the punctual subobject supported at zero.
+Finite support itself is only lax under addition or convolution because top
+coefficients can cancel.  Its convex-hull/Newton polytope is monoidal under
+convolution over a domain, while the associated-graded face retained in
+Theorem 21.5 records the coefficients needed to detect cancellation.
+
+For the blowup problem this is again a conditional interface.  One would
+need the normalized Gamma point channel, coefficientwise in the retained
+Novikov variables, to have the finite exponential-polynomial form (21.28)
+and polynomial growth on a separating set of rays.  The split-nef Kummer
+pilot has exactly this form.  The negative-degree tail \(e^{-R}/R\) violates
+the growth premise, and no audited source proves the required punctual
+Fourier support for arbitrary relative caps.  The theorem therefore gives a
+sharp falsifier and a possible holonomic specialization, not the missing
+provider.
+
+### Theorem 21.5 -- exposed exponential faces form a filtered-monoidal shadow
+
+Let \(k\) be an integral domain, let \(\Gamma\) be a torsion-free abelian
+group, and consider its finite-support group algebra \(k[\Gamma]\).  For an
+additive weight (group homomorphism) \(w:\Gamma\to\mathbf R\) and nonzero
+\(f=\sum_\gamma a_\gamma[\gamma]\), define
+
+\[
+\nu_w(f)=\max_{a_\gamma\ne0}w(\gamma),\qquad
+\operatorname{in}_w(f)
+=\sum_{w(\gamma)=\nu_w(f)}a_\gamma[\gamma].
+\tag{21.30}
+\]
+
+Put \(\nu_w(0)=-\infty\), with the usual extended-addition convention, and
+\(\operatorname{in}_w(0)=0\).  For nonzero \(f,g\),
+
+Then
+
+\[
+\nu_w(fg)=\nu_w(f)+\nu_w(g),\qquad
+\operatorname{in}_w(fg)
+=\operatorname{in}_w(f)\operatorname{in}_w(g).
+\tag{21.31}
+\]
+
+For sums,
+
+\[
+\nu_w(f+g)\le\max\{\nu_w(f),\nu_w(g)\},
+\tag{21.32}
+\]
+
+If \(\nu_w(f)=\nu_w(g)\), the inequality is strict exactly when
+\(\operatorname{in}_w(f)+\operatorname{in}_w(g)=0\).  If their top weights
+are unequal, the inequality is an equality.  These are the standard
+associated-graded laws for the weight filtration.  Indeed, the supports of
+\(f\) and \(g\) generate a finitely generated torsion-free subgroup of
+\(\Gamma\), hence a free abelian group; its group algebra over \(k\) is a
+domain, so the product of two nonzero initial forms is nonzero.  Additivity of
+\(w\) then gives (21.31).
+
+Thus the exposed-face assignment is a multiplicative filtered shadow on
+group-algebra elements.  It becomes a filtered-monoidal specialization only
+after a category and its action on morphisms have separately been specified;
+no such categorical upgrade is used here.  Reader supplies \(w\), indexed
+State stores the current support face, and Writer records the exact
+initial-form identities discharged under addition.  Applied to a relative
+degeneration, no lower-weight gluing channel can cancel a forbidden exposed
+exponential.  One must group precisely the channels on the same top face and
+prove their initial forms sum to zero.
+
+The domain hypothesis is load-bearing.  A cohomology-valued degeneration
+may have zero divisors, so (21.31) should be applied only after the scalar
+point-row pairing, or after passage to a coefficient domain on which the
+relevant initial forms remain nonzero.
+
+For the normalized negative-degree pilot
+
+\[
+\frac{1-e^{-R}}{R},
+\]
+
+the forbidden \(-1\) exponential has nonzero exposed coefficient
+\(-1/R\) in the ray where it grows.  Consequently any relative-cap proof
+must exhibit another top-face channel with the opposite coefficient; a
+formal support or lower-order argument cannot suffice.  This turns the open
+relative-cap lemma into a finite associated-graded cancellation target at
+each retained Novikov coefficient, while making no claim that the
+cancellation holds.
+
+## 21.15 The comma-bridge theorem for parallel retained paths
+
+The higher-support path and the QDM path can be combined without pretending
+that either determines the other.
+
+Let \(\mathcal A\) be a category of retained objects (for example numerical
+\(K\)-theory with a support recollement), let \(\mathcal Q\) be a category of
+operator objects, and let
+
+\[
+R:\mathcal A\to\mathsf{Vect}_K,
+\qquad
+S:\mathcal Q\to\mathsf{Vect}_K
+\]
+
+be realization functors.  A **bridge object** is
+
+\[
+(a,q,\gamma_a:R(a)\twoheadrightarrow S(q),
+  \epsilon_a:R(a)\to L_a)
+\tag{21.33}
+\]
+
+with \(\ker\gamma_a\subseteq\ker\epsilon_a\).  Thus \(\epsilon_a\) descends
+uniquely to a row \(r_a:S(q)\to L_a\).  A bridge morphism
+\((u,f,\ell):(a,q,\gamma_a,\epsilon_a)\to
+(b,q',\gamma_b,\epsilon_b)\) satisfies
+
+\[
+S(f)\gamma_a=\gamma_bR(u),
+\qquad
+\epsilon_bR(u)=\ell\epsilon_a.
+\tag{21.34}
+\]
+
+### Theorem 21.6 -- bridge naturality forces the augmented row law
+
+Every bridge morphism satisfies
+
+\[
+r_bS(f)=\ell r_a.
+\tag{21.35}
+\]
+
+If \(f\) also intertwines the retained operators, it is therefore a morphism
+of \(\mathsf{AugOp}_K\).  Bridge morphisms compose, and the induced
+augmented-row construction is functorial.
+
+### Proof
+
+Precompose the desired identity with the epimorphism \(\gamma_a\):
+
+\[
+r_bS(f)\gamma_a
+=r_b\gamma_bR(u)
+=\epsilon_bR(u)
+=\ell\epsilon_a
+=\ell r_a\gamma_a.
+\]
+
+Epimorphy gives (21.35), and composition is the ordinary comma-category
+calculation. ∎
+
+This is the exact categorical version of reading forgotten information from
+a higher parallel projection.  Useful choices of \(\mathcal A\) include:
+
+| retained path \(\mathcal A\) | output \(\epsilon\) | data still required in \(\gamma\) |
+|---|---|---|
+| Orlov numerical \(K_0\) | generic rank | Gamma/integral compatibility with the QDM comparison |
+| recollement \(\operatorname{Perf}_D(Y)\to\operatorname{Perf}(Y)\to\operatorname{Perf}(U)\) | common-open rank | a QDM realization of the localization square |
+| finite-support holonomic/Fourier object | punctual zero-exponent component | identification of the normalized Gamma channel with the Fourier realization |
+| strict nearby/vanishing-cycle object | dual row on the quotient | strict boundary maps and row-nullity of vanishing cycles |
+
+Reader carries \((R,S,\epsilon)\) and the bridge laws; indexed State carries
+the current pair \((a,q)\); the optic residual is \(\gamma\); Writer records
+support-null and strictness certificates.  Forgetting \(\gamma\) leaves two
+parallel paths but destroys (21.35), exactly as the Stokes graph countermodel
+shows.
+
+The theorem does not build a bridge.  For \(m=2\), a pseudonatural family of
+the first or second row of the table along arbitrary weak factorization would
+prove the required augmented-row path theorem.  Constructing that family is
+the same one-row Gamma/common-open provider already isolated above, now
+expressed without any ideal or zero-mode ambiguity.
+
+## 21.16 What scales to \(m>2\)
+
+The comma-bridge theorem separates a dimension-free implication from the
+dimension-sensitive provider search.
+
+### Corollary 21.7 -- a rank bridge for all blowups proves all stabilizations
+
+Assume that for every smooth blowup in every relevant dimension there is a
+pseudonatural bridge of Theorem 21.6 whose high retained path is Orlov
+numerical \(K_0\), whose output is generic rank, and whose QDM side
+intertwines the normalized formal monodromy.  Then the pointed
+primitive-sixth row Boolean is a birational invariant in every dimension.
+Combined with
+the audited endpoint calculation, this proves the irrationality of
+\(X\times\mathbf P^m\) for every \(m\ge1\).
+
+The proof is dimension-free: every exceptional Orlov functor has image
+supported on a proper exceptional divisor and hence generic rank zero,
+regardless of the center dimension or codimension.  Theorem 21.6 supplies
+the augmented-row blowup arrows, and weak factorization composes them.
+
+This corollary is a conditional implication, not a theorem that the bridge
+exists.  Its premise is stronger than the one-row provider targeted for
+\(m=2\).  The latter benefits from the fivefold center bound: only rank-two
+normal bundles of threefold centers are genuine primitive carriers.  For
+\(m>2\), centers of dimension at least four can carry additional
+primitive-sixth data, and higher-codimension blowups have longer exceptional
+strings.  The relative-cap/exposed-face approach then becomes multivariate,
+with \(\Gamma\cong\mathbf Z^{c-1}\); Theorem 21.5 still applies to each
+weight, but it supplies no uniform cancellation theorem.
+
+The independent \(\mathbf G_a\)/Jordan route scales differently.  The
+projective factor asks for \(J_{m+1}\), and tensor-product coherence is
+controlled by the Clebsch--Gordan law already tested in Module 19.4.  What
+does not scale for free is the geometric carrier exclusion: higher
+dimensional centers can themselves carry the required long nilpotent string.
+Thus category theory organizes the higher-\(m\) obstruction and its
+compositions, but neither the rank bridge nor the carrier theorem is
+currently available.
+
+## 21.17 Sparse reconstruction as a torsor-lift problem
+
+The reconstruction results in the other papers have a common exact core:
+either the chosen shadows are proved complete, or a residual marking is kept
+which selects one lift through a nontrivial forgetful fibre.  The following
+graph theorem isolates the path-tracking part without asserting that a
+particular geometric fibre has this form.
+
+Let \(Q\) be a connected graph, let \(\Pi(Q)\) be its path groupoid, and let
+\(G\) be a group.  A **torsor local system** on \(Q\) consists of a nonempty
+right \(G\)-torsor \(X_v\) at each vertex and a \(G\)-equivariant bijection
+
+\[
+\tau_e:X_v\longrightarrow X_w
+\tag{21.36}
+\]
+
+for every oriented edge \(e:v\to w\), with
+\(\tau_{e^{-1}}=\tau_e^{-1}\).  A compatible lift is a choice
+\(x_v\in X_v\) satisfying \(\tau_e(x_v)=x_w\) for every edge.
+
+### Theorem 21.8 -- torsor reconstruction is exactly trivial holonomy
+
+Fix a base vertex \(b\) and \(x_b\in X_b\).  There is a compatible lift
+extending \(x_b\) if and only if every based-loop transport fixes \(x_b\):
+
+\[
+\tau_\ell(x_b)=x_b
+\qquad(\ell\in\operatorname{Aut}_{\Pi(Q)}(b)).
+\tag{21.37}
+\]
+
+Because the action on a torsor is free and every transport is
+\(G\)-equivariant, this is equivalent to trivial holonomy on all of \(X_b\).
+When it exists, the extension of the fixed base point is unique.  In
+particular:
+
+1. if \(Q\) is a tree, every base lift extends uniquely and the set of all
+   compatible lifts is itself a right \(G\)-torsor;
+2. on an interval with both endpoint lifts prescribed, a compatible lift
+   exists exactly when transport along the interval sends the first endpoint
+   lift to the second;
+3. a graph map, or more generally a functor of path groupoids
+   \(F:\Pi(P)\to\Pi(Q)\), pulls the local system and its holonomy back.  It
+   does not in general trivialize that holonomy.
+
+### Proof
+
+Choose paths \(p_v:b\to v\) and define
+\(x_v=\tau_{p_v}(x_b)\).  This is independent of the chosen path precisely
+when every loop \(p_vp_v'^{-1}\) fixes \(x_b\), which is (21.37); edge
+compatibility and uniqueness then follow.  A tree has a unique reduced path
+from \(b\) to each vertex.  The interval statement is the same construction
+with its terminal value prescribed.  Pullback replaces every transport
+\(\tau_p\) by \(\tau_{F(p)}\), so it replaces each loop holonomy by its
+image under \(F\).  ∎
+
+After choosing one point in every fibre, the edge transports are encoded by
+a nonabelian graph \(1\)-cocycle with values in \(G\); changing those choices
+is vertexwise gauge.  Theorem 21.8 says exactly that a compatible lift exists
+when this cocycle has neutral gauge class.  For a path theory with imposed
+2-cells, the products around the corresponding boundary loops must also be
+the identity.  This is the elementary cohomological form of the
+Beck--Chevalley requirement.
+
+This explains what the sparse-shadow precedents do and do not import.  A
+marked bridge kills a residual \(C_2\)-torsor; a retained removed-root marker
+chooses a polar-contraction lift; and a proved complete weighted shadow has
+singleton fibres.  An affine frame residual that remains uncontrolled is the
+opposite case.  These are structural precedents, not a theorem that the QDM
+forgetful fibre is any particular torsor.
+
+For the present packet, Proposition 19.3B identifies the candidate residual
+group only **after** a common row-line carrier has been constructed.  A single
+weak-factorization chain is a tree, so an arbitrarily chosen lift can always
+be propagated along it.  That fact is useless for birational invariance unless
+the propagated endpoint equals the canonical Gamma point row; by item 2 this
+is exactly a boundary condition, not a formal consequence of having tracked
+the path.  Parallel projections and overlap squares add loops, whose trivial
+holonomy is exactly the missing marked Beck--Chevalley/provider theorem.
+
+In effect notation, Reader contains the torsor local system and any path
+functor, indexed State contains the chosen lift, and Writer contains the
+holonomy and endpoint certificates.  A lens into a higher parallel
+projection is lawful only when a bridge such as (21.33) makes that residual
+cartesian.  Mapping paths without mapping this residual merely pulls the
+obstruction back; it cannot recover information that was never marked.
+
+## 21.18 A simple retained character forces the row line
+
+There is one useful way for the higher projection to make the endpoint
+condition automatic.  Let \(A\) be a unital \(K\)-algebra and let
+\(\chi:A\to K\) be a character.  Write \(K_\chi\) for the resulting
+one-dimensional left \(A\)-module.
+
+### Theorem 21.9 -- simple-character row forcing
+
+Let \(V_-\) and \(V_+\) be left \(A\)-modules and suppose
+
+\[
+\operatorname{Hom}_A(V_\pm,K_\chi)=K r_\pm
+\tag{21.38}
+\]
+
+with \(r_\pm\ne0\).  Every \(A\)-linear isomorphism
+\(\Phi:V_-\to V_+\) satisfies
+
+\[
+r_+\Phi=c_\Phi r_-
+\qquad\text{for a unique }c_\Phi\in K^\times.
+\tag{21.39}
+\]
+
+These scalars multiply under composition.  If the modules also carry
+operators \(T_\pm\) and \(\Phi T_-=T_+\Phi\), then \(\Phi\) is an augmented
+operator-row isomorphism.
+
+### Proof
+
+The composite \(r_+\Phi\) is a nonzero element of
+\(\operatorname{Hom}_A(V_-,K_\chi)\), so (21.38) gives the unique nonzero
+scalar in (21.39).  Substitution proves the composition law, and the final
+claim is exactly the morphism law of \(\mathsf{AugOp}_K\).  ∎
+
+For a single retained endomorphism \(Q\), take \(A=K[t]\) and let \(t\) act
+on \(K_\chi\) by \(\lambda\).  The hypothesis then says that the left
+\(\lambda\)-eigenspace is the single row line.  Thus any intertwiner of
+\(Q\) preserves that line.  More geometric choices are a support idempotent
+whose generic-open character kills all boundary summands, or the coordinate
+algebra of finite Fourier support with the character at exponent zero.
+
+This theorem pinpoints why the audited Hodge specialization is insufficient:
+the trivial Hodge character occurs on every Tate direction, so (21.38) fails.
+Formal monodromy alone also has repeated primitive-sixth covectors in the
+relevant exceptional packets.  A cohomological grading could separate the
+top-degree row, and a common-open support action could separate generic rank,
+but the fixed-phase analytic blowup comparison has not been proved linear for
+either proposed action in the required Gamma frame.  Theorem 21.9 therefore
+gives another small provider interface, not that missing linearity theorem.
 
 ---
 

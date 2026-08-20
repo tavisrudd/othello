@@ -75,6 +75,16 @@ It currently contains:
   cyclic shadow, its common-threshold/reduced-nearby-cycle parallel
   projections, and the augmented operator-row category whose output kernel
   repairs the false naked row-null quotient; and
+- direct augmented-row and conditional Orlov/Gamma rank-bridge criteria,
+  dual cyclic-row descent with its exact strict-saturation hypotheses, and
+  formal multi-sector, holonomic-growth, and exposed-face specializations
+  which reduce but do not discharge the relative-cap provider; and
+- a comma-bridge theorem for reading the point row from a higher retained
+  projection, an exact torsor-holonomy theorem explaining why path state
+  transports a chosen lift but cannot identify it with a canonical endpoint
+  without a bridge/Beck--Chevalley certificate, and a simple-character
+  criterion under which a genuinely separating retained action forces the row
+  line; and
 - a complete-source audit of Iritani's 2026 Hodge/cyclotomic blowup note,
   including the proved exceptional-cusp point symbol and the remaining
   large-radius Gamma frame gap; and
@@ -84,7 +94,7 @@ The finite categorical law model is
 `notes/cubic-threefolds-tasks/c925-categorical-law-check.py`, with exact
 checked output
 `notes/cubic-threefolds-tasks/c925-categorical-law-check.json`.  It passes
-twenty-seven tests, including a negative collision test showing why Guéré's
+thirty-one tests, including a negative collision test showing why Guéré's
 unit-shift separation contract is mandatory, the \(m\ge2\) constituent
 no-go, \(\mathbf G_a\) Clebsch--Gordan through size five, and composition of
 row-preserving shears, plus exact coordinate-pseudonaturality,
@@ -94,8 +104,12 @@ dual-row quotient tests, kernel-profile, Krylov, effect-stack,
 optic/path-functor, the affine row-stabilizer group law, Orlov/Gamma rank-row
 forcing, nonreversible provider
 implications, positive and Stokes-sheared negative multi-sector
-reconstruction tests, and pointed \(m=2\) endpoint
-checks.  A separate executable Haskell toy at
+reconstruction tests, pointed \(m=2\) endpoint checks, exposed
+exponential-face filtration and comma-bridge laws, the torsor-holonomy and
+prescribed-endpoint obstruction, and simple retained-character row forcing.
+A
+separate executable
+Haskell toy at
 `notes/cubic-threefolds-tasks/c925-sparse-shadow-path-toy.hs` verifies the
 typed path translator, payload naturality, indexed bind laws, lens laws, and
 the necessity of an optic residual.  The original exact cubic residue replay

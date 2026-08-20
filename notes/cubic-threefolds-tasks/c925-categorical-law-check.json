@@ -1,10 +1,12 @@
 {
-  "check_count": 27,
+  "check_count": 31,
   "checks": {
     "augmented_row_output_kernel_is_two_sided": "pass",
     "bittner_relation_codimension_2_through_6": "pass",
     "center_localization_idempotent_and_nested": "pass",
+    "comma_bridge_forces_descended_augmented_row": "pass",
     "cyclic_krylov_moments_reconstruct_nilpotent_string": "pass",
+    "exponential_initial_face_filtered_monoidal_laws": "pass",
     "finite_kan_coarsening_composition": "pass",
     "formal_coordinate_pseudonaturality_not_raw_equality": "pass",
     "free_sym_monad_and_fold_fusion": "pass",
@@ -23,8 +25,10 @@
     "row_line_stabilizer_affine_group_law": "pass",
     "row_stabilizer_composition_telescope": "pass",
     "sector_path_transport_needs_stokes_optic_residual": "pass",
+    "simple_retained_character_forces_row_line": "pass",
     "sparse_kernel_profile_reconstructs_jordan_type": "pass",
     "split_vs_exact_k0_retention": "pass",
+    "torsor_path_holonomy_and_endpoint_obstruction": "pass",
     "unmarked_constituent_no_go_m_2_through_6": "pass",
     "zero_mode_dual_cyclic_row_descends_through_quotient": "pass",
     "zero_mode_row_annihilation_is_necessary": "pass"
