@@ -110,6 +110,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.Eckard
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.HeartOrthogonalLines
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPointOddLabelHeartAction
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPointPacketLabelGroup
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.GraphLattices.SixPointDuadFactorization
 
 /-!
 # Reviewer interface for the cubic-stabilization companion
@@ -3237,6 +3238,59 @@ theorem principalGluing_stableHalfPacket_labelGroupIsNormalizer :
     GraphLattices.sixPointLabelPacketGroup_eq_closure,
     GraphLattices.sixPointLabelPacketGroup_eq_normalizer,
     GraphLattices.natCard_sixPointLabelPacketGroup⟩
+
+/-- The dictionary between the fifteen pairs of labels and the fifteen nonzero
+heart vectors, and what it says about the distinguished commutant element `W`.
+The characteristic-two indicator vector of a pair of distinct labels has nonzero
+image in the four-dimensional coefficient heart; every nonzero heart vector
+arises that way; and the heart matrix of a label permutation carries the heart
+vector of a pair to the heart vector of the permuted pair.  Under this
+dictionary the displayed one-factorization of the fifteen pairs into five
+perfect matchings is exactly the orbit decomposition of multiplication by `W`:
+two nonzero heart vectors belong to a common matching precisely when one is the
+other, or the other multiplied by `W`, or the other multiplied by `W+1`.
+Consequently a permutation of the six labels carries every matching of the
+displayed one-factorization to a matching precisely when conjugation by its
+heart matrix carries `W` to `W` or to `W+1`, and it centralizes `W` precisely
+when it both preserves that one-factorization and is an even permutation of the
+six labels.  Preserving the one-factorization is therefore strictly weaker than
+centralizing `W`.  The six labels here are abstract: this statement identifies
+no geometric Galois action and does not identify them with the six conjugate
+dihedral subgroups of the geometric argument. -/
+theorem principalGluing_stableHalfPacket_labelOneFactorizationDictionary :
+    (∀ first second : Fin 6, first ≠ second →
+        GraphLattices.sixPointDuadHeart first second ≠ 0) ∧
+      (∀ vector : Fin 4 → GraphLattices.F2, vector ≠ 0 →
+          ∃ first second : Fin 6, first ≠ second ∧
+            GraphLattices.sixPointDuadHeart first second = vector) ∧
+        (∀ (permutation : Equiv.Perm (Fin 6)) (first second : Fin 6),
+            Matrix.mulVec
+                (GraphLattices.sixPointHeartPermutationMatrix permutation)
+                (GraphLattices.sixPointDuadHeart first second) =
+              GraphLattices.sixPointDuadHeart (permutation first)
+                (permutation second)) ∧
+          (∀ left right : Fin 4 → GraphLattices.F2, left ≠ 0 → right ≠ 0 →
+              (GraphLattices.sixPointHeartFactor left =
+                  GraphLattices.sixPointHeartFactor right ↔
+                right = left ∨
+                  right = Matrix.mulVec
+                      GraphLattices.sixPointHeartCommutantRoot left ∨
+                    right = Matrix.mulVec
+                      (GraphLattices.sixPointHeartCommutantRoot + 1) left)) ∧
+            (∀ permutation : Equiv.Perm (Fin 6),
+                GraphLattices.SixPointFactorizationPreserving permutation ↔
+                  permutation ∈ GraphLattices.sixPointLabelPacketGroup) ∧
+              ∀ permutation : Equiv.Perm (Fin 6),
+                permutation ∈ GraphLattices.sixPointLabelCommutantGroup ↔
+                  GraphLattices.SixPointFactorizationPreserving permutation ∧
+                    Equiv.Perm.sign permutation = 1 :=
+  ⟨fun _ _ distinct ↦ GraphLattices.sixPointDuadHeart_ne_zero distinct,
+    fun _ nonzero ↦ GraphLattices.sixPointDuadHeart_exists nonzero,
+    GraphLattices.sixPointHeartPermutationMatrix_mulVec_duadHeart,
+    fun _ _ leftNonzero rightNonzero ↦
+      GraphLattices.sixPointHeartFactor_eq_iff leftNonzero rightNonzero,
+    GraphLattices.sixPointFactorizationPreserving_iff_mem_packetGroup,
+    GraphLattices.mem_sixPointLabelCommutantGroup_iff_even_factorizationPreserving⟩
 
 /-- Concrete polarization calculation from the principal-gluing proof.  The
 trace of the determinant on `F4²` is nondegenerate over `F2`; the induced

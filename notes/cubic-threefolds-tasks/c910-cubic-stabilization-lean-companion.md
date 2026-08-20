@@ -874,6 +874,32 @@ identification of the six labels with the manuscript's dihedral axes, and the
 geometric commutator pairing.  Report:
 [`../2026-08-20-c910-packet-label-group-and-kernel-orders.md`](../2026-08-20-c910-packet-label-group-and-kernel-orders.md).
 
+**The duad/one-factorization dictionary, 2026-08-20.**
+`GraphLattices/SixPointDuadFactorization.lean` identifies the fifteen nonzero
+heart vectors with the fifteen pairs of labels: the indicator vector of a pair of
+distinct labels has nonzero heart class, every nonzero heart vector arises from
+exactly one pair, and the heart matrix of a label permutation carries the heart
+vector of a pair to the heart vector of the permuted pair.  Under that dictionary
+the one-factorization displayed in the alternating-action module is exactly the
+orbit decomposition of multiplication by `W`: two nonzero heart vectors lie in a
+common matching precisely when one is the other, the other times `W`, or the
+other times `W+1`.  Hence a label permutation carries every matching to a
+matching precisely when it lies in the packet-preserving group of order one
+hundred twenty, and it centralizes `W` precisely when it does that and is even.
+So preserving the one-factorization is the packet condition, and centralizing `W`
+is its index-two even part; the remark in the previous report that the two
+coincide was off by that index.  The reverse implication is proved structurally
+rather than by enumerating the seven hundred twenty permutations: preservation
+makes the conjugate of `W` carry each orbit to itself, so the difference between
+that conjugate and `W` annihilates or fixes each vector individually, and
+additivity forces one choice at every vector at once.  One terminal was added,
+`principalGluing_stableHalfPacket_labelOneFactorizationDictionary` on
+`prop:principal-gluing-packet`, and the snapshot moves to 311 reviewer terminals
+with unchanged coverage counts.  Still supplied: every geometric identification,
+including that of the six labels with the manuscript's dihedral axes, and hence
+the marking of the actual kernel.  Report:
+[`../2026-08-20-c910-duad-one-factorization-dictionary.md`](../2026-08-20-c910-duad-one-factorization-dictionary.md).
+
 ## Prioritized Lean backlog
 
 Work in this order unless a later literature or library dependency changes the

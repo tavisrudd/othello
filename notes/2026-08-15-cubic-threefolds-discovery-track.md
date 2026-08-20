@@ -252,10 +252,19 @@ Strongest question: does the geometric side carry a one-factorization of the six
 dihedral axes directly — a canonical way of pairing them off in five ways — in
 which case the label identification that is still supplied might be constructed
 from the axes rather than assumed.
-**Evidence:** CHECKED — the fifteen-vector identification, the five orbits, and
-their agreement with the displayed factorization table were verified by direct
-computation over the field with two elements; none of it is formalized.
-**Status:** open lead
+**Evidence:** LEAN — the fifteen-vector identification, the five orbits, their
+agreement with the displayed factorization table, and the resulting group
+statement are formalized in
+`GraphLattices/SixPointDuadFactorization.lean`, with reviewer terminal
+`principalGluing_stableHalfPacket_labelOneFactorizationDictionary`.
+Formalization corrected one clause above: preserving the one-factorization is
+preserving the unordered pair `{W, W+1}`, of order one hundred twenty, while
+centralizing `W` is its index-two even part, so the two are not the same
+condition.
+**Status:** graduated -> C910 /
+`notes/2026-08-20-c910-duad-one-factorization-dictionary.md`; the geometric
+question, whether the six dihedral axes carry a one-factorization directly,
+stays open.
 
 ## 2026-08-20 — the factor-three boundary beyond the middle theta lattice
 
