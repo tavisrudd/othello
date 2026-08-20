@@ -3212,8 +3212,17 @@
       "last": 924,
       "purpose": "rigorous verification and compression study of the direct-QDM proof route for the epilogue",
       "sequence": 357
+    },
+    {
+      "count": 1,
+      "first": 925,
+      "kind": "reservation",
+      "lane": "cubic-threefolds",
+      "last": 925,
+      "purpose": "write a modular parameterized direct-QDM proof packet with selectable block markers",
+      "sequence": 358
     }
   ],
-  "next_id": 925,
+  "next_id": 926,
   "schema": "codex-task-id-allocations-v1"
 }
