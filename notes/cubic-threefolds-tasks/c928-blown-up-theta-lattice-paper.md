@@ -8,6 +8,8 @@
 
 - structural saturation theorem:
   `notes/2026-08-20-c928-structural-saturation.md`
+- structural glue and saturation realization:
+  `notes/2026-08-20-c928-structural-glue.md`
 
 ## Goal
 
@@ -104,6 +106,6 @@ authoritative monorepo paper passes its acceptance gates.
 
 ## Next
 
-Prove the endpoint Pontryagin/divided-power identity for
-`b_*q_*mu^*(beta tensor 1)` and use the integral cylinder isomorphism to
-close the onto half of the glue map.
+Prove that diagonal-zero transfer classes generate the kernel
+`b^* wedge^3 Lambda` integrally, then freeze the complete theorem dependency
+graph for manuscript assembly.
