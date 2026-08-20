@@ -1737,8 +1737,9 @@ projective frame because the kernel of the cross-golden compression is the
 all-ones line. The same derivative identity and chart classification are
 also kernel-checked: the derivative identity over
 any commutative ring containing a root of $t^2=t+1$ and the classification
-of singular points over any field of characteristic zero containing such a
-root; Section~\ref{sec:verification} names the declarations.
+of singular points over any field containing such a root whose
+characteristic is not $2$, $3$, or $5$;
+Section~\ref{sec:verification} names the declarations.
 
 The same pairing appears in the literature: the cross-golden four-space
 $\Lambda$ and its trace orthogonal $\Lambda^\perp$ carry the paired
@@ -1850,8 +1851,8 @@ Over any commutative ring containing a root of $t^2=t+1$,
 \small\path{derivative_crossGoldenDeterminantLine_eval}
 \end{center}
 identifies the partial derivatives of the cross-golden determinant with the
-gradient quadrics of the support cubic, and over any field of
-characteristic zero containing such a root,
+gradient quadrics of the support cubic, and over any field containing such
+a root, provided $30$ is invertible there,
 \begin{center}
 \small\path{RelativeConicArcs.SupportOrientationNodes.}\\
 \small\path{singularPoints_crossGoldenDeterminant_eq_axisClasses}
@@ -1859,7 +1860,17 @@ characteristic zero containing such a root,
 identifies the singular points with the six axis classes.  Neither uses a
 smoothness or transversality hypothesis. The chartwise Gr\"obner bases
 displayed in the node-frame argument are the load-bearing finite human
-certificate; these declarations independently rederive the same result.
+certificate over $\mathbf Q$; these declarations rederive that result
+independently and extend it to every field containing a golden root whose
+characteristic is not $2$, $3$, or $5$.  At the golden root $t=8$ over
+$\F_{11}$, where $30=8$ is invertible, the specialization
+\begin{center}
+\small\path{RelativeConicArcs.SupportOrientationNodes.}\\
+\small\path{singularPoints_crossGoldenDeterminant_eq_axisClasses_zmod_eleven}
+\end{center}
+and its ordinary-node companion in the same namespace record the six-class
+singular locus and the node type in the field over which the rest of this
+paper works.
 
 The line bound, chord-defect identity, partial-cover deduction, decoder
 reconstruction, support bipartition, and the orientation two-graph

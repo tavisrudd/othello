@@ -15,6 +15,15 @@ the generator `lean/scripts/generate_golden_cubic_elimination.py` — a scope
 expansion over the dispatch allowlist, taken because the elimination module is
 generated and must not be hand-edited.
 
+Manuscript updated 2026-08-20 by explicit user instruction: the two sentences
+describing the kernel-checked coverage now say "any field containing such a root
+whose characteristic is not 2, 3, or 5" instead of "characteristic zero", the
+chartwise Groebner certificate is identified as the human certificate over the
+rationals, and the verification section names the characteristic-eleven
+specialization. Deterministic rebuild green at twenty-nine pages with no
+warnings. A Fable referee pass on that diff was requested and deferred for
+budget; it remains owed.
+
 Two follow-ups, both deliberately not done. `supportCubic_framePoints_ordinaryNodes`
 still requires characteristic zero because its Hessian determinants are computed
 in `RelativeConicArcs/GoldenCubicNodeHessians.lean`, outside the allowlist; the
