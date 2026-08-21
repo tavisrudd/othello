@@ -1,0 +1,87 @@
+\section{The quantitative pair-extension criterion}
+
+The mate-line decomposition now turns the extension problem into one count:
+empty fixed lines are the carriers, and nonfixed secant orbits are the only
+first-order obstructions on them.
+
+\begin{theorem}[Quadratic pair-extension criterion]
+\label{thm:pair-criterion}
+Let $\cC$ be a $\phi$-invariant $k$-arc in $\PG(2,s^2)$ with profile
+$k=f+2e$.  With $E$, $N$, and $M$ as in
+\eqref{eq:E} and \eqref{eq:M},
+\begin{equation}\label{eq:uniform-lower}
+  \Npair(\cC)\ge E\,\pospart{N-M}
+  =E\,\pospart{\frac{s^2-s}{2}-fe-e(e-1)}.
+\end{equation}
+In particular, if $E>0$ and $M<N$, then $\cC$ admits a legal conjugate-pair
+extension.
+\end{theorem}
+
+\begin{proof}
+Fix $\ell\in\cE$.  It carries exactly $N$ candidate conjugate pairs.  A
+fixed old secant meets $\ell$ in a fixed point and destroys no nonfixed
+candidate.  Consider a nonfixed old secant orbit $\{m,\phi(m)\}$.  Unless
+$m\cap\ell$ is fixed, the two intersections $m\cap\ell$ and
+$\phi(m)\cap\ell$ form one conjugate candidate pair; thus the orbit destroys
+at most one candidate.  There are $M$ such secant orbits, so at least
+$\pospart{N-M}$ candidates survive on $\ell$.
+
+A survivor lies on no old secant, and its empty mate line contains no point
+of $\cC$.  Lemma~\ref{lem:pair-test} makes it legal.  Candidate sets on
+distinct fixed lines are disjoint because a nonfixed pair has a unique mate
+line.  Summing over the $E$ carriers proves \eqref{eq:uniform-lower}.
+\end{proof}
+
+\begin{corollary}[The Clebsch hexagon over the quadratic extension]
+\label{cor:clebsch-pair-extension}
+Let $H\subseteq\PG(2,11)$ be a Clebsch hexagon, viewed as a
+Frobenius-invariant six-arc in $\PG(2,11^2)$
+\cite{RuddClebschRigidity2026}.  Then
+\[
+  \Npair(H)=76\cdot55=4180.
+\]
+Consequently every invariant eight-arc $H\cup Q$ obtained by adjoining one
+such pair has exactly $4179$ alternate conjugate-pair repairs after $Q$ is
+deleted.  In coding language, the scalar extension of the Clebsch
+$[6,3,4]_{11}$ code has $4180$ Frobenius-paired two-column extensions to
+$[8,5,4]_{121}$ MDS codes.
+\end{corollary}
+
+\begin{proof}
+Here $(s,f,e)=(11,6,0)$.  There are
+\[
+ E=11^2+11+1-\left(6\cdot12-\binom62\right)=76
+\]
+fixed lines disjoint from $H$, and each contains
+$N=(11^2-11)/2=55$ nonfixed conjugate pairs.  Every old secant is fixed, so
+$M=0$ and every one of these pairs is legal.  Conversely, the mate line of
+any legal nonfixed pair is a fixed line disjoint from $H$, which proves
+equality rather than only the lower bound.  Excluding the selected pair
+$Q$ leaves $4180-1$ alternatives.
+\end{proof}
+
+\begin{remark}
+The count in Corollary~\ref{cor:clebsch-pair-extension} uses only that $H$
+is a six-arc rational over $\F_{11}$; it is not another characterization of
+the Clebsch class.  Its role is to show how the exceptional code studied in
+\cite{RuddClebschRigidity2026} enters the equivariant extension and repair
+theory developed here.
+\end{remark}
+
+The preceding proof deliberately uses only the uniform upper bound $M$ on
+the number of forbidden candidates per carrier.  Retaining the actual
+forbidden support gives both a sharper bound and an exact identity.
+
+For $\ell\in\cE$, let $\cQ_\ell$ be its $N$ candidate pairs and let
+$\cF_\ell\subseteq\cQ_\ell$ be the pairs hit by at least one nonfixed old
+secant orbit.  Then
+\begin{equation}\label{eq:heterogeneous}
+  \Npair(\cC)=\sum_{\ell\in\cE}
+  \left(|\cQ_\ell|-|\cF_\ell|\right).
+\end{equation}
+The same formula applies when carrier capacities vary.  In particular, if
+$|\cF_\ell|\le U_\ell$, then
+\[
+  \Npair(\cC)\ge
+  \sum_{\ell\in\cE}\pospart{|\cQ_\ell|-U_\ell}.
+\]

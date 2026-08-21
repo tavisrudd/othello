@@ -1,0 +1,103 @@
+\section{Introduction}
+
+An arc in a projective plane is a set of points no three of which are
+collinear.  Ordinary completeness asks whether one further point can be
+adjoined.  If the arc is preserved by a field automorphism, the natural
+equivariant continuation unit is instead a complete Galois orbit.  Over a
+quadratic extension this means either a fixed point or a nonfixed conjugate
+pair.
+
+Let $F=\F_s$, let $K=\F_{s^2}$, and let
+\[
+  \phi\colon [x:y:z]\longmapsto[x^s:y^s:z^s]
+\]
+act on $\PG(2,K)$.  The fixed points and fixed lines form the embedded Baer
+subplane $\PG(2,F)$.  This paper studies the following question: when must a
+$\phi$-invariant arc admit an extension by a fresh pair
+$\{P,\phi(P)\}$?
+
+Under the arc--code correspondence, a $k$-arc gives the projective columns
+of a $[k,3,k-2]_{s^2}$ MDS code.  Adjoining $\{P,\phi(P)\}$ is therefore a
+Frobenius-compatible two-column MDS extension, and alternate-orbit repair is
+replacement of an erased conjugate column pair.  Here ``repair'' changes the
+generator-column configuration; it is not erasure decoding inside a fixed
+code.
+
+\begin{theorem}[Robust extension of invariant eight-arcs]
+\label{thm:main}
+Let $s\ge5$ be a prime power.  Every $\phi$-invariant eight-arc in
+$\PG(2,s^2)$ admits a fresh nonfixed conjugate-pair extension.  More
+precisely:
+\begin{enumerate}[label=(\roman*),leftmargin=2.1em]
+\item over $\F_{25}$ there are at least four such pairs, so deleting any
+      selected nonfixed orbit from an invariant ten-arc leaves at least
+      three alternate repairs;
+\item for every $s\ge7$ there are at least $319$ legal pairs, so deletion of
+      any selected nonfixed orbit from an invariant ten-arc leaves at least
+      $318$ alternate repairs.
+\end{enumerate}
+\end{theorem}
+
+The proof has one organizing mechanism.  A nonfixed pair lies on a unique
+fixed mate line, and a legal pair must lie on a fixed line disjoint from the
+old arc.  Each noninvariant old-secant orbit forbids at most one candidate on
+such a carrier.  Counting empty carriers gives the uniform criterion.  The
+exact correction records the two ways in which the first-order count
+overestimates the obstruction: the secant orbit can be invisible because
+its fixed center lies on the carrier, or several visible orbits can charge
+the same pair.
+
+The argument first proves the carrier count and its exact correction.  For
+$s\ge7$ those structural bounds imply Theorem~\ref{thm:main}(ii).  At $s=5$
+one profile lies beyond the first-order range; two projective normalizations
+reduce it to a finite residual problem.  Proposition~\ref{prop:f2} gives the
+exact minimum $32$ in that profile and classifies its normalized equality
+cases.  Combining it with the four structural profiles proves
+Theorem~\ref{thm:main}(i).
+
+The quantitative criterion and its exact correction are the structural
+part of the paper.  Proposition~\ref{prop:f2} is the only exhaustive finite
+step.  Its lower bound, attainment, and equality-orbit exhaustion are kernel
+checked in the normalized coordinate model; the manuscript carries those
+facts through the two projective normalizations.  Section~\ref{sec:formalization}
+states the certificate and trust boundary.  The parameterized exchange
+theorem identifies the general phase
+$\lfloor(k-1)^2/4\rfloor+r+1\le s(s-1)/2$.  The saturation corollary and the
+Clebsch specialization are secondary consequences of the same carrier
+count.  The saturation scale is the classical Lunelli--Sce $\sqrt{2q}$
+scale~\cite{LunelliSce1964,BallLavrauw2019}; no new constant or sharpness
+claim is made.
+
+The classical inputs are point and line counts in a projective plane, the
+fixed Baer subplane, Hilbert--90 normalization, and secant counting; see
+Hirschfeld~\cite{Hirschfeld1998} and Martin~\cite{Martin1967}.
+
+\subsection*{Prior art and claim boundary}
+
+Baker and Wantz~\cite{BakerWantz2005} use Frobenius-invariant arcs in the
+Hughes plane and, in a maximality argument, consider a point together with
+its Frobenius image.  This is genuine precedence for the conjugate-point
+maneuver.  Their result does not count legal conjugate pairs on empty Baer
+lines.  Jungnickel's arcs in Baer-semiplane complements
+\cite{Jungnickel1987} and Ueberberg's geometries of Frobenius collineations
+\cite{Ueberberg1997} are also adjacent but concern different incidence or
+collineation problems.
+
+Dye gives exact completion geometry for the special family of Clebsch
+hexagons and a five-valent adjacency graph defined by sharing an associated
+triangle~\cite[Proposition~1 and Theorems~7--8, pp.~282--284]{Dye1991}.
+Blokhuis, Seress, and Wilbrink classify extremal complete exterior sets
+relative to a conic~\cite[pp.~143--146]{BlokhuisSeressWilbrink1992}.
+Neither work treats arbitrary plane arcs invariant under the quadratic
+field-Frobenius involution, counts fresh legal conjugate-pair extensions, or
+requires a different replacement after every selected-orbit deletion.
+
+Ordinary arc and MDS lengthening results
+\cite{Alderson2005,AldersonBruenSilverman2007,Alderson2026} impose no
+quadratic Galois-pair constraint.  Likewise, the classification of
+Galois-invariant subsets of $\mathbf P^1$~\cite{LopezMaisnerNartXarles2002}
+does not treat arbitrary plane arcs or their pair extensions.  Bounded
+zbMATH Open, OpenAlex, Crossref, and source-level searches found no exact
+precursor for the quantitative criterion below for arbitrary quadratic-
+field-Frobenius-invariant arcs, or for the uniform $\PG(2,25)$ theorem.
+This is negative search evidence, not a claim of historical priority.

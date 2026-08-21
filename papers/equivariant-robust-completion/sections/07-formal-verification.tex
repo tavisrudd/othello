@@ -1,0 +1,139 @@
+\section{Formal verification}\label{sec:formalization}
+
+This section records the correspondence between the paper statements and
+their formal evidence; it is not a second proof narrative.  The structural
+reductions are ordinary Lean proofs.  A separate Mathlib-only package checks
+the exceptional two-fixed-point Q25 census in the normalized coordinate model
+used inside the proof of Proposition~\ref{prop:f2}; the projective
+normalizations and semantic transport are manuscript arguments.  The
+development uses Lean~\cite{Lean2015} on top of mathlib~\cite{Mathlib2020}
+and is divided as follows.
+
+\begin{enumerate}[leftmargin=2.2em]
+\item The projective-conjugation and quadratic-Frobenius modules construct
+      the semilinear projective involution, prove the degree-two fixed-locus
+      normalization, and count the $N=(s^2-s)/2$ candidates on a fixed line.
+\item The line-counting and forbidden-candidate modules prove
+      Lemma~\ref{lem:empty-lines}, the exact secant-orbit count, the
+      injective charge, and the semantic arc-extension conclusion in
+      Theorem~\ref{thm:pair-criterion}.
+\item The global-count module defines the finite set of fresh nonfixed
+      Frobenius pairs whose union with the old arc remains an arc.  It proves
+      that this semantic set is the disjoint union of the carrierwise legal
+      sets and that its cardinality is the abstract legal count.
+\item The alternate-repair module formalizes deletion of an arbitrary
+      selected nonfixed orbit, proves that the erased orbit is one semantic
+      legal pair of the invariant eight-arc remainder, and supplies the
+      certificate-free eight-repair baseline.  Its order-five wrapper proves
+      Corollary~\ref{cor:q25-nonexceptional-repair}.
+\item The profile-envelope modules prove the five closed forms, their
+      piecewise lower envelope, the semantic envelope comparison in
+      Theorem~\ref{thm:profile-envelope}, and the uniform $318$-repair
+      conclusion in Corollary~\ref{cor:alternate-repair}.
+\item The phase-diagram and parameterized-repair modules prove the exact
+      maximum $W(k)=\lfloor(k-1)^2/4\rfloor$, derive the empty-carrier range
+      from the phase inequality itself, and prove
+      Theorem~\ref{thm:parameterized-repair} for semantic legal-pair finsets.
+\item The collision and invisibility modules prove
+      Proposition~\ref{prop:linewise}, Corollary~\ref{cor:aggregate}, the
+      fixed-center interpretation, and the cross-pair estimate
+      \eqref{eq:cross-invisible}.
+\item Separate profile modules prove the lower bounds $5$ and $4$ for
+      $f=0$ and $f=4$.  For $f=2$, residual composition certificates prove
+      the lower bound $32$ on all $1189$ representatives; orbit--stabilizer,
+      strict-composition, and exhaustive-dispatch modules prove attainment
+      and equality-orbit exhaustion in the package's normalized coordinate
+      model.  The proof of Proposition~\ref{prop:f2} carries these conclusions
+      through both normalizations.  The order-five
+      alternate-repair module and the paper-level parity split then give
+      Theorem~\ref{thm:q25} and
+      Corollary~\ref{cor:q25-uniform-repair}.
+\item The orbit-saturation module proves the denominator-free inequality
+      $2s(s-1)\le(k-1)^2$ used in Corollary~\ref{cor:saturation}.  The final
+      ceiling notation and the geometric case split are paper proofs.
+\end{enumerate}
+
+Corollary~\ref{cor:clebsch-pair-extension} is a manuscript-level
+specialization of the semantic carrier count to $(s,f,e)=(11,6,0)$.  Its
+arithmetic and the observation $M=0$ are printed in full; no separate Lean
+terminal is claimed for the number $4180$.
+
+The scoped structural builds and the sealed certificate package's
+declaration-level axiom audits report exactly
+\[
+  [\texttt{propext},\ \texttt{Classical.choice},\ \texttt{Quot.sound}],
+\]
+the standard classical quotient profile inherited from mathlib.  No public
+theorem depends on an admitted proof, a custom axiom, or
+\texttt{native\_decide}.  The finite leaves supporting
+Proposition~\ref{prop:f2} use kernel \texttt{decide}.  The certificate terminal
+is the normalized classification; the passage to semantic arcs is the
+manuscript proof and does not rely on a count of semantic arcs.
+
+The certificate aggregate exposes
+\path{PairCertificate.allRows},
+\path{ResidualMinimumOrbits.card_minimumOrbitUnion}, and the two normalized
+exhaustion terminals in \path{Exhaustion.lean}.
+
+For reproducibility, the paper-facing declarations are located as follows.
+
+\begin{center}
+\small
+\begin{tabular}{>{\raggedright\arraybackslash}p{0.43\linewidth}
+                >{\raggedright\arraybackslash}p{0.49\linewidth}}
+\toprule
+Source module & Paper-facing declaration or role \\
+\midrule
+\path{FiniteGeom/BaerCompletion/PairExtension.lean} &
+  \path{quadraticBaer_pairExtension_lowerBound} \\
+\path{RelativeConicArcs/QuadraticForbidden.lean} &
+  \path{exists_quadratic_pair_extension} \\
+\path{RelativeConicArcs/QuadraticGlobalCount.lean} &
+  \path{card_globalLegalPairs_eq_legalCount} \\
+\path{RelativeConicArcs/AlternateOrbitRepair.lean} &
+  \path{eight_le_alternateLegalPairs_of_seven_le} \\
+\path{RelativeConicArcs/AlternateOrbitRepairProfileEnvelope.lean} &
+  five closed forms and the piecewise profile envelope \\
+\path{RelativeConicArcs/}\newline
+\path{AlternateOrbitRepairProfile}\allowbreak\path{EnvelopeResult.lean} &
+  \path{profileEnvelope_le_card_globalLegalPairs_of_card_eight},
+  \path{three_hundred_eighteen_le_alternateLegalPairs_of_seven_le} \\
+\path{RelativeConicArcs/}\newline
+\path{AlternateOrbitRepairPhaseDiagram.lean} &
+  \path{exists_profile_attaining_worstObstruction},
+  \path{phase_profile_product_lowerBound} \\
+\path{RelativeConicArcs/Parameterized}\newline
+\path{AlternateOrbitRepair.lean} &
+  \path{card_alternateLegalPairs_ge_of_phase} \\
+\path{RelativeConicArcs/QuadraticInvisible.lean} &
+  aggregate equality/excess and fixed-center criteria \\
+\path{FiniteGeom/BaerCompletion/OrbitSaturation.lean} &
+  \path{orbitSaturation_quadratic_bound_of_split} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection*{Artifact and reproduction}
+
+The exceptional finite layer uses a separately versioned Mathlib-only
+certificate package.  Its exact commit and manifest digest are recorded in
+the verification pin.
+That package pins Lean 4.32.0-rc1 and mathlib revision
+\texttt{571b8a8e5421}.  From the package root
+its sealed aggregate and source-reproduction checks are run by
+\begin{verbatim}
+nix run .#verify
+\end{verbatim}
+The exact pin and trust boundary are recorded in
+\path{verification/q25-certificate-pin.json} and
+\path{verification/README.md}.  The standalone paper archive does not vendor
+the shared human-scale Lean development listed above; its structural theorem
+sources and the separately pinned finite certificate have distinct release
+boundaries.
+The manuscript PDF is reproduced from its source directory with
+\begin{verbatim}
+nix shell nixpkgs#tectonic -c tectonic \
+  equivariant-robust-completion.tex --keep-logs
+\end{verbatim}
+
+\clearpage

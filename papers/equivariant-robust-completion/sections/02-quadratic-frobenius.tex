@@ -1,0 +1,79 @@
+\section{Quadratic Frobenius and mate lines}
+
+Let $\cC\subseteq\PG(2,K)$ be a $\phi$-invariant $k$-arc.  Write
+\[
+  f=|\cC\cap\PG(2,F)|,
+  \qquad k=f+2e,
+\]
+so that $\cC$ is the disjoint union of $f$ fixed points and $e$ nonfixed
+conjugate pairs.
+
+For every nonfixed point $P$, the line $P\phi(P)$ is fixed by $\phi$; we
+call it the \emph{mate line} of the pair $\{P,\phi(P)\}$.  Conversely, every
+nonfixed conjugate pair has a unique mate line.  A fixed line contains
+$s^2+1$ points, of which $s+1$ are fixed, and therefore contains exactly
+\[
+  N=\frac{s^2-s}{2}
+\]
+nonfixed conjugate pairs.
+
+\begin{definition}\label{def:legal-pair}
+A \emph{legal conjugate-pair extension} of $\cC$ is an unordered pair
+$Q=\{P,\phi(P)\}$ such that $P\ne\phi(P)$, $Q\cap\cC=\varnothing$, and
+$\cC\cup Q$ is an arc.  Let $\Npair(\cC)$ be the number of such pairs.
+\end{definition}
+
+\begin{definition}[Alternate-orbit repair]\label{def:alternate-repair}
+Let $A$ be an invariant arc, let $O\subseteq A$ be a selected nonfixed
+conjugate orbit, and put $D=A\setminus O$.  An \emph{alternate-orbit repair}
+of this deletion is a legal conjugate-pair extension $Q$ of $D$ with
+$Q\ne O$.  The erased orbit $O$ is itself legal for $D$, so a lower bound
+$\Npair(D)\ge r+1$ supplies at least $r$ alternate repairs.
+\end{definition}
+
+\begin{lemma}[Pair-extension test]\label{lem:pair-test}
+Let $P\ne\phi(P)$ and suppose neither point belongs to $\cC$.  Then
+$\cC\cup\{P,\phi(P)\}$ fails to be an arc if and only if at least one of the
+following holds:
+\begin{enumerate}[label=(\alph*),leftmargin=2em]
+\item $P$ lies on a secant of $\cC$;
+\item $\phi(P)$ lies on a secant of $\cC$;
+\item the mate line $P\phi(P)$ contains a point of $\cC$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Every collinear triple in the enlarged set either contains one new point
+and two old points, giving (a) or (b), or contains both new points and one
+old point, giving (c).  The converse is immediate.
+\end{proof}
+
+The useful carriers are therefore the fixed lines disjoint from $\cC$.
+Let $\cE$ be this set of empty fixed lines.
+
+\begin{lemma}[Empty fixed lines]\label{lem:empty-lines}
+The number of empty fixed lines is
+\begin{equation}\label{eq:E}
+ E=|\cE|=s^2+s+1-\left(f(s+1)-\binom f2+e\right).
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+The $f$ fixed selected points occupy
+$f(s+1)-\binom f2$ fixed lines.  Inclusion--exclusion is exact because no
+three selected fixed points are collinear.  Each selected conjugate pair
+occupies its mate line.  These $e$ lines are distinct and contain no fixed
+selected point, since $\cC$ is an arc.  Subtract from the $s^2+s+1$ fixed
+lines.
+\end{proof}
+
+Among the $\binom k2$ old secants, exactly
+\[
+ I=\binom f2+e
+\]
+are fixed: those joining two fixed selected points and the $e$ mate lines.
+The remaining secants occur in two-element Frobenius orbits.  Their number
+is
+\begin{equation}\label{eq:M}
+ M=\frac{\binom k2-I}{2}=fe+e(e-1).
+\end{equation}

@@ -1,0 +1,27 @@
+{
+  "title": "Frobenius-equivariant pair extension and robust repair of eight-arcs",
+  "description": "This paper studies arcs in PG(2,s^2) invariant under the quadratic Frobenius involution and the corresponding dimension-three MDS codes. Fixed mate lines turn extension by a nonfixed conjugate pair into a carrierwise counting problem, while invisible centers and collision redundancy give an exact correction. Every invariant eight-arc over every prime-power base order s >= 5 admits a fresh conjugate-pair extension; over F_25 there are at least four legal pairs, and the exceptional two-fixed-point profile has exact minimum 32. The structural reductions have human-scale Lean support, and the normalized exceptional census is checked by a separately pinned Mathlib-only certificate package.",
+  "creators": [
+    {
+      "name": "Rudd, Tavis",
+      "orcid": "0009-0003-6405-3275",
+      "affiliation": "Independent researcher"
+    }
+  ],
+  "access_right": "open",
+  "license": "cc-by-4.0",
+  "upload_type": "publication",
+  "publication_type": "preprint",
+  "keywords": [
+    "finite projective geometry",
+    "arcs",
+    "MDS codes",
+    "Frobenius involution",
+    "Baer subplanes",
+    "equivariant completion",
+    "robust repair",
+    "formal verification",
+    "Lean"
+  ],
+  "notes": "Correspondence: tavisrudd@damnsimple.com"
+}

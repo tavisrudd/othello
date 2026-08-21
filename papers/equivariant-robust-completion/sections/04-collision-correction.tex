@@ -1,0 +1,71 @@
+\section{Invisible centers and collision correction}
+
+The preceding theorem subtracts every nonfixed secant orbit once on every
+empty carrier.  Exactness requires recording when an orbit contributes
+nothing and when several orbits forbid the same candidate.
+
+Fix $\ell\in\cE$.  Every nonfixed secant orbit has a fixed center
+$m\cap\phi(m)$.  Let $B_\ell$ be the number of such orbits whose center
+lies on $\ell$.  Those orbits meet $\ell$ only in a fixed point and are
+invisible to its nonfixed candidates.
+
+For $Q\in\cQ_\ell$, let $\mu_\ell(Q)$ be the number of visible secant
+orbits that charge $Q$, and put
+\[
+ A_\ell=\sum_{Q\in\cQ_\ell}\mu_\ell(Q),
+ \qquad
+ R_\ell=\sum_{Q\in\cQ_\ell}
+     \pospart{\mu_\ell(Q)-1}.
+\]
+Here $R_\ell$ is the redundancy caused by several visible obstruction
+orbits hitting the same candidate.
+
+\begin{proposition}[Exact linewise correction]\label{prop:linewise}
+For every empty fixed line $\ell$,
+\begin{align}
+ A_\ell&=M-B_\ell,\label{eq:visible-mass}\\
+ |\cF_\ell|&=A_\ell-R_\ell,\label{eq:support}\\
+ |\cQ_\ell\setminus\cF_\ell|+M
+   &=N+B_\ell+R_\ell.\label{eq:linewise-balance}
+\end{align}
+Consequently the first-order identity
+$|\cQ_\ell\setminus\cF_\ell|+M=N$ holds exactly when every secant orbit is
+visible on $\ell$ and the visible charge map is injective.
+\end{proposition}
+
+\begin{proof}
+Exactly $B_\ell$ of the $M$ secant orbits are invisible, proving
+\eqref{eq:visible-mass}.  The support of the multiplicity function
+$\mu_\ell$ is $\cF_\ell$, and for every positive integer $a$ one has
+$1=a-(a-1)$.  Summing this equality over the support gives
+\eqref{eq:support}.  Substitution into
+$|\cQ_\ell\setminus\cF_\ell|=N-|\cF_\ell|$ gives
+\eqref{eq:linewise-balance}.  Equality in the first-order identity is
+equivalent to $B_\ell=R_\ell=0$.
+\end{proof}
+
+Let
+\[
+ L=\Npair(\cC),\qquad
+ B=\sum_{\ell\in\cE}B_\ell,
+ \qquad
+ R=\sum_{\ell\in\cE}R_\ell.
+\]
+
+\begin{corollary}[Aggregate equality and excess]
+\label{cor:aggregate}
+The exact aggregate balance is
+\begin{equation}\label{eq:aggregate}
+  L+EM=EN+B+R.
+\end{equation}
+Thus $L+EM=EN$ if and only if every secant-orbit center avoids every empty
+fixed carrier and every local visible charge is injective.  More generally,
+for each integer $t\ge0$,
+\[
+  L+EM=EN+t\quad\Longleftrightarrow\quad B+R=t.
+\]
+\end{corollary}
+
+This is an algebraic equality and excess classification.  It does not
+classify the invariant arcs for which $L$ is small, and no such structural
+inverse theorem is claimed.

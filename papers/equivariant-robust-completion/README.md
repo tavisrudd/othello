@@ -39,6 +39,8 @@ semantic transport remain manuscript arguments.  The certificate's generic
 and row-specific trust surfaces, the classical projective-geometry inputs, and
 the bounded priority boundary are stated explicitly.
 
-The directory contains the focused LaTeX manuscript, bibliography, PDF, and
-verification surface. It is a staged paper release; publication identifiers,
-final export choices, and submission remain author decisions.
+The directory contains the focused LaTeX manuscript, bibliography, PDF,
+Zenodo metadata, and verification surface. The manuscript entry point is
+`equivariant-robust-completion.tex`; its numbered sections live under
+`sections/`. It is a staged paper release; publication identifiers, final
+export choices, and submission remain author decisions.

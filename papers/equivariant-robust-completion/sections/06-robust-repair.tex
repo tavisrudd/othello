@@ -1,0 +1,171 @@
+\section{General robust repair}
+
+The profile envelope and parameterized exchange theorem are the general
+repair statements of the paper.  We first record a secondary saturation
+consequence of the carrier criterion, then derive those two results.
+
+\subsection*{A saturation consequence}
+
+Call an invariant arc \emph{pair-saturated} if it has no legal conjugate-pair
+extension.  This is weaker than ordinary completeness.
+
+\begin{corollary}[Orbit-saturation bound]\label{cor:saturation}
+If a $\phi$-invariant $k$-arc in $\PG(2,s^2)$ is pair-saturated, then
+\begin{equation}\label{eq:saturation}
+  k\ge 1+\left\lceil\sqrt{2s(s-1)}\right\rceil.
+\end{equation}
+In particular, for every prime power $s\ge7$, every invariant eight-arc in
+$\PG(2,s^2)$ admits a conjugate-pair extension.
+\end{corollary}
+
+\begin{proof}
+If every fixed line is occupied, Lemma~\ref{lem:empty-lines} gives
+$s^2+s+1=f(s+1)-\binom f2+e$.  Substituting $2e=k-f$ and completing the
+square gives the occupation identity
+\[
+  k=s^2+1+(f-s-1)^2,
+\]
+which is stronger than \eqref{eq:saturation}.  Otherwise choose an empty
+fixed line.  Pair saturation forces all $N=s(s-1)/2$ of its candidates to
+be forbidden, so $N\le M$.  From $k=f+2e$ and \eqref{eq:M},
+\[
+  M=e((k-1)-e),
+  \qquad
+  4M\le(k-1)^2.
+\]
+Consequently $2s(s-1)\le(k-1)^2$, which gives
+\eqref{eq:saturation}.
+
+For $k=8$, one has $M\le12<N$ when $s\ge7$.  Full occupation is impossible
+because $8<s^2+1$, so Theorem~\ref{thm:pair-criterion} applies.
+\end{proof}
+
+\subsection*{Profile envelope and robust exchange}
+
+\begin{theorem}[Five-profile lower envelope]\label{thm:profile-envelope}
+Let $s\ge7$ and let $D$ be a $\phi$-invariant eight-arc with profile
+$8=f+2e$.  Put $N=s(s-1)/2$.  Then $\Npair(D)\ge L_f(s)$, where
+\[
+\begin{array}{c|c|c|c}
+(f,e)&E_f(s)&M_f&L_f(s)=E_f(s)(N-M_f)\\ \hline
+(0,4)&s^2+s-3&12&(s^2+s-3)(N-12)\\
+(2,3)&s^2-s-3&12&(s^2-s-3)(N-12)\\
+(4,2)&s^2-3s+1&10&(s^2-3s+1)(N-10)\\
+(6,1)&s^2-5s+9&6&(s^2-5s+9)(N-6)\\
+(8,0)&s^2-7s+21&0&(s^2-7s+21)N.
+\end{array}
+\]
+For the certified first-order envelope $L(s)=\min_f L_f(s)$,
+\[
+  L(7)=319,\qquad L(8)=726,\qquad L(9)=1350,
+\]
+and $L(s)=L_8(s)$ for every $s\ge10$.  The minimizing profiles are therefore
+$f=4$ at $s=7$, $f=6$ at $s=8,9$, and $f=8$ for $s\ge10$.
+In particular, $\Npair(D)\ge319$ for every $s\ge7$.
+\end{theorem}
+
+\begin{proof}
+Substituting the five solutions of $8=f+2e$ into
+\eqref{eq:E} and \eqref{eq:M} gives the displayed values of
+$E_f$, $M_f$, and hence $L_f=E_f(N-M_f)$ by
+Theorem~\ref{thm:pair-criterion}.  At $s=7,8,9$ the five value vectors are
+respectively
+\[
+(477,351,319,345,441),\quad
+(1104,848,738,726,812),\quad
+(2088,1656,1430,1350,1404).
+\]
+For $s=t+10$, twice each difference $L_f-L_8$, for
+$f=0,2,4,6$, has nonnegative coefficients as a polynomial in $t\ge0$.
+This proves the infinite branch.  Independently, each $L_f(s)$ is
+nondecreasing for $s\ge7$, so the value $319$ at the first boundary is a
+uniform lower bound.  These polynomial identities and inequalities are
+kernel-checked in the supplementary Lean source.
+\end{proof}
+
+\begin{corollary}[Quantitative alternate-orbit repair]
+\label{cor:alternate-repair}
+Let $s\ge7$ be a prime power.  If $A$ is a $\phi$-invariant ten-arc in
+$\PG(2,s^2)$ and $O\subseteq A$ is any selected nonfixed conjugate orbit,
+then deleting $O$ leaves at least $318$ alternate-orbit repairs.
+\end{corollary}
+
+\begin{proof}
+Put $D=A\setminus O$.  Then $D$ is an invariant eight-arc, and $O$ is one
+of its legal conjugate-pair extensions.  Theorem~\ref{thm:profile-envelope}
+gives $\Npair(D)\ge319$.  Excluding $O$ leaves at least $318$ different
+legal pairs.
+\end{proof}
+
+\begin{theorem}[Parameterized robust equivariant exchange]
+\label{thm:parameterized-repair}
+Let $s\ge3$ be a prime power, let $k\ge1$, and let $r\ge0$.  Put
+\[
+  N(s)=\frac{s(s-1)}2,
+  \qquad
+  W(k)=\left\lfloor\frac{(k-1)^2}{4}\right\rfloor.
+\]
+If
+\begin{equation}\label{eq:repair-phase}
+  W(k)+r+1\le N(s),
+\end{equation}
+then deleting any selected nonfixed conjugate orbit from a $\phi$-invariant
+$(k+2)$-arc in $\PG(2,s^2)$ leaves at least $r$ alternate-orbit repairs.
+The obstruction envelope $W(k)$ is exact over all profiles $k=f+2e$.
+In particular, if $s\ge4$ and $1\le k\le s+1$, every such deletion has an
+alternate repair.
+\end{theorem}
+
+\begin{proof}
+For a remainder profile $k=f+2e$, the noninvariant old-secant obstruction is
+\[
+  M=f e+e(e-1)=e(k-e-1).
+\]
+The concave quadratic has the exact profile maximum
+$M\le W(k)$: equality is attained by $f=0$ when $k$ is even and by $f=1$
+when $k$ is odd.  Condition~\eqref{eq:repair-phase} implies $k\le2s+1$.
+For $s\ge3$ this gives $k<s^2+1$; the completed-square occupation identity
+\[
+  2E_{\mathrm{occ}}=(s+1)^2+k-(f-s-1)^2
+\]
+then shows that at least one fixed carrier is empty.  On that carrier,
+Theorem~\ref{thm:pair-criterion} gives
+\[
+  \Npair(D)\ge N(s)-M\ge N(s)-W(k)\ge r+1.
+\]
+The erased orbit is one of these legal pairs, so excluding it leaves at
+least $r$ alternatives.
+
+For the rectangular corollary, $k\le s+1$ gives
+$4W(k)\le(k-1)^2\le s^2$, while $s\ge4$ gives
+$s^2+8\le2(s^2-s)=4N(s)$.  Hence $W(k)+2\le N(s)$, which is
+\eqref{eq:repair-phase} with $r=1$.  The restriction $s\ge4$ is genuine for
+this rectangle: $(s,k)=(3,4)$ misses the inequality by one.
+\end{proof}
+
+\begin{corollary}[All base orders from five]\label{cor:all-orders}
+Let $s\ge5$ be a prime power.  Every Frobenius-invariant eight-arc in
+$\PG(2,s^2)$ admits an extension by a fresh nonfixed point together with
+its Frobenius conjugate.
+\end{corollary}
+
+\begin{proof}
+The case $s=5$ is Theorem~\ref{thm:q25}.  There is no prime power strictly
+between $5$ and $7$, and the final assertion of
+Corollary~\ref{cor:saturation} treats every $s\ge7$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+The extension assertion is Corollary~\ref{cor:all-orders}.
+Theorem~\ref{thm:q25} and Corollary~\ref{cor:q25-uniform-repair} give (i),
+while Proposition~\ref{prop:f2} gives (ii), including the normalization
+scope.  Theorem~\ref{thm:profile-envelope} and
+Corollary~\ref{cor:alternate-repair} give (iii).
+\end{proof}
+
+The scale in \eqref{eq:saturation} is the classical Lunelli--Sce scale for
+ordinary complete arcs, with the same secant-covering mechanism in the
+Frobenius quotient.  Ng and Wild's line-covering problem
+\cite{NgWild2001} is another adjacent square-root-scale result.  The point
+of Corollary~\ref{cor:saturation} is the weaker pair-saturation hypothesis,
+not a new constant or a sharp family.

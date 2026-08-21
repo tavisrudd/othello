@@ -1,0 +1,83 @@
+\documentclass[11pt]{article}
+
+\usepackage[a4paper,margin=28mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\setlength{\emergencystretch}{2em}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\PG}{\operatorname{PG}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\cE}{\mathcal{E}}
+\newcommand{\cQ}{\mathcal{Q}}
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\Fix}{\operatorname{Fix}}
+\newcommand{\Npair}{N_{\mathrm{pair}}}
+\newcommand{\pospart}[1]{\left(#1\right)_{+}}
+
+\title{Frobenius-equivariant pair extension and robust repair of
+eight-arcs}
+\author{Tavis Rudd}
+\date{July 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Let $\phi$ be the quadratic Frobenius involution of $\PG(2,s^2)$.  We study
+extensions of $\phi$-invariant arcs by fresh nonfixed conjugate pairs, or
+equivalently Frobenius-compatible two-column extensions of the associated
+dimension-three MDS codes.  Every pair lies on a unique fixed mate line.
+Counting pairs carrier by carrier gives a uniform lower bound, and an exact
+correction records secant orbits that disappear at fixed centers and visible
+orbits that collide on one candidate.
+
+Every invariant eight-arc over every prime-power base order $s\ge5$ admits
+such an extension.  Over $\F_{25}$ there are at least four legal pairs; the
+exceptional two-fixed-point profile has exact minimum $32$.  For $s\ge7$
+there are at least $319$ legal pairs.  These bounds yield alternate repairs
+after deletion of a selected orbit, and a parameterized criterion gives the
+corresponding result for invariant $(k+2)$-arcs.  The structural reductions
+have human-scale Lean support.  A separate Mathlib-only certificate checks
+the normalized exceptional census; the projective normalizations and
+semantic transport are manuscript arguments.
+\end{abstract}
+
+\input{sections/01-introduction}
+\input{sections/02-quadratic-frobenius}
+\input{sections/03-pair-extension-criterion}
+\input{sections/04-collision-correction}
+\input{sections/05-eight-arcs-q25}
+\input{sections/06-robust-repair}
+\input{sections/07-formal-verification}
+\input{sections/08-conclusion}
+
+\section*{AI assistance disclosure}
+
+This project was developed with extensive assistance from OpenAI Codex and
+Anthropic Claude. Under the author's direction, the systems assisted
+throughout with proof exploration, literature research, symbolic and finite
+computation, code and formal-proof development, verification, and manuscript
+drafting and revision. The author checked the resulting arguments,
+computations, code, and cited sources, reviewed and edited all AI-assisted
+material, and assumes responsibility for all content.
+
+\bibliographystyle{plain}
+\bibliography{refs}
+
+\end{document}
