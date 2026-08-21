@@ -130,4 +130,6 @@ realization.  The reference is explicitly non-load-bearing for the epilogue.
 Rendered pages 11--13 and 50--51 were inspected after insertion; the citation,
 the neighboring proposition break, and the two-page bibliography are clean.
 The resulting 51-page epilogue was exported and verified in its standalone
-repository at commit `9ce774f`.
+repository.  A subsequent venue-independent front-matter pass reduces the
+abstract to 164 words and adds the programme's standard AI-assistance
+disclosure; the current standalone commit is `65ef31d`.

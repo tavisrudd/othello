@@ -589,9 +589,11 @@ that spacing is preferable to tightening all references merely to recover a
 page.
 
 Authority commit `818c14c4a` adds the forward reference and bibliography item.
-The epilogue was exported from that exact source commit to
+Authority commit `40cea7816` subsequently reduces the abstract to 164 words
+and adds the programme's standard AI-assistance disclosure.  The epilogue was
+exported from that exact source commit to
 `~/src/math-papers/cubic-stabilization-epilogue` and committed there as
-`9ce774f`.  Standalone `make check` passes, the exporter verifies all 231
+`65ef31d`.  Standalone `make check` passes, the exporter verifies all 231
 tracked files, and the authority and standalone 51-page PDFs have identical
 SHA-256 digest
-`6c2f164c66497bae23f0e5d60055993660af782140f77008cde0692db40e259c`.
+`52090c1d3b07ffc4a01ff1ee810ea395b886302ed73fc33c24bd948d725adcfe`.

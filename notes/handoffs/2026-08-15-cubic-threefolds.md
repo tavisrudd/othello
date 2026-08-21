@@ -68,8 +68,9 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   `../2026-08-21-c936-modular-resolvent-companion.md`.  The cubic-stabilization
   epilogue now points forward to the companion from its elliptic-discriminant
   paragraph.  Its 51-page rendering passes visual inspection and `make check`;
-  the verified standalone epilogue is synchronized at commit `9ce774f`, with a
-  PDF byte-identical to authority.
+  its abstract is now a 164-word theorem-first paragraph and it carries the
+  standard AI-assistance disclosure.  The verified standalone epilogue is
+  synchronized at commit `65ef31d`, with a PDF byte-identical to authority.
 - **C935 — closed 2026-08-21; exotic gluing is the elliptic discriminant
   orientation.**  The epilogue now proves that monodromy on the exotic pair is
   the sign of its action on the rational two-division triple, identifies the
