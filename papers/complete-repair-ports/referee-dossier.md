@@ -28,7 +28,7 @@ should record the commit and PDF SHA-256 before reading.
 
 1. A complete bounded repair port has support, normalized coefficient, and
    probability layers.
-2. For a positive-dimensional `[n,k]` MDS code, the radius-`k` coefficient
+2. For an `[n,k]` MDS code with `1 <= k < n`, the radius-`k` coefficient
    port at one target spans the whole dual, has reconstruction radius `k`, and
    projects to the generic complete `k`-uniform support clutter.
 3. Concatenation has an exact pointed nonembedded-witness threshold obtained

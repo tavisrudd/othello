@@ -15,6 +15,10 @@ radius-four harmonic ports, and the abstract nucleus-gate closure identities.  T
 terminal list and each declared axiom set live in
 `trust/areas/complete_ports.toml`.
 
+The completed projective twisted-cubic terminals give the exact `[2q+2,4,q]_q` parameters, prove
+that radius four exhausts every full minimal port, and establish the uniform cubic and axis
+matching/transversal rows at radius four and at full radius.
+
 The reliability terminals prove deletion--contraction, pivotal derivatives, the homogeneous
 Russo--Margulis identity, erasure-sign conditioning, the no-repair convention, radius truncation,
 cheapest-repair-radius transforms, and the minimum-blocker expansion by finite sums and polynomial

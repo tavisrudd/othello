@@ -2,6 +2,7 @@
 \label{sec:flagships}
 
 \subsection{The twisted-cubic--axis family}
+\label{subsec:cubic-axis}
 
 Let $q=3^h$ and work in $\mathrm{PG}(3,q)$.  Put
 \[
@@ -38,33 +39,107 @@ $(\F_q,+)$, then
  =\left(\frac{5q-9}{6},2q-2-Z_3(q)\right).
 \]
 In particular every coordinate satisfies $\tau>\nu$ for $q\geq9$.
-\end{theorem}
 
-\begin{proof}
-A plane containing $L_q$ contains at most one cubic point by Frobenius
-injectivity; a plane not containing it meets the line once and the cubic at
-most three times.  This gives the code parameters.  Vandermonde determinants
-classify the displayed small circuits.  At an axis target the repair clutter
-is a disjoint union of $K_q$ and a zero-sum-triple hypergraph, so matching and
-transversal numbers add; complements of transversals are precisely
-zero-sum-free sets.  At a cubic target, inversion relabels the other cubic
-helpers by $\F_q^*$.  A multiplicative-generator pairing gives $(q-1)/2$
-repairs with distinct axis completions; no larger matching is possible because
-each repair uses two of the $q-1$ cubic helpers.  The shifted-inverse
-complement lemma bounds a repair-free helper set by $q+2$, attained by all
-axis helpers together with one cubic helper.  Taking complements gives
-$\tau=q-2$.  The stated strict inequalities follow from the elementary bound
-$Z_3(q)\leq q-2$ and the displayed formulas.
-\end{proof}
-
-Restoring the cubic point at infinity gives a
-$[2q+2,4,q]_q$ code whose full minimal port is visible at radius four and has
-uniform rows
+After adjoining \(C(\infty)=(0:0:0:1)\), the completed row code is
+\([2q+2,4,q]_q\).  Radius four is its full minimal port, and its rows are
+uniform on the two projective blocks:
 \[
  \left(\frac{q-1}{2},q-1\right)\text{ on the cubic},
  \qquad
  \left(\frac{5q-3}{6},2q-3\right)\text{ on the axis}.
 \]
+\end{theorem}
+
+\begin{proof}
+A plane containing $L_q$ contains at most one cubic point by Frobenius
+injectivity; a plane not containing it meets the line once and the cubic at
+most three times.  A plane through \(L_q\) and one cubic point has \(q+2\)
+columns, so the largest section has size \(q+2\); the length \(2q+1\) and
+rank four therefore give distance \(q-1\).
+
+Write \(\Delta(s,t,u)=(s-t)(s-u)(t-u)\).  Direct expansion gives, up to the
+fixed ordering sign,
+\[
+ \det\bigl(C(s),C(t),C(u),(0:a:b:0)\bigr)
+   =\Delta(s,t,u)(a e_2-b e_1).
+\]
+Thus three distinct cubic points meet the axis in the unique point
+\((0:e_1:e_2:0)\).  If \(e_1=0\), then in characteristic three
+\(e_2=-(s-t)^2\neq0\), so this point is \(A_\infty\).  Four cubic columns
+have nonzero Vandermonde determinant.  Two distinct cubic and two distinct
+axis columns also have nonzero determinant, while any set containing three
+axis points already contains an axis triple.  These calculations prove both
+the displayed circuit list and its completeness through size four.
+
+We record the elementary hypergraph calculation used for the exact rows.
+Let \(\mathcal Z\) be the triples of \(\F_q\) with sum zero.  The parallel
+class
+\(\{a,a+1,a-1\}\) partitions \(\F_q\), so
+\(\nu(\mathcal Z)=q/3\); after deleting all triples through zero, deleting the
+one affected parallel-class member gives \(\nu=q/3-1\).  A set avoids
+\(\mathcal Z\) exactly when it is three-term-zero-sum-free, hence
+\(\tau(\mathcal Z)=q-Z_3(q)\).  Translation preserves \(\mathcal Z\) and
+lets a maximum avoiding set omit zero; adjoining the now-isolated zero shows
+that the deleted hypergraph has transversal number \(q-1-Z_3(q)\).
+
+At an axis target, the minimal clutter is the disjoint union of the complete
+graph on the other \(q\) axis points and a three-cubic component.  At
+\(A_\infty\) that component is \(\mathcal Z\).  At \(A(a)\), the bijection
+\[
+ s\longmapsto(s+a)^{-1}
+\]
+identifies it with the zero-sum triples avoiding zero: expanding the numerator
+of the sum of the three inverses gives exactly
+\(e_2-ae_1=0\).  Matching and transversal numbers add across the two disjoint
+helper blocks.  Since \(K_q\) contributes \(((q-1)/2,q-1)\), the two stated
+axis rows follow.
+
+Fix now a cubic target \(C(x)\).  Relabel every other cubic parameter by
+\(u=(s-x)^{-1}\in\F_q^*\).  The repair using parameters \(s,t\) has axis
+completion
+\[
+ \chi_x(u+v),\qquad
+ \chi_x(w)=
+ \begin{cases}A_\infty,&w=0,\\ A(-x+w^{-1}),&w\ne0,
+ \end{cases}
+\]
+and \(\chi_x\) is injective.  If \(g\) generates \(\F_q^*\), pairing
+\(g^{2i}\) with \(g^{2i+1}\) uses every nonzero parameter once and gives
+distinct colors \(g^{2i}(1+g)\).  This is a matching of size
+\((q-1)/2\), and no matching can be larger because every repair uses two
+cubic helpers.  For the transversal, all but one cubic helper give a cover of
+size \(q-2\).  Conversely, if a cover selects \(t\) cubic helpers and leaves a
+nonempty set \(U\) unselected, fix \(u_0\in U\).  For every
+\(v\in U\setminus\{u_0\}\), the distinct axis color
+\(\chi_x(u_0+v)\) must be selected.  Hence the cover has at least
+\(t+(|U|-1)=q-2\) vertices.  This proves the cubic row without an unstated
+complement lemma.  The bound \(Z_3(q)\le q-2\), witnessed by the zero-sum
+triple \(\{0,1,-1\}\), gives \(\tau>\nu\) for \(q\ge9\).
+
+For the completion, projective shifted inversion
+\(s\mapsto(s+a)^{-1}\), with its pole sent to infinity and infinity to zero,
+is induced by an invertible ambient map; it is transitive on each of the
+cubic and axis blocks.  It therefore suffices to use targets \(C(\infty)\)
+and \(A_\infty\).  At \(C(\infty)\) the radius-three repairs are
+\(\{C(s),C(t),A(s+t)\}\).  The same pairing and covering argument gives
+\(((q-1)/2,q-1)\).  At \(A_\infty\), the radius-three matching already has
+\((q-1)/2+q/3=(5q-3)/6\) edges.  In any matching of minimal radius-four
+repairs, if an edge uses \(c\) cubic and \(a\) axis helpers, independence of
+the helper columns and the circuit classification give \(2c+3a\ge6\).
+Summing over the disjoint edges and using the \(q+1\) cubic and \(q\)
+available axis coordinates yields
+\(6\nu\le2(q+1)+3q=5q+2\), hence the same upper bound
+\((5q-3)/6\).
+
+Finally, a helper set contains no full repair exactly when it lies in a
+hyperplane section avoiding the target.  For \(C(\infty)\), the largest such
+section has \(q+2\) points (the plane \(X_3=0\) attains it), giving
+\(\tau=(2q+1)-(q+2)=q-1\).  A plane avoiding \(A_\infty\) meets the axis once
+and the cubic at most three times, and an explicit four-point section attains
+four; hence \(\tau=(2q+1)-4=2q-3\).  Rank four makes every minimal circuit
+have at most five points, so radius four exhausts the full minimal port.
+\end{proof}
+
 This is the inner code in the strict weighted-transfer example above.
 The exact $q=9$ rows are recorded in Appendix~\ref{sec:finite-evidence}.
 

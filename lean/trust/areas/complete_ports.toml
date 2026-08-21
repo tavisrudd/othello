@@ -57,6 +57,12 @@ terminals = [
   "RepairPorts.coeff_blockerFailurePolynomial_eq_zero_below_minimum",
   "RepairPorts.blockerFailurePolynomial_eq_minimum_term_add_remainder",
   "RepairCodes.projectiveAxisTwistedCubic_strict_weighted_transfer_of_regular_projective_action",
+  "FiniteGeom.projectiveAxisTwistedCubic_code_parameters",
+  "RepairCodes.minimalProjectiveAxisTwistedCubicRepair_full_eq_four",
+  "RepairCodes.minimalProjectiveCubicRepair_four_invariants",
+  "RepairCodes.minimalProjectiveAxisRepair_four_invariants",
+  "RepairCodes.minimalProjectiveCubicRepair_full_invariants",
+  "RepairCodes.minimalProjectiveAxisRepair_full_invariants",
   "RepairPorts.harmonicQuarticDeterminant_finite",
   "RepairPorts.harmonicQuarticDeterminant_infinity",
   "RepairPorts.existsUnique_harmonicQuarticCompletion",
@@ -279,6 +285,36 @@ expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 
 [[terminal]]
 declaration = "RepairCodes.projectiveAxisTwistedCubic_strict_weighted_transfer_of_regular_projective_action"
+gates = ["RepairPorts.Gates.CompletePorts"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "FiniteGeom.projectiveAxisTwistedCubic_code_parameters"
+gates = ["RepairPorts.Gates.CompletePorts"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RepairCodes.minimalProjectiveAxisTwistedCubicRepair_full_eq_four"
+gates = ["RepairPorts.Gates.CompletePorts"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RepairCodes.minimalProjectiveCubicRepair_four_invariants"
+gates = ["RepairPorts.Gates.CompletePorts"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RepairCodes.minimalProjectiveAxisRepair_four_invariants"
+gates = ["RepairPorts.Gates.CompletePorts"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RepairCodes.minimalProjectiveCubicRepair_full_invariants"
+gates = ["RepairPorts.Gates.CompletePorts"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RepairCodes.minimalProjectiveAxisRepair_full_invariants"
 gates = ["RepairPorts.Gates.CompletePorts"]
 expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 

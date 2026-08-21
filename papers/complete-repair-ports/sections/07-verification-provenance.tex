@@ -18,8 +18,18 @@ strict field-nine corollary is the conclusion of
 \path{RepairCodes.projectiveAxisTwistedCubic_strict_weighted_transfer_of_regular_projective_action}.
 \end{quote}
 Singer regularity is an explicit hypothesis of that declaration, not a hidden
-formal axiom.  The exact public module closure and artifact provenance are
-release-gate data, not claims made by this private draft.
+formal axiom.
+
+The paper's \path{verification/formal-boundary.json} fixes the formal source
+commit, the finitegeom base commit, Lean and mathlib revisions, gate-fact hash,
+32-module closure, and 54 paper-facing terminals.  At source commit
+\texttt{832a9d60682a6c6175131e93802275bde85c4bae}, the immutable area-export
+planner reports 722374 closure bytes and no prose drift against finitegeom
+commit \texttt{b871c10b4a91200a0913644d39b9f0ce44f655ca}.  The companion
+\path{verification/README.md} gives the guarded build, axiom-audit, and
+area-export replay commands.  These identifiers distinguish the kernel-checked
+module closure from the manuscript PDF and from evidence-only finite
+calculations.
 
 Trace duality, scaled concatenated parameters, exact target density, eventual
 necessity and sufficiency, support/coefficient transfer, and the MDS
@@ -59,18 +69,29 @@ polynomial.
 \subsection{Field-nine evidence}
 \label{sec:finite-evidence}
 
-For the completed field-nine cubic--axis code, $Z_3(9)=4$, and the cubic,
-finite-axis, and axis-infinity coordinate types have exact $(\nu,\tau)$ rows
+For the uncompleted field-nine cubic--axis code on
+\(T_9\sqcup L_9\), \(Z_3(9)=4\), and the cubic, finite-axis, and
+axis-infinity coordinate types have exact radius-three \((\nu,\tau)\) rows
 \[
  (4,7),\qquad(6,12),\qquad(7,13),
 \]
-with multiplicities $9,9,1$.  A Singer-shifted generalized single-parity-check
-$[5,4,2]_{6561}$ outer code has functional distance five but weighted distance
-at least six.  Its exact nonembedded threshold is six, so radius-four transfer
-holds although the support-distance gate requiring functional distance six
-fails.  The five parity-check multipliers use a regular Singer action so that
-the inner code's twenty unit-cost projective functional classes have disjoint
-translates in the five blocks.
+with multiplicities \(9,9,1\).  These are not rows of the completed code.
+After adjoining \(C(\infty)\), Theorem~\ref{thm:cubic} gives the two uniform
+radius-four/full-port rows
+\[
+ (4,8)\quad\text{on the ten cubic coordinates},\qquad
+ (7,15)\quad\text{on the ten axis coordinates}.
+\]
+
+Corollary~\ref{cor:strict-transfer} uses the completed 20-coordinate code.
+Its generalized-SPC check has coefficients
+\((1,a,1,1,1)\), where \(a\) is a linear Singer multiplier whose translate of
+the 20 unit-cost projective functional classes is disjoint from the original
+20-set.  Regularity on 820 classes and \(20^2<820\) prove that such an \(a\)
+exists.  Thus this is an exact conditional-on-Singer existence proof, not a
+claim that five field elements or a hidden finite multiplier certificate were
+computed.  The functional support distance is five, the weighted and exact
+nonembedded thresholds are six, and radius-four transfer follows.
 
 For the quartic--nucleus code at $q=9$, the general formulas give 30 nucleus
 repairs and 12 repairs at each curve target.  The certificate additionally

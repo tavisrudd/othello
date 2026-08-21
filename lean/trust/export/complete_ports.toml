@@ -20,7 +20,8 @@ This boundary records the formal development of bounded repair ports: the
 paper-facing coefficient-port object, the intrinsic reconstruction radius, the
 bridge to standard-code duality, minimum-port reconstruction for maximum
 distance separable codes, exact pointed transfer, and the finite reliability and
-bounded-radius erasure calculus.
+bounded-radius erasure calculus.  It also records the completed projective
+twisted-cubic parameters, radius-four stabilization, and exact cubic/axis rows.
 """
 
 correspondence = """
@@ -34,6 +35,11 @@ It then proves exact transfer of ports along pointed maps, and develops the
 erasure calculus in two forms: a finite reliability statement, and a
 bounded-radius statement in which the reconstruction radius is constrained in
 advance.
+
+For the completed projective twisted cubic with its common axis, the closure
+proves the `[2q+2,4,q]_q` parameters, identifies radius four with the full
+minimal repair hypergraph, and computes the uniform matching and transversal
+rows for both coordinate orbits.
 
 One statement is conditional.  The strict weighted example assumes the displayed
 regular Singer-action input and asserts nothing without it; every other terminal
@@ -56,7 +62,8 @@ This audit prints the axioms of the terminals exported with the bounded
 repair-port boundary: the coefficient-port object and intrinsic reconstruction
 radius, the standard-code duality bridge, minimum-port reconstruction for
 maximum distance separable codes, exact pointed transfer, and the finite
-reliability and bounded-radius erasure calculus.
+reliability and bounded-radius erasure calculus, together with the completed
+projective twisted-cubic parameters and exact cubic/axis port rows.
 """
 
 readme_anchor = "  upper bounds alone."
@@ -64,5 +71,6 @@ readme_anchor = "  upper bounds alone."
 readme_bullet = """- `trust/manifests/complete_ports.json` content-addresses the bounded
   repair-port boundary: the coefficient-port object and intrinsic reconstruction
   radius, the standard-code duality bridge, minimum-port reconstruction for
-  maximum distance separable codes, exact pointed transfer, and the erasure
-  calculus in its finite reliability and bounded-radius forms."""
+  maximum distance separable codes, exact pointed transfer, completed
+  projective twisted-cubic rows, and the erasure calculus in its finite
+  reliability and bounded-radius forms."""

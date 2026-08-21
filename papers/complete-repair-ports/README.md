@@ -43,6 +43,9 @@ bandwidth, full symbol-MAP behavior at a finite radius, or a capacity theorem.
 - `complete_repair_ports.tex` is the manuscript driver.
 - `sections/` contains the numbered theory, application, conclusion, and
   verification/evidence sources.
+- `figures/` contains the source-native proof-spine diagram.
+- `verification/` pins the formal source/base revisions, module closure,
+  terminal count, gate-fact hash, and guarded replay commands.
 - `refs.bib` contains the bibliography.
 - `.zenodo.json` contains preprint deposit metadata; it creates no deposit or
   DOI by itself.

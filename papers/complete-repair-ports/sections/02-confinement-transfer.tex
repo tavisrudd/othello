@@ -151,7 +151,43 @@ transfer conclusion follows.
 The functional-dual decomposition is classical concatenation machinery
 \cite[Theorem~2.3]{ChenLingXing2001}\cite[Theorem~2.1]{ChenLingXing2005}.
 The weighted statement matters because ordinary functional support distance
-can be strictly weaker.  The completed field-nine cubic--axis inner code has a
-radius-four instance in which weighted transfer succeeds although the
-support-distance gate fails.  Appendix~\ref{sec:verification} records the
-finite calculation and its Singer-regularity input \cite{Singer1938}.
+can be strictly weaker.
+
+\begin{corollary}[Strict weighted transfer]
+\label{cor:strict-transfer}
+Let \(I\) be the completed \([20,4,9]_9\) cubic--axis code of
+Section~\ref{sec:flagships}, identify its message space with
+\(L=\F_{9^4}\), and let \(a:L\to L\) be an \(\F_9\)-linear Singer
+automorphism chosen as in the proof below.  The generalized
+single-parity-check outer code
+\[
+ O_a=\{u\in L^5:u_0+a(u_1)+u_2+u_3+u_4=0\}
+\]
+has functional-dual support distance five, but its nonzero weighted
+realization cost for \(I\) is at least six.  Thus the ordinary
+support-distance condition at radius four fails while the exact weighted gate
+holds, and every radius-four support and coefficient port transfers to each
+of the five blocks of \(O_a\circ I\).
+\end{corollary}
+
+\begin{proof}
+The nonzero projective functionals on the four-dimensional \(\F_9\)-space
+\(L\) form \( (9^4-1)/(9-1)=820\) classes.  The twenty coordinate
+functionals of \(I\) give twenty distinct classes because
+\(d(I^\perp)=3\).  Singer's regular action on these projective classes
+\cite{Singer1938} supplies a multiplier \(a\) whose translate of this
+twenty-set is disjoint from the original set: at most \(20^2=400<820\)
+group elements can map some selected class to another selected class.
+
+Every functional-dual tuple of \(O_a\) is
+\((f,f\circ a,f,f,f)\).  If \(f\neq0\), all five entries are nonzero, so the
+functional support distance is exactly five.  A weight-five realization
+would have unit cost in every block.  In particular, both \(f\) and
+\(f\circ a\) would lie in the two disjoint unit-cost class sets, a
+contradiction.  Hence every nonzero tuple costs at least six.  The zero sector
+also costs at least \(2d(I^\perp)=6\), so
+Theorem~\ref{thm:transfer} with \(r=4\) gives the two exact port equalities.
+The displayed parity check makes every outer coordinate projection
+surjective.  Taking any nonzero \(f\) shows at the same time that functional
+distance six is false.
+\end{proof}

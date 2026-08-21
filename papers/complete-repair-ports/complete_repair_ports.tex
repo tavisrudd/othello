@@ -4,8 +4,11 @@
 \usepackage{amsmath,amssymb,amsthm,mathtools}
 \usepackage{booktabs}
 \usepackage{enumitem}
+\usepackage{float}
 \usepackage{hyperref}
+\usepackage{tikz}
 \usepackage{xcolor}
+\usetikzlibrary{arrows.meta,positioning}
 
 \hypersetup{colorlinks=true,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black}
 \setlength{\emergencystretch}{2em}
@@ -85,7 +88,7 @@ records the scalar recovery equations, not only their supports.
 
 \begin{theorem}[MDS coefficient-port reconstruction]
 \label{thm:mds-reconstruction}
-Let $C\leq\F_q^E$ be a positive-dimensional $[n,k]_q$ MDS code and let
+Let $C\leq\F_q^E$ be an $[n,k]_q$ MDS code with $1\leq k<n$, and let
 $x\in E$.  Then
 \[
  \operatorname{span}\cP_x^{(\leq k)}(C)=C^\perp,
@@ -102,6 +105,12 @@ the represented dual code.  The proof chooses minimum dual words with a common
 core of $k-1$ helpers and distinct private coordinates, producing a basis of
 $C^\perp$.  Thus the coefficient layer retains represented information that
 support-only locality discards.
+
+Figure~\ref{fig:transfer-spine} gives the proof spine in one view.  The exact
+transfer theorem concerns the first two port layers; reliability is then
+determined by the transported support layer.
+
+\input{figures/transfer-spine}
 
 The paper has six parts.  Section~\ref{sec:ports} fixes the complete pointed
 object and separates support, coefficient, and probability layers.

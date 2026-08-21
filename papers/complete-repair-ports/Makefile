@@ -12,7 +12,7 @@ all: manuscript
 
 check: manuscript warnings
 
-manuscript: $(SOURCE) refs.bib sections/*.tex
+manuscript: $(SOURCE) refs.bib sections/*.tex figures/*.tex
 	$(LATEXMK) $(LATEXMK_FLAGS) $(SOURCE)
 
 warnings: manuscript

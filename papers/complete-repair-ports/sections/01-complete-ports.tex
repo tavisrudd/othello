@@ -3,6 +3,14 @@
 
 Let $C\leq\F_q^X$ be a linear code, let $x\in X$, and let $r\geq0$.
 
+Throughout, whenever matching, transversal, failure tolerance
+$\tau-1$, or a minimum-blocker leading term is asserted, the minimal repair
+clutter is nonempty and does not contain the empty helper set.  The support,
+coefficient, and reliability definitions themselves remain valid in the two
+degenerate cases: an empty port never repairs, while an empty repair edge
+repairs without a helper.  We state those cases separately rather than assign
+them an adversarial-tolerance interpretation.
+
 \begin{definition}[Support layer]
 \label{def:complete-port}
 The complete radius-$r$ repair hypergraph at $x$ is

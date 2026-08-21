@@ -1,0 +1,36 @@
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+  font=\small,
+  node distance=7mm and 5mm,
+  box/.style={draw, rounded corners=2pt, align=center, inner sep=5pt,
+    minimum height=10mm, text width=29mm},
+  view/.style={draw, align=center, inner sep=4pt, minimum height=9mm,
+    text width=33mm},
+  arrow/.style={-{Latex[length=2mm]}, thick}
+]
+\node[box] (port) {represented inner port\\$\cP_x^{(\le r)}(I)$};
+\node[box, right=of port] (cost) {block-functional costs\\$\mu_x,\ \lambda,\ z_x$\\fixed inner encoder};
+\node[box, right=of cost] (gate) {pointed\\confinement\\$d(O_N^\perp)\ge r+2$ eventually\\$r+1<z_x(I)$};
+\node[box, right=of gate] (copies) {exact block copies\\$N$ targets, density $1/m$};
+
+\draw[arrow] (port) -- (cost);
+\draw[arrow] (cost) -- (gate);
+\draw[arrow] (gate) -- (copies);
+
+\node[view, below=of cost, xshift=-38mm] (support) {support clutter\\availability, tolerance};
+\node[view, right=of support] (coeff) {normalized coefficients\\scalar decoder};
+\node[view, right=of coeff] (prob) {survival event\\reliability, bounded EXIT};
+\draw[arrow] (copies.south) -- ++(0,-3mm) -| (support.north);
+\draw[arrow] (copies.south) -- ++(0,-3mm) -| (coeff.north);
+\draw[arrow] (support.south) -- ++(0,-6mm) -|
+  node[pos=.65, below, font=\scriptsize] {determines} (prob.south);
+\end{tikzpicture}
+\caption{The transfer spine.  In the fixed-inner, $L$-linear concatenation
+regime, weighted block-functional costs give an exact confinement gate.
+When $d(O_N^\perp)\to\infty$ and $r+1<z_x(I)$, support and normalized
+coefficient ports are copied into every block.  Reliability is derived from
+the copied support clutter; the diagram makes no necessity claim for arbitrary
+asymptotically good families.}
+\label{fig:transfer-spine}
+\end{figure}
