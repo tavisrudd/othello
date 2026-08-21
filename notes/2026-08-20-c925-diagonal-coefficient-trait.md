@@ -8,8 +8,9 @@ proved for all five completed unit pilots.  The all-ones class is primitive
 in the Gale quotient, so one may choose the Spenko--Van den Bergh splitting
 whose normalized lift is \(\gamma(t)=t(1,\ldots,1)\).  Consequently every
 coefficient in Proposition 12.6 is the same
-\(q=e^{-2\pi i t}\), \(1-q\) is a uniformizer, and the crossed product normal
-is \((1-q)^{|J|}\).  This closes only the decategorified \(K_0\)-schober
+\(q_{\mathrm{coeff}}=e^{-2\pi i t}\),
+\(1-q_{\mathrm{coeff}}\) is a uniformizer, and the crossed product normal
+is \((1-q_{\mathrm{coeff}})^{|J|}\).  This closes only the decategorified \(K_0\)-schober
 pilot trait.  The categorical schober family, actual AKMW occurrence,
 based-loop reindexing, and fixed-phase QDM/Malgrange reader remain open.
 
@@ -96,17 +97,19 @@ is exactly the normalized lift appearing in Proposition 12.6.  Therefore
 
 \[
  z_j(t)=e^{-2\pi i\gamma_j(t)}
-       =e^{-2\pi i t}=:q(t) \quad\text{for every }j.          \tag{61.6}
+       =e^{-2\pi i t}=:q_{\mathrm{coeff}}(t)
+       \quad\text{for every }j.                              \tag{61.6}
 \]
 
 ### Theorem 61.3 -- admissible punctured coefficient trait
 
 Under Spenko--Van den Bergh's standing pointed-cone and homogeneity
 assumptions, (61.5) defines a sufficiently small punctured analytic trait of
-nonresonant parameters.  At its center \(t=0\), \(q=1\), and
+nonresonant parameters.  At its center \(t=0\),
+\(q_{\mathrm{coeff}}=1\), and
 
 \[
-                         1-q=2\pi i\,t+\mathrm O(t^2)         \tag{61.7}
+          1-q_{\mathrm{coeff}}=2\pi i\,t+\mathrm O(t^2)       \tag{61.7}
 \]
 
 is a uniformizer up to a unit.  Base-changing the integral decategorified
@@ -114,7 +117,8 @@ window representation along
 
 \[
  K_0(\overline S_C^c)\otimes_{\mathbf Z[X(H)]}R,
- \qquad e^\mu\longmapsto q^{\langle\mu,A\mathbf1\rangle},    \tag{61.7a}
+ \qquad e^\mu\longmapsto
+ q_{\mathrm{coeff}}^{\langle\mu,A\mathbf1\rangle},           \tag{61.7a}
 \]
 
 gives a finite-free decategorified \(K_0\)-schober trait on the fixed window
@@ -153,7 +157,7 @@ For every directed wall in all five completed signatures,
 \[
  A_{\eta,z}
    =\prod_{j\in J}(1-z_j\eta^{-d_j})
-   =(1-q)^{|J|}
+   =(1-q_{\mathrm{coeff}})^{|J|}
  \quad\text{at }\eta=1.                                     \tag{61.9}
 \]
 
@@ -207,7 +211,8 @@ packet see this same normalized schober edge and the same based loop?
 |---|---|---|
 | Is the all-ones quotient class primitive? | **yes for all five pilots** | Proposition 61.2 and exact certificate |
 | Can the normalized lift have all coordinates equal? | **yes** | Proposition 61.1 |
-| Is \(q-1\) a genuine trait parameter? | **yes up to a unit** | Theorem 61.3 |
+| Is \(q_{\mathrm{coeff}}-1\) a genuine trait parameter? | **yes up to a unit** | Theorem 61.3 |
+| Is the coefficient loop already the QDM Novikov/large-radius loop? | **not proved, and not a type equality** | the vertical based-loop reader must supply the Fourier--Laplace/deck identification |
 | Is the punctured trait nonresonant? | **yes in the stated pointed homogeneous source scope** | facet-functional proof (61.8) |
 | Does the crossed schober row vanish at the pilot center? | **yes** | Corollary 61.3A |
 | Is this the actual cubic fixed-phase packet edge? | **open** | occurrence/based-loop/QDM--Malgrange reader |

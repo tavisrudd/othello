@@ -123,11 +123,12 @@ Decomposing each shifted output into its common and moving coordinates turns
        =A_{\eta,z}r_{M,-}.                                   \tag{60.7}
 \]
 
-Along the formal diagonal substitution \(z_j=q\), at the wall-factor rank
+Along the formal diagonal substitution \(z_j=q_{\mathrm{coeff}}\), at the wall-factor rank
 character \(\eta=1\),
 
 \[
-                       A_{1,q}=(1-q)^{|J|}.                  \tag{60.8}
+ A_{1,q_{\mathrm{coeff}}}
+       =(1-q_{\mathrm{coeff}})^{|J|}.                        \tag{60.8}
 \]
 
 Every genuine pilot wall has \(|J|\ge1\).  Hence the **crossed** relative
@@ -135,7 +136,9 @@ defect has positive order in every one of the thirty-two directed pilot
 transitions, including the blowup--blowdown and mixed directions where the
 plain complement has order zero.  Module 61 certifies the diagonal
 substitution as an admissible coefficient-torus DVR arc for every completed
-unit pilot.
+unit pilot.  The symbol \(q_{\mathrm{coeff}}\) is not the QDM Novikov
+coordinate: identifying its based loop with the actual fixed-phase
+Fourier--Laplace/deck path is part of the reader, not notation.
 
 This is not a contradiction with Module 58: native common generators remain
 rank-visible and fixed.  The crossed consumer never presents them as moving
