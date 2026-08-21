@@ -6,6 +6,7 @@
 \usepackage{microtype}
 \usepackage{amsmath,amssymb,amsthm,amscd,mathtools,mathrsfs}
 \usepackage{booktabs}
+\usepackage{multicol}
 \usepackage[hidelinks]{hyperref}
 
 \numberwithin{equation}{section}
@@ -574,7 +575,9 @@ Consequently \(Q|_C\) is a nonzero section of
 \(\mathcal O_C(3)\simeq\mathcal O_{\PP^1}(12)\).  Its zero divisor contains
 the twelve distinct points of \(Z\), so it is exactly \(Z\) and is reduced.
 The first-order deformation of \(P+t_0Q\) in this pencil is \(Q\); hence the
-general chordal-limit description applies
+nonvanishing criterion of Allcock--Carlson--Toledo shows that this direction
+is transverse to the chordal locus \cite[Lemma~2.5]{ACT}.  The general
+chordal-limit description therefore applies
 \cite[Remark~1.8]{CMGHL}.  The icosahedral action on \(C\simeq\PP^1\) has a
 unique orbit of length twelve.  In a standard coordinate it is the zero
 divisor of
@@ -588,6 +591,22 @@ Paulhus proves the displayed isogeny decomposition and elliptic factor
 \(c_4=1984=2^6\cdot31\) and \(\Delta=2000=2^4\cdot5^3\), hence
 \(j(E_{\rm ico})=2^{14}31^3/5^3\).  Direct substitution in
 \(J(T)=(T+27)(T+3)^3/T\) gives the same value at \(T=729/5\).
+\end{proof}
+
+\begin{corollary}[Boundary reconstruction]\label{cor:boundary-reconstruction}
+The embedded branch orbit \(Z\subset\PP(W)\) determines the pair
+\((C,[Q|_C])\), hence the chordal central fibre and its projective
+first-order normal direction.
+\end{corollary}
+
+\begin{proof}
+Quadratic generation and \(I_Z(2)=I_C(2)\) recover \(C\) as a scheme; its
+secant variety is the chordal cubic.  The divisor
+\(Z\) uniquely determines \([Q|_C]\in\PP H^0(C,\mathcal O_C(3))\).
+Projective normality identifies this with the normal direction
+\[
+ [Q]\in\PP\bigl(H^0(\PP(W),\mathcal O(3))/I_C(3)\bigr).
+\]
 \end{proof}
 
 Only \(T=0\) and \(T=\infty\) are cusps of \(X_0(3)\).  The marked smooth
@@ -644,38 +663,43 @@ The paper's
 \texttt{make check} target replays all three checks, verifies the manifest, lints
 the source, builds the PDF, and rejects TeX warnings.
 
-\footnotesize
+\scriptsize
+\begin{multicols}{2}
+\raggedcolumns
+\sloppy
+\raggedright
 \begin{thebibliography}{99}
+
+\bibitem{ACT}
+D.~Allcock, J.~A.~Carlson, and D.~Toledo,
+\emph{The moduli space of cubic threefolds as a ball quotient},
+Mem. Amer. Math. Soc. 209 (2011), no.~985;
+doi:10.1090/S0065-9266-10-00591-0.
 
 \bibitem{RebolledoWuthrich}
 M.~Rebolledo and C.~Wuthrich,
 \emph{A moduli interpretation for the non-split Cartan modular curve},
-Glasg. Math. J. 60 (2018), no.~2, 411--434;
-arXiv:1402.3498v2.
+Glasg. Math. J. 60 (2018), no.~2, 411--434.
 
 \bibitem{CMGHL}
 S.~Casalaina-Martin, S.~Grushevsky, K.~Hulek, and R.~Laza,
 \emph{Complete moduli of cubic threefolds and their intermediate Jacobians},
-Proc. Lond. Math. Soc. 122 (2021), 259--316;
-arXiv:1510.08891v2.
+Proc. Lond. Math. Soc. 122 (2021), 259--316.
 
 \bibitem{Hartlieb}
 M.~Hartlieb,
 \emph{Special subvarieties in the locus of intermediate Jacobians of cubic
-threefolds}, Math. Z. 310 (2025), article 52;
-arXiv:2304.03214v2.
+threefolds}, Math. Z. 310 (2025), article 52.
 
 \bibitem{LZ}
 E.~Looijenga and Y.~Zi,
 \emph{Monodromy and period map of the Winger pencil},
-Nagoya Math. J. 251 (2023), 561--602;
-arXiv:2109.01810v2.
+Nagoya Math. J. 251 (2023), 561--602.
 
 \bibitem{Roulleau}
 X.~Roulleau,
 \emph{The Fano surface of the Klein cubic threefold},
-J. Math. Kyoto Univ. 49 (2009), no.~1, 113--129;
-arXiv:1002.4467v1.
+J. Math. Kyoto Univ. 49 (2009), no.~1, 113--129.
 
 \bibitem{Paulhus}
 J.~Paulhus,
@@ -693,9 +717,9 @@ preprint, 2026.
 B.~van Geemen and T.~Yamauchi,
 \emph{On intermediate Jacobians of cubic threefolds admitting an
 automorphism of order five},
-Pure Appl. Math. Q. 12 (2016), no.~1, 141--164;
-arXiv:1506.05346v3.
+Pure Appl. Math. Q. 12 (2016), no.~1, 141--164.
 
 \end{thebibliography}
+\end{multicols}
 
 \end{document}

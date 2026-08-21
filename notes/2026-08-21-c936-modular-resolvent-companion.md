@@ -388,7 +388,7 @@ This explains the rational formula
 
 ## Supplemental literature record
 
-This supplement names five new load-bearing sources; zero were read at full
+This supplement names six new load-bearing sources; zero were read at full
 text.  Each was read at the indicated partial depth.  The searches below were
 discovery and attribution checks, not a priority audit, and no absence-of-prior-
 work claim rests on them.
@@ -398,6 +398,12 @@ work claim rests on them.
   the chordal hyperelliptic extension and the admissible-cover setup.  Cache
   SHA-256
   `d5b3c69094eee70d5486542952f394308e3aa4bdbc5762a85588ebae4b2d7753`.
+- Allcock--Carlson--Toledo, arXiv:math/0608287 and the published Memoirs
+  pagination, **partial**: the introduction and the chordal-discriminant
+  discussion, especially the criterion that a cubic direction is transverse
+  to the chordal locus exactly when its restriction to the singular rational
+  normal quartic is nonzero.  Cache SHA-256
+  `a2b455c771d3bf3d9e69cd85bb672e86b57fa2d60bb3815abd577b592f1afe21`.
 - Rebolledo--Wuthrich, arXiv:1402.3498v2, **partial**: introduction and
   Section 2's nonsplit-Cartan/necklace moduli interpretation.  Cache SHA-256
   `10cee9475c4fc778526ef1d0c11bb8e73647b2305eb7897d7613ee7ca545eaed`.
@@ -419,6 +425,14 @@ work claim rests on them.
 
 The topic-by-topic web queries were:
 
+- chordal reconstruction: `icosahedral orbit 12 points rational normal
+  quartic quadrics ideal chordal cubic threefold`; `chordal cubic threefold
+  12 branch points rational normal quartic deformation intermediate
+  Jacobian`; `binary icosahedral invariant degree 12 rational normal quartic
+  A5 orbit`.  The search stopped after recovering the primary
+  Allcock--Carlson--Toledo transversality criterion and finding no competing
+  formulation of the paper-specific embedded-orbit reconstruction claim;
+  this bounded stop is not a priority verdict.
 - Picard--Lefschetz: `cubic threefold five A2 singularities monodromy
   Picard Lefschetz A5 pencil`; `A2 singularity Picard Lefschetz monodromy
   order 3 vanishing cycles`; `icosahedral A5 cubic threefold pencil five A2
@@ -445,6 +459,10 @@ The topic-by-topic web queries were:
 
 - **Settled:** the chordal `h=5` value is the elliptic factor of the
   icosahedral hyperelliptic limit.
+- **Settled:** the embedded twelve-point branch orbit recovers the singular
+  rational normal quartic by its quadrics, its secant chordal cubic, and the
+  projective first-order normal direction.  This is stronger than the
+  transversality check needed for the limit theorem.
 - **Settled:** the `A_3=F_4^times` coincidence is the nonsplit-Cartan
   structure selected by a golden sheet.
 - **Settled negatively:** no unmarked rational construction can prefer one

@@ -679,3 +679,14 @@ Therefore \(Q|_C\neq0\).  Since it is a section of
 distinct orbit points, its zero divisor is exactly that reduced orbit.  This
 supplies the missing family-specific hypothesis in the general chordal-limit
 theorem and makes Theorem E unconditional.
+
+The closeout literature check also exposes a stronger free consequence.
+Allcock--Carlson--Toledo identify nonzero restriction to the singular quartic
+with a direction normal to the chordal locus.  Here the equality
+\(I_Z(2)=I_C(2)\) reconstructs \(C\) scheme-theoretically from the embedded
+branch orbit, hence reconstructs its secant chordal cubic.  The divisor \(Z\)
+also determines the unique projective section of
+\(\mathcal O_C(3)\simeq\mathcal O_{\mathbf P^1}(12)\) vanishing on it; by
+projective normality this is the class of \(Q\) modulo \(I_C(3)\).  Thus the
+twelve branch points determine both the central fibre and the projective
+first-order normal direction.
