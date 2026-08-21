@@ -30,6 +30,12 @@ mathematical input as the two equations in the semilinear-specialization
 record. When the stronger datum of a horizontal morphism of full based-loop
 representations is available, selecting loop classes constructs that diagram
 morphism uniformly for every directed comparison.
+The selected-local-system adapter makes the remaining vertical identifications
+explicit: the pair selected from the trait representation must be the crossed
+coordinate model diagram, and the pair selected from the fibre representation
+must be the supplied actual fixed-phase diagram. With those two identifications
+and ambient surjectivity, the global horizontal morphism constructs the full
+trait-horizontal reader.
 The horizontal morphism carries an explicit homomorphism between the trait and
 fibre loop groups, so ramified loop reindexing is not identified with equality.
 An endpoint-loop assignment can be constructed from the endpoint's QDM/deck

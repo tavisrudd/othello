@@ -80,6 +80,22 @@ structure LoopAssignment (Index : Type uI) (Loop : Type uLoop) where
 
 namespace LoopAssignment
 
+/-- Reindex an endpoint-loop assignment along a homomorphism of loop groups. -/
+def map
+    {Index : Type uI} {Loop : Type uLoop} {Loop' : Type uLoop'}
+    [Group Loop] [Group Loop']
+    (loopMap : Loop →* Loop') (assignment : LoopAssignment Index Loop) :
+    LoopAssignment Index Loop' where
+  loop index := loopMap (assignment.loop index)
+
+@[simp]
+theorem map_loop
+    {Index : Type uI} {Loop : Type uLoop} {Loop' : Type uLoop'}
+    [Group Loop] [Group Loop']
+    (loopMap : Loop →* Loop') (assignment : LoopAssignment Index Loop) (index : Index) :
+    (assignment.map loopMap).loop index = loopMap (assignment.loop index) :=
+  rfl
+
 /-- Build an endpoint-loop assignment from the endpoint's QDM/deck path field
 and one supplied interpretation of path labels as loop-group elements. -/
 def ofQdmPath

@@ -393,7 +393,11 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   row, the vector coordinate realization of the crossed edge, and this
   incoming-image coverage at resonance.  A full based-loop representation
   morphism along a typed trait-to-fibre loop homomorphism is a stronger optional
-  provider for many edges; exact
+  provider for many edges.  Its selected-local-system adapter shows exactly
+  what must still be identified: the selected trait loops and row must equal
+  the crossed-coordinate model diagram, and the selected fibre loops and row
+  must equal the supplied actual diagram.  Given those equalities,
+  incoming-image coverage constructs the complete reader; exact
   range/coimage base change is a stronger sufficient implementation.  The
   paper-local `TraitHorizontalReader` now composes exactly these hypotheses to
   the directed fibre-variation vanishing theorem.  Its source API also computes

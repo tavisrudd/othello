@@ -289,7 +289,12 @@ index row.
   comparison map; this is the same pair of equations as the prior specialization
   record.  A stronger optional based-loop representation morphism along a typed
   loop-group homomorphism can supply those equations uniformly for many loop
-  pairs.  A separate descent-packet module proves that
+  pairs.  A selected-local-system adapter isolates the two remaining vertical
+  equalities: the chosen trait loops and row must realize the crossed-coordinate
+  model, and the chosen fibre loops and row must realize the fixed actual
+  receiver.  These equalities plus incoming-image coverage construct the
+  complete reader; ambient surjectivity is only one sufficient implementation.
+  A separate descent-packet module proves that
   a regular orbit differs equivariantly from three fixed points and that a unary
   correction is fixed only after its singleton summand is action-stable.  The
   coordinate realization, actual marked comparison, and any equivariant

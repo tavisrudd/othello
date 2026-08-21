@@ -9,6 +9,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.Ran
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.SemilinearVariation
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.MarkedMonodromyDiagram
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.MarkedLocalSystem
+import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.SelectedLocalSystemReader
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.DescentPacket
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.HorizontalReader
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.TraitHorizontalReader
@@ -29,7 +30,12 @@ product commutes with monodromy-image formation. The two monodromies and rank
 row form one endpoint-indexed diagram, so a single naturality law supplies both
 operator intertwining equations as one coherent package. More generally, the
 stronger datum of a horizontal morphism of marked based-loop representations
-supplies every selected directed two-loop diagram. An explicit range
+supplies every selected directed two-loop diagram. The selected-local-system
+adapter records the two remaining identifications:
+the loops and row selected from the trait representation must equal the model
+diagram, and those selected from the fibre representation must equal the
+externally supplied actual diagram. With these identifications, the global
+horizontal morphism constructs the trait reader. An explicit range
 base-change certificate remains available for
 applications that require an image equivalence. The trait-horizontal reader
 composes this specialization law with the crossed-coordinate normal-factor

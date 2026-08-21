@@ -209,6 +209,17 @@ remaining endpoint-path-to-loop interpretation once and prevents per-edge loop
 choice relative to that supplied interpretation; constructing the geometric
 interpretation remains external.
 
+`Comparison.SelectedLocalSystemReader.DiagramIdentification` now isolates the
+two vertical identifications that remain after that selection: the trait-side
+selected loops and row must equal the crossed-coordinate model diagram, and
+the fibre-side selected loops and row must equal the externally supplied
+actual diagram.  Given those two equalities and ambient surjectivity,
+`SelectedLocalSystemReader.Reader.ofMarkedLocalSystemOfSurjective` constructs
+the complete trait-horizontal reader.  With a non-surjective comparison,
+`ofMarkedLocalSystemWithImageSpan` consumes the weaker incoming-image coverage
+clause directly.  This is a packaging reduction, not a proof of either QDM
+identification.
+
 Some form of item 4 cannot be omitted.  Over `R = C[[s]]`, take
 `T = (1 - s) id_R`.  Then
 
@@ -299,6 +310,7 @@ The main checked declarations are:
 - `Comparison.MarkedMonodromyDiagram.SemilinearMorphism.projectedVariation_specializes`;
 - `Comparison.MarkedLocalSystem.SemilinearHorizontal.projectedVariation_specializes`;
 - `Comparison.MarkedLocalSystem.SemilinearHorizontal.projectedVariation_eq_zero_of_normalFactor`;
+- `Comparison.SelectedLocalSystemReader.DiagramIdentification.selectedMorphism_map`;
 - `Comparison.DescentPacket.fixed_of_stable_singleton`;
 - `Comparison.DescentPacket.unaryPacketEquivariantEquiv`;
 - `Comparison.DescentPacket.regular_not_equivariantly_equivalent_fixedThree`;
