@@ -116,7 +116,7 @@ statements are in the reports above and their development history is in the comp
 
 | Task | State | Current deliverable |
 |---|---|---|
-| C937 | queued; the lane's next step | Layered-exposition and hierarchy pass, synchronized Q25 wording, MDS translation, trust-boundary prose, and a clean current PDF |
+| C937 | queued; the lane's next step; no large Q25 certificate rebuilds | Layered-exposition and hierarchy pass, synchronized Q25 wording, MDS translation, trust-boundary prose, and a clean current PDF; scoped Lean work is allowed, but no regeneration or forced re-elaboration of the large Q25 certificate forests |
 | C318 | queued | Manifest rows for the residual layer, its data trees, and the trusted-surface statement |
 | C319 | queued; C151 cost measured at 1:57:09 serial | Decide verified canonicalizer versus demotion to reduction-plus-computation |
 | C152 | queued | Define the orbit-replacement graph, prove the exact local degree identity, then run a component census before considering connectivity |

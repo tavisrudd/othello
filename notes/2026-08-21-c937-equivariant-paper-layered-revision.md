@@ -4,6 +4,11 @@
 **State:** queued
 **Canonical manuscript:** `papers/equivariant-robust-completion/frobenius_pair_extension.tex`
 
+**Hard constraint:** no large Q25 certificate rebuilds. Scoped Lean development and validation are
+allowed, but do not regenerate or force re-elaboration of the residual transport, dispatch,
+class-link, composition, or exhaustion forests. C937 itself remains a manuscript-revision task and
+may rebuild the LaTeX manuscript PDF.
+
 ## Objective
 
 Turn the mathematically complete manuscript into one visibly unified, submission-shaped paper. The
@@ -30,6 +35,13 @@ presentation, not the proved theorem package.
 5. Present the trust boundary once at the right level: human proof, classical input, kernel-checked
    theorem, generated certificate layer, and reproducible computation. Do not decide C318's manifest
    inventory or C319's canonicalizer/demotion question inside this task.
+
+D-AOR8 is not part of C937. A separately bounded scout may seek a direct geometric proof of the
+coupling inequality `B+R≥66`, which would conceptually explain the Q25 minimum `32` using the
+committed census and mask evidence. A resulting small theorem may be formalized in an isolated
+downstream module if its scoped validation does not rebuild the large certificate forests. The full
+`32`–`47` spectrum, semantic surjectivity away from the minimum, and certificate-tree regeneration
+remain outside this manuscript-revision task.
 
 ## Acceptance gates
 
