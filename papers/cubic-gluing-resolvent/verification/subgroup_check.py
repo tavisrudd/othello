@@ -58,6 +58,7 @@ def main() -> str:
         "sign/root/split indices in Gamma0(3): 2, 3, 6\n"
         "root subgroup equals Gamma0(6) mod 6\n"
         "sign intersection root equals split kernel\n"
+        "over the sign cover the root packet is regular cyclic C3\n"
         "PASS\n"
     )
 

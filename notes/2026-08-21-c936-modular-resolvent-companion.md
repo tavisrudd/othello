@@ -27,6 +27,13 @@ The paper proves the complete modular diagram: the degree-three root curve is
 `X_0(6)`, the degree-two curve belongs to the inverse image of `A_3` under
 reduction modulo two, and the common degree-six splitting curve belongs to
 `Gamma_0(3) intersect Gamma(2)`.  It gives rational equations for all three.
+After a golden/sign orientation is chosen, the rational root packet becomes
+that connected cyclic `C_3` splitting cover.  The same normalization gives
+the explicit signed modular parameter
+
+```text
+t(tau) = 3 (eta(3tau)/eta(tau))^6.
+```
 
 ## What made the comparison actual
 
@@ -145,7 +152,13 @@ as their identification with this specific relative principal-gluing packet.
 
 **EJ settled.**  The modular identification upgrades C935's containment
 `rho_2(pi_1) subset A_3` to equality: the deleted order-three point prints an
-actual three-cycle.  This costs one theorem clause and one proof paragraph.
+actual three-cycle.  A fresh post-close EJ pass then extracts two further
+free consequences: golden orientation cyclicizes the rational three-packet,
+so the degree-three pullback is already the full splitting cover, and the
+signed cubic coordinate is the eta quotient
+`3(eta(3tau)/eta(tau))^6`.  In the reciprocal Hauptmodul `h`, the two interior
+cubic boundary values are exactly `-27` and `5`.  Both consequences are now
+in the paper and its replay bundle.
 
 **TT correction settled.**  The signed compact parameter line and the sign
 modular curve are isomorphic as curves, but the smooth cubic base is a smaller

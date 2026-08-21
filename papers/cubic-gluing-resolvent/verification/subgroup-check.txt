@@ -2,4 +2,5 @@ Gamma0(3) mod 6: 36 elements; mod-2 image S3 has order 6
 sign/root/split indices in Gamma0(3): 2, 3, 6
 root subgroup equals Gamma0(6) mod 6
 sign intersection root equals split kernel
+over the sign cover the root packet is regular cyclic C3
 PASS

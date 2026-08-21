@@ -14,7 +14,9 @@ classical source.
 | The root/sign/split curves are `X_0(6)`, `Gamma_sgn`, and `Gamma_0(3) intersect Gamma(2)`. | Human subgroup proof plus independent enumeration in `verification/subgroup_check.py`. | Standard modular interpretation of elliptic two-torsion. |
 | The sign curve is `r^2=T`, and `r=9t` after a deck choice. | Two-division discriminant `16T(T+27)^8`, then pullback by `T=81t^2`. | The identification with the signed cubic marking is the synthesis claim. |
 | The actual mod-two image on the marked smooth base is exactly `A_3`. | The sign subgroup maps onto `A_3`; a loop about a deleted lift of the order-three point maps to a three-cycle. | Strengthens the containment proved in the epilogue. |
+| A golden orientation makes the rational root packet a cyclic cubic splitting cover. | Over the sign subgroup, the point stabilizer has trivial intersection with `A_3`; the pullback is the regular `C_3`-set. | Formal but useful interaction between the two resolvents. |
 | The sign curve has genus zero, cusp widths `2,6`, and two order-three points. | Proved from parabolic and elliptic monodromy and the genus formula. | Standard modular-curve calculation. |
+| `t=3(eta(3tau)/eta(tau))^6`, with noncuspidal cubic boundary values `h=-27,5`. | Immediate from `h=729/T`, `T=81t^2`, and the chosen square root of `h`. | Explicit normalization; no novelty claim for the eta quotient itself. |
 | Only `T=0,infinity` are modular cusps; `T=-27,729/5` are extra cubic boundary values. | Direct cubic singularity census inherited from the exact A5-pencil certificate and stated explicitly here. | This is a scope correction, not a claim that the cubic compactification is modular. |
 
 The paper does not claim that the fivefold kernels are elliptic isogenies, that

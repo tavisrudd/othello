@@ -331,6 +331,23 @@ The last line directly verifies both preceding equations.  It realizes the
 classical fact that adjoining a root of an \(S_3\)-cubic and adjoining the
 square root of its discriminant generate its splitting field.
 
+\begin{corollary}[Golden orientation cyclicizes the rational packet]
+After base change to the sign curve, the root cover \(X_0(6)\to X_0(3)\)
+becomes a connected Galois cover of degree three with group \(A_3\simeq C_3\).
+It is the full splitting cover of the two-division cubic.  Hence, over the
+signed smooth cubic base, the rational three-sheet gluing packet has cyclic
+monodromy and any one rational sheet determines the other two.
+\end{corollary}
+
+\begin{proof}
+The sign subgroup has mod-two image \(A_3\), while a point stabilizer in
+\(S_3\) has order two.  Their intersection is trivial.  Therefore the
+pullback of the point-stabilizer cover to the sign cover has regular
+\(A_3\)-action on its three sheets.  Equivalently, the fibre product of
+\eqref{eq:root} and \eqref{eq:sign} is the splitting field parametrized by
+\eqref{eq:split}.
+\end{proof}
+
 For completeness, the two-division cubic of \eqref{eq:tate}, obtained by
 eliminating \(y\) from the equation and
 \(2y+(T+27)x+(T+27)^2=0\), is
@@ -383,6 +400,20 @@ Because \(729=27^2\), the quadratic fields
 \(\Q(h)(\sqrt h)\) and \(\Q(T)(\sqrt T)\) coincide.  Analytically one may
 take \(\sqrt h=(\eta(\tau)/\eta(3\tau))^6\).  Its half-integral order in the
 base cusp parameter is the width doubling just computed.
+
+Combining this square root with \(r=9t\) gives an explicit modular
+uniformization of the signed cubic parameter:
+\begin{equation}\label{eq:eta-t}
+ \boxed{\displaystyle
+ t(\tau)=3\left(\frac{\eta(3\tau)}{\eta(\tau)}\right)^6}
+\end{equation}
+after the same deck convention.  In the \(h\)-coordinate, the two
+noncuspidal cubic boundary values below are especially simple:
+\[
+ T=-27\Longleftrightarrow h=-27,
+ \qquad
+ T=729/5\Longleftrightarrow h=5.
+\]
 
 It remains to compare compactifications.  A direct singularity calculation
 for the six-variable cubic equation gives

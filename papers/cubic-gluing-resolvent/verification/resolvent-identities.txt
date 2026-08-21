@@ -1,5 +1,6 @@
 VGY j(u) = 9(3u^2+5)(27u^2+5)^3/(125u^2)
 T=81t^2 gives j=(T+27)(T+3)^3/T
+h=729/T gives sqrt(h)=3/t; interior cubic boundary h-values are -27 and 5
 Tate Delta = T(T+27)^8
 disc(two-division cubic) = 16T(T+27)^8
 root quotient: T=-(4y+3)(y+3)^2/(y+1)^2

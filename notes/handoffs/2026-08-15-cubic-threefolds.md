@@ -43,8 +43,11 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   relative norm-axis elliptic two-division cover.  It identifies
   \(T=81t^2\), \(r=9t\), \(X_0(6)\), the sign and split level-six subgroups,
   exact \(A_3\) monodromy, cusp widths \(2,6\), and the two extra
-  modular-interior cubic boundary values.  Exact algebra and an independent
-  subgroup enumeration replay under `make check`; no mirror was exported.
+  modular-interior cubic boundary values.  A post-close EJ pass further proves
+  that golden orientation turns the rational triple into the cyclic cubic
+  splitting cover and gives
+  \(t=3(\eta(3\tau)/\eta(\tau))^6\).  Exact algebra and an independent subgroup
+  enumeration replay under `make check`; no mirror was exported.
   Report: `../2026-08-21-c936-modular-resolvent-companion.md`.
 - **C935 — closed 2026-08-21; exotic gluing is the elliptic discriminant
   orientation.**  The epilogue now proves that monodromy on the exotic pair is

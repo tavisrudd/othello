@@ -39,6 +39,10 @@ def main() -> str:
     ) == 0
     J = (T + 27) * (T + 3) ** 3 / T
     assert sp.factor(j_t - J.subs(T, 81 * t**2)) == 0
+    h = 729 / T
+    assert sp.factor((3 / t) ** 2 - h.subs(T, 81 * t**2)) == 0
+    assert h.subs(T, -27) == -27
+    assert h.subs(T, sp.Rational(729, 5)) == 5
 
     # Tate normal form with a point of order three.
     a1, a3 = T + 27, (T + 27) ** 2
@@ -72,6 +76,7 @@ def main() -> str:
     lines = [
         "VGY j(u) = 9(3u^2+5)(27u^2+5)^3/(125u^2)",
         "T=81t^2 gives j=(T+27)(T+3)^3/T",
+        "h=729/T gives sqrt(h)=3/t; interior cubic boundary h-values are -27 and 5",
         "Tate Delta = T(T+27)^8",
         "disc(two-division cubic) = 16T(T+27)^8",
         "root quotient: T=-(4y+3)(y+3)^2/(y+1)^2",
