@@ -67,7 +67,7 @@ shadow-sister comparisons, motivic fifth-power decompositions, and explicit
 Mordell--Weil generators remain outside unless one short corollary materially
 clarifies the main theorem without adding a new proof dependency.
 
-All acceptance gates are discharged locally.  The warning-free seven-page
+All acceptance gates are discharged locally.  The warning-free eight-page
 paper, deterministic algebra certificate, independent subgroup enumeration,
 SHA-256 manifest, rendered-page inspection, hostile read, literature record,
 and EJ/TT mystery ledger are recorded in the report.  No mirror/export was

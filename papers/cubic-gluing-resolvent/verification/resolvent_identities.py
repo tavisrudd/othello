@@ -10,7 +10,7 @@ import sympy as sp
 
 
 def main() -> str:
-    t, T, u, x, y, v = sp.symbols("t T u x y v")
+    t, T, u, x, y, v, alpha = sp.symbols("t T u x y v alpha")
 
     # van Geemen--Yamauchi's Prym chart, with u^2=5t^2.
     a = -32 * (u - 3) ** 4 / (9 * (u + 1) ** 3 * (u + 3) ** 2)
@@ -66,6 +66,26 @@ def main() -> str:
     r_of_v = v * (9 - v**2) / (1 - v**2)
     assert sp.factor(T_of_y.subs(y, y_of_v) - T_of_v) == 0
     assert sp.factor(r_of_v**2 - T_of_v) == 0
+    assert sp.factor(
+        r_of_v**2 + 27 - (v**2 + 3) ** 3 / (v**2 - 1) ** 2
+    ) == 0
+    assert sp.factor(
+        sp.diff(r_of_v, v) - (v**2 + 3) ** 2 / (v**2 - 1) ** 2
+    ) == 0
+    mobius_numerator = sp.together(
+        (r_of_v - 3 * alpha) / (r_of_v + 3 * alpha)
+        - ((v - alpha) / (v + alpha)) ** 3
+    ).as_numer_denom()[0]
+    assert sp.rem(
+        sp.Poly(mobius_numerator, alpha), sp.Poly(alpha**2 + 3, alpha)
+    ).as_expr() == 0
+    sigma = (v - 3) / (v + 1)
+    sigma2 = sp.factor(sigma.subs(v, sigma))
+    sigma3 = sp.factor(sigma.subs(v, sigma2))
+    assert sp.factor(sigma2 + (v + 3) / (v - 1)) == 0
+    assert sp.factor(sigma3 - v) == 0
+    assert sp.factor(r_of_v.subs(v, sigma) - r_of_v) == 0
+    assert sp.factor(-sigma.subs(v, -v) - sigma2) == 0
 
     # Two generators of GL_2(F_2): a transposition and a 3-cycle.  Their
     # permutations on P^1(F_4) are (0 1)(w w^2) and (inf 0 1).
@@ -84,6 +104,10 @@ def main() -> str:
         "root quotient: T=-(4y+3)(y+3)^2/(y+1)^2",
         "chosen root: x=-4y^4/(y+1)^2 satisfies the two-division cubic",
         "full split cover: y=-(v^2+3)/4, r=v(9-v^2)/(1-v^2), r^2=T",
+        "cyclic cubic: (r-3a)/(r+3a)=((v-a)/(v+a))^3 for a^2=-3",
+        "ramification: only v=+/-a over T=-27, each of index 3",
+        "rational deck action: sigma(v)=(v-3)/(v+1), sigma^3=1",
+        "golden reversal v->-v conjugates sigma to sigma^-1",
         "P1(F4)=P1(F2) disjoint {w,w^2}; the complementary action is sign",
         "PASS",
     ]
