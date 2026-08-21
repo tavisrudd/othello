@@ -2,8 +2,9 @@
 
 **Lane:** `complete-ports`
 
-**Status:** ACTIVE — the characteristic-three harmonic-completion algebra is kernel-green; the
-projective design, circuit, code, port, and closure layers remain open.
+**Status:** ACTIVE — the characteristic-three harmonic-completion algebra, hyperplane evaluations,
+and projective Steiner completion theorem are kernel-green; the circuit, code, port, and closure
+layers remain open.
 
 ## Current checkpoint
 
@@ -18,6 +19,21 @@ d=-\frac{e_2(a,b,c)}{e_1(a,b,c)},
 that this completion is distinct from all three prescribed parameters, that a distinct zero-sum
 triple has no finite completion, and that a triple containing infinity has the unique distinct
 completion `-a-b`.  These proofs use `CharP 𝔽 3` directly and no finite enumeration.
+
+The module also defines the quartic curve and nucleus columns and the finite/infinity hyperplane
+coefficient vectors.  Their evaluations factor as the expected quartic or cubic root products, and
+their nucleus evaluations are respectively (e_2(a,b,c,d)) and (-e_1(a,b,c)).  The terminal
+`existsUnique_harmonicQuarticCompletion` packages every placement of infinity and proves the
+ordered Steiner unique-completion property for all distinct projective triples.
+
+The classical-source check is now pinned to the cached originals.  Gmainer--Havlicek,
+arXiv:1304.0088, SHA-256
+`da688c01e3953319ef93f17e1676fedf0470c590a0a348a853dabb11209526d0`, Theorem 1 gives the
+binomial-coefficient basis for the hyperplane nucleus; at (n=4,k=3), characteristic three, its
+only basis point is (e_2).  Tricot, arXiv:2408.14714, SHA-256
+`20a8e4187dafeda456cb3112d3cd9a71b9dd472f216a049f8ec7d87ba7cb658d`, Section 2 supplies the
+general `PGL(2,q)` orbit-to-3-design construction.  The Steiner parameter one is proved directly
+by the coordinate completion theorem rather than imported from that paper.
 
 Validation:
 
