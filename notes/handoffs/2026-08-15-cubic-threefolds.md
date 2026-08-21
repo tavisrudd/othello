@@ -127,23 +127,36 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   `../2026-08-20-c930-independent-referee-report.md` and
   `../2026-08-20-c930-second-referee-pass.md`. Card:
   `../cubic-threefolds-tasks/c930-categorical-direct-qdm-paper-preparation.md`.
-- **C925 — modular direct-QDM proof packet, active.**  **Current frontier:**
-  freeze the paper-local Lean consumer at
-  `Comparison.MarkedWitnessObstruction`.  Its exact input is one detected
-  marked source over the endpoint ring and one map to the actual
-  projective-space receiver satisfying the selected-loop and scalar-row
-  squares.  A finite rational core followed by faithfully flat scalar
-  extension is the current high-EV provider, not a consumer requirement.
-  Target surjectivity, primary coverage, exceptional
-  splitting, adjacent overlap, and an inverse are not used.  The next bounded
-  source check is the G0--G4 algebraic deck/descent test in
+- **C925 — modular direct-QDM proof packet, landed pending verification.**
+  **Closure route:** fuse the intrinsic C924 marked-atom projector with the algebraic
+  Gu--Yu--Yu row \(\rho=\epsilon M\) on one Laurent QDM domain.  For each
+  blowup the exact two squares are projector block-naturality and
+  \(\rho_{\widetilde Y}=\rho_Y\operatorname{pr}_Y\Psi\).  Their linear
+  consequence is that row-visible marked support ignores every correction,
+  even a correction carrying the same atom.  The cubic product detects this
+  projector and projective space has zero projector, so a source-faithful
+  realization gives every \(m\), not only \(m=2\).  The realization is now
+  source-closed: connection naturality preserves the canonical marked
+  spectral union, and Gu--Yu--Yu Proposition 5.2 supplies an ordinary
+  equivariant \(R\)-basis on which Propositions 2.4, 2.8, and 4.21 prove the
+  adjoint row equality; finite \(R\)-linearity extends it to the Laurent
+  module.  No loop, root, Gamma
+  lattice, formal/sectorial row, or Stokes comparison is consumed.  The row
+  may have a larger coefficient codomain; only its QDM domain must be the one
+  carrying the idempotent.  The native projective deck route is closed:
+  Iritani--Koto's \(r=6\) endpoint already has primitive \(C_3\)-visible rank
+  under the natural order-three subgroup.  The exact P0--P4 gate is in
   `../2026-08-21-c925-pointed-row-calibration.md`; the task card's `Next`
-  section is authoritative.  The selected action and row must live on one
-  pre-sectorial marked carrier; do not use a large-radius-to-\(z=0\)
-  Gamma/Stokes identification.  Ordinary Hodge--Lefschetz packets are closed by
-  a one-blowup curve counterexample.  The remainder of this entry records
-  established modules and conditional provider alternatives, not coequal
-  next steps.
+  section is authoritative.  `Comparison.RowedProjectorDecomposition.Data.ofBasisSquares`
+  locks the basis-extension step.  The independent Haskell plumbing suite
+  exhausts 576 lawful `F3` models, rejects each omitted source fact and four
+  malformed bundles, and adds 6,000 fixed-seed QuickCheck cases; its exact
+  report is `../2026-08-21-c925-rowed-projector-computational-sanity.md`.
+  Lean proves the projective-product branch count positive for every natural
+  stabilization index, so the suite's `m=0,...,64` sweep is only a regression.
+  `Comparison.MarkedWitnessObstruction` remains
+  the first fallback, not the live consumer.  Ordinary Hodge--Lefschetz
+  packets are closed by a one-blowup curve counterexample.
   Exact external-source inputs, deductions, and nonoutputs are tracked in
   `../2026-08-21-c925-no-stokes-source-dossier.md`; update that dossier before
   changing the provider frontier.
@@ -159,9 +172,10 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   functors, torsor holonomy, and a semilinear simple-character criterion.
   The false naked row-null ideal has been removed: comparison now lands in an
   augmented operator-row category, whose output-kernel ideal is genuinely
-  two-sided.  For \(m=2\), the pointed primitive-sixth endpoint contrast and
-  fivefold center reduction are exact, but no unconditional blowup provider
-  is known.  Generic-point localization proves rank is the universal
+  two-sided.  The older pointed primitive-sixth/fivefold-center route remains
+  conditional, but it has been superseded: the intrinsic marked-projector
+  plus algebraic adjoint row supplies an unconditional blowup invariant for
+  every \(m\).  Generic-point localization proves rank is the universal
   support-null \(K_0\)-character, and the whole full-rank comparison defect is
   one boundary-to-rank leakage covector.  Wall mutations and multiplicity-one
   characters kill that covector when their analytic hypotheses hold; Hodge,
@@ -564,7 +578,7 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   actual comparisons and reindexings.  Reports:
   `../2026-08-21-c925-two-layer-resolvent-packet.md` and
   `../2026-08-21-c925-outer-kummer-and-carrier-boundary.md`.
-  The current consumer is one-sided.  A detected primitive-sixth witness in
+  The first fallback consumer is one-sided.  A detected primitive-sixth witness in
   one rational marked core and one scalar-row, selected-loop map from its
   faithfully flat extension to the rational endpoint already contradict
   endpoint non-detection; target surjectivity, primary coverage, exceptional
@@ -575,7 +589,7 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   single-cobordism provider: the detected cubic endpoint and empty rational
   endpoint may use unrelated faithfully flat branch fields of one rational
   marked core.  Only the cubic-side map needs primary coverage; the rational
-  endpoint map remains one-sided.  The live source gate is exact AKMW/GYY
+  endpoint map remains one-sided.  Its source gate is exact AKMW/GYY
   highest/lowest compatibility, descent of both maps to that core, one
   genuinely geometric common selected action, and the two same-source row
   equations.  Gu--Yu--Yu's shift becomes scalar multiplication after Fourier
@@ -590,19 +604,21 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   analytic provider theorems remain logically possible.  One narrower formal
   test is open: determine whether Cai's solution ring admits both the
   Gu--Yu--Yu large-radius adjoint row and the selected (z=0) Turrittin packet
-  by one lawful scalar extension.  The exact G0--G4 ledger, route dispositions,
-  and stop conditions are in
+  by one lawful scalar extension.  The exact P0--P4 and fallback G0--G4
+  ledgers, route dispositions, and stop conditions are in
   `../2026-08-21-c925-pointed-row-calibration.md`.
-  Shifted tensor stability and the extremal multinomial source law are
-  proved, but the occurrence-indexed exact QDM sequence, actual carrier
-  exponent, and boundary vanishing remain open.  The packet is split into
+  In the superseded fixed-phase fallback, shifted tensor stability and the
+  extremal multinomial source law are proved, while the occurrence-indexed
+  exact QDM sequence, actual carrier exponent, and boundary vanishing remain
+  open.  Those are not gates for the marked-projector proof.  The packet is split into
   bounded module companions behind a stable index.  The
   one-hundred-twenty-two-check
   finite law replay, the eleven-check path toy, the four-check source-typed
   Haskell toy, the four-check double-normal producer toy, and original cubic
-  replay are green.  C925 remains open at the algebraic marked-source/action
-  provider above.  The fixed-phase/Stokes and ExactTop routes are fallbacks,
-  not the live frontier.
+  replay are green.  C925 has no remaining mathematical source gate on the
+  marked-projector route; guarded aggregate verification and durable
+  packaging remain.  The one-sided marked source,
+  fixed-phase/Stokes, and ExactTop routes are fallbacks, not the live frontier.
   Mathematics and paper-local Lean only; no manuscript edits.  Card:
   `../cubic-threefolds-tasks/c925-modular-direct-qdm-proof-packet.md`.
 - **C924 — closed 2026-08-19.** The direct ordinary-QDM route proves

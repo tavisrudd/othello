@@ -9,7 +9,7 @@ modules `Comparison.PointedDirectSum` and
 `Comparison.RowedRepresentationDecomposition` separate that equation from
 point representatives and endpoint loop selection.
 
-The latest consumer is asymmetric and bypasses adjacent vertex comparisons.
+The latest endpoint consumer is asymmetric and bypasses adjacent vertex comparisons.
 One finite marked representation over the endpoint ring contains a detected
 cubic-product witness.  To contradict the rational endpoint, it is enough to
 map that representation to the endpoint by one selected-loop intertwiner
@@ -37,11 +37,41 @@ below changes the selected action from formal \(z\)-monodromy to an algebraic
 deck action, so its source detection and endpoint contrast must be reproved;
 they cannot be borrowed from the fixed-phase calculation.
 
+A looser operation-level consumer is now the closure route.  It
+does not ask for one map from a global core to projective space.  For each
+blowup it retains the intrinsic idempotent projecting to all C924-marked QDM
+atoms and a scalar row with arbitrary codomain.  If the actual QDM
+decomposition is block-natural for that projector and factors the row through
+the ambient projection, row-visible marked support is unchanged even when the
+center contains the same atom.  Edgewise equalities of this intrinsic Boolean
+telescope by weak factorization.  This is the multiple-source architecture
+assembled downstream at the level of one occurrence-independent marker.
+
 The statement-by-statement external-source audit is maintained in
 `2026-08-21-c925-no-stokes-source-dossier.md`.  This note owns the consumer
 and route ledger; the dossier owns what each paper actually supplies.
 
-## Open-gate ledger
+## Closure ledger
+
+The landed marked-projector package is:
+
+| gate | exact input | current evidence boundary |
+|---|---|---|
+| P0: intrinsic projector | On every chosen generic even QDM, the idempotent onto the union of rank-two blocks with (N\ne0) and (delta^\sharp\ne0). | C924 proves the block predicate is regular-isomorphism and scalar-extension invariant; KKPYY Theorem 4.1 gives the canonical spectral summands. |
+| P1: projector square | For each Iritani blowup decomposition \(\Psi\), \(\Psi P_{\widetilde Y}=(P_Y\oplus P_Z)\Psi\), marking every ambient and correction occurrence satisfying the predicate. | Closed: the comparison intertwines quantum connections and KKPYY's spectral decomposition is canonical, so the isomorphism-invariant union of marked summands is preserved. |
+| P2: algebraic row | The Gu--Yu--Yu covector \(\rho_Y=\epsilon_YM_Y\), allowed to take values in a larger Givental coefficient module but defined on the same QDM lattice as \(P_Y\). | Proposition 4.21 gives \(M_X\mathrm{FT}_X=\mathsf F_XM_W\).  No Gamma, formal monodromy, or sectorial interpretation is requested. |
+| P3: row square | \(\rho_{\widetilde Y}=\rho_Y\operatorname{pr}_Y\Psi\) on that same domain. | Closed: Propositions 2.4, 2.8, and 4.21 give the adjoint row identity on the ordinary equivariant classes; Proposition 5.2 makes such classes an \(R\)-basis of the completed wall module, so finite \(R\)-linearity extends the square. |
+| P4: endpoints | Source row detects the marked projector on (X\times\mathbf P^m); the projector is zero on (mathbf P^{m+3}). | The C924 separated cubic block has (H^0)-row ((0,-7r^2)\ne0); projective space is generically semisimple with rank-one blocks.  Projective-bundle persistence is supplied by Iritani--Koto/KKPYY. |
+
+P0--P4 are now closed and imply the result for every \(m\), because the
+correction row is zero regardless of the correction's marked atoms.  P2
+deliberately has a larger codomain, so no false identification of a
+\(z=\infty\) row with a \(z=0\) solution row is being made.  Different
+edgewise comparison domains do not have to compose: zero/nonzero restriction
+of the horizontal row to the canonical horizontal marked summand is an
+intrinsic property of each vertex F-bundle.
+
+The older one-sided endpoint gate remains the first fallback:
 
 | gate | exact input | current evidence boundary |
 |---|---|---|
@@ -64,6 +94,8 @@ for a closed mathematical route.
 
 | route | exact disposition |
 |---|---|
+| Row-visible marked projector | Landed no-Stokes route.  The Iritani/KKPYY projector square and Gu--Yu--Yu adjoint row square coexist on the Laurent QDM domain by connection naturality and the Proposition 5.2 basis argument.  It is all-\(m\). |
+| Native projective Kummer/deck carrier | Closed for endpoint contrast: the (r=6) projective-space inverse-branch rank vector already has primitive (C_3) support under four (q)-plane turns on the twelve-fold cover. |
 | One-sided marked core | Kernel-checked consumer; G0--G3 remain geometric. |
 | Analytic global gauge from the graded `C[z]` comparison | The automatic inference is false: finite Novikov--Artin truncation can still leave an infinite positive-\(z\) tail.  A separately constructed analytic gauge would remain a valid provider. |
 | Composition of edge-local completed germs | Automatic composition is false when basepoints differ by a nonnilpotent Laurent constant.  A pathwise based-coordinate theorem or one pre-completion core remains valid. |
@@ -85,6 +117,7 @@ not be promoted to necessary gates.
 
 | attempted connector | part of G0--G3 it could supply | excess data that may be discarded | exact live status |
 |---|---|---|---|
+| Intrinsic marked projector plus algebraic adjoint row | Replaces G0--G4 by the edgewise P0--P4 Boolean. | Any geometric loop, root label, target endpoint map, center classification, Gamma lattice, and Stokes packet. | Landed.  Projector naturality is algebraic, and the row square extends from Gu--Yu--Yu's ordinary Proposition 5.2 basis by finite \(R\)-linearity. |
 | Whole meromorphic comparison from \(z=\infty\) to \(z=0\) | G2--G3, if it carries the actual selected loop and Gamma row. | A global gauge on the full QDM, all Stokes blocks, and adjacent-edge coherence. | The inference from finite Artin levels is false; direct construction of the marked restriction remains open. |
 | Shared-vertex row-cyclic overlap | Could compose local maps into G2--G3. | Pairwise overlap is unnecessary if one global core maps directly to the rational endpoint. | Valid fallback, no longer a primary gate. |
 | Integral nonturning Gamma crystal / pathwise common germ | Could construct G0 and G2--G3 simultaneously. | Full analytic parameter family, full HLT object, inverse edges, and all vertex germs. | Strong open provider; failure of automatic Laurent-germ composition does not rule it out. |
@@ -144,30 +177,33 @@ Gamma/Stokes connector in another form.  A Stokes-free instantiation must put
 the selected action, detected witness, endpoint contrast, and adjoint rank row
 on one algebraic marked module before any sectorial splitting.
 
-The highest-value candidate is the external Kummer/deck action of the
-projective-bundle root cover.  Work over the invariant coefficient field, use
-the geometric descent action as `selectedLoop`, and use the algebraic adjoint
-rank covector on the same representation.  Then either source architecture
-above can feed `MarkedWitnessObstruction` without a Stokes matrix, a fixed
-phase, or a \(z=\infty\)-to-\(z=0\) comparison.
+The highest-value candidate is now the intrinsic marked projector, not a deck
+action.  On a split generic QDM, mark the union of all rank-two blocks with
+nonzero centered nilpotent and nonzero \(\delta^\sharp\).  Its idempotent
+projector acts on the algebraic QDM lattice.  The row
+\(\rho=\epsilon M\) is a linear map *from that same lattice* to a possibly
+larger Givental coefficient module.  Gu--Yu--Yu's adjoint calculation and the
+Iritani/KKPYY block decomposition can therefore be fused without ever calling
+the row a covector on a formal-monodromy or sectorial solution object.
 
-This candidate has an immediate typing falsifier.  Naive restriction of
-scalars from \(L=K(q^{1/3})\) gives the scalar coefficient space itself every
-deck character, even for an endpoint object that descends to \(K\).  Therefore
-“the endpoint descends” does not imply endpoint non-detection.  A provider
-must distinguish:
+The previous Kummer candidate has two independent falsifiers.  Naive
+restriction of scalars from \(L=K(q^{1/3})\) gives the scalar coefficient space
+itself every deck character.  More decisively, Iritani--Koto formula (5.10)
+for \(\mathbf P^5=\mathbf P(\mathbf C^6)\) gives its native six-branch rank
+vector primitive \(C_3\) support under the order-three subgroup generated by
+four turns of the \(q\)-plane on the twelve-fold cover.  Thus unmarked native
+deck support does not distinguish the endpoints.  The exact calculation is
+durable in the source dossier.
 
-- the scalar semilinear Galois action on coefficients; and
-- the geometric action on the marked finite-étale packet, idempotent quotient,
-  or other row-visible carrier.
-
-The endpoint contrast must be proved on the latter after descent, and the
-source-to-endpoint map must preserve that exact action and row.  The existing
-Kummer/Burnside packet is one possible geometric carrier.  A linearized
-version is lawful only after proving that scalar characters have been removed
-and that the row-visible marked quotient is functorial.  This is now the first
-source test; the Cai formal-solution-ring test is retained only as a separate
-fallback because it reintroduces the large-radius-to-formal-row bridge.
+The marked projector avoids both failures.  It is defined from the atom
+itself, includes all isomorphic occurrences, and is zero on projective space.
+The two algebraic squares P1 and P3 are maps on one domain: P1 follows from
+connection naturality and canonical spectral decomposition, while P3 is
+checked on Gu--Yu--Yu's ordinary completed-source basis and extended by
+finite \(R\)-linearity.  Correction blocks disappear because of the row
+square, not because their atoms or deck actions are classified.
+The Cai formal-solution-ring test is retained only as a separate fallback
+because it reintroduces the large-radius-to-formal-row bridge.
 
 One narrower fallback is not decided by the failed analytic-gauge argument.  Cai's
 formal solution ring contains the \(z=0\) Turrittin symbols over the fraction

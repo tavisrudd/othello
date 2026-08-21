@@ -148,6 +148,24 @@ detects a generalized eigenspace if and only if the ambient row detects the
 same eigenvalue and nilpotence exponent. Correction summands may contain that
 eigenvalue; row factorization makes their multiplicity irrelevant.
 
+`Comparison.RowedProjectorDecomposition` is the no-loop specialization for
+an intrinsic spectral marker. `Projector` stores both a linear endomorphism
+and its idempotence proof. `Data` stores source, ambient, and correction
+projectors, a direct-sum equivalence, projector block naturality, and an exact
+row factorization through ambient projection. The row may take values in a
+different `R`-module, matching an algebraic QDM row with values in a larger
+Givental coefficient module. Lean proves that row-visible marked support is
+equivalent on source and ambient even when the correction projector is
+nonzero, and that a detected source contradicts a zero ambient projector.
+`Data.ofBasisSquares` constructs the full comparison data when the two squares
+are verified only on a source basis.  This is the finite-free extension used
+for Gu--Yu--Yu's ordinary equivariant basis of the completed wall module; it
+does not invoke density, topology, or convergence.  The file does not
+construct spectral projectors or prove the geometric basis equations.
+The same module records that the projective-product branch count `m + 1` is
+positive for every natural stabilization index; bounded external test suites
+are not used to establish that quantifier.
+
 `Comparison.MarkedRepresentationEquivalence` gives the adjacent-edge
 connector without imposing equality or uniqueness of sectorial frames. If
 both copies of a shared vertex are marked-equivalent to one common carrier,

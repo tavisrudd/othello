@@ -2,15 +2,17 @@
 
 **Lane:** cubic-threefolds
 
-**Status:** active; mathematics and paper-local Lean; no manuscript edits
+**Status:** no-Stokes marked-projector proof landed for every \(m\); guarded
+aggregate verification and durable packaging in progress; no manuscript edits
 
 ## Goal
 
-Build and rigorously vet a parameterized direct-QDM proof framework whose
+Package and rigorously verify the landed parameterized direct-QDM proof whose
 caller selects the observed blocks, retained marks, path environment, and
 commutative-monoid consumer.  Instantiate it for cubic
 one-stabilization irrationality, then use the same interfaces to isolate the
-exact \(m=2\) and all-\(m\) transport gates.
+\(m=2\) and all-\(m\) transport uses an intrinsic marked projector and the
+algebraic adjoint row.
 
 ## Stable entry points
 
@@ -87,6 +89,14 @@ index row.
 
 ## Closed mathematics
 
+- The row-visible marked-projector Boolean is invariant under every smooth
+  blowup and blowdown.  Projector naturality follows from connection
+  naturality and canonical spectral decomposition; the Gu--Yu--Yu row square
+  follows on the Proposition 5.2 ordinary basis and extends by finite
+  \(R\)-linearity.  The C924 cubic block is row-visible after product with
+  \(\mathbf P^m\), while \(\mathbf P^{m+3}\) has no marked block.  Weak
+  factorization therefore proves the obstruction for every \(m\), without
+  Stokes data or center classification.
 - The modular \(m=1\) proof is sound from its stated Iritani,
   Iritani--Koto, and weak-factorization inputs.
 - Guéré/BFGMP and KKPYY are lawful split specializations at the algebraic
@@ -380,7 +390,11 @@ index row.
   `../2026-08-21-c925-two-layer-resolvent-packet.md` and
   `../2026-08-21-c925-outer-kummer-and-carrier-boundary.md`.
 
-## Open geometric providers
+## Open geometric providers for superseded fallback routes
+
+None of the providers in this section is consumed by the landed
+marked-projector proof.  They remain recorded to prevent a future context
+compaction from confusing a valid fallback with the current closure gate.
 
 ### Rank row
 
@@ -503,12 +517,31 @@ Crossed-edge provenance replay:
        | diff -u \
            notes/cubic-threefolds-tasks/c925-crossed-edge-lens-toy-output.txt -'
 
+Final rowed-projector source/consumer sanity replay:
+
+    nix shell --impure --expr \
+      'with import <nixpkgs> {}; haskellPackages.ghcWithPackages (p: [p.QuickCheck])' \
+      --command sh -c \
+      'runghc notes/cubic-threefolds-tasks/c925-rowed-projector-sanity.hs \
+       | diff -u \
+           notes/cubic-threefolds-tasks/c925-rowed-projector-sanity-output.txt -'
+
+This separate suite has 38 named checks: all 576 lawful two-dimensional
+models over `F3`, four hostile malformed bundles, omission of each of the six
+source facts, a bounded endpoint sweep for `m=0,...,64`, and 6,000 fixed-seed
+QuickCheck cases.  The exact domain, hashes, dependency versions, and trust
+boundary are recorded in
+`../2026-08-21-c925-rowed-projector-computational-sanity.md`.  Lean's
+`projectiveProductBranchCount_pos` proves positivity for every natural `m`;
+the finite sweep is only a regression.
+
 Paper-local Lean is validated only through the guarded queue.  The aggregate
 targets `CubicStabilizationIrrationality` and
 `CubicStabilizationIrrationalityVerification` passed together in run
-`20260821-220337-05593f8e`.  This includes
-`GlobalCommonSourceObstruction.Data` and its coefficient-loose `ScalarData`
-wrapper in the reviewer axiom audit.
+`20260821-234441-e57a0561`.  This includes
+`RowedProjectorDecomposition.projectiveProductBranchCount_pos`,
+`Data.ofBasisSquares`, `Data.detects_iff`, and the zero-ambient contradiction
+in the reviewer axiom audit.
 
 The finite model currently has one hundred twenty-two checks.  It verifies only the
 advertised algebraic laws and countermodels, never an external QDM provider.
@@ -522,49 +555,63 @@ any geometric or QDM provider.
 
 ## Next
 
-1. Freeze the Lean consumer at `Comparison.MarkedWitnessObstruction`.  Its
-   exact same-ring input is only a detected marked source and one map to the
-   actual projective-space receiver satisfying the selected-loop and
-   scalar-row squares.  The current high-EV provider to source-check is a
-   finite rational marked core carrying that witness, followed by scalar
-   extension; rational descent and faithful flatness belong to this provider,
-   not to the minimal consumer.  The comparison-provider ledger is G0--G3,
-   with endpoint contrast recorded separately as G4, in
-   `../2026-08-21-c925-pointed-row-calibration.md`.
-   Audit every proposed provider against this one-sided consumer before adding
-   a hypothesis: endpoint surjectivity, primary coverage, correction control,
-   inverse maps, and adjacent coherence are not consumed.
-2. Keep the primary route Stokes-free.  Test whether the external
-   projective-bundle Kummer/deck action and the adjoint rank row live on one
-   algebraic marked carrier over the invariant field.  Distinguish the scalar
-   semilinear Galois action from the geometric packet action; naive scalar
-   extension gives every endpoint spurious deck characters and cannot prove
-   endpoint non-detection.  Prove both the source witness (G1) and rational
-   endpoint non-detection (G4) for this exact algebraic action; the old
-   fixed-phase endpoint calculation cannot be reused by relabeling.
-   Record every source theorem and nonoutput in
-   `../2026-08-21-c925-no-stokes-source-dossier.md`; do not promote a derived
-   row formula to a source-stated Gamma or descent theorem.
-3. Test the newly isolated global-cobordism provider first.  AKMW
-   Definition 2.1.1 and Theorem 2.3.1 give a projective compactified
-   cobordism with the two endpoints as geometric quotients for a projective
-   birational morphism.  Verify the four missing sublemmas in the source
-   dossier: exact Gu--Yu--Yu highest/lowest scope, descent to one rational
-   marked core with faithful branch fields plus a cubic-side primary lift, a
-   genuinely geometric common selected action, and the two same-source row
-   equations.  Proposition 4.14's shift is sent
-   to scalar multiplication and does not by itself give the required deck
-   contrast.  The conditional consumer is
-   `Comparison.GlobalCommonSourceObstruction`.
-   If this global source fails, test the only other source architecture: a
-   typed chain of local marked maps over one downstream ring, each satisfying
-   the selected-loop and scalar-row laws.  Their composite is the one map consumed by
-   `MarkedWitnessObstruction`; no local surjectivity or correction equivalence
-   is needed.  If neither architecture is sourced, record the missing map as
-   the new source theorem rather than adding another algebraic interface.
-4. Retain the Cai formal-solution-ring embedding only as a bounded fallback.
-   It is not the no-Stokes route: even a lawful common coefficient field must
-   still identify the large-radius adjoint row with the intended formal row.
+1. Package the landed row-visible marked-projector proof.  For every generic
+   even QDM, let \(P_{\mathrm{mark}}\) be the idempotent onto the union of the
+   C924 blocks of rank two with \(N\ne0\) and
+   \(\delta^\sharp\ne0\).  The exact one-edge theorem is
+
+   \[
+      \Psi P_{\widetilde Y}=(P_Y\oplus P_Z)\Psi,
+      \qquad
+      \rho_{\widetilde Y}=\rho_Y\operatorname{pr}_Y\Psi,
+      \qquad \rho=\epsilon M.
+   \]
+
+   Both equations are now closed on one actual Laurent QDM domain.  Projector
+   naturality follows from connection naturality and KKPYY's canonical
+   spectral decomposition.  For the row square, Gu--Yu--Yu Propositions 2.4,
+   2.8, and 4.21 give equality on ordinary equivariant classes, while
+   Proposition 5.2 makes suitable such classes an \(R\)-basis of the
+   completed wall source; finite \(R\)-linearity extends the equality.  The
+   row may take values in a larger Givental coefficient module.  It is not a
+   Gamma, fixed-phase, formal-monodromy, or sectorial row.
+2. Use the operation-level Boolean: a row detects a marked projector when
+   some fixed vector of that idempotent has nonzero row.  A rowed direct-sum
+   comparison preserves this Boolean even if every correction summand is
+   marked, because the row factors through the ambient projection.  Package
+   this exact algebra in the paper-local Lean namespace with idempotence and
+   projector naturality carried by the types.  `Data.ofBasisSquares` now
+   records that the source squares may be checked on Gu--Yu--Yu's ordinary
+   basis.  Do not add loops, roots, surjectivity, Fitting, primary coverage,
+   Gamma data, or Stokes data.
+3. Close the endpoints on the same algebraic marker.  The C924 separated
+   cubic zero block has degree-zero row ((0,-7r^2)\ne0\), so
+   (X\times\mathbf P^m) detects its marked projector.  Generic quantum
+   cohomology of \(\mathbf P^{m+3}\) has only rank-one factors, so its marked
+   projector is zero.  The two one-edge squares pass, so weak factorization
+   proves the result for every \(m\), with no center classification and no
+   composition of edge-local completed germs.  The invariant is the
+   zero/nonzero restriction of a horizontal row to a canonical horizontal
+   marked summand, hence is intrinsic at each vertex.
+4. Run the guarded aggregate Lean/axiom audit, make the basis constructor
+   reviewer-visible, and keep the source dossier, this card, and the handoff
+   synchronized.  Then commit only the C925 files; preserve unrelated dirty
+   work.
+5. Keep the prior one-sided endpoint architecture as the first fallback:
+   `Comparison.MarkedWitnessObstruction` consumes only one detected source
+   and one rowed selected-action map to projective space.  The global AKMW
+   source and a typed chain of local sources are its two lawful providers.
+   The native projective Kummer/deck carrier is no longer a candidate: the
+   (r=6) endpoint itself has primitive (C_3)-visible rank under the natural
+   order-three subgroup.  Retain Cai/fixed-phase/Gamma/Stokes bridges only as
+   explicitly nonprimary fallbacks.  They are not open gates for the landed
+   proof.
+
+The statement-by-statement evidence and nonoutputs for Iritani--Koto,
+Gu--Yu--Yu, Iritani, AKMW, KKPYY, and the analytic fallbacks live in
+`../2026-08-21-c925-no-stokes-source-dossier.md`.  The exact P0--P4 gate and
+the looser fallback audit live in
+`../2026-08-21-c925-pointed-row-calibration.md`.
 
 ## Conditional provider ledger
 

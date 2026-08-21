@@ -26,6 +26,7 @@ roots = [
   "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.BasedCoefficientMap",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.PointedDirectSum",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.RowedRepresentationDecomposition",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.RowedProjectorDecomposition",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.RowedRepresentationPath",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.ParallelAugmentedSource",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.PrimaryDetectionBaseChange",

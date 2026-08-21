@@ -15,6 +15,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.Res
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.BasedCoefficientMap
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.PointedDirectSum
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.RowedRepresentationDecomposition
+import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.RowedProjectorDecomposition
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.RowedRepresentationPath
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.ParallelAugmentedSource
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.PrimaryDetectionBaseChange
@@ -110,6 +111,18 @@ formal interface cannot choose a different loop for the row and that edge's
 direct-sum comparison. For each such loop, detected support on every generalized
 eigenspace is equivalent on the source and ambient factors even when the
 correction factor has the same eigenvalue.
+A smaller no-loop interface uses an intrinsic idempotent marking instead.
+`RowedProjectorDecomposition` allows its row to take values in a separate
+coefficient module. A block-natural projector square and a row square through
+ambient projection preserve row-visible marked support in both directions,
+even when the correction projector is nonzero. The zero ambient projector
+therefore contradicts a detected source. `Data.ofBasisSquares` shows that
+both squares may be checked on a basis of the source; no topology, density,
+or convergence argument is hidden in that extension. Constructing the QDM
+spectral projectors and proving the source equations on the chosen geometric
+basis remain external to Lean. The positive branch count for a product with
+`P^m` is proved symbolically for every natural `m`, rather than inferred from
+a bounded computational sweep.
 For a finite factorization path, a vertex-indexed family can supply the exact
 same marked representation to both incident edges. The resulting typed path
 composes the detected-support equivalences without any separately chosen
