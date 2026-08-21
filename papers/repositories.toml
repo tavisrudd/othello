@@ -422,9 +422,9 @@ reason = "private claim and priority ledger, not part of the public manuscript r
 [[repository.rewrite]]
 path = "Makefile"
 old = "TEXSHELL ?= nix develop ..\\#manuscript --command"
-new = "TEXSHELL ?= nix shell nixpkgs\\#texliveFull --command"
+new = "TEXSHELL ?= nix develop .\\#manuscript --command"
 expected_count = 1
-reason = "the standalone repository builds from a self-contained Nix shell"
+reason = "the standalone repository carries the same pinned manuscript shell"
 
 [[repository.rewrite]]
 path = "Makefile"
