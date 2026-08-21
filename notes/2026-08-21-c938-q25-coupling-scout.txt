@@ -1,0 +1,161 @@
+arcs=469600 min_legal=32 min_B=18 min_R=42 max_fixed_moment=28 max_occupied_moment=96 min_empty_moment=96 A=625 B=25 orbit_indices=65,93,154
+3251 13001
+5151 14901
+12076 9326
+type f=0 pairs=0 min_empty=0
+type f=0 pairs=1 min_empty=6
+type f=0 pairs=2 min_empty=0
+type f=1 pairs=0 min_empty=24
+type f=1 pairs=1 min_empty=20
+type f=1 pairs=2 min_empty=0
+type f=2 pairs=0 min_empty=16
+type f=2 pairs=1 min_empty=0
+type f=2 pairs=2 min_empty=0
+legal_histogram 32:1600 33:1200 34:2800 35:5600 36:12000 37:26000 38:39000 39:65200 40:73600 41:85800 42:68200 43:43000 44:29200 45:10400 46:4400 47:1600
+min_R_by_B 18:52 19:50 20:51 21:46 22:46 23:43 24:42 25:42 26:44
+min_B_by_R 42:24 43:23 44:24 46:21 47:22 48:21 49:21 50:19 51:20 52:18 53:21 54:19 55:18 56:18 57:24 58:18
+B_conditioned_moment_bounds
+B=18 minR=52 minT=57 maxHigh=6 separate_R_bound=51 maxFixedPlusOccupied=96
+B=19 minR=50 minT=55 maxHigh=6 separate_R_bound=49 maxFixedPlusOccupied=100
+B=20 minR=51 minT=55 maxHigh=6 separate_R_bound=49 maxFixedPlusOccupied=100
+B=21 minR=46 minT=51 maxHigh=11 separate_R_bound=40 maxFixedPlusOccupied=108
+B=22 minR=46 minT=49 maxHigh=11 separate_R_bound=38 maxFixedPlusOccupied=112
+B=23 minR=43 minT=48 maxHigh=11 separate_R_bound=37 maxFixedPlusOccupied=114
+B=24 minR=42 minT=49 maxHigh=9 separate_R_bound=40 maxFixedPlusOccupied=112
+B=25 minR=42 minT=48 maxHigh=10 separate_R_bound=38 maxFixedPlusOccupied=114
+B=26 minR=44 minT=49 maxHigh=8 separate_R_bound=41 maxFixedPlusOccupied=112
+
+BR_histogram 18,52:800 18,55:400 18,56:800 18,58:1200 19,50:400 19,52:400 19,54:800 19,55:800 20,51:1600 20,52:800 21,46:800 21,48:2400 21,49:800 21,50:4000 21,51:1600 21,52:4000 21,53:8000 21,54:6400 21,55:4800 21,56:800 22,46:2000 22,47:1600 22,48:5200 22,49:6400 22,50:7600 22,51:8400 22,52:10800 22,53:13200 22,54:4800 22,55:6400 22,56:3600 22,58:400 23,43:800 23,46:1200 23,47:3600 23,48:6000 23,49:13800 23,50:28000 23,51:18400 23,52:29000 23,53:20200 23,54:13000 23,55:12000 23,58:800 24,42:800 24,44:800 24,46:1200 24,47:5200 24,48:11600 24,49:15200 24,50:25600 24,51:27600 24,52:23600 24,53:17600 24,54:10400 24,55:8000 24,56:4000 24,57:800 25,42:400 25,46:2400 25,47:3600 25,48:7200 25,49:9200 25,50:8000 25,51:13600 25,52:4800 25,53:2400 25,54:2400 26,44:400 26,47:1200 26,49:1600 26,51:400 26,52:800
+linewise_B_legal_range 0:0-5 1:0-7 2:0-5 3:1-6 6:4-7
+invisible_line_signatures=82
+signature b1=11 b2=3 b3=3 minLegal=36
+signature b1=12 b2=3 b3=2 minLegal=32
+signature b1=13 b2=1 b3=3 minLegal=37
+signature b1=13 b2=2 b3=2 minLegal=41
+signature b1=16 b6=1 minLegal=35
+signature b0=1 b1=7 b2=9 minLegal=33
+signature b0=1 b1=8 b2=6 b3=2 minLegal=39
+signature b0=1 b1=8 b2=7 b3=1 minLegal=37
+signature b0=1 b1=9 b2=5 b3=2 minLegal=40
+signature b0=1 b1=9 b2=7 minLegal=38
+signature b0=1 b1=11 b2=2 b3=3 minLegal=37
+signature b0=1 b1=11 b2=3 b3=2 minLegal=37
+signature b0=1 b1=12 b2=1 b3=3 minLegal=38
+signature b0=1 b1=12 b2=2 b3=2 minLegal=34
+signature b0=2 b1=5 b2=10 minLegal=41
+signature b0=2 b1=6 b2=7 b3=2 minLegal=44
+signature b0=2 b1=6 b2=8 b3=1 minLegal=38
+signature b0=2 b1=6 b2=9 minLegal=39
+signature b0=2 b1=7 b2=6 b3=2 minLegal=37
+signature b0=2 b1=7 b2=7 b3=1 minLegal=36
+signature b0=2 b1=7 b2=8 minLegal=41
+signature b0=2 b1=8 b2=5 b3=2 minLegal=34
+signature b0=2 b1=8 b2=6 b3=1 minLegal=36
+signature b0=2 b1=9 b2=2 b3=4 minLegal=38
+signature b0=2 b1=9 b2=3 b3=3 minLegal=32
+signature b0=2 b1=9 b2=4 b3=2 minLegal=38
+signature b0=2 b1=10 b2=1 b3=4 minLegal=38
+signature b0=2 b1=10 b2=2 b3=3 minLegal=32
+signature b0=2 b1=10 b2=3 b3=2 minLegal=36
+signature b0=2 b1=10 b2=4 b3=1 minLegal=37
+signature b0=2 b1=11 b3=4 minLegal=40
+signature b0=2 b1=11 b2=1 b3=3 minLegal=35
+signature b0=2 b1=11 b2=2 b3=2 minLegal=35
+signature b0=3 b1=4 b2=9 b3=1 minLegal=38
+signature b0=3 b1=4 b2=10 minLegal=40
+signature b0=3 b1=5 b2=7 b3=2 minLegal=39
+signature b0=3 b1=5 b2=8 b3=1 minLegal=36
+signature b0=3 b1=5 b2=9 minLegal=36
+signature b0=3 b1=6 b2=6 b3=2 minLegal=37
+signature b0=3 b1=6 b2=7 b3=1 minLegal=36
+signature b0=3 b1=6 b2=8 minLegal=36
+signature b0=3 b1=7 b2=5 b3=2 minLegal=37
+signature b0=3 b1=7 b2=6 b3=1 minLegal=34
+signature b0=3 b1=8 b2=2 b3=4 minLegal=37
+signature b0=3 b1=8 b2=3 b3=3 minLegal=36
+signature b0=3 b1=8 b2=4 b3=2 minLegal=34
+signature b0=3 b1=8 b2=5 b3=1 minLegal=35
+signature b0=3 b1=9 b2=1 b3=4 minLegal=39
+signature b0=3 b1=9 b2=2 b3=3 minLegal=36
+signature b0=3 b1=9 b2=3 b3=2 minLegal=33
+signature b0=3 b1=10 b2=1 b3=3 minLegal=39
+signature b0=4 b1=3 b2=8 b3=2 minLegal=40
+signature b0=4 b1=3 b2=9 b3=1 minLegal=38
+signature b0=4 b1=4 b2=7 b3=2 minLegal=38
+signature b0=4 b1=4 b2=8 b3=1 minLegal=38
+signature b0=4 b1=4 b2=9 minLegal=41
+signature b0=4 b1=5 b2=6 b3=2 minLegal=37
+signature b0=4 b1=5 b2=7 b3=1 minLegal=35
+signature b0=4 b1=6 b2=3 b3=4 minLegal=39
+signature b0=4 b1=6 b2=4 b3=3 minLegal=42
+signature b0=4 b1=6 b2=5 b3=2 minLegal=38
+signature b0=4 b1=6 b2=6 b3=1 minLegal=42
+signature b0=4 b1=7 b2=2 b3=4 minLegal=32
+signature b0=4 b1=7 b2=3 b3=3 minLegal=35
+signature b0=4 b1=7 b2=4 b3=2 minLegal=37
+signature b0=4 b1=8 b2=1 b3=4 minLegal=39
+signature b0=4 b1=8 b2=2 b3=3 minLegal=37
+signature b0=5 b1=2 b2=8 b3=2 minLegal=43
+signature b0=5 b1=2 b2=9 b3=1 minLegal=41
+signature b0=5 b1=3 b2=7 b3=2 minLegal=42
+signature b0=5 b1=3 b2=8 b3=1 minLegal=40
+signature b0=5 b1=4 b2=6 b3=2 minLegal=44
+signature b0=5 b1=4 b2=8 minLegal=37
+signature b0=5 b1=5 b2=4 b3=3 minLegal=37
+signature b0=5 b1=5 b2=5 b3=2 minLegal=38
+signature b0=5 b1=6 b2=3 b3=3 minLegal=43
+signature b0=5 b1=6 b2=6 minLegal=42
+signature b0=6 b1=2 b2=9 minLegal=38
+signature b0=6 b1=3 b2=5 b3=3 minLegal=41
+signature b0=6 b1=3 b2=8 minLegal=35
+signature b0=6 b1=4 b2=7 minLegal=36
+signature b0=7 b1=2 b2=8 minLegal=39
+
+frontier_by_B
+B=18 R=52 first=34,266,372 second=24,72,114 multiplicity=36,87,42,5,0
+B=19 R=50 first=34,268,370 second=26,74,110 multiplicity=35,90,40,5,0
+B=20 R=51 first=34,270,368 second=28,72,110 multiplicity=37,86,43,4,0
+B=21 R=46 first=34,272,366 second=18,90,102 multiplicity=33,96,36,5,0
+B=22 R=46 first=34,274,364 second=16,96,98 multiplicity=34,93,40,3,0
+B=23 R=43 first=34,276,362 second=18,94,98 multiplicity=32,101,31,6,0
+B=24 R=42 first=34,278,360 second=16,92,102 multiplicity=32,103,30,3,2
+B=25 R=42 first=34,280,358 second=22,92,96 multiplicity=33,101,30,6,0
+B=26 R=44 first=34,282,356 second=20,92,98 multiplicity=36,95,34,5,0
+equality_tuple_count=4
+equality count=400 tuple=23,43,34,276,362,18,94,98,32,101,31,6,0
+equality count=400 tuple=23,43,34,276,362,22,92,96,32,100,33,5,0
+equality count=400 tuple=24,42,34,278,360,16,92,102,32,103,30,3,2
+equality count=400 tuple=24,42,34,278,360,24,84,102,32,105,24,9,0
+equality_residual_classes=5
+class canonical=65,93,154 normalized_arcs=200 orbit_size=200 stabilizer_size=2
+class canonical=65,96,216 normalized_arcs=400 orbit_size=400 stabilizer_size=1
+class canonical=65,98,251 normalized_arcs=400 orbit_size=400 stabilizer_size=1
+class canonical=65,119,232 normalized_arcs=200 orbit_size=200 stabilizer_size=2
+class canonical=65,123,279 normalized_arcs=400 orbit_size=400 stabilizer_size=1
+
+feature=fixedMoment,occupiedMoment keys=89 nondetermined_keys=61 nondetermined_arcs=447000 max_legal_width=10
+feature=B,fixedMoment,occupiedMoment keys=138 nondetermined_keys=84 nondetermined_arcs=427800 max_legal_width=8
+feature=R,fixedMoment,occupiedMoment keys=260 nondetermined_keys=63 nondetermined_arcs=219600 max_legal_width=4
+feature=fixedFirst,occupiedFirst,emptyFirst keys=9 nondetermined_keys=9 nondetermined_arcs=469600 max_legal_width=15
+feature=allFirstAndSecondMoments keys=138 nondetermined_keys=84 nondetermined_arcs=427800 max_legal_width=8
+feature=B,emptyMoment keys=82 nondetermined_keys=61 nondetermined_arcs=453200 max_legal_width=8
+feature=R,emptyMoment keys=94 nondetermined_keys=59 nondetermined_arcs=444000 max_legal_width=7
+feature=n2,n3,n4 keys=113 nondetermined_keys=62 nondetermined_arcs=431200 max_legal_width=7
+feature=fullTuple keys=344 nondetermined_keys=0 nondetermined_arcs=0 max_legal_width=0
+normalized_arcs_with_orbit_5=7044 greedy_cover_size=16
+cover_orbit=94 lean_orbit_number=59
+cover_orbit=199 lean_orbit_number=39
+cover_orbit=220 lean_orbit_number=85
+cover_orbit=153 lean_orbit_number=168
+cover_orbit=257 lean_orbit_number=147
+cover_orbit=179 lean_orbit_number=219
+cover_orbit=297 lean_orbit_number=237
+cover_orbit=268 lean_orbit_number=183
+cover_orbit=126 lean_orbit_number=116
+cover_orbit=309 lean_orbit_number=249
+cover_orbit=152 lean_orbit_number=167
+cover_orbit=95 lean_orbit_number=60
+cover_orbit=281 lean_orbit_number=196
+cover_orbit=291 lean_orbit_number=231
+cover_orbit=124 lean_orbit_number=114
+cover_orbit=142 lean_orbit_number=157

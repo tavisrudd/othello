@@ -11,9 +11,10 @@ semantic level: the universal `≥ 32` bound, five-row attainment, the certified
 the semantic lift of the lower bound, equality-orbit exhaustion, and its semantic lift are all
 kernel-checked. `32` is the exact semantic minimum and the five orbits are the complete extremal set
 up to normalization. The citation audit gating priority language is discharged and all four lane
-claims survive. C938 is the active bounded coupling scout; C937's layered-exposition and manuscript
-closeout pass follows. Release bookkeeping C318/C319 comes next; the exchange graph C152 remains
-optional unless adopted.
+claims survive. C938 closed negatively without changing the theorem package: the visible compact
+invariants do not prove the Q25 coupling without residual classification. C937's layered-exposition
+and manuscript closeout pass is next. Release bookkeeping C318/C319 follows; the exchange graph
+C152 remains optional unless adopted.
 **Tasks:** C142–C143, C148–C152, C318–C319, C331, C363, C937–C938
 
 Companion discovery log:
@@ -94,7 +95,8 @@ Reported theorem and scout details live in their reports:
 [C143](../2026-07-14-c143-q25-alternate-orbit-repair.md),
 [C148](../2026-07-14-c148-general-s-profile-envelope.md),
 [C149](../2026-07-14-c149-parameterized-robust-exchange.md), and
-[C150](../2026-07-14-c150-q25-multiplicity-structure.md).
+[C150](../2026-07-14-c150-q25-multiplicity-structure.md). The bounded conceptual-coupling no-go is
+recorded in [C938](../2026-08-21-c938-q25-coupling-scout.md).
 
 ## Current discovery frontier
 
@@ -109,7 +111,7 @@ computed but not yet promoted through the complete semantic theorem.
 | D-AOR5 | For an invariant old set, legality of a conjugate candidate pair reduces to freshness, one representative avoiding old secants, and its fixed carrier avoiding old points. | `LEAN-CHECKED; LIT-OPEN` | C151 certificate compression and later exposition assessment |
 | D-AOR6 | The residual order-400 group is two independent 20-element base-field affine normalizers; its executable action preserves legal-orbit cardinality. | `LEAN-CHECKED` | C151 class transport |
 | D-AOR7 | Determinant obstructions factor through 651 canonical dual-line masks; the 310 candidate carriers lie ten apiece on the 31 conjugation-fixed lines. | mask table and Boolean composition `LEAN-CHECKED` | compact C151 residual certificates |
-| D-AOR8 | Freshness blocks 3 candidates and carrier incidence blocks 140 in every residual class; only the old-secant mask varies, yielding the legal-count spectrum 32–47 through overlap. | lower bound and five equalities `LEAN-CHECKED`; spectrum `COMPUTE-CHECKED` | seek a conceptual overlap inequality after the residual cover closes |
+| D-AOR8 | Freshness blocks 3 candidates and carrier incidence blocks 140 in every residual class; only the old-secant mask varies, yielding the legal-count spectrum 32–47 through overlap. | lower bound and five equalities `LEAN-CHECKED`; spectrum `COMPUTE-CHECKED`; C938 bounded conceptual scout negative | current paper retains the residual certificate; any successor needs a genuinely new global incidence inequality, not more moment or center-signature cases |
 
 Closed discoveries D-AOR1 and D-AOR3 were promoted by C148 and C149 respectively; their final
 statements are in the reports above and their development history is in the companion archive.
@@ -118,13 +120,12 @@ statements are in the reports above and their development history is in the comp
 
 | Task | State | Current deliverable |
 |---|---|---|
-| C938 | in progress; the lane's next step; no large Q25 certificate rebuilds | Seek a genuinely geometric `B+R≥66` proof explaining minimum `32`; isolated downstream Lean only if cheap, otherwise stop at the scout gate |
-| C937 | queued after C938; no large Q25 certificate rebuilds | Layered-exposition and hierarchy pass, synchronized Q25 wording, MDS translation, trust-boundary prose, and a clean current PDF; scoped Lean work is allowed, but no regeneration or forced re-elaboration of the large Q25 certificate forests |
-| C318 | queued | Manifest rows for the residual layer, its data trees, and the trusted-surface statement |
+| C937 | queued; the lane's next step; no large Q25 certificate rebuilds | Layered-exposition and hierarchy pass, synchronized Q25 wording, MDS translation, trust-boundary prose, and a clean current PDF; scoped Lean work is allowed, but no regeneration or forced re-elaboration of the large Q25 certificate forests |
+| C318 | queued | Manifest rows for the surviving residual layer and data trees, the trusted-surface statement, and reconciliation of C151 report references to the mask-spectrum payload removed by `6da475113` |
 | C319 | queued; C151 cost measured at 1:57:09 serial | Decide verified canonicalizer versus demotion to reduction-plus-computation |
 | C152 | queued | Define the orbit-replacement graph, prove the exact local degree identity, then run a component census before considering connectivity |
 
-Reported: C142, C143, C148, C149, C150, C151, and C331; use the linked reports rather than
+Reported: C142, C143, C148, C149, C150, C151, C331, and C938; use the linked reports rather than
 recreating their plans here.
 
 ## Minimum-classification layer — state a cold session needs
