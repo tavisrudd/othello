@@ -20,11 +20,20 @@ strict field-nine corollary is the conclusion of
 Singer regularity is an explicit hypothesis of that declaration, not a hidden
 formal axiom.
 
+The completed cubic parameters and rows are independently exposed by
+\begin{quote}\small\raggedright
+\path{FiniteGeom.projectiveAxisTwistedCubic_code_parameters},\\
+\path{RepairCodes.minimalProjectiveAxisTwistedCubicRepair_full_eq_four},\\
+\path{RepairCodes.minimalProjectiveCubicRepair_four_invariants},\\
+\path{RepairCodes.minimalProjectiveAxisRepair_four_invariants}.
+\end{quote}
+The gate also prints the corresponding full-radius invariant terminals.
+
 The paper's \path{verification/formal-boundary.json} fixes the formal source
 commit, the finitegeom base commit, Lean and mathlib revisions, gate-fact hash,
-32-module closure, and 54 paper-facing terminals.  At source commit
-\texttt{832a9d60682a6c6175131e93802275bde85c4bae}, the immutable area-export
-planner reports 722374 closure bytes and no prose drift against finitegeom
+36-module closure, and 60 paper-facing terminals.  At source commit
+\texttt{e1b58fd8a79a763012a21fa4d32f8904c8d9eb04}, the immutable area-export
+planner reports 885232 closure bytes and no prose drift against finitegeom
 commit \texttt{b871c10b4a91200a0913644d39b9f0ce44f655ca}.  The companion
 \path{verification/README.md} gives the guarded build, axiom-audit, and
 area-export replay commands.  These identifiers distinguish the kernel-checked
