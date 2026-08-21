@@ -16,9 +16,6 @@ SOURCE_ROOT = ROOT / "TavisRuddFiniteGeom"
 CLAIMS = ROOT / "verification" / "claims.json"
 EXPECTED_AXIOMS = ROOT / "verification" / "expected_axioms.txt"
 SECTIONS = ROOT.parent / "sections"
-PAPER_INTERFACE = (
-    SOURCE_ROOT / "Papers" / "CubicStabilizationEpilogue" / "PaperInterface.lean"
-)
 AXIOM_AUDIT = (
     SOURCE_ROOT
     / "Papers"
@@ -133,34 +130,58 @@ def statement_digest(body: str) -> str:
     return hashlib.sha256(" ".join(stripped.split()).encode("utf-8")).hexdigest()
 
 
-def terminal_signatures() -> dict[str, str]:
+def terminal_signatures(interface_sources: tuple[Path, ...]) -> dict[str, str]:
     """The elaborated statement text of each reviewer terminal, by name.
 
     A terminal's signature runs from its declaration keyword to the assignment
     that opens its proof; the docstring above it is deliberately excluded, so a
     prose improvement does not read as a change of statement.
     """
-    lines = PAPER_INTERFACE.read_text(encoding="utf-8").splitlines()
     signatures: dict[str, str] = {}
-    current: str | None = None
-    collected: list[str] = []
-    for line in lines:
-        opening = re.match(
-            r"^(?:noncomputable\s+)?(?:theorem|def)\s+([A-Za-z0-9_']+)", line
-        )
-        if opening:
-            current = opening.group(1)
-            collected = [line]
-            if ":=" in line:
-                signatures[current] = " ".join(" ".join(collected).split())
-                current = None
-            continue
-        if current is not None:
-            collected.append(line)
-            if ":=" in line:
-                signatures[current] = " ".join(" ".join(collected).split())
-                current = None
+    for source in interface_sources:
+        current: str | None = None
+        collected: list[str] = []
+        for line in source.read_text(encoding="utf-8").splitlines():
+            opening = re.match(
+                r"^(?:noncomputable\s+)?(?:theorem|def)\s+([A-Za-z0-9_']+)", line
+            )
+            if opening:
+                current = opening.group(1)
+                collected = [line]
+                if ":=" in line:
+                    signatures[current] = " ".join(" ".join(collected).split())
+                    current = None
+                continue
+            if current is not None:
+                collected.append(line)
+                if ":=" in line:
+                    signatures[current] = " ".join(" ".join(collected).split())
+                    current = None
     return signatures
+
+
+def reviewer_sources(manifest: dict[str, object]) -> tuple[Path, ...]:
+    """Resolve the declared section-level reviewer modules inside this package."""
+    modules = manifest.get("reviewer_modules")
+    if not isinstance(modules, list) or not modules or not all(isinstance(x, str) for x in modules):
+        fail("claim map declares no reviewer module list")
+    if len(modules) != len(set(modules)):
+        fail("claim map repeats a reviewer module")
+    result = tuple(ROOT / (module.replace(".", "/") + ".lean") for module in modules)
+    for source in result:
+        if not source.is_relative_to(SOURCE_ROOT) or not source.is_file():
+            fail(f"reviewer module does not resolve inside the package: {source}")
+    aggregator = manifest.get("reviewer_module")
+    if not isinstance(aggregator, str) or not aggregator:
+        fail("claim map declares no reviewer aggregator")
+    aggregator_source = ROOT / (aggregator.replace(".", "/") + ".lean")
+    if not aggregator_source.is_file():
+        fail("reviewer aggregator does not resolve inside the package")
+    aggregator_text = aggregator_source.read_text(encoding="utf-8")
+    for module in modules:
+        if f"import {module}" not in aggregator_text:
+            fail(f"reviewer aggregator does not import {module}")
+    return result
 
 
 def terminal_digest(declarations: list[str], signatures: dict[str, str], namespace: str) -> str:
@@ -365,6 +386,11 @@ def main() -> None:
     mode.add_argument("--axiom-log", type=Path)
     args = parser.parse_args()
 
+    manifest = json.loads(CLAIMS.read_text(encoding="utf-8"))
+    if manifest.get("schema") != "cubic-stabilization-lean-claims-v6":
+        fail("unexpected claims schema")
+    interface_sources = reviewer_sources(manifest)
+
     sources = sorted(SOURCE_ROOT.rglob("*.lean"))
     if not sources:
         fail("no Lean sources found")
@@ -376,7 +402,9 @@ def main() -> None:
                 fail(f"{source.relative_to(ROOT)} contains forbidden {label}")
         check_public_docstrings(source, text)
 
-    interface_text = PAPER_INTERFACE.read_text(encoding="utf-8")
+    interface_text = "\n".join(
+        source.read_text(encoding="utf-8") for source in interface_sources
+    )
     terminals = {
         f"{namespace}.{match.group(1)}"
         for match in re.finditer(
@@ -393,9 +421,6 @@ def main() -> None:
             f"missing={sorted(terminals - audited)} extra={sorted(audited - terminals)}"
         )
 
-    manifest = json.loads(CLAIMS.read_text(encoding="utf-8"))
-    if manifest.get("schema") != "cubic-stabilization-lean-claims-v5":
-        fail("unexpected claims schema")
     terminal_namespace = manifest.get("terminal_namespace")
     if not isinstance(terminal_namespace, str) or not terminal_namespace:
         fail("claim map declares no terminal namespace")
@@ -483,7 +508,7 @@ def main() -> None:
             if declaration in registered:
                 fail(f"terminal registered more than once: {declaration}")
             registered.add(declaration)
-    signatures = terminal_signatures()
+    signatures = terminal_signatures(interface_sources)
     for claim in claims:
         if not claim["declarations"]:
             if claim.get("terminal_digest") is not None:

@@ -140,6 +140,11 @@ Current audit: 53 manuscript
 claims, 4 absent, 22 fragmentary, 26 conditional, 1 complete; 311 reviewer
 terminals, of which 83 are machinery. The aggregate Lean gate, source audit,
 axiom-log audit, and warning-free 50-page manuscript gate are green.
+The former 8,305-line reviewer interface is now split into semantic facades for
+the introduction, envelope, minimal-class, categorical one-step,
+framed-monodromy, and synthesis sections, plus a separate machinery facade;
+`PaperInterface.lean` remains a thin compatibility aggregator, and every fully
+qualified terminal name is unchanged.
 Governing plan:
 [`../2026-08-20-c910-categorical-proof-spine-plan.md`](../2026-08-20-c910-categorical-proof-spine-plan.md).
 
@@ -1130,6 +1135,14 @@ papers/cubic-stabilization-epilogue/lean/
     Applications/CubicFramedOneStep.lean
     Applications/DivisorTaggingVanishing.lean
     PaperInterface.lean
+    PaperInterface/Imports.lean
+    PaperInterface/Introduction.lean
+    PaperInterface/Envelope.lean
+    PaperInterface/MinimalClass.lean
+    PaperInterface/CategoricalOneStep.lean
+    PaperInterface/FramedMonodromy.lean
+    PaperInterface/Synthesis.lean
+    PaperInterface/Machinery.lean
     Verification/AxiomAudit.lean
   verification/
     claims.json

@@ -381,11 +381,15 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   exact closed reading.  Module 62 now gives the paper-local Lean type and
   proof spine for that last reader.  The canonical projected variation is
   functorial under one marked horizontal comparison, so separate actual
-  can/variation maps and a projected-row square are no longer inputs.  In the
-  forward direction surjectivity is enough; in the reverse direction it is
-  unnecessary.  The remaining theorem is one occurrence-indexed horizontal
-  comparison intertwining both monodromies and the rank row, the model-side
-  crossed-defect reading, and exact range/coimage base change at resonance.
+  can/variation maps and a projected-row square are no longer inputs.  Vector
+  crossed-coordinate equations now derive the model reading, and the actual
+  receiver is a fixed external parameter rather than existential reader data.
+  In the forward direction only the induced incoming-image map must be
+  surjective; in the reverse direction no surjectivity is needed.  The
+  remaining theorem is one occurrence-indexed horizontal comparison
+  intertwining both monodromies and the rank row, the vector coordinate
+  realization of the crossed edge, and exact range/coimage base change at
+  resonance.
   Shifted tensor stability and the extremal multinomial source law are
   proved, but the occurrence-indexed exact QDM sequence, actual carrier
   exponent, and boundary vanishing remain open.  The packet is split into
@@ -467,7 +471,11 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   under the C879 paper-facing
   namespace `TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue`, with
   reviewer entry point `PaperInterface` and machine audit
-  `Verification/AxiomAudit`. The current main proof spine is the effective
+  `Verification/AxiomAudit`. The entry point is now a thin aggregator over
+  semantic facades for the five proof-bearing manuscript sections, a
+  declaration-free synthesis facade, and a separate 83-terminal machinery
+  facade; all 311 fully qualified terminal names are unchanged. The current
+  main proof spine is the effective
   categorical block ledger and occurrence-indexed weak-factorization descent:
   the direct rank-two residue theorem and the finer primitive-sixth framed
   theorem are literal specializations of the same generic theorem, and their

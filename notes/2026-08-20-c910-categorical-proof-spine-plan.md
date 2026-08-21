@@ -96,6 +96,14 @@ in the target monoid algebra, but does not construct the geometric center
 specialization or identify its associated graded ring. The source, axiom-log,
 and 50-page manuscript gates pass.
 
+The reviewer surface is split by semantic manuscript section.  The public
+`PaperInterface` path is now a thin aggregator over introduction, envelope,
+minimal-class, categorical one-step, framed-monodromy, and synthesis facades,
+with the 83 unclaimed reusable terminals isolated in a machinery facade.  The
+311 declaration and proof blocks, fully qualified names, claim digests, and
+axiom census are unchanged; the claim-map checker now requires the aggregator
+to import every declared reviewer module.
+
 ### Execution status
 
 Work-order items 1--7 below are complete for the stable categorical checkpoint.

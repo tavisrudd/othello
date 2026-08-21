@@ -1,6 +1,15 @@
 {
-  "schema": "cubic-stabilization-lean-claims-v5",
+  "schema": "cubic-stabilization-lean-claims-v6",
   "reviewer_module": "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.PaperInterface",
+  "reviewer_modules": [
+    "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.PaperInterface.Introduction",
+    "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.PaperInterface.Envelope",
+    "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.PaperInterface.MinimalClass",
+    "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.PaperInterface.CategoricalOneStep",
+    "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.PaperInterface.FramedMonodromy",
+    "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.PaperInterface.Synthesis",
+    "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.PaperInterface.Machinery"
+  ],
   "axiom_audit_module": "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Verification.AxiomAudit",
   "terminal_namespace": "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue",
   "claims": [

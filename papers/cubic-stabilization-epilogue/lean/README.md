@@ -7,6 +7,14 @@ reviewer-facing entry point is
 TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.PaperInterface
 ```
 
+That module is a thin aggregator.  The declarations themselves are grouped in
+semantic reviewer facades matching the manuscript: `Introduction`, `Envelope`,
+`MinimalClass`, `CategoricalOneStep`, `FramedMonodromy`, and `Synthesis` under
+`PaperInterface/`.  The declaration-free synthesis facade records that the
+concluding section introduces no new theorem-like terminal.  Reusable audited
+terminals on which no manuscript claim currently rests live separately in
+`PaperInterface/Machinery.lean`.
+
 and its axiom audit is
 
 ```text

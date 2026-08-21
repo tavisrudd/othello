@@ -129,6 +129,12 @@ the introduction, the envelope section, the minimal-class section, the framed
 refinement, and the separation section.  A statement carrying no edge has none
 recorded rather than none used, and the same holds of an imported source.
 
+The claim inventory declares both the public `PaperInterface` aggregator and
+the semantic reviewer modules it exports.  The checker resolves every declared
+module inside the package, requires the aggregator to import each one, and
+computes terminal and signature coverage across their union.  This keeps the
+section-level source split from weakening the exact terminal census.
+
 Checked coverage snapshot: 53 claims; 4 absent; 22 fragmentary; 26 conditional;
 1 complete; 311 reviewer terminals, of which 83 are machinery serving no current
 manuscript claim.

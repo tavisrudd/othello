@@ -178,6 +178,14 @@ roots = [
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.SeparatedVariableCubicForms",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.UniversalCH0Separation",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.EckardtHessianRank",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.PaperInterface.Imports",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.PaperInterface.Introduction",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.PaperInterface.Envelope",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.PaperInterface.MinimalClass",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.PaperInterface.CategoricalOneStep",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.PaperInterface.FramedMonodromy",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.PaperInterface.Synthesis",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.PaperInterface.Machinery",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.PaperInterface",
 ]
 
