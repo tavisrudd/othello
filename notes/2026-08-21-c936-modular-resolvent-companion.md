@@ -571,3 +571,27 @@ An initial unpinned materialization rebuilt a different PDF byte stream; it was
 moved intact to
 `/tmp/persistent/tavis/export-rejected/cubic-gluing-resolvent-unpinned-20260821`
 and replaced by the pinned, byte-identical export.
+
+## Epilogue forward reference and export
+
+The cubic-stabilization epilogue now cites this companion immediately after
+identifying the exotic pair with the square-root torsor of the elliptic
+discriminant.  The added sentence records only the root/sign quotient and
+level-six modular realization and says explicitly that those refinements are
+not used in the epilogue.  Thus the citation exposes the stronger result
+without introducing a circular or hidden proof dependency.
+
+The rendered citation landing and its neighbors (pages 11--13), together with
+the complete bibliography landing (pages 50--51), were inspected at full
+resolution.  There is no orphan, collision, bad display break, or anomalous
+vertical gap.  The final bibliography page is naturally half-filled; retaining
+that spacing is preferable to tightening all references merely to recover a
+page.
+
+Authority commit `818c14c4a` adds the forward reference and bibliography item.
+The epilogue was exported from that exact source commit to
+`~/src/math-papers/cubic-stabilization-epilogue` and committed there as
+`9ce774f`.  Standalone `make check` passes, the exporter verifies all 231
+tracked files, and the authority and standalone 51-page PDFs have identical
+SHA-256 digest
+`6c2f164c66497bae23f0e5d60055993660af782140f77008cde0692db40e259c`.

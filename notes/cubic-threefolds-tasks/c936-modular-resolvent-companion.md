@@ -123,3 +123,11 @@ general-prime context: the two orbits are the Borel and nonsplit-Cartan
 quotients, and only at two does the nonsplit orbit itself become a discriminant
 double cover.  The unresolved questions and their literature boundaries are in
 the report's reopened-supplement section.
+
+The cubic-stabilization epilogue now points forward from its elliptic
+discriminant discussion to this paper's exact root/sign and level-six
+realization.  The reference is explicitly non-load-bearing for the epilogue.
+Rendered pages 11--13 and 50--51 were inspected after insertion; the citation,
+the neighboring proposition break, and the two-page bibliography are clean.
+The resulting 51-page epilogue was exported and verified in its standalone
+repository at commit `9ce774f`.
