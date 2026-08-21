@@ -3302,8 +3302,17 @@
       "last": 934,
       "purpose": "full integral decomposition complex for the cubic-threefold theta divisor",
       "sequence": 367
+    },
+    {
+      "count": 1,
+      "first": 935,
+      "kind": "reservation",
+      "lane": "cubic-threefolds",
+      "last": 935,
+      "purpose": "Audit the elliptic 2-division discriminant-resolvent upgrade and strengthen the m=1 cubic-stabilization epilogue",
+      "sequence": 368
     }
   ],
-  "next_id": 935,
+  "next_id": 936,
   "schema": "codex-task-id-allocations-v1"
 }
