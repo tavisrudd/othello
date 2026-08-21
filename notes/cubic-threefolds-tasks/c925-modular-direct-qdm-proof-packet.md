@@ -294,6 +294,17 @@ index row.
   model, and the chosen fibre loops and row must realize the fixed actual
   receiver.  These equalities plus incoming-image coverage construct the
   complete reader; ambient surjectivity is only one sufficient implementation.
+  The identifications may be marked gauge equivalences rather than literal
+  equality: conjugacy for both monodromies plus row transport suffices, and
+  surjectivity survives the change of frame.
+  The identification frontier is now split into three gates: construct the
+  crossed-coordinate monodromy model, compare its selected diagram with the
+  actual fixed-phase diagram, and prove resonant incoming-image coverage.
+  Gate 1 has a new kernel sieve: every coordinate model forces
+  `ker(B,D)` into the kernel of the source-to-image map, while injectivity of
+  the full upper-triangular window comparison makes `(B,D)` jointly injective.
+  Its Lean goal is split into incoming-image, target-vector, and row-coordinate
+  capability records, so the known Fourier-row pilot fills only the third.
   A separate descent-packet module proves that
   a regular orbit differs equivariantly from three fixed points and that a unary
   correction is fixed only after its singleton summand is action-stable.  The

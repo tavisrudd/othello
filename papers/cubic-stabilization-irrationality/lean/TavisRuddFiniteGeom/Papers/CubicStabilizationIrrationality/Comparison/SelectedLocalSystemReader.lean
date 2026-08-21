@@ -27,7 +27,7 @@ open MarkedMonodromyDiagram
 open ModelCrossedCoordinates
 open TraitHorizontalReader
 
-universe uι uLoop uLoop' uR uk uC₀ uC₁ uM₀ uM₁ uModel uActual uCert
+universe uι uLoop uLoop' uR uk uC₀ uC₁ uM₀ uM₁ uModel uActual uModelRep uActualRep uCert
 
 /-- Identification of the diagram selected from a based-loop representation
 with one independently specified endpoint-indexed directed diagram. -/
@@ -86,6 +86,66 @@ theorem selectedMorphism_map
     rfl
 
 end DiagramIdentification
+
+/-- Select a whole-local-system horizontal morphism and transport it through
+marked gauge equivalences to independently chosen model and actual frames. -/
+def selectedGaugeMorphism
+    {R : Type uR} {k : Type uk} [CommRing R] [CommRing k]
+    {specialize : R →+* k}
+    {Loop : Type uLoop} {Loop' : Type uLoop'} [Group Loop] [Group Loop']
+    {loopMap : Loop →* Loop'}
+    {Index : Type uι} {source target : Index}
+    {ModelRepresentationNearby : Type uModelRep}
+    {ActualRepresentationNearby : Type uActualRep}
+    {ModelNearby : Type uModel} {ActualNearby : Type uActual}
+    [AddCommGroup ModelRepresentationNearby] [Module R ModelRepresentationNearby]
+    [AddCommGroup ActualRepresentationNearby] [Module k ActualRepresentationNearby]
+    [AddCommGroup ModelNearby] [Module R ModelNearby]
+    [AddCommGroup ActualNearby] [Module k ActualNearby]
+    {domain : MarkedLocalSystem.Representation R Loop ModelRepresentationNearby}
+    {codomain : MarkedLocalSystem.Representation k Loop' ActualRepresentationNearby}
+    {assignment : LoopAssignment Index Loop}
+    {modelDiagram : Diagram R source target ModelNearby}
+    {actualDiagram : Diagram k source target ActualNearby}
+    (modelEquivalence : DiagramEquivalence R
+      (domain.select source target (assignment.loop source) (assignment.loop target)) modelDiagram)
+    (actualEquivalence : DiagramEquivalence k
+      (codomain.select source target (loopMap (assignment.loop source))
+        (loopMap (assignment.loop target))) actualDiagram)
+    (horizontal : SemilinearHorizontal specialize loopMap domain codomain) :
+    SemilinearMorphism specialize modelDiagram actualDiagram :=
+  (horizontal.selectAssigned assignment source target).transport
+    modelEquivalence actualEquivalence
+
+/-- Ambient surjectivity survives selection and marked gauge transport. -/
+theorem selectedGaugeMorphism_map_surjective
+    {R : Type uR} {k : Type uk} [CommRing R] [CommRing k]
+    {specialize : R →+* k}
+    {Loop : Type uLoop} {Loop' : Type uLoop'} [Group Loop] [Group Loop']
+    {loopMap : Loop →* Loop'}
+    {Index : Type uι} {source target : Index}
+    {ModelRepresentationNearby : Type uModelRep}
+    {ActualRepresentationNearby : Type uActualRep}
+    {ModelNearby : Type uModel} {ActualNearby : Type uActual}
+    [AddCommGroup ModelRepresentationNearby] [Module R ModelRepresentationNearby]
+    [AddCommGroup ActualRepresentationNearby] [Module k ActualRepresentationNearby]
+    [AddCommGroup ModelNearby] [Module R ModelNearby]
+    [AddCommGroup ActualNearby] [Module k ActualNearby]
+    {domain : MarkedLocalSystem.Representation R Loop ModelRepresentationNearby}
+    {codomain : MarkedLocalSystem.Representation k Loop' ActualRepresentationNearby}
+    {assignment : LoopAssignment Index Loop}
+    {modelDiagram : Diagram R source target ModelNearby}
+    {actualDiagram : Diagram k source target ActualNearby}
+    (modelEquivalence : DiagramEquivalence R
+      (domain.select source target (assignment.loop source) (assignment.loop target)) modelDiagram)
+    (actualEquivalence : DiagramEquivalence k
+      (codomain.select source target (loopMap (assignment.loop source))
+        (loopMap (assignment.loop target))) actualDiagram)
+    (horizontal : SemilinearHorizontal specialize loopMap domain codomain)
+    (surjective : Function.Surjective horizontal.map) :
+    Function.Surjective (selectedGaugeMorphism modelEquivalence actualEquivalence horizontal).map :=
+  SemilinearMorphism.transport_map_surjective modelEquivalence actualEquivalence
+    (horizontal.selectAssigned assignment source target) surjective
 
 namespace Reader
 
@@ -163,5 +223,90 @@ def ofMarkedLocalSystemOfSurjective
           DiagramIdentification.selectedMorphism_map] using mapSurjective))
 
 end Reader
+
+namespace GaugeReader
+
+variable
+    {R : Type uR} {k : Type uk} [CommRing R] [CommRing k]
+    {specialize : R →+* k}
+    {Occurrence CoeffParameter ChamberPath QdmPath Phase Character Direction : Type uι}
+    {environment : ReaderEnvironment R k Occurrence CoeffParameter ChamberPath QdmPath Direction}
+    {phase : PhaseTag Phase} {character : CharacterTag Character}
+    {direction : DirectionTag Direction}
+    {sourceEndpoint targetEndpoint :
+      Endpoint R k environment specialize phase character direction}
+    {C₀ : Type uC₀} {C₁ : Type uC₁} {M₀ : Type uM₀} {M₁ : Type uM₁}
+    [AddCommGroup C₀] [Module R C₀]
+    [AddCommGroup C₁] [Module R C₁]
+    [AddCommGroup M₀] [Module R M₀]
+    [AddCommGroup M₁] [Module R M₁]
+    {edge : CrossedEdge R sourceEndpoint.index targetEndpoint.index C₀ C₁ M₀ M₁}
+    {ModelRepresentationNearby : Type uModelRep}
+    {ActualRepresentationNearby : Type uActualRep}
+    {ModelNearby : Type uModel} {ActualNearby : Type uActual}
+    [AddCommGroup ModelRepresentationNearby] [Module R ModelRepresentationNearby]
+    [AddCommGroup ActualRepresentationNearby] [Module k ActualRepresentationNearby]
+    [AddCommGroup ModelNearby] [Module R ModelNearby]
+    [AddCommGroup ActualNearby] [Module k ActualNearby]
+    {PacketCertificate :
+      ReaderIndex Occurrence CoeffParameter ChamberPath QdmPath Phase Character Direction →
+      ReaderIndex Occurrence CoeffParameter ChamberPath QdmPath Phase Character Direction →
+      Type uCert}
+    {actual : DirectedFixedPhaseReceiver k PacketCertificate sourceEndpoint.index
+      targetEndpoint.index ActualNearby}
+    {Loop : Type uLoop} {Loop' : Type uLoop'} [Group Loop] [Group Loop']
+    {loopMap : Loop →* Loop'}
+    {domain : MarkedLocalSystem.Representation R Loop ModelRepresentationNearby}
+    {codomain : MarkedLocalSystem.Representation k Loop' ActualRepresentationNearby}
+    {assignment : LoopAssignment
+      (ReaderIndex Occurrence CoeffParameter ChamberPath QdmPath Phase Character Direction) Loop}
+
+/-- Construct the trait-horizontal reader after transporting the selected
+whole-local-system comparison into independently chosen model and actual
+frames. -/
+def ofMarkedLocalSystemWithImageSpan
+    (model : Coordinates R R (RingHom.id R) edge ModelNearby)
+    (modelEquivalence : DiagramEquivalence R
+      (domain.select sourceEndpoint.index targetEndpoint.index
+        (assignment.loop sourceEndpoint.index) (assignment.loop targetEndpoint.index))
+      (Diagram.ofOperators model.incoming model.targetMonodromy model.row))
+    (actualEquivalence : DiagramEquivalence k
+      (codomain.select sourceEndpoint.index targetEndpoint.index
+        (loopMap (assignment.loop sourceEndpoint.index))
+        (loopMap (assignment.loop targetEndpoint.index)))
+      (Diagram.ofOperators actual.incoming actual.targetMonodromy actual.row))
+    (horizontal : SemilinearHorizontal specialize loopMap domain codomain)
+    (imageSpans : Submodule.span k
+      (Set.range
+        (selectedGaugeMorphism modelEquivalence actualEquivalence horizontal).toSpecialization.incomingImageMap) =
+      ⊤) :
+    TraitHorizontalReader.Reader R k specialize environment phase character direction
+      sourceEndpoint targetEndpoint edge ModelNearby ActualNearby PacketCertificate actual where
+  model := model
+  horizontal := selectedGaugeMorphism modelEquivalence actualEquivalence horizontal
+  incomingImageSpans := imageSpans
+
+/-- Ambient surjectivity is preserved by the two marked gauge equivalences and
+therefore supplies incoming-image coverage in the chosen frames. -/
+def ofMarkedLocalSystemOfSurjective
+    (model : Coordinates R R (RingHom.id R) edge ModelNearby)
+    (modelEquivalence : DiagramEquivalence R
+      (domain.select sourceEndpoint.index targetEndpoint.index
+        (assignment.loop sourceEndpoint.index) (assignment.loop targetEndpoint.index))
+      (Diagram.ofOperators model.incoming model.targetMonodromy model.row))
+    (actualEquivalence : DiagramEquivalence k
+      (codomain.select sourceEndpoint.index targetEndpoint.index
+        (loopMap (assignment.loop sourceEndpoint.index))
+        (loopMap (assignment.loop targetEndpoint.index)))
+      (Diagram.ofOperators actual.incoming actual.targetMonodromy actual.row))
+    (horizontal : SemilinearHorizontal specialize loopMap domain codomain)
+    (surjective : Function.Surjective horizontal.map) :
+    TraitHorizontalReader.Reader R k specialize environment phase character direction
+      sourceEndpoint targetEndpoint edge ModelNearby ActualNearby PacketCertificate actual :=
+  TraitHorizontalReader.Reader.ofSurjective model
+    (selectedGaugeMorphism modelEquivalence actualEquivalence horizontal)
+    (selectedGaugeMorphism_map_surjective modelEquivalence actualEquivalence horizontal surjective)
+
+end GaugeReader
 
 end TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.SelectedLocalSystemReader

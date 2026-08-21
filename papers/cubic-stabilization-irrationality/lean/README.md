@@ -19,6 +19,9 @@ crossed-coordinate equations derive the model row reading. The reduced
 horizontal reader proves that one marked comparison intertwining the two
 monodromies transports model-side vanishing to an externally supplied actual
 receiver when its induced incoming-image map is surjective.
+The model construction is split into three separately inhabitable capability
+records: incoming-image realization, target vector coordinates, and scalar row
+coordinates. Only their assembly yields the full crossed-coordinate model.
 The trait-level module proves the weaker specialization law actually consumed
 by the vanishing argument: pointwise specialized variation commutes with a
 marked semilinear comparison, so a normal-factor reading whose normal maps to
@@ -36,6 +39,10 @@ coordinate model diagram, and the pair selected from the fibre representation
 must be the supplied actual fixed-phase diagram. With those two identifications
 and ambient surjectivity, the global horizontal morphism constructs the full
 trait-horizontal reader.
+The same construction accepts marked gauge equivalences instead of literal
+equality of frames. Each equivalence conjugates both selected monodromies and
+transports the scalar row; the global semilinear map is transported through
+the two gauges. Ambient surjectivity is invariant under this transport.
 The horizontal morphism carries an explicit homomorphism between the trait and
 fibre loop groups, so ramified loop reindexing is not identified with equality.
 An endpoint-loop assignment can be constructed from the endpoint's QDM/deck

@@ -22,7 +22,7 @@ open MonodromyImage
 open ProjectedVariation
 open SemilinearVariation
 
-universe uI uR uk uV uW
+universe uI uR uk uV uW uV' uW'
 
 /-- The two loop roles used by a directed projected-variation comparison.
 The source and target endpoint values are retained in the type. -/
@@ -86,6 +86,52 @@ theorem ofOperators_row
 
 end Diagram
 
+/-- A marked gauge equivalence between two endpoint-indexed monodromy
+diagrams. It conjugates both selected monodromies and transports the scalar
+row. -/
+structure DiagramEquivalence
+    (K : Type uR) [CommRing K]
+    {Index : Type uI} {source target : Index}
+    {V : Type uV} {W : Type uW}
+    [AddCommGroup V] [Module K V]
+    [AddCommGroup W] [Module K W]
+    (domain : Diagram K source target V)
+    (codomain : Diagram K source target W) where
+  map : V ≃ₗ[K] W
+  naturality : ∀ loop x,
+    map (domain.monodromy loop x) = codomain.monodromy loop (map x)
+  rowNaturality : ∀ x, codomain.row (map x) = domain.row x
+
+namespace DiagramEquivalence
+
+variable
+    {K : Type uR} [CommRing K]
+    {Index : Type uI} {source target : Index}
+    {V : Type uV} {W : Type uW}
+    [AddCommGroup V] [Module K V]
+    [AddCommGroup W] [Module K W]
+    {domain : Diagram K source target V}
+    {codomain : Diagram K source target W}
+
+/-- Reverse a marked gauge equivalence. -/
+def symm
+    (equivalence : DiagramEquivalence K domain codomain) :
+    DiagramEquivalence K codomain domain where
+  map := equivalence.map.symm
+  naturality := by
+    intro loop y
+    obtain ⟨x, rfl⟩ := equivalence.map.surjective y
+    apply equivalence.map.injective
+    simpa only [LinearEquiv.apply_symm_apply, LinearEquiv.symm_apply_apply] using
+      (equivalence.naturality loop x).symm
+  rowNaturality := by
+    intro y
+    obtain ⟨x, rfl⟩ := equivalence.map.surjective y
+    rw [LinearEquiv.symm_apply_apply]
+    exact (equivalence.rowNaturality x).symm
+
+end DiagramEquivalence
+
 /-- A semilinear horizontal morphism between endpoint-indexed marked
 monodromy diagrams. One naturality law covers both named loops. -/
 structure SemilinearMorphism
@@ -113,6 +159,86 @@ variable
     [AddCommGroup W] [Module k W]
     {domain : Diagram R source target V}
     {codomain : Diagram k source target W}
+
+/-- Transport a semilinear diagram morphism through marked gauge
+equivalences on its domain and codomain. -/
+def transport
+    {V' : Type uV'} {W' : Type uW'}
+    [AddCommGroup V'] [Module R V']
+    [AddCommGroup W'] [Module k W']
+    {domain' : Diagram R source target V'}
+    {codomain' : Diagram k source target W'}
+    (domainEquivalence : DiagramEquivalence R domain domain')
+    (codomainEquivalence : DiagramEquivalence k codomain codomain')
+    (morphism : SemilinearMorphism specialize domain codomain) :
+    SemilinearMorphism specialize domain' codomain' where
+  map :=
+    { toFun := fun x => codomainEquivalence.map (morphism.map (domainEquivalence.map.symm x))
+      map_add' := by
+        intro x y
+        rw [domainEquivalence.map.symm.map_add, morphism.map.map_add,
+          codomainEquivalence.map.map_add]
+      map_smul' := by
+        intro c x
+        rw [domainEquivalence.map.symm.map_smul, morphism.map.map_smulₛₗ,
+          codomainEquivalence.map.map_smul] }
+  naturality := by
+    intro loop x
+    have domainNaturality :
+        domainEquivalence.map.symm (domain'.monodromy loop x) =
+          domain.monodromy loop (domainEquivalence.map.symm x) := by
+      apply domainEquivalence.map.injective
+      simpa only [LinearEquiv.apply_symm_apply] using
+        (domainEquivalence.naturality loop (domainEquivalence.map.symm x)).symm
+    change codomainEquivalence.map
+        (morphism.map (domainEquivalence.map.symm (domain'.monodromy loop x))) =
+      codomain'.monodromy loop
+        (codomainEquivalence.map (morphism.map (domainEquivalence.map.symm x)))
+    rw [domainNaturality, morphism.naturality, codomainEquivalence.naturality]
+  rowNaturality := by
+    intro x
+    change codomain'.row
+        (codomainEquivalence.map (morphism.map (domainEquivalence.map.symm x))) =
+      specialize (domain'.row x)
+    rw [codomainEquivalence.rowNaturality, morphism.rowNaturality]
+    have rowNaturality :=
+      domainEquivalence.rowNaturality (domainEquivalence.map.symm x)
+    rw [LinearEquiv.apply_symm_apply] at rowNaturality
+    exact congrArg specialize rowNaturality.symm
+
+@[simp]
+theorem transport_map_apply
+    {V' : Type uV'} {W' : Type uW'}
+    [AddCommGroup V'] [Module R V']
+    [AddCommGroup W'] [Module k W']
+    {domain' : Diagram R source target V'}
+    {codomain' : Diagram k source target W'}
+    (domainEquivalence : DiagramEquivalence R domain domain')
+    (codomainEquivalence : DiagramEquivalence k codomain codomain')
+    (morphism : SemilinearMorphism specialize domain codomain)
+    (x : V') :
+    (morphism.transport domainEquivalence codomainEquivalence).map x =
+      codomainEquivalence.map (morphism.map (domainEquivalence.map.symm x)) :=
+  rfl
+
+/-- Surjectivity of the underlying semilinear map is invariant under marked
+gauge transport. -/
+theorem transport_map_surjective
+    {V' : Type uV'} {W' : Type uW'}
+    [AddCommGroup V'] [Module R V']
+    [AddCommGroup W'] [Module k W']
+    {domain' : Diagram R source target V'}
+    {codomain' : Diagram k source target W'}
+    (domainEquivalence : DiagramEquivalence R domain domain')
+    (codomainEquivalence : DiagramEquivalence k codomain codomain')
+    (morphism : SemilinearMorphism specialize domain codomain)
+    (surjective : Function.Surjective morphism.map) :
+    Function.Surjective (morphism.transport domainEquivalence codomainEquivalence).map := by
+  intro y
+  obtain ⟨x, hx⟩ := surjective (codomainEquivalence.map.symm y)
+  refine ⟨domainEquivalence.map x, ?_⟩
+  simp only [transport_map_apply, LinearEquiv.symm_apply_apply, hx,
+    LinearEquiv.apply_symm_apply]
 
 /-- Forget the diagram packaging and expose the specialization of the two
 selected monodromies and the marked row. -/

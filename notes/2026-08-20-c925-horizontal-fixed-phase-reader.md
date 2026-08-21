@@ -220,7 +220,81 @@ the complete trait-horizontal reader.  With a non-surjective comparison,
 clause directly.  This is a packaging reduction, not a proof of either QDM
 identification.
 
-Some form of item 4 cannot be omitted.  Over `R = C[[s]]`, take
+Literal equality is not load-bearing.  A geometric comparison usually lands
+in a chosen gauge rather than the model's definitional frame.
+`MarkedMonodromyDiagram.DiagramEquivalence` therefore records one linear
+equivalence that conjugates both selected monodromies and transports the marked
+row.  `SelectedLocalSystemReader.selectedGaugeMorphism` transports the global
+semilinear map through a model gauge and an actual gauge; ambient surjectivity
+survives.  The two `GaugeReader` constructors consume either image-span
+coverage or ambient surjectivity.  Thus the vertical theorems may be stated as
+gauge equivalences, which matches the natural output shape of QDM comparison.
+
+### 62.5A Gate decomposition
+
+The remaining identification theorem has three independently falsifiable
+parts.
+
+1. **Crossed edge to model monodromies.**  Modules 60--61 already supply the
+   enumerated completed-window pilot `(B,D)`, its special Fourier-row crossed
+   defect, and a lawful decategorified \(K_0\) coefficient trait with
+   uniformizer `1-q_coeff` after choosing an adapted splitting.  The crossed
+   normal is the corresponding product
+   `A_(1,q_coeff)=(1-q_coeff)^|J|`.  It remains to construct the trait nearby
+   module and the two invertible monodromies, identify the incoming image with
+   the moving source, prove the vector crossed-coordinate equation, and prove
+   the source/common/moving rank-row coordinate laws.  These are exactly the
+   fields of `ModelCrossedCoordinates.Coordinates`.  Lean now separates them as
+   `IncomingCoordinates`, `TargetCoordinates`, and `RowCoordinates`;
+   `Coordinates.ofParts` is the only assembly step.  Thus the known scalar row
+   pilot cannot masquerade as the missing vector or incoming-image witnesses.
+   If a whole based-loop
+   representation is used, this gate also includes its marked gauge
+   equivalence to the coordinate model.
+2. **Model diagram to actual fixed-phase diagram.**  It remains to choose the
+   actual based loops and primitive projector, construct one horizontal map,
+   prove conjugacy for both selected monodromies, transport the rank/Gamma row,
+   and certify the same occurrence, QDM path, phase, character, and direction.
+   The minimal output is the two-loop marked semilinear comparison consumed by
+   `TraitHorizontalReader`.  A stronger global output consists of trait and
+   fibre `Representation`s, a loop-group homomorphism, an endpoint
+   `LoopAssignment`, one `SemilinearHorizontal`, and the selected
+   representation-to-actual marked gauge.  Together with Gate 1's model gauge,
+   these are consumed by `SelectedLocalSystemReader.GaugeReader`; literal
+   equality is unnecessary.  The gauge row laws are exact covector equations:
+   `r_model ∘ g_model = r_selected` and
+   `r_actual ∘ g_actual = r_selected`.  Scalar-twisted geometric gauges require
+   compatible normalization; if their factors are `alpha` and `beta`, the
+   exact reader law needs `beta = specialize(alpha)`.
+3. **Incoming-image coverage at resonance.**  It is enough either to prove the
+   specialized ambient comparison surjective or directly to prove that its
+   induced incoming image spans the actual packet.  Exact range base change,
+   a flat cokernel/direct-summand image theorem, or strict nearby-cycle
+   specialization are stronger possible providers.  Generic horizontality
+   alone is excluded by the `sR` countermodel.
+
+Gate 1 has a new cheap rejection test.  In any lawful coordinate model,
+`Coordinates.sourceToIncomingImage_eq_zero_of_crossedMap_eq_zero_of_movingMap_eq_zero`
+proves
+
+\[
+  \ker(B,D)\subseteq\ker(\text{source-to-incoming-image}).
+\]
+
+Indeed the target monodromy sends such a realized source vector to zero, so
+invertibility kills it.  If the source-to-image map is injective, `(B,D)` must
+be jointly injective.  Thus the scalar Fourier-row law cannot by itself create
+the model; the source comparison must supply this vector-level kernel control.
+The pilot has a natural sufficient route: if the full upper-triangular window
+map `(c,m) ↦ (A c+B m,D m)` is injective, then
+`CrossedEdge.crossedMap_movingMap_jointly_injective_of_fullMap_injective`
+supplies the joint-kernel condition.  Over a domain, generic invertibility is
+a likely proof of injectivity only when the source lattice is torsion-free and
+the generic map is the localization of this same integral full map.  The trait
+lattice and specialization still have to be identified with the model rather
+than inferred from the scalar row formula.
+
+The incoming-image coverage clause cannot be omitted.  Over `R = C[[s]]`, take
 `T = (1 - s) id_R`.  Then
 
 \[
@@ -300,17 +374,24 @@ The reviewer entry point is
 The main checked declarations are:
 
 - `Comparison.CrossedEdgeComposition.compositeDefect_eq`;
+- `Comparison.FixedPhaseReader.CrossedEdge.crossedMap_movingMap_jointly_injective_of_fullMap_injective`;
 - `Comparison.LawfulReaderIndex.Endpoint.compatibility`;
 - `Comparison.MonodromyImage.imageMap_comp`;
 - `Comparison.ProjectedVariation.projectedVariation_natural`;
 - `Comparison.ProjectedVariation.projectedVariation_eq_zero_of_surjective`;
+- `Comparison.ModelCrossedCoordinates.Coordinates.sourceValue_eq_zero_of_crossedMap_eq_zero_of_movingMap_eq_zero`;
+- `Comparison.ModelCrossedCoordinates.Coordinates.ofParts`;
+- `Comparison.ModelCrossedCoordinates.Coordinates.sourceToIncomingImage_eq_zero_of_crossedMap_eq_zero_of_movingMap_eq_zero`;
+- `Comparison.ModelCrossedCoordinates.Coordinates.crossedMap_movingMap_jointly_injective`;
 - `Comparison.SemilinearVariation.Specialization.projectedVariation_specializes`;
 - `Comparison.SemilinearVariation.Specialization.incomingImageSpan_eq_top_of_surjective`;
 - `Comparison.SemilinearVariation.Specialization.projectedVariation_eq_zero_of_normalFactor`;
 - `Comparison.MarkedMonodromyDiagram.SemilinearMorphism.projectedVariation_specializes`;
+- `Comparison.MarkedMonodromyDiagram.SemilinearMorphism.transport_map_surjective`;
 - `Comparison.MarkedLocalSystem.SemilinearHorizontal.projectedVariation_specializes`;
 - `Comparison.MarkedLocalSystem.SemilinearHorizontal.projectedVariation_eq_zero_of_normalFactor`;
 - `Comparison.SelectedLocalSystemReader.DiagramIdentification.selectedMorphism_map`;
+- `Comparison.SelectedLocalSystemReader.selectedGaugeMorphism_map_surjective`;
 - `Comparison.DescentPacket.fixed_of_stable_singleton`;
 - `Comparison.DescentPacket.unaryPacketEquivariantEquiv`;
 - `Comparison.DescentPacket.regular_not_equivariantly_equivalent_fixedThree`;
@@ -350,10 +431,11 @@ must not be counted as construction progress.
 
 | question | state | exact evidence gap |
 |---|---|---|
-| Does the lawful coefficient trait produce the model projected-variation reading? | open | identify the Module 60 crossed (B,D) edge with the canonical two-monodromy model over the named trait |
-| Does one Fourier--Laplace/QDM comparison intertwine the two selected monodromies and the rank row? | open | construct the occurrence-indexed marked two-loop semilinear comparison; a `MarkedLocalSystem.SemilinearHorizontal` is a stronger uniform provider, not necessary for one edge |
+| Does the lawful coefficient trait produce the model projected-variation reading? | open | construct `IncomingCoordinates` and `TargetCoordinates` for the completed-window `(B,D)` edge; the Fourier-row pilot supplies only `RowCoordinates`, and the new joint-kernel sieve is necessary but not sufficient |
+| Does one Fourier--Laplace/QDM comparison intertwine the two selected monodromies and the rank row? | open | construct the occurrence-indexed marked two-loop semilinear comparison, or the stronger loop representations, loop assignment, global horizontal morphism, and exact marked gauges |
 | Does the trait comparison span the actual resonant incoming image? | open | construct the marked semilinear comparison and prove induced image-span coverage; the `sR` countermodel forbids inference from generic horizontality |
 | Does a unary codimension-two correction have fixed \(\mu_3\)-descent? | settled: no formal implication | a unary outer packet preserves a nontrivial inner center action; fixedness requires a common equivariant occurrence reader |
 | Is a tensor/image base-change isomorphism necessary? | settled: no for vanishing transport | `SemilinearVariation.projectedVariation_eq_zero_of_normalFactor` uses only semilinear naturality and image-span coverage |
 | Are independent can/variation packet maps still needed? | settled: no over one fixed field | `ProjectedVariation.projectedVariation_natural` derives them from (F) |
 | Is bijectivity of (F) required? | settled: no | the fixed-field forward route uses image-map surjectivity; the trait route uses span coverage; reverse transport needs neither surjectivity nor injectivity |
+| Is literal equality of model and actual frames required? | settled: no | `DiagramEquivalence` transports both monodromies and the exact covector row; ambient surjectivity survives gauge transport |

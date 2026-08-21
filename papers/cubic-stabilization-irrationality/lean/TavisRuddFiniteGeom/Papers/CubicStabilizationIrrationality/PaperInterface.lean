@@ -24,7 +24,10 @@ vanishing, composition, monodromy-image functoriality, and map-indexed
 provenance witnesses. Projected monodromy variation is derived from a single
 marked horizontal comparison of the common nearby-cycle spaces; the reduced
 reader derives the model row from vector crossed coordinates and consumes
-that comparison against an externally supplied actual receiver. Semilinear
+that comparison against an externally supplied actual receiver. Invertibility
+of target monodromy also yields a kernel sieve for the crossed and moving
+coordinate maps; the scalar crossed-row law alone does not construct the
+model. Semilinear
 specialization transports the directed variation without asserting that tensor
 product commutes with monodromy-image formation. The two monodromies and rank
 row form one endpoint-indexed diagram, so a single naturality law supplies both
@@ -35,7 +38,10 @@ adapter records the two remaining identifications:
 the loops and row selected from the trait representation must equal the model
 diagram, and those selected from the fibre representation must equal the
 externally supplied actual diagram. With these identifications, the global
-horizontal morphism constructs the trait reader. An explicit range
+horizontal morphism constructs the trait reader. Literal equality of frames
+is unnecessary: marked gauge equivalences that conjugate both monodromies and
+transport the row yield the same construction and preserve ambient
+surjectivity. An explicit range
 base-change certificate remains available for
 applications that require an image equivalence. The trait-horizontal reader
 composes this specialization law with the crossed-coordinate normal-factor

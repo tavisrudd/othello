@@ -143,6 +143,32 @@ variable
     [AddCommGroup M₀] [Module R M₀]
     [AddCommGroup M₁] [Module R M₁]
 
+/-- The full upper-triangular comparison represented by the common, crossed,
+and moving blocks of an edge. -/
+def fullMap
+    (edge : CrossedEdge R source target C₀ C₁ M₀ M₁) :
+    C₀ × M₀ →ₗ[R] C₁ × M₁ where
+  toFun value :=
+    (edge.commonMap value.1 + edge.crossedMap value.2,
+      edge.movingMap value.2)
+  map_add' left right := by
+    ext <;> simp [add_assoc, add_left_comm, add_comm]
+  map_smul' scalar value := by
+    ext <;> simp
+
+/-- Injectivity of the full block comparison forces the crossed and moving
+blocks to be jointly injective on a moving input. -/
+theorem crossedMap_movingMap_jointly_injective_of_fullMap_injective
+    (edge : CrossedEdge R source target C₀ C₁ M₀ M₁)
+    (fullMapInjective : Function.Injective edge.fullMap) :
+    ∀ x, edge.crossedMap x = 0 → edge.movingMap x = 0 → x = 0 := by
+  intro x crossedVanishes movingVanishes
+  have fullMapVanishes : edge.fullMap (0, x) = 0 := by
+    ext <;> simp [fullMap, crossedVanishes, movingVanishes]
+  have sourceVanishes : (0, x) = (0 : C₀ × M₀) :=
+    fullMapInjective (by simpa only [map_zero] using fullMapVanishes)
+  exact congrArg Prod.snd sourceVanishes
+
 /-- The provenance-sensitive row defect on a moving source input. -/
 def defect
     (edge : CrossedEdge R source target C₀ C₁ M₀ M₁) : M₀ →ₗ[R] R :=

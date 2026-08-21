@@ -399,6 +399,16 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   must equal the supplied actual diagram.  Given those equalities,
   incoming-image coverage constructs the complete reader; exact
   range/coimage base change is a stronger sufficient implementation.  The
+  vertical identifications may be marked gauge equivalences rather than
+  literal equalities; the Lean adapter transports the same global comparison
+  through both gauges and preserves ambient surjectivity.  The
+  remaining identification is now separated into (i) crossed-edge model
+  monodromies and row coordinates, (ii) model-to-actual selected-loop/row
+  comparison, and (iii) resonant incoming-image coverage.  A new kernel sieve
+  shows that any model forces `ker(B,D)` into the source-to-image kernel; an
+  injective full upper-triangular window map supplies joint injectivity.  The
+  model goal is split into incoming-image, target-vector, and row-coordinate
+  records; the current Fourier-row pilot addresses only the last.  The
   paper-local `TraitHorizontalReader` now composes exactly these hypotheses to
   the directed fibre-variation vanishing theorem.  Its source API also computes
   the QDM path from the chamber path and shares phase, character, and direction
