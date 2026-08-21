@@ -1,1 +1,0 @@
-../../notes/2026-07-11-baer-extension-audit-scope.md

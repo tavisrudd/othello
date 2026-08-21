@@ -24,8 +24,8 @@ implicitly—the user must select `paper-frob-eq`.
 While this handoff remains live, Baer-owned paths are the modules under
 `lean/FiniteGeom/BaerCompletion/`, the Baer/Frobenius/Q25 modules under
 `lean/RelativeConicArcs/`, the C99/C133–C141 reports, and
-`papers/baer-equivariant-extension/` plus `papers/equivariant-robust-completion/`. Changes from all
-other lanes remain foreign.
+`archive/papers/baer-equivariant-extension/` plus `papers/equivariant-robust-completion/`. Changes
+from all other lanes remain foreign.
 
 ## Final result
 

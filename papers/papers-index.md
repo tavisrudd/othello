@@ -178,8 +178,8 @@ of eight-arcs*
   Frobenius-paired two-column MDS extensions of the Clebsch hexagon and
   `4179` alternate repairs after deletion of a selected pair; this
   manuscript corollary applies to every `F_11`-rational six-arc.
-- *Staging/library views, not themselves papers:* `baer-equivariant-extension` is a retired source
-  view merged into this paper;
+- *Staging/library views, not themselves papers:* `archive/papers/baer-equivariant-extension` is a
+  retired source view merged into this paper;
   `completion-core-rigidity` is reusable generic infrastructure outside the submission.
 
 **7 · `continuation-graph-rigidity`** — *Semilinear rigidity of four-point-frame continuation

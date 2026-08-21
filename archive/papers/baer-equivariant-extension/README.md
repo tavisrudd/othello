@@ -1,6 +1,6 @@
 # Retired source view: Frobenius-equivariant pair extension
 
-**Canonical paper:** [`equivariant-robust-completion`](../equivariant-robust-completion/) —
+**Canonical paper:** [`equivariant-robust-completion`](../../../papers/equivariant-robust-completion/) —
 *Frobenius-equivariant pair extension and robust repair of eight-arcs.*
 
 **Lane:** `paper-frob-eq`.
@@ -39,20 +39,20 @@ now adopted by the canonical manuscript; the unfinished exchange graph remains o
 work.
 
 **Focused development manuscript:**
-[`paper-baer-equivariant-robust-completion.md`](../../notes/2026-07-12-riffing-on-applications/paper-baer-equivariant-robust-completion.md).
+[`paper-baer-equivariant-robust-completion.md`](../../../notes/2026-07-12-riffing-on-applications/paper-baer-equivariant-robust-completion.md).
 
 **Novelty audit:**
-[`2026-07-13-baer-completion-adversarial-novelty-review.md`](../../notes/2026-07-13-baer-completion-adversarial-novelty-review.md).
+[`2026-07-13-baer-completion-adversarial-novelty-review.md`](../../../notes/2026-07-13-baer-completion-adversarial-novelty-review.md).
 
 **Collision proof ledger:**
-[`2026-07-13-c99-baer-collision-strengthening.md`](../../notes/2026-07-13-c99-baer-collision-strengthening.md).
+[`2026-07-13-c99-baer-collision-strengthening.md`](../../../notes/2026-07-13-c99-baer-collision-strengthening.md).
 
-## Files here (symlinks into ../../notes/)
+## Files here (symlinks into ../../../notes/)
 
 - `2026-07-10-baer-equivariant-extension-upgrades.md` — the theorem-package note
 - `2026-07-11-baer-extension-audit-scope.md` — external citation audit (the SOFTEN verdict)
 - `2026-07-10-codex-odd-plane-round7-generator-growth-baer.md` — origin (Baer obstruction, q=25 block)
 - `2026-07-09-codex-q25-baer-census.md` — q=25 Baer census (supporting data)
 
-See `../papers-index.md` and `../papers-planning.md`. Parent audit: Package 2 in
-`../../notes/2026-07-10-codex-publishable-spinout-audit.md`.
+See `../../../papers/papers-index.md` and `../../../papers/papers-planning.md`. Parent audit:
+Package 2 in `../../../notes/2026-07-10-codex-publishable-spinout-audit.md`.
