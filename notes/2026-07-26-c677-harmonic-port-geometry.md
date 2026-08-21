@@ -2,9 +2,9 @@
 
 **Lane:** `complete-ports`
 
-**Status:** ACTIVE — harmonic completion, hyperplane evaluations, determinant factorization,
-Steiner completion, code length/dimension, and the five-family dependence criterion are
-kernel-green; circuit minimality, distances, ports, and closure remain open.
+**Status:** ACTIVE — harmonic completion, determinant factorization, Steiner completion, code
+length/dimension, and the normalized five-circuit theorem are kernel-green; global distance, port,
+and closure packaging remain open.
 
 ## Current checkpoint
 
@@ -42,6 +42,13 @@ Consequently, for distinct parameters the five-family is independent exactly whe
 harmonic block.  The complete index type has cardinality `Fintype.card 𝔽 + 2`; five finite
 Vandermonde columns prove that `harmonicQuarticCode` has dimension five whenever the field has at
 least five elements.
+
+Two complementary coordinate minors prove that the nucleus with any three distinct finite curve
+points is independent, including the zero-sum branch; a third minor handles two finite points with
+infinity.  The terminals `finiteHarmonicBlock_isFiveCircuit` and
+`infinityHarmonicBlock_isFiveCircuit` now prove dependence of the full harmonic family and
+independence after every one-point deletion.  Thus the harmonic five-sets are genuine circuits by
+uniform algebra rather than the field-nine inventory.
 
 The classical-source check is now pinned to the cached originals.  Gmainer--Havlicek,
 arXiv:1304.0088, SHA-256

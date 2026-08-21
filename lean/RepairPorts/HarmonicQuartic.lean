@@ -263,6 +263,207 @@ theorem harmonicQuarticFamily_infinity_linearIndependent_iff {a b c : 𝔽}
   have hv := harmonicVandermondeThree_ne_zero hab hac hbc
   simp [IsHarmonicQuarticBlock, hv]
 
+/-- Restricting a finite vector family to any square coordinate minor with nonzero determinant
+proves independence of the original vectors. -/
+theorem linearIndependent_of_coordinateMinor_det_ne_zero {m n : ℕ}
+    (v : Fin m → (Fin n → 𝔽)) (cols : Fin m → Fin n)
+    (hdet : Matrix.det (fun i j => v i (cols j)) ≠ 0) :
+    LinearIndependent 𝔽 v := by
+  have hminor : LinearIndependent 𝔽 (fun i j => v i (cols j)) :=
+    Matrix.linearIndependent_rows_of_det_ne_zero hdet
+  rw [Fintype.linearIndependent_iff] at hminor ⊢
+  intro g hrel
+  apply hminor g
+  funext j
+  have hj := congrFun hrel (cols j)
+  simpa only [Finset.sum_apply, Pi.smul_apply, Pi.zero_apply] using hj
+
+/-- The nucleus followed by three finite quartic points. -/
+def nucleusFiniteTripleFamily (a b c : 𝔽) : Fin 4 → (Fin 5 → 𝔽) :=
+  ![harmonicQuarticNucleus, harmonicQuarticCurvePoint (.finite a),
+    harmonicQuarticCurvePoint (.finite b), harmonicQuarticCurvePoint (.finite c)]
+
+/-- The nucleus, two finite quartic points, and the quartic point at infinity. -/
+def nucleusFiniteInfinityFamily (a b : 𝔽) : Fin 4 → (Fin 5 → 𝔽) :=
+  ![harmonicQuarticNucleus, harmonicQuarticCurvePoint (.finite a),
+    harmonicQuarticCurvePoint (.finite b), harmonicQuarticCurvePoint .infinity]
+
+/-- The complete symmetric polynomial of degree two in three variables. -/
+def harmonicH₂ (a b c : 𝔽) : 𝔽 :=
+  a ^ 2 + b ^ 2 + c ^ 2 + a * b + a * c + b * c
+
+/-- The first useful coordinate minor of a nucleus and three finite curve points. -/
+theorem nucleusFiniteTriple_minor₀₁₂₃_det (a b c : 𝔽) :
+    Matrix.det (fun i j => nucleusFiniteTripleFamily a b c i (![0, 1, 2, 3] j)) =
+        harmonicVandermondeThree a b c * harmonicE₁ a b c := by
+  simp (disch := decide) [nucleusFiniteTripleFamily, harmonicQuarticNucleus,
+    harmonicQuarticCurvePoint, harmonicVandermondeThree, harmonicE₁,
+    Matrix.det_succ_row_zero, Fin.sum_univ_succ, Fin.succAbove]
+  ring
+
+/-- The complementary coordinate minor detects the zero-sum branch. -/
+theorem nucleusFiniteTriple_minor₀₁₂₄_det (a b c : 𝔽) :
+    Matrix.det (fun i j => nucleusFiniteTripleFamily a b c i (![0, 1, 2, 4] j)) =
+        harmonicVandermondeThree a b c * harmonicH₂ a b c := by
+  simp (disch := decide) [nucleusFiniteTripleFamily, harmonicQuarticNucleus,
+    harmonicQuarticCurvePoint, harmonicVandermondeThree, harmonicH₂,
+    Matrix.det_succ_row_zero, Fin.sum_univ_succ, Fin.succAbove]
+  ring
+
+/-- If the prescribed triple has zero sum, its degree-two complete symmetric polynomial is minus
+its second elementary symmetric function. -/
+theorem harmonicH₂_eq_neg_harmonicE₂_of_harmonicE₁_eq_zero {a b c : 𝔽}
+    (hsum : harmonicE₁ a b c = 0) : harmonicH₂ a b c = -harmonicE₂ a b c := by
+  simp only [harmonicH₂, harmonicE₁, harmonicE₂] at hsum ⊢
+  linear_combination (a + b + c) * hsum
+
+/-- If a distinct finite triple has zero sum in characteristic three, its second elementary
+symmetric function is nonzero.  Hence no finite fourth parameter completes it harmonically. -/
+theorem harmonicE₂_ne_zero_of_harmonicE₁_eq_zero [CharP 𝔽 3] {a b c : 𝔽}
+    (hab : a ≠ b) (hsum : harmonicE₁ a b c = 0) : harmonicE₂ a b c ≠ 0 := by
+  have hc : c = -a - b := by
+    simp only [harmonicE₁] at hsum
+    linear_combination hsum
+  rw [hc]
+  have h3 : (3 : 𝔽) = 0 := CharP.cast_eq_zero 𝔽 3
+  have hid : harmonicE₂ a b (-a - b) = -(a - b) ^ 2 := by
+    simp only [harmonicE₂]
+    linear_combination (-a * b) * h3
+  rw [hid]
+  exact neg_ne_zero.mpr (pow_ne_zero 2 (sub_ne_zero.mpr hab))
+
+/-- A nucleus and three distinct finite quartic points are linearly independent in characteristic
+three. -/
+theorem nucleusFiniteTriple_linearIndependent [CharP 𝔽 3] {a b c : 𝔽}
+    (hab : a ≠ b) (hac : a ≠ c) (hbc : b ≠ c) :
+    LinearIndependent 𝔽 (nucleusFiniteTripleFamily a b c) := by
+  have hv := harmonicVandermondeThree_ne_zero hab hac hbc
+  by_cases hsum : harmonicE₁ a b c = 0
+  · have he₂ := harmonicE₂_ne_zero_of_harmonicE₁_eq_zero hab hsum
+    apply linearIndependent_of_coordinateMinor_det_ne_zero
+      (nucleusFiniteTripleFamily a b c) ![0, 1, 2, 4]
+    rw [nucleusFiniteTriple_minor₀₁₂₄_det,
+      harmonicH₂_eq_neg_harmonicE₂_of_harmonicE₁_eq_zero hsum]
+    exact mul_ne_zero hv (neg_ne_zero.mpr he₂)
+  · apply linearIndependent_of_coordinateMinor_det_ne_zero
+      (nucleusFiniteTripleFamily a b c) ![0, 1, 2, 3]
+    rw [nucleusFiniteTriple_minor₀₁₂₃_det]
+    exact mul_ne_zero hv hsum
+
+/-- The coordinate minor of a nucleus, two finite curve points, and infinity is their finite
+parameter difference. -/
+theorem nucleusFiniteInfinity_minor_det (a b : 𝔽) :
+    Matrix.det (fun i j => nucleusFiniteInfinityFamily a b i (![0, 1, 2, 4] j)) = b - a := by
+  simp (disch := decide) [nucleusFiniteInfinityFamily, harmonicQuarticNucleus,
+    harmonicQuarticCurvePoint, Matrix.det_succ_row_zero, Fin.sum_univ_succ, Fin.succAbove]
+  ring
+
+/-- A nucleus, two distinct finite quartic points, and the point at infinity are linearly
+independent. -/
+theorem nucleusFiniteInfinity_linearIndependent {a b : 𝔽} (hab : a ≠ b) :
+    LinearIndependent 𝔽 (nucleusFiniteInfinityFamily a b) := by
+  apply linearIndependent_of_coordinateMinor_det_ne_zero
+    (nucleusFiniteInfinityFamily a b) ![0, 1, 2, 4]
+  rw [nucleusFiniteInfinity_minor_det]
+  exact sub_ne_zero.mpr hab.symm
+
+/-- Four distinct finite quartic curve points are linearly independent. -/
+theorem fourFiniteHarmonicQuarticCurve_linearIndependent {a b c d : 𝔽}
+    (hab : a ≠ b) (hac : a ≠ c) (had : a ≠ d)
+    (hbc : b ≠ c) (hbd : b ≠ d) (hcd : c ≠ d) :
+    LinearIndependent 𝔽 ![
+      harmonicQuarticCurvePoint (.finite a), harmonicQuarticCurvePoint (.finite b),
+      harmonicQuarticCurvePoint (.finite c), harmonicQuarticCurvePoint (.finite d)] := by
+  let v : Fin 4 → 𝔽 := ![a, b, c, d]
+  have hv : Function.Injective v := by
+    have hba := hab.symm
+    have hca := hac.symm
+    have hda := had.symm
+    have hcb := hbc.symm
+    have hdb := hbd.symm
+    have hdc := hcd.symm
+    intro i j
+    fin_cases i <;> fin_cases j <;> simp_all [v]
+  have hli := FiniteGeom.momentCurve_linearIndependent_of_card_le (n := 5) hv (by decide)
+  have heq : (fun i : Fin 4 => FiniteGeom.momentCurve 5 (v i)) = ![
+      harmonicQuarticCurvePoint (.finite a), harmonicQuarticCurvePoint (.finite b),
+      harmonicQuarticCurvePoint (.finite c), harmonicQuarticCurvePoint (.finite d)] := by
+    funext i
+    fin_cases i <;> rfl
+  rwa [heq] at hli
+
+/-- The `0,1,2,4` coordinate minor of three finite quartic points and infinity is their
+three-parameter Vandermonde product. -/
+theorem finiteTripleInfinityCurve_minor_det (a b c : 𝔽) :
+    Matrix.det (fun i j => (![
+      harmonicQuarticCurvePoint (.finite a), harmonicQuarticCurvePoint (.finite b),
+      harmonicQuarticCurvePoint (.finite c), harmonicQuarticCurvePoint .infinity] :
+        Fin 4 → (Fin 5 → 𝔽)) i (![0, 1, 2, 4] j)) = harmonicVandermondeThree a b c := by
+  simp (disch := decide) [harmonicQuarticCurvePoint, harmonicVandermondeThree,
+    Matrix.det_succ_row_zero, Fin.sum_univ_succ, Fin.succAbove]
+  ring
+
+/-- Three distinct finite quartic points together with the point at infinity are linearly
+independent. -/
+theorem finiteTripleInfinityCurve_linearIndependent {a b c : 𝔽}
+    (hab : a ≠ b) (hac : a ≠ c) (hbc : b ≠ c) :
+    LinearIndependent 𝔽 ![
+      harmonicQuarticCurvePoint (.finite a), harmonicQuarticCurvePoint (.finite b),
+      harmonicQuarticCurvePoint (.finite c), harmonicQuarticCurvePoint .infinity] := by
+  let v : Fin 4 → (Fin 5 → 𝔽) := ![
+    harmonicQuarticCurvePoint (.finite a), harmonicQuarticCurvePoint (.finite b),
+    harmonicQuarticCurvePoint (.finite c), harmonicQuarticCurvePoint .infinity]
+  let cols : Fin 4 → Fin 5 := ![0, 1, 2, 4]
+  apply linearIndependent_of_coordinateMinor_det_ne_zero v cols
+  have hv := harmonicVandermondeThree_ne_zero hab hac hbc
+  rw [show Matrix.det (fun i j => v i (cols j)) = harmonicVandermondeThree a b c by
+    simpa [v, cols] using finiteTripleInfinityCurve_minor_det a b c]
+  exact hv
+
+/-- A finite harmonic block together with the nucleus is a five-circuit: the full family is
+dependent and deleting any one member leaves an independent four-family. -/
+theorem finiteHarmonicBlock_isFiveCircuit [CharP 𝔽 3] {a b c d : 𝔽}
+    (hab : a ≠ b) (hac : a ≠ c) (had : a ≠ d)
+    (hbc : b ≠ c) (hbd : b ≠ d) (hcd : c ≠ d)
+    (hblock : IsHarmonicQuarticBlock (.finite a) (.finite b) (.finite c) (.finite d)) :
+    ¬LinearIndependent 𝔽
+        (harmonicQuarticFamily (.finite a) (.finite b) (.finite c) (.finite d)) ∧
+      LinearIndependent 𝔽 ![
+        harmonicQuarticCurvePoint (.finite a), harmonicQuarticCurvePoint (.finite b),
+        harmonicQuarticCurvePoint (.finite c), harmonicQuarticCurvePoint (.finite d)] ∧
+      LinearIndependent 𝔽 (nucleusFiniteTripleFamily b c d) ∧
+      LinearIndependent 𝔽 (nucleusFiniteTripleFamily a c d) ∧
+      LinearIndependent 𝔽 (nucleusFiniteTripleFamily a b d) ∧
+      LinearIndependent 𝔽 (nucleusFiniteTripleFamily a b c) := by
+  refine ⟨?_, fourFiniteHarmonicQuarticCurve_linearIndependent hab hac had hbc hbd hcd,
+    nucleusFiniteTriple_linearIndependent hbc hbd hcd,
+    nucleusFiniteTriple_linearIndependent hac had hcd,
+    nucleusFiniteTriple_linearIndependent hab had hbd,
+    nucleusFiniteTriple_linearIndependent hab hac hbc⟩
+  intro hli
+  exact (harmonicQuarticFamily_finite_linearIndependent_iff hab hac had hbc hbd hcd).1 hli hblock
+
+/-- A harmonic block containing infinity together with the nucleus is likewise a five-circuit. -/
+theorem infinityHarmonicBlock_isFiveCircuit [CharP 𝔽 3] {a b c : 𝔽}
+    (hab : a ≠ b) (hac : a ≠ c) (hbc : b ≠ c)
+    (hblock : IsHarmonicQuarticBlock (.finite a) (.finite b) (.finite c) .infinity) :
+    ¬LinearIndependent 𝔽
+        (harmonicQuarticFamily (.finite a) (.finite b) (.finite c) .infinity) ∧
+      LinearIndependent 𝔽 ![
+        harmonicQuarticCurvePoint (.finite a), harmonicQuarticCurvePoint (.finite b),
+        harmonicQuarticCurvePoint (.finite c), harmonicQuarticCurvePoint .infinity] ∧
+      LinearIndependent 𝔽 (nucleusFiniteInfinityFamily b c) ∧
+      LinearIndependent 𝔽 (nucleusFiniteInfinityFamily a c) ∧
+      LinearIndependent 𝔽 (nucleusFiniteInfinityFamily a b) ∧
+      LinearIndependent 𝔽 (nucleusFiniteTripleFamily a b c) := by
+  refine ⟨?_, finiteTripleInfinityCurve_linearIndependent hab hac hbc,
+    nucleusFiniteInfinity_linearIndependent hbc,
+    nucleusFiniteInfinity_linearIndependent hac,
+    nucleusFiniteInfinity_linearIndependent hab,
+    nucleusFiniteTriple_linearIndependent hab hac hbc⟩
+  intro hli
+  exact (harmonicQuarticFamily_infinity_linearIndependent_iff hab hac hbc).1 hli hblock
+
 /-- Coefficients of the monic quartic with roots `a,b,c,d`, ordered from constant to quartic
 coefficient. -/
 def finiteQuarticHyperplane (a b c d : 𝔽) : Fin 5 → 𝔽 :=
@@ -406,21 +607,6 @@ theorem finiteHarmonicCompletion_ne [CharP 𝔽 3] {a b c : 𝔽}
   · intro hc
     rw [hc, harmonicE₂Four_repeat_third] at hzero
     exact mul_ne_zero (sub_ne_zero.mpr hac.symm) (sub_ne_zero.mpr hbc.symm) hzero
-
-/-- If a distinct finite triple has zero sum in characteristic three, its second elementary
-symmetric function is nonzero.  Hence no finite fourth parameter completes it harmonically. -/
-theorem harmonicE₂_ne_zero_of_harmonicE₁_eq_zero [CharP 𝔽 3] {a b c : 𝔽}
-    (hab : a ≠ b) (hsum : harmonicE₁ a b c = 0) : harmonicE₂ a b c ≠ 0 := by
-  have hc : c = -a - b := by
-    simp only [harmonicE₁] at hsum
-    linear_combination hsum
-  rw [hc]
-  have h3 : (3 : 𝔽) = 0 := CharP.cast_eq_zero 𝔽 3
-  have hid : harmonicE₂ a b (-a - b) = -(a - b) ^ 2 := by
-    simp only [harmonicE₂]
-    linear_combination (-a * b) * h3
-  rw [hid]
-  exact neg_ne_zero.mpr (pow_ne_zero 2 (sub_ne_zero.mpr hab))
 
 /-- A distinct zero-sum finite triple has infinity as its unique harmonic completion. -/
 theorem isHarmonicQuarticBlock_finite_zero_iff [CharP 𝔽 3] {a b c : 𝔽}
