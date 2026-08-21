@@ -136,9 +136,11 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   extension is the current high-EV provider, not a consumer requirement.
   Target surjectivity, primary coverage, exceptional
   splitting, adjacent overlap, and an inverse are not used.  The next bounded
-  source check is the G0--G3 formal-ring test in
+  source check is the G0--G4 algebraic deck/descent test in
   `../2026-08-21-c925-pointed-row-calibration.md`; the task card's `Next`
-  section is authoritative.  Ordinary Hodge--Lefschetz packets are closed by
+  section is authoritative.  The selected action and row must live on one
+  pre-sectorial marked carrier; do not use a large-radius-to-\(z=0\)
+  Gamma/Stokes identification.  Ordinary Hodge--Lefschetz packets are closed by
   a one-blowup curve counterexample.  The remainder of this entry records
   established modules and conditional provider alternatives, not coequal
   next steps.

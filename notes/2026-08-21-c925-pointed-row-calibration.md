@@ -28,23 +28,27 @@ one common core.  There primary coverage is load-bearing; ordinary
 surjectivity supplies it only at an exponent where the source and endpoint
 shifted operators have the required Fitting decompositions.
 
-The live source obligation is therefore exactly two-part: construct the
-detected marked core witness, and construct one actual core-to-rational-endpoint
-map whose selected formal loop and rank row are the same objects used in the
+The consumer obligation is therefore exactly two-part: construct a detected
+marked source witness, and construct one actual source-to-rational-endpoint
+map whose selected action and rank row are the same objects used in the
 endpoint calculation.  No target surjectivity, exceptional splitting,
-adjacent overlap, or inverse map is consumed.
+adjacent overlap, or inverse map is consumed.  The no-Stokes source candidate
+below changes the selected action from formal \(z\)-monodromy to an algebraic
+deck action, so its source detection and endpoint contrast must be reproved;
+they cannot be borrowed from the fixed-phase calculation.
 
 ## Open-gate ledger
 
 | gate | exact input | current evidence boundary |
 |---|---|---|
 | G0: marked source | One representation over the endpoint ring carrying the chosen primitive-sixth scalar, selected loop, and rank row.  It may be obtained from a rational core, but descent is not consumed by the same-ring theorem. | Lean consumes it; no geometric construction from the global cobordism is proved. |
-| G1: detected witness | A generalized-primary vector in the marked source on which its row is nonzero. | The cubic-product endpoint has the witness.  Putting it in a rational core still needs a direct construction or one source-side primary lift.  If the witness is supplied after scalar extension, no flatness hypothesis is consumed. |
+| G1: detected witness | A generalized-primary vector in the marked source on which its row is nonzero. | The fixed-phase cubic-product endpoint has the old witness.  A new algebraic deck carrier must prove its own row-visible primitive witness.  If a witness is supplied after scalar extension, no flatness hypothesis is consumed. |
 | G2: rational-endpoint map | A same-ring linear map from the marked source to the actual projective-space representation, intertwining the selected loop. | No target surjectivity, primary lift, correction summand, inverse, or coefficient-descent theorem is required.  The actual map is not yet constructed. |
-| G3: row square | On the same map, `core row = scalar * endpoint row`; the scalar may be zero or nonunit for the logical implication, though a geometric normalization should be nondegenerate. | Gu--Yu--Yu's adjoint identity proves the generatorwise formal row equation on its nonlocalized completed source.  Extension to the exact marked solution object remains open. |
-| G4: endpoint contrast | The projective-space row does not detect the selected generalized-primary part. | Established by the endpoint calculation, provided G0--G3 use that same loop, eigenvalue, exponent, and row. |
+| G3: row square | On the same map, `source row = scalar * endpoint row`; the scalar may be zero or nonunit for the logical implication, though a geometric normalization should be nondegenerate. | Gu--Yu--Yu's adjoint identity proves a generatorwise algebraic row equation on its nonlocalized completed source.  The no-Stokes route must descend it to the exact deck-marked carrier; the formal fallback instead needs the unresolved row formalization. |
+| G4: endpoint contrast | The projective-space row does not detect the selected generalized-primary part. | Established for the old fixed-phase action, provided G0--G3 use exactly that action and row.  Open and separately load-bearing for the algebraic deck candidate because naive coefficient descent creates spurious deck characters. |
 
-G0--G3 are the complete open provider.  G4 plus
+For a fixed choice of action and row, G0--G3 are the complete comparison
+provider and G4 is the endpoint calculation.  G4 plus
 `MarkedWitnessObstruction.false_of_core_detects_of_endpoint_not_detects`
 then gives the contradiction.  This ledger is asymmetric by design: no
 condition is hidden on target primary coverage.
@@ -93,14 +97,80 @@ decomposition, correction control, inverse maps, and adjacent-receiver
 coherence are not missing hypotheses of the live one-sided proof.  They are
 only possible implementation data for stronger providers.
 
-One narrower test is not decided by the failed analytic-gauge argument.  Cai's
+### The two lawful source architectures
+
+Every viable provider must reduce to one of two shapes before it reaches the
+same-ring consumer.
+
+1. **General source, specialized downstream.**  Construct one marked source
+   \(S\) with its detected witness, selected loop, and row, then obtain one
+   map \(S_K\to E\) to the projective endpoint after any required scalar
+   extension.  The rational-core proposal has this shape.
+2. **Composable local sources, assembled downstream.**  Construct a typed
+   chain
+
+   \[
+       S_0\longrightarrow S_1\longrightarrow\cdots\longrightarrow E
+   \]
+
+   over one final coefficient ring.  Every arrow need only intertwine the
+   selected loop and satisfy a scalar row law.  Composition multiplies the
+   row scalars and produces the single `MarkedWitnessObstruction.Data` value
+   consumed at the end.  No arrow needs to be surjective.  If the local maps
+   begin over different rings, a lawful common scalar extension and compatible
+   root/loop reindexing must occur before this same-ring composition.
+
+A collection of unrelated local sources is not a third architecture.  It
+contributes only after a downstream cocone, reindexing, or ordered chain turns
+the source carrying the witness into one actual map to \(E\).  Conversely,
+the full augmented direct sums, inverse maps, and correction identifications
+used to construct such a chain are implementation details, not consumer
+hypotheses.  The global-source route should be tried first; the composed route
+is the precise fallback if no single global cobordism map exists.
+
+### No-Stokes constraint
+
+The live provider search must not define its marked row at large radius and
+then identify it with a \(z=0\) formal or sectorial row.  That is the missing
+Gamma/Stokes connector in another form.  A Stokes-free instantiation must put
+the selected action, detected witness, endpoint contrast, and adjoint rank row
+on one algebraic marked module before any sectorial splitting.
+
+The highest-value candidate is the external Kummer/deck action of the
+projective-bundle root cover.  Work over the invariant coefficient field, use
+the geometric descent action as `selectedLoop`, and use the algebraic adjoint
+rank covector on the same representation.  Then either source architecture
+above can feed `MarkedWitnessObstruction` without a Stokes matrix, a fixed
+phase, or a \(z=\infty\)-to-\(z=0\) comparison.
+
+This candidate has an immediate typing falsifier.  Naive restriction of
+scalars from \(L=K(q^{1/3})\) gives the scalar coefficient space itself every
+deck character, even for an endpoint object that descends to \(K\).  Therefore
+“the endpoint descends” does not imply endpoint non-detection.  A provider
+must distinguish:
+
+- the scalar semilinear Galois action on coefficients; and
+- the geometric action on the marked finite-étale packet, idempotent quotient,
+  or other row-visible carrier.
+
+The endpoint contrast must be proved on the latter after descent, and the
+source-to-endpoint map must preserve that exact action and row.  The existing
+Kummer/Burnside packet is one possible geometric carrier.  A linearized
+version is lawful only after proving that scalar characters have been removed
+and that the row-visible marked quotient is functorial.  This is now the first
+source test; the Cai formal-solution-ring test is retained only as a separate
+fallback because it reintroduces the large-radius-to-formal-row bridge.
+
+One narrower fallback is not decided by the failed analytic-gauge argument.  Cai's
 formal solution ring contains the \(z=0\) Turrittin symbols over the fraction
 field of `C((z))[[q,t]]`.  The next bounded check is whether the normalized
 large-radius fundamental solution and the Gu--Yu--Yu adjoint Fourier maps
 embed in that exact coefficient field and whether the selected formal
 monodromy fixes their image.  Success would construct G3 by scalar extension.
-Failure of any one ring map closes this test without reopening sectorial
-uniqueness.
+Failure of any one ring map closes this chosen embedding without reopening
+sectorial uniqueness.  Passing it would still require proving that the
+large-radius row becomes the intended formal row; it is not the no-Stokes
+frontier.
 
 ## Rejected Hodge--Lefschetz packet shortcut
 

@@ -155,8 +155,11 @@ imply primary coverage;
 from exactly those data.
 `MarkedWitnessObstruction.Data` is smaller still when only the
 target is known to have empty selected primary support: its contradiction
-uses one detected core witness, one selected-loop intertwiner, and one
-scalar row square. No target surjectivity or primary lift is present.
+uses one detected same-ring source witness, one selected-loop intertwiner, and
+one scalar row square. No target surjectivity or primary lift is present.
+`MarkedWitnessObstruction.Data.comp` assembles a typed chain of such local
+maps; the intermediate marked representation and selected loop must agree,
+and the scalar row factors multiply.
 At the coefficient level, a based ring map must preserve the chosen residue
 square. It therefore cannot send a coordinate vanishing at the source point
 to a target coordinate plus a term of nonzero residue. An element with unit

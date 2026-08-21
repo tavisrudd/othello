@@ -524,16 +524,25 @@ any geometric or QDM provider.
    Audit every proposed provider against this one-sided consumer before adding
    a hypothesis: endpoint surjectivity, primary coverage, correction control,
    inverse maps, and adjacent coherence are not consumed.
-2. Run the bounded formal-ring test recorded there.  Verify an actual ring map
-   placing both the Gu--Yu--Yu large-radius adjoint row and Cai's selected
-   \(z=0\) Turrittin packet in one marked representation.  If the fundamental
-   solution or Fourier map does not belong to Cai's coefficient field, close
-   this test; do not infer an analytic continuation or reopen sectorial
-   uniqueness.
-3. If the ring test passes, verify that the same global cobordism map exists
-   beyond a simple wall and proves G1--G3.  If the cited sources do not state
-   that map, record it as the new source theorem rather than adding another
-   algebraic interface.
+2. Keep the primary route Stokes-free.  Test whether the external
+   projective-bundle Kummer/deck action and the adjoint rank row live on one
+   algebraic marked carrier over the invariant field.  Distinguish the scalar
+   semilinear Galois action from the geometric packet action; naive scalar
+   extension gives every endpoint spurious deck characters and cannot prove
+   endpoint non-detection.  Prove both the source witness (G1) and rational
+   endpoint non-detection (G4) for this exact algebraic action; the old
+   fixed-phase endpoint calculation cannot be reused by relabeling.
+3. For that algebraic carrier, verify that one global cobordism map exists
+   beyond a simple wall and proves G2--G3.  If the cited sources do not state
+   that map, test the only other source architecture: a typed chain of local
+   marked maps over one downstream ring, each satisfying the selected-loop and
+   scalar-row laws.  Their composite is the one map consumed by
+   `MarkedWitnessObstruction`; no local surjectivity or correction equivalence
+   is needed.  If neither architecture is sourced, record the missing map as
+   the new source theorem rather than adding another algebraic interface.
+4. Retain the Cai formal-solution-ring embedding only as a bounded fallback.
+   It is not the no-Stokes route: even a lawful common coefficient field must
+   still identify the large-radius adjoint row with the intended formal row.
 
 ## Conditional provider ledger
 

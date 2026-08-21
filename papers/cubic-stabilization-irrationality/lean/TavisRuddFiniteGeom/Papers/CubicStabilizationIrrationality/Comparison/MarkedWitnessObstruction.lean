@@ -21,7 +21,7 @@ open RowedRepresentationDecomposition
 open RowedRepresentationDecomposition.Data
 open TensorProduct
 
-universe uR uK uLoop uSource uEndpoint uCore
+universe uR uK uLoop uSource uMiddle uEndpoint uCore
 
 /-- A one-sided comparison of two marked representations over the same ring.
 The scalar need not be a unit for the source-to-endpoint implication. -/
@@ -51,6 +51,27 @@ variable
     {source : MarkedLocalSystem.Representation K Loop Source}
     {endpoint : MarkedLocalSystem.Representation K Loop Endpoint}
     {selectedLoop : Loop}
+
+/-- Composable one-sided comparisons assemble downstream. The intermediate
+marked representation and selected loop are shared by the type, while the
+row factors multiply in traversal order. -/
+def comp
+    {Middle : Type uMiddle} [AddCommGroup Middle] [Module K Middle]
+    {middle : MarkedLocalSystem.Representation K Loop Middle}
+    (second : Data K Loop Middle Endpoint middle endpoint selectedLoop)
+    (first : Data K Loop Source Middle source middle selectedLoop) :
+    Data K Loop Source Endpoint source endpoint selectedLoop where
+  comparison := second.comparison.comp first.comparison
+  rowScale := first.rowScale * second.rowScale
+  rowComparison := by
+    intro x
+    rw [first.rowComparison, second.rowComparison]
+    simp only [LinearMap.coe_comp, Function.comp_apply]
+    rw [mul_assoc]
+  monodromyComparison := by
+    intro x
+    simp only [LinearMap.coe_comp, Function.comp_apply]
+    rw [first.monodromyComparison, second.monodromyComparison]
 
 /-- The selected comparison sends every generalized-primary vector to a
 generalized-primary vector with the same eigenvalue and exponent. -/
