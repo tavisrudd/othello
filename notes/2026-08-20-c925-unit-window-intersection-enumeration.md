@@ -193,10 +193,9 @@ normal.  The missing datum is therefore a path-dependent common-output
 cross term, not another scalar attached to the moving quotient alone.
 
 The calculation is a pilot theorem only.  It uses the character splitting,
-the formal diagonal substitution \(z_j=q\), and \(\eta=1\).  A positive
-order-one result still needs a certificate that this substitution comes from
-an admissible coefficient-torus/GKZ DVR arc, with the lift relations,
-generic nonresonance, and integral specialization.  It is also a row law
+the formal diagonal substitution \(z_j=q\), and \(\eta=1\).  Module 61 now
+certifies that substitution as an admissible normalized nonresonant trait for
+all five pilots.  It is also a row law
 between the distinct relative complements \(M_-\) and \(M_+\), not yet the
 Module 57 eigenrow law for an endomorphism of one common receiver.  Promotion
 therefore needs a based-loop or reindexing adapter in addition to the
@@ -226,13 +225,14 @@ Hashes and byte counts:
 
 | artifact | bytes | SHA-256 |
 |---|---:|---|
-| script | 18910 | `f2914b5729e51922387cb1fa1fb67b774ceec4788553804b026675463273109f` |
-| certificate | 5631 | `b53ba67e8245144379bd73acb3e0ab7e961f44e5f448bdb19a05e793d2724274` |
+| script | 20056 | `d6118978c980368d2ab6530b7576348fd024f67a5a9dbe37dde60bdce7cd605e` |
+| certificate | 6132 | `2e2685568fd1888fa9322f7cacdaff8477e12d16e2205c9c9647d5aa01356280` |
 
 The certificate records the five exact weight multisets, sixteen-case
 count, common-size and relative-defect-order histograms, exact transverse
 clearance, per-signature hashes of the fully enumerated case records, script
-hash, and the two membership implementations. The claim is finite: it proves
+hash, the two membership implementations, and the gcd-one augmented-minor
+certificate used by Module 61. The claim is finite: it proves
 nothing for non-unit weights, non-coordinate wall directions, alternative
 completions, non-diagonal arcs, or unidentified geometric occurrences.
 
@@ -272,7 +272,7 @@ the product normal. This is still smaller than a full resonant Stokes matrix.
 | Can a separable primitive projector on the full window work? | **no for every pilot case** | Corollary 59.1A |
 | Does rank descend to the quotient by the common span? | **no** | rank is one on every common character generator |
 | Does the basis-split moving complement have positive normal order? | **only for all flip--flip directions and two of six directions in each mixed pilot; never for blowup--blowdown** | Proposition 59.2 |
-| What datum was lost in the failures? | **the moved-to-common cross block** | exact term classification in the certificate; a coupled Reader/lens theorem is next |
+| What datum was lost in the failures? | **the moved-to-common cross block** | exact term classification; Module 60 retains it |
 | Does this prove the actual overlap theorem? | **no** | pilot-to-occurrence and fixed-phase readers remain open |
 
 ## Boundary
@@ -280,7 +280,7 @@ the product normal. This is still smaller than a full resonant Stokes matrix.
 The finite pilot question is settled: every completed unit adjacency has
 common rank-visible fixed window generators, so the separable full-window
 producer is impossible.  The naive moving complement is also not uniform.
-The highest-EV remaining source calculation is the upper-triangular coupled
-consumer retaining the moved-to-common cross block.  Its first theorem
-should characterize exactly when the common-output lens restores the full
-product normal, before asking for a fixed-phase QDM realization.
+Module 60 supplies the upper-triangular crossed consumer retaining the
+moved-to-common block, and Module 61 supplies its pilot trait.  The
+highest-EV remaining source calculation is now the fixed-phase QDM/Malgrange
+realization of that relative edge and its based loop.

@@ -326,7 +326,8 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   variation is zero.  This removes the two-wall Stokes matrix from the live
   task.  What remains is the occurrence-indexed fixed-phase
   Fourier--Laplace/can--var reader identifying the actual Malgrange blocks
-  with those Thom/divided-rank packages.  Yu--Zhang identifies spectral and
+  with the provenance-tagged crossed schober edge and its based-loop
+  component maps.  Yu--Zhang identifies spectral and
   vanishing-cycle decompositions for algebraic exponential-type
   connections, but does not construct the Gamma row or the image-block
   reader; pure formal support alone is not enough.
@@ -358,6 +359,25 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   therefore a coupled Reader/lens retaining that block, followed by a lawful
   coefficient-torus DVR arc, based-loop reindexing, and the exact fixed-phase
   packet reader.
+  Module 60 proves the exact provenance-sensitive repair.  The discarded
+  cross block \(B:M\to C\) is the sole term missing from the plain moving
+  defect; retaining it restores the full Spenko--Van den Bergh product normal
+  in every directed pilot transition.  Native common inputs and common
+  outputs born from a moving input must have distinct types, because no
+  ordinary covector on their untagged quotient can distinguish them.  The
+  crossed edges compose by the upper-triangular law
+  \(B_{21}=A_2B_1+B_2D_1\).  The remaining source gate is therefore a lawful
+  coefficient-torus trait and a based-loop, occurrence-indexed fixed-phase
+  Malgrange/QDM reader for this one crossed edge, not a global eigenrow or full
+  Stokes matrix.
+  Module 61 closes the trait half for every unit pilot.  The all-ones Gale
+  quotient class is primitive by a gcd-one maximal-minor certificate, so an
+  adapted integral splitting gives normalized lift
+  \(\gamma(t)=t(1,\ldots,1)\), common coefficient
+  \(q=e^{-2\pi i t}\), and a nonresonant punctured trait with uniformizer
+  \(1-q\).  What remains is only the vertical realization of that labelled
+  crossed edge as the actual based-loop fixed-phase Malgrange/QDM packet with
+  exact closed reading.
   Shifted tensor stability and the extremal multinomial source law are
   proved, but the occurrence-indexed exact QDM sequence, actual carrier
   exponent, and boundary vanishing remain open.  The packet is split into

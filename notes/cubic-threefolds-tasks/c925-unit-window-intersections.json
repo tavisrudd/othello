@@ -1,4 +1,5 @@
 {
+  "all_diagonal_quotient_classes_primitive": true,
   "all_enumerated_adjacent_windows_intersect": true,
   "case_count": 16,
   "definition": "closure(Delta)=sum_i[-1/4,1/4]b_i; generic L_C=(nu+closure(Delta)) intersect Z^2",
@@ -10,8 +11,8 @@
   "minimum_transverse_clearance": "1/4",
   "schema": "c925-unit-window-intersections-v1",
   "scope": "five Module-41 completed signatures; both coordinate facet normals; every affine level and open wall segment modulo Z^2",
-  "script_bytes": 18910,
-  "script_sha256": "f2914b5729e51922387cb1fa1fb67b774ceec4788553804b026675463273109f",
+  "script_bytes": 20056,
+  "script_sha256": "d6118978c980368d2ab6530b7576348fd024f67a5a9dbe37dde60bdce7cd605e",
   "signature_count": 5,
   "signatures": {
     "blowup_blowdown": {
@@ -23,6 +24,8 @@
       "common_size_histogram": {
         "2": 2
       },
+      "diagonal_augmented_minor_gcd": 1,
+      "diagonal_quotient_class_primitive": true,
       "maximum_common_size": 2,
       "minimum_common_size": 2,
       "parameters_A_B_d_u": [
@@ -65,6 +68,8 @@
         "3": 2,
         "4": 1
       },
+      "diagonal_augmented_minor_gcd": 1,
+      "diagonal_quotient_class_primitive": true,
       "maximum_common_size": 4,
       "minimum_common_size": 3,
       "parameters_A_B_d_u": [
@@ -109,6 +114,8 @@
         "3": 2,
         "4": 1
       },
+      "diagonal_augmented_minor_gcd": 1,
+      "diagonal_quotient_class_primitive": true,
       "maximum_common_size": 4,
       "minimum_common_size": 3,
       "parameters_A_B_d_u": [
@@ -152,6 +159,8 @@
       "common_size_histogram": {
         "4": 4
       },
+      "diagonal_augmented_minor_gcd": 1,
+      "diagonal_quotient_class_primitive": true,
       "maximum_common_size": 4,
       "minimum_common_size": 4,
       "parameters_A_B_d_u": [
@@ -188,6 +197,8 @@
       "common_size_histogram": {
         "6": 4
       },
+      "diagonal_augmented_minor_gcd": 1,
+      "diagonal_quotient_class_primitive": true,
       "maximum_common_size": 6,
       "minimum_common_size": 6,
       "parameters_A_B_d_u": [

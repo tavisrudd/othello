@@ -64,6 +64,8 @@ No manuscript or Lean source is part of this packet.
 | 57 | eigenrow image factorization and fixed-summand obstruction | notes/2026-08-20-c925-eigenrow-image-factorization.md |
 | 58 | separable primitive-projector no-go and moving/coupled repair | notes/2026-08-20-c925-separable-primitive-projector-no-go.md |
 | 59 | exact adjacent-window intersections and moving-complement defects for all unit pilots | notes/2026-08-20-c925-unit-window-intersection-enumeration.md |
+| 60 | provenance-tagged crossed edge and upper-triangular lens law | notes/2026-08-20-c925-crossed-edge-provenance-lens.md |
+| 61 | adapted integral splitting and diagonal coefficient trait | notes/2026-08-20-c925-diagonal-coefficient-trait.md |
 | frontier | open experiments and provider targets | notes/2026-08-20-c925-exploration-frontier.md |
 
 ## Dependency spine
@@ -90,7 +92,7 @@ Modules 19--23 prove reusable categorical consequences:
 - universal center-null quotients and minimal sufficient shadows; and
 - the conditional Section 6 argument as a separate specialization.
 
-Modules 24--59 isolate the higher-stabilization frontier:
+Modules 24--61 isolate the higher-stabilization frontier:
 
 - irrationality on any unbounded stabilization set implies irrationality for
   every index;
@@ -396,6 +398,26 @@ moved-to-common cross block is precisely where the product-normal
 cancellation is lost.  The highest-EV surviving calculation is therefore a
 coupled Reader/lens retaining that cross block, followed by a lawful DVR-arc
 certificate and the exact actual-packet reader.
+Module 60 proves the crossed-edge replacement.  For an upper-triangular
+relative comparison \(F=(A,B,D)\), the full moving-input defect is the plain
+moving defect minus the single lens term \(r_CB\).  The Spenko--Van den
+Bergh formula then restores the full product normal in every directed pilot
+transition before specialization.  Native common inputs and common outputs
+born from a moving input must have distinct provenance types; no ordinary
+covector on an untagged quotient can distinguish them.  These crossed edges
+compose by \(B_{21}=A_2B_1+B_2D_1\), so the retained state is one
+upper-triangular Writer/cocycle rather than a full Stokes matrix.  The live
+gate is now a lawful coefficient-torus DVR arc plus the occurrence-level
+fixed-phase reader identifying this crossed edge with the actual directed
+Malgrange packet.
+Module 61 closes the coefficient-torus arc gate on all five unit pilots.
+The all-ones class in each Gale quotient is primitive by an exact gcd-one
+maximal-minor certificate.  An adapted integral splitting therefore has
+normalized lift \(\gamma(t)=t(1,\ldots,1)\); its coefficients are all
+\(q=e^{-2\pi i t}\), \(1-q\) is a uniformizer, and a small punctured trait is
+nonresonant.  The sole live source gate is now vertical: identify the labelled
+crossed schober edge with the actual occurrence's based-loop, fixed-phase
+Malgrange/QDM packet and exact closed reader.
 
 ### ExactTop provider
 

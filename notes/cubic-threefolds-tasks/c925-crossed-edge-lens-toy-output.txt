@@ -1,0 +1,5 @@
+native_common_rank_at_q1=1
+moving_only_defect_order_at_q1=0
+crossed_defect=1-q
+crossed_defect_order_at_q1=1
+typed_composition=B21=A2B1+B2D1,D21=D2D1

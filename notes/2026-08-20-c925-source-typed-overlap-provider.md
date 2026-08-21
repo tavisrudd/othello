@@ -256,6 +256,30 @@ closed base change, and path/direction compatibility.  These types reject
 representational mismatches; provenance and noncircular construction remain
 trusted-source audits.
 
+Module 58 adds a closed source sum before `EigenrowLaw`:
+
+\[
+ \mathsf{PhaseSource}
+   =\mathsf{SeparablePhase}
+    +\mathsf{MovingPhase}
+    +\mathsf{CrossedEdgePhase}
+    +\mathsf{CoupledPhase}.                                  \tag{55.15}
+\]
+
+There is no eliminator from `SeparablePhase` to `EigenrowLaw`: a projector
+on the cubic/base factor cannot certify the fixed span in the window factor.
+`MovingPhase` carries only a character-basis split and its restricted row;
+it has no eliminator to `EigenrowLaw`, because rank does not descend through
+the common-span quotient.  `CrossedEdgePhase` carries distinct
+`NativeCommon` and `FromMovingCommon` origins, the upper-triangular
+\((A,B,D)\) edge, and the crossed row law of Module 60.  It can reach the
+direct projected-variation consumer only after a `ValidSVdBArc`, a
+based-loop/common-receiver adapter, and the exact fixed-phase reader with the
+same indices.  It cannot reach `EigenrowLaw`.  `CoupledPhase` carries a
+separate direct kernel/eigenrow proof.
+This keeps the actual repair choice visible instead of allowing a primitive
+label to masquerade as a wall-packet theorem.
+
 ## 55.5 Compile-checked toy
 
 The concrete replay is
@@ -297,11 +321,12 @@ extension”.
 | Can occurrences, loops, or characters be silently changed? | **no** | endpoint indices (55.2)--(55.3) |
 | Does every safe provider yield the row transition? | **yes** | Theorem 55.1 |
 | Do the types prove either geometric source adapter exists? | **no** | (55.10)--(55.11) are the remaining theorems |
-| Which source adapter is currently highest EV? | **first the Module 57 primitive eigenrow test, then the Module 56 exact image reader if it passes** | a row-visible fixed summand refutes the common-row route before analytic construction |
+| Which source adapter is currently highest EV? | **the Module 60 crossed-edge reader on the Module 61 lawful trait** | the primitive eigenrow route is refuted by the row-visible fixed summand; the remaining theorem is the based-loop fixed-phase component reader |
 
 ## Boundary
 
-The consumer can now be written so that every known illegal source state is
+With constructor-hiding smart APIs at the trusted boundary, the consumer can
+be written so that every known *syntactic* illegal source state is
 unrepresentable: wrong analytic variable, wrong resonance, wrong
 normalization, wrong occurrence, wrong phase path, missing row fidelity, and
 missing direction all fail before the telescope is called.  This is a real

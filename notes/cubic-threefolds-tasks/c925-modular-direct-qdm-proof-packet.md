@@ -68,6 +68,10 @@ exact \(m=2\) and all-\(m\) transport gates.
   notes/2026-08-20-c925-separable-primitive-projector-no-go.md
 - exact unit-window intersection enumeration:
   notes/2026-08-20-c925-unit-window-intersection-enumeration.md
+- crossed-edge provenance lens and composition law:
+  notes/2026-08-20-c925-crossed-edge-provenance-lens.md
+- adapted diagonal coefficient trait:
+  notes/2026-08-20-c925-diagonal-coefficient-trait.md
 
 The packet index owns the module-to-file map.  Do not append another large
 module to this card or to the index; add one focused companion file and one
@@ -355,6 +359,14 @@ Unit-window intersection replay:
        | diff -u \
            notes/cubic-threefolds-tasks/c925-unit-window-intersections.json -'
 
+Crossed-edge provenance replay:
+
+    nix shell nixpkgs#ghc --command sh -c \
+      'runghc -inotes/cubic-threefolds-tasks \
+           notes/cubic-threefolds-tasks/c925-crossed-edge-lens-toy.hs \
+       | diff -u \
+           notes/cubic-threefolds-tasks/c925-crossed-edge-lens-toy-output.txt -'
+
 The finite model currently has one hundred twenty-two checks.  It verifies only the
 advertised algebraic laws and countermodels, never an external QDM provider.
 
@@ -367,12 +379,12 @@ advertised algebraic laws and countermodels, never an external QDM provider.
    is not a uniform repair: its formal diagonal coefficient passes every
    flip--flip direction but has
    order-zero defect in every blowup--blowdown direction and most mixed
-   directions.  Construct the upper-triangular coupled Reader/lens which
-   retains the moved-to-common cross block, and prove whether its combined row
-   restores the full product normal on both incident walls along a lawful DVR
-   arc and after the required based-loop reindexing.  Only if this
-   passes, construct Module 56's exact fixed-phase image/can--var reader.  Theorem
-   56.1 then proves the directed covector
+   directions.  Module 60 proves that the upper-triangular crossed-edge
+   Reader/lens restores the full product normal formally and composes without
+   a Stokes matrix.  Module 61 supplies the lawful diagonal coefficient trait
+   on all five pilots.  Construct the based-loop/common-receiver reindexing
+   and identify that exact crossed edge with the actual fixed-phase
+   image/can--var packet.  The direct Module 60 consumer then proves the directed covector
    \(\rho_j(1-T_j)|_{\operatorname{im}(1-T_i)}\) vanishes without computing a
    two-wall Stokes matrix.  Yu--Zhang supplies spectral/vanishing-cycle block
    comparison only after an algebraic exponential-type occurrence is built;

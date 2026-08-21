@@ -165,10 +165,23 @@ are:
     two equations are equivalent to \(r(1-T_i)=a_i u_i r\), which forces the
     row to kill every fixed summand.  Compute whether the primitive-sixth
     projector kills the common fixed generators while retaining the moving
-    rank line.  Only after that passes is the highest-EV task the exact
-    occurrence reader identifying the actual
-    fixed-phase inverse-Laplace blocks and maps with those Thom/divided-rank
-    packages in one receiver, not a two-wall Stokes-matrix computation.
+    rank line.  Module 58 now proves that a projector on the cubic/base
+    tensor factor alone cannot kill a rank-visible fixed window generator.
+    Module 59 enumerates the five pilot windows exactly: every one of the
+    sixteen coordinate-wall adjacency types has a common generator, with
+    minimum intersection size two.  The separable pilot route is therefore
+    closed.  Module 59 also shows that the plain basis-split moving complement
+    loses the normal cancellation in every blowup--blowdown and most mixed
+    directions.  Module 60 identifies the exact repair: retain the
+    provenance-tagged moved-to-common cross block, whose upper-triangular
+    Writer law restores the full product normal formally in every pilot.
+    Module 61 proves the coefficient-torus trait itself: every all-ones Gale
+    class is primitive, so an adapted integral splitting makes the diagonal
+    coefficient arc normalized and nonresonant.  The highest-EV task is now
+    the exact occurrence reader identifying the actual fixed-phase
+    inverse-Laplace blocks and maps with that provenance-tagged crossed
+    schober edge and its based-loop component maps in one receiver, not a
+    two-wall Stokes-matrix computation.
     Yu--Zhang's spectral/vanishing-cycle theorem helps type the block reader
     for an algebraic exponential-type occurrence, but constructs neither the
     Gamma row nor the can/var identification.  If that reader fails,
@@ -200,7 +213,7 @@ are:
     row is the original cubic packet.
 
 None of these questions blocks the proof in Modules 0--16 or the
-transport-level specialization audit in Module 17.  Modules 18--57 isolate
+transport-level specialization audit in Module 17.  Modules 18--61 isolate
 the general consequences without claiming the missing enriched provider.
 The open questions control whether the interface can be promoted from a
 lawful compiler to a canonical equivalence with the complete external
