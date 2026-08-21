@@ -3,7 +3,7 @@
 **Lane**: `complete-ports`
 
 **Date**: 2026-07-26
-**Status**: ACTIVE; C672--C677 PROOF GATES COMPLETE; C678 NEXT; PUBLIC RELEASE GATED
+**Status**: ACTIVE; C672--C677 PROOF GATES COMPLETE; C678 DRAFT ASSEMBLY ACTIVE; PUBLIC RELEASE GATED
 **Theorem source lane**: archived [`repaircodes`](done/2026-07-13-projective-completion-repaircodes.md)
 **Current private paper**: [`complete-repair-ports`](../../papers/complete-repair-ports/README.md)
 **Canonical paper identity**: `complete-ports` — *Complete Bounded Repair Ports: Local Memory,
