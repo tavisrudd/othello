@@ -37,14 +37,16 @@ promoted mathematical assertion maps to a kernel-checked declaration.
 
 ## Current status
 
-- **C935 — elliptic two-division resolvent audit, active.** Audit the proposed
-  upgrade of the epilogue's five-sheet principal-gluing packet from a fibrewise
-  \(3+2\) decomposition to the exact sign/discriminant resolvent of the relative
-  elliptic two-division cover.  The unconditional local-system theorem, any
-  level-three modular specialization, the eta Hauptmodul equation, and the
-  literature/priority boundary are separate gates.  Adopt only what the
-  manuscript's actual base and level structure support.  Card:
-  `../cubic-threefolds-tasks/c935-elliptic-two-division-resolvent.md`.
+- **C935 — closed 2026-08-21; exotic gluing is the elliptic discriminant
+  orientation.**  The epilogue now proves that monodromy on the exotic pair is
+  the sign of its action on the rational two-division triple, identifies the
+  resulting class with the square-root torsor of the elliptic discriminant,
+  and observes that the actual kernel section cuts mod-two monodromy to
+  \(A_3\).  The noncanonical deck choice is explicit; the universal modular
+  resolvent is verified but a curve-level cubic identification is reserved for
+  a short companion after normalization, degree, stack-marking, and cusp gates.
+  The manuscript remains fifty pages and `make check` passes.  Report:
+  `../2026-08-21-c935-elliptic-two-division-resolvent.md`.
 - **C934 -- paper upgrade/export complete; all-degree table active.** The
   11-page paper now proves the integral derived splitting, central Smith
   factor three, canonical mod-three `delta_0`--`IC`--`delta_0` Loewy chain,

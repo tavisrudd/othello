@@ -4,6 +4,8 @@
 
 **Date:** 2026-08-21
 
+**Status:** complete; report `../2026-08-21-c935-elliptic-two-division-resolvent.md`
+
 ## Goal
 
 Audit the supplied “Proof Packet 01 — Upgrade” against the authoritative
@@ -43,6 +45,11 @@ resolvent of the relative elliptic two-division cover.
    manuscript through the guarded project entry points.
 8. After the acceptance gate, run the required `ej` + `tt` closeout pass and
    record a mystery ledger in the dated report.
+
+All gates are discharged at the scope recorded in the report.  The universal
+modular diagram is verified but not promoted as an identification of the cubic
+period curve; that stronger curve-level theorem is separated as an unallocated
+companion-note candidate.
 
 ## Initial risk assessment
 
