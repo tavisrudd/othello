@@ -40,6 +40,7 @@ preload one for another paper, even when subjects or named experts overlap.
 | `papers/clebsch-factorization/` | `../papers/expert-profiles/09-clebsch-factorization.md` |
 | `papers/clebsch-passages/` | `../papers/expert-profiles/10-clebsch-passages.md` |
 | `papers/ame_lu/` | `../papers/expert-profiles/11-ame-lu.md` |
+| `papers/cubic-gluing-resolvent/` | `expert-personas/bert-van-geemen-cubic-resolvent-referee.md` |
 
 ## Loading order by task
 
