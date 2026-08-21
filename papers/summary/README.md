@@ -222,21 +222,21 @@ boundary, and reproducible entry points.
 
 | Paper | Area | Central result | Public entry |
 |---|---|---|---|
-| Integral Cohomology and Modular Decomposition for the Theta Divisor of a Cubic Threefold | Algebraic geometry / topology | The rank-130 integral middle lattice has canonical mod-two glue, while the same resolution carries a factor-three integral perverse attachment, a length-three modular Loewy chain, and failure of relative hard Lefschetz modulo three. | [PDF](https://github.com/tavisrudd/blown-up-theta-lattice/blob/main/blown_up_theta_lattice.pdf) · [repo](https://github.com/tavisrudd/blown-up-theta-lattice) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.22036586-blue.svg)](https://doi.org/10.5281/zenodo.22036586) |
+| Irrationality of Cubic Threefolds after One Stabilization | Algebraic geometry / birational geometry | Every smooth cubic threefold stays irrational after multiplication by `P¹`, proved from the rank-two residue marker of a categorical direct-QDM ledger, while an explicit family is universally `CH₀`-trivial; the framed count `ν₆ = 2` and its stabilization to `4` are separate computations. | [PDF](https://github.com/tavisrudd/cubic-stabilization-epilogue/blob/main/irrationality_after_one_stabilization.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-epilogue) |
+| Deep Holes of Projective Reed–Solomon Codes Beyond Redundancy Four: Recursive Carriers and Exact Classifications Through Redundancy Ten | Coding theory | Deep-hole classifications extend through redundancy ten in stated ranges. | [PDF](https://github.com/tavisrudd/beyond4-prs/blob/main/prs-beyond-redundancy-four.pdf) · [repo](https://github.com/tavisrudd/beyond4-prs) |
+| Local-Unitary Rigidity and Quantitative Rounding for Stabilizer AME States | Quantum information | Exact local-unitary rigidity has a separate quantitative rounding theorem. | [PDF](https://github.com/tavisrudd/ame-lu/blob/main/ame-lu.pdf) · [repo](https://github.com/tavisrudd/ame-lu) |
 | Reconstructing the Clebsch Code and Its Golden Orientation from Its Deep-Hole Syndrome Locus | Finite geometry / coding | Deep-hole data recognize the Clebsch code and golden orientation. | [PDF](https://github.com/tavisrudd/clebsch-rigidity/blob/main/clebsch_rigidity.pdf) · [repo](https://github.com/tavisrudd/clebsch-rigidity) |
 | Quadratic Trade Rigidity and Cubic Orientation in Conic Matching Quotients | Algebraic combinatorics | On the matching carrier, a two-valued quadratic trade classifies two exceptional geometries and a cubic orients their sheets. | [PDF](https://github.com/tavisrudd/clebsch-factorization/blob/main/clebsch_factorization.pdf) · [repo](https://github.com/tavisrudd/clebsch-factorization) |
 | Golden Descent and Operator Realizations of the Clebsch Cubic | Algebraic geometry / combinatorics | An exact arithmetic incidence cover selects a marked conference source whose cubic shadows return in degree-six harmonics; exchange rigidity and two-graph reconstruction follow independently. | [PDF](https://github.com/tavisrudd/clebsch-passages/blob/main/clebsch_passages.pdf) · [repo](https://github.com/tavisrudd/clebsch-passages) |
 | Reconstructing PG(2,13), Its Conic, and Polarity from the Minimum Words of a Binary Conic Code | Coding / finite geometry | Weighted pair data on minimum words recover a marked projective plane, conic, and polarity. | [PDF](https://github.com/tavisrudd/q13-passant-code/blob/main/passant_code_q13.pdf) · [repo](https://github.com/tavisrudd/q13-passant-code) |
 | Chordal and Conference Cubics: Reconstruction and a Residual C2-Torsor | Invariant theory / algebraic combinatorics | Distinct chordal and conference cubics recover one marked six-axis carrier and admit an exact oriented marked return. | [PDF](https://github.com/tavisrudd/chordal-conference-reconstruction/blob/main/chordal_conference_reconstruction.pdf) · [repo](https://github.com/tavisrudd/chordal-conference-reconstruction) |
 | Hodge Atoms as Occurrence-Indexed Marker Ledgers | Algebraic geometry / quantum cohomology | The standard abstract Hodge-atom chemical formula is the Hodge specialization of an occurrence-indexed categorical marker ledger, with an effective weak-factorization quotient and a strictly one-step rank-two obstruction. | [PDF](https://github.com/tavisrudd/hodge-atom-marker-ledger/blob/main/hodge_atom_marker_ledger.pdf) · [repo](https://github.com/tavisrudd/hodge-atom-marker-ledger) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.22036391-blue.svg)](https://doi.org/10.5281/zenodo.22036391) |
-| Irrationality of Cubic Threefolds after One Stabilization | Algebraic geometry / birational geometry | Every smooth cubic threefold stays irrational after multiplication by `P¹`, proved from the rank-two residue marker of a categorical direct-QDM ledger, while an explicit family is universally `CH₀`-trivial; the framed count `ν₆ = 2` and its stabilization to `4` are separate computations. | [PDF](https://github.com/tavisrudd/cubic-stabilization-epilogue/blob/main/irrationality_after_one_stabilization.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-epilogue) |
 | Gamma Point Rows under Quantum Wall Crossing and a Criterion for Stable Irrationality | Algebraic geometry / quantum cohomology | A rank-one derived-clutching theorem, an exact simple-wall ambient point coordinate, ordinary-flop point-row transport, global support collapse, and Gamma reduction give an all-stabilizations criterion under explicit gauged-admissibility and marked threshold assumptions. | [PDF](https://github.com/tavisrudd/cubic-stabilization-irrationality/blob/main/cubic_stabilization_irrationality.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-irrationality) |
 | Standard Flips of Discrepancy One: Extremal J-Normalization and the Meijer Aperture at ν=1 | Algebraic geometry / quantum cohomology | An exact `z`-order count and the `ν=1` Barnes sector complete the discrepancy-one range in Shen--Shoemaker's extremal flip theorem. | [PDF](https://github.com/tavisrudd/discrepancy-one-flips/blob/main/discrepancy_one_flips.pdf) · [repo](https://github.com/tavisrudd/discrepancy-one-flips) |
 | Arcs Complete Outside a Conic: A Prescribed-Hole Defect Identity and Matching-Design Rigidity | Finite geometry / designs | A universal pointwise defect identity gives matching-design rigidity, stability, and conic-relative bounds. | [PDF](https://github.com/tavisrudd/arcs-complete-outside-conic/blob/main/arcs_complete_outside_conic.pdf) · [repo](https://github.com/tavisrudd/arcs-complete-outside-conic) |
-| Deep Holes of Projective Reed–Solomon Codes Beyond Redundancy Four: Recursive Carriers and Exact Classifications Through Redundancy Ten | Coding theory | Deep-hole classifications extend through redundancy ten in stated ranges. | [PDF](https://github.com/tavisrudd/beyond4-prs/blob/main/prs-beyond-redundancy-four.pdf) · [repo](https://github.com/tavisrudd/beyond4-prs) |
-| Local-Unitary Rigidity and Quantitative Rounding for Stabilizer AME States | Quantum information | Exact local-unitary rigidity has a separate quantitative rounding theorem. | [PDF](https://github.com/tavisrudd/ame-lu/blob/main/ame-lu.pdf) · [repo](https://github.com/tavisrudd/ame-lu) |
 | Diagonal Isoduality and Transversal Clifford Groups of MDS–CSS Codes | Quantum coding / finite geometry | A diagonal-isoduality nullity test determines the projective transversal group. | [PDF](https://github.com/tavisrudd/mds-css-transversal-groups/blob/main/mds-css-transversal-groups.pdf) · [repo](https://github.com/tavisrudd/mds-css-transversal-groups) |
 | Exchange Landscapes, Orientation, and Rigidity in the Golden Six-Mode Conference Interferometer | Quantum information / mathematical physics | Cut-independent exchange spectra and orientation-sensitive stability are unique at order six. | [PDF](https://github.com/tavisrudd/golden-quantum-statistics/blob/main/golden_quantum_statistics.pdf) · [repo](https://github.com/tavisrudd/golden-quantum-statistics) |
+| Integral Cohomology and Modular Decomposition for the Theta Divisor of a Cubic Threefold | Algebraic geometry / topology | The rank-130 integral middle lattice has canonical mod-two glue, while the same resolution carries a factor-three integral perverse attachment, a length-three modular Loewy chain, and failure of relative hard Lefschetz modulo three. | [PDF](https://github.com/tavisrudd/blown-up-theta-lattice/blob/main/blown_up_theta_lattice.pdf) · [repo](https://github.com/tavisrudd/blown-up-theta-lattice) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.22036586-blue.svg)](https://doi.org/10.5281/zenodo.22036586) |
 
 The repository for *Reconstructing the Clebsch Code and Its Golden Orientation
 from Its Deep-Hole Syndrome Locus* also contains the computational companion
@@ -251,6 +251,25 @@ rendered in plain Markdown notation. Each is followed by a non-specialist
 guide: what the paper delivers, who may care, and why it matters. If you are
 new to the subject, use those three guide paragraphs as the orientation and
 then read the abstract for the paper's technical statement.
+
+Read the paper summaries in this order:
+
+1. [Irrationality of Cubic Threefolds after One Stabilization](#irrationality-of-cubic-threefolds-after-one-stabilization)
+2. [Deep Holes of Projective Reed–Solomon Codes Beyond Redundancy Four](#deep-holes-of-projective-reedsolomon-codes-beyond-redundancy-four-recursive-carriers-and-exact-classifications-through-redundancy-ten)
+3. [Local-Unitary Rigidity and Quantitative Rounding for Stabilizer AME States](#local-unitary-rigidity-and-quantitative-rounding-for-stabilizer-ame-states)
+4. [Reconstructing the Clebsch Code and Its Golden Orientation from Its Deep-Hole Syndrome Locus](#reconstructing-the-clebsch-code-and-its-golden-orientation-from-its-deephole-syndrome-locus)
+5. [Quadratic Trade Rigidity and Cubic Orientation in Conic Matching Quotients](#quadratic-trade-rigidity-and-cubic-orientation-in-conic-matching-quotients)
+6. [Golden Descent and Operator Realizations of the Clebsch Cubic](#golden-descent-and-operator-realizations-of-the-clebsch-cubic)
+7. [Reconstructing PG(2,13), Its Conic, and Polarity from the Minimum Words of a Binary Conic Code](#reconstructing-pg213-its-conic-and-polarity-from-the-minimum-words-of-a-binary-conic-code)
+8. [Chordal and Conference Cubics: Reconstruction and a Residual C2-Torsor](#chordal-and-conference-cubics-reconstruction-and-a-residual-c2-torsor)
+9. [Computational Strengthenings of Clebsch Syndrome Rigidity](#computational-strengthenings-of-clebsch-syndrome-rigidity--companion)
+10. [Hodge Atoms as Occurrence-Indexed Marker Ledgers](#hodge-atoms-as-occurrence-indexed-marker-ledgers)
+11. [Gamma Point Rows under Quantum Wall Crossing and a Criterion for Stable Irrationality](#gamma-point-rows-under-quantum-wall-crossing-and-a-criterion-for-stable-irrationality)
+12. [Standard Flips of Discrepancy One: Extremal J-Normalization and the Meijer Aperture at ν=1](#standard-flips-of-discrepancy-one-extremal-j-normalization-and-the-meijer-aperture-at-ν1)
+13. [Arcs Complete Outside a Conic: A Prescribed-Hole Defect Identity and Matching-Design Rigidity](#arcs-complete-outside-a-conic-a-prescribedhole-defect-identity-and-matchingdesign-rigidity)
+14. [Diagonal Isoduality and Transversal Clifford Groups of MDS–CSS Codes](#diagonal-isoduality-and-transversal-clifford-groups-of-mdscss-codes)
+15. [Exchange Landscapes, Orientation, and Rigidity in the Golden Six-Mode Conference Interferometer](#exchange-landscapes-orientation-and-rigidity-in-the-golden-sixmode-conference-interferometer)
+16. [Integral Cohomology and Modular Decomposition for the Theta Divisor of a Cubic Threefold](#integral-cohomology-and-modular-decomposition-for-the-theta-divisor-of-a-cubic-threefold)
 
 ### Rigidity from Sparse Shadows
 
@@ -428,7 +447,7 @@ public mirror.
 
 ---
 
-### Other papers
+### Further papers
 
 #### Integral Cohomology and Modular Decomposition for the Theta Divisor of a Cubic Threefold
 
