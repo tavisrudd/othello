@@ -156,7 +156,17 @@ are:
     resonance trait with an exact actual-packet reader.  Module 55 makes
     wrong variables, resonance, normalization, occurrence, phase path, row,
     and direction unrepresentable to the telescope.  Construct the trusted
-    projected source adapter for the first \((1,1)\) pilot; if that fails,
+    projected source adapter for the first \((1,1)\) pilot.  Module 56 now
+    proves that its projected covector follows formally from two compatible
+    one-wall can/var factorizations:
+    \(rv_i=a_i\rho_i\), \(\rho_ic_i=u_ir\), and positive normal order imply
+    \(\rho_jc_jv_i=a_i u_j\rho_i\), hence closed-fibre zero.  The highest-EV
+    task is therefore the exact occurrence reader identifying the actual
+    fixed-phase inverse-Laplace blocks and maps with those Thom/divided-rank
+    packages in one receiver, not a two-wall Stokes-matrix computation.
+    Yu--Zhang's spectral/vanishing-cycle theorem helps type the block reader
+    for an algebraic exponential-type occurrence, but constructs neither the
+    Gamma row nor the can/var identification.  If that reader fails,
     construct the common trait receiver and normalized intermediate-
     extension reader, then make either construction occurrence-uniform.
 23. **Can the completed comparison be restricted to the intended
@@ -185,7 +195,7 @@ are:
     row is the original cubic packet.
 
 None of these questions blocks the proof in Modules 0--16 or the
-transport-level specialization audit in Module 17.  Modules 18--53 isolate
+transport-level specialization audit in Module 17.  Modules 18--56 isolate
 the general consequences without claiming the missing enriched provider.
 The open questions control whether the interface can be promoted from a
 lawful compiler to a canonical equivalence with the complete external

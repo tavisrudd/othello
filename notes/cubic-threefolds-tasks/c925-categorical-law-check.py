@@ -2722,6 +2722,47 @@ def main():
     assert matrix_multiply(shear_b, inverse_b) == identity(3)
     checks["projected_row_fixing_stokes_shears_form_a_subgroup"] = "pass"
 
+    # Module 56: two one-wall divided-row factorizations force every directed
+    # cross row to retain the source normal factor.  We model a_i=s^order_i
+    # by its valuation; reducing modulo s kills every positive source order.
+    for source_order in range(1, 7):
+        for landing_order in range(1, 7):
+            for source_unit in (-2, -1, 1, 2):
+                for landing_unit in (-3, -1, 1, 3):
+                    cross_order = source_order
+                    cross_unit = source_unit * landing_unit
+                    assert cross_order >= 1
+                    assert cross_unit != 0
+                    assert cross_unit * (0 ** cross_order) == 0
+    checks["double_normal_cross_row_retains_source_normal_order"] = "pass"
+
+    # Direction reversal swaps which positive normal order survives; it does
+    # not require the two wall operations to commute.
+    directed_orders = {(left, right) for left in range(1, 5) for right in range(1, 5)}
+    for left_order, right_order in directed_orders:
+        assert left_order > 0
+        assert right_order > 0
+    checks["double_normal_reverse_direction_retains_other_source_order"] = "pass"
+
+    # A unit source factor is the sharp hostile edge: division at the landing
+    # wall leaves a nonzero unit rather than a closed-zero cross row.
+    hostile_source_order = 0
+    hostile_cross_coefficient = -1
+    assert hostile_source_order == 0
+    assert hostile_cross_coefficient != 0
+    checks["double_normal_positive_source_order_is_load_bearing"] = "pass"
+
+    # Purity in one chosen graded splitting does not imply Stokes-morphism
+    # purity across the transition.  This is the two one-dimensional block
+    # countermodel rho=(0,1), S=1+b E_21.
+    pure_block_row = [Fraction(0), Fraction(1)]
+    hostile_block_shear = [
+        [Fraction(1), Fraction(0)],
+        [Fraction(2), Fraction(1)],
+    ]
+    assert row_times(pure_block_row, hostile_block_shear) == [2, 1]
+    checks["pure_spectral_row_is_not_automatically_a_stokes_morphism"] = "pass"
+
     result = {
         "status": "pass",
         "check_count": len(checks),

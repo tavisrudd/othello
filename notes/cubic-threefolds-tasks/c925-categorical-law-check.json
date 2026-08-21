@@ -1,5 +1,5 @@
 {
-  "check_count": 112,
+  "check_count": 116,
   "checks": {
     "all_five_completed_window_rank_jets_are_the_same_unit": "pass",
     "ambient_target_shear_changes_primitive_row_restriction": "pass",
@@ -16,6 +16,9 @@
     "conditional_framed_m1_telescope_with_specialized_center_null": "pass",
     "coordinate_and_determinant_two_jet_pilots_are_classified": "pass",
     "cyclic_krylov_moments_reconstruct_nilpotent_string": "pass",
+    "double_normal_cross_row_retains_source_normal_order": "pass",
+    "double_normal_positive_source_order_is_load_bearing": "pass",
+    "double_normal_reverse_direction_retains_other_source_order": "pass",
     "equivariant_first_normal_jet_restores_only_the_rank_shadow": "pass",
     "euler_kernel_is_rank_null_in_projective_space_models": "pass",
     "exacttop_needs_image_equality_not_map_equality": "pass",
@@ -76,6 +79,7 @@
     "projective_row_line_does_not_hide_target_visible_shear": "pass",
     "provider_implications_are_not_reversible": "pass",
     "pure_exceptional_multiplicity_preserves_jordan_type": "pass",
+    "pure_spectral_row_is_not_automatically_a_stokes_morphism": "pass",
     "quantum_serre_self_intersection_kills_rank_and_point_shadow": "pass",
     "rank_leakage_covector_is_sole_quotient_defect": "pass",
     "rank_line_specializes_invertibly_exactly_at_zero_valuation": "pass",

@@ -318,13 +318,25 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   closed reading.  The telescope can consume only one of the two safe source
   constructors; types prevent laundering but do not create their geometric
   witnesses.
+  Module 56 proves the best current projected-source implementation law.
+  Two one-wall can/var packages in one raw-rank receiver, satisfying
+  (rv_i=a_i\rho_i) and \(\rho_ic_i=u_ir\) with positive normal order,
+  automatically give
+  \(\rho_jc_jv_i=a_i u_j\rho_i\), hence the directed closed projected
+  variation is zero.  This removes the two-wall Stokes matrix from the live
+  task.  What remains is the occurrence-indexed fixed-phase
+  Fourier--Laplace/can--var reader identifying the actual Malgrange blocks
+  with those Thom/divided-rank packages.  Yu--Zhang identifies spectral and
+  vanishing-cycle decompositions for algebraic exponential-type
+  connections, but does not construct the Gamma row or the image-block
+  reader; pure formal support alone is not enough.
   Shifted tensor stability and the extremal multinomial source law are
   proved, but the occurrence-indexed exact QDM sequence, actual carrier
   exponent, and boundary vanishing remain open.  The packet is split into
   bounded module companions behind a stable index.  The
-  one-hundred-twelve-check
+  one-hundred-sixteen-check
   finite law replay, the eleven-check path toy, the four-check source-typed
-  Haskell toy, and original cubic
+  Haskell toy, the four-check double-normal producer toy, and original cubic
   replay are green.  C925 remains open at fixed-phase Gamma/rank transport
   or at this ExactTop provider; the relative-cap cancellation remains one
   possible rank provider.
@@ -395,10 +407,21 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   `../cubic-threefolds-tasks/c909-epilogue-math-level-ups.md`.
 - **C910 — Lean companion for the epilogue, active.** Formalizes the
   cubic-stabilization epilogue in the Mathlib-only package
-  `papers/cubic-stabilization-epilogue/lean/`, under the C879 paper-facing
+  [`papers/cubic-stabilization-epilogue/`](../../papers/cubic-stabilization-epilogue/),
+  under the C879 paper-facing
   namespace `TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue`, with
   reviewer entry point `PaperInterface` and machine audit
-  `Verification/AxiomAudit`; no duplicate under the shared
+  `Verification/AxiomAudit`. The current main proof spine is the effective
+  categorical block ledger and occurrence-indexed weak-factorization descent:
+  the direct rank-two residue theorem and the finer primitive-sixth framed
+  theorem are literal specializations of the same generic theorem, and their
+  strict `m = 1` cubic contradictions are now the reviewer-facing headline
+  terminals. QDM block construction, comparison, factorization, and geometric
+  nullity remain explicit premises; Gamma-row and all-`m` work are untouched.
+  The current checked snapshot is 53 claims, 6 absent, 20 fragmentary, 26
+  conditional, 1 complete, and 308 reviewer terminals, of which 83 are
+  machinery. Earlier checkpoints below record the superseded atom-route
+  assembly history. No duplicate under the shared
   `lean/TavisRuddFiniteGeom/` tree or a second Lean repository. The sources
   build through the guarded queue; `make check` and the axiom-log gate green
   over 59 claims, 46 machinery rows, and 283 reviewer terminals; coverage 3

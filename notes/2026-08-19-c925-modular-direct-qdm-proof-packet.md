@@ -60,6 +60,7 @@ No manuscript or Lean source is part of this packet.
 | 53 | saturated confluence and normalized primary-row coimages | notes/2026-08-20-c925-saturated-confluence-primary-coimage.md |
 | 54 | row-projected Malgrange--Sabbah variation and middle-extension saturation | notes/2026-08-20-c925-projected-stokes-variation.md |
 | 55 | source-typed safe-overlap providers and compile-checked GADT | notes/2026-08-20-c925-source-typed-overlap-provider.md |
+| 56 | double-normal can/var factorization and projected-variation vanishing | notes/2026-08-20-c925-double-normal-projected-variation.md |
 | frontier | open experiments and provider targets | notes/2026-08-20-c925-exploration-frontier.md |
 
 ## Dependency spine
@@ -86,7 +87,7 @@ Modules 19--23 prove reusable categorical consequences:
 - universal center-null quotients and minimal sufficient shadows; and
 - the conditional Section 6 argument as a separate specialization.
 
-Modules 24--55 isolate the higher-stabilization frontier:
+Modules 24--56 isolate the higher-stabilization frontier:
 
 - irrationality on any unbounded stabilization set implies irrationality for
   every index;
@@ -349,6 +350,18 @@ are nominally distinct and share only a safe-overlap eliminator.  Wrong
 variables, resonance, normalization, occurrence, loop, character, direction,
 or row reader cannot be passed to the telescope.  Types localize the missing
 geometry; they do not manufacture either source adapter.
+Module 56 supplies the cheapest proved implementation law for the projected
+branch.  If the two incident one-wall packets factor the actual can/var maps
+through one common raw rank row as
+(rv_i=a_i\rho_i\) and \(\rho_ic_i=u_ir\), with both source normal
+parameters positive, then
+(\rho_jc_jv_i=a_i u_j\rho_i\) and the directed projected variation vanishes
+on the closed fibre.  This uses no commutation and no two-wall Stokes matrix.
+The remaining theorem is the occurrence-level fixed-phase
+Fourier--Laplace/can--var reader identifying these one-wall Thom/divided-rank
+packages with the actual Malgrange blocks.  Yu--Zhang identifies spectral and
+vanishing-cycle decompositions in its algebraic exponential-type scope, but
+does not construct the Gamma row or this image-block reader.
 
 ### ExactTop provider
 
@@ -421,6 +434,8 @@ vanishing remain open.
   notes/2026-08-20-c925-projected-stokes-variation.md
 - source-typed overlap providers:
   notes/2026-08-20-c925-source-typed-overlap-provider.md
+- double-normal projected-variation source theorem:
+  notes/2026-08-20-c925-double-normal-projected-variation.md
 
 ## Executable witnesses
 
@@ -438,6 +453,11 @@ The source-typed overlap GADT and output are:
 
 - notes/cubic-threefolds-tasks/c925-source-typed-overlap-toy.hs
 - notes/cubic-threefolds-tasks/c925-source-typed-overlap-toy-output.txt
+
+The double-normal producer GADT and output are:
+
+- notes/cubic-threefolds-tasks/c925-double-normal-source-toy.hs
+- notes/cubic-threefolds-tasks/c925-double-normal-source-toy-output.txt
 
 These validate the advertised finite algebra only.  QDM comparison,
 reconstruction, carrier, Stokes, Gamma, and weak-factorization provider

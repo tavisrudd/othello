@@ -11,7 +11,9 @@ the geometric witnesses required by either source constructor.
 
 ## 55.1 Put the distinction at the producer boundary
 
-The current local theorem has two independent analytic routes:
+The current local theorem has two independent analytic routes.  Module 56
+also gives a trusted way to construct the first route from two compatible
+one-wall factors:
 
 1. a pre-Laplace \(\lambda\)-line receiver with a vanishing projected Stokes
    variation; or
@@ -218,6 +220,23 @@ The right trust boundary is therefore:
 All downstream composition is then formal and cannot reopen the local
 analytic assumptions.
 
+Module 56 refines the first producer without adding a third consumer branch.
+Its private smart constructor has the shape
+
+\[
+ \mathsf{doubleNormal}_{i\to j}:
+   \mathsf{CommonRawRow}
+   \to\mathsf{CanVarFactor}_i(\mathsf{Positive})
+   \to\mathsf{CanVarFactor}_j(\mathsf{Positive})
+   \to\mathsf{ExactClosedCanVarReader}_{i\to j}
+   \to\mathsf{ProjectedVariationZero}_{i\to j}.               \tag{55.13}
+\]
+
+The two factors carry the same occurrence, receiver, raw-row, loop, and
+character indices.  Their hidden constructors contain both one-wall row
+equations in (56.4).  Thus (55.13) cannot be filled by two unrelated
+one-arrow theorems or by a labelled but unidentified Thom operator.
+
 ## 55.5 Compile-checked toy
 
 The concrete replay is
@@ -259,7 +278,7 @@ extension”.
 | Can occurrences, loops, or characters be silently changed? | **no** | endpoint indices (55.2)--(55.3) |
 | Does every safe provider yield the row transition? | **yes** | Theorem 55.1 |
 | Do the types prove either geometric source adapter exists? | **no** | (55.10)--(55.11) are the remaining theorems |
-| Which source adapter is currently highest EV? | **projected \((1,1)\) variation** | it asks for one directed covector rather than a full trait model |
+| Which source adapter is currently highest EV? | **the Module 56 exact can/var reader** | the projected covector then follows formally from two one-wall divided-rank laws |
 
 ## Boundary
 
@@ -268,4 +287,5 @@ unrepresentable: wrong analytic variable, wrong resonance, wrong
 normalization, wrong occurrence, wrong phase path, missing row fidelity, and
 missing direction all fail before the telescope is called.  This is a real
 architectural gain, not a geometric proof.  The open theorem is concentrated
-upstream in the smart constructor for either (55.10) or (55.11).
+upstream in the smart constructor for either (55.10) or (55.11).  Module 56
+proves the algebra used by the most economical implementation of (55.10).
