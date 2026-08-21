@@ -1,15 +1,15 @@
 # Referee and critic dossier: Frobenius-equivariant pair extension
 
-**Manuscript:** *Frobenius-equivariant pair extension and robust repair of
-eight-arcs*  
-**Frozen authority:** commit
-`b53aee00c2d91f1547b82278412bbce6385c163e`  
-**Frozen PDF:**
-`papers/equivariant-robust-completion/equivariant-robust-completion.pdf`  
-**PDF SHA-256:**
-`b9f1fda1f109dde029aed2fae6ec5e0efe6d5dd568bdc048ae1658ae159a993d`  
-**Surface:** 15 A4 pages; 156 whitespace-delimited abstract tokens  
-**Date:** 2026-08-21
+- **Manuscript:** *Frobenius-equivariant pair extension and robust repair of
+  eight-arcs*
+- **Frozen authority:** commit
+  `527ae333d4cf66c4db472f7d81ae6b1759e92d45`
+- **Frozen PDF:**
+  `papers/equivariant-robust-completion/equivariant-robust-completion.pdf`
+- **PDF SHA-256:**
+  `ed58c2e62ad0d77725e947423951bccff4138959fa097b94660d618ce3ade11b`
+- **Surface:** 15 A4 pages; 156 whitespace-delimited abstract tokens
+- **Date:** 2026-08-21
 
 This is an internal review-planning artifact, not evidence for the paper and
 not part of its standalone export. Named critics below are expertise matches,
@@ -338,8 +338,9 @@ them away.
 The current architecture is appropriate for export: the object and code
 translation appear before the theorem, the theorem starts on page 1, the
 mate-line mechanism and proof strategy follow immediately, exact orbit data are
-demoted to the dedicated order-five section, and the verification boundary is
-isolated near the end. The strongest anticipated criticism is not layout but
-the manuscript-only transport from the normalized Q25 certificate to arbitrary
-semantic invariant arcs. That bridge should receive the first hostile read.
-
+demoted to the dedicated order-five section, the two correction mechanisms are
+shown together in a publication-sized incidence diagram, and the verification
+boundary is isolated near the end. The strongest anticipated criticism is not
+layout but the manuscript-only transport from the normalized Q25 certificate
+to arbitrary semantic invariant arcs. That bridge should receive the first
+hostile read.
