@@ -95,7 +95,8 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.Diviso
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.CubicAtomOneStep
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.CubicPacketFromBlockReduction
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.ProjectiveProductMultiplicity
-import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.CubicFramedOneStep
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.CubicResidueMarkerOneStep
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.CubicFramedMarkerOneStep
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.SpectralSignReversal
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.HodgeFixedSubalgebra
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.CubicZeroAtomRanks
@@ -5538,44 +5539,112 @@ theorem associatedGradedTagging_taggedImage_injective
     Function.Injective input.taggedImage :=
   input.taggedImage_injective
 
-/-- Public form of the weak-factorization telescope: composable steps that
-preserve a packet multiplicity preserve it between their endpoints. -/
-theorem packet_multiplicity_eq_of_preserving_chain
-    {Variety : Type*} (packet : Quantum.PacketData Variety)
-    {source target : Variety}
-    (chain : Quantum.PreservingChain packet source target) :
-    packet.multiplicity source = packet.multiplicity target :=
-  chain.multiplicity_eq packet
+/-- Reviewer-facing universal property of the effective block ledger.  A
+component weight has a unique extension to an additive map from the multiset
+of regular-isomorphism components into any commutative additive monoid. -/
+theorem effectiveBlockLedger_fold_unique
+    {A : Type*} [AddCommMonoid A]
+    (presentation : Quantum.BlockPresentation)
+    (weight : presentation.Component → A)
+    (homomorphism : presentation.EffectiveLedger →+ A)
+    (onSingleton : ∀ component,
+      homomorphism ({component} : presentation.EffectiveLedger) = weight component) :
+    homomorphism = presentation.fold weight :=
+  presentation.fold_unique weight homomorphism onSingleton
 
-/-- Reviewer-facing weak-factorization telescope with the blowup bookkeeping
-exposed: smooth endpoints and centers, codimension, dimensions, specialized
-center contributions, and the operation formula all occur in the typed input.
-The smoothness assumptions are stated explicitly even though the arithmetic
-telescope itself consumes them through each blowup step. -/
-theorem packet_multiplicity_eq_of_typed_weak_factorization
-    {Variety Center : Type*} (packet : Quantum.PacketData Variety)
-    (geometry : Quantum.BlowupGeometry packet Center)
-    {source target : Variety}
-    (sourceSmooth : geometry.smoothProjectiveComplex source)
-    (targetSmooth : geometry.smoothProjectiveComplex target)
-    (sourceDimension : packet.dimension source ≤ 4)
-    (chain : Quantum.WeakFactorizationChain packet geometry source target)
-    (vanishing :
-      Quantum.CenterContributionsVanishThroughDimensionTwo geometry) :
-    packet.multiplicity source = packet.multiplicity target := by
-  have _ := sourceSmooth
-  have _ := targetSmooth
-  exact chain.multiplicity_eq_of_center_vanishing sourceDimension vanishing
+/-- Reviewer-facing occurrence-indexed marker theorem in arbitrary ambient
+dimension and with arbitrary commutative additive target.  Weak factorization,
+the folded operation formulas, and low-dimensional center nullity are explicit
+premises of the provider and nullity inputs. -/
+theorem occurrenceIndexedMarker_eq_of_birational
+    {Variety Center Occurrence A : Type*} [AddCommMonoid A]
+    {presentation : Quantum.BlockPresentation}
+    (data : Quantum.OccurrenceIndexedLedger Variety Center Occurrence presentation)
+    (fold : presentation.EffectiveLedger →+ A) (dimension : ℕ)
+    (birational : Setoid Variety)
+    (provider : Quantum.BirationalFactorizationProvider data fold dimension birational)
+    (nullity : Quantum.LowDimensionalOccurrenceNullity data fold dimension)
+    {left right : Variety} (related : birational.r left right) :
+    data.varietyMarker fold left = data.varietyMarker fold right :=
+  provider.marker_eq_of_related data fold dimension birational nullity related
 
-/-- Reviewer-facing birational-invariance deduction.  Its typed input records
-the geometric weak-factorization and operation-formula premise explicitly. -/
-theorem packet_multiplicity_birational_in_dimension_four
-    {Variety : Type*} (packet : Quantum.PacketData Variety)
-    (input : Quantum.DimensionFourBirationalInput packet)
-    {source target : Variety} (sourceDimension : packet.dimension source ≤ 4)
-    (birational : input.birational source target) :
-    packet.multiplicity source = packet.multiplicity target :=
-  input.multiplicity_eq packet sourceDimension birational
+/-- Reviewer-facing object-set descent square for the occurrence-indexed
+marker: the marker factors through the quotient by the supplied birational
+equivalence relation. -/
+theorem occurrenceIndexedMarker_descends_to_birationalClasses
+    {Variety Center Occurrence A : Type*} [AddCommMonoid A]
+    {presentation : Quantum.BlockPresentation}
+    (data : Quantum.OccurrenceIndexedLedger Variety Center Occurrence presentation)
+    (fold : presentation.EffectiveLedger →+ A) (dimension : ℕ)
+    (birational : Setoid Variety)
+    (provider : Quantum.BirationalFactorizationProvider data fold dimension birational)
+    (nullity : Quantum.LowDimensionalOccurrenceNullity data fold dimension) :
+    ∃ descended : Quotient birational → A, ∀ variety,
+      descended (Quotient.mk birational variety) = data.varietyMarker fold variety :=
+  ⟨provider.descendedMarker data fold dimension birational nullity,
+    provider.descendedMarker_mk data fold dimension birational nullity⟩
+
+/-- Reviewer-facing dimension-four birational invariance of the direct
+rank-two residue marker.  It is a specialization of the generic
+occurrence-indexed theorem, not a separate packet telescope. -/
+theorem rankTwoResidueMarker_eq_of_birational
+    {K Variety Center Occurrence : Type*} [CommRing K]
+    (context : Quantum.RankTwoResidueMarkerContext K Variety Center Occurrence)
+    {left right : Variety}
+    (leftSmooth : context.data.smoothProjective left)
+    (rightSmooth : context.data.smoothProjective right)
+    (leftDimension : context.data.dimension left = 4)
+    (rightDimension : context.data.dimension right = 4)
+    (related : context.birational.r left right) :
+    context.marker left = context.marker right :=
+  context.marker_eq_of_birational leftSmooth rightSmooth leftDimension rightDimension related
+
+/-- Reviewer-facing dimension-four birational invariance of the framed
+primitive-sixth marker.  It invokes the same generic occurrence-indexed theorem
+as the direct residue marker. -/
+theorem framedSixthMarker_eq_of_birational
+    {Variety Center Occurrence : Type*}
+    (context : Quantum.FramedSixthMarkerContext Variety Center Occurrence)
+    {left right : Variety}
+    (leftSmooth : context.data.smoothProjective left)
+    (rightSmooth : context.data.smoothProjective right)
+    (leftDimension : context.data.dimension left = 4)
+    (rightDimension : context.data.dimension right = 4)
+    (related : context.birational.r left right) :
+    context.marker left = context.marker right :=
+  context.marker_eq_of_birational leftSmooth rightSmooth leftDimension rightDimension related
+
+/-- Reviewer-facing direct-QDM residue-marker proof that a smooth cubic
+threefold remains irrational after multiplication by one projective line.  The
+rank-two residue context exposes the block presentation, actual center
+occurrences, operation formulas, weak factorization, and center nullity. -/
+theorem cubicThreefold_oneProjectiveLine_not_rational_of_residueMarker
+    {K Variety Center Occurrence : Type*} [CommRing K]
+    (context : Quantum.RankTwoResidueMarkerContext K Variety Center Occurrence)
+    (productWithProjectiveLine : Variety → Variety)
+    (projectiveFourSpace : Variety) (Rational : Variety → Prop)
+    (cubic : Variety)
+    (input : Applications.CubicResidueMarkerOneStepInput context
+      productWithProjectiveLine projectiveFourSpace Rational cubic) :
+    ¬ Rational (productWithProjectiveLine cubic) :=
+  Applications.cubicThreefold_oneProjectiveLine_not_rational_of_residueMarker
+    context productWithProjectiveLine projectiveFourSpace Rational cubic input
+
+/-- Reviewer-facing framed primitive-sixth proof that a smooth cubic
+threefold remains irrational after multiplication by one projective line.  Its
+conditional context has the same occurrence-indexed shape as the residue
+context and invokes the same descent theorem. -/
+theorem cubicThreefold_oneProjectiveLine_not_rational_of_framedMarker
+    {Variety Center Occurrence : Type*}
+    (context : Quantum.FramedSixthMarkerContext Variety Center Occurrence)
+    (productWithProjectiveLine : Variety → Variety)
+    (projectiveFourSpace : Variety) (Rational : Variety → Prop)
+    (cubic : Variety)
+    (input : Applications.CubicFramedMarkerOneStepInput context
+      productWithProjectiveLine projectiveFourSpace Rational cubic) :
+    ¬ Rational (productWithProjectiveLine cubic) :=
+  Applications.cubicThreefold_oneProjectiveLine_not_rational_of_framedMarker
+    context productWithProjectiveLine projectiveFourSpace Rational cubic input
 
 /-- Reviewer-facing transport across two birational rank-two projective
 bundles, the formal deduction used for the genus-eight Fano application. -/
@@ -5592,34 +5661,6 @@ theorem rankTwoProjectiveBundle_packet_transport
     packet.multiplicity leftBase = packet.multiplicity rightBase :=
   Quantum.rankTwoProjectiveBundle_transport packet input leftFormula rightFormula
     bundleDimension bundlesBirational
-
-/-- Reviewer-facing irrationality deduction from a nonzero packet invariant. -/
-theorem irrational_of_nonzero_packet
-    {Variety : Type*} (packet : Quantum.PacketData Variety)
-    (input : Quantum.DimensionFourBirationalInput packet)
-    (Rational : Variety → Prop)
-    {object comparison : Variety}
-    (objectDimension : packet.dimension object ≤ 4)
-    (objectNonzero : packet.multiplicity object ≠ 0)
-    (comparisonZero : packet.multiplicity comparison = 0)
-    (rationalComparison : Rational object → input.birational object comparison) :
-    ¬ Rational object :=
-  Quantum.not_rational_of_nonzero_multiplicity packet input Rational objectDimension
-    objectNonzero comparisonZero rationalComparison
-
-/-- Reviewer-facing form of the cubic-threefold one-step irrationality
-deduction.  The input structure exposes every external quantum and geometric
-premise used by the proof. -/
-theorem cubicThreefold_oneStep_irrational_of_packet_inputs
-    {Variety : Type*} (packet : Quantum.PacketData Variety)
-    (birationalInput : Quantum.DimensionFourBirationalInput packet)
-    (geometry : Applications.CubicThreefoldGeometry Variety)
-    {cubic : Variety}
-    (input : Applications.CubicThreefoldOneStepInput
-      packet birationalInput geometry cubic) :
-    ¬ geometry.Rational (geometry.productWithProjectiveLine cubic) :=
-  Applications.cubicThreefold_oneStepStabilization_not_rational
-    packet birationalInput geometry input
 
 /-- Reviewer-facing packet transport from an associated cubic threefold to a
 genus-eight Fano threefold, conditional on the typed projective-bundle and flop
@@ -5735,52 +5776,6 @@ theorem genusEight_oneStep_irrational_of_atom_inputs
   ⟨Applications.genusEight_stabilization_birational_cubicStabilization input,
     Applications.genusEight_oneStepStabilization_not_rational_of_atomInputs stabilization
       input cubicInput⟩
-
-/-- Reviewer-facing value of the residue discriminant of the small even zero
-packet of a smooth cubic threefold.  The matrix is the residue of the canonical
-elementary modification in the adapted frame, and the invariant is the
-discriminant of its characteristic polynomial. -/
-theorem cubicZeroPacket_residueDiscriminant_eq :
-    Quantum.residueDiscriminant Quantum.cubicZeroPacketResidue = 4 / 9 :=
-  Quantum.residueDiscriminant_cubicZeroPacketResidue
-
-/-- Reviewer-facing vanishing of the residue discriminant of the even
-connection of a smooth projective curve of genus at least two, for every value
-of the Euler-characteristic parameter.  The modified residue has a repeated
-eigenvalue. -/
-theorem curve_residueDiscriminant_eq_zero (eulerCharacteristic : ℚ) :
-    Quantum.residueDiscriminant (Quantum.curveResidue eulerCharacteristic) = 0 :=
-  Quantum.residueDiscriminant_curveResidue eulerCharacteristic
-
-/-- Reviewer-facing exclusion of low-dimensional representatives of the cubic
-zero-packet atom.  Its residue discriminant is `4 / 9` while a curve
-representative would force `0`, and its even rank is two while a nef-canonical
-surface representative would force even rank at least three. -/
-theorem cubicAtom_not_represented_in_dimension_le_two
-    {Variety Atom : Type*}
-    {ledger : Quantum.OrdinaryAtomLedger Variety Atom}
-    {stabilization : Quantum.ProjectiveLineStabilizationInput ledger}
-    {exclusion : Quantum.LowDimensionalExclusionInput ledger}
-    {cubic : Variety} {atom : Atom}
-    (input : Applications.CubicAtomOneStepInput ledger stabilization exclusion cubic atom)
-    (witness : Variety) (witnessDimension : ledger.dimension witness ≤ 2) :
-    ledger.multiplicity witness atom = 0 :=
-  Applications.cubicAtom_multiplicity_eq_zero_of_dimension_le_two input witness witnessDimension
-
-/-- Reviewer-facing form of the atomic one-step irrationality deduction for a
-cubic threefold.  The input structure exposes the ordinary Hodge-atom premises:
-the projective-bundle formula for atomic compositions, the ordinary
-non-rationality criterion, the surface and curve analysis, and the parity ranks
-and residue discriminant of the cubic zero-packet atom. -/
-theorem cubicThreefold_oneStep_irrational_of_atom_inputs
-    {Variety Atom : Type*}
-    {ledger : Quantum.OrdinaryAtomLedger Variety Atom}
-    (stabilization : Quantum.ProjectiveLineStabilizationInput ledger)
-    {exclusion : Quantum.LowDimensionalExclusionInput ledger}
-    {cubic : Variety} {atom : Atom}
-    (input : Applications.CubicAtomOneStepInput ledger stabilization exclusion cubic atom) :
-    ¬ ledger.Rational (ledger.productWithProjectiveLine cubic) :=
-  Applications.cubicAtom_oneStepStabilization_not_rational stabilization input
 
 /-- Reviewer-facing small even block reduction of a smooth cubic threefold.
 Over a field of characteristic zero and for a nonzero square root `r` of three
@@ -6005,50 +6000,6 @@ theorem cubicProductProjectiveLine_sixthMultiplicity_eq_four_of_block_exponents
           (geometry.productWithProjectiveSpace cubic 1)).sixthMultiplicity = 4 :=
   Applications.cubicProductProjectiveLine_sixthMultiplicity_eq_four geometry input
     exponentMonodromy
-
-/-- Reviewer-facing framed-monodromy route to one-step irrationality of a smooth
-cubic threefold.  Three numerical inputs of the earlier assembly of this route
-are now proved rather than assumed: the framed count two for the cubic
-threefold, which follows from the small even block reduction; its doubling under
-multiplication by a projective line; and the vanishing of the count on
-projective four-space.  The premises that remain are the manuscript's product
-formula for a product with a projective space, involutivity of the framed
-monodromy of a point, the passage from the exponents of the reduced rank-two
-block to framed formal monodromy, the birational input carrying weak
-factorization with vanishing center contributions, the dimension bound on the
-stabilized fourfold, and the birational comparison with projective four-space
-supplied by rationality. -/
-theorem cubicThreefold_oneStep_not_rational_of_framed_product_inputs
-    {Variety : Type*}
-    (geometry : Applications.ProjectiveProductGeometry Variety)
-    (input : Applications.ProjectiveProductInput geometry)
-    (dimension : Variety → ℕ)
-    (birationalInput : Quantum.DimensionFourBirationalInput
-      (Applications.framedProductPacketData geometry dimension))
-    (Rational : Variety → Prop)
-    (exponentMonodromy : ∀ cubic, geometry.isSmoothCubicThreefold cubic →
-      ∀ firstExponent secondExponent : ℚ,
-        Quantum.cubicIndicialPolynomial =
-            (Polynomial.X - Polynomial.C firstExponent) *
-              (Polynomial.X - Polynomial.C secondExponent) →
-          (geometry.framedMonodromy cubic).operator.charpoly =
-            (Polynomial.X -
-                Polynomial.C
-                  (Complex.exp (2 * (Real.pi : ℂ) * Complex.I * (firstExponent : ℂ)))) *
-              (Polynomial.X -
-                Polynomial.C
-                  (Complex.exp (2 * (Real.pi : ℂ) * Complex.I * (secondExponent : ℂ)))) *
-                (Polynomial.X - Polynomial.C 1) ^ 2)
-    {cubic : Variety} (smooth : geometry.isSmoothCubicThreefold cubic)
-    (stabilizedDimension :
-      dimension (geometry.productWithProjectiveSpace cubic 1) ≤ 4)
-    (rationalComparison : Rational (geometry.productWithProjectiveSpace cubic 1) →
-      birationalInput.birational (geometry.productWithProjectiveSpace cubic 1)
-        (geometry.projectiveSpace 4)) :
-    ¬ Rational (geometry.productWithProjectiveSpace cubic 1) :=
-  Applications.cubicThreefold_oneStep_not_rational_of_framed_product_inputs geometry
-    input dimension birationalInput Rational exponentMonodromy smooth
-    stabilizedDimension rationalComparison
 
 /-- Reviewer-facing statement that the regular coefficient of an even rank-two
 atomic factor preserves the nilpotent line.  The line is the image of the

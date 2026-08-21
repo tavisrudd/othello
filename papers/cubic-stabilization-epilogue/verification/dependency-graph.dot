@@ -51,7 +51,7 @@ digraph manuscript {
   "thm:all-degree-graph-saturation" [fillcolor="#fde8c8", tooltip="fragment"];
   "thm:every-cubic" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
   "thm:every-cubic-conditional" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
-  "thm:marker-ledger" [fillcolor="#fde8c8", tooltip="fragment"];
+  "thm:marker-ledger" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
   "thm:nu6-birational-invariance" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
   "thm:separation-family" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
   "thm:six-axis-divided-powers" [fillcolor="#fde8c8", tooltip="fragment"];

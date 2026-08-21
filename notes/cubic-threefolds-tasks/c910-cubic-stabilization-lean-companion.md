@@ -7,7 +7,8 @@
 ## Objective
 
 Build a referee-facing, Mathlib-only Lean companion for
-`papers/cubic-stabilization-epilogue/`.  The authoritative package lives at
+[`papers/cubic-stabilization-epilogue/`](../../papers/cubic-stabilization-epilogue/).
+The authoritative package lives at
 `papers/cubic-stabilization-epilogue/lean/` and is exported as part of the
 paper repository.  Nothing is duplicated under `lean/TavisRuddFiniteGeom/` or
 in a second standalone Lean repository.
@@ -101,6 +102,23 @@ spine is strictly `m = 1` and does not consume or modify Gamma-row work.
 The package has a pinned standalone Nix and Mathlib environment.  Its Lean
 sources build through the guarded queue, and `make check` is green over the
 reviewer interface's audited terminals.
+
+**Categorical proof-spine checkpoint, 2026-08-20.** The reviewer-facing
+headline now runs through `EffectiveBlockLedger` and
+`OccurrenceIndexedMarker`: one free effective ledger, one arbitrary-monoid
+fold, and one dimension-parameterized weak-factorization descent theorem. The
+rank-two residue marker and the finer primitive-sixth framed marker are
+distinct presentations that invoke that same theorem, with strict `m = 1`
+cubic applications. The old ordinary Hodge-atom and framed-packet headline
+wrappers have been removed from `PaperInterface`; they remain only as
+non-headline supporting material where still used. QDM block construction,
+comparison theorems, factorization, and geometric center nullity are explicit
+premises. Gamma-row and all-`m` work are out of scope and unchanged. Current
+audit: 53 manuscript claims, 6 absent, 20 fragmentary, 26 conditional, 1
+complete; 308 reviewer terminals, of which 83 are machinery. The aggregate
+Lean gate, source audit, axiom-log audit, and 50-page manuscript gate are green.
+Governing plan:
+[`../2026-08-20-c910-categorical-proof-spine-plan.md`](../2026-08-20-c910-categorical-proof-spine-plan.md).
 
 **Post-restructure state, 2026-08-18.**  The author's 2026-08-16 atomic
 restructure of the manuscript replaced the proof of the headline: Theorem 1.1

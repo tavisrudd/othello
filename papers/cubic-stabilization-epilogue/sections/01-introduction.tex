@@ -13,9 +13,8 @@ stabilization it does not predict rationality for smooth cubic threefolds.
 \begin{theorem}[One-step irrationality]
 \label{thm:every-cubic}
 \coverage{conditional_deduction}%
-\lean{cubicZeroPacket_residueDiscriminant_eq, curve_residueDiscriminant_eq_zero,%
-  cubicAtom_not_represented_in_dimension_le_two,%
-  cubicThreefold_oneStep_irrational_of_atom_inputs}%
+\lean{rankTwoResidueMarker_eq_of_birational,%
+  cubicThreefold_oneProjectiveLine_not_rational_of_residueMarker}%
 For every smooth complex cubic threefold \(X\), the fourfold
 \(X\times\PP^1\) is irrational.
 \end{theorem}
@@ -235,9 +234,7 @@ the finer invariant.
 \begin{theorem}[One-step irrationality from the framed invariant]
 \label{thm:every-cubic-conditional}
 \coverage{conditional_deduction}%
-\lean{irrational_of_nonzero_packet,%
-  cubicThreefold_oneStep_irrational_of_packet_inputs,%
-  cubicThreefold_oneStep_not_rational_of_framed_product_inputs}%
+\lean{cubicThreefold_oneProjectiveLine_not_rational_of_framedMarker}%
 Assume Hypothesis~5.7R of Section~\ref{sec:framed-monodromy}, and
 Hypothesis~5.7T there only for surface centers that are neither minimal nor
 geometrically ruled.  Let

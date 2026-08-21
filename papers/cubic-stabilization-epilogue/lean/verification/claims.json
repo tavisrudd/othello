@@ -8,32 +8,28 @@
       "manuscript_label": "thm:every-cubic",
       "coverage": "conditional_deduction",
       "declarations": [
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicZeroPacket_residueDiscriminant_eq",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.curve_residueDiscriminant_eq_zero",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicAtom_not_represented_in_dimension_le_two",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicThreefold_oneStep_irrational_of_atom_inputs"
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.rankTwoResidueMarker_eq_of_birational",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicThreefold_oneProjectiveLine_not_rational_of_residueMarker"
       ],
-      "objects": "An abstract effective additive marker ledger (retaining the historical Lean type name OrdinaryAtomLedger), a dimension and rationality predicate, projective-line stabilization, low-dimensional marker exclusion, and the explicit cubic and curve residue matrices.",
-      "hypotheses": "The marker doubles under product with a projective line, vanishes on every center of dimension at most two, is birationally invariant by the supplied ledger criterion, and the cubic rank-two block has nonzero residue discriminant while the projective endpoint has zero marker.",
-      "conclusion": "Lean checks the cubic residue value 4/9, the curve value zero, the abstract low-dimensional exclusion, and the final contradiction proving that the cubic threefold times a projective line is not rational.",
-      "cautions": "Conditional deduction at the formal boundary. Lean does not construct the categorical QDM groupoid, Iritani comparison maps, marker fold, actual center occurrences, weak factorization, or cubic quantum connection. Those are proved or imported in the manuscript; the formal terminal checks their final typed composition. The word Atom in legacy terminal names denotes the abstract marked block and is not an imported Hodge-atom theorem.",
+      "objects": "A direct rank-two residue block presentation over a supplied commutative coefficient ring, its effective multiset ledger and natural-valued fold, smooth projective varieties through dimension four, smooth centers, actual specialized center occurrences, projective-line stabilization, projective four-space, and a rationality predicate.",
+      "hypotheses": "Regular isomorphism preserves the residue weight; a typed occurrence-indexed factorization provider supplies every blowup and blowdown formula; actual smooth center occurrences of dimension at most two have zero marker; the cubic marker equals one; the projective-line formula doubles it; projective four-space has marker zero; and rationality supplies the birational comparison.",
+      "conclusion": "The marker of the stabilized cubic is nonzero, categorical descent identifies it with the zero marker of projective four-space under rationality, and therefore the cubic threefold times one projective line is not rational.",
+      "cautions": "Conditional deduction at the formal boundary. Lean constructs the regular-isomorphism quotient, effective ledger, additive fold, occurrence-indexed telescope, and quotient descent, but it does not construct the cubic QDM, the Iritani or Iritani–Koto comparisons, weak factorization, or the geometric low-dimensional nullity witnesses. Those inputs remain explicit fields of the direct residue context.",
       "statement_digest": "90fbb0916c1f7b4e7b7e57bb8ea581e3d45f3914e6a6f66d4aba23e241428af4",
-      "terminal_digest": "edf2c1b78e663380e1dbea55deb2ce075e1d7edfc66b778c3a24410344af42d4"
+      "terminal_digest": "389cbf4676bc90c860a3fd5aa997e952444689c490cf7c1f1c3a1739e1f03e01"
     },
     {
       "manuscript_label": "thm:every-cubic-conditional",
       "coverage": "conditional_deduction",
       "declarations": [
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.irrational_of_nonzero_packet",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicThreefold_oneStep_irrational_of_packet_inputs",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicThreefold_oneStep_not_rational_of_framed_product_inputs"
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicThreefold_oneProjectiveLine_not_rational_of_framedMarker"
       ],
-      "objects": "An abstract geometric signature naming smooth complex cubic threefolds, product with projective one-space, projective four-space, and rationality, together with a natural-valued framed primitive-sixth multiplicity; and, for the third terminal, the product-formula signature carrying a distinguished point, the projective spaces, and the product of a variety with a projective space.",
-      "hypotheses": "For the first two terminals: the carrier satisfies the smooth-cubic predicate, its framed multiplicity equals two, the named product obeys the rank-two formula and dimension bound, projective four-space has zero multiplicity, and rationality supplies the required birational relation. The third terminal assumes instead the product formula for a product with a projective space, involutivity of the framed monodromy of a point, and the passage from the exponents of the reduced rank-two block to framed formal monodromy, and derives from them the multiplicity two of the cubic, its doubling under multiplication by a projective line, and the vanishing on projective four-space. Birational invariance of the multiplicity through dimension four, which the manuscript proves under its two residual hypotheses, is part of the supplied birational input in every case.",
-      "conclusion": "The named product of the specified cubic carrier with projective one-space is not rational.",
-      "cautions": "This is the finer framed specialization of the same categorical marker ledger. It is conditional in the manuscript on 5.7R and on 5.7T only for surface centers neither minimal nor geometrically ruled. Lean treats the QDM comparisons, actual occurrence nullity, and birational comparison as typed premises and checks the numerical endpoint contradiction.",
+      "objects": "A framed block retaining a marked small section and original-loop monodromy, its effective multiset ledger and primitive-sixth fold, smooth projective fourfold objects, smooth centers, actual specialized center occurrences, projective-line stabilization, projective four-space, and rationality.",
+      "hypotheses": "Regular isomorphism preserves primitive-sixth multiplicity; the residual framed hypotheses supply the occurrence-indexed comparison provider and center nullity; the cubic marker equals two; the projective-line formula doubles it; projective four-space has marker zero; and rationality supplies the birational comparison.",
+      "conclusion": "The stabilized cubic has framed marker four, categorical descent contradicts the zero marker of projective four-space under rationality, and hence the stabilized cubic is irrational.",
+      "cautions": "Conditional deduction. The framed block presentation and fold are distinct from the residue presentation but invoke the same generic descent theorem. Lean does not construct the framed QDM comparisons or prove residual Hypotheses 5.7R and 5.7T; their exact operation and occurrence-nullity consequences remain typed fields of the framed context.",
       "statement_digest": "a7216fd631de449d08be8f4158a70ab0c1760a55acabe8c2126c431d4a38b633",
-      "terminal_digest": "79aca35ea9e3f1b088f7defd419f2755cffef8a3e580c75c5485152849583eb0"
+      "terminal_digest": "9479a907ef1bb210435469321e8bf0f339d64cbff1849ab1bb44358a1568bb12"
     },
     {
       "manuscript_label": "cor:voisin-separation",
@@ -616,14 +612,14 @@
       "manuscript_label": "thm:nu6-birational-invariance",
       "coverage": "conditional_deduction",
       "declarations": [
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.packet_multiplicity_birational_in_dimension_four"
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.framedSixthMarker_eq_of_birational"
       ],
-      "objects": "The natural-valued primitive-sixth marker fold on the occurrence-indexed QDM block ledger, together with a typed dimension-four birational comparison input.",
-      "hypotheses": "The manuscript residual hypotheses 5.7R and 5.7T provide the framed projective-bundle and blowup laws and low-dimensional occurrence nullity. Lean packages the resulting birational comparison as a typed premise and checks its application.",
-      "conclusion": "Birational smooth projective varieties through dimension four have equal primitive-sixth marker, and the manuscript then cancels the projective-line factor for threefolds.",
-      "cautions": "Conditional deduction. Lean does not construct the QDM block groupoid, the fold, the Iritani comparisons, weak factorization, or low-dimensional vanishing; those are the mathematical content of the manuscript and typed premises of the terminal. The generic telescope is registered separately under thm:marker-ledger.",
+      "objects": "The effective ledger of framed blocks retaining a marked small section and original-loop monodromy, its natural-valued primitive-sixth fold, dimension-four varieties, smooth centers, and actual specialized center occurrences.",
+      "hypotheses": "Regular isomorphism preserves primitive-sixth multiplicity, and the residual hypotheses provide a typed occurrence-indexed factorization provider and vanishing of every actual smooth center occurrence of dimension at most two.",
+      "conclusion": "Birational smooth projective fourfold objects have equal primitive-sixth marker.",
+      "cautions": "Conditional deduction. Lean constructs the framed effective fold and applies the generic occurrence-indexed descent theorem. It does not construct the QDM comparison provider or the residual center-nullity witnesses; those remain explicit context fields. The generic theorem is registered separately under thm:marker-ledger.",
       "statement_digest": "f06d4c4134c117aa3dad0eb06c8fbb0b8091d4d757911468a8bd774ba005888b",
-      "terminal_digest": "9445d5061e7256e4cea77570e05429effc39f3cf75eb89f064b1f764580a7437"
+      "terminal_digest": "b8a927005e3504613ca8b5f3c28a781d79df550f2e78ff7dfb4d999cbe8dd171"
     },
     {
       "manuscript_label": "lem:simple-euler-block",
@@ -820,17 +816,18 @@
     },
     {
       "manuscript_label": "thm:marker-ledger",
-      "coverage": "fragment",
+      "coverage": "conditional_deduction",
       "declarations": [
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.packet_multiplicity_eq_of_preserving_chain",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.packet_multiplicity_eq_of_typed_weak_factorization"
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.effectiveBlockLedger_fold_unique",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.occurrenceIndexedMarker_eq_of_birational",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.occurrenceIndexedMarker_descends_to_birationalClasses"
       ],
-      "objects": "A natural-valued additive packet marker on abstract varieties, a chain of marker-preserving steps, and a typed weak-factorization chain recording smooth endpoints, codimension, center dimensions, specializations, and correction terms.",
-      "hypotheses": "Every step preserves the marker, or equivalently every actual center correction through dimension two vanishes in the supplied dimension-four factorization input.",
-      "conclusion": "The marker values at the endpoints agree by telescoping along the factorization chain.",
-      "cautions": "Fragment. The manuscript theorem allows an arbitrary effective commutative target monoid and constructs its geometric input from weak factorization; Lean models only a natural-valued packet and takes the typed factorization and operation laws as premises.",
+      "objects": "Regular-isomorphism components of typed blocks, their effective multiset ledger, an additive fold to an arbitrary commutative additive monoid, abstract varieties and smooth centers, and a separately indexed type of actual specialized center occurrences.",
+      "hypotheses": "A typed factorization provider supplies blowup and blowdown chains in ambient dimension d, each blowup records its codimension and a literal Fin(c-1)-indexed family of actual occurrences, and every actual smooth center occurrence with centerDimension + 2 at most d has zero folded correction.",
+      "conclusion": "The fold is the unique additive extension of its component weight; birationally related endpoints have equal markers; and the marker descends to the quotient set of birational classes.",
+      "cautions": "Conditional deduction. Lean proves the free effective fold, arbitrary-monoid and arbitrary-dimension telescope, occurrence preservation, and quotient descent. Weak factorization and the geometric operation formulas are supplied as typed provider data rather than formalized from algebraic geometry. The QDM comparisons that produce those formulas remain outside this row and are registered under prop:qdm-operation-ledgers.",
       "statement_digest": "2bb9891d902b7d680b3e27c41fc85124396cac2dd7783e4733564570f00eff1b",
-      "terminal_digest": "8ab2ceca143537057f227bba0e03a83a2ba115c46cc77b63b86144d93539cc3b"
+      "terminal_digest": "e06cea782440fa08974a45b671c9d05cc0337cfb01c9019e42fe7202a9e52f0a"
     },
     {
       "manuscript_label": "prop:qdm-operation-ledgers",

@@ -27,12 +27,14 @@ theorem-like environment in the manuscript and classifies each one as absent
 from Lean, represented by an exact but strictly weaker fragment, represented by
 a conditional deduction with every external premise exposed in the theorem
 type, or completely formalized from the manuscript's stated hypotheses.  Of the
-atomic route to the one-stabilization theorem, Lean checks the residue
-discriminants of the cubic zero packet and of a curve, the resulting exclusion
-of low-dimensional representatives, and the final non-rationality deduction from
-the ordinary Hodge-atom premises; the construction of the F-bundle, the spectral
-cover, the atom, and the elementary modification is not formalized and appears
-as typed premises.  The small even block reduction behind the cubic packet is
+direct-QDM route to the one-stabilization theorem, Lean constructs the effective
+block ledger and its universal additive fold, keeps every blowup correction as
+an actual indexed occurrence, and proves the dimension-parameterized
+weak-factorization descent theorem.  Both the rank-two residue marker and the
+finer framed primitive-sixth marker are literal specializations of that common
+categorical theorem.  Their QDM block decompositions, comparison theorems, and
+geometric low-dimensional nullity statements remain explicit typed premises.
+The small even block reduction behind the cubic packet is
 checked from the displayed connection matrices through the modified residue and
 its indicial polynomial, so the packet value no longer requires a supplied
 characteristic polynomial, only the passage from residue exponents to framed
@@ -53,8 +55,8 @@ truncated Chern class arithmetic, the Betti numbers, the degree count placing th
 whole odd cohomology in that packet, and the constancy of rank on a connected
 component.
 
-Checked coverage snapshot: 53 claims; 6 absent; 21 fragmentary; 25 conditional;
-1 complete; 311 reviewer terminals, of which 83 are machinery serving no current
+Checked coverage snapshot: 53 claims; 6 absent; 20 fragmentary; 26 conditional;
+1 complete; 308 reviewer terminals, of which 83 are machinery serving no current
 manuscript claim.
 
 Those machinery terminals are kernel-checked and reusable, and the claim map records for each one

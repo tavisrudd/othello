@@ -24,13 +24,13 @@ namespace Quantum
 
 open scoped BigOperators
 
-universe u v w x
+universe u v w x y
 
 /-- Ledger data for varieties and for the actual specialized center
 occurrences appearing in operation formulas. -/
 structure OccurrenceIndexedLedger
-    (Variety : Type u) (Center Occurrence : Type v)
-    (presentation : BlockPresentation.{w}) where
+    (Variety : Type u) (Center : Type v) (Occurrence : Type w)
+    (presentation : BlockPresentation.{x}) where
   varietyLedger : Variety → presentation.EffectiveLedger
   occurrenceLedger : Occurrence → presentation.EffectiveLedger
   occurrenceSource : Occurrence → Center
@@ -41,17 +41,17 @@ structure OccurrenceIndexedLedger
 
 namespace OccurrenceIndexedLedger
 
-variable {Variety : Type u} {Center Occurrence : Type v}
-variable {presentation : BlockPresentation.{w}}
+variable {Variety : Type u} {Center : Type v} {Occurrence : Type w}
+variable {presentation : BlockPresentation.{x}}
 
 /-- The marker of a variety obtained by folding its effective ledger. -/
-def varietyMarker {A : Type x} [AddCommMonoid A]
+def varietyMarker {A : Type y} [AddCommMonoid A]
     (data : OccurrenceIndexedLedger Variety Center Occurrence presentation)
     (fold : presentation.EffectiveLedger →+ A) (variety : Variety) : A :=
   fold (data.varietyLedger variety)
 
 /-- The marker of one actual specialized center occurrence. -/
-def occurrenceMarker {A : Type x} [AddCommMonoid A]
+def occurrenceMarker {A : Type y} [AddCommMonoid A]
     (data : OccurrenceIndexedLedger Variety Center Occurrence presentation)
     (fold : presentation.EffectiveLedger →+ A) (occurrence : Occurrence) : A :=
   fold (data.occurrenceLedger occurrence)
@@ -61,10 +61,10 @@ end OccurrenceIndexedLedger
 /-- The folded numerical content of a projective-bundle comparison.  The
 geometric comparison theorem is supplied as data rather than asserted here. -/
 structure ProjectiveBundleMarkerFormula
-    {Variety : Type u} {Center Occurrence : Type v}
-    {presentation : BlockPresentation.{w}}
+    {Variety : Type u} {Center : Type v} {Occurrence : Type w}
+    {presentation : BlockPresentation.{x}}
     (data : OccurrenceIndexedLedger Variety Center Occurrence presentation)
-    {A : Type x} [AddCommMonoid A]
+    {A : Type y} [AddCommMonoid A]
     (fold : presentation.EffectiveLedger →+ A)
     (base total : Variety) (rank : ℕ) : Prop where
   baseSmooth : data.smoothProjective base
@@ -77,10 +77,10 @@ structure ProjectiveBundleMarkerFormula
 `occurrence` names every one of the `codimension - 1` comparison occurrences;
 it is not replaced by a set of possible marker values. -/
 structure OccurrenceBlowupStep
-    {Variety : Type u} {Center Occurrence : Type v}
-    {presentation : BlockPresentation.{w}}
+    {Variety : Type u} {Center : Type v} {Occurrence : Type w}
+    {presentation : BlockPresentation.{x}}
     (data : OccurrenceIndexedLedger Variety Center Occurrence presentation)
-    {A : Type x} [AddCommMonoid A]
+    {A : Type y} [AddCommMonoid A]
     (fold : presentation.EffectiveLedger →+ A)
     (ambientDimension : ℕ) (lower upper : Variety) where
   center : Center
@@ -102,10 +102,10 @@ structure OccurrenceBlowupStep
 /-- Vanishing for every actual occurrence whose smooth source has codimension
 at least two in ambient dimension `d`. -/
 def LowDimensionalOccurrenceNullity
-    {Variety : Type u} {Center Occurrence : Type v}
-    {presentation : BlockPresentation.{w}}
+    {Variety : Type u} {Center : Type v} {Occurrence : Type w}
+    {presentation : BlockPresentation.{x}}
     (data : OccurrenceIndexedLedger Variety Center Occurrence presentation)
-    {A : Type x} [AddCommMonoid A]
+    {A : Type y} [AddCommMonoid A]
     (fold : presentation.EffectiveLedger →+ A) (d : ℕ) : Prop :=
   ∀ occurrence,
     data.smoothCenter (data.occurrenceSource occurrence) →
@@ -114,10 +114,10 @@ def LowDimensionalOccurrenceNullity
 
 namespace OccurrenceBlowupStep
 
-variable {Variety : Type u} {Center Occurrence : Type v}
-variable {presentation : BlockPresentation.{w}}
+variable {Variety : Type u} {Center : Type v} {Occurrence : Type w}
+variable {presentation : BlockPresentation.{x}}
 variable (data : OccurrenceIndexedLedger Variety Center Occurrence presentation)
-variable {A : Type x} [AddCommMonoid A]
+variable {A : Type y} [AddCommMonoid A]
 variable (fold : presentation.EffectiveLedger →+ A)
 variable {d : ℕ} {lower upper : Variety}
 
@@ -146,12 +146,12 @@ end OccurrenceBlowupStep
 
 /-- One unoriented link in a weak-factorization chain. -/
 inductive OccurrenceBlowupLink
-    {Variety : Type u} {Center Occurrence : Type v}
-    {presentation : BlockPresentation.{w}}
+    {Variety : Type u} {Center : Type v} {Occurrence : Type w}
+    {presentation : BlockPresentation.{x}}
     (data : OccurrenceIndexedLedger Variety Center Occurrence presentation)
-    {A : Type x} [AddCommMonoid A]
+    {A : Type y} [AddCommMonoid A]
     (fold : presentation.EffectiveLedger →+ A) (d : ℕ) :
-    Variety → Variety → Type (max u v w x)
+    Variety → Variety → Type (max u v w x y)
   | forward {lower upper}
       (step : OccurrenceBlowupStep data fold d lower upper) :
       OccurrenceBlowupLink data fold d lower upper
@@ -161,10 +161,10 @@ inductive OccurrenceBlowupLink
 
 namespace OccurrenceBlowupLink
 
-variable {Variety : Type u} {Center Occurrence : Type v}
-variable {presentation : BlockPresentation.{w}}
+variable {Variety : Type u} {Center : Type v} {Occurrence : Type w}
+variable {presentation : BlockPresentation.{x}}
 variable (data : OccurrenceIndexedLedger Variety Center Occurrence presentation)
-variable {A : Type x} [AddCommMonoid A]
+variable {A : Type y} [AddCommMonoid A]
 variable (fold : presentation.EffectiveLedger →+ A)
 variable {d : ℕ} {left right : Variety}
 
@@ -182,12 +182,12 @@ end OccurrenceBlowupLink
 
 /-- A composable chain of occurrence-indexed blowup and blowdown links. -/
 inductive OccurrenceFactorizationChain
-    {Variety : Type u} {Center Occurrence : Type v}
-    {presentation : BlockPresentation.{w}}
+    {Variety : Type u} {Center : Type v} {Occurrence : Type w}
+    {presentation : BlockPresentation.{x}}
     (data : OccurrenceIndexedLedger Variety Center Occurrence presentation)
-    {A : Type x} [AddCommMonoid A]
+    {A : Type y} [AddCommMonoid A]
     (fold : presentation.EffectiveLedger →+ A) (d : ℕ) :
-    Variety → Variety → Type (max u v w x)
+    Variety → Variety → Type (max u v w x y)
   | refl (variety : Variety) : OccurrenceFactorizationChain data fold d variety variety
   | step {source middle target}
       (link : OccurrenceBlowupLink data fold d source middle)
@@ -196,10 +196,10 @@ inductive OccurrenceFactorizationChain
 
 namespace OccurrenceFactorizationChain
 
-variable {Variety : Type u} {Center Occurrence : Type v}
-variable {presentation : BlockPresentation.{w}}
+variable {Variety : Type u} {Center : Type v} {Occurrence : Type w}
+variable {presentation : BlockPresentation.{x}}
 variable (data : OccurrenceIndexedLedger Variety Center Occurrence presentation)
-variable {A : Type x} [AddCommMonoid A]
+variable {A : Type y} [AddCommMonoid A]
 variable (fold : presentation.EffectiveLedger →+ A)
 variable {d : ℕ} {source target : Variety}
 
@@ -218,10 +218,10 @@ end OccurrenceFactorizationChain
 
 /-- A factorization provider for a chosen birational equivalence relation. -/
 structure BirationalFactorizationProvider
-    {Variety : Type u} {Center Occurrence : Type v}
-    {presentation : BlockPresentation.{w}}
+    {Variety : Type u} {Center : Type v} {Occurrence : Type w}
+    {presentation : BlockPresentation.{x}}
     (data : OccurrenceIndexedLedger Variety Center Occurrence presentation)
-    {A : Type x} [AddCommMonoid A]
+    {A : Type y} [AddCommMonoid A]
     (fold : presentation.EffectiveLedger →+ A) (d : ℕ)
     (birational : Setoid Variety) where
   factorization : ∀ {left right}, birational.r left right →
@@ -229,10 +229,10 @@ structure BirationalFactorizationProvider
 
 namespace BirationalFactorizationProvider
 
-variable {Variety : Type u} {Center Occurrence : Type v}
-variable {presentation : BlockPresentation.{w}}
+variable {Variety : Type u} {Center : Type v} {Occurrence : Type w}
+variable {presentation : BlockPresentation.{x}}
 variable (data : OccurrenceIndexedLedger Variety Center Occurrence presentation)
-variable {A : Type x} [AddCommMonoid A]
+variable {A : Type y} [AddCommMonoid A]
 variable (fold : presentation.EffectiveLedger →+ A) (d : ℕ)
 variable (birational : Setoid Variety)
 

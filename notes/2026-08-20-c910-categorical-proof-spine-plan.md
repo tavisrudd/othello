@@ -48,7 +48,8 @@ conditional deductions, 1 complete claim, and 311 reviewer terminals, of which
 
 ## Implementation checkpoint: 2026-08-20
 
-The foundation is now present in two guarded, independently building modules.
+The main categorical spine and both strict one-stabilization specializations
+are now present and wired into the reviewer interface.
 
 - `Quantum/EffectiveBlockLedger.lean` defines regular-isomorphism components,
   their effective multiset ledger, invariant-weight descent, and the unique
@@ -58,10 +59,21 @@ The foundation is now present in two guarded, independently building modules.
   `Fin (codimension - 1)` occurrence family.  The module proves one-link,
   chain, birational-relation, and quotient-descent forms of the generic
   dimension-`d` marker theorem.
+- `Quantum/RankTwoResidueMarker.lean` and
+  `Applications/CubicResidueMarkerOneStep.lean` specialize that theorem to the
+  direct rank-two residue fold and its cubic one-step contradiction.
+- `Quantum/FramedSixthMarker.lean` and
+  `Applications/CubicFramedMarkerOneStep.lean` specialize the same theorem to
+  the finer primitive-sixth framed fold and its conditional cubic one-step
+  contradiction.
 
-Neither module is yet imported by `PaperInterface`, so this checkpoint changes
-no manuscript coverage or reviewer-terminal count.  The next tranche is the
-natural-valued compatibility wrapper, followed by the residue specialization.
+`PaperInterface`, the three affected manuscript claims, the TeX provenance
+annotations, axiom audit, claim map, dependency graph, and coverage snapshot
+now use this route.  The old ordinary Hodge-atom and framed-packet headline
+wrappers are no longer reviewer terminals.  QDM block construction, comparison
+theorems, weak factorization, and low-dimensional geometric nullity remain
+explicit premises at the intended trust boundary.  This checkpoint contains
+no Gamma-row, `m = 2`, or all-`m` work.
 
 ## Target formal architecture
 

@@ -76,9 +76,10 @@ marker.
 
 \begin{theorem}[Occurrence-indexed marker ledger]
 \label{thm:marker-ledger}
-\coverage{fragment}%
-\lean{packet_multiplicity_eq_of_preserving_chain,%
-  packet_multiplicity_eq_of_typed_weak_factorization}%
+\coverage{conditional_deduction}%
+\lean{effectiveBlockLedger_fold_unique,%
+  occurrenceIndexedMarker_eq_of_birational,%
+  occurrenceIndexedMarker_descends_to_birationalClasses}%
 \imports{AKMW:weak-factorization}%
 Let \(w:\mathcal L_{\mathcal T}\to A\) be a marker fold unchanged by the
 allowed regular scalar extensions and formal coordinate changes.  Suppose
