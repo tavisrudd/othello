@@ -69,6 +69,70 @@ def foldBlocks {A : Type v} [AddCommMonoid A]
     presentation.EffectiveLedger →+ A :=
   presentation.fold (presentation.descendWeight weight invariant)
 
+/-- A blockwise matching between two effective ledgers across which a chosen
+fold is preserved.  The matching is data, rather than an equality of ledgers:
+its paired components may differ, as happens when regular scalar extension or
+formal coordinate transport changes the component representative.  Repeated
+pairs retain occurrence multiplicity. -/
+structure FoldCompatibleLedgerComparison {A : Type v} [AddCommMonoid A]
+    (presentation : BlockPresentation.{u})
+    (fold : presentation.EffectiveLedger →+ A)
+    (left right : presentation.EffectiveLedger) where
+  matching : Multiset (presentation.Component × presentation.Component)
+  leftLedger : matching.map Prod.fst = left
+  rightLedger : matching.map Prod.snd = right
+  preservesFold : ∀ pair ∈ matching,
+    fold ({pair.1} : presentation.EffectiveLedger) =
+      fold ({pair.2} : presentation.EffectiveLedger)
+
+namespace FoldCompatibleLedgerComparison
+
+/-- A blockwise fold-compatible comparison gives equality only after applying
+the chosen fold.  No equality of components or effective ledgers is assumed. -/
+theorem fold_eq {A : Type v} [AddCommMonoid A]
+    (presentation : BlockPresentation.{u})
+    (fold : presentation.EffectiveLedger →+ A)
+    {left right : presentation.EffectiveLedger}
+    (comparison : FoldCompatibleLedgerComparison presentation fold left right) :
+    fold left = fold right := by
+  have matchedFold :
+      ∀ matching : Multiset (presentation.Component × presentation.Component),
+        (∀ pair ∈ matching,
+          fold ({pair.1} : presentation.EffectiveLedger) =
+            fold ({pair.2} : presentation.EffectiveLedger)) →
+        fold (matching.map Prod.fst) = fold (matching.map Prod.snd) := by
+    intro matching preserves
+    induction matching using Multiset.induction_on with
+    | empty => simp
+    | cons pair tail inductionHypothesis =>
+        have headPreserved : fold ({pair.1} : presentation.EffectiveLedger) =
+            fold ({pair.2} : presentation.EffectiveLedger) :=
+          preserves pair (by simp)
+        have tailPreserved : ∀ entry ∈ tail,
+            fold ({entry.1} : presentation.EffectiveLedger) =
+              fold ({entry.2} : presentation.EffectiveLedger) := by
+          intro entry membership
+          exact preserves entry (by simp [membership])
+        simp only [Multiset.map_cons]
+        calc
+          fold (pair.1 ::ₘ tail.map Prod.fst) =
+              fold ({pair.1} : presentation.EffectiveLedger) +
+                fold (tail.map Prod.fst) := by
+            rw [← Multiset.singleton_add, map_add]
+          _ = fold ({pair.2} : presentation.EffectiveLedger) +
+                fold (tail.map Prod.snd) := by
+            rw [headPreserved, inductionHypothesis tailPreserved]
+          _ = fold (pair.2 ::ₘ tail.map Prod.snd) := by
+            rw [← Multiset.singleton_add, map_add]
+  calc
+    fold left = fold (comparison.matching.map Prod.fst) := by
+      rw [comparison.leftLedger]
+    _ = fold (comparison.matching.map Prod.snd) :=
+      matchedFold comparison.matching comparison.preservesFold
+    _ = fold right := by rw [comparison.rightLedger]
+
+end FoldCompatibleLedgerComparison
+
 /-- Descending an invariant weight and evaluating it on a represented component
 recovers the original block weight. -/
 @[simp]

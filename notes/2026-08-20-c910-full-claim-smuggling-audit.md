@@ -4,7 +4,7 @@
 
 This audit covers all 53 manuscript claim rows in
 `papers/cubic-stabilization-epilogue/lean/verification/claims.json`, with
-special attention to the 21 fragmentary and 25 conditional rows.  Code
+special attention to the 21 fragmentary and now 26 conditional rows.  Code
 provenance is not treated as evidence: every reviewer-facing terminal was
 checked against its Lean type, proof body or immediate application theorem,
 manuscript statement, and scope caution.
@@ -48,6 +48,10 @@ fragment, even when the represented algebraic composition is complete.
 6. `cor:voisin-separation` was downgraded from conditional deduction to
    fragment.  Lean proves the fibrewise separation composition, but the
    countable union and codimension-three locus are not represented at all.
+7. `prop:qdm-operation-ledgers` now formalizes the exact categorical adapter
+   from a multiplicity-preserving matching of transported block components to
+   the two folded operation formulas.  Pairwise singleton-fold preservation is
+   explicit; the cited QDM comparisons must still construct the matching.
 
 ## Row-by-row verdict
 
@@ -104,7 +108,7 @@ fragment, even when the represented algebraic composition is complete.
 | 49 | `prop:hirzebruch-specialized-vanishing` | conditional | Pass: simple spectrum plus the supplied LT implication yields unipotent framed characteristic polynomial and zero multiplicity. |
 | 50 | `lem:center-maps-monomial` | absent | Honest absent row; no proxy theorem is counted for the missing geometric monomiality result. |
 | 51 | `thm:marker-ledger` | conditional | Pass: the effective fold, occurrence-indexed telescope, and quotient descent are proved; factorization and QDM operation providers are explicit data. |
-| 52 | `prop:qdm-operation-ledgers` | absent | Honest absent row; Iritani/Iritani--Koto comparison formulas are not rebranded as kernel-checked constructions. |
+| 52 | `prop:qdm-operation-ledgers` | conditional | Pass after repair: a multiplicity-preserving matching of transported components, with singleton fold values preserved pairwise, yields both folded operation formulas. The matching itself remains the exact external QDM-comparison input. |
 | 53 | `prop:atomic-lowdim` | conditional | Pass: classification induction produces intrinsic nullity and then actual occurrence nullity through an explicit source-center comparison. |
 
 ## Bottom line
@@ -145,7 +149,7 @@ says so.
 | Why the one-`P¹` framed consequence can cancel while the generic theorem cannot | Settled | The application fold lands in `N`, where equality of two doubled values cancels; this is a specialization after descent, not a cancellation assumption on the generic target. |
 | Whether the arbitrary ambient-dimension telescope smuggles an all-stabilizations theorem | Settled | Ambient dimension `d` indexes weak factorization only. Every application and every product statement remains the single `m=1` stabilization; no iteration terminal exists. |
 | The codimension-three Voisin locus | Open, honestly graded | No moduli-space or codimension object occurs in Lean. The row is now a fragment; closure would require a separate formal model of the cited locus, not another logical wrapper. |
-| Actual Iritani/Iritani--Koto QDM operation ledgers | Open at the declared trust boundary | `prop:qdm-operation-ledgers` remains absent. The exact comparison constructions, regularity/parity adapters, and occurrence-specialization maps would have to be formalized rather than added as stronger fields. |
+| Actual Iritani/Iritani--Koto QDM comparison construction | Open at the declared trust boundary | The categorical passage from a fold-compatible block matching to both operation formulas is now formalized. The exact comparison constructions, regularity/parity adapters, and occurrence-specialization maps producing that matching remain external. |
 | Monomiality of the geometric center maps | Open at the declared trust boundary | `lem:center-maps-monomial` remains absent. The algebraic consumer is formalized, but the associated-graded Novikov identification is not. |
 | Four `A₅`/Eckardt geometric rows | Open cycle/moduli work | `lem:eckardt-involution`, `prop:eckardt-reflection-group`, `prop:A5-not-coprime`, and `lem:pencil-loci-coordinates` remain absent; the last has registered CAS evidence but no Lean certificate. |
 

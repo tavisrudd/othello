@@ -85,8 +85,11 @@ no Gamma-row, `m = 2`, or all-`m` work.
 The subsequent full-claim audit is recorded in
 [`2026-08-20-c910-full-claim-smuggling-audit.md`](2026-08-20-c910-full-claim-smuggling-audit.md).
 It covers all 53 rows, not only the categorical cluster. The resulting checked
-partition is 6 absent, 21 fragmentary, 25 conditional deductions, and 1
-complete claim over 306 reviewer terminals, 83 of them machinery. The source,
+partition is now 5 absent, 21 fragmentary, 26 conditional deductions, and 1
+complete claim over 309 reviewer terminals, 83 of them machinery. The QDM
+operation-ledger row moved from absent to conditional after formalizing the
+fold-compatible component-matching adapter; construction of the matching from
+the comparison theorems remains an explicit boundary. The source,
 axiom-log, and 50-page manuscript gates pass.
 
 ### Execution status

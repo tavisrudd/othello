@@ -830,13 +830,18 @@
     },
     {
       "manuscript_label": "prop:qdm-operation-ledgers",
-      "coverage": "absent",
-      "declarations": [],
-      "objects": "The generic even QDM block groupoid and an additive marker fold transported across projective-bundle and blowup comparison isomorphisms.",
-      "hypotheses": "Regularity in z, parity preservation, a common generic coefficient spine, invertible bulk Jacobians, and faithful occurrence-indexed center specialization.",
-      "conclusion": "The QDM comparison theorems supply the projective-bundle and blowup marker formulas.",
-      "cautions": "No Lean terminal formalizes the categorical QDM comparisons or their coefficient and reconstruction adapters; this proposition rests on the precisely cited theorems of Iritani and Iritani–Koto plus the manuscript’s adapter arguments.",
-      "statement_digest": "cf4ca20a8441fcd9519cc73b6f5c8e6ef2b944fe9224fd9bd27a1d5f945afd1c"
+      "coverage": "conditional_deduction",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.qdmProjectiveBundle_markerFormula_of_blockComparison",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.qdmBlowup_markerFormula_of_occurrenceBlockComparison",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.qdmBlowup_step_of_occurrenceBlockComparison"
+      ],
+      "objects": "The generic even QDM block presentation, its effective multiset ledger, an additive marker fold, variety ledgers, actual occurrence-indexed center ledgers, and a finite multiplicity-preserving matching of transported block components on a common coefficient spine.",
+      "hypotheses": "For each paired component in the supplied comparison matching, the chosen fold has equal singleton values after the regular scalar extension and formal-coordinate transport. The projective-bundle matching identifies the total-space blocks with rank copies of the base blocks. The blowup matching identifies the blowup blocks with the ambient blocks plus the literal finite family of center-occurrence blocks. Smoothness, positivity of the bundle rank, and the projective-bundle dimension formula are explicit premises of the packaged projective-bundle result.",
+      "conclusion": "Lean derives the folded projective-bundle and occurrence-indexed blowup marker formulas by additive transport across the component matching. It also packages the blowup formula with the stated center, source equality for every indexed occurrence, and the smoothness, dimension, and codimension metadata consumed by categorical descent.",
+      "cautions": "Conditional deduction. Lean proves the categorical additivity step without assuming equality of the two effective ledgers and without taking either final marker formula as a premise. The mapped packaged-step terminal makes actual center-occurrence provenance visible rather than merely summing an arbitrary finite family. Lean does not construct the geometric QDM blocks, the common coefficient spine, the regular comparison maps, the invertible bulk Jacobians, or the component matching from Iritani's and Iritani–Koto's theorems; those remain exactly the manuscript's cited geometric and analytic inputs.",
+      "statement_digest": "cf4ca20a8441fcd9519cc73b6f5c8e6ef2b944fe9224fd9bd27a1d5f945afd1c",
+      "terminal_digest": "3ad27243c78fb69319cdab4c3dd99d6e660d6c120442398e742fd88cd488ef73"
     },
     {
       "manuscript_label": "prop:atomic-lowdim",

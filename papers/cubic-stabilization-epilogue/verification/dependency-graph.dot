@@ -43,7 +43,7 @@ digraph manuscript {
   "prop:no-elliptic-product" [fillcolor="#fde8c8", tooltip="fragment"];
   "prop:principal-gluing-packet" [fillcolor="#fde8c8", tooltip="fragment"];
   "prop:projective-product-nu" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
-  "prop:qdm-operation-ledgers" [fillcolor="#ffffff", tooltip="absent"];
+  "prop:qdm-operation-ledgers" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
   "prop:rank2-rigidity" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
   "prop:ranktwo-framed-germ" [fillcolor="#fde8c8", tooltip="fragment"];
   "prop:residue-discriminant-exponents" [fillcolor="#fde8c8", tooltip="fragment"];

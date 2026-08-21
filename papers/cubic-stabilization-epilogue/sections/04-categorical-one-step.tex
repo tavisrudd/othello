@@ -163,7 +163,10 @@ generic numerical QDM of \(Z\).
 
 \begin{proposition}[QDM operation ledgers]
 \label{prop:qdm-operation-ledgers}
-\coverage{absent}%
+\coverage{conditional_deduction}%
+\lean{qdmProjectiveBundle_markerFormula_of_blockComparison,%
+  qdmBlowup_markerFormula_of_occurrenceBlockComparison,%
+  qdmBlowup_step_of_occurrenceBlockComparison}%
 \imports{IritaniKoto:thm-5.1,IritaniBlowup:thm-5.18}%
 Let a marker fold be preserved by the regular scalar extensions and formal
 coordinate changes described above.  The projective-bundle and blowup QDM
@@ -202,8 +205,9 @@ the fold.  The relevant categorical operation is instead the additivity square
 \end{CD}
 \label{diag:marker-fold-additivity}
 \end{equation}
-Proposition~\ref{prop:qdm-operation-ledgers} supplies only the resulting
-equalities in \(A\), as required by Theorem~\ref{thm:marker-ledger}.
+At marker level, Proposition~\ref{prop:qdm-operation-ledgers} supplies the
+resulting equalities in \(A\); its packaged blowup adapter also retains the
+occurrence metadata used by Theorem~\ref{thm:marker-ledger}.
 
 \subsection{The rank-two residue marker}
 

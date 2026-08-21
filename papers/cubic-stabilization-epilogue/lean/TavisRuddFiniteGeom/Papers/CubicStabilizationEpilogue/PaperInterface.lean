@@ -5537,6 +5537,83 @@ theorem effectiveBlockLedger_fold_unique
     homomorphism = presentation.fold weight :=
   presentation.fold_unique weight homomorphism onSingleton
 
+/-- Reviewer-facing categorical adapter for the projective-bundle QDM
+comparison.  A multiplicity-preserving block matching on a common coefficient
+spine, with singleton markers preserved pairwise, yields the folded
+projective-bundle marker formula.  Construction of that matching from the
+Iritani--Koto comparison remains an explicit geometric input. -/
+theorem qdmProjectiveBundle_markerFormula_of_blockComparison
+    {Variety Center Occurrence A : Type*} [AddCommMonoid A]
+    {presentation : Quantum.BlockPresentation}
+    (data : Quantum.OccurrenceIndexedLedger Variety Center Occurrence presentation)
+    (fold : presentation.EffectiveLedger →+ A)
+    (base total : Variety) (rank : ℕ)
+    (baseSmooth : data.smoothProjective base)
+    (totalSmooth : data.smoothProjective total)
+    (rankPositive : 1 ≤ rank)
+    (dimensionFormula : data.dimension total = data.dimension base + rank - 1)
+    (comparison : Quantum.BlockPresentation.FoldCompatibleLedgerComparison
+      presentation fold (data.varietyLedger total)
+        (rank • data.varietyLedger base)) :
+    Quantum.ProjectiveBundleMarkerFormula data fold base total rank :=
+  Quantum.projectiveBundleMarkerFormula_of_ledgerComparison
+    data fold base total rank baseSmooth totalSmooth rankPositive
+      dimensionFormula comparison
+
+/-- Reviewer-facing categorical adapter for the blowup QDM comparison.  A
+blockwise matching on a common coefficient spine, preserving the chosen fold
+and retaining the literal finite family of center occurrences, yields the
+folded blowup marker formula.  Construction of the matching from Iritani's
+comparison remains an explicit geometric input. -/
+theorem qdmBlowup_markerFormula_of_occurrenceBlockComparison
+    {Variety Center Occurrence A : Type*} [AddCommMonoid A]
+    {presentation : Quantum.BlockPresentation}
+    (data : Quantum.OccurrenceIndexedLedger Variety Center Occurrence presentation)
+    (fold : presentation.EffectiveLedger →+ A)
+    (lower upper : Variety) {codimension : ℕ}
+    (occurrence : Fin (codimension - 1) → Occurrence)
+    (comparison : Quantum.BlockPresentation.FoldCompatibleLedgerComparison
+      presentation fold (data.varietyLedger upper)
+        (data.varietyLedger lower +
+          ∑ index, data.occurrenceLedger (occurrence index))) :
+    data.varietyMarker fold upper = data.varietyMarker fold lower +
+      ∑ index, data.occurrenceMarker fold (occurrence index) :=
+  Quantum.blowupMarkerFormula_of_ledgerComparison
+    data fold lower upper occurrence comparison
+
+/-- Reviewer-facing packaged blowup adapter.  In addition to the folded
+formula, this terminal retains the center, the source equality for every
+indexed occurrence, and the smoothness, dimension, and codimension metadata
+consumed by occurrence-indexed weak-factorization descent. -/
+theorem qdmBlowup_step_of_occurrenceBlockComparison
+    {Variety Center Occurrence A : Type*} [AddCommMonoid A]
+    {presentation : Quantum.BlockPresentation}
+    (data : Quantum.OccurrenceIndexedLedger Variety Center Occurrence presentation)
+    (fold : presentation.EffectiveLedger →+ A)
+    (ambientDimension : ℕ) (lower upper : Variety)
+    (center : Center) (codimension : ℕ)
+    (occurrence : Fin (codimension - 1) → Occurrence)
+    (occurrenceSource :
+      ∀ index, data.occurrenceSource (occurrence index) = center)
+    (lowerSmooth : data.smoothProjective lower)
+    (upperSmooth : data.smoothProjective upper)
+    (centerSmooth : data.smoothCenter center)
+    (lowerDimension : data.dimension lower = ambientDimension)
+    (upperDimension : data.dimension upper = ambientDimension)
+    (codimensionAtLeastTwo : 2 ≤ codimension)
+    (centerAmbientDimension :
+      data.centerDimension center + codimension = ambientDimension)
+    (comparison : Quantum.BlockPresentation.FoldCompatibleLedgerComparison
+      presentation fold (data.varietyLedger upper)
+        (data.varietyLedger lower +
+          ∑ index, data.occurrenceLedger (occurrence index))) :
+    Nonempty
+      (Quantum.OccurrenceBlowupStep data fold ambientDimension lower upper) :=
+  ⟨Quantum.occurrenceBlowupStep_of_ledgerComparison
+    data fold ambientDimension lower upper center codimension occurrence
+      occurrenceSource lowerSmooth upperSmooth centerSmooth lowerDimension
+      upperDimension codimensionAtLeastTwo centerAmbientDimension comparison⟩
+
 /-- Reviewer-facing low-dimensional nullity theorem for the direct residue
 marker.  A classified center induction, intrinsic projective-bundle and
 point-blowup formulas, and the comparison with every actual QDM occurrence

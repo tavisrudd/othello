@@ -127,8 +127,13 @@ stored the same existential witness later returned as a conclusion. It now
 stores a chosen parameter and model plus the individual moduli-point,
 separated-form, and projective-equivalence facts, from which Lean constructs
 the existential. The referee's final verdict is MINOR with no remaining
-conclusion laundering. Current audit: 53 manuscript
-claims, 6 absent, 21 fragmentary, 25 conditional, 1 complete; 306 reviewer
+conclusion laundering. The next categorical pass formalized the honest
+operation adapter: a multiplicity-preserving matching of transported
+components, with the fold preserved pairwise, now yields both the
+projective-bundle and occurrence-indexed blowup marker formulas. The geometric
+construction of that matching from the cited QDM comparisons remains explicit.
+Current audit: 53 manuscript
+claims, 5 absent, 21 fragmentary, 26 conditional, 1 complete; 309 reviewer
 terminals, of which 83 are machinery. The aggregate Lean gate, source audit,
 axiom-log audit, and warning-free 50-page manuscript gate are green.
 Governing plan:

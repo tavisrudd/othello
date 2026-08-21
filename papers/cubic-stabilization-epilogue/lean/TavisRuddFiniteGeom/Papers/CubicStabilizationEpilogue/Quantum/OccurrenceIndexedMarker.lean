@@ -73,6 +73,37 @@ structure ProjectiveBundleMarkerFormula
   dimensionFormula : data.dimension total = data.dimension base + rank - 1
   markerFormula : data.varietyMarker fold total = rank • data.varietyMarker fold base
 
+/-- A projective-bundle block matching across which the fold is preserved
+produces the folded projective-bundle marker formula.  The comparison itself
+is an explicit input: this theorem checks the categorical additivity step and
+does not construct the geometric QDM comparison. -/
+theorem projectiveBundleMarkerFormula_of_ledgerComparison
+    {Variety : Type u} {Center : Type v} {Occurrence : Type w}
+    {presentation : BlockPresentation.{x}}
+    (data : OccurrenceIndexedLedger Variety Center Occurrence presentation)
+    {A : Type y} [AddCommMonoid A]
+    (fold : presentation.EffectiveLedger →+ A)
+    (base total : Variety) (rank : ℕ)
+    (baseSmooth : data.smoothProjective base)
+    (totalSmooth : data.smoothProjective total)
+    (rankPositive : 1 ≤ rank)
+    (dimensionFormula : data.dimension total = data.dimension base + rank - 1)
+    (comparison : BlockPresentation.FoldCompatibleLedgerComparison
+      presentation fold (data.varietyLedger total)
+        (rank • data.varietyLedger base)) :
+    ProjectiveBundleMarkerFormula data fold base total rank where
+  baseSmooth := baseSmooth
+  totalSmooth := totalSmooth
+  rankPositive := rankPositive
+  dimensionFormula := dimensionFormula
+  markerFormula := by
+    change fold (data.varietyLedger total) = rank • fold (data.varietyLedger base)
+    calc
+      fold (data.varietyLedger total) =
+          fold (rank • data.varietyLedger base) :=
+        comparison.fold_eq presentation fold
+      _ = rank • fold (data.varietyLedger base) := by simp
+
 /-- A directed blowup formula from `lower` to `upper`.  The function
 `occurrence` names every one of the `codimension - 1` comparison occurrences;
 it is not replaced by a set of possible marker values. -/
@@ -98,6 +129,76 @@ structure OccurrenceBlowupStep
   markerFormula :
     data.varietyMarker fold upper = data.varietyMarker fold lower +
       ∑ index, data.occurrenceMarker fold (occurrence index)
+
+/-- An occurrence-indexed block matching across which the fold is preserved
+gives the folded blowup marker formula, with every center occurrence retained
+separately. -/
+theorem blowupMarkerFormula_of_ledgerComparison
+    {Variety : Type u} {Center : Type v} {Occurrence : Type w}
+    {presentation : BlockPresentation.{x}}
+    (data : OccurrenceIndexedLedger Variety Center Occurrence presentation)
+    {A : Type y} [AddCommMonoid A]
+    (fold : presentation.EffectiveLedger →+ A)
+    (lower upper : Variety) {codimension : ℕ}
+    (occurrence : Fin (codimension - 1) → Occurrence)
+    (comparison : BlockPresentation.FoldCompatibleLedgerComparison
+      presentation fold (data.varietyLedger upper)
+        (data.varietyLedger lower +
+          ∑ index, data.occurrenceLedger (occurrence index))) :
+    data.varietyMarker fold upper = data.varietyMarker fold lower +
+      ∑ index, data.occurrenceMarker fold (occurrence index) := by
+  change fold (data.varietyLedger upper) =
+    fold (data.varietyLedger lower) +
+      ∑ index, fold (data.occurrenceLedger (occurrence index))
+  calc
+    fold (data.varietyLedger upper) =
+        fold (data.varietyLedger lower +
+          ∑ index, data.occurrenceLedger (occurrence index)) :=
+      comparison.fold_eq presentation fold
+    _ = fold (data.varietyLedger lower) +
+        ∑ index, fold (data.occurrenceLedger (occurrence index)) := by simp
+
+/-- Package an occurrence-indexed fold-compatible block matching and the
+geometric metadata into the directed blowup step consumed by categorical
+descent. -/
+def occurrenceBlowupStep_of_ledgerComparison
+    {Variety : Type u} {Center : Type v} {Occurrence : Type w}
+    {presentation : BlockPresentation.{x}}
+    (data : OccurrenceIndexedLedger Variety Center Occurrence presentation)
+    {A : Type y} [AddCommMonoid A]
+    (fold : presentation.EffectiveLedger →+ A)
+    (ambientDimension : ℕ) (lower upper : Variety)
+    (center : Center) (codimension : ℕ)
+    (occurrence : Fin (codimension - 1) → Occurrence)
+    (occurrenceSource :
+      ∀ index, data.occurrenceSource (occurrence index) = center)
+    (lowerSmooth : data.smoothProjective lower)
+    (upperSmooth : data.smoothProjective upper)
+    (centerSmooth : data.smoothCenter center)
+    (lowerDimension : data.dimension lower = ambientDimension)
+    (upperDimension : data.dimension upper = ambientDimension)
+    (codimensionAtLeastTwo : 2 ≤ codimension)
+    (centerAmbientDimension :
+      data.centerDimension center + codimension = ambientDimension)
+    (comparison : BlockPresentation.FoldCompatibleLedgerComparison
+      presentation fold (data.varietyLedger upper)
+        (data.varietyLedger lower +
+          ∑ index, data.occurrenceLedger (occurrence index))) :
+    OccurrenceBlowupStep data fold ambientDimension lower upper where
+  center := center
+  codimension := codimension
+  occurrence := occurrence
+  occurrenceSource := occurrenceSource
+  lowerSmooth := lowerSmooth
+  upperSmooth := upperSmooth
+  centerSmooth := centerSmooth
+  lowerDimension := lowerDimension
+  upperDimension := upperDimension
+  codimensionAtLeastTwo := codimensionAtLeastTwo
+  centerAmbientDimension := centerAmbientDimension
+  markerFormula :=
+    blowupMarkerFormula_of_ledgerComparison data fold lower upper occurrence
+      comparison
 
 /-- Vanishing for every actual occurrence whose smooth source has codimension
 at least two in ambient dimension `d`. -/
