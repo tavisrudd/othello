@@ -55,6 +55,7 @@ caveats; none is covered by C778--C780.
 
 ### `paper-frob-eq`
 
+- **C937 `[paper-frob-eq]` [QUEUED; NEXT]** — revise the canonical manuscript under `papers/style-guide.md`: impose the mate-line/count/correction/Q25/repair hierarchy with layered exposition, subordinate the Clebsch/profile/saturation corollaries, add a concise principal MDS translation without changing the paper's finite-geometry identity, synchronize the abstract/theorems/conclusion (including the stale Q25 `4/3` multiplicity), sharpen the formal/computational trust boundary without pre-empting C318/C319, and produce a clean current PDF → `notes/2026-08-21-c937-equivariant-paper-layered-revision.md`.
 - **C152 `[paper-frob-eq]` [QUEUED]** — quadratic-Frobenius replacement graph and component census → `notes/2026-07-14-c152-orbit-replacement-graph.md`.
 - **C318 `[paper-frob-eq]` [QUEUED]** — add the Q25 residual layer to the arcs trust manifest: theorem-map rows for the orbit/classification theorems, the residual `*Data/` trees with their scale and consuming checker, and the trusted-surface statement distinguishing generic-predicate leaves from bespoke per-row leaves → `notes/2026-07-18-c151-certificate-portfolio-fable-review.md`.
 - **C319 `[paper-frob-eq]` [QUEUED; C151 cost now measured at 1:57:09 serial]** — decide whether to replace the literal canonical-class links with a verified canonicalizer, or to demote the exact Q25 classification to a Lean-checked reduction plus reproducible computation → `notes/2026-07-18-c151-certificate-portfolio-fable-review.md`.

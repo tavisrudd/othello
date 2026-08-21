@@ -5,14 +5,15 @@
 **Canonical paper:** `papers/equivariant-robust-completion/` —
 *Frobenius-equivariant pair extension and robust repair of eight-arcs*
 
-**Date:** 2026-07-19
+**Date:** 2026-08-21
 **Status:** OPEN — C142, C143, C148–C151, C331, C363 reported. The exact Q25 minimum is closed at the
 semantic level: the universal `≥ 32` bound, five-row attainment, the certified residual-orbit layer,
 the semantic lift of the lower bound, equality-orbit exhaustion, and its semantic lift are all
 kernel-checked. `32` is the exact semantic minimum and the five orbits are the complete extremal set
 up to normalization. The citation audit gating priority language is discharged and all four lane
-claims survive. What remains is bookkeeping (C318, C319) and the exchange graph (C152).
-**Tasks:** C142–C143, C148–C152, C318–C319, C331, C363
+claims survive. C937 is the next step: a layered-exposition and manuscript closeout pass. Release
+bookkeeping C318/C319 follows; the exchange graph C152 remains optional unless adopted.
+**Tasks:** C142–C143, C148–C152, C318–C319, C331, C363, C937
 
 Companion discovery log:
 [`../2026-07-18-alt-orbit-repair-discovery-track.md`](../2026-07-18-alt-orbit-repair-discovery-track.md).
@@ -36,6 +37,7 @@ handoff is finished, `go` and `next?` refer to the next open-queue step below.
   generated Q25 certificate sources only under C143/C151
 - `notes/2026-07-14-c142-*` through `notes/2026-07-14-c152-*`, this handoff, and its companion
   archive
+- `notes/2026-08-21-c937-*` for the manuscript-revision report
 - this lane's rows in `notes/2026-07-07-codex-task-queue.md` and its routing row in `CLAUDE.md`
 - `papers/equivariant-robust-completion/` and its index/planning rows only after the corresponding
   theorem and trust gates pass
@@ -114,7 +116,8 @@ statements are in the reports above and their development history is in the comp
 
 | Task | State | Current deliverable |
 |---|---|---|
-| C318 | queued; the lane's next step | Manifest rows for the residual layer, its data trees, and the trusted-surface statement |
+| C937 | queued; the lane's next step | Layered-exposition and hierarchy pass, synchronized Q25 wording, MDS translation, trust-boundary prose, and a clean current PDF |
+| C318 | queued | Manifest rows for the residual layer, its data trees, and the trusted-surface statement |
 | C319 | queued; C151 cost measured at 1:57:09 serial | Decide verified canonicalizer versus demotion to reduction-plus-computation |
 | C152 | queued | Define the orbit-replacement graph, prove the exact local degree identity, then run a component census before considering connectivity |
 
