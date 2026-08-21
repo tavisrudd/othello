@@ -86,17 +86,37 @@ The outer coset of the normalizer \(S_5=N_{S_6}(A_5)\) fixes \(P\), negates
 \(Q\), and therefore sends \(X_t\) to \(X_{-t}\).  Thus \(t\) is the signed
 parameter and \(t^2\) is the unmarked parameter.
 
-On the smooth marked base, the six distinguished dihedral axes in the
-intermediate Jacobian form one relative elliptic norm axis \(\mathcal E\).
-The integral six-axis construction of \cite[Relative six-axis source and
-Principal gluing packet]{RuddEpilogue} identifies the five principal kernels
-with the finite local system
+We use the following precise input from the six-axis construction.
+
+\begin{proposition}[Programme input]\label{prop:programme-input}
+Over the connected smooth marked cubic base \(B^\circ\), there are a relative
+intermediate Jacobian \(\mathcal J\), an elliptic norm axis \(\mathcal E\), and
+an \(A_5\)-equivariant isogeny
+\[
+ f:\mathcal E\otimes(\mathbf Z^\Omega/\mathbf Z\mathbf1)\longrightarrow
+ \mathcal J
+\]
+whose pulled-back polarization is the form induced by \(6I_6-J_6\).  The
+\(A_5\)-stable maximal isotropic halves of its two-primary discriminant form
+the five-sheet local system
 \begin{equation}\label{eq:packet}
- \mathscr P=PP_{\F_4}(\F_4\otimes_{\F_2}\mathcal E[2]).
+ \mathscr P=\PP_{\F_4}(\F_4\otimes_{\F_2}\mathcal E[2]).
 \end{equation}
-The comparison in Proposition~\ref{prop:actual-axis} below records why the
-elliptic curve used to compute the period is this actual norm axis at the
-level needed in \eqref{eq:packet}.
+The actual subgroup \(\ker(f)_{(2)}\) is one section of this candidate packet,
+and it selects one of the two non-\(\F_2\)-rational sheets.
+\end{proposition}
+
+\begin{proof}
+This is exactly \cite[Relative six-axis source and Principal gluing
+packet]{RuddEpilogue}.  The first result constructs \(f\), proves the
+polarization identity, and identifies the two-primary discriminant local
+system.  The second classifies its five stable halves and states separately
+which half is selected by the actual relative kernel.
+\end{proof}
+
+Proposition~\ref{prop:actual-axis} below identifies the elliptic curve used in
+the period calculation with this norm axis, rather than only with an elliptic
+factor in its isogeny class.
 
 \begin{theorem}[Cubic--modular resolvent]\label{thm:main}
 Set \(T=81t^2\).  Then the following assertions hold over the smooth cubic
@@ -234,8 +254,8 @@ Weierstrass model of its elliptic factor are
  a(u)=-\frac{32(u-3)^4}{9(u+1)^3(u+3)^2},\qquad
  b(u)=-\frac{8(u-3)^2(u-1)}{(u+1)(u+3)^2}.
 \]
-In the notation of \cite[Proposition 3.2]{VGY}, the generalized Weierstrass
-coefficients are
+The proof of \cite[Proposition~3.1]{VGY} gives the generalized Weierstrass
+coefficients
 \begin{align*}
  a_1&=b^2/4+b-4,&
  a_3&=(a+b)^2/2+4a+6b-8,\\
@@ -243,13 +263,44 @@ coefficients are
  a_4&=4(a+b-1),\\
  a_6&=(a+b-1)(8-4a-2ab-b^4/16-b^3/2-b^2-4b).
 \end{align*}
-The Fourier change of coordinates from the six-point equation gives
-\(u=ct\), where \(c^2=5\).  Substitution in the standard formulas for
-\(c_4\) and \(\Delta\), followed by \(u^2=5t^2\), yields
+Here is the coordinate comparison.  Index five of the six coordinates by
+\(k\in\F_5\), index the last by \(\infty\), choose a fifth root \(\zeta\), and
+put
+\[
+ z_k=\frac{1}{5}\left(X_0+\sum_{m=1}^4\zeta^{mk}X_m\right),
+ \qquad z_\infty=-X_0.
+\]
+If
+\[
+ c=2\zeta^3+2\zeta^2+1,
+\]
+then \(c^2=5\).  With \(s=ct\), multiplication of \(P+tQ\) by \(25/3\)
+and the reordering
+\((x,u,v,z,y)=(X_4,X_3,X_2,X_1,X_0)\) give
+\begin{align*}
+ &(1-s/3)(xu^2+zv^2)+2(1+s)yuv\\
+ &\qquad +(1+s/3)(z^2u+x^2v)-8y^3+2(1-s)xyz.
+\end{align*}
+Set \(A_-=1-s/3\), \(A_+=1+s/3\).  Replacing \(x,z,y\) by
+\[
+ \frac{2A_-}{A_+}x,\qquad
+ \frac{2A_-}{A_+}z,\qquad
+ \frac{2A_-^2}{A_+(1+s)}y
+\]
+and multiplying the equation by \(A_+/(2A_-^2)\) puts it in the van
+Geemen--Yamauchi normal form, with
+\[
+ a=-\frac{32(s-3)^4}{9(s+1)^3(s+3)^2},\qquad
+ b=-\frac{8(s-3)^2(s-1)}{(s+1)(s+3)^2}.
+\]
+Thus their signed parameter is \(u=s=ct\), and in particular
+\(u^2=5t^2\).  Substitution in the standard formulas for \(c_4\) and
+\(\Delta\) yields
 \begin{equation}\label{eq:j-t}
  j=\frac{9(3t^2+1)(27t^2+1)^3}{t^2}.
 \end{equation}
-This calculation is replayed exactly in the paper's verification bundle.
+The Fourier coefficients, diagonal normalization, and invariant calculation
+are replayed exactly in the paper's verification bundle.
 
 Putting \(T=81t^2\), equation \eqref{eq:j-t} becomes
 \begin{equation}\label{eq:J}
@@ -285,25 +336,69 @@ which does not alter its two-torsion.
 \end{proposition}
 
 \begin{proof}
-The degree-five cyclic quotient construction of
-\cite[Propositions 2.1, 3.1, and 3.2]{VGY} gives the Prym elliptic curve and
-a pullback map to the corresponding norm-fixed elliptic subvariety of the
-intermediate Jacobian.  Pullback followed by norm is multiplication by five,
-so the image is the primitive one-dimensional fixed factor.  On the Prym,
-the principal polarization pulls back as five times its intrinsic principal
-polarization.  The restriction of the intermediate-Jacobian polarization to
-the primitive norm axis is likewise five times its primitive principal
-polarization.  Factoring pullback through that axis and comparing degrees
-therefore gives degree one.  This proves the polarized isomorphism.
+Let \(\widetilde H\to H\) be the étale double cover whose Prym is the
+intermediate Jacobian, and let
+\(\widetilde H_0\to H_0\) be its quotient by the cyclic subgroup of order
+five.  The diagram in \cite[Section~3.2]{VGY} gives a pullback homomorphism
+\[
+ \phi:P_0:=\operatorname{Prym}(\widetilde H_0/H_0)\longrightarrow
+ P:=\operatorname{Prym}(\widetilde H/H)=J(X).
+\]
+Write \(\Xi_0\) and \(\Xi\) for the principal Prym polarizations.  Pullback
+and norm on the two Jacobians compose to multiplication by five.  Moreover,
+the restriction of a Jacobian theta polarization to the Prym of an étale
+double cover is twice its principal Prym polarization.  Restricting the
+Jacobian pullback identity to \(P_0\) therefore gives
+\begin{equation}\label{eq:prym-pullback}
+ 2\phi^*\Xi=10\Xi_0,
+ \qquad\text{hence}\qquad
+ \phi^*\Xi=5\Xi_0.
+\end{equation}
 
-The explicit change to \eqref{eq:tate} gives the displayed
-twist; alternatively, comparing their \(c_4,c_6\) invariants gives the same
-square class.  In characteristic different from two, a quadratic twist
-changes the Galois representation by a scalar \(\{\pm1\}\); that scalar is
-trivial on two-torsion and preserves every cyclic order-three subgroup.
-Hence either comparison identifies the required two-division local system,
-and the cyclic level-three marking descends even when a chosen generator does
-not.
+The image of \(\phi\) is the connected fixed elliptic subvariety for the
+order-five subgroup: this is also the tangent-space calculation in
+\cite[Proposition~3.2]{VGY}.  In the five-dimensional augmentation
+representation, that fixed line is fixed by its dihedral normalizer, so it is
+the primitive dihedral norm axis \(\mathcal E\).  Let
+\(i:\mathcal E\hookrightarrow\mathcal J\) be its inclusion and factor
+\(\phi=i\bar\phi\).  The diagonal entry of the six-axis polarization is five;
+equivalently, \cite[Generic six-axis polarization and Relative six-axis
+source]{RuddEpilogue} gives
+\[
+ i^*\Xi=5\lambda_{\mathcal E}.
+\]
+Combining this with \eqref{eq:prym-pullback} gives
+\[
+ 5\bar\phi^*\lambda_{\mathcal E}=5\lambda_{P_0}.
+\]
+The group of symmetric homomorphisms of elliptic schemes is torsion-free, so
+the factors five cancel.  Taking degrees now forces
+\(\deg\bar\phi=1\).  Thus \(\bar\phi\) is a polarized isomorphism on the open
+where the quotient diagram is smooth.  Both sides are elliptic schemes over
+the regular marked base; the generic isomorphism and its inverse extend
+uniquely by the Néron mapping property.  This also covers the smooth
+parameters at which an auxiliary quotient curve degenerates, as in the
+specialization argument of \cite[Proposition~3.2]{VGY}.
+
+It remains to identify the displayed model.  If \(c_4^{\rm VGY},c_6^{\rm
+VGY}\) and \(c_4^{\rm T},c_6^{\rm T}\) denote the invariants of the two
+Weierstrass equations, the square class of their twist is represented by
+\[
+ q=\frac{c_6^{\rm VGY}c_4^{\rm T}}
+         {c_4^{\rm VGY}c_6^{\rm T}}.
+\]
+After \(T=81u^2/5\), direct factorization gives
+\[
+ \frac{q}{(T+27)(T-729/5)}=
+ \left(
+  \frac{200(u-3)^2}
+  {2187(u+1)^2(u+3)^2(3u^2+5)}
+ \right)^2.
+\]
+This proves the asserted twist class.  In characteristic different from two,
+a quadratic twist tensors the torsion representation by the scalar character
+\(\{\pm1\}\).  It is therefore trivial on two-torsion and preserves every
+cyclic order-three subgroup, although it need not preserve a chosen generator.
 \end{proof}
 
 The proof also explains the role of earlier results.  Roulleau exhibits the
@@ -453,7 +548,8 @@ action to the actual norm axis.  This proves assertion~(5).
 
 \section{Compactification and the cubic boundary}
 
-The coarse orbifold \(X_0(3)\) has two cusps of widths one and three and one
+The modular orbifold attached to \(\Gamma_0(3)\) has two cusps of widths one
+and three and one
 elliptic point of order three.  A primitive parabolic at either cusp reduces
 modulo two to a transposition, so it does not lie in
 \(\Gamma_{\mathrm{sgn}}(6)\), while its square does.  Each cusp consequently
@@ -557,10 +653,44 @@ For
  t_0=-\frac35-\frac65(\zeta^2+\zeta^3),
  \qquad t_0^2=\frac95,
 \]
-direct differentiation gives \(p\in\operatorname{Sing}(X_{t_0})\) and \(Q(p)=0\).
+the Fourier scalar above is
+\(c=1+2(\zeta^2+\zeta^3)\), so \(ct_0=-3\).  The Fourier equation at this
+value is proportional to
+\[
+ F_{\rm ch}=xu^2+zv^2-2yuv-4y^3+4xyz.
+\]
+It has the catalecticant form
+\[
+ F_{\rm ch}=4\det
+ \begin{pmatrix}
+ x&iv/2&y\\
+ iv/2&y&iu/2\\
+ y&iu/2&z
+ \end{pmatrix}.
+\]
+For completeness, write the five Hankel coordinates as \((a,b,c_0,d,e)\).
+The gradient of
+\[
+ ac_0e+2bc_0d-ad^2-b^2e-c_0^3
+\]
+vanishes precisely when
+\[
+ c_0e=d^2,\quad c_0d=be,\quad bc_0=ad,\quad ac_0=b^2,
+ \quad ae+2bd=3c_0^2.
+\]
+If \(c_0\ne0\), the first four equations give \(ae=bd\), and the last then
+gives \(ae=bd=c_0^2\).  If \(c_0=0\), they give \(b=d=0\) and \(ae=0\).
+Thus the reduced singular locus is the rank-one Hankel locus
+\[
+ [a:b:c_0:d:e]=[r^4:r^3s:r^2s^2:rs^3:s^4],
+\]
+a rational normal quartic, and the cubic is its secant variety.  This proves
+directly that \(t_0\) is the asserted chordal value.
+
+Direct differentiation gives \(p\in\operatorname{Sing}(X_{t_0})\) and \(Q(p)=0\).
 Its projective \(A_5\)-orbit \(Z\) has twelve points, all lying on the
-singular rational normal quartic
-\(C=\operatorname{Sing}(X_{t_0})\), and \(Q\) vanishes on
+reduced singular rational normal quartic
+\(C=\operatorname{Sing}(X_{t_0})_{\rm red}\), and \(Q\) vanishes on
 all of them.
 
 The exact linear-algebra calculation is short.  Evaluation of the fifteen
@@ -605,9 +735,15 @@ limit.
 Quadratic generation and \(I_Z(2)=I_C(2)\) recover \(C\) as a scheme; its
 secant variety is the chordal cubic.  The divisor
 \(Z\) uniquely determines \([Q|_C]\in\PP H^0(C,\mathcal O_C(3))\).
-Projective normality lifts it to the normal line \([Q]\) modulo \(I_C(3)\).
-Any fixed line yields an invariant degree-twelve divisor on \(C\simeq\PP^1\),
-necessarily its unique orbit \(Z\) of that length.
+The equivariant normal-space calculation in
+\cite[Lemma~2.5]{ACT} identifies this section with the
+projective normal line \([Q]\) modulo \(I_C(3)\).  Conversely, an
+\(A_5\)-fixed projective normal line is represented by a semi-invariant
+section.  Since \(A_5\) is perfect, it has no nontrivial complex character,
+so the section is invariant.  Its zero divisor is therefore an invariant
+effective divisor of degree twelve on \(C\simeq\PP^1\).  The nontrivial
+icosahedral orbit sizes are \(12,20,30,60\); hence that divisor is the unique
+reduced orbit \(Z\) of length twelve.
 \end{proof}
 
 Only \(T=0\) and \(T=\infty\) are cusps of \(X_0(3)\).  The marked smooth

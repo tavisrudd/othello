@@ -37,7 +37,7 @@ promoted mathematical assertion maps to a kernel-checked declaration.
 
 ## Current status
 
-- **C936 — cold-referee revision required.**  The warning-free nine-page paper
+- **C936 — cold-referee repairs implemented; repair audit pending.**  The warning-free eleven-page paper
   develops the signed nonstandard \(A_5\)-cubic parameter as the
   sign/discriminant resolvent of the actual
   relative norm-axis elliptic two-division cover.  It identifies
@@ -46,13 +46,14 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   modular-interior cubic boundary values.  At the chordal value, an exact
   orbit-and-ideal certificate identifies the transverse divisor with the
   reduced twelve-point icosahedral orbit conditional on identifying the
-  special fibre with the secant cubic of its full singular rational normal
-  quartic.  A genuinely blind van Geemen-lens referee pass found the fatal
-  open gate: the cited source gives only an isogeny to the invariant elliptic
-  factor, while the paper needs a proved relative degree-one polarized
-  comparison with the actual norm axis, including the coordinate, twist, and
-  marked level-three bridges.  The imported candidate-packet/actual-kernel
-  distinction also needs a precise proposition.  A post-close EJ pass further proves
+  special fibre with the secant cubic of its reduced singular rational normal
+  quartic.  The van Geemen-lens referee's geometric findings are now repaired:
+  the paper derives the factor-five Prym pullback and axis polarizations and
+  forces the comparison isogeny to have degree one; an exact Fourier transform
+  proves the coordinate and twist bridges; a separate programme-input
+  proposition distinguishes candidates from the actual kernel; and the
+  chordal fibre is displayed as a Hankel catalecticant.  Integrated `make
+  check` passes; an independent repair audit is pending.  A post-close EJ pass further proves
   that golden orientation turns the rational triple into the cyclic cubic
   splitting cover and gives
   \(t=3(\eta(3\tau)/\eta(\tau))^6\).  Exact algebra and an independent subgroup

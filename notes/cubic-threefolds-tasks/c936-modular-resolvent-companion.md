@@ -4,10 +4,12 @@
 
 **Date:** 2026-08-21
 
-**Status:** cold-referee revision required as of 2026-08-21.  The finite
-resolvent and modular-curve core passes, but the paper is not submission-ready:
-the relative degree-one polarized comparison with the actual norm axis is not
-proved.  Report `../2026-08-21-c936-van-geemen-cold-referee.md`; project report
+**Status:** cold-referee repairs implemented 2026-08-21; independent repair
+audit pending.  The relative degree-one polarized comparison, exact Fourier
+and twist bridges, candidate-packet/actual-kernel distinction, chordal
+catalecticant identification, and boundary equivariance argument are now
+proved; the integrated `make check` gate passes.  Referee report
+`../2026-08-21-c936-van-geemen-cold-referee.md`; project report
 `../2026-08-21-c936-modular-resolvent-companion.md`; strategy memo
 `../2026-08-21-c936-resolvent-rigidity-package-memo.md`.
 
@@ -78,7 +80,7 @@ No mirror/export was performed.  A later genuinely blind cold read found that
 the certificates do not close two geometric identifications on which the
 paper's strongest claims depend.
 
-## Cold-referee acceptance debt
+## Cold-referee findings and repairs
 
 1. **Fatal:** construct the relative map from the van Geemen--Yamauchi
    elliptic curve to the programme's primitive norm axis and prove the two
@@ -97,10 +99,14 @@ paper's strongest claims depend.
 4. **Minor:** complete Corollary 5.2 with the perfection/no-character argument
    for `A_5` and the orbit sizes `12,20,30,60`.
 
-The exact findings and source trust boundaries are in
-`../2026-08-21-c936-van-geemen-cold-referee.md`.  In particular, the previous
-claim that the chordal gate was discharged unconditionally is withdrawn: the
-certificate closes the divisor calculation only after item 3.
+All four repairs are implemented.  The actual-axis proof now derives the
+factor-five Prym pullback polarization, compares it with the factor-five axis
+restriction, and forces degree one.  A Fourier transform proves `u=ct`,
+`c^2=5`, and an invariant ratio proves the twist.  At the chordal value the
+same Fourier equation is four times a Hankel catalecticant, whose reduced
+singular locus is the rank-one rational normal quartic and whose zero cubic is
+its secant variety.  The exact findings, source trust boundaries, and repair
+audit are in `../2026-08-21-c936-van-geemen-cold-referee.md`.
 
 The reopened mathematical pass adds two theorem-level clarifications.  At
 the chordal value `h=5`, the icosahedral genus-five hyperelliptic

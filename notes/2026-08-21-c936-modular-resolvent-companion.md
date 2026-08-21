@@ -471,8 +471,8 @@ The topic-by-topic web queries were:
   structure selected by a golden sheet.
 - **Settled negatively:** no unmarked rational construction can prefer one
   golden orientation.
-- **Settled negatively:** the `S_3)-torsor does not by itself create an
-  irreducible `A_5)-quintic, and the internal and external Kummer cubics are
+- **Settled negatively:** the `S_3`-torsor does not by itself create an
+  irreducible `A_5`-quintic, and the internal and external Kummer cubics are
   not the same cover.
 - **Open:** a direct cubic Picard--Lefschetz computation of the norm-axis
   three-cycle.
@@ -480,5 +480,57 @@ The topic-by-topic web queries were:
   four boundary fibres.
 - **Open:** a direct Griffiths--Dwork derivation of the level-three
   Picard--Fuchs factor from the cubic equation.
-- **Open:** whether any of the fivefold `2)-Hecke quotients are again
+- **Open:** whether any of the fivefold `2`-Hecke quotients are again
   intermediate Jacobians of cubic threefolds.
+
+## Cold-referee repair
+
+The isolated van Geemen-lens report
+`2026-08-21-c936-van-geemen-cold-referee.md` found one fatal and two major
+gaps.  The revision closes all three.
+
+1. **Actual-axis comparison.**  The paper now constructs the map from the
+   quotient Prym to the intermediate Jacobian.  Pullback/norm and the factor
+   two in the principal polarization of an étale double-cover Prym give
+   `phi^*Xi=5Xi_0`.  The already-proved six-axis diagonal entry gives
+   `i^*Xi=5lambda_E`.  Factoring through the unique dihedral fixed axis,
+   cancelling five in the torsion-free symmetric Hom group, and taking
+   degrees proves that the intervening elliptic isogeny has degree one.  The
+   generic isomorphism extends over the regular smooth base by the Néron
+   mapping property.
+2. **Coordinate and twist bridges.**  A displayed Fourier transform of the
+   six coordinates gives the van Geemen--Yamauchi normal form with `u=ct`,
+   `c^2=5`.  An invariant `c4,c6` ratio proves that the remaining quadratic
+   twist has square class `(T+27)(T-729/5)`.  The exact checker now verifies
+   both calculations.
+3. **Programme input.**  A separate proposition now distinguishes the
+   five-sheet packet of candidate stable halves from the single actual
+   kernel section selecting an exotic sheet.
+4. **Chordal identification.**  At `ct=-3`, the Fourier equation is four
+   times a displayed Hankel catalecticant.  Its reduced singular locus is the
+   rank-one Hankel rational normal quartic and the cubic is its secant
+   variety.  This is a direct human proof; the checker verifies the exact
+   determinant identity.  The stronger request that the Jacobian singular
+   scheme equal the reduced quartic would be false: the five gradient
+   quadrics span a proper subspace of the six-dimensional quadratic ideal of
+   a rational normal quartic.  The degeneration theorem needs the reduced
+   singular curve, which is what the revision proves.
+5. **Boundary corollary and terminology.**  The proof now invokes the
+   equivariant normal quotient from published Allcock--Carlson--Toledo
+   Lemma 2.5, the perfection of `A_5`, and the orbit sizes `12,20,30,60`.
+   The VGY coefficient attribution and stack/coarse terminology are also
+   corrected, and the finite-set checker tests the two restricted parities
+   separately.
+
+The updated evidence files are deterministic:
+
+- `verification/resolvent_identities.py`: 9,058 bytes, SHA-256
+  `77222f05c97d9abffeb6637f2cec87f6c03a8bb3a67a0a595c28012c3dc90b5f`;
+- `verification/resolvent-identities.txt`: 829 bytes, SHA-256
+  `b92b7e7f0c3931abba263f474f6df4ebeb0027e5868e8ec6b20a9cdd987fad5c`.
+
+Replay from `papers/cubic-gluing-resolvent/` with `make check`.  The Fourier
+calculation is independently recoverable from the displayed seven
+coefficients in the paper, and the degree-one step is independently checked
+by the two polarization identities and their degree comparison; neither
+claim rests only on the symbolic execution.
