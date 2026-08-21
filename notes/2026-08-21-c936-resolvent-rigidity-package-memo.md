@@ -690,3 +690,10 @@ also determines the unique projective section of
 projective normality this is the class of \(Q\) modulo \(I_C(3)\).  Thus the
 twelve branch points determine both the central fibre and the projective
 first-order normal direction.
+
+There is also no residual equivariant choice in that direction.  Any
+\(A_5\)-fixed projective normal line restricts to an invariant effective
+degree-twelve divisor on the icosahedral \(\mathbf P^1\), hence to its unique
+orbit of length twelve.  The line is therefore unique.  In particular every
+\(A_5\)-invariant transverse first-order deformation of this chordal cubic
+has the same hyperelliptic branch divisor and limit Jacobian.

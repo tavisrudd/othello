@@ -463,6 +463,10 @@ The topic-by-topic web queries were:
   rational normal quartic by its quadrics, its secant chordal cubic, and the
   projective first-order normal direction.  This is stronger than the
   transversality check needed for the limit theorem.
+- **Settled:** that normal direction is the unique (A_5)-fixed point of the
+  projectivized normal space.  Thus the first-order hyperelliptic boundary
+  limit is forced for every (A_5)-invariant transverse deformation of this
+  chordal cubic, not just for the displayed pencil.
 - **Settled:** the `A_3=F_4^times` coincidence is the nonsplit-Cartan
   structure selected by a golden sheet.
 - **Settled negatively:** no unmarked rational construction can prefer one

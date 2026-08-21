@@ -596,17 +596,18 @@ Paulhus proves the displayed isogeny decomposition and elliptic factor
 \begin{corollary}[Boundary reconstruction]\label{cor:boundary-reconstruction}
 The embedded branch orbit \(Z\subset\PP(W)\) determines the pair
 \((C,[Q|_C])\), hence the chordal central fibre and its projective
-first-order normal direction.
+first-order normal direction, which is the unique \(A_5\)-fixed normal line.
+Thus all \(A_5\)-invariant transverse directions have the same hyperelliptic
+limit.
 \end{corollary}
 
 \begin{proof}
 Quadratic generation and \(I_Z(2)=I_C(2)\) recover \(C\) as a scheme; its
 secant variety is the chordal cubic.  The divisor
 \(Z\) uniquely determines \([Q|_C]\in\PP H^0(C,\mathcal O_C(3))\).
-Projective normality identifies this with the normal direction
-\[
- [Q]\in\PP\bigl(H^0(\PP(W),\mathcal O(3))/I_C(3)\bigr).
-\]
+Projective normality lifts it to the normal line \([Q]\) modulo \(I_C(3)\).
+Any fixed line yields an invariant degree-twelve divisor on \(C\simeq\PP^1\),
+necessarily its unique orbit \(Z\) of that length.
 \end{proof}
 
 Only \(T=0\) and \(T=\infty\) are cusps of \(X_0(3)\).  The marked smooth
@@ -642,26 +643,21 @@ form of this global resolvent theorem.
 
 The modular identification here is deliberately limited.  It neither turns
 the five principal kernels into ordinary elliptic isogenies nor promotes the
-whole compactified cubic pencil to a modular stack.  The additional cubic
-boundary points at \(T=-27\) and \(729/5\) are not modular cusps.  At the
-second point Proposition~\ref{prop:chordal-factor} identifies the
-hyperelliptic limit and its elliptic factor.  Related level-three period
-maps occur for the Winger
-pencil \cite[Theorem 1.1 and Proposition 5.1]{LZ}; that is a distinct family and
-is not used to identify the cubic base.  The contribution here is the
-combination of the explicit cubic period coordinate, the polarized
-actual-axis comparison, and the principal-kernel local system into one
-resolvent diagram.
+whole compactified cubic pencil to a modular stack.  In particular
+\(T=-27,729/5\) are cubic boundary points, not modular cusps; at the latter,
+Proposition~\ref{prop:chordal-factor} identifies the hyperelliptic limit.
+The related level-three period map for the Winger pencil
+\cite[Theorem~1.1 and Proposition~5.1]{LZ} concerns a distinct family and is
+not used here.  The result instead combines the explicit cubic period
+coordinate, the polarized actual-axis comparison, and the principal-kernel
+local system.
 
 \paragraph{Reproducibility.}
-The directory \texttt{verification/} contains a deterministic SymPy
-certificate for \eqref{eq:j-t}--\eqref{eq:split} and
-\eqref{eq:disc}, an exact cyclotomic-orbit and ideal-rank certificate for the
-chordal transverse divisor, an independent enumeration of the relevant
-subgroups modulo six, their exact expected outputs, and a SHA-256 manifest.
-The paper's
-\texttt{make check} target replays all three checks, verifies the manifest, lints
-the source, builds the PDF, and rejects TeX warnings.
+The directory \texttt{verification/} contains deterministic exact
+certificates for the resolvent identities, the chordal orbit and ideal ranks,
+and the subgroup enumeration, together with expected outputs and a SHA-256
+manifest.  The \texttt{make check} target replays them, verifies the manifest,
+lints the source, builds the PDF, and rejects TeX warnings.
 
 \scriptsize
 \begin{multicols}{2}
