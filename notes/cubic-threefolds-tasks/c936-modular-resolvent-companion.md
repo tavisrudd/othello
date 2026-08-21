@@ -4,6 +4,9 @@
 
 **Date:** 2026-08-21
 
+**Status:** complete; report
+`../2026-08-21-c936-modular-resolvent-companion.md`
+
 ## Goal
 
 Write a short standalone paper proving that the signed parameter of the
@@ -63,3 +66,9 @@ correspondences, arithmetic trace laws, rational elliptic surfaces, Winger
 shadow-sister comparisons, motivic fifth-power decompositions, and explicit
 Mordell--Weil generators remain outside unless one short corollary materially
 clarifies the main theorem without adding a new proof dependency.
+
+All acceptance gates are discharged locally.  The warning-free seven-page
+paper, deterministic algebra certificate, independent subgroup enumeration,
+SHA-256 manifest, rendered-page inspection, hostile read, literature record,
+and EJ/TT mystery ledger are recorded in the report.  No mirror/export was
+performed.

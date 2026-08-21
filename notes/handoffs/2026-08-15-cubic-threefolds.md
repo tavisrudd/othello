@@ -37,17 +37,15 @@ promoted mathematical assertion maps to a kernel-checked declaration.
 
 ## Current status
 
-- **C936 — modular resolvent companion, active.**  Write a short standalone
-  paper identifying the signed nonstandard \(A_5\)-cubic parameter with the
-  sign/discriminant resolvent of the relative elliptic two-division cover.
-  The proof must join the exact Prym coordinate \(T=81t^2\), the relative
-  six-axis kernel, and the naturality of the \(\mathbf P^1(\mathbf F_4)\)
-  graph packet; it must distinguish marked \(\Gamma_1(3)\), cyclic
-  \(\Gamma_0(3)\), and coarse orbifold data and prove the compactified cusp
-  passport.  The degree-three root resolvent and degree-six splitting cover
-  are part of the theorem; broader Fricke, zeta, and Winger consequences are
-  optional only if they do not compete with the resolvent spine.  Card:
-  `../cubic-threefolds-tasks/c936-modular-resolvent-companion.md`.
+- **C936 — closed 2026-08-21; modular resolvent companion complete.**  The
+  warning-free seven-page paper proves that the signed nonstandard
+  \(A_5\)-cubic parameter is the sign/discriminant resolvent of the actual
+  relative norm-axis elliptic two-division cover.  It identifies
+  \(T=81t^2\), \(r=9t\), \(X_0(6)\), the sign and split level-six subgroups,
+  exact \(A_3\) monodromy, cusp widths \(2,6\), and the two extra
+  modular-interior cubic boundary values.  Exact algebra and an independent
+  subgroup enumeration replay under `make check`; no mirror was exported.
+  Report: `../2026-08-21-c936-modular-resolvent-companion.md`.
 - **C935 — closed 2026-08-21; exotic gluing is the elliptic discriminant
   orientation.**  The epilogue now proves that monodromy on the exotic pair is
   the sign of its action on the rational two-division triple, identifies the
