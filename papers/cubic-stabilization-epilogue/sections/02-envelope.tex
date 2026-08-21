@@ -397,7 +397,12 @@ parametrized by
 The three \(\F_2\)-rational kernels are \(S_6\)-stable.  Each of the other
 two has stabilizer exactly \(A_5\), and the outer normalizer exchanges them.
 The intermediate Jacobian of the nonstandard \(A_5\)-cubic component uses
-the latter pair.  The \(A_5\)-stable three-primary kernels form
+the latter pair.  In the relative packet, monodromy on this exotic pair is
+the sign of its permutation action on the three rational kernels.  Thus the
+exotic pair represents the orientation, or discriminant, class of the
+rational degree-three cover.  The relative kernel selects one exotic sheet,
+so the mod-two monodromy of \(\mathcal E\) is contained in
+\(A_3\simeq C_3\).  The \(A_5\)-stable three-primary kernels form
 \(\PP^1(\F_3)\); after choosing a complementary symplectic ruling, each is a
 scalar graph.
 \end{proposition}
@@ -458,8 +463,14 @@ complement \(\mathscr P_{\rm ex}\).  Here \(H_2\), together with its
 commutant \(\F_4\), is constant, while monodromy acts only on
 \(\mathscr V_2\).  Its action is therefore \(\F_4\)-linear, not semilinear,
 and factors through \(\operatorname{GL}_2(\F_2)\); in particular it
-preserves both subsets.  The relative kernel \(\mathscr K_2\) gives a
-section of \(\mathscr P\).
+preserves both subsets.  Identify \(\operatorname{GL}_2(\F_2)\) with the
+permutation group of \(\PP^1(\F_2)\).  Its scalar extension lies in
+\(\operatorname{PGL}_2(\F_4)\simeq A_5\), so the permutation on the
+complementary pair has the same sign as that on the rational triple.  The
+latter sign defines the orientation cover.  Thus the two quadratic classes
+agree; their torsors are isomorphic in two ways, exchanged by the deck
+involution.  The relative kernel \(\mathscr K_2\) gives a section of
+\(\mathscr P\).
 
 At the geometric generic point this section cannot be rational.  Otherwise
 the natural faithful \(S_6\)-action on
@@ -515,11 +526,21 @@ have order smaller than \(|S_6|=720\).  The remaining group is
 divisible by \(720\).  None can contain \(S_6\).  The section is
 therefore generically in \(\mathscr P_{\rm ex}\).  Its inverse image is open
 and closed in the connected base \(B^\circ\), so every smooth fibre has
-exotic two-primary kernel.
+exotic two-primary kernel.  The section therefore trivializes the sign
+torsor over \(B^\circ\), so the preceding calculation gives
+\(\rho_2(\pi_1(B^\circ))\subseteq\ker(\operatorname{sgn})=A_3\).
 The same calculation at three gives the four lines parametrized by
 \(\PP^1(\F_3)\); choosing any complementary line as the vertical ruling
 makes the selected half an affine scalar graph.
 \end{proof}
+
+On a Weierstrass chart \(y^2=x^3+Ax+B\), the rational packet is the root
+cover of \(x^3+Ax+B\), while its orientation class is
+\(u^2=-4A^3-27B^2\).  Since
+\(\Delta_{\mathcal E}=16(-4A^3-27B^2)\), this is the square class of the
+elliptic discriminant.  Invariantly, for the Hodge line \(\lambda\), it is
+the class of the torsor of square roots in \(\lambda^{\otimes6}\) of the
+nowhere-vanishing discriminant section in \(\lambda^{\otimes12}\).
 
 For the cycle-theoretic argument, the unordered pair is enough.  Both members
 act on the heart with the same squarefree minimal polynomial

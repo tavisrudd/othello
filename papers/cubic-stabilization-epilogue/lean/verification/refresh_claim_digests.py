@@ -43,7 +43,8 @@ def main() -> None:
     manifest = json.loads(CLAIMS.read_text(encoding="utf-8"))
     namespace = manifest["terminal_namespace"]
     environments = checker["manuscript_environments"]()
-    signatures = checker["terminal_signatures"]()
+    interface_sources = checker["reviewer_sources"](manifest)
+    signatures = checker["terminal_signatures"](interface_sources)
 
     everything = arguments == ["--all"]
     machinery_mode = arguments[:1] == ["--machinery"]
