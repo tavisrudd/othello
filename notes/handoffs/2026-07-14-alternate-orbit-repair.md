@@ -11,9 +11,10 @@ semantic level: the universal `≥ 32` bound, five-row attainment, the certified
 the semantic lift of the lower bound, equality-orbit exhaustion, and its semantic lift are all
 kernel-checked. `32` is the exact semantic minimum and the five orbits are the complete extremal set
 up to normalization. The citation audit gating priority language is discharged and all four lane
-claims survive. C937 is the next step: a layered-exposition and manuscript closeout pass. Release
-bookkeeping C318/C319 follows; the exchange graph C152 remains optional unless adopted.
-**Tasks:** C142–C143, C148–C152, C318–C319, C331, C363, C937
+claims survive. C938 is the active bounded coupling scout; C937's layered-exposition and manuscript
+closeout pass follows. Release bookkeeping C318/C319 comes next; the exchange graph C152 remains
+optional unless adopted.
+**Tasks:** C142–C143, C148–C152, C318–C319, C331, C363, C937–C938
 
 Companion discovery log:
 [`../2026-07-18-alt-orbit-repair-discovery-track.md`](../2026-07-18-alt-orbit-repair-discovery-track.md).
@@ -38,6 +39,7 @@ handoff is finished, `go` and `next?` refer to the next open-queue step below.
 - `notes/2026-07-14-c142-*` through `notes/2026-07-14-c152-*`, this handoff, and its companion
   archive
 - `notes/2026-08-21-c937-*` for the manuscript-revision report
+- `notes/2026-08-21-c938-*` for the bounded Q25 coupling scout
 - this lane's rows in `notes/2026-07-07-codex-task-queue.md` and its routing row in `CLAUDE.md`
 - `papers/equivariant-robust-completion/` and its index/planning rows only after the corresponding
   theorem and trust gates pass
@@ -116,7 +118,8 @@ statements are in the reports above and their development history is in the comp
 
 | Task | State | Current deliverable |
 |---|---|---|
-| C937 | queued; the lane's next step; no large Q25 certificate rebuilds | Layered-exposition and hierarchy pass, synchronized Q25 wording, MDS translation, trust-boundary prose, and a clean current PDF; scoped Lean work is allowed, but no regeneration or forced re-elaboration of the large Q25 certificate forests |
+| C938 | in progress; the lane's next step; no large Q25 certificate rebuilds | Seek a genuinely geometric `B+R≥66` proof explaining minimum `32`; isolated downstream Lean only if cheap, otherwise stop at the scout gate |
+| C937 | queued after C938; no large Q25 certificate rebuilds | Layered-exposition and hierarchy pass, synchronized Q25 wording, MDS translation, trust-boundary prose, and a clean current PDF; scoped Lean work is allowed, but no regeneration or forced re-elaboration of the large Q25 certificate forests |
 | C318 | queued | Manifest rows for the residual layer, its data trees, and the trusted-surface statement |
 | C319 | queued; C151 cost measured at 1:57:09 serial | Decide verified canonicalizer versus demotion to reduction-plus-computation |
 | C152 | queued | Define the orbit-replacement graph, prove the exact local degree identity, then run a component census before considering connectivity |
