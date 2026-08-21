@@ -10,6 +10,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.Mod
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.SplitCrossedCoordinates
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.RangeBaseChange
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.SemilinearVariation
+import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.VariationNormalFactor
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.MarkedMonodromyDiagram
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.MarkedLocalSystem
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.SelectedLocalSystemReader
@@ -38,6 +39,12 @@ retraction. Semilinear
 specialization transports the directed variation without asserting that tensor
 product commutes with monodromy-image formation. Vanishing transport also
 allows the marked row to be preserved up to an arbitrary target scalar. The
+weakest scalar-normal-form consumer only requires the trait identity
+`r (1 - T_j) (1 - T_i) = a lambda`; when `a` specializes to zero, this kills
+the projected variation after incoming-image-spanning specialization. A
+one-sided factorization `v c = 1 - T_i` and a row formula on variation values
+imply this ambient identity. Neither the second can/variation triangle nor
+coverage of the full variation image is needed for this conclusion. The
 same law survives transport through model and actual operator-diagram
 equivalences with row factors when their factors satisfy the displayed
 multiplicative compatibility. The

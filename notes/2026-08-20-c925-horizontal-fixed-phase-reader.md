@@ -6,11 +6,19 @@
 **Status:** the crossed-edge algebra, intrinsic projected variation,
 monodromy-image functoriality, and the reduced zero-transport theorem are
 kernel checked.  A semilinear trait specialization transports variation
-without assuming tensor/image base change, and an actual-receiver
-can/variation certificate now merges incoming realization with coverage
-without imposing the split model's involutivity.  The schober source supplies
-the no-boundary-quotient input after specialization, but no source identifies
-its local can/variation quiver and target square with the actual fixed-phase
+without assuming tensor/image base change.  A backward Lean reduction shows
+that the telescope needs only a rowed trait identity
+
+\[
+ r_R(1-T_j)(1-T_i)=A_{ij}\lambda_{ij},
+ \qquad \operatorname{sp}(A_{ij})=0,
+\]
+
+on a lattice specializing to the actual fixed-phase receiver, together with
+incoming-image-spanning specialization.  The second can/variation triangle,
+full variation-image coverage, packet monodromy, and the vector crossed-edge
+model are unnecessary for this consumer.  The remaining source theorem is
+the regular resonant extension of that rowed identity to the actual indexed
 QDM/Malgrange receiver.  No unconditional `m = 2` or all-`m` conclusion
 follows.
 
@@ -236,8 +244,29 @@ gauge equivalences, which matches the natural output shape of QDM comparison.
 
 ### 62.5A Gate decomposition
 
-The remaining identification theorem has three independently falsifiable
-parts.
+The backward reduction changes the source target.  The exact theorem to prove
+is a rowed resonance-extension statement on a canonical trait lattice:
+
+\[
+   r_R(1-T_j)(1-T_i)=A_{ij}\lambda_{ij},
+\]
+
+where the SVdB Fourier covector \(\lambda_{ij}\) is independently specified
+and regular, \(A_{ij}\) is the known positive-valuation normal, and the special
+fibre is the actual occurrence-indexed fixed-phase receiver.  Merely asserting
+that the left side is divisible by \(A_{ij}\) is circular over a DVR; the
+generic source identification and regular extension of the named covector are
+load-bearing.  `VariationNormalFactor.AmbientCertificate` is this exact Lean
+interface.  Its theorem `specialized_projectedVariation_eq_zero` consumes the
+normal-form identity, a two-loop semilinear specialization, and
+incoming-image spanning.  A one-sided can/variation factorization
+\(v_i c_i=1-T_i\), together with
+\(r_R(1-T_j)v_i=A_{ij}\rho_i\), constructs the ambient certificate with
+reference row \(\rho_i c_i\).  No condition on \(c_iv_i\) and no coverage of
+all of \(v_i(P_i)\) enters.
+
+The former three gates remain useful sufficient constructions, but they are
+not the logically minimal closure theorem.
 
 1. **Crossed edge to model monodromies.**  Modules 60--61 already supply the
    enumerated completed-window pilot `(B,D)`, its special Fourier-row crossed
@@ -318,7 +347,11 @@ parts.
    forces `c` to be a unit.  The algebraic forward vanishing theorem remains
    valid for arbitrary row factors, including zero; those factors are not
    promoted to invertible marked gauges.
-3. **Incoming-image coverage at resonance.**  It is enough either to prove the
+3. **Optional full packet identification at resonance.**  This gate is not
+   needed by the backward scalar-normal-form consumer.  It is needed only if
+   one also wants to identify the whole variation image with the canonical
+   incoming monodromy packet.  For that stronger conclusion it is enough
+   either to prove the
    specialized ambient comparison surjective or directly to prove that its
    induced incoming image spans the actual packet.  Exact range base change,
    a flat cokernel/direct-summand image theorem, or strict nearby-cycle
@@ -357,6 +390,18 @@ parts.
    needs a packet-spectrum argument at \(h=1\).  It needs the occurrence-level
    identification of this schober local quiver, including its can/variation
    signs, with the actual fixed-phase QDM packet.
+
+For the telescope alone, this packet-coverage route can be bypassed.  The
+first triangle already gives
+
+\[
+ (1-T_i)x=v_i(c_i x),
+\]
+
+so a row identity on every variation value may be evaluated at (c_i x).
+This is the formal content of
+`CanVariationCertificate.toAmbientCertificate`.  The remaining comparison is
+therefore covector-valued, not a classification of the full Malgrange packet.
 
 On a specialized crossed edge with zero normal,
 `FixedReceiverCertificate.projectedVariation_eq_zero` consumes these data
@@ -556,6 +601,8 @@ The main checked declarations are:
 - `Comparison.SemilinearVariation.Specialization.projectedVariation_specializes`;
 - `Comparison.SemilinearVariation.Specialization.incomingImageSpan_eq_top_of_surjective`;
 - `Comparison.SemilinearVariation.Specialization.projectedVariation_eq_zero_of_normalFactor`;
+- `Comparison.VariationNormalFactor.CanVariationCertificate.toAmbientCertificate`;
+- `Comparison.VariationNormalFactor.AmbientCertificate.specialized_projectedVariation_eq_zero`;
 - `Comparison.SemilinearVariation.ScaledSpecialization.projectedVariation_specializes`;
 - `Comparison.SemilinearVariation.ScaledSpecialization.projectedVariation_eq_zero_of_normalFactor`;
 - `Comparison.SemilinearVariation.ScaledSpecialization.targetSquare_eq_on_incomingImage`;

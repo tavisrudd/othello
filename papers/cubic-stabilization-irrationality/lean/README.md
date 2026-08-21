@@ -89,6 +89,19 @@ and `beta` need only
 satisfy `beta = c * specialize alpha` for the residual row factor `c`. No
 division by either row factor occurs.
 
+For the projected-row vanishing alone, the model can be smaller.  The module
+`Comparison.VariationNormalFactor` consumes the trait covector identity
+
+`r * (1 - T_j) * (1 - T_i) = a * lambda`.
+
+If `a` specializes to zero, a semilinear two-monodromy comparison whose
+incoming image spans the fibre proves vanishing there.  A one-sided
+can/variation factorization `v * c = 1 - T_i`, together with a scalar normal
+form for `r * (1 - T_j) * v`, constructs this ambient identity.  The second
+can/variation triangle and coverage of the full variation image are not used.
+The reference covector `lambda` is explicit data; the formal result does not
+assert that a divisible quotient extends regularly from a generic fibre.
+
 The algebraic model has a compact sufficient constructor. If the combined
 crossed and moving map `(B,D)` admits a linear retraction, an explicit incoming
 shear and target involution construct every crossed-coordinate field. An
@@ -98,7 +111,8 @@ invertibility alone does not imply it over a trait ring. Because this target
 operator is an involution, an actual comparison using this constructor must
 separately justify involutivity on the covered target packet.
 
-Incoming-image coverage also has a can/variation implementation. If the two
+The stronger identification of the whole incoming packet also has a
+can/variation implementation. If the two
 composites are the identity-minus-monodromy operators on the ambient and
 packet modules, and can covers the packet modulo the kernel of variation, the
 ambient monodromy image is exactly the variation image. Packet-defect coverage
