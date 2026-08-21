@@ -21,7 +21,7 @@ universe u v w
 rationality after multiplication by one projective line. -/
 structure CubicFramedMarkerOneStepInput
     {Variety : Type u} {Center : Type v} {Occurrence : Type w}
-    (context : Quantum.FramedSixthMarkerContext Variety Center Occurrence)
+    (context : Quantum.FramedSixthMarkerContext 4 Variety Center Occurrence)
     (productWithProjectiveLine : Variety → Variety)
     (projectiveFourSpace : Variety) (Rational : Variety → Prop)
     (cubic : Variety) : Prop where
@@ -36,11 +36,48 @@ structure CubicFramedMarkerOneStepInput
   rationalComparison : Rational (productWithProjectiveLine cubic) →
     context.birational.r (productWithProjectiveLine cubic) projectiveFourSpace
 
+/-- Birationality after one projective-line stabilization forces equality of
+the framed primitive-sixth markers of two smooth projective threefolds. -/
+theorem framedSixthMarker_eq_of_oneProjectiveLine_birational
+    {Variety : Type u} {Center : Type v} {Occurrence : Type w}
+    (context : Quantum.FramedSixthMarkerContext 4 Variety Center Occurrence)
+    (productWithProjectiveLine : Variety → Variety)
+    {left right : Variety}
+    (leftDimension : context.data.dimension left = 3)
+    (rightDimension : context.data.dimension right = 3)
+    (leftFormula : Quantum.ProjectiveBundleMarkerFormula
+      context.data context.presentation.fold left
+        (productWithProjectiveLine left) 2)
+    (rightFormula : Quantum.ProjectiveBundleMarkerFormula
+      context.data context.presentation.fold right
+        (productWithProjectiveLine right) 2)
+    (related : context.birational.r
+      (productWithProjectiveLine left) (productWithProjectiveLine right)) :
+    context.marker left = context.marker right := by
+  have leftTotalDimension :
+      context.data.dimension (productWithProjectiveLine left) = 4 := by
+    rw [leftFormula.dimensionFormula, leftDimension]
+  have rightTotalDimension :
+      context.data.dimension (productWithProjectiveLine right) = 4 := by
+    rw [rightFormula.dimensionFormula, rightDimension]
+  have totalEquality := context.marker_eq_of_birational
+    leftFormula.totalSmooth rightFormula.totalSmooth leftTotalDimension
+      rightTotalDimension related
+  change context.data.varietyMarker context.presentation.fold left =
+    context.data.varietyMarker context.presentation.fold right
+  change context.data.varietyMarker context.presentation.fold
+      (productWithProjectiveLine left) =
+    context.data.varietyMarker context.presentation.fold
+      (productWithProjectiveLine right) at totalEquality
+  rw [leftFormula.markerFormula, rightFormula.markerFormula] at totalEquality
+  simp only [two_nsmul] at totalEquality
+  omega
+
 /-- A smooth cubic threefold remains irrational after multiplication by one
 projective line under the stated framed primitive-sixth inputs. -/
 theorem cubicThreefold_oneProjectiveLine_not_rational_of_framedMarker
     {Variety : Type u} {Center : Type v} {Occurrence : Type w}
-    (context : Quantum.FramedSixthMarkerContext Variety Center Occurrence)
+    (context : Quantum.FramedSixthMarkerContext 4 Variety Center Occurrence)
     (productWithProjectiveLine : Variety → Variety)
     (projectiveFourSpace : Variety) (Rational : Variety → Prop)
     (cubic : Variety)

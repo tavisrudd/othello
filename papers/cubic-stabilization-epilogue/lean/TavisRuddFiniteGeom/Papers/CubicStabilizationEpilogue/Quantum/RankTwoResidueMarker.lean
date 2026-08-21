@@ -136,13 +136,9 @@ theorem marker_eq_of_birational
     (rightDimension : context.data.dimension right = 4)
     (related : context.birational.r left right) :
     context.marker left = context.marker right :=
-  by
-    have _ := leftSmooth
-    have _ := rightSmooth
-    have _ := leftDimension
-    have _ := rightDimension
-    exact context.provider.marker_eq_of_related context.data context.presentation.fold 4
-      context.birational context.centerNullity related
+  context.provider.marker_eq_of_related context.data context.presentation.fold 4
+    context.birational context.centerNullity leftSmooth rightSmooth
+      leftDimension rightDimension related
 
 end RankTwoResidueMarkerContext
 

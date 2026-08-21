@@ -29,7 +29,7 @@
       "conclusion": "The stabilized cubic has framed marker four, categorical descent contradicts the zero marker of projective four-space under rationality, and hence the stabilized cubic is irrational.",
       "cautions": "Conditional deduction. The framed block presentation and fold are distinct from the residue presentation but invoke the same generic descent theorem. Lean does not construct the framed QDM comparisons or prove residual Hypotheses 5.7R and 5.7T; their exact operation and occurrence-nullity consequences remain typed fields of the framed context.",
       "statement_digest": "a7216fd631de449d08be8f4158a70ab0c1760a55acabe8c2126c431d4a38b633",
-      "terminal_digest": "9479a907ef1bb210435469321e8bf0f339d64cbff1849ab1bb44358a1568bb12"
+      "terminal_digest": "f3c79b431e6a3d878b22ce747ac20fbc5a9ac5d420fdf88cb2d845335aede49b"
     },
     {
       "manuscript_label": "cor:voisin-separation",
@@ -612,14 +612,15 @@
       "manuscript_label": "thm:nu6-birational-invariance",
       "coverage": "conditional_deduction",
       "declarations": [
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.framedSixthMarker_eq_of_birational"
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.framedSixthMarker_eq_of_birational",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.framedSixthMarker_eq_of_oneProjectiveLine_birational"
       ],
-      "objects": "The effective ledger of framed blocks retaining a marked small section and original-loop monodromy, its natural-valued primitive-sixth fold, dimension-four varieties, smooth centers, and actual specialized center occurrences.",
-      "hypotheses": "Regular isomorphism preserves primitive-sixth multiplicity, and the residual hypotheses provide a typed occurrence-indexed factorization provider and vanishing of every actual smooth center occurrence of dimension at most two.",
-      "conclusion": "Birational smooth projective fourfold objects have equal primitive-sixth marker.",
-      "cautions": "Conditional deduction. Lean constructs the framed effective fold and applies the generic occurrence-indexed descent theorem. It does not construct the QDM comparison provider or the residual center-nullity witnesses; those remain explicit context fields. The generic theorem is registered separately under thm:marker-ledger.",
+      "objects": "The effective ledger of framed blocks retaining a marked small section and original-loop monodromy, its natural-valued primitive-sixth fold, smooth projective varieties in a fixed ambient dimension at most four, smooth centers, actual specialized center occurrences, and one-projective-line stabilizations of threefolds.",
+      "hypotheses": "Regular isomorphism preserves primitive-sixth multiplicity; the residual hypotheses provide a typed occurrence-indexed factorization provider and vanishing of every actual smooth center occurrence allowed in the fixed dimension; and the stabilization consequence additionally uses the rank-two projective-bundle formulas for both threefolds.",
+      "conclusion": "Birational smooth projective objects of any fixed dimension at most four have equal primitive-sixth marker. If two smooth projective threefolds become birational after multiplication by one projective line, their primitive-sixth markers are equal.",
+      "cautions": "Conditional deduction. Lean constructs the framed effective fold, applies the generic occurrence-indexed descent theorem, and cancels the factor two in the one-projective-line consequence. It does not construct the QDM comparison provider, projective-bundle formulas, or residual center-nullity witnesses; those remain explicit typed inputs. The generic theorem is registered separately under thm:marker-ledger.",
       "statement_digest": "f06d4c4134c117aa3dad0eb06c8fbb0b8091d4d757911468a8bd774ba005888b",
-      "terminal_digest": "b8a927005e3504613ca8b5f3c28a781d79df550f2e78ff7dfb4d999cbe8dd171"
+      "terminal_digest": "2f9c1fef06e01d2f7bf291bc343a8bb48eb83df1573e39859601e576b36e64bf"
     },
     {
       "manuscript_label": "lem:simple-euler-block",
@@ -827,7 +828,7 @@
       "conclusion": "The fold is the unique additive extension of its component weight; birationally related endpoints have equal markers; and the marker descends to the quotient set of birational classes.",
       "cautions": "Conditional deduction. Lean proves the free effective fold, arbitrary-monoid and arbitrary-dimension telescope, occurrence preservation, and quotient descent. Weak factorization and the geometric operation formulas are supplied as typed provider data rather than formalized from algebraic geometry. The QDM comparisons that produce those formulas remain outside this row and are registered under prop:qdm-operation-ledgers.",
       "statement_digest": "2bb9891d902b7d680b3e27c41fc85124396cac2dd7783e4733564570f00eff1b",
-      "terminal_digest": "e06cea782440fa08974a45b671c9d05cc0337cfb01c9019e42fe7202a9e52f0a"
+      "terminal_digest": "f8a38d7c98c400a29332ad3f24cebfe48c60bc38ea82dfa62f0f4850e602b042"
     },
     {
       "manuscript_label": "prop:qdm-operation-ledgers",
@@ -843,15 +844,14 @@
       "manuscript_label": "prop:atomic-lowdim",
       "coverage": "conditional_deduction",
       "declarations": [
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicAtom_not_represented_by_curve",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicAtom_not_represented_by_surface"
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.rankTwoResidueMarker_lowDimensionalOccurrenceNullity"
       ],
-      "objects": "An abstract additive marked-block ledger, the cubic rank-two residue marker, varieties of dimension at most two, and supplied curve and minimal-surface reduction data.",
-      "hypotheses": "The curve marker has zero residue discriminant; nef-canonical surface blocks have incompatible rank; projective spaces and ruled surfaces reduce by the operation formulas; point blowups preserve nullity; and actual occurrence specialization is faithful.",
-      "conclusion": "The selected cubic rank-two marker has zero multiplicity on every possible point, curve, or surface center.",
-      "cautions": "Conditional deduction. Lean proves the abstract curve and surface exclusions from typed premises, but does not construct QDM blocks, prove the surface classification, the projective-bundle or blowup formulas, the nef-canonical degree argument, or the faithful occurrence adapter.",
+      "objects": "The direct rank-two residue block presentation and fold, smooth centers and their dimensions, actual specialized QDM occurrences, an intrinsic center marker, seed centers, positive-rank projective bundles, and point blowups.",
+      "hypotheses": "Every smooth center of dimension at most two is built inductively from a seed by positive-rank projective bundles and point blowups; the intrinsic residue marker vanishes on seeds, is multiplied by bundle rank, and is preserved by point blowup; and every actual occurrence marker equals the intrinsic marker of its source center.",
+      "conclusion": "Every actual QDM occurrence whose smooth source has dimension at most two has zero direct residue marker, exactly the center-nullity premise consumed by categorical descent in dimension four.",
+      "cautions": "Conditional deduction. Lean proves the full classification induction and its passage to occurrence-indexed nullity, but does not construct the geometric QDM blocks, classify the surfaces, prove the seed calculations or operation formulas, or construct the faithful occurrence comparison.",
       "statement_digest": "254a0d5feb586c95a1d3345c2063b77362355b2f9d1bd4abda1284026a14956a",
-      "terminal_digest": "ff3c224d18e3169afbe2ba09e85c1fa482998ae3eeff079ff74badd6afe85811"
+      "terminal_digest": "5ba89ca7cb2e71e08172b3d6baff7ab9c7ec980d2c21ef45e620c96f0d63225c"
     }
   ],
   "machinery": [

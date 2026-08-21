@@ -96,7 +96,9 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.CubicA
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.CubicPacketFromBlockReduction
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.ProjectiveProductMultiplicity
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.CubicResidueMarkerOneStep
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.RankTwoResidueLowDimensionalNullity
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.CubicFramedMarkerOneStep
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.FramedSixthLowDimensionalNullity
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.SpectralSignReversal
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.HodgeFixedSubalgebra
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.CubicZeroAtomRanks
@@ -5552,6 +5554,22 @@ theorem effectiveBlockLedger_fold_unique
     homomorphism = presentation.fold weight :=
   presentation.fold_unique weight homomorphism onSingleton
 
+/-- Reviewer-facing low-dimensional nullity theorem for the direct residue
+marker.  A classified center induction, intrinsic projective-bundle and
+point-blowup formulas, and the comparison with every actual QDM occurrence
+supply the nullity premise used by categorical descent in dimension four. -/
+theorem rankTwoResidueMarker_lowDimensionalOccurrenceNullity
+    {K Variety Center Occurrence : Type*} [CommRing K]
+    (presentation : Quantum.RankTwoResiduePresentation K)
+    (data : Quantum.OccurrenceIndexedLedger Variety Center Occurrence
+      presentation.toBlockPresentation)
+    (geometry : Applications.RankTwoResidueCenterGeometry Center)
+    (input : Applications.RankTwoResidueLowDimensionalInput
+      presentation data geometry) :
+    Quantum.LowDimensionalOccurrenceNullity data presentation.fold 4 :=
+  Applications.rankTwoResidue_lowDimensionalOccurrenceNullity
+    presentation data geometry input
+
 /-- Reviewer-facing occurrence-indexed marker theorem in arbitrary ambient
 dimension and with arbitrary commutative additive target.  Weak factorization,
 the folded operation formulas, and low-dimensional center nullity are explicit
@@ -5564,9 +5582,15 @@ theorem occurrenceIndexedMarker_eq_of_birational
     (birational : Setoid Variety)
     (provider : Quantum.BirationalFactorizationProvider data fold dimension birational)
     (nullity : Quantum.LowDimensionalOccurrenceNullity data fold dimension)
-    {left right : Variety} (related : birational.r left right) :
+    {left right : Variety}
+    (leftSmooth : data.smoothProjective left)
+    (rightSmooth : data.smoothProjective right)
+    (leftDimension : data.dimension left = dimension)
+    (rightDimension : data.dimension right = dimension)
+    (related : birational.r left right) :
     data.varietyMarker fold left = data.varietyMarker fold right :=
-  provider.marker_eq_of_related data fold dimension birational nullity related
+  provider.marker_eq_of_related data fold dimension birational nullity
+    leftSmooth rightSmooth leftDimension rightDimension related
 
 /-- Reviewer-facing object-set descent square for the occurrence-indexed
 marker: the marker factors through the quotient by the supplied birational
@@ -5579,8 +5603,15 @@ theorem occurrenceIndexedMarker_descends_to_birationalClasses
     (birational : Setoid Variety)
     (provider : Quantum.BirationalFactorizationProvider data fold dimension birational)
     (nullity : Quantum.LowDimensionalOccurrenceNullity data fold dimension) :
-    ∃ descended : Quotient birational → A, ∀ variety,
-      descended (Quotient.mk birational variety) = data.varietyMarker fold variety :=
+    ∃ descended : Quotient
+        (Quantum.BirationalFactorizationProvider.smoothAmbientBirational
+          data dimension birational) → A,
+      ∀ variety : Quantum.BirationalFactorizationProvider.SmoothAmbientObject
+          data dimension,
+        descended (Quotient.mk
+          (Quantum.BirationalFactorizationProvider.smoothAmbientBirational
+            data dimension birational) variety) =
+          data.varietyMarker fold variety.1 :=
   ⟨provider.descendedMarker data fold dimension birational nullity,
     provider.descendedMarker_mk data fold dimension birational nullity⟩
 
@@ -5603,16 +5634,41 @@ theorem rankTwoResidueMarker_eq_of_birational
 primitive-sixth marker.  It invokes the same generic occurrence-indexed theorem
 as the direct residue marker. -/
 theorem framedSixthMarker_eq_of_birational
-    {Variety Center Occurrence : Type*}
-    (context : Quantum.FramedSixthMarkerContext Variety Center Occurrence)
+    {Variety Center Occurrence : Type*} {ambientDimension : ℕ}
+    (context : Quantum.FramedSixthMarkerContext ambientDimension
+      Variety Center Occurrence)
     {left right : Variety}
     (leftSmooth : context.data.smoothProjective left)
     (rightSmooth : context.data.smoothProjective right)
-    (leftDimension : context.data.dimension left = 4)
-    (rightDimension : context.data.dimension right = 4)
+    (leftDimension : context.data.dimension left = ambientDimension)
+    (rightDimension : context.data.dimension right = ambientDimension)
     (related : context.birational.r left right) :
     context.marker left = context.marker right :=
   context.marker_eq_of_birational leftSmooth rightSmooth leftDimension rightDimension related
+
+/-- Reviewer-facing one-projective-line consequence of framed marker
+invariance: if the stabilizations of two smooth projective threefolds are
+birational and both satisfy the rank-two projective-bundle formula, their
+primitive-sixth markers agree. -/
+theorem framedSixthMarker_eq_of_oneProjectiveLine_birational
+    {Variety Center Occurrence : Type*}
+    (context : Quantum.FramedSixthMarkerContext 4 Variety Center Occurrence)
+    (productWithProjectiveLine : Variety → Variety)
+    {left right : Variety}
+    (leftDimension : context.data.dimension left = 3)
+    (rightDimension : context.data.dimension right = 3)
+    (leftFormula : Quantum.ProjectiveBundleMarkerFormula
+      context.data context.presentation.fold left
+        (productWithProjectiveLine left) 2)
+    (rightFormula : Quantum.ProjectiveBundleMarkerFormula
+      context.data context.presentation.fold right
+        (productWithProjectiveLine right) 2)
+    (related : context.birational.r
+      (productWithProjectiveLine left) (productWithProjectiveLine right)) :
+    context.marker left = context.marker right :=
+  Applications.framedSixthMarker_eq_of_oneProjectiveLine_birational
+    context productWithProjectiveLine leftDimension rightDimension
+      leftFormula rightFormula related
 
 /-- Reviewer-facing direct-QDM residue-marker proof that a smooth cubic
 threefold remains irrational after multiplication by one projective line.  The
@@ -5636,7 +5692,7 @@ conditional context has the same occurrence-indexed shape as the residue
 context and invokes the same descent theorem. -/
 theorem cubicThreefold_oneProjectiveLine_not_rational_of_framedMarker
     {Variety Center Occurrence : Type*}
-    (context : Quantum.FramedSixthMarkerContext Variety Center Occurrence)
+    (context : Quantum.FramedSixthMarkerContext 4 Variety Center Occurrence)
     (productWithProjectiveLine : Variety → Variety)
     (projectiveFourSpace : Variety) (Rational : Variety → Prop)
     (cubic : Variety)
@@ -5689,60 +5745,6 @@ theorem genusEight_oneStep_irrational_of_flop_inputs
     ¬ geometry.Rational (geometry.productWithProjectiveLine fano) :=
   Applications.genusEight_oneStepStabilization_not_rational
     packet birationalInput geometry input
-
-/-- Reviewer-facing exclusion of curve representatives of the cubic zero-packet
-atom.  The atom has even rank two, odd rank ten, and the residue discriminant of
-the displayed cubic residue matrix, which Lean evaluates as four ninths.  On a
-smooth projective variety of dimension at most one an occurring atom is either a
-point atom, of even rank one, or the single nef-canonical atom of a curve, whose
-parity ranks are two and twice the genus and whose residue discriminant
-vanishes.  The first clause is the manuscript's intermediate step: only genus
-five is compatible with the parity ranks.  The second clause excludes even that
-genus, since the residue discriminant of the cubic atom is nonzero, which makes
-the first clause vacuous.
-
-Lean constructs no variety, atom, or atomic composition, and proves none of the
-imported formulas; the projective-bundle formula for a projective line, the
-nef-canonical lemma, and the residue computation for a curve enter through the
-supplied dichotomy. -/
-theorem cubicAtom_not_represented_by_curve
-    {Variety Atom : Type*}
-    {ledger : Quantum.OrdinaryAtomLedger Variety Atom}
-    {curveInput : Quantum.CurveRepresentativeInput ledger} {atom : Atom}
-    (input : Applications.CubicAtomRepresentativeInput ledger curveInput atom) :
-    (∀ curve : Variety, ledger.dimension curve ≤ 1 →
-        ledger.multiplicity curve atom ≠ 0 → curveInput.genus curve = 5) ∧
-      ∀ curve : Variety, ledger.dimension curve ≤ 1 →
-        ledger.multiplicity curve atom = 0 :=
-  ⟨fun curve curveDimension occurs =>
-      Applications.cubicAtom_genus_eq_five_of_representative input curve curveDimension occurs,
-    fun curve curveDimension =>
-      Applications.cubicAtom_multiplicity_eq_zero_of_dimension_le_one input curve
-        curveDimension⟩
-
-/-- Reviewer-facing exclusion of surface representatives of the cubic zero-packet
-atom, and hence of every representative of dimension at most two.  An atom of
-even rank at least two survives the blow-down to a minimal model; on a minimal
-model with nef canonical class the single atom has even rank at least three,
-which the cubic atom does not; and the remaining minimal surfaces, the
-projective plane and the geometrically ruled surfaces, carry only point and
-curve atoms, which the curve analysis excludes.
-
-Lean constructs no variety, atom, atomic composition, blow-down, or minimal
-model, and proves neither the point-blowup formula, the nef-canonical lemma, the
-classification of minimal smooth complex projective surfaces, nor the
-projective-bundle formulas; each enters through the supplied premises. -/
-theorem cubicAtom_not_represented_by_surface
-    {Variety Atom : Type*}
-    {ledger : Quantum.OrdinaryAtomLedger Variety Atom}
-    {curveInput : Quantum.CurveRepresentativeInput ledger}
-    (surfaceInput : Quantum.SurfaceRepresentativeInput ledger curveInput) {atom : Atom}
-    (input : Applications.CubicAtomRepresentativeInput ledger curveInput atom) :
-    ∀ witness : Variety, ledger.dimension witness ≤ 2 →
-      ledger.multiplicity witness atom = 0 :=
-  fun witness witnessDimension =>
-    Applications.cubicAtom_multiplicity_eq_zero_of_surface_analysis surfaceInput input witness
-      witnessDimension
 
 /-- Reviewer-facing unconditional one-step irrationality for a genus-eight Fano
 threefold.  A rank-two projectivization is birational to the product of its base

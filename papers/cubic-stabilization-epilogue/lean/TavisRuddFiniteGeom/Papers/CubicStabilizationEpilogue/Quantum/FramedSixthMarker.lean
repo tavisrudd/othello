@@ -11,10 +11,10 @@ relation is required to preserve this weight, so it descends to components and
 extends to the effective ledger by the same additive fold used by the
 unframed residue marker.
 
-A context packages the conditional comparison and center-nullity data
-in ambient dimension four.  Its birational-invariance theorem specializes the
-generic occurrence-indexed descent theorem; no framed QDM construction or
-comparison theorem is asserted here.
+A context packages the conditional comparison and center-nullity data in one
+fixed ambient dimension at most four.  Its birational-invariance theorem
+specializes the generic occurrence-indexed descent theorem; no framed QDM
+construction or comparison theorem is asserted here.
 -/
 
 namespace TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue
@@ -61,46 +61,49 @@ noncomputable def fold (presentation : FramedSixthPresentation) :
 
 end FramedSixthPresentation
 
-/-- The framed-marker inputs needed for categorical descent in ambient
-dimension four.  The QDM comparison provider and center nullity remain
+/-- The framed-marker inputs needed for categorical descent in one ambient
+dimension at most four.  The QDM comparison provider and center nullity remain
 explicit premises. -/
 structure FramedSixthMarkerContext
+    (ambientDimension : ℕ)
     (Variety : Type u) (Center : Type v) (Occurrence : Type w) where
+  ambientDimensionAtMostFour : ambientDimension ≤ 4
   presentation : FramedSixthPresentation
   data : OccurrenceIndexedLedger Variety Center Occurrence
     presentation.toBlockPresentation
   birational : Setoid Variety
-  provider : BirationalFactorizationProvider data presentation.fold 4 birational
-  centerNullity : LowDimensionalOccurrenceNullity data presentation.fold 4
+  provider : BirationalFactorizationProvider data presentation.fold
+    ambientDimension birational
+  centerNullity : LowDimensionalOccurrenceNullity data presentation.fold
+    ambientDimension
 
 namespace FramedSixthMarkerContext
 
 variable {Variety : Type u} {Center : Type v} {Occurrence : Type w}
+variable {ambientDimension : ℕ}
 
 /-- The primitive-sixth framed marker of a variety. -/
 noncomputable def marker
-    (context : FramedSixthMarkerContext Variety Center Occurrence)
+    (context : FramedSixthMarkerContext ambientDimension Variety Center Occurrence)
     (variety : Variety) : ℕ :=
   context.data.varietyMarker context.presentation.fold variety
 
-/-- The framed primitive-sixth marker is birationally invariant in dimension
-four under the supplied occurrence-indexed QDM formulas and center nullity. -/
+/-- The framed primitive-sixth marker is birationally invariant in the fixed
+ambient dimension under the supplied occurrence-indexed QDM formulas and
+center nullity. -/
 theorem marker_eq_of_birational
-    (context : FramedSixthMarkerContext Variety Center Occurrence)
+    (context : FramedSixthMarkerContext ambientDimension Variety Center Occurrence)
     {left right : Variety}
     (leftSmooth : context.data.smoothProjective left)
     (rightSmooth : context.data.smoothProjective right)
-    (leftDimension : context.data.dimension left = 4)
-    (rightDimension : context.data.dimension right = 4)
+    (leftDimension : context.data.dimension left = ambientDimension)
+    (rightDimension : context.data.dimension right = ambientDimension)
     (related : context.birational.r left right) :
     context.marker left = context.marker right :=
-  by
-    have _ := leftSmooth
-    have _ := rightSmooth
-    have _ := leftDimension
-    have _ := rightDimension
-    exact context.provider.marker_eq_of_related context.data context.presentation.fold 4
-      context.birational context.centerNullity related
+  context.provider.marker_eq_of_related context.data context.presentation.fold
+    ambientDimension
+    context.birational context.centerNullity leftSmooth rightSmooth
+      leftDimension rightDimension related
 
 end FramedSixthMarkerContext
 

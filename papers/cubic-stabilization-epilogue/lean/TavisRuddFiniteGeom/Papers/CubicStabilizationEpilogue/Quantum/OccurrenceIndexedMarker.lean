@@ -224,8 +224,11 @@ structure BirationalFactorizationProvider
     {A : Type y} [AddCommMonoid A]
     (fold : presentation.EffectiveLedger →+ A) (d : ℕ)
     (birational : Setoid Variety) where
-  factorization : ∀ {left right}, birational.r left right →
-    Nonempty (OccurrenceFactorizationChain data fold d left right)
+  factorization : ∀ {left right},
+    data.smoothProjective left → data.smoothProjective right →
+    data.dimension left = d → data.dimension right = d →
+    birational.r left right →
+      Nonempty (OccurrenceFactorizationChain data fold d left right)
 
 namespace BirationalFactorizationProvider
 
@@ -242,18 +245,42 @@ invariant in ambient dimension `d`. -/
 theorem marker_eq_of_related
     (provider : BirationalFactorizationProvider data fold d birational)
     (nullity : LowDimensionalOccurrenceNullity data fold d)
-    {left right : Variety} (related : birational.r left right) :
+    {left right : Variety}
+    (leftSmooth : data.smoothProjective left)
+    (rightSmooth : data.smoothProjective right)
+    (leftDimension : data.dimension left = d)
+    (rightDimension : data.dimension right = d)
+    (related : birational.r left right) :
     data.varietyMarker fold left = data.varietyMarker fold right := by
-  obtain ⟨chain⟩ := provider.factorization related
+  obtain ⟨chain⟩ := provider.factorization leftSmooth rightSmooth
+    leftDimension rightDimension related
   exact chain.marker_eq data fold nullity
 
-/-- The object-set descent map from birational classes to marker values. -/
+/-- Smooth projective objects of the fixed ambient dimension on which the
+birational marker descends. -/
+abbrev SmoothAmbientObject :=
+  {variety : Variety // data.smoothProjective variety ∧ data.dimension variety = d}
+
+/-- The birational setoid restricted to smooth projective objects of the fixed
+ambient dimension. -/
+def smoothAmbientBirational : Setoid (SmoothAmbientObject data d) where
+  r left right := birational.r left.1 right.1
+  iseqv := {
+    refl := fun _ => birational.refl _
+    symm := fun relation => birational.symm relation
+    trans := fun leftMiddle middleRight => birational.trans leftMiddle middleRight
+  }
+
+/-- The object-set descent map from fixed-dimensional smooth birational
+classes to marker values. -/
 def descendedMarker
     (provider : BirationalFactorizationProvider data fold d birational)
     (nullity : LowDimensionalOccurrenceNullity data fold d) :
-    Quotient birational → A :=
-  Quotient.lift (data.varietyMarker fold)
-    (fun _ _ related => provider.marker_eq_of_related data fold d birational nullity related)
+    Quotient (smoothAmbientBirational data d birational) → A :=
+  Quotient.lift (fun variety => data.varietyMarker fold variety.1)
+    (fun left right related =>
+      provider.marker_eq_of_related data fold d birational nullity
+        left.2.1 right.2.1 left.2.2 right.2.2 related)
 
 /-- The descended marker evaluates a represented birational class by the
 marker of its representative. -/
@@ -261,10 +288,10 @@ marker of its representative. -/
 theorem descendedMarker_mk
     (provider : BirationalFactorizationProvider data fold d birational)
     (nullity : LowDimensionalOccurrenceNullity data fold d)
-    (variety : Variety) :
+    (variety : SmoothAmbientObject data d) :
     provider.descendedMarker data fold d birational nullity
-        (Quotient.mk birational variety) =
-      data.varietyMarker fold variety :=
+        (Quotient.mk (smoothAmbientBirational data d birational) variety) =
+      data.varietyMarker fold variety.1 :=
   rfl
 
 end BirationalFactorizationProvider
