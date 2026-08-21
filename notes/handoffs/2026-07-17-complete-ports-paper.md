@@ -110,12 +110,9 @@ It routes C675 to the Janson--O'Donnell reliability lens, C676 to the Britz--Rav
 code/matroid lens, and C677 to the Lavrauw--Ball/Bartoli finite-geometry lens; final assembly also
 requires the Yaakobi/Tamo operational-storage read.
 
-Run C677 next: complete the harmonic geometric application with human proofs and matching Lean
-statements.  C676 closed the rank-one perspective specialization, derivative enumerator, pointed
-duality proof, and the radius-filtration boundary with an explicit represented sparse-paving pair;
-the aggregate gate and trust audit pass.  The remaining proof/formalization work is:
-
-- C677 follows C672 for the harmonic geometric application.
+Run [C677](../2026-07-26-c677-harmonic-port-geometry.md) next: complete the harmonic geometric
+application with human proofs and matching Lean statements.  C672--C676 have passed their gates;
+C677 is the only remaining proof/formalization gate before C678 draft assembly.
 
 C678 assembles the revised modular draft only after C672--C677 pass their gates. C325 then builds
 the appendix-only finite verifier. C679 performs the aggregate formal/prose audits and independent
