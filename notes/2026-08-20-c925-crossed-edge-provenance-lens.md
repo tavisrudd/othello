@@ -208,6 +208,28 @@ Then direct substitution in (60.9) gives the source-compatible Writer law
 Thus Theorem 60.3 remains the homogeneous special case, while (60.10b) is
 the law actually used before closed specialization in the SVdB pilots.
 
+### Corollary 60.3A -- closed crossed defects telescope
+
+Let \(R\) be a local ring with ideal \(\mathfrak m\).  Along a finite typed
+path, assume the common rows are invariant, every block map is \(R\)-linear,
+and
+
+\[
+             \Delta_i\in\mathfrak m\,\operatorname{Hom}_R(M_i,R).
+                                                               \tag{60.10c}
+\]
+
+Then the composite crossed defect also lies in
+\(\mathfrak m\operatorname{Hom}_R(M_0,R)\), hence vanishes after reduction
+modulo \(\mathfrak m\).
+
+**Proof.** Formula (60.10b) preserves the indicated submodule because
+precomposition by the integral map \(D_1\) preserves
+\(\mathfrak m\)-divisibility.  Induct on the path length. \(\square\)
+
+Thus once the actual reader is built edgewise, no new global Stokes matrix
+or path-level cancellation theorem is required.
+
 ## 60.5 Making the illegal erasure unrepresentable
 
 The companion Haskell replay uses distinct promoted origins
@@ -346,6 +368,7 @@ trying another projector.
 | Can an ordinary row kill native common inputs but read the same untagged common outputs? | **no** | Proposition 60.2 |
 | Does the crossed pilot coefficient have positive formal diagonal order? | **yes for every directed pilot transition** | (60.8) and \(|J|\ge1\) |
 | Does this compose along paths? | **yes as a typed upper-triangular Writer law** | Theorem 60.3 and Haskell replay |
+| Do closed crossed defects require a new global cancellation theorem? | **no** | Corollary 60.3A |
 | Is the diagonal substitution a lawful SVdB/GKZ trait? | **yes on all five completed pilots** | Module 61 |
 | Is the crossed edge the actual fixed-phase Malgrange/QDM packet map? | **open** | occurrence-indexed exact reader in Theorem 60.4 |
 
