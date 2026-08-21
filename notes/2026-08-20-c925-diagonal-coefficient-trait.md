@@ -199,7 +199,10 @@ Primary source:
   \(h=e^{-2\pi i\alpha}\), and Proposition 12.6 for the normalized
   coefficient \(e^{-2\pi i\gamma_j}\) and fibre formula.  This confirms that
   \(q_{\mathrm{coeff}}\) is a representation-parameter specialization; it
-  does not identify it with a QDM Novikov coordinate.
+  does not identify it with a QDM Novikov coordinate.  Example 12.7 keeps
+  this specialization separate from the monodromy loop around the base
+  discriminant, confirming that the parameter trait and based path are
+  distinct provider fields.
 
 The source does not state Proposition 61.1, the five gcd computations, or
 the adapted diagonal trait.  Those are the extension proved here.
@@ -219,7 +222,7 @@ packet see this same normalized schober edge and the same based loop?
 | Is the all-ones quotient class primitive? | **yes for all five pilots** | Proposition 61.2 and exact certificate |
 | Can the normalized lift have all coordinates equal? | **yes** | Proposition 61.1 |
 | Is \(q_{\mathrm{coeff}}-1\) a genuine trait parameter? | **yes up to a unit** | Theorem 61.3 |
-| Is the coefficient loop already the QDM Novikov/large-radius loop? | **not proved, and not a type equality** | the vertical based-loop reader must supply the Fourier--Laplace/deck identification |
+| Is the coefficient parameter trait already the QDM Novikov coordinate? | **no type equality is supplied** | the SVdB chamber-groupoid path is separate; the vertical reader must identify that path with the Fourier--Laplace/deck path |
 | Is the punctured trait nonresonant? | **yes in the stated pointed homogeneous source scope** | facet-functional proof (61.8) |
 | Does the crossed schober row vanish at the pilot center? | **yes** | Corollary 61.3A |
 | Is this the actual cubic fixed-phase packet edge? | **open** | occurrence/based-loop/QDM--Malgrange reader |

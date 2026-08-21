@@ -137,7 +137,8 @@ transitions, including the blowup--blowdown and mixed directions where the
 plain complement has order zero.  Module 61 certifies the diagonal
 substitution as an admissible coefficient-torus DVR arc for every completed
 unit pilot.  The symbol \(q_{\mathrm{coeff}}\) is not the QDM Novikov
-coordinate: identifying its based loop with the actual fixed-phase
+coordinate.  The SVdB chamber-groupoid path is a second, independent datum;
+identifying that based path with the actual fixed-phase
 Fourier--Laplace/deck path is part of the reader, not notation.
 
 This is not a contradiction with Module 58: native common generators remain
