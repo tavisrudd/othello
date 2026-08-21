@@ -1,0 +1,32 @@
+{
+  "title": "Complete Bounded Repair Ports: Transfer, Reliability, and Geometric Structure",
+  "description": "This preprint studies the complete bounded repair port of a linear code at a distinguished coordinate: the family of all bounded dual-support repairs together with their normalized scalar coefficients and helper-failure reliability. It proves that the minimum coefficient port of an MDS code reconstructs the represented code, gives an exact weighted-functional transfer theorem for concatenation, and realizes every fixed represented port satisfying the pointed obstruction bound with positive density in an asymptotically good fixed-alphabet family. It also develops deletion-contraction reliability and bounded-EXIT calculi, identifies full-radius reliability with a specialization of the Las Vergnas polynomial of an elementary matroid perspective, and proves that the bounded-radius filtration contains additional information. Twisted-cubic-axis and quartic-normal-rational-curve nucleus codes in characteristic three provide geometric applications, including a harmonic Steiner repair port.",
+  "creators": [
+    {
+      "name": "Rudd, Tavis",
+      "orcid": "0009-0003-6405-3275",
+      "affiliation": "Independent researcher"
+    }
+  ],
+  "access_right": "open",
+  "license": "mit",
+  "upload_type": "publication",
+  "publication_type": "preprint",
+  "keywords": [
+    "locally repairable codes",
+    "linear codes",
+    "MDS codes",
+    "repair sets",
+    "code concatenation",
+    "reliability polynomials",
+    "EXIT functions",
+    "matroid perspectives",
+    "Las Vergnas polynomial",
+    "finite geometry",
+    "Steiner systems",
+    "normal rational curves",
+    "formalized mathematics",
+    "Lean 4"
+  ],
+  "notes": "Correspondence: tavisrudd@damnsimple.com"
+}

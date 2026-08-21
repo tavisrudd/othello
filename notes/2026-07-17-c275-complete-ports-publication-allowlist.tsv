@@ -1,11 +1,27 @@
-# schema: c275-complete-ports-publication-allowlist-v1
+# schema: c275-complete-ports-publication-allowlist-v2
+# papers/repositories.toml is the executable export authority; this table also records future C325 evidence inputs.
 # action<TAB>source-in-private-monorepo<TAB>destination-in-new-paper-repo<TAB>gate-or-role
-copy	papers/complete-repair-ports/complete_repair_ports.tex	complete_repair_ports.tex	rewrite-in-public-repo-after-byte-exact-export
+copy	papers/complete-repair-ports/.zenodo.json	.zenodo.json	validated deposit metadata; creates no deposit
+copy	papers/complete-repair-ports/LICENSE	LICENSE	approved MIT license
+copy	papers/complete-repair-ports/Makefile	Makefile	standalone warning-failing build entry point
+copy	papers/complete-repair-ports/README.md	README.md	external-reader-facing repository entry point
+copy	papers/complete-repair-ports/flake.lock	flake.lock	pinned manuscript toolchain
+copy	papers/complete-repair-ports/flake.nix	flake.nix	pinned manuscript toolchain
+copy	papers/complete-repair-ports/complete_repair_ports.pdf	complete_repair_ports.pdf	tracked release PDF selected by repository policy
+copy	papers/complete-repair-ports/complete_repair_ports.tex	complete_repair_ports.tex	modular manuscript driver
 copy	papers/complete-repair-ports/refs.bib	refs.bib	citation-audit-required
-rewrite	papers/complete-repair-ports/README.md	README.md	public-status-and-build-only; never copy private paths/status
-rewrite	papers/complete-repair-ports/proof_ledger.md	formal/PROOF_LEDGER.md	public claim/evidence ledger only
+copy	papers/complete-repair-ports/sections/01-complete-ports.tex	sections/01-complete-ports.tex	main theorem source
+copy	papers/complete-repair-ports/sections/02-confinement-transfer.tex	sections/02-confinement-transfer.tex	main theorem source
+copy	papers/complete-repair-ports/sections/03-positive-density.tex	sections/03-positive-density.tex	main theorem source
+copy	papers/complete-repair-ports/sections/04-reliability-exit.tex	sections/04-reliability-exit.tex	main theorem source
+copy	papers/complete-repair-ports/sections/05-pointed-tutte.tex	sections/05-pointed-tutte.tex	main theorem source
+copy	papers/complete-repair-ports/sections/06-geometric-flagships.tex	sections/06-geometric-flagships.tex	application source
+copy	papers/complete-repair-ports/sections/07-verification-provenance.tex	sections/07-verification-provenance.tex	public verification and finite-evidence appendix
+copy	papers/complete-repair-ports/sections/08-conclusion.tex	sections/08-conclusion.tex	mathematical conclusion source
+copy	papers/complete-repair-ports/sections/README.md	sections/README.md	public section map
+exclude	papers/complete-repair-ports/proof_ledger.md	-	internal proof-development ledger
 exclude	papers/complete-repair-ports/adversarial_novelty_review.md	-	internal review record
-generate	-	LICENSE	generate the approved MIT license text
+exclude	papers/complete-repair-ports/referee-dossier.md	-	internal cold-read context
 generate	-	CITATION.cff	paper metadata and authorship review required
 generate	-	formal/LEAN_REVISION	pin exact commit of all-papers shared Lean monorepo
 generate	-	formal/TARGETS.txt	complete-ports paper-facing shared-Lean targets and gates
@@ -26,4 +42,3 @@ copy	notes/2026-07-17-c243-nucleus-gated-separation-vet.json	evidence/2026-07-17
 copy	notes/2026-07-17-c244-exact-consequence-pack.py	evidence/2026-07-17-c244-exact-consequence-pack.py	exact consequence pack
 copy	notes/2026-07-17-c244-exact-consequence-pack.json	evidence/2026-07-17-c244-exact-consequence-pack.json	committed deterministic certificate
 generate	-	evidence/README.md	public replay commands, conventions, boundaries, hashes
-generate	-	complete_repair_ports.pdf	release artifact only; exclude from Git unless user policy says otherwise

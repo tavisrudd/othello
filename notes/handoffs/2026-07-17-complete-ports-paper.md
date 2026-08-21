@@ -3,7 +3,7 @@
 **Lane**: `complete-ports`
 
 **Date**: 2026-07-26
-**Status**: ACTIVE; C672--C677 PROOF GATES COMPLETE; C678 DRAFT ASSEMBLY ACTIVE; PUBLIC RELEASE GATED
+**Status**: ACTIVE; C672--C678 PROOF/DRAFT GATES COMPLETE; C325 APPENDIX VERIFIER NEXT; PUBLIC RELEASE GATED
 **Theorem source lane**: archived [`repaircodes`](done/2026-07-13-projective-completion-repaircodes.md)
 **Current private paper**: [`complete-repair-ports`](../../papers/complete-repair-ports/README.md)
 **Canonical paper identity**: `complete-ports` — *Complete Bounded Repair Ports: Local Memory,
@@ -106,15 +106,11 @@ terminal.
 Before any nontrivial proof development or formalization for this paper, read the required
 paper-specific expert dossier
 [`papers/expert-profiles/05-complete-repair-ports.md`](../../papers/expert-profiles/05-complete-repair-ports.md).
-The proof-gate sequence C672--C677 is complete.  Final assembly requires the Yaakobi/Tamo
-operational-storage read from the expert dossier.
-
-Run [C678](../2026-07-26-c678-complete-ports-draft-assembly.md) next to assemble the revised modular
-draft. C325 then builds
-the appendix-only finite verifier. C679 performs the aggregate formal/prose audits and independent
+The proof and assembly sequence C672--C678 is complete.  Run C325 next to build the appendix-only
+finite verifier.  C679 then performs the aggregate formal/prose audits and independent
 draft-readiness cold reads.
 
-The corrected prior twelve-page draft and its cold reads remain inputs, not acceptance of the new
+The prior monolithic draft and its cold reads remain inputs, not acceptance of the modular
 hierarchy. C220 remains omitted. Shared-Lean extraction is planned under
 [C287](../2026-07-17-c287-shared-lean-extraction-plan.md) and remains separately build-system-owned.
 

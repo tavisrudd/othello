@@ -1,78 +1,64 @@
-# Complete bounded repair ports
+# Complete Bounded Repair Ports
 
-**Title:** *Complete Bounded Repair Ports: Transfer, Reliability, and Geometric Structure*<br>
-**Author:** Tavis Rudd<br>
-**Status:** development manuscript, not yet a public release. The revised theorem hierarchy is
-frozen; the MDS reconstruction, pointed transfer, positive-density realization, and
-reliability/bounded-EXIT sections have complete written proofs and scoped formal support.
+## Read the paper
 
-## Paper spine
+[**Open the paper (PDF) →**](complete_repair_ports.pdf)
 
-For a linear code and a target coordinate, the complete bounded repair port retains every
-dual-support repair using at most a prescribed number of helpers. The paper keeps three layers
-visible: support, scalar coefficients, and failure probability.
+**Title:** *Complete Bounded Repair Ports: Transfer, Reliability, and Geometric Structure*
 
-The theorem-led order is:
+For a linear code and a distinguished coordinate, the complete bounded repair
+port records every dual-support recovery using at most a prescribed number of
+helpers. The paper keeps three layers visible: helper supports, normalized
+scalar recovery coefficients, and reliability under helper failures.
 
-1. complete bounded ports and their support/coefficient/probability layers;
-2. exact weighted-functional transfer and pointed confinement;
-3. prescribed positive-density realization in asymptotically good fixed-alphabet families;
-4. reliability, cheapest-radius transforms, and radius-truncated BEC EXIT;
-5. the standard pointed-Tutte/perspective identification and its radius-filtration boundary; and
-6. cubic--axis versus quartic--nucleus/harmonic flagships.
+The opening theorem shows that the minimum coefficient port of an MDS code
+reconstructs the represented code even though its support projection is the
+generic complete uniform clutter. The paper then proves an exact
+weighted-functional transfer theorem for concatenation and a positive-density
+realization theorem for prescribed represented ports. It develops
+deletion–contraction reliability and bounded-EXIT calculi, identifies
+full-radius reliability with a Las Vergnas perspective-polynomial
+specialization, and proves that the radius filtration contains additional
+information.
 
-The harmonic Steiner system gives parallel repairs at the nucleus, while every curve-target repair
-has the nucleus as a compulsory series helper. Exact field-nine reliability/EXIT profiles and
-Poisson approximations are computational refinements outside the body theorem chain. The cubic
-family supplies exact matching/transversal rows and the natural strict weighted-transfer example.
+Two characteristic-three applications illustrate different local geometries:
+a twisted-cubic–axis code with exact matching and transversal rows, and a
+quartic normal rational curve with its nucleus, whose harmonic quadruples form
+a Steiner repair design.
 
-The prescribed-port theorem is also instantiated on the Clebsch
-`[6,3,4]_11` code. Its full coefficient-valued radius-five port has
-`z_x=8`, reconstructs the inner code from one pointed coefficient port, and
-therefore occurs at density `1/6` in an asymptotically good fixed-`GF(11)`
-family. The support clutter alone is the generic complete three-uniform
-hypergraph on five helpers; the manuscript does not present generic MDS
-locality as Clebsch-specific.
+## Proof and evidence boundary
 
-The current PDF is a 17-page modular draft. Its main mathematical boundary is deliberate: coefficients
-give a direct one-symbol-per-helper scalar protocol, not a minimum-bandwidth or minimum-access
-claim under subpacketization.
+The reconstruction, transfer, prescribed-port, reliability, and bounded-EXIT
+chains have Lean 4 support. The manuscript names the classical inputs used for
+outer-code existence, concatenation, projective geometry, and the Las Vergnas
+polynomial. Exact finite tables and replay evidence are confined to the
+appendix and do not prove a main-body theorem.
 
-## Evidence boundary
+The scalar repair protocol downloads one complete base-field symbol from each
+contacted helper. It does not claim minimum subsymbol access, optimal repair
+bandwidth, full symbol-MAP behavior at a finite radius, or a capacity theorem.
 
-The reconstruction, transfer, prescribed-port, reliability, and bounded-EXIT theorem chains have
-formal support in the shared Lean development. Outer-family existence, the pointed-Tutte
-specialization, and the retained harmonic geometry remain explicit manuscript or literature
-boundaries. Exact finite harmonic, reliability, EXIT, and pointed-Tutte profiles are evidence
-support for the appendices, not substitutes for the body proofs.
+## Source layout
 
-Classical ingredients remain labeled as such: concatenated-dual decomposition, Singer regularity,
-random GV and AG/TVZ codes, normal-rational-curve nuclei, harmonic Steiner systems,
-and the Las Vergnas perspective polynomial. A none-found search is not a priority certificate.
-The Clebsch specialization is a manuscript corollary of the MDS dual parameters and the
-prescribed-port theorem; it is not a separate claim about Clebsch geometry.
-
-An optional cubic blocker-stability strengthening is outside the current scope. Sequential
-composition, service regions, coefficient optimization, log-concavity,
-product architecture, and random harmonic-cascade thresholds are outside scope.
-
-## Files
-
-- `complete_repair_ports.tex` — preamble, opening, and modular manuscript driver.
-- `complete_repair_ports.pdf` — current draft PDF.
-- `refs.bib` — bibliography.
-- `sections/` — manuscript sections and their reading order.
+- `complete_repair_ports.tex` is the manuscript driver.
+- `sections/` contains the numbered theory, application, conclusion, and
+  verification/evidence sources.
+- `refs.bib` contains the bibliography.
+- `.zenodo.json` contains preprint deposit metadata; it creates no deposit or
+  DOI by itself.
 
 ## Build
 
-From this directory:
+From this directory, run:
 
-```bash
-nix shell nixpkgs#tectonic -c tectonic complete_repair_ports.tex
+```text
+make check
 ```
 
-## Publication boundary
+This rebuilds the manuscript with the pinned Nix toolchain and fails on LaTeX
+warnings, unresolved references, or overfull/underfull boxes.
 
-This repository is not yet a citable public release. A future export will carry only the reviewed
-manuscript, its public evidence, and the corresponding formal boundary; publication, licensing,
-identifiers, and push remain author decisions.
+## License
+
+The contents of this repository are licensed under the MIT License; see
+`LICENSE`.

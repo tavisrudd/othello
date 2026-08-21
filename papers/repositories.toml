@@ -250,9 +250,46 @@ reason = "the monorepo-wide TeX lint helper is outside the standalone repository
 
 [[repository]]
 name = "complete-repair-ports"
+include_release_pdfs = true
 source = "papers/complete-repair-ports"
 paper_ids = ["complete_repair_ports"]
 disposition = "active"
+
+[[repository.exclude_path]]
+path = "adversarial_novelty_review.md"
+reason = "private review record, not part of the public manuscript repository"
+
+[[repository.exclude_path]]
+path = "claim-proof-novelty-ledger.md"
+reason = "internal claim-development ledger; public boundaries are stated in the manuscript"
+
+[[repository.exclude_path]]
+path = "formal-statement-adequacy.md"
+reason = "internal formalization review record; the appendix states the public trust boundary"
+
+[[repository.exclude_path]]
+path = "formalization-ledger.md"
+reason = "internal formalization work ledger; the appendix states the public theorem map"
+
+[[repository.exclude_path]]
+path = "proof_ledger.md"
+reason = "internal proof-development ledger, superseded by the manuscript proofs and appendix"
+
+[[repository.exclude_path]]
+path = "referee-dossier.md"
+reason = "private cold-read context, not part of the public manuscript repository"
+
+[[repository.exclude_path]]
+path = "second-draft-fix-plan.md"
+reason = "private revision plan, not part of the public manuscript repository"
+
+[[repository.exclude_path]]
+path = "theorem-map.md"
+reason = "internal theorem-adoption ledger; public claims remain in the manuscript"
+
+[[repository.exclude_path]]
+path = "verification-map.md"
+reason = "internal lane-to-proof map; the appendix states the public verification boundary"
 
 [[repository]]
 name = "continuation-graph-rigidity"
