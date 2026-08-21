@@ -735,4 +735,141 @@ theorem existsUnique_harmonicQuarticCompletion [CharP 𝔽 3]
                 · intro d hd
                   exact (isHarmonicQuarticBlock_finite_nonzero_iff hsum d).1 hd.2.2.2
 
+/-! ### Abstract harmonic and port closure -/
+
+/-- Least closure of a curve-parameter set under completing three members of a harmonic block. -/
+inductive HarmonicDesignClosure (S : Set (HarmonicParameter 𝔽)) :
+    HarmonicParameter 𝔽 → Prop
+  | base {x} (hx : x ∈ S) : HarmonicDesignClosure S x
+  | complete {a b c d}
+      (hblock : IsHarmonicQuarticBlock a b c d)
+      (ha : HarmonicDesignClosure S a) (hb : HarmonicDesignClosure S b)
+      (hc : HarmonicDesignClosure S c) : HarmonicDesignClosure S d
+
+/-- Least closure of a quartic--nucleus coordinate set under the radius-four harmonic repair
+rules: a complete block repairs the nucleus, while the nucleus and three block points repair the
+fourth curve point. -/
+inductive HarmonicPortClosure (A : Set (HarmonicQuarticIndex 𝔽)) :
+    HarmonicQuarticIndex 𝔽 → Prop
+  | base {x} (hx : x ∈ A) : HarmonicPortClosure A x
+  | nucleus {a b c d}
+      (hblock : IsHarmonicQuarticBlock a b c d)
+      (ha : HarmonicPortClosure A (.inl a)) (hb : HarmonicPortClosure A (.inl b))
+      (hc : HarmonicPortClosure A (.inl c)) (hd : HarmonicPortClosure A (.inl d)) :
+      HarmonicPortClosure A (.inr ())
+  | curve {a b c d}
+      (hblock : IsHarmonicQuarticBlock a b c d)
+      (hN : HarmonicPortClosure A (.inr ()))
+      (ha : HarmonicPortClosure A (.inl a)) (hb : HarmonicPortClosure A (.inl b))
+      (hc : HarmonicPortClosure A (.inl c)) : HarmonicPortClosure A (.inl d)
+
+/-- The curve coordinates belonging to a parameter set. -/
+def harmonicCurveCoordinateSet (S : Set (HarmonicParameter 𝔽)) :
+    Set (HarmonicQuarticIndex 𝔽) := Sum.inl '' S
+
+/-- The initial coordinate set consisting of the nucleus and a prescribed curve set. -/
+def harmonicCurveCoordinateSetWithNucleus (S : Set (HarmonicParameter 𝔽)) :
+    Set (HarmonicQuarticIndex 𝔽) :=
+  insert (.inr ()) (harmonicCurveCoordinateSet S)
+
+/-- With the nucleus initially present, port closure is exactly harmonic completion on the curve
+coordinates, together with the nucleus itself. -/
+theorem harmonicPortClosure_withNucleus_iff (S : Set (HarmonicParameter 𝔽))
+    (x : HarmonicQuarticIndex 𝔽) :
+    HarmonicPortClosure (harmonicCurveCoordinateSetWithNucleus S) x ↔
+      match x with
+      | .inl t => HarmonicDesignClosure S t
+      | .inr _ => True := by
+  constructor
+  · intro hx
+    induction hx with
+    | @base y hy =>
+        cases y with
+        | inl t =>
+            apply HarmonicDesignClosure.base
+            simpa [harmonicCurveCoordinateSetWithNucleus, harmonicCurveCoordinateSet] using hy
+        | inr u => trivial
+    | nucleus hblock ha hb hc hd iha ihb ihc ihd => trivial
+    | curve hblock hN ha hb hc ihN iha ihb ihc =>
+        exact HarmonicDesignClosure.complete hblock iha ihb ihc
+  · cases x with
+    | inr u =>
+        intro _
+        cases u
+        exact HarmonicPortClosure.base (by simp [harmonicCurveCoordinateSetWithNucleus])
+    | inl t =>
+        intro ht
+        induction ht with
+        | base hx =>
+            exact HarmonicPortClosure.base
+              (by simp [harmonicCurveCoordinateSetWithNucleus, harmonicCurveCoordinateSet, hx])
+        | complete hblock ha hb hc iha ihb ihc =>
+            exact HarmonicPortClosure.curve hblock
+              (HarmonicPortClosure.base (by simp [harmonicCurveCoordinateSetWithNucleus]))
+              iha ihb ihc
+
+/-- If the initial curve set contains a harmonic block, its radius-four port closure consists of
+the nucleus and exactly the harmonic design closure of the curve set. -/
+theorem harmonicPortClosure_of_containsBlock_iff
+    {S : Set (HarmonicParameter 𝔽)}
+    (hcontains : ∃ a b c d,
+      IsHarmonicQuarticBlock a b c d ∧ a ∈ S ∧ b ∈ S ∧ c ∈ S ∧ d ∈ S)
+    (x : HarmonicQuarticIndex 𝔽) :
+    HarmonicPortClosure (harmonicCurveCoordinateSet S) x ↔
+      match x with
+      | .inl t => HarmonicDesignClosure S t
+      | .inr _ => True := by
+  obtain ⟨a, b, c, d, hblock, ha, hb, hc, hd⟩ := hcontains
+  have hN : HarmonicPortClosure (harmonicCurveCoordinateSet S) (.inr ()) :=
+    HarmonicPortClosure.nucleus hblock
+      (HarmonicPortClosure.base ⟨a, ha, rfl⟩)
+      (HarmonicPortClosure.base ⟨b, hb, rfl⟩)
+      (HarmonicPortClosure.base ⟨c, hc, rfl⟩)
+      (HarmonicPortClosure.base ⟨d, hd, rfl⟩)
+  constructor
+  · intro hx
+    induction hx with
+    | base hx =>
+        rcases hx with ⟨t, ht, rfl⟩
+        exact HarmonicDesignClosure.base ht
+    | nucleus hblock ha hb hc hd iha ihb ihc ihd => trivial
+    | curve hblock hN' ha hb hc ihN iha ihb ihc =>
+        exact HarmonicDesignClosure.complete hblock iha ihb ihc
+  · cases x with
+    | inr u =>
+        intro _
+        cases u
+        exact hN
+    | inl t =>
+        intro ht
+        induction ht with
+        | base hx => exact HarmonicPortClosure.base ⟨_, hx, rfl⟩
+        | complete hblock ha hb hc iha ihb ihc =>
+            exact HarmonicPortClosure.curve hblock hN iha ihb ihc
+
+/-- If the initial curve set contains no complete harmonic block, no radius-four repair rule can
+fire and its port closure is the initial set itself. -/
+theorem harmonicPortClosure_of_containsNoBlock_iff
+    {S : Set (HarmonicParameter 𝔽)}
+    (hfree : ¬∃ a b c d,
+      IsHarmonicQuarticBlock a b c d ∧ a ∈ S ∧ b ∈ S ∧ c ∈ S ∧ d ∈ S)
+    (x : HarmonicQuarticIndex 𝔽) :
+    HarmonicPortClosure (harmonicCurveCoordinateSet S) x ↔ x ∈ harmonicCurveCoordinateSet S := by
+  constructor
+  · intro hx
+    induction hx with
+    | base hx => exact hx
+    | @nucleus a b c d hblock ha hb hc hd iha ihb ihc ihd =>
+        exfalso
+        apply hfree
+        have haS : a ∈ S := by simpa [harmonicCurveCoordinateSet] using iha
+        have hbS : b ∈ S := by simpa [harmonicCurveCoordinateSet] using ihb
+        have hcS : c ∈ S := by simpa [harmonicCurveCoordinateSet] using ihc
+        have hdS : d ∈ S := by simpa [harmonicCurveCoordinateSet] using ihd
+        exact ⟨a, b, c, d, hblock, haS, hbS, hcS, hdS⟩
+    | @curve a b c d hblock hN ha hb hc ihN iha ihb ihc =>
+        have hfalse := ihN
+        simp [harmonicCurveCoordinateSet] at hfalse
+  · exact HarmonicPortClosure.base
+
 end RepairPorts

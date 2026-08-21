@@ -961,7 +961,7 @@ Let
 \]
 and let $S_q=\{V(t):t\in\mathbb P^1(\F_q)\}\cup\{N\}$.
 The classical normal-rational-curve nucleus formula identifies $N$ as the
-hyperplane nucleus in characteristic three \cite{GmainerHavlicek2013}.
+hyperplane nucleus in characteristic three \cite[Theorem~1]{GmainerHavlicek2013}.
 
 \begin{theorem}[Quartic--nucleus port]
 \label{thm:harmonic}
@@ -978,8 +978,12 @@ form a Steiner system $S(3,4,q+1)$, the characteristic-three four-set orbit
 in the standard $\operatorname{PGL}(2,q)$ design construction
 \cite[Section~2]{Tricot2024}.  Hence the radius-four repairs are all
 $B$ at the nucleus and all $\{N\}\cup(B\setminus\{x\})$ at a curve target
-$x\in B$.  Every curve target has $(\nu,\tau)=(1,1)$.  At $q=9$ the nucleus
-has $(\nu,\tau)=(2,5)$, with 30 repairs, while each curve target has 12.
+$x\in B$.  The nucleus has
+\[
+ \frac{(q+1)q(q-1)}{24}
+\]
+radius-four repairs, and every curve target has $q(q-1)/6$.  Every curve
+target has $(\nu,\tau)=(1,1)$.
 \end{theorem}
 
 \begin{proof}
@@ -987,18 +991,47 @@ For distinct finite $a,b,c,d$, the hyperplane through their quartic columns
 contains $N$ exactly when $e_2(a,b,c,d)=0$; with $\infty$ present the condition
 is $a+b+c=0$.  Given three finite points, if $e_1=a+b+c\neq0$, the unique
 completion is $d=-e_2/e_1$; if $e_1=0$, the unique completion is $\infty$.
-The completion is distinct from the original triple.  This proves the
-Steiner property and identifies the blocks as the projective images of
-$\{\infty,0,1,-1\}$.
+In the first case, substituting $d=a$, for example, changes the harmonic
+equation to $(a-b)(a-c)=0$, and similarly for $b$ and $c$; hence the
+completion is distinct.  In the second case, writing $c=-a-b$ gives
+$e_2(a,b,c)=-(a-b)^2\neq0$, so no finite completion exists.  A triple
+$\{\infty,a,b\}$ has the unique completion $-a-b$, distinct from $a,b$
+in characteristic three.  This proves the Steiner property.  Since
+$\{\infty,0,1,-1\}$ is one block and $\operatorname{PGL}(2,q)$ is
+3-transitive, unique completion also identifies the blocks with its
+projective orbit.
 
-Any five curve points are independent.  The determinant criterion shows that
-$\{N\}\cup B$ has rank four exactly for a harmonic block, and deleting any
-point restores independence.  Thus there are no smaller circuits and the
-dual distance is five.  A hyperplane contains at most four curve points and
-possibly $N$, with equality on a harmonic block, so the primal distance is
-$(q+2)-5=q-3$.  The repair and row statements follow from the circuit
-inventory; the field-nine nucleus row is an exact finite enumeration.
+Any five curve points are independent by the extended Vandermonde
+determinant.  Expanding the determinant of $N,V(a),V(b),V(c),V(d)$ along
+the nucleus row gives
+\[
+ \Delta(a,b,c,d)e_2(a,b,c,d),
+\]
+and with infinity present it gives $\Delta(a,b,c)e_1(a,b,c)$.  The
+Vandermonde factor is nonzero for distinct parameters.  Thus
+$\{N\}\cup B$ is dependent exactly for a harmonic block.  A complementary
+minor shows that $N$ with any three distinct curve points is independent;
+in the zero-sum finite branch its determinant reduces to
+$-\Delta(a,b,c)e_2(a,b,c)$, which is nonzero by the calculation above.
+Deleting any point therefore restores independence.  These are all circuits
+of size at most five, so the dual distance is five.
+
+A nonzero hyperplane restricts to a nonzero polynomial of degree at most four
+on the normal rational curve, counting infinity as a root when the quartic
+coefficient vanishes.  It therefore contains at most four curve points.  If
+it also contains $N$, equality occurs exactly on a harmonic block, so the
+largest section of $S_q$ has five points.  Hence the primal distance is
+$(q+2)-5=q-3$.  Finally, the Steiner count is
+$\binom{q+1}{3}/\binom43$, and the number of blocks through a fixed curve
+point is $\binom q2/\binom32$.  The circuit--repair correspondence gives the
+stated ports and counts.
 \end{proof}
+
+\paragraph{Appendix-only field-nine data.}
+At $q=9$ the general formulas give 30 nucleus repairs and 12 repairs at each
+curve target.  The additional nucleus values $(\nu,\tau)=(2,5)$, exact
+Bernstein and EXIT rows, and finite propagation witnesses require the
+field-nine certificate and are reserved for the verification appendix.
 
 The inner-dual half of the coarse transfer gate is automatic at radius four
 because $5<2d(Q_q^\perp)=10$.  Theorem~\ref{thm:prescribed} therefore places the
@@ -1023,11 +1056,16 @@ the fourth.''  Then
 \qquad
  \operatorname{cl}_4(S)=\{N\}\cup D(S)\quad\text{otherwise},
 \]
-and $\operatorname{cl}_4(S\cup\{N\})=\{N\}\cup D(S)$.  At $q=9$ there is a block-free
-rank-five set of five curve points that linearly spans all eleven points but
-is inert under $\operatorname{cl}_4$; adjoining $N$ completes all five missing curve points
-in one parallel round.  This is a finite deterministic separation, not an
-asymptotic propagation or threshold theorem.
+and $\operatorname{cl}_4(S\cup\{N\})=\{N\}\cup D(S)$.
+Indeed, without $N$ no curve point can be repaired, while a complete block
+$B\subseteq S$ repairs $N$.  Once $N$ is present, the curve-target repairs
+are exactly $N$ together with three points of a harmonic block, so iteration
+is precisely harmonic completion.  This proves all three identities.
+
+The field-nine block-free rank-five spanning set and its one-round completion
+after adjoining $N$ are finite appendix data.  They illustrate the nucleus
+gate but are not inputs to the closure identities, an asymptotic propagation
+claim, or a threshold theorem.
 
 \section{Verification and provenance}
 \label{sec:verification}

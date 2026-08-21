@@ -3,8 +3,8 @@
 **Lane:** `complete-ports`
 
 **Status:** ACTIVE — harmonic completion, determinant factorization, Steiner completion, code
-length/dimension, and the normalized five-circuit theorem are kernel-green; global distance, port,
-and closure packaging remain open.
+length/dimension, normalized five-circuit theorem, and nucleus-gate closure identities are
+kernel-green; global distance and exact repair-hypergraph packaging remain open.
 
 ## Current checkpoint
 
@@ -49,6 +49,18 @@ infinity.  The terminals `finiteHarmonicBlock_isFiveCircuit` and
 `infinityHarmonicBlock_isFiveCircuit` now prove dependence of the full harmonic family and
 independence after every one-point deletion.  Thus the harmonic five-sets are genuine circuits by
 uniform algebra rather than the field-nine inventory.
+
+The abstract radius-four closure is also formalized.  `HarmonicPortClosure` has exactly the two
+geometric repair rules: a complete harmonic block adds the nucleus, and the nucleus plus three
+block points adds the fourth curve point.  Theorems now prove that a block-free curve set is inert,
+a curve set containing a block closes to the nucleus plus its harmonic design closure, and a set
+starting with the nucleus has the same form.  No finite propagation table enters these identities.
+
+The manuscript human proof has been expanded in parallel.  It now prints the completion
+distinctness calculation, both determinant mechanisms, the zero-sum complementary minor, the
+hyperplane-section distance argument, and the general Steiner repair counts.  The field-nine
+packing/transversal values, exact reliability rows, and propagation witness are explicitly marked
+for the verification appendix.
 
 The classical-source check is now pinned to the cached originals.  Gmainer--Havlicek,
 arXiv:1304.0088, SHA-256
