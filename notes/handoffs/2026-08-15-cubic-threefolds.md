@@ -374,8 +374,9 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   quotient class is primitive by a gcd-one maximal-minor certificate, so an
   adapted integral splitting gives normalized lift
   \(\gamma(t)=t(1,\ldots,1)\), common coefficient
-  \(q=e^{-2\pi i t}\), and a nonresonant punctured trait with uniformizer
-  \(1-q\).  What remains is only the vertical realization of that labelled
+  \(q_{\mathrm{coeff}}=e^{-2\pi i t}\), and a nonresonant punctured trait
+  with uniformizer \(1-q_{\mathrm{coeff}}\).  What remains is only the
+  vertical realization of that labelled
   crossed edge as the actual based-loop fixed-phase Malgrange/QDM packet with
   exact closed reading.
   Shifted tensor stability and the extremal multinomial source law are

@@ -414,7 +414,8 @@ Module 61 closes the coefficient-torus arc gate on all five unit pilots.
 The all-ones class in each Gale quotient is primitive by an exact gcd-one
 maximal-minor certificate.  An adapted integral splitting therefore has
 normalized lift \(\gamma(t)=t(1,\ldots,1)\); its coefficients are all
-\(q=e^{-2\pi i t}\), \(1-q\) is a uniformizer, and a small punctured trait is
+\(q_{\mathrm{coeff}}=e^{-2\pi i t}\),
+\(1-q_{\mathrm{coeff}}\) is a uniformizer, and a small punctured trait is
 nonresonant.  The sole live source gate is now vertical: identify the labelled
 crossed schober edge with the actual occurrence's based-loop, fixed-phase
 Malgrange/QDM packet and exact closed reader.

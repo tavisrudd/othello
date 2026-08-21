@@ -343,7 +343,8 @@ nix shell nixpkgs#ghc --command sh -c \
 
 The toy checks one hostile one-weight wall: the native common generator has
 rank one, the plain moving defect has order zero, and the provenance-tagged
-crossed defect is \(1-q\), of order one.  It also checks the typed
+crossed defect is \(1-q_{\mathrm{coeff}}\), of order one (the Haskell
+polynomial variable named q represents \(q_{\mathrm{coeff}}\)).  It also checks the typed
 upper-triangular composition law.  It is not evidence for the geometric
 source reader.
 

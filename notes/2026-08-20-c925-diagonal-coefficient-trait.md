@@ -113,7 +113,11 @@ nonresonant parameters.  At its center \(t=0\),
 \]
 
 is a uniformizer up to a unit.  Base-changing the integral decategorified
-window representation along
+window representation over
+\[
+ R:=\mathbf C[[1-q_{\mathrm{coeff}}]]\cong\mathbf C[[t]]
+\]
+along
 
 \[
  K_0(\overline S_C^c)\otimes_{\mathbf Z[X(H)]}R,
