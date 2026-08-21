@@ -229,6 +229,10 @@
       "label": "eq:visible-mass"
     },
     {
+      "environment": "figure",
+      "label": "fig:mate-line-correction"
+    },
+    {
       "environment": "lemma",
       "label": "lem:empty-lines"
     },
@@ -290,17 +294,17 @@
   "paper": "equivariant_robust_completion",
   "pdfs": [
     {
-      "bytes": 120362,
+      "bytes": 128691,
       "pages": 15,
       "path": "papers/equivariant-robust-completion/equivariant-robust-completion.pdf",
-      "sha256": "b9f1fda1f109dde029aed2fae6ec5e0efe6d5dd568bdc048ae1658ae159a993d"
+      "sha256": "ed58c2e62ad0d77725e947423951bccff4138959fa097b94660d618ce3ade11b"
     }
   ],
   "schema_version": 1,
   "sources": [
     {
       "path": "papers/equivariant-robust-completion/equivariant-robust-completion.tex",
-      "sha256": "ddd4aa00c794512eb1aa264b1bae385e7dac6d17c376db23da7d55d12e6381b7"
+      "sha256": "5ef389f58ba8d38f8fc0180cb1fdf3c5a6998586923266b904d7a19c210b5e20"
     },
     {
       "path": "papers/equivariant-robust-completion/sections/01-introduction.tex",
@@ -316,7 +320,11 @@
     },
     {
       "path": "papers/equivariant-robust-completion/sections/04-collision-correction.tex",
-      "sha256": "90aafeef69ca38afc58f77f5d1a79b31f63d0b76a687cdcaad8491a6dff371b7"
+      "sha256": "65a2de8428fb9fdd7ab92dc6adff84c9389c2b32c585948a8c28fbd4c33f5fd6"
+    },
+    {
+      "path": "papers/equivariant-robust-completion/figures/mate-line-correction.tex",
+      "sha256": "624794e1aee657b1e9a8e2b4bf1573b811b9dc36d3f1a54ef537b1edeedf6d80"
     },
     {
       "path": "papers/equivariant-robust-completion/sections/05-eight-arcs-q25.tex",
