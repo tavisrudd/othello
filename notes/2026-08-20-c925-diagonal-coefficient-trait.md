@@ -195,8 +195,11 @@ Primary source:
   (3.1)--(3.2) for the lattice/torus sequence, Section 3.6 for nonresonance,
   Section 4.3 for the splitting, Lemma 12.1 and Proposition 12.4 for the
   finite-free integral window representation, and Proposition 12.6 with
-  (12.3) for the normalized coefficient \(e^{-2\pi i\gamma_j}\) and fibre
-  formula.
+  Section 12.3 for specialization by
+  \(h=e^{-2\pi i\alpha}\), and Proposition 12.6 for the normalized
+  coefficient \(e^{-2\pi i\gamma_j}\) and fibre formula.  This confirms that
+  \(q_{\mathrm{coeff}}\) is a representation-parameter specialization; it
+  does not identify it with a QDM Novikov coordinate.
 
 The source does not state Proposition 61.1, the five gcd computations, or
 the adapted diagonal trait.  Those are the extension proved here.
