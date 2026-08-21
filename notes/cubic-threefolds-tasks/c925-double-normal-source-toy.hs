@@ -22,11 +22,20 @@ data FactorId = LeftFactorId | RightFactorId | OtherFactorId
 data CanMap = LeftCan | RightCan | OtherCan
 data VarMap = LeftVar | RightVar | OtherVar
 data Operation = LeftMonodromy | RightMonodromy | OtherOperation
+data ResidualUnit = MinusOneUnit | PlusOneUnit
 data Nat = Z | S Nat
 
 -- There is deliberately no constructor at order Z.
 data PositiveOrder (order :: Nat) where
   PositiveOrder :: PositiveOrder ('S n)
+
+data UnitWitness (unit :: ResidualUnit) where
+  MinusOneWitness :: UnitWitness 'MinusOneUnit
+  PlusOneWitness :: UnitWitness 'PlusOneUnit
+
+unitValue :: UnitWitness unit -> Int
+unitValue MinusOneWitness = -1
+unitValue PlusOneWitness = 1
 
 data CommonRawRow
   (o :: Occurrence)
@@ -54,20 +63,72 @@ data CanVarFactor
   (canMap :: CanMap)
   (varMap :: VarMap)
   (operation :: Operation)
+  (unit :: ResidualUnit)
   (order :: Nat)
   where
   CanVarFactor ::
     String ->
-    Int ->
+    UnitWitness unit ->
     PositiveOrder order ->
     CanVarFactor
-      o trait receiver row loop chi wall factorId canMap varMap operation order
+      o trait receiver row loop chi wall factorId canMap varMap operation unit order
 
 factorUnit ::
   CanVarFactor
-    o trait receiver row loop chi wall factorId canMap varMap operation order ->
+    o trait receiver row loop chi wall factorId canMap varMap operation unit order ->
   Int
-factorUnit (CanVarFactor _ unit _) = unit
+factorUnit (CanVarFactor _ unit _) = unitValue unit
+
+-- Module 57 moves factor construction upstream: a canonical image factor
+-- may be exposed only after the source provides the full eigenrow law and
+-- an exact reader identifying that image with the actual packet.  In a
+-- library module both evidence constructors and CanVarFactor are private.
+data EigenrowLaw
+  (o :: Occurrence)
+  (trait :: Trait)
+  (receiver :: Receiver)
+  (row :: RawRow)
+  (loop :: BasedLoop)
+  (chi :: PhaseCharacter)
+  (wall :: Wall)
+  (factorId :: FactorId)
+  (operation :: Operation)
+  (unit :: ResidualUnit)
+  (order :: Nat)
+  where
+  EigenrowLaw ::
+    UnitWitness unit ->
+    EigenrowLaw o trait receiver row loop chi wall factorId operation unit order
+
+data ExactImageReader
+  (o :: Occurrence)
+  (trait :: Trait)
+  (receiver :: Receiver)
+  (row :: RawRow)
+  (loop :: BasedLoop)
+  (chi :: PhaseCharacter)
+  (wall :: Wall)
+  (factorId :: FactorId)
+  (canMap :: CanMap)
+  (varMap :: VarMap)
+  (operation :: Operation)
+  where
+  ExactImageReader ::
+    ExactImageReader
+      o trait receiver row loop chi wall factorId canMap varMap operation
+
+imageFactor ::
+  CommonRawRow o trait receiver row loop chi ->
+  EigenrowLaw
+    o trait receiver row loop chi wall factorId operation unit order ->
+  ExactImageReader
+    o trait receiver row loop chi wall factorId canMap varMap operation ->
+  String ->
+  PositiveOrder order ->
+  CanVarFactor
+    o trait receiver row loop chi wall factorId canMap varMap operation unit order
+imageFactor _ (EigenrowLaw unit) _ label order =
+  CanVarFactor label unit order
 
 data ExactClosedCanVarReader
   (o :: Occurrence)
@@ -105,10 +166,10 @@ doubleNormalLeftToRight ::
   CommonRawRow o trait receiver row loop chi ->
   CanVarFactor
     o trait receiver row loop chi 'LeftWall
-    'LeftFactorId 'LeftCan 'LeftVar 'LeftMonodromy ('S sourceOrder) ->
+    'LeftFactorId 'LeftCan 'LeftVar 'LeftMonodromy sourceUnit ('S sourceOrder) ->
   CanVarFactor
     o trait receiver row loop chi 'RightWall
-    'RightFactorId 'RightCan 'RightVar 'RightMonodromy ('S landingOrder) ->
+    'RightFactorId 'RightCan 'RightVar 'RightMonodromy landingUnit ('S landingOrder) ->
   ExactClosedCanVarReader
     o trait receiver row loop chi 'LeftToRight
     'LeftFactorId 'LeftCan 'LeftVar 'LeftMonodromy
@@ -121,10 +182,10 @@ doubleNormalRightToLeft ::
   CommonRawRow o trait receiver row loop chi ->
   CanVarFactor
     o trait receiver row loop chi 'RightWall
-    'RightFactorId 'RightCan 'RightVar 'RightMonodromy ('S sourceOrder) ->
+    'RightFactorId 'RightCan 'RightVar 'RightMonodromy sourceUnit ('S sourceOrder) ->
   CanVarFactor
     o trait receiver row loop chi 'LeftWall
-    'LeftFactorId 'LeftCan 'LeftVar 'LeftMonodromy ('S landingOrder) ->
+    'LeftFactorId 'LeftCan 'LeftVar 'LeftMonodromy landingUnit ('S landingOrder) ->
   ExactClosedCanVarReader
     o trait receiver row loop chi 'RightToLeft
     'RightFactorId 'RightCan 'RightVar 'RightMonodromy
@@ -147,6 +208,36 @@ commonRow ::
     'PrimitiveSixth
 commonRow = CommonRawRow
 
+leftEigenrowLaw ::
+  EigenrowLaw
+    'Coordinate11
+    'IntegralTrait
+    'CommonReceiver
+    'RankRow
+    'MainLoop
+    'PrimitiveSixth
+    'LeftWall
+    'LeftFactorId
+    'LeftMonodromy
+    'MinusOneUnit
+    ('S 'Z)
+leftEigenrowLaw = EigenrowLaw MinusOneWitness
+
+leftImageReader ::
+  ExactImageReader
+    'Coordinate11
+    'IntegralTrait
+    'CommonReceiver
+    'RankRow
+    'MainLoop
+    'PrimitiveSixth
+    'LeftWall
+    'LeftFactorId
+    'LeftCan
+    'LeftVar
+    'LeftMonodromy
+leftImageReader = ExactImageReader
+
 leftFactor ::
   CanVarFactor
     'Coordinate11
@@ -160,8 +251,45 @@ leftFactor ::
     'LeftCan
     'LeftVar
     'LeftMonodromy
+    'MinusOneUnit
     ('S 'Z)
-leftFactor = CanVarFactor "left" (-1) PositiveOrder
+leftFactor =
+  imageFactor
+    commonRow
+    leftEigenrowLaw
+    leftImageReader
+    "left"
+    PositiveOrder
+
+rightEigenrowLaw ::
+  EigenrowLaw
+    'Coordinate11
+    'IntegralTrait
+    'CommonReceiver
+    'RankRow
+    'MainLoop
+    'PrimitiveSixth
+    'RightWall
+    'RightFactorId
+    'RightMonodromy
+    'PlusOneUnit
+    ('S ('S 'Z))
+rightEigenrowLaw = EigenrowLaw PlusOneWitness
+
+rightImageReader ::
+  ExactImageReader
+    'Coordinate11
+    'IntegralTrait
+    'CommonReceiver
+    'RankRow
+    'MainLoop
+    'PrimitiveSixth
+    'RightWall
+    'RightFactorId
+    'RightCan
+    'RightVar
+    'RightMonodromy
+rightImageReader = ExactImageReader
 
 rightFactor ::
   CanVarFactor
@@ -176,8 +304,15 @@ rightFactor ::
     'RightCan
     'RightVar
     'RightMonodromy
+    'PlusOneUnit
     ('S ('S 'Z))
-rightFactor = CanVarFactor "right" 1 PositiveOrder
+rightFactor =
+  imageFactor
+    commonRow
+    rightEigenrowLaw
+    rightImageReader
+    "right"
+    PositiveOrder
 
 leftToRightReader ::
   ExactClosedCanVarReader
@@ -232,8 +367,9 @@ wrongReceiverFactor ::
     'LeftCan
     'LeftVar
     'LeftMonodromy
+    'PlusOneUnit
     ('S 'Z)
-wrongReceiverFactor = CanVarFactor "wrong-receiver" 1 PositiveOrder
+wrongReceiverFactor = CanVarFactor "wrong-receiver" PlusOneWitness PositiveOrder
 
 wrongRowFactor ::
   CanVarFactor
@@ -248,8 +384,9 @@ wrongRowFactor ::
     'LeftCan
     'LeftVar
     'LeftMonodromy
+    'PlusOneUnit
     ('S 'Z)
-wrongRowFactor = CanVarFactor "wrong-row" 1 PositiveOrder
+wrongRowFactor = CanVarFactor "wrong-row" PlusOneWitness PositiveOrder
 
 wrongOccurrenceFactor ::
   CanVarFactor
@@ -264,8 +401,10 @@ wrongOccurrenceFactor ::
     'LeftCan
     'LeftVar
     'LeftMonodromy
+    'PlusOneUnit
     ('S 'Z)
-wrongOccurrenceFactor = CanVarFactor "wrong-occurrence" 1 PositiveOrder
+wrongOccurrenceFactor =
+  CanVarFactor "wrong-occurrence" PlusOneWitness PositiveOrder
 
 wrongLoopFactor ::
   CanVarFactor
@@ -280,8 +419,9 @@ wrongLoopFactor ::
     'LeftCan
     'LeftVar
     'LeftMonodromy
+    'PlusOneUnit
     ('S 'Z)
-wrongLoopFactor = CanVarFactor "wrong-loop" 1 PositiveOrder
+wrongLoopFactor = CanVarFactor "wrong-loop" PlusOneWitness PositiveOrder
 
 wrongCharacterFactor ::
   CanVarFactor
@@ -296,8 +436,10 @@ wrongCharacterFactor ::
     'LeftCan
     'LeftVar
     'LeftMonodromy
+    'PlusOneUnit
     ('S 'Z)
-wrongCharacterFactor = CanVarFactor "wrong-character" 1 PositiveOrder
+wrongCharacterFactor =
+  CanVarFactor "wrong-character" PlusOneWitness PositiveOrder
 
 wrongTraitFactor ::
   CanVarFactor
@@ -312,8 +454,9 @@ wrongTraitFactor ::
     'LeftCan
     'LeftVar
     'LeftMonodromy
+    'PlusOneUnit
     ('S 'Z)
-wrongTraitFactor = CanVarFactor "wrong-trait" 1 PositiveOrder
+wrongTraitFactor = CanVarFactor "wrong-trait" PlusOneWitness PositiveOrder
 
 wrongMapsFactor ::
   CanVarFactor
@@ -328,8 +471,9 @@ wrongMapsFactor ::
     'OtherCan
     'OtherVar
     'OtherOperation
+    'PlusOneUnit
     ('S 'Z)
-wrongMapsFactor = CanVarFactor "wrong-maps" 1 PositiveOrder
+wrongMapsFactor = CanVarFactor "wrong-maps" PlusOneWitness PositiveOrder
 
 -- The following illegal terms have no type-correct spelling:
 --
@@ -338,6 +482,8 @@ wrongMapsFactor = CanVarFactor "wrong-maps" 1 PositiveOrder
 -- * doubleNormalLeftToRight commonRow rightFactor leftFactor ...
 -- * doubleNormalRightToLeft commonRow leftFactor rightFactor ...
 -- * CanVarFactor ... (PositiveOrder :: PositiveOrder 'Z)
+-- * attaching zero or a different residual unit: imageFactor obtains its
+--   UnitWitness from the same EigenrowLaw evidence.
 -- * using a reader indexed by OtherLoop, TrivialCharacter, or factor/map IDs
 --   other than those carried by the two actual factor witnesses.
 

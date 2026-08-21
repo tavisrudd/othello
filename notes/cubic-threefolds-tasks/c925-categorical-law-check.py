@@ -2763,6 +2763,55 @@ def main():
     assert row_times(pure_block_row, hostile_block_shear) == [2, 1]
     checks["pure_spectral_row_is_not_automatically_a_stokes_morphism"] = "pass"
 
+    # Module 57: for the canonical image factorization of N=diag(a,0), the
+    # two factor-row equations are equivalent to the single eigenrow law.
+    normal = Fraction(2)
+    operation_defect = [
+        [normal, Fraction(0)],
+        [Fraction(0), Fraction(0)],
+    ]
+    moving_row = [Fraction(1), Fraction(0)]
+    divided_image_row = Fraction(1, 2)  # row on the image basis e_1
+    assert row_times(moving_row, operation_defect) == [2, 0]
+    assert row_times(moving_row, operation_defect) == [
+        normal * entry for entry in moving_row
+    ]
+    assert normal * divided_image_row == 1
+    assert divided_image_row * normal == 1
+    checks["canonical_image_factorization_equals_eigenrow_law"] = "pass"
+
+    # A row-visible fixed summand makes the same eigenrow law impossible.
+    leaking_row = [Fraction(1), Fraction(1)]
+    assert row_times(leaking_row, operation_defect) == [2, 0]
+    assert row_times(leaking_row, operation_defect) != [
+        normal * entry for entry in leaking_row
+    ]
+    checks["row_visible_fixed_summand_obstructs_eigenrow_factor"] = "pass"
+
+    # Restriction to the moving quotient removes precisely that obstruction.
+    moving_quotient_defect = [[normal]]
+    assert row_times([Fraction(1)], moving_quotient_defect) == [normal]
+    checks["moving_quotient_restores_eigenrow_factor"] = "pass"
+
+    # The specialized-schober Fourier-row coefficient is
+    # 1-product(1-z_j eta^{-d_j}); its identity-minus coefficient is the
+    # displayed product.  Positive DVR order remains a separate arc input.
+    for coefficient_pairs in (
+        [(Fraction(1, 2), Fraction(2))],
+        [(Fraction(1, 2), Fraction(2, 3)), (Fraction(2, 3), Fraction(3, 2))],
+        [
+            (Fraction(-1), Fraction(1, 3)),
+            (Fraction(1, 3), Fraction(3, 4)),
+            (Fraction(3, 4), Fraction(-2)),
+        ],
+    ):
+        product_normal = Fraction(1)
+        for z_value, character_shift in coefficient_pairs:
+            product_normal *= 1 - z_value * character_shift
+        moved_coefficient = 1 - product_normal
+        assert 1 - moved_coefficient == product_normal
+    checks["schober_moved_defect_has_product_normal_factor"] = "pass"
+
     result = {
         "status": "pass",
         "check_count": len(checks),

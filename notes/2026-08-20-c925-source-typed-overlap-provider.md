@@ -237,6 +237,25 @@ character indices.  Their hidden constructors contain both one-wall row
 equations in (56.4).  Thus (55.13) cannot be filled by two unrelated
 one-arrow theorems or by a labelled but unidentified Thom operator.
 
+Module 57 moves the producer boundary one step farther upstream.  For the
+canonical image packet, expose no public `CanVarFactor` constructor at all;
+instead require
+
+\[
+ \mathsf{imageFactor}:
+   \mathsf{EigenrowLaw}(r,1-T,a,u)
+   \to\mathsf{ExactImageReader}(\operatorname{im}(1-T),P_{\rm actual})
+   \to\mathsf{CanVarFactor}.                                  \tag{55.14}
+\]
+
+The eigenrow witness contains the full equality
+\(r(1-T)=au r\).  Hence a row-visible fixed vector cannot reach the
+constructor, and a moving-quotient calculation cannot be laundered as a
+full-receiver law.  The exact image reader separately owns saturation,
+closed base change, and path/direction compatibility.  These types reject
+representational mismatches; provenance and noncircular construction remain
+trusted-source audits.
+
 ## 55.5 Compile-checked toy
 
 The concrete replay is
@@ -278,7 +297,7 @@ extension”.
 | Can occurrences, loops, or characters be silently changed? | **no** | endpoint indices (55.2)--(55.3) |
 | Does every safe provider yield the row transition? | **yes** | Theorem 55.1 |
 | Do the types prove either geometric source adapter exists? | **no** | (55.10)--(55.11) are the remaining theorems |
-| Which source adapter is currently highest EV? | **the Module 56 exact can/var reader** | the projected covector then follows formally from two one-wall divided-rank laws |
+| Which source adapter is currently highest EV? | **first the Module 57 primitive eigenrow test, then the Module 56 exact image reader if it passes** | a row-visible fixed summand refutes the common-row route before analytic construction |
 
 ## Boundary
 

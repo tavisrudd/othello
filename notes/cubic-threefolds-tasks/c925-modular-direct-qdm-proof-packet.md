@@ -62,6 +62,8 @@ exact \(m=2\) and all-\(m\) transport gates.
   notes/2026-08-20-c925-source-typed-overlap-provider.md
 - double-normal projected-variation source theorem:
   notes/2026-08-20-c925-double-normal-projected-variation.md
+- eigenrow image factorization and fixed-summand test:
+  notes/2026-08-20-c925-eigenrow-image-factorization.md
 
 The packet index owns the module-to-file map.  Do not append another large
 module to this card or to the index; add one focused companion file and one
@@ -342,19 +344,22 @@ Double-normal producer replay:
       | diff -u \
           notes/cubic-threefolds-tasks/c925-double-normal-source-toy-output.txt -
 
-The finite model currently has one hundred sixteen checks.  It verifies only the
+The finite model currently has one hundred twenty checks.  It verifies only the
 advertised algebraic laws and countermodels, never an external QDM provider.
 
 ## Next
 
-1. For the first genuine \((1,1)\) overlap, construct the Module 56 exact
-   fixed-phase can/var reader.  Identify the actual two Malgrange packets and
-   maps with the two one-wall Thom/divided-rank factorizations in one common
-   raw-rank receiver.  Theorem 56.1 then proves the directed covector
-   \(\rho_j(1-T_j)|_{\operatorname{im}(1-T_i)}\) vanishes; do not compute a
+1. For the first genuine \((1,1)\) overlap, run Module 57's cheaper
+   eigenrow/fixed-summand test on the actual primitive-sixth projected wall
+   operations.  Determine whether the projector kills every common fixed
+   generator while retaining the moving rank line and whether
+   \(r(1-T_i)=a_i u_i r\) holds for both incident walls.  Only if this passes,
+   construct Module 56's exact fixed-phase image/can--var reader.  Theorem
+   56.1 then proves the directed covector
+   \(\rho_j(1-T_j)|_{\operatorname{im}(1-T_i)}\) vanishes without computing a
    two-wall Stokes matrix.  Yu--Zhang supplies spectral/vanishing-cycle block
    comparison only after an algebraic exponential-type occurrence is built;
-   it does not supply the Gamma row or can/var reader.
+   it does not supply the Gamma row or exact image reader.
 2. As the trait alternative, construct the Module 53 common canonical trait
    receiver for every
    consecutive-discrepant overlap.  Put both incident one-arrow receivers in

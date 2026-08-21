@@ -320,7 +320,7 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   witnesses.
   Module 56 proves the best current projected-source implementation law.
   Two one-wall can/var packages in one raw-rank receiver, satisfying
-  (rv_i=a_i\rho_i) and \(\rho_ic_i=u_ir\) with positive normal order,
+  \(rv_i=a_i\rho_i\) and \(\rho_ic_i=u_ir\) with positive normal order,
   automatically give
   \(\rho_jc_jv_i=a_i u_j\rho_i\), hence the directed closed projected
   variation is zero.  This removes the two-wall Stokes matrix from the live
@@ -330,11 +330,18 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   vanishing-cycle decompositions for algebraic exponential-type
   connections, but does not construct the Gamma row or the image-block
   reader; pure formal support alone is not enough.
+  Module 57 compresses the canonical one-wall package to the eigenrow law
+  \(r(1-T_i)=a_i u_i r\) and exposes the cheapest no-go test: every fixed
+  vector must be row-null.  The specialized schober formula has the right
+  normal factor on its moving quotient, but the unprojected row sees common
+  fixed generators.  The immediate task is to test whether the actual
+  primitive-sixth projector removes precisely this fixed leakage; construct
+  the resonant image reader only if it does.
   Shifted tensor stability and the extremal multinomial source law are
   proved, but the occurrence-indexed exact QDM sequence, actual carrier
   exponent, and boundary vanishing remain open.  The packet is split into
   bounded module companions behind a stable index.  The
-  one-hundred-sixteen-check
+  one-hundred-twenty-check
   finite law replay, the eleven-check path toy, the four-check source-typed
   Haskell toy, the four-check double-normal producer toy, and original cubic
   replay are green.  C925 remains open at fixed-phase Gamma/rank transport

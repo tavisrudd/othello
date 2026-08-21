@@ -61,6 +61,7 @@ No manuscript or Lean source is part of this packet.
 | 54 | row-projected Malgrange--Sabbah variation and middle-extension saturation | notes/2026-08-20-c925-projected-stokes-variation.md |
 | 55 | source-typed safe-overlap providers and compile-checked GADT | notes/2026-08-20-c925-source-typed-overlap-provider.md |
 | 56 | double-normal can/var factorization and projected-variation vanishing | notes/2026-08-20-c925-double-normal-projected-variation.md |
+| 57 | eigenrow image factorization and fixed-summand obstruction | notes/2026-08-20-c925-eigenrow-image-factorization.md |
 | frontier | open experiments and provider targets | notes/2026-08-20-c925-exploration-frontier.md |
 
 ## Dependency spine
@@ -87,7 +88,7 @@ Modules 19--23 prove reusable categorical consequences:
 - universal center-null quotients and minimal sufficient shadows; and
 - the conditional Section 6 argument as a separate specialization.
 
-Modules 24--56 isolate the higher-stabilization frontier:
+Modules 24--57 isolate the higher-stabilization frontier:
 
 - irrationality on any unbounded stabilization set implies irrationality for
   every index;
@@ -353,7 +354,7 @@ geometry; they do not manufacture either source adapter.
 Module 56 supplies the cheapest proved implementation law for the projected
 branch.  If the two incident one-wall packets factor the actual can/var maps
 through one common raw rank row as
-(rv_i=a_i\rho_i\) and \(\rho_ic_i=u_ir\), with both source normal
+\(rv_i=a_i\rho_i\) and \(\rho_ic_i=u_ir\), with both source normal
 parameters positive, then
 (\rho_jc_jv_i=a_i u_j\rho_i\) and the directed projected variation vanishes
 on the closed fibre.  This uses no commutation and no two-wall Stokes matrix.
@@ -362,6 +363,14 @@ Fourier--Laplace/can--var reader identifying these one-wall Thom/divided-rank
 packages with the actual Malgrange blocks.  Yu--Zhang identifies spectral and
 vanishing-cycle decompositions in its algebraic exponential-type scope, but
 does not construct the Gamma row or this image-block reader.
+Module 57 compresses each canonical one-wall image factor further: for
+\(P_i=\operatorname{im}(1-T_i)\), the two row equations are equivalent to
+the single eigenrow law \(r(1-T_i)=a_i u_i r\).  This supplies a decisive
+pre-analytic falsifier: every \(T_i\)-fixed vector must be row-null.  The
+specialized schober formula has the required product normal on its moving
+quotient, but common fixed generators obstruct the unprojected rank row.
+The next computation is therefore whether the actual primitive-sixth
+projector kills that fixed summand while retaining the moving rank line.
 
 ### ExactTop provider
 

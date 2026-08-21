@@ -161,7 +161,12 @@ are:
     one-wall can/var factorizations:
     \(rv_i=a_i\rho_i\), \(\rho_ic_i=u_ir\), and positive normal order imply
     \(\rho_jc_jv_i=a_i u_j\rho_i\), hence closed-fibre zero.  The highest-EV
-    task is therefore the exact occurrence reader identifying the actual
+    pretest is now Module 57: for the canonical image factorization these
+    two equations are equivalent to \(r(1-T_i)=a_i u_i r\), which forces the
+    row to kill every fixed summand.  Compute whether the primitive-sixth
+    projector kills the common fixed generators while retaining the moving
+    rank line.  Only after that passes is the highest-EV task the exact
+    occurrence reader identifying the actual
     fixed-phase inverse-Laplace blocks and maps with those Thom/divided-rank
     packages in one receiver, not a two-wall Stokes-matrix computation.
     Yu--Zhang's spectral/vanishing-cycle theorem helps type the block reader
@@ -195,7 +200,7 @@ are:
     row is the original cubic packet.
 
 None of these questions blocks the proof in Modules 0--16 or the
-transport-level specialization audit in Module 17.  Modules 18--56 isolate
+transport-level specialization audit in Module 17.  Modules 18--57 isolate
 the general consequences without claiming the missing enriched provider.
 The open questions control whether the interface can be promoted from a
 lawful compiler to a canonical equivalence with the complete external
