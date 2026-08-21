@@ -3,11 +3,11 @@
 - **Manuscript:** *Frobenius-equivariant pair extension and robust repair of
   eight-arcs*
 - **Frozen authority:** commit
-  `527ae333d4cf66c4db472f7d81ae6b1759e92d45`
+  `9977af02cfed699c1c14802242a6f500896164bc`
 - **Frozen PDF:**
   `papers/equivariant-robust-completion/equivariant-robust-completion.pdf`
 - **PDF SHA-256:**
-  `ed58c2e62ad0d77725e947423951bccff4138959fa097b94660d618ce3ade11b`
+  `0ecdf6e1689a407a47da0f1c03693da2466ae3dd1221b6462e548ed4a97d691f`
 - **Surface:** 15 A4 pages; 156 whitespace-delimited abstract tokens
 - **Date:** 2026-08-21
 
