@@ -21,6 +21,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.Pri
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.ParallelScalarExtensions
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.ParallelPrimaryQuotients
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.MarkedWitnessObstruction
+import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.GlobalCommonSourceObstruction
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.MarkedRepresentationEquivalence
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.MarkedMonodromyDiagram
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.MarkedLocalSystem
@@ -160,6 +161,15 @@ one scalar row square. No target surjectivity or primary lift is present.
 `MarkedWitnessObstruction.Data.comp` assembles a typed chain of such local
 maps; the intermediate marked representation and selected loop must agree,
 and the scalar row factors multiply.
+`GlobalCommonSourceObstruction` records the other lawful architecture.  One
+map from the global source to the detected endpoint must cover the selected
+primary part, while the map to the row-undetected endpoint is only the
+one-sided marked comparison.  Thus no surjectivity, correction splitting, or
+inverse is imposed on the rational-target map.  A surjective detected-endpoint
+map supplies its primary lift under the explicitly stated Fitting conditions.
+`ScalarData` is the coefficient-loose form: the two endpoints may use
+unrelated faithfully flat scalar extensions of one rational marked core, so a
+common chamber completion is not assumed.
 At the coefficient level, a based ring map must preserve the chosen residue
 square. It therefore cannot send a coordinate vanishing at the source point
 to a target coordinate plus a term of nonzero residue. An element with unit

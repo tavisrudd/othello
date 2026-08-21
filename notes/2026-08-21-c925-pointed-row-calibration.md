@@ -37,6 +37,10 @@ below changes the selected action from formal \(z\)-monodromy to an algebraic
 deck action, so its source detection and endpoint contrast must be reproved;
 they cannot be borrowed from the fixed-phase calculation.
 
+The statement-by-statement external-source audit is maintained in
+`2026-08-21-c925-no-stokes-source-dossier.md`.  This note owns the consumer
+and route ledger; the dossier owns what each paper actually supplies.
+
 ## Open-gate ledger
 
 | gate | exact input | current evidence boundary |
@@ -105,7 +109,11 @@ same-ring consumer.
 1. **General source, specialized downstream.**  Construct one marked source
    \(S\) with its detected witness, selected loop, and row, then obtain one
    map \(S_K\to E\) to the projective endpoint after any required scalar
-   extension.  The rational-core proposal has this shape.
+   extension.  The rational-core proposal has this shape.  The detected
+   cubic endpoint and the empty rational endpoint may use unrelated
+   faithfully flat branch fields; only their descent from the same marked
+   core is shared.  This is the exact role of
+   `GlobalCommonSourceObstruction.ScalarData`.
 2. **Composable local sources, assembled downstream.**  Construct a typed
    chain
 

@@ -144,6 +144,9 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   a one-blowup curve counterexample.  The remainder of this entry records
   established modules and conditional provider alternatives, not coequal
   next steps.
+  Exact external-source inputs, deductions, and nonoutputs are tracked in
+  `../2026-08-21-c925-no-stokes-source-dossier.md`; update that dossier before
+  changing the provider frontier.
 
   The packet is organized like a parameterized software interface: a
   caller chooses which generic even-block data to observe, which blocks to
@@ -568,8 +571,18 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   splitting, adjacent overlap, and inverse maps are not used.  The
   paper-local theorem is
   `Comparison.MarkedWitnessObstruction.endpoint_detects_of_core_detects`.
-  The live source gate is exactly construction of that actual marked core and
-  endpoint map.  Ordinary Hodge--Lefschetz packet length cannot replace the
+  `Comparison.GlobalCommonSourceObstruction.ScalarData` types the preferred
+  single-cobordism provider: the detected cubic endpoint and empty rational
+  endpoint may use unrelated faithfully flat branch fields of one rational
+  marked core.  Only the cubic-side map needs primary coverage; the rational
+  endpoint map remains one-sided.  The live source gate is exact AKMW/GYY
+  highest/lowest compatibility, descent of both maps to that core, one
+  genuinely geometric common selected action, and the two same-source row
+  equations.  Gu--Yu--Yu's shift becomes scalar multiplication after Fourier
+  transform and does not by itself give the required deck contrast.  If the
+  global source fails, the only alternative is a typed same-action chain of
+  local rowed maps.
+  Ordinary Hodge--Lefschetz packet length cannot replace the
   marking: a curve whose Jacobian surjects onto the cubic intermediate
   Jacobian creates the full source-length Hodge string in one smooth blowup.
   The automatic analytic global-gauge and edge-germ-composition implications
@@ -587,9 +600,9 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   one-hundred-twenty-two-check
   finite law replay, the eleven-check path toy, the four-check source-typed
   Haskell toy, the four-check double-normal producer toy, and original cubic
-  replay are green.  C925 remains open at fixed-phase Gamma/rank transport
-  or at this ExactTop provider; the relative-cap cancellation remains one
-  possible rank provider.
+  replay are green.  C925 remains open at the algebraic marked-source/action
+  provider above.  The fixed-phase/Stokes and ExactTop routes are fallbacks,
+  not the live frontier.
   Mathematics and paper-local Lean only; no manuscript edits.  Card:
   `../cubic-threefolds-tasks/c925-modular-direct-qdm-proof-packet.md`.
 - **C924 — closed 2026-08-19.** The direct ordinary-QDM route proves

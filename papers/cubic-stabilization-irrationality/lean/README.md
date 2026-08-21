@@ -217,6 +217,17 @@ the common marked core maps to a detected endpoint witness under only the
 selected-loop square and a scalar row square. It assumes neither
 surjectivity nor primary coverage.
 
+`Comparison.GlobalCommonSourceObstruction` types a single-master-space
+implementation of that consumer.  The map to the endpoint where detection is
+already known must lift the selected primary vectors and compare rows by a
+unit.  The map to the endpoint with empty marked support remains one-sided
+and need not be surjective.  A surjective source-endpoint map yields the
+required primary lift at an exponent satisfying the two Fitting conditions.
+The module does not construct the master space, Fourier maps, common selected
+action, or row identities.  Its `ScalarData` wrapper allows the two endpoint
+maps to use unrelated faithfully flat coefficient extensions of one rational
+marked core; the same-field `Data` is only the simpler special case.
+
 `Comparison.BasedCoefficientMap` isolates the first requirement on such
 completed germs. A map is based only when its residue square commutes. Hence a
 coordinate vanishing at the source point cannot map to a target coordinate

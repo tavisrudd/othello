@@ -78,6 +78,8 @@ exact \(m=2\) and all-\(m\) transport gates.
   notes/2026-08-21-c925-outer-kummer-and-carrier-boundary.md
 - pointed-row compression, open-gate ledger, and route audit:
   notes/2026-08-21-c925-pointed-row-calibration.md
+- no-Stokes external-source dossier and exact provider boundaries:
+  notes/2026-08-21-c925-no-stokes-source-dossier.md
 
 The packet index owns the module-to-file map.  Do not append another large
 module to this card or to the index; add one focused companion file and one
@@ -501,6 +503,13 @@ Crossed-edge provenance replay:
        | diff -u \
            notes/cubic-threefolds-tasks/c925-crossed-edge-lens-toy-output.txt -'
 
+Paper-local Lean is validated only through the guarded queue.  The aggregate
+targets `CubicStabilizationIrrationality` and
+`CubicStabilizationIrrationalityVerification` passed together in run
+`20260821-220337-05593f8e`.  This includes
+`GlobalCommonSourceObstruction.Data` and its coefficient-loose `ScalarData`
+wrapper in the reviewer axiom audit.
+
 The finite model currently has one hundred twenty-two checks.  It verifies only the
 advertised algebraic laws and countermodels, never an external QDM provider.
 The replayed script is 117334 bytes with SHA-256
@@ -519,7 +528,8 @@ any geometric or QDM provider.
    scalar-row squares.  The current high-EV provider to source-check is a
    finite rational marked core carrying that witness, followed by scalar
    extension; rational descent and faithful flatness belong to this provider,
-   not to the minimal consumer.  The complete gate ledger is G0--G3 in
+   not to the minimal consumer.  The comparison-provider ledger is G0--G3,
+   with endpoint contrast recorded separately as G4, in
    `../2026-08-21-c925-pointed-row-calibration.md`.
    Audit every proposed provider against this one-sided consumer before adding
    a hypothesis: endpoint surjectivity, primary coverage, correction control,
@@ -532,11 +542,23 @@ any geometric or QDM provider.
    endpoint non-detection.  Prove both the source witness (G1) and rational
    endpoint non-detection (G4) for this exact algebraic action; the old
    fixed-phase endpoint calculation cannot be reused by relabeling.
-3. For that algebraic carrier, verify that one global cobordism map exists
-   beyond a simple wall and proves G2--G3.  If the cited sources do not state
-   that map, test the only other source architecture: a typed chain of local
-   marked maps over one downstream ring, each satisfying the selected-loop and
-   scalar-row laws.  Their composite is the one map consumed by
+   Record every source theorem and nonoutput in
+   `../2026-08-21-c925-no-stokes-source-dossier.md`; do not promote a derived
+   row formula to a source-stated Gamma or descent theorem.
+3. Test the newly isolated global-cobordism provider first.  AKMW
+   Definition 2.1.1 and Theorem 2.3.1 give a projective compactified
+   cobordism with the two endpoints as geometric quotients for a projective
+   birational morphism.  Verify the four missing sublemmas in the source
+   dossier: exact Gu--Yu--Yu highest/lowest scope, descent to one rational
+   marked core with faithful branch fields plus a cubic-side primary lift, a
+   genuinely geometric common selected action, and the two same-source row
+   equations.  Proposition 4.14's shift is sent
+   to scalar multiplication and does not by itself give the required deck
+   contrast.  The conditional consumer is
+   `Comparison.GlobalCommonSourceObstruction`.
+   If this global source fails, test the only other source architecture: a
+   typed chain of local marked maps over one downstream ring, each satisfying
+   the selected-loop and scalar-row laws.  Their composite is the one map consumed by
    `MarkedWitnessObstruction`; no local surjectivity or correction equivalence
    is needed.  If neither architecture is sourced, record the missing map as
    the new source theorem rather than adding another algebraic interface.

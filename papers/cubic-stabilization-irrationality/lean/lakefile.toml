@@ -32,6 +32,7 @@ roots = [
   "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.ParallelScalarExtensions",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.ParallelPrimaryQuotients",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.MarkedWitnessObstruction",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.GlobalCommonSourceObstruction",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.MarkedRepresentationEquivalence",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.MarkedMonodromyDiagram",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.MarkedLocalSystem",
