@@ -166,6 +166,52 @@ theorem harmonicQuarticCode_parameters_of_global_geometry
   rw [hlength] at hdistance
   omega
 
+/-- Every chosen point of an injectively indexed five-circuit has the other four points as a
+radius-four repair set.  This is the finite reindexing bridge used below for harmonic blocks. -/
+theorem fiveCircuit_repairPort {ι : Type*} [Fintype ι] [DecidableEq ι]
+    [DecidableEq 𝔽] {G : Matrix (Fin 5) ι 𝔽}
+    (f : Fin 5 → ι) (hf : Function.Injective f)
+    (hdep : ¬ LinearIndependent 𝔽 (fun j => G.col (f j)))
+    (hdelete : ∀ j : Fin 5,
+      LinearIndependent 𝔽 (fun i : Fin 4 => G.col (f (j.succAbove i))))
+    (j : Fin 5) :
+    (Finset.univ.erase j).image f ∈
+      FiniteGeom.repairHypergraph (FiniteGeom.rowCode G) (f j) 4 := by
+  let R : Finset ι := (Finset.univ.erase j).image f
+  have hsub : R ⊆ Finset.univ.erase (f j) := by
+    intro x hx
+    obtain ⟨i, hi, rfl⟩ := Finset.mem_image.mp hx
+    exact Finset.mem_erase.mpr ⟨fun h => (Finset.mem_erase.mp hi).1 (hf h),
+      Finset.mem_univ _⟩
+  have hcard : R.card = 4 := by
+    rw [Finset.card_image_of_injective _ hf, Finset.card_erase_of_mem (Finset.mem_univ j),
+      Finset.card_univ, Fintype.card_fin]
+  let e₀ : Fin 5 → ↥(insert (f j) R) := fun i => ⟨f i, by
+    by_cases hij : i = j
+    · simp [hij]
+    · exact Finset.mem_insert.mpr (Or.inr (Finset.mem_image.mpr
+        ⟨i, Finset.mem_erase.mpr ⟨hij, Finset.mem_univ i⟩, rfl⟩))⟩
+  have he₀ : Function.Bijective e₀ := by
+    refine ⟨fun i k hik => hf (congrArg Subtype.val hik), ?_⟩
+    rintro ⟨x, hx⟩
+    rcases Finset.mem_insert.mp hx with rfl | hx
+    · exact ⟨j, Subtype.ext rfl⟩
+    · obtain ⟨i, -, rfl⟩ := Finset.mem_image.mp hx
+      exact ⟨i, Subtype.ext rfl⟩
+  let e : Fin 5 ≃ ↥(insert (f j) R) := Equiv.ofBijective e₀ he₀
+  apply FiniteGeom.mem_repairHypergraph_of_reindexed_circuit hsub hcard e
+  · simpa [e, e₀] using hdep
+  · intro k
+    have hk : LinearIndependent 𝔽
+        (fun i : {i : Fin 5 // i ≠ k} => G.col (f i.1)) := by
+      exact (linearIndependent_equiv' (R := 𝔽) (M := Fin 5 → 𝔽)
+        (finSuccAboveEquiv k)
+        (f := fun i : {i : Fin 5 // i ≠ k} => G.col (f i.1))
+        (g := fun i : Fin 4 => G.col (f (k.succAbove i))) (by
+          funext i
+          rfl)).1 (hdelete k)
+    simpa [e, e₀] using hk
+
 /-- The nucleus followed by four quartic curve columns, arranged as the rows of a square matrix. -/
 def harmonicQuarticFamily (a b c d : HarmonicParameter 𝔽) : Matrix (Fin 5) (Fin 5) 𝔽 :=
   ![harmonicQuarticNucleus, harmonicQuarticCurvePoint a, harmonicQuarticCurvePoint b,
@@ -426,6 +472,57 @@ theorem nucleusFiniteInfinity_linearIndependent {a b : 𝔽} (hab : a ≠ b) :
   rw [nucleusFiniteInfinity_minor_det]
   exact sub_ne_zero.mpr hab.symm
 
+/-- The nucleus and any three distinct projective quartic points are independent. -/
+theorem nucleusProjectiveTriple_linearIndependent [CharP 𝔽 3]
+    {a b c : HarmonicParameter 𝔽} (hab : a ≠ b) (hac : a ≠ c) (hbc : b ≠ c) :
+    LinearIndependent 𝔽 ![harmonicQuarticNucleus,
+      harmonicQuarticCurvePoint a, harmonicQuarticCurvePoint b,
+      harmonicQuarticCurvePoint c] := by
+  cases a with
+  | finite a =>
+      cases b with
+      | finite b =>
+          cases c with
+          | finite c =>
+              exact nucleusFiniteTriple_linearIndependent
+                (fun h => hab (congrArg HarmonicParameter.finite h))
+                (fun h => hac (congrArg HarmonicParameter.finite h))
+                (fun h => hbc (congrArg HarmonicParameter.finite h))
+          | infinity =>
+              exact nucleusFiniteInfinity_linearIndependent
+                (fun h => hab (congrArg HarmonicParameter.finite h))
+      | infinity =>
+          cases c with
+          | finite c =>
+              have hli := nucleusFiniteInfinity_linearIndependent (𝔽 := 𝔽)
+                (fun h => hac (congrArg HarmonicParameter.finite h))
+              have hs₀ : Equiv.swap (2 : Fin 4) 3 0 = 0 := by decide
+              have hs₁ : Equiv.swap (2 : Fin 4) 3 1 = 1 := by decide
+              have hs₂ : Equiv.swap (2 : Fin 4) 3 2 = 3 := by decide
+              have hs₃ : Equiv.swap (2 : Fin 4) 3 3 = 2 := by decide
+              exact (linearIndependent_equiv' (Equiv.swap (2 : Fin 4) 3) (by
+                funext i
+                fin_cases i <;> simp [nucleusFiniteInfinityFamily, hs₀, hs₁, hs₂, hs₃])).2 hli
+          | infinity => exact (hbc rfl).elim
+  | infinity =>
+      cases b with
+      | finite b =>
+          cases c with
+          | finite c =>
+              have hli := nucleusFiniteInfinity_linearIndependent (𝔽 := 𝔽)
+                (fun h => hbc (congrArg HarmonicParameter.finite h))
+              let e : Fin 4 ≃ Fin 4 :=
+                (Equiv.swap (2 : Fin 4) 3).trans (Equiv.swap (1 : Fin 4) 3)
+              have he₀ : e 0 = 0 := by decide
+              have he₁ : e 1 = 3 := by decide
+              have he₂ : e 2 = 1 := by decide
+              have he₃ : e 3 = 2 := by decide
+              exact (linearIndependent_equiv' e (by
+                funext i
+                fin_cases i <;> simp [nucleusFiniteInfinityFamily, he₀, he₁, he₂, he₃])).2 hli
+          | infinity => exact (hac rfl).elim
+      | infinity => exact (hab rfl).elim
+
 /-- Four distinct finite quartic curve points are linearly independent. -/
 theorem fourFiniteHarmonicQuarticCurve_linearIndependent {a b c d : 𝔽}
     (hab : a ≠ b) (hac : a ≠ c) (had : a ≠ d)
@@ -479,6 +576,84 @@ theorem finiteTripleInfinityCurve_linearIndependent {a b c : 𝔽}
     simpa [v, cols] using finiteTripleInfinityCurve_minor_det a b c]
   exact hv
 
+/-- Any four distinct projective quartic-curve points are linearly independent. -/
+theorem projectiveQuarticFour_linearIndependent
+    {a b c d : HarmonicParameter 𝔽}
+    (hab : a ≠ b) (hac : a ≠ c) (had : a ≠ d)
+    (hbc : b ≠ c) (hbd : b ≠ d) (hcd : c ≠ d) :
+    LinearIndependent 𝔽 ![harmonicQuarticCurvePoint a, harmonicQuarticCurvePoint b,
+      harmonicQuarticCurvePoint c, harmonicQuarticCurvePoint d] := by
+  cases a with
+  | finite a =>
+      cases b with
+      | finite b =>
+          cases c with
+          | finite c =>
+              cases d with
+              | finite d =>
+                  exact fourFiniteHarmonicQuarticCurve_linearIndependent
+                    (fun h => hab (congrArg HarmonicParameter.finite h))
+                    (fun h => hac (congrArg HarmonicParameter.finite h))
+                    (fun h => had (congrArg HarmonicParameter.finite h))
+                    (fun h => hbc (congrArg HarmonicParameter.finite h))
+                    (fun h => hbd (congrArg HarmonicParameter.finite h))
+                    (fun h => hcd (congrArg HarmonicParameter.finite h))
+              | infinity =>
+                  exact finiteTripleInfinityCurve_linearIndependent
+                    (fun h => hab (congrArg HarmonicParameter.finite h))
+                    (fun h => hac (congrArg HarmonicParameter.finite h))
+                    (fun h => hbc (congrArg HarmonicParameter.finite h))
+          | infinity =>
+              cases d with
+              | finite d =>
+                  have hli := finiteTripleInfinityCurve_linearIndependent (𝔽 := 𝔽)
+                    (fun h => hab (congrArg HarmonicParameter.finite h))
+                    (fun h => had (congrArg HarmonicParameter.finite h))
+                    (fun h => hbd (congrArg HarmonicParameter.finite h))
+                  have hs₀ : Equiv.swap (2 : Fin 4) 3 0 = 0 := by decide
+                  have hs₁ : Equiv.swap (2 : Fin 4) 3 1 = 1 := by decide
+                  have hs₂ : Equiv.swap (2 : Fin 4) 3 2 = 3 := by decide
+                  have hs₃ : Equiv.swap (2 : Fin 4) 3 3 = 2 := by decide
+                  exact (linearIndependent_equiv' (Equiv.swap (2 : Fin 4) 3) (by
+                    funext i
+                    fin_cases i <;> simp [hs₀, hs₁, hs₂, hs₃])).2 hli
+              | infinity => exact (hcd rfl).elim
+      | infinity =>
+          cases c with
+          | finite c =>
+              cases d with
+              | finite d =>
+                  have hli := finiteTripleInfinityCurve_linearIndependent (𝔽 := 𝔽)
+                    (fun h => hac (congrArg HarmonicParameter.finite h))
+                    (fun h => had (congrArg HarmonicParameter.finite h))
+                    (fun h => hcd (congrArg HarmonicParameter.finite h))
+                  let e₀ : Fin 4 → Fin 4 := ![0, 3, 1, 2]
+                  let e : Fin 4 ≃ Fin 4 := Equiv.ofBijective e₀ (by decide)
+                  exact (linearIndependent_equiv' e (by
+                    funext i
+                    fin_cases i <;> rfl)).2 hli
+              | infinity => exact (hbd rfl).elim
+          | infinity => exact (hbc rfl).elim
+  | infinity =>
+      cases b with
+      | finite b =>
+          cases c with
+          | finite c =>
+              cases d with
+              | finite d =>
+                  have hli := finiteTripleInfinityCurve_linearIndependent (𝔽 := 𝔽)
+                    (fun h => hbc (congrArg HarmonicParameter.finite h))
+                    (fun h => hbd (congrArg HarmonicParameter.finite h))
+                    (fun h => hcd (congrArg HarmonicParameter.finite h))
+                  let e₀ : Fin 4 → Fin 4 := ![3, 0, 1, 2]
+                  let e : Fin 4 ≃ Fin 4 := Equiv.ofBijective e₀ (by decide)
+                  exact (linearIndependent_equiv' e (by
+                    funext i
+                    fin_cases i <;> rfl)).2 hli
+              | infinity => exact (had rfl).elim
+          | infinity => exact (hac rfl).elim
+      | infinity => exact (hab rfl).elim
+
 /-- A finite harmonic block together with the nucleus is a five-circuit: the full family is
 dependent and deleting any one member leaves an independent four-family. -/
 theorem finiteHarmonicBlock_isFiveCircuit [CharP 𝔽 3] {a b c d : 𝔽}
@@ -522,6 +697,93 @@ theorem infinityHarmonicBlock_isFiveCircuit [CharP 𝔽 3] {a b c : 𝔽}
     nucleusFiniteTriple_linearIndependent hab hac hbc⟩
   intro hli
   exact (harmonicQuarticFamily_infinity_linearIndependent_iff hab hac hbc).1 hli hblock
+
+/-- Coordinate indices of the nucleus followed by four prescribed curve parameters. -/
+def harmonicQuarticBlockIndex (a b c d : HarmonicParameter 𝔽) :
+    Fin 5 → HarmonicQuarticIndex 𝔽 :=
+  ![.inr (), .inl a, .inl b, .inl c, .inl d]
+
+/-- A finite harmonic block gives all five pointed radius-four ports: choosing any one of its
+nucleus-plus-block coordinates as target leaves the other four as helpers. -/
+theorem finiteHarmonicBlock_repairPort [Fintype 𝔽] [DecidableEq 𝔽] [CharP 𝔽 3]
+    {a b c d : 𝔽}
+    (hab : a ≠ b) (hac : a ≠ c) (had : a ≠ d)
+    (hbc : b ≠ c) (hbd : b ≠ d) (hcd : c ≠ d)
+    (hblock : IsHarmonicQuarticBlock (.finite a) (.finite b) (.finite c) (.finite d))
+    (j : Fin 5) :
+    (Finset.univ.erase j).image
+        (harmonicQuarticBlockIndex (.finite a) (.finite b) (.finite c) (.finite d)) ∈
+      FiniteGeom.repairHypergraph (harmonicQuarticCode (𝔽 := 𝔽))
+        (harmonicQuarticBlockIndex (.finite a) (.finite b) (.finite c) (.finite d) j) 4 := by
+  let f := harmonicQuarticBlockIndex (.finite a) (.finite b) (.finite c) (.finite d)
+  have hf : Function.Injective f := by
+    intro i k hik
+    fin_cases i <;> fin_cases k <;> simp_all [f, harmonicQuarticBlockIndex]
+  have hc := finiteHarmonicBlock_isFiveCircuit hab hac had hbc hbd hcd hblock
+  apply fiveCircuit_repairPort (G := harmonicQuarticGenerator (𝔽 := 𝔽)) f hf
+  · have heq : (fun i => (harmonicQuarticGenerator (𝔽 := 𝔽)).col (f i)) =
+        harmonicQuarticFamily (.finite a) (.finite b) (.finite c) (.finite d) := by
+      funext i x
+      fin_cases i <;> rfl
+    rw [heq]
+    exact hc.1
+  · intro k
+    fin_cases k
+    · convert hc.2.1 using 1
+      funext i x
+      fin_cases i <;> rfl
+    · convert hc.2.2.1 using 1
+      funext i x
+      fin_cases i <;> rfl
+    · convert hc.2.2.2.1 using 1
+      funext i x
+      fin_cases i <;> rfl
+    · convert hc.2.2.2.2.1 using 1
+      funext i x
+      fin_cases i <;> rfl
+    · convert hc.2.2.2.2.2 using 1
+      funext i x
+      fin_cases i <;> rfl
+
+/-- The same five pointed ports for a harmonic block whose normalized fourth parameter is the
+point at infinity. -/
+theorem infinityHarmonicBlock_repairPort [Fintype 𝔽] [DecidableEq 𝔽] [CharP 𝔽 3]
+    {a b c : 𝔽} (hab : a ≠ b) (hac : a ≠ c) (hbc : b ≠ c)
+    (hblock : IsHarmonicQuarticBlock (.finite a) (.finite b) (.finite c) .infinity)
+    (j : Fin 5) :
+    (Finset.univ.erase j).image
+        (harmonicQuarticBlockIndex (.finite a) (.finite b) (.finite c) .infinity) ∈
+      FiniteGeom.repairHypergraph (harmonicQuarticCode (𝔽 := 𝔽))
+        (harmonicQuarticBlockIndex (.finite a) (.finite b) (.finite c) .infinity j) 4 := by
+  let f := harmonicQuarticBlockIndex (.finite a) (.finite b) (.finite c) .infinity
+  have hf : Function.Injective f := by
+    intro i k hik
+    fin_cases i <;> fin_cases k <;> simp_all [f, harmonicQuarticBlockIndex]
+  have hc := infinityHarmonicBlock_isFiveCircuit hab hac hbc hblock
+  apply fiveCircuit_repairPort (G := harmonicQuarticGenerator (𝔽 := 𝔽)) f hf
+  · have heq : (fun i => (harmonicQuarticGenerator (𝔽 := 𝔽)).col (f i)) =
+        harmonicQuarticFamily (.finite a) (.finite b) (.finite c) .infinity := by
+      funext i x
+      fin_cases i <;> rfl
+    rw [heq]
+    exact hc.1
+  · intro k
+    fin_cases k
+    · convert hc.2.1 using 1
+      funext i x
+      fin_cases i <;> rfl
+    · convert hc.2.2.1 using 1
+      funext i x
+      fin_cases i <;> rfl
+    · convert hc.2.2.2.1 using 1
+      funext i x
+      fin_cases i <;> rfl
+    · convert hc.2.2.2.2.1 using 1
+      funext i x
+      fin_cases i <;> rfl
+    · convert hc.2.2.2.2.2 using 1
+      funext i x
+      fin_cases i <;> rfl
 
 /-- Coefficients of the monic quartic with roots `a,b,c,d`, ordered from constant to quartic
 coefficient. -/
