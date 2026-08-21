@@ -2,9 +2,8 @@
 
 **Lane:** `complete-ports`
 
-**Status:** PARTIAL CHECKPOINT — complete human proofs, the represented filtration witness, and the
-matching Lean source elaborate cleanly; the aggregate gate and axiom audit await the shared build
-owner.
+**Status:** COMPLETE — human proofs, represented filtration witness, matching Lean statements,
+aggregate gate, axiom audit, trust-spine audit, exact replay, and manuscript build all pass.
 
 ## Result
 
@@ -122,6 +121,48 @@ formalize the circuit-overlap mechanism and the exact two symbolic curves.  The 
 minor table and independently replayed exact arithmetic; matrix rank itself is not a Lean
 dependency.
 
-The aggregate `RepairPorts.Gates.CompletePorts` run has not started because a foreign lane owns the
-shared build lock.  The paper ledgers therefore keep both statements outside the admitted body
-proof spine until that gate, its printed axiom audit, and the trust-spine audit pass.
+The aggregate `RepairPorts.Gates.CompletePorts` build passed.  Its 42 printed terminals each report
+exactly `propext`, `Classical.choice`, and `Quot.sound`; no certificate, native evaluation,
+generated finite record, or mathematical axiom occurs in the audited closures.  The
+`complete_ports` trust-spine audit reports zero findings.  The theorem, formalization,
+statement-adequacy, verification, and claim/proof/novelty ledgers now admit both statements to the
+body proof spine.
+
+## Validation
+
+Completed checks:
+
+```text
+python3 notes/2026-07-26-c676-pointed-tutte-filtration.py \
+  --check notes/2026-07-26-c676-pointed-tutte-filtration.json
+lean/scripts/lean-build-queue.py build RepairPorts.Gates.CompletePorts --cores 20-23
+python3 lean/scripts/lean-trust-spine.py audit --area complete_ports
+nix shell nixpkgs#tectonic -c tectonic complete_repair_ports.tex
+```
+
+The exact replay reproduced the committed 3,736-byte JSON and its recorded SHA-256.  The aggregate
+gate passed at 2.15 GB peak RSS, the trust audit reported zero errors, warnings, or informational
+findings, and the private manuscript rebuilt without TeX warnings.
+
+## Closeout: extra value and expert-pressure pass
+
+The Britz--Ravagnani pressure test confirms that the boundary identifies the forgotten datum
+sharply: the pointed polynomial records how many target-containing circuit-hyperplanes occur, while
+radius truncation records how those circuits intersect after deleting the target.  The explicit
+represented pair makes that loss visible without making the earlier field-nine coefficient table
+carry the proposition.
+
+The closeout also exposed a removable endpoint seam.  The rational forms
+`(1-s)^n S_x(s/(1-s))` and the inverse-variable coefficient extraction were previously printed
+without excluding their zero denominators.  The theorem now states the division-free Bernstein
+sum for every survival parameter and restricts the rational rewrite to `s != 1`; the proof likewise
+restricts inverse-variable extraction to `u != 0`.
+
+## Mystery ledger
+
+- **Settled:** what the unfiltered invariant forgets is circuit-intersection geometry, witnessed by
+  disjoint versus one-point-overlapping target circuits with identical pointed profiles.
+- **Settled:** the apparent endpoint ambiguity was only a presentation defect; the division-free
+  Bernstein identity covers the endpoints exactly.
+- **No genuine mystery remains within C676.**  Minimality of the seven-column witness is explicitly
+  unclaimed and is not needed for the boundary theorem.
