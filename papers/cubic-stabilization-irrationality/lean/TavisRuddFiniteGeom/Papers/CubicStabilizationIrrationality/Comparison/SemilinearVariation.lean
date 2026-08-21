@@ -70,6 +70,8 @@ def incomingImageMap
     apply Subtype.ext
     exact reader.map.map_smulₛₗ scalar x.1
 
+/-- The induced map on incoming monodromy images has the same ambient value as
+the semilinear specialization map. -/
 @[simp]
 theorem incomingImageMap_value
     (reader : Specialization specialize incomingR targetR incomingK targetK rowR rowK)
@@ -183,5 +185,158 @@ theorem projectedVariation_eq_zero_of_incomingImageMap_surjective
   simp
 
 end Specialization
+
+/-- A semilinear specialization whose marked row is transported up to a
+scalar in the target ring. The scalar need not be invertible for vanishing
+transport. -/
+structure ScaledSpecialization
+    (specialize : R →+* k)
+    (incomingR targetR : V →ₗ[R] V)
+    (incomingK targetK : W →ₗ[k] W)
+    (rowR : V →ₗ[R] R) (rowK : W →ₗ[k] k) where
+  map : V →ₛₗ[specialize] W
+  incomingCommutes : ∀ x, map (incomingR x) = incomingK (map x)
+  targetCommutes : ∀ x, map (targetR x) = targetK (map x)
+  rowScale : k
+  rowSpecializes : ∀ x, rowK (map x) = rowScale * specialize (rowR x)
+
+namespace ScaledSpecialization
+
+variable
+    {incomingR targetR : V →ₗ[R] V}
+    {incomingK targetK : W →ₗ[k] W}
+    {rowR : V →ₗ[R] R} {rowK : W →ₗ[k] k}
+
+/-- Forget the scaled rows and retain the operator specialization. Zero rows
+make its image map independent of any normalization choice. -/
+def operatorSpecialization
+    (reader :
+      ScaledSpecialization specialize incomingR targetR incomingK targetK rowR rowK) :
+    Specialization specialize incomingR targetR incomingK targetK 0 0 where
+  map := reader.map
+  incomingCommutes := reader.incomingCommutes
+  targetCommutes := reader.targetCommutes
+  rowSpecializes := by simp
+
+/-- The canonical induced map on incoming monodromy images. -/
+def incomingImageMap
+    (reader :
+      ScaledSpecialization specialize incomingR targetR incomingK targetK rowR rowK) :
+    LinearMap.range (defectOperator incomingR) →ₛₗ[specialize]
+      LinearMap.range (defectOperator incomingK) :=
+  reader.operatorSpecialization.incomingImageMap
+
+/-- Ambient surjectivity makes the induced incoming-image map surjective. -/
+theorem incomingImageMap_surjective_of_surjective
+    (reader :
+      ScaledSpecialization specialize incomingR targetR incomingK targetK rowR rowK)
+    (surjective : Function.Surjective reader.map) :
+    Function.Surjective reader.incomingImageMap :=
+  reader.operatorSpecialization.incomingImageMap_surjective_of_surjective surjective
+
+/-- Ambient surjectivity is a sufficient implementation of incoming-image
+spanning for a row-scaled specialization. -/
+theorem incomingImageSpan_eq_top_of_surjective
+    (reader :
+      ScaledSpecialization specialize incomingR targetR incomingK targetK rowR rowK)
+    (surjective : Function.Surjective reader.map) :
+    Submodule.span k (Set.range reader.incomingImageMap) = ⊤ :=
+  reader.operatorSpecialization.incomingImageSpan_eq_top_of_surjective surjective
+
+/-- The defect of involutivity of the specialized target operator, restricted
+to the specialized incoming image. -/
+def targetSquareDefectOnIncomingImage
+    (_reader :
+      ScaledSpecialization specialize incomingR targetR incomingK targetK rowR rowK) :
+    LinearMap.range (defectOperator incomingK) →ₗ[k] W where
+  toFun value := targetK (targetK value.1) - value.1
+  map_add' left right := by
+    change targetK (targetK (left.1 + right.1)) - (left.1 + right.1) =
+      (targetK (targetK left.1) - left.1) +
+        (targetK (targetK right.1) - right.1)
+    simp only [map_add]
+    abel
+  map_smul' scalar value := by simp [smul_sub]
+
+/-- If the model target operator is involutive, incoming-image spanning forces
+the specialized target operator to be involutive on the actual incoming
+image. This is a necessary test for an involutive model realization. -/
+theorem targetSquare_eq_on_incomingImage
+    (reader :
+      ScaledSpecialization specialize incomingR targetR incomingK targetK rowR rowK)
+    (imageSpans : Submodule.span k (Set.range reader.incomingImageMap) = ⊤)
+    (targetRInvolutive : ∀ x, targetR (targetR x) = x)
+    (value : LinearMap.range (defectOperator incomingK)) :
+    targetK (targetK value.1) = value.1 := by
+  have range_le_kernel : Set.range reader.incomingImageMap ⊆
+      reader.targetSquareDefectOnIncomingImage.ker := by
+    rintro _ ⟨x, rfl⟩
+    change targetK (targetK (reader.map x.1)) - reader.map x.1 = 0
+    rw [← reader.targetCommutes x.1,
+      ← reader.targetCommutes (targetR x.1), targetRInvolutive, sub_self]
+  have top_le_kernel : (⊤ : Submodule k _) ≤
+      reader.targetSquareDefectOnIncomingImage.ker := by
+    rw [← imageSpans]
+    exact Submodule.span_le.2 range_le_kernel
+  exact sub_eq_zero.mp (top_le_kernel Submodule.mem_top)
+
+/-- Projected variation specializes with the same scalar as the marked row. -/
+theorem projectedVariation_specializes
+    (reader :
+      ScaledSpecialization specialize incomingR targetR incomingK targetK rowR rowK)
+    (x : LinearMap.range (defectOperator incomingR)) :
+    projectedVariation incomingK targetK rowK (reader.incomingImageMap x) =
+      reader.rowScale * specialize (projectedVariation incomingR targetR rowR x) := by
+  change rowK (defectOperator targetK (reader.map x.1)) =
+    reader.rowScale * specialize (rowR (defectOperator targetR x.1))
+  have targetSquare :
+      reader.map (defectOperator targetR x.1) =
+        defectOperator targetK (reader.map x.1) := by
+    simp [defectOperator, reader.targetCommutes]
+  rw [← targetSquare]
+  exact reader.rowSpecializes (defectOperator targetR x.1)
+
+/-- Incoming-image spanning transports zero projected variation even when the
+row is preserved only up to a scalar. -/
+theorem projectedVariation_eq_zero_of_incomingImageSpan_eq_top
+    (reader :
+      ScaledSpecialization specialize incomingR targetR incomingK targetK rowR rowK)
+    (imageSpans : Submodule.span k (Set.range reader.incomingImageMap) = ⊤)
+    (specializedValuesVanish : ∀ x,
+      specialize (projectedVariation incomingR targetR rowR x) = 0) :
+    projectedVariation incomingK targetK rowK = 0 := by
+  let specializedVariation := projectedVariation incomingK targetK rowK
+  have range_le_kernel :
+      Set.range reader.incomingImageMap ⊆ specializedVariation.ker := by
+    rintro _ ⟨x, rfl⟩
+    change projectedVariation incomingK targetK rowK
+      (reader.incomingImageMap x) = 0
+    rw [reader.projectedVariation_specializes, specializedValuesVanish]
+    exact mul_zero reader.rowScale
+  have top_le_kernel : (⊤ : Submodule k _) ≤ specializedVariation.ker := by
+    rw [← imageSpans]
+    exact Submodule.span_le.2 range_le_kernel
+  apply LinearMap.ext
+  intro y
+  exact top_le_kernel Submodule.mem_top
+
+/-- A normal-factor reading whose normal specializes to zero remains zero
+after any scalar row normalization. -/
+theorem projectedVariation_eq_zero_of_normalFactor
+    (reader :
+      ScaledSpecialization specialize incomingR targetR incomingK targetK rowR rowK)
+    (imageSpans : Submodule.span k (Set.range reader.incomingImageMap) = ⊤)
+    (normal : R)
+    (referenceRow : LinearMap.range (defectOperator incomingR) →ₗ[R] R)
+    (variationReading :
+      projectedVariation incomingR targetR rowR = normal • referenceRow)
+    (normalVanishes : specialize normal = 0) :
+    projectedVariation incomingK targetK rowK = 0 := by
+  apply reader.projectedVariation_eq_zero_of_incomingImageSpan_eq_top imageSpans
+  intro x
+  rw [variationReading]
+  simp [normalVanishes]
+
+end ScaledSpecialization
 
 end TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.SemilinearVariation

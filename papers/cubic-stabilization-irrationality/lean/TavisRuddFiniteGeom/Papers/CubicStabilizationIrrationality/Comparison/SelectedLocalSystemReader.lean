@@ -72,6 +72,8 @@ def selectedMorphism
   rw [← domainIdentification.selectedDiagram, ← codomainIdentification.selectedDiagram]
   exact horizontal.selectAssigned assignment source target
 
+/-- Selecting two assigned loops does not change the underlying global
+semilinear comparison map. -/
 @[simp]
 theorem selectedMorphism_map
     (domainIdentification :
@@ -116,6 +118,76 @@ def selectedGaugeMorphism
     SemilinearMorphism specialize modelDiagram actualDiagram :=
   (horizontal.selectAssigned assignment source target).transport
     modelEquivalence actualEquivalence
+
+/-- Select a whole-local-system horizontal morphism and transport it through
+two row-scaled gauge equivalences. The residual row factor is specified by
+the compatibility equation between the gauge scales. -/
+def selectedRowScaledGaugeMorphism
+    {R : Type uR} {k : Type uk} [CommRing R] [CommRing k]
+    {specialize : R →+* k}
+    {Loop : Type uLoop} {Loop' : Type uLoop'} [Group Loop] [Group Loop']
+    {loopMap : Loop →* Loop'}
+    {Index : Type uι} {source target : Index}
+    {ModelRepresentationNearby : Type uModelRep}
+    {ActualRepresentationNearby : Type uActualRep}
+    {ModelNearby : Type uModel} {ActualNearby : Type uActual}
+    [AddCommGroup ModelRepresentationNearby] [Module R ModelRepresentationNearby]
+    [AddCommGroup ActualRepresentationNearby] [Module k ActualRepresentationNearby]
+    [AddCommGroup ModelNearby] [Module R ModelNearby]
+    [AddCommGroup ActualNearby] [Module k ActualNearby]
+    {domain : MarkedLocalSystem.Representation R Loop ModelRepresentationNearby}
+    {codomain : MarkedLocalSystem.Representation k Loop' ActualRepresentationNearby}
+    {assignment : LoopAssignment Index Loop}
+    {modelDiagram : Diagram R source target ModelNearby}
+    {actualDiagram : Diagram k source target ActualNearby}
+    (modelEquivalence : OperatorDiagramEquivalenceWithRowFactor R
+      (domain.select source target (assignment.loop source) (assignment.loop target)) modelDiagram)
+    (actualEquivalence : OperatorDiagramEquivalenceWithRowFactor k
+      (codomain.select source target (loopMap (assignment.loop source))
+        (loopMap (assignment.loop target))) actualDiagram)
+    (horizontal : SemilinearHorizontal specialize loopMap domain codomain)
+    (rowScale : k)
+    (scaleCompatibility :
+      actualEquivalence.rowScale = rowScale * specialize modelEquivalence.rowScale) :
+    ScaledSemilinearMorphism specialize modelDiagram actualDiagram :=
+  ScaledSemilinearMorphism.transportRowScaled modelEquivalence actualEquivalence
+    (horizontal.selectAssigned assignment source target) rowScale scaleCompatibility
+
+/-- Ambient surjectivity survives selected row-scaled gauge transport. -/
+theorem selectedRowScaledGaugeMorphism_map_surjective
+    {R : Type uR} {k : Type uk} [CommRing R] [CommRing k]
+    {specialize : R →+* k}
+    {Loop : Type uLoop} {Loop' : Type uLoop'} [Group Loop] [Group Loop']
+    {loopMap : Loop →* Loop'}
+    {Index : Type uι} {source target : Index}
+    {ModelRepresentationNearby : Type uModelRep}
+    {ActualRepresentationNearby : Type uActualRep}
+    {ModelNearby : Type uModel} {ActualNearby : Type uActual}
+    [AddCommGroup ModelRepresentationNearby] [Module R ModelRepresentationNearby]
+    [AddCommGroup ActualRepresentationNearby] [Module k ActualRepresentationNearby]
+    [AddCommGroup ModelNearby] [Module R ModelNearby]
+    [AddCommGroup ActualNearby] [Module k ActualNearby]
+    {domain : MarkedLocalSystem.Representation R Loop ModelRepresentationNearby}
+    {codomain : MarkedLocalSystem.Representation k Loop' ActualRepresentationNearby}
+    {assignment : LoopAssignment Index Loop}
+    {modelDiagram : Diagram R source target ModelNearby}
+    {actualDiagram : Diagram k source target ActualNearby}
+    (modelEquivalence : OperatorDiagramEquivalenceWithRowFactor R
+      (domain.select source target (assignment.loop source) (assignment.loop target)) modelDiagram)
+    (actualEquivalence : OperatorDiagramEquivalenceWithRowFactor k
+      (codomain.select source target (loopMap (assignment.loop source))
+        (loopMap (assignment.loop target))) actualDiagram)
+    (horizontal : SemilinearHorizontal specialize loopMap domain codomain)
+    (rowScale : k)
+    (scaleCompatibility :
+      actualEquivalence.rowScale = rowScale * specialize modelEquivalence.rowScale)
+    (surjective : Function.Surjective horizontal.map) :
+    Function.Surjective
+      (selectedRowScaledGaugeMorphism modelEquivalence actualEquivalence horizontal rowScale
+        scaleCompatibility).map :=
+  ScaledSemilinearMorphism.transportRowScaled_map_surjective modelEquivalence
+    actualEquivalence (horizontal.selectAssigned assignment source target) rowScale
+    scaleCompatibility surjective
 
 /-- Ambient surjectivity survives selection and marked gauge transport. -/
 theorem selectedGaugeMorphism_map_surjective
@@ -308,5 +380,101 @@ def ofMarkedLocalSystemOfSurjective
     (selectedGaugeMorphism_map_surjective modelEquivalence actualEquivalence horizontal surjective)
 
 end GaugeReader
+
+namespace ScaledGaugeReader
+
+variable
+    {R : Type uR} {k : Type uk} [CommRing R] [CommRing k]
+    {specialize : R →+* k}
+    {Occurrence CoeffParameter ChamberPath QdmPath Phase Character Direction : Type uι}
+    {environment : ReaderEnvironment R k Occurrence CoeffParameter ChamberPath QdmPath Direction}
+    {phase : PhaseTag Phase} {character : CharacterTag Character}
+    {direction : DirectionTag Direction}
+    {sourceEndpoint targetEndpoint :
+      Endpoint R k environment specialize phase character direction}
+    {C₀ : Type uC₀} {C₁ : Type uC₁} {M₀ : Type uM₀} {M₁ : Type uM₁}
+    [AddCommGroup C₀] [Module R C₀]
+    [AddCommGroup C₁] [Module R C₁]
+    [AddCommGroup M₀] [Module R M₀]
+    [AddCommGroup M₁] [Module R M₁]
+    {edge : CrossedEdge R sourceEndpoint.index targetEndpoint.index C₀ C₁ M₀ M₁}
+    {ModelRepresentationNearby : Type uModelRep}
+    {ActualRepresentationNearby : Type uActualRep}
+    {ModelNearby : Type uModel} {ActualNearby : Type uActual}
+    [AddCommGroup ModelRepresentationNearby] [Module R ModelRepresentationNearby]
+    [AddCommGroup ActualRepresentationNearby] [Module k ActualRepresentationNearby]
+    [AddCommGroup ModelNearby] [Module R ModelNearby]
+    [AddCommGroup ActualNearby] [Module k ActualNearby]
+    {PacketCertificate :
+      ReaderIndex Occurrence CoeffParameter ChamberPath QdmPath Phase Character Direction →
+      ReaderIndex Occurrence CoeffParameter ChamberPath QdmPath Phase Character Direction →
+      Type uCert}
+    {actual : DirectedFixedPhaseReceiver k PacketCertificate sourceEndpoint.index
+      targetEndpoint.index ActualNearby}
+    {Loop : Type uLoop} {Loop' : Type uLoop'} [Group Loop] [Group Loop']
+    {loopMap : Loop →* Loop'}
+    {domain : MarkedLocalSystem.Representation R Loop ModelRepresentationNearby}
+    {codomain : MarkedLocalSystem.Representation k Loop' ActualRepresentationNearby}
+    {assignment : LoopAssignment
+      (ReaderIndex Occurrence CoeffParameter ChamberPath QdmPath Phase Character Direction) Loop}
+
+/-- Construct the scaled trait reader from a whole-local-system horizontal
+morphism, two row-scaled gauges, and incoming-image coverage. -/
+def ofMarkedLocalSystemWithImageSpan
+    (model : Coordinates R R (RingHom.id R) edge ModelNearby)
+    (modelEquivalence : OperatorDiagramEquivalenceWithRowFactor R
+      (domain.select sourceEndpoint.index targetEndpoint.index
+        (assignment.loop sourceEndpoint.index) (assignment.loop targetEndpoint.index))
+      (Diagram.ofOperators model.incoming model.targetMonodromy model.row))
+    (actualEquivalence : OperatorDiagramEquivalenceWithRowFactor k
+      (codomain.select sourceEndpoint.index targetEndpoint.index
+        (loopMap (assignment.loop sourceEndpoint.index))
+        (loopMap (assignment.loop targetEndpoint.index)))
+      (Diagram.ofOperators actual.incoming actual.targetMonodromy actual.row))
+    (horizontal : SemilinearHorizontal specialize loopMap domain codomain)
+    (rowScale : k)
+    (scaleCompatibility :
+      actualEquivalence.rowScale = rowScale * specialize modelEquivalence.rowScale)
+    (imageSpans : Submodule.span k
+      (Set.range
+        (selectedRowScaledGaugeMorphism modelEquivalence actualEquivalence horizontal rowScale
+          scaleCompatibility).toScaledSpecialization.incomingImageMap) = ⊤) :
+    TraitHorizontalReader.ScaledReader R k specialize environment phase character direction
+      sourceEndpoint targetEndpoint edge ModelNearby ActualNearby PacketCertificate actual where
+  model := model
+  horizontal := selectedRowScaledGaugeMorphism modelEquivalence actualEquivalence horizontal
+    rowScale scaleCompatibility
+  incomingImageSpans := imageSpans
+
+/-- Ambient surjectivity supplies the incoming-image coverage required by the
+scaled gauge reader. -/
+def ofMarkedLocalSystemOfSurjective
+    (model : Coordinates R R (RingHom.id R) edge ModelNearby)
+    (modelEquivalence : OperatorDiagramEquivalenceWithRowFactor R
+      (domain.select sourceEndpoint.index targetEndpoint.index
+        (assignment.loop sourceEndpoint.index) (assignment.loop targetEndpoint.index))
+      (Diagram.ofOperators model.incoming model.targetMonodromy model.row))
+    (actualEquivalence : OperatorDiagramEquivalenceWithRowFactor k
+      (codomain.select sourceEndpoint.index targetEndpoint.index
+        (loopMap (assignment.loop sourceEndpoint.index))
+        (loopMap (assignment.loop targetEndpoint.index)))
+      (Diagram.ofOperators actual.incoming actual.targetMonodromy actual.row))
+    (horizontal : SemilinearHorizontal specialize loopMap domain codomain)
+    (rowScale : k)
+    (scaleCompatibility :
+      actualEquivalence.rowScale = rowScale * specialize modelEquivalence.rowScale)
+    (surjective : Function.Surjective horizontal.map) :
+    TraitHorizontalReader.ScaledReader R k specialize environment phase character direction
+      sourceEndpoint targetEndpoint edge ModelNearby ActualNearby PacketCertificate actual where
+  model := model
+  horizontal := selectedRowScaledGaugeMorphism modelEquivalence actualEquivalence horizontal
+    rowScale scaleCompatibility
+  incomingImageSpans :=
+    (selectedRowScaledGaugeMorphism modelEquivalence actualEquivalence horizontal rowScale
+      scaleCompatibility).toScaledSpecialization.incomingImageSpan_eq_top_of_surjective
+      (selectedRowScaledGaugeMorphism_map_surjective modelEquivalence actualEquivalence horizontal
+        rowScale scaleCompatibility surjective)
+
+end ScaledGaugeReader
 
 end TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.SelectedLocalSystemReader

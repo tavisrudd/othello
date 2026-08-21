@@ -33,7 +33,7 @@ mathematical input as the two equations in the semilinear-specialization
 record. When the stronger datum of a horizontal morphism of full based-loop
 representations is available, selecting loop classes constructs that diagram
 morphism uniformly for every directed comparison.
-The selected-local-system adapter makes the remaining vertical identifications
+The selected-local-system adapter makes the required vertical identifications
 explicit: the pair selected from the trait representation must be the crossed
 coordinate model diagram, and the pair selected from the fibre representation
 must be the supplied actual fixed-phase diagram. With those two identifications
@@ -70,18 +70,43 @@ remain separate data.
 Ambient surjectivity is another sufficient implementation: it formally makes
 the induced incoming image surjective, hence spanning. The constructor
 `TraitHorizontalReader.Reader.ofSurjective` packages that specialization.
+Exact row normalization is not needed for vanishing. The scaled semilinear
+reader permits the actual row to pull back to any target-scalar multiple of the
+specialized model row; projected variation acquires the same factor, so a
+normal specializing to zero still kills it.
+For a whole based-loop representation, operator-diagram equivalences with row
+factors on the model and actual sides are also accepted: their factors `alpha`
+and `beta` need only
+satisfy `beta = c * specialize alpha` for the residual row factor `c`. No
+division by either row factor occurs.
 
-From this directory, elaborate the reviewer interface through the repository's
-guarded runner:
+The algebraic model has a compact sufficient constructor. If the combined
+crossed and moving map `(B,D)` admits a linear retraction, an explicit incoming
+shear and target involution construct every crossed-coordinate field. An
+integral linear equivalence realizing the full upper-triangular edge supplies
+such a retraction. This condition is sufficient, not necessary, and generic
+invertibility alone does not imply it over a trait ring. Because this target
+operator is an involution, an actual comparison using this constructor must
+separately justify involutivity on the covered target packet.
 
-```text
-../../../lean/scripts/guarded-lean --root "$PWD" \
-  TavisRuddFiniteGeom/Papers/CubicStabilizationIrrationality/PaperInterface.lean
-```
+Incoming-image coverage also has a can/variation implementation. If the two
+composites are the identity-minus-monodromy operators on the ambient and
+packet modules, and can covers the packet modulo the kernel of variation, the
+ambient monodromy image is exactly the variation image. Packet-defect coverage
+modulo that kernel and full packet-defect surjectivity are stronger; in finite
+dimension, absence of packet fixed vectors implies full surjectivity. The
+`FixedReceiverCertificate` attaches these maps, the target crossed-coordinate
+equation, and the three row restrictions to one externally supplied
+fixed-phase receiver. If the crossed normal vanishes, its projected variation
+vanishes on the whole incoming image. This avoids both a manufactured target
+operator and an image/base-change isomorphism; identifying the supplied
+certificate with the intended geometric packet remains part of the input.
+The source-facing `FixedReceiverWindowCertificate` compresses the target
+components to one window map: it asks for the single square
+`T_j * v_i = j_+ * (B,D)` and one target window-row restriction. Its scaled
+variant permits one common scalar on the source and target window rows; no
+unit hypothesis is needed for the forward zero conclusion.
 
-The axiom audit is:
-
-```text
-../../../lean/scripts/guarded-lean --root "$PWD" \
-  TavisRuddFiniteGeom/Papers/CubicStabilizationIrrationality/Verification/AxiomAudit.lean
-```
+`PaperInterface.lean` is the reviewer-facing aggregate.  The companion
+`Verification/AxiomAudit.lean` prints the axioms of every exported terminal in
+this comparison package.

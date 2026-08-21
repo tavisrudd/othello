@@ -296,7 +296,11 @@ index row.
   complete reader; ambient surjectivity is only one sufficient implementation.
   The identifications may be marked gauge equivalences rather than literal
   equality: conjugacy for both monodromies plus row transport suffices, and
-  surjectivity survives the change of frame.
+  surjectivity survives the change of frame.  Operator-diagram equivalences
+  with row factors also suffice: if their factors are `alpha` and `beta`, a
+  residual target factor `c` with
+  `beta = c specialize(alpha)` transports projected variation without dividing
+  by either gauge factor.
   The identification frontier is now split into three gates: construct the
   crossed-coordinate monodromy model, compare its selected diagram with the
   actual fixed-phase diagram, and prove resonant incoming-image coverage.
@@ -305,6 +309,39 @@ index row.
   the full upper-triangular window comparison makes `(B,D)` jointly injective.
   Its Lean goal is split into incoming-image, target-vector, and row-coordinate
   capability records, so the known Fourier-row pilot fills only the third.
+  A trait-linear retraction of the combined `(B,D)` map now supplies all three
+  records by an explicit shear-and-involution model; an integral equivalence
+  realizing the full upper-triangular edge supplies such a retraction.  The
+  extended Module 59 certificate proves this split condition in all thirty-two
+  directed pilot transitions by recording a nonzero maximal residue minor.
+  This lands algebraic model existence for every completed pilot; generic
+  invertibility by itself would not have supplied the retraction over a DVR.
+  The constructed target monodromy is involutive, however, so a source-faithful
+  reader must either prove `T_target^2=1` on the actual incoming packet or use
+  the actual selected source monodromies instead.  Gate 1 remains open at that
+  precise sectorial identification.
+  The non-involutive alternative is now exact in Lean.
+  `CanVariationCoordinates.FixedReceiverCertificate` is indexed by an
+  externally supplied actual receiver and therefore uses that receiver's own
+  `T_i,T_j` and row.  It asks for signed can/variation factorizations, the
+  vector wall law `T_j v_i=j_M D+j_C B`, and the three row restrictions.  It
+  then constructs the full coordinates and, when the specialized edge normal
+  is zero, proves the actual projected variation vanishes.  This merges the
+  incoming part of Gate 1 with Gate 3 only after the occurrence-level packet
+  certificate and vector wall law are supplied; it does not construct them.
+  Gate 3 now has a direct can/variation closure theorem: `vc=1-T_V`,
+  `cv=1-T_P`, and the exact can-coverage condition `v(c(V))=v(P)` identify the
+  actual ambient incoming image with `im(v)`.  Packet-defect coverage modulo
+  `ker(v)`, surjectivity of `1-T_P`, and in finite dimension absence of packet
+  fixed vectors are successively stronger providers; surjectivity of the
+  actual can map is another direct provider.  Thus an occurrence-level
+  intermediate-extension theorem can close coverage without a packet-spectrum
+  computation.  The first paragraph of Špenko--Van den Bergh's Corollary 13.2
+  proof already gives the no-boundary-quotient half after specialization; on a
+  transverse wall this implies can-surjectivity once the local quiver is
+  identified.  This removes exact image/base-change from that route, but the
+  actual can/variation quiver, signs, and QDM packet still have to be
+  identified.
   A separate descent-packet module proves that
   a regular orbit differs equivariantly from three fixed points and that a unary
   correction is fixed only after its singleton summand is action-stable.  The
@@ -428,7 +465,23 @@ advertised algebraic laws and countermodels, never an external QDM provider.
    image/can--var packet.  Module 62 shows that it is enough to construct the
    vector crossed-coordinate model, the fixed actual receiver, and one marked
    horizontal semilinear comparison of the two selected monodromies whose
-   induced incoming-image map spans the actual packet.  A full based-loop
+   induced incoming-image map spans the actual packet.  Alternatively, construct
+   `FixedReceiverCertificate` directly on the specialized actual receiver; its
+   exact source lemma is the vector law `T_j v_i=j_M D+j_C B` together with the
+   three row restrictions and the actual can/variation packet certificate.
+   `FixedReceiverWindowCertificate` compresses this to the single square
+   `T_j v_i=j_+F` for the full window map `F=(B,D)` and one target window-row
+   equation.  Its scaled variant accepts one common source/target row factor
+   without division.  Proposition 12.6 computes `F`; it does not identify that
+   decategorified groupoid map with the actual fixed-phase square.  Theorem 6.4
+   and Proposition 13.4 identify the same groupoid map with analytic GKZ
+   continuation for nonresonant parameters in Proposition 13.4's real negative
+   cone; Theorem 6.4's formula itself allows the corresponding negative-real-part
+   sector.
+   They do not construct the actual can/variation maps or target square.  The
+   open source step is now that packet realization together with extension
+   across the named resonance trait and the actual fixed-phase QDM/Gamma-row
+   identification.  A full based-loop
    representation morphism is a stronger uniform provider.  Exact image/coimage base
    change is another sufficient stronger implementation, not a separate
    necessary gate; the remaining image maps and projected-row square then follow

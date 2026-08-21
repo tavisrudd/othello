@@ -401,7 +401,25 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   range/coimage base change is a stronger sufficient implementation.  The
   vertical identifications may be marked gauge equivalences rather than
   literal equalities; the Lean adapter transports the same global comparison
-  through both gauges and preserves ambient surjectivity.  The
+  through both gauges and preserves ambient surjectivity.  Exact row
+  normalization is unnecessary: model and actual operator-diagram
+  equivalences with row factors are also accepted when their factors satisfy
+  `beta = c specialize(alpha)`, with no division.  Genuine row-normalization
+  gauges have unit factors; the forward zero theorem itself needs no such
+  unit hypothesis.  The resonant coverage gate has also shrunk: for an actual
+  can/variation diagram, `vc=1-T_V`, `cv=1-T_P`, and the exact condition
+  `v(c(V))=v(P)` imply `im(1-T_V)=im(v)`; Lean also proves the converse.
+  Packet-defect coverage modulo `ker(v)`, full surjectivity of `1-T_P`, and in
+  finite dimension absence of fixed vectors are successively stronger than
+  necessary; surjectivity of the actual can map is another direct provider.
+  Thus an occurrence-level intermediate-extension theorem can close coverage
+  without a packet-spectrum calculation.  The route needs no separate
+  image/base-change theorem.  The first paragraph of the proof of Špenko--Van
+  den Bergh's Corollary 13.2 supplies the no-boundary-quotient half after
+  specialization, before nonresonance is used for the no-subobject half.  On a
+  transverse wall this gives surjective can once its local quiver is identified.
+  The open input is therefore the occurrence-faithful identification of that
+  can/variation quiver, its signs, and the actual QDM packet.  The
   remaining identification is now separated into (i) crossed-edge model
   monodromies and row coordinates, (ii) model-to-actual selected-loop/row
   comparison, and (iii) resonant incoming-image coverage.  A new kernel sieve
@@ -409,6 +427,38 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   injective full upper-triangular window map supplies joint injectivity.  The
   model goal is split into incoming-image, target-vector, and row-coordinate
   records; the current Fourier-row pilot addresses only the last.  The
+  split-model theorem now gives a shorter sufficient route: a trait-linear
+  retraction of `(B,D):M0 -> C1 x M1` constructs the incoming shear, target
+  involution, canonical image packet, and all row coordinates.  An integral
+  linear equivalence realizing the full upper-triangular map supplies this
+  retraction.  The extended Module 59 certificate closes this for all
+  thirty-two directed pilot transitions: every residue `(B,D)` matrix has a
+  recorded nonzero maximal minor, hence splits over the normalized trait.
+  This lands algebraic model existence for all completed pilots, not the
+  source-faithful selected-loop identification.  The constructed target is an
+  involution; a new Lean falsifier proves that any covered actual incoming
+  packet would inherit `T_target^2=1`.  Gate 1 therefore still needs either
+  that sectorial involutivity theorem or the actual selected monodromies.  The
+  latter alternative is now an exact conditional theorem:
+  `CanVariationCoordinates.FixedReceiverCertificate` attaches signed
+  can/variation maps, the vector law `T_j v_i=j_M D+j_C B`, and the three row
+  restrictions to one externally supplied actual receiver.  It constructs the
+  full coordinates without imposing involutivity, and zero normal kills that
+  receiver's projected variation on its whole incoming image.  The record does
+  not construct its occurrence-level packet certificate or the vector wall
+  law.  Its source-facing `FixedReceiverWindowCertificate` packages the latter
+  as one square `T_j v_i=j_+F`, one target window-row restriction, and the
+  source-row restriction; its scaled
+  sibling permits one common row factor without division.  Spenko--Van den
+  Bergh computes the decategorified window map `F=(B,D)` but not its
+  identification with that actual fixed-phase square.  Their Theorem 6.4 and
+  Proposition 13.4 do identify the corresponding groupoid transition with
+  analytic GKZ continuation for nonresonant parameters in Proposition 13.4's
+  real negative cone; Theorem 6.4's formula itself allows the corresponding
+  negative-real-part sector.  They do not construct the actual can/variation maps or target
+  square.  The source extension has therefore shrunk to that packet
+  realization, the resonant trait-to-fibre passage, and the actual fixed-phase
+  QDM/Gamma-row realization.  The
   paper-local `TraitHorizontalReader` now composes exactly these hypotheses to
   the directed fibre-variation vanishing theorem.  Its source API also computes
   the QDM path from the chamber path and shares phase, character, and direction

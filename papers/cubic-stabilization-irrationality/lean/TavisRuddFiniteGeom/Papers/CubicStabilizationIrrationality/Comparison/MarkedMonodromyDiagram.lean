@@ -63,6 +63,8 @@ def ofOperators
     | .target => targetMonodromy
   row := row
 
+/-- The incoming monodromy of a diagram built from named operators is the
+prescribed incoming operator. -/
 @[simp]
 theorem ofOperators_incoming
     (incoming targetMonodromy : V ≃ₗ[K] V) (row : V →ₗ[K] K) :
@@ -70,6 +72,8 @@ theorem ofOperators_incoming
       incoming targetMonodromy row).incoming = incoming :=
   rfl
 
+/-- The target monodromy of a diagram built from named operators is the
+prescribed target operator. -/
 @[simp]
 theorem ofOperators_targetMonodromy
     (incoming targetMonodromy : V ≃ₗ[K] V) (row : V →ₗ[K] K) :
@@ -77,6 +81,7 @@ theorem ofOperators_targetMonodromy
       incoming targetMonodromy row).targetMonodromy = targetMonodromy :=
   rfl
 
+/-- The marked row of a diagram built from named data is the prescribed row. -/
 @[simp]
 theorem ofOperators_row
     (incoming targetMonodromy : V ≃ₗ[K] V) (row : V →ₗ[K] K) :
@@ -131,6 +136,23 @@ def symm
     exact (equivalence.rowNaturality x).symm
 
 end DiagramEquivalence
+
+/-- An equivalence of the two operator diagrams together with a one-way scalar
+factor law for the marked rows. The row factor is not required to be a unit,
+so this need not be an equivalence of marked rows. -/
+structure OperatorDiagramEquivalenceWithRowFactor
+    (K : Type uR) [CommRing K]
+    {Index : Type uI} {source target : Index}
+    {V : Type uV} {W : Type uW}
+    [AddCommGroup V] [Module K V]
+    [AddCommGroup W] [Module K W]
+    (domain : Diagram K source target V)
+    (codomain : Diagram K source target W) where
+  map : V ≃ₗ[K] W
+  naturality : ∀ loop x,
+    map (domain.monodromy loop x) = codomain.monodromy loop (map x)
+  rowScale : K
+  rowNaturality : ∀ x, codomain.row (map x) = rowScale * domain.row x
 
 /-- A semilinear horizontal morphism between endpoint-indexed marked
 monodromy diagrams. One naturality law covers both named loops. -/
@@ -206,6 +228,8 @@ def transport
     rw [LinearEquiv.apply_symm_apply] at rowNaturality
     exact congrArg specialize rowNaturality.symm
 
+/-- Transported semilinear comparison evaluates by applying the inverse
+domain gauge, the original comparison, and then the codomain gauge. -/
 @[simp]
 theorem transport_map_apply
     {V' : Type uV'} {W' : Type uW'}
@@ -253,6 +277,7 @@ def toSpecialization
   targetCommutes := morphism.naturality .target
   rowSpecializes := morphism.rowNaturality
 
+/-- Forgetting the diagram packaging preserves the underlying semilinear map. -/
 @[simp]
 theorem toSpecialization_map
     (morphism : SemilinearMorphism specialize domain codomain) :
@@ -273,5 +298,147 @@ theorem projectedVariation_specializes
   morphism.toSpecialization.projectedVariation_specializes x
 
 end SemilinearMorphism
+
+/-- A semilinear morphism of marked diagrams whose scalar row is preserved up
+to one target-ring factor. -/
+structure ScaledSemilinearMorphism
+    {R : Type uR} {k : Type uk} [CommRing R] [CommRing k]
+    (specialize : R →+* k)
+    {Index : Type uI} {source target : Index}
+    {V : Type uV} {W : Type uW}
+    [AddCommGroup V] [Module R V]
+    [AddCommGroup W] [Module k W]
+    (domain : Diagram R source target V)
+    (codomain : Diagram k source target W) where
+  map : V →ₛₗ[specialize] W
+  naturality : ∀ loop x,
+    map (domain.monodromy loop x) = codomain.monodromy loop (map x)
+  rowScale : k
+  rowNaturality : ∀ x,
+    codomain.row (map x) = rowScale * specialize (domain.row x)
+
+namespace ScaledSemilinearMorphism
+
+variable
+    {R : Type uR} {k : Type uk} [CommRing R] [CommRing k]
+    {specialize : R →+* k}
+    {Index : Type uI} {source target : Index}
+    {V : Type uV} {W : Type uW}
+    [AddCommGroup V] [Module R V]
+    [AddCommGroup W] [Module k W]
+    {domain : Diagram R source target V}
+    {codomain : Diagram k source target W}
+
+/-- Transport an exactly row-preserving semilinear morphism through two
+row-scaled gauges. The residual row scale is specified by the compatibility
+equation between the two gauge scales; no scalar is inverted. -/
+def transportRowScaled
+    {V' : Type uV'} {W' : Type uW'}
+    [AddCommGroup V'] [Module R V']
+    [AddCommGroup W'] [Module k W']
+    {domain' : Diagram R source target V'}
+    {codomain' : Diagram k source target W'}
+    (domainEquivalence : OperatorDiagramEquivalenceWithRowFactor R domain domain')
+    (codomainEquivalence : OperatorDiagramEquivalenceWithRowFactor k codomain codomain')
+    (morphism : SemilinearMorphism specialize domain codomain)
+    (rowScale : k)
+    (scaleCompatibility :
+      codomainEquivalence.rowScale = rowScale * specialize domainEquivalence.rowScale) :
+    ScaledSemilinearMorphism specialize domain' codomain' where
+  map :=
+    { toFun := fun x => codomainEquivalence.map (morphism.map (domainEquivalence.map.symm x))
+      map_add' := by
+        intro x y
+        rw [domainEquivalence.map.symm.map_add, morphism.map.map_add,
+          codomainEquivalence.map.map_add]
+      map_smul' := by
+        intro c x
+        rw [domainEquivalence.map.symm.map_smul, morphism.map.map_smulₛₗ,
+          codomainEquivalence.map.map_smul] }
+  naturality := by
+    intro loop x
+    have domainNaturality :
+        domainEquivalence.map.symm (domain'.monodromy loop x) =
+          domain.monodromy loop (domainEquivalence.map.symm x) := by
+      apply domainEquivalence.map.injective
+      simpa only [LinearEquiv.apply_symm_apply] using
+        (domainEquivalence.naturality loop (domainEquivalence.map.symm x)).symm
+    change codomainEquivalence.map
+        (morphism.map (domainEquivalence.map.symm (domain'.monodromy loop x))) =
+      codomain'.monodromy loop
+        (codomainEquivalence.map (morphism.map (domainEquivalence.map.symm x)))
+    rw [domainNaturality, morphism.naturality, codomainEquivalence.naturality]
+  rowScale := rowScale
+  rowNaturality := by
+    intro x
+    change codomain'.row
+        (codomainEquivalence.map (morphism.map (domainEquivalence.map.symm x))) =
+      rowScale * specialize (domain'.row x)
+    rw [codomainEquivalence.rowNaturality, morphism.rowNaturality]
+    have domainRow := domainEquivalence.rowNaturality (domainEquivalence.map.symm x)
+    rw [LinearEquiv.apply_symm_apply] at domainRow
+    rw [scaleCompatibility, domainRow, map_mul]
+    exact mul_assoc _ _ _
+
+/-- Row-scaled transport has the same pointwise precomparison/postcomparison
+formula as exact-row transport. -/
+@[simp]
+theorem transportRowScaled_map_apply
+    {V' : Type uV'} {W' : Type uW'}
+    [AddCommGroup V'] [Module R V']
+    [AddCommGroup W'] [Module k W']
+    {domain' : Diagram R source target V'}
+    {codomain' : Diagram k source target W'}
+    (domainEquivalence : OperatorDiagramEquivalenceWithRowFactor R domain domain')
+    (codomainEquivalence : OperatorDiagramEquivalenceWithRowFactor k codomain codomain')
+    (morphism : SemilinearMorphism specialize domain codomain)
+    (rowScale : k)
+    (scaleCompatibility :
+      codomainEquivalence.rowScale = rowScale * specialize domainEquivalence.rowScale)
+    (x : V') :
+    (transportRowScaled domainEquivalence codomainEquivalence morphism rowScale
+      scaleCompatibility).map x =
+      codomainEquivalence.map (morphism.map (domainEquivalence.map.symm x)) :=
+  rfl
+
+/-- Surjectivity of the selected horizontal map survives row-scaled gauge
+transport. -/
+theorem transportRowScaled_map_surjective
+    {V' : Type uV'} {W' : Type uW'}
+    [AddCommGroup V'] [Module R V']
+    [AddCommGroup W'] [Module k W']
+    {domain' : Diagram R source target V'}
+    {codomain' : Diagram k source target W'}
+    (domainEquivalence : OperatorDiagramEquivalenceWithRowFactor R domain domain')
+    (codomainEquivalence : OperatorDiagramEquivalenceWithRowFactor k codomain codomain')
+    (morphism : SemilinearMorphism specialize domain codomain)
+    (rowScale : k)
+    (scaleCompatibility :
+      codomainEquivalence.rowScale = rowScale * specialize domainEquivalence.rowScale)
+    (surjective : Function.Surjective morphism.map) :
+    Function.Surjective
+      (transportRowScaled domainEquivalence codomainEquivalence morphism rowScale
+        scaleCompatibility).map := by
+  intro y
+  obtain ⟨x, hx⟩ := surjective (codomainEquivalence.map.symm y)
+  refine ⟨domainEquivalence.map x, ?_⟩
+  simp only [transportRowScaled_map_apply, LinearEquiv.symm_apply_apply, hx,
+    LinearEquiv.apply_symm_apply]
+
+/-- Expose the scaled semilinear specialization of the two selected
+monodromies and row. -/
+def toScaledSpecialization
+    (morphism : ScaledSemilinearMorphism specialize domain codomain) :
+    ScaledSpecialization specialize
+      domain.incoming.toLinearMap domain.targetMonodromy.toLinearMap
+      codomain.incoming.toLinearMap codomain.targetMonodromy.toLinearMap
+      domain.row codomain.row where
+  map := morphism.map
+  incomingCommutes := morphism.naturality .incoming
+  targetCommutes := morphism.naturality .target
+  rowScale := morphism.rowScale
+  rowSpecializes := morphism.rowNaturality
+
+end ScaledSemilinearMorphism
 
 end TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.MarkedMonodromyDiagram

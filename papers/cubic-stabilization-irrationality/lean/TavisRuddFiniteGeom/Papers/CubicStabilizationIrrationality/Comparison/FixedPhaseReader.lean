@@ -156,6 +156,15 @@ def fullMap
   map_smul' scalar value := by
     ext <;> simp
 
+/-- The crossed and moving blocks on one moving source input, regarded as a
+single map into the target common-plus-moving module. -/
+def movingTargetMap
+    (edge : CrossedEdge R source target C₀ C₁ M₀ M₁) :
+    M₀ →ₗ[R] C₁ × M₁ where
+  toFun value := (edge.crossedMap value, edge.movingMap value)
+  map_add' left right := by ext <;> simp
+  map_smul' scalar value := by ext <;> simp
+
 /-- Injectivity of the full block comparison forces the crossed and moving
 blocks to be jointly injective on a moving input. -/
 theorem crossedMap_movingMap_jointly_injective_of_fullMap_injective

@@ -92,6 +92,77 @@ def diagonal_class_minor_gcd(weights: list[IntVector]) -> int:
     return math.gcd(*minors)
 
 
+def rational_matrix_rank(rows: list[list[int]]) -> int:
+    """Exact row rank over Q by fraction-preserving elimination."""
+    if not rows:
+        return 0
+    matrix = [[Fraction(value) for value in row] for row in rows]
+    row_count = len(matrix)
+    column_count = len(matrix[0])
+    pivot_row = 0
+    for column in range(column_count):
+        pivot = next(
+            (row for row in range(pivot_row, row_count) if matrix[row][column] != 0),
+            None,
+        )
+        if pivot is None:
+            continue
+        matrix[pivot_row], matrix[pivot] = matrix[pivot], matrix[pivot_row]
+        pivot_value = matrix[pivot_row][column]
+        matrix[pivot_row] = [value / pivot_value for value in matrix[pivot_row]]
+        for row in range(row_count):
+            if row == pivot_row or matrix[row][column] == 0:
+                continue
+            factor = matrix[row][column]
+            matrix[row] = [
+                value - factor * pivot_entry
+                for value, pivot_entry in zip(matrix[row], matrix[pivot_row], strict=True)
+            ]
+        pivot_row += 1
+        if pivot_row == row_count:
+            break
+    return pivot_row
+
+
+def rational_determinant(rows: list[list[int]]) -> Fraction:
+    """Exact determinant over Q by elimination."""
+    size = len(rows)
+    if size == 0:
+        return Fraction(1)
+    matrix = [[Fraction(value) for value in row] for row in rows]
+    determinant = Fraction(1)
+    for column in range(size):
+        pivot = next(
+            (row for row in range(column, size) if matrix[row][column] != 0),
+            None,
+        )
+        if pivot is None:
+            return Fraction(0)
+        if pivot != column:
+            matrix[column], matrix[pivot] = matrix[pivot], matrix[column]
+            determinant = -determinant
+        pivot_value = matrix[column][column]
+        determinant *= pivot_value
+        for row in range(column + 1, size):
+            if matrix[row][column] == 0:
+                continue
+            factor = matrix[row][column] / pivot_value
+            for entry in range(column + 1, size):
+                matrix[row][entry] -= factor * matrix[column][entry]
+    return determinant
+
+
+def nonzero_maximal_minor(
+    rows: list[list[int]], row_labels: list[IntVector], column_count: int
+) -> tuple[tuple[IntVector, ...], Fraction] | None:
+    """First nonzero maximal row minor, in lexicographic row order."""
+    for indices in combinations(range(len(rows)), column_count):
+        determinant = rational_determinant([rows[index] for index in indices])
+        if determinant != 0:
+            return tuple(row_labels[index] for index in indices), determinant
+    return None
+
+
 def canonical_normal(weight: IntVector) -> IntVector:
     x, y = weight
     normal = (y, -x)
@@ -300,11 +371,13 @@ def transition_analysis(
     assert transition_indices
 
     moving_patterns: list[tuple[int, ...]] = []
+    residue_columns: list[dict[IntVector, int]] = []
     common_term_count = 0
     common_targets: set[IntVector] = set()
     moving_term_count = 0
     for source_point in moved_source:
         moving_masks: list[int] = []
+        residue_column: dict[IntVector, int] = {}
         for mask in range(1, 1 << len(transition_indices)):
             target_point = source_point
             for bit, weight_index in enumerate(transition_indices):
@@ -314,6 +387,9 @@ def transition_analysis(
                         target_point[1] - weights[weight_index][1],
                     )
             assert target_point in target_set
+            residue_column[target_point] = residue_column.get(target_point, 0) + (
+                (-1) ** (mask.bit_count() + 1)
+            )
             if target_point in common:
                 common_term_count += 1
                 common_targets.add(target_point)
@@ -321,6 +397,18 @@ def transition_analysis(
                 moving_term_count += 1
                 moving_masks.append(mask)
         moving_patterns.append(tuple(moving_masks))
+        residue_columns.append(residue_column)
+
+    residue_row_labels = sorted(target_set)
+    residue_matrix = [
+        [column.get(target_point, 0) for column in residue_columns]
+        for target_point in residue_row_labels
+    ]
+    residue_rank = rational_matrix_rank(residue_matrix)
+    residue_minor = nonzero_maximal_minor(
+        residue_matrix, residue_row_labels, len(moved_source)
+    )
+    assert (residue_minor is not None) == (residue_rank == len(moved_source))
 
     uniform_pattern = moving_patterns[0] if len(set(moving_patterns)) == 1 else ()
     wall_map_coefficients = [0] * (len(transition_indices) + 1)
@@ -351,6 +439,15 @@ def transition_analysis(
         "moving_output_terms": moving_term_count,
         "moving_mask_pattern_uniform": len(set(moving_patterns)) == 1,
         "moving_mask_pattern_nonempty": bool(moving_patterns[0]),
+        "moving_target_residue_rank": residue_rank,
+        "moving_source_rank": len(moved_source),
+        "moving_target_residue_full_column_rank": residue_rank == len(moved_source),
+        "moving_target_residue_unit_minor_rows": (
+            [vector_text(point) for point in residue_minor[0]] if residue_minor else []
+        ),
+        "moving_target_residue_unit_minor_at_q_1": (
+            fraction_text(residue_minor[1]) if residue_minor else "0"
+        ),
         "uniform_moving_masks": list(uniform_pattern),
         "relative_defect_order_at_q_1": defect_order,
         "relative_defect_leading_coefficient": defect_leading,
@@ -452,6 +549,39 @@ def enumerate_certificate() -> dict[str, object]:
                 for case in cases
                 for direction in ("forward_transition", "reverse_transition")
             ),
+            "all_moving_target_residue_maps_have_full_column_rank": all(
+                case[direction]["moving_target_residue_full_column_rank"]
+                for case in cases
+                for direction in ("forward_transition", "reverse_transition")
+            ),
+            "moving_target_residue_ranks": sorted(
+                {
+                    case[direction]["moving_target_residue_rank"]
+                    for case in cases
+                    for direction in ("forward_transition", "reverse_transition")
+                }
+            ),
+            "moving_source_ranks": sorted(
+                {
+                    case[direction]["moving_source_rank"]
+                    for case in cases
+                    for direction in ("forward_transition", "reverse_transition")
+                }
+            ),
+            "moving_target_residue_unit_minor_witnesses": [
+                {
+                    "wall_normal": case["wall_normal"],
+                    "wall_level_mod_1": case["wall_level_mod_1"],
+                    "segment_sample_mod_1": case["segment_sample_mod_1"],
+                    "direction": direction,
+                    "rows": case[direction]["moving_target_residue_unit_minor_rows"],
+                    "determinant_at_q_1": case[direction][
+                        "moving_target_residue_unit_minor_at_q_1"
+                    ],
+                }
+                for case in cases
+                for direction in ("forward_transition", "reverse_transition")
+            ],
             "relative_defect_orders_at_q_1": sorted(
                 {
                     case[direction]["relative_defect_order_at_q_1"]
@@ -466,8 +596,12 @@ def enumerate_certificate() -> dict[str, object]:
 
     assert global_minimum is not None
     assert global_clearance is not None
+    assert all(
+        result["all_moving_target_residue_maps_have_full_column_rank"]
+        for result in signature_results.values()
+    )
     return {
-        "schema": "c925-unit-window-intersections-v1",
+        "schema": "c925-unit-window-intersections-v2",
         "status": "pass",
         "definition": "closure(Delta)=sum_i[-1/4,1/4]b_i; generic L_C=(nu+closure(Delta)) intersect Z^2",
         "scope": "five Module-41 completed signatures; both coordinate facet normals; every affine level and open wall segment modulo Z^2",
@@ -480,6 +614,10 @@ def enumerate_certificate() -> dict[str, object]:
         "all_enumerated_adjacent_windows_intersect": global_minimum > 0,
         "all_diagonal_quotient_classes_primitive": all(
             result["diagonal_quotient_class_primitive"]
+            for result in signature_results.values()
+        ),
+        "all_moving_target_residue_maps_have_full_column_rank": all(
+            result["all_moving_target_residue_maps_have_full_column_rank"]
             for result in signature_results.values()
         ),
         "signatures": signature_results,

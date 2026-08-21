@@ -13,7 +13,11 @@ moving-coordinate-complement calculation is mixed: on the formal diagonal
 coefficient substitution, both flip--flip pilots have first-order normal defect in every direction, whereas every
 blowup--blowdown direction and four of six directions in each mixed pilot
 have order-zero defect. It does not identify any pilot with an actual
-AKMW/QDM occurrence or construct an actual primitive receiver.
+AKMW/QDM occurrence or construct an actual primitive receiver.  Retaining the
+full moved-source block changes the algebraic conclusion: its residue matrix
+has full column rank in every directed pilot transition, so it is split over
+the normalized resonance trait and supplies the complete algebraic monodromy
+model through the paper-local Lean constructor.
 
 ## 59.1 Exact window convention
 
@@ -203,6 +207,35 @@ primitive QDM and exact image/Malgrange readers.  By contrast, order zero at
 the all-ones point is already a genuine no-go for this \(\eta=1\) complement,
 independent of which lawful arc approaches that point.
 
+### Proposition 59.3 -- the full moved-source block is split at resonance
+
+For every directed transition in the sixteen pilot adjacencies, form the
+matrix of the full moved-source wall map
+
+\[
+                 (B,D):M_-\longrightarrow C_+\oplus M_+
+\]
+
+in the character bases and reduce it at
+`q_coeff=1`.  All thirty-two residue matrices have full column rank.  More
+precisely, the certificate records a nonzero maximal minor for every matrix;
+the possible source ranks and residue ranks are both `1` or `2` and agree in
+every occurrence.
+
+Consequently, over the trait ring
+\(R=\mathbf C[[1-q_{\mathrm{coeff}}]]\), the same maximal minor has unit
+determinant.  Projection to its selected target rows followed by the inverse
+minor gives an explicit `R`-linear retraction of `(B,D)`.  The paper-local Lean
+theorem
+`SplitCrossedCoordinates.SplitMovingTarget.coordinates` therefore constructs
+the complete algebraic crossed-coordinate monodromy model for every pilot.
+Its target monodromy is an involution.  This does not identify that model with
+the actual fixed-phase QDM receiver; such an identification would require the
+actual target to square to the identity on the covered incoming packet.
+
+The checker verifies full column rank twice: exact Gaussian elimination over
+\(\mathbf Q\), and an independently enumerated nonzero maximal-minor witness.
+
 ## 59.4 Reproducibility bundle
 
 Artifacts:
@@ -225,14 +258,15 @@ Hashes and byte counts:
 
 | artifact | bytes | SHA-256 |
 |---|---:|---|
-| script | 20056 | `d6118978c980368d2ab6530b7576348fd024f67a5a9dbe37dde60bdce7cd605e` |
-| certificate | 6132 | `2e2685568fd1888fa9322f7cacdaff8477e12d16e2205c9c9647d5aa01356280` |
+| script | 25820 | `158967e7627c6cb7676761577a84aa1444d7e81e3b45856bd63fc2d585c26791` |
+| certificate | 15998 | `7ec40c9aafe23cf4a3586c21e1f04a50dabe75fc35efd6fa9853c0259cd511b5` |
 
 The certificate records the five exact weight multisets, sixteen-case
 count, common-size and relative-defect-order histograms, exact transverse
 clearance, per-signature hashes of the fully enumerated case records, script
-hash, the two membership implementations, and the gcd-one augmented-minor
-certificate used by Module 61. The claim is finite: it proves
+hash, the two membership implementations, the gcd-one augmented-minor
+certificate used by Module 61, and a nonzero moving-target maximal minor for
+every directed transition. The claim is finite: it proves
 nothing for non-unit weights, non-coordinate wall directions, alternative
 completions, non-diagonal arcs, or unidentified geometric occurrences.
 
@@ -273,6 +307,7 @@ the product normal. This is still smaller than a full resonant Stokes matrix.
 | Does rank descend to the quotient by the common span? | **no** | rank is one on every common character generator |
 | Does the basis-split moving complement have positive normal order? | **only for all flip--flip directions and two of six directions in each mixed pilot; never for blowup--blowdown** | Proposition 59.2 |
 | What datum was lost in the failures? | **the moved-to-common cross block** | exact term classification; Module 60 retains it |
+| Does the full moved-source block split over the resonance trait? | **yes for every pilot transition** | Proposition 59.3; full-rank residue matrices and explicit unit-minor witnesses |
 | Does this prove the actual overlap theorem? | **no** | pilot-to-occurrence and fixed-phase readers remain open |
 
 ## Boundary

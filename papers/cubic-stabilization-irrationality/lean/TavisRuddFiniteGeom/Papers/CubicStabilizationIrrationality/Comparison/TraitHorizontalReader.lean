@@ -136,6 +136,97 @@ theorem actualVariation_eq_zero
 
 end Reader
 
+/-- Trait-level crossed coordinates and a two-loop comparison whose marked row
+is preserved up to a target scalar. -/
+structure ScaledReader
+    (R : Type uR) (k : Type uk) [CommRing R] [CommRing k]
+    (specialize : R →+* k)
+    {Occurrence CoeffParameter ChamberPath QdmPath Phase Character Direction : Type uι}
+    (environment : ReaderEnvironment R k Occurrence CoeffParameter ChamberPath QdmPath Direction)
+    (phase : PhaseTag Phase) (character : CharacterTag Character)
+    (direction : DirectionTag Direction)
+    (sourceEndpoint targetEndpoint :
+      Endpoint R k environment specialize phase character direction)
+    {C₀ : Type uC₀} {C₁ : Type uC₁} {M₀ : Type uM₀} {M₁ : Type uM₁}
+    [AddCommGroup C₀] [Module R C₀]
+    [AddCommGroup C₁] [Module R C₁]
+    [AddCommGroup M₀] [Module R M₀]
+    [AddCommGroup M₁] [Module R M₁]
+    (edge : CrossedEdge R sourceEndpoint.index targetEndpoint.index C₀ C₁ M₀ M₁)
+    (ModelNearby : Type uModel) (ActualNearby : Type uActual)
+    [AddCommGroup ModelNearby] [Module R ModelNearby]
+    [AddCommGroup ActualNearby] [Module k ActualNearby]
+    (PacketCertificate :
+      ReaderIndex Occurrence CoeffParameter ChamberPath QdmPath Phase Character Direction →
+      ReaderIndex Occurrence CoeffParameter ChamberPath QdmPath Phase Character Direction →
+      Type uCert)
+    (actual : DirectedFixedPhaseReceiver k PacketCertificate sourceEndpoint.index
+      targetEndpoint.index ActualNearby) where
+  model : Coordinates R R (RingHom.id R) edge ModelNearby
+  horizontal : ScaledSemilinearMorphism specialize
+    (Diagram.ofOperators (source := sourceEndpoint.index) (target := targetEndpoint.index)
+      model.incoming model.targetMonodromy model.row)
+    (Diagram.ofOperators (source := sourceEndpoint.index) (target := targetEndpoint.index)
+      actual.incoming actual.targetMonodromy actual.row)
+  incomingImageSpans : Submodule.span k
+    (Set.range horizontal.toScaledSpecialization.incomingImageMap) = ⊤
+
+namespace ScaledReader
+
+variable
+    {R : Type uR} {k : Type uk} [CommRing R] [CommRing k]
+    {specialize : R →+* k}
+    {Occurrence CoeffParameter ChamberPath QdmPath Phase Character Direction : Type uι}
+    {environment : ReaderEnvironment R k Occurrence CoeffParameter ChamberPath QdmPath Direction}
+    {phase : PhaseTag Phase} {character : CharacterTag Character}
+    {direction : DirectionTag Direction}
+    {sourceEndpoint targetEndpoint :
+      Endpoint R k environment specialize phase character direction}
+    {C₀ : Type uC₀} {C₁ : Type uC₁} {M₀ : Type uM₀} {M₁ : Type uM₁}
+    [AddCommGroup C₀] [Module R C₀]
+    [AddCommGroup C₁] [Module R C₁]
+    [AddCommGroup M₀] [Module R M₀]
+    [AddCommGroup M₁] [Module R M₁]
+    {edge : CrossedEdge R sourceEndpoint.index targetEndpoint.index C₀ C₁ M₀ M₁}
+    {ModelNearby : Type uModel} {ActualNearby : Type uActual}
+    [AddCommGroup ModelNearby] [Module R ModelNearby]
+    [AddCommGroup ActualNearby] [Module k ActualNearby]
+    {PacketCertificate :
+      ReaderIndex Occurrence CoeffParameter ChamberPath QdmPath Phase Character Direction →
+      ReaderIndex Occurrence CoeffParameter ChamberPath QdmPath Phase Character Direction →
+      Type uCert}
+    {actual : DirectedFixedPhaseReceiver k PacketCertificate sourceEndpoint.index
+      targetEndpoint.index ActualNearby}
+
+/-- A zero trait normal makes every model variation value vanish after scalar
+specialization. -/
+theorem specializedModelVariation_eq_zero
+    (reader : ScaledReader R k specialize environment phase character direction sourceEndpoint
+      targetEndpoint edge ModelNearby ActualNearby PacketCertificate actual)
+    (normalVanishes : specialize edge.normal = 0)
+    (x : LinearMap.range (defectOperator reader.model.incoming.toLinearMap)) :
+    specialize
+      (projectedVariation reader.model.incoming.toLinearMap
+        reader.model.targetMonodromy.toLinearMap reader.model.row x) = 0 := by
+  obtain ⟨sourceValue, rfl⟩ := reader.model.sourceToIncomingImage_surjective x
+  rw [reader.model.projectedVariation_sourceToIncomingImage]
+  rw [LinearMap.congr_fun edge.defect_eq_normal_smul sourceValue,
+    LinearMap.smul_apply, smul_eq_mul]
+  simp [normalVanishes]
+
+/-- A zero trait normal kills actual directed projected variation without any
+compatibility condition on the row-normalization scalar. -/
+theorem actualVariation_eq_zero
+    (reader : ScaledReader R k specialize environment phase character direction sourceEndpoint
+      targetEndpoint edge ModelNearby ActualNearby PacketCertificate actual)
+    (normalVanishes : specialize edge.normal = 0) :
+    projectedVariation actual.incoming.toLinearMap actual.targetMonodromy.toLinearMap
+      actual.row = 0 :=
+  reader.horizontal.toScaledSpecialization.projectedVariation_eq_zero_of_incomingImageSpan_eq_top
+    reader.incomingImageSpans (reader.specializedModelVariation_eq_zero normalVanishes)
+
+end ScaledReader
+
 /-- Existence of the typed trait-horizontal comparison for a fixed external
 receiver. -/
 def Goal
