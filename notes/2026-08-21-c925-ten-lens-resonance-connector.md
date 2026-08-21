@@ -118,12 +118,13 @@ Three connector shapes dominate the list.
 3. A **strict trait lattice** upgrades a named generic equality to an
    integral equality and then specializes the normal factor to zero.
 
-The highest-value fusion is the GKZ--categorical--Gamma route.  First build
-the resonant window rank as a natural transformation.  Then identify it with
-Euler pairing by a common point object.  Finally use a Gamma/Fourier--Mukai
-comparison, or a strict resonant extension of that comparison, to identify
-the same morphism with the actual QDM row.  This asks for neither a full
-Stokes basis nor every can/variation packet.
+The smallest target is the occurrence-local pole bound below.  A
+GKZ--categorical--Gamma fusion is a stronger fallback: build the resonant
+window rank as a natural transformation, identify it with Euler pairing by a
+common point object, and use a strict Gamma/Fourier--Mukai comparison to reach
+the actual QDM row.  That fusion is useful only when its legs are already
+available along the chosen path; it should not replace the smaller pole
+problem by a new global comparison theorem.
 
 ## Parallel augmented sources along a path
 
@@ -166,6 +167,13 @@ GKZ theorem is also generally multidimensional.  Thus any microlocal or
 Fourier bridge must name a non-characteristic functor and its boundary
 projector explicitly.
 
+Nor does the finite-length subschober supply the row by itself.  Its objects
+are nullcone-supported, and the inclusion
+\(K_0(S^f)\to K_0(S^c)\) becomes invertible only after the nonresonant
+localization in Proposition 12.9.  Its localization matrix is a plausible
+source of a denominator bound, but a finite-support class is not the desired
+nonzero rank morphism.
+
 ## Local theorem to seek
 
 For every dangerous overlap occurrence, construct one of the following
@@ -207,3 +215,29 @@ bound.  The morphism, pairing, strictness, perverse, and microlocal packages
 above are alternative sufficient ways to prove that bound.  Requiring
 \(\lambda_{ij,K}\in M_R^\vee\) remains an attractive uniform strengthening,
 but is unnecessary when \(a>1\).
+
+### Orders in the five completed pilots
+
+The tracked five-signature weight certificate gives the following numbers of
+weights on either oriented side of each coordinate wall:
+
+| signature | first coordinate | second coordinate |
+|---|---:|---:|
+| blowup--blowdown | 2 | 2 |
+| blowup--reverse-curve-flip | 2 | 3 |
+| curve-flip--blowdown | 3 | 2 |
+| flip--flip, antidiagonal | 3 | 3 |
+| flip--flip, diagonal | 3 | 3 |
+
+Thus every directed pilot normal
+\(A_{1,q_{\mathrm{coeff}}}=(1-q_{\mathrm{coeff}})^{|J|}\)
+has order two or three.  The exact occurrencewise requirement is pole order
+at most \(|J|-1\): one for an order-two normal and two for an order-three
+normal.  An at-most-simple pole is therefore the sharp single uniform
+sufficient bound for all thirty-two directed transitions.
+
+Numerically this uniform bound could match the first-order conormal factor in
+the quantum-Serre normal-jet calculation.  That is only a proposed mechanism:
+Module 42's fibre-scaling parameter and \(q_{\mathrm{coeff}}\) are different
+traits, its factor is a zero rather than a proved denominator of the present
+row, and no typed trait-and-row adapter currently identifies them.
