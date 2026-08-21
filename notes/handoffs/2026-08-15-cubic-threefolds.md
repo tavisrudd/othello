@@ -37,22 +37,28 @@ promoted mathematical assertion maps to a kernel-checked declaration.
 
 ## Current status
 
-- **C936 — closed 2026-08-21; modular resolvent companion complete.**  The
-  warning-free nine-page paper proves that the signed nonstandard
-  \(A_5\)-cubic parameter is the sign/discriminant resolvent of the actual
+- **C936 — cold-referee revision required.**  The warning-free nine-page paper
+  develops the signed nonstandard \(A_5\)-cubic parameter as the
+  sign/discriminant resolvent of the actual
   relative norm-axis elliptic two-division cover.  It identifies
   \(T=81t^2\), \(r=9t\), \(X_0(6)\), the sign and split level-six subgroups,
   exact \(A_3\) monodromy, cusp widths \(2,6\), and the two extra
   modular-interior cubic boundary values.  At the chordal value, an exact
   orbit-and-ideal certificate identifies the transverse divisor with the
-  reduced twelve-point icosahedral orbit, so the limit Jacobian is isogenous
-  to the fifth power of the norm-axis elliptic factor.  A post-close EJ pass
-  further proves
+  reduced twelve-point icosahedral orbit conditional on identifying the
+  special fibre with the secant cubic of its full singular rational normal
+  quartic.  A genuinely blind van Geemen-lens referee pass found the fatal
+  open gate: the cited source gives only an isogeny to the invariant elliptic
+  factor, while the paper needs a proved relative degree-one polarized
+  comparison with the actual norm axis, including the coordinate, twist, and
+  marked level-three bridges.  The imported candidate-packet/actual-kernel
+  distinction also needs a precise proposition.  A post-close EJ pass further proves
   that golden orientation turns the rational triple into the cyclic cubic
   splitting cover and gives
   \(t=3(\eta(3\tau)/\eta(\tau))^6\).  Exact algebra and an independent subgroup
-  enumeration replay under `make check`; no mirror was exported.
-  Report: `../2026-08-21-c936-modular-resolvent-companion.md`.
+  enumeration replay under `make check`; no mirror was exported.  Referee
+  report: `../2026-08-21-c936-van-geemen-cold-referee.md`; project report:
+  `../2026-08-21-c936-modular-resolvent-companion.md`.
 - **C935 — closed 2026-08-21; exotic gluing is the elliptic discriminant
   orientation.**  The epilogue now proves that monodromy on the exotic pair is
   the sign of its action on the rational two-division triple, identifies the

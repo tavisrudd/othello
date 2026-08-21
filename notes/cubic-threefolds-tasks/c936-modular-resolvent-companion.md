@@ -4,10 +4,12 @@
 
 **Date:** 2026-08-21
 
-**Status:** reopened 2026-08-21 for the mathematical mystery pass; supplement
-complete; unified-package memo and two-round red team complete; report
+**Status:** cold-referee revision required as of 2026-08-21.  The finite
+resolvent and modular-curve core passes, but the paper is not submission-ready:
+the relative degree-one polarized comparison with the actual norm axis is not
+proved.  Report `../2026-08-21-c936-van-geemen-cold-referee.md`; project report
 `../2026-08-21-c936-modular-resolvent-companion.md`; strategy memo
-`../2026-08-21-c936-resolvent-rigidity-package-memo.md`
+`../2026-08-21-c936-resolvent-rigidity-package-memo.md`.
 
 ## Goal
 
@@ -71,13 +73,34 @@ clarifies the main theorem without adding a new proof dependency.
 
 The warning-free nine-page paper, deterministic algebra certificate,
 independent subgroup enumeration, SHA-256 manifest, rendered-page inspection,
-hostile read, literature record, and EJ/TT mystery ledger are recorded in the
-report.  No mirror/export was performed.  The later unified-package red team
-reopened one mathematical gate: the chordal-factor proposition must verify
-that the actual transverse term cuts a reduced degree-twelve divisor on the
-singular rational normal curve.  That gate is now discharged by the tracked
-cyclotomic orbit and ideal-rank certificate
-`papers/cubic-gluing-resolvent/verification/chordal_transversality.py`.
+literature record, and EJ/TT mystery ledger are recorded in the project report.
+No mirror/export was performed.  A later genuinely blind cold read found that
+the certificates do not close two geometric identifications on which the
+paper's strongest claims depend.
+
+## Cold-referee acceptance debt
+
+1. **Fatal:** construct the relative map from the van Geemen--Yamauchi
+   elliptic curve to the programme's primitive norm axis and prove the two
+   polarization identities, degree-one conclusion, special-parameter
+   extension, coordinate bridge `u^2=5t^2`, twist, and marked level-three
+   comparison.  The cited source proves only an isogeny to the invariant
+   elliptic factor.
+2. **Major:** state the imported programme input precisely, separating the
+   five-sheet packet of candidate stable halves from the one actual geometric
+   kernel section that orients the pulled-back sign torsor.
+3. **Major:** prove scheme-theoretically that the `t^2=9/5` fibre has the
+   asserted rational normal quartic as its full singular scheme and is its
+   secant cubic.  Conditional on this identification, the tracked orbit/rank
+   certificate and published Allcock--Carlson--Toledo Lemma 2.5 do prove the
+   reduced transverse twelve-divisor and normal-space statement.
+4. **Minor:** complete Corollary 5.2 with the perfection/no-character argument
+   for `A_5` and the orbit sizes `12,20,30,60`.
+
+The exact findings and source trust boundaries are in
+`../2026-08-21-c936-van-geemen-cold-referee.md`.  In particular, the previous
+claim that the chordal gate was discharged unconditionally is withdrawn: the
+certificate closes the divisor calculation only after item 3.
 
 The reopened mathematical pass adds two theorem-level clarifications.  At
 the chordal value `h=5`, the icosahedral genus-five hyperelliptic
