@@ -14,7 +14,7 @@ digraph manuscript {
   "def:monomial-specialization" [fillcolor="#fde8c8", tooltip="fragment"];
   "def:strict-novikov-admissible" [fillcolor="#fde8c8", tooltip="fragment"];
   "lem:A0preserve" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
-  "lem:center-maps-monomial" [fillcolor="#ffffff", tooltip="absent"];
+  "lem:center-maps-monomial" [fillcolor="#fde8c8", tooltip="fragment"];
   "lem:center-specialization-nondegenerate" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
   "lem:divisor-tagging" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
   "lem:dvr-rank-one" [fillcolor="#cdeccd", tooltip="complete"];

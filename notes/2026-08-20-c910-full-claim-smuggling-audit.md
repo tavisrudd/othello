@@ -4,7 +4,7 @@
 
 This audit covers all 53 manuscript claim rows in
 `papers/cubic-stabilization-epilogue/lean/verification/claims.json`, with
-special attention to the 21 fragmentary and now 26 conditional rows.  Code
+special attention to the 22 fragmentary and now 26 conditional rows.  Code
 provenance is not treated as evidence: every reviewer-facing terminal was
 checked against its Lean type, proof body or immediate application theorem,
 manuscript statement, and scope caution.
@@ -106,7 +106,7 @@ fragment, even when the represented algebraic composition is complete.
 | 47 | `lem:ruled-degeneracy-dichotomy` | conditional | Pass: degeneracy, root multiplicity, and block shape are derived for a supplied matrix/charpoly model; geometric Euler identification is explicit input. |
 | 48 | `lem:center-specialization-nondegenerate` | conditional | Pass: valuation and leading-term laws imply the nondegeneracy statements; monomiality of geometric center maps is not assumed proved. |
 | 49 | `prop:hirzebruch-specialized-vanishing` | conditional | Pass: simple spectrum plus the supplied LT implication yields unipotent framed characteristic polynomial and zero multiplicity. |
-| 50 | `lem:center-maps-monomial` | absent | Honest absent row; no proxy theorem is counted for the missing geometric monomiality result. |
+| 50 | `lem:center-maps-monomial` | fragment | Honest fragment: after an additive exponent map is supplied, Lean proves the coefficient-one monomial law and linear independence in the target monoid algebra. No geometric specialization or associated-graded identification is constructed. |
 | 51 | `thm:marker-ledger` | conditional | Pass: the effective fold, occurrence-indexed telescope, and quotient descent are proved; factorization and QDM operation providers are explicit data. |
 | 52 | `prop:qdm-operation-ledgers` | conditional | Pass after repair: a multiplicity-preserving matching of transported components, with singleton fold values preserved pairwise, yields both folded operation formulas. The matching itself remains the exact external QDM-comparison input. |
 | 53 | `prop:atomic-lowdim` | conditional | Pass: classification induction produces intrinsic nullity and then actual occurrence nullity through an explicit source-center comparison. |
@@ -150,7 +150,8 @@ says so.
 | Whether the arbitrary ambient-dimension telescope smuggles an all-stabilizations theorem | Settled | Ambient dimension `d` indexes weak factorization only. Every application and every product statement remains the single `m=1` stabilization; no iteration terminal exists. |
 | The codimension-three Voisin locus | Open, honestly graded | No moduli-space or codimension object occurs in Lean. The row is now a fragment; closure would require a separate formal model of the cited locus, not another logical wrapper. |
 | Actual Iritani/Iritani--Koto QDM comparison construction | Open at the declared trust boundary | The categorical passage from a fold-compatible block matching to both operation formulas is now formalized. The exact comparison constructions, regularity/parity adapters, and occurrence-specialization maps producing that matching remain external. |
-| Monomiality of the geometric center maps | Open at the declared trust boundary | `lem:center-maps-monomial` remains absent. The algebraic consumer is formalized, but the associated-graded Novikov identification is not. |
+| Monomiality of the geometric center maps | Open at the declared trust boundary | The row is now a fragment: the algebra after a supplied exponent map is formalized, but the geometric center specialization and associated-graded Novikov identification are not. |
+| Whether the valuation-zero exceptional variable invalidates the graded-monomial proof | Settled | The completed degree-zero coefficients can exceed `C[u,u^{-1}]`, so the proof no longer claims that Laurent monomials span the whole associated graded. It proves the needed finite `C`-linear independence of the coefficient-one leading monomials and extends that set to a Hamel basis. |
 | Four `A₅`/Eckardt geometric rows | Open cycle/moduli work | `lem:eckardt-involution`, `prop:eckardt-reflection-group`, `prop:A5-not-coprime`, and `lem:pencil-loci-coordinates` remain absent; the last has registered CAS evidence but no Lean certificate. |
 
 No unexplained numerical coincidence remains in the categorical proof itself.

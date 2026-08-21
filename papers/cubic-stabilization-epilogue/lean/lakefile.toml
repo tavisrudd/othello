@@ -164,6 +164,7 @@ roots = [
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.QuarticSpectralSeparation",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.HirzebruchEulerSpectrum",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.MonomialSpecializationSeparation",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CenterMonomialMap",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.HirzebruchSpecializedVanishing",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FormalLoopConnection",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.AtomicElementaryModification",

@@ -378,7 +378,14 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   with uniformizer \(1-q_{\mathrm{coeff}}\).  What remains is only the
   vertical realization of that labelled
   crossed edge as the actual based-loop fixed-phase Malgrange/QDM packet with
-  exact closed reading.
+  exact closed reading.  Module 62 now gives the paper-local Lean type and
+  proof spine for that last reader.  The canonical projected variation is
+  functorial under one marked horizontal comparison, so separate actual
+  can/variation maps and a projected-row square are no longer inputs.  In the
+  forward direction surjectivity is enough; in the reverse direction it is
+  unnecessary.  The remaining theorem is one occurrence-indexed horizontal
+  comparison intertwining both monodromies and the rank row, the model-side
+  crossed-defect reading, and exact range/coimage base change at resonance.
   Shifted tensor stability and the extremal multinomial source law are
   proved, but the occurrence-indexed exact QDM sequence, actual carrier
   exponent, and boundary vanishing remain open.  The packet is split into
@@ -467,14 +474,13 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   strict `m = 1` cubic contradictions are now the reviewer-facing headline
   terminals. QDM block construction, comparison, factorization, and geometric
   nullity remain explicit premises; Gamma-row and all-`m` work are untouched.
-  The current checked snapshot is 53 claims, 6 absent, 20 fragmentary, 26
-  conditional, 1 complete, and 308 reviewer terminals, of which 83 are
+  The current checked snapshot is 53 claims, 4 absent, 22 fragmentary, 26
+  conditional, 1 complete, and 311 reviewer terminals, of which 83 are
   machinery. Earlier checkpoints below record the superseded atom-route
   assembly history. No duplicate under the shared
   `lean/TavisRuddFiniteGeom/` tree or a second Lean repository. The sources
-  build through the guarded queue; `make check` and the axiom-log gate green
-  over 59 claims, 46 machinery rows, and 283 reviewer terminals; coverage 3
-  absent / 27 fragmentary / 28 conditional / 1 complete. `thm:every-cubic` is
+  build through the guarded queue; `make check` and the axiom-log gate are green
+  at the current snapshot. `thm:every-cubic` is
   anchored to the atomic route, the framed spine answers to its own manuscript
   theorem `thm:every-cubic-conditional` and is now assembled end to end on the
   product-formula signature, the small even block reduction is formalized from

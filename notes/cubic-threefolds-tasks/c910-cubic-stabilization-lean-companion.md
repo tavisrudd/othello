@@ -132,8 +132,12 @@ operation adapter: a multiplicity-preserving matching of transported
 components, with the fold preserved pairwise, now yields both the
 projective-bundle and occurrence-indexed blowup marker formulas. The geometric
 construction of that matching from the cited QDM comparisons remains explicit.
+The center-monomial row is now an honest algebraic fragment: a supplied
+additive exponent map yields coefficient-one monomials, multiplicativity, and a
+linearly independent target basis, while the geometric specialization and its
+associated-graded identification remain outside Lean.
 Current audit: 53 manuscript
-claims, 5 absent, 21 fragmentary, 26 conditional, 1 complete; 309 reviewer
+claims, 4 absent, 22 fragmentary, 26 conditional, 1 complete; 311 reviewer
 terminals, of which 83 are machinery. The aggregate Lean gate, source audit,
 axiom-log audit, and warning-free 50-page manuscript gate are green.
 Governing plan:

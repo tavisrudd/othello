@@ -805,13 +805,17 @@
     },
     {
       "manuscript_label": "lem:center-maps-monomial",
-      "coverage": "absent",
-      "declarations": [],
-      "objects": "The numerical Novikov specializations of the center summands of the blowup comparison, and the associated graded of their coefficient ring.",
-      "hypotheses": "None beyond the displayed form of those specializations.",
-      "conclusion": "Each of them is monomial: the associated graded is a Laurent monoid ring whose monomials form a complex basis, and the image of every effective monomial is one of them with coefficient one.",
-      "cautions": "No terminal. Lean constructs no completed monoid ring, no associated graded ring, and no blowup comparison, so the statement that the center specializations have monomial associated graded image has no formal counterpart; the type of monomial-specialization certificates recorded under def:monomial-specialization records only the properties such data must have.",
-      "statement_digest": "4ae731e5a7d406edcfa0bb8ff47a70a3975e967801b1d1f76194bfef9b74d47f"
+      "coverage": "fragment",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.centerMonomialSpecializationData_of_exponentMap",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.centerMonomialImage_add_of_exponentMap"
+      ],
+      "objects": "An additive monoid of center degrees, an additive monoid of target exponents, the additive exponent map between them, and the additive-monoid algebra over the complex numbers on the target exponents.",
+      "hypotheses": "The exponent assignment is supplied as an additive-monoid homomorphism. No geometric or filtered-ring hypothesis is encoded.",
+      "conclusion": "Lean sends each center degree to the coefficient-one monomial at its supplied target exponent, proves that addition maps to multiplication, proves that the canonical target monomials are linearly independent, and packages these facts as monomial-specialization data with identity leading-term map.",
+      "cautions": "This is only the algebra after the exponent map has been supplied. Lean constructs no blowup center, numerical curve lattice, completed coefficient ring, filtration, associated graded of the manuscript's target ring, center specialization, or Iritani comparison, and therefore does not prove that the geometric specialization in the manuscript induces the supplied exponent map.",
+      "statement_digest": "4ae731e5a7d406edcfa0bb8ff47a70a3975e967801b1d1f76194bfef9b74d47f",
+      "terminal_digest": "a882ada36e9a9b3f3a66f9137d851cffe5eb56d0e9e5b5961655c9ff0d444cd4"
     },
     {
       "manuscript_label": "thm:marker-ledger",

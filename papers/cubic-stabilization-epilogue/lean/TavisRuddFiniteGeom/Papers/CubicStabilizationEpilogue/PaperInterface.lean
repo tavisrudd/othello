@@ -103,6 +103,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.HodgeFixedS
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.CubicZeroAtomRanks
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.HirzebruchEulerSpectrum
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.MonomialSpecializationSeparation
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CenterMonomialMap
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.HirzebruchSpecializedVanishing
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.AtomicRankTwoFlatRigidity
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CubicSeparatedBlockGauge
@@ -7895,6 +7896,35 @@ def monomialSpecializationData {Curve Target Index Graded : Type*}
     (leadingTerm : Target → Graded) (monomialImage : Curve → Target)
     (monomial : Index → Graded) : Type _ :=
   Quantum.MonomialSpecializationData leadingTerm monomialImage monomial
+
+/-- A supplied additive exponent map gives a coefficient-one monomial map from
+center degrees to the additive-monoid algebra on the target exponents.  The
+resulting data certify that the canonical target monomials are linearly
+independent and that every center degree has its prescribed monomial as leading
+term.  No geometric center specialization or associated-graded identification
+is asserted. -/
+noncomputable def centerMonomialSpecializationData_of_exponentMap
+    {CenterDegree TargetExponent : Type*}
+    [AddCommMonoid CenterDegree] [AddCommMonoid TargetExponent]
+    (exponent : CenterDegree →+ TargetExponent) :
+    Quantum.MonomialSpecializationData
+      (leadingTerm := id)
+      (monomialImage := Quantum.centerMonomialImage exponent)
+      (monomial := fun target : TargetExponent =>
+        AddMonoidAlgebra.single target (1 : ℂ)) :=
+  Quantum.centerMonomialMap_monomialSpecializationData exponent
+
+/-- Under the coefficient-one monomial map supplied by an additive exponent
+map, addition of center degrees becomes multiplication of target monomials. -/
+theorem centerMonomialImage_add_of_exponentMap
+    {CenterDegree TargetExponent : Type*}
+    [AddCommMonoid CenterDegree] [AddCommMonoid TargetExponent]
+    (exponent : CenterDegree →+ TargetExponent)
+    (left right : CenterDegree) :
+    Quantum.centerMonomialImage exponent (left + right) =
+      Quantum.centerMonomialImage exponent left *
+        Quantum.centerMonomialImage exponent right :=
+  Quantum.centerMonomialImage_add exponent left right
 
 /-- The odd degeneracy locus is not met by a graded-monomial specialization.  The
 premise is that the leading term of the combination is the corresponding
