@@ -1,0 +1,199 @@
+\section{Prescribed positive-density realization}
+\label{sec:realization}
+
+The pointed zero-functional sector persists even when outer dual distance
+grows.
+
+\begin{theorem}[Prescribed represented ports]
+\label{thm:prescribed}
+Let $O_N\leq L^N$ be $L$-linear outer codes with
+$d(O_N^\perp)\to\infty$, and let $C_N=O_N\circ I$.  For all sufficiently
+large $N$, every pointed dual witness through $(j,x)$ of weight at most
+$r+1$ is confined to block $j$ if and only if
+\[
+ r+1<z_x(I).
+\]
+Under this condition the radius-$r$ port at $x$ occurs at the $N$ targets
+$(j,x)$, hence with density $1/m$ in $C_N$.  More precisely, at every block
+\[
+ \cH_{(j,x)}^{(\leq r)}(C_N)
+   =\operatorname{embed}_j\bigl(\cH_x^{(\leq r)}(I)\bigr),
+ \qquad
+ \cP_{(j,x)}^{(\leq r)}(C_N)
+   =\operatorname{embed}_j\bigl(\cP_x^{(\leq r)}(I)\bigr).
+\]
+\end{theorem}
+
+\begin{proof}
+Every \(\F_q\)-linear functional on \(L\) has a unique form
+\(a\mapsto\Tr_{L/\F_q}(ba)\), by nondegeneracy of the trace pairing.  Let
+\(\beta=(\beta_j)\) lie in the functional dual of the restricted outer code,
+and write \(\beta_j(a)=\Tr(b_ja)\).  Since \(O_N\) is \(L\)-linear, applying
+\(\beta\) to every scalar multiple \(ca\) of every \(a\in O_N\) shows
+\[
+ \Tr\!\left(c\sum_j b_ja_j\right)=0
+ \quad\text{for every }c\in L.
+\]
+Trace nondegeneracy gives \((b_j)\in O_N^\perp\).  Conversely, every outer
+dual word gives such a functional tuple.  The trace representation is
+coordinatewise injective, so it preserves support exactly.  Thus the
+functional-dual support distance is \(d(O_N^\perp)\).
+
+Fix \(r\).  For all sufficiently large \(N\),
+\(d(O_N^\perp)\ge r+2\).  Every realization of a nonzero functional tuple
+then has weight at least \(r+2\): each nonzero functional requires a nonzero
+inner block.  The exact pointed decomposition of
+Theorem~\ref{thm:transfer} consequently leaves only the zero-functional
+sector in the bounded range.  For \(N\ge2\), its exact cost is the
+block-independent quantity \(z_x(I)\).  Hence confinement through every
+\((j,x)\) holds exactly when \(r+1<z_x(I)\).
+
+If \(r+1<z_x(I)\), Theorem~\ref{thm:transfer} identifies both support and
+normalized coefficient ports by zero-extension.  If
+\(r+1\ge z_x(I)\), the attained pointed inner-dual minimum at \(x\), together
+with a minimum nonzero inner-dual word in a second block, gives a
+zero-functional pointed nonembedded witness of weight at most \(r+1\).
+This proves necessity as well as sufficiency.  Finally, the \(N\) targets
+\((j,x)\) among the \(mN\) concatenated coordinates give density \(1/m\).
+\end{proof}
+
+\begin{proposition}[Concatenated parameters]
+\label{prop:concat-parameters}
+If \(I\) has parameters \([m,k,d]_q\) and
+\(O_N\leq L^N\) has \(L\)-dimension \(K_N\) and symbol distance \(D_N\),
+then \(C_N=O_N\circ I\) has length \(mN\), \(\F_q\)-dimension \(kK_N\),
+and minimum distance at least \(dD_N\).  In particular, if
+\[
+ \frac{K_N}{N}\longrightarrow R>0,
+ \qquad
+ \liminf_N\frac{D_N}{N}\geq\delta>0,
+\]
+then the concatenated family has asymptotic rate \(kR/m\) and relative
+distance at least \(d\delta/m\).
+\end{proposition}
+
+\begin{proof}
+The blockwise inner encoder is injective, so restriction of scalars multiplies
+the outer \(L\)-dimension by \([L:\F_q]=k\).  A nonzero outer word has at
+least \(D_N\) nonzero symbols, and each nonzero symbol encodes to an inner
+word of weight at least \(d\).  The finite parameter statements follow;
+division by \(mN\) gives the asymptotic claims.
+\end{proof}
+
+\begin{corollary}[Positive-density MDS coefficient fingerprints]
+\label{cor:mds-fingerprints}
+Let \(I\) be a positive-dimensional \([m,k]_q\) MDS code and fix \(x\).
+Its radius-\(k\) support port is the complete \(k\)-uniform clutter on the
+other coordinates, while its radius-\(k\) coefficient port reconstructs
+\(I\), and \(z_x(I)=2(k+1)\).  Both ports occur at density \(1/m\) in every sufficiently long
+concatenation by an outer family with dual distance tending to infinity.
+\end{corollary}
+
+\begin{proof}
+The minimum-port assertions are Theorem~\ref{thm:mds-reconstruction}.  Every
+minimum dual support through \(x\) has size \(k+1\), so
+\(\mu_x(0)=d(I^\perp)=k+1\) and
+\[
+ z_x(I)=2(k+1)>k+1.
+\]
+Apply Theorem~\ref{thm:prescribed} with \(r=k\).  The support port depends
+only on the MDS parameters; the transferred normalized coefficients retain
+the represented inner code.
+\end{proof}
+
+\begin{corollary}[Positive-density Clebsch repair ports]
+\label{cor:clebsch-port}
+Let $I$ be the $[6,3,4]_{11}$ Clebsch hexagon code
+\cite{RuddClebschRigidity2026}, and fix a coordinate $x$.
+The minimal radius-three repair clutter at $x$ is the complete
+three-uniform hypergraph on the other five coordinates.  Hence it has ten
+minimal repair supports,
+\[
+ \nu_x^{(\leq3)}=1,\qquad \tau_x^{(\leq3)}=3,
+\]
+and homogeneous helper-survival reliability
+\[
+ 10s^3(1-s)^2+5s^4(1-s)+s^5.
+\]
+Already the radius-three coefficient port at $x$ determines $I$.
+Moreover $z_x(I)=8$, so both the minimum radius-three port and the full
+radius-five coefficient port occur with density $1/6$ in an asymptotically
+good fixed-$\F_{11}$ family.
+\end{corollary}
+
+\begin{proof}
+The dual $I^\perp$ is again an $[6,3,4]_{11}$ MDS code.  Every four-set
+containing $x$ is therefore the support of a dual word, unique up to scalar.
+The minimal helper sets are consequently all $\binom53=10$ triples on the
+other coordinates.  Their matching and transversal numbers are one and
+three, and recovery succeeds exactly when at least three of the five
+helpers survive, giving the displayed polynomial.
+
+At radius three the common-core star of minimum normalized dual words is
+already a basis of \(I^\perp\), by
+Corollary~\ref{cor:mds-fingerprints}.  Thus the minimum coefficient port,
+and hence also the full radius-five port, recovers \(I^\perp\) and \(I\).
+
+Finally, the minimum dual-word weight through $x$ is four, so
+\[
+ z_x(I)=\mu_x(0)+d(I^\perp)=4+4=8.
+\]
+Taking $r=5$ gives $r+1=6<8$.  Theorem~\ref{thm:prescribed} therefore
+confines every full pointed witness to its inner block and reproduces the
+coefficient fibers at one of the six coordinate types in every block.
+Choosing asymptotically good outer codes over $\F_{11^3}$ gives the claimed
+fixed-$\F_{11}$ family and density.
+\end{proof}
+
+\begin{remark}
+The support clutter and reliability polynomial in
+Corollary~\ref{cor:clebsch-port} are shared by every $[6,3,4]$ MDS code.
+The Clebsch-specific information lies in the scalar coefficient fibers:
+they recover the inner code that is characterized geometrically in
+\cite{RuddClebschRigidity2026}.
+\end{remark}
+
+\begin{remark}
+Corollary~\ref{cor:mds-fingerprints} applies without a new transfer argument
+to every represented MDS inner code.  This includes the usual arc and
+projective Reed--Solomon presentations, and the classical MDS code
+presentations underlying AME constructions, whenever their displayed field
+and dimension hypotheses hold.  Their minimum support ports are generic MDS
+data; only their normalized coefficient ports distinguish the represented
+geometric or quantum-code realization.
+\end{remark}
+
+This is a represented-port theorem: it does not say that every abstract
+hypergraph is linearly representable.  It yields standard scaled asymptotic
+regions.  If $Q=q^k$, random $L$-linear outer codes of rate $R$ can have
+relative distances $\delta,\delta^\perp$ whenever
+\[
+ H_Q(\delta)<1-R,
+ \qquad H_Q(\delta^\perp)<R.
+\]
+For an inner $[m,k,d]_q$ code the concatenated parameters satisfy
+\[
+ R_{\rm concat}\to\frac{k}{m}R,
+ \qquad
+ \delta_{\rm concat}\geq\frac{d}{m}\delta.
+\]
+Indeed, for a random $L$-linear outer code the expected numbers of nonzero
+words and dual words below the two cutoffs have exponential rates
+$R+H_Q(\delta)-1$ and $H_Q(\delta^\perp)-R$, respectively, so both vanish
+simultaneously; this is the random-linear-code form of the
+Gilbert--Varshamov argument \cite[Chapter~17]{MacWilliamsSloane1977}.
+When $Q$ is square, algebraic-geometry outer codes similarly give, for
+$\gamma=1/A(Q)$ and $\gamma<R<1-\gamma$,
+\[
+ \delta(O_N)\geq1-R-\gamma,
+ \qquad
+ \delta(O_N^\perp)\geq R-\gamma,
+ \qquad
+ \delta_{\rm concat}\geq\frac{d}{m}(1-R-\gamma).
+\]
+These are the classical GV and TVZ ingredients.  For the completed
+$[20,4,9]_9$ seed, $Q=6561$ and $\gamma\leq1/80$, recovering the concrete
+rate-$1/10$ family as one instance
+\cite[Chapters~2 and~7]{Stichtenoth2009}.  The stronger self-dual family used
+for that concrete instance is precisely Stichtenoth's theorem over
+\(\F_{6561}\) \cite[Theorem~1.6(ii)]{Stichtenoth2005}.

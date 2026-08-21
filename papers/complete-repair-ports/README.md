@@ -34,7 +34,7 @@ family. The support clutter alone is the generic complete three-uniform
 hypergraph on five helpers; the manuscript does not present generic MDS
 locality as Clebsch-specific.
 
-The current PDF is a 12-page draft. Its main mathematical boundary is deliberate: coefficients
+The current PDF is a 17-page modular draft. Its main mathematical boundary is deliberate: coefficients
 give a direct one-symbol-per-helper scalar protocol, not a minimum-bandwidth or minimum-access
 claim under subpacketization.
 
@@ -58,7 +58,7 @@ product architecture, and random harmonic-cascade thresholds are outside scope.
 
 ## Files
 
-- `complete_repair_ports.tex` — main manuscript.
+- `complete_repair_ports.tex` — preamble, opening, and modular manuscript driver.
 - `complete_repair_ports.pdf` — current draft PDF.
 - `refs.bib` — bibliography.
 - `sections/` — manuscript sections and their reading order.

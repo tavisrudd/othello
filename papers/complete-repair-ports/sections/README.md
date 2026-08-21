@@ -1,7 +1,7 @@
 # Section map
 
-`complete_repair_ports.tex` remains the active monolithic driver until C678.
-The modular rewrite will use this mathematical dependency order:
+`complete_repair_ports.tex` is the active driver.  Its modular sources follow
+this mathematical dependency order:
 
 1. `01-complete-ports.tex` — support, coefficient, and probability layers;
    reconstruction radius; intrinsic pointed-port isomorphisms; page-2 MDS
@@ -15,11 +15,9 @@ The modular rewrite will use this mathematical dependency order:
    radius-filtration boundary.
 6. `06-geometric-flagships.tex` — cubic--axis and
    quartic--nucleus/harmonic applications.
-7. `07-verification-provenance.tex` — compact trust map.
-8. `08-conclusion.tex` — mathematical synthesis and precise open boundary.
+7. `08-conclusion.tex` — mathematical synthesis and precise open boundary.
+8. `07-verification-provenance.tex` — appendix trust map and evidence-only
+   finite outputs.
 
-The appendices contain all surviving finite computations, tables,
-certificates, and replay descriptions.  They are not dependencies of Sections
-1--6.  C678 creates the section files only after C672--C677 have passed their
-human-proof and Lean gates.
-
+The appendix contains all surviving finite computations, tables, certificates,
+and replay descriptions.  It is not a dependency of Sections 1--6.

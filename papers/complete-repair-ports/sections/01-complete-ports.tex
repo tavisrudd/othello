@@ -1,0 +1,110 @@
+\section{Complete bounded repair ports}
+\label{sec:ports}
+
+Let $C\leq\F_q^X$ be a linear code, let $x\in X$, and let $r\geq0$.
+
+\begin{definition}[Support layer]
+\label{def:complete-port}
+The complete radius-$r$ repair hypergraph at $x$ is
+\[
+ \cH_x^{(\leq r)}(C)=
+ \left\{R\subseteq X\setminus\{x\}: |R|\leq r,
+ \ \exists w\in C^\perp,\ w_x\neq0,\
+ \supp(w)\setminus\{x\}=R\right\}.
+\]
+Its minimal members form the repair clutter
+$\min\cH_x^{(\leq r)}(C)$.  Write $\nu_x^{(\leq r)}$ and
+$\tau_x^{(\leq r)}$ for its matching and transversal numbers.
+\end{definition}
+
+The distinction between the complete hypergraph and its minimal clutter is
+useful: the former records every bounded witness, while every monotone support
+invariant below depends only on the latter.
+
+\begin{proposition}[Basic invariants]
+\label{prop:basic-invariants}
+Assume the empty helper set is not a repair.  Then
+\[
+ \nu_x^{(\leq r)}\leq\tau_x^{(\leq r)}.
+\]
+Both numbers are unchanged after deleting nonminimal repair sets, so either
+the complete hypergraph or its minimal clutter may be used for these optima.
+\end{proposition}
+
+\begin{proof}
+A matching of $m$ nonempty edges forces every transversal to select at least
+one point from each edge.  Minimalization preserves the upward closure of the
+success event, hence preserves matching and transversal optima.
+\end{proof}
+
+\begin{definition}[Coefficient layer]
+\label{def:coefficient-port}
+Write
+\[
+ \cP_x^{(\leq r)}(C)=
+ \{w\in C^\perp:w_x=1,\
+   |\supp(w)\setminus\{x\}|\leq r\}
+\]
+for the normalized coefficient port.
+For $R\in\cH_x^{(\leq r)}(C)$, its coefficient fiber is the set of normalized
+coefficient vectors
+\[
+ \left(-\frac{w_y}{w_x}\right)_{y\in R}
+ \quad(w\in C^\perp,\ \supp(w)=R\cup\{x\}).
+\]
+Each vector gives the exact recovery equation
+$c_x=\sum_{y\in R}(-w_y/w_x)c_y$.  Operationally, a helper transmits its
+stored scalar in $\F_q$ and the decoder applies the displayed coefficient.
+Thus a radius-$r$ repair contacts at most $r$ helpers and downloads one whole
+base-field symbol from each.  This scalar exact-repair model does not optimize
+subsymbol access or repair bandwidth in an array-code model
+\cite{KurzYaakobi2021,YeBarg2016,ShahEtAl2010}.
+\end{definition}
+
+\begin{definition}[Reconstruction radius]
+\label{def:reconstruction-radius}
+The coefficient port \emph{reconstructs} $C$ at radius $r$ when its linear
+span is $C^\perp$; equivalently, double duality recovers $C$ from the port.
+Its reconstruction radius is the least such $r$, or infinity if no such
+radius exists.
+\end{definition}
+
+\begin{proof}[Proof of Theorem~\ref{thm:mds-reconstruction}]
+The dual has dimension $n-k$ and minimum distance $k+1$.  Given any
+$(k+1)$-set $T\subseteq E$, restrict $C^\perp$ to $E\setminus T$.  Its domain
+has dimension $n-k$ and its codomain dimension $n-k-1$, so the restriction
+has a nonzero kernel vector $y$ supported on $T$.  The dual-distance bound
+forces $\supp(y)=T$.  If $x\in T$, then $y_x\neq0$ and scaling gives a
+normalized repair word.  Thus every $k$-subset of $E\setminus\{x\}$ is a
+minimum helper set.  Conversely, any normalized repair with at most $k$
+helpers has total weight at most $k+1$, so the same distance bound forces
+equality.  This proves the support-clutter assertion.
+
+Choose $Q\subseteq E\setminus\{x\}$ with $|Q|=k-1$ and set
+$U=E\setminus(\{x\}\cup Q)$.  For every $t\in U$, choose the normalized
+minimum dual word $y_t$ supported on $\{x,t\}\cup Q$.  The coordinate $t$ is
+nonzero in $y_t$ and zero in every $y_s$ with $s\neq t$.  Evaluating a linear
+relation at the private coordinates $t$ shows that the $y_t$ are independent.
+There are $|U|=n-k=\dim C^\perp$ of them, so they form a basis of $C^\perp$
+contained in the radius-$k$ coefficient port.  Double duality therefore
+recovers $C$.  No smaller radius contains any normalized word, since that
+would produce a nonzero dual word of weight at most $k$.  Hence
+$\rho_x(C)=k$.
+\end{proof}
+
+\begin{definition}[Probability layer]
+\label{def:probability-layer}
+Let $A\subseteq X\setminus\{x\}$ be the surviving helpers and put
+\[
+ f_x^{(\leq r)}(A)=1
+ \quad\Longleftrightarrow\quad
+ \exists R\in\cH_x^{(\leq r)}(C)\text{ with }R\subseteq A.
+\]
+For independent survival probabilities $(s_y)$, the reliability is
+$R_x^{(\leq r)}(s)=\mathbb E[f_x^{(\leq r)}]$.
+\end{definition}
+
+Exact equality of complete ports preserves all support-derived invariants:
+matching, transversals, blocker clutters, multivariate reliability, and every
+correlated-law reliability after transporting the helper labels.  Coefficient
+fibers require the finer functional data used next.

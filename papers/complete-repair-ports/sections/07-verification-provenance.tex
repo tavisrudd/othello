@@ -1,0 +1,80 @@
+\section{Formal verification and finite evidence}
+\label{sec:verification}
+
+The coefficient-port reconstruction and exact transfer chains are checked in
+Lean.  The import-only gate
+\path{RepairPorts.Gates.CompletePorts} audits the paper-facing declarations.
+Its two transfer terminals are
+\begin{quote}\small\raggedright
+\path{RepairPorts.exactFunctionalStrata},\\
+\path{RepairPorts.exactPointedConfinementAndTransfer}.
+\end{quote}
+The first gives the exact zero-, singleton-, and multisupport-functional
+profiles; the second gives the pointed minimum formula and complete-port
+equality.  Both report only
+\texttt{propext}, \texttt{Classical.choice}, and \texttt{Quot.sound}.  The
+strict field-nine corollary is the conclusion of
+\begin{quote}\small\raggedright
+\path{RepairCodes.projectiveAxisTwistedCubic_strict_weighted_transfer_of_regular_projective_action}.
+\end{quote}
+Singer regularity is an explicit hypothesis of that declaration, not a hidden
+formal axiom.  The exact public module closure and artifact provenance are
+release-gate data, not claims made by this private draft.
+
+Trace duality, scaled concatenated parameters, exact target density, eventual
+necessity and sufficiency, support/coefficient transfer, and the MDS
+fingerprint corollary are audited through
+\begin{quote}\small\raggedright
+\path{RepairPorts.concatenatedRestrictedCode_parameters},\\
+\path{RepairPorts.eventually_pointedConfinement_iff_zeroCost},\\
+\path{RepairPorts.eventually_prescribedPorts},\\
+\path{RepairPorts.eventually_mdsMinimumCoefficientFingerprints}.
+\end{quote}
+They report only \texttt{propext}, \texttt{Classical.choice}, and
+\texttt{Quot.sound}.  Random-GV or AG/TVZ existence of an outer family is the
+explicit classical input; no such existence theorem occurs in the Lean
+dependency closure.
+
+The finite reliability and bounded-EXIT calculus is audited through
+\begin{quote}\small\raggedright
+\path{RepairPorts.portReliability_delete_contract},\\
+\path{RepairPorts.hasDerivAt_portReliability_update},\\
+\path{RepairPorts.hasDerivAt_homogeneous_portReliability},\\
+\path{RepairPorts.erasureFailureProbability_delete_contract},\\
+\path{RepairPorts.noRepairProbability_eq_erasureFailure},\\
+\path{RepairPorts.cheapestRepairRadiusProbability_eq_failure_sub},\\
+\path{RepairPorts.blockerFailurePolynomial_eq_minimum_term_add_remainder}.
+\end{quote}
+These declarations use finite sums and polynomial algebra only.  Exact finite
+profiles and Poisson approximations remain computational refinements outside
+the body proof chain.
+
+For the concrete completed field-nine family, the external existence input is
+Stichtenoth's self-dual TVZ-family theorem over \(\F_{6561}\)
+\cite[Theorem~1.6(ii)]{Stichtenoth2005}.  Classical inputs are labeled as
+such: outer-family existence, concatenated-dual decomposition, Singer
+regularity, normal-rational-curve nuclei, and the Las Vergnas perspective
+polynomial.
+
+\subsection{Field-nine evidence}
+\label{sec:finite-evidence}
+
+For the completed field-nine cubic--axis code, $Z_3(9)=4$, and the cubic,
+finite-axis, and axis-infinity coordinate types have exact $(\nu,\tau)$ rows
+\[
+ (4,7),\qquad(6,12),\qquad(7,13),
+\]
+with multiplicities $9,9,1$.  A Singer-shifted generalized single-parity-check
+$[5,4,2]_{6561}$ outer code has functional distance five but weighted distance
+at least six.  Its exact nonembedded threshold is six, so radius-four transfer
+holds although the support-distance gate requiring functional distance six
+fails.  The five parity-check multipliers use a regular Singer action so that
+the inner code's twenty unit-cost projective functional classes have disjoint
+translates in the five blocks.
+
+For the quartic--nucleus code at $q=9$, the general formulas give 30 nucleus
+repairs and 12 repairs at each curve target.  The certificate additionally
+gives nucleus values $(\nu,\tau)=(2,5)$, exact Bernstein and EXIT rows, and
+finite propagation witnesses.  In particular, a block-free rank-five spanning
+set completes in one round after adjoining the nucleus.  These exact outputs
+are evidence-only refinements: no theorem in the main body depends on them.

@@ -33,7 +33,7 @@ declaration, statement adequacy, an axiom audit, and no computational dependency
 | Bounded EXIT | `prop:bounded-exit` | Radius-truncated extrinsic failure obeys the erasure-sign recurrence, and successive curves encode the cheapest available repair radius; no finite-radius MAP or capacity claim is made. | Complete conditioning/event proof and `RepairPorts.Reliability` kernel terminals; exact curves are appendix refinements. | `ADOPTED / KERNEL` | C675 |
 | Pointed Tutte | `thm:tutte` | Full repair reliability is the stated specialization of the Las Vergnas perspective of \(M\backslash x\to M/x\); pointed duality exchanges repair and failure. | Complete human derivation and kernel-checked `RepairPorts.PointedTutte` terminals; Las Vergnas duality is the named classical input; aggregate gate and axiom audit pass. | `ADOPTED / KERNEL` | C676 |
 | Filtration boundary | `prop:filtration-boundary` | The unfiltered pointed invariant does not determine the bounded-radius filtration, even for rank-four \(\mathbb F_7\)-represented systems. | Complete sparse-paving/minor proof, exact replay bundle, and kernel-checked symbolic reliability separation; aggregate gate and axiom audit pass. | `ADOPTED / KERNEL` | C676 |
-| Cubic application | `thm:cubic` | The characteristic-three cubic--axis family has the retained code parameters, exact bounded port types, and strict matching/transversal contrast in the stated field range. | Human proof and kernel-checked theorem chain. | `ADOPTED / RECONCILE` | C678 |
+| Cubic application | `thm:cubic` | The characteristic-three cubic--axis family has the retained code parameters, exact bounded port types, and strict matching/transversal contrast for (q\ge9). | Human coordinate/combinatorial proof; `FiniteGeom.axisTwistedCubic_code_parameters`, the complete small-repair classification, `minimalAxisRepair_nucleus_invariants`, `minimalAxisRepair_finite_invariants`, `cubicRepair_matchingNumber`, `cubicRepair_transversalNumber`, and `axisTwistedCubic_allSymbol_tau_gt_nu`. | `ADOPTED / KERNEL` | C678 |
 | Harmonic application | `thm:harmonic` | The quartic normal-rational curve plus nucleus has the stated code parameters and harmonic \(S(3,4,q+1)\) radius-four coefficient/support port, with theorem-derived nucleus/curve contrast. | Complete symbolic manuscript proof and kernel-checked `RepairPorts.HarmonicQuartic` chain: determinant factors, unique projective completion, arbitrary-order harmonic-family iff, exclusion of circuits below five, dual distance five, pointed block ports, and nucleus-gate closure. The sharp five-point section bound is exposed in the exact parameter terminal and proved in the manuscript; finite \(q=9,q=27\) bundles are appendix-only. | `ADOPTED / KERNEL` | C677 |
 
 ## Appendix-only finite claims
@@ -41,8 +41,8 @@ declaration, statement adequacy, an axiom audit, and no computational dependency
 The following may not carry a body proof: exact \(q=9\) Bernstein
 coefficients, EXIT deficits and total-area ledger, finite harmonic closure
 witnesses, exact \(q=9/q=27\) circuit replays, finite Poisson error tables, and
-any generated profile table.  C325 owns their consolidated manifest and replay
-after C678 freezes the appendix contents.
+any generated profile table.  C678 freezes these as evidence-only appendix
+content; C325 owns their consolidated manifest and replay.
 
 ## Deliberate exclusions
 
