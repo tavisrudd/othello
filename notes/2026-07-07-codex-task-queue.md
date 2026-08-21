@@ -56,8 +56,6 @@ caveats; none is covered by C778--C780.
 ### `paper-frob-eq`
 
 - **C152 `[paper-frob-eq]` [QUEUED]** — quadratic-Frobenius replacement graph and component census → `notes/2026-07-14-c152-orbit-replacement-graph.md`.
-- **C318 `[paper-frob-eq]` [IN PROGRESS; NEXT]** — add the surviving Q25 residual layer to the arcs trust manifest: theorem-map rows for the orbit/classification theorems, the residual `*Data/` trees with their scale and consuming checker, the trusted-surface statement distinguishing generic-predicate leaves from bespoke per-row leaves, and reconciliation of C151 report references to the mask-spectrum payload removed by `6da475113` → `notes/2026-07-18-c151-certificate-portfolio-fable-review.md`.
-- **C319 `[paper-frob-eq]` [QUEUED; C151 cost now measured at 1:57:09 serial]** — decide whether to replace the literal canonical-class links with a verified canonicalizer, or to demote the exact Q25 classification to a Lean-checked reduction plus reproducible computation → `notes/2026-07-18-c151-certificate-portfolio-fable-review.md`.
 
 ### `build-sys`
 
@@ -158,7 +156,6 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 
 ### `complete-ports`
 
-- **C677 `[complete-ports]` [QUEUED AFTER C672]** — replace the quartic--nucleus/harmonic flagship’s mixed manuscript/certificate proof chain by uniform human and Lean proofs of the code parameters, harmonic-circuit design, pointed port structure, nucleus gate mechanism, and theorem-derived reliability consequences; mark every irreducibly finite q9 item for the appendix → `notes/2026-07-26-c677-harmonic-port-geometry.md`.
 - **C678 `[complete-ports]` [QUEUED AFTER C672--C677]** — assemble the theorem-backed revised manuscript in modular sections, put MDS reconstruction on page 2, subordinate Clebsch/cubic/harmonic geometry to the general theory, and move every surviving computation, finite table, certificate, and replay description into explicit appendices without leaving a body-proof dependency → `notes/2026-07-26-c678-complete-ports-draft-assembly.md`.
 - **C325 `[complete-ports]` [QUEUED AFTER C678; APPENDIX-ONLY]** — build one consolidated executable verifier reproducing every retained finite appendix table from a versioned manifest, with independent replay and per-claim evidence routes; no certificate or generated table may carry a main-spine theorem → `notes/2026-07-18-c151-certificate-portfolio-fable-review.md`.
 - **C679 `[complete-ports]` [QUEUED AFTER C325 AND C678]** — run aggregate Lean adequacy and axiom audits, warning-free manuscript and appendix validation, and independent cold reads of theorem hierarchy, human-proof completeness, formal correspondence, computation independence, and exposition; resolve all draft-scoped blockers and issue the draft-readiness verdict without crossing the public-release gates → `notes/2026-07-26-c679-complete-ports-draft-readiness.md`.

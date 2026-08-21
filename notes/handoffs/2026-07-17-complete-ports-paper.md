@@ -3,7 +3,7 @@
 **Lane**: `complete-ports`
 
 **Date**: 2026-07-26
-**Status**: ACTIVE; C672--C676 PROOF GATES COMPLETE; C677 NEXT; PUBLIC RELEASE GATED
+**Status**: ACTIVE; C672--C677 PROOF GATES COMPLETE; C678 NEXT; PUBLIC RELEASE GATED
 **Theorem source lane**: archived [`repaircodes`](done/2026-07-13-projective-completion-repaircodes.md)
 **Current private paper**: [`complete-repair-ports`](../../papers/complete-repair-ports/README.md)
 **Canonical paper identity**: `complete-ports` — *Complete Bounded Repair Ports: Local Memory,
@@ -106,15 +106,11 @@ terminal.
 Before any nontrivial proof development or formalization for this paper, read the required
 paper-specific expert dossier
 [`papers/expert-profiles/05-complete-repair-ports.md`](../../papers/expert-profiles/05-complete-repair-ports.md).
-It routes C675 to the Janson--O'Donnell reliability lens, C676 to the Britz--Ravagnani
-code/matroid lens, and C677 to the Lavrauw--Ball/Bartoli finite-geometry lens; final assembly also
-requires the Yaakobi/Tamo operational-storage read.
+The proof-gate sequence C672--C677 is complete.  Final assembly requires the Yaakobi/Tamo
+operational-storage read from the expert dossier.
 
-Run [C677](../2026-07-26-c677-harmonic-port-geometry.md) next: complete the harmonic geometric
-application with human proofs and matching Lean statements.  C672--C676 have passed their gates;
-C677 is the only remaining proof/formalization gate before C678 draft assembly.
-
-C678 assembles the revised modular draft only after C672--C677 pass their gates. C325 then builds
+Run [C678](../2026-07-26-c678-complete-ports-draft-assembly.md) next to assemble the revised modular
+draft. C325 then builds
 the appendix-only finite verifier. C679 performs the aggregate formal/prose audits and independent
 draft-readiness cold reads.
 

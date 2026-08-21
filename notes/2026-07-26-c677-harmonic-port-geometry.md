@@ -2,11 +2,12 @@
 
 **Lane:** `complete-ports`
 
-**Status:** ACTIVE — the symbolic manuscript proof, harmonic completion, determinant
+**Status:** COMPLETE — the symbolic manuscript proof, harmonic completion, determinant
 factorization, Steiner completion, arbitrary-order circuit criterion, exclusion of circuits below
 five, exact dual distance, pointed radius-four block ports, and nucleus-gate closure identities are
 kernel-green.  The exact parameter terminal exposes only the sharp five-point hyperplane-section
-lemma, which is proved in the manuscript; ledger and closeout gates are in progress.
+lemma, which is proved in the manuscript.  The aggregate gate, area-local trust audit, paper build,
+and control-ledger reconciliation pass.
 
 ## Current checkpoint
 
@@ -96,6 +97,46 @@ lean/scripts/guarded-lean RepairPorts/HarmonicQuartic.lean
 The single-file elaboration is warning-free apart from the wrapper's dirty-tree notice.
 `RepairPorts.Gates.CompletePorts` also passes through the guarded build queue, and the freshly
 extracted `complete_ports` trust facts pass the area-local trust-spine audit with zero findings.
+
+```text
+lean/scripts/lean-build-queue.py run RepairPorts.Gates.CompletePorts \
+  --profile single --threads 1 --cores 20-23
+python3 scripts/lean-trust-extract.py run --area complete_ports
+python3 scripts/lean-trust-spine.py audit --area complete_ports
+nix shell nixpkgs#tectonic -c tectonic complete_repair_ports.tex
+```
+
+The aggregate gate passed, the extracted area audit reported zero errors, warnings, or
+informational findings, and Tectonic rebuilt the tracked PDF without TeX warnings.
+
+## Closeout: extra value and expert-pressure pass
+
+The finite-geometry pressure pass forced two useful upgrades beyond the provisional normalized
+determinant proof.  First, the argument now treats infinity in every tuple position and proves the
+harmonic dependence criterion for arbitrary ordered projective quadruples.  Second, it enlarges an
+arbitrary selected set to four coordinates and proves uniform small-column independence, replacing
+what could otherwise have remained an implicit field-nine inventory.  Together with the explicit
+`{0,1,-1,∞}` block, this gives the exact dual distance uniformly and makes the characteristic-three
+boundary visible in the theorem types.
+
+The repair-port pressure pass also exposed and removed a representation seam: the code is now
+defined as the row span of the displayed generator, with a kernel-checked equality to the
+projective evaluation-code presentation.  Thus the circuit-to-repair bridge applies to the actual
+paper code rather than a merely isomorphic surrogate.
+
+## Mystery ledger
+
+- **Settled:** the zero-sum finite triple does not invalidate distinct completion; it completes at
+  infinity, while the complementary coordinate minor proves the needed deletion independence.
+- **Settled:** tuple normalization is harmless.  Explicit finite permutations transport the
+  infinity-last determinant theorem to every projective ordering.
+- **Settled:** dual distance five is not a field-nine observation.  Uniform four-column
+  independence gives the lower bound and the block `{0,1,-1,∞}` gives a weight-five witness.
+- **Boundary made explicit:** Lean takes the sharp five-point hyperplane-section lemma as the sole
+  input to the primal-distance terminal; the manuscript proves it by the degree-four root count
+  and the nucleus equality case.  No certificate or untracked classical theorem is hidden there.
+- **No genuine mystery remains within C677.**  Exact field-nine rows, propagation witnesses, and
+  Poisson refinements remain deliberately appendix-only and are not logical inputs to the body.
 
 ## Objective
 
