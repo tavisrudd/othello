@@ -1,4 +1,5 @@
 import RepairPorts.MDSReconstruction
+import RepairPorts.HarmonicQuartic
 import RepairPorts.PointedTutte
 import RepairPorts.PointedTransfer
 import RepairPorts.PositiveDensity
@@ -56,3 +57,15 @@ enumerator occurs in these dependency closures.
 #print axioms RepairPorts.coeff_blockerFailurePolynomial_eq_zero_below_minimum
 #print axioms RepairPorts.blockerFailurePolynomial_eq_minimum_term_add_remainder
 #print axioms RepairCodes.projectiveAxisTwistedCubic_strict_weighted_transfer_of_regular_projective_action
+#print axioms RepairPorts.harmonicQuarticDeterminant_finite
+#print axioms RepairPorts.harmonicQuarticDeterminant_infinity
+#print axioms RepairPorts.existsUnique_harmonicQuarticCompletion
+#print axioms RepairPorts.harmonicQuarticFamily_projective_linearIndependent_iff
+#print axioms RepairPorts.harmonicQuarticGenerator_smallColumnIndependent
+#print axioms RepairPorts.dualDist_harmonicQuarticCode
+#print axioms RepairPorts.harmonicQuarticCode_parameters_of_sharp_section
+#print axioms RepairPorts.finiteHarmonicBlock_repairPort
+#print axioms RepairPorts.infinityHarmonicBlock_repairPort
+#print axioms RepairPorts.harmonicPortClosure_withNucleus_iff
+#print axioms RepairPorts.harmonicPortClosure_of_containsBlock_iff
+#print axioms RepairPorts.harmonicPortClosure_of_containsNoBlock_iff

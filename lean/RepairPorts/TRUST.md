@@ -9,7 +9,10 @@ Memory, Transfer, and Reliability*.  The paper-facing boundary is the import clo
 The gate exports the exact support/coefficient bridge, reconstruction radius, MDS reconstruction,
 pointed functional strata and transfer, positive-density fingerprints, finite reliability and
 bounded-EXIT calculus, and the pointed rank-sum specialization with its radius-filtration
-boundary.  The complete terminal list and each declared axiom set live in
+boundary.  It also exports the characteristic-three quartic--nucleus determinant and harmonic
+completion laws, uniform exclusion of circuits below five, dual distance five, normalized
+radius-four harmonic ports, and the abstract nucleus-gate closure identities.  The complete
+terminal list and each declared axiom set live in
 `trust/areas/complete_ports.toml`.
 
 The reliability terminals prove deletion--contraction, pivotal derivatives, the homogeneous
@@ -22,6 +25,12 @@ rank-one deletion--contraction perspective, identify the evaluated derivative di
 successful-set enumerator, and prove the two-repair inclusion--exclusion formula that separates
 disjoint and overlapping radius-three repairs.  Matroid deletion, contraction, and duality enter
 the manuscript as the displayed classical rank identities, not as project axioms.
+
+The harmonic terminals use only coordinate algebra and finite linear algebra.  The exact primal
+distance terminal exposes the sharp five-point hyperplane-section statement as a theorem
+hypothesis; the manuscript proves that statement by the displayed degree-four root count.  The
+classical normal-rational-curve nucleus attribution is explanatory and does not enter the Lean
+dependency closure.
 
 ## Trust boundary
 

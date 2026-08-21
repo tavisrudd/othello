@@ -57,6 +57,18 @@ terminals = [
   "RepairPorts.coeff_blockerFailurePolynomial_eq_zero_below_minimum",
   "RepairPorts.blockerFailurePolynomial_eq_minimum_term_add_remainder",
   "RepairCodes.projectiveAxisTwistedCubic_strict_weighted_transfer_of_regular_projective_action",
+  "RepairPorts.harmonicQuarticDeterminant_finite",
+  "RepairPorts.harmonicQuarticDeterminant_infinity",
+  "RepairPorts.existsUnique_harmonicQuarticCompletion",
+  "RepairPorts.harmonicQuarticFamily_projective_linearIndependent_iff",
+  "RepairPorts.harmonicQuarticGenerator_smallColumnIndependent",
+  "RepairPorts.dualDist_harmonicQuarticCode",
+  "RepairPorts.harmonicQuarticCode_parameters_of_sharp_section",
+  "RepairPorts.finiteHarmonicBlock_repairPort",
+  "RepairPorts.infinityHarmonicBlock_repairPort",
+  "RepairPorts.harmonicPortClosure_withNucleus_iff",
+  "RepairPorts.harmonicPortClosure_of_containsBlock_iff",
+  "RepairPorts.harmonicPortClosure_of_containsNoBlock_iff",
 ]
 coverage_rule = "closure"
 
@@ -267,5 +279,65 @@ expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 
 [[terminal]]
 declaration = "RepairCodes.projectiveAxisTwistedCubic_strict_weighted_transfer_of_regular_projective_action"
+gates = ["RepairPorts.Gates.CompletePorts"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RepairPorts.harmonicQuarticDeterminant_finite"
+gates = ["RepairPorts.Gates.CompletePorts"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RepairPorts.harmonicQuarticDeterminant_infinity"
+gates = ["RepairPorts.Gates.CompletePorts"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RepairPorts.existsUnique_harmonicQuarticCompletion"
+gates = ["RepairPorts.Gates.CompletePorts"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RepairPorts.harmonicQuarticFamily_projective_linearIndependent_iff"
+gates = ["RepairPorts.Gates.CompletePorts"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RepairPorts.harmonicQuarticGenerator_smallColumnIndependent"
+gates = ["RepairPorts.Gates.CompletePorts"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RepairPorts.dualDist_harmonicQuarticCode"
+gates = ["RepairPorts.Gates.CompletePorts"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RepairPorts.harmonicQuarticCode_parameters_of_sharp_section"
+gates = ["RepairPorts.Gates.CompletePorts"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RepairPorts.finiteHarmonicBlock_repairPort"
+gates = ["RepairPorts.Gates.CompletePorts"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RepairPorts.infinityHarmonicBlock_repairPort"
+gates = ["RepairPorts.Gates.CompletePorts"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RepairPorts.harmonicPortClosure_withNucleus_iff"
+gates = ["RepairPorts.Gates.CompletePorts"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RepairPorts.harmonicPortClosure_of_containsBlock_iff"
+gates = ["RepairPorts.Gates.CompletePorts"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RepairPorts.harmonicPortClosure_of_containsNoBlock_iff"
 gates = ["RepairPorts.Gates.CompletePorts"]
 expected_axioms = ["Classical.choice", "Quot.sound", "propext"]

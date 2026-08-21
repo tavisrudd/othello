@@ -40,6 +40,11 @@ tools named below and only as ordinary forward commits:
   independent histories. Their content changes only by
   `papers/scripts/export-paper-repos.py sync`.
 
+Before the first export of a new paper, add its `.zenodo.json` to the
+authoritative paper root and include it in the committed source tree used by
+the exporter.  This is a mandatory part of first-export preparation, even when
+no Zenodo deposit has yet been created.
+
 A public Lean repository README is solely for external reviewers: mathematical
 scope, trust boundary, verification command, citation, and license. It does not
 describe synchronization, internal repository roles, publication gates, or DOI
