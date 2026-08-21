@@ -61,6 +61,60 @@ def harmonicQuarticPoints : HarmonicQuarticIndex 𝔽 → (Fin 5 → 𝔽)
   | .inl t => harmonicQuarticCurvePoint t
   | .inr _ => harmonicQuarticNucleus
 
+/-- Distinct projective parameters give distinct normalized quartic columns. -/
+theorem harmonicQuarticCurvePoint_injective :
+    Function.Injective (harmonicQuarticCurvePoint (𝔽 := 𝔽)) := by
+  intro a b h
+  cases a with
+  | finite a =>
+      cases b with
+      | finite b =>
+          have h₁ := congrFun h (1 : Fin 5)
+          simp [harmonicQuarticCurvePoint, FiniteGeom.momentCurve] at h₁
+          exact congrArg HarmonicParameter.finite h₁
+      | infinity =>
+          have h₀ := congrFun h (0 : Fin 5)
+          simp [harmonicQuarticCurvePoint, FiniteGeom.momentCurve] at h₀
+  | infinity =>
+      cases b with
+      | finite b =>
+          have h₀ := congrFun h (0 : Fin 5)
+          simp [harmonicQuarticCurvePoint, FiniteGeom.momentCurve] at h₀
+      | infinity => rfl
+
+/-- The nucleus is distinct from every curve column, so the complete point system is injectively
+indexed. -/
+theorem harmonicQuarticPoints_injective :
+    Function.Injective (harmonicQuarticPoints (𝔽 := 𝔽)) := by
+  intro x y h
+  cases x with
+  | inl x =>
+      cases y with
+      | inl y => exact congrArg Sum.inl (harmonicQuarticCurvePoint_injective h)
+      | inr y =>
+          cases x with
+          | finite x =>
+              have h₀ := congrFun h (0 : Fin 5)
+              simp [harmonicQuarticPoints, harmonicQuarticCurvePoint,
+                harmonicQuarticNucleus, FiniteGeom.momentCurve] at h₀
+          | infinity =>
+              have h₄ := congrFun h (4 : Fin 5)
+              simp [harmonicQuarticPoints, harmonicQuarticCurvePoint,
+                harmonicQuarticNucleus] at h₄
+  | inr x =>
+      cases y with
+      | inl y =>
+          cases y with
+          | finite y =>
+              have h₀ := congrFun h (0 : Fin 5)
+              simp [harmonicQuarticPoints, harmonicQuarticCurvePoint,
+                harmonicQuarticNucleus, FiniteGeom.momentCurve] at h₀
+          | infinity =>
+              have h₄ := congrFun h (4 : Fin 5)
+              simp [harmonicQuarticPoints, harmonicQuarticCurvePoint,
+                harmonicQuarticNucleus] at h₄
+      | inr y => congr
+
 /-- The generator matrix whose columns are the quartic--nucleus point system. -/
 def harmonicQuarticGenerator : Matrix (Fin 5) (HarmonicQuarticIndex 𝔽) 𝔽 :=
   fun i j => harmonicQuarticPoints j i
@@ -654,6 +708,182 @@ theorem projectiveQuarticFour_linearIndependent
           | infinity => exact (hac rfl).elim
       | infinity => exact (hab rfl).elim
 
+/-- Every four-element subset of the quartic--nucleus point system is independent in
+characteristic three. -/
+theorem harmonicQuartic_fourSet_linearIndependent [Fintype 𝔽] [DecidableEq 𝔽]
+    [CharP 𝔽 3] {T : Finset (HarmonicQuarticIndex 𝔽)} (hT : T.card = 4) :
+    LinearIndependent 𝔽 (fun j : T => harmonicQuarticPoints j.1) := by
+  classical
+  let N : HarmonicQuarticIndex 𝔽 := .inr ()
+  by_cases hN : N ∈ T
+  · let U := T.erase N
+    have hUcard : U.card = 3 := by
+      simp [U, hN, hT]
+    let eU : Fin 3 ≃ U := (Finset.equivFinOfCardEq hUcard).symm
+    let v : Fin 3 → HarmonicParameter 𝔽 := fun i =>
+      match (eU i).1 with
+      | .inl t => t
+      | .inr _ => .infinity
+    have hleft (i : Fin 3) : (.inl (v i) : HarmonicQuarticIndex 𝔽) = (eU i).1 := by
+      generalize hx : (eU i).1 = x
+      cases x with
+      | inl x => simp [v, hx]
+      | inr x =>
+          exfalso
+          have hne := (Finset.mem_erase.mp (eU i).property).1
+          cases x
+          exact hne hx
+    have hv : Function.Injective v := by
+      intro i k hik
+      apply eU.injective
+      apply Subtype.ext
+      rw [← hleft i, ← hleft k, hik]
+    have hbase := nucleusProjectiveTriple_linearIndependent (𝔽 := 𝔽)
+      (hv.ne (by decide : (0 : Fin 3) ≠ 1))
+      (hv.ne (by decide : (0 : Fin 3) ≠ 2))
+      (hv.ne (by decide : (1 : Fin 3) ≠ 2))
+    let g : Fin 4 → HarmonicQuarticIndex 𝔽 :=
+      Fin.cons N (fun i => (eU i).1)
+    have hg : Function.Injective g := by
+      apply Fin.cons_injective_of_injective
+      · rintro ⟨i, hi⟩
+        have hne := (Finset.mem_erase.mp (eU i).property).1
+        exact hne hi
+      · exact fun i k hik => eU.injective (Subtype.ext hik)
+    let f₀ : Fin 4 → T := fun i => ⟨g i, by
+      refine Fin.cases hN (fun k => ?_) i
+      exact Finset.mem_of_mem_erase (eU k).property⟩
+    have hf₀ : Function.Bijective f₀ :=
+      (Fintype.bijective_iff_injective_and_card f₀).2 ⟨
+        fun i k hik => hg (congrArg Subtype.val hik), by simp [hT]⟩
+    let f : Fin 4 ≃ T := Equiv.ofBijective f₀ hf₀
+    apply (linearIndependent_equiv f).mp
+    have heq : ((fun j : T => harmonicQuarticPoints j.1) ∘ f) = ![
+        harmonicQuarticNucleus, harmonicQuarticCurvePoint (v 0),
+        harmonicQuarticCurvePoint (v 1), harmonicQuarticCurvePoint (v 2)] := by
+      have harr : (![
+          harmonicQuarticNucleus, harmonicQuarticCurvePoint (v 0),
+          harmonicQuarticCurvePoint (v 1), harmonicQuarticCurvePoint (v 2)] :
+          Fin 4 → (Fin 5 → 𝔽)) =
+          Fin.cons harmonicQuarticNucleus (fun k => harmonicQuarticCurvePoint (v k)) := by
+        funext i
+        fin_cases i <;> rfl
+      rw [harr]
+      funext i
+      change harmonicQuarticPoints (g i) = _
+      refine Fin.cases rfl (fun k => ?_) i
+      simp only [g, Fin.cons_succ]
+      rw [← hleft k]
+      rfl
+    rw [heq]
+    exact hbase
+  · let e : Fin 4 ≃ T := (Finset.equivFinOfCardEq hT).symm
+    let v : Fin 4 → HarmonicParameter 𝔽 := fun i =>
+      match (e i).1 with
+      | .inl t => t
+      | .inr _ => .infinity
+    have hleft (i : Fin 4) : (.inl (v i) : HarmonicQuarticIndex 𝔽) = (e i).1 := by
+      generalize hx : (e i).1 = x
+      cases x with
+      | inl x => simp [v, hx]
+      | inr x =>
+          exfalso
+          cases x
+          have hmem := (e i).property
+          rw [hx] at hmem
+          exact hN hmem
+    have hv : Function.Injective v := by
+      intro i k hik
+      apply e.injective
+      apply Subtype.ext
+      rw [← hleft i, ← hleft k, hik]
+    have hbase := projectiveQuarticFour_linearIndependent (𝔽 := 𝔽)
+      (hv.ne (by decide : (0 : Fin 4) ≠ 1))
+      (hv.ne (by decide : (0 : Fin 4) ≠ 2))
+      (hv.ne (by decide : (0 : Fin 4) ≠ 3))
+      (hv.ne (by decide : (1 : Fin 4) ≠ 2))
+      (hv.ne (by decide : (1 : Fin 4) ≠ 3))
+      (hv.ne (by decide : (2 : Fin 4) ≠ 3))
+    apply (linearIndependent_equiv e).mp
+    have heq : ((fun j : T => harmonicQuarticPoints j.1) ∘ e) = ![
+        harmonicQuarticCurvePoint (v 0), harmonicQuarticCurvePoint (v 1),
+        harmonicQuarticCurvePoint (v 2), harmonicQuarticCurvePoint (v 3)] := by
+      have harr : (![
+          harmonicQuarticCurvePoint (v 0), harmonicQuarticCurvePoint (v 1),
+          harmonicQuarticCurvePoint (v 2), harmonicQuarticCurvePoint (v 3)] :
+          Fin 4 → (Fin 5 → 𝔽)) = fun i => harmonicQuarticCurvePoint (v i) := by
+        funext i
+        fin_cases i <;> rfl
+      rw [harr]
+      funext i
+      change harmonicQuarticPoints ((e i).1) = harmonicQuarticCurvePoint (v i)
+      rw [← hleft i]
+      rfl
+    rw [heq]
+    exact hbase
+
+/-- Every selected family of at most four quartic--nucleus columns is independent. -/
+theorem harmonicQuartic_selected_linearIndependent_of_card_le_four
+    [Fintype 𝔽] [DecidableEq 𝔽] [CharP 𝔽 3]
+    {S : Finset (HarmonicQuarticIndex 𝔽)} (hS : S.card ≤ 4)
+    (hambient : 4 ≤ Fintype.card (HarmonicQuarticIndex 𝔽)) :
+    LinearIndependent 𝔽 (fun j : S => harmonicQuarticPoints j.1) := by
+  classical
+  obtain ⟨T, hST, hT⟩ := Finset.exists_superset_card_eq hS hambient
+  have hli := harmonicQuartic_fourSet_linearIndependent (𝔽 := 𝔽) hT
+  let e : S ↪ T := ⟨fun j => ⟨j.1, hST j.2⟩,
+    fun i j hij => by
+      apply Subtype.ext
+      exact congrArg (fun z : T => z.1) hij⟩
+  exact hli.comp e e.injective
+
+/-- Uniform small-column independence for the quartic--nucleus generator. -/
+theorem harmonicQuarticGenerator_smallColumnIndependent
+    [Fintype 𝔽] [DecidableEq 𝔽] [CharP 𝔽 3]
+    (hcard : 9 ≤ Fintype.card 𝔽) (S : Finset (HarmonicQuarticIndex 𝔽))
+    (hS : S.card < 5) :
+    LinearIndependent 𝔽
+      (fun j : S => (harmonicQuarticGenerator (𝔽 := 𝔽)).col j.1) := by
+  have hambient : 4 ≤ Fintype.card (HarmonicQuarticIndex 𝔽) := by
+    rw [card_harmonicQuarticIndex]
+    omega
+  have hli := harmonicQuartic_selected_linearIndependent_of_card_le_four (𝔽 := 𝔽)
+    (S := S) (by omega) hambient
+  convert hli using 1
+  funext j i
+  rfl
+
+/-- One genuine four-helper repair, together with uniform four-column independence, pins the dual
+distance of the quartic--nucleus code to five. -/
+theorem harmonicQuarticCode_dualDist_eq_five_of_repair
+    [Fintype 𝔽] [DecidableEq 𝔽] [CharP 𝔽 3]
+    (hcard : 9 ≤ Fintype.card 𝔽) {x : HarmonicQuarticIndex 𝔽}
+    {R : Finset (HarmonicQuarticIndex 𝔽)}
+    (hR : R ∈ FiniteGeom.repairHypergraph (harmonicQuarticCode (𝔽 := 𝔽)) x 4)
+    (hRcard : R.card = 4) :
+    FiniteGeom.dualDist (harmonicQuarticCode (𝔽 := 𝔽)) = 5 := by
+  obtain ⟨hsub, -, y, hy, hyx, hsupp⟩ := FiniteGeom.mem_repairHypergraph.mp hR
+  have hy₀ : y ≠ 0 := by
+    intro hzero
+    exact hyx (congrFun hzero x)
+  have hdual : FiniteGeom.dualCode (harmonicQuarticCode (𝔽 := 𝔽)) ≠ ⊥ := by
+    intro hbot
+    rw [hbot] at hy
+    exact hy₀ (show y = 0 from hy)
+  have hlo : 5 ≤ FiniteGeom.dualDist (harmonicQuarticCode (𝔽 := 𝔽)) :=
+    FiniteGeom.le_dualDist_rowCode_of_column_independent
+      (harmonicQuarticGenerator (𝔽 := 𝔽)) 5 hdual
+      (harmonicQuarticGenerator_smallColumnIndependent hcard)
+  have hxR : x ∉ R := by
+    intro hx
+    exact (Finset.mem_erase.mp (hsub hx)).1 rfl
+  have hweight : hammingNorm y = 5 := by
+    rw [← FiniteGeom.card_wordSupport, hsupp, Finset.card_insert_of_notMem hxR, hRcard]
+  have hhi : FiniteGeom.dualDist (harmonicQuarticCode (𝔽 := 𝔽)) ≤ 5 := by
+    rw [← hweight]
+    exact FiniteGeom.dualDist_le_hammingNorm hy hy₀
+  exact Nat.le_antisymm hhi hlo
+
 /-- A finite harmonic block together with the nucleus is a five-circuit: the full family is
 dependent and deleting any one member leaves an independent four-family. -/
 theorem finiteHarmonicBlock_isFiveCircuit [CharP 𝔽 3] {a b c d : 𝔽}
@@ -784,6 +1014,65 @@ theorem infinityHarmonicBlock_repairPort [Fintype 𝔽] [DecidableEq 𝔽] [Char
     · convert hc.2.2.2.2.2 using 1
       funext i x
       fin_cases i <;> rfl
+
+/-- The normalized block `{0,1,-1,∞}` supplies a concrete four-helper repair over every
+field of characteristic three. -/
+theorem exists_harmonicQuartic_fourHelperRepair
+    [Fintype 𝔽] [DecidableEq 𝔽] [CharP 𝔽 3] :
+    ∃ (x : HarmonicQuarticIndex 𝔽) (R : Finset (HarmonicQuarticIndex 𝔽)),
+      R ∈ FiniteGeom.repairHypergraph (harmonicQuarticCode (𝔽 := 𝔽)) x 4 ∧
+        R.card = 4 := by
+  have hone : (1 : 𝔽) ≠ -1 := by
+    intro h
+    have hthree : (3 : 𝔽) = 0 := CharP.cast_eq_zero 𝔽 3
+    have htwo : (2 : 𝔽) = 0 := by linear_combination h
+    have hzero : (1 : 𝔽) = 0 := by linear_combination hthree - htwo
+    exact one_ne_zero hzero
+  let f := harmonicQuarticBlockIndex
+    (.finite (0 : 𝔽)) (.finite 1) (.finite (-1)) .infinity
+  let R : Finset (HarmonicQuarticIndex 𝔽) := (Finset.univ.erase (0 : Fin 5)).image f
+  have hf : Function.Injective f := by
+    intro i k hik
+    fin_cases i <;> fin_cases k <;> simp_all [f, harmonicQuarticBlockIndex]
+  have hblock : IsHarmonicQuarticBlock
+      (.finite (0 : 𝔽)) (.finite 1) (.finite (-1)) .infinity := by
+    simp [IsHarmonicQuarticBlock, harmonicE₁]
+  refine ⟨f 0, R, ?_, ?_⟩
+  · exact infinityHarmonicBlock_repairPort (zero_ne_one) (by simp) hone hblock 0
+  · rw [Finset.card_image_of_injective _ hf,
+      Finset.card_erase_of_mem (Finset.mem_univ (0 : Fin 5)), Finset.card_univ,
+      Fintype.card_fin]
+
+/-- The quartic--nucleus code has dual distance five uniformly in characteristic three once the
+field has at least nine elements. -/
+theorem dualDist_harmonicQuarticCode [Fintype 𝔽] [DecidableEq 𝔽] [CharP 𝔽 3]
+    (hcard : 9 ≤ Fintype.card 𝔽) :
+    FiniteGeom.dualDist (harmonicQuarticCode (𝔽 := 𝔽)) = 5 := by
+  obtain ⟨x, R, hR, hRcard⟩ := exists_harmonicQuartic_fourHelperRepair (𝔽 := 𝔽)
+  exact harmonicQuarticCode_dualDist_eq_five_of_repair hcard hR hRcard
+
+/-- Paper-facing exact code parameters.  The sole exposed global input is the sharp five-point
+hyperplane-section statement; rank, small-circuit exclusion, and the weight-five dual witness are
+proved above from the displayed coordinates. -/
+theorem harmonicQuarticCode_parameters_of_sharp_section
+    [Fintype 𝔽] [DecidableEq 𝔽] [CharP 𝔽 3]
+    (hcard : 9 ≤ Fintype.card 𝔽) (a₀ : Fin 5 → 𝔽)
+    (ha₀ : FiniteGeom.pointEval (harmonicQuarticPoints (𝔽 := 𝔽)) a₀ ≠ 0)
+    (hmax : FiniteGeom.sectionCount (harmonicQuarticPoints (𝔽 := 𝔽)) a₀ = 5)
+    (hsection : ∀ a : Fin 5 → 𝔽,
+      FiniteGeom.pointEval (harmonicQuarticPoints (𝔽 := 𝔽)) a ≠ 0 →
+      FiniteGeom.sectionCount (harmonicQuarticPoints (𝔽 := 𝔽)) a ≤ 5) :
+    Fintype.card (HarmonicQuarticIndex 𝔽) = Fintype.card 𝔽 + 2 ∧
+      Module.finrank 𝔽 (harmonicQuarticCode (𝔽 := 𝔽)) = 5 ∧
+      FiniteGeom.minDist (harmonicQuarticCode (𝔽 := 𝔽)) =
+        Fintype.card 𝔽 - 3 ∧
+      FiniteGeom.dualDist (harmonicQuarticCode (𝔽 := 𝔽)) = 5 := by
+  have hlength := card_harmonicQuarticIndex (𝔽 := 𝔽)
+  have hdim := finrank_harmonicQuarticCode (𝔽 := 𝔽) (by omega)
+  have hdistance := FiniteGeom.columnCode_minDist_eq ha₀ hmax hsection
+  rw [← harmonicQuarticCode_eq_columnCode, hlength] at hdistance
+  refine ⟨hlength, hdim, ?_, dualDist_harmonicQuarticCode hcard⟩
+  omega
 
 /-- Coefficients of the monic quartic with roots `a,b,c,d`, ordered from constant to quartic
 coefficient. -/
