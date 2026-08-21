@@ -361,9 +361,18 @@ index row.
   stable-ledger isomorphism for the occurrence comparisons.  Iritani's equation (5.11)
   and Theorem 5.18 close the local formal branch count: for codimension two,
   $s=1$ and there is one center summand, so its own Fourier variable needs no
-  root extension.  Zero external Kummer weight under the path reindexings and
-  idempotent preservation remain open.  Report:
-  `../2026-08-21-c925-two-layer-resolvent-packet.md`.
+  root extension.  Module 64 proves that the rank-three projective Fourier
+  branches form the expected external regular orbit, but also gives the
+  decisive unary-center countermodel: $K[t]/(t^3-q)$ uses only integral
+  coefficients and nevertheless acquires three cyclically permuted primitive
+  idempotents after adjoining $q^{1/3}$.  The exact remaining theorem is the
+  three-part charged carrier-unramified Burnside lift: construct a common
+  primitive external mod-three charge along the path, prove the splitting
+  field of every dangerous center block algebra is linearly disjoint from its
+  cubic Kummer extension, and lift the actual comparisons and reindexings to
+  the coherent oriented equivariant stable ledger.  Reports:
+  `../2026-08-21-c925-two-layer-resolvent-packet.md` and
+  `../2026-08-21-c925-outer-kummer-and-carrier-boundary.md`.
 
 ## Open geometric providers
 
@@ -419,15 +428,18 @@ are independent gates.
 
 ### Two-layer Kummer descent
 
-Construct the marked finite-etale spectral-block scheme before the cube-root
-extension.  Prove that the projective-bundle source is regular for the external
-$q^{1/3}$ inertia, while every target and codimension-two correction primitive
-idempotent descends individually from the base Laurent field.  Construct the
-oriented equivariant stable-ledger isomorphism.  The local $r=2$ Iritani projection already has root
-denominator $s=1$; the missing step is compatibility with the distinct
-external valuation under every occurrence reindexing.  Internal cubic-center
-monodromy may be arbitrary once it is separated from the external inertia.  A linear equivariant comparison is
-not enough: the comparison must preserve primitive spectral idempotents.
+The source projective-bundle orbit is source-verified, and the local $r=2$
+Iritani projection has root denominator $s=1$.  Construct a faithful common
+coefficient trait for the whole path with a primitive mod-three external
+charge preserved by every occurrence reindexing.  Prove that the splitting
+field of every dangerous codimension-two center's marked finite-etale block
+algebra is linearly disjoint from the resulting cubic Kummer extension.
+Equivalently, its geometric primitive idempotents must be externally fixed.
+Integral monomials, saturation, and one outer summand do not imply this:
+$K[t]/(t^3-q)$ is the
+minimal counterexample.  A linear equivariant comparison is insufficient;
+the comparison must lift to the Burnside category of the named external
+$C_3$.
 
 ## Validation
 
@@ -519,13 +531,13 @@ advertised algebraic laws and countermodels, never an external QDM provider.
    two-wall Stokes matrix.  Yu--Zhang supplies spectral/vanishing-cycle block
    comparison only after an algebraic exponential-type occurrence is built;
    it does not supply the Gamma row or exact image reader.
-   As a bounded alternative, test Module 63's external descent condition on
-   the unsplit formal comparison: the $X\times\mathbf P^2$ branches should be
-   regular for $q^{1/3}$-inertia, while a codimension-two exceptional block
-   should be defined over the base Laurent field.  If the actual comparison
-   preserves these spectral idempotents, the two-layer marker closes $m=2$
-   without a Gamma row.  If it only gives a linear representation or permits
-   diagonal collapse with an internal cubic resolvent, abandon this detour.
+   Module 64 has completed the bounded external-descent test.  The source
+   branches are regular and codimension two introduces no new outer root, but
+   the inner correction algebra can still be $K[t]/(t^3-q)$; therefore the
+   detour does not close from current comparison formulas.  Resume it only
+   with a geometric charged carrier-unramifiedness theorem for actual
+   threefold centers.  Otherwise keep the fixed-phase rank-row reader as the
+   primary route.
 2. As the trait alternative, construct the Module 53 common canonical trait
    receiver for every
    consecutive-discrepant overlap.  Put both incident one-arrow receivers in

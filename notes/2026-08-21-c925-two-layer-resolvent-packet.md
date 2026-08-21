@@ -272,11 +272,14 @@ free orbit.  The second hostile model is linear mixing through the trivial
 summand of the regular representation.  These show why both product descent
 and primitive-idempotent preservation are load-bearing.
 
-The highest-value next check is source-local: inspect the unsplit formal
-projective-bundle and codimension-two blow-up comparisons and decide whether
-their marked spectral idempotents are defined over the base Laurent field.  A
-positive answer closes the external-triviality input (63.2); a negative answer
-ends this detour without disturbing the fixed-phase reader route.
+The source-local check is carried out in
+`notes/2026-08-21-c925-outer-kummer-and-carrier-boundary.md`.  The projective
+source orbit and the absence of a new codimension-two *outer* root pass.  The
+stronger idempotent conclusion fails: $K[t]/(t^3-q)$ is defined by integral
+coefficients but acquires a regular three-orbit of primitive idempotents after
+adjoining $q^{1/3}$.  The remaining input is charged
+carrier-unramifiedness for every actual marked threefold center, together
+with a common primitive external charge along the factorization path.
 
 ## Mystery ledger
 

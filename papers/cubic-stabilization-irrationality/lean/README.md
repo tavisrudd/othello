@@ -58,7 +58,8 @@ The descent-packet module separately checks the elementary equivariant
 distinction between one regular orbit and three fixed points. It also makes the
 load-bearing qualification explicit: a one-element correction is fixed only
 when its singleton is stable under the supplied descent action. A unary outer
-constructor otherwise retains the full action on its inner packet.
+constructor otherwise retains the full action on its inner packet; formally,
+the unary packet is fixed if and only if its inner value is fixed.
 The two-layer descent module isolates the additional hypothesis that repairs
 this obstruction.  With an action of a product group, an external-regular
 coordinate has no point fixed by the external subgroup, whereas an

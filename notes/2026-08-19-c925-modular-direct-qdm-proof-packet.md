@@ -495,6 +495,8 @@ vanishing remain open.
   notes/2026-08-20-c925-double-normal-projected-variation.md
 - two-layer elliptic-resolvent/Kummer descent packet:
   notes/2026-08-21-c925-two-layer-resolvent-packet.md
+- outer Kummer source theorem and charged carrier boundary:
+  notes/2026-08-21-c925-outer-kummer-and-carrier-boundary.md
 
 ## Executable witnesses
 

@@ -92,6 +92,20 @@ def unaryPacketEquivariantEquiv
       right_inv := by intro x; rfl }
   map_smul _ _ := rfl
 
+/-- A unary outer constructor neither creates nor removes fixedness. Thus
+outer multiplicity one cannot by itself make an inner descent packet
+trivial. -/
+theorem unaryPacket_isFixed_iff
+    {G : Type uG} {A : Type uA} [Group G] [MulAction G A]
+    (x : UnaryPacket G A) :
+    IsFixed G x ↔ IsFixed G x.value := by
+  constructor
+  · intro hx g
+    exact congrArg UnaryPacket.value (hx g)
+  · intro hx g
+    cases x with
+    | mk value => exact congrArg UnaryPacket.mk (hx g)
+
 /-- The left regular action of a nontrivial group has no fixed point. -/
 theorem leftRegular_not_fixed
     {G : Type uG} [Group G] [Nontrivial G] (x : G) :

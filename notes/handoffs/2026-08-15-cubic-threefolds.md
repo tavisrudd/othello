@@ -508,10 +508,20 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   trivial summand.  Iritani's equation (5.11) and Theorem 5.18 pass the local
   codimension-two branch test: $r=2$ gives $s=1$ and one center summand, so
   no root is introduced in that occurrence's own exceptional Fourier
-  variable.  What remains is zero weight for the separate external Kummer
-  valuation under lawful reindexing and preservation of the spectral
-  idempotent.  Report:
-  `../2026-08-21-c925-two-layer-resolvent-packet.md`.
+  variable.  Module 64 verifies directly from Iritani--Koto that the
+  rank-three projective Fourier branches form the external regular orbit.
+  It also closes the detour negatively at its current strength:
+  $K[t]/(t^3-q)$ is defined by integral coefficients over a saturated
+  lattice but its three geometric idempotents are cyclically permuted after
+  adjoining $q^{1/3}$.  Thus one outer codimension-two summand and $s=1$
+  do not imply an externally fixed inner packet.  Resuming this route requires
+  one three-part charged carrier-unramified Burnside lift: a faithful common
+  path trait with primitive external mod-three charge, linear disjointness of
+  the splitting field of every dangerous center block algebra from the cubic
+  Kummer extension, and a coherent oriented equivariant stable ledger for the
+  actual comparisons and reindexings.  Reports:
+  `../2026-08-21-c925-two-layer-resolvent-packet.md` and
+  `../2026-08-21-c925-outer-kummer-and-carrier-boundary.md`.
   Shifted tensor stability and the extremal multinomial source law are
   proved, but the occurrence-indexed exact QDM sequence, actual carrier
   exponent, and boundary vanishing remain open.  The packet is split into
