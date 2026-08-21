@@ -1,0 +1,479 @@
+\documentclass[11pt]{article}
+
+\usepackage[a4paper,margin=29mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,amsthm,mathtools,mathrsfs}
+\usepackage{booktabs}
+\usepackage[hidelinks]{hyperref}
+
+\numberwithin{equation}{section}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\A}{\mathbf A}
+\newcommand{\C}{\mathbf C}
+\newcommand{\F}{\mathbf F}
+\newcommand{\Q}{\mathbf Q}
+\newcommand{\Z}{\mathbf Z}
+\newcommand{\PP}{\mathbf P}
+\newcommand{\OO}{\mathcal O}
+\newcommand{\disc}{\operatorname{disc}}
+\newcommand{\Or}{\operatorname{Or}}
+\newcommand{\Gal}{\operatorname{Gal}}
+
+\title{The Discriminant Resolvent of the \(A_5\)-Cubic Pencil}
+\author{Tavis Rudd}
+\date{August 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+The nonstandard \(A_5\)-invariant pencil of cubic threefolds carries five
+principal gluing kernels: three rational and two golden.  We prove that this
+is not an accidental \(3+2\) count.  The five kernels are the two proper
+transitive resolvents of the \(S_3\)-torsor of ordered nonzero two-torsion on
+the relative elliptic norm axis.  The rational triple is the root cover and
+the golden pair has the sign character, hence is the discriminant double
+cover of the same two-division cubic.
+
+Writing \(t\) for the signed cubic parameter and \(T=81t^2\), the unmarked
+elliptic period is the standard \(X_0(3)\)-coordinate
+\[
+ j=\frac{(T+27)(T+3)^3}{T}.
+\]
+The signed cubic line is the sign modular curve \(r^2=T\), with \(r=9t\)
+after choosing its deck convention.  The degree-three resolvent is
+\(X_0(6)\), and their common degree-six Galois closure belongs to
+\(\Gamma_0(3)\cap\Gamma(2)\).  We give rational equations for all three
+covers and distinguish the two modular cusps from the additional interior
+boundary points where the cubic degenerates.  In particular the modular
+identification concerns the actual relative principal-kernel packet, not
+only an auxiliary elliptic curve with the same \(j\)-invariant.
+\end{abstract}
+
+\noindent\textbf{Keywords.} cubic threefold; intermediate Jacobian;
+elliptic two-torsion; discriminant resolvent; modular curve; \(A_5\).
+
+\section{The result}
+
+Let \(W\subset\C^6\) be the hyperplane \(\sum_{i=0}^5z_i=0\).  The
+nonstandard transitive copy of \(A_5\subset S_6\) has two orbits
+\(\mathcal T_+\) and \(\mathcal T_-\), each of size ten, on the three-element
+subsets of \(\{0,\ldots,5\}\).  Put
+\[
+ P=\sum_{i=0}^5z_i^3,
+ \qquad
+ Q=\sum_{I\in\mathcal T_+}\prod_{i\in I}z_i
+       -\sum_{I\in\mathcal T_-}\prod_{i\in I}z_i,
+ \qquad
+ X_t=\{P+tQ=0\}\subset\PP(W).
+\]
+The outer coset of the normalizer \(S_5=N_{S_6}(A_5)\) fixes \(P\), negates
+\(Q\), and therefore sends \(X_t\) to \(X_{-t}\).  Thus \(t\) is the signed
+parameter and \(t^2\) is the unmarked parameter.
+
+On the smooth marked base, the six distinguished dihedral axes in the
+intermediate Jacobian form one relative elliptic norm axis \(\mathcal E\).
+The integral six-axis construction of \cite[Relative six-axis source and
+Principal gluing packet]{RuddEpilogue} identifies the five principal kernels
+with the finite local system
+\begin{equation}\label{eq:packet}
+ \mathscr P=PP_{\F_4}(\F_4\otimes_{\F_2}\mathcal E[2]).
+\end{equation}
+The comparison in Proposition~\ref{prop:actual-axis} below records why the
+elliptic curve used to compute the period is this actual norm axis at the
+level needed in \eqref{eq:packet}.
+
+\begin{theorem}[Cubic--modular resolvent]\label{thm:main}
+Set \(T=81t^2\).  Then the following assertions hold over the smooth cubic
+base.
+\begin{enumerate}
+\item The elliptic norm axis has
+\[
+ j(\mathcal E)=J(T):=\frac{(T+27)(T+3)^3}{T}.
+\]
+Consequently the unmarked period map identifies its normalized coarse base
+with an open subcurve of \(X_0(3)\).
+\item The packet \(\mathscr P\) is the disjoint union of the root cover
+\(\PP(\mathcal E[2])\), of degree three, and a degree-two cover having the
+sign character of \(\Gal(\mathcal E[2])\subset S_3\).  The second cover is
+the discriminant resolvent of the two-division cubic.
+\item Over \(X_0(3)\), the root cover is \(X_0(6)\), the sign cover has
+function field \(\Q(T)(\sqrt T)\), and their common Galois closure belongs to
+\(\Gamma_0(3)\cap\Gamma(2)\).  After one choice of deck involution, the
+signed cubic coordinate identifies with the sign coordinate by
+\[
+ r^2=T,\qquad r=9t.
+\]
+\item The compact sign curve has genus zero, two cusps of widths \(2\) and
+\(6\), and two elliptic points of order three.  Its map to \(X_0(3)\) is
+ramified at the two cusps and nowhere else as a coarse map.
+\end{enumerate}
+The smooth cubic base is obtained from the sign modular curve by deleting,
+in addition to the cusps over \(T=0,\infty\), the points over
+\(T=-27\) and \(T=729/5\).  Those last two values are interior modular
+points, not cusps.
+\end{theorem}
+
+The theorem identifies local systems and their monodromy.  It does not say
+that a fivefold gluing is literally an elliptic \(2\)-isogeny, nor that the
+compactified cubic pencil is the modular stack.
+
+\section{The finite \texorpdfstring{\(3+2\)}{3+2} resolvent}
+
+Let \(V\) be a two-dimensional \(\F_2\)-vector space and
+\(V_4=\F_4\otimes_{\F_2}V\).  Scalar extension gives a distinguished
+three-element subset
+\[
+ \PP_{\F_2}(V)\subset\PP_{\F_4}(V_4).
+\]
+Write \(D(V)\) for its two-element complement.
+
+\begin{lemma}[Sign lemma]\label{lem:sign}
+Under \(\operatorname{GL}(V)\simeq S_3\), the action on \(D(V)\) is the sign
+of the natural action on \(\PP(V)\).  Thus the two finite \(S_3\)-sets are
+\[
+ \PP(V)\simeq S_3/C_2,
+ \qquad
+ D(V)\simeq S_3/A_3.
+\]
+\end{lemma}
+
+\begin{proof}
+Choose a basis and write
+\[
+ \PP^1(\F_4)=\{\infty,0,1,\omega,\omega^2\},\qquad
+ \PP^1(\F_2)=\{\infty,0,1\}.
+\]
+The transformations \(x\mapsto x+1\) and
+\(x\mapsto 1/(x+1)\) generate \(\operatorname{PGL}_2(\F_2)\).  The first
+acts as \((0\ 1)(\omega\ \omega^2)\); the second cycles
+\((\infty\ 0\ 1)\) and fixes \(\omega,\omega^2\).  The first generator is
+odd on each of the three-set and the two-set, while the second is even on
+both.  This proves the assertion.
+\end{proof}
+
+For a degree-three finite \(\acute etale\) cover \(C\to S\), let
+\(\Or(C/S)\) denote the double cover associated to the sign of its monodromy
+in \(S_3\).  Lemma~\ref{lem:sign} proves
+\begin{equation}\label{eq:torsor-class}
+ [D(V)]=[\Or(\PP(V)/S)]\quad\text{in }H^1(S,C_2).
+\end{equation}
+This equality of torsor classes is canonical.  A sheetwise isomorphism of
+the two covers has two choices, interchanged by the deck involution.  This
+minor distinction is what makes the normalization \(r=9t\), rather than
+\(r=-9t\), a convention.
+
+Now let an elliptic curve be given locally, with \(2\) invertible, by
+\[
+ E:y^2=x^3+Ax+B.
+\]
+The nonzero two-torsion points are the roots of
+\(f_2(x)=x^3+Ax+B\).  The orientation cover of this root cover is therefore
+\[
+ u^2=\disc(f_2),
+ \qquad
+ \disc(f_2)=-4A^3-27B^2.
+\]
+Since \(\Delta_E=16\disc(f_2)\), it has the same square class as the elliptic
+discriminant.  Invariantly, \(\Delta_E\) is a nowhere-vanishing section of
+the twelfth power of the Hodge line; the double cover is the torsor of its
+square roots.  No global scalar equation for \(\Delta_E\) is implied before
+a Hodge trivialization is chosen.
+
+Applying the lemma to \eqref{eq:packet} proves Theorem~\ref{thm:main}(2).
+It also gives a useful monodromy consequence: choosing one golden sheet
+reduces the mod-two image from \(S_3\) to
+\(A_3\simeq C_3\).
+
+\section{The cubic parameter and the actual norm axis}
+
+The period calculation starts with the Prym quotient used by van Geemen and
+Yamauchi.  In their coordinate \(u\), two auxiliary parameters in the
+Weierstrass model of its elliptic factor are
+\[
+ a(u)=-\frac{32(u-3)^4}{9(u+1)^3(u+3)^2},\qquad
+ b(u)=-\frac{8(u-3)^2(u-1)}{(u+1)(u+3)^2}.
+\]
+In the notation of \cite[Proposition 3.2]{VGY}, the generalized Weierstrass
+coefficients are
+\begin{align*}
+ a_1&=b^2/4+b-4,&
+ a_3&=(a+b)^2/2+4a+6b-8,\\
+ a_2&=2-a-ab/2-b^4/64-b^3/8-b^2/4-b,&
+ a_4&=4(a+b-1),\\
+ a_6&=(a+b-1)(8-4a-2ab-b^4/16-b^3/2-b^2-4b).
+\end{align*}
+The Fourier change of coordinates from the six-point equation gives
+\(u=ct\), where \(c^2=5\).  Substitution in the standard formulas for
+\(c_4\) and \(\Delta\), followed by \(u^2=5t^2\), yields
+\begin{equation}\label{eq:j-t}
+ j=\frac{9(3t^2+1)(27t^2+1)^3}{t^2}.
+\end{equation}
+This calculation is replayed exactly in the paper's verification bundle.
+
+Putting \(T=81t^2\), equation \eqref{eq:j-t} becomes
+\begin{equation}\label{eq:J}
+ j=J(T)=\frac{(T+27)(T+3)^3}{T}.
+\end{equation}
+This is the standard degree-four \(j\)-map on \(X_0(3)\).  A convenient
+Tate normal form is
+\begin{equation}\label{eq:tate}
+ E_T:\quad y^2+(T+27)xy+(T+27)^2y=x^3.
+\end{equation}
+The point \((0,0)\) has order three, and the standard Weierstrass formulas
+give
+\begin{equation}\label{eq:tate-invariants}
+ \Delta(E_T)=T(T+27)^8,\qquad j(E_T)=J(T).
+\end{equation}
+
+The equality of \(j\)-maps alone would identify only a generic elliptic
+isomorphism class.  The next proposition supplies the geometric comparison
+needed for the principal-kernel packet.
+
+\begin{proposition}[Actual-axis comparison]\label{prop:actual-axis}
+Over the common marked smooth \(A_5/D_5\) base, the van Geemen--Yamauchi
+Prym factor maps isomorphically, as a polarized
+elliptic scheme, to the
+primitive dihedral norm axis inside the intermediate Jacobian.  In
+particular its two-torsion local system is the \(\mathcal E[2]\) occurring in
+\eqref{eq:packet}.  Relative to \eqref{eq:tate}, it may differ by the
+quadratic twist
+\[
+ D(T)=(T+27)(T-729/5),
+\]
+which does not alter its two-torsion.
+\end{proposition}
+
+\begin{proof}
+The degree-five cyclic quotient construction of
+\cite[Propositions 2.1, 3.1, and 3.2]{VGY} gives the Prym elliptic curve and
+a pullback map to the corresponding norm-fixed elliptic subvariety of the
+intermediate Jacobian.  Pullback followed by norm is multiplication by five,
+so the image is the primitive one-dimensional fixed factor.  On the Prym,
+the principal polarization pulls back as five times its intrinsic principal
+polarization.  The restriction of the intermediate-Jacobian polarization to
+the primitive norm axis is likewise five times its primitive principal
+polarization.  Factoring pullback through that axis and comparing degrees
+therefore gives degree one.  This proves the polarized isomorphism.
+
+The explicit change to \eqref{eq:tate} gives the displayed
+twist; alternatively, comparing their \(c_4,c_6\) invariants gives the same
+square class.  In characteristic different from two, a quadratic twist
+changes the Galois representation by a scalar \(\{\pm1\}\); that scalar is
+trivial on two-torsion.  Hence either comparison identifies the required
+two-division local system.
+\end{proof}
+
+The proof also explains the role of earlier results.  Roulleau exhibits the
+nonstandard \(A_5\)-pencil and its elliptic-power decomposition
+\cite[Theorem 11(D) and Lemma 17]{Roulleau}; Hartlieb places its intermediate
+Jacobians in a one-dimensional special subvariety
+\cite[Lemma 5.5 and Proposition 5.7]{Hartlieb}.  Neither statement by itself
+identifies the relative two-division packet used here.
+
+\section{The modular \texorpdfstring{\(S_3\)}{S3}-diagram}
+
+Reduction modulo two gives
+\[
+ \rho_2:\Gamma_0(3)\longrightarrow
+ \operatorname{SL}_2(\F_2)\simeq S_3.
+\]
+It is surjective: the elements
+\[
+ \begin{pmatrix}1&1\\0&1\end{pmatrix},\qquad
+ \begin{pmatrix}1&0\\3&1\end{pmatrix}
+\]
+belong to \(\Gamma_0(3)\) and reduce to two distinct transvections, which
+generate \(\operatorname{SL}_2(\F_2)\).  Define
+\[
+ \Gamma_{\mathrm{sgn}}(6)=
+ \ker(\operatorname{sgn}\circ\rho_2),
+ \qquad
+ \Gamma(2,3)=\Gamma(2)\cap\Gamma_0(3).
+\]
+The first has index two and the second index six in \(\Gamma_0(3)\).
+
+A nonzero point of \(E[2]\) is the same as a cyclic subgroup of order two.
+Together with the given cyclic subgroup of order three, it determines a
+unique cyclic subgroup of order six.  Conversely, an order-six cyclic
+subgroup has unique subgroups of orders two and three.  Therefore the
+degree-three root resolvent is
+\[
+ X_0(6)\longrightarrow X_0(3).
+\]
+The sign resolvent belongs to \(\Gamma_{\mathrm{sgn}}(6)\), and the full
+ordered two-torsion cover belongs to \(\Gamma(2,3)\).  This proves the group
+part of Theorem~\ref{thm:main}(3).
+
+All three covers are rational.  With \(y\) on the root cover, \(r\) on the
+sign cover, and \(v\) on the common splitting cover, one choice of equations
+is
+\begin{align}
+ T&=-\frac{(4y+3)(y+3)^2}{(y+1)^2},\label{eq:root}\\
+ r^2&=T,\label{eq:sign}\\
+ y&=-\frac{v^2+3}{4},&
+ T&=\frac{v^2(9-v^2)^2}{(1-v^2)^2},&
+ r&=\frac{v(9-v^2)}{1-v^2}.\label{eq:split}
+\end{align}
+The last line directly verifies both preceding equations.  It realizes the
+classical fact that adjoining a root of an \(S_3\)-cubic and adjoining the
+square root of its discriminant generate its splitting field.
+
+For completeness, the two-division cubic of \eqref{eq:tate}, obtained by
+eliminating \(y\) from the equation and
+\(2y+(T+27)x+(T+27)^2=0\), is
+\[
+ 4x^3+(T+27)^2x^2+2(T+27)^3x+(T+27)^4.
+\]
+Its discriminant is
+\begin{equation}\label{eq:disc}
+ 16T(T+27)^8.
+\end{equation}
+Thus its discriminant square class is exactly \(T\).  By
+Proposition~\ref{prop:actual-axis} and Lemma~\ref{lem:sign}, the exotic pair
+in the actual gluing packet is \eqref{eq:sign}.  Pulling back along
+\(T=81t^2\) splits it; choosing one sheet gives \(r=9t\).  This completes
+the proof of Theorem~\ref{thm:main}(1)--(3).
+
+\section{Compactification and the cubic boundary}
+
+The coarse orbifold \(X_0(3)\) has two cusps of widths one and three and one
+elliptic point of order three.  A primitive parabolic at either cusp reduces
+modulo two to a transposition, so it does not lie in
+\(\Gamma_{\mathrm{sgn}}(6)\), while its square does.  Each cusp consequently
+has one ramified lift, of width two or six.  An order-three elliptic generator
+reduces to a three-cycle and lies in the sign kernel; the elliptic point has
+two unramified lifts, both of order three.
+
+The sign subgroup has index eight in \(\operatorname{PSL}_2(\Z)\).  The
+genus formula now reads
+\[
+ g=1+\frac{8}{12}-\frac{0}{4}-\frac{2}{3}-\frac{2}{2}=0.
+\]
+This proves Theorem~\ref{thm:main}(4), including the absence of any further
+coarse branching.
+
+The eta Hauptmodul
+\[
+ h(\tau)=\left(\frac{\eta(\tau)}{\eta(3\tau)}\right)^{12}
+\]
+has a simple pole at the width-one cusp and a simple zero at the width-three
+cusp.  In the normalization \eqref{eq:J},
+\[
+ h=\frac{729}{T}.
+\]
+Because \(729=27^2\), the quadratic fields
+\(\Q(h)(\sqrt h)\) and \(\Q(T)(\sqrt T)\) coincide.  Analytically one may
+take \(\sqrt h=(\eta(\tau)/\eta(3\tau))^6\).  Its half-integral order in the
+base cusp parameter is the width doubling just computed.
+
+It remains to compare compactifications.  A direct singularity calculation
+for the six-variable cubic equation gives
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+cubic value & \(T\)-value & degeneration \\
+\midrule
+\(t=\infty\) & \(T=\infty\) & six singular points \\
+\(t=0\) & \(T=0\) & ten singular points \\
+\(t^2=-1/3\) & \(T=-27\) & five \(A_2\)-points \\
+\(t^2=9/5\) & \(T=729/5\) & chordal cubic \\
+\bottomrule
+\end{tabular}
+\end{center}
+Only \(T=0\) and \(T=\infty\) are cusps of \(X_0(3)\).  The marked smooth
+cubic base is therefore
+\[
+ \PP^1_t\setminus
+ \{0,\infty,\ t^2=-1/3,\ t^2=9/5\},
+\]
+and its unmarked image is
+\[
+ X_0(3)\setminus\{0,\infty,-27,729/5\}.
+\]
+On these opens, \(t\mapsto T=81t^2\) is finite \(\acute etale\).  Its
+compactification ramifies only over the two modular cusps.  This proves the
+boundary assertion of Theorem~\ref{thm:main} and prevents a misleading
+identification of every cubic degeneration with a cusp.
+
+\section{Conclusion and scope}
+
+The object behind the five principal kernels is the \(S_3\)-torsor of ordered
+nonzero two-torsion on the actual relative norm axis.  Its two proper
+transitive quotient sets are
+\[
+ S_3/C_2\quad(3\text{ sheets}),
+ \qquad
+ S_3/A_3\quad(2\text{ sheets}).
+\]
+Thus the golden pair contains no independent monodromy datum: it is the
+discriminant orientation of the rational root triple.  The familiar
+decomposition
+\(\PP^1(\F_4)=\PP^1(\F_2)\sqcup\{\omega,\omega^2\}\) is the fibrewise
+form of this global resolvent theorem.
+
+The modular identification here is deliberately limited.  It neither turns
+the five principal kernels into ordinary elliptic isogenies nor promotes the
+whole compactified cubic pencil to a modular stack.  The additional cubic
+boundary points at \(T=-27\) and \(729/5\) are precisely where that stronger
+claim would fail.  Related level-three period maps occur for the Winger
+pencil \cite[Theorem 1.1 and Theorem 5.2]{LZ}; that is a distinct family and
+is not used to identify the cubic base.  The contribution here is the
+combination of the explicit cubic period coordinate, the polarized
+actual-axis comparison, and the principal-kernel local system into one
+resolvent diagram.
+
+\paragraph{Reproducibility.}
+The directory \texttt{verification/} contains a deterministic SymPy
+certificate for \eqref{eq:j-t}--\eqref{eq:split} and
+\eqref{eq:disc}, an independent enumeration of the relevant subgroups modulo
+six, their exact expected outputs, and a SHA-256 manifest.  The paper's
+\texttt{make check} target replays both checks, verifies the manifest, lints
+the source, builds the PDF, and rejects TeX warnings.
+
+\footnotesize
+\begin{thebibliography}{99}
+
+\bibitem{Hartlieb}
+M.~Hartlieb,
+\emph{Special subvarieties in the locus of intermediate Jacobians of cubic
+threefolds}, Math. Z. 310 (2025), article 52;
+arXiv:2304.03214v2.
+
+\bibitem{LZ}
+E.~Looijenga and Y.~Zi,
+\emph{Monodromy and period map of the Winger pencil},
+Nagoya Math. J. 251 (2023), 561--602;
+arXiv:2109.01810v2.
+
+\bibitem{Roulleau}
+X.~Roulleau,
+\emph{The Fano surface of the Klein cubic threefold},
+J. Math. Kyoto Univ. 49 (2009), no.~1, 113--129;
+arXiv:1002.4467v1.
+
+\bibitem{RuddEpilogue}
+T.~Rudd,
+\emph{Irrationality of cubic threefolds after one stabilization},
+preprint, 2026.
+
+\bibitem{VGY}
+B.~van Geemen and T.~Yamauchi,
+\emph{On intermediate Jacobians of cubic threefolds admitting an
+automorphism of order five},
+Pure Appl. Math. Q. 12 (2016), no.~1, 141--164;
+arXiv:1506.05346v3.
+
+\end{thebibliography}
+
+\end{document}
