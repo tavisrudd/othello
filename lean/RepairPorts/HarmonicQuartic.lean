@@ -124,6 +124,48 @@ theorem finrank_harmonicQuarticCode [Fintype 𝔽] [DecidableEq 𝔽]
   rw [harmonicQuarticCode_eq_columnCode]
   exact FiniteGeom.finrank_columnCode (harmonicQuarticPoints_span hcard)
 
+/-- Exact parameters of the quartic--nucleus code from the two global geometric inputs used in
+the manuscript proof: the sharp five-point hyperplane-section bound and independence of every
+set of at most four columns.  The final argument also asks for one displayed weight-five dual
+relation, so nontriviality of the dual is explicit rather than hidden in a distance convention. -/
+theorem harmonicQuarticCode_parameters_of_global_geometry
+    [Fintype 𝔽] [DecidableEq 𝔽] (hcard : 9 ≤ Fintype.card 𝔽)
+    (a₀ : Fin 5 → 𝔽)
+    (ha₀ : FiniteGeom.pointEval (harmonicQuarticPoints (𝔽 := 𝔽)) a₀ ≠ 0)
+    (hmax : FiniteGeom.sectionCount (harmonicQuarticPoints (𝔽 := 𝔽)) a₀ = 5)
+    (hsection : ∀ a : Fin 5 → 𝔽,
+      FiniteGeom.pointEval (harmonicQuarticPoints (𝔽 := 𝔽)) a ≠ 0 →
+      FiniteGeom.sectionCount (harmonicQuarticPoints (𝔽 := 𝔽)) a ≤ 5)
+    (hcolumns : ∀ S : Finset (HarmonicQuarticIndex 𝔽), S.card < 5 →
+      LinearIndependent 𝔽
+        (fun j : S => (harmonicQuarticGenerator (𝔽 := 𝔽)).col j.1))
+    (y : HarmonicQuarticIndex 𝔽 → 𝔽)
+    (hy : y ∈ FiniteGeom.dualCode (harmonicQuarticCode (𝔽 := 𝔽)))
+    (hy₀ : y ≠ 0) (hyweight : hammingNorm y = 5) :
+    Fintype.card (HarmonicQuarticIndex 𝔽) = Fintype.card 𝔽 + 2 ∧
+      Module.finrank 𝔽 (harmonicQuarticCode (𝔽 := 𝔽)) = 5 ∧
+      FiniteGeom.minDist (harmonicQuarticCode (𝔽 := 𝔽)) =
+        Fintype.card 𝔽 - 3 ∧
+      FiniteGeom.dualDist (harmonicQuarticCode (𝔽 := 𝔽)) = 5 := by
+  have hlength := card_harmonicQuarticIndex (𝔽 := 𝔽)
+  have hdim := finrank_harmonicQuarticCode (𝔽 := 𝔽) (by omega)
+  have hdistance := FiniteGeom.columnCode_minDist_eq ha₀ hmax hsection
+  rw [← harmonicQuarticCode_eq_columnCode] at hdistance
+  have hdual : FiniteGeom.dualCode (harmonicQuarticCode (𝔽 := 𝔽)) ≠ ⊥ := by
+    intro hbot
+    rw [hbot] at hy
+    exact hy₀ (show y = 0 from hy)
+  have hduallo : 5 ≤ FiniteGeom.dualDist (harmonicQuarticCode (𝔽 := 𝔽)) :=
+    FiniteGeom.le_dualDist_rowCode_of_column_independent
+      (harmonicQuarticGenerator (𝔽 := 𝔽)) 5
+      hdual hcolumns
+  have hdualhi : FiniteGeom.dualDist (harmonicQuarticCode (𝔽 := 𝔽)) ≤ 5 := by
+    rw [← hyweight]
+    exact FiniteGeom.dualDist_le_hammingNorm hy hy₀
+  refine ⟨hlength, hdim, ?_, Nat.le_antisymm hdualhi hduallo⟩
+  rw [hlength] at hdistance
+  omega
+
 /-- The nucleus followed by four quartic curve columns, arranged as the rows of a square matrix. -/
 def harmonicQuarticFamily (a b c d : HarmonicParameter 𝔽) : Matrix (Fin 5) (Fin 5) 𝔽 :=
   ![harmonicQuarticNucleus, harmonicQuarticCurvePoint a, harmonicQuarticCurvePoint b,
