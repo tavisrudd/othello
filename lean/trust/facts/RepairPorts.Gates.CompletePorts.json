@@ -26,6 +26,7 @@
     "RepairPorts.CoefficientPort",
     "RepairPorts.FunctionalCost",
     "RepairPorts.Gates.CompletePorts",
+    "RepairPorts.HarmonicQuartic",
     "RepairPorts.MDSReconstruction",
     "RepairPorts.PointedTransfer",
     "RepairPorts.PointedTutte",
@@ -184,7 +185,7 @@
     "FiniteGeom.minimalRepair_edge_card_le_numRows": "FiniteGeom.Repair",
     "FiniteGeom.minimalRepair_helpers_linearIndependent": "FiniteGeom.Repair",
     "FiniteGeom.momentCurve": "FiniteGeom.MomentCurve",
-    "FiniteGeom.momentCurve.eq_1": "FiniteGeom.AxisTwistedCubic",
+    "FiniteGeom.momentCurve.eq_1": "RepairPorts.HarmonicQuartic",
     "FiniteGeom.momentCurve_apply": "FiniteGeom.MomentCurve",
     "FiniteGeom.momentCurve_four_dot": "FiniteGeom.AxisTwistedCubic",
     "FiniteGeom.momentCurve_linearIndependent": "FiniteGeom.MomentCurve",
@@ -348,6 +349,7 @@
     "FiniteGeom.wordSupport.congr_simp": "FiniteGeom.Repair",
     "FiniteGeom.wordSupport.eq_1": "FiniteGeom.Repair",
     "FiniteGeom.wordSupport_erase_mem_repairHypergraph_of_column_relation": "FiniteGeom.Repair",
+    "Matrix.row.eq_1": "RepairPorts.HarmonicQuartic",
     "RepairCodes.ConcatDualWord": "RepairCodes.Transfer",
     "RepairCodes.ConcatDualWord.beta": "RepairCodes.Transfer",
     "RepairCodes.ConcatDualWord.blockWt": "RepairCodes.Transfer",
@@ -621,6 +623,51 @@
     "RepairCodes.wordSupport_eq_map_wordSupport_wordBlock_of_single": "RepairCodes.SeedLift",
     "RepairCodes.wordSupport_singleBlockWord": "RepairCodes.SeedLift",
     "RepairPorts.FunctionalCostCacheEntry": "RepairPorts.FunctionalCost",
+    "RepairPorts.HarmonicDesignClosure": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.HarmonicDesignClosure.base": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.HarmonicDesignClosure.below": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.HarmonicDesignClosure.below.base": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.HarmonicDesignClosure.below.casesOn": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.HarmonicDesignClosure.below.complete": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.HarmonicDesignClosure.below.rec": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.HarmonicDesignClosure.brecOn": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.HarmonicDesignClosure.casesOn": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.HarmonicDesignClosure.complete": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.HarmonicDesignClosure.rec": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.HarmonicDesignClosure.recOn": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.HarmonicParameter": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.HarmonicParameter.casesOn": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.HarmonicParameter.ctorElim": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.HarmonicParameter.ctorElimType": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.HarmonicParameter.ctorIdx": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.HarmonicParameter.finite": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.HarmonicParameter.finite.elim": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.HarmonicParameter.finite.inj": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.HarmonicParameter.finite.injEq": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.HarmonicParameter.finite.noConfusion": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.HarmonicParameter.finite.sizeOf_spec": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.HarmonicParameter.infinity": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.HarmonicParameter.infinity.elim": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.HarmonicParameter.infinity.sizeOf_spec": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.HarmonicParameter.noConfusion": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.HarmonicParameter.noConfusionType": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.HarmonicParameter.rec": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.HarmonicParameter.recOn": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.HarmonicPortClosure": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.HarmonicPortClosure.base": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.HarmonicPortClosure.below": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.HarmonicPortClosure.below.base": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.HarmonicPortClosure.below.casesOn": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.HarmonicPortClosure.below.curve": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.HarmonicPortClosure.below.nucleus": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.HarmonicPortClosure.below.rec": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.HarmonicPortClosure.brecOn": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.HarmonicPortClosure.casesOn": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.HarmonicPortClosure.curve": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.HarmonicPortClosure.nucleus": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.HarmonicPortClosure.rec": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.HarmonicPortClosure.recOn": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.HarmonicQuarticIndex": "RepairPorts.HarmonicQuartic",
     "RepairPorts.HasMDSDualParameters": "RepairPorts.MDSReconstruction",
     "RepairPorts.HasMDSDualParameters.casesOn": "RepairPorts.MDSReconstruction",
     "RepairPorts.HasMDSDualParameters.dual_distance": "RepairPorts.MDSReconstruction",
@@ -635,6 +682,14 @@
     "RepairPorts.HasMDSDualParameters.reconstructsAt": "RepairPorts.MDSReconstruction",
     "RepairPorts.HasMDSDualParameters.reconstructsAt_iff": "RepairPorts.MDSReconstruction",
     "RepairPorts.HasMDSDualParameters.repairHypergraph_eq_powersetCard": "RepairPorts.MDSReconstruction",
+    "RepairPorts.IsHarmonicQuarticBlock": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.IsHarmonicQuarticBlock.eq_1": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.IsHarmonicQuarticBlock.eq_2": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.IsHarmonicQuarticBlock.eq_3": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.IsHarmonicQuarticBlock.eq_4": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.IsHarmonicQuarticBlock.eq_5": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.IsHarmonicQuarticBlock.eq_6": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.IsHarmonicQuarticBlock.match_1": "RepairPorts.HarmonicQuartic",
     "RepairPorts.IsMinimalBlocker": "RepairPorts.Reliability",
     "RepairPorts.IsMinimalBlocker.congr_simp": "RepairPorts.Reliability",
     "RepairPorts.IsPointedFunctionalRepresentative": "RepairPorts.FunctionalCost",
@@ -683,6 +738,7 @@
     "RepairPorts.cachedPointedFunctionalTupleCostFromCache.congr_simp": "RepairPorts.FunctionalCost",
     "RepairPorts.cachedPointedFunctionalTupleCostFromCache.eq_1": "RepairPorts.FunctionalCost",
     "RepairPorts.cachedPointedFunctionalTupleCostFromCache_eq": "RepairPorts.FunctionalCost",
+    "RepairPorts.card_harmonicQuarticIndex": "RepairPorts.HarmonicQuartic",
     "RepairPorts.card_representedTargets": "RepairPorts.PositiveDensity",
     "RepairPorts.cheapestRepairRadiusProbability": "RepairPorts.Reliability",
     "RepairPorts.cheapestRepairRadiusProbability_eq_failure_sub": "RepairPorts.Reliability",
@@ -708,6 +764,7 @@
     "RepairPorts.disjointTripleRepairs": "RepairPorts.PointedTutte",
     "RepairPorts.disjointTripleRepairs_reliability": "RepairPorts.PointedTutte",
     "RepairPorts.disjointTripleRepairs_reliability_ne_overlapping": "RepairPorts.PointedTutte",
+    "RepairPorts.dualDist_harmonicQuarticCode": "RepairPorts.HarmonicQuartic",
     "RepairPorts.dualDist_le_pointedFunctionalFiberCost_zero": "RepairPorts.PointedTransfer",
     "RepairPorts.elementaryPerspectiveSubsetEvaluation": "RepairPorts.PointedTutte",
     "RepairPorts.elementaryPerspectiveSubsetEvaluation_eq_pointedTutte": "RepairPorts.PointedTutte",
@@ -719,13 +776,31 @@
     "RepairPorts.eventually_prescribedPorts": "RepairPorts.PositiveDensity",
     "RepairPorts.exactFunctionalStrata": "RepairPorts.PointedTransfer",
     "RepairPorts.exactPointedConfinementAndTransfer": "RepairPorts.PointedTransfer",
+    "RepairPorts.existsUnique_harmonicQuarticCompletion": "RepairPorts.HarmonicQuartic",
     "RepairPorts.exists_functionalFiberCost_realizer": "RepairPorts.FunctionalCost",
     "RepairPorts.exists_functionalTupleCost_realizer": "RepairPorts.FunctionalCost",
+    "RepairPorts.exists_harmonicQuartic_fourHelperRepair": "RepairPorts.HarmonicQuartic",
     "RepairPorts.exists_pointedFunctionalFiberCost_realizer": "RepairPorts.FunctionalCost",
     "RepairPorts.exists_pointedFunctionalTupleCost_realizer": "RepairPorts.FunctionalCost",
+    "RepairPorts.finiteHarmonicBlock_isFiveCircuit": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.finiteHarmonicBlock_repairPort": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.finiteHarmonicCompletion": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.finiteHarmonicCompletion.eq_1": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.finiteHarmonicCompletion_ne": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.finiteHarmonicQuarticMinor": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.finiteHarmonicQuarticMinor.eq_1": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.finiteHarmonicQuarticMinor_det": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.finiteHarmonicQuartic_span": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.finiteQuarticHyperplane": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.finiteQuarticHyperplane.eq_1": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.finiteTripleInfinityCurve_linearIndependent": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.finiteTripleInfinityCurve_minor_det": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.finrank_harmonicQuarticCode": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.fiveCircuit_repairPort": "RepairPorts.HarmonicQuartic",
     "RepairPorts.fixedInnerCoordinateEmbedding": "RepairPorts.PositiveDensity",
     "RepairPorts.foldl_cacheEntry_fst": "RepairPorts.FunctionalCost",
     "RepairPorts.foldl_cacheEntry_snd": "RepairPorts.FunctionalCost",
+    "RepairPorts.fourFiniteHarmonicQuarticCurve_linearIndependent": "RepairPorts.HarmonicQuartic",
     "RepairPorts.functionalCostCache": "RepairPorts.FunctionalCost",
     "RepairPorts.functionalCostCache.congr_simp": "RepairPorts.FunctionalCost",
     "RepairPorts.functionalCostCache.eq_1": "RepairPorts.FunctionalCost",
@@ -748,15 +823,99 @@
     "RepairPorts.functionalTupleCost": "RepairPorts.FunctionalCost",
     "RepairPorts.functionalTupleCost.eq_1": "RepairPorts.FunctionalCost",
     "RepairPorts.functionalTupleCost_le": "RepairPorts.FunctionalCost",
+    "RepairPorts.harmonicCurveCoordinateSet": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicCurveCoordinateSet.eq_1": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicCurveCoordinateSetWithNucleus": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicCurveCoordinateSetWithNucleus.eq_1": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicE\u2081": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicE\u2081.eq_1": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicE\u2081_eq_zero_iff": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicE\u2082": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicE\u2082.eq_1": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicE\u2082Four": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicE\u2082Four.eq_1": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicE\u2082Four_eq_harmonicE\u2082_add_mul": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicE\u2082Four_eq_zero_iff": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicE\u2082Four_finiteHarmonicCompletion_eq_zero": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicE\u2082Four_repeat_first": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicE\u2082Four_repeat_second": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicE\u2082Four_repeat_third": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicE\u2082_ne_zero_of_harmonicE\u2081_eq_zero": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicH\u2082": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicH\u2082.eq_1": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicH\u2082_eq_neg_harmonicE\u2082_of_harmonicE\u2081_eq_zero": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicPortClosure_of_containsBlock_iff": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicPortClosure_of_containsNoBlock_iff": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicPortClosure_withNucleus_iff": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicQuarticBlockIndex": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicQuarticBlockIndex.eq_1": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicQuarticCode": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicQuarticCode_dualDist_eq_five_of_repair": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicQuarticCode_eq_columnCode": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicQuarticCode_parameters_of_global_geometry": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicQuarticCode_parameters_of_sharp_section": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicQuarticCurvePoint": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicQuarticCurvePoint.eq_1": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicQuarticCurvePoint.eq_2": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicQuarticCurvePoint_dot_finiteHyperplane": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicQuarticCurvePoint_dot_infinityHyperplane": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicQuarticCurvePoint_injective": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicQuarticDeterminant": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicQuarticDeterminant_finite": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicQuarticDeterminant_infinity": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicQuarticFamily": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicQuarticFamily_finite_linearIndependent_iff": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicQuarticFamily_infinity_linearIndependent_iff": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicQuarticFamily_linearIndependent_iff": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicQuarticFamily_projective_linearIndependent_iff": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicQuarticGenerator": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicQuarticGenerator_smallColumnIndependent": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicQuarticInfinity_dot_infinityHyperplane": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicQuarticNucleus": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicQuarticNucleus.eq_1": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicQuarticNucleus_dot_finiteHyperplane": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicQuarticNucleus_dot_infinityHyperplane": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicQuarticPoints": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicQuarticPoints.eq_1": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicQuarticPoints.eq_2": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicQuarticPoints.match_1": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicQuarticPoints_injective": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicQuarticPoints_span": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicQuartic_fourSet_linearIndependent": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicQuartic_selected_linearIndependent_of_card_le_four": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicVandermondeFour": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicVandermondeFour.eq_1": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicVandermondeFour_ne_zero": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicVandermondeThree": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicVandermondeThree.eq_1": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.harmonicVandermondeThree_ne_zero": "RepairPorts.HarmonicQuartic",
     "RepairPorts.hasDerivAt_homogeneous_portReliability": "RepairPorts.Reliability",
     "RepairPorts.hasDerivAt_homogeneous_subsetAverage": "RepairPorts.Reliability",
     "RepairPorts.hasDerivAt_portReliability_update": "RepairPorts.Reliability",
     "RepairPorts.hasDerivAt_update_subsetAverage": "RepairPorts.Reliability",
     "RepairPorts.hasPointedNonembeddedDualDistanceAtLeast_iff_le_pointedCost": "RepairPorts.FunctionalCost",
     "RepairPorts.hasWeightedFunctionalDualDistanceAtLeast_iff_functionalTupleCost": "RepairPorts.FunctionalCost",
+    "RepairPorts.infinityHarmonicBlock_isFiveCircuit": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.infinityHarmonicBlock_repairPort": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.infinityHarmonicQuarticMinor": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.infinityHarmonicQuarticMinor.eq_1": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.infinityHarmonicQuarticMinor_det": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.infinityQuarticHyperplane": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.infinityQuarticHyperplane.eq_1": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.infinityTripleCompletion_ne": "RepairPorts.HarmonicQuartic",
     "RepairPorts.instDecidableEqDual_repairPorts": "RepairPorts.FunctionalCost",
+    "RepairPorts.instDecidableEqHarmonicParameter": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.instDecidableEqHarmonicParameter.decEq": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.instDecidableEqHarmonicParameter.decEq.match_1": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.instFintypeHarmonicParameter": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.isHarmonicQuarticBlock_finite_nonzero_iff": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.isHarmonicQuarticBlock_finite_zero_iff": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.isHarmonicQuarticBlock_infinity_iff": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.isHarmonicQuarticBlock_second_infinity_iff": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.isHarmonicQuarticBlock_third_infinity_iff": "RepairPorts.HarmonicQuartic",
     "RepairPorts.isMinimalBlocker_of_minimum_card": "RepairPorts.Reliability",
     "RepairPorts.le_nonzeroOuterPointedFiberCost_of_weighted": "RepairPorts.PositiveDensity",
+    "RepairPorts.linearIndependent_of_coordinateMinor_det_ne_zero": "RepairPorts.HarmonicQuartic",
     "RepairPorts.mem_functionalFiberCandidates_iff": "RepairPorts.FunctionalCost",
     "RepairPorts.mem_repairHypergraph_iff_exists_mem_coefficientPort": "RepairPorts.CoefficientPort",
     "RepairPorts.minimalBlockerCount": "RepairPorts.Reliability",
@@ -774,6 +933,19 @@
     "RepairPorts.nonzeroOuterPointedRealizationCost": "RepairPorts.FunctionalCost",
     "RepairPorts.nonzeroOuterPointedRealizationCost_eq_fiberCost": "RepairPorts.FunctionalCost",
     "RepairPorts.not_isEmbeddedInnerDualBlockAt_of_functionalTuple_ne_zero": "RepairPorts.FunctionalCost",
+    "RepairPorts.nucleusFiniteInfinityFamily": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.nucleusFiniteInfinityFamily.eq_1": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.nucleusFiniteInfinity_linearIndependent": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.nucleusFiniteInfinity_minor_det": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.nucleusFiniteTripleFamily": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.nucleusFiniteTripleFamily.eq_1": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.nucleusFiniteTriple_linearIndependent": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.nucleusFiniteTriple_minor\u2080\u2081\u2082\u2083_det": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.nucleusFiniteTriple_minor\u2080\u2081\u2082\u2084_det": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.nucleusProjectiveTriple_linearIndependent": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.optionEquivHarmonicParameter": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.optionEquivHarmonicParameter.match_1": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.optionEquivHarmonicParameter.match_3": "RepairPorts.HarmonicQuartic",
     "RepairPorts.ordinaryFunctionalCostContribution": "RepairPorts.FunctionalCost",
     "RepairPorts.ordinaryFunctionalCostContribution.congr_simp": "RepairPorts.FunctionalCost",
     "RepairPorts.ordinaryFunctionalCostContribution.eq_1": "RepairPorts.FunctionalCost",
@@ -839,6 +1011,9 @@
     "RepairPorts.portSuccessIndicator_contractHelper": "RepairPorts.Reliability",
     "RepairPorts.portSuccessIndicator_deleteHelper": "RepairPorts.Reliability",
     "RepairPorts.prescribedPorts_of_outerDualDistance": "RepairPorts.PositiveDensity",
+    "RepairPorts.projectiveQuarticFive_linearIndependent": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.projectiveQuarticFive_linearIndependent_of_lastInfinity": "RepairPorts.HarmonicQuartic",
+    "RepairPorts.projectiveQuarticFour_linearIndependent": "RepairPorts.HarmonicQuartic",
     "RepairPorts.reconstructedCode_eq": "RepairPorts.CoefficientPort",
     "RepairPorts.reconstructionRadius": "RepairPorts.CoefficientPort",
     "RepairPorts.reconstructsAt_card_of_exists_dual_not_zero": "RepairPorts.CoefficientPort",
@@ -1212,6 +1387,7 @@
     "FiniteGeom.wordSupport.congr_simp",
     "FiniteGeom.wordSupport.eq_1",
     "FiniteGeom.wordSupport_erase_mem_repairHypergraph_of_column_relation",
+    "Matrix.row.eq_1",
     "RepairCodes.ConcatDualWord",
     "RepairCodes.ConcatDualWord.beta",
     "RepairCodes.ConcatDualWord.blockWt",
@@ -1485,6 +1661,51 @@
     "RepairCodes.wordSupport_eq_map_wordSupport_wordBlock_of_single",
     "RepairCodes.wordSupport_singleBlockWord",
     "RepairPorts.FunctionalCostCacheEntry",
+    "RepairPorts.HarmonicDesignClosure",
+    "RepairPorts.HarmonicDesignClosure.base",
+    "RepairPorts.HarmonicDesignClosure.below",
+    "RepairPorts.HarmonicDesignClosure.below.base",
+    "RepairPorts.HarmonicDesignClosure.below.casesOn",
+    "RepairPorts.HarmonicDesignClosure.below.complete",
+    "RepairPorts.HarmonicDesignClosure.below.rec",
+    "RepairPorts.HarmonicDesignClosure.brecOn",
+    "RepairPorts.HarmonicDesignClosure.casesOn",
+    "RepairPorts.HarmonicDesignClosure.complete",
+    "RepairPorts.HarmonicDesignClosure.rec",
+    "RepairPorts.HarmonicDesignClosure.recOn",
+    "RepairPorts.HarmonicParameter",
+    "RepairPorts.HarmonicParameter.casesOn",
+    "RepairPorts.HarmonicParameter.ctorElim",
+    "RepairPorts.HarmonicParameter.ctorElimType",
+    "RepairPorts.HarmonicParameter.ctorIdx",
+    "RepairPorts.HarmonicParameter.finite",
+    "RepairPorts.HarmonicParameter.finite.elim",
+    "RepairPorts.HarmonicParameter.finite.inj",
+    "RepairPorts.HarmonicParameter.finite.injEq",
+    "RepairPorts.HarmonicParameter.finite.noConfusion",
+    "RepairPorts.HarmonicParameter.finite.sizeOf_spec",
+    "RepairPorts.HarmonicParameter.infinity",
+    "RepairPorts.HarmonicParameter.infinity.elim",
+    "RepairPorts.HarmonicParameter.infinity.sizeOf_spec",
+    "RepairPorts.HarmonicParameter.noConfusion",
+    "RepairPorts.HarmonicParameter.noConfusionType",
+    "RepairPorts.HarmonicParameter.rec",
+    "RepairPorts.HarmonicParameter.recOn",
+    "RepairPorts.HarmonicPortClosure",
+    "RepairPorts.HarmonicPortClosure.base",
+    "RepairPorts.HarmonicPortClosure.below",
+    "RepairPorts.HarmonicPortClosure.below.base",
+    "RepairPorts.HarmonicPortClosure.below.casesOn",
+    "RepairPorts.HarmonicPortClosure.below.curve",
+    "RepairPorts.HarmonicPortClosure.below.nucleus",
+    "RepairPorts.HarmonicPortClosure.below.rec",
+    "RepairPorts.HarmonicPortClosure.brecOn",
+    "RepairPorts.HarmonicPortClosure.casesOn",
+    "RepairPorts.HarmonicPortClosure.curve",
+    "RepairPorts.HarmonicPortClosure.nucleus",
+    "RepairPorts.HarmonicPortClosure.rec",
+    "RepairPorts.HarmonicPortClosure.recOn",
+    "RepairPorts.HarmonicQuarticIndex",
     "RepairPorts.HasMDSDualParameters",
     "RepairPorts.HasMDSDualParameters.casesOn",
     "RepairPorts.HasMDSDualParameters.dual_distance",
@@ -1499,6 +1720,14 @@
     "RepairPorts.HasMDSDualParameters.reconstructsAt",
     "RepairPorts.HasMDSDualParameters.reconstructsAt_iff",
     "RepairPorts.HasMDSDualParameters.repairHypergraph_eq_powersetCard",
+    "RepairPorts.IsHarmonicQuarticBlock",
+    "RepairPorts.IsHarmonicQuarticBlock.eq_1",
+    "RepairPorts.IsHarmonicQuarticBlock.eq_2",
+    "RepairPorts.IsHarmonicQuarticBlock.eq_3",
+    "RepairPorts.IsHarmonicQuarticBlock.eq_4",
+    "RepairPorts.IsHarmonicQuarticBlock.eq_5",
+    "RepairPorts.IsHarmonicQuarticBlock.eq_6",
+    "RepairPorts.IsHarmonicQuarticBlock.match_1",
     "RepairPorts.IsMinimalBlocker",
     "RepairPorts.IsMinimalBlocker.congr_simp",
     "RepairPorts.IsPointedFunctionalRepresentative",
@@ -1547,6 +1776,7 @@
     "RepairPorts.cachedPointedFunctionalTupleCostFromCache.congr_simp",
     "RepairPorts.cachedPointedFunctionalTupleCostFromCache.eq_1",
     "RepairPorts.cachedPointedFunctionalTupleCostFromCache_eq",
+    "RepairPorts.card_harmonicQuarticIndex",
     "RepairPorts.card_representedTargets",
     "RepairPorts.cheapestRepairRadiusProbability",
     "RepairPorts.cheapestRepairRadiusProbability_eq_failure_sub",
@@ -1572,6 +1802,7 @@
     "RepairPorts.disjointTripleRepairs",
     "RepairPorts.disjointTripleRepairs_reliability",
     "RepairPorts.disjointTripleRepairs_reliability_ne_overlapping",
+    "RepairPorts.dualDist_harmonicQuarticCode",
     "RepairPorts.dualDist_le_pointedFunctionalFiberCost_zero",
     "RepairPorts.elementaryPerspectiveSubsetEvaluation",
     "RepairPorts.elementaryPerspectiveSubsetEvaluation_eq_pointedTutte",
@@ -1583,13 +1814,31 @@
     "RepairPorts.eventually_prescribedPorts",
     "RepairPorts.exactFunctionalStrata",
     "RepairPorts.exactPointedConfinementAndTransfer",
+    "RepairPorts.existsUnique_harmonicQuarticCompletion",
     "RepairPorts.exists_functionalFiberCost_realizer",
     "RepairPorts.exists_functionalTupleCost_realizer",
+    "RepairPorts.exists_harmonicQuartic_fourHelperRepair",
     "RepairPorts.exists_pointedFunctionalFiberCost_realizer",
     "RepairPorts.exists_pointedFunctionalTupleCost_realizer",
+    "RepairPorts.finiteHarmonicBlock_isFiveCircuit",
+    "RepairPorts.finiteHarmonicBlock_repairPort",
+    "RepairPorts.finiteHarmonicCompletion",
+    "RepairPorts.finiteHarmonicCompletion.eq_1",
+    "RepairPorts.finiteHarmonicCompletion_ne",
+    "RepairPorts.finiteHarmonicQuarticMinor",
+    "RepairPorts.finiteHarmonicQuarticMinor.eq_1",
+    "RepairPorts.finiteHarmonicQuarticMinor_det",
+    "RepairPorts.finiteHarmonicQuartic_span",
+    "RepairPorts.finiteQuarticHyperplane",
+    "RepairPorts.finiteQuarticHyperplane.eq_1",
+    "RepairPorts.finiteTripleInfinityCurve_linearIndependent",
+    "RepairPorts.finiteTripleInfinityCurve_minor_det",
+    "RepairPorts.finrank_harmonicQuarticCode",
+    "RepairPorts.fiveCircuit_repairPort",
     "RepairPorts.fixedInnerCoordinateEmbedding",
     "RepairPorts.foldl_cacheEntry_fst",
     "RepairPorts.foldl_cacheEntry_snd",
+    "RepairPorts.fourFiniteHarmonicQuarticCurve_linearIndependent",
     "RepairPorts.functionalCostCache",
     "RepairPorts.functionalCostCache.congr_simp",
     "RepairPorts.functionalCostCache.eq_1",
@@ -1612,15 +1861,99 @@
     "RepairPorts.functionalTupleCost",
     "RepairPorts.functionalTupleCost.eq_1",
     "RepairPorts.functionalTupleCost_le",
+    "RepairPorts.harmonicCurveCoordinateSet",
+    "RepairPorts.harmonicCurveCoordinateSet.eq_1",
+    "RepairPorts.harmonicCurveCoordinateSetWithNucleus",
+    "RepairPorts.harmonicCurveCoordinateSetWithNucleus.eq_1",
+    "RepairPorts.harmonicE\u2081",
+    "RepairPorts.harmonicE\u2081.eq_1",
+    "RepairPorts.harmonicE\u2081_eq_zero_iff",
+    "RepairPorts.harmonicE\u2082",
+    "RepairPorts.harmonicE\u2082.eq_1",
+    "RepairPorts.harmonicE\u2082Four",
+    "RepairPorts.harmonicE\u2082Four.eq_1",
+    "RepairPorts.harmonicE\u2082Four_eq_harmonicE\u2082_add_mul",
+    "RepairPorts.harmonicE\u2082Four_eq_zero_iff",
+    "RepairPorts.harmonicE\u2082Four_finiteHarmonicCompletion_eq_zero",
+    "RepairPorts.harmonicE\u2082Four_repeat_first",
+    "RepairPorts.harmonicE\u2082Four_repeat_second",
+    "RepairPorts.harmonicE\u2082Four_repeat_third",
+    "RepairPorts.harmonicE\u2082_ne_zero_of_harmonicE\u2081_eq_zero",
+    "RepairPorts.harmonicH\u2082",
+    "RepairPorts.harmonicH\u2082.eq_1",
+    "RepairPorts.harmonicH\u2082_eq_neg_harmonicE\u2082_of_harmonicE\u2081_eq_zero",
+    "RepairPorts.harmonicPortClosure_of_containsBlock_iff",
+    "RepairPorts.harmonicPortClosure_of_containsNoBlock_iff",
+    "RepairPorts.harmonicPortClosure_withNucleus_iff",
+    "RepairPorts.harmonicQuarticBlockIndex",
+    "RepairPorts.harmonicQuarticBlockIndex.eq_1",
+    "RepairPorts.harmonicQuarticCode",
+    "RepairPorts.harmonicQuarticCode_dualDist_eq_five_of_repair",
+    "RepairPorts.harmonicQuarticCode_eq_columnCode",
+    "RepairPorts.harmonicQuarticCode_parameters_of_global_geometry",
+    "RepairPorts.harmonicQuarticCode_parameters_of_sharp_section",
+    "RepairPorts.harmonicQuarticCurvePoint",
+    "RepairPorts.harmonicQuarticCurvePoint.eq_1",
+    "RepairPorts.harmonicQuarticCurvePoint.eq_2",
+    "RepairPorts.harmonicQuarticCurvePoint_dot_finiteHyperplane",
+    "RepairPorts.harmonicQuarticCurvePoint_dot_infinityHyperplane",
+    "RepairPorts.harmonicQuarticCurvePoint_injective",
+    "RepairPorts.harmonicQuarticDeterminant",
+    "RepairPorts.harmonicQuarticDeterminant_finite",
+    "RepairPorts.harmonicQuarticDeterminant_infinity",
+    "RepairPorts.harmonicQuarticFamily",
+    "RepairPorts.harmonicQuarticFamily_finite_linearIndependent_iff",
+    "RepairPorts.harmonicQuarticFamily_infinity_linearIndependent_iff",
+    "RepairPorts.harmonicQuarticFamily_linearIndependent_iff",
+    "RepairPorts.harmonicQuarticFamily_projective_linearIndependent_iff",
+    "RepairPorts.harmonicQuarticGenerator",
+    "RepairPorts.harmonicQuarticGenerator_smallColumnIndependent",
+    "RepairPorts.harmonicQuarticInfinity_dot_infinityHyperplane",
+    "RepairPorts.harmonicQuarticNucleus",
+    "RepairPorts.harmonicQuarticNucleus.eq_1",
+    "RepairPorts.harmonicQuarticNucleus_dot_finiteHyperplane",
+    "RepairPorts.harmonicQuarticNucleus_dot_infinityHyperplane",
+    "RepairPorts.harmonicQuarticPoints",
+    "RepairPorts.harmonicQuarticPoints.eq_1",
+    "RepairPorts.harmonicQuarticPoints.eq_2",
+    "RepairPorts.harmonicQuarticPoints.match_1",
+    "RepairPorts.harmonicQuarticPoints_injective",
+    "RepairPorts.harmonicQuarticPoints_span",
+    "RepairPorts.harmonicQuartic_fourSet_linearIndependent",
+    "RepairPorts.harmonicQuartic_selected_linearIndependent_of_card_le_four",
+    "RepairPorts.harmonicVandermondeFour",
+    "RepairPorts.harmonicVandermondeFour.eq_1",
+    "RepairPorts.harmonicVandermondeFour_ne_zero",
+    "RepairPorts.harmonicVandermondeThree",
+    "RepairPorts.harmonicVandermondeThree.eq_1",
+    "RepairPorts.harmonicVandermondeThree_ne_zero",
     "RepairPorts.hasDerivAt_homogeneous_portReliability",
     "RepairPorts.hasDerivAt_homogeneous_subsetAverage",
     "RepairPorts.hasDerivAt_portReliability_update",
     "RepairPorts.hasDerivAt_update_subsetAverage",
     "RepairPorts.hasPointedNonembeddedDualDistanceAtLeast_iff_le_pointedCost",
     "RepairPorts.hasWeightedFunctionalDualDistanceAtLeast_iff_functionalTupleCost",
+    "RepairPorts.infinityHarmonicBlock_isFiveCircuit",
+    "RepairPorts.infinityHarmonicBlock_repairPort",
+    "RepairPorts.infinityHarmonicQuarticMinor",
+    "RepairPorts.infinityHarmonicQuarticMinor.eq_1",
+    "RepairPorts.infinityHarmonicQuarticMinor_det",
+    "RepairPorts.infinityQuarticHyperplane",
+    "RepairPorts.infinityQuarticHyperplane.eq_1",
+    "RepairPorts.infinityTripleCompletion_ne",
     "RepairPorts.instDecidableEqDual_repairPorts",
+    "RepairPorts.instDecidableEqHarmonicParameter",
+    "RepairPorts.instDecidableEqHarmonicParameter.decEq",
+    "RepairPorts.instDecidableEqHarmonicParameter.decEq.match_1",
+    "RepairPorts.instFintypeHarmonicParameter",
+    "RepairPorts.isHarmonicQuarticBlock_finite_nonzero_iff",
+    "RepairPorts.isHarmonicQuarticBlock_finite_zero_iff",
+    "RepairPorts.isHarmonicQuarticBlock_infinity_iff",
+    "RepairPorts.isHarmonicQuarticBlock_second_infinity_iff",
+    "RepairPorts.isHarmonicQuarticBlock_third_infinity_iff",
     "RepairPorts.isMinimalBlocker_of_minimum_card",
     "RepairPorts.le_nonzeroOuterPointedFiberCost_of_weighted",
+    "RepairPorts.linearIndependent_of_coordinateMinor_det_ne_zero",
     "RepairPorts.mem_functionalFiberCandidates_iff",
     "RepairPorts.mem_repairHypergraph_iff_exists_mem_coefficientPort",
     "RepairPorts.minimalBlockerCount",
@@ -1638,6 +1971,19 @@
     "RepairPorts.nonzeroOuterPointedRealizationCost",
     "RepairPorts.nonzeroOuterPointedRealizationCost_eq_fiberCost",
     "RepairPorts.not_isEmbeddedInnerDualBlockAt_of_functionalTuple_ne_zero",
+    "RepairPorts.nucleusFiniteInfinityFamily",
+    "RepairPorts.nucleusFiniteInfinityFamily.eq_1",
+    "RepairPorts.nucleusFiniteInfinity_linearIndependent",
+    "RepairPorts.nucleusFiniteInfinity_minor_det",
+    "RepairPorts.nucleusFiniteTripleFamily",
+    "RepairPorts.nucleusFiniteTripleFamily.eq_1",
+    "RepairPorts.nucleusFiniteTriple_linearIndependent",
+    "RepairPorts.nucleusFiniteTriple_minor\u2080\u2081\u2082\u2083_det",
+    "RepairPorts.nucleusFiniteTriple_minor\u2080\u2081\u2082\u2084_det",
+    "RepairPorts.nucleusProjectiveTriple_linearIndependent",
+    "RepairPorts.optionEquivHarmonicParameter",
+    "RepairPorts.optionEquivHarmonicParameter.match_1",
+    "RepairPorts.optionEquivHarmonicParameter.match_3",
     "RepairPorts.ordinaryFunctionalCostContribution",
     "RepairPorts.ordinaryFunctionalCostContribution.congr_simp",
     "RepairPorts.ordinaryFunctionalCostContribution.eq_1",
@@ -1703,6 +2049,9 @@
     "RepairPorts.portSuccessIndicator_contractHelper",
     "RepairPorts.portSuccessIndicator_deleteHelper",
     "RepairPorts.prescribedPorts_of_outerDualDistance",
+    "RepairPorts.projectiveQuarticFive_linearIndependent",
+    "RepairPorts.projectiveQuarticFive_linearIndependent_of_lastInfinity",
+    "RepairPorts.projectiveQuarticFour_linearIndependent",
     "RepairPorts.reconstructedCode_eq",
     "RepairPorts.reconstructionRadius",
     "RepairPorts.reconstructsAt_card_of_exists_dual_not_zero",
@@ -1866,6 +2215,11 @@
       "Quot.sound",
       "propext"
     ],
+    "RepairPorts.dualDist_harmonicQuarticCode": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
     "RepairPorts.elementaryPerspectiveSubsetEvaluation_eq_pointedTutte": [
       "Classical.choice",
       "Quot.sound",
@@ -1901,12 +2255,64 @@
       "Quot.sound",
       "propext"
     ],
+    "RepairPorts.existsUnique_harmonicQuarticCompletion": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RepairPorts.finiteHarmonicBlock_repairPort": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RepairPorts.harmonicPortClosure_of_containsBlock_iff": [
+      "Quot.sound",
+      "propext"
+    ],
+    "RepairPorts.harmonicPortClosure_of_containsNoBlock_iff": [
+      "Quot.sound",
+      "propext"
+    ],
+    "RepairPorts.harmonicPortClosure_withNucleus_iff": [
+      "Quot.sound",
+      "propext"
+    ],
+    "RepairPorts.harmonicQuarticCode_parameters_of_sharp_section": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RepairPorts.harmonicQuarticDeterminant_finite": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RepairPorts.harmonicQuarticDeterminant_infinity": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RepairPorts.harmonicQuarticFamily_projective_linearIndependent_iff": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RepairPorts.harmonicQuarticGenerator_smallColumnIndependent": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
     "RepairPorts.hasDerivAt_homogeneous_portReliability": [
       "Classical.choice",
       "Quot.sound",
       "propext"
     ],
     "RepairPorts.hasDerivAt_portReliability_update": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RepairPorts.infinityHarmonicBlock_repairPort": [
       "Classical.choice",
       "Quot.sound",
       "propext"
@@ -5396,6 +5802,287 @@
       "RepairCodes.wordBlock_singleBlockWord_same",
       "RepairCodes.wordSupport_eq_map_wordSupport_wordBlock_of_single"
     ],
+    "RepairPorts.HarmonicDesignClosure": [
+      "RepairPorts.HarmonicParameter"
+    ],
+    "RepairPorts.HarmonicDesignClosure.base": [
+      "RepairPorts.HarmonicDesignClosure",
+      "RepairPorts.HarmonicParameter"
+    ],
+    "RepairPorts.HarmonicDesignClosure.below": [
+      "RepairPorts.HarmonicDesignClosure",
+      "RepairPorts.HarmonicParameter"
+    ],
+    "RepairPorts.HarmonicDesignClosure.below.base": [
+      "RepairPorts.HarmonicDesignClosure",
+      "RepairPorts.HarmonicDesignClosure.base",
+      "RepairPorts.HarmonicDesignClosure.below",
+      "RepairPorts.HarmonicParameter"
+    ],
+    "RepairPorts.HarmonicDesignClosure.below.casesOn": [
+      "RepairPorts.HarmonicDesignClosure",
+      "RepairPorts.HarmonicDesignClosure.base",
+      "RepairPorts.HarmonicDesignClosure.below",
+      "RepairPorts.HarmonicDesignClosure.below.base",
+      "RepairPorts.HarmonicDesignClosure.below.complete",
+      "RepairPorts.HarmonicDesignClosure.below.rec",
+      "RepairPorts.HarmonicDesignClosure.complete",
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.IsHarmonicQuarticBlock"
+    ],
+    "RepairPorts.HarmonicDesignClosure.below.complete": [
+      "RepairPorts.HarmonicDesignClosure",
+      "RepairPorts.HarmonicDesignClosure.below",
+      "RepairPorts.HarmonicDesignClosure.complete",
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.IsHarmonicQuarticBlock"
+    ],
+    "RepairPorts.HarmonicDesignClosure.below.rec": [
+      "RepairPorts.HarmonicDesignClosure",
+      "RepairPorts.HarmonicDesignClosure.base",
+      "RepairPorts.HarmonicDesignClosure.below",
+      "RepairPorts.HarmonicDesignClosure.below.base",
+      "RepairPorts.HarmonicDesignClosure.below.complete",
+      "RepairPorts.HarmonicDesignClosure.complete",
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.IsHarmonicQuarticBlock"
+    ],
+    "RepairPorts.HarmonicDesignClosure.brecOn": [
+      "RepairPorts.HarmonicDesignClosure",
+      "RepairPorts.HarmonicDesignClosure.below",
+      "RepairPorts.HarmonicDesignClosure.below.base",
+      "RepairPorts.HarmonicDesignClosure.below.complete",
+      "RepairPorts.HarmonicDesignClosure.rec",
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.IsHarmonicQuarticBlock"
+    ],
+    "RepairPorts.HarmonicDesignClosure.casesOn": [
+      "RepairPorts.HarmonicDesignClosure",
+      "RepairPorts.HarmonicDesignClosure.base",
+      "RepairPorts.HarmonicDesignClosure.complete",
+      "RepairPorts.HarmonicDesignClosure.rec",
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.IsHarmonicQuarticBlock"
+    ],
+    "RepairPorts.HarmonicDesignClosure.complete": [
+      "RepairPorts.HarmonicDesignClosure",
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.IsHarmonicQuarticBlock"
+    ],
+    "RepairPorts.HarmonicDesignClosure.rec": [
+      "RepairPorts.HarmonicDesignClosure",
+      "RepairPorts.HarmonicDesignClosure.base",
+      "RepairPorts.HarmonicDesignClosure.complete",
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.IsHarmonicQuarticBlock"
+    ],
+    "RepairPorts.HarmonicDesignClosure.recOn": [
+      "RepairPorts.HarmonicDesignClosure",
+      "RepairPorts.HarmonicDesignClosure.base",
+      "RepairPorts.HarmonicDesignClosure.complete",
+      "RepairPorts.HarmonicDesignClosure.rec",
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.IsHarmonicQuarticBlock"
+    ],
+    "RepairPorts.HarmonicParameter.casesOn": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicParameter.finite",
+      "RepairPorts.HarmonicParameter.infinity",
+      "RepairPorts.HarmonicParameter.rec"
+    ],
+    "RepairPorts.HarmonicParameter.ctorElim": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicParameter.casesOn",
+      "RepairPorts.HarmonicParameter.ctorElimType",
+      "RepairPorts.HarmonicParameter.ctorIdx",
+      "RepairPorts.HarmonicParameter.finite",
+      "RepairPorts.HarmonicParameter.infinity"
+    ],
+    "RepairPorts.HarmonicParameter.ctorElimType": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicParameter.finite",
+      "RepairPorts.HarmonicParameter.infinity"
+    ],
+    "RepairPorts.HarmonicParameter.ctorIdx": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicParameter.casesOn"
+    ],
+    "RepairPorts.HarmonicParameter.finite": [
+      "RepairPorts.HarmonicParameter"
+    ],
+    "RepairPorts.HarmonicParameter.finite.elim": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicParameter.ctorElim",
+      "RepairPorts.HarmonicParameter.ctorIdx",
+      "RepairPorts.HarmonicParameter.finite"
+    ],
+    "RepairPorts.HarmonicParameter.finite.inj": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicParameter.finite",
+      "RepairPorts.HarmonicParameter.finite.noConfusion"
+    ],
+    "RepairPorts.HarmonicParameter.finite.injEq": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicParameter.finite",
+      "RepairPorts.HarmonicParameter.finite.inj"
+    ],
+    "RepairPorts.HarmonicParameter.finite.noConfusion": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicParameter.finite",
+      "RepairPorts.HarmonicParameter.noConfusion"
+    ],
+    "RepairPorts.HarmonicParameter.finite.sizeOf_spec": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicParameter.finite"
+    ],
+    "RepairPorts.HarmonicParameter.infinity": [
+      "RepairPorts.HarmonicParameter"
+    ],
+    "RepairPorts.HarmonicParameter.infinity.elim": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicParameter.ctorElim",
+      "RepairPorts.HarmonicParameter.ctorIdx",
+      "RepairPorts.HarmonicParameter.infinity"
+    ],
+    "RepairPorts.HarmonicParameter.infinity.sizeOf_spec": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicParameter.infinity"
+    ],
+    "RepairPorts.HarmonicParameter.noConfusion": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicParameter.casesOn",
+      "RepairPorts.HarmonicParameter.noConfusionType"
+    ],
+    "RepairPorts.HarmonicParameter.noConfusionType": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicParameter.casesOn"
+    ],
+    "RepairPorts.HarmonicParameter.rec": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicParameter.finite",
+      "RepairPorts.HarmonicParameter.infinity"
+    ],
+    "RepairPorts.HarmonicParameter.recOn": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicParameter.finite",
+      "RepairPorts.HarmonicParameter.infinity",
+      "RepairPorts.HarmonicParameter.rec"
+    ],
+    "RepairPorts.HarmonicPortClosure": [
+      "RepairPorts.HarmonicQuarticIndex"
+    ],
+    "RepairPorts.HarmonicPortClosure.base": [
+      "RepairPorts.HarmonicPortClosure",
+      "RepairPorts.HarmonicQuarticIndex"
+    ],
+    "RepairPorts.HarmonicPortClosure.below": [
+      "RepairPorts.HarmonicPortClosure",
+      "RepairPorts.HarmonicQuarticIndex"
+    ],
+    "RepairPorts.HarmonicPortClosure.below.base": [
+      "RepairPorts.HarmonicPortClosure",
+      "RepairPorts.HarmonicPortClosure.base",
+      "RepairPorts.HarmonicPortClosure.below",
+      "RepairPorts.HarmonicQuarticIndex"
+    ],
+    "RepairPorts.HarmonicPortClosure.below.casesOn": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicPortClosure",
+      "RepairPorts.HarmonicPortClosure.base",
+      "RepairPorts.HarmonicPortClosure.below",
+      "RepairPorts.HarmonicPortClosure.below.base",
+      "RepairPorts.HarmonicPortClosure.below.curve",
+      "RepairPorts.HarmonicPortClosure.below.nucleus",
+      "RepairPorts.HarmonicPortClosure.below.rec",
+      "RepairPorts.HarmonicPortClosure.curve",
+      "RepairPorts.HarmonicPortClosure.nucleus",
+      "RepairPorts.HarmonicQuarticIndex",
+      "RepairPorts.IsHarmonicQuarticBlock"
+    ],
+    "RepairPorts.HarmonicPortClosure.below.curve": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicPortClosure",
+      "RepairPorts.HarmonicPortClosure.below",
+      "RepairPorts.HarmonicPortClosure.curve",
+      "RepairPorts.HarmonicQuarticIndex",
+      "RepairPorts.IsHarmonicQuarticBlock"
+    ],
+    "RepairPorts.HarmonicPortClosure.below.nucleus": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicPortClosure",
+      "RepairPorts.HarmonicPortClosure.below",
+      "RepairPorts.HarmonicPortClosure.nucleus",
+      "RepairPorts.HarmonicQuarticIndex",
+      "RepairPorts.IsHarmonicQuarticBlock"
+    ],
+    "RepairPorts.HarmonicPortClosure.below.rec": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicPortClosure",
+      "RepairPorts.HarmonicPortClosure.base",
+      "RepairPorts.HarmonicPortClosure.below",
+      "RepairPorts.HarmonicPortClosure.below.base",
+      "RepairPorts.HarmonicPortClosure.below.curve",
+      "RepairPorts.HarmonicPortClosure.below.nucleus",
+      "RepairPorts.HarmonicPortClosure.curve",
+      "RepairPorts.HarmonicPortClosure.nucleus",
+      "RepairPorts.HarmonicQuarticIndex",
+      "RepairPorts.IsHarmonicQuarticBlock"
+    ],
+    "RepairPorts.HarmonicPortClosure.brecOn": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicPortClosure",
+      "RepairPorts.HarmonicPortClosure.below",
+      "RepairPorts.HarmonicPortClosure.below.base",
+      "RepairPorts.HarmonicPortClosure.below.curve",
+      "RepairPorts.HarmonicPortClosure.below.nucleus",
+      "RepairPorts.HarmonicPortClosure.rec",
+      "RepairPorts.HarmonicQuarticIndex",
+      "RepairPorts.IsHarmonicQuarticBlock"
+    ],
+    "RepairPorts.HarmonicPortClosure.casesOn": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicPortClosure",
+      "RepairPorts.HarmonicPortClosure.base",
+      "RepairPorts.HarmonicPortClosure.curve",
+      "RepairPorts.HarmonicPortClosure.nucleus",
+      "RepairPorts.HarmonicPortClosure.rec",
+      "RepairPorts.HarmonicQuarticIndex",
+      "RepairPorts.IsHarmonicQuarticBlock"
+    ],
+    "RepairPorts.HarmonicPortClosure.curve": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicPortClosure",
+      "RepairPorts.HarmonicQuarticIndex",
+      "RepairPorts.IsHarmonicQuarticBlock"
+    ],
+    "RepairPorts.HarmonicPortClosure.nucleus": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicPortClosure",
+      "RepairPorts.HarmonicQuarticIndex",
+      "RepairPorts.IsHarmonicQuarticBlock"
+    ],
+    "RepairPorts.HarmonicPortClosure.rec": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicPortClosure",
+      "RepairPorts.HarmonicPortClosure.base",
+      "RepairPorts.HarmonicPortClosure.curve",
+      "RepairPorts.HarmonicPortClosure.nucleus",
+      "RepairPorts.HarmonicQuarticIndex",
+      "RepairPorts.IsHarmonicQuarticBlock"
+    ],
+    "RepairPorts.HarmonicPortClosure.recOn": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicPortClosure",
+      "RepairPorts.HarmonicPortClosure.base",
+      "RepairPorts.HarmonicPortClosure.curve",
+      "RepairPorts.HarmonicPortClosure.nucleus",
+      "RepairPorts.HarmonicPortClosure.rec",
+      "RepairPorts.HarmonicQuarticIndex",
+      "RepairPorts.IsHarmonicQuarticBlock"
+    ],
+    "RepairPorts.HarmonicQuarticIndex": [
+      "RepairPorts.HarmonicParameter"
+    ],
     "RepairPorts.HasMDSDualParameters.casesOn": [
       "FiniteGeom.dualCode",
       "FiniteGeom.dualDist",
@@ -5511,6 +6198,57 @@
       "RepairPorts.HasMDSDualParameters",
       "RepairPorts.HasMDSDualParameters.dual_distance",
       "RepairPorts.HasMDSDualParameters.exists_normalized_word"
+    ],
+    "RepairPorts.IsHarmonicQuarticBlock": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.IsHarmonicQuarticBlock.match_1",
+      "RepairPorts.harmonicE\u2081",
+      "RepairPorts.harmonicE\u2082Four"
+    ],
+    "RepairPorts.IsHarmonicQuarticBlock.eq_1": [
+      "RepairPorts.HarmonicParameter.finite",
+      "RepairPorts.IsHarmonicQuarticBlock",
+      "RepairPorts.harmonicE\u2082Four"
+    ],
+    "RepairPorts.IsHarmonicQuarticBlock.eq_2": [
+      "RepairPorts.HarmonicParameter.finite",
+      "RepairPorts.HarmonicParameter.infinity",
+      "RepairPorts.IsHarmonicQuarticBlock",
+      "RepairPorts.harmonicE\u2081"
+    ],
+    "RepairPorts.IsHarmonicQuarticBlock.eq_3": [
+      "RepairPorts.HarmonicParameter.finite",
+      "RepairPorts.HarmonicParameter.infinity",
+      "RepairPorts.IsHarmonicQuarticBlock",
+      "RepairPorts.harmonicE\u2081"
+    ],
+    "RepairPorts.IsHarmonicQuarticBlock.eq_4": [
+      "RepairPorts.HarmonicParameter.finite",
+      "RepairPorts.HarmonicParameter.infinity",
+      "RepairPorts.IsHarmonicQuarticBlock",
+      "RepairPorts.harmonicE\u2081"
+    ],
+    "RepairPorts.IsHarmonicQuarticBlock.eq_5": [
+      "RepairPorts.HarmonicParameter.finite",
+      "RepairPorts.HarmonicParameter.infinity",
+      "RepairPorts.IsHarmonicQuarticBlock",
+      "RepairPorts.harmonicE\u2081"
+    ],
+    "RepairPorts.IsHarmonicQuarticBlock.eq_6": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicParameter.finite",
+      "RepairPorts.HarmonicParameter.infinity",
+      "RepairPorts.IsHarmonicQuarticBlock",
+      "RepairPorts.IsHarmonicQuarticBlock.match_1",
+      "RepairPorts.harmonicE\u2081",
+      "RepairPorts.harmonicE\u2082Four"
+    ],
+    "RepairPorts.IsHarmonicQuarticBlock.match_1": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicParameter.casesOn",
+      "RepairPorts.HarmonicParameter.ctorIdx",
+      "RepairPorts.HarmonicParameter.finite",
+      "RepairPorts.HarmonicParameter.infinity"
     ],
     "RepairPorts.IsMinimalBlocker": [
       "FiniteGeom.IsTransversal"
@@ -5793,6 +6531,12 @@
       "RepairPorts.pointedFunctionalTupleCost",
       "RepairPorts.pointedFunctionalTupleCost.eq_1"
     ],
+    "RepairPorts.card_harmonicQuarticIndex": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicQuarticIndex",
+      "RepairPorts.instFintypeHarmonicParameter",
+      "RepairPorts.optionEquivHarmonicParameter"
+    ],
     "RepairPorts.card_representedTargets": [
       "RepairPorts.fixedInnerCoordinateEmbedding",
       "RepairPorts.representedTargets"
@@ -5913,6 +6657,17 @@
       "RepairPorts.portReliability",
       "RepairPorts.sixHelperUniverse"
     ],
+    "RepairPorts.dualDist_harmonicQuarticCode": [
+      "FiniteGeom.dualDist",
+      "FiniteGeom.repairHypergraph",
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicQuarticIndex",
+      "RepairPorts.exists_harmonicQuartic_fourHelperRepair",
+      "RepairPorts.harmonicQuarticCode",
+      "RepairPorts.harmonicQuarticCode_dualDist_eq_five_of_repair",
+      "RepairPorts.instDecidableEqHarmonicParameter",
+      "RepairPorts.instFintypeHarmonicParameter"
+    ],
     "RepairPorts.dualDist_le_pointedFunctionalFiberCost_zero": [
       "FiniteGeom.dualCode",
       "FiniteGeom.dualDist",
@@ -6008,6 +6763,24 @@
       "RepairPorts.pointedNonembeddedCost_eq_min_closed_nonzero",
       "RepairPorts.zeroFunctionalPointedClosedCost"
     ],
+    "RepairPorts.existsUnique_harmonicQuarticCompletion": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicParameter.casesOn",
+      "RepairPorts.HarmonicParameter.ctorIdx",
+      "RepairPorts.HarmonicParameter.finite",
+      "RepairPorts.HarmonicParameter.finite.inj",
+      "RepairPorts.HarmonicParameter.infinity",
+      "RepairPorts.IsHarmonicQuarticBlock",
+      "RepairPorts.finiteHarmonicCompletion",
+      "RepairPorts.finiteHarmonicCompletion_ne",
+      "RepairPorts.harmonicE\u2081",
+      "RepairPorts.infinityTripleCompletion_ne",
+      "RepairPorts.isHarmonicQuarticBlock_finite_nonzero_iff",
+      "RepairPorts.isHarmonicQuarticBlock_finite_zero_iff",
+      "RepairPorts.isHarmonicQuarticBlock_infinity_iff",
+      "RepairPorts.isHarmonicQuarticBlock_second_infinity_iff",
+      "RepairPorts.isHarmonicQuarticBlock_third_infinity_iff"
+    ],
     "RepairPorts.exists_functionalFiberCost_realizer": [
       "RepairCodes.blockFunctional",
       "RepairCodes.blockFunctional_surjective",
@@ -6018,6 +6791,23 @@
       "RepairPorts.exists_functionalFiberCost_realizer",
       "RepairPorts.functionalFiberCost",
       "RepairPorts.functionalTupleCost"
+    ],
+    "RepairPorts.exists_harmonicQuartic_fourHelperRepair": [
+      "FiniteGeom.repairHypergraph",
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicParameter.ctorIdx",
+      "RepairPorts.HarmonicParameter.finite",
+      "RepairPorts.HarmonicParameter.finite.injEq",
+      "RepairPorts.HarmonicParameter.infinity",
+      "RepairPorts.HarmonicQuarticIndex",
+      "RepairPorts.IsHarmonicQuarticBlock",
+      "RepairPorts.harmonicE\u2081",
+      "RepairPorts.harmonicQuarticBlockIndex",
+      "RepairPorts.harmonicQuarticBlockIndex.eq_1",
+      "RepairPorts.harmonicQuarticCode",
+      "RepairPorts.infinityHarmonicBlock_repairPort",
+      "RepairPorts.instDecidableEqHarmonicParameter",
+      "RepairPorts.instFintypeHarmonicParameter"
     ],
     "RepairPorts.exists_pointedFunctionalFiberCost_realizer": [
       "RepairPorts.IsPointedFunctionalRepresentative",
@@ -6033,11 +6823,114 @@
       "RepairPorts.pointedFunctionalTupleCost",
       "RepairPorts.pointedFunctionalTupleCost.eq_1"
     ],
+    "RepairPorts.finiteHarmonicBlock_isFiveCircuit": [
+      "RepairPorts.HarmonicParameter.finite",
+      "RepairPorts.IsHarmonicQuarticBlock",
+      "RepairPorts.fourFiniteHarmonicQuarticCurve_linearIndependent",
+      "RepairPorts.harmonicQuarticCurvePoint",
+      "RepairPorts.harmonicQuarticFamily",
+      "RepairPorts.harmonicQuarticFamily_finite_linearIndependent_iff",
+      "RepairPorts.nucleusFiniteTripleFamily",
+      "RepairPorts.nucleusFiniteTriple_linearIndependent"
+    ],
+    "RepairPorts.finiteHarmonicBlock_repairPort": [
+      "FiniteGeom.repairHypergraph",
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicParameter.finite",
+      "RepairPorts.HarmonicParameter.finite.injEq",
+      "RepairPorts.HarmonicQuarticIndex",
+      "RepairPorts.IsHarmonicQuarticBlock",
+      "RepairPorts.finiteHarmonicBlock_isFiveCircuit",
+      "RepairPorts.fiveCircuit_repairPort",
+      "RepairPorts.harmonicQuarticBlockIndex",
+      "RepairPorts.harmonicQuarticBlockIndex.eq_1",
+      "RepairPorts.harmonicQuarticCode",
+      "RepairPorts.harmonicQuarticCurvePoint",
+      "RepairPorts.harmonicQuarticFamily",
+      "RepairPorts.harmonicQuarticGenerator",
+      "RepairPorts.instDecidableEqHarmonicParameter",
+      "RepairPorts.instFintypeHarmonicParameter",
+      "RepairPorts.nucleusFiniteTripleFamily"
+    ],
+    "RepairPorts.finiteHarmonicCompletion": [
+      "RepairPorts.harmonicE\u2081",
+      "RepairPorts.harmonicE\u2082"
+    ],
+    "RepairPorts.finiteHarmonicCompletion.eq_1": [
+      "RepairPorts.finiteHarmonicCompletion",
+      "RepairPorts.harmonicE\u2081",
+      "RepairPorts.harmonicE\u2082"
+    ],
+    "RepairPorts.finiteHarmonicCompletion_ne": [
+      "RepairPorts.finiteHarmonicCompletion",
+      "RepairPorts.harmonicE\u2081",
+      "RepairPorts.harmonicE\u2082Four",
+      "RepairPorts.harmonicE\u2082Four_finiteHarmonicCompletion_eq_zero",
+      "RepairPorts.harmonicE\u2082Four_repeat_first",
+      "RepairPorts.harmonicE\u2082Four_repeat_second",
+      "RepairPorts.harmonicE\u2082Four_repeat_third"
+    ],
+    "RepairPorts.finiteHarmonicQuarticMinor.eq_1": [
+      "RepairPorts.finiteHarmonicQuarticMinor"
+    ],
+    "RepairPorts.finiteHarmonicQuarticMinor_det": [
+      "RepairPorts.finiteHarmonicQuarticMinor",
+      "RepairPorts.harmonicE\u2082Four",
+      "RepairPorts.harmonicVandermondeFour"
+    ],
+    "RepairPorts.finiteHarmonicQuartic_span": [
+      "FiniteGeom.momentCurve_linearIndependent",
+      "RepairPorts.HarmonicParameter.finite",
+      "RepairPorts.harmonicQuarticCurvePoint"
+    ],
+    "RepairPorts.finiteQuarticHyperplane": [
+      "RepairPorts.harmonicE\u2082Four"
+    ],
+    "RepairPorts.finiteQuarticHyperplane.eq_1": [
+      "RepairPorts.finiteQuarticHyperplane",
+      "RepairPorts.harmonicE\u2082Four"
+    ],
+    "RepairPorts.finiteTripleInfinityCurve_linearIndependent": [
+      "RepairPorts.HarmonicParameter.finite",
+      "RepairPorts.HarmonicParameter.infinity",
+      "RepairPorts.finiteTripleInfinityCurve_minor_det",
+      "RepairPorts.harmonicQuarticCurvePoint",
+      "RepairPorts.harmonicVandermondeThree",
+      "RepairPorts.harmonicVandermondeThree_ne_zero",
+      "RepairPorts.linearIndependent_of_coordinateMinor_det_ne_zero"
+    ],
+    "RepairPorts.finiteTripleInfinityCurve_minor_det": [
+      "FiniteGeom.momentCurve",
+      "RepairPorts.HarmonicParameter.finite",
+      "RepairPorts.HarmonicParameter.infinity",
+      "RepairPorts.harmonicQuarticCurvePoint",
+      "RepairPorts.harmonicVandermondeThree"
+    ],
+    "RepairPorts.finrank_harmonicQuarticCode": [
+      "FiniteGeom.columnCode",
+      "FiniteGeom.finrank_columnCode",
+      "RepairPorts.HarmonicQuarticIndex",
+      "RepairPorts.harmonicQuarticCode",
+      "RepairPorts.harmonicQuarticCode_eq_columnCode",
+      "RepairPorts.harmonicQuarticPoints",
+      "RepairPorts.harmonicQuarticPoints_span"
+    ],
+    "RepairPorts.fiveCircuit_repairPort": [
+      "FiniteGeom.mem_repairHypergraph_of_reindexed_circuit",
+      "FiniteGeom.repairHypergraph",
+      "FiniteGeom.rowCode"
+    ],
     "RepairPorts.foldl_cacheEntry_fst": [
       "RepairPorts.FunctionalCostCacheEntry"
     ],
     "RepairPorts.foldl_cacheEntry_snd": [
       "RepairPorts.FunctionalCostCacheEntry"
+    ],
+    "RepairPorts.fourFiniteHarmonicQuarticCurve_linearIndependent": [
+      "FiniteGeom.momentCurve",
+      "FiniteGeom.momentCurve_linearIndependent_of_card_le",
+      "RepairPorts.HarmonicParameter.finite",
+      "RepairPorts.harmonicQuarticCurvePoint"
     ],
     "RepairPorts.functionalCostCache": [
       "RepairPorts.FunctionalCostCacheEntry",
@@ -6147,6 +7040,407 @@
       "RepairPorts.functionalFiberCost_le",
       "RepairPorts.functionalTupleCost"
     ],
+    "RepairPorts.harmonicCurveCoordinateSet": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicQuarticIndex"
+    ],
+    "RepairPorts.harmonicCurveCoordinateSet.eq_1": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicQuarticIndex",
+      "RepairPorts.harmonicCurveCoordinateSet"
+    ],
+    "RepairPorts.harmonicCurveCoordinateSetWithNucleus": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicQuarticIndex",
+      "RepairPorts.harmonicCurveCoordinateSet"
+    ],
+    "RepairPorts.harmonicCurveCoordinateSetWithNucleus.eq_1": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicQuarticIndex",
+      "RepairPorts.harmonicCurveCoordinateSet",
+      "RepairPorts.harmonicCurveCoordinateSetWithNucleus"
+    ],
+    "RepairPorts.harmonicE\u2081.eq_1": [
+      "RepairPorts.harmonicE\u2081"
+    ],
+    "RepairPorts.harmonicE\u2081_eq_zero_iff": [
+      "RepairPorts.harmonicE\u2081"
+    ],
+    "RepairPorts.harmonicE\u2082.eq_1": [
+      "RepairPorts.harmonicE\u2082"
+    ],
+    "RepairPorts.harmonicE\u2082Four.eq_1": [
+      "RepairPorts.harmonicE\u2082Four"
+    ],
+    "RepairPorts.harmonicE\u2082Four_eq_harmonicE\u2082_add_mul": [
+      "RepairPorts.harmonicE\u2081",
+      "RepairPorts.harmonicE\u2082",
+      "RepairPorts.harmonicE\u2082Four"
+    ],
+    "RepairPorts.harmonicE\u2082Four_eq_zero_iff": [
+      "RepairPorts.finiteHarmonicCompletion",
+      "RepairPorts.finiteHarmonicCompletion.eq_1",
+      "RepairPorts.harmonicE\u2081",
+      "RepairPorts.harmonicE\u2082",
+      "RepairPorts.harmonicE\u2082Four",
+      "RepairPorts.harmonicE\u2082Four_eq_harmonicE\u2082_add_mul",
+      "RepairPorts.harmonicE\u2082Four_finiteHarmonicCompletion_eq_zero"
+    ],
+    "RepairPorts.harmonicE\u2082Four_finiteHarmonicCompletion_eq_zero": [
+      "RepairPorts.finiteHarmonicCompletion",
+      "RepairPorts.harmonicE\u2081",
+      "RepairPorts.harmonicE\u2082",
+      "RepairPorts.harmonicE\u2082Four",
+      "RepairPorts.harmonicE\u2082Four_eq_harmonicE\u2082_add_mul"
+    ],
+    "RepairPorts.harmonicE\u2082Four_repeat_first": [
+      "RepairPorts.harmonicE\u2082Four"
+    ],
+    "RepairPorts.harmonicE\u2082Four_repeat_second": [
+      "RepairPorts.harmonicE\u2082Four"
+    ],
+    "RepairPorts.harmonicE\u2082Four_repeat_third": [
+      "RepairPorts.harmonicE\u2082Four"
+    ],
+    "RepairPorts.harmonicE\u2082_ne_zero_of_harmonicE\u2081_eq_zero": [
+      "RepairPorts.harmonicE\u2081",
+      "RepairPorts.harmonicE\u2082"
+    ],
+    "RepairPorts.harmonicH\u2082.eq_1": [
+      "RepairPorts.harmonicH\u2082"
+    ],
+    "RepairPorts.harmonicH\u2082_eq_neg_harmonicE\u2082_of_harmonicE\u2081_eq_zero": [
+      "RepairPorts.harmonicE\u2081",
+      "RepairPorts.harmonicE\u2082",
+      "RepairPorts.harmonicH\u2082"
+    ],
+    "RepairPorts.harmonicPortClosure_of_containsBlock_iff": [
+      "RepairPorts.HarmonicDesignClosure",
+      "RepairPorts.HarmonicDesignClosure.base",
+      "RepairPorts.HarmonicDesignClosure.complete",
+      "RepairPorts.HarmonicDesignClosure.rec",
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicPortClosure",
+      "RepairPorts.HarmonicPortClosure.base",
+      "RepairPorts.HarmonicPortClosure.curve",
+      "RepairPorts.HarmonicPortClosure.nucleus",
+      "RepairPorts.HarmonicPortClosure.rec",
+      "RepairPorts.HarmonicQuarticIndex",
+      "RepairPorts.IsHarmonicQuarticBlock",
+      "RepairPorts.harmonicCurveCoordinateSet",
+      "RepairPorts.harmonicQuarticPoints.match_1"
+    ],
+    "RepairPorts.harmonicPortClosure_of_containsNoBlock_iff": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicPortClosure",
+      "RepairPorts.HarmonicPortClosure.base",
+      "RepairPorts.HarmonicPortClosure.rec",
+      "RepairPorts.HarmonicQuarticIndex",
+      "RepairPorts.IsHarmonicQuarticBlock",
+      "RepairPorts.harmonicCurveCoordinateSet"
+    ],
+    "RepairPorts.harmonicPortClosure_withNucleus_iff": [
+      "RepairPorts.HarmonicDesignClosure",
+      "RepairPorts.HarmonicDesignClosure.base",
+      "RepairPorts.HarmonicDesignClosure.complete",
+      "RepairPorts.HarmonicDesignClosure.rec",
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicPortClosure",
+      "RepairPorts.HarmonicPortClosure.base",
+      "RepairPorts.HarmonicPortClosure.curve",
+      "RepairPorts.HarmonicPortClosure.rec",
+      "RepairPorts.HarmonicQuarticIndex",
+      "RepairPorts.IsHarmonicQuarticBlock",
+      "RepairPorts.harmonicCurveCoordinateSet",
+      "RepairPorts.harmonicCurveCoordinateSetWithNucleus",
+      "RepairPorts.harmonicQuarticPoints.match_1"
+    ],
+    "RepairPorts.harmonicQuarticBlockIndex": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicQuarticIndex"
+    ],
+    "RepairPorts.harmonicQuarticBlockIndex.eq_1": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicQuarticIndex",
+      "RepairPorts.harmonicQuarticBlockIndex"
+    ],
+    "RepairPorts.harmonicQuarticCode": [
+      "FiniteGeom.rowCode",
+      "RepairPorts.HarmonicQuarticIndex",
+      "RepairPorts.harmonicQuarticGenerator"
+    ],
+    "RepairPorts.harmonicQuarticCode_dualDist_eq_five_of_repair": [
+      "FiniteGeom.card_wordSupport",
+      "FiniteGeom.dualCode",
+      "FiniteGeom.dualDist",
+      "FiniteGeom.dualDist_le_hammingNorm",
+      "FiniteGeom.le_dualDist_rowCode_of_column_independent",
+      "FiniteGeom.mem_repairHypergraph",
+      "FiniteGeom.repairHypergraph",
+      "FiniteGeom.wordSupport",
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicQuarticIndex",
+      "RepairPorts.harmonicQuarticCode",
+      "RepairPorts.harmonicQuarticGenerator",
+      "RepairPorts.harmonicQuarticGenerator_smallColumnIndependent",
+      "RepairPorts.instDecidableEqHarmonicParameter",
+      "RepairPorts.instFintypeHarmonicParameter"
+    ],
+    "RepairPorts.harmonicQuarticCode_eq_columnCode": [
+      "FiniteGeom.columnCode",
+      "FiniteGeom.rowCode",
+      "RepairPorts.HarmonicQuarticIndex",
+      "RepairPorts.harmonicQuarticCode",
+      "RepairPorts.harmonicQuarticGenerator",
+      "RepairPorts.harmonicQuarticPoints"
+    ],
+    "RepairPorts.harmonicQuarticCode_parameters_of_global_geometry": [
+      "FiniteGeom.columnCode",
+      "FiniteGeom.columnCode_minDist_eq",
+      "FiniteGeom.dualCode",
+      "FiniteGeom.dualDist",
+      "FiniteGeom.dualDist_le_hammingNorm",
+      "FiniteGeom.le_dualDist_rowCode_of_column_independent",
+      "FiniteGeom.minDist",
+      "FiniteGeom.pointEval",
+      "FiniteGeom.sectionCount",
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicQuarticIndex",
+      "RepairPorts.card_harmonicQuarticIndex",
+      "RepairPorts.finrank_harmonicQuarticCode",
+      "RepairPorts.harmonicQuarticCode",
+      "RepairPorts.harmonicQuarticCode_eq_columnCode",
+      "RepairPorts.harmonicQuarticGenerator",
+      "RepairPorts.harmonicQuarticPoints",
+      "RepairPorts.instFintypeHarmonicParameter"
+    ],
+    "RepairPorts.harmonicQuarticCode_parameters_of_sharp_section": [
+      "FiniteGeom.columnCode",
+      "FiniteGeom.columnCode_minDist_eq",
+      "FiniteGeom.dualDist",
+      "FiniteGeom.minDist",
+      "FiniteGeom.pointEval",
+      "FiniteGeom.sectionCount",
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicQuarticIndex",
+      "RepairPorts.card_harmonicQuarticIndex",
+      "RepairPorts.dualDist_harmonicQuarticCode",
+      "RepairPorts.finrank_harmonicQuarticCode",
+      "RepairPorts.harmonicQuarticCode",
+      "RepairPorts.harmonicQuarticCode_eq_columnCode",
+      "RepairPorts.harmonicQuarticPoints",
+      "RepairPorts.instFintypeHarmonicParameter"
+    ],
+    "RepairPorts.harmonicQuarticCurvePoint": [
+      "FiniteGeom.momentCurve",
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.optionEquivHarmonicParameter.match_3"
+    ],
+    "RepairPorts.harmonicQuarticCurvePoint.eq_1": [
+      "FiniteGeom.momentCurve",
+      "RepairPorts.HarmonicParameter.finite",
+      "RepairPorts.harmonicQuarticCurvePoint"
+    ],
+    "RepairPorts.harmonicQuarticCurvePoint.eq_2": [
+      "RepairPorts.HarmonicParameter.infinity",
+      "RepairPorts.harmonicQuarticCurvePoint"
+    ],
+    "RepairPorts.harmonicQuarticCurvePoint_dot_finiteHyperplane": [
+      "RepairPorts.HarmonicParameter.finite",
+      "RepairPorts.finiteQuarticHyperplane",
+      "RepairPorts.harmonicE\u2082Four",
+      "RepairPorts.harmonicQuarticCurvePoint"
+    ],
+    "RepairPorts.harmonicQuarticCurvePoint_dot_infinityHyperplane": [
+      "RepairPorts.HarmonicParameter.finite",
+      "RepairPorts.harmonicE\u2081",
+      "RepairPorts.harmonicE\u2082",
+      "RepairPorts.harmonicQuarticCurvePoint",
+      "RepairPorts.infinityQuarticHyperplane"
+    ],
+    "RepairPorts.harmonicQuarticCurvePoint_injective": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicParameter.casesOn",
+      "RepairPorts.HarmonicParameter.finite",
+      "RepairPorts.HarmonicParameter.infinity",
+      "RepairPorts.harmonicQuarticCurvePoint"
+    ],
+    "RepairPorts.harmonicQuarticDeterminant": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.harmonicQuarticFamily"
+    ],
+    "RepairPorts.harmonicQuarticDeterminant_finite": [
+      "FiniteGeom.momentCurve",
+      "RepairPorts.HarmonicParameter.finite",
+      "RepairPorts.finiteHarmonicQuarticMinor",
+      "RepairPorts.finiteHarmonicQuarticMinor_det",
+      "RepairPorts.harmonicE\u2082Four",
+      "RepairPorts.harmonicQuarticCurvePoint",
+      "RepairPorts.harmonicQuarticDeterminant",
+      "RepairPorts.harmonicQuarticFamily",
+      "RepairPorts.harmonicQuarticNucleus",
+      "RepairPorts.harmonicVandermondeFour"
+    ],
+    "RepairPorts.harmonicQuarticDeterminant_infinity": [
+      "FiniteGeom.momentCurve",
+      "RepairPorts.HarmonicParameter.finite",
+      "RepairPorts.HarmonicParameter.infinity",
+      "RepairPorts.harmonicE\u2081",
+      "RepairPorts.harmonicQuarticCurvePoint",
+      "RepairPorts.harmonicQuarticDeterminant",
+      "RepairPorts.harmonicQuarticFamily",
+      "RepairPorts.harmonicQuarticNucleus",
+      "RepairPorts.harmonicVandermondeThree",
+      "RepairPorts.infinityHarmonicQuarticMinor",
+      "RepairPorts.infinityHarmonicQuarticMinor_det"
+    ],
+    "RepairPorts.harmonicQuarticFamily": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.harmonicQuarticCurvePoint",
+      "RepairPorts.harmonicQuarticNucleus"
+    ],
+    "RepairPorts.harmonicQuarticFamily_finite_linearIndependent_iff": [
+      "RepairPorts.HarmonicParameter.finite",
+      "RepairPorts.IsHarmonicQuarticBlock",
+      "RepairPorts.harmonicE\u2082Four",
+      "RepairPorts.harmonicQuarticDeterminant",
+      "RepairPorts.harmonicQuarticDeterminant_finite",
+      "RepairPorts.harmonicQuarticFamily",
+      "RepairPorts.harmonicQuarticFamily_linearIndependent_iff",
+      "RepairPorts.harmonicVandermondeFour",
+      "RepairPorts.harmonicVandermondeFour_ne_zero"
+    ],
+    "RepairPorts.harmonicQuarticFamily_infinity_linearIndependent_iff": [
+      "RepairPorts.HarmonicParameter.finite",
+      "RepairPorts.HarmonicParameter.infinity",
+      "RepairPorts.IsHarmonicQuarticBlock",
+      "RepairPorts.harmonicE\u2081",
+      "RepairPorts.harmonicQuarticDeterminant",
+      "RepairPorts.harmonicQuarticDeterminant_infinity",
+      "RepairPorts.harmonicQuarticFamily",
+      "RepairPorts.harmonicQuarticFamily_linearIndependent_iff",
+      "RepairPorts.harmonicVandermondeThree",
+      "RepairPorts.harmonicVandermondeThree_ne_zero"
+    ],
+    "RepairPorts.harmonicQuarticFamily_linearIndependent_iff": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.harmonicQuarticDeterminant",
+      "RepairPorts.harmonicQuarticFamily"
+    ],
+    "RepairPorts.harmonicQuarticFamily_projective_linearIndependent_iff": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicParameter.casesOn",
+      "RepairPorts.HarmonicParameter.finite",
+      "RepairPorts.HarmonicParameter.infinity",
+      "RepairPorts.IsHarmonicQuarticBlock",
+      "RepairPorts.harmonicE\u2081",
+      "RepairPorts.harmonicQuarticFamily",
+      "RepairPorts.harmonicQuarticFamily_finite_linearIndependent_iff",
+      "RepairPorts.harmonicQuarticFamily_infinity_linearIndependent_iff"
+    ],
+    "RepairPorts.harmonicQuarticGenerator": [
+      "RepairPorts.HarmonicQuarticIndex",
+      "RepairPorts.harmonicQuarticPoints"
+    ],
+    "RepairPorts.harmonicQuarticGenerator_smallColumnIndependent": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicQuarticIndex",
+      "RepairPorts.card_harmonicQuarticIndex",
+      "RepairPorts.harmonicQuarticGenerator",
+      "RepairPorts.harmonicQuarticPoints",
+      "RepairPorts.harmonicQuartic_selected_linearIndependent_of_card_le_four",
+      "RepairPorts.instFintypeHarmonicParameter"
+    ],
+    "RepairPorts.harmonicQuarticInfinity_dot_infinityHyperplane": [
+      "RepairPorts.HarmonicParameter.infinity",
+      "RepairPorts.harmonicE\u2081",
+      "RepairPorts.harmonicE\u2082",
+      "RepairPorts.harmonicQuarticCurvePoint",
+      "RepairPorts.infinityQuarticHyperplane"
+    ],
+    "RepairPorts.harmonicQuarticNucleus.eq_1": [
+      "RepairPorts.harmonicQuarticNucleus"
+    ],
+    "RepairPorts.harmonicQuarticNucleus_dot_finiteHyperplane": [
+      "RepairPorts.finiteQuarticHyperplane",
+      "RepairPorts.harmonicE\u2082Four",
+      "RepairPorts.harmonicQuarticNucleus"
+    ],
+    "RepairPorts.harmonicQuarticNucleus_dot_infinityHyperplane": [
+      "RepairPorts.harmonicE\u2081",
+      "RepairPorts.harmonicE\u2082",
+      "RepairPorts.harmonicQuarticNucleus",
+      "RepairPorts.infinityQuarticHyperplane"
+    ],
+    "RepairPorts.harmonicQuarticPoints": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicQuarticIndex",
+      "RepairPorts.harmonicQuarticCurvePoint",
+      "RepairPorts.harmonicQuarticNucleus",
+      "RepairPorts.harmonicQuarticPoints.match_1"
+    ],
+    "RepairPorts.harmonicQuarticPoints.eq_1": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.harmonicQuarticCurvePoint",
+      "RepairPorts.harmonicQuarticPoints"
+    ],
+    "RepairPorts.harmonicQuarticPoints.eq_2": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.harmonicQuarticNucleus",
+      "RepairPorts.harmonicQuarticPoints"
+    ],
+    "RepairPorts.harmonicQuarticPoints.match_1": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicQuarticIndex"
+    ],
+    "RepairPorts.harmonicQuarticPoints_injective": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicParameter.casesOn",
+      "RepairPorts.HarmonicParameter.finite",
+      "RepairPorts.HarmonicParameter.infinity",
+      "RepairPorts.HarmonicQuarticIndex",
+      "RepairPorts.harmonicQuarticCurvePoint_injective",
+      "RepairPorts.harmonicQuarticPoints"
+    ],
+    "RepairPorts.harmonicQuarticPoints_span": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicParameter.finite",
+      "RepairPorts.HarmonicQuarticIndex",
+      "RepairPorts.finiteHarmonicQuartic_span",
+      "RepairPorts.harmonicQuarticCurvePoint",
+      "RepairPorts.harmonicQuarticPoints"
+    ],
+    "RepairPorts.harmonicQuartic_fourSet_linearIndependent": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicParameter.infinity",
+      "RepairPorts.HarmonicQuarticIndex",
+      "RepairPorts.harmonicQuarticCurvePoint",
+      "RepairPorts.harmonicQuarticNucleus",
+      "RepairPorts.harmonicQuarticPoints",
+      "RepairPorts.harmonicQuarticPoints.match_1",
+      "RepairPorts.instDecidableEqHarmonicParameter",
+      "RepairPorts.nucleusProjectiveTriple_linearIndependent",
+      "RepairPorts.projectiveQuarticFour_linearIndependent"
+    ],
+    "RepairPorts.harmonicQuartic_selected_linearIndependent_of_card_le_four": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicQuarticIndex",
+      "RepairPorts.harmonicQuarticPoints",
+      "RepairPorts.harmonicQuartic_fourSet_linearIndependent",
+      "RepairPorts.instFintypeHarmonicParameter"
+    ],
+    "RepairPorts.harmonicVandermondeFour.eq_1": [
+      "RepairPorts.harmonicVandermondeFour"
+    ],
+    "RepairPorts.harmonicVandermondeFour_ne_zero": [
+      "RepairPorts.harmonicVandermondeFour"
+    ],
+    "RepairPorts.harmonicVandermondeThree.eq_1": [
+      "RepairPorts.harmonicVandermondeThree"
+    ],
+    "RepairPorts.harmonicVandermondeThree_ne_zero": [
+      "RepairPorts.harmonicVandermondeThree"
+    ],
     "RepairPorts.hasDerivAt_homogeneous_portReliability": [
       "RepairPorts.discreteDerivative",
       "RepairPorts.discreteDerivative_portSuccessIndicator",
@@ -6200,6 +7494,137 @@
       "RepairPorts.exists_functionalTupleCost_realizer",
       "RepairPorts.functionalTupleCost",
       "RepairPorts.functionalTupleCost_le"
+    ],
+    "RepairPorts.infinityHarmonicBlock_isFiveCircuit": [
+      "RepairPorts.HarmonicParameter.finite",
+      "RepairPorts.HarmonicParameter.infinity",
+      "RepairPorts.IsHarmonicQuarticBlock",
+      "RepairPorts.finiteTripleInfinityCurve_linearIndependent",
+      "RepairPorts.harmonicQuarticCurvePoint",
+      "RepairPorts.harmonicQuarticFamily",
+      "RepairPorts.harmonicQuarticFamily_infinity_linearIndependent_iff",
+      "RepairPorts.nucleusFiniteInfinityFamily",
+      "RepairPorts.nucleusFiniteInfinity_linearIndependent",
+      "RepairPorts.nucleusFiniteTripleFamily",
+      "RepairPorts.nucleusFiniteTriple_linearIndependent"
+    ],
+    "RepairPorts.infinityHarmonicBlock_repairPort": [
+      "FiniteGeom.repairHypergraph",
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicParameter.ctorIdx",
+      "RepairPorts.HarmonicParameter.finite",
+      "RepairPorts.HarmonicParameter.finite.injEq",
+      "RepairPorts.HarmonicParameter.infinity",
+      "RepairPorts.HarmonicQuarticIndex",
+      "RepairPorts.IsHarmonicQuarticBlock",
+      "RepairPorts.fiveCircuit_repairPort",
+      "RepairPorts.harmonicQuarticBlockIndex",
+      "RepairPorts.harmonicQuarticBlockIndex.eq_1",
+      "RepairPorts.harmonicQuarticCode",
+      "RepairPorts.harmonicQuarticCurvePoint",
+      "RepairPorts.harmonicQuarticFamily",
+      "RepairPorts.harmonicQuarticGenerator",
+      "RepairPorts.infinityHarmonicBlock_isFiveCircuit",
+      "RepairPorts.instDecidableEqHarmonicParameter",
+      "RepairPorts.instFintypeHarmonicParameter",
+      "RepairPorts.nucleusFiniteInfinityFamily",
+      "RepairPorts.nucleusFiniteTripleFamily"
+    ],
+    "RepairPorts.infinityHarmonicQuarticMinor.eq_1": [
+      "RepairPorts.infinityHarmonicQuarticMinor"
+    ],
+    "RepairPorts.infinityHarmonicQuarticMinor_det": [
+      "RepairPorts.harmonicE\u2081",
+      "RepairPorts.harmonicVandermondeThree",
+      "RepairPorts.infinityHarmonicQuarticMinor"
+    ],
+    "RepairPorts.infinityQuarticHyperplane": [
+      "RepairPorts.harmonicE\u2081",
+      "RepairPorts.harmonicE\u2082"
+    ],
+    "RepairPorts.infinityQuarticHyperplane.eq_1": [
+      "RepairPorts.harmonicE\u2081",
+      "RepairPorts.harmonicE\u2082",
+      "RepairPorts.infinityQuarticHyperplane"
+    ],
+    "RepairPorts.instDecidableEqHarmonicParameter": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.instDecidableEqHarmonicParameter.decEq"
+    ],
+    "RepairPorts.instDecidableEqHarmonicParameter.decEq": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicParameter.finite",
+      "RepairPorts.HarmonicParameter.infinity",
+      "RepairPorts.instDecidableEqHarmonicParameter.decEq.match_1"
+    ],
+    "RepairPorts.instDecidableEqHarmonicParameter.decEq.match_1": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicParameter.casesOn",
+      "RepairPorts.HarmonicParameter.finite",
+      "RepairPorts.HarmonicParameter.infinity"
+    ],
+    "RepairPorts.instFintypeHarmonicParameter": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.optionEquivHarmonicParameter"
+    ],
+    "RepairPorts.isHarmonicQuarticBlock_finite_nonzero_iff": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicParameter.casesOn",
+      "RepairPorts.HarmonicParameter.ctorIdx",
+      "RepairPorts.HarmonicParameter.finite",
+      "RepairPorts.HarmonicParameter.finite.injEq",
+      "RepairPorts.HarmonicParameter.infinity",
+      "RepairPorts.IsHarmonicQuarticBlock",
+      "RepairPorts.finiteHarmonicCompletion",
+      "RepairPorts.harmonicE\u2081",
+      "RepairPorts.harmonicE\u2082Four",
+      "RepairPorts.harmonicE\u2082Four_eq_zero_iff"
+    ],
+    "RepairPorts.isHarmonicQuarticBlock_finite_zero_iff": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicParameter.casesOn",
+      "RepairPorts.HarmonicParameter.ctorIdx",
+      "RepairPorts.HarmonicParameter.finite",
+      "RepairPorts.HarmonicParameter.infinity",
+      "RepairPorts.IsHarmonicQuarticBlock",
+      "RepairPorts.harmonicE\u2081",
+      "RepairPorts.harmonicE\u2082",
+      "RepairPorts.harmonicE\u2082Four",
+      "RepairPorts.harmonicE\u2082Four_eq_harmonicE\u2082_add_mul",
+      "RepairPorts.harmonicE\u2082_ne_zero_of_harmonicE\u2081_eq_zero"
+    ],
+    "RepairPorts.isHarmonicQuarticBlock_infinity_iff": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicParameter.casesOn",
+      "RepairPorts.HarmonicParameter.ctorIdx",
+      "RepairPorts.HarmonicParameter.finite",
+      "RepairPorts.HarmonicParameter.finite.injEq",
+      "RepairPorts.HarmonicParameter.infinity",
+      "RepairPorts.IsHarmonicQuarticBlock",
+      "RepairPorts.harmonicE\u2081",
+      "RepairPorts.harmonicE\u2081_eq_zero_iff"
+    ],
+    "RepairPorts.isHarmonicQuarticBlock_second_infinity_iff": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicParameter.casesOn",
+      "RepairPorts.HarmonicParameter.ctorIdx",
+      "RepairPorts.HarmonicParameter.finite",
+      "RepairPorts.HarmonicParameter.finite.injEq",
+      "RepairPorts.HarmonicParameter.infinity",
+      "RepairPorts.IsHarmonicQuarticBlock",
+      "RepairPorts.harmonicE\u2081",
+      "RepairPorts.harmonicE\u2081_eq_zero_iff"
+    ],
+    "RepairPorts.isHarmonicQuarticBlock_third_infinity_iff": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicParameter.casesOn",
+      "RepairPorts.HarmonicParameter.ctorIdx",
+      "RepairPorts.HarmonicParameter.finite",
+      "RepairPorts.HarmonicParameter.finite.injEq",
+      "RepairPorts.HarmonicParameter.infinity",
+      "RepairPorts.IsHarmonicQuarticBlock",
+      "RepairPorts.harmonicE\u2081",
+      "RepairPorts.harmonicE\u2081_eq_zero_iff"
     ],
     "RepairPorts.isMinimalBlocker_of_minimum_card": [
       "FiniteGeom.IsTransversal",
@@ -6305,6 +7730,91 @@
       "RepairCodes.IsEmbeddedInnerDualBlockAt",
       "RepairCodes.blockFunctional",
       "RepairCodes.blockFunctional_eq_zero_iff"
+    ],
+    "RepairPorts.nucleusFiniteInfinityFamily": [
+      "RepairPorts.HarmonicParameter.finite",
+      "RepairPorts.HarmonicParameter.infinity",
+      "RepairPorts.harmonicQuarticCurvePoint",
+      "RepairPorts.harmonicQuarticNucleus"
+    ],
+    "RepairPorts.nucleusFiniteInfinityFamily.eq_1": [
+      "RepairPorts.HarmonicParameter.finite",
+      "RepairPorts.HarmonicParameter.infinity",
+      "RepairPorts.harmonicQuarticCurvePoint",
+      "RepairPorts.harmonicQuarticNucleus",
+      "RepairPorts.nucleusFiniteInfinityFamily"
+    ],
+    "RepairPorts.nucleusFiniteInfinity_linearIndependent": [
+      "RepairPorts.linearIndependent_of_coordinateMinor_det_ne_zero",
+      "RepairPorts.nucleusFiniteInfinityFamily",
+      "RepairPorts.nucleusFiniteInfinity_minor_det"
+    ],
+    "RepairPorts.nucleusFiniteInfinity_minor_det": [
+      "FiniteGeom.momentCurve",
+      "RepairPorts.harmonicQuarticNucleus",
+      "RepairPorts.nucleusFiniteInfinityFamily"
+    ],
+    "RepairPorts.nucleusFiniteTripleFamily": [
+      "RepairPorts.HarmonicParameter.finite",
+      "RepairPorts.harmonicQuarticCurvePoint",
+      "RepairPorts.harmonicQuarticNucleus"
+    ],
+    "RepairPorts.nucleusFiniteTripleFamily.eq_1": [
+      "RepairPorts.HarmonicParameter.finite",
+      "RepairPorts.harmonicQuarticCurvePoint",
+      "RepairPorts.harmonicQuarticNucleus",
+      "RepairPorts.nucleusFiniteTripleFamily"
+    ],
+    "RepairPorts.nucleusFiniteTriple_linearIndependent": [
+      "RepairPorts.harmonicE\u2081",
+      "RepairPorts.harmonicE\u2082",
+      "RepairPorts.harmonicE\u2082_ne_zero_of_harmonicE\u2081_eq_zero",
+      "RepairPorts.harmonicH\u2082",
+      "RepairPorts.harmonicH\u2082_eq_neg_harmonicE\u2082_of_harmonicE\u2081_eq_zero",
+      "RepairPorts.harmonicVandermondeThree",
+      "RepairPorts.harmonicVandermondeThree_ne_zero",
+      "RepairPorts.linearIndependent_of_coordinateMinor_det_ne_zero",
+      "RepairPorts.nucleusFiniteTripleFamily",
+      "RepairPorts.nucleusFiniteTriple_minor\u2080\u2081\u2082\u2083_det",
+      "RepairPorts.nucleusFiniteTriple_minor\u2080\u2081\u2082\u2084_det"
+    ],
+    "RepairPorts.nucleusFiniteTriple_minor\u2080\u2081\u2082\u2083_det": [
+      "FiniteGeom.momentCurve",
+      "RepairPorts.harmonicE\u2081",
+      "RepairPorts.harmonicQuarticNucleus",
+      "RepairPorts.harmonicVandermondeThree",
+      "RepairPorts.nucleusFiniteTripleFamily"
+    ],
+    "RepairPorts.nucleusFiniteTriple_minor\u2080\u2081\u2082\u2084_det": [
+      "FiniteGeom.momentCurve",
+      "RepairPorts.harmonicH\u2082",
+      "RepairPorts.harmonicQuarticNucleus",
+      "RepairPorts.harmonicVandermondeThree",
+      "RepairPorts.nucleusFiniteTripleFamily"
+    ],
+    "RepairPorts.nucleusProjectiveTriple_linearIndependent": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicParameter.casesOn",
+      "RepairPorts.HarmonicParameter.finite",
+      "RepairPorts.HarmonicParameter.infinity",
+      "RepairPorts.harmonicQuarticCurvePoint",
+      "RepairPorts.harmonicQuarticNucleus",
+      "RepairPorts.nucleusFiniteInfinityFamily",
+      "RepairPorts.nucleusFiniteInfinity_linearIndependent",
+      "RepairPorts.nucleusFiniteTriple_linearIndependent"
+    ],
+    "RepairPorts.optionEquivHarmonicParameter": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicParameter.finite",
+      "RepairPorts.HarmonicParameter.infinity",
+      "RepairPorts.optionEquivHarmonicParameter.match_1",
+      "RepairPorts.optionEquivHarmonicParameter.match_3"
+    ],
+    "RepairPorts.optionEquivHarmonicParameter.match_3": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicParameter.casesOn",
+      "RepairPorts.HarmonicParameter.finite",
+      "RepairPorts.HarmonicParameter.infinity"
     ],
     "RepairPorts.ordinaryFunctionalCostContribution": [
       "RepairCodes.blockFunctional",
@@ -6677,6 +8187,37 @@
       "RepairPorts.coefficientPort_concatenatedCode_eq_image_pointed",
       "RepairPorts.pointedConfinement_iff_zeroCost_of_outerDualDistance",
       "RepairPorts.pointedZeroFunctionalCost"
+    ],
+    "RepairPorts.projectiveQuarticFive_linearIndependent": [
+      "FiniteGeom.momentCurve",
+      "FiniteGeom.momentCurve_linearIndependent",
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicParameter.casesOn",
+      "RepairPorts.HarmonicParameter.finite",
+      "RepairPorts.HarmonicParameter.infinity",
+      "RepairPorts.harmonicQuarticCurvePoint",
+      "RepairPorts.instDecidableEqHarmonicParameter",
+      "RepairPorts.optionEquivHarmonicParameter.match_3",
+      "RepairPorts.projectiveQuarticFive_linearIndependent_of_lastInfinity"
+    ],
+    "RepairPorts.projectiveQuarticFive_linearIndependent_of_lastInfinity": [
+      "FiniteGeom.momentCurve",
+      "FiniteGeom.momentCurve_linearIndependent",
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicParameter.casesOn",
+      "RepairPorts.HarmonicParameter.finite",
+      "RepairPorts.HarmonicParameter.infinity",
+      "RepairPorts.harmonicQuarticCurvePoint",
+      "RepairPorts.optionEquivHarmonicParameter.match_3"
+    ],
+    "RepairPorts.projectiveQuarticFour_linearIndependent": [
+      "RepairPorts.HarmonicParameter",
+      "RepairPorts.HarmonicParameter.casesOn",
+      "RepairPorts.HarmonicParameter.finite",
+      "RepairPorts.HarmonicParameter.infinity",
+      "RepairPorts.finiteTripleInfinityCurve_linearIndependent",
+      "RepairPorts.fourFiniteHarmonicQuarticCurve_linearIndependent",
+      "RepairPorts.harmonicQuarticCurvePoint"
     ],
     "RepairPorts.reconstructedCode_eq": [
       "FiniteGeom.dualCode",
