@@ -55,7 +55,9 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   chordal fibre is displayed as a Hankel catalecticant.  The independent
   repair audit returns Accept at confidence 0.94 with no fatal or major
   defect; its final minor wording and optional certificate points are closed.
-  Integrated `make check` passes.  A post-close EJ pass further proves
+  A final style-guide pass gives a 142-source-word abstract and exposes the
+  three-step proof mechanism immediately after the main theorem.  Integrated
+  `make check` passes.  A post-close EJ pass further proves
   that golden orientation turns the rational triple into the cyclic cubic
   splitting cover and gives
   \(t=3(\eta(3\tau)/\eta(\tau))^6\).  Exact algebra and an independent subgroup

@@ -9,7 +9,10 @@
 and twist bridges, candidate-packet/actual-kernel distinction, chordal
 catalecticant identification, and boundary equivariance argument are now
 proved; the integrated `make check` gate passes.  The audit's one minor wording
-item and optional full-support certificate assertion are also closed.  Referee report
+item and optional full-support certificate assertion are also closed.  The
+final style-guide pass compresses the abstract to 142 source words, adds one
+proof-mechanism paragraph after the main theorem, and makes the higher-prime
+aside skippable without changing a claim.  Referee report
 `../2026-08-21-c936-van-geemen-cold-referee.md`; project report
 `../2026-08-21-c936-modular-resolvent-companion.md`; strategy memo
 `../2026-08-21-c936-resolvent-rigidity-package-memo.md`.

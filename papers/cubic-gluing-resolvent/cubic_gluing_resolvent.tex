@@ -39,31 +39,18 @@
 
 \begin{abstract}
 The nonstandard \(A_5\)-invariant pencil of cubic threefolds carries a
-five-sheet packet of possible principal gluing kernels: three rational and
-two golden.  We prove that this is not an accidental \(3+2\) count.  The two
-pieces of the packet are the proper
-transitive resolvents of the \(S_3\)-torsor of ordered nonzero two-torsion on
-the relative elliptic norm axis.  The rational triple is the root cover and
-the golden pair has the sign character, hence is the discriminant double
-cover of the same two-division cubic.
-
-Writing \(t\) for the signed cubic parameter and \(T=81t^2\), the unmarked
-elliptic period is the standard \(X_0(3)\)-coordinate
-\[
- j=\frac{(T+27)(T+3)^3}{T}.
-\]
-The signed cubic line is the sign modular curve \(r^2=T\), with \(r=9t\)
-after choosing its deck convention.  The degree-three resolvent is
-\(X_0(6)\), and their common degree-six Galois closure belongs to
-\(\Gamma_0(3)\cap\Gamma(2)\).  We give rational equations for all three
-covers and distinguish the two modular cusps from the additional interior
-boundary points where the cubic degenerates.  In particular the modular
-identification concerns the actual relative principal-kernel packet, not
-only an auxiliary elliptic curve with the same \(j\)-invariant.  Over the
-signed line, the resulting cyclic cubic cover is totally ramified exactly at
-the two fibres with five \(A_2\)-points.  At the chordal value \(h=5\), the
-hyperelliptic limit has Jacobian isogenous to the fifth power of the elliptic
-curve selected by the same norm-axis coordinate.
+five-sheet packet of stable principal gluing kernels: three rational and
+two golden.  We identify it with the two proper quotients of the ordered
+\(E[2]\)-torsor on the actual elliptic norm axis: the rational triple is the
+root cover, and the golden pair is its sign, or discriminant, cover.  For the
+signed cubic parameter \(t\), put \(T=81t^2\).  The norm-axis period is
+\(j=(T+27)(T+3)^3/T\); the root and sign resolvents are \(X_0(6)\) and
+\(r^2=T\), and their common Galois closure belongs to
+\(\Gamma_0(3)\cap\Gamma(2)\).  Pullback to the signed cubic line splits the
+sign cover and turns the root cover into a cyclic \(A_3\)-splitting cover,
+ramified exactly over the fibres with five \(A_2\)-points.  We separate the
+modular cusps from the other cubic degenerations and identify the chordal
+hyperelliptic limit with an elliptic fifth power at the same modular value.
 \end{abstract}
 
 \noindent\textbf{Keywords.} cubic threefold; intermediate Jacobian;
@@ -159,6 +146,15 @@ The theorem identifies local systems and their monodromy.  It does not say
 that a fivefold gluing is literally an elliptic \(2\)-isogeny, nor that the
 compactified cubic pencil is the modular stack.
 
+The proof has three steps.  First, a five-point calculation identifies the
+golden pair with the sign of the rational triple.  The geometric step then
+matches the explicit Prym elliptic curve with the actual polarized norm axis;
+this is where the Fourier coordinate and the degree-one polarization
+comparison enter.  Finally, reduction of \(\Gamma_0(3)\) modulo two produces
+the root, sign, and splitting covers, while their inertia separates modular
+cusps from the remaining cubic boundary.  At the chordal value, the Fourier
+equation becomes a Hankel catalecticant and supplies the limiting curve.
+
 \section{The finite \texorpdfstring{\(3+2\)}{3+2} resolvent}
 
 Let \(V\) be a two-dimensional \(\F_2\)-vector space and
@@ -204,7 +200,8 @@ the two covers has two choices, interchanged by the deck involution.  This
 minor distinction is what makes the normalization \(r=9t\), rather than
 \(r=-9t\), a convention.
 
-There is a useful higher-prime form of this finite geometry.  If \(V\) has
+\begin{remark}[Higher-prime form]
+If \(V\) has
 dimension two over \(\F_\ell\), then, as \(\operatorname{PGL}(V)\)-sets,
 \[
  \PP^1(\F_{\ell^2})
@@ -223,6 +220,7 @@ compare the modular interpretation in
 \(\operatorname{PGL}_2(\F_2)\), while
 \(C_{\rm ns}=A_3\).  Thus only at two does the entire nonsplit-Cartan orbit
 reduce to a double cover, namely the sign torsor above.
+\end{remark}
 
 Now let an elliptic curve be given locally, with \(2\) invertible, by
 \[
@@ -248,8 +246,12 @@ reduces the mod-two image from \(S_3\) to
 
 \section{The cubic parameter and the actual norm axis}
 
-The period calculation starts with the Prym quotient used by van Geemen and
-Yamauchi.  In their coordinate \(u\), two auxiliary parameters in the
+Two comparisons are needed here.  The first matches the cubic parameter with
+the explicit Prym chart; the second proves that this Prym is the actual
+polarized norm axis, not merely an elliptic curve in the same isogeny class.
+
+The period calculation starts with the quotient used by van Geemen and
+Yamauchi.  In their coordinate \(u\), two parameters in the
 Weierstrass model of its elliptic factor are
 \[
  a(u)=-\frac{32(u-3)^4}{9(u+1)^3(u+3)^2},\qquad
@@ -410,6 +412,9 @@ Jacobians in a one-dimensional special subvariety
 identifies the relative two-division packet used here.
 
 \section{The modular \texorpdfstring{\(S_3\)}{S3}-diagram}
+
+With the actual-axis comparison in place, the three modular covers are the
+standard quotient covers of one mod-two torsor.
 
 Reduction modulo two gives
 \[
@@ -764,19 +769,19 @@ identification of every cubic degeneration with a cusp.
 
 \section{Conclusion and scope}
 
-The object behind the five principal kernels is the \(S_3\)-torsor of ordered
-nonzero two-torsion on the actual relative norm axis.  Its two proper
-transitive quotient sets are
+The five-sheet packet is governed by one object: the \(S_3\)-torsor of
+ordered nonzero two-torsion on the relative norm axis.  Its two proper
+quotients are
 \[
  S_3/C_2\quad(3\text{ sheets}),
  \qquad
  S_3/A_3\quad(2\text{ sheets}).
 \]
-Thus the golden pair contains no independent monodromy datum: it is the
-discriminant orientation of the rational root triple.  The familiar
-decomposition
+The golden pair is therefore the discriminant orientation of the rational
+root triple, not an independent monodromy datum.  The familiar decomposition
 \(\PP^1(\F_4)=\PP^1(\F_2)\sqcup\{\omega,\omega^2\}\) is the fibrewise
-form of this global resolvent theorem.
+form of this resolvent theorem; the cubic geometry chooses one golden sheet
+and thereby turns the rational triple into a cyclic splitting cover.
 
 The modular identification here is deliberately limited.  It neither turns
 the five principal kernels into ordinary elliptic isogenies nor promotes the
@@ -786,8 +791,9 @@ Proposition~\ref{prop:chordal-factor} identifies the hyperelliptic limit.
 The related level-three period map for the Winger pencil
 \cite[Theorem~1.1 and Proposition~5.1]{LZ} concerns a distinct family and is
 not used here.  The result instead combines the explicit cubic period
-coordinate, the polarized actual-axis comparison, and the principal-kernel
-local system.
+coordinate with the polarized actual-axis comparison.  What globalizes is
+exactly the root--discriminant relation for the actual principal-kernel local
+system.
 
 \paragraph{Reproducibility.}
 The directory \texttt{verification/} contains deterministic exact

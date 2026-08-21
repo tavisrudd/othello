@@ -538,6 +538,18 @@ claim rests only on the symbolic execution.
 The resumed cold repair audit returns **Accept** at confidence `0.94`, with
 every fatal, major, and numbered minor finding closed.  Its remaining abstract
 wording suggestion and optional full-support assertion were then implemented:
-the abstract now says “five-sheet packet of possible principal gluing
+the abstract now says “five-sheet packet of stable principal gluing
 kernels,” and the Fourier checker proves that no cubic monomial outside the
 seven displayed invariant monomials occurs.
+
+## Final exposition pass
+
+The style-guide pass reduces the abstract to one 142-source-word paragraph.
+It retains only the packet theorem, the modular realization, the cyclic
+oriented pullback, and the boundary consequence.  A compact strategy paragraph
+after the main theorem now marks the finite-set, actual-axis, modular-inertia,
+and chordal stages; the higher-prime extension is a named skippable remark;
+Sections 3 and 4 state their language changes before beginning the formulas;
+and the conclusion ends on the root--discriminant relation rather than a list
+of ingredients.  No theorem, hypothesis, equation, citation, or evidence
+boundary changed.
