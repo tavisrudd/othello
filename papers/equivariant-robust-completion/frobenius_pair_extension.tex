@@ -39,31 +39,28 @@ eight-arcs}
 \maketitle
 
 \begin{abstract}
-Let $\phi$ be the quadratic Frobenius involution of $\PG(2,s^2)$.  We give
-an exact carrierwise count for fresh conjugate pairs
-$\{P,\phi(P)\}$ that extend a $\phi$-invariant arc.  The count combines the
-exact number of empty Baer lines with a charge from noninvariant secant
-orbits.  An exact correction separates secant orbits whose fixed centers
-make them invisible on a carrier from genuine collisions between visible
-charges, and it classifies equality and every first-order excess level.
+Let $\phi$ be the quadratic Frobenius involution of $\PG(2,s^2)$.  A
+nonfixed conjugate pair lies on a unique fixed mate line.  Organizing pairs
+by these carriers gives an explicit lower bound for the number that extend a
+$\phi$-invariant arc.  We refine it by an exact correction: a noninvariant
+secant orbit either disappears at its fixed center or charges a candidate,
+and coincident charges contribute a precisely measured redundancy.
 
-We then prove that every $\phi$-invariant eight-arc in $\PG(2,25)$ admits at
-least four distinct fresh conjugate-pair extensions.  In the exceptional
-two-fixed-point profile the exact minimum is $32$.  The equality cases form,
-after normalization, five residual-group orbits of sizes
-$200,400,400,200,400$; outside their union the count is at least $33$.
-The semantic lower bound, attainment, and equality-orbit exhaustion are
-checked by the Lean kernel.  Consequently, deleting any selected nonfixed
-conjugate orbit from an invariant ten-arc in $\PG(2,25)$ leaves at least
-three different orbits that repair the arc.  Together with the general
-count, the extension result covers every prime-power base-field order
-$s\ge5$.  For every $s\ge7$, an exact five-profile
-lower-envelope calculation gives at least $319$ legal conjugate pairs for
-every invariant eight-arc and hence at least $318$ alternate repairs after
-arbitrary nonfixed-orbit deletion.  More generally, deleting a selected
-orbit from an invariant $(k+2)$-arc leaves at least $r$ alternate repairs
-whenever
-$\lfloor(k-1)^2/4\rfloor+r+1\le s(s-1)/2$.
+This mechanism proves that every invariant eight-arc over every prime-power
+base order $s\ge5$ has a fresh conjugate-pair extension.  Over $\F_{25}$
+there are at least four such pairs.  In the exceptional two-fixed-point
+profile the exact minimum is $32$; after normalization its equality cases
+form five residual-group orbits of sizes $200,400,400,200,400$, and every
+normalized configuration outside their union has at least $33$ pairs.  Thus deletion
+of any selected nonfixed orbit from an invariant ten-arc over $\F_{25}$
+leaves at least three alternate repairs.  For $s\ge7$ the corresponding
+bounds are $319$ legal pairs and $318$ alternate repairs.  More generally,
+an invariant $(k+2)$-arc has at least $r$ alternate repairs after such a
+deletion whenever
+$\lfloor(k-1)^2/4\rfloor+r+1\le s(s-1)/2$.  The structural reductions and
+the exceptional minimum and equality classification have kernel-checked
+Lean support; the latter uses exhaustive finite certificates after two
+projective normalizations.
 \end{abstract}
 
 \section{Introduction}
@@ -84,37 +81,59 @@ subplane $\PG(2,F)$.  This paper studies the following question: when must a
 $\phi$-invariant arc admit an extension by a fresh pair
 $\{P,\phi(P)\}$?
 
-The classical ingredients are elementary: point and line counts in a
-projective plane, the fixed Baer subplane, Hilbert--90 normalization, and
-secant counting; see Hirschfeld~\cite{Hirschfeld1998} and
-Martin~\cite{Martin1967}.  The contribution here is their exact assembly
-into an orbit-valued extension count.  The main results are:
+Under the arc--code correspondence, a $k$-arc gives the projective columns
+of a $[k,3,k-2]_{s^2}$ MDS code.  Adjoining $\{P,\phi(P)\}$ is therefore a
+Frobenius-compatible two-column MDS extension, and alternate-orbit repair is
+replacement of an erased conjugate column pair.  Here ``repair'' changes the
+generator-column configuration; it is not erasure decoding inside a fixed
+code.
 
+The proof has one organizing mechanism.  A nonfixed pair lies on a unique
+fixed mate line, and a legal pair must lie on a fixed line disjoint from the
+old arc.  Each noninvariant old-secant orbit forbids at most one candidate on
+such a carrier.  Counting empty carriers gives the uniform criterion.  The
+exact correction then records the two ways in which the first-order count
+overestimates the obstruction: the secant orbit can be invisible because
+its fixed center lies on the carrier, or several visible orbits can charge
+the same pair.  For $s\ge7$ this gives the robust bounds below.  At $s=5$
+one profile lies beyond the first-order range; two projective normalizations
+reduce it to a finite residual problem.
+
+\begin{theorem}[Robust extension of invariant eight-arcs]
+\label{thm:main}
+Let $s\ge5$ be a prime power.  Every $\phi$-invariant eight-arc in
+$\PG(2,s^2)$ admits a fresh nonfixed conjugate-pair extension.  More
+precisely:
 \begin{enumerate}[label=(\roman*),leftmargin=2.1em]
-\item an explicit lower bound for the number of legal conjugate-pair
-      extensions of an arbitrary invariant arc;
-\item an exact linewise correction that separates invisible secant centers
-      from charge collisions, together with equality and excess criteria;
-\item a uniform theorem that every invariant eight-arc in $\PG(2,25)$ has
-      at least four distinct fresh conjugate-pair extensions, together with
-      the exact minimum $32$ and five-orbit equality classification in the
-      exceptional two-fixed-point profile; this yields robust repair after
-      arbitrary nonfixed-orbit deletion and, with the general estimate,
-      covers every prime-power base order $s\ge5$;
-\item an exact five-profile first-order lower envelope for invariant
-      eight-arcs over every $s\ge7$, yielding at least $318$ alternate repairs
-      after arbitrary nonfixed-orbit deletion;
-\item a parameterized robust exchange theorem for invariant $(k+2)$-arcs,
-      with the exact uniform profile obstruction
-      $\lfloor(k-1)^2/4\rfloor$; and
-\item a square-root lower bound for arcs that are saturated with respect to
-      conjugate-pair insertion.
+\item over $\F_{25}$ there are at least four such pairs, so deleting any
+      selected nonfixed orbit from an invariant ten-arc leaves at least
+      three alternate repairs;
+\item among invariant eight-arcs in $\PG(2,25)$ with exactly two fixed
+      points, the exact minimum is $32$; after the two normalizations used in
+      Section~\ref{sec:q25}, the equality cases form five residual-group
+      orbits of sizes $200,400,400,200,400$, and every normalized
+      configuration outside their union has at least $33$ pairs;
+\item for every $s\ge7$ there are at least $319$ legal pairs, so deletion of
+      any selected nonfixed orbit from an invariant ten-arc leaves at least
+      $318$ alternate repairs.
 \end{enumerate}
+\end{theorem}
 
-The last constant is not new: it is the classical Lunelli--Sce
-$\sqrt{2q}$ scale~\cite{LunelliSce1964,BallLavrauw2019}, now obtained under
-the weaker hypothesis of no equivariant pair extension.  We make no
-sharpness claim.
+The quantitative criterion and its exact correction are the structural
+part of the paper.  Theorem~\ref{thm:main}(ii) is the only exhaustive finite
+step.  Its semantic lower bound, attainment, and equality-orbit exhaustion
+are kernel checked after normalization; Section~\ref{sec:formalization}
+states the certificate and trust boundary.  The parameterized exchange
+theorem later identifies the general phase
+$\lfloor(k-1)^2/4\rfloor+r+1\le s(s-1)/2$.  The saturation corollary and the
+Clebsch specialization are secondary consequences of the same carrier
+count.  The saturation scale is the classical Lunelli--Sce $\sqrt{2q}$
+scale~\cite{LunelliSce1964,BallLavrauw2019}; no new constant or sharpness
+claim is made.
+
+The classical inputs are point and line counts in a projective plane, the
+fixed Baer subplane, Hilbert--90 normalization, and secant counting; see
+Hirschfeld~\cite{Hirschfeld1998} and Martin~\cite{Martin1967}.
 
 \subsection*{Prior art and claim boundary}
 
@@ -228,6 +247,10 @@ is
 
 \section{The quantitative pair-extension criterion}
 
+The mate-line decomposition now turns the extension problem into one count:
+empty fixed lines are the carriers, and nonfixed secant orbits are the only
+first-order obstructions on them.
+
 \begin{theorem}[Quadratic pair-extension criterion]
 \label{thm:pair-criterion}
 Let $\cC$ be a $\phi$-invariant $k$-arc in $\PG(2,s^2)$ with profile
@@ -312,6 +335,10 @@ $|\cF_\ell|\le U_\ell$, then
 
 \section{Invisible centers and collision correction}
 
+The preceding theorem subtracts every nonfixed secant orbit once on every
+empty carrier.  Exactness requires recording when an orbit contributes
+nothing and when several orbits forbid the same candidate.
+
 Fix $\ell\in\cE$.  Every nonfixed secant orbit has a fixed center
 $m\cap\phi(m)$.  Let $B_\ell$ be the number of such orbits whose center
 lies on $\ell$.  Those orbits meet $\ell$ only in a fixed point and are
@@ -378,7 +405,7 @@ This is an algebraic equality and excess classification.  It does not
 classify the invariant arcs for which $L$ is small, and no such structural
 inverse theorem is claimed.
 
-\section{Eight-arcs over \texorpdfstring{$\F_{25}$}{F25}}
+\section{Eight-arcs over \texorpdfstring{$\F_{25}$}{F25}}\label{sec:q25}
 
 We now take $s=5$, so each empty fixed line carries $N=10$ candidate
 pairs.  The profile of an invariant eight-arc is
@@ -386,9 +413,10 @@ pairs.  The profile of an invariant eight-arc is
  (f,e)\in\{(0,4),(2,3),(4,2),(6,1),(8,0)\}.
 \]
 
-Table~\ref{tab:q25-profiles} records the numerical data and the proved
-lower bound for each profile.  The exceptional row records the exact
-kernel-checked minimum and equality classification.
+The four profiles with $f\ne2$ are closed by incidence and moment arguments.
+Only $(f,e)=(2,3)$ escapes the structural bounds.  Table~\ref{tab:q25-profiles}
+separates these routes; the exceptional row records the exact
+kernel-checked minimum and equality classification after normalization.
 
 \begin{table}[ht]
 \centering
@@ -408,6 +436,8 @@ $8$ & $0$ & $11$ & $0$  & $110$ & uniform criterion \\
 Here $L=\Npair(\cC)$.}
 \label{tab:q25-profiles}
 \end{table}
+
+\subsection*{The four structural profiles}
 
 The following simple center estimate is useful.  A secant orbit joining
 two distinct selected conjugate pairs has a fixed center that lies on
@@ -497,6 +527,8 @@ The remaining profile $(f,e)=(2,3)$ has $(E,M,N)=(17,12,10)$.  The center
 estimate gives $B\ge18$, but the aggregate identity would still require a
 further collision estimate.  We close this profile by a finite reduction.
 
+\subsection*{The exceptional two-fixed-point profile}
+
 \begin{proposition}[Exact exceptional minimum]\label{prop:f2}
 Every invariant eight-arc in $\PG(2,25)$ with exactly two fixed selected
 points has at least $32$ fresh legal conjugate-pair extensions.  This bound
@@ -520,6 +552,11 @@ pair to
 \]
 Both transformations commute with Frobenius and preserve the arc and
 pair-extension predicates.
+
+Here $(E,M,N)=(17,12,10)$, so \eqref{eq:aggregate} reads
+$L=B+R-34$ and the target is the coupled inequality $B+R\ge66$.
+The finite layer below is load bearing for this coupling; separate bounds
+on invisible centers and collision moments do not prove it.
 
 After these reductions, the finite slice has $46{,}056$ rows and $1{,}189$
 residual class representatives.  Kernel-checked composition certificates
@@ -579,7 +616,13 @@ nor enumerates the semantic arcs attaining $32$.  It makes no equality
 claim for the other fixed-point profiles, other arc sizes, or other fields.
 \end{remark}
 
-\section{Equivariant saturation}
+\section{General robust repair}
+
+The profile envelope and parameterized exchange theorem are the general
+repair statements of the paper.  We first record a secondary saturation
+consequence of the carrier criterion, then derive those two results.
+
+\subsection*{A saturation consequence}
 
 Call an invariant arc \emph{pair-saturated} if it has no legal conjugate-pair
 extension.  This is weaker than ordinary completeness.
@@ -614,6 +657,8 @@ Consequently $2s(s-1)\le(k-1)^2$, which gives
 For $k=8$, one has $M\le12<N$ when $s\ge7$.  Full occupation is impossible
 because $8<s^2+1$, so Theorem~\ref{thm:pair-criterion} applies.
 \end{proof}
+
+\subsection*{Profile envelope and robust exchange}
 
 \begin{theorem}[Five-profile lower envelope]\label{thm:profile-envelope}
 Let $s\ge7$ and let $D$ be a $\phi$-invariant eight-arc with profile
@@ -728,6 +773,14 @@ between $5$ and $7$, and the final assertion of
 Corollary~\ref{cor:saturation} treats every $s\ge7$.
 \end{proof}
 
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+The extension assertion is Corollary~\ref{cor:all-orders}.
+Theorem~\ref{thm:q25} and Corollary~\ref{cor:q25-uniform-repair} give (i),
+while Proposition~\ref{prop:f2} gives (ii), including the normalization
+scope.  Theorem~\ref{thm:profile-envelope} and
+Corollary~\ref{cor:alternate-repair} give (iii).
+\end{proof}
+
 The scale in \eqref{eq:saturation} is the classical Lunelli--Sce scale for
 ordinary complete arcs, with the same secant-covering mechanism in the
 Frobenius quotient.  Ng and Wild's line-covering problem
@@ -737,8 +790,13 @@ not a new constant or a sharp family.
 
 \section{Formal verification}\label{sec:formalization}
 
-The results were formalized in Lean~\cite{Lean2015} on top of
-mathlib~\cite{Mathlib2020}.  The supplementary source is divided as follows.
+This section records the correspondence between the paper statements and
+their formal evidence; it is not a second proof narrative.  The structural
+reductions are ordinary Lean proofs.  The exceptional two-fixed-point Q25
+minimum adds generated finite certificates after the projective
+normalizations stated in Proposition~\ref{prop:f2}.  The development uses
+Lean~\cite{Lean2015} on top of mathlib~\cite{Mathlib2020} and is divided as
+follows.
 
 \begin{enumerate}[leftmargin=2.2em]
 \item The projective-conjugation and quadratic-Frobenius modules construct
@@ -856,26 +914,28 @@ nix shell nixpkgs#tectonic -c tectonic \
   frobenius_pair_extension.tex --keep-logs
 \end{verbatim}
 
+\clearpage
 \section{Conclusion}
 
 The fixed mate line of a quadratic Frobenius orbit turns symmetry-preserving
 arc extension into a carrierwise counting problem.  The uniform count is a
 first-order obstruction bound; its exact correction records which secant
 orbits disappear at fixed centers and which visible obstructions collide.
-This suffices, together with one finite exceptional-profile certificate, to
-prove a uniform conjugate-pair extension theorem for invariant eight-arcs in
-$\PG(2,25)$, now with two distinct legal pairs in every profile.  The same
-semantic count also proves deletion robustness: for
-every base order $s\ge7$, deleting any selected nonfixed orbit from an
-invariant ten-arc leaves at least $318$ alternate repairs.  More precisely,
-the certified first-order envelope changes its minimizing profile at
-$s=7$, $s=8,9$, and $s\ge10$.  The parameterized exchange theorem extends
-this deletion mechanism from ten-arcs to invariant $(k+2)$-arcs throughout
-the exact phase $\lfloor(k-1)^2/4\rfloor+r+1\le s(s-1)/2$.  In
-$\PG(2,25)$ the four nonexceptional profiles have the stated stronger
-alternate bounds, while the exceptional two-fixed-point profile still has
-at least one alternative.  Thus uniform order-five alternate repair holds
-after deletion of any selected nonfixed orbit.
+Together with one finite exceptional-profile certificate, this proves
+fresh conjugate-pair extension for every invariant eight-arc over every
+prime-power base order $s\ge5$.  In $\PG(2,25)$ every such arc has at least
+four legal pairs, hence every selected nonfixed-orbit deletion from an
+invariant ten-arc has at least three alternate repairs.  In the exceptional
+two-fixed-point profile the exact minimum is $32$, with all equality cases
+accounted for by five residual-group orbits up to normalization.
+
+For $s\ge7$ the same mechanism gives at least $319$ legal pairs and $318$
+alternate repairs.  The parameterized exchange theorem identifies the
+general phase
+$\lfloor(k-1)^2/4\rfloor+r+1\le s(s-1)/2$.  In coding language, these are
+paired two-column extensions and replacements of dimension-three MDS
+codes.  The finite certificate closes only the exceptional Q25 profile; the
+carrier count and collision correction explain the general phenomenon.
 
 \section*{AI assistance disclosure}
 
