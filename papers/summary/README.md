@@ -447,7 +447,7 @@ public mirror.
 
 ---
 
-### Geometry, coding theory, and quantum information
+### Further Geometry, Coding Theory, and Quantum Information Papers
 
 #### Integral Cohomology and Modular Decomposition for the Theta Divisor of a Cubic Threefold
 
