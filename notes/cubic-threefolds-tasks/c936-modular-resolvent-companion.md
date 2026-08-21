@@ -15,7 +15,9 @@ proof-mechanism paragraph after the main theorem, and makes the higher-prime
 aside skippable without changing a claim.  Referee report
 `../2026-08-21-c936-van-geemen-cold-referee.md`; project report
 `../2026-08-21-c936-modular-resolvent-companion.md`; strategy memo
-`../2026-08-21-c936-resolvent-rigidity-package-memo.md`.
+`../2026-08-21-c936-resolvent-rigidity-package-memo.md`.  The verified
+standalone repository is `~/src/math-papers/cubic-gluing-resolvent` at
+commit `92a7d79`.
 
 ## Goal
 
@@ -77,12 +79,13 @@ shadow-sister comparisons, motivic fifth-power decompositions, and explicit
 Mordell--Weil generators remain outside unless one short corollary materially
 clarifies the main theorem without adding a new proof dependency.
 
-The warning-free nine-page paper, deterministic algebra certificate,
+The warning-free eleven-page paper, deterministic algebra certificate,
 independent subgroup enumeration, SHA-256 manifest, rendered-page inspection,
 literature record, and EJ/TT mystery ledger are recorded in the project report.
-No mirror/export was performed.  A later genuinely blind cold read found that
-the certificates do not close two geometric identifications on which the
-paper's strongest claims depend.
+The standalone export is synchronized and verified.  A genuinely blind cold
+read found that the initial certificates did not close two geometric
+identifications on which the paper's strongest claims depended; the repairs
+below are included in the exported version.
 
 ## Cold-referee findings and repairs
 

@@ -553,3 +553,21 @@ Sections 3 and 4 state their language changes before beginning the formulas;
 and the conclusion ends on the root--discriminant relation rather than a list
 of ingredients.  No theorem, hypothesis, equation, citation, or evidence
 boundary changed.
+
+## Standalone export
+
+The paper is registered as `cubic-gluing-resolvent` and exported from
+authority commit `b4006aa046ddff9f77b9d6d9a24d080f84df17b0` to
+`~/src/math-papers/cubic-gluing-resolvent`.  The standalone repository begins
+at commit `92a7d79` and carries the manuscript, PDF, exact verification bundle,
+export manifest, provenance record, public README, CC BY 4.0 license, and the
+same pinned manuscript toolchain as the authority.
+
+The exporter audit reports zero findings, standalone `make check` passes, and
+the exporter verifies all seventeen tracked files.  The rebuilt authority and
+standalone PDFs have the same SHA-256 digest
+`90fac5468adadb9510f60eb7b2c8083fe3a62dc85984212a9242c44ba6dd0e7c`.
+An initial unpinned materialization rebuilt a different PDF byte stream; it was
+moved intact to
+`/tmp/persistent/tavis/export-rejected/cubic-gluing-resolvent-unpinned-20260821`
+and replaced by the pinned, byte-identical export.

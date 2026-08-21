@@ -57,11 +57,13 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   defect; its final minor wording and optional certificate points are closed.
   A final style-guide pass gives a 142-source-word abstract and exposes the
   three-step proof mechanism immediately after the main theorem.  Integrated
-  `make check` passes.  A post-close EJ pass further proves
+  `make check` passes.  The verified standalone repository is
+  `~/src/math-papers/cubic-gluing-resolvent` at `92a7d79`; its rebuilt PDF is
+  byte-identical to the authority PDF.  A post-close EJ pass further proves
   that golden orientation turns the rational triple into the cyclic cubic
   splitting cover and gives
   \(t=3(\eta(3\tau)/\eta(\tau))^6\).  Exact algebra and an independent subgroup
-  enumeration replay under `make check`; no mirror was exported.  Referee
+  enumeration replay under `make check`.  Referee
   report: `../2026-08-21-c936-van-geemen-cold-referee.md`; project report:
   `../2026-08-21-c936-modular-resolvent-companion.md`.
 - **C935 — closed 2026-08-21; exotic gluing is the elliptic discriminant
