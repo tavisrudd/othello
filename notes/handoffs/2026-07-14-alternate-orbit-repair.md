@@ -12,9 +12,9 @@ the semantic lift of the lower bound, equality-orbit exhaustion, and its semanti
 kernel-checked. `32` is the exact semantic minimum and the five orbits are the complete extremal set
 up to normalization. The citation audit gating priority language is discharged and all four lane
 claims survive. C938 closed negatively without changing the theorem package: the visible compact
-invariants do not prove the Q25 coupling without residual classification. C937's layered-exposition
-and manuscript closeout pass is next. Release bookkeeping C318/C319 follows; the exchange graph
-C152 remains optional unless adopted.
+invariants do not prove the Q25 coupling without residual classification. C937 completed the
+layered-exposition and manuscript closeout pass with a warning-free 14-page PDF. Release bookkeeping
+C318 is next, followed by C319; the exchange graph C152 remains optional unless adopted.
 **Tasks:** C142–C143, C148–C152, C318–C319, C331, C363, C937–C938
 
 Companion discovery log:
@@ -120,13 +120,13 @@ statements are in the reports above and their development history is in the comp
 
 | Task | State | Current deliverable |
 |---|---|---|
-| C937 | queued; the lane's next step; no large Q25 certificate rebuilds | Layered-exposition and hierarchy pass, synchronized Q25 wording, MDS translation, trust-boundary prose, and a clean current PDF; scoped Lean work is allowed, but no regeneration or forced re-elaboration of the large Q25 certificate forests |
-| C318 | queued | Manifest rows for the surviving residual layer and data trees, the trusted-surface statement, and reconciliation of C151 report references to the mask-spectrum payload removed by `6da475113` |
+| C318 | queued; the lane's next step | Manifest rows for the surviving residual layer and data trees, the trusted-surface statement, and reconciliation of C151 report references to the mask-spectrum payload removed by `6da475113` |
 | C319 | queued; C151 cost measured at 1:57:09 serial | Decide verified canonicalizer versus demotion to reduction-plus-computation |
 | C152 | queued | Define the orbit-replacement graph, prove the exact local degree identity, then run a component census before considering connectivity |
 
-Reported: C142, C143, C148, C149, C150, C151, C331, and C938; use the linked reports rather than
-recreating their plans here.
+Reported: C142, C143, C148, C149, C150, C151, C331, C937, and C938; use the linked reports rather
+than recreating their plans here. C937's manuscript closeout is recorded in
+[its report](../2026-08-21-c937-equivariant-paper-layered-revision.md).
 
 ## Minimum-classification layer — state a cold session needs
 
