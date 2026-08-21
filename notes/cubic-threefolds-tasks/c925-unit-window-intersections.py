@@ -1,0 +1,471 @@
+#!/usr/bin/env python3
+"""Exact finite enumeration of SVdB adjacent-window intersections for C925.
+
+The input is the five completed unit-weight signatures of Module 41.  For
+each coordinate facet direction, each affine wall level modulo Z^2, and
+each open wall segment modulo the other arrangement hyperplanes, the script
+computes the two adjacent generic window sets
+
+    L_C = (nu + Delta) intersect Z^2,
+    closure(Delta) = sum_i [-1/4, 1/4] b_i.
+
+Membership is checked independently by support half-spaces and by an exact
+convex-hull point-in-polygon implementation.  The same finite cases also
+test the character-basis moving-complement part of the specialized wall map
+along the diagonal arc z_j=q at the rank character eta=1.
+"""
+
+from __future__ import annotations
+
+import hashlib
+import json
+import math
+from fractions import Fraction
+from itertools import product
+from pathlib import Path
+from typing import Iterable
+
+
+Vector = tuple[Fraction, Fraction]
+IntVector = tuple[int, int]
+
+
+SIGNATURES: dict[str, tuple[int, int, int, int]] = {
+    "blowup_blowdown": (1, 1, 0, 0),
+    "blowup_reverse_curve_flip": (1, 2, 0, 0),
+    "curve_flip_blowdown": (2, 1, 0, 0),
+    "flip_flip_diagonal": (2, 2, 1, 0),
+    "flip_flip_antidiagonal": (2, 2, 0, 1),
+}
+
+
+def add(left: Vector, right: Vector) -> Vector:
+    return left[0] + right[0], left[1] + right[1]
+
+
+def subtract(left: Vector, right: Vector) -> Vector:
+    return left[0] - right[0], left[1] - right[1]
+
+
+def dot(left: IntVector, right: Vector | IntVector) -> Fraction:
+    return left[0] * right[0] + left[1] * right[1]
+
+
+def cross(origin: Vector, left: Vector, right: Vector) -> Fraction:
+    a = subtract(left, origin)
+    b = subtract(right, origin)
+    return a[0] * b[1] - a[1] * b[0]
+
+
+def completed_weights(A: int, B: int, d: int, u: int) -> list[IntVector]:
+    span = d + u
+    x = A - span
+    y = B - span
+    weights: list[IntVector] = []
+    weights += [(1, 0)] * x + [(-1, 0)] * x
+    weights += [(0, 1)] * y + [(0, -1)] * y
+    weights += [(1, 1)] * d + [(-1, -1)] * d
+    weights += [(1, -1)] * (u + 1) + [(-1, 1)] * (u + 1)
+    weights += [(0, 0)] * (2 * (3 - A - B + span))
+    assert len(weights) == 8
+    assert sum(weight[0] for weight in weights) == 0
+    assert sum(weight[1] for weight in weights) == 0
+    return weights
+
+
+def canonical_normal(weight: IntVector) -> IntVector:
+    x, y = weight
+    normal = (y, -x)
+    if normal < (0, 0):
+        normal = (-normal[0], -normal[1])
+    return normal
+
+
+def normals(weights: Iterable[IntVector]) -> list[IntVector]:
+    return sorted(
+        {
+            canonical_normal(weight)
+            for weight in weights
+            if weight != (0, 0)
+        }
+    )
+
+
+def support(weights: Iterable[IntVector], normal: IntVector) -> Fraction:
+    return Fraction(sum(abs(dot(normal, weight)) for weight in weights), 4)
+
+
+def residue(value: Fraction) -> Fraction:
+    return value - value.numerator // value.denominator
+
+
+def wall_levels(weights: list[IntVector], normal: IntVector) -> list[Fraction]:
+    height = support(weights, normal)
+    return sorted({residue(height), residue(-height)})
+
+
+def zonotope_vertices(weights: list[IntVector]) -> list[Vector]:
+    nonzero = [weight for weight in weights if weight != (0, 0)]
+    points = {
+        (
+            sum(Fraction(sign * weight[0], 4) for sign, weight in zip(signs, nonzero)),
+            sum(Fraction(sign * weight[1], 4) for sign, weight in zip(signs, nonzero)),
+        )
+        for signs in product((-1, 1), repeat=len(nonzero))
+    }
+    ordered = sorted(points)
+    if len(ordered) <= 1:
+        return ordered
+
+    def half(points_in_order: Iterable[Vector]) -> list[Vector]:
+        hull: list[Vector] = []
+        for point in points_in_order:
+            while len(hull) >= 2 and cross(hull[-2], hull[-1], point) <= 0:
+                hull.pop()
+            hull.append(point)
+        return hull
+
+    lower = half(ordered)
+    upper = half(reversed(ordered))
+    return lower[:-1] + upper[:-1]
+
+
+def in_zonotope_halfspaces(
+    point: Vector, weights: list[IntVector], facet_normals: list[IntVector]
+) -> bool:
+    return all(abs(dot(normal, point)) <= support(weights, normal) for normal in facet_normals)
+
+
+def in_convex_polygon(point: Vector, polygon: list[Vector]) -> bool:
+    return all(
+        cross(polygon[index], polygon[(index + 1) % len(polygon)], point) >= 0
+        for index in range(len(polygon))
+    )
+
+
+def window(
+    nu: Vector,
+    weights: list[IntVector],
+    facet_normals: list[IntVector],
+    polygon: list[Vector],
+) -> tuple[IntVector, ...]:
+    x_bound = support(weights, (1, 0)) + 2
+    y_bound = support(weights, (0, 1)) + 2
+    x_radius = (abs(nu[0]) + x_bound).__ceil__()
+    y_radius = (abs(nu[1]) + y_bound).__ceil__()
+    result: list[IntVector] = []
+    for lattice_point in product(
+        range(-x_radius, x_radius + 1), range(-y_radius, y_radius + 1)
+    ):
+        shifted = (
+            Fraction(lattice_point[0]) - nu[0],
+            Fraction(lattice_point[1]) - nu[1],
+        )
+        by_halfspaces = in_zonotope_halfspaces(shifted, weights, facet_normals)
+        by_polygon = in_convex_polygon(shifted, polygon)
+        assert by_halfspaces == by_polygon
+        if by_halfspaces:
+            result.append(lattice_point)
+    return tuple(sorted(result))
+
+
+def wall_parameter_point(normal: IntVector, level: Fraction, t: Fraction) -> Vector:
+    if normal == (1, 0):
+        return level, t
+    if normal == (0, 1):
+        return t, level
+    raise ValueError(f"only coordinate walls are enumerated, got {normal}")
+
+
+def critical_parameters(
+    weights: list[IntVector], wall_normal: IntVector, wall_level: Fraction
+) -> list[Fraction]:
+    critical = {Fraction(0)}
+    for other_normal in normals(weights):
+        if other_normal == wall_normal:
+            continue
+        coefficient = other_normal[1] if wall_normal == (1, 0) else other_normal[0]
+        constant = other_normal[0] * wall_level if wall_normal == (1, 0) else other_normal[1] * wall_level
+        if coefficient == 0:
+            continue
+        for other_level in wall_levels(weights, other_normal):
+            # coefficient is +/-1 for the five unit signatures.  The small
+            # bounded integer range records every residue modulo one.
+            for integer_shift in range(-2, 3):
+                parameter = Fraction(other_level + integer_shift - constant, coefficient)
+                critical.add(residue(parameter))
+    return sorted(critical)
+
+
+def cyclic_midpoints(points: list[Fraction]) -> list[Fraction]:
+    result: list[Fraction] = []
+    for index, left in enumerate(points):
+        right = points[(index + 1) % len(points)]
+        if index + 1 == len(points):
+            right += 1
+        result.append(residue((left + right) / 2))
+    return sorted(set(result))
+
+
+def adjacent_windows(
+    weights: list[IntVector], wall_normal: IntVector, level: Fraction, t: Fraction
+) -> tuple[tuple[IntVector, ...], tuple[IntVector, ...], Fraction]:
+    facet_normals = normals(weights)
+    polygon = zonotope_vertices(weights)
+    center = wall_parameter_point(wall_normal, level, t)
+    epsilon = Fraction(1, 10_000)
+    clearance_candidates: list[Fraction] = []
+    for other_normal in facet_normals:
+        transverse_coefficient = dot(other_normal, wall_normal)
+        if transverse_coefficient == 0:
+            continue
+        for other_level in wall_levels(weights, other_normal):
+            # The translated hyperplanes have levels other_level + k.  The
+            # closest nonzero crossing is attained by one of the two nearest
+            # integers to dot(other_normal, center)-other_level; if that
+            # number is integral, the next integer on either side suffices.
+            target_shift = dot(other_normal, center) - other_level
+            floor_shift = target_shift.numerator // target_shift.denominator
+            for integer_shift in (floor_shift - 1, floor_shift, floor_shift + 1):
+                crossing_parameter = Fraction(
+                    other_level + integer_shift - dot(other_normal, center),
+                    transverse_coefficient,
+                )
+                if crossing_parameter != 0:
+                    clearance_candidates.append(abs(crossing_parameter))
+    clearance = min(clearance_candidates)
+    assert epsilon < clearance
+    displacement = (epsilon * wall_normal[0], epsilon * wall_normal[1])
+    minus = subtract(center, displacement)
+    plus = add(center, displacement)
+    minus_window = window(minus, weights, facet_normals, polygon)
+    plus_window = window(plus, weights, facet_normals, polygon)
+
+    # The result must be stable under halving the transversal displacement.
+    half_displacement = (displacement[0] / 2, displacement[1] / 2)
+    assert minus_window == window(
+        subtract(center, half_displacement), weights, facet_normals, polygon
+    )
+    assert plus_window == window(
+        add(center, half_displacement), weights, facet_normals, polygon
+    )
+    return minus_window, plus_window, clearance
+
+
+def fraction_text(value: Fraction) -> str:
+    return str(value.numerator) if value.denominator == 1 else f"{value.numerator}/{value.denominator}"
+
+
+def vector_text(vector: IntVector) -> str:
+    return f"{vector[0]},{vector[1]}"
+
+
+def transition_analysis(
+    source: tuple[IntVector, ...],
+    target: tuple[IntVector, ...],
+    wall_normal: IntVector,
+    weights: list[IntVector],
+) -> dict[str, object]:
+    source_set = set(source)
+    target_set = set(target)
+    common = source_set & target_set
+    moved_source = sorted(source_set - common)
+    # Proposition 12.6 uses J_{-C_0,-C_2}: for the chosen traversal this is
+    # the set of weights negative on the wall normal, and shifts a character
+    # by minus their sum.  Keep that variance literal rather than silently
+    # identifying it with the opposite weights of the completed multiset.
+    transition_indices = [
+        index for index, weight in enumerate(weights) if dot(wall_normal, weight) < 0
+    ]
+    assert moved_source
+    assert transition_indices
+
+    moving_patterns: list[tuple[int, ...]] = []
+    common_term_count = 0
+    common_targets: set[IntVector] = set()
+    moving_term_count = 0
+    for source_point in moved_source:
+        moving_masks: list[int] = []
+        for mask in range(1, 1 << len(transition_indices)):
+            target_point = source_point
+            for bit, weight_index in enumerate(transition_indices):
+                if mask & (1 << bit):
+                    target_point = (
+                        target_point[0] - weights[weight_index][0],
+                        target_point[1] - weights[weight_index][1],
+                    )
+            assert target_point in target_set
+            if target_point in common:
+                common_term_count += 1
+                common_targets.add(target_point)
+            else:
+                moving_term_count += 1
+                moving_masks.append(mask)
+        moving_patterns.append(tuple(moving_masks))
+
+    uniform_pattern = moving_patterns[0] if len(set(moving_patterns)) == 1 else ()
+    wall_map_coefficients = [0] * (len(transition_indices) + 1)
+    for mask in uniform_pattern:
+        degree = mask.bit_count()
+        wall_map_coefficients[degree] += (-1) ** (degree + 1)
+    defect_coefficients = [-coefficient for coefficient in wall_map_coefficients]
+    defect_coefficients[0] += 1
+    defect_order: int | None = None
+    defect_leading: int | None = None
+    for order in range(len(defect_coefficients)):
+        coefficient = sum(
+            value * math.comb(degree, order)
+            for degree, value in enumerate(defect_coefficients)
+            if degree >= order
+        )
+        if coefficient != 0:
+            defect_order = order
+            defect_leading = coefficient
+            break
+
+    return {
+        "moved_source_count": len(moved_source),
+        "transition_weight_count": len(transition_indices),
+        "common_output_terms": common_term_count,
+        "common_output_target_count": len(common_targets),
+        "common_output_covers_common_basis": common_targets == common,
+        "moving_output_terms": moving_term_count,
+        "moving_mask_pattern_uniform": len(set(moving_patterns)) == 1,
+        "moving_mask_pattern_nonempty": bool(moving_patterns[0]),
+        "uniform_moving_masks": list(uniform_pattern),
+        "relative_defect_order_at_q_1": defect_order,
+        "relative_defect_leading_coefficient": defect_leading,
+    }
+
+
+def enumerate_certificate() -> dict[str, object]:
+    signature_results: dict[str, object] = {}
+    total_cases = 0
+    global_minimum: int | None = None
+    global_clearance: Fraction | None = None
+
+    for name, parameters in sorted(SIGNATURES.items()):
+        weights = completed_weights(*parameters)
+        cases: list[dict[str, object]] = []
+        for wall_normal in ((1, 0), (0, 1)):
+            for level in wall_levels(weights, wall_normal):
+                critical = critical_parameters(weights, wall_normal, level)
+                for parameter in cyclic_midpoints(critical):
+                    minus, plus, clearance = adjacent_windows(
+                        weights, wall_normal, level, parameter
+                    )
+                    common = tuple(sorted(set(minus) & set(plus)))
+                    forward = transition_analysis(minus, plus, wall_normal, weights)
+                    reverse_normal = (-wall_normal[0], -wall_normal[1])
+                    reverse = transition_analysis(plus, minus, reverse_normal, weights)
+                    cases.append(
+                        {
+                            "wall_normal": vector_text(wall_normal),
+                            "wall_level_mod_1": fraction_text(level),
+                            "segment_sample_mod_1": fraction_text(parameter),
+                            "minus_size": len(minus),
+                            "plus_size": len(plus),
+                            "common_size": len(common),
+                            "common_generators": [vector_text(point) for point in common],
+                            "transverse_clearance": fraction_text(clearance),
+                            "forward_transition": forward,
+                            "reverse_transition": reverse,
+                        }
+                    )
+                    total_cases += 1
+                    global_minimum = len(common) if global_minimum is None else min(global_minimum, len(common))
+                    global_clearance = (
+                        clearance
+                        if global_clearance is None
+                        else min(global_clearance, clearance)
+                    )
+        case_bytes = json.dumps(cases, sort_keys=True, separators=(",", ":")).encode()
+        common_size_histogram: dict[str, int] = {}
+        for case in cases:
+            key = str(case["common_size"])
+            common_size_histogram[key] = common_size_histogram.get(key, 0) + 1
+        defect_order_histogram: dict[str, int] = {}
+        zero_order_occurrences: list[str] = []
+        for case in cases:
+            for direction in ("forward_transition", "reverse_transition"):
+                order = case[direction]["relative_defect_order_at_q_1"]
+                key = str(order)
+                defect_order_histogram[key] = defect_order_histogram.get(key, 0) + 1
+                if order == 0:
+                    zero_order_occurrences.append(
+                        ":".join(
+                            (
+                                case["wall_normal"],
+                                case["wall_level_mod_1"],
+                                case["segment_sample_mod_1"],
+                                direction,
+                            )
+                        )
+                    )
+        signature_results[name] = {
+            "parameters_A_B_d_u": list(parameters),
+            "weights": [vector_text(weight) for weight in weights],
+            "case_count": len(cases),
+            "minimum_common_size": min(case["common_size"] for case in cases),
+            "maximum_common_size": max(case["common_size"] for case in cases),
+            "common_size_histogram": common_size_histogram,
+            "total_common_output_terms": sum(
+                case[direction]["common_output_terms"]
+                for case in cases
+                for direction in ("forward_transition", "reverse_transition")
+            ),
+            "all_common_output_targets_cover_common_basis": all(
+                case[direction]["common_output_covers_common_basis"]
+                for case in cases
+                for direction in ("forward_transition", "reverse_transition")
+            ),
+            "all_moving_mask_patterns_uniform": all(
+                case[direction]["moving_mask_pattern_uniform"]
+                for case in cases
+                for direction in ("forward_transition", "reverse_transition")
+            ),
+            "all_moving_mask_patterns_nonempty": all(
+                case[direction]["moving_mask_pattern_nonempty"]
+                for case in cases
+                for direction in ("forward_transition", "reverse_transition")
+            ),
+            "relative_defect_orders_at_q_1": sorted(
+                {
+                    case[direction]["relative_defect_order_at_q_1"]
+                    for case in cases
+                    for direction in ("forward_transition", "reverse_transition")
+                }
+            ),
+            "relative_defect_order_histogram": defect_order_histogram,
+            "zero_order_occurrences": zero_order_occurrences,
+            "cases_sha256": hashlib.sha256(case_bytes).hexdigest(),
+        }
+
+    assert global_minimum is not None
+    assert global_clearance is not None
+    return {
+        "schema": "c925-unit-window-intersections-v1",
+        "status": "pass",
+        "definition": "closure(Delta)=sum_i[-1/4,1/4]b_i; generic L_C=(nu+closure(Delta)) intersect Z^2",
+        "scope": "five Module-41 completed signatures; both coordinate facet normals; every affine level and open wall segment modulo Z^2",
+        "independent_membership_checks": ["support_halfspaces", "exact_convex_hull"],
+        "signature_count": len(SIGNATURES),
+        "case_count": total_cases,
+        "minimum_common_size": global_minimum,
+        "minimum_transverse_clearance": fraction_text(global_clearance),
+        "transverse_epsilon": "1/10000",
+        "all_enumerated_adjacent_windows_intersect": global_minimum > 0,
+        "signatures": signature_results,
+    }
+
+
+def main() -> None:
+    certificate = enumerate_certificate()
+    script_path = Path(__file__)
+    certificate["script_sha256"] = hashlib.sha256(script_path.read_bytes()).hexdigest()
+    certificate["script_bytes"] = script_path.stat().st_size
+    print(json.dumps(certificate, indent=2, sort_keys=True))
+
+
+if __name__ == "__main__":
+    main()

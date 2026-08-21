@@ -64,6 +64,10 @@ exact \(m=2\) and all-\(m\) transport gates.
   notes/2026-08-20-c925-double-normal-projected-variation.md
 - eigenrow image factorization and fixed-summand test:
   notes/2026-08-20-c925-eigenrow-image-factorization.md
+- separable primitive-projector no-go:
+  notes/2026-08-20-c925-separable-primitive-projector-no-go.md
+- exact unit-window intersection enumeration:
+  notes/2026-08-20-c925-unit-window-intersection-enumeration.md
 
 The packet index owns the module-to-file map.  Do not append another large
 module to this card or to the index; add one focused companion file and one
@@ -344,17 +348,30 @@ Double-normal producer replay:
       | diff -u \
           notes/cubic-threefolds-tasks/c925-double-normal-source-toy-output.txt -
 
-The finite model currently has one hundred twenty checks.  It verifies only the
+Unit-window intersection replay:
+
+    nix shell nixpkgs#python3 --command sh -c \
+      'python3 notes/cubic-threefolds-tasks/c925-unit-window-intersections.py \
+       | diff -u \
+           notes/cubic-threefolds-tasks/c925-unit-window-intersections.json -'
+
+The finite model currently has one hundred twenty-two checks.  It verifies only the
 advertised algebraic laws and countermodels, never an external QDM provider.
 
 ## Next
 
-1. For the first genuine \((1,1)\) overlap, run Module 57's cheaper
-   eigenrow/fixed-summand test on the actual primitive-sixth projected wall
-   operations.  Determine whether the projector kills every common fixed
-   generator while retaining the moving rank line and whether
-   \(r(1-T_i)=a_i u_i r\) holds for both incident walls.  Only if this passes,
-   construct Module 56's exact fixed-phase image/can--var reader.  Theorem
+1. For the first genuine \((1,1)\) overlap, use Module 59's result that all
+   sixteen completed-pilot coordinate-wall adjacencies have common
+   rank-visible generators; the separable primitive-projector implementation
+   is therefore closed on every pilot.  The character-basis moving complement
+   is not a uniform repair: its formal diagonal coefficient passes every
+   flip--flip direction but has
+   order-zero defect in every blowup--blowdown direction and most mixed
+   directions.  Construct the upper-triangular coupled Reader/lens which
+   retains the moved-to-common cross block, and prove whether its combined row
+   restores the full product normal on both incident walls along a lawful DVR
+   arc and after the required based-loop reindexing.  Only if this
+   passes, construct Module 56's exact fixed-phase image/can--var reader.  Theorem
    56.1 then proves the directed covector
    \(\rho_j(1-T_j)|_{\operatorname{im}(1-T_i)}\) vanishes without computing a
    two-wall Stokes matrix.  Yu--Zhang supplies spectral/vanishing-cycle block

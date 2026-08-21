@@ -62,6 +62,8 @@ No manuscript or Lean source is part of this packet.
 | 55 | source-typed safe-overlap providers and compile-checked GADT | notes/2026-08-20-c925-source-typed-overlap-provider.md |
 | 56 | double-normal can/var factorization and projected-variation vanishing | notes/2026-08-20-c925-double-normal-projected-variation.md |
 | 57 | eigenrow image factorization and fixed-summand obstruction | notes/2026-08-20-c925-eigenrow-image-factorization.md |
+| 58 | separable primitive-projector no-go and moving/coupled repair | notes/2026-08-20-c925-separable-primitive-projector-no-go.md |
+| 59 | exact adjacent-window intersections and moving-complement defects for all unit pilots | notes/2026-08-20-c925-unit-window-intersection-enumeration.md |
 | frontier | open experiments and provider targets | notes/2026-08-20-c925-exploration-frontier.md |
 
 ## Dependency spine
@@ -88,7 +90,7 @@ Modules 19--23 prove reusable categorical consequences:
 - universal center-null quotients and minimal sufficient shadows; and
 - the conditional Section 6 argument as a separate specialization.
 
-Modules 24--57 isolate the higher-stabilization frontier:
+Modules 24--59 isolate the higher-stabilization frontier:
 
 - irrationality on any unbounded stabilization set implies irrationality for
   every index;
@@ -367,10 +369,33 @@ Module 57 compresses each canonical one-wall image factor further: for
 \(P_i=\operatorname{im}(1-T_i)\), the two row equations are equivalent to
 the single eigenrow law \(r(1-T_i)=a_i u_i r\).  This supplies a decisive
 pre-analytic falsifier: every \(T_i\)-fixed vector must be row-null.  The
-specialized schober formula has the required product normal on its moving
-quotient, but common fixed generators obstruct the unprojected rank row.
+specialized schober formula has a candidate product coefficient on each
+moved generator, but it becomes the required normal only after a named DVR
+arc has positive finite valuation and a lawfully augmented moving receiver
+has a stable spanning set with one uniform eigenvalue.  Common fixed
+generators obstruct the unprojected rank row, and ordinary rank does not
+descend through their quotient.
 The next computation is therefore whether the actual primitive-sixth
 projector kills that fixed summand while retaining the moving rank line.
+Module 58 proves that a projector acting only on a cubic/base tensor factor
+cannot do so: any rank-visible fixed window vector survives.  Thus a
+separable primitive phase cannot instantiate Module 57 whenever the two
+adjacent windows share a generator.  The next finite test is the actual
+window intersection in the five unit pilots; after that, only a typed
+moving-complement augmentation, a genuinely coupled projector, or the direct
+Module 54 row argument remains.
+Module 59 completes that finite test: all sixteen coordinate-wall adjacency
+types across the five completed signatures have nonempty window
+intersection, with minimum common size two.  Hence the separable full-window
+producer fails on every pilot.  Its exact next calculation also closes the
+naive moving complement as a uniform fix: on the formal diagonal coefficient
+substitution it has first-order defect in every flip--flip direction, but
+order-zero defect in every blowup--blowdown
+direction and four of six directions in each mixed pilot.  The discarded
+moved-to-common cross block is precisely where the product-normal
+cancellation is lost.  The highest-EV surviving calculation is therefore a
+coupled Reader/lens retaining that cross block, followed by a lawful DVR-arc
+certificate and the exact actual-packet reader.
 
 ### ExactTop provider
 

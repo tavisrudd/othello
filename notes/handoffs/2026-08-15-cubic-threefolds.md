@@ -332,16 +332,37 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   reader; pure formal support alone is not enough.
   Module 57 compresses the canonical one-wall package to the eigenrow law
   \(r(1-T_i)=a_i u_i r\) and exposes the cheapest no-go test: every fixed
-  vector must be row-null.  The specialized schober formula has the right
-  normal factor on its moving quotient, but the unprojected row sees common
-  fixed generators.  The immediate task is to test whether the actual
+  vector must be row-null.  The specialized schober formula has a candidate
+  moved-generator coefficient; it becomes the required normal only after a
+  named DVR arc has positive finite valuation and every moving generator has
+  one uniform eigenvalue.  The unprojected row sees common fixed generators.
+  The immediate task is to test whether the actual
   primitive-sixth projector removes precisely this fixed leakage; construct
   the resonant image reader only if it does.
+  Module 58 proves a separable projector cannot remove it: a primitive
+  projector on the cubic/base tensor factor preserves every rank-visible
+  fixed vector in the window factor.  The immediate finite test is therefore
+  the adjacent-window intersection in each of the five unit pilots.  A
+  common generator forces a lawfully augmented moving complement, a genuinely
+  coupled projector, or the direct projected-row route; rank itself does not
+  descend through the common-span quotient.
+  Module 59 completes that enumeration: all sixteen coordinate-wall
+  adjacency types across the five completed unit signatures have nonempty
+  adjacent-window intersection, with minimum size two.  Thus the separable
+  full-window producer fails on every pilot.  The exact moving-complement
+  calculation is then mixed: on the formal diagonal coefficient substitution,
+  every flip--flip direction has first-order normal defect, but every
+  blowup--blowdown direction and four of six
+  directions in each mixed pilot have order-zero defect.  The missing
+  cancellation is the moved-to-common cross block.  The next calculation is
+  therefore a coupled Reader/lens retaining that block, followed by a lawful
+  coefficient-torus DVR arc, based-loop reindexing, and the exact fixed-phase
+  packet reader.
   Shifted tensor stability and the extremal multinomial source law are
   proved, but the occurrence-indexed exact QDM sequence, actual carrier
   exponent, and boundary vanishing remain open.  The packet is split into
   bounded module companions behind a stable index.  The
-  one-hundred-twenty-check
+  one-hundred-twenty-two-check
   finite law replay, the eleven-check path toy, the four-check source-typed
   Haskell toy, the four-check double-normal producer toy, and original cubic
   replay are green.  C925 remains open at fixed-phase Gamma/rank transport

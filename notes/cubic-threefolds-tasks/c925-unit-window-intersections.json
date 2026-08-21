@@ -1,0 +1,221 @@
+{
+  "all_enumerated_adjacent_windows_intersect": true,
+  "case_count": 16,
+  "definition": "closure(Delta)=sum_i[-1/4,1/4]b_i; generic L_C=(nu+closure(Delta)) intersect Z^2",
+  "independent_membership_checks": [
+    "support_halfspaces",
+    "exact_convex_hull"
+  ],
+  "minimum_common_size": 2,
+  "minimum_transverse_clearance": "1/4",
+  "schema": "c925-unit-window-intersections-v1",
+  "scope": "five Module-41 completed signatures; both coordinate facet normals; every affine level and open wall segment modulo Z^2",
+  "script_bytes": 18910,
+  "script_sha256": "f2914b5729e51922387cb1fa1fb67b774ceec4788553804b026675463273109f",
+  "signature_count": 5,
+  "signatures": {
+    "blowup_blowdown": {
+      "all_common_output_targets_cover_common_basis": true,
+      "all_moving_mask_patterns_nonempty": true,
+      "all_moving_mask_patterns_uniform": true,
+      "case_count": 2,
+      "cases_sha256": "9a10425aa2383454b512fa60aa6fe64c9472c120d3935684744e0f7aa329b8f3",
+      "common_size_histogram": {
+        "2": 2
+      },
+      "maximum_common_size": 2,
+      "minimum_common_size": 2,
+      "parameters_A_B_d_u": [
+        1,
+        1,
+        0,
+        0
+      ],
+      "relative_defect_order_histogram": {
+        "0": 4
+      },
+      "relative_defect_orders_at_q_1": [
+        0
+      ],
+      "total_common_output_terms": 8,
+      "weights": [
+        "1,0",
+        "-1,0",
+        "0,1",
+        "0,-1",
+        "1,-1",
+        "-1,1",
+        "0,0",
+        "0,0"
+      ],
+      "zero_order_occurrences": [
+        "1,0:0:1/2:forward_transition",
+        "1,0:0:1/2:reverse_transition",
+        "0,1:0:1/2:forward_transition",
+        "0,1:0:1/2:reverse_transition"
+      ]
+    },
+    "blowup_reverse_curve_flip": {
+      "all_common_output_targets_cover_common_basis": true,
+      "all_moving_mask_patterns_nonempty": true,
+      "all_moving_mask_patterns_uniform": true,
+      "case_count": 3,
+      "cases_sha256": "1ff032469cb3ed8c8749c37e51e5f6a4ad8a947acdfdbd84b657017152bcc463",
+      "common_size_histogram": {
+        "3": 2,
+        "4": 1
+      },
+      "maximum_common_size": 4,
+      "minimum_common_size": 3,
+      "parameters_A_B_d_u": [
+        1,
+        2,
+        0,
+        0
+      ],
+      "relative_defect_order_histogram": {
+        "0": 4,
+        "1": 2
+      },
+      "relative_defect_orders_at_q_1": [
+        0,
+        1
+      ],
+      "total_common_output_terms": 28,
+      "weights": [
+        "1,0",
+        "-1,0",
+        "0,1",
+        "0,1",
+        "0,-1",
+        "0,-1",
+        "1,-1",
+        "-1,1"
+      ],
+      "zero_order_occurrences": [
+        "1,0:0:1/4:forward_transition",
+        "1,0:0:1/4:reverse_transition",
+        "1,0:0:3/4:forward_transition",
+        "1,0:0:3/4:reverse_transition"
+      ]
+    },
+    "curve_flip_blowdown": {
+      "all_common_output_targets_cover_common_basis": true,
+      "all_moving_mask_patterns_nonempty": true,
+      "all_moving_mask_patterns_uniform": true,
+      "case_count": 3,
+      "cases_sha256": "4642ff14e19e93b4d5bdc0674492eef0a89b1180124616ef63669386e9f5a159",
+      "common_size_histogram": {
+        "3": 2,
+        "4": 1
+      },
+      "maximum_common_size": 4,
+      "minimum_common_size": 3,
+      "parameters_A_B_d_u": [
+        2,
+        1,
+        0,
+        0
+      ],
+      "relative_defect_order_histogram": {
+        "0": 4,
+        "1": 2
+      },
+      "relative_defect_orders_at_q_1": [
+        0,
+        1
+      ],
+      "total_common_output_terms": 28,
+      "weights": [
+        "1,0",
+        "1,0",
+        "-1,0",
+        "-1,0",
+        "0,1",
+        "0,-1",
+        "1,-1",
+        "-1,1"
+      ],
+      "zero_order_occurrences": [
+        "0,1:0:1/4:forward_transition",
+        "0,1:0:1/4:reverse_transition",
+        "0,1:0:3/4:forward_transition",
+        "0,1:0:3/4:reverse_transition"
+      ]
+    },
+    "flip_flip_antidiagonal": {
+      "all_common_output_targets_cover_common_basis": true,
+      "all_moving_mask_patterns_nonempty": true,
+      "all_moving_mask_patterns_uniform": true,
+      "case_count": 4,
+      "cases_sha256": "31936da49860d746474e3f0137f14fcab704b80d6a8e10ef51627f27b9d437f4",
+      "common_size_histogram": {
+        "4": 4
+      },
+      "maximum_common_size": 4,
+      "minimum_common_size": 4,
+      "parameters_A_B_d_u": [
+        2,
+        2,
+        0,
+        1
+      ],
+      "relative_defect_order_histogram": {
+        "1": 8
+      },
+      "relative_defect_orders_at_q_1": [
+        1
+      ],
+      "total_common_output_terms": 48,
+      "weights": [
+        "1,0",
+        "-1,0",
+        "0,1",
+        "0,-1",
+        "1,-1",
+        "1,-1",
+        "-1,1",
+        "-1,1"
+      ],
+      "zero_order_occurrences": []
+    },
+    "flip_flip_diagonal": {
+      "all_common_output_targets_cover_common_basis": true,
+      "all_moving_mask_patterns_nonempty": true,
+      "all_moving_mask_patterns_uniform": true,
+      "case_count": 4,
+      "cases_sha256": "a6463f47ca09cf5fd07936a07fb208550b2e3cf300c88dd67fb1702dc19b7f23",
+      "common_size_histogram": {
+        "6": 4
+      },
+      "maximum_common_size": 6,
+      "minimum_common_size": 6,
+      "parameters_A_B_d_u": [
+        2,
+        2,
+        1,
+        0
+      ],
+      "relative_defect_order_histogram": {
+        "1": 8
+      },
+      "relative_defect_orders_at_q_1": [
+        1
+      ],
+      "total_common_output_terms": 48,
+      "weights": [
+        "1,0",
+        "-1,0",
+        "0,1",
+        "0,-1",
+        "1,1",
+        "-1,-1",
+        "1,-1",
+        "-1,1"
+      ],
+      "zero_order_occurrences": []
+    }
+  },
+  "status": "pass",
+  "transverse_epsilon": "1/10000"
+}
