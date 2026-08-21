@@ -7,16 +7,20 @@
     "FiniteGeom.ColoredCompleteGraph",
     "FiniteGeom.ColumnCode",
     "FiniteGeom.EvalCode",
+    "FiniteGeom.ExplicitRainbowMatching",
     "FiniteGeom.Hypergraph",
     "FiniteGeom.MomentCurve",
     "FiniteGeom.ProjectiveAxisTwistedCubic",
     "FiniteGeom.ProjectiveAxisTwistedCubicCircuits",
     "FiniteGeom.Repair",
     "FiniteGeom.Weight",
+    "FiniteGeom.ZeroSumTriple",
     "RepairCodes.AxisTwistedCubic",
+    "RepairCodes.AxisTwistedCubicInvariants",
     "RepairCodes.CodeInstance",
     "RepairCodes.OuterDual",
     "RepairCodes.ProjectiveAxisTwistedCubic",
+    "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
     "RepairCodes.SeedLift",
     "RepairCodes.TraceDual",
     "RepairCodes.Transfer",
@@ -79,10 +83,13 @@
     "FiniteGeom.card_axisTwistedCubicIndex": "FiniteGeom.AxisTwistedCubic",
     "FiniteGeom.card_embedHypergraph": "FiniteGeom.Hypergraph",
     "FiniteGeom.card_eval_zero_le_natDegree": "FiniteGeom.EvalCode",
+    "FiniteGeom.card_explicitAugmentedEdge": "FiniteGeom.ExplicitRainbowMatching",
     "FiniteGeom.card_filter_le_sum": "FiniteGeom.Weight",
     "FiniteGeom.card_filter_sum": "FiniteGeom.AxisTwistedCubic",
     "FiniteGeom.card_le_independenceNumber": "FiniteGeom.Hypergraph",
     "FiniteGeom.card_le_matchingNumber": "FiniteGeom.Hypergraph",
+    "FiniteGeom.card_le_matchingNumber_augmentedColorHypergraph_of_explicit": "FiniteGeom.ExplicitRainbowMatching",
+    "FiniteGeom.card_le_zeroSumCapNumber": "FiniteGeom.ZeroSumTriple",
     "FiniteGeom.card_projectiveAxisTwistedCubicIndex": "FiniteGeom.ProjectiveAxisTwistedCubic",
     "FiniteGeom.card_projectiveTwistedCubicIndex": "FiniteGeom.ProjectiveAxisTwistedCubic",
     "FiniteGeom.card_relabelHypergraph": "FiniteGeom.Hypergraph",
@@ -120,6 +127,9 @@
     "FiniteGeom.exists_minimalHyperedge_subset": "FiniteGeom.Hypergraph",
     "FiniteGeom.exists_minimalHyperedges_matching": "FiniteGeom.Hypergraph",
     "FiniteGeom.exists_transversal_card_eq_transversalNumber": "FiniteGeom.Hypergraph",
+    "FiniteGeom.exists_zeroSumCap_card_eq": "FiniteGeom.ZeroSumTriple",
+    "FiniteGeom.explicitAugmentedEdge": "FiniteGeom.ExplicitRainbowMatching",
+    "FiniteGeom.explicitAugmentedEdge.eq_1": "FiniteGeom.ExplicitRainbowMatching",
     "FiniteGeom.finiteCubicInfinityAxis_linearIndependent": "FiniteGeom.ProjectiveAxisTwistedCubicCircuits",
     "FiniteGeom.finiteCubicInfinityTwoAxis_linearIndependent": "FiniteGeom.ProjectiveAxisTwistedCubicCircuits",
     "FiniteGeom.finiteInfinityFinite_linearIndependent": "FiniteGeom.ProjectiveAxisTwistedCubicCircuits",
@@ -135,7 +145,9 @@
     "FiniteGeom.functionalSupport_isTransversal_repairHypergraph": "FiniteGeom.Repair",
     "FiniteGeom.hammingNorm_pointEval_add_sectionCount": "FiniteGeom.ColumnCode",
     "FiniteGeom.independenceNumber": "FiniteGeom.Hypergraph",
+    "FiniteGeom.independenceNumber_zeroSumTripleHypergraphAvoidingZero": "FiniteGeom.ZeroSumTriple",
     "FiniteGeom.instFactPrimeOfNatNat_finiteGeom": "FiniteGeom.Code",
+    "FiniteGeom.isMatching_explicitAugmentedEdge": "FiniteGeom.ExplicitRainbowMatching",
     "FiniteGeom.isMatching_relabelHypergraph_iff": "FiniteGeom.Hypergraph",
     "FiniteGeom.isTransversal_compl_iff": "FiniteGeom.Hypergraph",
     "FiniteGeom.isTransversal_minimalHyperedges_iff": "FiniteGeom.Hypergraph",
@@ -155,6 +167,8 @@
     "FiniteGeom.matchingNumber_mono": "FiniteGeom.Hypergraph",
     "FiniteGeom.matchingNumber_relabelHypergraph": "FiniteGeom.Hypergraph",
     "FiniteGeom.matchingNumber_union_of_disjoint_vertices": "FiniteGeom.Hypergraph",
+    "FiniteGeom.matchingNumber_zeroSumTripleHypergraph": "FiniteGeom.ZeroSumTriple",
+    "FiniteGeom.matchingNumber_zeroSumTripleHypergraphAvoidingZero": "FiniteGeom.ZeroSumTriple",
     "FiniteGeom.matching_card_le_transversal_card": "FiniteGeom.Hypergraph",
     "FiniteGeom.mem_augmentedColorHypergraph": "FiniteGeom.ColoredCompleteGraph",
     "FiniteGeom.mem_columnCode": "FiniteGeom.ColumnCode",
@@ -172,6 +186,8 @@
     "FiniteGeom.mem_repairHypergraph_of_reindexed_circuit": "FiniteGeom.Repair",
     "FiniteGeom.mem_repairHypergraph_of_reindexed_fullSupport_relation": "FiniteGeom.Repair",
     "FiniteGeom.mem_wordSupport": "FiniteGeom.Repair",
+    "FiniteGeom.mem_zeroSumTripleHypergraph": "FiniteGeom.ZeroSumTriple",
+    "FiniteGeom.mem_zeroSumTripleHypergraphAvoidingZero": "FiniteGeom.ZeroSumTriple",
     "FiniteGeom.minDist": "FiniteGeom.Code",
     "FiniteGeom.minDist.eq_1": "RepairCodes.WeightedStrictExample",
     "FiniteGeom.minDist_le_hammingNorm": "FiniteGeom.Code",
@@ -179,6 +195,7 @@
     "FiniteGeom.minimalHyperedges.eq_1": "FiniteGeom.Hypergraph",
     "FiniteGeom.minimalHyperedges_relabelHypergraph": "FiniteGeom.Hypergraph",
     "FiniteGeom.minimalRepairHypergraph": "FiniteGeom.Repair",
+    "FiniteGeom.minimalRepairHypergraph.congr_simp": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
     "FiniteGeom.minimalRepairHypergraph.eq_1": "FiniteGeom.Repair",
     "FiniteGeom.minimalRepairHypergraph_eq_of_numRows_le_radius": "FiniteGeom.Repair",
     "FiniteGeom.minimalRepairHypergraph_mono_radius": "FiniteGeom.Repair",
@@ -241,6 +258,9 @@
     "FiniteGeom.relabelHypergraph_symm": "FiniteGeom.Hypergraph",
     "FiniteGeom.relabel_minimalRepairHypergraph_of_monomial": "FiniteGeom.Repair",
     "FiniteGeom.relabel_repairHypergraph_of_monomial": "FiniteGeom.Repair",
+    "FiniteGeom.relabel_zeroSumTripleHypergraph": "FiniteGeom.ZeroSumTriple",
+    "FiniteGeom.relabel_zeroSumTripleHypergraphAvoidingZero": "FiniteGeom.ZeroSumTriple",
+    "FiniteGeom.relabel_zeroSumTripleHypergraph_addRight": "FiniteGeom.ZeroSumTriple",
     "FiniteGeom.relation_fullSupport_of_delete_linearIndependent": "FiniteGeom.Repair",
     "FiniteGeom.repairHypergraph": "FiniteGeom.Repair",
     "FiniteGeom.repairHypergraph.congr_simp": "FiniteGeom.Repair",
@@ -282,6 +302,8 @@
     "FiniteGeom.transversalNumber_minimalRepairHypergraph": "FiniteGeom.Repair",
     "FiniteGeom.transversalNumber_relabelHypergraph": "FiniteGeom.Hypergraph",
     "FiniteGeom.transversalNumber_union_of_disjoint_vertices": "FiniteGeom.Hypergraph",
+    "FiniteGeom.transversalNumber_zeroSumTripleHypergraph": "FiniteGeom.ZeroSumTriple",
+    "FiniteGeom.transversalNumber_zeroSumTripleHypergraphAvoidingZero": "FiniteGeom.ZeroSumTriple",
     "FiniteGeom.twistedCubicAxisCircuitMatrix": "FiniteGeom.AxisTwistedCubicCircuits",
     "FiniteGeom.twistedCubicAxisCircuitMatrix.eq_1": "FiniteGeom.AxisTwistedCubicCircuits",
     "FiniteGeom.twistedCubicAxisCircuitMatrix_col_axis": "FiniteGeom.AxisTwistedCubicCircuits",
@@ -345,10 +367,19 @@
     "FiniteGeom.twoFiniteCubicInfinityAxis_dependent_iff": "FiniteGeom.ProjectiveAxisTwistedCubicCircuits",
     "FiniteGeom.twoFiniteCubicInfinityAxis_isFourCircuit": "FiniteGeom.ProjectiveAxisTwistedCubicCircuits",
     "FiniteGeom.twoFiniteCubicInfinity_linearIndependent": "FiniteGeom.ProjectiveAxisTwistedCubicCircuits",
+    "FiniteGeom.units_addColor_matchingNumber_lower": "FiniteGeom.ExplicitRainbowMatching",
     "FiniteGeom.wordSupport": "FiniteGeom.Repair",
     "FiniteGeom.wordSupport.congr_simp": "FiniteGeom.Repair",
     "FiniteGeom.wordSupport.eq_1": "FiniteGeom.Repair",
     "FiniteGeom.wordSupport_erase_mem_repairHypergraph_of_column_relation": "FiniteGeom.Repair",
+    "FiniteGeom.zeroSumCapNumber": "FiniteGeom.ZeroSumTriple",
+    "FiniteGeom.zeroSumCapNumber.congr_simp": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "FiniteGeom.zeroSumCapNumber_lt_card": "FiniteGeom.ZeroSumTriple",
+    "FiniteGeom.zeroSumTripleHypergraph": "FiniteGeom.ZeroSumTriple",
+    "FiniteGeom.zeroSumTripleHypergraph.eq_1": "FiniteGeom.ZeroSumTriple",
+    "FiniteGeom.zeroSumTripleHypergraphAvoidingZero": "FiniteGeom.ZeroSumTriple",
+    "FiniteGeom.zeroSumTripleHypergraphAvoidingZero.eq_1": "FiniteGeom.ZeroSumTriple",
+    "FiniteGeom.zeroSumTriple_parallelClass_exists": "FiniteGeom.ZeroSumTriple",
     "Matrix.row.eq_1": "RepairPorts.HarmonicQuartic",
     "RepairCodes.ConcatDualWord": "RepairCodes.Transfer",
     "RepairCodes.ConcatDualWord.beta": "RepairCodes.Transfer",
@@ -395,7 +426,12 @@
     "RepairCodes.IsEmbeddedInnerDualBlock": "RepairCodes.WeightedTransferExact",
     "RepairCodes.IsEmbeddedInnerDualBlockAt": "RepairCodes.WeightedTransferExact",
     "RepairCodes.IsOrthogonalToConcatenation": "RepairCodes.OuterDual",
+    "RepairCodes.IsProjectiveAxisTwistedCubicCircuit": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
     "RepairCodes.IsSupportReducedRepresentative": "RepairCodes.WeightedTransferExact",
+    "RepairCodes.affineToProjectiveAxisIndexEmbedding": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.affineToProjectiveAxisIndexEmbedding.eq_1": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.affineToProjectiveAxisIndexEmbedding.match_1": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.axisCardDivision_normalizations": "RepairCodes.AxisTwistedCubicInvariants",
     "RepairCodes.axisCoordinateTriple": "RepairCodes.AxisTwistedCubic",
     "RepairCodes.axisCoordinateTriple.eq_1": "RepairCodes.AxisTwistedCubic",
     "RepairCodes.axisCoordinateTriple.eq_2": "RepairCodes.AxisTwistedCubic",
@@ -405,8 +441,27 @@
     "RepairCodes.axisCoordinate_exact_locality_two": "RepairCodes.AxisTwistedCubic",
     "RepairCodes.axisCoordinate_has_repairEdge": "RepairCodes.AxisTwistedCubic",
     "RepairCodes.axisCoordinate_no_repairEdge_radius_one": "RepairCodes.AxisTwistedCubic",
+    "RepairCodes.axisCubicRepairComponent": "RepairCodes.AxisTwistedCubicInvariants",
+    "RepairCodes.axisCubicRepairComponent.eq_1": "RepairCodes.AxisTwistedCubicInvariants",
+    "RepairCodes.axisCubicRepairComponent_finite_eq_avoidingZero": "RepairCodes.AxisTwistedCubicInvariants",
+    "RepairCodes.axisCubicRepairComponent_finite_matchingNumber": "RepairCodes.AxisTwistedCubicInvariants",
+    "RepairCodes.axisCubicRepairComponent_finite_transversalNumber": "RepairCodes.AxisTwistedCubicInvariants",
+    "RepairCodes.axisCubicRepairComponent_infinity_eq_zeroSum": "RepairCodes.AxisTwistedCubicInvariants",
+    "RepairCodes.axisCubicRepairComponent_infinity_matchingNumber": "RepairCodes.AxisTwistedCubicInvariants",
+    "RepairCodes.axisCubicRepairComponent_infinity_transversalNumber": "RepairCodes.AxisTwistedCubicInvariants",
+    "RepairCodes.axisPairRepairComponent": "RepairCodes.AxisTwistedCubicInvariants",
+    "RepairCodes.axisPairRepairComponent.eq_1": "RepairCodes.AxisTwistedCubicInvariants",
+    "RepairCodes.axisPairRepairComponent_eq_completePair": "RepairCodes.AxisTwistedCubicInvariants",
+    "RepairCodes.axisPairRepairComponent_invariants": "RepairCodes.AxisTwistedCubicInvariants",
+    "RepairCodes.axisPairRepairComponent_invariants.match_1_1": "RepairCodes.AxisTwistedCubicInvariants",
     "RepairCodes.axisRepairPair_shape": "RepairCodes.AxisTwistedCubic",
+    "RepairCodes.axisRepair_contains_canonical": "RepairCodes.AxisTwistedCubicInvariants",
     "RepairCodes.axisRepair_edge_card_eq_two": "RepairCodes.AxisTwistedCubic",
+    "RepairCodes.axisRepair_tau_gt_nu": "RepairCodes.AxisTwistedCubicInvariants",
+    "RepairCodes.axisRepair_threeCubic_target_eq": "RepairCodes.AxisTwistedCubicInvariants",
+    "RepairCodes.axisRepair_twoCubic_oneAxis_not_mem": "RepairCodes.AxisTwistedCubicInvariants",
+    "RepairCodes.axisShiftInvEquiv": "RepairCodes.AxisTwistedCubicInvariants",
+    "RepairCodes.axisShiftInvEquiv_apply": "RepairCodes.AxisTwistedCubicInvariants",
     "RepairCodes.axisTripleRepairHelpers": "RepairCodes.AxisTwistedCubic",
     "RepairCodes.axisTripleRepairHelpers.eq_1": "RepairCodes.AxisTwistedCubic",
     "RepairCodes.axisTripleRepairHelpers_mem": "RepairCodes.AxisTwistedCubic",
@@ -423,6 +478,7 @@
     "RepairCodes.axisTwistedCubicRepair_edge_dependent": "RepairCodes.AxisTwistedCubic",
     "RepairCodes.axisTwistedCubicRepair_edge_nonempty": "RepairCodes.AxisTwistedCubic",
     "RepairCodes.axisTwistedCubic_allSymbol_locality_three": "RepairCodes.AxisTwistedCubic",
+    "RepairCodes.axisTwistedCubic_allSymbol_tau_gt_nu": "RepairCodes.AxisTwistedCubicInvariants",
     "RepairCodes.axisTwistedCubic_circuit_mem_repair": "RepairCodes.AxisTwistedCubic",
     "RepairCodes.axisTwistedCubic_pair_linearIndependent": "RepairCodes.AxisTwistedCubic",
     "RepairCodes.axisTwistedCubic_selected_linearIndependent_of_card_le_three_of_containsCubic": "RepairCodes.AxisTwistedCubic",
@@ -441,6 +497,7 @@
     "RepairCodes.blockSupport.congr_simp": "RepairCodes.WeightedTransferExact",
     "RepairCodes.blockSupport.eq_1": "RepairCodes.WeightedTransferExact",
     "RepairCodes.blockSupport_card_le_one_of_isEmbeddedInnerDualBlock": "RepairCodes.WeightedTransferExact",
+    "RepairCodes.card_projectiveCubicPart_add_card_projectiveAxisPart": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
     "RepairCodes.completedQ9_singer_average_lt": "RepairCodes.WeightedTransferExact",
     "RepairCodes.concatenatedCode": "RepairCodes.SeedLift",
     "RepairCodes.concatenatedCode_finrank": "RepairCodes.SeedLift",
@@ -458,12 +515,29 @@
     "RepairCodes.cubicCoordinate_exact_locality_three": "RepairCodes.AxisTwistedCubic",
     "RepairCodes.cubicCoordinate_has_repairEdge": "RepairCodes.AxisTwistedCubic",
     "RepairCodes.cubicCoordinate_no_repairEdge_radius_two": "RepairCodes.AxisTwistedCubic",
+    "RepairCodes.cubicRepairHypergraph_card": "RepairCodes.AxisTwistedCubicInvariants",
     "RepairCodes.cubicRepairHypergraph_shape": "RepairCodes.AxisTwistedCubic",
+    "RepairCodes.cubicRepairShiftedSum": "RepairCodes.AxisTwistedCubicInvariants",
+    "RepairCodes.cubicRepairShiftedSum.eq_1": "RepairCodes.AxisTwistedCubicInvariants",
+    "RepairCodes.cubicRepairSumColor": "RepairCodes.AxisTwistedCubicInvariants",
+    "RepairCodes.cubicRepairSumColor.eq_1": "RepairCodes.AxisTwistedCubicInvariants",
+    "RepairCodes.cubicRepairSumColor_injective": "RepairCodes.AxisTwistedCubicInvariants",
     "RepairCodes.cubicRepair_axis_eq_of_mem": "RepairCodes.AxisTwistedCubic",
     "RepairCodes.cubicRepair_edge_card_eq_three": "RepairCodes.AxisTwistedCubic",
+    "RepairCodes.cubicRepair_matchingNumber": "RepairCodes.AxisTwistedCubicInvariants",
+    "RepairCodes.cubicRepair_matchingNumber_ge_half": "RepairCodes.AxisTwistedCubicInvariants",
+    "RepairCodes.cubicRepair_matchingNumber_ge_half.match_1_1": "RepairCodes.AxisTwistedCubicInvariants",
+    "RepairCodes.cubicRepair_matchingNumber_le": "RepairCodes.AxisTwistedCubicInvariants",
+    "RepairCodes.cubicRepair_matchingNumber_lower": "RepairCodes.AxisTwistedCubicInvariants",
+    "RepairCodes.cubicRepair_matchingNumber_lower.match_1_1": "RepairCodes.AxisTwistedCubicInvariants",
+    "RepairCodes.cubicRepair_matching_card_bound": "RepairCodes.AxisTwistedCubicInvariants",
     "RepairCodes.cubicRepair_oneCubic_twoAxis_not_mem": "RepairCodes.AxisTwistedCubic",
+    "RepairCodes.cubicRepair_tau_gt_nu": "RepairCodes.AxisTwistedCubicInvariants",
     "RepairCodes.cubicRepair_threeAxis_not_mem": "RepairCodes.AxisTwistedCubic",
     "RepairCodes.cubicRepair_threeCubic_not_mem": "RepairCodes.AxisTwistedCubic",
+    "RepairCodes.cubicRepair_transversalNumber": "RepairCodes.AxisTwistedCubicInvariants",
+    "RepairCodes.cubicRepair_transversal_card_ge": "RepairCodes.AxisTwistedCubicInvariants",
+    "RepairCodes.cubicRepair_transversal_of_erase": "RepairCodes.AxisTwistedCubicInvariants",
     "RepairCodes.cubicTripleIndexFamily": "RepairCodes.AxisTwistedCubic",
     "RepairCodes.cubicTripleIndexFamily.eq_1": "RepairCodes.AxisTwistedCubic",
     "RepairCodes.cubicTripleRepairHelpers": "RepairCodes.AxisTwistedCubic",
@@ -524,31 +598,76 @@
     "RepairCodes.innerCoordinateFunctional_orbit_injective": "RepairCodes.WeightedStrictExample",
     "RepairCodes.instDecidableEqDual_repairCodes": "RepairCodes.CodeInstance",
     "RepairCodes.isEmbeddedInnerDualBlock_of_all_inner_of_card_le_one": "RepairCodes.WeightedTransferExact",
+    "RepairCodes.isProjectiveAxisTwistedCubicCircuit_map_iff": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
     "RepairCodes.matchingNumber_minimalAxisTwistedCubicRepairHypergraph": "RepairCodes.AxisTwistedCubic",
     "RepairCodes.matchingNumber_minimalProjectiveAxisTwistedCubicRepairHypergraph": "RepairCodes.ProjectiveAxisTwistedCubic",
     "RepairCodes.matchingNumber_repairHypergraph_concatenatedCode": "RepairCodes.SeedLift",
+    "RepairCodes.mem_axisCubicRepairComponent_iff": "RepairCodes.AxisTwistedCubicInvariants",
+    "RepairCodes.mem_axisPairRepairComponent_iff": "RepairCodes.AxisTwistedCubicInvariants",
+    "RepairCodes.mem_axisRepairHypergraph_threeCubic_iff": "RepairCodes.AxisTwistedCubicInvariants",
     "RepairCodes.mem_axisRepairHypergraph_two_iff": "RepairCodes.AxisTwistedCubic",
     "RepairCodes.mem_cubicRepairHypergraph_iff": "RepairCodes.AxisTwistedCubic",
     "RepairCodes.mem_functionalDual": "RepairCodes.OuterDual",
     "RepairCodes.mem_functionalDual_generalizedSPCFive_iff": "RepairCodes.WeightedStrictExample",
     "RepairCodes.mem_generalizedSPCFive": "RepairCodes.WeightedStrictExample",
+    "RepairCodes.mem_minimalAxisRepairHypergraph_iff": "RepairCodes.AxisTwistedCubicInvariants",
     "RepairCodes.mem_minimalProjectiveAxisInfinityRepair_iff": "RepairCodes.ProjectiveAxisTwistedCubic",
     "RepairCodes.mem_projectiveAxisInfinityRepair_threeFinite_iff": "RepairCodes.ProjectiveAxisTwistedCubic",
     "RepairCodes.mem_projectiveAxisRepairHypergraph_two_iff": "RepairCodes.ProjectiveAxisTwistedCubic",
     "RepairCodes.mem_projectiveCubicInfinityRepairHypergraph_iff": "RepairCodes.ProjectiveAxisTwistedCubic",
+    "RepairCodes.minimalAxisRepairHypergraph_eq_components": "RepairCodes.AxisTwistedCubicInvariants",
+    "RepairCodes.minimalAxisRepair_finite_invariants": "RepairCodes.AxisTwistedCubicInvariants",
+    "RepairCodes.minimalAxisRepair_invariant_decomposition": "RepairCodes.AxisTwistedCubicInvariants",
+    "RepairCodes.minimalAxisRepair_le_transversalNumber": "RepairCodes.AxisTwistedCubicInvariants",
+    "RepairCodes.minimalAxisRepair_matchingNumber_le": "RepairCodes.AxisTwistedCubicInvariants",
+    "RepairCodes.minimalAxisRepair_matching_weight_bound": "RepairCodes.AxisTwistedCubicInvariants",
+    "RepairCodes.minimalAxisRepair_nucleus_invariants": "RepairCodes.AxisTwistedCubicInvariants",
+    "RepairCodes.minimalAxisRepair_tau_gt_nu": "RepairCodes.AxisTwistedCubicInvariants",
+    "RepairCodes.minimalAxisRepair_transversal_card_ge": "RepairCodes.AxisTwistedCubicInvariants",
     "RepairCodes.minimalAxisTwistedCubicRepairHypergraph": "RepairCodes.AxisTwistedCubic",
+    "RepairCodes.minimalAxisTwistedCubicRepairHypergraph.eq_1": "RepairCodes.AxisTwistedCubicInvariants",
+    "RepairCodes.minimalProjectiveAxisInfinityRepair_eq_embedAffine": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.minimalProjectiveAxisInfinityRepair_four_invariants": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.minimalProjectiveAxisInfinityRepair_four_matchingNumber": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.minimalProjectiveAxisInfinityRepair_four_matching_weight_bound": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.minimalProjectiveAxisInfinityRepair_four_weight": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.minimalProjectiveAxisInfinityRepair_invariants": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.minimalProjectiveAxisRepair_four_invariants": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.minimalProjectiveAxisRepair_full_invariants": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.minimalProjectiveAxisRepair_invariants": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
     "RepairCodes.minimalProjectiveAxisTwistedCubicRepairHypergraph": "RepairCodes.ProjectiveAxisTwistedCubic",
     "RepairCodes.minimalProjectiveAxisTwistedCubicRepairHypergraph.eq_1": "RepairCodes.ProjectiveAxisTwistedCubic",
+    "RepairCodes.minimalProjectiveAxisTwistedCubicRepair_full_eq_four": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.minimalProjectiveCubicInfinityRepair_four_cubicPart_card_ge_two": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.minimalProjectiveCubicInfinityRepair_four_invariants": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.minimalProjectiveCubicInfinityRepair_four_matchingNumber": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.minimalProjectiveCubicInfinityRepair_four_matching_card_bound": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.minimalProjectiveCubicInfinityRepair_invariants": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.minimalProjectiveCubicRepair_four_invariants": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.minimalProjectiveCubicRepair_full_invariants": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.minimalProjectiveCubicRepair_invariants": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
     "RepairCodes.not_isEmbeddedInnerDualBlock_iff_two_le_blockSupport_card_of_isCoordinateSurjective": "RepairCodes.WeightedTransferExact",
     "RepairCodes.ofInnerCode": "RepairCodes.CodeInstance",
     "RepairCodes.ofInnerCodeFunctional": "RepairCodes.CodeInstance",
     "RepairCodes.precompNonzeroDual": "RepairCodes.WeightedStrictExample",
+    "RepairCodes.projectiveAxisInfinityFullRepair_transversalNumber": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
     "RepairCodes.projectiveAxisInfinityRepair_contains_canonical": "RepairCodes.ProjectiveAxisTwistedCubic",
     "RepairCodes.projectiveAxisInfinityRepair_threeFinite_sum_eq_zero": "RepairCodes.ProjectiveAxisTwistedCubic",
     "RepairCodes.projectiveAxisInfinityRepair_twoFiniteCubicInfinity_not_mem": "RepairCodes.ProjectiveAxisTwistedCubic",
+    "RepairCodes.projectiveAxisPart": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.projectiveAxisPart.eq_1": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.projectiveAxisPart_card_le_two_of_linearIndependent": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
     "RepairCodes.projectiveAxisRepairPair_shape": "RepairCodes.ProjectiveAxisTwistedCubic",
     "RepairCodes.projectiveAxisRepair_edge_card_eq_two": "RepairCodes.ProjectiveAxisTwistedCubic",
     "RepairCodes.projectiveAxisRepair_twoCubic_oneAxis_not_mem": "RepairCodes.ProjectiveAxisTwistedCubic",
+    "RepairCodes.projectiveAxisShiftInvEquiv": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.projectiveAxisShiftInvEquiv.eq_1": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.projectiveAxisShiftInvEquiv.match_1": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.projectiveAxisShiftInvEquiv_eq_infinity_iff": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.projectiveAxisShiftInvEquiv_finite_iff": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.projectiveAxisShiftInvEquiv_finite_of_ne": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.projectiveAxisShiftInvEquiv_infinity": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.projectiveAxisShiftInvEquiv_neg": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
     "RepairCodes.projectiveAxisTripleDualWord": "RepairCodes.ProjectiveAxisTwistedCubic",
     "RepairCodes.projectiveAxisTripleDualWord.eq_1": "RepairCodes.ProjectiveAxisTwistedCubic",
     "RepairCodes.projectiveAxisTripleDualWord_hammingNorm": "RepairCodes.ProjectiveAxisTwistedCubic",
@@ -574,20 +693,61 @@
     "RepairCodes.projectiveAxisTwistedCubic_strict_weighted_transfer_of_regular_projective_action": "RepairCodes.WeightedStrictExample",
     "RepairCodes.projectiveAxisTwistedCubic_triple_linearIndependent_of_containsCubic": "RepairCodes.ProjectiveAxisTwistedCubic",
     "RepairCodes.projectiveAxisTwistedCubic_twenty_unitCost_orbits": "RepairCodes.WeightedStrictExample",
+    "RepairCodes.projectiveCubicInfinityFullRepair_transversalNumber": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
     "RepairCodes.projectiveCubicInfinityRepairHelpers_mem": "RepairCodes.ProjectiveAxisTwistedCubic",
     "RepairCodes.projectiveCubicInfinityRepairHypergraph_shape": "RepairCodes.ProjectiveAxisTwistedCubic",
     "RepairCodes.projectiveCubicInfinityRepair_axis_eq_of_mem": "RepairCodes.ProjectiveAxisTwistedCubic",
     "RepairCodes.projectiveCubicInfinityRepair_edge_card_eq_three": "RepairCodes.ProjectiveAxisTwistedCubic",
+    "RepairCodes.projectiveCubicInfinityRepair_matchingNumber": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.projectiveCubicInfinityRepair_matchingNumber_ge_half": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.projectiveCubicInfinityRepair_matchingNumber_ge_half.match_1_1": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.projectiveCubicInfinityRepair_matchingNumber_le": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.projectiveCubicInfinityRepair_matching_card_bound": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
     "RepairCodes.projectiveCubicInfinityRepair_oneFinite_twoAxis_not_mem": "RepairCodes.ProjectiveAxisTwistedCubic",
     "RepairCodes.projectiveCubicInfinityRepair_threeAxis_not_mem": "RepairCodes.ProjectiveAxisTwistedCubic",
     "RepairCodes.projectiveCubicInfinityRepair_threeFinite_not_mem": "RepairCodes.ProjectiveAxisTwistedCubic",
+    "RepairCodes.projectiveCubicInfinityRepair_transversalNumber": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.projectiveCubicInfinityRepair_transversal_card_ge": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.projectiveCubicInfinityRepair_transversal_of_erase": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
     "RepairCodes.projectiveCubicInfinity_no_repairEdge_radius_two": "RepairCodes.ProjectiveAxisTwistedCubic",
+    "RepairCodes.projectiveCubicPart": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.projectiveCubicPart.eq_1": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
     "RepairCodes.projectiveFiniteCubicTripleIndexFamily": "RepairCodes.ProjectiveAxisTwistedCubic",
     "RepairCodes.projectiveFiniteCubicTripleIndexFamily.eq_1": "RepairCodes.ProjectiveAxisTwistedCubic",
     "RepairCodes.projectiveFiniteCubicTripleRepairHelpers": "RepairCodes.ProjectiveAxisTwistedCubic",
     "RepairCodes.projectiveFiniteCubicTripleRepairHelpers.eq_1": "RepairCodes.ProjectiveAxisTwistedCubic",
     "RepairCodes.projectiveFiniteCubicTripleRepairHelpers_mem": "RepairCodes.ProjectiveAxisTwistedCubic",
     "RepairCodes.projectiveRepairTriple_not_mem_of_linearIndependent": "RepairCodes.ProjectiveAxisTwistedCubic",
+    "RepairCodes.projectiveShiftInvFinsetEquiv": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.projectiveShiftInvIndexEquiv": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.projectiveShiftInvIndexEquiv.eq_1": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.projectiveShiftInvLinearEquiv": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.projectiveShiftInvLinearEquiv_apply": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.projectiveShiftInvLinearMap": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.projectiveShiftInvLinearMap.eq_1": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.projectiveShiftInvLinearMap_axis_finite": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.projectiveShiftInvLinearMap_axis_finite_of_ne": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.projectiveShiftInvLinearMap_axis_infinity": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.projectiveShiftInvLinearMap_axis_target": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.projectiveShiftInvLinearMap_column": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.projectiveShiftInvLinearMap_cubic_finite": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.projectiveShiftInvLinearMap_cubic_finite_of_ne": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.projectiveShiftInvLinearMap_cubic_infinity": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.projectiveShiftInvLinearMap_cubic_pole": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.projectiveShiftInvLinearMap_injective": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.projectiveShiftInvScale": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.projectiveShiftInvScale.eq_1": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.projectiveShiftInvScale.eq_2": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.projectiveShiftInvScale.eq_3": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.projectiveShiftInvScale.eq_4": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.projectiveShiftInvScale.match_1": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.projectiveShiftInvScaleUnit": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.projectiveShiftInvScaleUnit_val": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.projectiveShiftInvScale_ne_zero": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.projectiveShiftInv_finset_linearIndependent_iff": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.projectiveShiftInv_linearIndependent_iff": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.projectiveShiftInv_relabel_minimalRepairHypergraph": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
+    "RepairCodes.projectiveShiftInv_relabel_repairHypergraph": "RepairCodes.ProjectiveAxisTwistedCubicInvariants",
     "RepairCodes.repairHypergraph_concatenatedCode_eq_embed": "RepairCodes.SeedLift",
     "RepairCodes.repairHypergraph_concatenatedCode_eq_embed_nonembedded": "RepairCodes.WeightedTransferExact",
     "RepairCodes.repairHypergraph_concatenatedCode_eq_embed_pointed": "RepairCodes.WeightedTransferExact",
@@ -613,7 +773,10 @@
     "RepairCodes.transversalNumber_minimalAxisTwistedCubicRepairHypergraph": "RepairCodes.AxisTwistedCubic",
     "RepairCodes.transversalNumber_minimalProjectiveAxisTwistedCubicRepairHypergraph": "RepairCodes.ProjectiveAxisTwistedCubic",
     "RepairCodes.transversalNumber_repairHypergraph_concatenatedCode": "RepairCodes.SeedLift",
+    "RepairCodes.tripleAxisIndex_eq_finite_iff_shiftInv": "RepairCodes.AxisTwistedCubicInvariants",
+    "RepairCodes.twistedCubicTripleAxisIndex_eq_cubicRepairSumColor": "RepairCodes.AxisTwistedCubicInvariants",
     "RepairCodes.twistedCubicTripleAxisIndex_injective_third": "RepairCodes.AxisTwistedCubic",
+    "RepairCodes.twistedCubicTripleAxisIndex_translate": "RepairCodes.AxisTwistedCubicInvariants",
     "RepairCodes.twoCubicNormalizedAxis_linearIndependent": "RepairCodes.AxisTwistedCubic",
     "RepairCodes.wordBlock": "RepairCodes.SeedLift",
     "RepairCodes.wordBlock.eq_1": "RepairCodes.SeedLift",
@@ -1117,10 +1280,13 @@
     "FiniteGeom.card_axisTwistedCubicIndex",
     "FiniteGeom.card_embedHypergraph",
     "FiniteGeom.card_eval_zero_le_natDegree",
+    "FiniteGeom.card_explicitAugmentedEdge",
     "FiniteGeom.card_filter_le_sum",
     "FiniteGeom.card_filter_sum",
     "FiniteGeom.card_le_independenceNumber",
     "FiniteGeom.card_le_matchingNumber",
+    "FiniteGeom.card_le_matchingNumber_augmentedColorHypergraph_of_explicit",
+    "FiniteGeom.card_le_zeroSumCapNumber",
     "FiniteGeom.card_projectiveAxisTwistedCubicIndex",
     "FiniteGeom.card_projectiveTwistedCubicIndex",
     "FiniteGeom.card_relabelHypergraph",
@@ -1158,6 +1324,9 @@
     "FiniteGeom.exists_minimalHyperedge_subset",
     "FiniteGeom.exists_minimalHyperedges_matching",
     "FiniteGeom.exists_transversal_card_eq_transversalNumber",
+    "FiniteGeom.exists_zeroSumCap_card_eq",
+    "FiniteGeom.explicitAugmentedEdge",
+    "FiniteGeom.explicitAugmentedEdge.eq_1",
     "FiniteGeom.finiteCubicInfinityAxis_linearIndependent",
     "FiniteGeom.finiteCubicInfinityTwoAxis_linearIndependent",
     "FiniteGeom.finiteInfinityFinite_linearIndependent",
@@ -1173,7 +1342,9 @@
     "FiniteGeom.functionalSupport_isTransversal_repairHypergraph",
     "FiniteGeom.hammingNorm_pointEval_add_sectionCount",
     "FiniteGeom.independenceNumber",
+    "FiniteGeom.independenceNumber_zeroSumTripleHypergraphAvoidingZero",
     "FiniteGeom.instFactPrimeOfNatNat_finiteGeom",
+    "FiniteGeom.isMatching_explicitAugmentedEdge",
     "FiniteGeom.isMatching_relabelHypergraph_iff",
     "FiniteGeom.isTransversal_compl_iff",
     "FiniteGeom.isTransversal_minimalHyperedges_iff",
@@ -1193,6 +1364,8 @@
     "FiniteGeom.matchingNumber_mono",
     "FiniteGeom.matchingNumber_relabelHypergraph",
     "FiniteGeom.matchingNumber_union_of_disjoint_vertices",
+    "FiniteGeom.matchingNumber_zeroSumTripleHypergraph",
+    "FiniteGeom.matchingNumber_zeroSumTripleHypergraphAvoidingZero",
     "FiniteGeom.matching_card_le_transversal_card",
     "FiniteGeom.mem_augmentedColorHypergraph",
     "FiniteGeom.mem_columnCode",
@@ -1210,6 +1383,8 @@
     "FiniteGeom.mem_repairHypergraph_of_reindexed_circuit",
     "FiniteGeom.mem_repairHypergraph_of_reindexed_fullSupport_relation",
     "FiniteGeom.mem_wordSupport",
+    "FiniteGeom.mem_zeroSumTripleHypergraph",
+    "FiniteGeom.mem_zeroSumTripleHypergraphAvoidingZero",
     "FiniteGeom.minDist",
     "FiniteGeom.minDist.eq_1",
     "FiniteGeom.minDist_le_hammingNorm",
@@ -1217,6 +1392,7 @@
     "FiniteGeom.minimalHyperedges.eq_1",
     "FiniteGeom.minimalHyperedges_relabelHypergraph",
     "FiniteGeom.minimalRepairHypergraph",
+    "FiniteGeom.minimalRepairHypergraph.congr_simp",
     "FiniteGeom.minimalRepairHypergraph.eq_1",
     "FiniteGeom.minimalRepairHypergraph_eq_of_numRows_le_radius",
     "FiniteGeom.minimalRepairHypergraph_mono_radius",
@@ -1279,6 +1455,9 @@
     "FiniteGeom.relabelHypergraph_symm",
     "FiniteGeom.relabel_minimalRepairHypergraph_of_monomial",
     "FiniteGeom.relabel_repairHypergraph_of_monomial",
+    "FiniteGeom.relabel_zeroSumTripleHypergraph",
+    "FiniteGeom.relabel_zeroSumTripleHypergraphAvoidingZero",
+    "FiniteGeom.relabel_zeroSumTripleHypergraph_addRight",
     "FiniteGeom.relation_fullSupport_of_delete_linearIndependent",
     "FiniteGeom.repairHypergraph",
     "FiniteGeom.repairHypergraph.congr_simp",
@@ -1320,6 +1499,8 @@
     "FiniteGeom.transversalNumber_minimalRepairHypergraph",
     "FiniteGeom.transversalNumber_relabelHypergraph",
     "FiniteGeom.transversalNumber_union_of_disjoint_vertices",
+    "FiniteGeom.transversalNumber_zeroSumTripleHypergraph",
+    "FiniteGeom.transversalNumber_zeroSumTripleHypergraphAvoidingZero",
     "FiniteGeom.twistedCubicAxisCircuitMatrix",
     "FiniteGeom.twistedCubicAxisCircuitMatrix.eq_1",
     "FiniteGeom.twistedCubicAxisCircuitMatrix_col_axis",
@@ -1383,10 +1564,19 @@
     "FiniteGeom.twoFiniteCubicInfinityAxis_dependent_iff",
     "FiniteGeom.twoFiniteCubicInfinityAxis_isFourCircuit",
     "FiniteGeom.twoFiniteCubicInfinity_linearIndependent",
+    "FiniteGeom.units_addColor_matchingNumber_lower",
     "FiniteGeom.wordSupport",
     "FiniteGeom.wordSupport.congr_simp",
     "FiniteGeom.wordSupport.eq_1",
     "FiniteGeom.wordSupport_erase_mem_repairHypergraph_of_column_relation",
+    "FiniteGeom.zeroSumCapNumber",
+    "FiniteGeom.zeroSumCapNumber.congr_simp",
+    "FiniteGeom.zeroSumCapNumber_lt_card",
+    "FiniteGeom.zeroSumTripleHypergraph",
+    "FiniteGeom.zeroSumTripleHypergraph.eq_1",
+    "FiniteGeom.zeroSumTripleHypergraphAvoidingZero",
+    "FiniteGeom.zeroSumTripleHypergraphAvoidingZero.eq_1",
+    "FiniteGeom.zeroSumTriple_parallelClass_exists",
     "Matrix.row.eq_1",
     "RepairCodes.ConcatDualWord",
     "RepairCodes.ConcatDualWord.beta",
@@ -1433,7 +1623,12 @@
     "RepairCodes.IsEmbeddedInnerDualBlock",
     "RepairCodes.IsEmbeddedInnerDualBlockAt",
     "RepairCodes.IsOrthogonalToConcatenation",
+    "RepairCodes.IsProjectiveAxisTwistedCubicCircuit",
     "RepairCodes.IsSupportReducedRepresentative",
+    "RepairCodes.affineToProjectiveAxisIndexEmbedding",
+    "RepairCodes.affineToProjectiveAxisIndexEmbedding.eq_1",
+    "RepairCodes.affineToProjectiveAxisIndexEmbedding.match_1",
+    "RepairCodes.axisCardDivision_normalizations",
     "RepairCodes.axisCoordinateTriple",
     "RepairCodes.axisCoordinateTriple.eq_1",
     "RepairCodes.axisCoordinateTriple.eq_2",
@@ -1443,8 +1638,27 @@
     "RepairCodes.axisCoordinate_exact_locality_two",
     "RepairCodes.axisCoordinate_has_repairEdge",
     "RepairCodes.axisCoordinate_no_repairEdge_radius_one",
+    "RepairCodes.axisCubicRepairComponent",
+    "RepairCodes.axisCubicRepairComponent.eq_1",
+    "RepairCodes.axisCubicRepairComponent_finite_eq_avoidingZero",
+    "RepairCodes.axisCubicRepairComponent_finite_matchingNumber",
+    "RepairCodes.axisCubicRepairComponent_finite_transversalNumber",
+    "RepairCodes.axisCubicRepairComponent_infinity_eq_zeroSum",
+    "RepairCodes.axisCubicRepairComponent_infinity_matchingNumber",
+    "RepairCodes.axisCubicRepairComponent_infinity_transversalNumber",
+    "RepairCodes.axisPairRepairComponent",
+    "RepairCodes.axisPairRepairComponent.eq_1",
+    "RepairCodes.axisPairRepairComponent_eq_completePair",
+    "RepairCodes.axisPairRepairComponent_invariants",
+    "RepairCodes.axisPairRepairComponent_invariants.match_1_1",
     "RepairCodes.axisRepairPair_shape",
+    "RepairCodes.axisRepair_contains_canonical",
     "RepairCodes.axisRepair_edge_card_eq_two",
+    "RepairCodes.axisRepair_tau_gt_nu",
+    "RepairCodes.axisRepair_threeCubic_target_eq",
+    "RepairCodes.axisRepair_twoCubic_oneAxis_not_mem",
+    "RepairCodes.axisShiftInvEquiv",
+    "RepairCodes.axisShiftInvEquiv_apply",
     "RepairCodes.axisTripleRepairHelpers",
     "RepairCodes.axisTripleRepairHelpers.eq_1",
     "RepairCodes.axisTripleRepairHelpers_mem",
@@ -1461,6 +1675,7 @@
     "RepairCodes.axisTwistedCubicRepair_edge_dependent",
     "RepairCodes.axisTwistedCubicRepair_edge_nonempty",
     "RepairCodes.axisTwistedCubic_allSymbol_locality_three",
+    "RepairCodes.axisTwistedCubic_allSymbol_tau_gt_nu",
     "RepairCodes.axisTwistedCubic_circuit_mem_repair",
     "RepairCodes.axisTwistedCubic_pair_linearIndependent",
     "RepairCodes.axisTwistedCubic_selected_linearIndependent_of_card_le_three_of_containsCubic",
@@ -1479,6 +1694,7 @@
     "RepairCodes.blockSupport.congr_simp",
     "RepairCodes.blockSupport.eq_1",
     "RepairCodes.blockSupport_card_le_one_of_isEmbeddedInnerDualBlock",
+    "RepairCodes.card_projectiveCubicPart_add_card_projectiveAxisPart",
     "RepairCodes.completedQ9_singer_average_lt",
     "RepairCodes.concatenatedCode",
     "RepairCodes.concatenatedCode_finrank",
@@ -1496,12 +1712,29 @@
     "RepairCodes.cubicCoordinate_exact_locality_three",
     "RepairCodes.cubicCoordinate_has_repairEdge",
     "RepairCodes.cubicCoordinate_no_repairEdge_radius_two",
+    "RepairCodes.cubicRepairHypergraph_card",
     "RepairCodes.cubicRepairHypergraph_shape",
+    "RepairCodes.cubicRepairShiftedSum",
+    "RepairCodes.cubicRepairShiftedSum.eq_1",
+    "RepairCodes.cubicRepairSumColor",
+    "RepairCodes.cubicRepairSumColor.eq_1",
+    "RepairCodes.cubicRepairSumColor_injective",
     "RepairCodes.cubicRepair_axis_eq_of_mem",
     "RepairCodes.cubicRepair_edge_card_eq_three",
+    "RepairCodes.cubicRepair_matchingNumber",
+    "RepairCodes.cubicRepair_matchingNumber_ge_half",
+    "RepairCodes.cubicRepair_matchingNumber_ge_half.match_1_1",
+    "RepairCodes.cubicRepair_matchingNumber_le",
+    "RepairCodes.cubicRepair_matchingNumber_lower",
+    "RepairCodes.cubicRepair_matchingNumber_lower.match_1_1",
+    "RepairCodes.cubicRepair_matching_card_bound",
     "RepairCodes.cubicRepair_oneCubic_twoAxis_not_mem",
+    "RepairCodes.cubicRepair_tau_gt_nu",
     "RepairCodes.cubicRepair_threeAxis_not_mem",
     "RepairCodes.cubicRepair_threeCubic_not_mem",
+    "RepairCodes.cubicRepair_transversalNumber",
+    "RepairCodes.cubicRepair_transversal_card_ge",
+    "RepairCodes.cubicRepair_transversal_of_erase",
     "RepairCodes.cubicTripleIndexFamily",
     "RepairCodes.cubicTripleIndexFamily.eq_1",
     "RepairCodes.cubicTripleRepairHelpers",
@@ -1562,31 +1795,76 @@
     "RepairCodes.innerCoordinateFunctional_orbit_injective",
     "RepairCodes.instDecidableEqDual_repairCodes",
     "RepairCodes.isEmbeddedInnerDualBlock_of_all_inner_of_card_le_one",
+    "RepairCodes.isProjectiveAxisTwistedCubicCircuit_map_iff",
     "RepairCodes.matchingNumber_minimalAxisTwistedCubicRepairHypergraph",
     "RepairCodes.matchingNumber_minimalProjectiveAxisTwistedCubicRepairHypergraph",
     "RepairCodes.matchingNumber_repairHypergraph_concatenatedCode",
+    "RepairCodes.mem_axisCubicRepairComponent_iff",
+    "RepairCodes.mem_axisPairRepairComponent_iff",
+    "RepairCodes.mem_axisRepairHypergraph_threeCubic_iff",
     "RepairCodes.mem_axisRepairHypergraph_two_iff",
     "RepairCodes.mem_cubicRepairHypergraph_iff",
     "RepairCodes.mem_functionalDual",
     "RepairCodes.mem_functionalDual_generalizedSPCFive_iff",
     "RepairCodes.mem_generalizedSPCFive",
+    "RepairCodes.mem_minimalAxisRepairHypergraph_iff",
     "RepairCodes.mem_minimalProjectiveAxisInfinityRepair_iff",
     "RepairCodes.mem_projectiveAxisInfinityRepair_threeFinite_iff",
     "RepairCodes.mem_projectiveAxisRepairHypergraph_two_iff",
     "RepairCodes.mem_projectiveCubicInfinityRepairHypergraph_iff",
+    "RepairCodes.minimalAxisRepairHypergraph_eq_components",
+    "RepairCodes.minimalAxisRepair_finite_invariants",
+    "RepairCodes.minimalAxisRepair_invariant_decomposition",
+    "RepairCodes.minimalAxisRepair_le_transversalNumber",
+    "RepairCodes.minimalAxisRepair_matchingNumber_le",
+    "RepairCodes.minimalAxisRepair_matching_weight_bound",
+    "RepairCodes.minimalAxisRepair_nucleus_invariants",
+    "RepairCodes.minimalAxisRepair_tau_gt_nu",
+    "RepairCodes.minimalAxisRepair_transversal_card_ge",
     "RepairCodes.minimalAxisTwistedCubicRepairHypergraph",
+    "RepairCodes.minimalAxisTwistedCubicRepairHypergraph.eq_1",
+    "RepairCodes.minimalProjectiveAxisInfinityRepair_eq_embedAffine",
+    "RepairCodes.minimalProjectiveAxisInfinityRepair_four_invariants",
+    "RepairCodes.minimalProjectiveAxisInfinityRepair_four_matchingNumber",
+    "RepairCodes.minimalProjectiveAxisInfinityRepair_four_matching_weight_bound",
+    "RepairCodes.minimalProjectiveAxisInfinityRepair_four_weight",
+    "RepairCodes.minimalProjectiveAxisInfinityRepair_invariants",
+    "RepairCodes.minimalProjectiveAxisRepair_four_invariants",
+    "RepairCodes.minimalProjectiveAxisRepair_full_invariants",
+    "RepairCodes.minimalProjectiveAxisRepair_invariants",
     "RepairCodes.minimalProjectiveAxisTwistedCubicRepairHypergraph",
     "RepairCodes.minimalProjectiveAxisTwistedCubicRepairHypergraph.eq_1",
+    "RepairCodes.minimalProjectiveAxisTwistedCubicRepair_full_eq_four",
+    "RepairCodes.minimalProjectiveCubicInfinityRepair_four_cubicPart_card_ge_two",
+    "RepairCodes.minimalProjectiveCubicInfinityRepair_four_invariants",
+    "RepairCodes.minimalProjectiveCubicInfinityRepair_four_matchingNumber",
+    "RepairCodes.minimalProjectiveCubicInfinityRepair_four_matching_card_bound",
+    "RepairCodes.minimalProjectiveCubicInfinityRepair_invariants",
+    "RepairCodes.minimalProjectiveCubicRepair_four_invariants",
+    "RepairCodes.minimalProjectiveCubicRepair_full_invariants",
+    "RepairCodes.minimalProjectiveCubicRepair_invariants",
     "RepairCodes.not_isEmbeddedInnerDualBlock_iff_two_le_blockSupport_card_of_isCoordinateSurjective",
     "RepairCodes.ofInnerCode",
     "RepairCodes.ofInnerCodeFunctional",
     "RepairCodes.precompNonzeroDual",
+    "RepairCodes.projectiveAxisInfinityFullRepair_transversalNumber",
     "RepairCodes.projectiveAxisInfinityRepair_contains_canonical",
     "RepairCodes.projectiveAxisInfinityRepair_threeFinite_sum_eq_zero",
     "RepairCodes.projectiveAxisInfinityRepair_twoFiniteCubicInfinity_not_mem",
+    "RepairCodes.projectiveAxisPart",
+    "RepairCodes.projectiveAxisPart.eq_1",
+    "RepairCodes.projectiveAxisPart_card_le_two_of_linearIndependent",
     "RepairCodes.projectiveAxisRepairPair_shape",
     "RepairCodes.projectiveAxisRepair_edge_card_eq_two",
     "RepairCodes.projectiveAxisRepair_twoCubic_oneAxis_not_mem",
+    "RepairCodes.projectiveAxisShiftInvEquiv",
+    "RepairCodes.projectiveAxisShiftInvEquiv.eq_1",
+    "RepairCodes.projectiveAxisShiftInvEquiv.match_1",
+    "RepairCodes.projectiveAxisShiftInvEquiv_eq_infinity_iff",
+    "RepairCodes.projectiveAxisShiftInvEquiv_finite_iff",
+    "RepairCodes.projectiveAxisShiftInvEquiv_finite_of_ne",
+    "RepairCodes.projectiveAxisShiftInvEquiv_infinity",
+    "RepairCodes.projectiveAxisShiftInvEquiv_neg",
     "RepairCodes.projectiveAxisTripleDualWord",
     "RepairCodes.projectiveAxisTripleDualWord.eq_1",
     "RepairCodes.projectiveAxisTripleDualWord_hammingNorm",
@@ -1612,20 +1890,61 @@
     "RepairCodes.projectiveAxisTwistedCubic_strict_weighted_transfer_of_regular_projective_action",
     "RepairCodes.projectiveAxisTwistedCubic_triple_linearIndependent_of_containsCubic",
     "RepairCodes.projectiveAxisTwistedCubic_twenty_unitCost_orbits",
+    "RepairCodes.projectiveCubicInfinityFullRepair_transversalNumber",
     "RepairCodes.projectiveCubicInfinityRepairHelpers_mem",
     "RepairCodes.projectiveCubicInfinityRepairHypergraph_shape",
     "RepairCodes.projectiveCubicInfinityRepair_axis_eq_of_mem",
     "RepairCodes.projectiveCubicInfinityRepair_edge_card_eq_three",
+    "RepairCodes.projectiveCubicInfinityRepair_matchingNumber",
+    "RepairCodes.projectiveCubicInfinityRepair_matchingNumber_ge_half",
+    "RepairCodes.projectiveCubicInfinityRepair_matchingNumber_ge_half.match_1_1",
+    "RepairCodes.projectiveCubicInfinityRepair_matchingNumber_le",
+    "RepairCodes.projectiveCubicInfinityRepair_matching_card_bound",
     "RepairCodes.projectiveCubicInfinityRepair_oneFinite_twoAxis_not_mem",
     "RepairCodes.projectiveCubicInfinityRepair_threeAxis_not_mem",
     "RepairCodes.projectiveCubicInfinityRepair_threeFinite_not_mem",
+    "RepairCodes.projectiveCubicInfinityRepair_transversalNumber",
+    "RepairCodes.projectiveCubicInfinityRepair_transversal_card_ge",
+    "RepairCodes.projectiveCubicInfinityRepair_transversal_of_erase",
     "RepairCodes.projectiveCubicInfinity_no_repairEdge_radius_two",
+    "RepairCodes.projectiveCubicPart",
+    "RepairCodes.projectiveCubicPart.eq_1",
     "RepairCodes.projectiveFiniteCubicTripleIndexFamily",
     "RepairCodes.projectiveFiniteCubicTripleIndexFamily.eq_1",
     "RepairCodes.projectiveFiniteCubicTripleRepairHelpers",
     "RepairCodes.projectiveFiniteCubicTripleRepairHelpers.eq_1",
     "RepairCodes.projectiveFiniteCubicTripleRepairHelpers_mem",
     "RepairCodes.projectiveRepairTriple_not_mem_of_linearIndependent",
+    "RepairCodes.projectiveShiftInvFinsetEquiv",
+    "RepairCodes.projectiveShiftInvIndexEquiv",
+    "RepairCodes.projectiveShiftInvIndexEquiv.eq_1",
+    "RepairCodes.projectiveShiftInvLinearEquiv",
+    "RepairCodes.projectiveShiftInvLinearEquiv_apply",
+    "RepairCodes.projectiveShiftInvLinearMap",
+    "RepairCodes.projectiveShiftInvLinearMap.eq_1",
+    "RepairCodes.projectiveShiftInvLinearMap_axis_finite",
+    "RepairCodes.projectiveShiftInvLinearMap_axis_finite_of_ne",
+    "RepairCodes.projectiveShiftInvLinearMap_axis_infinity",
+    "RepairCodes.projectiveShiftInvLinearMap_axis_target",
+    "RepairCodes.projectiveShiftInvLinearMap_column",
+    "RepairCodes.projectiveShiftInvLinearMap_cubic_finite",
+    "RepairCodes.projectiveShiftInvLinearMap_cubic_finite_of_ne",
+    "RepairCodes.projectiveShiftInvLinearMap_cubic_infinity",
+    "RepairCodes.projectiveShiftInvLinearMap_cubic_pole",
+    "RepairCodes.projectiveShiftInvLinearMap_injective",
+    "RepairCodes.projectiveShiftInvScale",
+    "RepairCodes.projectiveShiftInvScale.eq_1",
+    "RepairCodes.projectiveShiftInvScale.eq_2",
+    "RepairCodes.projectiveShiftInvScale.eq_3",
+    "RepairCodes.projectiveShiftInvScale.eq_4",
+    "RepairCodes.projectiveShiftInvScale.match_1",
+    "RepairCodes.projectiveShiftInvScaleUnit",
+    "RepairCodes.projectiveShiftInvScaleUnit_val",
+    "RepairCodes.projectiveShiftInvScale_ne_zero",
+    "RepairCodes.projectiveShiftInv_finset_linearIndependent_iff",
+    "RepairCodes.projectiveShiftInv_linearIndependent_iff",
+    "RepairCodes.projectiveShiftInv_relabel_minimalRepairHypergraph",
+    "RepairCodes.projectiveShiftInv_relabel_repairHypergraph",
     "RepairCodes.repairHypergraph_concatenatedCode_eq_embed",
     "RepairCodes.repairHypergraph_concatenatedCode_eq_embed_nonembedded",
     "RepairCodes.repairHypergraph_concatenatedCode_eq_embed_pointed",
@@ -1651,7 +1970,10 @@
     "RepairCodes.transversalNumber_minimalAxisTwistedCubicRepairHypergraph",
     "RepairCodes.transversalNumber_minimalProjectiveAxisTwistedCubicRepairHypergraph",
     "RepairCodes.transversalNumber_repairHypergraph_concatenatedCode",
+    "RepairCodes.tripleAxisIndex_eq_finite_iff_shiftInv",
+    "RepairCodes.twistedCubicTripleAxisIndex_eq_cubicRepairSumColor",
     "RepairCodes.twistedCubicTripleAxisIndex_injective_third",
+    "RepairCodes.twistedCubicTripleAxisIndex_translate",
     "RepairCodes.twoCubicNormalizedAxis_linearIndependent",
     "RepairCodes.wordBlock",
     "RepairCodes.wordBlock.eq_1",
@@ -2115,6 +2437,36 @@
       "Quot.sound",
       "propext"
     ],
+    "FiniteGeom.projectiveAxisTwistedCubic_code_parameters": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RepairCodes.minimalProjectiveAxisRepair_four_invariants": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RepairCodes.minimalProjectiveAxisRepair_full_invariants": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RepairCodes.minimalProjectiveAxisTwistedCubicRepair_full_eq_four": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RepairCodes.minimalProjectiveCubicRepair_four_invariants": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RepairCodes.minimalProjectiveCubicRepair_full_invariants": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
     "RepairCodes.projectiveAxisTwistedCubic_strict_weighted_transfer_of_regular_projective_action": [
       "Classical.choice",
       "Quot.sound",
@@ -2543,6 +2895,9 @@
     "FiniteGeom.card_embedHypergraph": [
       "FiniteGeom.embedHypergraph"
     ],
+    "FiniteGeom.card_explicitAugmentedEdge": [
+      "FiniteGeom.explicitAugmentedEdge"
+    ],
     "FiniteGeom.card_le_independenceNumber": [
       "FiniteGeom.IsIndependent",
       "FiniteGeom.IsTransversal",
@@ -2554,6 +2909,22 @@
     "FiniteGeom.card_le_matchingNumber": [
       "FiniteGeom.IsMatching",
       "FiniteGeom.matchingNumber"
+    ],
+    "FiniteGeom.card_le_matchingNumber_augmentedColorHypergraph_of_explicit": [
+      "FiniteGeom.IsMatching",
+      "FiniteGeom.augmentedColorHypergraph",
+      "FiniteGeom.card_explicitAugmentedEdge",
+      "FiniteGeom.card_le_matchingNumber",
+      "FiniteGeom.explicitAugmentedEdge",
+      "FiniteGeom.isMatching_explicitAugmentedEdge",
+      "FiniteGeom.matchingNumber"
+    ],
+    "FiniteGeom.card_le_zeroSumCapNumber": [
+      "FiniteGeom.IsIndependent",
+      "FiniteGeom.card_le_independenceNumber",
+      "FiniteGeom.mem_zeroSumTripleHypergraph",
+      "FiniteGeom.zeroSumCapNumber",
+      "FiniteGeom.zeroSumTripleHypergraph"
     ],
     "FiniteGeom.card_projectiveAxisTwistedCubicIndex": [
       "FiniteGeom.ProjectiveAxisTwistedCubicIndex",
@@ -2714,6 +3085,16 @@
       "FiniteGeom.IsTransversal",
       "FiniteGeom.transversalNumber"
     ],
+    "FiniteGeom.exists_zeroSumCap_card_eq": [
+      "FiniteGeom.IsIndependent",
+      "FiniteGeom.exists_independent_card_eq_independenceNumber",
+      "FiniteGeom.mem_zeroSumTripleHypergraph",
+      "FiniteGeom.zeroSumCapNumber",
+      "FiniteGeom.zeroSumTripleHypergraph"
+    ],
+    "FiniteGeom.explicitAugmentedEdge.eq_1": [
+      "FiniteGeom.explicitAugmentedEdge"
+    ],
     "FiniteGeom.finiteCubicInfinityAxis_linearIndependent": [
       "FiniteGeom.axisTwistedCubicPoints",
       "FiniteGeom.axisTwistedCubicPoints_axis_coord_three",
@@ -2783,6 +3164,28 @@
     ],
     "FiniteGeom.independenceNumber": [
       "FiniteGeom.transversalNumber"
+    ],
+    "FiniteGeom.independenceNumber_zeroSumTripleHypergraphAvoidingZero": [
+      "FiniteGeom.IsIndependent",
+      "FiniteGeom.IsIndependent.relabelHypergraph",
+      "FiniteGeom.card_le_independenceNumber",
+      "FiniteGeom.card_le_zeroSumCapNumber",
+      "FiniteGeom.exists_independent_card_eq_independenceNumber",
+      "FiniteGeom.exists_zeroSumCap_card_eq",
+      "FiniteGeom.independenceNumber",
+      "FiniteGeom.mem_zeroSumTripleHypergraph",
+      "FiniteGeom.mem_zeroSumTripleHypergraphAvoidingZero",
+      "FiniteGeom.relabelHypergraph",
+      "FiniteGeom.relabel_zeroSumTripleHypergraph_addRight",
+      "FiniteGeom.zeroSumCapNumber",
+      "FiniteGeom.zeroSumTripleHypergraph",
+      "FiniteGeom.zeroSumTripleHypergraphAvoidingZero"
+    ],
+    "FiniteGeom.isMatching_explicitAugmentedEdge": [
+      "FiniteGeom.IsMatching",
+      "FiniteGeom.augmentedColorHypergraph",
+      "FiniteGeom.explicitAugmentedEdge",
+      "FiniteGeom.mem_augmentedColorHypergraph"
     ],
     "FiniteGeom.isMatching_relabelHypergraph_iff": [
       "FiniteGeom.IsMatching",
@@ -2906,6 +3309,26 @@
       "FiniteGeom.exists_matching_card_eq_matchingNumber",
       "FiniteGeom.matchingNumber"
     ],
+    "FiniteGeom.matchingNumber_zeroSumTripleHypergraph": [
+      "FiniteGeom.IsMatching",
+      "FiniteGeom.card_le_matchingNumber",
+      "FiniteGeom.matchingNumber",
+      "FiniteGeom.matchingNumber_le_of_forall",
+      "FiniteGeom.mem_zeroSumTripleHypergraph",
+      "FiniteGeom.zeroSumTripleHypergraph",
+      "FiniteGeom.zeroSumTriple_parallelClass_exists"
+    ],
+    "FiniteGeom.matchingNumber_zeroSumTripleHypergraphAvoidingZero": [
+      "FiniteGeom.IsMatching",
+      "FiniteGeom.card_le_matchingNumber",
+      "FiniteGeom.matchingNumber",
+      "FiniteGeom.matchingNumber_le_of_forall",
+      "FiniteGeom.mem_zeroSumTripleHypergraph",
+      "FiniteGeom.mem_zeroSumTripleHypergraphAvoidingZero",
+      "FiniteGeom.zeroSumTripleHypergraph",
+      "FiniteGeom.zeroSumTripleHypergraphAvoidingZero",
+      "FiniteGeom.zeroSumTriple_parallelClass_exists"
+    ],
     "FiniteGeom.matching_card_le_transversal_card": [
       "FiniteGeom.IsMatching",
       "FiniteGeom.IsTransversal"
@@ -2993,6 +3416,13 @@
     "FiniteGeom.mem_wordSupport": [
       "FiniteGeom.wordSupport"
     ],
+    "FiniteGeom.mem_zeroSumTripleHypergraph": [
+      "FiniteGeom.zeroSumTripleHypergraph"
+    ],
+    "FiniteGeom.mem_zeroSumTripleHypergraphAvoidingZero": [
+      "FiniteGeom.zeroSumTripleHypergraph",
+      "FiniteGeom.zeroSumTripleHypergraphAvoidingZero"
+    ],
     "FiniteGeom.minDist.eq_1": [
       "FiniteGeom.minDist"
     ],
@@ -3010,6 +3440,9 @@
     "FiniteGeom.minimalRepairHypergraph": [
       "FiniteGeom.minimalHyperedges",
       "FiniteGeom.repairHypergraph"
+    ],
+    "FiniteGeom.minimalRepairHypergraph.congr_simp": [
+      "FiniteGeom.minimalRepairHypergraph"
     ],
     "FiniteGeom.minimalRepairHypergraph.eq_1": [
       "FiniteGeom.minimalHyperedges",
@@ -3371,6 +3804,21 @@
       "FiniteGeom.repairHypergraph_map_mem_of_monomial",
       "FiniteGeom.rowCode"
     ],
+    "FiniteGeom.relabel_zeroSumTripleHypergraph": [
+      "FiniteGeom.mem_zeroSumTripleHypergraph",
+      "FiniteGeom.relabelHypergraph",
+      "FiniteGeom.zeroSumTripleHypergraph"
+    ],
+    "FiniteGeom.relabel_zeroSumTripleHypergraphAvoidingZero": [
+      "FiniteGeom.mem_zeroSumTripleHypergraphAvoidingZero",
+      "FiniteGeom.relabelHypergraph",
+      "FiniteGeom.zeroSumTripleHypergraphAvoidingZero"
+    ],
+    "FiniteGeom.relabel_zeroSumTripleHypergraph_addRight": [
+      "FiniteGeom.mem_zeroSumTripleHypergraph",
+      "FiniteGeom.relabelHypergraph",
+      "FiniteGeom.zeroSumTripleHypergraph"
+    ],
     "FiniteGeom.repairHypergraph": [
       "FiniteGeom.dualCode",
       "FiniteGeom.wordSupport"
@@ -3589,6 +4037,29 @@
       "FiniteGeom.le_transversalNumber_of_forall",
       "FiniteGeom.transversalNumber",
       "FiniteGeom.transversalNumber_le_card"
+    ],
+    "FiniteGeom.transversalNumber_zeroSumTripleHypergraph": [
+      "FiniteGeom.IsTransversal",
+      "FiniteGeom.independenceNumber",
+      "FiniteGeom.mem_zeroSumTripleHypergraph",
+      "FiniteGeom.transversalNumber",
+      "FiniteGeom.transversalNumber_le_card",
+      "FiniteGeom.zeroSumCapNumber",
+      "FiniteGeom.zeroSumTripleHypergraph"
+    ],
+    "FiniteGeom.transversalNumber_zeroSumTripleHypergraphAvoidingZero": [
+      "FiniteGeom.IsIndependent",
+      "FiniteGeom.IsTransversal",
+      "FiniteGeom.exists_zeroSumCap_card_eq",
+      "FiniteGeom.independenceNumber",
+      "FiniteGeom.independenceNumber_zeroSumTripleHypergraphAvoidingZero",
+      "FiniteGeom.mem_zeroSumTripleHypergraph",
+      "FiniteGeom.mem_zeroSumTripleHypergraphAvoidingZero",
+      "FiniteGeom.transversalNumber",
+      "FiniteGeom.transversalNumber_le_card",
+      "FiniteGeom.zeroSumCapNumber",
+      "FiniteGeom.zeroSumTripleHypergraph",
+      "FiniteGeom.zeroSumTripleHypergraphAvoidingZero"
     ],
     "FiniteGeom.twistedCubicAxisCircuitMatrix.eq_1": [
       "FiniteGeom.twistedCubicAxisCircuitMatrix"
@@ -3869,6 +4340,11 @@
       "FiniteGeom.momentCurve",
       "FiniteGeom.projectiveTwistedCubicPoints"
     ],
+    "FiniteGeom.units_addColor_matchingNumber_lower": [
+      "FiniteGeom.augmentedColorHypergraph",
+      "FiniteGeom.card_le_matchingNumber_augmentedColorHypergraph_of_explicit",
+      "FiniteGeom.matchingNumber"
+    ],
     "FiniteGeom.wordSupport.congr_simp": [
       "FiniteGeom.wordSupport"
     ],
@@ -3883,6 +4359,35 @@
       "FiniteGeom.repairHypergraph",
       "FiniteGeom.rowCode",
       "FiniteGeom.wordSupport"
+    ],
+    "FiniteGeom.zeroSumCapNumber": [
+      "FiniteGeom.independenceNumber",
+      "FiniteGeom.zeroSumTripleHypergraph"
+    ],
+    "FiniteGeom.zeroSumCapNumber.congr_simp": [
+      "FiniteGeom.zeroSumCapNumber"
+    ],
+    "FiniteGeom.zeroSumCapNumber_lt_card": [
+      "FiniteGeom.IsIndependent",
+      "FiniteGeom.exists_zeroSumCap_card_eq",
+      "FiniteGeom.mem_zeroSumTripleHypergraph",
+      "FiniteGeom.zeroSumCapNumber",
+      "FiniteGeom.zeroSumTripleHypergraph"
+    ],
+    "FiniteGeom.zeroSumTripleHypergraph.eq_1": [
+      "FiniteGeom.zeroSumTripleHypergraph"
+    ],
+    "FiniteGeom.zeroSumTripleHypergraphAvoidingZero": [
+      "FiniteGeom.zeroSumTripleHypergraph"
+    ],
+    "FiniteGeom.zeroSumTripleHypergraphAvoidingZero.eq_1": [
+      "FiniteGeom.zeroSumTripleHypergraph",
+      "FiniteGeom.zeroSumTripleHypergraphAvoidingZero"
+    ],
+    "FiniteGeom.zeroSumTriple_parallelClass_exists": [
+      "FiniteGeom.IsMatching",
+      "FiniteGeom.mem_zeroSumTripleHypergraph",
+      "FiniteGeom.zeroSumTripleHypergraph"
     ],
     "RepairCodes.ConcatDualWord.beta": [
       "RepairCodes.ConcatDualWord"
@@ -4069,8 +4574,29 @@
     "RepairCodes.IsEmbeddedInnerDualBlockAt": [
       "FiniteGeom.dualCode"
     ],
+    "RepairCodes.IsProjectiveAxisTwistedCubicCircuit": [
+      "FiniteGeom.ProjectiveAxisTwistedCubicIndex",
+      "FiniteGeom.ProjectiveTwistedCubicIndex",
+      "FiniteGeom.projectiveAxisTwistedCubicPoints"
+    ],
     "RepairCodes.IsSupportReducedRepresentative": [
       "RepairCodes.blockFunctional"
+    ],
+    "RepairCodes.affineToProjectiveAxisIndexEmbedding": [
+      "FiniteGeom.AxisTwistedCubicIndex",
+      "FiniteGeom.ProjectiveAxisTwistedCubicIndex",
+      "FiniteGeom.ProjectiveTwistedCubicIndex",
+      "RepairCodes.affineToProjectiveAxisIndexEmbedding.match_1"
+    ],
+    "RepairCodes.affineToProjectiveAxisIndexEmbedding.eq_1": [
+      "FiniteGeom.AxisTwistedCubicIndex",
+      "FiniteGeom.ProjectiveAxisTwistedCubicIndex",
+      "FiniteGeom.ProjectiveTwistedCubicIndex",
+      "RepairCodes.affineToProjectiveAxisIndexEmbedding",
+      "RepairCodes.affineToProjectiveAxisIndexEmbedding.match_1"
+    ],
+    "RepairCodes.affineToProjectiveAxisIndexEmbedding.match_1": [
+      "FiniteGeom.AxisTwistedCubicIndex"
     ],
     "RepairCodes.axisCoordinateTriple": [
       "RepairCodes.axisCoordinateTriple.match_1"
@@ -4114,6 +4640,112 @@
       "RepairCodes.axisTwistedCubicRepair_edge_dependent",
       "RepairCodes.axisTwistedCubic_selected_linearIndependent_of_card_le_two"
     ],
+    "RepairCodes.axisCubicRepairComponent": [
+      "FiniteGeom.AxisTwistedCubicIndex",
+      "RepairCodes.minimalAxisTwistedCubicRepairHypergraph"
+    ],
+    "RepairCodes.axisCubicRepairComponent.eq_1": [
+      "FiniteGeom.AxisTwistedCubicIndex",
+      "RepairCodes.axisCubicRepairComponent",
+      "RepairCodes.minimalAxisTwistedCubicRepairHypergraph"
+    ],
+    "RepairCodes.axisCubicRepairComponent_finite_eq_avoidingZero": [
+      "FiniteGeom.AxisTwistedCubicIndex",
+      "FiniteGeom.embedHypergraph",
+      "FiniteGeom.mem_zeroSumTripleHypergraphAvoidingZero",
+      "FiniteGeom.twistedCubicTripleAxisIndex",
+      "FiniteGeom.zeroSumTripleHypergraphAvoidingZero",
+      "RepairCodes.axisCubicRepairComponent",
+      "RepairCodes.axisShiftInvEquiv",
+      "RepairCodes.mem_axisCubicRepairComponent_iff",
+      "RepairCodes.tripleAxisIndex_eq_finite_iff_shiftInv"
+    ],
+    "RepairCodes.axisCubicRepairComponent_finite_matchingNumber": [
+      "FiniteGeom.AxisTwistedCubicIndex",
+      "FiniteGeom.embedHypergraph",
+      "FiniteGeom.matchingNumber",
+      "FiniteGeom.matchingNumber_embedHypergraph",
+      "FiniteGeom.matchingNumber_zeroSumTripleHypergraphAvoidingZero",
+      "FiniteGeom.zeroSumTripleHypergraphAvoidingZero",
+      "RepairCodes.axisCubicRepairComponent",
+      "RepairCodes.axisCubicRepairComponent_finite_eq_avoidingZero",
+      "RepairCodes.axisShiftInvEquiv"
+    ],
+    "RepairCodes.axisCubicRepairComponent_finite_transversalNumber": [
+      "FiniteGeom.AxisTwistedCubicIndex",
+      "FiniteGeom.embedHypergraph",
+      "FiniteGeom.mem_zeroSumTripleHypergraphAvoidingZero",
+      "FiniteGeom.transversalNumber",
+      "FiniteGeom.transversalNumber_embedHypergraph",
+      "FiniteGeom.transversalNumber_zeroSumTripleHypergraphAvoidingZero",
+      "FiniteGeom.zeroSumCapNumber",
+      "FiniteGeom.zeroSumTripleHypergraphAvoidingZero",
+      "RepairCodes.axisCubicRepairComponent",
+      "RepairCodes.axisCubicRepairComponent_finite_eq_avoidingZero",
+      "RepairCodes.axisShiftInvEquiv"
+    ],
+    "RepairCodes.axisCubicRepairComponent_infinity_eq_zeroSum": [
+      "FiniteGeom.AxisTwistedCubicIndex",
+      "FiniteGeom.embedHypergraph",
+      "FiniteGeom.mem_zeroSumTripleHypergraph",
+      "FiniteGeom.twistedCubicTripleAxisIndex",
+      "FiniteGeom.twistedCubicTripleAxisIndex.eq_1",
+      "FiniteGeom.zeroSumTripleHypergraph",
+      "RepairCodes.axisCubicRepairComponent",
+      "RepairCodes.mem_axisCubicRepairComponent_iff"
+    ],
+    "RepairCodes.axisCubicRepairComponent_infinity_matchingNumber": [
+      "FiniteGeom.AxisTwistedCubicIndex",
+      "FiniteGeom.embedHypergraph",
+      "FiniteGeom.matchingNumber",
+      "FiniteGeom.matchingNumber_embedHypergraph",
+      "FiniteGeom.matchingNumber_zeroSumTripleHypergraph",
+      "FiniteGeom.zeroSumTripleHypergraph",
+      "RepairCodes.axisCubicRepairComponent",
+      "RepairCodes.axisCubicRepairComponent_infinity_eq_zeroSum"
+    ],
+    "RepairCodes.axisCubicRepairComponent_infinity_transversalNumber": [
+      "FiniteGeom.AxisTwistedCubicIndex",
+      "FiniteGeom.embedHypergraph",
+      "FiniteGeom.mem_zeroSumTripleHypergraph",
+      "FiniteGeom.transversalNumber",
+      "FiniteGeom.transversalNumber_embedHypergraph",
+      "FiniteGeom.zeroSumTripleHypergraph",
+      "RepairCodes.axisCubicRepairComponent",
+      "RepairCodes.axisCubicRepairComponent_infinity_eq_zeroSum"
+    ],
+    "RepairCodes.axisPairRepairComponent": [
+      "FiniteGeom.AxisTwistedCubicIndex",
+      "RepairCodes.minimalAxisTwistedCubicRepairHypergraph"
+    ],
+    "RepairCodes.axisPairRepairComponent.eq_1": [
+      "FiniteGeom.AxisTwistedCubicIndex",
+      "RepairCodes.axisPairRepairComponent",
+      "RepairCodes.minimalAxisTwistedCubicRepairHypergraph"
+    ],
+    "RepairCodes.axisPairRepairComponent_eq_completePair": [
+      "FiniteGeom.AxisTwistedCubicIndex",
+      "FiniteGeom.completePairHypergraph",
+      "FiniteGeom.embedHypergraph",
+      "FiniteGeom.mem_completePairHypergraph",
+      "RepairCodes.axisPairRepairComponent",
+      "RepairCodes.mem_axisPairRepairComponent_iff"
+    ],
+    "RepairCodes.axisPairRepairComponent_invariants": [
+      "FiniteGeom.AxisTwistedCubicIndex",
+      "FiniteGeom.completePairHypergraph",
+      "FiniteGeom.embedHypergraph",
+      "FiniteGeom.matchingNumber",
+      "FiniteGeom.matchingNumber_completePairHypergraph",
+      "FiniteGeom.matchingNumber_embedHypergraph",
+      "FiniteGeom.mem_completePairHypergraph",
+      "FiniteGeom.transversalNumber",
+      "FiniteGeom.transversalNumber_completePairHypergraph",
+      "FiniteGeom.transversalNumber_embedHypergraph",
+      "RepairCodes.axisPairRepairComponent",
+      "RepairCodes.axisPairRepairComponent_eq_completePair",
+      "RepairCodes.axisPairRepairComponent_invariants.match_1_1"
+    ],
     "RepairCodes.axisRepairPair_shape": [
       "FiniteGeom.AxisTwistedCubicIndex",
       "FiniteGeom.dualCode",
@@ -4126,6 +4758,21 @@
       "RepairCodes.axisTwistedCubicRepair_edge_dependent",
       "RepairCodes.axisTwistedCubic_selected_linearIndependent_of_card_le_three_of_containsCubic"
     ],
+    "RepairCodes.axisRepair_contains_canonical": [
+      "FiniteGeom.AxisTwistedCubicIndex",
+      "FiniteGeom.dualCode",
+      "FiniteGeom.mem_repairHypergraph",
+      "FiniteGeom.mem_repairHypergraph_of_mem_of_card_le",
+      "FiniteGeom.repairHypergraph",
+      "FiniteGeom.twistedCubicTripleAxisIndex",
+      "FiniteGeom.wordSupport",
+      "RepairCodes.axisCoordinate_no_repairEdge_radius_one",
+      "RepairCodes.axisRepairPair_shape",
+      "RepairCodes.axisRepair_threeCubic_target_eq",
+      "RepairCodes.axisRepair_twoCubic_oneAxis_not_mem",
+      "RepairCodes.axisTwistedCubicCode",
+      "RepairCodes.axisTwistedCubicRepairHypergraph"
+    ],
     "RepairCodes.axisRepair_edge_card_eq_two": [
       "FiniteGeom.AxisTwistedCubicIndex",
       "FiniteGeom.dualCode",
@@ -4135,6 +4782,36 @@
       "RepairCodes.axisCoordinate_no_repairEdge_radius_one",
       "RepairCodes.axisTwistedCubicCode",
       "RepairCodes.axisTwistedCubicRepairHypergraph"
+    ],
+    "RepairCodes.axisRepair_tau_gt_nu": [
+      "FiniteGeom.AxisTwistedCubicIndex",
+      "FiniteGeom.matchingNumber",
+      "FiniteGeom.transversalNumber",
+      "RepairCodes.axisTwistedCubicRepairHypergraph",
+      "RepairCodes.matchingNumber_minimalAxisTwistedCubicRepairHypergraph",
+      "RepairCodes.minimalAxisRepair_tau_gt_nu",
+      "RepairCodes.minimalAxisTwistedCubicRepairHypergraph",
+      "RepairCodes.transversalNumber_minimalAxisTwistedCubicRepairHypergraph"
+    ],
+    "RepairCodes.axisRepair_threeCubic_target_eq": [
+      "FiniteGeom.AxisTwistedCubicIndex",
+      "FiniteGeom.repairHypergraph",
+      "FiniteGeom.repairHypergraph_retarget",
+      "FiniteGeom.twistedCubicTripleAxisIndex",
+      "RepairCodes.axisTwistedCubicCode",
+      "RepairCodes.axisTwistedCubicRepairHypergraph",
+      "RepairCodes.cubicRepair_axis_eq_of_mem"
+    ],
+    "RepairCodes.axisRepair_twoCubic_oneAxis_not_mem": [
+      "FiniteGeom.AxisTwistedCubicIndex",
+      "FiniteGeom.repairHypergraph",
+      "FiniteGeom.repairHypergraph_retarget",
+      "RepairCodes.axisTwistedCubicCode",
+      "RepairCodes.axisTwistedCubicRepairHypergraph",
+      "RepairCodes.cubicRepair_oneCubic_twoAxis_not_mem"
+    ],
+    "RepairCodes.axisShiftInvEquiv_apply": [
+      "RepairCodes.axisShiftInvEquiv"
     ],
     "RepairCodes.axisTripleRepairHelpers": [
       "FiniteGeom.AxisTwistedCubicIndex"
@@ -4247,6 +4924,14 @@
       "RepairCodes.axisTwistedCubicRepairHypergraph",
       "RepairCodes.cubicCoordinate_has_repairEdge"
     ],
+    "RepairCodes.axisTwistedCubic_allSymbol_tau_gt_nu": [
+      "FiniteGeom.AxisTwistedCubicIndex",
+      "FiniteGeom.matchingNumber",
+      "FiniteGeom.transversalNumber",
+      "RepairCodes.axisRepair_tau_gt_nu",
+      "RepairCodes.axisTwistedCubicRepairHypergraph",
+      "RepairCodes.cubicRepair_tau_gt_nu"
+    ],
     "RepairCodes.axisTwistedCubic_circuit_mem_repair": [
       "FiniteGeom.AxisTwistedCubicIndex",
       "FiniteGeom.axisTwistedCubicPoints",
@@ -4324,6 +5009,14 @@
       "FiniteGeom.dualCode",
       "RepairCodes.IsEmbeddedInnerDualBlock",
       "RepairCodes.blockSupport"
+    ],
+    "RepairCodes.card_projectiveCubicPart_add_card_projectiveAxisPart": [
+      "FiniteGeom.ProjectiveAxisTwistedCubicIndex",
+      "FiniteGeom.ProjectiveTwistedCubicIndex",
+      "RepairCodes.projectiveAxisPart",
+      "RepairCodes.projectiveAxisPart.eq_1",
+      "RepairCodes.projectiveCubicPart",
+      "RepairCodes.projectiveCubicPart.eq_1"
     ],
     "RepairCodes.concatenatedCode": [
       "RepairCodes.concatenationLinearMap"
@@ -4427,6 +5120,13 @@
       "RepairCodes.axisTwistedCubicRepair_edge_dependent",
       "RepairCodes.axisTwistedCubic_selected_linearIndependent_of_card_le_three_of_containsCubic"
     ],
+    "RepairCodes.cubicRepairHypergraph_card": [
+      "FiniteGeom.AxisTwistedCubicIndex",
+      "FiniteGeom.twistedCubicTripleAxisIndex",
+      "RepairCodes.axisTwistedCubicRepairHypergraph",
+      "RepairCodes.cubicRepair_axis_eq_of_mem",
+      "RepairCodes.mem_cubicRepairHypergraph_iff"
+    ],
     "RepairCodes.cubicRepairHypergraph_shape": [
       "FiniteGeom.AxisTwistedCubicIndex",
       "FiniteGeom.dualCode",
@@ -4441,6 +5141,15 @@
       "RepairCodes.cubicRepair_oneCubic_twoAxis_not_mem",
       "RepairCodes.cubicRepair_threeAxis_not_mem",
       "RepairCodes.cubicRepair_threeCubic_not_mem"
+    ],
+    "RepairCodes.cubicRepairShiftedSum.eq_1": [
+      "RepairCodes.cubicRepairShiftedSum"
+    ],
+    "RepairCodes.cubicRepairSumColor.eq_1": [
+      "RepairCodes.cubicRepairSumColor"
+    ],
+    "RepairCodes.cubicRepairSumColor_injective": [
+      "RepairCodes.cubicRepairSumColor"
     ],
     "RepairCodes.cubicRepair_axis_eq_of_mem": [
       "FiniteGeom.AxisTwistedCubicIndex",
@@ -4465,6 +5174,62 @@
       "RepairCodes.axisTwistedCubicRepairHypergraph",
       "RepairCodes.cubicCoordinate_no_repairEdge_radius_two"
     ],
+    "RepairCodes.cubicRepair_matchingNumber": [
+      "FiniteGeom.AxisTwistedCubicIndex",
+      "FiniteGeom.matchingNumber",
+      "RepairCodes.axisTwistedCubicRepairHypergraph",
+      "RepairCodes.cubicRepair_matchingNumber_ge_half",
+      "RepairCodes.cubicRepair_matchingNumber_le"
+    ],
+    "RepairCodes.cubicRepair_matchingNumber_ge_half": [
+      "FiniteGeom.AxisTwistedCubicIndex",
+      "FiniteGeom.augmentedColorHypergraph",
+      "FiniteGeom.embedHypergraph",
+      "FiniteGeom.matchingNumber",
+      "FiniteGeom.matchingNumber_embedHypergraph",
+      "FiniteGeom.matchingNumber_mono",
+      "FiniteGeom.mem_augmentedColorHypergraph",
+      "FiniteGeom.twistedCubicTripleAxisIndex",
+      "FiniteGeom.units_addColor_matchingNumber_lower",
+      "RepairCodes.axisTwistedCubicRepairHypergraph",
+      "RepairCodes.cubicRepairShiftedSum",
+      "RepairCodes.cubicRepairSumColor",
+      "RepairCodes.cubicRepairSumColor_injective",
+      "RepairCodes.cubicRepair_matchingNumber_ge_half.match_1_1",
+      "RepairCodes.mem_cubicRepairHypergraph_iff",
+      "RepairCodes.twistedCubicTripleAxisIndex_eq_cubicRepairSumColor"
+    ],
+    "RepairCodes.cubicRepair_matchingNumber_le": [
+      "FiniteGeom.AxisTwistedCubicIndex",
+      "FiniteGeom.IsMatching",
+      "FiniteGeom.matchingNumber",
+      "FiniteGeom.matchingNumber_le_of_forall",
+      "RepairCodes.axisTwistedCubicRepairHypergraph",
+      "RepairCodes.cubicRepair_matching_card_bound"
+    ],
+    "RepairCodes.cubicRepair_matchingNumber_lower": [
+      "FiniteGeom.AxisTwistedCubicIndex",
+      "FiniteGeom.IsProperAwayDiagonal",
+      "FiniteGeom.augmentedColorHypergraph",
+      "FiniteGeom.embedHypergraph",
+      "FiniteGeom.matchingNumber",
+      "FiniteGeom.matchingNumber_augmentedColorHypergraph_lower",
+      "FiniteGeom.matchingNumber_embedHypergraph",
+      "FiniteGeom.matchingNumber_mono",
+      "FiniteGeom.mem_augmentedColorHypergraph",
+      "FiniteGeom.twistedCubicTripleAxisIndex",
+      "RepairCodes.axisTwistedCubicRepairHypergraph",
+      "RepairCodes.cubicRepair_matchingNumber_lower.match_1_1",
+      "RepairCodes.mem_cubicRepairHypergraph_iff",
+      "RepairCodes.twistedCubicTripleAxisIndex_injective_third"
+    ],
+    "RepairCodes.cubicRepair_matching_card_bound": [
+      "FiniteGeom.AxisTwistedCubicIndex",
+      "FiniteGeom.IsMatching",
+      "FiniteGeom.twistedCubicTripleAxisIndex",
+      "RepairCodes.axisTwistedCubicRepairHypergraph",
+      "RepairCodes.mem_cubicRepairHypergraph_iff"
+    ],
     "RepairCodes.cubicRepair_oneCubic_twoAxis_not_mem": [
       "FiniteGeom.AxisTwistedCubicIndex",
       "FiniteGeom.axisTwistedCubicPoints",
@@ -4473,6 +5238,14 @@
       "FiniteGeom.twoCubicTwoAxis_linearIndependent",
       "RepairCodes.axisTwistedCubicRepairHypergraph",
       "RepairCodes.repairTriple_not_mem_of_linearIndependent"
+    ],
+    "RepairCodes.cubicRepair_tau_gt_nu": [
+      "FiniteGeom.AxisTwistedCubicIndex",
+      "FiniteGeom.matchingNumber",
+      "FiniteGeom.transversalNumber",
+      "RepairCodes.axisTwistedCubicRepairHypergraph",
+      "RepairCodes.cubicRepair_matchingNumber_le",
+      "RepairCodes.cubicRepair_transversalNumber"
     ],
     "RepairCodes.cubicRepair_threeAxis_not_mem": [
       "FiniteGeom.AxisTwistedCubicIndex",
@@ -4493,6 +5266,31 @@
       "FiniteGeom.momentCurve_linearIndependent_of_card_le",
       "RepairCodes.axisTwistedCubicRepairHypergraph",
       "RepairCodes.repairTriple_not_mem_of_linearIndependent"
+    ],
+    "RepairCodes.cubicRepair_transversalNumber": [
+      "FiniteGeom.AxisTwistedCubicIndex",
+      "FiniteGeom.IsTransversal",
+      "FiniteGeom.le_transversalNumber_of_forall",
+      "FiniteGeom.transversalNumber",
+      "FiniteGeom.transversalNumber_le_card",
+      "RepairCodes.axisTwistedCubicRepairHypergraph",
+      "RepairCodes.cubicRepair_transversal_card_ge",
+      "RepairCodes.cubicRepair_transversal_of_erase"
+    ],
+    "RepairCodes.cubicRepair_transversal_card_ge": [
+      "FiniteGeom.AxisTwistedCubicIndex",
+      "FiniteGeom.IsTransversal",
+      "FiniteGeom.twistedCubicTripleAxisIndex",
+      "RepairCodes.axisTwistedCubicRepairHypergraph",
+      "RepairCodes.mem_cubicRepairHypergraph_iff",
+      "RepairCodes.twistedCubicTripleAxisIndex_injective_third"
+    ],
+    "RepairCodes.cubicRepair_transversal_of_erase": [
+      "FiniteGeom.AxisTwistedCubicIndex",
+      "FiniteGeom.IsTransversal",
+      "FiniteGeom.twistedCubicTripleAxisIndex",
+      "RepairCodes.axisTwistedCubicRepairHypergraph",
+      "RepairCodes.mem_cubicRepairHypergraph_iff"
     ],
     "RepairCodes.cubicTripleIndexFamily": [
       "FiniteGeom.AxisTwistedCubicIndex",
@@ -4950,6 +5748,14 @@
       "RepairCodes.IsEmbeddedInnerDualBlock",
       "RepairCodes.blockSupport"
     ],
+    "RepairCodes.isProjectiveAxisTwistedCubicCircuit_map_iff": [
+      "FiniteGeom.ProjectiveAxisTwistedCubicIndex",
+      "FiniteGeom.ProjectiveTwistedCubicIndex",
+      "FiniteGeom.projectiveAxisTwistedCubicPoints",
+      "RepairCodes.IsProjectiveAxisTwistedCubicCircuit",
+      "RepairCodes.projectiveShiftInvIndexEquiv",
+      "RepairCodes.projectiveShiftInv_finset_linearIndependent_iff"
+    ],
     "RepairCodes.matchingNumber_minimalAxisTwistedCubicRepairHypergraph": [
       "FiniteGeom.AxisTwistedCubicIndex",
       "FiniteGeom.matchingNumber",
@@ -4982,6 +5788,33 @@
       "RepairCodes.concatenatedCode",
       "RepairCodes.repairHypergraph_concatenatedCode_eq_embed"
     ],
+    "RepairCodes.mem_axisCubicRepairComponent_iff": [
+      "FiniteGeom.AxisTwistedCubicIndex",
+      "FiniteGeom.twistedCubicTripleAxisIndex",
+      "RepairCodes.axisCubicRepairComponent",
+      "RepairCodes.axisCubicRepairComponent.eq_1",
+      "RepairCodes.mem_minimalAxisRepairHypergraph_iff",
+      "RepairCodes.minimalAxisTwistedCubicRepairHypergraph"
+    ],
+    "RepairCodes.mem_axisPairRepairComponent_iff": [
+      "FiniteGeom.AxisTwistedCubicIndex",
+      "FiniteGeom.twistedCubicTripleAxisIndex",
+      "RepairCodes.axisPairRepairComponent",
+      "RepairCodes.axisPairRepairComponent.eq_1",
+      "RepairCodes.mem_minimalAxisRepairHypergraph_iff",
+      "RepairCodes.minimalAxisTwistedCubicRepairHypergraph"
+    ],
+    "RepairCodes.mem_axisRepairHypergraph_threeCubic_iff": [
+      "FiniteGeom.AxisTwistedCubicIndex",
+      "FiniteGeom.repairHypergraph",
+      "FiniteGeom.repairHypergraph_retarget",
+      "FiniteGeom.twistedCubicTripleAxisIndex",
+      "RepairCodes.axisRepair_threeCubic_target_eq",
+      "RepairCodes.axisTwistedCubicCode",
+      "RepairCodes.axisTwistedCubicRepairHypergraph",
+      "RepairCodes.cubicTripleRepairHelpers",
+      "RepairCodes.cubicTripleRepairHelpers_mem"
+    ],
     "RepairCodes.mem_axisRepairHypergraph_two_iff": [
       "FiniteGeom.AxisTwistedCubicIndex",
       "RepairCodes.axisRepairPair_shape",
@@ -5005,6 +5838,26 @@
     ],
     "RepairCodes.mem_generalizedSPCFive": [
       "RepairCodes.generalizedSPCFive"
+    ],
+    "RepairCodes.mem_minimalAxisRepairHypergraph_iff": [
+      "FiniteGeom.AxisTwistedCubicIndex",
+      "FiniteGeom.mem_minimalHyperedges",
+      "FiniteGeom.mem_repairHypergraph_of_mem_of_card_le",
+      "FiniteGeom.minimalHyperedges",
+      "FiniteGeom.minimalRepairHypergraph",
+      "FiniteGeom.minimalRepairHypergraph.eq_1",
+      "FiniteGeom.repairHypergraph",
+      "FiniteGeom.repairHypergraph_mono_radius",
+      "FiniteGeom.twistedCubicTripleAxisIndex",
+      "RepairCodes.axisCoordinate_no_repairEdge_radius_one",
+      "RepairCodes.axisRepairPair_shape",
+      "RepairCodes.axisRepair_contains_canonical",
+      "RepairCodes.axisTwistedCubicCode",
+      "RepairCodes.axisTwistedCubicRepairHypergraph",
+      "RepairCodes.mem_axisRepairHypergraph_threeCubic_iff",
+      "RepairCodes.mem_axisRepairHypergraph_two_iff",
+      "RepairCodes.minimalAxisTwistedCubicRepairHypergraph",
+      "RepairCodes.minimalAxisTwistedCubicRepairHypergraph.eq_1"
     ],
     "RepairCodes.mem_minimalProjectiveAxisInfinityRepair_iff": [
       "FiniteGeom.ProjectiveAxisTwistedCubicIndex",
@@ -5055,10 +5908,257 @@
       "RepairCodes.projectiveCubicInfinityRepairHelpers_mem",
       "RepairCodes.projectiveCubicInfinityRepairHypergraph_shape"
     ],
+    "RepairCodes.minimalAxisRepairHypergraph_eq_components": [
+      "FiniteGeom.AxisTwistedCubicIndex",
+      "FiniteGeom.twistedCubicTripleAxisIndex",
+      "RepairCodes.axisCubicRepairComponent",
+      "RepairCodes.axisPairRepairComponent",
+      "RepairCodes.mem_axisCubicRepairComponent_iff",
+      "RepairCodes.mem_axisPairRepairComponent_iff",
+      "RepairCodes.mem_minimalAxisRepairHypergraph_iff",
+      "RepairCodes.minimalAxisTwistedCubicRepairHypergraph"
+    ],
+    "RepairCodes.minimalAxisRepair_finite_invariants": [
+      "FiniteGeom.AxisTwistedCubicIndex",
+      "FiniteGeom.matchingNumber",
+      "FiniteGeom.transversalNumber",
+      "FiniteGeom.zeroSumCapNumber",
+      "FiniteGeom.zeroSumCapNumber_lt_card",
+      "RepairCodes.axisCardDivision_normalizations",
+      "RepairCodes.axisCubicRepairComponent",
+      "RepairCodes.axisCubicRepairComponent_finite_matchingNumber",
+      "RepairCodes.axisCubicRepairComponent_finite_transversalNumber",
+      "RepairCodes.minimalAxisRepair_invariant_decomposition",
+      "RepairCodes.minimalAxisTwistedCubicRepairHypergraph"
+    ],
+    "RepairCodes.minimalAxisRepair_invariant_decomposition": [
+      "FiniteGeom.AxisTwistedCubicIndex",
+      "FiniteGeom.matchingNumber",
+      "FiniteGeom.matchingNumber_union_of_disjoint_vertices",
+      "FiniteGeom.transversalNumber",
+      "FiniteGeom.transversalNumber_union_of_disjoint_vertices",
+      "FiniteGeom.twistedCubicTripleAxisIndex",
+      "RepairCodes.axisCubicRepairComponent",
+      "RepairCodes.axisPairRepairComponent",
+      "RepairCodes.axisPairRepairComponent_invariants",
+      "RepairCodes.mem_axisCubicRepairComponent_iff",
+      "RepairCodes.mem_axisPairRepairComponent_iff",
+      "RepairCodes.minimalAxisRepairHypergraph_eq_components",
+      "RepairCodes.minimalAxisTwistedCubicRepairHypergraph"
+    ],
+    "RepairCodes.minimalAxisRepair_le_transversalNumber": [
+      "FiniteGeom.AxisTwistedCubicIndex",
+      "FiniteGeom.IsTransversal",
+      "FiniteGeom.le_transversalNumber_of_forall",
+      "FiniteGeom.mem_minimalHyperedges",
+      "FiniteGeom.minimalHyperedges",
+      "FiniteGeom.repairHypergraph",
+      "FiniteGeom.transversalNumber",
+      "RepairCodes.axisTwistedCubicCode",
+      "RepairCodes.axisTwistedCubicRepair_edge_nonempty",
+      "RepairCodes.minimalAxisRepair_transversal_card_ge",
+      "RepairCodes.minimalAxisTwistedCubicRepairHypergraph"
+    ],
+    "RepairCodes.minimalAxisRepair_matchingNumber_le": [
+      "FiniteGeom.AxisTwistedCubicIndex",
+      "FiniteGeom.IsMatching",
+      "FiniteGeom.matchingNumber",
+      "FiniteGeom.matchingNumber_le_of_forall",
+      "RepairCodes.minimalAxisRepair_matching_weight_bound",
+      "RepairCodes.minimalAxisTwistedCubicRepairHypergraph"
+    ],
+    "RepairCodes.minimalAxisRepair_matching_weight_bound": [
+      "FiniteGeom.AxisTwistedCubicIndex",
+      "FiniteGeom.IsMatching",
+      "FiniteGeom.twistedCubicTripleAxisIndex",
+      "RepairCodes.mem_minimalAxisRepairHypergraph_iff",
+      "RepairCodes.minimalAxisTwistedCubicRepairHypergraph"
+    ],
+    "RepairCodes.minimalAxisRepair_nucleus_invariants": [
+      "FiniteGeom.AxisTwistedCubicIndex",
+      "FiniteGeom.IsIndependent",
+      "FiniteGeom.exists_zeroSumCap_card_eq",
+      "FiniteGeom.matchingNumber",
+      "FiniteGeom.transversalNumber",
+      "FiniteGeom.transversalNumber_zeroSumTripleHypergraph",
+      "FiniteGeom.zeroSumCapNumber",
+      "FiniteGeom.zeroSumTripleHypergraph",
+      "RepairCodes.axisCardDivision_normalizations",
+      "RepairCodes.axisCubicRepairComponent",
+      "RepairCodes.axisCubicRepairComponent_infinity_matchingNumber",
+      "RepairCodes.axisCubicRepairComponent_infinity_transversalNumber",
+      "RepairCodes.minimalAxisRepair_invariant_decomposition",
+      "RepairCodes.minimalAxisTwistedCubicRepairHypergraph"
+    ],
+    "RepairCodes.minimalAxisRepair_tau_gt_nu": [
+      "FiniteGeom.AxisTwistedCubicIndex",
+      "FiniteGeom.matchingNumber",
+      "FiniteGeom.transversalNumber",
+      "RepairCodes.minimalAxisRepair_le_transversalNumber",
+      "RepairCodes.minimalAxisRepair_matchingNumber_le",
+      "RepairCodes.minimalAxisTwistedCubicRepairHypergraph"
+    ],
+    "RepairCodes.minimalAxisRepair_transversal_card_ge": [
+      "FiniteGeom.AxisTwistedCubicIndex",
+      "FiniteGeom.IsTransversal",
+      "FiniteGeom.twistedCubicTripleAxisIndex",
+      "RepairCodes.mem_minimalAxisRepairHypergraph_iff",
+      "RepairCodes.minimalAxisTwistedCubicRepairHypergraph"
+    ],
     "RepairCodes.minimalAxisTwistedCubicRepairHypergraph": [
       "FiniteGeom.AxisTwistedCubicIndex",
       "FiniteGeom.minimalRepairHypergraph",
       "RepairCodes.axisTwistedCubicCode"
+    ],
+    "RepairCodes.minimalAxisTwistedCubicRepairHypergraph.eq_1": [
+      "FiniteGeom.AxisTwistedCubicIndex",
+      "FiniteGeom.minimalRepairHypergraph",
+      "RepairCodes.axisTwistedCubicCode",
+      "RepairCodes.minimalAxisTwistedCubicRepairHypergraph"
+    ],
+    "RepairCodes.minimalProjectiveAxisInfinityRepair_eq_embedAffine": [
+      "FiniteGeom.AxisTwistedCubicIndex",
+      "FiniteGeom.ProjectiveAxisTwistedCubicIndex",
+      "FiniteGeom.ProjectiveTwistedCubicIndex",
+      "FiniteGeom.embedHypergraph",
+      "FiniteGeom.twistedCubicTripleAxisIndex",
+      "FiniteGeom.twistedCubicTripleAxisIndex.eq_1",
+      "RepairCodes.affineToProjectiveAxisIndexEmbedding",
+      "RepairCodes.affineToProjectiveAxisIndexEmbedding.match_1",
+      "RepairCodes.mem_minimalAxisRepairHypergraph_iff",
+      "RepairCodes.mem_minimalProjectiveAxisInfinityRepair_iff",
+      "RepairCodes.minimalAxisTwistedCubicRepairHypergraph",
+      "RepairCodes.minimalProjectiveAxisTwistedCubicRepairHypergraph"
+    ],
+    "RepairCodes.minimalProjectiveAxisInfinityRepair_four_invariants": [
+      "FiniteGeom.ProjectiveAxisTwistedCubicIndex",
+      "FiniteGeom.ProjectiveTwistedCubicIndex",
+      "FiniteGeom.matchingNumber",
+      "FiniteGeom.minimalRepairHypergraph",
+      "FiniteGeom.minimalRepairHypergraph.congr_simp",
+      "FiniteGeom.minimalRepairHypergraph_eq_of_numRows_le_radius",
+      "FiniteGeom.rowCode",
+      "FiniteGeom.transversalNumber",
+      "FiniteGeom.transversalNumber.congr_simp",
+      "RepairCodes.minimalProjectiveAxisInfinityRepair_four_matchingNumber",
+      "RepairCodes.minimalProjectiveAxisTwistedCubicRepairHypergraph",
+      "RepairCodes.projectiveAxisInfinityFullRepair_transversalNumber",
+      "RepairCodes.projectiveAxisTwistedCubicCode",
+      "RepairCodes.projectiveAxisTwistedCubicGenerator",
+      "RepairCodes.projectiveAxisTwistedCubicRepairHypergraph",
+      "RepairCodes.transversalNumber_minimalProjectiveAxisTwistedCubicRepairHypergraph"
+    ],
+    "RepairCodes.minimalProjectiveAxisInfinityRepair_four_matchingNumber": [
+      "FiniteGeom.IsMatching",
+      "FiniteGeom.ProjectiveAxisTwistedCubicIndex",
+      "FiniteGeom.ProjectiveTwistedCubicIndex",
+      "FiniteGeom.matchingNumber",
+      "FiniteGeom.matchingNumber_le_of_forall",
+      "FiniteGeom.matchingNumber_mono",
+      "FiniteGeom.minimalRepairHypergraph_mono_radius",
+      "FiniteGeom.transversalNumber",
+      "FiniteGeom.zeroSumCapNumber",
+      "RepairCodes.minimalProjectiveAxisInfinityRepair_four_matching_weight_bound",
+      "RepairCodes.minimalProjectiveAxisInfinityRepair_invariants",
+      "RepairCodes.minimalProjectiveAxisTwistedCubicRepairHypergraph",
+      "RepairCodes.projectiveAxisTwistedCubicCode"
+    ],
+    "RepairCodes.minimalProjectiveAxisInfinityRepair_four_matching_weight_bound": [
+      "FiniteGeom.IsMatching",
+      "FiniteGeom.ProjectiveAxisTwistedCubicIndex",
+      "FiniteGeom.ProjectiveTwistedCubicIndex",
+      "FiniteGeom.dualCode",
+      "FiniteGeom.mem_minimalHyperedges",
+      "FiniteGeom.mem_repairHypergraph",
+      "FiniteGeom.minimalHyperedges",
+      "FiniteGeom.repairHypergraph",
+      "FiniteGeom.wordSupport",
+      "RepairCodes.minimalProjectiveAxisInfinityRepair_four_weight",
+      "RepairCodes.minimalProjectiveAxisTwistedCubicRepairHypergraph",
+      "RepairCodes.projectiveAxisPart",
+      "RepairCodes.projectiveAxisTwistedCubicCode",
+      "RepairCodes.projectiveCubicPart"
+    ],
+    "RepairCodes.minimalProjectiveAxisInfinityRepair_four_weight": [
+      "FiniteGeom.ProjectiveAxisTwistedCubicIndex",
+      "FiniteGeom.ProjectiveTwistedCubicIndex",
+      "FiniteGeom.mem_minimalHyperedges",
+      "FiniteGeom.mem_repairHypergraph_of_mem_of_card_le",
+      "FiniteGeom.minimalHyperedges",
+      "FiniteGeom.minimalRepair_helpers_linearIndependent",
+      "FiniteGeom.projectiveAxisTwistedCubicPoints",
+      "FiniteGeom.repairHypergraph",
+      "FiniteGeom.repairHypergraph_mono_radius",
+      "RepairCodes.card_projectiveCubicPart_add_card_projectiveAxisPart",
+      "RepairCodes.mem_minimalProjectiveAxisInfinityRepair_iff",
+      "RepairCodes.minimalProjectiveAxisTwistedCubicRepairHypergraph",
+      "RepairCodes.projectiveAxisPart",
+      "RepairCodes.projectiveAxisPart_card_le_two_of_linearIndependent",
+      "RepairCodes.projectiveAxisTwistedCubicCode",
+      "RepairCodes.projectiveAxisTwistedCubicGenerator",
+      "RepairCodes.projectiveAxisTwistedCubicRepairHypergraph",
+      "RepairCodes.projectiveCubicPart"
+    ],
+    "RepairCodes.minimalProjectiveAxisInfinityRepair_invariants": [
+      "FiniteGeom.AxisTwistedCubicIndex",
+      "FiniteGeom.ProjectiveAxisTwistedCubicIndex",
+      "FiniteGeom.ProjectiveTwistedCubicIndex",
+      "FiniteGeom.embedHypergraph",
+      "FiniteGeom.matchingNumber",
+      "FiniteGeom.matchingNumber_embedHypergraph",
+      "FiniteGeom.transversalNumber",
+      "FiniteGeom.transversalNumber_embedHypergraph",
+      "FiniteGeom.twistedCubicTripleAxisIndex",
+      "FiniteGeom.zeroSumCapNumber",
+      "RepairCodes.affineToProjectiveAxisIndexEmbedding",
+      "RepairCodes.mem_minimalAxisRepairHypergraph_iff",
+      "RepairCodes.minimalAxisRepair_nucleus_invariants",
+      "RepairCodes.minimalAxisTwistedCubicRepairHypergraph",
+      "RepairCodes.minimalProjectiveAxisInfinityRepair_eq_embedAffine",
+      "RepairCodes.minimalProjectiveAxisTwistedCubicRepairHypergraph"
+    ],
+    "RepairCodes.minimalProjectiveAxisRepair_four_invariants": [
+      "FiniteGeom.ProjectiveAxisTwistedCubicIndex",
+      "FiniteGeom.ProjectiveTwistedCubicIndex",
+      "FiniteGeom.matchingNumber",
+      "FiniteGeom.matchingNumber_relabelHypergraph",
+      "FiniteGeom.relabelHypergraph",
+      "FiniteGeom.transversalNumber",
+      "FiniteGeom.transversalNumber_relabelHypergraph",
+      "RepairCodes.minimalProjectiveAxisInfinityRepair_four_invariants",
+      "RepairCodes.minimalProjectiveAxisTwistedCubicRepairHypergraph",
+      "RepairCodes.projectiveAxisShiftInvEquiv",
+      "RepairCodes.projectiveAxisShiftInvEquiv.match_1",
+      "RepairCodes.projectiveShiftInvIndexEquiv",
+      "RepairCodes.projectiveShiftInv_relabel_minimalRepairHypergraph"
+    ],
+    "RepairCodes.minimalProjectiveAxisRepair_full_invariants": [
+      "FiniteGeom.ProjectiveAxisTwistedCubicIndex",
+      "FiniteGeom.ProjectiveTwistedCubicIndex",
+      "FiniteGeom.matchingNumber",
+      "FiniteGeom.transversalNumber",
+      "RepairCodes.minimalProjectiveAxisRepair_four_invariants",
+      "RepairCodes.minimalProjectiveAxisTwistedCubicRepairHypergraph",
+      "RepairCodes.minimalProjectiveAxisTwistedCubicRepair_full_eq_four"
+    ],
+    "RepairCodes.minimalProjectiveAxisRepair_invariants": [
+      "FiniteGeom.ProjectiveAxisTwistedCubicIndex",
+      "FiniteGeom.ProjectiveTwistedCubicIndex",
+      "FiniteGeom.matchingNumber",
+      "FiniteGeom.matchingNumber_relabelHypergraph",
+      "FiniteGeom.relabelHypergraph",
+      "FiniteGeom.transversalNumber",
+      "FiniteGeom.transversalNumber_relabelHypergraph",
+      "FiniteGeom.zeroSumCapNumber",
+      "RepairCodes.matchingNumber_minimalProjectiveAxisTwistedCubicRepairHypergraph",
+      "RepairCodes.minimalProjectiveAxisInfinityRepair_invariants",
+      "RepairCodes.minimalProjectiveAxisTwistedCubicRepairHypergraph",
+      "RepairCodes.projectiveAxisShiftInvEquiv",
+      "RepairCodes.projectiveAxisShiftInvEquiv.match_1",
+      "RepairCodes.projectiveAxisTwistedCubicRepairHypergraph",
+      "RepairCodes.projectiveShiftInvIndexEquiv",
+      "RepairCodes.projectiveShiftInv_relabel_repairHypergraph",
+      "RepairCodes.transversalNumber_minimalProjectiveAxisTwistedCubicRepairHypergraph"
     ],
     "RepairCodes.minimalProjectiveAxisTwistedCubicRepairHypergraph": [
       "FiniteGeom.ProjectiveAxisTwistedCubicIndex",
@@ -5072,6 +6172,133 @@
       "FiniteGeom.minimalRepairHypergraph",
       "RepairCodes.minimalProjectiveAxisTwistedCubicRepairHypergraph",
       "RepairCodes.projectiveAxisTwistedCubicCode"
+    ],
+    "RepairCodes.minimalProjectiveAxisTwistedCubicRepair_full_eq_four": [
+      "FiniteGeom.ProjectiveAxisTwistedCubicIndex",
+      "FiniteGeom.ProjectiveTwistedCubicIndex",
+      "FiniteGeom.minimalRepairHypergraph_eq_of_numRows_le_radius",
+      "RepairCodes.minimalProjectiveAxisTwistedCubicRepairHypergraph",
+      "RepairCodes.projectiveAxisTwistedCubicGenerator"
+    ],
+    "RepairCodes.minimalProjectiveCubicInfinityRepair_four_cubicPart_card_ge_two": [
+      "FiniteGeom.ProjectiveAxisTwistedCubicIndex",
+      "FiniteGeom.ProjectiveTwistedCubicIndex",
+      "FiniteGeom.mem_minimalHyperedges",
+      "FiniteGeom.mem_repairHypergraph_of_mem_of_card_le",
+      "FiniteGeom.minimalHyperedges",
+      "FiniteGeom.minimalRepair_helpers_linearIndependent",
+      "FiniteGeom.projectiveAxisTwistedCubicPoints",
+      "FiniteGeom.repairHypergraph",
+      "RepairCodes.card_projectiveCubicPart_add_card_projectiveAxisPart",
+      "RepairCodes.mem_projectiveCubicInfinityRepairHypergraph_iff",
+      "RepairCodes.minimalProjectiveAxisTwistedCubicRepairHypergraph",
+      "RepairCodes.projectiveAxisPart",
+      "RepairCodes.projectiveAxisPart_card_le_two_of_linearIndependent",
+      "RepairCodes.projectiveAxisTwistedCubicCode",
+      "RepairCodes.projectiveAxisTwistedCubicGenerator",
+      "RepairCodes.projectiveAxisTwistedCubicRepairHypergraph",
+      "RepairCodes.projectiveCubicPart"
+    ],
+    "RepairCodes.minimalProjectiveCubicInfinityRepair_four_invariants": [
+      "FiniteGeom.ProjectiveAxisTwistedCubicIndex",
+      "FiniteGeom.ProjectiveTwistedCubicIndex",
+      "FiniteGeom.matchingNumber",
+      "FiniteGeom.minimalRepairHypergraph",
+      "FiniteGeom.minimalRepairHypergraph.congr_simp",
+      "FiniteGeom.minimalRepairHypergraph_eq_of_numRows_le_radius",
+      "FiniteGeom.rowCode",
+      "FiniteGeom.transversalNumber",
+      "FiniteGeom.transversalNumber.congr_simp",
+      "RepairCodes.minimalProjectiveAxisTwistedCubicRepairHypergraph",
+      "RepairCodes.minimalProjectiveCubicInfinityRepair_four_matchingNumber",
+      "RepairCodes.projectiveAxisTwistedCubicCode",
+      "RepairCodes.projectiveAxisTwistedCubicGenerator",
+      "RepairCodes.projectiveAxisTwistedCubicRepairHypergraph",
+      "RepairCodes.projectiveCubicInfinityFullRepair_transversalNumber",
+      "RepairCodes.transversalNumber_minimalProjectiveAxisTwistedCubicRepairHypergraph"
+    ],
+    "RepairCodes.minimalProjectiveCubicInfinityRepair_four_matchingNumber": [
+      "FiniteGeom.IsMatching",
+      "FiniteGeom.ProjectiveAxisTwistedCubicIndex",
+      "FiniteGeom.ProjectiveTwistedCubicIndex",
+      "FiniteGeom.matchingNumber",
+      "FiniteGeom.matchingNumber_le_of_forall",
+      "FiniteGeom.matchingNumber_mono",
+      "FiniteGeom.minimalRepairHypergraph_mono_radius",
+      "FiniteGeom.transversalNumber",
+      "RepairCodes.minimalProjectiveAxisTwistedCubicRepairHypergraph",
+      "RepairCodes.minimalProjectiveCubicInfinityRepair_four_matching_card_bound",
+      "RepairCodes.minimalProjectiveCubicInfinityRepair_invariants",
+      "RepairCodes.projectiveAxisTwistedCubicCode"
+    ],
+    "RepairCodes.minimalProjectiveCubicInfinityRepair_four_matching_card_bound": [
+      "FiniteGeom.IsMatching",
+      "FiniteGeom.ProjectiveAxisTwistedCubicIndex",
+      "FiniteGeom.ProjectiveTwistedCubicIndex",
+      "FiniteGeom.dualCode",
+      "FiniteGeom.mem_minimalHyperedges",
+      "FiniteGeom.mem_repairHypergraph",
+      "FiniteGeom.minimalHyperedges",
+      "FiniteGeom.repairHypergraph",
+      "FiniteGeom.wordSupport",
+      "RepairCodes.minimalProjectiveAxisTwistedCubicRepairHypergraph",
+      "RepairCodes.minimalProjectiveCubicInfinityRepair_four_cubicPart_card_ge_two",
+      "RepairCodes.projectiveAxisTwistedCubicCode",
+      "RepairCodes.projectiveCubicPart"
+    ],
+    "RepairCodes.minimalProjectiveCubicInfinityRepair_invariants": [
+      "FiniteGeom.ProjectiveAxisTwistedCubicIndex",
+      "FiniteGeom.ProjectiveTwistedCubicIndex",
+      "FiniteGeom.matchingNumber",
+      "FiniteGeom.transversalNumber",
+      "RepairCodes.matchingNumber_minimalProjectiveAxisTwistedCubicRepairHypergraph",
+      "RepairCodes.minimalProjectiveAxisTwistedCubicRepairHypergraph",
+      "RepairCodes.projectiveAxisTwistedCubicRepairHypergraph",
+      "RepairCodes.projectiveCubicInfinityRepair_matchingNumber",
+      "RepairCodes.projectiveCubicInfinityRepair_transversalNumber",
+      "RepairCodes.transversalNumber_minimalProjectiveAxisTwistedCubicRepairHypergraph"
+    ],
+    "RepairCodes.minimalProjectiveCubicRepair_four_invariants": [
+      "FiniteGeom.ProjectiveAxisTwistedCubicIndex",
+      "FiniteGeom.ProjectiveTwistedCubicIndex",
+      "FiniteGeom.matchingNumber",
+      "FiniteGeom.matchingNumber_relabelHypergraph",
+      "FiniteGeom.relabelHypergraph",
+      "FiniteGeom.transversalNumber",
+      "FiniteGeom.transversalNumber_relabelHypergraph",
+      "RepairCodes.minimalProjectiveAxisTwistedCubicRepairHypergraph",
+      "RepairCodes.minimalProjectiveCubicInfinityRepair_four_invariants",
+      "RepairCodes.projectiveAxisShiftInvEquiv",
+      "RepairCodes.projectiveAxisShiftInvEquiv.match_1",
+      "RepairCodes.projectiveShiftInvIndexEquiv",
+      "RepairCodes.projectiveShiftInv_relabel_minimalRepairHypergraph"
+    ],
+    "RepairCodes.minimalProjectiveCubicRepair_full_invariants": [
+      "FiniteGeom.ProjectiveAxisTwistedCubicIndex",
+      "FiniteGeom.ProjectiveTwistedCubicIndex",
+      "FiniteGeom.matchingNumber",
+      "FiniteGeom.transversalNumber",
+      "RepairCodes.minimalProjectiveAxisTwistedCubicRepairHypergraph",
+      "RepairCodes.minimalProjectiveAxisTwistedCubicRepair_full_eq_four",
+      "RepairCodes.minimalProjectiveCubicRepair_four_invariants"
+    ],
+    "RepairCodes.minimalProjectiveCubicRepair_invariants": [
+      "FiniteGeom.ProjectiveAxisTwistedCubicIndex",
+      "FiniteGeom.ProjectiveTwistedCubicIndex",
+      "FiniteGeom.matchingNumber",
+      "FiniteGeom.matchingNumber_relabelHypergraph",
+      "FiniteGeom.relabelHypergraph",
+      "FiniteGeom.transversalNumber",
+      "FiniteGeom.transversalNumber_relabelHypergraph",
+      "RepairCodes.matchingNumber_minimalProjectiveAxisTwistedCubicRepairHypergraph",
+      "RepairCodes.minimalProjectiveAxisTwistedCubicRepairHypergraph",
+      "RepairCodes.minimalProjectiveCubicInfinityRepair_invariants",
+      "RepairCodes.projectiveAxisShiftInvEquiv",
+      "RepairCodes.projectiveAxisShiftInvEquiv.match_1",
+      "RepairCodes.projectiveAxisTwistedCubicRepairHypergraph",
+      "RepairCodes.projectiveShiftInvIndexEquiv",
+      "RepairCodes.projectiveShiftInv_relabel_repairHypergraph",
+      "RepairCodes.transversalNumber_minimalProjectiveAxisTwistedCubicRepairHypergraph"
     ],
     "RepairCodes.not_isEmbeddedInnerDualBlock_iff_two_le_blockSupport_card_of_isCoordinateSurjective": [
       "FiniteGeom.dualCode",
@@ -5104,6 +6331,30 @@
       "RepairCodes.blockFunctional",
       "RepairCodes.instDecidableEqDual_repairCodes",
       "RepairCodes.ofInnerCode"
+    ],
+    "RepairCodes.projectiveAxisInfinityFullRepair_transversalNumber": [
+      "FiniteGeom.IsTransversal",
+      "FiniteGeom.ProjectiveAxisTwistedCubicIndex",
+      "FiniteGeom.ProjectiveTwistedCubicIndex",
+      "FiniteGeom.axisTwistedCubicPoints",
+      "FiniteGeom.card_projectiveAxisTwistedCubicIndex",
+      "FiniteGeom.card_sectionFunctionalSupport_erase_add_sectionCount",
+      "FiniteGeom.fullRepair_transversal_card_ge_of_avoiding_section_le",
+      "FiniteGeom.le_transversalNumber_of_forall",
+      "FiniteGeom.projectiveAxisInfinityAvoidingFourSectionForm",
+      "FiniteGeom.projectiveAxisInfinityAvoidingFourSectionForm_axisInfinity_eval",
+      "FiniteGeom.projectiveAxisInfinityAvoidingFourSectionForm_sectionCount",
+      "FiniteGeom.projectiveAxisInfinity_avoiding_section_le_four",
+      "FiniteGeom.projectiveAxisTwistedCubicPoints",
+      "FiniteGeom.repairHypergraph",
+      "FiniteGeom.rowCode",
+      "FiniteGeom.sectionCount",
+      "FiniteGeom.sectionFunctionalSupport_isTransversal_fullRepair",
+      "FiniteGeom.transversalNumber",
+      "FiniteGeom.transversalNumber.congr_simp",
+      "FiniteGeom.transversalNumber_le_card",
+      "FiniteGeom.wordSupport",
+      "RepairCodes.projectiveAxisTwistedCubicRepairHypergraph"
     ],
     "RepairCodes.projectiveAxisInfinityRepair_contains_canonical": [
       "FiniteGeom.ProjectiveAxisTwistedCubicIndex",
@@ -5147,6 +6398,24 @@
       "RepairCodes.projectiveAxisTwistedCubicRepairHypergraph",
       "RepairCodes.projectiveRepairTriple_not_mem_of_linearIndependent"
     ],
+    "RepairCodes.projectiveAxisPart": [
+      "FiniteGeom.ProjectiveAxisTwistedCubicIndex",
+      "FiniteGeom.ProjectiveTwistedCubicIndex"
+    ],
+    "RepairCodes.projectiveAxisPart.eq_1": [
+      "FiniteGeom.ProjectiveAxisTwistedCubicIndex",
+      "FiniteGeom.ProjectiveTwistedCubicIndex",
+      "RepairCodes.projectiveAxisPart"
+    ],
+    "RepairCodes.projectiveAxisPart_card_le_two_of_linearIndependent": [
+      "FiniteGeom.ProjectiveAxisTwistedCubicIndex",
+      "FiniteGeom.ProjectiveTwistedCubicIndex",
+      "FiniteGeom.axisTwistedCubicPoints_axis_coord_three",
+      "FiniteGeom.axisTwistedCubicPoints_axis_coord_zero",
+      "FiniteGeom.projectiveAxisTwistedCubicPoints",
+      "RepairCodes.projectiveAxisPart",
+      "RepairCodes.projectiveAxisPart.eq_1"
+    ],
     "RepairCodes.projectiveAxisRepairPair_shape": [
       "FiniteGeom.ProjectiveAxisTwistedCubicIndex",
       "FiniteGeom.ProjectiveTwistedCubicIndex",
@@ -5182,6 +6451,39 @@
       "FiniteGeom.projectiveTwoCubicTwoAxis_linearIndependent",
       "RepairCodes.projectiveAxisTwistedCubicRepairHypergraph",
       "RepairCodes.projectiveRepairTriple_not_mem_of_linearIndependent"
+    ],
+    "RepairCodes.projectiveAxisShiftInvEquiv": [
+      "FiniteGeom.ProjectiveTwistedCubicIndex",
+      "RepairCodes.projectiveAxisShiftInvEquiv.match_1"
+    ],
+    "RepairCodes.projectiveAxisShiftInvEquiv.eq_1": [
+      "FiniteGeom.ProjectiveTwistedCubicIndex",
+      "RepairCodes.projectiveAxisShiftInvEquiv",
+      "RepairCodes.projectiveAxisShiftInvEquiv.match_1"
+    ],
+    "RepairCodes.projectiveAxisShiftInvEquiv.match_1": [
+      "FiniteGeom.ProjectiveTwistedCubicIndex"
+    ],
+    "RepairCodes.projectiveAxisShiftInvEquiv_eq_infinity_iff": [
+      "FiniteGeom.ProjectiveTwistedCubicIndex",
+      "RepairCodes.projectiveAxisShiftInvEquiv",
+      "RepairCodes.projectiveAxisShiftInvEquiv.match_1"
+    ],
+    "RepairCodes.projectiveAxisShiftInvEquiv_finite_iff": [
+      "FiniteGeom.ProjectiveTwistedCubicIndex",
+      "RepairCodes.projectiveAxisShiftInvEquiv"
+    ],
+    "RepairCodes.projectiveAxisShiftInvEquiv_finite_of_ne": [
+      "FiniteGeom.ProjectiveTwistedCubicIndex",
+      "RepairCodes.projectiveAxisShiftInvEquiv"
+    ],
+    "RepairCodes.projectiveAxisShiftInvEquiv_infinity": [
+      "FiniteGeom.ProjectiveTwistedCubicIndex",
+      "RepairCodes.projectiveAxisShiftInvEquiv"
+    ],
+    "RepairCodes.projectiveAxisShiftInvEquiv_neg": [
+      "FiniteGeom.ProjectiveTwistedCubicIndex",
+      "RepairCodes.projectiveAxisShiftInvEquiv"
     ],
     "RepairCodes.projectiveAxisTripleDualWord": [
       "FiniteGeom.ProjectiveAxisTwistedCubicIndex",
@@ -5412,6 +6714,30 @@
       "RepairCodes.projectiveAxisTwistedCubicCode",
       "RepairCodes.projectiveAxisTwistedCubicCode_dualDist"
     ],
+    "RepairCodes.projectiveCubicInfinityFullRepair_transversalNumber": [
+      "FiniteGeom.IsTransversal",
+      "FiniteGeom.ProjectiveAxisTwistedCubicIndex",
+      "FiniteGeom.ProjectiveTwistedCubicIndex",
+      "FiniteGeom.card_projectiveAxisTwistedCubicIndex",
+      "FiniteGeom.card_sectionFunctionalSupport_erase_add_sectionCount",
+      "FiniteGeom.fullRepair_transversal_card_ge_of_avoiding_section_le",
+      "FiniteGeom.le_transversalNumber_of_forall",
+      "FiniteGeom.projectiveAxisTwistedCubicMaxForm",
+      "FiniteGeom.projectiveAxisTwistedCubicMaxForm_cubicInfinity_eval",
+      "FiniteGeom.projectiveAxisTwistedCubicMaxForm_sectionCount",
+      "FiniteGeom.projectiveAxisTwistedCubicPoints",
+      "FiniteGeom.projectiveAxisTwistedCubic_section_le",
+      "FiniteGeom.projectiveTwistedCubicPoints",
+      "FiniteGeom.repairHypergraph",
+      "FiniteGeom.rowCode",
+      "FiniteGeom.sectionCount",
+      "FiniteGeom.sectionFunctionalSupport_isTransversal_fullRepair",
+      "FiniteGeom.transversalNumber",
+      "FiniteGeom.transversalNumber.congr_simp",
+      "FiniteGeom.transversalNumber_le_card",
+      "FiniteGeom.wordSupport",
+      "RepairCodes.projectiveAxisTwistedCubicRepairHypergraph"
+    ],
     "RepairCodes.projectiveCubicInfinityRepairHelpers_mem": [
       "FiniteGeom.ProjectiveAxisTwistedCubicIndex",
       "FiniteGeom.ProjectiveTwistedCubicIndex",
@@ -5462,6 +6788,47 @@
       "RepairCodes.projectiveAxisTwistedCubicRepairHypergraph",
       "RepairCodes.projectiveCubicInfinity_no_repairEdge_radius_two"
     ],
+    "RepairCodes.projectiveCubicInfinityRepair_matchingNumber": [
+      "FiniteGeom.ProjectiveAxisTwistedCubicIndex",
+      "FiniteGeom.ProjectiveTwistedCubicIndex",
+      "FiniteGeom.matchingNumber",
+      "RepairCodes.projectiveAxisTwistedCubicRepairHypergraph",
+      "RepairCodes.projectiveCubicInfinityRepair_matchingNumber_ge_half",
+      "RepairCodes.projectiveCubicInfinityRepair_matchingNumber_le"
+    ],
+    "RepairCodes.projectiveCubicInfinityRepair_matchingNumber_ge_half": [
+      "FiniteGeom.ProjectiveAxisTwistedCubicIndex",
+      "FiniteGeom.ProjectiveTwistedCubicIndex",
+      "FiniteGeom.augmentedColorHypergraph",
+      "FiniteGeom.embedHypergraph",
+      "FiniteGeom.matchingNumber",
+      "FiniteGeom.matchingNumber_embedHypergraph",
+      "FiniteGeom.matchingNumber_mono",
+      "FiniteGeom.mem_augmentedColorHypergraph",
+      "FiniteGeom.units_addColor_matchingNumber_lower",
+      "RepairCodes.mem_projectiveCubicInfinityRepairHypergraph_iff",
+      "RepairCodes.projectiveAxisTwistedCubicRepairHypergraph",
+      "RepairCodes.projectiveCubicInfinityRepair_matchingNumber_ge_half.match_1_1"
+    ],
+    "RepairCodes.projectiveCubicInfinityRepair_matchingNumber_le": [
+      "FiniteGeom.IsMatching",
+      "FiniteGeom.ProjectiveAxisTwistedCubicIndex",
+      "FiniteGeom.ProjectiveTwistedCubicIndex",
+      "FiniteGeom.matchingNumber",
+      "FiniteGeom.matchingNumber_le_of_forall",
+      "RepairCodes.projectiveAxisTwistedCubicRepairHypergraph",
+      "RepairCodes.projectiveCubicInfinityRepair_matching_card_bound"
+    ],
+    "RepairCodes.projectiveCubicInfinityRepair_matching_card_bound": [
+      "FiniteGeom.AxisTwistedCubicIndex",
+      "FiniteGeom.IsMatching",
+      "FiniteGeom.ProjectiveAxisTwistedCubicIndex",
+      "FiniteGeom.ProjectiveTwistedCubicIndex",
+      "RepairCodes.affineToProjectiveAxisIndexEmbedding",
+      "RepairCodes.affineToProjectiveAxisIndexEmbedding.match_1",
+      "RepairCodes.mem_projectiveCubicInfinityRepairHypergraph_iff",
+      "RepairCodes.projectiveAxisTwistedCubicRepairHypergraph"
+    ],
     "RepairCodes.projectiveCubicInfinityRepair_oneFinite_twoAxis_not_mem": [
       "FiniteGeom.ProjectiveAxisTwistedCubicIndex",
       "FiniteGeom.ProjectiveTwistedCubicIndex",
@@ -5497,6 +6864,38 @@
       "RepairCodes.projectiveAxisTwistedCubicRepairHypergraph",
       "RepairCodes.projectiveRepairTriple_not_mem_of_linearIndependent"
     ],
+    "RepairCodes.projectiveCubicInfinityRepair_transversalNumber": [
+      "FiniteGeom.IsTransversal",
+      "FiniteGeom.ProjectiveAxisTwistedCubicIndex",
+      "FiniteGeom.ProjectiveTwistedCubicIndex",
+      "FiniteGeom.le_transversalNumber_of_forall",
+      "FiniteGeom.transversalNumber",
+      "FiniteGeom.transversalNumber_le_card",
+      "RepairCodes.affineToProjectiveAxisIndexEmbedding",
+      "RepairCodes.projectiveAxisTwistedCubicRepairHypergraph",
+      "RepairCodes.projectiveCubicInfinityRepair_transversal_card_ge",
+      "RepairCodes.projectiveCubicInfinityRepair_transversal_of_erase"
+    ],
+    "RepairCodes.projectiveCubicInfinityRepair_transversal_card_ge": [
+      "FiniteGeom.AxisTwistedCubicIndex",
+      "FiniteGeom.IsTransversal",
+      "FiniteGeom.ProjectiveAxisTwistedCubicIndex",
+      "FiniteGeom.ProjectiveTwistedCubicIndex",
+      "RepairCodes.affineToProjectiveAxisIndexEmbedding",
+      "RepairCodes.affineToProjectiveAxisIndexEmbedding.match_1",
+      "RepairCodes.mem_projectiveCubicInfinityRepairHypergraph_iff",
+      "RepairCodes.projectiveAxisTwistedCubicRepairHypergraph"
+    ],
+    "RepairCodes.projectiveCubicInfinityRepair_transversal_of_erase": [
+      "FiniteGeom.AxisTwistedCubicIndex",
+      "FiniteGeom.IsTransversal",
+      "FiniteGeom.ProjectiveAxisTwistedCubicIndex",
+      "FiniteGeom.ProjectiveTwistedCubicIndex",
+      "RepairCodes.affineToProjectiveAxisIndexEmbedding",
+      "RepairCodes.affineToProjectiveAxisIndexEmbedding.match_1",
+      "RepairCodes.mem_projectiveCubicInfinityRepairHypergraph_iff",
+      "RepairCodes.projectiveAxisTwistedCubicRepairHypergraph"
+    ],
     "RepairCodes.projectiveCubicInfinity_no_repairEdge_radius_two": [
       "FiniteGeom.ProjectiveAxisTwistedCubicIndex",
       "FiniteGeom.ProjectiveTwistedCubicIndex",
@@ -5509,6 +6908,15 @@
       "RepairCodes.projectiveAxisTwistedCubicRepairHypergraph",
       "RepairCodes.projectiveAxisTwistedCubicRepair_edge_dependent",
       "RepairCodes.projectiveAxisTwistedCubic_selected_linearIndependent_of_card_le_three_of_containsCubic"
+    ],
+    "RepairCodes.projectiveCubicPart": [
+      "FiniteGeom.ProjectiveAxisTwistedCubicIndex",
+      "FiniteGeom.ProjectiveTwistedCubicIndex"
+    ],
+    "RepairCodes.projectiveCubicPart.eq_1": [
+      "FiniteGeom.ProjectiveAxisTwistedCubicIndex",
+      "FiniteGeom.ProjectiveTwistedCubicIndex",
+      "RepairCodes.projectiveCubicPart"
     ],
     "RepairCodes.projectiveFiniteCubicTripleIndexFamily": [
       "FiniteGeom.ProjectiveAxisTwistedCubicIndex",
@@ -5560,6 +6968,175 @@
       "FiniteGeom.projectiveAxisTwistedCubicPoints",
       "RepairCodes.projectiveAxisTwistedCubicRepairHypergraph",
       "RepairCodes.projectiveAxisTwistedCubicRepair_edge_dependent"
+    ],
+    "RepairCodes.projectiveShiftInvFinsetEquiv": [
+      "FiniteGeom.ProjectiveAxisTwistedCubicIndex",
+      "RepairCodes.projectiveShiftInvIndexEquiv"
+    ],
+    "RepairCodes.projectiveShiftInvIndexEquiv": [
+      "FiniteGeom.ProjectiveAxisTwistedCubicIndex",
+      "FiniteGeom.ProjectiveTwistedCubicIndex",
+      "RepairCodes.projectiveAxisShiftInvEquiv"
+    ],
+    "RepairCodes.projectiveShiftInvIndexEquiv.eq_1": [
+      "FiniteGeom.ProjectiveAxisTwistedCubicIndex",
+      "FiniteGeom.ProjectiveTwistedCubicIndex",
+      "RepairCodes.projectiveAxisShiftInvEquiv",
+      "RepairCodes.projectiveShiftInvIndexEquiv"
+    ],
+    "RepairCodes.projectiveShiftInvLinearEquiv": [
+      "RepairCodes.projectiveShiftInvLinearMap",
+      "RepairCodes.projectiveShiftInvLinearMap_injective"
+    ],
+    "RepairCodes.projectiveShiftInvLinearEquiv_apply": [
+      "RepairCodes.projectiveShiftInvLinearEquiv",
+      "RepairCodes.projectiveShiftInvLinearMap"
+    ],
+    "RepairCodes.projectiveShiftInvLinearMap.eq_1": [
+      "RepairCodes.projectiveShiftInvLinearMap"
+    ],
+    "RepairCodes.projectiveShiftInvLinearMap_axis_finite": [
+      "FiniteGeom.axisTwistedCubicPoints",
+      "RepairCodes.projectiveShiftInvLinearMap"
+    ],
+    "RepairCodes.projectiveShiftInvLinearMap_axis_finite_of_ne": [
+      "FiniteGeom.axisTwistedCubicPoints",
+      "RepairCodes.projectiveShiftInvLinearMap",
+      "RepairCodes.projectiveShiftInvLinearMap_axis_finite"
+    ],
+    "RepairCodes.projectiveShiftInvLinearMap_axis_infinity": [
+      "FiniteGeom.axisTwistedCubicPoints",
+      "RepairCodes.projectiveShiftInvLinearMap"
+    ],
+    "RepairCodes.projectiveShiftInvLinearMap_axis_target": [
+      "FiniteGeom.axisTwistedCubicPoints",
+      "RepairCodes.projectiveShiftInvLinearMap",
+      "RepairCodes.projectiveShiftInvLinearMap_axis_finite"
+    ],
+    "RepairCodes.projectiveShiftInvLinearMap_column": [
+      "FiniteGeom.ProjectiveAxisTwistedCubicIndex",
+      "FiniteGeom.ProjectiveTwistedCubicIndex",
+      "FiniteGeom.axisTwistedCubicPoints",
+      "FiniteGeom.momentCurve",
+      "FiniteGeom.projectiveAxisTwistedCubicPoints",
+      "FiniteGeom.projectiveAxisTwistedCubicPoints.match_1",
+      "FiniteGeom.projectiveAxisTwistedCubicPoints_axis",
+      "FiniteGeom.projectiveAxisTwistedCubicPoints_cubic",
+      "FiniteGeom.projectiveTwistedCubicPoints",
+      "RepairCodes.projectiveAxisShiftInvEquiv",
+      "RepairCodes.projectiveAxisShiftInvEquiv.match_1",
+      "RepairCodes.projectiveShiftInvIndexEquiv",
+      "RepairCodes.projectiveShiftInvLinearMap",
+      "RepairCodes.projectiveShiftInvLinearMap_axis_finite_of_ne",
+      "RepairCodes.projectiveShiftInvLinearMap_axis_infinity",
+      "RepairCodes.projectiveShiftInvLinearMap_axis_target",
+      "RepairCodes.projectiveShiftInvLinearMap_cubic_finite_of_ne",
+      "RepairCodes.projectiveShiftInvLinearMap_cubic_infinity",
+      "RepairCodes.projectiveShiftInvLinearMap_cubic_pole",
+      "RepairCodes.projectiveShiftInvScale"
+    ],
+    "RepairCodes.projectiveShiftInvLinearMap_cubic_finite": [
+      "FiniteGeom.momentCurve",
+      "FiniteGeom.projectiveTwistedCubicPoints",
+      "RepairCodes.projectiveShiftInvLinearMap"
+    ],
+    "RepairCodes.projectiveShiftInvLinearMap_cubic_finite_of_ne": [
+      "FiniteGeom.momentCurve",
+      "FiniteGeom.projectiveTwistedCubicPoints",
+      "RepairCodes.projectiveShiftInvLinearMap",
+      "RepairCodes.projectiveShiftInvLinearMap_cubic_finite"
+    ],
+    "RepairCodes.projectiveShiftInvLinearMap_cubic_infinity": [
+      "FiniteGeom.projectiveTwistedCubicPoints",
+      "RepairCodes.projectiveShiftInvLinearMap"
+    ],
+    "RepairCodes.projectiveShiftInvLinearMap_cubic_pole": [
+      "FiniteGeom.projectiveTwistedCubicPoints",
+      "RepairCodes.projectiveShiftInvLinearMap",
+      "RepairCodes.projectiveShiftInvLinearMap_cubic_finite"
+    ],
+    "RepairCodes.projectiveShiftInvLinearMap_injective": [
+      "RepairCodes.projectiveShiftInvLinearMap"
+    ],
+    "RepairCodes.projectiveShiftInvScale": [
+      "FiniteGeom.ProjectiveAxisTwistedCubicIndex",
+      "RepairCodes.projectiveShiftInvScale.match_1"
+    ],
+    "RepairCodes.projectiveShiftInvScale.eq_1": [
+      "FiniteGeom.ProjectiveTwistedCubicIndex",
+      "RepairCodes.projectiveShiftInvScale"
+    ],
+    "RepairCodes.projectiveShiftInvScale.eq_2": [
+      "FiniteGeom.ProjectiveTwistedCubicIndex",
+      "RepairCodes.projectiveShiftInvScale"
+    ],
+    "RepairCodes.projectiveShiftInvScale.eq_3": [
+      "FiniteGeom.ProjectiveTwistedCubicIndex",
+      "RepairCodes.projectiveShiftInvScale"
+    ],
+    "RepairCodes.projectiveShiftInvScale.eq_4": [
+      "FiniteGeom.ProjectiveTwistedCubicIndex",
+      "RepairCodes.projectiveShiftInvScale"
+    ],
+    "RepairCodes.projectiveShiftInvScale.match_1": [
+      "FiniteGeom.ProjectiveAxisTwistedCubicIndex",
+      "FiniteGeom.ProjectiveTwistedCubicIndex"
+    ],
+    "RepairCodes.projectiveShiftInvScaleUnit": [
+      "FiniteGeom.ProjectiveAxisTwistedCubicIndex",
+      "RepairCodes.projectiveShiftInvScale",
+      "RepairCodes.projectiveShiftInvScale_ne_zero"
+    ],
+    "RepairCodes.projectiveShiftInvScaleUnit_val": [
+      "FiniteGeom.ProjectiveAxisTwistedCubicIndex",
+      "RepairCodes.projectiveShiftInvScale",
+      "RepairCodes.projectiveShiftInvScaleUnit"
+    ],
+    "RepairCodes.projectiveShiftInvScale_ne_zero": [
+      "FiniteGeom.ProjectiveAxisTwistedCubicIndex",
+      "FiniteGeom.ProjectiveTwistedCubicIndex",
+      "RepairCodes.projectiveShiftInvScale"
+    ],
+    "RepairCodes.projectiveShiftInv_finset_linearIndependent_iff": [
+      "FiniteGeom.ProjectiveAxisTwistedCubicIndex",
+      "FiniteGeom.projectiveAxisTwistedCubicPoints",
+      "RepairCodes.projectiveShiftInvFinsetEquiv",
+      "RepairCodes.projectiveShiftInvIndexEquiv",
+      "RepairCodes.projectiveShiftInv_linearIndependent_iff"
+    ],
+    "RepairCodes.projectiveShiftInv_linearIndependent_iff": [
+      "FiniteGeom.ProjectiveAxisTwistedCubicIndex",
+      "FiniteGeom.projectiveAxisTwistedCubicPoints",
+      "RepairCodes.projectiveShiftInvIndexEquiv",
+      "RepairCodes.projectiveShiftInvLinearEquiv",
+      "RepairCodes.projectiveShiftInvLinearMap_column",
+      "RepairCodes.projectiveShiftInvScaleUnit"
+    ],
+    "RepairCodes.projectiveShiftInv_relabel_minimalRepairHypergraph": [
+      "FiniteGeom.ProjectiveAxisTwistedCubicIndex",
+      "FiniteGeom.ProjectiveTwistedCubicIndex",
+      "FiniteGeom.relabelHypergraph",
+      "FiniteGeom.relabel_minimalRepairHypergraph_of_monomial",
+      "RepairCodes.minimalProjectiveAxisTwistedCubicRepairHypergraph",
+      "RepairCodes.projectiveAxisTwistedCubicGenerator",
+      "RepairCodes.projectiveShiftInvIndexEquiv",
+      "RepairCodes.projectiveShiftInvLinearEquiv",
+      "RepairCodes.projectiveShiftInvLinearMap_column",
+      "RepairCodes.projectiveShiftInvScale",
+      "RepairCodes.projectiveShiftInvScale_ne_zero"
+    ],
+    "RepairCodes.projectiveShiftInv_relabel_repairHypergraph": [
+      "FiniteGeom.ProjectiveAxisTwistedCubicIndex",
+      "FiniteGeom.ProjectiveTwistedCubicIndex",
+      "FiniteGeom.relabelHypergraph",
+      "FiniteGeom.relabel_repairHypergraph_of_monomial",
+      "RepairCodes.projectiveAxisTwistedCubicGenerator",
+      "RepairCodes.projectiveAxisTwistedCubicRepairHypergraph",
+      "RepairCodes.projectiveShiftInvIndexEquiv",
+      "RepairCodes.projectiveShiftInvLinearEquiv",
+      "RepairCodes.projectiveShiftInvLinearMap_column",
+      "RepairCodes.projectiveShiftInvScale",
+      "RepairCodes.projectiveShiftInvScale_ne_zero"
     ],
     "RepairCodes.repairHypergraph_concatenatedCode_eq_embed": [
       "FiniteGeom.card_wordSupport",
@@ -5763,8 +7340,25 @@
       "RepairCodes.concatenatedCode",
       "RepairCodes.repairHypergraph_concatenatedCode_eq_embed"
     ],
+    "RepairCodes.tripleAxisIndex_eq_finite_iff_shiftInv": [
+      "FiniteGeom.twistedCubicTripleAxisIndex",
+      "FiniteGeom.twistedCubicTripleAxis_coordinates_ne_zero",
+      "RepairCodes.axisShiftInvEquiv",
+      "RepairCodes.axisShiftInvEquiv_apply"
+    ],
+    "RepairCodes.twistedCubicTripleAxisIndex_eq_cubicRepairSumColor": [
+      "FiniteGeom.twistedCubicTripleAxisIndex",
+      "FiniteGeom.twistedCubicTripleAxisIndex.eq_1",
+      "RepairCodes.cubicRepairShiftedSum",
+      "RepairCodes.cubicRepairSumColor",
+      "RepairCodes.cubicRepairSumColor.eq_1"
+    ],
     "RepairCodes.twistedCubicTripleAxisIndex_injective_third": [
       "FiniteGeom.twistedCubicTripleAxisIndex"
+    ],
+    "RepairCodes.twistedCubicTripleAxisIndex_translate": [
+      "FiniteGeom.twistedCubicTripleAxisIndex",
+      "FiniteGeom.twistedCubicTripleAxisIndex.eq_1"
     ],
     "RepairCodes.twoCubicNormalizedAxis_linearIndependent": [
       "FiniteGeom.axisTwistedCubicPoints",
