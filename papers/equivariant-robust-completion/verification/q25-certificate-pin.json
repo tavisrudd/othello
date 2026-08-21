@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "package": "finitegeom-q25-certificates",
+  "repository": "https://github.com/tavisrudd/finitegeom-q25-certificates",
+  "commit": "d4e910cf01819a8678fd84422bb18fe23f4d6695",
+  "manifest_sha256": "4f3d252a453c7217a8a8aaf7b27374794396e2d0b4101c7c8b85683deaa52292",
+  "source_commit": "d5e2187cd1daf9420eaed71847ead29cc18baf78",
+  "lean_toolchain": "leanprover/lean4:v4.32.0-rc1",
+  "mathlib_commit": "571b8a8e54219b4d393f75f4b8653fac08197fcc",
+  "gate": "TavisRuddFiniteGeom.Certificates.Q25",
+  "terminals": [
+    "TavisRuddFiniteGeom.Certificates.Q25.PairCertificate.allRows",
+    "TavisRuddFiniteGeom.Certificates.Q25.ResidualMinimumOrbits.card_minimumOrbitUnion",
+    "TavisRuddFiniteGeom.Certificates.Q25.ResidualEquality.isMinimumResidualClass_iff_mem_minimumOrbitUnion",
+    "TavisRuddFiniteGeom.Certificates.Q25.Exhaustion.mem_minimumOrbitUnion_of_normalized_card_eq_32",
+    "TavisRuddFiniteGeom.Certificates.Q25.Exhaustion.card_ge_33_of_not_mem_minimumOrbitUnion"
+  ],
+  "coverage": {
+    "normalized_finite_classification": "kernel_checked",
+    "projective_normalization_and_semantic_transport": "manuscript_proof"
+  }
+}

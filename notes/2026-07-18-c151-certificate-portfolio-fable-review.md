@@ -1,5 +1,12 @@
 # Portfolio certificate-dependency assessment — critical review (Fable, 2026-07-18)
 
+> **State reconciliation (2026-08-21).** This is a dated review of the pre-extraction tree.  The
+> Q25 residual layer subsequently landed, was extracted into the Mathlib-only
+> `finitegeom-q25-certificates` package, and was removed from the monorepo.  The paper now maps to
+> that sealed package rather than regenerating the forest.  The historical “untracked” finding
+> below is therefore closed; the remaining question is the explicitly disclosed review surface of
+> the literal per-row links.
+
 **Lane**: `alt-orbit-repair`
 
 Scope: review of the external model's portfolio-wide certificate inventory (reproduced in the

@@ -1,5 +1,12 @@
 # C151 — exact Q25 repair minimum and extremizers
 
+> **Artifact-location reconciliation (2026-08-21).** The Q25 certificate forest was extracted
+> into the Mathlib-only `finitegeom-q25-certificates` package and then removed from the monorepo.
+> The dated module paths and build records below describe the pre-extraction authority.  The
+> surviving mask-spectrum replay is package-local; its command and hashes are updated in the
+> dedicated subsection below.  The sealed package is reused as-is—no certificate regeneration or
+> rebuild is part of this reconciliation.
+
 **Lane**: `alt-orbit-repair` — see `CLAUDE.md` § Lane routing.
 
 **Status:** REPORTED — the universal normalized-row `≥32` theorem is kernel-checked for all `46,056`
@@ -592,25 +599,25 @@ classes and lies in their residual orbits, closing against
 
 ### Mask-spectrum evidence bundle
 
-Replay, from `/home/tavis/src/othello`:
+Replay from the `finitegeom-q25-certificates` package at its sealed paper pin:
 
 ```sh
-python3 notes/2026-07-18-c151-minimum-mask-spectrum.py \
-  --check notes/2026-07-18-c151-minimum-mask-spectrum.json
+python3 scripts/minimum-mask-spectrum.py \
+  --check artifacts/minimum-mask-spectrum.json
 ```
 
 | File | SHA-256 | Bytes |
 |---|---|---|
-| `2026-07-18-c151-minimum-mask-spectrum.py` | `151b34ce6d0e1c0d3d18b9f12623e504ca0095c0bca506c7f657db6ddb410a94` | `7,549` |
-| `2026-07-18-c151-minimum-mask-spectrum.json` | `236c9abe08fda2c03d076868d23a4577b65ff9ebe2afdf85c560836a77c5fd17` | `10,393` |
+| `scripts/minimum-mask-spectrum.py` | `e9ea6c9f5f033f01ade17edc3a930f53f40316441f0c910a9360b4ae17819b7f` | `7,522` |
+| `artifacts/minimum-mask-spectrum.json` | `5416df54c53fb58535d740e5bf2e2cb579df8328479235089691e69af3fbb8d5` | `10,379` |
 
-The script parses only tracked Lean sources and fails loudly on schema drift: a wrong mask-word
+The script parses only the package's sealed Lean sources and fails loudly on schema drift: a wrong mask-word
 count, a duplicated class, a class set other than `0..1188`, or any class below the certified `32`.
 The independent cross-check reads the `legal` column of the residual-cover CSV
 (`62aa26c98deb98cb786fa1b21957b91ec16b1e2bd2a6319129c31449eb0effe3`), which is derived from the
 generator rather than from the Lean tree; it agrees with the mask cardinality on all `1,189`
-classes. That CSV is an untracked cache, so `--check` compares only the tracked-source-derived
-fields and records the cross-check status separately.
+classes.  In the package that CSV is the tracked canonical input, so `--check` verifies both the
+sealed-source-derived fields and the independent cross-check status.
 
 What this does not certify: the mask cardinality is a lower bound on the legal count, not the exact
 count, except at the five rows where equality is separately checked. The CSV agreement cross-checks

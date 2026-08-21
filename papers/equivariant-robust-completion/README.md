@@ -31,12 +31,13 @@ Clebsch theorem.
 
 ## Evidence and status
 
-The quadratic criterion, semantic global count, collision correction, robust
-exchange theorem, and $\operatorname{PG}(2,25)$ classification have
-kernel-checked Lean support. The exact exceptional minimum uses exhaustive
-finite certificates after two projective normalizations; the manuscript states
-that trust boundary explicitly. The classical projective-geometry inputs and
-bounded priority boundary are also identified.
+The quadratic criterion, semantic global count, collision correction, and
+robust exchange theorem have human-scale Lean support.  The normalized finite
+step in the $\operatorname{PG}(2,25)$ classification is pinned to a separate
+Mathlib-only certificate package; the two projective normalizations and
+semantic transport remain manuscript arguments.  The certificate's generic
+and row-specific trust surfaces, the classical projective-geometry inputs, and
+the bounded priority boundary are stated explicitly.
 
 The directory contains the focused LaTeX manuscript, bibliography, PDF, and
 verification surface. It is a staged paper release; publication identifiers,

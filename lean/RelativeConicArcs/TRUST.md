@@ -40,6 +40,7 @@ repositories; this ledger is not copied into the human-scale `finitegeom` export
 | q=11 residual game | residual graph theorems and `continuation_rawArc_iff` (`Q11Residual`), `seed_isP` (`Q11ResidualGame`) | every seeded continuation is exactly an icosahedral independent set; the actual projective seed is P by localization and antipodal mirror |
 | q=11 code and extension spectrum | `witness_mds_columns`, `witness_code_minimum_distance_four`, `projective_distanceThreeDirections_eq_standardConic`, `affine_distanceThree_iff_mem_standardConic`, `witness_code_coveringRadius_three`, `mem_affineSyndromesOfDistance_iff`, `affine_coset_distance_distribution`, `syndromeLeaderSupports_two_eq_raw`, `distance_two_leader_distribution`, `no_nonzero_quadratic_vanishing`, `witness_not_hasGRSQuadratic`, `witness_not_projectivelyGRS_of_implies_quadratic`, `extension_independence_spectrum`, `maximal_extension_spectrum`, `maximal_independent_extension_complete`, `completed_witness_matchings_oneFactorization` | Lean proves the `[6,3,4]₁₁` code/radius/deep-hole claims and closes the implication from the classical NRC/GRS quadratic consequence to non-GRS. The NRC/GRS dictionary itself remains the cited classical input. The affine distribution and `(900,150,100)` split range over actual syndromes and actual finite coefficient words, with a proved ray bijection and support equality. Every counted maximal extension is ordinarily complete, and the six distinct antipodal additions give a checked one-factorization. |
 | quadratic global count, invisible-center bound, inverse collision balance, and q=25 pair extension | `QuadraticGlobalCount.card_globalLegalPairs_eq_legalCount`, `QuadraticInvisible.s_add_three_sub_f_sub_e_le_card_empty_through_crossPair_center`, `QuadraticInvisible.aggregate_firstOrder_equality_iff_centers_avoid_carriers_and_collisionFree`, `QuadraticInvisible.aggregate_firstOrder_excess_eq_iff_centerIncidence_add_redundancy_eq`, `Q25PairResult.f2_pair_extension`, `Q25ProfileFour.profile_four_pair_extension`, `Q25ProfileZero.profile_zero_pair_extension`, `Q25AllProfiles.pair_extension` | the semantic global finset of fresh legal Frobenius pairs is exactly the disjoint carrierwise union counted by `legalCount`; equality in the aggregate first-order count is exactly universal center/carrier avoidance plus injective local charging, and excess `k` is exactly center-incidence mass plus collision redundancy; every cross-pair orbit in an `(f,e)` profile is invisible on at least the natural-number value `s+3-f-e` empty carriers; every Frobenius-invariant eight-arc over q=25 has a fresh conjugate-pair extension, with both new points explicitly outside the old arc; `f=2` uses checked normalization and all 46,056 finite rows, while `f=0,4` are certificate-free moment/center-incidence proofs and `f=6,8` use the strict count |
+| q=25 normalized residual minimum and equality classification | `TavisRuddFiniteGeom.Certificates.Q25.PairCertificate.allRows`, `TavisRuddFiniteGeom.Certificates.Q25.ResidualMinimumOrbits.card_minimumOrbitUnion`, `TavisRuddFiniteGeom.Certificates.Q25.ResidualEquality.isMinimumResidualClass_iff_mem_minimumOrbitUnion`, `TavisRuddFiniteGeom.Certificates.Q25.Exhaustion.mem_minimumOrbitUnion_of_normalized_card_eq_32`, `TavisRuddFiniteGeom.Certificates.Q25.Exhaustion.card_ge_33_of_not_mem_minimumOrbitUnion` | checked in the separate Mathlib-only `finitegeom-q25-certificates` package.  Its aggregate covers all normalized rows, proves the five orbit sizes and their 1,600-element disjoint union, and proves that every normalized row outside that union has at least 33 legal pairs.  The package deliberately stops at its concrete normalized coordinate model; projective normalization and transport to semantic arcs belong to the human argument or a separate compatibility bridge |
 | six-arc triple concurrence and the golden hexagon | `SixArcConcurrence.card_triplePoints_on_secant_le_two`, `SixArcConcurrence.card_triplePoints_le_ten`, `SixArcChordMatchings.card_concurrentMatchings_eq_card_triplePoints`, `SixArcOneFactorization.card_filter_mem_nonconcurrentMatchings`, `SixArcOneFactorization.card_nonconcurrentMatchings`, `SixArcOneFactorization.disjoint_of_mem_nonconcurrentMatchings`, `SixArcHexagonalOrder.exists_hexagonal_order`, `GoldenHexagonNormalForm.golden_normal_form_of_concurrent_matchings`, `SixArcGoldenNormalForm.exists_golden_frame`, `SixArcGoldenNormalForm.exists_golden_root`, `Q11GoldenHexagonWitness.exists_mapEquiv_toWitness` | proved in Lean and collected by the import-only `SixArcConcurrenceSpine`, which is exported as a companion boundary of its own and shares no module with the support-cubic orientation spine; over any field in which two is invertible a six-arc has at most ten points off it lying on three of its secants, and the chords through such a point give a bijection onto the concurrent chord matchings. At exactly ten such points the five non-concurrent matchings partition the fifteen chords, two of them list the arc as a hexagon, and frame arithmetic puts that hexagon in the golden normal form, so the ground field contains a root of `x² = x + 1`. Over the field of eleven elements the two roots give explicit projectivities onto the displayed witness. Dye 1991 is the cited antecedent for the bound and for the classification of the arcs attaining it; neither is imported as an assumption |
 
 The five exact arithmetic thresholds are also explicit theorems:
@@ -65,6 +66,45 @@ The checker and all concrete field laws use Lean's kernel-reduced `decide`.  No 
 `native_decide` or an external evaluator.  The `q=16` proof is split into independent field-law,
 arc, disjointness, and canonical-coverage leaves solely to bound build memory; the aggregate
 theorem composes their checked propositions.
+
+## Q25 residual certificate surface
+
+The Mathlib-only `finitegeom-q25-certificates` package seals 9,511 Lean modules under the
+import-only aggregate `TavisRuddFiniteGeom.Certificates.Q25`.  It retains 9,492 generated modules
+from the extracted source snapshot and replaces the old handwritten layer with 19 package-owned
+modules.  The generated families that carry the residual minimum are:
+
+| Generated tree | Modules | Consuming checker or terminal layer |
+|---|---:|---|
+| `LineMaskData/` | 67 | `LineMaskChecker.LineMaskCertificate` and `LineMaskComposition` |
+| `CarrierLineData/` | 33 | `LineMaskChecker.CarrierLineCertificate` and `LineMaskComposition` |
+| `RowCompositionData/` | 238 | shared reflected-mask soundness; representative lower bounds |
+| `ExactMinimumRows/` | 6 | `ExactnessComposition`; the five equality witnesses |
+| `ResidualCoverData/` | 1,072 | `ResidualCoverBridge`; bad-row and valid-row payloads |
+| `ResidualTransportData/` | 1,036 | pointwise transport and inverse checks for valid rows |
+| `ResidualClassLinkData/` | 1,036 | literal links from transported rows to representatives |
+| `ResidualDispatchData/` | 1,071 | normalized-row payload dispatch |
+| `ResidualConclusionData/` | 1,071 | lower-bound conclusions for all 46,056 normalized rows |
+| `ResidualConclusionDispatchData/` | 304 | aggregate lower-bound dispatch |
+| `RowCompositionStrictData/` | 238 | strict bounds for the 1,184 nonminimum classes |
+| `ExhaustionConclusionData/` | 1,071 | equality/nonminimum conclusions for all normalized rows |
+| `ExhaustionDispatchData/` | 304 | `Exhaustion.concludeNormalizedRowExhaustion` |
+
+File count is not the trusted surface.  The line, carrier, and composition leaves instantiate
+shared predicates whose soundness is proved once: literal masks are untrusted data, and the
+checker theorems connect checked bits to geometric legality.  The residual transport and
+conclusion forests are less uniform.  Their leaves check row-specific point images, bad triples,
+dispatcher alternatives, and literal links to canonical representatives.  Those obligations are
+kernel checked, but their mathematical review surface grows with the rows rather than collapsing
+to one generic predicate.  In particular, equality exhaustion uses literal canonical-class links
+rather than a proved canonicalization algorithm.
+
+The package also seals the canonical residual-cover CSV and a separate replay of all 1,189 mask
+cardinalities.  That replay checks agreement between the Lean literals and the independently
+generated legal-count column; it is provenance, not a substitute for the Lean aggregate.  The
+paper pins the package commit and manifest directly.  A future semantic compatibility bridge may
+transport the normalized terminals into the shared projective API, but no rebuild or regeneration
+of the certificate forest is required for that bridge.
 
 ## Toolchain and exact replay
 

@@ -104,6 +104,23 @@ allowed_import_path_prefixes = [
 ]
 forbidden_artifact_basenames = []
 
+[[package]]
+name = "finitegeom-q25-certificates"
+repository = "https://github.com/tavisrudd/finitegeom-q25-certificates"
+commit = "d4e910cf01819a8678fd84422bb18fe23f4d6695"
+manifest_sha256 = "4f3d252a453c7217a8a8aaf7b27374794396e2d0b4101c7c8b85683deaa52292"
+gate = "TavisRuddFiniteGeom.Certificates.Q25"
+terminal = "TavisRuddFiniteGeom.Certificates.Q25.Exhaustion.card_ge_33_of_not_mem_minimumOrbitUnion"
+trust_fact = "external/finitegeom-q25-certificates.json"
+trust_fact_sha256 = "6526629ffa651555b99909b5e8b0e40d12ef00a4b983591a8ff57f0b6b05dd32"
+owned_module_prefixes = [
+  "TavisRuddFiniteGeom.Certificates.Q25",
+]
+allowed_import_path_prefixes = [
+  "lean/paper-bridges/equivariant-robust-completion/",
+]
+forbidden_artifact_basenames = []
+
 # Generated data that a written determination keeps in the monorepo, because it is
 # human-scale semantic source rather than certificate payload: a frozen finite table
 # small enough to read, carrying no generated proof, consumed by hand-written theorems

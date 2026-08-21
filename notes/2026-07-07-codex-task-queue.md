@@ -56,7 +56,7 @@ caveats; none is covered by C778--C780.
 ### `paper-frob-eq`
 
 - **C152 `[paper-frob-eq]` [QUEUED]** — quadratic-Frobenius replacement graph and component census → `notes/2026-07-14-c152-orbit-replacement-graph.md`.
-- **C318 `[paper-frob-eq]` [QUEUED; NEXT]** — add the surviving Q25 residual layer to the arcs trust manifest: theorem-map rows for the orbit/classification theorems, the residual `*Data/` trees with their scale and consuming checker, the trusted-surface statement distinguishing generic-predicate leaves from bespoke per-row leaves, and reconciliation of C151 report references to the mask-spectrum payload removed by `6da475113` → `notes/2026-07-18-c151-certificate-portfolio-fable-review.md`.
+- **C318 `[paper-frob-eq]` [IN PROGRESS; NEXT]** — add the surviving Q25 residual layer to the arcs trust manifest: theorem-map rows for the orbit/classification theorems, the residual `*Data/` trees with their scale and consuming checker, the trusted-surface statement distinguishing generic-predicate leaves from bespoke per-row leaves, and reconciliation of C151 report references to the mask-spectrum payload removed by `6da475113` → `notes/2026-07-18-c151-certificate-portfolio-fable-review.md`.
 - **C319 `[paper-frob-eq]` [QUEUED; C151 cost now measured at 1:57:09 serial]** — decide whether to replace the literal canonical-class links with a verified canonicalizer, or to demote the exact Q25 classification to a Lean-checked reduction plus reproducible computation → `notes/2026-07-18-c151-certificate-portfolio-fable-review.md`.
 
 ### `build-sys`

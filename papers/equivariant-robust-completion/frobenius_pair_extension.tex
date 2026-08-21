@@ -57,10 +57,10 @@ leaves at least three alternate repairs.  For $s\ge7$ the corresponding
 bounds are $319$ legal pairs and $318$ alternate repairs.  More generally,
 an invariant $(k+2)$-arc has at least $r$ alternate repairs after such a
 deletion whenever
-$\lfloor(k-1)^2/4\rfloor+r+1\le s(s-1)/2$.  The structural reductions and
-the exceptional minimum and equality classification have kernel-checked
-Lean support; the latter uses exhaustive finite certificates after two
-projective normalizations.
+$\lfloor(k-1)^2/4\rfloor+r+1\le s(s-1)/2$.  The structural reductions have
+human-scale Lean support, and the normalized exceptional census is checked by
+a separate Mathlib-only certificate package.  The two projective
+normalizations and semantic transport are manuscript arguments.
 \end{abstract}
 
 \section{Introduction}
@@ -121,8 +121,9 @@ precisely:
 
 The quantitative criterion and its exact correction are the structural
 part of the paper.  Theorem~\ref{thm:main}(ii) is the only exhaustive finite
-step.  Its semantic lower bound, attainment, and equality-orbit exhaustion
-are kernel checked after normalization; Section~\ref{sec:formalization}
+step.  Its lower bound, attainment, and equality-orbit exhaustion are kernel
+checked in the normalized coordinate model; the manuscript carries those
+facts through the two projective normalizations.  Section~\ref{sec:formalization}
 states the certificate and trust boundary.  The parameterized exchange
 theorem later identifies the general phase
 $\lfloor(k-1)^2/4\rfloor+r+1\le s(s-1)/2$.  The saturation corollary and the
@@ -567,9 +568,9 @@ disjointness, and show that their union has size $1600$.
 
 Strict certificates place every nonminimizing residual class above $32$,
 and an exhaustive dispatcher places every normalized equality row in the
-five-orbit union.  Separate semantic transport theorems carry both the
-lower bound and equality exhaustion through the two projective
-normalizations.  Conversely, invariance of the legal-pair count under the
+five-orbit union.  The two projective normalizations and invariance of the
+legal-pair count carry the lower bound and equality exhaustion back to the
+semantic arc.  Conversely, invariance of the legal-pair count under the
 residual action transports the five checked equalities across their orbits.
 Thus $32$ is the exact semantic minimum, with the stated complete equality
 classification up to normalization.  Section~\ref{sec:formalization}
@@ -792,9 +793,10 @@ not a new constant or a sharp family.
 
 This section records the correspondence between the paper statements and
 their formal evidence; it is not a second proof narrative.  The structural
-reductions are ordinary Lean proofs.  The exceptional two-fixed-point Q25
-minimum adds generated finite certificates after the projective
-normalizations stated in Proposition~\ref{prop:f2}.  The development uses
+reductions are ordinary Lean proofs.  A separate Mathlib-only package checks
+the exceptional two-fixed-point Q25 census in the normalized coordinate model
+used inside the proof of Proposition~\ref{prop:f2}; the projective
+normalizations and semantic transport are manuscript arguments.  The development uses
 Lean~\cite{Lean2015} on top of mathlib~\cite{Mathlib2020} and is divided as
 follows.
 
@@ -831,8 +833,9 @@ follows.
       $f=0$ and $f=4$.  For $f=2$, residual composition certificates prove
       the lower bound $32$ on all $1189$ representatives; orbit--stabilizer,
       strict-composition, and exhaustive-dispatch modules prove attainment
-      and equality-orbit exhaustion.  Semantic transport carries these
-      conclusions through both normalizations.  The order-five
+      and equality-orbit exhaustion in the package's normalized coordinate
+      model.  The proof of Proposition~\ref{prop:f2} carries these conclusions
+      through both normalizations.  The order-five
       alternate-repair module and the paper-level parity split then give
       Theorem~\ref{thm:q25} and
       Corollary~\ref{cor:q25-uniform-repair}.
@@ -846,15 +849,22 @@ specialization of the semantic carrier count to $(s,f,e)=(11,6,0)$.  Its
 arithmetic and the observation $M=0$ are printed in full; no separate Lean
 terminal is claimed for the number $4180$.
 
-The scoped builds and declaration-level axiom audits report exactly
+The scoped structural builds and the sealed certificate package's
+declaration-level axiom audits report exactly
 \[
   [\texttt{propext},\ \texttt{Classical.choice},\ \texttt{Quot.sound}],
 \]
 the standard classical quotient profile inherited from mathlib.  No public
 theorem depends on an admitted proof, a custom axiom, or
-\texttt{native\_decide}.  The finite leaves in Proposition~\ref{prop:f2}
-use kernel \texttt{decide}.  The theorem classifies equality up to
-normalization and does not rely on a count of semantic arcs.
+\texttt{native\_decide}.  The finite leaves supporting
+Proposition~\ref{prop:f2} use kernel \texttt{decide}.  The certificate terminal
+is the normalized classification; the passage to semantic arcs is the
+manuscript proof and does not rely on a count of semantic arcs.
+
+The certificate aggregate exposes
+\path{PairCertificate.allRows},
+\path{ResidualMinimumOrbits.card_minimumOrbitUnion}, and the two normalized
+exhaustion terminals in \path{Exhaustion.lean}.
 
 For reproducibility, the paper-facing declarations are located as follows.
 
@@ -896,18 +906,21 @@ Source module & Paper-facing declaration or role \\
 
 \subsection*{Artifact and reproduction}
 
-The accompanying source archive pins Lean to
-\path{leanprover/lean4:v4.32.0-rc1} and mathlib to revision
-\path{571b8a8e54219b4d393f75f4b8653fac08197fcc}.  The audited formal-source
-checkpoint will be recorded from the final submission commit.  From the
-\path{lean/} directory the paper-facing targets are rebuilt by
+The exceptional finite layer uses a separately versioned Mathlib-only
+certificate package.  Its exact commit and manifest digest are recorded in
+the verification pin.
+That package pins Lean 4.32.0-rc1 and mathlib revision
+\texttt{571b8a8e5421}.  From the package root
+its sealed aggregate and source-reproduction checks are run by
 \begin{verbatim}
-LEAN_NUM_THREADS=6 nix develop --command lake build \
-  RelativeConicArcs.QuadraticGlobalCount \
-  RelativeConicArcs.AlternateOrbitRepair \
-  RelativeConicArcs.AlternateOrbitRepairProfileEnvelopeResult \
-  RelativeConicArcs.ParameterizedAlternateOrbitRepair \
+nix run .#verify
 \end{verbatim}
+The exact pin and trust boundary are recorded in
+\path{verification/q25-certificate-pin.json} and
+\path{verification/README.md}.  The standalone paper archive does not vendor
+the shared human-scale Lean development listed above; its structural theorem
+sources and the separately pinned finite certificate have distinct release
+boundaries.
 The manuscript PDF is reproduced from its source directory with
 \begin{verbatim}
 nix shell nixpkgs#tectonic -c tectonic \

@@ -1,0 +1,64 @@
+{
+  "declarations": {
+    "TavisRuddFiniteGeom.Certificates.Q25.Exhaustion.card_ge_33_of_not_mem_minimumOrbitUnion": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "TavisRuddFiniteGeom.Certificates.Q25.Exhaustion",
+      "origin": "package"
+    },
+    "TavisRuddFiniteGeom.Certificates.Q25.Exhaustion.mem_minimumOrbitUnion_of_normalized_card_eq_32": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "TavisRuddFiniteGeom.Certificates.Q25.Exhaustion",
+      "origin": "package"
+    },
+    "TavisRuddFiniteGeom.Certificates.Q25.PairCertificate.allRows": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "TavisRuddFiniteGeom.Certificates.Q25.PairRows",
+      "origin": "package"
+    },
+    "TavisRuddFiniteGeom.Certificates.Q25.ResidualEquality.isMinimumResidualClass_iff_mem_minimumOrbitUnion": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "TavisRuddFiniteGeom.Certificates.Q25.ResidualEquality",
+      "origin": "package"
+    },
+    "TavisRuddFiniteGeom.Certificates.Q25.ResidualMinimumOrbits.card_minimumOrbitUnion": {
+      "axioms": [
+        "Classical.choice",
+        "Quot.sound",
+        "propext"
+      ],
+      "module": "TavisRuddFiniteGeom.Certificates.Q25.ResidualMinimumOrbits",
+      "origin": "package"
+    }
+  },
+  "dependency": {
+    "commit": "571b8a8e54219b4d393f75f4b8653fac08197fcc",
+    "repository": "https://github.com/leanprover-community/mathlib4"
+  },
+  "evidence": {
+    "replay": "nix run .#verify"
+  },
+  "gate": "TavisRuddFiniteGeom.Certificates.Q25",
+  "lean_toolchain": "leanprover/lean4:v4.32.0-rc1",
+  "manifest_sha256": "4f3d252a453c7217a8a8aaf7b27374794396e2d0b4101c7c8b85683deaa52292",
+  "package": "finitegeom-q25-certificates",
+  "repository": "https://github.com/tavisrudd/finitegeom-q25-certificates",
+  "schema_version": 1,
+  "source_commit": "d5e2187cd1daf9420eaed71847ead29cc18baf78",
+  "terminal": "TavisRuddFiniteGeom.Certificates.Q25.Exhaustion.card_ge_33_of_not_mem_minimumOrbitUnion"
+}

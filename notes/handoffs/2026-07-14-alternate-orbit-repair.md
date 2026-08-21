@@ -120,7 +120,7 @@ statements are in the reports above and their development history is in the comp
 
 | Task | State | Current deliverable |
 |---|---|---|
-| C318 | queued; the lane's next step | Manifest rows for the surviving residual layer and data trees, the trusted-surface statement, and reconciliation of C151 report references to the mask-spectrum payload removed by `6da475113` |
+| C318 | in progress; the lane's current step | Manifest rows for the surviving residual layer and data trees, the trusted-surface statement, and reconciliation of C151 report references to the mask-spectrum payload removed by `6da475113` |
 | C319 | queued; C151 cost measured at 1:57:09 serial | Decide verified canonicalizer versus demotion to reduction-plus-computation |
 | C152 | queued | Define the orbit-replacement graph, prove the exact local degree identity, then run a component census before considering connectivity |
 
