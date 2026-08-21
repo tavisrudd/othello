@@ -105,6 +105,120 @@ For the integral window formula, `Comparison.ResonantWindowRank` proves the
 finite alternating-mask identity that makes the rank of every moved generator
 equal to one at resonance.
 
+`Comparison.PointedDirectSum` isolates a different asymmetric bypass.  An
+uncalibrated pairing-compatible direct-sum comparison cannot enter the row
+consumer.  It must first carry a `ScaledRowCalibration` with a unit scale. An
+`ExactRowCalibration` supplies its unit-one case. A stronger
+`ExactPointCalibration`, asserting equality of the actual flat point with the
+ambient point plus zero correction, constructs that row certificate by
+pairing preservation; a full-variable point-insertion identity may instead
+construct the exact row certificate directly. A
+`CommonReceiverRowFactorization` gives a third constructor from two maps into
+one rowed receiver. Dually, `CommonSourceRowFactorization` starts with two
+endpoint maps out of one augmented Fourier or gauged source. In both cases a
+commutative map square and multiplicatively compatible unit scales imply
+`ScaledRowCalibration` without division. These are the types consumed by a
+support-localization identity and use no uniqueness statement for a flat
+point. `CommonSourceGeneratorAgreement` weakens the source-side presentation
+further: exact agreement on any spanning generator set extends by linearity,
+matching Fourier maps defined by explicit basis formulas. The still smaller
+`RowedComparison` does not mention points or pairings at all, and
+`CommonSourceGeneratorRows` constructs it from the same generatorwise data.
+This row-only interface is appropriate when an adjoint augmentation formula
+identifies the two rank rows directly. With the perfect QDM pairing the two
+exact calibrations are equivalent; the second route changes how the source
+theorem is proved, not its mathematical strength. A leading-term equality is
+deliberately neither certificate.  Once exact row calibration is supplied,
+the point row factors through ambient projection, ambient inclusion preserves
+it, and the projection intertwines every forward iterate of the selected
+invertible monodromy. The algebra is applied only after restricting scalars
+to a base over which the pairing is bilinear; the full QDM pairing retains
+the usual `z` versus `-z` variance and needs that typed adapter. Lean does not
+construct the geometric calibration or infer it from horizontality and a
+leading class.
+
+`Comparison.RowedRepresentationDecomposition` combines the row-only direct
+sum with one whole based-loop representation. Its comparison intertwines
+every loop before endpoint loops are selected. One `LoopAssignment` then
+produces exact marked diagram equivalences for every directed pair belonging
+to that one edge. Separate incident edges may still carry unrelated copies of
+the nominally shared vertex representation.
+For any loop already in that representation, Lean proves that the source row
+detects a generalized eigenspace if and only if the ambient row detects the
+same eigenvalue and nilpotence exponent. Correction summands may contain that
+eigenvalue; row factorization makes their multiplicity irrelevant.
+
+`Comparison.MarkedRepresentationEquivalence` gives the adjacent-edge
+connector without imposing equality or uniqueness of sectorial frames. If
+both copies of a shared vertex are marked-equivalent to one common carrier,
+their transition conjugates every loop, transports the row, and preserves all
+detected generalized-eigenspace Booleans. Constructing those marked
+equivalences from a geometric quantum connection, including the passage from
+the large-radius Gamma row to the selected irregular solution object, remains
+an external input.
+
+`Comparison.RowedRepresentationPath` gives the stronger pathwise type. A
+single vertex-indexed family assigns each weak-factorization vertex one
+carrier, one whole loop representation, and one row. Every directed edge is
+indexed by the exact source and target values of that family, so consecutive
+edges cannot use unrelated copies of their shared vertex. Lean then composes
+the edgewise detected-support equivalences along any finite typed path. The
+source of such a family must still provide one common coefficient base and
+compatible completed germs; differently based formal power-series expansions
+cannot inhabit the same vertex value merely because they describe the same
+variety.
+
+`Comparison.ParallelAugmentedSource` removes the need to compose those germs
+when geometry supplies a stronger common source.  Each branch maps one
+definitionally shared marked representation isomorphically to an endpoint
+representation plus a row-invisible correction representation.  Lean proves
+that any two branches have the same detected generalized-eigenspace Boolean,
+although their endpoint carriers and correction representations may differ.
+The module does not construct a global Fourier, gauged, or birational-cobordism
+source with the required branch maps.
+
+`Comparison.ParallelScalarExtensions` weakens the remaining coefficient-ring
+requirement.  It starts from one marked representation before completion, but
+allows every endpoint branch to use its own scalar ring and its own augmented
+source decomposition.  The branch must explicitly certify that scalar
+realization reflects the row-detected generalized-primary predicate.  Lean
+then compares endpoints over unrelated chamber completions through the common
+pre-completion Boolean.  This conservativity is not inferred from arbitrary
+base change: specialization can kill a row or create a primary block.
+
+`Comparison.PrimaryDetectionBaseChange` discharges that conservativity for
+faithfully flat scalar extension.  Flatness identifies the generalized-primary
+kernel after extension with the tensor product of the original kernel, and
+faithfulness reflects whether the restricted marked row is zero.  The smart
+constructor `ParallelScalarExtensions.Branch.ofFaithfullyFlatBaseChange`
+therefore accepts an augmented decomposition over each branch field without a
+separate Boolean-reflection proof.  It does not construct the finite rational
+core or identify an analytic/Gamma endpoint with that algebraic base change.
+Only eigenvalues already defined over the core are compared; the core must
+therefore contain the selected primitive-sixth label and fix the compatible
+root lift used by every branch.
+
+`Comparison.ParallelPrimaryQuotients` removes the direct-sum requirement as
+well.  Each branch may instead map its scalar-extended common source to the
+endpoint, provided the map intertwines the selected loop, compares the rows
+up to a unit, and covers the selected generalized-primary kernel.  Lean then
+identifies endpoint detection through the common core.  Primary coverage is
+not implied by ordinary surjectivity for a fixed nilpotence exponent: a
+nonsplit operator extension can prevent a target kernel vector from having a
+kernel lift of the same exponent.  When that exponent gives a Fitting
+decomposition on the source and endpoint shifted operators, surjectivity does
+give the required lift.  The constructor
+`ParallelPrimaryQuotients.Branch.ofSurjectiveOfFitting` records this sharper
+route.
+
+`Comparison.BasedCoefficientMap` isolates the first requirement on such
+completed germs. A map is based only when its residue square commutes. Hence a
+coordinate vanishing at the source point cannot map to a target coordinate
+plus a term with nonzero residue. The module also proves that an element with
+unit residue cannot be nilpotent, so an Artin quotient cannot legalize a
+translation by a unit constant. Completeness, continuity, and analytic
+continuation remain outside this elementary coefficient-ring interface.
+
 The algebraic model has a compact sufficient constructor. If the combined
 crossed and moving map `(B,D)` admits a linear retraction, an explicit incoming
 shear and target involution construct every crossed-coordinate field. An

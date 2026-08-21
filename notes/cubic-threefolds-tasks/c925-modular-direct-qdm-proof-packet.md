@@ -383,6 +383,18 @@ preserves the rank quotient through every actual blowup occurrence.  This is
 the highest-EV route because it avoids a universal threefold carrier theorem
 and is uniform in \(m\).
 
+A smaller direct endpoint formulation is now formalized.  Start with one
+finite rational marked representation before chamber completion.  Each
+endpoint may use its own faithfully flat coefficient extension and need only
+be a selected-primary quotient of that scalar extension: the endpoint map
+intertwines the selected loop, compares the rows up to a unit, and covers the
+chosen generalized-primary kernel.  Then all endpoint Booleans agree through
+the common core, with no adjacent comparison or exceptional direct sum.
+Ordinary endpoint surjectivity supplies primary coverage at any exponent
+beyond the source and endpoint Fitting thresholds.  The geometric input is
+now descent of the actual Gamma/monodromy row to the rational core and the
+corresponding localized quantum-Kirwan endpoint maps.
+
 ### Resonant saturation
 
 For each consecutive-discrepant overlap, deform the integral GKZ parameter
@@ -490,7 +502,17 @@ advertised algebraic laws and countermodels, never an external QDM provider.
 
 ## Next
 
-1. For the first genuine \((1,1)\) overlap, use Module 59's result that all
+1. Test the global common-source route first.  On one smooth projective
+   cobordism, construct a finite rational marked Gamma/monodromy core
+   containing the chosen primitive-sixth label.  For each extreme quotient,
+   prove that the Rees-homogenized localized quantum-Kirwan map is a
+   selected-loop intertwiner, is surjective, and pulls the endpoint rank row
+   back to the common row up to a unit.  Choose one exponent above the finite
+   Fitting thresholds.  `Comparison.PrimaryDetectionBaseChange` and
+   `Comparison.ParallelPrimaryQuotients` then give the endpoint contradiction
+   directly, uniformly in \(m\), without adjacent-overlap coherence.
+   If this direct endpoint provider fails, return to the first genuine
+   \((1,1)\) overlap and use Module 59's result that all
    sixteen completed-pilot coordinate-wall adjacencies have common
    rank-visible generators; the separable primitive-projector implementation
    is therefore closed on every pilot.  The character-basis moving complement

@@ -12,6 +12,15 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.Ran
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.SemilinearVariation
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.VariationNormalFactor
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.ResonantWindowRank
+import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.BasedCoefficientMap
+import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.PointedDirectSum
+import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.RowedRepresentationDecomposition
+import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.RowedRepresentationPath
+import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.ParallelAugmentedSource
+import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.PrimaryDetectionBaseChange
+import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.ParallelScalarExtensions
+import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.ParallelPrimaryQuotients
+import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.MarkedRepresentationEquivalence
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.MarkedMonodromyDiagram
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.MarkedLocalSystem
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.SelectedLocalSystemReader
@@ -82,6 +91,76 @@ composes this specialization law with the crossed-coordinate normal-factor
 calculation. Environment-indexed endpoints compute the quantum path and share
 the phase, character, and
 direction, so their compatibility certificate is derived rather than chosen.
+For the alternative blowup-direct-sum route, an uncalibrated horizontal and
+pairing-compatible splitting is kept distinct from unit-scaled row
+calibration. Exact flat-point calibration implies its unit-one row
+certificate, while a
+full-variable point-insertion identity may provide it directly.  Only the row
+certificate lets the point row factor through the ambient projection; the
+separate monodromy-intertwining field transports its forward iterates. The
+bilinear theorem is consumed only after handling the QDM pairing's
+`z`-to-`-z` variance. Agreement of a leading point
+class is not accepted as a constructor.
+A rowed direct-sum decomposition may instead be natural for an entire marked
+based-loop representation. Selecting both endpoint loops from one assignment
+then gives an exact marked diagram equivalence for every directed pair; the
+formal interface cannot choose a different loop for the row and that edge's
+direct-sum comparison. For each such loop, detected support on every generalized
+eigenspace is equivalent on the source and ambient factors even when the
+correction factor has the same eigenvalue.
+For a finite factorization path, a vertex-indexed family can supply the exact
+same marked representation to both incident edges. The resulting typed path
+composes the detected-support equivalences without any separately chosen
+adjacent overlap. Constructing that family still requires one common
+coefficient base and compatible completed germs; the path type does not turn
+two differently based formal expansions into the same object.
+Alternatively, several vertices may be compared in parallel from one marked
+augmented source.  Each branch is an isomorphism from that definitionally
+shared source to one vertex representation plus a row-invisible correction.
+Any two branches then have the same detected-support Boolean without a map
+between their completed vertex germs.  Constructing the common geometric
+source and all of its marked branch maps remains external to the algebraic
+interface.
+The endpoint completions themselves need not share a coefficient ring.
+`ParallelScalarExtensions` starts with one marked representation before
+completion, realizes it separately over each branch ring, and asks explicitly
+that the chosen scalar realization reflect the row-detected generalized-primary
+predicate.  Once that conservative reflection is supplied, the augmented
+direct-sum theorem compares the endpoint Booleans through the common core.
+Arbitrary specialization or completion does not construct the reflection
+field: a quotient may kill the marked row and a turning specialization may
+create a primary block.
+For an honest faithfully flat scalar extension, that reflection is no longer
+an input.  `PrimaryDetectionBaseChange` proves that flatness base-changes the
+generalized-primary kernel and faithfulness reflects nonvanishing of the
+restricted row.  `ParallelScalarExtensions.ofFaithfullyFlatBaseChange` then
+constructs a conservative endpoint branch directly from its augmented
+decomposition.  Constructing the finite rational marked core and identifying
+each endpoint QDM/Gamma representation with its scalar extension remain
+external.  The selected eigenvalue must already descend from the core ring;
+scalar extension may create new primary eigenvalues, so the primitive-sixth
+label and compatible root lift are part of the core datum.
+An endpoint need not occur as a direct summand of the local source.
+`ParallelPrimaryQuotients` replaces the augmented decomposition by a linear
+comparison which intertwines the selected loop, identifies the rows up to a
+unit, and covers the selected generalized-primary kernel.  Two such endpoint
+quotients over unrelated faithfully flat scalar extensions have the same
+detected-primary Boolean.  The primary-coverage field is explicit because a
+surjective intertwiner need not lift the kernel of a fixed power through a
+non-split operator extension.  At an exponent for which the shifted operator
+has its Fitting decomposition on source and target, ordinary surjectivity does
+imply primary coverage;
+`ParallelPrimaryQuotients.Branch.ofSurjectiveOfFitting` constructs the branch
+from exactly those data.
+At the coefficient level, a based ring map must preserve the chosen residue
+square. It therefore cannot send a coordinate vanishing at the source point
+to a target coordinate plus a term of nonzero residue. An element with unit
+residue cannot be nilpotent, so passing to an Artin quotient does not repair
+such a nonbased translation.
+Two incident sectorial frames may differ by an arbitrary Stokes transition.
+If each is marked-equivalent to one common carrier, composition gives their
+marked overlap and preserves the same detected-support Boolean. The interface
+does not construct the common carrier or the analytic Gamma-row realization.
 At the set level, a regular descent orbit is distinguished from three fixed
 points, while a unary correction is fixed only under an explicit stability
 hypothesis for its singleton summand.  With two independent actions, a regular
