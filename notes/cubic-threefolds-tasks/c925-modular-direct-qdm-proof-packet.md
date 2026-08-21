@@ -515,6 +515,15 @@ advertised algebraic laws and countermodels, never an external QDM provider.
    as a conjecture in Woodward's Remark 8.10 and is not an available blanket
    provider.  This one-sided formulation is uniform in \(m\) and avoids
    adjacent-overlap coherence.
+   Do not replace the marking by the ordinary Hard--Lefschetz character of
+   the cubic Hodge structure.  If (A=H^3(X)_{\mathrm{prim}}), a curve
+   (C) with (J(C)\twoheadrightarrow J(X)) has
+   (A(1)\subset H^1(C)); blowing up (C\subset\mathbf P^D) creates the
+   full length-((D-2)) string (A(-j)\subset H^{3+2j}).  Hence the
+   unmarked Hodge packet fails under a single smooth blowup.  The exact
+   counterexample and the conditionally valid Lefschetz arithmetic are
+   recorded in
+   `../2026-08-21-c925-pointed-row-calibration.md`.
    If this direct endpoint provider fails, return to the first genuine
    \((1,1)\) overlap and use Module 59's result that all
    sixteen completed-pilot coordinate-wall adjacencies have common

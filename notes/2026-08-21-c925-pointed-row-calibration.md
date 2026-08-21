@@ -22,6 +22,54 @@ have the relevant Fitting decompositions, ordinary surjectivity implies the
 needed primary coverage.  The source problem is consequently one global
 marked-core theorem rather than adjacent sectorial coherence.
 
+## Rejected Hodge--Lefschetz packet shortcut
+
+Ordinary Hodge multiplicities cannot replace the marked QDM row.  Let
+
+\[
+ A=H^3(X)_{\mathrm{prim}}.
+\]
+
+The tempting construction records the copies
+
+\[
+ A(-j)\subset H^{3+2j}(Y)
+\]
+
+and applies the primitive Hard--Lefschetz transform to their graded
+multiplicities.  Conditionally on a lower carrier bound, the arithmetic is
+correct: the source (X\times\mathbf P^m) has a string of length (m+1),
+and a codimension-(c) blowup correction tensors a center string with the
+length-((c-1)) Lefschetz character.
+
+The carrier premise is false because the index (j) ranges over all
+integers.  In particular, (A(1)) is a weight-one Hodge structure.  Choose a
+smooth curve (C) for which (J(C)\twoheadrightarrow J(X)); semisimplicity
+then makes (A(1)) a direct summand of (H^1(C)).  If
+(C\subset\mathbf P^D) is blown up, the correction terms
+
+\[
+ H^1(C)(-i),\qquad 1\le i\le D-2,
+\]
+
+contain
+
+\[
+ A(1-i)\subset H^{1+2i},
+\]
+
+which is exactly the string (A(-j)\subset H^{3+2j}) for
+(j=0,\ldots,D-3).  Its length is (D-2), equal to the string in
+(X\times\mathbf P^{D-3}).  Thus one lawful curve blowup changes the proposed
+top multiplicity.  The same counterexample already has length two when
+(D=4), so the unconditional one-stabilization atom necessarily retains
+extra polarization, QDM, or occurrence marking that ordinary Hodge
+semisimplification forgets.
+
+The Hard--Lefschetz/Clebsch--Gordan calculation survives only as a conditional
+combinatorial lemma.  It cannot supply an unconditional (m=2) or all-(m)
+obstruction.
+
 ## The uncalibrated blowup splitting
 
 For a smooth blowup \(\widetilde X=\operatorname{Bl}_Z X\), the blowup case
