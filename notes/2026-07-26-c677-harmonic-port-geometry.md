@@ -2,7 +2,30 @@
 
 **Lane:** `complete-ports`
 
-**Status:** READY — task card created 2026-08-21; proof and formalization work has not started.
+**Status:** ACTIVE — the characteristic-three harmonic-completion algebra is kernel-green; the
+projective design, circuit, code, port, and closure layers remain open.
+
+## Current checkpoint
+
+`RepairPorts.HarmonicQuartic` now defines the elementary symmetric conditions for finite and
+infinite harmonic blocks.  It proves that a finite triple with nonzero sum has the unique
+completion
+
+\[
+d=-\frac{e_2(a,b,c)}{e_1(a,b,c)},
+\]
+
+that this completion is distinct from all three prescribed parameters, that a distinct zero-sum
+triple has no finite completion, and that a triple containing infinity has the unique distinct
+completion `-a-b`.  These proofs use `CharP 𝔽 3` directly and no finite enumeration.
+
+Validation:
+
+```text
+lean/scripts/guarded-lean RepairPorts/HarmonicQuartic.lean
+```
+
+The single-file elaboration is warning-free apart from the wrapper's dirty-tree notice.
 
 ## Objective
 
