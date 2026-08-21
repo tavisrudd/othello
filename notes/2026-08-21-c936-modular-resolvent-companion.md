@@ -224,3 +224,229 @@ three-packet, while reversing the golden orientation reverses that direction.
 No discovery-track entry was added: the exact `A_3` strengthening and all
 boundary corrections are direct closeout consequences of the requested
 companion.
+
+## Reopened mathematical supplement
+
+> **Post-supplement correction (two-round red team, 2026-08-21).**  The
+> chordal-factor comparison below is conditional until the actual transverse
+> term of the cubic pencil is restricted to the singular rational normal
+> curve and verified to cut a reduced degree-twelve divisor.  General chordal
+> degeneration theory identifies the branch divisor with that restriction;
+> uniqueness of an abstract twelve-point \(A_5\)-orbit does not replace the
+> family-specific transversality check.  The resolvent and smooth cubic-IJ
+> landing/escape arguments are unaffected.  The corrected theorem package,
+> bounded literature audit, and two rounds of red-team findings are recorded
+> in `2026-08-21-c936-resolvent-rigidity-package-memo.md`.
+
+The reopened pass checked literature before treating each question.  It
+settles two of the paper's mysteries, sharpens four others, and separates
+three genuine open gates from attractive but false extrapolations.
+
+### New theorem: the chordal value `h=5`
+
+The chordal value is not a numerical accident.  General chordal degeneration
+theory identifies the limit intermediate Jacobian with the Jacobian of the
+double cover of the singular rational normal curve branched over the twelve
+points selected by the deformation direction.  In the present pencil that
+divisor is `A_5`-invariant, hence is the unique icosahedral orbit of length
+twelve.  In a standard coordinate the limit curve is
+
+```text
+C_ico: w^2 = x(x^10 + 11x^5 - 1).
+```
+
+Paulhus's Theorem 2 gives
+
+```text
+J(C_ico) ~ E_ico^5,
+E_ico: y^2 = x(x^2 + 11x - 1).
+```
+
+For this elliptic curve, `c4=1984=2^6*31` and
+`Delta=2000=2^4*5^3`, so
+
+```text
+j(E_ico) = 2^14*31^3/5^3 = J(729/5).
+```
+
+Thus the smooth norm-axis period lands on exactly the elliptic isogeny factor
+of the hyperelliptic chordal limit.  This theorem and its proof are now in the
+paper.
+
+### New theorem: why two is exceptional
+
+For any prime `ell` and two-dimensional `F_ell`-space `V`, put
+`G=PGL(V)`.  Orbit-stabilizer gives
+
+```text
+P^1(F_{ell^2}) = G/B  disjoint union  G/C_ns,
+```
+
+where `B` is a Borel and `C_ns` a nonsplit Cartan.  Frobenius pairs the
+nonrational points, and the quotient by Frobenius is `G/N_ns`.  At
+`ell=2`, `N_ns=G` and `C_ns=A_3`; therefore the whole nonsplit orbit is
+the degree-two sign cover.  For `ell>2` its degree is `ell(ell-1)`, so no
+analogous discriminant pair exists.  This places the paper's `3+2` packet
+inside the standard Borel/nonsplit-Cartan geometry and is now stated in the
+paper.
+
+Choosing one exotic sheet is equivalently choosing one of the two
+`F_4`-eigenlines.  It equips `V` with an `F_4`-module structure and
+identifies the surviving monodromy
+
+```text
+A_3 = C_3 = F_4^times.
+```
+
+Golden reversal is Frobenius on `F_4`, hence inversion on this cyclic group.
+This explains the rational formula
+`-sigma(-v)=sigma^{-1}(v)` conceptually.
+
+### Status of the other questions
+
+1. **Picard--Lefschetz source of the three-cycle: partly settled.**  An
+   `A_2` singularity has a rank-two vanishing lattice and Coxeter monodromy
+   of order three.  At a five-`A_2` fibre the five local Coxeter blocks
+   commute, and the actual-axis comparison sends their product to the
+   nontrivial order-three element on the elliptic norm axis.  This explains
+   the modular three-cycle geometrically.  Still open is a cubic-only proof
+   that computes the norm-axis projection of the five local blocks without
+   passing through the elliptic comparison.
+
+2. **Meaning of `sigma`: settled at the correct level.**  The map
+   `sigma(v)=(v-3)/(v+1)` is the modular deck transformation cyclically
+   relabelling the three nonzero two-torsion points.  Through the principal
+   packet it cyclically relabels the three rational maximal isotropic kernels.
+   Their quotients are points of the Siegel `2`-Hecke correspondence.  This
+   does not produce a fibrewise automorphism of the cubic or prove that the
+   quotient ppav's are intermediate Jacobians of cubic threefolds.  The latter
+   is a genuine Schottky-type open question.
+
+3. **Preferred golden orientation: negative over the unmarked rational
+   base.**  The outer normalizer and golden Galois conjugation exchange the
+   two sheets.  Therefore no construction equivariant for that normalizer can
+   choose between `r=9t` and `r=-9t`.  A choice becomes canonical only
+   after adding an oriented icosahedral realization, equivalently a real
+   embedding of `Q(sqrt(5))).  The two-choice ambiguity is structural.
+
+4. **Boundary extension: general theory exists, but the pencilwise comparison
+   is incomplete.**  Toroidal Prym and intermediate-Jacobian extension
+   theorems cover the general framework.  In this pencil the two modular cusps
+   should carry toric degeneration; the five-`A_2` values have finite
+   order-three monodromy and potential good reduction; the chordal value has
+   the hyperelliptic abelian limit proved above.  Extending the actual
+   polarized Prym/norm-axis isomorphism, including its kernel and
+   polarization, through all four fibres remains open.
+
+5. **The full `S_3)-torsor: geometrically realized, with a boundary.**  The
+   ordered nonzero two-torsion torsor is already the common splitting cover.
+   Extension of structure group along the nontransitive embedding
+   `S_3 < A_5` recovers the five-set with orbit pattern `3+2`, but its
+   monodromy remains `S_3`.  Hence there is a canonical reducible quintic
+   etale algebra, not an irreducible `A_5)-quintic.  Klein's irreducible
+   icosahedral quintic resolvents require a genuine `A_5)-extension and do
+   not arise from this torsor alone.
+
+6. **Internal versus external cubic Kummer covers: no hidden equality.**  Over
+   a field containing `mu_3`, cyclic cubic covers are classes in
+   `K^times/K^{times 3}`.  The internal class
+   `(r-3a)/(r+3a)` has zero valuation in an independent external parameter,
+   while the class of `q` has valuation one.  They are therefore independent
+   and the extensions are linearly disjoint.  The common group `C_3` is
+   useful for normalization but does not identify the covers.
+
+7. **Direct Picard--Fuchs derivation: exact target, still open from the
+   six-variable cubic.**  With
+   `h=(eta(tau)/eta(3tau))^12`, the normalized level-three elliptic period
+   satisfies
+
+   ```text
+   [theta_h^2 + (h/27)(theta_h+1/3)^2] Pi = 0.
+   ```
+
+   Equivalently its singularities are the two cusps `h=0,infinity` and the
+   order-three point `h=-27`.  A Griffiths--Dwork calculation followed by
+   the `A_5` norm-axis projector should extract this rank-two factor directly
+   from the cubic Gauss--Manin system.  That calculation would make the cubic
+   base comparison independent of the Prym quotient.
+
+8. **The primes `2,3,5`: not yet one arithmetic theorem.**  Two controls the
+   gluing resolvent, three the modular level and Coxeter monodromy, and five
+   the icosahedral/golden symmetry.  Calling these the complete bad primes
+   would require an integral model and reduction analysis.  No such claim is
+   made.
+
+## Supplemental literature record
+
+This supplement names five new load-bearing sources; zero were read at full
+text.  Each was read at the indicated partial depth.  The searches below were
+discovery and attribution checks, not a priority audit, and no absence-of-prior-
+work claim rests on them.
+
+- Casalaina-Martin--Grushevsky--Hulek--Laza,
+  arXiv:1510.08891v2, **partial**: introduction, Sections 3 and 5, especially
+  the chordal hyperelliptic extension and the admissible-cover setup.  Cache
+  SHA-256
+  `d5b3c69094eee70d5486542952f394308e3aa4bdbc5762a85588ebae4b2d7753`.
+- Rebolledo--Wuthrich, arXiv:1402.3498v2, **partial**: introduction and
+  Section 2's nonsplit-Cartan/necklace moduli interpretation.  Cache SHA-256
+  `10cee9475c4fc778526ef1d0c11bb8e73647b2305eb7897d7613ee7ca545eaed`.
+- Sevilla--Shaska, arXiv:1209.1868v1, **partial**: Sections 2--3, including
+  the degree-twelve icosahedral orbit polynomial.  Cache SHA-256
+  `a7ce73ad611995ba7633cdccbaee714ee37b22fbc7956ae5e0dc3166f0dfbbe3`.
+- Maier, arXiv:math/0611041v4, **partial**: Theorem 5.4, Section 7, and
+  Table 15 for the `Gamma_0(3)` Picard--Fuchs equation.  Cache SHA-256
+  `ca51653bb995355b0191fb0acc04a72f742e08ca67873f7e84a036bacf81ead5`.
+- Paulhus, doi:10.2140/obs.2013.1.487, **partial**: Theorem 2 and its proof.
+  Cache SHA-256
+  `d45781c71c6f655acb795fbfb3d79402f39965ee75c2739aaff1432d549b0261`.
+  The author's errata was also checked at **partial** depth: it corrects
+  Theorem 1 and portions of the summary table, not Theorem 2.  The fetched
+  errata bytes had SHA-256
+  `278f15c4ab3ea4483f30af1942d39934bc5ea890cf0e2093b54779c6a48407ba`;
+  the host's TLS chain could not be verified, so this errata access is recorded
+  as a coverage caveat rather than cached evidence.
+
+The topic-by-topic web queries were:
+
+- Picard--Lefschetz: `cubic threefold five A2 singularities monodromy
+  Picard Lefschetz A5 pencil`; `A2 singularity Picard Lefschetz monodromy
+  order 3 vanishing cycles`; `icosahedral A5 cubic threefold pencil five A2
+  monodromy`.
+- deck action and orientation: `X(2) X0(3) deck transformation v ->
+  (v-3)/(v+1)`; `modular curve Gamma0(3) intersection Gamma(2)
+  Hauptmodul automorphism order 3`; `A5 outer automorphism golden ratio
+  conjugation icosahedron orientation`.
+- boundary and chordal limit: `degeneration Prym varieties admissible double
+  covers semiabelian compactification Beauville`; `cubic threefold
+  intermediate Jacobian degeneration A2 singularity semiabelian Prym`;
+  `chordal cubic threefold limit intermediate Jacobian hyperelliptic genus
+  5`; `Jacobian y^2=x(x^10+11x^5-1) decomposition elliptic curve`.
+- Hecke, Kummer, and quintic: `principally polarized abelian variety maximal
+  isotropic 2 torsion Hecke correspondence`; `Kummer extensions linear
+  disjoint valuations cyclic cubic criterion`; `S3 subgroup A5 orbit
+  decomposition 3 2 quintic resolvent`.
+- general prime and differential equation: `P1(F_p2) decomposition P1(F_p)
+  complement PGL2(F_p) action nonsplit Cartan`; `A5 cubic threefold pencil
+  Picard Fuchs equation`; `elliptic modular curve X0(3) Picard Fuchs
+  equation eta Hauptmodul`.
+
+## Refreshed mystery ledger
+
+- **Settled:** the chordal `h=5` value is the elliptic factor of the
+  icosahedral hyperelliptic limit.
+- **Settled:** the `A_3=F_4^times` coincidence is the nonsplit-Cartan
+  structure selected by a golden sheet.
+- **Settled negatively:** no unmarked rational construction can prefer one
+  golden orientation.
+- **Settled negatively:** the `S_3)-torsor does not by itself create an
+  irreducible `A_5)-quintic, and the internal and external Kummer cubics are
+  not the same cover.
+- **Open:** a direct cubic Picard--Lefschetz computation of the norm-axis
+  three-cycle.
+- **Open:** extension of the polarized actual-axis comparison through all
+  four boundary fibres.
+- **Open:** a direct Griffiths--Dwork derivation of the level-three
+  Picard--Fuchs factor from the cubic equation.
+- **Open:** whether any of the fivefold `2)-Hecke quotients are again
+  intermediate Jacobians of cubic threefolds.

@@ -4,8 +4,10 @@
 
 **Date:** 2026-08-21
 
-**Status:** complete; report
-`../2026-08-21-c936-modular-resolvent-companion.md`
+**Status:** reopened 2026-08-21 for the mathematical mystery pass; supplement
+complete; unified-package memo and two-round red team complete; report
+`../2026-08-21-c936-modular-resolvent-companion.md`; strategy memo
+`../2026-08-21-c936-resolvent-rigidity-package-memo.md`
 
 ## Goal
 
@@ -67,8 +69,21 @@ shadow-sister comparisons, motivic fifth-power decompositions, and explicit
 Mordell--Weil generators remain outside unless one short corollary materially
 clarifies the main theorem without adding a new proof dependency.
 
-All acceptance gates are discharged locally.  The warning-free eight-page
-paper, deterministic algebra certificate, independent subgroup enumeration,
-SHA-256 manifest, rendered-page inspection, hostile read, literature record,
-and EJ/TT mystery ledger are recorded in the report.  No mirror/export was
-performed.
+The warning-free nine-page paper, deterministic algebra certificate,
+independent subgroup enumeration, SHA-256 manifest, rendered-page inspection,
+hostile read, literature record, and EJ/TT mystery ledger are recorded in the
+report.  No mirror/export was performed.  The later unified-package red team
+reopened one mathematical gate: the chordal-factor proposition must verify
+that the actual transverse term cuts a reduced degree-twelve divisor on the
+singular rational normal curve.  Until that check is supplied, the chordal
+comparison is conditional and the paper is not submission-ready.
+
+The reopened mathematical pass proposes two theorem-level clarifications.  At
+the chordal value `h=5`, the expected icosahedral genus-five hyperelliptic
+limit has Jacobian isogenous to the fifth power of the same elliptic curve
+printed by the norm-axis modular coordinate; the missing transverse-divisor
+check is recorded above.  The finite `3+2` lemma is also placed in its
+general-prime context: the two orbits are the Borel and nonsplit-Cartan
+quotients, and only at two does the nonsplit orbit itself become a discriminant
+double cover.  The unresolved questions and their literature boundaries are in
+the report's reopened-supplement section.

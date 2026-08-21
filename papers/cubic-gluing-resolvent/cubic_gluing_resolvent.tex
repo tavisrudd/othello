@@ -59,7 +59,9 @@ boundary points where the cubic degenerates.  In particular the modular
 identification concerns the actual relative principal-kernel packet, not
 only an auxiliary elliptic curve with the same \(j\)-invariant.  Over the
 signed line, the resulting cyclic cubic cover is totally ramified exactly at
-the two fibres with five \(A_2\)-points.
+the two fibres with five \(A_2\)-points.  We also isolate the precise
+transverse-divisor check needed to compare the chordal hyperelliptic limit
+with the elliptic curve selected by the same norm-axis coordinate.
 \end{abstract}
 
 \noindent\textbf{Keywords.} cubic threefold; intermediate Jacobian;
@@ -179,6 +181,26 @@ This equality of torsor classes is canonical.  A sheetwise isomorphism of
 the two covers has two choices, interchanged by the deck involution.  This
 minor distinction is what makes the normalization \(r=9t\), rather than
 \(r=-9t\), a convention.
+
+There is a useful higher-prime form of this finite geometry.  If \(V\) has
+dimension two over \(\F_\ell\), then, as \(\operatorname{PGL}(V)\)-sets,
+\[
+ \PP^1(\F_{\ell^2})
+ =\PP^1(\F_\ell)\sqcup
+   \bigl(\PP^1(\F_{\ell^2})\setminus\PP^1(\F_\ell)\bigr)
+ \simeq \operatorname{PGL}(V)/B
+       \sqcup\operatorname{PGL}(V)/C_{\rm ns},
+\]
+where \(B\) is a Borel subgroup and \(C_{\rm ns}\) a nonsplit Cartan.
+Frobenius pairs the second orbit, and its quotient is
+\(\operatorname{PGL}(V)/N_{\rm ns}\), where \(N_{\rm ns}\) is the Cartan
+normalizer;
+compare the modular interpretation in
+\cite[Section~2]{RebolledoWuthrich}.  For
+\(\ell=2\), the normalizer is all of
+\(\operatorname{PGL}_2(\F_2)\), while
+\(C_{\rm ns}=A_3\).  Thus only at two does the entire nonsplit-Cartan orbit
+reduce to a double cover, namely the sign torsor above.
 
 Now let an elliptic curve be given locally, with \(2\) invertible, by
 \[
@@ -498,6 +520,48 @@ cubic value & \(T\)-value & degeneration \\
 \bottomrule
 \end{tabular}
 \end{center}
+
+\begin{proposition}[Conditional chordal elliptic factor]\label{prop:chordal-factor}
+Assume that, at \(T=729/5\), the actual transverse term of the pencil cuts a
+reduced degree-twelve divisor on the singular rational normal curve of the
+chordal cubic.  Then the limit intermediate Jacobian is the Jacobian of the
+icosahedral hyperelliptic curve
+\[
+ C_{\rm ico}:\quad w^2=x(x^{10}+11x^5-1).
+\]
+Moreover
+\[
+ J(C_{\rm ico})\sim E_{\rm ico}^{\,5},
+ \qquad
+ E_{\rm ico}:\quad y^2=x(x^2+11x-1),
+\]
+and the elliptic factor has
+\[
+ j(E_{\rm ico})=\frac{2^{14}31^3}{5^3}
+ =J\left(\frac{729}{5}\right).
+\]
+Consequently the modular value \(h=5\) records the elliptic isogeny factor
+of the hyperelliptic chordal limit.
+\end{proposition}
+
+\begin{proof}
+For a transverse degeneration to the chordal cubic, the limiting
+intermediate Jacobian is the Jacobian of the double cover of its singular
+rational normal curve branched over the twelve points cut out by the
+deformation direction \cite[Section~5]{CMGHL}.  In the present pencil this
+divisor is \(A_5\)-invariant, and the hypothesis makes it reduced of degree
+twelve.  The icosahedral action on the rational normal
+curve has a unique orbit of length twelve; in a standard coordinate it is
+the zero divisor of \(x(x^{10}+11x^5-1)\), including the point at infinity.
+This gives \(C_{\rm ico}\).
+
+Paulhus proves the displayed isogeny decomposition and elliptic factor
+\cite[Theorem~2]{Paulhus}.  For the printed Weierstrass equation,
+\(c_4=1984=2^6\cdot31\) and \(\Delta=2000=2^4\cdot5^3\), hence
+\(j(E_{\rm ico})=2^{14}31^3/5^3\).  Direct substitution in
+\(J(T)=(T+27)(T+3)^3/T\) gives the same value at \(T=729/5\).
+\end{proof}
+
 Only \(T=0\) and \(T=\infty\) are cusps of \(X_0(3)\).  The marked smooth
 cubic base is therefore
 \[
@@ -532,9 +596,12 @@ form of this global resolvent theorem.
 The modular identification here is deliberately limited.  It neither turns
 the five principal kernels into ordinary elliptic isogenies nor promotes the
 whole compactified cubic pencil to a modular stack.  The additional cubic
-boundary points at \(T=-27\) and \(729/5\) are precisely where that stronger
-claim would fail.  Related level-three period maps occur for the Winger
-pencil \cite[Theorem 1.1 and Theorem 5.2]{LZ}; that is a distinct family and
+boundary points at \(T=-27\) and \(729/5\) are not modular cusps.  At the
+second point Proposition~\ref{prop:chordal-factor} identifies the
+hyperelliptic limit and its elliptic factor conditional on the stated
+transverse-divisor check.  Related level-three period
+maps occur for the Winger
+pencil \cite[Theorem 1.1 and Proposition 5.1]{LZ}; that is a distinct family and
 is not used to identify the cubic base.  The contribution here is the
 combination of the explicit cubic period coordinate, the polarized
 actual-axis comparison, and the principal-kernel local system into one
@@ -550,6 +617,18 @@ the source, builds the PDF, and rejects TeX warnings.
 
 \footnotesize
 \begin{thebibliography}{99}
+
+\bibitem{RebolledoWuthrich}
+M.~Rebolledo and C.~Wuthrich,
+\emph{A moduli interpretation for the non-split Cartan modular curve},
+Glasg. Math. J. 60 (2018), no.~2, 411--434;
+arXiv:1402.3498v2.
+
+\bibitem{CMGHL}
+S.~Casalaina-Martin, S.~Grushevsky, K.~Hulek, and R.~Laza,
+\emph{Complete moduli of cubic threefolds and their intermediate Jacobians},
+Proc. Lond. Math. Soc. 122 (2021), 259--316;
+arXiv:1510.08891v2.
 
 \bibitem{Hartlieb}
 M.~Hartlieb,
@@ -568,6 +647,13 @@ X.~Roulleau,
 \emph{The Fano surface of the Klein cubic threefold},
 J. Math. Kyoto Univ. 49 (2009), no.~1, 113--129;
 arXiv:1002.4467v1.
+
+\bibitem{Paulhus}
+J.~Paulhus,
+\emph{Elliptic factors in Jacobians of hyperelliptic curves with certain
+automorphism groups},
+Open Book Ser. 1 (2013), 487--505;
+doi:10.2140/obs.2013.1.487.
 
 \bibitem{RuddEpilogue}
 T.~Rudd,
