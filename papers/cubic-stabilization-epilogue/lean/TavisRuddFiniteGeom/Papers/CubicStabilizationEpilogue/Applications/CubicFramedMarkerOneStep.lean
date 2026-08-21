@@ -33,8 +33,22 @@ structure CubicFramedMarkerOneStepInput
   projectiveFourSpaceSmooth : context.data.smoothProjective projectiveFourSpace
   projectiveFourSpaceDimension : context.data.dimension projectiveFourSpace = 4
   projectiveFourSpaceMarker : context.marker projectiveFourSpace = 0
-  rationalComparison : Rational (productWithProjectiveLine cubic) →
-    context.birational.r (productWithProjectiveLine cubic) projectiveFourSpace
+  rationalComparison : ∀ {variety}, context.data.smoothProjective variety →
+    context.data.dimension variety = 4 → Rational variety →
+      context.birational.r variety projectiveFourSpace
+
+/-- The three clauses of the manuscript's conditional framed theorem. -/
+structure CubicFramedMarkerOneStepConclusion
+    {Variety : Type u} {Center : Type v} {Occurrence : Type w}
+    (context : Quantum.FramedSixthMarkerContext 4 Variety Center Occurrence)
+    (productWithProjectiveLine : Variety → Variety)
+    (Rational : Variety → Prop) (cubic : Variety) : Prop where
+  stabilizedMarker : context.marker (productWithProjectiveLine cubic) = 4
+  rationalFourfoldMarkerZero : ∀ variety,
+    context.data.smoothProjective variety →
+      context.data.dimension variety = 4 → Rational variety →
+        context.marker variety = 0
+  stabilizationIrrational : ¬ Rational (productWithProjectiveLine cubic)
 
 /-- Birationality after one projective-line stabilization forces equality of
 the framed primitive-sixth markers of two smooth projective threefolds. -/
@@ -91,7 +105,8 @@ theorem cubicThreefold_oneProjectiveLine_not_rational_of_framedMarker
   have markerEquality := context.marker_eq_of_birational
     input.projectiveLineFormula.totalSmooth input.projectiveFourSpaceSmooth
     stabilizedDimension input.projectiveFourSpaceDimension
-    (input.rationalComparison rational)
+    (input.rationalComparison input.projectiveLineFormula.totalSmooth
+      stabilizedDimension rational)
   have stabilizedNonzero : context.marker (productWithProjectiveLine cubic) ≠ 0 := by
     have cubicMarker := input.cubicMarker
     change context.data.varietyMarker context.presentation.fold cubic = 2 at cubicMarker
@@ -101,6 +116,38 @@ theorem cubicThreefold_oneProjectiveLine_not_rational_of_framedMarker
     norm_num
   apply stabilizedNonzero
   exact markerEquality.trans input.projectiveFourSpaceMarker
+
+/-- Exact three-clause conditional framed conclusion.  In particular, the
+marker-four calculation and the vanishing on every rational smooth projective
+fourfold are public conclusions rather than unrecorded intermediate steps. -/
+theorem cubicThreefold_oneProjectiveLine_conclusion_of_framedMarker
+    {Variety : Type u} {Center : Type v} {Occurrence : Type w}
+    (context : Quantum.FramedSixthMarkerContext 4 Variety Center Occurrence)
+    (productWithProjectiveLine : Variety → Variety)
+    (projectiveFourSpace : Variety) (Rational : Variety → Prop)
+    (cubic : Variety)
+    (input : CubicFramedMarkerOneStepInput context productWithProjectiveLine
+      projectiveFourSpace Rational cubic) :
+    CubicFramedMarkerOneStepConclusion context productWithProjectiveLine
+      Rational cubic := by
+  refine
+    { stabilizedMarker := ?_
+      rationalFourfoldMarkerZero := ?_
+      stabilizationIrrational :=
+        cubicThreefold_oneProjectiveLine_not_rational_of_framedMarker context
+          productWithProjectiveLine projectiveFourSpace Rational cubic input }
+  · change context.data.varietyMarker context.presentation.fold
+      (productWithProjectiveLine cubic) = 4
+    rw [input.projectiveLineFormula.markerFormula]
+    have cubicMarker := input.cubicMarker
+    change context.data.varietyMarker context.presentation.fold cubic = 2 at cubicMarker
+    rw [cubicMarker]
+    norm_num
+  · intro variety smooth dimension rational
+    exact (context.marker_eq_of_birational smooth input.projectiveFourSpaceSmooth
+      dimension input.projectiveFourSpaceDimension
+      (input.rationalComparison smooth dimension rational)).trans
+        input.projectiveFourSpaceMarker
 
 end Applications
 

@@ -14,7 +14,7 @@ stabilization it does not predict rationality for smooth cubic threefolds.
 \label{thm:every-cubic}
 \coverage{conditional_deduction}%
 \lean{rankTwoResidueMarker_eq_of_birational,%
-  cubicThreefold_oneProjectiveLine_not_rational_of_residueMarker}%
+  cubicThreefold_oneProjectiveLine_conclusion_of_residueMarker}%
 For every smooth complex cubic threefold \(X\), the fourfold
 \(X\times\PP^1\) is irrational.
 \end{theorem}
@@ -73,7 +73,7 @@ codimension at most three parametrizing threefolds with universally trivial
 
 \begin{corollary}[Separation in codimension three]
 \label{cor:voisin-separation}
-\coverage{conditional_deduction}%
+\coverage{fragment}%
 \lean{primitiveMinimalClassFamily_universalCH0_and_irrational_stabilization,%
  exists_universalCH0_cubic_with_irrational_stabilization}%
 \uses{thm:every-cubic}%
@@ -139,7 +139,7 @@ equivalent to a cubic of separated-variable type.
 \begin{theorem}[Separation on the \(A_5\)-pencil]
 \label{thm:separation-family}
 \coverage{conditional_deduction}%
-\lean{separationFamily_of_sixAxis_packet_and_period_inputs}%
+\lean{separationFamily_of_sixAxis_residue_and_period_inputs}%
 Let \(W_5\) be the five-dimensional irreducible \(A_5\)-module, and let
 \(B^\circ\) be the smooth locus inside
 \[
@@ -234,7 +234,7 @@ the finer invariant.
 \begin{theorem}[One-step irrationality from the framed invariant]
 \label{thm:every-cubic-conditional}
 \coverage{conditional_deduction}%
-\lean{cubicThreefold_oneProjectiveLine_not_rational_of_framedMarker}%
+\lean{cubicThreefold_oneProjectiveLine_conclusion_of_framedMarker}%
 Assume Hypothesis~5.7R of Section~\ref{sec:framed-monodromy}, and
 Hypothesis~5.7T there only for surface centers that are neither minimal nor
 geometrically ruled.  Let

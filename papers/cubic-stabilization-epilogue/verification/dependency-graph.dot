@@ -9,7 +9,7 @@ digraph manuscript {
   "cor:p3-nu6" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
   "cor:universal-ch0" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
   "cor:v14-one-step" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
-  "cor:voisin-separation" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
+  "cor:voisin-separation" [fillcolor="#fde8c8", tooltip="fragment"];
   "def:framed-sixth-multiplicity" [fillcolor="#fde8c8", tooltip="fragment"];
   "def:monomial-specialization" [fillcolor="#fde8c8", tooltip="fragment"];
   "def:strict-novikov-admissible" [fillcolor="#fde8c8", tooltip="fragment"];

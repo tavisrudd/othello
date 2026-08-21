@@ -103,20 +103,28 @@ The package has a pinned standalone Nix and Mathlib environment.  Its Lean
 sources build through the guarded queue, and `make check` is green over the
 reviewer interface's audited terminals.
 
-**Categorical proof-spine checkpoint, 2026-08-20.** The reviewer-facing
+**Categorical proof-spine and full-claim audit checkpoint, 2026-08-20.** The reviewer-facing
 headline now runs through `EffectiveBlockLedger` and
 `OccurrenceIndexedMarker`: one free effective ledger, one arbitrary-monoid
 fold, and one dimension-parameterized weak-factorization descent theorem. The
 rank-two residue marker and the finer primitive-sixth framed marker are
 distinct presentations that invoke that same theorem, with strict `m = 1`
-cubic applications. The old ordinary Hodge-atom and framed-packet headline
-wrappers have been removed from `PaperInterface`; they remain only as
-non-headline supporting material where still used. QDM block construction,
+cubic applications. The separation corollaries and unconditional genus-eight
+transport now also use the direct residue context; the conditional genus-eight
+value uses the framed context. The old ordinary Hodge-atom and framed-packet
+wrappers have been removed from `PaperInterface`. QDM block construction,
 comparison theorems, factorization, and geometric center nullity are explicit
-premises. Gamma-row and all-`m` work are out of scope and unchanged. Current
-audit: 53 manuscript claims, 6 absent, 20 fragmentary, 26 conditional, 1
-complete; 308 reviewer terminals, of which 83 are machinery. The aggregate
-Lean gate, source audit, axiom-log audit, and 50-page manuscript gate are green.
+premises. Gamma-row and all-`m` work are out of scope and unchanged.
+
+The full 53-row anti-smuggling audit is
+[`../2026-08-20-c910-full-claim-smuggling-audit.md`](../2026-08-20-c910-full-claim-smuggling-audit.md).
+It repaired two omitted manuscript clauses, replaced a conclusion-as-premise
+non-isotriviality field by typed period-map nonconstancy, removed the remaining
+stale application routes, and downgraded the Voisin codimension-three row to a
+fragment because codimension is not represented. Current audit: 53 manuscript
+claims, 6 absent, 21 fragmentary, 25 conditional, 1 complete; 306 reviewer
+terminals, of which 83 are machinery. The aggregate Lean gate, source audit,
+axiom-log audit, and warning-free 50-page manuscript gate are green.
 Governing plan:
 [`../2026-08-20-c910-categorical-proof-spine-plan.md`](../2026-08-20-c910-categorical-proof-spine-plan.md).
 

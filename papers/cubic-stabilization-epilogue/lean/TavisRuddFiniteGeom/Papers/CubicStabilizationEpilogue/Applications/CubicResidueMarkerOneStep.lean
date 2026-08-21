@@ -37,6 +37,17 @@ structure CubicResidueMarkerOneStepInput
   rationalComparison : Rational (productWithProjectiveLine cubic) →
     context.birational.r (productWithProjectiveLine cubic) projectiveFourSpace
 
+/-- Both conclusions used in the direct one-step proof: the stabilized marker
+is exactly two, and the stabilization is irrational. -/
+structure CubicResidueMarkerOneStepConclusion
+    {K : Type x} [CommRing K]
+    {Variety : Type u} {Center : Type v} {Occurrence : Type w}
+    (context : Quantum.RankTwoResidueMarkerContext K Variety Center Occurrence)
+    (productWithProjectiveLine : Variety → Variety)
+    (Rational : Variety → Prop) (cubic : Variety) : Prop where
+  stabilizedMarker : context.marker (productWithProjectiveLine cubic) = 2
+  stabilizationIrrational : ¬ Rational (productWithProjectiveLine cubic)
+
 /-- A smooth cubic threefold remains irrational after multiplication by one
 projective line under the stated direct-QDM residue-marker inputs. -/
 theorem cubicThreefold_oneProjectiveLine_not_rational_of_residueMarker
@@ -66,6 +77,32 @@ theorem cubicThreefold_oneProjectiveLine_not_rational_of_residueMarker
     norm_num
   apply stabilizedNonzero
   exact markerEquality.trans input.projectiveFourSpaceMarker
+
+/-- Exact direct-QDM one-step conclusion, with the nonzero marker value exposed
+rather than left only as an intermediate fact in the irrationality proof. -/
+theorem cubicThreefold_oneProjectiveLine_conclusion_of_residueMarker
+    {K : Type x} [CommRing K]
+    {Variety : Type u} {Center : Type v} {Occurrence : Type w}
+    (context : Quantum.RankTwoResidueMarkerContext K Variety Center Occurrence)
+    (productWithProjectiveLine : Variety → Variety)
+    (projectiveFourSpace : Variety) (Rational : Variety → Prop)
+    (cubic : Variety)
+    (input : CubicResidueMarkerOneStepInput context productWithProjectiveLine
+      projectiveFourSpace Rational cubic) :
+    CubicResidueMarkerOneStepConclusion context productWithProjectiveLine
+      Rational cubic := by
+  refine
+    { stabilizedMarker := ?_
+      stabilizationIrrational :=
+        cubicThreefold_oneProjectiveLine_not_rational_of_residueMarker context
+          productWithProjectiveLine projectiveFourSpace Rational cubic input }
+  change context.data.varietyMarker context.presentation.fold
+    (productWithProjectiveLine cubic) = 2
+  rw [input.projectiveLineFormula.markerFormula]
+  have cubicMarker := input.cubicMarker
+  change context.data.varietyMarker context.presentation.fold cubic = 1 at cubicMarker
+  rw [cubicMarker]
+  norm_num
 
 end Applications
 

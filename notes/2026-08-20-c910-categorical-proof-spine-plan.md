@@ -61,19 +61,39 @@ are now present and wired into the reviewer interface.
   dimension-`d` marker theorem.
 - `Quantum/RankTwoResidueMarker.lean` and
   `Applications/CubicResidueMarkerOneStep.lean` specialize that theorem to the
-  direct rank-two residue fold and its cubic one-step contradiction.
+  direct rank-two residue fold and expose both the exact stabilized value and
+  the cubic one-step contradiction.
 - `Quantum/FramedSixthMarker.lean` and
   `Applications/CubicFramedMarkerOneStep.lean` specialize the same theorem to
-  the finer primitive-sixth framed fold and its conditional cubic one-step
-  contradiction.
+  the finer primitive-sixth framed fold and expose all three clauses of the
+  conditional theorem.
+- `Applications/RankTwoResidueLowDimensionalNullity.lean` and
+  `Applications/FramedSixthLowDimensionalNullity.lean` connect the classified
+  intrinsic center calculations to literal occurrence-indexed nullity.
+- `Applications/UniversalCH0Separation.lean`, `Applications/SeparationFamily.lean`,
+  and `Applications/GenusEightCategorical.lean` route the paper's separation
+  and genus-eight applications through the same direct/framed contexts.
 
-`PaperInterface`, the three affected manuscript claims, the TeX provenance
+`PaperInterface`, the affected manuscript claims, the TeX provenance
 annotations, axiom audit, claim map, dependency graph, and coverage snapshot
 now use this route.  The old ordinary Hodge-atom and framed-packet headline
 wrappers are no longer reviewer terminals.  QDM block construction, comparison
 theorems, weak factorization, and low-dimensional geometric nullity remain
 explicit premises at the intended trust boundary.  This checkpoint contains
 no Gamma-row, `m = 2`, or all-`m` work.
+
+The subsequent full-claim audit is recorded in
+[`2026-08-20-c910-full-claim-smuggling-audit.md`](2026-08-20-c910-full-claim-smuggling-audit.md).
+It covers all 53 rows, not only the categorical cluster. The resulting checked
+partition is 6 absent, 21 fragmentary, 25 conditional deductions, and 1
+complete claim over 306 reviewer terminals, 83 of them machinery. The source,
+axiom-log, and 50-page manuscript gates pass.
+
+### Execution status
+
+Work-order items 1--7 below are complete for the stable categorical checkpoint.
+Further C910 work concerns honest closure of the remaining fragmentary and
+absent rows, not redesign of the main proof spine.
 
 ## Target formal architecture
 

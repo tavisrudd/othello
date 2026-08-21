@@ -103,6 +103,60 @@ theorem not_representedBySeparatedVariable_of_ne_distinguishedPoint
     hasEckardtPoint separatedVariableType projectivelyEquivalent
     distinguishedPoint input).1 parameter represented)
 
+/-- The full conclusion of the manuscript proposition: the separated-variable
+locus is the distinguished point, and every other family member is both
+universally `CH₀`-trivial and outside that locus. -/
+structure SeparatedVariableUniversalCH0Conclusion
+    {Base Variety Moduli : Type*}
+    (fibre : Base → Variety) (moduliPoint : Base → Moduli)
+    (universallyCH0Trivial separatedVariableType : Variety → Prop)
+    (projectivelyEquivalent : Variety → Variety → Prop)
+    (distinguishedPoint : Moduli) : Prop where
+  representedOnlyAtDistinguishedPoint : ∀ parameter,
+    RepresentedBySeparatedVariable separatedVariableType projectivelyEquivalent
+        (fibre parameter) →
+      moduliPoint parameter = distinguishedPoint
+  distinguishedPointRepresented : ∃ parameter,
+    moduliPoint parameter = distinguishedPoint ∧
+      RepresentedBySeparatedVariable separatedVariableType projectivelyEquivalent
+        (fibre parameter)
+  otherPointsUniversallyCH0Trivial : ∀ parameter,
+    moduliPoint parameter ≠ distinguishedPoint →
+      universallyCH0Trivial (fibre parameter)
+  otherPointsNotRepresentedBySeparatedVariable : ∀ parameter,
+    moduliPoint parameter ≠ distinguishedPoint →
+      ¬ RepresentedBySeparatedVariable separatedVariableType projectivelyEquivalent
+        (fibre parameter)
+
+/-- Assemble both sentences of the separated-variable proposition from the
+Eckardt-locus inputs and the independently proved fibrewise universal
+`CH₀`-triviality theorem. -/
+theorem separatedVariableLocus_and_universalCH0_outside
+    {Base Variety Moduli : Type*}
+    (fibre : Base → Variety) (moduliPoint : Base → Moduli)
+    (hasEckardtPoint universallyCH0Trivial separatedVariableType : Variety → Prop)
+    (projectivelyEquivalent : Variety → Variety → Prop)
+    (distinguishedPoint : Moduli)
+    (input : SeparatedVariableModuliInput fibre moduliPoint hasEckardtPoint
+      separatedVariableType projectivelyEquivalent distinguishedPoint)
+    (allFibresUniversallyCH0Trivial : ∀ parameter,
+      universallyCH0Trivial (fibre parameter)) :
+    SeparatedVariableUniversalCH0Conclusion fibre moduliPoint
+      universallyCH0Trivial separatedVariableType projectivelyEquivalent
+      distinguishedPoint := by
+  have locus := separatedVariableModuli_eq_distinguishedPoint fibre moduliPoint
+    hasEckardtPoint separatedVariableType projectivelyEquivalent
+    distinguishedPoint input
+  exact
+    { representedOnlyAtDistinguishedPoint := locus.1
+      distinguishedPointRepresented := locus.2
+      otherPointsUniversallyCH0Trivial := fun parameter _ ↦
+        allFibresUniversallyCH0Trivial parameter
+      otherPointsNotRepresentedBySeparatedVariable := fun parameter distinct ↦
+        not_representedBySeparatedVariable_of_ne_distinguishedPoint fibre moduliPoint
+          hasEckardtPoint separatedVariableType projectivelyEquivalent
+          distinguishedPoint input parameter distinct }
+
 end Applications
 
 end TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue

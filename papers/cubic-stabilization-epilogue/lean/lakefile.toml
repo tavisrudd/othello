@@ -140,6 +140,7 @@ roots = [
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.CubicPacketFormula",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.DivisorTaggingVanishing",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.GenusEightThreefold",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.GenusEightCategorical",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.CubicAtomOneStep",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.CubicPacketFromBlockReduction",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.ProjectiveProductMultiplicity",

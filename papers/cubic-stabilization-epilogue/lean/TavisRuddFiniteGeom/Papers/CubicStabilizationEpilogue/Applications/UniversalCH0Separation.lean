@@ -1,4 +1,4 @@
-import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.CubicAtomOneStep
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.CubicResidueMarkerOneStep
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.UniversalCH0
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.SeparatedVariableCubicForms
 
@@ -8,8 +8,8 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Applications.Separa
 The manuscript's separation statements all have the same shape.  For a smooth
 cubic threefold `X` two independent facts are combined: `X` is universally
 `CH₀`-trivial for a reason coming from cycle theory, and `X × ℙ¹` is irrational
-because the cubic zero-packet Hodge atom occurs on it and on no smooth
-projective variety of dimension at most two.  Universal `CH₀`-triviality passes
+because its direct-QDM rank-two residue marker is nonzero while the marker
+vanishes on projective four-space.  Universal `CH₀`-triviality passes
 from `X` to `X × ℙ¹` by the projective-bundle formula for Chow groups, so the
 fourfold `X × ℙ¹` carries a trivial universal `CH₀` group and is nonetheless
 irrational: the decomposition-of-the-diagonal obstruction and the atom
@@ -53,39 +53,46 @@ namespace TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue
 
 namespace Applications
 
-variable {Variety Atom : Type*}
+universe u v w x
+
+variable {K : Type x} [CommRing K]
+variable {Variety : Type u} {Center : Type v} {Occurrence : Type w}
 
 /-- The two assertions a separation statement makes about the product of a
 cubic threefold with a projective line: universal `CH₀`-triviality and
 irrationality. -/
-structure StabilizationSeparation (ledger : Quantum.OrdinaryAtomLedger Variety Atom)
-    (universallyCH0Trivial : Variety → Prop) (cubic : Variety) : Prop where
+structure StabilizationSeparation
+    (productWithProjectiveLine : Variety → Variety)
+    (Rational universallyCH0Trivial : Variety → Prop) (cubic : Variety) : Prop where
   /-- The product is universally `CH₀`-trivial. -/
   stabilizationUniversallyCH0Trivial :
-    universallyCH0Trivial (ledger.productWithProjectiveLine cubic)
+    universallyCH0Trivial (productWithProjectiveLine cubic)
   /-- The product is not rational. -/
   stabilizationNotRational :
-    ¬ ledger.Rational (ledger.productWithProjectiveLine cubic)
+    ¬ Rational (productWithProjectiveLine cubic)
 
 /-- The separation composition.  Universal `CH₀`-triviality of the cubic
 threefold passes to its projective-line stabilization by the supplied
 projective-bundle premise, while the cubic zero-packet atom makes that
 stabilization irrational. -/
-theorem stabilizationSeparation_of_universalCH0_and_atom
-    {ledger : Quantum.OrdinaryAtomLedger Variety Atom}
-    (stabilization : Quantum.ProjectiveLineStabilizationInput ledger)
-    {exclusion : Quantum.LowDimensionalExclusionInput ledger}
-    {cubic : Variety} {atom : Atom}
+theorem stabilizationSeparation_of_universalCH0_and_residueMarker
+    (context : Quantum.RankTwoResidueMarkerContext K Variety Center Occurrence)
+    (productWithProjectiveLine : Variety → Variety)
+    (projectiveFourSpace : Variety) (Rational : Variety → Prop)
+    {cubic : Variety}
     (universallyCH0Trivial : Variety → Prop)
     (projectiveBundleCH0 : ∀ variety, universallyCH0Trivial variety →
-      universallyCH0Trivial (ledger.productWithProjectiveLine variety))
+      universallyCH0Trivial (productWithProjectiveLine variety))
     (cubicUniversallyCH0Trivial : universallyCH0Trivial cubic)
-    (input : CubicAtomOneStepInput ledger stabilization exclusion cubic atom) :
-    StabilizationSeparation ledger universallyCH0Trivial cubic where
+    (input : CubicResidueMarkerOneStepInput context productWithProjectiveLine
+      projectiveFourSpace Rational cubic) :
+    StabilizationSeparation productWithProjectiveLine Rational
+      universallyCH0Trivial cubic where
   stabilizationUniversallyCH0Trivial :=
     projectiveBundleCH0 cubic cubicUniversallyCH0Trivial
   stabilizationNotRational :=
-    cubicAtom_oneStepStabilization_not_rational stabilization input
+    cubicThreefold_oneProjectiveLine_not_rational_of_residueMarker context
+      productWithProjectiveLine projectiveFourSpace Rational cubic input
 
 /-- Separation along a family whose members have algebraic primitive minimal
 class.  Every member is universally `CH₀`-trivial by Voisin's criterion, and
@@ -93,26 +100,30 @@ its projective-line stabilization is universally `CH₀`-trivial and
 irrational. -/
 theorem primitiveMinimalClassFamily_separation
     {Base Jacobian : Type*}
-    {ledger : Quantum.OrdinaryAtomLedger Variety Atom}
-    (stabilization : Quantum.ProjectiveLineStabilizationInput ledger)
-    {exclusion : Quantum.LowDimensionalExclusionInput ledger}
+    (context : Quantum.RankTwoResidueMarkerContext K Variety Center Occurrence)
+    (productWithProjectiveLine : Variety → Variety)
+    (projectiveFourSpace : Variety) (Rational : Variety → Prop)
     (geometry : CubicCycleTrivialityGeometry Variety Jacobian)
     (voisinCriterion : VoisinPrimitiveMinimalClassCriterion geometry)
     (projectiveBundleCH0 : ∀ variety, geometry.universallyCH0Trivial variety →
-      geometry.universallyCH0Trivial (ledger.productWithProjectiveLine variety))
+      geometry.universallyCH0Trivial (productWithProjectiveLine variety))
     (fibre : Base → Variety)
     (familyInput : SixAxisMinimalClassFamilyInput geometry fibre)
-    {atom : Atom}
     (atomInput : ∀ parameter,
-      CubicAtomOneStepInput ledger stabilization exclusion (fibre parameter) atom) :
+      CubicResidueMarkerOneStepInput context productWithProjectiveLine
+        projectiveFourSpace Rational (fibre parameter)) :
     ∀ parameter, geometry.universallyCH0Trivial (fibre parameter) ∧
-      StabilizationSeparation ledger geometry.universallyCH0Trivial (fibre parameter) := by
+      StabilizationSeparation productWithProjectiveLine Rational
+        geometry.universallyCH0Trivial (fibre parameter) := by
   intro parameter
   have fibreCH0 : geometry.universallyCH0Trivial (fibre parameter) :=
     universalCH0Triviality_of_primitiveMinimalClassFamily geometry fibre familyInput
       voisinCriterion parameter
-  exact ⟨fibreCH0, stabilizationSeparation_of_universalCH0_and_atom stabilization
-    geometry.universallyCH0Trivial projectiveBundleCH0 fibreCH0 (atomInput parameter)⟩
+  exact ⟨fibreCH0,
+    stabilizationSeparation_of_universalCH0_and_residueMarker context
+      productWithProjectiveLine projectiveFourSpace Rational
+      geometry.universallyCH0Trivial projectiveBundleCH0 fibreCH0
+      (atomInput parameter)⟩
 
 /-- The existential form of the previous statement.  When the parameter space of
 the family is nonempty there is a cubic threefold that is universally
@@ -121,23 +132,25 @@ the family is nonempty there is a cubic threefold that is universally
 parameter space, are the imported inputs; they are not derived here. -/
 theorem exists_universalCH0_with_irrational_stabilization
     {Base Jacobian : Type*} [Nonempty Base]
-    {ledger : Quantum.OrdinaryAtomLedger Variety Atom}
-    (stabilization : Quantum.ProjectiveLineStabilizationInput ledger)
-    {exclusion : Quantum.LowDimensionalExclusionInput ledger}
+    (context : Quantum.RankTwoResidueMarkerContext K Variety Center Occurrence)
+    (productWithProjectiveLine : Variety → Variety)
+    (projectiveFourSpace : Variety) (Rational : Variety → Prop)
     (geometry : CubicCycleTrivialityGeometry Variety Jacobian)
     (voisinCriterion : VoisinPrimitiveMinimalClassCriterion geometry)
     (projectiveBundleCH0 : ∀ variety, geometry.universallyCH0Trivial variety →
-      geometry.universallyCH0Trivial (ledger.productWithProjectiveLine variety))
+      geometry.universallyCH0Trivial (productWithProjectiveLine variety))
     (fibre : Base → Variety)
     (familyInput : SixAxisMinimalClassFamilyInput geometry fibre)
-    {atom : Atom}
     (atomInput : ∀ parameter,
-      CubicAtomOneStepInput ledger stabilization exclusion (fibre parameter) atom) :
+      CubicResidueMarkerOneStepInput context productWithProjectiveLine
+        projectiveFourSpace Rational (fibre parameter)) :
     ∃ cubic, geometry.universallyCH0Trivial cubic ∧
-      StabilizationSeparation ledger geometry.universallyCH0Trivial cubic :=
+      StabilizationSeparation productWithProjectiveLine Rational
+        geometry.universallyCH0Trivial cubic :=
   ⟨fibre (Classical.arbitrary Base),
-    primitiveMinimalClassFamily_separation stabilization geometry voisinCriterion
-      projectiveBundleCH0 fibre familyInput atomInput (Classical.arbitrary Base)⟩
+    primitiveMinimalClassFamily_separation context productWithProjectiveLine
+      projectiveFourSpace Rational geometry voisinCriterion projectiveBundleCH0
+      fibre familyInput atomInput (Classical.arbitrary Base)⟩
 
 /-- Separation for a cubic threefold whose equation is the Fermat form in five
 variables.  The hypothesis of the almost-diagonal criterion is discharged by
@@ -145,21 +158,24 @@ Lean: the Fermat form is the sum of the cubes of the five variables, hence a
 sum of forms in pairwise disjoint groups of at most three variables. -/
 theorem fermatCubic_separation
     {Coefficient : Type*} [CommRing Coefficient] [Nontrivial Coefficient]
-    {ledger : Quantum.OrdinaryAtomLedger Variety Atom}
-    (stabilization : Quantum.ProjectiveLineStabilizationInput ledger)
-    {exclusion : Quantum.LowDimensionalExclusionInput ledger}
-    {fermat : Variety} {atom : Atom}
+    (context : Quantum.RankTwoResidueMarkerContext K Variety Center Occurrence)
+    (productWithProjectiveLine : Variety → Variety)
+    (projectiveFourSpace : Variety) (Rational : Variety → Prop)
+    {fermat : Variety}
     (universallyCH0Trivial : Variety → Prop)
     (definingForm : Variety → MvPolynomial (Fin 5) Coefficient)
     (separatedVariableCriterion : ∀ variety,
       HasSeparatedVariableDecomposition 3 (definingForm variety) →
         universallyCH0Trivial variety)
     (projectiveBundleCH0 : ∀ variety, universallyCH0Trivial variety →
-      universallyCH0Trivial (ledger.productWithProjectiveLine variety))
+      universallyCH0Trivial (productWithProjectiveLine variety))
     (fermatEquation : definingForm fermat = fermatCubicForm Coefficient 5)
-    (input : CubicAtomOneStepInput ledger stabilization exclusion fermat atom) :
-    StabilizationSeparation ledger universallyCH0Trivial fermat := by
-  refine stabilizationSeparation_of_universalCH0_and_atom stabilization universallyCH0Trivial
+    (input : CubicResidueMarkerOneStepInput context productWithProjectiveLine
+      projectiveFourSpace Rational fermat) :
+    StabilizationSeparation productWithProjectiveLine Rational
+      universallyCH0Trivial fermat := by
+  refine stabilizationSeparation_of_universalCH0_and_residueMarker context
+    productWithProjectiveLine projectiveFourSpace Rational universallyCH0Trivial
     projectiveBundleCH0 (separatedVariableCriterion fermat ?_) input
   rw [fermatEquation]
   exact fermatCubicForm_separatedVariable_five Coefficient
@@ -171,10 +187,10 @@ stabilization, two and three are coprime, so the stabilization is universally
 cubic zero-packet atom.  No projective-bundle premise is needed: universal
 `CH₀`-triviality is obtained on the fourfold directly. -/
 theorem coprimeUnirationalDegrees_separation
-    {ledger : Quantum.OrdinaryAtomLedger Variety Atom}
-    (stabilization : Quantum.ProjectiveLineStabilizationInput ledger)
-    {exclusion : Quantum.LowDimensionalExclusionInput ledger}
-    {cubic : Variety} {atom : Atom}
+    (context : Quantum.RankTwoResidueMarkerContext K Variety Center Occurrence)
+    (productWithProjectiveLine : Variety → Variety)
+    (projectiveFourSpace : Variety) (Rational : Variety → Prop)
+    {cubic : Variety}
     (universallyCH0Trivial : Variety → Prop)
     (admitsUnirationalParametrization : Variety → ℕ → Prop)
     (coprimeDegreeCriterion : ∀ variety degree otherDegree,
@@ -183,23 +199,26 @@ theorem coprimeUnirationalDegrees_separation
           Nat.Coprime degree otherDegree → universallyCH0Trivial variety)
     (degreesPersist : ∀ variety degree,
       admitsUnirationalParametrization variety degree →
-        admitsUnirationalParametrization (ledger.productWithProjectiveLine variety) degree)
+        admitsUnirationalParametrization (productWithProjectiveLine variety) degree)
     (quadraticParametrization : admitsUnirationalParametrization cubic 2)
     (cubicParametrization : admitsUnirationalParametrization cubic 3)
-    (input : CubicAtomOneStepInput ledger stabilization exclusion cubic atom) :
-    admitsUnirationalParametrization (ledger.productWithProjectiveLine cubic) 2 ∧
-      admitsUnirationalParametrization (ledger.productWithProjectiveLine cubic) 3 ∧
-        StabilizationSeparation ledger universallyCH0Trivial cubic := by
+    (input : CubicResidueMarkerOneStepInput context productWithProjectiveLine
+      projectiveFourSpace Rational cubic) :
+    admitsUnirationalParametrization (productWithProjectiveLine cubic) 2 ∧
+      admitsUnirationalParametrization (productWithProjectiveLine cubic) 3 ∧
+        StabilizationSeparation productWithProjectiveLine Rational
+          universallyCH0Trivial cubic := by
   have stabilizedQuadratic :
-      admitsUnirationalParametrization (ledger.productWithProjectiveLine cubic) 2 :=
+      admitsUnirationalParametrization (productWithProjectiveLine cubic) 2 :=
     degreesPersist cubic 2 quadraticParametrization
   have stabilizedCubic :
-      admitsUnirationalParametrization (ledger.productWithProjectiveLine cubic) 3 :=
+      admitsUnirationalParametrization (productWithProjectiveLine cubic) 3 :=
     degreesPersist cubic 3 cubicParametrization
   refine ⟨stabilizedQuadratic, stabilizedCubic, ?_, ?_⟩
-  · exact coprimeDegreeCriterion (ledger.productWithProjectiveLine cubic) 2 3
+  · exact coprimeDegreeCriterion (productWithProjectiveLine cubic) 2 3
       stabilizedQuadratic stabilizedCubic (by decide)
-  · exact cubicAtom_oneStepStabilization_not_rational stabilization input
+  · exact cubicThreefold_oneProjectiveLine_not_rational_of_residueMarker context
+      productWithProjectiveLine projectiveFourSpace Rational cubic input
 
 end Applications
 
