@@ -37,6 +37,14 @@ promoted mathematical assertion maps to a kernel-checked declaration.
 
 ## Current status
 
+- **C935 — elliptic two-division resolvent audit, active.** Audit the proposed
+  upgrade of the epilogue's five-sheet principal-gluing packet from a fibrewise
+  \(3+2\) decomposition to the exact sign/discriminant resolvent of the relative
+  elliptic two-division cover.  The unconditional local-system theorem, any
+  level-three modular specialization, the eta Hauptmodul equation, and the
+  literature/priority boundary are separate gates.  Adopt only what the
+  manuscript's actual base and level structure support.  Card:
+  `../cubic-threefolds-tasks/c935-elliptic-two-division-resolvent.md`.
 - **C934 -- paper upgrade/export complete; all-degree table active.** The
   11-page paper now proves the integral derived splitting, central Smith
   factor three, canonical mod-three `delta_0`--`IC`--`delta_0` Loewy chain,
