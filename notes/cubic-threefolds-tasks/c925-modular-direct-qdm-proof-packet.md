@@ -74,6 +74,10 @@ exact \(m=2\) and all-\(m\) transport gates.
   notes/2026-08-20-c925-diagonal-coefficient-trait.md
 - two-layer elliptic-resolvent/Kummer descent packet:
   notes/2026-08-21-c925-two-layer-resolvent-packet.md
+- outer Kummer variable and carrier boundary:
+  notes/2026-08-21-c925-outer-kummer-and-carrier-boundary.md
+- pointed-row compression, open-gate ledger, and route audit:
+  notes/2026-08-21-c925-pointed-row-calibration.md
 
 The packet index owns the module-to-file map.  Do not append another large
 module to this card or to the index; add one focused companion file and one
@@ -509,11 +513,38 @@ any geometric or QDM provider.
 
 ## Next
 
-1. Test the global common-source route first.  On one smooth projective
+1. Freeze the Lean consumer at `Comparison.MarkedWitnessObstruction`.  Its
+   exact same-ring input is only a detected marked source and one map to the
+   actual projective-space receiver satisfying the selected-loop and
+   scalar-row squares.  The current high-EV provider to source-check is a
+   finite rational marked core carrying that witness, followed by scalar
+   extension; rational descent and faithful flatness belong to this provider,
+   not to the minimal consumer.  The complete gate ledger is G0--G3 in
+   `../2026-08-21-c925-pointed-row-calibration.md`.
+   Audit every proposed provider against this one-sided consumer before adding
+   a hypothesis: endpoint surjectivity, primary coverage, correction control,
+   inverse maps, and adjacent coherence are not consumed.
+2. Run the bounded formal-ring test recorded there.  Verify an actual ring map
+   placing both the Gu--Yu--Yu large-radius adjoint row and Cai's selected
+   \(z=0\) Turrittin packet in one marked representation.  If the fundamental
+   solution or Fourier map does not belong to Cai's coefficient field, close
+   this test; do not infer an analytic continuation or reopen sectorial
+   uniqueness.
+3. If the ring test passes, verify that the same global cobordism map exists
+   beyond a simple wall and proves G1--G3.  If the cited sources do not state
+   that map, record it as the new source theorem rather than adding another
+   algebraic interface.
+
+## Conditional provider ledger
+
+The entries below are retained alternatives, not coequal next steps.
+
+1. Global common-source detail.  On one smooth projective
    cobordism, construct a finite rational marked Gamma/monodromy core
    containing a detected primitive-sixth witness.  For the rational target it
    is enough to construct one selected-loop intertwiner from that core whose
-   pullback of the endpoint rank row is the common row up to a unit.  No target
+   pullback of the endpoint rank row is the common row up to one scalar; the
+   scalar need not be a unit for this one-sided implication.  No target
    surjectivity or primary coverage is used:
    `Comparison.MarkedWitnessObstruction` gives the contradiction because the
    target primary block is empty.  The source side still needs either a direct
@@ -523,19 +554,20 @@ any geometric or QDM provider.
    provider.  This one-sided formulation is uniform in \(m\) and avoids
    adjacent-overlap coherence.
    Do not replace the marking by the ordinary Hard--Lefschetz character of
-   the cubic Hodge structure.  If (A=H^3(X)_{\mathrm{prim}}), a curve
-   (C) with (J(C)\twoheadrightarrow J(X)) has
-   (A(1)\subset H^1(C)); blowing up (C\subset\mathbf P^D) creates the
-   full length-((D-2)) string (A(-j)\subset H^{3+2j}).  Hence the
+   the cubic Hodge structure.  If \(A=H^3(X)_{\mathrm{prim}}\), a curve
+   \(C\) with \(J(C)\twoheadrightarrow J(X)\) has
+   \(A(1)\subset H^1(C)\); blowing up \(C\subset\mathbf P^D\) creates the
+   full length-\((D-2)\) string \(A(-j)\subset H^{3+2j}\).  Hence the
    unmarked Hodge packet fails under a single smooth blowup.  The exact
    counterexample and the conditionally valid Lefschetz arithmetic are
    recorded in
    `../2026-08-21-c925-pointed-row-calibration.md`.
-   If this direct endpoint provider fails, return to the first genuine
+   If the source audit does not construct this direct endpoint provider,
+   return to the first genuine
    \((1,1)\) overlap and use Module 59's result that all
    sixteen completed-pilot coordinate-wall adjacencies have common
    rank-visible generators; the separable primitive-projector implementation
-   is therefore closed on every pilot.  The character-basis moving complement
+   is therefore ruled out on every pilot.  The character-basis moving complement
    is not a uniform repair: its formal diagonal coefficient passes every
    flip--flip direction but has
    order-zero defect in every blowup--blowdown direction and most mixed

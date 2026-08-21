@@ -9,18 +9,98 @@ modules `Comparison.PointedDirectSum` and
 `Comparison.RowedRepresentationDecomposition` separate that equation from
 point representatives and endpoint loop selection.
 
-The latest consumer bypasses adjacent vertex comparisons entirely.  One
-finite marked representation before chamber completion may be extended
-faithfully flat to each endpoint coefficient field and mapped directly to
-that endpoint.  It is enough that the map intertwine the selected loop,
-compare the rows up to a unit, and cover the selected generalized-primary
-kernel.  The paper-local Lean modules
+The latest consumer is asymmetric and bypasses adjacent vertex comparisons.
+One finite marked representation over the endpoint ring contains a detected
+cubic-product witness.  To contradict the rational endpoint, it is enough to
+map that representation to the endpoint by one selected-loop intertwiner
+satisfying one scalar row equation.  The scalar need not be a unit, and the
+endpoint map need not be surjective or cover its primary kernel.  This is the
+same-ring theorem
+`Comparison.MarkedWitnessObstruction.Data.endpoint_detects_of_source_detects`.
+The theorem `endpoint_detects_of_core_detects` is only a convenient wrapper:
+faithfully flat scalar extension transports a witness from a rational core.
+
+The older symmetric comparison remains useful when neither endpoint is known
+to be empty.  The paper-local modules
 `Comparison.PrimaryDetectionBaseChange` and
-`Comparison.ParallelPrimaryQuotients` prove that any two such endpoints have
-the same detected-primary Boolean.  At an exponent where source and target
-have the relevant Fitting decompositions, ordinary surjectivity implies the
-needed primary coverage.  The source problem is consequently one global
-marked-core theorem rather than adjacent sectorial coherence.
+`Comparison.ParallelPrimaryQuotients` compare two endpoint Booleans through
+one common core.  There primary coverage is load-bearing; ordinary
+surjectivity supplies it only at an exponent where the source and endpoint
+shifted operators have the required Fitting decompositions.
+
+The live source obligation is therefore exactly two-part: construct the
+detected marked core witness, and construct one actual core-to-rational-endpoint
+map whose selected formal loop and rank row are the same objects used in the
+endpoint calculation.  No target surjectivity, exceptional splitting,
+adjacent overlap, or inverse map is consumed.
+
+## Open-gate ledger
+
+| gate | exact input | current evidence boundary |
+|---|---|---|
+| G0: marked source | One representation over the endpoint ring carrying the chosen primitive-sixth scalar, selected loop, and rank row.  It may be obtained from a rational core, but descent is not consumed by the same-ring theorem. | Lean consumes it; no geometric construction from the global cobordism is proved. |
+| G1: detected witness | A generalized-primary vector in the marked source on which its row is nonzero. | The cubic-product endpoint has the witness.  Putting it in a rational core still needs a direct construction or one source-side primary lift.  If the witness is supplied after scalar extension, no flatness hypothesis is consumed. |
+| G2: rational-endpoint map | A same-ring linear map from the marked source to the actual projective-space representation, intertwining the selected loop. | No target surjectivity, primary lift, correction summand, inverse, or coefficient-descent theorem is required.  The actual map is not yet constructed. |
+| G3: row square | On the same map, `core row = scalar * endpoint row`; the scalar may be zero or nonunit for the logical implication, though a geometric normalization should be nondegenerate. | Gu--Yu--Yu's adjoint identity proves the generatorwise formal row equation on its nonlocalized completed source.  Extension to the exact marked solution object remains open. |
+| G4: endpoint contrast | The projective-space row does not detect the selected generalized-primary part. | Established by the endpoint calculation, provided G0--G3 use that same loop, eigenvalue, exponent, and row. |
+
+G0--G3 are the complete open provider.  G4 plus
+`MarkedWitnessObstruction.false_of_core_detects_of_endpoint_not_detects`
+then gives the contradiction.  This ledger is asymmetric by design: no
+condition is hidden on target primary coverage.
+
+## Route audit
+
+The following distinctions prevent a failed implication from being mistaken
+for a closed mathematical route.
+
+| route | exact disposition |
+|---|---|
+| One-sided marked core | Kernel-checked consumer; G0--G3 remain geometric. |
+| Analytic global gauge from the graded `C[z]` comparison | The automatic inference is false: finite Novikov--Artin truncation can still leave an infinite positive-\(z\) tail.  A separately constructed analytic gauge would remain a valid provider. |
+| Composition of edge-local completed germs | Automatic composition is false when basepoints differ by a nonnilpotent Laurent constant.  A pathwise based-coordinate theorem or one pre-completion core remains valid. |
+| Extremal slice with all ambient Novikov variables zero | Insufficient because the specialization is not detection-reflecting.  A proved slice-faithfulness theorem on the marked finite quotient would repair it. |
+| Convergent native QDM family across retained marker values | Not disproved; absent from the cited formal sources.  It remains an analytic provider theorem, not a consequence of integrability or Artin truncation. |
+| Can/variation image coverage | Correct optional packet-identification input, but algebraically unnecessary for the closed projected-row zero after substituting \(p=c(x)\). |
+| Dual cyclic-subconnection spectrum | Not an equivalent marker: an analytic-monodromy cyclic subspace need not be stable under formal monodromy, and cyclic spectrum forgets both the fixed nilpotence depth and the exponential-block label.  It remains usable only after an independent formal-row realization and collision-free marker theorem. |
+| Ordinary Hodge--Lefschetz packet | Genuinely closed by the curve-blowup counterexample below. |
+| Kummer/Burnside packet | Still open after adding the explicit common-charge, splitting-field disjointness, and equivariant-ledger hypotheses; only the inference from integral coefficients is closed. |
+
+### Audit against the loosest consumer
+
+The baseline for every proposed provider is now the same-ring theorem in
+`MarkedWitnessObstruction`: one detected source witness, one map to the
+projective endpoint, selected-loop naturality on that map, and one scalar row
+equation.  Faithful flatness appears only in the rational-core convenience
+wrapper.  The following stronger data are not part of the consumer and must
+not be promoted to necessary gates.
+
+| attempted connector | part of G0--G3 it could supply | excess data that may be discarded | exact live status |
+|---|---|---|---|
+| Whole meromorphic comparison from \(z=\infty\) to \(z=0\) | G2--G3, if it carries the actual selected loop and Gamma row. | A global gauge on the full QDM, all Stokes blocks, and adjacent-edge coherence. | The inference from finite Artin levels is false; direct construction of the marked restriction remains open. |
+| Shared-vertex row-cyclic overlap | Could compose local maps into G2--G3. | Pairwise overlap is unnecessary if one global core maps directly to the rational endpoint. | Valid fallback, no longer a primary gate. |
+| Integral nonturning Gamma crystal / pathwise common germ | Could construct G0 and G2--G3 simultaneously. | Full analytic parameter family, full HLT object, inverse edges, and all vertex germs. | Strong open provider; failure of automatic Laurent-germ composition does not rule it out. |
+| All-ambient-Novikov-zero extremal slice | Could provide G2--G3 after a reflection theorem. | Full slice equivalence is unnecessary; only the marked witness and its row/loop data must reflect. | Current specialization is nonfaithful.  A finite marked-quotient slice-faithfulness theorem remains open. |
+| Parallel augmented source / direct-sum decomposition | Could provide G0--G3. | Target surjectivity, correction factors, direct-sum invertibility, and maps to every endpoint. | Algebraically valid but strictly stronger than the one-sided endpoint map. |
+| Parallel primary quotients and Fitting lifts | Could compare two nonempty endpoints. | All target primary coverage and stabilized Fitting data. | Superseded for the projective-space contradiction; retained only for other endpoint pairs. |
+| Dual cyclic spectrum | Would replace the marker rather than supply G0--G3. | Not applicable. | Rejected as an equivalent invariant; a separate collision-free formal-marker theorem would define a different viable route. |
+| Hodge--Lefschetz string | Would replace the marked QDM witness by an ordinary Hodge witness. | Not applicable. | Genuinely false under one smooth curve blowup, so this exact invariant is closed. |
+| Kummer/Burnside packet | Proves a different equivariant telescope without G0--G3. | The ordinary cardinality ledger and integrality-only descent inference. | Still open under the stronger common-charge, splitting-field, and equivariant-ledger hypotheses. |
+| Cai formal-solution-ring embedding | Could supply the common representation and the row/loop typing in G0--G3. | Analytic continuation and a full sectorial basis. | Bounded open test; failure closes only this chosen ring embedding. |
+
+In particular, can/variation coverage, endpoint surjectivity, Fitting
+decomposition, correction control, inverse maps, and adjacent-receiver
+coherence are not missing hypotheses of the live one-sided proof.  They are
+only possible implementation data for stronger providers.
+
+One narrower test is not decided by the failed analytic-gauge argument.  Cai's
+formal solution ring contains the \(z=0\) Turrittin symbols over the fraction
+field of `C((z))[[q,t]]`.  The next bounded check is whether the normalized
+large-radius fundamental solution and the Gu--Yu--Yu adjoint Fourier maps
+embed in that exact coefficient field and whether the selected formal
+monodromy fixes their image.  Success would construct G3 by scalar extension.
+Failure of any one ring map closes this test without reopening sectorial
+uniqueness.
 
 ## Rejected Hodge--Lefschetz packet shortcut
 
@@ -38,15 +118,15 @@ The tempting construction records the copies
 
 and applies the primitive Hard--Lefschetz transform to their graded
 multiplicities.  Conditionally on a lower carrier bound, the arithmetic is
-correct: the source (X\times\mathbf P^m) has a string of length (m+1),
-and a codimension-(c) blowup correction tensors a center string with the
-length-((c-1)) Lefschetz character.
+correct: the source \(X\times\mathbf P^m\) has a string of length \(m+1\),
+and a codimension-\(c\) blowup correction tensors a center string with the
+length-\((c-1)\) Lefschetz character.
 
-The carrier premise is false because the index (j) ranges over all
-integers.  In particular, (A(1)) is a weight-one Hodge structure.  Choose a
-smooth curve (C) for which (J(C)\twoheadrightarrow J(X)); semisimplicity
-then makes (A(1)) a direct summand of (H^1(C)).  If
-(C\subset\mathbf P^D) is blown up, the correction terms
+The carrier premise is false because the index \(j\) ranges over all
+integers.  In particular, \(A(1)\) is a weight-one Hodge structure.  Choose a
+smooth curve \(C\) for which \(J(C)\twoheadrightarrow J(X)\); semisimplicity
+then makes \(A(1)\) a direct summand of \(H^1(C)\).  If
+\(C\subset\mathbf P^D\) is blown up, the correction terms
 
 \[
  H^1(C)(-i),\qquad 1\le i\le D-2,
@@ -58,16 +138,16 @@ contain
  A(1-i)\subset H^{1+2i},
 \]
 
-which is exactly the string (A(-j)\subset H^{3+2j}) for
-(j=0,\ldots,D-3).  Its length is (D-2), equal to the string in
-(X\times\mathbf P^{D-3}).  Thus one lawful curve blowup changes the proposed
+which is exactly the string \(A(-j)\subset H^{3+2j}\) for
+\(j=0,\ldots,D-3\).  Its length is \(D-2\), equal to the string in
+\(X\times\mathbf P^{D-3}\).  Thus one lawful curve blowup changes the proposed
 top multiplicity.  The same counterexample already has length two when
-(D=4), so the unconditional one-stabilization atom necessarily retains
+\(D=4\), so the unconditional one-stabilization atom necessarily retains
 extra polarization, QDM, or occurrence marking that ordinary Hodge
 semisimplification forgets.
 
 The Hard--Lefschetz/Clebsch--Gordan calculation survives only as a conditional
-combinatorial lemma.  It cannot supply an unconditional (m=2) or all-(m)
+combinatorial lemma.  It cannot supply an unconditional \(m=2\) or all-\(m\)
 obstruction.
 
 ## The uncalibrated blowup splitting
@@ -214,9 +294,11 @@ There are four flexible ways to construct the row calibration.
    natural starting point, but one must additionally exclude cross-boundary
    support on \(\{p\}\times D\) and \(D\times\{p\}\).
 
-The second route closes the formal rank-row equation directly.  The third is
-an alternative construction of its analytic fixed-phase lift: support collapse
-is coefficientwise in all remaining Novikov and bulk variables, but needs an
+The second route proves the generatorwise formal rank-row equation on the
+nonlocalized completed QDM source.  It does not by itself extend that row to
+the Laurent or fixed-phase solution object.  The third is an alternative
+construction of the analytic fixed-phase lift: support collapse is
+coefficientwise in all remaining Novikov and bulk variables, but needs an
 endpoint same-row theorem after one named common base change.
 
 ## Formal Fourier row without uniqueness
@@ -616,7 +698,7 @@ The rational endpoint does not require a quotient theorem.  Suppose the
 common marked core already detects the chosen generalized-primary block and
 the target has no such block.  Any comparison from a faithfully flat scalar
 extension of the core to the target which intertwines the selected loop and
-satisfies the unit-scaled row square sends a detected core witness to a
+satisfies a scalar row square sends a detected core witness to a
 detected target witness.  It therefore gives an immediate contradiction;
 surjectivity and primary coverage never enter.  This is proved in
 `MarkedWitnessObstruction.endpoint_detects_of_core_detects`.

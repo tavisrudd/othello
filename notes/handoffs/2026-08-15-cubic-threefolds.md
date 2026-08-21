@@ -127,8 +127,23 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   `../2026-08-20-c930-independent-referee-report.md` and
   `../2026-08-20-c930-second-referee-pass.md`. Card:
   `../cubic-threefolds-tasks/c930-categorical-direct-qdm-paper-preparation.md`.
-- **C925 — modular direct-QDM proof packet, active.** Write a self-contained
-  alternative packet organized like a parameterized software interface: a
+- **C925 — modular direct-QDM proof packet, active.**  **Current frontier:**
+  freeze the paper-local Lean consumer at
+  `Comparison.MarkedWitnessObstruction`.  Its exact input is one detected
+  marked source over the endpoint ring and one map to the actual
+  projective-space receiver satisfying the selected-loop and scalar-row
+  squares.  A finite rational core followed by faithfully flat scalar
+  extension is the current high-EV provider, not a consumer requirement.
+  Target surjectivity, primary coverage, exceptional
+  splitting, adjacent overlap, and an inverse are not used.  The next bounded
+  source check is the G0--G3 formal-ring test in
+  `../2026-08-21-c925-pointed-row-calibration.md`; the task card's `Next`
+  section is authoritative.  Ordinary Hodge--Lefschetz packets are closed by
+  a one-blowup curve counterexample.  The remainder of this entry records
+  established modules and conditional provider alternatives, not coequal
+  next steps.
+
+  The packet is organized like a parameterized software interface: a
   caller chooses which generic even-block data to observe, which blocks to
   mark, and what commutative-monoid value to retain, while the coefficient,
   comparison, ledger, and weak-factorization modules remain reusable.  The
@@ -544,6 +559,25 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   actual comparisons and reindexings.  Reports:
   `../2026-08-21-c925-two-layer-resolvent-packet.md` and
   `../2026-08-21-c925-outer-kummer-and-carrier-boundary.md`.
+  The current consumer is one-sided.  A detected primitive-sixth witness in
+  one rational marked core and one scalar-row, selected-loop map from its
+  faithfully flat extension to the rational endpoint already contradict
+  endpoint non-detection; target surjectivity, primary coverage, exceptional
+  splitting, adjacent overlap, and inverse maps are not used.  The
+  paper-local theorem is
+  `Comparison.MarkedWitnessObstruction.endpoint_detects_of_core_detects`.
+  The live source gate is exactly construction of that actual marked core and
+  endpoint map.  Ordinary Hodge--Lefschetz packet length cannot replace the
+  marking: a curve whose Jacobian surjects onto the cubic intermediate
+  Jacobian creates the full source-length Hodge string in one smooth blowup.
+  The automatic analytic global-gauge and edge-germ-composition implications
+  remain closed by explicit completion countermodels; the corresponding
+  analytic provider theorems remain logically possible.  One narrower formal
+  test is open: determine whether Cai's solution ring admits both the
+  Gu--Yu--Yu large-radius adjoint row and the selected (z=0) Turrittin packet
+  by one lawful scalar extension.  The exact G0--G4 ledger, route dispositions,
+  and stop conditions are in
+  `../2026-08-21-c925-pointed-row-calibration.md`.
   Shifted tensor stability and the extremal multinomial source law are
   proved, but the occurrence-indexed exact QDM sequence, actual carrier
   exponent, and boundary vanishing remain open.  The packet is split into

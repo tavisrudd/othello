@@ -8,7 +8,7 @@ need surjectivity or primary coverage. A detected primary vector in the
 source maps to a primary vector at the endpoint. A scalar row factorization
 prevents that image from having zero endpoint row.
 
-The first theorem is the minimal same-ring linear consumer. A second theorem
+The first theorem is the same-ring row-factorized consumer. A second theorem
 combines it with the existing faithfully flat base-change interface for a
 common marked core.
 -/
@@ -115,7 +115,7 @@ variable
     (core : MarkedLocalSystem.Representation R Loop Core)
 
 /-- Faithfully flat base change supplies the detected local source consumed
-by the minimal same-ring theorem. -/
+by the same-ring row-factorized theorem. -/
 theorem endpoint_detects_of_core_detects
     {K : Type uK} [CommRing K] [Algebra R K] [Module.FaithfullyFlat R K]
     {Endpoint : Type uEndpoint} [AddCommGroup Endpoint] [Module K Endpoint]
