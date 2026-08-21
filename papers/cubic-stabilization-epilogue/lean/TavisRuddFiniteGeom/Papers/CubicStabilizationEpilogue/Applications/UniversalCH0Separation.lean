@@ -73,7 +73,7 @@ structure StabilizationSeparation
 
 /-- The separation composition.  Universal `CH₀`-triviality of the cubic
 threefold passes to its projective-line stabilization by the supplied
-projective-bundle premise, while the cubic zero-packet atom makes that
+projective-bundle premise, while the cubic residue marker makes that
 stabilization irrational. -/
 theorem stabilizationSeparation_of_universalCH0_and_residueMarker
     (context : Quantum.RankTwoResidueMarkerContext K Variety Center Occurrence)
@@ -109,7 +109,7 @@ theorem primitiveMinimalClassFamily_separation
       geometry.universallyCH0Trivial (productWithProjectiveLine variety))
     (fibre : Base → Variety)
     (familyInput : SixAxisMinimalClassFamilyInput geometry fibre)
-    (atomInput : ∀ parameter,
+    (residueInput : ∀ parameter,
       CubicResidueMarkerOneStepInput context productWithProjectiveLine
         projectiveFourSpace Rational (fibre parameter)) :
     ∀ parameter, geometry.universallyCH0Trivial (fibre parameter) ∧
@@ -123,7 +123,7 @@ theorem primitiveMinimalClassFamily_separation
     stabilizationSeparation_of_universalCH0_and_residueMarker context
       productWithProjectiveLine projectiveFourSpace Rational
       geometry.universallyCH0Trivial projectiveBundleCH0 fibreCH0
-      (atomInput parameter)⟩
+      (residueInput parameter)⟩
 
 /-- The existential form of the previous statement.  When the parameter space of
 the family is nonempty there is a cubic threefold that is universally
@@ -141,7 +141,7 @@ theorem exists_universalCH0_with_irrational_stabilization
       geometry.universallyCH0Trivial (productWithProjectiveLine variety))
     (fibre : Base → Variety)
     (familyInput : SixAxisMinimalClassFamilyInput geometry fibre)
-    (atomInput : ∀ parameter,
+    (residueInput : ∀ parameter,
       CubicResidueMarkerOneStepInput context productWithProjectiveLine
         projectiveFourSpace Rational (fibre parameter)) :
     ∃ cubic, geometry.universallyCH0Trivial cubic ∧
@@ -150,7 +150,7 @@ theorem exists_universalCH0_with_irrational_stabilization
   ⟨fibre (Classical.arbitrary Base),
     primitiveMinimalClassFamily_separation context productWithProjectiveLine
       projectiveFourSpace Rational geometry voisinCriterion projectiveBundleCH0
-      fibre familyInput atomInput (Classical.arbitrary Base)⟩
+      fibre familyInput residueInput (Classical.arbitrary Base)⟩
 
 /-- Separation for a cubic threefold whose equation is the Fermat form in five
 variables.  The hypothesis of the almost-diagonal criterion is discharged by
@@ -184,7 +184,7 @@ theorem fermatCubic_separation
 degrees two and three.  Both degrees persist on the projective-line
 stabilization, two and three are coprime, so the stabilization is universally
 `CH₀`-trivial by the coprime-degree criterion, and it is irrational by the
-cubic zero-packet atom.  No projective-bundle premise is needed: universal
+cubic residue marker.  No projective-bundle premise is needed: universal
 `CH₀`-triviality is obtained on the fourfold directly. -/
 theorem coprimeUnirationalDegrees_separation
     (context : Quantum.RankTwoResidueMarkerContext K Variety Center Occurrence)

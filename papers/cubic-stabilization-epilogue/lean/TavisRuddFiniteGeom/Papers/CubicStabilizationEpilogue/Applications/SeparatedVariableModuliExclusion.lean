@@ -39,7 +39,7 @@ structure SeparatedVariableModuliInput
     (fibre : Base → Variety) (moduliPoint : Base → Moduli)
     (hasEckardtPoint separatedVariableType : Variety → Prop)
     (projectivelyEquivalent : Variety → Variety → Prop)
-    (distinguishedPoint : Moduli) : Prop where
+    (distinguishedPoint : Moduli) where
   /-- A cubic threefold of separated-variable type carries an Eckardt point. -/
   separatedVariable_hasEckardtPoint :
     ∀ variety, separatedVariableType variety → hasEckardtPoint variety
@@ -52,12 +52,19 @@ structure SeparatedVariableModuliInput
   eckardtLocus_eq_distinguishedPoint :
     ∀ parameter, hasEckardtPoint (fibre parameter) →
       moduliPoint parameter = distinguishedPoint
-  /-- The distinguished moduli point is represented by a member that is
-  projectively equivalent to a separated-variable cubic. -/
-  distinguishedPoint_represented :
-    ∃ parameter, moduliPoint parameter = distinguishedPoint ∧
-      RepresentedBySeparatedVariable separatedVariableType projectivelyEquivalent
-        (fibre parameter)
+  /-- A chosen parameter over the distinguished moduli point. -/
+  distinguishedParameter : Base
+  /-- A chosen separated-variable model for that parameter. -/
+  distinguishedModel : Variety
+  /-- The chosen parameter maps to the distinguished moduli point. -/
+  distinguishedParameter_moduliPoint :
+    moduliPoint distinguishedParameter = distinguishedPoint
+  /-- The chosen model is of separated-variable type. -/
+  distinguishedModel_separatedVariable :
+    separatedVariableType distinguishedModel
+  /-- The chosen model is projectively equivalent to the chosen fibre. -/
+  distinguishedModel_projectivelyEquivalent :
+    projectivelyEquivalent distinguishedModel (fibre distinguishedParameter)
 
 /-- The moduli points of the family represented by a cubic of separated-variable
 type are exactly the distinguished one.  Both directions are stated: a member
@@ -78,11 +85,16 @@ theorem separatedVariableModuli_eq_distinguishedPoint
       ∃ parameter, moduliPoint parameter = distinguishedPoint ∧
         RepresentedBySeparatedVariable separatedVariableType
           projectivelyEquivalent (fibre parameter) := by
-  refine ⟨fun parameter represented ↦ ?_, input.distinguishedPoint_represented⟩
+  refine ⟨fun parameter represented ↦ ?_, ?_⟩
   obtain ⟨model, separated, equivalence⟩ := represented
   exact input.eckardtLocus_eq_distinguishedPoint parameter
     (input.eckardtPoint_projectivelyInvariant model (fibre parameter) equivalence
       (input.separatedVariable_hasEckardtPoint model separated))
+  exact ⟨input.distinguishedParameter,
+    input.distinguishedParameter_moduliPoint,
+    input.distinguishedModel,
+    input.distinguishedModel_separatedVariable,
+    input.distinguishedModel_projectivelyEquivalent⟩
 
 /-- Every moduli point of the family other than the distinguished one is
 represented by no cubic of separated-variable type, which is the form in which

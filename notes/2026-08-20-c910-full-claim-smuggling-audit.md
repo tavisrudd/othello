@@ -33,6 +33,9 @@ fragment, even when the represented algebraic composition is complete.
    fourfold, and irrationality.
 2. `prop:A5-nonseparated` now exposes its second sentence by composing the
    separated-variable exclusion with fibrewise universal `CH₀`-triviality.
+   Its existence direction is constructed from a parameter, model, moduli-point
+   equality, separated-form proof, and projective-equivalence proof; the
+   existential conclusion is no longer stored in the input record.
 3. `thm:separation-family` no longer takes `isNonIsotrivial fibre` itself as a
    field.  It takes a typed period map, an explicit pair of distinct period
    values, and the imported implication from period-map nonconstancy to
@@ -55,7 +58,7 @@ fragment, even when the represented algebraic composition is complete.
 | 3 | `cor:voisin-separation` | fragment | Honest after downgrade: fibrewise composition is checked, but the moduli locus and codimension bound are absent. |
 | 4 | `cor:fermat-separation` | conditional | Pass: Lean proves the Fermat separated-variable decomposition and composes the cited criterion with the direct residue obstruction. |
 | 5 | `cor:coprime-separation` | conditional | Pass: degree persistence and the coprime-degree criterion are explicit; Lean proves `Coprime 2 3` and uses the direct residue obstruction. |
-| 6 | `thm:separation-family` | conditional | Pass after repair: non-isotriviality is derived from typed period-map nonconstancy, and irrationality uses the direct categorical spine. |
+| 6 | `thm:separation-family` | conditional | Pass after repair: non-isotriviality is derived from typed period-map nonconstancy, irrationality uses the direct categorical spine, and separated-variable existence is built from primitive witness data. |
 | 7 | `lem:six-point-hearts` | fragment | Honest fragment: concrete modules and commutants are proved; the geometric axis identification is not claimed. |
 | 8 | `prop:six-axis-polarization` | fragment | Honest fragment: Gram spectrum and Smith reduction are proved; the geometric isogeny/polarization realization is absent. |
 | 9 | `lem:relative-six-axis` | fragment | Honest fragment: integral lattice and primary-coordinate consequences are checked from visibly supplied relative geometry. |
@@ -72,7 +75,7 @@ fragment, even when the represented algebraic composition is complete.
 | 20 | `prop:A5-not-coprime` | absent | Honest absent row. |
 | 21 | `lem:pencil-loci-coordinates` | absent | Honest absent row; the registered CAS evidence is not mislabeled as Lean. |
 | 22 | `prop:no-elliptic-product` | fragment | Honest fragment: only the two-primary linear-algebra obstructions are proved. |
-| 23 | `prop:A5-nonseparated` | conditional | Pass after repair: both the exact locus and the universal-`CH₀` statement off it are public conclusions. |
+| 23 | `prop:A5-nonseparated` | conditional | Pass after repair: both the exact locus and the universal-`CH₀` statement off it are public conclusions, and the existence half is constructed rather than projected from an equivalent existential premise. |
 | 24 | `prop:cubic-block-data` | fragment | Honest fragment: the displayed matrices, residue, gauge coefficients, and indicial polynomial are checked; their QDM origin is imported. |
 | 25 | `lem:A0preserve` | conditional | Pass: preservation of the nilpotent line is derived from explicit coefficient and horizontality equations, not assumed. |
 | 26 | `prop:rank2-rigidity` | conditional | Pass: regularity, the Lax equation, and discriminant constancy are derived from typed flatness/horizontality identities. |

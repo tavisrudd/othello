@@ -2,7 +2,7 @@
 \label{sec:framed-monodromy}
 
 Section~\ref{sec:atomic-one-step} proved the occurrence-indexed marker-ledger
-theorem and applied its rank-two residue fold.  We now keep the block
+theorem and applied its rank-two residue fold.  We now keep the ledger
 construction and target monoid \(A=\mathbf N\) fixed, refine the block type by
 a marked small section and loop framing, and replace the fold by
 primitive-sixth framed formal-monodromy multiplicity.  The argument is
@@ -13,9 +13,10 @@ The Iritani and Iritani--Koto comparison isomorphisms preserve the original
 loop framing after coefficient-field extension.  The string and divisor
 equations remove the scalar degree-zero term and every fixed degree-two term
 whose Novikov character descends to the coefficient ring.  The additional
-provider data retained by this finer fold are precisely a residual
-reconstruction-tail displacement and a logically separate specialization
-step in the divisor-tagging argument.  These are Hypotheses~5.7R and~5.7T.
+inputs needed to make the operation formulas compatible with this finer fold
+are a residual reconstruction-tail displacement and a logically separate
+specialization step in the divisor-tagging argument.  These are
+Hypotheses~5.7R and~5.7T.
 
 The framed conclusion is logically subordinate to
 Theorem~\ref{thm:every-cubic}.  Definition~\ref{def:framed-sixth-multiplicity},
@@ -46,9 +47,9 @@ original loop framing when ramification is present.  For the cubic zero
 block, Section~\ref{sec:atomic-one-step} already finds the representatives
 \(-1/6\) and \(-5/6\); the calculation below
 recovers those same exponents directly from formal solutions and records
-that their classes give the two primitive sixth roots.  Thus Sections~4 and
-5 use two levels of the same formal data rather than unrelated numerical
-obstructions.
+that their classes give the two primitive sixth roots.  Thus
+Sections~\ref{sec:atomic-one-step} and~\ref{sec:framed-monodromy} use two
+levels of the same formal data rather than unrelated numerical obstructions.
 
 Let \(T\) be a smooth projective variety.  Write
 \[
@@ -84,7 +85,6 @@ Choose a complement \(K=\C\oplus V\) of \(\mathbf Q\)-vector spaces, let
 \[
  \operatorname{Exp}_V(c+v)=e^{2\pi i c}[v]
  \colon (K,+)\longrightarrow\Omega_V^\times
- \tag{5.0}
  \label{eq:universal-exponential}
 \]
 is a group homomorphism.  Since \(V\) is torsion-free, \(K[V]\) is a domain,
@@ -94,7 +94,6 @@ and its distinct monomials are linearly independent.  Consequently
  \qquad
  \operatorname{Exp}_V(a)\text{ is a root of unity}
  \Longleftrightarrow a\in\mathbf Q.
- \tag{5.0a}
  \label{eq:universal-exponential-torsion}
 \]
 
@@ -142,14 +141,12 @@ with indices modulo \(d\).  Put
 \(U=A_{d-1}\cdots A_0\) on \(E_0\).  A cyclic-block determinant gives
 \[
  \chi_{\bigoplus_iE_i}(X)=\det(X^dI-U).
- \tag{5.0b}
  \label{eq:deck-orbit-polynomial}
 \]
 Put \(r=e/d\).  Equivariance of the descent datum gives the intrinsic return
 relation
 \[
  U^r=M_{\mathrm{RS},V}.
- \tag{5.0c}
  \label{eq:deck-return-power}
 \]
 Thus, if \(\mu\) is an eigenvalue of \(U\), then
@@ -168,7 +165,7 @@ complex construction.  Nonrational residue classes contribute no root of
 unity.  This criterion does not depend on \(V\) and does not require a
 fractional residue factor to commute with the descent action.
 
-For completeness, compare two Levelt--Turrittin choices after pulling both to
+Compare two Levelt--Turrittin choices after pulling both to
 a common ramification \(z=\widetilde w^{\,E}\).  Equivariant uniqueness of the formal
 decomposition identifies their total horizontal solution spaces and carries
 the original-\(z\)-turn deck/descent operator for one choice to the scalar
@@ -212,13 +209,12 @@ two primitive-sixth algebraic multiplicities, and extend blockwise:
  w_6:\mathcal L_{\mathcal T_{\mathrm{fr}}}\longrightarrow\mathbf N,
  \qquad
  \nu_6(T)=w_6(\mathcal B_{\mathcal T_{\mathrm{fr}}}(T)).
- \tag{5.0d}
  \label{eq:framed-fold}
 \]
 Direct-sum additivity of characteristic polynomials makes \(w_6\) a
-commutative-monoid fold.  Lemma~5.1A below shows that it is preserved by the
-regular scalar extensions and formal-coordinate isomorphisms in the common
-QDM construction.  Neither marked datum is forgotten when passing to
+commutative-monoid fold.  Lemma~\ref{lem:frame-transport} shows that it is
+preserved by the regular scalar extensions and formal-coordinate isomorphisms
+in the common QDM construction.  Neither marked datum is forgotten when passing to
 \(\mathcal L_{\mathcal T_{\mathrm{fr}}}\).
 
 The frame matters.  Adjoining roots of Novikov monomials is an algebraic
@@ -227,6 +223,7 @@ coefficient extension and is harmless by choice independence.  Adjoining a root 
 part of the operator.
 
 \begin{lemmaOneA}[Frame transport over a coefficient field]
+\label{lem:frame-transport}
 Let \(K\supset\C\) be an algebraically closed field of characteristic zero,
 and let \(D,D'\) be differential modules over \(K(\!(z)\!)\).  Suppose
 \(G\in\operatorname{GL}_n(K(\!(z)\!))\) is a gauge isomorphism from \(D\) to
@@ -496,7 +493,6 @@ Assume Hypothesis~5.7R.
 Let \(V\to T\) be a vector bundle of rank \(r\ge2\).  Then
 \[
  \nu_6(\PP_T(V))=r\nu_6(T).
- \tag{5.2}
  \label{eq:projective-bundle-nu}
 \]
 Let \(\widetilde T=\operatorname{Bl}_C T\), where \(C\subset T\) is smooth of
@@ -504,7 +500,6 @@ codimension \(c\ge2\).  In Iritani's comparison field one has
 \[
  \nu_6(\widetilde T)=\nu_6(T)+
  \sum_{j=0}^{c-2}\nu_6(C;\chi_j),
- \tag{5.3}
  \label{eq:blowup-nu}
 \]
 where \(\chi_j\) is the numerical Novikov specialization of the \(j\)-th
@@ -514,10 +509,10 @@ invariants; the center terms are computed after the displayed specializations.
 
 \begin{proof}
 Proposition~\ref{prop:qdm-operation-ledgers} supplies the common direct-sum,
-coefficient-spine, parity, and occurrence bookkeeping.  Lemma~5.1A shows
-that the fold \(w_6\) crosses its regular comparison maps without changing
-the original \(z\)-disc.  It remains only to compare the reconstructed bulk
-points with the intrinsic small sections.
+coefficient-spine, parity, and occurrence bookkeeping.
+Lemma~\ref{lem:frame-transport} shows that the fold \(w_6\) crosses its regular
+comparison maps without changing the original \(z\)-disc.  It remains only to
+compare the reconstructed bulk points with the intrinsic small sections.
 
 For a blowup center summand put \(u=q^{-1/(c-1)}\).  Iritani's coordinates
 have the initial form
@@ -525,7 +520,6 @@ have the initial form
  \varsigma_j=\varsigma_j^\circ+s_j,
  \qquad
  \varsigma_j^\circ=-(c-1)\lambda_j+h_{C,j}+O(u),
- \tag{5.4}
  \label{eq:blowup-reconstruction-coordinate}
 \]
 with $\lambda_j=\zeta_j u^{-1}$
@@ -533,7 +527,6 @@ with $\lambda_j=\zeta_j u^{-1}$
 specialization
 \[
  \chi_j(Q_C^d)=Q^{i_*d}u^{\rho_C\cdot d}.
- \tag{5.4a}
  \label{eq:center-novikov-specialization}
 \]
 Lemma~\ref{lem:exact-low-degree-shifts} removes the scalar term and the fixed
@@ -576,7 +569,6 @@ Novikov-admissible} if \(A\) is a complete separated valued \(\C\)-domain
 with domain associated graded, every monomial has nonzero image, and
 \[
  v(\chi(Q^d))=\ell(d),
- \tag{5.5}
  \label{eq:strict-novikov-valuation}
 \]
 where \(\ell\) is positive and proper on the effective numerical monoid.
@@ -807,7 +799,6 @@ characteristic polynomial of Euler multiplication on
   X^4-8(u+w)X^2+16(u-w)^2, & a\ \text{even},\\[2pt]
   X^4+wX^3-8uX^2-36uwX+16u^2-27uw^2, & a\ \text{odd},
  \end{cases}
- \tag{5.5a}
  \label{eq:ruled-euler-quartic}
 \]
 and its discriminant is
@@ -817,7 +808,6 @@ and its discriminant is
   2^{24}\,u^2w^2(u-w)^2, & a\ \text{even},\\[2pt]
   -u^2w^2\left(256u+27w^2\right)^3, & a\ \text{odd}.
  \end{cases}
- \tag{5.5b}
  \label{eq:ruled-euler-discriminant}
 \]
 \end{lemma}
@@ -1158,7 +1148,6 @@ Choose integral divisors \(D_1,\ldots,D_\rho\) whose pairings separate
 \[
  \chi_{\boldsymbol t}(Q^d)=\chi(Q^d)
  \exp\!\left(\sum_i t_i(D_i\cdot d)\right).
- \tag{5.6}
  \label{eq:divisor-tagging-map}
 \]
 This formula extends continuously from monomials to the completed Novikov
@@ -1241,7 +1230,6 @@ surface, and let \(\chi\) be a strictly Novikov-admissible specialization,
 graded-monomial when \(T\cong F_1\).  Then
 \[
  \nu_6(T;\chi)=0.
- \tag{5.7}
  \label{eq:low-dimensional-vanishing}
 \]
 \end{proposition}
@@ -1288,7 +1276,6 @@ If \(Y\) and \(Y'\) are birational smooth projective complex varieties of
 the same dimension at most four, then
 \[
  \nu_6(Y)=\nu_6(Y').
- \tag{5.8}
  \label{eq:nu-birational-invariance}
 \]
 Consequently, for smooth projective threefolds,
@@ -1429,7 +1416,6 @@ block has rank one, so Lemma~\ref{lem:simple-euler-block} gives the claim.
 For every smooth cubic threefold \(X\),
 \[
  \nu_6(X)=2.
- \tag{5.9}
  \label{eq:cubic-packet-value}
 \]
 \end{proposition}
@@ -1451,7 +1437,6 @@ For the rank-two block, seek a formal solution in the form
  \widetilde S_3=z^\rho(1+O(z)),
  \qquad
  \widetilde S_4=cz^{\rho+1}(1+O(z)).
- \tag{5.9f}
  \label{eq:cubic-indicial-ansatz}
 \]
 The coefficient of \(z^{\rho+1}\) in the first coordinate of
@@ -1461,7 +1446,6 @@ the second, give respectively
  \rho=2c-\frac{19}{18},
  \qquad
  c(\rho+1)=\frac{19}{18}c-\frac8{81}.
- \tag{5.9g}
  \label{eq:cubic-indicial-coefficients}
 \]
 Eliminating \(c\) gives
@@ -1470,13 +1454,11 @@ Eliminating \(c\) gives
  \left(\rho-\frac1{18}\right)=-\frac8{81},
  \qquad\text{hence}\qquad
  \rho^2+\rho+\frac5{36}=0.
- \tag{5.9h}
  \label{eq:cubic-indicial-polynomial}
 \]
 The quadratic formula applied to \eqref{eq:cubic-indicial-polynomial} gives
 \[
  \rho=-\frac16,\ -\frac56.
- \tag{5.9i}
  \label{eq:cubic-indicial-roots}
 \]
 These are the eigenvalues of the modified residue \(R_X\) computed in
@@ -1488,7 +1470,7 @@ integral powers of \(z\).  Hence they preserve each exponent class in
 \(\Q/\Z\): multiplication sends \(z^\rho F_X[[z]]\) to itself, and the same
 holds for the inverse.  Thus the two classes in
 \eqref{eq:cubic-indicial-roots} remain the classes in the original-\(z\)-disc
-frame.  By \eqref{eq:universal-exponential}, the repaired framed convention
+frame.  By \eqref{eq:universal-exponential}, the framed convention above
 assigns to a rational exponent \(\rho\) the eigenvalue
 \(\operatorname{Exp}_V(\rho)=e^{2\pi i\rho}\).  Therefore these two classes
 give
@@ -1497,7 +1479,6 @@ give
  \qquad
  \operatorname{Exp}_V\left(-\frac56\right)
  =e^{-5\pi i/3}=e^{\pi i/3}.
- \tag{5.9j}
  \label{eq:cubic-framed-eigenvalues}
 \]
 Put \(R=\C[r,r^{-1}]\).  The scalar equations have the form
@@ -1506,7 +1487,6 @@ Put \(R=\C[r,r^{-1}]\).  The scalar equations have the form
 \[
  \widetilde S_\pm=e^{\mp6r/z}u_\pm(z),
  \qquad u_\pm(z)\in1+zR[[z]].
- \tag{5.9k}
  \label{eq:cubic-rank-one-solutions}
 \]
 After removing the exponential,
@@ -1529,7 +1509,6 @@ At coefficient \(n\), the two equations have the form
  \end{pmatrix},
  \qquad
  \det L_s=\left(s+\frac16\right)\left(s+\frac56\right).
- \tag{5.9l}
  \label{eq:cubic-frobenius-recursion}
 \]
 Here \((\alpha_n,\beta_n)\) depends only on coefficients of lower index;
@@ -1549,7 +1528,6 @@ algebraic multiplicity one, while
 Hence
 \[
  \nu_6(X)=2.
- \tag{5.9m}
  \label{eq:cubic-packet-internal-count}
 \]
 No odd-cohomology block enters this small-even calculation, and
@@ -1632,7 +1610,6 @@ Assuming Hypothesis~5.7R, and Hypothesis~5.7T only for surface centers that are
 neither minimal nor geometrically ruled, one moreover has
 \[
   \nu_6(V)=2.
-  \tag{5.11}
   \label{eq:v14-stabilization}
 \]
 \end{corollary}

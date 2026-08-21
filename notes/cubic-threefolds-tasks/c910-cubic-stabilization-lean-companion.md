@@ -121,7 +121,13 @@ The full 53-row anti-smuggling audit is
 It repaired two omitted manuscript clauses, replaced a conclusion-as-premise
 non-isotriviality field by typed period-map nonconstancy, removed the remaining
 stale application routes, and downgraded the Voisin codimension-three row to a
-fragment because codimension is not represented. Current audit: 53 manuscript
+fragment because codimension is not represented. A fresh hostile pass then
+caught one further local laundering defect: the separated-variable input
+stored the same existential witness later returned as a conclusion. It now
+stores a chosen parameter and model plus the individual moduli-point,
+separated-form, and projective-equivalence facts, from which Lean constructs
+the existential. The referee's final verdict is MINOR with no remaining
+conclusion laundering. Current audit: 53 manuscript
 claims, 6 absent, 21 fragmentary, 25 conditional, 1 complete; 306 reviewer
 terminals, of which 83 are machinery. The aggregate Lean gate, source audit,
 axiom-log audit, and warning-free 50-page manuscript gate are green.
