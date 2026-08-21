@@ -3320,8 +3320,17 @@
       "last": 936,
       "purpose": "Write the modular companion identifying the signed cubic gluing curve with the elliptic two-division sign resolvent",
       "sequence": 369
+    },
+    {
+      "count": 1,
+      "first": 937,
+      "kind": "reservation",
+      "lane": "paper-frob-eq",
+      "last": 937,
+      "purpose": "layered-exposition and manuscript closeout pass for equivariant robust completion",
+      "sequence": 370
     }
   ],
-  "next_id": 937,
+  "next_id": 938,
   "schema": "codex-task-id-allocations-v1"
 }
