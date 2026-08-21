@@ -3329,8 +3329,17 @@
       "last": 937,
       "purpose": "layered-exposition and manuscript closeout pass for equivariant robust completion",
       "sequence": 370
+    },
+    {
+      "count": 1,
+      "first": 938,
+      "kind": "reservation",
+      "lane": "paper-frob-eq",
+      "last": 938,
+      "purpose": "bounded D-AOR8 geometric coupling scout before C937 with no large Q25 certificate rebuilds",
+      "sequence": 371
     }
   ],
-  "next_id": 938,
+  "next_id": 939,
   "schema": "codex-task-id-allocations-v1"
 }
