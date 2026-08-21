@@ -2,9 +2,11 @@
 
 **Lane:** `complete-ports`
 
-**Status:** ACTIVE — harmonic completion, determinant factorization, Steiner completion, code
-length/dimension, normalized five-circuit theorem, and nucleus-gate closure identities are
-kernel-green; global distance and exact repair-hypergraph packaging remain open.
+**Status:** ACTIVE — the symbolic manuscript proof, harmonic completion, determinant
+factorization, Steiner completion, arbitrary-order circuit criterion, exclusion of circuits below
+five, exact dual distance, pointed radius-four block ports, and nucleus-gate closure identities are
+kernel-green.  The exact parameter terminal exposes only the sharp five-point hyperplane-section
+lemma, which is proved in the manuscript; ledger and closeout gates are in progress.
 
 ## Current checkpoint
 
@@ -50,6 +52,20 @@ infinity.  The terminals `finiteHarmonicBlock_isFiveCircuit` and
 independence after every one-point deletion.  Thus the harmonic five-sets are genuine circuits by
 uniform algebra rather than the field-nine inventory.
 
+The normalization gap has now been removed.  The row-span generator is proved equal to the
+projective evaluation code; four distinct projective curve points and the nucleus with any three
+distinct projective curve points are independent in arbitrary order.  A finite-set enlargement
+argument then proves every selected family of fewer than five columns independent.  Five distinct
+curve columns are independent as well, including the infinity branch, while an arbitrary ordered
+nucleus-plus-four family is independent exactly when its four parameters are not harmonic.
+
+Both finite and infinity-normalized harmonic blocks now produce actual radius-four edges of
+`FiniteGeom.repairHypergraph` for every one of their five possible targets.  The normalized block
+`{0,1,-1,∞}` supplies a weight-five dual word, and uniform four-column independence supplies the
+matching lower bound, yielding `dualDist_harmonicQuarticCode = 5` without enumeration.  The
+paper-facing parameter theorem proves length `q+2`, dimension five, distance `q-3`, and dual
+distance five from the sharp five-point section statement alone.
+
 The abstract radius-four closure is also formalized.  `HarmonicPortClosure` has exactly the two
 geometric repair rules: a complete harmonic block adds the nucleus, and the nucleus plus three
 block points adds the fourth curve point.  Theorems now prove that a block-free curve set is inert,
@@ -78,6 +94,8 @@ lean/scripts/guarded-lean RepairPorts/HarmonicQuartic.lean
 ```
 
 The single-file elaboration is warning-free apart from the wrapper's dirty-tree notice.
+`RepairPorts.Gates.CompletePorts` also passes through the guarded build queue, and the freshly
+extracted `complete_ports` trust facts pass the area-local trust-spine audit with zero findings.
 
 ## Objective
 
