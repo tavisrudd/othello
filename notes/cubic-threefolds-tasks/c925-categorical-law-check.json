@@ -1,5 +1,5 @@
 {
-  "check_count": 120,
+  "check_count": 122,
   "checks": {
     "all_five_completed_window_rank_jets_are_the_same_unit": "pass",
     "ambient_target_shear_changes_primitive_row_restriction": "pass",
@@ -16,6 +16,7 @@
     "completed_window_supported_mutations_have_zero_rank": "pass",
     "conditional_framed_m1_telescope_with_specialized_center_null": "pass",
     "coordinate_and_determinant_two_jet_pilots_are_classified": "pass",
+    "coupled_moving_projector_can_restore_eigenrow_factor": "pass",
     "cyclic_krylov_moments_reconstruct_nilpotent_string": "pass",
     "double_normal_cross_row_retains_source_normal_order": "pass",
     "double_normal_positive_source_order_is_load_bearing": "pass",
@@ -97,6 +98,7 @@
     "saturated_row_null_closure_has_flat_closed_quotient": "pass",
     "schober_moved_defect_has_product_normal_factor": "pass",
     "sector_path_transport_needs_stokes_optic_residual": "pass",
+    "separable_primitive_projector_retains_window_fixed_leakage": "pass",
     "simple_retained_character_forces_row_line": "pass",
     "sparse_kernel_profile_reconstructs_jordan_type": "pass",
     "split_vs_exact_k0_retention": "pass",

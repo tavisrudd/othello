@@ -2788,10 +2788,26 @@ def main():
     ]
     checks["row_visible_fixed_summand_obstructs_eigenrow_factor"] = "pass"
 
+    # A primitive projector on a separate tensor factor cannot remove that
+    # fixed leakage: any nonzero projected base row still pairs nontrivially
+    # with the rank-visible fixed window vector.
+    projected_base_row_value = Fraction(3)
+    fixed_window_rank = Fraction(1)
+    assert projected_base_row_value * fixed_window_rank != 0
+    checks["separable_primitive_projector_retains_window_fixed_leakage"] = "pass"
+
     # Restriction to the moving quotient removes precisely that obstruction.
     moving_quotient_defect = [[normal]]
     assert row_times([Fraction(1)], moving_quotient_defect) == [normal]
     checks["moving_quotient_restores_eigenrow_factor"] = "pass"
+
+    # A coupled projection onto the moving tensor line removes the fixed
+    # component and restores the same positive-normal eigenrow law.
+    coupled_moving_row = [projected_base_row_value]
+    assert row_times(coupled_moving_row, moving_quotient_defect) == [
+        normal * projected_base_row_value
+    ]
+    checks["coupled_moving_projector_can_restore_eigenrow_factor"] = "pass"
 
     # The specialized-schober Fourier-row coefficient is
     # 1-product(1-z_j eta^{-d_j}); its identity-minus coefficient is the

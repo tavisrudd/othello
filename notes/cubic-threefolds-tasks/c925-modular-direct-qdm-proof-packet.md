@@ -499,6 +499,13 @@ Crossed-edge provenance replay:
 
 The finite model currently has one hundred twenty-two checks.  It verifies only the
 advertised algebraic laws and countermodels, never an external QDM provider.
+The replayed script is 117334 bytes with SHA-256
+`2a51e21e3bcd5059f033d405a9ce5e6c11ad0f77e7b738bcf953e94e223986c3`;
+the canonical JSON is 8111 bytes with SHA-256
+`1d9bbc084f582f5a80d68736009fb32c64e7c0524c4ff9bf94bd397019750b58`.
+There is no second implementation of the two scalar projector regressions;
+they are transparent exact-rational assertions and are not sole evidence for
+any geometric or QDM provider.
 
 ## Next
 
