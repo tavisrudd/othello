@@ -6,15 +6,14 @@
 *Frobenius-equivariant pair extension and robust repair of eight-arcs*
 
 **Date:** 2026-08-21
-**Status:** OPEN — C142, C143, C148–C151, C331, C363 reported. The exact Q25 minimum is closed at the
-semantic level: the universal `≥ 32` bound, five-row attainment, the certified residual-orbit layer,
-the semantic lift of the lower bound, equality-orbit exhaustion, and its semantic lift are all
-kernel-checked. `32` is the exact semantic minimum and the five orbits are the complete extremal set
-up to normalization. The citation audit gating priority language is discharged and all four lane
-claims survive. C938 closed negatively without changing the theorem package: the visible compact
-invariants do not prove the Q25 coupling without residual classification. C937 completed the
-layered-exposition and manuscript closeout pass with a warning-free 14-page PDF. Release bookkeeping
-C318 is next, followed by C319; the exchange graph C152 remains optional unless adopted.
+**Status:** OPEN — C142, C143, C148–C151, C318–C319, C331, C363, C937–C938 reported. The exact Q25
+minimum is closed mathematically.  Its normalized finite layer is pinned to the already sealed
+Mathlib-only `finitegeom-q25-certificates` package; the manuscript owns the two projective
+normalizations and semantic transport.  The package's literal per-row link surface is disclosed,
+and no canonicalizer rebuild is planned.  C938 found no conceptual replacement for that residual
+classification.  C937 completed the layered exposition, and C318/C319 remapped the formal boundary
+and materialized the verified standalone source repository.  The exchange graph C152 remains
+optional unless adopted.
 **Tasks:** C142–C143, C148–C152, C318–C319, C331, C363, C937–C938
 
 Companion discovery log:
@@ -107,7 +106,7 @@ computed but not yet promoted through the complete semantic theorem.
 | ID | Surviving finding | Status | Active use |
 |---|---|---|---|
 | D-AOR2 | Orbit replacement gives a token-jumping-style graph on embedded invariant ten-arcs, fibered by the exact fixed-point subset. Dye's shared-triangle graph is a predecessor with different adjacency. | local profile inputs checked; graph theorem open | C152: prove neighbor injectivity and the degree identity before any connectivity claim |
-| D-AOR4 | The 469,600 exceptional-profile arcs form 1,189 classes under the order-400 ordered-fixed-pair group; the 1,600 computed minimizers form five classes. | representative equalities, orbit sizes, disjointness, union 1,600, and both normalized-row and semantic exhaustion `LEAN-CHECKED` | closed; supports the C318 manifest rows |
+| D-AOR4 | The 469,600 exceptional-profile arcs form 1,189 classes under the order-400 ordered-fixed-pair group; the 1,600 computed minimizers form five classes. | representative equalities, orbit sizes, disjointness, union 1,600, and normalized-row exhaustion are sealed in the Q25 certificate package; semantic transport is the manuscript boundary | closed; recorded in the trust manifest |
 | D-AOR5 | For an invariant old set, legality of a conjugate candidate pair reduces to freshness, one representative avoiding old secants, and its fixed carrier avoiding old points. | `LEAN-CHECKED; LIT-OPEN` | C151 certificate compression and later exposition assessment |
 | D-AOR6 | The residual order-400 group is two independent 20-element base-field affine normalizers; its executable action preserves legal-orbit cardinality. | `LEAN-CHECKED` | C151 class transport |
 | D-AOR7 | Determinant obstructions factor through 651 canonical dual-line masks; the 310 candidate carriers lie ten apiece on the 31 conjugation-fixed lines. | mask table and Boolean composition `LEAN-CHECKED` | compact C151 residual certificates |
@@ -120,13 +119,11 @@ statements are in the reports above and their development history is in the comp
 
 | Task | State | Current deliverable |
 |---|---|---|
-| C318 | in progress; the lane's current step | Manifest rows for the surviving residual layer and data trees, the trusted-surface statement, and reconciliation of C151 report references to the mask-spectrum payload removed by `6da475113` |
-| C319 | queued; C151 cost measured at 1:57:09 serial | Decide verified canonicalizer versus demotion to reduction-plus-computation |
 | C152 | queued | Define the orbit-replacement graph, prove the exact local degree identity, then run a component census before considering connectivity |
 
-Reported: C142, C143, C148, C149, C150, C151, C331, C937, and C938; use the linked reports rather
-than recreating their plans here. C937's manuscript closeout is recorded in
-[its report](../2026-08-21-c937-equivariant-paper-layered-revision.md).
+Reported: C142, C143, C148, C149, C150, C151, C318, C319, C331, C937, and C938; use the linked
+reports rather than recreating their plans here.  The Q25 remap and standalone setup are recorded
+in [the combined C318/C319 report](../2026-08-21-c318-c319-q25-remap-paper-export.md).
 
 ## Minimum-classification layer — state a cold session needs
 
@@ -182,14 +179,15 @@ what it does not certify.
 - `notes/2026-07-18-c151-trust-doc-diff-fable-review.md` is untracked and, despite its `c151`
   filename, reviews the `TRUST.md` rename across `lean/TRUST.md`, `lean/README.md`, and queue rows
   C318–C325. It is foreign to this lane.
-- C318 (manifest rows for the residual layer) and C319 (canonicalizer-or-demote decision, whose
-  gating cost measurement C151 supplied) are queued alongside this work.
+- C318 and C319 are reported: the manifest names the sealed package boundary, and the literal-link
+  certificate is retained with its bespoke review surface disclosed rather than rebuilt around a
+  canonicalizer.
 
-The checked valid-row cover is split into 1,036 modules under
-`lean/RelativeConicArcs/Q25ResidualTransportData/`, with at most eight valid eight-point
+In the sealed package, the checked valid-row cover is split into 1,036 modules under
+`TavisRuddFiniteGeom/Certificates/Q25/ResidualTransportData/`, with at most eight valid eight-point
 permutation certificates per module. The handwritten prototype remains split under
-`lean/RelativeConicArcs/Q25ResidualCoverPrototype/`, and the generic bridge is
-`lean/RelativeConicArcs/Q25ResidualCoverBridge.lean`. Preserve these module boundaries because a
+the package's Q25 source tree, and the generic bridge is
+`TavisRuddFiniteGeom/Certificates/Q25/ResidualCoverBridge.lean`. Preserve these module boundaries because a
 combined elaboration exceeded the safe memory envelope.
 
 The checked mixed-row dispatcher is split into 1,071 leaves under
@@ -247,5 +245,6 @@ The `paper-frob-eq` integrator remains the sole writer of
 `papers/equivariant-robust-completion/` and its release boundary. C270/C287 may inventory metadata
 and prospective shared-Lean targets read-only. The canonical manuscript adopts the exact semantic
 minimum `32`, the five-orbit equality classification up to normalization, and the parameterized
-robust-repair results. C318 and C319 remain release bookkeeping gates. C152 becomes a release gate
-only if its exchange-graph claims are later adopted.
+robust-repair results.  C318 and C319 are closed; the standalone source repository is materialized
+and the Q25 package pin is explicit. C152 becomes a release gate only if its exchange-graph claims
+are later adopted.
