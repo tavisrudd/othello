@@ -504,13 +504,17 @@ advertised algebraic laws and countermodels, never an external QDM provider.
 
 1. Test the global common-source route first.  On one smooth projective
    cobordism, construct a finite rational marked Gamma/monodromy core
-   containing the chosen primitive-sixth label.  For each extreme quotient,
-   prove that the Rees-homogenized localized quantum-Kirwan map is a
-   selected-loop intertwiner, is surjective, and pulls the endpoint rank row
-   back to the common row up to a unit.  Choose one exponent above the finite
-   Fitting thresholds.  `Comparison.PrimaryDetectionBaseChange` and
-   `Comparison.ParallelPrimaryQuotients` then give the endpoint contradiction
-   directly, uniformly in \(m\), without adjacent-overlap coherence.
+   containing a detected primitive-sixth witness.  For the rational target it
+   is enough to construct one selected-loop intertwiner from that core whose
+   pullback of the endpoint rank row is the common row up to a unit.  No target
+   surjectivity or primary coverage is used:
+   `Comparison.MarkedWitnessObstruction` gives the contradiction because the
+   target primary block is empty.  The source side still needs either a direct
+   construction of the detected core witness or one primary-covering lift from
+   the cubic-product endpoint.  General quantum-Kirwan surjectivity is stated
+   as a conjecture in Woodward's Remark 8.10 and is not an available blanket
+   provider.  This one-sided formulation is uniform in \(m\) and avoids
+   adjacent-overlap coherence.
    If this direct endpoint provider fails, return to the first genuine
    \((1,1)\) overlap and use Module 59's result that all
    sixteen completed-pilot coordinate-wall adjacencies have common

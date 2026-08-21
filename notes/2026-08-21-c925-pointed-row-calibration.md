@@ -561,3 +561,26 @@ adjacent chambers, an exceptional direct-sum splitting, or a full Stokes
 matrix.  What is not yet supplied is descent of the actual marked
 Gamma/monodromy source to the rational core and realization of the localized
 quantum-Kirwan maps with these four properties.
+
+## One-sided target-empty compression
+
+The rational endpoint does not require a quotient theorem.  Suppose the
+common marked core already detects the chosen generalized-primary block and
+the target has no such block.  Any comparison from a faithfully flat scalar
+extension of the core to the target which intertwines the selected loop and
+satisfies the unit-scaled row square sends a detected core witness to a
+detected target witness.  It therefore gives an immediate contradiction;
+surjectivity and primary coverage never enter.  This is proved in
+`MarkedWitnessObstruction.endpoint_detects_of_core_detects`.
+
+Accordingly, the source theorem has two asymmetric parts:
+
+1. put one detected cubic-product witness into the global marked core (a
+   single primary lift suffices); and
+2. construct only a marked selected-loop map from that core to the rational
+   endpoint.
+
+This avoids importing general quantum-Kirwan surjectivity, which is
+conjectural in the cited generality.  It does not remove the actual
+Gamma-row-to-formal-monodromy identification: the loop and row must already
+live on the same marked core before the Lean consumer applies.

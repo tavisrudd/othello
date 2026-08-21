@@ -211,6 +211,12 @@ give the required lift.  The constructor
 `ParallelPrimaryQuotients.Branch.ofSurjectiveOfFitting` records this sharper
 route.
 
+`Comparison.MarkedWitnessObstruction` is the one-sided specialization used
+when the target row has no selected-primary support. A detected primary witness in
+the common marked core maps to a detected endpoint witness under only the
+selected-loop square and a scalar row square. It assumes neither
+surjectivity nor primary coverage.
+
 `Comparison.BasedCoefficientMap` isolates the first requirement on such
 completed germs. A map is based only when its residue square commutes. Hence a
 coordinate vanishing at the source point cannot map to a target coordinate

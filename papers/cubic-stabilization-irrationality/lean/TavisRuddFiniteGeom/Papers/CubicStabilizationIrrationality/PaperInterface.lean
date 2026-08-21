@@ -20,6 +20,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.Par
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.PrimaryDetectionBaseChange
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.ParallelScalarExtensions
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.ParallelPrimaryQuotients
+import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.MarkedWitnessObstruction
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.MarkedRepresentationEquivalence
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.MarkedMonodromyDiagram
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.MarkedLocalSystem
@@ -152,6 +153,10 @@ has its Fitting decomposition on source and target, ordinary surjectivity does
 imply primary coverage;
 `ParallelPrimaryQuotients.Branch.ofSurjectiveOfFitting` constructs the branch
 from exactly those data.
+`MarkedWitnessObstruction.Data` is smaller still when only the
+target is known to have empty selected primary support: its contradiction
+uses one detected core witness, one selected-loop intertwiner, and one
+scalar row square. No target surjectivity or primary lift is present.
 At the coefficient level, a based ring map must preserve the chosen residue
 square. It therefore cannot send a coordinate vanishing at the source point
 to a target coordinate plus a term of nonzero residue. An element with unit
