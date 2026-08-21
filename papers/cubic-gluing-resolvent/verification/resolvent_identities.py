@@ -10,7 +10,7 @@ import sympy as sp
 
 
 def main() -> str:
-    t, T, u, y, v = sp.symbols("t T u y v")
+    t, T, u, x, y, v = sp.symbols("t T u x y v")
 
     # van Geemen--Yamauchi's Prym chart, with u^2=5t^2.
     a = -32 * (u - 3) ** 4 / (9 * (u + 1) ** 3 * (u + 3) ** 2)
@@ -53,12 +53,14 @@ def main() -> str:
     assert sp.factor(c4**3 / delta - J) == 0
 
     # The generalized two-division cubic and its discriminant.
-    f2 = 4 * y**3 + a1**2 * y**2 + 2 * a1 * a3 * y + a3**2
-    disc2 = sp.factor(sp.discriminant(f2, y))
+    f2 = 4 * x**3 + a1**2 * x**2 + 2 * a1 * a3 * x + a3**2
+    disc2 = sp.factor(sp.discriminant(f2, x))
     assert disc2 == 16 * T * (T + 27) ** 8
 
     # Cubic root quotient and its rational Galois closure.
     T_of_y = -(4 * y + 3) * (y + 3) ** 2 / (y + 1) ** 2
+    x_of_y = -4 * y**4 / (y + 1) ** 2
+    assert sp.factor(f2.subs({T: T_of_y, x: x_of_y})) == 0
     y_of_v = -(v**2 + 3) / 4
     T_of_v = v**2 * (9 - v**2) ** 2 / (1 - v**2) ** 2
     r_of_v = v * (9 - v**2) / (1 - v**2)
@@ -80,6 +82,7 @@ def main() -> str:
         "Tate Delta = T(T+27)^8",
         "disc(two-division cubic) = 16T(T+27)^8",
         "root quotient: T=-(4y+3)(y+3)^2/(y+1)^2",
+        "chosen root: x=-4y^4/(y+1)^2 satisfies the two-division cubic",
         "full split cover: y=-(v^2+3)/4, r=v(9-v^2)/(1-v^2), r^2=T",
         "P1(F4)=P1(F2) disjoint {w,w^2}; the complementary action is sign",
         "PASS",

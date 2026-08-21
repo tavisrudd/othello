@@ -163,7 +163,21 @@ in the paper and its replay bundle.
 **TT correction settled.**  The signed compact parameter line and the sign
 modular curve are isomorphic as curves, but the smooth cubic base is a smaller
 open and its family does not extend across the two modular-interior cubic
-degenerations.  The paper also retains the two-choice deck ambiguity.
+degenerations.  The paper also retains the two-choice deck ambiguity.  A fresh
+post-close TT pass found one genuine proof seam: the printed `X_0(6)` rational
+map had not been explicitly tied to a root of the printed two-division cubic.
+The paper and exact checker now substitute
+
+```text
+T = -(4y+3)(y+3)^2/(y+1)^2,      x = -4y^4/(y+1)^2
+```
+
+and verify the cubic vanishes.  The same pass prints the normalized Cartesian
+resolvent square, proves the root and split cusp passports
+`(1,2,3,6)` and `(2,2,2,6,6,6)`, and notes that the quadratic twist preserves
+the cyclic order-three subgroup even when it does not preserve a chosen
+generator.  These repairs make the `Gamma_0(3)` rather than `Gamma_1(3)` level
+claim and every arrow in the square locally auditable.
 
 **Mysteries still open.**
 

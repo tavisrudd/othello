@@ -4,7 +4,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage{microtype}
-\usepackage{amsmath,amssymb,amsthm,mathtools,mathrsfs}
+\usepackage{amsmath,amssymb,amsthm,amscd,mathtools,mathrsfs}
 \usepackage{booktabs}
 \usepackage[hidelinks]{hyperref}
 
@@ -272,8 +272,10 @@ The explicit change to \eqref{eq:tate} gives the displayed
 twist; alternatively, comparing their \(c_4,c_6\) invariants gives the same
 square class.  In characteristic different from two, a quadratic twist
 changes the Galois representation by a scalar \(\{\pm1\}\); that scalar is
-trivial on two-torsion.  Hence either comparison identifies the required
-two-division local system.
+trivial on two-torsion and preserves every cyclic order-three subgroup.
+Hence either comparison identifies the required two-division local system,
+and the cyclic level-three marking descends even when a chosen generator does
+not.
 \end{proof}
 
 The proof also explains the role of earlier results.  Roulleau exhibits the
@@ -304,6 +306,14 @@ generate \(\operatorname{SL}_2(\F_2)\).  Define
  \Gamma(2,3)=\Gamma(2)\cap\Gamma_0(3).
 \]
 The first has index two and the second index six in \(\Gamma_0(3)\).
+The resulting normalized Cartesian square is
+\begin{equation}\label{eq:resolvent-square}
+\begin{CD}
+ X(\Gamma(2,3)) @>{2}>> X_0(6)\\
+ @V{3}VV                    @VV{3}V\\
+ X_{\mathrm{sgn}}(6) @>{2}>> X_0(3).
+\end{CD}
+\end{equation}
 
 A nonzero point of \(E[2]\) is the same as a cyclic subgroup of order two.
 Together with the given cyclic subgroup of order three, it determines a
@@ -322,12 +332,16 @@ sign cover, and \(v\) on the common splitting cover, one choice of equations
 is
 \begin{align}
  T&=-\frac{(4y+3)(y+3)^2}{(y+1)^2},\label{eq:root}\\
+ x&=-\frac{4y^4}{(y+1)^2},\label{eq:chosen-root}\\
  r^2&=T,\label{eq:sign}\\
  y&=-\frac{v^2+3}{4},&
  T&=\frac{v^2(9-v^2)^2}{(1-v^2)^2},&
  r&=\frac{v(9-v^2)}{1-v^2}.\label{eq:split}
 \end{align}
-The last line directly verifies both preceding equations.  It realizes the
+Substitution of \eqref{eq:root} and \eqref{eq:chosen-root} in the
+two-division cubic below gives zero, so \(y\) really selects a nonzero
+two-torsion point.  The last line directly verifies the root and sign cover
+equations.  It realizes the
 classical fact that adjoining a root of an \(S_3\)-cubic and adjoining the
 square root of its discriminant generate its splitting field.
 
@@ -386,6 +400,16 @@ genus formula now reads
 \]
 This proves Theorem~\ref{thm:main}(4), including the absence of any further
 coarse branching.
+
+The same inertia calculation completes the passport of
+\eqref{eq:resolvent-square}.  On the root cover, a transposition has orbits of
+sizes one and two, giving cusp widths \(1,2,3,6\).  On the regular split
+cover it has three orbits of size two, giving widths
+\(2,2,2,6,6,6\).  The root and split subgroups contain no elliptic torsion.
+Their indices in \(\operatorname{PSL}_2(\Z)\) are twelve and twenty-four, so
+the genus formula gives genus zero in both cases.  Thus every curve in the
+resolvent square is rational, now independently of the displayed
+parametrizations.
 
 The eta Hauptmodul
 \[
