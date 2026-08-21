@@ -46,6 +46,18 @@ def main() -> str:
     ]
     p_poly = sp.Poly(pencil_p, *X)
     q_poly = sp.Poly(pencil_q, *X)
+    invariant_support = {
+        sp.Poly(monomial, *X).monoms()[0] for monomial in monomials
+    }
+    reduced_supports = []
+    for polynomial in (p_poly, q_poly):
+        reduced_supports.append({
+            exponent
+            for exponent, coefficient in polynomial.terms()
+            if reduce_cyclotomic(coefficient) != 0
+        })
+    assert all(support <= invariant_support for support in reduced_supports)
+    assert reduced_supports[0] | reduced_supports[1] == invariant_support
     p_coefficients = [
         reduce_cyclotomic(p_poly.coeff_monomial(monomial))
         for monomial in monomials

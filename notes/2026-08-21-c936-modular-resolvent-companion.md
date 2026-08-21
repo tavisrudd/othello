@@ -524,8 +524,8 @@ gaps.  The revision closes all three.
 
 The updated evidence files are deterministic:
 
-- `verification/resolvent_identities.py`: 9,058 bytes, SHA-256
-  `77222f05c97d9abffeb6637f2cec87f6c03a8bb3a67a0a595c28012c3dc90b5f`;
+- `verification/resolvent_identities.py`: 9,552 bytes, SHA-256
+  `ac3f6f808136a9e7ad39a4d936597b97e86bf2f9567a36469fc43dc4f4f3d995`;
 - `verification/resolvent-identities.txt`: 829 bytes, SHA-256
   `b92b7e7f0c3931abba263f474f6df4ebeb0027e5868e8ec6b20a9cdd987fad5c`.
 
@@ -534,3 +534,10 @@ calculation is independently recoverable from the displayed seven
 coefficients in the paper, and the degree-one step is independently checked
 by the two polarization identities and their degree comparison; neither
 claim rests only on the symbolic execution.
+
+The resumed cold repair audit returns **Accept** at confidence `0.94`, with
+every fatal, major, and numbered minor finding closed.  Its remaining abstract
+wording suggestion and optional full-support assertion were then implemented:
+the abstract now says “five-sheet packet of possible principal gluing
+kernels,” and the Fourier checker proves that no cubic monomial outside the
+seven displayed invariant monomials occurs.

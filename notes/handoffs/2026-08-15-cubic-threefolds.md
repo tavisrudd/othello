@@ -37,7 +37,7 @@ promoted mathematical assertion maps to a kernel-checked declaration.
 
 ## Current status
 
-- **C936 — cold-referee repairs implemented; repair audit pending.**  The warning-free eleven-page paper
+- **C936 — accepted after cold-referee repair audit.**  The warning-free eleven-page paper
   develops the signed nonstandard \(A_5\)-cubic parameter as the
   sign/discriminant resolvent of the actual
   relative norm-axis elliptic two-division cover.  It identifies
@@ -52,8 +52,10 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   forces the comparison isogeny to have degree one; an exact Fourier transform
   proves the coordinate and twist bridges; a separate programme-input
   proposition distinguishes candidates from the actual kernel; and the
-  chordal fibre is displayed as a Hankel catalecticant.  Integrated `make
-  check` passes; an independent repair audit is pending.  A post-close EJ pass further proves
+  chordal fibre is displayed as a Hankel catalecticant.  The independent
+  repair audit returns Accept at confidence 0.94 with no fatal or major
+  defect; its final minor wording and optional certificate points are closed.
+  Integrated `make check` passes.  A post-close EJ pass further proves
   that golden orientation turns the rational triple into the cyclic cubic
   splitting cover and gives
   \(t=3(\eta(3\tau)/\eta(\tau))^6\).  Exact algebra and an independent subgroup

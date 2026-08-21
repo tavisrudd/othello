@@ -4,11 +4,12 @@
 
 **Date:** 2026-08-21
 
-**Status:** cold-referee repairs implemented 2026-08-21; independent repair
-audit pending.  The relative degree-one polarized comparison, exact Fourier
+**Status:** accepted by the independent repair audit 2026-08-21 with confidence
+0.94.  The relative degree-one polarized comparison, exact Fourier
 and twist bridges, candidate-packet/actual-kernel distinction, chordal
 catalecticant identification, and boundary equivariance argument are now
-proved; the integrated `make check` gate passes.  Referee report
+proved; the integrated `make check` gate passes.  The audit's one minor wording
+item and optional full-support certificate assertion are also closed.  Referee report
 `../2026-08-21-c936-van-geemen-cold-referee.md`; project report
 `../2026-08-21-c936-modular-resolvent-companion.md`; strategy memo
 `../2026-08-21-c936-resolvent-rigidity-package-memo.md`.

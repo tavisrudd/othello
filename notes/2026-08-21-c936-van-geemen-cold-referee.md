@@ -202,3 +202,37 @@ The prose currently oversteps the first trust boundary and the special-fibre par
 ## Bottom line
 
 The manuscript has a publishable modular-resolvent calculation inside it, and its best sections are both exact and conceptually clean.  Under the van Geemen lens, however, the key distinction is between an elliptic isogeny factor and the actual polarized norm axis.  The paper announces that distinction correctly but has not yet proved it.  Closing F1 is the acceptance gate; F2 and F3 are the remaining major repairs, and F4 is a short but worthwhile completion of the boundary corollary.
+
+## Repair audit of the revised manuscript
+
+I re-read the revised eleven-page PDF, the complete revised TeX source, and the complete tracked verification bundle, and rechecked the load-bearing uses of van Geemen--Yamauchi, published Allcock--Carlson--Toledo, Casalaina-Martin--Grushevsky--Hulek--Laza, and Paulhus.  The PDF contains the revised statements and proofs.  The SHA-256 manifest for all six verification files passes.
+
+### Disposition of the original findings
+
+| finding | status | repair audit |
+|---|---|---|
+| F1 actual-axis comparison | **closed** | The revised proof constructs the Prym pullback map \(\phi:P_0\to J(X)\).  For the two étale double covers, restriction of the Jacobian theta polarization is twice the principal Prym polarization; the degree-five pullback identity therefore gives \(\phi^*\Xi=5\Xi_0\).  Van Geemen--Yamauchi Proposition 3.2 identifies its image with the connected order-five fixed elliptic factor, and the augmentation representation identifies that line with the dihedral norm axis.  The programme's diagonal polarization entry gives \(i^*\Xi=5\lambda_{\mathcal E}\).  Cancelling five in the torsion-free group of symmetric homomorphisms gives \(\bar\phi^*\lambda_{\mathcal E}=\lambda_{P_0}\), so \(\deg\bar\phi=1\).  The generic isomorphism and inverse extend across the smooth auxiliary exceptional parameters by the Néron mapping property, exactly addressing the specialization issue in VGY Proposition 3.2. |
+| F1 coordinate, twist, and level-three marking | **closed** | The Fourier transform is displayed, including \(c^2=5\), the diagonal normalization, and the equality of the signed parameters \(u=ct\).  The revised exact certificate checks the Fourier coefficients, \(u^2=5t^2\), and the VGY/Tate twist square class \((T+27)(T-729/5)\).  The \(c_4,c_6\) ratio is displayed in the proof.  Twisting tensors the torsion representation by a scalar character: it is trivial on \(E[2]\), and on \(E[3]\) it preserves cyclic lines although it may reverse a generator.  This is precisely the level-three datum needed for \(X_0(3)\), not a stronger \(X_1(3)\) marking. |
+| F2 programme input | **closed** | Proposition 1.1 now states the connected marked base, the relative intermediate Jacobian and elliptic scheme, the \(A_5\)-equivariant isogeny, its \(6I-J\) polarization, the five-sheet candidate packet, and separately the actual kernel section selecting a golden sheet.  The proof cites the two exact source results.  Candidate packet and actual kernel are no longer conflated in the mathematical argument. |
+| F3 chordal fibre | **closed** | At \(ct_0=-3\) the revised paper writes the cubic as four times the Hankel catalecticant.  Solving its gradient equations identifies the **reduced** singular locus with the rank-one Hankel locus, the rational normal quartic, and the determinant cubic with its secant variety.  Reducedness of the full Jacobian singular *scheme* is not required here: ACT's normal restriction, the divisor \(Q|_C\), and the hyperelliptic branch construction use the underlying reduced singular curve \(C\).  The paper now writes \(C=\operatorname{Sing}(X_{t_0})_{\mathrm{red}}\), which is the correct object.  The orbit/rank certificate then proves that \(Q|_C\) cuts the reduced twelve-point orbit, and published ACT Lemma 2.5 supplies transversality. |
+| F4 boundary reconstruction | **closed** | The proof now invokes ACT's equivariant normal-space calculation, observes that a fixed projective line is represented by a semi-invariant section, uses perfection of \(A_5\) to kill its character, and records the icosahedral orbit sizes \(12,20,30,60\).  The uniqueness conclusion follows. |
+| F5 citation precision | **closed** | The Weierstrass coefficients are now attributed to the proof of VGY Proposition 3.1, while Proposition 3.2 is used for the isogeny and specialization statement. |
+| F6 stack/coarse terminology | **closed** | The text now says “the modular orbifold attached to \(\Gamma_0(3)\)” and continues to state coarse ramification separately.  No stack/coarse or connected/split conflation remains. |
+| F7 sign certificate | **closed** | The revised script checks parity separately on the rational three-set and exotic two-set for both generators. |
+
+### Red-team of the new material
+
+I found no new fatal or major defect.
+
+Two small points remain, neither affecting a theorem.
+
+1. **Minor wording.**  The abstract still says that the pencil “carries five principal gluing kernels.”  Proposition 1.1 now makes the intended meaning unambiguous: this is a five-sheet local system of candidate stable halves, while the actual isogeny kernel is one section.  “Carries a five-sheet packet of principal gluing kernels” would be maximally precise.
+2. **Optional certificate strengthening.**  The Fourier certificate checks the seven invariant monomial coefficients but does not explicitly assert that every other cubic monomial has zero coefficient.  The displayed equality is independently justified by the \(C_5\)-invariant seven-dimensional support and is mathematically sound.  For a perfectly literal certificate boundary, the script could also compare the full expanded polynomial after cyclotomic reduction.
+
+The Néron-extension paragraph is concise but sufficient: the marked base is a regular curve, both objects are elliptic schemes after taking the displayed smooth VGY model, and uniqueness extends the generic map and its inverse.  No separate assertion about a singular auxiliary curve being an abelian scheme is consumed.
+
+### Final verdict
+
+**Accept.**  All original fatal and major findings are closed, as are F4--F7.  The two residual points above are minor/optional and do not justify another mathematical revision cycle.  The theorem/proof dependency chain is now complete at the level claimed, the computational evidence stays within its stated trust boundary, and the universal/oriented, stack/coarse, and connected/split distinctions remain correct.
+
+**Confidence:** 0.94.
