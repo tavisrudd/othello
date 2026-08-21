@@ -510,6 +510,15 @@ operadic height would additionally need a theorem that composites of lower
 arity cannot create the source primitive class; this is the same operation
 control isolated by the conditional top-Jordan-string route.
 
+Module 63 gives the exact repair suggested by the elliptic two-division
+resolvent: distinguish the center's internal $C_3$ from the external
+$q^{1/3}$ Kummer action.  Under a product action, an arbitrary internal packet
+cannot erase the external fixed-point mark.  Iritani's codimension-two formal
+projection passes the local ramification test ($r=2$ gives $s=1$ and one
+center branch), but the occurrence reindexings must still have zero external
+Kummer weight and preserve the primitive spectral idempotents.  See
+`2026-08-21-c925-two-layer-resolvent-packet.md`.
+
 ## 62.7 Verification boundary
 
 The reviewer entry point is
@@ -561,6 +570,10 @@ The main checked declarations are:
 - `Comparison.DescentPacket.fixed_of_stable_singleton`;
 - `Comparison.DescentPacket.unaryPacketEquivariantEquiv`;
 - `Comparison.DescentPacket.regular_not_equivariantly_equivalent_fixedThree`;
+- `Comparison.TwoLayerDescentPacket.externalTrivialPacket_isExternallyFixed`;
+- `Comparison.TwoLayerDescentPacket.externalRegularPacket_not_externallyFixed`;
+- `Comparison.TwoLayerDescentPacket.externalRegular_not_equivariantlyEquivalent_externalTrivial`;
+- `Comparison.TwoLayerDescentPacket.externalRegularSum_not_equivariantlyEquivalent_externalTrivial`;
 - `Comparison.HorizontalReader.Reader.modelVariation_eq_zero`;
 - `Comparison.HorizontalReader.Reader.actualVariation_eq_zero`;
 - `Comparison.TraitHorizontalReader.Reader.actualVariation_eq_zero`;
@@ -623,7 +636,7 @@ defect formula.  No separate packet-eigenvalue calculation is consumed.
 | Does the lawful coefficient trait produce the model projected-variation reading? | split algebraic existence settled; exact actual-receiver provider isolated | Proposition 59.3 and `SplitMovingTarget.coordinates` construct an involutive pilot model; the non-involutive alternative is `FixedReceiverCertificate`, whose load-bearing source theorem is `T_j v_i=j_M D+j_C B` plus the three row restrictions |
 | Does one Fourier--Laplace/QDM comparison intertwine the two selected monodromies and the rank row? | open | construct the occurrence-indexed scaled two-loop semilinear comparison, or the stronger loop representations, loop assignment, global horizontal morphism, and row-scaled gauges satisfying `beta = c specialize(alpha)` |
 | Does the trait comparison span the actual resonant incoming image? | source-side no-quotient input exists; actual-reader adapter open | Corollary 13.2's proof supplies no boundary quotient after specialization, and Lean turns surjective can into coverage; identify the transverse schober can/variation quiver, signs, and packet with the actual QDM occurrence |
-| Does a unary codimension-two correction have fixed \(\mu_3\)-descent? | settled: no formal implication | a unary outer packet preserves a nontrivial inner center action; fixedness requires a common equivariant occurrence reader |
+| Does a unary codimension-two correction have fixed \(\mu_3\)-descent? | no for one unnamed action; separated conditionally by Module 63 | a unary outer packet preserves its internal center action, but an independent external Kummer subgroup still fixes it; construct the product descent action and comparison-stable spectral idempotents |
 | Is a tensor/image base-change isomorphism necessary? | settled: no for vanishing transport | `SemilinearVariation.projectedVariation_eq_zero_of_normalFactor` uses only semilinear naturality and image-span coverage |
 | Are independent can/variation packet maps still needed? | settled: no over one fixed field | `ProjectedVariation.projectedVariation_natural` derives them from the marked horizontal comparison (F_{\mathrm{horizontal}}) |
 | Is bijectivity of (F_{\mathrm{horizontal}}) required? | settled: no | the fixed-field forward route uses image-map surjectivity; the trait route uses span coverage; reverse transport needs neither surjectivity nor injectivity |

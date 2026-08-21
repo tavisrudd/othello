@@ -72,6 +72,8 @@ exact \(m=2\) and all-\(m\) transport gates.
   notes/2026-08-20-c925-crossed-edge-provenance-lens.md
 - adapted diagonal coefficient trait:
   notes/2026-08-20-c925-diagonal-coefficient-trait.md
+- two-layer elliptic-resolvent/Kummer descent packet:
+  notes/2026-08-21-c925-two-layer-resolvent-packet.md
 
 The packet index owns the module-to-file map.  Do not append another large
 module to this card or to the index; add one focused companion file and one
@@ -348,6 +350,20 @@ index row.
   coordinate realization, actual marked comparison, and any equivariant
   blowup splitting remain explicit gates.  Report:
   `../2026-08-20-c925-horizontal-fixed-phase-reader.md`.
+  Module 63 separates the internal $C_3$-resolvent of elliptic two-division
+  from the external $q^{1/3}$ Kummer action.  With a product action, a regular
+  external coordinate cannot be equivariantly identified with any packet on
+  which the external factor acts trivially, regardless of the center's
+  internal action; the same remains true after adjoining externally fixed
+  corrections to the source ledger.  The exact new source gate is individual
+  descent of the target and codimension-two exceptional spectral idempotents
+  before adjoining $q^{1/3}$, together with an oriented equivariant
+  stable-ledger isomorphism for the occurrence comparisons.  Iritani's equation (5.11)
+  and Theorem 5.18 close the local formal branch count: for codimension two,
+  $s=1$ and there is one center summand, so its own Fourier variable needs no
+  root extension.  Zero external Kummer weight under the path reindexings and
+  idempotent preservation remain open.  Report:
+  `../2026-08-21-c925-two-layer-resolvent-packet.md`.
 
 ## Open geometric providers
 
@@ -400,6 +416,18 @@ Standard Orlov semiorthogonality naturally targets the second orientation.
 
 The internal center-square condition and the ambient--exceptional boundary
 are independent gates.
+
+### Two-layer Kummer descent
+
+Construct the marked finite-etale spectral-block scheme before the cube-root
+extension.  Prove that the projective-bundle source is regular for the external
+$q^{1/3}$ inertia, while every target and codimension-two correction primitive
+idempotent descends individually from the base Laurent field.  Construct the
+oriented equivariant stable-ledger isomorphism.  The local $r=2$ Iritani projection already has root
+denominator $s=1$; the missing step is compatibility with the distinct
+external valuation under every occurrence reindexing.  Internal cubic-center
+monodromy may be arbitrary once it is separated from the external inertia.  A linear equivariant comparison is
+not enough: the comparison must preserve primitive spectral idempotents.
 
 ## Validation
 
@@ -491,6 +519,13 @@ advertised algebraic laws and countermodels, never an external QDM provider.
    two-wall Stokes matrix.  Yu--Zhang supplies spectral/vanishing-cycle block
    comparison only after an algebraic exponential-type occurrence is built;
    it does not supply the Gamma row or exact image reader.
+   As a bounded alternative, test Module 63's external descent condition on
+   the unsplit formal comparison: the $X\times\mathbf P^2$ branches should be
+   regular for $q^{1/3}$-inertia, while a codimension-two exceptional block
+   should be defined over the base Laurent field.  If the actual comparison
+   preserves these spectral idempotents, the two-layer marker closes $m=2$
+   without a Gamma row.  If it only gives a linear representation or permits
+   diagonal collapse with an internal cubic resolvent, abandon this detour.
 2. As the trait alternative, construct the Module 53 common canonical trait
    receiver for every
    consecutive-discrepant overlap.  Put both incident one-arrow receivers in

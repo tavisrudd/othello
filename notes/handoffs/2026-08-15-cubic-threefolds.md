@@ -489,7 +489,28 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   regular orbit is not three fixed points, but also isolates the missing
   hypothesis: one exceptional copy is fixed only if that singleton summand is
   stable under a common descent action.  Codimension alone supplies no such
-  equivariance.
+  equivariance.  Module 63 refines this using the elliptic two-division
+  resolvent.  The cubic center's $C_3$ is an internal action; the
+  projective-bundle cube-root deck group is an external action.  If the two
+  are carried by a product descent datum, Lean proves that a regular external
+  source packet together with externally fixed corrections cannot equal a
+  wholly external-trivial target ledger, irrespective of its internal action.
+  The $q$-adic test makes the desired separation
+  plausible: internal data pulled from the cubic base are unramified, while
+  $q^{1/3}$ is totally ramified.  The remaining theorem is geometric, not
+  cardinal: construct the unsplit marked spectral-block scheme and prove that
+  every target and codimension-two correction primitive idempotent descend
+  individually before adjoining $q^{1/3}$, and construct the oriented
+  equivariant stable-ledger isomorphism coherently through the factorization
+  path.  Linear
+  equivariance alone is insufficient because the regular representation has a
+  trivial summand.  Iritani's equation (5.11) and Theorem 5.18 pass the local
+  codimension-two branch test: $r=2$ gives $s=1$ and one center summand, so
+  no root is introduced in that occurrence's own exceptional Fourier
+  variable.  What remains is zero weight for the separate external Kummer
+  valuation under lawful reindexing and preservation of the spectral
+  idempotent.  Report:
+  `../2026-08-21-c925-two-layer-resolvent-packet.md`.
   Shifted tensor stability and the extremal multinomial source law are
   proved, but the occurrence-indexed exact QDM sequence, actual carrier
   exponent, and boundary vanishing remain open.  The packet is split into

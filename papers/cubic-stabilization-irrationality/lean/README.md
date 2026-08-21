@@ -59,6 +59,14 @@ distinction between one regular orbit and three fixed points. It also makes the
 load-bearing qualification explicit: a one-element correction is fixed only
 when its singleton is stable under the supplied descent action. A unary outer
 constructor otherwise retains the full action on its inner packet.
+The two-layer descent module isolates the additional hypothesis that repairs
+this obstruction.  With an action of a product group, an external-regular
+coordinate has no point fixed by the external subgroup, whereas an
+external-trivial packet is pointwise fixed by that subgroup even when its
+internal action is arbitrary.  The module proves that these packets cannot be
+equivariantly equivalent, even after adjoining an arbitrary external-trivial
+correction packet to the external-regular source.  It does not construct the
+two actions or prove their independence for a geometric comparison.
 
 The geometric comparison with the actual QDM packet remains an explicit
 inhabited-structure proposition. In particular, the package does not assume

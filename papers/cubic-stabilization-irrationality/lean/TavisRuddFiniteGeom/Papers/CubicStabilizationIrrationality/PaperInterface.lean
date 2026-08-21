@@ -14,6 +14,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.Mar
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.MarkedLocalSystem
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.SelectedLocalSystemReader
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.DescentPacket
+import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.TwoLayerDescentPacket
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.HorizontalReader
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.TraitHorizontalReader
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.ProvenanceEdge
@@ -74,5 +75,9 @@ endpoints compute the quantum path and share the phase, character, and
 direction, so their compatibility certificate is derived rather than chosen.
 At the set level, a regular descent orbit is distinguished from three fixed
 points, while a unary correction is fixed only under an explicit stability
-hypothesis for its singleton summand.
+hypothesis for its singleton summand.  With two independent actions, a regular
+external coordinate cannot be equivariantly identified with any packet on
+which the external factor acts trivially, regardless of the internal action;
+the obstruction persists after adjoining external-trivial corrections on the
+source side.
 -/
