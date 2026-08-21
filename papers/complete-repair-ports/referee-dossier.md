@@ -35,8 +35,8 @@ should record the commit and PDF SHA-256 before reading.
    from zero-functional and nonzero-functional costs; below it, support and
    coefficient ports transfer exactly.
 4. A fixed represented port satisfying the persistent pointed obstruction
-   bound occurs at density `1/m` in an asymptotically good fixed-alphabet
-   family.
+   bound occurs on a designated target class of density `1/m` in an
+   asymptotically good fixed-alphabet family.
 5. Port reliability obeys deletion–contraction and pivotal identities;
    radius-truncated erasure failure gives a bounded-EXIT/cheapest-radius
    hierarchy.

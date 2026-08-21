@@ -30,17 +30,23 @@ The completed cubic parameters and rows are independently exposed by
 The gate also prints the corresponding full-radius invariant terminals.
 
 The paper's \path{verification/formal-boundary.json} fixes the formal source
-commit, the finitegeom base commit, Lean and mathlib revisions, gate-fact hash,
-36-module closure, and 60 paper-facing terminals.  At source commit
-\texttt{e1b58fd8a79a763012a21fa4d32f8904c8d9eb04}, the immutable area-export
-planner reports 885232 closure bytes and no prose drift against finitegeom
-commit \texttt{b871c10b4a91200a0913644d39b9f0ce44f655ca}.  The companion
+commit, the finitegeom base commit, Lean and mathlib revisions, 36-module
+closure, and 60 paper-facing terminals:
+\begin{quote}\scriptsize\raggedright
+source \path{e1b58fd8a79a763012a21fa4d32f8904c8d9eb04},\\
+finitegeom \path{b871c10b4a91200a0913644d39b9f0ce44f655ca},\\
+gate fact SHA-256
+\path{2a51b159a20056520e4e7a9a4be5529af19c19b6133af65b3cba5d7797c8a915}.
+\end{quote}
+The immutable area-export planner reports 885232 closure bytes and no prose
+drift at those commits.  The companion
 \path{verification/README.md} gives the guarded build, axiom-audit, and
 area-export replay commands.  These identifiers distinguish the kernel-checked
 module closure from the manuscript PDF and from evidence-only finite
-calculations.
+calculations.  The named \path{verification/} files are supplementary files
+distributed with the paper's source archive.
 
-Trace duality, scaled concatenated parameters, exact target density, eventual
+Trace duality, scaled concatenated parameters, exact designated-class density, eventual
 necessity and sufficiency, support/coefficient transfer, and the MDS
 fingerprint corollary are audited through
 \begin{quote}\small\raggedright
@@ -99,8 +105,9 @@ the 20 unit-cost projective functional classes is disjoint from the original
 20-set.  Regularity on 820 classes and \(20^2<820\) prove that such an \(a\)
 exists.  Thus this is an exact conditional-on-Singer existence proof, not a
 claim that five field elements or a hidden finite multiplier certificate were
-computed.  The functional support distance is five, the weighted and exact
-nonembedded thresholds are six, and radius-four transfer follows.
+computed.  The functional support distance is five, both the weighted nonzero
+sector and the exact pointed nonembedded threshold are at least six, and
+radius-four transfer follows.
 
 For the quartic--nucleus code at $q=9$, the general formulas give 30 nucleus
 repairs and 12 repairs at each curve target.  The certificate additionally
