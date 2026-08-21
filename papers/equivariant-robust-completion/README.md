@@ -44,3 +44,12 @@ Zenodo metadata, and verification surface. The manuscript entry point is
 `equivariant-robust-completion.tex`; its numbered sections live under
 `sections/`. It is a staged paper release; publication identifiers, final
 export choices, and submission remain author decisions.
+
+## Build
+
+Run `make check` from the repository root. The command enters the pinned Nix
+manuscript environment, builds the paper with Tectonic, and rejects LaTeX or
+layout warnings.
+
+The manuscript and repository metadata are licensed under
+[CC BY 4.0](LICENSE).
