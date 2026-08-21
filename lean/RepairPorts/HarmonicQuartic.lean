@@ -708,6 +708,176 @@ theorem projectiveQuarticFour_linearIndependent
           | infinity => exact (hac rfl).elim
       | infinity => exact (hab rfl).elim
 
+/-- Four distinct projective parameters form a dependent nucleus-plus-curve family exactly when
+they satisfy the harmonic block equation, independently of where infinity occurs in the tuple. -/
+theorem harmonicQuarticFamily_projective_linearIndependent_iff
+    {a b c d : HarmonicParameter 𝔽}
+    (hab : a ≠ b) (hac : a ≠ c) (had : a ≠ d)
+    (hbc : b ≠ c) (hbd : b ≠ d) (hcd : c ≠ d) :
+    LinearIndependent 𝔽 (harmonicQuarticFamily a b c d) ↔
+      ¬ IsHarmonicQuarticBlock a b c d := by
+  cases a with
+  | finite a =>
+      cases b with
+      | finite b =>
+          cases c with
+          | finite c =>
+              cases d with
+              | finite d =>
+                  exact harmonicQuarticFamily_finite_linearIndependent_iff
+                    (fun h => hab (congrArg HarmonicParameter.finite h))
+                    (fun h => hac (congrArg HarmonicParameter.finite h))
+                    (fun h => had (congrArg HarmonicParameter.finite h))
+                    (fun h => hbc (congrArg HarmonicParameter.finite h))
+                    (fun h => hbd (congrArg HarmonicParameter.finite h))
+                    (fun h => hcd (congrArg HarmonicParameter.finite h))
+              | infinity =>
+                  exact harmonicQuarticFamily_infinity_linearIndependent_iff
+                    (fun h => hab (congrArg HarmonicParameter.finite h))
+                    (fun h => hac (congrArg HarmonicParameter.finite h))
+                    (fun h => hbc (congrArg HarmonicParameter.finite h))
+          | infinity =>
+              cases d with
+              | finite d =>
+                  have hnorm := harmonicQuarticFamily_infinity_linearIndependent_iff
+                    (fun h => hab (congrArg HarmonicParameter.finite h))
+                    (fun h => had (congrArg HarmonicParameter.finite h))
+                    (fun h => hbd (congrArg HarmonicParameter.finite h))
+                  let e : Fin 5 ≃ Fin 5 := Equiv.swap (3 : Fin 5) 4
+                  have hreindex : LinearIndependent 𝔽
+                      (harmonicQuarticFamily (.finite a) (.finite b) .infinity (.finite d)) ↔
+                      LinearIndependent 𝔽
+                        (harmonicQuarticFamily (.finite a) (.finite b) (.finite d) .infinity) :=
+                    linearIndependent_equiv' e (by
+                      funext i
+                      fin_cases i <;> rfl)
+                  rw [hreindex, hnorm]
+                  simp [IsHarmonicQuarticBlock, harmonicE₁, add_comm, add_left_comm]
+              | infinity => exact (hcd rfl).elim
+      | infinity =>
+          cases c with
+          | finite c =>
+              cases d with
+              | finite d =>
+                  have hnorm := harmonicQuarticFamily_infinity_linearIndependent_iff
+                    (fun h => hac (congrArg HarmonicParameter.finite h))
+                    (fun h => had (congrArg HarmonicParameter.finite h))
+                    (fun h => hcd (congrArg HarmonicParameter.finite h))
+                  let e₀ : Fin 5 → Fin 5 := ![0, 1, 4, 2, 3]
+                  let e : Fin 5 ≃ Fin 5 := Equiv.ofBijective e₀ (by decide)
+                  have hreindex : LinearIndependent 𝔽
+                      (harmonicQuarticFamily (.finite a) .infinity (.finite c) (.finite d)) ↔
+                      LinearIndependent 𝔽
+                        (harmonicQuarticFamily (.finite a) (.finite c) (.finite d) .infinity) :=
+                    linearIndependent_equiv' e (by
+                      funext i
+                      fin_cases i <;> rfl)
+                  rw [hreindex, hnorm]
+                  simp [IsHarmonicQuarticBlock, harmonicE₁, add_comm, add_left_comm]
+              | infinity => exact (hbd rfl).elim
+          | infinity => exact (hbc rfl).elim
+  | infinity =>
+      cases b with
+      | finite b =>
+          cases c with
+          | finite c =>
+              cases d with
+              | finite d =>
+                  have hnorm := harmonicQuarticFamily_infinity_linearIndependent_iff
+                    (fun h => hbc (congrArg HarmonicParameter.finite h))
+                    (fun h => hbd (congrArg HarmonicParameter.finite h))
+                    (fun h => hcd (congrArg HarmonicParameter.finite h))
+                  let e₀ : Fin 5 → Fin 5 := ![0, 4, 1, 2, 3]
+                  let e : Fin 5 ≃ Fin 5 := Equiv.ofBijective e₀ (by decide)
+                  have hreindex : LinearIndependent 𝔽
+                      (harmonicQuarticFamily .infinity (.finite b) (.finite c) (.finite d)) ↔
+                      LinearIndependent 𝔽
+                        (harmonicQuarticFamily (.finite b) (.finite c) (.finite d) .infinity) :=
+                    linearIndependent_equiv' e (by
+                      funext i
+                      fin_cases i <;> rfl)
+                  rw [hreindex, hnorm]
+                  simp [IsHarmonicQuarticBlock, harmonicE₁, add_comm, add_left_comm]
+              | infinity => exact (had rfl).elim
+          | infinity => exact (hac rfl).elim
+      | infinity => exact (hab rfl).elim
+
+/-- Five distinct projective quartic-curve points are independent when the point at infinity is
+placed last. -/
+theorem projectiveQuarticFive_linearIndependent_of_lastInfinity
+    {v : Fin 5 → HarmonicParameter 𝔽} (hv : Function.Injective v)
+    (hlast : v (Fin.last 4) = .infinity) :
+    LinearIndependent 𝔽 (fun i => harmonicQuarticCurvePoint (v i)) := by
+  have hlast' : v (4 : Fin 5) = .infinity := hlast
+  let u : Fin 4 → 𝔽 := fun i =>
+    match v i.castSucc with
+    | .finite t => t
+    | .infinity => 0
+  have hfinite (i : Fin 4) : v i.castSucc = .finite (u i) := by
+    generalize hx : v i.castSucc = x
+    cases x with
+    | finite x => simp [u, hx]
+    | infinity =>
+        exfalso
+        exact (Fin.castSucc_ne_last i) (hv (hx.trans hlast.symm))
+  have hu : Function.Injective u := by
+    intro i j hij
+    apply Fin.castSucc_injective
+    apply hv
+    rw [hfinite i, hfinite j, hij]
+  have hcurve := FiniteGeom.momentCurve_linearIndependent (n := 4) hu
+  rw [Fintype.linearIndependent_iff]
+  intro g hrel
+  let c : Fin 4 → 𝔽 := fun i => g i.castSucc
+  have hrel₄ : ∑ i, c i • FiniteGeom.momentCurve 4 (u i) = 0 := by
+    funext j
+    have hj := congrFun hrel j.castSucc
+    have hjne : j.castSucc ≠ (4 : Fin 5) := Fin.castSucc_ne_last j
+    simp only [Finset.sum_apply, Pi.smul_apply, Pi.zero_apply] at hj ⊢
+    rw [Fin.sum_univ_castSucc] at hj
+    simpa [c, hfinite, hlast', hjne, harmonicQuarticCurvePoint,
+      FiniteGeom.momentCurve] using hj
+  have hc := (Fintype.linearIndependent_iff.mp hcurve) c hrel₄
+  have hlastCoeff : g (Fin.last 4) = 0 := by
+    have hj := congrFun hrel (Fin.last 4)
+    simp only [Finset.sum_apply, Pi.smul_apply, Pi.zero_apply] at hj
+    rw [Fin.sum_univ_castSucc] at hj
+    simpa [c, hc, hfinite, hlast', harmonicQuarticCurvePoint,
+      FiniteGeom.momentCurve] using hj
+  intro i
+  refine Fin.lastCases hlastCoeff (fun j => ?_) i
+  exact hc j
+
+/-- Any five distinct projective quartic-curve points are independent. -/
+theorem projectiveQuarticFive_linearIndependent
+    {v : Fin 5 → HarmonicParameter 𝔽} (hv : Function.Injective v) :
+    LinearIndependent 𝔽 (fun i => harmonicQuarticCurvePoint (v i)) := by
+  by_cases hinf : ∃ i, v i = .infinity
+  · obtain ⟨i, hi⟩ := hinf
+    let e : Fin 5 ≃ Fin 5 := Equiv.swap i (Fin.last 4)
+    have helast : v (e (Fin.last 4)) = .infinity := by simp [e, hi]
+    have heinj : Function.Injective (fun j => v (e j)) := hv.comp e.injective
+    have hli := projectiveQuarticFive_linearIndependent_of_lastInfinity heinj helast
+    exact (linearIndependent_equiv e).mp hli
+  · let u : Fin 5 → 𝔽 := fun i =>
+      match v i with
+      | .finite t => t
+      | .infinity => 0
+    have hfinite (i : Fin 5) : v i = .finite (u i) := by
+      generalize hx : v i = x
+      cases x with
+      | finite x => simp [u, hx]
+      | infinity => exact (hinf ⟨i, hx⟩).elim
+    have hu : Function.Injective u := by
+      intro i j hij
+      apply hv
+      rw [hfinite i, hfinite j, hij]
+    have hli := FiniteGeom.momentCurve_linearIndependent (n := 5) hu
+    convert hli using 1
+    funext i
+    rw [hfinite i]
+    rfl
+
 /-- Every four-element subset of the quartic--nucleus point system is independent in
 characteristic three. -/
 theorem harmonicQuartic_fourSet_linearIndependent [Fintype 𝔽] [DecidableEq 𝔽]
