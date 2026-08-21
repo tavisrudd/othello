@@ -92,6 +92,16 @@ theorem incomingImageMap_surjective_of_surjective
   rw [reader.defectOperator_commutes incomingR incomingK
     reader.incomingCommutes source, sourceEquation, targetEquation]
 
+/-- A surjective ambient specialization makes the induced incoming image span
+the entire specialized packet. -/
+theorem incomingImageSpan_eq_top_of_surjective
+    (reader : Specialization specialize incomingR targetR incomingK targetK rowR rowK)
+    (mapSurjective : Function.Surjective reader.map) :
+    Submodule.span k (Set.range reader.incomingImageMap) = ⊤ := by
+  rw [Set.range_eq_univ.mpr
+    (reader.incomingImageMap_surjective_of_surjective mapSurjective)]
+  exact Submodule.span_univ
+
 /-- Directed projected variation specializes along the induced incoming-image
 map. -/
 theorem projectedVariation_specializes

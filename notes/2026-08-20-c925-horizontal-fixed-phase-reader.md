@@ -192,6 +192,23 @@ For one actual `(1,1)` overlap, it is enough to construct:
    base-change certificate is a stronger sufficient implementation of the
    trait alternative.
 
+The two operator equations admit a coherent repackaging, but that does not
+reduce the single-edge mathematical input: the former specialization record
+already used one common semilinear map and stored exactly these two squares.
+The stronger optional source object
+`Comparison.MarkedLocalSystem.Representation` stores a representation of the
+whole based-loop group and its marked row, while
+`Comparison.MarkedLocalSystem.SemilinearHorizontal` stores one natural
+semilinear morphism along a named homomorphism from the trait loop group to the
+fibre loop group.  Selecting the incoming and target loop classes produces the
+endpoint-indexed two-loop comparison consumed by item 4, with any ramified
+loop reindexing applied automatically.  This does not construct the QDM
+realization, but it amortizes one global naturality theorem across every loop
+pair selected from that representation.  `LoopAssignment.ofQdmPath` types the
+remaining endpoint-path-to-loop interpretation once and prevents per-edge loop
+choice relative to that supplied interpretation; constructing the geometric
+interpretation remains external.
+
 Some form of item 4 cannot be omitted.  Over `R = C[[s]]`, take
 `T = (1 - s) id_R`.  Then
 
@@ -207,13 +224,23 @@ does not give the required closed packet.
 The identification side has therefore shrunk again: it is no longer a full
 Stokes matrix, two independent packet maps, an independently normalized
 projected row, or necessarily a tensor/image base-change isomorphism.  It is
-one model-side crossed-coordinate realization, one marked horizontal
-semilinear comparison, and coverage of the actual incoming image.
+one model-side crossed-coordinate realization, one marked two-loop semilinear
+comparison, and coverage of the actual incoming image.  A marked morphism of
+the full based-loop representation is a stronger optional way to supply the
+same comparison coherently for many edges.
+If the ambient semilinear comparison is surjective, the coverage clause follows
+formally from
+`SemilinearVariation.Specialization.incomingImageSpan_eq_top_of_surjective`;
+it remains an independent clause only for a non-surjective realization.
+`TraitHorizontalReader.Reader.ofSurjective` constructs the complete reader directly
+in this case.
 
 ## 62.6 Descent-packet specialization
 
 The proposed Burnside-valued consumer is algebraically valid once a common
-\(\mu_3\)-action exists.  In the Burnside ring of \(\mu_3\), the free orbit
+\(\mu_3\)-action and an invariant ambient/exceptional decomposition are proved,
+with every admitted correction fixed in that action.  In the Burnside ring of
+\(\mu_3\), the free orbit
 \([\mu_3/e]\) differs from three fixed points: the fixed-point mark sends them
 to (0) and (3), respectively.  Consequently corrections represented by
 fixed \(\mu_3\)-sets cannot change the free-orbit coefficient.
@@ -233,6 +260,18 @@ chosen one-dimensional exceptional summand with ambient directions.  Thus the ex
 specialization would be a common equivariant occurrence reader proving that
 every threefold-center correction is fixed, not merely unary.  No audited
 comparison theorem supplies that statement.
+
+Lean checks both set-level implications.  In
+`Comparison.DescentPacket.fixed_of_stable_singleton`, stability of a singleton
+under the supplied action forces its point to be fixed.  In
+`Comparison.DescentPacket.regular_not_equivariantly_equivalent_fixedThree`,
+the left regular action of any nontrivial group is not equivariantly equivalent
+to three fixed points.  The explicit
+`Comparison.DescentPacket.unaryPacketEquivariantEquiv` proves the hostile
+point directly: a one-copy outer packet is equivariantly equivalent to its
+entire inner packet and therefore retains any nontrivial inner orbit.  None of
+these theorems constructs the action or proves that the blowup splitting is
+stable under it.
 
 If such a reader is constructed, the Burnside marker could avoid the Gamma-row
 normalization.  Without it, the proposal is the bare-deck-orbit route already
@@ -255,7 +294,14 @@ The main checked declarations are:
 - `Comparison.ProjectedVariation.projectedVariation_natural`;
 - `Comparison.ProjectedVariation.projectedVariation_eq_zero_of_surjective`;
 - `Comparison.SemilinearVariation.Specialization.projectedVariation_specializes`;
+- `Comparison.SemilinearVariation.Specialization.incomingImageSpan_eq_top_of_surjective`;
 - `Comparison.SemilinearVariation.Specialization.projectedVariation_eq_zero_of_normalFactor`;
+- `Comparison.MarkedMonodromyDiagram.SemilinearMorphism.projectedVariation_specializes`;
+- `Comparison.MarkedLocalSystem.SemilinearHorizontal.projectedVariation_specializes`;
+- `Comparison.MarkedLocalSystem.SemilinearHorizontal.projectedVariation_eq_zero_of_normalFactor`;
+- `Comparison.DescentPacket.fixed_of_stable_singleton`;
+- `Comparison.DescentPacket.unaryPacketEquivariantEquiv`;
+- `Comparison.DescentPacket.regular_not_equivariantly_equivalent_fixedThree`;
 - `Comparison.HorizontalReader.Reader.modelVariation_eq_zero`;
 - `Comparison.HorizontalReader.Reader.actualVariation_eq_zero`;
 - `Comparison.TraitHorizontalReader.Reader.actualVariation_eq_zero`.
@@ -263,6 +309,10 @@ The main checked declarations are:
 The package is independent of the (m=1) epilogue package and uses the
 top-level namespace
 `TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality`.
+The guarded library and verification targets build together.  The guarded
+axiom audit is green; the new projected-variation theorems use only
+`propext`, `Classical.choice`, and `Quot.sound`, while
+`DescentPacket.fixed_of_stable_singleton` is axiom-free.
 
 ## EJ and TT closeout
 
@@ -270,6 +320,13 @@ The cheap extra theorem is the asymmetric variance law: a reverse
 actual-to-model comparison transports zero without surjectivity.  This may
 be useful if Fourier--Laplace naturally supplies a conservative restriction
 rather than a quotient map.
+
+The upstream typing pass gives a second cheap gain: one horizontal morphism of
+the full based-loop representation now generates every directed two-loop
+comparison by selection.  If a deck transformation is represented by a loop
+element, this supplies operator equivariance for that element.  It does not
+supply the finite branch set, semilinear Galois action, row character, or an
+invariant ambient/exceptional splitting needed by the descent-packet consumer.
 
 The main hostile test is the DVR example above.  It prevents a formal
 monodromy comparison from being promoted to the resonant image packet
@@ -282,7 +339,7 @@ must not be counted as construction progress.
 | question | state | exact evidence gap |
 |---|---|---|
 | Does the lawful coefficient trait produce the model projected-variation reading? | open | identify the Module 60 crossed (B,D) edge with the canonical two-monodromy model over the named trait |
-| Does one Fourier--Laplace/QDM comparison intertwine both based-loop monodromies and the rank row? | open | construct the occurrence-indexed marked horizontal map (F) |
+| Does one Fourier--Laplace/QDM comparison intertwine the two selected monodromies and the rank row? | open | construct the occurrence-indexed marked two-loop semilinear comparison; a `MarkedLocalSystem.SemilinearHorizontal` is a stronger uniform provider, not necessary for one edge |
 | Does the trait comparison span the actual resonant incoming image? | open | construct the marked semilinear comparison and prove induced image-span coverage; the `sR` countermodel forbids inference from generic horizontality |
 | Does a unary codimension-two correction have fixed \(\mu_3\)-descent? | settled: no formal implication | a unary outer packet preserves a nontrivial inner center action; fixedness requires a common equivariant occurrence reader |
 | Is a tensor/image base-change isomorphism necessary? | settled: no for vanishing transport | `SemilinearVariation.projectedVariation_eq_zero_of_normalFactor` uses only semilinear naturality and image-span coverage |

@@ -1,5 +1,6 @@
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.HorizontalReader
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.LawfulReaderIndex
+import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.MarkedMonodromyDiagram
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.SemilinearVariation
 
 /-!
@@ -18,6 +19,7 @@ namespace TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.
 open FixedPhaseReader
 open HorizontalReader
 open LawfulReaderIndex
+open MarkedMonodromyDiagram
 open ModelCrossedCoordinates
 open MonodromyImage
 open ProjectedVariation
@@ -52,12 +54,13 @@ structure Reader
     (actual : DirectedFixedPhaseReceiver k PacketCertificate sourceEndpoint.index
       targetEndpoint.index ActualNearby) where
   model : Coordinates R R (RingHom.id R) edge ModelNearby
-  specialization : SemilinearVariation.Specialization specialize
-    model.incoming.toLinearMap model.targetMonodromy.toLinearMap
-    actual.incoming.toLinearMap actual.targetMonodromy.toLinearMap
-    model.row actual.row
+  horizontal : SemilinearMorphism specialize
+    (Diagram.ofOperators (source := sourceEndpoint.index) (target := targetEndpoint.index)
+      model.incoming model.targetMonodromy model.row)
+    (Diagram.ofOperators (source := sourceEndpoint.index) (target := targetEndpoint.index)
+      actual.incoming actual.targetMonodromy actual.row)
   incomingImageSpans :
-    Submodule.span k (Set.range specialization.incomingImageMap) = ⊤
+    Submodule.span k (Set.range horizontal.toSpecialization.incomingImageMap) = ⊤
 
 namespace Reader
 
@@ -86,6 +89,23 @@ variable
     {actual : DirectedFixedPhaseReceiver k PacketCertificate sourceEndpoint.index
       targetEndpoint.index ActualNearby}
 
+/-- Construct a trait-horizontal reader from a surjective ambient semilinear
+comparison. Surjectivity supplies the incoming-image spanning field. -/
+def ofSurjective
+    (model : Coordinates R R (RingHom.id R) edge ModelNearby)
+    (horizontal : SemilinearMorphism specialize
+      (Diagram.ofOperators (source := sourceEndpoint.index) (target := targetEndpoint.index)
+        model.incoming model.targetMonodromy model.row)
+      (Diagram.ofOperators (source := sourceEndpoint.index) (target := targetEndpoint.index)
+        actual.incoming actual.targetMonodromy actual.row))
+    (mapSurjective : Function.Surjective horizontal.map) :
+    Reader R k specialize environment phase character direction sourceEndpoint
+      targetEndpoint edge ModelNearby ActualNearby PacketCertificate actual where
+  model := model
+  horizontal := horizontal
+  incomingImageSpans :=
+    horizontal.toSpecialization.incomingImageSpan_eq_top_of_surjective mapSurjective
+
 /-- A zero trait normal makes every value of the model variation vanish after
 scalar specialization. -/
 theorem specializedModelVariation_eq_zero
@@ -111,7 +131,7 @@ theorem actualVariation_eq_zero
     (normalVanishes : specialize edge.normal = 0) :
     projectedVariation actual.incoming.toLinearMap actual.targetMonodromy.toLinearMap
       actual.row = 0 :=
-  reader.specialization.projectedVariation_eq_zero_of_incomingImageSpan_eq_top
+  reader.horizontal.toSpecialization.projectedVariation_eq_zero_of_incomingImageSpan_eq_top
     reader.incomingImageSpans (reader.specializedModelVariation_eq_zero normalVanishes)
 
 end Reader

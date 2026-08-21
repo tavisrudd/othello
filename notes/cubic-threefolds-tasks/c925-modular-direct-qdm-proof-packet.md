@@ -285,8 +285,15 @@ index row.
   character, and direction, so an endpoint pair is compatible by construction
   relative to that supplied environment and those shared labels.  The
   geometric receiver also requires invertible monodromies rather than arbitrary
-  endomorphisms.  The coordinate realization and actual marked comparison
-  remain explicit gates.  Report:
+  endomorphisms.  The two directed monodromies are coherently packaged with one
+  comparison map; this is the same pair of equations as the prior specialization
+  record.  A stronger optional based-loop representation morphism along a typed
+  loop-group homomorphism can supply those equations uniformly for many loop
+  pairs.  A separate descent-packet module proves that
+  a regular orbit differs equivariantly from three fixed points and that a unary
+  correction is fixed only after its singleton summand is action-stable.  The
+  coordinate realization, actual marked comparison, and any equivariant
+  blowup splitting remain explicit gates.  Report:
   `../2026-08-20-c925-horizontal-fixed-phase-reader.md`.
 
 ## Open geometric providers
@@ -404,10 +411,12 @@ advertised algebraic laws and countermodels, never an external QDM provider.
    and identify that exact crossed edge with the actual fixed-phase
    image/can--var packet.  Module 62 shows that it is enough to construct the
    vector crossed-coordinate model, the fixed actual receiver, and one marked
-   horizontal comparison of the common nearby-cycle spaces whose induced
-   incoming-image map spans the actual packet.  Exact image/coimage base change
-   is one sufficient stronger implementation, not a separate necessary gate;
-   the remaining image maps and projected-row square then follow functorially.
+   horizontal semilinear comparison of the two selected monodromies whose
+   induced incoming-image map spans the actual packet.  A full based-loop
+   representation morphism is a stronger uniform provider.  Exact image/coimage base
+   change is another sufficient stronger implementation, not a separate
+   necessary gate; the remaining image maps and projected-row square then follow
+   functorially.
    The direct Module 60 consumer proves the directed covector
    \(\rho_j(1-T_j)|_{\operatorname{im}(1-T_i)}\) vanishes without computing a
    two-wall Stokes matrix.  Yu--Zhang supplies spectral/vanishing-cycle block

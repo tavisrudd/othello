@@ -389,15 +389,22 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   trait-level semilinear comparison needs only that its induced image span the
   actual fibre packet: a normal-factor reading then specializes to zero without
   a tensor/image base-change isomorphism.  The remaining theorem is one
-  occurrence-indexed marked horizontal comparison intertwining both
-  monodromies and the rank row, the vector coordinate realization of the
-  crossed edge, and this incoming-image coverage at resonance; exact
+  occurrence-indexed marked two-loop semilinear comparison preserving the rank
+  row, the vector coordinate realization of the crossed edge, and this
+  incoming-image coverage at resonance.  A full based-loop representation
+  morphism along a typed trait-to-fibre loop homomorphism is a stronger optional
+  provider for many edges; exact
   range/coimage base change is a stronger sufficient implementation.  The
   paper-local `TraitHorizontalReader` now composes exactly these hypotheses to
   the directed fibre-variation vanishing theorem.  Its source API also computes
   the QDM path from the chamber path and shares phase, character, and direction
   as endpoint parameters, so only the coefficient-trait equation remains a
   stored discrete compatibility certificate.
+  A descent-packet specialization is typed separately.  It proves that a
+  regular orbit is not three fixed points, but also isolates the missing
+  hypothesis: one exceptional copy is fixed only if that singleton summand is
+  stable under a common descent action.  Codimension alone supplies no such
+  equivariance.
   Shifted tensor stability and the extremal multinomial source law are
   proved, but the occurrence-indexed exact QDM sequence, actual carrier
   exponent, and boundary vanishing remain open.  The packet is split into
@@ -408,7 +415,7 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   replay are green.  C925 remains open at fixed-phase Gamma/rank transport
   or at this ExactTop provider; the relative-cap cancellation remains one
   possible rank provider.
-  Mathematics only; no manuscript or Lean edits.  Card:
+  Mathematics and paper-local Lean only; no manuscript edits.  Card:
   `../cubic-threefolds-tasks/c925-modular-direct-qdm-proof-packet.md`.
 - **C924 — closed 2026-08-19.** The direct ordinary-QDM route proves
   irrationality of `X x P^1` after one mandatory local repair: compare the
