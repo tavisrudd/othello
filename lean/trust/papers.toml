@@ -295,3 +295,9 @@ id = "blown_up_theta_lattice"
 dir = "papers/blown-up-theta-lattice"
 main = "blown_up_theta_lattice.tex"
 lane = "cubic-threefolds"
+
+[[paper]]
+id = "cubic_gluing_resolvent"
+dir = "papers/cubic-gluing-resolvent"
+main = "cubic_gluing_resolvent.tex"
+lane = "cubic-threefolds"

@@ -408,6 +408,53 @@ expected_count = 1
 reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
 
 [[repository]]
+name = "cubic-gluing-resolvent"
+include_release_pdfs = true
+release_output_policy = "immutable-source"
+source = "papers/cubic-gluing-resolvent"
+paper_ids = ["cubic_gluing_resolvent"]
+disposition = "active"
+
+[[repository.exclude_path]]
+path = "claim-proof-novelty-ledger.md"
+reason = "private claim and priority ledger, not part of the public manuscript repository"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = "TEXSHELL ?= nix develop ..\\#manuscript --command"
+new = "TEXSHELL ?= nix shell nixpkgs\\#texliveFull --command"
+expected_count = 1
+reason = "the standalone repository builds from a self-contained Nix shell"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = ".PHONY: all check lint evidence manuscript warnings clean distclean"
+new = ".PHONY: all check evidence manuscript warnings clean distclean"
+expected_count = 1
+reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = "check: lint evidence manuscript warnings"
+new = "check: evidence manuscript warnings"
+expected_count = 1
+reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = "lint:\n\t$(PYTHON) ../scripts/lint_tex_spacing.py $(SOURCE)\n\n"
+new = ""
+expected_count = 1
+reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = "manuscript: $(SOURCE)\n\t$(PYTHON) ../scripts/lint_tex_spacing.py $(SOURCE)\n"
+new = "manuscript: $(SOURCE)\n"
+expected_count = 1
+reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
+
+[[repository]]
 name = "dihedral-schreier-node-kayles"
 source = "papers/dihedral-schreier-node-kayles"
 paper_ids = ["dihedral_schreier_node_kayles"]
