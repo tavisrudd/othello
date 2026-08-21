@@ -385,11 +385,19 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   crossed-coordinate equations now derive the model reading, and the actual
   receiver is a fixed external parameter rather than existential reader data.
   In the forward direction only the induced incoming-image map must be
-  surjective; in the reverse direction no surjectivity is needed.  The
-  remaining theorem is one occurrence-indexed horizontal comparison
-  intertwining both monodromies and the rank row, the vector coordinate
-  realization of the crossed edge, and exact range/coimage base change at
-  resonance.
+  surjective; in the reverse direction no surjectivity is needed.  A
+  trait-level semilinear comparison needs only that its induced image span the
+  actual fibre packet: a normal-factor reading then specializes to zero without
+  a tensor/image base-change isomorphism.  The remaining theorem is one
+  occurrence-indexed marked horizontal comparison intertwining both
+  monodromies and the rank row, the vector coordinate realization of the
+  crossed edge, and this incoming-image coverage at resonance; exact
+  range/coimage base change is a stronger sufficient implementation.  The
+  paper-local `TraitHorizontalReader` now composes exactly these hypotheses to
+  the directed fibre-variation vanishing theorem.  Its source API also computes
+  the QDM path from the chamber path and shares phase, character, and direction
+  as endpoint parameters, so only the coefficient-trait equation remains a
+  stored discrete compatibility certificate.
   Shifted tensor stability and the extremal multinomial source law are
   proved, but the occurrence-indexed exact QDM sequence, actual carrier
   exponent, and boundary vanishing remain open.  The packet is split into

@@ -102,7 +102,11 @@ minimal-class, categorical one-step, framed-monodromy, and synthesis facades,
 with the 83 unclaimed reusable terminals isolated in a machinery facade.  The
 311 declaration and proof blocks, fully qualified names, claim digests, and
 axiom census are unchanged; the claim-map checker now requires the aggregator
-to import every declared reviewer module.
+to import every declared reviewer module.  The facades now carry direct imports
+rather than a shared umbrella: their local source closures have sizes 69
+(introduction), 69 (envelope), 80 (minimal class), 73 (categorical one-step),
+103 (framed monodromy), 0 (synthesis), and 116 (machinery), versus 164 for the
+former common import surface.
 
 ### Execution status
 

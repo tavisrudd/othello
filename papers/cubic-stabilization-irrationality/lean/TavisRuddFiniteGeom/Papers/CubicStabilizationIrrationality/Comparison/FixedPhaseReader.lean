@@ -10,10 +10,12 @@ independent indices. A reader can only be applied to the crossed edge carrying
 the same endpoint indices.
 
 The formal theorem proves that a crossed row whose normal factor vanishes on
-the closed fibre gives a zero actual projected row. It does not construct the
-comparison with a quantum connection. That construction is represented by
-`VerticalReaderGoal`, whose witness contains the path compatibility and
-closed-reading equations displayed below.
+the closed fibre gives zero after evaluating the fixed projected row on every
+realized source input. It does not construct the comparison with a quantum
+connection. That construction is represented by `VerticalReaderGoal`, whose
+witness contains the path compatibility and closed-reading equations displayed
+below. Surjectivity needed for global packet vanishing is imposed by the
+componentwise interface.
 -/
 
 namespace TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.FixedPhaseReader
@@ -41,25 +43,75 @@ structure QdmPathTag (α : Type uι) where
 structure PhaseTag (α : Type uι) where
   value : α
 
+/-- A formal or deck-character label. -/
+structure CharacterTag (α : Type uι) where
+  value : α
+
+/-- An oriented traversal label. -/
+structure DirectionTag (α : Type uι) where
+  value : α
+
 /-- The independent labels determining one endpoint of a fixed-phase
 comparison. The coefficient parameter and the two path notions have distinct
 types, so a parameter specialization cannot be supplied as a path
 identification. -/
 structure ReaderIndex
-    (Occurrence CoeffParameter ChamberPath QdmPath Phase : Type uι) where
+    (Occurrence CoeffParameter ChamberPath QdmPath Phase Character Direction : Type uι) where
   occurrence : OccurrenceTag Occurrence
   coeffParameter : CoeffParameterTag CoeffParameter
   chamberPath : ChamberPathTag ChamberPath
   qdmPath : QdmPathTag QdmPath
   phase : PhaseTag Phase
+  character : CharacterTag Character
+  direction : DirectionTag Direction
+
+/-- The orientation of the projected variation is an involutive unit. Over a
+field of characteristic different from two this restricts it to a sign. -/
+structure OrientationSign (k : Type uk) [CommRing k] where
+  unit : kˣ
+  involutive : (unit : k) * (unit : k) = 1
+
+/-- The trusted interpretation of coefficient labels and chamber paths. The
+coefficient trait and the QDM/deck path are separate functions. -/
+structure ReaderEnvironment
+    (R : Type uR) (k : Type uk) [CommRing R] [CommRing k]
+    (Occurrence CoeffParameter ChamberPath QdmPath Direction : Type uι) where
+  coefficientSpecialization : Occurrence → CoeffParameter → R →+* k
+  chamberToQdmPath : Occurrence → ChamberPath → Direction → QdmPath
+
+/-- Exact equations certifying that one indexed edge is read in the named
+coefficient trait and along the named QDM/deck path. -/
+structure ReaderCompatibility
+    (R : Type uR) (k : Type uk) [CommRing R] [CommRing k]
+    {Occurrence CoeffParameter ChamberPath QdmPath Phase Character Direction : Type uι}
+    (environment : ReaderEnvironment R k Occurrence CoeffParameter ChamberPath QdmPath Direction)
+    (specialize : R →+* k)
+    (source target : ReaderIndex Occurrence CoeffParameter ChamberPath QdmPath Phase
+      Character Direction) : Prop where
+  sourceCoefficient :
+    environment.coefficientSpecialization source.occurrence.value
+      source.coeffParameter.value = specialize
+  targetCoefficient :
+    environment.coefficientSpecialization target.occurrence.value
+      target.coeffParameter.value = specialize
+  sourcePath :
+    environment.chamberToQdmPath source.occurrence.value source.chamberPath.value
+      source.direction.value = source.qdmPath.value
+  targetPath :
+    environment.chamberToQdmPath target.occurrence.value target.chamberPath.value
+      target.direction.value = target.qdmPath.value
+  phasePreserved : source.phase = target.phase
+  characterPreserved : source.character = target.character
+  directionPreserved : source.direction = target.direction
 
 /-- An upper-triangular comparison together with its source and target rows.
 The four carrier modules remain explicit because the common and moving
 summands need not agree across a wall. -/
 structure CrossedEdge
     (R : Type uR) [CommRing R]
-    {Occurrence CoeffParameter ChamberPath QdmPath Phase : Type uι}
-    (source target : ReaderIndex Occurrence CoeffParameter ChamberPath QdmPath Phase)
+    {Occurrence CoeffParameter ChamberPath QdmPath Phase Character Direction : Type uι}
+    (source target : ReaderIndex Occurrence CoeffParameter ChamberPath QdmPath Phase
+      Character Direction)
     (C₀ : Type uC₀) (C₁ : Type uC₁) (M₀ : Type uM₀) (M₁ : Type uM₁)
     [AddCommGroup C₀] [Module R C₀]
     [AddCommGroup C₁] [Module R C₁]
@@ -82,8 +134,9 @@ namespace CrossedEdge
 
 variable
     {R : Type uR} [CommRing R]
-    {Occurrence CoeffParameter ChamberPath QdmPath Phase : Type uι}
-    {source target : ReaderIndex Occurrence CoeffParameter ChamberPath QdmPath Phase}
+    {Occurrence CoeffParameter ChamberPath QdmPath Phase Character Direction : Type uι}
+    {source target : ReaderIndex Occurrence CoeffParameter ChamberPath QdmPath Phase
+      Character Direction}
     {C₀ : Type uC₀} {C₁ : Type uC₁} {M₀ : Type uM₀} {M₁ : Type uM₁}
     [AddCommGroup C₀] [Module R C₀]
     [AddCommGroup C₁] [Module R C₁]
@@ -126,26 +179,25 @@ geometric or analytic input. -/
 structure PacketReader
     (R : Type uR) (k : Type uk) [CommRing R] [CommRing k]
     (specialize : R →+* k)
-    {Occurrence CoeffParameter ChamberPath QdmPath Phase : Type uι}
-    {source target : ReaderIndex Occurrence CoeffParameter ChamberPath QdmPath Phase}
+    {Occurrence CoeffParameter ChamberPath QdmPath Phase Character Direction : Type uι}
+    {source target : ReaderIndex Occurrence CoeffParameter ChamberPath QdmPath Phase
+      Character Direction}
     {C₀ : Type uC₀} {C₁ : Type uC₁} {M₀ : Type uM₀} {M₁ : Type uM₁}
     [AddCommGroup C₀] [Module R C₀]
     [AddCommGroup C₁] [Module R C₁]
     [AddCommGroup M₀] [Module R M₀]
     [AddCommGroup M₁] [Module R M₁]
     (edge : CrossedEdge R source target C₀ C₁ M₀ M₁)
-    (PathCompatible :
-      ReaderIndex Occurrence CoeffParameter ChamberPath QdmPath Phase →
-      ReaderIndex Occurrence CoeffParameter ChamberPath QdmPath Phase → Prop)
+    (environment : ReaderEnvironment R k Occurrence CoeffParameter ChamberPath QdmPath Direction)
     (ActualIncoming : Type uA)
-    [AddCommGroup ActualIncoming] [Module k ActualIncoming] where
-  pathCompatible : PathCompatible source target
+    [AddCommGroup ActualIncoming] [Module k ActualIncoming]
+    (actualProjectedRow : ActualIncoming →ₗ[k] k) where
+  compatibility : ReaderCompatibility R k environment specialize source target
   sourceToActual : M₀ →ₛₗ[specialize] ActualIncoming
-  actualProjectedRow : ActualIncoming →ₗ[k] k
-  orientation : kˣ
+  orientation : OrientationSign k
   closedReading : ∀ x,
     actualProjectedRow (sourceToActual x) =
-      (orientation : k) * specialize (edge.defect x)
+      (orientation.unit : k) * specialize (edge.defect x)
 
 /-- The exact identification problem. A witness supplies an
 occurrence-specific path certificate and the comparison with the actual
@@ -153,42 +205,45 @@ packet. -/
 def VerticalReaderGoal
     (R : Type uR) (k : Type uk) [CommRing R] [CommRing k]
     (specialize : R →+* k)
-    {Occurrence CoeffParameter ChamberPath QdmPath Phase : Type uι}
-    {source target : ReaderIndex Occurrence CoeffParameter ChamberPath QdmPath Phase}
+    {Occurrence CoeffParameter ChamberPath QdmPath Phase Character Direction : Type uι}
+    {source target : ReaderIndex Occurrence CoeffParameter ChamberPath QdmPath Phase
+      Character Direction}
     {C₀ : Type uC₀} {C₁ : Type uC₁} {M₀ : Type uM₀} {M₁ : Type uM₁}
     [AddCommGroup C₀] [Module R C₀]
     [AddCommGroup C₁] [Module R C₁]
     [AddCommGroup M₀] [Module R M₀]
     [AddCommGroup M₁] [Module R M₁]
     (edge : CrossedEdge R source target C₀ C₁ M₀ M₁)
-    (PathCompatible :
-      ReaderIndex Occurrence CoeffParameter ChamberPath QdmPath Phase →
-      ReaderIndex Occurrence CoeffParameter ChamberPath QdmPath Phase → Prop)
+    (environment : ReaderEnvironment R k Occurrence CoeffParameter ChamberPath QdmPath Direction)
     (ActualIncoming : Type uA)
-    [AddCommGroup ActualIncoming] [Module k ActualIncoming] : Prop :=
-  Nonempty (PacketReader R k specialize edge PathCompatible ActualIncoming)
+    [AddCommGroup ActualIncoming] [Module k ActualIncoming]
+    (actualProjectedRow : ActualIncoming →ₗ[k] k) : Prop :=
+  Nonempty (PacketReader R k specialize edge environment
+    ActualIncoming actualProjectedRow)
 
 /-- Once the vertical reader exists and the normal factor vanishes on the
-closed fibre, the actual directed projected row vanishes. -/
+closed fibre, the fixed directed projected row vanishes on the realized source
+inputs. -/
 theorem actualProjectedRow_eq_zero
     {R : Type uR} {k : Type uk} [CommRing R] [CommRing k]
     {specialize : R →+* k}
-    {Occurrence CoeffParameter ChamberPath QdmPath Phase : Type uι}
-    {source target : ReaderIndex Occurrence CoeffParameter ChamberPath QdmPath Phase}
+    {Occurrence CoeffParameter ChamberPath QdmPath Phase Character Direction : Type uι}
+    {source target : ReaderIndex Occurrence CoeffParameter ChamberPath QdmPath Phase
+      Character Direction}
     {C₀ : Type uC₀} {C₁ : Type uC₁} {M₀ : Type uM₀} {M₁ : Type uM₁}
     [AddCommGroup C₀] [Module R C₀]
     [AddCommGroup C₁] [Module R C₁]
     [AddCommGroup M₀] [Module R M₀]
     [AddCommGroup M₁] [Module R M₁]
     {edge : CrossedEdge R source target C₀ C₁ M₀ M₁}
-    {PathCompatible :
-      ReaderIndex Occurrence CoeffParameter ChamberPath QdmPath Phase →
-      ReaderIndex Occurrence CoeffParameter ChamberPath QdmPath Phase → Prop}
+    {environment : ReaderEnvironment R k Occurrence CoeffParameter ChamberPath QdmPath Direction}
     {ActualIncoming : Type uA}
     [AddCommGroup ActualIncoming] [Module k ActualIncoming]
-    (reader : PacketReader R k specialize edge PathCompatible ActualIncoming)
+    {actualProjectedRow : ActualIncoming →ₗ[k] k}
+    (reader : PacketReader R k specialize edge environment
+      ActualIncoming actualProjectedRow)
     (normalVanishes : specialize edge.normal = 0) :
-    ∀ x, reader.actualProjectedRow (reader.sourceToActual x) = 0 := by
+    ∀ x, actualProjectedRow (reader.sourceToActual x) = 0 := by
   intro x
   rw [reader.closedReading]
   have defectFormula := LinearMap.congr_fun edge.defect_eq_normal_smul x

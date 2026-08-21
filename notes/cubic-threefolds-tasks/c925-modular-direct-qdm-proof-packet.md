@@ -2,7 +2,7 @@
 
 **Lane:** cubic-threefolds
 
-**Status:** active; mathematics only; no manuscript or Lean edits
+**Status:** active; mathematics and paper-local Lean; no manuscript edits
 
 ## Goal
 
@@ -270,6 +270,24 @@ index row.
   provider.  The compile-checked toy is concrete, not tagless-final.  Types
   prevent hypothesis laundering but do not create the two geometric source
   witnesses.
+- A separate paper-local Lean package now formalizes the fixed-phase reader
+  under the namespace
+  `TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality`.  Its intrinsic
+  projected-variation theorem removes independent can/variation packet maps.
+  Vector crossed-coordinate equations derive the model reading; one marked
+  horizontal comparison transports it to an externally supplied actual
+  receiver when the induced incoming-image map is surjective.  At trait level,
+  semilinear naturality and spanning of the specialized incoming image already
+  transport a normal-factor reading; tensor/image base change is a stronger
+  optional certificate rather than a required isomorphism.  The trait-horizontal
+  reader composes those laws into the exact conditional endpoint theorem.  The
+  environment-indexed endpoint API computes the QDM path and shares phase,
+  character, and direction, so an endpoint pair is compatible by construction
+  relative to that supplied environment and those shared labels.  The
+  geometric receiver also requires invertible monodromies rather than arbitrary
+  endomorphisms.  The coordinate realization and actual marked comparison
+  remain explicit gates.  Report:
+  `../2026-08-20-c925-horizontal-fixed-phase-reader.md`.
 
 ## Open geometric providers
 
@@ -384,7 +402,13 @@ advertised algebraic laws and countermodels, never an external QDM provider.
    a Stokes matrix.  Module 61 supplies the lawful diagonal coefficient trait
    on all five pilots.  Construct the based-loop/common-receiver reindexing
    and identify that exact crossed edge with the actual fixed-phase
-   image/can--var packet.  The direct Module 60 consumer then proves the directed covector
+   image/can--var packet.  Module 62 shows that it is enough to construct the
+   vector crossed-coordinate model, the fixed actual receiver, and one marked
+   horizontal comparison of the common nearby-cycle spaces whose induced
+   incoming-image map spans the actual packet.  Exact image/coimage base change
+   is one sufficient stronger implementation, not a separate necessary gate;
+   the remaining image maps and projected-row square then follow functorially.
+   The direct Module 60 consumer proves the directed covector
    \(\rho_j(1-T_j)|_{\operatorname{im}(1-T_i)}\) vanishes without computing a
    two-wall Stokes matrix.  Yu--Zhang supplies spectral/vanishing-cycle block
    comparison only after an algebraic exponential-type occurrence is built;

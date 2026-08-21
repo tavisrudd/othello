@@ -144,7 +144,9 @@ The former 8,305-line reviewer interface is now split into semantic facades for
 the introduction, envelope, minimal-class, categorical one-step,
 framed-monodromy, and synthesis sections, plus a separate machinery facade;
 `PaperInterface.lean` remains a thin compatibility aggregator, and every fully
-qualified terminal name is unchanged.
+Each facade now has its own direct imports.  The five proof-bearing local source
+closures have sizes 69, 69, 80, 73, and 103 instead of inheriting the former
+164-module common closure; the isolated machinery facade reaches 116 modules.
 Governing plan:
 [`../2026-08-20-c910-categorical-proof-spine-plan.md`](../2026-08-20-c910-categorical-proof-spine-plan.md).
 
@@ -1135,7 +1137,6 @@ papers/cubic-stabilization-epilogue/lean/
     Applications/CubicFramedOneStep.lean
     Applications/DivisorTaggingVanishing.lean
     PaperInterface.lean
-    PaperInterface/Imports.lean
     PaperInterface/Introduction.lean
     PaperInterface/Envelope.lean
     PaperInterface/MinimalClass.lean
