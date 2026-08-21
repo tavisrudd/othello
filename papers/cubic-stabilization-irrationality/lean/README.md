@@ -101,6 +101,9 @@ form for `r * (1 - T_j) * v`, constructs this ambient identity.  The second
 can/variation triangle and coverage of the full variation image are not used.
 The reference covector `lambda` is explicit data; the formal result does not
 assert that a divisible quotient extends regularly from a generic fibre.
+For the integral window formula, `Comparison.ResonantWindowRank` proves the
+finite alternating-mask identity that makes the rank of every moved generator
+equal to one at resonance.
 
 The algebraic model has a compact sufficient constructor. If the combined
 crossed and moving map `(B,D)` admits a linear retraction, an explicit incoming

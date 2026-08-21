@@ -22,6 +22,7 @@ roots = [
   "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.RangeBaseChange",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.SemilinearVariation",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.VariationNormalFactor",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.ResonantWindowRank",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.MarkedMonodromyDiagram",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.MarkedLocalSystem",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.SelectedLocalSystemReader",
