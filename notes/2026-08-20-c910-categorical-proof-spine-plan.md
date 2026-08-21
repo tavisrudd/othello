@@ -99,14 +99,16 @@ and 50-page manuscript gates pass.
 The reviewer surface is split by semantic manuscript section.  The public
 `PaperInterface` path is now a thin aggregator over introduction, envelope,
 minimal-class, categorical one-step, framed-monodromy, and synthesis facades,
-with the 83 unclaimed reusable terminals isolated in a machinery facade.  The
+with the 83 unclaimed reusable terminals isolated in coefficient-tower,
+formal-connection, and residue-pairing machinery facades.  The
 311 declaration and proof blocks, fully qualified names, claim digests, and
 axiom census are unchanged; the claim-map checker now requires the aggregator
 to import every declared reviewer module.  The facades now carry direct imports
 rather than a shared umbrella: their local source closures have sizes 69
 (introduction), 69 (envelope), 80 (minimal class), 73 (categorical one-step),
-103 (framed monodromy), 0 (synthesis), and 116 (machinery), versus 164 for the
-former common import surface.
+103 (framed monodromy), and 0 (synthesis), versus 164 for the former common
+import surface.  The three machinery closures have sizes 78, 66, and 91,
+respectively, versus 116 before their semantic split.
 
 ### Execution status
 

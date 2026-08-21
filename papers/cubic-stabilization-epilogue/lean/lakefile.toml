@@ -184,7 +184,9 @@ roots = [
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.PaperInterface.CategoricalOneStep",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.PaperInterface.FramedMonodromy",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.PaperInterface.Synthesis",
-  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.PaperInterface.Machinery",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.PaperInterface.CoefficientTowers",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.PaperInterface.FormalConnections",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.PaperInterface.ResiduePairing",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.PaperInterface",
 ]
 

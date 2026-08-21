@@ -481,8 +481,9 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   reviewer entry point `PaperInterface` and machine audit
   `Verification/AxiomAudit`. The entry point is now a thin aggregator over
   semantic facades for the five proof-bearing manuscript sections, a
-  declaration-free synthesis facade, and a separate 83-terminal machinery
-  facade; all 311 fully qualified terminal names are unchanged. The current
+  declaration-free synthesis facade, and three semantic machinery facades
+  containing the 83 unclaimed terminals; all 311 fully qualified terminal
+  names are unchanged. The current
   main proof spine is the effective
   categorical block ledger and occurrence-indexed weak-factorization descent:
   the direct rank-two residue theorem and the finer primitive-sixth framed

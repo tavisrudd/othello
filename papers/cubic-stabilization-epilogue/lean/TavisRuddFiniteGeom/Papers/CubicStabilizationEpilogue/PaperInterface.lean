@@ -4,7 +4,9 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.PaperInterface.Mini
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.PaperInterface.CategoricalOneStep
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.PaperInterface.FramedMonodromy
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.PaperInterface.Synthesis
-import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.PaperInterface.Machinery
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.PaperInterface.CoefficientTowers
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.PaperInterface.FormalConnections
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.PaperInterface.ResiduePairing
 
 /-!
 # Reviewer interface for the cubic-stabilization companion

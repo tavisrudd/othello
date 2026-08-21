@@ -13,7 +13,9 @@ semantic reviewer facades matching the manuscript: `Introduction`, `Envelope`,
 `PaperInterface/`.  The declaration-free synthesis facade records that the
 concluding section introduces no new theorem-like terminal.  Reusable audited
 terminals on which no manuscript claim currently rests live separately in
-`PaperInterface/Machinery.lean`.
+the `PaperInterface/CoefficientTowers.lean`,
+`PaperInterface/FormalConnections.lean`, and
+`PaperInterface/ResiduePairing.lean` machinery facades.
 
 and its axiom audit is
 
