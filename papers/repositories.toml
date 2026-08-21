@@ -265,6 +265,10 @@ path = "claim-proof-novelty-ledger.md"
 reason = "internal claim-development ledger; public boundaries are stated in the manuscript"
 
 [[repository.exclude_path]]
+path = "cold-read-round-1.md"
+reason = "private referee report, not part of the public manuscript repository"
+
+[[repository.exclude_path]]
 path = "formal-statement-adequacy.md"
 reason = "internal formalization review record; the appendix states the public trust boundary"
 
