@@ -2,11 +2,12 @@
 
 **Lane:** `complete-ports` (re-pegged from `repaircodes` by the explicit C277 lane split)
 
-**Status:** COMPLETE — a deny-by-default complete-ports source/evidence allowlist and fail-closed export design
-are frozen. No repository was initialized, no file was copied, and no Lean/build artifact was
-touched. Publication remains blocked on the paper repository identity/remote, a user-selected
-license, the final C220 inclusion decision, public rewrites of README/proof/evidence ledgers, and the
-separately owned all-papers shared-Lean source/artifact export.
+**Status:** COMPLETE — a deny-by-default complete-ports source/evidence allowlist and fail-closed
+export design are frozen.  C678 later supplied the approved repository identity, MIT license,
+external-reader README, modular sources, pinned build, Zenodo metadata, tracked PDF policy, and
+executable `papers/repositories.toml` entry.  No repository was materialized, initialized, pushed,
+or published.  C325 still owns consolidated appendix evidence, C679 owns draft readiness, and the
+shared-Lean export remains separate.
 
 ## Nonpublication invariant
 
@@ -31,8 +32,9 @@ the complete v1 map. Its actions have exact meanings:
 - `generate`: create in the new repository from reviewed public metadata or a validated build; and
 - `exclude`: never export.
 
-The current direct-copy surface consists of the TeX source, bibliography, and the closed dependency
-set of the selected computational evidence. The exact script closure matters: C218 imports the
+The current direct-copy surface consists of the modular TeX source, bibliography, external README,
+MIT license, pinned build files, Zenodo metadata, tracked PDF, and the closed dependency set of the
+selected computational evidence. The exact script closure matters: C218 imports the
 projective-completion verifier; C219 imports C202 and C218; C227 imports C219; C243 imports C218;
 and C244 imports C218, C226, and C227. Preserving the original evidence basenames under one
 `evidence/` directory keeps those explicit relative imports checkable.
@@ -52,7 +54,6 @@ The following remain forbidden unless a later manifest names an exact replacemen
   planning documents;
 - the current README and proof ledger as byte copies—their public replacements must omit private
   paths and internal workflow state;
-- the tracked PDF as a source input; build a release PDF from the public source;
 - every Lean source/build file in the paper repository; it receives only a shared-repository commit
   pin, target list, public proof ledger, and artifact provenance;
 - `.lake/`, raw `.olean`/`.ilean`/`.trace` files, local caches, Nix stores, editor state, logs,
@@ -83,10 +84,9 @@ The following remain forbidden unless a later manifest names an exact replacemen
    allowlisted file set, review the first commit, and then attach the approved remote. Publishing or
    pushing remains a separate explicit user action.
 
-The initial candidate scan over the six current paper-package files and selected script/JSON closure
-found no filenames containing obvious absolute `/home`/`/tmp` paths or common credential/private-key
-markers. This bounded scan is not a publication clearance. No repository license file exists, so
-license selection is a hard blocker.
+The C678 immutable-source exporter audit reports zero private-reference findings for the selected
+18-file paper package.  This is not publication authorization; appendix consolidation, final audit,
+and explicit author action remain required.
 
 ## Shared Lean monorepo contract
 
@@ -121,7 +121,8 @@ shared Lean edit.
 
 ## Next gates
 
-The complete-ports paper can proceed after the user supplies or approves its repository identity/remote and license, then
-decides whether C220 remains. In parallel, the global all-papers Lean export needs a separately
-lane-pegged task coordinating build-system ownership and existing public-`FiniteGeom` extraction
-work. Every other paper gets its own deny-by-default manifest before export.
+The repository identity, MIT license, and omission of C220 are settled.  C325 next consolidates the
+appendix verifier; C679 then performs the draft-readiness audit.  The global all-papers Lean export
+remains a separately lane-pegged task coordinating build-system ownership and the public
+`FiniteGeom` extraction.  Materialization, remote creation, DOI deposition, publication, and push
+remain separate author actions.

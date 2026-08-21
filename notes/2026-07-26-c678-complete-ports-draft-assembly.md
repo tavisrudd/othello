@@ -47,6 +47,15 @@ lean/scripts/lean-build-queue.py build \
 
 python3 scripts/lean-trust-spine.py audit --area complete_ports
   PASS — 0 error, 0 warn, 0 info
+
+nix develop path:.#manuscript --command make TEXSHELL= check
+  PASS — pinned XeLaTeX build, 17 pages, clean final warning scan
+
+python3 papers/scripts/export-paper-repos.py plan \
+  --source-ref HEAD --repository complete-repair-ports
+python3 papers/scripts/export-paper-repos.py audit \
+  --source-ref HEAD --repository complete-repair-ports
+  PASS — 18 selected files, 9 explicit private exclusions, 0 reference findings
 ```
 
 The manuscript milestone is commit `9033d5103`, made with the complete explicit C678 path list.
