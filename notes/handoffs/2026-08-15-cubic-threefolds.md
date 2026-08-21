@@ -38,12 +38,16 @@ promoted mathematical assertion maps to a kernel-checked declaration.
 ## Current status
 
 - **C936 — closed 2026-08-21; modular resolvent companion complete.**  The
-  warning-free seven-page paper proves that the signed nonstandard
+  warning-free nine-page paper proves that the signed nonstandard
   \(A_5\)-cubic parameter is the sign/discriminant resolvent of the actual
   relative norm-axis elliptic two-division cover.  It identifies
   \(T=81t^2\), \(r=9t\), \(X_0(6)\), the sign and split level-six subgroups,
   exact \(A_3\) monodromy, cusp widths \(2,6\), and the two extra
-  modular-interior cubic boundary values.  A post-close EJ pass further proves
+  modular-interior cubic boundary values.  At the chordal value, an exact
+  orbit-and-ideal certificate identifies the transverse divisor with the
+  reduced twelve-point icosahedral orbit, so the limit Jacobian is isogenous
+  to the fifth power of the norm-axis elliptic factor.  A post-close EJ pass
+  further proves
   that golden orientation turns the rational triple into the cyclic cubic
   splitting cover and gives
   \(t=3(\eta(3\tau)/\eta(\tau))^6\).  Exact algebra and an independent subgroup

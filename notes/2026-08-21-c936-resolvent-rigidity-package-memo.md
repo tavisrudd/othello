@@ -40,9 +40,8 @@ explains why the geometric cubic kernel is exotic: within this five-gluing
 packet, the exotic orbit is not decorative; it is the only orbit compatible
 with cubic Torelli rigidity.
 
-After the family-specific transversality check recorded below, the boundary
-theorem would supply an independent compatibility check.  At the chordal
-value, the hyperelliptic limit would then have Jacobian isogenous to the fifth
+The now-certified boundary theorem supplies an independent compatibility
+check.  At the chordal value, the hyperelliptic limit has Jacobian isogenous to the fifth
 power of the same elliptic factor that controls the smooth resolvent packet.
 
 ## Proposed theorem package
@@ -240,21 +239,40 @@ Use the term *gluing-isogeny packet* until the polarized isogeny type between
 the quotients has been computed.  Calling it a Siegel Hecke correspondence
 would currently assert more than has been proved.
 
-### Conditional Theorem E: chordal compatibility
+### Theorem E: chordal compatibility
 
 At the chordal value \(T=729/5\), general chordal degeneration theory says
 that the limit is the genus-five hyperelliptic double cover branched over the
 degree-twelve divisor cut on the singular rational normal curve by the actual
-transverse term of the pencil.  To identify it with
+transverse term of the pencil.  For this pencil, choose a primitive fifth root
+\(\zeta\) and the \(C_5\)-eigenline
+
+\[
+ p=[1:\zeta:\zeta^2:\zeta^3:\zeta^4:0].
+\]
+
+At
+
+\[
+ t_0=-\frac35-\frac65(\zeta^2+\zeta^3),
+ \qquad t_0^2=\frac95,
+\]
+
+exact differentiation shows that the twelve-point orbit
+\(Z=A_5p\) lies on the singular rational normal quartic and in \(Q=0\).
+Quadratic evaluation on \(Z\) has rank nine, so the six quadrics through
+\(Z\) are exactly the quadratic ideal of the quartic.  Their linear multiples
+have degree-three rank twenty-two, while adjoining \(Q\) raises that rank to
+twenty-three.  Thus \(Q\) does not vanish identically on the quartic.  Its
+restriction is a nonzero section of \(\mathcal O_{\mathbf P^1}(12)\) already
+vanishing at the twelve distinct points of \(Z\), so that orbit is exactly
+the reduced transverse divisor.  Its standard icosahedral coordinate gives
 
 \[
  C_{\rm ico}:\quad w^2=x(x^{10}+11x^5-1).
 \]
 
-one must still verify that the actual pencil is transverse there and that the
-restricted transverse term cuts a reduced divisor of degree twelve.  Once
-verified, \(A_5\)-invariance and the orbit-size classification identify it
-with the icosahedral twelve-point orbit.  Paulhus's decomposition then gives
+Paulhus's decomposition then gives
 
 \[
  J(C_{\rm ico})\sim E_{\rm ico}^{5},
@@ -274,8 +292,7 @@ Equality of \(j\)-invariants identifies the elliptic curves over \(\mathbf C\)
 or \(\overline{\mathbf Q}\).  Equality over \(\mathbf Q\) would additionally
 require a quadratic-twist check.
 
-After the family-specific transversality check, this should close the
-mathematical narrative: the elliptic source that
+This closes the mathematical narrative: the elliptic source that
 controls the smooth gluing packet is recovered as the elliptic isogeny factor
 of the chordal hyperelliptic limit.
 
@@ -379,9 +396,9 @@ argument elsewhere; that would require a specialist priority audit.
 
 Casalaina-Martin--Grushevsky--Hulek--Laza prove the extension of the
 intermediate-Jacobian map and describe the hyperelliptic limit of a general
-chordal degeneration.  For the \(A_5\)-pencil, identifying the twelve branch
-points with the icosahedral orbit requires the transverse-term check stated
-in Conditional Theorem E.
+chordal degeneration.  For the \(A_5\)-pencil, Theorem E supplies the
+family-specific transverse-term calculation identifying the branch divisor
+with the reduced icosahedral orbit.
 
 Paulhus computes the Jacobian decomposition of this genus-five curve and its
 elliptic factor.  The exact equality of that elliptic factor's \(j\)-invariant
@@ -441,8 +458,9 @@ supports the following conservative position:
 - the strongest candidate contribution is the application-specific bridge
   from the actual cubic gluing packet to elliptic two-division, followed by
   the proposed symmetry-based landing/escape classification;
-- conditional on the transverse-term check, the chordal equality supplies
-  independent geometric evidence and a strong final theorem;
+- the exact transverse-term certificate makes the chordal equality an
+  unconditional source of independent geometric evidence and a strong final
+  theorem;
 - a specialist priority audit remains necessary before using words such as
   “first,” “new,” or “previously unknown.”
 
@@ -635,7 +653,29 @@ Final red-team status:
 - universal-versus-oriented resolvent statement: repaired;
 - literature positioning: suitable for a strategy memo, not a priority
   verdict;
-- chordal compatibility: conditional until the actual transverse divisor is
-  checked;
+- chordal compatibility: conditional at the end of round 2, subsequently
+  discharged by the exact certificate below;
 - use of “Hecke”: blocked until the polarized inter-quotient double-coset
   type is computed.
+
+### Post-red-team chordal discharge
+
+The remaining chordal condition was removed after the two review rounds.
+The tracked script
+`papers/cubic-gluing-resolvent/verification/chordal_transversality.py` works
+over \(\mathbf Q(\zeta_5)\) and certifies:
+
+- the selected eigenline lies over \(t^2=9/5\);
+- its projective \(A_5\)-orbit has twelve points, all singular on the chordal
+  member and all in \(Q=0\);
+- quadratic evaluation has rank nine, hence the quadrics through the orbit
+  have dimension six and equal the quadratic ideal of the rational normal
+  quartic;
+- their degree-three multiples have rank twenty-two;
+- adjoining \(Q\) raises the rank to twenty-three.
+
+Therefore \(Q|_C\neq0\).  Since it is a section of
+\(\mathcal O_C(3)\simeq\mathcal O_{\mathbf P^1}(12)\) vanishing on twelve
+distinct orbit points, its zero divisor is exactly that reduced orbit.  This
+supplies the missing family-specific hypothesis in the general chordal-limit
+theorem and makes Theorem E unconditional.

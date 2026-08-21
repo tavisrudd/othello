@@ -20,6 +20,8 @@ lint:
 evidence:
 	nix-shell -p 'python3.withPackages (ps: [ ps.sympy ])' --run \
 		'python3 verification/resolvent_identities.py --check verification/resolvent-identities.txt'
+	nix-shell -p 'python3.withPackages (ps: [ ps.sympy ])' --run \
+		'python3 verification/chordal_transversality.py --check verification/chordal-transversality.txt'
 	$(PYTHON) verification/subgroup_check.py --check verification/subgroup-check.txt
 	cd verification && sha256sum --check SHA256SUMS
 

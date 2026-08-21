@@ -210,16 +210,27 @@ Direct substitution gives `r(sigma(v))=r(v)`; its fixed points are exactly
 reduces the group to `A_3`: it chooses a cyclic direction on the rational
 three-packet, while reversing the golden orientation reverses that direction.
 
-**Mysteries still open.**
+**Mystery ledger.**
 
-- A preferred geometric golden orientation might choose between `r=9t` and
+- **Settled in the reopened pass:** chordal transversality needs no new
+  parametrization of the singular quartic.  One (C_5)-eigenline generates a
+  twelve-point (A_5)-orbit in (Q=0); the quadratic-ideal ranks prove
+  (Q|_C\ne0), and orbit size equals
+  \(\deg\mathcal O_C(3)=12\).  Symmetry and degree therefore force the whole
+  reduced transverse divisor.
+
+- **Open:** a preferred geometric golden orientation might choose between `r=9t` and
   `r=-9t`; the unordered kernel theorem does not.  Once either convention is
   chosen, the resulting cyclic generator and its inversion under golden
   reversal are now explicit.
-- Extending the actual polarized Prym/axis comparison across the cusps would
+- **Open:** extending the actual polarized Prym/axis comparison across the cusps would
   require a semiabelian or logarithmic Prym theorem and is not used here.
-- A specialist citation-graph audit could support a formal priority claim;
+- **Open:** a specialist citation-graph audit could support a formal priority claim;
   the present bounded search deliberately does not.
+- **Successor question:** the orbit-saturation argument applies whenever a
+  symmetric chordal degeneration supplies an orbit whose size equals the
+  degree of the transverse section.  Classifying other cubic pencils for
+  which this equality occurs is not needed here and remains unallocated.
 
 No discovery-track entry was added: the exact `A_3` strengthening and all
 boundary corrections are direct closeout consequences of the requested
@@ -227,16 +238,15 @@ companion.
 
 ## Reopened mathematical supplement
 
-> **Post-supplement correction (two-round red team, 2026-08-21).**  The
-> chordal-factor comparison below is conditional until the actual transverse
-> term of the cubic pencil is restricted to the singular rational normal
-> curve and verified to cut a reduced degree-twelve divisor.  General chordal
-> degeneration theory identifies the branch divisor with that restriction;
-> uniqueness of an abstract twelve-point \(A_5\)-orbit does not replace the
-> family-specific transversality check.  The resolvent and smooth cubic-IJ
-> landing/escape arguments are unaffected.  The corrected theorem package,
-> bounded literature audit, and two rounds of red-team findings are recorded
-> in `2026-08-21-c936-resolvent-rigidity-package-memo.md`.
+> **Post-red-team resolution (2026-08-21).**  The chordal condition raised by
+> the two-round review is discharged.  The tracked certificate constructs a
+> twelve-point \(A_5\)-orbit on the singular rational normal quartic, recovers
+> its six-dimensional quadratic ideal, and proves that adjoining the actual
+> transverse term \(Q\) raises the degree-three ideal rank from 22 to 23.
+> Hence \(Q|_C\neq0\), and its twelve known orbit zeros form the complete
+> reduced degree-twelve branch divisor.  The unconditional proof and
+> literature boundary are recorded in
+> `2026-08-21-c936-resolvent-rigidity-package-memo.md`.
 
 The reopened pass checked literature before treating each question.  It
 settles two of the paper's mysteries, sharpens four others, and separates
