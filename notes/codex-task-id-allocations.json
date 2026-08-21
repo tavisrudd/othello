@@ -3311,8 +3311,17 @@
       "last": 935,
       "purpose": "Audit the elliptic 2-division discriminant-resolvent upgrade and strengthen the m=1 cubic-stabilization epilogue",
       "sequence": 368
+    },
+    {
+      "count": 1,
+      "first": 936,
+      "kind": "reservation",
+      "lane": "cubic-threefolds",
+      "last": 936,
+      "purpose": "Write the modular companion identifying the signed cubic gluing curve with the elliptic two-division sign resolvent",
+      "sequence": 369
     }
   ],
-  "next_id": 936,
+  "next_id": 937,
   "schema": "codex-task-id-allocations-v1"
 }
