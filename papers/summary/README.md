@@ -15,17 +15,17 @@ under operations, such as stabilization, that might be expected to weaken them?
 
 Every paper is intended to stand on its own mathematically.
 
-The five-paper series *Rigidity from Sparse Shadows* asks how much of a
+The five-paper series *Clebsch: Rigidity from Sparse Shadows* asks how much of a
 structured object can be reconstructed from sparse code, matching, incidence,
-and cubic-form data. *Reconstructing the Clebsch Code and Its Golden Orientation
-from Its Deep-Hole Syndrome Locus*, *Quadratic Trade Rigidity and Cubic
-Orientation in Conic Matching Quotients*, and *Golden Descent and Operator
-Realizations of the Clebsch Cubic* reconstruct two geometrically different
+and cubic-form data. *Reconstructing the Clebsch Code from Its Deep-Hole
+Syndrome Locus*, *Quadratic Trade Rigidity and Cubic Orientation in Conic
+Matching Quotients*, and *Hitchin’s Icosahedral Incidence Double Cover and
+Operator Realizations of the Clebsch Cubic* reconstruct two geometrically different
 `A₅`-invariant cubic forms attached to the same six axes: one conference-type
 and one chordal. *Chordal and Conference Cubics: Reconstruction and a Residual
-C2-Torsor* proves that each form recovers the common carrier and computes the
-precise ambiguity in passing between them. *Reconstructing PG(2,13), Its Conic,
-and Polarity from the Minimum Words of a Binary Conic Code* develops a separate
+C₂-Torsor* proves that each form recovers the common carrier and computes the
+precise ambiguity in passing between them. *Reconstructing PG(2,13), its conic,
+and polarity from the minimum words of a binary conic code* develops a separate
 code reconstruction: pair data from minimum-weight words recover a marked conic
 plane and its polarity.
 *Diagonal Isoduality and Transversal Clifford Groups of MDS–CSS Codes* and
@@ -132,16 +132,17 @@ complex as separate victories.
   has size at least `√(2q) + 3/2 − 8/√(2q)`. The first two secant moments give
   the exact pointwise-nonnegative defect behind this bound; zero defect forces
   a simple maximum-matching design, and the remainder gives deletion
-  stability. [Arcs Complete Outside a Conic: A Prescribed-Hole Defect Identity and Matching-Design Rigidity](https://github.com/tavisrudd/arcs-complete-outside-conic/blob/main/arcs_complete_outside_conic.pdf).
+  stability. [Arcs complete outside a conic: a prescribed-hole defect identity and matching-design rigidity](https://github.com/tavisrudd/arcs-complete-outside-conic/blob/main/arcs_complete_outside_conic.pdf).
 
 - **Sparse data recover marked finite geometry.** In the Clebsch case, a
   conic-containing deep-hole syndrome locus recognizes the non-GRS
-  `[6,3,4]₁₁` code and recovers its conic, polarity, and golden orientation;
+  `[6,3,4]₁₁` code and recovers its conic, polarity, and conference matrix up
+  to switching and global negation;
   a companion classification proves that `q = 11` is the only field order
   admitting a conic-filling six-arc. In the q=13 case, weighted pair
   concurrences of the 364 minimum words recover the binary code and the marked
-  plane `PG(2,13)`, including its conic and polarity. [Reconstructing the Clebsch Code and Its Golden Orientation from Its Deep-Hole Syndrome Locus](https://github.com/tavisrudd/clebsch-rigidity/blob/main/clebsch_rigidity.pdf),
-  [Reconstructing PG(2,13), Its Conic, and Polarity from the Minimum Words of a Binary Conic Code](https://github.com/tavisrudd/q13-passant-code/blob/main/passant_code_q13.pdf).
+  plane `PG(2,13)`, including its conic and polarity. [Reconstructing the Clebsch Code from Its Deep-Hole Syndrome Locus](https://github.com/tavisrudd/clebsch-rigidity/blob/main/clebsch_rigidity.pdf),
+  [Reconstructing PG(2,13), its conic, and polarity from the minimum words of a binary conic code](https://github.com/tavisrudd/q13-passant-code/blob/main/passant_code_q13.pdf).
 
 - **Quadratic trades recognize exceptional matching geometries.** Within full
   `PGL₂(q)`-orbits of perfect matchings over odd fields, a two-valued
@@ -151,25 +152,26 @@ complex as separate victories.
   `q − 2` nonmatching orbits retain the same trade.
   [Quadratic Trade Rigidity and Cubic Orientation in Conic Matching Quotients](https://github.com/tavisrudd/clebsch-factorization/blob/main/clebsch_factorization.pdf).
 
-- **Golden descent fixes a conference source and its cubic shadows.** Hitchin's
+- **Arithmetic of Hitchin's incidence cover determines its quadratic twist.** Hitchin's
   harmonic-cubic incidence cover has function field `Q(P(H))(√(5J₀))` and
   finite Stein equation `z² = 5J₀`. After a marked bridge datum is fixed, a
   chosen sheet selects a conference source whose cubic has four exact operator
   descriptions and returns as the exact degree-six Gaunt multiple
   `−784000σ₃/1247103`. The same carrier independently yields exchange-spectrum
   rigidity and sharp reconstruction of two-graphs from aligned four-sets.
-  [Golden Descent and Operator Realizations of the Clebsch Cubic](https://github.com/tavisrudd/clebsch-passages/blob/main/clebsch_passages.pdf).
+  [Hitchin’s Icosahedral Incidence Double Cover and Operator Realizations of the Clebsch Cubic](https://github.com/tavisrudd/clebsch-passages/blob/main/clebsch_passages.pdf).
 
 - **Distinct cubic shadows recover one marked carrier.** The signed residue in
   *Quadratic Trade Rigidity and Cubic Orientation in Conic Matching Quotients*
   is a chordal Hankel cubic, not the conference cubic of *Reconstructing the
-  Clebsch Code and Its Golden Orientation from Its Deep-Hole Syndrome Locus*
-  and *Golden Descent and Operator Realizations of the Clebsch Cubic*. Its
-  singular quartic recovers the original six axes by
-  exact stabilizer pairs. The two cubics occupy one invariant pencil, and
-  the normalized outer difference gives an exact oriented round trip once a
-  chordal companion is selected.
-  [Chordal and Conference Cubics: Reconstruction and a Residual C2-Torsor](https://github.com/tavisrudd/chordal-conference-reconstruction/blob/main/chordal_conference_reconstruction.pdf).
+  Clebsch Code from Its Deep-Hole Syndrome Locus*
+  and *Hitchin’s Icosahedral Incidence Double Cover and Operator Realizations
+  of the Clebsch Cubic*. Its singular quartic recovers the original six axes
+  by exact stabilizer pairs. Selecting a chordal line and a conference sign
+  gives mutually inverse reconstruction maps. Forgetting the chordal line
+  gives a residual `C₂`-torsor distinct from the global-negation torsor
+  `{[B],[-B]}`.
+  [Chordal and Conference Cubics: Reconstruction and a Residual C₂-Torsor](https://github.com/tavisrudd/chordal-conference-reconstruction/blob/main/chordal_conference_reconstruction.pdf).
 
 ### Coding theory and quantum information
 
@@ -207,7 +209,7 @@ complex as separate victories.
   squared real triangle holonomy parametrizes the complete degree-three Pareto
   frontier; cutwise constancy of any one sector characterizes the real
   switching class, with a quantitative stability bound.
-  [Balanced Cuts of Conference Matrices](https://github.com/tavisrudd/conference-cut-spectra/blob/main/conference_cut_spectra.pdf).
+  [Balanced Cuts of Conference Matrices: Squared-Spectrum Rigidity and Hermitian Holonomy](https://github.com/tavisrudd/conference-cut-spectra/blob/main/conference_cut_spectra.pdf).
 
 ## Theorems over infinite families
 
@@ -226,11 +228,11 @@ is conditional, its hypothesis is displayed in the theorem column.
 | Framed Formal Monodromy of Cubic Threefolds | The primitive-sixth framed-monodromy count of the numerical small even quantum connection equals two. | Every smooth complex cubic threefold `X`. |
 | Framed Formal Monodromy of Cubic Threefolds | The primitive-sixth count of a product with projective space is that of the factor times one more than the dimension. | Every smooth projective variety and every projective space. |
 | Framed Formal Monodromy of Cubic Threefolds | Assuming the reconstruction-tail and residual divisor-tagging hypotheses, the primitive-sixth count is birationally invariant. | All smooth projective varieties of dimension at most four. |
-| Reconstructing the Clebsch Code and Its Golden Orientation from Its Deep-Hole Syndrome Locus | If an arc's uncovered locus is a nonsingular conic, then `q` is odd and `2k − 3 ≤ q ≤ (k(k − 1) + 3)/3`. | Every `k`-arc with `k ≥ 4`, over every finite field order `q`. |
+| Reconstructing the Clebsch Code from Its Deep-Hole Syndrome Locus | If an arc's uncovered locus is a nonsingular conic, then `q` is odd and `2k − 3 ≤ q ≤ (k(k − 1) + 3)/3`. | Every `k`-arc with `k ≥ 4`, over every finite field order `q`. |
 | Computational Strengthenings of Clebsch Syndrome Rigidity | `q = 11` is the only field order admitting a conic-filling six-arc. | Every field order. |
 | Quadratic Trade Rigidity and Cubic Orientation in Conic Matching Quotients | The strength-two trade space is one-dimensional and generated by a two-valued vector if and only if the orbit is `B₃/F₇` or `H₃/F₁₁`. | Full `PGL₂(q)`-orbits of perfect matchings, for every odd prime power `q`. |
-| Golden Descent and Operator Realizations of the Clebsch Cubic | Aligned four-sets reconstruct the two-graph up to complement, and seven is sharp. | Every two-graph on at least seven vertices. |
-| Arcs Complete Outside a Conic: A Prescribed-Hole Defect Identity and Matching-Design Rigidity | The first two secant moments give an exact defect identity with pointwise nonnegative remainder. | Every `k`-arc with `k ≥ 3` in every finite projective plane, and every prescribed hole set disjoint from the arc. |
+| Hitchin’s Icosahedral Incidence Double Cover and Operator Realizations of the Clebsch Cubic | Aligned four-sets reconstruct the two-graph up to complement, and seven is sharp. | Every two-graph on at least seven vertices. |
+| Arcs complete outside a conic: a prescribed-hole defect identity and matching-design rigidity | The first two secant moments give an exact defect identity with pointwise nonnegative remainder. | Every `k`-arc with `k ≥ 3` in every finite projective plane, and every prescribed hole set disjoint from the arc. |
 | Deep Holes of Projective Reed–Solomon Codes Beyond Redundancy Four: Recursive Carriers and Exact Classifications Through Redundancy Ten | Split-free directions, and deep holes wherever the covering-radius gate applies, are classified in the stated ranges. | R5–R6: every `q ≥ 7`; R7: split-free for every `q ≥ 7` and deep holes for `q ≥ 11`; R8–R10: `q ≥ 43, 53, 59`. |
 | Deep Holes of Projective Reed–Solomon Codes Beyond Redundancy Four: Recursive Carriers and Exact Classifications Through Redundancy Ten | On the trivial-gcd separable stratum, `#Y = 6N + 3d₂ + d₃` in every characteristic. | Every field order and characteristic. |
 | Local-Unitary Rigidity and Quantitative Rounding for Stabilizer AME States | Every product-unitary intertwiner between stabilizer `AME(2m,q)` states is Clifford on each party. | Every prime power `q = pᵉ` and `m ≥ 2`. |
@@ -253,23 +255,23 @@ boundary, and reproducible entry points.
 | Framed Formal Monodromy of Cubic Threefolds | Algebraic geometry / quantum cohomology | The unconditional count is `ν₆(X) = 2` and satisfies the projective-space product formula; its operation formulas and birational invariance remain conditional on two explicit hypotheses. | [PDF](https://github.com/tavisrudd/cubic-stabilization-m1/blob/main/companions/cubic-framed-monodromy/cubic_framed_monodromy.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-m1) |
 | Deep Holes of Projective Reed–Solomon Codes Beyond Redundancy Four: Recursive Carriers and Exact Classifications Through Redundancy Ten | Coding theory | Deep-hole classifications extend through redundancy ten in stated ranges. | [PDF](https://github.com/tavisrudd/beyond4-prs/blob/main/prs-beyond-redundancy-four.pdf) · [repo](https://github.com/tavisrudd/beyond4-prs) |
 | Local-Unitary Rigidity and Quantitative Rounding for Stabilizer AME States | Quantum information | Exact local-unitary rigidity has a separate quantitative rounding theorem. | [PDF](https://github.com/tavisrudd/ame-lu/blob/main/ame-lu.pdf) · [repo](https://github.com/tavisrudd/ame-lu) |
-| Reconstructing the Clebsch Code and Its Golden Orientation from Its Deep-Hole Syndrome Locus | Finite geometry / coding | Deep-hole data recognize the Clebsch code and golden orientation. | [PDF](https://github.com/tavisrudd/clebsch-rigidity/blob/main/clebsch_rigidity.pdf) · [repo](https://github.com/tavisrudd/clebsch-rigidity) |
+| Reconstructing the Clebsch Code from Its Deep-Hole Syndrome Locus | Finite geometry / coding | Deep-hole data recognize the Clebsch code and recover its conference matrix up to switching and global negation. | [PDF](https://github.com/tavisrudd/clebsch-rigidity/blob/main/clebsch_rigidity.pdf) · [repo](https://github.com/tavisrudd/clebsch-rigidity) |
 | Quadratic Trade Rigidity and Cubic Orientation in Conic Matching Quotients | Algebraic combinatorics | On the matching carrier, a two-valued quadratic trade classifies two exceptional geometries and a cubic orients their sheets. | [PDF](https://github.com/tavisrudd/clebsch-factorization/blob/main/clebsch_factorization.pdf) · [repo](https://github.com/tavisrudd/clebsch-factorization) |
-| Golden Descent and Operator Realizations of the Clebsch Cubic | Algebraic geometry / combinatorics | An exact arithmetic incidence cover selects a marked conference source whose cubic shadows return in degree-six harmonics; exchange rigidity and two-graph reconstruction follow independently. | [PDF](https://github.com/tavisrudd/clebsch-passages/blob/main/clebsch_passages.pdf) · [repo](https://github.com/tavisrudd/clebsch-passages) |
-| Reconstructing PG(2,13), Its Conic, and Polarity from the Minimum Words of a Binary Conic Code | Coding / finite geometry | Weighted pair data on minimum words recover a marked projective plane, conic, and polarity. | [PDF](https://github.com/tavisrudd/q13-passant-code/blob/main/passant_code_q13.pdf) · [repo](https://github.com/tavisrudd/q13-passant-code) |
-| Chordal and Conference Cubics: Reconstruction and a Residual C2-Torsor | Invariant theory / algebraic combinatorics | Distinct chordal and conference cubics recover one marked six-axis carrier and admit an exact oriented marked return. | [PDF](https://github.com/tavisrudd/chordal-conference-reconstruction/blob/main/chordal_conference_reconstruction.pdf) · [repo](https://github.com/tavisrudd/chordal-conference-reconstruction) |
+| Hitchin’s Icosahedral Incidence Double Cover and Operator Realizations of the Clebsch Cubic | Algebraic geometry / combinatorics | An exact arithmetic incidence cover labels its sheets by opposite marked conference sources; cubic realizations, exchange rigidity, and two-graph reconstruction follow. | [PDF](https://github.com/tavisrudd/clebsch-passages/blob/main/clebsch_passages.pdf) · [repo](https://github.com/tavisrudd/clebsch-passages) |
+| Reconstructing PG(2,13), its conic, and polarity from the minimum words of a binary conic code | Coding / finite geometry | Weighted pair data on minimum words recover a marked projective plane, conic, and polarity. | [PDF](https://github.com/tavisrudd/q13-passant-code/blob/main/passant_code_q13.pdf) · [repo](https://github.com/tavisrudd/q13-passant-code) |
+| Chordal and Conference Cubics: Reconstruction and a Residual C₂-Torsor | Invariant theory / algebraic combinatorics | Distinct chordal and conference cubics recover one marked six-axis carrier; the residual chordal-line torsor is distinct from the global-negation/Frobenius torsor. | [PDF](https://github.com/tavisrudd/chordal-conference-reconstruction/blob/main/chordal_conference_reconstruction.pdf) · [repo](https://github.com/tavisrudd/chordal-conference-reconstruction) |
 | Hodge Atoms as Occurrence-Indexed Marker Ledgers | Algebraic geometry / quantum cohomology | The standard abstract Hodge-atom chemical formula is the Hodge specialization of an occurrence-indexed categorical marker ledger, with an effective weak-factorization quotient and a strictly one-step rank-two obstruction. | [PDF](https://github.com/tavisrudd/hodge-atom-marker-ledger/blob/main/hodge_atom_marker_ledger.pdf) · [repo](https://github.com/tavisrudd/hodge-atom-marker-ledger) |
 | Gamma Point Rows under Quantum Wall Crossing and a Criterion for Stable Irrationality | Algebraic geometry / quantum cohomology | A rank-one derived-clutching theorem, an exact simple-wall ambient point coordinate, ordinary-flop point-row transport, global support collapse, and Gamma reduction give an all-stabilizations criterion under explicit gauged-admissibility and marked threshold assumptions. | [PDF](https://github.com/tavisrudd/cubic-stabilization-irrationality/blob/main/cubic_stabilization_irrationality.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-irrationality) |
 | Standard Flips of Discrepancy One: Extremal J-Normalization and the Meijer Aperture at ν=1 | Algebraic geometry / quantum cohomology | An exact `z`-order count and the `ν=1` Barnes sector complete the discrepancy-one range in Shen--Shoemaker's extremal flip theorem. | [PDF](https://github.com/tavisrudd/discrepancy-one-flips/blob/main/discrepancy_one_flips.pdf) · [repo](https://github.com/tavisrudd/discrepancy-one-flips) |
-| Arcs Complete Outside a Conic: A Prescribed-Hole Defect Identity and Matching-Design Rigidity | Finite geometry / designs | A universal pointwise defect identity gives matching-design rigidity, stability, and conic-relative bounds. | [PDF](https://github.com/tavisrudd/arcs-complete-outside-conic/blob/main/arcs_complete_outside_conic.pdf) · [repo](https://github.com/tavisrudd/arcs-complete-outside-conic) |
+| Arcs complete outside a conic: a prescribed-hole defect identity and matching-design rigidity | Finite geometry / designs | A universal pointwise defect identity gives matching-design rigidity, stability, and conic-relative bounds. | [PDF](https://github.com/tavisrudd/arcs-complete-outside-conic/blob/main/arcs_complete_outside_conic.pdf) · [repo](https://github.com/tavisrudd/arcs-complete-outside-conic) |
 | Diagonal Isoduality and Transversal Clifford Groups of MDS–CSS Codes | Quantum coding / finite geometry | A diagonal-isoduality nullity test determines the projective transversal group. | [PDF](https://github.com/tavisrudd/mds-css-transversal-groups/blob/main/mds-css-transversal-groups.pdf) · [repo](https://github.com/tavisrudd/mds-css-transversal-groups) |
 | Balanced Cuts of Conference Matrices: Squared-Spectrum Rigidity and Hermitian Holonomy | Matrix theory / algebraic combinatorics / mathematical physics | Order six is the unique nontrivial cut-independent case; Hermitian triangle holonomy controls the degree-three frontier and rigidity. | [PDF](https://github.com/tavisrudd/conference-cut-spectra/blob/main/conference_cut_spectra.pdf) · [repo](https://github.com/tavisrudd/conference-cut-spectra) |
 | Integral Cohomology and Modular Decomposition for the Theta Divisor of a Cubic Threefold | Algebraic geometry / topology | The rank-130 integral middle lattice has canonical mod-two glue, while the same resolution carries a factor-three integral perverse attachment, a length-three modular Loewy chain, and failure of relative hard Lefschetz modulo three. | [PDF](https://github.com/tavisrudd/blown-up-theta-lattice/blob/main/blown_up_theta_lattice.pdf) · [repo](https://github.com/tavisrudd/blown-up-theta-lattice) |
 | Frobenius-equivariant Pair Extension and Robust Repair of Eight-Arcs | Finite geometry / coding theory | Fixed mate-line carriers and exact collision corrections give Frobenius-compatible paired MDS extensions, including the exact two-fixed-point minimum over F₂₅. | [PDF](https://github.com/tavisrudd/equivariant-robust-completion/blob/main/equivariant-robust-completion.pdf) · [repo](https://github.com/tavisrudd/equivariant-robust-completion) |
 | Complete Bounded Repair Ports: Transfer, Reliability, and Geometric Structure | Coding theory / reliability | Exact weighted-functional confinement transfers represented bounded repair ports to positive-density coordinate classes, retaining both support and normalized decoder data. | [PDF](https://github.com/tavisrudd/complete-repair-ports/blob/main/complete_repair_ports.pdf) · [repo](https://github.com/tavisrudd/complete-repair-ports) |
 
-The repository for *Reconstructing the Clebsch Code and Its Golden Orientation
-from Its Deep-Hole Syndrome Locus* also contains the computational companion
+The repository for *Reconstructing the Clebsch Code from Its Deep-Hole
+Syndrome Locus* also contains the computational companion
 *Computational Strengthenings of Clebsch Syndrome Rigidity*. It supplies exact
 finite classifications and replayable evidence for the main paper rather than
 a separate series paper.
@@ -434,27 +436,27 @@ models produce near-symmetries rather than perfect ones.
 
 ---
 
-### Rigidity from Sparse Shadows
+### Clebsch: Rigidity from Sparse Shadows
 
-#### Reconstructing the Clebsch Code and Its Golden Orientation from Its Deep-Hole Syndrome Locus
+#### Reconstructing the Clebsch Code from Its Deep-Hole Syndrome Locus
 
 [PDF](https://github.com/tavisrudd/clebsch-rigidity/blob/main/clebsch_rigidity.pdf) · [Repository](https://github.com/tavisrudd/clebsch-rigidity) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21652792-blue.svg)](https://doi.org/10.5281/zenodo.21652792)
 
 **Standout result.** Deep-hole data recover the non-GRS Clebsch code, its
-conic and polarity, and its golden orientation, including an operator with
-`B² = 5I`; and eleven is not an arbitrary choice of field, because a
+conic and polarity, and a conference matrix up to switching and global
+negation, with `B² = 5I`; and eleven is not an arbitrary choice of field, because a
 Sylvester-graph obstruction in the computational companion shows that q = 11
 is the only field order admitting a conic-filling six-arc at all.
 
-> *Abstract* Let A be a six-arc in PG(2,11), and let U(A) be the projective points lying on no chord of A. For the associated [6,3,4]₁₁ MDS code, U(A) is its projective deep-hole syndrome locus. We prove that U(A) lies on a conic if and only if A is projectively equivalent to the Clebsch hexagon; in that case U(A) is exactly a nonsingular conic. Thus nearest-codeword data reconstruct the non-GRS Clebsch code up to monomial equivalence: the projective deep-hole locus is a recognition invariant whose metric boundary data recover the parity-check geometry. The reconstructed conic then determines its polarity, and Dye's theorem identifies the stabilizer as A₅; none of this geometry is assumed.
+> *Abstract* Let A be a six-arc in PG(2,11) and let U(A) be the projective points on no chord of A: the projective deep-hole syndrome locus of its [6,3,4]₁₁ MDS code. We prove that U(A) lies on a conic if and only if A is projectively equivalent to the Clebsch hexagon, and then U(A) is exactly a nonsingular conic. The deep-hole locus is thus a recognition invariant for the non-GRS Clebsch code up to monomial equivalence: from its metric boundary we recover the parity-check geometry, the conic then determines its polarity, and Dye's theorem identifies the stabilizer as A₅. From the decoder multiplicities we recover the Brianchon points, the self-polar triangles, and an intrinsic bipartition of the three-coordinate supports.
 >
-> Nearest-codeword ambiguity then reconstructs an unordered orientation torsor on six axes. Its signed orbital operator satisfies B² = 5I, and triangle holonomy gives the support cubic through cᵢⱼₖ = BᵢⱼBⱼₖBₖᵢ; equivalently, this cubic is the sole nonsymmetric term in the diagonal determinant pencil of B. Thus the same syndrome and support data recover both the code and its golden orientation; coset-leader ambiguity recovers not only incidence and symmetry but the integral quadratic order Z[B] ≃ Z[√5].
+> From nearest-codeword ambiguity we reconstruct a complementary pair of conference two-graphs on six axes, equivalently a conference matrix up to switching and global negation. Either signed orbital representative satisfies B² = 5I, and triangle holonomy gives the support cubic cᵢⱼₖ = BᵢⱼBⱼₖBₖᵢ, the sole nonsymmetric term in the diagonal determinant pencil of B. The decoder data thus yield incidence, symmetry, the conference structure, and the integral quadratic order Z[B] ≃ Z[√5].
 >
-> The proof uses a universal chord-defect identity and a partial-cover bound for rigidity, then decoder ambiguity and the orbital pentagon for orientation. As a secondary uniform consequence, any k-arc whose uncovered locus is a nonsingular conic has q odd, with 2k − 3 ≤ q ≤ (k(k − 1) + 3)/3. Thus for each fixed k, the all-field existence problem reduces to finitely many field orders.
+> We prove rigidity from a universal chord-defect identity and a partial-cover bound, and deduce one uniform consequence: any k-arc whose uncovered locus is a nonsingular conic has q odd and 2k − 3 ≤ q ≤ (k(k − 1) + 3)/3, so for each fixed k the all-field conic-filling existence problem reduces to finitely many field orders.
 >
 **Delivers.** The pattern of the errors farthest from every valid codeword
-identifies the code itself and reveals an underlying golden arithmetic
-structure.
+identifies the code, its conference structure, and the integral quadratic
+order `Z[B] ≃ Z[√5]`.
 
 **Who cares.** Coding theorists, finite geometers, and researchers interested
 in inverse problems or in what can be learned from failures.
@@ -465,8 +467,8 @@ into a complete reconstruction theorem, and it is not confined to one field:
 the same chord-defect argument gives a field window for every k-arc, and the
 companion shows that eleven is the only field order where a conic-filling
 six-arc exists.  The chord-defect identity used here is the special case, for
-one arc in PG(2,q), of the all-planes secant-moment identity proved in Arcs
-Complete Outside a Conic below.
+one arc in PG(2,q), of the all-planes secant-moment identity proved in *Arcs
+complete outside a conic* below.
 
 ---
 
@@ -479,11 +481,11 @@ trade singles out the B₃/F₇ and H₃/F₁₁ geometries and recovers their u
 sheets; the first nonzero signed cubic orients them. Off the carrier, `q − 2`
 nonmatching orbits retain the same trade.
 
-> *Abstract* Restriction to a conic forgets how its marked points were paired into secants. Among full PGL₂(q)-orbits of perfect matchings over odd finite fields, we classify those whose conic-quotient evaluation space has a one-dimensional strength-two trade—a signed relation annihilating all quadratic coordinate products—generated by a two-valued vector. Exactly two occur: the balanced B₃/F₇ and H₃/F₁₁ orbits. The trade recovers their two complementary sheets, without assuming self-association or Gorensteinness.
+> *Abstract* A perfect matching of marked points on a conic determines a product of secant lines; restricting that product to the conic forgets the pairing. Among full PGL₂(q)-orbits of such matchings over odd finite fields, we classify those whose conic-quotient evaluation space has a one-dimensional strength-two trade—a signed relation annihilating all quadratic coordinate products—generated by a two-valued vector: exactly two such orbits occur, the balanced B₃/F₇ and H₃/F₁₁ orbits. Targeted modular detectors, made exhaustive by Faber's tame subgroup theorem, exclude every other orbit without a field census. From the trade we reconstruct the two complementary sheets up to interchange, assuming neither self-association nor Gorensteinness, and we orient them by the first nonzero signed moment: the signed moments vanish through degree two, and that first survivor is an anti-invariant cubic.
 >
-> The restriction to perfect matchings is sharp. For either surviving stabilizer, its fixed locus in the ambient conic-product fiber is an affine line of q pairwise nonconjugate rational points. Only the matching point splits completely into linear factors, although q − 2 nonmatching orbits have the same one-dimensional two-valued strength-two trade condition. Thus complete splitting selects the matching orbit from the fixed line. The exceptional one-factorizations are classical; the new boundary is the fixed line and its unique completely split point.
+> We prove the matching hypothesis sharp. For either surviving stabilizer the fixed locus in the ambient conic-product fiber is an affine line of q pairwise nonconjugate rational points: q − 2 of them are nonmatching orbits satisfying the same trade condition, one is the coalescence parameter, and only the matching point splits completely into linear factors. The exceptional one-factorizations are classical; the boundary we isolate is that fixed line and its unique completely split point.
 >
-> For the two matching configurations, the first nonzero signed tensor moment is an anti-invariant cubic. Their 14- and 22-point homogenizations are self-associated and arithmetically Gorenstein, and maximal isotropy identifies the cubic with the Macaulay inverse system of an Artinian reduction. General self-dual-code criteria already explain the Gorenstein consequence of the Schur square; the configuration-specific contributions are the all-field orbit classification, sharp matching boundary, sheet reconstruction, and cubic orientation. Targeted modular detectors, made exhaustive by Faber's tame subgroup theorem, exclude every other matching orbit without a field census. A common alternating-cycle and Dickson calculation supplies the radial nonvanishing needed for the quotient ranks.
+> The 14- and 22-point homogenizations are self-associated and arithmetically Gorenstein, with the cubic as the Macaulay inverse system of an Artinian reduction—a consequence of general self-dual-code criteria for the Schur square, not a hypothesis.
 >
 **Delivers.** On the matching carrier, a two-level balancing pattern forces one
 of two exceptional pairing geometries and recovers its unordered sheets; a
@@ -498,7 +500,7 @@ orientation information.
 
 ---
 
-#### Golden Descent and Operator Realizations of the Clebsch Cubic
+#### Hitchin’s Icosahedral Incidence Double Cover and Operator Realizations of the Clebsch Cubic
 
 [PDF](https://github.com/tavisrudd/clebsch-passages/blob/main/clebsch_passages.pdf) · [Repository](https://github.com/tavisrudd/clebsch-passages) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21682515-blue.svg)](https://doi.org/10.5281/zenodo.21682515)
 
@@ -510,9 +512,9 @@ rigidity and sharp two-graph reconstruction are independent consequences.
 
 > *Abstract* Let H be the rational seven-space of harmonic cubics. Hitchin's icosahedral incidence variety is generically a degree-two cover of P(H). We prove that its function field is Q(P(H))(√(5J₀)), where J₀ is the rational equation of the reduced branch sextic normalized by ιₜ*J₀ = 16σ₃² on the Clebsch chart. The complete reduced fibre over [xyz] has residue algebra Q(√5) and determines the twist; the finite Stein algebra is O ⊕ O(−3) with multiplication z² = 5J₀.
 >
-> After an ordering, chart lift, outer labels, and Petersen labels are fixed as a marked bridge datum, a chosen sheet selects an order-six conference source or its opposite. The sheet alone supplies none of that marking. The source cubic and its six outer translates have four exact descriptions: triangle holonomy, middle-exterior diagonal, commutator Pfaffian, and oriented cross-golden determinant. They give the signed Joubert–Segre–Igusa–Clebsch chain. On the Petersen four-space the degree-six zonal-harmonic cubic restricts exactly to −784000σ₃/1247103. This is a relative sign comparison between cubics on different spaces, not an identification of their ambient harmonic representations.
+> After an ordering, chart lift, outer labels, and Petersen labels are fixed as a marked bridge datum, the two sheets are labelled by an order-six conference source and its opposite; the sheet alone supplies none of that marking. The source cubic and its six outer translates have four exact descriptions—triangle holonomy, middle-exterior diagonal, commutator Pfaffian, and oriented spectral-block determinant—giving the signed Joubert–Segre–Igusa–Clebsch chain. For real symmetric zero-diagonal matrices with nonzero off-diagonal entries, nonzero proportionality of the commutator Pfaffian to the triangle cubic already forces order six and a scalar square. Under the marked Petersen pair-sum comparison, the degree-six zonal-harmonic cubic restricts exactly to −784000σ₃/1247103: a relative sign comparison between cubics on different spaces, not an identification of their ambient harmonic representations.
 >
-> The same conference carrier has two independent structural consequences. Cut-independence of the balanced exchange spectrum singles out order six. Aligned four-sets reconstruct every two-graph on at least seven vertices up to complement, with seven sharp; hence the determinant-(−3) blocks recover symmetric conference signings of order at least ten up to switching and global negation.
+> The same conference carrier has two independent structural consequences. Cut-independence of the balanced exchange spectrum also singles out order six. Aligned four-sets reconstruct every two-graph on at least seven vertices up to complement, with seven sharp; hence the determinant-(−3) four-blocks recover every symmetric conference signing of order at least ten up to switching and global negation. The characteristic-zero incidence theorem is independent of the unresolved problem of determining the exact finite set of primes over which the geometric incidence comparison spreads out.
 >
 **Delivers.** The exact arithmetic incidence cover selects a relative marked
 conference source, whose cubic is tracked through holonomy, exterior algebra,
@@ -525,14 +527,14 @@ geometers, and mathematical physicists.
 
 **Why it matters.** Complementary descriptions make different aspects of the
 same structured calculation visible. *Chordal and Conference Cubics:
-Reconstruction and a Residual C2-Torsor* determines their precise relation:
+Reconstruction and a Residual C₂-Torsor* determines their precise relation:
 the cubic from *Quadratic Trade Rigidity and Cubic Orientation in Conic
 Matching Quotients* is a distinct chordal companion of the conference cubic,
 not the same cubic in different coordinates.
 
 ---
 
-#### Reconstructing PG(2,13), Its Conic, and Polarity from the Minimum Words of a Binary Conic Code
+#### Reconstructing PG(2,13), its conic, and polarity from the minimum words of a binary conic code
 
 [PDF](https://github.com/tavisrudd/q13-passant-code/blob/main/passant_code_q13.pdf) · [Repository](https://github.com/tavisrudd/q13-passant-code) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21783970-blue.svg)](https://doi.org/10.5281/zenodo.21783970)
 
@@ -552,36 +554,41 @@ problems, minimum-weight structure, and the information retained by a code.
 
 **Why it matters.** A small layer of codewords retains enough incidence data to
 recover a much richer geometric object.  The result supplies a q=13
-reconstruction counterpart to *Reconstructing the Clebsch Code and Its Golden
-Orientation from Its Deep-Hole Syndrome Locus*.
+reconstruction counterpart to *Reconstructing the Clebsch Code from Its
+Deep-Hole Syndrome Locus*.
 
 ---
 
-#### Chordal and Conference Cubics: Reconstruction and a Residual C2-Torsor
+#### Chordal and Conference Cubics: Reconstruction and a Residual C₂-Torsor
 
 [PDF](https://github.com/tavisrudd/chordal-conference-reconstruction/blob/main/chordal_conference_reconstruction.pdf) · [Repository](https://github.com/tavisrudd/chordal-conference-reconstruction) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21895530-blue.svg)](https://doi.org/10.5281/zenodo.21895530)
 
 **Standout result.** The signed cubic from *Quadratic Trade Rigidity and Cubic
 Orientation in Conic Matching Quotients* is a chordal Hankel companion, not
-the conference cubic of *Reconstructing the Clebsch Code and Its Golden
-Orientation from Its Deep-Hole Syndrome Locus* and *Golden Descent and Operator
+the conference cubic of *Reconstructing the Clebsch Code from Its Deep-Hole
+Syndrome Locus* and *Hitchin’s Icosahedral Incidence Double Cover and Operator
 Realizations of the Clebsch Cubic*. Its singular quartic recovers the original
-six axes, and the normalized outer difference gives an exact oriented marked
-round trip between the two companion lines.
+six axes. Selecting one chordal line and one conference sign gives mutually
+inverse reconstruction maps; forgetting the chordal line is a residual
+`C₂`-torsor distinct from the global-negation torsor `{[B],[-B]}`.
 
-> *Abstract* *Quadratic Trade Rigidity and Cubic Orientation in Conic Matching Quotients* produces a signed cubic in a ten-dimensional matching quotient. We identify its canonical five-dimensional residue and prove that it is not the conference cubic appearing in *Reconstructing the Clebsch Code and Its Golden Orientation from Its Deep-Hole Syndrome Locus* and *Golden Descent and Operator Realizations of the Clebsch Cubic*: the two are distinguished companions in the two-dimensional pencil invariant under the irreducible five-dimensional action of A₅. The conference member has six nodes. The chordal residue is a Hankel determinant, singular along a rational normal quartic. Its twelve rational singular points form A₅/C₅; pairing points with the same stabilizer gives A₅/D₅ and identifies its six fibres equivariantly with the original matched axes. Thus the two companion cubics realize one six-axis carrier through different singular shadows. We determine the normalized outer-normalizer action exactly on the chordal pencil and prove that, after one chordal companion is retained, its difference operator gives an exact oriented round trip between sheet and conference orientations. The result rules out a tempting literal identification of the two invariant cubic lines while recovering the marked equivalence that replaces it.
+> *Abstract* Different lossy invariants of the same source need not have the same geometry. Let Ω be the six Sylow-5 subgroups of A₅ and V the five-dimensional augmentation module of F₁₁^Ω with its standard quadratic form. The A₅-invariant cubic pencil in P(V) contains a conference cubic with exactly six isolated nodes and two chordal cubics, each singular along a rational normal quartic; over the algebraic closure of F₁₁ the conference cubic is not projectively isomorphic to either chordal cubic. We prove that they nevertheless recover the same marked six-axis carrier. From the singular quartic we recover the constant double cover A₅/C₅ → Ω = A₅/D₁₀. If either chordal line L of the invariant pencil is selected, we construct from the outer involution q mutually inverse reconstruction functors between a normalized chordal generator h ∈ L and a chosen-sign conference generator c over every neutral scalar extension of F₁₁. Forgetting L is exactly the free quotient (L,h,c) ↦ (qL,−qh,c), which fixes c: a residual C₂-torsor distinct from the global-negation torsor {[B],[-B]}.
+>
+> We also prove an intrinsic six-point recognition criterion. If a Seidel matrix S represents a two-graph Δ on a six-set, with triple signs σ(xyz) = SxySyzSzx, pair defects m(xy) = ∑z∉{x,y} σ(xyz), and A(Δ) the family of four-sets with constant triple sign, then 16|A(Δ)| = ∑{x,y} m(xy)², so A(Δ) is empty exactly when S² = 5I.
+>
+> Finally, for every normalized symmetric conference matrix B of order n ≡ 2 (mod 4), we determine the least φ = (I+B)/2-stable lattice containing Zⁿ, namely Dₙ∨ = Zⁿ + Z1/2, and the algebra F₂[φ̄] it induces on Dₙ∨/2Dₙ∨: F₄ for n ≡ 6 (mod 8) and F₂ × F₂ for n ≡ 2 (mod 8). At n = 6 the binary heart is the natural F₄A₅-module H; the map [B] ↦ φ̄|H identifies {[B],[-B]} with {ω,ω²} ⊂ F₄, and global negation acts by Frobenius, an equivariant identification of principal C₂-torsors.
 
-**Delivers.** A precise correction and completion of the upper series map:
-the source cubics are distinct, their common carrier is intrinsic, and their
-orientation transport is explicit and reversible at the stated marked level.
+**Delivers.** The nonisomorphic chordal and conference cubics recover the same
+six-axis carrier. A selected chordal line and conference sign give reversible
+reconstruction, while the residual chordal-line torsor and the separate
+global-negation/Frobenius torsor are determined explicitly.
 
 **Who cares.** Invariant theorists, algebraic combinatorialists,
 representation theorists, and readers interested in reconstruction from
 singular loci.
 
-**Why it matters.** A false literal coincidence is replaced by a stronger
-structural statement: different sparse shadows can recover the same carrier,
-and the exact missing marking can itself be identified.
+**Why it matters.** Nonisomorphic cubic singular loci can recover the same
+carrier, and the exact residual markings can themselves be identified.
 
 ---
 
@@ -594,8 +601,8 @@ four-frame and the F₁₁ Clebsch six-arc among conic-filling arcs through eigh
 points.
 
 **Delivers.** Exact finite computations and strengthened census results support
-*Reconstructing the Clebsch Code and Its Golden Orientation from Its Deep-Hole
-Syndrome Locus*, with reproducible verification material.
+*Reconstructing the Clebsch Code from Its Deep-Hole Syndrome Locus*, with
+reproducible verification material.
 
 **Who cares.** Readers checking finite classifications, computational
 geometers, and anyone who wants independently replayable evidence.
@@ -606,7 +613,7 @@ exhaustive checks and makes delicate finite claims inspectable.
 It is housed in the `clebsch-rigidity` repository rather than in a separate
 public mirror.
 
-*Companion abstract.* For a projective arc A ⊂ PG(2,q), let U(A) be the points on no chord of A. The geometric paper proves, without an exhaustive classification of six-arcs over F₁₁, that a six-arc in PG(2,11) whose uncovered locus lies on a conic is the Clebsch hexagon. Here exact finite computation sharpens and extends that result. There are fifteen projective classes of six-arcs over F₁₁; the Clebsch class is the unique one whose uncovered locus is contained in a cubic, and it is separated from every other class by a four-point gap in uncovered-set size. A Sylvester-graph obstruction shows that q = 11 is the only field order admitting a conic-filling six-arc. Exhaustive orbit searches then classify all conic-filling arcs through eight points: only the projective four-frame over F₅ and the Clebsch six-arc over F₁₁ occur. The companion also preserves the original q = 13 computations underlying *Reconstructing PG(2,13), Its Conic, and Polarity from the Minimum Words of a Binary Conic Code*, which gives the passant-code reconstruction theorem a standalone structural and reproducible account. The finite claims are accompanied by exact replay routes and a claim-by-claim trust ledger.
+*Companion abstract.* For a projective arc A ⊂ PG(2,q), let U(A) be the points on no chord of A. The geometric paper proves, without an exhaustive classification of six-arcs over F₁₁, that a six-arc in PG(2,11) whose uncovered locus lies on a conic is the Clebsch hexagon. Here exact finite computation sharpens and extends that result. There are fifteen projective classes of six-arcs over F₁₁; the Clebsch class is the unique one whose uncovered locus is contained in a cubic, and it is separated from every other class by a four-point gap in uncovered-set size. A Sylvester-graph obstruction shows that q = 11 is the only field order admitting a conic-filling six-arc. Exhaustive orbit searches then classify all conic-filling arcs through eight points: only the projective four-frame over F₅ and the Clebsch six-arc over F₁₁ occur. The companion also preserves the original q = 13 computations underlying *Reconstructing PG(2,13), its conic, and polarity from the minimum words of a binary conic code*, which gives the passant-code reconstruction theorem a standalone structural and reproducible account. The finite claims are accompanied by exact replay routes and a claim-by-claim trust ledger.
 
 ---
 
@@ -881,7 +888,7 @@ projective-bundle step.
 
 ---
 
-#### Arcs Complete Outside a Conic: A Prescribed-Hole Defect Identity and Matching-Design Rigidity
+#### Arcs complete outside a conic: a prescribed-hole defect identity and matching-design rigidity
 
 [PDF](https://github.com/tavisrudd/arcs-complete-outside-conic/blob/main/arcs_complete_outside_conic.pdf) · [Repository](https://github.com/tavisrudd/arcs-complete-outside-conic) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21682567-blue.svg)](https://doi.org/10.5281/zenodo.21682567)
 
@@ -906,8 +913,8 @@ projective planes or extremal configurations.
 calculation, with zero defect forcing rigid exceptional cases.  The
 secant-moment identity proved here, valid in every finite projective plane and
 for every prescribed hole set, is the general form of the chord-defect identity
-used in the rigidity theorem of *Reconstructing the Clebsch Code and Its Golden
-Orientation from Its Deep-Hole Syndrome Locus* above. That relationship is a
+used in the rigidity theorem of *Reconstructing the Clebsch Code from Its
+Deep-Hole Syndrome Locus* above. That relationship is a
 specialization of the identity, not a claim that the Clebsch hexagon has zero
 defect in the present paper's matching-design sense.
 
@@ -951,7 +958,7 @@ controls rigidity relative to the real switching class.
 
 > *Abstract* Let C be a symmetric conference matrix of order 2d, put q = 2d − 1, and for a balanced half Y write R = C[Y,Yᶜ]. We study the exchange spectrum spec(RRᵀ/q) and prove that it is independent of Y exactly when d ≤ 3. Since the order-two case is trivial and no symmetric conference matrix of order four exists, order six is the unique nontrivial case; its spectrum is {1/5, 4/5, 4/5}. For the associated diagonal-control transfer, the twenty balanced sign vectors in {±1}⁶ are exactly the maximizers of each degree-three Schur sector over [−1,1]⁶.
 >
-> For Hermitian conference matrices of order six, the conference identities fix the first two exchange moments, while squared real triangle holonomy parametrizes the complete Pareto frontier of the three degree-three sectors. Cutwise constancy of any one sector holds exactly for matrices equivalent, under switching and permutation, to a real symmetric conference matrix. An averaged squared-holonomy defect bounds the Frobenius distance from that class globally from below and locally from above. In arbitrary real dimension, singular values classify unframed port transfers; for invertible transfers, orientation adds exactly the determinant sign, and the determinant is the unique minimal-degree orientation-covariant polynomial up to scale. We interpret the order-six transfer through a conference interferometer, separating intrinsic, oriented, and calibrated observables and identifying the external resource required for direct three-fermion emulation. This is a theory and design-limit analysis, not a report of a built device.
+> For Hermitian conference matrices of order six, the conference identities fix the first two exchange moments, while squared real triangle holonomy parametrizes the complete Pareto frontier of the three degree-three sectors. Cutwise constancy of any one sector holds exactly for matrices equivalent, under switching and permutation, to a real symmetric conference matrix. An averaged squared-holonomy defect bounds the Frobenius distance from that class globally from below and locally from above. We interpret the order-six transfer through a conference interferometer, separating intrinsic, oriented, and calibrated observables and identifying the external resource required for direct three-fermion emulation; this is a theory and design-limit analysis, not a report of a built device. In arbitrary real dimension, singular values classify unframed port transfers; for invertible transfers, orientation adds exactly the determinant sign, and the determinant is, up to scale, the unique minimal-degree orientation-covariant polynomial.
 >
 **Delivers.** A classification of symmetric conference matrices with
 cut-independent balanced cross-block spectrum; an exact continuous-control

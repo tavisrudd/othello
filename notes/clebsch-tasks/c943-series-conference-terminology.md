@@ -7,8 +7,8 @@ companion have sealed cold-referee ACCEPT verdicts and deterministic green
 manuscript builds. Paper III also passes the complete
 local release gate, including source-only replay of all three pinned Lean closures.
 Paper I’s trust projection and mirror export remain deferred behind C855’s
-pre-existing unmapped `prop:fifteen-class-census`. Shared summaries,
-cross-references, and mirror exports remain.
+pre-existing unmapped `prop:fifteen-class-census`. The shared portfolio
+summary has a sealed cold-reader ACCEPT; mirror exports remain.
 
 ## Objective
 
@@ -148,3 +148,10 @@ and must not be reused as mathematical terminology.
   PDF SHA-256 is
   `dd08311f15337cfa7e8c8d1c427318a69a120002f68447b825e2937e93678488`.
   Independent cold referee: MINOR, repaired, sealed ACCEPT.
+- Portfolio summary and arcs README: every programme overview, headline,
+  table row, detailed abstract, cross-paper explanation, title, alias, and
+  public link is synchronized. The Paper V entry distinguishes the residual
+  chordal-line torsor from the global-negation/Frobenius torsor, and the arcs
+  README now leads with the universal prescribed-hole theorem rather than the
+  easier small orders. No branded “golden” terminology remains in the summary.
+  Independent cold reader: MINOR, repaired, sealed ACCEPT.

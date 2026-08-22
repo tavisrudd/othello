@@ -11,25 +11,25 @@ This repository contains the manuscript
 matching-design rigidity* by Tavis Rudd, together with its public
 computational evidence.
 
-For a nonsingular conic \(\mathcal C\subset PG(2,q)\), the paper studies arcs
-\(A\) disjoint from \(\mathcal C\) whose secants cover every point outside
-\(A\cup\mathcal C\).  If \(\rho_{\mathcal C}(q)\) is the least possible size,
-the paper proves
-\(\rho_{\mathcal C}(q)\geq\sqrt{2q}+3/2-8/\sqrt{2q}\), classifies zero defect
-in characteristic two, and determines
-\(\rho_{\mathcal C}(5)=4\), \(\rho_{\mathcal C}(8)=\rho_{\mathcal C}(9)=\rho_{\mathcal C}(11)=6\),
-\(\rho_{\mathcal C}(13)=8\), \(\rho_{\mathcal C}(16)=9\),
-\(\rho_{\mathcal C}(17)=9\), and \(\rho_{\mathcal C}(19)=10\).
-
-The mechanism works in every finite projective plane with an arbitrary
-prescribed hole set: the first two secant moments give an exact identity with
-a pointwise nonnegative remainder.  Equality converts the canonical
+In any finite projective plane of order \(q\), if \(\mathcal H\) is an
+arbitrary prescribed set of \(q+1\) points, every arc \(A\) disjoint from
+\(\mathcal H\) whose secants cover all points outside
+\(A\cup\mathcal H\) satisfies
+\(|A|\geq\sqrt{2q}+3/2-8/\sqrt{2q}\).  The first two secant moments give the
+exact defect identity behind this universal bound, with pointwise
+nonnegative local summands. Equality converts the canonical
 secant-concurrency decomposition of the Kneser graph into a maximum-matching
 design; over a finite field that design has a rank-three projective
 realization.  The same identity supplies a quantitative deletion bound away
-from equality.  The defect identity, equality criterion, and deletion
-stability are independently formalized in Lean; the finite field values use
-the trust boundaries stated below.
+from equality.
+
+For the specialization \(\mathcal H=\mathcal C\), where \(\mathcal C\) is a
+nonsingular conic, the paper classifies zero defect in characteristic two and
+determines \(\rho_{\mathcal C}(13)=8\), \(\rho_{\mathcal C}(16)=9\),
+\(\rho_{\mathcal C}(17)=9\), and \(\rho_{\mathcal C}(19)=10\). The defect
+identity, equality criterion, and deletion stability are independently
+formalized in Lean; the finite-field values use the trust boundaries stated
+below.
 
 The Lean formalization is distributed in
 [`tavisrudd/finitegeom`](https://github.com/tavisrudd/finitegeom). Its archived
