@@ -1,9 +1,9 @@
-\section{The marked orientation source}
-\label{sec:orientation-source}
+\section{Transporting the deck sign through the marking}
+\label{sec:marked-sheet-transport}
 
 This section keeps track of the sign lost by projectivizing the Clebsch
 chart.  The normalization is intrinsic to the pullback.  Its comparison with
-the golden six-axis data and the Petersen coefficient module is relative to
+the marked icosahedral six-axis data and the Petersen coefficient module is relative to
 the marked bridge datum \(\mathfrak m\) fixed in the introduction.
 
 \subsection{Normalization over the Clebsch chart}
@@ -48,7 +48,7 @@ to have \(z=4\sqrt5\,\sigma_3\).  This does not strengthen the integral
 statement: comparison with the geometric incidence model still holds only
 over an unspecified \(\mathbf Z[1/N]\).
 
-\subsection{The golden involution}
+\subsection{The configuration exchanger and global negation}
 
 Choose the displayed normalized representatives
 \(a_0,\ldots,a_5\) of the ordered projective axes in \(\mathfrak m\), and
@@ -69,7 +69,7 @@ C=\begin{pmatrix}
 The six vertex axes of an icosahedron as equiangular lines, and their signed
 Gram or Seidel-matrix description up to diagonal switching, are classical
 \cite[\S3]{GodsilProblems}.  What is tracked below is the sign of the
-specific marked triangle cubic under the golden exchanger.
+specific marked triangle cubic under the configuration exchanger.
 The frame operator \(\sum_i a_ia_i^{\mathsf T}\) commutes with the
 irreducible three-dimensional \(A_5\)-action, so it is scalar.  Its trace is
 \(6(t+2)\); division by the dimension gives
@@ -97,7 +97,8 @@ Using \(t^2(1-t)=-t\), one obtains
 \[
  d_id_jC_{p(i)p(j)}=-C_{ij}.
 \]
-Thus, at the golden fibre, conjugation transported by \(R\) changes \(C\)
+Thus, over the incidence fibre at \([xyz]\), Galois conjugation transported
+by \(R\) changes \(C\)
 to \(-C\) and \(Z_C\) to \(-Z_C\).  Consequently, deck exchange leaves the unmarked
 quadratic spectral algebra unchanged, \(\Q[C]=\Q[-C]\), even though it reverses
 the chosen marked generator and the relative orientation data.  The lone
@@ -107,10 +108,10 @@ the reversal; switching alone leaves the triangle cubic fixed.
 No global marking of the varying configurations on \(B_-\) is needed or
 asserted.  The fixed section \(U_t\) selects \(B_+\), but does not by itself
 choose \(\mathfrak m\).  After \(\mathfrak m\) is fixed, we attach its
-constant source \([C_{\mathfrak m},Z_{\mathfrak m}]_{\rm or}\) to \(B_+\)
+constant source \(\bigl(C_{\mathfrak m},Z_{\mathfrak m}\bigr)\) to \(B_+\)
 and attach the deck-opposite source to \(B_-\), meaning that the normalized
 odd generator changes sign.  The calculation at \([xyz]\) proves that this
-relative convention agrees with the actual conjugate golden configuration
+relative convention agrees with the actual Galois-conjugate icosahedral configuration
 there; it is not used to infer a pointwise conference labeling elsewhere.
 These relative source labels are attached to the normalized components, not
 to a pointwise regular-six-axis marking.  They therefore extend across both
@@ -129,8 +130,8 @@ Write Hitchin's chart as
 after transporting the five plane-triple labels.  Normalize the lift on
 \(B_+\) by \(q_1=xyz\); the deck-opposite source carries the lift
 \(-\iota_t\).  The displayed exchanger calculation shows that this
-normalization agrees with golden conjugation at \([xyz]\).  Thus the lift
-is part of the oriented source datum, rather than a purported global marking
+normalization agrees with Galois conjugation at \([xyz]\).  Thus the sign of
+the lift is part of the marked source datum, rather than a purported global marking
 of the second family.
 
 The primitive integral map
@@ -147,7 +148,7 @@ Multiplicity one makes this comparison unique after the five labels and the
 normalization are fixed.  Reversing the chart lift reverses \(y\), the zonal harmonic
 \(F_y\), and its cubic integral.  The two signs in the normalized incidence
 cover therefore select the two signs of the exact Gaunt cubic relative to
-\(\mathfrak m\).  This proves Proposition~\ref{thm:orientation-source}.
+\(\mathfrak m\).  This proves Proposition~\ref{thm:marked-sheet-comparison}.
 
 The remaining marking actions and the boundary of this comparison are listed
 in Appendix~\ref{app:marking-ambiguities}.

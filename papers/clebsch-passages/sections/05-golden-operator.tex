@@ -1,8 +1,9 @@
-\section{The golden operator and its cubic shadows}
-\label{sec:golden-operator}
+\section{The conference operator and its cubic shadows}
+\label{sec:conference-operator}
 
-The incidence cover supplies a golden orientation bit.  Relative to the
-marked bridge datum, we attach that bit to the six-axis carrier and apply
+After the marked bridge datum is fixed, a chosen sheet selects one of two
+opposite marked conference sources.  We attach that choice to the six-axis
+carrier and apply
 three elementary operations to its
 conference operator: middle exterior power, commutator with the diagonal
 algebra, and centered squaring.  These operations produce the Joubert,
@@ -46,7 +47,7 @@ class of symmetric zero-diagonal sign matrices; it is the unique order-six
 conference class.  Choose representatives \(C_T\) whose triangle products
 are \(\epsilon_T\), and transport the Hodge orientations with the ordered
 axis basis.  Then \(C_T^2=5I\).  These choices constitute the coherent outer
-marking.  The incidence sheet supplies only its orientation bit, not the
+marking.  The incidence sheet supplies only the choice of sign, not the
 outer labels or representatives.
 
 Put
@@ -55,7 +56,7 @@ Put
  \qquad x_S=\prod_{i\in S}x_i.
 \]
 The following table fixes every sign.  Take \(T_0\) to be the total attached
-to the matrix displayed in Section~\ref{sec:orientation-source}, let
+to the matrix displayed in Section~\ref{sec:marked-sheet-transport}, let
 \(T_r=p_rT_0\), and write permutations in one-line notation.  In the column
 headed ``coefficient word'', the signs occur in the order
 \[
@@ -135,7 +136,7 @@ separates the four normalized formulas from their classical consequences.
   \(\frac14\sum_S(K_T)_{SS}x_S=Z_T\)};
 \node[box] (pf) at (-3.4,0.5) {commutator Pfaffian\\
   \(\frac14\operatorname{Pf}[D_x,C_T]=Z_T\)};
-\node[box] (det) at (3.4,0.5) {oriented cross-golden determinant\\
+\node[box] (det) at (3.4,0.5) {oriented spectral-block determinant\\
   \(10\sqrt5\det B_T(x)=Z_T\)};
 \node[center] (z) at (0,-1.15) {four normalized formulas agree\\
   \(Z_T=J_T\)};
@@ -162,7 +163,7 @@ separates the four normalized formulas from their classical consequences.
 \caption{The four constructions of the same marked cubic and their classical
 targets.  Plain connectors denote the normalized identities displayed in the
 upper boxes; arrows denote subsequent constructions.  The determinant-line
-orientation is normalized by the cross-golden formula.}
+orientation is normalized by the spectral-block formula.}
 \label{fig:four-cubic-shadows}
 \end{figure}
 
@@ -171,7 +172,8 @@ orientation is normalized by the cross-golden formula.}
 For every symmetric matrix \(A\) of order six, the coefficient of \(x_S\) in
 \(\operatorname{Pf}[D_x,A]\) is the signed complementary minor
 \(\det A[S^c,S]\), hence the corresponding diagonal entry of
-\(*\!\bigwedge^3A\).  The cross-golden determinant is the spectral-block form
+\(*\!\bigwedge^3A\).  The oriented spectral-block determinant is the
+eigenspace-block form
 of this identity once \(C^2=5I\).  Only the triangle comparison is
 matrix-specific.
 Theorem~\ref{thm:triangle-pfaffian-recognition} forces scalar-square rigidity
@@ -183,7 +185,7 @@ For a six-tuple \((a_U)_{U\in\mathcal T}\), write
  =a_T-\frac16\sum_{U\in\mathcal T}a_U.
 \]
 
-\begin{theorem}[Golden operator and classical cubic shadows]
+\begin{theorem}[Conference operator and classical cubic shadows]
 \label{thm:operator-shadows}
 For a marked bridge datum and its coherent outer family:
 \begin{enumerate}
@@ -192,7 +194,7 @@ For a marked bridge datum and its coherent outer family:
  (K_T)_{SS}=4(C_T)_{ij}(C_T)_{jk}(C_T)_{ki}=4\epsilon_T(S)
  \quad(S=\{i,j,k\}),
 \]
-so \(Z_T=J_T\) is the switching-invariant orientation cubic on \(A_X\).
+so \(Z_T=J_T\) is the switching-invariant triangle cubic on \(A_X\).
 The four-point two-graph identity and pair balance recover the conference
 switching class; after fixing a vertex, the negative edges on the other five
 vertices form a pentagon.
@@ -250,7 +252,7 @@ Thus \(W\) is the Segre--Igusa polar map.
 \end{theorem}
 
 \begin{proof}
-The tight-frame argument in Section~\ref{sec:orientation-source} gives
+The tight-frame argument in Section~\ref{sec:marked-sheet-transport} gives
 \(C_T^2=5I\).  The off-diagonal entries of that equation are the pair-balance
 identities
 \[
@@ -388,12 +390,12 @@ oriented equality locus
  X_\varepsilon=\{A\in W:h_S(A)=4\varepsilon\tau_S(A)\ \text{for all twenty}\ S\},
  \qquad\varepsilon=\pm1,
 \]
-is a cone.  The representative \(C\) of Section~\ref{sec:orientation-source}
+is a cone.  The representative \(C\) of Section~\ref{sec:marked-sheet-transport}
 lies in \(X_{+1}\), and with it the whole line \(\mathbf R\,C\).  Nothing else
 lies nearby.
 
-\begin{theorem}[Rigidity at the golden representative]
-\label{thm:golden-equality-rigidity}
+\begin{theorem}[Rigidity at the conference representative]
+\label{thm:conference-equality-rigidity}
 The twenty functions \(F_S=h_S-4\tau_S\) have Jacobian of rank fourteen at
 \(C\), with kernel the scaling line \(\mathbf R\,C\).  Near \(C\) the locus
 \(X_{+1}\) is therefore exactly that line, and the same holds for
@@ -530,7 +532,7 @@ so \(X\mapsto\tfrac15CXC\) is an involution of \(T\) with \(+1\)-eigenspace
 character \((15,3,0,0,0)\) on the classes of orders \(1,2,3,5,5\); the only
 four-dimensional submodule is the irreducible \(\mathbf4\), so \(T\) is
 exactly \(\mathbf1\oplus\mathbf4\).  By
-Theorem~\ref{thm:golden-equality-rigidity} the Jacobian \(J\) is injective on
+Theorem~\ref{thm:conference-equality-rigidity} the Jacobian \(J\) is injective on
 \(\ker\mu\): the conference deformations the cubic equality kills are exactly
 the scalings.  This makes the conference count and the cubic count one
 statement about the four-dimensional constituent.
@@ -805,7 +807,7 @@ decoder in the proof uses exactly this many.  An aligned anchor is found
 deterministically with at most twenty tests.  Each of those queries reads one
 bit, whether a single fourth-order principal minor equals \(-3\); the
 reconstruction consumes no minor value and no minor of any other order.
-One calibrated triangle product selects between the two global orientations.
+One calibrated triangle product selects between \(C\) and \(-C\).
 \end{theorem}
 
 \begin{proof}
@@ -915,7 +917,7 @@ For a conference signing, the identity
 \(\mathcal A(\tau)\).  Choosing a root and switching its incident signs to
 one recovers every matrix entry from the rooted triangle values.  The sole
 remaining complement sends \(C\) to \(-C\), and one triangle product fixes
-that orientation.  Minimality of the bound seven is the six-point pair of
+the conference sign.  Minimality of the bound seven is the six-point pair of
 Remark~\ref{rem:six-point-witness}.
 \end{proof}
 
