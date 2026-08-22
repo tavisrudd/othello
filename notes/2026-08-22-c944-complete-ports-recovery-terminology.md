@@ -95,11 +95,19 @@ No novelty or priority verdict changed.
   diagram, and bibliography inspected at full resolution;
 - rendered terminology scan: no repair-port, coefficient-port, support-port,
   full-port, represented-port, or prescribed-port phrase remains;
+- independent cold read: PASS WITH MINOR EDITS.  It found one genuine layer
+  description defect and four low-severity edit defects: the conclusion had
+  conflated exact support projection with its upward closure, the main theorem
+  left the eventual scope of exact copying momentarily ambiguous, one sentence
+  equated a radius with a family, one minimum-recovery phrase was imprecise,
+  and one proof contained a stray “restricted.”  All five were repaired; the
+  same independent reader's narrow reread closed every finding with no new
+  defect.  Its separate `make check` passed at 23 pages, warning-free;
 - PDF SHA-256:
-  `c53e6094b9fd3d103747a675f8d870ad52047169968e89821976ee2786be6807`.
+  `5479bc2ba9f2b124c03ccd0074b642de9a693f33ccdad239ccfa3bcee9bba697`.
 - immutable export source:
-  `76e5c2ae5068b5bb1d0098020c5aefeeb9e5183f`;
-- standalone mirror commit: `6c76b20`; exporter verification and the clean-tree
+  `2bc37936483e8584bb9ede8a1be3eb86ec233f4b`;
+- standalone mirror commit: `cf3ccf7`; exporter verification and the clean-tree
   full release gate both pass, with no push, tag, deposit, or submission.
 
 ## `ej` + `tt` closeout and mystery ledger

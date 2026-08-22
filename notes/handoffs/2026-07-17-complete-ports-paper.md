@@ -83,7 +83,8 @@ Completed strengthening:
 - [C944 recovery-terminology revision](../2026-08-22-c944-complete-ports-recovery-terminology.md)
   removes “port” as visible technical terminology, distinguishes exact helper
   supports from the upward-closed recovery-set family, preserves normalized
-  recovery coefficients, and exports the verified 23-page standalone artifact.
+  recovery coefficients, passes an independent cold read after five minor
+  edit repairs, and exports the verified 23-page standalone artifact.
 - [C939 unified asymptotic separation revision](../2026-08-21-c939-complete-ports-unified-asymptotic-separation.md)
   proves the matched-availability structural seed pair, lifts it to
   positive-density asymptotically good families, passes final cold/formal
