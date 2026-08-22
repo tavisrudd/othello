@@ -12,7 +12,7 @@
 
 This programme studies **what survives information loss**. Across geometry,
 coding theory, and quantum information, a rich object is replaced by a sparse
-shadow. Examples include deep-hole loci, minimum-word layers, repair ports,
+shadow. Examples include deep-hole loci, minimum-word layers, recovery equations,
 marginal atlases, and marked spectral packets. The central question is whether
 the shadow still determines its source, or whether failure of generic behaviour
 forces the source onto a **rigid exceptional carrier**.
@@ -39,7 +39,7 @@ examples.
 | Cubic stabilization | Rank-two formal quantum-connection block | Irrationality after multiplication by `P¹` |
 | Projective Reed–Solomon deep holes | Coherent marked contractions | Persistent and modular obstruction carriers |
 | Stabilizer AME states | Marginal Weyl atlas | Local-Clifford rigidity and quantitative rounding |
-| Repair ports | Bounded decoder equations | Code reconstruction and transfer |
+| Bounded recovery structures | Normalized recovery equations | Code reconstruction and transfer |
 | Finite planes and codes | Deep-hole or minimum-word data | Recovery of the marked geometry |
 | Cubic-threefold theta divisor | Integral lattice and local link data | Global lattice and perverse decomposition |
 
@@ -163,12 +163,11 @@ complex as separate victories.
   one. Its nullity determines whether the projective transversal group is
   `Fq² ⋊ SL₂(q)` or the smaller split-torus branch. [Diagonal Isoduality and Transversal Clifford Groups](https://github.com/tavisrudd/mds-css-transversal-groups/blob/main/mds-css-transversal-groups.pdf).
 
-- **Complete bounded repair ports transfer represented local structure.**
-  Support clutters, normalized scalar decoders, and stochastic reliability are
-  treated as three layers of one pointed object. Exact weighted-functional
-  confinement copies a prescribed bounded port into every block, and
-  asymptotically good outer families place it on a positive-density target
-  class. [Complete Bounded Repair Ports](https://github.com/tavisrudd/complete-repair-ports/blob/main/complete_repair_ports.pdf).
+- **Bounded recovery structures transfer exactly.** Normalized bounded
+  recovery equations retain both their helper supports and their coefficients.
+  A sharp confinement threshold copies this represented local structure into
+  every inner block, and asymptotically good outer families place it on a
+  positive-density target class. [Bounded Recovery Structures of Linear Codes](https://github.com/tavisrudd/complete-repair-ports/blob/main/complete_repair_ports.pdf).
 
 - **Order six is the unique nontrivial cut-rigid symmetric conference
   order.** For a balanced half (Y) of a symmetric conference matrix, the
@@ -220,8 +219,8 @@ the theorem column.
 | Local-Unitary Rigidity and Quantitative Rounding for Stabilizer AME States | Every product-unitary intertwiner between stabilizer `AME(2m,q)` states is Clifford on each party. | Every prime power `q = pᵉ` and `m ≥ 2`. |
 | Diagonal Isoduality and Transversal Clifford Groups of MDS–CSS Codes | The diagonal multiplier nullity fixes the transversal logical group. | All `[2m,m,m+1]q` MDS codes over odd prime fields. |
 | Balanced Cuts of Conference Matrices: Squared-Spectrum Rigidity and Hermitian Holonomy | Order six is the unique nontrivial realized symmetric conference order whose normalized balanced cross-block Gram spectrum is cut-independent. | Every symmetric conference matrix and every balanced half. |
-| Complete Bounded Repair Ports: Transfer, Reliability, and Geometric Structure | The minimum coefficient port reconstructs the represented code, although its support projection is the generic complete uniform clutter. | Every proper `[n,k]q` MDS code with `1 ≤ k < n`, at every distinguished coordinate. |
-| Complete Bounded Repair Ports: Transfer, Reliability, and Geometric Structure | Exact weighted-functional confinement transfers every represented bounded support and coefficient port below the pointed zero-functional threshold onto a designated positive-density target class. | Every fixed inner encoder and outer family with dual distance tending to infinity; asymptotic goodness follows from the stated classical outer-family inputs. |
+| Bounded Recovery Structures of Linear Codes: Transfer, Reliability, and Geometry | The minimum-weight normalized recovery equations reconstruct the represented code, although their support projection is the generic complete uniform family. | Every proper `[n,k]q` MDS code with `1 ≤ k < n`, at every distinguished coordinate. |
+| Bounded Recovery Structures of Linear Codes: Transfer, Reliability, and Geometry | The inequality `r + 1 < z_x(I)` exactly characterizes confinement of every radius-`r` recovery equation to its inner block; under it, supports and normalized coefficients transfer to a designated positive-density target class. | Every fixed represented inner code and every outer family with dual distance tending to infinity; asymptotic goodness follows from the stated classical outer-family inputs. |
 | Integral Cohomology and Modular Decomposition for the Theta Divisor of a Cubic Threefold | The integral middle lattice has rank `130` and saturation quotient `(Z/2)^10`; the integral resolution complex has central Smith factor three, a length-three mod-three Loewy chain, and modular relative-hard-Lefschetz failure. | The theta divisor of every smooth complex cubic threefold. |
 
 ## Papers and entry points
@@ -250,7 +249,7 @@ boundary, and reproducible entry points.
 | Balanced Cuts of Conference Matrices: Squared-Spectrum Rigidity and Hermitian Holonomy | Matrix theory / algebraic combinatorics / mathematical physics | Order six is the unique nontrivial cut-independent case; Hermitian triangle holonomy controls the degree-three frontier and rigidity. | [PDF](https://github.com/tavisrudd/conference-cut-spectra/blob/main/conference_cut_spectra.pdf) · [repo](https://github.com/tavisrudd/conference-cut-spectra) |
 | Integral Cohomology and Modular Decomposition for the Theta Divisor of a Cubic Threefold | Algebraic geometry / topology | The rank-130 integral middle lattice has canonical mod-two glue, while the same resolution carries a factor-three integral perverse attachment, a length-three modular Loewy chain, and failure of relative hard Lefschetz modulo three. | [PDF](https://github.com/tavisrudd/blown-up-theta-lattice/blob/main/blown_up_theta_lattice.pdf) · [repo](https://github.com/tavisrudd/blown-up-theta-lattice) |
 | Frobenius-equivariant Pair Extension and Robust Repair of Eight-Arcs | Finite geometry / coding theory | Fixed mate-line carriers and exact collision corrections give Frobenius-compatible paired MDS extensions, including the exact two-fixed-point minimum over F₂₅. | [PDF](https://github.com/tavisrudd/equivariant-robust-completion/blob/main/equivariant-robust-completion.pdf) · [repo](https://github.com/tavisrudd/equivariant-robust-completion) |
-| Complete Bounded Repair Ports: Transfer, Reliability, and Geometric Structure | Coding theory / reliability | Exact weighted-functional confinement transfers represented bounded repair ports to positive-density coordinate classes, retaining both support and normalized decoder data. | [PDF](https://github.com/tavisrudd/complete-repair-ports/blob/main/complete_repair_ports.pdf) · [repo](https://github.com/tavisrudd/complete-repair-ports) |
+| Bounded Recovery Structures of Linear Codes: Transfer, Reliability, and Geometry | Coding theory / reliability | A sharp confinement threshold transfers exact helper supports and normalized recovery equations to positive-density coordinate classes. | [PDF](https://github.com/tavisrudd/complete-repair-ports/blob/main/complete_repair_ports.pdf) · [repo](https://github.com/tavisrudd/complete-repair-ports) |
 
 The repository for *Reconstructing the Clebsch Code from Its Deep-Hole
 Syndrome Locus* also contains the computational companion
@@ -646,58 +645,56 @@ a fixed code.
 
 ---
 
-#### Complete Bounded Repair Ports: Transfer, Reliability, and Geometric Structure
+#### Bounded Recovery Structures of Linear Codes: Transfer, Reliability, and Geometry
 
 [PDF](https://github.com/tavisrudd/complete-repair-ports/blob/main/complete_repair_ports.pdf) · [Repository](https://github.com/tavisrudd/complete-repair-ports) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.22051903-blue.svg)](https://doi.org/10.5281/zenodo.22051903)
 
-**Standout result.** An exact weighted-functional confinement criterion
-transfers both the support clutter and every normalized scalar decoder of a
-bounded repair port. Below its pointed zero-functional threshold, any
-represented port occurs on a designated positive-density coordinate class in
-an asymptotically good fixed-alphabet family.
+**Standout result.** The inequality `r + 1 < z_x(I)` exactly characterizes
+when every radius-`r` recovery equation is confined to its inner block. Under
+this condition, concatenation copies both the exact helper supports and the
+normalized coefficients, and asymptotically good outer families realize the
+recovery structure on a positive-density coordinate class.
 
-> *Abstract* For a linear code and a distinguished coordinate, the complete
-> bounded repair port records every dual recovery equation using at most a
-> prescribed number of helpers. Its support clutter says which helpers
-> suffice, its normalized coefficients retain the represented decoder, and
-> its Boolean success event governs reliability. This extra coefficient data
-> is substantial: for every proper MDS code, the minimum coefficient port at
-> any distinguished coordinate reconstructs the represented code, although
-> its support projection is the generic complete uniform clutter.
+> *Abstract* Fix a represented inner code `I`, a target `x`, and a helper
+> bound `r`. Its normalized dual words through `x` of weight at most `r + 1`
+> give the bounded recovery equations and their exact helper supports. For an
+> outer family whose dual distance tends to infinity, we prove that all
+> sufficiently long concatenations confine every such equation to its inner
+> block if and only if `r + 1 < z_x(I)`. Under this condition the supports and
+> normalized coefficients are copied. Asymptotically good outer families
+> therefore realize represented recovery data on a positive-density coordinate
+> class over a fixed alphabet.
 >
-> We prove an exact weighted-functional transfer theorem for concatenation.
-> In the fixed-inner linear regime, a pointed zero-functional cost is the
-> persistent obstruction to copying a bounded port blockwise; every
-> represented port below this threshold occurs on a positive-density
-> designated coordinate class in an asymptotically good fixed-alphabet
-> family. We also derive exact deletion–contraction and pivotal identities, a
-> bounded BEC EXIT hierarchy whose successive differences recover the
-> distribution of the cheapest available repair radius, and a full-radius
-> specialization of the Las Vergnas polynomial for `M∖x → M/x`. An explicit
-> represented pair proves that this
-> full-radius invariant does not determine the bounded-radius filtration.
+> Two represented `[10,4,6]` inner codes have the same pointed-perspective
+> polynomial and matched locality, availability, transversal, blocker, and
+> helper-degree statistics, but their radius-three reliabilities are
+> `5s³ - 7s⁵ - s⁶ + 5s⁷ - s⁹` and
+> `5s³ - 7s⁵ - 2s⁶ + 8s⁷ - 3s⁸`. A common outer family preserves matched
+> global parameter bounds and places these recovery structures on target
+> classes of density `1/10`. Thus these pointed-Tutte and conventional local
+> invariants do not determine bounded stochastic repair behavior after
+> positive-density realization.
 >
-> Characteristic-three examples exhibit both extremes: a completed
-> twisted-cubic–axis code has two uniform exact matching/transversal rows and
-> strict weighted transfer, while a quartic normal rational curve with its
-> nucleus has a Steiner `S(3,4,q+1)` port at the nucleus and a compulsory
-> nucleus helper at every curve target.
+> We prove deletion–contraction and pivotal identities, a bounded BEC EXIT
+> hierarchy whose differences recover the cheapest available repair radius,
+> and reconstruction of MDS codes from minimum-weight recovery equations.
+> Characteristic-three cubic–axis and quartic–nucleus examples exhibit
+> geometric recovery structures.
 
-**Delivers.** A complete pointed support/coefficient/probability object; MDS
-coefficient-port reconstruction; an exact concatenation threshold; a
-positive-density realization theorem; deletion–contraction, pivotal, blocker,
-and bounded-EXIT identities; a pointed-Tutte specialization; and exact
-cubic–axis and quartic–nucleus port inventories.
+**Delivers.** An exact block-confinement threshold, transfer of supports and
+normalized coefficients, positive-density realization, separated stochastic
+reliability examples, deletion–contraction and bounded-EXIT identities, MDS
+reconstruction from minimum-weight recovery equations, and exact geometric
+examples.
 
 **Who cares.** Coding theorists working on locality and availability,
 distributed storage, erasure decoding, code concatenation, matroid
 reliability, or finite-geometric code constructions.
 
 **Why it matters.** Locality and disjoint availability retain only coarse
-support data. The complete port keeps the actual scalar recovery equations
-and the full failure event visible, while the transfer theorem identifies the
-precise obstruction to reproducing that richer local object throughout a
-long code.
+support data. Normalized recovery equations keep the scalar decoder and the
+full failure event visible, while the transfer theorem identifies exactly
+when that richer local structure survives concatenation.
 
 ---
 

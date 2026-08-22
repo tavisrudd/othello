@@ -57,8 +57,8 @@ The results are grouped as follows.
    matching-design rigidity*.
 9. *Deep holes of projective Reed–Solomon codes beyond redundancy four:
    recursive carriers and exact classifications through redundancy ten*.
-10. *Complete Bounded Repair Ports: Transfer, Reliability, and Geometric
-   Structure* — local memory and exact transfer of erasure repair.
+10. *Bounded Recovery Structures of Linear Codes: Transfer, Reliability, and
+   Geometry* — local memory and exact transfer of erasure repair.
 11. *Local-Unitary Rigidity and Quantitative Rounding for Stabilizer AME
    States* — every product-unitary intertwiner of a stabilizer absolutely
    maximally entangled state is local Clifford.  The transversal-group half of
@@ -2036,18 +2036,17 @@ The methods combine exact invariant theory, Plücker inversion, Gale duality,
 catalecticants and apolarity, finite-group descent, low-genus point bounds, and
 independently replayed bounded classifications.
 
-## *Complete Bounded Repair Ports: Transfer, Reliability, and Geometric Structure*
+## *Bounded Recovery Structures of Linear Codes: Transfer, Reliability, and Geometry*
 
-The organizing object is the complete radius-\(r\) repair port at a target
-coordinate: every dual-word repair using at most \(r\) helpers, retaining
-three distinct layers—support sets, normalized scalar recovery coefficients,
-and failure probabilities.
+The organizing object is the family of normalized radius-\(r\) recovery
+equations at a target coordinate.  It retains the exact helper supports,
+scalar recovery coefficients, and failure probabilities.
 
 ### General MDS local reconstruction
 
 Let \(C\le\mathbf F^E\) be an \([n,k]\) MDS code with \(k>0\), let \(x\in E\),
-and normalize every dual repair word \(y\in C^\perp\) by \(y_x=1\). The
-radius-\(r\) *coefficient port* is
+and normalize every dual recovery word \(y\in C^\perp\) by \(y_x=1\). The
+radius-\(r\) *normalized recovery-equation family* is
 \[
  \mathcal P_x^{\le r}(C)
  =\{y\in C^\perp:\ y_x=1,\ |\operatorname{supp}(y)\setminus\{x\}|\le r\}.
@@ -2061,10 +2060,11 @@ none exists. Using \(\dim C^\perp=n-k\) and \(d(C^\perp)=k+1\),
  \rho_x(C)=k,
 \]
 and the support projection is the complete \(k\)-uniform clutter. Retaining the
-coefficients rather than only the supports is what makes the port remember the
-code: the Clebsch \([6,3,4]_{11}\) code's full radius-five coefficient port
-reconstructs its inner code from a single pointed port, while its support-only
-clutter is the generic complete three-uniform hypergraph on five helpers.
+coefficients rather than only the supports is what makes the recovery structure
+remember the code.  The Clebsch \([6,3,4]_{11}\) code's full radius-five
+recovery-equation family reconstructs its inner code from a single target,
+while its support-only clutter is the generic complete three-uniform hypergraph
+on five helpers.
 
 This theorem, the reconstruction radius, and the support/coefficient bridge are
 formally verified.
@@ -2098,7 +2098,7 @@ formally verified.
 - There is also an exact pointed confinement profile. It measures,
   coordinate by coordinate, the least nonembedded dual witness that could
   introduce a new repair at that target. Falling below this cost gives
-  equality of the complete pointed repair ports.
+  equality of the complete pointed recovery structures.
 
 - Both numerical transfer gates are uniformly sharp: explicit nondegenerate
   \(GF(3)\) examples produce literal repair-hypergraph failure at
@@ -2113,23 +2113,23 @@ formally verified.
   distance into the functional-dual condition while preserving exact
   support.
 
-### Prescribed positive-density ports
+### Prescribed positive-density recovery structures
 
-- Every fixed represented radius-\(r\) port satisfying
+- Every fixed represented radius-\(r\) recovery structure satisfying
   \[
   r+1<z_x(I)
   \]
   occurs with density \(1/m\) in an asymptotically good fixed-alphabet
   concatenated family, where \(m\) is the inner length. The inequality is
   also the exact eventual confinement condition for the selected pointed
-  port.
+  recovery structure.
 
 - Thus the construction transports an entire prescribed local object—support
   sets and coefficient fibres—not merely a locality number.
 
-- For the Clebsch \([6,3,4]_{11}\) code, the full radius-five coefficient
-  port has \(z_x=8\), reconstructs the inner code from a single pointed port,
-  and occurs with density \(1/6\) in an asymptotically good fixed-
+- For the Clebsch \([6,3,4]_{11}\) code, the full radius-five normalized
+  recovery-equation family has \(z_x=8\), reconstructs the inner code from a
+  single target, and occurs with density \(1/6\) in an asymptotically good fixed-
   \(\mathbb F_{11}\) family. Its support-only clutter is the generic complete
   three-uniform hypergraph on five helpers, with
   \[
@@ -2180,7 +2180,7 @@ uniform family with unusually explicit repair geometry.
   [2q+2,4,q]_q
   \]
   with dual distance three. Radius four exhausts the complete minimal inner
-  port. The exact rows become
+  recovery structure. The exact rows become
   \[
   \left(\frac{q-1}{2},q-1\right)
   \]
@@ -2238,7 +2238,7 @@ Stichtenoth self-dual TVZ theorem.
 
 ### Reliability, EXIT, and pointed Tutte structure
 
-- Complete-port reliability satisfies deletion-contraction,
+- Complete recovery-structure reliability satisfies deletion-contraction,
   pivotal-influence formulas, Russo-Margulis differentiation, and a
   high-survival expansion governed by minimum blockers.
 
@@ -2851,9 +2851,9 @@ It also sharpens three bridges without yet proving them.  The quadratic and
 cubic pieces in the conic matching quotient have a literal ambient
 source in the square/cube filtration of the conic evaluation algebra, but
 no natural transformation to that quotient has been constructed.  The
-coefficient-enriched repair port and the scheme-theoretic jet quotient both
-recover information erased by support reduction, but no coefficient-port
-to Rees-algebra functor is known.  Finally \(R_5\) supplies the
+coefficient-aware recovery structure and the scheme-theoretic jet quotient
+both recover information erased by support reduction, but no
+recovery-equation-to-Rees-algebra functor is known.  Finally \(R_5\) supplies the
 extended-GRS stabilizer \(\operatorname{AME}(12,11)\) state; local-unitary
 rigidity makes any proposed product-local realization of the geometric
 duality a discrete local-Clifford question, but no such realization is
@@ -3518,9 +3518,10 @@ are vacuous because a natural number can encode the whole residual.
   exact at redundancies three, five, six, seven, eight, nine, and ten at the
   stated field ranges, with a uniform high-field containment theorem at
   arbitrary redundancy; not a proof of the general deep-hole conjecture.
-- ***Complete Bounded Repair Ports:*** manuscript assembled around the general
-  MDS reconstruction theorem; central transfer and cubic results formally
-  verified; specialist citation review outstanding.
+- ***Bounded Recovery Structures of Linear Codes:*** manuscript assembled
+  around the sharp confinement threshold and general MDS reconstruction
+  theorem; central transfer and cubic results formally verified; specialist
+  citation review outstanding.
 - ***Local-Unitary Rigidity of Stabilizer AME States:*** rigidity proved for
   every stabilizer AME state, not only the MDS–CSS family, and stable under
   approximate equality with explicit constants; the \(m=2\) proof bridge is
