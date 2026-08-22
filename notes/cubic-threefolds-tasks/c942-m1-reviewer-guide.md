@@ -1,4 +1,4 @@
-# C942 -- reviewer guide for the one-stabilization paper
+# C942 -- linked lightweight referee guide for the one-stabilization paper
 
 **Lane:** cubic-threefolds
 
@@ -7,167 +7,121 @@ paper-grade independent review required
 
 ## Goal
 
-Add a concise reviewer-facing guide and checklist for the primary paper
-*Irrationality of Cubic Threefolds after One Stabilization* under
-`papers/cubic-stabilization-m1/`.  A referee should be able to identify the
-unconditional theorem, reconstruct its proof spine, locate every imported or
-formal dependency, replay the appropriate checks, and report a discrepancy
-without first reverse-engineering the repository.
+Add `papers/cubic-stabilization-m1/REVIEWER_GUIDE.md` and link it prominently
+from `papers/cubic-stabilization-m1/README.md`.  Model the guide on the compact
+`For referees` and `Proof and evidence boundary` sections of
+`papers/complete-repair-ports/README.md`.  It should let a referee see the
+unconditional theorem, follow the central proof in five or six steps, inspect
+the exact human/formal/imported boundary, and find the existing verification
+entry point without navigating the repository unaided.
 
-The guide is a navigation layer.  The manuscript, claim map, imported-source
-registry, evidence registry, and kernel axiom audit remain authoritative for
-mathematical content and trust status.
+The intended impression must be earned, not announced.  Do not describe the
+work as credible, careful, rigorous, comprehensive, or thoroughly reviewed.
+Demonstrate those qualities through exact theorem references, explicit logical
+boundaries, authoritative artifacts, reproducible checks, and independent
+review records.
 
 ## Dependency and scope
 
-- C940 is splitting the former integrated epilogue into one short primary
-  paper and two optional companions.  Drafting may inspect the current tree,
-  but final paths, labels, commands, and links must be taken only after C940
-  freezes the split's theorem and provenance inventory.
+- Final wording waits for C940 to freeze the short primary paper's theorem,
+  label, and provenance inventory.
 - The required route covers only the unconditional primary `m=1` paper.  The
-  six-axis and framed-monodromy companions receive a short boundary note and
-  links, not parallel review checklists.
-- `papers/cubic-stabilization-irrationality/`, the conditional all-`m`
-  manuscript, is outside scope.
-- Do not alter a theorem, proof, hypothesis, claim-map classification,
-  verification gate, or Lean source merely to make the guide simpler.  Any
-  defect discovered while writing the guide is reported against its owning
-  task.
-- Before writing Lean-facing commands or synchronizing a standalone mirror,
-  read and follow `lean/AGENTS.md` and
+  six-axis and framed-monodromy companions are optional and the conditional
+  all-`m` manuscript is outside scope.
+- The standalone guide is a navigation surface, not a second claim ledger, a
+  copied terminal census, or a long command manual.  Authoritative detail stays
+  in the manuscript and verification registries.
+- Do not change a theorem, hypothesis, claim-map classification, validation
+  gate, or Lean source under C942.  Report any such defect to its owning task.
+- Before writing Lean-facing replay language or synchronizing a standalone
+  mirror, read and follow `lean/AGENTS.md` and
   `notes/export-and-mirror-conventions.md`, respectively.
 
-## Deliverables
+## Deliverable
 
-1. Add `papers/cubic-stabilization-m1/REVIEWER_GUIDE.md` and link it near the
-   top of the paper's `README.md`.
-2. Give two explicit entry paths:
-   - a short mathematical review that reaches the headline theorem and causal
-     proof mechanism without opening the formal artifact; and
-   - an artifact audit that checks the manuscript-to-claim correspondence,
-     the primary-paper Lean facade, and the captured axiom report.
-3. Key the mathematical route to stable semantic labels, beginning with
-   `thm:every-cubic` and passing through the generic marker ledger, QDM
-   operation providers, rank-two formal-exponent marker, cubic detection,
-   low-dimensional center nullity, projective endpoint, and final weak-
-   factorization contradiction.  Use no rendered theorem or page numbers.
-4. Include a checkbox audit for:
-   - exact theorem scope and unconditionality;
-   - occurrence indexing and fold additivity;
-   - imported QDM, blowup, factorization, and classification providers;
-   - the residue/exponent marker and its coefficient-field boundary;
-   - cubic detection, center nullity, and projective-space vanishing;
-   - provenance annotations, claim-map strength, and absent/conditional Lean
-     coverage;
-   - computational-evidence boundaries; and
-   - deterministic manuscript and formal-artifact replay.
-5. Point each check to one authoritative object rather than copying volatile
-   coverage totals, terminal censuses, hashes, or long command sequences.
-   In particular, distinguish `PaperInterface.Main` from the aggregate facade
-   that also exposes the two companions.
-6. Give exact, guarded, copy-pasteable replay commands consistent with the
-   repository's current Lean and build rules.  State what each command proves
-   and, equally importantly, what it does not prove.
-7. Add a compact discrepancy template: severity, semantic label, manuscript
-   claim, dependency or artifact inspected, expected versus observed result,
-   and whether the issue is mathematical, expository, provenance, or tooling.
-8. Synchronize the final documentation-only change to the established
-   standalone paper repository after the authority passes its checks, if the
-   guide is part of that public review surface under the mirror conventions.
-9. Subject the guide itself to the paper review protocol: freeze the candidate,
-   obtain mutually isolated cold reads, run a hostile trust-boundary and
-   usability audit, repair every adopted finding, and rerun fresh review on the
-   repaired candidate.  Prior reports and author intent must not be shown to a
-   cold reader before its verdict.
+Add one prominent README link and one compact Markdown guide with at most three
+pieces:
 
-## Proposed guide structure
+1. **Suggested reading:** identify the introduction, the one-blowup model, the
+   main QDM-marker section, and which consequences may be skipped on a first
+   pass.
+2. **For referees:** five or six numbered proof steps keyed to stable semantic
+   labels rather than rendered theorem or page numbers.  The route should cover
+   the generic marker ledger, QDM operation providers, rank-two formal-exponent
+   marker, cubic detection, low-dimensional center nullity, projective endpoint,
+   and the weak-factorization contradiction, combining adjacent steps where the
+   final short manuscript naturally does so.
+3. **Proof and evidence boundary:** one short section distinguishing the full
+   written proof, cited geometric/QDM inputs, partial Lean deductions exposed
+   through `PaperInterface.Main`, computational evidence, and deliberately
+   unformalized geometric providers.  Point to the authoritative verification
+   directory and existing `make check` entry; do not reproduce volatile counts,
+   hashes, or guarded commands already maintained there.
 
-1. **Scope in one screen.** State the theorem, the unconditional/conditional
-   boundary, and which companion material may be skipped.
-2. **Ten-minute orientation.** Link the PDF, abstract/introduction, main
-   theorem, and the one-blowup model that explains the mechanism before the
-   categorical formulation.
-3. **Proof-spine review.** Present a compact ordered table with semantic label,
-   mathematical job, external input, and failure mode to test.
-4. **Trust map.** Separate prose proofs, cited imports, kernel-checked
-   deductions, trusted symbolic runs, and deliberately absent formalizations.
-5. **Artifact replay.** Give the root manuscript check, source correspondence
-   check, guarded Lean build/audit route, expected outputs, and realistic
-   resource notes.
-6. **Reviewer checklist.** Provide independent mathematics, citation,
-   formalization, reproducibility, and presentation checkboxes.
-7. **Reporting findings.** Supply the discrepancy template and the stable
-   identifiers reviewers should cite.
+The README addition should be only a clear one-line invitation to the guide.
+The guide should stay close to the complete-ports precedent: roughly 500--800
+source words, unless the final split requires one extra short paragraph to
+state a load-bearing boundary honestly.
 
-## Implementation sequence
+## Review protocol
 
-1. After C940 freezes the split, inventory the primary manuscript's section
-   headings, semantic labels, imports, evidence entries, claim-map rows, public
-   Lean facade, and existing replay entry points.
-2. Draft the guide from the proof spine outward.  Keep the primary route
-   complete while relegating consequences and companions to optional branches.
-3. Red-team every checklist item against the manuscript and registries: no
-   check may imply stronger formal coverage, stronger source verification, or
-   broader theorem scope than the underlying artifact records.
-4. Freeze a review candidate.  Obtain at least two mutually isolated cold
-   reads: one primary-audience mathematical referee following only the fast
-   path, and one formal/reproducibility referee following only the artifact
-   path.  Each report must give a verdict, confidence, required findings,
-   optional findings, strongest passage, and first point of friction.
-5. Run a separate hostile review against theorem scope, conditionality,
-   semantic-label accuracy, source provenance, formal coverage, command safety,
-   clean-checkout usability, and the possibility that the guide overstates
-   what a passing check establishes.  Record every finding in a dated review
-   report rather than only in chat.
-6. Repair every adopted finding, then give the repaired candidate to fresh
-   isolated readers who have not seen the earlier reports.  Do not accept the
-   guide on the strength of the authoring pass or the first repair audit.
-7. Run the scoped documentation/link checks and the paper's existing `make
-   check`; run the guarded formal audit when the guide claims that replay path
-   is current.  Inspect the narrow diff for accidental manuscript or registry
-   changes.
-8. Compare the frozen and repaired guide line by line and verify every linked
-   path and command from the directory the guide states.  Record the final
-   review synthesis and disposition of all findings.
-9. Commit the authority, then synchronize and verify the public standalone
-   copy when required by the mirror conventions.
+Treat the README change as paper-facing prose, not routine documentation.
+
+1. Freeze the candidate and preserve a dated review copy or exact commit.
+2. Obtain mutually isolated cold reads from:
+   - a primary-audience mathematical referee following only the numbered
+     proof route; and
+   - a formal/reproducibility referee checking only the boundary and replay
+     pointers.
+3. Run a separate hostile audit for theorem scope, conditionality, semantic
+   labels, source provenance, formal-coverage overstatement, dead links, and
+   claims stronger than `make check` establishes.
+4. Record verdict, confidence, required and optional findings, strongest
+   passage, and first point of friction in dated lane-owned reports.
+5. Repair every adopted finding, then rerun fresh isolated readers who have not
+   seen the first reports.  The authoring pass does not count as a cold read.
+6. Compare the frozen and repaired versions, run the existing paper checks,
+   verify every link from a clean checkout, and record a final synthesis and
+   finding disposition.
+
+## Editorial test
+
+Every sentence must do at least one of four jobs: locate a mathematical claim,
+explain a proof dependency, delimit the trust boundary, or enable a check.  Cut
+general assurances, review-process advertising, exhaustive inventory prose,
+and implementation detail that does not help a referee assess the theorem.
+Let stable labels, exact qualifications, passing gates, and accessible evidence
+carry the signal.
 
 ## Acceptance gate
 
-- A reviewer can state the theorem, its proof mechanism, and its trust boundary
-  after following only the guide's fast path.
-- Every required proof step and imported provider is reachable by a stable
-  semantic label or authoritative registry entry; no page-number navigation or
-  duplicated volatile census is used.
-- The guide clearly separates the unconditional primary theorem from the
-  conditional framed companion and the unrelated all-`m` manuscript.
-- Every command is current, guarded where required, copy-pasteable from its
-  stated directory, and paired with an honest statement of what passing it
-  establishes.
-- The primary-paper facade, claim map, expected-axiom audit, evidence registry,
-  and imported-source registry are all findable without exposing the reviewer
-  to the companions' machinery unless they opt in.
-- Both isolated review paths complete without undocumented local knowledge.
-- The frozen candidate, isolated referee reports, hostile audit, repair
-  disposition, fresh post-repair cold reads, and final synthesis are preserved
-  in dated lane-owned review records, matching the evidentiary standard used
-  for manuscript review.
-- Final acceptance requires fresh post-repair verdicts of accept from both the
-  mathematical and formal/reproducibility paths, with no fatal or major finding
-  open.  The guide's authoring pass does not count as a cold read.
-- Existing manuscript and verification gates pass; no theorem, hypothesis,
-  coverage status, or validation policy changes under C942.
+- The README exposes the guide prominently, and the linked guide gives a
+  correct short route through the primary theorem and its causal proof
+  mechanism.
+- The route uses five or six stable semantic-label steps and the guide does not
+  become a second verification manual.
+- The unconditional primary theorem is unmistakably separate from the
+  conditional framed companion and all-`m` manuscript.
+- The proof/evidence paragraph states exactly what is written, imported,
+  kernel checked, computationally replayed, and absent from formalization.
+- The prose contains no unsupported quality claim; its specificity and the
+  linked evidence make the standard of work directly inspectable.
+- Every link and command is current and its stated effect is no stronger than
+  the underlying gate.
+- Fresh post-repair mathematical and formal/reproducibility readers both return
+  accept, with no fatal or major finding open.
+- Existing manuscript and verification gates pass, and the authority is
+  synchronized to the standalone paper repository when required by the mirror
+  conventions.
 
 ## Starting points
 
+- `papers/complete-repair-ports/README.md`
 - `papers/cubic-stabilization-m1/README.md`
-- `papers/cubic-stabilization-m1/cubic_stabilization_m1.tex`
 - `papers/cubic-stabilization-m1/sections/`
 - `papers/cubic-stabilization-m1/verification/README.md`
 - `papers/cubic-stabilization-m1/verification/imported-sources.json`
 - `papers/cubic-stabilization-m1/verification/evidence.json`
-- `papers/cubic-stabilization-m1/lean/README.md`
 - `papers/cubic-stabilization-m1/lean/verification/claims.json`
-- `papers/cubic-stabilization-m1/lean/verification/expected_axioms.txt`
 - `notes/cubic-threefolds-tasks/c940-epilogue-three-way-split.md`
 - `papers/style-guide.md`
