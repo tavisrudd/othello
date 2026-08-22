@@ -1194,10 +1194,14 @@ arXiv:alg-geom/9710014v1, supplies the tensor-product genus-zero quantum
 algebra.  The checked PDF has SHA-256
 `73d708012d4157f176a264940b80490f697f51aefd6a3913fbd7ccbbc1e0ed7d`.
 After avoiding the outer discriminant, the four rank-one \(F_1\) algebra
-factors are separated.  Corollary 1.2 preserves the Euler field, so the
-marked center block is carried back to \(U_B\otimes L_i\) for some such
-factor \(L_i\).  Its label need not agree with a preselected label for the
-point-blowup correction; algebra-factor permutations are harmless here.
+factors are separated.  Use the established formal-germ persistence at
+Iritani's center parameter and the cubic primitive-local rank pattern
+\(1,1,2\): \(U_B\) is the unique rank-two primitive ideal.  Corollary 1.2
+gives a ring isomorphism and preserves the Euler field, so preservation of
+primitive central idempotents carries the marked center block back to
+\(U_B\otimes L_i\) for some rank-one \(F_1\) factor \(L_i\).  Its label need
+not agree with a preselected label for the point-blowup correction;
+algebra-factor permutations are harmless here and a shear is impossible.
 On \(L_i\), the outer Euler operator is scalar, so tensoring only adds that
 scalar to the semisimple part of the cubic block.  Its rank, nonzero
 square-zero nilpotent part, and shift-invariant modified-residue discriminant
@@ -1223,8 +1227,12 @@ formula, Iritani's algebra-ideal identification of the \(F_1\) correction,
 and the existing C924 identification of the displayed rational cubic block
 and raw degree-zero row with the actual \(z=0\) cubic block.  The remaining
 product-marker deduction uses generic separation, connectedness of the
-generalized-primary cubic block, Corollary 1.2's Euler preservation, and
+generalized-primary cubic block, its unique primitive rank and persistence at
+the center parameter, Corollary 1.2's ring and Euler preservation, and
 scalar-shift invariance; it does not identify a canonical outer-factor label.
+Without that cubic uniqueness and persistence, an abstract marked factor
+could be permuted with another isomorphic rank-two factor and the conclusion
+would require an additional marker-compatibility theorem.
 
 Consequently (D10.5) is false as a universal smooth-blowup provider.  The
 argument is invariant under permutations of the four outer \(F_1\) factors,

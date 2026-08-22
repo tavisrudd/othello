@@ -99,6 +99,11 @@ for the unconditional \(m=2\) or all-\(m\) theorem.
 - **Settled:** an unmarked Mori interpretation cannot exclude period three.
   The quadric-threefold and Type-II transition examples carry cubic local
   monodromy without producing the required projective-bundle carrier.
+- **Settled:** raw normalized \(z=0\) augmentation cannot replace the loop
+  ledger.  The \(B\times F_1\) blowup has a row-visible marked correction;
+  primitive-factor preservation makes the obstruction independent of the
+  permutation of the four outer \(F_1\) factors.  The full and
+  projector-restricted row laws are both false as universal providers.
 - **Open:** construct an occurrence-wise comparison from the C924 marked
   finite étale QDM index scheme to labelled nearby-cycle branches over the
   actual transported trait, equivariant for one named loop.

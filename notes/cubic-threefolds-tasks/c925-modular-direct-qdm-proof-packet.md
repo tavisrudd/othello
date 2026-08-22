@@ -630,8 +630,10 @@ any geometric or QDM provider.
    blowup
    \(B\times F_1=\operatorname{Bl}_{B\times\{p\}}(B\times\mathbb P^2)\).
    Over a generic splitting field, Behrend's product theorem and the
-   Euler-preserving algebra decomposition carry the connected marked center
-   block to \(U_B\otimes L_i\) for some separated rank-one \(F_1\) factor.
+   Euler-preserving algebra decomposition, the cubic primitive-local rank
+   pattern \(1,1,2\), and persistence at the center parameter carry the
+   unique rank-two marked center block to \(U_B\otimes L_i\) for some
+   separated rank-one \(F_1\) factor.
    No canonical factor label or product-functorial comparison is needed.
    The outer Euler operator is scalar on \(L_i\), so rank, the nonzero
    square-zero nilpotent part, and the shift-invariant modified-residue

@@ -198,8 +198,9 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   this blowup.  Tensoring with the cubic gives the legal fivefold blowup
   \(B\times F_1=\operatorname{Bl}_{B\times\{p\}}(B\times\mathbb P^2)\).
   Over a generic splitting field, Behrend's product theorem and Euler
-  preservation carry the connected marked center block to
-  \(U_B\otimes L_i\) for some separated rank-one \(F_1\) factor; no canonical
+  preservation, cubic rank pattern \(1,1,2\), and center-parameter persistence
+  carry the unique rank-two marked center block to \(U_B\otimes L_i\) for
+  some separated rank-one \(F_1\) factor; no canonical
   label or product-functorial comparison is needed.  Scalar shift preserves
   the cubic marker, and every \(L_i\) is degree-zero visible.  The product row
   is nonzero while its ambient component is zero.  Lean checks the tensor
