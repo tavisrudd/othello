@@ -19,12 +19,12 @@ script as a proof.
 
 The immutable inputs are recorded in formal-boundary.json:
 
-- source commit e1b58fd8a79a763012a21fa4d32f8904c8d9eb04;
+- source commit e45c925e11112b4a21a17ff23029243904fc5865;
 - finitegeom base commit b871c10b4a91200a0913644d39b9f0ce44f655ca;
 - Lean v4.32.0-rc1;
 - mathlib revision 571b8a8e54219b4d393f75f4b8653fac08197fcc;
 - import-only gate RepairPorts.Gates.CompletePorts;
-- 36 modules and 60 paper-facing terminals.
+- 36 modules and 61 paper-facing terminals.
 
 From a checkout of the source repository at the pinned source commit, the
 guarded replay is:
@@ -44,13 +44,13 @@ checkout at the pinned base commit:
 ~~~text
 python3 lean/scripts/lean-area-export.py \
   --config lean/trust/export/complete_ports.toml \
-  --source-commit e1b58fd8a79a763012a21fa4d32f8904c8d9eb04 \
+  --source-commit e45c925e11112b4a21a17ff23029243904fc5865 \
   --finitegeom-repo /absolute/path/to/clean/finitegeom \
   --finitegeom-commit b871c10b4a91200a0913644d39b9f0ce44f655ca \
   plan
 ~~~
 
-The plan must report 885232 closure bytes, no prose drift, the 36-module
+The plan must report 888036 closure bytes, no prose drift, the 36-module
 closure listed in the JSON manifest, and only Classical.choice, Quot.sound,
 and propext in the permitted logical-axiom set. The strict weighted example
 remains conditional on the regular Singer-action hypothesis displayed in its
