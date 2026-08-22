@@ -154,12 +154,9 @@ def track_cycle_type(k, cls, z0, b, eps=0.05, steps=400):
             perm = dist.argmin(axis=1)
             if len(set(perm)) != n:
                 return None  # ambiguous; caller refines
-            # safety: step must be small relative to the separation of the
-            # previous eigenvalues among themselves
-            selfdist = np.abs(prev[:, None] - prev[None, :]) + np.eye(n) * 1e9
-            sep = np.min(selfdist)
-            if np.max(dist[np.arange(n), perm]) > 0.3 * sep:
-                return None
+            # bijectivity of nearest-neighbour matching is the only local
+            # check; global reliability comes from agreement across step
+            # counts and radii in the caller
             ev = ev[perm]
         prev = ev
     # final permutation: start[i] -> prev[i]; match prev back to start
@@ -205,13 +202,9 @@ def main():
         # since a larger circle can cross the discriminant locus
         results = []
         for eps in (1e-2, 3e-3):
-            ct = None
-            for steps in (800, 3200, 12800):
-                ct = track_cycle_type(k, cls, z0, b, eps=eps, steps=steps)
-                if ct is not None:
-                    break
-            results.append(ct)
-        ct = results[0] if (results[0] is not None and results[0] == results[1]) else None
+            for steps in (3200, 12800):
+                results.append(track_cycle_type(k, cls, z0, b, eps=eps, steps=steps))
+        ct = results[0] if (results[0] is not None and all(r == results[0] for r in results)) else None
         key = ct if ct is not None else "unresolved"
         seen.setdefault(key, []).append(b)
         if ct is not None:

@@ -288,6 +288,15 @@ Findings so far:
   No edge with denominator \(\ge5\) has appeared.  Coverage is therefore
   partial: "no 5-cycle on the resolved part of the box" is the current
   statement, not a theorem.
+- Validated numeric scan (nearest-neighbour tracking accepted only when two
+  radii \(10^{-2},3\cdot10^{-3}\) and two step counts \(3200,12800\) agree),
+  box \(|b_j|\le1\), seed 1:
+  \(k=4\): 222/242 resolved, types \((1^7),(2,2,1^3),(3,1^4),(4,1^3)\);
+  \(k=5\): 669/728 resolved, types \((1^8),(2,2,1^4),(3,1^5),(3,2,1^3),(4,1^4)\).
+  The unresolved cocharacters are those whose Newton polygon has a repeated
+  algebraic edge root (for \(k=4\) the same 20 as in the exact scan).  No
+  cycle of length \(\ge5\) on any resolved cocharacter.  Outputs:
+  `c925-fable-dp-cycle-scan-output.txt`.
 
 ### 11.4 Closed lens: Frobenius as a canonical extra symmetry
 
