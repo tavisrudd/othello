@@ -4,6 +4,19 @@ This directory identifies the exact Lean boundary supporting the paper. It
 does not treat a generated table or native computation as a proof of a body
 theorem.
 
+The field-seven sparse-paving representations have an independent exact
+finite replay:
+
+~~~text
+python3 verification/f7-seed.py \
+  --check verification/f7-seed.json
+~~~
+
+This checks the displayed circuit-hyperplane lists and their derived pointed
+profile and radius-three reliability data.  The body proof uses the displayed
+minor ledger and the structural sparse-paving argument; it does not use the
+script as a proof.
+
 The immutable inputs are recorded in formal-boundary.json:
 
 - source commit e1b58fd8a79a763012a21fa4d32f8904c8d9eb04;

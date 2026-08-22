@@ -2,7 +2,7 @@
 
 **Lane**: `complete-ports`
 
-**Status**: ACTIVE — PHASE B HUMAN PROOF AND LEAN BOUNDARY
+**Status**: ACTIVE — PHASE C UNIFYING PAPER REVISION
 **Allocated**: 2026-08-21
 **Source assessment**:
 `notes/2026-08-21-c678-complete-ports-percentile-referee.md`
@@ -137,10 +137,10 @@ Do not begin by moving sections.
 
 ## Phase A result — seed and transfer audit
 
-Phase A passes.  Let (I_{\mathrm{dis}}) and (I_{\mathrm{ov}}) be the two
+Phase A passes.  Let \(I_{\mathrm{dis}}\) and \(I_{\mathrm{ov}}\) be the two
 row-span codes over \(\mathbb F_7\) displayed in Proposition 6.3, with
-distinguished coordinate (x=0).  The proof is structural once the two
-finite representations are checked.  Direct elimination gives rank (4),
+distinguished coordinate \(x=0\).  The proof is structural once the two
+finite representations are checked.  Direct elimination gives rank \(4\),
 no dependent triples, and the circuit-hyperplane lists
 \[
  \{0145,0236,2345\},\qquad \{0123,0256,3456\}.
@@ -148,7 +148,7 @@ no dependent triples, and the circuit-hyperplane lists
 The committed C676 replay bundle independently verifies this finite input
 and the following derived data:
 
-- both matrices have rank (4), every three columns are independent, and
+- both matrices have rank \(4\), every three columns are independent, and
   each represented matroid has exactly three circuit-hyperplanes;
 - the two complete pointed subset profiles agree;
 - the radius-three minimal repair clutters are
@@ -180,7 +180,7 @@ representations; sparse-paving structure proves every conceptual claim.
 
 ### Exact parameter and pointed-cost proof
 
-Both seeds are \([7,4,3]_7\) codes.  Rank (4) gives dimension (4).
+Both seeds are \([7,4,3]_7\) codes.  Rank \(4\) gives dimension \(4\).
 A circuit-hyperplane is a rank-three four-set, so a nonzero primal linear
 functional vanishes on four columns and the primal distance is at most
 three.  If five columns lay in a hyperplane, all five of their four-subsets
@@ -189,7 +189,7 @@ Thus the distance is exactly three.
 
 Every three columns are independent and a dependent four-set exists, hence
 the dual distance is exactly four.  In each seed a circuit-hyperplane through
-(x) supplies a weight-four dual word through (x); after normalization this
+\(x\) supplies a weight-four dual word through \(x\); after normalization this
 shows \(\mu_x(0)\leq4\).  The dual-distance bound gives the reverse inequality,
 so
 \[
@@ -199,34 +199,57 @@ so
  \qquad
  z_x(I)=\mu_x(0)+d(I^\perp)=8.
 \]
-At radius (r=3), the exact transfer gate is (r+1<z_x(I)), namely
-(4<8), and therefore passes for both seeds.
+At radius \(r=3\), the exact transfer gate is \(r+1<z_x(I)\), namely
+\(4<8\), and therefore passes for both seeds.
 
 ### Sharp matched-family theorem
 
 Use either seed as an inner code and use the same asymptotically good
-\(\mathbb F_{7^4}\)-linear outer family (O_N\leq\mathbb F_{7^4}^N), chosen
+\(\mathbb F_{7^4}\)-linear outer family \(O_N\leq\mathbb F_{7^4}^N\), chosen
 with both primal and dual relative distances bounded away from zero.  The two
-concatenated families have, for every (N), the same length (7N), the same
-dimension (4K_N), and the same lower bound (3D_N) on minimum distance.
+concatenated families have, for every \(N\), the same length \(7N\), the same
+dimension \(4K_N\), and the same lower bound \(3D_N\) on minimum distance.
 They are therefore asymptotically good over the same fixed alphabet
 \(\mathbb F_7\), with matched rate and distance bounds.
 
-Since (d(O_N^\perp)\to\infty), for all sufficiently large (N) the exact
+Since \(d(O_N^\perp)\to\infty\), for all sufficiently large \(N\) the exact
 prescribed-port theorem applies simultaneously to both seeds.  At every one
-of the (N) coordinates \((j,x)\), a designated class of density exactly
-(1/7), the radius-three repair clutter is a literal block embedding of the
+of the \(N\) coordinates \((j,x)\), a designated class of density exactly
+\(1/7\), the radius-three repair clutter is a literal block embedding of the
 corresponding seed clutter.  Consequently the two families have:
 
-- identical full pointed subset profiles and pointed-Tutte specializations;
+- radius-three ports copied from seeds with identical full pointed subset
+  profiles and pointed-Tutte specializations (no equality of the large codes'
+  full pointed invariants is claimed);
 - identical alphabet, block length, dimension, distance lower bound,
-  designated-class density, locality (3), and number (2) of minimum
+  designated-class density, locality \(3\), and number \(2\) of minimum
   repairs at every designated target; but
 - distinct radius-three homogeneous reliability functions
   \(2s^3-s^6\) and \(2s^3-s^5\), hence distinct bounded-EXIT curves.
 
 The current seeds do **not** match availability: the disjoint seed has
-matching number (2), while the overlapping seed has matching number (1).
+matching number \(2\), while the overlapping seed has matching number \(1\).
 The theorem therefore does not claim that all conventional local data agree.
 This is the strongest honest common-outer lift of Proposition 6.3 without a
 new seed-search program.
+
+## Phase B result — human proof and Lean boundary
+
+Phase B passes. The paper proof reduces the finite comparison to the
+sparse-paving pointed-profile lemma and proves both exact pointed costs
+\(z_0=8\) directly. Lean theorem
+`RepairPorts.eventually_radiusThree_prescribedPortPair` proves that one
+outer family eventually transfers both radius-three support and coefficient
+ports simultaneously whenever the two inner dual distances are at least four.
+The complete-ports gate rebuilt successfully and the declaration reports only
+`propext`, `Classical.choice`, and `Quot.sound`.
+
+## Phase C draft
+
+The manuscript now contains `thm:asymptotic-separation` and
+`cor:transfer-synthesis`. The determinant ledger has moved from the body to
+the verification appendix, while a public exact replay bundle lives at
+`papers/complete-repair-ports/verification/f7-seed.py` and
+`papers/complete-repair-ports/verification/f7-seed.json`. The current
+22-page build passes `make check` without TeX warnings. Formal ledgers are
+being reconciled before the immutable boundary refresh and cold referee gate.

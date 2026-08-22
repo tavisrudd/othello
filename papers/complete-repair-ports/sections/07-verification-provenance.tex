@@ -81,6 +81,44 @@ such: outer-family existence, concatenated-dual decomposition, Singer
 regularity, normal-rational-curve nuclei, and the Las Vergnas perspective
 polynomial.
 
+\subsection{The two field-seven seed representations}
+\label{sec:seed-evidence}
+
+For completeness, order the four-subsets of $\{0,\ldots,6\}$
+lexicographically as
+\[
+\begin{split}
+&0123,0124,0125,0126,0134,0135,0136,0145,0146,0156,\\
+&0234,0235,0236,0245,0246,0256,0345,0346,0356,0456,\\
+&1234,1235,1236,1245,1246,1256,1345,1346,1356,1456,\\
+&2345,2346,2356,2456,3456.
+\end{split}
+\]
+The corresponding determinants in $\F_7$ are
+\[
+\begin{split}
+G_{\rm dis}:{}&
+5,3,3,5,4,4,1,0,5,5,2,5,0,6,5,2,1,1,6,4,\\
+&1,6,6,3,4,6,4,6,5,2,0,1,6,3,4,\\
+G_{\rm ov}:{}&
+0,2,5,1,2,5,1,5,2,6,1,6,4,4,5,0,5,4,4,5,\\
+&1,6,4,2,2,4,3,1,1,3,6,2,2,6,0.
+\end{split}
+\]
+Each triple extends to a displayed nonzero minor, and each set of at least
+five columns contains one.  This proves the finite representation facts used
+in Proposition~\ref{prop:filtration-boundary}.  The independent exact replay
+bundle is
+\begin{quote}\small\raggedright
+\path{verification/f7-seed.py},\\
+\path{verification/f7-seed.json}.
+\end{quote}
+It checks the circuit-hyperplane lists, pointed subset profile, minimal
+radius-three repairs, and survivor-set counts.  Its certificate SHA-256 is
+\begin{quote}\scriptsize
+\path{8096230e66f634c820ae7ec4bacd9b2493006782ff02b8be3a8c7e1caf80de07}.
+\end{quote}
+
 \subsection{Field-nine evidence}
 \label{sec:finite-evidence}
 

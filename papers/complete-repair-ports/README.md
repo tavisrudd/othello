@@ -23,6 +23,12 @@ full-radius reliability with a Las Vergnas perspective-polynomial
 specialization, and proves that the radius filtration contains additional
 information.
 
+The main synthesis uses two explicit `[7,4,3]₇` inner codes with the same full
+pointed subset profile but radius-three reliability laws `2s³-s⁶` and
+`2s³-s⁵`. Concatenation with one common outer family gives asymptotically good
+fixed-alphabet families with matched global parameter formulas and designated
+target classes of density `1/7` carrying the distinct bounded ports.
+
 Two characteristic-three applications illustrate different local geometries:
 a twisted-cubic–axis code with exact matching and transversal rows, and a
 quartic normal rational curve with its nucleus, whose harmonic quadruples form
