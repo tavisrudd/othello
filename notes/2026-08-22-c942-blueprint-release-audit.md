@@ -48,3 +48,10 @@ replaced by “writes an annotated web view of the manuscript” (or the split
 configuration should be changed deliberately).
 
 No other release or PDF-build defect was found in the C942 delta.
+
+## Post-repair disposition
+
+**Pass.**  The guide now says that the target writes an annotated web view and
+dependency graph.  It no longer promises usable Lean declaration links or
+separate theorem pages, and it retains the exact statement that the view does
+not build or check Lean.
