@@ -3374,8 +3374,17 @@
       "last": 942,
       "purpose": "Plan and add a reviewer guide and checklist for the m=1 cubic-stabilization paper",
       "sequence": 375
+    },
+    {
+      "count": 1,
+      "first": 943,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 943,
+      "purpose": "Conventional terminology revision across the Clebsch and conference papers with rolling cold-referee review",
+      "sequence": 376
     }
   ],
-  "next_id": 943,
+  "next_id": 944,
   "schema": "codex-task-id-allocations-v1"
 }
