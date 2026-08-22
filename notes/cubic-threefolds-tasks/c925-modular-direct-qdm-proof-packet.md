@@ -31,6 +31,12 @@ discriminant zero, while the distinct-root reduction does not preserve the
 leading nilpotent line and hence does not admit the marker's elementary
 modification.  Thus either normalized calibration excludes \(4/9\); the
 remaining source theorem must construct one from the geometric occurrence.
+The strict companion equality case is independently certified: an exact Rust
+solver finds the unique normalized gauge in both endpoint orientations, Lean
+rechecks the full recurrence and discriminants \(0,4\), and a typed
+`Calibration` theorem transports this exclusion to any simultaneously
+intertwined native model.  This closes the finite recurrence consumer, not the
+native calibration provider.
 The unconditional every-smooth theorem is not landed.  Independently, Voisin
 plus the 2025 Engel--de Gaay Fortman--Schreieder parity theorem gives an
 all-\(m\) proof for a very general cubic; that preprint result must not be
@@ -680,6 +686,14 @@ certificate.  A separate hostile audit found no commit-gate defect and checked
 that the normalization hypotheses imply a genuine projector, an off-block
 gauge, and block-diagonal reduced grading.
 
+The generated rank-six recurrence checker elaborated without diagnostics in
+guarded run `20260822-162636`.  The generated data, checker,
+`PaperInterface`, and `Verification.AxiomAudit` passed together in queued run
+`20260822-232949-4c919d89`.  Guarded audit run `20260822-163436` reports only
+`propext`, `Classical.choice`, and `Quot.sound` on all new terminals.  The
+flake replay checks tracked hashes and regenerates byte-identical JSON and Lean
+data from the exact Rust solver.
+
 The finite model currently has one hundred twenty-two checks.  It verifies only the
 advertised algebraic laws and countermodels, never an external QDM provider.
 The replayed script is 117334 bytes with SHA-256
@@ -716,6 +730,11 @@ The live frontier is source-side, not another linear consumer.
    identify the occurrence with either normalized reduction, but neither the
    order classification nor the Laurent comparison supplies that
    identification.
+   `RankSixRecurrenceCertificate.no_cubic_discriminant_of_calibration`
+   makes the smaller remaining obligation precise: construct one calibration
+   intertwining multiplication, projector, first gauge, grading, selected
+   basis, and left inverse.  An unordered or generic block identification is
+   insufficient.
 
 2. **What Lean separates.**  The nonsplit outer-return theorem proves that
    total period is outer-label period times return-map period.  The pre-strict
@@ -734,6 +753,10 @@ The live frontier is source-side, not another linear consumer.
    `BinaryCubicOrderResidues.no_classicalOrderModel_carriesCubicMarker`
    checks the final two-case finite exclusion after a normalized native
    calibration has been supplied; it does not construct that calibration.
+   The generated rank-six certificate independently checks the two strict
+   companion orientations and proves calibration invariance.  It does not
+   classify effective orders or prove that a geometric occurrence has the
+   required calibration.
 
 3. **All-\(m\) remainder.**  Before the strict equality case, the candidate
    center dimensions at \(n=2,3,4,5,14\) are respectively

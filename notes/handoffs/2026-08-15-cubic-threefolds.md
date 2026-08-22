@@ -165,7 +165,13 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   reduction has residue discriminant zero, while the distinct-root reduction
   does not preserve the elementary-modification line.  Thus either normalized
   native calibration excludes \(4/9\), but no source constructs such a
-  calibration from the geometric occurrence.  The
+  calibration from the geometric occurrence.  The strict companion equality
+  case is now independently replayable: exact Rust elimination solves the two
+  unique normalized gauges, Lean checks their full recurrences and
+  discriminants \(0,4\), and a typed `Calibration` theorem transports the
+  exclusion under simultaneous intertwining of multiplication, projector,
+  first gauge, grading, selected basis, and left inverse.  The geometric task
+  is to construct that calibration, not another finite recurrence proof.  The
   pre-strict candidate dimensions at
   \(n=2,3,4,5,14\) are respectively \(\{1,2\}\), \(\{1,3\}\),
   \(\{1,3,4\}\), \(\{1,5\}\), and

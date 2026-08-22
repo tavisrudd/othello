@@ -43,6 +43,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.Occ
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.ThreefoldKummerCompatibility
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.BinaryCubicJordanStrata
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.BinaryCubicOrderResidues
+import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.RankSixRecurrenceCertificate
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.KummerDivisorGenerator
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.HorizontalReader
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.TraitHorizontalReader
@@ -195,6 +196,18 @@ the same elementary modification is not regular.  The resulting two-case
 theorem excludes discriminant `4/9` only after one of these two normalized
 native calibrations has been supplied; it does not construct that calibration
 from a quantum-D-module occurrence.
+`RankSixRecurrenceCertificate` independently checks the two canonical strict
+rank-six endpoint orientations.  A tracked Rust solver obtains the unique
+normalized first gauge by exact Gaussian elimination and emits the matrices;
+Lean checks the projector, Sylvester equation, recurrence, and resulting
+discriminants `0` and `4`.  Lean also proves that a nonzero square-zero
+self-adjoint endomorphism of a hyperbolic plane has exactly these two
+orientations.  A typed `Calibration` then proves that any simultaneous
+intertwining of multiplication, projector, first gauge, grading, selected
+basis, and left inverse preserves both recurrence coefficients and the
+discriminant.  The geometric input must still construct that calibration for
+the native carrier; the certificate does not infer it from generic block
+isomorphism.
 `ProjectiveSpaceQuantumPolynomial` proves that the standard relation
 `X^(m+4) - q` is separable in characteristic zero for nonzero `q`. This
 kernel-checks the target's no-repeated-root algebra once its small-quantum

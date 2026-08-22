@@ -7,6 +7,22 @@
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
+      verifyRankSixRecurrence = pkgs.writeShellApplication {
+        name = "verify-rank-six-recurrence";
+        runtimeInputs = with pkgs; [ coreutils diffutils rustc ];
+        text = ''
+          certificate_dir=$(mktemp -d -p /var/tmp rank-six-recurrence.XXXXXX)
+          trap 'rm -rf "$certificate_dir"' EXIT
+          cd ${./.}
+          sha256sum -c ${./certificates/rank-six-recurrence.sha256}
+          rustc ${./scripts/rank_six_recurrence_cert.rs} -O -D warnings \
+            -o "$certificate_dir/solver"
+          "$certificate_dir/solver" --lean | diff -u \
+            ${./TavisRuddFiniteGeom/Papers/CubicStabilizationIrrationality/Comparison/Generated/RankSixRecurrenceData.lean} -
+          "$certificate_dir/solver" --json | diff -u \
+            ${./certificates/rank-six-recurrence.json} -
+        '';
+      };
     in {
       devShells.${system}.default = pkgs.mkShell {
         packages = with pkgs; [ elan git curl cacert gmp zlib coreutils ];
@@ -18,6 +34,10 @@
           export CURL_CA_BUNDLE="$SSL_CERT_FILE"
           export GIT_SSL_CAINFO="$SSL_CERT_FILE"
         '';
+      };
+      apps.${system}.verify-rank-six-recurrence = {
+        type = "app";
+        program = "${verifyRankSixRecurrence}/bin/verify-rank-six-recurrence";
       };
     };
 }

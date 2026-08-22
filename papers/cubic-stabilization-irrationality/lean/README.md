@@ -516,6 +516,29 @@ for these two normalized reductions.  It does not prove that a geometric
 carrier descends to a regular unital order or that its occurrence comparison
 selects either normalization.
 
+`Comparison.RankSixRecurrenceCertificate` checks the strict cyclic companion
+recurrence without trusting a precomputed first gauge.  The tracked Rust
+program `scripts/rank_six_recurrence_cert.rs` solves the rational Sylvester
+system with zero selected and complementary diagonal blocks and emits both
+`certificates/rank-six-recurrence.json` and the generated Lean matrix data.
+Lean independently checks the projector, selected Jordan block, gauge
+normalization, full gauge-derivative recurrence, and discriminants `0` and
+`4`.  It also proves that a nonzero hyperbolic-self-adjoint square-zero
+endpoint map has exactly the lower or upper orientation.  Its `Calibration`
+interface requires simultaneous intertwining of multiplication, projector,
+first gauge, grading, selected basis, and left inverse; Lean proves that such
+a calibration preserves both selected recurrence coefficients and the
+modified-residue discriminant.  Run
+
+    nix run .#verify-rank-six-recurrence
+
+from this directory to regenerate both outputs in a temporary directory and
+compare them byte for byte.  The certificate does not prove that an actual
+marked occurrence admits this calibration; a generic or unordered block
+isomorphism is deliberately insufficient.  The replay also checks the three
+tracked artifact digests in `certificates/rank-six-recurrence.sha256` before
+executing the solver.
+
 The algebraic model has a compact sufficient constructor. If the combined
 crossed and moving map `(B,D)` admits a linear retraction, an explicit incoming
 shear and target involution construct every crossed-coordinate field. An
