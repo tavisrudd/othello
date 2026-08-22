@@ -1,11 +1,6 @@
 # Reconstruction, Rigidity, and Rationality in Geometry, Coding, and Quantum Information
 
-- [selected headline results](#selected-headline-results)
-- [theorems over infinite families](#theorems-over-infinite-families)
-- [papers and entry points](#papers-and-entry-points)
-- [abstracts and non-specialist guides](#abstracts-and-non-specialist-guides)
-- [verification philosophy](#verification-philosophy)
-- [contact and disclosure](#contact-and-disclosure)
+*Sparse shadows, persistent defects, and the recovery of hidden structure*
 
 This programme studies **what survives information loss**. Across geometry,
 coding theory, and quantum information, a rich object is replaced by a sparse
@@ -27,14 +22,33 @@ stabilization, wall crossing, or change of coefficients. The common principle
 is to find a **minimally enriched shadow** that remembers the hidden structure
 and can be transported without losing the feature that matters.
 
-Every paper is intended to stand on its own mathematically.
+Several classifications terminate in exceptional small geometries, but those
+objects arise as outputs of uniform theorems rather than chosen starting
+examples.
 
-Many structural components have independent Lean formalizations; coverage is
-claim-specific and generally not end-to-end. Each repository states which
-parts are prose proofs, cited inputs, kernel-checked formalizations,
-certificate-checked computations, or trusted executions. See
-[VERIFICATION.md](VERIFICATION.md) for links to the detailed paper-level
-evidence maps.
+| Problem | Shadow or marker | Result |
+|---|---|---|
+| Cubic stabilization | Rank-two formal quantum-connection block | Irrationality after multiplication by `P¹` |
+| Projective Reed–Solomon deep holes | Coherent marked contractions | Persistent and modular obstruction carriers |
+| Stabilizer AME states | Marginal Weyl atlas | Local-Clifford rigidity and quantitative rounding |
+| Repair ports | Bounded decoder equations | Code reconstruction and transfer |
+| Finite planes and codes | Deep-hole or minimum-word data | Recovery of the marked geometry |
+| Cubic-threefold theta divisor | Integral lattice and local link data | Global lattice and perverse decomposition |
+
+> **Status.** These manuscripts have not been externally refereed. Each paper
+> is intended to stand on its own mathematically. Verification is claim-specific
+> and generally not end-to-end. Each repository
+> distinguishes prose proofs, cited inputs, kernel-checked formalizations,
+> certificate-checked computations, and trusted executions. See
+> [VERIFICATION.md](VERIFICATION.md) for the paper-level evidence maps.
+
+- [selected headline results](#selected-headline-results)
+- [research frontiers and conditional extensions](#research-frontiers-and-conditional-extensions)
+- [theorems over infinite families](#theorems-over-infinite-families)
+- [papers and entry points](#papers-and-entry-points)
+- [abstracts and non-specialist guides](#abstracts-and-non-specialist-guides)
+- [verification philosophy](#verification-philosophy)
+- [contact and disclosure](#contact-and-disclosure)
 
 ## Selected headline results
 
@@ -47,13 +61,14 @@ complex as separate victories.
 - **One-stabilization irrationality for every smooth cubic threefold.** The
   fourfold `X × P¹` is irrational for every smooth complex cubic threefold
   `X`, and likewise `V × P¹` for every smooth prime Fano
-  threefold `V` of genus eight. The proof counts rank-two blocks of the
-  generic even quantum `D`-module whose centered leading Euler operator is
-  nonzero square-zero and whose two formal exponent classes differ modulo the
-  integers. The count vanishes on points, curves, surfaces, and projective
-  four-space, but the cubic block has exponent difference `2/3`. The same
-  construction gives an irrationality criterion for smooth projective
-  threefolds.
+  threefold `V` of genus eight. The proof constructs a marker that vanishes on
+  every blow-up centre available in dimension four but not on the cubic
+  contribution; the blow-up and projective-bundle formulas then rule out a
+  birational map from `X × P¹` to `P⁴`. Technically, the marker counts
+  rank-two blocks of the generic even quantum `D`-module whose centered
+  leading Euler operator is nonzero square-zero and whose formal exponent
+  classes differ modulo the integers. The same construction gives an
+  irrationality criterion for smooth projective threefolds.
   [Irrationality of Cubic Threefolds after One Stabilization](https://github.com/tavisrudd/cubic-stabilization-m1/blob/main/irrationality_after_one_stabilization.pdf).
 
 - **Integral divisor products on the nonstandard `A₅` cubic pencil.** An
@@ -64,32 +79,6 @@ complex as separate victories.
   this gives an explicit family whose products with `P¹` are both universally
   `CH₀`-trivial and irrational.
   [Integral Divisor Products on the Nonstandard A₅-Invariant Cubic Pencil](https://github.com/tavisrudd/cubic-stabilization-m1/blob/main/companions/six-axis-cubic-pencil/six_axis_cubic_pencil.pdf).
-
-- **Framed formal monodromy of cubic threefolds.** The numerical small even
-  quantum connection has primitive-sixth count `ν₆(X) = 2`, and the
-  unconditional product formula gives `ν₆(X × P¹) = 4`. Under explicit
-  reconstruction-tail and residual divisor-tagging hypotheses, the count is
-  birationally invariant through dimension four and gives a conditional
-  second proof of one-step irrationality.
-  [Framed Formal Monodromy of Cubic Threefolds](https://github.com/tavisrudd/cubic-stabilization-m1/blob/main/companions/cubic-framed-monodromy/cubic_framed_monodromy.pdf).
-
-- **Conditionally, every projective stabilization of a smooth cubic
-  threefold is irrational.** A common-open point has exact ambient coordinate
-  in the Gu--Yu--Yu simple-wall comparison, and projective ordinary-flop
-  continuation preserves its intrinsic row on a fixed continuation domain.
-  For a global cobordism, support collapse and coefficientwise Gamma-ratio
-  reduction combine with a rank-one derived-intersection theorem. In addition
-  to the stated gauged-admissibility conditions, the remaining unproved input
-  is one-object marked threshold compatibility for the cyclic Rees `z`-modules.
-  A crepant toric wall supplies a genuine neutral linear-toric calibration of
-  the intrinsic marked-continuation mechanism at the QDM/`I`-function level,
-  but not the arbitrary-master inverse system or the zero-mode nearby-cycle
-  comparison.
-  Under those assumptions, the point-row primary Boolean is birationally
-  invariant and distinguishes `X × P^m` from projective space for every smooth
-  cubic threefold `X` and every `m ≥ 0`.  That paper is an early draft, likely
-  to contain logical gaps and notational issues.
-  [Gamma Point Rows under Quantum Wall Crossing and a Criterion for Stable Irrationality](https://github.com/tavisrudd/cubic-stabilization-irrationality/blob/main/cubic_stabilization_irrationality.pdf).
 
 - **Integral and modular decomposition for the cubic-threefold theta
   divisor.** For the theta divisor of every smooth complex cubic threefold,
@@ -152,13 +141,15 @@ complex as separate victories.
 
 ### Coding theory and quantum information
 
-- **Projective Reed–Solomon deep holes beyond redundancy four.** Split-free
-  syndrome directions—and deep holes wherever the covering-radius gate
-  applies—are classified at redundancies five and six for every prime power
-  `q ≥ 7`, at redundancy seven in the stated split-free/deep-hole ranges, and
-  at redundancies eight through ten for `q ≥ 43, 53, 59`, respectively. At
-  redundancy five, an all-characteristic count gives splitting density `1/6`
-  on the trivial-gcd separable stratum. [Deep Holes of Projective Reed–Solomon Codes Beyond Redundancy Four: Recursive Carriers and Exact Classifications Through Redundancy Ten](https://github.com/tavisrudd/beyond4-prs/blob/main/prs-beyond-redundancy-four.pdf).
+- **Recursive carriers for projective Reed–Solomon deep holes.** For every
+  redundancy `r ≥ 6`, the reduced recursively contained locus is the union of
+  the catalecticant rank-two scheme and one maximal modular Lucas carrier.
+  This component theorem is unconditional. Under the stated intermediate
+  lower-package hypotheses, a uniform field bound confines every split-free
+  syndrome to that locus; those packages are discharged through redundancy
+  ten, giving the exact classifications in the stated ranges. At redundancy
+  five, an all-characteristic count gives splitting density `1/6` on the
+  trivial-gcd separable stratum. [Deep Holes of Projective Reed–Solomon Codes Beyond Redundancy Four: Recursive Carriers and Exact Classifications Through Redundancy Ten](https://github.com/tavisrudd/beyond4-prs/blob/main/prs-beyond-redundancy-four.pdf).
 
 - **Exact and quantitative AME rigidity.** Every product-unitary intertwiner
   between stabilizer `AME(2m,q)` states is local Clifford for every prime power
@@ -188,12 +179,26 @@ complex as separate victories.
   switching class, with a quantitative stability bound.
   [Balanced Cuts of Conference Matrices: Squared-Spectrum Rigidity and Hermitian Holonomy](https://github.com/tavisrudd/conference-cut-spectra/blob/main/conference_cut_spectra.pdf).
 
+## Research frontiers and conditional extensions
+
+- **Framed formal monodromy.** The numerical small even quantum connection has
+  the unconditional primitive-sixth counts `ν₆(X) = 2` and
+  `ν₆(X × P¹) = 4`. Its blow-up formulas and birational invariance through
+  dimension four depend on explicit reconstruction-tail and residual
+  divisor-tagging hypotheses. [Framed Formal Monodromy of Cubic Threefolds](https://github.com/tavisrudd/cubic-stabilization-m1/blob/main/companions/cubic-framed-monodromy/cubic_framed_monodromy.pdf).
+
+- **All projective stabilizations.** The cubic endpoint calculation,
+  simple-wall coordinate, ordinary-flop transport, support collapse, Gamma
+  reduction, and tail holonomicity are proved. The conclusion that every
+  `X × P^m` is irrational still assumes gauged-admissibility and one-object
+  marked threshold compatibility for the cyclic Rees `z`-modules. The paper
+  is an early draft. [Gamma Point Rows under Quantum Wall Crossing and a Criterion for Stable Irrationality](https://github.com/tavisrudd/cubic-stabilization-irrationality/blob/main/cubic_stabilization_irrationality.pdf).
+
 ## Theorems over infinite families
 
-The exceptional Clebsch, `q = 13`, and `q = 11` objects arise as answers to
-general questions rather than as assumptions. The following table records
-selected infinite-family statements from the major papers; when a statement
-is conditional, its hypothesis is displayed in the theorem column.
+The following table records selected infinite-family statements from the
+major papers. When a statement is conditional, its hypothesis is displayed in
+the theorem column.
 
 | Paper | General theorem | Quantifier range |
 |---|---|---|
