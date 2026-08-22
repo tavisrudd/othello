@@ -41,36 +41,31 @@ a prescribed-hole defect identity and matching-design rigidity}
 \maketitle
 
 \begin{abstract}
-An arc is a point set with no three collinear; its secants are the lines
-joining pairs of its points.  For an arc in any finite projective plane and
-any prescribed set of points allowed to remain uncovered, we combine the
-first two moments of the number of secants through an external point into an
-exact identity with a pointwise nonnegative remainder.
-Its vanishing turns the canonical secant-concurrency decomposition of
-the pairs of secants with disjoint endpoint pairs into maximum-matching
-cliques.  Equivalently, it produces a simple
-\(\operatorname{MATCH}(k,\lfloor k/2\rfloor,1)\) design in which every
-pair of independent edges occurs once.  In a Desarguesian plane, its matching
-blocks are realized by concurrent chord families of the planar \(k\)-arc.
-The same remainder gives explicit edge and deletion stability away from
-equality.
-
-As the principal application, for a nonsingular conic
-\(\cC\subseteq\PG(2,q)\), let \(\rhoC(q)\) be the least size of an arc
-disjoint from \(\cC\) whose secants cover every remaining point outside
-\(\cC\).  We prove
+We prove that if \(\cH\) is any prescribed set of \(q+1\) points in a
+finite projective plane of order \(q\), then every arc \(A\) disjoint from
+\(\cH\) whose secants cover all points outside \(A\cup\cH\) satisfies
 \[
- \rhoC(q)\ge
+ |A|\ge
  \sqrt{2q}+\frac32-\frac8{\sqrt{2q}}.
 \]
-We determine the possible zero-defect orders and classify zero defect in
-characteristic two: for odd \(k\ge7\), equality gives an oval whose nucleus
-lies on \(\cC\), while for even \(k\ge6\), it forces \(k=q+2\).  A
-kernel-checked finite classification proves \(\rhoC(16)=9\).  Separate
-exhaustive classifications, with kernel-checked attaining witnesses, give
-\(\rhoC(13)=8\), \(\rhoC(17)=9\), and \(\rhoC(19)=10\).
-The defect identity, equality criterion, and deletion stability are
-independently formalized in Lean.
+Thus even after exempting \(q+1\) points from coverage, the bound retains
+the classical \(\sqrt{2q}\) scale with additive term \(3/2-o(1)\).  More
+generally, the first two secant moments yield an exact defect identity with
+nonnegative local summands.  At zero defect, each concurrency class
+containing at least two secants is a maximum matching, and these classes form
+a simple \(\operatorname{MATCH}(k,\lfloor k/2\rfloor,1)\) design.  In
+Desarguesian planes, the arc realizes this design by concurrent chord
+families; the defect also gives quantitative deletion stability.
+
+For a nonsingular conic \(\cC\subseteq\PG(2,q)\), let \(\rhoC(q)\) denote
+the corresponding minimum.  In characteristic two, a \(\cC\)-complete
+zero-defect arc with odd \(k\ge7\) is an oval of size \(q+1\) whose nucleus
+lies on \(\cC\), while even \(k\ge6\) forces \(k=q+2\), hence a hyperoval.
+A kernel-checked classification gives \(\rhoC(16)=9\); exhaustive
+classifications with kernel-checked attaining witnesses give
+\(\rhoC(13)=8\), \(\rhoC(17)=9\), and \(\rhoC(19)=10\).  The defect
+identity, equality criterion, and deletion stability are independently
+formalized in Lean.
 \end{abstract}
 
 \noindent\textbf{Keywords.} complete arc; conic; saturating set; secant
