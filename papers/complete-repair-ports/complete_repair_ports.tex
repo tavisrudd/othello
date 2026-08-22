@@ -40,28 +40,30 @@
 
 \begin{abstract}
 For a linear code and a distinguished coordinate, the complete bounded repair
-port records every dual-support recovery using at most a prescribed number of
-helpers.  We keep three layers of this object visible: its support clutter, its
-scalar recovery coefficients, and its reliability under helper failures.
+port records every dual recovery equation using at most a prescribed number
+of helpers.  Its support clutter says which helpers suffice, its normalized
+coefficients retain the represented decoder, and its Boolean success event
+governs reliability.  This extra coefficient data is substantial: for every
+proper MDS code, one minimum coefficient port reconstructs the represented
+code, although its support projection is the generic complete uniform
+clutter.
 
-We prove an exact weighted-functional transfer theorem for concatenation and
-identify the persistent pointed obstruction to replicating a prescribed port.
-Every fixed represented port satisfying this obstruction bound occurs with positive
-density in an asymptotically good fixed-alphabet family.  The same object has
-an exact deletion--contraction reliability calculus and a radius-truncated BEC
-EXIT hierarchy whose successive differences give the cheapest available
-repair radius.  At full radius, repair reliability is a specialization of the
-Las Vergnas polynomial of the elementary perspective
-$M\backslash x\to M/x$; the bounded-radius filtration is extra information.
+We prove an exact weighted-functional transfer theorem for concatenation.
+In the fixed-inner linear regime, a pointed zero-functional cost is the
+persistent obstruction to copying a bounded port blockwise; every represented
+port below this threshold occurs on a positive-density designated coordinate
+class in an asymptotically good fixed-alphabet family.  We also derive exact
+deletion--contraction and pivotal identities, a bounded BEC EXIT hierarchy
+whose differences recover the cheapest repair radius, and a full-radius
+specialization of the Las Vergnas polynomial for
+$M\backslash x\to M/x$.  An explicit represented pair proves that this
+full-radius invariant does not determine the bounded-radius filtration.
 
-Two characteristic-three families illustrate the distinction.  A
-twisted-cubic--axis code has exact coordinatewise matching and transversal
-rows and transfers strictly beyond the ordinary support-distance gate.  A
-quartic normal rational curve with its nucleus has harmonic-quadruple circuits,
-a Steiner $S(3,4,q+1)$ nucleus port, and parallel repairs at the nucleus,
-whereas every curve-target repair has the nucleus as a compulsory helper.
-These parallel and series geometries separate bounded-radius from full-port
-information.
+Characteristic-three examples exhibit both extremes: a completed
+twisted-cubic--axis code has two uniform exact matching/transversal rows and
+strict weighted transfer, while a quartic normal rational curve with its
+nucleus has a Steiner $S(3,4,q+1)$ port, parallel nucleus repairs, and a
+compulsory nucleus helper at every curve target.
 \end{abstract}
 
 \section{Introduction}
