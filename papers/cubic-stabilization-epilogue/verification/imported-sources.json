@@ -3,7 +3,7 @@
   "sources": {
     "AKMW:weak-factorization": {
       "citation": "AKMW",
-      "pinpoint": "Theorem 0.1.1",
+      "pinpoint": "Theorem 0.3.1",
       "used": "Weak factorization of a birational map of smooth projective varieties into blowups and blowdowns along smooth centers disjoint from the common isomorphism locus.",
       "conventions": [
         {
@@ -44,9 +44,14 @@
     },
     "IritaniBlowup:thm-5.18": {
       "citation": "IritaniBlowup",
-      "pinpoint": "Theorem 5.18, especially parts (4), (6), and (7), with Remarks 2.3 and 5.6 and equation (5.15)",
-      "used": "The regular quantum-D-module comparison for a blowup, with one ambient summand, c-1 occurrence-indexed center summands, separated branches, and an invertible reconstruction Jacobian.",
+      "pinpoint": "Equation (1.1), Theorem 5.18, especially parts (3), (4), (6), and (7), Section 5.8, Remarks 2.3 and 5.6, and equation (5.15)",
+      "used": "The regular parity-preserving quantum-D-module comparison for a blowup, with one ambient summand, c-1 occurrence-indexed center summands, explicit homogeneous degree shifts, leading branch asymptotics, and an invertible reconstruction Jacobian.",
       "conventions": [
+        {
+          "aspect": "coefficient maps",
+          "requirement": "The graded completed source rings map injectively as in equation (1.1); no finite algebraic coefficient algebra is asserted for an arbitrary non-Fano fourfold.",
+          "matched": "The comparison is transported through the displayed injective maps and a common algebraically closed generic overfield."
+        },
         {
           "aspect": "loop coordinate",
           "requirement": "The comparison and its inverse are regular in z over the stated Laurent-Novikov coefficient ring.",
@@ -56,13 +61,28 @@
           "aspect": "center variables",
           "requirement": "The center Novikov map can have a kernel and divisor variables occur through the divisor-equation characters.",
           "matched": "Each occurrence retains its induced specialization and is made faithful by the finite-fibre divisor-character adapter."
+        },
+        {
+          "aspect": "parity",
+          "requirement": "Parity is independent of the formal homogeneous degree, and the pull-push and Fourier comparison formulas are parity-preserving.",
+          "matched": "The atomic ledger is formed on H^ev after odd bulk variables are set to zero; the comparison and inverse are restricted to that invariant carrier."
+        },
+        {
+          "aspect": "homogeneous degree",
+          "requirement": "The ambient component has degree zero and each center component has degree minus the center codimension.",
+          "matched": "Absolute cohomological grading is omitted from the atomic block type; a graded refinement must record these degrees as suspensions and use a suspension-invariant fold."
+        },
+        {
+          "aspect": "spectral separation",
+          "requirement": "Parts (4) and (6) give the branch asymptotics and leading reconstruction parameters, while part (7) gives the invertible combined bulk Jacobian.",
+          "matched": "Independent target unit coordinates translate the finite Euler spectra independently; the resultant argument proves pairwise generic disjointness before ledger additivity is invoked."
         }
       ]
     },
     "IritaniKoto:thm-5.1": {
       "citation": "IritaniKoto",
-      "pinpoint": "Theorem 5.1, Remarks 1.2, 5.2, and 5.3",
-      "used": "The regular quantum-D-module decomposition of a rank-r projective bundle into r reconstructed copies of the base module.",
+      "pinpoint": "Theorem 5.1, especially parts (3)--(6), and Remarks 1.2, 5.2, and 5.3",
+      "used": "The regular parity-preserving quantum-D-module decomposition of a rank-r projective bundle into r reconstructed copies of the base module, with its homogeneous shift and invertible joint bulk Jacobian.",
       "conventions": [
         {
           "aspect": "loop coordinate",
@@ -73,6 +93,21 @@
           "aspect": "bundle normalization",
           "requirement": "Twisting by a line bundle may be used to meet the global-generation convention without changing the projective bundle.",
           "matched": "The proof records this twist and checks that the intrinsic Novikov embedding is unchanged."
+        },
+        {
+          "aspect": "parity",
+          "requirement": "The Fourier comparison preserves the supermodule parity even though roots of even Novikov variables can have odd homogeneous degree.",
+          "matched": "The proof restricts both comparison directions to H^ev and does not infer parity from homogeneous degree."
+        },
+        {
+          "aspect": "homogeneous degree",
+          "requirement": "The comparison has homogeneous degree minus (r-1), not degree zero.",
+          "matched": "The atomic block type forgets absolute grading; a graded refinement records the shift and requires suspension invariance of the fold."
+        },
+        {
+          "aspect": "spectral separation",
+          "requirement": "The joint bulk Jacobian is invertible and the reconstructed factors have independent unit coordinates.",
+          "matched": "Independent scalar translations have generically nonzero pairwise resultants, so primary blocks of distinct factors do not fuse."
         }
       ]
     },

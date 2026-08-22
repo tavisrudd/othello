@@ -411,14 +411,15 @@
         "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicSmallEven_blockReduction",
         "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicZeroBlock_modifiedResidue_indicialPolynomial",
         "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicSmallEven_normalizedGauge_exists_and_unique",
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicSmallEven_normalizedGauge_coefficients"
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicSmallEven_normalizedGauge_coefficients",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.cubicExponentDifference_nonintegral"
       ],
       "objects": "The Euler and grading matrices derived in the manuscript from Beauville’s small quantum products for a cubic threefold, the constant separating basis, the normalized regular block gauge, and the rank-two zero block with its canonical elementary modification.",
       "hypotheses": "A characteristic-zero field and a nonzero square root r of three times the line-class Novikov variable. Lean takes the two displayed matrices as data and checks the finite matrix and normalized-gauge calculations.",
-      "conclusion": "The Euler matrix has eigenvalues 6r, -6r, 0, 0 with one rank-two Jordan block at zero; the first two reduced coefficients and the modified residue have the displayed values and indicial polynomial; the normalized block gauge exists and is unique coefficientwise.",
+      "conclusion": "The Euler matrix has eigenvalues 6r, -6r, 0, 0 with one rank-two Jordan block at zero; the first two reduced coefficients and the modified residue have the displayed values and indicial polynomial; the normalized block gauge exists and is unique coefficientwise; and the resulting exponent difference 2/3 is not an integer.",
       "cautions": "Fragment. Lean checks the algebraic reduction but does not derive the quantum products or identify the input matrices with the cubic QDM. That identification is now derived in the manuscript from Beauville’s published formulas. Higher gauge coefficients are established recursively rather than explicitly computed.",
       "statement_digest": "1fe93b862ceb29729b7554896e246b5650c24941cb3d3de726efe107141f6bc4",
-      "terminal_digest": "cab42cab0b334ab7d8a1b957224eec5147c916d8377df49cd3db37bcde6c5993"
+      "terminal_digest": "ef30fb83a5f676b8b5cefdbd458b64c2167358fb669bad8af85a8ce511455d44"
     },
     {
       "manuscript_label": "lem:A0preserve",
@@ -829,6 +830,19 @@
       "terminal_digest": "a882ada36e9a9b3f3a66f9137d851cffe5eb56d0e9e5b5961655c9ff0d444cd4"
     },
     {
+      "manuscript_label": "prop:generic-spectral-connection-splitting",
+      "coverage": "fragment",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.genericSpectralConnection_normalizedSplitting"
+      ],
+      "objects": "A finite free formal matrix system over a commutative coefficient ring, a finite coordinate labelling into spectral factors, a scalar attached to each factor, a block-diagonal leading operator equal to the scalar-label diagonal plus a nilpotent matrix, a normalized regular gauge, a reduced loop system, and the coefficient sequence of one base direction.",
+      "hypotheses": "Distinct factor scalars differ by units; the leading operator is block diagonal and differs from the scalar-label diagonal by a nilpotent matrix; and the base coefficients satisfy the recurrence extracted from flatness, namely that once all earlier coefficients are block diagonal, the commutator of the next coefficient with the leading operator is block diagonal.",
+      "conclusion": "Lean constructs a normalized regular gauge reducing the loop system, proves it and the reduced system unique coefficient by coefficient, and proves every coefficient of the base direction block diagonal in the same splitting.",
+      "cautions": "Fragment. Lean proves the formal Sylvester recursion and the coefficientwise flatness induction, but does not construct a quantum D-module, its generic coefficient field or algebraic closure, generalized-eigenspace subbundles, Novikov and bulk derivations, or the horizontal pairing. The paper supplies those geometric identifications and applies the same Sylvester argument separately to pairing horizontality.",
+      "statement_digest": "94d7cc7baa4e48660607906b9cfbce597e276fe5b186b67f8ed64fcd84d4c4f3",
+      "terminal_digest": "ea8798b5f79a31d5be64c4cc7c3a2dc7d7d782f140b1c0d687e26a44b3795546"
+    },
+    {
       "manuscript_label": "thm:marker-ledger",
       "coverage": "conditional_deduction",
       "declarations": [
@@ -847,16 +861,19 @@
       "manuscript_label": "prop:qdm-operation-ledgers",
       "coverage": "conditional_deduction",
       "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.qdmComparison_evenCarrierEquiv",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.qdmProjectiveBundle_markerFormula_of_suspensionComparison",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.qdmBlowup_markerFormula_of_suspensionComparison",
         "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.qdmProjectiveBundle_markerFormula_of_blockComparison",
         "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.qdmBlowup_markerFormula_of_occurrenceBlockComparison",
         "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.qdmBlowup_step_of_occurrenceBlockComparison"
       ],
-      "objects": "The generic even QDM block presentation, its effective multiset ledger, an additive marker fold, variety ledgers, actual occurrence-indexed center ledgers, and a finite multiplicity-preserving matching of transported block components on a common coefficient spine.",
-      "hypotheses": "For each paired component in the supplied comparison matching, the chosen fold has equal singleton values after the regular scalar extension and formal-coordinate transport. The projective-bundle matching identifies the total-space blocks with rank copies of the base blocks. The blowup matching identifies the blowup blocks with the ambient blocks plus the literal finite family of center-occurrence blocks. Smoothness, positivity of the bundle rank, and the projective-bundle dimension formula are explicit premises of the packaged projective-bundle result.",
-      "conclusion": "Lean derives the folded projective-bundle and occurrence-indexed blowup marker formulas by additive transport across the component matching. It also packages the blowup formula with the stated center, source equality for every indexed occurrence, and the smoothness, dimension, and codimension metadata consumed by categorical descent.",
-      "cautions": "Conditional deduction. Lean proves the categorical additivity step without assuming equality of the two effective ledgers and without taking either final marker formula as a premise. The mapped packaged-step terminal makes actual center-occurrence provenance visible rather than merely summing an arbitrary finite family. Lean does not construct the geometric QDM blocks, the common coefficient spine, the regular comparison maps, the invertible bulk Jacobians, or the component matching from Iritani's and Iritani–Koto's theorems; those remain exactly the manuscript's cited geometric and analytic inputs.",
-      "statement_digest": "cf4ca20a8441fcd9519cc73b6f5c8e6ef2b944fe9224fd9bd27a1d5f945afd1c",
-      "terminal_digest": "3ad27243c78fb69319cdab4c3dd99d6e660d6c120442398e742fd88cd488ef73"
+      "objects": "The even-carrier generic QDM block presentation, its effective multiset ledger, an additive marker fold, an integer suspension action on block components, variety ledgers, actual occurrence-indexed center ledgers, a parity-preserving full-carrier equivalence, and a finite multiplicity-preserving matching of transported block components with a recorded degree shift on every pair.",
+      "hypotheses": "The full-carrier comparison preserves membership in the chosen even submodules in both directions. The marker fold is invariant under every recorded suspension. The projective-bundle matching identifies the total-space blocks with rank copies of the base blocks up to those suspensions. The blowup matching identifies the blowup blocks with the ambient blocks plus the literal finite family of center-occurrence blocks, again up to recorded suspensions. Smoothness, positivity of the bundle rank, and the projective-bundle dimension formula are explicit premises of the packaged projective-bundle result.",
+      "conclusion": "Lean restricts the parity-preserving comparison to a linear equivalence of even carriers, converts each suspension-compatible matching into a fold-compatible matching, and derives the folded projective-bundle and occurrence-indexed blowup marker formulas. It also packages the blowup formula with the center provenance and dimension metadata consumed by categorical descent.",
+      "cautions": "Conditional deduction. Lean proves the even-submodule restriction and the suspension-invariant categorical additivity step without identifying nonzero-degree maps with degree-zero graded morphisms. The mapped packaged-step terminal keeps actual center-occurrence provenance visible. Lean does not construct cohomology or its parity splitting, the geometric QDM blocks, a fixed algebraic splitting field, the common coefficient spine, the parity-preserving regular comparison maps, pairwise spectral separation of summands, the invertible bulk Jacobians, or the component matching from Iritani's and Iritani–Koto's theorems; those remain the manuscript's cited geometric and analytic inputs.",
+      "statement_digest": "24540a687de6f3d9249ff2f33aae2364ce35decad8208cbda15cffc62a8c5946",
+      "terminal_digest": "ec2903f27f534c7d201f8d7284d3855ae3e09d50a5cf6bd55af84bca25c3c5f2"
     },
     {
       "manuscript_label": "prop:atomic-lowdim",

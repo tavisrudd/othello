@@ -19,10 +19,11 @@ For every smooth complex cubic threefold \(X\), the fourfold
 \(X\times\PP^1\) is irrational.
 \end{theorem}
 
-The proof begins with one blowup.  Split the generic even quantum
-\(D\)-module (QDM) into spectral blocks and place their regular-isomorphism
-classes in a free commutative monoid.  A marker is any monoid-valued fold of
-this block ledger.  Iritani's blowup theorem identifies the marker of the blowup
+The proof begins with one blowup.  Restrict the quantum \(D\)-module (QDM) to
+the even-cohomology carrier over the even bulk base, split it over an algebraic
+closure of its generic coefficient field, and place the resulting formal
+connection blocks in a free commutative monoid.  A marker is any monoid-valued
+fold of this block ledger.  Iritani's blowup theorem identifies the marker of the blowup
 with the marker of the ambient variety plus the occurrence-indexed markers
 of the center; Iritani--Koto gives the parallel projective-bundle formula.
 Consequently, if the center markers vanish in dimensions at most \(d-2\),
@@ -31,10 +32,11 @@ projective \(d\)-folds.
 
 For the unconditional specialization, a block is marked when its rank is
 two, its centered leading Euler operator is nonzero nilpotent, and its
-canonical elementary modification has nonzero residue discriminant
-\(\delta^\sharp\).  Pairing horizontality makes the modification regular,
-and flatness makes the residue move by conjugation.  Beauville's small
-quantum algebra yields one marked cubic block with
+canonical elementary modification has two distinct formal exponent classes
+modulo \(\Z\).  Pairing horizontality makes the modification regular, and
+flatness makes the residue move by conjugation.  Beauville's small quantum
+algebra yields exponents \(-1/6\) and \(-5/6\), whose difference is
+nonintegral; equivalently, their squared separation is
 \[
   \delta^\sharp=\frac49,
 \]
@@ -196,7 +198,8 @@ an explicit degree-three unirational parametrization
 \subsection*{A finer conditional framed invariant}
 
 The unconditional proof above is deliberately minimal: its marker retains
-only rank, generic nilpotence, and the residue discriminant.  A second instance
+only rank, generic nilpotence, and the two formal exponent classes modulo
+\(\Z\).  A second instance
 of the ledger construction, on a framed block type, retains finer data from
 the entire numerical small even quantum connection.  Definition
 \ref{def:framed-sixth-multiplicity} counts the primitive-sixth eigenvalues

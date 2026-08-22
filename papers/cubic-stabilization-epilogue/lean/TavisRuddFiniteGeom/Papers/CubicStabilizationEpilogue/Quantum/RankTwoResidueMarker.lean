@@ -5,11 +5,11 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.OccurrenceI
 # The rank-two residue marker as an effective-ledger fold
 
 The unframed marker distinguishes rank-two blocks whose leading nilpotent is
-nonzero and square-zero and whose modified residue has nonzero discriminant.
-All other even blocks receive weight zero.  A supplied regular-isomorphism
-relation may identify different matrix presentations only when this weight is
-unchanged.  The resulting natural-valued marker is therefore an instance of
-the effective-ledger fold.
+nonzero and square-zero and whose two formal exponent classes are distinct
+modulo the integers.  All other even blocks receive weight zero.  A supplied
+regular-isomorphism relation may identify different matrix presentations only
+when this weight is unchanged.  The resulting natural-valued marker is
+therefore an instance of the effective-ledger fold.
 
 A context packages block ledgers, actual center occurrences, weak
 factorization, and low-dimensional nullity in ambient dimension four.  Its
@@ -28,22 +28,28 @@ universe u v w x
 certified non-two rank otherwise. -/
 inductive RankTwoResidueBlock (K : Type x) [CommRing K]
   | rankTwo (leadingNilpotent modifiedResidue : Matrix (Fin 2) (Fin 2) K)
+      (exponentDifference : K)
   | other (rank : ℕ) (notRankTwo : rank ≠ 2)
 
 namespace RankTwoResidueBlock
 
 /-- The rank of an unframed even block. -/
 def rank {K : Type x} [CommRing K] : RankTwoResidueBlock K → ℕ
-  | .rankTwo _ _ => 2
+  | .rankTwo _ _ _ => 2
   | .other value _ => value
 
+/-- An exponent difference represents two distinct formal exponent classes
+precisely when it is not the image of an integer. -/
+def ExponentClassesDistinct {K : Type x} [CommRing K] (difference : K) : Prop :=
+  ¬ ∃ integer : ℤ, difference = integer
+
 /-- The residue-marker weight is one precisely for a nonzero square-zero
-rank-two leading term with nonzero modified-residue discriminant. -/
+rank-two leading term with distinct formal exponent classes modulo `ℤ`. -/
 noncomputable def weight {K : Type x} [CommRing K] : RankTwoResidueBlock K → ℕ
-  | .rankTwo leadingNilpotent modifiedResidue => by
+  | .rankTwo leadingNilpotent _ exponentDifference => by
       classical
       exact if leadingNilpotent ≠ 0 ∧ leadingNilpotent * leadingNilpotent = 0 ∧
-        residueDiscriminant modifiedResidue ≠ 0 then 1 else 0
+        ExponentClassesDistinct exponentDifference then 1 else 0
   | .other _ _ => 0
 
 /-- The marker weight vanishes on every block not presented as rank two. -/
@@ -57,9 +63,10 @@ one. -/
 theorem weight_rankTwo_of_conditions
     {K : Type x} [CommRing K]
     (leadingNilpotent modifiedResidue : Matrix (Fin 2) (Fin 2) K)
+    (exponentDifference : K)
     (conditions : leadingNilpotent ≠ 0 ∧ leadingNilpotent * leadingNilpotent = 0 ∧
-      residueDiscriminant modifiedResidue ≠ 0) :
-    weight (.rankTwo leadingNilpotent modifiedResidue) = 1 := by
+      ExponentClassesDistinct exponentDifference) :
+    weight (.rankTwo leadingNilpotent modifiedResidue exponentDifference) = 1 := by
   classical
   simp [weight, conditions]
 
@@ -68,11 +75,25 @@ zero. -/
 theorem weight_rankTwo_of_not_conditions
     {K : Type x} [CommRing K]
     (leadingNilpotent modifiedResidue : Matrix (Fin 2) (Fin 2) K)
+    (exponentDifference : K)
     (failure : ¬ (leadingNilpotent ≠ 0 ∧ leadingNilpotent * leadingNilpotent = 0 ∧
-      residueDiscriminant modifiedResidue ≠ 0)) :
-    weight (.rankTwo leadingNilpotent modifiedResidue) = 0 := by
+      ExponentClassesDistinct exponentDifference)) :
+    weight (.rankTwo leadingNilpotent modifiedResidue exponentDifference) = 0 := by
   classical
   simp [weight, failure]
+
+/-- The cubic exponent difference `2 / 3` is nonintegral. -/
+theorem twoThirds_exponentClassesDistinct :
+    ExponentClassesDistinct (2 / 3 : ℚ) := by
+  rintro ⟨integer, equality⟩
+  have dichotomy : integer ≤ 0 ∨ 1 ≤ integer := by omega
+  rcases dichotomy with nonpositive | positive
+  · have castNonpositive : (integer : ℚ) ≤ 0 := by exact_mod_cast nonpositive
+    norm_num at equality
+    linarith
+  · have castPositive : (1 : ℚ) ≤ integer := by exact_mod_cast positive
+    norm_num at equality
+    linarith
 
 end RankTwoResidueBlock
 

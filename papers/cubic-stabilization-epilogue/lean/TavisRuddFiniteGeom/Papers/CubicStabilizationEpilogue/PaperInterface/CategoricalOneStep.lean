@@ -11,6 +11,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CubicPacket
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CubicSeparatedBlockGauge
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.CubicSmallEvenBlockReduction
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.EffectiveBlockLedger
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.EvenParityRestriction
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FilteredCoefficientQuotients
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FormalLoopConnection
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.FramedSixthMarker
@@ -22,6 +23,8 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.PowerSeries
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.QuarticDiscriminantDerivations
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.RankTwoResidueMarker
 import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.RankTwoResidueRigidity
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.SpectralConnectionSplitting
+import TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.SuspensionInvariantLedger
 
 /-!
 # Categorical one-step reviewer terminals
@@ -48,6 +51,93 @@ theorem effectiveBlockLedger_fold_unique
       homomorphism ({component} : presentation.EffectiveLedger) = weight component) :
     homomorphism = presentation.fold weight :=
   presentation.fold_unique weight homomorphism onSingleton
+/-- Reviewer-facing construction of formal spectral connection summands.  A
+system whose leading Euler operator has separated scalar-plus-nilpotent blocks
+has a unique normalized regular gauge reducing its loop direction.  If a base
+direction satisfies the coefficientwise recurrence obtained from flatness,
+every coefficient of that base direction is block diagonal in the same
+splitting.  Thus the conclusion concerns summands of the full formal
+connection, not only primary subspaces of its leading operator.  Lean does not
+construct the geometric QDM or derive the recurrence from its flatness. -/
+theorem genericSpectralConnection_normalizedSplitting
+    {R coordinate factorIndex : Type*} [CommRing R]
+    [Fintype coordinate] [DecidableEq coordinate] [DecidableEq factorIndex]
+    {label : coordinate → factorIndex} {scalar : factorIndex → R}
+    {system baseCoefficient : ℕ → Matrix coordinate coordinate R}
+    (separated : ∀ first second, first ≠ second →
+      IsUnit (scalar first - scalar second))
+    (leadingBlockDiagonal : Quantum.IsBlockDiagonal label (system 0))
+    (nilpotent : IsNilpotent
+      (system 0 - Matrix.diagonal fun index => scalar (label index)))
+    (flatness : Quantum.SatisfiesBlockFlatnessRecurrence
+      label (system 0) baseCoefficient) :
+    ∃ gauge reduced : ℕ → Matrix coordinate coordinate R,
+      Quantum.IsNormalizedGauge label system gauge reduced ∧
+      (∀ otherGauge otherReduced,
+        Quantum.IsNormalizedGauge label system otherGauge otherReduced →
+          ∀ order,
+            gauge order = otherGauge order ∧ reduced order = otherReduced order) ∧
+      ∀ order, Quantum.IsBlockDiagonal label (baseCoefficient order) :=
+  Quantum.existsUnique_normalizedGauge_with_flat_base separated
+    leadingBlockDiagonal nilpotent flatness
+/-- Reviewer-facing restriction of a comparison to its even carrier.  The
+full comparison is an invertible linear map and parity preservation is stated
+in both directions; Lean then constructs the induced linear equivalence of the
+designated even submodules.  The theorem distinguishes restriction of the
+bulk base to even variables from restriction of the QDM carrier to even
+cohomology. -/
+theorem qdmComparison_evenCarrierEquiv
+    {R V W : Type*} [Semiring R]
+    [AddCommMonoid V] [Module R V] [AddCommMonoid W] [Module R W]
+    {evenSource : Submodule R V} {evenTarget : Submodule R W}
+    (comparison : Quantum.ParityPreservingLinearEquiv evenSource evenTarget) :
+    Nonempty (evenSource ≃ₗ[R] evenTarget) :=
+  ⟨comparison.evenLinearEquiv⟩
+/-- Reviewer-facing projective-bundle adapter for homogeneous comparison maps.
+The matching records the integer suspension of every paired component.  Once
+the chosen fold is invariant under those suspensions, the matching yields the
+same folded marker formula as a degree-zero block comparison.  The trivial
+suspension action is the specialization which forgets absolute grading. -/
+theorem qdmProjectiveBundle_markerFormula_of_suspensionComparison
+    {Variety Center Occurrence A : Type*} [AddCommMonoid A]
+    {presentation : Quantum.BlockPresentation}
+    (data : Quantum.OccurrenceIndexedLedger Variety Center Occurrence presentation)
+    (fold : presentation.EffectiveLedger →+ A)
+    (suspension : Quantum.BlockPresentation.ComponentSuspension presentation)
+    (foldInvariant : suspension.FoldInvariant fold)
+    (base total : Variety) (rank : ℕ)
+    (baseSmooth : data.smoothProjective base)
+    (totalSmooth : data.smoothProjective total)
+    (rankPositive : 1 ≤ rank)
+    (dimensionFormula : data.dimension total = data.dimension base + rank - 1)
+    (comparison : Quantum.BlockPresentation.SuspensionCompatibleLedgerComparison
+      presentation suspension (data.varietyLedger total)
+        (rank • data.varietyLedger base)) :
+    Quantum.ProjectiveBundleMarkerFormula data fold base total rank :=
+  Quantum.projectiveBundleMarkerFormula_of_ledgerComparison
+    data fold base total rank baseSmooth totalSmooth rankPositive dimensionFormula
+      (comparison.toFoldCompatible fold foldInvariant)
+/-- Reviewer-facing blowup adapter for homogeneous comparison maps.  Ambient
+and center components may carry different integer degree shifts; the shifts
+are retained in the matching and disappear only after applying a
+suspension-invariant fold. -/
+theorem qdmBlowup_markerFormula_of_suspensionComparison
+    {Variety Center Occurrence A : Type*} [AddCommMonoid A]
+    {presentation : Quantum.BlockPresentation}
+    (data : Quantum.OccurrenceIndexedLedger Variety Center Occurrence presentation)
+    (fold : presentation.EffectiveLedger →+ A)
+    (suspension : Quantum.BlockPresentation.ComponentSuspension presentation)
+    (foldInvariant : suspension.FoldInvariant fold)
+    (lower upper : Variety) {codimension : ℕ}
+    (occurrence : Fin (codimension - 1) → Occurrence)
+    (comparison : Quantum.BlockPresentation.SuspensionCompatibleLedgerComparison
+      presentation suspension (data.varietyLedger upper)
+        (data.varietyLedger lower +
+          ∑ index, data.occurrenceLedger (occurrence index))) :
+    data.varietyMarker fold upper = data.varietyMarker fold lower +
+      ∑ index, data.occurrenceMarker fold (occurrence index) :=
+  Quantum.blowupMarkerFormula_of_ledgerComparison data fold lower upper occurrence
+    (comparison.toFoldCompatible fold foldInvariant)
 /-- Reviewer-facing categorical adapter for the projective-bundle QDM
 comparison.  A multiplicity-preserving block matching on a common coefficient
 spine, with singleton markers preserved pairwise, yields the folded
@@ -402,6 +492,13 @@ theorem residueDiscriminant_eq_squared_eigenvalue_separation
           Quantum.residueDiscriminant R :=
   ⟨Quantum.residueDiscriminant_eq_sq_sub_of_trace_det R r₁ r₂ traceValue detValue,
     Quantum.residueDiscriminant_add_scalar R⟩
+
+/-- Reviewer-facing arithmetic check that the cubic rank-two block's exponent
+difference `2 / 3` defines two distinct classes modulo the integers. -/
+theorem cubicExponentDifference_nonintegral :
+    Quantum.RankTwoResidueBlock.ExponentClassesDistinct (2 / 3 : ℚ) :=
+  Quantum.RankTwoResidueBlock.twoThirds_exponentClassesDistinct
+
 /-- Reviewer-facing derivation of the rank-two pairing equations from
 horizontality, and of the nilpotent-line preservation they give.  The connection
 of the centered even rank-two atomic factor has square-zero residue `residue`

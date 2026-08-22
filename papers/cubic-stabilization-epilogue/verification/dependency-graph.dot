@@ -38,6 +38,7 @@ digraph manuscript {
   "prop:direct-specialized-lowdim" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
   "prop:eckardt-reflection-group" [fillcolor="#ffffff", tooltip="absent"];
   "prop:framed-operations" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
+  "prop:generic-spectral-connection-splitting" [fillcolor="#fde8c8", tooltip="fragment"];
   "prop:hirzebruch-specialized-vanishing" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
   "prop:low-dimensional-vanishing" [fillcolor="#d6e8f7", tooltip="conditional_deduction"];
   "prop:no-elliptic-product" [fillcolor="#fde8c8", tooltip="fragment"];
