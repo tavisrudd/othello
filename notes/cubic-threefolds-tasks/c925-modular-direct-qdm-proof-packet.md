@@ -3,8 +3,10 @@
 **Lane:** cubic-threefolds
 
 **Status:** no-Stokes marked-projector consumer landed for every \(m\);
-intrinsic edge reflection Lean-reduced to a faithful scalar comparison and
-two exact squares; geometric construction remains open; no manuscript edits
+Iritani rank-row square and the formal stable-projector square are separately
+source-derived on the general blowup map; their common even coefficient
+object and the cubic full-row endpoint remain open; the projective endpoint is
+closed; no manuscript edits
 
 ## Goal
 
@@ -97,6 +99,20 @@ index row.
   pullback of that native datum, or place the finite path over one common
   conservative coefficient field.  Without this clause, two incident edges
   may use unrelated realizations of their nominally shared vertex.
+- Iritani Proposition 5.1, Theorem 5.2, Proposition 5.4, and the definition
+  of the Theorem 5.18 comparison derive the exact rank-row square on the same
+  completed map for an arbitrary smooth center.  Gu--Yu--Yu is now a
+  simple-wall corroboration, not a source that must be fused with Iritani.
+- C924/KKPYY spectral-extension uniqueness derives the full stable-projector
+  square from the `z=0` coprime-factor projector.  This formal projector is
+  `z`-adic, while the Iritani row uses the negative-`z` fundamental-solution
+  completion.  No cited theorem yet puts them on one faithful even
+  coefficient object; full big QDM also has odd nilpotent bulk coordinates.
+- `TwoBaseRowedProjectorEdge` permits each vertex to retain its own native
+  coefficient ring; two faithful extensions to one edge ring and explicit
+  semantic endpoint identifications produce the intrinsic path edge.
+  `CoprimeFactorProjector` constructs and transports the marked projector from
+  explicit coprime factors, Bezout coefficients, and product annihilation.
 - The modular \(m=1\) proof is sound from its stated Iritani,
   Iritani--Koto, and weak-factorization inputs.
 - Guéré/BFGMP and KKPYY are lawful split specializations at the algebraic
@@ -526,14 +542,17 @@ Final rowed-projector source/consumer sanity replay:
        | diff -u \
            notes/cubic-threefolds-tasks/c925-rowed-projector-sanity-output.txt -'
 
-This separate suite has 64 named checks: all 576 lawful two-dimensional
+This separate suite has 67 named checks: all 576 lawful two-dimensional
 models over `F3`, 1,152 unit-scaled models, 104,976 polynomial cases, 55,296
 two-presentation common-source cases, four hostile malformed bundles,
 route-specific omission gates, a bounded endpoint sweep for `m=0,...,64`,
-an explicit forward-then-reverse traversal, a nominal-vertex occurrence mismatch accepted by the name-only
+an explicit forward-then-reverse traversal, the finite cancellation showing
+that leading-fibre visibility need not survive the normalized full row, a
+nominal-vertex occurrence mismatch accepted by the name-only
 telescope and rejected by the typed telescope, and 9,000 fixed-seed
-QuickCheck cases.  Uniform smooth-center coverage and both endpoint geometric
-identifications also have independent fail-closed omission tests.  Separate
+QuickCheck cases.  Uniform smooth-center coverage, the common even rowed
+coefficient object, cubic full-row visibility, product transport, and the
+projective endpoint also have independent fail-closed omission tests.  Separate
 tests show that the typed-occurrence and intrinsic-predicate path routes are
 alternatives, not cumulative hypotheses.  The exact domain, hashes, dependency
 versions, and trust boundary are recorded in
@@ -563,28 +582,38 @@ any geometric or QDM provider.
 
 ## Next
 
-1. Construct the geometric data consumed by
+1. Construct the common rowed object consumed by
    `RowedProjectorOccurrence.FaithfulScalarEdge`.  For every factorization
    vertex define the native rowed marked module
    \((V_Y,\rho_Y,P_Y)\) and its detection proposition \(D(Y)\).  For every
-   edge give one faithfully flat coefficient extension, the completed
-   ambient-plus-correction equivalence, and the unit-scaled row and
-   block-projector squares for that same equivalence.  The endpoint rows and
-   projectors are scalar extensions by type; `ofBasisSquares` promotes basis
-   equations, `detectsAt_iff` derives \(D(Y_-)\leftrightarrow D(Y_+)\), and
-   `toIntrinsicEdge` feeds `IntrinsicPath`.  No adjacent carrier map remains.
+   edge give faithful extensions of the two possibly different native rings
+   to one edge ring, Iritani's completed
+   ambient-plus-correction equivalence, and the block-projector square for the
+   intrinsic C924-marked union.  The exact row square for that same map is now
+   source-derived from Iritani's common Fourier source and completed ordinary
+   basis, while spectral-extension uniqueness separately supplies the full
+   formal projector square.  Restrict to a stated even bulk slice and place
+   the negative-`z` row and positive-`z` projector on one explicit
+   graded/topological module where their composite is defined; then prove the
+   native and edge maps faithful.  The endpoint rows and projectors are scalar
+   extensions by type;
+   `detectsAt_iff` derives \(D(Y_-)\leftrightarrow D(Y_+)\), and
+   `TwoBaseRowedProjectorEdge.Data.toIntrinsicEdge` feeds `IntrinsicPath`
+   after explicit semantic endpoint identifications.  No common path ring or
+   adjacent carrier map remains after the native presentations are supplied.
    If the marked projectors are polynomial in one intertwined operator,
    `ofBasisRowAndPolynomialProjector` derives the projector square; the source
-   then supplies only the geometric polynomial presentation, operator square,
-   and basis row equation for the completed map.
+   then supplies only the geometric polynomial presentation and operator
+   square; the basis row equation is the Iritani augmentation identity.
    Iritani (5.38) and (5.39) are the relevant vertex inclusions; (5.40) is only
    a homomorphism for edge-local center variables.  Theorem 5.18(7) gives an
    invertible combined coordinate change, but coordinates do not identify the
-   carrier, row, or projector.  Define native data over a Novikov/bulk
-   coefficient field, keep the regular \(z=0\) lattice, and use
-   field-to-field extensions.  Localizing an integral module at its fraction
-   field is not faithful.
-2. Referee-audit the direct six-input edge provider uniformly for every
+   carrier, row, or projector.  A bare fraction-field or "graded completion"
+   assertion is insufficient: odd bulk variables prevent a fraction field,
+   and homogeneous positive- and negative-`z` tails can still have an
+   infinite diagonal convolution.  Localizing an integral module at its
+   fraction field is not faithful.
+2. Referee-audit the marked-projector provider uniformly for every
    smooth-center blowup allowed by AKMW, including the higher-dimensional
    centers that appear when \(m>1\).  For every generic even QDM, let
    \(P_{\mathrm{mark}}\) be the idempotent onto the union of the C924
@@ -598,25 +627,32 @@ any geometric or QDM provider.
       \qquad \rho=\epsilon M.
    \]
 
-   The current source candidate takes projector naturality from KKPYY spectral
-   canonicity and the row square from Gu--Yu--Yu Propositions 2.4, 2.8, 4.21,
-   5.2 and Theorem 5.5.  It is not yet proved that these are statements about
-   the same completed comparison over the same occurrence maps.  Verify that
-   fusion line by line against the preprints and seek exact finite matrices
-   from the authors when available.  A finite truncation is not evidence for
-   existence or invertibility of the completed map.
+   Iritani supplies the completed comparison and row square uniformly.  The
+   remaining source candidate takes projector naturality from KKPYY spectral
+   canonicity, or from a direct formal CRT/Hensel projector for the C924
+   spectral predicate.  `CoprimeFactorProjector.Data` reduces this to marked
+   and unmarked factors, one Bezout identity, product annihilation, and the
+   Euler-operator square.  Prove that this geometric marked union is
+   collision-free and is carried by Iritani's exact map.  A finite truncation
+   is not evidence for existence or invertibility of the completed projector.
    `RowedProjectorOccurrence.CommonSourceEdgePresentation.toEdge` derives the
    typed edge from two exact common-source presentations.  The smaller
    intrinsic route instead uses `FaithfulScalarEdge`: after the same completed
    map satisfies the two squares, faithful base change and path reflection are
    theorem consequences.
-3. Keep the provider routes modular.  The direct route uses the six facts
-   above.  A common faithful base, a polynomial presentation of the marked
+3. Keep the provider routes modular.  The direct route uses the abstract edge
+   facts recorded in the source dossier; Iritani and Gu--Yu--Yu are alternate
+   providers where their scopes overlap.  A common faithful base, a
+   polynomial presentation of the marked
    projector, a unit row normalization, and a tensor endpoint unit are
    separate adapters used only by the presentations that need them.  The Lean
    and Haskell interfaces now test each route without requiring their union.
-4. The consumer arithmetic is closed; the geometric endpoints are not
-   machine-constructed.  Lean proves unit-scaled detection,
+4. The consumer arithmetic and projective-space endpoint are closed.  The
+   cubic endpoint still requires
+   \((\epsilon_XM_X)|_{\operatorname{im}P_X}\ne0\) for the full stable cubic
+   projector on the same coefficient object as item 1.  Raw `z=0` visibility
+   plus `M=1+O(z^-1)` does not imply this; a two-dimensional exact matrix
+   counterexample is recorded in the dossier.  Lean proves unit-scaled detection,
    common-source composition from basis certificates, faithful base-change
    reflection, polynomial projector naturality, the exact rational cubic
    marker, its tensor detection for every auxiliary row with a value-one
@@ -629,7 +665,8 @@ any geometric or QDM provider.
    `../2026-08-21-c925-referee-source-substitution-table.md`.  It now separates
    independent derivations from shared Fourier lineage and records the native
    occurrence gate.  Do not call the all-\(m\) theorem unconditional until
-   that gate and the endpoint identifications are discharged.
+   the common rowed coefficient object and cubic full-row endpoint are
+   discharged.
 6. Keep the prior one-sided endpoint architecture as the first fallback:
    `Comparison.MarkedWitnessObstruction` consumes only one detected source
    and one rowed selected-action map to projective space.  The global AKMW

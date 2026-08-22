@@ -137,18 +137,30 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   equivalence from a `FaithfulScalarEdge`: the two endpoint rows and projectors
   are scalar extensions by type, and a basis-checkable row square and
   projector square for one completed direct-sum comparison imply native
-  reflection.  Polynomial projector presentations plus one operator square
-  derive the projector square in Lean.  Iritani Proposition 5.1, Theorem 5.2,
-  Proposition 5.4, and the definition of the Theorem 5.18 comparison now
-  derive the exact rank-row square on Iritani's own completed map for every
-  smooth-center blowup.  The live geometric edge gate has therefore shrunk to
-  the intrinsic C924-marked projector/native scalar presentation; the two
-  endpoint QDM identifications remain open.  The unconditional all-\(m\)
-  theorem is not yet landed.  Lean kernel-checks the
+  reflection.  `TwoBaseRowedProjectorEdge` removes the artificial global-ring
+  requirement: the endpoints may have different native coefficient rings and
+  compare after faithful extension to one edge ring, with explicit semantic
+  endpoint identifications.  Polynomial projector presentations plus one
+  operator square derive the projector square in Lean.
+  `CoprimeFactorProjector` constructs that polynomial projector from marked
+  and unmarked factors, Bezout coefficients, and product annihilation, and
+  proves its transport.  Iritani Proposition 5.1, Theorem 5.2,
+  Proposition 5.4, and the definition of the Theorem 5.18 comparison derive
+  the exact rank-row square on Iritani's own completed map for every
+  smooth-center blowup.  C924/KKPYY spectral-extension uniqueness separately
+  derives the full formal projector square.  The two pieces are not yet one
+  legal rowed object: the row is negative-\(z\), the projector is
+  positive-\(z\), and full big QDM has odd nilpotent bulk coordinates.  The
+  exact remaining gates are an even common graded/topological coefficient
+  object with faithful occurrence maps and nonvanishing of
+  \((\epsilon_XM_X)|_{\operatorname{im}P_X}\) for the full cubic stable block.
+  The projective-space endpoint is closed; the unconditional all-\(m\)
+  theorem is not landed.  The complete reviewer target and axiom audit are
+  green for both new connectors.  Lean kernel-checks the
   conditional consumer, unit normalization, faithful
   base change, injective row-codomain enlargement, polynomial projector
   transport, tensor endpoint witness, common-source composition, and the
-  finite rational cubic-block marker.  Haskell independently checks 64 named
+  finite rational cubic-block marker.  Haskell independently checks 67 named
   laws, including 55,296 two-presentation common-source certificates and
   9,000 fixed-seed properties; its hostile nominal-occurrence path is accepted
   by a name-only telescope and rejected by the typed telescope.  The named
@@ -161,12 +173,12 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   simultaneous hypothesis.  Faithful-base descent, polynomial
   projector presentation, unit scaling, and tensor endpoints are modular
   alternatives or endpoint adapters, not four extra simultaneous assumptions.
-  The former path-level occurrence obligation is no longer a separate
-  adjacent-carrier theorem on the intrinsic route: faithful scalar extension
-  plus the two edge squares derives it.  Proving that the cited geometric map
-  has exactly that scalar-extension presentation remains part of the edge
-  source theorem.  Lean does not construct the completed QDM comparison, its
-  geometric row/projector, or either endpoint model.  The exact
+  The former path-level occurrence obligation is no longer a common-ring or
+  adjacent-carrier theorem: two faithful edge extensions plus explicit
+  semantic vertex identifications suffice.  Geometry must still provide
+  those identifications and identify the C924 marker with the coprime factor
+  split.  Lean does not construct the QDM comparison or either endpoint
+  model; Iritani supplies the comparison and row equation externally.  The exact
   publication-status and substitution
   table is `../2026-08-21-c925-referee-source-substitution-table.md`; the
   theorem-by-theorem dossier is

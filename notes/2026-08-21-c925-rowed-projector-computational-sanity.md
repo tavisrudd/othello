@@ -63,14 +63,21 @@ detection Boolean, so both squares are load-bearing rather than decorative.
 
 The edge source has seven separately named inputs:
 
-1. Gu--Yu--Yu Proposition 5.2: an ordinary equivariant basis;
-2. Gu--Yu--Yu Propositions 2.4 and 2.8: shift legality on that source;
-3. Gu--Yu--Yu Proposition 4.21: the adjoint row square on basis vectors;
-4. Gu--Yu--Yu Theorem 5.5: the completed comparison isomorphism;
+1. a completed ordinary basis;
+2. legality of the master shifts on that source;
+3. the master-Fourier adjoint row equation on basis vectors;
+4. the completed blowup comparison isomorphism;
 5. connection naturality of that comparison;
 6. the KKPYY canonical marked spectral union;
 7. uniform coverage of every smooth-center blowup allowed in the all-\(m\)
    factorization.
+
+Iritani Proposition 5.1, Theorem 5.2, Proposition 5.4, and Theorems
+5.9/5.18 are the primary general-blowup provider for inputs 1--5.  Applying
+degree-zero augmentation to the two Fourier maps derives input 3 on that same
+comparison.  Gu--Yu--Yu provides a simple-wall implementation of the same
+abstract facts and is tested as a modular substitute, not accumulated with
+Iritani.
 
 Two alternative eighth inputs close the path, and the suite checks that they
 are not accumulated:
@@ -91,6 +98,14 @@ genuine geometric obligation, not a convenience of the implementation.  Lean
 expands that token into the faithful extension, completed direct-sum
 equivalence, and two exact squares; it does not leave intrinsic reflection as
 an axiom.
+Lean also checks a strictly looser coefficient interface which is not modeled
+as another finite token: source and target may have different native rings and
+extend faithfully to one edge ring.  Explicit semantic endpoint
+identifications then produce the intrinsic path edge.  A second Lean-only
+certificate constructs the marked projector from coprime marked/unmarked
+factors, Bezout coefficients, and product annihilation.  These are symbolic
+theorems over arbitrary commutative rings, so a bounded finite replay would
+not add quantifier coverage.
 
 Two further fail-closed tokens guard the endpoint contradiction: geometric
 identification of the cubic-product marked factor and geometric proof of
@@ -143,7 +158,7 @@ nix shell --impure --expr \
   ../notes/cubic-threefolds-tasks/c925-rowed-projector-sanity.hs
 ```
 
-Both commands pass.  The canonical output records 64 named checks, 576
+Both commands pass.  The canonical output records 67 named checks, 576
 exhaustive lawful bundles, 1,152 unit-scaled bundles, 104,976 polynomial
 cases, 55,296 common-source cases, and 9,000 fixed-seed QuickCheck cases.
 
@@ -151,17 +166,19 @@ cases, 55,296 common-source cases, and 9,000 fixed-seed QuickCheck cases.
 
 | artifact | bytes | SHA-256 |
 |---|---:|---|
-| `c925-rowed-projector-sanity.hs` | 34006 | `8a216e0c409240dc2c90aaa4937b5e61b1efbde8a3f54d0d5f4cd7127faea184` |
-| `c925-rowed-projector-sanity-output.txt` | 3467 | `4e015e120272ba8d8f91a42e89f3c42f208f23ff9cf784c6880245accce25451` |
+| `c925-rowed-projector-sanity.hs` | 34906 | `4bf375a81b7d27aaadae5ebabf24df8fafd4b0a0b59a528463d05d54fe30159e` |
+| `c925-rowed-projector-sanity-output.txt` | 3685 | `de7691912ce51b0ca2a5b52910f5f11e09d604e6ab95aa583b8ee1e194ad48c4` |
 
 ## Boundary
 
 The suite does not compute Gromov--Witten invariants, construct a QDM
 comparison, identify a marked spectral block, or verify any cited source.  It
 tests the plumbing after the route-specific source facts are supplied.  The
-six direct-edge obligations, uniform smooth-center coverage, either selected
-path-level presentation obligation, and both endpoint identifications fail
-closed independently.  On the intrinsic route that token means a native
+eight edge facts, either selected path-level presentation obligation, and
+three endpoint facts fail closed independently.  The new edge fact is the
+existence of one even coefficient object on which the row and full projector
+compose; the new endpoint fact is full stable-row visibility of the cubic,
+separate from product transport.  On the intrinsic route its path token means a native
 faithful scalar presentation; Lean, rather than the token, proves edge
 reflection.  Four other facts gate
 alternative adapters and are not cumulative assumptions.  Source-fact tokens
@@ -177,6 +194,10 @@ publication-status audit is
   proof.
 - **Settled:** the row square and projector square are independently
   load-bearing.  Each has a finite countermodel that reverses detection.
+- **Settled:** raw visibility on the leading `z=0` projector does not imply
+  visibility of the normalized negative-`z` row on the full positive-`z`
+  projector.  The exact Laurent-polynomial cancellation is a separate
+  regression and the source-token pipeline rejects a missing full-row witness.
 - **Settled:** idempotence and invertibility are separate legality gates.  The
   suite isolates each failure while leaving the comparison squares valid.
 - **Settled:** two independently supplied common-source presentations compose
@@ -193,5 +214,6 @@ publication-status audit is
   dossier and is not inferred from successful execution.
 
 No genuine mystery remains in the algebraic or computational consumer.  The
-existence and geometric identification of the completed QDM maps remain the
-source trust boundary; finite truncations cannot establish them.
+common even rowed coefficient object, the cubic full-row witness, and the
+geometric identification of the completed QDM maps remain the source trust
+boundary; finite truncations cannot establish them.

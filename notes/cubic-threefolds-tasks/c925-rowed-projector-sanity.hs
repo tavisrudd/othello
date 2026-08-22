@@ -5,8 +5,8 @@
 -- This executable mirrors the algebraic interface proved in
 -- RowedProjectorDecomposition.lean.  It does not prove any Gu--Yu--Yu,
 -- Iritani, or KKPYY source theorem.  Instead, it checks a finite model of the
--- interface exhaustively.  The direct edge route, native-occurrence descent,
--- and four optional adapters
+-- interface exhaustively.  The direct edge route, the common even rowed
+-- coefficient object, native-occurrence descent, and four optional adapters
 -- have separate fact gates, so alternatives are not accumulated into one
 -- artificially strong source interface.
 
@@ -290,15 +290,17 @@ ambientDetectsF9 bundle =
   detectsF9 1 (ambientProjector bundle) (ambientRow bundle)
 
 data SourceFact
-  = OrdinaryEquivariantBasis
-  | ShiftPreservesOrdinarySource
-  | FundamentalSolutionAdjointSquare
-  | CompletedComparisonIsomorphism
+  = CompletedOrdinaryBasis
+  | MasterShiftLegality
+  | MasterFourierAdjointRow
+  | CompletedBlowupComparison
   | ConnectionNaturality
   | CanonicalMarkedSpectralUnion
   | UniformSmoothCenterCoverage
+  | CommonEvenRowedCoefficientObject
   | NativeOccurrenceDescent
   | NativeFaithfulScalarPresentation
+  | CubicFullStableRowWitness
   | CubicProductEndpointIdentification
   | ProjectiveSpaceEndpointIdentification
   | FaithfulCommonBase
@@ -312,13 +314,14 @@ allSourceFacts = [minBound .. maxBound]
 
 edgeSourceFacts :: [SourceFact]
 edgeSourceFacts =
-  [ OrdinaryEquivariantBasis
-  , ShiftPreservesOrdinarySource
-  , FundamentalSolutionAdjointSquare
-  , CompletedComparisonIsomorphism
+  [ CompletedOrdinaryBasis
+  , MasterShiftLegality
+  , MasterFourierAdjointRow
+  , CompletedBlowupComparison
   , ConnectionNaturality
   , CanonicalMarkedSpectralUnion
   , UniformSmoothCenterCoverage
+  , CommonEvenRowedCoefficientObject
   ]
 
 directEdgeFacts :: [SourceFact]
@@ -335,7 +338,8 @@ intrinsicEdgeFacts =
 
 allMEndpointFacts :: [SourceFact]
 allMEndpointFacts =
-  [ CubicProductEndpointIdentification
+  [ CubicFullStableRowWitness
+  , CubicProductEndpointIdentification
   , ProjectiveSpaceEndpointIdentification
   ]
 
@@ -358,15 +362,17 @@ consumerDetectsIff (CertifiedBundle bundle) =
   sourceDetects bundle == ambientDetects bundle
 
 sourceFactName :: SourceFact -> String
-sourceFactName OrdinaryEquivariantBasis = "gyy_prop_5_2_basis"
-sourceFactName ShiftPreservesOrdinarySource = "gyy_props_2_4_2_8_shift_legality"
-sourceFactName FundamentalSolutionAdjointSquare = "gyy_prop_4_21_row_square"
-sourceFactName CompletedComparisonIsomorphism = "gyy_thm_5_5_comparison"
+sourceFactName CompletedOrdinaryBasis = "completed_ordinary_basis"
+sourceFactName MasterShiftLegality = "master_shift_legality"
+sourceFactName MasterFourierAdjointRow = "master_fourier_adjoint_row"
+sourceFactName CompletedBlowupComparison = "completed_blowup_comparison"
 sourceFactName ConnectionNaturality = "comparison_connection_naturality"
 sourceFactName CanonicalMarkedSpectralUnion = "kkpyy_canonical_marked_union"
 sourceFactName UniformSmoothCenterCoverage = "uniform_smooth_center_coverage"
+sourceFactName CommonEvenRowedCoefficientObject = "common_even_rowed_coefficient_object"
 sourceFactName NativeOccurrenceDescent = "native_vertex_occurrence_descent"
 sourceFactName NativeFaithfulScalarPresentation = "native_faithful_scalar_presentation"
+sourceFactName CubicFullStableRowWitness = "cubic_full_stable_row_witness"
 sourceFactName CubicProductEndpointIdentification = "cubic_product_endpoint_identification"
 sourceFactName ProjectiveSpaceEndpointIdentification = "projective_space_endpoint_identification"
 sourceFactName FaithfulCommonBase = "faithful_common_scalar_base"
@@ -576,6 +582,16 @@ cubicProductVisible m =
 
 projectiveSpaceMarkedEmpty :: Int -> Bool
 projectiveSpaceMarkedEmpty m = m >= 0 && not (isMarked projectiveBlock)
+
+-- The raw fibre row can detect the leading projector while the normalized
+-- negative-z row vanishes on the full positive-z projector.  This is the
+-- finite Laurent-polynomial counterexample
+--   epsilon=(1,0), P(e1)=(1,z), M(1,z)=(1-z^-1*z,z)=(0,z).
+leadingFiberVisibilityDoesNotImplyFullVisibility :: Bool
+leadingFiberVisibilityDoesNotImplyFullVisibility =
+  let rawLeadingValue = 1 :: Rational
+      normalizedFullValue = 1 - ((1 :: Rational) * 1)
+   in rawLeadingValue /= 0 && normalizedFullValue == 0
 
 allMEndpointsCertified :: [SourceFact] -> Int -> Bool
 allMEndpointsCertified supplied m =
@@ -820,6 +836,8 @@ checks =
   , ("rank_one_projective_atom_is_unmarked", not (isMarked projectiveBlock))
   , ("zero_nilpotent_part_is_unmarked", not (isMarked (AtomBlock 2 False 4)))
   , ("zero_delta_sharp_is_unmarked", not (isMarked (AtomBlock 2 True 0)))
+  , ("leading_fibre_visibility_does_not_imply_full_row_visibility",
+      leadingFiberVisibilityDoesNotImplyFullVisibility)
   , ("bounded_all_m_endpoint_regression_0_through_64",
       all (\m -> cubicProductVisible m && projectiveSpaceMarkedEmpty m) [0 .. 64])
   , ("m_1_has_2_source_branches_and_empty_projective_target",

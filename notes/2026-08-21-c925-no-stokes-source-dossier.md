@@ -42,6 +42,10 @@ square and block-projector square.  The local rows and endpoint projectors are
 definitionally the scalar extensions, so they cannot be replaced by unrelated
 edge data.  `FaithfulScalarEdge.ofBasisSquares` reduces the two squares to a
 basis check, and `FaithfulScalarEdge.toIntrinsicEdge` supplies the path edge.
+`TwoBaseRowedProjectorEdge` removes the common-(R) restriction: the two native
+data may use different coefficient rings, each extends faithfully to one edge
+ring, and explicit identifications with the semantic endpoint predicates
+supply the intrinsic path edge.
 
 There are only two source architectures:
 
@@ -50,11 +54,13 @@ There are only two source architectures:
    map consumed by Lean.
 
 The publication-status and exact source-substitution audit is
-`2026-08-21-c925-referee-source-substitution-table.md`.  The decisive
-Gu--Yu--Yu and KKPYY inputs, together with Iritani's blowup and
-Iritani--Koto's projective-bundle decompositions, are currently cited as
-preprints.  Lean checks their algebraic consequences after the geometric maps
-are supplied; it does not reprove the QDM decomposition theorems.
+`2026-08-21-c925-referee-source-substitution-table.md`.  The decisive KKPYY
+input, together with Iritani's blowup and Iritani--Koto's projective-bundle
+decompositions, is currently cited from preprints or an accepted arXiv
+version.  Gu--Yu--Yu supplies a simple-wall corroboration, not a simultaneous
+hypothesis of the direct all-center route.  Lean checks their algebraic
+consequences after the geometric maps are supplied; it does not reprove the
+QDM decomposition theorems.
 
 ## Red--fix--green ledger
 
@@ -62,10 +68,10 @@ are supplied; it does not reprove the QDM decomposition theorems.
 |---|---|---|
 | one-edge row/projector consumer | no algebraic countermodel under its stated hypotheses | **Green:** Lean theorem and exhaustive finite models |
 | reverse traversal in weak factorization | the original path type encoded only blowup-to-base edges | **Fixed/green:** oriented `Step.forward` and `Step.reverse`; Lean aggregate and Haskell forward-then-reverse regression pass |
-| repeated-vertex occurrence | equal variety names can carry unrelated rows/projectors over different completions | **Lean-green/source-open:** `FaithfulScalarEdge.detectsAt_iff` derives intrinsic reflection from one faithful extension and two exact squares; geometry must construct that scalar-edge datum for every factorization edge |
-| source-map fusion | Iritani's occurrence spine and Gu--Yu--Yu's row equation are not yet proved for one comparison | **Red/open:** prove both squares for the same completed map |
+| repeated-vertex occurrence | equal variety names can carry unrelated rows/projectors over different completions | **Lean-green/source-open:** `TwoBaseRowedProjectorEdge` permits different native endpoint rings and derives the intrinsic edge after faithful extension to one edge ring; geometry must provide the semantic endpoint identifications |
+| source-map fusion | the earlier route took Iritani's comparison and Gu--Yu--Yu's row equation from different maps | **Fixed/green for the row:** Proposition 5.1, Theorem 5.2, Proposition 5.4, and the definition of Theorem 5.18's comparison derive the rank-row square on Iritani's own completed map; the marked-projector square remains separate |
 | endpoints | rational branch/matrix certificates do not identify the actual product and projective-space QDM marked factors | **Mixed:** both endpoint algebras are Lean-green; the standard geometric QDM presentations remain external |
-| all-\(m\) edge scope | low-dimensional C924 centers and a simple-wall theorem do not cover every higher-dimensional AKMW center | **Red/open:** uniform smooth-center provider, most naturally from Iritani's general blowup comparison |
+| all-\(m\) edge scope | low-dimensional C924 centers and a simple-wall theorem do not cover every higher-dimensional AKMW center | **Fixed for comparison and row:** Iritani treats an arbitrary smooth center of codimension at least two; the uniform marked-projector/native-presentation theorem remains open |
 
 Every red item is fail-closed in the routing and test interfaces.  A source
 token records an obligation; it is not computational evidence that the
@@ -86,9 +92,10 @@ the QDM maps, not to prove another linear-algebra lemma after it is supplied.
 
 The resulting per-edge source ledger is short and fail-closed:
 
-1. choose the native coefficient ring or field (R) and the native rowed
-   marked modules at the two endpoints, keeping the regular (z=0) lattice;
-2. give one faithfully flat edge algebra (R\to K);
+1. restrict to an even bulk slice and construct native rowed marked modules
+   at the two endpoints on which the row and projector genuinely compose;
+2. give faithful algebra maps from both native coefficient objects to one
+   edge coefficient object (K), with its topology/graded support stated;
 3. construct the completed ambient-plus-correction linear equivalence over
    (K);
 4. prove on that same equivalence the unit-scaled row square and the
@@ -102,12 +109,26 @@ map, its basis row equation, its operator square, and the geometric polynomial
 presentation.  Faithful scalar extension, intrinsic edge reflection, either
 traversal orientation, and finite telescoping are Lean consequences.
 
+`CoprimeFactorProjector.Data` makes the polynomial presentation explicit.
+Marked and unmarked factors, Bezout coefficients, and annihilation by their
+product construct the idempotent; it is the identity on the marked-factor
+kernel, zero on the unmarked-factor kernel, and natural for every operator
+intertwiner.  The source must still prove that the C924 predicate selects
+those factors.
+
 ## D1. Iritani--Koto: projective-bundle Fourier branches
 
 **Source.** Hiroshi Iritani and Yuki Koto, *Quantum cohomology of projective
 bundles*, arXiv:2307.03696v4.  Local extracted text:
 `/tmp/persistent/tavis/lit-search/text/arXiv_2307.03696.txt`, SHA-256
 `ef1855c431cd7a91a17666a4125523d60060b7c8a519ddb0d169d1043044b262`.
+
+For the trivial-bundle endpoint we also use Kai Behrend, *The product formula
+for Gromov--Witten invariants*, Journal of Algebraic Geometry 8 (1999),
+529--541, arXiv:alg-geom/9710014v1.  Its main theorem identifies the complete
+system of Gromov--Witten classes of a product with the tensor product of the
+two systems.  Its specialization to three-point genus-zero invariants gives
+the tensor-product small quantum algebra used below.
 
 ### SOURCE
 
@@ -311,33 +332,166 @@ arXiv:2307.13555v3.  Local extracted text:
 
 ### SOURCE
 
+- Section 4.1 defines the discrete Fourier map for either quotient
+
+  \[
+    F_Y(f)=\sum_{k\in\mathbf Z}S^k\kappa_Y(S^{-k}f).
+  \]
+
+- Proposition 5.1 constructs the QDM map
+  \(\operatorname{FT}_Y\), proves the fundamental-solution square
+  \(M_Y\operatorname{FT}_Y=F_YM_W\), and proves shift, connection, and
+  homogeneity compatibility.
+- Theorem 5.2 extends the blowup-side map to an isomorphism on the completed
+  equivariant source.  If ordinary equivariant classes have Kirwan images
+  forming a cohomology basis, those same classes form a basis of the completed
+  source.
+- Proposition 5.4 extends the ambient map to that same completed source and
+  retains the Proposition 5.1 compatibilities.
+- Theorem 5.9 defines the completed direct-sum comparison by
+
+  \[
+    \Psi=\bigl(\operatorname{FT}_X\oplus
+      \textstyle\bigoplus_j\operatorname{FT}_{Z,j}\bigr)
+      \operatorname{FT}_{\widetilde X}^{-1}.
+  \]
+
 - Equation (5.11) defines the root denominator
 
   \[
   s=r-1\quad(r\text{ even}),\qquad
   s=2(r-1)\quad(r\text{ odd}).
   \]
-- Theorem 5.18 gives a connection- and pairing-compatible formal Laurent
-  decomposition of the blowup QDM into one ambient factor and \(r-1\) center
-  factors over \(\mathbf C[z]((q^{-1/s}))[[Q,\widetilde\tau]]\).
+- Theorem 5.18 restricts that construction to a connection- and
+  pairing-compatible formal Laurent decomposition of the blowup QDM into one
+  ambient factor and \(r-1\) center factors over
+  \(\mathbf C[z]((q^{-1/s}))[[Q,\widetilde\tau]]\).
 - For codimension \(r=2\), this specializes to \(s=1\) and one outer center
   factor.
+
+### DERIVED
+
+Let \(\epsilon_Y\) be projection to cohomological degree zero and put
+\(\rho_Y=\epsilon_YM_Y\).  On the ordinary equivariant source the Kirwan map
+is graded and unital, hence \(\epsilon_Y\kappa_Y=\epsilon_W\).  Therefore,
+whenever the discrete Fourier sum is defined,
+
+\[
+ \rho_Y\operatorname{FT}_Y(s)
+ =\epsilon_YF_YM_W(s)
+ =\sum_{k\in\mathbf Z}S^k\epsilon_W(S^{-k}M_W(s)),
+\]
+
+which is independent of whether \(Y=X\) or \(Y=\widetilde X\).  Theorem
+5.2 supplies an ordinary equivariant basis of the completed source, and
+Proposition 5.4 puts the ambient map on that same source.  Equality on this
+basis extends by linearity after the common Laurent base change; no
+coefficientwise continuity assertion on an arbitrary rational Fourier input
+is used.  Substituting the definition of \(\Psi\) gives the exact row square
+
+\[
+  \rho_{\widetilde X}=\rho_X\operatorname{pr}_X\Psi.
+\]
+
+Thus the general smooth-center blowup comparison and its rank-row equation
+come from one map in one source.  Gu--Yu--Yu's analogous simple-wall
+calculation is a lineage cross-check, not a required splice.
+
+The marked-projector square is carried by this same map.  At the generic
+point of a native numerical Novikov/bulk domain, let \(\kappa_Y\) denote the
+Euler residual endomorphism.  Over an algebraic closure, partition its
+generalized eigenspaces by the C924 predicate
+
+\[
+  \operatorname{rank}=2,\qquad N\ne0,\qquad
+  \delta^\sharp\ne0.
+\]
+
+The predicate is invariant under regular block isomorphism and under field
+automorphisms: rank is preserved, and nonvanishing of \(N\) and
+\(\delta^\sharp\) is preserved.  Hence the union of marked geometric factors
+is Galois-stable and descends to the native generic field.  Equivalently,
+factor the characteristic polynomial into the product \(f_{\rm mark}\) of
+the marked primary factors and the complementary product
+\(f_{\rm unmark}\).  They are coprime; Bezout and Cayley--Hamilton give the
+idempotent polynomial
+
+\[
+ P_{\rm mark}=b(\kappa_Y)f_{\rm unmark}(\kappa_Y),
+ \qquad
+ af_{\rm mark}+bf_{\rm unmark}=1.
+\]
+
+`CoprimeFactorProjector.Data.projector` constructs exactly this idempotent on
+the \(z=0\) Euler fibre.  This is not yet the full QDM projector: a regular
+\(z\)-dependent connection gauge need not commute with the constant
+polynomial \(P_{\rm mark}(\kappa)\) away from \(z=0\).
+
+The full projector is the unique connection-stable spectral extension of
+that fibre projector.  Existence and uniqueness are the spectral-splitting
+theorem used in C924: recursively, every off-diagonal coefficient is solved
+by a Sylvester operator whose leading spectra are disjoint.  Equivalently,
+this is Katzarkov--Kontsevich--Pantev--Yu Theorem 4.1 and Remark 4.2, which
+extend the generalized Euler eigenspaces to canonical maximal F-bundle
+summands.
+
+Iritani's \(\Psi\) commutes with the full quantum connection and is regular
+at \(z=0\), so its constant term intertwines the Euler residual
+endomorphisms, with the stated power/exponential shifts on the center
+factors.  The C924 predicate is invariant under these elementary shifts.
+Theorem 5.18(6) gives distinct leading Laurent orders for the
+ambient cluster and the \(r-1\) center clusters; after shrinking the generic
+Laurent domain their spectra are pairwise disjoint.  Thus no marked and
+unmarked factor is merged by a cross-cluster collision.  This is also the
+precise content of the maximal-F-bundle
+interpretation: Katzarkov--Kontsevich--Pantev--Yu Theorem 4.5 extracts its
+canonical blowup isomorphism from Iritani's formal comparison, while their
+Theorem 4.1 and Remark 4.2 identify the summands with the canonical
+generalized-eigenbundles.  Conjugating the source stable projector by
+\(\Psi\) gives a stable target projector with the same \(z=0\) spectral
+fibre; canonicity identifies it with the target projector.  Thus it is not a
+second comparison map.  On the same \(\Psi\) used for the row equation,
+
+\[
+  \Psi P_{\widetilde Y}
+   =(P_Y\oplus\textstyle\bigoplus_j P_{Z,j})\Psi.
+\]
+
+Iritani's (5.38) and (5.39) are literal injective native-ring maps into the
+edge Laurent ring, and Theorem 5.18(7) gives an invertible combined
+bulk-coordinate Jacobian.  These facts do not yet instantiate the scalar
+edge.  Full big QDM has odd bulk variables, hence a supercommutative
+coefficient ring rather than a domain with a fraction field.  Even after
+restricting to the even bulk slice, the two pieces of the proposed Boolean
+live in opposite \(z\)-completions: the canonical stable projector is
+\(z\)-adic, whereas \(\rho=\epsilon M\) is a negative-\(z\) fundamental-
+solution row.  A fraction-field slogan does not define their composite.
+One must exhibit an even common graded/topological coefficient object on
+which both act, prove that its native and edge maps are faithful, and prove
+that the infinite coefficient convolutions are defined.  Alternatively, one
+may replace the Boolean by a genuinely fibrewise row/projector pair and prove
+its row square directly.  `TwoBaseRowedProjectorEdge.Data.toIntrinsicEdge`
+then closes the occurrence problem, but it does not construct this missing
+common object.
 
 ### NOT PROVIDED
 
 - Triviality of the external projective-bundle Kummer action on the center's
   inner spectral/idempotent packet.
 - A common external Novikov charge along a weak-factorization path.
-- A common completion for consecutive blowup maps.
 - A global map to the final rational endpoint.
-- Any classification of the center's marked finite-etale splitting algebra.
 
 ### OPEN
 
-For the composed-source architecture, only the row-visible selected-action
-map on the ambient projection is needed.  The full center packet need not be
-classified if this local map descends to the common downstream carrier.
-Theorem 5.18 alone does not prove that descent.
+The comparison, its algebraic augmentation-row square, and the formal stable
+projector square are separately source-derived for a general smooth-center
+blowup.  Their joint row-visible Boolean is not yet typed: the row and full
+projector use opposite \(z\)-completions, and the full big coefficient ring
+has odd nilpotents.  The remaining edge input is an even common
+graded/topological realization, or a replacement fibrewise row square, in
+addition to the endpoint inputs recorded in D10.  No pathwise common
+completion or center classification is required after those local data are
+supplied.
 
 ## D4. AKMW: weak factorization and birational cobordisms
 
@@ -614,8 +768,9 @@ spectral factors.  The cubic zero block is marked by the C924 calculation.
 
 The undecorated chemical formula alone does not solve stabilization: a center
 may contain the same marked atom.  Its useful contribution is the intrinsic
-projector.  The active no-Stokes route fuses that projector with the separate
-Gu--Yu--Yu adjoint row, rather than attributing a row theorem to KKPYY.
+projector.  The active no-Stokes route combines that projector with the
+adjoint row derived directly on Iritani's blowup comparison; it does not
+attribute a row theorem to KKPYY.
 
 ## Active fusion: the row-visible marked projector
 
@@ -626,8 +781,8 @@ For one blowup comparison, let
        V_Y\oplus C_Z
 \]
 
-be the Iritani/Gu--Yu--Yu QDM decomposition after its lawful scalar
-extension.  Let (P_{\widetilde Y},P_Y,P_Z) be the projectors onto the union
+be Iritani's QDM decomposition after its lawful scalar extension.  Let
+(P_{\widetilde Y},P_Y,P_Z) be the projectors onto the union
 of C924-marked atoms, and let
 
 \[
@@ -648,13 +803,15 @@ The consumer also accepts
 Tate factors, and localized monomials from the Boolean argument.  A zero or
 nonunit factor is not silently accepted.
 
-The row may take values in a larger coefficient module than the QDM lattice;
-only its domain must be the same module on which the idempotents act.  Thus
-(D10.1) does not identify a large-radius row with formal monodromy or a
-sectorial \(z=0\) row.  It uses no Stokes object.  The composition
-\(\rho_Y\circ P_Y\) is legal whenever \(P_Y\) is an endomorphism of the QDM
-lattice and \(\rho_Y\) is defined on that lattice; no multiplication of a
-positive-\(z\) gauge by a negative-\(z\) gauge is being inferred.
+The row may take values in a larger coefficient module than the QDM lattice,
+but its domain must be the same module on which the idempotents act.  This is
+the current typing obstruction.  C924 and KKPYY construct the stable
+projector on a \(z\)-adic F-bundle, while Iritani's
+\(M\in\operatorname{End}(H)[[z^{-1}]][[Q,\tau]]\) defines the row in the
+opposite completion.  In general \(\rho P\) is not defined: the coefficient
+of one power of \(z\) can be an infinite untopologized sum.  Therefore
+(D10.1) is presently a conditional common-object interface, not yet a
+source-instantiated no-Stokes object.
 
 From (D10.1), purely linear algebra gives
 
@@ -669,94 +826,94 @@ The correction may contain arbitrarily many marked atoms: the row square
 kills its entire contribution.  This is exactly why (D10.2), unlike the
 ordinary chemical formula, is potentially stable for every (m).
 
-The two inputs of (D10.1) have different proposed provenance and remain
-source obligations:
+The row square in (D10.1) is now derived on Iritani's actual comparison in D3.
+Theorem 5.2 supplies the completed ordinary basis, Proposition 5.4 extends
+the ambient map to the same source, and Theorem 5.9 defines the comparison
+from those maps.  No Gu--Yu--Yu/Iritani identification and no continuity
+argument on arbitrary rational Fourier inputs remains.
 
-1. the projector square should follow from Iritani's connection isomorphism,
-   KKPYY spectral canonicity, and the already-audited C924 block predicate,
-   but only after proving that the geometric marked union is the same
-   collision-free spectral union on both sides;
-2. the row square is generatorwise on the nonlocalized Gu--Yu--Yu source by
-   Definition 4.13 and Propositions 2.8 and 4.21.  Extension to the completed
-   Laurent QDM domain, invertibility there, and identification with the
-   actual geometric row are separate checks; a finite-basis replay does not
-   supply them.
+The projector square is now derived in D3, rather than inferred from bare
+connection naturality.  The generic marked union descends by its Galois-stable
+coprime factorization, Cayley--Hamilton and Bezout construct its projector,
+and Iritani's Euler-operator square transports it.  KKPYY Theorem 4.5 confirms
+that this is the canonical maximal-F-bundle isomorphism extracted from the
+same formal comparison.
 
-These routes cannot be spliced by notation: either prove the row square for
-Iritani's actual comparison, or prove a row- and projector-preserving
-identification between that comparison and Gu--Yu--Yu's map over the same
-coefficient and occurrence maps.
+Only the projective-space endpoint is presently source-derived.  The cubic
+product endpoint still needs the full-row theorem
 
-The desired conclusion is that both squares hold on one algebraic QDM domain
-after one lawful Laurent base change.  This is the exact edge-source gate,
-not an output of the Lean or Haskell consumer.  A source proof must establish:
+\[
+  (\epsilon_XM_X)|_{\operatorname{im}P_X}\ne0,
+  \tag{D10.3}
+\]
 
-1. that the ordinary basis from Gu--Yu--Yu Proposition 5.2 remains a basis of
-   the exact completed source, and that Proposition 4.21's generatorwise row
-   equality extends continuously to the same Laurent module with a unit
-   normalization;
-2. that the same comparison intertwines the geometric marked projectors.
-   This requires a collision-free identification of the KKPYY spectral union
-   selected by the C924 predicate; connection naturality alone is
-   insufficient.
+where \(P_X\) is the full connection-stable cubic projector.  C924 proves
+that the raw degree-zero row is \((0,-7r^2)\) on the marked \(z=0\) Euler
+block.  This does not imply (D10.3).  Normalization
+\(M=1+O(z^{-1})\) can cancel the raw constant term against positive powers in
+the stable projector.  For example, over a Laurent field take
 
-The endpoint contradiction is immediate only after two geometric
-identifications that the algebraic certificates do not construct:
+\[
+ \epsilon=(1,0),\quad
+ P(z)=\begin{pmatrix}1&0\\z&0\end{pmatrix},\quad
+ M=I-z^{-1}\begin{pmatrix}0&1\\0&0\end{pmatrix}.
+\]
 
-- (X\times\mathbf P^m) has a marked cubic summand and its degree-zero row is
-  nonzero on the explicit cubic zero block (the C924 separated basis gives
-  row ((0,-7r^2))); tensoring with the projective-bundle unit preserves a
-  witness, once the actual product QDM row and marked projector are identified
-  with this tensor model;
-- (mathbf P^{m+3}) has (P_{\mathrm{mark}}=0), once its actual QDM spectral
-  factors are identified with the rank-one marker-free model.
+Then \(P^2=P\), \(P(0)=\operatorname{diag}(1,0)\), and
+\(M=I+O(z^{-1})\), but \(\epsilon MP=0\).  Behrend's product formula and
+`CubicBlockCertificate.rankRow_tensor_detects` transport a genuine cubic
+full-row witness to \(X\times\mathbf P^m\); they do not create that witness.
+The exact hypergeometric point-period calculation gives a candidate direct
+proof of (D10.3), but its identification with this algebraic row/projector
+pair and its coefficient object must be stated explicitly before it counts
+as the no-Stokes endpoint provider.
 
-Equation (D10.2) is unchanged under one blowup or blowdown.  To telescope it,
-each occurrence of an intermediate \(Y\) must be identified with a faithful
-pullback of one native \((V_Y,\rho_Y,P_Y)\).  Nonempty comparison domains alone
-do not prove reflection: two unrelated occurrences can carry different rows.
-One candidate algebraic repair uses Iritani's inclusions (5.38) and (5.39)
-and the formally invertible combined coordinate change from Theorem 5.18(7).
-The center map (5.40) is only a homomorphism and remains edge-local.  The
-native vertex datum must be defined over a Novikov/bulk coefficient field;
-subsequent field-to-field extensions are faithfully flat.  Localizing an
-integral module at its fraction field is not faithful, and \(z\) must not be
-inverted because the marker uses the regular \(z=0\) lattice.  The repair
-still must prove that the carriers, rows, and marked projectors descend to
-those fields and that all path maps are compatible.  Coordinate invertibility
-alone supplies none of those three identifications.
-Once that occurrence theorem is written, `RowedProjectorPath`
-gives the all-\(m\) contradiction without Stokes data.  Until then the
-all-\(m\) geometric telescope is conditional.
+For the target, the standard small quantum presentation is
 
-### Live four-gate ledger
+\[
+ QH(\mathbf P^{m+3})
+   =K[H]/(H^{m+4}-q).
+\]
 
-1. **Edge source:** for every smooth-center blowup allowed in an AKMW path,
-   construct the completed comparison and prove both squares in (D10.1),
-   including the unit status of every row normalization.  A simple-wall or
-   low-dimensional-center statement is not a uniform all-\(m\) provider.
-2. **Occurrence descent:** identify every repeated vertex occurrence with a
-   faithful pullback of one native carrier, row, and marked projector; or,
-   more weakly, prove the edge's local detection Boolean equivalent to one
-   intrinsic predicate of that vertex.  `IntrinsicPath` then needs no carrier
-   identification between adjacent edges.
-3. **Cubic-product endpoint:** identify the rational matrix/tensor certificate
-   with the actual \(X\times\mathbf P^m\) QDM marked row and projector.
-   `CubicBlockCertificate.rankRow_tensor_detects` proves detection after
-   tensoring with any auxiliary row carrying a value-one vector, so only the
-   product-QDM and row/projector identification remains.
-4. **Projective endpoint:** prove that the actual
-   \(\mathbf P^{m+3}\) QDM has no row-visible C924-marked factor.
-   `ProjectiveSpaceQuantumPolynomial.relationPolynomial_separable` proves the
-   no-repeated-root algebra for \(H^{m+4}-q\) in characteristic zero at
-   \(q\ne0\); only the standard geometric small-quantum presentation remains
-   to be supplied.
+At \(q\ne0\) in characteristic zero, \(H^{m+4}-q\) is separable.  After a
+splitting-field extension every Euler spectral factor therefore has rank
+one.  The C924 predicate requires a rank-two block with nonzero nilpotent
+part, so the marked projector is zero at this point and hence on the generic
+F-bundle.  `ProjectiveSpaceQuantumPolynomial.relationPolynomial_separable`
+checks the separability statement for every \(m\).
 
-These gates are independent.  Connection naturality does not imply the
-projector square; finite basis calculations do not imply completed
-invertibility; faithful-flatness reflects an already descended datum but does
-not create descent; and formal branch counts do not prove either endpoint
-identification.
+Equation (D10.2) is unchanged under one blowup or blowdown.  D3 supplies the
+occurrence theorem using the two injective native-ring maps and the formal
+generic coordinate germ.  The center map (5.40) may remain edge-local because
+the consumer never identifies correction carriers at adjacent steps.
+`TwoBaseRowedProjectorEdge` reflects both endpoint Booleans through faithful
+field extensions, and `RowedProjectorPath.IntrinsicPath.property_iff`
+telescopes the resulting one native predicate through an arbitrary oriented
+weak factorization.
+
+Consequently the Lean telescope gives the all-\(m\) contradiction once the
+following local/source gates are supplied.  They are not yet all supplied,
+so the unconditional theorem is not landed.
+
+### Four-gate ledger
+
+1. **Edge formal projector — source-derived:** the Galois-stable coprime
+   factorization and Iritani/KKPYY spectral-extension uniqueness give the
+   projector square on the formal F-bundles.  The CRT certificate itself is
+   only the \(z=0\) fibre.
+2. **Joint occurrence object — open:** construct the even common
+   graded/topological module on which the negative-\(z\) row and positive-
+   \(z\) stable projector compose, and prove faithful native/edge pullback.
+3. **Cubic-product endpoint — open:** prove (D10.3) on that same object.
+   Behrend and the tensor Lean lemma then give every \(m\).
+4. **Projective endpoint — closed:** the standard small-quantum presentation
+   and separability of \(H^{m+4}-q\) give only rank-one generic spectral
+   factors, hence zero marked projector.
+
+The first two gates may also be replaced together by a direct fibrewise
+projector and rank-row square.  No common path completion, Stokes matrix,
+center classification, or correction-nullity theorem is consumed after this
+local rowed object exists.
 
 ## The exact one-sided source theorem
 
