@@ -372,14 +372,14 @@ expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 [[terminal]]
 declaration = "RepairPorts.harmonicPortClosure_withNucleus_iff"
 gates = ["RepairPorts.Gates.CompletePorts"]
-expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+expected_axioms = ["Quot.sound", "propext"]
 
 [[terminal]]
 declaration = "RepairPorts.harmonicPortClosure_of_containsBlock_iff"
 gates = ["RepairPorts.Gates.CompletePorts"]
-expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+expected_axioms = ["Quot.sound", "propext"]
 
 [[terminal]]
 declaration = "RepairPorts.harmonicPortClosure_of_containsNoBlock_iff"
 gates = ["RepairPorts.Gates.CompletePorts"]
-expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+expected_axioms = ["Quot.sound", "propext"]
