@@ -94,6 +94,14 @@ by construction.  Geometry must still construct the marked finite-etale packets,
 the edgewise equivariant comparisons, the common actual-loop actions, and the
 correction-period exclusions.
 
+The same module treats a nonsplit outer packet without imposing commuting
+inner and outer actions.  If the projected outer point has period `t` and the
+actual return map after `t` loop steps has period `h` on the chosen fibre
+point, Lean proves that the total point has period `t * h`.  Only the
+power-equivariance of the outer label and the fixedness law for the return map
+are assumed.  This theorem does not construct the label, return map, or their
+geometric realization.
+
 An even looser one-way interface consumes only injective equivariant maps
 between consecutive packets.  It transports the chosen orbit without asking
 for surjectivity, a full correction ledger, or an enumeration of unrelated
@@ -447,6 +455,18 @@ residue projections, descend the marked block lattices, or identify a
 geometric path loop with a pure native Euler coordinate.  In particular they
 do not justify purity after localization by coefficient variables of nonzero
 degree; the geometric adapter must retain an effective flat QDM frame.
+For low-dimensional period arithmetic, Lean also proves that a constant outer
+charge on two or four labels must vanish when a total point returns after
+three steps.  The curve residue matrix
+`[-1/2, c; 0, -1/2]` has zero discriminant for every rational `c`.  These are
+finite statements; identifying the labels and residue with a curve or surface
+correction factor remains external.  A kernel reduction records the candidate
+dimensions before the strict equality case is treated.  At packet length `3`
+they are `{1, 3}`; the displayed curve calculation excludes `1` only after
+the curve-to-matrix adapter is supplied.  A second, explicitly post-strict
+table at packet lengths `2, 3, 4, 5, 14` is respectively none, none, `{3}`,
+none, and `{8, 9, 11, 13}`.  These are arithmetic regressions, not a proof of
+the equality case or a construction of the occurrence-labelled carrier.
 The module also kernel-checks the final characteristic-zero scalar
 contradiction obtained from the three weight equations of the degree-one-unit
 countermodel.  It does not derive those equations from flatness or the divisor

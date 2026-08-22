@@ -32,10 +32,13 @@ two-dimensional residue class therefore exhausts that class.  This statement
 does not construct the residue splitting, the cyclic transports, or an
 effective coefficient lattice.
 
-A final scalar lemma checks the contradiction among the three weight
+One scalar lemma checks the contradiction among the three weight
 equations obtained after reducing a proposed degree-one-unit gauge.  The
 derivation of those equations from flat quantum-connection data is not part
-of this file.
+of this file.  The period lemmas separate an outer translation charge and a
+fibre return map from the period of a total occurrence, and evaluate the
+dimension arithmetic at five packet lengths.  Their geometric
+labelling maps and carriers are explicit inputs.
 -/
 
 namespace TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.ThreefoldKummerCompatibility
@@ -79,6 +82,32 @@ theorem block_pairing_compatibility :
 theorem blockResidue_discriminant :
     blockResidue.trace ^ 2 - 4 * blockResidue.det = 4 / 9 := by
   norm_num [blockResidue, Matrix.trace, Matrix.det_fin_two]
+
+namespace CurveResidue
+
+/-- The elementary-modified residue shape of a classical rank-two curve
+block, with arbitrary nilpotent scale.  Identifying this matrix with a
+geometric curve quantum connection is external to the finite calculation. -/
+def modifiedResidue (nilpotentScale : ℚ) :
+    Matrix BlockIndex BlockIndex ℚ :=
+  !![-1 / 2, nilpotentScale; 0, -1 / 2]
+
+/-- Every residue in the displayed curve family has zero discriminant,
+independently of the nilpotent scale. -/
+theorem modifiedResidue_discriminant (nilpotentScale : ℚ) :
+    (modifiedResidue nilpotentScale).trace ^ 2 -
+        4 * (modifiedResidue nilpotentScale).det = 0 := by
+  norm_num [modifiedResidue, Matrix.trace, Matrix.det_fin_two]
+
+/-- The displayed curve residue family never has the marked cubic
+discriminant `4/9`. -/
+theorem modifiedResidue_discriminant_ne_cubic (nilpotentScale : ℚ) :
+    (modifiedResidue nilpotentScale).trace ^ 2 -
+        4 * (modifiedResidue nilpotentScale).det ≠ 4 / 9 := by
+  rw [modifiedResidue_discriminant]
+  norm_num
+
+end CurveResidue
 
 /-- The Poincare-type pairing in the ordered basis
 `1, e, x, x e, x^2, x^2 e`. -/
@@ -792,5 +821,94 @@ theorem zeroClassInside_of_finrank
   exact hxZeroPart
 
 end ResidueCarrier
+
+namespace OuterPeriodThree
+
+/-- If a label changes by a constant charge on every step and a point returns
+after three steps, then three times the label charge is zero.  No injectivity,
+surjectivity, or splitting of the fibres of the label map is assumed. -/
+theorem three_nsmul_charge_eq_zero
+    {X A : Type*} [AddCommGroup A]
+    (step : X → X) (label : X → A) (charge : A) (x : X)
+    (label_step : ∀ y, label (step y) = label y + charge)
+    (period_three : step (step (step x)) = x) :
+    3 • charge = 0 := by
+  have hthree :
+      label (step (step (step x))) =
+        ((label x + charge) + charge) + charge := by
+    rw [label_step, label_step, label_step]
+  rw [period_three] at hthree
+  have hsum : charge + charge + charge = 0 := by
+    apply add_left_cancel (a := label x)
+    rw [add_zero]
+    calc
+      label x + (charge + charge + charge) =
+          ((label x + charge) + charge) + charge := by abel
+      _ = label x := hthree.symm
+  simpa [three_nsmul, add_assoc] using hsum
+
+/-- On two outer labels, a constant translation charge whose third multiple
+vanishes is already zero. -/
+theorem zmod_two_charge_eq_zero :
+    ∀ charge : ZMod 2, 3 • charge = 0 → charge = 0 := by
+  decide
+
+/-- On four outer labels, a constant translation charge whose third multiple
+vanishes is already zero. -/
+theorem zmod_four_charge_eq_zero :
+    ∀ charge : ZMod 4, 3 • charge = 0 → charge = 0 := by
+  decide
+
+end OuterPeriodThree
+
+namespace CyclicPowerRegression
+
+/-- Dimensions in which period arithmetic permits an inner return whose
+period is at most the center dimension.  For a center of dimension `d` in
+ambient dimension `n + 2`, the outer packet has length `n + 1 - d`.  The
+largest possible outer orbit has order `gcd n (n + 1 - d)`, so the smallest
+compatible inner return period is the displayed quotient.  No strict
+residue calculation is used in this definition. -/
+def preStrictCandidateDimensions (n : ℕ) : Finset ℕ :=
+  (Finset.Icc 1 n).filter fun d ↦
+    n / Nat.gcd n (n + 1 - d) ≤ d
+
+/-- Exact pre-strict candidate tables for stabilization indices
+`m = 1, 2, 3, 4, 13`, equivalently packet lengths
+`n = 2, 3, 4, 5, 14`.  This is a kernel reduction of the arithmetic
+definition; it does not construct an outer label map or an inner carrier. -/
+theorem preStrictCandidateDimensions_named_values :
+    preStrictCandidateDimensions 2 = {1, 2} ∧
+      preStrictCandidateDimensions 3 = {1, 3} ∧
+      preStrictCandidateDimensions 4 = {1, 3, 4} ∧
+      preStrictCandidateDimensions 5 = {1, 5} ∧
+      preStrictCandidateDimensions 14 = {1, 7, 8, 9, 11, 13, 14} := by
+  decide
+
+/-- Dimensions in which period arithmetic leaves a strictly lower-period
+inner return after factoring a total period `n` through an outer translation.
+For a center of dimension `d` in ambient dimension `n + 2`, the outer packet
+has length `n + 1 - d`.  The largest possible outer orbit has order
+`gcd n (n + 1 - d)`, so the smallest compatible inner return period is the
+displayed quotient.  This definition assumes that a separate strict residue
+argument has excluded the equality case; it records only the remaining strict
+inequality. -/
+def postStrictUnresolvedDimensions (n : ℕ) : Finset ℕ :=
+  (Finset.Icc 1 n).filter fun d ↦
+    n / Nat.gcd n (n + 1 - d) < d
+
+/-- Exact post-strict unresolved-dimension tables for stabilization indices
+`m = 1, 2, 3, 4, 13`, equivalently packet lengths
+`n = 2, 3, 4, 5, 14`.  This is a kernel reduction of the arithmetic
+definition; it does not construct the outer label map or an inner carrier. -/
+theorem postStrictUnresolvedDimensions_named_values :
+    postStrictUnresolvedDimensions 2 = ∅ ∧
+      postStrictUnresolvedDimensions 3 = ∅ ∧
+      postStrictUnresolvedDimensions 4 = {3} ∧
+      postStrictUnresolvedDimensions 5 = ∅ ∧
+      postStrictUnresolvedDimensions 14 = {8, 9, 11, 13} := by
+  decide
+
+end CyclicPowerRegression
 
 end TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.ThreefoldKummerCompatibility

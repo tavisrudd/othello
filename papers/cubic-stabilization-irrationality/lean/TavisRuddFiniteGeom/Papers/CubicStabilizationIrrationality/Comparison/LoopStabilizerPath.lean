@@ -13,7 +13,9 @@ vertices.  The same equivalence is used in reverse for a blow-down.
 Because every edge is indexed by the exact values of one vertex family,
 adjacent path steps cannot silently use different loop actions on two nominal
 copies of the same intermediate vertex.  No split finite cyclic action is
-required.
+required.  A separate theorem computes the period of a point over an outer
+orbit from the period of the actual fibre return map, again without a split
+action.
 
 These results are finite-set and action-theoretic.  They do not construct the
 marked primitive packet of a quantum differential module, identify its actual
@@ -59,6 +61,51 @@ theorem hasPowerFixednessPeriod_map
   intro k
   rw [← equivalence.map_smul]
   exact (equivalence.toEquiv.injective.eq_iff).trans (fixedness k)
+
+/-- Suppose a point projects to an outer orbit of period `outerPeriod`, and
+the return map after `outerPeriod` loop steps has period `returnPeriod` on the
+chosen fibre point.  Then the original point has period
+`outerPeriod * returnPeriod`.  The hypothesis `returnFixedness` identifies
+fixedness after each outer return with fixedness of the fibre return map; no
+split action or commuting inner and outer actions is assumed. -/
+theorem hasPowerFixednessPeriod_of_outer_return
+    {G H A O F : Type*}
+    [Group G] [Group H]
+    [MulAction G A] [MulAction G O] [MulAction H F]
+    (generator : G) (returnGenerator : H)
+    (point : A) (fibrePoint : F) (outerLabel : A → O)
+    (outerPeriod returnPeriod : ℕ)
+    (labelPower : ∀ k : ℕ,
+      outerLabel (generator ^ k • point) =
+        generator ^ k • outerLabel point)
+    (outerFixedness :
+      HasPowerFixednessPeriod G generator outerPeriod (outerLabel point))
+    (returnFixedness : ∀ q : ℕ,
+      generator ^ (outerPeriod * q) • point = point ↔
+        returnGenerator ^ q • fibrePoint = fibrePoint)
+    (fibreFixedness :
+      HasPowerFixednessPeriod H returnGenerator returnPeriod fibrePoint) :
+    HasPowerFixednessPeriod G generator
+      (outerPeriod * returnPeriod) point := by
+  intro k
+  constructor
+  · intro pointFixed
+    have labelFixed :
+        generator ^ k • outerLabel point = outerLabel point := by
+      calc
+        generator ^ k • outerLabel point =
+            outerLabel (generator ^ k • point) := (labelPower k).symm
+        _ = outerLabel point := congrArg outerLabel pointFixed
+    rcases (outerFixedness k).mp labelFixed with ⟨q, rfl⟩
+    have fibreFixed :
+        returnGenerator ^ q • fibrePoint = fibrePoint :=
+      (returnFixedness q).mp pointFixed
+    rcases (fibreFixedness q).mp fibreFixed with ⟨u, rfl⟩
+    exact ⟨u, by simp [Nat.mul_assoc]⟩
+  · rintro ⟨q, rfl⟩
+    rw [Nat.mul_assoc]
+    exact (returnFixedness (returnPeriod * q)).mpr
+      ((fibreFixedness (returnPeriod * q)).mpr ⟨q, rfl⟩)
 
 /-- A vertex has selected-period support when one point has exactly that
 power-fixedness fingerprint. -/

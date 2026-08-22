@@ -20,6 +20,28 @@ brutePeriod modulus charge =
 formulaPeriod :: Int -> Int -> Int
 formulaPeriod modulus charge = modulus `div` gcd modulus charge
 
+preStrictCandidateDimensions :: Int -> [Int]
+preStrictCandidateDimensions packetLength =
+  [ centerDimension
+  | centerDimension <- [1 .. packetLength]
+  , let outerLength = packetLength + 1 - centerDimension
+        returnPeriod = packetLength `div` gcd packetLength outerLength
+  , returnPeriod <= centerDimension
+  ]
+
+postStrictUnresolvedDimensions :: Int -> [Int]
+postStrictUnresolvedDimensions packetLength =
+  [ centerDimension
+  | centerDimension <- [1 .. packetLength]
+  , let outerLength = packetLength + 1 - centerDimension
+        returnPeriod = packetLength `div` gcd packetLength outerLength
+  , returnPeriod < centerDimension
+  ]
+
+periodOfPoint :: Eq point => Int -> (point -> point) -> point -> Maybe Int
+periodOfPoint bound step point =
+  find (\power -> iterate step point !! power == point) [1 .. bound]
+
 separatingPower :: Int -> Int -> Maybe Int
 separatingPower sourcePeriod targetPeriod
   | sourcePeriod == targetPeriod = Nothing
@@ -195,6 +217,29 @@ main = do
     (sourceFixed 3 6 && sourceFixed 6 6 && separatingPower 3 6 == Just 3)
   assertCheck "a two-cycle plus a fixed point is green against a three-cycle"
     (all (\targetPeriod -> targetPeriod /= 3) ([2, 1] :: [Int]))
+  assertCheck "three-step return forces zero translation charge on two or four labels"
+    (all (\modulus -> all (\charge ->
+      (3 * charge) `mod` modulus /= 0 || charge == 0)
+      [0 .. modulus - 1]) ([2, 4] :: [Int]))
+  let splitStep (outerLabel, fibreLabel) =
+        ((outerLabel + 1) `mod` 2, (fibreLabel + 1) `mod` 4)
+      skewStep (outerLabel, fibreLabel)
+        | outerLabel == 0 = (1, fibreLabel)
+        | otherwise = (0, (fibreLabel + 1) `mod` 4)
+  assertCheck "split outer-two inner-four uses return period two, total period four"
+    (periodOfPoint 8 splitStep ((0, 0) :: (Int, Int)) == Just 4
+      && periodOfPoint 4 (\fibreLabel -> (fibreLabel + 2) `mod` 4)
+        (0 :: Int) == Just 2)
+  assertCheck "nonsplit outer-two return-four has total period eight"
+    (periodOfPoint 8 skewStep ((0, 0) :: (Int, Int)) == Just 8
+      && periodOfPoint 4 (\fibreLabel -> (fibreLabel + 1) `mod` 4)
+        (0 :: Int) == Just 4)
+  assertCheck "pre-strict dimension tables, named m=1,2,3,4,13"
+    (map preStrictCandidateDimensions [2, 3, 4, 5, 14]
+      == [[1, 2], [1, 3], [1, 3, 4], [1, 5], [1, 7, 8, 9, 11, 13, 14]])
+  assertCheck "post-strict dimension tables, named m=1,2,3,4,13"
+    (map postStrictUnresolvedDimensions [2, 3, 4, 5, 14]
+      == [[], [], [3], [], [8, 9, 11, 13]])
   let taggedMixedPoints =
         [(0, label) | label <- [0 .. 2]]
           ++ [(1, label) | label <- [0 .. 1]]

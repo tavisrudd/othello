@@ -161,7 +161,16 @@ exclusion from their geometric adapter.  It checks a cubic dual-number model
 whose normalized
 return coefficient vanishes, proves that Poincare self-adjointness kills the
 general rank-one return polynomial, proves the uniform dimension-two count for
-cyclic residue pieces, and records exact coarse countermodels.  It does not
+cyclic residue pieces, checks that the curve residue family has zero
+discriminant, and records exact coarse countermodels.  Its finite period
+calculation gives both the candidate dimensions before a strict equality-case
+argument and the dimensions left after that additional argument, at packet
+lengths `2, 3, 4, 5, 14`.
+`LoopStabilizerPath.hasPowerFixednessPeriod_of_outer_return` proves the
+underlying nonsplit period law: the total period is the outer period times the
+period of the return map on one fibre.  It assumes only power-equivariance of
+the outer label and the displayed return-fixedness equivalence.  It does not
+construct either from a geometric comparison.  The compatibility module does not
 identify an arbitrary correction occurrence with a pure native Euler
 coordinate, retain an effective flat coefficient lattice, or descend the
 marked block lattices.

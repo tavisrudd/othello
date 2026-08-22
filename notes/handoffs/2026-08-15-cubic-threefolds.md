@@ -143,15 +143,20 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   certificate, and scalar formula regressions at \(m=1,2,3,4,13\); it does
   not derive the generic all-\(n\) recurrence or residue shapes.
 
-  **Exact open gate:** first classify a dangerous total correction orbit as
-  inner, outer, or mixed under the source's primitive loop.  A curve center
-  of codimension \(n+1\) already has \(n\) outer copies, so the dimension
-  count alone cannot prove inner provenance.  For an inner orbit, one must
-  then descend its rank-\(2n\) carrier to a saturated native-effective
-  pure-Euler lattice and prove the uniform recurrence-to-residue calculation.
-  The alternative provider is a direct occurrence-wise exclusion of exact
-  period \(n\) from every correction packet in every codimension.  These are
-  missing geometric data/theorems, not another consumer-plumbing lemma.
+  **Exact open gate:** for \(m=2\), the nonsplit outer-return law and the
+  accepted point/curve/surface marker theorem exclude codimensions three
+  through five at the generic numerical-reduced even base.  The sole
+  remaining theorem is occurrence-wise exclusion of an exact three-cycle
+  among marked blocks of the single outer factor attached to each connected
+  codimension-two threefold-center occurrence.  A sufficient provider is
+  saturated native-effective pure-Euler descent for that factor plus the uniform
+  recurrence-to-residue calculation.  The pre-strict candidate dimensions at
+  \(n=2,3,4,5,14\) are respectively \(\{1,2\}\), \(\{1,3\}\),
+  \(\{1,3,4\}\), \(\{1,5\}\), and
+  \(\{1,7,8,9,11,13,14\}\).  After a separate equality-case exclusion, the
+  unresolved sets are empty, empty, \(\{3\}\), empty, and
+  \(\{8,9,11,13\}\).  These are missing geometric data or theorems, not
+  another consumer-plumbing lemma.
 
   **Closed lanes:** the common \(\epsilon M\)-row/stable-projector
   composite, raw and normalized degree-zero augmentation, ordinary

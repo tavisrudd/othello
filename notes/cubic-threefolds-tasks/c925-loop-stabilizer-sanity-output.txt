@@ -8,6 +8,11 @@ PASS a mixed ledger fails when one target orbit has the source period
 PASS cardinality does not replace stabilizer data
 PASS return at the source power does not imply equal exact period
 PASS a two-cycle plus a fixed point is green against a three-cycle
+PASS three-step return forces zero translation charge on two or four labels
+PASS split outer-two inner-four uses return period two, total period four
+PASS nonsplit outer-two return-four has total period eight
+PASS pre-strict dimension tables, named m=1,2,3,4,13
+PASS post-strict dimension tables, named m=1,2,3,4,13
 PASS occurrence-tagged flattened permutation preserves every tag
 PASS actual permutation checker rejects a lying green period table
 PASS actual permutation checker rejects occurrence mixing

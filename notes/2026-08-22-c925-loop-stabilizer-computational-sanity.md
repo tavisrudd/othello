@@ -14,6 +14,21 @@ translation
 
 the exact period is \(n/\gcd(n,a)\).
 
+For a nonsplit packet over an outer orbit of period \(t\), let \(h\) be the
+period of the actual return map after \(t\) loop steps.  The total point has
+period \(th\).  The check distinguishes this return-map period from the
+one-step period of an independent inner action.  It also evaluates the center
+dimensions allowed by
+
+\[
+  \frac{n}{\gcd(n,n+1-d)}\le d
+  \quad\text{and}\quad
+  \frac{n}{\gcd(n,n+1-d)}<d
+\]
+
+at \(n=2,3,4,5,14\).  The strict inequality is conditional on a separate
+argument excluding equality.
+
 The Haskell check validates this finite arithmetic independently of any QDM
 interpretation.  It is the executable input shape consumed by
 `Comparison.TwoLayerDescentPacket.sourceSum_not_equivariantlyEquivalent_of_distinctPowerFixednessPeriods`.
@@ -69,6 +84,12 @@ The deterministic part checks:
 - acceptance of inverse-charge conjugacy and rejection of a nonconjugate
   relabelling;
 - direct Kummer/split permutation fingerprints at \(m=1,2,3,4,13\);
+- split and nonsplit outer-period-two examples, checking respectively total
+  periods four and eight from their actual return maps;
+- the period-three charge test on outer translation packets of lengths two
+  and four;
+- the pre-strict and post-strict center-dimension tables at
+  \(n=2,3,4,5,14\);
 - the named stabilization indices \(m=1,2,3,4,13\).
 
 Three fixed-seed QuickCheck properties add 27,000 generated cases.  The seed
@@ -106,8 +127,8 @@ The replay used GHC 9.10.3 and QuickCheck 2.15.0.1.
 
 | artifact | bytes | SHA-256 |
 |---|---:|---|
-| `c925-loop-stabilizer-sanity.hs` | 11,124 | `eb247c714015c7e94563189ff34072d0c6bea3e2f731ed91f10dd01c9969c28a` |
-| `c925-loop-stabilizer-sanity-output.txt` | 1,525 | `35e3bc47a3eebde20c4d1076ae99a885a48c05350e254c7f7d6e610034a02976` |
+| `c925-loop-stabilizer-sanity.hs` | 13,244 | `4045065020f4b1c130d833a90e7695e640dee28acee4534016dbd1ac354dfffc` |
+| `c925-loop-stabilizer-sanity-output.txt` | 1,841 | `c003a904d01dcfd2e9368ef07e956a3a8f034e183773661032e1ce64eb8fc35b` |
 
 ## Independent check and trust boundary
 
@@ -120,6 +141,7 @@ prevents an equivariant stable-ledger equivalence.  The Lean declarations are
 - `modulus_dvd_power_mul_iff_reducedPeriod_dvd_power`;
 - `sourceSum_not_equivariantlyEquivalent_of_distinctPowerFixednessPeriods`;
 - `LoopStabilizerPath.Edge.hasPeriodAt_iff`;
+- `LoopStabilizerPath.hasPowerFixednessPeriod_of_outer_return`;
 - `LoopStabilizerPath.Decomposition.hasPeriodAt_source_of_target`;
 - `LoopStabilizerPath.Path.hasPeriodAt_of`;
 - `LoopStabilizerPath.Path.false_of_sourcePeriod_of_targetNoPeriod`;
@@ -127,7 +149,10 @@ prevents an equivariant stable-ledger equivalence.  The Lean declarations are
 - `LoopStabilizerPath.OrbitTransport.Path.false_of_sourcePeriod_of_targetNoPeriod`;
 - `OccurrenceLoopCertificate.Ledger.loopPermutation_pow_occurrence`;
 - `OccurrenceLoopCertificate.FixednessCertificate.of_check_eq_true`;
-- `OccurrenceLoopCertificate.no_selectedPeriod_of_certificate`.
+- `OccurrenceLoopCertificate.no_selectedPeriod_of_certificate`;
+- `ThreefoldKummerCompatibility.OuterPeriodThree.three_nsmul_charge_eq_zero`;
+- `ThreefoldKummerCompatibility.CyclicPowerRegression.preStrictCandidateDimensions_named_values`;
+- `ThreefoldKummerCompatibility.CyclicPowerRegression.postStrictUnresolvedDimensions_named_values`.
 
 The Haskell execution and GHC/QuickCheck implementation remain trusted.  The
 calculation does not prove that an actual QDM marked packet is finite étale,
@@ -136,10 +161,9 @@ listed branches are exhaustive, or that every weak-factorization comparison
 uses the same loop.  Those are the geometric source hypotheses still required
 for the unconditional \(m=2\) or all-\(m\) theorem.
 
-The guarded queue built the minimized `LoopStabilizerPath` and the full axiom
-audit in run `20260822-160244-effd621a`.  It built
-`OccurrenceLoopCertificate` and the full axiom audit in run
-`20260822-155313-d281179c`.  Both aggregate gates passed.
+The guarded queue built the reviewer `PaperInterface` in run
+`20260822-191101-a66e3c3a` and the full `Verification.AxiomAudit` in run
+`20260822-191827-bc6d5553`.  Both aggregate gates passed.
 
 ## Mystery ledger
 
@@ -155,6 +179,13 @@ audit in run `20260822-160244-effd621a`.  It built
 - **Settled:** the cyclic arithmetic is not the obstruction.  The gcd formula
   is kernel-checked, and the executable suite covers the named stabilization
   indices and all charges through period 65.
+- **Settled:** a nonsplit outer packet uses the period of the actual return
+  map, not the period of a hypothetical commuting inner action.  The suite
+  contains split and nonsplit mutation tests, and Lean proves the abstract
+  product law from fixedness fingerprints.
+- **Settled:** the pre-strict and post-strict dimension tables are different.
+  At packet length three the first is \(\{1,3\}\) and the second is empty;
+  the latter remains conditional on excluding the threefold equality case.
 - **Settled:** an unmarked Mori interpretation cannot exclude period three.
   The quadric-threefold and Type-II transition examples carry cubic local
   monodromy without producing the required projective-bundle carrier.
@@ -173,6 +204,10 @@ audit in run `20260822-160244-effd621a`.  It built
 - **Open:** exclude exact period \(m+1\) on the marked correction branches.
   Chuang's exponent formula makes this finite once the two preceding adapters
   exist, but it does not supply the marker-specific exclusion.
+- **Open:** for \(m=2\), the accepted low-dimensional marker theorem removes
+  the dimension-one candidate at the generic even base.  Exact period three
+  on the single outer factor of each codimension-two threefold-center
+  occurrence is still not excluded.
 
 An exponent multiset is not a substitute for the labelled branch action:
 three fixed eigenlines and one regular three-cycle can have the same character

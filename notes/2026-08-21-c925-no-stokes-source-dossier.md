@@ -1879,6 +1879,74 @@ effective flat frame.  The first unsupported arrow is the inner-versus-outer
 occurrence and loop identification.  Native-effective descent is the next
 unsupported arrow after an inner occurrence is supplied.
 
+For \(m=2\), the inner-versus-outer ambiguity can be separated without a
+split \(C_3\)-action.  If the outer packet has length \(s=r-1\), let \(L\)
+be the period of the chosen outer label and let \(H\) be the return map on its
+fibre after \(L\) loop steps.  A point with \(H\)-period \(h\) has total
+period \(Lh\).  Therefore a total period-three point has either
+\((L,h)=(1,3)\) or \((3,1)\).  In a fivefold this gives:
+
+| codimension \(r\) | center dimension | outer length | period-three shape |
+|---:|---:|---:|---|
+| 2 | 3 | 1 | inner period three |
+| 3 | 2 | 2 | inner period three |
+| 4 | 1 | 3 | inner period three or outer period three with fixed return |
+| 5 | 0 | 4 | inner period three |
+
+The low-dimensional marker theorem already audited for the one-stabilization
+proof removes the last three rows.  It is applied at the generic
+numerical-reduced even base, with the independent center divisor and even-bulk
+coordinates retained; it does not assert emptiness on an arbitrary special
+one-parameter pullback.  At this generic base, Iritani's combined bulk map has
+invertible even-even Jacobian and each correction factor is a scalar-extended,
+generically reparametrized copy of the native center packet.  Empty marked
+packets therefore remain empty even if the loop permutes the outer copies
+nonsplitly.  A point has no rank-two block.  For a
+curve, \(\mathbf P^1\) is generically semisimple; for genus at least one all
+genus-zero maps are constant, so the primary even product is classical.
+Genus one has zero nilpotent part, while genus at least two has elementary-
+modified residue
+
+\[
+ \begin{pmatrix}-\tfrac12&2-2g\\0&-\tfrac12\end{pmatrix}
+\]
+
+and modified-residue discriminant zero.  For surfaces, the dimension axiom
+handles minimal surfaces with nef canonical class; the Enriques--Kodaira
+classification, Iritani--Koto's projective-bundle theorem, and Iritani's
+point-blowup ledger handle the remaining minimal and blown-up surfaces.
+Thus the marked correction packet is empty in dimensions at most two.  The
+only remaining \(m=2\) correction theorem is codimension two: exclude an
+exact inner three-cycle among the marked primitive blocks of the single outer
+factor attached to each connected threefold-center occurrence.  Lean checks
+the curve matrix discriminant and its inequality with \(4/9\) in
+`ThreefoldKummerCompatibility.CurveResidue`; the geometric identification of
+the curve block remains the audited C924 input.  This conclusion is
+marker-specific; genus-at-least-two curve blocks give a mandatory
+counterexample to any claim that the whole correction packet lacks period
+three.
+
+The arithmetic boundary is useful beyond \(m=2\).  Before any strict
+equality-case theorem, the candidate center dimensions at
+\(n=2,3,4,5,14\) are
+
+\[
+ \{1,2\},\quad \{1,3\},\quad \{1,3,4\},\quad \{1,5\},\quad
+ \{1,7,8,9,11,13,14\}.
+\]
+
+After a separate strict theorem excludes return period equal to the center
+dimension, the remaining sets are
+
+\[
+ \varnothing,\quad\varnothing,\quad\{3\},\quad\varnothing,\quad
+ \{8,9,11,13\}.
+\]
+
+Lean kernel-reduces both tables.  In particular, the empty post-strict table
+at \(n=3\) is not a proof of the open threefold equality case: the pre-strict
+table is \(\{1,3\}\), and only the curve theorem removes \(1\).
+
 Hinault--Yu--Zhang--Zhang do not fill this gap.  Their Definition 2.9 uses a
 regular \(z\)-connection framing; Theorems 4.2 and 4.26 extend an already
 chosen framing, and Proposition 4.31 reconstructs an F-bundle isomorphism
@@ -1950,9 +2018,10 @@ Source ledger for this gate:
 | Iritani, arXiv:2604.10028v2, Propositions 3 and 8, Corollary 11 | Cyclotomic outer monodromy and Hodge equivariance. | The Hodge group fixes Novikov roots; it gives no inner occurrence action or effective lattice. |
 | KKPYY, arXiv:2508.05105v2, Theorems 4.1, 4.5, 4.11 and Remark 3.53 | Canonical Laurent F-bundle splitting and the non-equivariant atom multiset. | Atoms have no natural morphisms; base change to an algebraic closure loses the occurrence and inertia data needed here. |
 | Hinault--Yu--Zhang--Zhang, arXiv:2411.02266v2, Definition 2.9, Theorems 4.2 and 4.26, Proposition 4.31 | Extension and reconstruction from an already chosen regular framing. | No construction of the native effective frame, saturated marked carrier, or loop label. |
+| C. A. M. Peters, *Compact Complex Surfaces*, Proposition 6.2 ([course notes](https://www-fourier.ujf-grenoble.fr/~peters/ConfsAndSchools/Canada/surface.pdf)) | A minimal algebraic surface with non-nef canonical divisor is ruled or \(\mathbf P^2\). | This is only the classification input in the low-dimensional marker theorem; QDM reduction still uses Iritani--Koto and Iritani. |
 
-No journal publication was found for these five cited versions in the bounded
-source check on 2026-08-22.
+No journal publication was found for the five cited arXiv versions in the
+bounded source check on 2026-08-22.
 
 ## Current source verdict
 
@@ -1991,11 +2060,20 @@ source check on 2026-08-22.
    outer or mixed cycle in the whole correction.  The all-\(n\) companion
    recurrence and its discriminants remain a paper calculation; Lean checks
    the lower cubic instance and scalar formula regressions.
-7. **The unconditional geometric provider is not landed.**  The two live
-   source targets are alternatives: either prove actual-loop period exclusion
-   for every correction packet, or first classify a hypothetical orbit as
-   inner, then prove native-effective descent and purity and apply the strict
-   calculation.  The published Laurent comparison supplies neither.  Do not
+7. **For \(m=2\), low-dimensional marker emptiness removes every outer
+   loophole.**  The nonsplit outer-return period law reduces codimensions
+   three through five to the already-audited surface, curve, and point
+   theorem at the generic numerical-reduced even base.  This statement keeps
+   the auxiliary center divisor and even-bulk coordinates generic; it does not
+   cover an arbitrary special one-parameter slice.  Only a codimension-two
+   threefold center can still carry a marked exact three-cycle.
+8. **The unconditional geometric provider is not landed.**  For \(m=2\),
+   prove actual-loop exclusion on the single outer factor attached to each
+   connected codimension-two center occurrence,
+   or prove native-effective pure-Euler descent there and complete the
+   recurrence calculation.  For all \(m\), lower-period inner returns after
+   a nontrivial outer orbit create additional cases.  The published Laurent
+   comparison supplies neither provider.  Do not
    report the \(m=2\) or all-\(m\) theorem as proved, and do not add another
    row consumer.
 
@@ -2010,7 +2088,7 @@ mathematical evidence.
 
 The separate actual-loop regression is
 `cubic-threefolds-tasks/c925-loop-stabilizer-sanity.hs`.  It checks the period
-and fixedness-fingerprint arithmetic for (m=1,2,3,4,13), exhausts all
+and fixedness-fingerprint arithmetic for \(m=1,2,3,4,13\), exhausts all
 translation charges through period 65, and retains (x^{m+1}=t) as the
 mandatory red correction.  Its evidence report is
 `2026-08-22-c925-loop-stabilizer-computational-sanity.md`.

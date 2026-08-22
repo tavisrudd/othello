@@ -8,7 +8,12 @@ provided every correction packet excludes it.  For a connected native
 pure-Euler **inner** cycle in one fixed outer factor, the strict
 cyclic-carrier reduction forces codimension two; the all-\(n\) companion
 calculation then predicts discriminants \(0\) or \(4\), not \(4/9\).
-An outer or mixed cycle is not covered.  Neither published comparison
+For \(m=2\), the nonsplit outer-return period law and the accepted
+low-dimensional marker theorem remove codimensions three through five; the
+only remaining correction theorem is exact-three exclusion in the single
+outer factor attached to each connected codimension-two threefold-center
+occurrence.  For general \(m\), lower-period inner
+returns after a nontrivial outer orbit remain.  Neither published comparison
 supplies the required occurrence-labelled primitive loop or saturated
 native-effective carrier.
 The unconditional every-smooth theorem is not landed.  Independently, Voisin
@@ -639,37 +644,35 @@ any geometric or QDM provider.
 
 The live frontier is source-side, not another linear consumer.
 
-1. **Conditional finite consumers.**  Put \(n=m+1\).  After a connected
-   center supplies a native pure-Euler **inner** \(n\)-cycle in one fixed
-   outer factor, the cyclic dimension theorem forces \(d=n\) and exhausts
-   the residue-zero plane.  Only then is the correction codimension two.
-   Lean checks this conditional dimension consumer, the abstract connection
-   recurrence compression, the lower cubic certificate, and formula
-   regressions at \(n=2,3,4,5,14\).  It does not derive the generic all-\(n\)
-   companion recurrence or its two residue shapes.
+1. **Exact \(m=2\) source theorem.**  Work over the generic
+   numerical-reduced even base, retaining the independent center divisor and
+   even-bulk coordinates.  For each connected codimension-two threefold-center
+   occurrence, construct the transported product-loop action on the C924
+   marked primitive factors of its single outer correction factor and prove
+   that no point has exact period three.  This is the only remaining \(m=2\)
+   correction theorem.  Native-effective pure-Euler descent plus the strict
+   recurrence calculation is one sufficient proof, not an extra conclusion
+   required by the consumer.
 
-2. **Open gate A: orbit provenance and loop.**  Decide whether a dangerous
-   orbit in the whole correction is inner, outer, or mixed, and lift it to an
-   occurrence-labelled action of the same primitive loop used at the source.
-   An outer cycle already defeats the dimension inference: a curve center of
-   codimension \(n+1\) has \(n\) outer correction copies.  KKPYY's atom
-   multiset and Iritani's outer monodromy do not supply the required inner
-   provenance.
+2. **What Lean separates.**  The nonsplit outer-return theorem proves that
+   total period is outer-label period times return-map period.  The pre-strict
+   \(n=3\) dimension table is \(\{1,3\}\); the checked curve residue has
+   discriminant zero, so the accepted low-dimensional geometric adapter
+   removes \(d=1\), leaving \(d=3\).  The post-strict table is empty only
+   after the still-open equality case is excluded.  Lean also checks the
+   conditional cyclic dimension consumer, abstract recurrence compression,
+   lower cubic certificate, and formula regressions.  It does not construct
+   the geometric labels or prove the generic all-\(n\) recurrence.
 
-3. **Open gate B: native-effective descent and purity.**  For an orbit proved
-   to be inner,
-   descend the total rank-\(2n\) carrier to a saturated carrier in the
-   center's native effective flat frame, realize the loop by a primitive
-   Euler coordinate/Higgs field, and prove the Laurent connection and pairing
-   are scalar extensions of this lattice.  Then prove the uniform companion
-   recurrence-to-residue calculation rather than relying on formula
-   regressions.
+3. **All-\(m\) remainder.**  Before the strict equality case, the candidate
+   center dimensions at \(n=2,3,4,5,14\) are respectively
+   \(\{1,2\}\), \(\{1,3\}\), \(\{1,3,4\}\), \(\{1,5\}\), and
+   \(\{1,7,8,9,11,13,14\}\).  After a separate strict equality-case
+   exclusion, the unresolved sets are empty, empty, \(\{3\}\), empty, and
+   \(\{8,9,11,13\}\).  Composite lengths therefore retain genuine
+   lower-return cases; do not infer all-\(m\) from the \(m=2\) reduction.
 
-4. **Alternative direct provider.**  Bypass both gates by proving
-   occurrence-wise that no correction packet, in any codimension, has exact
-   period \(n\) under the transported loop.
-
-5. **Closed or non-provider routes.**  Do not reopen the common
+4. **Closed or non-provider routes.**  Do not reopen the common
    \(\epsilon M\)-row/stable-projector composite, raw or normalized
    degree-zero augmentation, ordinary Hodge/Hard-Lefschetz multiplicity, or
    global algebraic-simplicity projection.  Their countermodels and precise
