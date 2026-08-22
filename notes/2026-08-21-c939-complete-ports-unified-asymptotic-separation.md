@@ -272,7 +272,7 @@ homogeneous reliability polynomials are
   5s^3-7s^5-2s^6+8s^7-3s^8.
 \]
 
-Both seeds give ([10,4,6]_q) codes with dual distance four and
+Both seeds give \([10,4,6]_q\) codes with dual distance four and
 (z_x(I)=8).  Applying the same outer family therefore gives matched length,
 dimension, and distance lower bounds and transfers the distinct laws to
 coordinate classes of density (1/10).  The original field-seven pair is
@@ -284,7 +284,7 @@ a quotient projective plane, lifts them generically to rank four, and excludes
 all unintended four-circuits by avoiding a finite union of proper
 hyperplanes.  Rational data can then be reduced modulo any prime outside one
 finite exceptional set.  This is the structural proof; the concrete
-(\mathbb F_{29}) matrices below are an independent cross-check, not a premise.
+\(\mathbb F_{29}\) matrices below are an independent cross-check, not a premise.
 
 Exact replay from `papers/complete-repair-ports/`:
 
@@ -294,7 +294,7 @@ python3 verification/matched-seed.py \
 ```
 
 The replay checks all three- and four-column ranks, the exact
-circuit-hyperplane lists, ([10,4,6]_{29}) parameters, dual distance four,
+circuit-hyperplane lists, \([10,4,6]_{29}\) parameters, dual distance four,
 pointed rank-triple histograms, matching/transversal/blocker/degree data,
 union profiles, and both reliability polynomials.  It does not prove the
 generic construction or the outer-family existence theorem.  Certificate
@@ -320,7 +320,7 @@ owns its subsequent formalization-audit/standards closure.
 The formal boundary is deliberately narrower than the human theorem.  Lean
 certifies the simultaneous exact transfer of the two prescribed radius-three
 ports.  It does not formalize the quotient-plane seed construction, the
-finite seed invariants, ([10,4,6]) parameters, outer-family existence, or the
+finite seed invariants, \([10,4,6]\) parameters, outer-family existence, or the
 final human synthesis.
 
 ## Referee state
