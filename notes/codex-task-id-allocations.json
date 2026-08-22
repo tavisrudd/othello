@@ -3338,8 +3338,17 @@
       "last": 938,
       "purpose": "bounded D-AOR8 geometric coupling scout before C937 with no large Q25 certificate rebuilds",
       "sequence": 371
+    },
+    {
+      "count": 1,
+      "first": 939,
+      "kind": "reservation",
+      "lane": "complete-ports",
+      "last": 939,
+      "purpose": "unify complete-ports via asymptotic pointed-Tutte reliability separation",
+      "sequence": 372
     }
   ],
-  "next_id": 939,
+  "next_id": 940,
   "schema": "codex-task-id-allocations-v1"
 }
