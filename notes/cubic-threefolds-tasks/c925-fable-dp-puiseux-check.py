@@ -50,8 +50,8 @@ def main():
 
     M[:, 0] = h2vec(x, y)
     qb = []
-    for d, m, c in cls:
-        q = z[0] ** d
+    for d, m, c, nb in cls:
+        q = nb * z[0] ** d
         for i in range(k):
             q *= z[1 + i] ** m[i]
         qb.append(sp.simplify(q))
@@ -64,7 +64,7 @@ def main():
         col = sp.zeros(n, 1)
         xp, yp = Dp
         col[n - 1] = x * xp - sum(a * bb for a, bb in zip(y, yp))
-        for (d, m, c), q in zip(cls, qb):
+        for (d, m, c, _nb), q in zip(cls, qb):
             w = dot(D, (d, m)) * dot(Dp, (d, m)) * q
             if c == 1:
                 col += w * h2vec(d, m)
@@ -72,7 +72,7 @@ def main():
                 col[0] += w
         M[:, 1 + j] = col
     col = sp.zeros(n, 1)
-    for (d, m, c), q in zip(cls, qb):
+    for (d, m, c, _nb), q in zip(cls, qb):
         w = dot(D, (d, m)) * q
         if c == 2:
             col += w * h2vec(d, m)

@@ -66,10 +66,21 @@ def classes(k):
     for d, m, c in out:
         if d == 0:
             if sum(m) == 1 and all(x in (0, 1) for x in m):
-                res.append((d, m, c))
+                res.append((d, m, c, 1))
         else:
             if all(x <= 0 for x in m):
-                res.append((d, m, c))
+                res.append((d, m, c, 1))
+    # Nodal rational curves: classes with c_1.beta = c and beta^2 > c - 2
+    # also contribute, with invariants counting delta-nodal rational curves.
+    # For k <= 5 the bound beta^2 <= c^2/(9-k) excludes them; for k = 6 the
+    # only such class is the anticanonical 3L - E_1 - ... - E_6 with
+    # c_1.beta = 3, beta^2 = 3, whose two-point invariant is the number of
+    # singular fibres of a pencil of plane cubics, 12.  Larger k would need
+    # the Goettsche--Pandharipande recursion and is not supported here.
+    if k == 6:
+        res.append((3, tuple(-1 for _ in range(6)), 3, 12))
+    if k >= 7:
+        raise SystemExit("k >= 7 needs nodal-curve invariants beyond this script")
     return res
 
 
@@ -94,10 +105,10 @@ def divisor_matrix(k, cls, D, z):
 
     # D * 1
     M[:, 0] = h2vec(x, y)
-    # precompute q^beta and D.beta
+    # precompute N_beta q^beta
     qb = []
-    for d, m, c in cls:
-        q = z[0] ** d
+    for d, m, c, nb in cls:
+        q = nb * z[0] ** d
         for i in range(k):
             q *= z[1 + i] ** m[i]
         qb.append(q)
@@ -112,7 +123,7 @@ def divisor_matrix(k, cls, D, z):
         xp, yp = Dp
         # classical cup product D.D' pt
         col[n - 1] = x * xp - sum(a * b for a, b in zip(y, yp))
-        for (d, m, c), q in zip(cls, qb):
+        for (d, m, c, _nb), q in zip(cls, qb):
             w = dot(D, (d, m)) * dot(Dp, (d, m)) * q
             if c == 1:
                 col += w * h2vec(d, m)
@@ -121,7 +132,7 @@ def divisor_matrix(k, cls, D, z):
         M[:, 1 + j] = col
     # D * pt
     col = np.zeros(n, dtype=complex)
-    for (d, m, c), q in zip(cls, qb):
+    for (d, m, c, _nb), q in zip(cls, qb):
         w = dot(D, (d, m)) * q
         if c == 2:
             col += w * h2vec(d, m)
@@ -183,7 +194,7 @@ def main():
     seed = int(sys.argv[3]) if len(sys.argv) > 3 else 1
     rng = np.random.default_rng(seed)
     cls = classes(k)
-    counts = {c: sum(1 for _, _, cc in cls if cc == c) for c in (1, 2, 3)}
+    counts = {c: sum(1 for _, _, cc, _n in cls if cc == c) for c in (1, 2, 3)}
     print(f"k={k} classes: (-1)={counts[1]} conic={counts[2]} line={counts[3]}")
     z0 = np.exp(TWO_PI_I * rng.random(k + 1)) * (0.7 + 0.6 * rng.random(k + 1))
     # commutativity sanity
