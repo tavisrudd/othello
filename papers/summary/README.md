@@ -2,6 +2,14 @@
 
 *Sparse shadows, persistent defects, and the recovery of hidden structure*
 
+- [selected headline results](#selected-headline-results)
+- [research frontiers and conditional extensions](#research-frontiers-and-conditional-extensions)
+- [theorems over infinite families](#theorems-over-infinite-families)
+- [papers and entry points](#papers-and-entry-points)
+- [abstracts and non-specialist guides](#abstracts-and-non-specialist-guides)
+- [verification philosophy](#verification-philosophy)
+- [contact and disclosure](#contact-and-disclosure)
+
 This programme studies **what survives information loss**. Across geometry,
 coding theory, and quantum information, a rich object is replaced by a sparse
 shadow. Examples include deep-hole loci, minimum-word layers, repair ports,
@@ -41,14 +49,6 @@ examples.
 > distinguishes prose proofs, cited inputs, kernel-checked formalizations,
 > certificate-checked computations, and trusted executions. See
 > [VERIFICATION.md](VERIFICATION.md) for the paper-level evidence maps.
-
-- [selected headline results](#selected-headline-results)
-- [research frontiers and conditional extensions](#research-frontiers-and-conditional-extensions)
-- [theorems over infinite families](#theorems-over-infinite-families)
-- [papers and entry points](#papers-and-entry-points)
-- [abstracts and non-specialist guides](#abstracts-and-non-specialist-guides)
-- [verification philosophy](#verification-philosophy)
-- [contact and disclosure](#contact-and-disclosure)
 
 ## Selected headline results
 
