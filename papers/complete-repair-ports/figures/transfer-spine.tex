@@ -5,7 +5,7 @@
   node distance=7mm and 5mm,
   box/.style={draw, rounded corners=2pt, align=center, inner sep=5pt,
     minimum height=10mm, text width=29mm},
-  view/.style={draw, align=center, inner sep=4pt, minimum height=9mm,
+  view/.style={draw, align=center, inner sep=4pt, minimum height=17mm,
     text width=33mm},
   arrow/.style={-{Latex[length=2mm]}, thick}
 ]
@@ -18,11 +18,11 @@
 \draw[arrow] (cost) -- (gate);
 \draw[arrow] (gate) -- (copies);
 
-\node[view, below=of cost, xshift=-38mm] (support) {support clutter\\availability, tolerance};
-\node[view, right=of support] (coeff) {normalized coefficients\\scalar decoder};
-\node[view, right=of coeff] (prob) {survival event\\reliability, bounded EXIT};
-\draw[arrow] (port.south) -- ++(0,-3mm) -| (support.north);
-\draw[arrow] (cost.south) -- ++(0,-3mm) -| (coeff.north);
+\node[view, below=of gate] (prob) {survival event\\reliability, bounded EXIT};
+\node[view] (support) at (port |- prob) {support clutter\\availability, tolerance};
+\node[view] (coeff) at (cost |- prob) {normalized coefficients\\scalar decoder};
+\draw[arrow] (port.south) -- (support.north);
+\draw[arrow] (cost.south) -- (coeff.north);
 \draw[arrow] (copies.east) -- ++(3mm,0) |- (prob.east);
 \draw[arrow] (support.south) -- ++(0,-6mm) -|
   node[pos=.55, below=1mm, font=\scriptsize] {determines} (prob.south);
