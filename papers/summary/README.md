@@ -159,6 +159,13 @@ complex as separate victories.
 
 ### Coding theory and quantum information
 
+- **Complete bounded repair ports transfer represented local structure.**
+  Support clutters, normalized scalar decoders, and stochastic reliability are
+  treated as three layers of one pointed object. Exact weighted-functional
+  confinement copies a prescribed bounded port into every block, and
+  asymptotically good outer families place it on a positive-density target
+  class. [Complete Bounded Repair Ports](https://github.com/tavisrudd/complete-repair-ports/blob/main/complete_repair_ports.pdf).
+
 - **Projective Reed–Solomon deep holes beyond redundancy four.** Split-free
   syndrome directions—and deep holes wherever the covering-radius gate
   applies—are classified at redundancies five and six for every prime power
@@ -197,6 +204,8 @@ is conditional, its hypothesis is displayed in the theorem column.
 
 | Paper | General theorem | Quantifier range |
 |---|---|---|
+| Complete Bounded Repair Ports: Transfer, Reliability, and Geometric Structure | The minimum coefficient port reconstructs the represented code, although its support projection is the generic complete uniform clutter. | Every proper `[n,k]q` MDS code with `1 ≤ k < n`, at every distinguished coordinate. |
+| Complete Bounded Repair Ports: Transfer, Reliability, and Geometric Structure | Exact weighted-functional confinement transfers every represented bounded support and coefficient port below the pointed zero-functional threshold onto a designated positive-density target class. | Every fixed inner encoder and outer family with dual distance tending to infinity; asymptotic goodness follows from the stated classical outer-family inputs. |
 | Integral Cohomology and Modular Decomposition for the Theta Divisor of a Cubic Threefold | The integral middle lattice has rank `130` and saturation quotient `(Z/2)^10`; the integral resolution complex has central Smith factor three, a length-three mod-three Loewy chain, and modular relative-hard-Lefschetz failure. | The theta divisor of every smooth complex cubic threefold. |
 | Irrationality of Cubic Threefolds after One Stabilization | `X × P¹` is irrational, by way of the rank-two residue marker of the cubic zero block in the categorical direct-QDM ledger. | Every smooth complex cubic threefold `X`. |
 | Irrationality of Cubic Threefolds after One Stabilization | The primitive-sixth framed-monodromy multiplicity of the small even quantum connection equals two. | Every smooth complex cubic threefold `X`. |
@@ -222,6 +231,7 @@ boundary, and reproducible entry points.
 
 | Paper | Area | Central result | Public entry |
 |---|---|---|---|
+| Complete Bounded Repair Ports: Transfer, Reliability, and Geometric Structure | Coding theory / reliability | Exact weighted-functional confinement transfers represented bounded repair ports to positive-density coordinate classes, retaining both support and normalized decoder data. | [PDF](https://github.com/tavisrudd/complete-repair-ports/blob/main/complete_repair_ports.pdf) · [repo](https://github.com/tavisrudd/complete-repair-ports) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.22051904-blue.svg)](https://doi.org/10.5281/zenodo.22051904) |
 | Irrationality of Cubic Threefolds after One Stabilization | Algebraic geometry / birational geometry | Every smooth cubic threefold stays irrational after multiplication by `P¹`, proved from the rank-two residue marker of a categorical direct-QDM ledger, while an explicit family is universally `CH₀`-trivial; the framed count `ν₆ = 2` and its stabilization to `4` are separate computations. | [PDF](https://github.com/tavisrudd/cubic-stabilization-epilogue/blob/main/irrationality_after_one_stabilization.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-epilogue) |
 | Deep Holes of Projective Reed–Solomon Codes Beyond Redundancy Four: Recursive Carriers and Exact Classifications Through Redundancy Ten | Coding theory | Deep-hole classifications extend through redundancy ten in stated ranges. | [PDF](https://github.com/tavisrudd/beyond4-prs/blob/main/prs-beyond-redundancy-four.pdf) · [repo](https://github.com/tavisrudd/beyond4-prs) |
 | Local-Unitary Rigidity and Quantitative Rounding for Stabilizer AME States | Quantum information | Exact local-unitary rigidity has a separate quantitative rounding theorem. | [PDF](https://github.com/tavisrudd/ame-lu/blob/main/ame-lu.pdf) · [repo](https://github.com/tavisrudd/ame-lu) |
@@ -547,6 +557,61 @@ public mirror.
 ---
 
 ### Further Geometry, Coding Theory, and Quantum Information Papers
+
+#### Complete Bounded Repair Ports: Transfer, Reliability, and Geometric Structure
+
+[PDF](https://github.com/tavisrudd/complete-repair-ports/blob/main/complete_repair_ports.pdf) · [Repository](https://github.com/tavisrudd/complete-repair-ports) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.22051904-blue.svg)](https://doi.org/10.5281/zenodo.22051904)
+
+**Standout result.** An exact weighted-functional confinement criterion
+transfers both the support clutter and every normalized scalar decoder of a
+bounded repair port. Below its pointed zero-functional threshold, any
+represented port occurs on a designated positive-density coordinate class in
+an asymptotically good fixed-alphabet family.
+
+> *Abstract* For a linear code and a distinguished coordinate, the complete
+> bounded repair port records every dual recovery equation using at most a
+> prescribed number of helpers. Its support clutter says which helpers
+> suffice, its normalized coefficients retain the represented decoder, and
+> its Boolean success event governs reliability. This extra coefficient data
+> is substantial: for every proper MDS code, the minimum coefficient port at
+> any distinguished coordinate reconstructs the represented code, although
+> its support projection is the generic complete uniform clutter.
+>
+> We prove an exact weighted-functional transfer theorem for concatenation.
+> In the fixed-inner linear regime, a pointed zero-functional cost is the
+> persistent obstruction to copying a bounded port blockwise; every
+> represented port below this threshold occurs on a positive-density
+> designated coordinate class in an asymptotically good fixed-alphabet
+> family. We also derive exact deletion–contraction and pivotal identities, a
+> bounded BEC EXIT hierarchy whose successive differences recover the
+> distribution of the cheapest available repair radius, and a full-radius
+> specialization of the Las Vergnas polynomial for `M∖x → M/x`. An explicit
+> represented pair proves that this
+> full-radius invariant does not determine the bounded-radius filtration.
+>
+> Characteristic-three examples exhibit both extremes: a completed
+> twisted-cubic–axis code has two uniform exact matching/transversal rows and
+> strict weighted transfer, while a quartic normal rational curve with its
+> nucleus has a Steiner `S(3,4,q+1)` port at the nucleus and a compulsory
+> nucleus helper at every curve target.
+
+**Delivers.** A complete pointed support/coefficient/probability object; MDS
+coefficient-port reconstruction; an exact concatenation threshold; a
+positive-density realization theorem; deletion–contraction, pivotal, blocker,
+and bounded-EXIT identities; a pointed-Tutte specialization; and exact
+cubic–axis and quartic–nucleus port inventories.
+
+**Who cares.** Coding theorists working on locality and availability,
+distributed storage, erasure decoding, code concatenation, matroid
+reliability, or finite-geometric code constructions.
+
+**Why it matters.** Locality and disjoint availability retain only coarse
+support data. The complete port keeps the actual scalar recovery equations
+and the full failure event visible, while the transfer theorem identifies the
+precise obstruction to reproducing that richer local object throughout a
+long code.
+
+---
 
 #### Integral Cohomology and Modular Decomposition for the Theta Divisor of a Cubic Threefold
 

@@ -1,5 +1,7 @@
 # Complete Bounded Repair Ports
 
+[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.22051904-blue.svg)](https://doi.org/10.5281/zenodo.22051904)
+
 ## Read the paper
 
 [**Open the paper (PDF) →**](complete_repair_ports.pdf)
