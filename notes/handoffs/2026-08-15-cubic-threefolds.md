@@ -239,6 +239,9 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   have the same stabilizer.  All comparisons and inverses must lift coherently
   to the equivariant stable ledger.  `TwoLayerDescentPacket` proves this exact
   stabilizer obstruction, so a split $C_{m+1}$ action is no longer required.
+  Its witness-oriented theorem accepts one distinguishing loop power for each
+  target point, which is the finite-certificate interface for tame-inertia
+  exponent calculations.
   The occurrence-uniform stabilizer exclusion and coherent geometric lift
   remain external.  A bounded 2025--2026 math-physics search found two real
   alternate frameworks but no provider.  Bai--Pomerleano--Seidel's

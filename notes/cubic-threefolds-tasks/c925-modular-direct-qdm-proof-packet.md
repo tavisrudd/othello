@@ -635,6 +635,11 @@ any geometric or QDM provider.
    equivariant stable-disjoint-union ledger.  The Lean theorem
    `TwoLayerDescentPacket.sourceSum_not_equivariantlyEquivalent_withoutSameStabilizer`
    then gives the contradiction without requiring the loop quotient to split.
+   The witness-oriented theorem
+   `sourceSum_not_equivariantlyEquivalent_of_fixednessFingerprintSeparated`
+   accepts, for each target point, one loop power whose fixedness differs from
+   the source; a finite arithmetic certificate need not materialize a full
+   stabilizer.
    A split external \(C_{m+1}\)-action with no free opposite point is a
    convenient stronger provider.  For \(m=2\), the exact local exclusion is
    absence of a correction three-cycle.  This

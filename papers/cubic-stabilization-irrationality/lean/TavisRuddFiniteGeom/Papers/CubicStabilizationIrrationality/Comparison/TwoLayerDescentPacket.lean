@@ -353,4 +353,25 @@ theorem sourceSum_not_equivariantlyEquivalent_withoutSameStabilizer
   exact targetHasDifferentStabilizer (equivalence.toEquiv (Sum.inl x))
     (hasSameStabilizer_map equivalence (Sum.inl x))
 
+/--
+An equivariant stable-ledger equivalence is impossible when every target point
+has some loop element whose fixedness differs from that of the chosen source
+point.  The distinguishing loop element may depend on the target point.  This
+is a witness-oriented form of stabilizer separation suited to finite
+computation: it does not require materializing either full stabilizer.
+-/
+theorem sourceSum_not_equivariantlyEquivalent_of_fixednessFingerprintSeparated
+    {G : Type*} {A B C : Type*}
+    [Group G] [MulAction G A] [MulAction G B] [MulAction G C]
+    (x : A)
+    (targetSeparated :
+      ∀ y : C, ∃ g : G,
+        ¬ (g • (Sum.inl x : A ⊕ B) = Sum.inl x ↔ g • y = y)) :
+    ¬ Nonempty (EquivariantEquiv G (A ⊕ B) C) := by
+  rintro ⟨equivalence⟩
+  obtain ⟨g, separated⟩ :=
+    targetSeparated (equivalence.toEquiv (Sum.inl x))
+  exact separated
+    (hasSameStabilizer_map equivalence (Sum.inl x) g)
+
 end TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.TwoLayerDescentPacket

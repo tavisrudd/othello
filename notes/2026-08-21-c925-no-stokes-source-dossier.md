@@ -900,9 +900,12 @@ nearby-cycle enhancement of atoms**: put the marked KKPYY atom over one
 common henselian trait, identify it occurrence-wise with a canonical
 nearby-cycle summand, and prove every Iritani comparison equivariant for the
 same tame generator.  Chuang's formula would then make the final order-three
-exclusion computable from local exponents.  A Frobenius-enriched version
-could rigidify the comparison, but the exclusion clause remains essential:
-Frobenius structure alone does not defeat the \(K[x]/(x^3-t)\) countermodel.
+exclusion computable from local exponents.  The Lean witness-oriented
+stabilizer theorem consumes exactly one distinguishing loop power for each
+target point, so no full stabilizer enumeration is needed.  A
+Frobenius-enriched version could rigidify the comparison, but the exclusion
+clause remains essential: Frobenius structure alone does not defeat the
+\(K[x]/(x^3-t)\) countermodel.
 
 Wang suggests a second, larger connector: construct one common
 Landau--Ginzburg model for the whole birational path and invoke

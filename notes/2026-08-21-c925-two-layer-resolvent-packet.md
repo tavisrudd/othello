@@ -132,7 +132,12 @@ corrections cannot map to a ledger with no point of the same stabilizer.  Lean
 proves this in
 `Comparison.TwoLayerDescentPacket.sourceSum_not_equivariantlyEquivalent_withoutSameStabilizer`.
 For the projective packet the fingerprint is $(m+1)\mathbb Z$.  This version
-does not require the cyclic quotient of the loop action to split.
+does not require the cyclic quotient of the loop action to split.  A finite
+certificate need not enumerate a full target stabilizer: for each target
+point it may exhibit one loop power whose fixedness differs from the source.
+The theorem
+`Comparison.TwoLayerDescentPacket.sourceSum_not_equivariantlyEquivalent_of_fixednessFingerprintSeparated`
+consumes exactly those witnesses.
 
 ## 63.4 Conditional $m=2$ telescope
 
@@ -280,7 +285,8 @@ blow-up comparison.  Its checked declarations are:
 * `Comparison.TwoLayerDescentPacket.externalRegularSum_not_equivariantlyEquivalent_externalTrivial`;
 * `Comparison.TwoLayerDescentPacket.externalRegularSum_not_equivariantlyEquivalent_withoutExternallyFreePoint`;
 * `Comparison.TwoLayerDescentPacket.hasSameStabilizer_map`;
-* `Comparison.TwoLayerDescentPacket.sourceSum_not_equivariantlyEquivalent_withoutSameStabilizer`.
+* `Comparison.TwoLayerDescentPacket.sourceSum_not_equivariantlyEquivalent_withoutSameStabilizer`;
+* `Comparison.TwoLayerDescentPacket.sourceSum_not_equivariantlyEquivalent_of_fixednessFingerprintSeparated`.
 
 The ramification argument in Section 63.2 is a standard field-theoretic proof
 recorded in prose.  No modular Hauptmodul, cusp-signature, or programme-base

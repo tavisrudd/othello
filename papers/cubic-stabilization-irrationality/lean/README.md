@@ -72,8 +72,11 @@ factor nontrivially through proper quotients of the external group.  It does
 not require pointwise external triviality.  The weakest theorem uses the
 original loop group directly: an equivariant stable ledger must carry a chosen
 source point to a point with exactly the same stabilizer.  This avoids assuming
-that a cyclic quotient of the loop action splits.  The module does not
-construct the loop action or its geometric comparison.
+that a cyclic quotient of the loop action splits.  A finite provider may
+instead give, for each target point, one loop power whose fixedness differs
+from the source point; the module derives the same obstruction without
+materializing either stabilizer.  It does not construct the loop action or
+its geometric comparison.
 
 The geometric comparison with the actual QDM packet remains an explicit
 inhabited-structure proposition. In particular, the package does not assume
