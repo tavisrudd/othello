@@ -15,43 +15,6 @@ under operations, such as stabilization, that might be expected to weaken them?
 
 Every paper is intended to stand on its own mathematically.
 
-The five-paper series *Clebsch: Rigidity from Sparse Shadows* asks how much of a
-structured object can be reconstructed from sparse code, matching, incidence,
-and cubic-form data. *Reconstructing the Clebsch Code from Its Deep-Hole
-Syndrome Locus*, *Quadratic Trade Rigidity and Cubic Orientation in Conic
-Matching Quotients*, and *Hitchin’s Icosahedral Incidence Double Cover and
-Operator Realizations of the Clebsch Cubic* reconstruct two geometrically different
-`A₅`-invariant cubic forms attached to the same six axes: one conference-type
-and one chordal. *Chordal and Conference Cubics: Reconstruction and a Residual
-C₂-Torsor* proves that each form recovers the common carrier and computes the
-precise ambiguity in passing between them. *Reconstructing PG(2,13), its conic,
-and polarity from the minimum words of a binary conic code* develops a separate
-code reconstruction: pair data from minimum-weight words recover a marked conic
-plane and its polarity.
-*Diagonal Isoduality and Transversal Clifford Groups of MDS–CSS Codes* and
-*Balanced Cuts of Conference Matrices: Squared-Spectrum Rigidity and Hermitian
-Holonomy* are related unnumbered companions.
-
-One main paper and two companions concern irrationality and cycle theory for
-cubic threefolds. *Irrationality of Cubic Threefolds after One Stabilization*
-proves that `X × P¹` is irrational for every smooth complex cubic threefold
-`X`. Its birational invariant counts rank-two blocks of the generic even
-quantum `D`-module whose two formal exponent classes differ modulo the
-integers. *Integral Divisor Products on the Nonstandard A₅-Invariant Cubic
-Pencil* proves universal `CH₀`-triviality for every smooth member of an
-explicit non-isotrivial family. *Framed Formal Monodromy of Cubic Threefolds*
-computes a finer primitive-sixth count for cubics and their products with
-`P¹`; its operation formulas and birational-invariance theorem remain
-conditional on two stated hypotheses. The three manuscripts share one
-repository but are mathematically separate.
-*Hodge Atoms as Occurrence-Indexed Marker Ledgers* develops the same
-categorical occurrence/groupoid/fold mechanism for the standard abstract
-Hodge-atom construction and derives only its one-step rank-two consequence.
-*Gamma Point Rows under Quantum Wall Crossing* pursues
-the same quantum obstruction past the first stabilization, to a criterion
-covering every projective stabilization under explicit gauged-admissibility
-and marked threshold assumptions; it is an early draft.
-
 Many structural components have independent Lean formalizations; coverage is
 claim-specific and generally not end-to-end. Each repository states which
 parts are prose proofs, cited inputs, kernel-checked formalizations,
