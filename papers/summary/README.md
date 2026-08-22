@@ -66,17 +66,6 @@ complex as separate victories.
 
 ### Algebraic geometry and rationality
 
-- **Integral and modular decomposition for the cubic-threefold theta
-  divisor.** For the theta divisor of every smooth complex cubic threefold,
-  the integral middle lattice is free of rank `130` with Lefschetz saturation
-  quotient `(Z/2)^10`.  The resolution has two integral outer point summands
-  and a residual perverse factor with central map `Z --(-3)--> Z`; modulo
-  three that factor is uniserial with successive factors
-  `delta_0`, `IC`, `delta_0`.  The same factor three makes relative hard
-  Lefschetz fail modulo three, while an infinite-order Fano class lifts the
-  local order-three link class.
-  [Integral Cohomology and Modular Decomposition for the Theta Divisor of a Cubic Threefold](https://github.com/tavisrudd/blown-up-theta-lattice/blob/main/blown_up_theta_lattice.pdf).
-
 - **One-stabilization irrationality for every smooth cubic threefold.** The
   fourfold `X × P¹` is irrational for every smooth complex cubic threefold
   `X`, and likewise `V × P¹` for every smooth prime Fano
@@ -123,6 +112,17 @@ complex as separate victories.
   cubic threefold `X` and every `m ≥ 0`.  That paper is an early draft, likely
   to contain logical gaps and notational issues.
   [Gamma Point Rows under Quantum Wall Crossing and a Criterion for Stable Irrationality](https://github.com/tavisrudd/cubic-stabilization-irrationality/blob/main/cubic_stabilization_irrationality.pdf).
+
+- **Integral and modular decomposition for the cubic-threefold theta
+  divisor.** For the theta divisor of every smooth complex cubic threefold,
+  the integral middle lattice is free of rank `130` with Lefschetz saturation
+  quotient `(Z/2)^10`.  The resolution has two integral outer point summands
+  and a residual perverse factor with central map `Z --(-3)--> Z`; modulo
+  three that factor is uniserial with successive factors
+  `delta_0`, `IC`, `delta_0`.  The same factor three makes relative hard
+  Lefschetz fail modulo three, while an infinite-order Fano class lifts the
+  local order-three link class.
+  [Integral Cohomology and Modular Decomposition for the Theta Divisor of a Cubic Threefold](https://github.com/tavisrudd/blown-up-theta-lattice/blob/main/blown_up_theta_lattice.pdf).
 
 ### Finite geometry and reconstruction
 
