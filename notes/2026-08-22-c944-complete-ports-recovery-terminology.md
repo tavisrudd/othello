@@ -2,7 +2,7 @@
 
 **Lane**: `complete-ports`
 
-**Status**: ACTIVE
+**Status**: MANUSCRIPT AND FULL RELEASE GATES PASS; STANDALONE EXPORT PENDING
 
 ## Intent
 
@@ -43,4 +43,71 @@ hypothesis, formula, example, reliability law, and formal-coverage boundary.
 
 ## Result
 
-Pending.
+The revised title is *Bounded Recovery Structures of Linear Codes: Transfer,
+Reliability, and Geometry*.  The manuscript no longer uses “port” as a visible
+technical noun.  Invisible stable labels and filenames and exact Lean module or
+declaration identifiers retain their established spellings; changing the Lean
+API is outside this manuscript task.
+
+The revision makes three levels explicit:
+
+- normalized dual words through the target are the bounded recovery equations;
+- their support projection records exact helper supports; and
+- the bounded upward closure of those supports is the standard recovery-set
+  family.
+
+The abstract now leads with the sharp eventual confinement theorem, retaining
+the outer-family hypothesis needed for the criterion `r+1 < z_x(I)`.  The
+finite-length theorem still includes the nonzero-functional weighted minimum.
+The MDS theorem is titled “MDS reconstruction from minimum-weight recovery
+equations,” the positive-density and geometric results use recovery-structure
+language sparingly, and the conclusion presents locality and overlap
+statistics as lossy summaries rather than ill-typed set inclusions.
+
+The public README, Zenodo metadata, transfer diagram, verification script, and
+current theorem/formal/evidence maps agree with the new terminology.  The
+repository identity and formal identifiers remain stable.
+
+## Source check
+
+No source was read at full-text depth for this bounded terminology check; two
+primary sources were read partially.
+
+- Márquez-Corbella, Martínez-Moro, and Munuera, *Computing Sharp Recovery
+  Structures for Locally Recoverable Codes*, arXiv:1907.05316v1: partial read
+  of the abstract, introduction, Section 2 definitions, Proposition 1, and the
+  dual-word recovery discussion.  Cache key `arXiv:1907.05316`, SHA-256
+  `a9060ca8f7901885f1e077076c73dd7d03f8ae995a2232e891ce74c39e4ea927`.
+- Pàmies-Juarez, Hollmann, and Oggier, *Locally Repairable Codes with Multiple
+  Repair Alternatives*, arXiv:1302.5518: partial read of the abstract and
+  introduction to confirm ordinary operational “repair” usage.  Cache key
+  `arXiv:1302.5518`, SHA-256
+  `278af00d94c8b7dcd6eec66732fc4e49df8f901f9cf601b2056a187c4430d18d`.
+
+No novelty or priority verdict changed.
+
+## Validation
+
+- deterministic `make check`: PASS, 23 pages, warning-free;
+- full `make release` against public `finitegeom` commit
+  `36c83268ddaeec9ee22824cad44d6222a9e67081`: PASS;
+- rendered PDF checks: title/abstract and opening theorem pages, transfer
+  diagram, and bibliography inspected at full resolution;
+- rendered terminology scan: no repair-port, coefficient-port, support-port,
+  full-port, represented-port, or prescribed-port phrase remains;
+- PDF SHA-256:
+  `c53e6094b9fd3d103747a675f8d870ad52047169968e89821976ee2786be6807`.
+
+## `ej` + `tt` closeout and mystery ledger
+
+The closeout settled two cheap issues exposed by the terminology change.  The
+standard recovery-set family is now distinguished from the exact supports of
+dual words, avoiding a silent change of definition.  The paper also states
+that `z_x(I)` is the persistent/eventual confinement threshold while the
+finite-length gate retains the nonzero-functional term.
+
+No genuine mathematical mystery remains.  One deliberate naming boundary is
+open: the public Lean API and stable repository/file identifiers still contain
+`Port`.  A zero-occurrence migration there would require a separately owned
+formal API rename, renewed gate/axiom extraction, deterministic finitegeom
+export, and paper re-pin; it is not a defect in the manuscript revision.
