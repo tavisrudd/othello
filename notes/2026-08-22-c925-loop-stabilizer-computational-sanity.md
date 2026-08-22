@@ -88,3 +88,28 @@ that a displayed local exponent labels one of its primitive branches, that the
 listed branches are exhaustive, or that every weak-factorization comparison
 uses the same loop.  Those are the geometric source hypotheses still required
 for the unconditional \(m=2\) or all-\(m\) theorem.
+
+## Mystery ledger
+
+- **Settled:** full stabilizers need not be computed.  One distinguishing
+  power per target point suffices, and unequal exact periods produce it.
+- **Settled:** the cyclic arithmetic is not the obstruction.  The gcd formula
+  is kernel-checked, and the executable suite covers the named stabilization
+  indices and all charges through period 65.
+- **Settled:** an unmarked Mori interpretation cannot exclude period three.
+  The quadric-threefold and Type-II transition examples carry cubic local
+  monodromy without producing the required projective-bundle carrier.
+- **Open:** construct an occurrence-wise comparison from the C924 marked
+  finite étale QDM index scheme to labelled nearby-cycle branches over the
+  actual transported trait, equivariant for one named loop.
+- **Open:** prove that this comparison is exhaustive and coherent through
+  every blow-up, inverse, and reindexing in the chosen factorization.
+- **Open:** exclude exact period \(m+1\) on the marked correction branches.
+  Chuang's exponent formula makes this finite once the two preceding adapters
+  exist, but it does not supply the marker-specific exclusion.
+
+An exponent multiset is not a substitute for the labelled branch action:
+three fixed eigenlines and one regular three-cycle can have the same character
+spectrum while their point stabilizers differ.  Any successor certificate
+must therefore retain the primitive branch labels or prove a theorem that
+recovers them.
