@@ -6,6 +6,8 @@
 
 [**Open the paper (PDF) →**](irrationality_after_one_stabilization.pdf)
 
+[**Reviewer guide →**](REVIEWER_GUIDE.md)
+
 **Title:** *Irrationality of cubic threefolds after one stabilization.*
 
 For every smooth complex cubic threefold `X`, the paper proves that
