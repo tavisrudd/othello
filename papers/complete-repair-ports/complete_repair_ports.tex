@@ -48,15 +48,21 @@ identify the persistent pointed obstruction.  Below that threshold, any
 represented bounded port occurs on a positive-density coordinate class in an
 asymptotically good fixed-alphabet family.
 
-This transfer yields a matched asymptotic separation.  Two explicit
-$[7,4,3]_7$ inner codes have the same pointed rank-triple multiplicity
-enumerator (equivalently, the same full pointed-perspective polynomial) but
-radius-three reliabilities $2s^3-s^6$ and $2s^3-s^5$.  Using one common outer
-family gives two asymptotically good code families with identical length and
-dimension formulas, the same distance bound, and designated target classes
-of density $1/7$ carrying those distinct ports.  Thus full pointed-Tutte data
-at the seed does not control bounded stochastic behavior after
-positive-density realization.
+This transfer yields a matched asymptotic separation.  Over one finite field,
+two represented $[10,4,6]$ inner codes have the same pointed rank-triple
+multiplicity enumerator, five minimum repairs, locality three, availability
+two, transversal number two, a unique minimum blocker, and the same helper
+degree multiset.  Nevertheless their radius-three reliabilities are
+
+\[
+ 5s^3-7s^5-s^6+5s^7-s^9
+ \quad\hbox{and}\quad
+ 5s^3-7s^5-2s^6+8s^7-3s^8.
+\]
+One common outer family preserves matched global parameter bounds and places
+these ports on target classes of density $1/10$.  Thus even pointed-Tutte data
+and the availability and blocker statistics do not control bounded
+stochastic behavior after positive-density realization.
 
 We also prove deletion--contraction and pivotal identities, a bounded BEC EXIT
 hierarchy whose differences recover the cheapest available repair radius,
@@ -103,12 +109,13 @@ an asymptotically good outer family therefore realizes the prescribed port on
 a coordinate class of density \(1/|E|\) in an asymptotically good
 fixed-alphabet family.
 
-Moreover, there are two represented \([7,4,3]_7\) inner codes with the same
-pointed rank-triple multiplicity enumerator, locality three, and two minimum
-repairs, for which one common outer family gives matched length and dimension
-formulas and the same distance lower bound, while density-\(1/7\) target
-classes retain the distinct radius-three reliability laws
-\(2s^3-s^6\) and \(2s^3-s^5\).
+Moreover, over one finite field there are two represented \([10,4,6]\) inner
+codes with the same pointed rank-triple multiplicity enumerator, locality
+three, five minimum repairs, matching number two, transversal number two, a
+unique minimum blocker, and the same helper degree multiset.  For one common
+outer family, matched length and dimension formulas and the same distance
+lower bound coexist with density-\(1/10\) target classes carrying the two
+distinct reliability laws displayed in the abstract.
 \end{theorem}
 
 The first paragraph is the exact confinement criterion of
@@ -138,16 +145,16 @@ core of $k-1$ helpers and distinct private coordinates, producing a basis of
 $C^\perp$.  Thus the coefficient layer retains represented information that
 support-only locality discards.
 
-Our main separation shows that this distinction survives asymptotically.
-Two represented sparse-paving seeds have identical pointed rank-triple
-multiplicity enumerators,
-but the two target circuit-hyperplanes are disjoint off the target in one
-seed and meet in one helper in the other.  Exact transfer by a common outer
-family copies these radius-three ports onto coordinate classes of density
-$1/7$, preserving matched global parameter bounds while giving different
-reliability and bounded-EXIT curves.  This is a structural consequence of
-the circuit intersections; the finite matrix check only certifies the two
-representations.
+Our main separation shows that this distinction survives asymptotically even
+after matching the usual local overlap statistics.  Two represented
+sparse-paving seeds have identical pointed rank-triple multiplicity
+enumerators, repair count, locality, matching and transversal numbers,
+minimum-blocker count, and helper degree multiset.  Their higher-order circuit
+intersections still give different reliability and bounded-EXIT curves.
+Exact transfer by a common outer family copies these ports onto coordinate
+classes of density $1/10$ while preserving matched global parameter bounds.
+The seed representations come from a quotient-plane line arrangement followed
+by a generic lift, so the separation has a structural human proof.
 
 Figure~\ref{fig:transfer-spine} gives the proof spine in one view.  The exact
 transfer theorem concerns the first two port layers; reliability is then

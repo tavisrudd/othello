@@ -8,7 +8,7 @@
 
 **Title:** *Complete Bounded Repair Ports: Transfer, Reliability, and Geometric Structure*
 
-This 22-page paper introduces a local invariant of a represented linear code.
+This 23-page paper introduces a local invariant of a represented linear code.
 Fix a coordinate and a helper budget. Its **complete bounded repair port**
 records every dual recovery equation within that budget—not just the permitted
 helper sets, but also the normalized scalar coefficients and the resulting
@@ -20,19 +20,24 @@ can be reproduced on a positive-density coordinate class in an asymptotically
 good fixed-alphabet family. The obstruction is sharp in the stated
 fixed-inner, linear-concatenation setting.
 
-The principal example shows why the bounded port contains information that
-standard unfiltered rank data misses. Two explicit `[7,4,3]₇` inner codes have
-the same pointed rank-triple multiplicity enumerator (equivalently, the same
-full pointed-perspective polynomial), but their radius-three reliability laws
-are
+The principal separation shows why the bounded port contains information that
+standard unfiltered rank data and coarse local statistics miss. Over one
+finite field, two represented `[10,4,6]` inner codes have the same pointed
+rank-triple multiplicity enumerator, five minimum repairs, locality three,
+matching number two, transversal number two, a unique minimum blocker, and the
+same helper-degree multiset. Their radius-three reliability laws are nonetheless
 
 ```text
-2s³ − s⁶    and    2s³ − s⁵.
+5s³ − 7s⁵ − s⁶ + 5s⁷ − s⁹
+5s³ − 7s⁵ − 2s⁶ + 8s⁷ − 3s⁸.
 ```
 
 Using the same outer family produces asymptotically good code families with
 matched length and dimension formulas, the same distance lower bound, and
-density-`1/7` target classes retaining these distinct local laws.
+density-`1/10` target classes retaining these distinct local laws. The seed
+representations have a structural proof: realize two five-line incidence
+patterns in a quotient plane, then choose a generic lift into projective
+three-space and specialize to one finite prime field.
 
 ## Other results
 
@@ -53,8 +58,11 @@ density-`1/7` target classes retaining these distinct local laws.
 The introduction states the complete theorem chain and Figure 1 gives its
 logical spine. Readers interested primarily in the asymptotic separation can
 then read the definitions in Section 2, the transfer and realization theorems
-in Sections 3–4, and the field-seven construction in Section 6. The geometric
-applications in Section 7 are independent demonstrations of the framework.
+in Sections 3–4, and the sparse-paving constructions in Section 6. The
+field-seven matrices give the smallest explicit filtration counterexample;
+the five-line quotient construction gives the stronger availability- and
+blocker-matched theorem. The geometric applications in Section 7 are
+independent demonstrations of the framework.
 
 ## For referees
 
@@ -66,34 +74,35 @@ The shortest route through the central argument is:
 2. **Sharp eventual boundary:** Theorem 4.1 proves that the persistent
    zero-functional obstruction is necessary and sufficient for eventual
    bounded confinement in the stated setting.
-3. **Finite separation:** Lemma 6.3 and Proposition 6.4 use sparse-paving
-   structure and two displayed matrices over `F₇`. Appendix A.1 prints every
-   four-column determinant needed to check the representations.
-4. **Asymptotic synthesis:** Theorem 6.5 applies one common outer family to
-   both seeds, giving the matched global formulas, density-`1/7` target
-   classes, and distinct reliability laws.
-
-The two seeds match the pointed rank-triple multiplicity enumerator, locality,
-and the number of minimum repairs. They **do not** match disjoint availability:
-the values are two and one. This limitation is stated in Theorem 6.5 and is not
-hidden by the asymptotic transfer.
+3. **Small explicit boundary:** Lemma 6.3 and Proposition 6.4 use
+   sparse-paving structure and two displayed matrices over `F₇`. Appendix A.1
+   prints every four-column determinant needed to check those representations.
+4. **Matched structural seeds:** Theorem 6.5 displays two five-edge clutters,
+   checks their matching, transversal, blocker, degree, and reliability data,
+   and represents them by a quotient-plane line arrangement and generic lift.
+5. **Asymptotic synthesis:** The same theorem applies one common outer family,
+   giving matched global formulas, density-`1/10` target classes, and distinct
+   reliability laws.
 
 The manuscript contains full written proofs of the promoted theorem chain.
 Lean checks the general transfer, parameter, reliability, and bounded-EXIT
-components; it does not package every concrete field-seven and asymptotic
-specialization into one theorem. The field-seven matrix facts are proved from
-the printed determinant ledger and independently checked by
-`verification/f7-seed.py`. Random-linear outer-family existence is an
-explicit classical input.
+components; it does not package the structural seed construction and
+asymptotic specialization into one theorem. The five-line seed construction
+and generic finite-field specialization are proved in the manuscript. The
+smaller field-seven matrix facts used by Proposition 6.4 are proved from the
+printed determinant ledger and independently checked by
+`verification/f7-seed.py`. Random-linear outer-family existence is an explicit
+classical input.
 
 ## Proof and evidence boundary
 
 The reconstruction, transfer, prescribed-port, reliability, and bounded-EXIT
 chains have Lean 4 support. The matched asymptotic theorem is a written
-synthesis of kernel-checked general components, a complete human proof of the
-two finite representations, an independently replayable finite calculation,
-and a classical outer-family existence theorem. The manuscript labels these
-roles separately.
+synthesis of kernel-checked general components, a complete structural human
+proof of the two represented seeds and their local invariants, and a classical
+outer-family existence theorem. The independent field-seven replay checks the
+separate small counterexample and carries no logical weight for the stronger
+matched theorem. The manuscript labels these roles separately.
 
 The scalar repair protocol downloads one complete base-field symbol from each
 contacted helper. It does not claim minimum subsymbol access, optimal repair

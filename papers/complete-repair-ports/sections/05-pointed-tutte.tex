@@ -197,64 +197,109 @@ Inclusion--exclusion under homogeneous survival consequently gives
 The pointed polynomials agree while the filtered curves do not.
 \end{proof}
 
-\begin{theorem}[Matched asymptotic bounded-port separation]
+\begin{theorem}[Availability- and blocker-matched asymptotic separation]
 \label{thm:asymptotic-separation}
-There are two asymptotically good fixed-alphabet linear-code families
-$C_N^{\rm dis},C_N^{\rm ov}$ over $\F_7$ with the following properties.
-For every $N$ the families have the same length and dimension, and they have
-the same proved lower bound on minimum distance.  Each family has a
-designated coordinate class of density exactly $1/7$.  At every target in
-that class, for all sufficiently large $N$, the radius-three repair port is
-a copy of the corresponding port in
-Proposition~\ref{prop:filtration-boundary}.  In particular,
+Over a finite prime field $\F_q$ there are two represented $[10,4,6]_q$
+inner codes whose distinguished radius-three ports have the same pointed
+rank-triple multiplicity enumerator, five minimum repairs, locality three,
+matching number two, transversal number two, exactly one minimum blocker, and
+helper degree multiset
 \[
- R_{\rm dis}^{(\leq3)}(s)=2s^3-s^6,\qquad
- R_{\rm ov}^{(\leq3)}(s)=2s^3-s^5.
+ (1,1,1,1,2,2,2,2,3).
 \]
-The two seed ports have the same pointed rank-triple multiplicity enumerator,
-locality three, and two minimum repairs.  Their availability is not matched:
-it is two for the disjoint seed and one for the overlapping seed.
+Their homogeneous reliability polynomials are nevertheless
+\[
+ R_{\mathcal A}^{(\leq3)}(s)=5s^3-7s^5-s^6+5s^7-s^9,
+ \qquad
+ R_{\mathcal B}^{(\leq3)}(s)=5s^3-7s^5-2s^6+8s^7-3s^8.
+\]
+Using one common outer family gives two asymptotically good fixed-alphabet
+families with the same length and dimension formulas, the same proved distance
+lower bound, and designated target classes of density exactly $1/10$ carrying
+these distinct ports.
 \end{theorem}
 
 \begin{proof}
-Let $I_{\rm dis}$ and $I_{\rm ov}$ be the row-span codes of the two displayed
-matrices.  Both have parameters $[7,4,3]_7$.  Indeed, their rank is four.
-A listed circuit-hyperplane supplies a hyperplane containing four columns,
-so the primal distance is at most three; no five columns have rank at most
-three, so it is exactly three.  Every triple is independent and a dependent
-four-set exists, hence
+On helpers $H=\{0,\ldots,8\}$ consider the two $3$-uniform linear clutters
 \[
- d(I_{\rm dis}^{\perp})=d(I_{\rm ov}^{\perp})=4.
+\begin{split}
+ \mathcal A&=\{158,026,045,013,478\},\\
+ \mathcal B&=\{168,237,078,015,124\}.
+\end{split}
 \]
-In each seed a listed circuit-hyperplane through $0$ supplies a weight-four
-dual word through the target.  Therefore the zero-functional pointed fiber
-cost is both at least and at most four, and
-\[
- z_0(I_{\rm dis})=z_0(I_{\rm ov})=4+4=8.
-\]
-The radius-three transfer gate is consequently $3+1<8$ for both seeds.
+Here $158$ denotes $\{1,5,8\}$.  Their helper degrees have the displayed
+common multiset.  The pairs $\{0,8\}$ and $\{1,7\}$ are respectively their
+unique minimum transversals.  Each clutter contains two disjoint edges, while
+a three-edge matching is impossible because every edge meets its two-point
+transversal.  Hence both have matching and transversal numbers two and one
+minimum blocker.
 
-Put $L=\F_{7^4}$ and choose one asymptotically good $L$-linear outer family
-$O_N\leq L^N$ whose dual distance tends to infinity; the standard random
-linear-code argument quoted after Corollary~\ref{cor:mds-fingerprints}
-supplies such a family with both primal and dual relative distances positive.
-Use the two inner encoders with this same $O_N$.  If $O_N$ has dimension
-$K_N$ and distance $D_N$, Proposition~\ref{prop:concat-parameters} gives,
-for both concatenations,
+Their different higher intersections are visible without a search.  For each
+$k$, the table records the number of $k$-edge subfamilies by union size:
 \[
- n_N=7N,\qquad k_N=4K_N,\qquad d_N\geq3D_N.
+\begin{array}{c|c|c}
+k&\mathcal A&\mathcal B\\ \hline
+1&5u^3&5u^3\\
+2&7u^5+3u^6&7u^5+3u^6\\
+3&2u^6+6u^7+2u^8&u^6+8u^7+u^8\\
+4&u^7+2u^8+2u^9&4u^8+u^9\\
+5&u^9&u^9
+\end{array}
 \]
-Thus their global formulas and asymptotic bounds agree.
+Alternating these rows is inclusion--exclusion for the union of the five
+edge-containment events and gives the two stated reliability polynomials.
 
-Since $d(O_N^\perp)\to\infty$, Theorem~\ref{thm:prescribed} applies
-simultaneously to the two fixed inner codes.  For every sufficiently large
-$N$ and every block $j$, it identifies the complete radius-three support and
-coefficient ports at $(j,0)$ with the corresponding seed ports.  These $N$
-targets among $7N$ coordinates have density exactly $1/7$.  Literal port
-equality preserves the two reliability polynomials computed in
-Proposition~\ref{prop:filtration-boundary}.  The same proposition and
-Lemma~\ref{lem:sparse-paving-profile} give the assertions about the seed
-profiles, locality, repair count, and the unmatched matching numbers.
+It remains to represent both clutters, and this is a generic geometric
+construction.  Work first over an infinite field.  For $\mathcal A$, choose
+five lines $\ell_1,\ldots,\ell_5$ in a projective plane with
+$\ell_2,\ell_3,\ell_4$ concurrent and otherwise in general position.  Label
+their displayed intersections by
+\[
+ 0=\ell_2\cap\ell_3\cap\ell_4,\quad
+ 1=\ell_1\cap\ell_4,\quad 4=\ell_3\cap\ell_5,\quad
+ 5=\ell_1\cap\ell_3,\quad 8=\ell_1\cap\ell_5,
+\]
+and choose $2,6$ generically on $\ell_2$, $3$ on $\ell_4$, and $7$ on
+$\ell_5$.  For $\mathcal B$, make $\ell_1,\ell_4,\ell_5$ concurrent at
+$1$, put
+\[
+ 8=\ell_1\cap\ell_3,\quad 7=\ell_2\cap\ell_3,\quad
+ 0=\ell_3\cap\ell_4,\quad 2=\ell_2\cap\ell_5,
+\]
+and choose $6,3,5,4$ generically on $\ell_1,\ell_2,\ell_4,\ell_5$.
+The choices can avoid the finitely many unwanted joining lines, so the listed
+edges are exactly the collinear triples in each configuration.
+
+Choose representatives $p_i\in K^3$ of either plane configuration and put
+$x=(1,0,0,0)$.  Lift helper $i$ to $h_i=(t_i,p_i)\in K^4$.  Dependence of
+the three lifts above any listed line is one proper linear condition on the
+$t_i$, and dependence of any four helper lifts is also one proper linear
+condition, because every four quotient points span $K^3$.  Avoiding this
+finite union of hyperplanes makes every helper triple and quadruple
+independent.  The dependent four-sets containing $x$ are then exactly
+$\{x\}\cup A$ with $A\in\mathcal A$ or $A\in\mathcal B$.  Performing the
+construction over the rationals and reducing modulo one prime avoiding the
+finitely many nonzero determinants gives both representations over one finite
+prime field $\F_q$.
+
+Each resulting column matroid is rank-four sparse paving on ten elements,
+with five circuit-hyperplanes through $x$ and none avoiding it.  Thus the two
+pointed rank-triple multiplicity enumerators agree by
+Lemma~\ref{lem:sparse-paving-profile}.  A hyperplane contains at most four
+columns and a displayed circuit-hyperplane contains four, so both row-span
+codes have parameters $[10,4,6]_q$.  Their dual distance is four, and a
+displayed target circuit shows $\mu_x(0)=4$; hence $z_x=8$ for both seeds.
+
+Put $L=\F_{q^4}$ and choose one asymptotically good $L$-linear outer family
+$O_N\leq L^N$ with dual distance tending to infinity.  If its dimension and
+distance are $K_N,D_N$, the two concatenations have
+\[
+ n_N=10N,\qquad k_N=4K_N,\qquad d_N\geq6D_N.
+\]
+Since $3+1<8$, Theorem~\ref{thm:prescribed} eventually copies both complete
+radius-three support and coefficient ports at every designated block target.
+Those $N$ targets have density $1/10$, and literal port equality preserves all
+the matched clutter invariants and the two distinct reliability laws.
 \end{proof}
 
 \begin{corollary}[Synthesis under exact port transfer]
