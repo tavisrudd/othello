@@ -415,3 +415,38 @@ consumer.  It is a search for a stable invariant that remains nonzero on the
 special universally-\(\mathrm{CH}_0\)-trivial cubics.  Any candidate must pass
 the conic-bundle stable-rational example, the Fano-surface centre, the
 \(B\times F_1\) correction, and the signed-versus-effective countermodel.
+
+## Mystery ledger
+
+Settled by the indirect and referee passes:
+
+* the very-general theorem has the all-stabilizations quantifier; no
+  monotonicity extrapolation is needed there;
+* the finite \(R_{10}\) row-span statement is independently reproduced and
+  checked in Lean, with its native-decision trust route disclosed;
+* the Beauville--Colliot-Thélène--Sansuc--Swinnerton-Dyer mechanism is stable
+  birational/permutation-lattice geometry, not pure-transcendental
+  trivialization of a nontrivial torsor;
+* the Shepherd-Barron level-two improvement and the corrected Ze Xu
+  Chern-character calculation are now separately sourced;
+* ordinary Hodge, intermediate-Jacobian, motive, category, and unramified
+  ledgers fail for a common reason: allowable higher-dimensional centres can
+  carry their payload.
+
+Open evidence gaps:
+
+1. `R10AlbaneseParity` checks only the exceptional \(R_{10}\) finite
+   calculation.  Propositions 7.5--7.6 also use the \(K_{3,3}\) and \(K_5\)
+   computations.  The source supplies them; separate Lean certificates would
+   complete the machine replay of the finite rank-check layer.
+2. Lean does not formalize the degeneration to regular matroids, monodromy,
+   the regular-matroid structure theorem, specialization, Voisin's diagonal
+   criterion, or the EGFS theta-class deduction.
+3. The generic `StableWitness` consumer does not encode an integral supported
+   diagonal.  A geometric instantiation must define a coefficient- and
+   support-indexed witness before the global implication becomes a formal
+   cubic theorem.
+4. No audited stable invariant is known to stay nonzero on the special smooth
+   cubics that are universally \(\mathrm{CH}_0\)-trivial.  This is the exact
+   every-smooth global obstruction; absent such an invariant, the live C925
+   frontier remains the row-free occurrence-wise loop-stabilizer theorem.
