@@ -2,6 +2,9 @@
   "schema": "cubic-stabilization-lean-claims-v6",
   "reviewer_module": "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.PaperInterface",
   "reviewer_modules": [
+    "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.PaperInterface.Main",
+    "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.PaperInterface.SixAxisCubicPencil",
+    "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.PaperInterface.CubicFramedMonodromy",
     "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.PaperInterface.Introduction",
     "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.PaperInterface.Envelope",
     "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.PaperInterface.MinimalClass",

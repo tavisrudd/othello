@@ -1,3 +1,6 @@
+import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.PaperInterface.Main
+import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.PaperInterface.SixAxisCubicPencil
+import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.PaperInterface.CubicFramedMonodromy
 import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.PaperInterface.Introduction
 import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.PaperInterface.Envelope
 import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.PaperInterface.MinimalClass
@@ -9,7 +12,10 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.PaperInterface.FormalConn
 import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.PaperInterface.ResiduePairing
 
 /-!
-# Reviewer interface for the cubic-stabilization companion
+# Reviewer interfaces for cubic stabilization at m = 1
 
-This module exports the section-level reviewer facades as one public entry point.
+This aggregate exports three named public entry points: `Main` for
+*Irrationality of Cubic Threefolds after One Stabilization*;
+`SixAxisCubicPencil` for the integral-divisor-products companion; and
+`CubicFramedMonodromy` for the framed-monodromy companion.
 -/

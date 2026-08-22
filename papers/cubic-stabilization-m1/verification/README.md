@@ -132,11 +132,14 @@ applications, the six-axis companion, and the framed-monodromy companion.  A
 statement carrying no edge has none
 recorded rather than none used, and the same holds of an imported source.
 
-The claim inventory declares both the public `PaperInterface` aggregator and
-the semantic reviewer modules it exports.  The checker resolves every declared
-module inside the package, requires the aggregator to import each one, and
-computes terminal and signature coverage across their union.  This keeps the
-section-level source split from weakening the exact terminal census.
+The claim inventory declares the public `PaperInterface` aggregate, three
+manuscript-specific entries—`PaperInterface.Main`,
+`PaperInterface.SixAxisCubicPencil`, and
+`PaperInterface.CubicFramedMonodromy`—and the semantic reviewer facades below
+them.  The checker resolves every declared module inside the package, requires
+the aggregate to import each one, and computes terminal and signature coverage
+across their union.  This keeps the manuscript split visible without weakening
+the exact terminal census.
 
 Checked coverage snapshot: 57 claims; 5 absent; 24 fragmentary; 27 conditional;
 1 complete; 317 reviewer terminals, of which 83 are machinery serving no current

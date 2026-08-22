@@ -8,14 +8,19 @@ entry point is
 TavisRuddFiniteGeom.Papers.CubicStabilizationM1.PaperInterface
 ```
 
-That module is a thin aggregator.  The declarations themselves remain grouped
-in semantic reviewer facades matching the three logical strands:
-`Introduction`, `Envelope`, `MinimalClass`, `CategoricalOneStep`,
-`FramedMonodromy`, and `Synthesis` under `PaperInterface/`.  Reusable audited
-terminals on which no manuscript claim currently rests live separately in
-the `PaperInterface/CoefficientTowers.lean`,
-`PaperInterface/FormalConnections.lean`, and
-`PaperInterface/ResiduePairing.lean` machinery facades.
+That module is a thin aggregate of three manuscript-specific public entry
+points:
+
+```text
+TavisRuddFiniteGeom.Papers.CubicStabilizationM1.PaperInterface.Main
+TavisRuddFiniteGeom.Papers.CubicStabilizationM1.PaperInterface.SixAxisCubicPencil
+TavisRuddFiniteGeom.Papers.CubicStabilizationM1.PaperInterface.CubicFramedMonodromy
+```
+
+They correspond respectively to the primary one-stabilization paper, the
+integral-divisor-products companion, and the framed-monodromy companion.
+Reusable audited terminals remain grouped below these entries in semantic
+reviewer and machinery facades.
 
 and its axiom audit is
 
