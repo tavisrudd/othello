@@ -78,6 +78,13 @@ Completed preparation:
 
 **Discovery companion**: [complete-ports discovery track](../complete-ports-discovery-track.md).
 
+Queued strengthening:
+
+- [C939 unified asymptotic separation revision](../2026-08-21-c939-complete-ports-unified-asymptotic-separation.md)
+  owns the referee-recommended lift of Proposition 6.3 and the downstream
+  seed-to-transfer-to-stochastic-consequence reorganization.  Its theorem gate
+  precedes any manuscript restructuring.
+
 ## Publication boundary
 
 Every paper is a fresh-history allowlisted export. Never publish, fork, history-filter, or broadly
