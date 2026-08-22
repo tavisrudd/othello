@@ -66,6 +66,7 @@ No manuscript or Lean source is part of this packet.
 | 59 | exact adjacent-window intersections and moving-complement defects for all unit pilots | notes/2026-08-20-c925-unit-window-intersection-enumeration.md |
 | 60 | provenance-tagged crossed edge and upper-triangular lens law | notes/2026-08-20-c925-crossed-edge-provenance-lens.md |
 | 61 | adapted integral splitting and diagonal coefficient trait | notes/2026-08-20-c925-diagonal-coefficient-trait.md |
+| global | stable-rationality predictions, classical benchmark, and Lean consumer | notes/2026-08-22-c925-indirect-rationality-predictions.md |
 | frontier | open experiments and provider targets | notes/2026-08-20-c925-exploration-frontier.md |
 
 ## Dependency spine

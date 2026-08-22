@@ -10,7 +10,9 @@ row-free gate is a pathwise loop action for which no opposite correction
 idempotent has the source branch's stabilizer, together with a coherent
 equivariant stable ledger.  The
 projective endpoint and generic-bulk persistence are closed; the unconditional
-theorem is not landed; no manuscript edits
+every-smooth theorem is not landed.  Independently, Voisin plus the 2025
+Engel--de Gaay Fortman--Schreieder parity theorem gives an all-\(m\) proof for
+a very general cubic; no manuscript edits
 
 ## Goal
 
@@ -90,6 +92,8 @@ geometric providers.
   notes/2026-08-21-c925-pointed-row-calibration.md
 - no-Stokes external-source dossier and exact provider boundaries:
   notes/2026-08-21-c925-no-stokes-source-dossier.md
+- indirect stable-rationality predictions and the very-general benchmark:
+  notes/2026-08-22-c925-indirect-rationality-predictions.md
 
 The packet index owns the module-to-file map.  Do not append another large
 module to this card or to the index; add one focused companion file and one
@@ -118,6 +122,14 @@ index row.
   semantic endpoint identifications produce the intrinsic path edge.
   `CoprimeFactorProjector` constructs and transports the marked projector from
   explicit coprime factors, Bezout coefficients, and product annihilation.
+- `StableRationalityConsequences` exposes the pre-factorization proof layer.
+  A hypothetical stabilized birational parametrization forces the rational
+  value of any explicitly supplied stable invariant, or transports a
+  projective-space witness after an explicitly supplied projective-factor
+  cancellation theorem.  Rational stabilization indices form an upper set.
+  The module also rejects cancellation by a bare nonzero multiplicity over
+  `ZMod (m+1)` at \(m=1,2,3,4,13\), and rejects the upgrade from a signed
+  algebraic class to an effective class.
 - The modular \(m=1\) proof is sound from its stated Iritani,
   Iritani--Koto, and weak-factorization inputs.
 - Guéré/BFGMP and KKPYY are lawful split specializations at the algebraic
@@ -721,11 +733,25 @@ any geometric or QDM provider.
    degree-three Type-II transition has local exponents \(1/3,2/3\), so even
    genuine threefold extremal-transition geometry can carry exact order-three
    monodromy before the C924 marker is imposed.
+5. Keep the global stable-rationality route as an independent benchmark.
+   Voisin's JEMS Corollary 4.4 converts a hypothetical
+   \(B\times\mathbf P^m\dashrightarrow\mathbf P^{m+3}\) into algebraicity of
+   \(\theta^4/4!\) on \(J(B)\).  Engel--de Gaay Fortman--Schreieder
+   arXiv:2507.15704v3, Theorem 1.3, proves that every curve class is an even
+   multiple of the minimal class for a very general cubic, so their
+   Corollary 1.4 closes every stabilization index in that quantifier domain.
+   This 2025 source is a preprint.  Its finite \(K_{3,3}\), \(K_5\), and
+   \(R_{10}\) rank calculations are candidates for an independent Lean
+   certificate; its degeneration and monodromy arguments remain external.
+   Voisin's Theorem 4.5 gives nonempty special loci with universally trivial
+   \(\mathrm{CH}_0\), so this route cannot prove the every-smooth statement.
 
 ## Retired provider specifications
 
 The items below retain exact hypotheses and falsifiers for alternate routes;
-they are not the work queue.  Items 1--3 above are the live frontier.
+they are not the work queue.  Item 3 above is the live every-smooth frontier;
+items 4 and 5 are, respectively, a source-search fallback and an independent
+very-general benchmark.
 
 5. Keep generic even-bulk persistence green under its stated QDM hypotheses.
    `rankTwoCluster_nilpotent_persists_on_formal_germ` proves from compressed

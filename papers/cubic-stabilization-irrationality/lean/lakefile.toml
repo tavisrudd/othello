@@ -52,6 +52,7 @@ roots = [
   "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.HorizontalReader",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.TraitHorizontalReader",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.ProvenanceEdge",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.StableRationalityConsequences",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.PaperInterface",
 ]
 

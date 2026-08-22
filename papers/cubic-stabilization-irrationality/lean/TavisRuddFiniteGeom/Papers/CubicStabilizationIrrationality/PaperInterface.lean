@@ -41,6 +41,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.Two
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.HorizontalReader
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.TraitHorizontalReader
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.ProvenanceEdge
+import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.StableRationalityConsequences
 
 /-!
 # Reviewer interface for the cubic-stabilization irrationality paper

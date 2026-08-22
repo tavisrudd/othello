@@ -128,6 +128,18 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   `../2026-08-20-c930-second-referee-pass.md`. Card:
   `../cubic-threefolds-tasks/c930-categorical-direct-qdm-paper-preparation.md`.
 - **C925 — no-Stokes row-visible-projector proof, all stabilizations.**
+  A separate global audit now gives an unconditional all-stabilizations
+  implication for a very general cubic: stable rationality forces an integral
+  diagonal decomposition and algebraicity of the minimal theta class by
+  Voisin, while Engel--de Gaay Fortman--Schreieder
+  arXiv:2507.15704v3 prove the required parity obstruction.  Their 2025 result
+  is a preprint and does not cover every smooth cubic.  Voisin's special
+  universally-\(\mathrm{CH}_0\)-trivial loci are mandatory red cases for the
+  every-smooth proof.  The focused report is
+  `../2026-08-22-c925-indirect-rationality-predictions.md`; Lean's
+  `StableRationalityConsequences` module checks the global invariant/witness
+  consumers, stabilization monotonicity, and the cancellation and
+  signed-versus-effective falsifiers.
   **Live conditional result:** on every blowup edge, an intrinsic marked-projector square
   and a unit-scaled algebraic row square imply that row-visible marked support
   is identical on the blowup and ambient factors, regardless of marked
