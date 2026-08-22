@@ -107,6 +107,15 @@ Every relative file link in the guide resolves, including the public Lean entry
 point, both formal-inventory files, both verification READMEs, the imported
 source registry, and the two manuscript sections named in the reading route.
 
+## Mystery ledger
+
+The closeout pass found no unexplained mathematical feature or unverified guide
+claim. One editorial ambiguity remains: the repository does not define “strict
+fragment” as a coverage category, so the reader cannot tell whether “strict” is
+intentional terminology or merely means “proper, non-complete fragment.” The
+evidence gap is only authorial intent; the underlying count and coverage data
+are settled by the manuscript annotations and `claims.json`.
+
 ## Prose verdict
 
 PASS. The revision reads as natural referee orientation rather than generated
