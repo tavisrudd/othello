@@ -32,7 +32,7 @@ warning.  The source and PDF hashes at this accepted checkpoint are:
 | file | bytes | SHA-256 |
 |---|---:|---|
 | `conference_cut_spectra.tex` | 54,334 | `e9f5a404df0fe668605030841df505282d71fd0ed77306bfe031aa12f5b84f5c` |
-| `conference_cut_spectra.pdf` | 146,224 | `ccd4d83874ded1daf74fae5cebc379953defe9e6d6950176ab85038b702469dd` |
+| `conference_cut_spectra.pdf` | 146,796 | `f95bd29aa7216630ebd10fdfc900f40c49607dc5dfad6870174ce3d65b9633e1` |
 
 Rebuild and verify from this directory with:
 
