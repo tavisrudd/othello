@@ -1,6 +1,6 @@
 {
   "schema": "clebsch-factorization-evidence-fingerprint-v2",
-  "python": "3.14.6",
+  "python": "3.13.12",
   "lean_toolchain": "leanprover/lean4:v4.32.0-rc1",
   "mathlib_revision": "571b8a8e54219b4d393f75f4b8653fac08197fcc",
   "environment_sha256": {
@@ -19,7 +19,7 @@
     "paper_flake_nix": "9717287b35144a3e671f9b380b6bbaf4c8ec8da9561f5b2cc41fb2d51948c858",
     "paper_flake_lock": "9ae203c10f2e27ff1a11363a02ac43747d9766f8f17c975b5d825ed480d120cc",
     "paper_readme": "c8656a079c6edc83320d4df92e158a4efc16895aac61501f99aeac91fbe093b7",
-    "verification_readme": "19480e81645705a499b51f3b2aa15123bcf8176dca320d74fb3394f48ac1b95b",
+    "verification_readme": "5a51cf754c41a910afd4ca6870ec6b00ed3c6ffea58aca2fc39274616d8338ef",
     "evidence_manifest_tool": "1ac363dbb652fe7a605fb41e7333318fff5133a35ef7efe41dd2eeb93a528ca5",
     "lean_gates": {
       "ClebschArithmeticGluing.lean": "0af02636b81d5003028764dc87ac58f125823329bcbb80f2257c4a03d619a9ca",

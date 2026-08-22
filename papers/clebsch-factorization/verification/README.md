@@ -1,7 +1,7 @@
 # Verification of the conic matching quotient paper
 
-This directory is the aggregate verification surface for *Quadratic trade
-rigidity and cubic orientation in conic matching quotients*. It
+This directory is the aggregate verification surface for *Quadratic Trade
+Rigidity and Cubic Orientation in Conic Matching Quotients*. It
 separates four kinds of support:
 
 - proofs given in the manuscript;

@@ -9,8 +9,8 @@ Conference Matrices: Squared-Spectrum Rigidity and Hermitian Holonomy*. The shar
 progression is expository: this paper is logically independent of the other
 portfolio papers.
 
-The five numbered papers are: I, this rigidity paper; II, *Quadratic trade
-rigidity and cubic orientation in conic matching quotients*; III, *Hitchin's
+The five numbered papers are: I, this rigidity paper; II, *Quadratic Trade
+Rigidity and Cubic Orientation in Conic Matching Quotients*; III, *Hitchin's
 Icosahedral Incidence Double Cover and Operator Realizations of the Clebsch
 Cubic*; IV, *Reconstructing
 PG(2,13), its conic, and polarity from the minimum words of a binary conic
