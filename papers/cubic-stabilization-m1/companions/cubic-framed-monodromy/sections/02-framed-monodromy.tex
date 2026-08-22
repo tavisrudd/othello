@@ -1,13 +1,13 @@
 \section{Framed formal monodromy: a conditional refinement}
 \label{sec:framed-monodromy}
 
-Section~\ref{sec:atomic-one-step} proved the occurrence-indexed marker-ledger
-theorem and applied its rank-two formal-exponent fold.  We now keep the ledger
+The direct-QDM paper \cite{RuddM1} proves an occurrence-indexed marker-ledger
+theorem and applies its rank-two formal-exponent fold.  We keep that ledger
 construction and target monoid \(A=\mathbf N\) fixed, refine the block type by
 a marked small section and loop framing, and replace the fold by
-primitive-sixth framed formal-monodromy multiplicity.  The argument is
-therefore a second specialization of Theorem~\ref{thm:marker-ledger}, not a
-parallel weak-factorization proof.
+primitive-sixth framed formal-monodromy multiplicity.  The argument is a
+second specialization of the same marker theorem, not a parallel
+weak-factorization proof.
 
 The Iritani and Iritani--Koto comparison isomorphisms preserve the original
 loop framing after coefficient-field extension.  The string and divisor
@@ -16,28 +16,28 @@ whose Novikov character descends to the coefficient ring.  The additional
 inputs needed to make the operation formulas compatible with this finer fold
 are a residual reconstruction-tail displacement and a logically separate
 specialization step in the divisor-tagging argument.  These are
-Hypotheses~5.7R and~5.7T.
+Hypotheses~R and~T.
 
-The framed conclusion is logically subordinate to
-Theorem~\ref{thm:every-cubic}.  Definition~\ref{def:framed-sixth-multiplicity},
+The framed conclusion is logically subordinate to the unconditional theorem
+of \cite{RuddM1}.  Definition~\ref{def:framed-sixth-multiplicity},
 the cubic computation, and the product-with-projective-space formula below
 are unconditional.  The projective-bundle and blowup operation formulas
-use Hypothesis~5.7R.  We prove specialized low-dimensional vanishing
-directly, without Hypothesis~5.7T, for nef-canonical targets, for
+use Hypothesis~R.  We prove specialized low-dimensional vanishing
+directly, without Hypothesis~T, for nef-canonical targets, for
 \(\PP^1\) and \(\PP^2\), for every rational geometrically ruled surface---for
 \(F_1\) on specializations that are graded-monomial in the sense of
 Definition~\ref{def:monomial-specialization}, as every center specialization
-is---and, assuming only Hypothesis~5.7R, for ruled surfaces over curves of
-positive genus.  In the present proof Hypothesis~5.7T is used only
+is---and, assuming only Hypothesis~R, for ruled surfaces over curves of
+positive genus.  In the present proof Hypothesis~T is used only
 for surface centers that are neither minimal nor geometrically ruled.
 Consequently the resulting birational invariance
 of \(\nu_6\), and the identification \(\nu_6(V)=2\) for genus-eight Fano
-threefolds, remain conditional on Hypothesis~5.7R and on Hypothesis~5.7T for
+threefolds, remain conditional on Hypothesis~R and on Hypothesis~T for
 those centers.
 
 
-Proposition~\ref{prop:residue-discriminant-exponents} explains how the two
-folds are related on the cubic rank-two block.  The atomic fold tests whether
+The exponent interpretation in \cite[Section~2]{RuddM1} explains how the two
+folds are related on the cubic rank-two block.  The direct fold tests whether
 the two formal exponent classes are distinct modulo \(\Z\).  The auxiliary
 quantity \(\delta^\sharp\) is the square of the difference of the residue
 representatives selected by the canonical elementary modification; for the
@@ -45,12 +45,12 @@ cubic it equals \(4/9\).  The
 framed invariant \(\nu_6\) is finer: it tests the absolute cyclotomic
 placement of the formal exponent classes, together with descent data for the
 original loop framing when ramification is present.  For the cubic zero
-block, Section~\ref{sec:atomic-one-step} already finds the representatives
+block, \cite[Section~2]{RuddM1} finds the representatives
 \(-1/6\) and \(-5/6\); the calculation below
 recovers those same exponents directly from formal solutions and records
 that their classes give the two primitive sixth roots.  Thus
-Sections~\ref{sec:atomic-one-step} and~\ref{sec:framed-monodromy} use two
-levels of the same formal data rather than unrelated numerical obstructions.
+The direct marker and the framed count use two levels of the same formal data
+rather than unrelated numerical obstructions.
 
 Let \(T\) be a smooth projective variety.  Write
 \[
@@ -312,7 +312,7 @@ reconstruction coordinate containing Novikov coefficients, however, the sum
 over all bulk degrees need not have a uniform lower Laurent bound in $z$.
 We therefore do not promote this degreewise gauge to an element of a Laurent
 series field and do not use it to identify intrinsic framed monodromy at a
-reconstruction value.  Hypotheses~5.7R and~5.7T below isolate exactly the two
+reconstruction value.  Hypotheses~R and~T below isolate exactly the two
 places where such an identification is still required.  The rank-two theorem
 below avoids this gauge altogether on the formal germ where it applies.
 \end{remark}
@@ -377,7 +377,7 @@ nilpotent part is a single nonzero Jordan block, and every other Euler
 eigenvalue differs from it by a unit of $K$.  Then the corresponding
 rank-two spectral cluster remains a single nonzero Jordan block on the
 formal germ.  After scalar centering and the canonical elementary
-modification of Section~\ref{sec:atomic-one-step}, its residue $R$ has
+modification of \cite[Section~2]{RuddM1}, its residue $R$ has
 constant characteristic polynomial on $B$.  Consequently the algebraic
 multiplicities of the primitive sixth roots contributed by this block are
 constant on the formal germ.
@@ -432,7 +432,7 @@ in $K[[t_1,\ldots,t_m]]$ forces $d=0$.  Thus $N^2=0$ everywhere.  A matrix
 entry of $N$ is a unit at the closed point, so $N$ remains nonzero and its
 image is a line subbundle.
 
-The proof of Proposition~\ref{prop:rank2-rigidity} is purely algebraic: it
+The rank-two rigidity proof in \cite[Section~2]{RuddM1} is purely algebraic: it
 uses only flatness, Frobenius self-adjointness, anti-self-adjointness of the
 grading operator, and the nondegenerate Poincar\'e pairing on the separated
 spectral factor.  Those identities hold coefficientwise over the present
@@ -443,7 +443,7 @@ direction and its residue satisfies
 \]
 Hence $\operatorname{tr}R$ and $\det R$, and therefore the characteristic
 polynomial of $R$, are constant.  By
-Proposition~\ref{prop:residue-discriminant-exponents}, the residue
+the exponent interpretation there, the residue
 eigenvalues are representatives of the formal exponent classes; the
 integral shear changes them only by integers.  The eigenvalues of the
 regular formal monodromy are therefore constant, including in resonant
@@ -462,7 +462,7 @@ variables over $K$.  Substituting a Laurent-Novikov reconstruction expression
 for those formal variables is an additional operation, and no theorem
 legitimizing that substitution for framed monodromy is assumed here.  Thus
 the proposition proves the local rank-two mechanism behind
-Hypothesis~5.7R; it is not a proof of that hypothesis at a reconstruction
+Hypothesis~R; it is not a proof of that hypothesis at a reconstruction
 value.
 \end{remark}
 
@@ -490,7 +490,7 @@ No invariance under an arbitrary bulk displacement is asserted.
 \lean{framedProjectiveBundle_sixthMultiplicity, framedBlowup_sixthMultiplicity,%
   framedSixthMultiplicity_polynomial_pow,%
   framedSixthMultiplicity_polynomial_list_prod}%
-Assume Hypothesis~5.7R.
+Assume Hypothesis~R.
 Let \(V\to T\) be a vector bundle of rank \(r\ge2\).  Then
 \[
  \nu_6(\PP_T(V))=r\nu_6(T).
@@ -509,7 +509,7 @@ invariants; the center terms are computed after the displayed specializations.
 \end{proposition}
 
 \begin{proof}
-Proposition~\ref{prop:qdm-operation-ledgers} supplies the common direct-sum,
+The QDM operation theorem of \cite[Section~2]{RuddM1} supplies the common direct-sum,
 coefficient-spine, parity, and occurrence bookkeeping.
 Lemma~\ref{lem:frame-transport} shows that the fold \(w_6\) crosses its regular
 comparison maps without changing the original \(z\)-disc.  It remains only to
@@ -534,7 +534,7 @@ Lemma~\ref{lem:exact-low-degree-shifts} removes the scalar term and the fixed
 divisor \(h_{C,j}\) exactly.  The latter character descends through
 \eqref{eq:center-novikov-specialization} because $h_{C,j}$ is a scalar
 multiple of $\rho_C$.  Section~5.8.1 of \cite{IritaniBlowup} fixes the
-logarithmic normalization.  Hypothesis~5.7R is invoked exactly for the
+logarithmic normalization.  Hypothesis~R is invoked exactly for the
 remaining \(O(u)+s_j\) tail, and analogously for the residual ambient tail
 \(\tau^\circ=O(q^{-1})\).  Additivity of \(w_6\) now gives
 \eqref{eq:blowup-nu}.  The center term retains \(\chi_j\), since the map
@@ -550,7 +550,7 @@ coordinates satisfy
 \]
 \cite[Theorem~5.1(4), Proposition~5.6]{IritaniKoto}.  The exact shift lemma
 removes the first two terms, while \cite[(5.11)--(5.12)]{IritaniKoto} fixes
-the initial coordinate.  Hypothesis~5.7R is used only for the residual
+the initial coordinate.  Hypothesis~R is used only for the residual
 \(O(u)+s_j\) tail.  The base Novikov map is injective
 \cite[(1.1) and Remark~5.2]{IritaniKoto}, so each of the \(r\) ledger blocks
 contributes \(\nu_6(T)\).  This proves \eqref{eq:projective-bundle-nu}.
@@ -611,7 +611,7 @@ unconditionally.
 \]
 unconditionally.
 \item Let \(T=\PP_C(V)\) be a geometrically ruled surface with
-\(g(C)\ge1\).  Assuming Hypothesis~5.7R,
+\(g(C)\ge1\).  Assuming Hypothesis~R,
 \[
   \nu_6(T;\chi)=0.
 \]
@@ -700,7 +700,7 @@ of \(\chi\) to the fibre ray is injective, because
  \qquad \ell(f)>0,
 \]
 so distinct powers have distinct valuation.  On the other hand,
-Hypothesis~5.7R and Proposition~\ref{prop:framed-operations} give the
+Hypothesis~R and Proposition~\ref{prop:framed-operations} give the
 intrinsic projective-bundle identity
 \[
  \nu_6(T)=2\nu_6(C)=0,
@@ -1092,14 +1092,14 @@ framed regular monodromy trivial on each.  Hence no primitive sixth root occurs.
 \begin{remark}[Where the tagging hypothesis is still used]
 \label{rem:tagging-scope}
 Proposition~\ref{prop:direct-specialized-lowdim} shows that
-Hypothesis~5.7T is not needed for nef-canonical centers, for \(\PP^1\) or
-\(\PP^2\), or---assuming only Hypothesis~5.7R---for ruled surfaces over
+Hypothesis~T is not needed for nef-canonical centers, for \(\PP^1\) or
+\(\PP^2\), or---assuming only Hypothesis~R---for ruled surfaces over
 positive-genus curves, and
 Proposition~\ref{prop:hirzebruch-specialized-vanishing} removes it for the
 rational geometrically ruled centers as well.  Those cases exhaust the minimal
 surfaces, and also cover \(F_1\), which is geometrically ruled without being
 minimal.  In the present proof of four-dimensional birational invariance, the
-substantive use of Hypothesis~5.7T is therefore confined to surface centers
+substantive use of Hypothesis~T is therefore confined to surface centers
 that are neither minimal nor geometrically ruled.  Every such surface is an iterated point
 blowup, so eliminating it there would require a separate support or base-change
 statement for applying the blowup comparison after the external center
@@ -1137,7 +1137,7 @@ an arbitrary divisor-valued bulk deformation.
   associatedGradedTagging_taggedImage_ne_zero,%
   associatedGradedTagging_taggedImage_eq_zero_iff,%
   associatedGradedTagging_taggedImage_injective}%
-Assume Hypothesis~5.7T.
+Assume Hypothesis~T.
 Let \(\chi:\Lambda_T\to A\) be strictly Novikov-admissible.  If the intrinsic
 small even quantum connection of \(T\) has no primitive-sixth framed
 monodromy, neither does its specialization along \(\chi\).
@@ -1214,7 +1214,7 @@ have the same primitive-sixth multiplicities after passage to a common
 algebraic closure.
 
 On the other hand, setting $\boldsymbol t=0$ in the tagged family gives the
-$\chi$-specialized small connection.  Hypothesis~5.7T is precisely the
+$\chi$-specialized small connection.  Hypothesis~T is precisely the
 remaining assertion that this specialization does not change the two
 primitive-sixth multiplicities.  Combining these two statements proves the
 lemma.  Notice that no pro-Laurent or Hahn-field framed operator is invoked:
@@ -1228,7 +1228,7 @@ is needed.
 \lean{lowDimensionalVanishing_of_classification_and_specialization_inputs,%
   lowDimensionalVanishing_of_characteristicRoots_sq_eq_one,%
   lowDimensionalVanishing_of_involutiveFramedMonodromy}%
-Assume Hypothesis~5.7R, and Hypothesis~5.7T only for surface centers that are
+Assume Hypothesis~R, and Hypothesis~T only for surface centers that are
 neither minimal nor geometrically ruled.  Let \(T\) be a point, a smooth
 projective curve, or a smooth projective
 surface, and let \(\chi\) be a strictly Novikov-admissible specialization,
@@ -1244,11 +1244,11 @@ The direct specialized cases are already covered by
 Proposition~\ref{prop:direct-specialized-lowdim}: this includes points and
 curves of positive genus through the nef-canonical case, the two projective
 spaces \(\PP^1,\PP^2\), every minimal surface with nef canonical bundle,
-and, assuming Hypothesis~5.7R, ruled surfaces over positive-genus curves.
+and, assuming Hypothesis~R, ruled surfaces over positive-genus curves.
 
 The rational geometrically ruled surfaces, that is the Hirzebruch surfaces
 \(F_a\), are covered by Proposition~\ref{prop:hirzebruch-specialized-vanishing},
-again without Hypothesis~5.7T; the graded-monomial condition on \(\chi\) is used
+again without Hypothesis~T; the graded-monomial condition on \(\chi\) is used
 only there, and only for \(F_1\).  Together these cases cover every minimal
 surface: a minimal smooth projective surface has nef canonical class, or is
 \(\PP^2\), or is geometrically ruled over a curve, by the Enriques--Kodaira
@@ -1263,9 +1263,9 @@ Novikov-admissible with \(\ell=H\cdot(-)\) for an ample \(H\), and
 graded-monomial because its associated graded is the monoid algebra of the
 effective monoid, whose monomials are a basis.  A surface that is not minimal
 is obtained from a minimal one
-by point blowups, and under Hypothesis~5.7R the blowup formula
+by point blowups, and under Hypothesis~R the blowup formula
 \eqref{eq:blowup-nu} adds only point terms, which are zero; so its intrinsic
-small invariant vanishes as well.  For this last case we use Hypothesis~5.7T
+small invariant vanishes as well.  For this last case we use Hypothesis~T
 through Lemma~\ref{lem:divisor-tagging}, which carries the intrinsic vanishing
 to \(\chi\), proving \eqref{eq:low-dimensional-vanishing}.
 \end{proof}
@@ -1275,7 +1275,7 @@ to \(\chi\), proving \eqref{eq:low-dimensional-vanishing}.
 \coverage{conditional_deduction}%
 \lean{framedSixthMarker_eq_of_birational,%
   framedSixthMarker_eq_of_oneProjectiveLine_birational}%
-Assume Hypothesis~5.7R, and Hypothesis~5.7T only for surface centers that are
+Assume Hypothesis~R, and Hypothesis~T only for surface centers that are
 neither minimal nor geometrically ruled.
 If \(Y\) and \(Y'\) are birational smooth projective complex varieties of
 the same dimension at most four, then
@@ -1292,15 +1292,15 @@ Consequently, for smooth projective threefolds,
 
 \begin{proof}
 The fold \(w_6:\mathcal L_{\mathcal T_{\mathrm{fr}}}\to\mathbf N\) in
-\eqref{eq:framed-fold} uses the same occurrence-indexed ledger construction as
-Section~\ref{sec:atomic-one-step}.  Proposition~\ref{prop:framed-operations}
+\eqref{eq:framed-fold} uses the occurrence-indexed ledger construction of
+\cite{RuddM1}.  Proposition~\ref{prop:framed-operations}
 supplies its projective-bundle and blowup laws, including each actual center
 specialization.  Those specializations are strictly Novikov-admissible by the
 calculation following Definition~\ref{def:strict-novikov-admissible} and are
 graded-monomial by Lemma~\ref{lem:center-maps-monomial}.  In dimension at
 most four their centers have dimension at most two, so
 Proposition~\ref{prop:low-dimensional-vanishing} kills every correction.
-Theorem~\ref{thm:marker-ledger} now gives the first assertion.
+The marker-ledger theorem of \cite{RuddM1} now gives the first assertion.
 
 If \(Y,Y'\) are smooth threefolds and
 \(Y\times\PP^1\dashrightarrow Y'\times\PP^1\), apply the first assertion in
@@ -1425,17 +1425,34 @@ For every smooth cubic threefold \(X\),
 \]
 \end{proposition}
 
-This proposition is unconditional and uses neither Hypothesis~5.7R nor
-Hypothesis~5.7T.
+This proposition is unconditional and uses neither Hypothesis~R nor
+Hypothesis~T.
+
+We recall the small-even block data needed for its proof.  Over
+\(F_X=\overline{\operatorname{Frac}\C[[q]]}\), put \(r=(3q)^{1/2}\).
+The calculation in \cite[Section~2]{RuddM1} separates the two scalar blocks
+with leading terms \(6r\) and \(-6r\) from a rank-two block satisfying
+\begin{equation}
+ z^2\partial_z
+ \begin{pmatrix}\widetilde S_3\\\widetilde S_4\end{pmatrix}
+ =\left[
+ \begin{pmatrix}0&2\\0&0\end{pmatrix}
+ +z\begin{pmatrix}-19/18&0\\0&19/18\end{pmatrix}
+ +z^2\begin{pmatrix}0&-14/(81r^2)\\-8/81&0\end{pmatrix}
+ +O(z^3)\right]
+ \begin{pmatrix}\widetilde S_3\\\widetilde S_4\end{pmatrix}.
+ \label{eq:framed-cubic-block-reduction}
+\end{equation}
+The normalized splitting gauge and its inverse use only integral powers of
+the original loop coordinate:
+\begin{equation}
+ A(z)=I+\sum_{n\ge1}A_nz^n,
+ \qquad A_n\text{ is block-off-diagonal}.
+ \label{eq:framed-cubic-block-gauge}
+\end{equation}
 
 \begin{proof}
-Use the notation of Proposition~\ref{prop:cubic-block-data} and put
-\(F_X=\overline{\operatorname{Frac}\C[[q]]}\).  That
-proposition separates the small even connection into two scalar blocks and
-the rank-two zero block \eqref{eq:cubic-integral-block-reduction}, using
-only an algebraic Novikov extension and integral powers of the original
-loop coordinate.  We treat the rank-two block first and return to the scalar
-blocks below.
+We treat the rank-two block first and return to the scalar blocks below.
 
 For the rank-two block, seek a formal solution in the form
 \[
@@ -1445,7 +1462,7 @@ For the rank-two block, seek a formal solution in the form
  \label{eq:cubic-indicial-ansatz}
 \]
 The coefficient of \(z^{\rho+1}\) in the first coordinate of
-\eqref{eq:cubic-integral-block-reduction}, and that of \(z^{\rho+2}\) in
+\eqref{eq:framed-cubic-block-reduction}, and that of \(z^{\rho+2}\) in
 the second, give respectively
 \[
  \rho=2c-\frac{19}{18},
@@ -1466,11 +1483,11 @@ The quadratic formula applied to \eqref{eq:cubic-indicial-polynomial} gives
  \rho=-\frac16,\ -\frac56.
  \label{eq:cubic-indicial-roots}
 \]
-These are the eigenvalues of the modified residue \(R_X\) computed in
-Section~\ref{sec:atomic-one-step}; their squared difference is
-\(\delta^\sharp(X)=4/9\).
+These are the eigenvalues of the modified residue \(R_X\); their squared
+difference is \(\delta^\sharp(X)=4/9\), in agreement with
+\cite[Section~2]{RuddM1}.
 The constant matrix \(C\) adjoins only the algebraic Novikov coefficient
-\(r\), and \eqref{eq:cubic-integral-block-gauge} and its inverse use only
+\(r\), and \eqref{eq:framed-cubic-block-gauge} and its inverse use only
 integral powers of \(z\).  Hence they preserve each exponent class in
 \(\Q/\Z\): multiplication sends \(z^\rho F_X[[z]]\) to itself, and the same
 holds for the inverse.  Thus the two classes in
@@ -1538,8 +1555,8 @@ Hence
 No odd-cohomology block enters this small-even calculation, and
 \(N_1(X)=\Z\ell\) makes the numerical Novikov ring
 \(\C[[Q^\ell]]=\C[[q]]\).  The proof uses the Beauville-derived reduction of
-Proposition~\ref{prop:cubic-block-data} and ordinary formal recursion in the
-original loop coordinate.  It also agrees with Cai's calculation
+\cite[Section~2]{RuddM1} and ordinary formal recursion in the original loop
+coordinate.  It also agrees with Cai's calculation
 \cite[pp.~5--6]{Cai}.
 
 \end{proof}
@@ -1592,8 +1609,8 @@ Since \(4\ne0\), the fourfold \(X\times\PP^1\) is not rational.
 
 This is the framed specialization of the common marker theorem.  Its fold is
 finer, but its operation formulas and birational invariance are conditional.
-The rank-two formal-exponent fold of Section~\ref{sec:atomic-one-step} proves
-the same irrationality statement without either hypothesis.
+The rank-two formal-exponent fold of \cite{RuddM1} proves the same
+irrationality statement without either hypothesis.
 
 \subsection{A genus-eight Fano consequence}
 
@@ -1602,17 +1619,12 @@ eight a smooth Pfaffian cubic threefold \(X\), together with rank-two vector
 bundles \(U\) on \(V\) and \(E^*\) on \(X\), whose projectivizations are
 related by a flop \cite[Theorems~2.17--2.18]{KuznetsovV14}.
 
-\begin{corollary}[One stabilization of \(V_{14}\)]
-\label{cor:v14-one-step}
+\begin{corollary}[Framed count for \(V_{14}\)]
+\label{cor:v14-framed-count}
 \coverage{conditional_deduction}%
-\lean{genusEight_oneProjectiveLine_not_rational_of_residueContext,%
-  genusEight_framedSixthMarker_eq_two_of_categoricalFlop}%
-For every smooth prime Fano threefold \(V\) of genus eight,
-\[
-  V\times\PP^1\ \text{is irrational}.
-\]
-Assuming Hypothesis~5.7R, and Hypothesis~5.7T only for surface centers that are
-neither minimal nor geometrically ruled, one moreover has
+ \lean{genusEight_framedSixthMarker_eq_two_of_categoricalFlop}%
+Assume Hypothesis~R, and Hypothesis~T only for surface centers that are
+neither minimal nor geometrically ruled.  Then
 \[
   \nu_6(V)=2.
   \label{eq:v14-stabilization}
@@ -1621,14 +1633,7 @@ neither minimal nor geometrically ruled, one moreover has
 
 \begin{proof}
 The flop gives a birational map between \(\PP_V(U)\) and
-\(\PP_X(E^*)\).  A projective bundle is birational to the product of its
-base with the corresponding projective space, so
-\(V\times\PP^1\) is birational to \(X\times\PP^1\).  The latter is
-irrational by Theorem~\ref{thm:every-cubic}, proving the unconditional
-assertion.
-
-Assume now Hypothesis~5.7R, and Hypothesis~5.7T only for surface centers that are
-neither minimal nor geometrically ruled.  Both projectivizations are smooth
+\(\PP_X(E^*)\).  Both projectivizations are smooth
 projective fourfolds.  By Theorem~\ref{thm:nu6-birational-invariance}, Proposition
 \ref{prop:framed-operations}, and Proposition~\ref{prop:cubic-packet},
 \[

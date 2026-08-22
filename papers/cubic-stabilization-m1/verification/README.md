@@ -1,6 +1,9 @@
 # Verification boundary
 
-The proof spine of the manuscript is structural apart from the computations in
+This registry and the bundled Lean package cover the primary paper and both
+companion manuscripts in this repository.
+
+The proof spines are structural apart from the computations in
 `evidence.json`, which are the only places a symbolic program is invoked as a
 premise.  None of them is certificate-checked; each is a trusted execution,
 cross-checked as its registry entry records.  Exactly one statement now invokes
@@ -123,10 +126,10 @@ python3 verification/dependency_graph.py verification/dependency-graph.dot
 and the correspondence check regenerates it and rejects a stale copy, so the
 graph cannot fall behind the annotations.  Dependency edges and imported-source
 annotations are authored, not harvested from cross-references, so they are
-recorded where they have been authored and nowhere else: densely along the
-atomic route of Section 4 and the one-stabilization proof, and more sparsely in
-the introduction, the envelope section, the minimal-class section, the framed
-refinement, and the separation section.  A statement carrying no edge has none
+recorded where they have been authored and nowhere else: densely in the
+primary paper's QDM-marker section and more sparsely in its introduction and
+applications, the six-axis companion, and the framed-monodromy companion.  A
+statement carrying no edge has none
 recorded rather than none used, and the same holds of an imported source.
 
 The claim inventory declares both the public `PaperInterface` aggregator and
@@ -135,8 +138,8 @@ module inside the package, requires the aggregator to import each one, and
 computes terminal and signature coverage across their union.  This keeps the
 section-level source split from weakening the exact terminal census.
 
-Checked coverage snapshot: 54 claims; 4 absent; 23 fragmentary; 26 conditional;
-1 complete; 316 reviewer terminals, of which 83 are machinery serving no current
+Checked coverage snapshot: 57 claims; 5 absent; 24 fragmentary; 27 conditional;
+1 complete; 317 reviewer terminals, of which 83 are machinery serving no current
 manuscript claim.
 
 The Lean modules and axiom audit can be built with the pinned package command

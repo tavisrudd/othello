@@ -111,30 +111,6 @@
         }
       ]
     },
-    "Conrad:lem-2.1.4": {
-      "citation": "Conrad",
-      "pinpoint": "Lemma 2.1.4",
-      "used": "On a connected normal rigid analytic space, an analytic subset containing a nonempty admissible open is the whole space.",
-      "conventions": [
-        {
-          "aspect": "hypothesis",
-          "requirement": "Connectedness and normality of the ambient rigid space are required.",
-          "matched": "The spectral components used here are smooth, and smooth rigid spaces are normal."
-        }
-      ]
-    },
-    "DavidHertling:euler-witt-identities": {
-      "citation": "DavidHertling",
-      "pinpoint": "Identities (19), (20), (24), and (25)",
-      "used": "The identities satisfied by the canonical powers of the Euler field of an F-manifold.",
-      "conventions": [
-        {
-          "aspect": "normalization",
-          "requirement": "The Euler field is normalized by the two identities that its Lie derivative reproduces the multiplication and that its bracket with the unit is the unit.",
-          "matched": "The intrinsic Euler field of the maximal F-manifold satisfies both, and no coordinate formula away from the small point is used."
-        }
-      ]
-    },
     "PutSinger:ch-3": {
       "citation": "PutSinger",
       "pinpoint": "Chapter 3",
@@ -356,6 +332,18 @@
           "aspect": "hypothesis",
           "requirement": "The statement is about the smooth Fermat cubic threefold over the complex numbers, not about Fermat hypersurfaces of other dimension or degree.",
           "matched": "It is applied to the Fermat cubic threefold alone, as the member of the pencil identified by the reflection-group classification."
+        }
+      ]
+    },
+    "KuznetsovV14:flop": {
+      "citation": "KuznetsovV14",
+      "pinpoint": "Theorems 2.17 and 2.18",
+      "used": "The rank-two projectivizations over a genus-eight prime Fano threefold and its associated Pfaffian cubic threefold are related by a flop.",
+      "conventions": [
+        {
+          "aspect": "scope",
+          "requirement": "The construction applies to a smooth prime Fano threefold of genus eight and its associated smooth Pfaffian cubic threefold.",
+          "matched": "The corollary is stated for exactly that pair and uses only the resulting birationality of the two smooth projectivizations."
         }
       ]
     },

@@ -1,0 +1,61 @@
+\section{Introduction}
+
+Let \(W_5\) be the five-dimensional irreducible representation of \(A_5\).
+The invariant space
+\[
+ \bigl(\operatorname{Sym}^3W_5^*\bigr)^{A_5}
+\]
+has dimension two, so its projectivization is a pencil of cubic threefolds.
+We prove universal \(CH_0\)-triviality uniformly over its smooth locus by
+constructing the primitive minimal class of the intermediate Jacobian.
+
+\begin{theorem}[The nonstandard \(A_5\)-pencil]
+\label{thm:separation-family}
+\coverage{conditional_deduction}%
+\lean{separationFamily_of_sixAxis_residue_and_period_inputs}%
+Let \(B^\circ\) be the smooth locus in
+\(\PP((\operatorname{Sym}^3W_5^*)^{A_5})\), and let
+\(\mathcal X\to B^\circ\) be the resulting family.  For every
+\(b\in B^\circ(\C)\),
+\[
+ \mathcal X_b\quad\text{and}\quad\mathcal X_b\times\PP^1
+\]
+are universally \(CH_0\)-trivial, while
+\(\mathcal X_b\times\PP^1\) is irrational.  The family is non-isotrivial in
+coarse moduli.  Exactly one point of its coarse-moduli image is represented
+by a cubic whose defining form is a sum of cubic forms in pairwise disjoint
+nonempty groups of at most three variables: the Fermat point.
+\end{theorem}
+
+The geometric input is a six-axis configuration on the Fano surface of lines.
+Its polarization matrix has a unit direction and a four-dimensional
+depth-one part.  The principal gluing kernel is selected by a quadratic
+two-primary orientation, and its integral graph coordinates satisfy a
+rank-one generation theorem in every degree.  Voisin's criterion then turns
+the resulting algebraic primitive minimal class into universal
+\(CH_0\)-triviality.  Irrationality after one stabilization is imported from
+\cite{RuddM1}; it is logically independent of the cycle construction here.
+
+The character of \(W_5\) is \((5,1,-1,0,0)\) on the classes
+\(1,2A,3A,5A,5B\).  The symmetric-cube character formula gives
+\[
+ \dim\bigl(\operatorname{Sym}^3W_5^*\bigr)^{A_5}=2.
+\]
+Hartlieb identifies the resulting coarse-moduli image with his
+\(M_{H_1}\), a one-dimensional special subvariety
+\cite[Lemma~5.5 and Proposition~5.7]{Hartlieb}.
+
+\begin{remark}
+\label{rem:fermat-in-pencil}
+The pencil contains the Fermat cubic.  The representation \(W_5\) is induced
+from a nontrivial cubic character of a point stabilizer \(A_4\subset A_5\);
+in a monomial realization, every nonzero matrix entry is a cube root of
+unity, so \(x_1^3+\cdots+x_5^3\) is invariant.  This is the unique
+separated-variable point in the coarse-moduli image.
+\end{remark}
+
+Section~\ref{sec:envelope} determines the polarization and gluing packet.
+Section~\ref{sec:minimal-class} proves the all-degree integral saturation
+theorem and its universal-\(CH_0\) consequence.  The final section proves
+Theorem~\ref{thm:separation-family} and records the relation with the
+one-stabilization theorem.

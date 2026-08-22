@@ -4,11 +4,8 @@
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage{microtype}
-\usepackage{amsmath,amssymb,amsthm,amscd,mathtools,mathrsfs}
-\usepackage{array,booktabs}
-\usepackage{enumitem}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta,positioning}
+\usepackage{amsmath,amssymb,amsthm,amscd,mathtools}
+\usepackage{booktabs}
 \usepackage[hidelinks]{hyperref}
 
 \numberwithin{equation}{section}
@@ -19,42 +16,20 @@
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{corollary}[theorem]{Corollary}
-\newtheorem*{hypothesisR}{Hypothesis 5.7R}
-\newtheorem*{hypothesisT}{Hypothesis 5.7T}
-\newtheorem*{lemmaOneA}{Lemma 5.1A}
 \theoremstyle{definition}
 \newtheorem{definition}[theorem]{Definition}
 \theoremstyle{remark}
 \newtheorem{remark}[theorem]{Remark}
 
-\newcommand{\A}{\mathbf A}
 \newcommand{\C}{\mathbf C}
-\newcommand{\F}{\mathbf F}
-\newcommand{\Q}{\mathbf Q}
 \newcommand{\Z}{\mathbf Z}
 \newcommand{\PP}{\mathbf P}
-\newcommand{\CH}{\operatorname{CH}}
-\newcommand{\End}{\operatorname{End}}
-\newcommand{\Hom}{\operatorname{Hom}}
-\newcommand{\NS}{\operatorname{NS}}
-\newcommand{\Alb}{\operatorname{Alb}}
-\newcommand{\CFF}{\operatorname{CFF}}
-\newcommand{\FM}{\operatorname{FM}}
-\newcommand{\kk}{\Bbbk}
 \newcommand{\OO}{\mathcal O}
-\newcommand{\Eu}{\mathsf{Eu}}
-\newcommand{\Gr}{\mathsf{Gr}}
-\newcommand{\Hod}{\mathsf{Hod}}
-\newcommand{\CF}{\mathsf{CF}}
-\newcommand{\HAtoms}{\mathsf{HAtoms}}
+\newcommand{\Bl}{\operatorname{Bl}}
 \newcommand{\tr}{\operatorname{tr}}
 \newcommand{\rk}{\operatorname{rk}}
-\newcommand{\Spec}{\operatorname{Spec}}
 \newcommand{\im}{\operatorname{im}}
 \newcommand{\diag}{\operatorname{diag}}
-\newcommand{\id}{\mathrm{id}}
-\newcommand{\Bl}{\operatorname{Bl}}
-\newcommand{\disc}{\operatorname{disc}}
 
 \title{Irrationality of Cubic Threefolds after One Stabilization}
 \author{Tavis Rudd}
@@ -65,42 +40,36 @@
 
 \begin{abstract}
 We prove that \(X\times\PP^1\) is irrational for every smooth complex cubic
-threefold \(X\), and deduce the same conclusion for every smooth prime Fano
-threefold of genus eight.  The proof constructs an occurrence-indexed ledger
-of generic even quantum \(D\)-module blocks.  Blowup and projective-bundle
-decompositions give its operation laws, while weak factorization turns folds
-that vanish on low-dimensional centers into birational invariants.  A
-rank-two formal-exponent marker vanishes for points, curves, and surfaces, but detects
-\(X\times\PP^1\) and separates it from \(\PP^4\).  A finer framed fold has
-value \(2\) on \(X\) and \(4\) on \(X\times\PP^1\); under two explicit
-reconstruction hypotheses it gives a second birational obstruction.
-Finally, an integral six-axis construction proves universal
-\(CH_0\)-triviality for every smooth member of the nonstandard
-\(A_5\)-invariant cubic pencil.  Their products with \(\PP^1\) remain
-universally \(CH_0\)-trivial but are irrational, giving an explicit
-non-isotrivial family on which universal \(CH_0\)-triviality and irrationality
-after one stabilization coexist.
+threefold \(X\).  On the generic even quantum \(D\)-module, our invariant
+counts rank-two formal connection blocks whose centered leading Euler operator
+is nonzero square-zero and whose two formal exponent classes differ modulo the
+integers.  Blowup and projective-bundle decompositions make this count
+birationally invariant because all low-dimensional centers contribute zero.
+It distinguishes \(X\times\PP^1\) from \(\PP^4\).  The same count gives an
+irrationality criterion for smooth projective threefolds, the
+one-stabilization theorem for prime Fano threefolds of genus eight, and
+separation results on known universally \(CH_0\)-trivial loci.
 \end{abstract}
 
 \noindent\textbf{Keywords.} cubic threefold; universal \(CH_0\)-triviality;
-irrationality; quantum \(D\)-modules; categorical markers; intermediate
-Jacobian; formal monodromy; weak factorization.
+irrationality; quantum \(D\)-modules; formal exponents; block markers;
+weak factorization; Fano threefolds.
 
 \input{sections/01-introduction}
-\input{sections/02-envelope}
-\input{sections/03-minimal-class}
-\input{sections/04-categorical-one-step}
-\input{sections/05-framed-monodromy}
-\input{sections/06-synthesis}
+\input{sections/02-qdm-marker}
+\input{sections/03-applications}
 
 \section*{AI assistance disclosure}
 
 This project was developed with extensive assistance from OpenAI Codex and
-Anthropic Claude. Under the author's direction, the systems assisted with
-proof exploration, literature research, exact computation, verification,
-and manuscript drafting and revision. The author checked the resulting
-arguments, computations, code, and cited sources, reviewed and edited all
-AI-assisted material, and assumes responsibility for all content.
+Anthropic Claude in proof exploration, literature research, exact computation,
+formal verification, and drafting.  AI-assisted adversarial review identified,
+in particular, the need for the even-carrier restriction and for replacing the
+preliminary nonzero-discriminant test by distinct formal exponent classes in
+Section~2.
+The author checked the arguments, computations, code, and cited sources,
+reviewed and edited all AI-assisted material, and assumes responsibility for
+all content.
 
 \footnotesize
 \noindent Numbered statements are cited from the exact versions listed here.
@@ -115,23 +84,14 @@ D.~Abramovich, K.~Karu, K.~Matsuki, and J.~W{\l}odarczyk,
 \emph{Torification and factorization of birational maps},
 J. Amer. Math. Soc. 15 (2002), 531--572.
 
-\bibitem{ACMW}
+\bibitem{Bittner}
 \begingroup\raggedright
-J.~D.~Achter, S.~Casalaina-Martin, and J.~Wise,
-\emph{Images of abelian schemes},
-preprint, arXiv:2312.13262v2 (2024).\par
+F.~Bittner,
+\emph{The universal Euler characteristic for varieties of characteristic
+zero},
+Compos. Math. 140 (2004), no.~4, 1011--1032;
+arXiv:math/0111062v3.\par
 \endgroup
-
-\bibitem{BdGF}
-T.~Beckmann and O.~de Gaay Fortman,
-\emph{Integral Fourier transforms and the integral Hodge conjecture for
-one-cycles on abelian varieties}, Compos. Math. 159 (2023), 1188--1213.
-
-\bibitem{Batyrev}
-V.~V.~Batyrev,
-\emph{Quantum cohomology rings of toric manifolds},
-in: Journ\'ees de G\'eom\'etrie Alg\'ebrique d'Orsay (Orsay, 1992),
-Ast\'erisque 218 (1993), 9--34.
 
 \bibitem{Beauville}
 A.~Beauville,
@@ -145,16 +105,6 @@ A.~Beauville,
 London Mathematical Society Student Texts 34,
 Cambridge University Press, Cambridge, 1996.
 
-\bibitem{BehrendProduct}
-K.~Behrend,
-\emph{The product formula for Gromov--Witten invariants},
-J. Algebraic Geom. 8 (1999), 529--541; arXiv:alg-geom/9710014.
-
-\bibitem{BFGMP}
-V.~Benedetti, A.~Fay, J.~Gu\'er\'e, L.~Manivel, and N.~Perrin,
-\emph{An atomic criterion for irrationality without quantum computations},
-arXiv:2607.26718v1 (2026).
-
 \bibitem{Cai}
 J.~Cai,
 \emph{The cubic threefold is symplectically irrational},
@@ -166,83 +116,15 @@ C.~H.~Clemens and P.~A.~Griffiths,
 Ann. of Math. (2) 95 (1972), 281--356.
 
 
-\bibitem{Conrad}
-B.~Conrad,
-\emph{Irreducible components of rigid spaces},
-Ann. Inst. Fourier (Grenoble) 49 (1999), no.~2, 473--541.
-
-\bibitem{Cotti}
-G.~Cotti,
-\emph{Cyclic stratum of Frobenius manifolds, Borel--Laplace
-\((\alpha,\beta)\)-multitransforms, and integral representations of
-solutions of quantum differential equations},
-Mem. Eur. Math. Soc. 2, EMS Press, Berlin, 2022;
-doi:10.4171/MEMS/2.
-
-\bibitem{DavidHertling}
-L.~David and C.~Hertling,
-\emph{Regular \(F\)-manifolds: initial conditions and Frobenius metrics},
-Ann. Sc. Norm. Super. Pisa Cl. Sci. (5) 17 (2017), 1121--1152;
-arXiv:1411.4553.
-
 \bibitem{CT}
 J.-L.~Colliot-Th\'el\`ene,
 \emph{\(CH_0\)-trivialit\'e universelle d'hypersurfaces cubiques presque
 diagonales}, Algebr. Geom. 4 (2017), 597--602; arXiv:1607.05673v3.
 
-\bibitem{EdGFS}
-P.~Engel, O.~de Gaay Fortman, and S.~Schreieder,
-\emph{Matroids and the integral Hodge conjecture for abelian varieties},
-arXiv:2507.15704v3 (2026).
-
-
-\bibitem{GonzalezAguileraLiendo}
-V.~Gonz\'alez-Aguilera and A.~Liendo,
-\emph{Automorphisms of prime order of smooth cubic \(n\)-folds},
-Arch. Math. 97 (2011), 25--37; arXiv:1002.4136v2.
-
-\bibitem{Givental}
-A.~B.~Givental,
-\emph{A mirror theorem for toric complete intersections},
-in: Topological Field Theory, Primitive Forms and Related Topics (Kyoto, 1996),
-Progr. Math. 160, Birkh\"auser, Boston, 1998, 141--175;
-arXiv:alg-geom/9701016.
-
-\bibitem{Grieve}
-N.~Grieve,
-\emph{Reduced norms and the Riemann--Roch theorem for abelian varieties},
-New York J. Math. 23 (2017), 1087--1110; arXiv:1603.06425v2.
-
-\bibitem{Guere}
-J.~Gu\'er\'e,
-\emph{On the irrationality of cubic fourfolds},
-arXiv:2603.04518v1 (2026).
-
-\bibitem{Hartlieb}
-M.~Hartlieb,
-\emph{Special subvarieties in the locus of intermediate Jacobians of cubic
-threefolds}, Math. Z. 310 (2025), article 52; arXiv:2304.03214v2.
-
-\bibitem{AtlasBrauer}
-K.~Jansen, K.~Lux, R.~Parker, and R.~Wilson,
-\emph{An atlas of Brauer characters}, London Mathematical Society Monographs,
-New Series 11, Oxford University Press, 1995; see also the \(A_5\)
-representation table, version 3.004, especially the matrix rows with
-characteristic/ring/dimension/ID
-\(2/\operatorname{GF}(4)/2/a,b\),
-\(2/\operatorname{GF}(2)/4/a,b\), and
-\(3/\operatorname{GF}(3)/4\), at
-\url{https://brauer.maths.qmul.ac.uk/Atlas/v3/alt/A5/}.
-
 \bibitem{IritaniBlowup}
 H.~Iritani,
 \emph{Quantum cohomology of blowups},
 arXiv:2307.13555v3 (2025).
-
-\bibitem{IritaniNotes}
-H.~Iritani,
-\emph{Notes on the decomposition theorem for blowups},
-arXiv:2604.10028v2 (2026).
 
 \bibitem{IritaniKoto}
 H.~Iritani and Y.~Koto,
@@ -255,67 +137,15 @@ A.~Kuznetsov,
 Proc. Steklov Inst. Math. 246 (2004), 171--194;
 arXiv:math/0303037v1.
 
-\bibitem{McDuffSalamon}
-D.~McDuff and D.~Salamon,
-\emph{\(J\)-holomorphic Curves and Symplectic Topology}, 2nd ed.,
-Amer. Math. Soc. Colloq. Publ. 52, American Mathematical Society, 2012.
-
-\bibitem{MilneLefschetz}
-J.~S.~Milne,
-\emph{Lefschetz classes on abelian varieties},
-Duke Math. J. 96 (1999), 639--675.
-
-\bibitem{MoonenPolishchuk}
-B.~Moonen and A.~Polishchuk,
-\emph{Divided powers in Chow rings and integral Fourier transforms},
-Adv. Math. 224 (2010), 2216--2236.
-
 \bibitem{PutSinger}
 M.~van der Put and M.~F.~Singer,
 \emph{Galois Theory of Linear Differential Equations},
 Grundlehren der mathematischen Wissenschaften 328, Springer, 2003.
 
-\bibitem{Roulleau}
-X.~Roulleau,
-\emph{Genus 2 curve configurations on Fano surfaces},
-Comment. Math. Univ. St. Pauli 59 (2010), 51--64;
-arXiv:1002.4467v1.
-
-\bibitem{RuddHodgeLedger}
-T.~Rudd,
-\emph{Hodge atoms as occurrence-indexed marker ledgers},
-manuscript, 2026.
-
-\bibitem{RuddResolvent}
-T.~Rudd,
-\emph{The discriminant resolvent of the \(A_5\)-cubic pencil},
-manuscript, 2026.
-
-\bibitem{SabbahStokes}
-C.~Sabbah,
-\emph{Introduction to Stokes Structures},
-Lecture Notes in Mathematics 2060, Springer, 2013;
-arXiv:0912.2762.
-
-\bibitem{ShephardTodd}
-G.~C.~Shephard and J.~A.~Todd,
-\emph{Finite unitary reflection groups},
-Canad. J. Math. 6 (1954), 274--304.
-
 \bibitem{Voisin}
 C.~Voisin,
 \emph{On the universal \(CH_0\) group of cubic hypersurfaces},
 J. Eur. Math. Soc. 19 (2017), 1619--1653; arXiv:1407.7261v2.
-
-\bibitem{WeiYu}
-L.~Wei and X.~Yu,
-\emph{Automorphism groups of smooth cubic threefolds},
-J. Math. Soc. Japan 72 (2020), 1327--1343; arXiv:1907.00392v2.
-
-\bibitem{YuTropical}
-J.~Yu,
-\emph{Tropicalizing the positive semidefinite cone},
-Proc. Amer. Math. Soc. 143 (2015), 1891--1895.
 
 \bibitem{YYZ}
 S.~Yang, X.~Yu, and Z.~Zhu,

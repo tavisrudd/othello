@@ -15,7 +15,12 @@ ROOT = Path(__file__).resolve().parents[1]
 SOURCE_ROOT = ROOT / "TavisRuddFiniteGeom"
 CLAIMS = ROOT / "verification" / "claims.json"
 EXPECTED_AXIOMS = ROOT / "verification" / "expected_axioms.txt"
-SECTIONS = ROOT.parent / "sections"
+MANUSCRIPT_ROOT = ROOT.parent
+SECTION_DIRS = (
+    MANUSCRIPT_ROOT / "sections",
+    MANUSCRIPT_ROOT / "companions" / "six-axis-cubic-pencil" / "sections",
+    MANUSCRIPT_ROOT / "companions" / "cubic-framed-monodromy" / "sections",
+)
 AXIOM_AUDIT = (
     SOURCE_ROOT
     / "Papers"
@@ -25,7 +30,17 @@ AXIOM_AUDIT = (
 )
 IMPORTED_SOURCES = ROOT.parent / "verification" / "imported-sources.json"
 EVIDENCE = ROOT.parent / "verification" / "evidence.json"
-MANUSCRIPT = ROOT.parent / "cubic_stabilization_m1.tex"
+MANUSCRIPTS = (
+    MANUSCRIPT_ROOT / "cubic_stabilization_m1.tex",
+    MANUSCRIPT_ROOT
+    / "companions"
+    / "six-axis-cubic-pencil"
+    / "six_axis_cubic_pencil.tex",
+    MANUSCRIPT_ROOT
+    / "companions"
+    / "cubic-framed-monodromy"
+    / "cubic_framed_monodromy.tex",
+)
 GRAPH_GENERATOR = ROOT.parent / "verification" / "dependency_graph.py"
 GRAPH = ROOT.parent / "verification" / "dependency-graph.dot"
 LEAN_README = ROOT / "README.md"
@@ -52,6 +67,15 @@ def fail(message: str) -> None:
     raise SystemExit(1)
 
 
+def manuscript_sections() -> tuple[Path, ...]:
+    """All section sources covered by the repository-wide formal artifact."""
+    return tuple(
+        section
+        for directory in SECTION_DIRS
+        for section in sorted(directory.glob("*.tex"))
+    )
+
+
 def manuscript_environments() -> dict[str, str]:
     """Map each theorem-like manuscript environment's semantic label to its body."""
     environments: dict[str, str] = {}
@@ -60,7 +84,7 @@ def manuscript_environments() -> dict[str, str]:
         r"(?:\[[^\]]*\])?(.*?)\\end\{\1\}",
         re.DOTALL,
     )
-    for section in sorted(SECTIONS.glob("*.tex")):
+    for section in manuscript_sections():
         text = section.read_text(encoding="utf-8")
         for match in environment_pattern.finditer(text):
             found = re.findall(
@@ -86,7 +110,7 @@ def manuscript_proofs(labels: set[str]) -> dict[str, str]:
     separated from its statement is paired with it.
     """
     proofs: dict[str, str] = {}
-    for section in sorted(SECTIONS.glob("*.tex")):
+    for section in manuscript_sections():
         text = section.read_text(encoding="utf-8")
         position = 0
         for match in re.finditer(r"\\begin\{proof\}(.*?)\\end\{proof\}", text, re.DOTALL):
@@ -220,7 +244,13 @@ def registry(path: Path, key: str, schema: str) -> dict[str, dict]:
 
 def check_imported_sources(entries: dict[str, dict]) -> None:
     """Every imported source names a bibliography key, a pinpoint, and its conventions."""
-    bibliography = set(re.findall(r"\\bibitem\{([^}]+)\}", MANUSCRIPT.read_text(encoding="utf-8")))
+    bibliography = {
+        key
+        for manuscript in MANUSCRIPTS
+        for key in re.findall(
+            r"\\bibitem\{([^}]+)\}", manuscript.read_text(encoding="utf-8")
+        )
+    }
     for identifier, entry in entries.items():
         for field in ("citation", "pinpoint", "used"):
             if not isinstance(entry.get(field), str) or not entry[field].strip():

@@ -1,0 +1,207 @@
+\documentclass[11pt]{article}
+
+\usepackage[a4paper,margin=29mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,amsthm,amscd,mathtools,mathrsfs}
+\usepackage{array,booktabs}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning}
+\usepackage[hidelinks]{hyperref}
+
+\numberwithin{equation}{section}
+
+\input{formal-annotations}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem*{hypothesisR}{Hypothesis 5.7R}
+\newtheorem*{hypothesisT}{Hypothesis 5.7T}
+\newtheorem*{lemmaOneA}{Lemma 5.1A}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\A}{\mathbf A}
+\newcommand{\C}{\mathbf C}
+\newcommand{\F}{\mathbf F}
+\newcommand{\Q}{\mathbf Q}
+\newcommand{\Z}{\mathbf Z}
+\newcommand{\PP}{\mathbf P}
+\newcommand{\CH}{\operatorname{CH}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\NS}{\operatorname{NS}}
+\newcommand{\Alb}{\operatorname{Alb}}
+\newcommand{\CFF}{\operatorname{CFF}}
+\newcommand{\FM}{\operatorname{FM}}
+\newcommand{\kk}{\Bbbk}
+\newcommand{\OO}{\mathcal O}
+\newcommand{\Eu}{\mathsf{Eu}}
+\newcommand{\Gr}{\mathsf{Gr}}
+\newcommand{\Hod}{\mathsf{Hod}}
+\newcommand{\CF}{\mathsf{CF}}
+\newcommand{\HAtoms}{\mathsf{HAtoms}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\rk}{\operatorname{rk}}
+\newcommand{\Spec}{\operatorname{Spec}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\Bl}{\operatorname{Bl}}
+\newcommand{\disc}{\operatorname{disc}}
+
+\title{Integral Divisor Products on the Nonstandard \(A_5\)-Invariant Cubic Pencil}
+\author{Tavis Rudd}
+\date{August 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We study the nonstandard \(A_5\)-invariant pencil of smooth cubic
+threefolds.  A six-axis polarization identifies its exotic two-primary
+gluing packet and constrains odd-degree product decompositions of the
+intermediate Jacobian.  An all-degree integral graph-saturation theorem then
+proves algebraicity of the primitive minimal class for every smooth member.
+Consequently every member is universally \(CH_0\)-trivial.  The family is
+non-isotrivial, and all but its Fermat point lie outside both the
+separated-variable locus and the explicit coprime-degree family of
+Yang--Yu--Zhu.  Combined with the one-stabilization theorem for cubic
+threefolds, this gives a non-isotrivial family whose products with
+\(\PP^1\) are universally \(CH_0\)-trivial and irrational.
+\end{abstract}
+
+\noindent\textbf{Keywords.} cubic threefold; \(A_5\)-action; universal
+\(CH_0\)-triviality; intermediate Jacobian; minimal class; integral divisor
+products.
+
+\input{sections/01-introduction}
+\input{sections/02-six-axis-polarization}
+\input{sections/03-divisor-products}
+\input{sections/04-applications}
+
+\section*{AI assistance disclosure}
+
+This project was developed with extensive assistance from OpenAI Codex and
+Anthropic Claude. Under the author's direction, the systems assisted with
+proof exploration, literature research, exact computation, verification,
+and manuscript drafting and revision. The author checked the resulting
+arguments, computations, code, and cited sources, reviewed and edited all
+AI-assisted material, and assumes responsibility for all content.
+
+\footnotesize
+\noindent Numbered statements are cited from the exact versions listed here.
+Where both a journal and a preprint version appear, the numbering is that of
+the preprint.
+
+\begin{thebibliography}{99}
+
+\bibitem{ACMW}
+\begingroup\raggedright
+J.~D.~Achter, S.~Casalaina-Martin, and J.~Wise,
+\emph{Images of abelian schemes},
+preprint, arXiv:2312.13262v2 (2024).\par
+\endgroup
+
+\bibitem{BdGF}
+T.~Beckmann and O.~de Gaay Fortman,
+\emph{Integral Fourier transforms and the integral Hodge conjecture for
+one-cycles on abelian varieties}, Compos. Math. 159 (2023), 1188--1213.
+
+\bibitem{CG}
+C.~H.~Clemens and P.~A.~Griffiths,
+\emph{The intermediate Jacobian of the cubic threefold},
+Ann. of Math. (2) 95 (1972), 281--356.
+
+
+\bibitem{CT}
+J.-L.~Colliot-Th\'el\`ene,
+\emph{\(CH_0\)-trivialit\'e universelle d'hypersurfaces cubiques presque
+diagonales}, Algebr. Geom. 4 (2017), 597--602; arXiv:1607.05673v3.
+
+\bibitem{GonzalezAguileraLiendo}
+V.~Gonz\'alez-Aguilera and A.~Liendo,
+\emph{Automorphisms of prime order of smooth cubic \(n\)-folds},
+Arch. Math. 97 (2011), 25--37; arXiv:1002.4136v2.
+
+\bibitem{Grieve}
+N.~Grieve,
+\emph{Reduced norms and the Riemann--Roch theorem for abelian varieties},
+New York J. Math. 23 (2017), 1087--1110; arXiv:1603.06425v2.
+
+\bibitem{Hartlieb}
+M.~Hartlieb,
+\emph{Special subvarieties in the locus of intermediate Jacobians of cubic
+threefolds}, Math. Z. 310 (2025), article 52; arXiv:2304.03214v2.
+
+\bibitem{AtlasBrauer}
+K.~Jansen, K.~Lux, R.~Parker, and R.~Wilson,
+\emph{An atlas of Brauer characters}, London Mathematical Society Monographs,
+New Series 11, Oxford University Press, 1995; see also the \(A_5\)
+representation table, version 3.004, especially the matrix rows with
+characteristic/ring/dimension/ID
+\(2/\operatorname{GF}(4)/2/a,b\),
+\(2/\operatorname{GF}(2)/4/a,b\), and
+\(3/\operatorname{GF}(3)/4\), at
+\url{https://brauer.maths.qmul.ac.uk/Atlas/v3/alt/A5/}.
+
+\bibitem{MilneLefschetz}
+J.~S.~Milne,
+\emph{Lefschetz classes on abelian varieties},
+Duke Math. J. 96 (1999), 639--675.
+
+\bibitem{MoonenPolishchuk}
+B.~Moonen and A.~Polishchuk,
+\emph{Divided powers in Chow rings and integral Fourier transforms},
+Adv. Math. 224 (2010), 2216--2236.
+
+\bibitem{Roulleau}
+X.~Roulleau,
+\emph{Genus 2 curve configurations on Fano surfaces},
+Comment. Math. Univ. St. Pauli 59 (2010), 51--64;
+arXiv:1002.4467v1.
+
+\bibitem{RuddResolvent}
+T.~Rudd,
+\emph{The discriminant resolvent of the \(A_5\)-cubic pencil},
+manuscript, 2026.
+
+\bibitem{ShephardTodd}
+G.~C.~Shephard and J.~A.~Todd,
+\emph{Finite unitary reflection groups},
+Canad. J. Math. 6 (1954), 274--304.
+
+\bibitem{Voisin}
+C.~Voisin,
+\emph{On the universal \(CH_0\) group of cubic hypersurfaces},
+J. Eur. Math. Soc. 19 (2017), 1619--1653; arXiv:1407.7261v2.
+
+\bibitem{WeiYu}
+L.~Wei and X.~Yu,
+\emph{Automorphism groups of smooth cubic threefolds},
+J. Math. Soc. Japan 72 (2020), 1327--1343; arXiv:1907.00392v2.
+
+\bibitem{YuTropical}
+J.~Yu,
+\emph{Tropicalizing the positive semidefinite cone},
+Proc. Amer. Math. Soc. 143 (2015), 1891--1895.
+
+\bibitem{YYZ}
+S.~Yang, X.~Yu, and Z.~Zhu,
+\emph{Nonrational varieties with unirational parametrizations of coprime
+degrees}, arXiv:2508.03623v2 (2025).
+
+\bibitem{RuddM1}
+T.~Rudd,
+\emph{Irrationality of cubic threefolds after one stabilization},
+preprint (2026).
+
+\end{thebibliography}
+
+\end{document}

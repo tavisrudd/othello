@@ -30,6 +30,19 @@
       "terminal_digest": "c76771330994e3bf76753fc318ed5c8045703600a05a6f9c128db153d5eae0fa"
     },
     {
+      "manuscript_label": "cor:threefold-marker",
+      "coverage": "fragment",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.threefold_not_rational_of_occurrenceIndexedMarker"
+      ],
+      "objects": "An occurrence-indexed block ledger and additive marker for smooth projective threefolds, a projective-three-space endpoint, a selected threefold, and a rationality predicate.",
+      "hypotheses": "A typed dimension-three factorization provider supplies the blowup and blowdown formulas; every actual point or curve center occurrence has zero marker; both endpoints are smooth of dimension three; projective three-space has marker zero; the selected threefold has nonzero marker; and rationality supplies a birational comparison with projective three-space.",
+      "conclusion": "The selected threefold is not rational.",
+      "cautions": "Fragment. Lean proves the exact occurrence-indexed endpoint contradiction, but does not construct the generic even QDM, identify a marked block with a nonzero folded marker, supply weak factorization or center nullity, calculate projective space, or construct the rationality comparison.",
+      "statement_digest": "01f537e51944e676d06e22163d30e25726ab3b2aece09af72b5eee3f74e6bdf7",
+      "terminal_digest": "fd742b8caba6eed5b20aef7a07c8938baaf30d65f49d16b708ffa6b525fb0ec7"
+    },
+    {
       "manuscript_label": "thm:every-cubic-conditional",
       "coverage": "conditional_deduction",
       "declarations": [
@@ -39,7 +52,7 @@
       "hypotheses": "Regular isomorphism preserves primitive-sixth multiplicity; the residual framed hypotheses supply the occurrence-indexed comparison provider and center nullity; the cubic marker equals two; the projective-line formula doubles it; projective four-space has marker zero; and rationality supplies the birational comparison.",
       "conclusion": "The stabilized cubic has framed marker four; every rational smooth projective fourfold has framed marker zero; and consequently the stabilized cubic is irrational.",
       "cautions": "Conditional deduction. The framed block presentation and fold are distinct from the residue presentation but invoke the same generic descent theorem. Lean does not construct the framed QDM comparisons or prove residual Hypotheses 5.7R and 5.7T; their exact operation and occurrence-nullity consequences remain typed fields of the framed context.",
-      "statement_digest": "a7216fd631de449d08be8f4158a70ab0c1760a55acabe8c2126c431d4a38b633",
+      "statement_digest": "546cc5e738069364fed90ad6afb360b4217850ea8f42bb7a3aafa25d8f577dcb",
       "terminal_digest": "def6d5a19dfeff196f2c8ea160bc6d2b5f778fefc50a5ae86b4e5c13ee86d7c3"
     },
     {
@@ -92,7 +105,7 @@
       "hypotheses": "For every parameter, the fibre is a smooth complex cubic threefold with algebraic primitive minimal class and the direct residue-marker one-step input holds. Voisin's criterion and preservation of universal CH0-triviality under the named projective-line product are explicit premises. Non-isotriviality is not supplied as the conclusion: two parameters with distinct period-map values are supplied, together with the external implication from period-map nonconstancy to the family predicate. The exclusion clause supplies the Eckardt criterion, projective invariance, the pencil's Eckardt locus, and primitive data consisting of a chosen parameter, a chosen separated-variable model, its projective equivalence to that fibre, and the equality of the parameter's moduli point with the distinguished point.",
       "conclusion": "Every fibre is universally CH0-trivial; every named projective-line stabilization is universally CH0-trivial and irrational; the family is non-isotrivial; and the separated-variable locus of the family in coarse moduli is exactly the distinguished point.",
       "cautions": "Lean checks the final composition. It does not construct the A5-invariant pencil, its connected smooth locus, the invariant cubic space, its fibres, intermediate Jacobians, Chow groups, projective-bundle formula, primitive minimal classes, Voisin's criterion, direct QDM comparison provider, coarse moduli, or period map. Irrationality uses the same direct occurrence-indexed residue context as thm:every-cubic. The period argument exposes a nonconstant map and a comparison implication rather than storing non-isotriviality itself as an input field. The separated-variable existence conclusion is constructed from the separately typed parameter, model, equality, separated-form, and equivalence data rather than stored as an existential premise.",
-      "statement_digest": "e55d8d2ce304d78ad73daba9e20f53033d1dc1c502dc9c4b213a6591521c6694",
+      "statement_digest": "b2d13427f95e250627014fa282d30ad01c928364a71c2c38084934ae11427d1d",
       "terminal_digest": "ed50c124bf811b509f54c85cbbd98b46561b499f86ee1e01cf2bac5a67a5ae8d"
     },
     {
@@ -532,7 +545,7 @@
       "hypotheses": "The coefficient field is of characteristic zero, the nilpotent part has an invertible off-diagonal entry and vanishing determinant at the closed point, the compressed multiplications commute with the leading operator and satisfy the compressed flatness identity, and, for the residue, each formal partial derivative is its commutator with a matrix regular in the germ.",
       "conclusion": "The nilpotent part stays square-zero and nonzero over the germ, the residue has a characteristic polynomial with coefficients constant on the germ, and two blocks with the same monic split exponent polynomial have the same framed primitive-sixth multiplicity.",
       "cautions": "Fragment.  Lean constructs no quantum connection, Euler operator, spectral projector, or elementary modification, and does not prove that a compression of a connection to an isolated cluster satisfies the displayed identities.  The germ is modelled by a multivariate formal power-series ring rather than an analytic or rigid-analytic germ, and the passage from residue eigenvalues to the exponents of framed monodromy is not formalized: the multiplicity statement takes the exponent multiset as data.",
-      "statement_digest": "3ca08f375564e927d750b61d537b5c82a19b7e0f97597d13a7d840d735f6ecca",
+      "statement_digest": "f1d2fb31c41f1b96484986370c5ea968d959a85c76a3592cbed791c21bdace63",
       "terminal_digest": "7c2c2d0beb06372090435a140075eec081c14b325232acdda9aca49a8b9733cb"
     },
     {
@@ -548,7 +561,7 @@
       "hypotheses": "For r at least two, the projective-bundle relation is supplied together with equality of its intrinsic characteristic polynomial to the r-th power of the base polynomial. For c at least two, the blowup relation is supplied together with c-1 center specializations and equality of the total characteristic polynomial to the ambient polynomial times the finite product of the specialized center polynomials.",
       "conclusion": "Lean proves the exact framed operation formulas: projective-bundle primitive-sixth multiplicity is r times the base multiplicity, and blowup multiplicity is the ambient multiplicity plus the sum of the c-1 specialized center multiplicities.",
       "cautions": "The result is conditional on the geometric and characteristic-polynomial comparison inputs. Lean does not construct varieties, vector bundles, projective bundles, smooth centers, blowups, endpoint or specialized-center quantum connections, Iritani comparison coordinates, parity restrictions, numerical Novikov specializations, or the characteristic-polynomial block identities. No loop-coordinate root is represented.",
-      "statement_digest": "a83cf783f3bbcc3d476ae0a5ff0632bf882e2275ff66d93c6e0849aca5043f37",
+      "statement_digest": "71ddf70d5155059e984dd5630e55f395641db0d7f9a12a28afc9a91bec50c6d4",
       "terminal_digest": "0a6039253aaf028c3baad1c3230b6271b9971901493147731569bd8c4118b1d4"
     },
     {
@@ -581,7 +594,7 @@
       "hypotheses": "For the nef-canonical case, every nonzero entry of the residue raises the weight of its column by at least one, the parity correction has square one and commutes with the residue, and the framed monodromy is the parity correction times the exponential of two pi i times the residue.  For the projective cases, the characteristic polynomial of Euler multiplication is the specialized quantum relation with nonzero line coefficient, and the conclusion of the multiplicity-one Euler block lemma is supplied as an implication from simplicity of the spectral blocks to identity framed monodromy.  For the ruled-surface case, the base carries the nef-canonical data, the intrinsic projective-bundle formula doubles the base count, and the specialized and intrinsic framed characteristic polynomials agree.",
       "conclusion": "The specialized primitive-sixth count vanishes in all three cases.  Along the way Lean proves that a finite sum of weight-raising matrices raises the weight and that a weight-raising matrix on a finite index type is nilpotent, that the exponential of a nilpotent complex matrix differs from the identity by a nilpotent matrix, that a parity-corrected unipotent monodromy has only characteristic roots of square one, that the specialized quantum relation of a projective space is separable so that every maximal generalized eigenspace of Euler multiplication is at most one-dimensional, and that it has exactly the expected number of distinct roots.",
       "cautions": "Conditional deduction.  Lean constructs no target variety, quantum connection, Euler multiplication, grading operator, Novikov specialization, or Levelt--Turrittin decomposition, and does not prove that a geometric framed monodromy has the displayed factorization or that a geometric Euler operator has the displayed characteristic polynomial.  Strict Novikov admissibility appears only through nonvanishing of the line coefficient in the projective cases; its role in making the specialized connection well defined has no formal counterpart.  The conclusion of the multiplicity-one Euler block lemma and the identification of the specialized ruled-surface module with the intrinsic one are typed premises rather than formalized arguments.",
-      "statement_digest": "e1552bb9e4793fe6e329b417e966273b9df1bd545b9c5c267756727906fe6db2",
+      "statement_digest": "68a17ae5f9d7968caaab2e71dd36229bab7ce4056f5fa24f8904a3e2cddcbeae",
       "terminal_digest": "6a324127e310d801cab516327b739163673d52cfd2a556a8987dabfccb12b44f"
     },
     {
@@ -602,7 +615,7 @@
       "hypotheses": "For every supplied strictly Novikov-admissible specialization, the final common-field polynomial equality resulting from the unformalized coefficient extension and algebraic-closure identifications is supplied, as is the final polynomial equality resulting from the unformalized divisor-equation formal bulk gauge. The individual-class theorem assumes that the tag separates numerical classes. The abstract finite-family theorem assumes an injective vector family over an infinite characteristic-zero field. For the completed tagging injection, the integral pairing vector is injective over an arbitrary characteristic-zero coefficient field; every monomial initial coefficient is nonzero; every direction detector sends zero to zero; and, for every nonzero completed series and integral direction, the detected initial form of its tagged image is supplied to equal the finite exponential-character combination on the formalized lowest support.",
       "conclusion": "Lean proves equality of intrinsic and specialized primitive-sixth multiplicities and transfers intrinsic vanishing through every strictly Novikov-admissible specialization. It proves injectivity of the paired monomial/class tag on individual numerical classes. For every finite injective vector family, it chooses an abstract K-linear separator and proves finite exponential-character independence; for integral pairing families it constructs an integral direction. At coefficient level, every nonzero completed series has a nonempty finite lowest support and exponential-character noncancellation over every characteristic-zero field. From the supplied initial-form compatibility and nonzero monomial initial coefficients, Lean proves the tagged image of every nonzero series is nonzero, reflects zero, and is fully injective by applying noncancellation to differences.",
       "cautions": "The vanishing result remains conditional on two final polynomial equalities over C. No source coefficient fields, common comparison field, embeddings, Polynomial.map scalar extension, or typed bulk-gauge witness occur in that theorem. The associated-graded tagging interface neither represents nor constructs the filtered target ring, associated graded ring, valuation, or geometric Novikov specialization. It supplies only proxy detector functions, their zero values, nonzero monomial initial coefficients, and the compatibility equality, and does not prove that they arise from the manuscript's filtered hypotheses. Lean proves the exact noncancellation and injectivity deduction from these proxy inputs. The individual-class injection alone does not imply completed-series injection; the latter uses the compatibility package. Construction of the integral divisors whose pairing vectors separate numerical curve classes, common algebraic closures, scalar extension of quantum connections, the divisor-equation bulk pullback, and compatible integral-loop-power finite-quotient gauges also remain unformalized. The strength of the row is uneven and the terminals should be read separately. Once the two final polynomial equalities are granted, the vanishing endpoint is immediate, because the primitive-sixth multiplicity is defined from the characteristic polynomial; that terminal carries no mathematical content beyond the equalities it assumes. The content of the row is in the other terminals: independence of finite families of exponential characters through an integral separating direction and a Vandermonde argument, nonemptiness and exact membership of the lowest-length support, and nonvanishing and injectivity of the tagged additive map from proxy detector data.",
-      "statement_digest": "41229b6311a659b01ec9d1da14af0bee4e2a290112df2488a504f69dc134ed28",
+      "statement_digest": "e9283cd324261b757ead91d1adc4eaf24b05c67be0807c2bb3be46a6cdfe545e",
       "terminal_digest": "9e728845144df874d3965eebc8de77ebf9575f96c3fa6837de1b779a62b355fa"
     },
     {
@@ -617,7 +630,7 @@
       "hypotheses": "Every selected object has a supplied inductive classification witness built from a nef seed, the point, a positive-rank projective bundle, or a point blowup. Nef-seed characteristic roots are supplied to have square one; the point multiplicity is zero; the projective-bundle formula multiplies the base multiplicity by the rank; point blowup preserves multiplicity; and divisor tagging transfers intrinsic vanishing to each strictly Novikov-admissible specialization.",
       "conclusion": "For every supplied point, smooth projective curve, or smooth projective surface and every strictly Novikov-admissible specialization, the specialized framed monodromy has primitive-sixth multiplicity zero. Lean proves the classification induction, including the exact root-square-one spectral endpoint, and the final specialization transfer. A separate corollary proves that matrix involutivity is a stronger sufficient condition for the spectral restriction.",
       "cautions": "The result is conditional on every geometric and comparison input used by the human proof. Lean does not construct the varieties, quantum connections, framed monodromy, numerical Novikov rings, grading operator or parity correction; prove regular singularity and nilpotence of the residue; derive the plus-or-minus-one spectrum from nefness; prove the low-dimensional minimal-model classification; construct the projective bundles or blowups; establish their monodromy formulas; or prove divisor tagging and specialization comparison. The human proof restricts eigenvalues to {1,-1}; it does not assert involutivity of the full monodromy matrix, which is strictly stronger in the presence of possible Jordan parts and appears only in the separately marked sufficient corollary. The manuscript now uses divisor tagging only for surface centers that are neither minimal nor geometrically ruled; Hirzebruch surface targets are covered by the direct specialized argument, whose formal content is recorded under prop:hirzebruch-specialized-vanishing. The Lean statement retains divisor tagging as one typed premise of the classification witness and does not distinguish the two cases.",
-      "statement_digest": "a6f56b094003f55eca9bb97b113fa278a22a056a23d1400cd1761e0303d6ac19",
+      "statement_digest": "15dc9404826b1dd5fc5ea969907c9252b9c528f4dbd37ca3da78bf1ecabf795d",
       "terminal_digest": "13b28c87fae9641c855287f0b0ba7453f8311ec788c5a6e5e7238d2b5ab77c98"
     },
     {
@@ -631,7 +644,7 @@
       "hypotheses": "Regular isomorphism preserves primitive-sixth multiplicity; the residual hypotheses provide a typed occurrence-indexed factorization provider and vanishing of every actual smooth center occurrence allowed in the fixed dimension; and the stabilization consequence additionally uses the rank-two projective-bundle formulas for both threefolds.",
       "conclusion": "Birational smooth projective objects of any fixed dimension at most four have equal primitive-sixth marker. If two smooth projective threefolds become birational after multiplication by one projective line, their primitive-sixth markers are equal.",
       "cautions": "Conditional deduction. Lean constructs the framed effective fold, applies the generic occurrence-indexed descent theorem, and cancels the factor two in the one-projective-line consequence. It does not construct the QDM comparison provider, projective-bundle formulas, or residual center-nullity witnesses; those remain explicit typed inputs. The generic theorem is registered separately under thm:marker-ledger.",
-      "statement_digest": "8f8dd97e49820a725e9ca54d55173b9a9d36e3bc66808d42daaad76c4fb78605",
+      "statement_digest": "affc4425f8a4373f10c89792f0251e7e4fd6de261956230999fa900efc307251",
       "terminal_digest": "2f9c1fef06e01d2f7bf291bc343a8bb48eb83df1573e39859601e576b36e64bf"
     },
     {
@@ -722,15 +735,27 @@
       "manuscript_label": "cor:v14-one-step",
       "coverage": "conditional_deduction",
       "declarations": [
-        "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.genusEight_oneProjectiveLine_not_rational_of_residueContext",
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.genusEight_oneProjectiveLine_not_rational_of_residueContext"
+      ],
+      "objects": "An abstract geometric signature naming a genus-eight carrier, its associated Pfaffian cubic, both rank-two projectivizations, and the direct formal-exponent-marker context for irrationality.",
+      "hypotheses": "Each projectivization is birational to the one-projective-line product of its base, the two projectivizations are birational through the flop, rationality transports along the context's birational relation, and the associated cubic satisfies the direct marker one-step input.",
+      "conclusion": "The named product of the genus-eight carrier with one projective line is irrational.",
+      "cautions": "Conditional deduction at the formal boundary. Lean constructs neither the Fano threefold, Pfaffian cubic, bundles, projectivizations, nor flop, and does not prove that a rank-two projectivization is birational to the corresponding product. No higher stabilization is represented.",
+      "statement_digest": "3eb15babef9517601b6cebae13065dd178bf9a62325dc14f87534123b978ad13",
+      "terminal_digest": "b331627f1fd37385eb2217f78ad8c401959b1057677a37d7667571e03dce284a"
+    },
+    {
+      "manuscript_label": "cor:v14-framed-count",
+      "coverage": "conditional_deduction",
+      "declarations": [
         "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.genusEight_framedSixthMarker_eq_two_of_categoricalFlop"
       ],
-      "objects": "An abstract geometric signature naming a genus-eight carrier, its associated Pfaffian cubic, and both rank-two projectivizations; the direct residue-marker context for unconditional irrationality; and the framed primitive-sixth context for the conditional equality.",
-      "hypotheses": "For the direct route, each projectivization is birational to the one-projective-line product of its base, the two are birational through the flop, rationality transports along the context's birational relation, and the associated cubic satisfies the direct residue-marker one-step input. For the framed route, the bases have dimension three, both total spaces satisfy the rank-two marker formulas, the totals are birational, and the associated cubic has framed marker two.",
-      "conclusion": "The named product of the genus-eight carrier with one projective line is irrational. Under the framed context, the carrier has primitive-sixth marker two.",
-      "cautions": "Both conclusions now specialize the common occurrence-indexed categorical spine. Lean constructs neither the Fano threefold, Pfaffian cubic, bundles, projectivizations, nor flop, and does not prove that a rank-two projectivization is birational to the corresponding product. The direct route transports the cubic residue obstruction; the framed route applies categorical marker invariance to the two total spaces and cancels the common factor two. No higher stabilization is represented.",
-      "statement_digest": "302bc3d273915ac8d5872551de945ec060d0b19575dccdfbcefa5a98d5e771e6",
-      "terminal_digest": "add9ea5048d2105ed7a8f2a6b5dfd86ef62b40a13187c2a291d559f7dc1eaa93"
+      "objects": "An abstract geometric signature naming a genus-eight carrier, its associated Pfaffian cubic, both rank-two projectivizations, and the framed primitive-sixth marker context.",
+      "hypotheses": "The bases have dimension three, both projectivizations satisfy the rank-two marker formulas, the total spaces are birational through the flop, and the associated cubic has framed marker two.",
+      "conclusion": "The genus-eight carrier has primitive-sixth marker two.",
+      "cautions": "Conditional deduction. Lean applies framed marker invariance to the two projectivizations and cancels the common factor two, but constructs none of the geometric objects, the flop, or the framed QDM comparison and center-nullity providers.",
+      "statement_digest": "fbeb22f0dd753957ebfe96c624ec2c1642b23e1b302982fd4005c4cfda54381e",
+      "terminal_digest": "60e14de05b82c7231803631965faa3835f4a54601a298b401e90ce062e0ce531"
     },
     {
       "manuscript_label": "def:monomial-specialization",
@@ -856,6 +881,16 @@
       "cautions": "Conditional deduction. Lean proves the free effective fold, arbitrary-monoid and arbitrary-dimension telescope, occurrence preservation, and quotient descent. Weak factorization and the geometric operation formulas are supplied as typed provider data rather than formalized from algebraic geometry. The QDM comparisons that produce those formulas remain outside this row and are registered under prop:qdm-operation-ledgers.",
       "statement_digest": "2bb9891d902b7d680b3e27c41fc85124396cac2dd7783e4733564570f00eff1b",
       "terminal_digest": "f8a38d7c98c400a29332ad3f24cebfe48c60bc38ea82dfa62f0f4850e602b042"
+    },
+    {
+      "manuscript_label": "lem:faithful-center-base-change",
+      "coverage": "absent",
+      "declarations": [],
+      "objects": "Iritani's divisor-equation-reduced completed coefficient ring for a blowup center, its numerical Novikov monomials, independent divisor-character variables, the common Laurent comparison ring, and the intrinsic and occurrence-indexed generic even quantum D-modules of the center.",
+      "hypotheses": "Divisor pairings separate numerical curve classes; fibres of the untagged center monomial map are finite in every bounded ample-degree slice; Iritani's reduced center connection and mutually inverse comparison maps are defined over the reduced image ring; and the combined bulk Jacobian is invertible.",
+      "conclusion": "The character-tagged completed coefficient map is injective, and after passage to generic fraction fields every actual center summand is a faithful scalar extension and formal reparametrization of the intrinsic generic numerical even QDM of the center.",
+      "cautions": "Absent from Lean. The package proves abstract finite exponential-character independence and a proxy completed-tagging injection elsewhere, but it does not construct these geometric completed rings, their filtrations, Iritani's comparison and inverse, the bulk Jacobian, or the claimed QDM base-change diagram.",
+      "statement_digest": "ff4c6212c6ddf74454f5d9b819fa3829ae79ea01e6cd33fb70febfb030b5c3e6"
     },
     {
       "manuscript_label": "prop:qdm-operation-ledgers",

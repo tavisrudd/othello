@@ -192,6 +192,7 @@ TavisRuddFiniteGeom.Papers.CubicStabilizationM1.rankTwoResidueMarker_lowDimensio
 TavisRuddFiniteGeom.Papers.CubicStabilizationM1.occurrenceIndexedMarker_eq_of_birational: propext, Classical.choice, Quot.sound
 TavisRuddFiniteGeom.Papers.CubicStabilizationM1.occurrenceIndexedMarker_descends_to_birationalClasses: propext, Classical.choice, Quot.sound
 TavisRuddFiniteGeom.Papers.CubicStabilizationM1.rankTwoResidueMarker_eq_of_birational: propext, Classical.choice, Quot.sound
+TavisRuddFiniteGeom.Papers.CubicStabilizationM1.threefold_not_rational_of_occurrenceIndexedMarker: propext, Classical.choice, Quot.sound
 TavisRuddFiniteGeom.Papers.CubicStabilizationM1.framedSixthMarker_eq_of_birational: propext, Classical.choice, Quot.sound
 TavisRuddFiniteGeom.Papers.CubicStabilizationM1.framedSixthMarker_eq_of_oneProjectiveLine_birational: propext, Classical.choice, Quot.sound
 TavisRuddFiniteGeom.Papers.CubicStabilizationM1.cubicThreefold_oneProjectiveLine_conclusion_of_residueMarker: propext, Classical.choice, Quot.sound

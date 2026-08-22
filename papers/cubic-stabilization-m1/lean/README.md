@@ -1,17 +1,17 @@
 # Lean companion to *Irrationality of Cubic Threefolds after One Stabilization*
 
-This Mathlib-only package is the formal companion to the manuscript.  Its
-reviewer-facing entry point is
+This Mathlib-only package is the shared formal companion to the primary paper
+and the two companion manuscripts in this repository.  Its reviewer-facing
+entry point is
 
 ```text
 TavisRuddFiniteGeom.Papers.CubicStabilizationM1.PaperInterface
 ```
 
-That module is a thin aggregator.  The declarations themselves are grouped in
-semantic reviewer facades matching the manuscript: `Introduction`, `Envelope`,
-`MinimalClass`, `CategoricalOneStep`, `FramedMonodromy`, and `Synthesis` under
-`PaperInterface/`.  The declaration-free synthesis facade records that the
-concluding section introduces no new theorem-like terminal.  Reusable audited
+That module is a thin aggregator.  The declarations themselves remain grouped
+in semantic reviewer facades matching the three logical strands:
+`Introduction`, `Envelope`, `MinimalClass`, `CategoricalOneStep`,
+`FramedMonodromy`, and `Synthesis` under `PaperInterface/`.  Reusable audited
 terminals on which no manuscript claim currently rests live separately in
 the `PaperInterface/CoefficientTowers.lean`,
 `PaperInterface/FormalConnections.lean`, and
@@ -33,7 +33,7 @@ reported as independently formalized.
 
 This is a publishable partial companion, not a claim of complete
 formalization.  The machine-checked claim inventory contains every labelled
-theorem-like environment in the manuscript and classifies each one as absent
+theorem-like environment in all three manuscripts and classifies each one as absent
 from Lean, represented by an exact but strictly weaker fragment, represented by
 a conditional deduction with every external premise exposed in the theorem
 type, or completely formalized from the manuscript's stated hypotheses.  Of the
@@ -65,8 +65,8 @@ truncated Chern class arithmetic, the Betti numbers, the degree count placing th
 whole odd cohomology in that packet, and the constancy of rank on a connected
 component.
 
-Checked coverage snapshot: 54 claims; 4 absent; 23 fragmentary; 26 conditional;
-1 complete; 316 reviewer terminals, of which 83 are machinery serving no current
+Checked coverage snapshot: 57 claims; 5 absent; 24 fragmentary; 27 conditional;
+1 complete; 317 reviewer terminals, of which 83 are machinery serving no current
 manuscript claim.
 
 Those machinery terminals are kernel-checked and reusable, and the claim map records for each one

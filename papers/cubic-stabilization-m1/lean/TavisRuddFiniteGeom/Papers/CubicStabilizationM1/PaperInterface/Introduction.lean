@@ -73,6 +73,32 @@ theorem rankTwoResidueMarker_eq_of_birational
     (related : context.birational.r left right) :
     context.marker left = context.marker right :=
   context.marker_eq_of_birational leftSmooth rightSmooth leftDimension rightDimension related
+/-- Reviewer-facing dimension-three endpoint contradiction for an
+occurrence-indexed marker.  All QDM, weak-factorization, center-nullity, and
+rationality inputs remain explicit. -/
+theorem threefold_not_rational_of_occurrenceIndexedMarker
+    {Variety Center Occurrence A : Type*} [AddCommMonoid A]
+    {presentation : Quantum.BlockPresentation}
+    (data : Quantum.OccurrenceIndexedLedger Variety Center Occurrence presentation)
+    (fold : presentation.EffectiveLedger →+ A)
+    (birational : Setoid Variety)
+    (provider : Quantum.BirationalFactorizationProvider data fold 3 birational)
+    (nullity : Quantum.LowDimensionalOccurrenceNullity data fold 3)
+    (Rational : Variety → Prop) (projectiveThreeSpace threefold : Variety)
+    (projectiveSmooth : data.smoothProjective projectiveThreeSpace)
+    (threefoldSmooth : data.smoothProjective threefold)
+    (projectiveDimension : data.dimension projectiveThreeSpace = 3)
+    (threefoldDimension : data.dimension threefold = 3)
+    (projectiveMarker : data.varietyMarker fold projectiveThreeSpace = 0)
+    (threefoldMarker : data.varietyMarker fold threefold ≠ 0)
+    (rationalComparison : Rational threefold →
+      birational.r threefold projectiveThreeSpace) :
+    ¬ Rational threefold := by
+  intro rational
+  have markerEquality := provider.marker_eq_of_related data fold 3 birational nullity
+    threefoldSmooth projectiveSmooth threefoldDimension projectiveDimension
+    (rationalComparison rational)
+  exact threefoldMarker (markerEquality.trans projectiveMarker)
 /-- Reviewer-facing direct-QDM one-step conclusion with the exact stabilized
 marker value and irrationality exposed together. -/
 theorem cubicThreefold_oneProjectiveLine_conclusion_of_residueMarker

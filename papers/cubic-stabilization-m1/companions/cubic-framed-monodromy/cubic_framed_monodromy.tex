@@ -1,0 +1,178 @@
+\documentclass[11pt]{article}
+
+\usepackage[a4paper,margin=29mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,amsthm,amscd,mathtools,mathrsfs}
+\usepackage{array,booktabs}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning}
+\usepackage[hidelinks]{hyperref}
+
+\numberwithin{equation}{section}
+
+\input{formal-annotations}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem*{hypothesisR}{Hypothesis R}
+\newtheorem*{hypothesisT}{Hypothesis T}
+\newtheorem{lemmaOneA}[theorem]{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\A}{\mathbf A}
+\newcommand{\C}{\mathbf C}
+\newcommand{\F}{\mathbf F}
+\newcommand{\Q}{\mathbf Q}
+\newcommand{\Z}{\mathbf Z}
+\newcommand{\PP}{\mathbf P}
+\newcommand{\CH}{\operatorname{CH}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\NS}{\operatorname{NS}}
+\newcommand{\Alb}{\operatorname{Alb}}
+\newcommand{\CFF}{\operatorname{CFF}}
+\newcommand{\FM}{\operatorname{FM}}
+\newcommand{\kk}{\Bbbk}
+\newcommand{\OO}{\mathcal O}
+\newcommand{\Eu}{\mathsf{Eu}}
+\newcommand{\Gr}{\mathsf{Gr}}
+\newcommand{\Hod}{\mathsf{Hod}}
+\newcommand{\CF}{\mathsf{CF}}
+\newcommand{\HAtoms}{\mathsf{HAtoms}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\rk}{\operatorname{rk}}
+\newcommand{\Spec}{\operatorname{Spec}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\Bl}{\operatorname{Bl}}
+\newcommand{\disc}{\operatorname{disc}}
+
+\title{Framed Formal Monodromy of Cubic Threefolds}
+\author{Tavis Rudd}
+\date{August 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We define a framed formal-monodromy count \(\nu_6\) for the numerical small
+even quantum connection and compute
+\(\nu_6(X)=2\) and \(\nu_6(X\times\PP^1)=4\) for every smooth cubic
+threefold.  The calculation and product formula are unconditional.  Under an
+explicit reconstruction-tail hypothesis, the count satisfies blowup and
+projective-bundle formulas; under a separate residual divisor-tagging
+hypothesis for the remaining surface centers, it is birationally invariant
+through dimension four.  These hypotheses give a conditional second proof
+of one-step irrationality and the conditional identity \(\nu_6(V)=2\) for
+prime Fano threefolds of genus eight.  We isolate the exact comparison
+statements still needed to make the refinement unconditional.
+\end{abstract}
+
+\noindent\textbf{Keywords.} cubic threefold; quantum \(D\)-modules; formal
+monodromy; primitive sixth roots; blowups; projective bundles.
+
+\input{sections/01-introduction}
+\input{sections/02-framed-monodromy}
+
+\section*{AI assistance disclosure}
+
+This project was developed with extensive assistance from OpenAI Codex and
+Anthropic Claude. Under the author's direction, the systems assisted with
+proof exploration, literature research, exact computation, verification,
+and manuscript drafting and revision. The author checked the resulting
+arguments, computations, code, and cited sources, reviewed and edited all
+AI-assisted material, and assumes responsibility for all content.
+
+\footnotesize
+\noindent Numbered statements are cited from the exact versions listed here.
+Where both a journal and a preprint version appear, the numbering is that of
+the preprint.
+
+\begin{thebibliography}{99}
+
+\bibitem{Batyrev}
+V.~V.~Batyrev,
+\emph{Quantum cohomology rings of toric manifolds},
+in: Journ\'ees de G\'eom\'etrie Alg\'ebrique d'Orsay (Orsay, 1992),
+Ast\'erisque 218 (1993), 9--34.
+
+\bibitem{BeauvilleSurfaces}
+A.~Beauville,
+\emph{Complex algebraic surfaces}, second edition,
+London Mathematical Society Student Texts 34,
+Cambridge University Press, Cambridge, 1996.
+
+\bibitem{BehrendProduct}
+K.~Behrend,
+\emph{The product formula for Gromov--Witten invariants},
+J. Algebraic Geom. 8 (1999), 529--541; arXiv:alg-geom/9710014.
+
+\bibitem{Cai}
+J.~Cai,
+\emph{The cubic threefold is symplectically irrational},
+arXiv:2608.01577v1 (2026).
+
+\bibitem{Cotti}
+G.~Cotti,
+\emph{Cyclic stratum of Frobenius manifolds, Borel--Laplace
+\((\alpha,\beta)\)-multitransforms, and integral representations of
+solutions of quantum differential equations},
+Mem. Eur. Math. Soc. 2, EMS Press, Berlin, 2022;
+doi:10.4171/MEMS/2.
+
+\bibitem{Givental}
+A.~B.~Givental,
+\emph{A mirror theorem for toric complete intersections},
+in: Topological Field Theory, Primitive Forms and Related Topics (Kyoto, 1996),
+Progr. Math. 160, Birkh\"auser, Boston, 1998, 141--175;
+arXiv:alg-geom/9701016.
+
+\bibitem{IritaniBlowup}
+H.~Iritani,
+\emph{Quantum cohomology of blowups},
+arXiv:2307.13555v3 (2025).
+
+\bibitem{IritaniKoto}
+H.~Iritani and Y.~Koto,
+\emph{Quantum cohomology of projective bundles},
+arXiv:2307.03696v4 (2026).
+
+\bibitem{KuznetsovV14}
+A.~Kuznetsov,
+\emph{Derived categories of cubic and \(V_{14}\) threefolds},
+Proc. Steklov Inst. Math. 246 (2004), 171--194;
+arXiv:math/0303037v1.
+
+\bibitem{McDuffSalamon}
+D.~McDuff and D.~Salamon,
+\emph{\(J\)-holomorphic Curves and Symplectic Topology}, 2nd ed.,
+Amer. Math. Soc. Colloq. Publ. 52, American Mathematical Society, 2012.
+
+\bibitem{PutSinger}
+M.~van der Put and M.~F.~Singer,
+\emph{Galois Theory of Linear Differential Equations},
+Grundlehren der mathematischen Wissenschaften 328, Springer, 2003.
+
+\bibitem{SabbahStokes}
+C.~Sabbah,
+\emph{Introduction to Stokes Structures},
+Lecture Notes in Mathematics 2060, Springer, 2013;
+arXiv:0912.2762.
+
+\bibitem{RuddM1}
+T.~Rudd,
+\emph{Irrationality of cubic threefolds after one stabilization},
+preprint (2026).
+
+\end{thebibliography}
+
+\end{document}

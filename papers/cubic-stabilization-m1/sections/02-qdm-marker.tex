@@ -1,12 +1,20 @@
-\section{Categorical QDM markers and one stabilization}
+\section{QDM markers and one stabilization}
 \label{sec:atomic-one-step}
 
-We prove the unconditional theorem by applying the quantum \(D\)-module
+We prove the theorem by applying the quantum \(D\)-module
 decomposition formulas directly.  The common argument is stated first for an
 arbitrary additive marker.  The rest of the section constructs the smallest
-marker needed for a cubic threefold and verifies its center nullity.  The
-framed invariant of Section~\ref{sec:framed-monodromy} will apply the same
-ledger theorem to a block type carrying additional framing data.
+marker needed for a cubic threefold and verifies its center nullity.
+
+Here is the concrete invariant before the general construction.  Split the
+generic even quantum \(D\)-module into formal connection blocks.  A block
+contributes one when it has rank two, its centered leading Euler operator is
+nonzero square-zero, and the two exponent classes obtained after the canonical
+elementary modification are distinct modulo \(\Z\); every other block
+contributes zero.  Their sum is \(I_{\mathrm{at}}\).  The rest of the section
+shows that this count is intrinsic and additive, vanishes on all possible
+centers, equals one on a cubic threefold, doubles after product with \(\PP^1\),
+and vanishes on \(\PP^4\).
 
 \subsection{The one-blowup model}
 
@@ -159,9 +167,6 @@ Equivalently, the marker descends on object sets:
 \label{diag:marker-descent}
 \end{equation}
 This square reformulates the proof; it is not an additional input.
-The standard Hodge-atom construction is a distinct specialization of this
-occurrence/groupoid/fold pattern; its exact type map and one-step carrier
-quotient are developed in \cite{RuddHodgeLedger}.
 
 \subsection{The QDM operation providers}
 
@@ -189,12 +194,14 @@ comparison and its inverse therefore restrict to mutually inverse maps on
 Third, the comparisons are regular in \(z\).  Iritani's Theorem~5.18 and
 Iritani--Koto's Theorem~5.1 are respectively defined over rings of the form
 \[
- \C[z]((q_{\mathrm{exc}}^{-1/s}))[[Q,\widetilde\tau]],
+ \C[z]((q_{\mathrm{exc}}^{-1/\mathfrak s}))[[Q,\widetilde\tau]],
  \qquad
  \C[z]((q_{\mathrm{fib}}^{-1/r'}))[[Q,\widehat\tau]],
 \]
 where Iritani--Koto take \(r'=r\) when \(r-1\) is even and \(r'=2r\) when
-\(r-1\) is odd.  Their inverses use no negative powers of \(z\); see also
+\(r-1\) is odd.  Here \(\mathfrak s\in\{c-1,2(c-1)\}\) is Iritani's
+parity-dependent ramification index from \cite[(5.11)]{IritaniBlowup}.  Their
+inverses use no negative powers of \(z\); see also
 \cite[Remark~5.3]{IritaniKoto}.  The maps are homogeneous but need not have
 degree zero: the projective-bundle map has degree \(-(r-1)\), while Iritani's
 ambient and center components have degrees \(0\) and \(-c\), respectively
@@ -211,6 +218,7 @@ Fourth, Iritani's center map need not be injective
  Q^{i_*d}q_{\mathrm{exc}}^{-\rho_Z\cdot d/(c-1)}.
  \label{eq:center-novikov-map-atomic}
 \end{equation}
+Here \(\rho_Z=c_1(N_{Z/Y})\).
 Choose divisors \(D_1,\ldots,D_\rho\) separating \(N_1(Z)\) and retain the
 characters \(\exp(\sum_k(D_k\cdot d)s_k)\).  Every fibre of
 \eqref{eq:center-novikov-map-atomic} is finite: an ample degree from \(Y\)
@@ -219,12 +227,58 @@ bounds the lattice points in the corresponding slice of
 restriction gives distinct exponentials.  Their derivatives of orders
 \(0,\ldots,n-1\) form an invertible Vandermonde matrix, so the
 character-tagged map is injective.
-Remarks~2.3 and 5.6 of \cite{IritaniBlowup} show that divisor and Novikov
-variables occur in precisely these combinations.  The reduced
-divisor-equation image ring with its retained character tags replaces the
-function-level symbol \(\sigma_j^*\), which need not exist before reduction.
-Over this ring, each actual center term is a faithful scalar extension and
-formal reparametrization of the intrinsic generic numerical QDM of \(Z\).
+The resulting base change is the following.
+
+\begin{lemma}[Faithful center base change]
+\label{lem:faithful-center-base-change}
+\coverage{absent}%
+Let \(R_{Z,\mathrm{src}}^{\mathrm{red}}\) be the coefficient domain whose
+\(\C[z]\)-extension is Iritani's divisor-equation source ring
+\(\C[z][[Q_Ze^{\sigma^{(2)}},\sigma']][\sigma^0]\), and let
+\(R_{\mathrm{cmp},j}^{\mathrm{red}}\) be its completed image coefficient
+domain in the \(j\)-th common comparison ring
+\cite[Remark~5.6]{IritaniBlowup}.  After adjoining independent divisor
+variables \(s_1,\ldots,s_\rho\), the continuous map
+\(\iota_j:R_{Z,\mathrm{src}}^{\mathrm{red}}[[s]]
+\to R_{\mathrm{cmp},j}^{\mathrm{red}}[[s]]\) defined by
+\begin{equation}
+ Q_Z^d\exp\!\left(\sum_k(D_k\cdot d)s_k\right)
+ \longmapsto
+ Q^{i_*d}q_{\mathrm{exc}}^{-\rho_Z\cdot d/(c-1)}
+ \exp\!\left(\sum_k(D_k\cdot d)s_k\right)
+ \label{eq:faithful-center-map}
+\end{equation}
+is injective.  It induces a field embedding
+\[
+ \operatorname{Frac}(R_{Z,\mathrm{src}}^{\mathrm{red}}[[s]])
+ \lhook\joinrel\longrightarrow
+ \operatorname{Frac}(R_{\mathrm{cmp},j}^{\mathrm{red}}[[s]]).
+\]
+After this field extension, each center summand in Iritani's comparison is the
+faithful scalar extension, followed by the formal coordinate change
+\(\varsigma_j\), of the intrinsic generic numerical even QDM of \(Z\).
+\end{lemma}
+
+\begin{proof}
+Filter both completed rings by an ample degree pulled back from \(Y\).  In
+each bounded quotient, every fibre of the untagged monomial map is finite.
+On such a fibre choose an integral linear combination of the \(D_k\) that
+separates its curve classes.  Restriction to the corresponding one-parameter
+subgroup turns a putative kernel element into a finite sum of distinct
+exponentials; its first \(n\) derivatives give a Vandermonde matrix, so every
+coefficient is zero.  The map is therefore injective on every quotient and,
+by separated completeness, on the inverse limit.
+
+Remark~5.6 of \cite{IritaniBlowup} defines the center connection over exactly
+the image of this divisor-equation-reduced ring, rather than over the bare
+noninjective map~(5.15).  Base-change the comparison of
+\cite[Theorem~5.18]{IritaniBlowup} and its inverse along
+\eqref{eq:faithful-center-map}; their two identities remain identities.
+The resulting extension of fraction fields is faithfully flat.
+Finally, the invertible combined bulk Jacobian in Theorem~5.18(7) identifies
+the retained divisor coordinates with the center coordinates and supplies
+the formal reparametrization \(\varsigma_j\).
+\end{proof}
 
 \begin{proposition}[QDM operation ledgers]
 \label{prop:qdm-operation-ledgers}
@@ -268,14 +322,14 @@ parameters, and the invertible combined bulk Jacobian, respectively.  The
 independent unit coordinates supplied by part~(7) give the same nonzero
 resultant argument, so the ambient and occurrence-indexed center spectra are
 pairwise disjoint generically.  Regularity, even-carrier restriction, the
-fixed splitting field, suspension invariance, and the faithful character
-argument for each center copy then give
+fixed splitting field, suspension invariance, and
+Lemma~\ref{lem:faithful-center-base-change} for each center copy then give
 \eqref{eq:marker-blowup}.  Each comparison is evaluated over its own common
 coefficient spine; the proof never composes Laurent comparisons recursively.
 \end{proof}
 
 The QDM comparison need not identify the two ledger elements before applying
-the fold.  The relevant categorical operation is instead the additivity square
+the fold.  The relevant block-ledger operation is instead the additivity square
 \begin{equation}
 \begin{CD}
  \mathcal L_{\mathcal T}\times\mathcal L_{\mathcal T}
@@ -589,9 +643,9 @@ surface \(\PP_C(V)\) \cite[Chapter~VI]{BeauvilleSurfaces}.  The relation
 \eqref{eq:marker-pbundle} and the curve case give zero for ruled surfaces.
 Every nonminimal surface is obtained from a minimal one by point blowups;
 formula~\eqref{eq:marker-blowup} adds only zero point terms.  This proves
-intrinsic nullity.  The faithful character argument identifies every actual
-center term with a faithful scalar extension of the corresponding intrinsic
-generic block, and the marker is unchanged by that extension.
+intrinsic nullity.  Lemma~\ref{lem:faithful-center-base-change} identifies
+every actual center term with a faithful scalar extension of the corresponding
+intrinsic generic block, and the marker is unchanged by that extension.
 \end{proof}
 
 \subsection{The projective endpoint and the contradiction}
@@ -602,7 +656,8 @@ Formula~\eqref{eq:marker-pbundle} applied to
  I_{\mathrm{at}}(X\times\PP^1)=2.
  \label{eq:atomic-product-value}
 \end{equation}
-On the other hand,
+On the other hand, over the generic numerical Novikov field
+\(\Lambda=\operatorname{Frac}\C[[Q]]\),
 \(QH^\bullet(\PP^4)=\Lambda[H]/(H^5-Q)\).  At \(Q\ne0\), multiplication
 by \(5H\) has five distinct eigenvalues after algebraic closure.  Thus
 \begin{equation}
@@ -622,9 +677,3 @@ invariant.  If \(X\times\PP^1\) were rational, then
 a contradiction.
 \proves{thm:every-cubic}%
 \end{proof}
-
-\begin{remark}[Scope]
-The marker, center theorem, and weak-factorization application above are
-strictly for one stabilization.  No statement concerns a second or an
-arbitrary stabilization.
-\end{remark}

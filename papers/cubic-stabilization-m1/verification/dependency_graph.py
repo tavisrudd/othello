@@ -25,7 +25,11 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-SECTIONS = ROOT / "sections"
+SECTION_DIRS = (
+    ROOT / "sections",
+    ROOT / "companions" / "six-axis-cubic-pencil" / "sections",
+    ROOT / "companions" / "cubic-framed-monodromy" / "sections",
+)
 ENVIRONMENTS = ("theorem", "proposition", "lemma", "corollary", "definition")
 FILL = {
     "absent": "#ffffff",
@@ -50,7 +54,11 @@ def collect() -> tuple[dict[str, str], list[tuple[str, str, str]]]:
         r"\\begin\{(" + "|".join(ENVIRONMENTS) + r")\}(?:\[[^\]]*\])?(.*?)\\end\{\1\}",
         re.DOTALL,
     )
-    for section in sorted(SECTIONS.glob("*.tex")):
+    for section in (
+        section
+        for directory in SECTION_DIRS
+        for section in sorted(directory.glob("*.tex"))
+    ):
         text = section.read_text(encoding="utf-8")
         for match in environment.finditer(text):
             body = match.group(2)
