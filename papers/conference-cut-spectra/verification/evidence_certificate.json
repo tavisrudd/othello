@@ -474,7 +474,7 @@
       }
     }
   },
-  "schema": "golden-quantum-statistics-evidence-v1",
+  "schema": "conference-cut-spectra-evidence-v1",
   "trust_boundary": {
     "certificate_checked": [
       "balanced census and calibrated permanent probabilities",

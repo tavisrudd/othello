@@ -544,8 +544,8 @@ fact, materializes a disposable candidate on the canonical
 `~/src/lean/finitegeom` base twice, requires byte-identical repeats, verifies
 byte identity, manifests, terminals, and an unchanged base, and prints a
 read-only forward delta without committing, tagging, pushing, or editing either
-repository. Its Golden configuration is
-`lean/trust/export/golden_quantum_statistics.toml`, and an end-to-end run gives
+repository. Its balanced-cut configuration is
+`lean/trust/export/conference_cut_spectra.toml`, and an end-to-end run gives
 a ten-file forward delta taking the canonical library state from 273 to 275
 modules. That candidate is deliberately not adopted or elaborated because C853
 replaces its four scalar terminals. Details:
@@ -883,7 +883,7 @@ reference remain user-owned.
 ## Manuscript toolchain (handed over 2026-08-04, unallocated)
 
 `papers/golden-operator/Makefile` and
-`papers/golden-quantum-statistics/Makefile` resolve TeX from the mutable flake
+`papers/conference-cut-spectra/Makefile` resolve TeX from the mutable flake
 registry and pin no build epoch, so neither manuscript builds reproducibly and
 neither can gate on a stale tracked PDF.  The four Clebsch-series papers now
 copy one shared `papers/flake.nix`/`flake.lock`, build through

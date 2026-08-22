@@ -284,7 +284,7 @@ def build_certificate() -> dict:
                 ],
             },
         },
-        "schema": "golden-quantum-statistics-evidence-v1",
+        "schema": "conference-cut-spectra-evidence-v1",
         "evidence_bundles": source_files,
         "trust_boundary": {
             "certificate_checked": [
@@ -322,8 +322,8 @@ def local_manifest_bytes(certificate_bytes: bytes) -> bytes:
         (HERE / "check_manuscript_build.py",
          (HERE / "check_manuscript_build.py").read_bytes()),
         (PAPER_ROOT / "Makefile", (PAPER_ROOT / "Makefile").read_bytes()),
-        (PAPER_ROOT / "golden_quantum_statistics.tex",
-         (PAPER_ROOT / "golden_quantum_statistics.tex").read_bytes()),
+        (PAPER_ROOT / "conference_cut_spectra.tex",
+         (PAPER_ROOT / "conference_cut_spectra.tex").read_bytes()),
         (PAPER_ROOT / "pyproject.toml", (PAPER_ROOT / "pyproject.toml").read_bytes()),
         (PAPER_ROOT / "uv.lock", (PAPER_ROOT / "uv.lock").read_bytes()),
     ]
@@ -339,7 +339,7 @@ def local_manifest_bytes(certificate_bytes: bytes) -> bytes:
         }
     return canonical_bytes({
         "files": files,
-        "schema": "golden-quantum-statistics-manifest-v1",
+        "schema": "conference-cut-spectra-manifest-v1",
     })
 
 

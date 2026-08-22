@@ -1725,6 +1725,84 @@ is not the whole adapter: geometry must first identify the exhaustive marked
 primitive-factor packet with the tagged carrier and prove that the loop
 preserves those occurrence fibres.
 
+## D14. A threefold dimension budget stops at the first connection jet
+
+The obvious dimension-three exclusion is false.  On the slice
+
+\[
+  A_t=\mathbb Q[t,x,e]/(x^3-t,e^2)
+\]
+
+the generic fibre splits, after adjoining \(t^{1/3}\), into a regular cubic
+orbit of three rank-two dual-number factors.  The special fibre is the
+classical algebra of \(\mathbb P^2\times\mathbb P^1\).  Multiplication by
+\(x+e\) there is self-adjoint for the top-coefficient pairing and has Jordan
+type \(J_4\oplus J_2\), not \(J_2^3\).  Thus a rank-six lattice can extend
+while the three primitive block lattices and their elementary modifications
+collide.  Rank, Poincare duality, and the threefold Hard-Lefschetz profile do
+not give marked-block descent.
+
+There is also an exact six-dimensional linear falsifier.  It has grading
+spectrum
+
+\[
+  \{-3/2,-1/2,-1/2,1/2,1/2,3/2\},
+\]
+
+a perfect degree-three pairing, and a branch compression whose elementary
+modification has discriminant \(4/9\).  It therefore satisfies the coarse
+grading, pairing, and marker equations simultaneously.  It fails the strict
+logarithmic homogeneity equation for the cubic multiplication operator.
+`Comparison.ThreefoldKummerCompatibility` checks these assertions over
+\(\mathbb Q\), together with the preceding \(J_4\oplus J_2\) calculation.
+This is a falsifier module, not a threefold-QDM construction.
+
+A narrower finite reduction is valid.  If an actual carrier is compatible
+with a three-piece residue grading, contains the whole residue-zero class,
+and the grading operator preserves that class and is scalar on the other two,
+then the grading preserves the carrier.  The same Lean module proves this and
+derives the required containment from a full-dimensional subspace.  The
+geometric hypotheses are not formal consequences of rank six.  A
+parameter-dependent occurrence gauge contributes the Euler derivative term,
+and localized coefficient variables of nonzero degree modulo three can erase
+the cohomological residue-class budget.
+
+Most importantly, grading stability does not compute the marked residue.
+For an adapted rank-two block
+
+\[
+  M(z)=z^{-1}N+A_0+zA_1+\cdots,
+\]
+
+the elementary modification retains the lower-left entry
+\(c=(A_1)_{21}\).  With the proposed compressed weights the residue may have
+the form
+
+\[
+  R_c=\begin{pmatrix}-1/2&1\\ c&-1/2\end{pmatrix},
+  \qquad \delta^\sharp(R_c)=4c.
+\]
+
+The value \(c=0\) gives the unmarked product model, while \(c=1/9\) gives the
+cubic value \(4/9\), without changing the leading rank, nilpotent, or grading
+compression.  The logarithmic homogeneity equation checked in Lean contains
+no \(A_1\) term and cannot force this vanishing.
+
+Accordingly, a genuine dimension-three correction theorem needs three
+independent clauses:
+
+1. saturated descent of the three elementary-modified marked block lattices
+   through the Kummer collision;
+2. Euler-horizontal occurrence reindexing, including the base-Euler
+   derivative term; and
+3. a threefold-specific divisor, flatness, or WDVV theorem forcing
+   \((A_1)_{21}=0\).
+
+No audited blowup, projective-bundle, Hodge, p-curvature, or
+irregular-Hodge source proves these clauses.  The dimension-budget route is
+therefore a sharply stated possible new theorem, not a present provider for
+the period-three correction exclusion.
+
 ## Current source verdict
 
 1. **The row/projector architecture is closed in the no-Stokes regime.**

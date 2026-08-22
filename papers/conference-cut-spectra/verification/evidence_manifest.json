@@ -1,20 +1,20 @@
 {
   "files": {
     "Makefile": {
-      "bytes": 1790,
-      "sha256": "5fcb8b3bac6cf2fba01f22197cb5d073fa64ec4e2ec8cd93d42b0c48ff0aa358"
+      "bytes": 1781,
+      "sha256": "9cb47945d435f2e7170c604fa20c65c412257d28bc124c8a5a0f53565ffd5dcc"
     },
-    "golden_quantum_statistics.tex": {
-      "bytes": 54531,
-      "sha256": "34d86b824a1ad591915f9400a6ffe33f608d23e760c4c5c3b4158b9c2c113c2b"
+    "conference_cut_spectra.tex": {
+      "bytes": 54334,
+      "sha256": "e9f5a404df0fe668605030841df505282d71fd0ed77306bfe031aa12f5b84f5c"
     },
     "pyproject.toml": {
-      "bytes": 168,
-      "sha256": "d58925c8c32e80d8971af330033b085a31857e9be14ff63b70520657ab116203"
+      "bytes": 165,
+      "sha256": "5dc14a8e077b5e16c40befe0039ad13096aeaae161bf4fe12d9ccca324a4a759"
     },
     "uv.lock": {
-      "bytes": 1756,
-      "sha256": "1e477e1b1f12759445102c654ff14b01d32e392ef9f1ccfc4950d4c47818e5e5"
+      "bytes": 1753,
+      "sha256": "c5e83e0c87502449b5ec6fa77fde427f7f40d69eec1467dd55bbbbe04a95354f"
     },
     "verification/EVIDENCE.md": {
       "bytes": 2927,
@@ -25,8 +25,8 @@
       "sha256": "28185ef880145d1e0165ba3b4e3cfeed927912c01e4048e551494cb87a0b5c96"
     },
     "verification/check_manuscript_build.py": {
-      "bytes": 4892,
-      "sha256": "1659d840c185aca2924275ec0eebb5454c33bd603769535fe228fdea7728cc4e"
+      "bytes": 4874,
+      "sha256": "be943749107e072af0117d0be1dea58f0a5be94522bc21254461f9f4378addd6"
     },
     "verification/evidence/anomaly_inverse.json": {
       "bytes": 14269,
@@ -65,17 +65,17 @@
       "sha256": "812a9a72ed57f5c65f26f7d58e802b741ce97173a9c32d6c5d4f853ead4c5caf"
     },
     "verification/evidence_certificate.json": {
-      "bytes": 10104,
-      "sha256": "592c10c67616c26bc55c9a9aa5f0357d679b79e6fe8b62639d579b45d417501a"
+      "bytes": 10101,
+      "sha256": "76695b4e205cf6b5286d6dd345fe9dccaed962e4a0c78dd35ea125819ab4931c"
     },
     "verification/lint_tex_spacing.py": {
       "bytes": 1499,
       "sha256": "511eb6837ec3b59769f4a2e3d76a9658403907f270246e9d739bec1afcc345e0"
     },
     "verification/verify.py": {
-      "bytes": 15375,
-      "sha256": "8f2b26a4c004301bddd721e1a460313bfc53720c866f3a5add670910e9a05b37"
+      "bytes": 15363,
+      "sha256": "fb54ef36bd79dbc2d9b2ba1296a4d6daf008a55e6865724f89e0f921b9dd599b"
     }
   },
-  "schema": "golden-quantum-statistics-manifest-v1"
+  "schema": "conference-cut-spectra-manifest-v1"
 }

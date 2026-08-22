@@ -28,8 +28,9 @@ precise ambiguity in passing between them. *Reconstructing PG(2,13), Its Conic,
 and Polarity from the Minimum Words of a Binary Conic Code* develops a separate
 code reconstruction: pair data from minimum-weight words recover a marked conic
 plane and its polarity.
-*Diagonal Isoduality and Transversal Clifford Groups of MDS–CSS Codes* and the
-Golden interferometer paper are related unnumbered companions.
+*Diagonal Isoduality and Transversal Clifford Groups of MDS–CSS Codes* and
+*Balanced Cuts of Conference Matrices: Squared-Spectrum Rigidity and Hermitian
+Holonomy* are related unnumbered companions.
 
 One main paper and two companions concern irrationality and cycle theory for
 cubic threefolds. *Irrationality of Cubic Threefolds after One Stabilization*
@@ -126,12 +127,12 @@ complex as separate victories.
 
 ### Finite geometry and reconstruction
 
-- **Universal secant-defect identity.** For every finite projective plane and
-  prescribed hole set, the first two secant moments give an exact identity with
-  a pointwise nonnegative remainder. Zero defect forces a simple maximum-matching
-  design, while the remainder gives deletion stability. For `q + 1` holes this
-  yields a universal lower bound and exact small-field consequences for arcs
-  complete outside a conic. [Arcs Complete Outside a Conic: A Prescribed-Hole Defect Identity and Matching-Design Rigidity](https://github.com/tavisrudd/arcs-complete-outside-conic/blob/main/arcs_complete_outside_conic.pdf).
+- **Universal lower bound and secant-defect identity.** Even after any
+  prescribed `q + 1` points are exempted from coverage, a complete-outside arc
+  has size at least `√(2q) + 3/2 − 8/√(2q)`. The first two secant moments give
+  the exact pointwise-nonnegative defect behind this bound; zero defect forces
+  a simple maximum-matching design, and the remainder gives deletion
+  stability. [Arcs Complete Outside a Conic: A Prescribed-Hole Defect Identity and Matching-Design Rigidity](https://github.com/tavisrudd/arcs-complete-outside-conic/blob/main/arcs_complete_outside_conic.pdf).
 
 - **Sparse data recover marked finite geometry.** In the Clebsch case, a
   conic-containing deep-hole syndrome locus recognizes the non-GRS
@@ -199,14 +200,14 @@ complex as separate victories.
   asymptotically good outer families place it on a positive-density target
   class. [Complete Bounded Repair Ports](https://github.com/tavisrudd/complete-repair-ports/blob/main/complete_repair_ports.pdf).
 
-- **Order six is the unique nontrivial balanced conference order.** For a
-  symmetric conference matrix, split the modes into two equal parts and take
-  the singular-value spectrum of the corresponding cut block. Order six is
-  the unique nontrivial order at which this spectrum is independent of the
-  balanced split. The Golden six-mode analysis adds orientation-sensitive
-  determinant data and stability bounds, while explicitly treating the device
-  as a theory and design-limit model rather than a report of a built
-  experiment. [Exchange Landscapes, Orientation, and Rigidity](https://github.com/tavisrudd/golden-quantum-statistics/blob/main/golden_quantum_statistics.pdf).
+- **Order six is the unique nontrivial cut-rigid symmetric conference
+  order.** For a balanced half (Y) of a symmetric conference matrix, the
+  normalized cross-block Gram spectrum is independent of (Y) exactly in the
+  trivial order-two case and at order six. In the Hermitian order-six problem,
+  squared real triangle holonomy parametrizes the complete degree-three Pareto
+  frontier; cutwise constancy of any one sector characterizes the real
+  switching class, with a quantitative stability bound.
+  [Balanced Cuts of Conference Matrices](https://github.com/tavisrudd/conference-cut-spectra/blob/main/conference_cut_spectra.pdf).
 
 ## Theorems over infinite families
 
@@ -234,7 +235,7 @@ is conditional, its hypothesis is displayed in the theorem column.
 | Deep Holes of Projective Reed–Solomon Codes Beyond Redundancy Four: Recursive Carriers and Exact Classifications Through Redundancy Ten | On the trivial-gcd separable stratum, `#Y = 6N + 3d₂ + d₃` in every characteristic. | Every field order and characteristic. |
 | Local-Unitary Rigidity and Quantitative Rounding for Stabilizer AME States | Every product-unitary intertwiner between stabilizer `AME(2m,q)` states is Clifford on each party. | Every prime power `q = pᵉ` and `m ≥ 2`. |
 | Diagonal Isoduality and Transversal Clifford Groups of MDS–CSS Codes | The diagonal multiplier nullity fixes the transversal logical group. | All `[2m,m,m+1]q` MDS codes over odd prime fields. |
-| Exchange Landscapes, Orientation, and Rigidity in the Golden Six-Mode Conference Interferometer | Order six is the unique nontrivial realized symmetric conference order whose balanced-half exchange spectrum is cut-independent. | Every symmetric conference matrix and every balanced half. |
+| Balanced Cuts of Conference Matrices: Squared-Spectrum Rigidity and Hermitian Holonomy | Order six is the unique nontrivial realized symmetric conference order whose normalized balanced cross-block Gram spectrum is cut-independent. | Every symmetric conference matrix and every balanced half. |
 | Complete Bounded Repair Ports: Transfer, Reliability, and Geometric Structure | The minimum coefficient port reconstructs the represented code, although its support projection is the generic complete uniform clutter. | Every proper `[n,k]q` MDS code with `1 ≤ k < n`, at every distinguished coordinate. |
 | Complete Bounded Repair Ports: Transfer, Reliability, and Geometric Structure | Exact weighted-functional confinement transfers every represented bounded support and coefficient port below the pointed zero-functional threshold onto a designated positive-density target class. | Every fixed inner encoder and outer family with dual distance tending to infinity; asymptotic goodness follows from the stated classical outer-family inputs. |
 | Integral Cohomology and Modular Decomposition for the Theta Divisor of a Cubic Threefold | The integral middle lattice has rank `130` and saturation quotient `(Z/2)^10`; the integral resolution complex has central Smith factor three, a length-three mod-three Loewy chain, and modular relative-hard-Lefschetz failure. | The theta divisor of every smooth complex cubic threefold. |
@@ -262,7 +263,7 @@ boundary, and reproducible entry points.
 | Standard Flips of Discrepancy One: Extremal J-Normalization and the Meijer Aperture at ν=1 | Algebraic geometry / quantum cohomology | An exact `z`-order count and the `ν=1` Barnes sector complete the discrepancy-one range in Shen--Shoemaker's extremal flip theorem. | [PDF](https://github.com/tavisrudd/discrepancy-one-flips/blob/main/discrepancy_one_flips.pdf) · [repo](https://github.com/tavisrudd/discrepancy-one-flips) |
 | Arcs Complete Outside a Conic: A Prescribed-Hole Defect Identity and Matching-Design Rigidity | Finite geometry / designs | A universal pointwise defect identity gives matching-design rigidity, stability, and conic-relative bounds. | [PDF](https://github.com/tavisrudd/arcs-complete-outside-conic/blob/main/arcs_complete_outside_conic.pdf) · [repo](https://github.com/tavisrudd/arcs-complete-outside-conic) |
 | Diagonal Isoduality and Transversal Clifford Groups of MDS–CSS Codes | Quantum coding / finite geometry | A diagonal-isoduality nullity test determines the projective transversal group. | [PDF](https://github.com/tavisrudd/mds-css-transversal-groups/blob/main/mds-css-transversal-groups.pdf) · [repo](https://github.com/tavisrudd/mds-css-transversal-groups) |
-| Exchange Landscapes, Orientation, and Rigidity in the Golden Six-Mode Conference Interferometer | Quantum information / mathematical physics | Cut-independent exchange spectra and orientation-sensitive stability are unique at order six. | [PDF](https://github.com/tavisrudd/golden-quantum-statistics/blob/main/golden_quantum_statistics.pdf) · [repo](https://github.com/tavisrudd/golden-quantum-statistics) |
+| Balanced Cuts of Conference Matrices: Squared-Spectrum Rigidity and Hermitian Holonomy | Matrix theory / algebraic combinatorics / mathematical physics | Order six is the unique nontrivial cut-independent case; Hermitian triangle holonomy controls the degree-three frontier and rigidity. | [PDF](https://github.com/tavisrudd/conference-cut-spectra/blob/main/conference_cut_spectra.pdf) · [repo](https://github.com/tavisrudd/conference-cut-spectra) |
 | Integral Cohomology and Modular Decomposition for the Theta Divisor of a Cubic Threefold | Algebraic geometry / topology | The rank-130 integral middle lattice has canonical mod-two glue, while the same resolution carries a factor-three integral perverse attachment, a length-three modular Loewy chain, and failure of relative hard Lefschetz modulo three. | [PDF](https://github.com/tavisrudd/blown-up-theta-lattice/blob/main/blown_up_theta_lattice.pdf) · [repo](https://github.com/tavisrudd/blown-up-theta-lattice) |
 | Frobenius-equivariant Pair Extension and Robust Repair of Eight-Arcs | Finite geometry / coding theory | Fixed mate-line carriers and exact collision corrections give Frobenius-compatible paired MDS extensions, including the exact two-fixed-point minimum over F₂₅. | [PDF](https://github.com/tavisrudd/equivariant-robust-completion/blob/main/equivariant-robust-completion.pdf) · [repo](https://github.com/tavisrudd/equivariant-robust-completion) |
 | Complete Bounded Repair Ports: Transfer, Reliability, and Geometric Structure | Coding theory / reliability | Exact weighted-functional confinement transfers represented bounded repair ports to positive-density coordinate classes, retaining both support and normalized decoder data. | [PDF](https://github.com/tavisrudd/complete-repair-ports/blob/main/complete_repair_ports.pdf) · [repo](https://github.com/tavisrudd/complete-repair-ports) |
@@ -889,9 +890,9 @@ defect into maximum-matching-design rigidity and gives explicit stability; its
 principal conic application yields a quantitative lower bound and exact small
 orders.
 
-> *Abstract* An arc is a point set with no three collinear; its secants are the lines joining pairs of its points. For an arc in any finite projective plane and any prescribed set of points allowed to remain uncovered, we combine the first two moments of the number of secants through an external point into an exact identity with a pointwise nonnegative remainder. Its vanishing turns the canonical secant-concurrency decomposition of the pairs of secants with disjoint endpoint pairs into maximum-matching cliques. Equivalently, it produces a simple MATCH(k,⌊k/2⌋,1) design in which every pair of independent edges occurs once. In a Desarguesian plane, its matching blocks are realized by concurrent chord families of the planar k-arc. The same remainder gives explicit edge and deletion stability away from equality.
+> *Abstract* We prove that if H is any prescribed set of q + 1 points in a finite projective plane of order q, then every arc A disjoint from H whose secants cover all points outside A ∪ H satisfies |A| ≥ √(2q) + 3/2 − 8/√(2q). Thus even after exempting q + 1 points from coverage, the bound retains the classical √(2q) scale with additive term 3/2 − o(1). More generally, the first two secant moments yield an exact defect identity with nonnegative local summands. At zero defect, each concurrency class containing at least two secants is a maximum matching, and these classes form a simple MATCH(k,⌊k/2⌋,1) design. In Desarguesian planes, the arc realizes this design by concurrent chord families; the defect also gives quantitative deletion stability.
 >
-> As the principal application, for a nonsingular conic C ⊂ PG(2,q), let ρC(q) be the least size of an arc disjoint from C whose secants cover every remaining point outside C. We prove ρC(q) ≥ √(2q) + 3/2 − 8/√(2q). We determine the possible zero-defect orders and classify zero defect in characteristic two: for odd k ≥ 7, equality gives an oval whose nucleus lies on C, while for even k ≥ 6, it forces k = q + 2. A kernel-checked finite classification proves ρC(16) = 9. Separate exhaustive classifications, with kernel-checked attaining witnesses, give ρC(13) = 8, ρC(17) = 9, and ρC(19) = 10. The defect identity, equality criterion, and deletion stability are independently formalized in Lean.
+> For a nonsingular conic C ⊂ PG(2,q), let ρC(q) denote the corresponding minimum. In characteristic two, a C-complete zero-defect arc with odd k ≥ 7 is an oval of size q + 1 whose nucleus lies on C, while even k ≥ 6 forces k = q + 2, hence a hyperoval. A kernel-checked classification gives ρC(16) = 9; exhaustive classifications with kernel-checked attaining witnesses give ρC(13) = 8, ρC(17) = 9, and ρC(19) = 10. The defect identity, equality criterion, and deletion stability are independently formalized in Lean.
 >
 **Delivers.** An exact counting identity governs arcs relative to any prescribed
 set of points allowed to remain uncovered.  It gives matching-design rigidity
@@ -938,31 +939,37 @@ survives.
 
 ---
 
-#### Exchange Landscapes, Orientation, and Rigidity in the Golden Six-Mode Conference Interferometer
+#### Balanced Cuts of Conference Matrices: Squared-Spectrum Rigidity and Hermitian Holonomy
 
-[PDF](https://github.com/tavisrudd/golden-quantum-statistics/blob/main/golden_quantum_statistics.pdf) · [Repository](https://github.com/tavisrudd/golden-quantum-statistics) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21766747-blue.svg)](https://doi.org/10.5281/zenodo.21766747)
+[PDF](https://github.com/tavisrudd/conference-cut-spectra/blob/main/conference_cut_spectra.pdf) · [Repository](https://github.com/tavisrudd/conference-cut-spectra) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21766747-blue.svg)](https://doi.org/10.5281/zenodo.21766747)
 
 **Standout result.** Order six is the unique nontrivial symmetric conference
-order whose balanced exchange spectrum is independent of the cut, with
-corresponding extremality and stability results for the golden interferometer.
+order whose normalized balanced cross-block Gram spectrum is independent of the
+cut. In the Hermitian order-six problem, squared real triangle holonomy
+parametrizes the complete degree-three Pareto frontier and quantitatively
+controls rigidity relative to the real switching class.
 
-> *Abstract* We study a six-mode interferometer built from a real symmetric conference matrix C of order six. Since C² = 5I, its mode space splits into two three-dimensional eigenspaces with eigenvalues +√5 and −√5. We call this the Golden realization because φ = (1+√5)/2 is the golden ratio. A diagonal control couples the two eigenspaces through a three-by-three transfer. Singular values classify this transfer when its ports are unframed. Orienting the ports adds the sign of the top exterior amplitude; up to scale, the determinant is the unique minimal-degree polynomial carrying this relative orientation. Fully calibrated frames expose matrix-dependent amplitudes such as the permanent.
+> *Abstract* Let C be a symmetric conference matrix of order 2d, put q = 2d − 1, and for a balanced half Y write R = C[Y,Yᶜ]. We study the exchange spectrum spec(RRᵀ/q) and prove that it is independent of Y exactly when d ≤ 3. Since the order-two case is trivial and no symmetric conference matrix of order four exists, order six is the unique nontrivial case; its spectrum is {1/5, 4/5, 4/5}. For the associated diagonal-control transfer, the twenty balanced sign vectors in {±1}⁶ are exactly the maximizers of each degree-three Schur sector over [−1,1]⁶.
 >
-> For symmetric conference matrices, the balanced exchange spectrum is a normalized cross-Gram spectrum; order six is the unique nontrivial order at which it is independent of the balanced cut. In the Golden order-six transfer, the balanced Boolean controls are precisely the joint maximizers of all degree-three Schur sectors over the real control cube. Hermitian conference phase gives a transverse deformation. Triangle holonomy fixes the first two exchange moments and moves the degree-three sectors along an exact Pareto segment. Constancy of any one sector characterizes the real switching class. An averaged squared-holonomy defect controls the Frobenius distance to the real conference orbit globally from below and locally from above.
+> For Hermitian conference matrices of order six, the conference identities fix the first two exchange moments, while squared real triangle holonomy parametrizes the complete Pareto frontier of the three degree-three sectors. Cutwise constancy of any one sector holds exactly for matrices equivalent, under switching and permutation, to a real symmetric conference matrix. An averaged squared-holonomy defect bounds the Frobenius distance from that class globally from below and locally from above. In arbitrary real dimension, singular values classify unframed port transfers; for invertible transfers, orientation adds exactly the determinant sign, and the determinant is the unique minimal-degree orientation-covariant polynomial up to scale. We interpret the order-six transfer through a conference interferometer, separating intrinsic, oriented, and calibrated observables and identifying the external resource required for direct three-fermion emulation. This is a theory and design-limit analysis, not a report of a built device.
 >
-> The Golden realization retains a calibrated determinant-sign code and a photonic design boundary. Common-reference tomography and ordinary-photon controls test its one-particle carrier and bosonic shadow, whereas direct three-fermion emulation needs an additional antisymmetric three-qutrit source. This is a theory and design-limit analysis, not a report of a built device.
->
-**Delivers.** An analysis of a six-channel optical device whose hidden modes
-are governed by a golden conference matrix.  Singular-value measurements see
-the unoriented device; calibrated ports recover its handedness, while balanced
-exchanges single out the six-channel case.
+**Delivers.** A classification of symmetric conference matrices with
+cut-independent balanced cross-block spectrum; an exact continuous-control
+optimum at order six; a Hermitian holonomy parametrization of the complete
+degree-three Pareto frontier; and quantitative rigidity relative to the real
+switching class. The conference interferometer is an application of these
+matrix results.
 
-**Who cares.** Quantum-optics researchers, mathematical physicists, and people
-designing or analyzing multi-mode interferometers.
+**Who cares.** Matrix theorists, algebraic combinatorialists, frame theorists,
+mathematical physicists, and quantum-information researchers studying
+structured transfer spectra.
 
-**Why it matters.** Abstract matrix symmetry becomes a set of experimentally
-meaningful signatures, including a quantitative measure of departure from the
-real switching class.
+**Why it matters.** Uniformity over every balanced cut is rigid rather than a
+generic conference-matrix phenomenon. At the exceptional order, triangle
+holonomy becomes an exact deformation coordinate: it controls the exchange
+tradeoff, detects the real switching class, and supplies a metric defect. The
+interferometric model shows how the same hierarchy separates intrinsic,
+oriented, and calibrated observables.
 
 ---
 

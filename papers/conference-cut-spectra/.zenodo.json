@@ -1,0 +1,31 @@
+{
+  "title": "Balanced Cuts of Conference Matrices: Squared-Spectrum Rigidity and Hermitian Holonomy",
+  "description": "This preprint studies the normalized cross-block Gram spectra of balanced cuts in symmetric and Hermitian conference matrices. It proves that cut independence occurs exactly through half-size three, making order six the unique nontrivial symmetric conference case. At order six, balanced sign controls are the exact degree-three Schur-sector maximizers; squared real triangle holonomy parametrizes the complete Hermitian Pareto frontier, characterizes the real switching class through cutwise sector constancy, and yields quantitative stability. A general orientation theorem and a six-mode conference-interferometer design limit are applications of this matrix structure.",
+  "creators": [
+    {
+      "name": "Rudd, Tavis",
+      "orcid": "0009-0003-6405-3275",
+      "affiliation": "Independent researcher"
+    }
+  ],
+  "access_right": "open",
+  "license": "cc-by-4.0",
+  "upload_type": "publication",
+  "publication_type": "preprint",
+  "keywords": [
+    "conference matrices",
+    "balanced cuts",
+    "spectral rigidity",
+    "Hermitian conference matrices",
+    "triangle holonomy",
+    "exchange statistics",
+    "matrix analysis",
+    "algebraic combinatorics",
+    "linear optics",
+    "fermionic determinants",
+    "bosonic permanents",
+    "equiangular tight frames",
+    "photonic interferometry"
+  ],
+  "notes": "Correspondence: tavis@damnsimple.com"
+}

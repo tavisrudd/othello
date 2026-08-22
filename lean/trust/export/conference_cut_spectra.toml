@@ -1,4 +1,4 @@
-# Area-export configuration for the Golden six-mode balanced-cut unit.
+# Area-export configuration for the order-six balanced-cut unit.
 #
 # The exporter derives the module closure, terminal list, and observed axioms
 # from the trust registry and the generated fact of the declared gate.  Only
@@ -10,12 +10,12 @@ gate = "RelativeConicArcs.Gates.GoldenQuantumStatistics"
 trust_statement = "trust/GOLDEN_QUANTUM_STATISTICS.md"
 axiom_audit = "trust/GoldenQuantumStatisticsAxiomAudit.lean"
 
-statement_title = "Golden six-mode conference interferometer: matrix formal artifact"
+statement_title = "Balanced Cuts of Conference Matrices: matrix formal artifact"
 
 overview = """
 This boundary records the matrix-level order-six identities accompanying Tavis
-Rudd, *Orientation, exchange statistics, and rigidity in the Golden six-mode
-conference interferometer* (DOI 10.5281/zenodo.21766748).
+Rudd, *Balanced Cuts of Conference Matrices: Squared-Spectrum Rigidity and
+Hermitian Holonomy* (DOI 10.5281/zenodo.21766747).
 """
 
 correspondence = """
@@ -68,11 +68,11 @@ declaration, or admitted proof.  The generated axiom audit records the exact
 uses of Mathlib's standard classical principles.
 """
 
-axiom_audit_title = "Axiom audit for the Golden matrix exchange identities"
+axiom_audit_title = "Axiom audit for the balanced conference-cut identities"
 
 axiom_audit_description = """
 This audit prints the axioms of the matrix-level order-six identities exported
-with the Golden six-mode conference interferometer artifact.  The statements
+with the balanced conference-cut artifact.  The statements
 cover the conference block equation, the balanced cross Gram spectrum and
 sectors, its determinant and trace contractions, and the transfer-compression
 and commutator identities.
@@ -81,5 +81,5 @@ and commutator identities.
 readme_anchor = "  the 77-module human Arcs boundary."
 
 readme_bullet = """- `trust/manifests/golden_quantum_statistics.json` records the symbolic
-  order-six balanced-cut boundary accompanying the Golden six-mode conference
-  interferometer."""
+  order-six balanced-cut boundary accompanying the conference-matrix
+  squared-spectrum and Hermitian-holonomy results."""

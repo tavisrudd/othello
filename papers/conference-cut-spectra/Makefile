@@ -11,11 +11,11 @@ TEXSHELL ?= nix develop .\#manuscript --command
 LATEXMK ?= $(TEXSHELL) latexmk
 LATEXMK_FLAGS ?= -xelatex -interaction=nonstopmode -halt-on-error
 UV ?= uv
-SOURCE := golden_quantum_statistics.tex
+SOURCE := conference_cut_spectra.tex
 
 .PHONY: all check lint manuscript verify verify-sources clean distclean
 
-all: lint golden_quantum_statistics.pdf
+all: lint conference_cut_spectra.pdf
 
 check: lint verify verify-sources manuscript
 
@@ -36,7 +36,7 @@ verify-sources:
 	$(UV) run --frozen python verification/evidence/six_mode_demonstrator.py --check
 	$(UV) run --frozen python verification/evidence/six_mode_demonstrator_replay.py
 
-golden_quantum_statistics.pdf: $(SOURCE)
+conference_cut_spectra.pdf: $(SOURCE)
 	python3 verification/lint_tex_spacing.py $(SOURCE)
 	$(LATEXMK) $(LATEXMK_FLAGS) $(SOURCE)
 

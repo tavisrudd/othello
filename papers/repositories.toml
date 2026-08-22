@@ -527,11 +527,11 @@ paper_ids = ["equivariant_robust_completion"]
 disposition = "active"
 
 [[repository]]
-name = "golden-quantum-statistics"
+name = "conference-cut-spectra"
 include_release_pdfs = true
 release_output_policy = "immutable-source"
-source = "papers/golden-quantum-statistics"
-paper_ids = ["golden_quantum_statistics"]
+source = "papers/conference-cut-spectra"
+paper_ids = ["conference_cut_spectra"]
 disposition = "active"
 
 [[repository]]

@@ -39,8 +39,8 @@ from pathlib import Path
 
 
 PAPER = Path(__file__).resolve().parents[1]
-SOURCE = "golden_quantum_statistics.tex"
-TRACKED_PDF = PAPER / "golden_quantum_statistics.pdf"
+SOURCE = "conference_cut_spectra.tex"
+TRACKED_PDF = PAPER / "conference_cut_spectra.pdf"
 EXPECTED_PAGES = 16
 # 2026-01-01T00:00:00Z. Fixed so that independent builds of one source agree.
 DETERMINISTIC_EPOCH = "1767225600"
@@ -54,7 +54,7 @@ PAGES_RE = re.compile(r"Output written on .+ \((\d+) pages?,")
 
 
 def fail(message: str) -> None:
-    raise SystemExit(f"golden-quantum-statistics manuscript: FAIL [{message}]")
+    raise SystemExit(f"conference-cut-spectra manuscript: FAIL [{message}]")
 
 
 def deterministic_environment() -> dict[str, str]:
@@ -106,12 +106,12 @@ def main() -> int:
     )
     args = parser.parse_args()
 
-    with tempfile.TemporaryDirectory(prefix="golden-quantum-statistics-build-") as scratch:
+    with tempfile.TemporaryDirectory(prefix="conference-cut-spectra-build-") as scratch:
         rebuilt = build_pdf(Path(scratch))
 
     if args.update:
         TRACKED_PDF.write_bytes(rebuilt)
-        print(f"golden-quantum-statistics manuscript: UPDATED [{len(rebuilt)} bytes]")
+        print(f"conference-cut-spectra manuscript: UPDATED [{len(rebuilt)} bytes]")
         return 0
 
     if not TRACKED_PDF.is_file():
@@ -122,7 +122,7 @@ def main() -> int:
             "rerun with --update after a manuscript edit"
         )
     print(
-        f"golden-quantum-statistics manuscript: PASS "
+        f"conference-cut-spectra manuscript: PASS "
         f"[{EXPECTED_PAGES} pages, warning-free]"
     )
     return 0

@@ -773,6 +773,24 @@ any geometric or QDM provider.
    identification remain source inputs.
    Passing this example does not exclude arbitrary-center three-cycles or
    supply pathwise loop and comparison coherence.
+
+   A proposed dimension-three budget is now closed at the coarse level.
+   `ThreefoldKummerCompatibility` checks that a six-dimensional linear model
+   can have the connected-threefold grading spectrum, a perfect pairing, and
+   branchwise modified-residue discriminant (4/9); that arrangement fails
+   strict logarithmic homogeneity.  It also checks that
+   \(\mathbb Q[x,e]/(x^3,e^2)\) has the honest threefold pairing and
+   \(J_4\oplus J_2\) Lefschetz type.  The latter is the special fibre of the
+   regular cubic orbit \(x^3=t,e^2=0\), so rank-six descent does not imply
+   descent of three marked rank-two block lattices.  Lean proves the smaller
+   finite statement that a residue-graded carrier containing the entire
+   residue-zero class is grading-stable.  That still does not determine the
+   first positive-\(z\) return coefficient \((A_1)_{21}\), which is exactly
+   what distinguishes \(\delta^\sharp=0\) from \(4/9\).  Reopen this route
+   only with a source theorem giving marked-lattice descent,
+   Euler-horizontal occurrence reindexing, and vanishing of that first jet.
+   D14 of the source dossier records the exact countermodels and boundary.
+
    Do not replace that centre theorem by an unmarked Mori assertion.
    Iritani's exponent is a normal-bundle charge, not an anticanonical degree;
    \(Q^3\) already has the cubic factor \(H^3-4q\) and contracts to a point.

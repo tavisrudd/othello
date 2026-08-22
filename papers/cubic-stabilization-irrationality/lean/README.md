@@ -424,6 +424,20 @@ deduces that every admissible vector has zero colour profile. The module does
 not formalize the geometric reduction to this graph or the subsequent theta-
 class and stable-rationality deductions.
 
+`Comparison.ThreefoldKummerCompatibility` records the exact finite boundary
+of a proposed dimension-three correction exclusion.  A six-dimensional
+linear model has the even-cohomology grading spectrum and perfect pairing of
+a Picard-rank-two threefold while its branch compression has the marked
+discriminant `4/9`; Lean also checks that this model violates the strict
+logarithmic homogeneity equation.  Separately, multiplication by `x + e` in
+`Q[x,e]/(x^3,e^2)` is self-adjoint and has Jordan form `J_4 ⊕ J_2`.  These
+are compatibility and falsifier calculations, not a construction or
+classification of a threefold quantum connection.  A separate abstract lemma
+shows that a residue-graded carrier containing the full residue-zero class is
+preserved by a grading operator which preserves that class and is scalar on
+the other two.  It does not construct those projections or control the first
+positive-`z` connection jet which enters the marked residue.
+
 The algebraic model has a compact sufficient constructor. If the combined
 crossed and moving map `(B,D)` admits a linear retraction, an explicit incoming
 shear and target involution construct every crossed-coordinate field. An

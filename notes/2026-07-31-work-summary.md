@@ -2492,7 +2492,7 @@ hand-written.
 `clebsch_hexagon_code` is the superseded integrated manuscript, preserved only as a fallback for
 material the rigidity paper, its companion, and the trade-rigidity paper now carry; and two rows are
 not papers — `golden_operator` is a source-lane draft feeding forward versions of the passages
-paper, and `golden_quantum_statistics` is the lane-local exchange-statistics companion written as a
+paper, and `conference_cut_spectra` is the lane-local exchange-statistics companion written as a
 design-limit and theory note. The generated rows predate the fifth numbered Paper V and therefore
 are no longer a complete portfolio count; Paper V is an eleven-page standalone manuscript not yet
 represented in that block, and neither are the three manuscripts of the cubic-threefold
@@ -2500,30 +2500,37 @@ stabilization programme — *Irrationality of Cubic Threefolds after One Stabili
 Rows under Quantum Wall Crossing and a Criterion for Stable Irrationality*, and the published
 standalone note *Standard Flips of Discrepancy One*. `passant_code_q13` is the fourth numbered
 Clebsch paper, and
-`golden_quantum_statistics` is a short note. The statement and label columns need the same
+`conference_cut_spectra` is a short note. The statement and label columns need the same
 care: labels count anything labelled, and corollary-heavy papers inflate against theorem-heavy ones —
 the arcs manuscript alone carries 21 corollaries against 8 theorems, so its 77 labels are not 77
 independent results. Neither column measures depth, and none of them should be summed across rows.
 
 <!-- trust-spine:begin area=papers section=manuscripts version=1 -->
-| Manuscript                      | Title                                                                                                                                    | Lane             | Pages | Thm | Lem | Prop | Cor | Labels |
-|---------------------------------|------------------------------------------------------------------------------------------------------------------------------------------|------------------|-------|-----|-----|------|-----|--------|
-| `ame_lu`                        | Local-Unitary Rigidity and Quantitative Rounding for Stabilizer AME States                                                               | `ame-lu`         | 35    | 10  | 14  | 9    | 9   | 60     |
-| `arcs_complete_outside_conic`   | Arcs complete outside a conic: a prescribed-hole defect identity and matching-design rigidity                                            | `relconic`       | 26    | 8   | 4   | 5    | 22  | 78     |
-| `beyond4_prs`                   | Deep holes of projective Reed--Solomon codes beyond redundancy four: recursive carriers and exact classifications through redundancy ten | `reed-solomon`   | 56    | 12  | 14  | 45   | 4   | 127    |
-| `beyond4_prs_submission`        | Deep Holes of Projective Reed--Solomon Codes Beyond Redundancy Four: Recursive Carriers and Exact Classifications Through Redundancy Ten | `reed-solomon`   | 56    | 12  | 14  | 45   | 4   | 127    |
-| `clebsch_factorization`         | Quadratic trade rigidity and cubic orientation in conic matching quotients                                                               | `clebsch`        | 43    | 7   | 7   | 5    | 10  | 46     |
-| `clebsch_passages`              | Golden descent and operator realizations of the Clebsch cubic                                                                            | `clebsch`        | 29    | 5   | 0   | 3    | 0   | 18     |
-| `clebsch_rigidity`              | Reconstructing the Clebsch code and its golden orientation from its deep-hole syndrome locus                                             | `clebsch`        | 27    | 4   | 1   | 9    | 4   | 32     |
-| `clebsch_rigidity_companion`    | Computational strengthenings of Clebsch syndrome rigidity                                                                                | `clebsch`        | 27    | 7   | 2   | 1    | 1   | 21     |
-| `complete_repair_ports`         | Complete Bounded Repair Ports: Transfer, Reliability, and Geometric Structure                                                            | `complete-ports` | 16    | 6   | 0   | 4    | 3   | 17     |
-| `continuation_graph_rigidity`   | Semilinear rigidity of four-point-frame continuation graphs                                                                              | `continuation`   | —     | 5   | 3   | 3    | 0   | 18     |
-| `dihedral_schreier_node_kayles` | Node Kayles on Conic Schreier Graphs: Dihedral and Polyhedral Templates                                                                  | `dihedral`       | 19    | 15  | 4   | 4    | 5   | 90     |
-| `equivariant_robust_completion` | Frobenius-equivariant pair extension and robust repair of eight-arcs                                                                     | `paper-frob-eq`  | 14    | 4   | 2   | 3    | 7   | 33     |
-| `golden_operator`               | The golden conference operator and its shadow sisters                                                                                    | `golden`         | —     | 7   | 1   | 3    | 2   | 14     |
-| `golden_quantum_statistics`     | Exchange landscapes, orientation, and rigidity in the Golden six-mode conference interferometer                                          | `golden`         | 16    | 6   | 0   | 2    | 1   | 19     |
-| `mds_css_transversal_groups`    | Diagonal Isoduality and Transversal Clifford Groups of MDS--CSS Codes                                                                    | `ame-lu`         | 23    | 7   | 4   | 5    | 3   | 42     |
-| `passant_code_q13`              | Minimum-word reconstruction of $\PG(2,13)$ from a binary conic code                                                                      | `clebsch`        | 12    | 1   | 0   | 1    | 0   | 6      |
+| Manuscript                          | Title                                                                                                                                    | Lane               | Pages | Thm | Lem | Prop | Cor | Labels |
+|-------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------|--------------------|-------|-----|-----|------|-----|--------|
+| `ame_lu`                            | Local-Unitary Rigidity and Quantitative Rounding for Stabilizer AME States                                                               | `ame-lu`           | 37    | 10  | 14  | 9    | 11  | 62     |
+| `arcs_complete_outside_conic`       | Arcs complete outside a conic: a prescribed-hole defect identity and matching-design rigidity                                            | `relconic`         | 27    | 9   | 4   | 5    | 22  | 79     |
+| `beyond4_prs`                       | Deep holes of projective Reed--Solomon codes beyond redundancy four: recursive carriers and exact classifications through redundancy ten | `reed-solomon`     | 71    | 12  | 19  | 47   | 6   | 143    |
+| `beyond4_prs_submission`            | Deep Holes of Projective Reed--Solomon Codes Beyond Redundancy Four: Recursive Carriers and Exact Classifications Through Redundancy Ten | `reed-solomon`     | 71    | 12  | 19  | 47   | 6   | 143    |
+| `blown_up_theta_lattice`            | Integral Cohomology and Modular Decomposition for the Theta Divisor of a Cubic Threefold                                                 | `cubic-threefolds` | 11    | 4   | 3   | 2    | 2   | 45     |
+| `chordal_conference_reconstruction` | Chordal and Conference Cubics: Reconstruction and a Residual \(C_2\)-Torsor                                                              | `clebsch`          | 23    | 4   | 5   | 8    | 3   | 36     |
+| `clebsch_factorization`             | Quadratic trade rigidity and cubic orientation in conic matching quotients                                                               | `clebsch`          | 47    | 7   | 9   | 5    | 10  | 53     |
+| `clebsch_passages`                  | Golden descent and operator realizations of the Clebsch cubic                                                                            | `clebsch`          | 39    | 7   | 0   | 4    | 0   | 38     |
+| `clebsch_rigidity`                  | Reconstructing the Clebsch code and its golden orientation from its deep-hole syndrome locus                                             | `clebsch`          | 29    | 4   | 1   | 9    | 4   | 34     |
+| `clebsch_rigidity_companion`        | Computational strengthenings of Clebsch syndrome rigidity                                                                                | `clebsch`          | 29    | 7   | 2   | 2    | 1   | 22     |
+| `complete_repair_ports`             | Complete Bounded Repair Ports: Transfer, Reliability, and Geometric Structure                                                            | `complete-ports`   | 23    | 9   | 1   | 4    | 5   | 35     |
+| `conference_cut_spectra`            | Balanced Cuts of Conference Matrices: Squared-Spectrum Rigidity and Hermitian Holonomy                                                   | `golden`           | 16    | 6   | 0   | 2    | 1   | 19     |
+| `continuation_graph_rigidity`       | Semilinear rigidity of four-point-frame continuation graphs                                                                              | `continuation`     | —     | 5   | 3   | 3    | 0   | 18     |
+| `cubic_gluing_resolvent`            | The Discriminant Resolvent of the \(A_5\)-Cubic Pencil                                                                                   | `cubic-threefolds` | 11    | 1   | 1   | 3    | 3   | 22     |
+| `cubic_stabilization_irrationality` | Gamma Point Rows under Quantum Wall Crossing and a Criterion for Stable Irrationality                                                    | `clebsch`          | 48    | 9   | 9   | 12   | 2   | 148    |
+| `cubic_stabilization_m1`            | Irrationality of Cubic Threefolds after One Stabilization                                                                                | `cubic-threefolds` | 21    | 2   | 2   | 6    | 5   | 40     |
+| `dihedral_schreier_node_kayles`     | Node Kayles on Conic Schreier Graphs: Dihedral and Polyhedral Templates                                                                  | `dihedral`         | 19    | 15  | 4   | 4    | 5   | 90     |
+| `discrepancy_one_flips`             | Standard Flips of Discrepancy One: Extremal \(J\)-Normalization and the Meijer Aperture at \(\nu=1\)                                     | `clebsch`          | 12    | 3   | 6   | 2    | 3   | 34     |
+| `equivariant_robust_completion`     | Frobenius-equivariant pair extension and robust repair of eight-arcs                                                                     | `paper-frob-eq`    | 17    | 5   | 2   | 3    | 7   | 37     |
+| `golden_operator`                   | The golden conference operator and its shadow sisters                                                                                    | `golden`           | —     | 7   | 1   | 3    | 2   | 14     |
+| `hodge_atom_marker_ledger`          | Hodge Atoms as Occurrence-Indexed Marker Ledgers                                                                                         | `cubic-threefolds` | 6     | 3   | 0   | 0    | 1   | 26     |
+| `mds_css_transversal_groups`        | Diagonal Isoduality and Transversal Clifford Groups of MDS--CSS Codes                                                                    | `ame-lu`           | 23    | 7   | 4   | 5    | 3   | 42     |
+| `passant_code_q13`                  | Reconstructing $\PG(2,13)$, its conic, and polarity from the minimum words of a binary conic code                                        | `clebsch`          | 16    | 1   | 0   | 1    | 0   | 12     |
 <!-- trust-spine:end area=papers section=manuscripts -->
 
 | # | Paper                                                | Lead                                                            | State                                                |

@@ -151,7 +151,7 @@ PAPER_PATHS = {
     "Beyond-4 PRS": "papers/beyond4_prs",
     "AME-LU": "papers/ame_lu",
     "MDS-CSS": "papers/mds_css_transversal_groups",
-    "Golden quantum statistics": "papers/golden-quantum-statistics",
+    "Conference cut spectra": "papers/conference-cut-spectra",
     "Complete repair ports": "papers/complete-repair-ports",
     "Baer / equivariant completion": "papers/baer-equivariant-extension",
     "CGT / Nofil": "papers/nofil-finite-geometry-outcomes",

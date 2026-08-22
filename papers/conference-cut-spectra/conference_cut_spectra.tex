@@ -27,7 +27,8 @@
 \newcommand{\Sym}{\operatorname{Sym}}
 \newcommand{\per}{\operatorname{per}}
 
-\title{Exchange landscapes, orientation, and rigidity in the Golden six-mode conference interferometer}
+\title{Balanced Cuts of Conference Matrices:\\
+Squared-Spectrum Rigidity and Hermitian Holonomy}
 \author{Tavis Rudd}
 \date{August 2026}
 
@@ -35,34 +36,31 @@
 \maketitle
 
 \begin{abstract}
-We study a six-mode interferometer built from a real symmetric conference
-matrix \(C\) of order six.  Since \(C^2=5I\), its mode space splits into two
-three-dimensional eigenspaces with eigenvalues \(+\sqrt5\) and \(-\sqrt5\).
-We call this the Golden realization because
-\(\varphi=(1+\sqrt5)/2\) is the golden ratio.  A diagonal control couples the
-two eigenspaces through a three-by-three transfer.  Singular values classify
-this transfer when its ports are unframed.  Orienting the ports adds the sign
-of the top exterior amplitude; up to scale, the determinant is the unique
-minimal-degree polynomial carrying this relative orientation.  Fully
-calibrated frames expose matrix-dependent amplitudes such as the permanent.
+Let \(C\) be a symmetric conference matrix of order \(2d\), put
+\(q=2d-1\), and for a balanced half \(Y\) write
+\(R=C[Y,Y^c]\).  We study the exchange spectrum
+\(\operatorname{spec}(RR^{\mathsf T}/q)\) and prove that it is independent of
+\(Y\) exactly when \(d\le3\).  Since the order-two case is trivial and no
+symmetric conference matrix of order four exists, order six is the unique
+nontrivial case; its spectrum is \(\{1/5,4/5,4/5\}\).  For the associated
+diagonal-control transfer, the twenty balanced sign vectors in
+\(\{\pm1\}^6\) are exactly the maximizers of each degree-three Schur sector
+over \([-1,1]^6\).
 
-For symmetric conference matrices, the balanced exchange spectrum is a
-normalized cross-Gram spectrum; order six is the unique nontrivial order at
-which it is independent of the balanced cut.  In the Golden order-six
-transfer, the balanced Boolean controls are precisely the joint maximizers of
-all degree-three Schur sectors over the real control cube.  Hermitian
-conference phase gives a transverse deformation.  Triangle holonomy fixes the
-first two exchange moments and moves the degree-three sectors along an exact
-Pareto segment.  Constancy of any one sector characterizes the real switching
-class.  An averaged squared-holonomy defect controls the Frobenius
-distance to the real conference orbit globally from below and locally from
-above.
-
-The Golden realization retains a calibrated determinant-sign code and a
-photonic design boundary.  Common-reference tomography and ordinary-photon
-controls test its one-particle carrier and bosonic shadow, whereas direct
-three-fermion emulation needs an additional antisymmetric three-qutrit source.
-This is a theory and design-limit analysis, not a report of a built device.
+For Hermitian conference matrices of order six, the conference identities fix
+the first two exchange moments, while squared real triangle holonomy
+parametrizes the complete Pareto frontier of the three degree-three sectors.
+Cutwise constancy of any one sector holds exactly for matrices equivalent,
+under switching and permutation, to a real symmetric conference matrix.  An
+averaged squared-holonomy defect bounds the Frobenius distance from that class
+globally from below and locally from above.  In arbitrary real dimension, singular values
+classify unframed port transfers; for invertible transfers, orientation adds
+exactly the determinant sign, and the determinant is the unique
+minimal-degree orientation-covariant polynomial up to scale.  We interpret
+the order-six transfer through a conference interferometer, separating
+intrinsic, oriented, and calibrated observables and identifying the external
+resource required for direct three-fermion emulation.  This is a theory and
+design-limit analysis, not a report of a built device.
 \end{abstract}
 
 \section{Introduction}

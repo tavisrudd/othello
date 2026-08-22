@@ -239,20 +239,17 @@ JCTA's shorter-paper format or J. Geometry as secondary fits; explicitly **not**
 `../notes/handoffs/2026-07-13-clebsch-paper.md`. Lane alias `clebsch`
 (CLAUDE.md routing), same word as this directory's alias.
 
-**Active unnumbered candidate · `golden-quantum-statistics`** — *Exchange landscapes, orientation,
-and rigidity in the Golden six-mode conference interferometer*
+**Active unnumbered candidate · `conference-cut-spectra`** — *Balanced Cuts of Conference
+Matrices: Squared-Spectrum Rigidity and Hermitian Holonomy*
 - *Lane:* `golden`.
 - *Status:* deposited as DOI `10.5281/zenodo.21766747`, with a standalone mirror and an
   immutable-source release policy; no submission has occurred.
-- *Owns:* the six-mode interferometer built from a symmetric conference matrix of order six, whose
-  square is five times the identity and whose mode space therefore splits into two three-dimensional
-  eigenspaces with eigenvalues plus and minus the square root of five; the classification of the
-  diagonal control's three-by-three transfer by singular values when its ports are unframed; the
-  orientation refinement adding the sign of the top exterior amplitude, with the determinant the
-  unique minimal-degree polynomial carrying that relative orientation up to scale; the
-  matrix-dependent amplitudes such as the permanent that fully calibrated frames expose; and the
-  balanced exchange spectrum of symmetric conference matrices.
-- *Lean:* the `golden_quantum_statistics` export area is configured but is not adopted on the
+- *Owns:* the classification of symmetric conference matrices whose normalized balanced
+  cross-block Gram spectrum is cut-independent; the order-six continuous-control optimum; the
+  Hermitian triangle-holonomy parametrization of the degree-three Pareto frontier; quantitative
+  rigidity relative to the real switching class; the general orientation refinement for port
+  transfers; and the six-mode conference-interferometer application.
+- *Lean:* the `conference_cut_spectra` export area is configured but is not adopted on the
   finitegeom repository, so this paper's Lean development currently sits outside the shared library.
 
 **Source programme, not a numbered paper · `golden-operator`** — *The golden conference operator and

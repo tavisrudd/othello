@@ -273,9 +273,9 @@ main = "golden_operator.tex"
 lane = "golden"
 
 [[paper]]
-id = "golden_quantum_statistics"
-dir = "papers/golden-quantum-statistics"
-main = "golden_quantum_statistics.tex"
+id = "conference_cut_spectra"
+dir = "papers/conference-cut-spectra"
+main = "conference_cut_spectra.tex"
 lane = "golden"
 
 [[paper]]

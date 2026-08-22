@@ -309,6 +309,22 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   Lee--Wang--Wang's 2025 Type-II degree-three transition supplies a second
   geometric warning: its local exponents are \(1/3,2/3\), so Mori transition
   geometry can itself carry exact order-three monodromy.
+  A threefold dimension-budget shortcut has also been audited and narrowed.
+  The new Lean module `ThreefoldKummerCompatibility` checks an exact
+  six-dimensional grading/pairing model with branch discriminant (4/9) and
+  proves that this fake model violates strict logarithmic homogeneity.  It
+  separately proves that the honest boundary algebra
+  \(\mathbb Q[x,e]/(x^3,e^2)\) is self-adjoint and has Lefschetz type
+  \(J_4\oplus J_2\).  Since this is the special fibre of the regular cubic
+  orbit (x^3=t,e^2=0), rank-six descent does not descend the three marked
+  block lattices.  The same module proves the exact finite residue-carrier
+  lemma: if the carrier contains the whole residue-zero class and is graded
+  by the other residue projections, then the threefold grading preserves it.
+  This does not compute the first connection jet \((A_1)_{21}\), whose value
+  distinguishes \(\delta^\sharp=0\) from (4/9).  A viable source theorem
+  must therefore give marked-lattice descent, Euler-horizontal occurrence
+  reindexing, and a threefold-specific vanishing of that jet.  D14 of the
+  no-Stokes dossier is authoritative; the coarse dimension count is retired.
   Material below this paragraph is a fallback ledger, not the live route.
 
   The packet is organized like a parameterized software interface: a

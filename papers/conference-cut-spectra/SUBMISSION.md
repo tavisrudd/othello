@@ -15,8 +15,8 @@ publication actions outside this bundle.
 
 ## Submission contents
 
-- `golden_quantum_statistics.tex` and the built
-  `golden_quantum_statistics.pdf`;
+- `conference_cut_spectra.tex` and the built
+  `conference_cut_spectra.pdf`;
 - `Makefile`, with `make check` as the complete local acceptance gate;
 - `verification/verify.py`, `verification/evidence_certificate.json`, and
   `verification/evidence_manifest.json`;
@@ -31,8 +31,8 @@ warning.  The source and PDF hashes at this accepted checkpoint are:
 
 | file | bytes | SHA-256 |
 |---|---:|---|
-| `golden_quantum_statistics.tex` | 54,313 | `1c1cae140fd42ce6a1cdd09c243965f66e914df4164cc9983bee8f31945fd07a` |
-| `golden_quantum_statistics.pdf` | 145,927 | `316d3d17bc7f15f564917b6348c3b8fa24af1bcf3fcc60b69e74d712a6604bbc` |
+| `conference_cut_spectra.tex` | 54,334 | `e9f5a404df0fe668605030841df505282d71fd0ed77306bfe031aa12f5b84f5c` |
+| `conference_cut_spectra.pdf` | 146,224 | `ccd4d83874ded1daf74fae5cebc379953defe9e6d6950176ab85038b702469dd` |
 
 Rebuild and verify from this directory with:
 
