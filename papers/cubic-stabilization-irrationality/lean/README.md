@@ -75,8 +75,11 @@ source point to a point with exactly the same stabilizer.  This avoids assuming
 that a cyclic quotient of the loop action splits.  A finite provider may
 instead give, for each target point, one loop power whose fixedness differs
 from the source point; the module derives the same obstruction without
-materializing either stabilizer.  It does not construct the loop action or
-its geometric comparison.
+materializing either stabilizer.  When a local calculation gives exact orbit
+periods, the module derives those loop-power witnesses from the inequality of
+the source and target periods.  For a cyclic translation it also proves the
+period formula \(n/\gcd(n,a)\) from divisibility.  It does not construct the
+loop action or its geometric comparison.
 
 The geometric comparison with the actual QDM packet remains an explicit
 inhabited-structure proposition. In particular, the package does not assume

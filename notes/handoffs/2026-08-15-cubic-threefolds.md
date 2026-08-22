@@ -241,7 +241,12 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   stabilizer obstruction, so a split $C_{m+1}$ action is no longer required.
   Its witness-oriented theorem accepts one distinguishing loop power for each
   target point, which is the finite-certificate interface for tame-inertia
-  exponent calculations.
+  exponent calculations.  Its exact-period corollary constructs the witness
+  directly from unequal source and target periods.
+  A deterministic Haskell/QuickCheck suite checks the period arithmetic for
+  \(m=1,2,3,4,13\), all cyclic charges through period 65, and the mandatory
+  red model \(x^{m+1}=t\); see
+  `notes/2026-08-22-c925-loop-stabilizer-computational-sanity.md`.
   The occurrence-uniform stabilizer exclusion and coherent geometric lift
   remain external.  A bounded 2025--2026 math-physics search found two real
   alternate frameworks but no provider.  Bai--Pomerleano--Seidel's
@@ -257,6 +262,13 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   nearby-cycle realization, but the cubic diagonal model itself realizes the
   forbidden orbit.  An arithmetic nearby-cycle enhancement of atoms or one
   common Landau--Ginzburg model would be a new theorem, not imported closure.
+  A proposed Mori shortcut is also closed: Iritani's transported exponent is
+  governed by the normal bundle, and \(Q^3\) already has a cubic Kummer factor
+  while contracting to a point.  Höring--Novelli applies only after a
+  length-three fibre-type ray over a curve has independently been produced.
+  Lee--Wang--Wang's 2025 Type-II degree-three transition supplies a second
+  geometric warning: its local exponents are \(1/3,2/3\), so Mori transition
+  geometry can itself carry exact order-three monodromy.
   Material below this paragraph is a fallback ledger, not the live route.
 
   The packet is organized like a parameterized software interface: a

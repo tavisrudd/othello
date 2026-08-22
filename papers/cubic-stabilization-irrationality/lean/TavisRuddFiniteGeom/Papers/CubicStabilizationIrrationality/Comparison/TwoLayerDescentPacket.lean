@@ -1,6 +1,7 @@
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.DescentPacket
 import Mathlib.Algebra.Group.Prod
 import Mathlib.Algebra.Group.Action.Sum
+import Mathlib.Data.Nat.GCD.Basic
 
 /-!
 # Two-layer descent packets
@@ -119,6 +120,63 @@ def HasSameStabilizer
     [Group G] [MulAction G A] [MulAction G B]
     (x : A) (y : B) : Prop :=
   ∀ g : G, g • x = x ↔ g • y = y
+
+/-- The fixedness fingerprint of a point under powers of one group element is
+periodic with period `period` when precisely the multiples of `period` fix the
+point.  Period zero describes a point with no positive fixing power. -/
+def HasPowerFixednessPeriod
+    (G : Type*) {A : Type*}
+    [Group G] [MulAction G A]
+    (generator : G) (period : ℕ) (x : A) : Prop :=
+  ∀ k : ℕ, generator ^ k • x = x ↔ period ∣ k
+
+/-- Distinct natural-number periods have different divisibility fingerprints.
+One of the two periods itself is a distinguishing exponent. -/
+theorem exists_power_fixedness_divisibility_difference
+    {sourcePeriod targetPeriod : ℕ}
+    (periodsDifferent : sourcePeriod ≠ targetPeriod) :
+    ∃ k : ℕ, ¬ (sourcePeriod ∣ k ↔ targetPeriod ∣ k) := by
+  by_cases target_dvd_source : targetPeriod ∣ sourcePeriod
+  · refine ⟨targetPeriod, ?_⟩
+    intro sameFixedness
+    have source_dvd_target : sourcePeriod ∣ targetPeriod :=
+      sameFixedness.mpr (by simp)
+    exact periodsDifferent (Nat.dvd_antisymm source_dvd_target target_dvd_source)
+  · refine ⟨sourcePeriod, ?_⟩
+    intro sameFixedness
+    exact target_dvd_source (sameFixedness.mp (by simp))
+
+/-- For a cyclic translation by `charge` modulo a positive `modulus`, the
+powers fixing a point are precisely the multiples of
+`modulus / gcd modulus charge`. -/
+theorem modulus_dvd_power_mul_iff_reducedPeriod_dvd_power
+    {modulus charge power : ℕ} (modulus_pos : 0 < modulus) :
+    modulus ∣ power * charge ↔ modulus / Nat.gcd modulus charge ∣ power := by
+  have gcd_pos : 0 < Nat.gcd modulus charge :=
+    Nat.gcd_pos_of_pos_left charge modulus_pos
+  have coprime_reductions :
+      Nat.Coprime (modulus / Nat.gcd modulus charge)
+        (charge / Nat.gcd modulus charge) :=
+    Nat.coprime_div_gcd_div_gcd gcd_pos
+  constructor
+  · intro divides
+    have dividedProduct :
+        modulus / Nat.gcd modulus charge ∣
+          power * (charge / Nat.gcd modulus charge) := by
+      apply Nat.dvd_of_mul_dvd_mul_right (k := Nat.gcd modulus charge) gcd_pos
+      rw [Nat.div_mul_cancel (Nat.gcd_dvd_left modulus charge), mul_assoc,
+        Nat.div_mul_cancel (Nat.gcd_dvd_right modulus charge)]
+      exact divides
+    exact coprime_reductions.dvd_mul_right.mp dividedProduct
+  · intro divides
+    have dividedProduct :
+        modulus / Nat.gcd modulus charge ∣
+          power * (charge / Nat.gcd modulus charge) :=
+      coprime_reductions.dvd_mul_right.mpr divides
+    have multiplied := Nat.mul_dvd_mul_right dividedProduct (Nat.gcd modulus charge)
+    rw [Nat.div_mul_cancel (Nat.gcd_dvd_left modulus charge), mul_assoc,
+      Nat.div_mul_cancel (Nat.gcd_dvd_right modulus charge)] at multiplied
+    exact multiplied
 
 /-- An equivariant equivalence preserves the full stabilizer of every point. -/
 theorem hasSameStabilizer_map
@@ -373,5 +431,30 @@ theorem sourceSum_not_equivariantlyEquivalent_of_fixednessFingerprintSeparated
     targetSeparated (equivalence.toEquiv (Sum.inl x))
   exact separated
     (hasSameStabilizer_map equivalence (Sum.inl x) g)
+
+/--
+An equivariant stable-ledger equivalence is impossible when the chosen source
+point and every target point have distinct power-fixedness periods for one
+common loop.  The proof converts the period mismatch into a single
+distinguishing loop power for each target point.
+-/
+theorem sourceSum_not_equivariantlyEquivalent_of_distinctPowerFixednessPeriods
+    {G : Type*} {A B C : Type*}
+    [Group G] [MulAction G A] [MulAction G B] [MulAction G C]
+    (generator : G) (x : A) (sourcePeriod : ℕ)
+    (sourceFixedness :
+      HasPowerFixednessPeriod G generator sourcePeriod (Sum.inl x : A ⊕ B))
+    (targetPeriod : C → ℕ)
+    (targetFixedness :
+      ∀ y : C, HasPowerFixednessPeriod G generator (targetPeriod y) y)
+    (periodsDifferent : ∀ y : C, sourcePeriod ≠ targetPeriod y) :
+    ¬ Nonempty (EquivariantEquiv G (A ⊕ B) C) := by
+  apply sourceSum_not_equivariantlyEquivalent_of_fixednessFingerprintSeparated x
+  intro y
+  obtain ⟨k, different⟩ :=
+    exists_power_fixedness_divisibility_difference (periodsDifferent y)
+  refine ⟨generator ^ k, ?_⟩
+  rw [sourceFixedness k, targetFixedness y k]
+  exact different
 
 end TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.TwoLayerDescentPacket

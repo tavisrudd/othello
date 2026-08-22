@@ -776,12 +776,12 @@ attribute a row theorem to KKPYY.
 
 ### SOURCE
 
-Five recent results address precisely the formal or arithmetic side of an
+Six recent results address precisely the formal or arithmetic side of an
 irregular quantum connection.
 
-Read-depth summary: none of the five papers was read cover to cover.  Each was
+Read-depth summary: none of the six papers was read cover to cover.  Each was
 read partially at its theorem statements and the sections named below; all
-five PDFs are cached.
+six PDFs are cached.
 
 1. Bai--Pomerleano--Seidel, *P-adic Gamma classes and overconvergent
    Frobenius structures for quantum connections*, arXiv:2509.26295,
@@ -829,29 +829,40 @@ five PDFs are cached.
    partial, arXiv v1, Introduction and Theorems 1.1 and 3.12; cache key
    arXiv:2607.05757, SHA-256
    629bd22c46febe79d1c6ba2a9f9a12764edc85bda7d8c7e39337d2f82be83a01.
+6. Lee--C.-L. Wang--S.-S. Wang, *Quantum Extremal Transitions and Special
+   L-values*, arXiv:2508.01374v2, Proposition 1.10 and equation (3.9).  For
+   Type-II transitions of degrees \(d=1,2,3\), the semistable base-change
+   degrees are \(6,4,3\).  At \(d=3\), the two local exponents at the
+   transition point are \(1/3\) and \(2/3\), hence the local monodromy has
+   exact order three.  This is a preprint; no journal publication was found
+   in the bounded search.  Read depth: partial, arXiv v2, Introduction,
+   Proposition 1.10, and equation (3.9); cache key arXiv:2508.01374, SHA-256
+   a0a1050c98396b84894bfb451a1334d5829ca82707b1776509703b7744db08d1.
 
 ### WHAT THEY PROVIDE
 
-These papers give four useful no-Stokes mechanisms:
+These papers give five useful no-Stokes mechanisms:
 
 - a canonical arithmetic framing of a fixed small quantum connection, when
   overconvergence is known;
 - constraints on the formal residue and its nilpotent part derived from
   \(p\)-curvature rather than sectorial comparison;
 - a filtered object that is genuinely invariant under modifications of a
-  fixed Landau--Ginzburg compactification.
+  fixed Landau--Ginzburg compactification;
 - an explicit finite computation of tame-inertia characters once a marked
-  packet has been realized as nearby cycles of a diagonal degeneration.
+  packet has been realized as nearby cycles of a diagonal degeneration;
+- a geometric threefold transition with exact order-three local monodromy.
 
 The third item is especially close in shape to the desired pathwise theorem:
 the comparison maps are composed through a weak-factorization zigzag and the
 filtration is intrinsic to the common open Landau--Ginzburg model.  The fourth
 would make the final inertia check finite once the missing nearby-cycle
-realization has been constructed.
+realization has been constructed.  The fifth item is a counterwarning rather
+than an exclusion mechanism.
 
 ### NOT PROVIDED
 
-None of the five results instantiates the C925 obstruction.
+None of the six results instantiates the C925 obstruction.
 
 1. The proved overconvergent Frobenius cases do not include the cubic
    threefold or arbitrary smooth blowup centers.  No cited theorem makes
@@ -891,6 +902,11 @@ None of the five results instantiates the C925 obstruction.
    to the nearby cycles of a proper diagonal degeneration.  Moreover the
    one-variable cubic case with \(k=3\) and \(v=1\) produces the forbidden
    order-three characters rather than ruling them out.
+7. Mori or extremal-transition origin does not exclude order three either.
+   The degree-three Type-II transition above has exponents \(1/3,2/3\).
+   The paper does not identify that local system with the C924 marked atom or
+   the selected product loop, but it rules out any unmarked assertion that
+   threefold contraction geometry forces the required stabilizer exclusion.
 
 ### DISPOSITION
 
@@ -902,10 +918,11 @@ nearby-cycle summand, and prove every Iritani comparison equivariant for the
 same tame generator.  Chuang's formula would then make the final order-three
 exclusion computable from local exponents.  The Lean witness-oriented
 stabilizer theorem consumes exactly one distinguishing loop power for each
-target point, so no full stabilizer enumeration is needed.  A
-Frobenius-enriched version could rigidify the comparison, but the exclusion
-clause remains essential: Frobenius structure alone does not defeat the
-\(K[x]/(x^3-t)\) countermodel.
+target point, so no full stabilizer enumeration is needed.  Its exact-period
+corollary constructs such a power whenever the source and target tame periods
+differ.  A Frobenius-enriched version could rigidify the comparison, but the
+exclusion clause remains essential: Frobenius structure alone does not
+defeat the \(K[x]/(x^3-t)\) countermodel.
 
 Wang suggests a second, larger connector: construct one common
 Landau--Ginzburg model for the whole birational path and invoke
@@ -1523,6 +1540,64 @@ target the same scalar eigenlabel.  A finite geometric quotient of the shift
 data could still work, but its construction and its target action must be
 proved separately.
 
+## D12. The Mori carrier shortcut fails before classification
+
+A cubic Kummer orbit does not determine a Mori extremal ray.  Iritani's
+blow-up coefficient map uses
+
+\[
+  Q_Z^d\longmapsto
+  Q^{\iota_*d}q^{-c_1(N_{Z/Y})\cdot d/(r-1)},
+\]
+
+so the external exponent records the normal bundle and the ambient lattice,
+not \(-K_Z\cdot d\).  No current adapter turns a marked tame orbit into an
+effective primitive rational curve, proves that it spans a \(K_Z\)-negative
+extremal ray, or identifies its period with the minimal length of that ray.
+
+The smooth quadric threefold is a geometric falsifier for the missing
+implication.  Pech--Rietsch, *A comparison of Landau--Ginzburg models for odd
+dimensional quadrics*, arXiv:1306.4016, equation (23), gives the quantum
+Chevalley table.  For \(Q^3\) it implies
+
+\[
+  H^4=4qH,
+\]
+
+so the nonzero spectral factor is \(H^3-4q\), a cubic Kummer cover.  Yet
+\(-K_{Q^3}=3H\) and the elementary contraction is
+\(Q^3\to\mathrm{pt}\), not a projective-plane bundle over a curve.  This
+example carries rank-one
+semisimple sheets rather than the C924 rank-two atom; it shows that the Kummer
+orbit alone supplies no Mori information.  Decorating
+\(K[x]/(x^3-t)\) by the rank-two atom retains the formal marker while still
+supplying no effective cone or contraction.
+
+The classification step that would apply after the missing reconstruction is
+real.  Höring--Novelli, *Mori contractions of maximal length*,
+arXiv:1201.4009, Theorem 1.3, proves that an equidimensional elementary
+fibre-type contraction whose general fibre has dimension \(d\) and whose ray
+has length \(d+1\) is a projective bundle.  For a smooth threefold over a
+curve this would apply with \(d=2\) and length three.  It assumes the
+contraction and the minimal ray length; it does not produce them from a
+spectral cover.
+
+Source reads for this subsection:
+
+- Pech--Rietsch: partial full-text read, introduction and equation (23), cache
+  key `arXiv:1306.4016`, SHA-256
+  `a8d3724481323c7a1c1c4c485312e252e6bfd153c0c3da580fd9281fb3dd8694`;
+- Höring--Novelli: partial full-text read, Theorem 1.3 and its immediate
+  scope discussion, cache key `arXiv:1201.4009`, SHA-256
+  `8e2453c7052bb852c982ab158a46b693797831eeffd386512dc411d3397b800e`.
+
+The surviving computational bridge is narrower: once geometry supplies a
+labelled finite packet and its actual loop permutation, exact tame periods can
+be checked.  The Haskell certificate and Lean period theorem are recorded in
+`2026-08-22-c925-loop-stabilizer-computational-sanity.md`.  They deliberately
+reject \(x^{m+1}=t\) as a target correction rather than attempting to exclude
+it.
+
 ## Current source verdict
 
 1. **The row/projector architecture is closed in the no-Stokes regime.**
@@ -1541,7 +1616,7 @@ proved separately.
    constructing a coherent actual-\(\mathbb Z\)-equivariant refinement of the
    KKPYY atom ledger along the selected factorization and excluding
    stabilizer \((m+1)\mathbb Z\) on every opposite marked correction point.
-   For \(m=2\), the algebra (K[x]/(x^3-t)) decorated by the cubic atom is the
+   For \(m=2\), the algebra \(K[x]/(x^3-t)\) decorated by the cubic atom is the
    mandatory countermodel to any proposed proof.
 4. **The \(B\times F_1\) calculation is only a model edge.**  Its polynomial
    has the required simple special-fibre root, but the actual tensor
@@ -1566,3 +1641,10 @@ comparisons and stabilization indices.  Its report is
 `2026-08-21-c925-rowed-projector-computational-sanity.md`.  This computation
 checks only the assembly; the cited sources and the Lean theorem remain the
 mathematical evidence.
+
+The separate actual-loop regression is
+`cubic-threefolds-tasks/c925-loop-stabilizer-sanity.hs`.  It checks the period
+and fixedness-fingerprint arithmetic for (m=1,2,3,4,13), exhausts all
+translation charges through period 65, and retains (x^{m+1}=t) as the
+mandatory red correction.  Its evidence report is
+`2026-08-22-c925-loop-stabilizer-computational-sanity.md`.

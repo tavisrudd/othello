@@ -137,7 +137,14 @@ certificate need not enumerate a full target stabilizer: for each target
 point it may exhibit one loop power whose fixedness differs from the source.
 The theorem
 `Comparison.TwoLayerDescentPacket.sourceSum_not_equivariantlyEquivalent_of_fixednessFingerprintSeparated`
-consumes exactly those witnesses.
+consumes exactly those witnesses.  If a tame local calculation gives an exact
+period for each point, then
+`sourceSum_not_equivariantlyEquivalent_of_distinctPowerFixednessPeriods`
+constructs a distinguishing power from the inequality of periods.  The
+arithmetic theorem
+`modulus_dvd_power_mul_iff_reducedPeriod_dvd_power` proves that translation by
+charge \(a\) modulo \(n>0\) has the fixed-power pattern
+\(n/\gcd(n,a)\mid k\).
 
 ## 63.4 Conditional $m=2$ telescope
 
@@ -286,7 +293,9 @@ blow-up comparison.  Its checked declarations are:
 * `Comparison.TwoLayerDescentPacket.externalRegularSum_not_equivariantlyEquivalent_withoutExternallyFreePoint`;
 * `Comparison.TwoLayerDescentPacket.hasSameStabilizer_map`;
 * `Comparison.TwoLayerDescentPacket.sourceSum_not_equivariantlyEquivalent_withoutSameStabilizer`;
-* `Comparison.TwoLayerDescentPacket.sourceSum_not_equivariantlyEquivalent_of_fixednessFingerprintSeparated`.
+* `Comparison.TwoLayerDescentPacket.sourceSum_not_equivariantlyEquivalent_of_fixednessFingerprintSeparated`;
+* `Comparison.TwoLayerDescentPacket.modulus_dvd_power_mul_iff_reducedPeriod_dvd_power`;
+* `Comparison.TwoLayerDescentPacket.sourceSum_not_equivariantlyEquivalent_of_distinctPowerFixednessPeriods`.
 
 The ramification argument in Section 63.2 is a standard field-theoretic proof
 recorded in prose.  No modular Hauptmodul, cusp-signature, or programme-base

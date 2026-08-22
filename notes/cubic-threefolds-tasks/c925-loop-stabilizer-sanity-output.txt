@@ -1,0 +1,19 @@
+PASS translation period formula, exhaustive n=2..65
+PASS distinct periods yield a valid separating power, exhaustive 1..65
+PASS equal periods admit no separating certificate, exhaustive 1..65
+PASS inverse translations preserve periods, exhaustive n=2..65
+PASS the Kummer model x^n=t is red for every n=2..65
+PASS the split model x^n=1 is green for every n=2..65
+PASS a mixed ledger fails when one target orbit has the source period
+PASS cardinality does not replace stabilizer data
+PASS return at the source power does not imply equal exact period
+PASS a two-cycle plus a fixed point is green against a three-cycle
+PASS QuickCheck translation period formula, 9000 fixed-seed cases
+PASS QuickCheck separating power, 9000 fixed-seed cases
+PASS QuickCheck inverse-period invariance, 9000 fixed-seed cases
+m=1 period=2 redCharges=[1] greenCharges=[0]
+m=2 period=3 redCharges=[1,2] greenCharges=[0]
+m=3 period=4 redCharges=[1,3] greenCharges=[0,2]
+m=4 period=5 redCharges=[1,2,3,4] greenCharges=[0]
+m=13 period=14 redCharges=[1,3,5,9,11,13] greenCharges=[0,2,4,6,7,8,10,12]
+SUMMARY exhaustiveTranslationCases=2144 exhaustivePeriodPairs=4225 quickCheckCases=27000

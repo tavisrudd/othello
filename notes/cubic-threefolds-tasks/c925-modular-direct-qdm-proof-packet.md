@@ -547,6 +547,15 @@ Final rowed-projector source/consumer sanity replay:
        | diff -u \
            notes/cubic-threefolds-tasks/c925-rowed-projector-sanity-output.txt -'
 
+Actual-loop stabilizer replay:
+
+    nix shell --impure --expr \
+      'with import <nixpkgs> {}; haskellPackages.ghcWithPackages (p: [p.QuickCheck])' \
+      --command sh -c \
+      'runghc -Wall notes/cubic-threefolds-tasks/c925-loop-stabilizer-sanity.hs \
+       | diff -u \
+           notes/cubic-threefolds-tasks/c925-loop-stabilizer-sanity-output.txt -'
+
 This separate suite has 67 named checks: all 576 lawful two-dimensional
 models over `F3`, 1,152 unit-scaled models, 104,976 polynomial cases, 55,296
 two-presentation common-source cases, four hostile malformed bundles,
@@ -564,6 +573,13 @@ versions, and trust boundary are recorded in
 `../2026-08-21-c925-rowed-projector-computational-sanity.md`.  Lean's
 `projectiveProductBranchCount_pos` proves positivity for every natural `m`;
 the finite sweep is only a regression.
+
+The loop-stabilizer suite separately checks 2,144 cyclic translations, 4,225
+period pairs, 27,000 fixed-seed QuickCheck cases, and the named indices
+(m=1,2,3,4,13).  It tests the exact finite certificate consumed by the
+actual-loop theorem; it does not certify the geometric QDM-to-packet adapter.
+Its trust record is
+`../2026-08-22-c925-loop-stabilizer-computational-sanity.md`.
 
 Paper-local Lean is validated only through the guarded queue.  The aggregate
 target `CubicStabilizationIrrationalityVerification` passed in run
@@ -639,7 +655,11 @@ any geometric or QDM provider.
    `sourceSum_not_equivariantlyEquivalent_of_fixednessFingerprintSeparated`
    accepts, for each target point, one loop power whose fixedness differs from
    the source; a finite arithmetic certificate need not materialize a full
-   stabilizer.
+   stabilizer.  The exact-period corollary reduces this further to the period
+   inequality returned by a tame local-exponent calculation.  The companion
+   Haskell suite checks that arithmetic for \(m=1,2,3,4,13\), all translation
+   charges through period 65, and the red model \(x^{m+1}=t\); Lean proves the
+   gcd reduction and the period-separation implication.
    A split external \(C_{m+1}\)-action with no free opposite point is a
    convenient stronger provider.  For \(m=2\), the exact local exclusion is
    absence of a correction three-cycle.  This
@@ -673,6 +693,11 @@ any geometric or QDM provider.
    identification remain source inputs.
    Passing this example does not exclude arbitrary-center three-cycles or
    supply pathwise loop and comparison coherence.
+   Do not replace that centre theorem by an unmarked Mori assertion.
+   Iritani's exponent is a normal-bundle charge, not an anticanonical degree;
+   \(Q^3\) already has the cubic factor \(H^3-4q\) and contracts to a point.
+   Höring--Novelli's projective-bundle theorem starts only after a
+   length-three fibre-type extremal ray over a curve has been supplied.
 4. Keep the bounded 2025--2026 math-physics search as a fallback, not a
    provider.  P-adic Gamma/Frobenius is proved for toric Fanos and
    Grassmannians; mod-\(p\) and categorical Fourier--Laplace results constrain
@@ -684,7 +709,10 @@ any geometric or QDM provider.
    from the marked QDM packet to those nearby cycles is not available and the
    cubic diagonal model itself realizes the forbidden three-cycle.  An
    arithmetic nearby-cycle enhancement of atoms or a common
-   Landau--Ginzburg model would be new mathematics.
+   Landau--Ginzburg model would be new mathematics.  Lee--Wang--Wang's
+   degree-three Type-II transition has local exponents \(1/3,2/3\), so even
+   genuine threefold extremal-transition geometry can carry exact order-three
+   monodromy before the C924 marker is imposed.
 
 ## Retired provider specifications
 
