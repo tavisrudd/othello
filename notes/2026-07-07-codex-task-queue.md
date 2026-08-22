@@ -158,6 +158,7 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 
 ### `complete-ports`
 
+- **C944 `[complete-ports]` [ACTIVE; USER-PRIORITIZED TERMINOLOGY REVISION]** — retire “port” as manuscript terminology; recast the paper in standard recovery-set and recovery-structure language while preserving exact-support/coefficient distinctions, theorem strength, formal identifiers, and release provenance → `notes/2026-08-22-c944-complete-ports-recovery-terminology.md`.
 - **C325 `[complete-ports]` [ACTIVE; APPENDIX-ONLY]** — build one consolidated executable verifier reproducing every retained finite appendix table from a versioned manifest, with independent replay and per-claim evidence routes; no certificate or generated table may carry a main-spine theorem → `notes/2026-07-18-c151-certificate-portfolio-fable-review.md`.
 - **C679 `[complete-ports]` [QUEUED AFTER C325 AND C678]** — run aggregate Lean adequacy and axiom audits, warning-free manuscript and appendix validation, and independent cold reads of theorem hierarchy, human-proof completeness, formal correspondence, computation independence, and exposition; resolve all draft-scoped blockers and issue the draft-readiness verdict without crossing the public-release gates → `notes/2026-07-26-c679-complete-ports-draft-readiness.md`.
 ### `continuation`

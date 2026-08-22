@@ -3,7 +3,7 @@
 **Lane**: `complete-ports`
 
 **Date**: 2026-07-26
-**Status**: ACTIVE; C939 STRENGTHENING COMPLETE; C325 APPENDIX VERIFIER NEXT; REMOTE PUBLICATION GATED
+**Status**: ACTIVE; C944 RECOVERY-TERMINOLOGY REVISION IN PROGRESS; C325 APPENDIX VERIFIER RESUMES NEXT; REMOTE PUBLICATION GATED
 **Theorem source lane**: archived [`repaircodes`](done/2026-07-13-projective-completion-repaircodes.md)
 **Current private paper**: [`complete-repair-ports`](../../papers/complete-repair-ports/README.md)
 **Canonical paper identity**: `complete-ports` — *Complete Bounded Repair Ports: Local Memory,
@@ -114,7 +114,8 @@ terminal.
 Before any nontrivial proof development or formalization for this paper, read the required
 paper-specific expert dossier
 [`papers/expert-profiles/05-complete-repair-ports.md`](../../papers/expert-profiles/05-complete-repair-ports.md).
-The proof and assembly sequence C672--C678 is complete.  Run C325 next to build the appendix-only
+The proof and assembly sequence C672--C678 is complete.  Complete C944's
+manuscript terminology revision, then run C325 to build the appendix-only
 finite verifier.  C679 then performs the aggregate formal/prose audits and independent
 draft-readiness cold reads.
 
