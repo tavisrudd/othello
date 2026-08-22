@@ -2,12 +2,12 @@
 
 **Lane:** `clebsch`
 **Paper stream:** five-paper Clebsch series and the unnumbered conference companion
-**State:** active; Papers I, II, III, and V have sealed cold-referee ACCEPT
-verdicts and deterministic green builds. Paper III also passes the complete
+**State:** active; all five numbered papers have sealed cold-referee ACCEPT
+verdicts and deterministic green manuscript builds. Paper III also passes the complete
 local release gate, including source-only replay of all three pinned Lean closures.
 Paper I’s trust projection and mirror export remain deferred behind C855’s
-pre-existing unmapped `prop:fifteen-class-census`. Paper IV and the remaining
-unnumbered conference paper/shared cross-references are next.
+pre-existing unmapped `prop:fifteen-class-census`. The unnumbered conference
+paper and remaining shared cross-references are next.
 
 ## Objective
 
@@ -111,6 +111,20 @@ and must not be reused as mathematical terminology.
   `013ca974439dc3b5f4002d78a9df31e5db6d97b2bdb6c6438ae1474c8e9aab0d`.
   Independent cold referee: MINOR, repaired through two sealed rereads, final
   ACCEPT.
+- Paper IV — *Reconstructing \(\operatorname{PG}(2,13)\), its conic, and
+  polarity from the minimum words of a binary conic code*: the only
+  reader-facing occurrences were stale Paper I/conference-paper names and the
+  common Paper III coda; all are updated. Its coda now distinguishes Paper
+  V’s global-negation/\(\F_4\) torsor from Paper IV’s \(\F_8\)
+  Frobenius-orbit marking, and its verification README is external-facing
+  trust-boundary documentation. The deterministic manuscript gate passes at
+  16 pages; PDF SHA-256 is
+  `e3667df7d90371c22f4ae4ac7236202bbebfa47eab2a11d3952633d088d5a59f`.
+  The aggregate evidence gate remains pre-existingly blocked by the missing
+  C834-owned shared Lean source
+  `RelativeConicArcs/PassantCodeQ13/StructuralUpgrade.lean`; C943 does not
+  absorb that formal-release blocker. Independent cold referee: MINOR,
+  repaired, sealed ACCEPT.
 - Paper II — *Quadratic Trade Rigidity and Cubic Orientation in Conic
   Matching Quotients*: the former “golden pair” is now stated as the
   ordered/unordered parent pair, and Appendix B distinguishes exactly the
