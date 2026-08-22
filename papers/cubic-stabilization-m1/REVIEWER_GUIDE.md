@@ -68,7 +68,8 @@ Iritani's blowup comparison, Iritani--Koto's projective-bundle comparison,
 regular-singular classification, and the classification of minimal surfaces.
 The headline theorem uses no computational evidence bundle.
 
-For the primary paper, the Mathlib companion records no claim as complete:
+For the primary paper, this repository's Lean 4 companion, built against
+Mathlib, records no claim as complete:
 five are strict fragments, nine are conditional deductions, and
 `lem:faithful-center-base-change` is absent.  It checks the effective ledger
 and occurrence-indexed telescope, parts of the rank-two residue matrix algebra,

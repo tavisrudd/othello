@@ -60,8 +60,9 @@ hypotheses.  The framed companion labels every result that depends on its two
 residual hypotheses.  Computational evidence and exact replay commands are
 registered in [`verification/evidence.json`](verification/evidence.json).
 
-The Mathlib-only companion in [`lean/`](lean/) is a partial reviewer artifact
-covering all three manuscripts in this repository.  Its rejecting inventory
+The Lean 4 companion in [`lean/`](lean/), built against Mathlib, is a partial
+reviewer artifact covering all three manuscripts in this repository.  Its
+rejecting inventory
 distinguishes proved fragments and conditional deductions from absent claims.
 The claim-level trust boundary is recorded in
 [`lean/verification/claims.json`](lean/verification/claims.json), with
@@ -73,7 +74,8 @@ kernel-reported dependencies checked against
 - [`cubic_stabilization_m1.tex`](cubic_stabilization_m1.tex): primary paper.
 - [`sections/`](sections/): primary-paper sections.
 - [`companions/`](companions/): the two separate companion manuscripts.
-- [`lean/`](lean/): pinned shared Mathlib companion and reviewer interface.
+- [`lean/`](lean/): Lean 4 companion built against pinned Mathlib, with its
+  reviewer interface.
 - [`verification/`](verification/): claim coverage and computational evidence.
 - [`.zenodo.json`](.zenodo.json): archival deposit metadata.
 
