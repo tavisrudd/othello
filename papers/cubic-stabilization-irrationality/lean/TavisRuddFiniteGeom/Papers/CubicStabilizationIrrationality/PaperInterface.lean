@@ -16,6 +16,9 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.Bas
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.PointedDirectSum
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.RowedRepresentationDecomposition
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.RowedProjectorDecomposition
+import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.CoprimeFactorProjector
+import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.PoleFreeProjectorObstruction
+import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.TwoBaseRowedProjectorEdge
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.CubicBlockCertificate
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.ProjectiveSpaceQuantumPolynomial
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.RowedProjectorPath
@@ -124,7 +127,12 @@ therefore contradicts a detected source. `Data.ofBasisSquares` shows that
 both squares may be checked on a basis of the source; no topology, density,
 or convergence argument is hidden in that extension. Constructing the QDM
 spectral projectors and proving the source equations on the chosen geometric
-basis are external inputs. `UnitScaledData` accepts a unit normalization of
+basis are external inputs. `CoprimeFactorProjector` makes one common source
+route explicit: two polynomial factors, Bezout coefficients, and annihilation
+by their product construct an idempotent which is the identity on the first
+factor kernel and zero on the second. An operator intertwiner then transports
+that projector. The module does not derive the factors or their annihilation
+from geometric spectral data. `UnitScaledData` accepts a unit normalization of
 the row. `CommonSourcePresentation` composes two endpoint presentations of
 one marked source, and its basis constructor reduces the row and projector
 squares to finite algebra. Faithfully flat extensions compare detection only
@@ -172,6 +180,11 @@ by `IntrinsicPath`. If both projectors are one polynomial in intertwined
 operators, Lean derives the projector square and only the basis row equation
 remains. The type does not construct the completed geometric map, prove that
 row equation, or identify the geometric marker with the polynomial.
+`TwoBaseRowedProjectorEdge` weakens the coefficient requirement further: the
+two native endpoint data may be defined over different rings and compared
+after faithful extension to one common edge ring. Exact semantic endpoint
+identifications turn the resulting equivalence into an `IntrinsicEdge`.
+Neither the common ring nor those semantic identifications are inferred.
 Alternatively, several vertices may be compared in parallel from one marked
 augmented source.  Each branch is an isomorphism from that definitionally
 shared source to one vertex representation plus a row-invisible correction.

@@ -2,11 +2,12 @@
 
 **Lane:** cubic-threefolds
 
-**Status:** no-Stokes marked-projector consumer landed for every \(m\);
-Iritani rank-row square and the formal stable-projector square are separately
-source-derived on the general blowup map; their common even coefficient
-object and the cubic full-row endpoint remain open; the projective endpoint is
-closed; no manuscript edits
+**Status:** no-Stokes marked-projector consumer landed for every \(m\), but
+its algebraic/pole-bounded geometric provider is ruled out by irreducibility
+of the cubic rank-four hypergeometric module; Iritani's rank-row square and the
+formal stable-projector square live in opposite \(z\)-realizations; the
+projective endpoint and generic-bulk persistence are closed; the
+unconditional theorem is not landed; no manuscript edits
 
 ## Goal
 
@@ -582,7 +583,35 @@ any geometric or QDM provider.
 
 ## Next
 
-1. Construct the common rowed object consumed by
+1. Freeze the common-rowed-object search.  The new Lean theorems
+   `PoleFreeProjectorObstruction.pullbackFixedSubmodule_invariantUnder` and
+   `pullbackFixedSubmodule_eq_bot_of_horizontal_irreducible` prove that a
+   horizontal proper formal projector on an irreducible algebraic module has
+   no nonzero included algebraic vector; the row non-detection theorem is a
+   corollary.  The cubic
+   hypergeometric criterion and exact parameter certificate supply the
+   irreducibility input; the source dossier records the remaining horizontal
+   inclusion and properness identifications.  Consequently no
+   effective-Novikov, \(z\)-pole-bounded
+   replacement for \(\rho P\) can supply the cubic witness.  An exotic
+   nonsectorial analytic domain is not ruled out, but no such provider is
+   known.  Do not add another coefficient ring or lattice-intersection adapter
+   without first defeating this theorem.
+2. The only remaining no-Stokes QDM design question is whether a different
+   intrinsic \(z=0\) functional has an exact marked edge square and kills the
+   correction factors.  Raw degree-zero augmentation fails away from the
+   initial slice; via pairing, its desired square is the unproved exact point
+   calibration.  Perform a bounded source-first search for a genuinely
+   different functional.  If none is source-derived, retire the QDM
+   spectral-marker route rather than weakening another consumer.
+3. Keep generic even-bulk persistence green under its stated QDM hypotheses.
+   `rankTwoCluster_nilpotent_persists_on_formal_germ` proves from compressed
+   commutation and flatness that the cubic nilpotent part remains square-zero
+   and nonzero throughout the formal germ.  A first-order bulk derivative is
+   only a corroboration, not a missing theorem.
+4. The following former provider specification is retained for audit only.
+   It is not an active construction target.  It asked to construct the common
+   rowed object consumed by
    `RowedProjectorOccurrence.FaithfulScalarEdge`.  For every factorization
    vertex define the native rowed marked module
    \((V_Y,\rho_Y,P_Y)\) and its detection proposition \(D(Y)\).  For every
@@ -613,7 +642,7 @@ any geometric or QDM provider.
    and homogeneous positive- and negative-`z` tails can still have an
    infinite diagonal convolution.  Localizing an integral module at its
    fraction field is not faithful.
-2. Referee-audit the marked-projector provider uniformly for every
+5. Referee-audit the formal marked-projector provider uniformly for every
    smooth-center blowup allowed by AKMW, including the higher-dimensional
    centers that appear when \(m>1\).  For every generic even QDM, let
    \(P_{\mathrm{mark}}\) be the idempotent onto the union of the C924
@@ -640,14 +669,14 @@ any geometric or QDM provider.
    intrinsic route instead uses `FaithfulScalarEdge`: after the same completed
    map satisfies the two squares, faithful base change and path reflection are
    theorem consequences.
-3. Keep the provider routes modular.  The direct route uses the abstract edge
+6. Keep the provider routes modular.  The direct route uses the abstract edge
    facts recorded in the source dossier; Iritani and Gu--Yu--Yu are alternate
    providers where their scopes overlap.  A common faithful base, a
    polynomial presentation of the marked
    projector, a unit row normalization, and a tensor endpoint unit are
    separate adapters used only by the presentations that need them.  The Lean
    and Haskell interfaces now test each route without requiring their union.
-4. The consumer arithmetic and projective-space endpoint are closed.  The
+7. The consumer arithmetic and projective-space endpoint are closed.  The
    cubic endpoint still requires
    \((\epsilon_XM_X)|_{\operatorname{im}P_X}\ne0\) for the full stable cubic
    projector on the same coefficient object as item 1.  Raw `z=0` visibility
@@ -672,13 +701,13 @@ any geometric or QDM provider.
    denominator-clearing theorem because Iritani's Laurent comparison does not
    preserve the two native chamber lattices.  The exact falsifier and the
    existing C907 certificate are recorded in the source dossier.
-5. The source/referee frontier is the table
+8. The source/referee frontier is the table
    `../2026-08-21-c925-referee-source-substitution-table.md`.  It now separates
    independent derivations from shared Fourier lineage and records the native
    occurrence gate.  Do not call the all-\(m\) theorem unconditional until
    the common rowed coefficient object and cubic full-row endpoint are
    discharged.
-6. Keep the prior one-sided endpoint architecture as the first fallback:
+9. Keep the prior one-sided endpoint architecture as a fallback:
    `Comparison.MarkedWitnessObstruction` consumes only one detected source
    and one rowed selected-action map to projective space.  The global AKMW
    source and a typed chain of local sources are its two lawful providers.

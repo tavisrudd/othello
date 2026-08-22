@@ -4,26 +4,26 @@ Date: 2026-08-21
 
 ## Result-level trust statement
 
-The no-Stokes all-stabilizations consumer is kernel-checked, but the geometric
-proof is not yet source-instantiated.  Iritani supplies the completed
+The no-Stokes all-stabilizations consumer is kernel-checked, but its proposed
+algebraic/pole-bounded geometric provider is ruled out.  Iritani supplies the completed
 comparison and exact augmentation-row square.  Its Euler residual square,
 together with the C924/KKPYY spectral-extension theorem, supplies the formal
 stable-projector square.  Those two squares currently live in opposite
-\(z\)-completions and have not been placed on one faithful even coefficient
-object.  Moreover the cubic calculation proves raw \(z=0\) row visibility,
-not visibility of \(\epsilon M\) on the full stable projector.  Lean verifies
-the conditional linear-algebraic consequences and the finite rational
-cubic-block arithmetic; it does not construct this common QDM object or the
-missing cubic full-row witness.  Several decisive inputs are preprints rather
-than journal publications.
+\(z\)-completions.  Irreducibility of the cubic rank-four hypergeometric
+module prevents its proper local formal block from containing a nonzero
+algebraic or pole-bounded vector.  Thus the missing common object and cubic
+full-row witness are not merely unsourced gates in this regime.  Lean verifies
+the conditional linear algebra and now kernel-checks this abstract
+irreducibility obstruction; the hypergeometric irreducibility criterion
+remains an imported source theorem with an exact parameter certificate.
 
-The active consumer is
+The retained conditional consumer is
 `Comparison.RowedProjectorDecomposition.UnitScaledData.detects_iff`.  It needs
 only an invertible ambient-plus-correction comparison, a unit-scaled row
 square, and a block-natural idempotent-projector square.  The correction
 projector may be nonzero.
 
-The direct all-center edge instantiation uses Iritani's completed blowup
+The retired direct all-center edge instantiation used Iritani's completed blowup
 comparison and its derived augmentation row together with the KKPYY marked
 spectral union.  Gu--Yu--Yu gives a simple-wall corroborating instantiation.
 The other formal interfaces are alternatives: a polynomial projector may replace
@@ -83,22 +83,27 @@ classified as a lineage cross-check, not as independent evidence.
 | Ambient rank-row square | Apply degree-zero augmentation to Iritani's common-source Fourier maps and the definition of `Psi` | Gu--Yu--Yu Definition 4.13, Propositions 2.8 and 4.21, Proposition 5.2 | Same Fourier/augmentation mechanism in two papers, so this is a derivational cross-check, not an independent geometric proof. The elementary augmentation step should be proved in the packet. | Source-local proof can avoid attributing a separate row theorem to either paper. |
 | Marked-projector naturality | KKPYY Theorem 4.1 and Remark 4.2: canonical full F-bundle spectral summands, applied to Iritani's connection isomorphism | C924's recursive Sylvester splitting gives the same unique full stable extension from the `z=0` CRT projector | These are two formulations of the same formal uniqueness mechanism. `CoprimeFactorProjector` checks the fibre projector only: a `z`-dependent connection gauge need not commute with that constant polynomial away from `z=0`. | Use full spectral-extension uniqueness; retain the CRT theorem as the exact leading-fibre certificate. |
 | Cubic marked block | Beauville's cubic quantum product plus the C924 exact conjugation/residue calculation | KKPYY Example 6.21 identifies an indecomposable cubic zero atom from the quantum differential equation | Only partial independence. Example 6.21 corroborates the zero atom but does not compute the C924 modified-residue discriminant `4/9`; it is not a second proof of the exact marker. | Exact geometric normalization remains one-source plus two computational replays. |
-| Product source `X x P^m` | Iritani--Koto Theorem 5.1 | Standard product/CohFT formula on a small product slice, followed by the tensor-projector and tensor-row lemma | Genuinely independent once the product QDM formula is cited/proved. `CubicBlockCertificate.rankRow_tensor_detects` kernel-checks transport of an already supplied cubic full-row witness. | The cubic full-row witness on the stable block remains open; the product theorem does not create it. |
+| Product source `X x P^m` | Iritani--Koto Theorem 5.1 | Standard product/CohFT formula on a small product slice, followed by the tensor-projector and tensor-row lemma | Genuinely independent once the product QDM formula is cited/proved. `CubicBlockCertificate.rankRow_tensor_detects` kernel-checks transport of an already supplied cubic full-row witness. | The product theorem does not create a cubic full-row witness; cubic irreducibility rules out the proposed algebraic/pole-bounded witness before tensor transport. |
 | Projective-space target | Explicit `QH(P^n)=K[H]/(H^(n+1)-q)` at `q != 0` | Iritani--Koto with base a point | Genuinely independent but elementary; both yield rank-one factors. `ProjectiveSpaceQuantumPolynomial.relationPolynomial_separable` kernel-checks squarefreeness for every `m`. | Only the standard geometric small-quantum presentation remains imported. |
-| Repeated-vertex occurrence | Iritani's injective vertex maps (5.38), (5.39), and the invertible formal generic coordinate germ in Theorem 5.18(7); (5.40) remains edge-local | `TwoBaseRowedProjectorEdge.Data.detects_iff` compares distinct native endpoint objects after faithful extension to one edge object | The intrinsic-predicate route needs neither a common path ring nor an adjacent carrier map once one native rowed object exists. | **Open at source level:** full big QDM has odd nilpotents, and on the even slice the row and stable projector use opposite `z`-completions. `Data.toIntrinsicEdge` closes only the downstream telescope after a faithful common object is supplied. |
+| Repeated-vertex occurrence | Iritani's injective vertex maps (5.38), (5.39), and the invertible formal generic coordinate germ in Theorem 5.18(7); (5.40) remains edge-local | `TwoBaseRowedProjectorEdge.Data.detects_iff` compares distinct native endpoint objects after faithful extension to one edge object | The intrinsic-predicate route needs neither a common path ring nor an adjacent carrier map once one native rowed object exists. | **No-go for the proposed native object:** on the even slice the row and stable projector use opposite `z`-completions, and cubic irreducibility forbids a nonzero marked algebraic/pole-bounded witness. |
 
 This audit finds multiple proofs for the formal projector and projective-space
-endpoint, but not a source proof of the common rowed coefficient object or of
-the cubic full-row endpoint.  The active conditional proof is source-minimal:
+endpoint, but the common rowed coefficient object and cubic full-row endpoint
+cannot be supplied on the proposed pole-bounded domains.  The conditional
+consumer is source-minimal:
 Iritani for blowups, formal spectral-extension uniqueness, the standard
 product formula, Beauville's cubic calculation, the explicit projective-space
 ring, and AKMW.  GYY/KKPYY remain corroborating routes rather than
-simultaneous hypotheses.  Unconditional all-\(m\) closure requires either a
-direct even rowed F-bundle theorem or both missing local statements above.
+simultaneous hypotheses.  A no-Stokes continuation now requires a different
+intrinsic \(z=0\) functional with a source-derived edge square, or an invariant
+outside this QDM spectral-marker architecture.  Raw augmentation is not such a
+functional at general Novikov parameters.
 
 ## Exact source-to-consumer substitution
 
-For one wall, let `S` be the completed common source, with presentations
+The following is the exact conditional substitution interface retained for
+audit.  It has no algebraic/pole-bounded cubic instantiation.  For one wall,
+let `S` be the completed common source, with presentations
 
 \[
  F_{\rm src}:S\xrightarrow{\sim}V_{\widetilde Y},\qquad
@@ -204,11 +209,9 @@ The proof fails if any one of the following occurs:
 - the projective-space endpoint has a marked rank-two factor.
 
 Each consumer-side algebraic weakening has a Lean theorem and a finite hostile
-check.  The former three geometric gates are discharged respectively by the
-Iritani/CRT native projector argument, Behrend's product formula plus the
-C924 block, and the projective-space small quantum presentation.  The
-rank-row equation is source-derived on Iritani's exact map; its displayed
-augmentation calculation remains a referee check, not a separate imported
-theorem.  The principal residual referee risk is therefore source correctness
-and normalization of these geometric identifications, not an unfilled logical
-interface in the telescope.
+check.  The formal projector and projective-space endpoint are source-backed,
+and the rank-row equation is source-derived on Iritani's exact map.  Their
+combination with the cubic block is obstructed by the incompatible
+realizations and global hypergeometric irreducibility.  This is a mathematical
+no-go for the pole-bounded provider, not an unfilled logical interface in the
+telescope.

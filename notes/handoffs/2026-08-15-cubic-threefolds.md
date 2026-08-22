@@ -148,15 +148,14 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   Proposition 5.4, and the definition of the Theorem 5.18 comparison derive
   the exact rank-row square on Iritani's own completed map for every
   smooth-center blowup.  C924/KKPYY spectral-extension uniqueness separately
-  derives the full formal projector square.  The two pieces are not yet one
-  legal rowed object: the row is negative-\(z\), the projector is
-  positive-\(z\), and full big QDM has odd nilpotent bulk coordinates.  The
-  exact remaining gates are an even common graded/topological coefficient
-  object with faithful occurrence maps and nonvanishing of
-  \((\epsilon_XM_X)|_{\operatorname{im}P_X}\) for the full cubic stable block.
-  The projective-space endpoint is closed; the unconditional all-\(m\)
-  theorem is not landed.  The complete reviewer target and axiom audit are
-  green for both new connectors.  Lean kernel-checks the
+  derives the full formal projector square.  The two pieces are not one legal
+  rowed object: the row is negative-\(z\), while the projector is
+  positive-\(z\).  The former proposal to construct a common algebraic or
+  pole-bounded object is now ruled out.  Irreducibility of the cubic rank-four
+  hypergeometric module prevents its proper local formal block from containing
+  a nonzero algebraic fixed vector.  The projective-space endpoint is closed;
+  the unconditional all-\(m\) theorem is not landed.  The complete reviewer
+  target and axiom audit are green.  Lean kernel-checks the
   conditional consumer, unit normalization, faithful
   base change, injective row-codomain enlargement, polynomial projector
   transport, tensor endpoint witness, common-source composition, and the
@@ -167,7 +166,7 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   `m=1,3,4,13` regressions and Lean's all-`m` branch-count theorem test only
   the consumer arithmetic, not the geometric providers.
 
-  A proposed pole-free-lattice repair is now closed.  Although restricting
+  A proposed pole-free-lattice repair is closed negatively.  Although restricting
   \(\epsilon M\) to an effective-Novikov/nonnegative-\(z\) lattice can make
   individual evaluations coefficientwise meaningful, Iritani's Laurent edge
   comparison does not automatically preserve the native chamber lattices.
@@ -176,26 +175,40 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   not the Golyshev-`D3` algebraic subconnection proposed as a pole-free
   witness.  The exact parameter-difference certificate and the
   denominator-clearing boundary are in D10 of the no-Stokes dossier.
+  `PoleFreeProjectorObstruction.pullbackFixedSubmodule_invariantUnder` derives
+  connection stability from horizontal inclusion and projector maps, and
+  `pullbackFixedSubmodule_eq_bot_of_horizontal_irreducible` combines it with
+  irreducibility and properness; row non-detection is a corollary.  The
+  guarded aggregate passed in run
+  `20260822-043848-8d70aaeb`, and the guarded axiom audit exits zero.  The
+  separate generic-bulk splitting concern is green under the established QDM
+  hypotheses: `rankTwoCluster_nilpotent_persists_on_formal_germ` proves from
+  compressed commutation and flatness that the cubic nilpotent part stays
+  square-zero and nonzero over the formal even-bulk germ.
 
-  **Trust boundary:** the direct all-center edge provider uses Iritani's
+  **Trust boundary:** the retired direct all-center provider uses Iritani's
   comparison and derived augmentation row plus the KKPYY/direct-formal marked
   spectral projector.  Gu--Yu--Yu is a simple-wall corroboration, not a
   simultaneous hypothesis.  Faithful-base descent, polynomial
   projector presentation, unit scaling, and tensor endpoints are modular
   alternatives or endpoint adapters, not four extra simultaneous assumptions.
-  The former path-level occurrence obligation is no longer a common-ring or
+  Its path-level occurrence obligation is no longer a common-ring or
   adjacent-carrier theorem: two faithful edge extensions plus explicit
   semantic vertex identifications suffice.  Geometry must still provide
   those identifications and identify the C924 marker with the coprime factor
-  split.  Lean does not construct the QDM comparison or either endpoint
-  model; Iritani supplies the comparison and row equation externally.  The exact
+  split.  Even those data cannot produce a no-Stokes cubic witness on a
+  pole-bounded common object.  Lean does not construct the QDM comparison or
+  either endpoint model; Iritani supplies the comparison and row equation
+  externally.  The exact
   publication-status and substitution
   table is `../2026-08-21-c925-referee-source-substitution-table.md`; the
   theorem-by-theorem dossier is
   `../2026-08-21-c925-no-stokes-source-dossier.md`; the executable report is
-  `../2026-08-21-c925-rowed-projector-computational-sanity.md`.  The task
-  card's `Next` section is authoritative.  Material below this paragraph is a
-  fallback ledger, not the live route.
+  `../2026-08-21-c925-rowed-projector-computational-sanity.md`.  The live
+  no-Stokes frontier is now either a different intrinsic \(z=0\) functional
+  with a source-derived edge square, or a non-QDM invariant.  Raw augmentation
+  is a failed candidate.  The task card's `Next` section is authoritative.
+  Material below this paragraph is a fallback ledger, not the live route.
 
   The packet is organized like a parameterized software interface: a
   caller chooses which generic even-block data to observe, which blocks to

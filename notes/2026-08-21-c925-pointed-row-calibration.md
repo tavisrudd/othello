@@ -3,13 +3,17 @@
 ## Status
 
 The false flat-point uniqueness step can be removed from the algebraic
-consumer.  Gu--Yu--Yu's adjoint Fourier formula gives the rank-row equation
-generatorwise on the nonlocalized completed QDM source.  The paper-local Lean
+consumer.  Applying degree-zero augmentation to Iritani's two Fourier maps
+gives the rank-row equation on the ordinary basis of his completed blowup
+source; Gu--Yu--Yu gives the parallel simple-wall calculation.  The
+paper-local Lean
 modules `Comparison.PointedDirectSum` and
 `Comparison.RowedRepresentationDecomposition` separate that equation from
 point representatives and endpoint loop selection.
 
-The latest endpoint consumer is asymmetric and bypasses adjacent vertex comparisons.
+The active consumer is the operation-level rowed marked projector described
+below.  The asymmetric endpoint consumer is the smallest retained fallback
+and bypasses adjacent vertex comparisons.
 One finite marked representation over the endpoint ring contains a detected
 cubic-product witness.  To contradict the rational endpoint, it is enough to
 map that representation to the endpoint by one selected-loop intertwiner
@@ -37,7 +41,9 @@ below changes the selected action from formal \(z\)-monodromy to an algebraic
 deck action, so its source detection and endpoint contrast must be reproved;
 they cannot be borrowed from the fixed-phase calculation.
 
-A looser operation-level consumer is now the closure route.  It
+A looser operation-level consumer was the final row-visible-projector
+candidate.  Its algebraic and pole-bounded source realizations are ruled out
+by cubic hypergeometric irreducibility.  Conditionally, it
 does not ask for one map from a global core to projective space.  For each
 blowup it retains the intrinsic idempotent projecting to all C924-marked QDM
 atoms and a scalar row with arbitrary codomain.  If the actual QDM

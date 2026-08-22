@@ -174,6 +174,30 @@ whose row value is one preserves an endpoint witness.  These results verify
 the algebraic consequences of finite certificates; they do not prove the
 existence of the completed quantum-module maps or of a polynomial presentation
 of the geometric spectral projector.
+`Comparison.CoprimeFactorProjector` replaces that last presentation by an
+explicit algebraic certificate: two polynomial factors, Bezout coefficients,
+and annihilation by their product. Lean constructs the idempotent, proves that
+it selects the first factor kernel and kills the second, and transports it
+through every intertwiner of the chosen operators. It does not prove that a
+geometric marker supplies those factors or that their product annihilates the
+quantum module.
+`Comparison.PoleFreeProjectorObstruction` records the obstruction to replacing
+the completed rowed carrier by algebraic vectors in a larger formal module.
+The vectors fixed by the formal projector pull back to a submodule of the
+algebraic carrier. If connection stability and irreducibility make that
+submodule either zero or the whole carrier, and the projector is proper on the
+included carrier, then no scalar row detects an included fixed vector. The
+file also proves that horizontal inclusion and projector maps make the
+pullback fixed submodule connection-stable and, under irreducibility and
+properness, force it to be zero. It does not prove a
+hypergeometric irreducibility criterion, construct the algebraic-to-formal
+inclusion, or establish horizontality for a geometric projector.
+`Comparison.TwoBaseRowedProjectorEdge` allows the two native endpoint modules
+to have different coefficient rings. Faithful scalar extensions to one common
+edge ring, together with the row and projector squares, preserve native
+detection. Separate endpoint identifications then produce the semantic edge
+used by `IntrinsicPath`; the file does not infer those identifications from
+the vertex names.
 The same module records that the projective-product branch count `m + 1` is
 positive for every natural stabilization index; bounded external test suites
 are not used to establish that quantifier.

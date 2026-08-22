@@ -178,7 +178,9 @@ eight edge facts, either selected path-level presentation obligation, and
 three endpoint facts fail closed independently.  The new edge fact is the
 existence of one even coefficient object on which the row and full projector
 compose; the new endpoint fact is full stable-row visibility of the cubic,
-separate from product transport.  On the intrinsic route its path token means a native
+separate from product transport.  The no-Stokes pole-bounded QDM cannot supply
+those two tokens: cubic hypergeometric irreducibility excludes a nonzero
+algebraic vector in the proper local formal block.  On the intrinsic route its path token means a native
 faithful scalar presentation; Lean, rather than the token, proves edge
 reflection.  Four other facts gate
 alternative adapters and are not cumulative assumptions.  Source-fact tokens
@@ -214,6 +216,9 @@ publication-status audit is
   dossier and is not inferred from successful execution.
 
 No genuine mystery remains in the algebraic or computational consumer.  The
-common even rowed coefficient object, the cubic full-row witness, and the
-geometric identification of the completed QDM maps remain the source trust
-boundary; finite truncations cannot establish them.
+common even rowed coefficient object and cubic full-row witness are now known
+to be unavailable on the proposed algebraic/pole-bounded no-Stokes domains;
+the finite source tokens retain the conditional interface but do not suggest
+that those providers exist.  A different \(z=0\) functional or a non-QDM
+invariant would require a new suite.  Finite truncations cannot establish such
+geometric data.

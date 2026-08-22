@@ -13,7 +13,7 @@ proof and the repeatedly proposed fallback bridges.  Each entry separates:
 - **OPEN/DISPOSITION:** the exact remaining use, or the reason the source is
   not part of the active C925 proof.
 
-The active one-edge consumer is
+The conditional one-edge consumer is
 `Comparison.RowedProjectorDecomposition.UnitScaledData.detects_iff`; the
 exact-row `Data.detects_iff` is its scale-one specialization.  For one blowup
 it needs an intrinsic marked idempotent on each direct-sum factor, block
@@ -23,7 +23,7 @@ does not consume a loop, an eigenvalue, primary coverage, correction
 vanishing, a Gamma lattice, or Stokes data.  The older one-sided
 `MarkedWitnessObstruction` architecture is retained only as a fallback.
 
-The finite telescope is
+The finite conditional telescope is
 `Comparison.RowedProjectorPath.Path.detectsAt_iff`.  It deliberately requires
 one native carrier, row, and projector at every vertex.  Constructing that
 family, or proving that all edge occurrences are faithful pullbacks of it, is
@@ -47,7 +47,7 @@ data may use different coefficient rings, each extends faithfully to one edge
 ring, and explicit identifications with the semantic endpoint predicates
 supply the intrinsic path edge.
 
-There are only two source architectures:
+There are only two source architectures for that conditional consumer:
 
 1. one general marked source specialized downstream; or
 2. a typed chain of local marked maps whose downstream composite is the one
@@ -90,7 +90,8 @@ extensionality closes both compatibility squares once their values are known
 on a basis.  The open source task is precisely to construct this record from
 the QDM maps, not to prove another linear-algebra lemma after it is supplied.
 
-The resulting per-edge source ledger is short and fail-closed:
+The resulting per-edge source ledger is short and fail-closed, but the
+pole-bounded no-Stokes instantiation is ruled out in D10:
 
 1. restrict to an even bulk slice and construct native rowed marked modules
    at the two endpoints on which the row and projector genuinely compose;
@@ -397,7 +398,8 @@ Thus the general smooth-center blowup comparison and its rank-row equation
 come from one map in one source.  Gu--Yu--Yu's analogous simple-wall
 calculation is a lineage cross-check, not a required splice.
 
-The marked-projector square is carried by this same map.  At the generic
+The marked-projector square is a separate consequence of spectral-extension
+uniqueness for this same map.  At the generic
 point of a native numerical Novikov/bulk domain, let \(\kappa_Y\) denote the
 Euler residual endomorphism.  Over an algebraic closure, partition its
 generalized eigenspaces by the C924 predicate
@@ -481,17 +483,15 @@ common object.
 - A common external Novikov charge along a weak-factorization path.
 - A global map to the final rational endpoint.
 
-### OPEN
+### BOUNDARY
 
 The comparison, its algebraic augmentation-row square, and the formal stable
 projector square are separately source-derived for a general smooth-center
-blowup.  Their joint row-visible Boolean is not yet typed: the row and full
-projector use opposite \(z\)-completions, and the full big coefficient ring
-has odd nilpotents.  The remaining edge input is an even common
-graded/topological realization, or a replacement fibrewise row square, in
-addition to the endpoint inputs recorded in D10.  No pathwise common
-completion or center classification is required after those local data are
-supplied.
+blowup.  Their joint row-visible Boolean is not defined on the two native
+opposite-\(z\) completions.  D10 proves that an algebraic or pole-bounded
+common realization cannot supply the cubic witness.  A replacement
+fibrewise \(z=0\) row square would be a different source theorem, not a
+completion of the present construction.
 
 ## D4. AKMW: weak factorization and birational cobordisms
 
@@ -832,12 +832,15 @@ the ambient map to the same source, and Theorem 5.9 defines the comparison
 from those maps.  No Gu--Yu--Yu/Iritani identification and no continuity
 argument on arbitrary rational Fourier inputs remains.
 
-The projector square is now derived in D3, rather than inferred from bare
-connection naturality.  The generic marked union descends by its Galois-stable
-coprime factorization, Cayley--Hamilton and Bezout construct its projector,
-and Iritani's Euler-operator square transports it.  KKPYY Theorem 4.5 confirms
-that this is the canonical maximal-F-bundle isomorphism extracted from the
-same formal comparison.
+The \(z=0\) projector is derived in D3 from the Galois-stable coprime
+factorization, Cayley--Hamilton, and Bezout.  Bare connection compatibility
+does not transport that constant polynomial projector through a
+\(z\)-dependent gauge.  The full projector square instead follows by
+conjugating the source stable projector and using uniqueness of the
+connection-stable spectral extension with the prescribed \(z=0\) fibre.
+KKPYY Theorem 4.1 and Remark 4.2 supply this canonicity; their Theorem 4.5
+identifies the resulting blowup decomposition with the one extracted from
+Iritani's formal comparison.
 
 Only the projective-space endpoint is presently source-derived.  The cubic
 product endpoint still needs the full-row theorem
@@ -882,38 +885,42 @@ part, so the marked projector is zero at this point and hence on the generic
 F-bundle.  `ProjectiveSpaceQuantumPolynomial.relationPolynomial_separable`
 checks the separability statement for every \(m\).
 
-Equation (D10.2) is unchanged under one blowup or blowdown.  D3 supplies the
-occurrence theorem using the two injective native-ring maps and the formal
-generic coordinate germ.  The center map (5.40) may remain edge-local because
-the consumer never identifies correction carriers at adjacent steps.
-`TwoBaseRowedProjectorEdge` reflects both endpoint Booleans through faithful
-field extensions, and `RowedProjectorPath.IntrinsicPath.property_iff`
-telescopes the resulting one native predicate through an arbitrary oriented
-weak factorization.
+If one common rowed object existed, the algebraic consumer would make
+(D10.2) unchanged under one blowup or blowdown.  The center map (5.40) could
+remain edge-local because the consumer never identifies correction carriers
+at adjacent steps.  `TwoBaseRowedProjectorEdge` and
+`RowedProjectorPath.IntrinsicPath.property_iff` kernel-check that conditional
+telescope.  They do not supply the common object, and the pole-bounded
+proposal for it is excluded below.
 
-Consequently the Lean telescope gives the all-\(m\) contradiction once the
-following local/source gates are supplied.  They are not yet all supplied,
-so the unconditional theorem is not landed.
+The Lean telescope would give the all-\(m\) contradiction if the following
+local/source data existed.  The pole-bounded no-Stokes realization of the
+middle two items is ruled out below, so this is now a retired provider ledger.
 
-### Four-gate ledger
+### Retired four-gate ledger
 
 1. **Edge formal projector — source-derived:** the Galois-stable coprime
    factorization and Iritani/KKPYY spectral-extension uniqueness give the
    projector square on the formal F-bundles.  The CRT certificate itself is
    only the \(z=0\) fibre.
-2. **Joint occurrence object — open:** construct the even common
-   graded/topological module on which the negative-\(z\) row and positive-
-   \(z\) stable projector compose, and prove faithful native/edge pullback.
-3. **Cubic-product endpoint — open:** prove (D10.3) on that same object.
-   Behrend and the tensor Lean lemma then give every \(m\).
+2. **Joint occurrence object — unavailable in the pole-bounded no-Stokes
+   regime:** a nonzero marked algebraic vector would define a proper
+   subconnection of the irreducible cubic hypergeometric module.  The opposite
+   \(z\)-tails also have an infinite homogeneous diagonal on the unrestricted
+   formal modules.
+3. **Cubic-product endpoint — impossible for the proposed pole-free
+   replacement:** the same irreducibility obstruction persists after the
+   product extension.  A sectorial realization can contain the local formal
+   block, but that is the Stokes connector excluded by this route.
 4. **Projective endpoint — closed:** the standard small-quantum presentation
    and separability of \(H^{m+4}-q\) give only rank-one generic spectral
    factors, hence zero marked projector.
 
-The first two gates may also be replaced together by a direct fibrewise
-projector and rank-row square.  No common path completion, Stokes matrix,
-center classification, or correction-nullity theorem is consumed after this
-local rowed object exists.
+The first two gates could only be replaced by a direct fibrewise projector and
+row square for a different \(z=0\) functional.  Raw degree-zero augmentation
+does not satisfy that square at general Novikov parameters.  Existence of
+another intrinsic functional is an open design question, not a theorem
+asserted by this dossier.
 
 ### Rejected pole-free-intersection repair
 
@@ -958,6 +965,24 @@ irreducibility.  The C907 Sage certificate already checks the parameter
 differences and records
 `global_hypergeometric_module_irreducible = true` and
 `rank_two_formal_block_can_be_proper_global_subobject = false`.
+The tracked artifacts are
+`2026-08-10-c907-quantum-monodromy-stabilization.sage.py`
+(SHA-256 `72098d03f35c81307510f07fb26df59c6de985690a2d96a5685cd84755c401ea`),
+the independent Python replay
+`2026-08-10-c907-quantum-monodromy-stabilization-independent.py`
+(SHA-256 `3ae5b4f9532f6be0fd2378396c92878c508d5e68d1c3e279944f96b70aa8ec63`),
+and their JSON certificate
+`2026-08-10-c907-quantum-monodromy-stabilization.json`
+(SHA-256 `b419ce52ee9118584ca81c65ca894a3a300cef32a33056b7872fe1b2ee3cf0ee`).
+
+The imported criterion is Nicholas Katz, *Exponential Sums and Differential
+Equations*, Annals of Mathematics Studies 124 (1990), Proposition 3.2:
+nonresonance \(\alpha_i-\beta_j\notin\mathbf Z\) implies irreducibility of
+the hypergeometric connection.  Yichen Qin and Daxin Xu, *Irregular Hodge
+filtration of hypergeometric differential equations*, Algebra & Number Theory
+19 (2025), Section 2.1.1, restate that proposition in the confluent notation
+used here.  The finite certificate checks only the two parameter differences;
+it does not replace Katz's theorem.
 
 The apparent Golyshev `D3` factor is a regularized-period/right-determinant
 statement (and in several tracked notes concerns other del Pezzo
@@ -966,11 +991,49 @@ subconnection into the cubic's unregularized rank-four QDM.  It therefore
 cannot supply \(D_L(X)\).  A finite polynomial ansatz can be retained as a
 negative regression, but it cannot overturn the irreducibility theorem.
 
-Consequently this repair does not move the live frontier.  A different
+Consequently this repair does not move the live frontier.  The Lean theorem
+`PoleFreeProjectorObstruction.pullbackFixedSubmodule_invariantUnder` proves
+that a horizontal algebraic inclusion and horizontal formal projector make
+the pullback fixed vectors connection-stable.  The theorem
+`pullbackFixedSubmodule_eq_bot_of_horizontal_irreducible` combines that fact
+with irreducibility and properness to prove that the pullback is zero;
+`not_detectsOnIncludedModule_of_horizontal_irreducible` gives the row
+corollary.  Hypergeometric irreducibility, the algebraic-to-formal
+inclusion, and geometric horizontality/properness remain explicit source
+inputs.  The guarded aggregate and axiom audit pass.
+
+A different
 lattice large enough to meet the local formal block would again require an
 edgewise strictness theorem and an independently proved cubic witness; if it
 contains sectorial sums, it has reintroduced the Stokes connector under a new
-name.
+name.  This closes the row-visible-projector route on algebraic and Novikov-
+or \(z\)-pole-bounded native domains.  It does not prove that no exotic
+nonsectorial analytic domain exists.
+
+The exact certainty split is:
+
+| statement | evidence status |
+|---|---|
+| a horizontal proper formal summand contains no nonzero included algebraic vector in an irreducible algebraic module | kernel-checked by `pullbackFixedSubmodule_invariantUnder` and `pullbackFixedSubmodule_eq_bot_of_horizontal_irreducible` |
+| the cubic operator is irreducible | Katz Proposition 3.2 plus the exact nonresonance certificate above |
+| the proposed effective-Novikov or bounded-\(z\)-pole witness would give such an algebraic vector | mathematical homogeneity and horizontal-projector argument recorded above; not separately formalized in the paper-local Lean package |
+| every enlargement containing the formal block must be sectorial | not claimed; all standard summation realizations are sectorial, but no exclusion theorem for exotic domains is used |
+| no different intrinsic \(z=0\) correction-killing functional exists | not claimed; raw augmentation is only one failed candidate |
+
+### Generic even-bulk persistence
+
+The concern that the cubic rank-two Jordan block might split under a generic
+even-bulk perturbation is answered by the formal-germ rigidity theorem
+`rankTwoCluster_nilpotent_persists_on_formal_germ`.  In the matrix model of
+the compressed QDM connection, it proves that a traceless nilpotent part with
+one unit entry and nilpotent closed fibre stays square-zero and nonzero,
+provided the compressed multiplication commutes with the leading operator and
+the displayed flatness identities hold in every bulk direction.  This is
+stronger than checking one entry of one first derivative.  The theorem does
+not construct the QDM cluster; the geometric input is that the isolated cubic
+cluster supplies those compressed flatness and commutation equations.  Thus
+generic splitting is not an additional gate under the C924/m=1 formal-germ
+hypotheses.
 
 ## The exact one-sided source theorem
 
@@ -1088,11 +1151,13 @@ proved separately.
    fallbacks.**  They are no longer the first source test.  AKMW/GYY do not
    currently supply their marked endpoint maps as a package.
 
-The live task is source construction, not further consumer packaging: either
-construct a legal row/projector object and its cubic witness, or find a
-different fibrewise functional whose edge square is source-derived.  Do not
-resume the pole-free algebraic-subconnection, fixed-phase, deck, Hodge-height,
-or Stokes routes without answering their recorded countermodels.
+The live no-Stokes task is no longer construction of a common object for
+\(\epsilon M\) and the stable projector.  It is either a different fibrewise
+\(z=0\) functional with a source-derived edge square, or an invariant outside
+the QDM spectral-marker architecture.  No such functional is presently known;
+raw degree-zero augmentation is an exact failed candidate.  Do not resume the
+pole-free algebraic-subconnection, fixed-phase, deck, Hodge-height, or Stokes
+routes without answering their recorded countermodels.
 
 The finite plumbing regression is
 `cubic-threefolds-tasks/c925-rowed-projector-sanity.hs`.  It requires each
