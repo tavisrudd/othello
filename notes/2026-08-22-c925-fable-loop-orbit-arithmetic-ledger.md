@@ -196,6 +196,74 @@ so case 3 contains the source geometry.  This is the exact residue of the
 \(\ell=3\) instance of the card's open provider; the Mori shortcut closed in
 dossier D12 is not reopened, since nothing here asserts a length-three ray.
 
+## 11. Creative pass: reformulation, toric cycle lemma, falsification experiment
+
+### 11.1 Loop-independent form of the residual gate
+
+If \(\ell\nmid r-1\), the \(\ell\)-part of a point's period under the
+fractional cocharacter \(\iota^*\gamma'+\tfrac a{r-1}\rho_Z\) equals its
+\(\ell\)-part under the integral cocharacter \((r-1)\iota^*\gamma'+a\rho_Z\)
+of \(Z\)'s own torus (pullback along a degree prime to \(\ell\) cannot create
+or destroy \(\ell\)-torsion in a Kummer orbit).  Hence, under T1–T3 and H1–H4,
+the all-\(m\) theorem for \(m+1=\ell\) prime is **equivalent** to:
+
+> **Marked prime-cycle dimension bound (conjecture).** If a smooth projective
+> \(d\)-fold has, under some integral cocharacter of its Novikov torus, a
+> cyclic orbit of prime length \(\ell\) consisting of marked
+> \((2,N\ne0,\delta^\sharp=4/9)\) blocks, then \(d\ge\ell+2\).
+
+\(B\times\mathbf P^{\ell-1}\) saturates the bound.  This removes every
+reference to the transported loop from the gate: it is now a statement about
+one variety and its own Novikov torus.  The transport (Section 8) is what
+justifies dropping the loop.
+
+### 11.2 Toric sheet cycles are cell torsion (unmarked analogue)
+
+For a smooth Fano toric \(Y\) the Euler sheets are the critical points of the
+mirror Laurent polynomial \(W=\sum_i x^{v_i}\) over the fan polytope, and a
+cocharacter \(\beta\) is a height function \(v_i\mapsto\beta_i\).  Along the
+loop in \(\beta\) the critical points cluster over the cells of the induced
+regular subdivision; on a cell \(C\) with affine heights the rescaling
+\(x\mapsto x\,t^{u}\) with \(\langle u,v\rangle+\beta(v)\) constant on \(C\)
+solves \(u\in N\otimes\mathbf Q\), and the monodromy permutes the cell's
+critical points through the class of \(u\) in the finite group
+\(N/\langle v-v'\colon v,v'\in C\rangle\).  So prime cycle lengths are element
+orders of these cell-torsion groups: for \(\mathbf P^d\) the simplex gives
+\(\mathbf Z/(d+1)\); for the five toric del Pezzos every lattice triangle on
+rays has normalized area \(\le3\) and non-simplicial cells have trivial
+torsion, so no prime cycle exceeds 3.  **Caution:** the picture fails outside
+the Fano range — for \(F_3\) the triangle
+\(\{(1,0),(0,1),(-1,-3)\}\) has area 5 but \(\chi(F_3)=4\); the Jacobian
+ring of \(W\) overcounts the sheets when \(-K\) is not nef.  Status: derived,
+not formalized; the Fano-range claim should be checked against Givental's
+mirror theorem before any use.
+
+### 11.3 Falsification experiment for the strategy at \(\ell=5\)
+
+A rational surface \(Y\) with a cyclic 5-orbit of Euler sheets under an
+integral cocharacter would make \(Z=B\times Y\) a 5-fold carrying a marked
+5-orbit (tensor with the cubic block; \(\delta^\sharp\) is shift-invariant).
+For \(m=4\) the ambient is a 7-fold and \(Z\) has codimension 2, so it is an
+admissible blow-down centre with no Kummer index.  The stabilizer ledger then
+cannot separate that correction from the source, and the conjecture in 11.1
+fails at \(\ell=5\) with \(d=5<7\).  Toric del Pezzos are safe (11.2).  The
+open test is the non-toric del Pezzos \(\mathrm{Bl}_k\mathbf P^2\),
+\(4\le k\le8\): their small quantum products follow from genus-zero
+invariants (Göttsche–Pandharipande recursion), and one must decide whether any
+integral cocharacter of the rank-\((k+1)\) Novikov torus has a 5-cycle on the
+\(k+3\) sheets.  A 5-cycle would show that the loop-stabilizer route needs an
+embedding or normal-bundle argument for every prime \(\ge5\); no 5-cycle
+(and none for 7 on \(k\le8\)) would support 11.1 for surfaces.  This is a
+bounded exact computation, not yet run.
+
+### 11.4 Closed lens: Frobenius as a canonical extra symmetry
+
+A \(p\)-adic Frobenius structure (Bai–Pomerleano–Seidel, dossier D11) would
+act on any Kummer index \(q^{1/n}\mapsto q^{p/n}\), i.e. by multiplication by
+\(p\) on \(\mathbf Z/n\), on source and correction alike; it is
+telescope-coherent by the same uniqueness argument as T2 but distinguishes
+nothing that the cyclic structure does not already.  Closed.
+
 ## 10. Suggested next step on this branch
 
 With H3 settled, Section 1 holds for every prime \(\ell=m+1\) under H2 and
