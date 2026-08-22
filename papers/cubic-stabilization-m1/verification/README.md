@@ -96,9 +96,11 @@ Each claim-map row also pins the two things it describes, by digest.  One digest
 covers the manuscript statement, taken with its annotations removed and its
 layout normalized, so that rewriting the mathematics of a statement fails the
 check until the row describing its formal coverage has been re-examined.  The
-other covers the elaborated statements of the terminals the row registers,
-excluding their docstrings, so that changing what a terminal proves has the same
-effect while improving how it is documented does not.  Machinery terminals carry
+other covers normalized source declaration signatures of the terminals the row
+registers, excluding their docstrings, so that changing a terminal's declared
+type has the same effect while improving how it is documented does not.
+Source-only checking does not establish that a declaration elaborates.
+Machinery terminals carry
 the second digest as well, since the reason recorded for one describes what it
 states.  After re-examining a row, record its current digests with
 

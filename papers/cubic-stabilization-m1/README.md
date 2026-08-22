@@ -48,8 +48,9 @@ make -C companions/cubic-framed-monodromy check
 
 The root check validates the shared manuscript-to-Lean claim inventory,
 builds the primary PDF in the pinned environment, and rejects manuscript
-warnings.  The Lean kernel and axiom audit are replayed separately using the
-guarded commands in [`lean/README.md`](lean/README.md).
+warnings.  It does not build Lean or replay a captured axiom audit;
+[`lean/README.md`](lean/README.md) documents the separate artifact and checker
+semantics.
 
 ## Trust boundary
 
