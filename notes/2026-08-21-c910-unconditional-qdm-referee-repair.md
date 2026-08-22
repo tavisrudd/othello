@@ -48,13 +48,24 @@ surface is now 54 claims and 316 terminals.
 - authority `make check`: passed, producing a warning-free 52-page PDF;
 - authority axiom-log gate: passed with 316 terminals and no unexpected
   axioms;
-- changed pages 1, 25--30 were inspected visually;
+- changed pages 1, 15, 18, 22, 26, 27, 31, and 50 were inspected visually;
 - export plan and audit: zero private-reference findings;
 - standalone exact Lean build, `make check`, axiom-log gate, and export
   manifest verification: passed.
 
-Authority commits: `741ac4ce6`, `779668a35`.
-Standalone commits: `a35c0d3`, `ed007e0`.
+Authority commits: `741ac4ce6`, `779668a35`, `5ee9d2ec1`.
+Standalone commits: `a35c0d3`, `ed007e0`, `0387c21`.
+
+## Cold-read follow-up
+
+An isolated cold reader found no review or process debris and judged the
+abstract concise, theorem-first, and accurate apart from one stale name.  The
+paper now calls the atomic construction the rank-two formal-exponent marker
+throughout, distinguishes the marker from the auxiliary discriminant, and
+states precisely which framed conclusions are conditional.  The same pass
+repaired one missing antecedent, two awkward sentences, one indentation error,
+and the pre-existing hard-coded equation tags in Sections 2--3.  The abstract
+gained no words: “residue” was replaced by “formal-exponent.”
 
 ## EJ + TT closeout
 

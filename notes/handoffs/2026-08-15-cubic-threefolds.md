@@ -138,10 +138,13 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   are scalar extensions by type, and a basis-checkable row square and
   projector square for one completed direct-sum comparison imply native
   reflection.  Polynomial projector presentations plus one operator square
-  derive the projector square in Lean.  Constructing that geometric scalar
-  edge, its exact completed
-  squares, and the endpoint QDM identifications remains open; therefore the
-  unconditional all-\(m\) theorem is not landed.  Lean kernel-checks the
+  derive the projector square in Lean.  Iritani Proposition 5.1, Theorem 5.2,
+  Proposition 5.4, and the definition of the Theorem 5.18 comparison now
+  derive the exact rank-row square on Iritani's own completed map for every
+  smooth-center blowup.  The live geometric edge gate has therefore shrunk to
+  the intrinsic C924-marked projector/native scalar presentation; the two
+  endpoint QDM identifications remain open.  The unconditional all-\(m\)
+  theorem is not yet landed.  Lean kernel-checks the
   conditional consumer, unit normalization, faithful
   base change, injective row-codomain enlargement, polynomial projector
   transport, tensor endpoint witness, common-source composition, and the
@@ -152,8 +155,10 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   `m=1,3,4,13` regressions and Lean's all-`m` branch-count theorem test only
   the consumer arithmetic, not the geometric providers.
 
-  **Trust boundary:** the direct edge provider uses six source obligations
-  from the Gu--Yu--Yu and KKPYY preprints.  Faithful-base descent, polynomial
+  **Trust boundary:** the direct all-center edge provider uses Iritani's
+  comparison and derived augmentation row plus the KKPYY/direct-formal marked
+  spectral projector.  Gu--Yu--Yu is a simple-wall corroboration, not a
+  simultaneous hypothesis.  Faithful-base descent, polynomial
   projector presentation, unit scaling, and tensor endpoints are modular
   alternatives or endpoint adapters, not four extra simultaneous assumptions.
   The former path-level occurrence obligation is no longer a separate
@@ -625,9 +630,10 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   finite law replay, the eleven-check path toy, the four-check source-typed
   Haskell toy, the four-check double-normal producer toy, and original cubic
   replay are green.  C925's marked-projector route has three geometric groups:
-  the per-edge faithful scalar comparison with both completed squares, the
+  the per-edge native marked-projector presentation and projector square, the
   cubic-product endpoint identification, and projective-space marked
-  emptiness.  Lean derives intrinsic path reflection from the first group;
+  emptiness.  Iritani now supplies the comparison and rank-row square
+  uniformly.  Lean derives intrinsic path reflection from the first group;
   no adjacent-carrier identification is separately consumed.  The one-sided marked source,
   fixed-phase/Stokes, and ExactTop routes are fallbacks, not the live frontier.
   Mathematics and paper-local Lean only; no manuscript edits.  Card:
@@ -719,7 +725,9 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   summand-separation, coefficient-ring, and grading-suspension interfaces.
   The current checked snapshot is 54 claims, 4 absent, 23 fragmentary, 26
   conditional, 1 complete, and 316 reviewer terminals, of which 83 are
-  machinery. Earlier checkpoints below record the superseded atom-route
+  machinery. A fresh isolated cold read found no process debris, retained the
+  concise theorem-first abstract, and made the formal-exponent terminology
+  consistent throughout. Earlier checkpoints below record the superseded atom-route
   assembly history. No duplicate under the shared
   `lean/TavisRuddFiniteGeom/` tree or a second Lean repository. The sources
   build through the guarded queue; `make check` and the axiom-log gate are green
@@ -1008,7 +1016,7 @@ mirror, or Lean source follows automatically from any of the above.
 
 | surface | root | current state | owning task |
 |---|---|---|---|
-| Cubic-stabilization epilogue: `X x P^1` irrational, the `m = 1` statement | `papers/cubic-stabilization-epilogue/` | headline unconditional through the Section 4 atomic route since 2026-08-16; Hypothesis 5.7R and, since C920, Hypothesis 5.7T only for surface centers that are neither minimal nor geometrically ruled carry the Section 5 framed refinement stated as `thm:every-cubic-conditional`; Lean anchored to the atomic route, further coverage open under C910; the standalone export is synchronized and verified at `da1d8641b` | C907, C909, C910, C913 (C912 closed) |
+| Cubic-stabilization epilogue: `X x P^1` irrational, the `m = 1` statement | `papers/cubic-stabilization-epilogue/` | headline unconditional through the Section 4 atomic route since 2026-08-16; Hypothesis 5.7R and, since C920, Hypothesis 5.7T only for surface centers that are neither minimal nor geometrically ruled carry the Section 5 framed refinement stated as `thm:every-cubic-conditional`; Lean anchored to the atomic route, further coverage open under C910; the standalone export is synchronized and verified at `0387c21` | C907, C909, C910, C913 (C912 closed) |
 | Discrepancy-one flip correction | `papers/discrepancy-one-flips/` | published standalone note, DOI `10.5281/zenodo.21924799` | C911 (closed) |
 | *Irrationality of Cubic Threefolds after One Stabilization*: `X x P^m` for all `m`, the all-`m` statement | `papers/cubic-stabilization-irrationality/` | headline conditional on the marked-threshold wall and zero-mode hypotheses | C913 |
 
