@@ -78,12 +78,13 @@ Completed preparation:
 
 **Discovery companion**: [complete-ports discovery track](../complete-ports-discovery-track.md).
 
-Queued strengthening:
+Active strengthening:
 
 - [C939 unified asymptotic separation revision](../2026-08-21-c939-complete-ports-unified-asymptotic-separation.md)
-  owns the referee-recommended lift of Proposition 6.3 and the downstream
-  seed-to-transfer-to-stochastic-consequence reorganization.  Its theorem gate
-  precedes any manuscript restructuring.
+  is in its Phase A seed/transfer audit.  It owns the referee-recommended lift
+  of Proposition 6.3 and the downstream seed-to-transfer-to-stochastic-
+  consequence reorganization; its theorem gate precedes any manuscript
+  restructuring.
 
 ## Publication boundary
 

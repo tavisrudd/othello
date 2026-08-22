@@ -2,7 +2,7 @@
 
 **Lane**: `complete-ports`
 
-**Status**: QUEUED
+**Status**: ACTIVE — PHASE A SEED AND TRANSFER AUDIT
 **Allocated**: 2026-08-21
 **Source assessment**:
 `notes/2026-08-21-c678-complete-ports-percentile-referee.md`
