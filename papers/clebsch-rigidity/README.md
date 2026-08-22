@@ -1,17 +1,18 @@
-# Reconstructing the Clebsch code and its golden orientation from its deep-hole syndrome locus
+# Reconstructing the Clebsch Code from Its Deep-Hole Syndrome Locus
 
 [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21652792-blue.svg)](https://doi.org/10.5281/zenodo.21652792)
 
 **Clebsch portfolio:** part of the five-paper *Clebsch: Rigidity from Sparse
 Shadows* series. Related companions include *Diagonal Isoduality and
-Transversal Clifford Groups of MDS--CSS Codes* and the Golden interferometer
-paper. The shared
+Transversal Clifford Groups of MDS--CSS Codes* and *Balanced Cuts of
+Conference Matrices: Squared-Spectrum Rigidity and Hermitian Holonomy*. The shared
 progression is expository: this paper is logically independent of the other
 portfolio papers.
 
 The five numbered papers are: I, this rigidity paper; II, *Quadratic trade
-rigidity and cubic orientation in conic matching quotients*; III, *Golden
-descent and operator realizations of the Clebsch cubic*; IV, *Reconstructing
+rigidity and cubic orientation in conic matching quotients*; III, *Hitchin's
+Icosahedral Incidence Double Cover and Operator Realizations of the Clebsch
+Cubic*; IV, *Reconstructing
 PG(2,13), its conic, and polarity from the minimum words of a binary conic
 code*; and V, the culminating recognition and marked-round-trip paper.
 
@@ -24,8 +25,9 @@ the Clebsch hexagon; in that case it is the entire conic.  Thus
 nearest-codeword data reconstruct the non-GRS code up to monomial equivalence,
 including its parity-check geometry and \(A_5\) stabilizer.
 
-Coset-leader ambiguity then recovers an orientation torsor on six axes.  Its
-orbital operator satisfies \(B^2=5I\), and triangle holonomy recovers the
+Coset-leader ambiguity then recovers a conference matrix on six axes up to
+switching and global negation. Either representative satisfies \(B^2=5I\),
+and triangle holonomy recovers the
 support cubic and the integral order \(\mathbb Z[B]\simeq\mathbb Z[\sqrt5]\).
 The proof combines a universal chord-defect identity with decoder ambiguity
 and the orbital pentagon.  Uniformly, any \(k\)-arc whose uncovered locus is a
@@ -33,16 +35,19 @@ nonsingular conic satisfies
 \(2k-3\leq q\leq(k(k-1)+3)/3\), reducing each fixed-\(k\) existence problem
 to finitely many fields.
 
-Build the manuscript from `papers/` with
-`make -B clebsch-rigidity`; the `clebsch` target builds the preserved
-mega-paper fallback.
+Rebuild the manuscript and compare the tracked PDF with a deterministic build:
+
+```text
+nix develop .#manuscript --command \
+  python3 verification/check_manuscript_build.py
+```
 
 The verification material is under `verification/`. It contains the
-nineteen-row statement identity, claim map, trust manifest, deterministic
+claim map, trust manifest, deterministic
 checker transcripts, validators, and unit tests. The commutant terminals are
 unconditional: the finitegeom library proves the reverse containment from
-explicit five-cycle and three-cycle commutation equations, while golden
-equivariance and integral descent are kernel checked.
+explicit five-cycle and three-cycle commutation equations, while equivariance
+of the conference operator and integral descent are kernel checked.
 
 The main paper's q11 orbit decomposition has an explicit two-generator finite
 certificate, independently checked by the formal gate and the paper-owned

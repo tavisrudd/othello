@@ -647,7 +647,7 @@ def components_by_row(
             ],
         ),
         26: (
-            "The golden normal form and the all-field formula are conceptual; q=19 is checked by an independent exact specialization.",
+            "The Clebsch normal form and the all-field formula are conceptual; q=19 is checked by an independent exact specialization.",
             [
                 conceptual("Clebsch-family chord count, associated-conic inclusion, and stabilizer exception", CLASSICAL_DYE_ASSOCIATED_CONIC, "The manuscript normalizes the equality configuration over Z[phi], derives the polynomial from the ten-Brianchon equality, records the characteristic-five stabilizer enlargement, and uses Dye's edge criterion for the associated-conic inclusion."),
                 lean("uncovered-locus polynomial", ["clebsch_formula"], axioms),

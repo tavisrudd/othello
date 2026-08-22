@@ -2,8 +2,10 @@
 
 **Lane:** `clebsch`
 **Paper stream:** five-paper Clebsch series and the unnumbered conference companion
-**State:** active; occurrence classification and replacement red-team complete,
-manuscript editing beginning with Paper I.
+**State:** active; Paper I’s terminology revision and deterministic PDFs have
+a sealed cold-referee ACCEPT. Its trust projection and mirror export remain
+deferred behind C855’s pre-existing unmapped `prop:fifteen-class-census`;
+Paper III is next.
 
 ## Objective
 
@@ -32,8 +34,7 @@ The governing distinctions are:
 - `papers/conference-cut-spectra/` and its public metadata;
 - shared paper indexes, summaries, repository metadata, bibliographies, and
   trust maps that quote revised titles or printed identifiers;
-- exact Lean declarations, gates, and generated trust facts required to rename
-  public `crossGolden` identifiers in lockstep;
+- exact trust and manuscript surfaces that cite legacy formal identifiers;
 - this card, the Clebsch handoff, queue/archive rows, dated C943 report, and the
   Clebsch discovery track if a genuinely incidental result appears;
 - matching clean standalone mirrors under `~/src/math-papers/`, only after
@@ -60,8 +61,9 @@ For each paper in turn:
 
 1. classify every case-insensitive occurrence in context;
 2. revise prose, headings, labels, captions, conclusions, coda, and metadata;
-3. rename public formal identifiers only with their actual declarations and
-   trust surfaces;
+3. preserve exact formal declaration names where a manuscript must cite the
+   existing shared API; classify them as machine-name survivors rather than
+   using their terminology in mathematical prose;
 4. require every surviving occurrence to be literal arithmetic, historical
    terminology, an exact quotation, or an unchanged external title;
 5. rebuild the deterministic PDF and run the paper’s complete local gates;
@@ -71,3 +73,16 @@ For each paper in turn:
 
 Final acceptance also requires a series-wide survivor audit, consistent titles
 and bibliography entries, clean cross-references, and zero exporter findings.
+Legacy formal identifiers may survive only when quoted exactly as machine names
+and must not be reused as mathematical terminology.
+
+## Rolling review record
+
+- Paper I — *Reconstructing the Clebsch Code from Its Deep-Hole Syndrome
+  Locus*: all mathematical prose uses conference, switching, global-negation,
+  and spectral-block language; the only “golden” survivors are the literal
+  golden-ratio keyword, Dye’s historical parameter, and three exact legacy
+  Lean declaration names. Deterministic builds pass at 29 and 14 pages with
+  zero warnings. Independent cold referee: MINOR, repaired, sealed ACCEPT.
+  The statement extractor is independently blocked by C855’s already-present
+  theorem `prop:fifteen-class-census`, which is absent from its claim map.

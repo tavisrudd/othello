@@ -1,7 +1,7 @@
 # Verification of the Clebsch rigidity paper
 
 This directory is the release-verification surface for *Reconstructing the
-Clebsch code and its golden orientation from its deep-hole syndrome locus*.
+Clebsch Code from Its Deep-Hole Syndrome Locus*.
 The paper and companion separate exactly five proof modes:
 
 - human structural proofs;

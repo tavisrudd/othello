@@ -31,8 +31,8 @@
 \newcommand{\cU}{\mathcal{U}}
 \newcommand{\A}{A_5}
 
-\title{Reconstructing the Clebsch code and its golden orientation\\
-from its deep-hole syndrome locus}
+\title{Reconstructing the Clebsch Code\\
+from Its Deep-Hole Syndrome Locus}
 \author{Tavis Rudd}
 \date{July 2026}
 
@@ -48,15 +48,17 @@ is exactly a nonsingular conic.  The deep-hole locus is thus a recognition
 invariant for the non-GRS Clebsch code up to monomial equivalence: from its
 metric boundary we recover the parity-check geometry, the conic then
 determines its polarity, and Dye's theorem identifies the stabilizer as
-$A_5$.  Off the decoder multiplicities we read the Brianchon points, the
+$A_5$.  From the decoder multiplicities we recover the Brianchon points, the
 self-polar triangles, and an intrinsic bipartition of the three-coordinate
 supports.
 
-From nearest-codeword ambiguity we reconstruct an unordered orientation
-torsor on six axes.  Its signed orbital operator satisfies $B^2=5I$, and
+From nearest-codeword ambiguity we reconstruct a complementary pair of
+conference two-graphs on six axes, equivalently a conference matrix up to
+switching and global negation.  Either signed orbital representative satisfies
+$B^2=5I$, and
 triangle holonomy gives the support cubic $c_{ijk}=B_{ij}B_{jk}B_{ki}$, the
 sole nonsymmetric term in the diagonal determinant pencil of $B$.  The
-decoder data thus yield incidence, symmetry, the golden orientation, and the
+decoder data thus yield incidence, symmetry, the conference structure, and the
 integral quadratic order $\mathbf Z[B]\simeq\mathbf Z[\sqrt5]$.
 
 We prove rigidity from a universal chord-defect identity and a partial-cover
@@ -81,8 +83,9 @@ determine how much of a projective system can be reconstructed from coarse
 metric data.  Here the retained datum is the projective locus of
 maximum-distance syndromes of a redundancy-three MDS code.  For a six-arc in
 $\PG(2,11)$, containment of that locus in an arbitrary conic forces the
-Clebsch hexagon; decoder data then recover its polarity, symmetry, and golden
-orientation.  The exceptional configuration is therefore the output of a
+Clebsch hexagon; decoder data then recover its polarity, symmetry, and
+conference structure up to switching and global negation.  The exceptional
+configuration is therefore the output of a
 recognition theorem, not part of its input.  The motivating question is not
 specific to the Clebsch configuration: when can a sparse invariant determine
 the object that produced it?  The order-eleven Clebsch code is the rigid
@@ -161,9 +164,9 @@ locus, the two five-valent orbitals recover a signed operator on the six
 antipodal axes.  Triangle holonomy identifies its switching class with the
 support bipartition and recovers the integral order $\mathbf Z[\sqrt5]$.
 
-This orientation is the second structural pillar.  With the normalization
-of Theorem~\ref{thm:orientation-two-graph}, its signed operator and support
-cubic satisfy
+The reconstructed conference structure is the second structural pillar.
+With the normalization of Theorem~\ref{thm:conference-two-graphs}, a chosen
+conference sign and its support cubic satisfy
 \[
  \begin{gathered}
  B^2=5I,\qquad c_{ijk}=B_{ij}B_{jk}B_{ki},\\
@@ -172,7 +175,8 @@ cubic satisfy
  \end{gathered}
 \]
 Thus triangle holonomy and the diagonal determinant pencil recover the same
-orientation torsor directly from nearest-codeword data.
+complementary pair of conference two-graphs directly from nearest-codeword
+data.
 
 A secondary general theorem gives a uniform field window for conic-filling arcs.
 For an arbitrary conic-filling $k$-arc, the chord moments and a
@@ -202,14 +206,14 @@ syndrome locus.
 stabilizer, and its complete-exterior-set interpretation are classical
 \cite{Clebsch1871,Edge1956,Dye1991,BSW1992,SVM1995}. We prove the
 conic-locus identification of Proposition~\ref{prop:deep-holes-conic}
-directly here, and Proposition~\ref{prop:golden-normal-form} reproves the
+directly here, and Proposition~\ref{prop:clebsch-normal-form} reproves the
 classical existence, orbit, polarity, and stabilizer statements from one
 normal form over $\mathbf Z[\varphi]$. The new contribution is the
 symmetry-free arbitrary-quadratic-containment coding criterion,
 the decoder reconstruction and support bipartition, the uniform
 conic-filling window, and the concurrence spectrum that refines Dye's
 bound.  The reconstructed support bipartition and syndrome
-cover also determine a balanced signed two-graph and its golden operator;
+cover also determine a balanced signed two-graph and its conference operator;
 their triangle products recover a cubic determinant line.  The underlying
 six-nodal $S_5$-symmetric cubic is known
 \cite{CTZ2025}; what is proved here is its intrinsic recovery from the
@@ -251,7 +255,7 @@ $\A\subset\mathrm{PGL}_2(11)$ be an icosahedral subgroup; its six Sylow
 $5$-subgroups each fix two points of $\cC$, and the poles of the six chords
 joining these fixed pairs form a six-arc with ten Brianchon
 points~\cite[\S\S29--32]{Edge1956}.  The two descriptions agree over
-$\F_{11}$: by Proposition~\ref{prop:golden-normal-form} the six-arcs with
+$\F_{11}$: by Proposition~\ref{prop:clebsch-normal-form} the six-arcs with
 ten Brianchon points form a single $\mathrm{PGL}_3(11)$-orbit, which
 therefore contains the constructed arc.
 \end{definition}
@@ -299,8 +303,8 @@ square in the base field~\cite[Theorem~1, pp.~275--276]{Dye1991}. The
 following normal form carries the classical package uniformly in the field
 and makes every step an identity in $\mathbf Z[\varphi]$.
 
-\begin{proposition}[Golden normal form and uniform rigidity]
-\label{prop:golden-normal-form}
+\begin{proposition}[Clebsch normal form and uniform rigidity]
+\label{prop:clebsch-normal-form}
 Let $K$ be a field of odd characteristic and let $\varphi$ satisfy
 $\varphi^2=\varphi+1$. A six-arc in $\PG(2,K)$ has ten Brianchon points if
 and only if $5$ is a square in $K$ and the arc is
@@ -395,7 +399,7 @@ when its norm does, which gives the two characteristic conditions.
 \end{proof}
 
 \begin{remark}[Attribution]
-Proposition~\ref{prop:golden-normal-form} reproves classical statements.
+Proposition~\ref{prop:clebsch-normal-form} reproves classical statements.
 Dye introduces the golden parameter $j$ with $j^2=j+1$ as a root of the
 discriminant-five quadratic and fixes a canonical hexagon with vertices
 $(1,\pm j,0)$, $(0,1,\pm j)$, $(\pm j,0,1)$; his Theorem~1 gives existence
@@ -931,7 +935,7 @@ nonzero syndromes, hence ten distinct cosets. Every coset has $|C|$ words.
 \end{proof}
 
 The stabilizer further organizes all the small point sets that occur in the
-decoder and orientation constructions.
+decoder and conference-sign constructions.
 
 The next proposition uses a compact two-generator certificate rather than
 characters or a proper-subgroup census.  Independent matrix-to-row checks,
@@ -1156,7 +1160,7 @@ Label the six coordinates by $0,\ldots,5$. The $20$ three-element
 coordinate supports form two complementary $A_5$-orbits of size ten.
 Automorphisms preserve the two classes, but
 nothing intrinsic chooses one as positive. We use \emph{support bipartition}
-only as shorthand for this unoriented bipartition. Its ten complementary
+only as shorthand for this unsigned bipartition. Its ten complementary
 pairs carry the Petersen graph in Figure~\ref{fig:synthematic-petersen}.
 
 \begin{figure}[H]
@@ -1344,13 +1348,14 @@ after coordinate rescaling, because its support permutations lie outside
 that quotient $A_5$.
 \end{proof}
 
-\section{The intrinsic orientation two-graph}
-\label{sec:orientation-two-graph}
+\section{The reconstructed conference two-graphs}
+\label{sec:conference-two-graphs}
 
-The support bipartition and the twelve deep-hole directions carry two
-apparently different orientation choices.  We now show that they are the
-same datum.  This comparison uses only the reconstructed $A_5$-sets in this
-paper.  We use the standard correspondence between two-graphs, switching
+The support bipartition and the twelve deep-hole directions give two
+apparently different presentations of the same complementary pair of
+conference two-graphs.  We now identify those presentations.  This comparison
+uses only the reconstructed $A_5$-sets in this paper.  We use the standard
+correspondence between two-graphs, switching
 classes, and Seidel matrices.  Two-graphs are due to Higman, with Taylor the
 standard reference and Seidel's switching the graph-side description; see
 Brouwer and Van Maldeghem \cite[\S1.1.12]{BrouwerVanMaldeghem} for the
@@ -1373,7 +1378,7 @@ their equation~(7.5), then
 The result here is not a new construction of that cubic or its abstract
 $S_5$-action.  It recovers the cubic intrinsically from the syndrome
 locus: the support-orbit signs give its equation, and the diagonal
-determinant identity identifies it with the golden continuation operator.
+determinant identity identifies it with the conference operator.
 Because the cited proposition assumes six nodes, we prove singular-locus
 completeness independently below; the coordinate match is not used in that
 step.
@@ -1388,10 +1393,10 @@ onto six axes.  Write $R$ for its deck involution.  The stabilizer of a
 point of $\Omega$ has suborbits of lengths $1,1,5,5$; let $A$ and $A'$
 be the adjacency matrices of the two five-valent orbitals.
 
-\begin{theorem}[Support cubic and golden continuation]
-\label{thm:orientation-two-graph}
-The syndrome locus reconstructs an unordered orientation torsor with the
-following equivalent presentations.
+\begin{theorem}[Support cubic and conference operator]
+\label{thm:conference-two-graphs}
+The syndrome locus reconstructs a complementary pair of conference
+two-graphs with the following equivalent presentations.
 \begin{enumerate}[label=(\roman*),leftmargin=2em]
 \item Give the two $A_5$-orbits of three-coordinate supports opposite
 signs.  Their signed moments in degrees zero, one, and two vanish, while
@@ -1423,7 +1428,7 @@ then
  =e_6(x)-e_4(x)+5e_2(x)-125-2C(x).}
 \]
 Thus the support cubic is the sole nonsymmetric term in the diagonal
-determinant pencil of the golden operator.
+determinant pencil of the conference operator.
 In homogeneous form, with
 $F_B(x,z)=\det(zB+\operatorname{diag}(x))$, this becomes
 \[
@@ -1440,7 +1445,7 @@ of order $120$.
 \end{theorem}
 
 \begin{corollary}[Nodes, symmetry, and integral commutant]
-\label{cor:orientation-cubic-geometry}
+\label{cor:conference-cubic-geometry}
 The cubic also recovers the unlabelled axis carrier: in
 \[
  \mathbf P(\mathbf Q^6/\mathbf Q\mathbf1)
@@ -1451,7 +1456,8 @@ and
 \[
  \operatorname{Aut}_{\mathrm{proj}}(C=0)\cong S_5,
 \]
-with the oriented-cubic stabilizer $A_5$ as its index-two subgroup.
+with the stabilizer of the chosen cubic form equal to the index-two subgroup
+$A_5$.
 Consequently the continuation algebra and its integral commutant are
 \[
  \mathbf Q[B]\cong\mathbf Q(\sqrt5),\qquad
@@ -1460,9 +1466,9 @@ Consequently the continuation algebra and its integral commutant are
 \]
 \end{corollary}
 
-\begin{proof}[Proof of Theorem~\ref{thm:orientation-two-graph} and
-Corollary~\ref{cor:orientation-cubic-geometry}]
-The proof has five stages: the orbital pentagon produces the golden operator;
+\begin{proof}[Proof of Theorem~\ref{thm:conference-two-graphs} and
+Corollary~\ref{cor:conference-cubic-geometry}]
+The proof has five stages: the orbital pentagon produces the conference operator;
 triangle holonomy identifies its switching class with the support cubic;
 principal minors give the determinant pencil; the singular locus recovers
 the node frame and its symmetry; and Galois descent gives the rational and
@@ -1603,7 +1609,7 @@ switching class; the twelve classes pair into six with stabilizers of
 order $120$.  Since triangle products are switching-invariant, the
 order-sixty stabilizer preserves every $c_{ijk}$ while the outer coset
 reverses them all; this is the $\A\subset S_5$ distinction of
-Corollary~\ref{cor:orientation-cubic-geometry}, seen from the two-graph
+Corollary~\ref{cor:conference-cubic-geometry}, seen from the two-graph
 side.
 
 \paragraph{The determinant pencil.}
@@ -1616,12 +1622,12 @@ Jacobi's complementary-minor identity then gives principal-minor values
 $5$ in size four and $0$ in size five, while complementary size-three
 minors have opposite signs. Expanding along the diagonal variables gives
 the displayed determinant formula and its homogeneous odd-part identity.
-In particular, the same quadratic identity that defines the golden
+In particular, the same quadratic identity that defines the conference
 operator also recovers support complementation.
 
 \paragraph{The node frame.}
 It remains to see that the cubic itself recovers the six axes.  We use the
-determinantal duality behind the golden operator. Put
+determinantal duality behind the conference operator. Put
 $E=\mathbf Q(\sqrt5)$, $t_\pm=(1\pm\sqrt5)/2$, and
 \[
  U(t)=
@@ -1637,7 +1643,7 @@ $D_x=\operatorname{diag}(x_0,\ldots,x_5)$,
 \[
  \Phi_x=U(t_-)^{\mathsf T}D_xU(t_+)
 \]
-is a matrix for the cross-golden block and is unchanged by
+is a matrix for the spectral block from $V_+$ to $V_-$ and is unchanged by
 $x\mapsto x+t\mathbf1$. Direct expansion of this $3\times3$ determinant
 gives the exact identity
 \[
@@ -1697,7 +1703,7 @@ characteristic zero.
 
 Completeness of the singular locus needs neither that smoothness nor a
 transversality hypothesis.  Because $\det(\Phi_x)=-C(x)$, differentiating
-the cross-golden determinant along a centered coordinate line and
+the spectral-block determinant along a centered coordinate line and
 evaluating identifies each of its five partial derivatives with the
 corresponding gradient quadric of $C$, up to sign. Here is an exact
 exhaustion of their common zero set. Represent the translation quotient by
@@ -1733,7 +1739,7 @@ quotient these are exactly the six centered axis classes
 $[\mathbf1-6e_a]$. Hence the determinantal cubic threefold in
 $\mathbf P(\Lambda^\perp)$ has exactly the six classes
 $p_a=[\mathbf1-6e_a]$ as singular points, and these already form a
-projective frame because the kernel of the cross-golden compression is the
+projective frame because the kernel of the spectral-block compression is the
 all-ones line. The same derivative identity and chart classification are
 also kernel-checked: the derivative identity over
 any commutative ring containing a root of $t^2=t+1$ and the classification
@@ -1741,8 +1747,9 @@ of singular points over any field containing such a root whose
 characteristic is not $2$, $3$, or $5$;
 Section~\ref{sec:verification} names the declarations.
 
-The same pairing appears in the literature: the cross-golden four-space
-$\Lambda$ and its trace orthogonal $\Lambda^\perp$ carry the paired
+The same pairing appears in the literature: the four-dimensional
+spectral-block space $\Lambda$ and its trace orthogonal $\Lambda^\perp$
+carry the paired
 determinantal hypersurfaces of Hassett and Tschinkel, whose Proposition~10
 characterizes the trace-dual partner of a smooth determinantal cubic
 surface as a cubic threefold with six ordinary double points in linear
@@ -1750,7 +1757,7 @@ general position \cite[\S3, Proposition~10]{HassettTschinkel2010}.  That
 equivalence is context here; the argument above does not use it.
 
 The node type follows directly from the same
-golden identity. At $p_a$, pair balance gives
+conference identity. At $p_a$, pair balance gives
 \[
  \operatorname{Hess}(C)_{ij}(p_a)=
  \begin{cases}
@@ -1785,8 +1792,9 @@ of $A_5$ and an odd permutation; hence $N\cong S_5$.  The even generators
 preserve every $c_{ijk}$ and the odd element reverses them all.  Moreover,
 the identity and the five transpositions $(0\,i)$ give six distinct cubic
 lines.  Thus the line stabilizer has order at most $720/6=120$ and equals
-$N$; its orientation character is the sign on $\mathcal T$.  The cubic-line
-and oriented-cubic stabilizers are therefore $S_5$ and $A_5$.
+$N$; the character describing its action on the cubic line is the sign on
+$\mathcal T$.  The stabilizers of the cubic line and of the chosen cubic form
+are therefore $S_5$ and $A_5$, respectively.
 
 \paragraph{The integral commutant.}
 Finally, after extension from $\mathbf Q$ to
@@ -1810,8 +1818,9 @@ This proves the integral commutant statement.
 
 \begin{remark}[The conductor at two]
 The order $\mathbf Z[\sqrt5]$ has conductor two in
-$\mathbf Z[(1+\sqrt5)/2]$.  The orientation collapse is already visible
-without normalizing: modulo $2$, all $c_{ijk}$ become $1$, while
+$\mathbf Z[(1+\sqrt5)/2]$.  The distinction between the two conference signs
+already disappears without normalizing: modulo $2$, all $c_{ijk}$ become $1$,
+while
 $B-I$ has rank one and square zero.  This is precisely the degeneration
 \[
  \mathbf Z[\sqrt5]\otimes\F_2
@@ -1824,7 +1833,7 @@ No ambient characteristic-zero geometry is used here.
 \label{sec:verification}
 
 The rigidity and field-window arguments use three external mathematical
-inputs, while the orientation section uses one external model
+inputs, while the conference-two-graph section uses one external model
 identification and no external singular-locus theorem. Dye's Brianchon bound and equality classification identify
 the Clebsch orbit
 \cite[\S2.2--2.3, Theorem~1, pp.~275--276]{Dye1991}; his stabilizer and
@@ -1835,7 +1844,7 @@ obstruction uses the standard nucleus theorem
 Proposition~1.6 of Blokhuis, Brouwer, and Sz\H{o}nyi~\cite{BBS2010}.
 Cheltsov, Tschinkel, and Zhang supply a published $S_5$-symmetric equation
 inside their classification of cubics already assumed to be six-nodal.
-Section~\ref{sec:orientation-two-graph} gives the explicit coordinate
+Section~\ref{sec:conference-two-graphs} gives the explicit coordinate
 identification, but does not use that citation to transfer singular-locus
 completeness.  Nor does it transfer that completeness from
 Hassett--Tschinkel.  Their Proposition~10 relates the determinantal
@@ -1844,13 +1853,13 @@ trace orthogonal, a cubic threefold with six ordinary nodes in linear
 general position corresponding to a smooth paired cubic surface
 \cite[\S3, Proposition~10]{HassettTschinkel2010}; that statement is
 recorded as context and is not load-bearing.  Singular-locus completeness
-is instead a kernel-checked theorem about the cross-golden family itself.
+is instead a kernel-checked theorem about the spectral-block family itself.
 Over any commutative ring containing a root of $t^2=t+1$,
 \begin{center}
 \small\path{RelativeConicArcs.SupportOrientationNodes.}\\
 \small\path{derivative_crossGoldenDeterminantLine_eval}
 \end{center}
-identifies the partial derivatives of the cross-golden determinant with the
+identifies the partial derivatives of the spectral-block determinant with the
 gradient quadrics of the support cubic, and over any field containing such
 a root, provided $30$ is invertible there,
 \begin{center}
@@ -1861,8 +1870,8 @@ identifies the singular points with the six axis classes.  Neither uses a
 smoothness or transversality hypothesis. The chartwise Gr\"obner bases
 displayed in the node-frame argument are the load-bearing finite human
 certificate over $\mathbf Q$; these declarations rederive that result
-independently and extend it to every field containing a golden root whose
-characteristic is not $2$, $3$, or $5$.  At the golden root $t=8$ over
+independently and extend it to every field containing a root of $t^2-t-1$
+whose characteristic is not $2$, $3$, or $5$.  At the root $t=8$ over
 $\F_{11}$, where $30=8$ is invertible, the specialization
 \begin{center}
 \small\path{RelativeConicArcs.SupportOrientationNodes.}\\
@@ -1873,16 +1882,16 @@ singular locus and the node type in the field over which the rest of this
 paper works.
 
 The line bound, chord-defect identity, partial-cover deduction, decoder
-reconstruction, support bipartition, and the orientation two-graph
-reconstruction are proved in the text.  In particular, the conference
+reconstruction, support bipartition, and the complementary conference
+two-graphs are proved in the text.  In particular, the conference
 identity gives pair balance and the Hessian ranks, while the five-matching
 normalizer and six-coset bound give the $S_5/A_5$ stabilizer distinction.
-The golden cross block, its
+The spectral block, its
 four-dimensional trace complement, and the resulting gradient
 classification give singular-locus completeness without a smoothness
 input.  The paper-owned replay independently constructs
 the coset actions, signed operator, triangle products, diagonal pencil,
-cross-golden trace dual, switching class, gradient ideals, and Hessian blocks.
+spectral-block trace dual, switching class, gradient ideals, and Hessian blocks.
 Its gradient exhaustion independently recomputes the displayed human
 certificate rather than replacing it.
 It reads no later-paper artifact:
@@ -1895,14 +1904,16 @@ independently rederives the displayed q11 code and decoder conclusions, the
 causal containing-quadratic rigidity spine, the projective-to-code correspondence,
 the chord-defect specialization, the $q=9$ obstruction, the small-arc moments,
 the intrinsic ten-plus-ten support split, the complete Brianchon matching
-dictionary, and the eight orientation mechanisms from the antipodal cover
-through the rational and integral commutants.  Dye's ten-point bound and his equality
+dictionary, and the eight mechanisms connecting the antipodal cover,
+conference signs, and the rational and integral commutants.  Dye's ten-point
+bound and his equality
 classification are theorems of the development rather than assumptions: the
 bound is proved for every field in which two is invertible and specialized to
-$q=11$, and the classification is obtained from the golden normal form together
+$q=11$, and the classification is obtained from the Clebsch normal form together
 with the two explicit projectivities carrying its order-eleven instances onto
 the displayed witness.  The commutant theorems are unconditional: Lean checks
-golden equivariance on all sixty signed action matrices, proves the reverse
+equivariance of the conference operator on all sixty signed action matrices,
+proves the reverse
 containment from the displayed five-cycle and three-cycle commutation system,
 and checks the diagonal/off-diagonal integral test.  The generated q11
 rows are finite leaves internal to this redundant cross-check; they are not
@@ -1978,8 +1989,9 @@ The same questions have useful algebraic and spectral forms.  Passant
 conditions become clique problems in conic association schemes, while the
 decoder results ask when coset-leader support data alone reconstruct a
 projective code.  For the Clebsch code, that support data also reconstructs
-the switching class of the golden continuation operator: the support cubic
-and the twelve-point syndrome locus retain the same orientation two-graph.
+the switching class of the conference operator: the support cubic
+and the twelve-point syndrome locus encode the same conference switching
+class up to global negation.
 The determinant pencil makes the bridge visible: its quadratic identity
 $B^2=5I$ controls every symmetric layer, while triangle holonomy is exactly
 the remaining cubic term.  In particular, decoder support data recover a
@@ -1992,7 +2004,7 @@ nontrivial integral endomorphism order, not only a projective configuration.
 \begin{tabular}{@{}r@{\hskip 1.4em}l@{}}
 {\scriptsize I}   & \textbf{From deep holes, a form arises;}\\
 {\scriptsize II}  & beneath it, paired chords turn true;\\
-{\scriptsize III} & through many veils, the golden thread runs;\\
+{\scriptsize III} & through paired veils, the two sheets exchange;\\
 {\scriptsize IV}  & from bare, whispered words, a plane rises;\\
 {\scriptsize V}   & beneath one form, two shadows, a hidden twist between.
 \end{tabular}
@@ -2011,7 +2023,7 @@ nontrivial integral endomorphism order, not only a projective configuration.
 ]
 \node[active]  (p1) at (0,1.9) {\textbf{I}\\deep-hole\\conference cubic};
 \node[paper]   (p2) at (0,0.35) {\textbf{II}\\matching-quotient\\cubic moment};
-\node[paper]   (p3) at (0,-1.2) {\textbf{III}\\golden-descent\\conference cubic};
+\node[paper]   (p3) at (0,-1.2) {\textbf{III}\\incidence cover\\conference cubic};
 \node[hinge]   (p5) at (5.5,0.35) {\textbf{V}\\marked cubic\\correspondence};
 \node[package] (gold) at (10.6,0.35) {one six-axis carrier\\conference \(+\) chordal};
 \node[paper]   (p4) at (0,-3.6) {\textbf{IV}\\minimum-word pairs};
@@ -2034,7 +2046,8 @@ The five papers are logically independent; the map records reconstruction
 correspondences and thematic relations, not proof dependencies.
 
 The sparse datum here is the maximum-distance syndrome locus.  It recovers
-the Clebsch code together with its conic, polarity, and golden orientation,
+the Clebsch code together with its conic, polarity, and conference structure
+up to switching and global negation,
 while the later papers study other shadows of related sources.  Paper~IV gives
 the
 structural and reproducible account of

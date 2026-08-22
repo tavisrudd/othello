@@ -41,8 +41,8 @@ ROW_LABELS = {
     22: "cor:decoder-brianchon",
     23: (
         "prop:invariant-support-bipartition",
-        "thm:orientation-two-graph",
-        "cor:orientation-cubic-geometry",
+        "thm:conference-two-graphs",
+        "cor:conference-cubic-geometry",
     ),
     24: (
         "lem:chord-defect",
@@ -52,7 +52,7 @@ ROW_LABELS = {
     ),
     25: "thm:why11",
     26: (
-        "prop:golden-normal-form",
+        "prop:clebsch-normal-form",
         "prop:clebsch-family-uncovered",
     ),
     29: (
