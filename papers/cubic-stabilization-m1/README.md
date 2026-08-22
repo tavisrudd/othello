@@ -1,6 +1,6 @@
 # Cubic stabilization at m = 1
 
-<a href="https://doi.org/10.5281/zenodo.21909944"><img src="https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21909944-blue.svg?cacheSeconds=3600&amp;v=21909944" alt="DOI: 10.5281/zenodo.21909944"></a>
+<a href="https://doi.org/10.5281/zenodo.21909943"><img src="https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21909943-blue.svg?cacheSeconds=3600&amp;v=21909943" alt="DOI: 10.5281/zenodo.21909943"></a>
 
 ## Primary paper
 
@@ -77,5 +77,5 @@ kernel-reported dependencies checked against
 ## Citation and license
 
 The archival DOI is
-[`10.5281/zenodo.21909944`](https://doi.org/10.5281/zenodo.21909944).
+[`10.5281/zenodo.21909943`](https://doi.org/10.5281/zenodo.21909943).
 The repository is licensed under CC BY 4.0; see [`LICENSE`](LICENSE).

@@ -1,6 +1,6 @@
 # Integral cohomology and modular decomposition for the theta divisor of a cubic threefold
 
-[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.22036586-blue.svg)](https://doi.org/10.5281/zenodo.22036586)
+[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.22036585-blue.svg)](https://doi.org/10.5281/zenodo.22036585)
 
 [Download the paper (PDF)](blown_up_theta_lattice.pdf)
 

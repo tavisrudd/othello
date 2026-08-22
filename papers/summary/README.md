@@ -31,17 +31,18 @@ plane and its polarity.
 *Diagonal Isoduality and Transversal Clifford Groups of MDS–CSS Codes* and the
 Golden interferometer paper are related unnumbered companions.
 
-Two main draft papers and a short companion concern rationality of cubic
-threefolds.
-*Irrationality after one stabilization* proves that `X × P¹` is
-irrational for every smooth complex cubic threefold `X`, by way of an
-occurrence-indexed categorical marker ledger and a rank-two direct-QDM residue
-discriminant; it also uses the
-six-axis structure of the nonstandard `A₅`-invariant pencil to prove universal
-`CH₀`-triviality for its explicit family. Its finer framed-monodromy invariant
-is computed for cubics and their products with `P¹`, while the
-birational-invariance refinement of that invariant is conditional on two
-stated hypotheses.
+One main paper and two companions concern irrationality and cycle theory for
+cubic threefolds. *Irrationality of Cubic Threefolds after One Stabilization*
+proves that `X × P¹` is irrational for every smooth complex cubic threefold
+`X`. Its birational invariant counts rank-two blocks of the generic even
+quantum `D`-module whose two formal exponent classes differ modulo the
+integers. *Integral Divisor Products on the Nonstandard A₅-Invariant Cubic
+Pencil* proves universal `CH₀`-triviality for every smooth member of an
+explicit non-isotrivial family. *Framed Formal Monodromy of Cubic Threefolds*
+computes a finer primitive-sixth count for cubics and their products with
+`P¹`; its operation formulas and birational-invariance theorem remain
+conditional on two stated hypotheses. The three manuscripts share one
+repository but are mathematically separate.
 *Hodge Atoms as Occurrence-Indexed Marker Ledgers* develops the same
 categorical occurrence/groupoid/fold mechanism for the standard abstract
 Hodge-atom construction and derives only its one-step rank-two consequence.
@@ -79,19 +80,31 @@ complex as separate victories.
 - **One-stabilization irrationality for every smooth cubic threefold.** The
   fourfold `X × P¹` is irrational for every smooth complex cubic threefold
   `X`, and likewise `V × P¹` for every smooth prime Fano
-  threefold `V` of genus eight. The proof develops an occurrence-indexed
-  categorical ledger for generic even quantum `D`-module blocks and applies
-  its unconditional rank-two residue marker: the modified cubic zero block
-  has discriminant `4/9`, while every point, curve, and surface contribution
-  vanishes. A separate
-  framed-monodromy invariant gives `ν₆(X) = 2` and `ν₆(X × P¹) = 4`; its
-  birational invariance through dimension four is
-  conditional on two stated hypotheses and yields a second proof. On an
-  explicit non-isotrivial `A₅`-invariant family, the cubic threefolds are
-  universally `CH₀`-trivial, so the usual decomposition-of-the-diagonal
-  detector and irrationality after one stabilization separate on the same
-  stabilized varieties.
-  [Irrationality of Cubic Threefolds after One Stabilization](https://github.com/tavisrudd/cubic-stabilization-epilogue/blob/main/irrationality_after_one_stabilization.pdf).
+  threefold `V` of genus eight. The proof counts rank-two blocks of the
+  generic even quantum `D`-module whose centered leading Euler operator is
+  nonzero square-zero and whose two formal exponent classes differ modulo the
+  integers. The count vanishes on points, curves, surfaces, and projective
+  four-space, but the cubic block has exponent difference `2/3`. The same
+  construction gives an irrationality criterion for smooth projective
+  threefolds.
+  [Irrationality of Cubic Threefolds after One Stabilization](https://github.com/tavisrudd/cubic-stabilization-m1/blob/main/irrationality_after_one_stabilization.pdf).
+
+- **Integral divisor products on the nonstandard `A₅` cubic pencil.** An
+  all-degree graph-saturation theorem makes the primitive minimal class of
+  the intermediate Jacobian an integral divisor product for every smooth
+  member of this non-isotrivial pencil. Consequently every member is
+  universally `CH₀`-trivial. Combined with the one-stabilization theorem,
+  this gives an explicit family whose products with `P¹` are both universally
+  `CH₀`-trivial and irrational.
+  [Integral Divisor Products on the Nonstandard A₅-Invariant Cubic Pencil](https://github.com/tavisrudd/cubic-stabilization-m1/blob/main/companions/six-axis-cubic-pencil/six_axis_cubic_pencil.pdf).
+
+- **Framed formal monodromy of cubic threefolds.** The numerical small even
+  quantum connection has primitive-sixth count `ν₆(X) = 2`, and the
+  unconditional product formula gives `ν₆(X × P¹) = 4`. Under explicit
+  reconstruction-tail and residual divisor-tagging hypotheses, the count is
+  birationally invariant through dimension four and gives a conditional
+  second proof of one-step irrationality.
+  [Framed Formal Monodromy of Cubic Threefolds](https://github.com/tavisrudd/cubic-stabilization-m1/blob/main/companions/cubic-framed-monodromy/cubic_framed_monodromy.pdf).
 
 - **Conditionally, every projective stabilization of a smooth cubic
   threefold is irrational.** A common-open point has exact ambient coordinate
@@ -204,11 +217,14 @@ is conditional, its hypothesis is displayed in the theorem column.
 
 | Paper | General theorem | Quantifier range |
 |---|---|---|
-| Irrationality of Cubic Threefolds after One Stabilization | `X × P¹` is irrational, by way of the rank-two residue marker of the cubic zero block in the categorical direct-QDM ledger. | Every smooth complex cubic threefold `X`. |
-| Irrationality of Cubic Threefolds after One Stabilization | The primitive-sixth framed-monodromy multiplicity of the small even quantum connection equals two. | Every smooth complex cubic threefold `X`. |
-| Irrationality of Cubic Threefolds after One Stabilization | The primitive-sixth framed-monodromy multiplicity of a product with a projective space is that of the factor times one more than the dimension. | Every smooth projective variety and every projective space. |
-| Irrationality of Cubic Threefolds after One Stabilization | Assuming Hypotheses 5.7R (reconstruction-tail invariance) and 5.7T (divisor-tagging specialization), the primitive-sixth framed-monodromy multiplicity is birationally invariant. | All smooth projective varieties of dimension at most four. |
-| Irrationality of Cubic Threefolds after One Stabilization | Finite-etale graph slopes make every divided power of the marked graph divisor lattice an ordinary integral divisor product. | Every marked finite-etale graph quotient of an elliptic power satisfying the stated local depth and self-adjointness hypotheses, in every degree. |
+| Irrationality of Cubic Threefolds after One Stabilization | `X × P¹` is irrational, detected by a rank-two generic-even-QDM block with distinct formal exponent classes modulo the integers. | Every smooth complex cubic threefold `X`. |
+| Irrationality of Cubic Threefolds after One Stabilization | A smooth projective threefold whose generic even QDM contains such a marked block is irrational. | Every smooth projective complex threefold. |
+| Irrationality of Cubic Threefolds after One Stabilization | `V × P¹` is irrational. | Every smooth prime Fano threefold `V` of genus eight. |
+| Integral Divisor Products on the Nonstandard A₅-Invariant Cubic Pencil | Finite-etale graph slopes make every divided power of the marked graph divisor lattice an ordinary integral divisor product. | Every marked finite-etale graph quotient of an elliptic power satisfying the stated local depth and self-adjointness hypotheses, in every degree. |
+| Integral Divisor Products on the Nonstandard A₅-Invariant Cubic Pencil | Every smooth pencil member is universally `CH₀`-trivial; after multiplication by `P¹`, it remains universally `CH₀`-trivial and is irrational. | Every smooth member of the nonstandard `A₅`-invariant cubic pencil. |
+| Framed Formal Monodromy of Cubic Threefolds | The primitive-sixth framed-monodromy count of the numerical small even quantum connection equals two. | Every smooth complex cubic threefold `X`. |
+| Framed Formal Monodromy of Cubic Threefolds | The primitive-sixth count of a product with projective space is that of the factor times one more than the dimension. | Every smooth projective variety and every projective space. |
+| Framed Formal Monodromy of Cubic Threefolds | Assuming the reconstruction-tail and residual divisor-tagging hypotheses, the primitive-sixth count is birationally invariant. | All smooth projective varieties of dimension at most four. |
 | Reconstructing the Clebsch Code and Its Golden Orientation from Its Deep-Hole Syndrome Locus | If an arc's uncovered locus is a nonsingular conic, then `q` is odd and `2k − 3 ≤ q ≤ (k(k − 1) + 3)/3`. | Every `k`-arc with `k ≥ 4`, over every finite field order `q`. |
 | Computational Strengthenings of Clebsch Syndrome Rigidity | `q = 11` is the only field order admitting a conic-filling six-arc. | Every field order. |
 | Quadratic Trade Rigidity and Cubic Orientation in Conic Matching Quotients | The strength-two trade space is one-dimensional and generated by a two-valued vector if and only if the orbit is `B₃/F₇` or `H₃/F₁₁`. | Full `PGL₂(q)`-orbits of perfect matchings, for every odd prime power `q`. |
@@ -231,7 +247,9 @@ boundary, and reproducible entry points.
 
 | Paper | Area | Central result | Public entry |
 |---|---|---|---|
-| Irrationality of Cubic Threefolds after One Stabilization | Algebraic geometry / birational geometry | Every smooth cubic threefold stays irrational after multiplication by `P¹`, proved from the rank-two residue marker of a categorical direct-QDM ledger, while an explicit family is universally `CH₀`-trivial; the framed count `ν₆ = 2` and its stabilization to `4` are separate computations. | [PDF](https://github.com/tavisrudd/cubic-stabilization-epilogue/blob/main/irrationality_after_one_stabilization.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-epilogue) |
+| Irrationality of Cubic Threefolds after One Stabilization | Algebraic geometry / birational geometry | Every smooth cubic threefold stays irrational after multiplication by `P¹`, detected by a rank-two block of the generic even quantum `D`-module with distinct formal exponent classes modulo the integers. | [PDF](https://github.com/tavisrudd/cubic-stabilization-m1/blob/main/irrationality_after_one_stabilization.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-m1) |
+| Integral Divisor Products on the Nonstandard A₅-Invariant Cubic Pencil | Algebraic geometry / algebraic cycles | Every smooth member of the non-isotrivial pencil is universally `CH₀`-trivial; after multiplication by `P¹`, it remains universally `CH₀`-trivial and is irrational. | [PDF](https://github.com/tavisrudd/cubic-stabilization-m1/blob/main/companions/six-axis-cubic-pencil/six_axis_cubic_pencil.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-m1) |
+| Framed Formal Monodromy of Cubic Threefolds | Algebraic geometry / quantum cohomology | The unconditional count is `ν₆(X) = 2` and satisfies the projective-space product formula; its operation formulas and birational invariance remain conditional on two explicit hypotheses. | [PDF](https://github.com/tavisrudd/cubic-stabilization-m1/blob/main/companions/cubic-framed-monodromy/cubic_framed_monodromy.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-m1) |
 | Deep Holes of Projective Reed–Solomon Codes Beyond Redundancy Four: Recursive Carriers and Exact Classifications Through Redundancy Ten | Coding theory | Deep-hole classifications extend through redundancy ten in stated ranges. | [PDF](https://github.com/tavisrudd/beyond4-prs/blob/main/prs-beyond-redundancy-four.pdf) · [repo](https://github.com/tavisrudd/beyond4-prs) |
 | Local-Unitary Rigidity and Quantitative Rounding for Stabilizer AME States | Quantum information | Exact local-unitary rigidity has a separate quantitative rounding theorem. | [PDF](https://github.com/tavisrudd/ame-lu/blob/main/ame-lu.pdf) · [repo](https://github.com/tavisrudd/ame-lu) |
 | Reconstructing the Clebsch Code and Its Golden Orientation from Its Deep-Hole Syndrome Locus | Finite geometry / coding | Deep-hole data recognize the Clebsch code and golden orientation. | [PDF](https://github.com/tavisrudd/clebsch-rigidity/blob/main/clebsch_rigidity.pdf) · [repo](https://github.com/tavisrudd/clebsch-rigidity) |
@@ -267,35 +285,23 @@ then read the abstract for the paper's technical statement.
 
 #### Irrationality of Cubic Threefolds after One Stabilization
 
-[PDF](https://github.com/tavisrudd/cubic-stabilization-epilogue/blob/main/irrationality_after_one_stabilization.pdf) · [Repository](https://github.com/tavisrudd/cubic-stabilization-epilogue) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21909944-blue.svg)](https://doi.org/10.5281/zenodo.21909944)
+[PDF](https://github.com/tavisrudd/cubic-stabilization-m1/blob/main/irrationality_after_one_stabilization.pdf) · [Repository](https://github.com/tavisrudd/cubic-stabilization-m1) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21909943-blue.svg)](https://doi.org/10.5281/zenodo.21909943)
 
 **Standout results.** Every smooth complex cubic threefold stays irrational
 after multiplication by a projective line, and the same holds
-for every smooth prime Fano threefold of genus eight.  The proof runs on an
-occurrence-indexed categorical ledger for generic even quantum `D`-module
-blocks and its rank-two residue marker, which vanishes in dimensions at most
-two and survives on the modified cubic zero block.  The separate
-framed-monodromy count is `ν₆(X) = 2` for every smooth cubic threefold and
-`ν₆(X × P¹) = 4`; its birational invariance through
-dimension four is conditional on two stated hypotheses and gives a second
-proof of the theorem.  On an explicit non-isotrivial family, universal
-`CH₀`-triviality survives that stabilization, so it does not detect the
-irrationality.
+for every smooth prime Fano threefold of genus eight. The invariant counts
+rank-two blocks of the generic even quantum `D`-module whose centered leading
+Euler operator is nonzero square-zero and whose two formal exponent classes
+differ modulo the integers. It also gives an irrationality criterion for
+smooth projective threefolds.
 
-> *Abstract* We prove that X × P¹ is irrational for every smooth complex cubic threefold X. We first prove an occurrence-indexed categorical ledger theorem for markers of generic even quantum D-module blocks. Iritani's blowup decomposition and the Iritani–Koto projective-bundle decomposition give its two operation laws; weak factorization then makes every marker whose low-dimensional center terms vanish a birational invariant. The unconditional specialization counts rank-two nilpotent blocks whose canonical elementary modification has nonzero residue discriminant δ♯. Beauville's small quantum algebra gives δ♯ = 4/9 on the cubic zero block. The marker vanishes for points, curves, and surfaces, but survives on X × P¹, while it vanishes on P⁴. Kuznetsov's birational correspondence extends the conclusion to every smooth prime Fano threefold of genus eight.
->
-> The finer specialization applies the same ledger theorem to blocks that also retain a marked small section and the original loop framing; its fold counts primitive-sixth formal-monodromy eigenvalues of the numerical small even quantum connection. We compute ν₆(X) = 2 and ν₆(X × P¹) = 4. Its blowup and projective-bundle providers retain two stated hypotheses on reconstruction tails and divisor-tagging specialization. Under those hypotheses the same categorical theorem makes ν₆ birationally invariant through dimension four and gives a conditional second proof.
->
-> Finally, an integral six-axis construction proves universal CH₀-triviality for every smooth member of the nonstandard A₅-invariant pencil: an all-degree saturation theorem for marked finite-étale graph quotients of elliptic powers makes the primitive minimal class of the intermediate Jacobian an integral divisor product. Every moduli point of this pencil but one lies outside the separated-variable locus covered by Colliot-Thélène's criterion; the exception is the Fermat point. Universal CH₀-triviality and irrationality after one stabilization therefore coexist in an explicit nontrivial family, as they also do for Voisin's loci, the Fermat cubic, and the coprime-degree family of Yang–Yu–Zhu.
+> *Abstract* We prove that X × P¹ is irrational for every smooth complex cubic threefold X. On the generic even quantum D-module, our invariant counts rank-two formal connection blocks whose centered leading Euler operator is nonzero square-zero and whose two formal exponent classes differ modulo the integers. Blowup and projective-bundle decompositions make this count birationally invariant because all low-dimensional centers contribute zero. It distinguishes X × P¹ from P⁴. The same count gives an irrationality criterion for smooth projective threefolds, the one-stabilization theorem for prime Fano threefolds of genus eight, and separation results on known universally CH₀-trivial loci.
 
 **Delivers.** An unconditional birational obstruction after one
-projective-line stabilization for every smooth cubic threefold, together with
-an explicit family showing that universal `CH₀`-triviality can hold while that
-irrationality persists; an unconditional computation of the primitive-sixth
-quantum packet and of its value after one stabilization; and, under two stated
-hypotheses, birational invariance of that count through dimension four.  The
-two marker specializations share one categorical occurrence/groupoid/fold
-theorem.
+projective-line stabilization for every smooth cubic threefold; a QDM-side
+irrationality criterion for smooth projective threefolds; the same
+one-stabilization result for prime Fano threefolds of genus eight; and
+separation from universal `CH₀`-triviality on several known loci.
 
 **Who cares.** Algebraic geometers working on rationality, stable rationality,
 intermediate Jacobians, algebraic cycles, quantum connections, or weak
@@ -304,21 +310,68 @@ factorization.
 **Why it matters.** Failure of universal `CH₀`-triviality is a standard
 obstruction to stable rationality, but its validity is not a parametrization.
 This paper makes that limitation concrete after an actual stabilization, and
-its residue marker is a direct quantum-`D`-module invariant that applies to
-every smooth cubic threefold, not only the symmetric family used on the cycle
-side.  The classical route stops short here: after one
+its formal-exponent marker is a direct quantum-`D`-module invariant that
+applies to every smooth cubic threefold. The classical route stops short here:
+after one
 stabilization the direct Clemens–Griffiths mechanism gives no contradiction,
 because `H³(X × P¹)` is still `H³(X)`, which the Fano surface of lines
 already carries as its `H¹` up to twist, while the middle `H⁴` is Tate.  The
 recent fourfold criteria that read Hodge data through quantum spectral
 packets do not reach this geometry either, since they assume `b₃ = 0` and a
 large vanishing middle `H⁴`.  The paper claims no novelty for that broad
-philosophy; what is new is the rank-two residue discriminant and the
-categorical occurrence-ledger mechanism that carries it through one
+philosophy; what is new is the formal-exponent marker and the operation ledger
+that carries it through one stabilization.
+
+---
+
+#### Integral Divisor Products on the Nonstandard A₅-Invariant Cubic Pencil
+
+[PDF](https://github.com/tavisrudd/cubic-stabilization-m1/blob/main/companions/six-axis-cubic-pencil/six_axis_cubic_pencil.pdf) · [Repository](https://github.com/tavisrudd/cubic-stabilization-m1) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21909943-blue.svg)](https://doi.org/10.5281/zenodo.21909943)
+
+**Standout result.** Every smooth member of the nonstandard
+`A₅`-invariant cubic pencil is universally `CH₀`-trivial. Combined with the
+one-stabilization theorem, this gives a non-isotrivial family whose products
+with `P¹` are universally `CH₀`-trivial and irrational.
+
+> *Abstract* We study the nonstandard A₅-invariant pencil of smooth cubic threefolds. A six-axis polarization identifies its exotic two-primary gluing packet and constrains odd-degree product decompositions of the intermediate Jacobian. An all-degree integral graph-saturation theorem then proves algebraicity of the primitive minimal class for every smooth member. Consequently every member is universally CH₀-trivial. The family is non-isotrivial, and all but its Fermat point lie outside both the separated-variable locus and the explicit coprime-degree family of Yang–Yu–Zhu. Combined with the one-stabilization theorem for cubic threefolds, this gives a non-isotrivial family whose products with P¹ are universally CH₀-trivial and irrational.
+
+**Delivers.** A six-axis description of the intermediate-Jacobian
+polarization, an all-degree integral divisor-product theorem, universal
+`CH₀`-triviality for the pencil, and its separation from stabilized
+irrationality.
+
+**Who cares.** Algebraic geometers working on cubic threefolds, algebraic
+cycles, intermediate Jacobians, and universal `CH₀`-triviality.
+
+**Why it matters.** Universal `CH₀`-triviality is necessary for stable
+rationality but does not provide a parametrization. This family shows that it
+can coexist with irrationality after an actual projective-line
 stabilization.
-Two hypotheses remain, and only for the finer framed invariant: invariance of
-the primitive-sixth framed multiplicity under the reconstruction tail of the
-operation formulas, and under the divisor-tagging specialization.
+
+---
+
+#### Framed Formal Monodromy of Cubic Threefolds
+
+[PDF](https://github.com/tavisrudd/cubic-stabilization-m1/blob/main/companions/cubic-framed-monodromy/cubic_framed_monodromy.pdf) · [Repository](https://github.com/tavisrudd/cubic-stabilization-m1) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21909943-blue.svg)](https://doi.org/10.5281/zenodo.21909943)
+
+**Standout result.** The framed primitive-sixth count satisfies
+`ν₆(X) = 2` and `ν₆(X × P¹) = 4` for every smooth cubic threefold. These
+computations are unconditional; the operation formulas and birational
+invariance are conditional on two explicit hypotheses.
+
+> *Abstract* We define a framed formal-monodromy count ν₆ for the numerical small even quantum connection and compute ν₆(X) = 2 and ν₆(X × P¹) = 4 for every smooth cubic threefold. The calculation and product formula are unconditional. Under an explicit reconstruction-tail hypothesis, the count satisfies blowup and projective-bundle formulas; under a separate residual divisor-tagging hypothesis for the remaining surface centers, it is birationally invariant through dimension four. These hypotheses give a conditional second proof of one-step irrationality and the conditional identity ν₆(V) = 2 for prime Fano threefolds of genus eight. We isolate the exact comparison statements still needed to make the refinement unconditional.
+
+**Delivers.** The unconditional cubic and product computations, explicit
+conditional operation formulas, and a precise statement of the remaining
+comparison hypotheses.
+
+**Who cares.** Researchers in quantum cohomology, formal monodromy, and
+birational geometry.
+
+**Why it matters.** The framed count retains more small-point information than
+the primary paper's generic formal-exponent marker. The companion keeps that
+refinement and its unresolved provider assumptions separate from the
+unconditional one-stabilization proof.
 
 ---
 
@@ -480,7 +533,7 @@ not the same cubic in different coordinates.
 
 #### Reconstructing PG(2,13), Its Conic, and Polarity from the Minimum Words of a Binary Conic Code
 
-[PDF](https://github.com/tavisrudd/q13-passant-code/blob/main/passant_code_q13.pdf) · [Repository](https://github.com/tavisrudd/q13-passant-code) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21783971-blue.svg)](https://doi.org/10.5281/zenodo.21783971)
+[PDF](https://github.com/tavisrudd/q13-passant-code/blob/main/passant_code_q13.pdf) · [Repository](https://github.com/tavisrudd/q13-passant-code) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21783970-blue.svg)](https://doi.org/10.5281/zenodo.21783970)
 
 **Standout result.** The 364 minimum words of the [78,36,12]₂ passant-line
 code reconstruct the marked projective plane PG(2,13), including its conic
@@ -505,7 +558,7 @@ Orientation from Its Deep-Hole Syndrome Locus*.
 
 #### Chordal and Conference Cubics: Reconstruction and a Residual C2-Torsor
 
-[PDF](https://github.com/tavisrudd/chordal-conference-reconstruction/blob/main/chordal_conference_reconstruction.pdf) · [Repository](https://github.com/tavisrudd/chordal-conference-reconstruction) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21895531-blue.svg)](https://doi.org/10.5281/zenodo.21895531)
+[PDF](https://github.com/tavisrudd/chordal-conference-reconstruction/blob/main/chordal_conference_reconstruction.pdf) · [Repository](https://github.com/tavisrudd/chordal-conference-reconstruction) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21895530-blue.svg)](https://doi.org/10.5281/zenodo.21895530)
 
 **Standout result.** The signed cubic from *Quadratic Trade Rigidity and Cubic
 Orientation in Conic Matching Quotients* is a chordal Hankel companion, not
@@ -560,7 +613,7 @@ public mirror.
 
 #### Frobenius-equivariant Pair Extension and Robust Repair of Eight-Arcs
 
-[PDF](https://github.com/tavisrudd/equivariant-robust-completion/blob/main/equivariant-robust-completion.pdf) · [Repository](https://github.com/tavisrudd/equivariant-robust-completion) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.22051736-blue.svg)](https://doi.org/10.5281/zenodo.22051736)
+[PDF](https://github.com/tavisrudd/equivariant-robust-completion/blob/main/equivariant-robust-completion.pdf) · [Repository](https://github.com/tavisrudd/equivariant-robust-completion) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.22051735-blue.svg)](https://doi.org/10.5281/zenodo.22051735)
 
 **Standout result.** Every Frobenius-invariant eight-arc over every prime-power
 base order `s ≥ 5` admits a fresh nonfixed conjugate-pair extension. Over
@@ -605,7 +658,7 @@ a fixed code.
 
 #### Complete Bounded Repair Ports: Transfer, Reliability, and Geometric Structure
 
-[PDF](https://github.com/tavisrudd/complete-repair-ports/blob/main/complete_repair_ports.pdf) · [Repository](https://github.com/tavisrudd/complete-repair-ports) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.22051904-blue.svg)](https://doi.org/10.5281/zenodo.22051904)
+[PDF](https://github.com/tavisrudd/complete-repair-ports/blob/main/complete_repair_ports.pdf) · [Repository](https://github.com/tavisrudd/complete-repair-ports) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.22051903-blue.svg)](https://doi.org/10.5281/zenodo.22051903)
 
 **Standout result.** An exact weighted-functional confinement criterion
 transfers both the support clutter and every normalized scalar decoder of a
@@ -660,7 +713,7 @@ long code.
 
 #### Integral Cohomology and Modular Decomposition for the Theta Divisor of a Cubic Threefold
 
-[PDF](https://github.com/tavisrudd/blown-up-theta-lattice/blob/main/blown_up_theta_lattice.pdf) · [Repository](https://github.com/tavisrudd/blown-up-theta-lattice) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.22036586-blue.svg)](https://doi.org/10.5281/zenodo.22036586)
+[PDF](https://github.com/tavisrudd/blown-up-theta-lattice/blob/main/blown_up_theta_lattice.pdf) · [Repository](https://github.com/tavisrudd/blown-up-theta-lattice) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.22036585-blue.svg)](https://doi.org/10.5281/zenodo.22036585)
 
 **Standout result.** The blow-up resolution of the cubic-threefold theta
 divisor exhibits two distinct integral coefficient defects.  Its rank-130
@@ -703,7 +756,7 @@ small-extension frameworks on which the example-specific calculation sits.
 
 #### Standard Flips of Discrepancy One: Extremal J-Normalization and the Meijer Aperture at ν=1
 
-[PDF](https://github.com/tavisrudd/discrepancy-one-flips/blob/main/discrepancy_one_flips.pdf) · [Repository](https://github.com/tavisrudd/discrepancy-one-flips) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21924799-blue.svg)](https://doi.org/10.5281/zenodo.21924799)
+[PDF](https://github.com/tavisrudd/discrepancy-one-flips/blob/main/discrepancy_one_flips.pdf) · [Repository](https://github.com/tavisrudd/discrepancy-one-flips) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21924798-blue.svg)](https://doi.org/10.5281/zenodo.21924798)
 
 **Standout result.** Shen and Shoemaker's extremal quantum-spectrum and
 Gamma-class argument extends through the omitted discrepancy-one range
@@ -803,7 +856,7 @@ into a global birational obstruction.
 
 #### Hodge Atoms as Occurrence-Indexed Marker Ledgers
 
-[PDF](https://github.com/tavisrudd/hodge-atom-marker-ledger/blob/main/hodge_atom_marker_ledger.pdf) · [Repository](https://github.com/tavisrudd/hodge-atom-marker-ledger) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.22036391-blue.svg)](https://doi.org/10.5281/zenodo.22036391)
+[PDF](https://github.com/tavisrudd/hodge-atom-marker-ledger/blob/main/hodge_atom_marker_ledger.pdf) · [Repository](https://github.com/tavisrudd/hodge-atom-marker-ledger) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.22036390-blue.svg)](https://doi.org/10.5281/zenodo.22036390)
 
 **Standout result.** The standard abstract Hodge-atom chemical formula is the
 universal fold of an occurrence-indexed thin groupoid.  Killing atom classes

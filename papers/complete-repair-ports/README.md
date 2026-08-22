@@ -1,6 +1,6 @@
 # Complete Bounded Repair Ports
 
-[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.22051904-blue.svg)](https://doi.org/10.5281/zenodo.22051904)
+[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.22051903-blue.svg)](https://doi.org/10.5281/zenodo.22051903)
 
 ## Read the paper
 
@@ -139,7 +139,7 @@ metadata and the AI disclosure, and replays both exact seed certificates.
 ## Citation
 
 The archival identifier is
-[`10.5281/zenodo.22051904`](https://doi.org/10.5281/zenodo.22051904).
+[`10.5281/zenodo.22051903`](https://doi.org/10.5281/zenodo.22051903).
 
 ## License
 

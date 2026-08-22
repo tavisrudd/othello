@@ -1,6 +1,6 @@
 # Standard flips of discrepancy one
 
-[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21924799-blue.svg)](https://doi.org/10.5281/zenodo.21924799)
+[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21924798-blue.svg)](https://doi.org/10.5281/zenodo.21924798)
 
 ## Read the paper
 
