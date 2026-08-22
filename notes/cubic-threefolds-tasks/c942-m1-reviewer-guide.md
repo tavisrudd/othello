@@ -2,7 +2,8 @@
 
 **Lane:** cubic-threefolds
 
-**Status:** queued behind C940's split-path and claim-inventory freeze
+**Status:** queued behind C940's split-path and claim-inventory freeze;
+paper-grade independent review required
 
 ## Goal
 
@@ -73,6 +74,11 @@ mathematical content and trust status.
 8. Synchronize the final documentation-only change to the established
    standalone paper repository after the authority passes its checks, if the
    guide is part of that public review surface under the mirror conventions.
+9. Subject the guide itself to the paper review protocol: freeze the candidate,
+   obtain mutually isolated cold reads, run a hostile trust-boundary and
+   usability audit, repair every adopted finding, and rerun fresh review on the
+   repaired candidate.  Prior reports and author intent must not be shown to a
+   cold reader before its verdict.
 
 ## Proposed guide structure
 
@@ -103,15 +109,27 @@ mathematical content and trust status.
 3. Red-team every checklist item against the manuscript and registries: no
    check may imply stronger formal coverage, stronger source verification, or
    broader theorem scope than the underlying artifact records.
-4. Have one mathematical cold reader follow only the fast path and one
-   formal-artifact reader follow only the audit path.  Record and repair every
-   dead link, ambiguous instruction, hidden prerequisite, and misleading trust
-   claim.
-5. Run the scoped documentation/link checks and the paper's existing `make
+4. Freeze a review candidate.  Obtain at least two mutually isolated cold
+   reads: one primary-audience mathematical referee following only the fast
+   path, and one formal/reproducibility referee following only the artifact
+   path.  Each report must give a verdict, confidence, required findings,
+   optional findings, strongest passage, and first point of friction.
+5. Run a separate hostile review against theorem scope, conditionality,
+   semantic-label accuracy, source provenance, formal coverage, command safety,
+   clean-checkout usability, and the possibility that the guide overstates
+   what a passing check establishes.  Record every finding in a dated review
+   report rather than only in chat.
+6. Repair every adopted finding, then give the repaired candidate to fresh
+   isolated readers who have not seen the earlier reports.  Do not accept the
+   guide on the strength of the authoring pass or the first repair audit.
+7. Run the scoped documentation/link checks and the paper's existing `make
    check`; run the guarded formal audit when the guide claims that replay path
    is current.  Inspect the narrow diff for accidental manuscript or registry
    changes.
-6. Commit the authority, then synchronize and verify the public standalone
+8. Compare the frozen and repaired guide line by line and verify every linked
+   path and command from the directory the guide states.  Record the final
+   review synthesis and disposition of all findings.
+9. Commit the authority, then synchronize and verify the public standalone
    copy when required by the mirror conventions.
 
 ## Acceptance gate
@@ -130,6 +148,13 @@ mathematical content and trust status.
   and imported-source registry are all findable without exposing the reviewer
   to the companions' machinery unless they opt in.
 - Both isolated review paths complete without undocumented local knowledge.
+- The frozen candidate, isolated referee reports, hostile audit, repair
+  disposition, fresh post-repair cold reads, and final synthesis are preserved
+  in dated lane-owned review records, matching the evidentiary standard used
+  for manuscript review.
+- Final acceptance requires fresh post-repair verdicts of accept from both the
+  mathematical and formal/reproducibility paths, with no fatal or major finding
+  open.  The guide's authoring pass does not count as a cold read.
 - Existing manuscript and verification gates pass; no theorem, hypothesis,
   coverage status, or validation policy changes under C942.
 
