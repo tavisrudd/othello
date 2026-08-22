@@ -495,6 +495,16 @@ construct a formal gauge, a flat connection, or a Frobenius family.  Excluding
 this calibration requires an effective large-radius or equivalent geometric
 hypothesis not present in the finite matrix model.
 
+`Comparison.BinaryCubicJordanStrata` checks the classical rank-six case
+without selecting the special dual-cubic order.  For a binary intersection
+cubic and one marked divisor, five explicit invertible chain bases give the
+five possible nilpotent Jordan types.  The fully degenerate type has singular
+divisor pairing for every divisor and is therefore incompatible with hard
+Lefschetz.  The kernel checks only this operator classification.  It does not
+construct the classical specialization of a marked carrier, identify the
+Euler and transported Kummer divisor lines, or classify integral orders over
+a degeneration trait.
+
 The algebraic model has a compact sufficient constructor. If the combined
 crossed and moving map `(B,D)` admits a linear retraction, an explicit incoming
 shear and target involution construct every crossed-coordinate field. An

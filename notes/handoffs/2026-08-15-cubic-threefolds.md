@@ -153,9 +153,14 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   shear fixes the unit and both divisor vectors and still produces the cubic
   marker.  The sufficient provider must descend the carrier and elementary
   modification to the native effective large-radius calibration, or prove the
-  exact-period exclusion directly.  After descent, the finite residue problem
-  still ranges over the binary cubic intersection form of the two-dimensional
-  divisor space; the special dual-cubic order is not automatic.  The
+  exact-period exclusion directly.  A regular unital projector descent would
+  force a rank-six whole-center algebra; Elias--Rossi reduce its classical
+  fibre to two types.  Explicit graded self-dual orders nevertheless realize
+  both types with the same generic paired \(C_3\)-algebra and marked divisor,
+  so order data alone do not close the QDM residue problem.  The
+  matched divisor specializes to \(J_4\oplus J_2\) and
+  \(J_4\oplus J_1^{\oplus2}\), respectively, so native control of this
+  special Jordan type is a narrower possible separator.  The
   pre-strict candidate dimensions at
   \(n=2,3,4,5,14\) are respectively \(\{1,2\}\), \(\{1,3\}\),
   \(\{1,3,4\}\), \(\{1,5\}\), and

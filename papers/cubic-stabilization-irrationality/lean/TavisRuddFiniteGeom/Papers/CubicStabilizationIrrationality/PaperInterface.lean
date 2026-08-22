@@ -41,6 +41,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.Two
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.LoopStabilizerPath
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.OccurrenceLoopCertificate
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.ThreefoldKummerCompatibility
+import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.BinaryCubicJordanStrata
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.KummerDivisorGenerator
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.HorizontalReader
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.TraitHorizontalReader
@@ -177,6 +178,14 @@ coordinate, retain an effective flat coefficient lattice, or descend the
 marked block lattices.
 Its flat-coordinate scalar obstruction consumes three weight equations; it
 does not derive them from a geometric divisor equation.
+`BinaryCubicJordanStrata` gives invertible chain-basis certificates for all
+five Jordan types of multiplication by a marked divisor in a Frobenius
+algebra with graded dimensions `(1, 2, 2, 1)`.  It also proves that the fully
+degenerate row has singular divisor pairing for every divisor, so that row
+cannot contain a hard-Lefschetz class.  These finite results classify one
+operator after a binary cubic and a divisor line have been supplied.  They do
+not construct a classical-limit algebra, identify the Euler and Kummer
+divisor lines, or descend a spectral carrier to the large-radius point.
 `ProjectiveSpaceQuantumPolynomial` proves that the standard relation
 `X^(m+4) - q` is separable in characteristic zero for nonzero `q`. This
 kernel-checks the target's no-repeated-root algebra once its small-quantum

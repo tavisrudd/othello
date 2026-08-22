@@ -131,14 +131,28 @@ parabolic shear and any transverse bulk deformation with the same generic
 data.  Iritani's Laurent comparison, KKPYY's generic atom splitting, and the
 existing C924 projector do not supply this descent.
 
-Even this formulation leaves a finite classification problem.  A connected
-rank-six threefold has a two-dimensional divisor space, but its classical cup
-product is governed by an arbitrary binary cubic intersection form.  The
-special order \(K[x,e]/(x^3,e^2)\) corresponds to one such form; self-duality
-and the grading alone do not select it.  A proof must either show that the
-dangerous Kummer carrier has this special fibre or classify every graded
-self-dual Frobenius order with the same generic cubic dual-number algebra and
-check the modified residue in each case.
+There is a useful dichotomy.  If the spectral projector itself extends as a
+regular unital direct factor, its special-fibre unit is an idempotent in the
+connected graded classical cohomology ring.  Such a ring is local, so the
+idempotent is zero or one; flat positive rank forces one.  The carrier is then
+the whole even cohomology, of rank six and Hilbert function \((1,2,2,1)\).
+A module lattice without a regular unital projector does not supply a
+classical Frobenius algebra at all.
+
+Elias--Rossi, arXiv:0911.3565, Theorem 3.3, Corollaries 3.4--3.5, and
+published Proposition 3.6, reduce a local Artin Gorenstein algebra with this
+Hilbert function to two complex isomorphism types.  Jelisiejew,
+arXiv:1511.08007, Example 3.23, gives the same pair:
+
+\[
+ \mathbf C[x,e]/(x^3,e^2),\qquad
+ \mathbf C[a,b]/(ab,a^3-b^3).
+\]
+
+This does not make the degeneration problem finite.  A marked divisor line,
+its normalization, the conductor, and the extension class remain.  In
+particular, the Euler line controlling the primary collision and the divisor
+\(\beta=i^*\xi-a\rho_Z\) controlling the transported loop need not coincide.
 
 The first stratification is elementary.  Write
 
@@ -161,10 +175,64 @@ Jordan types.  The determinant in the first two rows is that of the matrix
 
 For example, in the \(J_2^{\oplus3}\) row the chains are represented by
 \(1\mapsto u\), \(v\mapsto c\,v^*\), and
-\(u^*\mapsto[\mathrm{pt}]\).  This table identifies a finite next target:
-classify the effective self-dual orders in these binary-cubic strata and run
-the residue recurrence on each.  It does not by itself show that the generic
-marked Kummer carrier extends to any one row.
+\(u^*\mapsto[\mathrm{pt}]\).  Hard Lefschetz excludes the last row: when
+\(a=b=c=0\), multiplication from degree two to degree four is singular for
+every divisor.  If the displayed operator preserves a free rank-six lattice
+over a discrete valuation ring, and its generic characteristic polynomial is
+\((T^3-\varepsilon t)^2\) for a uniformizer \(t\) and a unit
+\(\varepsilon\), then \(v_t(\det U)=2\); Smith invariants bound its
+special-fibre nullity by two.
+This further leaves only \(J_4\oplus J_2\) and
+\(J_3\oplus J_3\).  The argument does not apply to a charge-two factor
+\((T^3-\varepsilon t^2)^2\), nor does it identify the Euler line with the
+Kummer divisor line.
+
+The Lean module
+`Comparison.BinaryCubicJordanStrata` kernel-checks explicit invertible
+chain-basis certificates for all five rows and the hard-Lefschetz determinant
+test.  It does not prove the Smith bound or any geometric specialization.
+
+Order data remain essential.  Over \(R=\mathbf C[[r]]\), the two graded
+rank-six Frobenius orders
+
+\[
+ A_d=R[x,e]/(x^3-r^3,e^2),\qquad
+ A_s=R[a,b]/(ab-r^2,a^3+b^3-2r^3)
+\]
+
+have the two different Elias--Rossi special fibres but isomorphic generic
+\(C_3\)-equivariant paired Frobenius algebras.  The isomorphism can also match
+the full marked divisor \(x-e/3\) with \(a\).  Thus grading, self-duality,
+saturation, deck action, generic pairing, and a marked divisor do not select
+the special order.  This is an order-level red test, not a flat QDM
+counterexample.
+
+The comparison is explicit.  The second order is free on
+\(1,a,a^2,b,b^2,b^3\): both generators satisfy
+\((T^3-r^3)^2\), the complete intersection has no \(r\)-torsion, and these
+six elements span.  Fix a primitive cube root \(\zeta\).  The deck actions are
+
+\[
+ (r,x,e)\longmapsto(\zeta r,\zeta^2x,\zeta^2e),\qquad
+ (r,a,b)\longmapsto(\zeta r,\zeta^2a,b).
+\]
+
+In the second generic fibre put
+\(t=a/r\), \(s=t^3-1\), and \(u=t(1-s/3)\); then \(s^2=0\) and \(u^3=1\).
+The map \(x\mapsto ru\), \(e\mapsto-rus\) identifies the two generic
+algebras, intertwines the cubic deck action, and sends \(x-e/3\) to \(a\).
+If \(\lambda_d\) extracts the coefficient of \(x^2e\) and \(\lambda_s\)
+extracts the coefficient of \(b^3\), then
+\(\lambda_s\circ\phi=\lambda_d\) for this map \(\phi\).  The generic
+Frobenius pairings therefore agree as well.
+
+The common generic divisor has different integral limits.  In the dual order,
+the special divisor \(u=x-e/3\), completed by \(v=e\), has coefficients
+\((a,b,c)=(-1,1,0)\) and type \(J_4\oplus J_2\).  In the distinct-root
+order, \(u=a\), completed by \(v=b\), has coefficients
+\((-1,0,0)\) and type \(J_4\oplus J_1\oplus J_1\).  Thus a theorem that
+controls the native special Jordan type of the transported divisor could
+separate the two orders; the generic marked divisor cannot.
 
 This boundary is narrower than a global packet or Stokes theorem.  It is also
 stronger than generic Frobenius-algebra or divisor data, as the two red tests
@@ -177,5 +245,7 @@ show.
 | settled | The codimension-two source signs are \(\lambda_0=q\) and \(\varsigma_0=-q+\pi i\rho_Z+O(q^{-1})\). | Iritani's fixed-center weights in (4.9), followed by Theorem 5.18(6). |
 | settled | Exact cubic inertia on rank-two nilpotent factors does not determine the marker. | \(\mathbf P^2\times C_g\) has an exact cubic orbit with discriminant zero; the parabolic shear has discriminant \(4/9\). |
 | open | The generic Laurent carrier may fail to extend as a saturated self-dual order in the native effective large-radius lattice. | Neither Iritani's Laurent comparison nor the generic atom splitting crosses this calibration boundary.  This is the primary C925 source gate. |
-| open | The classical rank-six order is not determined by its generic cubic dual-number algebra. | The binary-cubic table above gives five Jordan strata.  The next finite calculation must classify effective self-dual orders or run the residue recurrence in every realizable stratum. |
+| settled | A regular unital projector descent would force the carrier to be the whole rank-six even cohomology, and its local Gorenstein special fibre has two algebra types. | Locality of connected graded cohomology plus Elias--Rossi and Jelisiejew. |
+| open | The classical rank-six order is not determined by its generic cubic dual-number algebra, pairing, deck action, and marked divisor. | The two explicit orders \(A_d,A_s\) have different special fibres and the same listed generic data.  A full QDM/divisor-equation calibration is still missing. |
+| settled | The matched generic divisor has different special Jordan types in the two orders. | The binary-cubic coefficients are \((-1,1,0)\) and \((-1,0,0)\), giving \(J_4\oplus J_2\) and \(J_4\oplus J_1^{\oplus2}\).  Native special-Jordan control is a narrower possible separator. |
 | open | The derivative and trace lemmas still need a geometric scalar-block adapter. | One must control the moving projector, regular block gauge, and identification of the divisor eigenvalue with the derivative of the Euler eigenvalue on the same occurrence. |

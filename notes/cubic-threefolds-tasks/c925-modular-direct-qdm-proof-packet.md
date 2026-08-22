@@ -20,7 +20,12 @@ marker \(\delta^\sharp=4/9\), not merely \(\delta^\sharp\ne0\).  A
 pairing-preserving parabolic shear gives the exact \(4/9\) block while fixing
 the unit and both divisor vectors, so generic Frobenius-algebra and divisor-
 generator data do not replace the missing effective large-radius
-calibration.
+calibration.  A regular unital projector descent would force the carrier to
+be the whole rank-six even cohomology.  Elias--Rossi then reduce its classical
+local Gorenstein algebra to two types, but explicit graded self-dual orders
+with the same generic paired \(C_3\)-algebra and marked divisor realize both
+special fibres.  The missing theorem must retain the full QDM/divisor-equation
+calibration, not only the native order.
 The unconditional every-smooth theorem is not landed.  Independently, Voisin
 plus the 2025 Engel--de Gaay Fortman--Schreieder parity theorem gives an
 all-\(m\) proof for a very general cubic; that preprint result must not be
@@ -653,6 +658,14 @@ run `20260822-133601`.  Its library target, `PaperInterface`, and
 only `propext`, `Classical.choice`, and `Quot.sound` on the new terminals and
 no admitted or native-evaluation axiom.
 
+The binary-cubic Jordan module elaborated without diagnostics in guarded run
+`20260822-140748`.  Its library target, `PaperInterface`, and
+`Verification.AxiomAudit` passed together after the hostile field-and-Smith
+repairs in queued run `20260822-212205-b2deeebb`; trace-current replay
+`20260822-213623-28be379f` passed the aggregate gate.  Guarded audit run
+`20260822-141651` reports only `propext`, `Classical.choice`, and `Quot.sound`
+on the six new terminals.
+
 The finite model currently has one hundred twenty-two checks.  It verifies only the
 advertised algebraic laws and countermodels, never an external QDM provider.
 The replayed script is 117334 bytes with SHA-256
@@ -678,9 +691,13 @@ The live frontier is source-side, not another linear consumer.
    large-radius lattice, including the standard cup-product grading and the
    elementary modification.  Generic cubic-etale/divisor data are
    insufficient: the parabolic-shear countermodel retains them and has
-   \(\delta^\sharp=4/9\).  The resulting native-order problem still includes
-   arbitrary binary cubic intersection forms on the rank-two divisor space;
-   rank six and self-duality do not force the special dual-cubic order.
+   \(\delta^\sharp=4/9\).  The resulting native-order problem has two
+   Elias--Rossi classical algebra types and distinct Euler and transported
+   divisor lines.  The standard dual-cubic order is not automatic, and order
+   data alone do not select it.  The two explicit orders do specialize the
+   matched divisor to different Jordan types, \(J_4\oplus J_2\) and
+   \(J_4\oplus J_1^{\oplus2}\); native control of that specialization is a
+   narrower sufficient target than a classification of all orders.
 
 2. **What Lean separates.**  The nonsplit outer-return theorem proves that
    total period is outer-label period times return-map period.  The pre-strict
