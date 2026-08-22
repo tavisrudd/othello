@@ -37,6 +37,13 @@ rechecks the full recurrence and discriminants \(0,4\), and a typed
 `Calibration` theorem transports this exclusion to any simultaneously
 intertwined native model.  This closes the finite recurrence consumer, not the
 native calibration provider.
+The programme-wide information-loss lens suggests a smaller candidate source
+datum than the full calibration: a **marked Rees port** consisting of the
+self-dual Kummer coweight and the first marked connection/Rees jet.  The two
+known red modes are independent: the explicit dual and distinct-root orders
+have relative coweight \((-1,0,0,0,0,1)\), while a coweight-zero parabolic
+shear changes the marker through its first jet.  This is a testable
+reconstruction proposal, not yet a source theorem.
 The unconditional every-smooth theorem is not landed.  Independently, Voisin
 plus the 2025 Engel--de Gaay Fortman--Schreieder parity theorem gives an
 all-\(m\) proof for a very general cubic; that preprint result must not be
@@ -123,6 +130,9 @@ realization of that orbit.
   notes/2026-08-22-c925-indirect-rationality-predictions.md
 - cubic Kummer derivative, divisor generator, and calibration boundary:
   notes/2026-08-22-c925-kummer-divisor-generator.md
+- programme-level marked Rees shadow, exact coweight calculation, and
+  certificate-first experiment:
+  notes/2026-08-22-c925-marked-rees-shadow.md
 
 The packet index owns the module-to-file map.  Do not append another large
 module to this card or to the index; add one focused companion file and one
@@ -734,7 +744,15 @@ The live frontier is source-side, not another linear consumer.
    makes the smaller remaining obligation precise: construct one calibration
    intertwining multiplication, projector, first gauge, grading, selected
    basis, and left inverse.  An unordered or generic block identification is
-   insufficient.
+   insufficient.  The proposed compression is to construct only a marked Rees
+   port: the native self-dual Kummer coweight together with the first
+   connection jet modulo integral gauges trivial on the associated graded.
+   The exact Rust-to-Lean experiment should enumerate the bounded rank-six
+   coweight charts and jets, emit elimination certificates, and derive the
+   existing `Calibration` only after each certificate is checked.  The finite
+   classification can then be compressed structurally.  This proposal and its
+   mandatory input-index mutation test are recorded in
+   `../2026-08-22-c925-marked-rees-shadow.md`.
 
 2. **What Lean separates.**  The nonsplit outer-return theorem proves that
    total period is outer-label period times return-map period.  The pre-strict

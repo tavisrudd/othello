@@ -180,6 +180,20 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   \(\{8,9,11,13\}\).  These are missing geometric data or theorems, not
   another consumer-plumbing lemma.
 
+  **Programme-level reconstruction signal:** the smallest plausible
+  enrichment of the generic marked packet is now a two-layer **marked Rees
+  port**: its self-dual Kummer coweight and its first marked connection/Rees
+  jet.  The layers are independently necessary.  The two explicit native
+  orders differ by relative coweight \((-1,0,0,0,0,1)\), whereas the
+  coweight-zero parabolic shear retains the associated grading but changes the
+  marker through its first jet.  The next finite experiment is therefore an
+  exact Rust enumeration of the bounded rank-six coweight/jet charts, with
+  canonical JSON and Lean correspondence to the existing `Calibration`
+  consumer; only after that exhaustive certificate should the result be
+  compressed to a structural Rees-extension theorem.  This is a proposed
+  source compression, not a landed geometric adapter.  Report:
+  `../2026-08-22-c925-marked-rees-shadow.md`.
+
   **Closed lanes:** the common \(\epsilon M\)-row/stable-projector
   composite, raw and normalized degree-zero augmentation, ordinary
   Hodge/Hard-Lefschetz multiplicity, and algebraic-simplicity projection all
@@ -190,6 +204,8 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   Source dossier: `../2026-08-21-c925-no-stokes-source-dossier.md`.
   Divisor/calibration report:
   `../2026-08-22-c925-kummer-divisor-generator.md`.
+  Marked Rees-shadow report:
+  `../2026-08-22-c925-marked-rees-shadow.md`.
   Indirect route report:
   `../2026-08-22-c925-indirect-rationality-predictions.md`.
 
