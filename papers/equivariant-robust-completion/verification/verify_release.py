@@ -50,7 +50,7 @@ FORBIDDEN_PUBLIC = (
         "private filesystem path",
     ),
 )
-TEXT_SUFFIXES = {"", ".bib", ".json", ".md", ".nix", ".py", ".tex"}
+TEXT_SUFFIXES = {"", ".bib", ".json", ".lock", ".md", ".nix", ".py", ".tex"}
 
 
 def fail(message: str) -> None:
@@ -82,7 +82,7 @@ def public_text_files() -> list[Path]:
     for path in PAPER.rglob("*"):
         if not path.is_file() or path == PDF or path.name.endswith(".log"):
             continue
-        if ".git" in path.parts or path.name == "flake.lock":
+        if ".git" in path.parts:
             continue
         if path.suffix in TEXT_SUFFIXES or path.name in {"LICENSE", "Makefile"}:
             files.append(path)
