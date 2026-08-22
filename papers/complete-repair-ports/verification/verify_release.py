@@ -195,16 +195,33 @@ def check_metadata() -> dict[str, object]:
             encoding="utf-8"
         )
     )
+    provenance_tex = (PAPER / "sections" / "07-verification-provenance.tex").read_text(
+        encoding="utf-8"
+    )
     require(boundary.get("gate") == GATE, "formal gate name is stale")
     require(
         boundary.get("finitegeom_repository") == FINITEGEOM_REPOSITORY,
         "formal metadata must reference only the public finitegeom repository",
     )
-    for field in ("source_commit", "finitegeom_base_commit", "mathlib_rev"):
+    for field in (
+        "source_commit",
+        "finitegeom_base_commit",
+        "finitegeom_release_commit",
+        "mathlib_rev",
+    ):
         value = boundary.get(field)
         require(
             isinstance(value, str) and HEX40.fullmatch(value) is not None,
             f"formal metadata field {field} is not a 40-hex revision",
+        )
+    for field in (
+        "source_commit",
+        "finitegeom_base_commit",
+        "finitegeom_release_commit",
+    ):
+        require(
+            f"\\path{{{boundary[field]}}}" in provenance_tex,
+            f"manuscript provenance is stale for {field}",
         )
     require(
         boundary.get("closure_module_count") == 36,
