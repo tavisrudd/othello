@@ -3,12 +3,12 @@
 - **Manuscript:** *Frobenius-equivariant pair extension and robust repair of
   eight-arcs*
 - **Frozen authority:** commit
-  `9977af02cfed699c1c14802242a6f500896164bc`
+  `0a2924c560f556bc8d61bce9625ace08875d272e`
 - **Frozen PDF:**
   `papers/equivariant-robust-completion/equivariant-robust-completion.pdf`
 - **PDF SHA-256:**
-  `0ecdf6e1689a407a47da0f1c03693da2466ae3dd1221b6462e548ed4a97d691f`
-- **Surface:** 15 A4 pages; 156 whitespace-delimited abstract tokens
+  `65e8ee558c95c2c8f3935c2dd5b93a26162dc80346df2b57408e4ff28cb97a66`
+- **Surface:** 16 A4 pages; 156 whitespace-delimited abstract tokens
 - **Date:** 2026-08-21
 
 This is an internal review-planning artifact, not evidence for the paper and
@@ -16,6 +16,19 @@ not part of its standalone export. Named critics below are expertise matches,
 not claims about availability, conflicts, or an actual editorial assignment.
 Do not blend their perspectives into one synthetic persona: the point of the
 packets is to expose different standards of objection.
+
+## Review history
+
+The first context-isolated cold read is frozen in
+`notes/2026-08-21-equivariant-robust-completion-cold-referee.md`.  It returned
+verdict C because Proposition 5.3 did not yet prove that every semantic
+two-fixed-point arc reaches the certified 46,056-row slice.  Revision
+`0a2924c560f556bc8d61bce9625ace08875d272e` adds the two explicit
+base-field projectivities, treats all normalization choices and row ordering,
+proves the determinant/freshness dictionary and legal-count transport, and
+also repairs the four local defects listed in that report.  The next cold read
+must assess this frozen revision independently rather than treating the first
+report as evidence of closure.
 
 ## Editorial question
 
