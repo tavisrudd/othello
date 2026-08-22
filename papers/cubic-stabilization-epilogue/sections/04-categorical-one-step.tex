@@ -222,9 +222,12 @@ restriction gives distinct exponentials.  Their derivatives of orders
 \(0,\ldots,n-1\) form an invertible Vandermonde matrix, so the
 character-tagged map is injective.
 Remarks~2.3 and 5.6 of \cite{IritaniBlowup} show that divisor and Novikov
-variables occur in precisely these combinations.  Each center summand is a
-faithful scalar extension and formal reparametrization of the intrinsic
-generic numerical QDM of \(Z\).
+variables occur in precisely these combinations.  We do not use the
+function-level symbol \(\sigma_j^*\), which need not be defined before this
+reduction.  Instead, each actual center term, over the reduced
+divisor-equation image ring with its retained character tags, is a faithful
+scalar extension and formal reparametrization of the intrinsic generic
+numerical QDM of \(Z\).
 
 \begin{proposition}[QDM operation ledgers]
 \label{prop:qdm-operation-ledgers}
@@ -382,7 +385,11 @@ nilpotent \(2\times2\) matrix is the coefficient-field span of \(I\) and
  \partial N=-q_\partial N+
  [N,q_\partial A_0-C_{\partial,0}].
 \]
-Thus formal bulk transport preserves the nonzero square-zero orbit and its
+Writing \(B=q_\partial A_0-C_{\partial,0}\), one has
+\(\partial(N^2)=-2q_\partial N^2+[N^2,B]\); uniqueness for the formal
+coefficient recursion preserves \(N^2=0\), while the nonzero leading value
+prevents \(N\) from becoming the zero formal section.  Thus formal bulk
+transport preserves the nonzero square-zero orbit and its
 image line.  After modification, the only possible base
 pole is \(z^{-1}kE_{21}\).  If
 \(R=\left(\begin{smallmatrix}a&\nu\\c&d\end{smallmatrix}\right)\), the
@@ -564,7 +571,8 @@ Let \(C\) have genus \(g\ge1\).  There is no nonconstant genus-zero map to
 \]
 For \(g=1\), \(N=0\).  For \(g>1\), the modification
 \(S=\diag(z,1)\) gives residue \(aE_{21}-\tfrac12I\), of discriminant zero.
-Thus every curve has zero marker.
+Its two eigenvalues, and therefore its two exponent classes, are equal.  Thus
+every curve has zero marker.
 
 Let \(S\) be a surface with \(K_S\) nef.  For a quantum-product term with
 input degree \(b\), non-scalar Euler degree \(a\ge2\), curve class \(d\), and
