@@ -159,13 +159,6 @@ complex as separate victories.
 
 ### Coding theory and quantum information
 
-- **Complete bounded repair ports transfer represented local structure.**
-  Support clutters, normalized scalar decoders, and stochastic reliability are
-  treated as three layers of one pointed object. Exact weighted-functional
-  confinement copies a prescribed bounded port into every block, and
-  asymptotically good outer families place it on a positive-density target
-  class. [Complete Bounded Repair Ports](https://github.com/tavisrudd/complete-repair-ports/blob/main/complete_repair_ports.pdf).
-
 - **Projective Reed–Solomon deep holes beyond redundancy four.** Split-free
   syndrome directions—and deep holes wherever the covering-radius gate
   applies—are classified at redundancies five and six for every prime power
@@ -186,6 +179,13 @@ complex as separate victories.
   one. Its nullity determines whether the projective transversal group is
   `Fq² ⋊ SL₂(q)` or the smaller split-torus branch. [Diagonal Isoduality and Transversal Clifford Groups](https://github.com/tavisrudd/mds-css-transversal-groups/blob/main/mds-css-transversal-groups.pdf).
 
+- **Complete bounded repair ports transfer represented local structure.**
+  Support clutters, normalized scalar decoders, and stochastic reliability are
+  treated as three layers of one pointed object. Exact weighted-functional
+  confinement copies a prescribed bounded port into every block, and
+  asymptotically good outer families place it on a positive-density target
+  class. [Complete Bounded Repair Ports](https://github.com/tavisrudd/complete-repair-ports/blob/main/complete_repair_ports.pdf).
+
 - **Order six is the unique nontrivial balanced conference order.** For a
   symmetric conference matrix, split the modes into two equal parts and take
   the singular-value spectrum of the corresponding cut block. Order six is
@@ -204,9 +204,6 @@ is conditional, its hypothesis is displayed in the theorem column.
 
 | Paper | General theorem | Quantifier range |
 |---|---|---|
-| Complete Bounded Repair Ports: Transfer, Reliability, and Geometric Structure | The minimum coefficient port reconstructs the represented code, although its support projection is the generic complete uniform clutter. | Every proper `[n,k]q` MDS code with `1 ≤ k < n`, at every distinguished coordinate. |
-| Complete Bounded Repair Ports: Transfer, Reliability, and Geometric Structure | Exact weighted-functional confinement transfers every represented bounded support and coefficient port below the pointed zero-functional threshold onto a designated positive-density target class. | Every fixed inner encoder and outer family with dual distance tending to infinity; asymptotic goodness follows from the stated classical outer-family inputs. |
-| Integral Cohomology and Modular Decomposition for the Theta Divisor of a Cubic Threefold | The integral middle lattice has rank `130` and saturation quotient `(Z/2)^10`; the integral resolution complex has central Smith factor three, a length-three mod-three Loewy chain, and modular relative-hard-Lefschetz failure. | The theta divisor of every smooth complex cubic threefold. |
 | Irrationality of Cubic Threefolds after One Stabilization | `X × P¹` is irrational, by way of the rank-two residue marker of the cubic zero block in the categorical direct-QDM ledger. | Every smooth complex cubic threefold `X`. |
 | Irrationality of Cubic Threefolds after One Stabilization | The primitive-sixth framed-monodromy multiplicity of the small even quantum connection equals two. | Every smooth complex cubic threefold `X`. |
 | Irrationality of Cubic Threefolds after One Stabilization | The primitive-sixth framed-monodromy multiplicity of a product with a projective space is that of the factor times one more than the dimension. | Every smooth projective variety and every projective space. |
@@ -222,6 +219,9 @@ is conditional, its hypothesis is displayed in the theorem column.
 | Local-Unitary Rigidity and Quantitative Rounding for Stabilizer AME States | Every product-unitary intertwiner between stabilizer `AME(2m,q)` states is Clifford on each party. | Every prime power `q = pᵉ` and `m ≥ 2`. |
 | Diagonal Isoduality and Transversal Clifford Groups of MDS–CSS Codes | The diagonal multiplier nullity fixes the transversal logical group. | All `[2m,m,m+1]q` MDS codes over odd prime fields. |
 | Exchange Landscapes, Orientation, and Rigidity in the Golden Six-Mode Conference Interferometer | Order six is the unique nontrivial realized symmetric conference order whose balanced-half exchange spectrum is cut-independent. | Every symmetric conference matrix and every balanced half. |
+| Complete Bounded Repair Ports: Transfer, Reliability, and Geometric Structure | The minimum coefficient port reconstructs the represented code, although its support projection is the generic complete uniform clutter. | Every proper `[n,k]q` MDS code with `1 ≤ k < n`, at every distinguished coordinate. |
+| Complete Bounded Repair Ports: Transfer, Reliability, and Geometric Structure | Exact weighted-functional confinement transfers every represented bounded support and coefficient port below the pointed zero-functional threshold onto a designated positive-density target class. | Every fixed inner encoder and outer family with dual distance tending to infinity; asymptotic goodness follows from the stated classical outer-family inputs. |
+| Integral Cohomology and Modular Decomposition for the Theta Divisor of a Cubic Threefold | The integral middle lattice has rank `130` and saturation quotient `(Z/2)^10`; the integral resolution complex has central Smith factor three, a length-three mod-three Loewy chain, and modular relative-hard-Lefschetz failure. | The theta divisor of every smooth complex cubic threefold. |
 
 ## Papers and entry points
 
@@ -231,7 +231,6 @@ boundary, and reproducible entry points.
 
 | Paper | Area | Central result | Public entry |
 |---|---|---|---|
-| Complete Bounded Repair Ports: Transfer, Reliability, and Geometric Structure | Coding theory / reliability | Exact weighted-functional confinement transfers represented bounded repair ports to positive-density coordinate classes, retaining both support and normalized decoder data. | [PDF](https://github.com/tavisrudd/complete-repair-ports/blob/main/complete_repair_ports.pdf) · [repo](https://github.com/tavisrudd/complete-repair-ports) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.22051904-blue.svg)](https://doi.org/10.5281/zenodo.22051904) |
 | Irrationality of Cubic Threefolds after One Stabilization | Algebraic geometry / birational geometry | Every smooth cubic threefold stays irrational after multiplication by `P¹`, proved from the rank-two residue marker of a categorical direct-QDM ledger, while an explicit family is universally `CH₀`-trivial; the framed count `ν₆ = 2` and its stabilization to `4` are separate computations. | [PDF](https://github.com/tavisrudd/cubic-stabilization-epilogue/blob/main/irrationality_after_one_stabilization.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-epilogue) |
 | Deep Holes of Projective Reed–Solomon Codes Beyond Redundancy Four: Recursive Carriers and Exact Classifications Through Redundancy Ten | Coding theory | Deep-hole classifications extend through redundancy ten in stated ranges. | [PDF](https://github.com/tavisrudd/beyond4-prs/blob/main/prs-beyond-redundancy-four.pdf) · [repo](https://github.com/tavisrudd/beyond4-prs) |
 | Local-Unitary Rigidity and Quantitative Rounding for Stabilizer AME States | Quantum information | Exact local-unitary rigidity has a separate quantitative rounding theorem. | [PDF](https://github.com/tavisrudd/ame-lu/blob/main/ame-lu.pdf) · [repo](https://github.com/tavisrudd/ame-lu) |
@@ -248,6 +247,7 @@ boundary, and reproducible entry points.
 | Exchange Landscapes, Orientation, and Rigidity in the Golden Six-Mode Conference Interferometer | Quantum information / mathematical physics | Cut-independent exchange spectra and orientation-sensitive stability are unique at order six. | [PDF](https://github.com/tavisrudd/golden-quantum-statistics/blob/main/golden_quantum_statistics.pdf) · [repo](https://github.com/tavisrudd/golden-quantum-statistics) |
 | Integral Cohomology and Modular Decomposition for the Theta Divisor of a Cubic Threefold | Algebraic geometry / topology | The rank-130 integral middle lattice has canonical mod-two glue, while the same resolution carries a factor-three integral perverse attachment, a length-three modular Loewy chain, and failure of relative hard Lefschetz modulo three. | [PDF](https://github.com/tavisrudd/blown-up-theta-lattice/blob/main/blown_up_theta_lattice.pdf) · [repo](https://github.com/tavisrudd/blown-up-theta-lattice) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.22036586-blue.svg)](https://doi.org/10.5281/zenodo.22036586) |
 | Frobenius-equivariant Pair Extension and Robust Repair of Eight-Arcs | Finite geometry / coding theory | Fixed mate-line carriers and exact collision corrections give Frobenius-compatible paired MDS extensions, including the exact two-fixed-point minimum over F₂₅. | [repo](https://github.com/tavisrudd/equivariant-robust-completion) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.22051736-blue.svg)](https://doi.org/10.5281/zenodo.22051736) |
+| Complete Bounded Repair Ports: Transfer, Reliability, and Geometric Structure | Coding theory / reliability | Exact weighted-functional confinement transfers represented bounded repair ports to positive-density coordinate classes, retaining both support and normalized decoder data. | [PDF](https://github.com/tavisrudd/complete-repair-ports/blob/main/complete_repair_ports.pdf) · [repo](https://github.com/tavisrudd/complete-repair-ports) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.22051904-blue.svg)](https://doi.org/10.5281/zenodo.22051904) |
 
 The repository for *Reconstructing the Clebsch Code and Its Golden Orientation
 from Its Deep-Hole Syndrome Locus* also contains the computational companion
