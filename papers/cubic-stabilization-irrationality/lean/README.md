@@ -371,6 +371,26 @@ unit residue cannot be nilpotent, so an Artin quotient cannot legalize a
 translation by a unit constant. Completeness, continuity, and analytic
 continuation remain outside this elementary coefficient-ring interface.
 
+`Comparison.StableRationalityConsequences` gives two global consumers that do
+not use a weak-factorization path. One transports a stable birational
+invariant; the other pulls a projective-space witness back through a supplied
+birational relation and then applies a separately supplied cancellation map
+for the projective factor. The module packages upward closure of rational
+stabilization indices and proves its consequences. Its finite countermodels
+show that a nonzero multiplicity does not formally justify cancellation and
+that an abstract signed class need not have a positive-monoid representative.
+It does not instantiate a diagonal decomposition, a theta class, or any
+geometric birational relation.
+
+`Comparison.R10AlbaneseParity` checks the finite `F_2` computation for the
+reduced `R10` Albanese graph in Engel--de Gaay Fortman--Schreieder,
+arXiv:2507.15704v3, Proposition 7.6. Ten explicit row-span masks factor the
+colour-profile matrix through the `160 × 160` admissibility matrix; native
+evaluation checks all 1,600 coefficients, and a symbolic matrix argument
+deduces that every admissible vector has zero colour profile. The module does
+not formalize the geometric reduction to this graph or the subsequent theta-
+class and stable-rationality deductions.
+
 The algebraic model has a compact sufficient constructor. If the combined
 crossed and moving map `(B,D)` admits a linear retraction, an explicit incoming
 shear and target involution construct every crossed-coordinate field. An

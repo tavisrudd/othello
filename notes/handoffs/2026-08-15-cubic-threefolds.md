@@ -139,7 +139,12 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   `../2026-08-22-c925-indirect-rationality-predictions.md`; Lean's
   `StableRationalityConsequences` module checks the global invariant/witness
   consumers, stabilization monotonicity, and the cancellation and
-  signed-versus-effective falsifiers.
+  abstract signed-versus-positive-monoid falsifiers.  `R10AlbaneseParity`
+  now independently checks all 1,600 coefficients of ten explicit row-span witnesses for the
+  finite \(R_{10}\) calculation in Proposition 7.6.  The adjacent tracked
+  Python/JSON/checksum bundle reconstructs the reduced graph and independently
+  verifies ranks 125 and 125.  This does not formalize the geometric reduction
+  or promote the very-general theorem to every smooth cubic.
   **Live conditional result:** on every blowup edge, an intrinsic marked-projector square
   and a unit-scaled algebraic row square imply that row-visible marked support
   is identical on the blowup and ambient factors, regardless of marked

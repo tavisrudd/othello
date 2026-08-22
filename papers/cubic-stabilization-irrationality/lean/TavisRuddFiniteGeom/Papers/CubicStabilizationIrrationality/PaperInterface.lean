@@ -42,6 +42,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.Hor
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.TraitHorizontalReader
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.ProvenanceEdge
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.StableRationalityConsequences
+import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.R10AlbaneseParity
 
 /-!
 # Reviewer interface for the cubic-stabilization irrationality paper
@@ -258,4 +259,11 @@ external coordinate cannot be equivariantly identified with any packet on
 which the external factor acts trivially, regardless of the internal action;
 the obstruction persists after adjoining external-trivial corrections on the
 source side.
+Two global consumers avoid weak factorization entirely: one transports a
+supplied stable birational invariant, and one transports a supplied geometric
+witness and then uses an explicit projective-factor cancellation map. They do
+not construct a diagonal decomposition or instantiate the birational
+relation. A separate finite module checks the ten row-span identities for the
+reduced `R10` Albanese graph over `F_2`; the geometric reduction to that graph
+and the theta-class consequence remain external.
 -/

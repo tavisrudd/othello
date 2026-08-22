@@ -128,8 +128,17 @@ index row.
   projective-space witness after an explicitly supplied projective-factor
   cancellation theorem.  Rational stabilization indices form an upper set.
   The module also rejects cancellation by a bare nonzero multiplicity over
-  `ZMod (m+1)` at \(m=1,2,3,4,13\), and rejects the upgrade from a signed
-  algebraic class to an effective class.
+  `ZMod (m+1)` at \(m=1,2,3,4,13\), and gives an abstract monoid/group
+  countermodel showing that a signed-class identity does not formally imply
+  a positive representative.
+- `R10AlbaneseParity` independently checks the finite \(R_{10}\) computation
+  in Engel--de Gaay Fortman--Schreieder, arXiv:2507.15704v3, Proposition 7.6.
+  Ten explicit row-span masks factor the colour-profile matrix through the
+  \(160\times160\) constraint matrix, so Lean proves profile vanishing for
+  every admissible vector.  The tracked Python certificate independently
+  reconstructs the graph and recomputes both ranks.  This strengthens the
+  very-general all-stabilizations route only; the geometric reduction,
+  regular-matroid theorem, and theta-class deduction remain imported.
 - The modular \(m=1\) proof is sound from its stated Iritani,
   Iritani--Koto, and weak-factorization inputs.
 - Guéré/BFGMP and KKPYY are lawful split specializations at the algebraic

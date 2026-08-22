@@ -1,0 +1,3 @@
+90b120a982b01f59a5cfca23ed930e79dcbc0689f62222d06afc4c862a08b0c9  9657  check_r10_albanese_parity.py
+ea2930e1f5babde935c6221d2aec1d8b427b4f1770f4bd980bc6126647ef0189  9944  r10_albanese_parity_certificate.json
+55e4a7ec7e9a355396bda0a6fc198496bacdb945015e1374980fcf3438e039f1  5534  ../lean/TavisRuddFiniteGeom/Papers/CubicStabilizationIrrationality/Comparison/R10AlbaneseParity.lean
