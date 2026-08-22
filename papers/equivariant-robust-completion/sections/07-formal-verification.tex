@@ -116,14 +116,38 @@ Source module & Paper-facing declaration or role \\
 \subsection*{Artifact and reproduction}
 
 The exceptional finite layer uses a separately versioned Mathlib-only
-certificate package.  Its exact commit and manifest digest are recorded in
-the verification pin.
+certificate package at
+\href{https://github.com/tavisrudd/finitegeom-q25-certificates}%
+{the certificate repository}.  The paper pins commit
+\texttt{d4e910cf0181} and the SHA-256 of its \path{MANIFEST.json}; the full
+40- and 64-hex-digit values are printed in
+\path{verification/q25-certificate-pin.json}.  Thus the cited artifact is a
+content-addressed source tree rather than a moving branch.
 That package pins Lean 4.32.0-rc1 and mathlib revision
 \texttt{571b8a8e5421}.  From the package root
 its sealed aggregate and source-reproduction checks are run by
 \begin{verbatim}
 nix run .#verify
 \end{verbatim}
+On success the command exits with status zero; its final seal line is
+\begin{verbatim}
+MANIFEST.json ok (9511 modules)
+\end{verbatim}
+and the regeneration checks report \texttt{trees\_checked=3 passed=3}.
+It also checks the canonical residual-cover input against the full SHA-256
+printed in the verification pin.
+This is intentionally a large, $9511$-module build; the first run also
+downloads the pinned Lean/mathlib cache.  We do not quote a portable time or
+memory estimate, since those depend strongly on the Nix cache and build
+parallelism.  Checking only the repository commit and manifest digest is the
+lightweight identity check; it is not a substitute for the full kernel build.
+
+The human-scale development is source-pinned separately at
+\href{https://github.com/tavisrudd/othello/tree/9977af02cfed699c1c14802242a6f500896164bc/lean}%
+{the structural source tree}, commit \texttt{9977af02cfed}.
+The module and declaration paths in the table above are relative to that
+tree.  This pin fixes the structural sources reviewed with the manuscript;
+it is not the Q25 generated package and does not import that package.
 The exact pin and trust boundary are recorded in
 \path{verification/q25-certificate-pin.json} and
 \path{verification/README.md}.  The standalone paper archive does not vendor

@@ -88,7 +88,10 @@ $\sum u_x\le48$.  Since $u_x\le3$ and
 $\binom{1+u}{2}\le2u$, the occupied-carrier contribution is at most $96$.
 Thus the two endpoints of candidates on empty carriers contribute at least
 $210-72-96=42$ to \eqref{eq:second-moment}.  Conjugate endpoints contribute
-equally, and therefore
+equally.  Moreover, every such endpoint $q$ belongs to a unique candidate
+$Q=\{q,\phi(q)\}$ on its unique mate carrier $\ell$, and
+$r_q=r_{\phi(q)}=\mu_\ell(Q)$.  Partitioning the endpoint contribution by
+these candidates therefore gives
 \[
   T:=\sum_{\ell\in\cE}\sum_{Q\in\cQ_\ell}
        \binom{\mu_\ell(Q)}2\ge21.
@@ -136,34 +139,94 @@ outside this union has at least $33$ legal pairs.
 \end{proposition}
 
 \begin{proof}[Computer-assisted proof, kernel checked]
-Represent $\F_{25}$ as $\F_5[\omega]/(\omega^2-2)$.  A base-field
-projectivity sends the two fixed selected points to a prescribed ordered
-pair.  Their stabilizer then sends the first admissible selected conjugate
-pair to
+Represent $\F_{25}$ as $\F_5[\omega]/(\omega^2-2)$, so
+$\phi(\omega)=-\omega$.  We first spell out the reduction to the certified
+row set.  Order the two selected fixed points.  Representatives of them are
+two independent vectors in $\F_5^3$; extend these to a basis and send that
+basis to the standard basis.  The resulting element of
+$\mathrm{PGL}(3,5)$ sends the ordered pair to
+\[
+ A=[0:0:1],\qquad B=[0:1:0].
+\]
+It commutes with $\phi$.  Any remaining selected point is off the line
+$AB$, since the selected set is an arc, and hence has a unique representative
+$P=[1:y:z]$.  Write
+\[
+ y=a+b\omega,\qquad z=c+d\omega
+ \quad(a,b,c,d\in\F_5).
+\]
+The determinants of $(A,P,\phi(P))$ and $(B,P,\phi(P))$ are nonzero scalar
+multiples of $b$ and $d$, respectively.  Thus $b,d\ne0$.
+
+Choose any one of the three selected nonfixed conjugate pairs and use one of
+its two points as $P$.  The base-field matrix
+\[
+ T_{y,z}[X:Y:Z]
+  =\bigl[X:\,-ab^{-1}X+b^{-1}Y:\,-cd^{-1}X+d^{-1}Z\bigr]
+\]
+is invertible, fixes $A$ and $B$ projectively, and commutes with $\phi$.
+It sends $P$ and $\phi(P)$ to
 \[
  [1:\omega:\omega],\qquad[1:-\omega:-\omega].
 \]
-Both transformations commute with Frobenius and preserve the arc and
-pair-extension predicates.
+Changing the ordering of the fixed points, the chosen selected orbit, or its
+chosen point changes the normalizing projectivity but not the legal-pair
+count.  Thus existence, rather than uniqueness, of this normalization is all
+that is used.
+
+Here is the precise correspondence with the finite rows.  The certificate
+uses the canonical representatives
+\[
+ [1:y:z],\qquad [0:1:z],\qquad [0:0:1]
+\]
+for projective points and a bijective enumeration of the $310$ nonfixed
+Frobenius pairs.  The standard pair above has orbit code $5$.  Compatibility
+with both $A$ and $B$ forces every selected nonfixed pair to have code at
+least $5$; injectivity makes the other two codes strictly larger than $5$.
+Ordering those codes gives a unique pair
+\[
+  6\le b'<c'\le309.
+\]
+Conversely, the row indexed by $(b',c')$ is the union of $\{A,B\}$, the
+standard pair, and the two pairs with codes $b',c'$.  Its determinant
+predicate says exactly that every triple in this eight-point set is
+noncollinear.  Hence every normalized semantic arc occurs among the
+\[
+ \binom{304}{2}=46{,}056
+\]
+rows that the dispatcher checks (rows failing the determinant predicate are
+discarded).
+
+The same coordinate dictionary identifies legal extensions, not merely old
+configurations.  The orbit-code enumeration is a bijection onto all nonfixed
+Frobenius pairs.  In a certified row, its freshness test says that the new
+pair is disjoint from the eight old points, and its determinant tests say
+that adjoining the pair leaves every triple noncollinear.  These are exactly
+the two conditions defining a fresh semantic legal pair.  Consequently the
+cardinality computed for a row is $L=\Npair(\cC)$.  Every base-field
+projectivity used above bijects the candidate pairs and preserves freshness
+and determinants, so this equality and the legal-pair count transport in
+both directions.
 
 Here $(E,M,N)=(17,12,10)$, so \eqref{eq:aggregate} reads
 $L=B+R-34$ and the target is the coupled inequality $B+R\ge66$.
 The finite layer below is load bearing for this coupling; separate bounds
 on invisible centers and collision moments do not prove it.
 
-After these reductions, the finite slice has $46{,}056$ rows and $1{,}189$
-residual class representatives.  Kernel-checked composition certificates
+Among the determinant-valid rows, the residual cover has $1{,}189$
+class representatives.  Kernel-checked composition certificates
 give a lower bound of $32$ on every representative.  Five representatives
 attain $32$.  The residual group has order $400$; orbit--stabilizer
 certificates give the five displayed orbit sizes, prove their pairwise
 disjointness, and show that their union has size $1600$.
 
 Strict certificates place every nonminimizing residual class above $32$,
-and an exhaustive dispatcher places every normalized equality row in the
-five-orbit union.  The two projective normalizations and invariance of the
-legal-pair count carry the lower bound and equality exhaustion back to the
-semantic arc.  Conversely, invariance of the legal-pair count under the
-residual action transports the five checked equalities across their orbits.
+and an exhaustive dispatcher places every determinant-valid normalized
+equality row in the five-orbit union.  The row correspondence and
+projective invariance just proved carry the lower bound and equality
+exhaustion back to every semantic arc, regardless of the normalization
+choices.  Conversely, the same invariance transports the five checked
+equalities across their residual orbits.
 Thus $32$ is the exact semantic minimum, with the stated complete equality
 classification up to normalization.  Section~\ref{sec:formalization}
 records the trust boundary and the generated-certificate layers.

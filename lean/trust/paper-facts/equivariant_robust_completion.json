@@ -294,10 +294,10 @@
   "paper": "equivariant_robust_completion",
   "pdfs": [
     {
-      "bytes": 129053,
-      "pages": 15,
+      "bytes": 136332,
+      "pages": 16,
       "path": "papers/equivariant-robust-completion/equivariant-robust-completion.pdf",
-      "sha256": "0ecdf6e1689a407a47da0f1c03693da2466ae3dd1221b6462e548ed4a97d691f"
+      "sha256": "65e8ee558c95c2c8f3935c2dd5b93a26162dc80346df2b57408e4ff28cb97a66"
     }
   ],
   "schema_version": 1,
@@ -316,7 +316,7 @@
     },
     {
       "path": "papers/equivariant-robust-completion/sections/03-pair-extension-criterion.tex",
-      "sha256": "c860924a891d5feff8f383c46549021d2f603eeba0d32d062df856c5b12ed1f3"
+      "sha256": "c64641b537cea4b285253a7b83a956092aaa8c99b11c317d5f9a0b4b481410a1"
     },
     {
       "path": "papers/equivariant-robust-completion/sections/04-collision-correction.tex",
@@ -324,19 +324,19 @@
     },
     {
       "path": "papers/equivariant-robust-completion/figures/mate-line-correction.tex",
-      "sha256": "624794e1aee657b1e9a8e2b4bf1573b811b9dc36d3f1a54ef537b1edeedf6d80"
+      "sha256": "e2937501d5814ae2692d62061be1d118a613bc7c6f2ffe212d8be93e0732a0e5"
     },
     {
       "path": "papers/equivariant-robust-completion/sections/05-eight-arcs-q25.tex",
-      "sha256": "cb3dd2edb6858828c4370f3c843d2c610f6bf53e7ea1a9dd0e43cb3dd3d03e4e"
+      "sha256": "6bd6422fd33d8036a783750efba32c54ee7e485aa2f2395391e0b7520c72d1f9"
     },
     {
       "path": "papers/equivariant-robust-completion/sections/06-robust-repair.tex",
-      "sha256": "aca04962b60869f9d669b72c46f90b9ec026cbb73474d9abf03b88118e6ef7fa"
+      "sha256": "0e0bb2ccaab03829e01817ba36f11626abee3a9ca81be6210fea9c8eca329cba"
     },
     {
       "path": "papers/equivariant-robust-completion/sections/07-formal-verification.tex",
-      "sha256": "b4dc3a07e78966b4f8327d16f443ee5e7cac4139b218c763b2dceb214f9cda6e"
+      "sha256": "419d4be7aa10efa727471065c97301c148d35c61833b32c1f83ac444b12bfb25"
     },
     {
       "path": "papers/equivariant-robust-completion/sections/08-conclusion.tex",
