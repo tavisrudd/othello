@@ -27,7 +27,7 @@ including its parity-check geometry and \(A_5\) stabilizer.
 
 Coset-leader ambiguity then recovers a conference matrix on six axes up to
 switching and global negation. Either representative satisfies \(B^2=5I\),
-and triangle holonomy recovers the
+and its triangle products recover the
 support cubic and the integral order \(\mathbb Z[B]\simeq\mathbb Z[\sqrt5]\).
 The proof combines a universal chord-defect identity with decoder ambiguity
 and the orbital pentagon.  Uniformly, any \(k\)-arc whose uncovered locus is a
