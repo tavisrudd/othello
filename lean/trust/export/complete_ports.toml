@@ -66,7 +66,7 @@ reliability and bounded-radius erasure calculus, together with the completed
 projective twisted-cubic parameters and exact cubic/axis port rows.
 """
 
-readme_anchor = "  upper bounds alone."
+readme_anchor = "  axiom audit."
 
 readme_bullet = """- `trust/manifests/complete_ports.json` content-addresses the bounded
   repair-port boundary: the coefficient-port object and intrinsic reconstruction
