@@ -661,6 +661,17 @@ any geometric or QDM provider.
    supplies exhaustive hostile finite models.  Do
    not add loops, roots, surjectivity, Fitting, Gamma data, or Stokes data to
    the active proof.
+   The tempting replacement
+   \(\exists x\in L_X\cap\operatorname{im}P_X\) with
+   \(\epsilon_XM_Xx\ne0\), for the pole-free effective-Novikov lattice
+   \(L_X\), is not a closed endpoint theorem.  The cubic rank-four
+   hypergeometric module is globally irreducible; its rank-two
+   zero-exponential factor is only a local formal block.  Hence the proposed
+   Golyshev-`D3` rank-one algebraic subconnection is the wrong object.
+   Edgewise reflection would additionally need a strict
+   denominator-clearing theorem because Iritani's Laurent comparison does not
+   preserve the two native chamber lattices.  The exact falsifier and the
+   existing C907 certificate are recorded in the source dossier.
 5. The source/referee frontier is the table
    `../2026-08-21-c925-referee-source-substitution-table.md`.  It now separates
    independent derivations from shared Fourier lineage and records the native

@@ -167,6 +167,16 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   `m=1,3,4,13` regressions and Lean's all-`m` branch-count theorem test only
   the consumer arithmetic, not the geometric providers.
 
+  A proposed pole-free-lattice repair is now closed.  Although restricting
+  \(\epsilon M\) to an effective-Novikov/nonnegative-\(z\) lattice can make
+  individual evaluations coefficientwise meaningful, Iritani's Laurent edge
+  comparison does not automatically preserve the native chamber lattices.
+  More decisively, the cubic rank-four hypergeometric module is globally
+  irreducible: its rank-two zero-exponential factor is a local formal block,
+  not the Golyshev-`D3` algebraic subconnection proposed as a pole-free
+  witness.  The exact parameter-difference certificate and the
+  denominator-clearing boundary are in D10 of the no-Stokes dossier.
+
   **Trust boundary:** the direct all-center edge provider uses Iritani's
   comparison and derived augmentation row plus the KKPYY/direct-formal marked
   spectral projector.  Gu--Yu--Yu is a simple-wall corroboration, not a
@@ -199,9 +209,11 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   The false naked row-null ideal has been removed: comparison now lands in an
   augmented operator-row category, whose output-kernel ideal is genuinely
   two-sided.  The older pointed primitive-sixth/fivefold-center route remains
-  conditional, but it has been superseded: the intrinsic marked-projector
-  plus algebraic adjoint row supplies an unconditional blowup invariant for
-  every \(m\).  Generic-point localization proves rank is the universal
+  conditional, but it has been superseded as a consumer architecture: the
+  intrinsic marked-projector plus algebraic adjoint row would supply a blowup
+  invariant for every \(m\) once its common row/projector object and cubic
+  full-row witness are constructed.  Those source gates are still open.
+  Generic-point localization proves rank is the universal
   support-null \(K_0\)-character, and the whole full-rank comparison defect is
   one boundary-to-rank leakage covector.  Wall mutations and multiplicity-one
   characters kill that covector when their analytic hypotheses hold; Hodge,

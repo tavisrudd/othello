@@ -915,6 +915,63 @@ projector and rank-row square.  No common path completion, Stokes matrix,
 center classification, or correction-nullity theorem is consumed after this
 local rowed object exists.
 
+### Rejected pole-free-intersection repair
+
+A proposed way to avoid the opposite-\(z\) completions was to replace
+(D10.2) by
+
+\[
+ D_L(Y):\quad \exists x\in L_Y\cap\operatorname{im}P_Y
+             \text{ with }\rho_Y(x)\ne0,
+\]
+
+where \(L_Y\) is the effective-Novikov, nonnegative-\(z\) lattice.  This
+proposal separates two real questions, but it does not close either one.
+
+First, restriction to \(L_Y\) can make
+\(\rho_Y(x)=\epsilon_YM_Yx\) coefficientwise meaningful under an explicit
+local-finiteness/homogeneity hypothesis.  It does **not** follow that
+Iritani's comparison preserves these native lattices.  The comparison is an
+isomorphism only after Laurent extension in the exceptional variable.
+Reflection of \(D_L\) therefore needs a new elementwise denominator-clearing
+or strict-intersection theorem; an infinite Laurent tail need not be cleared
+by one native monomial.  Flat base change preserving a finite kernel does not
+by itself identify the two different chamber lattices or their completed
+intersections.
+
+Second, the suggested cubic provider is false for the actual cubic QDM.  Its
+normalized scalar operator is
+
+\[
+ \theta^4-x(\theta+1/3)(\theta+2/3).
+\]
+
+The hypergeometric irreducibility criterion applies because the four left
+parameters are \(0\) and the right parameters are \(1/3,2/3\), with no
+integral cross-difference.  Thus the global rank-four hypergeometric
+differential module is irreducible.  The rank-two eigenvalue-zero block is a
+local formal/Stokes-graded block at the irregular end, not a rank-one or
+rank-two algebraic subconnection.  On the Picard-rank-one Fano homogeneous
+lattice, a nonzero homogeneous pole-free vector fixed by the stable projector
+would generate a proper algebraic differential submodule, contradicting this
+irreducibility.  The C907 Sage certificate already checks the parameter
+differences and records
+`global_hypergeometric_module_irreducible = true` and
+`rank_two_formal_block_can_be_proper_global_subobject = false`.
+
+The apparent Golyshev `D3` factor is a regularized-period/right-determinant
+statement (and in several tracked notes concerns other del Pezzo
+threefolds).  Regularization is not an inclusion of a first-order
+subconnection into the cubic's unregularized rank-four QDM.  It therefore
+cannot supply \(D_L(X)\).  A finite polynomial ansatz can be retained as a
+negative regression, but it cannot overturn the irreducibility theorem.
+
+Consequently this repair does not move the live frontier.  A different
+lattice large enough to meet the local formal block would again require an
+edgewise strictness theorem and an independently proved cubic witness; if it
+contains sectorial sums, it has reintroduced the Stokes connector under a new
+name.
+
 ## The exact one-sided source theorem
 
 The loosest consumer has removed the strongest clauses of the former
@@ -1007,32 +1064,35 @@ proved separately.
    branch formula makes the cubic \(r=3\) source visible, but the same formula
    gives primitive \(C_3\)-visible rank on the \(r=6\) projective endpoint.
    This is an endpoint countercalculation, not a missing descent lemma.
-2. **The marked-projector route survives that falsifier.**  KKPYY and the
-   C924 calculation provide an intrinsic projector onto all rank-two
-   nonsemisimple nonzero-\(\delta^\sharp\) atoms.  It is nonzero and row-visible
-   for \(X\times\mathbf P^m\), and zero for projective space.
-3. **The two squares (D10.1) are closed.**  Projector naturality follows from
-   connection naturality plus canonical spectral decomposition.  The row
-   square is checked on Gu--Yu--Yu's Proposition 5.2 basis and extended by
-   finite \(R\)-linearity.  No formal monodromy, Gamma lattice, sectorial
-   solution, or Stokes comparison is consumed.
+2. **The marked-projector consumer survives that falsifier,
+   conditionally.**  KKPYY and the C924 calculation provide the formal stable
+   projector onto the rank-two nonsemisimple nonzero-\(\delta^\sharp\) union,
+   and projective space has zero such projector.  Cubic visibility by the full
+   algebraic row on a common legal object remains open.
+3. **The two squares (D10.1) are separately source-derived, not jointly
+   instantiated.**  Projector naturality follows in the positive-\(z\) formal
+   F-bundle from connection naturality plus canonical spectral decomposition.
+   The row square follows in the negative-\(z\) completed Fourier source.
+   Their common domain and the composite \(\rho P\) are not supplied.
 4. **The row is allowed a larger codomain.**  This removes the artificial
    demand that the Givental series be an endomorphism-valued row over the
    original \(\mathbf C[z]\)-ring.  What remains load-bearing is only that the
    row is defined on the same QDM module on which the atom projector acts.
-5. **The resulting argument is all-\(m\).**  Correction atoms are
-   irrelevant because their row is zero, so no threefold-center
-   classification or packet-arity bound remains.
+5. **The resulting consumer is uniform in \(m\), but the geometric theorem is
+   not landed.**  If the common rowed object and cubic full-row witness are
+   supplied, correction atoms are irrelevant and the Lean telescope works
+   for every \(m\).  The rejected pole-free-intersection proposal does not
+   supply those inputs because the cubic global hypergeometric module is
+   irreducible.
 6. **The one-sided global-core and composed-map architectures remain valid
    fallbacks.**  They are no longer the first source test.  AKMW/GYY do not
    currently supply their marked endpoint maps as a package.
 
-The live task is proof packaging: retain the exact basis-level source
-derivation, the intrinsic-horizontal explanation that removes adjacent
-completion composition, and the endpoint witness/emptiness check in the C925
-routing documents and Lean reviewer surface.  Do not reopen the old
-fixed-phase, deck, Hodge-height, or Stokes routes unless this exact algebraic
-chain is falsified.
+The live task is source construction, not further consumer packaging: either
+construct a legal row/projector object and its cubic witness, or find a
+different fibrewise functional whose edge square is source-derived.  Do not
+resume the pole-free algebraic-subconnection, fixed-phase, deck, Hodge-height,
+or Stokes routes without answering their recorded countermodels.
 
 The finite plumbing regression is
 `cubic-threefolds-tasks/c925-rowed-projector-sanity.hs`.  It requires each
