@@ -1,3 +1,16 @@
+__pycache__/
+*.py[cod]
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.run.xml
+*.synctex.gz
+*.xdv
 blueprint/src/*.paux
 blueprint/src/generated-references.tex
 blueprint/lean_decls
