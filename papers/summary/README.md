@@ -9,17 +9,17 @@
 
 This programme studies **what survives information loss**. Across geometry,
 coding theory, and quantum information, a rich object is replaced by a sparse
-shadow: a deep-hole locus, a minimum-word layer, a repair port, a marginal
-atlas, or a marked spectral packet. The central question is whether that shadow
-still determines its source---or whether failure of generic behaviour forces
-the source onto a **rigid exceptional carrier**.
+shadow. Examples include deep-hole loci, minimum-word layers, repair ports,
+marginal atlases, and marked spectral packets. The central question is whether
+the shadow still determines its source, or whether failure of generic behaviour
+forces the source onto a **rigid exceptional carrier**.
 
 A recurring method is to identify the exact ambiguity left by the coarse
-shadow, then retain the **smallest extra datum that removes it**: coefficients
-rather than supports, coherent views rather than independent quotients,
-orientations rather than unordered sheets, occurrence markers rather than
-unmarked types, or a multiplication map rather than its saturated image. This
-produces reconstruction, classification, and quantitative rigidity theorems.
+shadow, then retain the **smallest extra datum that removes it**. Coefficients
+refine supports, coherent views replace independent quotients, and markings
+restore information lost by unordered or saturated invariants. The resulting
+theorems reconstruct hidden objects, classify exceptional loci, and turn
+approximate agreement into exact algebraic rigidity.
 
 A second theme is **persistence**. Once a marked obstruction has been isolated,
 the papers determine whether it survives operations such as concatenation,
