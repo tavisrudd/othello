@@ -217,6 +217,49 @@ theorem eventually_prescribedPorts
   exact prescribedPorts_of_outerDualDistance
     I e (O N) j x r hother (hN₁ N hNN₁) hzero
 
+/-- **Common-outer radius-three transfer.**  Two inner codes with dual distance at least four
+and nontrivial duals can use the same outer family.  Eventually, every block simultaneously
+carries exact copies of both radius-three support and coefficient ports.  This is the formal
+transfer statement used by the paper's matched asymptotic separation; the concrete seed-port
+identifications are separate finite inputs. -/
+theorem eventually_radiusThree_prescribedPortPair
+    {κ₁ κ₂ : Type*}
+    [Fintype κ₁] [DecidableEq κ₁] [Fintype κ₂] [DecidableEq κ₂]
+    (I₁ : Submodule K (κ₁ → K)) (e₁ : L ≃ₗ[K] I₁)
+    (I₂ : Submodule K (κ₂ → K)) (e₂ : L ≃ₗ[K] I₂)
+    (hdual₁ : dualCode I₁ ≠ ⊥) (hdual₂ : dualCode I₂ ≠ ⊥)
+    (hdist₁ : 4 ≤ dualDist I₁) (hdist₂ : 4 ≤ dualDist I₂)
+    (O : ∀ N : ℕ, Submodule L (Fin N → L))
+    (houter : OuterDualDistanceTendsToInfinity O)
+    (x₁ : κ₁) (x₂ : κ₂) :
+    ∃ N₀ : ℕ, ∀ N, N₀ ≤ N → ∀ j : Fin N,
+      (repairHypergraph
+            (concatenatedCode I₁ e₁ ((O N).restrictScalars K)) (j, x₁) 3 =
+          embedHypergraph (blockEmbedding j) (repairHypergraph I₁ x₁ 3) ∧
+        coefficientPort
+            (concatenatedCode I₁ e₁ ((O N).restrictScalars K)) (j, x₁) 3 =
+          (fun z => singleBlockWord j z) '' coefficientPort I₁ x₁ 3) ∧
+      (repairHypergraph
+            (concatenatedCode I₂ e₂ ((O N).restrictScalars K)) (j, x₂) 3 =
+          embedHypergraph (blockEmbedding j) (repairHypergraph I₂ x₂ 3) ∧
+        coefficientPort
+            (concatenatedCode I₂ e₂ ((O N).restrictScalars K)) (j, x₂) 3 =
+          (fun z => singleBlockWord j z) '' coefficientPort I₂ x₂ 3) := by
+  have hzero₁ : ((5 : ℕ) : WithTop ℕ) ≤ pointedZeroFunctionalCost I₁ e₁ x₁ := by
+    have hfour : 5 ≤ 2 * dualDist I₁ := by omega
+    exact (WithTop.coe_le_coe.mpr hfour).trans
+      (two_mul_dualDist_le_pointedZeroFunctionalCost I₁ e₁ x₁ hdual₁)
+  have hzero₂ : ((5 : ℕ) : WithTop ℕ) ≤ pointedZeroFunctionalCost I₂ e₂ x₂ := by
+    have hfour : 5 ≤ 2 * dualDist I₂ := by omega
+    exact (WithTop.coe_le_coe.mpr hfour).trans
+      (two_mul_dualDist_le_pointedZeroFunctionalCost I₂ e₂ x₂ hdual₂)
+  obtain ⟨N₁, hN₁⟩ := eventually_prescribedPorts I₁ e₁ O houter x₁ 3 hzero₁
+  obtain ⟨N₂, hN₂⟩ := eventually_prescribedPorts I₂ e₂ O houter x₂ 3 hzero₂
+  refine ⟨max N₁ N₂, ?_⟩
+  intro N hN j
+  exact ⟨hN₁ N (le_trans (le_max_left N₁ N₂) hN) j,
+    hN₂ N (le_trans (le_max_right N₁ N₂) hN) j⟩
+
 /-- For an MDS inner code, the pointed zero-functional cost is exactly twice the minimum dual
 weight.  In the `[n,k]` convention used here this is `2 * (k + 1)`. -/
 theorem HasMDSDualParameters.pointedZeroFunctionalCost_eq
@@ -312,6 +355,7 @@ theorem eventually_mdsMinimumCoefficientFingerprints
 #print axioms RepairPorts.prescribedPorts_of_outerDualDistance
 #print axioms RepairPorts.eventually_pointedConfinement_iff_zeroCost
 #print axioms RepairPorts.eventually_prescribedPorts
+#print axioms RepairPorts.eventually_radiusThree_prescribedPortPair
 #print axioms RepairPorts.HasMDSDualParameters.pointedZeroFunctionalCost_eq
 #print axioms RepairPorts.eventually_mdsMinimumCoefficientFingerprints
 

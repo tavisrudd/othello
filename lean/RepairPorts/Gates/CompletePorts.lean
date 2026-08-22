@@ -39,6 +39,7 @@ twisted-cubic code parameters, radius-four stabilization, and exact cubic/axis p
 #print axioms RepairPorts.prescribedPorts_of_outerDualDistance
 #print axioms RepairPorts.eventually_pointedConfinement_iff_zeroCost
 #print axioms RepairPorts.eventually_prescribedPorts
+#print axioms RepairPorts.eventually_radiusThree_prescribedPortPair
 #print axioms RepairPorts.HasMDSDualParameters.pointedZeroFunctionalCost_eq
 #print axioms RepairPorts.eventually_mdsMinimumCoefficientFingerprints
 #print axioms RepairPorts.portReliability_delete_contract

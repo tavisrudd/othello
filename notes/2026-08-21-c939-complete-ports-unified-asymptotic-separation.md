@@ -2,7 +2,7 @@
 
 **Lane**: `complete-ports`
 
-**Status**: ACTIVE — PHASE A SEED AND TRANSFER AUDIT
+**Status**: ACTIVE — PHASE B HUMAN PROOF AND LEAN BOUNDARY
 **Allocated**: 2026-08-21
 **Source assessment**:
 `notes/2026-08-21-c678-complete-ports-percentile-referee.md`
@@ -134,3 +134,99 @@ Read the complete-ports expert dossier and the applicable Lean/reproducibility
 instructions, then audit the Proposition 6.3 seed pair for exact `z_x(I)`,
 common-outer compatibility, and the strongest matched asymptotic statement.
 Do not begin by moving sections.
+
+## Phase A result — seed and transfer audit
+
+Phase A passes.  Let (I_{\mathrm{dis}}) and (I_{\mathrm{ov}}) be the two
+row-span codes over \(\mathbb F_7\) displayed in Proposition 6.3, with
+distinguished coordinate (x=0).  The proof is structural once the two
+finite representations are checked.  Direct elimination gives rank (4),
+no dependent triples, and the circuit-hyperplane lists
+\[
+ \{0145,0236,2345\},\qquad \{0123,0256,3456\}.
+\]
+The committed C676 replay bundle independently verifies this finite input
+and the following derived data:
+
+- both matrices have rank (4), every three columns are independent, and
+  each represented matroid has exactly three circuit-hyperplanes;
+- the two complete pointed subset profiles agree;
+- the radius-three minimal repair clutters are
+  \(\{145,236\}\) and \(\{123,256\}\), respectively; and
+- the homogeneous success counts give
+  \(2s^3-s^6\) and \(2s^3-s^5\).
+
+Replay:
+
+```text
+python3 notes/2026-07-26-c676-pointed-tutte-filtration.py \
+  --check notes/2026-07-26-c676-pointed-tutte-filtration.json
+```
+
+The replay reports certificate SHA-256
+`8096230e66f634c820ae7ec4bacd9b2493006782ff02b8be3a8c7e1caf80de07`.
+
+The certificate is not the mathematical explanation.  Structurally, a
+rank-four sparse paving matroid has uniform rank on every subset except its
+four-element circuit-hyperplanes.  Its pointed subset profile is therefore
+determined by the ground-set size and the numbers of circuit-hyperplanes
+through and away from the target.  Both seeds have the same data
+\((n,r,h_x,h_{\bar x})=(7,4,2,1)\), so their full pointed profiles agree.
+Deleting the target from the two incident circuit-hyperplanes instead gives
+two three-helper repairs.  Their intersection size is zero in the first seed
+and one in the second, so inclusion--exclusion gives, without enumeration,
+\(2s^3-s^6\) and \(2s^3-s^5\).  Thus computation checks the displayed
+representations; sparse-paving structure proves every conceptual claim.
+
+### Exact parameter and pointed-cost proof
+
+Both seeds are \([7,4,3]_7\) codes.  Rank (4) gives dimension (4).
+A circuit-hyperplane is a rank-three four-set, so a nonzero primal linear
+functional vanishes on four columns and the primal distance is at most
+three.  If five columns lay in a hyperplane, all five of their four-subsets
+would be dependent; the exhaustive circuit-hyperplane list rules this out.
+Thus the distance is exactly three.
+
+Every three columns are independent and a dependent four-set exists, hence
+the dual distance is exactly four.  In each seed a circuit-hyperplane through
+(x) supplies a weight-four dual word through (x); after normalization this
+shows \(\mu_x(0)\leq4\).  The dual-distance bound gives the reverse inequality,
+so
+\[
+ d(I_{\mathrm{dis}}^\perp)=d(I_{\mathrm{ov}}^\perp)=4,
+ \qquad
+ \mu_x(0)=4,
+ \qquad
+ z_x(I)=\mu_x(0)+d(I^\perp)=8.
+\]
+At radius (r=3), the exact transfer gate is (r+1<z_x(I)), namely
+(4<8), and therefore passes for both seeds.
+
+### Sharp matched-family theorem
+
+Use either seed as an inner code and use the same asymptotically good
+\(\mathbb F_{7^4}\)-linear outer family (O_N\leq\mathbb F_{7^4}^N), chosen
+with both primal and dual relative distances bounded away from zero.  The two
+concatenated families have, for every (N), the same length (7N), the same
+dimension (4K_N), and the same lower bound (3D_N) on minimum distance.
+They are therefore asymptotically good over the same fixed alphabet
+\(\mathbb F_7\), with matched rate and distance bounds.
+
+Since (d(O_N^\perp)\to\infty), for all sufficiently large (N) the exact
+prescribed-port theorem applies simultaneously to both seeds.  At every one
+of the (N) coordinates \((j,x)\), a designated class of density exactly
+(1/7), the radius-three repair clutter is a literal block embedding of the
+corresponding seed clutter.  Consequently the two families have:
+
+- identical full pointed subset profiles and pointed-Tutte specializations;
+- identical alphabet, block length, dimension, distance lower bound,
+  designated-class density, locality (3), and number (2) of minimum
+  repairs at every designated target; but
+- distinct radius-three homogeneous reliability functions
+  \(2s^3-s^6\) and \(2s^3-s^5\), hence distinct bounded-EXIT curves.
+
+The current seeds do **not** match availability: the disjoint seed has
+matching number (2), while the overlapping seed has matching number (1).
+The theorem therefore does not claim that all conventional local data agree.
+This is the strongest honest common-outer lift of Proposition 6.3 without a
+new seed-search program.
