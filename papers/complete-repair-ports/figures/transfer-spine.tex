@@ -21,10 +21,11 @@
 \node[view, below=of cost, xshift=-38mm] (support) {support clutter\\availability, tolerance};
 \node[view, right=of support] (coeff) {normalized coefficients\\scalar decoder};
 \node[view, right=of coeff] (prob) {survival event\\reliability, bounded EXIT};
-\draw[arrow] (copies.south) -- ++(0,-3mm) -| (support.north);
-\draw[arrow] (copies.south) -- ++(0,-3mm) -| (coeff.north);
+\draw[arrow] (port.south) -- ++(0,-3mm) -| (support.north);
+\draw[arrow] (cost.south) -- ++(0,-3mm) -| (coeff.north);
+\draw[arrow] (copies.east) -- ++(3mm,0) |- (prob.east);
 \draw[arrow] (support.south) -- ++(0,-6mm) -|
-  node[pos=.65, below, font=\scriptsize] {determines} (prob.south);
+  node[pos=.55, below=1mm, font=\scriptsize] {determines} (prob.south);
 \end{tikzpicture}
 \caption{The transfer spine.  In the fixed-inner, $L$-linear concatenation
 regime, weighted block-functional costs give an exact confinement gate.
