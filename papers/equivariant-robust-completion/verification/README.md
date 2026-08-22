@@ -1,9 +1,8 @@
-# Verification boundary
+# Verification
 
-The structural argument in the manuscript is human-scale mathematics with a
-Lean development in the shared finite-geometry project.  Its exceptional
-normalized order-25 census is isolated in the Mathlib-only
-`finitegeom-q25-certificates` package.  This paper pins that package in
+The structural argument is given in the manuscript. Its exceptional normalized
+order-25 census is checked by the separate Mathlib-only
+`finitegeom-q25-certificates` package. This paper pins that public package in
 `q25-certificate-pin.json` by repository commit and manifest digest.
 
 Artifact locator:
@@ -12,12 +11,6 @@ Artifact locator:
 https://github.com/tavisrudd/finitegeom-q25-certificates
 commit d4e910cf01819a8678fd84422bb18fe23f4d6695
 MANIFEST.json sha256 4f3d252a453c7217a8a8aaf7b27374794396e2d0b4101c7c8b85683deaa52292
-```
-
-The human-scale structural sources are separately frozen at:
-
-```text
-https://github.com/tavisrudd/othello/tree/9977af02cfed699c1c14802242a6f500896164bc/lean
 ```
 
 The package gate checks all normalized rows in the two-fixed-point slice.  It
@@ -35,7 +28,29 @@ bad-triple witnesses, and literal links to canonical representatives.  These
 are kernel checked, but their review surface grows with the rows; the package
 does not replace the literal links with a proved canonicalization algorithm.
 
-From a checkout of the pinned certificate package, the full package command is:
+The paper-only release check is:
+
+```text
+make check
+```
+
+It scans every public text file for private paths and process vocabulary,
+validates the metadata and certificate pin, builds the manuscript in a clean
+temporary directory, rejects TeX warnings, and requires the tracked PDF to
+match that build byte for byte.
+
+To add a source-only check of an existing certificate checkout, run:
+
+```text
+nix develop .#manuscript --command python3 verification/verify_release.py \
+  --certificate-root /path/to/finitegeom-q25-certificates
+```
+
+This compares the checkout commit and `MANIFEST.json` digest with the paper's
+pin. It does not build the certificate package.
+
+From a checkout of the pinned certificate package, the independent full
+package command is:
 
 ```text
 nix run .#verify
@@ -50,11 +65,5 @@ This is a 9,511-module build and the first run downloads the pinned
 Lean/mathlib cache.  Wall-clock and peak-memory numbers are not stated because
 they vary with cache state and build parallelism.
 
-That command includes the large certificate build.  Verifying only that this
-paper has not drifted to a different package identity is source-only: compare
-the checkout commit with `commit`, hash its `MANIFEST.json`, and compare that
-digest with `manifest_sha256` in `q25-certificate-pin.json`.
-
-The standalone paper export carries this directory unchanged.  Publishing the
-certificate commit and running the full package command are separate release
-actions; neither is performed by the paper exporter.
+That command includes the large certificate build. It is not invoked by this
+paper's verifier.

@@ -10,11 +10,6 @@
   "canonical_input_sha256": "62aa26c98deb98cb786fa1b21957b91ec16b1e2bd2a6319129c31449eb0effe3",
   "verify_command": "nix run .#verify",
   "expected_final_output": "MANIFEST.json ok (9511 modules)",
-  "structural_source": {
-    "repository": "https://github.com/tavisrudd/othello",
-    "commit": "9977af02cfed699c1c14802242a6f500896164bc",
-    "path": "lean"
-  },
   "gate": "TavisRuddFiniteGeom.Certificates.Q25",
   "terminals": [
     "TavisRuddFiniteGeom.Certificates.Q25.PairCertificate.allRows",

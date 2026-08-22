@@ -11,7 +11,7 @@
       devShells = forAllSystems (system:
         let
           pkgs = nixpkgs.legacyPackages.${system};
-          base = with pkgs; [ tectonic gnumake git coreutils ];
+          base = with pkgs; [ tectonic gnumake git coreutils python3 ];
         in {
           default = pkgs.mkShell { packages = base; };
           manuscript = pkgs.mkShell { packages = base; };

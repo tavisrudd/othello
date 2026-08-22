@@ -5,11 +5,14 @@
 **Title:** *Frobenius-equivariant pair extension and robust repair of
 eight-arcs.*
 
-## Headline
+[Read the paper (PDF)](equivariant-robust-completion.pdf)
 
-The paper studies arcs invariant under a quadratic Frobenius involution. It
-proves an exact orbit-valued criterion for adjoining conjugate pairs, identifies
-the invisible-center and collision corrections that make the count exact, and
+## Results and scope
+
+The paper studies arcs—sets of projective points with no three collinear—that
+are invariant under a quadratic Frobenius involution. It proves an exact
+orbit-valued criterion for adjoining conjugate pairs, identifies the
+invisible-center and collision corrections that make the count exact, and
 turns the count into a robust orbit-replacement theorem.
 
 Every invariant eight-arc in PG(2,25) has at least four
@@ -31,27 +34,41 @@ GF(121), every GF(11)-rational six-arc has 4,180 legal paired extensions and
 selected. This is a corollary of the general carrier count, not a separate
 Clebsch theorem.
 
-## Evidence and status
+## Verification boundary
 
 The quadratic criterion, semantic global count, collision correction, and
 robust exchange theorem have human-scale Lean support.  The normalized finite
 step in the PG(2,25) classification is pinned to a separate
-Mathlib-only certificate package; the two projective normalizations and
-semantic transport remain manuscript arguments.  The certificate's generic
-and row-specific trust surfaces, the classical projective-geometry inputs, and
-the bounded priority boundary are stated explicitly.
+Mathlib-only [certificate package](https://github.com/tavisrudd/finitegeom-q25-certificates);
+the two projective normalizations and semantic transport remain manuscript
+arguments. The public package pins Lean and mathlib and checks all 46,056
+normalized rows. The paper records which claims are kernel checked, which are
+proved in the manuscript, and which classical inputs are imported.
 
-The directory contains the focused LaTeX manuscript, bibliography, PDF,
+The repository contains the focused LaTeX manuscript, bibliography, PDF,
 Zenodo metadata, and verification surface. The manuscript entry point is
 `equivariant-robust-completion.tex`; its numbered sections live under
-`sections/`. It is a staged paper release; publication identifiers, final
-export choices, and submission remain author decisions.
+`sections/`. Exact artifact pins and reproduction instructions are in
+[`verification/README.md`](verification/README.md).
 
 ## Build
 
 Run `make check` from the repository root. The command enters the pinned Nix
-manuscript environment, builds the paper with Tectonic, and rejects LaTeX or
-layout warnings.
+manuscript environment, checks the public release surface and certificate pin,
+rebuilds the paper with Tectonic, rejects LaTeX or layout warnings, and requires
+the tracked PDF to match the clean build byte for byte. To refresh the PDF after
+a manuscript edit, run `make update-pdf`.
+
+The paper verifier deliberately performs only a source-identity check on an
+existing certificate checkout. It never starts the certificate package's large
+Lean build; that independent check is documented separately in the verification
+instructions.
+
+## Citation
+
+The archival record is [doi:10.5281/zenodo.22051736](https://doi.org/10.5281/zenodo.22051736).
+
+## License
 
 The manuscript and repository metadata are licensed under
 [CC BY 4.0](LICENSE).

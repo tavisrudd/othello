@@ -142,18 +142,13 @@ memory estimate, since those depend strongly on the Nix cache and build
 parallelism.  Checking only the repository commit and manifest digest is the
 lightweight identity check; it is not a substitute for the full kernel build.
 
-The human-scale development is source-pinned separately at
-\href{https://github.com/tavisrudd/othello/tree/9977af02cfed699c1c14802242a6f500896164bc/lean}%
-{the structural source tree}, commit \texttt{9977af02cfed}.
-The module and declaration paths in the table above are relative to that
-tree.  This pin fixes the structural sources reviewed with the manuscript;
-it is not the Q25 generated package and does not import that package.
-The exact pin and trust boundary are recorded in
-\path{verification/q25-certificate-pin.json} and
-\path{verification/README.md}.  The standalone paper archive does not vendor
-the shared human-scale Lean development listed above; its structural theorem
-sources and the separately pinned finite certificate have distinct release
-boundaries.
+The module and declaration paths in the table above identify the structural
+statements used during development.  Their source tree is not part of this
+release, so the manuscript arguments, rather than a public formal artifact,
+are the review surface for those reductions.  The normalized exceptional
+classification has the narrower reproducible boundary described above: its
+exact public repository pin and manifest digest are recorded in
+\path{verification/q25-certificate-pin.json}.
 The manuscript PDF is reproduced from its source directory with
 \begin{verbatim}
 make check
