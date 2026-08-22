@@ -253,8 +253,41 @@ invariants (Göttsche–Pandharipande recursion), and one must decide whether an
 integral cocharacter of the rank-\((k+1)\) Novikov torus has a 5-cycle on the
 \(k+3\) sheets.  A 5-cycle would show that the loop-stabilizer route needs an
 embedding or normal-bundle argument for every prime \(\ge5\); no 5-cycle
-(and none for 7 on \(k\le8\)) would support 11.1 for surfaces.  This is a
-bounded exact computation, not yet run.
+(and none for 7 on \(k\le8\)) would support 11.1 for surfaces.
+
+**Run (this branch).**  The small quantum product of \(\mathrm{Bl}_k\mathbf P^2\)
+needs only classes with \(c_1\cdot\beta\in\{1,2,3\}\); by adjunction and
+connectedness these are the \((-1)\)-classes, the conic classes
+(\(\beta^2=0\)), and the line-type classes (\(\beta^2=1\)), each with
+invariant 1 (Göttsche–Pandharipande; the counts are classical).  Scripts:
+`notes/cubic-threefolds-tasks/c925-fable-dp-sheet-cycles.py` (class
+enumeration, product matrices, numeric boundary-monodromy tracker),
+`c925-fable-dp-puiseux-check.py` (exact lower Newton polygon of the
+characteristic polynomial of \(c_1\ast\) along \(z_j=z_{0,j}t^{b_j}\), edge
+factorization, one further Newton–Puiseux step at rational repeated roots),
+and `c925-fable-dp-newton-scan.py` (the exact method over a box of
+cocharacters).  Sanity: \(F_1\) reproduces the 3-cycle and the pair of
+2-cycles; class counts for \(k=4\) are \(10/5/5\).
+
+Findings so far:
+
+- The numeric tracker with a large-radius fallback reported 5-cycles on
+  \(\mathrm{Bl}_4\mathbf P^2\) for \(b=(0,1,1,0,-1)\) and on
+  \(\mathrm{Bl}_5\mathbf P^2\) for \(b=(-1,0,-1,-1,0,0)\) and
+  \(b=(0,-1,1,0,1,-1)\).  All three are **refuted exactly**: the Newton
+  polygons have edges of lengths \(3,3,1\) (resp. \(3,5\); \(3,4,1\)) with
+  slopes \(2/3,1,2\) (resp. \(2/3,1\); \(2/3,1,2\)), and every integral-slope
+  edge polynomial splits into distinct rational linear factors, so those
+  branches are unramified.  The true cycle types are \((3,1^4)\) and
+  \((3,1^5)\).  Large-radius loops cross the discriminant; the exact method is
+  authoritative.
+- Exact scan, box \(|b_j|\le1\): certified cycle lengths on resolved edges are
+  \(\{1,2,3\}\) for \(k=4\); edges whose edge polynomial has a repeated root
+  at fractional slope, or a repeated algebraic root, are listed as
+  unresolved (they need a further Puiseux step over an algebraic extension).
+  No edge with denominator \(\ge5\) has appeared.  Coverage is therefore
+  partial: "no 5-cycle on the resolved part of the box" is the current
+  statement, not a theorem.
 
 ### 11.4 Closed lens: Frobenius as a canonical extra symmetry
 
