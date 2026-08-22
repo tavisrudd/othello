@@ -922,6 +922,121 @@ does not satisfy that square at general Novikov parameters.  Existence of
 another intrinsic functional is an open design question, not a theorem
 asserted by this dossier.
 
+### Rejected normalized-\(z=0\) Jacobian repair
+
+Iritani's equation (5.32) does permit one exact normalization.  Put
+
+\[
+ h_Y=\operatorname{FT}_Y(1)|_{z=0}.
+\]
+
+After proving that \(h_Y\) is a quantum unit in the relevant adic
+completion, left multiplication by \(h_Y^{-1}\) turns the \(z=0\) Fourier
+map into the mirror-map differential:
+
+\[
+ L_{h_Y}^{-1}\operatorname{FT}_Y|_{z=0}=D\tau_Y.
+\]
+
+Because \(L_{h_Y}\) commutes with Euler multiplication, this normalization
+is compatible with the already selected CRT factors.  It does **not** prove
+the needed row square.  The exact remaining identity, in the bulk/fibre
+directions consumed by (5.32), is
+
+\[
+ \epsilon_{\widetilde X}D_{\vartheta}\widetilde\tau
+ =\epsilon_XD_{\vartheta}\tau,                    \tag{D10.3}
+\]
+
+or merely its restriction to the selected marked CRT image.  Theorem 5.18
+gives the initial asymptotics and invertibility of the combined Jacobian, but
+not (D10.3) with the native Novikov and bulk variables retained.  The string
+equation fixes the identity-coordinate derivative and still permits a shear
+\(\tau^0=\widetilde\tau^0+f(Q,\widetilde\tau^{\ne0})\).
+
+This is a real missing theorem, not a formal consequence of the comparison.
+For example, over \(k[[t]]\), take \(D\widetilde\tau=I_2\) and the combined
+ambient--centre Jacobian
+
+\[
+ J=(D\tau,D\varsigma)=
+ \begin{pmatrix}1&t\\1&1\end{pmatrix}.
+\]
+
+It is invertible, has the correct initial row, sends the unit to the prescribed
+unit after the harmless choice of coordinates, and can be made a unital
+algebra isomorphism by transporting the product.  Nevertheless the source
+degree-zero row \((1,0)\) differs from the ambient pullback row \((1,t)\).
+Thus invertibility, unit preservation, projector naturality, and initial-slice
+agreement do not imply (D10.3).  No current source proves (D10.3), even only
+on the marked image.
+
+### Rejected associated-graded edge repair
+
+Replacing exact row equality by a congruence in
+\(u=q_{\mathrm{edge}}^{-1/s}\) does not follow from Theorem 5.18.  Its
+comparison ring is the graded Laurent ring
+\(\mathbb C((q_{\mathrm{edge}}^{-1/s}))[[Q,\widetilde\tau]]\), where \(u\) is a
+unit, so reduction modulo \(u\) is not defined.  The displayed \(O(u)\)
+asymptotics occur only after \(Q=\widetilde\tau=0\); the vertex substitutions
+can have unbounded negative \(u\)-order as native curve degree grows.
+
+Even after imposing an external DVR lattice, congruence modulo \(u\) only
+propagates a primitive row witness.  The sharp one-witness condition is
+equality of the first nonzero associated-graded value:
+
+\[
+ \nu(r_sx)=a<\infty,
+ \qquad
+ \nu\bigl(r_sx-c\,r_t\operatorname{pr}F(x)\bigr)>a.
+\]
+
+A path would then have to carry the witness, valuation, lattice, and an
+integral occurrence map preserving that leading class.  Iritani supplies no
+such occurrence lattice.  Finite Novikov--Artin truncation gives only
+order-dependent denominator bounds, not a compatible inverse-limit lattice;
+generic CRT projectors can also disappear under the truncation.  This is a
+useful finite pilot, not an unconditional provider.
+
+Iritani's later note *Notes on the decomposition theorem for blowups*
+(arXiv:2604.10028v2, Proposition 3, Proposition 8, and Corollary 11) adds
+rational/cyclotomic and Hodge-equivariant descent of the decomposition.  It
+does not add (D10.3), a Gamma/rank row, or the integral occurrence lattices
+needed by the associated-graded repair.
+
+### Rejected Hodge-equivariant carrier replacement
+
+Proposition 8 and Corollary 11 do not turn Hodge equivariance into a
+correction-exclusion theorem.  They say that the mirror maps and decomposition
+are equivariant for the universal Hodge group, with the Novikov/root variables
+fixed.  Centre summands remain present in that equivariant category.
+
+In particular, Hodge type, Tate grading, and the outer root packet are
+insufficient.  Let \(A=H^3(X,\mathbb Q)\), choose a smooth complete-intersection
+curve \(C\subset J(X)\), and use
+\(A(1)\subset H^1(C,\mathbb Q)\).  For \(D=m+3\), the blowup of
+\(C\times\mathbb P^{m+2}\) along \(C\times\{p\}\) has correction
+
+\[
+ \bigoplus_{j=1}^{m+1}H^*(C)(-j).
+\]
+
+Its \(A\)-part contains
+\(A,A(-1),\ldots,A(-m)\), with the same outer \((m+1)\)-branch root
+packet as the projective-bundle source.  Thus these coarse equivariant data do
+not distinguish the source packet from a legal correction.
+
+This example does **not** show that the curve carries the full inner C924
+formal atom \(N\ne0,\delta^\sharp=4/9\).  If that atom is retained, the
+remaining theorem is instead the original higher-centre exclusion: no relevant
+smooth centre carries the joint Hodge-labelled C924 packet.  For \(m=2\), the
+codimension-two outer correction has length one, so a common product
+\(\mu_3\)-charge would separate it only after proving that every centre packet
+descends individually and is unramified for that same charge.  Proposition 3
+describes each edge's own cyclotomic branch monodromy, while Proposition 8
+fixes root variables under Hod; neither supplies this cross-occurrence
+common-charge theorem or its coherent ledger lift.
+
 ### Rejected pole-free-intersection repair
 
 A proposed way to avoid the opposite-\(z\) completions was to replace

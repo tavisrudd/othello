@@ -597,13 +597,19 @@ any geometric or QDM provider.
    nonsectorial analytic domain is not ruled out, but no such provider is
    known.  Do not add another coefficient ring or lattice-intersection adapter
    without first defeating this theorem.
-2. The only remaining no-Stokes QDM design question is whether a different
-   intrinsic \(z=0\) functional has an exact marked edge square and kills the
-   correction factors.  Raw degree-zero augmentation fails away from the
-   initial slice; via pairing, its desired square is the unproved exact point
-   calibration.  Perform a bounded source-first search for a genuinely
-   different functional.  If none is source-derived, retire the QDM
-   spectral-marker route rather than weakening another consumer.
+2. The normalized \(z=0\) Fourier candidate is now decided conditionally.
+   Equation (5.32) reduces it to the mirror-map Jacobian, but the exact
+   remaining row identity is
+   \(\epsilon_{\widetilde X}D_{\vartheta}\widetilde\tau
+   =\epsilon_XD_{\vartheta}\tau\), or its restriction to the marked CRT
+   image.  Theorem 5.18 proves only the initial congruence and invertibility;
+   a unital \(2\times2\) Jacobian countermodel shows those facts do not imply
+   the row identity.  An associated-graded weakening would additionally need
+   edge DVR lattices and integral occurrence maps preserving the first
+   nonzero row class; Iritani's Laurent comparison supplies neither, and
+   finite Novikov--Artin truncations do not give a compatible inverse-limit
+   lattice.  Do not add another row consumer unless a source theorem or an
+   exact calculation proves this identity on the selected marked image.
 3. Keep generic even-bulk persistence green under its stated QDM hypotheses.
    `rankTwoCluster_nilpotent_persists_on_formal_germ` proves from compressed
    commutation and flatness that the cubic nilpotent part remains square-zero

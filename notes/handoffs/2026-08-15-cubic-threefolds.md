@@ -186,6 +186,18 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   compressed commutation and flatness that the cubic nilpotent part stays
   square-zero and nonzero over the formal even-bulk germ.
 
+  The normalized \(z=0\) Fourier candidate is also now reduced exactly, but
+  not closed: equation (5.32) turns it into the mirror-map Jacobian, and the
+  residual source theorem is
+  \(\epsilon_{\widetilde X}D_{\vartheta}\widetilde\tau
+  =\epsilon_XD_{\vartheta}\tau\) on the selected marked image.  Iritani proves
+  the initial congruence and invertibility, not this row identity; a unital
+  \(2\times2\) Jacobian model falsifies the inference.  An associated-graded
+  weakening still needs unsupplied integral edge lattices and occurrence maps.
+  Iritani's 2026 Hodge-equivariant refinement strengthens descent only: it
+  supplies neither this row nor the common-product charge/correction-exclusion
+  theorem needed for a row-free packet telescope.
+
   **Trust boundary:** the retired direct all-center provider uses Iritani's
   comparison and derived augmentation row plus the KKPYY/direct-formal marked
   spectral projector.  Gu--Yu--Yu is a simple-wall corroboration, not a
@@ -205,9 +217,11 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   theorem-by-theorem dossier is
   `../2026-08-21-c925-no-stokes-source-dossier.md`; the executable report is
   `../2026-08-21-c925-rowed-projector-computational-sanity.md`.  The live
-  no-Stokes frontier is now either a different intrinsic \(z=0\) functional
-  with a source-derived edge square, or a non-QDM invariant.  Raw augmentation
-  is a failed candidate.  The task card's `Next` section is authoritative.
+  no-Stokes frontier is now either a genuinely different intrinsic \(z=0\)
+  functional with a source-derived marked edge square, the independent
+  common-charge centre-exclusion theorem, or a non-QDM invariant.  Raw and
+  normalized augmentation and the associated-graded repair are failed or
+  conditional candidates.  The task card's `Next` section is authoritative.
   Material below this paragraph is a fallback ledger, not the live route.
 
   The packet is organized like a parameterized software interface: a
