@@ -3,7 +3,7 @@
 **Lane**: `complete-ports`
 
 **Date**: 2026-07-26
-**Status**: ACTIVE; C672--C678 PROOF/DRAFT GATES COMPLETE; C325 APPENDIX VERIFIER NEXT; PUBLIC RELEASE GATED
+**Status**: ACTIVE; C939 STRENGTHENING COMPLETE; C325 APPENDIX VERIFIER NEXT; REMOTE PUBLICATION GATED
 **Theorem source lane**: archived [`repaircodes`](done/2026-07-13-projective-completion-repaircodes.md)
 **Current private paper**: [`complete-repair-ports`](../../papers/complete-repair-ports/README.md)
 **Canonical paper identity**: `complete-ports` — *Complete Bounded Repair Ports: Local Memory,
@@ -78,13 +78,13 @@ Completed preparation:
 
 **Discovery companion**: [complete-ports discovery track](../complete-ports-discovery-track.md).
 
-Active strengthening:
+Completed strengthening:
 
 - [C939 unified asymptotic separation revision](../2026-08-21-c939-complete-ports-unified-asymptotic-separation.md)
-  is in its Phase A seed/transfer audit.  It owns the referee-recommended lift
-  of Proposition 6.3 and the downstream seed-to-transfer-to-stochastic-
-  consequence reorganization; its theorem gate precedes any manuscript
-  restructuring.
+  proves the matched-availability structural seed pair, lifts it to
+  positive-density asymptotically good families, passes final cold/formal
+  review, and leaves a verified local public export; no push or deposit was
+  made.
 
 ## Publication boundary
 

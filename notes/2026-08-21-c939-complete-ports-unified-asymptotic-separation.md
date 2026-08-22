@@ -2,7 +2,7 @@
 
 **Lane**: `complete-ports`
 
-**Status**: ACTIVE — FINAL FROZEN-ARTIFACT REVIEW AND MIRROR EXPORT
+**Status**: COMPLETE — FINAL REFEREE GO; LOCAL PUBLIC EXPORT VERIFIED
 **Allocated**: 2026-08-21
 **Source assessment**:
 `notes/2026-08-21-c678-complete-ports-percentile-referee.md`
@@ -332,6 +332,23 @@ formal-correspondence boundary honest.  The conclusion is now synchronized and
 the explicit field-29 instance supplies the highest-value requested
 cross-check.  A final review must grade the new frozen PDF rather than the
 earlier worktree-mutating build.
+
+The final cold review is GO with no issue.  The formal referee first caught a
+stale rendered source/base-pin paragraph; commit
+`4cd32e1a78b009f76f44dbf130eb4ebbaa19675a` synchronizes the printed source,
+base, and public release pins with `formal-boundary.json` and makes the release
+verifier enforce all three equalities.  The formal rereview is GO.  The final
+percentile estimate is 96th against annual specialty papers and 90th on
+transferable dimensions against annual mathematics papers generally.
+
+The final tracked PDF has 23 warning-free pages and SHA-256
+`c2611c12114492b47b1af5a8ac77f5550fb11ec9eba81c54acbf6c3523f6ccc9`.
+The full public-formal release verifier passes against finitegeom release
+`36c83268ddaeec9ee22824cad44d6222a9e67081`.  Page 20 was inspected at full
+resolution after the provenance repair and is clean.  The immutable export
+audit reports no private-reference finding.  The standalone mirror was
+forward-committed at `581357f` and verifies as 29 tracked files sourced from
+`4cd32e1a78b009f76f44dbf130eb4ebbaa19675a`; nothing was pushed or deposited.
 
 ## `ej` + `tt` closeout and mystery ledger
 
