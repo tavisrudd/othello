@@ -3347,8 +3347,17 @@
       "last": 939,
       "purpose": "unify complete-ports via asymptotic pointed-Tutte reliability separation",
       "sequence": 372
+    },
+    {
+      "count": 1,
+      "first": 940,
+      "kind": "reservation",
+      "lane": "cubic-threefolds",
+      "last": 940,
+      "purpose": "Split the m=1 epilogue into unconditional QDM, six-axis, and framed-monodromy manuscripts",
+      "sequence": 373
     }
   ],
-  "next_id": 940,
+  "next_id": 941,
   "schema": "codex-task-id-allocations-v1"
 }
