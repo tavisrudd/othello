@@ -164,7 +164,7 @@ step is special to the actual non-CM six-axis calculation.
 ## Owning ledger row and all surfaces that must be synchronized
 
 The sole home for a priority sentence is
-[`papers/cubic-stabilization-epilogue/claim-proof-novelty-ledger.md`](../papers/cubic-stabilization-epilogue/claim-proof-novelty-ledger.md).
+[`papers/cubic-stabilization-m1/claim-proof-novelty-ledger.md`](../papers/cubic-stabilization-m1/claim-proof-novelty-ledger.md).
 Its current row **“Semisimple graph-slope primitivity”** is too narrow for the
 planned package.  Before public manuscript text is changed, replace that row
 with three rows, one for each of (A), (B), and (C), or explicitly make the
@@ -178,14 +178,14 @@ was updated in this audit.**
 
 | Surface | Required action before integration |
 |---|---|
-| `papers/cubic-stabilization-epilogue/claim-proof-novelty-ledger.md` | **Owner:** add/replace the three controlled rows and point to this audit; this is the only priority home. |
-| `papers/cubic-stabilization-epilogue/sections/03-minimal-class.tex` | Replace the old “semisimple graph slopes” ladder only with the fully scoped (A) proof, then print the separate (B) and (C) local statements. |
-| `papers/cubic-stabilization-epilogue/sections/01-introduction.tex` | Describe results, not novelty; distinguish marked graph saturation, six-axis ambient equality, and comparison defect. |
-| `papers/cubic-stabilization-epilogue/sections/02-envelope.tex` | Cross-reference the actual six-axis packet only after the geometric realization and non-CM boundary are stated. |
-| `papers/cubic-stabilization-epilogue/sections/05-synthesis.tex` | Keep the cycle conclusion fibrewise and nonrelative; do not turn (A) into a bare-ppav theorem. |
-| `papers/cubic-stabilization-epilogue/cubic_stabilization_epilogue.tex` and its bibliography | Add only sources actually cited in prose (at minimum the classical input citations used in the new section); do not use the bibliography as a priority claim. |
-| `papers/cubic-stabilization-epilogue/README.md` | Paraphrase the ledger row, rather than carrying an independent novelty claim. |
-| `papers/cubic-stabilization-epilogue/verification/README.md` | Add the exact local table and theorem-scope checks if they become verification obligations; point priority wording back to the ledger. |
+| `papers/cubic-stabilization-m1/claim-proof-novelty-ledger.md` | **Owner:** add/replace the three controlled rows and point to this audit; this is the only priority home. |
+| `papers/cubic-stabilization-m1/sections/03-minimal-class.tex` | Replace the old “semisimple graph slopes” ladder only with the fully scoped (A) proof, then print the separate (B) and (C) local statements. |
+| `papers/cubic-stabilization-m1/sections/01-introduction.tex` | Describe results, not novelty; distinguish marked graph saturation, six-axis ambient equality, and comparison defect. |
+| `papers/cubic-stabilization-m1/sections/02-envelope.tex` | Cross-reference the actual six-axis packet only after the geometric realization and non-CM boundary are stated. |
+| `papers/cubic-stabilization-m1/sections/05-synthesis.tex` | Keep the cycle conclusion fibrewise and nonrelative; do not turn (A) into a bare-ppav theorem. |
+| `papers/cubic-stabilization-m1/cubic_stabilization_m1.tex` and its bibliography | Add only sources actually cited in prose (at minimum the classical input citations used in the new section); do not use the bibliography as a priority claim. |
+| `papers/cubic-stabilization-m1/README.md` | Paraphrase the ledger row, rather than carrying an independent novelty claim. |
+| `papers/cubic-stabilization-m1/verification/README.md` | Add the exact local table and theorem-scope checks if they become verification obligations; point priority wording back to the ledger. |
 | `notes/2026-08-12-c909-epilogue-integration-blueprint.md` | Revise its “claim-ledger additions” and any unqualified “new” language to point to the ledger/audit once implementation begins. |
 | `notes/2026-08-12-c909-epilogue-integration-cycle-audit.md` | Keep as the proof-scope audit; add only a pointer to this priority audit if the two reports are cross-linked. |
 | `notes/2026-08-11-c909-etale-saturation-priority-audit.md` and `notes/2026-08-11-c909-four-slot-pluecker-literature-audit.md` | Preserve as underlying source evidence; no retroactive prose change is needed. |

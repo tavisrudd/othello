@@ -13,7 +13,7 @@ field `kernelMaximalIsotropic`. This pass proves the primary refinement and
 removes that field.
 
 New module
-`papers/cubic-stabilization-epilogue/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationEpilogue/GraphLattices/PrimaryDiscriminantSplitting.lean`
+`papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/PrimaryDiscriminantSplitting.lean`
 develops the splitting for an arbitrary integral alternating form `F` of
 nonzero determinant and an arbitrary factorization of an annihilator of its
 discriminant group into two coprime integers `a`, `b`:
@@ -94,13 +94,13 @@ All gates green; the manuscript PDF was not rebuilt, since the only manuscript
 change is the `\lean` list of `lem:relative-six-axis`, whose macros are
 typographically empty.
 
-From `papers/cubic-stabilization-epilogue/`:
+From `papers/cubic-stabilization-m1/`:
 
 ```text
 make lint formal-static
 lean/scripts/lean-build-queue.py build \
-  TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Verification.AxiomAudit \
-  --lean-root <repository>/papers/cubic-stabilization-epilogue/lean --cores 20-23
+  TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Verification.AxiomAudit \
+  --lean-root <repository>/papers/cubic-stabilization-m1/lean --cores 20-23
 make formal-audit AXIOM_LOG=<run directory>/logs/<audit target>.quiet/<run>/<invocation>/stdout.log
 ```
 

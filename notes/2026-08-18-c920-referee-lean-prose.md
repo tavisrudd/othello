@@ -1,4 +1,4 @@
-# Referee audit of the C920 Lean prose (cubic-stabilization-epilogue companion)
+# Referee audit of the C920 Lean prose (cubic-stabilization-m1 companion)
 
 **Verdict: changes required before the artifact is referee-ready — 2 blockers, 11 major, 15 minor.**
 No forbidden workflow vocabulary, task ID, path, status prose, novelty claim, or the banned
@@ -8,13 +8,13 @@ geometry as if Lean had established it, where Lean in fact proves a hypothesis-l
 polynomial statement, plus one docstring that asserts the converse of its own field.
 
 Scope audited (entire modules, not only changed lines), all under
-`papers/cubic-stabilization-epilogue/`:
+`papers/cubic-stabilization-m1/`:
 
-- `lean/TavisRuddFiniteGeom/Papers/CubicStabilizationEpilogue/Quantum/QuarticSpectralSeparation.lean`
-- `lean/TavisRuddFiniteGeom/Papers/CubicStabilizationEpilogue/Quantum/MinimalRuledEulerSpectrum.lean`
-- `lean/TavisRuddFiniteGeom/Papers/CubicStabilizationEpilogue/Quantum/MonomialSpecializationSeparation.lean`
-- `lean/TavisRuddFiniteGeom/Papers/CubicStabilizationEpilogue/Applications/MinimalRuledSpecializedVanishing.lean`
-- `lean/TavisRuddFiniteGeom/Papers/CubicStabilizationEpilogue/PaperInterface.lean` (appended terminals only)
+- `lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/QuarticSpectralSeparation.lean`
+- `lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/MinimalRuledEulerSpectrum.lean`
+- `lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/MonomialSpecializationSeparation.lean`
+- `lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Applications/MinimalRuledSpecializedVanishing.lean`
+- `lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/PaperInterface.lean` (appended terminals only)
 - `lean/verification/claims.json` (five new rows, four edited)
 - `verification/hirzebruch_euler_spectrum.py`
 
@@ -329,7 +329,7 @@ Scope audited (entire modules, not only changed lines), all under
 34. **MINOR — `verification/hirzebruch_euler_spectrum.py`, replay block.** The two commands use the
     relative path `verification/hirzebruch_euler_spectrum.py` without saying from which directory.
     Prefix with the working directory: "From the paper directory
-    `papers/cubic-stabilization-epilogue`:". (Verified working: `--check` exits 0 with "certificate
+    `papers/cubic-stabilization-m1`:". (Verified working: `--check` exits 0 with "certificate
     and digests agree" in about one second and leaves the tree unchanged.)
 
 35. **MINOR — cross-artifact, worth one sentence somewhere.** The certificate records the stronger

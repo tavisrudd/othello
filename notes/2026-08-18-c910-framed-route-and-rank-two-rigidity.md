@@ -1,7 +1,7 @@
 # C910 — the framed route end to end and the rank-two rigidity algebra
 
 **Task:** C910 (`cubic-threefolds`) — Lean companion for
-`papers/cubic-stabilization-epilogue/`.
+`papers/cubic-stabilization-m1/`.
 **Date:** 2026-08-18.  **Authority commit:** `2d187bc43`.
 **Predecessors:** the gap audit `2026-08-18-c910-post-restructure-gap-audit.md`
 (priorities 0b and 0d), the block-reduction report

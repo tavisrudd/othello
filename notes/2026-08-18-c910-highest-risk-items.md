@@ -1,7 +1,7 @@
 # C910 — the highest-risk items: separated-factor pairings, the symmetric exclusion, and thin rows
 
 **Task:** C910 (`cubic-threefolds`) — Lean companion for
-`papers/cubic-stabilization-epilogue/`.
+`papers/cubic-stabilization-m1/`.
 **Date:** 2026-08-18.  **Authority commit:** `2bc736282`.
 **Predecessors:** the gap audit `2026-08-18-c910-post-restructure-gap-audit.md`,
 the hearts and product-corollary report

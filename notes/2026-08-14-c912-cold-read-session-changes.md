@@ -1,10 +1,10 @@
 # C912 cold read: session changes to the cubic-stabilization epilogue
 
 Date: 2026-08-14
-Reader: independent cold read, read-only on `papers/cubic-stabilization-epilogue/`
+Reader: independent cold read, read-only on `papers/cubic-stabilization-m1/`
 Scope: commits `0db2a97fc`, `131e926d6`, `d92f27904`, `ac0bfee7b`, `9c3518861`,
 `87b6170e1`, `a9fd9b84e`, `011580e55` (delta `27649bc3a..HEAD` restricted to
-`papers/cubic-stabilization-epilogue`).
+`papers/cubic-stabilization-m1`).
 
 ## Overall verdict
 
@@ -595,7 +595,7 @@ None of these invalidates a theorem, corollary, or lemma.
 
 ## Build gate
 
-`make check` in `papers/cubic-stabilization-epilogue` exits 0; latexmk reports
+`make check` in `papers/cubic-stabilization-m1` exits 0; latexmk reports
 all targets up to date, so the committed PDF matches the committed sources.
 
 ---

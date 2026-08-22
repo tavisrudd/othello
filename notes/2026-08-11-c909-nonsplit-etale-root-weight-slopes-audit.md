@@ -149,7 +149,7 @@ provided the standard maximal-isotropic quotient construction is included:
 the root form has determinant supported only at p, the self-adjoint graph is
 maximal isotropic in its p^a-kernel, and the quotient therefore carries the
 descended principal polarization. The graph-descent calculation in
-papers/cubic-stabilization-epilogue/sections/03-minimal-class.tex is the
+papers/cubic-stabilization-m1/sections/03-minimal-class.tex is the
 normalization to reuse. The local trace form alone is not by itself a global
 quotient theorem; these gluing facts must be stated when the family is
 promoted.

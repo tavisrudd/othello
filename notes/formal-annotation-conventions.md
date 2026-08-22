@@ -6,7 +6,7 @@ computational evidence they rest on. Read it before adding or changing an
 annotation, a claim-map row, a source or evidence registry entry, or the
 checker that gates them, and before adopting the layer in another paper.
 
-The first implementation is `papers/cubic-stabilization-epilogue/`. Everything
+The first implementation is `papers/cubic-stabilization-m1/`. Everything
 below describes the convention; that paper is the reference copy.
 
 ## Why the layer exists

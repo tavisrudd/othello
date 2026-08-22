@@ -143,7 +143,7 @@ in this pass.
 ## Surface/ledger boundary
 
 This note audits theorem text only. The owning novelty row remains
-papers/cubic-stabilization-epilogue/claim-proof-novelty-ledger.md, whose safe
+papers/cubic-stabilization-m1/claim-proof-novelty-ledger.md, whose safe
 posture is “formal corollary/application,” not a source theorem or
 unqualified first claim. No manuscript, ledger, snapshot, or public summary
 was edited.

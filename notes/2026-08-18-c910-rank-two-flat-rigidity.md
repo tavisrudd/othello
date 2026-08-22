@@ -116,7 +116,7 @@ concurrent session's manuscript edits made its dependency-graph comparison stale
 that staleness is in files owned by that session, not by this pass.
 
 New modules, all under
-`papers/cubic-stabilization-epilogue/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationEpilogue/`:
+`papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/`:
 
 * `Quantum/FormalLoopConnection.lean`
 * `Quantum/AtomicElementaryModification.lean`

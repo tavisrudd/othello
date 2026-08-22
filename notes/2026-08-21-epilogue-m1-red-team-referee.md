@@ -2,7 +2,7 @@
 
 **Lane:** `cubic-threefolds`
 **Date:** 2026-08-21
-**Target:** `papers/cubic-stabilization-epilogue/sections/04-categorical-one-step.tex`,
+**Target:** `papers/cubic-stabilization-m1/sections/04-categorical-one-step.tex`,
 Theorem `every-cubic` (for every smooth cubic threefold `X`, `X x P^1` is irrational).
 
 Main-agent read plus three independent cold referees (formal D-module lens, source-fidelity
@@ -80,9 +80,9 @@ Secondary, all repairable by wording or one sentence:
 
 ### Appendix A-formal
 
-# Referee report A — local formal algebra of §4 (cubic-stabilization-epilogue)
+# Referee report A — local formal algebra of §4 (cubic-stabilization-m1)
 
-Target: `papers/cubic-stabilization-epilogue/sections/04-categorical-one-step.tex`
+Target: `papers/cubic-stabilization-m1/sections/04-categorical-one-step.tex`
 (read in full) and `sections/01-introduction.tex` ll. 1–60.
 Lens: §4.1 block definition, §4.3 rank-two residue marker, §4.4 cubic block, §4.5 center nullity.
 
@@ -403,9 +403,9 @@ generic QDM of `X`).
 
 ### Appendix B-sources
 
-# Referee report B — source verification of §4 of `cubic-stabilization-epilogue`
+# Referee report B — source verification of §4 of `cubic-stabilization-m1`
 
-Target: `papers/cubic-stabilization-epilogue/sections/04-categorical-one-step.tex`
+Target: `papers/cubic-stabilization-m1/sections/04-categorical-one-step.tex`
 (read in full, lines 1–533). Sources checked line-by-line:
 
 - Iritani, *Quantum cohomology of blowups*, arXiv:2307.13555 —
@@ -838,7 +838,7 @@ amount to roughly a page of added argument.
 
 # Referee report C (birational geometry / derived categories)
 
-Target: `papers/cubic-stabilization-epilogue/sections/04-categorical-one-step.tex` (read in full)
+Target: `papers/cubic-stabilization-m1/sections/04-categorical-one-step.tex` (read in full)
 and `sections/01-introduction.tex` lines 1–60.
 
 Theorem under attack: **every-cubic** — for every smooth complex cubic threefold `X`,

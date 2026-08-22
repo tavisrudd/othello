@@ -3,7 +3,7 @@
 ## Scope and standard
 
 This audit covers all 53 manuscript claim rows in
-`papers/cubic-stabilization-epilogue/lean/verification/claims.json`, with
+`papers/cubic-stabilization-m1/lean/verification/claims.json`, with
 special attention to the 22 fragmentary and now 26 conditional rows.  Code
 provenance is not treated as evidence: every reviewer-facing terminal was
 checked against its Lean type, proof body or immediate application theorem,

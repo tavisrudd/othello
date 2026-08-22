@@ -5,7 +5,7 @@
 **Status:** closed 2026-08-18
 
 **Objective:** close the rational geometrically ruled half of the residual use of
-Hypothesis 5.7T in `papers/cubic-stabilization-epilogue/`, so that specialized
+Hypothesis 5.7T in `papers/cubic-stabilization-m1/`, so that specialized
 primitive-sixth vanishing for those centers is proved rather than assumed.
 
 **Outcome:** done.  Hypothesis 5.7T is now used only for surface centers that

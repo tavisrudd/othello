@@ -62,7 +62,7 @@ quantum correction of Novikov degree two, which is consistent with a dropped ter
 than a different convention.
 
 The second row agrees with the manuscript's own block reduction
-(`papers/cubic-stabilization-epilogue/sections/04-one-step.tex`, (4.9a)–(4.9e)) and with
+(`papers/cubic-stabilization-m1/sections/04-one-step.tex`, (4.9a)–(4.9e)) and with
 the independent recomputation in the verification note §7, both of which give
 `{6r, −6r, 0, 0}` with `r = sqrt(3q)`.
 

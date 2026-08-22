@@ -200,7 +200,7 @@ dated follow-up report:
 4. separate records for no-result, login/rate-limit, and API-error outcomes;
    and
 5. a refreshed ledger row in
-   `papers/cubic-stabilization-epilogue/claim-proof-novelty-ledger.md` before
+   `papers/cubic-stabilization-m1/claim-proof-novelty-ledger.md` before
    any broadening of public priority wording.
 
 **MathSciNet remains NOT COVERED.**  This authenticated packet reduces the

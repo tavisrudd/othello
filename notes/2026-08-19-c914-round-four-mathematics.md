@@ -4,7 +4,7 @@
 - **Lane**: `cubic-threefolds`
 - **Task**: C914
 - **Object under review**: the uncommitted diff `c914-round4.diff` against
-  `papers/cubic-stabilization-epilogue/` (sections `02-envelope.tex`,
+  `papers/cubic-stabilization-m1/` (sections `02-envelope.tex`,
   `03-minimal-class.tex`, plus the ledger and the claims registry rows that mirror them).
 - **Method**: cold read. No earlier referee report was consulted; every judgement below was
   formed from the manuscript sources and, where noted, from the cited literature.
@@ -41,7 +41,7 @@ of this particular pencil rather than of the other `A_5`-component.
 
 ### 1. The scalar ambiguity in the definition of a signature is stated too widely
 
-`papers/cubic-stabilization-epilogue/sections/03-minimal-class.tex`, new text:
+`papers/cubic-stabilization-m1/sections/03-minimal-class.tex`, new text:
 
 > a signature is the tuple of exponents of \(\zeta_3\) in a diagonalization of a linear lift of
 > the automorphism, well defined up to permutation of the coordinates, replacement of the chosen
@@ -175,7 +175,7 @@ Concrete replacement for the first clause:
 
 ### 5. Orthogonality is introduced one level below where the later steps consume it
 
-`papers/cubic-stabilization-epilogue/sections/02-envelope.tex`, new text:
+`papers/cubic-stabilization-m1/sections/02-envelope.tex`, new text:
 
 > Under the polarization hypothesis that sum is moreover orthogonal, each summand of \(L'\)
 > carries \(m\) times a unimodular alternating form, and each \(P_i\) is unimodular.
@@ -401,7 +401,7 @@ is true and harmless; it may simply be inert.
 ### Ledger and registry rows
 
 16. The registry row for `prop:no-elliptic-product` in
-    `papers/cubic-stabilization-epilogue/lean/verification/claims.json` now says "odd isogeny
+    `papers/cubic-stabilization-m1/lean/verification/claims.json` now says "odd isogeny
     degree, and an odd multiple of the product polarization; for the last conclusion, odd degree
     alone" and mirrors the manuscript's new phrasing in its conclusion field. Both are accurate
     against the proof. I recomputed the recorded `statement_digest` with the project's own
@@ -411,7 +411,7 @@ is true and harmless; it may simply be inert.
     on `blockDiagonalProjection_apply`), which is outside the scope of this review and outside
     this diff.
 
-17. The two changed rows of `papers/cubic-stabilization-epilogue/claim-proof-novelty-ledger.md`
+17. The two changed rows of `papers/cubic-stabilization-m1/claim-proof-novelty-ledger.md`
     describe the proposition correctly, including the added sentence that the five-elliptic-factor
     conclusion drops the polarization hypothesis entirely and the refined description of the
     difference from van Geemen--Yamauchi, which now distinguishes "matching the polarizations when

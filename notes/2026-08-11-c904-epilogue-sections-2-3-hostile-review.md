@@ -1,7 +1,7 @@
 # C904 epilogue Sections 2--3 hostile cold review
 
 Date: 2026-08-11
-Scope: `papers/cubic-stabilization-epilogue/sections/02-envelope.tex` and
+Scope: `papers/cubic-stabilization-m1/sections/02-envelope.tex` and
 `03-minimal-class.tex`; no manuscript edits  
 Verdict: **MINOR**
 

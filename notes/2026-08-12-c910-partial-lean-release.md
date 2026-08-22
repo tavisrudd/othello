@@ -8,7 +8,7 @@ no such claim.  Its value at this stage is a kernel-checked algebraic spine plus
 a rejecting, manuscript-wide account of everything still outside Lean.
 
 The authoritative package is
-`papers/cubic-stabilization-epilogue/lean/`.  No duplicate shared Lean source
+`papers/cubic-stabilization-m1/lean/`.  No duplicate shared Lean source
 tree was created.
 
 ## Exact coverage

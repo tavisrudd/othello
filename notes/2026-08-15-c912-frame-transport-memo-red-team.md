@@ -3,9 +3,9 @@
 **Lane:** `clebsch` · **Task:** C912 · **Date:** 2026-08-15
 
 Target: `notes/2026-08-15-c912-frame-transport-memo.tex`.
-Checked against `papers/cubic-stabilization-epilogue/sections/04-one-step.tex`,
-`papers/cubic-stabilization-epilogue/irrationality_after_one_stabilization.aux`,
-`papers/cubic-stabilization-epilogue/lean/verification/check_formal_artifact.py`,
+Checked against `papers/cubic-stabilization-m1/sections/04-one-step.tex`,
+`papers/cubic-stabilization-m1/irrationality_after_one_stabilization.aux`,
+`papers/cubic-stabilization-m1/lean/verification/check_formal_artifact.py`,
 `.../lean/verification/claims.json`, `.../lean/README.md`, `.../verification/README.md`.
 Read-only; nothing under `papers/` was touched.
 

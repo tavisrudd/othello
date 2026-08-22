@@ -16,7 +16,7 @@ resolvent of the relative elliptic two-division cover.
 
 ## Scope and ownership
 
-- Authoritative manuscript: `papers/cubic-stabilization-epilogue/`.
+- Authoritative manuscript: `papers/cubic-stabilization-m1/`.
 - Task records: this card, one dated C935 report, the lane handoff, live queue,
   archive on completion, and the lane discovery track if an incidental finding
   meets its discriminator.

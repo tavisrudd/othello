@@ -1,7 +1,7 @@
 # Quantum Referee C — independent recomputation (C912)
 
 **Date**: 2026-08-14
-**Paper**: `papers/cubic-stabilization-epilogue/`, `sections/04-one-step.tex`
+**Paper**: `papers/cubic-stabilization-m1/`, `sections/04-one-step.tex`
 **Charge**: recompute, from scratch, (1) the cubic-threefold value of the framed
 sixth-root multiplicity `nu_6` asserted in `prop:cubic-packet`, and (2) the
 divisor-tagging endpoint (`lem:divisor-tagging` with
@@ -569,7 +569,7 @@ receiver.
 ## Severity-ranked defect list
 
 All line numbers in
-`papers/cubic-stabilization-epilogue/sections/04-one-step.tex`.
+`papers/cubic-stabilization-m1/sections/04-one-step.tex`.
 
 1. **MODERATE — `p^tag` is never placed in the same coefficient ring as the
    transported operator.** Lines 800-829 (definition of `p^tag` at 803, the
@@ -654,8 +654,8 @@ Nothing in `prop:cubic-packet` requires any change.
    needed for the line-by-line comparison in §1.8. I did not check the bulk-quantum
    extension or Cai's own irrationality conclusion, and the cache is an OCR
    reconstruction rather than the authoritative page images.
-6. **Bibliography.** `papers/cubic-stabilization-epilogue/` has no `.bib`; the
-   references are inline `\bibitem`s in `cubic_stabilization_epilogue.tex`. I did
+6. **Bibliography.** `papers/cubic-stabilization-m1/` has no `.bib`; the
+   references are inline `\bibitem`s in `cubic_stabilization_m1.tex`. I did
    not audit citation targets beyond the Cai page numbers, which are correct
    (pp. 4-6 as claimed at lines 989, 1050, 1083, 1109, 1139, 1184-1187).
 

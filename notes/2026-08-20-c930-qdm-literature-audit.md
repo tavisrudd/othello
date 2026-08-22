@@ -3,7 +3,7 @@
 **Lane:** `cubic-threefolds`
 
 **Scope:** the strictly \(m=1\) categorical proof spine for
-`papers/cubic-stabilization-epilogue/`
+`papers/cubic-stabilization-m1/`
 
 **Status:** complete for the C930 theorem graph; repeat the point-of-use check
 if a mathematical claim changes during manuscript refounding

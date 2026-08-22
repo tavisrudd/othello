@@ -4,7 +4,7 @@
 
 **Status:** Paper V is complete and exported as a warning-free 22-page
 structural authority.  By author instruction, C904 now owns the unnumbered
-geometric epilogue at `papers/cubic-stabilization-epilogue/`.  Its initial
+geometric epilogue at `papers/cubic-stabilization-m1/`.  Its initial
 theorem-first draft states the separation family, proves the local
 minimal-class and one-step irrationality mechanisms, and passes `make check`.
 Lean remains deferred.
@@ -32,7 +32,7 @@ companion; all five standalone mirrors are synchronized locally and unpushed.
 
 **Epilogue surface:** *Irrationality after One Stabilization of Universally
 \(CH_0\)-Trivial Cubic Threefolds*, rooted at
-`papers/cubic-stabilization-epilogue/`.  The baseline theorem and optional
+`papers/cubic-stabilization-m1/`.  The baseline theorem and optional
 period upgrades are frozen in
 `notes/2026-08-11-c904-geometric-epilogue-theorem-freeze.md`.
 

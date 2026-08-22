@@ -1,7 +1,7 @@
 # C910 — invariance of the residue discriminant: frame change, factor gluing, and the formal germ
 
 **Task:** C910 (`cubic-threefolds`) — Lean companion for
-`papers/cubic-stabilization-epilogue/`.
+`papers/cubic-stabilization-m1/`.
 **Date:** 2026-08-18.  **Authority commit:** `44fc8b1ff`.
 **Predecessor:** the even-part orthogonality report
 `2026-08-18-c910-even-part-orthogonality.md`.
@@ -119,7 +119,7 @@ themes still need a disposition.
 ## Export status
 
 Exported.  The standalone paper repository
-`~/src/math-papers/cubic-stabilization-epilogue` was synchronized from authority
+`~/src/math-papers/cubic-stabilization-m1` was synchronized from authority
 `44fc8b1ff`, the export manifest verifies over 142 tracked files, and the
 repository's own `make check`, pinned Lean build, and axiom-log replay agree with
 the authority over 204 reviewer terminals.

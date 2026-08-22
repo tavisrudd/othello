@@ -1,7 +1,7 @@
 # C910 — anchoring the headline to the atomic route
 
 **Task:** C910 (`cubic-threefolds`) — Lean companion for
-`papers/cubic-stabilization-epilogue/`.
+`papers/cubic-stabilization-m1/`.
 **Date:** 2026-08-18.  **Authority commit:** `5d537f713`.
 **Predecessor:** `2026-08-18-c910-post-restructure-gap-audit.md`, priority 0a
 and part of 0b.

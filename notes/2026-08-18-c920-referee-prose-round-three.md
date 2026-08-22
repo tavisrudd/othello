@@ -1,8 +1,8 @@
 # C920 referee report, round three: exposition, style, internal consistency
 
-**Scope**: `git diff 3736b643a..a74cf275c -- papers/cubic-stabilization-epilogue/sections
-papers/cubic-stabilization-epilogue/cubic_stabilization_epilogue.tex
-papers/cubic-stabilization-epilogue/verification`, read against the committed blobs of
+**Scope**: `git diff 3736b643a..a74cf275c -- papers/cubic-stabilization-m1/sections
+papers/cubic-stabilization-m1/cubic_stabilization_m1.tex
+papers/cubic-stabilization-m1/verification`, read against the committed blobs of
 `a74cf275c` (the working tree matches the commit exactly this time). Exposition, style,
 internal consistency of wording and cross-references. Mathematical correctness remains
 another referee's charge.

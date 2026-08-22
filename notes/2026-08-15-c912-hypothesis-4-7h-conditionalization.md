@@ -5,7 +5,7 @@
 ## What was done
 
 Applied the author's edit specification (`/tmp/opus_edit_spec_one_stabilization.md`)
-to `papers/cubic-stabilization-epilogue/`.  The unresolved positive-filtration
+to `papers/cubic-stabilization-m1/`.  The unresolved positive-filtration
 bulk-displacement step is now a manually named hypothesis rather than an
 asserted proof step, and every statement that depends on it says so.
 

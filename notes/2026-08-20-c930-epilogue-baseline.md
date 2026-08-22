@@ -2,7 +2,7 @@
 
 **Lane:** `cubic-threefolds`
 
-**Authority:** `papers/cubic-stabilization-epilogue/`
+**Authority:** `papers/cubic-stabilization-m1/`
 
 **Frozen source commit:** `29908f0dceb3ba0965e6d007efdda859c2c40ea7`
 

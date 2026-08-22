@@ -4,7 +4,7 @@
 
 Audits the evidence base for Hypothesis 4.7H ("Reconstruction-displacement
 invariance"), stated in
-`papers/cubic-stabilization-epilogue/sections/04-one-step.tex` lines 409-425.
+`papers/cubic-stabilization-m1/sections/04-one-step.tex` lines 409-425.
 This is an audit, not an argument for or against the hypothesis.
 
 Every evidence item and every attack carries four named fields: **PROVENANCE**

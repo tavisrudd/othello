@@ -1,7 +1,7 @@
 # C910 — the six-axis local chart as a split graph presentation
 
 **Task:** C910 (`cubic-threefolds`) — Lean companion for
-`papers/cubic-stabilization-epilogue/`.
+`papers/cubic-stabilization-m1/`.
 **Date:** 2026-08-19.  **Authority commit:** `d4193b00f`.
 **Predecessor:** the local-chart lift and unit-summand pass
 `2026-08-18-c910-local-chart-lift-and-unit-summand.md`, which closed the two
@@ -127,7 +127,7 @@ typographically empty, and a concurrent session was editing the same sections
 ## Concurrent work in the same paper
 
 While this pass ran, another session was editing
-`papers/cubic-stabilization-epilogue/` in the same worktree: the Eckardt-locus
+`papers/cubic-stabilization-m1/` in the same worktree: the Eckardt-locus
 prose in `sections/03-minimal-class.tex`, the main manuscript file,
 `verification/imported-sources.json`, `verification/dependency-graph.dot`, three
 new claim rows, and the coverage-snapshot lines of both `README.md` files.  The
@@ -141,13 +141,13 @@ claims rather than the 62 the working tree now computes.
 
 ## Replay
 
-From `papers/cubic-stabilization-epilogue/`:
+From `papers/cubic-stabilization-m1/`:
 
 ```text
 make lint formal-static
-lean/scripts/lean-build-queue.py build CubicStabilizationEpilogue \
-  TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Verification.AxiomAudit \
-  --lean-root <repository>/papers/cubic-stabilization-epilogue/lean --cores 20-23
+lean/scripts/lean-build-queue.py build CubicStabilizationM1 \
+  TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Verification.AxiomAudit \
+  --lean-root <repository>/papers/cubic-stabilization-m1/lean --cores 20-23
 make formal-audit AXIOM_LOG=<run directory>/logs/<audit target>.quiet/<run>/<invocation>/stdout.log
 ```
 

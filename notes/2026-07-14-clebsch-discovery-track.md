@@ -1725,7 +1725,7 @@ Euler-orthogonal to the skyscraper of a common-open point, which is why
 detection replaced counting.
 
 **Evidence:** REASONED from the epilogue's own centre-vanishing statement
-(`papers/cubic-stabilization-epilogue/sections/04-one-step.tex`, centres of
+(`papers/cubic-stabilization-m1/sections/04-one-step.tex`, centres of
 dimension at most two have `nu_6 = 0`) plus the codimension bound; the exact
 multiplicity contributed by a cubic-threefold centre is not computed here.
 

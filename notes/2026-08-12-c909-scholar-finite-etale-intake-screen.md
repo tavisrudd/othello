@@ -297,7 +297,7 @@ identifiers.
    predecessors of claims B and C.
 4. No paper-facing surface has been updated.  If a promoted source changes
    the priority posture, update only the owning row in
-   `papers/cubic-stabilization-epilogue/claim-proof-novelty-ledger.md`
+   `papers/cubic-stabilization-m1/claim-proof-novelty-ledger.md`
    and then point all other surfaces to that row.
 
 ## Handoff

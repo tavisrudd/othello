@@ -26,7 +26,7 @@ places.
 ## What is proved
 
 Four new modules, all under
-`papers/cubic-stabilization-epilogue/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationEpilogue/`.
+`papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/`.
 
 **`Quantum/SylvesterOperator.lean` — the operator is invertible.** Over a
 commutative ring, left multiplication by a square matrix and right
@@ -175,14 +175,14 @@ as proved, with the analytic splittings and the overlaps still imported.
   mystery remains beyond that boundary.
 
 New modules and changed files, all under
-`papers/cubic-stabilization-epilogue/`:
+`papers/cubic-stabilization-m1/`:
 
-* `lean/TavisRuddFiniteGeom/Papers/CubicStabilizationEpilogue/Quantum/SylvesterOperator.lean`
-* `lean/TavisRuddFiniteGeom/Papers/CubicStabilizationEpilogue/Quantum/BlockSylvesterSolvability.lean`
-* `lean/TavisRuddFiniteGeom/Papers/CubicStabilizationEpilogue/Quantum/NormalizedSylvesterGauge.lean`
-* `lean/TavisRuddFiniteGeom/Papers/CubicStabilizationEpilogue/Quantum/CubicSeparatedBlockGauge.lean`
-* `lean/TavisRuddFiniteGeom/Papers/CubicStabilizationEpilogue/PaperInterface.lean`
-* `lean/TavisRuddFiniteGeom/Papers/CubicStabilizationEpilogue/Verification/AxiomAudit.lean`
+* `lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/SylvesterOperator.lean`
+* `lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/BlockSylvesterSolvability.lean`
+* `lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/NormalizedSylvesterGauge.lean`
+* `lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/CubicSeparatedBlockGauge.lean`
+* `lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/PaperInterface.lean`
+* `lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Verification/AxiomAudit.lean`
 * `lean/verification/claims.json`, `lean/verification/expected_axioms.txt`
 * `lean/lakefile.toml`, `lean/README.md`, `verification/README.md`
 * `sections/04-atomic-one-step.tex`

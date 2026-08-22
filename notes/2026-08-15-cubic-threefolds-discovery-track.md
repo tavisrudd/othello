@@ -170,7 +170,7 @@ question: for which toric surfaces is the eigenvalue map injective on the
 spectral cover, and does injectivity have a fan-level characterization?
 **Evidence:** CHECKED — the discriminant of the parametrizing quartic was
 computed symbolically; the Euler discriminant is in the tracked certificate
-`papers/cubic-stabilization-epilogue/verification/hirzebruch-euler-spectrum.json`.
+`papers/cubic-stabilization-m1/verification/hirzebruch-euler-spectrum.json`.
 **Status:** open lead
 
 ## 2026-08-19 — the Eckardt reflection group as an invariant of a cubic hypersurface

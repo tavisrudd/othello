@@ -1,8 +1,8 @@
 # C920 referee report, round two: the repaired minimal-ruled 5.7T removal
 
-Scope: `git diff 3736b643a..2c030a8fc -- papers/cubic-stabilization-epilogue/sections
-papers/cubic-stabilization-epilogue/cubic_stabilization_epilogue.tex
-papers/cubic-stabilization-epilogue/verification`. Round-one findings are in
+Scope: `git diff 3736b643a..2c030a8fc -- papers/cubic-stabilization-m1/sections
+papers/cubic-stabilization-m1/cubic_stabilization_m1.tex
+papers/cubic-stabilization-m1/verification`. Round-one findings are in
 `notes/2026-08-18-c920-referee-mathematics.md`; item numbers below in the form "round-one item N"
 refer to that file.
 

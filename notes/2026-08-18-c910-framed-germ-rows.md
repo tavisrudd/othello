@@ -1,7 +1,7 @@
 # C910 — the Section 5 framed-germ rows in Lean
 
 **Task:** C910 (`cubic-threefolds`) — Lean companion for
-`papers/cubic-stabilization-epilogue/`.
+`papers/cubic-stabilization-m1/`.
 **Date:** 2026-08-18.  **Authority commits:** `1a7b649d3`, `092f4d29b`.
 **Predecessor:** the local-chart pass
 `2026-08-18-c910-local-chart-lift-and-unit-summand.md`, whose closing note named
@@ -181,7 +181,7 @@ self-contained algebra plus a filtration argument, and is the cheapest of the si
 ## Export status
 
 Exported.  The standalone paper repository
-`~/src/math-papers/cubic-stabilization-epilogue` was synchronized from authority
+`~/src/math-papers/cubic-stabilization-m1` was synchronized from authority
 `092f4d29b` with a zero-finding coupling audit, and its own `make check`, pinned
 Lean build, and axiom-log replay agree with the authority over 233 reviewer
 terminals.

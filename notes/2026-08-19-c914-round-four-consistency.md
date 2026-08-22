@@ -7,7 +7,7 @@
 **Diff reviewed**: `c914-round4.diff` — `sections/02-envelope.tex`,
 `sections/03-minimal-class.tex`, `claim-proof-novelty-ledger.md`,
 `lean/verification/claims.json` (all under
-`papers/cubic-stabilization-epilogue/`)
+`papers/cubic-stabilization-m1/`)
 
 A separate referee is checking the mathematics. Nothing below re-derives a
 lattice computation or re-checks an isogeny argument; the findings are about
@@ -40,7 +40,7 @@ licensed. All of these are local prose or field-text fixes.
 
 ### 1. The claim map now understates the hypotheses of the last conclusion
 
-**File**: `papers/cubic-stabilization-epilogue/lean/verification/claims.json`,
+**File**: `papers/cubic-stabilization-m1/lean/verification/claims.json`,
 row `prop:no-elliptic-product`, field `hypotheses`.
 
 Quoted text:
@@ -85,7 +85,7 @@ manuscript statement, so no refresh is needed.
 
 ### 2. "block" is used before it is introduced
 
-**File**: `papers/cubic-stabilization-epilogue/sections/03-minimal-class.tex`,
+**File**: `papers/cubic-stabilization-m1/sections/03-minimal-class.tex`,
 first added sentence of the rewritten paragraph.
 
 Quoted text:
@@ -120,7 +120,7 @@ and then "such a group" in place of "such a block" in the next sentence.
 
 ### 3. "the two decompositions just obtained" has two candidate antecedents
 
-**File**: `papers/cubic-stabilization-epilogue/sections/02-envelope.tex`, last
+**File**: `papers/cubic-stabilization-m1/sections/02-envelope.tex`, last
 paragraph of the proof of `prop:no-elliptic-product`.
 
 Quoted text:
@@ -154,7 +154,7 @@ Concrete replacement:
 
 ### 4. The reuse disclaimer no longer covers everything the edit quarantined
 
-**File**: `papers/cubic-stabilization-epilogue/sections/02-envelope.tex`, proof
+**File**: `papers/cubic-stabilization-m1/sections/02-envelope.tex`, proof
 of `prop:no-elliptic-product`.
 
 The edit rewrote the construction of \(L'\) so that three consequences are now
@@ -188,7 +188,7 @@ Concrete replacement for the reuse sentence:
 
 ### 5. "that sum" is ambiguous between two sums in the same sentence pair
 
-**File**: `papers/cubic-stabilization-epilogue/sections/02-envelope.tex`, same
+**File**: `papers/cubic-stabilization-m1/sections/02-envelope.tex`, same
 paragraph as finding 4.
 
 Quoted text:
@@ -218,7 +218,7 @@ Concrete replacement:
 
 ### 6. The inserted relative clause separated "Each" from its antecedent
 
-**File**: `papers/cubic-stabilization-epilogue/sections/03-minimal-class.tex`.
+**File**: `papers/cubic-stabilization-m1/sections/03-minimal-class.tex`.
 
 Quoted text, with the added clause in bold:
 
@@ -254,7 +254,7 @@ rewritten by this diff and the whole sentence will be reflowed anyway.
 
 ### 7. "signature" is defined two uses after its first use, and the definition has a loose clause
 
-**File**: `papers/cubic-stabilization-epilogue/sections/03-minimal-class.tex`.
+**File**: `papers/cubic-stabilization-m1/sections/03-minimal-class.tex`.
 
 Quoted text:
 
@@ -297,7 +297,7 @@ and then delete the trailing clause from the sentence where it now sits.
 
 ### 8. The Klein-cubic exclusion is one sentence with three unresolved pronouns
 
-**File**: `papers/cubic-stabilization-epilogue/sections/03-minimal-class.tex`.
+**File**: `papers/cubic-stabilization-m1/sections/03-minimal-class.tex`.
 
 Quoted text:
 
@@ -338,7 +338,7 @@ Concrete replacement:
 
 ### 9. The finiteness step now stands twice in the same section with two different justifications
 
-**File**: `papers/cubic-stabilization-epilogue/sections/03-minimal-class.tex`.
+**File**: `papers/cubic-stabilization-m1/sections/03-minimal-class.tex`.
 
 The added sentence:
 
@@ -391,7 +391,7 @@ and "the moduli map" is left as is, but it would read better as "under
 
 ### 10. The ledger's literature cell pins a hypothesis the proposition does not have, in a sentence that does not close
 
-**File**: `papers/cubic-stabilization-epilogue/claim-proof-novelty-ledger.md`,
+**File**: `papers/cubic-stabilization-m1/claim-proof-novelty-ledger.md`,
 row "No elliptic-product route into Voisin's components", literature-posture
 cell.
 
@@ -430,7 +430,7 @@ Concrete replacement:
 
 ### 11. The claim map's conclusion drops two assertions the proposition makes
 
-**File**: `papers/cubic-stabilization-epilogue/lean/verification/claims.json`,
+**File**: `papers/cubic-stabilization-m1/lean/verification/claims.json`,
 row `prop:no-elliptic-product`, field `conclusion`.
 
 The edited proposition asserts, in its statement, both that the two-factor case
@@ -457,7 +457,7 @@ Again this does not affect `statement_digest`.
 
 ### 12. The proposition's last sentence carries a mid-sentence override of its own standing hypothesis
 
-**File**: `papers/cubic-stabilization-epilogue/sections/02-envelope.tex`,
+**File**: `papers/cubic-stabilization-m1/sections/02-envelope.tex`,
 statement of `prop:no-elliptic-product`.
 
 Quoted text:
@@ -488,7 +488,7 @@ the only place that needs the change.
 
 ### 13. Small wording points in the ledger status cell
 
-**File**: `papers/cubic-stabilization-epilogue/claim-proof-novelty-ledger.md`,
+**File**: `papers/cubic-stabilization-m1/claim-proof-novelty-ledger.md`,
 row "No elliptic-product route into Voisin's components", proof-status cell.
 
 Quoted text:
@@ -515,9 +515,9 @@ Concrete replacement:
 **Mechanical hygiene.** The manuscript's own spacing lint,
 
     nix shell nixpkgs#python3 -c python3 ../scripts/lint_tex_spacing.py \
-      cubic_stabilization_epilogue.tex sections/*.tex
+      cubic_stabilization_m1.tex sections/*.tex
 
-run from `papers/cubic-stabilization-epilogue`, reports `TeX spacing-command
+run from `papers/cubic-stabilization-m1`, reports `TeX spacing-command
 lint: 7 files: CHECK OK` and exits zero.
 
 **Line width.** The longest changed line is 78 columns in

@@ -6,7 +6,7 @@ between what a source says and what the manuscript claims it says. The blocking 
 in the paper's own completion machinery on the blowup side, not in its reading of the
 literature.**
 
-Target: `/home/tavis/src/othello/papers/cubic-stabilization-epilogue/sections/04-one-step.tex`,
+Target: `/home/tavis/src/othello/papers/cubic-stabilization-m1/sections/04-one-step.tex`,
 Proposition `prop:framed-operations` ("Framed operation formulas"), statement lines 369-388,
 proof lines 390-704. Formula (4.2) `eq:projective-bundle-nu` is the projective-bundle formula
 \(\nu_6(\mathbb P_T(V)) = r\,\nu_6(T)\); formula (4.3) `eq:blowup-nu` is the blowup formula
@@ -18,7 +18,7 @@ each quotation can be re-found.
 
 ## Version pins
 
-| Bib key | Manuscript pin (`cubic_stabilization_epilogue.tex` lines 147-165) | Cached header | Numbering used | Verdict |
+| Bib key | Manuscript pin (`cubic_stabilization_m1.tex` lines 147-165) | Cached header | Numbering used | Verdict |
 |---|---|---|---|---|
 | `IritaniBlowup` | arXiv:2307.13555v3 (2025)  | `arXiv:2307.13555v3 [math.AG] 4 Feb 2025`  | v3 (Thm 5.18, §5.8.2, Rem. 5.6, (5.11), (5.15), (5.45)-(5.47)) | CONFIRMED |
 | `IritaniNotes`  | arXiv:2604.10028v2 (2026)  | `arXiv:2604.10028v2 [math.AG] 19 Apr 2026` | v2 (§2 items (a)-(e))                                          | CONFIRMED |
@@ -97,7 +97,7 @@ section (lines 873, 989-1139) and play no role in this proposition.
 ## Severity-ranked mismatches and gaps
 
 All line numbers below are in
-`/home/tavis/src/othello/papers/cubic-stabilization-epilogue/sections/04-one-step.tex`.
+`/home/tavis/src/othello/papers/cubic-stabilization-m1/sections/04-one-step.tex`.
 
 **S1 — BLOCKING. The blowup-side Hahn value group is built from an infinite family of bulk
 generators all carrying weight one, so "every permitted support is well ordered" is not

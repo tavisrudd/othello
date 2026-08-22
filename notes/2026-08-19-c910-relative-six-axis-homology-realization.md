@@ -16,7 +16,7 @@ signature by an explicit integral first-homology layer, and derived from it the
 statements those placeholders stood for.
 
 New module
-`papers/cubic-stabilization-epilogue/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationEpilogue/GraphLattices/SixAxisSourcePolarization.lean`
+`papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/SixAxisSourcePolarization.lean`
 builds the polarized source lattice and proves:
 
 - `ellipticWeilPairing` — the standard alternating unimodular pairing on the
@@ -90,13 +90,13 @@ All gates green, and the manuscript PDF was not rebuilt: the only manuscript
 change is the `\lean` list of `lem:relative-six-axis`, whose macros are
 typographically empty.
 
-From `papers/cubic-stabilization-epilogue/`:
+From `papers/cubic-stabilization-m1/`:
 
 ```text
 make lint formal-static
-lean/scripts/lean-build-queue.py build CubicStabilizationEpilogue \
-  TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Verification.AxiomAudit \
-  --lean-root <repository>/papers/cubic-stabilization-epilogue/lean --cores 20-23
+lean/scripts/lean-build-queue.py build CubicStabilizationM1 \
+  TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Verification.AxiomAudit \
+  --lean-root <repository>/papers/cubic-stabilization-m1/lean --cores 20-23
 make formal-audit AXIOM_LOG=<run directory>/logs/<audit target>.quiet/<run>/<invocation>/stdout.log
 ```
 

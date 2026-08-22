@@ -1,7 +1,7 @@
 # C910 — the small even block reduction in Lean
 
 **Task:** C910 (`cubic-threefolds`) — Lean companion for
-`papers/cubic-stabilization-epilogue/`.
+`papers/cubic-stabilization-m1/`.
 **Date:** 2026-08-18.  **Authority commit:** `3b0d554ea`.
 **Predecessors:** the gap audit `2026-08-18-c910-post-restructure-gap-audit.md`
 (priority 0c) and the anchor report `2026-08-18-c910-atom-route-anchor.md`.
@@ -68,9 +68,9 @@ Two restrictions:
 
 The gauge coefficients were derived symbolically before being supplied to Lean.
 The derivation is committed as
-`papers/cubic-stabilization-epilogue/verification/small_even_block_reduction.py`
+`papers/cubic-stabilization-m1/verification/small_even_block_reduction.py`
 with its recorded output `small_even_block_reduction.txt`, documented in
-`papers/cubic-stabilization-epilogue/verification/README.md`.  Replay from the
+`papers/cubic-stabilization-m1/verification/README.md`.  Replay from the
 paper directory:
 
 ```sh

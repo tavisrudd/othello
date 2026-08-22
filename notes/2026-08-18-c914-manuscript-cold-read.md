@@ -1,7 +1,7 @@
 # C914 — adversarial cold read of the manuscript change
 
 **Lane:** `cubic-threefolds` · **Date:** 2026-08-18 · **Reviewer:** independent cold read of the
-uncommitted C914 edit to `papers/cubic-stabilization-epilogue/`
+uncommitted C914 edit to `papers/cubic-stabilization-m1/`
 
 ## Verdict
 

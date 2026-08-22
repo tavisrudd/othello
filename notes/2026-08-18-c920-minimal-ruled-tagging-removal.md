@@ -2,7 +2,7 @@
 
 **Task:** C920 (`cubic-threefolds`).
 **Date:** 2026-08-18.
-**Manuscript:** `papers/cubic-stabilization-epilogue/`.
+**Manuscript:** `papers/cubic-stabilization-m1/`.
 **Authority commits:** `ee4f72d44`, `eb9b34622`, `b4d416a62`, `17e2d2a6f`,
 `2c030a8fc`, `b9ba88d26`, `a74cf275c`, `f06c3da38`.
 **Card:** `cubic-threefolds-tasks/c920-minimal-ruled-tagging-removal.md`.

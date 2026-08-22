@@ -501,7 +501,7 @@ the corrected ladder.
   specialization.  Weak factorization therefore proves `X x P^1`
   irrational, since the product has `2 nu_6(X)>0` while `P^4` has zero.
 - The proof is in `../2026-08-11-c907-v1-framed-fractional-support.md`; the
-  warning-free v1 manuscript is `papers/cubic-stabilization-epilogue/`.
+  warning-free v1 manuscript is `papers/cubic-stabilization-m1/`.
 
 ## Closed moonshot inputs
 

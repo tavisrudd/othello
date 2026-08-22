@@ -1,7 +1,7 @@
 # C910 — review of the nine remaining fragment rows and the ten absent rows
 
 **Task:** C910 (`cubic-threefolds`) — Lean companion for
-`papers/cubic-stabilization-epilogue/`.
+`papers/cubic-stabilization-m1/`.
 **Date:** 2026-08-18.  **Authority commit at review start:** `97d42fa6b`.
 **Predecessor:** `2026-08-18-c910-claim-map-review.md`, which reviewed the
 eighteen conditional deductions, the single complete row, and twelve of the

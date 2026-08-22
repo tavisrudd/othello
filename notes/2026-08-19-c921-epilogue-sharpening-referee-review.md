@@ -1,6 +1,6 @@
 # Referee review: sharpening the A_5-pencil separation statements to a single exceptional point
 
-Hostile review of the uncommitted change under `papers/cubic-stabilization-epilogue/`
+Hostile review of the uncommitted change under `papers/cubic-stabilization-m1/`
 (`git diff` plus the four untracked `verification/a5-pencil-eckardt-locus.*` /
 `a5_pencil_eckardt_locus.py` files), dated 2026-08-19. Judged against
 `papers/style-guide.md` and `notes/formal-annotation-conventions.md`.
@@ -74,7 +74,7 @@ final clause of a headline theorem — is the output of a Groebner elimination.
 The claim is no longer defensible under any reading.
 
 **(b) No sentence of the manuscript discloses the trust level.**
-`grep -n "Singular\|trusted\|certificate" sections/*.tex cubic_stabilization_epilogue.tex`
+`grep -n "Singular\|trusted\|certificate" sections/*.tex cubic_stabilization_m1.tex`
 returns nothing. The proof of `prop:A5-not-coprime` presents the computation as
 plain mathematics (`sections/03-minimal-class.tex:511-514`):
 
@@ -299,7 +299,7 @@ the two models present the same pencil over **C** would close it.
 The change updated the two propositions and the theorem and left everything that
 describes them behind:
 
-- `cubic_stabilization_epilogue.tex:94-95` (**the abstract**): "All but
+- `cubic_stabilization_m1.tex:94-95` (**the abstract**): "All but
   finitely many moduli points of this pencil lie outside the separated-variable
   locus covered by Colliot-Th\'el\`ene's criterion."
 - `sections/01-introduction.tex:147`, the sentence immediately above the
@@ -719,7 +719,7 @@ independently obtainable without it.
 **(c) "No irrationality statement ... rests on any of them" is contradicted by
 the paper's own framing.** `lem:hirzebruch-euler-spectrum` carries
 `\evidence{hirzebruch-euler-spectrum}` (`05-framed-monodromy.tex:822`) and is a
-lemma of the framed route, which `cubic_stabilization_epilogue.tex:87` describes
+lemma of the framed route, which `cubic_stabilization_m1.tex:87` describes
 as "giving a second proof of the theorem" and which
 `01-introduction.tex:241-243` describes as reproving the one-step conclusion,
 landing on `thm:every-cubic-conditional`, "One-step irrationality from the framed
@@ -855,7 +855,7 @@ None is false. All three name a proposition and then state less than it proves,
 which is the reverse of the style guide's "State claims at their natural
 strength".
 
-Separately, the **abstract** (`cubic_stabilization_epilogue.tex:94-95`) still
+Separately, the **abstract** (`cubic_stabilization_m1.tex:94-95`) still
 says only "All but finitely many moduli points of this pencil lie outside the
 separated-variable locus". With the theorem reverted this is defensible, but the
 paper now proves that the exceptional set is the single Fermat point and the

@@ -1,7 +1,7 @@
 # C910 — the unconditional genus-eight half of the flop corollary
 
 **Task:** C910 (`cubic-threefolds`) — Lean companion for
-`papers/cubic-stabilization-epilogue/`.
+`papers/cubic-stabilization-m1/`.
 **Date:** 2026-08-18.  **Authority commit:** `b1873b960`.
 **Predecessor:** the pairing-horizontality report
 `2026-08-18-c910-pairing-horizontality.md`.
@@ -85,7 +85,7 @@ the orphaned machinery themes.
 ## Export status
 
 Exported.  The standalone paper repository
-`~/src/math-papers/cubic-stabilization-epilogue` was synchronized from authority
+`~/src/math-papers/cubic-stabilization-m1` was synchronized from authority
 `a470f773b` at its commit `d58e5a4`, the export manifest verifies, and the
 repository's own `make check`, pinned Lean build, and axiom-log replay agree
 with the authority over 190 reviewer terminals.

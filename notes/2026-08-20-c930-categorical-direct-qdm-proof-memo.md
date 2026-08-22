@@ -5,7 +5,7 @@
 **Phase:** 1 -- proof and narrative design only; no manuscript edits
 
 **Target:** the sole manuscript authority is
-`papers/cubic-stabilization-epilogue/`.  The complete 60-page paper has now
+`papers/cubic-stabilization-m1/`.  The complete 60-page paper has now
 been read.  The theorem inventory, page count, table of contents, migration
 ledger, and implementation plan below refer only to that paper.  The separate
 Gamma-row manuscript is outside C930 and must not be edited.

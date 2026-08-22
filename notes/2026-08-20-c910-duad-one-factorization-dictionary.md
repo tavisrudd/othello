@@ -71,12 +71,12 @@ kernel therefore remains supplied, exactly as before.
 
 ## Validation
 
-From `papers/cubic-stabilization-epilogue/`:
+From `papers/cubic-stabilization-m1/`:
 
 ```text
 lean/scripts/lean-build-queue.py build \
-  TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Verification.AxiomAudit \
-  --lean-root <repository>/papers/cubic-stabilization-epilogue/lean --cores 20-23
+  TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Verification.AxiomAudit \
+  --lean-root <repository>/papers/cubic-stabilization-m1/lean --cores 20-23
 make lint formal-static
 make formal-audit AXIOM_LOG=<run directory>/logs/<audit target>.quiet/<run>/<invocation>/stdout.log
 ```

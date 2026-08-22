@@ -3,7 +3,7 @@
 **Date:** 2026-08-15 · **Lane:** `cubic-threefolds` · **Task:** C912
 
 **Purpose.** Adversarial assessment of Hypothesis 4.7H of
-`papers/cubic-stabilization-epilogue/`, together with the strongest defense the
+`papers/cubic-stabilization-m1/`, together with the strongest defense the
 evidence actually supports. Every evidence item carries its provenance and the
 precise reason it is valid. Nothing here is asserted from the lane's own summary
 sentences: each mechanism below was re-derived and checked against the stated
@@ -19,7 +19,7 @@ Companion audits, written for this pass:
 
 ## 1. The hypothesis, and what it is really quantified over
 
-**Statement.** `papers/cubic-stabilization-epilogue/sections/04-one-step.tex`,
+**Statement.** `papers/cubic-stabilization-m1/sections/04-one-step.tex`,
 lines 409–425, environment `hypothesisH`, "Reconstruction-displacement
 invariance". After the coefficient specialization displayed in the relevant
 construction, replacing zero bulk by one of the positive-filtration bulk

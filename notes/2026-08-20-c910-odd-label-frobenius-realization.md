@@ -13,7 +13,7 @@ identity.  This pass supplies them, and the answer is yes.
 ## What this pass did
 
 One new module,
-`papers/cubic-stabilization-epilogue/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationEpilogue/GraphLattices/SixPointOddLabelHeartAction.lean`,
+`papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/SixPointOddLabelHeartAction.lean`,
 together with one new reviewer terminal and its registrations.
 
 The six labels are the six points `0,1,2,3,4,∞` of the projective line over the
@@ -98,12 +98,12 @@ their action to be geometric, which is the same gap as before.
 
 ## Validation
 
-From `papers/cubic-stabilization-epilogue/`:
+From `papers/cubic-stabilization-m1/`:
 
 ```text
 lean/scripts/lean-build-queue.py build \
-  TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Verification.AxiomAudit \
-  --lean-root <repository>/papers/cubic-stabilization-epilogue/lean --cores 20-23
+  TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Verification.AxiomAudit \
+  --lean-root <repository>/papers/cubic-stabilization-m1/lean --cores 20-23
 make lint formal-static
 make formal-audit AXIOM_LOG=<run directory>/logs/<audit target>.quiet/<run>/<invocation>/stdout.log
 ```

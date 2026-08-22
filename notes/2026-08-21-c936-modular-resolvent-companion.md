@@ -592,7 +592,7 @@ Authority commit `818c14c4a` adds the forward reference and bibliography item.
 Authority commit `40cea7816` subsequently reduces the abstract to 164 words
 and adds the programme's standard AI-assistance disclosure.  The epilogue was
 exported from that exact source commit to
-`~/src/math-papers/cubic-stabilization-epilogue` and committed there as
+`~/src/math-papers/cubic-stabilization-m1` and committed there as
 `65ef31d`.  Standalone `make check` passes, the exporter verifies all 231
 tracked files, and the authority and standalone 51-page PDFs have identical
 SHA-256 digest

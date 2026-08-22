@@ -3,10 +3,10 @@
 **Lane:** `clebsch` · **Task:** C912 · **Date:** 2026-08-15
 
 Read-only cold read of the uncommitted working-tree change in
-`papers/cubic-stabilization-epilogue`: the title change and the new
+`papers/cubic-stabilization-m1`: the title change and the new
 introduction framing. Nothing under `papers/` was edited; no build was run.
 
-Sources read: `cubic_stabilization_epilogue.tex`, `sections/01-introduction.tex`,
+Sources read: `cubic_stabilization_m1.tex`, `sections/01-introduction.tex`,
 `sections/03-minimal-class.tex` (statements around
 `thm:six-axis-divided-powers`, `cor:universal-ch0`), `sections/04-one-step.tex`
 (`thm:nu6-birational-invariance`, `prop:cubic-packet`,
@@ -271,7 +271,7 @@ These are the three expected occurrences. Two adjacent items in the same file:
 - `papers/summary/README.md:537` quotes a stale abstract that opens "Does
   universal CH₀-triviality force rationality after stabilization? We construct
   a non-isotrivial one-parameter family ...". The manuscript abstract
-  (`cubic_stabilization_epilogue.tex:44-51`) now leads with the every-cubic
+  (`cubic_stabilization_m1.tex:44-51`) now leads with the every-cubic
   theorem. The quoted block at 537-541 predates that reordering and carries the
   old title's framing (family first, uniform theorem second). Refresh it with
   the retitle.
@@ -280,7 +280,7 @@ These are the three expected occurrences. Two adjacent items in the same file:
   change needed.
 
 Inside the manuscript directory the only remaining match is
-`papers/cubic-stabilization-epilogue/README.md:1`,
+`papers/cubic-stabilization-m1/README.md:1`,
 `# Irrationality after one stabilization` — the short-form repository heading,
 consistent with the new title and correct as is. `.zenodo.json`, `lean/README.md`,
 and `README.md:9` all carry the new title. Nothing in `sections/*.tex`,

@@ -1,8 +1,8 @@
 # C920 referee report, round two: exposition, style, internal consistency
 
-**Scope**: `git diff 3736b643a..2c030a8fc -- papers/cubic-stabilization-epilogue/sections
-papers/cubic-stabilization-epilogue/cubic_stabilization_epilogue.tex
-papers/cubic-stabilization-epilogue/verification`, read against the committed blobs of
+**Scope**: `git diff 3736b643a..2c030a8fc -- papers/cubic-stabilization-m1/sections
+papers/cubic-stabilization-m1/cubic_stabilization_m1.tex
+papers/cubic-stabilization-m1/verification`, read against the committed blobs of
 `2c030a8fc`, not the working tree (see item 0). Same standard as round one: exposition,
 style-guide compliance, internal consistency of wording and cross-references. Mathematical
 correctness remains another referee's charge.
@@ -29,7 +29,7 @@ edited lines run 104–119 columns (item 12). The rest is polish.
 
 0. **MAJOR (outside the reviewed commit, but it will ship) — the working tree contains an
    uncommitted `centre`→`center` sweep that produced a misspelling.** `git diff 2c030a8fc --
-   papers/cubic-stabilization-epilogue/sections` shows nineteen substitutions, one of which
+   papers/cubic-stabilization-m1/sections` shows nineteen substitutions, one of which
    is
 
    > "by Cayley--Hamilton its **centerd** matrix \(M-\lambda\) squares to zero."

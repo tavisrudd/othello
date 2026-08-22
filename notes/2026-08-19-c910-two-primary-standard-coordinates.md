@@ -10,7 +10,7 @@ across that identification).
 ## What this pass did
 
 New module
-`papers/cubic-stabilization-epilogue/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationEpilogue/GraphLattices/SixAxisTwoPrimaryStandardCoordinates.lean`
+`papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/SixAxisTwoPrimaryStandardCoordinates.lean`
 closes the last gap between the lattice statement and the packet
 classification.
 
@@ -60,7 +60,7 @@ two-primary half of the lemma.
 
 ## Validation
 
-From `papers/cubic-stabilization-epilogue/`, `make lint formal-static` and
+From `papers/cubic-stabilization-m1/`, `make lint formal-static` and
 `make formal-audit` against the captured audit log of the guarded build of
 `Verification.AxiomAudit` both pass, over 149 sources and 299 reviewer
 terminals, with 62 claims, 48 machinery rows, and unchanged coverage counts

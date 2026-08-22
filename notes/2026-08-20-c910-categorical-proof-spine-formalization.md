@@ -54,7 +54,7 @@ The red-team pass repaired the main type-level risks:
 
 All current gates pass:
 
-- guarded aggregate build of `CubicStabilizationEpilogue` and
+- guarded aggregate build of `CubicStabilizationM1` and
   `Verification.AxiomAudit`;
 - source audit over 167 sources and 308 reviewer terminals;
 - axiom-log audit, with the new public terminals using only `propext`,

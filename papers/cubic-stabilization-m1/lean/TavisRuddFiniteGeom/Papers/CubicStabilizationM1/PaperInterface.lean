@@ -1,0 +1,15 @@
+import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.PaperInterface.Introduction
+import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.PaperInterface.Envelope
+import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.PaperInterface.MinimalClass
+import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.PaperInterface.CategoricalOneStep
+import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.PaperInterface.FramedMonodromy
+import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.PaperInterface.Synthesis
+import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.PaperInterface.CoefficientTowers
+import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.PaperInterface.FormalConnections
+import TavisRuddFiniteGeom.Papers.CubicStabilizationM1.PaperInterface.ResiduePairing
+
+/-!
+# Reviewer interface for the cubic-stabilization companion
+
+This module exports the section-level reviewer facades as one public entry point.
+-/

@@ -1,7 +1,7 @@
 # C910 — the six-point hearts and the product-formula corollaries in Lean
 
 **Task:** C910 (`cubic-threefolds`) — Lean companion for
-`papers/cubic-stabilization-epilogue/`.
+`papers/cubic-stabilization-m1/`.
 **Date:** 2026-08-18.  **Authority commit:** `cd932d7c5`.
 **Predecessors:** the gap audit `2026-08-18-c910-post-restructure-gap-audit.md`
 (priority 0b), the anchor report `2026-08-18-c910-atom-route-anchor.md`, and the

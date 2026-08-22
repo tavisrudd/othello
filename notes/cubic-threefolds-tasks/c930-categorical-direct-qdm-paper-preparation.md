@@ -7,11 +7,11 @@
 ## Stable entry point
 
 - authoritative manuscript:
-  [cubic-stabilization-epilogue](../../papers/cubic-stabilization-epilogue/)
+  [cubic-stabilization-m1](../../papers/cubic-stabilization-m1/)
 - manuscript main source:
-  [cubic_stabilization_epilogue.tex](../../papers/cubic-stabilization-epilogue/cubic_stabilization_epilogue.tex)
+  [cubic_stabilization_m1.tex](../../papers/cubic-stabilization-m1/cubic_stabilization_m1.tex)
 - current review PDF:
-  [irrationality_after_one_stabilization.pdf](../../papers/cubic-stabilization-epilogue/irrationality_after_one_stabilization.pdf)
+  [irrationality_after_one_stabilization.pdf](../../papers/cubic-stabilization-m1/irrationality_after_one_stabilization.pdf)
 - frozen 60-page epilogue baseline:
   `notes/2026-08-20-c930-epilogue-baseline.md`
 - proof memo and paper architecture:
@@ -79,7 +79,7 @@ proof revisions and a final standalone release check.
 ## Goal
 
 Write a proof memo on top of the current
-`papers/cubic-stabilization-epilogue/` manuscript that turns C925's
+`papers/cubic-stabilization-m1/` manuscript that turns C925's
 modular categorical direct-QDM packet into one candidate paper proof.  Use the
 memo to determine how the manuscript's proof and narrative should eventually
 be adapted around the smallest honest categorical transport theorem, with the
@@ -92,7 +92,7 @@ proofs joined only at the conclusion.
 
 This item owns the bridge from C925's mathematics-only module library to a
 coherent overlay proof memo and manuscript plan for
-`papers/cubic-stabilization-epilogue/`.  Its atomic and framed routes are the
+`papers/cubic-stabilization-m1/`.  Its atomic and framed routes are the
 two required specialization tests.  The item does not silently close any open
 geometric provider in C925 or weaken a hypothesis.  Phase 2 manuscript edits
 are authorized only in that epilogue authority.
@@ -109,7 +109,7 @@ investigate, repair, or extend any higher-stabilization provider.
 ## Deliverables
 
 1. Audit the present theorem, section, and dependency spine of
-   `papers/cubic-stabilization-epilogue/` against C925's stable modules.
+   `papers/cubic-stabilization-m1/` against C925's stable modules.
 2. State the memo's candidate headline theorem at the smallest categorical
    level of generality actually supported: the reusable marked-row/point-line
    transport theorem first, followed by the cubic endpoint application.
@@ -179,7 +179,7 @@ investigate, repair, or extend any higher-stabilization provider.
 
 - `notes/cubic-threefolds-tasks/c925-modular-direct-qdm-proof-packet.md`
 - `notes/2026-08-19-c925-modular-direct-qdm-proof-packet.md`
-- `papers/cubic-stabilization-epilogue/cubic_stabilization_epilogue.tex`
+- `papers/cubic-stabilization-m1/cubic_stabilization_m1.tex`
 - the atom and conditional framed-route sections under
-  `papers/cubic-stabilization-epilogue/sections/`
+  `papers/cubic-stabilization-m1/sections/`
 - `papers/style-guide.md`

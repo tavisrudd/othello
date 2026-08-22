@@ -184,7 +184,7 @@ equivalently of characteristic other than `2`, `3`, `5` — containing such a ro
   the `derivative_crossGoldenDeterminantLine_eval` proof). They predate this change and were
   left alone rather than perturbing a proof this task did not need to touch.
 - A concurrent session is elaborating
-  `papers/cubic-stabilization-epilogue/lean/…/SixPointDuadFactorization.lean` through
+  `papers/cubic-stabilization-m1/lean/…/SixPointDuadFactorization.lean` through
   `guarded-lean`; foreign work, not touched.
 
 ## Validation

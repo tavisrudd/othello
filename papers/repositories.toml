@@ -307,10 +307,10 @@ path = "2026-07-11-continuation-rigidity-audit-scope.md"
 reason = "private audit-scope note, not part of the public manuscript repository"
 
 [[repository]]
-name = "cubic-stabilization-epilogue"
+name = "cubic-stabilization-m1"
 include_release_pdfs = true
-source = "papers/cubic-stabilization-epilogue"
-paper_ids = ["cubic_stabilization_epilogue"]
+source = "papers/cubic-stabilization-m1"
+paper_ids = ["cubic_stabilization_m1"]
 disposition = "active"
 
 [[repository.exclude_path]]

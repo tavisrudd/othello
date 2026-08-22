@@ -147,7 +147,7 @@ automatic closure.
 ## Objective
 
 Audit every claim in the Claude Fable referee report on
-`papers/cubic-stabilization-epilogue/` against the manuscript and the cited
+`papers/cubic-stabilization-m1/` against the manuscript and the cited
 primary sources, repair only verified defects, and deliver a referee-readable
 revision of the paper. The six prioritized work packages are:
 

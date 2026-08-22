@@ -1,7 +1,7 @@
 # C910 — the geometric rows of the atomic route: Euler sign, Hodge base, cubic zero atom
 
 **Task:** C910 (`cubic-threefolds`) — Lean companion for
-`papers/cubic-stabilization-epilogue/`.
+`papers/cubic-stabilization-m1/`.
 **Date:** 2026-08-18.  **Authority commit:** `202e6e6b0`.
 **Predecessor:** the residue-discriminant invariance report
 `2026-08-18-c910-residue-discriminant-invariance.md`.
@@ -151,7 +151,7 @@ in the package.
 ## Export status
 
 Exported.  The standalone paper repository
-`~/src/math-papers/cubic-stabilization-epilogue` was synchronized from authority
+`~/src/math-papers/cubic-stabilization-m1` was synchronized from authority
 `202e6e6b0` with a zero-finding coupling audit, and its own `make check`, pinned
 Lean build, and axiom-log replay agree with the authority over 220 reviewer
 terminals.

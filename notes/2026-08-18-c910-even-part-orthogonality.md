@@ -1,7 +1,7 @@
 # C910 — block diagonality for an arbitrary splitting and nondegeneracy on the even part
 
 **Task:** C910 (`cubic-threefolds`) — Lean companion for
-`papers/cubic-stabilization-epilogue/`.
+`papers/cubic-stabilization-m1/`.
 **Date:** 2026-08-18.  **Authority commit:** `ad5a9b87d`.
 **Predecessor:** the pairing-horizontality report
 `2026-08-18-c910-pairing-horizontality.md`, whose mystery ledger left the
@@ -149,7 +149,7 @@ themes.
 ## Export status
 
 Exported.  The standalone paper repository
-`~/src/math-papers/cubic-stabilization-epilogue` was synchronized from authority
+`~/src/math-papers/cubic-stabilization-m1` was synchronized from authority
 `ad5a9b87d` at its commit `8019404`, the export manifest verifies over 141
 tracked files, and the repository's own `make check`, pinned Lean build, and
 axiom-log replay agree with the authority over 201 reviewer terminals.

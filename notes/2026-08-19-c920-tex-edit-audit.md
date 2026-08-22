@@ -1,12 +1,12 @@
-# 2026-08-19 — Audit of the C920 manuscript edits (cubic-stabilization-epilogue)
+# 2026-08-19 — Audit of the C920 manuscript edits (cubic-stabilization-m1)
 
 **Lane:** `cubic-threefolds`
 
 **Subject:** every TeX edit made under C920, "Removing the divisor-tagging hypothesis
 for rational geometrically ruled centers", closed 2026-08-18 and archived. Net TeX
 diff audited: `eb9b34622..f06c3da38` restricted to
-`papers/cubic-stabilization-epilogue/**/*.tex` — 450 insertions, 50 deletions across
-`cubic_stabilization_epilogue.tex`, `sections/01-introduction.tex`,
+`papers/cubic-stabilization-m1/**/*.tex` — 450 insertions, 50 deletions across
+`cubic_stabilization_m1.tex`, `sections/01-introduction.tex`,
 `sections/05-framed-monodromy.tex`, `sections/06-synthesis.tex`. C920's Lean, evidence
 and registry edits were read where a manuscript claim depends on them.
 
@@ -231,7 +231,7 @@ it is disclosed in the `absent` claims row instead.
   (lines 64, 69, 207) have no immediately preceding docstring. Both files are C910's,
   from `7f07332c6` and `c883adf40`. The checker is fail-fast, so this masks any later
   error in the tree.
-- `lean/TavisRuddFiniteGeom/Papers/CubicStabilizationEpilogue/Quantum/NormalizedSylvesterGauge.lean`
+- `lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/Quantum/NormalizedSylvesterGauge.lean`
   is untracked (C910).
 
 ## Mystery ledger
@@ -254,9 +254,9 @@ it is disclosed in the `absent` claims row instead.
 ## Replay
 
 ```text
-git diff eb9b34622 f06c3da38 -- 'papers/cubic-stabilization-epilogue/**/*.tex' \
-  'papers/cubic-stabilization-epilogue/*.tex'
-cd papers/cubic-stabilization-epilogue
+git diff eb9b34622 f06c3da38 -- 'papers/cubic-stabilization-m1/**/*.tex' \
+  'papers/cubic-stabilization-m1/*.tex'
+cd papers/cubic-stabilization-m1
 make lint
 make manuscript warnings
 (cd verification && sha256sum -c hirzebruch-euler-spectrum.sha256)

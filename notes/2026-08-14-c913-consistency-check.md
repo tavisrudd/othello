@@ -6,7 +6,7 @@ Range: `86dfdd447..25403b891` (HEAD). Read-only pass; nothing edited except this
 Scope note before the items. The coordinator described the range as "all touching
 papers/cubic-stabilization-irrationality plus papers/papers-index.md and
 papers/summary/README.md". The range in fact also rewrites
-`papers/cubic-stabilization-epilogue/` (introduction, envelope, one-step, synthesis, its
+`papers/cubic-stabilization-m1/` (introduction, envelope, one-step, synthesis, its
 ledger, its Lean `claims.json`) and `papers/discrepancy-one-flips/`. Those are foreign to
 this pass and were not audited; only their non-interference with the irrationality paper was
 checked. The seven items below concern the irrationality paper only.

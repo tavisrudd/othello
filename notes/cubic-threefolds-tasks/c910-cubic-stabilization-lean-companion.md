@@ -7,17 +7,17 @@
 ## Objective
 
 Build a referee-facing, Mathlib-only Lean companion for
-[`papers/cubic-stabilization-epilogue/`](../../papers/cubic-stabilization-epilogue/).
+[`papers/cubic-stabilization-m1/`](../../papers/cubic-stabilization-m1/).
 The authoritative package lives at
-`papers/cubic-stabilization-epilogue/lean/` and is exported as part of the
+`papers/cubic-stabilization-m1/lean/` and is exported as part of the
 paper repository.  Nothing is duplicated under `lean/TavisRuddFiniteGeom/` or
 in a second standalone Lean repository.
 
 The public library and namespace follow the C879 paper-facing convention:
 
 ```text
-CubicStabilizationEpilogue
-TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue
+CubicStabilizationM1
+TavisRuddFiniteGeom.Papers.CubicStabilizationM1
 ```
 
 The current plan is `notes/2026-08-20-c910-categorical-proof-spine-plan.md`.
@@ -1094,11 +1094,11 @@ manuscript theorem or hiding an external premise.
 ## Package shape
 
 ```text
-papers/cubic-stabilization-epilogue/lean/
+papers/cubic-stabilization-m1/lean/
   lakefile.toml
   lean-toolchain
   README.md
-  TavisRuddFiniteGeom/Papers/CubicStabilizationEpilogue/
+  TavisRuddFiniteGeom/Papers/CubicStabilizationM1/
     GraphLattices/RankOneGeneration.lean
     GraphLattices/DividedPowers.lean
     GraphLattices/SixAxisGram.lean
@@ -1184,7 +1184,7 @@ C910 is complete only when the package builds from a clean checkout, the
 semantic and axiom gates pass, the manuscript claim map states exact coverage
 without upgrading conditional results, the tracked PDF and verification output
 are current, and the committed paper export verifies byte-for-byte in
-`~/src/math-papers/cubic-stabilization-epilogue`.
+`~/src/math-papers/cubic-stabilization-m1`.
 
 ## Mystery ledger
 

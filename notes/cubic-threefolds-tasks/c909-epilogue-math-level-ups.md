@@ -440,8 +440,8 @@ application or an exact obstruction to necessity.
 
 ## Starting authority
 
-- `papers/cubic-stabilization-epilogue/sections/03-minimal-class.tex`;
-- `papers/cubic-stabilization-epilogue/sections/04-one-step.tex`;
+- `papers/cubic-stabilization-m1/sections/03-minimal-class.tex`;
+- `papers/cubic-stabilization-m1/sections/04-one-step.tex`;
 - `notes/cubic-threefolds-tasks/c907-quantum-monodromy-stabilization.md`;
 - `notes/cubic-threefolds-tasks/c908-annals-math-upgrades.md`;
 - `notes/2026-08-11-c904-adjacent-annals-crown-audit.md`;

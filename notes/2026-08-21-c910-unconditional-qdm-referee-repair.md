@@ -5,7 +5,7 @@
 ## Result
 
 The unconditional (m=1) QDM proof in
-`papers/cubic-stabilization-epilogue/` now closes the interfaces exposed by a
+`papers/cubic-stabilization-m1/` now closes the interfaces exposed by a
 three-referee red-team pass and the subsequent Fable checks.  No file in the
 all-(m) manuscript was changed.
 
@@ -43,7 +43,7 @@ surface is now 54 claims and 316 terminals.
 ## Validation
 
 - authority exact build:
-  `TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Verification.AxiomAudit`
+  `TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Verification.AxiomAudit`
   passed through the guarded queue;
 - authority `make check`: passed, producing a warning-free 52-page PDF;
 - authority axiom-log gate: passed with 316 terminals and no unexpected

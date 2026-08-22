@@ -1,7 +1,7 @@
 # Cold algebraic-geometry referee report: cubic-stabilization epilogue
 
 **Date:** 2026-08-11  
-**Artifact read:** `papers/cubic-stabilization-epilogue/irrationality_after_one_stabilization.pdf`  
+**Artifact read:** `papers/cubic-stabilization-m1/irrationality_after_one_stabilization.pdf`  
 **PDF SHA-256:** `22c805a17b50d0038c6477b4ce62c94b45b301abb5bbb4be16b3ec5fb03b9a9b`  
 **Repository commit at read:** `ad5c19707a1b63b435c2d464b06e5b419efe3d42`  
 **Length:** 12 A4 pages  
@@ -137,7 +137,7 @@ Excellent theorem shape and unusually good scope discipline; blocked for submiss
 # Second-round cold generalist reread
 
 **Date:** 2026-08-11
-**Repaired artifact read:** `papers/cubic-stabilization-epilogue/irrationality_after_one_stabilization.pdf`
+**Repaired artifact read:** `papers/cubic-stabilization-m1/irrationality_after_one_stabilization.pdf`
 **PDF SHA-256:** `f488b00aa125e19400d05ac3e0158c5be03b61f0af7eae30df62478569a967ba`
 **Length:** 13 A4 pages
 **Verdict:** **MINOR REVISION**

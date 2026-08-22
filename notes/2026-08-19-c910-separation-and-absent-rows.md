@@ -2,7 +2,7 @@
 
 **Date:** 2026-08-19
 **Lane:** `cubic-threefolds`
-**Task:** C910 (Lean companion for `papers/cubic-stabilization-epilogue/`)
+**Task:** C910 (Lean companion for `papers/cubic-stabilization-m1/`)
 
 ## What this pass did
 
@@ -24,7 +24,7 @@ here rather than taken on report:
 | prose lint | `make lint` | 7 files, check OK |
 | correspondence, source only | `make formal-static` | PASS, 134 sources, 274 terminals, 59 claims, 46 machinery, 19 imported sources, 2 evidence bundles |
 | deterministic manuscript | `make manuscript warnings` | exit 0, warning free, tracked PDF current |
-| Lean library and audit | guarded queue, `CubicStabilizationEpilogue` and `Verification.AxiomAudit` | both built |
+| Lean library and audit | guarded queue, `CubicStabilizationM1` and `Verification.AxiomAudit` | both built |
 | axiom transcript | `make formal-audit AXIOM_LOG=<captured audit stdout>` | PASS over all 274 terminals |
 
 Coverage at that commit was 9 absent, 24 fragmentary, 25 conditional
@@ -237,14 +237,14 @@ fixed by the axis stabilizer. No claim-map row leans on either sentence.
 
 ## Replay
 
-From `papers/cubic-stabilization-epilogue/`:
+From `papers/cubic-stabilization-m1/`:
 
 ```text
 make lint formal-static
 make manuscript warnings
-lean/scripts/lean-build-queue.py build CubicStabilizationEpilogue \
-  TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Verification.AxiomAudit \
-  --lean-root <repository>/papers/cubic-stabilization-epilogue/lean --cores 20-23
+lean/scripts/lean-build-queue.py build CubicStabilizationM1 \
+  TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Verification.AxiomAudit \
+  --lean-root <repository>/papers/cubic-stabilization-m1/lean --cores 20-23
 make formal-audit AXIOM_LOG=<run directory>/logs/<audit target>.quiet/<run>/<invocation>/stdout.log
 ```
 

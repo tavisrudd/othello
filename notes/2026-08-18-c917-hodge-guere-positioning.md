@@ -1,7 +1,7 @@
 # C917 — Classical Hodge comparison and 2026 atomic positioning in the one-stabilization epilogue
 
 **Date:** 2026-08-18 · **Lane:** `cubic-threefolds` · **Task:** C917
-**Manuscript:** `papers/cubic-stabilization-epilogue/` (build target
+**Manuscript:** `papers/cubic-stabilization-m1/` (build target
 `irrationality_after_one_stabilization`, 49 pages)
 
 ## What landed
@@ -23,7 +23,7 @@ recommends when the introduction is already dense; the introduction grew from
 four pages to five in a 49-page paper.
 
 Edits, all in `sections/01-introduction.tex` and
-`cubic_stabilization_epilogue.tex`:
+`cubic_stabilization_m1.tex`:
 
 1. The second sentence of the Clemens--Griffiths paragraph was replaced by
    the classical comparison: `H^3(X x P^1, Q) = H^3(X, Q)` and
@@ -75,7 +75,7 @@ abstract are unchanged.
 
 Neither source pre-empts anything in the epilogue. Both bound its novelty
 posture, and the recorded posture is in
-`papers/cubic-stabilization-epilogue/claim-proof-novelty-ledger.md`: no
+`papers/cubic-stabilization-m1/claim-proof-novelty-ledger.md`: no
 novelty is claimed for the broad idea of localizing Hodge data into quantum
 spectral packets, nor for being the first atomic refinement of a classical
 Hodge obstruction.
@@ -97,7 +97,7 @@ quantum computations — a claim it does not make at all in the compact form.
 `make check` in the paper root: green (lint, source-only formal check,
 49-page manuscript build, and the zero-warning gate).
 
-Standalone repository `~/src/math-papers/cubic-stabilization-epilogue`
+Standalone repository `~/src/math-papers/cubic-stabilization-m1`
 synchronized from monorepo commit `9cf7433ae` by
 `papers/scripts/export-paper-repos.py sync`, its own `make check` replayed
 green, tracked PDF byte-identical to the authority

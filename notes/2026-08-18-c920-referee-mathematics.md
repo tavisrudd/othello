@@ -1,7 +1,7 @@
 # C920 referee report: mathematics of the minimal-ruled 5.7T removal
 
-Scope: `git diff 3736b643a..b4d416a62 -- papers/cubic-stabilization-epilogue/sections
-papers/cubic-stabilization-epilogue/cubic_stabilization_epilogue.tex`, plus the immediately
+Scope: `git diff 3736b643a..b4d416a62 -- papers/cubic-stabilization-m1/sections
+papers/cubic-stabilization-m1/cubic_stabilization_m1.tex`, plus the immediately
 surrounding text of `sections/05-framed-monodromy.tex`. Nothing outside that diff is reviewed.
 (The working tree is at `17e2d2a6f`, which differs from `b4d416a62` only by the equation-tag
 renumbering noted in item 16.)

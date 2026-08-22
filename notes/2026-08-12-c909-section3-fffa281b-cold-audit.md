@@ -14,7 +14,7 @@ ledger edit.
 ## Checked surface and verdict
 
 The checked text is
-`fffa281b:papers/cubic-stabilization-epilogue/sections/03-minimal-class.tex`.
+`fffa281b:papers/cubic-stabilization-m1/sections/03-minimal-class.tex`.
 The verdict by component is:
 
 | component | verdict | exact disposition |

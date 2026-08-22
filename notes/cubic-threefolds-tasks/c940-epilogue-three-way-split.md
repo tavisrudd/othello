@@ -6,7 +6,9 @@
 
 ## Goal
 
-Replace the fifty-two-page integrated `m=1` epilogue by three manuscripts:
+Replace the fifty-two-page integrated `m=1` paper by three manuscripts.  The
+short paper's authority and public alias become
+`papers/cubic-stabilization-m1/` and `cubic-stabilization-m1`:
 
 1. a short unconditional paper proving irrationality of
    \(X\times\mathbf P^1\) from the generic-even-QDM formal-exponent marker,

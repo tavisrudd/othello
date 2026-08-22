@@ -169,12 +169,12 @@ paragraph.
 ## Owning surfaces and no edits
 
 The owning novelty surface is
-papers/cubic-stabilization-epilogue/claim-proof-novelty-ledger.md, quantum row
+papers/cubic-stabilization-m1/claim-proof-novelty-ledger.md, quantum row
 “Irrationality of \(X\times\mathbf P^1\) for every smooth cubic threefold.”
 Proposed A/B rows are formal-corollary rows; C is an application row. Repeated
 unedited surfaces checked:
 
-* papers/cubic-stabilization-epilogue/sections/04-one-step.tex
+* papers/cubic-stabilization-m1/sections/04-one-step.tex
 * notes/2026-08-12-c907-low-dimensional-stable-birational-compression.md
 * notes/2026-08-12-c909-quantum-short-theorem-wording-audit.md
 * notes/2026-08-12-c909-epilogue-integration-blueprint.md

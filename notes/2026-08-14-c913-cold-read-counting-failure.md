@@ -10,7 +10,7 @@ Targets:
 - `papers/cubic-stabilization-irrationality/cubic_stabilization_irrationality.tex`,
   abstract, lines 79–84 and 107–110.
 
-Companion checked: `papers/cubic-stabilization-epilogue/sections/04-one-step.tex`
+Companion checked: `papers/cubic-stabilization-m1/sections/04-one-step.tex`
 (and `01-introduction.tex`, `05-synthesis.tex`).
 
 Summary of verdicts:

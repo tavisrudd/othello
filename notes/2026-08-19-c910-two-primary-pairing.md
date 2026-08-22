@@ -9,7 +9,7 @@ computation as the missing step.
 ## What this pass did
 
 New module
-`papers/cubic-stabilization-epilogue/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationEpilogue/GraphLattices/SixAxisTwoPrimaryPairing.lean`
+`papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/SixAxisTwoPrimaryPairing.lean`
 computes the `ℚ/ℤ`-valued discriminant pairing across that identification, in
 four steps.
 
@@ -67,7 +67,7 @@ packet classification would apply to it, leaving only diagonal stability — the
 
 ## Validation
 
-From `papers/cubic-stabilization-epilogue/`, `make lint formal-static` and
+From `papers/cubic-stabilization-m1/`, `make lint formal-static` and
 `make formal-audit` against the captured audit log of the guarded build of
 `Verification.AxiomAudit` both pass, over 148 sources and 298 reviewer
 terminals, with 62 claims, 48 machinery rows, and unchanged coverage counts

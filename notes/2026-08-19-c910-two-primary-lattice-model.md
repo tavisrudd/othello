@@ -14,7 +14,7 @@ heart, the rank-eight tensor form, and the classification of the five stable
 maximal-isotropic subspaces live. This pass identifies them.
 
 New module
-`papers/cubic-stabilization-epilogue/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationEpilogue/GraphLattices/SixAxisTwoPrimaryLatticeComparison.lean`.
+`papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/SixAxisTwoPrimaryLatticeComparison.lean`.
 The comparison is division free. The polarization `F` has the integral cofactor
 `C` of the previous pass, with `F C = C F = 6`, so the reduction modulo two of
 `C v` depends only on the class of `v` and gives a map from the whole
@@ -69,7 +69,7 @@ be shown an isometry.
 
 ## Validation
 
-From `papers/cubic-stabilization-epilogue/`, `make lint formal-static` and
+From `papers/cubic-stabilization-m1/`, `make lint formal-static` and
 `make formal-audit` against the captured audit log of the guarded build of
 `Verification.AxiomAudit` both pass, over 147 sources and 297 reviewer
 terminals, with 62 claims, 48 machinery rows, and unchanged coverage counts

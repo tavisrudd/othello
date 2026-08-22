@@ -1,7 +1,7 @@
 # C910 — the local chart's depth-one self-adjoint lift and its unimodular summand
 
 **Task:** C910 (`cubic-threefolds`) — Lean companion for
-`papers/cubic-stabilization-epilogue/`.
+`papers/cubic-stabilization-m1/`.
 **Date:** 2026-08-18.  **Authority commits:** `73db2f51b`, `1ae082209`.
 **Predecessor:** the claim-map review
 `2026-08-18-c910-cycle-side-and-absent-rows-review.md`, which recorded that two
@@ -154,7 +154,7 @@ formal-germ calculus they need are already in the package.
 ## Export status
 
 Exported.  The standalone paper repository
-`~/src/math-papers/cubic-stabilization-epilogue` was synchronized from authority
+`~/src/math-papers/cubic-stabilization-m1` was synchronized from authority
 `1ae082209` with a zero-finding coupling audit, and its own `make check`, pinned
 Lean build, and axiom-log replay agree with the authority over 224 reviewer
 terminals.

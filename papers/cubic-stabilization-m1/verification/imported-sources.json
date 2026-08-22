@@ -1,0 +1,385 @@
+{
+  "schema": "cubic-stabilization-m1-imported-sources-v1",
+  "sources": {
+    "AKMW:weak-factorization": {
+      "citation": "AKMW",
+      "pinpoint": "Theorem 0.3.1",
+      "used": "Weak factorization of a birational map of smooth projective varieties into blowups and blowdowns along smooth centers disjoint from the common isomorphism locus.",
+      "conventions": [
+        {
+          "aspect": "category",
+          "requirement": "The factorization is taken in characteristic zero and in the projective category.",
+          "matched": "All endpoints and centers in the marker theorem are smooth projective complex varieties."
+        }
+      ]
+    },
+    "Beauville:quantum-products": {
+      "citation": "Beauville",
+      "pinpoint": "Main theorem and equations (2.1)--(2.3)",
+      "used": "The three hyperplane quantum products from which the small even cubic connection matrix is derived.",
+      "conventions": [
+        {
+          "aspect": "Novikov normalization",
+          "requirement": "The Novikov variable records the line class and the hyperplane class pairs to one with that class.",
+          "matched": "The manuscript fixes the line class by this pairing and writes its monomial as q before forming the Euler matrix."
+        },
+        {
+          "aspect": "Euler normalization",
+          "requirement": "Euler multiplication on a cubic threefold is multiplication by c1(X)=2H.",
+          "matched": "The displayed matrix K_X is twice the matrix of multiplication by the hyperplane class."
+        }
+      ]
+    },
+    "BeauvilleSurfaces:minimal-surface-classification": {
+      "citation": "BeauvilleSurfaces",
+      "pinpoint": "Chapter VI",
+      "used": "The classification step that a minimal smooth projective surface has nef canonical class or is the projective plane or geometrically ruled over a curve.",
+      "conventions": [
+        {
+          "aspect": "minimality",
+          "requirement": "Minimality is in the smooth complex projective surface category.",
+          "matched": "The center-nullity argument first contracts point exceptional curves to a minimal smooth projective model."
+        }
+      ]
+    },
+    "IritaniBlowup:thm-5.18": {
+      "citation": "IritaniBlowup",
+      "pinpoint": "Equation (1.1), Theorem 5.18, especially parts (3), (4), (6), and (7), Section 5.8, Remarks 2.3 and 5.6, and equation (5.15)",
+      "used": "The regular parity-preserving quantum-D-module comparison for a blowup, with one ambient summand, c-1 occurrence-indexed center summands, explicit homogeneous degree shifts, leading branch asymptotics, and an invertible reconstruction Jacobian.",
+      "conventions": [
+        {
+          "aspect": "coefficient maps",
+          "requirement": "The graded completed source rings map injectively as in equation (1.1); no finite algebraic coefficient algebra is asserted for an arbitrary non-Fano fourfold.",
+          "matched": "The comparison is transported through the displayed injective maps and a common algebraically closed generic overfield."
+        },
+        {
+          "aspect": "loop coordinate",
+          "requirement": "The comparison and its inverse are regular in z over the stated Laurent-Novikov coefficient ring.",
+          "matched": "Marker transport permits scalar extension and formal bulk reparametrization but no negative or fractional power of z."
+        },
+        {
+          "aspect": "center variables",
+          "requirement": "The center Novikov map can have a kernel and divisor variables occur through the divisor-equation characters.",
+          "matched": "Each occurrence retains its induced specialization and is made faithful by the finite-fibre divisor-character adapter."
+        },
+        {
+          "aspect": "parity",
+          "requirement": "Parity is independent of the formal homogeneous degree, and the pull-push and Fourier comparison formulas are parity-preserving.",
+          "matched": "The atomic ledger is formed on H^ev after odd bulk variables are set to zero; the comparison and inverse are restricted to that invariant carrier."
+        },
+        {
+          "aspect": "homogeneous degree",
+          "requirement": "The ambient component has degree zero and each center component has degree minus the center codimension.",
+          "matched": "Absolute cohomological grading is omitted from the atomic block type; a graded refinement must record these degrees as suspensions and use a suspension-invariant fold."
+        },
+        {
+          "aspect": "spectral separation",
+          "requirement": "Parts (4) and (6) give the branch asymptotics and leading reconstruction parameters, while part (7) gives the invertible combined bulk Jacobian.",
+          "matched": "Independent target unit coordinates translate the finite Euler spectra independently; the resultant argument proves pairwise generic disjointness before ledger additivity is invoked."
+        }
+      ]
+    },
+    "IritaniKoto:thm-5.1": {
+      "citation": "IritaniKoto",
+      "pinpoint": "Theorem 5.1, especially parts (3)--(6), and Remarks 1.2, 5.2, and 5.3",
+      "used": "The regular parity-preserving quantum-D-module decomposition of a rank-r projective bundle into r reconstructed copies of the base module, with its homogeneous shift and invertible joint bulk Jacobian.",
+      "conventions": [
+        {
+          "aspect": "loop coordinate",
+          "requirement": "The comparison and inverse are regular in z after the Laurent fibre-Novikov extension.",
+          "matched": "Both marker folds are transported only across regular z-gauges."
+        },
+        {
+          "aspect": "bundle normalization",
+          "requirement": "Twisting by a line bundle may be used to meet the global-generation convention without changing the projective bundle.",
+          "matched": "The proof records this twist and checks that the intrinsic Novikov embedding is unchanged."
+        },
+        {
+          "aspect": "parity",
+          "requirement": "The Fourier comparison preserves the supermodule parity even though roots of even Novikov variables can have odd homogeneous degree.",
+          "matched": "The proof restricts both comparison directions to H^ev and does not infer parity from homogeneous degree."
+        },
+        {
+          "aspect": "homogeneous degree",
+          "requirement": "The comparison has homogeneous degree minus (r-1), not degree zero.",
+          "matched": "The atomic block type forgets absolute grading; a graded refinement records the shift and requires suspension invariance of the fold."
+        },
+        {
+          "aspect": "spectral separation",
+          "requirement": "The joint bulk Jacobian is invertible and the reconstructed factors have independent unit coordinates.",
+          "matched": "Independent scalar translations have generically nonzero pairwise resultants, so primary blocks of distinct factors do not fuse."
+        }
+      ]
+    },
+    "Conrad:lem-2.1.4": {
+      "citation": "Conrad",
+      "pinpoint": "Lemma 2.1.4",
+      "used": "On a connected normal rigid analytic space, an analytic subset containing a nonempty admissible open is the whole space.",
+      "conventions": [
+        {
+          "aspect": "hypothesis",
+          "requirement": "Connectedness and normality of the ambient rigid space are required.",
+          "matched": "The spectral components used here are smooth, and smooth rigid spaces are normal."
+        }
+      ]
+    },
+    "DavidHertling:euler-witt-identities": {
+      "citation": "DavidHertling",
+      "pinpoint": "Identities (19), (20), (24), and (25)",
+      "used": "The identities satisfied by the canonical powers of the Euler field of an F-manifold.",
+      "conventions": [
+        {
+          "aspect": "normalization",
+          "requirement": "The Euler field is normalized by the two identities that its Lie derivative reproduces the multiplication and that its bracket with the unit is the unit.",
+          "matched": "The intrinsic Euler field of the maximal F-manifold satisfies both, and no coordinate formula away from the small point is used."
+        }
+      ]
+    },
+    "PutSinger:ch-3": {
+      "citation": "PutSinger",
+      "pinpoint": "Chapter 3",
+      "used": "The formal classification of differential modules, including regular-singular exponents and the ramified Levelt--Turrittin factors used in the tensor-product argument.",
+      "conventions": [
+        {
+          "aspect": "normalization",
+          "requirement": "Exponents are classified modulo the integers.",
+          "matched": "Only the difference of the two exponents of the modified rank-two module is used, and it is read modulo that ambiguity."
+        },
+        {
+          "aspect": "tensor products",
+          "requirement": "After a common ramification, exponential factors add and their regular-singular factors tensor.",
+          "matched": "The projective-line product proof writes this operation explicitly and observes that the rank-one projective factor changes only the scalar irregular exponential."
+        }
+      ]
+    },
+    "Cotti:hirzebruch-quantum-presentations": {
+      "citation": "Cotti",
+      "pinpoint": "Chapter 9, Section 9.3, Theorems 9.3.1 and 9.3.3: presentations of the small quantum cohomology of every Hirzebruch surface",
+      "used": "That the two transported presentations of the small quantum cohomology of F_a obtained here are the published ones, so the derivation reproves a known theorem rather than establishing a new one.",
+      "conventions": [
+        {
+          "aspect": "normalization",
+          "requirement": "The presentations are stated in the divisor generators T_1 and T_2 of the source and in its two Novikov variables q_1 and q_2, with the section generator shifted by a multiple of the fibre generator.",
+          "matched": "Under T_1 - k T_2 = S-flat and T_2 = F for even index, and T_1 - (k+1) T_2 = S-flat and T_2 = F for odd index, with q_1 the fibre monomial and q_1^k q_2 the shifted-section monomial, both source relations become the two displayed here; the substitution was checked in both parities."
+        },
+        {
+          "aspect": "hypothesis",
+          "requirement": "The identification of the genus-zero theory of a Hirzebruch surface with that of the surface of the same parity of index is taken there from deformation equivalence together with a diffeomorphism, without an exhibited family.",
+          "matched": "The same identification is used, and the family realizing it is constructed here, so this import corroborates the transported presentation rather than carrying it.  What the source does not provide is the truncation of the transported product to finitely many Novikov monomials and the resulting presentation of the ring specialized along a strictly Novikov-admissible map, which is the form the Euler quartic consumes."
+        }
+      ]
+    },
+    "Batyrev:fano-toric-presentation": {
+      "citation": "Batyrev",
+      "pinpoint": "Section 5, the quantum cohomology ring of a smooth Fano toric manifold as its quantum Stanley--Reisner ring",
+      "used": "The presentation of the small quantum cohomology of the Hirzebruch surface of index one by the two toric quantum Stanley--Reisner relations of its primitive collections.",
+      "conventions": [
+        {
+          "aspect": "hypothesis",
+          "requirement": "The presentation is asserted for a smooth toric manifold with ample anticanonical class; it is not asserted for a general smooth projective toric variety, where the ring of the primitive relations can even have the wrong rank.",
+          "matched": "It is applied only to the Hirzebruch surface of index one, which is Fano, and the same two relations are read off directly from the genus-zero invariants of that surface, so the import corroborates a computation rather than carrying it.  The quadric surface is not covered by this import; it is handled by the Gromov--Witten product formula.  Every larger index is reduced to those two by deformation, not by the toric presentation."
+        },
+        {
+          "aspect": "normalization",
+          "requirement": "The Novikov variable attached to a primitive relation is the curve class whose pairings with the toric divisors are the coefficients of that relation.",
+          "matched": "The two primitive collections of the Hirzebruch surface of index one give the fibre class and the negative-section class with exactly those pairings, and the relations are stated in those two variables."
+        }
+      ]
+    },
+    "Givental:toric-mirror-theorem": {
+      "citation": "Givental",
+      "pinpoint": "Theorem 0.1, the mirror theorem for toric complete intersections",
+      "used": "That the quantum Stanley--Reisner presentation of a smooth Fano toric manifold is a theorem rather than a conjecture. As with the Batyrev entry, the import corroborates a computation the manuscript also performs directly from the genus-zero invariants, rather than carrying it.",
+      "conventions": [
+        {
+          "aspect": "hypothesis",
+          "requirement": "The mirror theorem identifies the small J-function with the hypergeometric series without a mirror transformation only when the anticanonical class is nef and the degree-two part of the map is trivial; outside that range a mirror map intervenes.",
+          "matched": "It is used only for the Hirzebruch surface of index one, whose anticanonical class is ample; the surfaces of higher index are reached by deformation invariance of genus-zero invariants, which does not invoke the mirror theorem."
+        },
+        {
+          "aspect": "coefficients",
+          "requirement": "The identification is over the Novikov ring of the target, with the Novikov variable of each curve class of positive degree.",
+          "matched": "The presentation is read over the Novikov ring of the surface and specialized only afterwards, along a strictly Novikov-admissible map."
+        }
+      ]
+    },
+    "McDuffSalamon:deformation-invariance": {
+      "citation": "McDuffSalamon",
+      "pinpoint": "Chapter 7, invariance of the genus-zero Gromov--Witten invariants under deformation of the symplectic form",
+      "used": "That the genus-zero Gromov--Witten invariants of the Hirzebruch surfaces F_a and F_{a mod 2} agree under the parallel transport of the curve-class lattice along a smooth projective family joining them.",
+      "conventions": [
+        {
+          "aspect": "framing",
+          "requirement": "Invariance is invariance of the invariants as functions on the lattice of curve classes carried along by parallel transport, not of the invariants indexed by a fixed geometric description of a class.",
+          "matched": "The transport is computed explicitly: it fixes the fibre class, and pairing with the fibre class together with the self-intersection determines it on the section class, sending it to the negative-section class of the other surface minus the shift times the fibre."
+        },
+        {
+          "aspect": "domain",
+          "requirement": "The two fibres must lie in one connected family of symplectic manifolds.",
+          "matched": "The family is the projectivization of the extensions with class a multiple of one fixed extension class over the affine line, chosen so that the nonzero fibres are the split bundle of the target surface; it is a smooth projective family with a relatively ample class, its zero fibre is F_a, and every nonzero fibre is F_{a mod 2}."
+        },
+        {
+          "aspect": "hypothesis",
+          "requirement": "The genus-zero invariants are constructed there for semipositive symplectic manifolds, and the family must be symplectic rather than merely algebraic.",
+          "matched": "A smooth projective family carries a smooth family of Kaehler forms, and every symplectic four-manifold is semipositive, so both conditions hold for a family of surfaces."
+        }
+      ]
+    },
+    "BehrendProduct:small-product-formula": {
+      "citation": "BehrendProduct",
+      "pinpoint": "The product formula for genus-zero Gromov--Witten invariants of a product of smooth projective varieties",
+      "used": "That the small quantum differential module of a product of two projective lines is the tensor product of the modules of the factors over the Novikov ring of the product.",
+      "conventions": [
+        {
+          "aspect": "coefficients",
+          "requirement": "The Novikov ring of the product is the tensor product of the Novikov rings of the factors, and the curve classes of the product are the pairs of curve classes of the factors.",
+          "matched": "The specialization is applied entrywise to a connection matrix with entries in that tensor product, so it restricts to each factor and the identification commutes with it."
+        },
+        {
+          "aspect": "framing",
+          "requirement": "The formula is an identity of quantum products; the passage to formal decompositions of the associated connections is a separate step.",
+          "matched": "The manuscript uses the product formula only for the quantum products.  Compatibility of the Levelt--Turrittin decomposition with tensor products is invoked separately, in the same form as in the proof of the product-with-projective-space formula, and is stated as the premise consumed by the formal statement."
+        }
+      ]
+    },
+    "Voisin:minimal-class-locus": {
+      "citation": "Voisin",
+      "pinpoint": "Theorem 4.5, with Corollary 4.4 and Lemma 4.6",
+      "used": "There is a nonempty countable union of proper subvarieties of codimension at most three in the moduli space of smooth cubic threefolds parametrizing threefolds whose CH0 group is universally trivial, and a smooth cubic threefold is universally CH0-trivial exactly when the primitive minimal class of its intermediate Jacobian is algebraic.",
+      "conventions": [
+        {
+          "aspect": "domain",
+          "requirement": "The criterion and the locus are statements about smooth cubic threefolds over the complex numbers and their coarse moduli space.",
+          "matched": "The separation corollary is applied only to smooth complex cubic threefolds, and the parameter space of the family is the cited locus rather than an arbitrary base."
+        },
+        {
+          "aspect": "hypothesis",
+          "requirement": "Universal CH0-triviality is the equivalent of algebraicity of the primitive minimal class, not of algebraicity of an arbitrary multiple of it.",
+          "matched": "The formal premise is the equivalence itself, supplied for every smooth cubic under consideration, and the family input supplies algebraicity of the primitive minimal class fibrewise."
+        },
+        {
+          "aspect": "framing",
+          "requirement": "Nonemptiness and the codimension bound are part of the cited theorem, not consequences of the criterion.",
+          "matched": "Both are imported: the formal statement represents them by a nonempty parameter type and asserts nothing about codimension."
+        }
+      ]
+    },
+    "CT:separated-variable-criterion": {
+      "citation": "CT",
+      "pinpoint": "Théorème 2.8",
+      "used": "A smooth complex cubic hypersurface of dimension at least two whose equation is a sum of forms in separated variables, each involving at most three of them, is universally CH0-trivial.",
+      "conventions": [
+        {
+          "aspect": "hypothesis",
+          "requirement": "The summands must involve pairwise disjoint groups of variables, each group of size at most three.",
+          "matched": "The formalized notion of a separated-variable decomposition assigns each variable to exactly one group, bounds every group by three, and requires each summand to involve no variable outside its own group."
+        },
+        {
+          "aspect": "domain",
+          "requirement": "The hypersurface must be smooth, over the complex numbers, and of dimension at least two.",
+          "matched": "The statement is applied to a smooth complex cubic threefold; smoothness and the ground field are supplied premises, and the polynomial lemma proved here makes no smoothness claim."
+        }
+      ]
+    },
+    "YYZ:coprime-degree-family": {
+      "citation": "YYZ",
+      "pinpoint": "Theorem 1.1 and Theorem 3.3",
+      "used": "There is a two-dimensional family of smooth cubic threefolds admitting unirational parametrizations of coprime degrees; the members of the displayed normal form admit one of degree three, and every smooth cubic hypersurface admits one of degree two.",
+      "conventions": [
+        {
+          "aspect": "hypothesis",
+          "requirement": "The degree-three parametrization is constructed for the members of the displayed normal form, not for an arbitrary smooth cubic threefold.",
+          "matched": "The formal statement takes the two parametrization degrees as premises about one supplied cubic threefold and derives nothing about any other member of the moduli space."
+        },
+        {
+          "aspect": "normalization",
+          "requirement": "Degree of a unirational parametrization means the degree of a dominant rational map from projective space of the same dimension.",
+          "matched": "The formal statement treats the parametrization predicate as opaque and uses only that the two supplied degrees are two and three."
+        }
+      ]
+    },
+    "YYZ:coprime-degrees-persist": {
+      "citation": "YYZ",
+      "pinpoint": "Corollary 3.5",
+      "used": "For a member of that family and every positive integer m, the product with projective m-space again admits unirational parametrizations of coprime degrees.",
+      "conventions": [
+        {
+          "aspect": "framing",
+          "requirement": "The corollary is stated as coprimality of some pair of degrees on the product, rather than as persistence of each individual degree.",
+          "matched": "The manuscript reads it as keeping the degrees two and three, which is how the corollary is obtained, and the formal premise is that same per-degree persistence; coprimality of two and three is then proved rather than assumed."
+        },
+        {
+          "aspect": "domain",
+          "requirement": "The product is taken with a projective space of arbitrary positive dimension.",
+          "matched": "Only the projective-line case is used, which is the case m equal to one."
+        }
+      ]
+    },
+    "ShephardTodd:rank-five-degrees": {
+      "citation": "ShephardTodd",
+      "pinpoint": "Sections 3-8 and the table of degrees; the infinite family G(m,p,n), the exceptional group G_33, and their invariant degrees",
+      "used": "The irreducible finite complex reflection groups of rank five are G(1,1,6), the groups G(m,p,5) with m at least two and p dividing m, and G_33, and their invariant rings are polynomial with degrees 2,3,4,5,6, then m,2m,3m,4m,5m/p, and 4,6,10,12,18 respectively; the number of reflections of such a group is the sum of the degrees each less one.",
+      "conventions": [
+        {
+          "aspect": "framing",
+          "requirement": "The classification is of finite groups generated by pseudo-reflections in GL(V) together with their reflection representation, up to conjugacy, and rank means the codimension of the fixed subspace.",
+          "matched": "The group used here is generated by order-two reflections of GL_5(C), is shown to act irreducibly on C^5 and therefore to have no nonzero fixed vector, so its rank is five and its reflection representation is the given one."
+        },
+        {
+          "aspect": "domain",
+          "requirement": "The classification is over the complex numbers and covers only irreducible groups; a reducible reflection group is a product of irreducible ones acting on complementary subspaces plus a fixed space.",
+          "matched": "Irreducibility is established before the classification is invoked, from the irreducible action of the automorphism group that normalizes the reflection group."
+        },
+        {
+          "aspect": "normalization",
+          "requirement": "The degrees are those of a homogeneous generating set of the invariant ring, which is polynomial by Chevalley-Shephard-Todd; a degree occurring once means the space of invariants in that degree is one-dimensional when no smaller degrees multiply into it.",
+          "matched": "Only degree three is used, and in both surviving groups the smallest degree is at least two, so a degree-three invariant is a scalar multiple of the single generator of degree three."
+        }
+      ]
+    },
+    "WeiYu:fermat-automorphisms": {
+      "citation": "WeiYu",
+      "pinpoint": "Example 3.1(1), restated in Lemma 6.2",
+      "used": "The automorphism group of the Fermat cubic threefold in P^4 is C_3^4 semidirect S_5, of order 9720: the group of diagonal matrices with cube-root entries modulo scalars, extended by the permutations of the five coordinates.",
+      "conventions": [
+        {
+          "aspect": "framing",
+          "requirement": "Automorphisms of a smooth cubic threefold are induced by projective linear transformations of the ambient P^4, so the group is read inside PGL_5(C).",
+          "matched": "Every automorphism used here is a projective linear transformation by construction, and the counting argument is carried out inside PGL(W_5)."
+        },
+        {
+          "aspect": "coordinates",
+          "requirement": "The description is in the coordinates in which the defining form is x_1^3 + ... + x_5^3.",
+          "matched": "The group is used only after the classification has put the defining form into exactly those coordinates, and the conclusion drawn from it is invariant under projective equivalence."
+        },
+        {
+          "aspect": "hypothesis",
+          "requirement": "The statement is about the smooth Fermat cubic threefold over the complex numbers, not about Fermat hypersurfaces of other dimension or degree.",
+          "matched": "It is applied to the Fermat cubic threefold alone, as the member of the pencil identified by the reflection-group classification."
+        }
+      ]
+    },
+    "Hartlieb:period-image-dimension": {
+      "citation": "Hartlieb",
+      "pinpoint": "Proposition 5.7, with Lemma 5.5 for the identification of the component",
+      "used": "The closure of the image of the intermediate-Jacobian period map on the A5-family component is a one-dimensional special subvariety of the period domain, so the family is not isotrivial and its image in coarse moduli is a curve.",
+      "conventions": [
+        {
+          "aspect": "domain",
+          "requirement": "The statement concerns the component of the classification of A5-actions denoted M_{H_1}, and not the component associated with the reducible representation 1 + W_4.",
+          "matched": "The family of the separation theorem is the smooth locus of the pencil of A5-invariant cubics on the irreducible five-dimensional representation, whose coarse-moduli image is identified with M_{H_1} through Lemma 5.5 of the same source, and the manuscript states that identification where the theorem is discussed."
+        },
+        {
+          "aspect": "normalization",
+          "requirement": "Special subvariety is meant in the sense of the period domain of intermediate Jacobians, and the assertion used is about the dimension of the closure of the image, not about the image itself being closed.",
+          "matched": "Only positivity of that dimension is used, through the statement that the period map is nonconstant on the component; no property of the closure beyond its dimension enters the separation theorem."
+        },
+        {
+          "aspect": "hypothesis",
+          "requirement": "The proposition is about the family of smooth members, so the parameter must avoid the singular members of the pencil.",
+          "matched": "The family of the theorem is indexed by the smooth locus of the pencil, which is exactly the complement of its finitely many singular members."
+        }
+      ]
+    }
+  }
+}

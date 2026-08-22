@@ -45,7 +45,7 @@ statement and gives the repeated-root hypothesis visible work to do.
 
 ## 2. Status of the motivating defect — read this before quoting anything
 
-An earlier reading of `papers/cubic-stabilization-epilogue/claim-proof-novelty-ledger.md`
+An earlier reading of `papers/cubic-stabilization-m1/claim-proof-novelty-ledger.md`
 found it asserting both results were already printed as named theorems while no such
 labels existed under `sections/`. **That discrepancy has since been repaired** by commits
 `4864cfc1` (Synchronize epilogue scope and evidence ledger) and `6eadbec6` (Close epilogue
@@ -84,7 +84,7 @@ commit to state the results as printed claims of the paper.
 
 ## 3. Insertion point and proof route
 
-File: `papers/cubic-stabilization-epilogue/sections/03-minimal-class.tex`.
+File: `papers/cubic-stabilization-m1/sections/03-minimal-class.tex`.
 
 Anchors, in order: the all-degree saturation theorem `thm:all-degree-graph-saturation`
 (near line 151), then the subsection `\subsection{The six-axis packet}` (near line 200),
@@ -98,7 +98,7 @@ multidegree lemma comes first, then the saturation theorem, then the defect prop
 The removed prose is recoverable and should be the starting point, not a rewrite:
 
 ```
-git show 8bc4b6dd^:papers/cubic-stabilization-epilogue/sections/03-minimal-class.tex
+git show 8bc4b6dd^:papers/cubic-stabilization-m1/sections/03-minimal-class.tex
 ```
 
 Check the same commit's diff of `sections/01-introduction.tex` and
@@ -128,14 +128,14 @@ Read `lean/CLAUDE.md` (the symlink to `lean/AGENTS.md`) completely before any Le
 Never invoke `lake`, `nix ... lake`, or any direct build; `run-quiet` is not a substitute
 for the guarded entry point.
 
-`papers/cubic-stabilization-epilogue/lean/verification/claims.json` is keyed by
+`papers/cubic-stabilization-m1/lean/verification/claims.json` is keyed by
 `manuscript_label` and currently carries 23 rows, one per labelled theorem-like
 environment in the manuscript. It has no rows for `lem:elliptic-multidegrees`,
 `thm:six-axis-hodge-saturation`, or `prop:rank-five-defect`. Add one row for each,
 coverage `absent`, with the schema's `objects` / `hypotheses` / `conclusion` fields filled
 honestly — do not claim a fragment that does not exist.
 
-In the same commit, move the counts in `papers/cubic-stabilization-epilogue/lean/README.md`:
+In the same commit, move the counts in `papers/cubic-stabilization-m1/lean/README.md`:
 the sentence "the machine-checked claim inventory currently contains all 23 labelled
 theorem-like environments" (near line 25) and the snapshot line "23 claims; 4 absent; 15
 fragmentary; 3 conditional; 1 complete" (near line 34) both become 26 claims and 7 absent.
@@ -155,7 +155,7 @@ fail it.
   statements without a fresh cycle audit violates the ledger's own instruction.
 - **Read `papers/style-guide.md` completely** before touching manuscript prose. Routed
   read, not optional.
-- **Mirror direction.** The monorepo `papers/cubic-stabilization-epilogue/` is
+- **Mirror direction.** The monorepo `papers/cubic-stabilization-m1/` is
   authoritative. The standalone paper repository under `~/src/math-papers/` is downstream:
   edit and validate here first, then forward-commit there as ordinary commits. Read
   `notes/export-and-mirror-conventions.md` completely before any write under

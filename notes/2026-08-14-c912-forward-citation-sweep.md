@@ -2,7 +2,7 @@
 
 Date: 2026-08-14. Bound by `notes/literature-audit-conventions.md`. The verdict
 text this licenses lives in
-`papers/cubic-stabilization-epilogue/claim-proof-novelty-ledger.md`; this file
+`papers/cubic-stabilization-m1/claim-proof-novelty-ledger.md`; this file
 is the search record.
 
 ## Purpose

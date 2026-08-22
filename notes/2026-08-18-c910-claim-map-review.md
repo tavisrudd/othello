@@ -1,7 +1,7 @@
 # C910 — review of the claim map against the manuscript and the terminals
 
 **Task:** C910 (`cubic-threefolds`) — Lean companion for
-`papers/cubic-stabilization-epilogue/`.
+`papers/cubic-stabilization-m1/`.
 **Date:** 2026-08-18.  **Authority commit:** `69c21b764`.
 **Predecessor:** the annotation-layer report
 `2026-08-18-c910-manuscript-formal-annotations.md`.

@@ -487,7 +487,7 @@ carrying a characterisation of the Voisin equivalence or of Hartlieb's classific
 be checked against this report. Not audited by this task, and named here so the omission is
 traceable rather than silent:
 
-- `papers/cubic-stabilization-epilogue/` manuscript sources (currently modified in the
+- `papers/cubic-stabilization-m1/` manuscript sources (currently modified in the
   working tree) — not inspected by this audit.
 - The cubic lane handoff `notes/handoffs/2026-07-13-twisted-cubic-transversal-spectrum.md`
   and any claim–proof–novelty ledger for the epilogue paper — not inspected.

@@ -9,7 +9,7 @@ lines 559–715) of `notes/2026-08-15-c912-frame-transport-memo.tex`: `lem:h0-sc
 
 **Claimed purpose.** Discharge Obligation A of
 `notes/2026-08-15-c912-normalization-statement.md`: make provable the manuscript's assertions at
-`papers/cubic-stabilization-epilogue/sections/04-one-step.tex` l. 520–522 ("the center connection is
+`papers/cubic-stabilization-m1/sections/04-one-step.tex` l. 520–522 ("the center connection is
 defined over `R_j`") and l. 532 ("The normalized connection descends to `B_j`").
 
 **Sources actually consulted (not taken from the audit).**

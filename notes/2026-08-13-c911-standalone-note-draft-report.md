@@ -61,7 +61,7 @@ SHA-256 `2c1d25490d53d1eb04da11e4ad8eec2d9834b25e765462186181292e7f085cce`.
 - Alias / directory: `papers/discrepancy-one-flips`, main source
   `discrepancy_one_flips.tex`, sections under `sections/`.  Nothing under
   `papers/` used that name before.
-- Layout copied from `papers/cubic-stabilization-epilogue`: `Makefile`
+- Layout copied from `papers/cubic-stabilization-m1`: `Makefile`
   (`nix develop ..#manuscript` + `latexmk -xelatex`, `SOURCE_DATE_EPOCH`
   pinned), `flake.nix`/`flake.lock`, `LICENSE` (CC BY 4.0), `README.md`.
   No Lean, no verification directory, no certificate: the note has no
@@ -195,7 +195,7 @@ required first, since the exporter refuses any repository it does not know:
 - `papers/repositories.toml`: new `[[repository]]` row
   `discrepancy-one-flips`, `include_release_pdfs = true`, disposition
   `active`, with five `Makefile` rewrite rules copied from the
-  `cubic-stabilization-epilogue` pattern: repoint `TEXSHELL` from
+  `cubic-stabilization-m1` pattern: repoint `TEXSHELL` from
   `nix develop ..#manuscript` to `.#manuscript`, and drop the `lint` target
   and its two call sites, since `papers/scripts/lint_tex_spacing.py` is
   outside the standalone boundary.

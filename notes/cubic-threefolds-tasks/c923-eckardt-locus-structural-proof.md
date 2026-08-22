@@ -34,7 +34,7 @@ subspace of `Q^6`. By elimination:
 
 Report and evidence: `../2026-08-19-c921-pencil-level-structure-and-eckardt.md`
 and `../2026-08-19-c921-integral-glued-model.md`. The paper-side bundle is
-`papers/cubic-stabilization-epilogue/verification/a5-pencil-eckardt-locus.*`.
+`papers/cubic-stabilization-m1/verification/a5-pencil-eckardt-locus.*`.
 
 ## The mechanism to try first
 

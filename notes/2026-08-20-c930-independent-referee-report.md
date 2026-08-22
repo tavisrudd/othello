@@ -31,7 +31,7 @@ marker-level certified edges, not isomorphisms of the full ambient or center
 QDM (`notes/2026-08-19-c925-conditional-m1-specialization.md:99`--`109`).
 The framed blowup law is an equality only after applying \(\nu_6\), at lines
 159--167.  The current epilogue states the same boundary in
-`papers/cubic-stabilization-epilogue/sections/05-framed-monodromy.tex:448`--`462`.
+`papers/cubic-stabilization-m1/sections/05-framed-monodromy.tex:448`--`462`.
 
 A hostile pair is
 \[

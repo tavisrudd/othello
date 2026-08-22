@@ -2,7 +2,7 @@
 
 **Lane:** `cubic-threefolds`
 
-**Scope:** `papers/cubic-stabilization-epilogue/lean/`, the corresponding
+**Scope:** `papers/cubic-stabilization-m1/lean/`, the corresponding
 paper-facing verification apparatus, and C910's planning records.  This plan is
 strictly for the epilogue's one-stabilization theorem.  Gamma-row and every
 `m >= 2` construction are outside scope.

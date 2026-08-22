@@ -1,7 +1,7 @@
 # C910 — machine-readable provenance annotations in the manuscript source
 
 **Task:** C910 (`cubic-threefolds`) — Lean companion for
-`papers/cubic-stabilization-epilogue/`.
+`papers/cubic-stabilization-m1/`.
 **Date:** 2026-08-18.  **Authority commits:** `628aaec72`, `b90f9433a`, `d871175a2`.
 **Predecessor:** the geometric-rows report
 `2026-08-18-c910-geometric-rows-of-the-atomic-route.md`.

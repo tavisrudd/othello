@@ -1,4 +1,4 @@
-# Referee audit, round three (final) — C920 Lean prose (cubic-stabilization-epilogue companion)
+# Referee audit, round three (final) — C920 Lean prose (cubic-stabilization-m1 companion)
 
 **Verdict: the coverage gap is genuinely closed and every round-two item was applied except one —
 the `prop:low-dimensional-vanishing` cautions field still carries the old, and mis-scoped, "nonminimal
@@ -9,7 +9,7 @@ Range audited: `3736b643a..a74cf275c`. Whole modules re-read: `Quantum/QuarticSp
 `Quantum/HirzebruchEulerSpectrum.lean`, `Quantum/MonomialSpecializationSeparation.lean`,
 `Applications/HirzebruchSpecializedVanishing.lean`, the appended `PaperInterface.lean` block,
 `lean/verification/claims.json`, and `verification/hirzebruch_euler_spectrum.py`. Replay reverified
-from `papers/cubic-stabilization-epilogue`: `--check` exits 0 with "certificate and digests agree".
+from `papers/cubic-stabilization-m1`: `--check` exits 0 with "certificate and digests agree".
 The twenty-three new terminals, including `hirzebruch_degenerate_rootMultiplicity_eq_one`, are in
 `verification/expected_axioms.txt` with only `propext`, `Classical.choice`, `Quot.sound`. No task
 identifier, workflow reference, local path, status prose, novelty claim, or the banned "honest"
@@ -43,7 +43,7 @@ family appears anywhere in the set.
    eigenvalues is not part of the statement"; the phantom "with the section value nonzero" is gone
    from the parametrization docstring; `HirzebruchSpecializedVanishing` says "makes the framed regular
    monodromy unipotent" and names
-   `TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Quantum.HirzebruchEulerSpectrum` by its
+   `TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Quantum.HirzebruchEulerSpectrum` by its
    module path; `MonomialSpecializationData.oddCombination_ne_zero` opens "Under the displayed
    premises" and identifies `sectionClass` as twice the shifted section class; and every splitting
    and degenerate binder is now `fibreRoot` / `sectionRoot` / `sectionScale` / `squareRoot`, with the

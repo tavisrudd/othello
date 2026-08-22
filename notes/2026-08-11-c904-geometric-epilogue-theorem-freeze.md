@@ -3,7 +3,7 @@
 **Lane:** `clebsch`
 
 **Status:** manuscript work started at
-`papers/cubic-stabilization-epilogue/`.  This freeze distinguishes the proved
+`papers/cubic-stabilization-m1/`.  This freeze distinguishes the proved
 baseline from optional period upgrades.
 
 ## Baseline main theorem

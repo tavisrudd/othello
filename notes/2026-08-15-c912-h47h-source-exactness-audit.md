@@ -13,7 +13,7 @@ imported statements with each other.
 Our-side files audited: `notes/2026-08-15-c912-frame-transport-memo.tex` (the memo;
 its `\section` "The coalesced block is rigid", which carries equations (8.1)–(8.5),
 is what the task calls "our Section 8"),
-`papers/cubic-stabilization-epilogue/sections/04-one-step.tex` (the manuscript),
+`papers/cubic-stabilization-m1/sections/04-one-step.tex` (the manuscript),
 and, where a claim is repeated, `notes/2026-08-15-c912-kkpy-imports-source-check.md`
 and `notes/2026-08-15-c912-det-r-pairing-and-serre-lattice.md`.
 
@@ -1206,7 +1206,7 @@ reference list, entry [17], read at full text: "Marius van der Put and Michael F
 Singer, *Galois theory of linear differential equations*, Grundlehren der
 mathematischen Wissenschaften [Fundamental Principles of Mathematical Sciences],
 vol. 328, Springer-Verlag, Berlin, 2003. MR 1960772." The manuscript's bibliography
-entry (`cubic_stabilization_epilogue.tex` l. 188–191) reads "M. van der Put and
+entry (`cubic_stabilization_m1.tex` l. 188–191) reads "M. van der Put and
 M. F. Singer, *Galois Theory of Linear Differential Equations*, Grundlehren der
 mathematischen Wissenschaften 328, Springer, 2003." **EXACT MATCH on every field.**
 

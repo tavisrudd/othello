@@ -1,7 +1,7 @@
 # C910 — the discriminant differential equation and spectrum transfer
 
 **Task:** C910 (`cubic-threefolds`) — Lean companion for
-`papers/cubic-stabilization-epilogue/`.
+`papers/cubic-stabilization-m1/`.
 **Date:** 2026-08-18.  **Authority commit:** `59e679e0b`.
 **Predecessor:** the low-dimensional exclusions report
 `2026-08-18-c910-low-dimensional-exclusions.md`.
@@ -133,7 +133,7 @@ refinement of `lem:orthogonal`, the absent geometric rows `lem:hodge-base` and
 ## Export status
 
 Exported.  The standalone paper repository
-`~/src/math-papers/cubic-stabilization-epilogue` was synchronized from authority
+`~/src/math-papers/cubic-stabilization-m1` was synchronized from authority
 `3c2a343d8` at its commit `20a9f57`, the export manifest verifies over its
 tracked tree, and the repository's own `make check`, pinned Lean build, and
 axiom-log replay agree with the authority over 198 reviewer terminals.

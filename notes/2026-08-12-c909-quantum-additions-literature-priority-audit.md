@@ -185,7 +185,7 @@ clearance. The old MathOverflow page is historical only and cannot support a
 ## Owning ledger rows and surfaces
 
 The current owning novelty ledger is
-papers/cubic-stabilization-epilogue/claim-proof-novelty-ledger.md. Its
+papers/cubic-stabilization-m1/claim-proof-novelty-ledger.md. Its
 quantum row is “Irrationality of \(X\times\mathbf P^1\) for every smooth
 complex cubic threefold.” It does **not** currently contain a \(V_{14}\) row.
 The safe future ledger decomposition is:
@@ -198,7 +198,7 @@ The safe future ledger decomposition is:
 
 Surfaces checked but not edited:
 
-* papers/cubic-stabilization-epilogue/sections/04-one-step.tex currently
+* papers/cubic-stabilization-m1/sections/04-one-step.tex currently
   prints the cubic lower bound \(\nu _6\ge2\) and the cubic product proof; it
   does not print the \(V_{14}\) addition.
 * notes/2026-08-12-c907-low-dimensional-stable-birational-compression.md,

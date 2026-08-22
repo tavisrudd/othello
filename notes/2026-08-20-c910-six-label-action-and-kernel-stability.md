@@ -16,7 +16,7 @@ hypothesis on the comparison matrix alone.
 ## What this pass did
 
 Two new modules under
-`papers/cubic-stabilization-epilogue/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationEpilogue/GraphLattices/`.
+`papers/cubic-stabilization-m1/lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/GraphLattices/`.
 
 `SixAxisSourcePermutationAction.lean` represents the six-label permutation
 group on the source lattice.  A permutation acts on coordinate families by
@@ -106,12 +106,12 @@ in this pass.
 
 ## Validation
 
-From `papers/cubic-stabilization-epilogue/`:
+From `papers/cubic-stabilization-m1/`:
 
 ```text
-lean/scripts/lean-build-queue.py build CubicStabilizationEpilogue \
-  TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.Verification.AxiomAudit \
-  --lean-root <repository>/papers/cubic-stabilization-epilogue/lean --cores 20-23
+lean/scripts/lean-build-queue.py build CubicStabilizationM1 \
+  TavisRuddFiniteGeom.Papers.CubicStabilizationM1.Verification.AxiomAudit \
+  --lean-root <repository>/papers/cubic-stabilization-m1/lean --cores 20-23
 make lint formal-static
 make formal-audit AXIOM_LOG=<run directory>/logs/<audit target>.quiet/<run>/<invocation>/stdout.log
 ```

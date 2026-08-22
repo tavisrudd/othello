@@ -9,7 +9,7 @@ at 49 pages, and the standalone repository is synchronized and verified.
 Report: `../2026-08-18-c917-hodge-guere-positioning.md`.
 
 **Objective:** update the `m = 1` cubic-stabilization epilogue
-(`papers/cubic-stabilization-epilogue/`, build target
+(`papers/cubic-stabilization-m1/`, build target
 `irrationality_after_one_stabilization`) so that it answers the expert question
 "why doesn't Clemens--Griffiths already obstruct `X x P^1`?", positions the
 unconditional ordinary-Hodge-atom proof against Guéré and

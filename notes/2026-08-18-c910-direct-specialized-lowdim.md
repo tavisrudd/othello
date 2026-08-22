@@ -1,7 +1,7 @@
 # C910 — direct specialized low-dimensional vanishing in Lean
 
 **Task:** C910 (`cubic-threefolds`) — Lean companion for
-`papers/cubic-stabilization-epilogue/`.
+`papers/cubic-stabilization-m1/`.
 **Date:** 2026-08-18.  **Authority commits:** `cbbdfefc9`, `e9e9c4d28`.
 **Predecessor:** the framed-germ pass `2026-08-18-c910-framed-germ-rows.md`,
 whose closing note named this row as the last absent row whose proof is
@@ -152,7 +152,7 @@ self-contained algebraic row.
 ## Export status
 
 Exported.  The standalone paper repository
-`~/src/math-papers/cubic-stabilization-epilogue` was synchronized from authority
+`~/src/math-papers/cubic-stabilization-m1` was synchronized from authority
 `e9e9c4d28` with a zero-finding coupling audit, its tracked tree verifies against
 the export manifest, and its own `make check`, pinned Lean build, and axiom-log
 replay agree with the authority over 241 reviewer terminals.

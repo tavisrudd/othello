@@ -1,8 +1,8 @@
 # C920 referee report: exposition, style, internal consistency
 
-**Scope**: `git diff 3736b643a..b4d416a62 -- papers/cubic-stabilization-epilogue/sections
-papers/cubic-stabilization-epilogue/cubic_stabilization_epilogue.tex
-papers/cubic-stabilization-epilogue/verification`. Prose, style-guide compliance, internal
+**Scope**: `git diff 3736b643a..b4d416a62 -- papers/cubic-stabilization-m1/sections
+papers/cubic-stabilization-m1/cubic_stabilization_m1.tex
+papers/cubic-stabilization-m1/verification`. Prose, style-guide compliance, internal
 consistency, cross-references, bibliography, registry prose. Mathematical correctness is
 another referee's charge; where a wording problem is entangled with a mathematical claim I
 say so and stop at the wording.
@@ -43,7 +43,7 @@ are polish.
    throughout, so I do not ask for that here, only for the collision to go.)
 
    Everything else in item 4 of the brief checks out: no `\label` in `sections/` or
-   `cubic_stabilization_epilogue.tex` is defined twice, and every `\ref`/`\eqref` target in
+   `cubic_stabilization_m1.tex` is defined twice, and every `\ref`/`\eqref` target in
    the paper — including the new `eq:center-novikov-specialization`,
    `eq:strict-novikov-valuation`, `eq:blowup-nu`, `lem:simple-euler-block`,
    `def:strict-novikov-admissible` and `prop:direct-specialized-lowdim`, whose part (ii) is

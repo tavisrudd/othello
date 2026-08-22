@@ -284,7 +284,7 @@ SHA-256 (byte counts in parentheses):
 ## 4b. Promotion into the manuscript
 
 The Eckardt bundle now also lives inside the paper, at
-`papers/cubic-stabilization-epilogue/verification/`, as
+`papers/cubic-stabilization-m1/verification/`, as
 `a5_pencil_eckardt.py` with two tracked outputs — `a5-pencil-models.txt` for
 the model checks and `a5-pencil-eckardt.txt` for the Singular run — a checksum
 manifest covering all three, a `--check` mode that recomputes the model checks

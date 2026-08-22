@@ -1,7 +1,7 @@
 # C910 — the curve and surface exclusions from named premises
 
 **Task:** C910 (`cubic-threefolds`) — Lean companion for
-`papers/cubic-stabilization-epilogue/`.
+`papers/cubic-stabilization-m1/`.
 **Date:** 2026-08-18.  **Authority commit:** `8ea3528fe`.
 **Predecessor:** the genus-eight unconditional report
 `2026-08-18-c910-genus-eight-unconditional.md`.
@@ -88,7 +88,7 @@ machinery themes.
 ## Export status
 
 Exported.  The standalone paper repository
-`~/src/math-papers/cubic-stabilization-epilogue` was synchronized from authority
+`~/src/math-papers/cubic-stabilization-m1` was synchronized from authority
 `a76d0cc08` at its commit `6c0e39d`, the export manifest verifies, and the
 repository's own `make check`, pinned Lean build, and axiom-log replay agree
 with the authority over 192 reviewer terminals.

@@ -20,7 +20,7 @@ Paper V itself or the numbered Clebsch series — those stay in `clebsch`.
 **C912 and C913 were re-pegged to this lane on 2026-08-15 by author
 instruction**, and with them both stabilization manuscripts. C912 closed the
 referee-foundation repairs to the cubic-stabilization epilogue
-(`papers/cubic-stabilization-epilogue/`), the `m = 1` statement, whose headline
+(`papers/cubic-stabilization-m1/`), the `m = 1` statement, whose headline
 is now unconditional. C913 owns the referee revision pass on
 *Irrationality of Cubic Threefolds after One Stabilization*
 (`papers/cubic-stabilization-irrationality/`), the all-`m` statement, conditional
@@ -115,7 +115,7 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   `../2026-08-20-c931-c928-referee-dossier.md`; final synthesis:
   `../2026-08-20-c931-c928-rerun-synthesis.md`.
 - **C930 — 50-page epilogue refounding passes hostile manuscript review.**
-  C930 owns only `papers/cubic-stabilization-epilogue/`, strictly at `m=1`.
+  C930 owns only `papers/cubic-stabilization-m1/`, strictly at `m=1`.
   The common occurrence-indexed marker theorem is now instantiated on distinct
   atomic and framed block types, and both specializations pass resumed, fresh
   blind, and hostile manuscript review.  The implementation retains the
@@ -664,7 +664,7 @@ promoted mathematical assertion maps to a kernel-checked declaration.
 - **C907 — quantum monodromy stabilization, active.** v1 is unconditional:
   framed formal monodromy of the numerical small quantum connection, followed
   through Iritani's blow-up comparison, proves `X x P^1` irrational for every
-  smooth cubic threefold (`papers/cubic-stabilization-epilogue/`, Silver
+  smooth cubic threefold (`papers/cubic-stabilization-m1/`, Silver
   tier). Gold (`m=2`) is reduced to a minimal nilpotent `K[N]` packet on the
   whole generalized `zeta_6` sector: endpoint `J_3`, strict blowup
   biproducts, and no center `J_3` imply irrationality; a `J_3` requires
@@ -703,9 +703,9 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   `../cubic-threefolds-tasks/c909-epilogue-math-level-ups.md`.
 - **C910 — Lean companion for the epilogue, active.** Formalizes the
   cubic-stabilization epilogue in the Mathlib-only package
-  [`papers/cubic-stabilization-epilogue/`](../../papers/cubic-stabilization-epilogue/),
+  [`papers/cubic-stabilization-m1/`](../../papers/cubic-stabilization-m1/),
   under the C879 paper-facing
-  namespace `TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue`, with
+  namespace `TavisRuddFiniteGeom.Papers.CubicStabilizationM1`, with
   reviewer entry point `PaperInterface` and machine audit
   `Verification/AxiomAudit`. The entry point is now a thin aggregator over
   semantic facades for the five proof-bearing manuscript sections, a
@@ -1016,7 +1016,7 @@ mirror, or Lean source follows automatically from any of the above.
 
 | surface | root | current state | owning task |
 |---|---|---|---|
-| Cubic-stabilization epilogue: `X x P^1` irrational, the `m = 1` statement | `papers/cubic-stabilization-epilogue/` | headline unconditional through the Section 4 atomic route since 2026-08-16; Hypothesis 5.7R and, since C920, Hypothesis 5.7T only for surface centers that are neither minimal nor geometrically ruled carry the Section 5 framed refinement stated as `thm:every-cubic-conditional`; Lean anchored to the atomic route, further coverage open under C910; the standalone export is synchronized and verified at `0387c21` | C907, C909, C910, C913 (C912 closed) |
+| Cubic-stabilization epilogue: `X x P^1` irrational, the `m = 1` statement | `papers/cubic-stabilization-m1/` | headline unconditional through the Section 4 atomic route since 2026-08-16; Hypothesis 5.7R and, since C920, Hypothesis 5.7T only for surface centers that are neither minimal nor geometrically ruled carry the Section 5 framed refinement stated as `thm:every-cubic-conditional`; Lean anchored to the atomic route, further coverage open under C910; the standalone export is synchronized and verified at `0387c21` | C907, C909, C910, C913 (C912 closed) |
 | Discrepancy-one flip correction | `papers/discrepancy-one-flips/` | published standalone note, DOI `10.5281/zenodo.21924799` | C911 (closed) |
 | *Irrationality of Cubic Threefolds after One Stabilization*: `X x P^m` for all `m`, the all-`m` statement | `papers/cubic-stabilization-irrationality/` | headline conditional on the marked-threshold wall and zero-mode hypotheses | C913 |
 
@@ -1024,7 +1024,7 @@ mirror, or Lean source follows automatically from any of the above.
 
 This lane owns the cubic-threefold research program above, its task cards
 under `notes/cubic-threefolds-tasks/`, and — since 2026-08-15 —
-both stabilization manuscripts: `papers/cubic-stabilization-epilogue/` under
+both stabilization manuscripts: `papers/cubic-stabilization-m1/` under
 C907, C909 and C910, and `papers/cubic-stabilization-irrationality/`
 under C913. It does not
 own the numbered Clebsch series (Papers I–V) or any other `clebsch`-lane

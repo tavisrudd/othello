@@ -13,7 +13,7 @@ uncommitted changes, with write timestamps seconds old. Editing the
 introduction, the claim map and the evidence registry at the same time would
 have collided with that session, so nothing was applied. The evidence-registry
 entry that had been added was reverted, and the bundle files that had been
-copied under `papers/cubic-stabilization-epilogue/verification/` were removed
+copied under `papers/cubic-stabilization-m1/verification/` were removed
 again; the paper tree carries no C914 change.
 
 Everything needed to apply the pass is below. The mathematics and the
@@ -27,10 +27,10 @@ computation are committed: report
 1. Copy the evidence bundle into the paper:
 
         cp notes/2026-08-18-c914-a5-pencil-eckardt.py \
-           papers/cubic-stabilization-epilogue/verification/a5_pencil_eckardt.py
+           papers/cubic-stabilization-m1/verification/a5_pencil_eckardt.py
         cp notes/2026-08-18-c914-a5-pencil-eckardt.txt \
-           papers/cubic-stabilization-epilogue/verification/a5-pencil-eckardt.txt
-        cd papers/cubic-stabilization-epilogue/verification && \
+           papers/cubic-stabilization-m1/verification/a5-pencil-eckardt.txt
+        cd papers/cubic-stabilization-m1/verification && \
           sha256sum a5_pencil_eckardt.py a5-pencil-eckardt.txt \
           > a5-pencil-eckardt.sha256
 

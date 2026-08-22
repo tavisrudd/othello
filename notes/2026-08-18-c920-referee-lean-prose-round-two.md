@@ -1,4 +1,4 @@
-# Referee audit, round two — C920 Lean prose (cubic-stabilization-epilogue companion)
+# Referee audit, round two — C920 Lean prose (cubic-stabilization-m1 companion)
 
 **Verdict: both blockers are cleared and the substantive composition was really formalized, but
 five defects remain — one true coverage gap against case (b) of the degeneracy dichotomy, and four
@@ -7,7 +7,7 @@ prose or naming residues, two of them created by the rename. No blockers; 5 majo
 Range audited: `3736b643a..2c030a8fc`, whole modules, same file set as round one with the two
 renamed modules (`Quantum/HirzebruchEulerSpectrum.lean`,
 `Applications/HirzebruchSpecializedVanishing.lean`). Replay reverified from
-`papers/cubic-stabilization-epilogue`: `uv run --with sympy python3
+`papers/cubic-stabilization-m1`: `uv run --with sympy python3
 verification/hirzebruch_euler_spectrum.py --check` exits 0 with "certificate and digests agree".
 All twenty-two new terminals appear in `verification/expected_axioms.txt` with only `propext`,
 `Classical.choice`, `Quot.sound`. No task identifier, workflow reference, local path, status prose,

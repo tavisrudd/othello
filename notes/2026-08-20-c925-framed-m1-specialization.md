@@ -21,12 +21,12 @@ C925 instances.
 
 The adaptation was checked against:
 
-- `papers/cubic-stabilization-epilogue/sections/05-framed-monodromy.tex`:
+- `papers/cubic-stabilization-m1/sections/05-framed-monodromy.tex`:
   Definition `def:framed-sixth-multiplicity`, Hypotheses 5.7R and 5.7T,
   `prop:framed-operations`, the specialized low-dimensional vanishing
   results, `thm:nu6-birational-invariance`, the unconditional product
   formula, and the cubic endpoint calculation;
-- `papers/cubic-stabilization-epilogue/sections/06-synthesis.tex`: the exact
+- `papers/cubic-stabilization-m1/sections/06-synthesis.tex`: the exact
   scope of the conditional refinement and its separation from the
   unconditional Section 4 proof; and
 - `notes/2026-08-19-c925-modular-direct-qdm-proof-packet.md`: the generic

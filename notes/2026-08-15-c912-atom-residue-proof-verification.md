@@ -42,7 +42,7 @@ severity:
 | Katzarkov–Kontsevich–Pantev–Yu, *Birational Invariants from Hodge Structures and Quantum Multiplication* | arXiv:2508.05105**v2** | full text of §3.4–3.5.2, §5.2.2, §5.2.6, §5.3.2, §5.4, §6.4, Ex. 6.17–6.21; re-extracted with `pdftotext -layout` | `arXiv:2508.05105` | `2c5c9f0a2f9eaf230605eaf844c3b7d08e0181e6dbc921153156a071d616ff64` |
 | Cai, *The cubic threefold is symplectically irrational* | arXiv:2608.01577**v1** | full text (§3 cubic, §4 Riemann surfaces), re-extracted with `-layout` | `arXiv:2608.01577` | `06bfccf9b67ed8cf224f5e7cc6ba2088271577787e2f8e0dd895c0ef3b404a9e` |
 
-Our-side files read: the target proof; `papers/cubic-stabilization-epilogue/sections/04-one-step.tex`
+Our-side files read: the target proof; `papers/cubic-stabilization-m1/sections/04-one-step.tex`
 (Proposition `prop:cubic-packet`); `notes/2026-08-15-c912-h47h-source-exactness-audit.md` §4;
 spot checks against `notes/2026-08-15-c912-frame-transport-memo.tex`.
 
@@ -556,7 +556,7 @@ The block-reduction recomputation was run as a standalone script under
 change `C`, and the block partition `1|1|2`, and solves the Sylvester recursion itself.
 Output reproduced verbatim in §7 above. The script is not committed here because it is
 scratch verification of an already-committed manuscript computation
-(`papers/cubic-stabilization-epilogue/sections/04-one-step.tex`, (4.9a)–(4.9e)); if this
+(`papers/cubic-stabilization-m1/sections/04-one-step.tex`, (4.9a)–(4.9e)); if this
 verification is ever cited as evidence rather than as review, the script must be committed
 under `notes/scripts/` per `notes/research-reproducibility-conventions.md`.
 

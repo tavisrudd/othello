@@ -1,7 +1,7 @@
 # C910 — gap audit after the 2026-08-16 atomic restructure
 
 **Task:** C910 (`cubic-threefolds`) — Lean companion for
-`papers/cubic-stabilization-epilogue/`.
+`papers/cubic-stabilization-m1/`.
 **Date:** 2026-08-18.
 **Inputs read:** manuscript sections `01`–`06` at authority `4ef6c743c`
 (Section 4 in full), `lean/verification/claims.json`, `PaperInterface.lean`

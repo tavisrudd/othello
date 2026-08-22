@@ -223,16 +223,16 @@ main = "continuation_graph_rigidity.tex"
 lane = "continuation"
 
 [[paper]]
-id = "cubic_stabilization_epilogue"
-dir = "papers/cubic-stabilization-epilogue"
-main = "cubic_stabilization_epilogue.tex"
-lane = "clebsch"
+id = "cubic_stabilization_m1"
+dir = "papers/cubic-stabilization-m1"
+main = "cubic_stabilization_m1.tex"
+lane = "cubic-threefolds"
 lean_terminals = [
-  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.rankOne_mixed_coefficient_identity",
-  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.packet_multiplicity_eq_of_preserving_chain",
-  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.packet_multiplicity_birational_in_dimension_four",
-  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.rankTwoProjectiveBundle_packet_transport",
-  "TavisRuddFiniteGeom.Papers.CubicStabilizationEpilogue.irrational_of_nonzero_packet",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.rankOne_mixed_coefficient_identity",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.packet_multiplicity_eq_of_preserving_chain",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.packet_multiplicity_birational_in_dimension_four",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.rankTwoProjectiveBundle_packet_transport",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.irrational_of_nonzero_packet",
 ]
 
 [[paper]]

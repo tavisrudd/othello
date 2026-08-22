@@ -1,6 +1,6 @@
 # Quantum Referee A — the differential-equations foundation
 
-Paper: `papers/cubic-stabilization-epilogue/`, built PDF
+Paper: `papers/cubic-stabilization-m1/`, built PDF
 `irrationality_after_one_stabilization.pdf` (29 pp). `make check` rebuilds clean (exit 0).
 
 Charge: Section 4 (`sections/04-one-step.tex`) through the framed operation formulas

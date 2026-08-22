@@ -12,7 +12,7 @@ that the spectrum is {lambda_+, lambda_-, 0, 0}. The two statements are
 incompatible: the displayed A omits the quantum term in the corner slot (1,4).
 Cai (arXiv:2608.01577v1, section 3) displays the same matrix with that entry
 present, and the manuscript's own block reduction
-(papers/cubic-stabilization-epilogue/sections/04-one-step.tex, (4.9a)-(4.9e))
+(papers/cubic-stabilization-m1/sections/04-one-step.tex, (4.9a)-(4.9e))
 agrees with Cai.
 
 This script computes both characteristic polynomials and the eigenvalues, and
