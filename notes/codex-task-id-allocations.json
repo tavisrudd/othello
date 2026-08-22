@@ -3356,8 +3356,26 @@
       "last": 940,
       "purpose": "Split the m=1 epilogue into unconditional QDM, six-axis, and framed-monodromy manuscripts",
       "sequence": 373
+    },
+    {
+      "count": 1,
+      "first": 941,
+      "kind": "reservation",
+      "lane": "cubic-threefolds",
+      "last": 941,
+      "purpose": "Split the m=1 one-stabilization theorem into a standalone short paper",
+      "sequence": 374
+    },
+    {
+      "count": 1,
+      "first": 942,
+      "kind": "reservation",
+      "lane": "cubic-threefolds",
+      "last": 942,
+      "purpose": "Plan and add a reviewer guide and checklist for the m=1 cubic-stabilization paper",
+      "sequence": 375
     }
   ],
-  "next_id": 941,
+  "next_id": 943,
   "schema": "codex-task-id-allocations-v1"
 }
