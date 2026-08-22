@@ -2,13 +2,15 @@
 
 **Lane:** `clebsch`
 **Paper stream:** five-paper Clebsch series and the unnumbered conference companion
-**State:** active; all five numbered papers and the unnumbered conference
-companion have sealed cold-referee ACCEPT verdicts and deterministic green
-manuscript builds. Paper III also passes the complete
+**State:** active at one external trust-chain dependency; all five numbered
+papers and the unnumbered conference companion have sealed cold-referee ACCEPT
+verdicts and deterministic green manuscript builds. Paper III also passes the complete
 local release gate, including source-only replay of all three pinned Lean closures.
 Paper I’s trust projection and mirror export remain deferred behind C855’s
 pre-existing unmapped `prop:fifteen-class-census`. The shared portfolio
-summary has a sealed cold-reader ACCEPT; mirror exports remain.
+summary has a sealed cold-reader ACCEPT. Papers II--V, the conference
+companion, the arcs paper, and the portfolio summary are exported to clean
+standalone repositories and verified; Paper I alone remains deferred.
 
 ## Objective
 
@@ -155,3 +157,34 @@ and must not be reused as mathematical terminology.
   README now leads with the universal prescribed-hole theorem rather than the
   easier small orders. No branded “golden” terminology remains in the summary.
   Independent cold reader: MINOR, repaired, sealed ACCEPT.
+- Standalone exports: clean forward commits and exporter verification pass for
+  Paper II (`dfb0e89`), Paper III (`7b1067b`), Paper IV (`7c5bbfa`), Paper V
+  (`d4fb4bc`), the conference companion (`f0c8ab7`), the arcs paper
+  (`428d067`), and the summary (`a20389d`). Paper II and Paper III pass their
+  complete release gates in the mirrors; Paper IV passes its deterministic
+  manuscript gate; Paper V and the conference companion pass `make check`;
+  the arcs manuscript, witness replay, and rank-three certificate pass. All
+  seven downstream worktrees are clean. Paper I's generated
+  `verification/statement_identity.json` still contains one stale phrase,
+  “golden operator”; regeneration and export remain correctly blocked by
+  C855's unmapped `prop:fifteen-class-census`, so C943 does not hand-edit that
+  generated trust identity.
+
+## Mystery ledger
+
+- **Settled by the C943 `ej` + `tt` closeout:** the repeated appearance of
+  five is now presented as a consequence of conference identities and their
+  \((\pm\sqrt5)\)-eigenspaces; exact title capitalization, the distinction
+  between the two Paper V torsors, and the noncanonical nature of the marked
+  sheet comparison are consistent across papers, summaries, and eligible
+  mirrors.
+- **Open evidence gap:** Paper I's generated statement identity and standalone
+  export wait on C855's theorem-map repair for
+  `prop:fifteen-class-census`. C855 owns the exact gate; no manuscript theorem
+  or terminology judgment remains open in C943.
+- **External publication state:** existing DOI/GitHub releases under former
+  titles are not rewritten or pushed by this task. Forward public versioning
+  remains the author's publication action.
+- **Mathematical mysteries:** none introduced by the terminology revision.
+  The changes preserve every theorem and ambiguity rather than creating a new
+  named structure.
