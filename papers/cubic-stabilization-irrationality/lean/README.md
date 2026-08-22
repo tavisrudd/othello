@@ -505,6 +505,17 @@ construct the classical specialization of a marked carrier, identify the
 Euler and transported Kummer divisor lines, or classify integral orders over
 a degeneration trait.
 
+`Comparison.BinaryCubicOrderResidues` checks the next finite layer for the two
+complex local Gorenstein algebra types.  Explicit rank-two projectors, left
+inverses, normalized block-off-diagonal gauges, and recurrence coefficients
+show that the dual-number order has modified-residue discriminant zero.  For
+the distinct-root order the reduced grading does not preserve the leading
+nilpotent line, so the elementary modification used by the marker is not a
+regular lattice operation.  Lean therefore excludes the exact `4/9` marker
+for these two normalized reductions.  It does not prove that a geometric
+carrier descends to a regular unital order or that its occurrence comparison
+selects either normalization.
+
 The algebraic model has a compact sufficient constructor. If the combined
 crossed and moving map `(B,D)` admits a linear retraction, an explicit incoming
 shear and target involution construct every crossed-coordinate field. An

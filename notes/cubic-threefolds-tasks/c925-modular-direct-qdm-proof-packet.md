@@ -25,7 +25,12 @@ be the whole rank-six even cohomology.  Elias--Rossi then reduce its classical
 local Gorenstein algebra to two types, but explicit graded self-dual orders
 with the same generic paired \(C_3\)-algebra and marked divisor realize both
 special fibres.  The missing theorem must retain the full QDM/divisor-equation
-calibration, not only the native order.
+calibration, not only the native order.  Lean now checks one normalized
+generic primary reduction for each type: the dual-number reduction has residue
+discriminant zero, while the distinct-root reduction does not preserve the
+leading nilpotent line and hence does not admit the marker's elementary
+modification.  Thus either normalized calibration excludes \(4/9\); the
+remaining source theorem must construct one from the geometric occurrence.
 The unconditional every-smooth theorem is not landed.  Independently, Voisin
 plus the 2025 Engel--de Gaay Fortman--Schreieder parity theorem gives an
 all-\(m\) proof for a very general cubic; that preprint result must not be
@@ -666,6 +671,15 @@ repairs in queued run `20260822-212205-b2deeebb`; trace-current replay
 `20260822-141651` reports only `propext`, `Classical.choice`, and `Quot.sound`
 on the six new terminals.
 
+The binary-cubic order-residue module elaborated without diagnostics in
+guarded run `20260822-151428`.  Its library target, `PaperInterface`, and
+`Verification.AxiomAudit` passed together in queued run
+`20260822-221819-91daa41d`.  Guarded audit run `20260822-152143` reports only
+`propext`, `Classical.choice`, and `Quot.sound` on every new public theorem and
+certificate.  A separate hostile audit found no commit-gate defect and checked
+that the normalization hypotheses imply a genuine projector, an off-block
+gauge, and block-diagonal reduced grading.
+
 The finite model currently has one hundred twenty-two checks.  It verifies only the
 advertised algebraic laws and countermodels, never an external QDM provider.
 The replayed script is 117334 bytes with SHA-256
@@ -696,8 +710,12 @@ The live frontier is source-side, not another linear consumer.
    divisor lines.  The standard dual-cubic order is not automatic, and order
    data alone do not select it.  The two explicit orders do specialize the
    matched divisor to different Jordan types, \(J_4\oplus J_2\) and
-   \(J_4\oplus J_1^{\oplus2}\); native control of that specialization is a
-   narrower sufficient target than a classification of all orders.
+   \(J_4\oplus J_1^{\oplus2}\).  The normalized primary reductions of both
+   types are now checked: the first has discriminant zero and the second fails
+   to preserve the elementary-modification line.  It therefore suffices to
+   identify the occurrence with either normalized reduction, but neither the
+   order classification nor the Laurent comparison supplies that
+   identification.
 
 2. **What Lean separates.**  The nonsplit outer-return theorem proves that
    total period is outer-label period times return-map period.  The pre-strict
@@ -713,6 +731,9 @@ The live frontier is source-side, not another linear consumer.
    identify the traced block scalar with an element of one connected cubic
    etale orbit.  These lemmas do not supply the native calibration needed to
    exclude the shear.
+   `BinaryCubicOrderResidues.no_classicalOrderModel_carriesCubicMarker`
+   checks the final two-case finite exclusion after a normalized native
+   calibration has been supplied; it does not construct that calibration.
 
 3. **All-\(m\) remainder.**  Before the strict equality case, the candidate
    center dimensions at \(n=2,3,4,5,14\) are respectively

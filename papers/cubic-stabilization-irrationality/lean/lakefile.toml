@@ -53,6 +53,7 @@ roots = [
   "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.OccurrenceLoopCertificate",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.ThreefoldKummerCompatibility",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.BinaryCubicJordanStrata",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.BinaryCubicOrderResidues",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.KummerDivisorGenerator",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.HorizontalReader",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.TraitHorizontalReader",

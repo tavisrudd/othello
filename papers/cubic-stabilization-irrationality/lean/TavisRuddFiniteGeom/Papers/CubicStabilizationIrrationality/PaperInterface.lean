@@ -42,6 +42,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.Loo
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.OccurrenceLoopCertificate
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.ThreefoldKummerCompatibility
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.BinaryCubicJordanStrata
+import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.BinaryCubicOrderResidues
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.KummerDivisorGenerator
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.HorizontalReader
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.TraitHorizontalReader
@@ -186,6 +187,14 @@ cannot contain a hard-Lefschetz class.  These finite results classify one
 operator after a binary cubic and a divisor line have been supplied.  They do
 not construct a classical-limit algebra, identify the Euler and Kummer
 divisor lines, or descend a spectral carrier to the large-radius point.
+`BinaryCubicOrderResidues` checks one normalized generic primary reduction for
+each of the two complex local Gorenstein algebra types.  In the dual-number
+type the leading nilpotent line is preserved and the modified residue has
+discriminant zero.  In the distinct-root type that line is not preserved, so
+the same elementary modification is not regular.  The resulting two-case
+theorem excludes discriminant `4/9` only after one of these two normalized
+native calibrations has been supplied; it does not construct that calibration
+from a quantum-D-module occurrence.
 `ProjectiveSpaceQuantumPolynomial` proves that the standard relation
 `X^(m+4) - q` is separable in characteristic zero for nonzero `q`. This
 kernel-checks the target's no-repeated-root algebra once its small-quantum

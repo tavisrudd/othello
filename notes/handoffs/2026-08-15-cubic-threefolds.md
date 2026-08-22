@@ -160,7 +160,12 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   so order data alone do not close the QDM residue problem.  The
   matched divisor specializes to \(J_4\oplus J_2\) and
   \(J_4\oplus J_1^{\oplus2}\), respectively, so native control of this
-  special Jordan type is a narrower possible separator.  The
+  special Jordan type is a narrower possible separator.  Lean now checks one
+  normalized generic primary reduction for each type: the dual-number
+  reduction has residue discriminant zero, while the distinct-root reduction
+  does not preserve the elementary-modification line.  Thus either normalized
+  native calibration excludes \(4/9\), but no source constructs such a
+  calibration from the geometric occurrence.  The
   pre-strict candidate dimensions at
   \(n=2,3,4,5,14\) are respectively \(\{1,2\}\), \(\{1,3\}\),
   \(\{1,3,4\}\), \(\{1,5\}\), and

@@ -124,6 +124,13 @@ three.  A sufficient, more structured statement is:
 - the transported loop and the Iritani occurrence map preserve this
   calibration.
 
+It is enough for this descent to identify the normalized generic primary
+reduction with one of the two explicit classical-order reductions below.  The
+finite residue calculation then excludes the marker in both cases.  A regular
+unital order by itself is not enough: the source theorem must also identify
+the projector, grading, first reducing gauge, and elementary-modification
+line in the native calibration.
+
 After the moving-projector, scalar-block, and connected-conjugacy adapters are
 supplied, the Kummer derivative and Vandermonde lemmas identify the cubic
 divisor quotient.  The effective large-radius theorem must then exclude the
@@ -234,9 +241,44 @@ order, \(u=a\), completed by \(v=b\), has coefficients
 controls the native special Jordan type of the transported divisor could
 separate the two orders; the generic marked divisor cannot.
 
+The normalized generic residue calculation is sharper.  For the dual-number
+order, the selected grading and second recurrence coefficient are
+
+\[
+ \begin{pmatrix}-1/2&0\\0&1/2\end{pmatrix},\qquad
+ \frac13 I_2.
+\]
+
+The leading nilpotent line is preserved, and the elementary-modified residue
+has discriminant zero.  For the distinct-root order the selected grading is
+
+\[
+ \begin{pmatrix}-11/18&0\\1/6&11/18\end{pmatrix}.
+\]
+
+Its lower-left entry is nonzero, so the grading does not preserve the leading
+nilpotent line and the same elementary modification is not a regular lattice
+operation.  Thus neither displayed normalized reduction carries the exact
+\(4/9\) marker.  This calculation does not show that a geometric occurrence
+extends to either normalization.
+
+The Lean module
+`Comparison.BinaryCubicOrderResidues` checks the projectors, left inverses,
+Jordan blocks, block-off-diagonal reducing gauges, recurrence coefficients,
+and the two-case exclusion.  Its terminal theorem is
+`BinaryCubicOrderResidues.no_classicalOrderModel_carriesCubicMarker`.
+
 This boundary is narrower than a global packet or Stokes theorem.  It is also
 stronger than generic Frobenius-algebra or divisor data, as the two red tests
 show.
+
+The new module elaborated without diagnostics in guarded run
+`20260822-151428`.  Its library target, reviewer interface, and axiom audit
+passed together in queued run `20260822-221819-91daa41d`.  Guarded audit run
+`20260822-152143` reports only `propext`, `Classical.choice`, and `Quot.sound`
+on the new public declarations.  A separate hostile audit checked the
+projector, off-block normalization, residue values, and stated scope and found
+no commit-gate defect.
 
 ## Mystery ledger
 
@@ -244,8 +286,8 @@ show.
 | --- | --- | --- |
 | settled | The codimension-two source signs are \(\lambda_0=q\) and \(\varsigma_0=-q+\pi i\rho_Z+O(q^{-1})\). | Iritani's fixed-center weights in (4.9), followed by Theorem 5.18(6). |
 | settled | Exact cubic inertia on rank-two nilpotent factors does not determine the marker. | \(\mathbf P^2\times C_g\) has an exact cubic orbit with discriminant zero; the parabolic shear has discriminant \(4/9\). |
-| open | The generic Laurent carrier may fail to extend as a saturated self-dual order in the native effective large-radius lattice. | Neither Iritani's Laurent comparison nor the generic atom splitting crosses this calibration boundary.  This is the primary C925 source gate. |
+| open | The generic Laurent carrier may fail to extend as a regular unital order with one of the two normalized native primary reductions. | Neither Iritani's Laurent comparison nor the generic atom splitting crosses the large-radius calibration boundary.  This is the primary C925 source gate. |
 | settled | A regular unital projector descent would force the carrier to be the whole rank-six even cohomology, and its local Gorenstein special fibre has two algebra types. | Locality of connected graded cohomology plus Elias--Rossi and Jelisiejew. |
-| open | The classical rank-six order is not determined by its generic cubic dual-number algebra, pairing, deck action, and marked divisor. | The two explicit orders \(A_d,A_s\) have different special fibres and the same listed generic data.  A full QDM/divisor-equation calibration is still missing. |
-| settled | The matched generic divisor has different special Jordan types in the two orders. | The binary-cubic coefficients are \((-1,1,0)\) and \((-1,0,0)\), giving \(J_4\oplus J_2\) and \(J_4\oplus J_1^{\oplus2}\).  Native special-Jordan control is a narrower possible separator. |
+| open | The classical rank-six order is not determined by its generic cubic dual-number algebra, pairing, deck action, and marked divisor. | The two explicit orders \(A_d,A_s\) have different special fibres and the same listed generic data.  Their normalized residue reductions are safe, but a full QDM/divisor-equation calibration is still missing. |
+| settled | The two normalized classical-order reductions do not carry the exact \(4/9\) marker. | In the dual-number type the residue discriminant is zero; in the distinct-root type the reduced grading has lower-left entry \(1/6\), so the elementary-modification line is not preserved.  Lean checks both alternatives. |
 | open | The derivative and trace lemmas still need a geometric scalar-block adapter. | One must control the moving projector, regular block gauge, and identification of the divisor eigenvalue with the derivative of the Euler eigenvalue on the same occurrence. |
