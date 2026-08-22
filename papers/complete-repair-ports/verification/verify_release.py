@@ -25,7 +25,7 @@ SOURCE = "complete_repair_ports.tex"
 PDF = PAPER / "complete_repair_ports.pdf"
 DETERMINISTIC_EPOCH = "1767225600"
 EXPECTED_PAGES = 23
-DOI = "10.5281/zenodo.22051904"
+DOI = "10.5281/zenodo.22051903"
 FINITEGEOM_REPOSITORY = "https://github.com/tavisrudd/finitegeom"
 GATE = "RepairPorts.Gates.CompletePorts"
 FACT_RELATIVE = Path("lean/trust/facts/RepairPorts.Gates.CompletePorts.json")
@@ -125,7 +125,7 @@ def check_public_surface() -> None:
     readme = (PAPER / "README.md").read_text(encoding="utf-8")
     require(
         f"https://doi.org/{DOI}" in readme
-        and "10.5281%2Fzenodo.22051904" in readme,
+        and "10.5281%2Fzenodo.22051903" in readme,
         "README DOI badge/link is missing or stale",
     )
     require(
