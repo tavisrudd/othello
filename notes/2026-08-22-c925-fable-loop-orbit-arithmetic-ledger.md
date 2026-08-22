@@ -136,7 +136,67 @@ or log after merge.
   in the main tree at the time of writing. Register at merge, then rerun the
   guarded aggregate and axiom audit.
 
-## 7. Suggested next step on this branch
+## 8. Explicit loop transport along one edge (derived, unverified in Lean)
+
+Iritani's ring extension (1.1) is monomial:
+\(e^{\tilde d}\mapsto Q^{\varphi_*\tilde d}q^{-[D]\cdot\tilde d}\) on the
+ambient side and \(Q_Z^{d}\mapsto Q^{\iota_*d}q^{-\rho_Z\cdot d/(r-1)}\) on
+the centre side, with \(q\) the class of a line in the exceptional divisor
+\(D\) and \(\rho_Z=c_1(N_{Z/X})\).  A cocharacter
+\(\gamma\in H^2(\tilde X,\mathbf Z)\) therefore acts on every summand through
+explicit restricted cocharacters:
+
+| Edge | Decomposition | Ambient summand sees | Centre summand sees | Kummer shift |
+|------|---------------|----------------------|---------------------|--------------|
+| blow-up \(X\to\tilde X=\mathrm{Bl}_ZX\), loop \(\gamma\) on \(X\) | \(\tilde\gamma=\pi^*\gamma\) | \(\gamma\) | \(\iota^*\gamma\) | \(0\) |
+| blow-down \(\tilde X\to X'\), loop \(\gamma\) on \(\tilde X\) | \(\gamma=\pi^*\gamma'+aE\) | \(\gamma'\) | \(\iota^*\gamma'+\tfrac{a}{r-1}\rho_Z\) (fractional) | \(a \bmod (r-1)\) |
+
+Since \(H^2(\tilde X)=\pi^*H^2(X')\oplus\mathbf ZE\), the source loop
+\(\gamma_0=h\) (the \(\mathbf P^m\) hyperplane cocharacter) descends
+canonically through the whole telescope; no choice is made at any edge.  The
+Kummer deck generator acts on the centre's inner packet by the monodromy of
+the fractional cocharacter \(\rho_Z/(r-1)\), which is trivial exactly when
+\(\rho_Z\cdot d\equiv0\pmod{r-1}\) for all \(d\) (e.g. trivial normal
+bundle, as in the \(B\times F_1\) test); the dossier's "triviality of the
+external Kummer action on the inner packet" (D3, NOT PROVIDED) is thus not
+a hypothesis to assume but a computable quantity.
+
+**Hypotheses this rests on.**
+
+| Tag | Hypothesis | Source / status |
+|-----|------------|-----------------|
+| T1 | \(\Psi\) intertwines Euler eigenvalue functions, so Puiseux exponents of marked sheets match across the edge. | Thm 5.18(1) (commutes with the quantum connection) and (3) (homogeneity of degree 0 on the ambient, \(-r\) on the centre summand). Derived; the exponential shift on centre factors is the Kummer term. |
+| T2 | \(\Psi\) is equivariant for the semilinear inertia action of \(q\mapsto e^{2\pi i}q\) (the Kummer deck), with the centre factors permuted \(j\mapsto j+1\). | Expected from uniqueness of \(\Psi\) given its initial conditions (Thm 5.18, §5.8.1) and the canonical maximal-F-bundle characterization (KKPYY Thm 4.1, 4.5): the conjugate of \(\Psi\) by the deck is another comparison with the same characterization.  **Unverified**: the uniqueness statement must be checked to cover semilinear conjugates. |
+| T3 | Marked sheets are intrinsic (spectral-extension uniqueness). | Existing: C924 / dossier D3 marked-projector square. |
+
+## 9. The \(\ell=3\) gate after Sections 1 and 8
+
+For \(m=2\) (ambient 5-fold) a correction point with period 3 must come from a
+blow-down centre \(Z\) with \(\dim Z\le3\) and a marked block, hence
+(C924 audit) \(\dim Z=3\), \(r=2\), no Kummer index at all.  Its marked
+sheets must contain a 3-orbit under the integral cocharacter
+\(\iota^*\gamma'+a\rho_Z\in H^2(Z,\mathbf Z)\), so \(Z\) has at least three
+marked rank-2 blocks and \(b_{\rm even}(Z)=2+2b_2(Z)\ge6\), i.e.
+\(b_2(Z)\ge2\).  Blow-ups of a threefold along points and curves add only
+unmarked sheets (rank-one sheets, and \(\delta^\sharp=0\) curve blocks), and
+the loop projects along the blow-down, so the 3-orbit descends to a marked
+3-orbit on a Mori fibre space \(W_{\min}\) with \(b_2(W_{\min})\ge2\):
+
+1. a Fano threefold with \(\rho\ge2\) (Mori–Mukai, finitely many families),
+   with a multi-parameter small quantum product exhibiting three conjugate
+   marked \(J_2\) blocks under one integral cocharacter;
+2. a del Pezzo fibration over \(\mathbf P^1\) with \(\rho=2\); or
+3. a conic bundle over a surface \(S\) with \(\rho(W)=\rho(S)+1\).
+
+Case 1 is a finite check in principle but needs the full multi-parameter
+small quantum product, not the one-variable quantum period (the grading loop
+is trivial on sheets, Section 3).  Cases 2–3 have no general quantum
+product computation; the cubic itself is a conic bundle over \(\mathbf P^2\),
+so case 3 contains the source geometry.  This is the exact residue of the
+\(\ell=3\) instance of the card's open provider; the Mori shortcut closed in
+dossier D12 is not reopened, since nothing here asserts a length-three ray.
+
+## 10. Suggested next step on this branch
 
 With H3 settled, Section 1 holds for every prime \(\ell=m+1\) under H2 and
 H4.  The remaining work is the \(\ell\)-cycle exclusion itself, which is the
