@@ -3383,8 +3383,17 @@
       "last": 943,
       "purpose": "Conventional terminology revision across the Clebsch and conference papers with rolling cold-referee review",
       "sequence": 376
+    },
+    {
+      "count": 1,
+      "first": 944,
+      "kind": "reservation",
+      "lane": "complete-ports",
+      "last": 944,
+      "purpose": "replace private port terminology with recovery-set and recovery-equation language",
+      "sequence": 377
     }
   ],
-  "next_id": 944,
+  "next_id": 945,
   "schema": "codex-task-id-allocations-v1"
 }
