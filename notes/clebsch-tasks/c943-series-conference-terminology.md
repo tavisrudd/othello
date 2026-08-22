@@ -2,11 +2,12 @@
 
 **Lane:** `clebsch`
 **Paper stream:** five-paper Clebsch series and the unnumbered conference companion
-**State:** active; Papers I and III have sealed cold-referee ACCEPT verdicts
-and deterministic green builds. Paper III also passes the complete local
-release gate, including source-only replay of all three pinned Lean closures.
+**State:** active; Papers I, III, and V have sealed cold-referee ACCEPT
+verdicts and deterministic green builds. Paper III also passes the complete
+local release gate, including source-only replay of all three pinned Lean closures.
 Paper I’s trust projection and mirror export remain deferred behind C855’s
-pre-existing unmapped `prop:fifteen-class-census`. Paper V is next.
+pre-existing unmapped `prop:fifteen-class-census`. Paper II and the remaining
+shared codas/cross-references are next.
 
 ## Objective
 
@@ -98,3 +99,15 @@ and must not be reused as mathematical terminology.
   `245f7274caa89141669db018a2cc10b0c5716acf37270ba476134c33351760db`;
   the complete release gate passes. Independent cold referee: MINOR, repaired
   through two sealed rereads, final ACCEPT.
+- Paper V — *Chordal and Conference Cubics: Reconstruction and a Residual
+  \(C_2\)-Torsor*: no “golden” terminology remains in the manuscript, README,
+  or Zenodo metadata. The revision distinguishes the residual chordal-line
+  torsor from the global-negation torsor \(\{[B],[-B]\}\), proves that the
+  latter corresponds to the Frobenius torsor \(\{\omega,\omega^2\}\), and
+  states outer-normalizer transport on the commutant explicitly, including
+  the mod-\(2\) triviality of diagonal switching. The coda and Paper I/III
+  citations use the revised vocabulary. `make check` passes at 23 pages;
+  deterministic PDF SHA-256 is
+  `013ca974439dc3b5f4002d78a9df31e5db6d97b2bdb6c6438ae1474c8e9aab0d`.
+  Independent cold referee: MINOR, repaired through two sealed rereads, final
+  ACCEPT.
