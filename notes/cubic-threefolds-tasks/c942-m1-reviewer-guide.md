@@ -2,8 +2,8 @@
 
 **Lane:** cubic-threefolds
 
-**Status:** queued behind C940's split-path and claim-inventory freeze;
-paper-grade independent review required
+**Status:** complete 2026-08-22; independently cold-read, release-checked, and
+exported to the standalone mirror
 
 ## Goal
 
@@ -113,6 +113,14 @@ carry the signal.
 - Existing manuscript and verification gates pass, and the authority is
   synchronized to the standalone paper repository when required by the mirror
   conventions.
+
+## Closeout
+
+Completed at authority commit `6663d9020`; see
+`notes/2026-08-22-c942-reviewer-guide-closeout.md`.  The clean standalone mirror
+ends at `b5d99f1`.  The conditional framed companion's stale evidence checksum
+is recorded there as an out-of-scope C940 defect; it is not used by the primary
+theorem.
 
 ## Starting points
 
