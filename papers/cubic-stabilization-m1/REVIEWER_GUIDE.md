@@ -1,94 +1,86 @@
-# Reviewer guide
+# A referee's route through the proof
 
-This guide gives a short route through the proof of *Irrationality of Cubic
-Threefolds after One Stabilization* and identifies the boundary between the
-written argument, cited inputs, formal deductions, and computational evidence.
-The two papers under `companions/` are logically separate and are not needed
-for this route.  The conditional all-stabilization manuscript is not part of
-this repository's primary theorem.
+The primary paper contains the whole proof of *Irrationality of Cubic
+Threefolds after One Stabilization*.  A referee can set aside the two papers
+under `companions/`; neither enters the argument below.  The conditional
+all-stabilization manuscript is a different paper.
 
-## Suggested reading
+## A first pass
 
-Start with the theorem and four-paragraph proof overview in
-[`sections/01-introduction.tex`](sections/01-introduction.tex), through the
-discussion following `thm:every-cubic`.  Then read the one-blowup model at the
-start of [`sections/02-qdm-marker.tex`](sections/02-qdm-marker.tex).  It gives
-the concrete invariant before the categorical ledger.  The remainder of that
-section contains the complete proof.  The consequences in
-[`sections/03-applications.tex`](sections/03-applications.tex) may be skipped
-on a first pass.
+Read `thm:every-cubic` and the four paragraphs after it in
+[`sections/01-introduction.tex`](sections/01-introduction.tex).  Then turn to
+the one-blowup model at the start of
+[`sections/02-qdm-marker.tex`](sections/02-qdm-marker.tex).  That model says in
+concrete terms what the ledger formalizes.  The rest of Section 2 proves the
+theorem.  Section 3 contains consequences and can wait.
 
-## For referees
+## Six checks
 
-The shortest route through the central argument is:
+1. **What is being counted?** Start with the generalized eigenspaces of Euler
+   multiplication.  `prop:generic-spectral-connection-splitting` upgrades
+   their separated leading decomposition to formal connection blocks.
+   `thm:marker-ledger` turns any additive block marker into a birational
+   invariant once every actual center occurrence has value zero.  Occurrences
+   are kept separate, even when they come from the same center.
+2. **Do the QDM comparisons give the required ledger formulas?**
+   `lem:faithful-center-base-change` restores the curve-class information lost
+   by the raw center Novikov map.  `prop:qdm-operation-ledgers` then brings in
+   Iritani's blowup comparison and Iritani--Koto's projective-bundle
+   comparison.  The points to check are the common coefficient fields, the
+   even carrier, regularity in $z$, grading shifts, and the indexing of the
+   center copies.
+3. **Why does the rank-two test survive the allowed changes?** By
+   `lem:A0preserve`, the only possible new pole in the elementary modification
+   vanishes.  `prop:rank2-rigidity` shows that the modified residue moves by
+   conjugation.  `prop:residue-discriminant-exponents` identifies its
+   eigenvalues modulo $\mathbb Z$ with the formal exponent classes.  The marker
+   requires distinct exponent classes: nonzero residue discriminant alone
+   would also admit resonant blocks.
+4. **Does a cubic carry the marked block?** `prop:cubic-block-data` starts from
+   Beauville's three displayed quantum products.  The resulting zero block has
+   exponent representatives $-1/6$ and $-5/6$.  Their difference is $2/3$, so
+   the cubic marker is one.
+5. **Can a factorization center carry the same marker?**
+   `prop:atomic-lowdim` rules out every point, curve, and smooth projective
+   surface, including each center after the comparison base change.  For
+   surfaces, the proof separately treats nef canonical class, projective
+   space, ruled surfaces, and point blowups.  This is the geometric step on
+   which the fourfold argument depends.
+6. **Finish at the two endpoints.** The projective-bundle formula gives value
+   two on $X\times\mathbb P^1$.  The generic quantum product of
+   $\mathbb P^4$ is semisimple, so its value is zero.  Weak factorization,
+   `thm:marker-ledger`, and `prop:atomic-lowdim` make those values incompatible
+   with rationality.
 
-1. **The additive ledger.** Starting from the generalized eigenspaces of Euler
-   multiplication, `prop:generic-spectral-connection-splitting` upgrades the
-   separated leading decomposition to formal connection blocks.
-   `thm:marker-ledger` shows that an additive marker of those blocks is
-   birationally invariant once every actual center occurrence contributes
-   zero.  The occurrence index is essential: repeated copies of the same
-   center are not silently identified.
-2. **The operation formulas.** `lem:faithful-center-base-change` restores the
-   curve-class information lost by the raw center Novikov map.
-   `prop:qdm-operation-ledgers` then places Iritani's blowup comparison and
-   Iritani--Koto's projective-bundle comparison in the ledger.  Check here the
-   common coefficient fields, restriction to the even carrier, regularity in
-   $z$, grading shifts, and separate center occurrences.
-3. **The marker.** By `lem:A0preserve`, the only possible new pole in the
-   elementary modification vanishes, so the modified rank-two square-zero
-   block is regular.  `prop:rank2-rigidity` proves that its
-   modified residue moves by conjugation, and
-   `prop:residue-discriminant-exponents` identifies its eigenvalues modulo
-   $\mathbb Z$ with the formal exponent classes.  The fold marks distinct
-   exponent classes; a merely nonzero residue discriminant would also mark
-   resonant blocks and is not enough.
-4. **Cubic detection.** `prop:cubic-block-data` derives the small even block
-   from Beauville's three displayed quantum products.  The zero block has
-   exponent representatives $-1/6$ and $-5/6$, so their difference is
-   $2/3$ and the cubic marker equals one.
-5. **Center nullity.** `prop:atomic-lowdim` proves that the marker vanishes on
-   every point, curve, and smooth projective surface, including every actual
-   comparison occurrence.  The surface step separates nef-canonical surfaces,
-   projective space, ruled surfaces, and point blowups; this is the
-   load-bearing geometric exclusion for fourfold weak factorization.
-6. **The contradiction.** The projective-bundle formula gives marker value two
-   on $X\times\mathbb P^1$, while the generic quantum product of
-   $\mathbb P^4$ is semisimple and has marker zero.  Applying
-   `thm:marker-ledger` and `prop:atomic-lowdim` to a hypothetical rationality
-   factorization proves `thm:every-cubic`.
+## What is proved where
 
-## Proof and evidence boundary
+The paper writes out all six steps.  Its outside inputs are weak
+factorization, Beauville's cubic quantum products, the two QDM comparison
+theorems, regular-singular classification, and the classification of minimal
+surfaces.  [`verification/imported-sources.json`](verification/imported-sources.json)
+gives a source location and the convention match for each use.  No
+computational evidence bundle enters `thm:every-cubic`.
 
-The manuscript gives a written proof of every step above.  Its imported inputs
-are recorded with source pinpoints and recorded convention matches in
-[`verification/imported-sources.json`](verification/imported-sources.json):
-in particular weak factorization, Beauville's cubic quantum products,
-Iritani's blowup comparison, Iritani--Koto's projective-bundle comparison,
-regular-singular classification, and the classification of minimal surfaces.
-The headline theorem uses no computational evidence bundle.
+The repository also contains a Lean 4 companion built against Mathlib; it is
+not part of Mathlib.  For the primary paper, its claims file classifies five
+statements as strict fragments, nine as conditional deductions, and
+`lem:faithful-center-base-change` as absent; none is classified as complete.
+Lean proves the effective ledger and occurrence-indexed telescope, parts of
+the rank-two residue algebra, and the final implications from typed premises.
+It does not formalize the passage from residue eigenvalues to formal exponent
+classes, faithful center base change, the geometric QDM comparisons, weak
+factorization, or geometric center nullity.
 
-For the primary paper, this repository's Lean 4 companion, built against
-Mathlib, records no claim as complete:
-five are strict fragments, nine are conditional deductions, and
-`lem:faithful-center-base-change` is absent.  It checks the effective ledger
-and occurrence-indexed telescope, parts of the rank-two residue matrix algebra,
-and the final implications from explicit typed premises.  It does not
-formalize the regular-singular identification of residue eigenvalues with
-formal exponent classes, faithful center base change, the geometric QDM
-comparisons, weak factorization, or low-dimensional geometric nullity.  These
-inputs occur as theorem hypotheses rather than Lean axioms.  The primary-paper
-entry point is
+The public entry point is
 [`PaperInterface/Main.lean`](lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/PaperInterface/Main.lean).
-Exact claim coverage and limitations are recorded in
-[`claims.json`](lean/verification/claims.json), and the expected kernel-reported
-dependencies are pinned in
-[`expected_axioms.txt`](lean/verification/expected_axioms.txt).
+[`claims.json`](lean/verification/claims.json) states the exact correspondence
+and its limitations.  [`expected_axioms.txt`](lean/verification/expected_axioms.txt)
+is the expected dependency transcript, not a record of a fresh kernel run.
 
-From this directory, `make check` validates the source-level
-manuscript-to-claim correspondence, rebuilds the PDF in the pinned environment,
-and rejects TeX warnings.  It does not build Lean or replay a captured axiom
-audit.  This guide does not provide a standalone formal replay command.
-[`lean/README.md`](lean/README.md) explains the artifact and checker semantics;
-the complete registry semantics are in
-[`verification/README.md`](verification/README.md).
+From this directory, `make check` checks the source-level claim
+correspondence, rebuilds the PDF in the pinned environment, and rejects TeX
+warnings.  It neither builds Lean nor checks a captured axiom transcript.  For
+the artifact and registry semantics, see
+[`lean/README.md`](lean/README.md) and
+[`verification/README.md`](verification/README.md).  This guide does not
+supply a standalone formal replay command.
