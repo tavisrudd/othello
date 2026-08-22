@@ -297,6 +297,16 @@ Findings so far:
   algebraic edge root (for \(k=4\) the same 20 as in the exact scan).  No
   cycle of length \(\ge5\) on any resolved cocharacter.  Outputs:
   `c925-fable-dp-cycle-scan-output.txt`.
+- **Correction for \(k=6\).**  The adjunction filter \(\beta^2=c-2\) captures
+  only smooth rational curves; nodal rational curves also contribute.  The
+  bound \(\beta^2\le c^2/(9-k)\) excludes them for \(k\le5\) (so the
+  \(k=4,5\) results stand; their products commute to \(10^{-16}\)), but at
+  \(k=6\) the anticanonical class \(3L-\sum E_i\) (\(c_1\cdot\beta=3\),
+  \(\beta^2=3\)) enters with two-point invariant 12, the number of singular
+  members of a pencil of plane cubics.  Without it the \(k=6\) product fails
+  to commute at relative size 0.3 at order \(z_0^3\); with it, commutators are
+  \(10^{-16}\).  \(k=7,8\) need the Göttsche–Pandharipande recursion for
+  higher-nodal classes and are out of scope for these scripts.
 
 ### 11.4 Closed lens: Frobenius as a canonical extra symmetry
 
