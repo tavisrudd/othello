@@ -139,6 +139,12 @@ index row.
   reconstructs the graph and recomputes both ranks.  This strengthens the
   very-general all-stabilizations route only; the geometric reduction,
   regular-matroid theorem, and theta-class deduction remain imported.
+- De Gaay Fortman--Schreieder, Compositio 161 (2025), Theorem 1.2 gives a
+  refereed, independent rigidity check: no power of the intermediate Jacobian
+  of a very general cubic is isogenous to a product of curve Jacobians.  This
+  still has the very-general quantifier and is not a formal consequence of
+  stable rationality in dimension \(m+3\), where higher-dimensional centres
+  can contribute general abelian factors.
 - The modular \(m=1\) proof is sound from its stated Iritani,
   Iritani--Koto, and weak-factorization inputs.
 - Guéré/BFGMP and KKPYY are lawful split specializations at the algebraic

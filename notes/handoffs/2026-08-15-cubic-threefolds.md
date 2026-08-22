@@ -144,7 +144,9 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   finite \(R_{10}\) calculation in Proposition 7.6.  The adjacent tracked
   Python/JSON/checksum bundle reconstructs the reduced graph and independently
   verifies ranks 125 and 125.  This does not formalize the geometric reduction
-  or promote the very-general theorem to every smooth cubic.
+  or promote the very-general theorem to every smooth cubic.  The refereed
+  2025 no-power-isogenous-to-Jacobians theorem gives an independent
+  very-general rigidity check, but not another stable-birational consumer.
   **Live conditional result:** on every blowup edge, an intrinsic marked-projector square
   and a unit-scaled algebraic row square imply that row-visible marked support
   is identical on the blowup and ambient factors, regardless of marked

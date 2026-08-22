@@ -202,6 +202,16 @@ threefold centre can carry the full length-three Tate string required by
 \(B\times\mathbf P^2\).  Dimension bounds alone therefore do not exclude
 correction cancellation.
 
+A recent strengthening does not change this conclusion.  De Gaay Fortman--
+Schreieder prove that no positive power of the intermediate Jacobian of a
+very general cubic is isogenous to a product of curve Jacobians.  Stable
+rationality of \(B\times\mathbf P^m\), however, does not formally imply the
+prohibited isogeny: higher-dimensional factorization centres contribute
+general abelian factors, not only curve Jacobians.  Their paper also records
+the complementary warning that an arbitrary abelian variety occurs as an
+isogeny factor of the Jacobian of a sufficiently general complete-
+intersection curve in it.
+
 ### S5. Derived and motivic refinements have the same first-order leakage
 
 Orlov's formula adds copies of \(D^b(Z)\); the blowup formula for Chow motives
@@ -298,6 +308,18 @@ the packed row hashes.  The replay also parses the Lean module and checks its
 dual-column, component-support, and combination masks against the independent
 reconstruction.  The adjacent checksum manifest records byte counts and
 SHA-256 hashes for the checker, certificate, and Lean module.
+
+### De Gaay Fortman--Schreieder, 2025 — refereed
+
+*Abelian varieties with no power isogenous to a Jacobian*, Compositio
+Mathematica 161 (2025), 1404--1457,
+DOI 10.1112/S0010437X25007171, arXiv:2401.06577.
+
+Theorem 1.2 proves that no positive power of the intermediate Jacobian of a
+very general cubic threefold is isogenous to a product of curve Jacobians.
+This independently confirms strong rigidity of the very-general intermediate
+Jacobian, but it is not itself a stable-birational consequence of
+\(R_m(B)\) in dimension \(m+3\).
 
 ### Beauville--Colliot-Thélène--Sansuc--Swinnerton-Dyer, 1985 — refereed
 
