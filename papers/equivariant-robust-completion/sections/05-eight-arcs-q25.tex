@@ -125,12 +125,27 @@ further collision estimate.  We close this profile by a finite reduction.
 
 \subsection*{The exceptional two-fixed-point profile}
 
+We first fix the equivalence used in the equality statement.  Put
+\[
+ \mathcal A=\{a+b\omega:a,b\in\F_5,\ b\ne0\}.
+\]
+For $y=a+b\omega$ and $z=c+d\omega$ in $\mathcal A$, let
+\begin{equation}\label{eq:residual-action}
+ g_{y,z}[X:Y:Z]
+  =\bigl[X:\,-ab^{-1}X+b^{-1}Y:\,-cd^{-1}X+d^{-1}Z\bigr].
+\end{equation}
+These $20^2=400$ base-field projectivities form a group $G$ under
+composition, isomorphic to $\mathrm{AGL}(1,5)\times\mathrm{AGL}(1,5)$.  They fix
+$A=[0:0:1]$ and $B=[0:1:0]$ individually, commute with Frobenius, and act on
+eight-point subsets by pointwise image.  In what follows, a residual orbit
+means an orbit for this action on subsets with the ordered fixed pair $(A,B)$;
+swapping the fixed points is not part of $G$.
+
 \begin{proposition}[Exact exceptional minimum]\label{prop:f2}
 Every invariant eight-arc in $\PG(2,25)$ with exactly two fixed selected
 points has at least $32$ fresh legal conjugate-pair extensions.  This bound
-is attained.  After the two projective normalizations used below, the
-configurations attaining equality form exactly five residual-group orbits,
-of sizes
+is attained.  After ordering the fixed points and sending them to $(A,B)$,
+the configurations attaining equality form exactly five $G$-orbits, of sizes
 \[
   200,\qquad 400,\qquad 400,\qquad 200,\qquad 400.
 \]
@@ -159,13 +174,8 @@ The determinants of $(A,P,\phi(P))$ and $(B,P,\phi(P))$ are nonzero scalar
 multiples of $b$ and $d$, respectively.  Thus $b,d\ne0$.
 
 Choose any one of the three selected nonfixed conjugate pairs and use one of
-its two points as $P$.  The base-field matrix
-\[
- T_{y,z}[X:Y:Z]
-  =\bigl[X:\,-ab^{-1}X+b^{-1}Y:\,-cd^{-1}X+d^{-1}Z\bigr]
-\]
-is invertible, fixes $A$ and $B$ projectively, and commutes with $\phi$.
-It sends $P$ and $\phi(P)$ to
+its two points as $P$.  The element $g_{y,z}\in G$ of
+\eqref{eq:residual-action} sends $P$ and $\phi(P)$ to
 \[
  [1:\omega:\omega],\qquad[1:-\omega:-\omega].
 \]
@@ -216,17 +226,28 @@ on invisible centers and collision moments do not prove it.
 Among the determinant-valid rows, the residual cover has $1{,}189$
 class representatives.  Kernel-checked composition certificates
 give a lower bound of $32$ on every representative.  Five representatives
-attain $32$.  The residual group has order $400$; orbit--stabilizer
-certificates give the five displayed orbit sizes, prove their pairwise
-disjointness, and show that their union has size $1600$.
+attain $32$; their two remaining orbit-code pairs are
+\[
+ (58,169),\quad(61,81),\quad(63,141),\quad(97,109),\quad(113,194).
+\]
+Orbit--stabilizer certificates for the explicitly defined action of $G$ give
+the five displayed orbit sizes, prove their pairwise disjointness, and show
+that their union has size $1600$.
 
 Strict certificates place every nonminimizing residual class above $32$,
 and an exhaustive dispatcher places every determinant-valid normalized
 equality row in the five-orbit union.  The row correspondence and
 projective invariance just proved carry the lower bound and equality
-exhaustion back to every semantic arc, regardless of the normalization
-choices.  Conversely, the same invariance transports the five checked
-equalities across their residual orbits.
+exhaustion back to every semantic arc.  More precisely, after only the first
+normalization, the equality locus with ordered fixed pair $(A,B)$ is exactly
+the five-orbit union: the second normalization is itself an element of $G$,
+so it moves a configuration into a certified row without changing its
+$G$-orbit.  A different choice of selected pair merely chooses another such
+element.  Conversely, projective invariance transports the five checked
+equalities across their $G$-orbits and then back through the inverse of the
+first normalization.  The ordering of the original fixed pair is auxiliary;
+the proposition asserts that either ordered normalization lands in the stated
+ordered model, not that the swap lies in $G$.
 Thus $32$ is the exact semantic minimum, with the stated complete equality
 classification up to normalization.  Section~\ref{sec:formalization}
 records the trust boundary and the generated-certificate layers.
@@ -266,8 +287,10 @@ jointly legal.
 
 \begin{remark}[Scope of the equality classification]\label{rem:census}
 Proposition~\ref{prop:f2} classifies equality up to normalization: it says
-that some base-field collineation sends an equality case into the certified
-$1600$-element union.  It neither asserts uniqueness of that collineation
-nor enumerates the semantic arcs attaining $32$.  It makes no equality
+that, after ordering its fixed points, a base-field collineation sends an
+equality case into the certified $1600$-element union of five $G$-orbits.
+It neither quotients by the fixed-point swap nor asserts uniqueness of that
+collineation, and it does not enumerate the unnormalized semantic arcs
+attaining $32$.  It makes no equality
 claim for the other fixed-point profiles, other arc sizes, or other fields.
 \end{remark}

@@ -210,6 +210,10 @@
     },
     {
       "environment": "equation",
+      "label": "eq:residual-action"
+    },
+    {
+      "environment": "equation",
       "label": "eq:saturation"
     },
     {
@@ -294,10 +298,10 @@
   "paper": "equivariant_robust_completion",
   "pdfs": [
     {
-      "bytes": 136332,
-      "pages": 16,
+      "bytes": 139478,
+      "pages": 17,
       "path": "papers/equivariant-robust-completion/equivariant-robust-completion.pdf",
-      "sha256": "65e8ee558c95c2c8f3935c2dd5b93a26162dc80346df2b57408e4ff28cb97a66"
+      "sha256": "a4f2de94a1969efc30218b158b1e76f29c27fb976238a33ae0c070a639b0e98d"
     }
   ],
   "schema_version": 1,
@@ -328,11 +332,11 @@
     },
     {
       "path": "papers/equivariant-robust-completion/sections/05-eight-arcs-q25.tex",
-      "sha256": "6bd6422fd33d8036a783750efba32c54ee7e485aa2f2395391e0b7520c72d1f9"
+      "sha256": "8a0811866de9ca4f604c2358f6e3e4fcc06e85120c6256c230dd6c9cdb7560a5"
     },
     {
       "path": "papers/equivariant-robust-completion/sections/06-robust-repair.tex",
-      "sha256": "0e0bb2ccaab03829e01817ba36f11626abee3a9ca81be6210fea9c8eca329cba"
+      "sha256": "8833825b6784c88802465e4bda6b89fa79977ceb8619cc8c797c9f487c1d44e8"
     },
     {
       "path": "papers/equivariant-robust-completion/sections/07-formal-verification.tex",
