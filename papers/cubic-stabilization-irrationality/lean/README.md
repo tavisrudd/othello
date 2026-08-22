@@ -181,7 +181,15 @@ are not used to establish that quantifier.
 `Comparison.CubicBlockCertificate` kernel-checks the exact rational marker
 data used at the cubic endpoint: a nonzero nilpotent, modified-residue trace
 `-1`, determinant `5/36`, discriminant `4/9`, and a row-visible normalized
-block.  It does not identify that finite matrix model with a geometric QDM.
+block.  It also transports this witness through any tensor factor carrying a
+row-value-one vector.  It does not identify that finite matrix model with a
+geometric QDM.
+
+`Comparison.ProjectiveSpaceQuantumPolynomial` proves that
+`X^(m+4) - q` is separable over every characteristic-zero field when
+`q` is nonzero.  This checks the absence of repeated spectral roots in the
+standard small-quantum presentation of `P^(m+3)`; the geometric presentation
+itself remains an imported input.
 
 `Comparison.RowedProjectorPath` assigns every path vertex one carrier, row,
 and marked projector.  Its edges are indexed by those exact values, so two
@@ -193,11 +201,26 @@ Constructing the native vertex
 family, or proving that every completed edge occurrence is its faithful
 pullback, remains an external geometric hypothesis.
 
+When an edge theorem is already stated for one intrinsic vertex-indexed
+detection predicate, `IntrinsicPath` gives a weaker telescope: it composes the
+edgewise proposition equivalences without identifying adjacent carriers.
+Each edge must still prove that its local comparison reflects that exact
+intrinsic predicate.
+
 `Comparison.RowedProjectorOccurrence` provides two source-facing assembly
 lemmas.  A unit-scaled row/projector equivalence preserves detection between
 two occurrences, and exact common-source presentations construct the typed
 edge used by the path theorem.  Both compatibility equations must use one
-map; the records do not construct the geometric presentations.
+map; the records do not construct the geometric presentations.  Its stricter
+`FaithfulScalarEdge` interface fixes the two local rows and projectors
+definitionally as faithful scalar extensions of native endpoint data.  Only a
+direct-sum comparison, a correction projector, a unit row scale, and the row
+and projector squares remain.  Those squares may be checked on a basis, and
+the projector square may instead be derived from one intertwined operator and
+polynomial presentations of the two projectors.  Lean then constructs the
+intrinsic proposition-valued edge.  The interface does not prove that a
+geometric completed comparison has these scalar-extension presentations,
+satisfies the row equation, or realizes the marker by the named polynomial.
 
 `Comparison.MarkedRepresentationEquivalence` gives the adjacent-edge
 connector without imposing equality or uniqueness of sectorial frames. If

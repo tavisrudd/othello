@@ -28,6 +28,7 @@ roots = [
   "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.RowedRepresentationDecomposition",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.RowedProjectorDecomposition",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.CubicBlockCertificate",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.ProjectiveSpaceQuantumPolynomial",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.RowedProjectorPath",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.RowedProjectorOccurrence",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.RowedRepresentationPath",

@@ -131,15 +131,21 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   **Live conditional result:** on every blowup edge, an intrinsic marked-projector square
   and a unit-scaled algebraic row square imply that row-visible marked support
   is identical on the blowup and ambient factors, regardless of marked
-  correction blocks.  A dependent path telescopes only after every repeated
-  vertex occurrence is a faithful pullback of one native carrier, row, and
-  projector.  This occurrence theorem, the exact completed edge squares, and
-  both geometric endpoint identifications remain open; therefore the
+  correction blocks.  One path type uses faithful pullbacks of a native
+  carrier, row, and projector; a looser `IntrinsicPath` needs only an edgewise
+  equivalence for one native vertex predicate.  Lean now derives this edgewise
+  equivalence from a `FaithfulScalarEdge`: the two endpoint rows and projectors
+  are scalar extensions by type, and a basis-checkable row square and
+  projector square for one completed direct-sum comparison imply native
+  reflection.  Polynomial projector presentations plus one operator square
+  derive the projector square in Lean.  Constructing that geometric scalar
+  edge, its exact completed
+  squares, and the endpoint QDM identifications remains open; therefore the
   unconditional all-\(m\) theorem is not landed.  Lean kernel-checks the
   conditional consumer, unit normalization, faithful
   base change, injective row-codomain enlargement, polynomial projector
   transport, tensor endpoint witness, common-source composition, and the
-  finite rational cubic-block marker.  Haskell independently checks 61 named
+  finite rational cubic-block marker.  Haskell independently checks 64 named
   laws, including 55,296 two-presentation common-source certificates and
   9,000 fixed-seed properties; its hostile nominal-occurrence path is accepted
   by a name-only telescope and rejected by the typed telescope.  The named
@@ -150,9 +156,13 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   from the Gu--Yu--Yu and KKPYY preprints.  Faithful-base descent, polynomial
   projector presentation, unit scaling, and tensor endpoints are modular
   alternatives or endpoint adapters, not four extra simultaneous assumptions.
-  A seventh, path-level obligation is native occurrence descent.  Lean does
-  not construct the completed QDM comparison, its geometric row/projector,
-  or either endpoint model.  The exact publication-status and substitution
+  The former path-level occurrence obligation is no longer a separate
+  adjacent-carrier theorem on the intrinsic route: faithful scalar extension
+  plus the two edge squares derives it.  Proving that the cited geometric map
+  has exactly that scalar-extension presentation remains part of the edge
+  source theorem.  Lean does not construct the completed QDM comparison, its
+  geometric row/projector, or either endpoint model.  The exact
+  publication-status and substitution
   table is `../2026-08-21-c925-referee-source-substitution-table.md`; the
   theorem-by-theorem dossier is
   `../2026-08-21-c925-no-stokes-source-dossier.md`; the executable report is
@@ -614,10 +624,11 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   one-hundred-twenty-two-check
   finite law replay, the eleven-check path toy, the four-check source-typed
   Haskell toy, the four-check double-normal producer toy, and original cubic
-  replay are green.  C925's marked-projector route still has four independent
-  source gates: completed edge squares, native occurrence descent, the
+  replay are green.  C925's marked-projector route has three geometric groups:
+  the per-edge faithful scalar comparison with both completed squares, the
   cubic-product endpoint identification, and projective-space marked
-  emptiness.  The one-sided marked source,
+  emptiness.  Lean derives intrinsic path reflection from the first group;
+  no adjacent-carrier identification is separately consumed.  The one-sided marked source,
   fixed-phase/Stokes, and ExactTop routes are fallbacks, not the live frontier.
   Mathematics and paper-local Lean only; no manuscript edits.  Card:
   `../cubic-threefolds-tasks/c925-modular-direct-qdm-proof-packet.md`.

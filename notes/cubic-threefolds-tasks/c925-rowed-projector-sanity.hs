@@ -14,7 +14,7 @@ module Main (main) where
 
 import Control.Monad (unless)
 import Data.List (intercalate, transpose)
-import Data.Maybe (isNothing)
+import Data.Maybe (isJust, isNothing)
 import qualified Test.QuickCheck as QC
 import Test.QuickCheck.Random (mkQCGen)
 
@@ -298,6 +298,7 @@ data SourceFact
   | CanonicalMarkedSpectralUnion
   | UniformSmoothCenterCoverage
   | NativeOccurrenceDescent
+  | NativeFaithfulScalarPresentation
   | CubicProductEndpointIdentification
   | ProjectiveSpaceEndpointIdentification
   | FaithfulCommonBase
@@ -309,8 +310,8 @@ data SourceFact
 allSourceFacts :: [SourceFact]
 allSourceFacts = [minBound .. maxBound]
 
-directEdgeFacts :: [SourceFact]
-directEdgeFacts =
+edgeSourceFacts :: [SourceFact]
+edgeSourceFacts =
   [ OrdinaryEquivariantBasis
   , ShiftPreservesOrdinarySource
   , FundamentalSolutionAdjointSquare
@@ -318,7 +319,18 @@ directEdgeFacts =
   , ConnectionNaturality
   , CanonicalMarkedSpectralUnion
   , UniformSmoothCenterCoverage
-  , NativeOccurrenceDescent
+  ]
+
+directEdgeFacts :: [SourceFact]
+directEdgeFacts =
+  edgeSourceFacts ++
+  [ NativeOccurrenceDescent
+  ]
+
+intrinsicEdgeFacts :: [SourceFact]
+intrinsicEdgeFacts =
+  edgeSourceFacts ++
+  [ NativeFaithfulScalarPresentation
   ]
 
 allMEndpointFacts :: [SourceFact]
@@ -335,6 +347,12 @@ certifyDirectEdge supplied bundle
       Just (CertifiedBundle bundle)
   | otherwise = Nothing
 
+certifyIntrinsicEdge :: [SourceFact] -> RawBundle -> Maybe CertifiedBundle
+certifyIntrinsicEdge supplied bundle
+  | all (`elem` supplied) intrinsicEdgeFacts && validateRawBundle bundle =
+      Just (CertifiedBundle bundle)
+  | otherwise = Nothing
+
 consumerDetectsIff :: CertifiedBundle -> Bool
 consumerDetectsIff (CertifiedBundle bundle) =
   sourceDetects bundle == ambientDetects bundle
@@ -348,6 +366,7 @@ sourceFactName ConnectionNaturality = "comparison_connection_naturality"
 sourceFactName CanonicalMarkedSpectralUnion = "kkpyy_canonical_marked_union"
 sourceFactName UniformSmoothCenterCoverage = "uniform_smooth_center_coverage"
 sourceFactName NativeOccurrenceDescent = "native_vertex_occurrence_descent"
+sourceFactName NativeFaithfulScalarPresentation = "native_faithful_scalar_presentation"
 sourceFactName CubicProductEndpointIdentification = "cubic_product_endpoint_identification"
 sourceFactName ProjectiveSpaceEndpointIdentification = "projective_space_endpoint_identification"
 sourceFactName FaithfulCommonBase = "faithful_common_scalar_base"
@@ -841,6 +860,21 @@ checks =
           (certifyDirectEdge (filter (/= missing) directEdgeFacts)
             (identityBundle 1 1 1)))
     | missing <- directEdgeFacts
+    ]
+    ++
+    [ ("intrinsic_path_route_accepts_without_native_occurrence_equivalence",
+        NativeOccurrenceDescent `notElem` intrinsicEdgeFacts
+          && isJust
+            (certifyIntrinsicEdge intrinsicEdgeFacts (identityBundle 1 1 1)))
+    , ("typed_occurrence_route_does_not_require_faithful_scalar_presentation",
+        NativeFaithfulScalarPresentation `notElem` directEdgeFacts
+          && isJust
+            (certifyDirectEdge directEdgeFacts (identityBundle 1 1 1)))
+    , ("missing_native_faithful_scalar_presentation_rejected",
+        isNothing
+          (certifyIntrinsicEdge
+            (filter (/= NativeFaithfulScalarPresentation) intrinsicEdgeFacts)
+            (identityBundle 1 1 1)))
     ]
     ++
     [ ("missing_all_m_endpoint_fact_rejected_" ++ sourceFactName missing,

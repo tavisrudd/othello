@@ -17,6 +17,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.Poi
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.RowedRepresentationDecomposition
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.RowedProjectorDecomposition
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.CubicBlockCertificate
+import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.ProjectiveSpaceQuantumPolynomial
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.RowedProjectorPath
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.RowedProjectorOccurrence
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.RowedRepresentationPath
@@ -137,8 +138,13 @@ computational sweep.
 `CubicBlockCertificate` kernel-checks the finite rational marker data: the
 rank-two nilpotent is nonzero and squares to zero, the modified residue has trace `-1`,
 determinant `5/36`, and discriminant `4/9`, and the normalized degree-zero row
-detects the block. Its identification with the geometric quantum-module block
+detects the block and remains detecting after tensoring with a row-value-one
+vector. Its identification with the geometric quantum-module block
 is not a consequence of those rational calculations.
+`ProjectiveSpaceQuantumPolynomial` proves that the standard relation
+`X^(m+4) - q` is separable in characteristic zero for nonzero `q`. This
+kernel-checks the target's no-repeated-root algebra once its small-quantum
+presentation is supplied.
 `RowedProjectorPath` assigns one native rowed projector datum to every vertex
 and indexes every edge by the exact endpoint values. It composes row-visible
 support along a finite path, with either orientation of each direct-sum edge,
@@ -151,10 +157,21 @@ composes the detected-support equivalences without any separately chosen
 adjacent overlap. Constructing that family still requires one common
 coefficient base and compatible completed germs; the path type does not turn
 two differently based formal expansions into the same object.
+If every wall theorem instead concludes an equivalence for one intrinsic
+vertex-indexed detection predicate, `IntrinsicPath` composes those propositions
+without a shared carrier. The per-edge reflection to that exact predicate
+remains an input.
 `RowedProjectorOccurrence` isolates the algebra left after occurrence maps are
 constructed. One occurrence equivalence preserves row-visible support, and
 two presentations of one source construct a single typed edge whose row and
-projector equations use the same comparison.
+projector equations use the same comparison. Its `FaithfulScalarEdge` type
+fixes the local endpoint rows and projectors to be the faithful scalar
+extensions of native vertex data. A basis check of the row and
+projector squares then produces the exact intrinsic edge proposition consumed
+by `IntrinsicPath`. If both projectors are one polynomial in intertwined
+operators, Lean derives the projector square and only the basis row equation
+remains. The type does not construct the completed geometric map, prove that
+row equation, or identify the geometric marker with the polynomial.
 Alternatively, several vertices may be compared in parallel from one marked
 augmented source.  Each branch is an isomorphism from that definitionally
 shared source to one vertex representation plus a row-invisible correction.

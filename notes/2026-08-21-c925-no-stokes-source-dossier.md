@@ -30,6 +30,19 @@ family, or proving that all edge occurrences are faithful pullbacks of it, is
 the live geometric gate.  Edgewise comparison data alone do not identify two
 occurrences of an intermediate variety.
 
+The looser telescope is `RowedProjectorPath.IntrinsicPath.property_iff`.
+It needs no shared carrier: each edge may instead prove an equivalence for one
+intrinsic vertex-indexed detection predicate.  This replaces global
+occurrence descent by a smaller per-edge reflection theorem.  Lean now derives
+that reflection in
+`RowedProjectorOccurrence.FaithfulScalarEdge.detectsAt_iff`: fix native
+endpoint data over (R), extend both along one faithfully flat
+(R\to K), and supply a direct-sum comparison satisfying the unit-scaled row
+square and block-projector square.  The local rows and endpoint projectors are
+definitionally the scalar extensions, so they cannot be replaced by unrelated
+edge data.  `FaithfulScalarEdge.ofBasisSquares` reduces the two squares to a
+basis check, and `FaithfulScalarEdge.toIntrinsicEdge` supplies the path edge.
+
 There are only two source architectures:
 
 1. one general marked source specialized downstream; or
@@ -49,9 +62,9 @@ are supplied; it does not reprove the QDM decomposition theorems.
 |---|---|---|
 | one-edge row/projector consumer | no algebraic countermodel under its stated hypotheses | **Green:** Lean theorem and exhaustive finite models |
 | reverse traversal in weak factorization | the original path type encoded only blowup-to-base edges | **Fixed/green:** oriented `Step.forward` and `Step.reverse`; Lean aggregate and Haskell forward-then-reverse regression pass |
-| repeated-vertex occurrence | equal variety names can carry unrelated rows/projectors over different completions | **Red/open:** construct one native datum and faithful occurrence pullbacks |
+| repeated-vertex occurrence | equal variety names can carry unrelated rows/projectors over different completions | **Lean-green/source-open:** `FaithfulScalarEdge.detectsAt_iff` derives intrinsic reflection from one faithful extension and two exact squares; geometry must construct that scalar-edge datum for every factorization edge |
 | source-map fusion | Iritani's occurrence spine and Gu--Yu--Yu's row equation are not yet proved for one comparison | **Red/open:** prove both squares for the same completed map |
-| endpoints | rational branch/matrix certificates do not identify the actual product and projective-space QDM marked factors | **Red/open:** two geometric identification theorems |
+| endpoints | rational branch/matrix certificates do not identify the actual product and projective-space QDM marked factors | **Mixed:** both endpoint algebras are Lean-green; the standard geometric QDM presentations remain external |
 | all-\(m\) edge scope | low-dimensional C924 centers and a simple-wall theorem do not cover every higher-dimensional AKMW center | **Red/open:** uniform smooth-center provider, most naturally from Iritani's general blowup comparison |
 
 Every red item is fail-closed in the routing and test interfaces.  A source
@@ -63,9 +76,31 @@ steps.  `OccurrenceEquivalence.detects_iff` derives occurrence-independent
 detection from one unit-scaled row/projector equivalence.
 `CommonSourceEdgePresentation.toEdge` derives the exact typed edge from two
 presentations of one source; both compatibility equations therefore use the
-same comparison.  Solver-level simplification closes these consequences.
-The open source task is precisely to construct the records from the QDM maps,
-not to prove another linear-algebra lemma after they are supplied.
+same comparison.  `FaithfulScalarEdge` removes the separate occurrence
+equivalence altogether for the intrinsic route: its endpoint rows and
+projectors are scalar extensions by construction, and faithful base change
+plus the one-edge theorem derives the native predicate equivalence.  Basis
+extensionality closes both compatibility squares once their values are known
+on a basis.  The open source task is precisely to construct this record from
+the QDM maps, not to prove another linear-algebra lemma after it is supplied.
+
+The resulting per-edge source ledger is short and fail-closed:
+
+1. choose the native coefficient ring or field (R) and the native rowed
+   marked modules at the two endpoints, keeping the regular (z=0) lattice;
+2. give one faithfully flat edge algebra (R\to K);
+3. construct the completed ambient-plus-correction linear equivalence over
+   (K);
+4. prove on that same equivalence the unit-scaled row square and the
+   block-projector square.
+
+The block-projector square in item 4 is itself a Lean consequence when both
+projectors are presented by one polynomial in operators intertwined by the
+completed map; `FaithfulScalarEdge.ofBasisRowAndPolynomialProjector` encodes
+that route.  Thus the irreducible source checks may be reduced to the completed
+map, its basis row equation, its operator square, and the geometric polynomial
+presentation.  Faithful scalar extension, intrinsic edge reflection, either
+traversal orientation, and finite telescoping are Lean consequences.
 
 ## D1. Iritani--Koto: projective-bundle Fourier branches
 
@@ -701,11 +736,21 @@ all-\(m\) geometric telescope is conditional.
    including the unit status of every row normalization.  A simple-wall or
    low-dimensional-center statement is not a uniform all-\(m\) provider.
 2. **Occurrence descent:** identify every repeated vertex occurrence with a
-   faithful pullback of one native carrier, row, and marked projector.
+   faithful pullback of one native carrier, row, and marked projector; or,
+   more weakly, prove the edge's local detection Boolean equivalent to one
+   intrinsic predicate of that vertex.  `IntrinsicPath` then needs no carrier
+   identification between adjacent edges.
 3. **Cubic-product endpoint:** identify the rational matrix/tensor certificate
    with the actual \(X\times\mathbf P^m\) QDM marked row and projector.
+   `CubicBlockCertificate.rankRow_tensor_detects` proves detection after
+   tensoring with any auxiliary row carrying a value-one vector, so only the
+   product-QDM and row/projector identification remains.
 4. **Projective endpoint:** prove that the actual
    \(\mathbf P^{m+3}\) QDM has no row-visible C924-marked factor.
+   `ProjectiveSpaceQuantumPolynomial.relationPolynomial_separable` proves the
+   no-repeated-root algebra for \(H^{m+4}-q\) in characteristic zero at
+   \(q\ne0\); only the standard geometric small-quantum presentation remains
+   to be supplied.
 
 These gates are independent.  Connection naturality does not imply the
 projector square; finite basis calculations do not imply completed

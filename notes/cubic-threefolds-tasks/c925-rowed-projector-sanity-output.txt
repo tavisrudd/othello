@@ -44,6 +44,9 @@ missing_direct_edge_fact_rejected_comparison_connection_naturality: pass
 missing_direct_edge_fact_rejected_kkpyy_canonical_marked_union: pass
 missing_direct_edge_fact_rejected_uniform_smooth_center_coverage: pass
 missing_direct_edge_fact_rejected_native_vertex_occurrence_descent: pass
+intrinsic_path_route_accepts_without_native_occurrence_equivalence: pass
+typed_occurrence_route_does_not_require_faithful_scalar_presentation: pass
+missing_native_faithful_scalar_presentation_rejected: pass
 missing_all_m_endpoint_fact_rejected_cubic_product_endpoint_identification: pass
 missing_all_m_endpoint_fact_rejected_projective_space_endpoint_identification: pass
 polynomial_route_requires_polynomial_marker_presentation: pass
@@ -59,4 +62,4 @@ quickcheck_polynomial_transport: pass
 quickcheck_common_source_composition: pass
 quickcheck_endpoints_for_arbitrary_nonnegative_m: pass
 quickcheck_arbitrary_finite_path_length: pass
-summary: 61 checks; 576 exact bundles; 1152 unit-scaled bundles; 104976 polynomial cases; 55296 common-source cases; 9000 fixed-seed QuickCheck cases
+summary: 64 checks; 576 exact bundles; 1152 unit-scaled bundles; 104976 polynomial cases; 55296 common-source cases; 9000 fixed-seed QuickCheck cases

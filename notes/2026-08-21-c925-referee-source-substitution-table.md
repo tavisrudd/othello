@@ -6,12 +6,15 @@ Date: 2026-08-21
 
 The no-Stokes all-stabilizations consumer is kernel-checked after the
 following geometric inputs are supplied.  Its path-level geometric
-instantiation is not yet closed: every occurrence of an intermediate variety
-must descend from one native rowed marked module.  Several decisive inputs are
-currently preprints rather than journal publications.  Lean verifies their
-linear-algebraic consequences and the finite rational cubic-block arithmetic;
-it does not independently construct quantum cohomology modules or Fourier
-comparison maps.
+instantiation is not yet closed.  The loosest route chooses one intrinsic
+native detection predicate at each vertex and, for each edge, constructs a
+`FaithfulScalarEdge`: both endpoint data are scalar extensions along one
+faithfully flat map, and one completed comparison satisfies the row and
+projector squares.  Lean derives the intrinsic edge equivalence and the finite
+telescope.  Several decisive inputs are currently preprints rather than
+journal publications.  Lean verifies their linear-algebraic consequences and
+the finite rational cubic-block arithmetic; it does not independently
+construct quantum cohomology modules or Fourier comparison maps.
 
 The active consumer is
 `Comparison.RowedProjectorDecomposition.UnitScaledData.detects_iff`.  It needs
@@ -35,6 +38,8 @@ constructor.  They are not cumulative hypotheses.
 | Common-source composition | A separately cited composite comparison | Existence of both source presentations |
 | Same coefficient ring | Faithful common-base descent | Row/projector compatibility |
 | Faithfully flat common base | A map between incompatible completions | Proof that both complete marked modules descend |
+| `FaithfulScalarEdge` | Separate occurrence equivalences and adjacent carrier identification | Construction of the native endpoint data, completed direct-sum map, or its two squares |
+| Polynomial scalar-edge constructor | Direct projector-square check | Geometric polynomial presentation, operator square, or row square |
 | Exact row square | Unit normalization | Projector naturality |
 | Unit-scaled row square | Exact normalization | Proof that the scale is a unit |
 | Tensor endpoint constructor | A separate product-witness calculation | Projective-bundle QDM comparison |
@@ -73,9 +78,9 @@ classified as a lineage cross-check, not as independent evidence.
 | Ambient rank-row square | Apply degree-zero augmentation to Iritani's common-source Fourier maps and the definition of `Psi` | Gu--Yu--Yu Definition 4.13, Propositions 2.8 and 4.21, Proposition 5.2 | Same Fourier/augmentation mechanism in two papers, so this is a derivational cross-check, not an independent geometric proof. The elementary augmentation step should be proved in the packet. | Source-local proof can avoid attributing a separate row theorem to either paper. |
 | Marked-projector naturality | Canonical spectral decomposition in HYZZ/KKPYY plus connection naturality | Direct formal CRT/Hensel splitting and isomorphism invariance of rank, nilpotent part, and modified residue; polynomial functional calculus when a collision-free polynomial exists | The formal-algebra proof is independent of KKPYY canonicity. The polynomial shortcut is only conditional: it fails if marked and unmarked blocks cannot be separated by one polynomial in the chosen operator. | Promote the direct formal lemma as the source-minimal route; keep KKPYY as corroboration. |
 | Cubic marked block | Beauville's cubic quantum product plus the C924 exact conjugation/residue calculation | KKPYY Example 6.21 identifies an indecomposable cubic zero atom from the quantum differential equation | Only partial independence. Example 6.21 corroborates the zero atom but does not compute the C924 modified-residue discriminant `4/9`; it is not a second proof of the exact marker. | Exact geometric normalization remains one-source plus two computational replays. |
-| Product source `X x P^m` | Iritani--Koto Theorem 5.1 | Standard product/CohFT formula on a small product slice, followed by the tensor-projector and tensor-row lemma | Genuinely independent once the product QDM formula is cited/proved. It avoids the opposite Laurent projective-bundle completion. | Highest-value endpoint redundancy to write explicitly. |
-| Projective-space target | Explicit `QH(P^n)=K[H]/(H^(n+1)-q)` at `q != 0` | Iritani--Koto with base a point | Genuinely independent but elementary; both yield rank-one factors. | Add a finite polynomial/separability certificate if desired. |
-| Repeated-vertex occurrence | Field-first native rowed projectors, Iritani's vertex inclusions (5.38), (5.39), and compatible field extensions; (5.40) is excluded | Analytic continuation of the horizontal rowed projector on one connected native maximal F-bundle | Two conceptual bridges, neither complete. The algebraic route must keep the regular z-lattice and prove same-map carrier/row/projector descent; coordinate invertibility is insufficient. | **Open gate.** Do not telescope until one bridge is completely written. |
+| Product source `X x P^m` | Iritani--Koto Theorem 5.1 | Standard product/CohFT formula on a small product slice, followed by the tensor-projector and tensor-row lemma | Genuinely independent once the product QDM formula is cited/proved. `CubicBlockCertificate.rankRow_tensor_detects` kernel-checks the endpoint tensor witness. | Only the geometric product-QDM row/projector identification remains imported. |
+| Projective-space target | Explicit `QH(P^n)=K[H]/(H^(n+1)-q)` at `q != 0` | Iritani--Koto with base a point | Genuinely independent but elementary; both yield rank-one factors. `ProjectiveSpaceQuantumPolynomial.relationPolynomial_separable` kernel-checks squarefreeness for every `m`. | Only the standard geometric small-quantum presentation remains imported. |
+| Repeated-vertex occurrence | Field-first native rowed projectors, Iritani's vertex inclusions (5.38), (5.39), and compatible field extensions; (5.40) is excluded | `FaithfulScalarEdge.detectsAt_iff` derives per-edge intrinsic reflection from faithful base change and the exact row/projector squares; a stronger analytic continuation route may identify the full rowed projector | The intrinsic-predicate route is strictly weaker and needs no adjacent carrier map. The local rows and endpoint projectors are scalar extensions by type, but the source must still construct that presentation while retaining the regular z-lattice. | **Open source gate, Lean-reduced.** `FaithfulScalarEdge.toIntrinsicEdge` and `IntrinsicPath.property_iff` close the downstream telescope. |
 
 This audit therefore finds multiple proofs for the endpoint and formal
 projector identifications, but not two independent proofs of the exact cubic
@@ -107,14 +112,16 @@ all three equations to a finite basis.  The proof still requires the two
 presentations as actual linear equivalences; a finite truncation cannot prove
 invertibility in a completed infinite series ring.
 
-For a factorization path this construction must be preceded by an occurrence
-descent.  For each vertex `Y`, choose one native `(V_Y,row_Y,P_Y)`.  Each
-incident edge must identify its occurrence with a faithful scalar extension
-of that datum.  Define the native data over coefficient fields first, without
-inverting \(z\); a finite diagram of field embeddings may then be passed to
-one common overfield.  `RowedProjectorPath` gives the telescope with a
-definitionally shared intermediate value.  A nominally repeated variety name
-is not a substitute for these maps.
+For a factorization path, choose one native detection datum
+`(V_Y,row_Y,P_Y)` at each vertex.  The loosest route does not identify the two
+edge occurrences of (Y).  Instead, each edge supplies one faithful scalar
+extension of its two native endpoint data and the completed direct-sum map
+with its two squares.  `FaithfulScalarEdge.detectsAt_iff` proves the native
+endpoint predicates equivalent; `toIntrinsicEdge` and
+`IntrinsicPath.property_iff` telescope those propositions.  Define the native
+data over coefficient fields first, without inverting (z), and use
+field-to-field extensions.  A nominally repeated variety name is not a
+substitute for these scalar-extension identifications.
 
 The marked projector may be checked by either of two exact routes:
 
@@ -124,7 +131,10 @@ The marked projector may be checked by either of two exact routes:
 
 `polynomialProjector_naturality` proves the second route.  Numerical
 agreement of eigenvalues without a collision-free polynomial presentation is
-not accepted.
+not accepted.  `FaithfulScalarEdge.ofBasisRowAndPolynomialProjector` fuses
+that derivation with faithful scalar reflection: after a basis row equation,
+the operator square and two polynomial identities supply the intrinsic path
+edge.
 
 The row may be enlarged into a Givental coefficient module through an
 explicit injective linear map; `detects_comp_injective_iff` handles this
@@ -134,7 +144,7 @@ and rows are proved to descend to one faithfully flat common base.
 
 ## Certificate intake
 
-An exact finite-free source certificate can be consumed if it records:
+An exact finite-free common-source certificate can be consumed if it records:
 
 1. the coefficient ring and ordered bases;
 2. both common-source presentation matrices and inverse matrices;
@@ -152,6 +162,14 @@ independent common-source presentations.  A certificate containing truncated
 power series proves only the corresponding truncation.  Exact existence of
 the completed QDM map requires exact symbolic coefficients, a finite
 presentation theorem, or the cited geometric source theorem.
+
+The smaller intrinsic-edge certificate records the native source and target
+rows and projectors, one faithfully flat coefficient extension, one invertible
+ambient-plus-correction matrix, its correction projector and unit row scale,
+and the row and projector equations on a basis.  The endpoint rows and
+projectors are not repeated certificate fields: `FaithfulScalarEdge` fixes
+them as scalar extensions.  Lean derives the full equations by basis
+extensionality and then derives the intrinsic edge proposition.
 
 ## Referee attack points
 

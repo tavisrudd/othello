@@ -3,8 +3,8 @@
 **Lane:** cubic-threefolds
 
 **Status:** no-Stokes marked-projector consumer landed for every \(m\);
-unconditional geometric telescope reopened pending occurrence-compatible
-faithful pullback; no manuscript edits
+intrinsic edge reflection Lean-reduced to a faithful scalar comparison and
+two exact squares; geometric construction remains open; no manuscript edits
 
 ## Goal
 
@@ -526,14 +526,16 @@ Final rowed-projector source/consumer sanity replay:
        | diff -u \
            notes/cubic-threefolds-tasks/c925-rowed-projector-sanity-output.txt -'
 
-This separate suite has 61 named checks: all 576 lawful two-dimensional
+This separate suite has 64 named checks: all 576 lawful two-dimensional
 models over `F3`, 1,152 unit-scaled models, 104,976 polynomial cases, 55,296
 two-presentation common-source cases, four hostile malformed bundles,
 route-specific omission gates, a bounded endpoint sweep for `m=0,...,64`,
 an explicit forward-then-reverse traversal, a nominal-vertex occurrence mismatch accepted by the name-only
 telescope and rejected by the typed telescope, and 9,000 fixed-seed
 QuickCheck cases.  Uniform smooth-center coverage and both endpoint geometric
-identifications also have independent fail-closed omission tests.  The exact domain, hashes, dependency
+identifications also have independent fail-closed omission tests.  Separate
+tests show that the typed-occurrence and intrinsic-predicate path routes are
+alternatives, not cumulative hypotheses.  The exact domain, hashes, dependency
 versions, and trust boundary are recorded in
 `../2026-08-21-c925-rowed-projector-computational-sanity.md`.  Lean's
 `projectiveProductBranchCount_pos` proves positivity for every natural `m`;
@@ -541,12 +543,13 @@ the finite sweep is only a regression.
 
 Paper-local Lean is validated only through the guarded queue.  The aggregate
 target `CubicStabilizationIrrationalityVerification` passed in run
-`20260822-002715-50291734`.  The guarded axiom audit also exits zero and reports
+`20260822-020610-0d32e5c3`.  The guarded axiom audit also exits zero and reports
 only `propext`, `Classical.choice`, and `Quot.sound` where used.  Its reviewer
 surface now includes the unit-scaled consumer, common-source basis
 constructor, faithful base-change reflection, injective row-codomain lemma,
-polynomial projector transport, tensor endpoint witness, unbounded branch
-count, and exact rational cubic-block certificate.
+polynomial projector transport, the faithful scalar-edge basis and polynomial
+constructors, intrinsic edge reflection, tensor endpoint witness, unbounded
+branch count, and exact rational cubic-block certificate.
 
 The finite model currently has one hundred twenty-two checks.  It verifies only the
 advertised algebraic laws and countermodels, never an external QDM provider.
@@ -560,21 +563,27 @@ any geometric or QDM provider.
 
 ## Next
 
-1. Close the occurrence-descent gate.  For every factorization vertex \(Y\),
-   define one native generic rowed marked module
-   \((V_Y,\rho_Y,P_Y)\).  Prove that both occurrences of \(Y\) in incident
-   Iritani/Gu--Yu--Yu comparisons are faithful pullbacks of this same datum,
-   or base-change the finite path to one common field.  Iritani (5.38) and
-   (5.39) are the relevant inclusions; (5.40) is only a homomorphism for the
-   edge-local center variables and is not used for vertex descent.  Theorem
-   5.18(7) gives an invertible combined coordinate change, but coordinates do
-   not identify the carrier, row, or projector.  A lawful field-first repair
-   must define the native datum over a Novikov/bulk coefficient field, keep
-   the regular \(z=0\) lattice, and use field-to-field extensions.  Merely
-   localizing an integral module at its fraction field is not faithful.
-   `RowedProjectorOccurrence.OccurrenceEquivalence.detects_iff` consumes the
-   resulting occurrence map, and `RowedProjectorPath` then makes the
-   telescope type-correct.
+1. Construct the geometric data consumed by
+   `RowedProjectorOccurrence.FaithfulScalarEdge`.  For every factorization
+   vertex define the native rowed marked module
+   \((V_Y,\rho_Y,P_Y)\) and its detection proposition \(D(Y)\).  For every
+   edge give one faithfully flat coefficient extension, the completed
+   ambient-plus-correction equivalence, and the unit-scaled row and
+   block-projector squares for that same equivalence.  The endpoint rows and
+   projectors are scalar extensions by type; `ofBasisSquares` promotes basis
+   equations, `detectsAt_iff` derives \(D(Y_-)\leftrightarrow D(Y_+)\), and
+   `toIntrinsicEdge` feeds `IntrinsicPath`.  No adjacent carrier map remains.
+   If the marked projectors are polynomial in one intertwined operator,
+   `ofBasisRowAndPolynomialProjector` derives the projector square; the source
+   then supplies only the geometric polynomial presentation, operator square,
+   and basis row equation for the completed map.
+   Iritani (5.38) and (5.39) are the relevant vertex inclusions; (5.40) is only
+   a homomorphism for edge-local center variables.  Theorem 5.18(7) gives an
+   invertible combined coordinate change, but coordinates do not identify the
+   carrier, row, or projector.  Define native data over a Novikov/bulk
+   coefficient field, keep the regular \(z=0\) lattice, and use
+   field-to-field extensions.  Localizing an integral module at its fraction
+   field is not faithful.
 2. Referee-audit the direct six-input edge provider uniformly for every
    smooth-center blowup allowed by AKMW, including the higher-dimensional
    centers that appear when \(m>1\).  For every generic even QDM, let
@@ -596,9 +605,11 @@ any geometric or QDM provider.
    fusion line by line against the preprints and seek exact finite matrices
    from the authors when available.  A finite truncation is not evidence for
    existence or invertibility of the completed map.
-   `RowedProjectorOccurrence.CommonSourceEdgePresentation.toEdge` now derives
-   the typed edge automatically once two exact common-source presentations
-   are provided, so no separate composite-map proof remains.
+   `RowedProjectorOccurrence.CommonSourceEdgePresentation.toEdge` derives the
+   typed edge from two exact common-source presentations.  The smaller
+   intrinsic route instead uses `FaithfulScalarEdge`: after the same completed
+   map satisfies the two squares, faithful base change and path reflection are
+   theorem consequences.
 3. Keep the provider routes modular.  The direct route uses the six facts
    above.  A common faithful base, a polynomial presentation of the marked
    projector, a unit row normalization, and a tensor endpoint unit are
@@ -608,8 +619,10 @@ any geometric or QDM provider.
    machine-constructed.  Lean proves unit-scaled detection,
    common-source composition from basis certificates, faithful base-change
    reflection, polynomial projector naturality, the exact rational cubic
-   marker, and positivity of the projective-product branch count for every
-   \(m\).  The Haskell suite supplies exhaustive hostile finite models.  Do
+   marker, its tensor detection for every auxiliary row with a value-one
+   vector, separability of \(H^{m+4}-q\) for nonzero \(q\), and positivity of
+   the projective-product branch count for every \(m\).  The Haskell suite
+   supplies exhaustive hostile finite models.  Do
    not add loops, roots, surjectivity, Fitting, Gamma data, or Stokes data to
    the active proof.
 5. The source/referee frontier is the table

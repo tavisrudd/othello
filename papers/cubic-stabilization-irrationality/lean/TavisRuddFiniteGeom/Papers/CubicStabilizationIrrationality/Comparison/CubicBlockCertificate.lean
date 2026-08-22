@@ -72,4 +72,16 @@ theorem rankRow_detects :
   · simp [Projector.identity]
   · norm_num [rankRow]
 
+/-- The marked cubic block remains row-visible after tensoring with any
+auxiliary module carrying a vector of row value one. -/
+theorem rankRow_tensor_detects
+    {U : Type*} [AddCommGroup U] [Module ℚ U]
+    (rowU : U →ₗ[ℚ] ℚ) (u : U) (rowU_one : rowU u = 1) :
+    Detects ℚ ℚ
+      (tensorRow ℚ rankRow rowU)
+      ((Projector.identity (R := ℚ) (M := Fin 2 → ℚ)).tensorIdentity) :=
+  detects_tensorIdentity ℚ rankRow rowU
+    (Projector.identity (R := ℚ) (M := Fin 2 → ℚ))
+    rankRow_detects u rowU_one
+
 end TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.CubicBlockCertificate

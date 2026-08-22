@@ -164,4 +164,48 @@ theorem Path.false_of_source_detects_of_target_projector_zero
   rw [targetProjectorZero] at targetDetects
   exact not_detects_zero R A (system target).row targetDetects
 
+/-- An edge theorem stated directly for one intrinsic vertex-indexed
+predicate.  The two endpoint propositions cannot be replaced by edge-local
+surrogates. -/
+structure IntrinsicEdge
+    {Vertex : Type uVertex}
+    (property : Vertex → Prop) (source target : Vertex) where
+  property_iff : property source ↔ property target
+
+/-- A finite path of equivalences of one intrinsic vertex-indexed predicate.
+This is weaker than identifying the carriers used by adjacent edges. -/
+inductive IntrinsicPath
+    {Vertex : Type uVertex}
+    (property : Vertex → Prop) : Vertex → Vertex → Type uVertex
+  | nil (vertex : Vertex) : IntrinsicPath property vertex vertex
+  | cons {source middle target : Vertex}
+      (edge : IntrinsicEdge property source middle)
+      (tail : IntrinsicPath property middle target) :
+      IntrinsicPath property source target
+
+namespace IntrinsicPath
+
+variable {Vertex : Type uVertex} {property : Vertex → Prop}
+
+/-- An intrinsic predicate is constant along a path of edge equivalences. -/
+theorem property_iff
+    {source target : Vertex}
+    (path : IntrinsicPath property source target) :
+    property source ↔ property target := by
+  induction path with
+  | nil => exact Iff.rfl
+  | cons edge tail inductionHypothesis =>
+      exact edge.property_iff.trans inductionHypothesis
+
+/-- A path of intrinsic edge equivalences cannot join a true source predicate
+to a false target predicate. -/
+theorem false_of_source_of_not_target
+    {source target : Vertex}
+    (path : IntrinsicPath property source target)
+    (sourceHolds : property source)
+    (targetFails : ¬property target) : False :=
+  targetFails (path.property_iff.mp sourceHolds)
+
+end IntrinsicPath
+
 end TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.RowedProjectorPath

@@ -3,11 +3,14 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.Row
 /-!
 # Occurrence equivalences for rowed marked projectors
 
-This module isolates two algebraic constructions needed to compare repeated
+This module isolates three algebraic constructions needed to compare repeated
 occurrences of a quantum module.  An `OccurrenceEquivalence` identifies two
 rowed marked-projector data by one linear equivalence, one unit-scaled row
 equation, and one projector equation.  A `CommonSourceEdgePresentation`
 constructs a rowed direct-sum edge from two presentations of the same source.
+A `FaithfulScalarEdge` fixes both endpoint rows and projectors definitionally
+as scalar extensions of native data, leaving only the direct-sum comparison
+and its two compatibility squares to be supplied.
 
 The terminal theorems derive detection invariance and the exact edge record
 from these data.  They do not construct the geometric occurrence maps,
@@ -17,6 +20,7 @@ coefficient extensions, quantum modules, rows, or marked projectors.
 namespace TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.RowedProjectorOccurrence
 
 open RowedProjectorDecomposition RowedProjectorPath
+open scoped TensorProduct
 
 universe uR uA uVertex uCarrier uSource
 
@@ -180,5 +184,213 @@ def toEdge
     simpa [s] using presentation.targetProjectorNaturality s
 
 end CommonSourceEdgePresentation
+
+/-- A faithfully flat edge comparison between scalar extensions preserves the
+intrinsic row-visible marked-support predicate over the native coefficient
+ring.  The four equality hypotheses identify the local rows and projectors
+with the scalar extensions used by the edge comparison. -/
+theorem detects_iff_of_faithful_edge
+    {R K : Type*} [CommRing R] [CommRing K]
+    [Algebra R K] [Module.FaithfullyFlat R K]
+    {A V W C : Type*}
+    [AddCommGroup A] [Module R A]
+    [AddCommGroup V] [Module R V]
+    [AddCommGroup W] [Module R W]
+    [AddCommGroup C] [Module K C]
+    (sourceRow : V →ₗ[R] A) (targetRow : W →ₗ[R] A)
+    (sourceProjector : Projector R V)
+    (targetProjector : Projector R W)
+    (edgeData : UnitScaledData K (K ⊗[R] A)
+      (K ⊗[R] V) (K ⊗[R] W) C)
+    (localSourceRow :
+      edgeData.sourceRow = baseChangeRow R A sourceRow)
+    (localTargetRow :
+      edgeData.ambientRow = baseChangeRow R A targetRow)
+    (localSourceProjector :
+      edgeData.sourceProjector = sourceProjector.baseChange)
+    (localTargetProjector :
+      edgeData.ambientProjector = targetProjector.baseChange) :
+    Detects R A sourceRow sourceProjector ↔
+      Detects R A targetRow targetProjector := by
+  calc
+    Detects R A sourceRow sourceProjector ↔
+        Detects K (K ⊗[R] A) (baseChangeRow R A sourceRow)
+          sourceProjector.baseChange :=
+      (detects_baseChange_iff R A sourceRow sourceProjector).symm
+    _ ↔ Detects K (K ⊗[R] A) edgeData.sourceRow
+          edgeData.sourceProjector := by
+      rw [localSourceRow, localSourceProjector]
+    _ ↔ Detects K (K ⊗[R] A) edgeData.ambientRow
+          edgeData.ambientProjector := edgeData.detects_iff
+    _ ↔ Detects K (K ⊗[R] A) (baseChangeRow R A targetRow)
+          targetProjector.baseChange := by
+      rw [localTargetRow, localTargetProjector]
+    _ ↔ Detects R A targetRow targetProjector :=
+      detects_baseChange_iff R A targetRow targetProjector
+
+/-- A direct-sum edge over a faithfully flat scalar extension of two fixed
+native endpoint data.  The endpoint rows and projectors are not fields: they
+are definitionally the scalar extensions of the supplied native data.  Thus a
+value of this type can vary only the correction factor, comparison, unit row
+scale, and the two compatibility squares. -/
+structure FaithfulScalarEdge
+    {R : Type uR} [CommRing R]
+    {A : Type uA} [AddCommGroup A] [Module R A]
+    {Vertex : Type uVertex}
+    (system : Vertex → VertexDatum.{uR, uA, uCarrier} R A)
+    (source target : Vertex)
+    (K : Type*) [CommRing K] [Algebra R K]
+    [Module.FaithfullyFlat R K] where
+  Correction : Type uCarrier
+  [correctionAddCommGroup : AddCommGroup Correction]
+  [correctionModule : Module K Correction]
+  correctionProjector : Projector K Correction
+  comparison : (K ⊗[R] (system source).Carrier) ≃ₗ[K]
+    (K ⊗[R] (system target).Carrier) × Correction
+  rowScale : Kˣ
+  rowComparison : ∀ x,
+    baseChangeRow R A (system source).row x =
+      (rowScale : K) •
+        baseChangeRow R A (system target).row (comparison x).1
+  projectorComparison : ∀ x,
+    comparison ((system source).projector.baseChange.map x) =
+      ((system target).projector.baseChange.map (comparison x).1,
+        correctionProjector.map (comparison x).2)
+
+attribute [instance] FaithfulScalarEdge.correctionAddCommGroup
+attribute [instance] FaithfulScalarEdge.correctionModule
+
+namespace FaithfulScalarEdge
+
+variable
+    {R : Type uR} [CommRing R]
+    {A : Type uA} [AddCommGroup A] [Module R A]
+    {Vertex : Type uVertex}
+    (system : Vertex → VertexDatum.{uR, uA, uCarrier} R A)
+    {source target : Vertex}
+    {K : Type*} [CommRing K] [Algebra R K]
+    [Module.FaithfullyFlat R K]
+
+/-- Forgetting the native endpoint indices gives the scalar-extended one-edge
+consumer datum. -/
+noncomputable def toUnitScaledData
+    (edge : FaithfulScalarEdge system source target K) :
+    UnitScaledData K (K ⊗[R] A)
+      (K ⊗[R] (system source).Carrier)
+      (K ⊗[R] (system target).Carrier) edge.Correction where
+  sourceProjector := (system source).projector.baseChange
+  ambientProjector := (system target).projector.baseChange
+  correctionProjector := edge.correctionProjector
+  comparison := edge.comparison
+  sourceRow := baseChangeRow R A (system source).row
+  ambientRow := baseChangeRow R A (system target).row
+  rowScale := edge.rowScale
+  rowComparison := edge.rowComparison
+  projectorComparison := edge.projectorComparison
+
+/-- A faithfully flat scalar edge preserves the intrinsic detection predicate
+of its native endpoints. -/
+theorem detectsAt_iff
+    (edge : FaithfulScalarEdge system source target K) :
+    DetectsAt system source ↔ DetectsAt system target := by
+  exact detects_iff_of_faithful_edge
+    (system source).row (system target).row
+    (system source).projector (system target).projector
+    (edge.toUnitScaledData system) rfl rfl rfl rfl
+
+/-- A faithfully flat scalar edge supplies the proposition-valued edge used
+by the intrinsic path telescope. -/
+theorem toIntrinsicEdge
+    (edge : FaithfulScalarEdge system source target K) :
+    IntrinsicEdge (DetectsAt system) source target where
+  property_iff := edge.detectsAt_iff system
+
+/-- The two compatibility squares of a faithfully flat scalar edge may be
+verified on a basis of its scalar-extended source. -/
+noncomputable def ofBasisSquares
+    {Index : Type*}
+    (basis : Module.Basis Index K (K ⊗[R] (system source).Carrier))
+    {Correction : Type uCarrier}
+    [AddCommGroup Correction] [Module K Correction]
+    (correctionProjector : Projector K Correction)
+    (comparison : (K ⊗[R] (system source).Carrier) ≃ₗ[K]
+      (K ⊗[R] (system target).Carrier) × Correction)
+    (rowScale : Kˣ)
+    (rowOnBasis : ∀ index,
+      baseChangeRow R A (system source).row (basis index) =
+        (rowScale : K) •
+          baseChangeRow R A (system target).row (comparison (basis index)).1)
+    (projectorOnBasis : ∀ index,
+      comparison ((system source).projector.baseChange.map (basis index)) =
+        ((system target).projector.baseChange.map
+            (comparison (basis index)).1,
+          correctionProjector.map (comparison (basis index)).2)) :
+    FaithfulScalarEdge system source target K where
+  Correction := Correction
+  correctionProjector := correctionProjector
+  comparison := comparison
+  rowScale := rowScale
+  rowComparison := by
+    have equality : baseChangeRow R A (system source).row =
+        (rowScale : K) •
+          (baseChangeRow R A (system target).row).comp
+            (LinearMap.fst K
+              (K ⊗[R] (system target).Carrier) Correction |>.comp
+                comparison.toLinearMap) := by
+      exact basis.ext fun index ↦ by simpa using rowOnBasis index
+    exact LinearMap.congr_fun equality
+  projectorComparison := by
+    have equality : comparison.toLinearMap.comp
+          (system source).projector.baseChange.map =
+        (LinearMap.prod
+          ((system target).projector.baseChange.map.comp
+            (LinearMap.fst K
+              (K ⊗[R] (system target).Carrier) Correction))
+          (correctionProjector.map.comp
+            (LinearMap.snd K
+              (K ⊗[R] (system target).Carrier) Correction))).comp
+          comparison.toLinearMap := by
+      exact basis.ext fun index ↦ by simpa using projectorOnBasis index
+    exact LinearMap.congr_fun equality
+
+/-- A basis row equation and one polynomial operator intertwining construct a
+faithful scalar edge.  The polynomial presentations replace the separate
+projector-square check. -/
+noncomputable def ofBasisRowAndPolynomialProjector
+    {Index : Type*}
+    (basis : Module.Basis Index K (K ⊗[R] (system source).Carrier))
+    {Correction : Type uCarrier}
+    [AddCommGroup Correction] [Module K Correction]
+    (correctionProjector : Projector K Correction)
+    (comparison : (K ⊗[R] (system source).Carrier) ≃ₗ[K]
+      (K ⊗[R] (system target).Carrier) × Correction)
+    (rowScale : Kˣ)
+    (rowOnBasis : ∀ index,
+      baseChangeRow R A (system source).row (basis index) =
+        (rowScale : K) •
+          baseChangeRow R A (system target).row (comparison (basis index)).1)
+    (sourceOperator : Module.End K
+      (K ⊗[R] (system source).Carrier))
+    (targetOperator : Module.End K
+      ((K ⊗[R] (system target).Carrier) × Correction))
+    (operatorComparison : ∀ x,
+      comparison (sourceOperator x) = targetOperator (comparison x))
+    (polynomial : Polynomial K)
+    (sourcePolynomial : (system source).projector.baseChange.map =
+      Polynomial.aeval sourceOperator polynomial)
+    (targetPolynomial :
+      (system target).projector.baseChange.map.prodMap
+          correctionProjector.map =
+        Polynomial.aeval targetOperator polynomial) :
+    FaithfulScalarEdge system source target K := by
+  refine ofBasisSquares system basis correctionProjector comparison rowScale
+    rowOnBasis ?_
+  intro index
+  have naturality := intertwines_aeval K comparison.toLinearMap
+    sourceOperator targetOperator operatorComparison polynomial (basis index)
+  rw [← sourcePolynomial, ← targetPolynomial] at naturality
+  simpa using naturality
+
+end FaithfulScalarEdge
 
 end TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.RowedProjectorOccurrence

@@ -23,9 +23,15 @@ source pipeline are `Data.ofBasisSquares` and
 are `RowedProjectorOccurrence.OccurrenceEquivalence.ofBasisSquares`,
 `OccurrenceEquivalence.detects_iff`,
 `CommonSourceEdgePresentation.toEdge`, and
-`RowedProjectorPath.Path.detectsAt_iff`.  Lean proves them over an arbitrary
-commutative ring and with an arbitrary row codomain; the computation is a
-finite regression, not their proof.
+`RowedProjectorPath.Path.detectsAt_iff`.  The smaller intrinsic route is
+expanded by `FaithfulScalarEdge.ofBasisSquares` and
+`FaithfulScalarEdge.detectsAt_iff`: the local endpoint rows and projectors are
+scalar extensions by type, and faithful base change derives the native edge
+predicate.  `FaithfulScalarEdge.ofBasisRowAndPolynomialProjector` additionally
+derives the projector square from polynomial functional calculus and one
+operator square.  Lean proves these results over an arbitrary commutative ring
+and with an arbitrary row codomain; the computation is a finite regression,
+not their proof.
 
 ## Exhaustive domain
 
@@ -55,8 +61,7 @@ square, projector idempotence, or comparison invertibility.  The smart
 constructor rejects each.  The first two malformed bundles also reverse the
 detection Boolean, so both squares are load-bearing rather than decorative.
 
-The pathwise direct route has eight separately named inputs.  Removing any one
-makes that route fail closed:
+The edge source has seven separately named inputs:
 
 1. Gu--Yu--Yu Proposition 5.2: an ordinary equivariant basis;
 2. Gu--Yu--Yu Propositions 2.4 and 2.8: shift legality on that source;
@@ -65,16 +70,27 @@ makes that route fail closed:
 5. connection naturality of that comparison;
 6. the KKPYY canonical marked spectral union;
 7. uniform coverage of every smooth-center blowup allowed in the all-\(m\)
-   factorization; and
-8. native occurrence descent: every repeated weak-factorization vertex is the
-   faithful pullback of one carrier, marked row, and marked projector.
+   factorization.
 
-The eighth token is path-level rather than edge-level.  A positive regression
+Two alternative eighth inputs close the path, and the suite checks that they
+are not accumulated:
+
+- **typed-occurrence route:** every repeated vertex is the faithful pullback
+  of one carrier, marked row, and marked projector;
+- **intrinsic-predicate route:** every edge comparison has a faithful scalar
+  presentation of the two native endpoint data and satisfies the row and
+  projector squares.  Lean derives reflection of the native vertex-indexed
+  detection proposition.
+
+These tokens are path-level rather than edge-level.  A positive regression
 traverses one certified direct-sum edge forward and then backward.  The hostile
 `hostileNominalPath` test gives two edgewise-lawful occurrences with the same
 vertex name but opposite detection values.  A name-only telescope accepts
-them; the typed telescope rejects them.  Thus the token records a genuine
-geometric obligation, not a convenience of the implementation.
+them; the typed telescope rejects them.  Thus the Haskell token records a
+genuine geometric obligation, not a convenience of the implementation.  Lean
+expands that token into the faithful extension, completed direct-sum
+equivalence, and two exact squares; it does not leave intrinsic reflection as
+an axiom.
 
 Two further fail-closed tokens guard the endpoint contradiction: geometric
 identification of the cubic-product marked factor and geometric proof of
@@ -127,7 +143,7 @@ nix shell --impure --expr \
   ../notes/cubic-threefolds-tasks/c925-rowed-projector-sanity.hs
 ```
 
-Both commands pass.  The canonical output records 61 named checks, 576
+Both commands pass.  The canonical output records 64 named checks, 576
 exhaustive lawful bundles, 1,152 unit-scaled bundles, 104,976 polynomial
 cases, 55,296 common-source cases, and 9,000 fixed-seed QuickCheck cases.
 
@@ -135,17 +151,19 @@ cases, 55,296 common-source cases, and 9,000 fixed-seed QuickCheck cases.
 
 | artifact | bytes | SHA-256 |
 |---|---:|---|
-| `c925-rowed-projector-sanity.hs` | 32715 | `ea5714a315464dacef1e2d41ee2e54cd9618c442500006d6a2b4bb2789af800b` |
-| `c925-rowed-projector-sanity-output.txt` | 3260 | `2907ef6dfd196b991a1e816c1e3106b444215cd3ac99e2dd531409b82ab0e38d` |
+| `c925-rowed-projector-sanity.hs` | 34006 | `8a216e0c409240dc2c90aaa4937b5e61b1efbde8a3f54d0d5f4cd7127faea184` |
+| `c925-rowed-projector-sanity-output.txt` | 3467 | `4e015e120272ba8d8f91a42e89f3c42f208f23ff9cf784c6880245accce25451` |
 
 ## Boundary
 
 The suite does not compute Gromov--Witten invariants, construct a QDM
 comparison, identify a marked spectral block, or verify any cited source.  It
 tests the plumbing after the route-specific source facts are supplied.  The
-six direct-edge obligations, uniform smooth-center coverage, the path-level
-occurrence obligation, and both endpoint identifications fail
-closed independently; four other facts gate
+six direct-edge obligations, uniform smooth-center coverage, either selected
+path-level presentation obligation, and both endpoint identifications fail
+closed independently.  On the intrinsic route that token means a native
+faithful scalar presentation; Lean, rather than the token, proves edge
+reflection.  Four other facts gate
 alternative adapters and are not cumulative assumptions.  Source-fact tokens
 are coverage labels, not implementations of the cited results.  Lean is the
 independent general check of the consumer algebra.  The exact substitution and
