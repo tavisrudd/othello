@@ -937,6 +937,7 @@
     "RepairPorts.eventually_mdsMinimumCoefficientFingerprints": "RepairPorts.PositiveDensity",
     "RepairPorts.eventually_pointedConfinement_iff_zeroCost": "RepairPorts.PositiveDensity",
     "RepairPorts.eventually_prescribedPorts": "RepairPorts.PositiveDensity",
+    "RepairPorts.eventually_radiusThree_prescribedPortPair": "RepairPorts.PositiveDensity",
     "RepairPorts.exactFunctionalStrata": "RepairPorts.PointedTransfer",
     "RepairPorts.exactPointedConfinementAndTransfer": "RepairPorts.PointedTransfer",
     "RepairPorts.existsUnique_harmonicQuarticCompletion": "RepairPorts.HarmonicQuartic",
@@ -2134,6 +2135,7 @@
     "RepairPorts.eventually_mdsMinimumCoefficientFingerprints",
     "RepairPorts.eventually_pointedConfinement_iff_zeroCost",
     "RepairPorts.eventually_prescribedPorts",
+    "RepairPorts.eventually_radiusThree_prescribedPortPair",
     "RepairPorts.exactFunctionalStrata",
     "RepairPorts.exactPointedConfinementAndTransfer",
     "RepairPorts.existsUnique_harmonicQuarticCompletion",
@@ -2593,6 +2595,11 @@
       "propext"
     ],
     "RepairPorts.eventually_prescribedPorts": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "RepairPorts.eventually_radiusThree_prescribedPortPair": [
       "Classical.choice",
       "Quot.sound",
       "propext"
@@ -8328,6 +8335,20 @@
       "RepairPorts.coefficientPort",
       "RepairPorts.pointedZeroFunctionalCost",
       "RepairPorts.prescribedPorts_of_outerDualDistance"
+    ],
+    "RepairPorts.eventually_radiusThree_prescribedPortPair": [
+      "FiniteGeom.dualCode",
+      "FiniteGeom.dualDist",
+      "FiniteGeom.embedHypergraph",
+      "FiniteGeom.repairHypergraph",
+      "RepairCodes.blockEmbedding",
+      "RepairCodes.concatenatedCode",
+      "RepairCodes.singleBlockWord",
+      "RepairPorts.OuterDualDistanceTendsToInfinity",
+      "RepairPorts.coefficientPort",
+      "RepairPorts.eventually_prescribedPorts",
+      "RepairPorts.pointedZeroFunctionalCost",
+      "RepairPorts.two_mul_dualDist_le_pointedZeroFunctionalCost"
     ],
     "RepairPorts.exactFunctionalStrata": [
       "FiniteGeom.dualCode",
