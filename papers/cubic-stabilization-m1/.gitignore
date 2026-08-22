@@ -1,0 +1,4 @@
+blueprint/src/*.paux
+blueprint/src/generated-references.tex
+blueprint/lean_decls
+blueprint/web/

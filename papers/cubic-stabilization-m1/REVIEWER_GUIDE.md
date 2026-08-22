@@ -1,7 +1,7 @@
 # A referee's route through the proof
 
-The primary paper contains the whole proof of *Irrationality of Cubic
-Threefolds after One Stabilization*.  A referee can set aside the two papers
+The proof of *Irrationality of Cubic Threefolds after One Stabilization* is in
+the primary paper.  A referee can set aside the two papers
 under `companions/`; neither enters the argument below.  The conditional
 all-stabilization manuscript is a different paper.
 
@@ -19,7 +19,8 @@ theorem.  Section 3 contains consequences and can wait.
 1. **What is being counted?** Start with the generalized eigenspaces of Euler
    multiplication.  `prop:generic-spectral-connection-splitting` upgrades
    their separated leading decomposition to formal connection blocks.
-   `thm:marker-ledger` turns any additive block marker into a birational
+   `thm:marker-ledger` turns an additive block marker satisfying the QDM
+   operation formulas and the stated invariance conditions into a birational
    invariant once every actual center occurrence has value zero.  Occurrences
    are kept separate, even when they come from the same center.
 2. **Do the QDM comparisons give the required ledger formulas?**
@@ -62,8 +63,8 @@ gives a source location and the convention match for each use.  No
 computational evidence bundle enters `thm:every-cubic`.
 
 The repository also contains a Lean 4 companion built against Mathlib; it is
-not part of Mathlib.  For the primary paper, its claims file classifies five
-statements as strict fragments, nine as conditional deductions, and
+not part of Mathlib.  For the primary paper, its claims file classifies the 15
+labelled statements as five fragments, nine conditional deductions, and
 `lem:faithful-center-base-change` as absent; none is classified as complete.
 Lean proves the effective ledger and occurrence-indexed telescope, parts of
 the rank-two residue algebra, and the final implications from typed premises.
@@ -75,7 +76,7 @@ The public entry point is
 [`PaperInterface/Main.lean`](lean/TavisRuddFiniteGeom/Papers/CubicStabilizationM1/PaperInterface/Main.lean).
 [`claims.json`](lean/verification/claims.json) states the exact correspondence
 and its limitations.  [`expected_axioms.txt`](lean/verification/expected_axioms.txt)
-is the expected dependency transcript, not a record of a fresh kernel run.
+is the expected axiom list, not a record of a fresh kernel run.
 
 From this directory, `make check` checks the source-level claim
 correspondence, rebuilds the PDF in the pinned environment, and rejects TeX
@@ -84,3 +85,9 @@ the artifact and registry semantics, see
 [`lean/README.md`](lean/README.md) and
 [`verification/README.md`](verification/README.md).  This guide does not
 supply a standalone formal replay command.
+
+The existing `\lean` and `\uses` annotations also render as a LeanBlueprint
+web view.  From the paper root, `nix run .#blueprint-web` writes an annotated
+web view and dependency graph under `blueprint/web/`.  This is a reading aid:
+it neither builds nor checks the Lean declarations and does not replace the
+claim registry or axiom audit.
