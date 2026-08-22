@@ -772,6 +772,145 @@ projector.  The active no-Stokes route combines that projector with the
 adjoint row derived directly on Iritani's blowup comparison; it does not
 attribute a row theorem to KKPYY.
 
+## D11. Arithmetic and irregular-Hodge rigidifiers, 2025--2026
+
+### SOURCE
+
+Five recent results address precisely the formal or arithmetic side of an
+irregular quantum connection.
+
+Read-depth summary: none of the five papers was read cover to cover.  Each was
+read partially at its theorem statements and the sections named below; all
+five PDFs are cached.
+
+1. Bai--Pomerleano--Seidel, *P-adic Gamma classes and overconvergent
+   Frobenius structures for quantum connections*, arXiv:2509.26295,
+   Conjecture 1.2 and Theorems 1.9--1.10.  A formal Frobenius structure with
+   prescribed constant term exists uniquely for the small monotone quantum
+   connection.  Overconvergence for the \(p\)-adic Gamma constant term is
+   conjectural in general and proved for smooth projective toric Fanos and
+   Grassmannians.  Read depth: partial, arXiv v1, Introduction and theorem
+   statements; cache key arXiv:2509.26295, SHA-256
+   d9570ef69eb5c6136caeb744e96ed31573d2390cbc04eba0f2c3756fa07cf89f.
+2. Pomerleano--Seidel, *The quantum connection and its mod p reduction*,
+   arXiv:2606.28256v2, Theorem 1.4, Corollary 1.5, and Proposition 1.7.  The
+   \(p\)-curvature is the relevant quantum Steenrod endomorphism; the
+   nilpotent part of each regularized formal residue lies in the closure of
+   the nilpotent part of quantum multiplication.  Diagonalizable quantum
+   multiplication therefore gives finite-order regularized monodromy.  Read
+   depth: partial, arXiv v2, Introduction and Sections 1a--1b; cache key
+   arXiv:2606.28256, SHA-256
+   8175a1f1239771a4b1d665ed6791cc308a4570fea0d3e63646e1d5819ec9ea9e.
+3. Pomerleano--Seidel, *The quantum connection, Fourier--Laplace transform,
+   and families of A-infinity-categories*, arXiv:2308.13567v5, Theorems
+   1.2.3--1.2.4.  Under the smooth anticanonical-divisor hypothesis, the
+   quantum connection has unramified exponential type, quasi-unipotent
+   regularized formal monodromy, and the stated dimension bounds on its
+   Jordan blocks.  The paper explicitly studies the formal data while
+   ignoring Stokes phenomena.  Read depth: partial, arXiv v5, Sections
+   1.1--1.2 and the main theorem statements; cache key arXiv:2308.13567,
+   SHA-256
+   40913d72c0a28b110d3d641ddd7351384b1429220e458ce41d045ccec2af666c.
+4. Wang, *Compactification Independence of the Irregular Hodge Filtration on
+   Deligne--Mumford Stacks*, arXiv:2608.06234, Theorem 1.1.  The irregular
+   Hodge filtration of one fixed Landau--Ginzburg model \((U,w)\) is
+   independent of its NC rational stack compactification.  The proof uses
+   filtered comparison for boundary blowups and roots and relative stacky
+   weak factorization.  Read depth: partial, arXiv v1, Introduction and
+   theorem statements for Theorems 1.1, 4.11, and 5.5; cache key
+   arXiv:2608.06234, SHA-256
+   6a3343410d2f4e9867d19fde778dd541867b579187393f4922d3202a84bd34fa.
+5. Chuang, *On the Generalized Arithmetic Picard--Lefschetz Formula*,
+   arXiv:2607.05757, Theorems 1.1 and 3.12.  For a proper flat family over a
+   henselian DVR with isolated diagonal singularities
+   \(\sum a_i z_i^{k_i}+u\pi^v=0\), the local vanishing cycles have an explicit
+   tame-inertia eigenbasis.  A chosen tame generator acts on the basis vector
+   indexed by \((\zeta_i)\) through \((\prod_i\zeta_i)^v\).  Read depth:
+   partial, arXiv v1, Introduction and Theorems 1.1 and 3.12; cache key
+   arXiv:2607.05757, SHA-256
+   629bd22c46febe79d1c6ba2a9f9a12764edc85bda7d8c7e39337d2f82be83a01.
+
+### WHAT THEY PROVIDE
+
+These papers give four useful no-Stokes mechanisms:
+
+- a canonical arithmetic framing of a fixed small quantum connection, when
+  overconvergence is known;
+- constraints on the formal residue and its nilpotent part derived from
+  \(p\)-curvature rather than sectorial comparison;
+- a filtered object that is genuinely invariant under modifications of a
+  fixed Landau--Ginzburg compactification.
+- an explicit finite computation of tame-inertia characters once a marked
+  packet has been realized as nearby cycles of a diagonal degeneration.
+
+The third item is especially close in shape to the desired pathwise theorem:
+the comparison maps are composed through a weak-factorization zigzag and the
+filtration is intrinsic to the common open Landau--Ginzburg model.  The fourth
+would make the final inertia check finite once the missing nearby-cycle
+realization has been constructed.
+
+### NOT PROVIDED
+
+None of the five results instantiates the C925 obstruction.
+
+1. The proved overconvergent Frobenius cases do not include the cubic
+   threefold or arbitrary smooth blowup centers.  No cited theorem makes
+   Iritani's blowup decomposition Frobenius-compatible.
+2. Quasi-unipotence, rational residue eigenvalues, and Jordan-size bounds do
+   not determine the stabilizer of a primitive spectral idempotent under the
+   transported product loop.  The decorated algebra
+   \(K[x]/(x^3-t)\) satisfies the same kind of tame arithmetic constraints
+   while retaining the forbidden three-cycle.
+3. Quantum Steenrod identification is a theorem about one connection.  There
+   is no arbitrary-center blowup formula intertwining those operations with
+   the KKPYY/Iritani atom ledger.  Known blowup calculations are special
+   examples, not an occurrence-uniform comparison theorem.  At the relevant
+   prime \(3\), \(c_1(\mathbf P^2)=3H\) and
+   \(c_1(\mathbf P^5)=6H\) vanish in the standard \(p\)-curvature
+   normalization, so the operation does not see the external projective
+   packet.  A selected-divisor variant does not help:
+   \(\mathbf F_3[t,x]/(x^3-t)\) realizes the same cubic-power law.  The
+   rank-three Fourier comparison also uses cube roots and \(1/\sqrt3\), so an
+   integral-at-\(3\) edge map would itself be a new theorem.
+4. Wang compares compactifications of the same \((U,w)\).  A weak
+   factorization of \(X\times\mathbf P^m\dashrightarrow\mathbf P^{m+3}\)
+   does not come with one Landau--Ginzburg model whose compactifications are
+   the quantum mirrors of every vertex.  Constructing that common model and
+   identifying its filtered twisted de Rham object with every vertex QDM
+   would be a new mirror theorem.  The filtered quasi-isomorphisms also do
+   not provide a canonical loop action on primitive idempotents: exceptional
+   defects are removed by derived acyclicity rather than retained in a
+   positive equivariant ledger.
+5. Iritani's Hodge equivariance does not fill this gap.  The universal Hodge
+   group acts trivially on the Novikov variables, and the Tannakian category
+   used there is already quotiented by Tate twists.  It therefore neither
+   sees the external Kummer inertia nor supplies a projector-compatible
+   carrier length.
+6. Arithmetic Picard--Lefschetz is a diagnostic, not an exclusion theorem.
+   C925 has no occurrence-wise comparison from its marked QDM index schemes
+   to the nearby cycles of a proper diagonal degeneration.  Moreover the
+   one-variable cubic case with \(k=3\) and \(v=1\) produces the forbidden
+   order-three characters rather than ruling them out.
+
+### DISPOSITION
+
+The arithmetic idea is a real alternate research programme, not a current
+provider.  Its smallest useful theorem would be an **arithmetic
+nearby-cycle enhancement of atoms**: put the marked KKPYY atom over one
+common henselian trait, identify it occurrence-wise with a canonical
+nearby-cycle summand, and prove every Iritani comparison equivariant for the
+same tame generator.  Chuang's formula would then make the final order-three
+exclusion computable from local exponents.  A Frobenius-enriched version
+could rigidify the comparison, but the exclusion clause remains essential:
+Frobenius structure alone does not defeat the \(K[x]/(x^3-t)\) countermodel.
+
+Wang suggests a second, larger connector: construct one common
+Landau--Ginzburg model for the whole birational path and invoke
+compactification independence there.  No source presently constructs that
+model or the QDM identifications.  Both routes remain in the fallback ledger;
+the actual \(\mathbb Z\)-loop stabilizer exclusion remains the smaller live
+frontier.
+
 ## Active fusion: the row-visible marked projector
 
 For one blowup comparison, let
@@ -1060,8 +1199,8 @@ row-free charge route.  Lean proves that multiplication by \(T_1\) satisfies
 \]
 
 At \(q_2=0\) this is \(\lambda^3(\lambda+q_1)\), and the derivative at the
-exceptional root \(-q_1\) is \(-q_1^3\ne0\).  The geometric descent for this
-edge follows directly from Iritani (1.1).  For
+exceptional root \(-q_1\) is \(-q_1^3\ne0\).  Iritani (1.1) supplies only the
+first part of the geometric descent argument.  For
 \(Z=B\times\{p\}\subset B\times\mathbb P^2\), one has \(r=2\), the normal
 bundle is trivial, and therefore \(\rho_Z=c_1(N_{Z/X})=0\).  A center monomial
 maps as
@@ -1070,17 +1209,51 @@ maps as
  Q_Z^d\longmapsto Q^{\iota_*d}
 \]
 
-with no exceptional-root factor and no \(\mathbb P^2\) Novikov degree.  The
-single correction QDM is therefore defined before adjoining the named
-product cube root.  Complete in the product parameter on the unramified
-generic spectral locus.  The correction splitting closure is then a
-constant, hence unramified, extension of that trait, while the cube-root
-extension is totally ramified.  Standard unramified--totally-ramified
-disjointness makes the external deck subgroup fix every correction geometric
-idempotent.  The simple-root theorem is an independent finite check of the
-same separation in the \(F_1\) multiplication table.  This closes the model
-edge, not the common-charge, splitting-closure, and coherent-ledger theorem
+with no exceptional-root factor and no \(\mathbb P^2\) Novikov degree.  This
+does not make the pulled-back center bulk coordinate constant in the product
+parameter.  Instead put \(t=q_1q_2\), genericize the cubic, \(q_1\), and the
+remaining variables, and work over \(R=F[[t]]\).  The displayed polynomial is
+
+\[
+ \lambda^3(\lambda+q_1)-q_1t.
+\]
+
+Its root \(-q_1\) is simple modulo \(t\), so Hensel lifting produces the
+exceptional rank-one factor over \(R\).  Behrend's product formula and the
+identity
+
+\[
+ B\times F_1=\operatorname{Bl}_{B\times\{p\}}
+   (B\times\mathbb P^2)
+\]
+
+reduce the desired marked-correction statement to identifying the actual
+Iritani correction projector with this factor tensored with the marked
+\(B\)-packet.  This identification is an additional input: the pulled-back
+bulk coordinate may vary with \(t\), and the simple \(F_1\) root alone says
+nothing about ramification of the \(B\)-packet.  One must also construct its
+finite-flat index algebra and prove that its splitting discriminant (or the
+relevant inter-block resultant) is a unit before inverting \(t\).  Under
+those hypotheses its splitting closure is unramified.  The named Kummer
+extension \(R[t^{1/3}]\) is totally ramified.  Standard
+unramified--totally-ramified disjointness makes the external deck subgroup fix
+every correction geometric idempotent.  Lean checks the polynomial and
+simple-root input.  The exponent-lattice charge, actual projector tensor
+square, finite-etale good reduction, and geometric identification remain
+open source inputs.  Once those inputs are supplied, this closes the model
+edge, not the common-charge,
+splitting-closure, and coherent-ledger theorem
 along an arbitrary factorization.
+
+The consumer does not need a split external $C_3$ action.  The actual product
+loop acts through $\mathbb Z$, and a source branch has stabilizer $3\mathbb Z$.
+An equivariant stable ledger must preserve that full stabilizer.  The Lean
+theorem
+`Comparison.TwoLayerDescentPacket.sourceSum_not_equivariantlyEquivalent_withoutSameStabilizer`
+therefore reduces the source gate to excluding opposite marked points with
+stabilizer exactly $3\mathbb Z$.  This handles nonsplit lifts such as a cyclic
+$C_9$ splitting extension.  It does not defeat $K[x]/(x^3-t)$, whose points
+have precisely the forbidden three-cycle.
 
 ### Rejected associated-graded edge repair
 
@@ -1349,41 +1522,38 @@ proved separately.
 
 ## Current source verdict
 
-1. **The unmarked native-deck route is closed.**  Iritani--Koto's inverse
-   branch formula makes the cubic \(r=3\) source visible, but the same formula
-   gives primitive \(C_3\)-visible rank on the \(r=6\) projective endpoint.
-   This is an endpoint countercalculation, not a missing descent lemma.
-2. **The marked-projector consumer survives that falsifier,
-   conditionally.**  KKPYY and the C924 calculation provide the formal stable
-   projector onto the rank-two nonsemisimple nonzero-\(\delta^\sharp\) union,
-   and projective space has zero such projector.  Cubic visibility by the full
-   algebraic row on a common legal object remains open.
-3. **The two squares (D10.1) are separately source-derived, not jointly
-   instantiated.**  Projector naturality follows in the positive-\(z\) formal
-   F-bundle from connection naturality plus canonical spectral decomposition.
-   The row square follows in the negative-\(z\) completed Fourier source.
-   Their common domain and the composite \(\rho P\) are not supplied.
-4. **The row is allowed a larger codomain.**  This removes the artificial
-   demand that the Givental series be an endomorphism-valued row over the
-   original \(\mathbf C[z]\)-ring.  What remains load-bearing is only that the
-   row is defined on the same QDM module on which the atom projector acts.
-5. **The resulting consumer is uniform in \(m\), but the geometric theorem is
-   not landed.**  If the common rowed object and cubic full-row witness are
-   supplied, correction atoms are irrelevant and the Lean telescope works
-   for every \(m\).  The rejected pole-free-intersection proposal does not
-   supply those inputs because the cubic global hypergeometric module is
-   irreducible.
-6. **The one-sided global-core and composed-map architectures remain valid
-   fallbacks.**  They are no longer the first source test.  AKMW/GYY do not
-   currently supply their marked endpoint maps as a package.
-
-The live no-Stokes task is no longer construction of a common object for
-\(\epsilon M\) and the stable projector.  It is either a different fibrewise
-\(z=0\) functional with a source-derived edge square, or an invariant outside
-the QDM spectral-marker architecture.  No such functional is presently known;
-raw degree-zero augmentation is an exact failed candidate.  Do not resume the
-pole-free algebraic-subconnection, fixed-phase, deck, Hodge-height, or Stokes
-routes without answering their recorded countermodels.
+1. **The row/projector architecture is closed in the no-Stokes regime.**
+   The exact rank row and the stable projector occupy opposite \(z\)-adic
+   completions.  Bounded-pole intersections are zero by cubic
+   hypergeometric irreducibility, while raw or normalized degree-zero
+   augmentation fails on the marked product edge
+   \(B\times\mathbf P^2\leftarrow B\times F_1\).
+2. **The live consumer is row-free and uses the actual loop.**  The source
+   projective packet has stabilizer \((m+1)\mathbb Z\).  An equivariant atomic
+   ledger cannot carry it to a target-and-correction ledger containing no
+   marked point with that stabilizer.  The Lean theorem in
+   `TwoLayerDescentPacket` proves exactly this set/action obstruction and
+   handles nonsplit finite lifts.
+3. **The plumbing is not the open gate.**  What remains is one source theorem
+   constructing a coherent actual-\(\mathbb Z\)-equivariant refinement of the
+   KKPYY atom ledger along the selected factorization and excluding
+   stabilizer \((m+1)\mathbb Z\) on every opposite marked correction point.
+   For \(m=2\), the algebra (K[x]/(x^3-t)) decorated by the cubic atom is the
+   mandatory countermodel to any proposed proof.
+4. **The \(B\times F_1\) calculation is only a model edge.**  Its polynomial
+   has the required simple special-fibre root, but the actual tensor
+   projector, charge neutrality, and good reduction of the marked
+   \(B\)-index packet remain hypotheses.  It does not classify arbitrary
+   smooth threefold centers.
+5. **Recent arithmetic and irregular-Hodge methods do not yet close the
+   gate.**  They provide formal monodromy constraints, special-scope
+   Frobenius structures, or compactification invariance for one fixed
+   Landau--Ginzburg model.  They do not provide the occurrence-uniform
+   stabilizer exclusion or a common mirror model for the birational path.
+6. **The conditional Lean telescope is uniform in \(m\); the unconditional
+   geometric provider is not landed.**  Do not report the all-\(m\) theorem
+   as proved.  The next source target is the henselian, actual-loop
+   refinement just stated, not another row consumer.
 
 The finite plumbing regression is
 `cubic-threefolds-tasks/c925-rowed-projector-sanity.hs`.  It requires each

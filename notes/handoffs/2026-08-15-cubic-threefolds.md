@@ -229,17 +229,31 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   theorem-by-theorem dossier is
   `../2026-08-21-c925-no-stokes-source-dossier.md`; the executable report is
   `../2026-08-21-c925-rowed-projector-computational-sanity.md`.  The live
-  no-Stokes frontier is the row-free common-charge centre-exclusion theorem;
+  no-Stokes frontier is the row-free loop-stabilizer centre-exclusion theorem;
   an invariant outside the QDM spectral-marker architecture is the distinct
   fallback.  Raw, full normalized, and projector-restricted normalized
   augmentation are failed universal providers, and the associated-graded
   repair remains conditional.  The task card's `Next` section is
-  authoritative.  Construct one pathwise external \(C_{m+1}\)-charge for which the
-  source packet is regular, every target/correction marked idempotent is
-  externally fixed, and all comparisons/inverses lift coherently to the
-  equivariant stable ledger.  `TwoLayerDescentPacket` already proves the
-  all-\(m\) set/action contradiction from exactly those inputs.  Common charge,
-  splitting-field disjointness, and coherent geometric lift remain external.
+  authoritative.  Use the actual pathwise $\mathbb Z$-loop: a source branch
+  has stabilizer $(m+1)\mathbb Z$, and no point in the opposite ledger may
+  have the same stabilizer.  All comparisons and inverses must lift coherently
+  to the equivariant stable ledger.  `TwoLayerDescentPacket` proves this exact
+  stabilizer obstruction, so a split $C_{m+1}$ action is no longer required.
+  The occurrence-uniform stabilizer exclusion and coherent geometric lift
+  remain external.  A bounded 2025--2026 math-physics search found two real
+  alternate frameworks but no provider.  Bai--Pomerleano--Seidel's
+  overconvergent Frobenius structure is proved for toric Fanos and
+  Grassmannians, not the cubic or arbitrary centers.  Wang's irregular Hodge
+  filtration is invariant under compactifying one fixed Landau--Ginzburg
+  model, not under replacing the variety QDM along this birational path.
+  Pomerleano--Seidel's mod-$p$ and categorical Fourier--Laplace results
+  constrain formal residues and Jordan blocks but do not determine
+  primitive-idempotent stabilizers.  D11 of the no-Stokes dossier records the
+  exact scopes and the mandatory $K[x]/(x^3-t)$ falsifier.  Chuang's 2026
+  arithmetic Picard--Lefschetz formula makes tame inertia computable after a
+  nearby-cycle realization, but the cubic diagonal model itself realizes the
+  forbidden orbit.  An arithmetic nearby-cycle enhancement of atoms or one
+  common Landau--Ginzburg model would be a new theorem, not imported closure.
   Material below this paragraph is a fallback ledger, not the live route.
 
   The packet is organized like a parameterized software interface: a
@@ -656,11 +670,11 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   lattice but its three geometric idempotents are cyclically permuted after
   adjoining $q^{1/3}$.  Thus one outer codimension-two summand and $s=1$
   do not imply an externally fixed inner packet.  Resuming this route requires
-  one three-part charged carrier-unramified Burnside lift: a faithful common
-  path trait with primitive external mod-three charge, linear disjointness of
-  the splitting field of every dangerous center block algebra from the cubic
-  Kummer extension, and a coherent oriented equivariant stable ledger for the
-  actual comparisons and reindexings.  Reports:
+  one loop-stabilizer Burnside lift: a faithful common path loop, exclusion of
+  stabilizer $3\mathbb Z$ for every dangerous center block, and a coherent
+  oriented equivariant stable ledger for the actual comparisons and
+  reindexings.  Splitting-field disjointness is a stronger sufficient
+  provider.  Reports:
   `../2026-08-21-c925-two-layer-resolvent-packet.md` and
   `../2026-08-21-c925-outer-kummer-and-carrier-boundary.md`.
   The first fallback consumer is one-sided.  A detected primitive-sixth witness in

@@ -6,10 +6,11 @@
 the no-Stokes row providers tested are ruled out: cubic irreducibility excludes
 the pole-bounded common object, and the cubic product of the \(F_1\) correction
 falsifies both full and marked-image raw \(z=0\) augmentation.  The live
-row-free gate is a pathwise external \(C_{m+1}\)-charge with fixed correction
-idempotents and a coherent equivariant stable ledger.  The projective endpoint
-and generic-bulk persistence are closed; the unconditional theorem is not
-landed; no manuscript edits
+row-free gate is a pathwise loop action for which no opposite correction
+idempotent has the source branch's stabilizer, together with a coherent
+equivariant stable ledger.  The
+projective endpoint and generic-bulk persistence are closed; the unconditional
+theorem is not landed; no manuscript edits
 
 ## Goal
 
@@ -625,16 +626,18 @@ any geometric or QDM provider.
    reopen raw or normalized augmentation unless the product marker itself is
    replaced.  An associated-graded alternative would still need unsupplied
    edge DVR lattices and integral occurrence maps.
-3. Pursue one row-free source theorem only.  For each (m\ge1), construct a
-   single external cyclic (C_{m+1})-action on the marked finite-étale packet
-   over a pathwise coefficient trait such that:
-   the \(B\times\mathbb P^m\) packet is externally regular; every target and
-   correction marked idempotent is externally fixed (equivalently, its
-   splitting Galois closure is disjoint from the named Kummer extension); and
+3. Pursue one row-free source theorem only.  For each \(m\ge1\), use the
+   actual pathwise loop action on the marked finite-etale packet such that:
+   a chosen \(B\times\mathbb P^m\) branch has stabilizer
+   \((m+1)\mathbb Z\); no point in the opposite target/correction marked
+   ledger has that stabilizer; and
    every directed comparison and inverse lifts coherently to the resulting
    equivariant stable-disjoint-union ledger.  The Lean theorem
-   `TwoLayerDescentPacket.externalRegularSum_not_equivariantlyEquivalent_externalTrivial`
-   then gives the contradiction for arbitrary internal packet actions.  This
+   `TwoLayerDescentPacket.sourceSum_not_equivariantlyEquivalent_withoutSameStabilizer`
+   then gives the contradiction without requiring the loop quotient to split.
+   A split external \(C_{m+1}\)-action with no free opposite point is a
+   convenient stronger provider.  For \(m=2\), the exact local exclusion is
+   absence of a correction three-cycle.  This
    is a missing geometric/descent theorem, not a consumer or typing gap.  The
    first finite source test is the marked correction in
    \(B\times F_1\): compute its spectral polynomial in the product Novikov
@@ -642,29 +645,53 @@ any geometric or QDM provider.
    idempotents.  Lean now checks the table's operator polynomial
    \(\lambda^4+q_1\lambda^3-q_1^2q_2\) and that at \(q_2=0\) the exceptional
    root \(-q_1\) is simple while the ambient root is triple.  This test is
-   source-closed: Iritani (1.1) sends a center monomial to
+   source-reduced: Iritani (1.1) sends a center monomial to
    \(Q^{\iota_*d}q^{-\rho_Z\cdot d/(r-1)}\); here \(r=2\), the normal bundle of
    \(B\times\{p\}\) is trivial, and \(\iota_*d\) has no \(\mathbb P^2\) degree.
-   Thus the single correction QDM is defined before adjoining the named
-   product cube root.  Over the product-parameter DVR its generic splitting
-   closure is constant/unramified, whereas the cube-root extension is totally
-   ramified; their disjointness makes the correction externally fixed.  The
-   simple-root calculation
-   is an independent finite algebra check on the blowup presentation.
-   Passing this example does not supply arbitrary-center fixedness, pathwise
-   charge, or comparison coherence.
+   This removes product charge from the center monomials, but the pulled-back
+   center bulk coordinate may still depend on the product parameter.  Put
+   \(t=q_1q_2\), genericize the cubic, \(q_1\), and the remaining variables,
+   and work over \(R=F[[t]]\).  The displayed polynomial becomes
+   \(\lambda^3(\lambda+q_1)-q_1t\); its root \(-q_1\) is simple modulo \(t\).
+   Hensel lifting therefore produces the exceptional rank-one factor over
+   \(R\).  Behrend's product formula and
+   \(B\times F_1=\operatorname{Bl}_{B\times\{p\}}(B\times\mathbb P^2)\)
+   reduce the marked correction claim to the additional tensor-projector
+   identification with that factor and the marked \(B\)-packet.  The latter
+   packet must itself have a finite-flat index algebra whose splitting
+   discriminant or inter-block resultant is a unit before \(t\) is inverted.
+   Under those hypotheses its splitting closure is unramified.  The named
+   extension \(R[t^{1/3}]\) is totally ramified, so disjointness makes the
+   correction idempotents externally fixed.  Lean checks the polynomial and
+   simple-root input.  The exponent-lattice charge, tensor-projector square,
+   Hensel lift, finite-etale good reduction, and geometric occurrence
+   identification remain source inputs.
+   Passing this example does not exclude arbitrary-center three-cycles or
+   supply pathwise loop and comparison coherence.
+4. Keep the bounded 2025--2026 math-physics search as a fallback, not a
+   provider.  P-adic Gamma/Frobenius is proved for toric Fanos and
+   Grassmannians; mod-\(p\) and categorical Fourier--Laplace results constrain
+   formal residues but not primitive-idempotent stabilizers; irregular Hodge
+   compactification independence compares compactifications of one fixed
+   Landau--Ginzburg model.  D11 of the no-Stokes dossier records the exact
+   theorem scopes.  Chuang's 2026 arithmetic Picard--Lefschetz formula makes
+   tame characters computable for diagonal degenerations, but a comparison
+   from the marked QDM packet to those nearby cycles is not available and the
+   cubic diagonal model itself realizes the forbidden three-cycle.  An
+   arithmetic nearby-cycle enhancement of atoms or a common
+   Landau--Ginzburg model would be new mathematics.
 
 ## Retired provider specifications
 
 The items below retain exact hypotheses and falsifiers for alternate routes;
 they are not the work queue.  Items 1--3 above are the live frontier.
 
-4. Keep generic even-bulk persistence green under its stated QDM hypotheses.
+5. Keep generic even-bulk persistence green under its stated QDM hypotheses.
    `rankTwoCluster_nilpotent_persists_on_formal_germ` proves from compressed
    commutation and flatness that the cubic nilpotent part remains square-zero
    and nonzero throughout the formal germ.  A first-order bulk derivative is
    only a corroboration, not a missing theorem.
-5. The following former provider specification is retained for audit only.
+6. The following former provider specification is retained for audit only.
    It is not an active construction target.  It asked to construct the common
    rowed object consumed by
    `RowedProjectorOccurrence.FaithfulScalarEdge`.  For every factorization

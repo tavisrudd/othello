@@ -66,8 +66,14 @@ coordinate has no point fixed by the external subgroup, whereas an
 external-trivial packet is pointwise fixed by that subgroup even when its
 internal action is arbitrary.  The module proves that these packets cannot be
 equivariantly equivalent, even after adjoining an arbitrary external-trivial
-correction packet to the external-regular source.  It does not construct the
-two actions or prove their independence for a geometric comparison.
+correction packet to the external-regular source.  A weaker theorem requires
+only that the target ledger have no externally free point; target actions may
+factor nontrivially through proper quotients of the external group.  It does
+not require pointwise external triviality.  The weakest theorem uses the
+original loop group directly: an equivariant stable ledger must carry a chosen
+source point to a point with exactly the same stabilizer.  This avoids assuming
+that a cyclic quotient of the loop action splits.  The module does not
+construct the loop action or its geometric comparison.
 
 The geometric comparison with the actual QDM packet remains an explicit
 inhabited-structure proposition. In particular, the package does not assume

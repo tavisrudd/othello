@@ -115,6 +115,25 @@ fixed-point mark for the named external subgroup, or equivalently the external
 layer of the finite-etale packet.  A single external-regular orbit cannot be
 assembled from any positive disjoint union of external-trivial corrections.
 
+The all-arity consumer needs less.  Call a point externally free when its
+stabilizer in $G_{\mathrm{ext}}\times\{1\}$ is trivial.  Every point of the
+external-regular packet is externally free, and equivariant equivalences
+preserve this property.  Hence a regular source packet plus an arbitrary
+correction ledger cannot be equivariantly identified with a target ledger
+having no externally free point.  Lean proves this in
+`Comparison.TwoLayerDescentPacket.externalRegularSum_not_equivariantlyEquivalent_withoutExternallyFreePoint`.
+For $G_{\mathrm{ext}}=C_3$, nonfree means fixed; for composite external groups,
+proper-quotient orbits are allowed.
+
+An even weaker formulation uses the original loop group.  Two points have the
+same stabilizer when exactly the same loop powers fix them.  Equivariant
+equivalences preserve this fingerprint, so a source witness plus arbitrary
+corrections cannot map to a ledger with no point of the same stabilizer.  Lean
+proves this in
+`Comparison.TwoLayerDescentPacket.sourceSum_not_equivariantlyEquivalent_withoutSameStabilizer`.
+For the projective packet the fingerprint is $(m+1)\mathbb Z$.  This version
+does not require the cyclic quotient of the loop action to split.
+
 ## 63.4 Conditional $m=2$ telescope
 
 The formal codimension-two branch count passes a primary-source check.
@@ -184,8 +203,8 @@ would close the packet route.
 Under these hypotheses the left ledger contains an external-regular packet
 plus externally trivial corrections, while the right ledger is wholly
 external-trivial.  Section 63.3 forbids the required equivariant stable
-identification.  Lean checks this exact disjoint-union form in
-`Comparison.TwoLayerDescentPacket.externalRegularSum_not_equivariantlyEquivalent_externalTrivial`.
+identification.  This is the prime-order specialization of
+`Comparison.TwoLayerDescentPacket.externalRegularSum_not_equivariantlyEquivalent_withoutExternallyFreePoint`.
 
 The codimension-two formula contributes only one outer exceptional copy, but
 that count is used here solely to show that no new exceptional Kummer root is
@@ -218,41 +237,50 @@ fibre degenerates; the marker must be formed on the punctured/formal generic
 fibre and extended by a specified nearby-cycle or intermediate-extension
 construction.
 
-The most economical source theorem is now:
+One convenient sufficient source theorem is:
 
 > The unsplit projective-bundle and blow-up QDM comparisons induce coherent
 > maps of marked finite-etale spectral schemes over $K_0((q))$; after the
 > external cubic Kummer extension, the projective-bundle packet is regular and
 > every codimension-two correction descends from the base field.
 
-If this holds, no Gamma normalization or Stokes-matrix calculation is needed
-for the packet consumer.  If it fails, Module 62's fixed-phase rank-row reader
-remains the stronger fallback.
+The exact weaker theorem keeps the actual loop and only excludes correction
+points with stabilizer \(3\mathbb Z\); base-field descent is not necessary.
+Either version avoids Gamma normalization and Stokes matrices in the packet
+consumer.  The fixed-phase rank-row reader remains an analytic fallback, not
+an input to this route.
 
-## 63.6 All-$m$ boundary
+## 63.6 All-$m$ consumer and source boundary
 
-The argument is especially clean for $m=2$: the source has external
-ramification degree three and a dangerous codimension-two center has exceptional
-outer degree one.  For general $m$, the source Kummer degree is $m+1$, while
-successive lower-arity operations can have ramification degrees with common
-factors whose composites recreate part or all of that inertia.  Cardinality or
-one fixed-point mark is then inadequate.
+For general $m$, a source branch has loop stabilizer $(m+1)\mathbb Z$.  The
+set-theoretic proof needs only that no point in the opposite correction and
+target ledger have the same stabilizer.  Equivalently, after a split cyclic
+quotient is supplied, the source is a free $C_{m+1}$-orbit and no opposite
+point is free.  Pointwise fixedness is unnecessary: a correction action
+through a proper quotient is harmless.  Thus the consumer works uniformly in
+$m$ without requiring a split quotient.
 
-An all-$m$ theorem would retain the ramification filtration or the tower of
-primitive inertia quotients.  This is the number-theoretic form of packet
-height.  It is a lawful continuation of the $m=2$ proof, not a free corollary
-of it.
+The source theorem remains open.  It must construct the common loop action and
+coherent equivariant stable ledger, then exclude stabilizer
+$(m+1)\mathbb Z$ in every correction.  A split action and ramification
+filtration are sufficient providers, not part of the consumer.  For $m=2$,
+a split $C_3$ provider reduces the condition to external fixedness.
 
 ## Verification boundary
 
-The new Lean module proves only the product-action set theorem.  It assumes the
-two group actions and does not construct a Galois cover, a QDM block scheme, or
-an equivariant blow-up comparison.  Its checked declarations are:
+The new Lean module proves product-action and arbitrary-loop set theorems.  It
+does not construct a Galois cover, a QDM block scheme, or an equivariant
+blow-up comparison.  Its checked declarations are:
 
 * `Comparison.TwoLayerDescentPacket.externalTrivialPacket_isExternallyFixed`;
 * `Comparison.TwoLayerDescentPacket.externalRegularPacket_not_externallyFixed`;
+* `Comparison.TwoLayerDescentPacket.externalRegularPacket_isExternallyFree`;
+* `Comparison.TwoLayerDescentPacket.externallyFree_map`;
 * `Comparison.TwoLayerDescentPacket.externalRegular_not_equivariantlyEquivalent_externalTrivial`;
-* `Comparison.TwoLayerDescentPacket.externalRegularSum_not_equivariantlyEquivalent_externalTrivial`.
+* `Comparison.TwoLayerDescentPacket.externalRegularSum_not_equivariantlyEquivalent_externalTrivial`;
+* `Comparison.TwoLayerDescentPacket.externalRegularSum_not_equivariantlyEquivalent_withoutExternallyFreePoint`;
+* `Comparison.TwoLayerDescentPacket.hasSameStabilizer_map`;
+* `Comparison.TwoLayerDescentPacket.sourceSum_not_equivariantlyEquivalent_withoutSameStabilizer`.
 
 The ramification argument in Section 63.2 is a standard field-theoretic proof
 recorded in prose.  No modular Hauptmodul, cusp-signature, or programme-base
@@ -289,4 +317,5 @@ with a common primitive external charge along the factorization path.
 | Does a cubic center's internal $C_3$ defeat the marker? | settled: no under an independent external action | Lean proves arbitrary internal actions cannot remove the external fixed-point distinction |
 | Does codimension two force external triviality? | local formal branch count passes; global external descent open | Iritani's $r=2$ projection uses $s=1$, but prove zero external Kummer weight under every occurrence reindexing and preserve the idempotent |
 | Is linear Galois equivariance enough? | settled: no | the regular representation contains a trivial summand; preserve the finite block scheme or primitive idempotents |
-| Does this prove all $m$? | no | retain primitive inertia/ramification towers and exclude reconstruction from lower arities |
+| Does the consumer work for all $m$? | yes | the external-freeness theorem permits proper-quotient correction inertia |
+| What remains for all $m$? | geometric provider open | construct the common actual loop, exclude correction stabilizer $(m+1)\mathbb Z$, and lift the comparison ledger equivariantly |

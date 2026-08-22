@@ -157,7 +157,17 @@ nor removes fixedness.  Together with the two-layer stable-ledger theorem it
 shows that closure requires an external-fixedness theorem for the inner
 marked center packet; outer multiplicity one is insufficient.
 
-## 64.5 Smallest remaining theorem
+For a composite external group, fixedness is stronger than the consumer
+needs.  The theorem
+`Comparison.TwoLayerDescentPacket.externalRegularSum_not_equivariantlyEquivalent_withoutExternallyFreePoint`
+only requires every point in the opposite ledger to have nontrivial external
+stabilizer.  For the $m=2$ group $C_3$, this is equivalent to fixedness.
+Using the actual $\mathbb Z$-loop is weaker still: the source branch has
+stabilizer $3\mathbb Z$, and the consumer only excludes correction points with
+that exact stabilizer.  This removes the need to split the cyclic quotient,
+but it does not remove the $K[t]/(t^3-q)$ counterexample.
+
+## 64.5 Exact remaining theorem and a convenient sufficient provider
 
 Let $Z^3\hookrightarrow Y^5$ be an actual codimension-two center occurrence,
 and let \(\mathscr S_{4/9}(Z)\) be the finite geometric set of primitive
@@ -166,7 +176,10 @@ extension.  Let $v_{\mathrm{ext}}$ be the divisorial valuation determined by
 the source \(\mathbf P^2\) Kummer variable after transport to the common
 Novikov spine.
 
-The remaining theorem is the following three-part occurrence-uniform package:
+The exact local theorem excludes stabilizer \(3\mathbb Z\) for every marked
+point of every dangerous correction packet under one coherently transported
+actual loop.  The following three-part occurrence-uniform package is a
+stronger, convenient provider:
 
 > **Charged carrier-unramified Burnside lift.** The weak-factorization path admits a
 > common faithful saturated coefficient trait with a primitive external
@@ -193,6 +206,13 @@ occurrence-uniformly, the remaining steps are formal:
 4. the target packet is empty;
 5. the oriented equivariant stable ledger contradicts the paper-local Lean
    theorem.
+
+For general $m$, the loosest local replacement uses the actual loop: no
+geometric correction idempotent may have stabilizer
+$(m+1)\mathbb Z$.  If a split $C_{m+1}$ action is available, it suffices to
+exclude trivial stabilizers.  Splitting-field disjointness remains a
+convenient stronger provider, but proper-quotient inertia is allowed.  The
+same coherent stable-ledger clause is still required.
 
 ## 64.6 Why current sources do not prove carrier-unramifiedness
 
@@ -252,5 +272,6 @@ that restriction cannot.
 | Does codimension two introduce a new outer root? | settled: no | Iritani has $s=1$ and one center summand |
 | Is the actual cubic's internal $C_3$ independent of the external one? | settled after product-base change | actual Prym-axis resolvent is finite etale over the cubic base and unramified in $q$ |
 | Does one outer correction imply one fixed idempotent? | settled: no | $K[t]/(t^3-q)$ and the Lean unary-packet theorem |
-| What remains for $m=2$? | charged carrier-unramified Burnside lift for arbitrary actual threefold centers | construct the common primitive external charge, exclude cubic ramification of every marked inner block algebra, and lift the actual comparison/reindexing ledger equivariantly |
-| Does this give all $m$? | no | higher Kummer degrees require a ramification filtration and carrier-height theorem |
+| What remains for $m=2$? | loop-stabilizer Burnside lift for arbitrary actual threefold centers | construct the common loop, exclude stabilizer $3\mathbb Z$ for every marked inner block, and lift the actual comparison/reindexing ledger equivariantly |
+| Does the set-theoretic consumer give all $m$? | yes | exact loop stabilizers are preserved without choosing a split cyclic quotient |
+| What remains for all $m$? | source theorem open | construct the common loop, exclude correction stabilizer $(m+1)\mathbb Z$, and lift the ledger equivariantly |
