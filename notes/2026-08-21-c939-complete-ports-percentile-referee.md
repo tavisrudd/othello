@@ -1,8 +1,8 @@
 # Percentile referee report: *Complete Bounded Repair Ports*
 
-**Date:** 2026-08-21  
-**Artifact reviewed:** `papers/complete-repair-ports/complete_repair_ports.pdf`  
-**SHA-256:** `62fdcd7f0a9875e3b8d7a17dce415cedd0c7937b8aea5b83b64155b1d5eab7be`  
+**Date:** 2026-08-21
+**Artifact reviewed:** `papers/complete-repair-ports/complete_repair_ports.pdf`
+**SHA-256:** `62fdcd7f0a9875e3b8d7a17dce415cedd0c7937b8aea5b83b64155b1d5eab7be`
 **Clean-room protocol:** I read and scored the 22-page PDF before inspecting any earlier review, manuscript source, Git history, task note, verification file, or cited paper. I did not inspect those materials afterward either. The judgments below therefore assess the submitted PDF and its stated trust boundary, not the underlying repository.
 
 ## Bottom line
