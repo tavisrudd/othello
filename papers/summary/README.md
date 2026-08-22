@@ -246,7 +246,7 @@ boundary, and reproducible entry points.
 | Diagonal Isoduality and Transversal Clifford Groups of MDS–CSS Codes | Quantum coding / finite geometry | A diagonal-isoduality nullity test determines the projective transversal group. | [PDF](https://github.com/tavisrudd/mds-css-transversal-groups/blob/main/mds-css-transversal-groups.pdf) · [repo](https://github.com/tavisrudd/mds-css-transversal-groups) |
 | Exchange Landscapes, Orientation, and Rigidity in the Golden Six-Mode Conference Interferometer | Quantum information / mathematical physics | Cut-independent exchange spectra and orientation-sensitive stability are unique at order six. | [PDF](https://github.com/tavisrudd/golden-quantum-statistics/blob/main/golden_quantum_statistics.pdf) · [repo](https://github.com/tavisrudd/golden-quantum-statistics) |
 | Integral Cohomology and Modular Decomposition for the Theta Divisor of a Cubic Threefold | Algebraic geometry / topology | The rank-130 integral middle lattice has canonical mod-two glue, while the same resolution carries a factor-three integral perverse attachment, a length-three modular Loewy chain, and failure of relative hard Lefschetz modulo three. | [PDF](https://github.com/tavisrudd/blown-up-theta-lattice/blob/main/blown_up_theta_lattice.pdf) · [repo](https://github.com/tavisrudd/blown-up-theta-lattice) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.22036586-blue.svg)](https://doi.org/10.5281/zenodo.22036586) |
-| Frobenius-equivariant Pair Extension and Robust Repair of Eight-Arcs | Finite geometry / coding theory | Fixed mate-line carriers and exact collision corrections give Frobenius-compatible paired MDS extensions, including the exact two-fixed-point minimum over F₂₅. | [repo](https://github.com/tavisrudd/equivariant-robust-completion) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.22051736-blue.svg)](https://doi.org/10.5281/zenodo.22051736) |
+| Frobenius-equivariant Pair Extension and Robust Repair of Eight-Arcs | Finite geometry / coding theory | Fixed mate-line carriers and exact collision corrections give Frobenius-compatible paired MDS extensions, including the exact two-fixed-point minimum over F₂₅. | [PDF](https://github.com/tavisrudd/equivariant-robust-completion/blob/main/equivariant-robust-completion.pdf) · [repo](https://github.com/tavisrudd/equivariant-robust-completion) |
 | Complete Bounded Repair Ports: Transfer, Reliability, and Geometric Structure | Coding theory / reliability | Exact weighted-functional confinement transfers represented bounded repair ports to positive-density coordinate classes, retaining both support and normalized decoder data. | [PDF](https://github.com/tavisrudd/complete-repair-ports/blob/main/complete_repair_ports.pdf) · [repo](https://github.com/tavisrudd/complete-repair-ports) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.22051904-blue.svg)](https://doi.org/10.5281/zenodo.22051904) |
 
 The repository for *Reconstructing the Clebsch Code and Its Golden Orientation
@@ -557,6 +557,51 @@ public mirror.
 ---
 
 ### Further Geometry, Coding Theory, and Quantum Information Papers
+
+#### Frobenius-equivariant Pair Extension and Robust Repair of Eight-Arcs
+
+[PDF](https://github.com/tavisrudd/equivariant-robust-completion/blob/main/equivariant-robust-completion.pdf) · [Repository](https://github.com/tavisrudd/equivariant-robust-completion) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.22051736-blue.svg)](https://doi.org/10.5281/zenodo.22051736)
+
+**Standout result.** Every Frobenius-invariant eight-arc over every prime-power
+base order `s ≥ 5` admits a fresh nonfixed conjugate-pair extension. Over
+`F₂₅` there are at least four legal pairs, and the exceptional two-fixed-point
+profile has exact minimum 32; for `s ≥ 7` there are at least 319 legal pairs.
+
+> *Abstract* Let φ be the quadratic Frobenius involution of PG(2,s²). We study
+> extensions of φ-invariant arcs by fresh nonfixed conjugate pairs, or
+> equivalently Frobenius-compatible two-column extensions of the associated
+> dimension-three MDS codes. Every pair lies on a unique fixed mate line.
+> Counting pairs carrier by carrier gives a uniform lower bound, and an exact
+> correction records secant orbits that disappear at fixed centers and visible
+> orbits that collide on one candidate.
+>
+> Every invariant eight-arc over every prime-power base order s ≥ 5 admits
+> such an extension. Over F₂₅ there are at least four legal pairs; the
+> exceptional two-fixed-point profile has exact minimum 32. For s ≥ 7 there
+> are at least 319 legal pairs. These bounds yield alternate repairs after
+> deletion of a selected orbit, and a parameterized criterion gives the
+> corresponding result for invariant (k+2)-arcs. The structural reductions
+> have human-scale Lean support. A separate Mathlib-only certificate checks
+> the normalized exceptional census; the projective normalizations and
+> semantic transport are manuscript arguments.
+
+**Delivers.** A carrierwise theory of Frobenius-compatible paired extension,
+an exact invisible-center and collision correction, uniform extension and
+alternate-repair bounds, and an exact normalized classification of the
+exceptional two-fixed-point minimum over `F₂₅`.
+
+**Who cares.** Finite geometers, coding theorists studying MDS extension and
+puncturing, and researchers interested in symmetry-constrained completion or
+formally checked finite classifications.
+
+**Why it matters.** Ordinary point extension does not ensure that a point and
+its Frobenius conjugate are jointly legal. The mate-line quotient exposes the
+extra obstruction, while the correction terms measure exactly where a naive
+first-order count loses information. The resulting multiplicity bounds give
+robust replacement of generator-column pairs rather than erasure decoding in
+a fixed code.
+
+---
 
 #### Complete Bounded Repair Ports: Transfer, Reliability, and Geometric Structure
 
