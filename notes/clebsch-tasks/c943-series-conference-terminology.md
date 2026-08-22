@@ -2,12 +2,12 @@
 
 **Lane:** `clebsch`
 **Paper stream:** five-paper Clebsch series and the unnumbered conference companion
-**State:** active; Papers I, III, and V have sealed cold-referee ACCEPT
+**State:** active; Papers I, II, III, and V have sealed cold-referee ACCEPT
 verdicts and deterministic green builds. Paper III also passes the complete
 local release gate, including source-only replay of all three pinned Lean closures.
 Paper I’s trust projection and mirror export remain deferred behind C855’s
-pre-existing unmapped `prop:fifteen-class-census`. Paper II and the remaining
-shared codas/cross-references are next.
+pre-existing unmapped `prop:fifteen-class-census`. Paper IV and the remaining
+unnumbered conference paper/shared cross-references are next.
 
 ## Objective
 
@@ -109,5 +109,17 @@ and must not be reused as mathematical terminology.
   citations use the revised vocabulary. `make check` passes at 23 pages;
   deterministic PDF SHA-256 is
   `013ca974439dc3b5f4002d78a9df31e5db6d97b2bdb6c6438ae1474c8e9aab0d`.
+  Independent cold referee: MINOR, repaired through two sealed rereads, final
+  ACCEPT.
+- Paper II — *Quadratic Trade Rigidity and Cubic Orientation in Conic
+  Matching Quotients*: the former “golden pair” is now stated as the
+  ordered/unordered parent pair, and Appendix B distinguishes exactly the
+  unordered pair determining \(K\), the ordered pair, the displayed
+  cell-orientation convention, the signed profiles, and sheet choice. No
+  reader-facing “golden” terminology remains; frozen evidence schema keys are
+  unchanged. The complete release gate passes all evidence bundles, guarded
+  Lean gates, the axiom allowlist, and a warning-free 47-page deterministic
+  build. PDF SHA-256:
+  `e045f7de81c385d59e2aa173de668485aa5bb5e313c653160d36d4dedaacbdff`.
   Independent cold referee: MINOR, repaired through two sealed rereads, final
   ACCEPT.

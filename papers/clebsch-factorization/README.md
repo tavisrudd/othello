@@ -1,23 +1,23 @@
-# Quadratic trade rigidity and cubic orientation in conic matching quotients
+# Quadratic Trade Rigidity and Cubic Orientation in Conic Matching Quotients
 
 [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21682217-blue.svg)](https://doi.org/10.5281/zenodo.21682217)
 
 **Clebsch portfolio:** part of the five-paper *Clebsch: Rigidity from Sparse
 Shadows* series. Related companions include *Diagonal Isoduality and
-Transversal Clifford Groups of MDS--CSS Codes* and the Golden interferometer
-paper. The shared
+Transversal Clifford Groups of MDS--CSS Codes* and *Balanced Cuts of
+Conference Matrices: Squared-Spectrum Rigidity and Hermitian Holonomy*. The shared
 progression is expository: this paper is logically independent of the other
 portfolio papers.
 
-The five numbered papers are: I, *Reconstructing the Clebsch code and its
-golden orientation from its deep-hole syndrome locus*; II, this paper; III,
-*Golden descent and operator realizations of the Clebsch cubic*; IV,
-*Reconstructing PG(2,13), its conic, and polarity from the minimum words of a
-binary conic code*; and V, the culminating recognition and marked-round-trip
-paper.
+The five numbered papers are: I, *Reconstructing the Clebsch Code from Its
+Deep-Hole Syndrome Locus*; II, this paper; III, *Hitchin's Icosahedral
+Incidence Double Cover and Operator Realizations of the Clebsch Cubic*; IV,
+*Reconstructing \(\operatorname{PG}(2,13)\), its conic, and polarity from the
+minimum words of a binary conic code*; and V, *Chordal and Conference Cubics:
+Reconstruction and a Residual \(C_2\)-Torsor*.
 
 This directory contains the manuscript
-*Quadratic trade rigidity and cubic orientation in conic matching quotients*.
+*Quadratic Trade Rigidity and Cubic Orientation in Conic Matching Quotients*.
 
 [Read the paper (PDF).](clebsch_factorization.pdf)
 
@@ -38,7 +38,7 @@ excludes every other matching orbit without a field census.
 ## Files
 
 - `clebsch_factorization.tex`: manuscript source.
-- `clebsch_factorization.pdf`: rebuilt review PDF.
+- `clebsch_factorization.pdf`: paper PDF.
 - `verification/statement_identity.json`: exact identity of every
   theorem-like statement.
 - `verification/trust_manifest.json`: proof-mode and evidence mapping.
