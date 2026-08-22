@@ -6,7 +6,7 @@ Date: 2026-08-21
 
 The no-Stokes all-stabilizations consumer is kernel-checked, but its proposed
 algebraic/pole-bounded geometric provider is ruled out.  Iritani supplies the completed
-comparison and exact augmentation-row square.  Its Euler residual square,
+comparison and the exact negative-\(z\) augmentation-row square.  Its Euler residual square,
 together with the C924/KKPYY spectral-extension theorem, supplies the formal
 stable-projector square.  Those two squares currently live in opposite
 \(z\)-completions.  Irreducibility of the cubic rank-four hypergeometric
@@ -17,11 +17,15 @@ the conditional linear algebra and now kernel-checks this abstract
 irreducibility obstruction; the hypergeometric irreducibility criterion
 remains an imported source theorem with an exact parameter certificate.
 
-The retained conditional consumer is
-`Comparison.RowedProjectorDecomposition.UnitScaledData.detects_iff`.  It needs
+The loosest retained conditional consumer is
+`Comparison.ProjectedRowProjectorDecomposition.Data.detects_iff`.  It needs
 only an invertible ambient-plus-correction comparison, a unit-scaled row
-square, and a block-natural idempotent-projector square.  The correction
-projector may be nonzero.
+square on the marked projector image, and a block-natural
+idempotent-projector square.  It imposes no row equation on unmarked
+correction factors.  The stronger full-row consumer remains available as a
+convenience interface.  The cubic product of the \(F_1\) correction supplies
+a marked correction on which raw augmentation is nonzero, so neither
+interface has a universal raw-augmentation provider for smooth blowups.
 
 The retired direct all-center edge instantiation used Iritani's completed blowup
 comparison and its derived augmentation row together with the KKPYY marked
@@ -60,6 +64,7 @@ its required source-to-projective-space map has not been constructed.
 | Katzarkov--Kontsevich--Pantev--Yu, *Birational Invariants from Hodge Structures and Quantum Multiplication*, arXiv:2508.05105v2 | Institutional and arXiv records list a preprint; no journal version located | Theorems 4.1, 4.5, and 4.11: formal spectral decomposition and blowup/projective-bundle F-bundle decompositions | `polynomialProjector_naturality` proves projector transport from one operator square whenever the marked projector is presented by one polynomial. `CommonSourcePresentation.toUnitScaledData` checks downstream fusion with the row theorem. | Existence and canonicity of the geometric spectral splitting, and the claim that the C925 marker selects the corresponding union of blocks |
 | Iritani, *Quantum cohomology of blowups*, arXiv:2307.13555v3 | The Gu--Yu--Yu bibliography records it as “to appear in Kyoto J. Math.”; the checked text is still the arXiv version | Proposition 5.1 fundamental-solution square; Theorem 5.2 completed Fourier isomorphism and ordinary basis; Proposition 5.4 ambient extension; Theorems 5.9/5.18 general smooth-center direct sum; vertex inclusions (5.38), (5.39); invertible generic bulk Jacobian in Theorem 5.18(7) | Applying degree-zero augmentation to the two Fourier maps proves the rank-row square on the exact Iritani comparison. `CoprimeFactorProjector` checks only the `z=0` CRT projector; KKPYY/C924 spectral-splitting canonicity transports its unique full connection-stable extension. `TwoBaseRowedProjectorEdge` proves reflection after a common faithful scalar object is supplied. | The general smooth-center QDM decomposition theorem and its ring/completion hypotheses; no cited statement puts the negative-`z` row and positive-`z` stable projector on one faithful even coefficient object |
 | Iritani, *Notes on the decomposition theorem for blowups*, arXiv:2604.10028v2 | ArXiv preprint; checked PDF SHA-256 `0114923576b2ec3a78fc346fd9f61eb65cfe63f8cc7087881d11626cdb9883c3` | Proposition 3: rational/cyclotomic form of the decomposition; Proposition 8: equivariance for the universal Hodge group; Corollary 11: restriction to complexified Hodge classes | No new Lean premise is required: these results strengthen the external carrier/descent provenance of the already conditional decomposition. | No rank/Gamma row, normalized-Jacobian augmentation identity, integral occurrence lattice, or correction-exclusion theorem is supplied |
+| Reichelt--Schulze--Sevenheck--Walther, *Algebraic aspects of hypergeometric differential equations*, Beitr. Algebra Geom. 62 (2021), DOI 10.1007/s13366-020-00560-1 | Refereed open-access journal article | Example 5.1: the complete small quantum multiplication table of (F_1=\operatorname{Bl}_p\mathbb P^2) in the basis ((1,T_1,T_2,[\mathrm{pt}])) | `HirzebruchSurfaceAugmentation.no_nonzero_eigenvector_in_degreeZeroKernel` proves that the degree-zero row kills no nonzero (T_1)-eigenvector when both Novikov parameters are nonzero.  `tensor_degreeZeroRow_ne_zero_of_eigenvector` proves that this visibility survives tensoring with a visible marked vector.  Together with the zero-ambient obstruction in `ProjectedRowProjectorDecomposition`, this falsifies both full and marked-image raw row squares on the cubic product blowup. | The multiplication table and its geometric identification; Iritani's algebra decomposition identifies the rank-one correction as an eigenline; the standard product formula and the already used tensor marker identify the marked product correction |
 | Iritani--Koto, *Quantum cohomology of projective bundles*, arXiv:2307.03696v4 | Author CV and bibliographic records list it as a preprint; no journal version located | Projective-bundle QDM decomposition and the faithful common coefficient spine | `detects_baseChange_iff`, `detects_on_common_extensions_iff`, and `detects_tensorIdentity` prove faithful descent and endpoint witness transport | The projective-bundle comparison; it corroborates the product endpoint but is not needed for the rank-row tensor identity |
 | Behrend, *The product formula for Gromov--Witten invariants*, J. Algebraic Geom. 8 (1999), 529--541; arXiv:alg-geom/9710014v1 | Refereed journal theorem | Theorem 9: the Gromov--Witten transformation of a product is the tensor product/cup product of the two factor transformations | Its three-point genus-zero specialization gives the small quantum tensor algebra and degree-zero tensor row used by `CubicBlockCertificate.rankRow_tensor_detects` | The virtual-class product formula itself; it transports a full cubic row witness but does not derive that witness from the raw `z=0` row |
 | Programme cubic-block calculation | Local, not refereed | Rank-two zero block, nonzero nilpotent, modified-residue discriminant `4/9`, and degree-zero row `(0,-7r^2)` | `CubicBlockCertificate` kernel-checks the normalized rational nilpotent, trace `-1`, determinant `5/36`, discriminant `4/9`, and row detection. The earlier exact SymPy certificate independently checks the full conjugation at symbolic nonzero `r`. | Identification of the finite matrices with the cubic QDM block and the normalization from the geometric quantum product |
@@ -97,11 +102,18 @@ product formula, Beauville's cubic calculation, the explicit projective-space
 ring, and AKMW.  GYY/KKPYY remain corroborating routes rather than
 simultaneous hypotheses.  Normalizing the \(z=0\) Fourier map by
 \(h_Y=\operatorname{FT}_Y(1)|_{z=0}\) reduces the next candidate to the
-mirror-map Jacobian, but neither Iritani paper proves the remaining
-degree-zero augmentation identity on the marked image.  The 2026 note adds
-Hodge-equivariant descent only.  A no-Stokes continuation therefore requires
-a different intrinsic \(z=0\) functional with a source-derived edge square,
-or an invariant outside this QDM spectral-marker architecture.
+mirror-map Jacobian.  The \(F_1\) multiplication table and the Lean
+four-coordinate argument show that its rank-one correction eigenline has
+nonzero degree-zero coordinate at the generic point, whereas the proposed
+ambient-row identity would kill it.  Thus the **full** normalized augmentation
+candidate is false.  Tensoring the \(F_1\) blowup with the cubic makes its
+correction rank two and marked under the same tensor projector used at the
+source endpoint.  The product row remains nonzero while ambient projection
+kills the correction, so the projector-restricted identity is also false as a
+universal smooth-blowup provider.  The 2026 note adds Hodge-equivariant descent
+only.  A no-Stokes continuation therefore requires the independent
+common-charge or connected-packet centre-exclusion theorem, or an invariant
+outside this QDM spectral-marker architecture.
 
 ## Exact source-to-consumer substitution
 

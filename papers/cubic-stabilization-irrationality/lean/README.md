@@ -181,6 +181,13 @@ it selects the first factor kernel and kills the second, and transports it
 through every intertwiner of the chosen operators. It does not prove that a
 geometric marker supplies those factors or that their product annihilates the
 quantum module.
+`Comparison.ProjectedRowProjectorDecomposition` weakens the row hypothesis to
+the marked projector images.  Its detection theorem permits arbitrary row
+leakage on unmarked correction factors while retaining the full projector
+square and a unit normalization.  A full unit-scaled row comparison supplies
+this restricted interface, but the converse is not assumed.  The same module
+proves that a row-visible marked vector with zero ambient comparison component
+rules out even this restricted interface.
 `Comparison.PoleFreeProjectorObstruction` records the obstruction to replacing
 the completed rowed carrier by algebraic vectors in a larger formal module.
 The vectors fixed by the formal projector pull back to a submodule of the
@@ -208,6 +215,24 @@ data used at the cubic endpoint: a nonzero nilpotent, modified-residue trace
 block.  It also transports this witness through any tensor factor carrying a
 row-value-one vector.  It does not identify that finite matrix model with a
 geometric QDM.
+
+`Comparison.HirzebruchSurfaceAugmentation` checks a four-coordinate
+consequence of the published small quantum multiplication table for the first
+Hirzebruch surface.  When both Novikov parameters are nonzero, every nonzero
+eigenvector of multiplication by the first divisor has nonzero degree-zero
+coordinate.  The theorem therefore rules out raw degree-zero augmentation as
+a correction-killing row on any one-dimensional generic spectral factor of
+that algebra.  It also proves that tensoring such an eigenvector with any
+row-visible vector remains row-visible.  Combining this tensor statement with
+the zero-ambient obstruction is purely linear algebra; identifying a
+geometric product correction and its marked projector with those factors is
+an external input.  The multiplication table and its geometric interpretation
+are the cited external inputs.  The same module proves the operator relation
+`T⁴ + q₁ T³ - q₁² q₂ = 0` and checks that, at `q₂ = 0`, the
+additional root `-q₁` is simple.  This is the finite algebra used when a
+Hensel argument separates the exceptional branch from the triple ambient
+root; existence of that Hensel lift and its identification with a named
+geometric deck action are not proved by the module.
 
 `Comparison.ProjectiveSpaceQuantumPolynomial` proves that
 `X^(m+4) - q` is separable over every characteristic-zero field when

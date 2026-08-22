@@ -186,16 +186,28 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   compressed commutation and flatness that the cubic nilpotent part stays
   square-zero and nonzero over the formal even-bulk germ.
 
-  The normalized \(z=0\) Fourier candidate is also now reduced exactly, but
-  not closed: equation (5.32) turns it into the mirror-map Jacobian, and the
-  residual source theorem is
-  \(\epsilon_{\widetilde X}D_{\vartheta}\widetilde\tau
-  =\epsilon_XD_{\vartheta}\tau\) on the selected marked image.  Iritani proves
-  the initial congruence and invertibility, not this row identity; a unital
-  \(2\times2\) Jacobian model falsifies the inference.  An associated-graded
-  weakening still needs unsupplied integral edge lattices and occurrence maps.
+  The **full-row** normalized \(z=0\) Fourier candidate is closed negatively.
+  Equation (5.32) turns it into the mirror-map Jacobian, whose ambient-row
+  identity would annihilate every correction ideal.  For
+  \(F_1=\operatorname{Bl}_p\mathbb P^2\), the published small-quantum table
+  makes every nonzero vector in the generic rank-one correction ideal an
+  eigenvector with nonzero degree-zero coordinate.  Lean checks the exact
+  four-coordinate implication in
+  `HirzebruchSurfaceAugmentation.no_nonzero_eigenvector_in_degreeZeroKernel`.
+  Thus the full correction-annihilating row identity is false already for
+  this blowup.  Tensoring with the cubic gives the legal fivefold blowup
+  \(B\times F_1=\operatorname{Bl}_{B\times\{p\}}(B\times\mathbb P^2)\).
+  The same product projector (P_B\otimes\mathrm{id}) used at the source
+  endpoint marks the rank-two correction \(U_B\otimes L\); its product row is
+  nonzero while its ambient component is zero.  Lean checks the tensor
+  visibility and zero-ambient obstruction.  Therefore even the
+  projector-restricted raw-augmentation square is false as a universal
+  smooth-blowup provider.  The abstract consumer remains correct, but this
+  geometric instantiation is retired.  An associated-graded weakening still
+  needs unsupplied integral edge lattices and occurrence maps.
   Iritani's 2026 Hodge-equivariant refinement strengthens descent only: it
-  supplies neither this row nor the common-product charge/correction-exclusion
+  supplies neither a replacement row nor the common-product
+  charge/correction-exclusion
   theorem needed for a row-free packet telescope.
 
   **Trust boundary:** the retired direct all-center provider uses Iritani's
@@ -217,11 +229,17 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   theorem-by-theorem dossier is
   `../2026-08-21-c925-no-stokes-source-dossier.md`; the executable report is
   `../2026-08-21-c925-rowed-projector-computational-sanity.md`.  The live
-  no-Stokes frontier is now either a genuinely different intrinsic \(z=0\)
-  functional with a source-derived marked edge square, the independent
-  common-charge centre-exclusion theorem, or a non-QDM invariant.  Raw and
-  normalized augmentation and the associated-graded repair are failed or
-  conditional candidates.  The task card's `Next` section is authoritative.
+  no-Stokes frontier is the row-free common-charge centre-exclusion theorem;
+  an invariant outside the QDM spectral-marker architecture is the distinct
+  fallback.  Raw, full normalized, and projector-restricted normalized
+  augmentation are failed universal providers, and the associated-graded
+  repair remains conditional.  The task card's `Next` section is
+  authoritative.  Construct one pathwise external \(C_{m+1}\)-charge for which the
+  source packet is regular, every target/correction marked idempotent is
+  externally fixed, and all comparisons/inverses lift coherently to the
+  equivariant stable ledger.  `TwoLayerDescentPacket` already proves the
+  all-\(m\) set/action contradiction from exactly those inputs.  Common charge,
+  splitting-field disjointness, and coherent geometric lift remain external.
   Material below this paragraph is a fallback ledger, not the live route.
 
   The packet is organized like a parameterized software interface: a
@@ -236,10 +254,12 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   The false naked row-null ideal has been removed: comparison now lands in an
   augmented operator-row category, whose output-kernel ideal is genuinely
   two-sided.  The older pointed primitive-sixth/fivefold-center route remains
-  conditional, but it has been superseded as a consumer architecture: the
-  intrinsic marked-projector plus algebraic adjoint row would supply a blowup
-  invariant for every \(m\) once its common row/projector object and cubic
-  full-row witness are constructed.  Those source gates are still open.
+  conditional.  The intrinsic marked-projector plus algebraic adjoint-row
+  route is now retired in the no-Stokes regime: cubic irreducibility excludes
+  a pole-bounded common row/projector object, and the cubic product of the
+  \(F_1\) correction falsifies both the full and projector-restricted raw
+  \(z=0\) augmentation laws.  Its Lean consumers remain reusable conditional
+  algebra, not a geometric provider.
   Generic-point localization proves rank is the universal
   support-null \(K_0\)-character, and the whole full-rank comparison defect is
   one boundary-to-rank leakage covector.  Wall mutations and multiplicity-one

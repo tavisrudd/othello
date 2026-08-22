@@ -2,21 +2,24 @@
 
 **Lane:** cubic-threefolds
 
-**Status:** no-Stokes marked-projector consumer landed for every \(m\), but
-its algebraic/pole-bounded geometric provider is ruled out by irreducibility
-of the cubic rank-four hypergeometric module; Iritani's rank-row square and the
-formal stable-projector square live in opposite \(z\)-realizations; the
-projective endpoint and generic-bulk persistence are closed; the
-unconditional theorem is not landed; no manuscript edits
+**Status:** conditional marked-projector consumers landed for every \(m\), but
+the no-Stokes row providers tested are ruled out: cubic irreducibility excludes
+the pole-bounded common object, and the cubic product of the \(F_1\) correction
+falsifies both full and marked-image raw \(z=0\) augmentation.  The live
+row-free gate is a pathwise external \(C_{m+1}\)-charge with fixed correction
+idempotents and a coherent equivariant stable ledger.  The projective endpoint
+and generic-bulk persistence are closed; the unconditional theorem is not
+landed; no manuscript edits
 
 ## Goal
 
-Package and rigorously verify the parameterized direct-QDM proof whose
-caller selects the observed blocks, retained marks, path environment, and
-commutative-monoid consumer.  Instantiate it for cubic
-one-stabilization irrationality, then use the same interfaces to isolate the
-\(m=2\) and all-\(m\) transport uses an intrinsic marked projector and the
-algebraic adjoint row.
+Package and rigorously verify the parameterized direct-QDM proof whose caller
+selects the observed blocks, retained marks, path environment, and
+commutative-monoid consumer.  Instantiate it for cubic one-stabilization
+irrationality, then isolate the exact \(m=2\) and all-\(m\) geometric input.
+The active input is the row-free two-layer Kummer/descent packet; the
+row/projector consumers remain formal alternatives with failed universal
+geometric providers.
 
 ## Stable entry points
 
@@ -597,25 +600,71 @@ any geometric or QDM provider.
    nonsectorial analytic domain is not ruled out, but no such provider is
    known.  Do not add another coefficient ring or lattice-intersection adapter
    without first defeating this theorem.
-2. The normalized \(z=0\) Fourier candidate is now decided conditionally.
-   Equation (5.32) reduces it to the mirror-map Jacobian, but the exact
-   remaining row identity is
-   \(\epsilon_{\widetilde X}D_{\vartheta}\widetilde\tau
-   =\epsilon_XD_{\vartheta}\tau\), or its restriction to the marked CRT
-   image.  Theorem 5.18 proves only the initial congruence and invertibility;
-   a unital \(2\times2\) Jacobian countermodel shows those facts do not imply
-   the row identity.  An associated-graded weakening would additionally need
-   edge DVR lattices and integral occurrence maps preserving the first
-   nonzero row class; Iritani's Laurent comparison supplies neither, and
-   finite Novikov--Artin truncations do not give a compatible inverse-limit
-   lattice.  Do not add another row consumer unless a source theorem or an
-   exact calculation proves this identity on the selected marked image.
-3. Keep generic even-bulk persistence green under its stated QDM hypotheses.
+2. The **full** normalized \(z=0\) row candidate is closed negatively.
+   Equation (5.32) reduces it to the mirror-map Jacobian, whose full
+   ambient-row identity would annihilate every correction ideal.  For
+   \(F_1=\operatorname{Bl}_p\mathbb P^2\), the published small-quantum
+   multiplication table implies that every nonzero eigenvector of the first
+   divisor has nonzero degree-zero coordinate at the generic point.  Lean
+   checks this in
+   `HirzebruchSurfaceAugmentation.no_nonzero_eigenvector_in_degreeZeroKernel`.
+   The rank-one correction is such an eigenline, so the full row identity is
+   false.  Tensoring this blowup with the cubic gives the legal fivefold
+   blowup
+   \(B\times F_1=\operatorname{Bl}_{B\times\{p\}}(B\times\mathbb P^2)\).
+   Under the same product projector (P_B\otimes\mathrm{id}) used at the
+   source endpoint, the correction \(U_B\otimes L\) is rank two and C924
+   marked.  Its product row is nonzero while its ambient comparison component
+   is zero.  Lean checks the tensor visibility and zero-ambient obstruction
+   separately in
+   `HirzebruchSurfaceAugmentation.tensor_degreeZeroRow_ne_zero_of_eigenvector`
+   and
+   `ProjectedRowProjectorDecomposition.Data.false_of_visible_marked_vector_with_zeroAmbientComponent`.
+   Thus even the projector-restricted row square is false as a universal
+   smooth-blowup provider.  The abstract consumer remains correct; do not
+   reopen raw or normalized augmentation unless the product marker itself is
+   replaced.  An associated-graded alternative would still need unsupplied
+   edge DVR lattices and integral occurrence maps.
+3. Pursue one row-free source theorem only.  For each (m\ge1), construct a
+   single external cyclic (C_{m+1})-action on the marked finite-étale packet
+   over a pathwise coefficient trait such that:
+   the \(B\times\mathbb P^m\) packet is externally regular; every target and
+   correction marked idempotent is externally fixed (equivalently, its
+   splitting Galois closure is disjoint from the named Kummer extension); and
+   every directed comparison and inverse lifts coherently to the resulting
+   equivariant stable-disjoint-union ledger.  The Lean theorem
+   `TwoLayerDescentPacket.externalRegularSum_not_equivariantlyEquivalent_externalTrivial`
+   then gives the contradiction for arbitrary internal packet actions.  This
+   is a missing geometric/descent theorem, not a consumer or typing gap.  The
+   first finite source test is the marked correction in
+   \(B\times F_1\): compute its spectral polynomial in the product Novikov
+   charge and verify that the external \(C_3\) fixes its geometric
+   idempotents.  Lean now checks the table's operator polynomial
+   \(\lambda^4+q_1\lambda^3-q_1^2q_2\) and that at \(q_2=0\) the exceptional
+   root \(-q_1\) is simple while the ambient root is triple.  This test is
+   source-closed: Iritani (1.1) sends a center monomial to
+   \(Q^{\iota_*d}q^{-\rho_Z\cdot d/(r-1)}\); here \(r=2\), the normal bundle of
+   \(B\times\{p\}\) is trivial, and \(\iota_*d\) has no \(\mathbb P^2\) degree.
+   Thus the single correction QDM is defined before adjoining the named
+   product cube root.  Over the product-parameter DVR its generic splitting
+   closure is constant/unramified, whereas the cube-root extension is totally
+   ramified; their disjointness makes the correction externally fixed.  The
+   simple-root calculation
+   is an independent finite algebra check on the blowup presentation.
+   Passing this example does not supply arbitrary-center fixedness, pathwise
+   charge, or comparison coherence.
+
+## Retired provider specifications
+
+The items below retain exact hypotheses and falsifiers for alternate routes;
+they are not the work queue.  Items 1--3 above are the live frontier.
+
+4. Keep generic even-bulk persistence green under its stated QDM hypotheses.
    `rankTwoCluster_nilpotent_persists_on_formal_germ` proves from compressed
    commutation and flatness that the cubic nilpotent part remains square-zero
    and nonzero throughout the formal germ.  A first-order bulk derivative is
    only a corroboration, not a missing theorem.
-4. The following former provider specification is retained for audit only.
+5. The following former provider specification is retained for audit only.
    It is not an active construction target.  It asked to construct the common
    rowed object consumed by
    `RowedProjectorOccurrence.FaithfulScalarEdge`.  For every factorization

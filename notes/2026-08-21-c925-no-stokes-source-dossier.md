@@ -945,13 +945,24 @@ directions consumed by (5.32), is
 
 \[
  \epsilon_{\widetilde X}D_{\vartheta}\widetilde\tau
- =\epsilon_XD_{\vartheta}\tau,                    \tag{D10.3}
+ =\epsilon_XD_{\vartheta}\tau.                    \tag{D10.4}
 \]
 
-or merely its restriction to the selected marked CRT image.  Theorem 5.18
+The actual detection consumer needs only the projector-restricted identity
+
+\[
+ \epsilon_{\widetilde X}P_{\widetilde X}
+ =\epsilon_XD\tau\,P_{\widetilde X},               \tag{D10.5}
+\]
+
+up to a unit normalization, together with the projector square.  The Lean
+theorem
+`ProjectedRowProjectorDecomposition.Data.detects_iff` proves that (D10.5) is
+enough and imposes no row condition on unmarked corrections.  Theorem 5.18
 gives the initial asymptotics and invertibility of the combined Jacobian, but
-not (D10.3) with the native Novikov and bulk variables retained.  The string
-equation fixes the identity-coordinate derivative and still permits a shear
+not (D10.4) or (D10.5) with the native Novikov and bulk variables retained.
+The string equation fixes the identity-coordinate derivative and still
+permits a shear
 \(\tau^0=\widetilde\tau^0+f(Q,\widetilde\tau^{\ne0})\).
 
 This is a real missing theorem, not a formal consequence of the comparison.
@@ -968,8 +979,108 @@ unit after the harmless choice of coordinates, and can be made a unital
 algebra isomorphism by transporting the product.  Nevertheless the source
 degree-zero row \((1,0)\) differs from the ambient pullback row \((1,t)\).
 Thus invertibility, unit preservation, projector naturality, and initial-slice
-agreement do not imply (D10.3).  No current source proves (D10.3), even only
-on the marked image.
+agreement do not imply (D10.4).  If the chosen projector contains the leaking
+direction, the same model also violates (D10.5); the cited source supplies no
+geometric theorem excluding that case.
+
+The failure already occurs for the geometric blowup
+\(\operatorname{Bl}_{p}\mathbb P^2=F_1\).  Reichelt, Schulze, Sevenheck, and
+Walther, *Algebraic aspects of hypergeometric differential equations* (2021),
+DOI 10.1007/s13366-020-00560-1, Example 5.1, give multiplication by the first
+divisor in the ordered basis \((1,T_1,T_2,[\mathrm{pt}])\):
+
+\[
+ (a,b,c,d)\longmapsto(q_1q_2d,\ a-q_1b,\ q_1b,\ c).
+\]
+
+If \(q_1q_2\ne0\), a nonzero eigenvector cannot have \(a=0\): the four
+coordinate equations then force successively \(d=c=b=0\).
+The Lean theorem
+`HirzebruchSurfaceAugmentation.no_nonzero_eigenvector_in_degreeZeroKernel`
+checks this implication over every field.
+
+For Iritani's blowup variables one has, up to the displayed generator
+convention, \(q_1=q_{\mathrm{edge}}\) and
+\(q_2=Qq_{\mathrm{edge}}^{-1}\).  After passage to the generic fraction field,
+both are nonzero.  Iritani's normalized \(z=0\) direct-sum map identifies the
+rank-one point correction with a one-dimensional algebra ideal in
+\(QH(F_1)\).  Every nonzero vector in that ideal is an eigenvector for
+multiplication by \(T_1\), so its degree-zero coordinate is nonzero.  A full
+ambient-only row square would instead annihilate that correction ideal.
+Equation (5.32) writes the unnormalized \(z=0\) map as the normalized
+Jacobian map composed with multiplication by quantum units; these
+multiplications preserve the correction ideal.  Thus both the normalized and
+unnormalized **full** row squares are false for this elementary blowup.
+
+The point correction by itself has rank one and is not selected by the
+rank-two C924 projector.  Tensoring it with the cubic marked block turns this
+into a decisive marked-centre test.  Let \(B\) be the cubic threefold and
+consider the smooth codimension-two blowup
+
+\[
+ \operatorname{Bl}_{B\times\{p\}}(B\times\mathbb P^2)
+ \cong B\times F_1.
+\]
+
+Over a generic splitting field, let \(U_B\) be the marked cubic block and
+let \(L\) be the rank-one \(F_1\) correction ideal.  The product projector
+already used at the source endpoint is \(P_B\otimes\mathrm{id}\), so it fixes
+\(U_B\otimes L\).  Equivalently, the scalar outer Euler eigenvalue only shifts
+the semisimple part of the cubic block; its rank, nonzero nilpotent part, and
+shift-invariant modified-residue discriminant remain marked.  Choose
+\(b\in U_B\) with \(\epsilon_B(b)\ne0\) and \(0\ne\ell\in L\).  The \(F_1\)
+calculation gives \(\epsilon_{F_1}(\ell)\ne0\), hence
+
+\[
+ \epsilon_{B\times F_1}(b\otimes\ell)
+ =\epsilon_B(b)\epsilon_{F_1}(\ell)\ne0.
+\]
+
+The normalized blowup comparison carries this vector entirely in the centre
+factor, so its ambient component is zero.  This contradicts (D10.5).  Lean
+checks the two load-bearing linear implications in
+`HirzebruchSurfaceAugmentation.tensor_degreeZeroRow_ne_zero_of_eigenvector`
+and
+`ProjectedRowProjectorDecomposition.Data.false_of_visible_marked_vector_with_zeroAmbientComponent`.
+The imported geometric inputs are the product quantum-cohomology formula,
+Iritani's identification of the \(F_1\) correction ideal, and the same tensor
+marker identification already used for \(B\times\mathbb P^m\).
+
+Consequently (D10.5) is false as a universal smooth-blowup provider.  Denying
+that the product marker fixes \(U_B\otimes L\) would also withdraw the tensor
+projector used at the cubic-product endpoint; it is not a repair internal to
+this route.  The abstract projector-restricted Lean consumer remains correct,
+but it has no universal raw-augmentation instantiation.
+
+The same \(F_1\) table gives a positive finite check for the independent
+row-free charge route.  Lean proves that multiplication by \(T_1\) satisfies
+
+\[
+ \lambda^4+q_1\lambda^3-q_1^2q_2=0.
+\]
+
+At \(q_2=0\) this is \(\lambda^3(\lambda+q_1)\), and the derivative at the
+exceptional root \(-q_1\) is \(-q_1^3\ne0\).  The geometric descent for this
+edge follows directly from Iritani (1.1).  For
+\(Z=B\times\{p\}\subset B\times\mathbb P^2\), one has \(r=2\), the normal
+bundle is trivial, and therefore \(\rho_Z=c_1(N_{Z/X})=0\).  A center monomial
+maps as
+
+\[
+ Q_Z^d\longmapsto Q^{\iota_*d}
+\]
+
+with no exceptional-root factor and no \(\mathbb P^2\) Novikov degree.  The
+single correction QDM is therefore defined before adjoining the named
+product cube root.  Complete in the product parameter on the unramified
+generic spectral locus.  The correction splitting closure is then a
+constant, hence unramified, extension of that trait, while the cube-root
+extension is totally ramified.  Standard unramified--totally-ramified
+disjointness makes the external deck subgroup fix every correction geometric
+idempotent.  The simple-root theorem is an independent finite check of the
+same separation in the \(F_1\) multiplication table.  This closes the model
+edge, not the common-charge, splitting-closure, and coherent-ledger theorem
+along an arbitrary factorization.
 
 ### Rejected associated-graded edge repair
 
