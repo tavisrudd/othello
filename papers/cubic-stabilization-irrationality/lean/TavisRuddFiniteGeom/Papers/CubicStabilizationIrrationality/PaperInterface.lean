@@ -16,6 +16,9 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.Bas
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.PointedDirectSum
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.RowedRepresentationDecomposition
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.RowedProjectorDecomposition
+import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.CubicBlockCertificate
+import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.RowedProjectorPath
+import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.RowedProjectorOccurrence
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.RowedRepresentationPath
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.ParallelAugmentedSource
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.PrimaryDetectionBaseChange
@@ -120,15 +123,38 @@ therefore contradicts a detected source. `Data.ofBasisSquares` shows that
 both squares may be checked on a basis of the source; no topology, density,
 or convergence argument is hidden in that extension. Constructing the QDM
 spectral projectors and proving the source equations on the chosen geometric
-basis remain external to Lean. The positive branch count for a product with
-`P^m` is proved symbolically for every natural `m`, rather than inferred from
-a bounded computational sweep.
+basis are external inputs. `UnitScaledData` accepts a unit normalization of
+the row. `CommonSourcePresentation` composes two endpoint presentations of
+one marked source, and its basis constructor reduces the row and projector
+squares to finite algebra. Faithfully flat extensions compare detection only
+when the complete marked modules descend from one common base; no relation
+between arbitrary completions is inferred. Polynomial functional calculus
+transports projectors from an operator square, an injective coefficient map
+preserves detection, and a tensor factor with row value one transports a
+source witness. The positive branch count for a product with `P^m` is proved
+symbolically for every natural `m`, rather than inferred from a bounded
+computational sweep.
+`CubicBlockCertificate` kernel-checks the finite rational marker data: the
+rank-two nilpotent is nonzero and squares to zero, the modified residue has trace `-1`,
+determinant `5/36`, and discriminant `4/9`, and the normalized degree-zero row
+detects the block. Its identification with the geometric quantum-module block
+is not a consequence of those rational calculations.
+`RowedProjectorPath` assigns one native rowed projector datum to every vertex
+and indexes every edge by the exact endpoint values. It composes row-visible
+support along a finite path, with either orientation of each direct-sum edge,
+and rules out a zero-projector target. The source
+must still construct that native family or identify every edge occurrence as
+a faithful pullback; the type does not infer this from a shared variety name.
 For a finite factorization path, a vertex-indexed family can supply the exact
 same marked representation to both incident edges. The resulting typed path
 composes the detected-support equivalences without any separately chosen
 adjacent overlap. Constructing that family still requires one common
 coefficient base and compatible completed germs; the path type does not turn
 two differently based formal expansions into the same object.
+`RowedProjectorOccurrence` isolates the algebra left after occurrence maps are
+constructed. One occurrence equivalence preserves row-visible support, and
+two presentations of one source construct a single typed edge whose row and
+projector equations use the same comparison.
 Alternatively, several vertices may be compared in parallel from one marked
 augmented source.  Each branch is an isomorphism from that definitionally
 shared source to one vertex representation plus a row-invisible correction.

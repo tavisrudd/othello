@@ -5,9 +5,10 @@
 -- This executable mirrors the algebraic interface proved in
 -- RowedProjectorDecomposition.lean.  It does not prove any Gu--Yu--Yu,
 -- Iritani, or KKPYY source theorem.  Instead, it checks a finite model of the
--- interface exhaustively and refuses to expose the consumer until every
--- external source obligation has been named and every algebraic square has
--- passed.
+-- interface exhaustively.  The direct edge route, native-occurrence descent,
+-- and four optional adapters
+-- have separate fact gates, so alternatives are not accumulated into one
+-- artificially strong source interface.
 
 module Main (main) where
 
@@ -33,6 +34,26 @@ instance Num F3 where
   abs = id
   signum (F3 value) = if normalize value == 0 then 0 else 1
   fromInteger value = F3 (normalize (fromInteger value))
+
+data F9 = F9 F3 F3
+  deriving (Eq)
+
+instance Show F9 where
+  show (F9 scalar alpha) = "(" ++ show scalar ++ "+" ++ show alpha ++ "a)"
+
+instance Num F9 where
+  F9 a b + F9 c d = F9 (a + c) (b + d)
+  F9 a b * F9 c d = F9 (a * c + 2 * b * d) (a * d + b * c)
+  negate (F9 a b) = F9 (negate a) (negate b)
+  abs = id
+  signum value = if value == 0 then 0 else 1
+  fromInteger value = F9 (fromInteger value) 0
+
+embedF3 :: F3 -> F9
+embedF3 value = F9 value 0
+
+allF9Values :: [F9]
+allF9Values = [F9 scalar alpha | scalar <- f3Values, alpha <- f3Values]
 
 type Vector = [F3]
 type Matrix = [[F3]]
@@ -69,6 +90,24 @@ matrixMultiply left right =
 
 matrixPowerTwo :: Matrix -> Matrix
 matrixPowerTwo matrix = matrixMultiply matrix matrix
+
+matrixAdd :: Matrix -> Matrix -> Matrix
+matrixAdd = zipWith (zipWith (+))
+
+matrixScale :: F3 -> Matrix -> Matrix
+matrixScale scalar = map (map (scalar *))
+
+matrixPower :: Matrix -> Int -> Matrix
+matrixPower matrix powerIndex =
+  foldr (\_ accumulator -> matrixMultiply matrix accumulator)
+    (identity (length matrix)) [1 .. powerIndex]
+
+kronecker :: Matrix -> Matrix -> Matrix
+kronecker left right =
+  concatMap
+    (\leftRow ->
+      [concatMap (\entry -> map (entry *) rightRow) leftRow | rightRow <- right])
+    left
 
 determinantTwo :: Matrix -> F3
 determinantTwo [[a, b], [c, d]] = a * d - b * c
@@ -112,6 +151,18 @@ standardBasis size =
 
 nonzeroVector :: Vector -> Bool
 nonzeroVector = any (/= 0)
+
+allF9Vectors :: Int -> [[F9]]
+allF9Vectors 0 = [[]]
+allF9Vectors dimension =
+  [entry : rest | entry <- allF9Values, rest <- allF9Vectors (dimension - 1)]
+
+matrixVectorF9 :: [[F9]] -> [F9] -> [F9]
+matrixVectorF9 matrix vector =
+  [sum (zipWith (*) row vector) | row <- matrix]
+
+liftMatrixF9 :: Matrix -> [[F9]]
+liftMatrixF9 = map (map embedF3)
 
 firstCoordinate :: Vector -> F3
 firstCoordinate (entry : _) = entry
@@ -190,6 +241,24 @@ validateRawBundle bundle =
     && projectorIsIdempotent (correctionProjector bundle)
     && basisSquaresHold bundle
 
+scaledRowSquareAt :: F3 -> RawBundle -> Vector -> Bool
+scaledRowSquareAt scale bundle vector =
+  matrixVector (sourceRow bundle) vector
+    == map (scale *)
+      (matrixVector
+        (ambientRow bundle)
+        [firstCoordinate (matrixVector (comparison bundle) vector)])
+
+validateUnitScaledBundle :: F3 -> RawBundle -> Bool
+validateUnitScaledBundle scale bundle =
+  scale /= 0
+    && comparisonIsInvertible bundle
+    && projectorIsIdempotent (sourceProjector bundle)
+    && projectorIsIdempotent (ambientProjector bundle)
+    && projectorIsIdempotent (correctionProjector bundle)
+    && all (scaledRowSquareAt scale bundle) (standardBasis 2)
+    && all (projectorSquareAt bundle) (standardBasis 2)
+
 detects :: Int -> Matrix -> Matrix -> Bool
 detects dimension projector row =
   any
@@ -204,6 +273,22 @@ sourceDetects bundle = detects 2 (sourceProjector bundle) (sourceRow bundle)
 ambientDetects :: RawBundle -> Bool
 ambientDetects bundle = detects 1 (ambientProjector bundle) (ambientRow bundle)
 
+detectsF9 :: Int -> Matrix -> Matrix -> Bool
+detectsF9 dimension projector row =
+  any
+    (\vector ->
+      matrixVectorF9 (liftMatrixF9 projector) vector == vector
+        && any (/= 0) (matrixVectorF9 (liftMatrixF9 row) vector))
+    (allF9Vectors dimension)
+
+sourceDetectsF9 :: RawBundle -> Bool
+sourceDetectsF9 bundle =
+  detectsF9 2 (sourceProjector bundle) (sourceRow bundle)
+
+ambientDetectsF9 :: RawBundle -> Bool
+ambientDetectsF9 bundle =
+  detectsF9 1 (ambientProjector bundle) (ambientRow bundle)
+
 data SourceFact
   = OrdinaryEquivariantBasis
   | ShiftPreservesOrdinarySource
@@ -211,16 +296,42 @@ data SourceFact
   | CompletedComparisonIsomorphism
   | ConnectionNaturality
   | CanonicalMarkedSpectralUnion
+  | UniformSmoothCenterCoverage
+  | NativeOccurrenceDescent
+  | CubicProductEndpointIdentification
+  | ProjectiveSpaceEndpointIdentification
+  | FaithfulCommonBase
+  | PolynomialMarkerPresentation
+  | UnitRowNormalization
+  | TensorEndpointUnit
   deriving (Eq, Enum, Bounded, Show)
 
 allSourceFacts :: [SourceFact]
 allSourceFacts = [minBound .. maxBound]
 
+directEdgeFacts :: [SourceFact]
+directEdgeFacts =
+  [ OrdinaryEquivariantBasis
+  , ShiftPreservesOrdinarySource
+  , FundamentalSolutionAdjointSquare
+  , CompletedComparisonIsomorphism
+  , ConnectionNaturality
+  , CanonicalMarkedSpectralUnion
+  , UniformSmoothCenterCoverage
+  , NativeOccurrenceDescent
+  ]
+
+allMEndpointFacts :: [SourceFact]
+allMEndpointFacts =
+  [ CubicProductEndpointIdentification
+  , ProjectiveSpaceEndpointIdentification
+  ]
+
 newtype CertifiedBundle = CertifiedBundle RawBundle
 
-certify :: [SourceFact] -> RawBundle -> Maybe CertifiedBundle
-certify supplied bundle
-  | all (`elem` supplied) allSourceFacts && validateRawBundle bundle =
+certifyDirectEdge :: [SourceFact] -> RawBundle -> Maybe CertifiedBundle
+certifyDirectEdge supplied bundle
+  | all (`elem` supplied) directEdgeFacts && validateRawBundle bundle =
       Just (CertifiedBundle bundle)
   | otherwise = Nothing
 
@@ -235,6 +346,14 @@ sourceFactName FundamentalSolutionAdjointSquare = "gyy_prop_4_21_row_square"
 sourceFactName CompletedComparisonIsomorphism = "gyy_thm_5_5_comparison"
 sourceFactName ConnectionNaturality = "comparison_connection_naturality"
 sourceFactName CanonicalMarkedSpectralUnion = "kkpyy_canonical_marked_union"
+sourceFactName UniformSmoothCenterCoverage = "uniform_smooth_center_coverage"
+sourceFactName NativeOccurrenceDescent = "native_vertex_occurrence_descent"
+sourceFactName CubicProductEndpointIdentification = "cubic_product_endpoint_identification"
+sourceFactName ProjectiveSpaceEndpointIdentification = "projective_space_endpoint_identification"
+sourceFactName FaithfulCommonBase = "faithful_common_scalar_base"
+sourceFactName PolynomialMarkerPresentation = "polynomial_marker_presentation"
+sourceFactName UnitRowNormalization = "unit_row_normalization"
+sourceFactName TensorEndpointUnit = "tensor_endpoint_unit"
 
 allLegalBundles :: [RawBundle]
 allLegalBundles =
@@ -245,11 +364,138 @@ allLegalBundles =
   , rowValue <- f3Values
   ]
 
+allUnitScaledBundles :: [(F3, RawBundle)]
+allUnitScaledBundles =
+  [ (scale, bundle {sourceRow = matrixScale scale (sourceRow bundle)})
+  | bundle <- allLegalBundles
+  , scale <- [1, 2]
+  ]
+
+allMatricesTwo :: [Matrix]
+allMatricesTwo =
+  [ [[a, b], [c, d]]
+  | a <- f3Values
+  , b <- f3Values
+  , c <- f3Values
+  , d <- f3Values
+  ]
+
+allQuadraticCoefficientLists :: [[F3]]
+allQuadraticCoefficientLists =
+  [[a, b, c] | a <- f3Values, b <- f3Values, c <- f3Values]
+
+evaluatePolynomial :: [F3] -> Matrix -> Matrix
+evaluatePolynomial coefficients operator =
+  foldr matrixAdd (zeroMatrix 2 2)
+    [matrixScale coefficient (matrixPower operator powerIndex)
+    | (powerIndex, coefficient) <- zip [0 ..] coefficients]
+
+polynomialTransportHolds :: Matrix -> Matrix -> Matrix -> [F3] -> Bool
+polynomialTransportHolds matrix inverseMatrix sourceOperator coefficients =
+  let targetOperator =
+        matrixMultiply matrix (matrixMultiply sourceOperator inverseMatrix)
+   in matrixMultiply matrix (evaluatePolynomial coefficients sourceOperator)
+        == matrixMultiply (evaluatePolynomial coefficients targetOperator) matrix
+
+allPolynomialTransportCases :: [Bool]
+allPolynomialTransportCases =
+  [ polynomialTransportHolds matrix inverseMatrix operator coefficients
+  | (matrix, inverseMatrix) <- allInvertibleTwo
+  , operator <- allMatricesTwo
+  , coefficients <- allQuadraticCoefficientLists
+  ]
+
+commonSourceCertificateHolds
+  :: Matrix -> Matrix -> Matrix -> Matrix
+  -> F3 -> F3 -> Matrix -> F3 -> Bool
+commonSourceCertificateHolds
+    sourcePresentation sourcePresentationInverse
+    targetPresentation targetPresentationInverse
+    ambientMark correctionMark row scale =
+  let block = blockProjector ambientMark correctionMark
+      commonProjector =
+        matrixMultiply targetPresentationInverse
+          (matrixMultiply block targetPresentation)
+      endpointProjector =
+        matrixMultiply sourcePresentation
+          (matrixMultiply commonProjector sourcePresentationInverse)
+      endpointComparison =
+        matrixMultiply targetPresentation sourcePresentationInverse
+      endpointComparisonInverse =
+        matrixMultiply sourcePresentation targetPresentationInverse
+      liftedRow = liftAmbientRow row
+      endpointRow =
+        matrixScale scale (matrixMultiply liftedRow endpointComparison)
+      bundle = RawBundle
+        { sourceProjector = endpointProjector
+        , ambientProjector = [[ambientMark]]
+        , correctionProjector = [[correctionMark]]
+        , comparison = endpointComparison
+        , comparisonInverse = endpointComparisonInverse
+        , sourceRow = endpointRow
+        , ambientRow = row
+        }
+   in projectorIsIdempotent commonProjector
+        && matrixMultiply sourcePresentation commonProjector
+          == matrixMultiply endpointProjector sourcePresentation
+        && matrixMultiply targetPresentation commonProjector
+          == matrixMultiply block targetPresentation
+        && matrixMultiply endpointRow sourcePresentation
+          == matrixScale scale (matrixMultiply liftedRow targetPresentation)
+        && validateUnitScaledBundle scale bundle
+        && sourceDetects bundle == ambientDetects bundle
+
+allCommonSourceCertificateCases :: [Bool]
+allCommonSourceCertificateCases =
+  [ commonSourceCertificateHolds
+      sourcePresentation sourcePresentationInverse
+      targetPresentation targetPresentationInverse
+      ambientMark correctionMark [[rowValue]] scale
+  | (sourcePresentation, sourcePresentationInverse) <- allInvertibleTwo
+  , (targetPresentation, targetPresentationInverse) <- allInvertibleTwo
+  , ambientMark <- [0, 1]
+  , correctionMark <- [0, 1]
+  , rowValue <- f3Values
+  , scale <- [1, 2]
+  ]
+
+tensorEndpointDetectionAgrees :: RawBundle -> Bool
+tensorEndpointDetectionAgrees bundle =
+  let auxiliaryRow = [[1, 2]]
+      tensorProjector = kronecker (sourceProjector bundle) (identity 2)
+      tensorProductRow = kronecker (sourceRow bundle) auxiliaryRow
+   in sourceDetects bundle == detects 4 tensorProjector tensorProductRow
+
+polynomialRouteChecks :: [SourceFact] -> Bool
+polynomialRouteChecks supplied =
+  PolynomialMarkerPresentation `elem` supplied
+    && and allPolynomialTransportCases
+
+faithfulBaseRouteChecks :: [SourceFact] -> Bool
+faithfulBaseRouteChecks supplied =
+  FaithfulCommonBase `elem` supplied
+    && all (\bundle -> sourceDetectsF9 bundle == sourceDetects bundle)
+      allLegalBundles
+
+unitScaledRouteChecks :: [SourceFact] -> Bool
+unitScaledRouteChecks supplied =
+  UnitRowNormalization `elem` supplied
+    && all
+      (\(scale, bundle) ->
+        validateUnitScaledBundle scale bundle
+          && sourceDetects bundle == ambientDetects bundle)
+      allUnitScaledBundles
+
+tensorEndpointRouteChecks :: [SourceFact] -> Bool
+tensorEndpointRouteChecks supplied =
+  TensorEndpointUnit `elem` supplied
+    && all tensorEndpointDetectionAgrees allLegalBundles
+
 certifiedLegalBundles :: [CertifiedBundle]
 certifiedLegalBundles =
   [ certified
   | bundle <- allLegalBundles
-  , Just certified <- [certify allSourceFacts bundle]
+  , Just certified <- [certifyDirectEdge directEdgeFacts bundle]
   ]
 
 identityBundle :: F3 -> F3 -> F3 -> RawBundle
@@ -280,6 +526,10 @@ singularComparisonBundle =
     , sourceRow = [[0, 0]]
     }
 
+nonunitScaledBundle :: RawBundle
+nonunitScaledBundle =
+  (identityBundle 1 0 1) {sourceRow = [[0, 0]]}
+
 data AtomBlock = AtomBlock
   { blockRank :: Int
   , nilpotentPartNonzero :: Bool
@@ -308,9 +558,81 @@ cubicProductVisible m =
 projectiveSpaceMarkedEmpty :: Int -> Bool
 projectiveSpaceMarkedEmpty m = m >= 0 && not (isMarked projectiveBlock)
 
+allMEndpointsCertified :: [SourceFact] -> Int -> Bool
+allMEndpointsCertified supplied m =
+  all (`elem` supplied) allMEndpointFacts
+    && cubicProductVisible m
+    && projectiveSpaceMarkedEmpty m
+
+data VertexDatum = VertexDatum
+  { vertexName :: Int
+  , vertexDetects :: Bool
+  }
+  deriving (Eq, Show)
+
+data EdgeDirection = Forward | Reverse
+  deriving (Eq, Show)
+
+data TypedEdge = TypedEdge EdgeDirection VertexDatum VertexDatum CertifiedBundle
+
+edgeMatchesVertices :: TypedEdge -> Bool
+edgeMatchesVertices (TypedEdge direction source target certified@(CertifiedBundle bundle)) =
+  let endpointsMatch =
+        case direction of
+          Forward ->
+            sourceDetects bundle == vertexDetects source
+              && ambientDetects bundle == vertexDetects target
+          Reverse ->
+            ambientDetects bundle == vertexDetects source
+              && sourceDetects bundle == vertexDetects target
+   in endpointsMatch && consumerDetectsIff certified
+
+adjacentVerticesMatch :: TypedEdge -> TypedEdge -> Bool
+adjacentVerticesMatch (TypedEdge _ _ target _) (TypedEdge _ source _ _) =
+  target == source
+
+nominalAdjacentVerticesMatch :: TypedEdge -> TypedEdge -> Bool
+nominalAdjacentVerticesMatch (TypedEdge _ _ target _) (TypedEdge _ source _ _) =
+  vertexName target == vertexName source
+
+typedPathPreservesDetection :: [TypedEdge] -> Bool
+typedPathPreservesDetection edges =
+  all edgeMatchesVertices edges
+    && and (zipWith adjacentVerticesMatch edges (drop 1 edges))
+    && case edges of
+      [] -> True
+      TypedEdge _ source _ _ : _ ->
+        let TypedEdge _ _ target _ = last edges
+         in vertexDetects source == vertexDetects target
+
 pathPreservesDetection :: Int -> CertifiedBundle -> Bool
-pathPreservesDetection edgeCount certified =
-  edgeCount >= 0 && all id (replicate edgeCount (consumerDetectsIff certified))
+pathPreservesDetection edgeCount certified@(CertifiedBundle bundle) =
+  let detection = sourceDetects bundle
+      vertices = [VertexDatum index detection | index <- [0 .. edgeCount]]
+      edges =
+        zipWith
+          (\source target -> TypedEdge Forward source target certified)
+          vertices (drop 1 vertices)
+   in edgeCount >= 0 && typedPathPreservesDetection edges
+
+forwardThenReversePreservesDetection :: CertifiedBundle -> Bool
+forwardThenReversePreservesDetection certified@(CertifiedBundle bundle) =
+  let detection = sourceDetects bundle
+      source = VertexDatum 0 detection
+      target = VertexDatum 1 detection
+   in typedPathPreservesDetection
+        [ TypedEdge Forward source target certified
+        , TypedEdge Reverse target source certified
+        ]
+
+hostileNominalPath :: Maybe [TypedEdge]
+hostileNominalPath = do
+  detected <- certifyDirectEdge directEdgeFacts (identityBundle 1 0 1)
+  undetected <- certifyDirectEdge directEdgeFacts (identityBundle 1 0 0)
+  pure
+    [ TypedEdge Forward (VertexDatum 0 True) (VertexDatum 1 True) detected
+    , TypedEdge Forward (VertexDatum 1 False) (VertexDatum 2 False) undetected
+    ]
 
 data LegalCase = LegalCase Matrix Matrix F3 F3 F3
   deriving (Show)
@@ -347,7 +669,7 @@ quickChecks =
     [ runQuickCheck
         "quickcheck_lawful_bundle_certifies"
         (\legalCase ->
-          case certify allSourceFacts (bundleOfCase legalCase) of
+          case certifyDirectEdge directEdgeFacts (bundleOfCase legalCase) of
             Just _ -> True
             Nothing -> False)
     , runQuickCheck
@@ -356,7 +678,7 @@ quickChecks =
     , runQuickCheck
         "quickcheck_detection_iff"
         (\legalCase ->
-          case certify allSourceFacts (bundleOfCase legalCase) of
+          case certifyDirectEdge directEdgeFacts (bundleOfCase legalCase) of
             Just certified -> consumerDetectsIff certified
             Nothing -> False)
     , runQuickCheck
@@ -368,13 +690,35 @@ quickChecks =
                 legalBundle matrix inverseMatrix ambientMark 1 [[rowValue]]
            in sourceDetects withoutCorrection == sourceDetects withCorrection)
     , runQuickCheck
+        "quickcheck_unit_scaled_detection_iff"
+        (\legalCase@(LegalCase _ _ _ correctionMark _) ->
+          let bundle = bundleOfCase legalCase
+              scale = if correctionMark == 0 then 1 else 2
+              scaled = bundle {sourceRow = matrixScale scale (sourceRow bundle)}
+           in validateUnitScaledBundle scale scaled
+                && sourceDetects scaled == ambientDetects scaled)
+    , runQuickCheck
+        "quickcheck_polynomial_transport"
+        (\legalCase@(LegalCase matrix inverseMatrix ambientMark correctionMark rowValue) ->
+          polynomialTransportHolds matrix inverseMatrix
+            (sourceProjector (bundleOfCase legalCase))
+            [ambientMark, correctionMark, rowValue])
+    , runQuickCheck
+        "quickcheck_common_source_composition"
+        (\(LegalCase sourcePresentation sourceInverse ambientMark correctionMark rowValue)
+          (LegalCase targetPresentation targetInverse _ _ scaleSeed) ->
+          let scale = if scaleSeed == 0 then 1 else scaleSeed
+           in commonSourceCertificateHolds
+                sourcePresentation sourceInverse targetPresentation targetInverse
+                ambientMark correctionMark [[rowValue]] scale)
+    , runQuickCheck
         "quickcheck_endpoints_for_arbitrary_nonnegative_m"
         (\(QC.NonNegative m) ->
-          cubicProductVisible m && projectiveSpaceMarkedEmpty m)
+          allMEndpointsCertified allSourceFacts m)
     , runQuickCheck
         "quickcheck_arbitrary_finite_path_length"
         (\legalCase (QC.NonNegative edgeCount) ->
-          case certify allSourceFacts (bundleOfCase legalCase) of
+          case certifyDirectEdge directEdgeFacts (bundleOfCase legalCase) of
             Just certified -> pathPreservesDetection (edgeCount `mod` 257) certified
             Nothing -> False)
     ]
@@ -398,19 +742,47 @@ checks =
       length (filter sourceDetects allLegalBundles) == 192
         && length (filter ambientDetects allLegalBundles) == 192)
   , ("larger_row_codomain_is_supported",
-      case certify allSourceFacts (legalBundle (identity 2) (identity 2) 1 1 [[1], [2]]) of
+      case certifyDirectEdge directEdgeFacts
+        (legalBundle (identity 2) (identity 2) 1 1 [[1], [2]]) of
         Just certified -> consumerDetectsIff certified
         Nothing -> False)
+  , ("enumerates_1152_unit_scaled_bundles",
+      length allUnitScaledBundles == 1152)
+  , ("unit_scaled_detection_iff_holds_exhaustively",
+      all
+        (\(scale, bundle) ->
+          validateUnitScaledBundle scale bundle
+            && sourceDetects bundle == ambientDetects bundle)
+        allUnitScaledBundles)
+  , ("nonunit_row_scale_is_rejected",
+      not (validateUnitScaledBundle 0 nonunitScaledBundle))
+  , ("nonunit_row_scale_can_flip_detection",
+      not (sourceDetects nonunitScaledBundle)
+        && ambientDetects nonunitScaledBundle)
+  , ("faithful_f3_to_f9_extension_reflects_source_detection",
+      all (\bundle -> sourceDetectsF9 bundle == sourceDetects bundle)
+        allLegalBundles)
+  , ("faithful_f3_to_f9_extension_reflects_ambient_detection",
+      all (\bundle -> ambientDetectsF9 bundle == ambientDetects bundle)
+        allLegalBundles)
+  , ("polynomial_transport_holds_in_104976_cases",
+      length allPolynomialTransportCases == 104976
+        && and allPolynomialTransportCases)
+  , ("common_source_certificate_holds_in_55296_cases",
+      length allCommonSourceCertificateCases == 55296
+        && and allCommonSourceCertificateCases)
+  , ("tensor_endpoint_detection_agrees_in_all_576_cases",
+      all tensorEndpointDetectionAgrees allLegalBundles)
   , ("bad_row_square_is_rejected",
-      isNothing (certify allSourceFacts badRowBundle))
+      isNothing (certifyDirectEdge directEdgeFacts badRowBundle))
   , ("bad_row_square_can_flip_detection",
       sourceDetects badRowBundle && not (ambientDetects badRowBundle))
   , ("bad_projector_square_is_rejected",
-      isNothing (certify allSourceFacts badProjectorBundle))
+      isNothing (certifyDirectEdge directEdgeFacts badProjectorBundle))
   , ("bad_projector_square_can_flip_detection",
       not (sourceDetects badProjectorBundle) && ambientDetects badProjectorBundle)
   , ("non_idempotent_marker_is_rejected",
-      isNothing (certify allSourceFacts nonIdempotentBundle))
+      isNothing (certifyDirectEdge directEdgeFacts nonIdempotentBundle))
   , ("non_idempotent_failure_is_isolated",
       comparisonIsInvertible nonIdempotentBundle
         && basisSquaresHold nonIdempotentBundle
@@ -418,7 +790,7 @@ checks =
         && not (projectorIsIdempotent (sourceProjector nonIdempotentBundle))
         && not (projectorIsIdempotent (ambientProjector nonIdempotentBundle)))
   , ("singular_comparison_is_rejected",
-      isNothing (certify allSourceFacts singularComparisonBundle))
+      isNothing (certifyDirectEdge directEdgeFacts singularComparisonBundle))
   , ("singular_comparison_failure_is_isolated",
       basisSquaresHold singularComparisonBundle
         && projectorIsIdempotent (sourceProjector singularComparisonBundle)
@@ -447,12 +819,49 @@ checks =
       case certifiedLegalBundles of
         certified : _ -> pathPreservesDetection 16 certified
         [] -> False)
+  , ("typed_path_accepts_forward_then_reverse_traversal",
+      case certifiedLegalBundles of
+        certified : _ -> forwardThenReversePreservesDetection certified
+        [] -> False)
+  , ("name_only_path_accepts_hostile_occurrence_mismatch",
+      case hostileNominalPath of
+        Just [left, right] ->
+          edgeMatchesVertices left
+            && edgeMatchesVertices right
+            && nominalAdjacentVerticesMatch left right
+        _ -> False)
+  , ("typed_path_rejects_hostile_occurrence_mismatch",
+      case hostileNominalPath of
+        Just edges -> not (typedPathPreservesDetection edges)
+        Nothing -> False)
   ]
     ++
-    [ ("missing_source_fact_rejected_" ++ sourceFactName missing,
+    [ ("missing_direct_edge_fact_rejected_" ++ sourceFactName missing,
         isNothing
-          (certify (filter (/= missing) allSourceFacts) (identityBundle 1 1 1)))
-    | missing <- allSourceFacts
+          (certifyDirectEdge (filter (/= missing) directEdgeFacts)
+            (identityBundle 1 1 1)))
+    | missing <- directEdgeFacts
+    ]
+    ++
+    [ ("missing_all_m_endpoint_fact_rejected_" ++ sourceFactName missing,
+        not
+          (allMEndpointsCertified
+            (filter (/= missing) allSourceFacts) 2))
+    | missing <- allMEndpointFacts
+    ]
+    ++
+    [ ("polynomial_route_requires_polynomial_marker_presentation",
+        not (polynomialRouteChecks
+          (filter (/= PolynomialMarkerPresentation) allSourceFacts)))
+    , ("faithful_base_route_requires_faithful_common_scalar_base",
+        not (faithfulBaseRouteChecks
+          (filter (/= FaithfulCommonBase) allSourceFacts)))
+    , ("unit_scaled_route_requires_unit_row_normalization",
+        not (unitScaledRouteChecks
+          (filter (/= UnitRowNormalization) allSourceFacts)))
+    , ("tensor_endpoint_route_requires_tensor_endpoint_unit",
+        not (tensorEndpointRouteChecks
+          (filter (/= TensorEndpointUnit) allSourceFacts)))
     ]
 
 renderCheck :: (String, Bool) -> String
@@ -467,4 +876,6 @@ main = do
   mapM_ (putStrLn . renderCheck) allChecks
   putStrLn
     ("summary: " ++ show (length allChecks)
-      ++ " checks; 576 exhaustive lawful bundles; 6000 fixed-seed QuickCheck cases")
+      ++ " checks; 576 exact bundles; 1152 unit-scaled bundles; "
+      ++ "104976 polynomial cases; 55296 common-source cases; "
+      ++ "9000 fixed-seed QuickCheck cases")

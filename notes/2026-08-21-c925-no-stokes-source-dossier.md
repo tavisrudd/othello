@@ -13,8 +13,9 @@ proof and the repeatedly proposed fallback bridges.  Each entry separates:
 - **OPEN/DISPOSITION:** the exact remaining use, or the reason the source is
   not part of the active C925 proof.
 
-The active consumer is
-`Comparison.RowedProjectorDecomposition.Data.detects_iff`.  For one blowup
+The active one-edge consumer is
+`Comparison.RowedProjectorDecomposition.UnitScaledData.detects_iff`; the
+exact-row `Data.detects_iff` is its scale-one specialization.  For one blowup
 it needs an intrinsic marked idempotent on each direct-sum factor, block
 naturality of those idempotents, and one algebraic row square through ambient
 projection.  The row may have a separate coefficient-module codomain.  It
@@ -22,11 +23,49 @@ does not consume a loop, an eigenvalue, primary coverage, correction
 vanishing, a Gamma lattice, or Stokes data.  The older one-sided
 `MarkedWitnessObstruction` architecture is retained only as a fallback.
 
+The finite telescope is
+`Comparison.RowedProjectorPath.Path.detectsAt_iff`.  It deliberately requires
+one native carrier, row, and projector at every vertex.  Constructing that
+family, or proving that all edge occurrences are faithful pullbacks of it, is
+the live geometric gate.  Edgewise comparison data alone do not identify two
+occurrences of an intermediate variety.
+
 There are only two source architectures:
 
 1. one general marked source specialized downstream; or
 2. a typed chain of local marked maps whose downstream composite is the one
    map consumed by Lean.
+
+The publication-status and exact source-substitution audit is
+`2026-08-21-c925-referee-source-substitution-table.md`.  The decisive
+Gu--Yu--Yu and KKPYY inputs, together with Iritani's blowup and
+Iritani--Koto's projective-bundle decompositions, are currently cited as
+preprints.  Lean checks their algebraic consequences after the geometric maps
+are supplied; it does not reprove the QDM decomposition theorems.
+
+## Red--fix--green ledger
+
+| Component | Hostile result | Disposition |
+|---|---|---|
+| one-edge row/projector consumer | no algebraic countermodel under its stated hypotheses | **Green:** Lean theorem and exhaustive finite models |
+| reverse traversal in weak factorization | the original path type encoded only blowup-to-base edges | **Fixed/green:** oriented `Step.forward` and `Step.reverse`; Lean aggregate and Haskell forward-then-reverse regression pass |
+| repeated-vertex occurrence | equal variety names can carry unrelated rows/projectors over different completions | **Red/open:** construct one native datum and faithful occurrence pullbacks |
+| source-map fusion | Iritani's occurrence spine and Gu--Yu--Yu's row equation are not yet proved for one comparison | **Red/open:** prove both squares for the same completed map |
+| endpoints | rational branch/matrix certificates do not identify the actual product and projective-space QDM marked factors | **Red/open:** two geometric identification theorems |
+| all-\(m\) edge scope | low-dimensional C924 centers and a simple-wall theorem do not cover every higher-dimensional AKMW center | **Red/open:** uniform smooth-center provider, most naturally from Iritani's general blowup comparison |
+
+Every red item is fail-closed in the routing and test interfaces.  A source
+token records an obligation; it is not computational evidence that the
+obligation holds.
+
+`Comparison.RowedProjectorOccurrence` now removes two further algebraic
+steps.  `OccurrenceEquivalence.detects_iff` derives occurrence-independent
+detection from one unit-scaled row/projector equivalence.
+`CommonSourceEdgePresentation.toEdge` derives the exact typed edge from two
+presentations of one source; both compatibility equations therefore use the
+same comparison.  Solver-level simplification closes these consequences.
+The open source task is precisely to construct the records from the QDM maps,
+not to prove another linear-algebra lemma after they are supplied.
 
 ## D1. Iritani--Koto: projective-bundle Fourier branches
 
@@ -569,6 +608,11 @@ completion.  The exact provider is the pair of squares
  \rho_{\widetilde Y}=\rho_Y\operatorname{pr}_Y\Psi.          \tag{D10.1}
 \]
 
+The consumer also accepts
+`rho_blowup = u rho_Y pr_Y Psi` for a unit `u`; this isolates Fourier signs,
+Tate factors, and localized monomials from the Boolean argument.  A zero or
+nonunit factor is not silently accepted.
+
 The row may take values in a larger coefficient module than the QDM lattice;
 only its domain must be the same module on which the idempotents act.  Thus
 (D10.1) does not identify a large-radius row with formal monodromy or a
@@ -590,43 +634,84 @@ The correction may contain arbitrarily many marked atoms: the row square
 kills its entire contribution.  This is exactly why (D10.2), unlike the
 ordinary chemical formula, is potentially stable for every (m).
 
-The two inputs of (D10.1) have different provenance:
+The two inputs of (D10.1) have different proposed provenance and remain
+source obligations:
 
-1. the projector square is derived from Iritani's connection isomorphism,
-   KKPYY spectral canonicity, and the already-audited C924 block predicate;
-2. the row square is the generatorwise consequence of Gu--Yu--Yu Definition
-   4.13, Propositions 2.8 and 4.21, and Theorem 5.5 recorded in D2.
+1. the projector square should follow from Iritani's connection isomorphism,
+   KKPYY spectral canonicity, and the already-audited C924 block predicate,
+   but only after proving that the geometric marked union is the same
+   collision-free spectral union on both sides;
+2. the row square is generatorwise on the nonlocalized Gu--Yu--Yu source by
+   Definition 4.13 and Propositions 2.8 and 4.21.  Extension to the completed
+   Laurent QDM domain, invertibility there, and identification with the
+   actual geometric row are separate checks; a finite-basis replay does not
+   supply them.
 
-Both squares hold on one algebraic QDM domain after the lawful Laurent base
-change:
+These routes cannot be spliced by notation: either prove the row square for
+Iritani's actual comparison, or prove a row- and projector-preserving
+identification between that comparison and Gu--Yu--Yu's map over the same
+coefficient and occurrence maps.
 
-1. Gu--Yu--Yu's completed source is finite free on the ordinary basis from
-   Proposition 5.2.  Proposition 4.21 gives the row equality on that basis,
-   and algebraic base change plus finite \(R\)-linearity extends it to the
-   Laurent module.  The row target is the scalar extension of the Givental
-   coefficient module, so this uses no mixed formal-series multiplication.
-2. The Gu--Yu--Yu comparison intertwines the quantum connections.  KKPYY's
-   spectral decomposition is canonical, so any such connection isomorphism
-   carries the union selected by the isomorphism-invariant C924 predicate to
-   the ambient-plus-correction union.  It therefore intertwines the marked
-   projectors even if it is not literally KKPYY's chosen canonical map.
+The desired conclusion is that both squares hold on one algebraic QDM domain
+after one lawful Laurent base change.  This is the exact edge-source gate,
+not an output of the Lean or Haskell consumer.  A source proof must establish:
 
-The endpoint calculation is then immediate:
+1. that the ordinary basis from Gu--Yu--Yu Proposition 5.2 remains a basis of
+   the exact completed source, and that Proposition 4.21's generatorwise row
+   equality extends continuously to the same Laurent module with a unit
+   normalization;
+2. that the same comparison intertwines the geometric marked projectors.
+   This requires a collision-free identification of the KKPYY spectral union
+   selected by the C924 predicate; connection naturality alone is
+   insufficient.
+
+The endpoint contradiction is immediate only after two geometric
+identifications that the algebraic certificates do not construct:
 
 - (X\times\mathbf P^m) has a marked cubic summand and its degree-zero row is
   nonzero on the explicit cubic zero block (the C924 separated basis gives
   row ((0,-7r^2))); tensoring with the projective-bundle unit preserves a
-  witness;
-- (mathbf P^{m+3}) has (P_{\mathrm{mark}}=0).
+  witness, once the actual product QDM row and marked projector are identified
+  with this tensor model;
+- (mathbf P^{m+3}) has (P_{\mathrm{mark}}=0), once its actual QDM spectral
+  factors are identified with the rank-one marker-free model.
 
-Then (D10.2) is unchanged under every blowup and blowdown.  The property is
-intrinsic: it is nonvanishing of a horizontal algebraic row on a canonical
-horizontal marked summand, so different edgewise analytic domains do not
-need to be composed.  Pullback to a nonempty comparison domain preserves and
-reflects the zero/nonzero restriction.  Weak factorization therefore gives
-the contradiction for every \(m\ge0\).  This is the unconditional no-Stokes
-closure route; the remaining work is durable exposition and aggregate
-verification, not a new source theorem.
+Equation (D10.2) is unchanged under one blowup or blowdown.  To telescope it,
+each occurrence of an intermediate \(Y\) must be identified with a faithful
+pullback of one native \((V_Y,\rho_Y,P_Y)\).  Nonempty comparison domains alone
+do not prove reflection: two unrelated occurrences can carry different rows.
+One candidate algebraic repair uses Iritani's inclusions (5.38) and (5.39)
+and the formally invertible combined coordinate change from Theorem 5.18(7).
+The center map (5.40) is only a homomorphism and remains edge-local.  The
+native vertex datum must be defined over a Novikov/bulk coefficient field;
+subsequent field-to-field extensions are faithfully flat.  Localizing an
+integral module at its fraction field is not faithful, and \(z\) must not be
+inverted because the marker uses the regular \(z=0\) lattice.  The repair
+still must prove that the carriers, rows, and marked projectors descend to
+those fields and that all path maps are compatible.  Coordinate invertibility
+alone supplies none of those three identifications.
+Once that occurrence theorem is written, `RowedProjectorPath`
+gives the all-\(m\) contradiction without Stokes data.  Until then the
+all-\(m\) geometric telescope is conditional.
+
+### Live four-gate ledger
+
+1. **Edge source:** for every smooth-center blowup allowed in an AKMW path,
+   construct the completed comparison and prove both squares in (D10.1),
+   including the unit status of every row normalization.  A simple-wall or
+   low-dimensional-center statement is not a uniform all-\(m\) provider.
+2. **Occurrence descent:** identify every repeated vertex occurrence with a
+   faithful pullback of one native carrier, row, and marked projector.
+3. **Cubic-product endpoint:** identify the rational matrix/tensor certificate
+   with the actual \(X\times\mathbf P^m\) QDM marked row and projector.
+4. **Projective endpoint:** prove that the actual
+   \(\mathbf P^{m+3}\) QDM has no row-visible C924-marked factor.
+
+These gates are independent.  Connection naturality does not imply the
+projector square; finite basis calculations do not imply completed
+invertibility; faithful-flatness reflects an already descended datum but does
+not create descent; and formal branch counts do not prove either endpoint
+identification.
 
 ## The exact one-sided source theorem
 

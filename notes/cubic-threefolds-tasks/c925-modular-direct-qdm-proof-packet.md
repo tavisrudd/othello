@@ -2,12 +2,13 @@
 
 **Lane:** cubic-threefolds
 
-**Status:** no-Stokes marked-projector proof landed for every \(m\); guarded
-aggregate verification and durable packaging in progress; no manuscript edits
+**Status:** no-Stokes marked-projector consumer landed for every \(m\);
+unconditional geometric telescope reopened pending occurrence-compatible
+faithful pullback; no manuscript edits
 
 ## Goal
 
-Package and rigorously verify the landed parameterized direct-QDM proof whose
+Package and rigorously verify the parameterized direct-QDM proof whose
 caller selects the observed blocks, retained marks, path environment, and
 commutative-monoid consumer.  Instantiate it for cubic
 one-stabilization irrationality, then use the same interfaces to isolate the
@@ -87,16 +88,15 @@ The packet index owns the module-to-file map.  Do not append another large
 module to this card or to the index; add one focused companion file and one
 index row.
 
-## Closed mathematics
+## Kernel-checked mathematics and current boundary
 
-- The row-visible marked-projector Boolean is invariant under every smooth
-  blowup and blowdown.  Projector naturality follows from connection
-  naturality and canonical spectral decomposition; the Gu--Yu--Yu row square
-  follows on the Proposition 5.2 ordinary basis and extends by finite
-  \(R\)-linearity.  The C924 cubic block is row-visible after product with
-  \(\mathbf P^m\), while \(\mathbf P^{m+3}\) has no marked block.  Weak
-  factorization therefore proves the obstruction for every \(m\), without
-  Stokes data or center classification.
+- `RowedProjectorDecomposition` proves the one-edge row-visible-projector
+  equivalence, and `RowedProjectorPath` proves the finite telescope after one
+  native carrier, row, and projector are assigned to every vertex.  The
+  geometric proof must still show that every edge occurrence is a faithful
+  pullback of that native datum, or place the finite path over one common
+  conservative coefficient field.  Without this clause, two incident edges
+  may use unrelated realizations of their nominally shared vertex.
 - The modular \(m=1\) proof is sound from its stated Iritani,
   Iritani--Koto, and weak-factorization inputs.
 - Guéré/BFGMP and KKPYY are lawful split specializations at the algebraic
@@ -526,22 +526,27 @@ Final rowed-projector source/consumer sanity replay:
        | diff -u \
            notes/cubic-threefolds-tasks/c925-rowed-projector-sanity-output.txt -'
 
-This separate suite has 38 named checks: all 576 lawful two-dimensional
-models over `F3`, four hostile malformed bundles, omission of each of the six
-source facts, a bounded endpoint sweep for `m=0,...,64`, and 6,000 fixed-seed
-QuickCheck cases.  The exact domain, hashes, dependency versions, and trust
-boundary are recorded in
+This separate suite has 61 named checks: all 576 lawful two-dimensional
+models over `F3`, 1,152 unit-scaled models, 104,976 polynomial cases, 55,296
+two-presentation common-source cases, four hostile malformed bundles,
+route-specific omission gates, a bounded endpoint sweep for `m=0,...,64`,
+an explicit forward-then-reverse traversal, a nominal-vertex occurrence mismatch accepted by the name-only
+telescope and rejected by the typed telescope, and 9,000 fixed-seed
+QuickCheck cases.  Uniform smooth-center coverage and both endpoint geometric
+identifications also have independent fail-closed omission tests.  The exact domain, hashes, dependency
+versions, and trust boundary are recorded in
 `../2026-08-21-c925-rowed-projector-computational-sanity.md`.  Lean's
 `projectiveProductBranchCount_pos` proves positivity for every natural `m`;
 the finite sweep is only a regression.
 
 Paper-local Lean is validated only through the guarded queue.  The aggregate
-targets `CubicStabilizationIrrationality` and
-`CubicStabilizationIrrationalityVerification` passed together in run
-`20260821-234441-e57a0561`.  This includes
-`RowedProjectorDecomposition.projectiveProductBranchCount_pos`,
-`Data.ofBasisSquares`, `Data.detects_iff`, and the zero-ambient contradiction
-in the reviewer axiom audit.
+target `CubicStabilizationIrrationalityVerification` passed in run
+`20260822-002715-50291734`.  The guarded axiom audit also exits zero and reports
+only `propext`, `Classical.choice`, and `Quot.sound` where used.  Its reviewer
+surface now includes the unit-scaled consumer, common-source basis
+constructor, faithful base-change reflection, injective row-codomain lemma,
+polynomial projector transport, tensor endpoint witness, unbounded branch
+count, and exact rational cubic-block certificate.
 
 The finite model currently has one hundred twenty-two checks.  It verifies only the
 advertised algebraic laws and countermodels, never an external QDM provider.
@@ -555,10 +560,27 @@ any geometric or QDM provider.
 
 ## Next
 
-1. Package the landed row-visible marked-projector proof.  For every generic
-   even QDM, let \(P_{\mathrm{mark}}\) be the idempotent onto the union of the
-   C924 blocks of rank two with \(N\ne0\) and
-   \(\delta^\sharp\ne0\).  The exact one-edge theorem is
+1. Close the occurrence-descent gate.  For every factorization vertex \(Y\),
+   define one native generic rowed marked module
+   \((V_Y,\rho_Y,P_Y)\).  Prove that both occurrences of \(Y\) in incident
+   Iritani/Gu--Yu--Yu comparisons are faithful pullbacks of this same datum,
+   or base-change the finite path to one common field.  Iritani (5.38) and
+   (5.39) are the relevant inclusions; (5.40) is only a homomorphism for the
+   edge-local center variables and is not used for vertex descent.  Theorem
+   5.18(7) gives an invertible combined coordinate change, but coordinates do
+   not identify the carrier, row, or projector.  A lawful field-first repair
+   must define the native datum over a Novikov/bulk coefficient field, keep
+   the regular \(z=0\) lattice, and use field-to-field extensions.  Merely
+   localizing an integral module at its fraction field is not faithful.
+   `RowedProjectorOccurrence.OccurrenceEquivalence.detects_iff` consumes the
+   resulting occurrence map, and `RowedProjectorPath` then makes the
+   telescope type-correct.
+2. Referee-audit the direct six-input edge provider uniformly for every
+   smooth-center blowup allowed by AKMW, including the higher-dimensional
+   centers that appear when \(m>1\).  For every generic even QDM, let
+   \(P_{\mathrm{mark}}\) be the idempotent onto the union of the C924
+   blocks of rank two with \(N\ne0\) and \(\delta^\sharp\ne0\).  The exact
+   one-edge theorem is
 
    \[
       \Psi P_{\widetilde Y}=(P_Y\oplus P_Z)\Psi,
@@ -567,37 +589,35 @@ any geometric or QDM provider.
       \qquad \rho=\epsilon M.
    \]
 
-   Both equations are now closed on one actual Laurent QDM domain.  Projector
-   naturality follows from connection naturality and KKPYY's canonical
-   spectral decomposition.  For the row square, Gu--Yu--Yu Propositions 2.4,
-   2.8, and 4.21 give equality on ordinary equivariant classes, while
-   Proposition 5.2 makes suitable such classes an \(R\)-basis of the
-   completed wall source; finite \(R\)-linearity extends the equality.  The
-   row may take values in a larger Givental coefficient module.  It is not a
-   Gamma, fixed-phase, formal-monodromy, or sectorial row.
-2. Use the operation-level Boolean: a row detects a marked projector when
-   some fixed vector of that idempotent has nonzero row.  A rowed direct-sum
-   comparison preserves this Boolean even if every correction summand is
-   marked, because the row factors through the ambient projection.  Package
-   this exact algebra in the paper-local Lean namespace with idempotence and
-   projector naturality carried by the types.  `Data.ofBasisSquares` now
-   records that the source squares may be checked on Gu--Yu--Yu's ordinary
-   basis.  Do not add loops, roots, surjectivity, Fitting, primary coverage,
-   Gamma data, or Stokes data.
-3. Close the endpoints on the same algebraic marker.  The C924 separated
-   cubic zero block has degree-zero row ((0,-7r^2)\ne0\), so
-   (X\times\mathbf P^m) detects its marked projector.  Generic quantum
-   cohomology of \(\mathbf P^{m+3}\) has only rank-one factors, so its marked
-   projector is zero.  The two one-edge squares pass, so weak factorization
-   proves the result for every \(m\), with no center classification and no
-   composition of edge-local completed germs.  The invariant is the
-   zero/nonzero restriction of a horizontal row to a canonical horizontal
-   marked summand, hence is intrinsic at each vertex.
-4. Run the guarded aggregate Lean/axiom audit, make the basis constructor
-   reviewer-visible, and keep the source dossier, this card, and the handoff
-   synchronized.  Then commit only the C925 files; preserve unrelated dirty
-   work.
-5. Keep the prior one-sided endpoint architecture as the first fallback:
+   The current source candidate takes projector naturality from KKPYY spectral
+   canonicity and the row square from Gu--Yu--Yu Propositions 2.4, 2.8, 4.21,
+   5.2 and Theorem 5.5.  It is not yet proved that these are statements about
+   the same completed comparison over the same occurrence maps.  Verify that
+   fusion line by line against the preprints and seek exact finite matrices
+   from the authors when available.  A finite truncation is not evidence for
+   existence or invertibility of the completed map.
+   `RowedProjectorOccurrence.CommonSourceEdgePresentation.toEdge` now derives
+   the typed edge automatically once two exact common-source presentations
+   are provided, so no separate composite-map proof remains.
+3. Keep the provider routes modular.  The direct route uses the six facts
+   above.  A common faithful base, a polynomial presentation of the marked
+   projector, a unit row normalization, and a tensor endpoint unit are
+   separate adapters used only by the presentations that need them.  The Lean
+   and Haskell interfaces now test each route without requiring their union.
+4. The consumer arithmetic is closed; the geometric endpoints are not
+   machine-constructed.  Lean proves unit-scaled detection,
+   common-source composition from basis certificates, faithful base-change
+   reflection, polynomial projector naturality, the exact rational cubic
+   marker, and positivity of the projective-product branch count for every
+   \(m\).  The Haskell suite supplies exhaustive hostile finite models.  Do
+   not add loops, roots, surjectivity, Fitting, Gamma data, or Stokes data to
+   the active proof.
+5. The source/referee frontier is the table
+   `../2026-08-21-c925-referee-source-substitution-table.md`.  It now separates
+   independent derivations from shared Fourier lineage and records the native
+   occurrence gate.  Do not call the all-\(m\) theorem unconditional until
+   that gate and the endpoint identifications are discharged.
+6. Keep the prior one-sided endpoint architecture as the first fallback:
    `Comparison.MarkedWitnessObstruction` consumes only one detected source
    and one rowed selected-action map to projective space.  The global AKMW
    source and a typed chain of local sources are its two lawful providers.

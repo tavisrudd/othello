@@ -127,39 +127,38 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   `../2026-08-20-c930-independent-referee-report.md` and
   `../2026-08-20-c930-second-referee-pass.md`. Card:
   `../cubic-threefolds-tasks/c930-categorical-direct-qdm-paper-preparation.md`.
-- **C925 — modular direct-QDM proof packet, landed pending verification.**
-  **Closure route:** fuse the intrinsic C924 marked-atom projector with the algebraic
-  Gu--Yu--Yu row \(\rho=\epsilon M\) on one Laurent QDM domain.  For each
-  blowup the exact two squares are projector block-naturality and
-  \(\rho_{\widetilde Y}=\rho_Y\operatorname{pr}_Y\Psi\).  Their linear
-  consequence is that row-visible marked support ignores every correction,
-  even a correction carrying the same atom.  The cubic product detects this
-  projector and projective space has zero projector, so a source-faithful
-  realization gives every \(m\), not only \(m=2\).  The realization is now
-  source-closed: connection naturality preserves the canonical marked
-  spectral union, and Gu--Yu--Yu Proposition 5.2 supplies an ordinary
-  equivariant \(R\)-basis on which Propositions 2.4, 2.8, and 4.21 prove the
-  adjoint row equality; finite \(R\)-linearity extends it to the Laurent
-  module.  No loop, root, Gamma
-  lattice, formal/sectorial row, or Stokes comparison is consumed.  The row
-  may have a larger coefficient codomain; only its QDM domain must be the one
-  carrying the idempotent.  The native projective deck route is closed:
-  Iritani--Koto's \(r=6\) endpoint already has primitive \(C_3\)-visible rank
-  under the natural order-three subgroup.  The exact P0--P4 gate is in
-  `../2026-08-21-c925-pointed-row-calibration.md`; the task card's `Next`
-  section is authoritative.  `Comparison.RowedProjectorDecomposition.Data.ofBasisSquares`
-  locks the basis-extension step.  The independent Haskell plumbing suite
-  exhausts 576 lawful `F3` models, rejects each omitted source fact and four
-  malformed bundles, and adds 6,000 fixed-seed QuickCheck cases; its exact
-  report is `../2026-08-21-c925-rowed-projector-computational-sanity.md`.
-  Lean proves the projective-product branch count positive for every natural
-  stabilization index, so the suite's `m=0,...,64` sweep is only a regression.
-  `Comparison.MarkedWitnessObstruction` remains
-  the first fallback, not the live consumer.  Ordinary Hodge--Lefschetz
-  packets are closed by a one-blowup curve counterexample.
-  Exact external-source inputs, deductions, and nonoutputs are tracked in
-  `../2026-08-21-c925-no-stokes-source-dossier.md`; update that dossier before
-  changing the provider frontier.
+- **C925 — no-Stokes row-visible-projector proof, all stabilizations.**
+  **Live conditional result:** on every blowup edge, an intrinsic marked-projector square
+  and a unit-scaled algebraic row square imply that row-visible marked support
+  is identical on the blowup and ambient factors, regardless of marked
+  correction blocks.  A dependent path telescopes only after every repeated
+  vertex occurrence is a faithful pullback of one native carrier, row, and
+  projector.  This occurrence theorem, the exact completed edge squares, and
+  both geometric endpoint identifications remain open; therefore the
+  unconditional all-\(m\) theorem is not landed.  Lean kernel-checks the
+  conditional consumer, unit normalization, faithful
+  base change, injective row-codomain enlargement, polynomial projector
+  transport, tensor endpoint witness, common-source composition, and the
+  finite rational cubic-block marker.  Haskell independently checks 61 named
+  laws, including 55,296 two-presentation common-source certificates and
+  9,000 fixed-seed properties; its hostile nominal-occurrence path is accepted
+  by a name-only telescope and rejected by the typed telescope.  The named
+  `m=1,3,4,13` regressions and Lean's all-`m` branch-count theorem test only
+  the consumer arithmetic, not the geometric providers.
+
+  **Trust boundary:** the direct edge provider uses six source obligations
+  from the Gu--Yu--Yu and KKPYY preprints.  Faithful-base descent, polynomial
+  projector presentation, unit scaling, and tensor endpoints are modular
+  alternatives or endpoint adapters, not four extra simultaneous assumptions.
+  A seventh, path-level obligation is native occurrence descent.  Lean does
+  not construct the completed QDM comparison, its geometric row/projector,
+  or either endpoint model.  The exact publication-status and substitution
+  table is `../2026-08-21-c925-referee-source-substitution-table.md`; the
+  theorem-by-theorem dossier is
+  `../2026-08-21-c925-no-stokes-source-dossier.md`; the executable report is
+  `../2026-08-21-c925-rowed-projector-computational-sanity.md`.  The task
+  card's `Next` section is authoritative.  Material below this paragraph is a
+  fallback ledger, not the live route.
 
   The packet is organized like a parameterized software interface: a
   caller chooses which generic even-block data to observe, which blocks to
@@ -615,9 +614,10 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   one-hundred-twenty-two-check
   finite law replay, the eleven-check path toy, the four-check source-typed
   Haskell toy, the four-check double-normal producer toy, and original cubic
-  replay are green.  C925 has no remaining mathematical source gate on the
-  marked-projector route; guarded aggregate verification and durable
-  packaging remain.  The one-sided marked source,
+  replay are green.  C925's marked-projector route still has four independent
+  source gates: completed edge squares, native occurrence descent, the
+  cubic-product endpoint identification, and projective-space marked
+  emptiness.  The one-sided marked source,
   fixed-phase/Stokes, and ExactTop routes are fallbacks, not the live frontier.
   Mathematics and paper-local Lean only; no manuscript edits.  Card:
   `../cubic-threefolds-tasks/c925-modular-direct-qdm-proof-packet.md`.

@@ -162,9 +162,42 @@ are verified only on a source basis.  This is the finite-free extension used
 for Gu--Yu--Yu's ordinary equivariant basis of the completed wall module; it
 does not invoke density, topology, or convergence.  The file does not
 construct spectral projectors or prove the geometric basis equations.
+`UnitScaledData` permits the two rows to differ by a unit, while
+`CommonSourcePresentation` composes two presentations of one marked source;
+its basis constructor checks the row square and both projector squares before
+forming the endpoint comparison.  Faithfully flat scalar extensions reflect
+and preserve detection through a common base, but the existence of such a
+descent is an explicit hypothesis.  An injective map of row codomains may be
+handled separately.  Polynomial functional calculus derives projector
+naturality from one operator square, and tensoring with an auxiliary vector
+whose row value is one preserves an endpoint witness.  These results verify
+the algebraic consequences of finite certificates; they do not prove the
+existence of the completed quantum-module maps or of a polynomial presentation
+of the geometric spectral projector.
 The same module records that the projective-product branch count `m + 1` is
 positive for every natural stabilization index; bounded external test suites
 are not used to establish that quantifier.
+
+`Comparison.CubicBlockCertificate` kernel-checks the exact rational marker
+data used at the cubic endpoint: a nonzero nilpotent, modified-residue trace
+`-1`, determinant `5/36`, discriminant `4/9`, and a row-visible normalized
+block.  It does not identify that finite matrix model with a geometric QDM.
+
+`Comparison.RowedProjectorPath` assigns every path vertex one carrier, row,
+and marked projector.  Its edges are indexed by those exact values, so two
+incident edges cannot silently choose unrelated realizations of their shared
+vertex.  An oriented step may follow a direct-sum edge or traverse it in
+reverse, so a path can mix blowups and blowdowns.  Lean composes the one-edge
+detection equivalences and derives the zero-projector endpoint contradiction.
+Constructing the native vertex
+family, or proving that every completed edge occurrence is its faithful
+pullback, remains an external geometric hypothesis.
+
+`Comparison.RowedProjectorOccurrence` provides two source-facing assembly
+lemmas.  A unit-scaled row/projector equivalence preserves detection between
+two occurrences, and exact common-source presentations construct the typed
+edge used by the path theorem.  Both compatibility equations must use one
+map; the records do not construct the geometric presentations.
 
 `Comparison.MarkedRepresentationEquivalence` gives the adjacent-edge
 connector without imposing equality or uniqueness of sectorial frames. If
