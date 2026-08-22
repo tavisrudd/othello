@@ -8,45 +8,114 @@
 
 **Title:** *Complete Bounded Repair Ports: Transfer, Reliability, and Geometric Structure*
 
-For a linear code and a distinguished coordinate, the complete bounded repair
-port records every dual-support recovery using at most a prescribed number of
-helpers. The paper keeps three layers visible: helper supports, normalized
-scalar recovery coefficients, and reliability under helper failures.
+This 22-page paper introduces a local invariant of a represented linear code.
+Fix a coordinate and a helper budget. Its **complete bounded repair port**
+records every dual recovery equation within that budget—not just the permitted
+helper sets, but also the normalized scalar coefficients and the resulting
+probability of successful repair under helper failures.
 
-The opening theorem shows that the minimum coefficient port of an MDS code
-reconstructs the represented code even though its support projection is the
-generic complete uniform clutter. The paper then proves an exact
-weighted-functional transfer theorem for concatenation and a positive-density
-realization theorem for prescribed represented ports. It develops
-deletion–contraction reliability and bounded-EXIT calculi, identifies
-full-radius reliability with a Las Vergnas perspective-polynomial
-specialization, and proves that the radius filtration contains additional
-information.
+The main theorem identifies the exact obstruction to carrying such a port
+through code concatenation. Below that obstruction, any fixed represented port
+can be reproduced on a positive-density coordinate class in an asymptotically
+good fixed-alphabet family. The obstruction is sharp in the stated
+fixed-inner, linear-concatenation setting.
 
-The main synthesis uses two explicit `[7,4,3]₇` inner codes with the same full
-pointed subset profile but radius-three reliability laws `2s³-s⁶` and
-`2s³-s⁵`. Concatenation with one common outer family gives asymptotically good
-fixed-alphabet families with matched global parameter formulas and designated
-target classes of density `1/7` carrying the distinct bounded ports.
+The principal example shows why the bounded port contains information that
+standard unfiltered rank data misses. Two explicit `[7,4,3]₇` inner codes have
+the same pointed rank-triple multiplicity enumerator (equivalently, the same
+full pointed-perspective polynomial), but their radius-three reliability laws
+are
 
-Two characteristic-three applications illustrate different local geometries:
-a twisted-cubic–axis code with exact matching and transversal rows, and a
-quartic normal rational curve with its nucleus, whose harmonic quadruples form
-a Steiner repair design.
+```text
+2s³ − s⁶    and    2s³ − s⁵.
+```
+
+Using the same outer family produces asymptotically good code families with
+matched length and dimension formulas, the same distance lower bound, and
+density-`1/7` target classes retaining these distinct local laws.
+
+## Other results
+
+- The minimum coefficient port of an MDS code reconstructs the represented
+  code, although its support projection is the generic complete uniform
+  clutter.
+- Port reliability satisfies deletion–contraction and pivotal identities.
+  Successive bounded-EXIT curves recover the cheapest available repair radius.
+- Full-radius reliability is a specialization of the Las Vergnas polynomial
+  of an elementary matroid perspective; the bounded-radius filtration is
+  strictly finer.
+- Characteristic-three twisted-cubic–axis and quartic–nucleus codes give exact
+  geometric port inventories. The quartic example produces a harmonic Steiner
+  repair design.
+
+## Suggested reading
+
+The introduction states the complete theorem chain and Figure 1 gives its
+logical spine. Readers interested primarily in the asymptotic separation can
+then read the definitions in Section 2, the transfer and realization theorems
+in Sections 3–4, and the field-seven construction in Section 6. The geometric
+applications in Section 7 are independent demonstrations of the framework.
+
+## For referees
+
+The shortest route through the central argument is:
+
+1. **Exact transfer:** Theorem 3.1 decomposes a concatenated dual word by its
+   block functionals and minimizes each realization fiber. The all-zero,
+   singleton, and multisupport functional strata are treated separately.
+2. **Sharp eventual boundary:** Theorem 4.1 proves that the persistent
+   zero-functional obstruction is necessary and sufficient for eventual
+   bounded confinement in the stated setting.
+3. **Finite separation:** Lemma 6.3 and Proposition 6.4 use sparse-paving
+   structure and two displayed matrices over `F₇`. Appendix A.1 prints every
+   four-column determinant needed to check the representations.
+4. **Asymptotic synthesis:** Theorem 6.5 applies one common outer family to
+   both seeds, giving the matched global formulas, density-`1/7` target
+   classes, and distinct reliability laws.
+
+The two seeds match the pointed rank-triple multiplicity enumerator, locality,
+and the number of minimum repairs. They **do not** match disjoint availability:
+the values are two and one. This limitation is stated in Theorem 6.5 and is not
+hidden by the asymptotic transfer.
+
+The manuscript contains full written proofs of the promoted theorem chain.
+Lean checks the general transfer, parameter, reliability, and bounded-EXIT
+components; it does not package every concrete field-seven and asymptotic
+specialization into one theorem. The field-seven matrix facts are proved from
+the printed determinant ledger and independently checked by
+`verification/f7-seed.py`. Random-linear outer-family existence is an
+explicit classical input.
 
 ## Proof and evidence boundary
 
 The reconstruction, transfer, prescribed-port, reliability, and bounded-EXIT
-chains have Lean 4 support. The manuscript names the classical inputs used for
-outer-code existence, concatenation, projective geometry, and the Las Vergnas
-polynomial. Exact finite tables and replay evidence are confined to the
-appendix and do not prove a main-body theorem.
+chains have Lean 4 support. The matched asymptotic theorem is a written
+synthesis of kernel-checked general components, a complete human proof of the
+two finite representations, an independently replayable finite calculation,
+and a classical outer-family existence theorem. The manuscript labels these
+roles separately.
 
 The scalar repair protocol downloads one complete base-field symbol from each
 contacted helper. It does not claim minimum subsymbol access, optimal repair
 bandwidth, full symbol-MAP behavior at a finite radius, or a capacity theorem.
 
-## Source layout
+## Verification
+
+The Lean development is published through
+[`tavisrudd/finitegeom`](https://github.com/tavisrudd/finitegeom). Exact
+formal boundaries and replay instructions are in [`verification/`](verification/).
+
+From this directory,
+
+```text
+make check
+```
+
+performs a clean deterministic rebuild, requires byte-for-byte agreement with
+the tracked PDF, rejects TeX warnings and private-path leakage, validates
+metadata and the AI disclosure, and replays the field-seven certificate.
+
+## Files
 
 - `complete_repair_ports.tex` is the manuscript driver.
 - `sections/` contains the numbered theory, application, conclusion, and
@@ -58,16 +127,10 @@ bandwidth, full symbol-MAP behavior at a finite radius, or a capacity theorem.
 - `.zenodo.json` contains preprint deposit metadata; it creates no deposit or
   DOI by itself.
 
-## Build
+## Citation
 
-From this directory, run:
-
-```text
-make check
-```
-
-This rebuilds the manuscript with the pinned Nix toolchain and fails on LaTeX
-warnings, unresolved references, or overfull/underfull boxes.
+The archival identifier is
+[`10.5281/zenodo.22051904`](https://doi.org/10.5281/zenodo.22051904).
 
 ## License
 

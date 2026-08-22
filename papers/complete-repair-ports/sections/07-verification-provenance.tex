@@ -33,7 +33,7 @@ The paper's \path{verification/formal-boundary.json} fixes the formal source
 commit, the finitegeom base commit, Lean and mathlib revisions, 36-module
 closure, and 61 paper-facing terminals:
 \begin{quote}\scriptsize\raggedright
-source \path{e45c925e11112b4a21a17ff23029243904fc5865},\\
+source \path{e45c925e1004c9316a2240a5fb36f7f2775a49b0},\\
 finitegeom \path{b871c10b4a91200a0913644d39b9f0ce44f655ca},\\
 gate fact SHA-256
 \path{fbb29ef0bc559b9ac2ce3308a7b3c0572753ffd7163d6c15cd18e57464fc0a4d}.
@@ -46,9 +46,13 @@ module closure from the manuscript PDF and from evidence-only finite
 calculations.  The named \path{verification/} files are supplementary files
 distributed with the paper's source archive.
 
-Trace duality, scaled concatenated parameters, exact designated-class density, eventual
-necessity and sufficiency, support/coefficient transfer, and the MDS
-fingerprint corollary are audited through
+Trace duality, scaled concatenated parameters, exact designated-class density,
+eventual necessity and sufficiency, support/coefficient transfer, and the MDS
+fingerprint corollary are audited through separate declarations.  In
+particular, the paired declaration below covers only simultaneous eventual
+radius-three support/coefficient transfer through one common outer family; it
+does not encode the concrete field-seven matrices, their finite invariants,
+or the human assembly of Theorem~\ref{thm:asymptotic-separation}:
 \begin{quote}\small\raggedright
 \path{RepairPorts.concatenatedRestrictedCode_parameters},\\
 \path{RepairPorts.eventually_pointedConfinement_iff_zeroCost},\\
@@ -114,7 +118,8 @@ bundle is
 \path{verification/f7-seed.py},\\
 \path{verification/f7-seed.json}.
 \end{quote}
-It checks the circuit-hyperplane lists, pointed subset profile, minimal
+It checks the circuit-hyperplane lists, pointed rank-triple multiplicity
+enumerator, minimal
 radius-three repairs, and survivor-set counts.  Its certificate SHA-256 is
 \begin{quote}\scriptsize
 \path{8096230e66f634c820ae7ec4bacd9b2493006782ff02b8be3a8c7e1caf80de07}.

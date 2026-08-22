@@ -125,7 +125,11 @@ and \(A_\infty\).  At \(C(\infty)\) the radius-three repairs are
 \(((q-1)/2,q-1)\).  At \(A_\infty\), the radius-three matching already has
 \((q-1)/2+q/3=(5q-3)/6\) edges.  In any matching of minimal radius-four
 repairs, if an edge uses \(c\) cubic and \(a\) axis helpers, independence of
-the helper columns and the circuit classification give \(2c+3a\ge6\).
+the helper columns and the circuit classification give \(2c+3a\ge6\): an
+axis-only edge has \(a\ge2\), a cubic-only edge has \(c\ge3\), and a mixed
+edge cannot have \(c=1\) or \((c,a)=(2,1)\), since the corresponding sets are
+independent by the size-at-most-four classification.  Every remaining mixed
+case satisfies the inequality.
 Summing over the disjoint edges and using the \(q+1\) cubic and \(q\)
 available axis coordinates yields
 \(6\nu\le2(q+1)+3q=5q+2\), hence the same upper bound
@@ -135,8 +139,12 @@ Finally, a helper set contains no full repair exactly when it lies in a
 hyperplane section avoiding the target.  For \(C(\infty)\), the largest such
 section has \(q+2\) points (the plane \(X_3=0\) attains it), giving
 \(\tau=(2q+1)-(q+2)=q-1\).  A plane avoiding \(A_\infty\) meets the axis once
-and the cubic at most three times, and an explicit four-point section attains
-four; hence \(\tau=(2q+1)-4=2q-3\).  Rank four makes every minimal circuit
+and the cubic at most three times.  To see sharpness, choose
+\(\alpha\in\F_q\setminus\F_3\).  The plane through
+\(C(0),C(1),C(\alpha)\) and their finite axis completion
+\((0:e_1:e_2:0)\), where \(e_1=1+\alpha\ne0\), contains four displayed
+points and avoids \(A_\infty\).  Hence \(\tau=(2q+1)-4=2q-3\).  Rank four
+makes every minimal circuit
 have at most five points, so radius four exhausts the full minimal port.
 \end{proof}
 

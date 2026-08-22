@@ -4,8 +4,9 @@
 this mathematical dependency order:
 
 1. `01-complete-ports.tex` — support, coefficient, and probability layers;
-   reconstruction radius; intrinsic pointed-port isomorphisms; page-2 MDS
-   reconstruction.
+   reconstruction radius; intrinsic pointed-port isomorphisms; MDS
+   reconstruction as the first application of the introduction's main
+   transfer-and-separation theorem.
 2. `02-confinement-transfer.tex` — exact pointed obstruction and weighted
    functional transfer.
 3. `03-positive-density.tex` — prescribed realization and compact

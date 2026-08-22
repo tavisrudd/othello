@@ -96,12 +96,16 @@ inclusion-minimal nonzero row-code supports.  Taking the smallest support
 through $x$ proves the distance formula.
 \end{proof}
 
-\begin{lemma}[Sparse-paving pointed profile]
+\begin{lemma}[Sparse-paving pointed enumerator]
 \label{lem:sparse-paving-profile}
 For a rank-$r$ sparse paving matroid on $n$ elements with distinguished
-element $x$, the complete pointed subset-rank profile is determined by
-$n,r$, the number of circuit-hyperplanes containing $x$, and the number
-avoiding $x$.
+element $x$, the multiplicity enumerator of the rank triples
+\(
+ (r_M(A),r_M(A\cup\{x\}),|A|)
+\), over all \(A\subseteq E\setminus\{x\}\), is determined by $n,r$, the
+number of circuit-hyperplanes containing $x$, and the number avoiding $x$.
+Equivalently, these data determine the full pointed-perspective polynomial.
+They do not determine the labeled subset-rank function \(A\mapsto r_M(A)\).
 \end{lemma}
 
 \begin{proof}
@@ -207,9 +211,9 @@ Proposition~\ref{prop:filtration-boundary}.  In particular,
  R_{\rm dis}^{(\leq3)}(s)=2s^3-s^6,\qquad
  R_{\rm ov}^{(\leq3)}(s)=2s^3-s^5.
 \]
-The two seed ports have the same full pointed subset profile, locality three,
-and two minimum repairs.  Their availability is not matched: it is two for
-the disjoint seed and one for the overlapping seed.
+The two seed ports have the same pointed rank-triple multiplicity enumerator,
+locality three, and two minimum repairs.  Their availability is not matched:
+it is two for the disjoint seed and one for the overlapping seed.
 \end{theorem}
 
 \begin{proof}

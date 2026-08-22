@@ -49,7 +49,8 @@ represented bounded port occurs on a positive-density coordinate class in an
 asymptotically good fixed-alphabet family.
 
 This transfer yields a matched asymptotic separation.  Two explicit
-$[7,4,3]_7$ inner codes have the same full pointed subset profile but
+$[7,4,3]_7$ inner codes have the same pointed rank-triple multiplicity
+enumerator (equivalently, the same full pointed-perspective polynomial) but
 radius-three reliabilities $2s^3-s^6$ and $2s^3-s^5$.  Using one common outer
 family gives two asymptotically good code families with identical length and
 dimension formulas, the same distance bound, and designated target classes
@@ -85,6 +86,38 @@ For a target $x$, let $\cP_x^{(\leq r)}(C)$ be the dual words normalized by
 $w_x=1$ and supported on $x$ and at most $r$ helpers.  This coefficient port
 records the scalar recovery equations, not only their supports.
 
+\begin{theorem}[Main theorem: exact transfer and separated realization]
+\label{thm:main}
+Let \(I\leq\F_q^E\) be a fixed represented \([m,k,d]_q\) inner code,
+identify its message space with \(L=\F_{q^k}\), let \(x\in E\) be a
+repairable target, and put
+\[
+ z_x(I)=\min\{\wt(u):u\in I^\perp,\ u_x\ne0\}+d(I^\perp).
+\]
+For any fixed radius \(r\) and any \(L\)-linear outer family whose dual distance
+tends to infinity, all sufficiently long concatenations confine every
+radius-\(r\) repair at a designated copy of \(x\) to its inner block if and
+only if \(r+1<z_x(I)\).  Whenever this inequality holds, the complete support
+and normalized coefficient ports are copied exactly in every block.  Choosing
+an asymptotically good outer family therefore realizes the prescribed port on
+a coordinate class of density \(1/|E|\) in an asymptotically good
+fixed-alphabet family.
+
+Moreover, there are two represented \([7,4,3]_7\) inner codes with the same
+pointed rank-triple multiplicity enumerator, locality three, and two minimum
+repairs, for which one common outer family gives matched length and dimension
+formulas and the same distance lower bound, while density-\(1/7\) target
+classes retain the distinct radius-three reliability laws
+\(2s^3-s^6\) and \(2s^3-s^5\).
+\end{theorem}
+
+The first paragraph is the exact confinement criterion of
+Theorems~\ref{thm:transfer} and~\ref{thm:prescribed}; the second is
+Theorem~\ref{thm:asymptotic-separation}.  The obstruction \(z_x(I)\) is the
+least pointed inner-dual word in the target block plus the least nonzero
+inner-dual word in another block.  Nonzero outer functionals eventually
+become too expensive, but this all-zero-functional obstruction persists.
+
 \begin{theorem}[MDS coefficient-port reconstruction]
 \label{thm:mds-reconstruction}
 Let $C\leq\F_q^E$ be an $[n,k]_q$ MDS code with $1\leq k<n$, and let
@@ -106,7 +139,8 @@ $C^\perp$.  Thus the coefficient layer retains represented information that
 support-only locality discards.
 
 Our main separation shows that this distinction survives asymptotically.
-Two represented sparse-paving seeds have identical full pointed rank data,
+Two represented sparse-paving seeds have identical pointed rank-triple
+multiplicity enumerators,
 but the two target circuit-hyperplanes are disjoint off the target in one
 seed and meet in one helper in the other.  Exact transfer by a common outer
 family copies these radius-three ports onto coordinate classes of density
