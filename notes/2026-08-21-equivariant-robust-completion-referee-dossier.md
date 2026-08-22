@@ -42,6 +42,13 @@ the already pinned certificate and structural-source commits remains an
 author-owned external action; repository policy forbids the exporter from
 pushing them.
 
+The third context-isolated report is frozen in
+`notes/2026-08-21-equivariant-robust-completion-cold-referee-r3.md`.  It grades
+the manuscript A, confirms the residual action and semantic transport against
+the pinned certificate source, and finds no manuscript-local mandatory
+correction.  Its only mandatory pre-release items are publication of the two
+pinned evidence commits and an archival deposit of the frozen release.
+
 ## Editorial question
 
 Does the mate-line carrier decomposition and its exact collision correction
