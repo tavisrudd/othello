@@ -5,8 +5,8 @@
       "sha256": "9cb47945d435f2e7170c604fa20c65c412257d28bc124c8a5a0f53565ffd5dcc"
     },
     "conference_cut_spectra.tex": {
-      "bytes": 54334,
-      "sha256": "e9f5a404df0fe668605030841df505282d71fd0ed77306bfe031aa12f5b84f5c"
+      "bytes": 54380,
+      "sha256": "804c182606f38da2db653460a306e58abb83a1ad57af8a2bb0efec73eb94e6bc"
     },
     "pyproject.toml": {
       "bytes": 165,
@@ -41,24 +41,24 @@
       "sha256": "34eaf48a865819afa6fab5a6b7884c77898860edbbd00a5c7b28d6edcc79c971"
     },
     "verification/evidence/boson_fermion_complement.json": {
-      "bytes": 333438,
-      "sha256": "1989fc56e7b4eaa9d8598b1b818d3027173238630ffc6561618f89346d12dbd0"
+      "bytes": 333444,
+      "sha256": "10aed9e04f1fde1ce0da7ed417cdd4a4f146b07506359cb0ad32ca9e2ead2f39"
     },
     "verification/evidence/boson_fermion_complement.py": {
-      "bytes": 18431,
-      "sha256": "316739532824a0899cc95adaf277ffd16e65438aefb7b82fd70e80bffd8ddfb7"
+      "bytes": 18441,
+      "sha256": "c4967e16db972f5a7752485355bcd308fe01333b2c8d46e1027fb86683516ea3"
     },
     "verification/evidence/boson_fermion_complement_replay.py": {
       "bytes": 6360,
       "sha256": "0d6706c87b90850d5e478bce6a4aa25d5add791d2ca79681230544b04af28644"
     },
     "verification/evidence/six_mode_demonstrator.json": {
-      "bytes": 12548,
-      "sha256": "74307d6f509a7404a8f94d068944c94bb12c706213d038f64b3e9691d86b700e"
+      "bytes": 12556,
+      "sha256": "9d178f3e6af9728ebd3e22a9792b04be6a31fccba3854a4d2fd20d4154c22aea"
     },
     "verification/evidence/six_mode_demonstrator.py": {
-      "bytes": 12998,
-      "sha256": "f8771a9b80b2708285715311a5a87ef9f3318a256615a35473000f3326c1edb3"
+      "bytes": 13006,
+      "sha256": "55fff8fd2327ef3cccd61d7c3de95e8a2956d03106930dfbcdfac7fc2904b4ab"
     },
     "verification/evidence/six_mode_demonstrator_replay.py": {
       "bytes": 2564,
@@ -66,7 +66,7 @@
     },
     "verification/evidence_certificate.json": {
       "bytes": 10101,
-      "sha256": "76695b4e205cf6b5286d6dd345fe9dccaed962e4a0c78dd35ea125819ab4931c"
+      "sha256": "582d5a1e8bfb5c7fe3a7028097fbb9e3069c3508f447fd7af3a961954c682ad8"
     },
     "verification/lint_tex_spacing.py": {
       "bytes": 1499,

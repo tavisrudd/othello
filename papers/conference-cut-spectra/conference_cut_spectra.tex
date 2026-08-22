@@ -53,14 +53,14 @@ parametrizes the complete Pareto frontier of the three degree-three sectors.
 Cutwise constancy of any one sector holds exactly for matrices equivalent,
 under switching and permutation, to a real symmetric conference matrix.  An
 averaged squared-holonomy defect bounds the Frobenius distance from that class
-globally from below and locally from above.  In arbitrary real dimension, singular values
+globally from below and locally from above.  We interpret the order-six
+transfer through a conference interferometer, separating intrinsic, oriented,
+and calibrated observables and identifying the external resource required for
+direct three-fermion emulation; this is a theory and design-limit analysis,
+not a report of a built device.  In arbitrary real dimension, singular values
 classify unframed port transfers; for invertible transfers, orientation adds
-exactly the determinant sign, and the determinant is the unique
-minimal-degree orientation-covariant polynomial up to scale.  We interpret
-the order-six transfer through a conference interferometer, separating
-intrinsic, oriented, and calibrated observables and identifying the external
-resource required for direct three-fermion emulation.  This is a theory and
-design-limit analysis, not a report of a built device.
+exactly the determinant sign, and the determinant is, up to scale, the unique
+minimal-degree orientation-covariant polynomial.
 \end{abstract}
 
 \section{Introduction}
@@ -120,28 +120,27 @@ matrix \(C\) of order six, so that
 The two eigenspaces of \(C\), with eigenvalues \(\pm\sqrt5\), both have
 dimension three.  A diagonal path control couples them through a
 three-by-three block \(K\).  Six coherently marked conference matrices produce
-six such blocks.  The Clebsch source papers construct this Golden family from
+six such blocks.  The Clebsch source papers construct this conference family from
 the regular six-point two-graph and identify its determinants with the six
 classical Joubert coordinates on the Segre cubic
 \cite{ClebschI,ClebschIII}.  We ask what this transfer retains under
 symmetric and antisymmetric exchange, how a calibrated apparatus reads its
-marked determinant signs, and where a photonic realization stops.  The name
-\emph{Golden} refers to the paired \(\pm\sqrt5\) conference eigenspaces;
-\emph{conference interferometer} refers to the operational realization.
+marked determinant signs, and where a photonic realization stops.  We use
+\emph{conference interferometer} for the operational realization.
 
 Three reductions organize the argument.  First, the left--right orbit theorem
 identifies what survives unframed and oriented port gauges and forces the
 determinant as the minimal orientation carrier.  Second, a conference block
 identity turns balanced exchange spectra into cross-Gram spectra; it yields
 the all-order classification and supplies the endpoint data for the
-continuous Golden optimum.  Third, triangle holonomy becomes the sole moving
+continuous-control optimum.  Third, triangle holonomy becomes the sole moving
 coordinate in the Hermitian
 order-six problem.  A pentagon parity obstruction and a Pfaffian-square
 obstruction force the rigid endpoint, while sign rounding turns the same
 holonomy defect into a local metric estimate.  These arguments use neither a
 classification of the Hermitian family nor a finite census.
 
-The mechanism is the determinant line.  The Golden data determine the two
+The mechanism is the determinant line.  The conference data determine the two
 three-dimensional port spaces but not ordered orthonormal frames inside them.
 Changing those frames acts on \(K\) from the left and right by orthogonal
 matrices.  The top exterior power is intrinsically a map between the two
@@ -178,7 +177,7 @@ below is also prior~\cite{EtTaouiConference}; a later work states an
 order-six classification~\cite{EtTaouiMakhlouf}.  Our rigidity instead
 concerns the sign-blind squared complementary cross-block spectrum.
 
-\section{The Golden transfer}
+\section{The order-six conference transfer}
 
 On the ordered path set \(X=\{0,\ldots,5\}\), take
 \[
@@ -233,7 +232,7 @@ postselection.
 
 The six determinant amplitudes satisfy
 \begin{equation}
-\label{eq:golden-amplitude}
+\label{eq:conference-amplitude}
  Z_T(x)=\varepsilon_T\,10\sqrt5\det K_T(x),
  \qquad \varepsilon_T\in\{\pm1\},
 \end{equation}
@@ -273,7 +272,7 @@ functions.  The intrinsic bosonic and filled-fermion quantities used below are
  =e_3(H)=\det H.
 \]
 The dagger notation keeps the statement valid for the complex port-gauge
-extension; throughout the real Golden construction it is simply transpose.
+extension; throughout the real order-six conference construction it is simply transpose.
 The first expression sums, over the ten normalized three-boson input
 occupations, the probabilities that all three bosons transfer.  Dividing by
 ten gives the uniform-input average \(B_{\mathrm{sym}}/10\).  The second
@@ -379,7 +378,7 @@ exactly the boundary at which the oriented top-exterior label disappears.
 For complex port frames, \(O(n)\) and \(SO(n)\) are replaced by \(U(n)\) and
 \(SU(n)\).  Singular values again classify the full double orbit.  On the
 invertible locus, the residual label is the phase of the oriented determinant;
-on the singular locus it disappears.  The real Golden transfer and a coherent
+on the singular locus it disappears.  The real order-six conference transfer and a coherent
 phase reference reduce this determinant-line phase to the sign studied here.
 \end{remark}
 
@@ -496,9 +495,9 @@ corollary, not a local optical observable: the mean and variance alone are
 universal, and each individual \(H_Y\) remains orientation-blind.
 \end{remark}
 
-\begin{theorem}[Golden balanced exchange benchmark]
+\begin{theorem}[Order-six balanced exchange benchmark]
 \label{thm:exchange-boundary}
-Let \(K_T(x)\) be a Golden transfer block.  At every balanced control with
+Let \(K_T(x)\) be an order-six conference transfer block.  At every balanced control with
 three entries \(+1\) and three entries \(-1\), for each of the six marked
 protocols,
 \[
@@ -576,9 +575,9 @@ real control cube.
 Since \(K_T(x)=Q_{T,-}^{\mathsf T}D_xQ_{T,+}\) is a compression of
 \(D_x\), it is a contraction on this cube.
 
-\begin{theorem}[Continuous Golden control]
+\begin{theorem}[Continuous order-six conference control]
 \label{thm:continuous-control}
-For the real Golden conference matrix and every
+For the real order-six conference matrix and every
 \(x\in[-1,1]^6\), let \(H(x)=K_T(x)^{\mathsf T}K_T(x)\).  Then
 \[
  p_1\le\frac95,\qquad p_2\le\frac{33}{25},\qquad
@@ -838,13 +837,13 @@ matrix and proves \eqref{eq:stability-upper}.
 With fixed physical port axes, a permanent is an ordinary transition amplitude,
 accessible only through a phase-sensitive multiphoton protocol; photon
 counting measures its squared modulus.  Such a value belongs to the calibrated
-apparatus rather than to the unmarked Golden operator.  Likewise, the
+apparatus rather than to the unmarked conference operator.  Likewise, the
 determinant sign belongs to the oriented amplitude: the probability
 \(F_{\mathrm{ext}}\) does not retain it.  The precursor below infers that sign
 from phase-referenced one-particle tomography; it does not measure a direct
 many-fermion phase.
 
-The necessity of balance is independent of the Golden conference matrix.
+The necessity of balance is independent of the order-six conference matrix.
 
 \begin{proposition}[Universal balance obstruction]
 \label{prop:balance-obstruction}
@@ -891,7 +890,7 @@ pairs antipodal controls and loses the overall orientation.
 
 Across the ten projective balanced cuts, the six determinant sign words have
 pairwise Hamming distance six.  Three selected signs identify a marked
-protocol once Golden membership is already known.  Five signs and magnitudes
+protocol once conference-family membership is already known.  Five signs and magnitudes
 jointly test membership and identify the protocol.  Measuring all ten signs
 supports soft matched-filter decoding; hard nearest-word decoding corrects
 two sign errors.  No relative sign word fixes the global orientation without
@@ -904,7 +903,7 @@ negative supports containing path zero:
 \]
 The first three positions \(012,013,014\) classify the six protocols after
 membership is known.  The five-cycle
-\(012,015,023,034,045\) jointly tests the common Golden magnitudes and
+\(012,015,023,034,045\) jointly tests the common conference-family magnitudes and
 classifies the protocol.  These are fixed schedules for the transported
 marking above, not protocol-dependent choices.
 
@@ -926,7 +925,7 @@ the relative classifier once that orientation is calibrated.
 
 The universal complementarity identities for determinants and permanents of
 Jabbour and Cerf~\cite{JabbourCerf} provide a useful calibrated consistency
-check.  They do not distinguish the Golden family by themselves.
+check.  They do not distinguish the conference family by themselves.
 
 \section{Photonic design limit}
 
@@ -1017,7 +1016,7 @@ gain and orientation convention and test the structural nulls
 \]
 Independent normalization of the protocols would erase these identities.
 Diagonal loss remains within the controlled family, whereas mesh error can
-move the amplitudes off the common Golden carrier.  Passing both nulls is
+move the amplitudes off the common conference carrier.  Passing both nulls is
 necessary but not sufficient; the controlled exchange spectra and calibrated
 probabilities provide the subsequent tests.
 
@@ -1061,7 +1060,7 @@ worst-case design bounds, not performance predictions.
 
 \section{Discussion}
 
-The Golden transfer separates three levels of information.  Singular values
+The order-six conference transfer separates three levels of information.  Singular values
 determine every intrinsic exchange scalar; orienting the determinant lines
 adds the sign of the top exterior amplitude; phase-referenced port frames then
 expose calibrated amplitudes such as the permanent.  Antisymmetric exchange
@@ -1070,7 +1069,7 @@ sign.  Coherent one-particle tomography can infer that sign only after the
 laboratory frames have been compiled and oriented.
 
 The exchange landscape has two independent deformations.  Continuous real
-control moves inside a fixed Golden operator and has the balanced Boolean
+control moves inside a fixed conference operator and has the balanced Boolean
 points as its unique degree-three joint optimum.  Hermitian conference phase
 moves the balanced endpoint itself: the first two moments remain fixed while
 triangle holonomy transfers weight along the exact Pareto segment.  Forgetting
@@ -1123,14 +1122,14 @@ priority.
 
 \bibitem{ClebschI}
 T.~Rudd,
-\emph{Reconstructing the Clebsch code and its golden orientation from its
-deep-hole syndrome locus},
-The Clebsch cubic: Recovering, orienting, and realizing I, preprint (2026).
+\emph{Reconstructing the Clebsch Code from Its Deep-Hole Syndrome Locus},
+\emph{Clebsch: Rigidity from Sparse Shadows} I, preprint (2026).
 
 \bibitem{ClebschIII}
 T.~Rudd,
-\emph{Golden descent and operator realizations of the Clebsch cubic},
-The Clebsch cubic: Recovering, orienting, and realizing III, preprint (2026).
+\emph{Hitchin's Icosahedral Incidence Double Cover and Operator Realizations
+of the Clebsch Cubic},
+\emph{Clebsch: Rigidity from Sparse Shadows} III, preprint (2026).
 
 \bibitem{Scheel}
 S.~Scheel,

@@ -106,7 +106,7 @@
   },
   "logical_network": {
     "balanced_direct_mesh_count_per_copy": 15,
-    "base_O_columns": "[Q_+,Q_-] in the frozen Golden pivot gauge",
+    "base_O_columns": "[Q_+,Q_-] in the frozen conference pivot gauge",
     "base_O_input_phase_signs": [
       1,
       1,
@@ -336,7 +336,7 @@
     "determinant_lipschitz_bound": "for contraction blocks, |det(K+E)-det(K)| <= 3 ||E||_2",
     "diagonal_coherent_phase": "preserves the two polynomial identities over C; destroys a literal real sign unless phase-referenced",
     "diagonal_real_loss": "preserves sum Z_T=sum Z_T^3=0 exactly but moves the target projective point",
-    "mesh_or_copy_mismatch": "breaks the shared Golden carrier; the linear residual sum Z_T is the first falsifiable null",
+    "mesh_or_copy_mismatch": "breaks the shared conference carrier; the linear residual sum Z_T is the first falsifiable null",
     "uniform_amplitude_transmission_lambda": "amplitudes scale as lambda^3 and probabilities as lambda^6"
   },
   "schema": "golden-six-mode-demonstrator-v1",

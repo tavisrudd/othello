@@ -2,12 +2,13 @@
 
 **Lane:** `clebsch`
 **Paper stream:** five-paper Clebsch series and the unnumbered conference companion
-**State:** active; all five numbered papers have sealed cold-referee ACCEPT
-verdicts and deterministic green manuscript builds. Paper III also passes the complete
+**State:** active; all five numbered papers and the unnumbered conference
+companion have sealed cold-referee ACCEPT verdicts and deterministic green
+manuscript builds. Paper III also passes the complete
 local release gate, including source-only replay of all three pinned Lean closures.
 Paper I’s trust projection and mirror export remain deferred behind C855’s
-pre-existing unmapped `prop:fifteen-class-census`. The unnumbered conference
-paper and remaining shared cross-references are next.
+pre-existing unmapped `prop:fifteen-class-census`. Shared summaries,
+cross-references, and mirror exports remain.
 
 ## Objective
 
@@ -137,3 +138,13 @@ and must not be reused as mathematical terminology.
   `e045f7de81c385d59e2aa173de668485aa5bb5e313c653160d36d4dedaacbdff`.
   Independent cold referee: MINOR, repaired through two sealed rereads, final
   ACCEPT.
+- Conference companion — *Balanced Cuts of Conference Matrices:
+  Squared-Spectrum Rigidity and Hermitian Holonomy*: reader-facing prose now
+  uses conference-matrix, order-six transfer, and explicit
+  \((\pm\sqrt5)\)-eigenspace language. The only “golden” survivors are three
+  frozen evidence-schema identifiers. The abstract leads with balanced-cut
+  rigidity, treats the interferometer as an application, and closes with the
+  arbitrary-dimensional determinant theorem. `make check` passes at 16 pages;
+  PDF SHA-256 is
+  `dd08311f15337cfa7e8c8d1c427318a69a120002f68447b825e2937e93678488`.
+  Independent cold referee: MINOR, repaired, sealed ACCEPT.

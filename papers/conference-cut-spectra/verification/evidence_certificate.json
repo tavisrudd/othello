@@ -447,12 +447,12 @@
     },
     "boson_fermion_complement": {
       "verification/evidence/boson_fermion_complement.json": {
-        "bytes": 333438,
-        "sha256": "1989fc56e7b4eaa9d8598b1b818d3027173238630ffc6561618f89346d12dbd0"
+        "bytes": 333444,
+        "sha256": "10aed9e04f1fde1ce0da7ed417cdd4a4f146b07506359cb0ad32ca9e2ead2f39"
       },
       "verification/evidence/boson_fermion_complement.py": {
-        "bytes": 18431,
-        "sha256": "316739532824a0899cc95adaf277ffd16e65438aefb7b82fd70e80bffd8ddfb7"
+        "bytes": 18441,
+        "sha256": "c4967e16db972f5a7752485355bcd308fe01333b2c8d46e1027fb86683516ea3"
       },
       "verification/evidence/boson_fermion_complement_replay.py": {
         "bytes": 6360,
@@ -461,12 +461,12 @@
     },
     "six_mode_demonstrator": {
       "verification/evidence/six_mode_demonstrator.json": {
-        "bytes": 12548,
-        "sha256": "74307d6f509a7404a8f94d068944c94bb12c706213d038f64b3e9691d86b700e"
+        "bytes": 12556,
+        "sha256": "9d178f3e6af9728ebd3e22a9792b04be6a31fccba3854a4d2fd20d4154c22aea"
       },
       "verification/evidence/six_mode_demonstrator.py": {
-        "bytes": 12998,
-        "sha256": "f8771a9b80b2708285715311a5a87ef9f3318a256615a35473000f3326c1edb3"
+        "bytes": 13006,
+        "sha256": "55fff8fd2327ef3cccd61d7c3de95e8a2956d03106930dfbcdfac7fc2904b4ab"
       },
       "verification/evidence/six_mode_demonstrator_replay.py": {
         "bytes": 2564,

@@ -15509,7 +15509,7 @@
       ]
     ],
     "representative_dependence": "changing a representative by the synthematic-total stabilizer rotates internal ports and changes Y_T",
-    "transport_rule": "Y_T(x)=Y_base(x_{p(0)},...,x_{p(5)}); for odd p the Golden eigenspaces exchange and transposition leaves the permanent unchanged"
+    "transport_rule": "Y_T(x)=Y_base(x_{p(0)},...,x_{p(5)}); for odd p the (+/-sqrt(5))-eigenspaces exchange and transposition leaves the permanent unchanged"
   },
   "sympy_version": "1.14.0",
   "trusted_boundary": {

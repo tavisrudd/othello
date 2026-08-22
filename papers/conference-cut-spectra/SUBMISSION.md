@@ -4,14 +4,14 @@
 
 The target venue remains **Physical Review A**.  The publication case is now
 the integrated theorem-first exchange landscape: the orientation boundary,
-continuous Golden control, Hermitian Pareto and squared-spectrum rigidity, and
+continuous order-six conference control, Hermitian Pareto and squared-spectrum rigidity, and
 quantitative stability, with the interferometric design limit as a concise
 operational consequence.
 
 The current submission bundle contains this record, the manuscript, the locked
-verification environment, and the paper-local evidence package. Live posting,
-assignment of the public locator, and the Clebsch forward reference remain
-publication actions outside this bundle.
+verification environment, and the paper-local evidence package. The public
+paper locator is DOI `10.5281/zenodo.21766747`; future versioning and any
+Clebsch forward-reference update are outside this bundle.
 
 ## Submission contents
 
@@ -31,8 +31,8 @@ warning.  The source and PDF hashes at this accepted checkpoint are:
 
 | file | bytes | SHA-256 |
 |---|---:|---|
-| `conference_cut_spectra.tex` | 54,334 | `e9f5a404df0fe668605030841df505282d71fd0ed77306bfe031aa12f5b84f5c` |
-| `conference_cut_spectra.pdf` | 146,796 | `f95bd29aa7216630ebd10fdfc900f40c49607dc5dfad6870174ce3d65b9633e1` |
+| `conference_cut_spectra.tex` | 54,380 | `804c182606f38da2db653460a306e58abb83a1ad57af8a2bb0efec73eb94e6bc` |
+| `conference_cut_spectra.pdf` | 146,649 | `dd08311f15337cfa7e8c8d1c427318a69a120002f68447b825e2937e93678488` |
 
 Rebuild and verify from this directory with:
 
@@ -52,7 +52,7 @@ For the generator and independent-replay subgate alone, use
 | Higher-order purity mean and variance | classical design theorem and Johnson inclusion calculus | credited to Greaves--Suda and classical inclusion machinery; the exchange interpretation is local |
 | Labelled-landscape reconstruction | Paper-III human theorem | retained only as a subordinate collective inverse-boundary remark, not a local optical observable |
 | Universal balanced-control rank obstruction and the 20+44 split | human proof | proved in the manuscript; the checker independently confirms the finite count |
-| Golden common spectrum and exchange-sector values | live Clebsch source theorem, local exact derivation, and paper-local certificate | explicit matrix, marking convention, trace identities, and characteristic polynomial are in the manuscript; the checker and frozen independent replays cross-check them |
+| Order-six conference spectrum and exchange-sector values | live Clebsch source theorem, local exact derivation, and paper-local certificate | explicit matrix, marking convention, trace identities, and characteristic polynomial are in the manuscript; the checker and frozen independent replays cross-check them |
 | Continuous-control joint optimum | human convexity, rank-one-minor, and spectral-lemma proof plus exact endpoint replay | the manuscript proves the cube reduction and equality cases; the paper-local certificate checks all 64 Boolean profiles |
 | Hermitian exchange Pareto segment | human triangle-holonomy and convexity proof plus exact formula replay | the prior conference family is credited only for attainability; no classification theorem is imported |
 | Squared-spectrum rigidity and quantitative stability | human pentagon parity, Pfaffian-square endpoint, triangle-product Lipschitz, and parity-rounding proofs | ordinary three-uniform ETF theory is explicitly distinguished; the reverse estimate is local and no constants are claimed sharp |

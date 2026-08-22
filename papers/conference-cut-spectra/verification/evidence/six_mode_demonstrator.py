@@ -173,7 +173,7 @@ def build() -> dict[str, object]:
         },
         "logical_network": {
             "formula": "U_T(x)=O_T^T diag(x) O_T; K_T is rows 3..5, columns 0..2",
-            "base_O_columns": "[Q_+,Q_-] in the frozen Golden pivot gauge",
+            "base_O_columns": "[Q_+,Q_-] in the frozen conference pivot gauge",
             "base_O_numeric": orthogonal,
             "base_O_input_phase_signs": input_signs,
             "base_O_input_to_output_givens": netlist,
@@ -224,7 +224,7 @@ def build() -> dict[str, object]:
             "diagonal_real_loss": "preserves sum Z_T=sum Z_T^3=0 exactly but moves the target projective point",
             "diagonal_coherent_phase": "preserves the two polynomial identities over C; destroys a literal real sign unless phase-referenced",
             "uniform_amplitude_transmission_lambda": "amplitudes scale as lambda^3 and probabilities as lambda^6",
-            "mesh_or_copy_mismatch": "breaks the shared Golden carrier; the linear residual sum Z_T is the first falsifiable null",
+            "mesh_or_copy_mismatch": "breaks the shared conference carrier; the linear residual sum Z_T is the first falsifiable null",
             "determinant_lipschitz_bound": "for contraction blocks, |det(K+E)-det(K)| <= 3 ||E||_2",
         },
         "simplex_decoder": simplex_schedule(),

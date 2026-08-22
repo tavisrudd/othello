@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate the exact Golden boson--fermion certificate.
+"""Generate the exact conference boson--fermion certificate.
 
 Run with the paper's pinned Python environment containing SymPy 1.14.0.
 """
@@ -325,7 +325,7 @@ def generate() -> dict:
             "determinant_formula": f"det(K_base(x))={int(determinant_ratio)} Z_base(x)/(10 sqrt(5))",
         },
         "six_protocols": {
-            "transport_rule": "Y_T(x)=Y_base(x_{p(0)},...,x_{p(5)}); for odd p the Golden eigenspaces exchange and transposition leaves the permanent unchanged",
+            "transport_rule": "Y_T(x)=Y_base(x_{p(0)},...,x_{p(5)}); for odd p the (+/-sqrt(5))-eigenspaces exchange and transposition leaves the permanent unchanged",
             "lexicographic_representatives": [list(permutation) for permutation in representatives],
             "representative_dependence": "changing a representative by the synthematic-total stabilizer rotates internal ports and changes Y_T",
         },
