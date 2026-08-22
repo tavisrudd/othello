@@ -713,8 +713,12 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   strict `m = 1` cubic contradictions are now the reviewer-facing headline
   terminals. QDM block construction, comparison, factorization, and geometric
   nullity remain explicit premises; Gamma-row and all-`m` work are untouched.
-  The current checked snapshot is 53 claims, 4 absent, 22 fragmentary, 26
-  conditional, 1 complete, and 311 reviewer terminals, of which 83 are
+  A 2026-08-21 red-team repair narrows the atomic fold from nonzero residue
+  discriminant to distinct formal exponent classes modulo the integers, makes
+  the even carrier explicit, and closes the spectral-splitting,
+  summand-separation, coefficient-ring, and grading-suspension interfaces.
+  The current checked snapshot is 54 claims, 4 absent, 23 fragmentary, 26
+  conditional, 1 complete, and 316 reviewer terminals, of which 83 are
   machinery. Earlier checkpoints below record the superseded atom-route
   assembly history. No duplicate under the shared
   `lean/TavisRuddFiniteGeom/` tree or a second Lean repository. The sources
@@ -908,6 +912,8 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   `../2026-08-20-c910-marked-frobenius-exotic-selection.md`;
   packet label-group and kernel-order report
   `../2026-08-20-c910-packet-label-group-and-kernel-orders.md`;
+  unconditional QDM referee repair
+  `../2026-08-21-c910-unconditional-qdm-referee-repair.md`;
   duad/one-factorization dictionary report
   `../2026-08-20-c910-duad-one-factorization-dictionary.md`;
   odd-label realization report
