@@ -1,6 +1,6 @@
 {
-  "title": "Golden descent and operator realizations of the Clebsch cubic",
-  "description": "This preprint determines Hitchin's incidence double cover over harmonic cubics as Q(P(H))(√(5J₀)) and turns a marked deck sign into an order-six conference operator C with C²=5I. One oriented cubic appears as triangle holonomy, a middle-exterior diagonal, a commutator Pfaffian, and a cross-golden determinant; its translates and squares recover the Joubert–Segre and Segre–Igusa constructions. Balanced exchange rigidity characterizes order six, aligned four-sets reconstruct every two-graph on at least seven vertices up to complement, and a Petersen/Gaunt realization returns the same Clebsch invariant harmonically.",
+  "title": "Hitchin's Icosahedral Incidence Double Cover and Operator Realizations of the Clebsch Cubic",
+  "description": "This preprint determines Hitchin's incidence double cover over harmonic cubics as Q(P(H))(√(5J₀)) and turns a marked deck sign into an order-six conference operator C with C²=5I. One oriented cubic appears as triangle holonomy, a middle-exterior diagonal, a commutator Pfaffian, and an oriented spectral-block determinant; its translates and squares recover the Joubert–Segre and Segre–Igusa constructions. Balanced exchange rigidity characterizes order six, aligned four-sets reconstruct every two-graph on at least seven vertices up to complement, and a Petersen/Gaunt realization returns the same Clebsch invariant harmonically.",
   "creators": [
     {
       "name": "Rudd, Tavis",

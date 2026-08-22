@@ -18,12 +18,12 @@ LABEL_RE = re.compile(r"\\label\{([^}]+)\}")
 INPUT_RE = re.compile(r"\\input\{([^}]+)\}")
 EXPECTED_LABELS = (
     "thm:arithmetic-main",
-    "thm:orientation-source",
-    "prop:golden-fibre",
+    "thm:marked-sheet-comparison",
+    "prop:incidence-fibre",
     "prop:spinor-specialization",
     "thm:operator-shadows",
     "thm:triangle-pfaffian-recognition",
-    "thm:golden-equality-rigidity",
+    "thm:conference-equality-rigidity",
     "prop:nonsingular-complementary-minors",
     "thm:balanced-exchange-rigidity",
     "thm:aligned-faithfulness",

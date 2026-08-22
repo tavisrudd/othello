@@ -46,8 +46,8 @@ are the meeting point of the first two questions.
   \(z^2=5J_0\)};
 \node[box,right=of cover] (datum) {marked bridge datum \(\mathfrak m\)\\
   chart lift, outer and Petersen labels};
-\node[wide,below=15mm of $(cover)!0.5!(datum)$] (mark) {chosen golden sign\\
-  with its compatible labels};
+\node[wide,below=15mm of $(cover)!0.5!(datum)$] (mark) {chosen sheet and sign\\
+  of the normalized odd generator};
 \node[box,below left=of mark] (six) {six ordered axes\\
   \(C^2=5I\), oriented cubic \(Z_{\mathfrak m}\)};
 \node[box,below right=of mark] (ten) {ten labelled face axes\\
@@ -75,12 +75,13 @@ between their ambient harmonic spaces.}
 \paragraph{First-pass route.}
 The main argument runs through the incidence cover in
 Section~\ref{sec:cover}, its marked pullback in
-Section~\ref{sec:orientation-source}, the golden fibre and exchanger in
-Sections~\ref{sec:golden-fibre} and~\ref{sec:golden-exchanger}, the four operator shadows in
+Section~\ref{sec:marked-sheet-transport}, the incidence fibre and configuration
+exchanger in Sections~\ref{sec:incidence-fibre} and
+Section~\ref{sec:configuration-exchanger}, the four operator shadows in
 Section~\ref{sec:four-shadows}, and the harmonic return in
 Section~\ref{sec:harmonic}.  The finite-field specialization in
 Section~\ref{sec:finite-field-specialization} and the exchange-spectrum and
-reconstruction subsections of Section~\ref{sec:golden-operator} are independent
+reconstruction subsections of Section~\ref{sec:conference-operator} are independent
 consequences and may be skipped on a first reading.
 
 Hitchin defines a real invariant sextic from the characteristic polynomial
@@ -150,7 +151,7 @@ Theorem~\ref{thm:arithmetic-main}.
 The choice can be retained globally after normalizing the pullback to the
 Clebsch chart, but its comparison with the conference and harmonic signs is
 relative to a marking.  A \emph{marked bridge datum} \(\mathfrak m\) consists
-of an ordering of the six golden projective axes, the five plane triples
+of an ordering of the six icosahedral projective axes, the five plane triples
 labelled so that \(q_1=xyz\) and \(\sum q_i=0\), and the resulting normalized
 linear lift
 \[
@@ -170,17 +171,17 @@ It is translation-invariant and hence defines
  Z_{\mathfrak m}\in\operatorname{Sym}^3
  \bigl((\Q^6/\Q\mathbf1)^*\bigr).
 \]
-Write \([C_{\mathfrak m},Z_{\mathfrak m}]_{\rm or}\) for this marked
+Write \(\bigl(C_{\mathfrak m},Z_{\mathfrak m}\bigr)\) for this marked
 source.  Changing the auxiliary representatives by \(a_i\mapsto d_i a_i\)
 sends \(C_{\mathfrak m}\) to \(DC_{\mathfrak m}D\) and fixes
 \(Z_{\mathfrak m}\).  The opposite source is represented by
 \((-C_{\mathfrak m},-Z_{\mathfrak m})\).  The sign of the cubic generator
-is retained, so the brackets are not projective notation.  Relabelling is
+is retained, so the ordered pair is not projective notation.  Relabelling is
 equivariant only when all labelled objects are transported together; it is
 not quotiented silently.
 
-\begin{proposition}[Relative marked orientation bridge]
-\label{thm:orientation-source}
+\begin{proposition}[Marked comparison of the two sheets]
+\label{thm:marked-sheet-comparison}
 Fix a marked bridge datum \(\mathfrak m\).  Let
 \(B=\mathbf P(V_E)\), where \(E=\Q(\sqrt5)\), and pull Hitchin's
 incidence normalization back along \(\iota_t:B\to\mathbf P(H_E)\).
@@ -206,9 +207,9 @@ On the Clebsch cubic the unnormalized branches meet, while the normalization
 remains disjoint.
 
 Relative to \(\mathfrak m\), equip \(B_+\) with the source
-\([C_{\mathfrak m},Z_{\mathfrak m}]_{\rm or}\) and equip \(B_-\) with its
-deck-opposite.  At \([xyz]\), the golden
-exchanger identifies this opposite with the conjugate configuration and
+\(\bigl(C_{\mathfrak m},Z_{\mathfrak m}\bigr)\) and equip \(B_-\) with its
+deck-opposite.  At \([xyz]\), the configuration exchanger identifies this
+opposite with the Galois-conjugate configuration and
 the representative
 \((-C_{\mathfrak m},-Z_{\mathfrak m})\).  Under the marked primitive
 pair-sum map
@@ -227,8 +228,8 @@ to \(\mathfrak m\); it does not identify their polynomial domains.
 
 Theorem~\ref{thm:operator-shadows} is the operator stage on the main route.
 The six outer translates of \(Z_{\mathfrak m}\) are simultaneously triangle
-cubics, middle-exterior diagonals, commutator Pfaffians, and cross-golden
-determinants.  Their Joubert coordinates land on the Segre cubic, whose
+cubics, middle-exterior diagonals, commutator Pfaffians, and oriented
+spectral-block determinants.  Their Joubert coordinates land on the Segre cubic, whose
 coordinate sections are diagonal Clebsch cubic surfaces; centered squaring is
 the classical Segre--Igusa polar map
 \cite[Sections~2.1--2.2]{HMSVOuter}.  The marked datum defines this operator
@@ -239,9 +240,10 @@ Theorem~\ref{thm:triangle-pfaffian-recognition} does.  Among real symmetric
 zero-diagonal matrices with nonzero off-diagonal entries, nonzero
 proportionality of the commutator Pfaffian to the triangle cubic already
 forces order six and a
-scalar square, and pins the equal-modulus case to the conference class with
-the sign recording orientation.  Theorem~\ref{thm:golden-equality-rigidity}
-adds that the equality is rigid at either oriented golden representative: the
+scalar square, and pins the equal-modulus case to the conference class, with
+the sign distinguishing the chosen cubic form from its negative.
+Theorem~\ref{thm:conference-equality-rigidity}
+adds that the equality is rigid at either chosen conference representative: the
 only nearby solutions are rescalings.
 Proposition~\ref{prop:nonsingular-complementary-minors} removes the cubic
 identity from the sign locus altogether, replacing it by the nondegeneracy of
@@ -251,9 +253,9 @@ The proof follows the language changes in
 Figure~\ref{fig:source-shadow-return}.  First, the rational incidence model and
 its canonical classes give a quadratic field branched exactly along the
 reduced sextic; the complete etale fibre at \([xyz]\) then determines its
-square class \([5]\).  Next, Proposition~\ref{thm:orientation-source}
+square class \([5]\).  Next, Proposition~\ref{thm:marked-sheet-comparison}
 normalizes the chart pullback and, relative to the stated marking and lift,
-follows deck exchange through the golden conference source and Petersen
+follows deck exchange through the marked conference source and Petersen
 pair-sum map.  Finally, Theorem~\ref{thm:operator-shadows} identifies the four
 operator formulas, and Theorem~\ref{thm:harmonic-main} identifies the Petersen
 coefficient module and computes the invariant cubic by one exact
@@ -303,7 +305,7 @@ The first factor is the universal \((6,6,6)\) Gaunt coupling
 \(\bigl(\begin{smallmatrix}6&6&6\\0&0&0\end{smallmatrix}\bigr)^2\);
 the second is the restriction scalar of the marked Petersen embedding.
 Thus the prime \(11\) in the denominator belongs to the universal angular
-momentum normalization, not to the golden descent.  The relative comparison
+momentum normalization, not to the incidence-cover twist.  The relative comparison
 uses their four-dimensional \(A_5\)-modules and the invariant polynomial
 \(\sigma_3\).
 

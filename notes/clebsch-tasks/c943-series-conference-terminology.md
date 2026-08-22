@@ -2,10 +2,11 @@
 
 **Lane:** `clebsch`
 **Paper stream:** five-paper Clebsch series and the unnumbered conference companion
-**State:** active; Paper I’s terminology revision and deterministic PDFs have
-a sealed cold-referee ACCEPT. Its trust projection and mirror export remain
-deferred behind C855’s pre-existing unmapped `prop:fifteen-class-census`;
-Paper III is next.
+**State:** active; Papers I and III have sealed cold-referee ACCEPT verdicts
+and deterministic green builds. Paper III also passes the complete local
+release gate, including source-only replay of all three pinned Lean closures.
+Paper I’s trust projection and mirror export remain deferred behind C855’s
+pre-existing unmapped `prop:fifteen-class-census`. Paper V is next.
 
 ## Objective
 
@@ -53,7 +54,7 @@ private identifiers not exposed by a paper are outside scope.
    Hermitian Holonomy*; “squared-spectrum” is the exact invariant.
 4. Keep Paper V’s title.
 5. Rename the shared Paper III coda map entry to “incidence cover / conference
-   cubic” and its verse to “through paired veils, one sign persists”.
+   cubic” and its verse to “through paired veils, the two sheets exchange”.
 
 ## Execution and acceptance
 
@@ -86,3 +87,14 @@ and must not be reused as mathematical terminology.
   zero warnings. Independent cold referee: MINOR, repaired, sealed ACCEPT.
   The statement extractor is independently blocked by C855’s already-present
   theorem `prop:fifteen-class-census`, which is absent from its claim map.
+- Paper III — *Hitchin’s Icosahedral Incidence Double Cover and Operator
+  Realizations of the Clebsch Cubic*: mathematical prose now distinguishes
+  incidence deck exchange, Galois conjugation, the configuration exchanger,
+  global negation, and determinant-line orientation explicitly. The only
+  “golden” survivors in the manuscript are the literal keyword “golden ratio”
+  and the exact frozen Lean gate name `ClebschGoldenReturn`. The renamed
+  section `03-marked-sheet-transport.tex` states the marked comparison
+  directly. Deterministic PDF SHA-256 is
+  `245f7274caa89141669db018a2cc10b0c5716acf37270ba476134c33351760db`;
+  the complete release gate passes. Independent cold referee: MINOR, repaired
+  through two sealed rereads, final ACCEPT.

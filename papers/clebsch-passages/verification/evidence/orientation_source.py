@@ -16,7 +16,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 OUTPUT = HERE / "orientation_source.json"
 HARMONIC = HERE / "harmonic_clebsch.json"
-OPERATOR_SOURCE = HERE.parents[1] / "sections" / "05-golden-operator.tex"
+OPERATOR_SOURCE = HERE.parents[1] / "sections" / "05-conference-operator.tex"
 
 
 @dataclass(frozen=True)

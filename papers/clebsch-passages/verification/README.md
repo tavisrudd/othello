@@ -45,7 +45,7 @@ python3 papers/clebsch-passages/verification/evidence/arithmetic_cover_replay.py
 sha256sum -c papers/clebsch-passages/verification/evidence/arithmetic_cover.sha256
 ```
 
-It checks the canonical-degree and branch-cycle bookkeeping and the explicit golden configurations over
+It checks the canonical-degree and branch-cycle bookkeeping and the explicit icosahedral configurations over
 \(\mathbf Q[t]/(t^2-t-1)\), all twenty three-point determinants, the
 conjugating projectivity, its reduction modulo \(11\), and the reflection
 norm product.  It contains no Mathieu, Hadamard, matching, or external
@@ -60,7 +60,7 @@ sha256sum -c papers/clebsch-passages/verification/evidence/orientation_source.sh
 ```
 
 For the displayed marking, it checks the scalar factorization of the pulled-back
-cover, the conference square, the exact golden exchanger, the reversal of all
+cover, the conference square, the exact configuration exchanger, the reversal of all
 triangle signs, all six outer coefficient words against the manuscript table,
 and the primitive Petersen pair-sum identities.  It does not
 prove that the incidence sheet determines that marking or the chart lift.
@@ -89,7 +89,7 @@ in the text and in Lean.
 The aggregate gate does not compare either theorem with a finite matching
 tensor.  It also does not turn the abstract integral equation into a global
 incidence model at \(11\).  The mod-\(11\) claim is the exact reduction of
-the displayed golden fibre and exchanger; the geometric incidence comparison
+the displayed incidence fibre over \([xyz]\) and its exchanger; the geometric incidence comparison
 remains over an unspecified cofinite base.
 
 The manifest states `formal_coverage: partial mechanisms; no complete
@@ -102,7 +102,7 @@ python3 verification/verify_passages_lean.py \
 
 `passages_formal.json` maps each of the nine manuscript rows to exact Lean
 declarations and records the missing geometric hypotheses.  Its gate proves
-the abstract pinching, conductor, involution, golden-character, tight-frame,
+the abstract pinching, conductor, involution, quadratic-character, tight-frame,
 switching, Petersen, fixed-line, and normalized aligned-design mechanisms.
 For aligned designs it checks the two-cut classifier by kernel decision and
 proves the third-point disambiguation, overlap consistency, signing transport,
@@ -127,9 +127,9 @@ python3 verification/verify_passages_lean.py \
 
 The replay program never starts Lean or Lake itself.
 
-The operator consolidation uses the expanded golden-return theorem package as
+The operator consolidation uses the expanded `ClebschGoldenReturn` theorem package as
 a second pinned formal map.  It covers the conference, triangle, two-graph,
-middle-exterior, support-recovery, golden-descent, fixed-conference
+middle-exterior, support-recovery, incidence-cover, fixed-conference
 commutator-Pfaffian, order-six skew determinant-square, outer Segre-relation,
 cut-block, and order-six signed-triangle mechanisms.  The determinant square is proved for every
 order-six skew-symmetric matrix with vanishing diagonal over a commutative
@@ -174,7 +174,7 @@ the spectrum read as a set is proved.
 
 The Ramsey exclusion
 behind exchange rigidity, the classical inputs to the aligned-design
-faithfulness argument, outer-family coherence, the cross-golden determinant
+faithfulness argument, outer-family coherence, the oriented spectral-block determinant
 comparison, the identification of the six translates with the classical Joubert
 coordinates, and the Segre--Igusa polar map remain human proof boundaries.  The
 first of those is a boundary of the manuscript's *printed proof*, not a gap in

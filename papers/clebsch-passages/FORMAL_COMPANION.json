@@ -3,7 +3,7 @@
     {
       "axiom_audit": "trust/ClebschPassagesAxiomAudit.lean",
       "commit": "575cf3e991168fb96eb24c318263c5d0552aa531",
-      "coverage": "the structural formal companion for this paper; this commit does not carry the supplemental golden-return sources, which are not yet published",
+      "coverage": "the structural formal companion for this paper; this commit does not carry the supplemental ClebschGoldenReturn sources, which are not yet published",
       "gate": "RelativeConicArcs.Gates.ClebschPassages",
       "manifest": "trust/manifests/clebsch_passages.json",
       "repository": "https://github.com/tavisrudd/finitegeom",

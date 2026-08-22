@@ -25,7 +25,7 @@
     {
       "clauses": [
         "complete reduced local fibre over xyz",
-        "golden six-set metric and six-arc properties",
+        "icosahedral six-set metric and six-arc properties",
         "uniform finite-field spinor class [2] and its nontrivial mod-11 specialization"
       ],
       "evidence": [
@@ -48,7 +48,7 @@
       "status": "certified",
       "theorem_labels": [
         "thm:arithmetic-main",
-        "prop:golden-fibre",
+        "prop:incidence-fibre",
         "prop:spinor-specialization"
       ]
     },
@@ -56,13 +56,13 @@
       "clauses": [
         "normalization of the pulled-back incidence cover into two chart components",
         "maximal distinct-configuration locus D(sigma3)",
-        "relative marked source convention and its golden-fibre identification with conference and triangle-cubic reversal",
+        "relative marked source convention and its incidence-fibre identification with conference and triangle-cubic reversal",
         "deck exchange preserves the unmarked generated quadratic algebra while reversing its marked generator",
         "label-compatible primitive Petersen comparison and relative harmonic sign transport",
         "unspecified geometric integral localization"
       ],
       "evidence": [
-        "sections/03-orientation-source.tex",
+        "sections/03-marked-sheet-transport.tex",
         "verification/evidence/orientation_source.py",
         "verification/evidence/orientation_source_replay.py",
         "verification/evidence/orientation_source.json",
@@ -76,24 +76,24 @@
         "certificate",
         "independent-replay"
       ],
-      "proof_role": "split-quadratic pinching, tight-frame conference identities, and an explicit relative-marking proof using Hitchin's branch and chart theorems, with a golden-fibre equivariance witness and exact regression audit",
-      "statement": "The normalized pullback of Hitchin's incidence cover to the golden Clebsch chart is the disjoint union of two normal chart components, while the unnormalized branches are distinct exactly on D(sigma3). After an ordered golden realization, normalized chart lift, and compatible plane-triple and Petersen labels are supplied, the selected component is assigned [C_m,Z_m]_or and the other its deck-opposite; the golden exchanger identifies the opposite with (-C_m,-Z_m) at xyz, preserves the unmarked generated algebra Q[C_m]=Q[-C_m], and reverses its marked generator; the marked primitive pair-sum map transports this relative sign to the degree-six Gaunt cubic. The incidence sheet alone is not asserted to determine the marking or lift.",
+      "proof_role": "split-quadratic pinching, tight-frame conference identities, and an explicit relative-marking proof using Hitchin's branch and chart theorems, with an incidence-fibre equivariance witness and exact regression audit",
+      "statement": "The normalized pullback of Hitchin's incidence cover to the icosahedral Clebsch chart is the disjoint union of two normal chart components, while the unnormalized branches are distinct exactly on D(sigma3). After a marked icosahedral realization, normalized chart lift, and compatible plane-triple and Petersen labels are supplied, the selected component is assigned [C_m,Z_m]_or and the other its deck-opposite; the configuration exchanger identifies the opposite with (-C_m,-Z_m) at xyz, preserves the unmarked generated algebra Q[C_m]=Q[-C_m], and reverses its marked generator; the marked primitive pair-sum map transports this relative sign to the degree-six Gaunt cubic. The incidence sheet alone is not asserted to determine the marking or lift.",
       "status": "certified",
       "theorem_labels": [
-        "thm:orientation-source"
+        "thm:marked-sheet-comparison"
       ]
     },
     {
       "clauses": [
         "conference square, triangle holonomy, switching reconstruction, and middle-exterior diagonal",
         "commutator Pfaffian and determinant-square identities",
-        "cross-golden determinant description and determinant-line norm over Q(sqrt(5))",
+        "oriented spectral-block determinant description and determinant-line norm over Q(sqrt(5))",
         "nondegenerate real triangle-Pfaffian proportionality forces order six and a scalar square, with exact sign-locus recognition",
-        "local rigidity of the oriented equality at the golden representative: Jacobian rank fourteen with kernel the scaling line",
+        "local rigidity of the oriented equality at the conference representative: Jacobian rank fourteen with kernel the scaling line",
         "sign-locus nondegeneracy characterization: all twenty complementary three-by-three minors nonzero iff the square is five times the identity"
       ],
       "evidence": [
-        "sections/05-golden-operator.tex",
+        "sections/05-conference-operator.tex",
         "verification/golden_return_formal.json",
         "verification/golden_return_axioms.txt",
         "verification/four_shadow_formal.json",
@@ -105,13 +105,13 @@
         "classical-input",
         "formal-partial"
       ],
-      "proof_role": "tight-frame recovery of the classical Bussemaker--Mathon--Seidel order-six switching normal form, matching expansion of the Pfaffian, Hodge middle-exterior comparison, and the golden eigenspace block decomposition.  The scalar-square implication and sign-matrix converse are formalized in the four-shadow gate; the manuscript proves the real positivity statement by translation invariance of the triangle cubic: its tx_i x_j coefficients force A^2 diagonal, and commutation makes that diagonal scalar; equal absolute values then recover the pentagon gauge.  The coherence of the outer six-family and the cross-golden comparison are formalized: each of the six relabelled conference matrices is symmetric with vanishing diagonal, unit off-diagonal squares and square 5*I, the six sign words are distinct and each obeys the four-point identity, and over a commutative ring with two invertible and an invertible square root s of five the commutator of the diagonal matrix with the conference matrix is 2s times the antisymmetric part of the cross-golden block, whence Z^2 = 500 det(B - B^T) and, exactly, Z = 10 s Pf(B - B^T), an identity unchanged by using the other square root of five.  The determinant of the induced map between the two spectral spaces is a determinant-line element; after compatible orientations, the odd-rank contraction is minus its ordinary quadratic field norm.  The rigidity statement is proved in the manuscript by Euler homogeneity, the multilinear difference rule for the twenty equations, equivariance under the order-sixty stabilizer, a fixed-vector reduction to a five-dimensional space, the displayed reduced table with its minus-five minor, and the constant-rank theorem; its table is certified against the manuscript's own representative and sign convention by a dated evidence bundle retained in the source archive, and the rank statement itself is not formalized.  The sign-locus characterization is proved in the manuscript from two elementary facts about three-by-three sign matrices and the identity relating a complementary block's row inner products to the square, with an exhaustive order-six census as the independent check.",
-      "statement": "For a fully marked golden presentation, the triangle cubic, the diagonal of the middle exterior return, the commutator Pfaffian, and the determinant of the cross-golden block define the same oriented cubic, with Pf[D_x,C_T]=4Z_T, det[D_x,C_T]=16Z_T^2=-8000 N(det(B_T)), and Z_T=plus-or-minus 10 sqrt(5) det(B_T). Conversely, for a real symmetric even-order zero-diagonal matrix with nonzero off-diagonal entries, nonzero proportionality of its commutator Pfaffian and triangle cubic forces order six and A^2=lambda I; on the equal-absolute-value locus this is exactly the pentagon conference class, with the two proportionality signs recording relative orientation. The equality is locally rigid at either oriented golden representative, its Jacobian having rank fourteen with kernel the scaling line; and on the sign locus the cubic identity may be replaced by the nondegeneracy of all twenty complementary three-by-three minors, which forces the same class and makes the proportionality constant plus or minus four the only value available.",
+      "proof_role": "tight-frame recovery of the classical Bussemaker--Mathon--Seidel order-six switching normal form, matching expansion of the Pfaffian, Hodge middle-exterior comparison, and the (plus-or-minus sqrt(5))-eigenspace block decomposition.  The scalar-square implication and sign-matrix converse are formalized in the four-shadow gate; the manuscript proves the real positivity statement by translation invariance of the triangle cubic: its tx_i x_j coefficients force A^2 diagonal, and commutation makes that diagonal scalar; equal absolute values then recover the pentagon gauge.  The coherence of the outer six-family and the spectral-block comparison are formalized: each of the six relabelled conference matrices is symmetric with vanishing diagonal, unit off-diagonal squares and square 5*I, the six sign words are distinct and each obeys the four-point identity, and over a commutative ring with two invertible and an invertible square root s of five the commutator of the diagonal matrix with the conference matrix is 2s times the antisymmetric part of the spectral block, whence Z^2 = 500 det(B - B^T) and, exactly, Z = 10 s Pf(B - B^T), an identity unchanged by using the other square root of five.  The determinant of the induced map between the two spectral spaces is a determinant-line element; after compatible orientations, the odd-rank contraction is minus its ordinary quadratic field norm.  The rigidity statement is proved in the manuscript by Euler homogeneity, the multilinear difference rule for the twenty equations, equivariance under the order-sixty stabilizer, a fixed-vector reduction to a five-dimensional space, the displayed reduced table with its minus-five minor, and the constant-rank theorem; its table is certified against the manuscript's own representative and sign convention by a dated evidence bundle retained in the source archive, and the rank statement itself is not formalized.  The sign-locus characterization is proved in the manuscript from two elementary facts about three-by-three sign matrices and the identity relating a complementary block's row inner products to the square, with an exhaustive order-six census as the independent check.",
+      "statement": "For a fully marked conference presentation, the triangle cubic, the diagonal of the middle exterior return, the commutator Pfaffian, and the oriented spectral-block determinant define the same oriented cubic, with Pf[D_x,C_T]=4Z_T, det[D_x,C_T]=16Z_T^2=-8000 N(det(B_T)), and Z_T=plus-or-minus 10 sqrt(5) det(B_T). Conversely, for a real symmetric even-order zero-diagonal matrix with nonzero off-diagonal entries, nonzero proportionality of its commutator Pfaffian and triangle cubic forces order six and A^2=lambda I; on the equal-absolute-value locus this is exactly the pentagon conference class, with the two proportionality signs recording relative orientation. The equality is locally rigid at either oriented conference representative, its Jacobian having rank fourteen with kernel the scaling line; and on the sign locus the cubic identity may be replaced by the nondegeneracy of all twenty complementary three-by-three minors, which forces the same class and makes the proportionality constant plus or minus four the only value available.",
       "status": "proven",
       "theorem_labels": [
         "thm:operator-shadows",
         "thm:triangle-pfaffian-recognition",
-        "thm:golden-equality-rigidity",
+        "thm:conference-equality-rigidity",
         "prop:nonsingular-complementary-minors"
       ]
     },
@@ -122,7 +122,7 @@
         "centered-determinant Segre--Igusa polar map"
       ],
       "evidence": [
-        "sections/05-golden-operator.tex",
+        "sections/05-conference-operator.tex",
         "verification/golden_return_formal.json",
         "verification/golden_return_axioms.txt"
       ],
@@ -147,7 +147,7 @@
         "credited aligned-design mean, variance, and order-ten purity split"
       ],
       "evidence": [
-        "sections/05-golden-operator.tex",
+        "sections/05-conference-operator.tex",
         "verification/golden_return_formal.json",
         "verification/golden_return_axioms.txt"
       ],
@@ -157,7 +157,7 @@
         "classical-input",
         "formal-partial"
       ],
-      "proof_role": "commutator and cross-block calculation, signed closed-four-walk count, and the support-sorted fourth trace.  The supplemental golden-return gate now covers the whole exchange mechanism in Lean: the cut-block identity, the support-sorted fourth trace, the one-element swap descent for inclusion sums, the whole-matrix weight pin (N-3)w = -24, cut dependence of the fourth trace and of the aligned four-set count, both exchange moments, the order-six characteristic polynomial, the order-four exclusion, the existence of both spectral isometries over the reals, the eigenvalue reading of the spectrum, and the transport of all of it from a subset of one label set to the cut that subset defines.  The manuscript's printed proof instead closes the rigidity direction by the characteristic-zero inclusion-rank descent, a switching normalization, and the Ramsey equality R(3,3)=6, whose two bounds are kernel-checked though no Lean declaration states the equality itself; the Lean therefore certifies the theorem's conclusion by a different route than the one printed, and the manuscript integration that would align them has not been made.  Greaves--Suda and classical Johnson-scheme machinery supply the credited design consequences.",
+      "proof_role": "commutator and cross-block calculation, signed closed-four-walk count, and the support-sorted fourth trace.  The supplemental `ClebschGoldenReturn` gate now covers the whole exchange mechanism in Lean: the cut-block identity, the support-sorted fourth trace, the one-element swap descent for inclusion sums, the whole-matrix weight pin (N-3)w = -24, cut dependence of the fourth trace and of the aligned four-set count, both exchange moments, the order-six characteristic polynomial, the order-four exclusion, the existence of both spectral isometries over the reals, the eigenvalue reading of the spectrum, and the transport of all of it from a subset of one label set to the cut that subset defines.  The manuscript's printed proof instead closes the rigidity direction by the characteristic-zero inclusion-rank descent, a switching normalization, and the Ramsey equality R(3,3)=6, whose two bounds are kernel-checked though no Lean declaration states the equality itself; the Lean therefore certifies the theorem's conclusion by a different route than the one printed, and the manuscript integration that would align them has not been made.  Greaves--Suda and classical Johnson-scheme machinery supply the credited design consequences.",
       "statement": "For a symmetric conference matrix of order 2d, the balanced exchange spectrum is q inverse times the cross-block Gram spectrum and is independent of the balanced half exactly when d is at most 3; order six is the unique nontrivial realized case and has spectrum 1/5, 4/5, 4/5. In higher orders the second exchange moment is an affine aligned-four-set count whose ensemble mean and variance follow from the classical determinant-minus-three 3-design.",
       "status": "proven",
       "theorem_labels": [
@@ -172,7 +172,7 @@
         "single triangle-product orientation calibration"
       ],
       "evidence": [
-        "sections/05-golden-operator.tex",
+        "sections/05-conference-operator.tex",
         "verification/passages_formal.json",
         "verification/passages_axioms.txt",
         "verification/golden_return_formal.json",
@@ -251,7 +251,7 @@
     }
   ],
   "formal_coverage": {
-    "boundary": "Lean proves the abstract pinching, involution, conductor, golden-character, tight-frame, switching, triangle, rooted two-graph reconstruction, aligned-design faithfulness up to a global complement bit for every two-graph on a finite point set with at least seven points, signing transport, principal-four determinant identity, query polynomial, both bounds behind the triangle Ramsey equality on six labelled points - the six-point pigeonhole and the pentagon colouring that shows five do not suffice - and the aligned anchor they produce, middle-exterior, fixed-conference commutator-Pfaffian, order-six signed-triangle square, support-recovery, Petersen-eigenspace, fixed-line, and scalar-normalization mechanisms. It does not prove the global Hitchin incidence and Stein identifications, the scheme-theoretic chart correspondence, the geometric golden-fibre identification, coherence of the outer six-family, the higher-order inclusion/Ramsey exchange-rigidity argument, the identification of the marked determinant-minus-three design of a conference matrix with the aligned family, the cross-golden determinant comparison, the classical Joubert--Segre--Igusa identifications, face-axis geometry and the spherical addition theorem, or the raw degree-six moment. No complete geometric manuscript row is claimed. Every audited terminal of all three gates depends only on propext, Classical.choice and Quot.sound; no compiled evaluation is used anywhere in their pinned sources, and each replay refuses it.",
+    "boundary": "Lean proves the abstract pinching, involution, conductor, quadratic-character, tight-frame, switching, triangle, rooted two-graph reconstruction, aligned-design faithfulness up to a global complement bit for every two-graph on a finite point set with at least seven points, signing transport, principal-four determinant identity, query polynomial, both bounds behind the triangle Ramsey equality on six labelled points - the six-point pigeonhole and the pentagon colouring that shows five do not suffice - and the aligned anchor they produce, middle-exterior, fixed-conference commutator-Pfaffian, order-six signed-triangle square, support-recovery, Petersen-eigenspace, fixed-line, and scalar-normalization mechanisms. It does not prove the global Hitchin incidence and Stein identifications, the scheme-theoretic chart correspondence, the geometric identification of the incidence fibre over [xyz], coherence of the outer six-family, the higher-order inclusion/Ramsey exchange-rigidity argument, the identification of the marked determinant-minus-three design of a conference matrix with the aligned family, the oriented spectral-block determinant comparison, the classical Joubert--Segre--Igusa identifications, face-axis geometry and the spherical addition theorem, or the raw degree-six moment. No complete geometric manuscript row is claimed. Every audited terminal of all three gates depends only on propext, Classical.choice and Quot.sound; no compiled evaluation is used anywhere in their pinned sources, and each replay refuses it.",
     "gate": "RelativeConicArcs.Gates.ClebschPassages",
     "map": "verification/passages_formal.json",
     "status": "partial mechanisms; no complete manuscript row claimed",
@@ -261,7 +261,7 @@
   "local_release_ready": true,
   "schema": "clebsch-passages-trust-v4",
   "submission_blockers": [
-    "immutable finitegeom release containing the supplemental golden-return sources"
+    "immutable finitegeom release containing the supplemental ClebschGoldenReturn sources"
   ],
   "submission_ready": false
 }

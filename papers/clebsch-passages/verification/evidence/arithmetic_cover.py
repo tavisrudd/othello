@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Exact certificate for the displayed golden fibre and its exchanger."""
+"""Exact certificate for the displayed incidence fibre and its exchanger."""
 
 from __future__ import annotations
 

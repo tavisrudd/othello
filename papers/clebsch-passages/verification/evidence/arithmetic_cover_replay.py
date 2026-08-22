@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Independent modular replay of the golden exchanger and spinor class."""
+"""Independent modular replay of the configuration exchanger and spinor class."""
 
 from __future__ import annotations
 

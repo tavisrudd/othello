@@ -1,18 +1,18 @@
 {
   "schema": "clebsch-orientation-statement-identity-v3",
   "main_source": "clebsch_passages.tex",
-  "main_source_sha256": "dceee770abd7d8687d6df1e57c6ecd61e508fe4261b076fec62c652b8d99b508",
+  "main_source_sha256": "6040015baff61ce343c05dc1c9bcbb9fae492b33235b5b59c9704526964332f5",
   "section_sha256": {
-    "sections/01-introduction.tex": "9569835099d13c22beed2aa3a24315aedd690ca9e51bd555adc56abb73b867ac",
-    "sections/02-orientation-cover.tex": "c714b229d1948509c133b28d9cc90b94166eb2cf37e21cfba5fcc694abcbe3c1",
-    "sections/03-orientation-source.tex": "2ea744bfb964840e48533b0320db20128c43e6121cdd10469c71ed93f6161201",
-    "sections/04-arithmetic-specialization.tex": "4ae82f831aafb77c2ac7e1114df559b2c711eae79e82363361e5576368f260f4",
-    "sections/05-golden-operator.tex": "2ae3f581b522521fa138e53be8676b2adfd356c5a36e80d4a477648c8a172aa5",
-    "sections/05-harmonic-realization.tex": "f019d20c504ddd04b670abc39e69fd9790cf351af4419c138efb9967fcba04a1",
-    "sections/09-conclusion.tex": "49f1b9c39751300cb5565af28cd2eca35629068caa3ee7207eaabbd1c313dcb5",
-    "sections/09-programme-coda.tex": "1206d26f844fd17d717d18cfe0ef542a046fec9aebe2c5ed6f0d8bb8b63605f8",
-    "sections/07-marking-ambiguities.tex": "682f8c4189bb48c1b6127f3a06b668425243520532ce4ac0909021e22e9e70e0",
-    "sections/08-verification.tex": "81fbce6119705d3d63db38d70955185a246748503491fff15f00f18a385a11d0",
+    "sections/01-introduction.tex": "76b079b6fc3e23ad099b6914053dda36e560a59d34c0b7f3b2a614e6286e3936",
+    "sections/02-orientation-cover.tex": "83f0383011b14c71538be61c30ea0e3e8b46ee8ed12c6a13b984de93d3c16b96",
+    "sections/03-marked-sheet-transport.tex": "e79fdd64051a67f0ec8b04a29fd94cfe1d892b019518e71dc6ff2d0bf4271df9",
+    "sections/04-arithmetic-specialization.tex": "f7d9d022fdcd02ec9aefc7987675c30eef6a12512ca09797ddf7460ac0aa9a26",
+    "sections/05-conference-operator.tex": "ce1fac1b7f291520fc5c51fb9a39f085c6f26a8501968edc77a90f8aceac9bfb",
+    "sections/05-harmonic-realization.tex": "ff31d4c161f152b306c07da6a70a5b355097dc9e777f90b4faacce555effc67b",
+    "sections/09-conclusion.tex": "a01599ed6befd606995f0f7942ceb734bd3cf1400c8832d441924eee7a649efc",
+    "sections/09-programme-coda.tex": "ee6ee7213812680c4343c9344d2f2538f612388b91e156becd5204b907314528",
+    "sections/07-marking-ambiguities.tex": "82766baa93ad896b1d9f60caedb26ee0f60d9077190adad9ff5201d690091d65",
+    "sections/08-verification.tex": "d54e82c2166835ce658501b5c33c362048fb08be06c3eaf1f50750106f07be60",
     "sections/10-references.tex": "dbedb7c5dc41fbb3608c27d4e897a38ca8771fe1d1869a9b80cad8075c768ee4"
   },
   "statement_count": 11,
@@ -22,70 +22,70 @@
       "environment": "theorem",
       "title": "Arithmetic incidence cover",
       "source": "sections/01-introduction.tex",
-      "source_line": 115,
+      "source_line": 116,
       "sha256": "6d903edd8afda2dfcabeca11638ed302f19edfb75d50fbb001e36983d4eac34a",
       "tex": "\\begin{theorem}[Arithmetic incidence cover]\n\\label{thm:arithmetic-main}\nThe function field of Hitchin's incidence cover is\n\\[\n \\Q(\\mathbf P(H))\\bigl(\\sqrt{5J_0}\\bigr).\n\\]\nIf \\(\\mathcal N\\to\\mathbf P(H)\\) is its finite Stein normalization, then,\nafter normalizing the anti-invariant summand, its algebra is\n\\[\n \\mathcal O\\oplus\\mathcal O(-3),\\qquad z^2=5J_0.\n\\]\nFor the Clebsch chart\n\\(\\iota_t:\\mathbf P(V_{\\Q(\\sqrt5)})\\to\\mathbf P(H_{\\Q(\\sqrt5)})\\)\ndefined in Section~\\ref{sec:cover},\n\\[\n \\iota_t^*J_0=16\\sigma_3^2.\n\\]\nThe chart is not defined over \\(\\Q\\); Galois conjugation carries it to the\nchart of the conjugate icosahedron.  The fibre over the rational point\n\\([xyz]\\) is nevertheless a complete reduced fibre with residue algebra\n\\(\\Q(\\sqrt5)\\).\n\\end{theorem}"
     },
     {
-      "label": "thm:orientation-source",
+      "label": "thm:marked-sheet-comparison",
       "environment": "proposition",
-      "title": "Relative marked orientation bridge",
+      "title": "Marked comparison of the two sheets",
       "source": "sections/01-introduction.tex",
-      "source_line": 182,
-      "sha256": "20e7953afb03295b88f1f9afcda8309a94b10dad8b477b74204bf088b3619a62",
-      "tex": "\\begin{proposition}[Relative marked orientation bridge]\n\\label{thm:orientation-source}\nFix a marked bridge datum \\(\\mathfrak m\\).  Let\n\\(B=\\mathbf P(V_E)\\), where \\(E=\\Q(\\sqrt5)\\), and pull Hitchin's\nincidence normalization back along \\(\\iota_t:B\\to\\mathbf P(H_E)\\).\nThe normalization of this pullback is a disjoint union\n\\[\n B_+\\amalg B_-.\n\\]\nThe fixed isotropic plane selects \\(B_+\\), and incidence deck exchange\ninterchanges the components.  For an odd generator normalized on \\(B_+\\),\ntheir equations are\n\\[\n z=4\\sqrt5\\,\\sigma_3,\n \\qquad z=-4\\sqrt5\\,\\sigma_3.\n\\]\nOn \\(D(\\sigma_3)\\) the pulled-back finite cover is split etale and has two\ndistinct compact incidence points.  Away from Hitchin's degree-ten\ndegeneracy locus (defined in Section~\\ref{sec:rational-incidence-model}),\nboth are regular\nicosahedral six-axis configurations; on that degeneracy locus with\n\\(\\sigma_3\\ne0\\), the fixed \\(U_t\\)-branch is regular and the other compact\nincidence point is degenerate.\nOn the Clebsch cubic the unnormalized branches meet, while the normalization\nremains disjoint.\n\nRelative to \\(\\mathfrak m\\), equip \\(B_+\\) with the source\n\\([C_{\\mathfrak m},Z_{\\mathfrak m}]_{\\rm or}\\) and equip \\(B_-\\) with its\ndeck-opposite.  At \\([xyz]\\), the golden\nexchanger identifies this opposite with the conjugate configuration and\nthe representative\n\\((-C_{\\mathfrak m},-Z_{\\mathfrak m})\\).  Under the marked primitive\npair-sum map\n\\[\n \\beta:V\\longrightarrow\\Q^{\\binom52},\n \\qquad \\beta(y)_{ij}=y_i+y_j,\n\\]\nthe same relative convention fixes the sign of the degree-six cubic in\nTheorem~\\ref{thm:harmonic-main}.  The normalized component alone is not\nasserted to determine \\(\\mathfrak m\\).\n\\end{proposition}"
+      "source_line": 183,
+      "sha256": "04c576c2bdcc0f638e1ceb3e05891735fc64e08b5c75a82c442c21a9b1d54ba8",
+      "tex": "\\begin{proposition}[Marked comparison of the two sheets]\n\\label{thm:marked-sheet-comparison}\nFix a marked bridge datum \\(\\mathfrak m\\).  Let\n\\(B=\\mathbf P(V_E)\\), where \\(E=\\Q(\\sqrt5)\\), and pull Hitchin's\nincidence normalization back along \\(\\iota_t:B\\to\\mathbf P(H_E)\\).\nThe normalization of this pullback is a disjoint union\n\\[\n B_+\\amalg B_-.\n\\]\nThe fixed isotropic plane selects \\(B_+\\), and incidence deck exchange\ninterchanges the components.  For an odd generator normalized on \\(B_+\\),\ntheir equations are\n\\[\n z=4\\sqrt5\\,\\sigma_3,\n \\qquad z=-4\\sqrt5\\,\\sigma_3.\n\\]\nOn \\(D(\\sigma_3)\\) the pulled-back finite cover is split etale and has two\ndistinct compact incidence points.  Away from Hitchin's degree-ten\ndegeneracy locus (defined in Section~\\ref{sec:rational-incidence-model}),\nboth are regular\nicosahedral six-axis configurations; on that degeneracy locus with\n\\(\\sigma_3\\ne0\\), the fixed \\(U_t\\)-branch is regular and the other compact\nincidence point is degenerate.\nOn the Clebsch cubic the unnormalized branches meet, while the normalization\nremains disjoint.\n\nRelative to \\(\\mathfrak m\\), equip \\(B_+\\) with the source\n\\(\\bigl(C_{\\mathfrak m},Z_{\\mathfrak m}\\bigr)\\) and equip \\(B_-\\) with its\ndeck-opposite.  At \\([xyz]\\), the configuration exchanger identifies this\nopposite with the Galois-conjugate configuration and\nthe representative\n\\((-C_{\\mathfrak m},-Z_{\\mathfrak m})\\).  Under the marked primitive\npair-sum map\n\\[\n \\beta:V\\longrightarrow\\Q^{\\binom52},\n \\qquad \\beta(y)_{ij}=y_i+y_j,\n\\]\nthe same relative convention fixes the sign of the degree-six cubic in\nTheorem~\\ref{thm:harmonic-main}.  The normalized component alone is not\nasserted to determine \\(\\mathfrak m\\).\n\\end{proposition}"
     },
     {
-      "label": "prop:golden-fibre",
+      "label": "prop:incidence-fibre",
       "environment": "proposition",
-      "title": "Golden fibre",
+      "title": "Icosahedral fibre over \\texorpdfstring{$[xyz]$}{[xyz]}",
       "source": "sections/04-arithmetic-specialization.tex",
       "source_line": 21,
-      "sha256": "5d30ffdc49ad202b26d91f2fe917ae7e58cda220ec5c5d4307d5cf9f9e083881",
-      "tex": "\\begin{proposition}[Golden fibre]\\label{prop:golden-fibre}\nThe points of \\(I_t\\) lie on \\(xyz=0\\), have a common nonzero norm, have\nnormalized squared inner product \\(1/5\\), and form a six-arc.  The two\nconfigurations are conjugate geometric configurations defined over\n\\[\n \\Q[t]/(t^2-t-1)=\\Q(\\sqrt5)\n\\]\nand are exchanged by its nontrivial automorphism.  In Hitchin's incidence\ncover, whose point records the chosen six-set, they are the complete fibre\nover \\([xyz]\\).\n\\end{proposition}"
+      "sha256": "3a68fda5d5c853960502501f0c18ddf60b46941af154d8be4d4549d3d3479fcc",
+      "tex": "\\begin{proposition}[Icosahedral fibre over \\texorpdfstring{$[xyz]$}{[xyz]}]\n\\label{prop:incidence-fibre}\nThe points of \\(I_t\\) lie on \\(xyz=0\\), have a common nonzero norm, have\nnormalized squared inner product \\(1/5\\), and form a six-arc.  The two\nconfigurations are conjugate geometric configurations defined over\n\\[\n \\Q[t]/(t^2-t-1)=\\Q(\\sqrt5)\n\\]\nand are exchanged by its nontrivial automorphism.  In Hitchin's incidence\ncover, whose point records the chosen six-set, they are the complete fibre\nover \\([xyz]\\).\n\\end{proposition}"
     },
     {
       "label": "prop:spinor-specialization",
       "environment": "proposition",
       "title": "Spinor specialization",
       "source": "sections/04-arithmetic-specialization.tex",
-      "source_line": 93,
+      "source_line": 94,
       "sha256": "271fc066cc3773ccdbfd75a2b5cfe0ed3d3150d30fe518cc3351ae057e2b1326",
       "tex": "\\begin{proposition}[Spinor specialization]\\label{prop:spinor-specialization}\nThe spinor class of \\(R\\) is \\([2]\\in k^\\times/k^{\\times2}\\).  Under the\nstandard identifications\n\\[\n \\operatorname{SO}_3(k)/\\Omega_3(k)\n \\cong \\operatorname{PGL}_2(k)/\\operatorname{PSL}_2(k),\n\\]\nthe exchanger lies outside \\(\\operatorname{PSL}_2(k)\\) exactly when \\(2\\)\nis nonsquare.  In particular, over \\(\\F_{11}\\) it represents the\nnontrivial element of\n\\[\n T_{11}=\\operatorname{PGL}_2(11)/\\PSL_2(11).\n\\]\n\\end{proposition}"
     },
     {
       "label": "thm:operator-shadows",
       "environment": "theorem",
-      "title": "Golden operator and classical cubic shadows",
-      "source": "sections/05-golden-operator.tex",
-      "source_line": 186,
-      "sha256": "e5b2c8fb8348830c7a33d2dd0311586953283a38f8cab191f27f360e7cb4de4c",
-      "tex": "\\begin{theorem}[Golden operator and classical cubic shadows]\n\\label{thm:operator-shadows}\nFor a marked bridge datum and its coherent outer family:\n\\begin{enumerate}\n\\item The triangle products of \\(C_T\\) satisfy\n\\[\n (K_T)_{SS}=4(C_T)_{ij}(C_T)_{jk}(C_T)_{ki}=4\\epsilon_T(S)\n \\quad(S=\\{i,j,k\\}),\n\\]\nso \\(Z_T=J_T\\) is the switching-invariant orientation cubic on \\(A_X\\).\nThe four-point two-graph identity and pair balance recover the conference\nswitching class; after fixing a vertex, the negative edges on the other five\nvertices form a pentagon.\n\\item The same cubic is a commutator Pfaffian:\n\\[\n \\operatorname{Pf}[D_x,C_T]=4Z_T(x),\n \\qquad\n \\det[D_x,C_T]=16Z_T(x)^2.\n\\]\nOver \\(E=\\Q(\\sqrt5)\\), put\n\\(P_{T,\\pm}=(I\\pm C_T/\\sqrt5)/2\\) and\n\\(V_{T,\\pm}=\\operatorname{im}P_{T,\\pm}\\).  Define the restricted map\n\\[\n B_T(x)=P_{T,-}D_x\\big|_{V_{T,+}}:V_{T,+}\\longrightarrow V_{T,-}.\n\\]\nIts basis-free determinant lies in\n\\(\\det(V_{T,-})\\otimes\\det(V_{T,+})^{-1}\\).  At \\(T_0\\), orient these\ndeterminant lines so that the following equality has positive sign, and\ntransport the orientations through the coherent outer marking.  The inherited\nsymmetric forms and these orientations trivialize the determinant line, and\n\\[\n Z_T(x)=10\\sqrt5\\det B_T(x).\n\\]\nGalois exchange swaps the two rank-three summands, so the determinant-line\ncontraction differs from the ordinary field norm by \\((-1)^{3\\cdot3}=-1\\):\n\\[\n \\det[D_x,C_T]\n =-8000\\,N_{E/\\Q}\\!\\left(\\det B_T(x)\\right).\n\\]\n\\item The six coordinates \\((Z_T)_{T\\in\\mathcal T}\\) satisfy\n\\[\n \\sum_TZ_T=0,\\qquad \\sum_TZ_T^3=0.\n\\]\nThey are the signed Joubert coordinates and hence define the classical map\nfrom six labelled points to the Segre cubic\n\\[\n \\left\\{[z]\\in\\mathbf P^5:\\sum_Tz_T=\\sum_Tz_T^3=0\\right\\}.\n\\]\nInside its hyperplane \\(z_T=0\\), the remaining linear relation cuts the\nambient space to \\(\\mathbf P^3\\), and the remaining cubic equation is the\ndiagonal Clebsch cubic surface.\n\\item The centered determinants\n\\[\n W_T=Z_T^2-\\frac16\\sum_UZ_U^2\n     =\\frac1{16}\\operatorname{center}_T\\det[D_x,C_T]\n\\]\nsatisfy\n\\[\n \\sum_TW_T=0,\n \\qquad\n \\left(\\sum_TW_T^2\\right)^2=4\\sum_TW_T^4.\n\\]\nThus \\(W\\) is the Segre--Igusa polar map.\n\\end{enumerate}\n\\end{theorem}"
+      "title": "Conference operator and classical cubic shadows",
+      "source": "sections/05-conference-operator.tex",
+      "source_line": 188,
+      "sha256": "2c5d667be18723c59a908c2ac73d0352c6ea9c3efe1b2a0a3da800fdbbcedf12",
+      "tex": "\\begin{theorem}[Conference operator and classical cubic shadows]\n\\label{thm:operator-shadows}\nFor a marked bridge datum and its coherent outer family:\n\\begin{enumerate}\n\\item The triangle products of \\(C_T\\) satisfy\n\\[\n (K_T)_{SS}=4(C_T)_{ij}(C_T)_{jk}(C_T)_{ki}=4\\epsilon_T(S)\n \\quad(S=\\{i,j,k\\}),\n\\]\nso \\(Z_T=J_T\\) is the switching-invariant triangle cubic on \\(A_X\\).\nThe four-point two-graph identity and pair balance recover the conference\nswitching class; after fixing a vertex, the negative edges on the other five\nvertices form a pentagon.\n\\item The same cubic is a commutator Pfaffian:\n\\[\n \\operatorname{Pf}[D_x,C_T]=4Z_T(x),\n \\qquad\n \\det[D_x,C_T]=16Z_T(x)^2.\n\\]\nOver \\(E=\\Q(\\sqrt5)\\), put\n\\(P_{T,\\pm}=(I\\pm C_T/\\sqrt5)/2\\) and\n\\(V_{T,\\pm}=\\operatorname{im}P_{T,\\pm}\\).  Define the restricted map\n\\[\n B_T(x)=P_{T,-}D_x\\big|_{V_{T,+}}:V_{T,+}\\longrightarrow V_{T,-}.\n\\]\nIts basis-free determinant lies in\n\\(\\det(V_{T,-})\\otimes\\det(V_{T,+})^{-1}\\).  At \\(T_0\\), orient these\ndeterminant lines so that the following equality has positive sign, and\ntransport the orientations through the coherent outer marking.  The inherited\nsymmetric forms and these orientations trivialize the determinant line, and\n\\[\n Z_T(x)=10\\sqrt5\\det B_T(x).\n\\]\nGalois exchange swaps the two rank-three summands, so the determinant-line\ncontraction differs from the ordinary field norm by \\((-1)^{3\\cdot3}=-1\\):\n\\[\n \\det[D_x,C_T]\n =-8000\\,N_{E/\\Q}\\!\\left(\\det B_T(x)\\right).\n\\]\n\\item The six coordinates \\((Z_T)_{T\\in\\mathcal T}\\) satisfy\n\\[\n \\sum_TZ_T=0,\\qquad \\sum_TZ_T^3=0.\n\\]\nThey are the signed Joubert coordinates and hence define the classical map\nfrom six labelled points to the Segre cubic\n\\[\n \\left\\{[z]\\in\\mathbf P^5:\\sum_Tz_T=\\sum_Tz_T^3=0\\right\\}.\n\\]\nInside its hyperplane \\(z_T=0\\), the remaining linear relation cuts the\nambient space to \\(\\mathbf P^3\\), and the remaining cubic equation is the\ndiagonal Clebsch cubic surface.\n\\item The centered determinants\n\\[\n W_T=Z_T^2-\\frac16\\sum_UZ_U^2\n     =\\frac1{16}\\operatorname{center}_T\\det[D_x,C_T]\n\\]\nsatisfy\n\\[\n \\sum_TW_T=0,\n \\qquad\n \\left(\\sum_TW_T^2\\right)^2=4\\sum_TW_T^4.\n\\]\nThus \\(W\\) is the Segre--Igusa polar map.\n\\end{enumerate}\n\\end{theorem}"
     },
     {
       "label": "thm:triangle-pfaffian-recognition",
       "environment": "theorem",
       "title": "Triangle--Pfaffian recognition",
-      "source": "sections/05-golden-operator.tex",
-      "source_line": 311,
+      "source": "sections/05-conference-operator.tex",
+      "source_line": 313,
       "sha256": "c9dcc8cc3a039d1b4ba23dd4a7cf944c102645b5ff48f94ae5bfa6c2ab428d7e",
       "tex": "\\begin{theorem}[Triangle--Pfaffian recognition]\n\\label{thm:triangle-pfaffian-recognition}\nLet \\(A=(a_{ij})\\) be real symmetric of even order \\(n\\geq4\\), with zero\ndiagonal and every off-diagonal entry nonzero.  Put\n\\[\n \\mathcal T_A(x)=\\sum_{|S|=3}\n \\left(\\prod_{\\{i,j\\}\\subset S}a_{ij}\\right)x_S,\n \\qquad\n \\Phi_A(x)=\\operatorname{Pf}[D_x,A],\n \\qquad x_S=\\prod_{i\\in S}x_i.\n\\]\nIf \\(\\Phi_A=\\mu\\mathcal T_A\\) for some \\(\\mu\\ne0\\), then \\(n=6\\) and\n\\(A^2=\\lambda I\\) for some \\(\\lambda>0\\).\n\nIf the off-diagonal entries also have a common absolute value, then, up to scale, switching,\nand relabelling, \\(A\\) is the pentagon conference matrix; conversely\n\\(\\Phi_A=\\pm4\\mathcal T_A\\); relative to an orientation of the signed label space,\nthe sign is that space's two-valued orientation character.\n\\end{theorem}"
     },
     {
-      "label": "thm:golden-equality-rigidity",
+      "label": "thm:conference-equality-rigidity",
       "environment": "theorem",
-      "title": "Rigidity at the golden representative",
-      "source": "sections/05-golden-operator.tex",
-      "source_line": 395,
-      "sha256": "91fd069b4a42f37f3422af23b6533b82514a9e97d1f947c3dbf6d7ccca303cf0",
-      "tex": "\\begin{theorem}[Rigidity at the golden representative]\n\\label{thm:golden-equality-rigidity}\nThe twenty functions \\(F_S=h_S-4\\tau_S\\) have Jacobian of rank fourteen at\n\\(C\\), with kernel the scaling line \\(\\mathbf R\\,C\\).  Near \\(C\\) the locus\n\\(X_{+1}\\) is therefore exactly that line, and the same holds for\n\\(h_S+4\\tau_S\\) near every odd signed-permutation image of \\(C\\), the\nrepresentatives that reverse the orientation of the signed label space.\n\\end{theorem}"
+      "title": "Rigidity at the conference representative",
+      "source": "sections/05-conference-operator.tex",
+      "source_line": 397,
+      "sha256": "b75fc2b8fc3ee12332f9280842a3ec3ddce92d47db6cb84ef8fa561240321081",
+      "tex": "\\begin{theorem}[Rigidity at the conference representative]\n\\label{thm:conference-equality-rigidity}\nThe twenty functions \\(F_S=h_S-4\\tau_S\\) have Jacobian of rank fourteen at\n\\(C\\), with kernel the scaling line \\(\\mathbf R\\,C\\).  Near \\(C\\) the locus\n\\(X_{+1}\\) is therefore exactly that line, and the same holds for\n\\(h_S+4\\tau_S\\) near every odd signed-permutation image of \\(C\\), the\nrepresentatives that reverse the orientation of the signed label space.\n\\end{theorem}"
     },
     {
       "label": "prop:nonsingular-complementary-minors",
       "environment": "proposition",
       "title": "Nonsingular complementary minors",
-      "source": "sections/05-golden-operator.tex",
-      "source_line": 540,
+      "source": "sections/05-conference-operator.tex",
+      "source_line": 542,
       "sha256": "ea4f03b3317a8e558556eb24ef90af8b843312088a4bbdde20e842cb47a53335",
       "tex": "\\begin{proposition}[Nonsingular complementary minors]\n\\label{prop:nonsingular-complementary-minors}\nLet \\(A\\) be symmetric of order six with zero diagonal and every off-diagonal\nentry \\(\\pm1\\).  Then \\(A^2=5I\\) if and only if \\(\\det A[S^c,S]\\ne0\\) for every\n\\(3\\)-subset \\(S\\), and in that case every one of those twenty determinants is\n\\(\\pm4\\).\n\\end{proposition}"
     },
@@ -93,8 +93,8 @@
       "label": "thm:balanced-exchange-rigidity",
       "environment": "theorem",
       "title": "Balanced exchange rigidity",
-      "source": "sections/05-golden-operator.tex",
-      "source_line": 634,
+      "source": "sections/05-conference-operator.tex",
+      "source_line": 636,
       "sha256": "8db1d1d4a438052ec1bc1af41686716f8f2832b86900159762882f278b6dc5a5",
       "tex": "\\begin{theorem}[Balanced exchange rigidity]\n\\label{thm:balanced-exchange-rigidity}\nWith the notation above,\n\\[\n \\Spec(H_Y)=\\Spec\\!\\left(\\frac1qRR^{\\mathsf T}\\right)\n =\\left\\{1-\\frac{\\alpha_1^2}{q},\\ldots,\n          1-\\frac{\\alpha_d^2}{q}\\right\\},\n\\]\nwhere \\(\\alpha_1,\\ldots,\\alpha_d\\) are the eigenvalues of \\(A\\).  The\nspectrum is independent of the balanced half \\(Y\\) if and only if\n\\(d\\leq3\\).  Thus order six is the unique nontrivial realized symmetric\nconference order with this property, and its exchange spectrum is\n\\[\n \\left\\{\\frac15,\\frac45,\\frac45\\right\\}.\n\\]\n\nFor a four-set \\(K\\), let \\(w(K)\\) be the sum of its three signed\nHamilton-cycle products.  Call \\(K\\) \\emph{aligned} if \\(w(K)=3\\); in\nstandard two-graph terminology this is the union of the coherent and\nincoherent four-set types.  Let \\(c_Y\\) count the aligned four-sets in\n\\(Y\\).  Then\n\\[\n \\operatorname{tr}(H_Y)=\\frac{d^2}{q},\\qquad\n \\operatorname{tr}(H_Y^2)=\\frac{F_d+32c_Y}{q^2},\n\\]\nwhere\n\\[\n F_d=dq^2-2qd(d-1)+d(d-1)+12\\binom d3-8\\binom d4.\n\\]\nHence the first exchange moment is universal, whereas the second is\ncut-independent exactly in the stated small orders.\n\\end{theorem}"
     },
@@ -102,10 +102,10 @@
       "label": "thm:aligned-faithfulness",
       "environment": "theorem",
       "title": "Aligned-design faithfulness",
-      "source": "sections/05-golden-operator.tex",
-      "source_line": 790,
-      "sha256": "c38edb7d919b509024ba4bdc20386dfc82be05fe1506ec15b1569f11ab7f4708",
-      "tex": "\\begin{theorem}[Aligned-design faithfulness]\n\\label{thm:aligned-faithfulness}\nIf \\(|V|\\geq7\\), then \\(\\mathcal A(\\tau)\\) determines \\(\\tau\\) up to\ncomplement, and seven is the least bound with this property.\n\nFor a symmetric conference matrix of order \\(n\\geq10\\), its marked family of\nprincipal four-subsets with determinant \\(-3\\), which is the design of\nGreaves and Suda \\cite[Table~1 and Example~2.3]{GreavesSuda}, therefore\ndetermines its signing up to diagonal switching and global negation.  After\none aligned four-set \\(Q\\) is known, the\n\\[\n 1+4(n-4)+6\\binom{n-4}{2}=3n^2-23n+45\n\\]\ntests on four-sets meeting \\(Q\\) in at least two points suffice, and the\ndecoder in the proof uses exactly this many.  An aligned anchor is found\ndeterministically with at most twenty tests.  Each of those queries reads one\nbit, whether a single fourth-order principal minor equals \\(-3\\); the\nreconstruction consumes no minor value and no minor of any other order.\nOne calibrated triangle product selects between the two global orientations.\n\\end{theorem}"
+      "source": "sections/05-conference-operator.tex",
+      "source_line": 792,
+      "sha256": "b4b9a9af3749dd555187abb79c792e6818326402612ab3428d4f4de881615da6",
+      "tex": "\\begin{theorem}[Aligned-design faithfulness]\n\\label{thm:aligned-faithfulness}\nIf \\(|V|\\geq7\\), then \\(\\mathcal A(\\tau)\\) determines \\(\\tau\\) up to\ncomplement, and seven is the least bound with this property.\n\nFor a symmetric conference matrix of order \\(n\\geq10\\), its marked family of\nprincipal four-subsets with determinant \\(-3\\), which is the design of\nGreaves and Suda \\cite[Table~1 and Example~2.3]{GreavesSuda}, therefore\ndetermines its signing up to diagonal switching and global negation.  After\none aligned four-set \\(Q\\) is known, the\n\\[\n 1+4(n-4)+6\\binom{n-4}{2}=3n^2-23n+45\n\\]\ntests on four-sets meeting \\(Q\\) in at least two points suffice, and the\ndecoder in the proof uses exactly this many.  An aligned anchor is found\ndeterministically with at most twenty tests.  Each of those queries reads one\nbit, whether a single fourth-order principal minor equals \\(-3\\); the\nreconstruction consumes no minor value and no minor of any other order.\nOne calibrated triangle product selects between \\(C\\) and \\(-C\\).\n\\end{theorem}"
     },
     {
       "label": "thm:harmonic-main",
@@ -117,7 +117,7 @@
       "tex": "\\begin{theorem}[Degree-six harmonic restriction]\n\\label{thm:harmonic-main}\nLet \\(u_{ij}\\), \\(1\\leq i<j\\leq5\\), be the explicitly labelled unit axes\nthrough opposite icosahedral faces in \\eqref{eq:face-axis-labels}, and set\n\\[\n F_y(\\omega)=\\sum_{i<j}(y_i+y_j)P_6(u_{ij}\\mathbin{\\cdot}\\omega).\n\\]\nThe coefficient vectors \\((y_i+y_j)_{i<j}\\) form the Petersen\n\\((-2)\\)-eigenspace, and their zonal harmonics give an injective copy of\n\\(V\\) in the real degree-six spherical-harmonic space \\(\\mathcal H_6\\).\nThe spherical cubic on this copy is\n\\[\n \\frac1{4\\pi}\\int_{S^2}F_y(\\omega)^3\\,d\\omega\n =-\\frac{784000}{1247103}\\sigma_3(y).\n\\]\n\\end{theorem}"
     }
   ],
-  "trust_rows_sha256": "cceab0cc4d5792acc2193471da1f46ed4785be78a914244d52e9c7fba5da8d15",
+  "trust_rows_sha256": "b9058e9e123165044594218976e471cac61bc2bade18f2b0f72186c03fd9b8f1",
   "trust_rows": [
     {
       "id": "ARITH-1",
@@ -145,12 +145,12 @@
       "id": "ARITH-2",
       "theorem_labels": [
         "thm:arithmetic-main",
-        "prop:golden-fibre",
+        "prop:incidence-fibre",
         "prop:spinor-specialization"
       ],
       "clauses": [
         "complete reduced local fibre over xyz",
-        "golden six-set metric and six-arc properties",
+        "icosahedral six-set metric and six-arc properties",
         "uniform finite-field spinor class [2] and its nontrivial mod-11 specialization"
       ],
       "statement": "The complete reduced fibre over xyz has residue algebra Q(sqrt(5)); over every odd finite field where 5 is a nonzero square, its displayed configurations are exchanged by R with spinor class [2], which is nontrivial modulo 11.",
@@ -174,17 +174,17 @@
     {
       "id": "ORIENT-1",
       "theorem_labels": [
-        "thm:orientation-source"
+        "thm:marked-sheet-comparison"
       ],
       "clauses": [
         "normalization of the pulled-back incidence cover into two chart components",
         "maximal distinct-configuration locus D(sigma3)",
-        "relative marked source convention and its golden-fibre identification with conference and triangle-cubic reversal",
+        "relative marked source convention and its incidence-fibre identification with conference and triangle-cubic reversal",
         "deck exchange preserves the unmarked generated quadratic algebra while reversing its marked generator",
         "label-compatible primitive Petersen comparison and relative harmonic sign transport",
         "unspecified geometric integral localization"
       ],
-      "statement": "The normalized pullback of Hitchin's incidence cover to the golden Clebsch chart is the disjoint union of two normal chart components, while the unnormalized branches are distinct exactly on D(sigma3). After an ordered golden realization, normalized chart lift, and compatible plane-triple and Petersen labels are supplied, the selected component is assigned [C_m,Z_m]_or and the other its deck-opposite; the golden exchanger identifies the opposite with (-C_m,-Z_m) at xyz, preserves the unmarked generated algebra Q[C_m]=Q[-C_m], and reverses its marked generator; the marked primitive pair-sum map transports this relative sign to the degree-six Gaunt cubic. The incidence sheet alone is not asserted to determine the marking or lift.",
+      "statement": "The normalized pullback of Hitchin's incidence cover to the icosahedral Clebsch chart is the disjoint union of two normal chart components, while the unnormalized branches are distinct exactly on D(sigma3). After a marked icosahedral realization, normalized chart lift, and compatible plane-triple and Petersen labels are supplied, the selected component is assigned [C_m,Z_m]_or and the other its deck-opposite; the configuration exchanger identifies the opposite with (-C_m,-Z_m) at xyz, preserves the unmarked generated algebra Q[C_m]=Q[-C_m], and reverses its marked generator; the marked primitive pair-sum map transports this relative sign to the degree-six Gaunt cubic. The incidence sheet alone is not asserted to determine the marking or lift.",
       "status": "certified",
       "modes": [
         "conceptual",
@@ -192,9 +192,9 @@
         "certificate",
         "independent-replay"
       ],
-      "proof_role": "split-quadratic pinching, tight-frame conference identities, and an explicit relative-marking proof using Hitchin's branch and chart theorems, with a golden-fibre equivariance witness and exact regression audit",
+      "proof_role": "split-quadratic pinching, tight-frame conference identities, and an explicit relative-marking proof using Hitchin's branch and chart theorems, with an incidence-fibre equivariance witness and exact regression audit",
       "evidence": [
-        "sections/03-orientation-source.tex",
+        "sections/03-marked-sheet-transport.tex",
         "verification/evidence/orientation_source.py",
         "verification/evidence/orientation_source_replay.py",
         "verification/evidence/orientation_source.json",
@@ -207,27 +207,27 @@
       "theorem_labels": [
         "thm:operator-shadows",
         "thm:triangle-pfaffian-recognition",
-        "thm:golden-equality-rigidity",
+        "thm:conference-equality-rigidity",
         "prop:nonsingular-complementary-minors"
       ],
       "clauses": [
         "conference square, triangle holonomy, switching reconstruction, and middle-exterior diagonal",
         "commutator Pfaffian and determinant-square identities",
-        "cross-golden determinant description and determinant-line norm over Q(sqrt(5))",
+        "oriented spectral-block determinant description and determinant-line norm over Q(sqrt(5))",
         "nondegenerate real triangle-Pfaffian proportionality forces order six and a scalar square, with exact sign-locus recognition",
-        "local rigidity of the oriented equality at the golden representative: Jacobian rank fourteen with kernel the scaling line",
+        "local rigidity of the oriented equality at the conference representative: Jacobian rank fourteen with kernel the scaling line",
         "sign-locus nondegeneracy characterization: all twenty complementary three-by-three minors nonzero iff the square is five times the identity"
       ],
-      "statement": "For a fully marked golden presentation, the triangle cubic, the diagonal of the middle exterior return, the commutator Pfaffian, and the determinant of the cross-golden block define the same oriented cubic, with Pf[D_x,C_T]=4Z_T, det[D_x,C_T]=16Z_T^2=-8000 N(det(B_T)), and Z_T=plus-or-minus 10 sqrt(5) det(B_T). Conversely, for a real symmetric even-order zero-diagonal matrix with nonzero off-diagonal entries, nonzero proportionality of its commutator Pfaffian and triangle cubic forces order six and A^2=lambda I; on the equal-absolute-value locus this is exactly the pentagon conference class, with the two proportionality signs recording relative orientation. The equality is locally rigid at either oriented golden representative, its Jacobian having rank fourteen with kernel the scaling line; and on the sign locus the cubic identity may be replaced by the nondegeneracy of all twenty complementary three-by-three minors, which forces the same class and makes the proportionality constant plus or minus four the only value available.",
+      "statement": "For a fully marked conference presentation, the triangle cubic, the diagonal of the middle exterior return, the commutator Pfaffian, and the oriented spectral-block determinant define the same oriented cubic, with Pf[D_x,C_T]=4Z_T, det[D_x,C_T]=16Z_T^2=-8000 N(det(B_T)), and Z_T=plus-or-minus 10 sqrt(5) det(B_T). Conversely, for a real symmetric even-order zero-diagonal matrix with nonzero off-diagonal entries, nonzero proportionality of its commutator Pfaffian and triangle cubic forces order six and A^2=lambda I; on the equal-absolute-value locus this is exactly the pentagon conference class, with the two proportionality signs recording relative orientation. The equality is locally rigid at either oriented conference representative, its Jacobian having rank fourteen with kernel the scaling line; and on the sign locus the cubic identity may be replaced by the nondegeneracy of all twenty complementary three-by-three minors, which forces the same class and makes the proportionality constant plus or minus four the only value available.",
       "status": "proven",
       "modes": [
         "conceptual",
         "classical-input",
         "formal-partial"
       ],
-      "proof_role": "tight-frame recovery of the classical Bussemaker--Mathon--Seidel order-six switching normal form, matching expansion of the Pfaffian, Hodge middle-exterior comparison, and the golden eigenspace block decomposition.  The scalar-square implication and sign-matrix converse are formalized in the four-shadow gate; the manuscript proves the real positivity statement by translation invariance of the triangle cubic: its tx_i x_j coefficients force A^2 diagonal, and commutation makes that diagonal scalar; equal absolute values then recover the pentagon gauge.  The coherence of the outer six-family and the cross-golden comparison are formalized: each of the six relabelled conference matrices is symmetric with vanishing diagonal, unit off-diagonal squares and square 5*I, the six sign words are distinct and each obeys the four-point identity, and over a commutative ring with two invertible and an invertible square root s of five the commutator of the diagonal matrix with the conference matrix is 2s times the antisymmetric part of the cross-golden block, whence Z^2 = 500 det(B - B^T) and, exactly, Z = 10 s Pf(B - B^T), an identity unchanged by using the other square root of five.  The determinant of the induced map between the two spectral spaces is a determinant-line element; after compatible orientations, the odd-rank contraction is minus its ordinary quadratic field norm.  The rigidity statement is proved in the manuscript by Euler homogeneity, the multilinear difference rule for the twenty equations, equivariance under the order-sixty stabilizer, a fixed-vector reduction to a five-dimensional space, the displayed reduced table with its minus-five minor, and the constant-rank theorem; its table is certified against the manuscript's own representative and sign convention by a dated evidence bundle retained in the source archive, and the rank statement itself is not formalized.  The sign-locus characterization is proved in the manuscript from two elementary facts about three-by-three sign matrices and the identity relating a complementary block's row inner products to the square, with an exhaustive order-six census as the independent check.",
+      "proof_role": "tight-frame recovery of the classical Bussemaker--Mathon--Seidel order-six switching normal form, matching expansion of the Pfaffian, Hodge middle-exterior comparison, and the (plus-or-minus sqrt(5))-eigenspace block decomposition.  The scalar-square implication and sign-matrix converse are formalized in the four-shadow gate; the manuscript proves the real positivity statement by translation invariance of the triangle cubic: its tx_i x_j coefficients force A^2 diagonal, and commutation makes that diagonal scalar; equal absolute values then recover the pentagon gauge.  The coherence of the outer six-family and the spectral-block comparison are formalized: each of the six relabelled conference matrices is symmetric with vanishing diagonal, unit off-diagonal squares and square 5*I, the six sign words are distinct and each obeys the four-point identity, and over a commutative ring with two invertible and an invertible square root s of five the commutator of the diagonal matrix with the conference matrix is 2s times the antisymmetric part of the spectral block, whence Z^2 = 500 det(B - B^T) and, exactly, Z = 10 s Pf(B - B^T), an identity unchanged by using the other square root of five.  The determinant of the induced map between the two spectral spaces is a determinant-line element; after compatible orientations, the odd-rank contraction is minus its ordinary quadratic field norm.  The rigidity statement is proved in the manuscript by Euler homogeneity, the multilinear difference rule for the twenty equations, equivariance under the order-sixty stabilizer, a fixed-vector reduction to a five-dimensional space, the displayed reduced table with its minus-five minor, and the constant-rank theorem; its table is certified against the manuscript's own representative and sign convention by a dated evidence bundle retained in the source archive, and the rank statement itself is not formalized.  The sign-locus characterization is proved in the manuscript from two elementary facts about three-by-three sign matrices and the identity relating a complementary block's row inner products to the square, with an exhaustive order-six census as the independent check.",
       "evidence": [
-        "sections/05-golden-operator.tex",
+        "sections/05-conference-operator.tex",
         "verification/golden_return_formal.json",
         "verification/golden_return_axioms.txt",
         "verification/four_shadow_formal.json",
@@ -253,7 +253,7 @@
       ],
       "proof_role": "the operator matching expansion identifies the frame with the classical Howard--Millson--Snowden--Vakil coloured-triangle Joubert family; their Segre--Igusa duality supplies the centered-square map, while the paper identifies it with centered commutator determinants.  All four clauses are also formalized, and there the classical inputs are proved rather than cited: the two Segre equations hold identically over every commutative ring, each translate is the coloured-triangle cubic of an explicit sign word coefficient by coefficient, those six words are the complementary triangle colourings of the one-factorizations of the complete graph on six labels and every one-factorization gives one of the six, the diagonal section is the vanishing sum and cube sum of the remaining five coordinates, and the centered squares satisfy the Igusa quartic relation by way of the characteristic polynomial of the six coordinates and Newton's identities.",
       "evidence": [
-        "sections/05-golden-operator.tex",
+        "sections/05-conference-operator.tex",
         "verification/golden_return_formal.json",
         "verification/golden_return_axioms.txt"
       ]
@@ -276,9 +276,9 @@
         "classical-input",
         "formal-partial"
       ],
-      "proof_role": "commutator and cross-block calculation, signed closed-four-walk count, and the support-sorted fourth trace.  The supplemental golden-return gate now covers the whole exchange mechanism in Lean: the cut-block identity, the support-sorted fourth trace, the one-element swap descent for inclusion sums, the whole-matrix weight pin (N-3)w = -24, cut dependence of the fourth trace and of the aligned four-set count, both exchange moments, the order-six characteristic polynomial, the order-four exclusion, the existence of both spectral isometries over the reals, the eigenvalue reading of the spectrum, and the transport of all of it from a subset of one label set to the cut that subset defines.  The manuscript's printed proof instead closes the rigidity direction by the characteristic-zero inclusion-rank descent, a switching normalization, and the Ramsey equality R(3,3)=6, whose two bounds are kernel-checked though no Lean declaration states the equality itself; the Lean therefore certifies the theorem's conclusion by a different route than the one printed, and the manuscript integration that would align them has not been made.  Greaves--Suda and classical Johnson-scheme machinery supply the credited design consequences.",
+      "proof_role": "commutator and cross-block calculation, signed closed-four-walk count, and the support-sorted fourth trace.  The supplemental `ClebschGoldenReturn` gate now covers the whole exchange mechanism in Lean: the cut-block identity, the support-sorted fourth trace, the one-element swap descent for inclusion sums, the whole-matrix weight pin (N-3)w = -24, cut dependence of the fourth trace and of the aligned four-set count, both exchange moments, the order-six characteristic polynomial, the order-four exclusion, the existence of both spectral isometries over the reals, the eigenvalue reading of the spectrum, and the transport of all of it from a subset of one label set to the cut that subset defines.  The manuscript's printed proof instead closes the rigidity direction by the characteristic-zero inclusion-rank descent, a switching normalization, and the Ramsey equality R(3,3)=6, whose two bounds are kernel-checked though no Lean declaration states the equality itself; the Lean therefore certifies the theorem's conclusion by a different route than the one printed, and the manuscript integration that would align them has not been made.  Greaves--Suda and classical Johnson-scheme machinery supply the credited design consequences.",
       "evidence": [
-        "sections/05-golden-operator.tex",
+        "sections/05-conference-operator.tex",
         "verification/golden_return_formal.json",
         "verification/golden_return_axioms.txt"
       ]
@@ -305,7 +305,7 @@
       ],
       "proof_role": "seven-point cut reconstruction from one-point and pair signatures, followed by a common seven-point restriction for any two triples; Lean checks the whole two-graph half of the row, namely faithfulness up to a global complement bit for every two-graph on a finite point set with at least seven points, including anchor existence through both bounds behind the triangle Ramsey equality, the normalization of an arbitrary labelled two-graph onto the cut classifier, distinctness of the anchor points and their separation from the root, symbolic third-point disambiguation, the finite-set extension, and the overlap agreement of complement bits, together with the switching transport, determinant identity, query polynomial, calibration, and the cardinality of the explicitly defined selected query family; the identification of the marked determinant-minus-three family of a Seidel matrix with the aligned family of its two-graph, the two values minus three and five taken by a principal four-by-four minor on distinct labels, the recovery of such a matrix from that family up to diagonal switching and one global sign, and the sufficiency of the selected query family for a decoder working from a single anchor are proved as well; the anchor search enters as the existence of an aligned four-set among the twenty four-sets through a root and six further points together with the count of those tests, and is not formalized as a procedure",
       "evidence": [
-        "sections/05-golden-operator.tex",
+        "sections/05-conference-operator.tex",
         "verification/passages_formal.json",
         "verification/passages_axioms.txt",
         "verification/golden_return_formal.json",
