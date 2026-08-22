@@ -122,7 +122,7 @@ make check
 
 performs a clean deterministic rebuild, requires byte-for-byte agreement with
 the tracked PDF, rejects TeX warnings and private-path leakage, validates
-metadata and the AI disclosure, and replays the field-seven certificate.
+metadata and the AI disclosure, and replays both exact seed certificates.
 
 ## Files
 

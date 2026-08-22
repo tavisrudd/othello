@@ -126,6 +126,28 @@ radius-three repairs, and survivor-set counts.  Its certificate SHA-256 is
 \path{8096230e66f634c820ae7ec4bacd9b2493006782ff02b8be3a8c7e1caf80de07}.
 \end{quote}
 
+\subsection{Concrete matched-seed cross-check}
+\label{sec:matched-seed-evidence}
+
+The proof of Theorem~\ref{thm:asymptotic-separation} is the generic line-and-lift
+argument in the body and does not depend on a finite search.  For an exact
+replayable instance, the supplementary bundle
+\begin{quote}\small\raggedright
+\path{verification/matched-seed.py},\\
+\path{verification/matched-seed.json}
+\end{quote}
+records two $4\times10$ matrices over $\F_{29}$.  It independently checks rank
+four by elimination, every four-column dependence both by elimination and by
+the determinant formula, the complete circuit-hyperplane lists, parameters
+$[10,4,6]_{29}$ and dual distance four, equality of the complete pointed
+rank-triple histograms, the matching, transversal, blocker, and degree data,
+and the two reliability polynomials.  Its certificate SHA-256 is
+\begin{quote}\scriptsize
+\path{16a378edc882a6dda7f5642c7d21bfa49913b45ef5409398de117897b19dd2b8}.
+\end{quote}
+This concrete instance cross-checks the structural proof; it is not a premise
+of the theorem.
+
 \subsection{Field-nine evidence}
 \label{sec:finite-evidence}
 

@@ -34,6 +34,9 @@ EXPECTED_AXIOMS = {"Classical.choice", "Quot.sound", "propext"}
 EXPECTED_CERTIFICATE_SHA256 = (
     "8096230e66f634c820ae7ec4bacd9b2493006782ff02b8be3a8c7e1caf80de07"
 )
+EXPECTED_MATCHED_CERTIFICATE_SHA256 = (
+    "16a378edc882a6dda7f5642c7d21bfa49913b45ef5409398de117897b19dd2b8"
+)
 HEX40 = re.compile(r"[0-9a-f]{40}")
 WARNING_RE = re.compile(
     r"LaTeX Warning|Package .* Warning|Overfull|Underfull|"
@@ -94,6 +97,8 @@ def public_text_files() -> list[Path]:
         PAPER / "verification" / "formal-boundary.json",
         PAPER / "verification" / "f7-seed.py",
         PAPER / "verification" / "f7-seed.json",
+        PAPER / "verification" / "matched-seed.py",
+        PAPER / "verification" / "matched-seed.json",
         PAPER / "verification" / "verify_release.py",
         *sorted((PAPER / "sections").glob("*.tex")),
         PAPER / "sections" / "README.md",
@@ -255,6 +260,22 @@ def check_seed_replay() -> None:
         sha256(PAPER / "verification" / "f7-seed.json")
         == EXPECTED_CERTIFICATE_SHA256,
         "field-seven certificate hash drift",
+    )
+    completed = run(
+        [
+            "python3",
+            "verification/matched-seed.py",
+            "--check",
+            "verification/matched-seed.json",
+        ],
+        PAPER,
+    )
+    if completed.returncode != 0:
+        fail("matched-seed replay failed:\n" + (completed.stderr or completed.stdout))
+    require(
+        sha256(PAPER / "verification" / "matched-seed.json")
+        == EXPECTED_MATCHED_CERTIFICATE_SHA256,
+        "matched-seed certificate hash drift",
     )
 
 

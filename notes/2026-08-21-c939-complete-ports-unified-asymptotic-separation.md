@@ -2,7 +2,7 @@
 
 **Lane**: `complete-ports`
 
-**Status**: ACTIVE — PHASE C UNIFYING PAPER REVISION
+**Status**: ACTIVE — FINAL FROZEN-ARTIFACT REVIEW AND MIRROR EXPORT
 **Allocated**: 2026-08-21
 **Source assessment**:
 `notes/2026-08-21-c678-complete-ports-percentile-referee.md`
@@ -253,3 +253,108 @@ the verification appendix, while a public exact replay bundle lives at
 `papers/complete-repair-ports/verification/f7-seed.json`. The current
 22-page build passes `make check` without TeX warnings. Formal ledgers are
 being reconciled before the immutable boundary refresh and cold referee gate.
+
+## Matched-availability upgrade
+
+The first Phase C draft exposed availability as the remaining conventional
+local mismatch.  A second structural construction closes that gap.  Over all
+but finitely many prime fields, two represented rank-four sparse-paving
+matroids on ten elements have five target circuit-hyperplanes and none away
+from the target.  Their repair clutters have the same locality, repair count,
+matching number (2), transversal number (2), unique minimum-blocker count,
+and helper-degree multiset
+((1,1,1,1,2,2,2,2,3)), while their higher intersections differ.  Their
+homogeneous reliability polynomials are
+
+\[
+  5s^3-7s^5-s^6+5s^7-s^9
+  \quad\text{and}\quad
+  5s^3-7s^5-2s^6+8s^7-3s^8.
+\]
+
+Both seeds give ([10,4,6]_q) codes with dual distance four and
+(z_x(I)=8).  Applying the same outer family therefore gives matched length,
+dimension, and distance lower bounds and transfers the distinct laws to
+coordinate classes of density (1/10).  The original field-seven pair is
+retained as the smallest explicit precursor, not as the main asymptotic
+separation.
+
+The human proof realizes the two clutters as five-line incidence patterns in
+a quotient projective plane, lifts them generically to rank four, and excludes
+all unintended four-circuits by avoiding a finite union of proper
+hyperplanes.  Rational data can then be reduced modulo any prime outside one
+finite exceptional set.  This is the structural proof; the concrete
+(\mathbb F_{29}) matrices below are an independent cross-check, not a premise.
+
+Exact replay from `papers/complete-repair-ports/`:
+
+```text
+python3 verification/matched-seed.py \
+  --check verification/matched-seed.json
+```
+
+The replay checks all three- and four-column ranks, the exact
+circuit-hyperplane lists, ([10,4,6]_{29}) parameters, dual distance four,
+pointed rank-triple histograms, matching/transversal/blocker/degree data,
+union profiles, and both reliability polynomials.  It does not prove the
+generic construction or the outer-family existence theorem.  Certificate
+SHA-256 is
+`16a378edc882a6dda7f5642c7d21bfa49913b45ef5409398de117897b19dd2b8`;
+script SHA-256 is
+`c77734a532f2b7152b97595fca66ffec4de9ea436711f0ffe94901aae67ac5b8`.
+
+## Public formal release
+
+The dirty `finitegeom` checkout was a coherent but partial Paper IV semantic
+export, not complete-ports work.  Its guarded single-profile semantic gate and
+axiom audit passed, and it was committed separately as
+`e69fbe7ac9e2dd6fb193f6f3c914d3831cbe806e`.  The complete-ports closure was
+then exported on that base and committed publicly as
+`36c83268ddaeec9ee22824cad44d6222a9e67081`: 36 modules, 61 paper-facing
+terminals, 888036 closure bytes, and observed axiom union exactly
+`Classical.choice`, `Quot.sound`, and `propext`.  The public manuscript points
+only to `https://github.com/tavisrudd/finitegeom` and the latter release
+commit.  Paper IV remains partial: C834 owns theorem completeness, and C857
+owns its subsequent formalization-audit/standards closure.
+
+The formal boundary is deliberately narrower than the human theorem.  Lean
+certifies the simultaneous exact transfer of the two prescribed radius-three
+ports.  It does not formalize the quotient-plane seed construction, the
+finite seed invariants, ([10,4,6]) parameters, outer-family existence, or the
+final human synthesis.
+
+## Referee state
+
+The matched-availability cold review found only one stale conclusion paragraph;
+the percentile review scored the revision at the 95th specialty percentile and
+88th general-mathematics percentile; and the formal review found the
+formal-correspondence boundary honest.  The conclusion is now synchronized and
+the explicit field-29 instance supplies the highest-value requested
+cross-check.  A final review must grade the new frozen PDF rather than the
+earlier worktree-mutating build.
+
+## `ej` + `tt` closeout and mystery ledger
+
+The closeout identified two cheap, high-value upgrades and both are settled:
+
+- availability, transversal number, minimum-blocker count, and helper degrees
+  are now matched in the main pair, so the separation is genuinely driven by
+  higher overlap structure;
+- the generic existence proof now has a concrete field-29 replay, so readers
+  can independently test every finite invariant without mistaking computation
+  for the proof.
+
+Open mysteries:
+
+- The smallest field supporting the matched pair is not determined.  The paper
+  needs only all but finitely many primes; a minimal-field classification would
+  require a separate exhaustive or moduli analysis and is not an acceptance
+  gate.
+- A conceptual classification of which higher intersection data determine the
+  full reliability polynomial remains open.  The present theorem isolates the
+  failure of the matched coarse statistics but does not claim a minimal
+  complete invariant; that is successor work, not a gap in this result.
+- The paired transfer theorem is only partially formalized, exactly as stated
+  in the appendix.  Formalizing the geometric seed construction and classical
+  outer-family existence would be a substantial successor formalization, not
+  required for the present paper's declared trust boundary.

@@ -18,49 +18,49 @@ body proof uses the displayed
 minor ledger and the structural sparse-paving argument; it does not use the
 script as a proof.
 
+The stronger matched seeds also have a concrete independent instance over
+`F_29`:
+
+~~~text
+python3 verification/matched-seed.py \
+  --check verification/matched-seed.json
+~~~
+
+This checks the two `4 x 10` matrices, all three- and four-column ranks, the
+complete circuit-hyperplane lists, `[10,4,6]` parameters and dual distance
+four, equality of the pointed rank-triple histograms, the matched clutter
+statistics, and the distinct reliability polynomials. The manuscript's
+line-arrangement and generic-lift proof is independent of this concrete
+cross-check.
+
 The immutable inputs are recorded in formal-boundary.json:
 
-- source commit e45c925e1004c9316a2240a5fb36f7f2775a49b0;
 - finitegeom repository https://github.com/tavisrudd/finitegeom;
-- finitegeom base commit b871c10b4a91200a0913644d39b9f0ce44f655ca;
+- finitegeom release commit 36c83268ddaeec9ee22824cad44d6222a9e67081;
 - Lean v4.32.0-rc1;
 - mathlib revision 571b8a8e54219b4d393f75f4b8653fac08197fcc;
 - import-only gate RepairPorts.Gates.CompletePorts;
 - 36 modules and 61 paper-facing terminals.
 
-From a checkout of the source repository at the pinned source commit, the
-guarded replay is:
+From a checkout of the public finitegeom repository at the pinned release
+commit, the complete library replay is:
 
 ~~~text
-python3 lean/scripts/lean-build-queue.py build \
-  RepairPorts.Gates.CompletePorts \
-  RepairCodes.ProjectiveAxisTwistedCubicInvariants \
-  --cores 0-3
-
-python3 lean/scripts/lean-trust-spine.py audit --area complete_ports
+git clone https://github.com/tavisrudd/finitegeom.git
+cd finitegeom
+git checkout 36c83268ddaeec9ee22824cad44d6222a9e67081
+nix run .#verify
 ~~~
 
-To reproduce the standalone formal-area plan against a clean finitegeom
-checkout at the pinned base commit:
+The area statement is `trust/COMPLETE_PORTS.md`; its two content-addressed
+source manifests agree on the 36-module closure and 61 terminals. The observed
+axiom union is exactly `Classical.choice`, `Quot.sound`, and `propext`. The
+strict weighted example remains conditional on the regular Singer-action
+hypothesis displayed in its theorem statement.
 
-~~~text
-python3 lean/scripts/lean-area-export.py \
-  --config lean/trust/export/complete_ports.toml \
-  --source-commit e45c925e1004c9316a2240a5fb36f7f2775a49b0 \
-  --finitegeom-repo /absolute/path/to/clean/finitegeom \
-  --finitegeom-commit b871c10b4a91200a0913644d39b9f0ce44f655ca \
-  plan
-~~~
-
-The plan must report 888036 closure bytes, no prose drift, the 36-module
-closure listed in the JSON manifest, and only Classical.choice, Quot.sound,
-and propext in the permitted logical-axiom set. The strict weighted example
-remains conditional on the regular Singer-action hypothesis displayed in its
-theorem statement.
-
-The paper-local release verifier rejects stale PDFs, TeX warnings, stale
-field-seven evidence, metadata drift, private-repository coupling, missing AI
-disclosure, and malformed formal-boundary pins:
+The paper-local release verifier rejects stale PDFs, TeX warnings, stale seed
+evidence, metadata drift, private-repository coupling, missing AI disclosure,
+and malformed formal-boundary pins:
 
 ~~~text
 nix develop .#manuscript --command \
