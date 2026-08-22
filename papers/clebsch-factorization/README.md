@@ -10,8 +10,8 @@ progression is expository: this paper is logically independent of the other
 portfolio papers.
 
 The five numbered papers are: I, *Reconstructing the Clebsch Code from Its
-Deep-Hole Syndrome Locus*; II, this paper; III, *Hitchin's Icosahedral
-Incidence Double Cover and Operator Realizations of the Clebsch Cubic*; IV,
+Deep-Hole Syndrome Locus*; II, this paper; III, *The Clebsch Cubic: Hitchin's
+Icosahedral Double Cover and Conference-Matrix Rigidity*; IV,
 *Reconstructing \(\operatorname{PG}(2,13)\), its conic, and polarity from the
 minimum words of a binary conic code*; and V, *Chordal and Conference Cubics:
 Reconstruction and a Residual \(C_2\)-Torsor*.

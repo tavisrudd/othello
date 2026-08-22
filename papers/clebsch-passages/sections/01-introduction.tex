@@ -16,20 +16,16 @@ general \([f]\in\mathbf P(H)\) two icosahedral six-axis configurations,
 equivalently two Mukai--Umemura isotropic three-planes \(U\subset H\) with
 \(f\perp U\) \cite{HitchinIcosahedron,HitchinBundles}.  Their incidence
 variety is generically a degree-two cover of \(\mathbf P(H)\).  We determine
-its rational square class and, after fixing the marked bridge datum below,
-transport a chosen sign through conference, operator, and harmonic
-realizations.  The same conference carrier later yields two standalone
-structural theorems.  Figure~\ref{fig:source-shadow-return} records the main
-source--shadow--return route and the role of the marking.
-
-Three inverse questions organize what follows.  The first is arithmetic: what
-is lost when Hitchin's
-two-sheeted incidence construction is remembered only through its branch
-sextic?  The second is marked: once a sheet is chosen, how much of that choice
-survives in the conference and harmonic shadows?  The third is independent of
-Hitchin's cover: what can low-order spectral or four-set data reconstruct for
-a general conference matrix or two-graph?  The Clebsch and icosahedral models
-are the meeting point of the first two questions.
+three groups of results.  First, we determine the rational square class of
+Hitchin's cover.  Second, after fixing the marking datum below, we trace its
+two sheets through conference, operator, and harmonic realizations; the
+conference stage gives four equivalent cubic formulas and an order-six
+Pfaffian recognition theorem.  Third, independently of Hitchin's cover, we
+characterize order six by cut-independent balanced exchange spectrum and
+reconstruct arbitrary two-graphs from aligned four-set data.  The Clebsch and
+icosahedral models connect the first two groups and motivate the third.
+Figure~\ref{fig:source-shadow-return} records the marked
+cover--operator--harmonic route.
 
 \begin{figure}[H]
 \centering
@@ -44,12 +40,12 @@ are the meeting point of the first two questions.
 ]
 \node[box] (cover) {finite Stein normalization\\of Hitchin's cover\\[-1pt]
   \(z^2=5J_0\)};
-\node[box,right=of cover] (datum) {marked bridge datum \(\mathfrak m\)\\
+\node[box,right=of cover] (datum) {marking datum \(\mathfrak m\)\\
   chart lift, outer and Petersen labels};
 \node[wide,below=15mm of $(cover)!0.5!(datum)$] (mark) {chosen sheet and sign\\
   of the normalized odd generator};
 \node[box,below left=of mark] (six) {six ordered axes\\
-  \(C^2=5I\), oriented cubic \(Z_{\mathfrak m}\)};
+  \(C^2=5I\), signed cubic \(Z_{\mathfrak m}\)};
 \node[box,below right=of mark] (ten) {ten labelled face axes\\
   Petersen four-space};
 \node[box,below=of six] (classical) {four operator shadows\\
@@ -150,7 +146,7 @@ Theorem~\ref{thm:arithmetic-main}.
 
 The choice can be retained globally after normalizing the pullback to the
 Clebsch chart, but its comparison with the conference and harmonic signs is
-relative to a marking.  A \emph{marked bridge datum} \(\mathfrak m\) consists
+relative to a marking.  A \emph{marking datum} \(\mathfrak m\) consists
 of an ordering of the six icosahedral projective axes, the five plane triples
 labelled so that \(q_1=xyz\) and \(\sum q_i=0\), and the resulting normalized
 linear lift
@@ -172,9 +168,9 @@ It is translation-invariant and hence defines
  \bigl((\Q^6/\Q\mathbf1)^*\bigr).
 \]
 Write \(\bigl(C_{\mathfrak m},Z_{\mathfrak m}\bigr)\) for this marked
-source.  Changing the auxiliary representatives by \(a_i\mapsto d_i a_i\)
+conference pair.  Changing the auxiliary representatives by \(a_i\mapsto d_i a_i\)
 sends \(C_{\mathfrak m}\) to \(DC_{\mathfrak m}D\) and fixes
-\(Z_{\mathfrak m}\).  The opposite source is represented by
+\(Z_{\mathfrak m}\).  The opposite pair is represented by
 \((-C_{\mathfrak m},-Z_{\mathfrak m})\).  The sign of the cubic generator
 is retained, so the ordered pair is not projective notation.  Relabelling is
 equivariant only when all labelled objects are transported together; it is
@@ -182,7 +178,7 @@ not quotiented silently.
 
 \begin{proposition}[Marked comparison of the two sheets]
 \label{thm:marked-sheet-comparison}
-Fix a marked bridge datum \(\mathfrak m\).  Let
+Fix a marking datum \(\mathfrak m\).  Let
 \(B=\mathbf P(V_E)\), where \(E=\Q(\sqrt5)\), and pull Hitchin's
 incidence normalization back along \(\iota_t:B\to\mathbf P(H_E)\).
 The normalization of this pullback is a disjoint union
@@ -206,9 +202,9 @@ incidence point is degenerate.
 On the Clebsch cubic the unnormalized branches meet, while the normalization
 remains disjoint.
 
-Relative to \(\mathfrak m\), equip \(B_+\) with the source
+Relative to \(\mathfrak m\), equip \(B_+\) with the marked conference pair
 \(\bigl(C_{\mathfrak m},Z_{\mathfrak m}\bigr)\) and equip \(B_-\) with its
-deck-opposite.  At \([xyz]\), the configuration exchanger identifies this
+deck-opposite pair.  At \([xyz]\), the configuration exchanger identifies this
 opposite with the Galois-conjugate configuration and
 the representative
 \((-C_{\mathfrak m},-Z_{\mathfrak m})\).  Under the marked primitive
@@ -223,7 +219,7 @@ asserted to determine \(\mathfrak m\).
 \end{proposition}
 
 Here \(Z_{\mathfrak m}\) and \(\sigma_3\) are different cubics on spaces of
-dimensions five and four.  The proposition compares their orientations relative
+dimensions five and four.  The proposition compares their signs relative
 to \(\mathfrak m\); it does not identify their polynomial domains.
 
 Theorem~\ref{thm:operator-shadows} is the operator stage on the main route.
@@ -255,7 +251,7 @@ its canonical classes give a quadratic field branched exactly along the
 reduced sextic; the complete etale fibre at \([xyz]\) then determines its
 square class \([5]\).  Next, Proposition~\ref{thm:marked-sheet-comparison}
 normalizes the chart pullback and, relative to the stated marking and lift,
-follows deck exchange through the marked conference source and Petersen
+follows deck exchange through the marked conference pair and Petersen
 pair-sum map.  Finally, Theorem~\ref{thm:operator-shadows} identifies the four
 operator formulas, and Theorem~\ref{thm:harmonic-main} identifies the Petersen
 coefficient module and computes the invariant cubic by one exact

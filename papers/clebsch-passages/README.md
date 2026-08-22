@@ -1,4 +1,4 @@
-# Hitchin's Icosahedral Incidence Double Cover and Operator Realizations of the Clebsch Cubic
+# The Clebsch Cubic: Hitchin's Icosahedral Double Cover and Conference-Matrix Rigidity
 
 [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21682515-blue.svg)](https://doi.org/10.5281/zenodo.21682515)
 
@@ -25,24 +25,25 @@ residue-field pinching has square class \([5]\).  A paper-local
 ramification-cycle calculation identifies Hitchin's real sextic boundary as
 the reduced branch divisor, and the cover's function field is
 \(\mathbb Q(\mathbf P(H))(\sqrt{5J_0})\).  The fibre over \([xyz]\) evaluates
-that class; after fixing the marked bridge datum, its two deck choices are
-identified with \(C\) and \(-C\) for an order-six conference operator satisfying
-\(C^2=5I\).
+that class; after fixing the marking datum, its two deck choices correspond to
+the marked conference pairs \((C,Z)\) and \((-C,-Z)\), where \(C^2=5I\).
 
-The resulting oriented cubic is simultaneously triangle holonomy, the
-diagonal of the middle exterior power, a commutator Pfaffian, and an
-oriented spectral-block determinant; the middle two agree for every symmetric
-matrix and the last reformulates the \((\pm\sqrt5)\)-eigenspace decomposition,
-so it is the triangle holonomy
-joining them that records the conference class.  Its outer translates are
-Joubert coordinates on the Segre cubic, while centered squares give the
-Segre--Igusa polar map.  For every symmetric conference matrix the balanced
-exchange spectrum is the squared singular spectrum of its cut block, and
-cut-independence singles out order six.  Independently of this order-six model,
-the four-by-four principal minors of a Seidel matrix determine it up to
-switching and global negation from seven vertices onward, seven being sharp.
-With the same marking, the Petersen eigenspace embeds as the Clebsch
-four-space in degree-six zonal harmonics.
+The resulting signed triangle-product cubic is simultaneously the diagonal
+of the middle exterior power, a commutator Pfaffian, and an oriented
+spectral-block determinant.  For a real symmetric zero-diagonal matrix with
+nonzero off-diagonal entries, nonzero proportionality of its commutator
+Pfaffian to its triangle cubic forces \(n=6\) and \(A^2=\lambda I\); in the
+equal-modulus case this identifies the pentagon conference class.  Its outer
+translates are Joubert coordinates on the Segre cubic, while centered squares
+give the Segre--Igusa polar map.  For every symmetric conference matrix the
+balanced exchange spectrum is the squared singular spectrum of its cut block,
+and cut-independence singles out order six.  Independently of this order-six
+model, the single bit recording whether each four-set is aligned reconstructs
+every two-graph from seven vertices onward up to complement, and seven is
+sharp.  For conference matrices, the determinant-\((-3)\) four-blocks
+therefore recover the signing up to switching and global negation.  With the
+same marking, the Petersen eigenspace embeds as the Clebsch four-space in
+degree-six zonal harmonics.
 
 The fixed-icosahedron Clebsch charts in the first theorem are conjugate
 charts over `Q(sqrt(5))`; they are not presented as rational subspaces of
