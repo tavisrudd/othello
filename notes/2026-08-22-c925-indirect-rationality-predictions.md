@@ -243,6 +243,18 @@ group.  Over \(\mathbf Z/(m+1)\), multiplication by \(m+1\) is zero.  The Lean
 interface therefore consumes an explicit injectivity certificate and checks
 the red cases \(m=1,2,3,4,13\).
 
+### S8. Fano-product rigidity does not cover stabilization by projective space
+
+Pukhlikov proves birational superrigidity for products of primitive Fano
+varieties satisfying his conditions (L) and (M).  Here primitive means
+\(\operatorname{Pic}(F)=\mathbf ZK_F\), with \(\dim F\geq3\).  His verified
+families are general index-one hypersurfaces of sufficiently high dimension
+and general index-one double spaces.  A cubic threefold has index two, while
+\(\mathbf P^m\) is neither an index-one primitive factor nor, for \(m=2\), of
+the required dimension.  The theorem therefore gives no rigidity statement
+for \(B\times\mathbf P^m\).  Applying it would assume precisely the stable
+product theorem that is sought here.
+
 ## Source dossier
 
 ### Claire Voisin, 2017 — refereed
@@ -338,6 +350,17 @@ pp. 693--700.
 This supplies the exact level-two refinement: the Beauville--Colliot-Thélène--
 Sansuc--Swinnerton-Dyer threefold becomes rational after multiplication by
 \(\mathbf P^2\).  The original Annals paper proves the \(\mathbf P^3\) level.
+
+### A. V. Pukhlikov, 2004
+
+*Birational geometry of Fano direct products*, arXiv:math/0405011v2.
+
+Theorem 1 proves birational superrigidity of a direct product of primitive
+Fano varieties when every factor satisfies conditions (L) and (M).  Theorem 2
+verifies those conditions for the high-dimensional index-one families stated
+above.  Neither the cubic factor nor the projective stabilizing factor in this
+problem meets the hypotheses.  The cached source has SHA-256
+`4b45f2c1ee5d2ab41441c459219d52772aa08ad0fd43495bd3e9cd03a2fdeac9`.
 
 ### Ze Xu, 2013 — published claim with a known incorrect proof
 

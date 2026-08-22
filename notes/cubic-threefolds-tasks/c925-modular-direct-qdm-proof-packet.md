@@ -2,30 +2,28 @@
 
 **Lane:** cubic-threefolds
 
-**Status:** conditional marked-projector consumers landed for every \(m\), but
-the no-Stokes row providers tested are ruled out: cubic irreducibility excludes
-the pole-bounded common object, and the cubic product of the \(F_1\) correction
-falsifies both full and marked-image raw \(z=0\) augmentation.  The live
-row-free gate is now edge-local: one vertex-indexed actual-loop packet family,
-an equivariant ambient-plus-correction decomposition on each blowup edge, and
-the exclusion of the source period from that edge's whole correction packet.
-`LoopStabilizerPath` proves that these data telescope through forward and
-reverse steps, so a separately assembled global stable ledger is not needed.  The
-projective endpoint and generic-bulk persistence are closed; the unconditional
-every-smooth theorem is not landed.  Independently, Voisin plus the 2025
-Engel--de Gaay Fortman--Schreieder parity theorem gives an all-\(m\) proof for
-a very general cubic; that preprint result must not be promoted to every
-smooth cubic.
+**Status:** the no-Stokes row providers are ruled out.  Two row-free
+alternatives remain.  `LoopStabilizerPath` transports an exact source period
+provided every correction packet excludes it.  For a connected native
+pure-Euler **inner** cycle in one fixed outer factor, the strict
+cyclic-carrier reduction forces codimension two; the all-\(n\) companion
+calculation then predicts discriminants \(0\) or \(4\), not \(4/9\).
+An outer or mixed cycle is not covered.  Neither published comparison
+supplies the required occurrence-labelled primitive loop or saturated
+native-effective carrier.
+The unconditional every-smooth theorem is not landed.  Independently, Voisin
+plus the 2025 Engel--de Gaay Fortman--Schreieder parity theorem gives an
+all-\(m\) proof for a very general cubic; that preprint result must not be
+promoted to every smooth cubic.
 
 ## Goal
 
-Package and rigorously verify the parameterized direct-QDM proof whose caller
-selects the observed blocks, retained marks, path environment, and
-commutative-monoid consumer.  Instantiate it for cubic one-stabilization
-irrationality, then isolate the exact \(m=2\) and all-\(m\) geometric input.
-The active input is the row-free two-layer Kummer/descent packet; the
-row/projector consumers remain formal alternatives with failed universal
-geometric providers.
+Land the every-smooth \(m=2\) theorem, ideally uniformly in \(m\), without a
+Stokes connector.  Keep the finite consumer and the external geometric
+provider separately typed.  The live source targets are exact-period
+exclusion for every correction packet in every codimension, or prior
+inner-orbit provenance followed by native-effective descent and pure-Euler
+realization of that orbit.
 
 ## Stable entry points
 
@@ -639,442 +637,47 @@ any geometric or QDM provider.
 
 ## Next
 
-1. Freeze the common-rowed-object search.  The new Lean theorems
-   `PoleFreeProjectorObstruction.pullbackFixedSubmodule_invariantUnder` and
-   `pullbackFixedSubmodule_eq_bot_of_horizontal_irreducible` prove that a
-   horizontal proper formal projector on an irreducible algebraic module has
-   no nonzero included algebraic vector; the row non-detection theorem is a
-   corollary.  The cubic
-   hypergeometric criterion and exact parameter certificate supply the
-   irreducibility input; the source dossier records the remaining horizontal
-   inclusion and properness identifications.  Consequently no
-   effective-Novikov, \(z\)-pole-bounded
-   replacement for \(\rho P\) can supply the cubic witness.  An exotic
-   nonsectorial analytic domain is not ruled out, but no such provider is
-   known.  Do not add another coefficient ring or lattice-intersection adapter
-   without first defeating this theorem.
-2. The **full** normalized \(z=0\) row candidate is closed negatively.
-   Equation (5.32) reduces it to the mirror-map Jacobian, whose full
-   ambient-row identity would annihilate every correction ideal.  For
-   \(F_1=\operatorname{Bl}_p\mathbb P^2\), the published small-quantum
-   multiplication table implies that every nonzero eigenvector of the first
-   divisor has nonzero degree-zero coordinate at the generic point.  Lean
-   checks this in
-   `HirzebruchSurfaceAugmentation.no_nonzero_eigenvector_in_degreeZeroKernel`.
-   The rank-one correction is such an eigenline, so the full row identity is
-   false.  Tensoring this blowup with the cubic gives the legal fivefold
-   blowup
-   \(B\times F_1=\operatorname{Bl}_{B\times\{p\}}(B\times\mathbb P^2)\).
-   Over a generic splitting field, Behrend's product theorem and the
-   Euler-preserving algebra decomposition, the cubic primitive-local rank
-   pattern \(1,1,2\), and persistence at the center parameter carry the
-   unique rank-two marked center block to \(U_B\otimes L_i\) for some
-   separated rank-one \(F_1\) factor.
-   No canonical factor label or product-functorial comparison is needed.
-   The outer Euler operator is scalar on \(L_i\), so rank, the nonzero
-   square-zero nilpotent part, and the shift-invariant modified-residue
-   discriminant of \(U_B\) are unchanged.  Every \(L_i\) is degree-zero
-   visible by the displayed table.  Thus the product row is nonzero while
-   the ambient comparison component is zero.  Lean checks the tensor
-   visibility and zero-ambient obstruction
-   separately in
-   `HirzebruchSurfaceAugmentation.tensor_degreeZeroRow_ne_zero_of_eigenvector`
-   and
-   `ProjectedRowProjectorDecomposition.Data.false_of_visible_marked_vector_with_zeroAmbientComponent`.
-   Thus even the projector-restricted row square is false as a universal
-   smooth-blowup provider.  The abstract consumer remains correct; do not
-   reopen raw or normalized augmentation unless the product marker itself is
-   replaced.  An associated-graded alternative would still need unsupplied
-   edge DVR lattices and integral occurrence maps.
-3. Pursue one row-free source theorem only.  For each \(m\ge1\), construct one
-   vertex-indexed family of marked finite-etale packets with an action of the
-   actual pathwise loop.  On each blowup edge, provide an equivariant
-   equivalence
-   \[
-     \mathscr P_{\mathrm{blowup}}
-       \simeq \mathscr P_{\mathrm{base}}\sqcup\mathscr C_e
-   \]
-   and prove that no point of the entire correction packet \(\mathscr C_e\)
-   has period \(m+1\).  A blowdown-oriented step consumes this exclusion; a
-   reverse base-to-blowup step uses only the inverse ambient inclusion.  The
-   new Lean module `LoopStabilizerPath` proves selected-period support
-   transported along the directional typed path; its
-   endpoint theorem contradicts a period-\(m+1\) source and a target with no
-   such point.  Adjacent occurrences share their packet and loop action by
-   construction, so no separate global stable-ledger composition theorem is
-   consumed.  This is strictly smaller than the former global oriented-ledger
-   gate, but it still requires the actual finite-etale index schemes and
-   equivariance of every edge comparison.  It does not require one common
-   coefficient trait: edge-local point sets are allowed, provided the two
-   incident maps at a shared vertex conjugate their local generators to the
-   one action assigned to that vertex.  Ramified charge reindexing must appear
-   in this conjugacy rather than being silently identified with the same loop.
+The live frontier is source-side, not another linear consumer.
 
-   There is a still looser alternative in
-   `LoopStabilizerPath.OrbitTransport`: supply only an injective equivariant
-   map carrying the selected packet at each directed step.  This avoids full
-   correction enumeration and surjectivity.  It replaces the uniform
-   correction-period exclusion by the pointed geometric assertion that this
-   particular orbit lands in the ambient factor.  For a reverse step, geometry
-   supplies the directed ambient inclusion arising from the same blowup
-   comparison.  This direct-provenance route and the correction-exclusion
-   route are alternatives, not cumulative hypotheses.
+1. **Conditional finite consumers.**  Put \(n=m+1\).  After a connected
+   center supplies a native pure-Euler **inner** \(n\)-cycle in one fixed
+   outer factor, the cyclic dimension theorem forces \(d=n\) and exhausts
+   the residue-zero plane.  Only then is the correction codimension two.
+   Lean checks this conditional dimension consumer, the abstract connection
+   recurrence compression, the lower cubic certificate, and formula
+   regressions at \(n=2,3,4,5,14\).  It does not derive the generic all-\(n\)
+   companion recurrence or its two residue shapes.
 
-   For a finite computed packet, use `OccurrenceLoopCertificate`: every point
-   retains its occurrence tag, the loop permutation is fibrewise by
-   construction, legal reindexing requires an explicit conjugacy, and the
-   certificate checks a separating power directly rather than trusting a
-   reported period.  The `Realizes` field equates this permutation with the
-   actual geometric generator.  This closes the finite checker/type seam, not
-   the geometric construction of that equality or the exhaustive marked
-   equivalence between the QDM packet and the enumerated carrier.
+2. **Open gate A: orbit provenance and loop.**  Decide whether a dangerous
+   orbit in the whole correction is inner, outer, or mixed, and lift it to an
+   occurrence-labelled action of the same primitive loop used at the source.
+   An outer cycle already defeats the dimension inference: a curve center of
+   codimension \(n+1\) has \(n\) outer correction copies.  KKPYY's atom
+   multiset and Iritani's outer monodromy do not supply the required inner
+   provenance.
 
-   At the finite level,
-   `TwoLayerDescentPacket.sourceSum_not_equivariantlyEquivalent_withoutSameStabilizer`
-   gives the same one-ledger contradiction without requiring the loop quotient
-   to split.  Its witness-oriented form accepts one distinguishing power per
-   target point, and its exact-period corollary reduces this to the period
-   inequality returned by a tame local-exponent calculation.  The companion
-   Haskell suite checks that arithmetic for \(m=1,2,3,4,13\), all translation
-   charges through period 65, and the red model \(x^{m+1}=t\); Lean proves the
-   gcd reduction and the period-separation implication.
-   A split external \(C_{m+1}\)-action with no free correction point is a
-   convenient stronger provider.  For \(m=2\), the exact local exclusion is
-   absence of a correction three-cycle under the same transported loop.  The
-   consumer/path typing is closed; constructing the coherent vertex-loop
-   finite-etale edge comparison and proving this arbitrary-center exclusion is
-   the missing source theorem.  The
-   first finite source test is the marked correction in
-   \(B\times F_1\): compute its spectral polynomial in the product Novikov
-   charge and verify that the external \(C_3\) fixes its geometric
-   idempotents.  Lean now checks the table's operator polynomial
-   \(\lambda^4+q_1\lambda^3-q_1^2q_2\) and that at \(q_2=0\) the exceptional
-   root \(-q_1\) is simple while the ambient root is triple.  This test is
-   source-reduced: Iritani (1.1) sends a center monomial to
-   \(Q^{\iota_*d}q^{-\rho_Z\cdot d/(r-1)}\); here \(r=2\), the normal bundle of
-   \(B\times\{p\}\) is trivial, and \(\iota_*d\) has no \(\mathbb P^2\) degree.
-   This removes product charge from the center monomials, but the pulled-back
-   center bulk coordinate may still depend on the product parameter.  Put
-   \(t=q_1q_2\), genericize the cubic, \(q_1\), and the remaining variables,
-   and work over \(R=F[[t]]\).  The displayed polynomial becomes
-   \(\lambda^3(\lambda+q_1)-q_1t\); its root \(-q_1\) is simple modulo \(t\).
-   Hensel lifting therefore produces the exceptional rank-one factor over
-   \(R\).  Behrend's product formula and
-   \(B\times F_1=\operatorname{Bl}_{B\times\{p\}}(B\times\mathbb P^2)\)
-   reduce the marked correction claim to the additional tensor-projector
-   identification with that factor and the marked \(B\)-packet.  The latter
-   packet must itself have a finite-flat index algebra whose splitting
-   discriminant or inter-block resultant is a unit before \(t\) is inverted.
-   Under those hypotheses its splitting closure is unramified.  The named
-   extension \(R[t^{1/3}]\) is totally ramified, so disjointness makes the
-   correction idempotents externally fixed.  Lean checks the polynomial and
-   simple-root input.  The exponent-lattice charge, tensor-projector square,
-   Hensel lift, finite-etale good reduction, and geometric occurrence
-   identification remain source inputs.
-   Passing this example does not exclude arbitrary-center three-cycles or
-   supply pathwise loop and comparison coherence.
+3. **Open gate B: native-effective descent and purity.**  For an orbit proved
+   to be inner,
+   descend the total rank-\(2n\) carrier to a saturated carrier in the
+   center's native effective flat frame, realize the loop by a primitive
+   Euler coordinate/Higgs field, and prove the Laurent connection and pairing
+   are scalar extensions of this lattice.  Then prove the uniform companion
+   recurrence-to-residue calculation rather than relying on formula
+   regressions.
 
-   A proposed dimension-three budget is now closed at the coarse level.
-   `ThreefoldKummerCompatibility` checks that a six-dimensional linear model
-   can have the connected-threefold grading spectrum, a perfect pairing, and
-   branchwise modified-residue discriminant (4/9); that arrangement fails
-   strict logarithmic homogeneity.  It also checks that
-   \(\mathbb Q[x,e]/(x^3,e^2)\) has the honest threefold pairing and
-   \(J_4\oplus J_2\) Lefschetz type.  The latter is the special fibre of the
-   regular cubic orbit \(x^3=t,e^2=0\), so rank-six descent does not imply
-   descent of three marked rank-two block lattices.  Lean proves the smaller
-   finite statement that a residue-graded carrier containing the entire
-   residue-zero class is grading-stable.  That still does not determine the
-   first positive-\(z\) return coefficient \((A_1)_{21}\), which is exactly
-   what distinguishes \(\delta^\sharp=0\) from \(4/9\).  Reopen this route
-   only with a source theorem giving marked-lattice descent,
-   Euler-horizontal occurrence reindexing, and vanishing of that first jet.
-   D14 of the source dossier records the exact countermodels and boundary.
+4. **Alternative direct provider.**  Bypass both gates by proving
+   occurrence-wise that no correction packet, in any codimension, has exact
+   period \(n\) under the transported loop.
 
-   Do not replace that centre theorem by an unmarked Mori assertion.
-   Iritani's exponent is a normal-bundle charge, not an anticanonical degree;
-   \(Q^3\) already has the cubic factor \(H^3-4q\) and contracts to a point.
-   Höring--Novelli's projective-bundle theorem starts only after a
-   length-three fibre-type extremal ray over a curve has been supplied.
-4. Keep the bounded 2025--2026 math-physics search as a fallback, not a
-   provider.  P-adic Gamma/Frobenius is proved for toric Fanos and
-   Grassmannians; mod-\(p\) and categorical Fourier--Laplace results constrain
-   formal residues but not primitive-idempotent stabilizers; irregular Hodge
-   compactification independence compares compactifications of one fixed
-   Landau--Ginzburg model.  D11 of the no-Stokes dossier records the exact
-   theorem scopes.  Chuang's 2026 arithmetic Picard--Lefschetz formula makes
-   tame characters computable for diagonal degenerations, but a comparison
-   from the marked QDM packet to those nearby cycles is not available and the
-   cubic diagonal model itself realizes the forbidden three-cycle.  An
-   arithmetic nearby-cycle enhancement of atoms or a common
-   Landau--Ginzburg model would be new mathematics.  Lee--Wang--Wang's
-   degree-three Type-II transition has local exponents \(1/3,2/3\), so even
-   genuine threefold extremal-transition geometry can carry exact order-three
-   monodromy before the C924 marker is imposed.
-5. Keep the global stable-rationality route as an independent benchmark.
-   Voisin's JEMS Corollary 4.4 converts a hypothetical
-   \(B\times\mathbf P^m\dashrightarrow\mathbf P^{m+3}\) into algebraicity of
-   \(\theta^4/4!\) on \(J(B)\).  Engel--de Gaay Fortman--Schreieder
-   arXiv:2507.15704v3, Theorem 1.3, proves that every curve class is an even
-   multiple of the minimal class for a very general cubic, so their
-   Corollary 1.4 closes every stabilization index in that quantifier domain.
-   This 2025 source is a preprint.  Its finite \(K_{3,3}\), \(K_5\), and
-   \(R_{10}\) rank calculations are candidates for an independent Lean
-   certificate; its degeneration and monodromy arguments remain external.
-   Voisin's Theorem 4.5 gives nonempty special loci with universally trivial
-   \(\mathrm{CH}_0\), so this route cannot prove the every-smooth statement.
+5. **Closed or non-provider routes.**  Do not reopen the common
+   \(\epsilon M\)-row/stable-projector composite, raw or normalized
+   degree-zero augmentation, ordinary Hodge/Hard-Lefschetz multiplicity, or
+   global algebraic-simplicity projection.  Their countermodels and precise
+   type failures are recorded in
+   `../2026-08-21-c925-no-stokes-source-dossier.md`.
 
-## Retired provider specifications
-
-The items below retain exact hypotheses and falsifiers for alternate routes;
-they are not the work queue.  Item 3 above is the live every-smooth frontier;
-items 4 and 5 are, respectively, a source-search fallback and an independent
-very-general benchmark.
-
-5. Keep generic even-bulk persistence green under its stated QDM hypotheses.
-   `rankTwoCluster_nilpotent_persists_on_formal_germ` proves from compressed
-   commutation and flatness that the cubic nilpotent part remains square-zero
-   and nonzero throughout the formal germ.  A first-order bulk derivative is
-   only a corroboration, not a missing theorem.
-6. The following former provider specification is retained for audit only.
-   It is not an active construction target.  It asked to construct the common
-   rowed object consumed by
-   `RowedProjectorOccurrence.FaithfulScalarEdge`.  For every factorization
-   vertex define the native rowed marked module
-   \((V_Y,\rho_Y,P_Y)\) and its detection proposition \(D(Y)\).  For every
-   edge give faithful extensions of the two possibly different native rings
-   to one edge ring, Iritani's completed
-   ambient-plus-correction equivalence, and the block-projector square for the
-   intrinsic C924-marked union.  The exact row square for that same map is now
-   source-derived from Iritani's common Fourier source and completed ordinary
-   basis, while spectral-extension uniqueness separately supplies the full
-   formal projector square.  Restrict to a stated even bulk slice and place
-   the negative-`z` row and positive-`z` projector on one explicit
-   graded/topological module where their composite is defined; then prove the
-   native and edge maps faithful.  The endpoint rows and projectors are scalar
-   extensions by type;
-   `detectsAt_iff` derives \(D(Y_-)\leftrightarrow D(Y_+)\), and
-   `TwoBaseRowedProjectorEdge.Data.toIntrinsicEdge` feeds `IntrinsicPath`
-   after explicit semantic endpoint identifications.  No common path ring or
-   adjacent carrier map remains after the native presentations are supplied.
-   If the marked projectors are polynomial in one intertwined operator,
-   `ofBasisRowAndPolynomialProjector` derives the projector square; the source
-   then supplies only the geometric polynomial presentation and operator
-   square; the basis row equation is the Iritani augmentation identity.
-   Iritani (5.38) and (5.39) are the relevant vertex inclusions; (5.40) is only
-   a homomorphism for edge-local center variables.  Theorem 5.18(7) gives an
-   invertible combined coordinate change, but coordinates do not identify the
-   carrier, row, or projector.  A bare fraction-field or "graded completion"
-   assertion is insufficient: odd bulk variables prevent a fraction field,
-   and homogeneous positive- and negative-`z` tails can still have an
-   infinite diagonal convolution.  Localizing an integral module at its
-   fraction field is not faithful.
-5. Referee-audit the formal marked-projector provider uniformly for every
-   smooth-center blowup allowed by AKMW, including the higher-dimensional
-   centers that appear when \(m>1\).  For every generic even QDM, let
-   \(P_{\mathrm{mark}}\) be the idempotent onto the union of the C924
-   blocks of rank two with \(N\ne0\) and \(\delta^\sharp\ne0\).  The exact
-   one-edge theorem is
-
-   \[
-      \Psi P_{\widetilde Y}=(P_Y\oplus P_Z)\Psi,
-      \qquad
-      \rho_{\widetilde Y}=\rho_Y\operatorname{pr}_Y\Psi,
-      \qquad \rho=\epsilon M.
-   \]
-
-   Iritani supplies the completed comparison and row square uniformly.  The
-   remaining source candidate takes projector naturality from KKPYY spectral
-   canonicity, or from a direct formal CRT/Hensel projector for the C924
-   spectral predicate.  `CoprimeFactorProjector.Data` reduces this to marked
-   and unmarked factors, one Bezout identity, product annihilation, and the
-   Euler-operator square.  Prove that this geometric marked union is
-   collision-free and is carried by Iritani's exact map.  A finite truncation
-   is not evidence for existence or invertibility of the completed projector.
-   `RowedProjectorOccurrence.CommonSourceEdgePresentation.toEdge` derives the
-   typed edge from two exact common-source presentations.  The smaller
-   intrinsic route instead uses `FaithfulScalarEdge`: after the same completed
-   map satisfies the two squares, faithful base change and path reflection are
-   theorem consequences.
-6. Keep the provider routes modular.  The direct route uses the abstract edge
-   facts recorded in the source dossier; Iritani and Gu--Yu--Yu are alternate
-   providers where their scopes overlap.  A common faithful base, a
-   polynomial presentation of the marked
-   projector, a unit row normalization, and a tensor endpoint unit are
-   separate adapters used only by the presentations that need them.  The Lean
-   and Haskell interfaces now test each route without requiring their union.
-7. The consumer arithmetic and projective-space endpoint are closed.  The
-   cubic endpoint still requires
-   \((\epsilon_XM_X)|_{\operatorname{im}P_X}\ne0\) for the full stable cubic
-   projector on the same coefficient object as item 1.  Raw `z=0` visibility
-   plus `M=1+O(z^-1)` does not imply this; a two-dimensional exact matrix
-   counterexample is recorded in the dossier.  Lean proves unit-scaled detection,
-   common-source composition from basis certificates, faithful base-change
-   reflection, polynomial projector naturality, the exact rational cubic
-   marker, its tensor detection for every auxiliary row with a value-one
-   vector, separability of \(H^{m+4}-q\) for nonzero \(q\), and positivity of
-   the projective-product branch count for every \(m\).  The Haskell suite
-   supplies exhaustive hostile finite models.  Do
-   not add loops, roots, surjectivity, Fitting, Gamma data, or Stokes data to
-   the active proof.
-   The tempting replacement
-   \(\exists x\in L_X\cap\operatorname{im}P_X\) with
-   \(\epsilon_XM_Xx\ne0\), for the pole-free effective-Novikov lattice
-   \(L_X\), is not a closed endpoint theorem.  The cubic rank-four
-   hypergeometric module is globally irreducible; its rank-two
-   zero-exponential factor is only a local formal block.  Hence the proposed
-   Golyshev-`D3` rank-one algebraic subconnection is the wrong object.
-   Edgewise reflection would additionally need a strict
-   denominator-clearing theorem because Iritani's Laurent comparison does not
-   preserve the two native chamber lattices.  The exact falsifier and the
-   existing C907 certificate are recorded in the source dossier.
-8. The source/referee frontier is the table
-   `../2026-08-21-c925-referee-source-substitution-table.md`.  It now separates
-   independent derivations from shared Fourier lineage and records the native
-   occurrence gate.  Do not call the all-\(m\) theorem unconditional until
-   the common rowed coefficient object and cubic full-row endpoint are
-   discharged.
-9. Keep the prior one-sided endpoint architecture as a fallback:
-   `Comparison.MarkedWitnessObstruction` consumes only one detected source
-   and one rowed selected-action map to projective space.  The global AKMW
-   source and a typed chain of local sources are its two lawful providers.
-   The native projective Kummer/deck carrier is no longer a candidate: the
-   (r=6) endpoint itself has primitive (C_3)-visible rank under the natural
-   order-three subgroup.  Retain Cai/fixed-phase/Gamma/Stokes bridges only as
-   explicitly nonprimary fallbacks.  They are not open gates for the landed
-   proof.
-
-The statement-by-statement evidence and nonoutputs for Iritani--Koto,
-Gu--Yu--Yu, Iritani, AKMW, KKPYY, and the analytic fallbacks live in
-`../2026-08-21-c925-no-stokes-source-dossier.md`.  The exact P0--P4 gate and
-the looser fallback audit live in
-`../2026-08-21-c925-pointed-row-calibration.md`.
-
-## Conditional provider ledger
-
-The entries below are retained alternatives, not coequal next steps.
-
-1. Global common-source detail.  On one smooth projective
-   cobordism, construct a finite rational marked Gamma/monodromy core
-   containing a detected primitive-sixth witness.  For the rational target it
-   is enough to construct one selected-loop intertwiner from that core whose
-   pullback of the endpoint rank row is the common row up to one scalar; the
-   scalar need not be a unit for this one-sided implication.  No target
-   surjectivity or primary coverage is used:
-   `Comparison.MarkedWitnessObstruction` gives the contradiction because the
-   target primary block is empty.  The source side still needs either a direct
-   construction of the detected core witness or one primary-covering lift from
-   the cubic-product endpoint.  General quantum-Kirwan surjectivity is stated
-   as a conjecture in Woodward's Remark 8.10 and is not an available blanket
-   provider.  This one-sided formulation is uniform in \(m\) and avoids
-   adjacent-overlap coherence.
-   Do not replace the marking by the ordinary Hard--Lefschetz character of
-   the cubic Hodge structure.  If \(A=H^3(X)_{\mathrm{prim}}\), a curve
-   \(C\) with \(J(C)\twoheadrightarrow J(X)\) has
-   \(A(1)\subset H^1(C)\); blowing up \(C\subset\mathbf P^D\) creates the
-   full length-\((D-2)\) string \(A(-j)\subset H^{3+2j}\).  Hence the
-   unmarked Hodge packet fails under a single smooth blowup.  The exact
-   counterexample and the conditionally valid Lefschetz arithmetic are
-   recorded in
-   `../2026-08-21-c925-pointed-row-calibration.md`.
-   If the source audit does not construct this direct endpoint provider,
-   return to the first genuine
-   \((1,1)\) overlap and use Module 59's result that all
-   sixteen completed-pilot coordinate-wall adjacencies have common
-   rank-visible generators; the separable primitive-projector implementation
-   is therefore ruled out on every pilot.  The character-basis moving complement
-   is not a uniform repair: its formal diagonal coefficient passes every
-   flip--flip direction but has
-   order-zero defect in every blowup--blowdown direction and most mixed
-   directions.  Module 60 proves that the upper-triangular crossed-edge
-   Reader/lens restores the full product normal formally and composes without
-   a Stokes matrix.  Module 61 supplies the lawful diagonal coefficient trait
-   on all five pilots.  Construct the based-loop/common-receiver reindexing
-   and identify that exact crossed edge with the actual fixed-phase
-   image/can--var packet.  Module 62 shows that it is enough to construct the
-   vector crossed-coordinate model, the fixed actual receiver, and one marked
-   horizontal semilinear comparison of the two selected monodromies whose
-   induced incoming-image map spans the actual packet.  Alternatively, construct
-   `FixedReceiverCertificate` directly on the specialized actual receiver; its
-   exact source lemma is the vector law `T_j v_i=j_M D+j_C B` together with the
-   three row restrictions and the actual can/variation packet certificate.
-   `FixedReceiverWindowCertificate` compresses this to the single square
-   `T_j v_i=j_+F` for the full window map `F=(B,D)` and one target window-row
-   equation.  Its scaled variant accepts one common source/target row factor
-   without division.  Proposition 12.6 computes `F`; it does not identify that
-   decategorified groupoid map with the actual fixed-phase square.  Theorem 6.4
-   and Proposition 13.4 identify the same groupoid map with analytic GKZ
-   continuation for nonresonant parameters in Proposition 13.4's real negative
-   cone; Theorem 6.4's formula itself allows the corresponding negative-real-part
-   sector.
-   They do not construct the actual can/variation maps or target square.  The
-   open source step is now that packet realization together with extension
-   across the named resonance trait and the actual fixed-phase QDM/Gamma-row
-   identification.  A full based-loop
-   representation morphism is a stronger uniform provider.  Exact image/coimage base
-   change is another sufficient stronger implementation, not a separate
-   necessary gate; the remaining image maps and projected-row square then follow
-   functorially.
-   The direct Module 60 consumer proves the directed covector
-   \(\rho_j(1-T_j)|_{\operatorname{im}(1-T_i)}\) vanishes without computing a
-   two-wall Stokes matrix.  Yu--Zhang supplies spectral/vanishing-cycle block
-   comparison only after an algebraic exponential-type occurrence is built;
-   it does not supply the Gamma row or exact image reader.
-   Module 64 has completed the bounded external-descent test.  The source
-   branches are regular and codimension two introduces no new outer root, but
-   the inner correction algebra can still be $K[t]/(t^3-q)$; therefore the
-   detour does not close from current comparison formulas.  Resume it only
-   with a geometric charged carrier-unramifiedness theorem for actual
-   threefold centers.  Otherwise keep the fixed-phase rank-row reader as the
-   primary route.
-2. As the trait alternative, construct the Module 53 common canonical trait
-   receiver for every
-   consecutive-discrepant overlap.  Put both incident one-arrow receivers in
-   its generic fibre, take the saturated closure of their row-null supported
-   span, and identify both actual closed fixed-phase primitive packets with
-   the resulting quotient, including projector, row, coimage base change,
-   deck character, and adjacent reindexing.  This is now strictly smaller
-   than a full two-arrow Stokes-mutation theorem.
-3. Pursue a relative \(p\)-field or enlarged-group master-space comparison
-   only after naming a nontrivial critical target whose QDM/Gamma realization
-   is the original cubic packet.  A metabolic quadratic stabilization cannot
-   do this.
-4. Do not search for another finite ordinary multi-coordinate completion:
-   Module 50 rules out that entire class, and Module 51 rules out localization
-   descent of the natural completed kernel.
-5. In parallel, test the narrower non-equivariant adapter of Module 44:
-   realize the actual primitive packet in a common narrow QDM, preserve its
-   compact-support pairing, and carry the shifted-point/Thom line across the
-   overlap.  Module 45 now supplies the rich paired narrow comparison under
-   the explicit toric-CIJ/Shoemaker realization, spanning, and exact
-   non-equivariant base-change hypotheses.  Module 46 proves that the narrow
-   row is equivariant rank divided by the universal Thom zero and is
-   therefore preserved by that same rank-preserving Fourier--Mukai map; the
-   pairing then preserves its shifted Thom representative.  The remaining
-   gate is the occurrence/fixed-phase and Thom/framing identification, not a
-   scalar or Euler-square computation.  Module 47 makes the phase part
-   smaller still: a single-valued horizontal gauge carries every generalized
-   character sector automatically, so identify the actual cubic packet with
-   one common based loop or typed deck path and record the induced character
-   map under reindexing.
-6. Use the normalized-primary-coimage theorem to identify Module 43's
-   universal conormal jet with the actual endpoint row transition.  The
-   scalar and ramification orders are already proved; only occurrence
-   realization and exact quotient-fidelity remain.
-7. Treat the arbitrary relative-cap lift and same-receiver lower-center
-   charge adapter as alternative routes, not prerequisites for the rank-row
-   overlap route.
-8. Prove the local fixed-phase QDM point-line law of Module 35: commute the
-   primitive projector with the chosen monodromy, identify the Gamma and
-   formally normalized point lines using a non-Picard selector or strict
-   multiplicity-one filtration quotient, and provide lawful adjacent/endpoint
-   reindexing along one chosen factorization.
-9. As the ExactTop alternative, construct a **corrected intrinsic**
-   support/Gysin realization for Module 32; ordinary Gamma or residual
-   projection is ruled out by the point regression.
-10. Prove the sharp occurrence-indexed exceptional exponent/carrier bound.
-11. If the monodromy route fails, construct the opposite-oriented enriched
-   exact sequence and use the Module 25/26 boundary adapter.
-12. Continue the higher-EV rank-row common-receiver audit in parallel.
+No unconditional every-smooth \(m=2\) or all-\(m\) theorem has been landed.
+The very-general all-\(m\) theorem from Voisin plus
+Engel--de Gaay Fortman--Schreieder remains a separate benchmark.
 
 C925 remains active until the user closes it.

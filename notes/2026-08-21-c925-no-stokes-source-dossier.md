@@ -1725,7 +1725,7 @@ is not the whole adapter: geometry must first identify the exhaustive marked
 primitive-factor packet with the tagged carrier and prove that the loop
 preserves those occurrence fibres.
 
-## D14. A threefold dimension budget stops at the first connection jet
+## D14. Strict cyclic carriers and the native-frame gap
 
 The obvious dimension-three exclusion is false.  On the slice
 
@@ -1786,22 +1786,173 @@ the form
 The value \(c=0\) gives the unmarked product model, while \(c=1/9\) gives the
 cubic value \(4/9\), without changing the leading rank, nilpotent, or grading
 compression.  The logarithmic homogeneity equation checked in Lean contains
-no \(A_1\) term and cannot force this vanishing.
+no \(A_1\) term and cannot force this vanishing by itself.
 
-Accordingly, a genuine dimension-three correction theorem needs three
+There is nevertheless a strict finite theorem on a pure one-variable spine.
+Write the even cohomology of a connected threefold as
+
+\[
+ V_0\oplus V_1\oplus V_2\oplus V_3,
+ \qquad \dim V_0=\dim V_3=1,
+\]
+
+with grading weights \(-3/2,-1/2,1/2,3/2\).  If multiplication by the Euler
+class is homogeneous of degree one modulo three and has one nonzero cubic
+orbit of three rank-two Jordan blocks, then the six-dimensional generalized
+primary carrier contains all of \(V_0\oplus V_3\).  Multiplication is
+invertible on that carrier, so it identifies its three residue classes and
+makes the carrier grading-stable even when the Picard rank is larger than two.
+
+On \(V_0\oplus V_3\), write the nilpotent part of the cube as
+
+\[
+ N=\begin{pmatrix}-rs&r^2\\-s^2&rs\end{pmatrix}.
+\]
+
+The strict Sylvester recurrence gives a return coefficient proportional to
+\(-2r^2s^2/27\).  Poincare self-adjointness of the Euler multiplication makes
+\(N\) self-adjoint for the hyperbolic unit--point pairing.  Hence \(rs=0\),
+so the return coefficient vanishes.  In the lower orientation the modified
+residue is
+
+\[
+ \begin{pmatrix}-1/2&2\\0&-1/2\end{pmatrix}
+\]
+
+and has discriminant zero; the upper orientation has discriminant four.
+Neither carries the cubic value \(4/9\).  The same Lean module checks the
+lower canonical model, including the separating basis, first Sylvester gauge,
+zero return entry, and zero discriminant.  The pairing hypothesis is
+essential: a strict six-dimensional homogeneous model with cube
+\(\left(\begin{smallmatrix}2&1\\-1&0\end{smallmatrix}\right)\) has nonzero
+return \(-2/27\), but admits no nondegenerate grading-compatible pairing for
+which the Euler multiplication is self-adjoint.
+
+The same calculation has an all-length form.  Put \(n=m+1\ge2\), let a
+connected center have dimension \(d\le n\), and suppose that, inside one
+fixed outer correction factor, a native pure degree-one operator modulo
+\(n\) has a regular inner \(n\)-cycle of rank-two Jordan blocks.
+The generalized primary carrier has dimension \(2n\).  Its \(n\) residue
+pieces are cyclically isomorphic and therefore all have dimension two.  If
+\(d<n\), the residue-zero part of cohomology is only \(H^0\), a contradiction.
+Thus \(d=n\), the carrier exhausts \(H^0\oplus H^{2n}\) in residue zero, and
+the grading preserves it.  In the companion model
+
+\[
+  K[x,e]/(x^n-1,e^2),\qquad U=Lx+\nu e,
+\]
+
+the full Sylvester recurrence has scalar selected second coefficient
+\((n^2-1)/(24L)\).  Its return entry is zero.  The lower and upper elementary
+modifications again have discriminants zero and four.  The checks at
+\(n=2,3,4,5,14\) give scalar coefficients
+\(1/8,1/3,5/8,1,65/8\) when \(L=1\).  Lean now proves the uniform cyclic
+dimension count and residue-zero exhaustion.  The displayed all-\(n\)
+Sylvester formula is an exact symbolic calculation but is not yet a
+kernel-checked geometric theorem.
+
+The conclusion \(d=n\) is conditional on that inner-factor hypothesis.  It
+does not classify an orbit in the whole correction packet.  For codimension
+\(r>2\), Iritani has \(s=r-1\) outer copies and the transported loop may cycle
+them.  For example, a curve center in ambient dimension \(n+2\) has
+\(r=n+1\) and hence \(s=n\): repeating one rank-two center block gives a
+regular outer \(n\)-cycle although \(d=1<n\).  Equivalently, the whole
+correction has Tate-string dimension \(d+r-2=n\), so the residue-zero count is
+compatible with every codimension.
+
+If geometry first identifies a dangerous orbit as inner to one fixed outer
+factor, the dimension theorem then gives \(d=n\), hence \(r=2\), \(s=1\),
+and one center factor.  In that conditional codimension-two specialization of
+Theorem 5.18,
+
+\[
+ \lambda_0=-q,\qquad
+ \varsigma_0=q+\pi i\rho_Z+O(q^{-1}),\qquad
+ Q_Z^d\longmapsto Q^{\iota_*d}q^{-\rho_Z\cdot d}.
+\]
+
+Equations (5.40) and (5.43) therefore place the center QDM at a
+\(q\)-dependent bulk point over a Laurent \(q^{-1}\)-ring; the pulled-back
+connections contain the derivatives of \(\varsigma_0\).  The comparison does
+not identify the dangerous occurrence with a block in the center's native
+effective flat frame.  The first unsupported arrow is the inner-versus-outer
+occurrence and loop identification.  Native-effective descent is the next
+unsupported arrow after an inner occurrence is supplied.
+
+Hinault--Yu--Zhang--Zhang do not fill this gap.  Their Definition 2.9 uses a
+regular \(z\)-connection framing; Theorems 4.2 and 4.26 extend an already
+chosen framing, and Proposition 4.31 reconstructs an F-bundle isomorphism
+from its fibre value.  Their blowup results do not choose an effective
+Novikov lattice, a finite-etale branch scheme, or a saturated elementary
+modification.  Canonicity of the formal F-bundle decomposition therefore does
+not imply the native occurrence statement required here.
+
+Purity cannot be imposed after arbitrary graded localization.  Over
+
+\[
+  R=\mathbb Q[u,u^{-1}][[t]],\qquad
+  E=3t\partial_t+u\partial_u,
+\]
+
+the degree-one unit \(u\) supports an exact six-dimensional, self-adjoint
+homogeneous matrix model with a regular cubic orbit and modified-residue
+discriminant \(4/9\).  It is a \(u\)-dependent graded conjugate of the honest
+dual-number model.  The conjugating matrix is fixed by the \(t\)-loop, so it
+does not change the period.  This is the mandatory counterexample to any
+statement made only over a strongly graded Laurent field.
+
+The Laurent model does not extend to a flat two-variable QDM in a trivial
+base frame.  If commuting Higgs matrices \(C_t,C_u\) satisfied
+\(U=3C_t+C_u\) and the flat-coordinate derivative equation, cyclicity of
+\(U\) reduces \(C_t\) to multiplication by one element of the dual-number
+algebra.  Three entries then force, for one coefficient \(\alpha\), both
+\(E\alpha=\alpha\) and \(E\alpha=-\alpha\), hence \(\alpha=0\), while a third
+entry requires \(E(\alpha t)=3t\).  The contradiction disappears only after
+adding the nonzero \(z^0\) base gauge produced by the \(u\)-dependent change
+of frame.  Equivalently, the construction uses \(u^{-1}\) and has no effective
+large-radius lattice.  This separates the native QDM hypothesis from the
+false localized matrix statement.
+
+This contradiction uses \(u\) as an actual logarithmic base coordinate with
+a Higgs operator \(C_u\) and the divisor identity \(U=3C_t+C_u\).  A graded
+unit introduced only by scalar or splitting-field extension need not be a
+QDM tangent direction, so the same flatness equation is then unavailable.
+The source adapter must carry an integral cocharacter, its extended
+derivation, and the corresponding Higgs map; a grading on the coefficient
+field alone is insufficient.
+
+Accordingly, a genuine all-length correction theorem needs four
 independent clauses:
 
-1. saturated descent of the three elementary-modified marked block lattices
-   through the Kummer collision;
-2. Euler-horizontal occurrence reindexing, including the base-Euler
+1. a pointed effective Novikov lattice and a flat-coordinate QDM frame, so
+   that nonzero-degree Laurent units and hidden \(z^0\) base gauges cannot
+   absorb the grading;
+2. saturated descent of the elementary-modified marked block lattices through
+   the Kummer collision;
+3. Euler-horizontal occurrence reindexing, including the base-Euler
    derivative term; and
-3. a threefold-specific divisor, flatness, or WDVV theorem forcing
-   \((A_1)_{21}=0\).
+4. identification of the transported loop with a pure degree-\(n\) Euler
+   coordinate, together with Poincare-compatible first-jet transport.  Under
+   those hypotheses the strict finite calculation forces
+   \((A_1)_{21}=0\); they are not supplied by the current comparison theorem.
 
 No audited blowup, projective-bundle, Hodge, p-curvature, or
 irregular-Hodge source proves these clauses.  The dimension-budget route is
 therefore a sharply stated possible new theorem, not a present provider for
 the period-three correction exclusion.
+
+Source ledger for this gate:
+
+| Source | Exact usable output | Missing output |
+| --- | --- | --- |
+| Iritani--Koto, arXiv:2307.03696v4, Theorem 5.1 and Proposition 5.8 | The source projective packet has branches \(\zeta_n^j q^{1/n}\) and one native \(q\)-turn is a regular \(n\)-cycle. | No blowup-occurrence descent. |
+| Iritani, arXiv:2307.13555v3, Theorem 5.18 and (5.38)--(5.43) | In codimension two there is one correction factor, with connection, pairing, homogeneity, and explicit Laurent pullback. | No native effective carrier or pure-loop identification; the bulk point depends on \(q\). |
+| Iritani, arXiv:2604.10028v2, Propositions 3 and 8, Corollary 11 | Cyclotomic outer monodromy and Hodge equivariance. | The Hodge group fixes Novikov roots; it gives no inner occurrence action or effective lattice. |
+| KKPYY, arXiv:2508.05105v2, Theorems 4.1, 4.5, 4.11 and Remark 3.53 | Canonical Laurent F-bundle splitting and the non-equivariant atom multiset. | Atoms have no natural morphisms; base change to an algebraic closure loses the occurrence and inertia data needed here. |
+| Hinault--Yu--Zhang--Zhang, arXiv:2411.02266v2, Definition 2.9, Theorems 4.2 and 4.26, Proposition 4.31 | Extension and reconstruction from an already chosen regular framing. | No construction of the native effective frame, saturated marked carrier, or loop label. |
+
+No journal publication was found for these five cited versions in the bounded
+source check on 2026-08-22.
 
 ## Current source verdict
 
@@ -1833,10 +1984,20 @@ the period-three correction exclusion.
    Frobenius structures, or compactification invariance for one fixed
    Landau--Ginzburg model.  They do not provide the occurrence-uniform
    stabilizer exclusion or a common mirror model for the birational path.
-6. **The edge-local Lean telescope is uniform in \(m\); the unconditional
-   geometric provider is not landed.**  Do not report the all-\(m\) theorem
-   as proved.  The next source target is the henselian, actual-loop
-   refinement just stated, not another row consumer.
+6. **The strict dimension reduction is conditional on an inner carrier.**
+   Lean proves the cyclic rank and endpoint-plane exhaustion consumers.  For
+   a connected native pure-Euler inner \(n\)-cycle in one fixed outer factor,
+   they force \(d=n\) and hence codimension two.  They say nothing about an
+   outer or mixed cycle in the whole correction.  The all-\(n\) companion
+   recurrence and its discriminants remain a paper calculation; Lean checks
+   the lower cubic instance and scalar formula regressions.
+7. **The unconditional geometric provider is not landed.**  The two live
+   source targets are alternatives: either prove actual-loop period exclusion
+   for every correction packet, or first classify a hypothetical orbit as
+   inner, then prove native-effective descent and purity and apply the strict
+   calculation.  The published Laurent comparison supplies neither.  Do not
+   report the \(m=2\) or all-\(m\) theorem as proved, and do not add another
+   row consumer.
 
 The finite plumbing regression is
 `cubic-threefolds-tasks/c925-rowed-projector-sanity.hs`.  It requires each

@@ -156,6 +156,17 @@ determinant `5/36`, and discriminant `4/9`, and the normalized degree-zero row
 detects the block and remains detecting after tensoring with a row-value-one
 vector. Its identification with the geometric quantum-module block
 is not a consequence of those rational calculations.
+`ThreefoldKummerCompatibility` separates finite ingredients for a strict
+exclusion from their geometric adapter.  It checks a cubic dual-number model
+whose normalized
+return coefficient vanishes, proves that Poincare self-adjointness kills the
+general rank-one return polynomial, proves the uniform dimension-two count for
+cyclic residue pieces, and records exact coarse countermodels.  It does not
+identify an arbitrary correction occurrence with a pure native Euler
+coordinate, retain an effective flat coefficient lattice, or descend the
+marked block lattices.
+Its flat-coordinate scalar obstruction consumes three weight equations; it
+does not derive them from a geometric divisor equation.
 `ProjectiveSpaceQuantumPolynomial` proves that the standard relation
 `X^(m+4) - q` is separable in characteristic zero for nonzero `q`. This
 kernel-checks the target's no-repeated-root algebra once its small-quantum

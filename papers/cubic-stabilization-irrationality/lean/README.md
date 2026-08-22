@@ -435,8 +435,22 @@ are compatibility and falsifier calculations, not a construction or
 classification of a threefold quantum connection.  A separate abstract lemma
 shows that a residue-graded carrier containing the full residue-zero class is
 preserved by a grading operator which preserves that class and is scalar on
-the other two.  It does not construct those projections or control the first
-positive-`z` connection jet which enters the marked residue.
+the other two.  For the strict cubic dual-number model, the module also checks
+an explicit separating basis, the first Sylvester gauge, the vanishing return
+entry, and the resulting zero modified-residue discriminant.  A two-parameter
+rank-one calculation proves that the same return polynomial vanishes whenever
+the nilpotent cube is self-adjoint for the hyperbolic unit--point pairing.
+The uniform cyclic lemma proves that `n` equivalent residue pieces of total
+dimension `2n` each have dimension two and exhaust any containing
+two-dimensional zero-residue class.  These results do not construct the
+residue projections, descend the marked block lattices, or identify a
+geometric path loop with a pure native Euler coordinate.  In particular they
+do not justify purity after localization by coefficient variables of nonzero
+degree; the geometric adapter must retain an effective flat QDM frame.
+The module also kernel-checks the final characteristic-zero scalar
+contradiction obtained from the three weight equations of the degree-one-unit
+countermodel.  It does not derive those equations from flatness or the divisor
+equation; that matrix-to-geometry reduction remains external.
 
 The algebraic model has a compact sufficient constructor. If the combined
 crossed and moving map `(B,D)` admits a linear retraction, an explicit incoming
