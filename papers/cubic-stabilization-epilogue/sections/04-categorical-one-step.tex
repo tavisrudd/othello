@@ -165,21 +165,19 @@ quotient are developed in \cite{RuddHodgeLedger}.
 
 \subsection{The QDM operation providers}
 
-Four adapters place the comparison theorems in the preceding interface.
+Four compatibility facts place the comparison theorems in the preceding
+framework.
 First, the intrinsic ample-adic completion and the Laurent neighborhood of a
-fibre or exceptional cusp need not map to one another.  We use the injective
-maps of graded completed coefficient rings in Iritani's display~(1.1), not a
-finite ``algebraic coefficient algebra'' \cite[(1.1)]{IritaniBlowup}.  For
-projective bundles the common
+fibre or exceptional cusp need not map to one another.  Iritani's
+display~(1.1) supplies the required injective maps of graded completed
+coefficient rings \cite[(1.1)]{IritaniBlowup}.  For projective bundles the common
 source is \(\C[z,q][[Q,\widehat\tau]]\); on the blowup side one uses the
 corresponding graded source and, for center terms, the reduced image ring of
-Iritani's Remark~5.6.  Pass from the generic field of each common image to one
-algebraic closure and form every primary block there.  The two completions are
-then compared only after embedding their generic fields in a common
-algebraically closed overfield.  Base change of an already split generalized
-eigenspace preserves its rank, nilpotent Jordan type, regular formal gauge,
-and formal exponent classes.  We do not claim that primary factors over a
-nonsplitting field survive arbitrary field extension.
+Iritani's Remark~5.6.  Embed the generic fields of these common images in a
+fixed algebraically closed overfield and form every primary block there.  Base
+change after this splitting extension preserves the rank, nilpotent Jordan
+type, regular formal gauge, and formal exponent classes of each block; forming
+primary factors over a nonsplitting field before extension would not.
 
 Second, the comparison is restricted to the even carrier, not merely to the
 even bulk base.  The supermodule conventions and the pull-push and Fourier
@@ -222,12 +220,11 @@ restriction gives distinct exponentials.  Their derivatives of orders
 \(0,\ldots,n-1\) form an invertible Vandermonde matrix, so the
 character-tagged map is injective.
 Remarks~2.3 and 5.6 of \cite{IritaniBlowup} show that divisor and Novikov
-variables occur in precisely these combinations.  We do not use the
-function-level symbol \(\sigma_j^*\), which need not be defined before this
-reduction.  Instead, each actual center term, over the reduced
-divisor-equation image ring with its retained character tags, is a faithful
-scalar extension and formal reparametrization of the intrinsic generic
-numerical QDM of \(Z\).
+variables occur in precisely these combinations.  The reduced
+divisor-equation image ring with its retained character tags replaces the
+function-level symbol \(\sigma_j^*\), which need not exist before reduction.
+Over this ring, each actual center term is a faithful scalar extension and
+formal reparametrization of the intrinsic generic numerical QDM of \(Z\).
 
 \begin{proposition}[QDM operation ledgers]
 \label{prop:qdm-operation-ledgers}
@@ -256,8 +253,8 @@ adds an independent scalar \(u_jI\) to Euler multiplication.  For two finite
 spectra, the resultant of their translated characteristic polynomials is a
 nonzero polynomial in \(u_i-u_j\), with leading coefficient one.  Hence the
 spectra of distinct factors are disjoint at the generic point: their primary
-blocks do not fuse when the direct sum is formed.  The regularity, even-carrier,
-fixed-splitting-field, and suspension adapters therefore carry the marker
+blocks do not fuse when the direct sum is formed.  Regularity, even-carrier
+restriction, the fixed splitting field, and suspension invariance therefore carry the marker
 blockwise across the comparison, and additivity gives
 \eqref{eq:marker-pbundle}.  Tensoring the bundle by a line bundle, when needed
 for the global-generation convention, changes neither the projective bundle
@@ -270,9 +267,9 @@ and (7) give the comparison asymptotics, the leading reconstruction
 parameters, and the invertible combined bulk Jacobian, respectively.  The
 independent unit coordinates supplied by part~(7) give the same nonzero
 resultant argument, so the ambient and occurrence-indexed center spectra are
-pairwise disjoint generically.  Apply the regularity, even-carrier,
-fixed-splitting-field, and suspension adapters, and apply the faithful
-character adapter to each center copy.  Additivity then gives
+pairwise disjoint generically.  Regularity, even-carrier restriction, the
+fixed splitting field, suspension invariance, and the faithful character
+argument for each center copy then give
 \eqref{eq:marker-blowup}.  Each comparison is evaluated over its own common
 coefficient spine; the proof never composes Laurent comparisons recursively.
 \end{proof}
@@ -289,10 +286,10 @@ the fold.  The relevant categorical operation is instead the additivity square
 \label{diag:marker-fold-additivity}
 \end{equation}
 At marker level, Proposition~\ref{prop:qdm-operation-ledgers} supplies the
-resulting equalities in \(A\); its packaged blowup adapter also retains the
+resulting equalities in \(A\); its blowup statement also retains the
 occurrence metadata used by Theorem~\ref{thm:marker-ledger}.
 
-\subsection{The rank-two residue marker}
+\subsection{The rank-two formal-exponent marker}
 
 Let \(\mathcal T_{\mathrm{at}}\) be the block type on the
 \(H^{\mathrm{ev}}\)-carrier retaining the connection, pairing, and centered
@@ -422,7 +419,8 @@ the exponent classes with the residue eigenvalues modulo \(\Z\)
 discriminant formula.
 \end{proof}
 
-Write \(\rho_1,\rho_2\) for the eigenvalues of its modified residue in the
+For such a block \(E\), write \(\rho_1,\rho_2\) for the eigenvalues of its
+modified residue in the
 fixed algebraic closure \(\overline K\) of the generic coefficient field.
 Define the fold on each block by
 \begin{equation}
@@ -442,9 +440,9 @@ Propositions~\ref{prop:rank2-rigidity} and
 \ref{prop:residue-discriminant-exponents} make this a lawful marker for
 Proposition~\ref{prop:qdm-operation-ledgers}: conjugation preserves the two
 residue eigenvalues, while changes of regular-singular lattice and recorded
-suspensions shift exponents only by integers.  The weaker test
-\(\delta^\sharp\ne0\) would merely say \(\rho_1\ne\rho_2\); it would also mark
-resonant blocks and is not used here.
+suspensions shift exponents only by integers.  The condition
+\(\delta^\sharp\ne0\) is insufficient: it says only
+\(\rho_1\ne\rho_2\) and therefore also marks resonant blocks.
 
 \subsection{The cubic block}
 \label{subsec:shared-cubic-packet}
@@ -591,7 +589,7 @@ surface \(\PP_C(V)\) \cite[Chapter~VI]{BeauvilleSurfaces}.  The relation
 \eqref{eq:marker-pbundle} and the curve case give zero for ruled surfaces.
 Every nonminimal surface is obtained from a minimal one by point blowups;
 formula~\eqref{eq:marker-blowup} adds only zero point terms.  This proves
-intrinsic nullity.  The faithful character adapter identifies every actual
+intrinsic nullity.  The faithful character argument identifies every actual
 center term with a faithful scalar extension of the corresponding intrinsic
 generic block, and the marker is unchanged by that extension.
 \end{proof}
