@@ -3,11 +3,11 @@
 - **Manuscript:** *Frobenius-equivariant pair extension and robust repair of
   eight-arcs*
 - **Frozen authority:** commit
-  `0a2924c560f556bc8d61bce9625ace08875d272e`
+  `a16667ce13262a5bb6dc04e3c32e405927362ce4`
 - **Frozen PDF:**
   `papers/equivariant-robust-completion/equivariant-robust-completion.pdf`
 - **PDF SHA-256:**
-  `65e8ee558c95c2c8f3935c2dd5b93a26162dc80346df2b57408e4ff28cb97a66`
+  `a4f2de94a1969efc30218b158b1e76f29c27fb976238a33ae0c070a639b0e98d`
 - **Surface:** 16 A4 pages; 156 whitespace-delimited abstract tokens
 - **Date:** 2026-08-21
 
@@ -29,6 +29,18 @@ proves the determinant/freshness dictionary and legal-count transport, and
 also repairs the four local defects listed in that report.  The next cold read
 must assess this frozen revision independently rather than treating the first
 report as evidence of closure.
+
+The second context-isolated report is frozen in
+`notes/2026-08-21-equivariant-robust-completion-cold-referee-r2.md`.  It found
+the normalization and mathematical spine sound, but returned C because the
+400-element residual action was implicit and the pinned GitHub commits were
+not publicly retrievable.  Revision
+`a16667ce13262a5bb6dc04e3c32e405927362ce4` defines the group as
+`AGL(1,5) x AGL(1,5)`, prints its coordinate action and representative rows,
+and states the ordered-fixed-pair equivalence precisely.  Public release of
+the already pinned certificate and structural-source commits remains an
+author-owned external action; repository policy forbids the exporter from
+pushing them.
 
 ## Editorial question
 
