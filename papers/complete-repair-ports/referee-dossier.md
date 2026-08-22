@@ -1,7 +1,7 @@
-# Referee and cold-read dossier: Complete Bounded Repair Ports
+# Referee and cold-read dossier: Bounded Recovery Structures of Linear Codes
 
-This is the internal context packet for independent criticism of *Complete
-Bounded Repair Ports: Transfer, Reliability, and Geometric Structure*. It
+This is the internal context packet for independent criticism of *Bounded
+Recovery Structures of Linear Codes: Transfer, Reliability, and Geometry*. It
 defines the review questions and evidence boundary; it is not a review report
 and must not be exported with the paper.
 
@@ -26,25 +26,25 @@ should record the commit and PDF SHA-256 before reading.
 
 ## Result spine the reviewer must be able to recover
 
-1. A complete bounded repair port has support, normalized coefficient, and
+1. A bounded recovery structure has support, normalized coefficient, and
    probability layers.
-2. For an `[n,k]` MDS code with `1 <= k < n`, the radius-`k` coefficient
-   port at one target spans the whole dual, has reconstruction radius `k`, and
+2. For an `[n,k]` MDS code with `1 <= k < n`, the radius-`k` normalized
+   equations at one target span the whole dual, have reconstruction radius `k`, and
    projects to the generic complete `k`-uniform support clutter.
 3. Concatenation has an exact pointed nonembedded-witness threshold obtained
    from zero-functional and nonzero-functional costs; below it, support and
-   coefficient ports transfer exactly.
-4. A fixed represented port satisfying the persistent pointed obstruction
+   normalized recovery equations transfer exactly.
+4. A fixed represented recovery structure satisfying the persistent pointed obstruction
    bound occurs on a designated target class of density `1/m` in an
    asymptotically good fixed-alphabet family.
-5. Port reliability obeys deletion–contraction and pivotal identities;
+5. Repair reliability obeys deletion–contraction and pivotal identities;
    radius-truncated erasure failure gives a bounded-EXIT/cheapest-radius
    hierarchy.
 6. Full-radius reliability is a Las Vergnas perspective-polynomial
    specialization, while an explicit represented pair shows that this
    unfiltered invariant does not determine the radius filtration.
 7. Cubic–axis and quartic–nucleus systems are applications. The latter has a
-   harmonic `S(3,4,q+1)` radius-four port with parallel nucleus repairs and a
+   harmonic `S(3,4,q+1)` radius-four recovery structure with parallel nucleus repairs and a
    compulsory nucleus helper at every curve target.
 
 ## Claims the paper does not make
@@ -68,7 +68,7 @@ The names below identify standards of expertise, not simulated personal views.
 
 Use the Ravagnani/Yaakobi/Tamo/Oggier standard. Ask:
 
-- Does the coefficient port retain information genuinely absent from the
+- Does the normalized recovery equations retain information genuinely absent from the
   support clutter, or is the reconstruction claim a reformulation of a known
   generalized-weight invariant?
 - Is the helper-download model stated before any operational conclusion?
@@ -140,7 +140,7 @@ Use a mathematically mature reader who is not a coding theorist. Ask:
 
 - By the end of page 2, can the reader state the object, principal theorem,
   and common-core mechanism?
-- Does every change of language—dual words to ports, ports to Boolean
+- Does every change of language—dual words to recovery sets, recovery sets to Boolean
   reliability, codes to matroids, coordinates to projective geometry—receive
   one precise bridge?
 - Can the reader skip the geometric applications and verification appendix
@@ -174,7 +174,7 @@ cannot be accepted and the evidence needed to reopen it.
 
 The draft is ready for the later release decision only if:
 
-- the coding/storage reader accepts the operational model and coefficient-port
+- the coding/storage reader accepts the operational model and coefficient-layer
   significance;
 - the matroid reader accepts the perspective specialization and filtration
   separation;

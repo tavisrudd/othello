@@ -1,4 +1,4 @@
-\section{Complete bounded repair ports}
+\section{Bounded recovery structures}
 \label{sec:ports}
 
 Let $C\leq\F_q^X$ be a linear code, let $x\in X$, and let $r\geq0$.
@@ -7,14 +7,14 @@ Throughout, whenever matching, transversal, failure tolerance
 $\tau-1$, or a minimum-blocker leading term is asserted, the minimal repair
 clutter is nonempty and does not contain the empty helper set.  The support,
 coefficient, and reliability definitions themselves remain valid in the two
-degenerate cases: an empty port never repairs, while an empty repair edge
+degenerate cases: an empty support family never repairs, while an empty repair edge
 repairs without a helper.  We state those cases separately rather than assign
 them an adversarial-tolerance interpretation.
 We use the extended-distance convention \(d(\{0\})=\infty\).
 
-\begin{definition}[Support layer]
+\begin{definition}[Exact helper-support layer]
 \label{def:complete-port}
-The complete radius-$r$ repair hypergraph at $x$ is
+The complete radius-$r$ exact-support hypergraph at $x$ is
 \[
  \cH_x^{(\leq r)}(C)=
  \left\{R\subseteq X\setminus\{x\}: |R|\leq r,
@@ -46,7 +46,14 @@ one point from each edge.  Minimalization preserves the upward closure of the
 success event, hence preserves matching and transversal optima.
 \end{proof}
 
-\begin{definition}[Coefficient layer]
+Every member of $\cH_x^{(\leq r)}(C)$ is a recovery set in the standard
+sense.  The standard bounded recovery-set family is its upward closure within
+the helper bound: it consists of the sets containing some member of
+$\cH_x^{(\leq r)}(C)$.  Thus $\cH_x^{(\leq r)}(C)$ records the helpers with
+nonzero coefficients, while the upward closure records all sets from which
+recovery is possible.
+
+\begin{definition}[Normalized recovery equations]
 \label{def:coefficient-port}
 Write
 \[
@@ -54,7 +61,7 @@ Write
  \{w\in C^\perp:w_x=1,\
    |\supp(w)\setminus\{x\}|\leq r\}
 \]
-for the normalized coefficient port.
+for the normalized bounded recovery equations through $x$.
 For $R\in\cH_x^{(\leq r)}(C)$, its coefficient fiber is the set of normalized
 coefficient vectors
 \[
@@ -72,8 +79,8 @@ subsymbol access or repair bandwidth in an array-code model
 
 \begin{definition}[Reconstruction radius]
 \label{def:reconstruction-radius}
-The coefficient port \emph{reconstructs} $C$ at radius $r$ when its linear
-span is $C^\perp$; equivalently, double duality recovers $C$ from the port.
+These equations \emph{reconstruct} $C$ at radius $r$ when their linear span is
+$C^\perp$; equivalently, double duality recovers $C$ from them.
 Its reconstruction radius is the least such $r$, or infinity if no such
 radius exists.
 \end{definition}
@@ -95,7 +102,7 @@ minimum dual word $y_t$ supported on $\{x,t\}\cup Q$.  The coordinate $t$ is
 nonzero in $y_t$ and zero in every $y_s$ with $s\neq t$.  Evaluating a linear
 relation at the private coordinates $t$ shows that the $y_t$ are independent.
 There are $|U|=n-k=\dim C^\perp$ of them, so they form a basis of $C^\perp$
-contained in the radius-$k$ coefficient port.  Double duality therefore
+contained in the radius-$k$ equation family.  Double duality therefore
 recovers $C$.  No smaller radius contains any normalized word, since that
 would produce a nonzero dual word of weight at most $k$.  Hence
 $\rho_x(C)=k$.
@@ -113,7 +120,8 @@ For independent survival probabilities $(s_y)$, the reliability is
 $R_x^{(\leq r)}(s)=\mathbb E[f_x^{(\leq r)}]$.
 \end{definition}
 
-Exact equality of complete ports preserves all support-derived invariants:
+Exact equality of the helper supports and equations
+preserves all support-derived invariants:
 matching, transversals, blocker clutters, multivariate reliability, and every
 correlated-law reliability after transporting the helper labels.  Coefficient
 fibers require the finer functional data used next.

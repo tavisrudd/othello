@@ -9,19 +9,19 @@
     text width=33mm},
   arrow/.style={-{Latex[length=2mm]}, thick}
 ]
-\node[box] (port) {represented inner port\\$\cP_x^{(\le r)}(I)$};
-\node[box, right=of port] (cost) {block-functional costs\\$\mu_x,\ \lambda,\ z_x$\\fixed inner encoder};
+\node[box] (recovery) {normalized inner recovery equations\\$\cP_x^{(\le r)}(I)$};
+\node[box, right=of recovery] (cost) {block-functional costs\\$\mu_x,\ \lambda,\ z_x$\\fixed inner encoder};
 \node[box, right=of cost] (gate) {pointed\\confinement\\$d(O_N^\perp)\ge r+2$ eventually\\$r+1<z_x(I)$};
 \node[box, right=of gate] (copies) {exact block copies\\$N$ targets, density $1/m$};
 
-\draw[arrow] (port) -- (cost);
+\draw[arrow] (recovery) -- (cost);
 \draw[arrow] (cost) -- (gate);
 \draw[arrow] (gate) -- (copies);
 
 \node[view, below=of gate] (prob) {survival event\\reliability, bounded EXIT};
-\node[view] (support) at (port |- prob) {support clutter\\availability, tolerance};
-\node[view] (coeff) at (cost |- prob) {normalized coefficients\\scalar decoder};
-\draw[arrow] (port.south) -- (support.north);
+\node[view] (support) at (recovery |- prob) {exact helper supports\\availability, tolerance};
+\node[view] (coeff) at (cost |- prob) {normalized equations\\scalar decoder};
+\draw[arrow] (recovery.south) -- (support.north);
 \draw[arrow] (cost.south) -- (coeff.north);
 \draw[arrow] (copies.east) -- ++(3mm,0) |- (prob.east);
 \draw[arrow] (support.south) -- ++(0,-6mm) -|
@@ -29,8 +29,8 @@
 \end{tikzpicture}
 \caption{The transfer spine.  In the fixed-inner, $L$-linear concatenation
 regime, weighted block-functional costs give an exact confinement gate.
-When $d(O_N^\perp)\to\infty$ and $r+1<z_x(I)$, support and normalized
-coefficient ports are copied into every block.  Reliability is derived from
+When $d(O_N^\perp)\to\infty$ and $r+1<z_x(I)$, exact helper supports and
+normalized equations are copied into every block.  Reliability is derived from
 the copied support clutter; the diagram makes no necessity claim for arbitrary
 asymptotically good families.}
 \label{fig:transfer-spine}

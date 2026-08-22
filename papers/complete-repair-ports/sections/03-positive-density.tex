@@ -4,7 +4,7 @@
 The pointed zero-functional sector persists even when outer dual distance
 grows.
 
-\begin{theorem}[Prescribed represented ports]
+\begin{theorem}[Prescribed represented recovery structures]
 \label{thm:prescribed}
 Let $O_N\leq L^N$ be $L$-linear outer codes with
 $d(O_N^\perp)\to\infty$, and let $C_N=O_N\circ I$.  For all sufficiently
@@ -13,9 +13,10 @@ $r+1$ is confined to block $j$ if and only if
 \[
  r+1<z_x(I).
 \]
-Under this condition the radius-$r$ port at $x$ occurs on the designated
+Under this condition the radius-$r$ helper supports and normalized equations
+at $x$ occur on the designated
 class of $N$ targets $(j,x)$, a class of density exactly $1/m$ in $C_N$.
-Other inner coordinate types may carry an isomorphic port as well.  More
+Other inner coordinate types may carry isomorphic recovery data as well.  More
 precisely, at every block
 \[
  \cH_{(j,x)}^{(\leq r)}(C_N)
@@ -50,8 +51,8 @@ sector in the bounded range.  For \(N\ge2\), its exact cost is the
 block-independent quantity \(z_x(I)\).  Hence confinement through every
 \((j,x)\) holds exactly when \(r+1<z_x(I)\).
 
-If \(r+1<z_x(I)\), Theorem~\ref{thm:transfer} identifies both support and
-normalized coefficient ports by zero-extension.  If
+If \(r+1<z_x(I)\), Theorem~\ref{thm:transfer} identifies both exact helper
+supports and normalized equations by zero-extension.  If
 \(r+1\ge z_x(I)\), the attained pointed inner-dual minimum at \(x\), together
 with a minimum nonzero inner-dual word in a second block, gives a
 zero-functional pointed nonembedded witness of weight at most \(r+1\).
@@ -86,26 +87,27 @@ division by \(mN\) gives the asymptotic claims.
 \begin{corollary}[Positive-density MDS coefficient fingerprints]
 \label{cor:mds-fingerprints}
 Let \(I\) be an \([m,k]_q\) MDS code with \(1\leq k<m\), and fix \(x\).
-Its radius-\(k\) support port is the complete \(k\)-uniform clutter on the
-other coordinates, while its radius-\(k\) coefficient port reconstructs
-\(I\), and \(z_x(I)=2(k+1)\).  Both ports occur on a designated target class
+Its radius-\(k\) exact helper-support family is the complete \(k\)-uniform
+clutter on the other coordinates, while its minimum-weight normalized
+recovery equations reconstruct \(I\), and \(z_x(I)=2(k+1)\).  Both layers
+occur on a designated target class
 of density \(1/m\) in every sufficiently long
 concatenation by an outer family with dual distance tending to infinity.
 \end{corollary}
 
 \begin{proof}
-The minimum-port assertions are Theorem~\ref{thm:mds-reconstruction}.  Every
+The minimum-weight assertions are Theorem~\ref{thm:mds-reconstruction}.  Every
 minimum dual support through \(x\) has size \(k+1\), so
 \(\mu_x(0)=d(I^\perp)=k+1\) and
 \[
  z_x(I)=2(k+1)>k+1.
 \]
-Apply Theorem~\ref{thm:prescribed} with \(r=k\).  The support port depends
+Apply Theorem~\ref{thm:prescribed} with \(r=k\).  The helper-support family depends
 only on the MDS parameters; the transferred normalized coefficients retain
 the represented inner code.
 \end{proof}
 
-\begin{corollary}[Positive-density Clebsch repair ports]
+\begin{corollary}[Positive-density Clebsch recovery equations]
 \label{cor:clebsch-port}
 Let $I$ be the $[6,3,4]_{11}$ Clebsch hexagon code
 \cite{RuddClebschRigidity2026}, and fix a coordinate $x$.
@@ -119,9 +121,10 @@ and homogeneous helper-survival reliability
 \[
  10s^3(1-s)^2+5s^4(1-s)+s^5.
 \]
-Already the radius-three coefficient port at $x$ determines $I$.
-Moreover $z_x(I)=8$, so both the minimum radius-three port and the full
-radius-five coefficient port occur on a designated target class of density
+Already the radius-three equations at $x$ determine $I$.
+Moreover $z_x(I)=8$, so both the minimum radius-three recovery structure and
+the full radius-five equation family occur on a
+designated target class of density
 $1/6$ in an asymptotically
 good fixed-$\F_{11}$ family.
 \end{corollary}
@@ -136,8 +139,9 @@ helpers survive, giving the displayed polynomial.
 
 At radius three the common-core star of minimum normalized dual words is
 already a basis of \(I^\perp\), by
-Corollary~\ref{cor:mds-fingerprints}.  Thus the minimum coefficient port,
-and hence also the full radius-five port, recovers \(I^\perp\) and \(I\).
+Corollary~\ref{cor:mds-fingerprints}.  Thus the minimum-weight normalized
+recovery equations, and hence also the full radius-five family, recover
+\(I^\perp\) and \(I\).
 
 Finally, the minimum dual-word weight through $x$ is four, so
 \[
@@ -163,12 +167,12 @@ Corollary~\ref{cor:mds-fingerprints} applies without a new transfer argument
 to every represented MDS inner code.  This includes the usual arc and
 projective Reed--Solomon presentations, and the classical MDS code
 presentations underlying AME constructions, whenever their displayed field
-and dimension hypotheses hold.  Their minimum support ports are generic MDS
-data; only their normalized coefficient ports distinguish the represented
+and dimension hypotheses hold.  Their minimum exact helper-support families
+are generic MDS data; only their normalized equations distinguish the represented
 geometric or quantum-code realization.
 \end{remark}
 
-This is a represented-port theorem: it does not say that every abstract
+This is a represented-recovery theorem: it does not say that every abstract
 hypergraph is linearly representable.  It yields standard scaled asymptotic
 regions.  If $Q=q^k$, random $L$-linear outer codes of rate $R$ can have
 relative distances $\delta,\delta^\perp$ whenever

@@ -200,7 +200,7 @@ The pointed polynomials agree while the filtered curves do not.
 \begin{theorem}[Availability- and blocker-matched asymptotic separation]
 \label{thm:asymptotic-separation}
 Over a finite prime field $\F_q$ there are two represented $[10,4,6]_q$
-inner codes whose distinguished radius-three ports have the same pointed
+inner codes whose distinguished radius-three recovery data have the same pointed
 rank-triple multiplicity enumerator, five minimum repairs, locality three,
 matching number two, transversal number two, exactly one minimum blocker, and
 helper degree multiset
@@ -216,7 +216,7 @@ Their homogeneous reliability polynomials are nevertheless
 Using one common outer family gives two asymptotically good fixed-alphabet
 families with the same length and dimension formulas, the same proved distance
 lower bound, and designated target classes of density exactly $1/10$ carrying
-these distinct ports.
+these distinct bounded recovery data.
 \end{theorem}
 
 \begin{proof}
@@ -298,26 +298,27 @@ distance are $K_N,D_N$, the two concatenations have
 \[
  n_N=10N,\qquad k_N=4K_N,\qquad d_N\geq6D_N.
 \]
-Since $3+1<8$, Theorem~\ref{thm:prescribed} eventually copies both complete
-radius-three support and coefficient ports at every designated block target.
-Those $N$ targets have density $1/10$, and literal port equality preserves all
+Since $3+1<8$, Theorem~\ref{thm:prescribed} eventually copies both the complete
+radius-three exact supports and normalized equations at
+every designated block target.  Those $N$ targets have density $1/10$, and
+literal equality of both layers preserves all
 the matched clutter invariants and the two distinct reliability laws.
 \end{proof}
 
-\begin{corollary}[Synthesis under exact port transfer]
+\begin{corollary}[Synthesis under exact recovery-structure transfer]
 \label{cor:transfer-synthesis}
-Whenever Theorem~\ref{thm:prescribed} transfers a radius-$r$ support and
-coefficient port exactly, it simultaneously transfers every smaller support
+Whenever Theorem~\ref{thm:prescribed} transfers a radius-$r$ exact-support
+family and its normalized equations, it simultaneously transfers every smaller support
 filtration and every normalized decoder in that range.  Consequently it
 preserves matching and transversal numbers, minimal blockers and their
 leading failure terms, multivariate reliability, and every bounded-EXIT
-curve through radius $r$.  Any difference between two inner ports in one of
+curve through radius $r$.  Any difference between two inner codes in one of
 these quantities therefore persists on their designated positive-density
 target classes.
 \end{corollary}
 
 \begin{proof}
-For each $t\leq r$, the radius-$t$ port is obtained from the radius-$r$ port
+For each $t\leq r$, the radius-$t$ data are obtained from the radius-$r$ data
 by retaining precisely the witnesses with at most $t$ helpers.  The
 zero-extension bijection in Theorem~\ref{thm:prescribed} preserves supports,
 coefficients, and cardinality, so it commutes with every such truncation.
@@ -331,5 +332,5 @@ equality after relabeling.
 
 The retained field-nine harmonic computation gives a geometric instance of
 the same boundary: six-element circuits in a rank-five code add five-helper
-repairs beyond the classified radius-four port.  It illustrates the effect
+repairs beyond the classified radius-four supports.  It illustrates the effect
 but is not evidence for Proposition~\ref{prop:filtration-boundary}.

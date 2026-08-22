@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Exact cross-check for the matched radius-three seed ports over F_29."""
+"""Exact cross-check for the matched radius-three recovery structures over F_29."""
 
 from __future__ import annotations
 

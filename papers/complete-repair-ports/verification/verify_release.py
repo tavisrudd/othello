@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Verify the public release surface for Complete Bounded Repair Ports.
+"""Verify the public release surface for Bounded Recovery Structures of Linear Codes.
 
 Run inside the pinned manuscript shell.  The update-pdf option is the only
 supported way to refresh the tracked PDF.  The lean-root option upgrades the
@@ -175,7 +175,7 @@ def check_metadata() -> dict[str, object]:
     metadata = json.loads((PAPER / ".zenodo.json").read_text(encoding="utf-8"))
     require(
         metadata.get("title")
-        == "Complete Bounded Repair Ports: Transfer, Reliability, and Geometric Structure",
+        == "Bounded Recovery Structures of Linear Codes: Transfer, Reliability, and Geometry",
         "Zenodo title does not match the paper",
     )
     require(metadata.get("license") == "mit", "Zenodo license must match LICENSE")

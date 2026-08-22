@@ -1,7 +1,7 @@
 \section{Formal verification and finite evidence}
 \label{sec:verification}
 
-The coefficient-port reconstruction and exact transfer chains are checked in
+The recovery-equation reconstruction and exact transfer chains are checked in
 Lean.  The import-only gate
 \path{RepairPorts.Gates.CompletePorts} audits the paper-facing declarations.
 Its two transfer terminals are
@@ -10,8 +10,8 @@ Its two transfer terminals are
 \path{RepairPorts.exactPointedConfinementAndTransfer}.
 \end{quote}
 The first gives the exact zero-, singleton-, and multisupport-functional
-profiles; the second gives the pointed minimum formula and complete-port
-equality.  Both report only
+profiles; the second gives the pointed minimum formula and exact equality of
+the bounded helper supports and normalized equations.  Both report only
 \texttt{propext}, \texttt{Classical.choice}, and \texttt{Quot.sound}.  The
 strict field-nine corollary is the conclusion of
 \begin{quote}\small\raggedright
@@ -160,7 +160,7 @@ axis-infinity coordinate types have exact radius-three \((\nu,\tau)\) rows
 \]
 with multiplicities \(9,9,1\).  These are not rows of the completed code.
 After adjoining \(C(\infty)\), Theorem~\ref{thm:cubic} gives the two uniform
-radius-four/full-port rows
+radius-four/full-radius recovery-set rows
 \[
  (4,8)\quad\text{on the ten cubic coordinates},\qquad
  (7,15)\quad\text{on the ten axis coordinates}.

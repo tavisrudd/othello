@@ -1,6 +1,6 @@
 {
-  "title": "Complete Bounded Repair Ports: Transfer, Reliability, and Geometric Structure",
-  "description": "This preprint studies the complete bounded repair port of a linear code at a distinguished coordinate: the family of all bounded dual-support repairs together with their normalized scalar coefficients and helper-failure reliability. It proves that the minimum coefficient port of an MDS code reconstructs the represented code, gives an exact weighted-functional transfer theorem for concatenation, and realizes every fixed represented port satisfying the pointed obstruction bound with positive density in an asymptotically good fixed-alphabet family. A structural sparse-paving construction gives two represented seeds with the same pointed-perspective data, repair count, locality, matching and transversal numbers, unique minimum-blocker count, and helper-degree multiset, but different bounded reliability and EXIT curves; one common outer family preserves the separation at positive density. The paper also develops deletion-contraction reliability and bounded-EXIT calculi. Twisted-cubic-axis and quartic-normal-rational-curve nucleus codes in characteristic three provide geometric applications, including a harmonic Steiner repair port.",
+  "title": "Bounded Recovery Structures of Linear Codes: Transfer, Reliability, and Geometry",
+  "description": "This preprint studies bounded local recovery at a distinguished coordinate of a represented linear code: all normalized dual recovery equations within a helper bound, their exact helper supports, the resulting recovery-set family, and helper-failure reliability. It proves that the minimum-weight recovery equations of an MDS code reconstruct the represented code, gives an exact weighted-functional transfer theorem for concatenation, and realizes every fixed represented bounded recovery structure satisfying the persistent confinement bound with positive density in an asymptotically good fixed-alphabet family. A structural sparse-paving construction gives two represented seeds with the same pointed-perspective data, repair count, locality, matching and transversal numbers, unique minimum-blocker count, and helper-degree multiset, but different bounded reliability and EXIT curves; one common outer family preserves the separation at positive density. The paper also develops deletion-contraction reliability and bounded-EXIT calculi. Twisted-cubic-axis and quartic-normal-rational-curve nucleus codes in characteristic three provide geometric applications, including a harmonic Steiner recovery structure.",
   "creators": [
     {
       "name": "Rudd, Tavis",
@@ -16,7 +16,8 @@
     "locally repairable codes",
     "linear codes",
     "MDS codes",
-    "repair sets",
+    "recovery sets",
+    "recovery structures",
     "code concatenation",
     "reliability polynomials",
     "EXIT functions",

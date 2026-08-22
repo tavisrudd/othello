@@ -30,8 +30,8 @@
 \newcommand{\rank}{\operatorname{rank}}
 \newcommand{\Tr}{\operatorname{Tr}}
 
-\title{Complete Bounded Repair Ports:\\
-\large Transfer, Reliability, and Geometric Structure}
+\title{Bounded Recovery Structures of Linear Codes:\\
+\large Transfer, Reliability, and Geometry}
 \author{Tavis Rudd}
 \date{July 2026}
 
@@ -39,58 +39,57 @@
 \maketitle
 
 \begin{abstract}
-For a linear code with a distinguished coordinate, the complete bounded
-repair port records every short dual recovery equation.  Its support clutter
-specifies the allowed helper sets, its normalized coefficients retain the
-represented decoder, and its Boolean event gives exact repair reliability.
-We prove an exact weighted-functional transfer theorem for concatenation and
-identify the persistent pointed obstruction.  Below that threshold, any
-represented bounded port occurs on a positive-density coordinate class in an
-asymptotically good fixed-alphabet family.
+Fix a represented inner code $I$, a target $x$, and a helper bound $r$.  Its
+normalized dual words through $x$ of weight at most $r+1$ give the bounded
+recovery equations and their exact helper supports.  For an outer family
+whose dual distance tends to infinity, we prove that all sufficiently long
+concatenations confine every such equation to its inner block if and only if
+$r+1<z_x(I)$.  Under this condition the supports and normalized coefficients
+are copied.  Asymptotically good outer families therefore realize
+represented recovery data on a positive-density coordinate class over a
+fixed alphabet.
 
-This transfer yields a matched asymptotic separation.  Over one finite field,
-two represented $[10,4,6]$ inner codes have the same pointed rank-triple
-multiplicity enumerator, five minimum repairs, locality three, availability
-two, transversal number two, a unique minimum blocker, and the same helper
-degree multiset.  Nevertheless their radius-three reliabilities are
+Two represented $[10,4,6]$ inner codes have the same pointed-perspective
+polynomial and matched locality, availability, transversal, blocker, and
+helper-degree statistics, but their radius-three reliabilities are
 
 \[
  5s^3-7s^5-s^6+5s^7-s^9
  \quad\hbox{and}\quad
  5s^3-7s^5-2s^6+8s^7-3s^8.
 \]
-One common outer family preserves matched global parameter bounds and places
-these ports on target classes of density $1/10$.  Thus even pointed-Tutte data
-and the availability and blocker statistics do not control bounded
-stochastic behavior after positive-density realization.
+A common outer family preserves matched global parameter bounds and places
+these recovery structures on target classes of density $1/10$.  Thus these
+pointed-Tutte and conventional local invariants do not determine bounded
+stochastic repair behavior after positive-density realization.
 
-We also prove deletion--contraction and pivotal identities, a bounded BEC EXIT
+We prove deletion--contraction and pivotal identities, a bounded BEC EXIT
 hierarchy whose differences recover the cheapest available repair radius,
-and MDS coefficient-port reconstruction.  Characteristic-three cubic--axis
-and quartic--nucleus examples exhibit exact geometric port structures.
+and reconstruction of MDS codes from minimum-weight recovery equations.
+Characteristic-three cubic--axis and quartic--nucleus examples exhibit
+geometric recovery structures.
 \end{abstract}
 
 \section{Introduction}
 
 Locality asks how many surviving symbols suffice to recover one unavailable
-coordinate.  Availability asks for many disjoint choices of helpers.  Both
-are standard in locally repairable codes
-\cite{GopalanEtAl2012,PamiesEtAl2013,LavrauwVanDeVoorde2019}, but neither
-describes the whole local failure event: two codes can have the same locality
-and matching number while their permitted repair sets overlap very
-differently.
+coordinate.  Availability asks for many disjoint choices of helpers.  Recovery
+sets and coordinate-indexed recovery structures are standard in locally
+repairable codes
+\cite{GopalanEtAl2012,PamiesEtAl2013,MarquezCorbellaEtAl2019,LavrauwVanDeVoorde2019},
+but locality and availability do not describe the whole local failure event:
+two codes can have the same values while their permitted recovery sets overlap
+very differently.
 
-The natural pointed object is the family of \emph{all} bounded dual-support
-repairs.  We call it a complete bounded repair port.  Its matching number is
-disjoint availability, its transversal number minus one is worst-case helper
-failure tolerance, and its monotone Boolean function gives exact stochastic
-reliability.  The coefficient layer matters as well: a repair support comes
-from a scalar equation, and concatenation is controlled by the minimum cost
-of realizing the corresponding block functional rather than by support alone.
-
-For a target $x$, let $\cP_x^{(\leq r)}(C)$ be the dual words normalized by
-$w_x=1$ and supported on $x$ and at most $r$ helpers.  This coefficient port
-records the scalar recovery equations, not only their supports.
+We use a pointed, coefficient-aware refinement of that standard data.  For a
+target $x$, let $\cP_x^{(\leq r)}(C)$ be the dual words normalized by $w_x=1$
+and supported on $x$ and at most $r$ helpers.  These are the normalized bounded
+recovery equations.  Their exact helper supports generate the usual bounded
+recovery-set family by upward closure.  The minimal supports measure disjoint
+availability and worst-case helper failure tolerance, while their monotone
+Boolean event gives exact stochastic reliability.  The coefficients retain
+more: concatenation is controlled by the minimum cost of realizing the
+corresponding block functional rather than by support alone.
 
 \begin{theorem}[Main theorem: exact transfer and separated realization]
 \label{thm:main}
@@ -102,11 +101,12 @@ repairable target, and put
 \]
 For any fixed radius \(r\) and any \(L\)-linear outer family whose dual distance
 tends to infinity, all sufficiently long concatenations confine every
-radius-\(r\) repair at a designated copy of \(x\) to its inner block if and
-only if \(r+1<z_x(I)\).  Whenever this inequality holds, the complete support
-and normalized coefficient ports are copied exactly in every block.  Choosing
-an asymptotically good outer family therefore realizes the prescribed port on
-a coordinate class of density \(1/|E|\) in an asymptotically good
+radius-\(r\) recovery equation at a designated copy of \(x\) to its inner
+block if and only if \(r+1<z_x(I)\).  Whenever this inequality holds, the
+complete family of exact helper supports and all normalized dual words
+are copied exactly in every block.  Choosing an asymptotically good outer
+family therefore realizes the prescribed bounded recovery structure on a
+coordinate class of density \(1/|E|\) in an asymptotically good
 fixed-alphabet family.
 
 Moreover, over one finite field there are two represented \([10,4,6]\) inner
@@ -125,7 +125,7 @@ least pointed inner-dual word in the target block plus the least nonzero
 inner-dual word in another block.  Nonzero outer functionals eventually
 become too expensive, but this all-zero-functional obstruction persists.
 
-\begin{theorem}[MDS coefficient-port reconstruction]
+\begin{theorem}[MDS reconstruction from minimum-weight recovery equations]
 \label{thm:mds-reconstruction}
 Let $C\leq\F_q^E$ be an $[n,k]_q$ MDS code with $1\leq k<n$, and let
 $x\in E$.  Then
@@ -133,54 +133,36 @@ $x\in E$.  Then
  \operatorname{span}\cP_x^{(\leq k)}(C)=C^\perp,
  \qquad \rho_x(C)=k,
 \]
-where $\rho_x(C)$ is the least reconstruction radius.  The support projection
-of the minimum coefficient port is the complete $k$-uniform clutter on
+where $\rho_x(C)$ is the least reconstruction radius.  The supports of the
+minimum-weight recovery equations form the complete $k$-uniform clutter on
 $E\setminus\{x\}$.
 \end{theorem}
 
-The support clutter in this theorem is generic: it is the same for every MDS
-code with these parameters.  The normalized coefficients nevertheless span
-the represented dual code.  The proof chooses minimum dual words with a common
-core of $k-1$ helpers and distinct private coordinates, producing a basis of
-$C^\perp$.  Thus the coefficient layer retains represented information that
-support-only locality discards.
+The supports are generic for these MDS parameters, but the normalized
+equations span the represented dual code.  Minimum dual words with a common
+core of $k-1$ helpers and distinct private coordinates form a basis, so their
+coefficients retain information that support-only locality discards.
 
-Our main separation shows that this distinction survives asymptotically even
-after matching the usual local overlap statistics.  Two represented
-sparse-paving seeds have identical pointed rank-triple multiplicity
-enumerators, repair count, locality, matching and transversal numbers,
-minimum-blocker count, and helper degree multiset.  Their higher-order circuit
-intersections still give different reliability and bounded-EXIT curves.
-Exact transfer by a common outer family copies these ports onto coordinate
-classes of density $1/10$ while preserving matched global parameter bounds.
-The seed representations come from a quotient-plane line arrangement followed
-by a generic lift, so the separation has a structural human proof.
+The main separation matches the pointed rank-triple enumerator, repair count,
+locality, matching and transversal numbers, minimum-blocker count, and helper
+degrees of two represented sparse-paving seeds.  Higher circuit intersections
+still produce different reliability and bounded-EXIT curves.  A common outer
+family transfers the difference to target classes of density $1/10$ with
+matched global bounds.  A quotient-plane line arrangement and generic lift
+give the structural seed proof.
 
-Figure~\ref{fig:transfer-spine} gives the proof spine in one view.  The exact
-transfer theorem concerns the first two port layers; reliability is then
-determined by the transported support layer.
+Figure~\ref{fig:transfer-spine} gives the transfer and reliability chain.
 
 \input{figures/transfer-spine}
 
-The paper has six parts.  Section~\ref{sec:ports} fixes the complete pointed
-object and separates support, coefficient, and probability layers.
-Section~\ref{sec:transfer} gives exact and usable concatenation gates.
-Section~\ref{sec:realization} turns the pointed gate into a prescribed
-positive-density realization theorem.  Section~\ref{sec:reliability}
-develops reliability and bounded EXIT.  Section~\ref{sec:tutte} identifies the
-full-port polynomial as standard pointed-Tutte structure and isolates what the
-radius filtration adds.  Section~\ref{sec:flagships} compares cubic--axis and
-quartic--nucleus flagships.
-
 The asymptotic coding ingredients, reliability identities, and pointed-Tutte
-polynomial are classical.  We develop their
-exact organization around the complete bounded pointed object,
-together with the transfer boundary, prescribed-port consequence, and the
-two exact geometric port inventories.  We make no minimum-bandwidth claim,
+polynomial are classical.  We organize them around bounded pointed recovery,
+the transfer boundary, positive-density realization, and two geometric
+recovery structures.  We make no minimum-bandwidth claim,
 no full-MAP claim for a radius cutoff, and no threshold claim for harmonic
 closure.
-In the literature reviewed, we did not locate the exact complete-port
-confinement criterion or the two coordinatewise port inventories
+In the literature reviewed, we did not locate the exact bounded-recovery
+confinement criterion or the two coordinatewise recovery-structure inventories
 \cite{PamiesEtAl2013,LiuEtAl2022,GruicaEtAl2026,DavydovEtAl2021}; this is a
 bounded comparison, not a priority claim.
 
@@ -205,6 +187,7 @@ drafting and revision. The author checked the resulting arguments,
 computations, code, and cited sources, reviewed and edited all AI-assisted
 material, and assumes responsibility for all content.
 
+\footnotesize
 \bibliographystyle{plain}
 \bibliography{refs}
 

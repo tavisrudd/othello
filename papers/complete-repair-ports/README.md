@@ -1,4 +1,4 @@
-# Complete Bounded Repair Ports
+# Bounded Recovery Structures of Linear Codes
 
 [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.22051903-blue.svg)](https://doi.org/10.5281/zenodo.22051903)
 
@@ -6,21 +6,23 @@
 
 [**Open the paper (PDF) →**](complete_repair_ports.pdf)
 
-**Title:** *Complete Bounded Repair Ports: Transfer, Reliability, and Geometric Structure*
+**Title:** *Bounded Recovery Structures of Linear Codes: Transfer, Reliability, and Geometry*
 
-This 23-page paper introduces a local invariant of a represented linear code.
-Fix a coordinate and a helper budget. Its **complete bounded repair port**
-records every dual recovery equation within that budget—not just the permitted
-helper sets, but also the normalized scalar coefficients and the resulting
-probability of successful repair under helper failures.
+This 23-page paper studies bounded local recovery at a coordinate of a
+represented linear code. Fix a target and a helper budget. The normalized
+dual recovery equations within that budget retain their exact helper supports
+and scalar coefficients. The upward closure of those supports is the standard
+recovery-set family, whose Boolean event gives the probability of successful
+repair under helper failures.
 
-The main theorem identifies the exact obstruction to carrying such a port
-through code concatenation. Below that obstruction, any fixed represented port
-can be reproduced on a positive-density coordinate class in an asymptotically
+The main theorem identifies the exact obstruction to carrying all of these
+supports and equations through code concatenation. Below that obstruction, any
+fixed represented bounded recovery structure can be reproduced on a
+positive-density coordinate class in an asymptotically
 good fixed-alphabet family. The obstruction is sharp in the stated
 fixed-inner, linear-concatenation setting.
 
-The principal separation shows why the bounded port contains information that
+The principal separation shows why the bounded recovery data contain information that
 standard unfiltered rank data and coarse local statistics miss. Over one
 finite field, two represented `[10,4,6]` inner codes have the same pointed
 rank-triple multiplicity enumerator, five minimum repairs, locality three,
@@ -41,16 +43,16 @@ three-space and specialize to one finite prime field.
 
 ## Other results
 
-- The minimum coefficient port of an MDS code reconstructs the represented
-  code, although its support projection is the generic complete uniform
-  clutter.
-- Port reliability satisfies deletion–contraction and pivotal identities.
+- The minimum-weight normalized recovery equations of an MDS code reconstruct
+  the represented code, although their support projection is the generic
+  complete uniform clutter.
+- Repair reliability satisfies deletion–contraction and pivotal identities.
   Successive bounded-EXIT curves recover the cheapest available repair radius.
 - Full-radius reliability is a specialization of the Las Vergnas polynomial
   of an elementary matroid perspective; the bounded-radius filtration is
   strictly finer.
 - Characteristic-three twisted-cubic–axis and quartic–nucleus codes give exact
-  geometric port inventories. The quartic example produces a harmonic Steiner
+  geometric recovery structures. The quartic example produces a harmonic Steiner
   repair design.
 
 ## Suggested reading
@@ -96,7 +98,7 @@ classical input.
 
 ## Proof and evidence boundary
 
-The reconstruction, transfer, prescribed-port, reliability, and bounded-EXIT
+The reconstruction, transfer, prescribed-recovery, reliability, and bounded-EXIT
 chains have Lean 4 support. The matched asymptotic theorem is a written
 synthesis of kernel-checked general components, a complete structural human
 proof of the two represented seeds and their local invariants, and a classical

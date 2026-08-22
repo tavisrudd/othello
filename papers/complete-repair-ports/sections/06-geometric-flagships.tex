@@ -16,7 +16,7 @@ The line $L_q$ is the characteristic-three axis of the osculating-plane
 pencil \cite{DavydovEtAl2021}; all statements below follow directly from
 the displayed coordinates.
 
-\begin{theorem}[Cubic--axis port]
+\begin{theorem}[Cubic--axis recovery structure]
 \label{thm:cubic}
 The row code on $T_q\sqcup L_q$ is $[2q+1,4,q-1]_q$.  Its minimal circuits
 of size at most four are the triples on $L_q$ and the sets
@@ -41,7 +41,7 @@ three distinct elements with sum zero, then
 In particular every coordinate satisfies $\tau>\nu$ for $q\geq9$.
 
 After adjoining \(C(\infty)=(0:0:0:1)\), the completed row code is
-\([2q+2,4,q]_q\).  Radius four is its full minimal port, and its rows are
+\([2q+2,4,q]_q\).  Radius four is its full minimal recovery-set family, and its rows are
 uniform on the two projective blocks:
 \[
  \left(\frac{q-1}{2},q-1\right)\text{ on the cubic},
@@ -145,7 +145,7 @@ and the cubic at most three times.  To see sharpness, choose
 \((0:e_1:e_2:0)\), where \(e_1=1+\alpha\ne0\), contains four displayed
 points and avoids \(A_\infty\).  Hence \(\tau=(2q+1)-4=2q-3\).  Rank four
 makes every minimal circuit
-have at most five points, so radius four exhausts the full minimal port.
+have at most five points, so radius four exhausts the full minimal recovery-set family.
 \end{proof}
 
 This is the inner code in the strict weighted-transfer example above.
@@ -162,7 +162,7 @@ and let $S_q=\{V(t):t\in\mathbb P^1(\F_q)\}\cup\{N\}$.
 The classical normal-rational-curve nucleus formula identifies $N$ as the
 hyperplane nucleus in characteristic three \cite[Theorem~1]{GmainerHavlicek2013}.
 
-\begin{theorem}[Quartic--nucleus port]
+\begin{theorem}[Quartic--nucleus recovery structure]
 \label{thm:harmonic}
 For $q=3^h\geq9$, the row code $Q_q$ on $S_q$ has parameters
 \[
@@ -223,21 +223,22 @@ largest section of $S_q$ has five points.  Hence the primal distance is
 $(q+2)-5=q-3$.  Finally, the Steiner count is
 $\binom{q+1}{3}/\binom43$, and the number of blocks through a fixed curve
 point is $\binom q2/\binom32$.  The circuit--repair correspondence gives the
-stated ports and counts.
+stated recovery sets and counts.
 \end{proof}
 
 The inner-dual half of the coarse transfer gate is automatic at radius four
 because $5<2d(Q_q^\perp)=10$.  Theorem~\ref{thm:prescribed} therefore places the
-entire harmonic port with positive density in asymptotically good
+entire harmonic recovery structure with positive density in asymptotically good
 fixed-$\F_q$ families.
 
 \subsection{Reliability, EXIT, and the geometric contrast}
 
 The nucleus repairs are the blocks of the Steiner system
 \(S(3,4,q+1)\).  At a curve target, every radius-four repair contains the
-nucleus.  Thus the nucleus port is a parallel family of four-helper repairs,
-whereas the curve port has a compulsory series helper.  The reliability and
-bounded-EXIT theorem applies to both ports without an exact finite profile.
+nucleus.  Thus the nucleus recovery structure is a parallel family of
+four-helper repairs, whereas the curve recovery structure has a compulsory
+series helper.  The reliability and bounded-EXIT theorem applies to both
+target types without an exact finite profile.
 Exact field-nine profiles are computational refinements recorded in
 Appendix~\ref{sec:finite-evidence}; they are not used in the body theorem chain.
 
