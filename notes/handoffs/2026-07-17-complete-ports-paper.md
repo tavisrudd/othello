@@ -1,13 +1,13 @@
-# Complete bounded repair ports paper preparation
+# Bounded recovery structures paper preparation
 
 **Lane**: `complete-ports`
 
 **Date**: 2026-07-26
-**Status**: ACTIVE; C944 RECOVERY-TERMINOLOGY REVISION IN PROGRESS; C325 APPENDIX VERIFIER RESUMES NEXT; REMOTE PUBLICATION GATED
+**Status**: ACTIVE; C944 RECOVERY-TERMINOLOGY REVISION COMPLETE; C325 APPENDIX VERIFIER RESUMES NEXT; REMOTE PUBLICATION GATED
 **Theorem source lane**: archived [`repaircodes`](done/2026-07-13-projective-completion-repaircodes.md)
 **Current private paper**: [`complete-repair-ports`](../../papers/complete-repair-ports/README.md)
-**Canonical paper identity**: `complete-ports` — *Complete Bounded Repair Ports: Local Memory,
-Transfer, and Reliability*
+**Canonical paper identity**: `complete-ports` — *Bounded Recovery Structures of Linear Codes:
+Transfer, Reliability, and Geometry*
 **Approved paper repository**: `tavisrudd/complete-ports` at `~/src/papers/complete-ports`
 **Approved paper license**: MIT
 
@@ -80,6 +80,10 @@ Completed preparation:
 
 Completed strengthening:
 
+- [C944 recovery-terminology revision](../2026-08-22-c944-complete-ports-recovery-terminology.md)
+  removes “port” as visible technical terminology, distinguishes exact helper
+  supports from the upward-closed recovery-set family, preserves normalized
+  recovery coefficients, and exports the verified 23-page standalone artifact.
 - [C939 unified asymptotic separation revision](../2026-08-21-c939-complete-ports-unified-asymptotic-separation.md)
   proves the matched-availability structural seed pair, lifts it to
   positive-density asymptotically good families, passes final cold/formal
@@ -114,9 +118,9 @@ terminal.
 Before any nontrivial proof development or formalization for this paper, read the required
 paper-specific expert dossier
 [`papers/expert-profiles/05-complete-repair-ports.md`](../../papers/expert-profiles/05-complete-repair-ports.md).
-The proof and assembly sequence C672--C678 is complete.  Complete C944's
-manuscript terminology revision, then run C325 to build the appendix-only
-finite verifier.  C679 then performs the aggregate formal/prose audits and independent
+The proof and assembly sequence C672--C678 and the C944 terminology revision
+are complete.  Run C325 to build the appendix-only finite verifier.  C679 then
+performs the aggregate formal/prose audits and independent
 draft-readiness cold reads.
 
 The prior monolithic draft and its cold reads remain inputs, not acceptance of the modular

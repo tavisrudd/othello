@@ -2,7 +2,7 @@
 
 **Lane**: `complete-ports`
 
-**Status**: MANUSCRIPT AND FULL RELEASE GATES PASS; STANDALONE EXPORT PENDING
+**Status**: COMPLETE; MANUSCRIPT AND STANDALONE RELEASE GATES PASS
 
 ## Intent
 
@@ -97,6 +97,10 @@ No novelty or priority verdict changed.
   full-port, represented-port, or prescribed-port phrase remains;
 - PDF SHA-256:
   `c53e6094b9fd3d103747a675f8d870ad52047169968e89821976ee2786be6807`.
+- immutable export source:
+  `76e5c2ae5068b5bb1d0098020c5aefeeb9e5183f`;
+- standalone mirror commit: `6c76b20`; exporter verification and the clean-tree
+  full release gate both pass, with no push, tag, deposit, or submission.
 
 ## `ej` + `tt` closeout and mystery ledger
 
