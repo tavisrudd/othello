@@ -106,8 +106,8 @@ No novelty or priority verdict changed.
 - PDF SHA-256:
   `5479bc2ba9f2b124c03ccd0074b642de9a693f33ccdad239ccfa3bcee9bba697`.
 - immutable export source:
-  `2bc37936483e8584bb9ede8a1be3eb86ec233f4b`;
-- standalone mirror commit: `cf3ccf7`; exporter verification and the clean-tree
+  `d73ee8fde74b105c73f0dd2c62ee029e4906cc7f`;
+- standalone mirror commit: `3899bc4`; exporter verification and the clean-tree
   full release gate both pass, with no push, tag, deposit, or submission.
 
 ## `ej` + `tt` closeout and mystery ledger
