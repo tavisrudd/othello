@@ -37,6 +37,7 @@ terminals = [
   "RepairPorts.prescribedPorts_of_outerDualDistance",
   "RepairPorts.eventually_pointedConfinement_iff_zeroCost",
   "RepairPorts.eventually_prescribedPorts",
+  "RepairPorts.eventually_radiusThree_prescribedPortPair",
   "RepairPorts.HasMDSDualParameters.pointedZeroFunctionalCost_eq",
   "RepairPorts.eventually_mdsMinimumCoefficientFingerprints",
   "RepairPorts.portReliability_delete_contract",
@@ -185,6 +186,11 @@ expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 
 [[terminal]]
 declaration = "RepairPorts.eventually_prescribedPorts"
+gates = ["RepairPorts.Gates.CompletePorts"]
+expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
+
+[[terminal]]
+declaration = "RepairPorts.eventually_radiusThree_prescribedPortPair"
 gates = ["RepairPorts.Gates.CompletePorts"]
 expected_axioms = ["Classical.choice", "Quot.sound", "propext"]
 
