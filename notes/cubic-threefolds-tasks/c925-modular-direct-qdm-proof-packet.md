@@ -15,7 +15,12 @@ outer factor attached to each connected codimension-two threefold-center
 occurrence.  For general \(m\), lower-period inner
 returns after a nontrivial outer orbit remain.  Neither published comparison
 supplies the required occurrence-labelled primitive loop or saturated
-native-effective carrier.
+native-effective carrier.  The row-free period argument uses the exact cubic
+marker \(\delta^\sharp=4/9\), not merely \(\delta^\sharp\ne0\).  A
+pairing-preserving parabolic shear gives the exact \(4/9\) block while fixing
+the unit and both divisor vectors, so generic Frobenius-algebra and divisor-
+generator data do not replace the missing effective large-radius
+calibration.
 The unconditional every-smooth theorem is not landed.  Independently, Voisin
 plus the 2025 Engel--de Gaay Fortman--Schreieder parity theorem gives an
 all-\(m\) proof for a very general cubic; that preprint result must not be
@@ -100,6 +105,8 @@ realization of that orbit.
   notes/2026-08-21-c925-no-stokes-source-dossier.md
 - indirect stable-rationality predictions and the very-general benchmark:
   notes/2026-08-22-c925-indirect-rationality-predictions.md
+- cubic Kummer derivative, divisor generator, and calibration boundary:
+  notes/2026-08-22-c925-kummer-divisor-generator.md
 
 The packet index owns the module-to-file map.  Do not append another large
 module to this card or to the index; add one focused companion file and one
@@ -151,6 +158,15 @@ index row.
   still has the very-general quantifier and is not a formal consequence of
   stable rationality in dimension \(m+3\), where higher-dimensional centres
   can contribute general abelian factors.
+- `KummerDivisorGenerator` proves three finite implications available after a
+  geometric occurrence has been constructed.  A commuting derivative with
+  fixed kernel preserves an order-three fixedness fingerprint; the trace of
+  a projected multiplication commutator vanishes; and three distinct divisor
+  eigenvalues generate the split cubic algebra by a Vandermonde isomorphism.
+  `ExactCubicPoint` packages rank two, nonzero nilpotent, and exact
+  discriminant \(4/9\) as a subtype.  A geometric provider must still put the
+  actual loop on that subtype.  These implications neither descend the
+  occurrence nor remove the regular base gauge of a moving spectral frame.
 - The modular \(m=1\) proof is sound from its stated Iritani,
   Iritani--Koto, and weak-factorization inputs.
 - Guéré/BFGMP and KKPYY are lawful split specializations at the algebraic
@@ -630,6 +646,13 @@ polynomial projector transport, the faithful scalar-edge basis and polynomial
 constructors, intrinsic edge reflection, tensor endpoint witness, unbounded
 branch count, and exact rational cubic-block certificate.
 
+The focused Kummer-divisor module elaborated without diagnostics in guarded
+run `20260822-133601`.  Its library target, `PaperInterface`, and
+`Verification.AxiomAudit` passed together in queued run
+`20260822-203654-bd8778f9`.  The guarded audit run `20260822-133914` reports
+only `propext`, `Classical.choice`, and `Quot.sound` on the new terminals and
+no admitted or native-evaluation axiom.
+
 The finite model currently has one hundred twenty-two checks.  It verifies only the
 advertised algebraic laws and countermodels, never an external QDM provider.
 The replayed script is 117334 bytes with SHA-256
@@ -648,11 +671,16 @@ The live frontier is source-side, not another linear consumer.
    numerical-reduced even base, retaining the independent center divisor and
    even-bulk coordinates.  For each connected codimension-two threefold-center
    occurrence, construct the transported product-loop action on the C924
-   marked primitive factors of its single outer correction factor and prove
-   that no point has exact period three.  This is the only remaining \(m=2\)
-   correction theorem.  Native-effective pure-Euler descent plus the strict
-   recurrence calculation is one sufficient proof, not an extra conclusion
-   required by the consumer.
+   primitive factors with exact marker \(\delta^\sharp=4/9\) in its single
+   outer correction factor and prove that no point has exact period three.
+   This is the only remaining \(m=2\) correction theorem.  The sharpened
+   sufficient route is saturated descent to the native effective
+   large-radius lattice, including the standard cup-product grading and the
+   elementary modification.  Generic cubic-etale/divisor data are
+   insufficient: the parabolic-shear countermodel retains them and has
+   \(\delta^\sharp=4/9\).  The resulting native-order problem still includes
+   arbitrary binary cubic intersection forms on the rank-two divisor space;
+   rank six and self-duality do not force the special dual-cubic order.
 
 2. **What Lean separates.**  The nonsplit outer-return theorem proves that
    total period is outer-label period times return-map period.  The pre-strict
@@ -662,7 +690,12 @@ The live frontier is source-side, not another linear consumer.
    after the still-open equality case is excluded.  Lean also checks the
    conditional cyclic dimension consumer, abstract recurrence compression,
    lower cubic certificate, and formula regressions.  It does not construct
-   the geometric labels or prove the generic all-\(n\) recurrence.
+   the geometric labels or prove the generic all-\(n\) recurrence.  The
+   Kummer-derivative, cubic-orbit, and projected-trace lemmas form the finite
+   part of a divisor-spectrum argument.  Its geometric adapter must still
+   identify the traced block scalar with an element of one connected cubic
+   etale orbit.  These lemmas do not supply the native calibration needed to
+   exclude the shear.
 
 3. **All-\(m\) remainder.**  Before the strict equality case, the candidate
    center dimensions at \(n=2,3,4,5,14\) are respectively

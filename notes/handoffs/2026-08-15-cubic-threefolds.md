@@ -147,10 +147,16 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   accepted point/curve/surface marker theorem exclude codimensions three
   through five at the generic numerical-reduced even base.  The sole
   remaining theorem is occurrence-wise exclusion of an exact three-cycle
-  among marked blocks of the single outer factor attached to each connected
-  codimension-two threefold-center occurrence.  A sufficient provider is
-  saturated native-effective pure-Euler descent for that factor plus the uniform
-  recurrence-to-residue calculation.  The pre-strict candidate dimensions at
+  among exact-\(4/9\) marked blocks of the single outer factor attached to
+  each connected codimension-two threefold-center occurrence.  A generic
+  divisor-generator reduction is not enough: a pairing-preserving parabolic
+  shear fixes the unit and both divisor vectors and still produces the cubic
+  marker.  The sufficient provider must descend the carrier and elementary
+  modification to the native effective large-radius calibration, or prove the
+  exact-period exclusion directly.  After descent, the finite residue problem
+  still ranges over the binary cubic intersection form of the two-dimensional
+  divisor space; the special dual-cubic order is not automatic.  The
+  pre-strict candidate dimensions at
   \(n=2,3,4,5,14\) are respectively \(\{1,2\}\), \(\{1,3\}\),
   \(\{1,3,4\}\), \(\{1,5\}\), and
   \(\{1,7,8,9,11,13,14\}\).  After a separate equality-case exclusion, the
@@ -166,6 +172,8 @@ promoted mathematical assertion maps to a kernel-checked declaration.
 
   Card: `../cubic-threefolds-tasks/c925-modular-direct-qdm-proof-packet.md`.
   Source dossier: `../2026-08-21-c925-no-stokes-source-dossier.md`.
+  Divisor/calibration report:
+  `../2026-08-22-c925-kummer-divisor-generator.md`.
   Indirect route report:
   `../2026-08-22-c925-indirect-rationality-predictions.md`.
 

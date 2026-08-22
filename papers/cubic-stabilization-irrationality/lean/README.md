@@ -472,6 +472,29 @@ contradiction obtained from the three weight equations of the degree-one-unit
 countermodel.  It does not derive those equations from flatness or the divisor
 equation; that matrix-to-geometry reduction remains external.
 
+`Comparison.KummerDivisorGenerator` isolates three finite algebra steps for a
+genuine cubic Kummer divisor direction.  A commuting derivative whose kernel
+is fixed by an order-three action preserves the action's fixed-point
+fingerprint.  Compression by a projector commuting with a multiplication
+operator leaves the trace of its commutator equal to zero.  Finally, three
+distinct divisor eigenvalues generate all functions on the three geometric
+points by the Vandermonde isomorphism; a separate theorem proves that a moved
+point in an order-three orbit has three distinct iterates.  The module also
+defines the exact cubic marked-point subtype with rank two, nonzero nilpotent,
+and discriminant `4/9`.  These statements do not construct the marked factors,
+the scalar conjugacy orbit, or the logarithmic divisor direction, and they do
+not remove a regular base-gauge term introduced by a parameter-dependent
+spectral frame.
+The same module gives an exact rational countermodel to a stronger inference:
+a parabolic Poincare isometry fixes the unit and both displayed divisor
+vectors, preserves the cubic dual-number Jordan form, and yields modified-
+residue discriminant `4/9`.  The kernel checks the isometry, fixed columns,
+change of basis, separation of the displayed `2+4` first recurrence, its
+selected second-recurrence entry, and the resulting discriminant.  It does not
+construct a formal gauge, a flat connection, or a Frobenius family.  Excluding
+this calibration requires an effective large-radius or equivalent geometric
+hypothesis not present in the finite matrix model.
+
 The algebraic model has a compact sufficient constructor. If the combined
 crossed and moving map `(B,D)` admits a linear retraction, an explicit incoming
 shear and target involution construct every crossed-coordinate field. An

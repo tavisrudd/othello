@@ -409,6 +409,20 @@ generalized eigenspaces by the C924 predicate
   \delta^\sharp\ne0.
 \]
 
+This qualitative predicate is the one used by the older row/projector and
+one-stabilization arguments.  The row-free exact-period route uses the refined
+cubic predicate
+
+\[
+  \operatorname{rank}=2,\qquad N\ne0,\qquad
+  \delta^\sharp=4/9.
+\]
+
+The distinction is essential: the strict upper orientation below has
+\(\delta^\sharp=4\), so it defeats the qualitative predicate but not the
+exact cubic one.  Exact equality with \(4/9\) is invariant under regular block
+isomorphism and field automorphisms because \(4/9\) is rational.
+
 The predicate is invariant under regular block isomorphism and under field
 automorphisms: rank is preserved, and nonvanishing of \(N\) and
 \(\delta^\sharp\) is preserved.  Hence the union of marked geometric factors
@@ -1863,11 +1877,13 @@ compatible with every codimension.
 If geometry first identifies a dangerous orbit as inner to one fixed outer
 factor, the dimension theorem then gives \(d=n\), hence \(r=2\), \(s=1\),
 and one center factor.  In that conditional codimension-two specialization of
-Theorem 5.18,
+Theorem 5.18, the normal weights of the fixed center are \(-1\) with rank
+\(r\) and \(+1\) with rank one.  Formula (4.9) therefore gives
+\(\lambda_j=e^{-2\pi i(j+r/2)/(r-1)}q^{1/(r-1)}\); in particular,
 
 \[
- \lambda_0=-q,\qquad
- \varsigma_0=q+\pi i\rho_Z+O(q^{-1}),\qquad
+ \lambda_0=q,\qquad
+ \varsigma_0=-q+\pi i\rho_Z+O(q^{-1}),\qquad
  Q_Z^d\longmapsto Q^{\iota_*d}q^{-\rho_Z\cdot d}.
 \]
 
@@ -1988,6 +2004,54 @@ QDM tangent direction, so the same flatness equation is then unavailable.
 The source adapter must carry an integral cocharacter, its extended
 derivation, and the corresponding Higgs map; a grading on the coefficient
 field alone is insufficient.
+
+There is a useful finite reduction after such a divisor direction has been
+identified.  Let \(\sigma\) be the cubic deck action and let \(D\) be its
+commuting Euler derivative.  If \(\ker D\) consists of \(\sigma\)-fixed
+vectors, then
+
+\[
+  \sigma(Dx)=Dx\quad\Longleftrightarrow\quad \sigma x=x.
+\]
+
+Indeed, for \(y=\sigma x-x\), the forward implication gives \(Dy=0\), hence
+\(\sigma y=y\); expanding \(\sigma^3x\) gives \(x+3y=x\).  On a rank-two
+primary block, the trace of the projected commutator in
+\(DU=C+[C,\mu]\) is zero.  To identify the scalar divisor eigenvalue with
+the derivative of the Euler eigenvalue one must also supply the moving-
+projector equation and the scalar-plus-nilpotent block decomposition.  If the
+resulting scalar lies in one connected cubic conjugacy orbit, nonfixedness
+makes its three conjugates distinct, and the Vandermonde determinant shows
+that it generates the cubic etale quotient.
+`Comparison.KummerDivisorGenerator` kernel-checks the derivative fixedness,
+the distinctness of the three iterates of a moved point, the projected-trace
+identity, and the Vandermonde step.  It does not construct the scalar block or
+its field action.
+
+This does not yet give the strict normal form.  In the ordered dual-cubic
+basis \((1,e,x,xe,x^2,x^2e)\), a unipotent parabolic isometry can fix
+\(1,e,x\), preserve the Poincare pairing, and conjugate the multiplication
+algebra while changing the compressed exponents.  At its rational parameter
+one, the normalized rank-two residue is
+
+\[
+ \begin{pmatrix}-1/6&2\\0&-5/6\end{pmatrix},
+ \qquad \delta^\sharp=4/9.
+\]
+
+It keeps the cubic quotient generator and the three dual-number factors.
+Consequently, unital Frobenius-algebra, pairing, divisor-generation, and
+generic Kummer data do not determine the native calibration.  The remaining
+source statement must rule out this shear by descending the occurrence and
+its elementary modification to the effective large-radius lattice with the
+standard cohomological grading and cup-product limit.  Iritani's Laurent
+comparison and C924's generic-field splitting do not cross that boundary.
+Nor does rank six determine the effective special order.  The cup product on
+the two-dimensional divisor space is an arbitrary binary cubic intersection
+form; self-duality and the grading do not force the special fibre
+\(K[x,e]/(x^3,e^2)\).  The finite provider must either identify that special
+order or classify the other graded self-dual Frobenius orders with the same
+generic cubic dual-number algebra.
 
 Accordingly, a genuine all-length correction theorem needs four
 independent clauses:
