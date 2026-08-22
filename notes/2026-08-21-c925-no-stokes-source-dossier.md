@@ -1145,8 +1145,10 @@ geometric theorem excluding that case.
 The failure already occurs for the geometric blowup
 \(\operatorname{Bl}_{p}\mathbb P^2=F_1\).  Reichelt, Schulze, Sevenheck, and
 Walther, *Algebraic aspects of hypergeometric differential equations* (2021),
-DOI 10.1007/s13366-020-00560-1, Example 5.1, give multiplication by the first
-divisor in the ordered basis \((1,T_1,T_2,[\mathrm{pt}])\):
+DOI 10.1007/s13366-020-00560-1, Example 5.1 (arXiv:2004.07262v2,
+published page 38), give multiplication by the first divisor in the ordered
+basis \((1,T_1,T_2,[\mathrm{pt}])\).  The checked arXiv PDF has SHA-256
+`4ec2933d806effbfa4cef9301348e0f6649c949830fa951b0c84944b40bdbdf8`:
 
 \[
  (a,b,c,d)\longmapsto(q_1q_2d,\ a-q_1b,\ q_1b,\ c).
@@ -1161,9 +1163,13 @@ checks this implication over every field.
 For Iritani's blowup variables one has, up to the displayed generator
 convention, \(q_1=q_{\mathrm{edge}}\) and
 \(q_2=Qq_{\mathrm{edge}}^{-1}\).  After passage to the generic fraction field,
-both are nonzero.  Iritani's normalized \(z=0\) direct-sum map identifies the
-rank-one point correction with a one-dimensional algebra ideal in
-\(QH(F_1)\).  Every nonzero vector in that ideal is an eigenvector for
+both are nonzero.  Iritani, *Quantum cohomology of blowups*,
+arXiv:2307.13555v3, Corollary 1.2, identifies the normalized \(z=0\)
+direct-sum map with an isomorphism of quantum-cohomology algebras.  For the
+point blowup \(r=2\), its correction is one-dimensional and hence a
+one-dimensional algebra ideal in \(QH(F_1)\).  The checked PDF has SHA-256
+`c16f56b283863322df04dadaeb0780889abd67a664f56a74fea39bc7ba8a934b`.
+Every nonzero vector in that ideal is an eigenvector for
 multiplication by \(T_1\), so its degree-zero coordinate is nonzero.  A full
 ambient-only row square would instead annihilate that correction ideal.
 Equation (5.32) writes the unnormalized \(z=0\) map as the normalized
@@ -1181,35 +1187,50 @@ consider the smooth codimension-two blowup
  \cong B\times F_1.
 \]
 
-Over a generic splitting field, let \(U_B\) be the marked cubic block and
-let \(L\) be the rank-one \(F_1\) correction ideal.  The product projector
-already used at the source endpoint is \(P_B\otimes\mathrm{id}\), so it fixes
-\(U_B\otimes L\).  Equivalently, the scalar outer Euler eigenvalue only shifts
-the semisimple part of the cubic block; its rank, nonzero nilpotent part, and
-shift-invariant modified-residue discriminant remain marked.  Choose
-\(b\in U_B\) with \(\epsilon_B(b)\ne0\) and \(0\ne\ell\in L\).  The \(F_1\)
-calculation gives \(\epsilon_{F_1}(\ell)\ne0\), hence
+Over a generic splitting field, let \(U_B\) be the connected marked cubic
+generalized-primary block.  Behrend, *The product
+formula for Gromov--Witten invariants*, Theorem 1 and formula (1),
+arXiv:alg-geom/9710014v1, supplies the tensor-product genus-zero quantum
+algebra.  The checked PDF has SHA-256
+`73d708012d4157f176a264940b80490f697f51aefd6a3913fbd7ccbbc1e0ed7d`.
+After avoiding the outer discriminant, the four rank-one \(F_1\) algebra
+factors are separated.  Corollary 1.2 preserves the Euler field, so the
+marked center block is carried back to \(U_B\otimes L_i\) for some such
+factor \(L_i\).  Its label need not agree with a preselected label for the
+point-blowup correction; algebra-factor permutations are harmless here.
+On \(L_i\), the outer Euler operator is scalar, so tensoring only adds that
+scalar to the semisimple part of the cubic block.  Its rank, nonzero
+square-zero nilpotent part, and shift-invariant modified-residue discriminant
+remain marked.  This derives the product marker without assuming product
+functoriality of Iritani's comparison.  Choose \(b\in U_B\) with
+\(\epsilon_B(b)\ne0\) and \(0\ne\ell_i\in L_i\).  The \(F_1\) calculation
+applies to every nonzero eigenline and gives
+\(\epsilon_{F_1}(\ell_i)\ne0\), hence
 
 \[
- \epsilon_{B\times F_1}(b\otimes\ell)
- =\epsilon_B(b)\epsilon_{F_1}(\ell)\ne0.
+ \epsilon_{B\times F_1}(b\otimes\ell_i)
+ =\epsilon_B(b)\epsilon_{F_1}(\ell_i)\ne0.
 \]
 
-The normalized blowup comparison carries this vector entirely in the centre
-factor, so its ambient component is zero.  This contradicts (D10.5).  Lean
+This block is the inverse image of the marked block in the center factor, so
+its ambient component is zero.  This contradicts (D10.5).  Lean
 checks the two load-bearing linear implications in
 `HirzebruchSurfaceAugmentation.tensor_degreeZeroRow_ne_zero_of_eigenvector`
 and
 `ProjectedRowProjectorDecomposition.Data.false_of_visible_marked_vector_with_zeroAmbientComponent`.
-The imported geometric inputs are the product quantum-cohomology formula,
-Iritani's identification of the \(F_1\) correction ideal, and the same tensor
-marker identification already used for \(B\times\mathbb P^m\).
+The imported geometric inputs are Behrend's product quantum-cohomology
+formula, Iritani's algebra-ideal identification of the \(F_1\) correction,
+and the existing C924 identification of the displayed rational cubic block
+and raw degree-zero row with the actual \(z=0\) cubic block.  The remaining
+product-marker deduction uses generic separation, connectedness of the
+generalized-primary cubic block, Corollary 1.2's Euler preservation, and
+scalar-shift invariance; it does not identify a canonical outer-factor label.
 
-Consequently (D10.5) is false as a universal smooth-blowup provider.  Denying
-that the product marker fixes \(U_B\otimes L\) would also withdraw the tensor
-projector used at the cubic-product endpoint; it is not a repair internal to
-this route.  The abstract projector-restricted Lean consumer remains correct,
-but it has no universal raw-augmentation instantiation.
+Consequently (D10.5) is false as a universal smooth-blowup provider.  The
+argument is invariant under permutations of the four outer \(F_1\) factors,
+because every one is degree-zero visible.  The abstract
+projector-restricted Lean consumer remains correct, but it has no universal
+raw-augmentation instantiation.
 
 The same \(F_1\) table gives a positive finite check for the independent
 row-free charge route.  Lean proves that multiplication by \(T_1\) satisfies

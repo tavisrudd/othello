@@ -629,10 +629,16 @@ any geometric or QDM provider.
    false.  Tensoring this blowup with the cubic gives the legal fivefold
    blowup
    \(B\times F_1=\operatorname{Bl}_{B\times\{p\}}(B\times\mathbb P^2)\).
-   Under the same product projector (P_B\otimes\mathrm{id}) used at the
-   source endpoint, the correction \(U_B\otimes L\) is rank two and C924
-   marked.  Its product row is nonzero while its ambient comparison component
-   is zero.  Lean checks the tensor visibility and zero-ambient obstruction
+   Over a generic splitting field, Behrend's product theorem and the
+   Euler-preserving algebra decomposition carry the connected marked center
+   block to \(U_B\otimes L_i\) for some separated rank-one \(F_1\) factor.
+   No canonical factor label or product-functorial comparison is needed.
+   The outer Euler operator is scalar on \(L_i\), so rank, the nonzero
+   square-zero nilpotent part, and the shift-invariant modified-residue
+   discriminant of \(U_B\) are unchanged.  Every \(L_i\) is degree-zero
+   visible by the displayed table.  Thus the product row is nonzero while
+   the ambient comparison component is zero.  Lean checks the tensor
+   visibility and zero-ambient obstruction
    separately in
    `HirzebruchSurfaceAugmentation.tensor_degreeZeroRow_ne_zero_of_eigenvector`
    and

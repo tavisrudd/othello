@@ -197,9 +197,12 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   Thus the full correction-annihilating row identity is false already for
   this blowup.  Tensoring with the cubic gives the legal fivefold blowup
   \(B\times F_1=\operatorname{Bl}_{B\times\{p\}}(B\times\mathbb P^2)\).
-  The same product projector (P_B\otimes\mathrm{id}) used at the source
-  endpoint marks the rank-two correction \(U_B\otimes L\); its product row is
-  nonzero while its ambient component is zero.  Lean checks the tensor
+  Over a generic splitting field, Behrend's product theorem and Euler
+  preservation carry the connected marked center block to
+  \(U_B\otimes L_i\) for some separated rank-one \(F_1\) factor; no canonical
+  label or product-functorial comparison is needed.  Scalar shift preserves
+  the cubic marker, and every \(L_i\) is degree-zero visible.  The product row
+  is nonzero while its ambient component is zero.  Lean checks the tensor
   visibility and zero-ambient obstruction.  Therefore even the
   projector-restricted raw-augmentation square is false as a universal
   smooth-blowup provider.  The abstract consumer remains correct, but this
