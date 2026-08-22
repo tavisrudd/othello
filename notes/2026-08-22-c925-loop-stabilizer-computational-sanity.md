@@ -20,6 +20,38 @@ interpretation.  It is the executable input shape consumed by
 Lean also proves the gcd reduction
 `modulus_dvd_power_mul_iff_reducedPeriod_dvd_power`.
 
+The later module `Comparison.LoopStabilizerPath` packages the same Boolean as
+an edge-local path invariant.  A vertex has selected-period support when one
+of its packet points has the displayed fixedness fingerprint.  A blowup edge
+is an equivariant equivalence from its source packet to the disjoint union of
+the ambient packet and one whole correction packet.  If no correction point
+has the selected period, Lean proves an iff between the two endpoint
+Booleans.  A forward blowdown consumes that exclusion; a reverse
+base-to-blowup step uses only the inverse ambient inclusion.  These directional
+steps compose in a dependent path whose shared vertex datum is definitionally
+the same.  Thus the final consumer no longer
+requires geometry to first assemble one global stable ledger.
+
+`LoopStabilizerPath.OrbitTransport` is weaker again: an injective equivariant
+map between consecutive vertex packets preserves the exact period, so a path
+of such maps carries the source witness to the endpoint.  It assumes neither
+surjectivity nor a correction decomposition.  This exposes a second possible
+source route: prove directly that the one carried marked orbit has ambient
+provenance at each edge.  It does not follow from an unlabelled F-bundle
+decomposition when isomorphic marked factors can be permuted.
+
+`Comparison.OccurrenceLoopCertificate` closes a different finite-checking
+gap.  It represents the target as a dependent sum of occurrence tags and
+their label types, with an explicit permutation in each fibre.  Lean proves
+that every power preserves the occurrence tag.  A lawful relabelling must
+conjugate these permutations.  The executable certificate checks one
+fixedness-separating power per actual tagged point and a separate `Realizes`
+equation identifies the table with the geometric group generator.  Thus a
+claimed period list, an occurrence-mixing permutation, or a hand-relabelled
+charge cannot enter the terminal theorem without an explicit proof.  Geometry
+must separately identify the exhaustive marked packet with this tagged
+carrier; `Realizes` alone cannot detect an omitted hidden orbit.
+
 ## Exact domain
 
 The deterministic part checks:
@@ -31,6 +63,12 @@ The deterministic part checks:
 - the red Kummer model \(x^n=t\), the green split model \(x^n=1\), and four
   omission/mutation tests that reject cardinality-only, return-only, and
   mixed-ledger substitutes for exact periods;
+- an occurrence-tagged flattened permutation with direct tag-preservation and
+  point-period checks;
+- rejection of a lying period table and of a loop that mixes occurrence tags;
+- acceptance of inverse-charge conjugacy and rejection of a nonconjugate
+  relabelling;
+- direct Kummer/split permutation fingerprints at \(m=1,2,3,4,13\);
 - the named stabilization indices \(m=1,2,3,4,13\).
 
 Three fixed-seed QuickCheck properties add 27,000 generated cases.  The seed
@@ -68,8 +106,8 @@ The replay used GHC 9.10.3 and QuickCheck 2.15.0.1.
 
 | artifact | bytes | SHA-256 |
 |---|---:|---|
-| `c925-loop-stabilizer-sanity.hs` | 5,528 | `52f0e75df18403dcf972ca21d4b939d8f7bd2b648d50e1f58df8f140781307d0` |
-| `c925-loop-stabilizer-sanity-output.txt` | 1,158 | `33d07efd66d9b952d9626c380dbf9fd1f785bc007f84137ac48d52430c855a28` |
+| `c925-loop-stabilizer-sanity.hs` | 11,124 | `eb247c714015c7e94563189ff34072d0c6bea3e2f731ed91f10dd01c9969c28a` |
+| `c925-loop-stabilizer-sanity-output.txt` | 1,525 | `35e3bc47a3eebde20c4d1076ae99a885a48c05350e254c7f7d6e610034a02976` |
 
 ## Independent check and trust boundary
 
@@ -80,7 +118,16 @@ prevents an equivariant stable-ledger equivalence.  The Lean declarations are
 
 - `exists_power_fixedness_divisibility_difference`;
 - `modulus_dvd_power_mul_iff_reducedPeriod_dvd_power`;
-- `sourceSum_not_equivariantlyEquivalent_of_distinctPowerFixednessPeriods`.
+- `sourceSum_not_equivariantlyEquivalent_of_distinctPowerFixednessPeriods`;
+- `LoopStabilizerPath.Edge.hasPeriodAt_iff`;
+- `LoopStabilizerPath.Decomposition.hasPeriodAt_source_of_target`;
+- `LoopStabilizerPath.Path.hasPeriodAt_of`;
+- `LoopStabilizerPath.Path.false_of_sourcePeriod_of_targetNoPeriod`;
+- `LoopStabilizerPath.OrbitTransport.Path.hasPeriodAt_of`;
+- `LoopStabilizerPath.OrbitTransport.Path.false_of_sourcePeriod_of_targetNoPeriod`;
+- `OccurrenceLoopCertificate.Ledger.loopPermutation_pow_occurrence`;
+- `OccurrenceLoopCertificate.FixednessCertificate.of_check_eq_true`;
+- `OccurrenceLoopCertificate.no_selectedPeriod_of_certificate`.
 
 The Haskell execution and GHC/QuickCheck implementation remain trusted.  The
 calculation does not prove that an actual QDM marked packet is finite étale,
@@ -89,10 +136,22 @@ listed branches are exhaustive, or that every weak-factorization comparison
 uses the same loop.  Those are the geometric source hypotheses still required
 for the unconditional \(m=2\) or all-\(m\) theorem.
 
+The guarded queue built the minimized `LoopStabilizerPath` and the full axiom
+audit in run `20260822-160244-effd621a`.  It built
+`OccurrenceLoopCertificate` and the full axiom audit in run
+`20260822-155313-d281179c`.  Both aggregate gates passed.
+
 ## Mystery ledger
 
 - **Settled:** full stabilizers need not be computed.  One distinguishing
   power per target point suffices, and unequal exact periods produce it.
+- **Settled:** a global oriented correction ledger is not needed by the
+  consumer.  Edgewise equivariant ambient-plus-correction decompositions and
+  local correction-period exclusion on blowdown-oriented steps telescope
+  through a typed path.  Reverse traversal needs only the ambient inclusion.
+- **Settled:** a finite certificate need not trust reported orbit periods.
+  It can check fixedness directly on an occurrence-tagged permutation, while
+  a separate equality ties that permutation to the actual loop action.
 - **Settled:** the cyclic arithmetic is not the obstruction.  The gcd formula
   is kernel-checked, and the executable suite covers the named stabilization
   indices and all charges through period 65.
@@ -107,8 +166,10 @@ for the unconditional \(m=2\) or all-\(m\) theorem.
 - **Open:** construct an occurrence-wise comparison from the C924 marked
   finite étale QDM index scheme to labelled nearby-cycle branches over the
   actual transported trait, equivariant for one named loop.
-- **Open:** prove that this comparison is exhaustive and coherent through
-  every blow-up, inverse, and reindexing in the chosen factorization.
+- **Open:** prove that each blowup comparison is exhaustive on the marked
+  primitive-factor scheme and equivariant for the vertex family's actual
+  loop.  Reverse traversal then uses the same edge equivalence; no independent
+  inverse comparison is needed.
 - **Open:** exclude exact period \(m+1\) on the marked correction branches.
   Chuang's exponent formula makes this finite once the two preceding adapters
   exist, but it does not supply the marker-specific exclusion.

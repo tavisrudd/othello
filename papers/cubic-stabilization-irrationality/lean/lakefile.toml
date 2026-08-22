@@ -49,6 +49,8 @@ roots = [
   "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.SelectedLocalSystemReader",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.DescentPacket",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.TwoLayerDescentPacket",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.LoopStabilizerPath",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.OccurrenceLoopCertificate",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.HorizontalReader",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.TraitHorizontalReader",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.ProvenanceEdge",

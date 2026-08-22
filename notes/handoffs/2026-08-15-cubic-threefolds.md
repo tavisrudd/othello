@@ -258,10 +258,24 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   augmentation are failed universal providers, and the associated-graded
   repair remains conditional.  The task card's `Next` section is
   authoritative.  Use the actual pathwise $\mathbb Z$-loop: a source branch
-  has stabilizer $(m+1)\mathbb Z$, and no point in the opposite ledger may
-  have the same stabilizer.  All comparisons and inverses must lift coherently
-  to the equivariant stable ledger.  `TwoLayerDescentPacket` proves this exact
-  stabilizer obstruction, so a split $C_{m+1}$ action is no longer required.
+  has stabilizer $(m+1)\mathbb Z$.  `LoopStabilizerPath` now removes the need
+  for one separately assembled global ledger.  It attaches one packet/action
+  to each typed vertex and consumes, on each blowup edge, an equivariant
+  blowup-packet $\simeq$ ambient-packet $\sqcup$ correction-packet comparison
+  plus exclusion of period $m+1$ from that correction in the blowdown
+  direction.  Reverse traversal uses only the inverse ambient inclusion, and
+  exact-period support telescopes.  Its still looser
+  `OrbitTransport` path consumes only directed injective equivariant maps of
+  the carried packet; this replaces uniform correction exclusion by a pointed
+  ambient-provenance theorem.  These two provider routes are alternatives.
+  `OccurrenceLoopCertificate` gives the finite adapter an occurrence-tagged
+  fibrewise permutation, direct fixedness-witness checks, conjugacy-only
+  relabelling, and a separate equality with the actual geometric generator;
+  it does not trust a reported period table.  Geometry must still prove that
+  this tagged carrier exhausts the marked primitive factors and that the loop
+  preserves the displayed occurrence fibres.
+  `TwoLayerDescentPacket` separately proves the one-ledger stabilizer
+  obstruction, so a split $C_{m+1}$ action is no longer required.
   Its witness-oriented theorem accepts one distinguishing loop power for each
   target point, which is the finite-certificate interface for tame-inertia
   exponent calculations.  Its exact-period corollary constructs the witness
@@ -270,8 +284,11 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   \(m=1,2,3,4,13\), all cyclic charges through period 65, and the mandatory
   red model \(x^{m+1}=t\); see
   `notes/2026-08-22-c925-loop-stabilizer-computational-sanity.md`.
-  The occurrence-uniform stabilizer exclusion and coherent geometric lift
-  remain external.  A bounded 2025--2026 math-physics search found two real
+  The occurrence-wise actual-loop/index-scheme lift and either the correction
+  period exclusion or direct marked-orbit provenance remain external.  A
+  coordinate reindexing $s=q^d$ changes period to
+  $r/\gcd(r,d)$, so a primitive charge map is load-bearing.  A bounded
+  2025--2026 math-physics search found two real
   alternate frameworks but no provider.  Bai--Pomerleano--Seidel's
   overconvergent Frobenius structure is proved for toric Fanos and
   Grassmannians, not the cubic or arbitrary centers.  Wang's irregular Hodge

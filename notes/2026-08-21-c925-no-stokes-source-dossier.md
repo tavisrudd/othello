@@ -1627,6 +1627,104 @@ be checked.  The Haskell certificate and Lean period theorem are recorded in
 reject \(x^{m+1}=t\) as a target correction rather than attempting to exclude
 it.
 
+## D13. Exact source boundary for the actual-loop path
+
+The edge-local consumer is now smaller than the global Burnside-ledger package.
+`Comparison.LoopStabilizerPath` attaches one packet and one action of the
+actual loop group to each vertex.  A blowup edge supplies an equivariant
+equivalence
+
+\[
+  \mathscr P_{\operatorname{Bl}_Z Y}
+    \simeq \mathscr P_Y\sqcup\mathscr C_Z
+\]
+
+and excludes the selected period from the whole correction packet
+\(\mathscr C_Z\).  The same equivalence is used in reverse for a blowdown.
+Consequently neither a split \(C_{m+1}\)-lift nor a separately composed global
+stable ledger is a consumer hypothesis.
+
+Nor does the consumer demand one common coefficient trait.  Different edges
+may construct their finite packets over different local traits and then
+identify the resulting geometric point sets.  What must be common is the
+abstract loop assignment at each shared vertex: the two incident edge maps
+must conjugate their local generators to the one chosen vertex action.  A
+ramified coordinate change therefore appears as an explicit action
+reindexing, not as equality of coefficient rings.
+
+The source contributions and omissions are now:
+
+1. **Iritani--Koto projective bundles.**  Theorem 5.1 and the monodromy
+   discussion around the Fourier branches give
+   \(\lambda_j=\zeta_{m+1}^j q^{1/(m+1)}\).  Under that local \(q\)-loop, the
+   branch labels form a regular orbit and have exact period \(m+1\).  This is
+   the source-end calculation.  It does not say that the inner cubic packet is
+   fixed by a loop transported through an arbitrary factorization, nor identify
+   that local loop with every later occurrence action.
+2. **KKPYY atoms.**  The canonical maximal-F-bundle decomposition and blowup
+   chemical formula provide the strongest available non-equivariant
+   ambient-plus-correction ledger.  They do not construct a finite-etale
+   primitive-idempotent index scheme over one trait or an equivariant bijection
+   for a named tame generator.  Repeated isomorphic factors can be permuted
+   after forgetting this index data.
+3. **Iritani blowup comparison and its 2026 arithmetic/Hodge refinement.**  The
+   formal comparison is a connection/F-bundle direct sum after edge-specific
+   root localization.  Rational/cyclotomic definition and Hodge equivariance
+   do not identify a loop imported from another Novikov coordinate; the Hodge
+   group fixes those variables.  A reindexing \(s=q^d\) changes an \(r\)-cycle
+   to period \(r/\gcd(r,d)\), so the exponent-lattice map is load-bearing.
+4. **Henselian good reduction.**  Standard finite-etale theory over a strictly
+   henselian DVR gives a real conditional provider: if a marked correction
+   index algebra extends finite etale over the common trait, its geometric
+   generic points are inertia-fixed.  Its unramified splitting closure is
+   disjoint from the totally tamely ramified Kummer extension.  What is not
+   sourced is the finite-etale integral model for every actual correction or
+   its compatibility with the QDM comparison.
+5. **Arithmetic Picard--Lefschetz.**  Once a labelled marked QDM branch has
+   been identified with a nearby-cycle eigenbranch, Chuang's formula computes
+   its tame period.  It supplies neither that identification nor a universal
+   exclusion; diagonal threefold singularities can have exact order three.
+
+There are three mandatory falsifiers for any successor source theorem:
+
+* \(K[x]/(x^{m+1}-t)\) decorated by the C924 atom has the forbidden exact
+  period while preserving all presently used inner marker data;
+* a coordinate map \(s=q^d\) changes periods and detects any suppressed charge
+  reindexing;
+* four isomorphic marked factors with inertia fixing one and cycling three
+  show that an unlabelled direct-sum isomorphism cannot identify the
+  \(B\times F_1\) correction factor.
+
+The exact new source theorem is therefore edgewise, not global: construct one
+coherent abstract \(\mathbb Z\)-action on the marked packet at every vertex
+(from edge-local traits if desired); lift each KKPYY/Iritani
+ambient-plus-correction decomposition to an equivariant equivalence of the
+marked primitive-factor schemes; and prove that every point of its whole
+correction packet has period different from \(m+1\).  For \(m=2\), the last
+clause is precisely exclusion of a correction three-cycle.  This is a missing
+geometric/descent theorem, not a finite-consumer theorem.
+
+There is one strictly weaker provider option.  The
+`LoopStabilizerPath.OrbitTransport` consumer needs only a directed injective
+equivariant map carrying the selected packet from one vertex to the next.  It
+does not require an exhaustive correction index scheme.  Geometrically this
+amounts to proving that the one transported marked orbit has ambient
+provenance at every blowdown; reverse traversal uses the ambient inclusion.
+This may be easier than excluding the selected period from every correction,
+but it is not formal from the unlabelled atom formula: repeated isomorphic
+marked factors can be permuted, so a marker/provenance theorem is still
+load-bearing.
+
+The finite-table adapter is now also explicit.  `OccurrenceLoopCertificate`
+uses a dependent occurrence-labelled carrier and a fibrewise permutation,
+checks one separating power per actual point, and requires an equality
+`Realizes` between that permutation and the geometric generator.  It prevents
+occurrence mixing and unproved charge relabelling inside the consumer.  The
+`Realizes` equality is itself exactly part of the missing source adapter.  It
+is not the whole adapter: geometry must first identify the exhaustive marked
+primitive-factor packet with the tagged carrier and prove that the loop
+preserves those occurrence fibres.
+
 ## Current source verdict
 
 1. **The row/projector architecture is closed in the no-Stokes regime.**
@@ -1636,17 +1734,17 @@ it.
    augmentation fails on the marked product edge
    \(B\times\mathbf P^2\leftarrow B\times F_1\).
 2. **The live consumer is row-free and uses the actual loop.**  The source
-   projective packet has stabilizer \((m+1)\mathbb Z\).  An equivariant atomic
-   ledger cannot carry it to a target-and-correction ledger containing no
-   marked point with that stabilizer.  The Lean theorem in
-   `TwoLayerDescentPacket` proves exactly this set/action obstruction and
-   handles nonsplit finite lifts.
-3. **The plumbing is not the open gate.**  What remains is one source theorem
-   constructing a coherent actual-\(\mathbb Z\)-equivariant refinement of the
-   KKPYY atom ledger along the selected factorization and excluding
-   stabilizer \((m+1)\mathbb Z\) on every opposite marked correction point.
-   For \(m=2\), the algebra \(K[x]/(x^3-t)\) decorated by the cubic atom is the
-   mandatory countermodel to any proposed proof.
+   projective packet has stabilizer \((m+1)\mathbb Z\).  The new
+   `LoopStabilizerPath` theorem transports existence of that period edgewise,
+   provided the entire correction packet lacks it, and handles reverse steps
+   without a separately supplied inverse comparison.
+3. **Consumer plumbing is closed; source adapter plumbing is not.**  The Lean
+   path makes nominal occurrence mismatch and reverse orientation
+   unrepresentable.  Geometry must still construct actual-loop actions and
+   equivariant finite-etale factor maps from the published formal
+   decompositions.  The independent geometric clause excludes stabilizer
+   \((m+1)\mathbb Z\) from every correction packet.  For \(m=2\), the algebra
+   \(K[x]/(x^3-t)\) decorated by the cubic atom is the mandatory countermodel.
 4. **The \(B\times F_1\) calculation is only a model edge.**  Its polynomial
    has the required simple special-fibre root, but the actual tensor
    projector, charge neutrality, and good reduction of the marked
@@ -1657,7 +1755,7 @@ it.
    Frobenius structures, or compactification invariance for one fixed
    Landau--Ginzburg model.  They do not provide the occurrence-uniform
    stabilizer exclusion or a common mirror model for the birational path.
-6. **The conditional Lean telescope is uniform in \(m\); the unconditional
+6. **The edge-local Lean telescope is uniform in \(m\); the unconditional
    geometric provider is not landed.**  Do not report the all-\(m\) theorem
    as proved.  The next source target is the henselian, actual-loop
    refinement just stated, not another row consumer.

@@ -6,13 +6,16 @@
 the no-Stokes row providers tested are ruled out: cubic irreducibility excludes
 the pole-bounded common object, and the cubic product of the \(F_1\) correction
 falsifies both full and marked-image raw \(z=0\) augmentation.  The live
-row-free gate is a pathwise loop action for which no opposite correction
-idempotent has the source branch's stabilizer, together with a coherent
-equivariant stable ledger.  The
+row-free gate is now edge-local: one vertex-indexed actual-loop packet family,
+an equivariant ambient-plus-correction decomposition on each blowup edge, and
+the exclusion of the source period from that edge's whole correction packet.
+`LoopStabilizerPath` proves that these data telescope through forward and
+reverse steps, so a separately assembled global stable ledger is not needed.  The
 projective endpoint and generic-bulk persistence are closed; the unconditional
 every-smooth theorem is not landed.  Independently, Voisin plus the 2025
 Engel--de Gaay Fortman--Schreieder parity theorem gives an all-\(m\) proof for
-a very general cubic; no manuscript edits
+a very general cubic; that preprint result must not be promoted to every
+smooth cubic.
 
 ## Goal
 
@@ -603,10 +606,16 @@ the finite sweep is only a regression.
 
 The loop-stabilizer suite separately checks 2,144 cyclic translations, 4,225
 period pairs, 27,000 fixed-seed QuickCheck cases, and the named indices
-(m=1,2,3,4,13).  It tests the exact finite certificate consumed by the
-actual-loop theorem; it does not certify the geometric QDM-to-packet adapter.
+(m=1,2,3,4,13).  It now also checks occurrence-tag preservation on a flattened
+permutation, rejects lying period tables and occurrence-mixing loops, and
+tests conjugate versus nonconjugate relabellings.  It tests the exact finite
+certificate consumed by the actual-loop theorem; it does not certify the
+geometric QDM-to-packet adapter.
 Its trust record is
 `../2026-08-22-c925-loop-stabilizer-computational-sanity.md`.
+The guarded queue built the minimized `LoopStabilizerPath` with the full axiom audit in run
+`20260822-160244-effd621a` and `OccurrenceLoopCertificate` with the full axiom
+audit in run `20260822-155313-d281179c`; both aggregate gates passed.
 
 Paper-local Lean is validated only through the guarded queue.  The aggregate
 target `CubicStabilizationIrrationalityVerification` passed in run
@@ -677,28 +686,64 @@ any geometric or QDM provider.
    reopen raw or normalized augmentation unless the product marker itself is
    replaced.  An associated-graded alternative would still need unsupplied
    edge DVR lattices and integral occurrence maps.
-3. Pursue one row-free source theorem only.  For each \(m\ge1\), use the
-   actual pathwise loop action on the marked finite-etale packet such that:
-   a chosen \(B\times\mathbb P^m\) branch has stabilizer
-   \((m+1)\mathbb Z\); no point in the opposite target/correction marked
-   ledger has that stabilizer; and
-   every directed comparison and inverse lifts coherently to the resulting
-   equivariant stable-disjoint-union ledger.  The Lean theorem
+3. Pursue one row-free source theorem only.  For each \(m\ge1\), construct one
+   vertex-indexed family of marked finite-etale packets with an action of the
+   actual pathwise loop.  On each blowup edge, provide an equivariant
+   equivalence
+   \[
+     \mathscr P_{\mathrm{blowup}}
+       \simeq \mathscr P_{\mathrm{base}}\sqcup\mathscr C_e
+   \]
+   and prove that no point of the entire correction packet \(\mathscr C_e\)
+   has period \(m+1\).  A blowdown-oriented step consumes this exclusion; a
+   reverse base-to-blowup step uses only the inverse ambient inclusion.  The
+   new Lean module `LoopStabilizerPath` proves selected-period support
+   transported along the directional typed path; its
+   endpoint theorem contradicts a period-\(m+1\) source and a target with no
+   such point.  Adjacent occurrences share their packet and loop action by
+   construction, so no separate global stable-ledger composition theorem is
+   consumed.  This is strictly smaller than the former global oriented-ledger
+   gate, but it still requires the actual finite-etale index schemes and
+   equivariance of every edge comparison.  It does not require one common
+   coefficient trait: edge-local point sets are allowed, provided the two
+   incident maps at a shared vertex conjugate their local generators to the
+   one action assigned to that vertex.  Ramified charge reindexing must appear
+   in this conjugacy rather than being silently identified with the same loop.
+
+   There is a still looser alternative in
+   `LoopStabilizerPath.OrbitTransport`: supply only an injective equivariant
+   map carrying the selected packet at each directed step.  This avoids full
+   correction enumeration and surjectivity.  It replaces the uniform
+   correction-period exclusion by the pointed geometric assertion that this
+   particular orbit lands in the ambient factor.  For a reverse step, geometry
+   supplies the directed ambient inclusion arising from the same blowup
+   comparison.  This direct-provenance route and the correction-exclusion
+   route are alternatives, not cumulative hypotheses.
+
+   For a finite computed packet, use `OccurrenceLoopCertificate`: every point
+   retains its occurrence tag, the loop permutation is fibrewise by
+   construction, legal reindexing requires an explicit conjugacy, and the
+   certificate checks a separating power directly rather than trusting a
+   reported period.  The `Realizes` field equates this permutation with the
+   actual geometric generator.  This closes the finite checker/type seam, not
+   the geometric construction of that equality or the exhaustive marked
+   equivalence between the QDM packet and the enumerated carrier.
+
+   At the finite level,
    `TwoLayerDescentPacket.sourceSum_not_equivariantlyEquivalent_withoutSameStabilizer`
-   then gives the contradiction without requiring the loop quotient to split.
-   The witness-oriented theorem
-   `sourceSum_not_equivariantlyEquivalent_of_fixednessFingerprintSeparated`
-   accepts, for each target point, one loop power whose fixedness differs from
-   the source; a finite arithmetic certificate need not materialize a full
-   stabilizer.  The exact-period corollary reduces this further to the period
+   gives the same one-ledger contradiction without requiring the loop quotient
+   to split.  Its witness-oriented form accepts one distinguishing power per
+   target point, and its exact-period corollary reduces this to the period
    inequality returned by a tame local-exponent calculation.  The companion
    Haskell suite checks that arithmetic for \(m=1,2,3,4,13\), all translation
    charges through period 65, and the red model \(x^{m+1}=t\); Lean proves the
    gcd reduction and the period-separation implication.
-   A split external \(C_{m+1}\)-action with no free opposite point is a
+   A split external \(C_{m+1}\)-action with no free correction point is a
    convenient stronger provider.  For \(m=2\), the exact local exclusion is
-   absence of a correction three-cycle.  This
-   is a missing geometric/descent theorem, not a consumer or typing gap.  The
+   absence of a correction three-cycle under the same transported loop.  The
+   consumer/path typing is closed; constructing the coherent vertex-loop
+   finite-etale edge comparison and proving this arbitrary-center exclusion is
+   the missing source theorem.  The
    first finite source test is the marked correction in
    \(B\times F_1\): compute its spectral polynomial in the product Novikov
    charge and verify that the external \(C_3\) fixes its geometric

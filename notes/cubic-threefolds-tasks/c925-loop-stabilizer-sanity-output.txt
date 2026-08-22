@@ -8,6 +8,12 @@ PASS a mixed ledger fails when one target orbit has the source period
 PASS cardinality does not replace stabilizer data
 PASS return at the source power does not imply equal exact period
 PASS a two-cycle plus a fixed point is green against a three-cycle
+PASS occurrence-tagged flattened permutation preserves every tag
+PASS actual permutation checker rejects a lying green period table
+PASS actual permutation checker rejects occurrence mixing
+PASS fiberwise conjugacy accepts inverse-charge relabelling
+PASS fiberwise conjugacy rejects a nonconjugate relabelling
+PASS actual permutation fingerprints, named m=1,2,3,4,13
 PASS QuickCheck translation period formula, 9000 fixed-seed cases
 PASS QuickCheck separating power, 9000 fixed-seed cases
 PASS QuickCheck inverse-period invariance, 9000 fixed-seed cases

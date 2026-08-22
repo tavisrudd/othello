@@ -1,7 +1,7 @@
 import Control.Monad (forM_, unless)
-import Data.List (find)
+import Data.List (find, nub, sort)
 import System.Exit (exitFailure)
-import Test.QuickCheck
+import Test.QuickCheck hiding (label)
 import Test.QuickCheck.Random (mkQCGen)
 
 sourceFixed :: Int -> Int -> Bool
@@ -35,6 +35,83 @@ certificateValid sourcePeriod targetPeriod =
   case separatingPower sourcePeriod targetPeriod of
     Nothing -> sourcePeriod == targetPeriod
     Just power -> sourcePeriod /= targetPeriod && separates sourcePeriod targetPeriod power
+
+type Occurrence = Int
+type Label = Int
+type TaggedPoint = (Occurrence, Label)
+type TaggedPermutation = TaggedPoint -> TaggedPoint
+
+permutationPower :: TaggedPermutation -> Int -> TaggedPoint -> TaggedPoint
+permutationPower permutation power point = iterate permutation point !! power
+
+permutationFixed :: TaggedPermutation -> Int -> TaggedPoint -> Bool
+permutationFixed permutation power point = permutationPower permutation power point == point
+
+isPermutationOn :: [TaggedPoint] -> TaggedPermutation -> Bool
+isPermutationOn points permutation =
+  length (nub points) == length points
+    && sort (map permutation points) == sort points
+
+preservesOccurrences :: [TaggedPoint] -> TaggedPermutation -> Bool
+preservesOccurrences points permutation =
+  all (\point -> fst (permutation point) == fst point) points
+
+fixednessWitnessesValid
+  :: Int -> [TaggedPoint] -> TaggedPermutation -> (TaggedPoint -> Int) -> Bool
+fixednessWitnessesValid sourcePeriod points permutation witnessPower =
+  all (\point ->
+    sourceFixed sourcePeriod (witnessPower point)
+      /= permutationFixed permutation (witnessPower point) point) points
+
+taggedCertificateValid
+  :: Int -> [TaggedPoint] -> TaggedPermutation -> (TaggedPoint -> Int) -> Bool
+taggedCertificateValid sourcePeriod points permutation witnessPower =
+  isPermutationOn points permutation
+    && preservesOccurrences points permutation
+    && fixednessWitnessesValid sourcePeriod points permutation witnessPower
+
+pointPeriod :: [TaggedPoint] -> TaggedPermutation -> TaggedPoint -> Maybe Int
+pointPeriod points permutation point =
+  find (\power -> permutationFixed permutation power point) [1 .. length points]
+
+fiberwiseConjugacy
+  :: [TaggedPoint]
+  -> [TaggedPoint]
+  -> TaggedPermutation
+  -> TaggedPermutation
+  -> (TaggedPoint -> TaggedPoint)
+  -> Bool
+fiberwiseConjugacy sourcePoints targetPoints sourceLoop targetLoop relabel =
+  isPermutationOn sourcePoints sourceLoop
+    && isPermutationOn targetPoints targetLoop
+    && sort (map relabel sourcePoints) == sort targetPoints
+    && all (\point -> fst (relabel point) == fst point) sourcePoints
+    && all (\point -> relabel (sourceLoop point) == targetLoop (relabel point)) sourcePoints
+
+singleOccurrencePoints :: Int -> Occurrence -> [TaggedPoint]
+singleOccurrencePoints modulus occurrence =
+  [(occurrence, label) | label <- [0 .. modulus - 1]]
+
+translationPermutation :: Int -> Int -> TaggedPermutation
+translationPermutation modulus charge (occurrence, label) =
+  (occurrence, (label + charge) `mod` modulus)
+
+namedPermutationCaseValid :: Int -> Bool
+namedPermutationCaseValid m =
+  let period = m + 1
+      points = singleOccurrencePoints period m
+      kummerLoop = translationPermutation period 1
+      splitLoop = translationPermutation period 0
+      witnessPower _ = 1
+      checkedPowers = [0 .. 2 * period]
+   in isPermutationOn points kummerLoop
+        && preservesOccurrences points kummerLoop
+        && all (\point -> pointPeriod points kummerLoop point == Just period) points
+        && all (\point -> all (\power ->
+          permutationFixed kummerLoop power point == sourceFixed period power)
+          checkedPowers) points
+        && taggedCertificateValid period points splitLoop witnessPower
+        && not (taggedCertificateValid period points kummerLoop witnessPower)
 
 assertCheck :: String -> Bool -> IO ()
 assertCheck name condition = do
@@ -118,6 +195,48 @@ main = do
     (sourceFixed 3 6 && sourceFixed 6 6 && separatingPower 3 6 == Just 3)
   assertCheck "a two-cycle plus a fixed point is green against a three-cycle"
     (all (\targetPeriod -> targetPeriod /= 3) ([2, 1] :: [Int]))
+  let taggedMixedPoints =
+        [(0, label) | label <- [0 .. 2]]
+          ++ [(1, label) | label <- [0 .. 1]]
+      taggedMixedLoop point@(occurrence, label)
+        | occurrence == 0 = (occurrence, (label + 1) `mod` 3)
+        | occurrence == 1 = (occurrence, (label + 1) `mod` 2)
+        | otherwise = point
+      lyingPoints = singleOccurrencePoints 3 0
+      actualThreeCycle = translationPermutation 3 1
+      lyingReportedPeriod _ = 1
+      lyingWitness point =
+        case separatingPower 3 (lyingReportedPeriod point) of
+          Just power -> power
+          Nothing -> 0
+      mixingPoints = [(occurrence, 0) | occurrence <- [0 .. 2]]
+      mixingLoop (occurrence, label) = ((occurrence + 1) `mod` 3, label)
+      mixingWitness _ = 2
+      relabelPoints = singleOccurrencePoints 3 0
+      forwardLoop = translationPermutation 3 1
+      inverseLoop = translationPermutation 3 2
+      inverseRelabel (occurrence, label) = (occurrence, (-label) `mod` 3)
+      identityRelabel = id
+  assertCheck "occurrence-tagged flattened permutation preserves every tag"
+    (isPermutationOn taggedMixedPoints taggedMixedLoop
+      && preservesOccurrences taggedMixedPoints taggedMixedLoop
+      && map (pointPeriod taggedMixedPoints taggedMixedLoop) taggedMixedPoints
+        == [Just 3, Just 3, Just 3, Just 2, Just 2])
+  assertCheck "actual permutation checker rejects a lying green period table"
+    (not (taggedCertificateValid 3 lyingPoints actualThreeCycle lyingWitness))
+  assertCheck "actual permutation checker rejects occurrence mixing"
+    (isPermutationOn mixingPoints mixingLoop
+      && fixednessWitnessesValid 2 mixingPoints mixingLoop mixingWitness
+      && not (preservesOccurrences mixingPoints mixingLoop)
+      && not (taggedCertificateValid 2 mixingPoints mixingLoop mixingWitness))
+  assertCheck "fiberwise conjugacy accepts inverse-charge relabelling"
+    (fiberwiseConjugacy relabelPoints relabelPoints
+      forwardLoop inverseLoop inverseRelabel)
+  assertCheck "fiberwise conjugacy rejects a nonconjugate relabelling"
+    (not (fiberwiseConjugacy relabelPoints relabelPoints
+      forwardLoop inverseLoop identityRelabel))
+  assertCheck "actual permutation fingerprints, named m=1,2,3,4,13"
+    (all namedPermutationCaseValid [1, 2, 3, 4, 13])
   runProperty "QuickCheck translation period formula, 9000 fixed-seed cases"
     propTranslationFormula
   runProperty "QuickCheck separating power, 9000 fixed-seed cases"

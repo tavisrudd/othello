@@ -81,6 +81,39 @@ the source and target periods.  For a cyclic translation it also proves the
 period formula \(n/\gcd(n,a)\) from divisibility.  It does not construct the
 loop action or its geometric comparison.
 
+The loop-stabilizer path module removes the need to assemble one global
+stable-disjoint-union ledger.  One vertex-indexed family supplies the packet
+and actual loop action at each path vertex.  A forward edge is an equivariant
+equivalence from the blowup packet to the disjoint union of its ambient and
+correction packets; it assumes only that the correction contains no point
+with the selected exact period.  Lean proves an iff for this forward
+decomposition.  In reverse, the inverse ambient inclusion transports support
+without any correction-period hypothesis.  A directional finite typed path
+composes these two rules.  Adjacent occurrences share their packet and action
+by construction.  Geometry must still construct the marked finite-etale packets,
+the edgewise equivariant comparisons, the common actual-loop actions, and the
+correction-period exclusions.
+
+An even looser one-way interface consumes only injective equivariant maps
+between consecutive packets.  It transports the chosen orbit without asking
+for surjectivity, a full correction ledger, or an enumeration of unrelated
+target points.  This is the appropriate consumer when geometry can prove
+directly that the carried marked orbit lands in the ambient factor.  Reverse
+traversal then needs its own directed injection; Lean does not infer it from a
+forward injection.
+
+The occurrence-loop certificate module makes the finite adapter more
+defensive.  Its total carrier is a dependent sum of occurrence tags and their
+label types; the loop acts fibrewise, so neither it nor any natural power can
+silently mix occurrences.  A legal relabelling must conjugate the displayed
+permutations.  A finite certificate stores one witness power per target point
+and checks fixedness directly, rather than trusting a claimed period.  A
+separate `Realizes` equation identifies the computed permutation with the
+actual group generator.  This still does not construct that generator, prove
+that the tagged enumeration is exhaustive, or identify it with the geometric
+marked packet.  Fibrewise occurrence preservation is imposed by the type; it
+is not inferred from QDM canonicity.
+
 The geometric comparison with the actual QDM packet remains an explicit
 inhabited-structure proposition. In particular, the package does not assume
 that monodromy-image formation commutes with specialization. An application
