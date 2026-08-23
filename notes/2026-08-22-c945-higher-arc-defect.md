@@ -96,7 +96,11 @@ that every extension outside the prescribed holes has at least `lambda`
 distinct minimum-weight witnesses.  The multiplicity theorem can thus be
 stated as a robust nonextendibility defect identity for projective dimension-
 three codes.  This is an interpretation of the same incidence count, not a
-claim that coding-theory precedence has yet been audited.
+standalone novelty claim.  In particular, Bishnoi--Mattheus--Schillewaert
+Theorem 8.1 already gives a spectral cardinality bound for a set having at
+least `lambda` minimal secants through each point; the candidate contribution
+here is the exact concurrency second moment, its equality defect, and the
+parameter ranges where it improves their bound.
 
 ## Equality archetypes
 
@@ -163,6 +167,33 @@ the two scales are respectively `s^2` and `s sqrt(q)`, crossing at
 controls the low-degree side, and the spectral minimal-blocking-set bound
 controls the high-degree side.  A combined all-degree phase diagram is a
 candidate paper-level consequence.
+
+More importantly, their Theorem 8.1 already treats the multiplicity parameter
+that is dual to ours.  If a point set `B` in a plane of order `q` has at least
+`lambda` lines through each of its points meeting `B` in exactly `t` points,
+then `b=|B|` satisfies
+
+```
+lambda b^2
+ - (2 lambda t(q+1) - (lambda+t)q)b
+ - t(q-lambda t)(q^2+q+1) <= 0.
+```
+
+Taking `B=Pi-A` and `t=q+1-s` gives a second necessary lower bound on `k` for
+`lambda`-fold maximal-secant coverage.  It is not dominated by the new moment
+bound, nor does it dominate it.  On the reproducible 146-row grid for each
+`lambda`, the moment threshold is stronger in 97, 86, and 73 rows for
+`lambda=1,2,3`; the spectral threshold is stronger in 34, 52, and 59 rows;
+and they tie in 15, 8, and 14 rows.  Thus the proposed hybrid is a genuine
+pointwise maximum of two complementary bounds, not a repackaging of one
+method.  The largest hybrid gains over the matching first-moment threshold on
+this grid are respectively 11, 17, and 22.
+
+This full-text correction narrows the claim sharply.  Robust tangent
+multiplicity and a spectral quadratic are prior art.  The viable novelty
+package is now: an exact two-moment defect with prescribed holes, hypergraph
+concurrency rigidity, an additive low-degree improvement, and its explicit
+hybridization with the existing spectral high-degree theorem.
 
 The other structural object exposed by the pressure test is the dual clique
 partition on the `s`-secants.  On its `t_s` vertices, the internal star cliques
@@ -309,6 +340,13 @@ range.  This isolated exclusion and the decreasing frequency of strict
 improvement as `lambda` rises are numerical observations, not yet structural
 theorems.
 
+The v3 rows also evaluate the complementary quadratic from
+Bishnoi--Mattheus--Schillewaert Theorem 8.1 and record the pointwise hybrid
+threshold.  Against that spectral threshold, the new second moment wins in
+97/86/73 rows, loses in 34/52/59, and ties in 15/8/14 for
+`lambda=1/2/3`.  This comparison is exact integer arithmetic; no floating-point
+root evaluation is used.
+
 For the eight small `(k,3)` comparison orders
 `q=4,5,7,8,9,11,13,16` at `lambda=1`, the first/second thresholds are
 respectively
@@ -330,10 +368,10 @@ nix shell nixpkgs#python3 --command python3 notes/2026-08-22-c945-higher-arc-def
 
 The generator is deterministic and uses only Python's standard library.
 `generate` rewrites the canonical sorted JSON and checksum manifest; `check`
-recomputes both in memory and fails on drift.  The script is 6,353 bytes with
-SHA-256 `ea8e44e9de0e4e2211e4076ebc3f734439fcfcf5f44a37a05a7eb442204024cd`;
-the JSON is 91,742 bytes with SHA-256
-`5f1233c907a118ce426ba5932cf71607f4835ea331488103262ba14d7f000f6f`.
+recomputes both in memory and fails on drift.  The script is 7,296 bytes with
+SHA-256 `a13821c72ff2aa76e5922d630c4d7a61e95deaf877d16ea80c4b2611c8e970b3`;
+the JSON is 117,105 bytes with SHA-256
+`6ec1a77b92e253eb288cdb9b8626cf9f8bfcd42bbba1bdaf2ee4224d757d818e`.
 
 ## Candidate new numerical consequence
 
@@ -449,15 +487,17 @@ equalities and this specializes to the paper's existing `3/2` term.
   multiple blocking sets / upper bounds for arcs, not minimality or the small
   complete-arc regime.
 - Bishnoi--Mattheus--Schillewaert, *Minimal multiple blocking sets*,
-  arXiv:1703.07843 / Electronic Journal of Combinatorics 25(4) (2018):
-  **partial**, introduction, Theorem 1.1, proof reduction through its quadratic,
-  and paper roadmap; cache SHA-256
+  arXiv:1703.07843v3 / Electronic Journal of Combinatorics 25(4) (2018):
+  **full text**, cache SHA-256
   `4ca2ebf88bc90d94a88552092a9e69bcd0dcc9f234490994bfa4d5fa682694b9`.
-  Their spectral/incidence theorem is the closest dual predecessor located so
-  far.  Its high-`t` specialization is compared explicitly in the `tt` section;
-  the full paper still must be read before a novelty verdict.
+  Their Theorem 1.1 bounds minimal `t`-fold blocking sets, and their Section 5
+  supplies a variance proof.  Crucially, Theorem 8.1 already bounds sets with
+  at least a prescribed number of `t`-secants through every point.  Its exact
+  dual quadratic and the non-dominating numerical comparison are recorded in
+  the `tt` section.  The paper does not formulate the external concurrence
+  second moment, prescribed holes, or the hypergraph clique defect.
 
-The audit currently has one full-text source and six partial sources.  A
+The audit currently has two full-text sources and five partial sources.  A
 novelty or priority verdict remains open.
 
 Forward-citation audit seed: DOI `10.1007/s10623-018-00592-8`.

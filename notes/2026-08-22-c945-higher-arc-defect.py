@@ -69,6 +69,23 @@ def second_moment_minimum(q: int, s: int, lam: int = 1) -> int | None:
     return None
 
 
+def spectral_minimum(q: int, s: int, lam: int = 1) -> int | None:
+    """Complementary threshold from Bishnoi--Mattheus--Schillewaert, Theorem 8.1."""
+    point_count = q * q + q + 1
+    blocking_order = q + 1 - s
+    for k in range(s + 1, (s - 1) * q + s + 1):
+        blocking_size = point_count - k
+        quadratic = (
+            lam * blocking_size * blocking_size
+            - (2 * lam * blocking_order * (q + 1) - (lam + blocking_order) * q)
+            * blocking_size
+            - blocking_order * (q - lam * blocking_order) * point_count
+        )
+        if quadratic <= 0:
+            return k
+    return None
+
+
 @lru_cache(maxsize=None)
 def dp_degree_maximum(vertices: int, cap: int, total: int) -> int | None:
     """Independent small dynamic program for the convex-envelope check."""
@@ -109,7 +126,10 @@ def run_checks() -> dict[str, object]:
             for lam in LAMBDA_VALUES:
                 first = first_moment_minimum(q, s, lam)
                 second = second_moment_minimum(q, s, lam)
+                spectral = spectral_minimum(q, s, lam)
                 assert second is None or second >= first
+                assert spectral is None or spectral >= s + 1
+                hybrid = None if second is None or spectral is None else max(second, spectral)
                 rows.append(
                     {
                         "q": q,
@@ -117,13 +137,15 @@ def run_checks() -> dict[str, object]:
                         "lambda": lam,
                         "first_moment_minimum": first,
                         "second_moment_minimum": second,
+                        "spectral_minimum": spectral,
+                        "hybrid_minimum": hybrid,
                         "improvement": None if second is None else second - first,
                         "excluded_through_universal_arc_maximum": second is None,
                     }
                 )
 
     return {
-        "schema": "c945-higher-arc-defect-v2",
+        "schema": "c945-higher-arc-defect-v3",
         "meaning": "Necessary-bound thresholds only; projective-plane or arc existence is not asserted.",
         "parameters": {"lambda_values": list(LAMBDA_VALUES), "holes": 0, "q_values": list(Q_VALUES), "s_max": 8},
         "independent_checks": {
