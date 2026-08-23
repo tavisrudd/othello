@@ -182,16 +182,16 @@ promoted mathematical assertion maps to a kernel-checked declaration.
 
   **Programme-level reconstruction signal:** the smallest plausible
   enrichment of the generic marked packet is now a two-layer **marked Rees
-  port**: its self-dual Kummer coweight and its first marked connection/Rees
-  jet.  The layers are independently necessary.  The two explicit native
+  port**: its self-dual Kummer-coweight orbit and its first marked
+  connection/Rees jet.  The layers are independently necessary.  The two explicit native
   orders differ by relative coweight \((-1,0,0,0,0,1)\), whereas the
   coweight-zero parabolic shear retains the associated grading but changes the
-  marker through its first jet.  The next finite experiment is therefore an
-  exact Rust enumeration of the bounded rank-six coweight/jet charts, with
-  canonical JSON and Lean correspondence to the existing `Calibration`
-  consumer; only after that exhaustive certificate should the result be
-  compressed to a structural Rees-extension theorem.  This is a proposed
-  source compression, not a landed geometric adapter.  Report:
+  marker through its first jet.  The discrete monomial enumeration is now
+  landed with canonical Rust data and Lean correspondence.  The next
+  structural task is to prove that every actual effective calibration admits
+  a representative in that finite Bruhat domain; only then can the result be
+  compressed to a Rees-extension theorem.  This is a proposed source
+  compression, not a landed geometric adapter.  Report:
   `../2026-08-22-c925-marked-rees-shadow.md`.
   The first exact certificate stage is now landed: Rust emits the three
   Laurent comparison blocks inside the full (6\times6) basis-change matrix
@@ -207,8 +207,14 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   five-parameter distinct-root chart.  Its logarithmic defect vanishes
   identically, but Lean proves that the selected block's lower-left grading
   entry is always \(1/6\), so the marker's leading line is not preserved.
-  Thus both normalized native-order charts are closed.  Other coweight charts
-  and construction of the geometric marked Rees port remain.
+  Thus both normalized native-order charts are closed.  A fourth exact
+  certificate now exhausts the discrete unit/top-fixed monomial Weyl layer:
+  four of eight positions are divisor-generating, and the Laurent Kummer
+  involution pairs them into the two already-checked zero and single-reversal
+  classes.  This does not prove the load-bearing external statement that every
+  geometric effective calibration has such a monomial Bruhat representative.
+  That Bruhat/native-descent theorem and construction of the geometric marked
+  Rees port remain.
 
   **Closed lanes:** the common \(\epsilon M\)-row/stable-projector
   composite, raw and normalized degree-zero augmentation, ordinary

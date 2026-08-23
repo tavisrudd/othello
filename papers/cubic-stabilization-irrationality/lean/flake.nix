@@ -71,6 +71,22 @@
             ${./certificates/effective-distinct-order.json} -
         '';
       };
+      verifyUnitFixedWeylCoweights = pkgs.writeShellApplication {
+        name = "verify-unit-fixed-weyl-coweights";
+        runtimeInputs = with pkgs; [ coreutils diffutils rustc ];
+        text = ''
+          certificate_dir=$(mktemp -d -p /var/tmp unit-fixed-weyl-coweights.XXXXXX)
+          trap 'rm -rf "$certificate_dir"' EXIT
+          cd ${./.}
+          sha256sum -c ${./certificates/unit-fixed-weyl-coweights.sha256}
+          rustc ${./scripts/native_coweight_scan.rs} -O -D warnings \
+            -o "$certificate_dir/solver"
+          "$certificate_dir/solver" --lean | diff -u \
+            ${./TavisRuddFiniteGeom/Papers/CubicStabilizationIrrationality/Comparison/Generated/UnitFixedWeylCoweightData.lean} -
+          "$certificate_dir/solver" --json | diff -u \
+            ${./certificates/unit-fixed-weyl-coweights.json} -
+        '';
+      };
     in {
       devShells.${system}.default = pkgs.mkShell {
         packages = with pkgs; [ elan git curl cacert gmp zlib coreutils ];
@@ -99,6 +115,10 @@
         verify-effective-distinct-order = {
           type = "app";
           program = "${verifyEffectiveDistinctOrder}/bin/verify-effective-distinct-order";
+        };
+        verify-unit-fixed-weyl-coweights = {
+          type = "app";
+          program = "${verifyUnitFixedWeylCoweights}/bin/verify-unit-fixed-weyl-coweights";
         };
       };
     };

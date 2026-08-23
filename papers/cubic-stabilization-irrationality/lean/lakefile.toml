@@ -63,6 +63,8 @@ roots = [
   "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.EffectiveReesCalibrationCertificate",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.Generated.EffectiveDistinctOrderData",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.EffectiveDistinctOrderCertificate",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.Generated.UnitFixedWeylCoweightData",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.UnitFixedWeylCoweightCertificate",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.HorizontalReader",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.TraitHorizontalReader",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.ProvenanceEdge",

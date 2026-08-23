@@ -607,6 +607,25 @@ the two known normalized native-order charts.  It does not prove that a
 geometric codimension-two correction occurrence descends to either chart, nor
 bound all possible coweights.
 
+`Comparison.UnitFixedWeylCoweightCertificate` isolates the finite discrete
+problem preceding those two affine calibration charts.  The Rust generator
+`scripts/native_coweight_scan.rs` enumerates the eight monomial self-dual
+positions that fix the unit/top hyperbolic pair.  Lean reconstructs every
+permutation, inverse, sorted coweight, special binary cubic, and
+hard-Lefschetz determinant.  It also checks directly that position `7` is the
+Laurent Kummer algebra involution.  Of the eight positions, exactly four have
+a marked divisor generating the reduced cubic quotient; modulo right
+composition by that involution they form the two classes represented by
+positions `0` and `2`.  Run
+
+    nix run .#verify-unit-fixed-weyl-coweights
+
+to verify the tracked digests and compare the Rust JSON and generated Lean
+data byte for byte.  The certificate is exhaustive for these eight monomial
+positions.  A separate geometric or algebraic-group theorem is still required
+to place every effective marked calibration in this finite relative-position
+domain.
+
 The algebraic model has a compact sufficient constructor. If the combined
 crossed and moving map `(B,D)` admits a linear retraction, an explicit incoming
 shear and target involution construct every crossed-coordinate field. An

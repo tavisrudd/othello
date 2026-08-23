@@ -39,7 +39,7 @@ intertwined native model.  This closes the finite recurrence consumer, not the
 native calibration provider.
 The programme-wide information-loss lens suggests a smaller candidate source
 datum than the full calibration: a **marked Rees port** consisting of the
-self-dual Kummer coweight and the first marked connection/Rees jet.  The two
+self-dual Kummer-coweight orbit and the first marked connection/Rees jet.  The two
 known red modes are independent: the explicit dual and distinct-root orders
 have relative coweight \((-1,0,0,0,0,1)\), while a coweight-zero parabolic
 shear changes the marker through its first jet.  This is a testable
@@ -54,8 +54,14 @@ transport mutation which produced the raw \(4/9\) shear.  A third certificate
 exhausts the corresponding five-parameter distinct-root chart: conformality
 holds identically, but the selected grading has lower-left entry \(1/6\) for
 every calibration, so the marker's leading line is never preserved.  The two
-normalized native-order charts are therefore closed.  Other coweights and the
-geometric occurrence-to-port theorem remain.
+normalized native-order charts are therefore closed.  A fourth exact
+Rust/Lean certificate enumerates the eight unit/top-fixed self-dual monomial
+Weyl positions.  Exactly four have a divisor generating the reduced cubic
+quotient, and the Laurent Kummer involution pairs them into the two classes
+represented by the already-checked zero and single-reversal charts.  This
+closes the discrete monomial quotient, not the external Bruhat theorem that
+every geometric effective calibration has such a representative.  That
+Bruhat/native-descent statement and the occurrence-to-port theorem remain.
 The unconditional every-smooth theorem is not landed.  Independently, Voisin
 plus the 2025 Engel--de Gaay Fortman--Schreieder parity theorem gives an
 all-\(m\) proof for a very general cubic; that preprint result must not be
@@ -757,7 +763,7 @@ The live frontier is source-side, not another linear consumer.
    intertwining multiplication, projector, first gauge, grading, selected
    basis, and left inverse.  An unordered or generic block identification is
    insufficient.  The proposed compression is to construct only a marked Rees
-   port: the native self-dual Kummer coweight together with the first
+   port: the native self-dual Kummer-coweight orbit together with the first
    connection jet modulo integral gauges trivial on the associated graded.
    The exact Rust-to-Lean experiment enumerates bounded rank-six coweight
    charts and jets, emits elimination certificates, and derives the existing
@@ -775,10 +781,14 @@ The live frontier is source-side, not another linear consumer.
    `EffectiveDistinctOrderCertificate` lands the second normalized native
    order chart: the logarithmic defect vanishes on its full five-parameter
    support, but exact Sylvester reduction forces selected-line leakage
-   \(1/6\), so the marked elementary modification is never regular.  The next
-   finite task is a genuine remaining coweight chart, not another
-   distinct-order calculation.  The occurrence-to-port theorem remains
-   external after every finite chart.
+   \(1/6\), so the marked elementary modification is never regular.
+   `UnitFixedWeylCoweightCertificate` then closes the discrete monomial layer:
+   it checks all eight unit/top-fixed self-dual positions, proves that exactly
+   four are divisor-generating, and quotients them to the two checked classes
+   by the certified Kummer involution.  The next task is no longer another
+   monomial coweight chart; it is the external Bruhat/native-descent theorem
+   placing every actual calibration in this finite domain.  The
+   occurrence-to-port theorem remains external after every finite chart.
 
 2. **What Lean separates.**  The nonsplit outer-return theorem proves that
    total period is outer-label period times return-map period.  The pre-strict

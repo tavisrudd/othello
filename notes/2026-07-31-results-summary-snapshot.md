@@ -1318,18 +1318,22 @@ discriminant.
 The present \(m=2\) finite frontier exhibits the programme's general
 information-loss pattern in a particularly small form.  A generic cubic
 spectral packet forgets its native integral order.  The candidate minimally
-enriched shadow is a pointed first-failure profile: the self-dual Kummer
-coweight, the first leakage of the marked nilpotent line into an adjacent Rees
+enriched shadow is a pointed first-failure profile: the orbit of the self-dual
+Kummer coweight under generic algebra automorphisms, the first leakage of the
+marked nilpotent line into an adjacent Rees
 grade, and, on the leakage-zero locus, the first return to that line.  Exact
 Rust certificates with independent Lean correspondence now exhaust the two
 normalized rank-six native-order charts.  The dual-number chart has zero
 leakage and residue discriminant zero; the distinct-root chart is conformal
 throughout its complete five-parameter effective calibration family but has
 unavoidable leakage \(1/6\), so the marked elementary modification is not
-regular.  This does **not** prove the every-smooth \(m=2\) theorem: the
-remaining geometric task is to descend an actual period-three correction
-occurrence to such a native pointed port, or to prove a coweight bound and
-classify every remaining port.
+regular.  A further exact scan shows that the eight unit/top-fixed monomial
+Weyl positions have three raw coweights, but their four divisor-generating
+positions form exactly the two checked classes modulo the Kummer involution.
+This does **not** prove the every-smooth \(m=2\) theorem: the remaining
+geometric task is to descend an actual period-three correction occurrence to
+such a native pointed port and prove the Bruhat reduction placing its
+effective calibration in that finite monomial domain.
 
 ### Formal verification of the epilogue
 

@@ -48,6 +48,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.Kum
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.MarkedReesShadowCertificate
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.EffectiveReesCalibrationCertificate
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.EffectiveDistinctOrderCertificate
+import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.UnitFixedWeylCoweightCertificate
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.HorizontalReader
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.TraitHorizontalReader
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.ProvenanceEdge
@@ -241,6 +242,15 @@ always `1/6`, so the leading nilpotent line required by the marked elementary
 modification is never preserved. This closes the second known native rank-six
 order chart, not the geometric descent to one of these orders and not the
 nonzero-coweight problem.
+`UnitFixedWeylCoweightCertificate` checks the discrete monomial layer before
+those affine charts.  It enumerates the eight unit/top-fixed self-dual Weyl
+positions, reconstructs their permutations and coweights, and verifies the
+special binary-cubic and Lefschetz data.  Exactly four positions carry a
+marked divisor that generates the reduced cubic quotient.  Right composition
+by the Laurent Kummer involution pairs them into two classes, represented by
+the coweight-zero and single-reversal positions.  The certificate does not
+assert the external Bruhat-reduction statement that every geometric effective
+calibration has one of these monomial relative positions.
 `ProjectiveSpaceQuantumPolynomial` proves that the standard relation
 `X^(m+4) - q` is separable in characteristic zero for nonzero `q`. This
 kernel-checks the target's no-repeated-root algebra once its small-quantum
