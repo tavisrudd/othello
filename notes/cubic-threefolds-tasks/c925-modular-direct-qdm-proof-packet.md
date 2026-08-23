@@ -46,7 +46,12 @@ shear changes the marker through its first jet.  This is a testable
 reconstruction proposal, not yet a source theorem.  The first exact
 Rust-to-Lean boundary certificate now recomputes that coweight and verifies
 the nonzero pairing-compatible shear jet.  It proves the two ambiguity modes
-are real; it does not yet enumerate every admissible coweight/jet chart.
+are real.  A second exact certificate exhausts the effective coweight-zero
+dual-number chart.  Correct input-index transport reduces every conformal
+calibration to one parameter, and Lean checks the full recurrence and residue
+discriminant zero throughout that family.  It also rejects the output-only
+transport mutation which produced the raw \(4/9\) shear.  Nonzero-coweight and
+distinct-order charts, and the geometric occurrence-to-port theorem, remain.
 The unconditional every-smooth theorem is not landed.  Independently, Voisin
 plus the 2025 Engel--de Gaay Fortman--Schreieder parity theorem gives an
 all-\(m\) proof for a very general cubic; that preprint result must not be
@@ -750,17 +755,21 @@ The live frontier is source-side, not another linear consumer.
    insufficient.  The proposed compression is to construct only a marked Rees
    port: the native self-dual Kummer coweight together with the first
    connection jet modulo integral gauges trivial on the associated graded.
-   The exact Rust-to-Lean experiment should enumerate the bounded rank-six
-   coweight charts and jets, emit elimination certificates, and derive the
-   existing `Calibration` only after each certificate is checked.  The finite
-   classification can then be compressed structurally.  This proposal and its
-   mandatory input-index mutation test are recorded in
+   The exact Rust-to-Lean experiment enumerates bounded rank-six coweight
+   charts and jets, emits elimination certificates, and derives the existing
+   recurrence calibration only after each certificate is checked.  The finite
+   classification can then be compressed structurally.  The experiment and
+   its mandatory input-index mutation test are recorded in
    `../2026-08-22-c925-marked-rees-shadow.md`.
    The first certificate stage is landed in
    `MarkedReesShadowCertificate`: exact Rust output and Lean recomputation
    certify the relative coweight and the zero-coweight nonzero shear jet.
-   The remaining finite step is the exhaustive bounded chart enumeration,
-   followed by the still-external occurrence-to-port theorem.
+   `EffectiveReesCalibrationCertificate` lands the first complete chart:
+   exact Rust elimination and Lean correspondence prove that every effective
+   coweight-zero dual-number calibration satisfying the logarithmic divisor
+   equation has discriminant zero.  The next finite chart is the nonzero
+   coweight/distinct-order case; the occurrence-to-port theorem remains
+   external after every finite chart.
 
 2. **What Lean separates.**  The nonsplit outer-return theorem proves that
    total period is outer-label period times return-map period.  The pre-strict

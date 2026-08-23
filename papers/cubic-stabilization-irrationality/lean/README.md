@@ -562,6 +562,30 @@ chart consumed after geometric identification.  It does not supply the
 Kummer trait, actual loop, native QDM lattice, or Iritani occurrence map, and
 therefore does not close the source adapter.
 
+`Comparison.EffectiveReesCalibrationCertificate` exhausts the normalized
+coweight-zero dual-number chart over one primitive Kummer ray.  The exact
+Rust program `scripts/effective_rees_calibration_cert.rs` starts with all
+thirteen effective unipotent coefficients in weights `(0,1,1,2,2,3)`, solves
+the Poincare self-duality equations to a five-parameter family, transports
+the multiplication tensor in both its output and input indices, and computes
+the logarithmic divisor defect.  Lean independently proves the five-parameter
+normal form, the tensor-transport correspondence, and the equivalence
+
+    defect = 0  iff  a = c = 0, f = b, and 2d + b^2 = 0.
+
+It then checks the full normalized first- and second-gauge recurrences on the
+surviving one-parameter family.  The selected residue has discriminant zero,
+so this entire chart excludes the marked value `4/9`.  Run
+
+    nix run .#verify-effective-rees-calibration
+
+to verify the three tracked digests, compile the exact solver, and compare
+its canonical JSON and generated Lean data byte for byte.  The search domain
+is exactly the displayed effective unipotent support with coweight zero and
+the cubic dual-number order.  It does not cover nonzero coweights, a distinct
+classical order, transverse bulk deformations, or construct a geometric
+occurrence calibration.
+
 The algebraic model has a compact sufficient constructor. If the combined
 crossed and moving map `(B,D)` admits a linear retraction, an explicit incoming
 shear and target involution construct every crossed-coordinate field. An

@@ -39,6 +39,22 @@
             ${./certificates/marked-rees-shadow.json} -
         '';
       };
+      verifyEffectiveReesCalibration = pkgs.writeShellApplication {
+        name = "verify-effective-rees-calibration";
+        runtimeInputs = with pkgs; [ coreutils diffutils rustc ];
+        text = ''
+          certificate_dir=$(mktemp -d -p /var/tmp effective-rees-calibration.XXXXXX)
+          trap 'rm -rf "$certificate_dir"' EXIT
+          cd ${./.}
+          sha256sum -c ${./certificates/effective-rees-calibration.sha256}
+          rustc ${./scripts/effective_rees_calibration_cert.rs} -O -D warnings \
+            -o "$certificate_dir/solver"
+          "$certificate_dir/solver" --lean | diff -u \
+            ${./TavisRuddFiniteGeom/Papers/CubicStabilizationIrrationality/Comparison/Generated/EffectiveReesCalibrationData.lean} -
+          "$certificate_dir/solver" --json | diff -u \
+            ${./certificates/effective-rees-calibration.json} -
+        '';
+      };
     in {
       devShells.${system}.default = pkgs.mkShell {
         packages = with pkgs; [ elan git curl cacert gmp zlib coreutils ];
@@ -59,6 +75,10 @@
         verify-marked-rees-shadow = {
           type = "app";
           program = "${verifyMarkedReesShadow}/bin/verify-marked-rees-shadow";
+        };
+        verify-effective-rees-calibration = {
+          type = "app";
+          program = "${verifyEffectiveReesCalibration}/bin/verify-effective-rees-calibration";
         };
       };
     };

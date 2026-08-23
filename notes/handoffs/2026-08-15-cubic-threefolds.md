@@ -198,8 +198,13 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   and the parabolic first jet, while Lean independently checks the extraction,
   recovers coweight \((-1,0,0,0,0,1)\), checks self-duality and all finite jet
   identities, and certifies the two independent information-loss modes.
-  It does not bound all coweights, enumerate all jets, or construct the
-  geometric marked Rees port.
+  A second exact certificate now exhausts the effective coweight-zero
+  dual-number chart: self-duality leaves five parameters, correct transport of
+  both multiplication indices makes conformality equivalent to a
+  one-parameter normal family, and Lean checks the complete gauge recurrence
+  and discriminant zero throughout that family.  The output-only transport
+  mutation is explicitly rejected.  Nonzero-coweight and distinct-order
+  charts remain, as does construction of the geometric marked Rees port.
 
   **Closed lanes:** the common \(\epsilon M\)-row/stable-projector
   composite, raw and normalized degree-zero augmentation, ordinary

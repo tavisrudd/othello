@@ -148,6 +148,24 @@ fibre and several ordinary Frobenius jets can admit the shear, while the pure
 transported Kummer flow does not.  The missing datum is therefore
 connection-enriched, not merely an order or filtration.
 
+The exact coweight-zero certificate now isolates that failure.  Starting from
+all thirteen entries allowed by the effective weight filtration, Poincare
+self-duality leaves five parameters \(a,b,c,d,f\).  After the multiplication
+tensor is transported in both its output and input indices, the logarithmic
+divisor equation is equivalent to
+
+\[
+ a=c=0,\qquad f=b,\qquad 2d+b^2=0.
+\]
+
+The surviving calibration is a one-parameter family \(R_p\).  Its inverse
+moves the Euler input by the scalar unit term \(3p\); omitting this input
+transport is exactly the mutation that makes the raw shear look obstructed.
+The full normalized gauge recurrence on \(R_p\) has selected exponents
+\((-1/2,1/2)\), zero return entry, and modified-residue discriminant zero for
+every \(p\).  Thus the first jet is necessary to state the ambiguity, but the
+effective conformal equation removes the dangerous jet throughout this chart.
+
 The first jet should be taken modulo integral pairing-preserving gauges acting
 trivially on the associated graded.  In that quotient it is a small extension
 or Bockstein class between adjacent cohomological degrees.  The selected second
@@ -174,8 +192,9 @@ The marked Rees-shadow hypothesis makes six immediate predictions.
    leading nilpotent line, so the marker's elementary modification is not
    regular.
 4. The raw \(4/9\) parabolic shear survives every generic invariant but has a
-   nonzero first Rees jet.  It must fail the native Kummer-flow equations or
-   land in a different jet orbit.
+   nonzero first Rees jet.  In the effective coweight-zero dual-number chart,
+   correct input-index transport proves that it fails the native Kummer-flow
+   equations; the only conformal replacement has discriminant zero.
 5. The hostile algebra \(K[z]/(z^3-r)\) remains a mandatory red test: without
    a native lattice and jet it can be decorated by any rank-two marked block.
 6. An Iritani comparison over a Laurent field need not preserve this shadow.
@@ -191,10 +210,10 @@ following.
    and hard Lefschetz leave only a bounded list of coweights.  The first list to
    test is \(0\) and \((-1,0,0,0,0,1)\).
 2. In each surviving coweight stratum, the effective homogeneous
-   pairing-preserving Rees jets form a small affine scheme.  After quotienting
-   gauges trivial on the associated graded, conformality should leave only
-   harmless jets with discriminant \(0\) or the upper value \(4\), never
-   \(4/9\).
+   pairing-preserving Rees jets form a small affine scheme.  This prediction is
+   proved for the coweight-zero dual-number chart: conformality leaves one
+   affine parameter and every member has discriminant zero.  The nonzero
+   coweight and distinct-order charts remain.
 3. If a \(4/9\) jet survives, its first failure should occur at one explicitly
    named higher connection or WDVV equation.  That failure is then the next
    coefficient to add to the shadow; one should not retain the full formal
@@ -246,11 +265,37 @@ first three columns.  It also links the jet to the previously checked
 parabolic shear and records the displayed \(0\)-versus-\(4/9\) residue
 ambiguity.
 
-This lands the information-loss certificate, not the exhaustive
-classification in steps 1--3.  In particular it neither bounds every possible
-coweight nor solves every Rees-jet chart, and it does not yet transport the
-complete multiplication tensor with its input index.  That transport remains
-a mandatory mutation test for the exhaustive certificate.
+The second certificate solves the first complete jet chart.  The exact Rust
+generator `scripts/effective_rees_calibration_cert.rs` constructs the full
+effective \(r\)-weighted calibration, its pairing inverse, the transported
+multiplication tensor with the input index included, the logarithmic defect,
+and the normal-family recurrence.  Its canonical JSON records the five free
+parameters, every nonzero defect entry, the four pivot entries, and the
+selected recurrence values.  Lean's
+`EffectiveReesCalibrationCertificate` independently proves:
+
+- pairing preservation cuts the thirteen raw coefficients to the displayed
+  five-parameter normal form;
+- the generated Euler and divisor matrices are the correctly transported
+  multiplication tensors;
+- defect zero is equivalent to
+  \(a=c=0,\ f=b,\ 2d+b^2=0\);
+- the generated basis is invertible and intertwines multiplication and the
+  connection grading;
+- the first gauge separates the \(2+4\) blocks, and the complete second
+  recurrence has zero selected return entry; and
+- the resulting modified residue has discriminant zero, never \(4/9\).
+
+The terminal theorem is
+`EffectiveReesCalibrationCertificate.conformalCalibration_normalFamily_and_discriminant`.
+The separate mutation theorem
+`normalCalibrationInverse_mulVec_eulerVector_ne` proves that for \(p\ne0\)
+the inverse calibration changes the Euler input, so an output-only conjugation
+cannot pass as tensor transport.
+
+The two certificates do not yet bound every possible coweight or solve the
+nonzero-coweight/distinct-order charts.  They also do not construct the
+geometric occurrence-to-port map.
 
 Reproducibility status on 2026-08-22:
 
@@ -265,10 +310,25 @@ Reproducibility status on 2026-08-22:
   generated Lean
   `2600650607f95dbf788af718d49ee0b3eb75dff05d9c1723abeb2340e7c73e7c`.
 
+The coweight-zero effective-calibration bundle replays with
+`nix run .#verify-effective-rees-calibration`.  The generated checker
+elaborated without diagnostics in guarded run `20260822-182651`; the checker,
+`PaperInterface`, and `Verification.AxiomAudit` passed final queued run
+`20260823-014544-5b6db71a`.  The axiom audit reports only `propext`,
+`Classical.choice`, and `Quot.sound`.  The exact artifact sizes and hashes are:
+
+- Rust: 30091 bytes,
+  `15f32dc526b6567c253208d8629bff6b9db5ddcde79c16eb0b8f01aa3dfb24ef`;
+- JSON: 1839 bytes,
+  `f1fb3def00165b21a52de2a4eaf4da83efb3555fd7b5339591e127bf46353d`;
+- generated Lean: 8649 bytes,
+  `65faebff2c3252cbd999b2673422c271e8003f5ba9c9181ce026f1960b2d1ee0`.
+
 The finite domain must remain explicit: rank six, one primitive cubic Kummer
-ray, cohomological weights \((0,1,1,2,2,3)\), the two candidate coweight charts,
-and exact rational arithmetic.  A successful certificate would close this
-finite calibration problem.  It would still not prove that Iritani's actual
+ray, cohomological weights \((0,1,1,2,2,3)\), coweight zero, the dual-number
+order, the effective unipotent support, and exact rational arithmetic.  The
+certificate closes this chart, not the whole finite calibration problem.  It
+does not prove that Iritani's actual
 codimension-two correction occurrence supplies the marked Rees port; that is
 the remaining geometric persistence theorem.
 
@@ -312,7 +372,8 @@ lattice vertex, and associated grading forgets the extension class.
 | --- | --- | --- |
 | settled | Generic paired marked-divisor data forget the native lattice position. | Rust emits the full comparison matrix; Lean checks its block decomposition and recomputes relative coweight \((-1,0,0,0,0,1)\). |
 | settled | The coweight alone forgets the dangerous calibration shear. | Lean checks a nonzero pairing-tangent, filtration-compatible first jet at coweight zero and the displayed \(0\)-versus-\(4/9\) residue ambiguity. |
-| proposed | Coweight plus first marked connection jet is the minimally enriched shadow needed by the strict recurrence. | It exactly separates the two known modes of information loss; the exhaustive Rees-jet certificate is not yet run. |
+| settled | Correct input-index transport removes the dangerous shear in the effective coweight-zero dual-number chart. | Exact Rust elimination gives one conformal parameter; Lean checks the complete recurrence and discriminant zero for every parameter, and separately rejects output-only transport. |
+| proposed | Coweight plus first marked connection jet is the minimally enriched shadow needed by the strict recurrence. | It separates the two known modes of information loss and closes one complete chart; the coweight bound and remaining charts are not proved. |
 | open | Primitive determinant, self-duality, and hard Lefschetz bound the admissible coweights to the two displayed cases. | This is the first structural theorem to seek or certify finitely. |
-| open | Every admissible Rees jet has discriminant \(0\) or \(4\), never \(4/9\). | This is the finite Rust-to-Lean experiment. |
+| partial | Every admissible Rees jet has discriminant \(0\) or \(4\), never \(4/9\). | Proved with value \(0\) in the complete coweight-zero dual-number chart; nonzero-coweight and distinct-order charts remain. |
 | open | The actual Iritani correction occurrence carries and preserves the marked Rees port. | Current comparison theorems are Laurent/generic and do not supply integral occurrence transport. |

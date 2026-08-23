@@ -46,6 +46,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.Bin
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.RankSixRecurrenceCertificate
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.KummerDivisorGenerator
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.MarkedReesShadowCertificate
+import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.EffectiveReesCalibrationCertificate
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.HorizontalReader
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.TraitHorizontalReader
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.ProvenanceEdge
@@ -220,6 +221,16 @@ filtration weight.  Its `ReesPortChart` is deliberately finite: it has no
 trait, actual loop, native QDM lattice, or occurrence comparison.  The module
 therefore certifies that coweight and first jet are independent ambiguity
 layers; it does not construct the geometric marked Rees port.
+`EffectiveReesCalibrationCertificate` exhausts the coweight-zero
+dual-number chart of effective self-dual calibrations.  Pairing preservation
+reduces the effective unipotent support to five parameters.  Correct
+transport of both multiplication outputs and inputs makes the logarithmic
+divisor equation equivalent to a one-parameter normal family.  Lean then
+checks the complete normalized gauge recurrence and proves that every member
+has modified-residue discriminant zero, hence never `4/9`.  This result
+requires a normalized effective dual-number calibration; it does not supply
+one for a geometric occurrence or cover a nonzero coweight or another
+classical order.
 `ProjectiveSpaceQuantumPolynomial` proves that the standard relation
 `X^(m+4) - q` is separable in characteristic zero for nonzero `q`. This
 kernel-checks the target's no-repeated-root algebra once its small-quantum
