@@ -268,7 +268,12 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   \(\mathbf P^2\) the conic-bundle residue's smooth-discriminant slice is
   exactly the closed MM 2-24 family; the frontier is nodal rational
   discriminants with vanishing abelian Prym:
-  `../2026-08-23-c925-fable-conic-bundle-residue-anatomy.md`.
+  `../2026-08-23-c925-fable-conic-bundle-residue-anatomy.md`.  The
+  Beauville check then proves \(b_3=2\sum(p_a-1)\), refuting the nodal
+  lead: the conic-bundle residue over \(\mathbf P^2\) is empty, and the
+  frontier is elliptic-configuration discriminants over non-minimal
+  rational bases:
+  `../2026-08-23-c925-fable-conic-bundle-b3-formula.md`.
 
 - **C924 — closed 2026-08-19.** The direct ordinary-QDM route proves
   irrationality of `X x P^1` after one mandatory local repair: compare the

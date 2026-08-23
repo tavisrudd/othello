@@ -254,6 +254,17 @@ realization of that orbit.
   Beauville admissible-cover bookkeeping before construction; computation
   plan queued.  Note:
   notes/2026-08-23-c925-fable-conic-bundle-residue-anatomy.md
+- Bookkeeping executed and the nodal lead refuted:
+  \(b_3=2\sum(p_a(\Delta_k)-1)\) for minimal conic bundles (elementary
+  Euler proof, matching Beauville's abelian admissible Prym) — nodes
+  never reduce \(b_3\), class (a) over \(\mathbf P^2\) is empty beyond
+  the closed 2-24 family, and the true frontier is
+  disjoint-union-of-\(p_a=1\) (elliptic-configuration) discriminants
+  over non-minimal rational bases, first family the fibre-discriminants
+  over \(\mathrm{Bl}_9\mathbf P^2\).  The three-cycle gate is priced:
+  \(\deg\Delta\ge7\) over \(\mathbf P^2\) plus a cyclic symmetry of
+  \((S,\Delta)\) permuting three cubic-Prym factors.  Note:
+  notes/2026-08-23-c925-fable-conic-bundle-b3-formula.md
 
 The packet index owns the module-to-file map.  Do not append another large
 module to this card or to the index; add one focused companion file and one
