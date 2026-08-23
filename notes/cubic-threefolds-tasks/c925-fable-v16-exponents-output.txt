@@ -1,0 +1,9 @@
+V16 period from Theorem F.1 (r=3, n=6, a=3, e=1): alpha = -4
+first ten regularized coefficients match CCGK: [1, 0, 24, 192, 2904, 40320, 611520, 9515520, 152412120, 2491104000]
+V16: order-4 operator of degree 4 in s=t^1 (1 relation); p4 = ['1', '0', '0', '0', '0']
+V16 c1* charpoly at q=1: (lambda + 4)**2*(lambda**2 - 16*lambda - 64)
+== V16 (prediction: class {1/2,1/2}, Ku = D^b(C_3), delta^sharp 0)
+  eigenvalue -4: J2 block, residue charpoly (2*lam + 1)**2/4, delta^sharp 0
+  eigenvalue 8 - 8*sqrt(2): dim 1
+  eigenvalue 8 + 8*sqrt(2): dim 1
+done

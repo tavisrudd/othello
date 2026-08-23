@@ -194,6 +194,9 @@ realization of that orbit.
   vanishing recovered as the \(e=0\) row; higher-rank cluster-factor gate
   sharpened to the sliver obstruction:
   notes/2026-08-23-c925-fable-rank-two-confluence-gamma-ii.md
+- V16 dictionary row via Theorem F.1 (class \(\{1/2,1/2\}\), matching
+  \(D^b(C_3)\)); V18 deferred with reasons:
+  notes/2026-08-23-c925-fable-v16-exponent-row.md
 
 The packet index owns the module-to-file map.  Do not append another large
 module to this card or to the index; add one focused companion file and one
