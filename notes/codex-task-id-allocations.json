@@ -3401,8 +3401,26 @@
       "last": 945,
       "purpose": "generalize prescribed-hole defect and equality theory to complete (k,m)-arcs",
       "sequence": 378
+    },
+    {
+      "count": 1,
+      "first": 946,
+      "kind": "reservation",
+      "lane": "complete-ports",
+      "last": 946,
+      "purpose": "derive multi-target bounded recovery and exact concatenation confinement thresholds",
+      "sequence": 379
+    },
+    {
+      "count": 1,
+      "first": 947,
+      "kind": "reservation",
+      "lane": "complete-ports",
+      "last": 947,
+      "purpose": "test recovery-cost lattice laws and audit number-theoretic categorical and third-theory interpretations",
+      "sequence": 380
     }
   ],
-  "next_id": 946,
+  "next_id": 948,
   "schema": "codex-task-id-allocations-v1"
 }
