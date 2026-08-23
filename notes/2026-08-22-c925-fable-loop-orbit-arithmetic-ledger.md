@@ -217,7 +217,61 @@ reference to the transported loop from the gate: it is now a statement about
 one variety and its own Novikov torus.  The transport (Section 8) is what
 justifies dropping the loop.
 
+### 11.2b Rotation orders of del Pezzo mirrors avoid every prime at least five
+
+This supersedes the loose formulation in 11.2 below and is the structural
+statement behind the scan of 11.3.
+
+Let \(W=\sum_i a_ix^{v_i}\) be a Laurent mirror of a del Pezzo surface of
+degree at least three; its Newton polygon \(P\) is reflexive, the origin is
+its unique interior lattice point, and the origin is not in the support
+(Coates–Corti–Galkin–Kasprzyk, Minkowski polynomials).  A cocharacter is a
+height function on the support; the critical points cluster over the cells of
+the induced regular subdivision, and over a cell \(C\) the leading behaviour
+is governed by \(W_C=\sum_{v_i\in C}a_ix^{v_i}\).
+
+If the support points of \(C\) span a sublattice of index \(m\) in \(N\), the
+dual \(\mu_m\)-action on the torus scales \(W_C\) by a primitive \(m\)-th root
+of unity, so it permutes the critical values of \(W_C\) in orbits of size
+\(m\): the boundary monodromy has \(m\)-cycles over \(C\).  Two consequences
+sharpen this into a usable bound.
+
+1. **Only the central cell rotates.**  The support omits only the origin, so
+   for a cell not containing the origin the support points are all of its
+   lattice points, and the lattice points of a lattice polygon span \(N\);
+   such a cell contributes no rotation.  At most one cell of a subdivision has
+   the origin in its interior, so at most one cell of any boundary limit
+   produces cycles.
+2. **The available orders are 3-smooth.**  Enumerating every reflexive polygon
+   and, inside each, every sub-polygon with the origin in its interior
+   (`notes/cubic-threefolds-tasks/c925-fable-reflexive-cell-bound.py`): with
+   the full support in the cell the orders realized are exactly \(1,2,3\);
+   in the worst case, where only the cell's vertices lie in the support, they
+   are \(1,2,3,4,6,8,9\).  **No order in either list is divisible by 5, 7, 11,
+   or 13.**  Every realizable order has the form \(2^a3^b\).
+
+So the first-order rotation of a del Pezzo boundary limit can never have order
+divisible by a prime \(\ell\ge5\).  This is the conceptual reason the scan of
+11.3 sees only cycle lengths \(1,2,3,4\), and it predicts that 6, 8 and 9 will
+appear in larger boxes while 5 and 7 never will.
+
+**What is still open.**  A cycle length is the product of the rotation orders
+of the successive Newton–Puiseux stages, and stages after the first are not
+governed by a reflexive polygon; the observed 4 is exactly such a product
+\(2\times2\).  The enumeration above bounds the first stage only.  The
+multiplicity certificate of 11.3 bounds all stages at once but is a finite
+check on one box.  A proof of the surface case at every prime needs either a
+reflexivity statement for the later stages or a direct argument that the total
+ramification of the spectral cover of a del Pezzo is 3-smooth.  The mirror
+identification itself (Givental's theorem for del Pezzos, and the tropical
+clustering statement) is quoted, not verified here.
+
 ### 11.2 Toric sheet cycles are cell torsion (unmarked analogue)
+
+*Superseded by 11.2b: the torsion must be computed from the support points in
+the cell, not from all its lattice points, and only the cell containing the
+origin can contribute.  The \(F_3\) caution below stands.*
+
 
 For a smooth Fano toric \(Y\) the Euler sheets are the critical points of the
 mirror Laurent polynomial \(W=\sum_i x^{v_i}\) over the fan polytope, and a

@@ -1,0 +1,5 @@
+reflexive polygons enumerated (box 3, with repeats): 828
+rotation orders m realised by a full-support central cell (m: how many cells): {1: 18716, 2: 2688, 3: 1204}
+orders if only the cell's vertices are in the support (worst case): {1: 9938, 2: 4970, 3: 1412, 4: 2128, 6: 2752, 8: 640, 9: 768}
+full-support orders divisible by a prime >= 5: none
+worst-case orders divisible by a prime >= 5: none
