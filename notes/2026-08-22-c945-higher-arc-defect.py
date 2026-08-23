@@ -7,6 +7,7 @@ import argparse
 import hashlib
 import json
 from functools import lru_cache
+from fractions import Fraction
 from math import comb
 from pathlib import Path
 
@@ -17,6 +18,73 @@ CHECKSUMS = ROOT / "2026-08-22-c945-higher-arc-defect.sha256"
 Q_VALUES = (4, 5, 7, 8, 9, 11, 13, 16, 17, 19, 23, 25, 27, 31, 32, 49, 64, 81, 125, 128, 243, 256)
 WIDE_DEGREE_Q_VALUES = (7, 8, 9, 11, 13, 16, 17, 19, 23, 25, 27, 31, 32)
 LAMBDA_VALUES = (1, 2, 3)
+RESONANCE_LAMBDA_MAX = 32
+
+
+def fraction_record(value: Fraction) -> dict[str, int]:
+    return {"numerator": value.numerator, "denominator": value.denominator}
+
+
+def resonance_record(u: int, v: int) -> dict[str, object]:
+    """Exact first-order data for the ordered factor-pair resonance uv=lambda."""
+    d = u + v + 1
+    spectral = Fraction(u * (u * v + 3 * u + 2 * v + 3), 2 * u + 1)
+    continuous = Fraction(
+        u * (u * v * v + 4 * u * v + 2 * u + 2 * v * v + 4 * v + 1),
+        2 * u * v + u + v,
+    )
+    gain = Fraction(
+        u * (v + 1) * (u * u + u + 1),
+        (2 * u + 1) * (2 * u * v + u + v),
+    )
+    h0 = Fraction(
+        -u * (v + 1) * (u * u * v + u * u - v),
+        2 * u * v + u + v,
+    )
+    slope = Fraction(2 * v, (u + v) * (2 * u * v + u + v + 1))
+
+    def lower(h: int) -> Fraction:
+        return Fraction(d) - Fraction(h, u)
+
+    def moment(h: int) -> Fraction:
+        return continuous + slope * (h - h0)
+
+    h_floor = h0.numerator // h0.denominator
+    candidates = (h_floor, h_floor + 1)
+    lattice, minimizing_h = min((max(lower(h), moment(h)), h) for h in candidates)
+
+    # Independent finite convexity check: the maximum of a decreasing and an
+    # increasing affine function is minimized next to their real crossing.
+    brute = min(
+        (max(lower(h), moment(h)), h)
+        for h in range(h_floor - 8, h_floor + 10)
+    )
+    assert brute == (lattice, minimizing_h)
+    assert continuous - spectral == gain
+    assert lattice >= continuous > spectral
+    crossing_denominator = 2 * u * v + u + v
+    crossing_numerator = u * (v + 1) * (u * u * v + u * u - v)
+    divisor_target = u * u * (u + 1) * (u * u + u + 1)
+    assert (crossing_numerator % crossing_denominator == 0) == (
+        divisor_target % crossing_denominator == 0
+    )
+    assert (h0.denominator == 1) == (divisor_target % crossing_denominator == 0)
+
+    return {
+        "lambda": u * v,
+        "u": u,
+        "v": v,
+        "density_alpha": fraction_record(Fraction(u + 1, d)),
+        "density_beta": fraction_record(Fraction(u, d)),
+        "balanced_internal_degree": (u + 1) * (v + 1),
+        "spectral_linear_coefficient": fraction_record(spectral),
+        "continuous_envelope_coefficient": fraction_record(continuous),
+        "certified_linear_gain": fraction_record(gain),
+        "lattice_envelope_coefficient": fraction_record(lattice),
+        "crossing_h0": fraction_record(h0),
+        "minimizing_h": minimizing_h,
+        "double_tight": h0.denominator == 1,
+    }
 
 
 def first_moment_minimum(q: int, s: int, lam: int = 1) -> int:
@@ -293,6 +361,27 @@ def run_checks() -> dict[str, object]:
         assert obstruction > 0
         checked_conjugate_resonance_instances += 1
 
+    resonance_rows = []
+    for lam in range(1, RESONANCE_LAMBDA_MAX + 1):
+        for u in range(1, lam + 1):
+            if lam % u == 0:
+                resonance_rows.append(resonance_record(u, lam // u))
+
+    known_resonances = {(row["u"], row["v"]): row for row in resonance_rows}
+    assert known_resonances[(1, 1)]["lattice_envelope_coefficient"] == fraction_record(
+        Fraction(18, 5)
+    )
+    assert known_resonances[(1, 2)]["lattice_envelope_coefficient"] == fraction_record(
+        Fraction(9, 2)
+    )
+    assert known_resonances[(2, 1)]["lattice_envelope_coefficient"] == fraction_record(
+        Fraction(6)
+    )
+    checked_diagonal_double_tight_instances = 0
+    for u in range(2, 65, 2):
+        assert resonance_record(u, u)["double_tight"]
+        checked_diagonal_double_tight_instances += 1
+
     rows = []
     for q in Q_VALUES:
         for s in range(2, min(8, q) + 1):
@@ -348,7 +437,7 @@ def run_checks() -> dict[str, object]:
                 )
 
     return {
-        "schema": "c945-higher-arc-defect-v7",
+        "schema": "c945-higher-arc-defect-v8",
         "meaning": "Necessary-bound thresholds only; projective-plane or arc existence is not asserted.",
         "parameters": {"lambda_values": list(LAMBDA_VALUES), "holes": 0, "q_values": list(Q_VALUES), "s_max": 8},
         "independent_checks": {
@@ -359,7 +448,10 @@ def run_checks() -> dict[str, object]:
             "infinite_family_formula_instances": checked_infinite_family_instances,
             "ordinary_resonance_formula_instances": checked_ordinary_resonance_instances,
             "conjugate_resonance_bound_instances": checked_conjugate_resonance_instances,
+            "factor_pair_resonance_instances": len(resonance_rows),
+            "diagonal_double_tight_instances": checked_diagonal_double_tight_instances,
         },
+        "factor_pair_resonances": resonance_rows,
         "rows": rows,
         "wide_degree_rows": wide_degree_rows,
     }

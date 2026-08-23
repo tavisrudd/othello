@@ -7,7 +7,7 @@
 **Status:** active theorem-development and literature-audit phase; the manuscript is
 untouched pending a go/no-go gate.
 
-**Literature-audit summary:** thirteen individually discussed sources; seven
+**Literature-audit summary:** fourteen individually discussed sources; eight
 read at full text and six partially.  The bounded full-text audit settles the main
 classicality question but does not close a global novelty or priority verdict.
 The degree-two moment/variance identity, its spectral form, the
@@ -33,9 +33,13 @@ classical incidence moments.  The higher-binomial generating identity is also
 classical machinery and is not itself a headline theorem.  The present package
 with the paired integer envelopes, exact recovery of spectral mixing as its
 continuous relaxation, the modular correction, and the infinite strict-gain
-families are provisionally at the **94th--97th percentile** among specialized
+families are provisionally at the **97th--98th percentile** among specialized
 finite-geometry papers, conditional on finishing the narrow precedence audit
-and replacing the remaining proof sketches by lemmas.  The arbitrary-
+and replacing the remaining proof sketches by lemmas.  The completed ordered-
+factor-pair theorem now proves that every rational multiplicity resonance has
+a positive linear gain and identifies a double-tight near-tactical sublocus;
+this removes the main risk that `(OF)`, `(UF)`, and `(CF)` were isolated
+arithmetic accidents.  The arbitrary-
 dimensional code corollary raises audience and conceptual reach, but not the
 percentile by itself.
 
@@ -53,8 +57,11 @@ The strongest honest architecture is therefore:
    an arbitrary design;
 5. `(OF)` as the primary separation theorem—already for ordinary completeness—
    and `(UF)`/`(CF)` as its two conjugate multiple-coverage companions;
-6. the finite resonance equation `(R)` as the explanation and classification
-   program behind the high-degree phase diagram.
+6. the complete ordered-factor-pair resonance theorem `(FP)`--`(LC)`, with
+   classical spectral mixing as its strict continuous relaxation at every
+   rational branch;
+7. the integral-`h0` double-tight sublocus as the entry point for an inverse
+   theorem or structural nonexistence result.
 
 This makes the classical result a corollary without pretending the elementary
 moment expansion is new.  A higher (`j>=3`) moment should enter the headline
@@ -785,6 +792,221 @@ size mismatch produces a linear modular obstruction.  The next high-EV theorem
 is a classification of all factor-pair resonances and their first-order gains,
 not another undirected parameter sweep.
 
+### Complete factor-pair resonance theorem
+
+The classification and its first-order gain can in fact be completed for every
+fixed multiplicity.  Write an ordered factorization
+
+```
+lambda=uv,                 u,v>=1,
+d=u+v+1,
+```
+
+and take the resonant parameters
+
+```
+q=dn,                      s=(u+1)n+1,
+k=ud n^2+c n+O(1).                                      (FP)
+```
+
+Then
+
+```
+alpha=(u+1)/d,             beta=u/d,
+a=(u+1)(v+1)
+```
+
+solve `(R)`, and every rational solution of `(R)` arises from exactly such an
+ordered factorization.  Indeed the earlier same-parity factor pair `UV=4lambda`
+must have `U=2u`, `V=2v`; conversely these substitutions give the displayed
+`alpha`, `beta`, and integral balanced internal degree `a`.  Thus the resonant
+phase diagram at multiplicity `lambda` has one ordered branch for each divisor
+of `lambda`, with conjugation interchanging `u` and `v`.
+
+Define the classical spectral first-order coefficient
+
+```
+c_sp = u(uv+3u+2v+3)/(2u+1),
+```
+
+and the continuous paired-envelope coefficient
+
+```
+c_env = u(uv^2+4uv+2u+2v^2+4v+1)/(2uv+u+v).
+```
+
+Their difference factors as
+
+```
+c_env-c_sp
+ = u(v+1)(u^2+u+1)/((2u+1)(2uv+u+v)) > 0.             (G)
+```
+
+Consequently, for every ordered factorization `lambda=uv`, the paired integer
+moments improve the classical spectral theorem by a positive linear amount:
+
+```
+k >= ud n^2+c_env n-O_{u,v}(1),                         (FG)
+```
+
+whereas the spectral quadratic alone has first-order threshold
+
+```
+k >= ud n^2+c_sp n-O_{u,v}(1).
+```
+
+The lattice correction admits an exact finite minimization.  Put
+
+```
+h0 = -u(v+1)(u^2v+u^2-v)/(2uv+u+v),
+mu = 2v/((u+v)(2uv+u+v+1)),
+L(h)=d-h/u,
+C(h)=c_env+mu(h-h0).
+```
+
+Then the sharp coefficient supplied by this first-order paired-envelope
+argument is
+
+```
+c_lat = min_{h in Z} max(L(h),C(h))
+      = min_{h in {floor(h0),ceil(h0)}} max(L(h),C(h)).  (LC)
+```
+
+In particular `c_lat>=c_env`, so `(G)` is a uniform certified gain; the
+integer position of `h0` can only strengthen it.  The three earlier theorems
+are precisely
+
+```
+(u,v)=(1,1): c_lat=18/5,     (OF),
+(u,v)=(1,2): c_lat=9/2,      (UF),
+(u,v)=(2,1): c_lat=6,        (CF).
+```
+
+Here is the proof of the new assertion.  Let `T` be the number of maximal
+secants, `b=q^2+q+1-k`, and
+
+```
+F(T)=Phi_min(k,sT)+Phi_min(b,(q+1-s)T)-C(T,2).
+```
+
+Pair feasibility requires `F(T)<=0`, while coverage gives
+
+```
+T >= ceil(lambda b/(q+1-s))
+  = ud(v+1)n+ceil(u(d-c)+O(1/n)).                       (P)
+```
+
+For bounded `c` at or above the spectral threshold, the balanced internal
+degree is approached from below.  The exact forward difference of `F` is
+
+```
+sum_{i=0}^{s-1} floor((sT+i)/k)
+ +sum_{i=0}^{vn-1} floor((vnT+i)/b)-T.
+```
+
+From the minimum in `(P)` through an interval of length `vn+O(1)`, the two
+floor families are at least `a-1` and `lambda`, so the difference is at least
+`vn-(T-T_min)+O(1)`.  Beyond that interval use `floor(x)>=x-1` and
+
+```
+s^2/k+(vn)^2/b-1 = 1/(u(v+1))+O(1/n).
+```
+
+At `T=T_min+vn+O(1)` this gives a positive linear margin
+`v n/(u(v+1))+O(1)`.  Hence `F` is minimized at `T_min`, up to a bounded
+endpoint ambiguity which does not affect the first-order coefficient.
+
+Pass to a subsequence on which
+
+```
+T_min=ud(v+1)n+h
+```
+
+with fixed integer `h`.  Coverage gives `c>=L(h)+o(1)`.  Since the internal
+degrees balance between `a-1` and `a`, while the external degrees balance
+between `lambda` and `lambda+1`, direct expansion gives
+
+```
+F(T_min)/n
+ = ((u+v)(2uv+u+v+1)/2)(C(h)-c)+o(1).
+```
+
+Thus feasibility also gives `c>=C(h)+o(1)`.  Minimizing the maximum of these
+two affine functions proves `(LC)`; they are respectively decreasing and
+increasing in `h`, so only the two integers adjacent to their crossing `h0`
+can minimize.  Expanding the Bishnoi--Mattheus--Schillewaert quadratic gives
+`c_sp`, and subtraction yields the positive factorization `(G)`.
+
+This theorem changes the status of `(OF)`, `(UF)`, and `(CF)`: they are not
+three favorable congruence accidents but the first exact members of a divisor-
+indexed family in which *every rational resonance has an unbounded linear
+integer-envelope penalty*.  It also makes the classical spectral theorem a
+literal corollary/relaxation at every branch, rather than merely at the three
+initial examples.
+
+There is a rigidity sublocus inside the resonance classification.  If `h0` is
+integral, then `L(h0)=C(h0)=c_env`: coverage and the pair envelope become tight
+simultaneously.  Any hypothetical sequence with
+`k=udn^2+c_env n+o(n)` must have `T=ud(v+1)n+h0+o(n)`; all but `O(n)` internal
+points have maximal-secant degree `a`, all but `o(n)` external points have
+degree `lambda`, and the total smoothing defect from the two balanced degree
+sequences is `o(n)`.  Thus exact double tightness forces an asymptotically
+tactical incidence structure outside a codimension-one exceptional locus.
+The branch `(u,v)=(2,1)` underlying `(CF)` has `h0=-4` and is the first such
+case.  Classifying or excluding these near-tactical structures is now the
+highest-value route from the general bound to a genuine extremal-geometry
+crown.
+
+The arithmetic classification of that sublocus is elementary and complete.
+Set
+
+```
+m=2uv+u+v.
+```
+
+Polynomial division in `v`, followed by multiplication by `(2u+1)^2`, gives
+
+```
+(2u+1)^2 u(v+1)(u^2v+u^2-v)
+  = m Q(u,v)+u^2(u+1)(u^2+u+1)
+```
+
+for an integer polynomial `Q`.  Since
+`gcd(m,2u+1)=gcd(u,2u+1)=1`, one obtains
+
+```
+h0 is integral
+ iff m divides u^2(u+1)(u^2+u+1).                       (DT)
+```
+
+Equivalently, for each fixed `u`, the double-tight branches are parametrized
+exactly by divisors `m` of the integer on the right satisfying
+
+```
+m>u,                       m congruent to u mod (2u+1),
+v=(m-u)/(2u+1).
+```
+
+This both makes the sublocus effectively enumerable and exposes an infinite
+self-conjugate family.  Taking `v=u` gives
+
+```
+h0=-u(u^2+u-1)/2,
+```
+
+which is integral for every even `u`.  Hence every square multiplicity
+`lambda=u^2` with even `u` has a self-conjugate, double-tight resonant branch
+
+```
+alpha=(u+1)/(2u+1),        beta=u/(2u+1),
+a=(u+1)^2.
+```
+
+The remaining problem is geometric rather than Diophantine: decide whether
+the forced near-tactical incidence structures on this infinite family can
+exist in projective planes, and, if so, construct them.  This is substantially
+narrower than the earlier undirected equality-classification gate.
+
 ### Projective codes in arbitrary dimension
 
 Take the point--hyperplane design of `PG(r-1,q)`, where
@@ -1033,7 +1255,15 @@ Bishnoi--Mattheus--Schillewaert quadratic are the same polynomial, and checks
 the exact `(UF)` threshold in the 11 orders `q=16,24,...,96`.  It also checks
 the ordinary-completeness formula `(OF)` for all 30 integers `3<=n<=32` and
 the spectral sign change plus boundary obstruction for the conjugate `3/4`
-resonance in all 63 integers `2<=m<=64`.
+resonance in all 63 integers `2<=m<=64`.  Schema v8 additionally records all
+119 ordered divisor-pair resonances with `lambda<=32`.  Exact rational
+arithmetic independently checks `(G)`, checks that the lattice coefficient is
+strictly above the spectral coefficient, and verifies by a bounded convex
+search around `h0` that the two adjacent integers give the global lattice
+minimum.  Six of these 119 branches have integral `h0`; this is a bounded
+observation, not a count of the unrestricted double-tight sublocus.  The
+divisor criterion `(DT)` and the self-conjugate assertion are independently
+checked for the 32 even integers `2<=u<=64`; their proofs are uniform.
 
 Replay from the repository root:
 
@@ -1043,10 +1273,10 @@ nix shell nixpkgs#python3 --command python3 notes/2026-08-22-c945-higher-arc-def
 
 The generator is deterministic and uses only Python's standard library.
 `generate` rewrites the canonical sorted JSON and checksum manifest; `check`
-recomputes both in memory and fails on drift.  The script is 16,373 bytes with
-SHA-256 `524154a665eb7c1a5ab32d543b599bc5723bf1daff9b0d4a287bf77419e95b22`;
-the JSON is 279,989 bytes with SHA-256
-`912e22b24f320ae208a1efbd4d1e40574b1c8d78c70ed29b7c0610a903827d29`.
+recomputes both in memory and fails on drift.  The script is 19,950 bytes with
+SHA-256 `f9c3ccfe0e87938ff32f6239bf54839767e7e9f839d7faa08b1a37c9fbbac608`;
+the JSON is 375,854 bytes with SHA-256
+`f0e2908666be3634c3430cce984a0bfdf7f76b27040434c74d6fcb334513e952`.
 
 ## Candidate new numerical consequence
 
@@ -1202,6 +1432,21 @@ equalities and this specializes to the paper's existing `3/2` term.
   extension, whereas `r(x)` counts minimum hyperplanes vanishing at a candidate
   and hence obstructing a distance increase.  No paired integer envelope is
   formulated there.
+- Calderbank--Kantor, *The Geometry of Two-Weight Codes*, DOI
+  `10.1112/blms/18.2.97`: **full text**, all Sections 1--13 of the 26-page
+  published article read from the cached author-hosted PDF, relying especially
+  on Theorems 3.1--3.2, Corollary 5.5, and the dimension-three examples and
+  characterization results in Sections 8 and 12; cache key
+  `10.1112/blms/18.2.97`, SHA-256
+  `986eeff4e7b4d259876242ee3659a627c28057abe5a087dcdd9e9bdb7181b05d`.
+  The paper makes the equivalence among exact two-character projective sets,
+  projective two-weight codes, and associated strongly regular graphs
+  classical, and proves that the two nonzero weights differ by a power of the
+  characteristic.  This is the correct classical target for the new integral-
+  `h0` inverse problem.  The C945 conclusion is only *near* two-character:
+  first-order double tightness leaves an `O(n)` exceptional degree locus, so
+  the exact correspondence neither pre-empts the factor-pair bound nor by
+  itself classifies its equality sequences.
 - Lund--Saraf, *Incidence Bounds for Block Designs*, arXiv:1407.7513v2:
   **full text**, all sections and the appendix of the 2016 arXiv source read,
   relying especially on Theorem 1, the prior-work note, the expander-mixing
@@ -1251,7 +1496,7 @@ equalities and this specializes to the paper's existing `3/2` term.
   points on both sides of a partition.  No absence claim rests on this partial
   read.
 
-The audit currently has seven full-text and six partial sources.  It supports a
+The audit currently has eight full-text and six partial sources.  It supports a
 firm *classical* verdict for the moment/spectral and code/blocking dictionaries.
 It supports only the narrower bounded statement that no direct predecessor for
 the paired integer-envelope sharpening or `(OF)`/`(UF)`/`(CF)` was found; a global novelty or
@@ -1307,6 +1552,10 @@ Murphy Petridis "point-line incidence identity" PDF finite fields applications
 Haemers incidence bound designs interlacing full text theorem 5.1
 "integer" "incidence bound" symmetric designs degree sequence
 "variance trick" blocking sets secants
+two-intersection sets projective spaces tactical decomposition finite geometry survey PDF
+two-character sets projective planes two-weight codes incidence degrees selected lines
+intriguing sets projective plane two intersection set code arXiv
+projective two-weight codes two-intersection sets Delsarte Calderbank Kantor PDF
 ```
 
 OpenAlex was then queried with `per-page=10` and the exact `search` values
@@ -1392,13 +1641,13 @@ result.
   `q/5+O(1)` for `q=8n`.  All three floor arguments are uniform; their
   arithmetic ingredients are independently checked in 30, 11, and 63 initial
   instances, respectively.
-- **Why the slopes `2/3`, `1/2`, and `3/4` appear — settled through first
-  order.**  Eliminating the limiting density and integral internal degree gives
-  the discriminant equation `(a-lambda-1)^2-y^2=4lambda`; its factor pairs
-  yield the finite resonant slope set.  Theorems `(OF)`, `(UF)`, and `(CF)` now
-  prove linear modular gains on all primitive resonances for `lambda<=2`.
-  What remains open is the uniform first-order formula for arbitrary
-  `lambda`, owned by the C945 resonance-classification gate.
+- **Why the slopes `2/3`, `1/2`, and `3/4` appear, and whether the phenomenon
+  persists — settled at every multiplicity.**  The ordered factorizations
+  `lambda=uv` classify all rational resonances.  Theorems `(FP)`--`(LC)` give
+  the exact lattice first-order coefficient and the strictly positive gain
+  `(G)` on every branch.  The 119 branches with `lambda<=32` are independently
+  checked in exact rational arithmetic; the proof itself is uniform and does
+  not depend on this bound.
 - **Whether the broad moment/design mechanism is classical — settled.**
   Murphy--Petridis close the moment/variance equivalence, Lund--Saraf and
   Haemers supply the spectral lineage, and Beker--Mitchell--Piper supply the
@@ -1423,14 +1672,23 @@ result.
   contact forces balanced/cap-filled degree multisets, but geometric
   classification of the resulting clique/tactical structures has not been
   done.  Owner: C945 equality-classification gate.
+- **Which factor-pair resonances have integral `h0` — arithmetic settled,
+  geometry open.**  Criterion `(DT)` is an exact divisor parametrization, and
+  every self-conjugate branch `(u,u)` with even `u` gives an infinite family of
+  multiplicities having double tightness.  What remains is whether the forced
+  near-tactical secant structures exist, or whether two-character/two-weight
+  rigidity yields a structural nonexistence theorem.  Calderbank--Kantor close
+  the exact two-character dictionary but not this stability problem.  Owner:
+  C945 double-tight inverse-theorem gate.
 
 ## Gates before manuscript work
 
 1. Prove the intrinsic identity, clique decomposition, and stability statements
    with all edge cases (`nu=1`, holes, incomplete arcs, and uniform required
    multiplicity `lambda`) explicit.
-2. Make the scalar optimization rigorous, including floors and the range in
-   which its maximum occurs at `T`; prove an explicit asymptotic error term.
+2. Promote the factor-pair asymptotic proof to lemma form, including the
+   bounded endpoint cases in the forward-difference split and an explicit
+   `O_{u,v}(1)` threshold.
 3. Compare the numerical bound with Alabdullah--Hirschfeld and other general
    complete `(k,s)`-arc bounds at full-text depth.
 4. Audit specifically whether simultaneous balanced/cap-filled integer degree
@@ -1438,6 +1696,8 @@ result.
    and whether `(OF)`, `(UF)`, or `(CF)` has a known equivalent.  The broader
    second-moment and spectral mechanisms are already classical and should not
    be audited or positioned as candidate novelty.
-5. Test structured curve-derived families where `t`, `d(a)`, or `nu` are known;
-   this decides whether the intrinsic theorem has applications beyond the
-   universal bound.
+5. Classify the integral-`h0` branches and prove an inverse theorem for their
+   near-tactical incidence structures; then test structured curve-derived
+   families where `t`, `d(a)`, or `nu` are known.  A construction or structural
+   nonexistence theorem here is the remaining crown needed for a 99th-
+   percentile paper.
