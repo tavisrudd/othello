@@ -15,12 +15,13 @@ ROOT = Path(__file__).resolve().parent
 OUTPUT = ROOT / "2026-08-22-c945-higher-arc-defect.json"
 CHECKSUMS = ROOT / "2026-08-22-c945-higher-arc-defect.sha256"
 Q_VALUES = (4, 5, 7, 8, 9, 11, 13, 16, 17, 19, 23, 25, 27, 31, 32, 49, 64, 81, 125, 128, 243, 256)
+LAMBDA_VALUES = (1, 2, 3)
 
 
-def first_moment_minimum(q: int, s: int) -> int:
+def first_moment_minimum(q: int, s: int, lam: int = 1) -> int:
     """Smallest k not excluded by the Alabdullah--Hirschfeld inequality."""
     for k in range(s + 1, (s - 1) * q + s + 1):
-        lhs = (q * q + q + 1 - k) * s * (s - 1)
+        lhs = lam * (q * q + q + 1 - k) * s * (s - 1)
         rhs = k * (k - 1) * (q + 1 - s)
         if lhs <= rhs:
             return k
@@ -45,9 +46,9 @@ def capacity_numerator(q: int, k: int, s: int, lam: int, t: int) -> tuple[int, i
     return numerator, denominator
 
 
-def second_moment_minimum(q: int, s: int, lam: int = 1) -> int:
+def second_moment_minimum(q: int, s: int, lam: int = 1) -> int | None:
     """Smallest k not excluded by the exact one-variable degree envelope."""
-    start = first_moment_minimum(q, s)
+    start = first_moment_minimum(q, s, lam)
     for k in range(start, (s - 1) * q + s + 1):
         matching_cap = k // s
         if matching_cap < lam:
@@ -65,7 +66,7 @@ def second_moment_minimum(q: int, s: int, lam: int = 1) -> int:
         required = q * q + q + 1 - k
         if max_num is not None and common_den * required <= max_num:
             return k
-    raise AssertionError((q, s, lam))
+    return None
 
 
 @lru_cache(maxsize=None)
@@ -105,23 +106,26 @@ def run_checks() -> dict[str, object]:
     rows = []
     for q in Q_VALUES:
         for s in range(2, min(8, q) + 1):
-            first = first_moment_minimum(q, s)
-            second = second_moment_minimum(q, s)
-            assert second >= first
-            rows.append(
-                {
-                    "q": q,
-                    "s": s,
-                    "first_moment_minimum": first,
-                    "second_moment_minimum": second,
-                    "improvement": second - first,
-                }
-            )
+            for lam in LAMBDA_VALUES:
+                first = first_moment_minimum(q, s, lam)
+                second = second_moment_minimum(q, s, lam)
+                assert second is None or second >= first
+                rows.append(
+                    {
+                        "q": q,
+                        "s": s,
+                        "lambda": lam,
+                        "first_moment_minimum": first,
+                        "second_moment_minimum": second,
+                        "improvement": None if second is None else second - first,
+                        "excluded_through_universal_arc_maximum": second is None,
+                    }
+                )
 
     return {
-        "schema": "c945-higher-arc-defect-v1",
+        "schema": "c945-higher-arc-defect-v2",
         "meaning": "Necessary-bound thresholds only; projective-plane or arc existence is not asserted.",
-        "parameters": {"lambda": 1, "holes": 0, "q_values": list(Q_VALUES), "s_max": 8},
+        "parameters": {"lambda_values": list(LAMBDA_VALUES), "holes": 0, "q_values": list(Q_VALUES), "s_max": 8},
         "independent_checks": {
             "convex_envelope_instances": checked_envelopes,
             "ordinary_arc_specializations": checked_arc_specializations,

@@ -80,6 +80,24 @@ feature to verify carefully: the `(lambda-1)S1/M` gain and the second-moment
 loss cancel at order `q^(3/2)` except for the same `s`-dependent residue as
 at `lambda=1`.
 
+### Coding interpretation
+
+Represent the points of `A` by columns of a generator matrix.  This gives a
+projective `[k,3,k-s]_q` code: a line meeting `A` in `s` points corresponds
+to a minimum-weight codeword, with those `s` coordinates zero.  If a new
+column representing `x` is appended, every `s`-secant through `x` supplies a
+projectively distinct minimum-weight word that remains of weight `k-s` in the
+extended code.  It therefore obstructs the prospective minimum-distance
+increase from `k-s` to `k+1-s`.
+
+Consequently, completeness says that every one-column projective extension
+has such an obstruction, while `lambda`-fold maximal-secant coverage says
+that every extension outside the prescribed holes has at least `lambda`
+distinct minimum-weight witnesses.  The multiplicity theorem can thus be
+stated as a robust nonextendibility defect identity for projective dimension-
+three codes.  This is an interpretation of the same incidence count, not a
+claim that coding-theory precedence has yet been audited.
+
 ## Equality archetypes
 
 The multiplicity theorem organizes several standard embedded designs by the
@@ -275,16 +293,25 @@ k >= sqrt(lambda s(s-1)q) + (s+1)/2
 ## Exact parameter evidence
 
 The deterministic bundle
-`2026-08-22-c945-higher-arc-defect.{py,json,sha256}` evaluates the published
+`2026-08-22-c945-higher-arc-defect.{py,json,sha256}` evaluates the matching
 first-moment threshold and the exact one-variable second-moment envelope for
-`lambda=1`, no holes, the 22 listed values of `q`, and
+`lambda=1,2,3`, no holes, the 22 listed values of `q`, and
 `2 <= s <= min(8,q)`.  These are parameter inequalities; the output does not
 assert existence of a projective plane or an arc for any row.
 
-Across 146 `(q,s)` rows, the second-moment threshold is strictly stronger in
-126 rows, with maximum improvement five in the searched set.  For the eight
-small `(k,3)` comparison orders `q=4,5,7,8,9,11,13,16`, the first/second
-thresholds are respectively
+For each value of `lambda` there are 146 `(q,s)` rows.  The second-moment
+threshold is strictly stronger in 126 rows at `lambda=1`, 89 rows at
+`lambda=2`, and 77 rows at `lambda=3`; the respective maximum improvements
+are five, four, and four.  At `(q,s,lambda)=(5,2,3)`, the exact envelope
+excludes every `k` through the universal arc maximum, so the second-moment
+threshold is recorded as absent rather than extrapolated past its geometric
+range.  This isolated exclusion and the decreasing frequency of strict
+improvement as `lambda` rises are numerical observations, not yet structural
+theorems.
+
+For the eight small `(k,3)` comparison orders
+`q=4,5,7,8,9,11,13,16` at `lambda=1`, the first/second thresholds are
+respectively
 
 ```
 7/7, 8/9, 9/9, 9/9, 9/11, 10/11, 11/12, 12/13.
@@ -303,10 +330,10 @@ nix shell nixpkgs#python3 --command python3 notes/2026-08-22-c945-higher-arc-def
 
 The generator is deterministic and uses only Python's standard library.
 `generate` rewrites the canonical sorted JSON and checksum manifest; `check`
-recomputes both in memory and fails on drift.  The script is 6,029 bytes with
-SHA-256 `ab2b15c414214ca6b5ec4481e8ed4525fa3c94e3f74b1473fe8f8762a6224de1`;
-the JSON is 20,120 bytes with SHA-256
-`d3c81648084c5ac9d2a58b9accc8ec538530a666814e051436a5fd0ddc330667`.
+recomputes both in memory and fails on drift.  The script is 6,353 bytes with
+SHA-256 `ea8e44e9de0e4e2211e4076ebc3f734439fcfcf5f44a37a05a7eb442204024cd`;
+the JSON is 91,742 bytes with SHA-256
+`5f1233c907a118ce426ba5932cf71607f4835ea331488103262ba14d7f000f6f`.
 
 ## Candidate new numerical consequence
 
