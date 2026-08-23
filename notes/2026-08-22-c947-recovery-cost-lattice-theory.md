@@ -392,8 +392,191 @@ Nothing in C947 should be inserted into the current paper merely to enlarge
 its scope. If a sequel is packaged now, lead with exact bounded transfer for
 all demand subspaces, use joint row support as the computational model, and
 place Yoneda in a short structural subsection. The arithmetic direction earns
-promotion only after one integral-seed experiment produces a nontrivial prime
-phase diagram.
+one finite generic-stabilization theorem below, but a ring-valued confinement
+theory remains quarantined; the phase-diagram program earns broader promotion
+only after one integral-seed experiment produces nontrivial exceptional
+characteristics.
+
+## 10. EJ upgrades
+
+### Proposition 4 — separating-functional blocker duality
+
+Let \(U=G_PA\leq\operatorname{span}(G_J)\). For every linear functional
+\(\lambda\in(\mathbb F_q^k)^*\) that is nonzero on \(U\), define its helper
+support
+\[
+ D_\lambda=\{j\in J:\lambda(G_j)\neq0\}.
+\]
+Let \(\mathcal D_U\) be the clutter of inclusion-minimal such supports. Then
+for \(H\subseteq J\),
+\[
+ U\subseteq\operatorname{span}(G_H)
+ \quad\Longleftrightarrow\quad
+ H\cap D\neq\varnothing
+ \quad\text{for every }D\in\mathcal D_U.
+\]
+Consequently
+\[
+ \boxed{\rho_{P,A}(C)=\tau(\mathcal D_U),}
+\]
+the transversal number of the separating-support clutter.
+
+For the forward implication, a functional vanishing on \(G_H\) must vanish on
+its span and hence on \(U\), so no \(U\)-separating support can avoid \(H\).
+Conversely, if \(U\not\subseteq\operatorname{span}(G_H)\), linear separation
+gives a functional \(\lambda\) vanishing on \(\operatorname{span}(G_H)\) but
+not on \(U\); then \(D_\lambda\cap H=\varnothing\), and an inclusion-minimal
+separating support inside it is also missed.
+
+In the represented matroid obtained by adjoining virtual columns spanning
+\(U\), these are the helper projections of the relevant cocycle supports.
+The literal separating-functional definition is preferable because it avoids
+any ambiguity about projection or minimality.
+
+This is the exact dual companion to Proposition 1:
+
+- Proposition 1 is a minimum common-support representation;
+- Proposition 4 is a minimum transversal of all rank-deficiency witnesses.
+
+### Corollary 4.1 — pointed circuit–cocircuit blocker pair
+
+Suppose \(\dim U=1\), choose \(0\neq t\in U\), and adjoin \(t\) as a virtual
+target element \(p\) to the represented matroid on the helper columns. Then:
+
+- the inclusion-minimal recovery sets are
+  \(K\setminus\{p\}\), where \(K\) ranges over circuits containing \(p\);
+- the clutter \(\mathcal D_U\) consists of
+  \(D\setminus\{p\}\), where \(D\) ranges over cocircuits containing \(p\);
+- these two clutters are blockers of one another.
+
+Indeed, \(H\) repairs \(t\) exactly when \(p\in\operatorname{cl}(H)\), which
+is equivalent both to containing a circuit through \(p\) with \(p\) removed
+and to meeting every cocircuit through \(p\). This identifies the complete
+one-demand support layer with classical pointed matroid data. The normalized
+coefficient fibers remain represented-code data above that matroidal shadow.
+
+It also gives the integer program
+\[
+ \rho_{P,A}(C)=
+ \min\left\{
+ \sum_{j\in J}x_j:
+ x_j\in\{0,1\},\
+ \sum_{j\in D}x_j\geq1\ \text{for every }D\in\mathcal D_U
+ \right\}.
+\]
+Relaxing \(x_j\in\{0,1\}\) to \(0\leq x_j\leq1\) gives the fractional
+transversal number \(\tau^*(\mathcal D_U)\), hence the rigorous lower bound
+\[
+ \tau^*(\mathcal D_U)\leq\rho_{P,A}(C).
+\]
+Linear-programming duality also gives the packing form
+\[
+ \tau^*(\mathcal D_U)=
+ \max\left\{
+ \sum_{D\in\mathcal D_U}y_D:
+ y_D\geq0,\
+ \sum_{D\ni j}y_D\leq1\ \text{for every }j\in J
+ \right\}.
+\]
+Thus any fractional packing of separating supports certifies a lower bound on
+the helper cost.
+This is the cheapest honest route from the recovery invariant to LP bounds.
+It is a general clutter relaxation, not yet a new coding bound.
+
+For independent helper survival, the available set repairs \(U\) at
+unrestricted radius exactly when it is a transversal of \(\mathcal D_U\).
+At radius \(r\), the event is that the available set contains a transversal
+of size at most \(r\). Thus bounded-recovery reliability is determined by the
+size-\(\leq r\) transversals of this separating-support clutter. Failure at
+unrestricted radius has a dual certificate: one functional nonzero on \(U\)
+that vanishes on every surviving helper column.
+
+### Proposition 5 — finite exceptional-prime stabilization
+
+Let \(\widetilde G_J\) be an integral helper matrix and fix finitely many
+integral demand matrices
+\[
+ \widetilde T_1,\ldots,\widetilde T_m.
+\]
+Reduce this data modulo \(p\). There is an explicitly computable nonzero
+integer \(\Delta\) such that, for every prime \(p\nmid\Delta\), simultaneously
+for every \(H\subseteq J\) and every \(i\):
+
+1. the predicate
+   \[
+   \operatorname{col}(\widetilde T_i\bmod p)
+   \subseteq
+   \operatorname{span}(\widetilde G_H\bmod p)
+   \]
+   agrees with the corresponding containment over \(\mathbb Q\);
+2. the minimum helper cost of each fixed demand agrees with its generic
+   characteristic value;
+3. whenever the equation fiber is nonempty, its affine dimension agrees with
+   the generic value.
+
+To construct \(\Delta\), for every \(H,i\) choose nonzero minors witnessing
+the rational ranks of \(\widetilde G_H\) and
+\((\widetilde G_H\mid\widetilde T_i)\), and take their product. Outside its
+prime divisors, all these ranks are preserved. Containment is the rank
+equality
+\[
+ \operatorname{rank}(\widetilde G_H)
+ =
+ \operatorname{rank}(\widetilde G_H\mid\widetilde T_i),
+\]
+so every support predicate stabilizes. There are only finitely many \(H,i\),
+and minima over the stabilized predicates stabilize as well. Finally, a
+nonempty solution fiber of
+\(\widetilde G_HX=-\widetilde T_i\) is affine under one copy of
+\(\ker\widetilde G_H\) per demand column, whose dimension is rank-determined.
+
+The exceptional set obtained from an arbitrary choice of witnessing minors
+need not be minimal. Smith normal forms or determinantal ideals can sharpen
+it. The theorem compares a fixed finite family of integral demands; it does
+not identify the entire subspace lattices over different finite fields.
+
+### Example 5.1 — support and coefficient jumps differ
+
+Take
+\[
+ \widetilde G_J=
+ \begin{pmatrix}
+ 1&1\\
+ 0&2
+ \end{pmatrix}.
+\]
+For the demand \(t=e_2\), both helpers recover \(t\) over every field of odd
+characteristic, but recovery fails in characteristic two because both helper
+columns reduce to \(e_1\). This is a support-predicate jump.
+
+For the demand \(t=e_1\), recovery remains possible in every characteristic.
+On the full helper set, however, the solution fiber is zero-dimensional away
+from two and one-dimensional in characteristic two, because the helper-matrix
+rank drops from two to one. This is a coefficient-fiber jump without a
+recovery-support jump. Here the sharp exceptional-prime certificate is
+\(\Delta=2\).
+
+This promotes the proposed arithmetic phase diagram from analogy to a finite
+theorem-and-computation program: generic recovery data are constant, and only
+finitely many explicitly certified characteristics can jump.
+
+### EJ priority revision
+
+The blocker duality is the best immediate upgrade because it joins four
+previously separate layers:
+\[
+ \text{joint sparse equations}
+ \longleftrightarrow
+ \text{separating-functional transversals}
+ \longleftrightarrow
+ \text{LP lower bounds}
+ \longleftrightarrow
+ \text{repair reliability}.
+\]
+The exceptional-prime theorem is the best cheap number-theoretic result. The
+next computation should use one geometric integral seed to minimize
+\(\Delta\), enumerate the actual bad primes, and determine which jumps affect
+supports versus coefficient-fiber dimensions.
 
 ## Mystery ledger
 
@@ -408,13 +591,20 @@ phase diagram.
 - Categorical completion: the Yoneda representable of the restricted-dual map.
 - Noninjective presentations: scalar cost depends only on their image, as in
   C946; their full lift fibers still retain kernel gauge data.
+- Dual optimization object: the minimum transversal of the
+  \(U\)-separating-functional support clutter.
+- Arithmetic genericity: every fixed finite integral demand profile stabilizes
+  outside an explicit finite set of primes.
+- Arithmetic layer separation: Example 5.1 exhibits both a support failure and
+  a coefficient-fiber-dimension jump at the same exceptional prime.
 
 ### Open
 
 - Fixed-parameter algorithms in radius, demand dimension, and field size.
 - Sharp generalized- or relative-weight bounds for prescribed demands.
 - A universal characterization of the bounded filtered representable.
-- Prime classification of support and coefficient changes for integral seeds.
+- Minimize the exceptional-prime certificate for a geometric integral seed
+  and classify its actual support versus coefficient-fiber jumps.
 - Correct projectivity or Frobenius-ring hypotheses for ring confinement.
 
 ## Verdict
