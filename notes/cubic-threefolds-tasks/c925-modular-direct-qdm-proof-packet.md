@@ -210,6 +210,12 @@ realization of that orbit.
   (\(\mathbf P^3\), \(Q^3\), \(V_5\), \(V_{22}\) all quantum-etale at the
   canonical point); tail residue is now non-toric \(\rho\ge2\) Fanos plus
   non-Fano carriers: notes/2026-08-23-c925-fable-gs-carrier-rank-one.md
+- blow-up chains propagate ledger semisimplicity (Iritani 5.18 bookkeeping;
+  \(b_3=0\) forces rational centres), closing all chains over closed bases,
+  every \(S\times\mathbf P^1\), and \(\rho\ge6\); flag threefold MM 2-32
+  closed by explicit etale certificate; residue = MM 2-24 plus non-chain
+  non-Fano carriers:
+  notes/2026-08-23-c925-fable-gs-carrier-blowup-chains.md
 
 The packet index owns the module-to-file map.  Do not append another large
 module to this card or to the index; add one focused companion file and one

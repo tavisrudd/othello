@@ -1,0 +1,4 @@
+quotient dimensions: classical 6 , canonical point 6 (both equal chi(Fl_3) = 6)
+q=(1,1) scheme: x2 in {0, +sqrt(3), -sqrt(3)}, each with a separable quadratic for (x1,x3): six distinct reduced points
+trace-form determinant at q=(1,1): 93312 (nonzero -> etale)
+Fl(1,2;3) = MM 2-32 is quantum-etale at the canonical point
