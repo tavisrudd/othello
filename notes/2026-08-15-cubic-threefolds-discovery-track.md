@@ -288,3 +288,23 @@ the `Z/3` link class survive globally or die in the pair sequence?
 **Evidence:** CHECKED in the local link Gysin sequence; global degrees other
 than three were not computed.
 **Status:** open lead
+
+### 2026-08-23 — ambient quantum-Lefschetz excess may always sit at c_1-eigenvalue zero with multiplicity dim ker(i*)
+
+**What was seen:** for MM 2-24, the z→0 spectral scheme of the two-parameter
+quantum-Lefschetz operators at the canonical point is a multiplicity-three
+point at the origin plus six distinct reduced points; the fat origin has
+`-K`-eigenvalue `0` and its multiplicity equals `dim ker(i^*: H^*(F) →
+H^*(X)) = 3`, while the six reduced points (`= chi(X)`) have distinct
+nonzero eigenvalues.  (Certificate part 3b of
+`notes/cubic-threefolds-tasks/c925-fable-mm224-projective-bundle-etale.py`.)
+**Why it may matter / strongest question:** if ambient excess always
+concentrates at eigenvalue zero for Fano hypersurfaces in products of
+projective spaces, the reduced nonzero spectrum of the ambient presentation
+would be an unconditional lower bound on the semisimple part of the
+hypersurface's canonical-point spectrum — a cheap confluence probe that
+needs no Frobenius-quotient identification.  Strongest question: is there a
+structural reason (e.g. the Euler-vector grading of the twisted theory)
+forcing the pairing-degenerate local factor to be graded-local at `0`?
+**Evidence:** CHECKED exactly for MM 2-24 only.
+**Status:** open lead

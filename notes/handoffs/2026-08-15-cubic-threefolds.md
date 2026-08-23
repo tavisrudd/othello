@@ -250,7 +250,12 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   `../2026-08-23-c925-fable-marker-is-levelt-exponent.md`.  Rank-two
   confluence rule proved and the cubic's block/Kuznetsov-Serre dictionary
   made unconditional via Sanda--Shamoto:
-  `../2026-08-23-c925-fable-rank-two-confluence-gamma-ii.md`.
+  `../2026-08-23-c925-fable-rank-two-confluence-gamma-ii.md`.  MM 2-24
+  closed: every smooth member is a \(\mathbf P^1\)-bundle over
+  \(\mathbf P^2\) and Iritani--Koto Theorem 5.1 splits its ledger into two
+  semisimple \(\mathbf P^2\) summands; the \(b_3=0\) tail residue is now
+  the Mori--Mukai enumeration completion plus non-chain non-Fano carriers:
+  `../2026-08-23-c925-fable-mm224-projective-bundle-closure.md`.
 
 - **C924 — closed 2026-08-19.** The direct ordinary-QDM route proves
   irrationality of `X x P^1` after one mandatory local repair: compare the

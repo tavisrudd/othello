@@ -1,0 +1,15 @@
+part 1: apolar degree-2 relation h1^2 - 2 h1 h2 + 4 h2^2 equals the
+        Grothendieck relation of P(ker(O^3 -> O(2))), c(E) = 1 - 2h + 4h^2
+part 1: quotient Hilbert dimensions (1,2,2,1); degree-3 annihilator
+        contained in the ideal -> H*(X) = H*(P(E)) exactly
+part 2: disc(lam^3 - q) = -27 q^2 != 0 for q != 0: QH(P^2) etale on
+        the punctured Novikov torus (anchor for both summands)
+part 3: P1 I = P2 I = 0 verified exactly on the grid l, m <= 3
+part 3b: ambient spectral scheme at q=(1,1): dim 9 = fat origin
+         (multiplicity 3, the twisted-pairing degeneracy) + six
+         distinct reduced points (= chi(X)); their -K_X values are
+         the six distinct nonzero roots of 64*s**6 - 768*s**5 + 2304*s**4 - 15232*s**3 + 4608*s**2 + 1536*s - 5824
+         trace-form rank 7 = 1 + 6, as a local cube plus six fields
+part 4: regularized quantum period matches CCGK section 41: [4, 24, 132, 780, 5800, 40320, 283780, 2105880] at t^2..t^9
+MM 2-24 = P(ker(O^3 -> O(2))) over P^2: ledger closed by
+Iritani--Koto Theorem 5.1 + the anchor lemma at the base P^2

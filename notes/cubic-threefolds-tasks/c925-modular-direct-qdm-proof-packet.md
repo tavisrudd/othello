@@ -216,6 +216,15 @@ realization of that orbit.
   closed by explicit etale certificate; residue = MM 2-24 plus non-chain
   non-Fano carriers:
   notes/2026-08-23-c925-fable-gs-carrier-blowup-chains.md
+- MM 2-24 closed: smoothness forces \(X=\mathbf P(\ker(\mathcal
+  O^3\to\mathcal O(2)))\) over \(\mathbf P^2\), and Iritani--Koto
+  Theorem 5.1 splits its ledger into two semisimple \(\mathbf P^2\)
+  summands (Ciolli covers only \(\mathbf P^3/Q^3\) blow-up chains; the
+  ambient quantum-Lefschetz algebra is itself non-etale — fat origin of
+  multiplicity three at eigenvalue \(0\) — so the projective-bundle route
+  was necessary, not just cheaper); tail residue = enumeration completion
+  plus non-chain non-Fano carriers:
+  notes/2026-08-23-c925-fable-mm224-projective-bundle-closure.md
 
 The packet index owns the module-to-file map.  Do not append another large
 module to this card or to the index; add one focused companion file and one
