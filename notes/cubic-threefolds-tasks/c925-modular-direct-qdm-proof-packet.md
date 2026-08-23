@@ -275,6 +275,21 @@ realization of that orbit.
   \(I\)-function queued; the degree-zero Novikov series is the new
   technical gate.  Note:
   notes/2026-08-23-c925-fable-weak-fano-conic-bundle.md
+- Probe run + two corrections: the non-convex twist is provably not GKZ
+  along the \(K\)-trivial ray (exact negative certificate); the ambient
+  \(K\)-trivial three-cycle sheets are simple/unmarked at four \(x\)
+  values; and the weak-Fano example itself has split cover —
+  \(X\cong\mathrm{Bl}_E(\mathbf P^1\times\mathbf P^2)\), \(b_3=2\), not
+  class (a), though still marked-free via its elliptic-centre summand.
+  Out of the failure: **candidate theorem** — markedness
+  (\(\{1/6,5/6\}\) blocks) is a birational invariant of smooth
+  threefolds via AKMW factorization plus two-way Iritani summand
+  inheritance (curve summands of every genus are unmarked); rational
+  \(\Rightarrow\) marked-free.  If it survives red-team (the open point
+  is the AKMW-chain coefficient-field bookkeeping, §6e machinery), the
+  tail closes for all rational carriers and the three-cycle gate
+  reduces to irrational centres.  Notes:
+  notes/2026-08-23-c925-fable-marked-block-birational-invariance.md
 
 The packet index owns the module-to-file map.  Do not append another large
 module to this card or to the index; add one focused companion file and one

@@ -277,7 +277,13 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   weak-Fano minimal conic bundle whose \(K\)-trivial \(\mathbf
   P^2\)-section contracts to the E5 germ — is constructed and is the
   queued (GS-carrier) test object:
-  `../2026-08-23-c925-fable-weak-fano-conic-bundle.md`.
+  `../2026-08-23-c925-fable-weak-fano-conic-bundle.md`.  Correction II:
+  that example has split cover (\(=\mathrm{Bl}_E(\mathbf
+  P^1\times\mathbf P^2)\), \(b_3=2\)), but the failure yields the
+  flagged candidate theorem that markedness is a birational invariant
+  of smooth threefolds (rational \(\Rightarrow\) marked-free), whose
+  red-team is now the highest-EV open item:
+  `../2026-08-23-c925-fable-marked-block-birational-invariance.md`.
 
 - **C924 — closed 2026-08-19.** The direct ordinary-QDM route proves
   irrationality of `X x P^1` after one mandatory local repair: compare the
