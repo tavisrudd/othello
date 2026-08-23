@@ -1,0 +1,12 @@
+part 1: ambient ring rank 9 = chi(P(E))
+part 2: twisted K-trivial shift identity FAILS at (a,b)=(1,0):
+        the non-convex twist is not GKZ along the K-trivial ray
+part 3: ambient shift identities verified on the grid a,b <= 2
+        (negative xi-degree region included); z->0 symbols:
+        R2 = xi^2(xi+3h) - w,  R1 = h^3 - x xi^6
+x = 1: dim 12; (xi+3h)-charpoly factor degrees [4, 8]; all simple: True
+x = -1: dim 12; (xi+3h)-charpoly factor degrees [4, 8]; all simple: True
+x = 2: dim 12; (xi+3h)-charpoly factor degrees [3, 9]; all simple: True
+x = 1/5: dim 12; (xi+3h)-charpoly factor degrees [12]; all simple: True
+part 4: the h ~ x^(1/3) three-cycle sheets of R1 = h^3 - x xi^6 are
+        read off the factor/simplicity profile above

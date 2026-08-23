@@ -56,12 +56,18 @@ of class (a)**, and structurally a Sarkisov-adjacent sibling of MM 2-24
 
 ## 3. Why this is the right test object
 
-1. It is a divisor in a smooth toric bundle, so the exact two-parameter
-   quantum-Lefschetz \(I\)-function machinery validated on MM 2-24 today
-   applies with weight data
-   \((y_0,y_1,y_2;s_0,s_1;s_2)\mapsto(h,h,h;\xi,\xi;\xi-3h)\) and
-   \(X\sim2\xi+3h\), \(2\xi+3h\) nef (degree \(3\) on the negative
-   section curves, \(2\) on fibre lines).
+1. It is a divisor in a smooth toric bundle with weight data
+   \((y_0,y_1,y_2;s_0,s_1;s_2)\mapsto(h,h,h;\xi,\xi;\xi+3h)\) and
+   \(X\sim2\xi+3h\).  **Correction (2026-08-23, same day):** the class
+   \(2\xi+3h\) is *not* nef — \(X\cdot\ell=-3\) on the lines of the
+   forced section \(P\) (necessarily: \(P\) is the base locus), so
+   convexity fails and the convex quantum-Lefschetz theorem does not
+   apply on the nose.  The computable exact object is the *non-convex*
+   twisted hypergeometric \(I\)-function (negative \(X\)-degrees
+   contribute numerator factors), whose \(z\to0\) spectrum is an ambient
+   probe of \(X\) rather than a certified computation of it; the failure
+   of convexity is localized exactly in the \(K\)-trivial
+   \(\ell\)-classes, i.e. in the direction treated as formal anyway.
 2. The genuinely new wrinkle: \(-K_X\cdot\ell=0\) means the small quantum
    product carries a **degree-zero Novikov series** in the
    \(\ell\)-direction (contributions from multiples of the flopping-type
@@ -74,6 +80,34 @@ of class (a)**, and structurally a Sarkisov-adjacent sibling of MM 2-24
    carry no abelian Prym.  A marked block here would falsify the
    \(b_3=0\) tail programme in its weakest open case; no marked block is
    strong evidence for (GS-carrier) beyond the Fano world.
+
+## 3b. First probe run (2026-08-23, same day)
+
+Certificate: `notes/cubic-threefolds-tasks/c925-fable-weak-fano-ambient-probe.py`
+(sha256 `7125a1c075fd9e839424c0c11484329f759a02eb708c19a77cdf030c2511e849`),
+output `c925-fable-weak-fano-ambient-probe-output.txt` (sha256
+`d4f2423da6305885caa2f49859f64455d315debb95a11d2bb2e9ba20601b5393`);
+replay `uv run --with sympy python3 <script>` (about a second).
+
+1. **The convexity obstruction is located and certified.**  The twisted
+   hypergeometric coefficients violate the naive GKZ shift identity in
+   the \(K\)-trivial direction already at class \(\ell\): the twist
+   factor's negative-degree convention (Euler class of \(-H^1\), no
+   \(m=0\) factor) breaks the product ratio exactly at twist-degree
+   crossings.  The twisted D-module is not GKZ along the \(K\)-trivial
+   ray — the precise technical form of the non-Fano difficulty.
+2. **The valid ambient probe is clean.**  The untwisted toric
+   \(\mathbf P(\mathcal O^2\oplus\mathcal O(-3))\) — which contains the
+   same \(\tfrac13(1,1,1)\)-contracting section — has verified shift
+   identities at all degrees, symbols
+   \(R_2=\xi^2(\xi+3h)-w\), \(R_1=h^3-x\,\xi^6\) with \(\deg x=0\), and
+   \(R_1\) exhibits the \(h\sim x^{1/3}\) sheets: a genuine three-cycle
+   under the \(K\)-trivial Novikov loop.  At \(w=1\) and
+   \(x\in\{1,-1,2,1/5\}\) the spectral scheme (dimension 12) has
+   **squarefree** Kähler-direction characteristic polynomial in every
+   case: the three-cycle sheets are simple, hence unmarked.  The
+   ambient model shows exactly the benign scenario — cyclically permuted
+   simple sheets, no \(J_2\), no exponent class to mark.
 
 ## 4. Residue table (corrected)
 
