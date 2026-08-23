@@ -292,9 +292,22 @@ which contributes dimension at least \(\ell-1\).  Total dimension at least
 that dimension.  The tensor form \(U_B\otimes L_i\) is the same one the task
 card already uses for the \(B\times F_1\) source test.
 
-For \(\ell=3\) this says the only 5-fold carrying a marked 3-cycle is
-\(B\times\mathbf P^2\) itself, which is exactly the \(m=2\) exclusion the card
-records as the open local gate, now with a reason rather than a case check.
+**The bound closes every \(m\) at once.**  Combine it with the prime reduction
+of Section 1.  Take \(m\) with \(\ell=m+1\) prime.  The ambient variety along
+the factorization has dimension \(m+3\), so a smooth blow-up centre has
+dimension at most \(m+1\).  A correction point sharing the source stabilizer
+must carry a marked \(\ell\)-cycle, which by the bound needs dimension at
+least \(\ell+2=m+3\).  Since \(m+1<m+3\), no admissible centre can carry it,
+and the source and target ledgers are separated.  The remaining \(m\) follow
+because rationality of \(B\times\mathbf P^m\) propagates upward, so the primes
+suffice.
+
+For \(m=2\) this is the exclusion of a correction three-cycle that the task
+card records as the open local gate: the only 5-fold carrying a marked
+3-cycle is \(B\times\mathbf P^2\) itself, and a centre in a 5-fold has
+dimension at most 3.  The same sentence, with \(\ell\) in place of 3, is the
+all-\(m\) statement; the argument is not specific to \(m=2\), so \(m=2\) and
+all-\(m\) now stand or fall together on the gap below.
 
 **Gap to close.**  Three steps are quoted rather than proved: that the
 boundary rotation order of the spectral cover equals the index of the limiting
