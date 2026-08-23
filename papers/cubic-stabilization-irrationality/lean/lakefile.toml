@@ -73,6 +73,7 @@ roots = [
   "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.R10AlbaneseParity",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.LoopOrbitArithmetic",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.QuantumNewtonSlope",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.GradingMultiplicityExclusion",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.PaperInterface",
 ]
 

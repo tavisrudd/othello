@@ -899,16 +899,44 @@ same disposes of every prime Fano threefold centre.  Taking \(b=c_1\) gives
 slope one on every edge, which is a one-line proof that the grading loop
 produces no rotation.
 
-**Residual gate.**  For a centre of Picard rank at least two the criterion is
-exact but yields no dimension bound: the order can be any divisor of
-\(c_1\cdot\gamma\), and nothing yet bounds \(c_1\cdot\gamma\) on the edge
-carrying the marked blocks.  Mori's cone theorem bounds \(c_1\cdot C\) on an
-extremal rational curve by \(\dim+1\), the curve-level analogue of
+**Grading-multiplicity exclusion.**  The Picard-rank-at-least-two case is
+closed for the grading type that actually matters, by a second and independent
+argument that uses no curve classes.  Block residues partition the spectrum of
+the grading operator \(\mu=(\deg-3)/2\), and a boundary monodromy that
+permutes blocks cyclically carries their residues into one another, so all
+blocks of one cyclic family share a grading pair; the grading values are
+rational and survive the semilinear field automorphism.  Distinct blocks
+occupy disjoint sub-multisets, so a family of length \(\ell\) consumes
+\(\ell\) copies of each value in that pair.  For a **connected** threefold the
+extreme values \(-3/2\) and \(3/2\) have multiplicity \(h^0=h^6=1\), so no
+family of length at least two can use them: the common pair lies in
+\(\{-1/2,1/2\}\) and the grading difference is zero or one.
+
+The cubic threefold's marked block has grading pair \((-3/2,\,1/2)\), of
+difference two: the audit script's residue diagonal is
+\((-19/18,\,1/18)=(-3/2+4/9,\,1/2-4/9)\), the modification being the traceless
+shift \(\pm4/9\) and \(\delta^\sharp=4/9\) the discriminant after it.
+Tensoring with a rank-one block shifts both values equally, so the source's
+marked blocks on \(B\times\mathbf P^m\) also have difference two.  Hence a
+connected threefold centre cannot carry a cyclic triple of the source's
+grading type at all.  The surviving configurations must reach
+\(\delta^\sharp=4/9\) from an underlying grading difference of zero or one,
+which is exactly what the native-order charts exclude once an occurrence
+calibration exists, and they force a large centre: difference one needs
+\(b_2\ge3\), difference zero needs \(b_2\ge6\).  Report:
+`../2026-08-23-c925-fable-grading-multiplicity-exclusion.md`; Lean:
+`Comparison.GradingMultiplicityExclusion`.
+
+**Residual gate.**  What is left on this route is a centre of Picard rank at
+least two whose cyclic triple has grading difference zero or one while still
+carrying \(\delta^\sharp=4/9\).  The Newton-slope criterion is exact there but
+yields no dimension bound, because nothing bounds \(c_1\cdot\gamma\) on the
+edge carrying the marked blocks: Mori's cone theorem bounds \(c_1\cdot C\) on
+an extremal rational curve by \(\dim+1\), the curve-level analogue of
 Kobayashi--Ochiai, but \(\gamma\) is a difference of effective classes and
-escapes it.  Closing that is the sole remaining obstacle on this route, and it
-is uniform in \(m\): with the prime reduction to \(\ell=m+1\), a marked
-\(\ell\)-cycle would need dimension \(\ell+2=m+3\) while a centre has
-dimension at most \(m+1\).
+escapes it.  This is the same configuration the parabolic-shear countermodel
+realizes as linear algebra, so the two routes now cover disjoint halves of the
+gate.
 
 Lean: `Comparison.QuantumNewtonSlope` and `Comparison.LoopOrbitArithmetic`,
 both build roots.  Reports:
