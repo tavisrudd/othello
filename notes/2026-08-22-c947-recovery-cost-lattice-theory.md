@@ -79,6 +79,17 @@ Its union of helpers is exactly the row support of \(X\).
 The value is basis-independent: changing the basis right-multiplies \(T_A\)
 and \(X\) by an invertible matrix and preserves row support.
 
+### Corollary 1.1 — scalar cost factors through the message-space demand
+
+If \(G_PA=G_PA'\), then
+\[
+ \rho_{P,A}(C)=\rho_{P,A'}(C).
+\]
+In particular, every demand subspace contained in \(\ker G_P\) has cost zero:
+its equations are supported entirely on \(P\). Thus the scalar cost remembers
+only the image demand \(U_A=G_PA\), while the full normalized lift functor can
+still remember the coefficient presentation and its helper-only gauge fibers.
+
 With \(\rho(0)=0\), the universal laws are
 \[
  A'\leq A\Longrightarrow\rho(A')\leq\rho(A)
@@ -334,6 +345,56 @@ coefficient fibers, union-helper filtration, and sharp concatenation
 confinement. This is a bounded-search conclusion, not a global novelty
 guarantee.
 
+## 9. TT verdict
+
+### Theorem hierarchy
+
+1. **Paper-bearing theorem remains C946, not C947.** Exact natural transfer of
+   the entire bounded demand-lifting diagram under the sharp confinement gate
+   is the genuinely structural theorem. C947 does not create a priority
+   challenge to the existing paper; it clarifies the best successor language.
+2. **Retain as the main C947 bridge:** Proposition 1 and Corollary 1.1. They
+   identify exactly which scalar information survives and which
+   coefficient-aware information lies above it. The proof is elementary
+   generator-matrix algebra, so this is high-utility packaging rather than a
+   stand-alone novelty claim.
+3. **Retain as sharp negative lemmas:** the two binary examples. They prevent
+   a false polymatroid program. Their value is diagnostic, not flagship.
+4. **Credit as inherited complexity:** Proposition 2 is a direct specialization
+   of classical coset-weight NP-completeness. The coding translation is exact,
+   but no new hardness technique should be claimed.
+5. **Use as conceptual compression:** Proposition 3 is standard Yoneda applied
+   in the correct slice category. The new paper-specific content would be the
+   bounded support filtration and its exact transfer, not representability
+   itself.
+6. **Quarantine as sequel mathematics:** Smith profiles are proved elementary
+   arithmetic observations; a module-valued confinement theorem, arithmetic
+   Tutte determination, or recovery sheaf is not proved.
+
+### Hypothesis audit
+
+- The counterexamples use \(G_P=I\), so no target-kernel degeneracy causes the
+  lattice failures.
+- The NP-completeness reduction is binary, uses a generator presentation
+  \(G=(b\mid M)\), and preserves the helper-weight threshold exactly.
+- Yoneda applies to the unfiltered lift functor at fixed \(H\); the bounded
+  support filtration is additional structure and is not itself claimed
+  representable.
+- The categorical transfer statement is asserted only under C946's stated
+  confinement hypothesis.
+- The arithmetic claims concern solvability for a fixed integral lift. They do
+  not claim that every finite-field represented code has a preferred or
+  characteristic-independent integral model.
+
+### Promotion decision
+
+Nothing in C947 should be inserted into the current paper merely to enlarge
+its scope. If a sequel is packaged now, lead with exact bounded transfer for
+all demand subspaces, use joint row support as the computational model, and
+place Yoneda in a short structural subsection. The arithmetic direction earns
+promotion only after one integral-seed experiment produces a nontrivial prime
+phase diagram.
+
 ## Mystery ledger
 
 ### Settled
@@ -341,6 +402,8 @@ guarantee.
 - Submodularity: false, by the binary seven-coordinate example.
 - Supermodularity: false, by the binary four-coordinate example.
 - Standard optimization object: finite-field minimum joint row support.
+- Scalar information loss: \(\rho_{P,A}\) factors through \(G_PA\), whereas
+  the full lift functor can retain coefficient-presentation data.
 - Generic exact complexity: NP-complete already for one binary demand.
 - Categorical completion: the Yoneda representable of the restricted-dual map.
 - Noninjective presentations: scalar cost depends only on their image, as in
