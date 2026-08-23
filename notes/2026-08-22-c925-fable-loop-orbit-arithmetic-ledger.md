@@ -309,6 +309,28 @@ dimension at most 3.  The same sentence, with \(\ell\) in place of 3, is the
 all-\(m\) statement; the argument is not specific to \(m=2\), so \(m=2\) and
 all-\(m\) now stand or fall together on the gap below.
 
+**Confirmation on the cubic itself.**  The identification can be tested where
+it matters most.  The marked block of the cubic threefold has characteristic
+polynomial \(\chi_K=T^2(T^2-108q)\) (audit of the direct-QDM proof,
+`../2026-08-19-c924-direct-qdm-proof-audit.md`), whose nonzero roots are
+\(\pm\sqrt{108q}\).  Their Puiseux exponent in \(q\) is \(1/2\), so the
+boundary monodromy of the marked sheets has ramification exactly 2 — and the
+Fano index of a cubic threefold is exactly 2.  The prediction "rotation order
+equals the index" is therefore verified on the one marked block the whole
+programme depends on.  Likewise \(B\times\mathbf P^m\): the projective factor
+contributes rotation order \(m+1\), giving the \((m+1)\)-cycle of marked
+blocks that is the source ledger's defining feature.
+
+**Borderline case, and why it still closes.**  The dimension count assumes the
+marked and the rotating structure sit on different tensor factors.  They can
+coincide only if one variety is both marked and of rotation order \(\ell\).
+For \(\ell=3\) and a threefold centre this needs index 3 in dimension 3, and
+Kobayashi–Ochiai says index equal to dimension forces a quadric.  The quadric
+threefold is already on record as unmarked: Pech–Rietsch's quantum Chevalley
+table gives \(H^4=4qH\), so \(Q^3\) carries rank-one semisimple sheets and not
+the rank-two marked atom (D12 of the no-Stokes dossier).  So even the
+borderline case is excluded, by classification rather than by the count.
+
 **Gap to close.**  Three steps are quoted rather than proved: that the
 boundary rotation order of the spectral cover equals the index of the limiting
 Fano (proved above only in the toric mirror picture, and only for the first
