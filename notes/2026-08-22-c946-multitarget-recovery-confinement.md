@@ -422,8 +422,10 @@ the two original helper unions.  In particular,
  \eta_P(I)=\min_{\dim A=1}\rho_{P,A}(I).
 \]
 
-Whether \(A\mapsto\rho_{P,A}\) satisfies a stronger submodular or
-polymatroid-type law is not settled here.
+C947 settles the stronger lattice-law question negatively:
+\(A\mapsto\rho_{P,A}\) is neither submodular nor supermodular, already for
+small binary represented codes.  Its exact optimization form is minimum joint
+row support for a multiple-right-hand-side linear system.
 
 Let \(I\leq\mathbb F_q^E\) be a represented inner code with message alphabet
 \(L\), let \(0\neq A\leq\mathbb F_q^P\) admit a normalized equation system,
@@ -878,9 +880,9 @@ universal exact concatenation-transfer statement across the whole diagram.
   functoriality is packaging, not a separate novelty claim.  Its costs are
   monotone and subadditive on sums, and the uniform threshold is controlled
   by the one-dimensional slices.
-- **Open structural degree of freedom:** it is unknown whether
-  \(A\mapsto\rho_{P,A}\) obeys a genuine submodular/polymatroid law or admits a
-  small counterexample.  This is a bounded successor question, not needed for
+- **Settled successor:** C947 gives small binary counterexamples to both
+  submodularity and supermodularity of \(A\mapsto\rho_{P,A}\), and identifies
+  the cost with finite-field minimum joint row support.  This does not affect
   the transfer theorem.
 - **Settled by TT:** the support layer is exactly the closure predicate
   \(P\subseteq\operatorname{cl}(H)\), and full-radius reliability is the

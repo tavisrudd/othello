@@ -93,13 +93,19 @@ Completed strengthening:
   review, and leaves a verified local public export; no push or deposit was
   made.
 
-Active sequel research:
+Sequel research:
 
 - [C946 multi-target recovery and exact confinement](../2026-08-22-c946-multitarget-recovery-confinement.md)
   derives the restricted-dual splitting object and tests a sharp eventual
   helper-union threshold reducing to the one-target theorem.  It is outside the
   frozen manuscript until its finite functional-cost theorem, generalized-
   weight boundary, literature comparison, and cold reads close.
+- [C947 recovery-cost lattice and theory audit](../2026-08-22-c947-recovery-cost-lattice-theory.md)
+  proves that the demand cost is finite-field minimum joint row support,
+  neither submodular nor supermodular and NP-complete already for one binary
+  demand; it packages all presented-demand lifts as a Yoneda representable and
+  bounds the arithmetic-matroid/Smith-normal-form sequel. It is math-only and
+  made no manuscript or formal-boundary change.
 
 ## Publication boundary
 
@@ -129,8 +135,9 @@ terminal.
 Before any nontrivial proof development or formalization for this paper, read the required
 paper-specific expert dossier
 [`papers/expert-profiles/05-complete-repair-ports.md`](../../papers/expert-profiles/05-complete-repair-ports.md).
-The proof and assembly sequence C672--C678 and the C944 terminology revision
-are complete.  Complete the user-prioritized C946 sequel derivation, then run
+The proof and assembly sequence C672--C678, the C944 terminology revision, and
+the C947 theory audit are complete. Complete the user-prioritized C946 sequel
+derivation, then run
 C325 to build the appendix-only finite verifier.  C679 then
 performs the aggregate formal/prose audits and independent
 draft-readiness cold reads.
