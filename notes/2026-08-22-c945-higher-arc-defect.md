@@ -155,9 +155,62 @@ Distinct maximal secants through `a in A` use disjoint `(s-1)`-subsets of
 `A-{a}`, so `d(a)<=D=floor((k-1)/(s-1))`.  Also `sum_a d(a)=st`, and
 linearity gives `t C(s,2)<=C(k,2)`.  Convexity of `C(d,2)` under the box and
 sum constraints gives the stated integer envelope by filling degrees to `D`
-one at a time.  This closes the exact one-variable coverage bound.  The
-remaining proof obligation is a fully explicit treatment of floors in the
-asymptotic corollary.
+one at a time.  This closes the exact one-variable coverage bound.
+
+### Fixed-degree asymptotics
+
+Fix `s`, `lambda`, and a hole family of size `O(q)`, and put `Q=sqrt(q)` and
+`alpha=sqrt(lambda s(s-1))`.  The first-moment part reduces the only
+nontrivial case to `k=alpha Q+beta` with bounded `beta`; if
+`k-alpha Q` is unbounded above, the claimed additive lower bound is automatic.
+
+Use the coarse bounds
+
+```
+P = k(k-1)/(s(s-1)),
+M = floor(k/s),
+C = 1+s(floor((k-1)/(s-1))-1).
+```
+
+For large `q`, the concave capacity function
+
+```
+f(t) = (M+lambda-1)t(q+1-s)/(lambda M)
+       - t(t-C)/(lambda M)
+```
+
+is increasing on `C <= t <= P`: its first term has derivative of order `q`,
+whereas `(2P-C)/(lambda M)` is only of order `sqrt(q)`.  Below `C` the
+second-moment subtraction is zero and the capacity is increasing.  Hence the
+universal capacity is at most `f(P)`.
+
+With floors absorbed in bounded terms,
+
+```
+P = lambda Q^2 + lambda(2beta-1)Q/alpha + O(1),
+M = alpha Q/s + O(1),
+C = s alpha Q/(s-1) + O(1).
+```
+
+Substitution gives
+
+```
+f(P) = Q^4 + (2beta-s-1)Q^3/alpha + O_{s,lambda}(Q^2).
+```
+
+The required locus has `Q^4+O(Q^2)` points when the holes have size `O(q)`.
+Therefore coverage forces
+
+```
+beta >= (s+1)/2 - O_{s,lambda}(1/Q),
+```
+
+which closes
+
+```
+k >= sqrt(lambda s(s-1)q) + (s+1)/2
+     - O_{s,lambda}(q^(-1/2)).
+```
 
 ## Exact parameter evidence
 
