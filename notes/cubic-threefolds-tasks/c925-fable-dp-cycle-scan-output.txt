@@ -1,0 +1,69 @@
+k=4 classes: (-1)=10 conic=5 line=5
+commutator norm L*,E1*: 1.3036134865857188e-13
+cycle types observed (count, first witness):
+  (1, 1, 1, 1, 1, 1, 1): 64 e.g. (-1, -1, -1, 1, -1)
+  (2, 2, 1, 1, 1): 81 e.g. (-1, -1, -1, 0, 0)
+  (3, 1, 1, 1, 1): 37 e.g. (-1, -1, -1, -1, -1)
+  (4, 1, 1, 1): 40 e.g. (-1, -1, -1, -1, 0)
+  unresolved: 20 e.g. (-1, -1, -1, -1, 1)
+prime cycles >=5: none
+k=5 classes: (-1)=16 conic=10 line=16
+commutator norm L*,E1*: 5.825253219024881e-11
+cycle types observed (count, first witness):
+  (1, 1, 1, 1, 1, 1, 1, 1): 200 e.g. (-1, -1, -1, -1, -1, 1)
+  (2, 2, 1, 1, 1, 1): 293 e.g. (-1, -1, -1, -1, 0, 0)
+  (3, 1, 1, 1, 1, 1): 93 e.g. (-1, -1, -1, -1, -1, -1)
+  (3, 2, 1, 1, 1): 3 e.g. (1, 1, -1, 0, 0, -1)
+  (4, 1, 1, 1, 1): 80 e.g. (-1, -1, -1, -1, -1, 0)
+  unresolved: 59 e.g. (-1, -1, -1, -1, 1, 0)
+prime cycles >=5: none
+k=5 box=1 seed=1 z0=[4/3, 2, 1, 9/8, 5/3, 9/2] classes=42
+cocharacters scanned: 728
+cycle lengths certified on resolved edges: [1, 2, 3]
+flagged (length >= 5, or unresolved repeated algebraic root): 340
+   ((-1, -1, -1, -1, -1, 0), 4, '1/2', 'repeated')
+   ((-1, -1, -1, -1, -1, 1), 8, '1', 'repeated')
+   ((-1, -1, -1, -1, 0, -1), 4, '1/2', 'repeated')
+   ((-1, -1, -1, -1, 0, 1), 7, '1', 'repeated')
+   ((-1, -1, -1, -1, 1, -1), 8, '1', 'repeated')
+   ((-1, -1, -1, -1, 1, 0), 7, '1', 'repeated')
+   ((-1, -1, -1, 0, -1, -1), 4, '1/2', 'repeated')
+   ((-1, -1, -1, 0, -1, 1), 7, '1', 'repeated')
+   ((-1, -1, -1, 0, 1, -1), 7, '1', 'repeated')
+   ((-1, -1, -1, 1, -1, -1), 8, '1', 'repeated')
+   ((-1, -1, -1, 1, -1, 0), 7, '1', 'repeated')
+   ((-1, -1, -1, 1, 0, -1), 7, '1', 'repeated')
+   ((-1, -1, 0, -1, -1, -1), 4, '1/2', 'repeated')
+   ((-1, -1, 0, -1, -1, 1), 7, '1', 'repeated')
+   ((-1, -1, 0, -1, 1, -1), 7, '1', 'repeated')
+   ((-1, -1, 0, 0, 0, 0), 8, '1', 'repeated')
+   ((-1, -1, 0, 0, 0, 1), 4, '3/2', 'repeated')
+   ((-1, -1, 0, 0, 1, 0), 4, '3/2', 'repeated')
+   ((-1, -1, 0, 0, 1, 1), 6, '2', 'repeated')
+   ((-1, -1, 0, 1, -1, -1), 7, '1', 'repeated')
+k=4 box=1 seed=1 z0=[4/3, 2, 1, 9/8, 5/3] classes=20
+cocharacters scanned: 242
+certified cycle-length upper bound per cocharacter (bound: how many cocharacters): {1: 61, 2: 84, 3: 37, 4: 60}
+cocharacters whose bound admits a cycle of length >= 5: 0
+cycle lengths certified on resolved edges: [1, 2, 3]
+flagged (length >= 5, or unresolved repeated algebraic root): 128
+   ((-1, -1, -1, -1, 0), 4, '1/2', 'repeated')
+   ((-1, -1, -1, -1, 1), 7, '1', 'repeated')
+   ((-1, -1, -1, 0, -1), 4, '1/2', 'repeated')
+   ((-1, -1, -1, 0, 1), 6, '1', 'repeated')
+   ((-1, -1, -1, 1, -1), 7, '1', 'repeated')
+   ((-1, -1, -1, 1, 0), 6, '1', 'repeated')
+   ((-1, -1, 0, -1, -1), 4, '1/2', 'repeated')
+   ((-1, -1, 0, -1, 1), 6, '1', 'repeated')
+   ((-1, -1, 0, 1, -1), 6, '1', 'repeated')
+   ((-1, -1, 0, 1, 1), 4, '3/2', 'repeated')
+   ((-1, -1, 1, -1, -1), 7, '1', 'repeated')
+   ((-1, -1, 1, -1, 0), 6, '1', 'repeated')
+   ((-1, -1, 1, 0, -1), 6, '1', 'repeated')
+   ((-1, -1, 1, 0, 1), 4, '3/2', 'repeated')
+   ((-1, -1, 1, 1, 0), 4, '3/2', 'repeated')
+   ((-1, -1, 1, 1, 1), 4, '2', 'repeated')
+   ((-1, 0, -1, -1, -1), 4, '1/2', 'repeated')
+   ((-1, 0, -1, -1, 1), 6, '1', 'repeated')
+   ((-1, 0, -1, 1, -1), 6, '1', 'repeated')
+   ((-1, 0, -1, 1, 1), 4, '3/2', 'repeated')
