@@ -206,6 +206,10 @@ realization of that orbit.
   tail closed via etale-at-a-point plus Hensel; general tail reduced to the
   pointwise converse-HMT statement (GS-carrier); irregular-Hodge lead
   logged: notes/2026-08-23-c925-fable-b3zero-tail-a2-reduction.md
+- (GS-carrier) discharged for all rank-one \(b_3=0\) Fanos
+  (\(\mathbf P^3\), \(Q^3\), \(V_5\), \(V_{22}\) all quantum-etale at the
+  canonical point); tail residue is now non-toric \(\rho\ge2\) Fanos plus
+  non-Fano carriers: notes/2026-08-23-c925-fable-gs-carrier-rank-one.md
 
 The packet index owns the module-to-file map.  Do not append another large
 module to this card or to the index; add one focused companion file and one

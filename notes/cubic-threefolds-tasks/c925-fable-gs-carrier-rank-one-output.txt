@@ -1,0 +1,5 @@
+P^3: regularized coefficients match CCGK; charpoly of c1* at q=1: (lam - 4)*(lam + 4)*(lam**2 + 16); squarefree -> semisimple, QH etale at the canonical point
+Q^3: regularized coefficients match CCGK; charpoly of c1* at q=1: lam*(lam**3 - 108); squarefree -> semisimple, QH etale at the canonical point
+V5: regularized coefficients match CCGK; charpoly of c1* at q=1: lam**4 - 44*lam**2 - 16; squarefree -> semisimple, QH etale at the canonical point
+V22: regularized coefficients match CCGK; charpoly of c1* at q=1: (lam + 4)*(lam**3 - 8*lam**2 - 56*lam - 76); squarefree -> semisimple, QH etale at the canonical point
+(GS-carrier) holds for every rank-one b3=0 Fano threefold
