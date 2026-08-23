@@ -80,6 +80,29 @@ feature to verify carefully: the `(lambda-1)S1/M` gain and the second-moment
 loss cancel at order `q^(3/2)` except for the same `s`-dependent residue as
 at `lambda=1`.
 
+## Equality archetypes
+
+The multiplicity theorem organizes several standard embedded designs by the
+two roots of the same quadratic.
+
+- A maximal arc of degree `s` has `k=(s-1)q+s`, line characters `0,s`,
+  and every external point lies on `k/s=M` `s`-secants.  It is an upper-root
+  equality family.
+- A unital in a plane of order `q^2` has `k=q^3+1`, `s=q+1`, and line
+  characters `1,s`.  Counting its points over the `q^2+1` lines through an
+  external point gives exactly `q^2-q` `s`-secants.  Since
+  `floor(k/s)=q^2-q+1`, it is a lower-root equality family for
+  `lambda=q^2-q`.
+- A Baer subplane of order `q` in a plane of order `q^2` has
+  `k=q^2+q+1`, `s=q+1`, and line characters `1,s`.  The same pencil count
+  gives exactly one `s`-secant through every external point, the lower-root
+  equality family for `lambda=1`.
+
+Thus the proposed theorem does more than repackage completeness: it places
+ordinary complete arcs, maximal arcs, unitals, and subplanes in one
+maximal-secant concurrency framework.  This is the current positive answer to
+the structural/notability gate, subject to precedence checking.
+
 ## Candidate new numerical consequence
 
 Put
