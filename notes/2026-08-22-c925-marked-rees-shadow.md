@@ -125,9 +125,13 @@ ladder that appears elsewhere in the programme.
 5. A Bruhat reduction to the finite monomial coweight domain, followed by the
    two checked native-order charts, would close the \(m=2\) correction theorem.
    The eight-position monomial domain now has only two divisor-generating
-   classes modulo the Kummer involution.  What remains open is the theorem
-   placing every actual effective calibration in that domain, together with
-   the occurrence-to-port construction.
+   classes modulo the Kummer involution.  Lean now strengthens this from the
+   monomial basepoints to their complete displayed effective unipotent cells:
+   none of the four other Weyl positions can satisfy the cubic
+   branch-separation fingerprint after arbitrary left and right unipotent
+   factors.  What remains open is the theorem placing every actual effective
+   calibration in this bounded affine-Bruhat domain, together with the
+   occurrence-to-port construction.
 
 ### Second-order predictions
 
@@ -466,8 +470,20 @@ marked-divisor source, special binary cubic, and hard-Lefschetz determinant.
 Lean's `UnitFixedWeylCoweightCertificate` reconstructs the permutations and
 coweights without `native_decide`, proves that position `7` is the Laurent
 Kummer algebra involution, identifies the four divisor-generating positions,
-and proves that their quotient has the two representatives `0` and `2`.  The
-checker passed guarded run `20260823-035813-30fdfdce`; the checker,
+and proves that their quotient has the two representatives `0` and `2`.
+It now also pulls the target divisor through an arbitrary effective left
+unipotent, one of the eight monomial positions, and an arbitrary effective
+right unipotent.  The reduced coefficients are \((1,0)\) on positions
+\(0,2\), \((f,1)\) on positions \(6,7\), and \((0,0)\) on the other four.
+Consequently the algebraic cubic branch-separation fingerprint
+\(\alpha^3\ne\beta^3\) forces one of the same four positions; the wrong cells
+cannot be repaired by unipotent parameters.  Identifying this fingerprint
+with the geometric divisor-eigenbranch occurrence remains external.  The
+base checker passed guarded run `20260823-035813-30fdfdce`; its strengthened
+cellwise elaboration passed guarded run `20260822-220041`.  The checker,
+`PaperInterface`, and `Verification.AxiomAudit` passed queued run
+`20260823-050130-8c76b21b`; the six new terminals use only `propext`,
+`Classical.choice`, and `Quot.sound`.
 `PaperInterface`, and `Verification.AxiomAudit` passed aggregate run
 `20260823-040632-7b2c8767`.  The ten audited terminals use only `propext`,
 `Classical.choice`, and `Quot.sound`.  Replay with
@@ -481,12 +497,20 @@ is green.  The exact artifact hashes are:
 - generated Lean:
   `2e9a7d7ebe9fced051c3c51a5f2f201fb07bc3b19ecb29d761a7116ee60e7906`.
 
-This quotient is exhaustive only for the eight displayed monomial Weyl
-positions.  It does not prove the external Bruhat statement that every
-effective marked calibration admits one of them.  In particular the zero
-special binary cubic at the single-reversal monomial basepoint does not rule
-out the whole affine coweight cell: the already-certified distinct-root chart
-has nontrivial unipotent parameters and must be treated separately.
+This quotient and the branch-separation exclusion are exhaustive only for the
+eight displayed monomial Weyl positions and their displayed effective
+unipotent cells.  They do not prove the external affine-Bruhat statement that
+every effective marked calibration belongs to this bounded union.  Pappas and
+Rapoport, *Twisted loop groups and their affine flag varieties*, Advances in
+Mathematics 219 (2008), Proposition 8.1, identify Iwahori and parahoric double
+cosets with Iwahori--Weyl double cosets.  That theorem supplies the correct
+relative-position index once a calibration is placed in the loop group, but
+the Iwahori--Weyl set contains the full coweight lattice.  It neither bounds
+the relative position to these eight cells nor constructs the integral QDM
+occurrence.  In particular the zero special binary cubic at the
+single-reversal monomial basepoint does not rule out the whole affine
+coweight cell: the already-certified distinct-root chart has nontrivial
+unipotent parameters and must be treated separately.
 
 The finite domain must remain explicit: rank six, one primitive cubic Kummer
 ray, cohomological weights \((0,1,1,2,2,3)\), the displayed effective
@@ -522,9 +546,11 @@ matrix change of basis.
 For one exact-\(4/9\) marked correction occurrence over the actual product-loop
 trait, construct a rank-six self-dual unital Rees lattice whose generic fibre is
 the marked cubic primary union, identify its coweight orbit and first connection
-jet, prove a monomial Bruhat representative exists, and prove that the Iritani
-occurrence map preserves this pair.  The finite certificate would then exclude
-every admissible pair.
+jet, prove its affine-Bruhat relative position lies in the certified bounded
+union of eight cells, and prove that the Iritani occurrence map preserves this
+pair.  The finite certificate would then exclude every admissible pair.  No
+choice of effective unipotent factors inside those cells is an additional
+source obligation.
 
 This is strictly smaller than transporting every primitive factor, every row,
 or a full Stokes object.  It is larger than a bare finite-etale packet for the
@@ -534,10 +560,11 @@ lattice vertex, and associated grading forgets the extension class.
 ## EJ and TT gate for the discrete certificate
 
 **EJ:** green as an exhaustive quotient of the eight explicitly typed
-unit/top-fixed monomial Weyl positions; red as a theorem that an arbitrary
-geometric calibration belongs to that domain.  The certificate reduces a
-finite ambiguity but does not discharge the integral Bruhat/native-descent
-adapter.
+unit/top-fixed monomial Weyl positions and as a cellwise exclusion after all
+displayed effective unipotent factors; red as a theorem that an arbitrary
+geometric calibration belongs to that bounded domain.  The certificate
+reduces a finite ambiguity but does not discharge the integral
+Bruhat/native-descent adapter.
 
 **TT:** four mutations keep the boundary sharp.
 
@@ -561,7 +588,8 @@ adapter.
 | settled | Correct input-index transport removes the dangerous shear in the effective coweight-zero dual-number chart. | Exact Rust elimination gives one conformal parameter; Lean checks the complete recurrence and discriminant zero for every parameter, and separately rejects output-only transport. |
 | settled | The complete effective distinct-root chart cannot carry the marked elementary modification. | Rust emits the exact first gauge; Lean proves conformality and the parameter-independent lower-left leakage \(1/6\). |
 | settled in the finite monomial domain | Raw coweight is over-refined: the divisor-generating positions have two classes modulo the Kummer involution. | Rust enumerates all eight unit/top-fixed self-dual monomial positions; Lean proves positions \(\{0,2,6,7\}\) are exactly the divisor-generating ones and pairs \(0\sim7\), \(2\sim6\). |
+| settled in the displayed affine cells | Effective unipotent factors might rescue a non-generating Weyl position. | Lean computes the complete divisor pullback on every cell and proves the branch-separation fingerprint still forces positions \(\{0,2,6,7\}\). |
 | proposed | Coweight orbit plus first marked connection jet is the minimally enriched shadow needed by the strict recurrence. | It separates the two known modes of information loss and closes both normalized native-order charts; the external Bruhat reduction is not proved. |
-| open | Every native effective marked calibration has a unit/top-fixed monomial Bruhat representative in the certified domain. | Current Iritani/KKPYY comparisons are Laurent-generic and do not produce an integral relative-position reduction. |
+| open | Every native effective marked calibration has affine-Bruhat relative position in the certified bounded union. | Pappas--Rapoport Proposition 8.1 supplies Iwahori--Weyl indexing, but the affine coweight set is infinite; current Iritani/KKPYY comparisons do not produce an integral occurrence or the required bound. |
 | partial | Every admissible marked Rees port excludes \(4/9\). | The dual-number chart gives discriminant \(0\); the distinct-root chart fails leading-line regularity. These are the two certified quotient representatives, conditional on the missing Bruhat/occurrence adapter. |
 | open | The actual Iritani correction occurrence carries and preserves the marked Rees port. | Current comparison theorems are Laurent/generic and do not supply integral occurrence transport. |

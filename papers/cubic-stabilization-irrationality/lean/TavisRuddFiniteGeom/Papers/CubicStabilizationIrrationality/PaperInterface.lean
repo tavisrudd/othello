@@ -248,9 +248,13 @@ positions, reconstructs their permutations and coweights, and verifies the
 special binary-cubic and Lefschetz data.  Exactly four positions carry a
 marked divisor that generates the reduced cubic quotient.  Right composition
 by the Laurent Kummer involution pairs them into two classes, represented by
-the coweight-zero and single-reversal positions.  The certificate does not
-assert the external Bruhat-reduction statement that every geometric effective
-calibration has one of these monomial relative positions.
+the coweight-zero and single-reversal positions.  A cellwise calculation also
+shows that arbitrary effective unipotent factors on either side cannot make
+one of the four other positions satisfy the cubic branch-separation
+fingerprint.  The certificate does not assert the external Bruhat-reduction
+statement that every geometric effective calibration has one of these
+monomial relative positions, nor identify that algebraic fingerprint with a
+geometric divisor-eigenbranch occurrence.
 `ProjectiveSpaceQuantumPolynomial` proves that the standard relation
 `X^(m+4) - q` is separable in characteristic zero for nonzero `q`. This
 kernel-checks the target's no-repeated-root algebra once its small-quantum

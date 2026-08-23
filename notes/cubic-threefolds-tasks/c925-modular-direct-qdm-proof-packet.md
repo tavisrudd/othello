@@ -59,8 +59,11 @@ Rust/Lean certificate enumerates the eight unit/top-fixed self-dual monomial
 Weyl positions.  Exactly four have a divisor generating the reduced cubic
 quotient, and the Laurent Kummer involution pairs them into the two classes
 represented by the already-checked zero and single-reversal charts.  This
-closes the discrete monomial quotient, not the external Bruhat theorem that
-every geometric effective calibration has such a representative.  That
+closes the discrete monomial quotient.  A cellwise Lean calculation now also
+shows that arbitrary effective unipotent factors on either side cannot make
+one of the other four positions satisfy the cubic branch-separation
+fingerprint.  It does not prove the external affine-Bruhat theorem that every
+geometric effective calibration lies in this bounded union.  That
 Bruhat/native-descent statement and the occurrence-to-port theorem remain.
 The unconditional every-smooth theorem is not landed.  Independently, Voisin
 plus the 2025 Engel--de Gaay Fortman--Schreieder parity theorem gives an
@@ -785,9 +788,15 @@ The live frontier is source-side, not another linear consumer.
    `UnitFixedWeylCoweightCertificate` then closes the discrete monomial layer:
    it checks all eight unit/top-fixed self-dual positions, proves that exactly
    four are divisor-generating, and quotients them to the two checked classes
-   by the certified Kummer involution.  The next task is no longer another
-   monomial coweight chart; it is the external Bruhat/native-descent theorem
-   placing every actual calibration in this finite domain.  The
+   by the certified Kummer involution.  Its strengthened cellwise theorem
+   pulls the marked divisor through arbitrary displayed effective unipotents
+   on both sides and proves that the cubic branch-separation fingerprint still
+   forces those same four positions.  The next task is no longer another
+   unipotent chart inside these cells; it is the external
+   Bruhat/native-descent theorem placing every actual calibration in this
+   bounded affine domain.  Standard affine-Bruhat theory indexes the possible
+   cells by an infinite Iwahori--Weyl/coweight set and supplies no such bound.
+   The
    occurrence-to-port theorem remains external after every finite chart.
 
 2. **What Lean separates.**  The nonsplit outer-return theorem proves that
@@ -807,10 +816,16 @@ The live frontier is source-side, not another linear consumer.
    `BinaryCubicOrderResidues.no_classicalOrderModel_carriesCubicMarker`
    checks the final two-case finite exclusion after a normalized native
    calibration has been supplied; it does not construct that calibration.
-   The generated rank-six certificate independently checks the two strict
-   companion orientations and proves calibration invariance.  It does not
-   classify effective orders or prove that a geometric occurrence has the
-   required calibration.
+The generated rank-six certificate independently checks the two strict
+companion orientations and proves calibration invariance.  It does not
+classify effective orders or prove that a geometric occurrence has the
+required calibration.
+
+The strengthened unit-fixed Weyl-cell checker, `PaperInterface`, and
+`Verification.AxiomAudit` passed queued run
+`20260823-050130-8c76b21b`.  The six cellwise correspondence and
+branch-separation terminals use only `propext`, `Classical.choice`, and
+`Quot.sound`; no `native_decide` or external oracle enters their proofs.
 
 3. **All-\(m\) remainder.**  Before the strict equality case, the candidate
    center dimensions at \(n=2,3,4,5,14\) are respectively

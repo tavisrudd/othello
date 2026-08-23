@@ -616,15 +616,20 @@ hard-Lefschetz determinant.  It also checks directly that position `7` is the
 Laurent Kummer algebra involution.  Of the eight positions, exactly four have
 a marked divisor generating the reduced cubic quotient; modulo right
 composition by that involution they form the two classes represented by
-positions `0` and `2`.  Run
+positions `0` and `2`.  Lean further computes the complete divisor pullback
+after arbitrary effective unipotent factors on both sides.  None of the four
+other Weyl cells can then satisfy the cubic branch-separation discriminant
+fingerprint; on positions `6` and `7` the fingerprint is exactly `f^3 != 1`
+for the one surviving right-unipotent parameter.  Run
 
     nix run .#verify-unit-fixed-weyl-coweights
 
 to verify the tracked digests and compare the Rust JSON and generated Lean
 data byte for byte.  The certificate is exhaustive for these eight monomial
-positions.  A separate geometric or algebraic-group theorem is still required
-to place every effective marked calibration in this finite relative-position
-domain.
+positions and their displayed effective unipotent cells.  A separate
+geometric or algebraic-group theorem is still required to place every
+effective marked calibration in this finite relative-position domain and to
+identify its divisor-eigenbranch separation with the checked fingerprint.
 
 The algebraic model has a compact sufficient constructor. If the combined
 crossed and moving map `(B,D)` admits a linear retraction, an explicit incoming

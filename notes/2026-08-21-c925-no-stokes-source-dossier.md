@@ -2087,6 +2087,41 @@ Source ledger for this gate:
 No journal publication was found for the five cited arXiv versions in the
 bounded source check on 2026-08-22.
 
+## D15. Affine Bruhat indexing does not supply the finite bound
+
+**SOURCE.**  Pappas--Rapoport, *Twisted loop groups and their affine flag
+varieties*, Advances in Mathematics 219 (2008), 118--198,
+doi:10.1016/j.aim.2008.04.006, Proposition 8.1, proves
+\[
+ B_0\backslash G(K)/B_0\cong\widetilde W
+ \quad\text{and}\quad
+ P\backslash G(K)/P\cong
+ \widetilde W_P\backslash\widetilde W/\widetilde W_P,
+\]
+where \(\widetilde W=N(K)/T(K)_1\) is the Iwahori--Weyl group.  Its equation
+(8.1) exhibits \(\widetilde W\) as an extension of the relative Weyl group by
+the inertia-coinvariant coweight lattice.
+
+**DERIVED.**  Once an integral marked calibration is realized as a point of
+the relevant loop group with fixed parahoric endpoints, its relative position
+has a canonical affine-Weyl double-coset label.  This is the correct
+structural replacement for an ad hoc monomial-factorization assertion.
+
+**NOT PROVIDED.**  The double-coset set is infinite in the coweight direction.
+Proposition 8.1 neither proves that a QDM occurrence extends to the required
+integral loop-group point nor bounds its relative position to the eight
+unit/top-fixed cells checked by `UnitFixedWeylCoweightCertificate`.  It also
+does not identify the checked algebraic branch-separation fingerprint with
+the actual divisor eigenbranches.
+
+**OPEN/DISPOSITION.**  Prove a bounded-Schubert theorem for the native marked
+Rees port: effectivity, the unit/top normalization, the marked divisor, and
+the first connection jet must force the affine relative position into the
+certified eight-cell union.  Lean already proves that arbitrary displayed
+effective unipotent factors inside those cells cannot rescue a wrong Weyl
+position.  The remaining statement is therefore a coweight bound plus
+occurrence descent, not another cellwise elimination.
+
 ## Current source verdict
 
 1. **The row/projector architecture is closed in the no-Stokes regime.**

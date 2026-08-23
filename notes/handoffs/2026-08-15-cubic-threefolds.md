@@ -211,10 +211,14 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   certificate now exhausts the discrete unit/top-fixed monomial Weyl layer:
   four of eight positions are divisor-generating, and the Laurent Kummer
   involution pairs them into the two already-checked zero and single-reversal
-  classes.  This does not prove the load-bearing external statement that every
-  geometric effective calibration has such a monomial Bruhat representative.
-  That Bruhat/native-descent theorem and construction of the geometric marked
-  Rees port remain.
+  classes.  Lean now checks the complete divisor pullback after arbitrary
+  displayed effective unipotent factors on both sides: none of the four other
+  Weyl cells can satisfy the cubic branch-separation fingerprint.  This does
+  not prove the load-bearing external statement that every geometric
+  effective calibration lies in this bounded affine-Bruhat union.
+  Pappas--Rapoport's affine-Bruhat theorem supplies Iwahori--Weyl indexing but
+  no finite coweight bound.  That Bruhat/native-descent theorem and
+  construction of the geometric marked Rees port remain.
 
   **Closed lanes:** the common \(\epsilon M\)-row/stable-projector
   composite, raw and normalized degree-zero augmentation, ordinary

@@ -1,4 +1,5 @@
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.Generated.UnitFixedWeylCoweightData
+import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.EffectiveReesCalibrationCertificate
 
 /-!
 # Unit-fixed Weyl-position certificate
@@ -17,7 +18,9 @@ parameters.  Lean checks its permutations, sorted coweights, inverse images
 of the marked divisor, special binary cubics, and hard-Lefschetz determinants.
 Among positions where the marked divisor generates the reduced cubic quotient,
 right composition by the Kummer algebra involution leaves exactly two classes,
-represented by positions `0` and `2`.
+represented by positions `0` and `2`.  The calculation is cellwise: arbitrary
+effective unipotent factors on both sides cannot make any of the other four
+positions satisfy the cubic branch-separation discriminant fingerprint.
 
 This is an exhaustive certificate for the displayed eight-position domain.
 It does not prove that every effective self-dual calibration admits such a
@@ -28,9 +31,12 @@ supplies an integral marked calibration.
 namespace TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.UnitFixedWeylCoweightCertificate
 
 open Generated.UnitFixedWeylCoweightData
+open EffectiveReesCalibrationCertificate
 
 abbrev Position := Generated.UnitFixedWeylCoweightData.Position
 abbrev Index := Generated.UnitFixedWeylCoweightData.Index
+
+set_option maxHeartbeats 1600000
 
 /-- Cohomological weights of `(1,e,x,xe,x^2,x^2e)`. -/
 def cohomologicalWeight : Index → ℤ := ![0, 1, 1, 2, 2, 3]
@@ -203,6 +209,157 @@ theorem generating_positions (p : Position) :
   fin_cases p <;>
     simp [DivisorGeneratesCubicQuotient, basisEPower, basisXPower,
       inversePermutation]
+
+/-- Source index of the target divisor under a monomial Weyl position.  This
+reducible table isolates the only generated datum needed by the cellwise
+calculation. -/
+def divisorSourceIndex (p : Position) : Index :=
+  match p.val with
+  | 0 | 2 => 2
+  | 1 | 3 => 3
+  | 4 | 5 => 1
+  | 6 | 7 => 4
+  | _ => 0
+
+/-- The reducible source-index table agrees with the inverse permutation in
+the generated certificate. -/
+theorem divisorSourceIndex_correspondence (p : Position) :
+    divisorSourceIndex p = inversePermutation p 2 := by
+  fin_cases p <;>
+    decide
+
+/-- Sparse form of the monomially pulled-back target divisor: a unit shift
+plus the basis vector mapping to target index `2`. -/
+def monomialDivisorSource
+    (p : Position) (leftUnitShift : ℚ) (i : Index) : ℚ :=
+  (match p.val with
+    | 0 | 2 => ![-leftUnitShift, 0, 1, 0, 0, 0]
+    | 1 | 3 => ![-leftUnitShift, 0, 0, 1, 0, 0]
+    | 4 | 5 => ![-leftUnitShift, 1, 0, 0, 0, 0]
+    | 6 | 7 => ![-leftUnitShift, 0, 0, 0, 1, 0]
+    | _ => ![-leftUnitShift, 0, 0, 0, 0, 0]) i
+
+/-- The direct sparse table is the unit shift plus the basis vector selected
+by the generated inverse permutation. -/
+theorem monomialDivisorSource_correspondence
+    (p : Position) (leftUnitShift : ℚ) (i : Index) :
+    monomialDivisorSource p leftUnitShift i =
+      if i.val = 0 then -leftUnitShift
+      else if i.val = (inversePermutation p 2).val then 1
+      else 0 := by
+  rw [← divisorSourceIndex_correspondence p]
+  fin_cases p <;> fin_cases i <;>
+    norm_num [monomialDivisorSource, divisorSourceIndex]
+
+/-- Source coordinates of the target divisor after a left effective
+unipotent calibration, a monomial Weyl position, and a right effective
+unipotent calibration.  Only the left unit-shift parameter and the five right
+parameters can enter. -/
+def bruhatDivisorSource
+    (p : Position) (leftUnitShift : ℚ) (a b c d f : ℚ) : Index → ℚ :=
+  (generalCalibrationInverse a b c d f).mulVec
+    (monomialDivisorSource p leftUnitShift)
+
+/-- Normal form of the full divisor pullback on each monomial cell. -/
+def bruhatDivisorSourceNormalForm
+    (p : Position) (leftUnitShift : ℚ) (a b c d f : ℚ) (i : Index) : ℚ :=
+  match p.val, i.val with
+  | 0, 0 | 2, 0 => -leftUnitShift - b
+  | 0, 2 | 2, 2 => 1
+  | 1, 0 | 3, 0 => -leftUnitShift - c + f * a
+  | 1, 1 | 3, 1 => -f
+  | 1, 3 | 3, 3 => 1
+  | 4, 0 | 5, 0 => -leftUnitShift - a
+  | 4, 1 | 5, 1 => 1
+  | 6, 0 | 7, 0 => -leftUnitShift - d - f * b
+  | 6, 2 | 7, 2 => f
+  | 6, 4 | 7, 4 => 1
+  | _, _ => 0
+
+/-- The effective right-unipotent inverse sends every sparse monomial divisor
+to the displayed full normal form. -/
+theorem bruhatDivisorSource_formula
+    (p : Position) (leftUnitShift : ℚ) (a b c d f : ℚ) :
+    bruhatDivisorSource p leftUnitShift a b c d f =
+      bruhatDivisorSourceNormalForm p leftUnitShift a b c d f := by
+  ext i
+  fin_cases p <;> fin_cases i <;>
+    norm_num [bruhatDivisorSource, bruhatDivisorSourceNormalForm,
+      monomialDivisorSource, generalCalibrationInverse,
+      Matrix.mulVec, dotProduct, Fin.sum_univ_succ]
+  all_goals ring
+
+/-- Coefficients of `x` and `x^2` in the reduced cubic quotient of the source
+divisor. -/
+def bruhatReducedDivisor (p : Position) (_leftUnitShift : ℚ)
+    (_a _b _c _d f : ℚ) : Fin 2 → ℚ :=
+  match p.val with
+  | 0 | 2 => ![1, 0]
+  | 6 | 7 => ![f, 1]
+  | _ => ![0, 0]
+
+/-- The two displayed reduced coefficients are exactly coordinates `2` and
+`4` of the full right-unipotent pullback. -/
+theorem bruhatReducedDivisor_eq_sourceCoordinates
+    (p : Position) (leftUnitShift : ℚ) (a b c d f : ℚ) :
+    bruhatReducedDivisor p leftUnitShift a b c d f =
+      ![bruhatDivisorSource p leftUnitShift a b c d f 2,
+        bruhatDivisorSource p leftUnitShift a b c d f 4] := by
+  rw [bruhatDivisorSource_formula]
+  ext i
+  fin_cases p <;> fin_cases i <;>
+    norm_num [bruhatReducedDivisor, bruhatDivisorSourceNormalForm]
+
+/-- The reduced divisor is constant on the four non-generating cells.  On
+the reference cells it is `x`; on their Kummer translates it is `f*x+x^2`.
+Thus the left unipotent and four of the five right-unipotent parameters are
+irrelevant to divisor generation. -/
+theorem bruhatReducedDivisor_formula
+    (p : Position) (leftUnitShift : ℚ) (a b c d f : ℚ) :
+    bruhatReducedDivisor p leftUnitShift a b c d f =
+      match p.val with
+      | 0 | 2 => ![1, 0]
+      | 6 | 7 => ![f, 1]
+      | _ => ![0, 0] := by
+  rfl
+
+/-- Discriminant fingerprint for a reduced divisor `alpha*x+beta*x^2` on the
+split cubic quotient.  Identifying this predicate with separation of the
+geometric divisor eigenbranches is an external occurrence hypothesis. -/
+def CubicBranchSeparationFingerprint (coefficients : Fin 2 → ℚ) : Prop :=
+  coefficients 0 ^ 3 ≠ coefficients 1 ^ 3
+
+/-- No point of any of the four non-generating monomial Bruhat cells can
+separate the cubic quotient, even after arbitrary effective unipotent factors
+on both sides. -/
+theorem cubicBranchSeparationFingerprint_forces_generating_position
+    (p : Position) (leftUnitShift : ℚ) (a b c d f : ℚ)
+    (separates : CubicBranchSeparationFingerprint
+      (bruhatReducedDivisor p leftUnitShift a b c d f)) :
+    p = 0 ∨ p = 2 ∨ p = 6 ∨ p = 7 := by
+  fin_cases p <;>
+    simp [CubicBranchSeparationFingerprint, bruhatReducedDivisor] at separates ⊢
+
+/-- On the two reference cells the divisor always separates the cubic
+branches; on the two Kummer-translated cells separation is exactly
+`f^3 != 1`. -/
+theorem cubicBranchSeparationFingerprint_on_generating_positions
+    (leftUnitShift : ℚ) (a b c d f : ℚ) :
+    CubicBranchSeparationFingerprint
+        (bruhatReducedDivisor 0 leftUnitShift a b c d f) ∧
+      CubicBranchSeparationFingerprint
+        (bruhatReducedDivisor 2 leftUnitShift a b c d f) ∧
+      (CubicBranchSeparationFingerprint
+          (bruhatReducedDivisor 6 leftUnitShift a b c d f) ↔ f ^ 3 ≠ 1) ∧
+      (CubicBranchSeparationFingerprint
+          (bruhatReducedDivisor 7 leftUnitShift a b c d f) ↔ f ^ 3 ≠ 1) := by
+  constructor
+  · simp [CubicBranchSeparationFingerprint, bruhatReducedDivisor]
+  constructor
+  · simp [CubicBranchSeparationFingerprint, bruhatReducedDivisor]
+  constructor
+  · simp [CubicBranchSeparationFingerprint, bruhatReducedDivisor]
+  · simp [CubicBranchSeparationFingerprint, bruhatReducedDivisor]
 
 /-- Every divisor-generating position belongs, modulo the Kummer involution,
 to the reference class `0` or the single-reversal class `2`. -/
