@@ -1,0 +1,24 @@
+== cubic threefold (expect exponents -1/6, -5/6, delta 4/9)
+  eigenvalue -6: dim 1 (not a J2 block)
+  eigenvalue 0: J2 block, residue exponents [-1/6, -5/6], charpoly (6*lam + 1)*(6*lam + 5)/36, delta^sharp 4/9
+  eigenvalue 6: dim 1 (not a J2 block)
+== P^2 x C_2 (blocks at x = 1 with q = 1)
+  eigenvalue 3: J2 block, residue exponents [-1/2], charpoly (2*lam + 1)**2/4, delta^sharp 0
+  eigenvalue -3/2 - 3*sqrt(3)*I/2: J2 block, residue exponents [-1/2], charpoly (2*lam + 1)**2/4, delta^sharp 0
+  eigenvalue -3/2 + 3*sqrt(3)*I/2: J2 block, residue exponents [-1/2], charpoly (2*lam + 1)**2/4, delta^sharp 0
+== P^2 x C_3 (blocks at x = 1 with q = 1)
+  eigenvalue 3: J2 block, residue exponents [-1/2], charpoly (2*lam + 1)**2/4, delta^sharp 0
+  eigenvalue -3/2 - 3*sqrt(3)*I/2: J2 block, residue exponents [-1/2], charpoly (2*lam + 1)**2/4, delta^sharp 0
+  eigenvalue -3/2 + 3*sqrt(3)*I/2: J2 block, residue exponents [-1/2], charpoly (2*lam + 1)**2/4, delta^sharp 0
+== P(E) over C_2, deg E = 1
+  eigenvalue 3: J2 block, residue exponents [-1/2], charpoly (2*lam + 1)**2/4, delta^sharp 0
+  eigenvalue -3/2 - 3*sqrt(3)*I/2: J2 block, residue exponents [-1/2], charpoly (2*lam + 1)**2/4, delta^sharp 0
+  eigenvalue -3/2 + 3*sqrt(3)*I/2: J2 block, residue exponents [-1/2], charpoly (2*lam + 1)**2/4, delta^sharp 0
+== P(E) over C_3, deg E = 5
+  eigenvalue 3: J2 block, residue exponents [-1/2], charpoly (2*lam + 1)**2/4, delta^sharp 0
+  eigenvalue -3/2 - 3*sqrt(3)*I/2: J2 block, residue exponents [-1/2], charpoly (2*lam + 1)**2/4, delta^sharp 0
+  eigenvalue -3/2 + 3*sqrt(3)*I/2: J2 block, residue exponents [-1/2], charpoly (2*lam + 1)**2/4, delta^sharp 0
+== curve summand C_0 (blow-up centre block)
+  eigenvalue 0: J2 block, residue exponents [-1/2], charpoly (2*lam + 1)**2/4, delta^sharp 0
+== curve summand C_2 (blow-up centre block)
+  eigenvalue 0: J2 block, residue exponents [-1/2], charpoly (2*lam + 1)**2/4, delta^sharp 0

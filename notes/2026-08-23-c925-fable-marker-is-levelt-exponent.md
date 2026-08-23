@@ -128,7 +128,39 @@ confluence rule, now with a precise prediction for each row.
   data.  This is the one place a genuinely new input (the Stokes/Euler
   dictionary or a direct computation on \(Z\)) is still needed.
 
-## 6. Next
+## 6. Exponent-class tool and first data
+
+`notes/cubic-threefolds-tasks/c925-fable-levelt-exponent-tool.py` takes
+\(U=c_1\star\) and the grading matrix in any basis, performs the Jordan
+reduction, the zero-diagonal-block first gauge, the second-order diagonal
+block, checks that the first-order \((2,1)\) entry of each \(J_2\) block
+vanishes, applies the elementary modification \(\operatorname{diag}(1,z)\),
+and returns the residue exponents and \(\delta^\sharp\).  It reproduces the
+audit script on the cubic.  Results
+(`c925-fable-levelt-exponent-tool-output.txt`):
+
+| variety | blocks | exponents | class | \(\delta^\sharp\) |
+|---|---|---|---|---|
+| cubic threefold | \(J_2\) at \(u=0\) | \(-1/6,-5/6\) | \(\{1/6,5/6\}\) | \(4/9\) |
+| \(\mathbf P^2\times C_g\), \(g=2,3\) | three \(J_2\), a 3-cycle | \(-1/2\) double | \(\{1/2,1/2\}\) | \(0\) |
+| \(\mathbf P(E)\to C_g\), \((g,\deg E)=(2,1),(3,5)\) | three \(J_2\), a 3-cycle | \(-1/2\) double | \(\{1/2,1/2\}\) | \(0\) |
+| curve summand \(C_g\) (blow-up centre), \(g=0,2\) | one \(J_2\) | \(-1/2\) double | \(\{1/2,1/2\}\) | \(0\) |
+
+The \(\mathbf P(E)\) rows use the projective-bundle quantum relation
+\(\xi^3+c_1(E)\xi^2=q\) (fibre-line class; no other rational curves for
+\(g\ge1\)), and \(c_1=3\xi+\pi^*(c_1(C)+c_1(E))\); the substitution
+\(\xi'=\xi+c_1(E)/3\) makes them identical to the product case, as the output
+confirms.  Every three-cycle of rank-two blocks on a threefold computed so far
+has the unmarked class, and every curve-type block has it too.
+
+Replay: `uv run --with sympy python3 c925-fable-levelt-exponent-tool.py`.
+SHA-256: script
+`3f2b836ac3ccec79da92bd69f506f3abc3fbfb2941b0a5f3a8abc2c7c6b6c20a`, output
+`ab32eaf611c1435fb32aae2fb8b5858ef7c039bd58d391999570e095e86e4fd6`.  No
+independent second implementation; the cubic row is the cross-check against
+`c924-finite-cubic-check.py`.
+
+## 7. Next
 
 1. Replace the card's `Next` item 1 by the threefold statement of §3.2; mark
    the native-order and Rees-port items as superseded.
