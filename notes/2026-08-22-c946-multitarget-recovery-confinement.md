@@ -6,11 +6,11 @@
 
 ## Objective
 
-Extend the one-target bounded recovery theory to an arbitrary presented
-linear demand \(\beta:Q\to\mathbb F_q^P\) supported on a coordinate set \(P\)
-in one inner block.  Preserve the whole filtered affine family of coefficient
-realizations, naturally in the query presentation.  Prove exact finite and
-eventual confinement criteria, derive subspace recovery and classical
+Extend the one-target bounded recovery theory simultaneously over every
+nonzero demand subspace \(A\leq\mathbb F_q^P\) supported on a coordinate set
+\(P\) in one inner block.  Preserve the whole restriction-compatible diagram
+of filtered affine coefficient realizations.  Prove exact finite and eventual
+confinement criteria, derive subspace recovery and classical
 simultaneous/cooperative recovery as corollaries, recover the published
 threshold when
 \(P=\{x\}\), and identify honestly what remains of the proposed
@@ -31,7 +31,25 @@ boundary change is authorized by this report.
 - Treat bandwidth/subpacketization as a separate model. For the present scalar
   \(\mathbb F_q\)-codes, bandwidth cost collapses to helper count.
 
-## Primary object: the boundary-lift profile
+## Primary object: the full demand-lifting diagram
+
+For every nonzero subspace \(A\leq\mathbb F_q^P\) and helper set
+\(H\subseteq E\setminus P\), let
+
+\[
+ \mathscr L_{C,P,H}(A)=
+ \{s:A\to C^\perp\cap\mathbb F_q^{P\cup H}:s|_P=\iota_A\}.
+\]
+
+For an inclusion \(A'\leq A\), restriction sends
+\(\mathscr L_{C,P,H}(A)\) to \(\mathscr L_{C,P,H}(A')\), without increasing
+helper-union cost.  The collection over the entire subspace lattice, with
+these restriction maps and support filtrations, is the **full demand-lifting
+diagram** at \(P\).  Its individual slices are classical demand-subspace
+recovery augmented by all coefficient realizations; its global compatibility
+is what the uniform transfer theorem preserves.
+
+### Presented queries collapse to their image
 
 Let \(Q\) be a nonzero finite-dimensional query space and let
 
@@ -65,13 +83,21 @@ Define
  \lvert\operatorname{usupp}(s)\setminus P\rvert.
 \]
 
-The assignment \((Q,\beta)\mapsto\{s:s|_P=\beta\}\), with its helper-support
-filtration, is the **boundary-lift profile** at \(P\).  It is natural under
-precomposition: if \(f:Q'\to Q\), then \(s\mapsto s\circ f\) sends lifts of
-\(\beta\) to lifts of \(\beta\circ f\) without increasing helper support.
-This is the honest level above a single demand subspace: it retains all query
-presentations and all coefficient realizations, not merely which subspaces
-are spanned by which helper sets.
+Precomposition is natural: if \(f:Q'\to Q\), then \(s\mapsto s\circ f\)
+sends lifts of \(\beta\) to lifts of \(\beta\circ f\) without increasing
+helper support.  But this does not create a genuinely higher recovery cost.
+If \(A=\operatorname{im}\beta\) and \(K=\ker\beta\), then
+
+\[
+ \rho_{P,\beta}(C)=\rho_{P,A}(C).
+\]
+
+After choosing a splitting \(Q\cong A\oplus K\), the lift space is
+noncanonically the product of the \(A\)-lift space with
+\(\operatorname{Hom}(K,C^\perp\cap\mathbb F_q^H)\).  The second factor merely
+assigns helper-only dual words to redundant zero queries.  Thus a presented
+map is useful notation for a labeled query tuple, but not a priority-bearing
+generalization of its image demand subspace.
 
 At the support/existence level, however, this abstraction is not new and must
 not be sold as such:
@@ -95,8 +121,9 @@ PIR/batch and subspace-recovery work.  Explicitly, for a generator matrix
  G_P\beta(Q)\subseteq\operatorname{span}(G_H).
 \]
 
-The additional datum is the complete filtered affine lift space and the
-theorem transporting it.
+The additional datum is the complete filtered affine lift space in every
+subspace slice, their restriction-compatible diagram, and the theorem
+transporting that entire diagram.
 
 ### Linear demand spaces as a specialization
 
@@ -303,7 +330,7 @@ concatenation.
 
 ## Eventual linear-demand confinement theorem
 
-The theorem holds first for every presented nonzero demand
+Equivalently, the theorem may be written for every presented nonzero demand
 \(\beta:Q\to\mathbb F_q^P\):
 
 \[
@@ -318,9 +345,8 @@ The theorem holds first for every presented nonzero demand
 Necessity adds the external rank-one map \(q\mapsto\ell(q)v\) for nonzero
 \(\ell\in Q^*\) and a minimum word \(v\in I^\perp\).  Sufficiency uses only
 that the target-block part remains a \(\beta\)-lift.  Hence the proof is
-natural under precomposition and applies objectwise to the entire
-boundary-lift profile.  The following \(A\)-statement is its inclusion-map
-specialization.
+natural under precomposition.  Since presentations collapse to their images,
+the following \(A\)-statement is the intrinsic subspace-lattice form.
 
 ### Uniform transfer of the whole profile
 
@@ -346,13 +372,58 @@ presented demand is eventually confined to its target block if and only if
 \]
 
 Below this threshold, zero-extension preserves the entire radius-\(r\)
-boundary-lift profile simultaneously, including every coefficient fiber and
-every property imposed only on the supports or coefficients of the lifted
+full demand-lifting diagram simultaneously, including every coefficient fiber
+and every property imposed only on the supports or coefficients of the lifted
 query basis.  Necessity uses the one-dimensional demand attaining
 \(\eta_P(I)\) and the same external minimum-dual-word perturbation.  This is
 the strongest priority-judo formulation: the classical notions are not
 renamed; they are evaluations or support projections of one transferred
 coefficient functor.
+
+The uniform threshold itself is matroidal.  If \(M(I)\) is the column matroid
+of an inner generator matrix, then
+
+\[
+ \eta_P(I)=
+ \min\{|K\setminus P|:K\text{ is a circuit of }M(I),\ K\cap P\neq\varnothing\}.
+\]
+
+Indeed, a circuit meeting \(P\) supplies a dual word for the upper bound.
+Conversely, choose a target coordinate with nonzero coefficient in a word
+attaining \(\eta_P\); a circuit contained in its support and containing that
+coordinate gives the reverse bound.  Thus the whole-diagram gate is clean but
+coarse: it is controlled by the cheapest one-dimensional slice and can
+collapse to \(d(I^\perp)\) when \(P\) already contains a circuit.  The
+objectwise \(\rho_{P,A}\) thresholds remain the sharper represented-code
+statements and should lead the exposition.
+
+The objectwise costs nevertheless carry useful lattice structure.  For
+nonzero \(A',A,B\leq\mathbb F_q^P\),
+
+\[
+ A'\leq A\Longrightarrow \rho_{P,A'}\leq\rho_{P,A},
+\]
+
+and
+
+\[
+ \max\{\rho_{P,A},\rho_{P,B}\}
+ \leq \rho_{P,A+B}
+ \leq \rho_{P,A}+\rho_{P,B}.
+\]
+
+The lower bounds are restrictions of a lift on \(A+B\).  For the upper bound,
+choose a basis of \(A\cap B\), extend it separately to bases of \(A\) and
+\(B\), use one lift on the intersection, and use the two chosen systems only
+on their complementary basis vectors; the helper union lies in the union of
+the two original helper unions.  In particular,
+
+\[
+ \eta_P(I)=\min_{\dim A=1}\rho_{P,A}(I).
+\]
+
+Whether \(A\mapsto\rho_{P,A}\) satisfies a stronger submodular or
+polymatroid-type law is not settled here.
 
 Let \(I\leq\mathbb F_q^E\) be a represented inner code with message alphabet
 \(L\), let \(0\neq A\leq\mathbb F_q^P\) admit a normalized equation system,
@@ -419,9 +490,9 @@ all coordinates in \(P\).  Since
 \]
 
 This is the priority-safe formulation: cooperative recovery, functional
-linear queries, and recovery of subspaces are classical.  What is obtained as
-a corollary is exact transfer of their complete bounded coefficient
-realizations from the more general presented-demand theorem.
+linear queries, and recovery of subspaces are classical.  The candidate
+contribution is exact transfer of their complete bounded coefficient
+realizations, compatibly across the full demand-subspace lattice.
 
 ### One-target reduction
 
@@ -537,9 +608,10 @@ set.  Zhang--Etzion--Yaakobi and later functional-batch work recover arbitrary
 linear queries, while Chee--Etzion--Kiah--Zhang explicitly define a recovery
 set for a whole subspace by the same generator-span condition.  Consequently
 neither arbitrary linear demands nor their support-only existence condition
-is a priority route.  The surviving candidate is the exact transfer of the
-*complete filtered affine family* of lifts, naturally for every presented
-demand, not the demand abstraction itself.
+is a priority route.  Nor does a noninjective presentation add essential
+recovery content beyond its image.  The surviving candidate is exact transfer
+of the *restriction-compatible diagram of complete filtered affine lift
+families* over all demand subspaces, not the demand abstraction itself.
 
 Chaiken's primary 1989 text was read at the relevant sections.  His
 \(P\)-ported Tutte polynomial is the established arbitrary-distinguished-set
@@ -586,6 +658,14 @@ candidate novelty, never a categorical priority claim.
   Codes with Small Recovery Sets*, arXiv:2601.12302: Definitions 4--6,
   Theorem 3, and conclusion read from cached SHA-256
   183fea187fcd6eea26f1bb393117cb60d38d911d200eca0532298531e60ccb31.
+- Bar-Lev, *Coded Information Retrieval for Block-Structured DNA-Based Data
+  Storage*, arXiv:2603.17154v2: abstract, Introduction, Definitions 1--4,
+  Sections II--III, main-result statements, and selected examples read from
+  cached SHA-256
+  c05014aa6860053203c5395f85631a9655ff2873f00f898410ea5970cbf3a899.  This
+  source already treats two target file subspaces, a column-generated
+  subspace lattice, and stochastic retrieval, but not coefficient fibers or
+  concatenation transfer.
 
 ## Acceptance gates
 
@@ -767,28 +847,41 @@ the fixed-demand predicate \(P\subseteq\operatorname{cl}(H)\):
 
 This quantifier view is the precise unification.
 
-### Presented-demand profile adopted as the primary research theorem
+### Full demand-lifting diagram adopted as the primary research theorem
 
-Nothing in the splitting or transfer proof requires an inclusion
-\(A\hookrightarrow\mathbb F_q^P\).  The primary theorem therefore takes an
-arbitrary nonzero presentation \(\beta:Q\to\mathbb F_q^P\) and preserves its
-whole filtered affine lift space, naturally under precomposition.  Inclusion
-maps give recovery of a query subspace; the identity gives cooperative
-recovery; a map out of a free space presents a labeled tuple of linear queries
-supported on \(P\).  Their support/existence layers are prior art.  The
-candidate advance is the universal exact concatenation-transfer statement
-across these slices.
+The meaningful higher object is not a noninjective presentation: its minimum
+cost is that of its image, and its kernel contributes only helper-dual gauge.
+The primary theorem therefore preserves the full restriction-compatible
+diagram \(A\mapsto\mathscr L_{C,P,H}(A)\) over all nonzero subspaces of
+\(\mathbb F_q^P\).  One-dimensional slices give linear queries, the top slice
+gives cooperative recovery, and intermediate slices give subspace recovery.
+Their support/existence layers are prior art.  The candidate advance is the
+universal exact concatenation-transfer statement across the whole diagram.
 
 ## Mystery ledger
 
 - **Settled by TT:** a hierarchy is not needed for the basic confinement gate.
   Rank one gives the sharp scalar threshold; generalized weights stratify
   stronger rank demands.
-- **Settled after the focused literature check:** arbitrary linear and
-  subspace demands are prior art.  The primary theorem is instead the natural
-  transfer of the filtered affine lift profile for every presented demand
-  \(\beta:Q\to\mathbb F_q^P\); established subspace, functional-query, and
-  cooperative notions are support-level shadows or slices.
+- **Settled by `ej`:** arbitrary linear and subspace demands are prior art,
+  and a presented map adds only kernel gauge beyond its image.  The primary
+  theorem is instead simultaneous transfer of the restriction-compatible
+  filtered affine lift diagram over every demand subspace; established
+  subspace, functional-query, and cooperative notions are support-level
+  shadows or slices.
+- **Settled by `ej`:** the uniform gate is matroidal, with
+  \(\eta_P=\min_{K\text{ circuit},K\cap P\ne\varnothing}|K\setminus P|\).
+  It is therefore a clean whole-diagram corollary, while the objectwise
+  \(\rho_{P,A}\) theorem remains the stronger represented statement.
+- **Settled by `tt`:** the full diagram is the restriction-compatible section
+  diagram of the target restriction map on bounded dual words; its
+  functoriality is packaging, not a separate novelty claim.  Its costs are
+  monotone and subadditive on sums, and the uniform threshold is controlled
+  by the one-dimensional slices.
+- **Open structural degree of freedom:** it is unknown whether
+  \(A\mapsto\rho_{P,A}\) obeys a genuine submodular/polymatroid law or admits a
+  small counterexample.  This is a bounded successor question, not needed for
+  the transfer theorem.
 - **Settled by TT:** the support layer is exactly the closure predicate
   \(P\subseteq\operatorname{cl}(H)\), and full-radius reliability is the
   \(Z^0\) slice of \(M\setminus P\to M/P\).

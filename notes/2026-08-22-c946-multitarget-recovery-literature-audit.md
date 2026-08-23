@@ -85,42 +85,70 @@ matrix \(G\), is precisely
 \(G_P\beta(Q)\subseteq\operatorname{span}(G_H)\).  Neither “arbitrary demand
 space” nor its existence criterion can carry novelty.
 
-The presentation \(\beta\), rather than only its image, still organizes a
-genuinely richer coefficient object: the complete helper-filtered affine
-space of lifts
+The `ej` pass closes one attempted escape route: a noninjective presentation
+does **not** add essential recovery content beyond its image.  For
+\(A=\operatorname{im}\beta\) and \(K=\ker\beta\),
 
 \[
- \{s:Q\to C^\perp\cap\mathbb F_q^{P\cup H}:s|_P=\beta\},
+ \rho_{P,\beta}(C)=\rho_{P,A}(C),
 \]
 
-natural under precomposition.  Inclusion maps give subspace recovery, the
-identity gives cooperative recovery, and maps from a free query space encode
-labeled functional-query tuples.  Functional-batch disjointness is an
-additional support predicate on the basis lifts; C946's universal confinement
-theorem preserves such predicates below its gate, but its sharp “only if”
-need not remain sharp after imposing disjointness.
+and, after choosing \(Q\cong A\oplus K\), its lift space is the product of the
+\(A\)-lift space with
+\(\operatorname{Hom}(K,C^\perp\cap\mathbb F_q^H)\).  That extra factor only
+assigns helper-dual words to redundant zero queries.  “Presented demands” may
+be convenient notation, but cannot be the novelty claim.
+
+The honest higher object is instead the complete helper-filtered affine lift
+space in **every** demand subspace, together with restriction maps.  Namely,
+
+\[
+ A\longmapsto
+ \mathscr L_{C,P,H}(A)=
+ \{s:A\to C^\perp\cap\mathbb F_q^{P\cup H}:s|_P=\iota_A\}.
+\]
+
+Restriction along \(A'\leq A\) makes this a contravariant diagram over the
+demand-subspace lattice.  One-dimensional slices give linear queries, the top
+slice gives cooperative recovery, and intermediate slices give subspace
+recovery.  Functional-batch disjointness is an additional support predicate
+on selected lifts; C946's universal confinement theorem preserves such
+predicates below its gate, but its sharp “only if” need not remain sharp after
+imposing disjointness.
+
+Bar-Lev's March 2026 block-structured DNA-retrieval preprint is the closest
+contemporary source to the **global demand-family** viewpoint.  It treats two
+complementary coordinate-file subspaces, defines file recovery by generator
+columns spanning the target subspace, uses the column-generated subspace
+lattice, and studies exact stochastic retrieval times.  It does not range
+over the full demand-subspace lattice, retain normalized coefficient fibers,
+or prove a concatenation-confinement theorem.  It therefore narrows the safe
+claim further: neither multiple target subspaces, a subspace lattice, nor
+stochastic subspace retrieval is new; only the exact coefficient-aware
+transfer package remains `NONE-FOUND`.
 
 The bounded search located **no predecessor** for the following narrower
-combined result, formulated at the presented-demand level:
+combined result, formulated at the full-diagram level:
 
-- a nonzero presented demand \(\beta:Q\to\mathbb F_q^P\), with the complete
-  helper-filtered affine family of normalized equation systems and its
-  naturality under precomposition;
+- the restriction-compatible diagram of complete helper-filtered affine
+  equation families over every nonzero \(A\leq\mathbb F_q^P\);
 - the exact finite map-valued non-confinement cost
-  \(\Theta_{P,\beta,j}(I,O)\) for a
+  \(\Theta_{P,A,j}(I,O)\) for a
   general represented inner code;
 - the sharp eventual concatenation criterion
-  \(r<\rho_{P,\beta}(I)+d(I^\perp)\), objectwise over the boundary-lift
-  profile, with subspace recovery, cooperative recovery, and the one-target
+  \(r<\rho_{P,A}(I)+d(I^\perp)\), objectwise over the demand-lifting
+  diagram, with subspace recovery, cooperative recovery, and the one-target
   theorem recovered as specializations; and
-- the uniform whole-profile criterion
+- the uniform whole-diagram criterion
   \(r<\eta_P(I)+d(I^\perp)\), where \(\eta_P(I)\) is the least helper cost of
-  any nonzero target-boundary equation.
+  any nonzero target-boundary equation, together with the circuit formula for
+  \(\eta_P(I)\).
 
 This is a `NONE-FOUND` candidate contribution, not a priority claim.  Its safe
 description is: **an exact coefficient-aware transfer theorem for the
-helper-filtered affine lift profile of presented local linear demands**.
-This wording claims the transfer theorem, not priority for linear demands.
+restriction-compatible diagram of bounded local linear-demand equations**.
+This wording claims the transfer theorem, not priority for linear demands or
+for elementary functorial packaging.
 Classical subspace, functional-query, and simultaneous/cooperative recovery
 are slices or support-level shadows.  Their intrinsic criteria, the
 cooperative-locality concept, target-set Tutte carrier, and use of generalized
@@ -135,7 +163,9 @@ weights must all be credited as prior.
 | Quantification over every erased set of size \(e\) with one helper set of size \(r\) | Rawat--Mazumdar--Vishwanath, Definition 1; Abdel-Ghaffar--Weber, Definition 2 | prior art (cooperative locality) |
 | Affine torsor of all splittings under \(\operatorname{Hom}(\mathbb F_q^P,C^\perp\cap\mathbb F_q^H)\) | no exact formulation located | elementary refinement; claim only as structural lemma, not a major novelty by itself |
 | Arbitrary linear query / recovery of a demand subspace | Zhang--Etzion--Yaakobi, functional-code definition; Chee--Etzion--Kiah--Zhang, introduction and recovery-set definition; Oksner--Hollmann--Riet--Skachek, Definitions 4--6 and Theorem 3 | prior art; existence is generator-column span containment |
-| Presented demand \(\beta:Q\to\mathbb F_q^P\) and its complete filtered affine lift profile | no exact formulation located | organizing refinement; do not claim novelty for the demand or nonemptiness predicate itself |
+| Presented demand \(\beta:Q\to\mathbb F_q^P\) | elementary reduction to \(A=\operatorname{im}\beta\) plus \(\operatorname{Hom}(\ker\beta,C^\perp\cap\mathbb F_q^H)\) | no essential generalization; retain only as useful query-presentation notation |
+| Full restriction-compatible affine lift diagram over all \(A\leq\mathbb F_q^P\) | no exact formulation located | organizing refinement; candidate value comes from exact transfer of the whole diagram, not from naming it |
+| Several target subspaces, subspace-lattice geometry, and stochastic retrieval | Bar-Lev, Sections II--III, especially Definitions 3--4 | prior/adjacent: two complementary file subspaces and support-only draw times, not the full coefficient diagram or concatenation transfer |
 | \(P\subseteq\operatorname{cl}_M(H)\) | Abdel-Ghaffar--Weber, Lemma 1, translated to the column matroid | prior art / immediate translation |
 | Arbitrary distinguished-set Tutte data | Chaiken, Sections 1 and 3, especially Theorem 2 and definition (3.4); Las Vergnas, Sections 2--3, especially (3.1)--(3.2) | prior art |
 | \(Z^0\) full-radius recovery slice for \(M\backslash P\to M/P\) | direct specialization of Las Vergnas (3.2) | author-derived adapter from prior polynomial; not a new invariant |
@@ -144,7 +174,7 @@ weights must all be credited as prior.
 | Single-coordinate refined support counts and MacWilliams/LP identities | Gruica--Jany--Ravagnani, Definition 3.2, Theorem 3.8, Corollary 3.10, Section 4 | prior art |
 | Multiple concurrent requests for stored objects | Alfarano--Ravagnani--Soljanin, Definitions 2.2--2.5 | adjacent but different: service-rate allocation, not simultaneous erased-coordinate recovery |
 | Sequential recovery of two erasures | Prakash--Lalitha--Kumar, abstract and model description | adjacent but different quantifiers and sequential process |
-| Exact finite \(\Theta_{P,\beta,j}(I,O)\), objectwise eventual gate \(\rho_{P,\beta}(I)+d(I^\perp)\), and uniform whole-profile gate \(\eta_P(I)+d(I^\perp)\) | no predecessor located in searched sources or screened citing sets | `NONE-FOUND` candidate contribution; subspace, functional-query, cooperative, and one-target recovery are slices or support shadows |
+| Exact finite \(\Theta_{P,A,j}(I,O)\), objectwise eventual gate \(\rho_{P,A}(I)+d(I^\perp)\), and uniform whole-diagram gate \(\eta_P(I)+d(I^\perp)\) | no predecessor located in searched sources or screened citing sets | `NONE-FOUND` candidate contribution; subspace, functional-query, cooperative, and one-target recovery are slices or support shadows |
 
 ## Source acquisition and read depth
 
@@ -169,6 +199,7 @@ mathematics, not metadata alone.
 | M. Nassar and E. Yaakobi, *Array Codes for Functional PIR and Batch Codes*, DOI `10.1109/TIT.2021.3124925` | `pdf/arXiv_2001.10770.pdf`, `451e08d05147966f87bc8e48a4658d0d6831f4b3d32f0346408e7d566ec98b0d` | opened once; 24 pages, 28,409 extracted words | partial: abstract, Introduction, Definition 1(c)--(d), locality-functional-array definition, selected bounds; establishes bounded recovery sets for arbitrary linear queries in the array model |
 | K. Oksner, H. D. L. Hollmann, A.-E. Riet, and V. Skachek, *On the Minimum Length of Functional Batch Codes with Small Recovery Sets*, arXiv:2601.12302 | `pdf/arXiv_2601.12302.pdf`, `183fea187fcd6eea26f1bb393117cb60d38d911d200eca0532298531e60ccb31` | opened once; 12 pages, 5,034 extracted words | partial: abstract, Definitions 3--6, Theorem 3 and proof, conclusion; exact generator-span and locality comparison read |
 | G. L. Matthews, G. Matthews, and E. Norton, *Linear Exact Repair for Dual Decomposable Codes*, DOI `10.1007/s40590-026-00897-y` | open-access publisher HTML; no immutable local PDF cached | abstract, Introduction, Definition 3.1, Proposition 3.2 and proof read in browser full text | adjacent vector/bandwidth work: uses a basis-indexed family of normalized dual words for one erased extension-field symbol; no bounded scalar lift-profile or concatenation-confinement theorem |
+| D. Bar-Lev, *Coded Information Retrieval for Block-Structured DNA-Based Data Storage*, arXiv:2603.17154v2 | `pdf/arXiv_2603.17154.pdf`, `c05014aa6860053203c5395f85631a9655ff2873f00f898410ea5970cbf3a899` | opened once; 46 pages, 17,869 extracted words | partial: abstract, Introduction, Definitions 1--4, Sections II--III, main-result statements, selected examples and conclusion; decisive boundary for multiple demand subspaces, subspace-lattice language, and stochastic retrieval |
 
 The 1989 Chaiken article was readable through the author's uploaded
 browser-extracted full text, but direct publisher and ResearchGate PDF fetches
@@ -212,6 +243,8 @@ were not treated as absence evidence.
 | arXiv API | `all:"recovery sets of subspaces"` | 2 total; both screened | Chee et al. plus one unrelated bibliography hit |
 | arXiv API | `all:"functional batch codes"` | 5 total; all screened | functional batch, simplex, and data-recovery descendants |
 | arXiv API | `all:"boundary map" AND all:recovery AND cat:cs.IT` | 0 | exact terminology returned no result; weak evidence only, not a field-wide absence claim |
+| Web search | `coding theory "recovery functor" subspace lattice`; `coding theory presheaf recovery sets linear queries`; `"subspace lattice" "recovery sets" code`; `"demand subspaces" recovery code functor` | provider exposed no total counts; all returned entries screened | no exact affine recovery-diagram transfer located; hits included ordinary LRC recovery, unrelated reconstruction, and a 2026 DNA-storage subspace-lattice model; this terminology probe is weak supplementary evidence only |
+| Web search | `"Coded Information Retrieval for Block-Structured DNA-Based Data Storage"`; `site:arxiv.org "Coded Information Retrieval" "subspace lattice" DNA` | provider exposed no total counts; all returned entries screened | exact Bar-Lev arXiv source recovered and read; establishes the adjacent two-file/subspace-lattice boundary |
 
 MathSciNet and Google Scholar were **not covered** in this run.  The former had
 no configured access path; the latter was not used as a stable, reproducible
@@ -248,13 +281,13 @@ closer, and it does not justify categorical priority language.
 2. State that the kernel, generator-span, and normalized dual-row existence
    criteria are established; cite Abdel-Ghaffar--Weber Definition 1 and
    Lemmas 1--2 at the proposition itself.
-3. State the theorem first for a presented demand
-   \(\beta:Q\to\mathbb F_q^P\) and its complete helper-filtered affine lift
-   family, naturally under precomposition.  Cite functional PIR/batch and
-   Chee--Etzion--Kiah--Zhang before saying that inclusion maps recover demand
-   subspaces.  Present simultaneous recovery as the identity-map corollary.
-   Do not claim that arbitrary linear queries, subspace recovery, or
-   simultaneous recovery is new.
+3. State the theorem objectwise for \(A\leq\mathbb F_q^P\), then give the
+   exact uniform transfer of the restriction-compatible diagram over the
+   whole demand-subspace lattice.  Cite functional PIR/batch and
+   Chee--Etzion--Kiah--Zhang before introducing the diagram.  Present
+   simultaneous recovery as the top-subspace corollary.  Do not claim that
+   arbitrary linear queries, subspace recovery, the diagram's elementary
+   functoriality, or simultaneous recovery is new.
 4. Cite Chaiken and Las Vergnas wherever the full-radius target-set Tutte
    carrier is introduced.  Reserve “ported” for their established matroid
    terminology.
