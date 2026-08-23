@@ -48,6 +48,38 @@ required points have index `1` or `nu`, and holes have index `0` or `nu`.
 The existing edge- and vertex-deletion stability proofs appear to transfer with
 `floor(k/2)` replaced by `nu`.
 
+## Multiplicity extension
+
+The natural two-moment statement allows a uniform required multiplicity
+`lambda`, not only ordinary coverage.  Let every non-hole required point lie on
+between `lambda` and `M` members of a line family, where `M` is a global index
+cap.  With `R` the required locus, the exact identity is
+
+```
+(M+lambda-1)S1 - 2S2 - lambda I_H - lambda M |R|
+  = sum_{x in R} (r(x)-lambda)(M-r(x))
+    + sum_{h in H} r(h)(M-r(h)).
+```
+
+Indeed, the required-point summand expands to
+`(M+lambda-1)r-2C(r,2)-lambda M`, and the hole summand results after
+subtracting `lambda r`.  Both are nonnegative.  Equality permits required
+indices only in `{lambda,M}` and hole indices only in `{0,M}`.  For
+`lambda=1` this is the original prescribed-hole defect.
+
+Applied to the `s`-secants of a `(k,s)`-arc with `M=floor(k/s)`, this
+defines a `lambda`-fold maximal-secant covering problem.  The candidate
+fixed-`s,lambda` asymptotic bound is
+
+```
+k >= sqrt(lambda s(s-1)q) + (s+1)/2 - O_{s,lambda}(q^(-1/2)).
+```
+
+The cancellation leaving the additive term independent of `lambda` is a
+feature to verify carefully: the `(lambda-1)S1/M` gain and the second-moment
+loss cancel at order `q^(3/2)` except for the same `s`-dependent residue as
+at `lambda=1`.
+
 ## Candidate new numerical consequence
 
 Put
@@ -141,7 +173,8 @@ novelty or priority verdict remains open.
 ## Gates before manuscript work
 
 1. Prove the intrinsic identity, clique decomposition, and stability statements
-   with all edge cases (`nu=1`, holes, incomplete arcs) explicit.
+   with all edge cases (`nu=1`, holes, incomplete arcs, and uniform required
+   multiplicity `lambda`) explicit.
 2. Make the scalar optimization rigorous, including floors and the range in
    which its maximum occurs at `T`; prove an explicit asymptotic error term.
 3. Compare the numerical bound with Alabdullah--Hirschfeld and other general
