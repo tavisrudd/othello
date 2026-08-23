@@ -103,6 +103,62 @@ ordinary complete arcs, maximal arcs, unitals, and subplanes in one
 maximal-secant concurrency framework.  This is the current positive answer to
 the structural/notability gate, subject to precedence checking.
 
+## Proof packet
+
+### Arrangement moments
+
+Let `L` be `t` distinct lines of a projective plane of order `q`, let `B` be
+a base point set, put `d(b)=#{ell in L:b in ell}`, and let `r(x)` count the
+members of `L` through `x` outside `B`.  Then
+
+```
+sum_{x notin B} r(x) = t(q+1)-sum_{b in B}d(b),
+sum_{x notin B} C(r(x),2) = C(t,2)-sum_{b in B}C(d(b),2).
+```
+
+The first equation counts line--point incidences.  For the second, each pair
+of distinct lines has one intersection; it contributes on the right precisely
+when that intersection is not in `B`.  This proves the two moments without an
+arc hypothesis.  The `(k,s)`-arc specialization has
+`sum_B d=st`, giving `S1=t(q+1-s)`.
+
+### Two-root defect
+
+Assume the outside points with positive index are partitioned into required
+points `R`, with `lambda <= r <= M`, and holes `H`, with `0 <= r <= M`.
+Expanding
+
+```
+(r-lambda)(M-r)
+  = (M+lambda-1)r - 2C(r,2) - lambda M,
+r(M-r) = (M+lambda-1)r - 2C(r,2) - lambda r
+```
+
+and summing proves the multiplicity identity.  Hence the identity and its
+equality indices are closed at the elementary level.  For maximal secants of
+a `(k,s)`-arc, concurrent secants have disjoint `s`-subsets of `A`, so any
+cap `M >= nu(E_s(A))` is valid; choosing the matching number is intrinsic and
+choosing `floor(k/s)` is parameter-only.
+
+### Concurrency decomposition
+
+Two maximal secants have disjoint hyperedges exactly when their unique
+intersection lies outside `A`.  Therefore their disjointness-graph edge lies
+in exactly one concurrence clique.  At zero defect these cliques have sizes
+in `{lambda,M}` at required points and size `M` at holes (singletons and empty
+classes omitted).  For `lambda=1` this recovers a decomposition entirely into
+maximum-matching cliques.
+
+### Degree envelope
+
+Distinct maximal secants through `a in A` use disjoint `(s-1)`-subsets of
+`A-{a}`, so `d(a)<=D=floor((k-1)/(s-1))`.  Also `sum_a d(a)=st`, and
+linearity gives `t C(s,2)<=C(k,2)`.  Convexity of `C(d,2)` under the box and
+sum constraints gives the stated integer envelope by filling degrees to `D`
+one at a time.  This closes the exact one-variable coverage bound.  The
+remaining proof obligation is a fully explicit treatment of floors in the
+asymptotic corollary.
+
 ## Candidate new numerical consequence
 
 Put
