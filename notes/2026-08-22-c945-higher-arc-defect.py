@@ -263,6 +263,36 @@ def run_checks() -> dict[str, object]:
         assert paired == paired_formula
         checked_ordinary_resonance_instances += 1
 
+    checked_conjugate_resonance_instances = 0
+    for m in range(2, 65):
+        q = 8 * m
+        s = 6 * m + 1
+        spectral_offset = (52 * m + 9) // 5
+        spectral_polynomial = lambda ell: (
+            ell * ell
+            - (40 * m * m + 20 * m + 2) * ell
+            + 416 * m**3
+            + 132 * m * m
+            + 20 * m
+            + 1
+        )
+        assert spectral_polynomial(spectral_offset - 1) > 0
+        assert spectral_polynomial(spectral_offset) <= 0
+
+        paired_bound = 32 * m * m + 12 * m - 1
+        excluded_k = paired_bound - 1
+        point_count = q * q + q + 1
+        complement_size = point_count - excluded_k
+        blocking_order = q + 1 - s
+        t_min = (2 * complement_size + blocking_order - 1) // blocking_order
+        obstruction = (
+            convex_degree_minimum(excluded_k, s * t_min)
+            + convex_degree_minimum(complement_size, blocking_order * t_min)
+            - comb(t_min, 2)
+        )
+        assert obstruction > 0
+        checked_conjugate_resonance_instances += 1
+
     rows = []
     for q in Q_VALUES:
         for s in range(2, min(8, q) + 1):
@@ -318,7 +348,7 @@ def run_checks() -> dict[str, object]:
                 )
 
     return {
-        "schema": "c945-higher-arc-defect-v6",
+        "schema": "c945-higher-arc-defect-v7",
         "meaning": "Necessary-bound thresholds only; projective-plane or arc existence is not asserted.",
         "parameters": {"lambda_values": list(LAMBDA_VALUES), "holes": 0, "q_values": list(Q_VALUES), "s_max": 8},
         "independent_checks": {
@@ -328,6 +358,7 @@ def run_checks() -> dict[str, object]:
             "spectral_quadratic_equivalences": checked_spectral_equivalences,
             "infinite_family_formula_instances": checked_infinite_family_instances,
             "ordinary_resonance_formula_instances": checked_ordinary_resonance_instances,
+            "conjugate_resonance_bound_instances": checked_conjugate_resonance_instances,
         },
         "rows": rows,
         "wide_degree_rows": wide_degree_rows,

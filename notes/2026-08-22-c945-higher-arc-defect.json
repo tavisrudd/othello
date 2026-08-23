@@ -1,6 +1,7 @@
 {
   "independent_checks": {
     "bounded_convex_envelope_instances": 1368,
+    "conjugate_resonance_bound_instances": 63,
     "convex_envelope_instances": 5386,
     "infinite_family_formula_instances": 11,
     "ordinary_arc_specializations": 37,
@@ -5737,7 +5738,7 @@
       "spectral_minimum": 169
     }
   ],
-  "schema": "c945-higher-arc-defect-v6",
+  "schema": "c945-higher-arc-defect-v7",
   "wide_degree_rows": [
     {
       "degree_regime": "below_sqrt_q",
