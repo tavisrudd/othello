@@ -132,6 +132,40 @@ difference zero needs \(b_2\ge6\).  Combined with the Newton-slope theorem's
 edge bound, a difference-zero triple needs a Newton edge of length at least
 six inside an even cohomology of rank \(2+2b_2\ge14\).
 
+## 3b. Why the marker cannot be read off the grading, and what that costs
+
+The natural way to finish would be to show that \(\delta^\sharp=4/9\) itself
+forces grading difference two, since Theorem C then closes \(m=2\) outright.
+That attempt fails, and the reason is worth recording because it explains the
+shape of the whole programme.
+
+The marker is the discriminant of the modified residue, so
+\(\delta^\sharp=4/9\) says exactly that the two exponents differ by
+\(2/3\).  But grading values on a variety of dimension \(n\) are
+\((2k-n)/2\), so **any two of them differ by an integer**.  A difference of
+\(2/3\) is therefore never a grading difference, on any variety, in any
+dimension.  For the cubic threefold the grading difference is two and the
+modification carries it to \(2/3\); the modification is not a perturbation of
+the grading data but the entire content of the marker.
+
+Two consequences.
+
+* It is structural, not accidental, that a native calibration excludes
+  \(4/9\).  Any calibration under which the exponent difference remains a
+  grading difference excludes \(4/9\) automatically, because \(2/3\) is not an
+  integer.  This is the content of the two normalized native-order charts
+  reaching discriminant \(0\) or \(4\) — those are the squares of grading
+  differences \(0\) and \(2\).
+* The implication "\(\delta^\sharp=4/9\) hence grading difference two" cannot
+  be proved from the marker alone, because the marker is precisely the datum
+  that has forgotten the grading.  Recovering it is the occurrence calibration,
+  which is the external gate both routes already depend on.
+
+So this route does not give an independent way past the calibration.  What
+Theorem C contributes stands on its own — it excludes the difference-two
+configuration with no calibration at all — but the complementary half is not
+reachable by strengthening the marker's bookkeeping.
+
 ## 4. Formal check
 
 `Comparison/GradingMultiplicityExclusion.lean` records the combinatorial core:

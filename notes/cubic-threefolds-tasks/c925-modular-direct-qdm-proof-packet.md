@@ -953,6 +953,20 @@ cover disjoint halves of the gate.  The refutation above says the mechanism
 must come from the marker rather than from the rotation, which is what the
 grading-multiplicity argument does.
 
+The obvious completion — deduce grading difference two from
+\(\delta^\sharp=4/9\) — is not available, for a structural reason.  The marker
+says the two exponents differ by \(2/3\), whereas grading values are
+\((2k-n)/2\) and any two of them differ by an integer.  So \(2/3\) is not a
+grading difference on any variety in any dimension: for the cubic the
+modification carries difference two to \(2/3\), and the modification is the
+whole content of the marker rather than a perturbation of it.  This explains
+why native calibration excludes \(4/9\) structurally — any calibration keeping
+the exponent difference equal to a grading difference excludes a
+non-integer automatically, which is what the charts reaching discriminant
+\(0\) or \(4\) record — and it shows that the marker's own bookkeeping cannot
+recover the grading.  Recovering it is the occurrence calibration, the
+external gate both routes already share.
+
 Lean: `Comparison.QuantumNewtonSlope` and `Comparison.LoopOrbitArithmetic`,
 both build roots.  Reports:
 `../2026-08-23-c925-fable-quantum-newton-slope-theorem.md` and
