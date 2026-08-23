@@ -1,0 +1,1061 @@
+{
+  "independent_checks": {
+    "convex_envelope_instances": 5386,
+    "ordinary_arc_specializations": 37
+  },
+  "meaning": "Necessary-bound thresholds only; projective-plane or arc existence is not asserted.",
+  "parameters": {
+    "holes": 0,
+    "lambda": 1,
+    "q_values": [
+      4,
+      5,
+      7,
+      8,
+      9,
+      11,
+      13,
+      16,
+      17,
+      19,
+      23,
+      25,
+      27,
+      31,
+      32,
+      49,
+      64,
+      81,
+      125,
+      128,
+      243,
+      256
+    ],
+    "s_max": 8
+  },
+  "rows": [
+    {
+      "first_moment_minimum": 4,
+      "improvement": 2,
+      "q": 4,
+      "s": 2,
+      "second_moment_minimum": 6
+    },
+    {
+      "first_moment_minimum": 7,
+      "improvement": 0,
+      "q": 4,
+      "s": 3,
+      "second_moment_minimum": 7
+    },
+    {
+      "first_moment_minimum": 12,
+      "improvement": 0,
+      "q": 4,
+      "s": 4,
+      "second_moment_minimum": 12
+    },
+    {
+      "first_moment_minimum": 5,
+      "improvement": 1,
+      "q": 5,
+      "s": 2,
+      "second_moment_minimum": 6
+    },
+    {
+      "first_moment_minimum": 8,
+      "improvement": 1,
+      "q": 5,
+      "s": 3,
+      "second_moment_minimum": 9
+    },
+    {
+      "first_moment_minimum": 12,
+      "improvement": 1,
+      "q": 5,
+      "s": 4,
+      "second_moment_minimum": 13
+    },
+    {
+      "first_moment_minimum": 18,
+      "improvement": 0,
+      "q": 5,
+      "s": 5,
+      "second_moment_minimum": 18
+    },
+    {
+      "first_moment_minimum": 5,
+      "improvement": 1,
+      "q": 7,
+      "s": 2,
+      "second_moment_minimum": 6
+    },
+    {
+      "first_moment_minimum": 9,
+      "improvement": 0,
+      "q": 7,
+      "s": 3,
+      "second_moment_minimum": 9
+    },
+    {
+      "first_moment_minimum": 13,
+      "improvement": 0,
+      "q": 7,
+      "s": 4,
+      "second_moment_minimum": 13
+    },
+    {
+      "first_moment_minimum": 17,
+      "improvement": 1,
+      "q": 7,
+      "s": 5,
+      "second_moment_minimum": 18
+    },
+    {
+      "first_moment_minimum": 24,
+      "improvement": 1,
+      "q": 7,
+      "s": 6,
+      "second_moment_minimum": 25
+    },
+    {
+      "first_moment_minimum": 33,
+      "improvement": 1,
+      "q": 7,
+      "s": 7,
+      "second_moment_minimum": 34
+    },
+    {
+      "first_moment_minimum": 5,
+      "improvement": 1,
+      "q": 8,
+      "s": 2,
+      "second_moment_minimum": 6
+    },
+    {
+      "first_moment_minimum": 9,
+      "improvement": 0,
+      "q": 8,
+      "s": 3,
+      "second_moment_minimum": 9
+    },
+    {
+      "first_moment_minimum": 13,
+      "improvement": 0,
+      "q": 8,
+      "s": 4,
+      "second_moment_minimum": 13
+    },
+    {
+      "first_moment_minimum": 18,
+      "improvement": 0,
+      "q": 8,
+      "s": 5,
+      "second_moment_minimum": 18
+    },
+    {
+      "first_moment_minimum": 23,
+      "improvement": 2,
+      "q": 8,
+      "s": 6,
+      "second_moment_minimum": 25
+    },
+    {
+      "first_moment_minimum": 31,
+      "improvement": 0,
+      "q": 8,
+      "s": 7,
+      "second_moment_minimum": 31
+    },
+    {
+      "first_moment_minimum": 43,
+      "improvement": 0,
+      "q": 8,
+      "s": 8,
+      "second_moment_minimum": 43
+    },
+    {
+      "first_moment_minimum": 6,
+      "improvement": 0,
+      "q": 9,
+      "s": 2,
+      "second_moment_minimum": 6
+    },
+    {
+      "first_moment_minimum": 9,
+      "improvement": 2,
+      "q": 9,
+      "s": 3,
+      "second_moment_minimum": 11
+    },
+    {
+      "first_moment_minimum": 13,
+      "improvement": 0,
+      "q": 9,
+      "s": 4,
+      "second_moment_minimum": 13
+    },
+    {
+      "first_moment_minimum": 18,
+      "improvement": 1,
+      "q": 9,
+      "s": 5,
+      "second_moment_minimum": 19
+    },
+    {
+      "first_moment_minimum": 24,
+      "improvement": 2,
+      "q": 9,
+      "s": 6,
+      "second_moment_minimum": 26
+    },
+    {
+      "first_moment_minimum": 30,
+      "improvement": 1,
+      "q": 9,
+      "s": 7,
+      "second_moment_minimum": 31
+    },
+    {
+      "first_moment_minimum": 39,
+      "improvement": 2,
+      "q": 9,
+      "s": 8,
+      "second_moment_minimum": 41
+    },
+    {
+      "first_moment_minimum": 6,
+      "improvement": 1,
+      "q": 11,
+      "s": 2,
+      "second_moment_minimum": 7
+    },
+    {
+      "first_moment_minimum": 10,
+      "improvement": 1,
+      "q": 11,
+      "s": 3,
+      "second_moment_minimum": 11
+    },
+    {
+      "first_moment_minimum": 14,
+      "improvement": 2,
+      "q": 11,
+      "s": 4,
+      "second_moment_minimum": 16
+    },
+    {
+      "first_moment_minimum": 19,
+      "improvement": 2,
+      "q": 11,
+      "s": 5,
+      "second_moment_minimum": 21
+    },
+    {
+      "first_moment_minimum": 24,
+      "improvement": 2,
+      "q": 11,
+      "s": 6,
+      "second_moment_minimum": 26
+    },
+    {
+      "first_moment_minimum": 30,
+      "improvement": 1,
+      "q": 11,
+      "s": 7,
+      "second_moment_minimum": 31
+    },
+    {
+      "first_moment_minimum": 38,
+      "improvement": 1,
+      "q": 11,
+      "s": 8,
+      "second_moment_minimum": 39
+    },
+    {
+      "first_moment_minimum": 6,
+      "improvement": 1,
+      "q": 13,
+      "s": 2,
+      "second_moment_minimum": 7
+    },
+    {
+      "first_moment_minimum": 11,
+      "improvement": 1,
+      "q": 13,
+      "s": 3,
+      "second_moment_minimum": 12
+    },
+    {
+      "first_moment_minimum": 15,
+      "improvement": 1,
+      "q": 13,
+      "s": 4,
+      "second_moment_minimum": 16
+    },
+    {
+      "first_moment_minimum": 20,
+      "improvement": 1,
+      "q": 13,
+      "s": 5,
+      "second_moment_minimum": 21
+    },
+    {
+      "first_moment_minimum": 25,
+      "improvement": 1,
+      "q": 13,
+      "s": 6,
+      "second_moment_minimum": 26
+    },
+    {
+      "first_moment_minimum": 31,
+      "improvement": 0,
+      "q": 13,
+      "s": 7,
+      "second_moment_minimum": 31
+    },
+    {
+      "first_moment_minimum": 38,
+      "improvement": 1,
+      "q": 13,
+      "s": 8,
+      "second_moment_minimum": 39
+    },
+    {
+      "first_moment_minimum": 7,
+      "improvement": 1,
+      "q": 16,
+      "s": 2,
+      "second_moment_minimum": 8
+    },
+    {
+      "first_moment_minimum": 12,
+      "improvement": 1,
+      "q": 16,
+      "s": 3,
+      "second_moment_minimum": 13
+    },
+    {
+      "first_moment_minimum": 16,
+      "improvement": 2,
+      "q": 16,
+      "s": 4,
+      "second_moment_minimum": 18
+    },
+    {
+      "first_moment_minimum": 21,
+      "improvement": 0,
+      "q": 16,
+      "s": 5,
+      "second_moment_minimum": 21
+    },
+    {
+      "first_moment_minimum": 27,
+      "improvement": 1,
+      "q": 16,
+      "s": 6,
+      "second_moment_minimum": 28
+    },
+    {
+      "first_moment_minimum": 33,
+      "improvement": 1,
+      "q": 16,
+      "s": 7,
+      "second_moment_minimum": 34
+    },
+    {
+      "first_moment_minimum": 39,
+      "improvement": 3,
+      "q": 16,
+      "s": 8,
+      "second_moment_minimum": 42
+    },
+    {
+      "first_moment_minimum": 7,
+      "improvement": 1,
+      "q": 17,
+      "s": 2,
+      "second_moment_minimum": 8
+    },
+    {
+      "first_moment_minimum": 12,
+      "improvement": 1,
+      "q": 17,
+      "s": 3,
+      "second_moment_minimum": 13
+    },
+    {
+      "first_moment_minimum": 17,
+      "improvement": 2,
+      "q": 17,
+      "s": 4,
+      "second_moment_minimum": 19
+    },
+    {
+      "first_moment_minimum": 22,
+      "improvement": 1,
+      "q": 17,
+      "s": 5,
+      "second_moment_minimum": 23
+    },
+    {
+      "first_moment_minimum": 27,
+      "improvement": 2,
+      "q": 17,
+      "s": 6,
+      "second_moment_minimum": 29
+    },
+    {
+      "first_moment_minimum": 33,
+      "improvement": 2,
+      "q": 17,
+      "s": 7,
+      "second_moment_minimum": 35
+    },
+    {
+      "first_moment_minimum": 40,
+      "improvement": 3,
+      "q": 17,
+      "s": 8,
+      "second_moment_minimum": 43
+    },
+    {
+      "first_moment_minimum": 7,
+      "improvement": 1,
+      "q": 19,
+      "s": 2,
+      "second_moment_minimum": 8
+    },
+    {
+      "first_moment_minimum": 12,
+      "improvement": 1,
+      "q": 19,
+      "s": 3,
+      "second_moment_minimum": 13
+    },
+    {
+      "first_moment_minimum": 18,
+      "improvement": 1,
+      "q": 19,
+      "s": 4,
+      "second_moment_minimum": 19
+    },
+    {
+      "first_moment_minimum": 23,
+      "improvement": 2,
+      "q": 19,
+      "s": 5,
+      "second_moment_minimum": 25
+    },
+    {
+      "first_moment_minimum": 29,
+      "improvement": 2,
+      "q": 19,
+      "s": 6,
+      "second_moment_minimum": 31
+    },
+    {
+      "first_moment_minimum": 34,
+      "improvement": 3,
+      "q": 19,
+      "s": 7,
+      "second_moment_minimum": 37
+    },
+    {
+      "first_moment_minimum": 41,
+      "improvement": 2,
+      "q": 19,
+      "s": 8,
+      "second_moment_minimum": 43
+    },
+    {
+      "first_moment_minimum": 8,
+      "improvement": 1,
+      "q": 23,
+      "s": 2,
+      "second_moment_minimum": 9
+    },
+    {
+      "first_moment_minimum": 13,
+      "improvement": 2,
+      "q": 23,
+      "s": 3,
+      "second_moment_minimum": 15
+    },
+    {
+      "first_moment_minimum": 19,
+      "improvement": 1,
+      "q": 23,
+      "s": 4,
+      "second_moment_minimum": 20
+    },
+    {
+      "first_moment_minimum": 25,
+      "improvement": 0,
+      "q": 23,
+      "s": 5,
+      "second_moment_minimum": 25
+    },
+    {
+      "first_moment_minimum": 31,
+      "improvement": 0,
+      "q": 23,
+      "s": 6,
+      "second_moment_minimum": 31
+    },
+    {
+      "first_moment_minimum": 37,
+      "improvement": 0,
+      "q": 23,
+      "s": 7,
+      "second_moment_minimum": 37
+    },
+    {
+      "first_moment_minimum": 43,
+      "improvement": 0,
+      "q": 23,
+      "s": 8,
+      "second_moment_minimum": 43
+    },
+    {
+      "first_moment_minimum": 8,
+      "improvement": 1,
+      "q": 25,
+      "s": 2,
+      "second_moment_minimum": 9
+    },
+    {
+      "first_moment_minimum": 14,
+      "improvement": 1,
+      "q": 25,
+      "s": 3,
+      "second_moment_minimum": 15
+    },
+    {
+      "first_moment_minimum": 20,
+      "improvement": 2,
+      "q": 25,
+      "s": 4,
+      "second_moment_minimum": 22
+    },
+    {
+      "first_moment_minimum": 25,
+      "improvement": 2,
+      "q": 25,
+      "s": 5,
+      "second_moment_minimum": 27
+    },
+    {
+      "first_moment_minimum": 31,
+      "improvement": 0,
+      "q": 25,
+      "s": 6,
+      "second_moment_minimum": 31
+    },
+    {
+      "first_moment_minimum": 38,
+      "improvement": 1,
+      "q": 25,
+      "s": 7,
+      "second_moment_minimum": 39
+    },
+    {
+      "first_moment_minimum": 44,
+      "improvement": 2,
+      "q": 25,
+      "s": 8,
+      "second_moment_minimum": 46
+    },
+    {
+      "first_moment_minimum": 9,
+      "improvement": 1,
+      "q": 27,
+      "s": 2,
+      "second_moment_minimum": 10
+    },
+    {
+      "first_moment_minimum": 14,
+      "improvement": 1,
+      "q": 27,
+      "s": 3,
+      "second_moment_minimum": 15
+    },
+    {
+      "first_moment_minimum": 20,
+      "improvement": 2,
+      "q": 27,
+      "s": 4,
+      "second_moment_minimum": 22
+    },
+    {
+      "first_moment_minimum": 26,
+      "improvement": 3,
+      "q": 27,
+      "s": 5,
+      "second_moment_minimum": 29
+    },
+    {
+      "first_moment_minimum": 32,
+      "improvement": 2,
+      "q": 27,
+      "s": 6,
+      "second_moment_minimum": 34
+    },
+    {
+      "first_moment_minimum": 39,
+      "improvement": 2,
+      "q": 27,
+      "s": 7,
+      "second_moment_minimum": 41
+    },
+    {
+      "first_moment_minimum": 46,
+      "improvement": 2,
+      "q": 27,
+      "s": 8,
+      "second_moment_minimum": 48
+    },
+    {
+      "first_moment_minimum": 9,
+      "improvement": 1,
+      "q": 31,
+      "s": 2,
+      "second_moment_minimum": 10
+    },
+    {
+      "first_moment_minimum": 15,
+      "improvement": 2,
+      "q": 31,
+      "s": 3,
+      "second_moment_minimum": 17
+    },
+    {
+      "first_moment_minimum": 21,
+      "improvement": 2,
+      "q": 31,
+      "s": 4,
+      "second_moment_minimum": 23
+    },
+    {
+      "first_moment_minimum": 28,
+      "improvement": 1,
+      "q": 31,
+      "s": 5,
+      "second_moment_minimum": 29
+    },
+    {
+      "first_moment_minimum": 34,
+      "improvement": 2,
+      "q": 31,
+      "s": 6,
+      "second_moment_minimum": 36
+    },
+    {
+      "first_moment_minimum": 41,
+      "improvement": 2,
+      "q": 31,
+      "s": 7,
+      "second_moment_minimum": 43
+    },
+    {
+      "first_moment_minimum": 48,
+      "improvement": 2,
+      "q": 31,
+      "s": 8,
+      "second_moment_minimum": 50
+    },
+    {
+      "first_moment_minimum": 9,
+      "improvement": 1,
+      "q": 32,
+      "s": 2,
+      "second_moment_minimum": 10
+    },
+    {
+      "first_moment_minimum": 15,
+      "improvement": 2,
+      "q": 32,
+      "s": 3,
+      "second_moment_minimum": 17
+    },
+    {
+      "first_moment_minimum": 22,
+      "improvement": 1,
+      "q": 32,
+      "s": 4,
+      "second_moment_minimum": 23
+    },
+    {
+      "first_moment_minimum": 28,
+      "improvement": 1,
+      "q": 32,
+      "s": 5,
+      "second_moment_minimum": 29
+    },
+    {
+      "first_moment_minimum": 35,
+      "improvement": 1,
+      "q": 32,
+      "s": 6,
+      "second_moment_minimum": 36
+    },
+    {
+      "first_moment_minimum": 42,
+      "improvement": 1,
+      "q": 32,
+      "s": 7,
+      "second_moment_minimum": 43
+    },
+    {
+      "first_moment_minimum": 49,
+      "improvement": 1,
+      "q": 32,
+      "s": 8,
+      "second_moment_minimum": 50
+    },
+    {
+      "first_moment_minimum": 11,
+      "improvement": 1,
+      "q": 49,
+      "s": 2,
+      "second_moment_minimum": 12
+    },
+    {
+      "first_moment_minimum": 19,
+      "improvement": 1,
+      "q": 49,
+      "s": 3,
+      "second_moment_minimum": 20
+    },
+    {
+      "first_moment_minimum": 26,
+      "improvement": 2,
+      "q": 49,
+      "s": 4,
+      "second_moment_minimum": 28
+    },
+    {
+      "first_moment_minimum": 34,
+      "improvement": 3,
+      "q": 49,
+      "s": 5,
+      "second_moment_minimum": 37
+    },
+    {
+      "first_moment_minimum": 42,
+      "improvement": 2,
+      "q": 49,
+      "s": 6,
+      "second_moment_minimum": 44
+    },
+    {
+      "first_moment_minimum": 49,
+      "improvement": 2,
+      "q": 49,
+      "s": 7,
+      "second_moment_minimum": 51
+    },
+    {
+      "first_moment_minimum": 57,
+      "improvement": 0,
+      "q": 49,
+      "s": 8,
+      "second_moment_minimum": 57
+    },
+    {
+      "first_moment_minimum": 12,
+      "improvement": 1,
+      "q": 64,
+      "s": 2,
+      "second_moment_minimum": 13
+    },
+    {
+      "first_moment_minimum": 21,
+      "improvement": 2,
+      "q": 64,
+      "s": 3,
+      "second_moment_minimum": 23
+    },
+    {
+      "first_moment_minimum": 30,
+      "improvement": 1,
+      "q": 64,
+      "s": 4,
+      "second_moment_minimum": 31
+    },
+    {
+      "first_moment_minimum": 38,
+      "improvement": 3,
+      "q": 64,
+      "s": 5,
+      "second_moment_minimum": 41
+    },
+    {
+      "first_moment_minimum": 47,
+      "improvement": 3,
+      "q": 64,
+      "s": 6,
+      "second_moment_minimum": 50
+    },
+    {
+      "first_moment_minimum": 56,
+      "improvement": 2,
+      "q": 64,
+      "s": 7,
+      "second_moment_minimum": 58
+    },
+    {
+      "first_moment_minimum": 64,
+      "improvement": 2,
+      "q": 64,
+      "s": 8,
+      "second_moment_minimum": 66
+    },
+    {
+      "first_moment_minimum": 14,
+      "improvement": 1,
+      "q": 81,
+      "s": 2,
+      "second_moment_minimum": 15
+    },
+    {
+      "first_moment_minimum": 23,
+      "improvement": 2,
+      "q": 81,
+      "s": 3,
+      "second_moment_minimum": 25
+    },
+    {
+      "first_moment_minimum": 33,
+      "improvement": 1,
+      "q": 81,
+      "s": 4,
+      "second_moment_minimum": 34
+    },
+    {
+      "first_moment_minimum": 42,
+      "improvement": 3,
+      "q": 81,
+      "s": 5,
+      "second_moment_minimum": 45
+    },
+    {
+      "first_moment_minimum": 52,
+      "improvement": 4,
+      "q": 81,
+      "s": 6,
+      "second_moment_minimum": 56
+    },
+    {
+      "first_moment_minimum": 62,
+      "improvement": 3,
+      "q": 81,
+      "s": 7,
+      "second_moment_minimum": 65
+    },
+    {
+      "first_moment_minimum": 72,
+      "improvement": 2,
+      "q": 81,
+      "s": 8,
+      "second_moment_minimum": 74
+    },
+    {
+      "first_moment_minimum": 17,
+      "improvement": 1,
+      "q": 125,
+      "s": 2,
+      "second_moment_minimum": 18
+    },
+    {
+      "first_moment_minimum": 29,
+      "improvement": 1,
+      "q": 125,
+      "s": 3,
+      "second_moment_minimum": 30
+    },
+    {
+      "first_moment_minimum": 40,
+      "improvement": 3,
+      "q": 125,
+      "s": 4,
+      "second_moment_minimum": 43
+    },
+    {
+      "first_moment_minimum": 52,
+      "improvement": 2,
+      "q": 125,
+      "s": 5,
+      "second_moment_minimum": 54
+    },
+    {
+      "first_moment_minimum": 64,
+      "improvement": 2,
+      "q": 125,
+      "s": 6,
+      "second_moment_minimum": 66
+    },
+    {
+      "first_moment_minimum": 75,
+      "improvement": 4,
+      "q": 125,
+      "s": 7,
+      "second_moment_minimum": 79
+    },
+    {
+      "first_moment_minimum": 87,
+      "improvement": 5,
+      "q": 125,
+      "s": 8,
+      "second_moment_minimum": 92
+    },
+    {
+      "first_moment_minimum": 17,
+      "improvement": 1,
+      "q": 128,
+      "s": 2,
+      "second_moment_minimum": 18
+    },
+    {
+      "first_moment_minimum": 29,
+      "improvement": 2,
+      "q": 128,
+      "s": 3,
+      "second_moment_minimum": 31
+    },
+    {
+      "first_moment_minimum": 41,
+      "improvement": 2,
+      "q": 128,
+      "s": 4,
+      "second_moment_minimum": 43
+    },
+    {
+      "first_moment_minimum": 53,
+      "improvement": 2,
+      "q": 128,
+      "s": 5,
+      "second_moment_minimum": 55
+    },
+    {
+      "first_moment_minimum": 64,
+      "improvement": 2,
+      "q": 128,
+      "s": 6,
+      "second_moment_minimum": 66
+    },
+    {
+      "first_moment_minimum": 76,
+      "improvement": 3,
+      "q": 128,
+      "s": 7,
+      "second_moment_minimum": 79
+    },
+    {
+      "first_moment_minimum": 88,
+      "improvement": 4,
+      "q": 128,
+      "s": 8,
+      "second_moment_minimum": 92
+    },
+    {
+      "first_moment_minimum": 23,
+      "improvement": 1,
+      "q": 243,
+      "s": 2,
+      "second_moment_minimum": 24
+    },
+    {
+      "first_moment_minimum": 39,
+      "improvement": 2,
+      "q": 243,
+      "s": 3,
+      "second_moment_minimum": 41
+    },
+    {
+      "first_moment_minimum": 55,
+      "improvement": 3,
+      "q": 243,
+      "s": 4,
+      "second_moment_minimum": 58
+    },
+    {
+      "first_moment_minimum": 71,
+      "improvement": 2,
+      "q": 243,
+      "s": 5,
+      "second_moment_minimum": 73
+    },
+    {
+      "first_moment_minimum": 87,
+      "improvement": 4,
+      "q": 243,
+      "s": 6,
+      "second_moment_minimum": 91
+    },
+    {
+      "first_moment_minimum": 103,
+      "improvement": 5,
+      "q": 243,
+      "s": 7,
+      "second_moment_minimum": 108
+    },
+    {
+      "first_moment_minimum": 119,
+      "improvement": 4,
+      "q": 243,
+      "s": 8,
+      "second_moment_minimum": 123
+    },
+    {
+      "first_moment_minimum": 24,
+      "improvement": 1,
+      "q": 256,
+      "s": 2,
+      "second_moment_minimum": 25
+    },
+    {
+      "first_moment_minimum": 40,
+      "improvement": 2,
+      "q": 256,
+      "s": 3,
+      "second_moment_minimum": 42
+    },
+    {
+      "first_moment_minimum": 57,
+      "improvement": 2,
+      "q": 256,
+      "s": 4,
+      "second_moment_minimum": 59
+    },
+    {
+      "first_moment_minimum": 73,
+      "improvement": 4,
+      "q": 256,
+      "s": 5,
+      "second_moment_minimum": 77
+    },
+    {
+      "first_moment_minimum": 90,
+      "improvement": 2,
+      "q": 256,
+      "s": 6,
+      "second_moment_minimum": 92
+    },
+    {
+      "first_moment_minimum": 106,
+      "improvement": 3,
+      "q": 256,
+      "s": 7,
+      "second_moment_minimum": 109
+    },
+    {
+      "first_moment_minimum": 123,
+      "improvement": 4,
+      "q": 256,
+      "s": 8,
+      "second_moment_minimum": 127
+    }
+  ],
+  "schema": "c945-higher-arc-defect-v1"
+}

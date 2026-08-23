@@ -159,6 +159,42 @@ one at a time.  This closes the exact one-variable coverage bound.  The
 remaining proof obligation is a fully explicit treatment of floors in the
 asymptotic corollary.
 
+## Exact parameter evidence
+
+The deterministic bundle
+`2026-08-22-c945-higher-arc-defect.{py,json,sha256}` evaluates the published
+first-moment threshold and the exact one-variable second-moment envelope for
+`lambda=1`, no holes, the 22 listed values of `q`, and
+`2 <= s <= min(8,q)`.  These are parameter inequalities; the output does not
+assert existence of a projective plane or an arc for any row.
+
+Across 146 `(q,s)` rows, the second-moment threshold is strictly stronger in
+126 rows, with maximum improvement five in the searched set.  For the eight
+small `(k,3)` comparison orders `q=4,5,7,8,9,11,13,16`, the first/second
+thresholds are respectively
+
+```
+7/7, 8/9, 9/9, 9/9, 9/11, 10/11, 11/12, 12/13.
+```
+
+The generator independently checks the convex degree envelope by dynamic
+programming in 5,386 bounded instances (`3 <= k <= 20`, `2 <= s < min(6,k)`,
+all feasible degree sums), and checks 37 ordinary-arc specializations against
+`3 C(k,4)` for `4 <= k <= 40`.
+
+Replay from the repository root:
+
+```
+nix shell nixpkgs#python3 --command python3 notes/2026-08-22-c945-higher-arc-defect.py check
+```
+
+The generator is deterministic and uses only Python's standard library.
+`generate` rewrites the canonical sorted JSON and checksum manifest; `check`
+recomputes both in memory and fails on drift.  The script is 6,029 bytes with
+SHA-256 `ab2b15c414214ca6b5ec4481e8ed4525fa3c94e3f74b1473fe8f8762a6224de1`;
+the JSON is 20,120 bytes with SHA-256
+`d3c81648084c5ac9d2a58b9accc8ec538530a666814e051436a5fd0ddc330667`.
+
 ## Candidate new numerical consequence
 
 Put
