@@ -281,9 +281,14 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   that example has split cover (\(=\mathrm{Bl}_E(\mathbf
   P^1\times\mathbf P^2)\), \(b_3=2\)), but the failure yields the
   flagged candidate theorem that markedness is a birational invariant
-  of smooth threefolds (rational \(\Rightarrow\) marked-free), whose
-  red-team is now the highest-EV open item:
+  of smooth threefolds (rational \(\Rightarrow\) marked-free):
   `../2026-08-23-c925-fable-marked-block-birational-invariance.md`.
+  Same-day red-team **withdraws the candidate** (splitting hole on
+  \(b_3=0\) members, circular over the open case); what survives is
+  curve-anchored transport along arbitrary AKMW chains, and the tail's
+  single technical target is now the Stokes-decorated ledger
+  (non-semisimple Gamma-II):
+  `../2026-08-23-c925-fable-birational-invariance-redteam.md`.
 
 - **C924 — closed 2026-08-19.** The direct ordinary-QDM route proves
   irrationality of `X x P^1` after one mandatory local repair: compare the

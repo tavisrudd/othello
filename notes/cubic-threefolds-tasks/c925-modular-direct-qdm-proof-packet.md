@@ -290,6 +290,18 @@ realization of that orbit.
   tail closes for all rational carriers and the three-cycle gate
   reduces to irrational centres.  Notes:
   notes/2026-08-23-c925-fable-marked-block-birational-invariance.md
+- Red-team verdict, same day: **candidate withdrawn** — blow-down
+  inheritance is curve-anchored, and origin-anchored markedness can
+  hide by splitting on \(b_3=0\) members, which is circularly the
+  (GS-carrier) obligation itself.  Mechanism: formal decompositions
+  transport ledgers but not Stokes data; monodromy is not
+  decomposition-additive (\(t^2-(2-b^2)t+1\)).  Salvage: curve-anchored
+  transport along arbitrary AKMW chains both directions (any-genus
+  curve centres), and rational varieties unmarked along chosen
+  factorizations.  The whole tail is now identified as one technical
+  target: make the Stokes-decorated ledger (\(ss'\) on split pairs)
+  transport along chain fields — non-semisimple Gamma-II.  Note:
+  notes/2026-08-23-c925-fable-birational-invariance-redteam.md
 
 The packet index owns the module-to-file map.  Do not append another large
 module to this card or to the index; add one focused companion file and one
