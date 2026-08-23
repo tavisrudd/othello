@@ -927,16 +927,31 @@ calibration exists, and they force a large centre: difference one needs
 `../2026-08-23-c925-fable-grading-multiplicity-exclusion.md`; Lean:
 `Comparison.GradingMultiplicityExclusion`.
 
+**A dimension bound is not available: refuted.**  The tempting completion of
+this route — read the rotation order as the index of a limiting Fano, bound it
+by \(\dim+1\) via Kobayashi--Ochiai, and conclude that a marked
+\(\ell\)-cycle needs dimension \(\ell+2\) — is false beyond Picard rank one.
+The del Pezzo surface of degree five \(\mathrm{Bl}_4\mathbf P^2\) has Fano
+index one yet boundary rotation order four at the cocharacter
+\((-1,-1,-1,-1,0)\); its Newton polygon has a length-four edge of slope
+\(1/2\) with edge polynomial the perfect square \((5\lambda^2-16)^2\), and the
+monodromy tracker returns cycle type \((4,1,1,1)\) unanimously across three
+base points, three radii and three step counts.  The cycle length is the
+product of the denominators of all Newton--Puiseux stages, and stages after
+the first are not governed by the degree axiom; geometrically the limits are
+singular Gorenstein toric Fanos whose Weil-divisor index exceeds \(\dim+1\),
+which Kobayashi--Ochiai does not bound.  Do not reopen this without defeating
+that witness.  The dimension bound itself is not refuted — every long cycle
+exhibited lives on a surface, and a surface carries no marked block — but no
+proof of it runs through the rotation order.
+
 **Residual gate.**  What is left on this route is a centre of Picard rank at
 least two whose cyclic triple has grading difference zero or one while still
-carrying \(\delta^\sharp=4/9\).  The Newton-slope criterion is exact there but
-yields no dimension bound, because nothing bounds \(c_1\cdot\gamma\) on the
-edge carrying the marked blocks: Mori's cone theorem bounds \(c_1\cdot C\) on
-an extremal rational curve by \(\dim+1\), the curve-level analogue of
-Kobayashi--Ochiai, but \(\gamma\) is a difference of effective classes and
-escapes it.  This is the same configuration the parabolic-shear countermodel
-realizes as linear algebra, so the two routes now cover disjoint halves of the
-gate.
+carrying \(\delta^\sharp=4/9\).  That is the same configuration the
+parabolic-shear countermodel realizes as linear algebra, so the two routes
+cover disjoint halves of the gate.  The refutation above says the mechanism
+must come from the marker rather than from the rotation, which is what the
+grading-multiplicity argument does.
 
 Lean: `Comparison.QuantumNewtonSlope` and `Comparison.LoopOrbitArithmetic`,
 both build roots.  Reports:

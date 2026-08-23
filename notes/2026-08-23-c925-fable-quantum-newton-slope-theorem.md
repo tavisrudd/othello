@@ -175,6 +175,53 @@ marked threefold centre, a cubic threefold itself: a cubic threefold centre
 can contribute a marked block but can never contribute a marked three-cycle.
 The same counting kills every prime Fano threefold centre.
 
+**Refuted.**  The reading of the rotation order as a Fano index, and with it
+the Kobayashi–Ochiai bound \(q\le\dim+1\), is false as soon as the Picard rank
+exceeds one.  The witness is the del Pezzo surface of degree five
+\(\mathrm{Bl}_4\mathbf P^2\), of dimension two and **Fano index one**, at the
+cocharacter \(b=(-1,-1,-1,-1,0)\) in the basis \((L,E_1,\dots,E_4)\).  Its
+boundary rotation order there is **four**, exceeding both the index and
+\(\dim+1=3\).
+
+Evidence.  The exact Newton polygon of the characteristic polynomial at that
+cocharacter has vertices \((0,55),(4,57),(7,60)\) after clearing denominators:
+a first edge of horizontal length four and slope \(1/2\), whose edge
+polynomial is the perfect square \((5\lambda^2-16)^2\), and a second edge of
+length three with three distinct rational roots.  The squared edge polynomial
+is exactly the degeneracy that allows the total ramification to be
+\(2\times2=4\) rather than two independent \(2\)-cycles, and the numerical
+monodromy tracker returns cycle type \((4,1,1,1)\) unanimously over three
+random base points, three radii and three step counts.  Scripts:
+`notes/cubic-threefolds-tasks/c925-fable-dp-puiseux-check.py` and
+`c925-fable-dp-sheet-cycles.py`.
+
+Why it fails.  Theorem A bounds the denominator of a *single* Newton edge.
+The cycle length of a branch is the product of the denominators of all its
+Newton–Puiseux stages, and stages after the first are not governed by the
+degree axiom.  Geometrically, the limits at such a boundary point are singular
+Gorenstein toric Fanos whose Weil-divisor index exceeds \(\dim+1\) — the
+weighted projective plane \(\mathbf P(1,1,2)\) has \(-K=\mathcal O(4)\) and
+Weil index four in dimension two — while Kobayashi–Ochiai bounds the Cartier
+index, which is two there.  The rotation order tracks the Weil index.  The
+enumeration recorded in the loop-orbit ledger already listed the achievable
+worst-case orders as \(\{1,2,3,4,6,8,9\}\), precisely those Weil indices;
+what is new here is the recognition that this refutes the dimension bound
+rather than supporting it.
+
+Picard rank one survives untouched, and for a structural reason: there the
+characteristic polynomial is quasi-homogeneous in the single ratio, so the
+eigenvalues are exactly \(Q^{1/r}\) times constants and no later
+Newton–Puiseux stage exists.  Theorem B is therefore a statement about total
+ramification, not merely the first stage.
+
+What this does and does not kill.  It kills the derivation of the marked
+prime-cycle dimension bound from Kobayashi–Ochiai, and with it the proposal to
+close every \(m\) at once by bounding \(c_1\cdot\gamma\).  It does **not**
+refute the dimension bound itself: every long cycle exhibited here lives on a
+surface, and a surface cannot carry a marked block at all.  The moral is that
+the mechanism must come from the marker, not from the rotation — which is the
+route the grading-multiplicity exclusion takes.
+
 **Not settled.**  For \(b_2(Z)\ge2\) Theorem A gives the exact criterion but
 not a dimension bound: the rotation order is
 \((c_1\cdot\gamma)/\gcd(b\cdot\gamma,c_1\cdot\gamma)\), and since \(b\) ranges

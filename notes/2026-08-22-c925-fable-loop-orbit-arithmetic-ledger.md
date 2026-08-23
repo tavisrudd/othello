@@ -266,7 +266,18 @@ ramification of the spectral cover of a del Pezzo is 3-smooth.  The mirror
 identification itself (Givental's theorem for del Pezzos, and the tropical
 clustering statement) is quoted, not verified here.
 
-### 11.2c The dimension bound is Kobayashi–Ochiai
+### 11.2c The dimension bound is Kobayashi–Ochiai — REFUTED
+
+> **This section's derivation is false beyond Picard rank one.**  The del Pezzo
+> surface \(\mathrm{Bl}_4\mathbf P^2\), of Fano index one, has boundary
+> rotation order four at the cocharacter \((-1,-1,-1,-1,0)\), exceeding both
+> its index and \(\dim+1\).  Rotation order tracks the Weil-divisor index of a
+> singular limit, which Kobayashi–Ochiai does not bound.  See
+> `2026-08-23-c925-fable-quantum-newton-slope-theorem.md`, §5.  Theorem B for
+> Picard rank one survives; the conjecture of 11.1 is not refuted, since every
+> long cycle exhibited lives on a surface and surfaces carry no marked block,
+> but the derivation below is not a proof of it.  Retained for the record.
+
 
 The enumeration of 11.2b says more than "no prime at least five".  With the
 full support in the cell the realized orders are exactly \(1,2,3\), and
@@ -523,7 +534,7 @@ The argument of 11.2c is geometric in the required sense — it constrains which
 varieties can carry the rotation, not which matrices can carry the marker —
 so it is of the right type to escape that countermodel.
 
-### 12.4 What it would close
+### 12.4 What it would close — VOID, the mechanism is refuted
 
 The candidate centre dimensions currently left open are \(d=3\) at \(n=3\)
 and, before a separate equality-case exclusion, \(d=5\) at \(n=5\), with
