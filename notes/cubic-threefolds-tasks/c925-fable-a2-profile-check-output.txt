@@ -1,0 +1,6 @@
+HH_*(kA2) dimensions (normalized bar complex): {0: 2, 1: 0, 2: 0, 3: 0} -> dimension two, concentrated in degree zero
+A2 Gram [[1,1],[0,1]]: T = G^-T G has trace 1, T^3 = -1, order 6, eigenvalues [1/2 + sqrt(3)*I/2, 1/2 - sqrt(3)*I/2] (the marked class)
+BMMS Ku(Y3) Gram [[-1,-1],[0,-1]]: T = G^-T G has trace 1, T^3 = -1, order 6, eigenvalues [1/2 + sqrt(3)*I/2, 1/2 - sqrt(3)*I/2] (the marked class)
+the two T's are literally equal: the marker sees no difference between Ku(Y3) and D^b(A2)
+del Pezzo (-1)-curve pair (O, O(E)): chi(O, O(E)) = 1  -> exceptional pair with a single Hom; its hull in D^b(S x P^1) is D^b(A2) inside a b3 = 0 threefold
+all checks passed

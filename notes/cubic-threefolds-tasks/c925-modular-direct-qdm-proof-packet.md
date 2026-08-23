@@ -201,6 +201,11 @@ realization of that orbit.
   canonical point, quantum cohomology etale, no Jordan block, hence no
   marked class on the toric \(b_3=0\) tail (vacuously — no blocks exist):
   notes/2026-08-23-c925-fable-toric-b3zero-levelt-sweep.md
+- Hochschild-parity closure of the \(b_3=0\) tail refuted (\(D^b(A_2)\) is
+  the danger profile and embeds in \(b_3=0\) threefolds); toric slice of the
+  tail closed via etale-at-a-point plus Hensel; general tail reduced to the
+  pointwise converse-HMT statement (GS-carrier); irregular-Hodge lead
+  logged: notes/2026-08-23-c925-fable-b3zero-tail-a2-reduction.md
 
 The packet index owns the module-to-file map.  Do not append another large
 module to this card or to the index; add one focused companion file and one
