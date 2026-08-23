@@ -235,6 +235,17 @@ realization of that orbit.
   carriers only (irregular-Hodge lead).  Table:
   notes/cubic-threefolds-tasks/c925-fable-b3zero-enumeration.md; note:
   notes/2026-08-23-c925-fable-b3zero-enumeration-closure.md
+- Carrier structure theorem: every smooth \(b_1=b_3=0\) threefold reduces
+  by smooth MMP (Mori 1982, no flips in the smooth category) to the
+  ledger-closed class or to four named residues — discriminantal conic
+  bundles over \(q=0\) surfaces with vanishing total Prym, del Pezzo
+  fibrations of degree \(\le8\) over \(\mathbf P^1\), E3--E5-only stages,
+  and the \(K\)-nef boundary.  Free corollaries: all rational surfaces and
+  all \(\mathbf P^1\)/\(\mathbf P^2\)-bundles over them are ledger-closed.
+  The \(b_3=0\) tail and the §6f three-cycle gate now converge on the same
+  two fibration classes; §6f's two silent gaps (E3--E5, \(K\)-nef) are
+  recorded.  Note:
+  notes/2026-08-23-c925-fable-carrier-mmp-reduction.md
 
 The packet index owns the module-to-file map.  Do not append another large
 module to this card or to the index; add one focused companion file and one

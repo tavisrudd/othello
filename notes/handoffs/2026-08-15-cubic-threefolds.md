@@ -259,7 +259,12 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   enumeration is complete: all 59 \(h^{1,2}=0\) Mori--Mukai families are
   ledger-closed with zero escapees, so the Fano \(b_3=0\) tail is fully
   discharged and the sole remaining tail item is non-Fano carriers:
-  `../2026-08-23-c925-fable-b3zero-enumeration-closure.md`.
+  `../2026-08-23-c925-fable-b3zero-enumeration-closure.md`.  The carrier
+  structure theorem then reduces those by smooth MMP to discriminantal
+  conic bundles, del Pezzo fibrations of degree \(\le8\), E3--E5-only
+  stages, and the \(K\)-nef boundary; both open gates now converge on the
+  two fibration classes:
+  `../2026-08-23-c925-fable-carrier-mmp-reduction.md`.
 
 - **C924 — closed 2026-08-19.** The direct ordinary-QDM route proves
   irrationality of `X x P^1` after one mandatory local repair: compare the
