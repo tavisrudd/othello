@@ -2,7 +2,7 @@
 
 **Lane**: complete-ports
 
-**Status**: IN PROGRESS; CORE THEOREMS AND EJ2 UPGRADES DERIVED; INDEPENDENT COLD READ PENDING
+**Status**: IN PROGRESS; CORE THEOREMS, EJ UPGRADES, AND BOUNDED LITERATURE AUDIT RECORDED; INDEPENDENT COLD READ AND FULL-TEXT NOVELTY CLOSURE PENDING
 
 ## Scope
 
@@ -487,7 +487,155 @@ No new relative-duality theorem is claimed here. The new content is its exact
 translation through the recovery pair and the additive concatenation escape
 barrier.
 
-## 9. Computational sanity checks
+## 9. Best-target dual-weight identity and cooperative-locality corollary
+
+For a linear code (C\le\mathbb F_q^E), a target set (P\subseteq E) of
+size (t), and (J=E\setminus P), define the full-coordinate recovery cost
+
+\[
+ \kappa_C(P)=\min |H|,
+\]
+
+where the minimum ranges over (H\subseteq J) for which there is a
+(t)-dimensional subspace (L\le C^\perp), supported on (P\cup H), whose
+restriction (L\to\mathbb F_q^P) is an isomorphism. Equivalently,
+(\kappa_C(P)) is the minimum helper-union cost of a normalized identity
+equation system recovering every coordinate in (P). Set it to infinity when
+no such system exists.
+
+### Theorem — generalized dual weights are exact best-target costs
+
+For (1\le t\le\dim C^\perp),
+
+\[
+ \boxed{
+ d_t(C^\perp)-t
+ =\min_{\substack{P\subseteq E\\|P|=t}}\kappa_C(P).
+ }
+\]
+
+For the lower bound, any normalized identity system spans a (t)-dimensional
+dual subcode whose support is (P) together with its helper union. Hence
+
+\[
+ d_t(C^\perp)\le t+\kappa_C(P).
+\]
+
+Conversely, choose a (t)-dimensional subcode (L\le C^\perp) of support
+size (d_t(C^\perp)). A generator matrix of (L) has an information set
+(P\subseteq\operatorname{supp}L) of size (t). Projection onto (P) is an
+isomorphism, and row normalization gives identity recovery equations using
+exactly (operatorname{supp}L\setminus P). Thus
+
+\[
+ \kappa_C(P)\le d_t(C^\perp)-t.
+\]
+
+This theorem separates two quantifiers that the classical GHW suppresses:
+
+- (d_t(C^\perp)-t) is the best target set's simultaneous helper cost;
+- fixed-(P) recovery is measured by (kappa_C(P)), and, when the (t)
+  target message dimensions are independent, by the canonical relative weight
+  (M_t(D_P,K_P));
+- worst-target cooperative locality is
+  [
+  r_t^{\mathrm{coop}}(C)
+  =\max_{|P|=t}\kappa_C(P)
+  ]
+  whenever every (t)-set is recoverable.
+
+In particular, if (C) has ((r,t))-cooperative locality and (t<d(C)), then
+
+\[
+ r\ge r_t^{\mathrm{coop}}(C)
+ \ge \min_{|P|=t}\kappa_C(P)
+ =d_t(C^\perp)-t.
+\]
+
+This recovers Abdel-Ghaffar--Weber's 2017 generalized-weight bound as an
+immediate min--max corollary. Their proof supplies the first inequality for an
+arbitrary erased set; the information-set converse above upgrades the global
+lower bound to an exact best-target identity.
+
+C946 then adds a new concatenation consequence. If
+(\Gamma_C(P)) is the eventual first nonconfined helper-union cost for the
+identity demand on (P), its objectwise theorem gives
+
+\[
+ \Gamma_C(P)=\kappa_C(P)+d(C^\perp).
+\]
+
+Minimizing over all (t)-targets yields the global escape envelope
+
+\[
+ \boxed{
+ \min_{|P|=t}\Gamma_C(P)
+ =d_t(C^\perp)-t+d(C^\perp).
+ }
+\]
+
+Thus the ordinary dual weight hierarchy governs the earliest possible escape
+somewhere, the fixed-target relative hierarchy governs escape at a prescribed
+target set, and the complete coefficient systems govern what is actually
+transported.
+
+### EJ consequences — target heterogeneity and MDS collapse
+
+For (t<d(C)), define the target-cost distribution
+
+\[
+ B_{t,h}(C)
+ =\#\{P\subseteq E:|P|=t,\ \kappa_C(P)=h\}.
+\]
+
+Its two endpoints are familiar invariants:
+
+\[
+ \min\{h:B_{t,h}\ne0\}=d_t(C^\perp)-t,
+ \qquad
+ \max\{h:B_{t,h}\ne0\}=r_t^{\mathrm{coop}}(C).
+\]
+
+Thus the dual GHW is the best-target endpoint, cooperative locality is the
+worst-target endpoint, and the distribution between them measures recovery
+heterogeneity discarded by both. The nonnegative gap
+
+\[
+ \mathfrak a_t(C)
+ =r_t^{\mathrm{coop}}(C)-d_t(C^\perp)+t
+\]
+
+is zero exactly when every (t)-target set has the globally minimum helper
+cost. This is useful diagnostic notation for the report, not yet proposed as a
+new branded invariant.
+
+For an ([n,k]) MDS code and (1\le t<d(C)=n-k+1), every (t)-target set has
+
+\[
+ \kappa_C(P)=k.
+\]
+
+Indeed, any (k) surviving coordinates reconstruct the codeword, while fewer
+than (k) helper columns cannot span even one omitted target column because
+every set of at most (k) generator columns is independent. Equivalently,
+
+\[
+ d_t(C^\perp)-t=(k+t)-t=k
+\]
+
+and the best and worst endpoints coincide. Consequently every full-(t)-target
+identity demand has the same eventual escape threshold
+
+\[
+ \boxed{\Gamma_C(P)=2k+1,}
+\]
+
+independent of (t). Within a fixed (p)-target set, the partial-rank
+thresholds still form the staircase (2k-p+t+1); only the top-rank full-(p)
+demand collapses to the constant (2k+1). This cleanly separates partial
+linear-demand recovery from complete coordinate-erasure recovery.
+
+## 10. Computational sanity checks
 
 Two exploratory checks were run while deriving the theorem packet:
 
@@ -516,33 +664,116 @@ evidence. Their ephemeral scripts and outputs are not a reproducibility bundle
 and must not be cited as such. Any manuscript use requires the separate
 research-reproducibility gate.
 
-## 10. Literature and priority audit
+## 11. Literature and priority audit
 
-Primary sources checked in the shared cache and by focused searches:
+**Read-depth summary:** 0 sources were read at full text. Nine primary sources
+were read partially at the theorem/definition/positioning sections stated
+below. The priority verdict therefore remains a bounded, targeted audit and
+supports only "to our knowledge" language.
 
-- arXiv:1403.7985 (Geil et al.): definition and hierarchy of relative
-  generalized Hamming weights, relative Singleton behavior, MDS equality,
-  and nested-code information interpretation. Cached SHA-256:
+### Sources and read depth
+
+- **Partial:** Abdel-Ghaffar and Weber, *Bounds for Cooperative Locality Using
+  Generalized Hamming Weights*, accepted-author manuscript of the 2017 ISIT
+  paper. Read: introduction; Section II, Lemma 2 and Definition 2; Section III,
+  GHW definition and Theorem 1 with proof; conclusion. It proves
+  (r\ge d_e(C^\perp)-e) for ((r,e))-cooperative locality, but neither an
+  exact fixed-target relative-weight identity nor concatenation confinement.
+  Cache key `10.1109/ISIT.2017.8006618`; SHA-256
+  `acae6904b1b9865754a15c44d7572965b6a313fc9a6d78510c196ca022fe4433`.
+- **Partial:** Geil--Martin--Matsumoto--Ruano--Luo, *Relative generalized
+  Hamming weights of one-point algebraic geometric codes*, cached arXiv
+  preprint. Read: the information-threshold discussion preceding Definition 4,
+  Definition 4, and Section 3's MDS/Singleton/duality discussion. These establish
+  the classical RGHW and ramp-secret-sharing inputs, not the recovery-pair or
+  transfer theorem. Cache key `arXiv:1403.7985`; SHA-256
   `25e31e23e4238ae33a08b4730c558fe071861a87c6e4fc0e1161d4bbcda581e7`.
-- arXiv:2503.17764 (San-José): current definitions, strict hierarchy,
-  Singleton bounds, and algorithms for generalized and relative weights.
-  Cached SHA-256:
+- **Partial:** San-José, *An algorithm for computing generalized Hamming weights
+  and the Sage package GHWs*, cached arXiv preprint. Read: introduction and
+  Section 2 through Theorem 2.8, covering GHW/RGHW definitions, strict
+  hierarchy, Singleton bounds, duality, and the package's problem boundary.
+  Cache key `arXiv:2503.17764`; SHA-256
   `98bebce176b7f711a90f6a2ba0224dd77e4883eb0939c8aca237d571e9d1654b`.
-- arXiv:2309.03676 (Gruica--Jany--Ravagnani): generalized weights and refined
-  support distributions in LRC bounds. The audited portions did not use the
-  canonical nested recovery pair or the exact confinement sum above. Cached
-  SHA-256:
+- **Partial:** Prakash--Lalitha--Kumar, *Codes with Locality for Two Erasures*,
+  cached arXiv preprint. Read: abstract, introduction, Section II's GHW setup,
+  and Section III's definition and result outline. It treats sequential two-
+  erasure repair and uses GHWs of a local dual subcode for global distance
+  bounds; it does not give the simultaneous fixed-target RGHW or confinement
+  theorem. Cache key `arXiv:1401.2422`; SHA-256
+  `8596f44adaa5891b774835700717cf8873701e53c15194b70d14724ddeac6d0d`.
+- **Partial:** Márquez-Corbella--Martínez-Moro--Munuera, *Computing sharp
+  recovery structures for Locally Recoverable codes*, cached arXiv preprint.
+  Read: introduction and Section 2 through Proposition 1. It establishes the
+  standard single-coordinate recovery-set/recovery-structure language and its
+  dual-support characterization, but retains neither multi-target ranks nor
+  normalized coefficient fibers. Cache key `arXiv:1907.05316`; SHA-256
+  `a9060ca8f7901885f1e077076c73dd7d03f8ae995a2232e891ce74c39e4ea927`.
+- **Partial:** Jin--Fu, *Constructions of Locally Repairable Codes via
+  Concatenated Codes*, arXiv v1 of 6 May 2026. Read: abstract/introduction,
+  Section 2's concatenation/locality definitions, Section 3's scope and
+  Construction 3.2. It fixes the binary ([3,2,2]) inner code and chooses
+  outer (mathbb F_4)-codes for parameter-optimal binary LRCs; it does not
+  study exact dual-equation confinement for a general represented inner code.
+  Cache key `arXiv:2605.04618`; SHA-256
+  `69847fc4ed1ada75f615ab8d2b2c08484da31253d278f9485cd03f5ab9587d93`.
+- **Partial:** Gruica--Jany--Ravagnani, *LRCs: Duality, LP Bounds, and Field
+  Size*, cached arXiv preprint. Read: abstract/introduction, Section 2's locality
+  definitions, and Section 3 through Definition 3.2 and the MacWilliams-type
+  framing. Its coordinate-refined weight counts and LP do not use the canonical
+  nested recovery pair or exact concatenation sum. Cache key
+  `arXiv:2309.03676`; SHA-256
   `1b941cf8445e40039a988ea0124e15fd94f0bbeb278205ec7bf934bf3e9a71a3`.
-- arXiv:2608.05758: a contemporary moment-based LRC linear-programming bound.
-  It reinforces that a generic LP-bounds paper would enter a crowded current
-  lane; it does not pre-empt the exact relative-weight confinement theorem.
-- The 2026 paper *Considerate ramp secret sharing* was checked for the current
-  access-structure/RGHW information interpretation; that bridge is standard.
-  DOI: 10.1007/s10623-026-01808-y.
+- **Partial:** Li--Wei--Xiong, *Moment-based linear programming bounds for
+  locally recoverable codes*, arXiv v1 of 6 August 2026. Read: abstract and
+  introduction through the paper organization and LP comparison. It confirms
+  that generic LRC LP bounds are a crowded lane and does not state an RGHW
+  confinement theorem. Cache key `arXiv:2608.05758`; SHA-256
+  `0d85f3fc514ccda6b001e639960cc22212cdfe1e8b164930229fde9c1e63d713`.
+- **Partial:** Geil, *Considerate ramp secret sharing*, Springer version of
+  record, published 16 February 2026. Read on the official HTML page: abstract,
+  introduction, Section 2's Theorem 1, Definition 6, and conclusion. It confirms
+  that nested-pair information recovery and RGHW access thresholds are standard;
+  it does not discuss local recovery equations or concatenation confinement.
+  DOI `10.1007/s10623-026-01808-y`; no PDF was cached.
 
-Focused exact-phrase searches included relative generalized weights together
-with concatenation, recovery sets, cooperative repair, locality, and
-confinement. No source found in this bounded audit states the combination
+### Search coverage
+
+Load-bearing web queries were:
+
+- `"relative generalized Hamming weights" "cooperative locality"`
+- `"relative generalized Hamming weights" "recovery sets" code`
+- `"relative generalized Hamming weight" "repair set" linear code`
+- `"relative generalized Hamming weights" concatenated codes recovery`
+- `"relative generalized Hamming weights" "concatenation" locality`
+- `"generalized Hamming weights of concatenated codes"`
+- `"weight hierarchy" concatenated codes linear`
+- `concatenated codes "cooperative repair" inner code outer code`
+- `concatenated locally recoverable codes "generalized Hamming weights"`
+- `linear code concatenation "repair equations" inner block`
+- `"recovery structure" concatenated codes locality`
+- `"relative dimension/length profile" erasure recovery`
+
+The web-search front end displayed respectively
+(7,21,19,20,17,22,14,21) hits in the eight audit batches, or 141 displayed
+records with duplicates retained. The screen covered displayed title, snippet,
+URL/domain, and date. Its mechanical discriminator was: **promote a result if
+its displayed record combines at least two of GHW/RGHW, cooperative or multiple-
+erasure recovery, concatenation, recovery structures, or exact dual supports;
+also promote every exact-title hit for a named near predecessor.** The result
+pages were relevance screens, not exhaustively enumerated citing sets, and no
+negative verdict rests on their reported total-result counts. Accordingly the
+three-graph forward-citation rule was not triggered. Promoted exact-title and
+exact-phrase hits received the source-level reads above.
+
+MathSciNet was **NOT COVERED** because institutional authentication was not
+available. Google Scholar was **NOT COVERED** because automated access was not
+used. No claim is made about sources indexed only there. zbMATH and a complete
+forward-citation closure were also not covered in this pass. These gaps require
+"to our knowledge" wording.
+
+### Priority verdict
+
+No source found in this bounded audit states the combination
 
 \[
  \text{canonical recovery pair}
@@ -554,21 +785,45 @@ confinement. No source found in this bounded audit states the combination
 This is a bounded-search priority conclusion, not a claim of exhaustive
 global novelty.
 
-## 11. TT and EJ verdict
+The nearest classical theorem is Abdel-Ghaffar--Weber's cooperative-locality
+bound. The exact best-target identity above makes it a corollary and clarifies
+the strict refinement:
+
+\[
+ \text{global dual GHW}
+ \;<\;\text{fixed-target relative recovery hierarchy}
+ \;<\;\text{normalized coefficient systems}
+ \;<\;\text{exact concatenation transfer}.
+\]
+
+The inequalities here denote increasing information, not numerical strictness
+for every code. The universality of nested pairs remains classical in substance;
+the defensible priority claim begins with their exact fixed-target role in the
+confinement theorem.
+
+No manuscript, bibliography, public summary, or novelty ledger was updated.
+The existing C948 report is the sole home of this provisional verdict, so there
+are no repeated novelty surfaces to synchronize at this stage.
+
+## 12. TT and EJ verdict
 
 1. **Flagship:** the exact rank-(t) threshold
    (M_t(D_P,K_P)+d(I^\perp)). This is the strongest paper-specific theorem.
-2. **Strong corollary:** relative-Singleton/MDS extremality and the rank-one
+2. **Priority judo:** the identity
+   (d_t(C^\perp)-t=\min_{|P|=t}\kappa_C(P)) makes the classical cooperative-
+   locality GHW bound a min--max corollary and yields the global concatenation
+   escape envelope (d_t(C^\perp)-t+d(C^\perp)).
+3. **Strong corollary:** relative-Singleton/MDS extremality and the rank-one
    rigidity theorem. The inequalities are classical inputs; their exact
    confinement interpretation is new in this package.
-3. **Concrete flagship:** the projective-simplex family gives a non-MDS
+4. **Concrete flagship:** the projective-simplex family gives a non-MDS
    nonlinear threshold hierarchy and an exact geometric reliability law.
-4. **Structural separation:** the binary two-presentation example proves that
+5. **Structural separation:** the binary two-presentation example proves that
    the helper pair and its entire RGHW hierarchy do not determine the escape
    barrier. Target coefficients matter through (d(I^\perp)).
-5. **Demote:** universality of nested pairs is standard quotient/graph algebra.
+6. **Demote:** universality of nested pairs is standard quotient/graph algebra.
    Its positive-density exact transport is the worthwhile payoff.
-6. **Corrected:** reliability separation requires forced supports and an exact
+7. **Corrected:** reliability separation requires forced supports and an exact
    total-radius budget; arbitrary direct-sum factorization is false.
 
 Ideally packaged, the combined mathematics is now a plausible 99-level coding-
@@ -604,6 +859,12 @@ rather than as a competing theme.
   leaving the canonical helper pair and complete RGHW hierarchy fixed.
 - At the projective helper budget, the simplex configuration is the unique
   rank-one extremizer up to projective column equivalence.
+- The dual GHW minus target size is exactly the best-target simultaneous
+  recovery cost, not merely a lower bound.
+- Abdel-Ghaffar--Weber's cooperative-locality inequality is the corresponding
+  min--max corollary.
+- The earliest rank-(t) identity-demand escape over all target sets is
+  (d_t(C^\perp)-t+d(C^\perp)).
 
 ### Open
 
@@ -611,6 +872,8 @@ rather than as a competing theme.
   reliability, and coefficient-presentation arguments.
 - Full literature closure for the combined exact threshold, rather than the
   classical RGHW ingredients separately.
+- Full-text promotion of the nearest partial reads and zbMATH/forward-citation
+  closure if a manuscript-bound priority sentence is proposed.
 - Decide whether the projective-simplex family or coefficient-presentation
   separation should lead the eventual sequel application section.
 - Derive the dual relative-weight failure thresholds in literal recovery
