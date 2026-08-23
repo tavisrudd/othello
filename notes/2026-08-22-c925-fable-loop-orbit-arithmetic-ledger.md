@@ -266,6 +266,45 @@ ramification of the spectral cover of a del Pezzo is 3-smooth.  The mirror
 identification itself (Givental's theorem for del Pezzos, and the tropical
 clustering statement) is quoted, not verified here.
 
+### 11.2c The dimension bound is Kobayashi–Ochiai
+
+The enumeration of 11.2b says more than "no prime at least five".  With the
+full support in the cell the realized orders are exactly \(1,2,3\), and
+\(3=\dim+1\) for a surface.  That is not a coincidence: for the whole polygon
+the rotation order is the index of the Gorenstein toric Fano with that fan
+polytope, and \(3\) is attained only by \(\mathbf P^2\).
+
+This identifies the governing classical theorem.  Kobayashi–Ochiai: a Fano
+manifold of dimension \(d\) has index \(r\le d+1\), with \(r=d+1\) only for
+\(\mathbf P^d\) and \(r=d\) only for a quadric; the same bound holds for
+Gorenstein canonical Fanos.  Reading the rotation order at a boundary limit as
+the index of the limiting Fano therefore gives
+
+> a boundary limit with rotation order \(\ell\) needs a limiting Fano factor
+> of index \(\ell\), hence of dimension at least \(\ell-1\), with equality
+> only for \(\mathbf P^{\ell-1}\).
+
+Combined with the marked block, this **derives the dimension bound conjectured
+in 11.1 and gives its extremal case**: a marked \(\ell\)-cycle needs the cubic
+factor, which contributes dimension 3, tensored with an index-\(\ell\) factor,
+which contributes dimension at least \(\ell-1\).  Total dimension at least
+\(\ell+2\), attained by \(B\times\mathbf P^{\ell-1}\) and by nothing else of
+that dimension.  The tensor form \(U_B\otimes L_i\) is the same one the task
+card already uses for the \(B\times F_1\) source test.
+
+For \(\ell=3\) this says the only 5-fold carrying a marked 3-cycle is
+\(B\times\mathbf P^2\) itself, which is exactly the \(m=2\) exclusion the card
+records as the open local gate, now with a reason rather than a case check.
+
+**Gap to close.**  Three steps are quoted rather than proved: that the
+boundary rotation order of the spectral cover equals the index of the limiting
+Fano (proved above only in the toric mirror picture, and only for the first
+Newton–Puiseux stage); that stage orders multiply to give the total cycle
+length, so that a prime \(\ell\) in the total forces \(\ell\) in some stage;
+and that the marked and rotating factors of a tensor block can be separated as
+the card's \(B\times F_1\) argument separates them.  The first is the
+substantial one.  None of this is formalized.
+
 ### 11.2 Toric sheet cycles are cell torsion (unmarked analogue)
 
 *Superseded by 11.2b: the torsion must be computed from the support points in
