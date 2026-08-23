@@ -70,7 +70,7 @@ repository identity and formal identifiers remain stable.
 
 ## Source check
 
-No source was read at full-text depth for this bounded terminology check; two
+No source was read at full-text depth for this bounded terminology check; three
 primary sources were read partially.
 
 - Márquez-Corbella, Martínez-Moro, and Munuera, *Computing Sharp Recovery
@@ -83,6 +83,13 @@ primary sources were read partially.
   introduction to confirm ordinary operational “repair” usage.  Cache key
   `arXiv:1302.5518`, SHA-256
   `278af00d94c8b7dcd6eec66732fc4e49df8f901f9cf601b2056a187c4430d18d`.
+- Jin and Fu, *Constructions of Locally Repairable Codes via Concatenated
+  Codes*, arXiv:2605.04618v1: partial read of the abstract, introduction,
+  concatenation preliminaries, and Construction 3.2.  This confirms their fixed
+  binary `[3,2,2]` inner code, `F_4`-linear outer codes, locality-two setting,
+  and parameter/weight-distribution objective.  Cache key `arXiv:2605.04618`,
+  SHA-256
+  `69847fc4ed1ada75f615ab8d2b2c08484da31253d278f9485cd03f5ab9587d93`.
 
 No novelty or priority verdict changed.
 
@@ -95,6 +102,12 @@ No novelty or priority verdict changed.
   diagram, and bibliography inspected at full resolution;
 - rendered terminology scan: no repair-port, coefficient-port, support-port,
   full-port, represented-port, or prescribed-port phrase remains;
+- contemporary-literature follow-up: the previously uncited Jin--Fu entry is
+  now cited beside the transfer theorem with the fixed-inner/parameter-design
+  versus general represented-inner/exact-equation distinction; the abstract
+  now attributes matched invariants only to the inner seeds, and the geometry
+  section is explicitly framed as applications outside the general theorem
+  dependency;
 - independent cold read: PASS WITH MINOR EDITS.  It found one genuine layer
   description defect and four low-severity edit defects: the conclusion had
   conflated exact support projection with its upward closure, the main theorem
@@ -104,10 +117,10 @@ No novelty or priority verdict changed.
   same independent reader's narrow reread closed every finding with no new
   defect.  Its separate `make check` passed at 23 pages, warning-free;
 - PDF SHA-256:
-  `5479bc2ba9f2b124c03ccd0074b642de9a693f33ccdad239ccfa3bcee9bba697`.
+  `6859df9c0749c440d42060424b105f7fa03a8eb1e06e5f7462b228d73e89f791`.
 - immutable export source:
-  `d73ee8fde74b105c73f0dd2c62ee029e4906cc7f`;
-- standalone mirror commit: `3899bc4`; exporter verification and the clean-tree
+  `af34473b1c92b3f9d7f65dfd30e9af439a102006`;
+- standalone mirror commit: `c2a4dca`; exporter verification and the clean-tree
   full release gate both pass, with no push, tag, deposit, or submission.
 
 ## `ej` + `tt` closeout and mystery ledger
