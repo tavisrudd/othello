@@ -2,7 +2,7 @@
 
 **Lane**: complete-ports
 
-**Status**: ACTIVE; INTRINSIC RECOVERY CRITERION AND EXACT COST CANDIDATE DERIVED
+**Status**: ACTIVE; HUMAN PROOF PACKET AND TT PASS COMPLETE; PRIMARY CHAIKEN COMPARISON AND COLD READS PENDING
 
 ## Objective
 
@@ -161,12 +161,12 @@ zero/singleton/multisupport stratification.
 Consequently every cost-\(\leq r\) exact splitting is confined if and only if
 \(r<\Theta_{P,j}(I,O)\).
 
-## Candidate eventual confinement theorem
+## Eventual confinement theorem: human proof packet
 
 Let \(I\leq\mathbb F_q^E\) be a represented inner code with message alphabet
 \(L\), let \(P\subseteq E\) be simultaneously recoverable, and concatenate it
 with an \(L\)-linear outer family whose dual distance tends to infinity. For a
-fixed helper budget \(r\), the candidate sharp eventual statement is
+fixed helper budget \(r\), the sharp eventual statement is
 
 \[
  \boxed{\quad
@@ -347,13 +347,13 @@ No novelty verdict is assigned yet.
 
 ## Immediate next work
 
-- prove the intrinsic equivalence without choosing bases;
-- verify the exact finite cost formula against exhaustive small binary cases;
-- determine the rank-\(t\) external perturbation cost in a direct sum of inner
-  dual blocks;
 - obtain and read Chaiken's primary paper;
-- isolate one counterexample showing why first-order MacWilliams data do not
-  determine simultaneous recovery intersections.
+- run independent mathematical and storage-operational cold reads of the human
+  proof packet;
+- sharpen the all-singleton-marginals counterexample search only if the cold
+  readers judge it material;
+- after those gates, decide whether to queue a separate manuscript and Lean
+  theorem task.
 
 ## First exhaustive check
 
@@ -415,3 +415,133 @@ enumerator at \(x\) does not determine the simultaneous recovery cost for a
 target set containing \(x\). This is the required finite obstruction to
 promoting the existing first-order MacWilliams transform directly to the
 multi-target structure.
+
+The script also searches all nondegenerate binary length-five codes for the
+stronger phenomenon in which the normalized weight enumerators agree at every
+labeled singleton coordinate while \(\rho_{\{0,1\}}\) differs. No such pair
+occurs at this size. This bounded negative result prevents the present
+counterexample from being overstated; the all-singleton-marginals question
+remains open beyond the tested range.
+
+## TT pass: structural compression and opportunities
+
+### The support layer is matroid closure
+
+Let \(M=M(C)\) be the column matroid of a generator matrix of \(C\). The
+intrinsic criterion has the basis-free support form
+
+\[
+ H\text{ recovers }P
+ \quad\Longleftrightarrow\quad
+ P\subseteq\operatorname{cl}_M(H)
+ \quad\Longleftrightarrow\quad
+ r_M(H\cup P)=r_M(H).
+\]
+
+Thus \(\rho_P(C)\) is the minimum size of a set disjoint from \(P\) that spans
+\(P\). The complete support-only target-set structure is already matroidal;
+the represented information resides in the actual affine space of splittings.
+
+If \(H\) recovers \(P\), then
+
+\[
+ \dim(C^\perp\cap\mathbb F_q^H)=|H|-r_M(H),
+\]
+
+and therefore the number of normalized recovery-equation splittings supported
+in \(P\cup H\) is
+
+\[
+ q^{\,|P|(|H|-r_M(H))}.
+\]
+
+The cardinality is matroidal once \(q\) is fixed, even though the represented
+coefficient maps themselves need not be.
+
+### Full-radius reliability already has a Las Vergnas carrier
+
+Assume \(P\) is recoverable from \(E\setminus P\), set
+\(D=M\setminus P\), \(Q=M/P\), and for
+\(A\subseteq E\setminus P\) put
+
+\[
+ \epsilon_P(A)=r_M(A\cup P)-r_M(A).
+\]
+
+Then \(A\) recovers \(P\) exactly when \(\epsilon_P(A)=0\). In the Las Vergnas
+perspective polynomial of \(D\to Q\), the \(Z\)-exponent is
+\(\epsilon_P(A)\); hence the \(Z^0\) slice is precisely the full-radius
+simultaneous-recovery enumerator. Chaiken's ported-matroid polynomial may
+retain a richer labeled boundary algebra, but it is not needed merely to
+obtain target-set reliability. Its exact added information must be checked
+from the primary paper rather than inferred from its title.
+
+### MDS specialization
+
+For an \([m,k]\) MDS inner code and a nonempty target set \(P\) with
+\(m-|P|\geq k\), the column matroid is uniform, so
+
+\[
+ \rho_P(I)=k,\qquad d(I^\perp)=k+1.
+\]
+
+Consequently every such target set has the same eventual coefficient-
+confinement threshold
+
+\[
+ r<2k+1.
+\]
+
+The number of erased target coordinates affects the number \(m-|P|\) of
+available helpers but not the first non-confined coefficient cost. Full-radius
+success is simply the event that at least \(k\) helpers survive. This is a
+clean multi-erasure extension of the paper's one-target MDS calculation.
+
+### Relation to established locality notions
+
+The framework does not place locality, availability, \((r,\delta)\)-locality,
+and cooperative locality in a literal inclusion chain. Instead it supplies
+the fixed-demand predicate \(P\subseteq\operatorname{cl}(H)\):
+
+- ordinary locality fixes \(|P|=1\);
+- cooperative locality quantifies over all target sets of a prescribed size;
+- \((r,\delta)\)-locality requires the predicate for every erased subset of
+  size at most \(\delta-1\) inside one local group; and
+- availability asks for several suitably disjoint witnesses \(H\).
+
+This quantifier view is the precise unification.
+
+### Further abstraction exposed but not adopted
+
+Nothing in the splitting or transfer proof requires \(A\) to be the full
+coordinate space \(\mathbb F_q^P\). The same argument applies to a finite
+linear demand space of coordinate functionals. This would unify recovery of
+target coordinates, partial linear queries, and rank-restricted demands.
+It is a genuine sequel opportunity, but adopting it now would obscure the
+operational multi-erasure theorem.
+
+## Mystery ledger
+
+- **Settled by TT:** a hierarchy is not needed for the basic confinement gate.
+  Rank one gives the sharp scalar threshold; generalized weights stratify
+  stronger rank demands.
+- **Settled by TT:** the support layer is exactly the closure predicate
+  \(P\subseteq\operatorname{cl}(H)\), and full-radius reliability is the
+  \(Z^0\) slice of \(M\setminus P\to M/P\).
+- **Settled by TT:** for MDS inner codes the threshold is \(2k+1\), independent
+  of \(|P|\) whenever at least \(k\) helper coordinates remain.
+- **Settled negatively:** the proposed \(A_{x,j}\) transform is already
+  contained in the 2026 refined-support MacWilliams identity; the finite pair
+  above shows that one fixed-coordinate marginal does not determine
+  simultaneous recovery.
+- **Open, exact evidence gap:** the primary Chaiken paper has not yet been
+  obtained. No claim is made about the exact specialization or extra boundary
+  information of its polynomial.
+- **Open, bounded evidence gap:** no length-five binary pair was found with all
+  labeled singleton marginals equal and different two-target cost. Existence
+  over larger fields or lengths is untested.
+- **Open gate:** the exact finite map-cost theorem, direct-sum generalized-
+  weight lemma, and Las Vergnas target-set specialization need independent
+  mathematical and operational cold reads before manuscript or Lean adoption.
+- **Owned elsewhere:** bandwidth-aware transfer needs a separately specified
+  vector/subpacketized repair model; it is not an ambiguity in C946.

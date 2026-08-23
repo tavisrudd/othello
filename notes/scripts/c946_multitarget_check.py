@@ -241,6 +241,50 @@ def find_first_order_counterexample() -> tuple[tuple[int, ...], ...]:
     raise AssertionError("no first-order counterexample found")
 
 
+def find_all_singleton_counterexample() -> tuple[tuple[int, ...], ...]:
+    n = 5
+    buckets: dict[
+        tuple[int, tuple[tuple[int, ...], ...]],
+        list[tuple[frozenset[int], int]],
+    ] = {}
+    for code in all_binary_subspaces(n):
+        if any(all(((word >> coordinate) & 1) == 0 for word in code)
+               for coordinate in range(n)):
+            continue
+        code_dual = dual(code, n)
+        signature = tuple(
+            tuple(
+                sum(
+                    1
+                    for word in code_dual
+                    if ((word >> coordinate) & 1)
+                    and word.bit_count() == helper_weight + 1
+                )
+                for helper_weight in range(n)
+            )
+            for coordinate in range(n)
+        )
+        key = (len(code), signature)
+        cost = target_recovery_cost(code_dual, n, (0, 1))
+        buckets.setdefault(key, []).append((code, cost))
+    for (code_size, signature), records in sorted(buckets.items()):
+        costs = sorted({cost for _, cost in records if cost <= n})
+        if len(costs) < 2:
+            continue
+        first_cost, second_cost = costs[:2]
+        first_code = next(code for code, cost in records if cost == first_cost)
+        second_code = next(code for code, cost in records if cost == second_cost)
+        return (
+            (code_size,),
+            tuple(value for row in signature for value in row),
+            tuple(sorted(first_code)),
+            (first_cost,),
+            tuple(sorted(second_code)),
+            (second_cost,),
+        )
+    return ()
+
+
 def main() -> None:
     tested, recoverable = intrinsic_checks()
     family_results = {
@@ -259,10 +303,12 @@ def main() -> None:
         (0, 10, 21, 31),
         (2,),
     )
+    all_singleton_counterexample = find_all_singleton_counterexample()
     print(f"intrinsic_cases={tested}")
     print(f"recoverable_cases={recoverable}")
     print(f"spc_repetition_costs={family_results}")
     print(f"first_order_counterexample={counterexample}")
+    print(f"all_singleton_counterexample={all_singleton_counterexample}")
     print("c946_multitarget_check=PASS")
 
 
