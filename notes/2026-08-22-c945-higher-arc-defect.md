@@ -343,8 +343,18 @@ equalities and this specializes to the paper's existing `3/2` term.
   `C(|S intersect ell|,2)`.  The proposed `lambda` extension instead counts
   distinct maximal `s`-secants of an arc.  The notions coincide for ordinary
   arcs (`s=2`) but not for higher arcs.
+- Bartoli--Timpanella, *Complete `(k,q+1)`-arcs in
+  `PG(2,F_{q^6})` from the Hermitian curve*, arXiv:2306.01134v1 / later
+  Journal of Algebraic Combinatorics (2025): **partial**, abstract,
+  introduction, main theorem, and preliminaries through Theorem 2.1; cache
+  SHA-256
+  `753783a0178b7cbb0012ae4488e51f08e49d780cd865a1c5ed760fc33560385e`.
+  The paper proves completeness of a curve-derived higher arc by an algebraic
+  variety point-count argument.  It confirms current topical adjacency but the
+  sections read do not address universal lower bounds or external-index
+  moments; no absence claim rests on this partial read.
 
-The audit currently has one full-text source and three partial sources.  A
+The audit currently has one full-text source and four partial sources.  A
 novelty or priority verdict remains open.
 
 Forward-citation audit seed: DOI `10.1007/s10623-018-00592-8`.
