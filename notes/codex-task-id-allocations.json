@@ -3392,8 +3392,17 @@
       "last": 944,
       "purpose": "replace private port terminology with recovery-set and recovery-equation language",
       "sequence": 377
+    },
+    {
+      "count": 1,
+      "first": 945,
+      "kind": "reservation",
+      "lane": "relconic",
+      "last": 945,
+      "purpose": "generalize prescribed-hole defect and equality theory to complete (k,m)-arcs",
+      "sequence": 378
     }
   ],
-  "next_id": 945,
+  "next_id": 946,
   "schema": "codex-task-id-allocations-v1"
 }

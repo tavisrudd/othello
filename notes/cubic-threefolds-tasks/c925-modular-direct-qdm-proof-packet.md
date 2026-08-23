@@ -50,8 +50,12 @@ are real.  A second exact certificate exhausts the effective coweight-zero
 dual-number chart.  Correct input-index transport reduces every conformal
 calibration to one parameter, and Lean checks the full recurrence and residue
 discriminant zero throughout that family.  It also rejects the output-only
-transport mutation which produced the raw \(4/9\) shear.  Nonzero-coweight and
-distinct-order charts, and the geometric occurrence-to-port theorem, remain.
+transport mutation which produced the raw \(4/9\) shear.  A third certificate
+exhausts the corresponding five-parameter distinct-root chart: conformality
+holds identically, but the selected grading has lower-left entry \(1/6\) for
+every calibration, so the marker's leading line is never preserved.  The two
+normalized native-order charts are therefore closed.  Other coweights and the
+geometric occurrence-to-port theorem remain.
 The unconditional every-smooth theorem is not landed.  Independently, Voisin
 plus the 2025 Engel--de Gaay Fortman--Schreieder parity theorem gives an
 all-\(m\) proof for a very general cubic; that preprint result must not be
@@ -767,8 +771,13 @@ The live frontier is source-side, not another linear consumer.
    `EffectiveReesCalibrationCertificate` lands the first complete chart:
    exact Rust elimination and Lean correspondence prove that every effective
    coweight-zero dual-number calibration satisfying the logarithmic divisor
-   equation has discriminant zero.  The next finite chart is the nonzero
-   coweight/distinct-order case; the occurrence-to-port theorem remains
+   equation has discriminant zero.
+   `EffectiveDistinctOrderCertificate` lands the second normalized native
+   order chart: the logarithmic defect vanishes on its full five-parameter
+   support, but exact Sylvester reduction forces selected-line leakage
+   \(1/6\), so the marked elementary modification is never regular.  The next
+   finite task is a genuine remaining coweight chart, not another
+   distinct-order calculation.  The occurrence-to-port theorem remains
    external after every finite chart.
 
 2. **What Lean separates.**  The nonsplit outer-return theorem proves that

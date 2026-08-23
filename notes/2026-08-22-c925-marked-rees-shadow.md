@@ -212,8 +212,10 @@ following.
 2. In each surviving coweight stratum, the effective homogeneous
    pairing-preserving Rees jets form a small affine scheme.  This prediction is
    proved for the coweight-zero dual-number chart: conformality leaves one
-   affine parameter and every member has discriminant zero.  The nonzero
-   coweight and distinct-order charts remain.
+   affine parameter and every member has discriminant zero.  It is also proved
+   for the complete five-parameter distinct-root chart: conformality is
+   automatic, but every member has the same forbidden leading-line leakage
+   \(1/6\).  Other nonzero-coweight charts remain.
 3. If a \(4/9\) jet survives, its first failure should occur at one explicitly
    named higher connection or WDVV equation.  That failure is then the next
    coefficient to add to the shadow; one should not retain the full formal
@@ -293,9 +295,31 @@ The separate mutation theorem
 the inverse calibration changes the Euler input, so an output-only conjugation
 cannot pass as tensor transport.
 
-The two certificates do not yet bound every possible coweight or solve the
-nonzero-coweight/distinct-order charts.  They also do not construct the
-geometric occurrence-to-port map.
+The third certificate closes the second known native order chart.  In the
+self-dual basis
+\[
+  (1,a,b,b^2,-a^2,b^3)
+\]
+of
+\[
+  \mathbf Q[r][a,b]/(ab-r^2,a^3+b^3-2r^3),
+\]
+the same complete effective support has five parameters.  Correct tensor
+transport makes the logarithmic divisor defect identically zero.  Exact
+Sylvester elimination nevertheless gives
+\[
+  \bigl(D_{\mathrm{selected}}\bigr)_{21}=\frac16
+\]
+for every parameter value.  Hence the selected leading nilpotent line is
+never preserved, so the marked elementary modification is not regular on
+this chart.  This is stronger than a discriminant mismatch: the marked
+residue is not defined with the required lattice.
+
+Together the second and third certificates close the two normalized
+rank-six native orders currently supplied by the Elias--Rossi dichotomy:
+the dual-number order has discriminant \(0\), and the distinct-root order has
+unavoidable line leakage \(1/6\).  They do not bound every possible coweight
+or construct the geometric occurrence-to-port map.
 
 Reproducibility status on 2026-08-22:
 
@@ -317,18 +341,31 @@ elaborated without diagnostics in guarded run `20260822-182651`; the checker,
 `20260823-014544-5b6db71a`.  The axiom audit reports only `propext`,
 `Classical.choice`, and `Quot.sound`.  The exact artifact sizes and hashes are:
 
-- Rust: 30091 bytes,
-  `15f32dc526b6567c253208d8629bff6b9db5ddcde79c16eb0b8f01aa3dfb24ef`;
+- Rust: 50410 bytes,
+  `e7c686f151e371b4ddbc7cdfd24e14ca9ee113db0fd980ab5d20edfb2d90686b`;
 - JSON: 1839 bytes,
   `f1fb3def00165b21a52de2a4eaf4da83efb3555fd7b5339591e127bf46353d`;
 - generated Lean: 8649 bytes,
   `65faebff2c3252cbd999b2673422c271e8003f5ba9c9181ce026f1960b2d1ee0`.
 
+The distinct-root effective-order bundle replays with
+`nix run .#verify-effective-distinct-order`.  Its Rust engine is shared with
+the dual-number certificate; `--distinct-json` and `--distinct-lean` select
+the second chart.  Lean's terminal theorem is
+`EffectiveDistinctOrderCertificate.conformalDistinctOrder_forces_lineFailure`.
+It uses no `native_decide`.
+The new artifact sizes and hashes are:
+
+- JSON: 3645 bytes,
+  `11e003ddbf9a2260e8ca83e6886e14547f5ecc32714b43a60dffefd07f11382e`;
+- generated Lean: 9221 bytes,
+  `de98fd76f7c38d64f6b28b27443573b184b40cd4bfe5a7282ef821295991a43e`.
+
 The finite domain must remain explicit: rank six, one primitive cubic Kummer
-ray, cohomological weights \((0,1,1,2,2,3)\), coweight zero, the dual-number
-order, the effective unipotent support, and exact rational arithmetic.  The
-certificate closes this chart, not the whole finite calibration problem.  It
-does not prove that Iritani's actual
+ray, cohomological weights \((0,1,1,2,2,3)\), the displayed effective
+unipotent support, the two normalized native orders, and exact rational
+arithmetic.  The certificates close these charts, not the whole finite
+calibration problem or arbitrary coweight.  They do not prove that Iritani's actual
 codimension-two correction occurrence supplies the marked Rees port; that is
 the remaining geometric persistence theorem.
 
@@ -373,7 +410,8 @@ lattice vertex, and associated grading forgets the extension class.
 | settled | Generic paired marked-divisor data forget the native lattice position. | Rust emits the full comparison matrix; Lean checks its block decomposition and recomputes relative coweight \((-1,0,0,0,0,1)\). |
 | settled | The coweight alone forgets the dangerous calibration shear. | Lean checks a nonzero pairing-tangent, filtration-compatible first jet at coweight zero and the displayed \(0\)-versus-\(4/9\) residue ambiguity. |
 | settled | Correct input-index transport removes the dangerous shear in the effective coweight-zero dual-number chart. | Exact Rust elimination gives one conformal parameter; Lean checks the complete recurrence and discriminant zero for every parameter, and separately rejects output-only transport. |
-| proposed | Coweight plus first marked connection jet is the minimally enriched shadow needed by the strict recurrence. | It separates the two known modes of information loss and closes one complete chart; the coweight bound and remaining charts are not proved. |
+| settled | The complete effective distinct-root chart cannot carry the marked elementary modification. | Rust emits the exact first gauge; Lean proves conformality and the parameter-independent lower-left leakage \(1/6\). |
+| proposed | Coweight plus first marked connection jet is the minimally enriched shadow needed by the strict recurrence. | It separates the two known modes of information loss and closes both normalized native-order charts; the coweight bound is not proved. |
 | open | Primitive determinant, self-duality, and hard Lefschetz bound the admissible coweights to the two displayed cases. | This is the first structural theorem to seek or certify finitely. |
-| partial | Every admissible Rees jet has discriminant \(0\) or \(4\), never \(4/9\). | Proved with value \(0\) in the complete coweight-zero dual-number chart; nonzero-coweight and distinct-order charts remain. |
+| partial | Every admissible marked Rees port excludes \(4/9\). | The dual-number chart gives discriminant \(0\); the distinct-root chart fails leading-line regularity. Other coweight charts remain. |
 | open | The actual Iritani correction occurrence carries and preserves the marked Rees port. | Current comparison theorems are Laurent/generic and do not supply integral occurrence transport. |

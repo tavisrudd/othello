@@ -203,8 +203,12 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   both multiplication indices makes conformality equivalent to a
   one-parameter normal family, and Lean checks the complete gauge recurrence
   and discriminant zero throughout that family.  The output-only transport
-  mutation is explicitly rejected.  Nonzero-coweight and distinct-order
-  charts remain, as does construction of the geometric marked Rees port.
+  mutation is explicitly rejected.  A third exact certificate exhausts the
+  five-parameter distinct-root chart.  Its logarithmic defect vanishes
+  identically, but Lean proves that the selected block's lower-left grading
+  entry is always \(1/6\), so the marker's leading line is not preserved.
+  Thus both normalized native-order charts are closed.  Other coweight charts
+  and construction of the geometric marked Rees port remain.
 
   **Closed lanes:** the common \(\epsilon M\)-row/stable-projector
   composite, raw and normalized degree-zero augmentation, ordinary

@@ -55,6 +55,22 @@
             ${./certificates/effective-rees-calibration.json} -
         '';
       };
+      verifyEffectiveDistinctOrder = pkgs.writeShellApplication {
+        name = "verify-effective-distinct-order";
+        runtimeInputs = with pkgs; [ coreutils diffutils rustc ];
+        text = ''
+          certificate_dir=$(mktemp -d -p /var/tmp effective-distinct-order.XXXXXX)
+          trap 'rm -rf "$certificate_dir"' EXIT
+          cd ${./.}
+          sha256sum -c ${./certificates/effective-distinct-order.sha256}
+          rustc ${./scripts/effective_rees_calibration_cert.rs} -O -D warnings \
+            -o "$certificate_dir/solver"
+          "$certificate_dir/solver" --distinct-lean | diff -u \
+            ${./TavisRuddFiniteGeom/Papers/CubicStabilizationIrrationality/Comparison/Generated/EffectiveDistinctOrderData.lean} -
+          "$certificate_dir/solver" --distinct-json | diff -u \
+            ${./certificates/effective-distinct-order.json} -
+        '';
+      };
     in {
       devShells.${system}.default = pkgs.mkShell {
         packages = with pkgs; [ elan git curl cacert gmp zlib coreutils ];
@@ -79,6 +95,10 @@
         verify-effective-rees-calibration = {
           type = "app";
           program = "${verifyEffectiveReesCalibration}/bin/verify-effective-rees-calibration";
+        };
+        verify-effective-distinct-order = {
+          type = "app";
+          program = "${verifyEffectiveDistinctOrder}/bin/verify-effective-distinct-order";
         };
       };
     };

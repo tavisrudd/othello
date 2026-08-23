@@ -47,6 +47,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.Ran
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.KummerDivisorGenerator
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.MarkedReesShadowCertificate
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.EffectiveReesCalibrationCertificate
+import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.EffectiveDistinctOrderCertificate
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.HorizontalReader
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.TraitHorizontalReader
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.ProvenanceEdge
@@ -231,6 +232,15 @@ has modified-residue discriminant zero, hence never `4/9`.  This result
 requires a normalized effective dual-number calibration; it does not supply
 one for a geometric occurrence or cover a nonzero coweight or another
 classical order.
+`EffectiveDistinctOrderCertificate` applies the same complete five-parameter
+effective self-dual calibration chart to the distinct-root native order
+`Q[r][a,b]/(ab-r^2,a^3+b^3-2r^3)`. Correct output-and-input tensor transport
+makes the logarithmic divisor defect vanish identically. Exact Sylvester
+elimination then proves that the selected block's lower-left grading entry is
+always `1/6`, so the leading nilpotent line required by the marked elementary
+modification is never preserved. This closes the second known native rank-six
+order chart, not the geometric descent to one of these orders and not the
+nonzero-coweight problem.
 `ProjectiveSpaceQuantumPolynomial` proves that the standard relation
 `X^(m+4) - q` is separable in characteristic zero for nonzero `q`. This
 kernel-checks the target's no-repeated-root algebra once its small-quantum

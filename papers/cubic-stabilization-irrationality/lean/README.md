@@ -582,9 +582,30 @@ so this entire chart excludes the marked value `4/9`.  Run
 to verify the three tracked digests, compile the exact solver, and compare
 its canonical JSON and generated Lean data byte for byte.  The search domain
 is exactly the displayed effective unipotent support with coweight zero and
-the cubic dual-number order.  It does not cover nonzero coweights, a distinct
-classical order, transverse bulk deformations, or construct a geometric
-occurrence calibration.
+the cubic dual-number order.  It does not cover nonzero coweights, transverse
+bulk deformations, or construct a geometric occurrence calibration.
+
+`Comparison.EffectiveDistinctOrderCertificate` exhausts the same effective
+five-parameter self-dual chart for the other normalized rank-six native order
+
+    Q[r][a,b]/(ab-r^2, a^3+b^3-2r^3).
+
+The Rust generator transports multiplication in both tensor indices and
+solves the exact constant-coefficient Sylvester system.  Lean reconstructs
+the native multiplication matrices, checks that the logarithmic divisor
+defect is identically zero, verifies the generated first gauge and its
+diagonal-block normalization, and proves that the selected block has
+lower-left entry `1/6` for every value of all five parameters.  Consequently
+the leading nilpotent line required by the marked elementary modification is
+never preserved in this chart.  Run
+
+    nix run .#verify-effective-distinct-order
+
+to verify the tracked digests and compare the Rust JSON and generated Lean
+data byte for byte.  Together with the dual-number certificate this closes
+the two known normalized native-order charts.  It does not prove that a
+geometric codimension-two correction occurrence descends to either chart, nor
+bound all possible coweights.
 
 The algebraic model has a compact sufficient constructor. If the combined
 crossed and moving map `(B,D)` admits a linear retraction, an explicit incoming

@@ -1,18 +1,20 @@
-//! Exact certificate generator for an effective rank-six Rees-calibration chart.
+//! Exact certificate generator for two effective rank-six Rees-calibration charts.
 //!
 //! The coefficient domain is the unipotent support permitted by weights
 //! `(0,1,1,2,2,3)` over one primitive cubic Kummer ray.  Arithmetic is exact
 //! over the rationals.  The program constructs the self-dual five-parameter
 //! calibration, transports multiplication in both tensor indices, computes
 //! the logarithmic divisor defect, and checks the full normalized recurrence
-//! on its conformal one-parameter family.  `--lean` emits canonical matrix
-//! data and `--json` emits the compact certificate; internal assertions check
-//! every emitted correspondence.  The program contains no randomized search.
+//! on its conformal one-parameter family.  The `--distinct-lean` and
+//! `--distinct-json` modes perform the corresponding exact calculation for
+//! the distinct-root native order and emit its unique normalized first gauge
+//! and selected-line obstruction.  Internal assertions check every emitted
+//! correspondence.  The program contains no randomized search.
 
 use std::collections::BTreeMap;
 use std::env;
 use std::fmt::{self, Display};
-use std::ops::{Add, Mul, Neg, Sub};
+use std::ops::{Add, Div, Mul, Neg, Sub};
 
 const N: usize = 6;
 const VARIABLE_COUNT: usize = 6;
@@ -106,6 +108,15 @@ impl Mul for Rat {
     }
 }
 
+impl Div for Rat {
+    type Output = Self;
+
+    fn div(self, rhs: Self) -> Self::Output {
+        assert!(!rhs.is_zero());
+        Self::new(self.num * rhs.den, self.den * rhs.num)
+    }
+}
+
 impl Neg for Rat {
     type Output = Self;
 
@@ -163,6 +174,11 @@ impl Poly {
 
     fn is_zero(&self) -> bool {
         self.0.is_empty()
+    }
+
+    fn as_constant(&self) -> Rat {
+        assert!(self.0.keys().all(|monomial| *monomial == Monomial::ONE));
+        self.0.get(&Monomial::ONE).copied().unwrap_or(Rat::ZERO)
     }
 
     fn scale(&self, scalar: Rat) -> Self {
@@ -446,6 +462,75 @@ fn e_multiplication() -> Matrix {
     result[3][2] = Poly::from(1);
     result[5][4] = Poly::from(1);
     result
+}
+
+// Multiplication in the distinct-root order
+//
+//   Q[r][a,b]/(ab-r^2, a^3+b^3-2r^3)
+//
+// in the self-dual graded basis `(1,a,b,b^2,-a^2,b^3)`.  The coefficient of
+// `b^3` gives the anti-diagonal pairing used by `pairing()`.
+fn distinct_a_multiplication() -> Matrix {
+    let mut result = zero_matrix();
+    let r = Poly::variable(R);
+    let r2 = r.clone() * r.clone();
+    let r3 = r2.clone() * r;
+    result[1][0] = Poly::from(1);
+    result[4][1] = Poly::from(-1);
+    result[0][2] = r2.clone();
+    result[2][3] = r2.clone();
+    result[0][4] = r3.scale(Rat::from(-2));
+    result[5][4] = Poly::from(1);
+    result[3][5] = r2;
+    result
+}
+
+fn distinct_b_multiplication() -> Matrix {
+    let mut result = zero_matrix();
+    let r = Poly::variable(R);
+    let r2 = r.clone() * r.clone();
+    let r3 = r2.clone() * r;
+    result[2][0] = Poly::from(1);
+    result[0][1] = r2.clone();
+    result[3][2] = Poly::from(1);
+    result[5][3] = Poly::from(1);
+    result[1][4] = r2.clone().scale(Rat::from(-1));
+    result[2][5] = r3.scale(Rat::from(2));
+    result[4][5] = r2;
+    result
+}
+
+fn distinct_basis_multiplications() -> [Matrix; N] {
+    let one = identity_matrix();
+    let a = distinct_a_multiplication();
+    let b = distinct_b_multiplication();
+    let b2 = mul_matrix(&b, &b);
+    let minus_a2 = scale_matrix(Rat::from(-1), &mul_matrix(&a, &a));
+    let b3 = mul_matrix(&b2, &b);
+    [one, a, b, b2, minus_a2, b3]
+}
+
+fn distinct_multiplication_of(vector: &Vector) -> Matrix {
+    let basis = distinct_basis_multiplications();
+    let mut result = zero_matrix();
+    for index in 0..N {
+        for row in 0..N {
+            for column in 0..N {
+                result[row][column] = result[row][column].clone()
+                    + vector[index].clone() * basis[index][row][column].clone();
+            }
+        }
+    }
+    result
+}
+
+fn distinct_transported_multiplication(calibration: &Matrix, vector: &Vector) -> Matrix {
+    let inverse = calibration_inverse(calibration);
+    let old_vector = mul_vector(&inverse, vector);
+    mul_matrix(
+        &mul_matrix(calibration, &distinct_multiplication_of(&old_vector)),
+        &inverse,
+    )
 }
 
 fn basis_multiplications() -> [Matrix; N] {
@@ -774,6 +859,43 @@ fn emit_matrix_definition(name: &str, arguments: &str, matrix: &Matrix) {
     }
 }
 
+fn emit_block_matrix_definition(name: &str, arguments: &str, matrix: &BlockMatrix) {
+    println!("def {name}{arguments} : Matrix (Fin 2) (Fin 2) ℚ :=");
+    print!("  !![");
+    for (row, entries) in matrix.iter().enumerate() {
+        if row != 0 {
+            print!("     ");
+        }
+        for (column, entry) in entries.iter().enumerate() {
+            if column != 0 {
+                print!(", ");
+            }
+            print!("{}", entry.lean());
+        }
+        if row + 1 == 2 {
+            println!("]\n");
+        } else {
+            println!(";");
+        }
+    }
+}
+
+fn json_matrix(matrix: &Matrix, indent: &str) -> String {
+    let rows = matrix
+        .iter()
+        .map(|row| {
+            let entries = row
+                .iter()
+                .map(|entry| format!("\"{entry}\""))
+                .collect::<Vec<_>>()
+                .join(", ");
+            format!("{indent}  [{entries}]")
+        })
+        .collect::<Vec<_>>()
+        .join(",\n");
+    format!("[\n{rows}\n{indent}]")
+}
+
 fn emit_lean(defect: &Matrix) {
     println!("import Mathlib\n");
     println!("/-!");
@@ -878,6 +1000,89 @@ fn emit_json(defect: &Matrix) {
     println!("}}");
 }
 
+fn emit_distinct_lean() {
+    let gauge = distinct_first_gauge();
+    let (block_grading, _) = distinct_recurrence();
+    println!("import Mathlib\n");
+    println!("/-!");
+    println!("# Generated data for the effective distinct-order certificate\n");
+    println!("This file is generated by `scripts/effective_rees_calibration_cert.rs`.");
+    println!("The importing checker reconstructs the native distinct-root algebra,");
+    println!("the Sylvester system, and the selected grading from these formulas.");
+    println!("-/\n");
+    println!("namespace TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.Generated.EffectiveDistinctOrderData\n");
+    println!("abbrev Index := Fin 6\n");
+    emit_matrix_definition("distinctFirstGaugeFormula", " (a b c d f : ℚ)", &gauge);
+    emit_matrix_definition(
+        "distinctOldEulerMultiplicationFormula",
+        " (a : ℚ)",
+        &distinct_old_euler_multiplication(),
+    );
+    emit_matrix_definition(
+        "distinctLeftEulerTransportFormula",
+        " (a b c d f : ℚ)",
+        &distinct_left_euler_transport(),
+    );
+    emit_matrix_definition(
+        "distinctTransportedEulerFormula",
+        " (a b c d f : ℚ)",
+        &distinct_transported_euler_formula(),
+    );
+    emit_matrix_definition(
+        "distinctOldDivisorMultiplicationFormula",
+        " (a : ℚ)",
+        &distinct_old_divisor_multiplication(),
+    );
+    emit_matrix_definition(
+        "distinctLeftDivisorTransportFormula",
+        " (a b c d f : ℚ)",
+        &distinct_left_divisor_transport(),
+    );
+    emit_matrix_definition(
+        "distinctTransportedDivisorFormula",
+        " (a b c d f : ℚ)",
+        &distinct_transported_divisor_formula(),
+    );
+    emit_matrix_definition(
+        "distinctNativeGradingFormula",
+        " (a b c d f : ℚ)",
+        &distinct_native_grading_formula(),
+    );
+    emit_block_matrix_definition(
+        "distinctSelectedBlockGradingFormula",
+        " (a b c d f : ℚ)",
+        &block_grading,
+    );
+    println!("end TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.Generated.EffectiveDistinctOrderData");
+}
+
+fn emit_distinct_json() {
+    let gauge = distinct_first_gauge();
+    let (block_grading, _) = distinct_recurrence();
+    println!("{{");
+    println!("  \"schema\": \"effective-distinct-order-certificate-v1\",");
+    println!("  \"rank\": 6,");
+    println!("  \"weights\": [0, 1, 1, 2, 2, 3],");
+    println!("  \"native_order\": \"Q[r][a,b]/(ab-r^2,a^3+b^3-2r^3)\",");
+    println!("  \"native_basis\": [\"1\", \"a\", \"b\", \"b^2\", \"-a^2\", \"b^3\"],");
+    println!("  \"free_parameters\": [\"a\", \"b\", \"c\", \"d\", \"f\"],");
+    println!("  \"conformal_defect_identically_zero\": true,");
+    println!("  \"first_gauge\": {},", json_matrix(&gauge, "  "));
+    println!("  \"selected_block_grading\": [");
+    for (row, entries) in block_grading.iter().enumerate() {
+        println!(
+            "    [\"{}\", \"{}\"]{}",
+            entries[0],
+            entries[1],
+            if row == 0 { "," } else { "" }
+        );
+    }
+    println!("  ],");
+    println!("  \"leading_line_entry\": \"1/6\",");
+    println!("  \"leading_line_preserved\": false");
+    println!("}}");
+}
+
 fn general_euler_at_one() -> Matrix {
     let calibration = calibration();
     let euler_vector = [
@@ -974,6 +1179,380 @@ fn defect() -> Matrix {
     )
 }
 
+fn distinct_defect() -> Matrix {
+    let calibration = calibration();
+    let divisor_vector = [
+        Poly::zero(),
+        Poly::from(1),
+        Poly::zero(),
+        Poly::zero(),
+        Poly::zero(),
+        Poly::zero(),
+    ];
+    let euler_vector = [
+        Poly::zero(),
+        Poly::from(3),
+        Poly::zero(),
+        Poly::zero(),
+        Poly::zero(),
+        Poly::zero(),
+    ];
+    let divisor = evaluate_r_one_matrix(&distinct_transported_multiplication(
+        &calibration,
+        &divisor_vector,
+    ));
+    let mu = grading();
+    let divisor_homogeneity = add_matrix(
+        &divisor,
+        &sub_matrix(&mul_matrix(&divisor, &mu), &mul_matrix(&mu, &divisor)),
+    );
+    sub_matrix(
+        &scale_matrix(
+            Rat::new(1, 3),
+            &evaluate_r_one_matrix(&euler_derivative(&distinct_transported_multiplication(
+                &calibration,
+                &euler_vector,
+            ))),
+        ),
+        &divisor_homogeneity,
+    )
+}
+
+fn distinct_old_euler_multiplication() -> Matrix {
+    let vector = [
+        Poly::variable(A).scale(Rat::from(-3)),
+        Poly::from(3),
+        Poly::zero(),
+        Poly::zero(),
+        Poly::zero(),
+        Poly::zero(),
+    ];
+    evaluate_r_one_matrix(&distinct_multiplication_of(&vector))
+}
+
+fn distinct_left_euler_transport() -> Matrix {
+    mul_matrix(
+        &evaluate_r_one_matrix(&calibration()),
+        &distinct_old_euler_multiplication(),
+    )
+}
+
+fn distinct_transported_euler_formula() -> Matrix {
+    mul_matrix(
+        &distinct_left_euler_transport(),
+        &evaluate_r_one_matrix(&calibration_inverse(&calibration())),
+    )
+}
+
+fn distinct_old_divisor_multiplication() -> Matrix {
+    let vector = [
+        -Poly::variable(A),
+        Poly::from(1),
+        Poly::zero(),
+        Poly::zero(),
+        Poly::zero(),
+        Poly::zero(),
+    ];
+    evaluate_r_one_matrix(&distinct_multiplication_of(&vector))
+}
+
+fn distinct_left_divisor_transport() -> Matrix {
+    mul_matrix(
+        &evaluate_r_one_matrix(&calibration()),
+        &distinct_old_divisor_multiplication(),
+    )
+}
+
+fn distinct_transported_divisor_formula() -> Matrix {
+    mul_matrix(
+        &distinct_left_divisor_transport(),
+        &evaluate_r_one_matrix(&calibration_inverse(&calibration())),
+    )
+}
+
+fn distinct_native_grading_formula() -> Matrix {
+    mul_matrix(
+        &mul_matrix(
+            &evaluate_r_one_matrix(&calibration_inverse(&calibration())),
+            &grading(),
+        ),
+        &evaluate_r_one_matrix(&calibration()),
+    )
+}
+
+fn print_nonzero_matrix(matrix: &Matrix) {
+    for (row, entries) in matrix.iter().enumerate() {
+        for (column, value) in entries.iter().enumerate() {
+            if !value.is_zero() {
+                println!("D[{row},{column}] = {value}");
+            }
+        }
+    }
+}
+
+type BlockMatrix = [[Poly; 2]; 2];
+
+fn distinct_projector() -> Matrix {
+    constant_matrix([
+        [
+            Rat::new(1, 3),
+            Rat::new(4, 9),
+            Rat::new(2, 9),
+            Rat::new(1, 9),
+            Rat::new(-5, 9),
+            Rat::ZERO,
+        ],
+        [
+            Rat::new(2, 9),
+            Rat::new(1, 3),
+            Rat::new(1, 9),
+            Rat::ZERO,
+            Rat::new(-4, 9),
+            Rat::new(-1, 9),
+        ],
+        [
+            Rat::new(2, 9),
+            Rat::new(1, 9),
+            Rat::new(1, 3),
+            Rat::new(4, 9),
+            Rat::ZERO,
+            Rat::new(5, 9),
+        ],
+        [
+            Rat::new(1, 9),
+            Rat::ZERO,
+            Rat::new(2, 9),
+            Rat::new(1, 3),
+            Rat::new(1, 9),
+            Rat::new(4, 9),
+        ],
+        [
+            Rat::new(-1, 9),
+            Rat::new(-2, 9),
+            Rat::ZERO,
+            Rat::new(1, 9),
+            Rat::new(1, 3),
+            Rat::new(2, 9),
+        ],
+        [
+            Rat::ZERO,
+            Rat::new(-1, 9),
+            Rat::new(1, 9),
+            Rat::new(2, 9),
+            Rat::new(2, 9),
+            Rat::new(1, 3),
+        ],
+    ])
+}
+
+fn distinct_selected_basis() -> [[Poly; 2]; N] {
+    [
+        [Poly::from(-1), Poly::from(-6)],
+        [Poly::from(-1), Poly::from(-4)],
+        [Poly::from(1), Poly::from(-4)],
+        [Poly::from(1), Poly::from(-2)],
+        [Poly::from(1), Poly::from(2)],
+        [Poly::from(1), Poly::zero()],
+    ]
+}
+
+fn distinct_left_inverse() -> [[Poly; N]; 2] {
+    [
+        [
+            Poly::zero(),
+            Poly::constant(Rat::new(-1, 9)),
+            Poly::constant(Rat::new(1, 9)),
+            Poly::constant(Rat::new(2, 9)),
+            Poly::constant(Rat::new(2, 9)),
+            Poly::constant(Rat::new(1, 3)),
+        ],
+        [
+            Poly::constant(Rat::new(-1, 18)),
+            Poly::constant(Rat::new(-1, 18)),
+            Poly::constant(Rat::new(-1, 18)),
+            Poly::constant(Rat::new(-1, 18)),
+            Poly::constant(Rat::new(1, 18)),
+            Poly::constant(Rat::new(-1, 18)),
+        ],
+    ]
+}
+
+fn compress_distinct(matrix: &Matrix) -> BlockMatrix {
+    let left = distinct_left_inverse();
+    let selected = distinct_selected_basis();
+    std::array::from_fn(|row| {
+        std::array::from_fn(|column| {
+            (0..N).fold(Poly::zero(), |outer_sum, i| {
+                outer_sum
+                    + (0..N).fold(Poly::zero(), |inner_sum, j| {
+                        inner_sum
+                            + left[row][i].clone()
+                                * matrix[i][j].clone()
+                                * selected[j][column].clone()
+                    })
+            })
+        })
+    })
+}
+
+fn solve_constant_linear_system(
+    coefficients: Vec<Vec<Rat>>,
+    right_hand_side: Vec<Poly>,
+    variable_count: usize,
+) -> Vec<Poly> {
+    assert_eq!(coefficients.len(), right_hand_side.len());
+    let mut rows = coefficients
+        .into_iter()
+        .zip(right_hand_side)
+        .map(|(mut coefficients, value)| {
+            assert_eq!(coefficients.len(), variable_count);
+            coefficients.push(Rat::ZERO);
+            (coefficients, value)
+        })
+        .collect::<Vec<_>>();
+    let mut pivot_rows = vec![None; variable_count];
+    let mut next_row = 0;
+    for column in 0..variable_count {
+        let Some(pivot) = (next_row..rows.len()).find(|row| !rows[*row].0[column].is_zero()) else {
+            continue;
+        };
+        rows.swap(next_row, pivot);
+        let pivot_value = rows[next_row].0[column];
+        let inverse = Rat::ONE / pivot_value;
+        for entry in &mut rows[next_row].0 {
+            *entry = *entry * inverse;
+        }
+        rows[next_row].1 = rows[next_row].1.scale(inverse);
+        let pivot_coefficients = rows[next_row].0.clone();
+        let pivot_rhs = rows[next_row].1.clone();
+        for (row_index, (row_coefficients, row_rhs)) in rows.iter_mut().enumerate() {
+            if row_index == next_row {
+                continue;
+            }
+            let factor = row_coefficients[column];
+            if factor.is_zero() {
+                continue;
+            }
+            for index in 0..row_coefficients.len() {
+                row_coefficients[index] =
+                    row_coefficients[index] - factor * pivot_coefficients[index];
+            }
+            *row_rhs = row_rhs.clone() - pivot_rhs.clone().scale(factor);
+        }
+        pivot_rows[column] = Some(next_row);
+        next_row += 1;
+    }
+    for (coefficients, value) in &rows {
+        if coefficients[..variable_count]
+            .iter()
+            .all(|coefficient| coefficient.is_zero())
+        {
+            assert!(value.is_zero());
+        }
+    }
+    assert!(pivot_rows.iter().all(Option::is_some));
+    pivot_rows
+        .into_iter()
+        .map(|row| rows[row.expect("full column rank")].1.clone())
+        .collect()
+}
+
+fn distinct_first_gauge() -> Matrix {
+    let calibration_at_one = evaluate_r_one_matrix(&calibration());
+    let inverse_at_one = evaluate_r_one_matrix(&calibration_inverse(&calibration()));
+    let mu_in_native_frame = mul_matrix(
+        &mul_matrix(&inverse_at_one, &grading()),
+        &calibration_at_one,
+    );
+    let multiplication = scale_matrix(
+        Rat::from(3),
+        &evaluate_r_one_matrix(&distinct_a_multiplication()),
+    );
+    let projector = distinct_projector();
+    let complement = sub_matrix(&identity_matrix(), &projector);
+    let off_grading = add_matrix(
+        &mul_matrix(&mul_matrix(&projector, &mu_in_native_frame), &complement),
+        &mul_matrix(&mul_matrix(&complement, &mu_in_native_frame), &projector),
+    );
+
+    let mut operators = Vec::with_capacity(N * N);
+    for variable in 0..N * N {
+        let mut basis = zero_matrix();
+        basis[variable / N][variable % N] = Poly::from(1);
+        operators.push([
+            sub_matrix(
+                &mul_matrix(&multiplication, &basis),
+                &mul_matrix(&basis, &multiplication),
+            ),
+            mul_matrix(&mul_matrix(&projector, &basis), &projector),
+            mul_matrix(&mul_matrix(&complement, &basis), &complement),
+        ]);
+    }
+
+    let right_hand_sides = [off_grading, zero_matrix(), zero_matrix()];
+    let mut coefficients = Vec::new();
+    let mut right_hand_side = Vec::new();
+    for constraint in 0..3 {
+        for row in 0..N {
+            for column in 0..N {
+                coefficients.push(
+                    operators
+                        .iter()
+                        .map(|operator| operator[constraint][row][column].as_constant())
+                        .collect(),
+                );
+                right_hand_side.push(right_hand_sides[constraint][row][column].clone());
+            }
+        }
+    }
+    let solution = solve_constant_linear_system(coefficients, right_hand_side, N * N);
+    std::array::from_fn(|row| std::array::from_fn(|column| solution[row * N + column].clone()))
+}
+
+fn distinct_recurrence() -> (BlockMatrix, BlockMatrix) {
+    let calibration_at_one = evaluate_r_one_matrix(&calibration());
+    let inverse_at_one = evaluate_r_one_matrix(&calibration_inverse(&calibration()));
+    let connection_grading = scale_matrix(
+        Rat::from(-1),
+        &mul_matrix(
+            &mul_matrix(&inverse_at_one, &grading()),
+            &calibration_at_one,
+        ),
+    );
+    let multiplication = scale_matrix(
+        Rat::from(3),
+        &evaluate_r_one_matrix(&distinct_a_multiplication()),
+    );
+    let gauge = distinct_first_gauge();
+    let commutator = sub_matrix(
+        &mul_matrix(&multiplication, &gauge),
+        &mul_matrix(&gauge, &multiplication),
+    );
+    let block_grading = add_matrix(&connection_grading, &commutator);
+    let second = sub_matrix(
+        &sub_matrix(
+            &sub_matrix(
+                &mul_matrix(&connection_grading, &gauge),
+                &mul_matrix(&gauge, &connection_grading),
+            ),
+            &mul_matrix(&gauge, &commutator),
+        ),
+        &gauge,
+    );
+    (
+        compress_distinct(&block_grading),
+        compress_distinct(&second),
+    )
+}
+
+fn print_block(name: &str, matrix: &BlockMatrix) {
+    for (row, entries) in matrix.iter().enumerate() {
+        for (column, value) in entries.iter().enumerate() {
+            println!("{name}[{row},{column}] = {value}");
+        }
+    }
+}
+
 fn main() {
     let mode = env::args().nth(1);
     let calibration = calibration();
@@ -1029,6 +1608,55 @@ fn main() {
     assert_eq!(block_grading[1][0], Poly::zero());
     assert_eq!(block_grading[1][1], Poly::constant(Rat::new(1, 2)));
     assert_eq!(second[1][0], Poly::zero());
+
+    let distinct_defect_value = evaluate_r_one_matrix(&distinct_defect());
+    assert_eq!(distinct_defect_value, zero_matrix());
+    let distinct_gauge = distinct_first_gauge();
+    let distinct_projector = distinct_projector();
+    let distinct_complement = sub_matrix(&identity_matrix(), &distinct_projector);
+    let distinct_calibration = evaluate_r_one_matrix(&calibration);
+    let distinct_inverse = evaluate_r_one_matrix(&calibration_inverse(&calibration));
+    let distinct_mu = mul_matrix(
+        &mul_matrix(&distinct_inverse, &grading()),
+        &distinct_calibration,
+    );
+    let distinct_u = scale_matrix(
+        Rat::from(3),
+        &evaluate_r_one_matrix(&distinct_a_multiplication()),
+    );
+    let distinct_off_mu = add_matrix(
+        &mul_matrix(
+            &mul_matrix(&distinct_projector, &distinct_mu),
+            &distinct_complement,
+        ),
+        &mul_matrix(
+            &mul_matrix(&distinct_complement, &distinct_mu),
+            &distinct_projector,
+        ),
+    );
+    assert_eq!(
+        sub_matrix(
+            &mul_matrix(&distinct_u, &distinct_gauge),
+            &mul_matrix(&distinct_gauge, &distinct_u),
+        ),
+        distinct_off_mu
+    );
+    assert_eq!(
+        mul_matrix(
+            &mul_matrix(&distinct_projector, &distinct_gauge),
+            &distinct_projector,
+        ),
+        zero_matrix()
+    );
+    assert_eq!(
+        mul_matrix(
+            &mul_matrix(&distinct_complement, &distinct_gauge),
+            &distinct_complement,
+        ),
+        zero_matrix()
+    );
+    let (distinct_block_grading, _) = distinct_recurrence();
+    assert_eq!(distinct_block_grading[1][0], Poly::constant(Rat::new(1, 6)));
     for row in 0..N {
         for column in 0..N {
             if (row < 2) != (column < 2) {
@@ -1038,6 +1666,15 @@ fn main() {
     }
 
     match mode.as_deref() {
+        Some("--distinct-debug") => {
+            print_nonzero_matrix(&evaluate_r_one_matrix(&distinct_defect()));
+            print_nonzero_matrix(&distinct_first_gauge());
+            let (block_grading, second) = distinct_recurrence();
+            print_block("B", &block_grading);
+            print_block("S", &second);
+        }
+        Some("--distinct-lean") => emit_distinct_lean(),
+        Some("--distinct-json") => emit_distinct_json(),
         Some("--lean") => emit_lean(&defect),
         Some("--json") => emit_json(&defect),
         Some(other) => panic!("unknown argument: {}", other),
