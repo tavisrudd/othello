@@ -1,0 +1,18 @@
+leg1: diag(1,z) gauge sends the eps=0 model to z W' = R# W exactly
+leg1: R# = [[-19/18, 2], [-8/81, 1/18]]
+leg1: Levelt exponents ['-5/6', '-1/6'] => monodromy trace 1
+leg2: trace(G^{-T} G) = 2 - a^2/(g+ g-) exactly
+leg2: a^2 -> class e: [(0, '0'), (1, '1/6'), (2, '1/4'), (3, '1/3'), (4, '1/2')] (a^2 = 1 is the cubic class, trace 1; a = 0 is the CDG unramified case, trace 2)
+leg3: trace of the monodromy of z^2 Y' = (U_eps + z D + z^2 L) Y, loop |z| = 1
+  eps =            0.0   tr M = +1.000000000 -0.000000000i
+  eps =         0.0001   tr M = +1.000000000 -0.000000000i
+  eps =          0.001   tr M = +1.000000000 -0.000000000i
+  eps =           0.01   tr M = +1.000000000 -0.000000000i
+  eps =            0.1   tr M = +1.000000000 -0.000000000i
+  eps =            0.5   tr M = +1.000000000 +0.000000000i
+  eps =          0.01j   tr M = +1.000000000 -0.000000000i
+  eps =           0.1j   tr M = +1.000000000 -0.000000000i
+  eps =           -0.1   tr M = +1.000000000 -0.000000000i
+  eps =   (0.05+0.05j)   tr M = +1.000000000 -0.000000000i
+leg3: tr M(0) = 1 to integrator precision; the sweep shows the trace is continuous through the eps = 0 Jordan turning point
+all checks passed

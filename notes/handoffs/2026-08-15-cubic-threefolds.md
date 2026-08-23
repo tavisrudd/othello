@@ -247,7 +247,10 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   `../2026-08-23-c925-fable-opus-vetting.md`.  Marker reformulated as a
   \(\Psi\)-invariant Levelt exponent class; the calibration gate is superseded
   and the \(m=2\) obligation now lives on the centre's own quantum connection:
-  `../2026-08-23-c925-fable-marker-is-levelt-exponent.md`.
+  `../2026-08-23-c925-fable-marker-is-levelt-exponent.md`.  Rank-two
+  confluence rule proved and the cubic's block/Kuznetsov-Serre dictionary
+  made unconditional via Sanda--Shamoto:
+  `../2026-08-23-c925-fable-rank-two-confluence-gamma-ii.md`.
 
 - **C924 — closed 2026-08-19.** The direct ordinary-QDM route proves
   irrationality of `X x P^1` after one mandatory local repair: compare the

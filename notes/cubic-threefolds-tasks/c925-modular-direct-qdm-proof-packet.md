@@ -81,6 +81,15 @@ of a block of the centre's own quantum connection in the centre's own lattice;
 the calibration, native-order, Rees-port, and affine-Bruhat obligations above
 are superseded.  Report:
 `../2026-08-23-c925-fable-marker-is-levelt-exponent.md`.
+**2026-08-23, later.**  The confluence rule is proved in rank two with the
+polarized trace dictionary \(a^2/(g_+g_-)=4\sin^2\pi e\), and the
+categorical reading of the cubic's marked block — monodromy trace equals the
+inverse numerical Serre trace of \(\mathcal Ku(Y_3)\), namely one — is
+**unconditional** by Sanda--Shamoto's Theorem 7.9 (Dubrovin-type conjecture
+for Fano complete intersections of index \(>1\)).  The only remaining
+non-semisimple Gamma-II content for the lane is the fixed-parameter rank-two
+cluster factor inside higher rank, confined to \(b_3=0\) carrier tails.
+Report: `../2026-08-23-c925-fable-rank-two-confluence-gamma-ii.md`.
 The unconditional every-smooth theorem is not landed.  Independently, Voisin
 plus the 2025 Engel--de Gaay Fortman--Schreieder parity theorem gives an
 all-\(m\) proof for a very general cubic; that preprint result must not be
@@ -179,6 +188,12 @@ realization of that orbit.
 - the marker as a \(\Psi\)-invariant Levelt exponent class; reformulated
   \(m=2\) gate on the centre's own quantum connection:
   notes/2026-08-23-c925-fable-marker-is-levelt-exponent.md
+- rank-two confluence rule proved (polarized trace dictionary
+  \(a^2/(g_+g_-)=4\sin^2\pi e\)); Sanda--Shamoto Theorem 7.9 makes the
+  cubic's marked-block/Kuznetsov-Serre dictionary unconditional; CDG
+  vanishing recovered as the \(e=0\) row; higher-rank cluster-factor gate
+  sharpened to the sliver obstruction:
+  notes/2026-08-23-c925-fable-rank-two-confluence-gamma-ii.md
 
 The packet index owns the module-to-file map.  Do not append another large
 module to this card or to the index; add one focused companion file and one
@@ -975,11 +990,16 @@ threefold centre with \(b_2\ge2\) carrying a three-cycle of marked
 torus, reduced along point and curve blow-ups to a Mori fibre space.  No
 rotation-order bound can close it, since Picard-rank-\(\ge2\) threefolds do
 carry three-cycles; the exclusion must use the marker.  A candidate
-reformulation, conjectural through the non-semisimple Dubrovin picture: the
+reformulation through the non-semisimple Dubrovin picture: the
 marked block is a semiorthogonal component of numerical rank two whose Serre
 functor has trace one (the cubic's \(\mathcal Ku(B)\), \(S^3=[5]\)), and the
 gate asks that no such threefold have three \(\otimes L\)-conjugate
-components of that type.  See the vetting report §4.
+components of that type.  See the vetting report §4.  The block-to-Serre
+dictionary behind this is now a theorem for Fano complete intersections of
+index \(>1\) (Sanda--Shamoto Theorem 7.9) and the rank-two confluence rule
+is proved; for a general centre the dictionary still needs that centre's own
+Dubrovin-type verification or a direct period computation
+(`../2026-08-23-c925-fable-rank-two-confluence-gamma-ii.md`).
 
 Lean: `Comparison.QuantumNewtonSlope` and `Comparison.LoopOrbitArithmetic`,
 both build roots.  Reports:
