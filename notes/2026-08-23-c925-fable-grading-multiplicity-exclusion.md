@@ -2,6 +2,18 @@
 
 **Lane:** `cubic-threefolds` · **Task:** C925 · **Date:** 2026-08-23
 
+> **Vetted 2026-08-23 — VOID.**  The premise of §1, that block residues at
+> \(z=0\) carry sub-multisets of the \(\mu\)-spectrum which the blocks
+> partition, is false: semisimple blocks have residue zero and every rank-two
+> block residue is traceless with exponents \(\pm e\) (\(\pm1/6\) on the cubic,
+> \(\pm11/18\) on the distinct-root chart).  The "grading pair
+> \((-3/2,1/2)\)" is a basis-dependent reading of the modified residue's
+> diagonal.  Theorem C is correct combinatorics under a hypothesis the
+> geometry does not supply and excludes nothing.  §3b's conclusion stands for
+> a different reason: the marker is \(e\bmod\mathbf Z\), never a grading
+> difference.  See `2026-08-23-c925-fable-opus-vetting.md` §3.  Retained for
+> the record.
+
 The geometric route to the \(m=2\) gate left one obstacle
 (`2026-08-23-c925-fable-quantum-newton-slope-theorem.md`, §5): for a centre of
 Picard rank at least two, nothing bounded \(c_1\cdot\gamma\) on the Newton edge

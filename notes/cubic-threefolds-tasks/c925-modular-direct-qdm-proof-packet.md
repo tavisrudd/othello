@@ -163,6 +163,9 @@ realization of that orbit.
 - logarithmic-extension applicability and unbounded Kummer-trait coweight
   drift:
   notes/2026-08-22-c925-deligne-rees-extension-audit.md
+- vetting of the rotation-order and grading-multiplicity commits, exact dP5
+  4-cycle, block-exponent invariant of the marker:
+  notes/2026-08-23-c925-fable-opus-vetting.md
 
 The packet index owns the module-to-file map.  Do not append another large
 module to this card or to the index; add one focused companion file and one
@@ -880,11 +883,13 @@ characteristic polynomial of \(c_1\star\) quasi-homogeneous, so along any
 cocharacter \(b\in H^2(Z,\mathbf Z)\) every Newton edge of the spectral cover
 runs between two effective curve classes and has slope
 \((b\cdot\gamma)/(c_1\cdot\gamma)\), where \(\gamma\) is their difference and
-\(c_1\cdot\gamma\) is the edge length.  The boundary rotation order is
-therefore \((c_1\cdot\gamma)/\gcd(b\cdot\gamma,c_1\cdot\gamma)\); it divides
-the edge length and hence the rank of the even cohomology.  No mirror symmetry
-and no toric hypothesis enter, and the statement covers all Newton--Puiseux
-stages at once.
+\(c_1\cdot\gamma\) is the edge length.  The first-stage ramification is
+therefore \((c_1\cdot\gamma)/\gcd(b\cdot\gamma,c_1\cdot\gamma)\).  Later
+Newton--Puiseux stages are not governed by the degree axiom, so the total
+cycle length is only bounded: it is at most \(\mu q\) for a root of
+multiplicity \(\mu\) on an edge of denominator \(q\), hence at most the edge
+length and the rank of the even cohomology.  No mirror symmetry and no toric
+hypothesis enter.
 
 **What it closes.**  At Picard rank one the rotation order divides the Fano
 index, with equality for a primitive cocharacter, so "rotation order equals
@@ -899,33 +904,21 @@ same disposes of every prime Fano threefold centre.  Taking \(b=c_1\) gives
 slope one on every edge, which is a one-line proof that the grading loop
 produces no rotation.
 
-**Grading-multiplicity exclusion.**  The Picard-rank-at-least-two case is
-closed for the grading type that actually matters, by a second and independent
-argument that uses no curve classes.  Block residues partition the spectrum of
-the grading operator \(\mu=(\deg-3)/2\), and a boundary monodromy that
-permutes blocks cyclically carries their residues into one another, so all
-blocks of one cyclic family share a grading pair; the grading values are
-rational and survive the semilinear field automorphism.  Distinct blocks
-occupy disjoint sub-multisets, so a family of length \(\ell\) consumes
-\(\ell\) copies of each value in that pair.  For a **connected** threefold the
-extreme values \(-3/2\) and \(3/2\) have multiplicity \(h^0=h^6=1\), so no
-family of length at least two can use them: the common pair lies in
-\(\{-1/2,1/2\}\) and the grading difference is zero or one.
-
-The cubic threefold's marked block has grading pair \((-3/2,\,1/2)\), of
-difference two: the audit script's residue diagonal is
-\((-19/18,\,1/18)=(-3/2+4/9,\,1/2-4/9)\), the modification being the traceless
-shift \(\pm4/9\) and \(\delta^\sharp=4/9\) the discriminant after it.
-Tensoring with a rank-one block shifts both values equally, so the source's
-marked blocks on \(B\times\mathbf P^m\) also have difference two.  Hence a
-connected threefold centre cannot carry a cyclic triple of the source's
-grading type at all.  The surviving configurations must reach
-\(\delta^\sharp=4/9\) from an underlying grading difference of zero or one,
-which is exactly what the native-order charts exclude once an occurrence
-calibration exists, and they force a large centre: difference one needs
-\(b_2\ge3\), difference zero needs \(b_2\ge6\).  Report:
-`../2026-08-23-c925-fable-grading-multiplicity-exclusion.md`; Lean:
-`Comparison.GradingMultiplicityExclusion`.
+**Grading-multiplicity exclusion: void.**  The 2026-08-23 attempt to exclude
+a cyclic triple "of the source's grading type" by counting multiplicities of
+the grading operator \(\mu=(\deg-3)/2\) rests on the premise that block
+residues at \(z=0\) carry sub-multisets of the \(\mu\)-spectrum.  That premise
+is false: semisimple blocks have residue zero, and every rank-two block
+residue is traceless (\(\mu\) is anti-self-adjoint for the pairing), with
+exponents \(\pm e\) that are not half-integers in general (\(\pm1/6\) on the
+cubic, \(\pm11/18\) on the distinct-root chart).  The marker is
+\(\delta^\sharp=(1-2e)^2\) in the selected orientation: \(\{0,4\}\) is
+\(e=1/2\) (formal monodromy \(-1\) on the block) and \(4/9\) is \(e=1/6\)
+(formal monodromy of order six).  No grading difference is encoded and no
+"difference two versus zero or one" dichotomy exists.  Report:
+`../2026-08-23-c925-fable-opus-vetting.md`; the Lean module
+`Comparison.GradingMultiplicityExclusion` is combinatorics under that
+unfounded hypothesis and is not consumed.
 
 **A dimension bound is not available: refuted.**  The tempting completion of
 this route — read the rotation order as the index of a limiting Fano, bound it
@@ -945,27 +938,17 @@ that witness.  The dimension bound itself is not refuted — every long cycle
 exhibited lives on a surface, and a surface carries no marked block — but no
 proof of it runs through the rotation order.
 
-**Residual gate.**  What is left on this route is a centre of Picard rank at
-least two whose cyclic triple has grading difference zero or one while still
-carrying \(\delta^\sharp=4/9\).  That is the same configuration the
-parabolic-shear countermodel realizes as linear algebra, so the two routes
-cover disjoint halves of the gate.  The refutation above says the mechanism
-must come from the marker rather than from the rotation, which is what the
-grading-multiplicity argument does.
-
-The obvious completion — deduce grading difference two from
-\(\delta^\sharp=4/9\) — is not available, for a structural reason.  The marker
-says the two exponents differ by \(2/3\), whereas grading values are
-\((2k-n)/2\) and any two of them differ by an integer.  So \(2/3\) is not a
-grading difference on any variety in any dimension: for the cubic the
-modification carries difference two to \(2/3\), and the modification is the
-whole content of the marker rather than a perturbation of it.  This explains
-why native calibration excludes \(4/9\) structurally — any calibration keeping
-the exponent difference equal to a grading difference excludes a
-non-integer automatically, which is what the charts reaching discriminant
-\(0\) or \(4\) record — and it shows that the marker's own bookkeeping cannot
-recover the grading.  Recovering it is the occurrence calibration, the
-external gate both routes already share.
+**Residual gate.**  Unchanged from the loop-orbit ledger §9: a connected
+threefold centre with \(b_2\ge2\) carrying a three-cycle of marked
+(\(e=1/6\)) rank-two blocks under an integral cocharacter of its own Novikov
+torus, reduced along point and curve blow-ups to a Mori fibre space.  No
+rotation-order bound can close it, since Picard-rank-\(\ge2\) threefolds do
+carry three-cycles; the exclusion must use the marker.  A candidate
+reformulation, conjectural through the non-semisimple Dubrovin picture: the
+marked block is a semiorthogonal component of numerical rank two whose Serre
+functor has trace one (the cubic's \(\mathcal Ku(B)\), \(S^3=[5]\)), and the
+gate asks that no such threefold have three \(\otimes L\)-conjugate
+components of that type.  See the vetting report §4.
 
 Lean: `Comparison.QuantumNewtonSlope` and `Comparison.LoopOrbitArithmetic`,
 both build roots.  Reports:

@@ -241,27 +241,10 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   Indirect route report:
   `../2026-08-22-c925-indirect-rationality-predictions.md`.
 
-  **Second attack on the same gate, from the centre's geometry.**  The degree
-  axiom fixes every Newton slope of the spectral cover as a ratio of two
-  curve-class pairings, so the boundary rotation order is
-  \((c_1\cdot\gamma)/\gcd(b\cdot\gamma,c_1\cdot\gamma)\) and divides the edge
-  length.  At Picard rank one this proves rotation order equals Fano index,
-  and every Picard-rank-one threefold centre — a cubic threefold centre
-  included — is then excluded by rank counting.  What remains is a bound on
-  \(c_1\cdot\gamma\) for centres of Picard rank at least two; Mori's cone
-  theorem does not reach it because \(\gamma\) is a difference of effective
-  classes.  A grading-multiplicity argument then closes that remainder for the
-  grading type that matters: blocks of one cyclic family share a grading pair,
-  and on a connected threefold the extreme grading values have multiplicity
-  one, so a cyclic triple has grading difference zero or one, while the cubic's
-  marked block — and hence the whole source ledger — has difference two.  What
-  survives is a triple reaching \(\delta^\sharp=4/9\) from difference zero or
-  one, needing \(b_2\ge3\) or \(b_2\ge6\); that is the same configuration the
-  native-order charts exclude, so the two routes now cover disjoint halves of
-  the gate.  Reports:
-  `../2026-08-23-c925-fable-quantum-newton-slope-theorem.md`,
-  `../2026-08-23-c925-fable-grading-multiplicity-exclusion.md` and
-  `../2026-08-22-c925-fable-loop-orbit-arithmetic-ledger.md`.
+  Geometric (rotation-order) route and its 2026-08-23 vetting, which voids the
+  grading-multiplicity exclusion and confirms the del Pezzo refutation of the
+  dimension bound: card section "Geometric route to the same gate" and
+  `../2026-08-23-c925-fable-opus-vetting.md`.
 
 - **C924 — closed 2026-08-19.** The direct ordinary-QDM route proves
   irrationality of `X x P^1` after one mandatory local repair: compare the

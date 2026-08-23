@@ -3,6 +3,14 @@
 **Lane:** `cubic-threefolds` · **Task:** C925 · **Date:** 2026-08-23
 **Branch/worktree:** `c925-fable`
 
+> **Vetted 2026-08-23.**  Theorem A's valuation formula and Theorem B are
+> correct.  Theorem A's "consequently the rotation order is \(q\)" is only the
+> first-stage ramification; the total cycle length is bounded by \(\mu q\) for
+> a root of multiplicity \(\mu\), not equal to \(q\) (§5's own dP5 witness).
+> The dP5 4-cycle was confirmed by an exact second Puiseux stage:
+> \(\lambda=t^{-1/2}(\alpha\pm c\,t^{1/4}+\dots)\), \(c^2=8\sqrt5/3\).  See
+> `2026-08-23-c925-fable-opus-vetting.md` §1–2.
+
 The loop-stabilizer route needs to know which rotation orders a boundary limit
 of a quantum spectral cover can have.  A previous pass conjectured that the
 order is the Fano index of a limiting variety, argued it only inside the toric
