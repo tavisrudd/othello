@@ -112,6 +112,20 @@ are therefore complementary and now cover disjoint halves of the same gate:
 | two (the source's own value) | Theorem C, topologically, unconditionally |
 | zero or one | the native-order charts, once an occurrence calibration exists |
 
+**Scope: this is a threefold statement, not an all-\(m\) one.**  Theorem C
+excludes the difference-two pair on a threefold only because every
+difference-two pair available in dimension three uses an extreme value:
+the spectrum is \(\{-3/2,-1/2,1/2,3/2\}\) and the difference-two pairs are
+\((-3/2,1/2)\) and \((-1/2,3/2)\).  In dimension \(d\ge4\) the interior of the
+spectrum spans at least three consecutive values, so a difference-two pair
+avoiding both extremes exists — already at \(d=4\) the pair \((-1,1)\) has
+multiplicities \(h^2\) and \(h^6\), which are equal by duality and may be
+arbitrarily large.  There the argument degrades from an exclusion to the
+bound \(b_2(Z)\ge\ell\).  Since a blow-up centre in the \(m=2\) ambient
+fivefold has dimension at most three, Theorem C covers every admissible centre
+at \(m=2\) and nothing beyond it; for \(m\ge3\), centres of dimension four and
+above need the rotation-order route or another argument.
+
 **Numerical residue.**  For the surviving cases Theorem C also forces the
 centre to be large: grading difference one needs \(b_2\ge3\), and grading
 difference zero needs \(b_2\ge6\).  Combined with the Newton-slope theorem's
