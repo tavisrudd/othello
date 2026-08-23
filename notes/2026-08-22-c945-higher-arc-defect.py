@@ -42,6 +42,10 @@ def resonance_record(u: int, v: int) -> dict[str, object]:
         2 * u * v + u + v,
     )
     slope = Fraction(2 * v, (u + v) * (2 * u * v + u + v + 1))
+    exception_per_q = Fraction(
+        u * (v + 1) * (v + 1) * (u * u + u + 1),
+        2 * u * v + u + v,
+    )
 
     def lower(h: int) -> Fraction:
         return Fraction(d) - Fraction(h, u)
@@ -69,6 +73,20 @@ def resonance_record(u: int, v: int) -> dict[str, object]:
         divisor_target % crossing_denominator == 0
     )
     assert (h0.denominator == 1) == (divisor_target % crossing_denominator == 0)
+    internal_excess_per_n = (
+        -continuous * u * v
+        - continuous * u
+        - continuous * v
+        - continuous
+        + h0 * u
+        + h0
+        + u * u * v
+        + u * u
+        + u * v * v
+        + 2 * u * v
+        + u
+    )
+    assert -internal_excess_per_n / d == exception_per_q
 
     return {
         "lambda": u * v,
@@ -84,6 +102,7 @@ def resonance_record(u: int, v: int) -> dict[str, object]:
         "crossing_h0": fraction_record(h0),
         "minimizing_h": minimizing_h,
         "double_tight": h0.denominator == 1,
+        "double_tight_exception_per_q": fraction_record(exception_per_q),
     }
 
 

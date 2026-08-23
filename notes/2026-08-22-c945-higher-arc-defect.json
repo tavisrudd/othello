@@ -23,6 +23,10 @@
         "numerator": 1
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 1,
+        "numerator": 3
+      },
       "lambda": 1,
       "lattice_envelope_coefficient": {
         "denominator": 5,
@@ -59,6 +63,10 @@
         "numerator": 1
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 7,
+        "numerator": 27
+      },
       "lambda": 2,
       "lattice_envelope_coefficient": {
         "denominator": 2,
@@ -95,6 +103,10 @@
         "numerator": 1
       },
       "double_tight": true,
+      "double_tight_exception_per_q": {
+        "denominator": 1,
+        "numerator": 8
+      },
       "lambda": 2,
       "lattice_envelope_coefficient": {
         "denominator": 1,
@@ -131,6 +143,10 @@
         "numerator": 1
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 5,
+        "numerator": 24
+      },
       "lambda": 3,
       "lattice_envelope_coefficient": {
         "denominator": 11,
@@ -167,6 +183,10 @@
         "numerator": 3
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 5,
+        "numerator": 78
+      },
       "lambda": 3,
       "lattice_envelope_coefficient": {
         "denominator": 22,
@@ -203,6 +223,10 @@
         "numerator": 1
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 13,
+        "numerator": 75
+      },
       "lambda": 4,
       "lattice_envelope_coefficient": {
         "denominator": 7,
@@ -239,6 +263,10 @@
         "numerator": 2
       },
       "double_tight": true,
+      "double_tight_exception_per_q": {
+        "denominator": 2,
+        "numerator": 21
+      },
       "lambda": 4,
       "lattice_envelope_coefficient": {
         "denominator": 2,
@@ -275,6 +303,10 @@
         "numerator": 2
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 13,
+        "numerator": 336
+      },
       "lambda": 4,
       "lattice_envelope_coefficient": {
         "denominator": 35,
@@ -311,6 +343,10 @@
         "numerator": 1
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 4,
+        "numerator": 27
+      },
       "lambda": 5,
       "lattice_envelope_coefficient": {
         "denominator": 17,
@@ -347,6 +383,10 @@
         "numerator": 5
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 4,
+        "numerator": 155
+      },
       "lambda": 5,
       "lattice_envelope_coefficient": {
         "denominator": 51,
@@ -383,6 +423,10 @@
         "numerator": 1
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 19,
+        "numerator": 147
+      },
       "lambda": 6,
       "lattice_envelope_coefficient": {
         "denominator": 5,
@@ -419,6 +463,10 @@
         "numerator": 1
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 17,
+        "numerator": 224
+      },
       "lambda": 6,
       "lattice_envelope_coefficient": {
         "denominator": 15,
@@ -455,6 +503,10 @@
         "numerator": 1
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 17,
+        "numerator": 351
+      },
       "lambda": 6,
       "lattice_envelope_coefficient": {
         "denominator": 45,
@@ -491,6 +543,10 @@
         "numerator": 3
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 19,
+        "numerator": 1032
+      },
       "lambda": 6,
       "lattice_envelope_coefficient": {
         "denominator": 35,
@@ -527,6 +583,10 @@
         "numerator": 1
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 11,
+        "numerator": 96
+      },
       "lambda": 7,
       "lattice_envelope_coefficient": {
         "denominator": 23,
@@ -563,6 +623,10 @@
         "numerator": 7
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 11,
+        "numerator": 798
+      },
       "lambda": 7,
       "lattice_envelope_coefficient": {
         "denominator": 23,
@@ -599,6 +663,10 @@
         "numerator": 1
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 25,
+        "numerator": 243
+      },
       "lambda": 8,
       "lattice_envelope_coefficient": {
         "denominator": 13,
@@ -635,6 +703,10 @@
         "numerator": 2
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 11,
+        "numerator": 175
+      },
       "lambda": 8,
       "lattice_envelope_coefficient": {
         "denominator": 23,
@@ -671,6 +743,10 @@
         "numerator": 4
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 11,
+        "numerator": 378
+      },
       "lambda": 8,
       "lattice_envelope_coefficient": {
         "denominator": 69,
@@ -707,6 +783,10 @@
         "numerator": 4
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 25,
+        "numerator": 2336
+      },
       "lambda": 8,
       "lattice_envelope_coefficient": {
         "denominator": 117,
@@ -743,6 +823,10 @@
         "numerator": 1
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 7,
+        "numerator": 75
+      },
       "lambda": 9,
       "lattice_envelope_coefficient": {
         "denominator": 29,
@@ -779,6 +863,10 @@
         "numerator": 3
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 1,
+        "numerator": 26
+      },
       "lambda": 9,
       "lattice_envelope_coefficient": {
         "denominator": 25,
@@ -815,6 +903,10 @@
         "numerator": 9
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 1,
+        "numerator": 117
+      },
       "lambda": 9,
       "lattice_envelope_coefficient": {
         "denominator": 145,
@@ -851,6 +943,10 @@
         "numerator": 1
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 31,
+        "numerator": 363
+      },
       "lambda": 10,
       "lattice_envelope_coefficient": {
         "denominator": 8,
@@ -887,6 +983,10 @@
         "numerator": 1
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 3,
+        "numerator": 56
+      },
       "lambda": 10,
       "lattice_envelope_coefficient": {
         "denominator": 49,
@@ -923,6 +1023,10 @@
         "numerator": 5
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 3,
+        "numerator": 155
+      },
       "lambda": 10,
       "lattice_envelope_coefficient": {
         "denominator": 49,
@@ -959,6 +1063,10 @@
         "numerator": 5
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 31,
+        "numerator": 4440
+      },
       "lambda": 10,
       "lattice_envelope_coefficient": {
         "denominator": 44,
@@ -995,6 +1103,10 @@
         "numerator": 1
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 17,
+        "numerator": 216
+      },
       "lambda": 11,
       "lattice_envelope_coefficient": {
         "denominator": 35,
@@ -1031,6 +1143,10 @@
         "numerator": 11
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 17,
+        "numerator": 2926
+      },
       "lambda": 11,
       "lattice_envelope_coefficient": {
         "denominator": 105,
@@ -1067,6 +1183,10 @@
         "numerator": 1
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 37,
+        "numerator": 507
+      },
       "lambda": 12,
       "lattice_envelope_coefficient": {
         "denominator": 19,
@@ -1103,6 +1223,10 @@
         "numerator": 2
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 16,
+        "numerator": 343
+      },
       "lambda": 12,
       "lattice_envelope_coefficient": {
         "denominator": 44,
@@ -1139,6 +1263,10 @@
         "numerator": 3
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 31,
+        "numerator": 975
+      },
       "lambda": 12,
       "lattice_envelope_coefficient": {
         "denominator": 14,
@@ -1175,6 +1303,10 @@
         "numerator": 1
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 31,
+        "numerator": 1344
+      },
       "lambda": 12,
       "lattice_envelope_coefficient": {
         "denominator": 112,
@@ -1211,6 +1343,10 @@
         "numerator": 2
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 16,
+        "numerator": 1161
+      },
       "lambda": 12,
       "lattice_envelope_coefficient": {
         "denominator": 132,
@@ -1247,6 +1383,10 @@
         "numerator": 6
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 37,
+        "numerator": 7536
+      },
       "lambda": 12,
       "lattice_envelope_coefficient": {
         "denominator": 247,
@@ -1283,6 +1423,10 @@
         "numerator": 1
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 10,
+        "numerator": 147
+      },
       "lambda": 13,
       "lattice_envelope_coefficient": {
         "denominator": 41,
@@ -1319,6 +1463,10 @@
         "numerator": 13
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 10,
+        "numerator": 2379
+      },
       "lambda": 13,
       "lattice_envelope_coefficient": {
         "denominator": 287,
@@ -1355,6 +1503,10 @@
         "numerator": 1
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 43,
+        "numerator": 675
+      },
       "lambda": 14,
       "lattice_envelope_coefficient": {
         "denominator": 11,
@@ -1391,6 +1543,10 @@
         "numerator": 1
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 37,
+        "numerator": 896
+      },
       "lambda": 14,
       "lattice_envelope_coefficient": {
         "denominator": 57,
@@ -1427,6 +1583,10 @@
         "numerator": 7
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 37,
+        "numerator": 3591
+      },
       "lambda": 14,
       "lattice_envelope_coefficient": {
         "denominator": 171,
@@ -1463,6 +1623,10 @@
         "numerator": 7
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 43,
+        "numerator": 11816
+      },
       "lambda": 14,
       "lattice_envelope_coefficient": {
         "denominator": 165,
@@ -1499,6 +1663,10 @@
         "numerator": 1
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 23,
+        "numerator": 384
+      },
       "lambda": 15,
       "lattice_envelope_coefficient": {
         "denominator": 47,
@@ -1535,6 +1703,10 @@
         "numerator": 1
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 19,
+        "numerator": 702
+      },
       "lambda": 15,
       "lattice_envelope_coefficient": {
         "denominator": 39,
@@ -1571,6 +1743,10 @@
         "numerator": 5
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 19,
+        "numerator": 1240
+      },
       "lambda": 15,
       "lattice_envelope_coefficient": {
         "denominator": 52,
@@ -1607,6 +1783,10 @@
         "numerator": 15
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 23,
+        "numerator": 7230
+      },
       "lambda": 15,
       "lattice_envelope_coefficient": {
         "denominator": 376,
@@ -1643,6 +1823,10 @@
         "numerator": 1
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 49,
+        "numerator": 867
+      },
       "lambda": 16,
       "lattice_envelope_coefficient": {
         "denominator": 25,
@@ -1679,6 +1863,10 @@
         "numerator": 2
       },
       "double_tight": true,
+      "double_tight_exception_per_q": {
+        "denominator": 1,
+        "numerator": 27
+      },
       "lambda": 16,
       "lattice_envelope_coefficient": {
         "denominator": 1,
@@ -1715,6 +1903,10 @@
         "numerator": 4
       },
       "double_tight": true,
+      "double_tight_exception_per_q": {
+        "denominator": 2,
+        "numerator": 105
+      },
       "lambda": 16,
       "lattice_envelope_coefficient": {
         "denominator": 2,
@@ -1751,6 +1943,10 @@
         "numerator": 8
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 7,
+        "numerator": 876
+      },
       "lambda": 16,
       "lattice_envelope_coefficient": {
         "denominator": 215,
@@ -1787,6 +1983,10 @@
         "numerator": 8
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 7,
+        "numerator": 2496
+      },
       "lambda": 16,
       "lattice_envelope_coefficient": {
         "denominator": 85,
@@ -1823,6 +2023,10 @@
         "numerator": 1
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 13,
+        "numerator": 243
+      },
       "lambda": 17,
       "lattice_envelope_coefficient": {
         "denominator": 53,
@@ -1859,6 +2063,10 @@
         "numerator": 17
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 13,
+        "numerator": 5219
+      },
       "lambda": 17,
       "lattice_envelope_coefficient": {
         "denominator": 477,
@@ -1895,6 +2103,10 @@
         "numerator": 1
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 55,
+        "numerator": 1083
+      },
       "lambda": 18,
       "lattice_envelope_coefficient": {
         "denominator": 14,
@@ -1931,6 +2143,10 @@
         "numerator": 1
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 47,
+        "numerator": 1400
+      },
       "lambda": 18,
       "lattice_envelope_coefficient": {
         "denominator": 88,
@@ -1967,6 +2183,10 @@
         "numerator": 3
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 15,
+        "numerator": 637
+      },
       "lambda": 18,
       "lattice_envelope_coefficient": {
         "denominator": 69,
@@ -2003,6 +2223,10 @@
         "numerator": 3
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 15,
+        "numerator": 1376
+      },
       "lambda": 18,
       "lattice_envelope_coefficient": {
         "denominator": 69,
@@ -2039,6 +2263,10 @@
         "numerator": 3
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 47,
+        "numerator": 7371
+      },
       "lambda": 18,
       "lattice_envelope_coefficient": {
         "denominator": 44,
@@ -2075,6 +2303,10 @@
         "numerator": 9
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 55,
+        "numerator": 24696
+      },
       "lambda": 18,
       "lattice_envelope_coefficient": {
         "denominator": 532,
@@ -2111,6 +2343,10 @@
         "numerator": 1
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 29,
+        "numerator": 600
+      },
       "lambda": 19,
       "lattice_envelope_coefficient": {
         "denominator": 59,
@@ -2147,6 +2383,10 @@
         "numerator": 19
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 29,
+        "numerator": 14478
+      },
       "lambda": 19,
       "lattice_envelope_coefficient": {
         "denominator": 590,
@@ -2183,6 +2423,10 @@
         "numerator": 1
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 61,
+        "numerator": 1323
+      },
       "lambda": 20,
       "lattice_envelope_coefficient": {
         "denominator": 31,
@@ -2219,6 +2463,10 @@
         "numerator": 2
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 26,
+        "numerator": 847
+      },
       "lambda": 20,
       "lattice_envelope_coefficient": {
         "denominator": 318,
@@ -2255,6 +2503,10 @@
         "numerator": 2
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 7,
+        "numerator": 432
+      },
       "lambda": 20,
       "lattice_envelope_coefficient": {
         "denominator": 45,
@@ -2291,6 +2543,10 @@
         "numerator": 1
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 49,
+        "numerator": 3875
+      },
       "lambda": 20,
       "lattice_envelope_coefficient": {
         "denominator": 25,
@@ -2327,6 +2583,10 @@
         "numerator": 10
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 26,
+        "numerator": 4995
+      },
       "lambda": 20,
       "lattice_envelope_coefficient": {
         "denominator": 106,
@@ -2363,6 +2623,10 @@
         "numerator": 10
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 61,
+        "numerator": 33680
+      },
       "lambda": 20,
       "lattice_envelope_coefficient": {
         "denominator": 217,
@@ -2399,6 +2663,10 @@
         "numerator": 1
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 16,
+        "numerator": 363
+      },
       "lambda": 21,
       "lattice_envelope_coefficient": {
         "denominator": 65,
@@ -2435,6 +2703,10 @@
         "numerator": 3
       },
       "double_tight": true,
+      "double_tight_exception_per_q": {
+        "denominator": 1,
+        "numerator": 48
+      },
       "lambda": 21,
       "lattice_envelope_coefficient": {
         "denominator": 1,
@@ -2471,6 +2743,10 @@
         "numerator": 7
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 13,
+        "numerator": 1596
+      },
       "lambda": 21,
       "lattice_envelope_coefficient": {
         "denominator": 265,
@@ -2507,6 +2783,10 @@
         "numerator": 21
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 16,
+        "numerator": 9723
+      },
       "lambda": 21,
       "lattice_envelope_coefficient": {
         "denominator": 143,
@@ -2543,6 +2823,10 @@
         "numerator": 1
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 67,
+        "numerator": 1587
+      },
       "lambda": 22,
       "lattice_envelope_coefficient": {
         "denominator": 17,
@@ -2579,6 +2863,10 @@
         "numerator": 1
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 19,
+        "numerator": 672
+      },
       "lambda": 22,
       "lattice_envelope_coefficient": {
         "denominator": 377,
@@ -2615,6 +2903,10 @@
         "numerator": 11
       },
       "double_tight": true,
+      "double_tight_exception_per_q": {
+        "denominator": 1,
+        "numerator": 231
+      },
       "lambda": 22,
       "lattice_envelope_coefficient": {
         "denominator": 1,
@@ -2651,6 +2943,10 @@
         "numerator": 11
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 67,
+        "numerator": 44616
+      },
       "lambda": 22,
       "lattice_envelope_coefficient": {
         "denominator": 782,
@@ -2687,6 +2983,10 @@
         "numerator": 1
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 35,
+        "numerator": 864
+      },
       "lambda": 23,
       "lattice_envelope_coefficient": {
         "denominator": 71,
@@ -2723,6 +3023,10 @@
         "numerator": 23
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 5,
+        "numerator": 3634
+      },
       "lambda": 23,
       "lattice_envelope_coefficient": {
         "denominator": 284,
@@ -2759,6 +3063,10 @@
         "numerator": 1
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 73,
+        "numerator": 1875
+      },
       "lambda": 24,
       "lattice_envelope_coefficient": {
         "denominator": 37,
@@ -2795,6 +3103,10 @@
         "numerator": 2
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 31,
+        "numerator": 1183
+      },
       "lambda": 24,
       "lattice_envelope_coefficient": {
         "denominator": 49,
@@ -2831,6 +3143,10 @@
         "numerator": 1
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 59,
+        "numerator": 3159
+      },
       "lambda": 24,
       "lattice_envelope_coefficient": {
         "denominator": 55,
@@ -2867,6 +3183,10 @@
         "numerator": 4
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 29,
+        "numerator": 2058
+      },
       "lambda": 24,
       "lattice_envelope_coefficient": {
         "denominator": 59,
@@ -2903,6 +3223,10 @@
         "numerator": 6
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 29,
+        "numerator": 3225
+      },
       "lambda": 24,
       "lattice_envelope_coefficient": {
         "denominator": 295,
@@ -2939,6 +3263,10 @@
         "numerator": 2
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 59,
+        "numerator": 9344
+      },
       "lambda": 24,
       "lattice_envelope_coefficient": {
         "denominator": 110,
@@ -2975,6 +3303,10 @@
         "numerator": 4
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 31,
+        "numerator": 8478
+      },
       "lambda": 24,
       "lattice_envelope_coefficient": {
         "denominator": 21,
@@ -3011,6 +3343,10 @@
         "numerator": 12
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 73,
+        "numerator": 57696
+      },
       "lambda": 24,
       "lattice_envelope_coefficient": {
         "denominator": 185,
@@ -3047,6 +3383,10 @@
         "numerator": 1
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 19,
+        "numerator": 507
+      },
       "lambda": 25,
       "lattice_envelope_coefficient": {
         "denominator": 77,
@@ -3083,6 +3423,10 @@
         "numerator": 5
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 1,
+        "numerator": 93
+      },
       "lambda": 25,
       "lattice_envelope_coefficient": {
         "denominator": 61,
@@ -3119,6 +3463,10 @@
         "numerator": 25
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 19,
+        "numerator": 16275
+      },
       "lambda": 25,
       "lattice_envelope_coefficient": {
         "denominator": 1001,
@@ -3155,6 +3503,10 @@
         "numerator": 1
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 79,
+        "numerator": 2187
+      },
       "lambda": 26,
       "lattice_envelope_coefficient": {
         "denominator": 20,
@@ -3191,6 +3543,10 @@
         "numerator": 1
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 67,
+        "numerator": 2744
+      },
       "lambda": 26,
       "lattice_envelope_coefficient": {
         "denominator": 1,
@@ -3227,6 +3583,10 @@
         "numerator": 13
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 67,
+        "numerator": 21411
+      },
       "lambda": 26,
       "lattice_envelope_coefficient": {
         "denominator": 13,
@@ -3263,6 +3623,10 @@
         "numerator": 13
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 79,
+        "numerator": 73112
+      },
       "lambda": 26,
       "lattice_envelope_coefficient": {
         "denominator": 360,
@@ -3299,6 +3663,10 @@
         "numerator": 1
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 41,
+        "numerator": 1176
+      },
       "lambda": 27,
       "lattice_envelope_coefficient": {
         "denominator": 83,
@@ -3335,6 +3703,10 @@
         "numerator": 3
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 11,
+        "numerator": 650
+      },
       "lambda": 27,
       "lattice_envelope_coefficient": {
         "denominator": 134,
@@ -3371,6 +3743,10 @@
         "numerator": 9
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 11,
+        "numerator": 2184
+      },
       "lambda": 27,
       "lattice_envelope_coefficient": {
         "denominator": 134,
@@ -3407,6 +3783,10 @@
         "numerator": 27
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 41,
+        "numerator": 40878
+      },
       "lambda": 27,
       "lattice_envelope_coefficient": {
         "denominator": 581,
@@ -3443,6 +3823,10 @@
         "numerator": 1
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 85,
+        "numerator": 2523
+      },
       "lambda": 28,
       "lattice_envelope_coefficient": {
         "denominator": 43,
@@ -3479,6 +3863,10 @@
         "numerator": 2
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 4,
+        "numerator": 175
+      },
       "lambda": 28,
       "lattice_envelope_coefficient": {
         "denominator": 584,
@@ -3515,6 +3903,10 @@
         "numerator": 1
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 67,
+        "numerator": 5376
+      },
       "lambda": 28,
       "lattice_envelope_coefficient": {
         "denominator": 374,
@@ -3551,6 +3943,10 @@
         "numerator": 7
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 67,
+        "numerator": 9975
+      },
       "lambda": 28,
       "lattice_envelope_coefficient": {
         "denominator": 187,
@@ -3587,6 +3983,10 @@
         "numerator": 14
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 4,
+        "numerator": 1477
+      },
       "lambda": 28,
       "lattice_envelope_coefficient": {
         "denominator": 584,
@@ -3623,6 +4023,10 @@
         "numerator": 14
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 85,
+        "numerator": 91056
+      },
       "lambda": 28,
       "lattice_envelope_coefficient": {
         "denominator": 1247,
@@ -3659,6 +4063,10 @@
         "numerator": 1
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 22,
+        "numerator": 675
+      },
       "lambda": 29,
       "lattice_envelope_coefficient": {
         "denominator": 89,
@@ -3695,6 +4103,10 @@
         "numerator": 29
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 22,
+        "numerator": 25259
+      },
       "lambda": 29,
       "lattice_envelope_coefficient": {
         "denominator": 1335,
@@ -3731,6 +4143,10 @@
         "numerator": 1
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 91,
+        "numerator": 2883
+      },
       "lambda": 30,
       "lattice_envelope_coefficient": {
         "denominator": 23,
@@ -3767,6 +4183,10 @@
         "numerator": 1
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 11,
+        "numerator": 512
+      },
       "lambda": 30,
       "lattice_envelope_coefficient": {
         "denominator": 221,
@@ -3803,6 +4223,10 @@
         "numerator": 3
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 73,
+        "numerator": 4719
+      },
       "lambda": 30,
       "lattice_envelope_coefficient": {
         "denominator": 481,
@@ -3839,6 +4263,10 @@
         "numerator": 5
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 71,
+        "numerator": 7595
+      },
       "lambda": 30,
       "lattice_envelope_coefficient": {
         "denominator": 3,
@@ -3875,6 +4303,10 @@
         "numerator": 1
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 71,
+        "numerator": 9288
+      },
       "lambda": 30,
       "lattice_envelope_coefficient": {
         "denominator": 6,
@@ -3911,6 +4343,10 @@
         "numerator": 5
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 73,
+        "numerator": 17760
+      },
       "lambda": 30,
       "lattice_envelope_coefficient": {
         "denominator": 37,
@@ -3947,6 +4383,10 @@
         "numerator": 5
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 77,
+        "numerator": 32535
+      },
       "lambda": 30,
       "lattice_envelope_coefficient": {
         "denominator": 221,
@@ -3983,6 +4423,10 @@
         "numerator": 15
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 13,
+        "numerator": 15960
+      },
       "lambda": 30,
       "lattice_envelope_coefficient": {
         "denominator": 713,
@@ -4019,6 +4463,10 @@
         "numerator": 1
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 47,
+        "numerator": 1536
+      },
       "lambda": 31,
       "lattice_envelope_coefficient": {
         "denominator": 95,
@@ -4055,6 +4503,10 @@
         "numerator": 31
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 47,
+        "numerator": 61566
+      },
       "lambda": 31,
       "lattice_envelope_coefficient": {
         "denominator": 760,
@@ -4091,6 +4543,10 @@
         "numerator": 1
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 97,
+        "numerator": 3267
+      },
       "lambda": 32,
       "lattice_envelope_coefficient": {
         "denominator": 49,
@@ -4127,6 +4583,10 @@
         "numerator": 2
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 41,
+        "numerator": 2023
+      },
       "lambda": 32,
       "lattice_envelope_coefficient": {
         "denominator": 747,
@@ -4163,6 +4623,10 @@
         "numerator": 4
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 19,
+        "numerator": 1701
+      },
       "lambda": 32,
       "lattice_envelope_coefficient": {
         "denominator": 231,
@@ -4199,6 +4663,10 @@
         "numerator": 8
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 19,
+        "numerator": 3650
+      },
       "lambda": 32,
       "lattice_envelope_coefficient": {
         "denominator": 77,
@@ -4235,6 +4703,10 @@
         "numerator": 16
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 41,
+        "numerator": 19656
+      },
       "lambda": 32,
       "lattice_envelope_coefficient": {
         "denominator": 747,
@@ -4271,6 +4743,10 @@
         "numerator": 16
       },
       "double_tight": false,
+      "double_tight_exception_per_q": {
+        "denominator": 97,
+        "numerator": 135296
+      },
       "lambda": 32,
       "lattice_envelope_coefficient": {
         "denominator": 1617,
