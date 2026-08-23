@@ -63,8 +63,14 @@ closes the discrete monomial quotient.  A cellwise Lean calculation now also
 shows that arbitrary effective unipotent factors on either side cannot make
 one of the other four positions satisfy the cubic branch-separation
 fingerprint.  It does not prove the external affine-Bruhat theorem that every
-geometric effective calibration lies in this bounded union.  That
-Bruhat/native-descent statement and the occurrence-to-port theorem remain.
+geometric effective calibration lies in this bounded union.  The stronger
+statement is now false under the advertised coarse hypotheses: the effective
+family (x^3=qh^{3k}), restricted by (q=h=r), has exact cubic period for
+every (k) and unbounded self-dual coweight
+\((0,-k,-2k,2k,k,0)\).  Lean checks this uniformly in
+`KummerTraitRescaling`.  The source theorem must instead construct a primitive
+marked valuation or descend the coweight and first jet modulo loop-trivial
+cocharacter drift.  The occurrence-to-port theorem remains external.
 The unconditional every-smooth theorem is not landed.  Independently, Voisin
 plus the 2025 Engel--de Gaay Fortman--Schreieder parity theorem gives an
 all-\(m\) proof for a very general cubic; that preprint result must not be
@@ -154,6 +160,9 @@ realization of that orbit.
 - programme-level marked Rees shadow, exact coweight calculation, and
   certificate-first experiment:
   notes/2026-08-22-c925-marked-rees-shadow.md
+- logarithmic-extension applicability and unbounded Kummer-trait coweight
+  drift:
+  notes/2026-08-22-c925-deligne-rees-extension-audit.md
 
 The packet index owns the module-to-file map.  Do not append another large
 module to this card or to the index; add one focused companion file and one
@@ -791,13 +800,16 @@ The live frontier is source-side, not another linear consumer.
    by the certified Kummer involution.  Its strengthened cellwise theorem
    pulls the marked divisor through arbitrary displayed effective unipotents
    on both sides and proves that the cubic branch-separation fingerprint still
-   forces those same four positions.  The next task is no longer another
-   unipotent chart inside these cells; it is the external
-   Bruhat/native-descent theorem placing every actual calibration in this
-   bounded affine domain.  Standard affine-Bruhat theory indexes the possible
-   cells by an infinite Iwahori--Weyl/coweight set and supplies no such bound.
-   The
-   occurrence-to-port theorem remains external after every finite chart.
+   forces those same four positions.  `KummerTraitRescaling` now proves that
+   the raw affine-coweight set cannot be bounded from exact cubic period,
+   effectiveness, and pairing: charges (3k+1) all have period three while
+   their self-dual lattice positions are unbounded.  The next finite test is
+   the semidirect action of this loop-trivial rescaling on the first marked
+   jet and recurrence.  If the marker descends, the source target is a
+   cocharacter-quotient port; otherwise it must construct a primitive marked
+   valuation.  The occurrence-to-port theorem remains external in either
+   formulation.  See
+   `../2026-08-22-c925-deligne-rees-extension-audit.md`.
 
 2. **What Lean separates.**  The nonsplit outer-return theorem proves that
    total period is outer-label period times return-map period.  The pre-strict
@@ -826,6 +838,16 @@ The strengthened unit-fixed Weyl-cell checker, `PaperInterface`, and
 `20260823-050130-8c76b21b`.  The six cellwise correspondence and
 branch-separation terminals use only `propext`, `Classical.choice`, and
 `Quot.sound`; no `native_decide` or external oracle enters their proofs.
+
+`KummerTraitRescaling` passed standalone guarded elaboration in run
+`20260822-223404-cd-lean-exec-taskset-c-20-23-env-LEAN_NUM_THREADS1-choom-n-1000-nix-develop-comma`.
+Its module target and `PaperInterface` passed queued runs
+`20260823-053609-f84147b4` and `20260823-053942-346c32a3`; the guarded axiom
+audit passed in run
+`20260822-224141-cd-lean-exec-taskset-c-20-23-env-LEAN_NUM_THREADS1-choom-n-1000-nix-develop-comma`.
+The six new terminals report only `propext`, `Classical.choice`, and
+`Quot.sound`.  They use no `native_decide`, generated certificate, or external
+oracle.
 
 3. **All-\(m\) remainder.**  Before the strict equality case, the candidate
    center dimensions at \(n=2,3,4,5,14\) are respectively

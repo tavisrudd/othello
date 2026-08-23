@@ -2114,13 +2114,81 @@ unit/top-fixed cells checked by `UnitFixedWeylCoweightCertificate`.  It also
 does not identify the checked algebraic branch-separation fingerprint with
 the actual divisor eigenbranches.
 
-**OPEN/DISPOSITION.**  Prove a bounded-Schubert theorem for the native marked
-Rees port: effectivity, the unit/top normalization, the marked divisor, and
-the first connection jet must force the affine relative position into the
-certified eight-cell union.  Lean already proves that arbitrary displayed
-effective unipotent factors inside those cells cannot rescue a wrong Weyl
-position.  The remaining statement is therefore a coweight bound plus
-occurrence descent, not another cellwise elimination.
+**DISPOSITION.**  The proposed bounded-Schubert conclusion is false from
+effectivity, exact cubic period, and self-duality alone.  The family in D16
+has exact period three and unbounded self-dual coweight.  The eight-cell
+certificate remains an exhaustive calculation on a normalized finite domain,
+but a source theorem must either choose that normalization geometrically or
+take a quotient by loop-trivial cocharacter drift.
+
+## D16. Relative logarithmic extension helps, but Kummer-trait drift is unbounded
+
+**SOURCE.**  Deligne, *Equations differentielles a points singuliers
+reguliers*, Lecture Notes in Mathematics 163 (1970), Chapter II,
+Propositions 5.2 and 5.4 and Theorem 5.9, constructs canonical logarithmic
+extensions of regular-singular connections after choosing residue
+representatives modulo the integers.  Proposition 5.2 is exact and compatible
+with tensor constructions in the unipotent/nilpotent-residue case; Remark 5.5
+warns that the general chosen-section extension is not tensor-compatible.
+The checked source is doi:10.1007/BFb0061194.
+
+Hai--dos Santos, *Regular-singular connections on relative complex schemes*,
+arXiv:2002.06629v2, Proposition 6.5 and Theorems 6.8 and 6.11, prove stability
+under subquotients/tensor/dual and construct compatible Deligne--Manin models
+over finite-dimensional and complete noetherian local complex bases.
+Achinger, *Regular logarithmic connections*, arXiv:2304.01135, Theorem 3.17,
+is an absolute algebraic corroboration: restriction is an equivalence on the
+chosen-exponent canonical extensions and local freeness is preserved.  Exact
+read depths and cached hashes are recorded in
+`2026-08-22-c925-deligne-rees-extension-audit.md`.
+
+**DERIVED.**  C924's elementary modification removes the base-direction
+\(z^{-1}\) pole on each marked rank-two block.  Because
+\(L=\operatorname{im}N\) is intrinsic, the deck-stable direct sum of the
+modified blocks descends over the punctured cubic trait as a connection over
+a base retaining \(\mathbf C[[z]]\).  If that trait connection is relatively
+regular singular over a noetherian complete coefficient base, the
+Deligne--Manin theorem can construct a functorial logarithmic modified
+carrier.  Thus inverting (z) is not itself the obstruction after the
+elementary modification.
+
+**COUNTERMODEL TO THE RAW COWEIGHT BOUND.**  Put
+
+\[
+ A_k=\mathbf C[[q,h]][x,e]/(x^3-qh^{3k},e^2).
+\]
+
+It is an effective graded rank-six paired Frobenius algebra with the fixed
+special fibre \(\mathbf C[x,e]/(x^3,e^2)\).  On \(q=h=r\), its cubic charge is
+\(3k+1\), hence its sheet period is exactly three.  The generic paired
+comparison with \(u^3=r\) sends
+\(u\mapsto r^{-k}x\), \(\epsilon\mapsto r^{2k}e\) and has coweight
+
+\[
+ (0,-k,-2k,2k,k,0).
+\]
+
+It fixes unit and top, is self-dual, and is unbounded.  Lean proves the
+arithmetic statement uniformly in
+`Comparison.KummerTraitRescaling.exists_exactCubicCharge_with_coweight_above`.
+The construction is not asserted to be the full QDM of an arbitrary smooth
+threefold; it falsifies precisely the coarsely typed adapter that stops at
+effectivity, pairing, and period.
+
+**NOT PROVIDED.**  The logarithmic-extension sources assume regular
+singularity and do not produce it for Iritani's pullback
+\(Q_Z^d\mapsto Q^{i_*d}q^{-\rho_Z\cdot d}\) when \(\rho_Z\) is not nef.  An
+adapted ample cocharacter can make the pullback effective, but its
+loop-trivial multiples produce the unbounded family above.  The sources also
+do not identify the logarithmic carrier with the native cohomology order or
+make the arbitrary-exponent extension self-dual.
+
+**OPEN/DISPOSITION.**  Replace the false bounded-Schubert target by one of two
+typed providers: a primitive marked valuation supplied by the divisor
+equation, or a marked coweight--jet port modulo loop-trivial cocharacters with
+the residue marker proved invariant.  The next finite calculation is the
+semidirect action of the displayed coweight on the first Rees jet and the
+normalized recurrence.
 
 ## Current source verdict
 
@@ -2169,8 +2237,10 @@ occurrence descent, not another cellwise elimination.
 8. **The unconditional geometric provider is not landed.**  For \(m=2\),
    prove actual-loop exclusion on the single outer factor attached to each
    connected codimension-two center occurrence,
-   or prove native-effective pure-Euler descent there and complete the
-   recurrence calculation.  For all \(m\), lower-period inner returns after
+   or construct the marked Rees port there and either a primitive valuation or
+   its loop-trivial cocharacter quotient.  Relative Deligne--Manin extension
+   is conditionally available after modified flatness and regular singularity;
+   it does not supply those missing data.  For all \(m\), lower-period inner returns after
    a nontrivial outer orbit create additional cases.  The published Laurent
    comparison supplies neither provider.  Do not
    report the \(m=2\) or all-\(m\) theorem as proved, and do not add another

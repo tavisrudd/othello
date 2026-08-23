@@ -122,16 +122,15 @@ ladder that appears elsewhere in the programme.
 4. The actual-loop theorem should transport one pointed profile, not enumerate
    every primitive factor.  The occurrence label and the loop generator remain
    indispensable because unordered atoms erase precisely this profile.
-5. A Bruhat reduction to the finite monomial coweight domain, followed by the
-   two checked native-order charts, would close the \(m=2\) correction theorem.
-   The eight-position monomial domain now has only two divisor-generating
-   classes modulo the Kummer involution.  Lean now strengthens this from the
-   monomial basepoints to their complete displayed effective unipotent cells:
-   none of the four other Weyl positions can satisfy the cubic
-   branch-separation fingerprint after arbitrary left and right unipotent
-   factors.  What remains open is the theorem placing every actual effective
-   calibration in this bounded affine-Bruhat domain, together with the
-   occurrence-to-port construction.
+5. The eight-position monomial domain has only two divisor-generating classes
+   modulo the Kummer involution, and Lean extends this exclusion to the
+   displayed effective unipotent cells.  This finite quotient is not a bound
+   on arbitrary effective traits.  The family
+   \(x^3=qh^{3k}\), restricted by \(q=h=r\), retains exact cubic period while
+   producing the unbounded self-dual coweight
+   \((0,-k,-2k,2k,k,0)\).  A source theorem must therefore choose a primitive
+   marked valuation or quotient coweight and jet together by loop-trivial
+   cocharacter drift.  A bare bounded affine-Bruhat conclusion is false.
 
 ### Second-order predictions
 
@@ -304,9 +303,10 @@ following.
    positions and three raw coweights.  Exactly four positions have a marked
    divisor which generates the reduced cubic quotient; right composition by
    the Kummer algebra involution pairs them into two classes represented by
-   \(0\) and \((-1,0,0,0,0,1)\).  This is now certified.  The prediction still
-   requiring proof is the Bruhat reduction of an arbitrary native effective
-   calibration to this monomial domain.
+   \(0\) and \((-1,0,0,0,0,1)\).  This is certified.  The unbounded
+   Kummer-trait family proves that an arbitrary effective calibration need not
+   have a representative in this finite domain without an additional
+   primitive-valuation or cocharacter-quotient theorem.
 2. In each surviving coweight stratum, the effective homogeneous
    pairing-preserving Rees jets form a small affine scheme.  This prediction is
    proved for the coweight-zero dual-number chart: conformality leaves one
@@ -319,9 +319,11 @@ following.
    coefficient to add to the shadow; one should not retain the full formal
    connection pre-emptively.
 4. Under composition, coweights add and first jets compose by a semidirect
-   cocycle law.  This should give a pathwise persistence theorem without an
-   exhaustive global ledger, provided the actual Kummer trait is primitive at
-   every junction.
+   cocycle law.  The next test is whether the loop-trivial rescaling
+   \((0,-k,-2k,2k,k,0)\) acts trivially on the residue marker after its
+   derivative jet is included.  A positive answer replaces the impossible raw
+   bound by a quotient port; a negative answer makes a primitive trait an
+   indispensable geometric input.
 5. For general \(m\), outer-return holonomy should act on the same Rees port.
    The period calculation and the calibration calculation would then use one
    enriched occurrence, rather than independent outer and inner shadows.
@@ -348,9 +350,11 @@ The next computation should be finite and deliberately overexplicit.
 4. Emit canonical JSON and Lean data.  Lean should recheck every matrix and
    polynomial identity and expose a typed `ReesCalibration` correspondence to
    `RankSixRecurrenceCertificate.Calibration`.
-5. Only after the exhaustive certificate is stable should the proof be
-   compressed structurally, by identifying the Bruhat reduction and the jet
-   quotient as a self-dual Rees-extension theorem.
+5. After the bounded certificates are stable, compress them structurally by
+   identifying the self-dual jet quotient.  The later unbounded rescaling
+   theorem shows that this quotient, or a primitive marked valuation, must be
+   part of the statement; a finite raw Bruhat reduction cannot be the
+   structural theorem.
 
 The first boundary certificate is now implemented.  The Rust generator
 `scripts/marked_rees_shadow_cert.rs` emits the full explicit (6\times6)
@@ -512,19 +516,37 @@ single-reversal monomial basepoint does not rule out the whole affine
 coweight cell: the already-certified distinct-root chart has nontrivial
 unipotent parameters and must be treated separately.
 
+The stronger bounded-union statement is refuted at the level of its stated
+coarse hypotheses.  For every \(k\geq0\), the effective graded paired family
+
+\[
+ \mathbf C[[q,h]][x,e]/(x^3-qh^{3k},e^2)
+\]
+
+restricts along \(q=h=r\) to a cubic packet of charge \(3k+1\), hence exact
+period three, while its generic comparison with the charge-one order has
+self-dual coweight \((0,-k,-2k,2k,k,0)\).  These coweights are unbounded and
+fix the unit and top class.  `Comparison.KummerTraitRescaling` proves the
+arithmetic statement uniformly.  The construction is not a full QDM
+realization, so a divisor-equation calibration can still exclude it; that
+calibration, a primitive valuation, or a gauge-covariant quotient by the
+rescaling action must be an explicit source hypothesis.  See
+`2026-08-22-c925-deligne-rees-extension-audit.md`.
+
 The finite domain must remain explicit: rank six, one primitive cubic Kummer
 ray, cohomological weights \((0,1,1,2,2,3)\), the displayed effective
 unipotent support, the two normalized native orders, and exact rational
 arithmetic.  The certificates close these charts and the displayed monomial
-quotient, not the whole effective calibration problem.  They do not prove that Iritani's actual
-codimension-two correction occurrence supplies the marked Rees port; that is
-the remaining geometric persistence theorem.
+quotient, not the whole effective calibration problem.  They do not prove that
+Iritani's actual codimension-two correction occurrence supplies the marked
+Rees port; that is the geometric persistence theorem.
 
 ## Edge-case and type boundary
 
 The certificate must reject, rather than normalize away, three mutations.
 
-1. Equal inertia with different coweight: \(z^3-r\) and \(z^3-r^2\).
+1. Equal inertia with unbounded different coweight:
+   \(z^3-r^{3k+1}\), for arbitrary \(k\geq0\).
 2. Equal coweight and associated grading with different jet: the homogeneous
    parabolic shear.
 3. A multiplication tensor conjugated only in its output matrices:
@@ -546,11 +568,12 @@ matrix change of basis.
 For one exact-\(4/9\) marked correction occurrence over the actual product-loop
 trait, construct a rank-six self-dual unital Rees lattice whose generic fibre is
 the marked cubic primary union, identify its coweight orbit and first connection
-jet, prove its affine-Bruhat relative position lies in the certified bounded
-union of eight cells, and prove that the Iritani occurrence map preserves this
-pair.  The finite certificate would then exclude every admissible pair.  No
-choice of effective unipotent factors inside those cells is an additional
-source obligation.
+jet, and prove that the Iritani occurrence map preserves this pair.  Then either
+choose a primitive marked valuation which places the port in the certified
+finite domain, or identify ports modulo the loop-trivial cocharacter action and
+prove that the marker descends to that quotient.  The first alternative feeds
+the existing finite certificates directly.  The second requires one additional
+finite calculation of the compensating jet action.
 
 This is strictly smaller than transporting every primitive factor, every row,
 or a full Stokes object.  It is larger than a bare finite-etale packet for the
@@ -562,11 +585,12 @@ lattice vertex, and associated grading forgets the extension class.
 **EJ:** green as an exhaustive quotient of the eight explicitly typed
 unit/top-fixed monomial Weyl positions and as a cellwise exclusion after all
 displayed effective unipotent factors; red as a theorem that an arbitrary
-geometric calibration belongs to that bounded domain.  The certificate
-reduces a finite ambiguity but does not discharge the integral
-Bruhat/native-descent adapter.
+effective trait belongs to that bounded domain.  The unbounded rescaling
+family proves the latter failure structurally.  The certificate reduces a
+finite normalized ambiguity but does not construct a primitive trait or the
+cocharacter-quotient port.
 
-**TT:** four mutations keep the boundary sharp.
+**TT:** five mutations keep the boundary sharp.
 
 1. Removing the divisor-generation predicate retains the double-reversal raw
    coweight and makes the two-class conclusion false.
@@ -578,6 +602,9 @@ Bruhat/native-descent adapter.
 4. Treating a Laurent comparison as an integral monomial representative is
    exactly the unsupported source arrow.  No Lean theorem performs that
    coercion.
+5. Treating exact cubic period as a primitive integral valuation is falsified
+   by every charge \(3k+1\): the sheet action is unchanged while the self-dual
+   coweight is unbounded.
 
 ## Mystery ledger
 
@@ -590,6 +617,7 @@ Bruhat/native-descent adapter.
 | settled in the finite monomial domain | Raw coweight is over-refined: the divisor-generating positions have two classes modulo the Kummer involution. | Rust enumerates all eight unit/top-fixed self-dual monomial positions; Lean proves positions \(\{0,2,6,7\}\) are exactly the divisor-generating ones and pairs \(0\sim7\), \(2\sim6\). |
 | settled in the displayed affine cells | Effective unipotent factors might rescue a non-generating Weyl position. | Lean computes the complete divisor pullback on every cell and proves the branch-separation fingerprint still forces positions \(\{0,2,6,7\}\). |
 | proposed | Coweight orbit plus first marked connection jet is the minimally enriched shadow needed by the strict recurrence. | It separates the two known modes of information loss and closes both normalized native-order charts; the external Bruhat reduction is not proved. |
-| open | Every native effective marked calibration has affine-Bruhat relative position in the certified bounded union. | Pappas--Rapoport Proposition 8.1 supplies Iwahori--Weyl indexing, but the affine coweight set is infinite; current Iritani/KKPYY comparisons do not produce an integral occurrence or the required bound. |
-| partial | Every admissible marked Rees port excludes \(4/9\). | The dual-number chart gives discriminant \(0\); the distinct-root chart fails leading-line regularity. These are the two certified quotient representatives, conditional on the missing Bruhat/occurrence adapter. |
+| refuted from the coarse hypotheses | Exact cubic period, effectiveness, and self-duality bound the affine coweight. | The charge-\(3k+1\) family has exact period three and coweight \((0,-k,-2k,2k,k,0)\); Lean proves this is an unbounded self-dual family. |
+| open | A primitive marked valuation exists, or the coweight--jet port descends modulo loop-trivial cocharacters. | The logarithmic-extension audit constructs the exact alternative; neither Iritani/KKPYY nor the current Lean modules supply it. |
+| partial | Every admissible marked Rees port excludes \(4/9\). | The dual-number chart gives discriminant \(0\); the distinct-root chart fails leading-line regularity. These are the two certified normalized representatives, conditional on a primitive-trait or cocharacter-quotient occurrence adapter. |
 | open | The actual Iritani correction occurrence carries and preserves the marked Rees port. | Current comparison theorems are Laurent/generic and do not supply integral occurrence transport. |

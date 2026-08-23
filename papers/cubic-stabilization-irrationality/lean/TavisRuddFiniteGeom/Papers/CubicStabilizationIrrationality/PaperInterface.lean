@@ -46,6 +46,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.Bin
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.RankSixRecurrenceCertificate
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.KummerDivisorGenerator
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.MarkedReesShadowCertificate
+import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.KummerTraitRescaling
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.EffectiveReesCalibrationCertificate
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.EffectiveDistinctOrderCertificate
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.UnitFixedWeylCoweightCertificate
@@ -223,6 +224,13 @@ filtration weight.  Its `ReesPortChart` is deliberately finite: it has no
 trait, actual loop, native QDM lattice, or occurrence comparison.  The module
 therefore certifies that coweight and first jet are independent ambiguity
 layers; it does not construct the geometric marked Rees port.
+`KummerTraitRescaling` checks a second limitation on the coweight layer.  The
+effective diagonal traits with cubic exponents `3k+1` all have exact sheet
+period three, while the paired generic basis change has self-dual valuation
+vector `(0,-k,-2k,2k,k,0)`.  Its positive coordinate is unbounded.  Hence
+exact period and self-duality do not imply a finite affine-coweight domain.
+The module proves only this arithmetic correspondence; it does not construct
+the displayed Frobenius-algebra family as a quantum connection.
 `EffectiveReesCalibrationCertificate` exhausts the coweight-zero
 dual-number chart of effective self-dual calibrations.  Pairing preservation
 reduces the effective unipotent support to five parameters.  Correct

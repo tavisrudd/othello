@@ -187,12 +187,18 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   orders differ by relative coweight \((-1,0,0,0,0,1)\), whereas the
   coweight-zero parabolic shear retains the associated grading but changes the
   marker through its first jet.  The discrete monomial enumeration is now
-  landed with canonical Rust data and Lean correspondence.  The next
-  structural task is to prove that every actual effective calibration admits
-  a representative in that finite Bruhat domain; only then can the result be
-  compressed to a Rees-extension theorem.  This is a proposed source
-  compression, not a landed geometric adapter.  Report:
-  `../2026-08-22-c925-marked-rees-shadow.md`.
+  landed with canonical Rust data and Lean correspondence.  A bounded raw
+  Bruhat domain is now ruled out under the coarse hypotheses: the effective
+  charge-(3k+1) family retains exact cubic period and has unbounded self-dual
+  coweight \((0,-k,-2k,2k,k,0)\).  Lean proves this uniformly.  The source
+  theorem must instead construct a primitive marked valuation or quotient the
+  coweight and first jet together by loop-trivial cocharacter drift.  C924's
+  modified-flatness calculation does make the marked base connection regular
+  in (z), so a relative Deligne--Manin extension is conditionally applicable
+  after an effective regular-singular trait has been supplied; it does not
+  choose that trait or the quotient.  Reports:
+  `../2026-08-22-c925-marked-rees-shadow.md` and
+  `../2026-08-22-c925-deligne-rees-extension-audit.md`.
   The first exact certificate stage is now landed: Rust emits the three
   Laurent comparison blocks inside the full (6\times6) basis-change matrix
   and the parabolic first jet, while Lean independently checks the extraction,
@@ -214,11 +220,9 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   classes.  Lean now checks the complete divisor pullback after arbitrary
   displayed effective unipotent factors on both sides: none of the four other
   Weyl cells can satisfy the cubic branch-separation fingerprint.  This does
-  not prove the load-bearing external statement that every geometric
-  effective calibration lies in this bounded affine-Bruhat union.
-  Pappas--Rapoport's affine-Bruhat theorem supplies Iwahori--Weyl indexing but
-  no finite coweight bound.  That Bruhat/native-descent theorem and
-  construction of the geometric marked Rees port remain.
+  not control loop-trivial coweight drift outside those cells.  The next
+  finite test is the induced semidirect action on the first marked jet and
+  recurrence; the geometric occurrence-to-port construction remains external.
 
   **Closed lanes:** the common \(\epsilon M\)-row/stable-projector
   composite, raw and normalized degree-zero augmentation, ordinary
@@ -232,6 +236,8 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   `../2026-08-22-c925-kummer-divisor-generator.md`.
   Marked Rees-shadow report:
   `../2026-08-22-c925-marked-rees-shadow.md`.
+  Logarithmic-extension and trait-drift audit:
+  `../2026-08-22-c925-deligne-rees-extension-audit.md`.
   Indirect route report:
   `../2026-08-22-c925-indirect-rationality-predictions.md`.
 
