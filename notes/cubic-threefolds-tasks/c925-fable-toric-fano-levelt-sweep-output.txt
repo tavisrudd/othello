@@ -1,0 +1,110 @@
+============================================================================================
+C925: Jordan type of c_1 * and Levelt exponent classes
+      for every smooth toric Fano threefold, at the canonical point q = 1
+============================================================================================
+
+-- validation: Levelt tool on known rank-two blocks -------------------------
+  [cubic threefold (b_3 = 10), expect exponents -1/6, -5/6]
+    eigenvalue 0: rank-two block, exponents [-1/6, -5/6], delta^sharp = 4/9
+    control passes: the marked class {1/6, 5/6} is detected when present.
+  [rational curve summand, expect {1/2, 1/2}]
+    eigenvalue 0: rank-two block, exponents [-1/2], delta^sharp = 0
+    control passes: an unmarked class {1/2, 1/2} is reported with delta^sharp 0.
+
+-- enumeration of the smooth toric Fano threefolds --------------------------
+    smooth Fano 3-fans up to GL(3,Z): 18
+    Picard rank distribution: {1: 1, 2: 4, 3: 7, 4: 4, 5: 2}
+
+-- per-variety sweep --------------------------------------------------------
+X01  P^3                                b2=1  chi=4  (-K)^3=64
+      rays [(1, 0, 0), (0, 1, 0), (0, 0, 1), (-1, -1, -1)]
+      spectrum: 4 distinct eigenvalues, multiplicities [1, 1, 1, 1]; charpoly (L - 4)*(L + 4)*(L**2 + 16)
+      Jordan blocks of c_1 *: 4 of size 1   semisimple: yes   algebra etale: yes
+X02  P(O+O(2)) -> P^2                   b2=2  chi=6  (-K)^3=62
+      rays [(1, 0, 0), (0, 1, 0), (0, 0, 1), (-2, -1, -1), (-1, 0, 0)]
+      spectrum: 6 distinct eigenvalues, multiplicities [1, 1, 1, 1, 1, 1]; charpoly L**6 - 4*L**5 - 12*L**4 + 50*L**3 + 48*L**2 - 1000*L + 3061
+      Jordan blocks of c_1 *: 6 of size 1   semisimple: yes   algebra etale: yes
+X03  P^2-bundle over P^1                b2=2  chi=6  (-K)^3=54
+      rays [(1, 0, 0), (0, 1, 0), (0, 0, 1), (-1, -1, -1), (-1, -1, 0)]
+      spectrum: 6 distinct eigenvalues, multiplicities [1, 1, 1, 1, 1, 1]; charpoly (L**3 + L**2 - 18*L - 43)*(L**3 + L**2 + 18*L - 11)
+      Jordan blocks of c_1 *: 6 of size 1   semisimple: yes   algebra etale: yes
+X04  P(O+O(1)) -> P^2                   b2=2  chi=6  (-K)^3=56
+      rays [(1, 0, 0), (0, 1, 0), (0, 0, 1), (-1, -1, -1), (-1, 0, 0)]
+      spectrum: 6 distinct eigenvalues, multiplicities [1, 1, 1, 1, 1, 1]; charpoly L**6 - 8*L**4 - 272*L**2 - 1600
+      Jordan blocks of c_1 *: 6 of size 1   semisimple: yes   algebra etale: yes
+X05  P^2 x P^1                          b2=2  chi=6  (-K)^3=54
+      rays [(1, 0, 0), (0, 1, 0), (0, 0, 1), (-1, 0, -1), (0, -1, 0)]
+      spectrum: 6 distinct eigenvalues, multiplicities [1, 1, 1, 1, 1, 1]; charpoly (L - 5)*(L - 1)*(L**2 - L + 7)*(L**2 + 7*L + 19)
+      Jordan blocks of c_1 *: 6 of size 1   semisimple: yes   algebra etale: yes
+X06  Bl_curve(P(O+O(2)) -> P^2)         b2=3  chi=8  (-K)^3=50
+      rays [(1, 0, 0), (0, 1, 0), (0, 0, 1), (-2, 1, -1), (1, -1, 0), (-1, 1, 0)]
+      spectrum: 8 distinct eigenvalues, multiplicities [1, 1, 1, 1, 1, 1, 1, 1]; charpoly L**8 - 22*L**6 - 129*L**4 - 812*L**3 + 1790*L**2 + 8076*L + 15749
+      Jordan blocks of c_1 *: 8 of size 1   semisimple: yes   algebra etale: yes
+X07  P^1-bundle over F_1, twist [0, 0, -1, -1] b2=3  chi=8  (-K)^3=50
+      rays [(1, 0, 0), (0, 1, 0), (0, 0, 1), (-1, -1, -1), (-1, -1, 0), (-1, 0, 0)]
+      spectrum: 8 distinct eigenvalues, multiplicities [1, 1, 1, 1, 1, 1, 1, 1]; charpoly L**8 + 4*L**7 - 6*L**6 - 100*L**5 - 545*L**4 - 1080*L**3 - 482*L**2 + 672*L + 9389
+      Jordan blocks of c_1 *: 8 of size 1   semisimple: yes   algebra etale: yes
+X08  Bl_curve(P(O+O(1)) -> P^2)         b2=3  chi=8  (-K)^3=46
+      rays [(1, 0, 0), (0, 1, 0), (0, 0, 1), (-1, 0, -1), (0, -1, 0), (-1, -1, -1)]
+      spectrum: 8 distinct eigenvalues, multiplicities [1, 1, 1, 1, 1, 1, 1, 1]; charpoly L**8 + 4*L**7 - 4*L**6 - 94*L**5 - 554*L**4 - 2176*L**3 - 4911*L**2 - 7526*L - 407
+      Jordan blocks of c_1 *: 8 of size 1   semisimple: yes   algebra etale: yes
+X09  P(O+O(1,1)) -> P^1xP^1             b2=3  chi=8  (-K)^3=52
+      rays [(1, 0, 0), (0, 1, 0), (0, 0, 1), (-1, 0, -1), (-1, -1, 0), (-1, 0, 0)]
+      spectrum: 6 distinct eigenvalues, multiplicities [2, 2, 1, 1, 1, 1]; charpoly (L - 2)**2*(L + 2)**2*(L**4 + 4*L**3 - 8*L**2 - 144*L - 416)
+      Jordan blocks of c_1 *: 8 of size 1   semisimple: yes   algebra etale: yes
+X10  F_1 x P^1                          b2=3  chi=8  (-K)^3=48
+      rays [(1, 0, 0), (0, 1, 0), (0, 0, 1), (-1, 0, -1), (0, -1, 0), (-1, 0, 0)]
+      spectrum: 8 distinct eigenvalues, multiplicities [1, 1, 1, 1, 1, 1, 1, 1]; charpoly (L**4 - 7*L**3 + 10*L**2 - 24*L + 37)*(L**4 + 9*L**3 + 22*L**2 - 24*L - 91)
+      Jordan blocks of c_1 *: 8 of size 1   semisimple: yes   algebra etale: yes
+X11  P(O+O(1,-1)) -> P^1xP^1            b2=3  chi=8  (-K)^3=44
+      rays [(1, 0, 0), (0, 1, 0), (0, 0, 1), (-1, 0, -1), (1, -1, 0), (-1, 0, 0)]
+      spectrum: 6 distinct eigenvalues, multiplicities [2, 2, 1, 1, 1, 1]; charpoly (L - 6)*(L - 1)**2*(L + 2)*(L + 3)**2*(L**2 + 4*L + 20)
+      Jordan blocks of c_1 *: 8 of size 1   semisimple: yes   algebra etale: yes
+X12  P^1 x P^1 x P^1                    b2=3  chi=8  (-K)^3=48
+      rays [(1, 0, 0), (0, 1, 0), (0, 0, 1), (0, 0, -1), (0, -1, 0), (-1, 0, 0)]
+      spectrum: 4 distinct eigenvalues, multiplicities [3, 3, 1, 1]; charpoly (L - 6)*(L - 2)**3*(L + 2)**3*(L + 6)
+      Jordan blocks of c_1 *: 8 of size 1   semisimple: yes   algebra etale: yes
+X13  Bl_curve(P^1-bundle over F_1, twist [0, 0, -1, -1]) b2=4  chi=10  (-K)^3=46
+      rays [(1, 0, 0), (0, 1, 0), (0, 0, 1), (-1, -1, -1), (0, -1, 0), (-1, 0, 0), (-1, -1, 0)]
+      spectrum: 8 distinct eigenvalues, multiplicities [2, 2, 1, 1, 1, 1, 1, 1]; charpoly (L - 3)*(L + 5)*(L**2 - L - 31)*(L**2 + 2*L + 5)**2*(L**2 + 3*L + 9)
+      Jordan blocks of c_1 *: 10 of size 1   semisimple: yes   algebra etale: yes
+X14  Bl_curve(P(O+O(1,1)) -> P^1xP^1)   b2=4  chi=10  (-K)^3=44
+      rays [(1, 0, 0), (0, 1, 0), (0, 0, 1), (-1, 0, -1), (0, -1, 0), (-1, 0, 0), (-1, -1, 0)]
+      spectrum: 10 distinct eigenvalues, multiplicities [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]; charpoly L**10 + 8*L**9 - 10*L**8 - 344*L**7 - 1339*L**6 - 386*L**5 + 9156*L**4 + 23694*L**3 + 16220*L**2 - 21120*L - 44407
+      Jordan blocks of c_1 *: 10 of size 1   semisimple: yes   algebra etale: yes
+X15  dP7 x P^1                          b2=4  chi=10  (-K)^3=42
+      rays [(1, 0, 0), (0, 1, 0), (0, 0, 1), (0, 0, -1), (0, -1, 0), (-1, 0, 0), (-1, -1, 0)]
+      spectrum: 8 distinct eigenvalues, multiplicities [2, 2, 1, 1, 1, 1, 1, 1]; charpoly (L - 1)**2*(L + 3)**2*(L**3 - 5*L**2 - 10*L - 11)*(L**3 + 7*L**2 - 2*L - 67)
+      Jordan blocks of c_1 *: 10 of size 1   semisimple: yes   algebra etale: yes
+X16  Bl_curve(P^1-bundle over F_1, twist [0, 0, -1, 0]) b2=4  chi=10  (-K)^3=40
+      rays [(1, 0, 0), (0, 1, 0), (0, 0, 1), (-1, 0, -1), (1, -1, 0), (-1, 0, 0), (0, -1, 0)]
+      spectrum: 10 distinct eigenvalues, multiplicities [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]; charpoly L**10 + 8*L**9 - 4*L**8 - 314*L**7 - 1768*L**6 - 4310*L**5 - 1815*L**4 + 17052*L**3 + 46298*L**2 + 34800*L - 23887
+      Jordan blocks of c_1 *: 10 of size 1   semisimple: yes   algebra etale: yes
+X17  Bl_curve(Bl_curve(P^1-bundle over F_1, twist [0, 0, -1, 0])) b2=5  chi=12  (-K)^3=36
+      rays [(1, 0, 0), (0, 1, 0), (0, 0, 1), (-1, 0, -1), (1, -1, 0), (-1, 1, 0), (0, -1, 0), (-1, 0, 0)]
+      spectrum: 10 distinct eigenvalues, multiplicities [2, 2, 1, 1, 1, 1, 1, 1, 1, 1]; charpoly (L**2 + 4*L + 8)**2*(L**4 + L**3 - 8*L**2 - 36*L - 11)*(L**4 + 5*L**3 - 44*L**2 - 360*L - 691)
+      Jordan blocks of c_1 *: 12 of size 1   semisimple: yes   algebra etale: yes
+X18  dP6 x P^1                          b2=5  chi=12  (-K)^3=36
+      rays [(1, 0, 0), (0, 1, 0), (0, 0, 1), (0, 0, -1), (1, -1, 0), (-1, 1, 0), (0, -1, 0), (-1, 0, 0)]
+      spectrum: 6 distinct eigenvalues, multiplicities [3, 3, 2, 2, 1, 1]; charpoly L**3*(L - 8)*(L - 4)*(L + 1)**2*(L + 4)**3*(L + 5)**2
+      Jordan blocks of c_1 *: 12 of size 1   semisimple: yes   algebra etale: yes
+
+-- validation: closed forms -------------------------------------------------
+    P^3: charpoly L^4 - 256, spectrum 4 i^k, four simple eigenvalues.
+    anticanonical degrees match the standard classification multiset.
+    products S x P^1 and Bl_pt P^3 match their closed-form degrees.
+
+============================================================================================
+SUMMARY: 18 smooth toric Fano threefolds (all b_3 = 0).
+  non-semisimple c_1 * at q = 1: 0 (every one is diagonalizable)
+  QH^*|_{q=1} not etale: 0 (every one is a product of fields)
+  marked blocks of Levelt class {1/6, 5/6} (delta^sharp 4/9): NONE.
+
+  Scope note.  The Jordan type of c_1 * is an invariant of the operator and is
+  independent of the basis, so the verdict above is basis-free.  The grading
+  operator mu is diagonal only in the classical cohomology basis; the monomial
+  basis of Batyrev's presentation differs from it by degree-lowering Novikov
+  corrections (visible as a failure of the classical Poincare pairing to be
+  graded on monomials).  A Levelt computation on a block would first have to fix
+  that splitting.  No block occurs, so the exponent question never arises here.
+============================================================================================

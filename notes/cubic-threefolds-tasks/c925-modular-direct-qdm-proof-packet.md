@@ -197,6 +197,10 @@ realization of that orbit.
 - V16 dictionary row via Theorem F.1 (class \(\{1/2,1/2\}\), matching
   \(D^b(C_3)\)); V18 deferred with reasons:
   notes/2026-08-23-c925-fable-v16-exponent-row.md
+- all 18 smooth toric Fano threefolds: \(c_1\star\) diagonalizable at the
+  canonical point, quantum cohomology etale, no Jordan block, hence no
+  marked class on the toric \(b_3=0\) tail (vacuously — no blocks exist):
+  notes/2026-08-23-c925-fable-toric-b3zero-levelt-sweep.md
 
 The packet index owns the module-to-file map.  Do not append another large
 module to this card or to the index; add one focused companion file and one
