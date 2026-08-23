@@ -29,7 +29,14 @@ product of two sets:
 * the only solutions in natural numbers of \((k+1)(m-k-1)=m+1\) are
   \(m=5\) with \(k\in\{1,2\}\).
 
-The last statement is the count comparison between the \(m+1\) marked sheets
+A final section records the arithmetic of a ramification computed in stages.
+The cycle length of a branch of a spectral cover over a punctured disc is the
+product of the rotation orders of the successive Newton--Puiseux stages.  If
+every stage order is a product of twos and threes, then so is the cycle
+length, and no prime at least five divides it.  The section also records the
+dimension count for a block that factors as a marked part and a rotating part.
+
+The count statement below is the comparison between the \(m+1\) marked sheets
 of a product with \(\mathbf P^m\) and the \((k+1)(r-1)\) marked sheets
 contributed by a centre of the form (marked threefold) \(\times\mathbf P^k\)
 of codimension \(r=m-k\) in an \((m+3)\)-fold.  It shows that sheet counts
@@ -135,5 +142,65 @@ theorem centre_sheet_count_eq_source_iff {m k : ℕ} (bound : k + 2 ≤ m) :
   omega
 
 end SheetCounts
+
+section StageOrders
+
+/-- A natural number is *three-smooth* when every prime dividing it is at most
+three, equivalently when it is a product of twos and threes. -/
+def ThreeSmooth (n : ℕ) : Prop :=
+  ∀ p : ℕ, p.Prime → p ∣ n → p ≤ 3
+
+theorem threeSmooth_one : ThreeSmooth 1 := by
+  intro p prime dvd
+  exact absurd (Nat.eq_one_of_dvd_one dvd) prime.ne_one
+
+theorem threeSmooth_mul {a b : ℕ} (ha : ThreeSmooth a) (hb : ThreeSmooth b) :
+    ThreeSmooth (a * b) := by
+  intro p prime dvd
+  rcases (Nat.Prime.dvd_mul prime).mp dvd with h | h
+  · exact ha p prime h
+  · exact hb p prime h
+
+/-- A product of three-smooth stage orders is three-smooth. -/
+theorem threeSmooth_prod {ι : Type*} (s : List ι) (order : ι → ℕ)
+    (smooth : ∀ i ∈ s, ThreeSmooth (order i)) :
+    ThreeSmooth ((s.map order).prod) := by
+  induction s with
+  | nil => simpa using threeSmooth_one
+  | cons i t ih =>
+      simp only [List.map_cons, List.prod_cons]
+      exact threeSmooth_mul (smooth i (by simp))
+        (ih fun j hj => smooth j (by simp [hj]))
+
+/-- No prime at least five divides a three-smooth number. -/
+theorem not_dvd_of_threeSmooth {n ℓ : ℕ} (smooth : ThreeSmooth n)
+    (prime : ℓ.Prime) (large : 5 ≤ ℓ) : ¬ ℓ ∣ n := by
+  intro dvd
+  exact absurd (smooth ℓ prime dvd) (by omega)
+
+/-- Stage exclusion.  A cycle length assembled as the product of stage
+rotation orders, each of them three-smooth, is not divisible by any prime at
+least five.  This is the arithmetic skeleton of a ramification argument that
+bounds each Newton--Puiseux stage separately. -/
+theorem prime_not_dvd_cycleLength_of_stages_threeSmooth
+    {ι : Type*} (stages : List ι) (order : ι → ℕ) {ℓ : ℕ}
+    (smooth : ∀ i ∈ stages, ThreeSmooth (order i))
+    (prime : ℓ.Prime) (large : 5 ≤ ℓ) :
+    ¬ ℓ ∣ (stages.map order).prod :=
+  not_dvd_of_threeSmooth (threeSmooth_prod stages order smooth) prime large
+
+/-- Dimension count for a block that factors as a marked part and a rotating
+part.  If the marked factor has dimension at least three and the rotating
+factor has index `ℓ`, hence by the Kobayashi--Ochiai bound dimension at least
+`ℓ - 1`, the ambient dimension is at least `ℓ + 2`.  Both hypotheses are
+supplied by geometry; only the count is checked here. -/
+theorem dimension_ge_of_marked_times_rotating
+    {markedDim rotatingDim ℓ : ℕ}
+    (marked : 3 ≤ markedDim) (rotating : ℓ - 1 ≤ rotatingDim)
+    (nontrivial : 1 ≤ ℓ) :
+    ℓ + 2 ≤ markedDim + rotatingDim := by
+  omega
+
+end StageOrders
 
 end TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.LoopOrbitArithmetic
