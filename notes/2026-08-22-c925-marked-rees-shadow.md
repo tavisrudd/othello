@@ -61,6 +61,89 @@ full `Calibration` landed in commit `0339032e9` is sufficient but intentionally
 large.  The marked Rees port is the candidate compressed source datum from
 which that calibration should be reconstructed.
 
+## Cross-programme signal: the pointed first-failure profile
+
+The portfolio suggests a sharper compression than “retain the native
+lattice.”  In the reconstruction theorems, the useful extra datum is usually
+the first layer at which the coarse shadow fails, together with a point or
+marking that prevents that layer from being averaged away:
+
+- recovery supports need normalized coefficients at one target;
+- a continuation graph needs coherent higher nonfaces, not independent
+  pairwise incompatibilities;
+- a marginal tensor needs its pure rank-one contractions to recover the Weyl
+  axes;
+- a Schur power needs its pointed jet quotient to identify the two missing
+  logical directions; and
+- an unordered spectral packet needs a marked integral port at the collision.
+
+For the rank-six cubic carrier this proposes the **pointed first-failure
+profile**
+\[
+  \mathfrak p=(\kappa,[\alpha],[\beta]).
+\]
+Here \(\kappa\) is the self-dual Kummer coweight, \([\alpha]\) is the
+gauge-invariant first leakage of the marked nilpotent line into the
+complementary Rees grade, and \([\beta]\) is the first return
+marked-line \(\to\) complement \(\to\) marked-line, defined only when
+\([\alpha]=0\).  Raw matrix entries are not the invariant: the brackets mean
+the corresponding extension/Bockstein classes modulo integral
+pairing-preserving gauges trivial on the associated graded.
+
+The two exact charts support this hierarchy.
+
+- In the distinct-root order, \([\alpha]=1/6\) for every effective
+  calibration.  The elementary modification fails before a residue
+  discriminant can be assigned.
+- In the dual-number order, \([\alpha]=0\).  The return class is defined and
+  the modified residue has discriminant \(0\), not \(4/9\).
+
+Thus the signal is not “which generic Frobenius algebra?”  It is the first
+marked extension class at the native boundary, followed by one return class
+only on its zero locus.  This is the same support--coefficient--coherence
+ladder that appears elsewhere in the programme.
+
+### First-order predictions from this signal
+
+1. Any genuine \(4/9\) correction occurrence must lie on the leakage-zero
+   locus \([\alpha]=0\).  This should exclude the entire distinct-root
+   native stratum before any monodromy calculation.
+2. On the leakage-zero locus, the marker should be a function of
+   \((\kappa,[\beta])\), not of a complete formal gauge.  The dual-number
+   certificate is the first chartwise instance.
+3. A regular unital projector descent should reconstruct the whole rank-six
+   native algebra from this pointed port: the special fibre is connected, so
+   its nonzero idempotent is the unit.  Without regular projector descent, a
+   saturated module is not enough.
+4. The actual-loop theorem should transport one pointed profile, not enumerate
+   every primitive factor.  The occurrence label and the loop generator remain
+   indispensable because unordered atoms erase precisely this profile.
+5. A finite coweight bound plus the two checked native-order charts would close
+   the \(m=2\) correction theorem.  At present the coweight bound and the
+   occurrence-to-port construction are still open.
+
+### Second-order predictions
+
+1. Coweights should compose additively, leakage classes by a cocycle law, and
+   return classes by the resulting semidirect law.  This is the expected
+   persistence rule through a factorization path.
+2. There should be a confinement threshold analogous to bounded repair:
+   below the first nonzero Rees leakage, scalar extension preserves the marked
+   elementary modification exactly; at the threshold a new correction port
+   can appear.
+3. For general \(m\), the nonsplit outer-return period and the inner pointed
+   profile should combine without a split product action.  The outer label
+   supplies the return time; the first-failure profile controls whether the
+   marked inner block exists after that return.
+4. If another chart survives, the correct response is to retain the first
+   newly nonzero obstruction coefficient, not the full connection.  This gives
+   a falsifiable stopping rule for enriching the shadow.
+5. Rationality should ultimately be expressed by cancellation of these
+   pointed profiles along a coherent factorization ledger, not by the claim
+   that every intermediate center is port-free.  Stable-rational examples
+   warn that auxiliary factors can supply exact cancellation data invisible
+   to ordinary stable invariants.
+
 ## The discrete signal: relative lattice position
 
 Let \(R=\mathbf C[[r]]\), \(K=\mathbf C((r))\), and compare the two explicit
@@ -353,7 +436,10 @@ The distinct-root effective-order bundle replays with
 the dual-number certificate; `--distinct-json` and `--distinct-lean` select
 the second chart.  Lean's terminal theorem is
 `EffectiveDistinctOrderCertificate.conformalDistinctOrder_forces_lineFailure`.
-It uses no `native_decide`.
+It uses no `native_decide`.  The checker, `PaperInterface`, and
+`Verification.AxiomAudit` passed queued run
+`20260823-030834-9fe6b2cc`; the audit reports only `propext`,
+`Classical.choice`, and `Quot.sound`.
 The new artifact sizes and hashes are:
 
 - JSON: 3645 bytes,

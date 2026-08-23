@@ -1315,6 +1315,22 @@ nonexistent embedding of one completion into the other. That route compresses
 the input to even rank two, nonzero nilpotent, and nonzero modified-residue
 discriminant.
 
+The present \(m=2\) finite frontier exhibits the programme's general
+information-loss pattern in a particularly small form.  A generic cubic
+spectral packet forgets its native integral order.  The candidate minimally
+enriched shadow is a pointed first-failure profile: the self-dual Kummer
+coweight, the first leakage of the marked nilpotent line into an adjacent Rees
+grade, and, on the leakage-zero locus, the first return to that line.  Exact
+Rust certificates with independent Lean correspondence now exhaust the two
+normalized rank-six native-order charts.  The dual-number chart has zero
+leakage and residue discriminant zero; the distinct-root chart is conformal
+throughout its complete five-parameter effective calibration family but has
+unavoidable leakage \(1/6\), so the marked elementary modification is not
+regular.  This does **not** prove the every-smooth \(m=2\) theorem: the
+remaining geometric task is to descend an actual period-three correction
+occurrence to such a native pointed port, or to prove a coweight bound and
+classify every remaining port.
+
 ### Formal verification of the epilogue
 
 The one-stabilization epilogue has a Lean companion bundled with it, held to the
