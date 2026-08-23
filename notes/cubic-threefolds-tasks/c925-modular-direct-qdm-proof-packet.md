@@ -246,6 +246,14 @@ realization of that orbit.
   two fibration classes; §6f's two silent gaps (E3--E5, \(K\)-nef) are
   recorded.  Note:
   notes/2026-08-23-c925-fable-carrier-mmp-reduction.md
+- Conic-bundle residue scoped: relative minimality forces componentwise
+  irreducible covers, so over \(\mathbf P^2\) the smooth-discriminant
+  slice of class (a) is exactly the closed MM 2-24 family, degrees
+  \(\le2\) are empty, and the open frontier is nodal rational
+  discriminants (\(d=4,5\)) with vanishing abelian Prym — pending
+  Beauville admissible-cover bookkeeping before construction; computation
+  plan queued.  Note:
+  notes/2026-08-23-c925-fable-conic-bundle-residue-anatomy.md
 
 The packet index owns the module-to-file map.  Do not append another large
 module to this card or to the index; add one focused companion file and one
