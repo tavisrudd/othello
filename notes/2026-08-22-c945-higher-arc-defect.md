@@ -7,6 +7,12 @@
 **Status:** active theorem-development and literature-audit phase; the manuscript is
 untouched pending a go/no-go gate.
 
+**Literature-audit summary:** seven individually discussed sources; two read at
+full text and five partially.  No novelty or priority verdict is closed.  The
+Semantic Scholar forward-citation count, zbMATH search, MathSciNet coverage,
+and full-text reads of the five partial sources remain open.  Accordingly, no
+manuscript-bound “to our knowledge” sentence is licensed by this report.
+
 ## Objective
 
 Determine the natural theorem level of the prescribed-hole defect method for
@@ -442,27 +448,32 @@ equalities and this specializes to the paper's existing `3/2` term.
 
 - Alabdullah--Hirschfeld, *A new lower bound for the smallest complete
   `(k,n)`-arc in `PG(2,q)`*, Designs, Codes and Cryptography (2019), DOI
-  `10.1007/s10623-018-00592-8`: **full text**, published open-access PDF,
-  cache key `10.1007/s10623-018-00592-8`, SHA-256
+  `10.1007/s10623-018-00592-8`: **full text**, published-version PDF obtained
+  from the German National Library mirror and read from the shared cache,
+  relying particularly on Theorem 2.1 and its proof; cache key
+  `10.1007/s10623-018-00592-8`, SHA-256
   `b70116f426fb6ca1e733fafc4d2f6434993c55006ba900344b7bfa4abbd32961`.
   Their Theorem 2.1 combines completeness with the pair-packing upper bound
   on the number of `n`-secants.  It uses only the first external coverage
   moment; no second external concurrency moment or additive refinement appears.
 - Bastioni--Micheli, *On complete m-arcs*, arXiv:2303.13670v1:
-  **partial**, abstract, introduction, and arc definitions; cache SHA-256
+  **partial**, cached arXiv v1 PDF, abstract, introduction, and arc definitions
+  read; cache key `arXiv:2303.13670`, SHA-256
   `f5eb03dab26f3cc701d9917db70d85409629174fc5ac279c59bbca1505517c40`.
   This establishes direct topical adjacency through constructions from curves,
   but has not yet been used for a novelty verdict.
 - Korchmaros--Nagy--Szonyi, *Algebraic approach to the completeness problem
   for `(k,n)`-arcs in planes over finite fields*, arXiv:2302.10162v1 / later
-  JCTA 204 (2024): **partial**, abstract and introduction; cache SHA-256
+  JCTA 204 (2024): **partial**, cached arXiv v1 PDF, abstract and introduction
+  read; the version of record was not read for this audit; cache key
+  `arXiv:2302.10162`, SHA-256
   `32cfd5b1cb4f28c171418f61d467fc0accee8adc269ae9cf36a517158917b6b7`.
   This confirms the maximal-secant coverage formulation and the relevance of
   prescribed uncovered loci.  No absence claim rests on this partial read.
 - Bartoli--Davydov--Giulietti--Marcugini--Pambianco, *On upper bounds on the
   smallest size of a saturating set in a projective plane*, arXiv:1505.01426:
-  **partial**, introduction and Definitions 1.1/1.5 through Theorem 1.6; cache
-  SHA-256
+  **partial**, cached arXiv PDF, introduction and Definitions 1.1/1.5 through
+  Theorem 1.6 read; cache key `arXiv:1505.01426`, SHA-256
   `e9040360a11f31d852dab3207a6db34fd31185ff244a72161cd36af3c039f55a`.
   Their `(1,mu)`-saturating multiplicity counts a secant line with weight
   `C(|S intersect ell|,2)`.  The proposed `lambda` extension instead counts
@@ -470,9 +481,10 @@ equalities and this specializes to the paper's existing `3/2` term.
   arcs (`s=2`) but not for higher arcs.
 - Bartoli--Timpanella, *Complete `(k,q+1)`-arcs in
   `PG(2,F_{q^6})` from the Hermitian curve*, arXiv:2306.01134v1 / later
-  Journal of Algebraic Combinatorics (2025): **partial**, abstract,
-  introduction, main theorem, and preliminaries through Theorem 2.1; cache
-  SHA-256
+  Journal of Algebraic Combinatorics (2025): **partial**, cached arXiv v1 PDF,
+  abstract, introduction, main theorem, and preliminaries through Theorem 2.1
+  read; the version of record was not read for this audit; cache key
+  `arXiv:2306.01134`, SHA-256
   `753783a0178b7cbb0012ae4488e51f08e49d780cd865a1c5ed760fc33560385e`.
   The paper proves completeness of a curve-derived higher arc by an algebraic
   variety point-count argument.  It confirms current topical adjacency but the
@@ -480,7 +492,8 @@ equalities and this specializes to the paper's existing `3/2` term.
   moments; no absence claim rests on this partial read.
 - Ball, *Multiple blocking sets and arcs in finite planes*, Journal of the
   London Mathematical Society 54 (1996): **partial**, abstract, introduction,
-  Theorems 1.1--1.4, and the complement formulation; cache key
+  Theorems 1.1--1.4, and the complement formulation read from the cached
+  author-hosted PDF; cache key
   `10.1112/jlms/54.3.581`, SHA-256
   `b0e5ee5e3bb2831fadc045ed1ecf9531730aa52084310542076a840fcbc14784`.
   This verifies the standard complement duality and concerns lower bounds for
@@ -488,7 +501,9 @@ equalities and this specializes to the paper's existing `3/2` term.
   complete-arc regime.
 - Bishnoi--Mattheus--Schillewaert, *Minimal multiple blocking sets*,
   arXiv:1703.07843v3 / Electronic Journal of Combinatorics 25(4) (2018):
-  **full text**, cache SHA-256
+  **full text**, all sections 1--9 of the cached 14-page arXiv v3 PDF read via
+  its `pdftotext` extraction, relying particularly on Theorem 1.1, Sections
+  3--5, and Theorem 8.1; cache key `arXiv:1703.07843`, SHA-256
   `4ca2ebf88bc90d94a88552092a9e69bcd0dcc9f234490994bfa4d5fa682694b9`.
   Their Theorem 1.1 bounds minimal `t`-fold blocking sets, and their Section 5
   supplies a variance proof.  Crucially, Theorem 8.1 already bounds sets with
@@ -500,19 +515,49 @@ equalities and this specializes to the paper's existing `3/2` term.
 The audit currently has two full-text sources and five partial sources.  A
 novelty or priority verdict remains open.
 
-Forward-citation audit seed: DOI `10.1007/s10623-018-00592-8`.
+Forward-citation audit seed: pinned DOI
+`10.1007/s10623-018-00592-8`.
 
 - OpenAlex resolved the seed as `W2905644805` and reported 12 citing works.
-  Query: `filter=cites:W2905644805`, `per-page=20`.  The 12 title/year/DOI
-  metadata records were screened for work on a general higher-arc lower bound
-  or maximal-secant concurrency moments.  Only Korchmaros--Nagy--Szonyi was
-  promoted by that discriminator; its read depth is recorded above.  The other
-  11 titles concern particular planes/arcs, group actions, partitions, conics,
-  or an unrelated typed point set and do not advertise a general bound.
+  Recorded parameters: `filter=cites:W2905644805`, `per-page=20`.  The 12
+  title/year/DOI metadata records were screened for work on a general
+  higher-arc lower bound or maximal-secant concurrency moments.  Only
+  Korchmaros--Nagy--Szonyi was promoted by that discriminator; its read depth
+  is recorded above.  The other 11 titles concern particular planes/arcs,
+  group actions, partitions, conics, or an unrelated typed point set and do
+  not advertise a general bound.
 - Crossref resolved the DOI and reported `is-referenced-by-count = 12`.
 - Semantic Scholar's graph API returned HTTP 429 on 2026-08-22.  Its independent
   count and citing set are **not covered** yet; therefore the forward-citation
   negative is not closed.
+
+The literal request strings used for the three API calls were not preserved in
+the earlier trace.  Recording parameters after the fact is not a substitute
+for the convention's verbatim-query requirement.  Therefore this
+forward-citation pass is non-closing and must be rerun with the exact OpenAlex,
+Crossref, and Semantic Scholar requests recorded before it can support a
+negative.  An HTTP 429 is treated as an error, not as an empty Semantic Scholar
+result.
+
+## Coverage and verdict ownership
+
+- **Not covered:** Semantic Scholar, because the graph API returned HTTP 429;
+  zbMATH Open, because it has not yet been searched; and MathSciNet, because no
+  authenticated access was available.  Google Scholar automated coverage was
+  not attempted because it is normally blocked.  These gaps license no
+  negative inference.
+- The five sources marked `partial` require full-text promotion if a final
+  novelty boundary depends on their silence.  Their present reads support only
+  the positive topical and definitional attributions stated above.
+- No higher-arc novelty sentence has been entered in the owning paper's
+  claim--proof--novelty ledger.  The C945 formulations are therefore candidate
+  positioning only and must not be copied into the manuscript, snapshot, or
+  public summary as novelty claims.
+- Surface check after the Theorem 8.1 precedence correction: the manuscript,
+  existing proof/novelty audit, results snapshot, and public summary discuss
+  the ordinary prescribed-hole theorem but do not repeat the new
+  `lambda`-multiplicity claim.  They required no update.  This C945 report is
+  the only changed surface; the manuscript remains untouched.
 
 ## Gates before manuscript work
 
