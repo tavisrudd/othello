@@ -53,9 +53,9 @@ the eventual rank-(t) escape threshold
  \boxed{\Gamma_t=M_t(D_P,K_P)+d(I^\perp)}.
 \]
 
-Thus, under C946's outer-family hypotheses, every radius-(r) recovery system
-for every rank-(t) demand is eventually confined to its inner block if and
-only if
+Thus, under C946's outer-family hypotheses, every radius-\\(r\\) recovery system
+for every internally realizable rank-\\(t\\) demand is eventually confined to
+its inner block if and only if
 
 \[
  r<M_t(D_P,K_P)+d(I^\perp).
@@ -363,8 +363,57 @@ For fixed (N=(q^m-1)/(q-1)), averaging over nonzero linear functionals gives
 
 The projective-simplex helper system attains equality because every nonzero
 functional misses a hyperplane and has exactly (q^{m-1}) nonzero helper
-coefficients. This gives the flagship a genuine rank-one extremal property,
-not merely a closed formula.
+coefficients.
+
+### Projective-simplex uniqueness theorem
+
+Let (A) be any full-row-rank (m\times N) helper matrix over
+(\mathbb F_q), where
+
+\[
+ N=\frac{q^m-1}{q-1}.
+\]
+
+Then
+
+\[
+ \min_{0\ne a\in\mathbb F_q^m}\operatorname{wt}(aA)
+ \le q^{m-1}.
+\]
+
+Equality holds if and only if, up to column scaling and permutation, the
+columns of (A) contain every point of (\mathrm{PG}(m-1,q)) exactly once.
+Thus the projective-simplex helper system is the unique rank-one extremizer at
+this helper budget.
+
+For each nonzero helper column, the fraction of nonzero functionals not
+vanishing on it is
+
+\[
+ \frac{q^{m-1}(q-1)}{q^m-1}.
+\]
+
+Averaging the weights of (aA) over (a\ne0) therefore gives at most
+(q^{m-1}), with strict inequality if any helper column is zero. If the
+minimum attains the average, every nonzero functional has weight exactly
+(q^{m-1}). Projectivize the columns and let their multiplicities form a
+vector (c). Every projective hyperplane then contains the same total
+multiplicity
+
+\[
+ N-q^{m-1}=\frac{q^{m-1}-1}{q-1}.
+\]
+
+The point--hyperplane incidence matrix of projective space is square and its
+Gram matrix has the form
+
+\[
+ (r-\lambda)I+\lambda J
+\]
+
+with (r>\lambda), hence is nonsingular over (\mathbb R). The constant
+hyperplane-sum equations have the unique solution (c=\mathbf1), proving the
+classification.
 
 ## 7. Coefficient presentation changes the escape barrier
 
@@ -438,7 +487,36 @@ No new relative-duality theorem is claimed here. The new content is its exact
 translation through the recovery pair and the additive concatenation escape
 barrier.
 
-## 9. Literature and priority audit
+## 9. Computational sanity checks
+
+Two exploratory checks were run while deriving the theorem packet:
+
+- An explicit $[6,3]$ Reed--Solomon/Vandermonde inner example over
+  $\\mathbb F_7$, with two targets, produced
+  $$
+  (M_1,M_2)=(2,3),
+  \\qquad
+  (\\Gamma_1,\\Gamma_2)=(6,7),
+  $$
+  exactly as predicted by the MDS formula.
+- An exhaustive enumeration inside 1,244 sampled small binary canonical-pair
+  cases verified strict growth of the computed relative-weight profiles and
+  the relative-Singleton ceiling in every checked case.
+- Direct subset enumeration for the binary projective systems with
+  $m=2,3$, at survivor probability $s=0.37$, agreed with the subspace-lattice
+  Möbius formula for every $1\le t\le m$. The five checked probabilities were
+  $0.309394$, $0.050653$, $0.102865650445$, $0.012264172235$, and
+  $0.000949318771$ in lexicographic $(m,t)$ order.
+- The two binary coefficient presentations in Section 7 were checked directly:
+  their nonzero dual-weight multisets are respectively $\{2,3,5\}$ and
+  $\{3,3,4\}$.
+
+These were derivation-time sanity checks, not paper-facing computational
+evidence. Their ephemeral scripts and outputs are not a reproducibility bundle
+and must not be cited as such. Any manuscript use requires the separate
+research-reproducibility gate.
+
+## 10. Literature and priority audit
 
 Primary sources checked in the shared cache and by focused searches:
 
@@ -455,6 +533,9 @@ Primary sources checked in the shared cache and by focused searches:
   canonical nested recovery pair or the exact confinement sum above. Cached
   SHA-256:
   `1b941cf8445e40039a988ea0124e15fd94f0bbeb278205ec7bf934bf3e9a71a3`.
+- arXiv:2608.05758: a contemporary moment-based LRC linear-programming bound.
+  It reinforces that a generic LP-bounds paper would enter a crowded current
+  lane; it does not pre-empt the exact relative-weight confinement theorem.
 - The 2026 paper *Considerate ramp secret sharing* was checked for the current
   access-structure/RGHW information interpretation; that bridge is standard.
   DOI: 10.1007/s10623-026-01808-y.
@@ -473,7 +554,7 @@ confinement. No source found in this bounded audit states the combination
 This is a bounded-search priority conclusion, not a claim of exhaustive
 global novelty.
 
-## 10. TT and EJ verdict
+## 11. TT and EJ verdict
 
 1. **Flagship:** the exact rank-(t) threshold
    (M_t(D_P,K_P)+d(I^\perp)). This is the strongest paper-specific theorem.
@@ -490,11 +571,19 @@ global novelty.
 6. **Corrected:** reliability separation requires forced supports and an exact
    total-radius budget; arbitrary direct-sum factorization is false.
 
-Ideally packaged, the combined mathematics is plausibly at the
-98th--99th percentile within coding theory and suitable for a strong IEEE
-Transactions on Information Theory submission. A cold read of this theorem
-packet and verification of the projective reliability inversion remain the
-main gates before treating that assessment as locked.
+Ideally packaged, the combined mathematics is now a plausible 99-level coding-
+theory package and suitable for a strong IEEE Transactions on Information
+Theory submission. The uniqueness theorem upgrades the projective family from
+an illustrative example to an extremal classification. An independent cold
+read of the full theorem packet and proof-level audit of the projective
+reliability inversion remain the main gates before treating that assessment as
+locked.
+
+The current best sequel title is *Exact Transfer of Bounded Linear Recovery
+and Relative Weight Hierarchies*. The single-coordinate theorem should appear
+as the rank-one specialization, the rank hierarchy should carry the
+quantitative spine, and geometry should serve as the principal application
+rather than as a competing theme.
 
 ## Mystery ledger
 
@@ -513,6 +602,8 @@ main gates before treating that assessment as locked.
   subspace-lattice inversion.
 - The coefficient presentation can change all confinement thresholds while
   leaving the canonical helper pair and complete RGHW hierarchy fixed.
+- At the projective helper budget, the simplex configuration is the unique
+  rank-one extremizer up to projective column equivalence.
 
 ### Open
 
@@ -524,8 +615,6 @@ main gates before treating that assessment as locked.
   separation should lead the eventual sequel application section.
 - Derive the dual relative-weight failure thresholds in literal recovery
   language, with all index reversals checked.
-- Determine whether the projective rank-one equality has a useful uniqueness
-  classification under the intended helper-multiset hypotheses.
 
 ## Current verdict
 
