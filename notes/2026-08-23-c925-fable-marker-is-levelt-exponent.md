@@ -295,6 +295,21 @@ Progress on the first half:
 
 The second half of H-C is the threefold-centre statement of §3.2, unchanged.
 
+## Mystery ledger (EJ+TT closeout, 2026-08-23)
+
+| status | feature | evidence or remaining gate |
+| --- | --- | --- |
+| settled | The marker is the Levelt exponent class, invariant under \(\Psi\). | §1–2; audit-script rederivation; Iritani 5.18(1). |
+| settled | The class is categorical on all tested rank-one threefolds, matching the three known component types: Jacobian \(\{1/2,1/2\}\), Enriques \(\{0,0\}\), cubic \(\{1/6,5/6\}\). | §6b table; the V14 row is an independent variety sharing only the component. |
+| settled | The cubic's \(J_2\) persists along every bulk curve. | Hertling–Manin–Teleman + rank four (§6c). |
+| settled | e cannot be read from the regularized period operator's indicial exponents at \(t=\infty\): V14, V12, V10 all have integer exponents \(\{1,2,3\}\) there. | Scratch check on the guessed order-three operators; e is a monodromy invariant, not an indicial one. |
+| open | H-C after the first curve-centre edge: marked blocks do not split along Iritani's bulk curves. | First-order four-point splitting test and the \(ss'=2\cos2\pi e-2\) Stokes obstruction identified (§6d); neither yet executed. |
+| open | The confluence rule for actual quantum connections (non-semisimple Gamma-II, numerical part). | §6c derives it in the abstract model only. |
+| open | The threefold classification: no connected \(b_2\ge2\) threefold carries three loop-conjugate \(\{1/6,5/6\}\) blocks. | §3.2; the categorical form is a finite question about cubic-type components of Mori fibre spaces. |
+| queued | Extend the tool to \(J_3\) blocks (V2's rank-three eigenspace) and to V16/V18 once more period terms are available. | Tool limitation; CCGK text has nine terms only. |
+
+No manufactured mysteries: the two open rows above are the whole gate.
+
 ## 7. Next
 
 1. Replace the card's `Next` item 1 by the threefold statement of §3.2; mark
