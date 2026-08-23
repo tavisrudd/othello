@@ -200,6 +200,50 @@ and \(V_{18}\) (components \(D^b(C_3)\), \(D^b(C_2)\); predicted
 and \(\mathrm{Gr}(5,7)\), which the cached extraction garbles; their period
 sequences in the Fanosearch database would do.
 
+## 6c. Persistence of the marked block along Iritani's bulk curves (H-C)
+
+Iritani's shifts are genuine bulk deformations: at \(\tilde\tau=0\),
+\(\tau(0)|_{Q=0}\in q^{-1}H^*(X)[q^{-1}]\) and
+\(\varsigma_j(0)|_{Q=0}\in-(r-1)\lambda_j+h_{Z,j}+q^{-1/(r-1)}H^*(Z)[q^{-1/(r-1)}]\)
+(arXiv:2307.13555v3, (5.30) and the display before it).  So the blocks of a
+summand over its coefficient field are the blocks of the big quantum
+connection of \(X\) (or \(Z\)) along a formal curve through the small point,
+and the marker is a field-generic object only if the \(J_2\) survives that
+deformation.
+
+*Hertling–Manin–Teleman*, arXiv:0803.2769 (cached 2026-08-23, sha256
+`f54acf28…`), strengthening Bayer–Manin 1.8.1: if the **even** quantum
+cohomology of \(V\) is generically semisimple then \(V\) has no odd
+cohomology.  The cubic threefold has \(b_3=10\), so its even big quantum
+cohomology is nowhere semisimple.  Its rank is four and the two sheets
+\(\pm\sqrt{108q}\) are simple at the small point, hence simple on an open set;
+the remaining rank-two factor is therefore non-reduced at every point: the
+\(J_2\) persists along every bulk curve, and by isomonodromy its class is
+\(\{1/6,5/6\}\) everywhere.  **H-C holds for the cubic factor.**
+
+For \(B\times\mathbf P^2\) at the first edge: the three marked blocks are
+permuted by the \(Q_{\mathbf P^2}\)-monodromy, which commutes with the
+\(q^{-1}\)-shift, so they split or persist together; all three splitting would
+make the summand semisimple at a point of the Frobenius manifold of
+\(B\times\mathbf P^2\), which has odd cohomology — excluded by HMT.  At later
+vertices the same conjugacy gives all-or-nothing for the source triple, but
+HMT alone does not exclude the non-semisimple part migrating to an earlier
+correction block; that residual is now stated precisely as H-C.
+
+*Abstract confluence rule.*  For a rank-two family
+\(z^2Y'=(U(\varepsilon)+zA_1+\dots)Y\) with \(U(0)\) nilpotent and
+\(U(\varepsilon)\) of distinct eigenvalues, the local monodromy of the
+two-dimensional system is constant in \(\varepsilon\): for
+\(\varepsilon\ne0\) it is \(S_-S_+=\bigl(\begin{smallmatrix}1+ss'&s\\s'&1\end{smallmatrix}\bigr)\)
+(trivial formal monodromy, Stokes multipliers \(s,s'\)); at \(\varepsilon=0\)
+it is conjugate to \(e^{2\pi iR}\) with exponents \(\pm e\).  Hence
+\(2+ss'=2\cos2\pi e\), and with integral Stokes data
+\(ss'\in\{0,-1,-2,-3,-4\}\leftrightarrow e\in\{0,1/6,1/4,1/3,1/2\}\).  For an
+exceptional pair \(s=-s'=\pm a\) this is the Euler-form list of §4.  This is
+the mechanism behind the table of §6b; applying it to an actual quantum
+connection needs the rank-two piece to be a sub-local-system on the punctured
+\(z\)-disc, which is exactly the non-semisimple Gamma-II content.
+
 ## 7. Next
 
 1. Replace the card's `Next` item 1 by the threefold statement of §3.2; mark
