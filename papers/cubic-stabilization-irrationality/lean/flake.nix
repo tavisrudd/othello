@@ -23,6 +23,22 @@
             ${./certificates/rank-six-recurrence.json} -
         '';
       };
+      verifyMarkedReesShadow = pkgs.writeShellApplication {
+        name = "verify-marked-rees-shadow";
+        runtimeInputs = with pkgs; [ coreutils diffutils rustc ];
+        text = ''
+          certificate_dir=$(mktemp -d -p /var/tmp marked-rees-shadow.XXXXXX)
+          trap 'rm -rf "$certificate_dir"' EXIT
+          cd ${./.}
+          sha256sum -c ${./certificates/marked-rees-shadow.sha256}
+          rustc ${./scripts/marked_rees_shadow_cert.rs} -O -D warnings \
+            -o "$certificate_dir/solver"
+          "$certificate_dir/solver" --lean | diff -u \
+            ${./TavisRuddFiniteGeom/Papers/CubicStabilizationIrrationality/Comparison/Generated/MarkedReesShadowData.lean} -
+          "$certificate_dir/solver" --json | diff -u \
+            ${./certificates/marked-rees-shadow.json} -
+        '';
+      };
     in {
       devShells.${system}.default = pkgs.mkShell {
         packages = with pkgs; [ elan git curl cacert gmp zlib coreutils ];
@@ -35,9 +51,15 @@
           export GIT_SSL_CAINFO="$SSL_CERT_FILE"
         '';
       };
-      apps.${system}.verify-rank-six-recurrence = {
-        type = "app";
-        program = "${verifyRankSixRecurrence}/bin/verify-rank-six-recurrence";
+      apps.${system} = {
+        verify-rank-six-recurrence = {
+          type = "app";
+          program = "${verifyRankSixRecurrence}/bin/verify-rank-six-recurrence";
+        };
+        verify-marked-rees-shadow = {
+          type = "app";
+          program = "${verifyMarkedReesShadow}/bin/verify-marked-rees-shadow";
+        };
       };
     };
 }

@@ -193,6 +193,13 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   compressed to a structural Rees-extension theorem.  This is a proposed
   source compression, not a landed geometric adapter.  Report:
   `../2026-08-22-c925-marked-rees-shadow.md`.
+  The first exact certificate stage is now landed: Rust emits the three
+  Laurent comparison blocks inside the full (6\times6) basis-change matrix
+  and the parabolic first jet, while Lean independently checks the extraction,
+  recovers coweight \((-1,0,0,0,0,1)\), checks self-duality and all finite jet
+  identities, and certifies the two independent information-loss modes.
+  It does not bound all coweights, enumerate all jets, or construct the
+  geometric marked Rees port.
 
   **Closed lanes:** the common \(\epsilon M\)-row/stable-projector
   composite, raw and normalized degree-zero augmentation, ordinary

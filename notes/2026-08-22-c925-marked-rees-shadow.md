@@ -233,6 +233,38 @@ The next computation should be finite and deliberately overexplicit.
    compressed structurally, by identifying the coweight bound and the jet
    quotient as a self-dual Rees-extension theorem.
 
+The first boundary certificate is now implemented.  The Rust generator
+`scripts/marked_rees_shadow_cert.rs` emits the full explicit (6\times6)
+Laurent basis-change matrix, extracts its three (2\times2) blocks, computes
+their valuations, and emits the relative coweight and parabolic first jet.
+Lean's `MarkedReesShadowCertificate` checks the same block extraction and
+off-block vanishing directly from the full matrix, then independently recomputes the
+elementary divisors \((-1,0)\), \((0,1)\), and \((0,0)\), checks the coweight
+\((-1,0,0,0,0,1)\) and its self-duality, and verifies that the zero-coweight
+shear jet is nonzero, pairing-tangent, filtration-compatible, and fixes the
+first three columns.  It also links the jet to the previously checked
+parabolic shear and records the displayed \(0\)-versus-\(4/9\) residue
+ambiguity.
+
+This lands the information-loss certificate, not the exhaustive
+classification in steps 1--3.  In particular it neither bounds every possible
+coweight nor solves every Rees-jet chart, and it does not yet transport the
+complete multiplication tensor with its input index.  That transport remains
+a mandatory mutation test for the exhaustive certificate.
+
+Reproducibility status on 2026-08-22:
+
+- Rust replay: `nix run .#verify-marked-rees-shadow`, green;
+- guarded Lean checker: run `20260822-172809-...`, green;
+- aggregate paper interface and axiom audit: run
+  `20260823-003721-8859e9e9`, green;
+- artifact hashes: Rust
+  `52bb3f548aee064ca6572c8f44ccf7b3153f6cfa4ff8c6be526cd79cc384585a`,
+  JSON
+  `592736b901e513758068c16986de204f85e9b31c4ec2152bf3d3be90fd3eb889`,
+  generated Lean
+  `2600650607f95dbf788af718d49ee0b3eb75dff05d9c1723abeb2340e7c73e7c`.
+
 The finite domain must remain explicit: rank six, one primitive cubic Kummer
 ray, cohomological weights \((0,1,1,2,2,3)\), the two candidate coweight charts,
 and exact rational arithmetic.  A successful certificate would close this
@@ -278,8 +310,8 @@ lattice vertex, and associated grading forgets the extension class.
 
 | status | feature | evidence or test |
 | --- | --- | --- |
-| settled | Generic paired marked-divisor data forget the native lattice position. | The explicit \(A_d\)-to-\(A_s\) comparison has relative coweight \((-1,0,0,0,0,1)\). |
-| settled | The coweight alone forgets the dangerous calibration shear. | The homogeneous parabolic shear is unimodular with trivial associated graded but nonzero first Rees jet. |
+| settled | Generic paired marked-divisor data forget the native lattice position. | Rust emits the full comparison matrix; Lean checks its block decomposition and recomputes relative coweight \((-1,0,0,0,0,1)\). |
+| settled | The coweight alone forgets the dangerous calibration shear. | Lean checks a nonzero pairing-tangent, filtration-compatible first jet at coweight zero and the displayed \(0\)-versus-\(4/9\) residue ambiguity. |
 | proposed | Coweight plus first marked connection jet is the minimally enriched shadow needed by the strict recurrence. | It exactly separates the two known modes of information loss; the exhaustive Rees-jet certificate is not yet run. |
 | open | Primitive determinant, self-duality, and hard Lefschetz bound the admissible coweights to the two displayed cases. | This is the first structural theorem to seek or certify finitely. |
 | open | Every admissible Rees jet has discriminant \(0\) or \(4\), never \(4/9\). | This is the finite Rust-to-Lean experiment. |

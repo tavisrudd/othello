@@ -43,7 +43,10 @@ self-dual Kummer coweight and the first marked connection/Rees jet.  The two
 known red modes are independent: the explicit dual and distinct-root orders
 have relative coweight \((-1,0,0,0,0,1)\), while a coweight-zero parabolic
 shear changes the marker through its first jet.  This is a testable
-reconstruction proposal, not yet a source theorem.
+reconstruction proposal, not yet a source theorem.  The first exact
+Rust-to-Lean boundary certificate now recomputes that coweight and verifies
+the nonzero pairing-compatible shear jet.  It proves the two ambiguity modes
+are real; it does not yet enumerate every admissible coweight/jet chart.
 The unconditional every-smooth theorem is not landed.  Independently, Voisin
 plus the 2025 Engel--de Gaay Fortman--Schreieder parity theorem gives an
 all-\(m\) proof for a very general cubic; that preprint result must not be
@@ -753,6 +756,11 @@ The live frontier is source-side, not another linear consumer.
    classification can then be compressed structurally.  This proposal and its
    mandatory input-index mutation test are recorded in
    `../2026-08-22-c925-marked-rees-shadow.md`.
+   The first certificate stage is landed in
+   `MarkedReesShadowCertificate`: exact Rust output and Lean recomputation
+   certify the relative coweight and the zero-coweight nonzero shear jet.
+   The remaining finite step is the exhaustive bounded chart enumeration,
+   followed by the still-external occurrence-to-port theorem.
 
 2. **What Lean separates.**  The nonsplit outer-return theorem proves that
    total period is outer-label period times return-map period.  The pre-strict

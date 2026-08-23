@@ -57,6 +57,8 @@ roots = [
   "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.Generated.RankSixRecurrenceData",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.RankSixRecurrenceCertificate",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.KummerDivisorGenerator",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.Generated.MarkedReesShadowData",
+  "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.MarkedReesShadowCertificate",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.HorizontalReader",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.TraitHorizontalReader",
   "TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.ProvenanceEdge",

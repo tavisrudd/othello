@@ -539,6 +539,29 @@ isomorphism is deliberately insufficient.  The replay also checks the three
 tracked artifact digests in `certificates/rank-six-recurrence.sha256` before
 executing the solver.
 
+`Comparison.MarkedReesShadowCertificate` checks the two independent
+ambiguity layers left by the generic marked packet.  The exact Rust program
+`scripts/marked_rees_shadow_cert.rs` emits the full Laurent `6 x 6`
+basis-change matrix, its three extracted `2 x 2` blocks, their claimed
+relative coweight, and the first parabolic Rees jet.  Lean verifies the block
+extraction and off-block vanishing from the full matrix, recomputes the block
+elementary divisors as `(-1,0)`, `(0,1)`, and
+`(0,0)`, recovers the relative coweight `(-1,0,0,0,0,1)`, and
+checks self-duality.  It also verifies that the zero-coweight shear jet is
+nonzero, tangent to the Poincare isometry group, fixes the first three
+columns, has the required filtration weight, and is the linear term of the
+already checked parabolic shear.  Thus a generic packet can forget a nonzero
+coweight, while fixed coweight can still forget the jet which changes the
+displayed residue from `0` to `4/9`.  Run
+
+    nix run .#verify-marked-rees-shadow
+
+to check the artifact digests, compile the exact solver, and compare its JSON
+and generated Lean output byte for byte.  `ReesPortChart` is only the finite
+chart consumed after geometric identification.  It does not supply the
+Kummer trait, actual loop, native QDM lattice, or Iritani occurrence map, and
+therefore does not close the source adapter.
+
 The algebraic model has a compact sufficient constructor. If the combined
 crossed and moving map `(B,D)` admits a linear retraction, an explicit incoming
 shear and target involution construct every crossed-coordinate field. An

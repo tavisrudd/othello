@@ -45,6 +45,7 @@ import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.Bin
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.BinaryCubicOrderResidues
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.RankSixRecurrenceCertificate
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.KummerDivisorGenerator
+import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.MarkedReesShadowCertificate
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.HorizontalReader
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.TraitHorizontalReader
 import TavisRuddFiniteGeom.Papers.CubicStabilizationIrrationality.Comparison.ProvenanceEdge
@@ -208,6 +209,17 @@ basis, and left inverse preserves both recurrence coefficients and the
 discriminant.  The geometric input must still construct that calibration for
 the native carrier; the certificate does not infer it from generic block
 isomorphism.
+`MarkedReesShadowCertificate` checks the next information-loss boundary.
+An exact Rust generator records the full Laurent comparison matrix between
+the two explicit native orders, its three blocks, and a parabolic first jet.
+Lean checks the block extraction and off-block vanishing, then recomputes
+their elementary divisors \((-1,0)\), \((0,1)\), and \((0,0)\), hence the
+relative coweight \((-1,0,0,0,0,1)\), and verifies that the first jet is
+nonzero, pairing-tangent, fixes the unit/divisor columns, and has the required
+filtration weight.  Its `ReesPortChart` is deliberately finite: it has no
+trait, actual loop, native QDM lattice, or occurrence comparison.  The module
+therefore certifies that coweight and first jet are independent ambiguity
+layers; it does not construct the geometric marked Rees port.
 `ProjectiveSpaceQuantumPolynomial` proves that the standard relation
 `X^(m+4) - q` is separable in characteristic zero for nonzero `q`. This
 kernel-checks the target's no-repeated-root algebra once its small-quantum
