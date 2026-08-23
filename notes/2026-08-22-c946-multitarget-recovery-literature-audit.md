@@ -18,14 +18,14 @@ claim.
 
 1. Is simultaneous linear recovery of a target set from one helper set new?
 2. Is its generator-matrix, kernel, or normalized dual-equation criterion new?
-3. Is the full affine space of normalized simultaneous recovery equations a
-   standard named invariant?
+3. Is the full affine space of normalized equation systems for an arbitrary
+   linear demand space \(A\leq\mathbb F_q^P\) a standard named invariant?
 4. Is target-set support data already carried by a set-pointed or ported Tutte
    invariant?
 5. Are generalized Hamming weights already used for cooperative locality?
 6. Was an exact coefficient-aware concatenation confinement theorem, with
    finite map-valued cost and eventual threshold
-   \(r<\rho_P(I)+d(I^\perp)\), located?
+   \(r<\rho_{P,A}(I)+d(I^\perp)\), located?
 
 ## Verdict
 
@@ -70,18 +70,22 @@ coefficient patterns, or intersections.  Merely renaming \(A_{x,j}\) is not
 new.
 
 The bounded search located **no predecessor** for the following combined
-result:
+result, formulated at the more general linear-demand level:
 
-- the complete affine family of normalized simultaneous recovery splittings,
-  including helper-supported gauge ambiguity;
-- the exact finite map-valued non-confinement cost \(\Theta_{P,j}(I,O)\) for a
+- a nonzero demand space \(A\leq\mathbb F_q^P\), with the complete affine
+  family of normalized equation systems realizing those demands and its
+  helper-supported gauge ambiguity;
+- the exact finite map-valued non-confinement cost
+  \(\Theta_{P,A,j}(I,O)\) for a
   general represented inner code; and
 - the sharp eventual concatenation criterion
-  \(r<\rho_P(I)+d(I^\perp)\), with the one-target theorem recovered exactly.
+  \(r<\rho_{P,A}(I)+d(I^\perp)\), with cooperative recovery and the
+  one-target theorem recovered as specializations.
 
 This is a `NONE-FOUND` candidate contribution, not a priority claim.  Its safe
-description is: **an exact coefficient-aware transfer theorem for the complete
-family of simultaneous recovery equations**.  The intrinsic recovery
+description is: **an exact coefficient-aware transfer theorem for arbitrary
+bounded linear-demand equation systems**.  Classical simultaneous/cooperative
+recovery is then the full-demand corollary \(A=\mathbb F_q^P\).  Its intrinsic
 criterion, cooperative-locality concept, target-set Tutte carrier, and use of
 generalized weights must all be credited as prior.
 
@@ -93,6 +97,7 @@ generalized weights must all be credited as prior.
 | \(|P|\) normalized dual equations with identity restriction on \(P\) | Abdel-Ghaffar--Weber, Lemma 2 | prior art; C946's surjection and splitting notation is a basis-free repackaging |
 | Quantification over every erased set of size \(e\) with one helper set of size \(r\) | Rawat--Mazumdar--Vishwanath, Definition 1; Abdel-Ghaffar--Weber, Definition 2 | prior art (cooperative locality) |
 | Affine torsor of all splittings under \(\operatorname{Hom}(\mathbb F_q^P,C^\perp\cap\mathbb F_q^H)\) | no exact formulation located | elementary refinement; claim only as structural lemma, not a major novelty by itself |
+| Arbitrary demand subspace \(0\neq A\leq\mathbb F_q^P\), its complete affine equation family, and exact transfer | no predecessor located in the audited recovery, GHW, or ported-matroid sources | primary `NONE-FOUND` formulation; full cooperative recovery is its classical corollary |
 | \(P\subseteq\operatorname{cl}_M(H)\) | Abdel-Ghaffar--Weber, Lemma 1, translated to the column matroid | prior art / immediate translation |
 | Arbitrary distinguished-set Tutte data | Chaiken, Sections 1 and 3, especially Theorem 2 and definition (3.4); Las Vergnas, Sections 2--3, especially (3.1)--(3.2) | prior art |
 | \(Z^0\) full-radius recovery slice for \(M\backslash P\to M/P\) | direct specialization of Las Vergnas (3.2) | author-derived adapter from prior polynomial; not a new invariant |
@@ -101,7 +106,7 @@ generalized weights must all be credited as prior.
 | Single-coordinate refined support counts and MacWilliams/LP identities | Gruica--Jany--Ravagnani, Definition 3.2, Theorem 3.8, Corollary 3.10, Section 4 | prior art |
 | Multiple concurrent requests for stored objects | Alfarano--Ravagnani--Soljanin, Definitions 2.2--2.5 | adjacent but different: service-rate allocation, not simultaneous erased-coordinate recovery |
 | Sequential recovery of two erasures | Prakash--Lalitha--Kumar, abstract and model description | adjacent but different quantifiers and sequential process |
-| Exact finite \(\Theta_{P,j}(I,O)\) and eventual \(\rho_P(I)+d(I^\perp)\) gate | no predecessor located in searched sources or screened citing sets | `NONE-FOUND` candidate contribution |
+| Exact finite \(\Theta_{P,A,j}(I,O)\) and eventual \(\rho_{P,A}(I)+d(I^\perp)\) gate | no predecessor located in searched sources or screened citing sets | `NONE-FOUND` candidate contribution; cooperative recovery is the full-demand corollary |
 
 ## Source acquisition and read depth
 
@@ -186,8 +191,10 @@ closer, and it does not justify categorical priority language.
 2. State that the kernel, generator-span, and normalized dual-row existence
    criteria are established; cite Abdel-Ghaffar--Weber Definition 1 and
    Lemmas 1--2 at the proposition itself.
-3. Present the affine space of all splittings as the coefficient-aware
-   refinement.  Do not claim that simultaneous recovery itself is new.
+3. State the theorem first for an arbitrary nonzero linear demand space
+   \(A\leq\mathbb F_q^P\), including its complete affine equation family.
+   Present simultaneous recovery as the full-demand corollary.  Do not claim
+   that simultaneous recovery itself is new.
 4. Cite Chaiken and Las Vergnas wherever the full-radius target-set Tutte
    carrier is introduced.  Reserve “ported” for their established matroid
    terminology.

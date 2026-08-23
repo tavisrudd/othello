@@ -1,4 +1,4 @@
-# C946 — Multi-target recovery and exact confinement
+# C946 — Linear-demand recovery and exact confinement
 
 **Lane**: complete-ports
 
@@ -6,15 +6,16 @@
 
 ## Objective
 
-Extend the one-target bounded recovery theory to simultaneous linear recovery
-of a nonempty target set \(P\) contained in one inner block. Determine the
-correct coefficient-aware local object, prove an exact eventual confinement
-criterion for concatenation, recover the published threshold when
-\(\lvert P\rvert=1\), and identify honestly what remains of the proposed
+Extend the one-target bounded recovery theory to an arbitrary nonzero linear
+demand space \(A\leq\mathbb F_q^P\) supported on a coordinate set \(P\) in one
+inner block.  Prove exact finite and eventual confinement criteria, derive
+classical simultaneous/cooperative recovery as the full-demand corollary
+\(A=\mathbb F_q^P\), recover the published threshold when
+\(P=\{x\}\), and identify honestly what remains of the proposed
 generalized-weight, MacWilliams/LP, and bandwidth directions.
 
-This is sequel research. It does not enlarge the frozen 23-page manuscript
-unless a later task explicitly adopts a proved result.
+This is math-only research.  No manuscript, bibliography, README, or formal
+boundary change is authorized by this report.
 
 ## Scope and terminology
 
@@ -28,7 +29,49 @@ unless a later task explicitly adopts a proved result.
 - Treat bandwidth/subpacketization as a separate model. For the present scalar
   \(\mathbb F_q\)-codes, bandwidth cost collapses to helper count.
 
-## Intrinsic simultaneous-recovery object
+## Primary object: a linear demand space
+
+Let \(C\leq\mathbb F_q^E\), let \(\varnothing\neq P\subseteq E\), and fix a
+nonzero subspace \(A\leq\mathbb F_q^P\).  Write
+\(\iota_A:A\hookrightarrow\mathbb F_q^P\) for inclusion.  A normalized
+\(A\)-equation system on helpers \(H\subseteq E\setminus P\) is a linear map
+
+\[
+ s:A\longrightarrow C^\perp\cap\mathbb F_q^{P\cup H},
+ \qquad s(a)|_P=\iota_A(a).
+\]
+
+Its helper cost is the cardinality of
+\(\operatorname{usupp}(s)\setminus P\), where
+
+\[
+ \operatorname{usupp}(s)=\bigcup_{a\in A}\operatorname{supp}(s(a)).
+\]
+
+If \(s_0\) is one normalized system on \(H\), every other one is uniquely
+\(s_0+t\) with
+
+\[
+ t\in\operatorname{Hom}\!\left(
+ A,\ C^\perp\cap\mathbb F_q^H
+ \right).
+\]
+
+Thus the coefficient-aware object is the full affine space of normalized
+equation systems, not only the existence of a supporting dual subspace.
+Define
+
+\[
+ \rho_{P,A}(C)=
+ \min_{\substack{s:A\to C^\perp\\s|_P=\iota_A}}
+ |\operatorname{usupp}(s)\setminus P|.
+\]
+
+This is strictly more general than simultaneous recovery of all coordinates
+in \(P\): \(A\) may prescribe one linear combination, a proper space of
+queries, or the full coordinate demand space.
+
+## Cooperative recovery as the full-demand corollary
 
 Let \(C\leq\mathbb F_q^E\), let
 \(\varnothing\neq P\subseteq E\), and let \(H\subseteq E\setminus P\). Put
@@ -85,14 +128,21 @@ Define the minimum internal helper-union cost
  \min\bigl\{|H|:\rho_{P,H}\text{ is surjective}\bigr\}.
 \]
 
+Taking \(A=\mathbb F_q^P\) in the primary definition gives exactly these
+splittings and
+
+\[
+ \rho_{P,\mathbb F_q^P}(C)=\rho_P(C).
+\]
+
 ## Exact finite map-valued cost
 
-Write \(A=\mathbb F_q^P\), and let
+Retain a nonzero demand space \(A\leq\mathbb F_q^P\), and let
 
 \[
  \Phi:\mathbb F_q^E\longrightarrow L^*,
  \qquad
- \Phi(y)(a)=\langle y,\iota(a)\rangle
+ \Phi(y)(u)=\langle y,\iota(u)\rangle
 \]
 
 be the block-functional map of the represented inner encoder
@@ -105,18 +155,17 @@ be the block-functional map of the represented inner encoder
  \min_{\Phi Y=B}|\operatorname{usupp}(Y)|
 \]
 
-and the pointed target-block cost
+and the target-block cost
 
 \[
- \mu_P(B)=
- \min_{\substack{\Phi Y=B\\Y|_P=\operatorname{id}_A}}
+ \mu_{P,A}(B)=
+ \min_{\substack{\Phi Y=B\\Y|_P=\iota_A}}
  |\operatorname{usupp}(Y)\setminus P|.
 \]
 
-Here \(Y|_P=\operatorname{id}_A\) means that the coordinate functionals of
-\(Y\) on \(P\) are the standard coordinate functionals of \(A\). In
-particular, \(\mu_P(0)=\rho_P(I)\), while the least union support of a nonzero
-map \(A\to I^\perp\) is \(d(I^\perp)\): a rank-one map attains it.
+Here \(Y|_P=\iota_A\) prescribes exactly the chosen linear demand space.  In
+particular, \(\mu_{P,A}(0)=\rho_{P,A}(I)\), while the least union support of a
+nonzero map \(A\to I^\perp\) is \(d(I^\perp)\): a rank-one map attains it.
 
 For an outer code \(O\leq L^J\) with \(\lvert J\rvert\geq2\), let
 
@@ -133,13 +182,13 @@ Equivalently,
 \(\operatorname{FD}_A(O)=
   \operatorname{Hom}(A,\operatorname{FD}(O))\).
 At target block \(j\), the exact least helper-union cost of a non-confined
-simultaneous recovery splitting is
+normalized \(A\)-equation system is
 
 \[
- \Theta_{P,j}(I,O)=
+ \Theta_{P,A,j}(I,O)=
  \min_{B\in\operatorname{FD}_A(O)}
  \left(
-  \mu_P(B_j)+
+  \mu_{P,A}(B_j)+
   \begin{cases}
    \displaystyle\sum_{\ell\neq j}\lambda_A(B_\ell),
       &\text{if some }B_\ell\neq0\text{ for }\ell\neq j,\\[6pt]
@@ -158,38 +207,42 @@ additive. This proves the formula directly from the block-functional
 decomposition; it is the multi-target analogue of the finite
 zero/singleton/multisupport stratification.
 
-Consequently every cost-\(\leq r\) exact splitting is confined if and only if
-\(r<\Theta_{P,j}(I,O)\).
+Consequently every cost-\(\leq r\) normalized \(A\)-equation system is
+confined if and only if \(r<\Theta_{P,A,j}(I,O)\).  Below this exact gate,
+zero-extension bijects the complete bounded affine families for \(I\) and the
+concatenation.
 
-## Eventual confinement theorem: human proof packet
+## Eventual linear-demand confinement theorem
 
 Let \(I\leq\mathbb F_q^E\) be a represented inner code with message alphabet
-\(L\), let \(P\subseteq E\) be simultaneously recoverable, and concatenate it
-with an \(L\)-linear outer family whose dual distance tends to infinity. For a
-fixed helper budget \(r\), the sharp eventual statement is
+\(L\), let \(0\neq A\leq\mathbb F_q^P\) admit a normalized equation system,
+and concatenate \(I\) with an \(L\)-linear outer family whose dual distance
+tends to infinity. For a fixed helper budget \(r\), the sharp eventual
+statement is
 
 \[
  \boxed{\quad
- \text{every exact simultaneous recovery splitting of cost at most }r
+ \text{every normalized \(A\)-equation system of cost at most }r
  \text{ is confined to its target block}
  \quad\Longleftrightarrow\quad
- r<\rho_P(I)+d(I^\perp).
+ r<\rho_{P,A}(I)+d(I^\perp).
  \quad}
 \]
 
 ### Necessity / attained obstruction
 
 Choose an internal splitting \(s_0\) with helper union of size
-\(\rho_P(I)\), a nonzero minimum word \(v\in I^\perp\), and a nonzero
-functional \(\ell\in(\mathbb F_q^P)^*\). In any other block, add
+\(\rho_{P,A}(I)\), a nonzero minimum word \(v\in I^\perp\), and a nonzero
+functional \(\ell\in A^*\). In any other block, add
 
 \[
  a\longmapsto\ell(a)v
 \]
 
 to \(s_0\). Embedded inner-dual words belong to the concatenated dual, the
-restriction on \(P\) remains the identity, and the exact helper union has size
-\(\rho_P(I)+d(I^\perp)\). This is a non-confined coefficient scheme.
+restriction on \(P\) remains the prescribed inclusion, and the exact helper
+union has size
+\(\rho_{P,A}(I)+d(I^\perp)\). This is a non-confined coefficient scheme.
 
 ### Sufficiency after outer growth
 
@@ -200,13 +253,34 @@ block support is at least the outer dual distance. A splitting using at most
 block. Thus all such tuples vanish once \(d(O_N^\perp)>r+1\), independently
 of \(\lvert P\rvert\).
 
-The splitting then decomposes blockwise into inner-dual maps. Its target-block
-part is itself a splitting, so its target-block helper union has size at least
-\(\rho_P(I)\). If the original splitting is not confined, at least one other
+The system then decomposes blockwise into inner-dual maps. Its target-block
+part is itself a normalized \(A\)-equation system, so its target-block helper
+union has size at least \(\rho_{P,A}(I)\). If the original splitting is not
+confined, at least one other
 block contains a nonzero inner-dual word and hence contributes at least
 \(d(I^\perp)\) disjoint helper coordinates. Therefore every non-confined
 zero-functional splitting costs at least
-\(\rho_P(I)+d(I^\perp)\).
+\(\rho_{P,A}(I)+d(I^\perp)\).
+
+## Cooperative-recovery corollary
+
+Take \(A=\mathbb F_q^P\).  The established kernel/span/dual-row criterion
+identifies normalized \(A\)-equation systems with simultaneous recovery of
+all coordinates in \(P\).  Since
+\(\rho_{P,A}(I)=\rho_P(I)\), the general theorem gives
+
+\[
+ \boxed{\quad
+ \text{every exact simultaneous recovery splitting of cost at most }r
+ \text{ is eventually confined}
+ \quad\Longleftrightarrow\quad
+ r<\rho_P(I)+d(I^\perp).
+ \quad}
+\]
+
+This is the priority-safe formulation: cooperative recovery is classical,
+while its complete coefficient family and exact concatenation transfer are
+obtained as a corollary of the more general linear-demand theorem.
 
 ### One-target reduction
 
@@ -235,11 +309,12 @@ blocks, and stratify a zero-functional non-confined splitting by the rank
 \(t\) of its external perturbation
 
 \[
- T:\mathbb F_q^P\longrightarrow D^{\oplus s}.
+ T:A\longrightarrow D^{\oplus s}.
 \]
 
 For \(0\leq a\leq\dim D\), write \(d_a(D)\) for the \(a\)-th generalized
-Hamming weight, with \(d_0(D)=0\). The exact external union-support cost is
+Hamming weight, with \(d_0(D)=0\).  For
+\(1\leq t\leq\min\{\dim A,s\dim D\}\), the exact external union-support cost is
 
 \[
  \delta_t^{(s)}(D)
@@ -260,7 +335,7 @@ subcodes attaining the \(d_{t_i}(D)\) attain the displayed sum.
 Therefore the exact rank-\(t\) zero-functional obstruction is
 
 \[
- \rho_P(I)+\delta_t^{(s)}(I^\perp).
+ \rho_{P,A}(I)+\delta_t^{(s)}(I^\perp).
 \]
 
 For fixed \(t\) this stabilizes once \(s\geq t\) to the subadditive envelope
@@ -534,20 +609,24 @@ the fixed-demand predicate \(P\subseteq\operatorname{cl}(H)\):
 
 This quantifier view is the precise unification.
 
-### Further abstraction exposed but not adopted
+### Linear-demand abstraction adopted as the primary research theorem
 
 Nothing in the splitting or transfer proof requires \(A\) to be the full
-coordinate space \(\mathbb F_q^P\). The same argument applies to a finite
-linear demand space of coordinate functionals. This would unify recovery of
-target coordinates, partial linear queries, and rank-restricted demands.
-It is a genuine sequel opportunity, but adopting it now would obscure the
-operational multi-erasure theorem.
+coordinate space \(\mathbb F_q^P\). This report now takes a nonzero subspace
+\(A\leq\mathbb F_q^P\) as the primary object.  This unifies recovery
+of all target coordinates, partial linear queries, and rank-restricted
+demands.  Classical cooperative recovery is the corollary
+\(A=\mathbb F_q^P\), with its established kernel/span/dual-row criterion
+cited rather than claimed.
 
 ## Mystery ledger
 
 - **Settled by TT:** a hierarchy is not needed for the basic confinement gate.
   Rank one gives the sharp scalar threshold; generalized weights stratify
   stronger rank demands.
+- **Settled by priority-safe generalization:** the primary theorem is for an
+  arbitrary nonzero demand space \(A\leq\mathbb F_q^P\); established
+  cooperative recovery is the full-demand corollary.
 - **Settled by TT:** the support layer is exactly the closure predicate
   \(P\subseteq\operatorname{cl}(H)\), and full-radius reliability is the
   \(Z^0\) slice of \(M\setminus P\to M/P\).
