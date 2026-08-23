@@ -241,6 +241,19 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   Indirect route report:
   `../2026-08-22-c925-indirect-rationality-predictions.md`.
 
+  **Second attack on the same gate, from the centre's geometry.**  The degree
+  axiom fixes every Newton slope of the spectral cover as a ratio of two
+  curve-class pairings, so the boundary rotation order is
+  \((c_1\cdot\gamma)/\gcd(b\cdot\gamma,c_1\cdot\gamma)\) and divides the edge
+  length.  At Picard rank one this proves rotation order equals Fano index,
+  and every Picard-rank-one threefold centre — a cubic threefold centre
+  included — is then excluded by rank counting.  What remains is a bound on
+  \(c_1\cdot\gamma\) for centres of Picard rank at least two; Mori's cone
+  theorem does not reach it because \(\gamma\) is a difference of effective
+  classes.  Reports:
+  `../2026-08-23-c925-fable-quantum-newton-slope-theorem.md` and
+  `../2026-08-22-c925-fable-loop-orbit-arithmetic-ledger.md`.
+
 - **C924 — closed 2026-08-19.** The direct ordinary-QDM route proves
   irrationality of `X x P^1` after one mandatory local repair: compare the
   intrinsic and asymptotic projective-bundle QDMs through Iritani--Koto's

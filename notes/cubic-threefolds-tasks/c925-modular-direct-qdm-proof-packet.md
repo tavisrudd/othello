@@ -868,4 +868,51 @@ No unconditional every-smooth \(m=2\) or all-\(m\) theorem has been landed.
 The very-general all-\(m\) theorem from Voisin plus
 Engel--de Gaay Fortman--Schreieder remains a separate benchmark.
 
+## Geometric route to the same gate: rotation orders and centre dimension
+
+A second, independent attack reaches the exact-three-cycle obligation from the
+geometry of the centre rather than from its native calibration.  It reduces
+that obligation to a bound on curve-class pairings and closes several of its
+cases outright.
+
+**Newton-slope theorem.**  The genus-zero degree axiom makes the
+characteristic polynomial of \(c_1\star\) quasi-homogeneous, so along any
+cocharacter \(b\in H^2(Z,\mathbf Z)\) every Newton edge of the spectral cover
+runs between two effective curve classes and has slope
+\((b\cdot\gamma)/(c_1\cdot\gamma)\), where \(\gamma\) is their difference and
+\(c_1\cdot\gamma\) is the edge length.  The boundary rotation order is
+therefore \((c_1\cdot\gamma)/\gcd(b\cdot\gamma,c_1\cdot\gamma)\); it divides
+the edge length and hence the rank of the even cohomology.  No mirror symmetry
+and no toric hypothesis enter, and the statement covers all Newton--Puiseux
+stages at once.
+
+**What it closes.**  At Picard rank one the rotation order divides the Fano
+index, with equality for a primitive cocharacter, so "rotation order equals
+index" is a theorem there; it reproduces the known spectra of
+\(\mathbf P^d\), the cubic threefold (\(\chi_K=T^2(T^2-108q)\), order two,
+index two) and the quadric threefold (\(H^4=4qH\), order three, index three).
+Consequently every Picard-rank-one threefold centre is excluded by counting
+alone: a cyclic triple of rank-two blocks needs even cohomology of rank at
+least six, while Picard rank one gives four.  In particular a cubic threefold
+centre can contribute a marked block but never a marked three-cycle, and the
+same disposes of every prime Fano threefold centre.  Taking \(b=c_1\) gives
+slope one on every edge, which is a one-line proof that the grading loop
+produces no rotation.
+
+**Residual gate.**  For a centre of Picard rank at least two the criterion is
+exact but yields no dimension bound: the order can be any divisor of
+\(c_1\cdot\gamma\), and nothing yet bounds \(c_1\cdot\gamma\) on the edge
+carrying the marked blocks.  Mori's cone theorem bounds \(c_1\cdot C\) on an
+extremal rational curve by \(\dim+1\), the curve-level analogue of
+Kobayashi--Ochiai, but \(\gamma\) is a difference of effective classes and
+escapes it.  Closing that is the sole remaining obstacle on this route, and it
+is uniform in \(m\): with the prime reduction to \(\ell=m+1\), a marked
+\(\ell\)-cycle would need dimension \(\ell+2=m+3\) while a centre has
+dimension at most \(m+1\).
+
+Lean: `Comparison.QuantumNewtonSlope` and `Comparison.LoopOrbitArithmetic`,
+both build roots.  Reports:
+`../2026-08-23-c925-fable-quantum-newton-slope-theorem.md` and
+`../2026-08-22-c925-fable-loop-orbit-arithmetic-ledger.md`.
+
 C925 remains active until the user closes it.
