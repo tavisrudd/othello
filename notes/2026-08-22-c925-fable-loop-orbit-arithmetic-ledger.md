@@ -465,6 +465,85 @@ act on any Kummer index \(q^{1/n}\mapsto q^{p/n}\), i.e. by multiplication by
 telescope-coherent by the same uniqueness argument as T2 but distinguishes
 nothing that the cyclic structure does not already.  Closed.
 
+## 12. Contact with the concurrent algebraic route
+
+The parallel line of work on this task reduced \(m=2\) to a single obligation:
+occurrence-wise exclusion of an exact three-cycle among exact-\(4/9\) marked
+blocks of the single outer factor attached to each connected
+**codimension-two threefold-centre** occurrence.  Codimensions three through
+five are already removed by the nonsplit outer-return law together with the
+point/curve/surface marker theorem.  That is the same statement the dimension
+bound of 11.2c addresses, reached from the algebraic side rather than the
+geometric one.  Four points of contact, in order of importance.
+
+### 12.1 At codimension two there is no external Kummer index
+
+The strongest objection to the derivation is the programme's own unary-centre
+model \(K[t]/(t^3-q)\), which has integral coefficients yet acquires three
+cyclically permuted primitive idempotents once \(q^{1/3}\) is adjoined: a
+three-cycle apparently manufactured by the loop rather than by an index-three
+factor.  The transport formulas of Section 8 dispose of this in the only case
+that survives.  On a blow-down edge the centre sees
+\(\iota^*\gamma'+\tfrac{a}{r-1}\rho_Z\), whose fractional part is the Kummer
+shift; at \(r=2\) this is \(\iota^*\gamma'+a\rho_Z\), an **integral**
+cocharacter of the centre's own Novikov torus.  Iritani's own bookkeeping
+agrees: at codimension two, \(s=1\) and the single centre summand needs no
+root extension.  So for the only centres still live at \(m=2\), a three-cycle
+cannot be externally induced — it is internal geometry of the centre, which
+is exactly what the index argument constrains.  The prime reduction of
+Section 1 is not even needed here; it is needed only for the higher
+codimensions that are already excluded by other means.
+
+### 12.2 The genus-at-least-two red test confirms the predicted shape
+
+That line of work records, as a red test forbidding any marker-free
+exclusion, the threefold \(\mathbf P^2\times C_g\) with
+\(QH^{\mathrm{ev}}=K[x,e]/(x^3-q,e^2)\): a genuine cyclic orbit of three
+rank-two Jordan blocks under the \(\mathcal O(1)\) loop, with modified-residue
+discriminant zero.  This is precisely what 11.2c predicts and is a
+confirmation rather than an obstacle.  The rotating factor is \(\mathbf P^2\),
+of index three and dimension \(\ell-1=2\), the extremal case of
+Kobayashi–Ochiai; the remaining dimension is one, which cannot host the
+cubic's marked factor, so the orbit is unmarked.  The bound says a *marked*
+three-cycle needs dimension at least five, and the example sits at three with
+the marker equal to zero.  The same reading covers the quadric threefold,
+which has index three and hence a three-cycle, and is on record as carrying
+rank-one semisimple sheets rather than the marked atom.  Every threefold known
+to that programme with an exact cubic orbit is unmarked, and the index
+argument says why.
+
+### 12.3 The shear countermodel says only a geometric argument can work
+
+A pairing-preserving parabolic shear fixes the unit and both divisor vectors
+and still produces normalized residue \([[-1/6,2],[0,-5/6]]\) with
+discriminant \(4/9\).  So no amount of spectral, unit, pairing, divisor or
+generic-Frobenius data excludes a marked three-cycle: the configuration is
+realizable as linear algebra.  Any successful exclusion must be geometric.
+The argument of 11.2c is geometric in the required sense — it constrains which
+varieties can carry the rotation, not which matrices can carry the marker —
+so it is of the right type to escape that countermodel.
+
+### 12.4 What it would close
+
+The candidate centre dimensions currently left open are \(d=3\) at \(n=3\)
+and, before a separate equality-case exclusion, \(d=5\) at \(n=5\), with
+\(\{3\}\) and \(\{8,9,11,13\}\) unresolved at \(n=4\) and \(n=14\).  Nothing
+in that work asserts these are realizable; they are simply unexcluded.  The
+dimension bound closes them outright, since a marked \(\ell\)-cycle needs
+dimension \(\ell+2\) while a centre has dimension at most \(m+1\).
+
+### 12.5 The gap is unchanged and is now the only thing between here and \(m=2\)
+
+Still to prove: that the boundary rotation order of the spectral cover equals
+the index of the limiting Fano, for a general threefold carrying an integral
+cocharacter, not merely in the toric mirror picture and not merely at the
+first Newton–Puiseux stage.  The cubic's own marked block verifies it
+(\(\chi_K=T^2(T^2-108q)\), ramification two, index two), and
+\(\mathbf P^2\times C_g\) and \(Q^3\) verify it at order three.  If it holds,
+it closes the codimension-two threefold gate without constructing the native
+calibration that the algebraic route is pursuing, and it does so uniformly in
+\(m\).
+
 ## 10. Suggested next step on this branch
 
 With H3 settled, Section 1 holds for every prime \(\ell=m+1\) under H2 and
