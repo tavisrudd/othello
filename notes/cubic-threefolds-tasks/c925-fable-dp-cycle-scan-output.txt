@@ -17,8 +17,34 @@ cycle types observed (count, first witness):
   (4, 1, 1, 1, 1): 80 e.g. (-1, -1, -1, -1, -1, 0)
   unresolved: 59 e.g. (-1, -1, -1, -1, 1, 0)
 prime cycles >=5: none
+k=5 box=1 seed=1 z0=[4/3, 2, 1, 9/8, 5/3, 9/2] classes=42
+cocharacters scanned: 728
+cycle lengths certified on resolved edges: [1, 2, 3]
+flagged (length >= 5, or unresolved repeated algebraic root): 340
+   ((-1, -1, -1, -1, -1, 0), 4, '1/2', 'repeated')
+   ((-1, -1, -1, -1, -1, 1), 8, '1', 'repeated')
+   ((-1, -1, -1, -1, 0, -1), 4, '1/2', 'repeated')
+   ((-1, -1, -1, -1, 0, 1), 7, '1', 'repeated')
+   ((-1, -1, -1, -1, 1, -1), 8, '1', 'repeated')
+   ((-1, -1, -1, -1, 1, 0), 7, '1', 'repeated')
+   ((-1, -1, -1, 0, -1, -1), 4, '1/2', 'repeated')
+   ((-1, -1, -1, 0, -1, 1), 7, '1', 'repeated')
+   ((-1, -1, -1, 0, 1, -1), 7, '1', 'repeated')
+   ((-1, -1, -1, 1, -1, -1), 8, '1', 'repeated')
+   ((-1, -1, -1, 1, -1, 0), 7, '1', 'repeated')
+   ((-1, -1, -1, 1, 0, -1), 7, '1', 'repeated')
+   ((-1, -1, 0, -1, -1, -1), 4, '1/2', 'repeated')
+   ((-1, -1, 0, -1, -1, 1), 7, '1', 'repeated')
+   ((-1, -1, 0, -1, 1, -1), 7, '1', 'repeated')
+   ((-1, -1, 0, 0, 0, 0), 8, '1', 'repeated')
+   ((-1, -1, 0, 0, 0, 1), 4, '3/2', 'repeated')
+   ((-1, -1, 0, 0, 1, 0), 4, '3/2', 'repeated')
+   ((-1, -1, 0, 0, 1, 1), 6, '2', 'repeated')
+   ((-1, -1, 0, 1, -1, -1), 7, '1', 'repeated')
 k=4 box=1 seed=1 z0=[4/3, 2, 1, 9/8, 5/3] classes=20
 cocharacters scanned: 242
+certified cycle-length upper bound per cocharacter (bound: how many cocharacters): {1: 61, 2: 84, 3: 37, 4: 60}
+cocharacters whose bound admits a cycle of length >= 5: 0
 cycle lengths certified on resolved edges: [1, 2, 3]
 flagged (length >= 5, or unresolved repeated algebraic root): 128
    ((-1, -1, -1, -1, 0), 4, '1/2', 'repeated')

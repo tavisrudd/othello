@@ -293,10 +293,31 @@ Findings so far:
   box \(|b_j|\le1\), seed 1:
   \(k=4\): 222/242 resolved, types \((1^7),(2,2,1^3),(3,1^4),(4,1^3)\);
   \(k=5\): 669/728 resolved, types \((1^8),(2,2,1^4),(3,1^5),(3,2,1^3),(4,1^4)\).
-  The unresolved cocharacters are those whose Newton polygon has a repeated
-  algebraic edge root (for \(k=4\) the same 20 as in the exact scan).  No
-  cycle of length \(\ge5\) on any resolved cocharacter.  Outputs:
-  `c925-fable-dp-cycle-scan-output.txt`.
+  The remaining cocharacters are exactly those whose Newton polygon has a
+  repeated edge root.  No cycle of length \(\ge5\) on any resolved
+  cocharacter.  Outputs: `c925-fable-dp-cycle-scan-output.txt`.
+
+**Exact closure of the flagged cases.**  A deeper Puiseux step is not needed
+to exclude long cycles.  Write an edge of slope \(p/q\) in lowest terms as
+\(E(\lambda)=\lambda^{r}\widetilde E(\lambda^{q})\).  A root of
+\(\widetilde E\) of multiplicity \(\mu\) carries \(\mu q\) Puiseux branches
+whose ramification indices are multiples of \(q\) summing to \(\mu q\), so
+every cycle length over that root is at most \(\mu q\).  Hence
+
+\[
+  \max(\text{cycle length at }b)\;\le\;
+  \max_{\text{edges}}\ \max_{\text{roots of }\widetilde E}\ \mu\cdot q ,
+\]
+
+computable from the first-stage data alone by factoring \(\widetilde E\) over
+\(\mathbf Q\) (distinct irreducible factors have disjoint roots, so factor
+exponents are root multiplicities).  Run on \(\mathrm{Bl}_4\mathbf P^2\),
+box \(|b_j|\le1\), all 242 cocharacters: the bound is 1 for 61, 2 for 84,
+3 for 37, and 4 for 60 cocharacters, and **never reaches 5**.  So on that box
+the del Pezzo of degree five has no boundary-monodromy cycle of length
+\(\ge5\) at all — not merely none among the resolved cocharacters.
+Sanity: on \(F_1\) the same certificate gives bound 4, matching the observed
+4-cycles.
 - **Correction for \(k=6\).**  The adjunction filter \(\beta^2=c-2\) captures
   only smooth rational curves; nodal rational curves also contribute.  The
   bound \(\beta^2\le c^2/(9-k)\) excludes them for \(k\le5\) (so the

@@ -103,6 +103,22 @@ def newton_edges(P, lam, t, shift):
             if x1 <= i <= x2 and Fraction(j - y1) == slope * (i - x1):
                 E += c * lam ** (i - x1)
         E = sp.Poly(E, lam)
+        # Reduced edge polynomial: the exponents carrying nonzero coefficients
+        # all lie in one class mod q, so E(lam) = lam^r * Etilde(lam^q).  A
+        # root of Etilde of multiplicity mu contributes mu*q Puiseux branches
+        # whose ramification indices are multiples of q summing to mu*q, so
+        # every cycle length over that root is at most mu*q.  This bounds the
+        # cycle lengths of the whole edge without a deeper Puiseux step.
+        q = slope.denominator
+        coeffs = {i: c for (i,), c in E.terms() if c != 0}
+        base = min(coeffs)
+        u = sp.symbols("u")
+        Et = sum(c * u ** ((i - base) // q) for i, c in coeffs.items())
+        bound = 0
+        for f, e in sp.factor_list(Et, u)[1]:
+            if sp.degree(f, u) > 0:
+                bound = max(bound, e * q)
+        edges_bound = bound
         simple = sp.discriminant(E.as_expr(), lam) != 0
         status = "simple"
         if not simple:
@@ -138,7 +154,7 @@ def newton_edges(P, lam, t, shift):
                                 deeper.append((a2 - a1, Fraction(b2 - b1, a2 - a1)))
                 if ok:
                     status = ("second-step", tuple(deeper))
-        edges.append((x2 - x1, slope, status))
+        edges.append((x2 - x1, slope, status, edges_bound))
     return edges
 
 
@@ -154,6 +170,7 @@ def main():
     print(f"k={k} box={box} seed={seed} z0={z0} classes={len(cls)}")
     lengths = set()
     flagged = []
+    bounds = {}
     count = 0
     for b in itertools.product(range(-box, box + 1), repeat=k + 1):
         if all(v == 0 for v in b):
@@ -164,7 +181,9 @@ def main():
         P = (lam * sp.eye(n) - M).det(method="berkowitz")
         shift = 40 * box
         edges = newton_edges(P, lam, t, shift)
-        for L, slope, status in edges:
+        cocharacter_bound = max(e[3] for e in edges)
+        bounds.setdefault(cocharacter_bound, []).append(b)
+        for L, slope, status, _bd in edges:
             q = slope.denominator
             if status == "simple":
                 lengths.add(q)
@@ -182,6 +201,14 @@ def main():
             else:
                 flagged.append((b, L, str(slope), status))
     print("cocharacters scanned:", count)
+    print("certified cycle-length upper bound per cocharacter "
+          "(bound: how many cocharacters):",
+          {bd: len(bs) for bd, bs in sorted(bounds.items())})
+    need_deeper = {bd: bs for bd, bs in bounds.items() if bd >= 5}
+    print("cocharacters whose bound admits a cycle of length >= 5:",
+          sum(len(bs) for bs in need_deeper.values()))
+    for bd, bs in sorted(need_deeper.items()):
+        print(f"   bound {bd}: {len(bs)} e.g. {bs[0]}")
     print("cycle lengths certified on resolved edges:", sorted(lengths))
     print("flagged (length >= 5, or unresolved repeated algebraic root):", len(flagged))
     for f in flagged[:20]:
