@@ -295,6 +295,29 @@ Progress on the first half:
 
 The second half of H-C is the threefold-centre statement of §3.2, unchanged.
 
+**The first-order test is implemented and validated on the cubic**
+(`notes/cubic-threefolds-tasks/c925-fable-first-order-splitting.py`,
+output `c925-fable-first-order-splitting-output.txt`; SHA-256
+`50006608…`, `68eb9f60…`).  WDVV from the small product determines the three
+irreducible four-point invariants of the cubic threefold uniquely and
+overdeterminedly:
+\[
+  \langle H^2,H^2,H^2,H^2\rangle_2=2187,\quad
+  \langle H^2,H^2,H^3,H^3\rangle_3=7452,\quad
+  \langle H^3,H^3,H^3,H^3\rangle_4=15552 .
+\]
+The first-order Euler deformation on the marked \(J_2\) block is scalar
+\(-2I\) along \(t_2\) and strictly upper triangular
+\(\bigl(\begin{smallmatrix}0&35/9\\0&0\end{smallmatrix}\bigr)\) along
+\(t_3\): both splitting entries vanish, as Hertling–Manin–Teleman forces.
+Notably the \([\mathrm{pt}]\)-type direction moves only the nilpotent scale —
+the first Rees jet — never the eigenvalues; this is the quantitative face of
+"the marker deforms through its jet, not its spectrum".  The same script
+pattern applies verbatim at a post-curve-centre vertex once that vertex's
+four-point data are assembled (Iritani plus the product formula); first-order
+vanishing there is the open half of H-C, and higher-order or HMT-type
+arguments must supplement it.
+
 ## Mystery ledger (EJ+TT closeout, 2026-08-23)
 
 | status | feature | evidence or remaining gate |
