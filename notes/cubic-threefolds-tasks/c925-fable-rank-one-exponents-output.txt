@@ -1,0 +1,27 @@
+== cubic threefold via cyclic companion basis (expect {1/6,5/6}, delta 4/9)
+  eigenvalue -6: dim 1
+  eigenvalue 0: J2 block, residue charpoly (6*lam + 1)*(6*lam + 5)/36, delta^sharp 4/9
+  eigenvalue 6: dim 1
+V14: operator order 4 degree 4 found (1 relation); leading coefficients ['1', '0', '0', '0', '0']
+V14 c1* at z=0, charpoly: (lambda - 23)*(lambda + 4)**2*(lambda + 5)
+== V14 (prediction: class {1/6,5/6})
+  eigenvalue -5: dim 1
+  eigenvalue -4: J2 block, residue charpoly (6*lam + 1)*(6*lam + 5)/36, delta^sharp 4/9
+  eigenvalue 23: dim 1
+V12: order-4 operator of degree 4 in s=t^1 (1 relation); p4 = ['1', '0', '0', '0', '0']
+V12 c1* charpoly at q=1: (lambda + 5)**2*(lambda**2 - 24*lambda - 144)
+== V12 (prediction: class {1/2,1/2}, Ku = D^b(C_7))
+  eigenvalue -5: J2 block, residue charpoly (2*lam + 1)**2/4, delta^sharp 0
+  eigenvalue 12 - 12*sqrt(2): dim 1
+  eigenvalue 12 + 12*sqrt(2): dim 1
+V10: order-4 operator of degree 4 in s=t^1 (1 relation); p4 = ['1', '0', '0', '0', '0']
+V10 c1* charpoly at q=1: (lambda + 6)**2*(lambda**2 - 32*lambda - 244)
+== V10 (prediction: Gushel-Mukai; Ku Enriques-type)
+  eigenvalue -6: J2 block, residue charpoly lam*(lam + 1), delta^sharp 1
+  eigenvalue 16 - 10*sqrt(5): dim 1
+  eigenvalue 16 + 10*sqrt(5): dim 1
+V2: order-4 operator of degree 4 in s=t^1 (1 relation); p4 = ['1', '0', '0', '0', '0']
+V2 c1* charpoly at q=1/10000: (250*lambda + 3)**3*(1250*lambda - 201)/19531250000
+== V2 (prediction: index-one sextic double solid)
+  eigenvalue -3/250: dim 3
+  eigenvalue 201/1250: dim 1

@@ -160,6 +160,46 @@ SHA-256: script
 independent second implementation; the cubic row is the cross-check against
 `c924-finite-cubic-check.py`.
 
+## 6b. Picard-rank-one test of the Serre-functor dictionary
+
+`c925-fable-rank-one-exponents.py` builds the quantum D-module of a
+Picard-rank-one Fano threefold from its quantum period: many terms of the
+unregularized period from the closed formulas in Coates–Corti–Galkin–Kasprzyk
+(arXiv:1303.3288v3, §§11–14, Theorem F.1 instances; each checked against the
+printed regularized series), the order-four operator in \(\theta=s\,d/ds\)
+guessed from forty terms (one-dimensional nullspace with at most twenty-five
+unknowns), the companion matrix of \(\Theta=zq\partial_q\) on the cyclic basis
+\(v_k=\Theta^k1\), and the flat-section system
+\(z^2y'=(rC(q,z)-z\operatorname{diag}(k-3/2))\,y\) from
+\(\nabla_{z\partial_z}v_k=(k-3/2)v_k-(r/z)v_{k+1}\).  The cubic threefold,
+run through the same companion construction from its known product, again
+gives \(\{1/6,5/6\}\); that validates the basis change.
+
+| \(X\) | \(h^{1,2}\) | Kuznetsov component | predicted class | computed block | class | \(\delta^\sharp\) |
+|---|---|---|---|---|---|---|
+| cubic \(V_3\) | 5 | \(\mathcal Ku\), \(S^3=[5]\) | \(\{1/6,5/6\}\) | \(J_2\) at \(u=0\) | \(\{1/6,5/6\}\) | \(4/9\) |
+| \(V_{14}\) | 5 | \(\simeq\mathcal Ku(V_3)\) (Kuznetsov) | \(\{1/6,5/6\}\) | \(J_2\) at \(u=-4\) | \(\{1/6,5/6\}\) | \(4/9\) |
+| \(V_{12}\) | 7 | \(D^b(C_7)\) | \(\{1/2,1/2\}\) | \(J_2\) at \(u=-5\) | \(\{1/2,1/2\}\) | \(0\) |
+| \(V_{10}\) | 10 | Enriques-type, \(S=\tau[2]\) | \(\{0,0\}\) (numerically unipotent) | \(J_2\) at \(u=-6\) | \(\{0,0\}\) | \(1\) |
+| \(V_2\) | 52 | rank three | — | rank-three generalized eigenspace | out of scope | — |
+
+Every prediction is met.  \(V_{14}\) is the decisive row: a different Fano
+threefold (index one, genus eight) whose only relation to the cubic is the
+equivalence of Kuznetsov components, and its block carries the cubic's class
+exactly.  \(V_{10}\) shows a third class, \(e=0\), again the one its
+component's numerical Serre functor predicts.  The exponent class is therefore
+a categorical invariant on all tested rows: the marker reads the numerical
+Serre functor of the non-exceptional component.
+
+Replay: `uv run --with sympy python3 c925-fable-rank-one-exponents.py`
+(about four minutes).  SHA-256: script
+`84f6bfb356f77a2b5cc9e48dcc3650183408083635013fb96af16eb608dae2b9`, output
+`636619c2884a0c0971686a5099b0286214bff161329d8fea5f75a21d4cdf07b4`.  \(V_{16}\)
+and \(V_{18}\) (components \(D^b(C_3)\), \(D^b(C_2)\); predicted
+\(\{1/2,1/2\}\)) need the general Theorem F.1 formula for \(\mathrm{Gr}(3,6)\)
+and \(\mathrm{Gr}(5,7)\), which the cached extraction garbles; their period
+sequences in the Fanosearch database would do.
+
 ## 7. Next
 
 1. Replace the card's `Next` item 1 by the threefold statement of §3.2; mark
