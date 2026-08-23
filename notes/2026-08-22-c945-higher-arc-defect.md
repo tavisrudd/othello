@@ -245,9 +245,32 @@ equalities and this specializes to the paper's existing `3/2` term.
   `32cfd5b1cb4f28c171418f61d467fc0accee8adc269ae9cf36a517158917b6b7`.
   This confirms the maximal-secant coverage formulation and the relevance of
   prescribed uncovered loci.  No absence claim rests on this partial read.
+- Bartoli--Davydov--Giulietti--Marcugini--Pambianco, *On upper bounds on the
+  smallest size of a saturating set in a projective plane*, arXiv:1505.01426:
+  **partial**, introduction and Definitions 1.1/1.5 through Theorem 1.6; cache
+  SHA-256
+  `e9040360a11f31d852dab3207a6db34fd31185ff244a72161cd36af3c039f55a`.
+  Their `(1,mu)`-saturating multiplicity counts a secant line with weight
+  `C(|S intersect ell|,2)`.  The proposed `lambda` extension instead counts
+  distinct maximal `s`-secants of an arc.  The notions coincide for ordinary
+  arcs (`s=2`) but not for higher arcs.
 
-The audit currently has one full-text source and two partial sources.  A
+The audit currently has one full-text source and three partial sources.  A
 novelty or priority verdict remains open.
+
+Forward-citation audit seed: DOI `10.1007/s10623-018-00592-8`.
+
+- OpenAlex resolved the seed as `W2905644805` and reported 12 citing works.
+  Query: `filter=cites:W2905644805`, `per-page=20`.  The 12 title/year/DOI
+  metadata records were screened for work on a general higher-arc lower bound
+  or maximal-secant concurrency moments.  Only Korchmaros--Nagy--Szonyi was
+  promoted by that discriminator; its read depth is recorded above.  The other
+  11 titles concern particular planes/arcs, group actions, partitions, conics,
+  or an unrelated typed point set and do not advertise a general bound.
+- Crossref resolved the DOI and reported `is-referenced-by-count = 12`.
+- Semantic Scholar's graph API returned HTTP 429 on 2026-08-22.  Its independent
+  count and citing set are **not covered** yet; therefore the forward-citation
+  negative is not closed.
 
 ## Gates before manuscript work
 
