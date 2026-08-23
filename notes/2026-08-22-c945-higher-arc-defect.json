@@ -1,10 +1,71 @@
 {
+  "cf_parity_asymptotic": {
+    "even_selected_line_count": {
+      "coefficient": {
+        "denominator": 3,
+        "numerator": 37
+      },
+      "offset": -2
+    },
+    "odd_selected_line_count": {
+      "coefficient": {
+        "denominator": 6,
+        "numerator": 73
+      },
+      "offset": -3
+    }
+  },
   "factor_pair_resonances": [
     {
       "balanced_internal_degree": 4,
       "certified_linear_gain": {
         "denominator": 2,
         "numerator": 1
+      },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 5,
+            "numerator": 19
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 5,
+            "numerator": 1
+          },
+          "minimizing_h": 1,
+          "shifted_crossing": {
+            "denominator": 3,
+            "numerator": 1
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 1,
+            "numerator": 4
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 5,
+            "numerator": 2
+          },
+          "minimizing_h": 1,
+          "shifted_crossing": {
+            "denominator": 6,
+            "numerator": 7
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 3,
+        "coefficient": {
+          "denominator": 1,
+          "numerator": 4
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 5,
+          "numerator": 2
+        },
+        "minimizing_h": 0,
+        "minimum_support_at_minimizer": 1
       },
       "continuous_envelope_coefficient": {
         "denominator": 2,
@@ -46,6 +107,51 @@
         "denominator": 7,
         "numerator": 3
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 3,
+            "numerator": 14
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 6,
+            "numerator": 1
+          },
+          "minimizing_h": 1,
+          "shifted_crossing": {
+            "denominator": 7,
+            "numerator": 3
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 6,
+            "numerator": 29
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 3,
+            "numerator": 1
+          },
+          "minimizing_h": 2,
+          "shifted_crossing": {
+            "denominator": 7,
+            "numerator": 9
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 2,
+        "coefficient": {
+          "denominator": 3,
+          "numerator": 14
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 6,
+          "numerator": 1
+        },
+        "minimizing_h": 1,
+        "minimum_support_at_minimizer": 1
+      },
       "continuous_envelope_coefficient": {
         "denominator": 7,
         "numerator": 31
@@ -85,6 +191,51 @@
       "certified_linear_gain": {
         "denominator": 5,
         "numerator": 4
+      },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 12,
+            "numerator": 73
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 12,
+            "numerator": 1
+          },
+          "minimizing_h": -3,
+          "shifted_crossing": {
+            "denominator": 7,
+            "numerator": -22
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 6,
+            "numerator": 37
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 6,
+            "numerator": 1
+          },
+          "minimizing_h": -2,
+          "shifted_crossing": {
+            "denominator": 7,
+            "numerator": -16
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 2,
+        "coefficient": {
+          "denominator": 12,
+          "numerator": 73
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 12,
+          "numerator": 1
+        },
+        "minimizing_h": -3,
+        "minimum_support_at_minimizer": 1
       },
       "continuous_envelope_coefficient": {
         "denominator": 1,
@@ -126,6 +277,51 @@
         "denominator": 5,
         "numerator": 2
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 22,
+            "numerator": 123
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 22,
+            "numerator": 3
+          },
+          "minimizing_h": 1,
+          "shifted_crossing": {
+            "denominator": 25,
+            "numerator": 12
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 11,
+            "numerator": 63
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 11,
+            "numerator": 3
+          },
+          "minimizing_h": 2,
+          "shifted_crossing": {
+            "denominator": 25,
+            "numerator": 34
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 5,
+        "coefficient": {
+          "denominator": 22,
+          "numerator": 123
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 22,
+          "numerator": 3
+        },
+        "minimizing_h": 1,
+        "minimum_support_at_minimizer": 1
+      },
       "continuous_envelope_coefficient": {
         "denominator": 5,
         "numerator": 27
@@ -165,6 +361,51 @@
       "certified_linear_gain": {
         "denominator": 35,
         "numerator": 39
+      },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 11,
+            "numerator": 93
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 22,
+            "numerator": 1
+          },
+          "minimizing_h": -9,
+          "shifted_crossing": {
+            "denominator": 25,
+            "numerator": -233
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 2,
+            "numerator": 17
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 11,
+            "numerator": 1
+          },
+          "minimizing_h": -8,
+          "shifted_crossing": {
+            "denominator": 25,
+            "numerator": -211
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 5,
+        "coefficient": {
+          "denominator": 11,
+          "numerator": 93
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 22,
+          "numerator": 1
+        },
+        "minimizing_h": -9,
+        "minimum_support_at_minimizer": 1
       },
       "continuous_envelope_coefficient": {
         "denominator": 5,
@@ -206,6 +447,39 @@
         "denominator": 13,
         "numerator": 5
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 35,
+            "numerator": 229
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 35,
+            "numerator": 4
+          },
+          "minimizing_h": 1,
+          "shifted_crossing": {
+            "denominator": 39,
+            "numerator": 20
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 35,
+            "numerator": 233
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 35,
+            "numerator": 8
+          },
+          "minimizing_h": 2,
+          "shifted_crossing": {
+            "denominator": 39,
+            "numerator": 55
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": null,
       "continuous_envelope_coefficient": {
         "denominator": 13,
         "numerator": 83
@@ -245,6 +519,51 @@
       "certified_linear_gain": {
         "denominator": 10,
         "numerator": 7
+      },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 26,
+            "numerator": 197
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 13,
+            "numerator": 1
+          },
+          "minimizing_h": -4,
+          "shifted_crossing": {
+            "denominator": 15,
+            "numerator": -62
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 26,
+            "numerator": 199
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 13,
+            "numerator": 2
+          },
+          "minimizing_h": -3,
+          "shifted_crossing": {
+            "denominator": 15,
+            "numerator": -49
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 5,
+        "coefficient": {
+          "denominator": 26,
+          "numerator": 197
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 13,
+          "numerator": 1
+        },
+        "minimizing_h": -4,
+        "minimum_support_at_minimizer": 1
       },
       "continuous_envelope_coefficient": {
         "denominator": 2,
@@ -286,6 +605,39 @@
         "denominator": 39,
         "numerator": 56
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 5,
+            "numerator": 54
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 35,
+            "numerator": 1
+          },
+          "minimizing_h": -18,
+          "shifted_crossing": {
+            "denominator": 39,
+            "numerator": -709
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 35,
+            "numerator": 379
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 35,
+            "numerator": 2
+          },
+          "minimizing_h": -17,
+          "shifted_crossing": {
+            "denominator": 39,
+            "numerator": -674
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": null,
       "continuous_envelope_coefficient": {
         "denominator": 13,
         "numerator": 140
@@ -325,6 +677,51 @@
       "certified_linear_gain": {
         "denominator": 8,
         "numerator": 3
+      },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 51,
+            "numerator": 383
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 51,
+            "numerator": 5
+          },
+          "minimizing_h": 1,
+          "shifted_crossing": {
+            "denominator": 28,
+            "numerator": 15
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 51,
+            "numerator": 388
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 51,
+            "numerator": 10
+          },
+          "minimizing_h": 2,
+          "shifted_crossing": {
+            "denominator": 56,
+            "numerator": 81
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 7,
+        "coefficient": {
+          "denominator": 51,
+          "numerator": 383
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 51,
+          "numerator": 5
+        },
+        "minimizing_h": 1,
+        "minimum_support_at_minimizer": 1
       },
       "continuous_envelope_coefficient": {
         "denominator": 8,
@@ -366,6 +763,51 @@
         "denominator": 88,
         "numerator": 155
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 51,
+            "numerator": 671
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 51,
+            "numerator": 1
+          },
+          "minimizing_h": -29,
+          "shifted_crossing": {
+            "denominator": 7,
+            "numerator": -208
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 17,
+            "numerator": 224
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 51,
+            "numerator": 2
+          },
+          "minimizing_h": -28,
+          "shifted_crossing": {
+            "denominator": 56,
+            "numerator": -1613
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 7,
+        "coefficient": {
+          "denominator": 51,
+          "numerator": 671
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 51,
+          "numerator": 1
+        },
+        "minimizing_h": -29,
+        "minimum_support_at_minimizer": 1
+      },
       "continuous_envelope_coefficient": {
         "denominator": 8,
         "numerator": 105
@@ -405,6 +847,51 @@
       "certified_linear_gain": {
         "denominator": 19,
         "numerator": 7
+      },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 35,
+            "numerator": 297
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 35,
+            "numerator": 3
+          },
+          "minimizing_h": 1,
+          "shifted_crossing": {
+            "denominator": 38,
+            "numerator": 21
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 7,
+            "numerator": 60
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 35,
+            "numerator": 6
+          },
+          "minimizing_h": 2,
+          "shifted_crossing": {
+            "denominator": 19,
+            "numerator": 28
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 2,
+        "coefficient": {
+          "denominator": 35,
+          "numerator": 297
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 35,
+          "numerator": 3
+        },
+        "minimizing_h": 1,
+        "minimum_support_at_minimizer": 1
       },
       "continuous_envelope_coefficient": {
         "denominator": 19,
@@ -446,6 +933,39 @@
         "denominator": 85,
         "numerator": 56
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 15,
+            "numerator": 137
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 15,
+            "numerator": 1
+          },
+          "minimizing_h": -5,
+          "shifted_crossing": {
+            "denominator": 17,
+            "numerator": -89
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 5,
+            "numerator": 46
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 15,
+            "numerator": 2
+          },
+          "minimizing_h": -4,
+          "shifted_crossing": {
+            "denominator": 17,
+            "numerator": -74
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": null,
       "continuous_envelope_coefficient": {
         "denominator": 17,
         "numerator": 154
@@ -486,6 +1006,39 @@
         "denominator": 119,
         "numerator": 117
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 15,
+            "numerator": 157
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 45,
+            "numerator": 2
+          },
+          "minimizing_h": -12,
+          "shifted_crossing": {
+            "denominator": 17,
+            "numerator": -210
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 45,
+            "numerator": 473
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 45,
+            "numerator": 4
+          },
+          "minimizing_h": -11,
+          "shifted_crossing": {
+            "denominator": 17,
+            "numerator": -195
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": null,
       "continuous_envelope_coefficient": {
         "denominator": 17,
         "numerator": 177
@@ -525,6 +1078,51 @@
       "certified_linear_gain": {
         "denominator": 247,
         "numerator": 516
+      },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 2,
+            "numerator": 31
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 70,
+            "numerator": 1
+          },
+          "minimizing_h": -44,
+          "shifted_crossing": {
+            "denominator": 38,
+            "numerator": -1669
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 2,
+            "numerator": 31
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 70,
+            "numerator": 1
+          },
+          "minimizing_h": -43,
+          "shifted_crossing": {
+            "denominator": 1,
+            "numerator": -43
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 2,
+        "coefficient": {
+          "denominator": 2,
+          "numerator": 31
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 70,
+          "numerator": 1
+        },
+        "minimizing_h": -43,
+        "minimum_support_at_minimizer": 1
       },
       "continuous_envelope_coefficient": {
         "denominator": 19,
@@ -566,6 +1164,51 @@
         "denominator": 11,
         "numerator": 4
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 92,
+            "numerator": 871
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 92,
+            "numerator": 7
+          },
+          "minimizing_h": 1,
+          "shifted_crossing": {
+            "denominator": 99,
+            "numerator": 56
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 46,
+            "numerator": 439
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 46,
+            "numerator": 7
+          },
+          "minimizing_h": 2,
+          "shifted_crossing": {
+            "denominator": 99,
+            "numerator": 148
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 3,
+        "coefficient": {
+          "denominator": 46,
+          "numerator": 439
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 46,
+          "numerator": 7
+        },
+        "minimizing_h": 2,
+        "minimum_support_at_minimizer": 1
+      },
       "continuous_envelope_coefficient": {
         "denominator": 11,
         "numerator": 103
@@ -605,6 +1248,51 @@
       "certified_linear_gain": {
         "denominator": 55,
         "numerator": 133
+      },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 92,
+            "numerator": 1641
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 92,
+            "numerator": 1
+          },
+          "minimizing_h": -60,
+          "shifted_crossing": {
+            "denominator": 99,
+            "numerator": -6019
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 46,
+            "numerator": 821
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 46,
+            "numerator": 1
+          },
+          "minimizing_h": -59,
+          "shifted_crossing": {
+            "denominator": 99,
+            "numerator": -5927
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 3,
+        "coefficient": {
+          "denominator": 92,
+          "numerator": 1641
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 92,
+          "numerator": 1
+        },
+        "minimizing_h": -60,
+        "minimum_support_at_minimizer": 1
       },
       "continuous_envelope_coefficient": {
         "denominator": 11,
@@ -646,6 +1334,39 @@
         "denominator": 25,
         "numerator": 9
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 117,
+            "numerator": 1223
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 117,
+            "numerator": 8
+          },
+          "minimizing_h": 1,
+          "shifted_crossing": {
+            "denominator": 125,
+            "numerator": 72
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 117,
+            "numerator": 1231
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 117,
+            "numerator": 16
+          },
+          "minimizing_h": 2,
+          "shifted_crossing": {
+            "denominator": 125,
+            "numerator": 189
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": null,
       "continuous_envelope_coefficient": {
         "denominator": 25,
         "numerator": 259
@@ -685,6 +1406,51 @@
       "certified_linear_gain": {
         "denominator": 11,
         "numerator": 7
+      },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 69,
+            "numerator": 739
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 69,
+            "numerator": 4
+          },
+          "minimizing_h": -6,
+          "shifted_crossing": {
+            "denominator": 77,
+            "numerator": -491
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 69,
+            "numerator": 743
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 69,
+            "numerator": 8
+          },
+          "minimizing_h": -5,
+          "shifted_crossing": {
+            "denominator": 77,
+            "numerator": -422
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 7,
+        "coefficient": {
+          "denominator": 69,
+          "numerator": 743
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 69,
+          "numerator": 8
+        },
+        "minimizing_h": -5,
+        "minimum_support_at_minimizer": 1
       },
       "continuous_envelope_coefficient": {
         "denominator": 11,
@@ -726,6 +1492,51 @@
         "denominator": 11,
         "numerator": 14
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 23,
+            "numerator": 306
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 69,
+            "numerator": 2
+          },
+          "minimizing_h": -24,
+          "shifted_crossing": {
+            "denominator": 77,
+            "numerator": -1863
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 3,
+            "numerator": 40
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 69,
+            "numerator": 4
+          },
+          "minimizing_h": -23,
+          "shifted_crossing": {
+            "denominator": 77,
+            "numerator": -1794
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 7,
+        "coefficient": {
+          "denominator": 23,
+          "numerator": 306
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 69,
+          "numerator": 2
+        },
+        "minimizing_h": -24,
+        "minimum_support_at_minimizer": 1
+      },
       "continuous_envelope_coefficient": {
         "denominator": 11,
         "numerator": 146
@@ -766,6 +1577,39 @@
         "denominator": 425,
         "numerator": 1168
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 117,
+            "numerator": 2360
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 117,
+            "numerator": 1
+          },
+          "minimizing_h": -80,
+          "shifted_crossing": {
+            "denominator": 125,
+            "numerator": -10043
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 39,
+            "numerator": 787
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 117,
+            "numerator": 2
+          },
+          "minimizing_h": -79,
+          "shifted_crossing": {
+            "denominator": 125,
+            "numerator": -9926
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": null,
       "continuous_envelope_coefficient": {
         "denominator": 25,
         "numerator": 504
@@ -805,6 +1649,51 @@
       "certified_linear_gain": {
         "denominator": 14,
         "numerator": 5
+      },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 145,
+            "numerator": 1659
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 145,
+            "numerator": 9
+          },
+          "minimizing_h": 1,
+          "shifted_crossing": {
+            "denominator": 77,
+            "numerator": 45
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 145,
+            "numerator": 1668
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 145,
+            "numerator": 18
+          },
+          "minimizing_h": 2,
+          "shifted_crossing": {
+            "denominator": 154,
+            "numerator": 235
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 11,
+        "coefficient": {
+          "denominator": 145,
+          "numerator": 1659
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 145,
+          "numerator": 9
+        },
+        "minimizing_h": 1,
+        "minimum_support_at_minimizer": 1
       },
       "continuous_envelope_coefficient": {
         "denominator": 14,
@@ -846,6 +1735,51 @@
         "denominator": 14,
         "numerator": 13
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 25,
+            "numerator": 314
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 25,
+            "numerator": 1
+          },
+          "minimizing_h": -15,
+          "shifted_crossing": {
+            "denominator": 28,
+            "numerator": -437
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 5,
+            "numerator": 63
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 25,
+            "numerator": 2
+          },
+          "minimizing_h": -14,
+          "shifted_crossing": {
+            "denominator": 7,
+            "numerator": -103
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 7,
+        "coefficient": {
+          "denominator": 25,
+          "numerator": 314
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 25,
+          "numerator": 1
+        },
+        "minimizing_h": -15,
+        "minimum_support_at_minimizer": 1
+      },
       "continuous_envelope_coefficient": {
         "denominator": 2,
         "numerator": 25
@@ -885,6 +1819,51 @@
       "certified_linear_gain": {
         "denominator": 38,
         "numerator": 117
+      },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 145,
+            "numerator": 3264
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 145,
+            "numerator": 1
+          },
+          "minimizing_h": -102,
+          "shifted_crossing": {
+            "denominator": 77,
+            "numerator": -7897
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 29,
+            "numerator": 653
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 145,
+            "numerator": 2
+          },
+          "minimizing_h": -101,
+          "shifted_crossing": {
+            "denominator": 154,
+            "numerator": -15649
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 11,
+        "coefficient": {
+          "denominator": 145,
+          "numerator": 3264
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 145,
+          "numerator": 1
+        },
+        "minimizing_h": -102,
+        "minimum_support_at_minimizer": 1
       },
       "continuous_envelope_coefficient": {
         "denominator": 2,
@@ -926,6 +1905,39 @@
         "denominator": 31,
         "numerator": 11
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 44,
+            "numerator": 547
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 88,
+            "numerator": 5
+          },
+          "minimizing_h": 1,
+          "shifted_crossing": {
+            "denominator": 93,
+            "numerator": 55
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 88,
+            "numerator": 1099
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 44,
+            "numerator": 5
+          },
+          "minimizing_h": 2,
+          "shifted_crossing": {
+            "denominator": 93,
+            "numerator": 143
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": null,
       "continuous_envelope_coefficient": {
         "denominator": 31,
         "numerator": 383
@@ -965,6 +1977,51 @@
       "certified_linear_gain": {
         "denominator": 45,
         "numerator": 28
+      },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 98,
+            "numerator": 1205
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 98,
+            "numerator": 5
+          },
+          "minimizing_h": -7,
+          "shifted_crossing": {
+            "denominator": 54,
+            "numerator": -407
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 49,
+            "numerator": 605
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 49,
+            "numerator": 5
+          },
+          "minimizing_h": -6,
+          "shifted_crossing": {
+            "denominator": 27,
+            "numerator": -179
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 2,
+        "coefficient": {
+          "denominator": 98,
+          "numerator": 1205
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 98,
+          "numerator": 5
+        },
+        "minimizing_h": -7,
+        "minimum_support_at_minimizer": 1
       },
       "continuous_envelope_coefficient": {
         "denominator": 9,
@@ -1006,6 +2063,51 @@
         "denominator": 99,
         "numerator": 155
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 7,
+            "numerator": 113
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 49,
+            "numerator": 1
+          },
+          "minimizing_h": -39,
+          "shifted_crossing": {
+            "denominator": 54,
+            "numerator": -2141
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 49,
+            "numerator": 792
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 49,
+            "numerator": 2
+          },
+          "minimizing_h": -38,
+          "shifted_crossing": {
+            "denominator": 27,
+            "numerator": -1046
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 2,
+        "coefficient": {
+          "denominator": 7,
+          "numerator": 113
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 49,
+          "numerator": 1
+        },
+        "minimizing_h": -39,
+        "minimum_support_at_minimizer": 1
+      },
       "continuous_envelope_coefficient": {
         "denominator": 9,
         "numerator": 145
@@ -1046,6 +2148,39 @@
         "denominator": 217,
         "numerator": 740
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 176,
+            "numerator": 4373
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 176,
+            "numerator": 1
+          },
+          "minimizing_h": -127,
+          "shifted_crossing": {
+            "denominator": 93,
+            "numerator": -11852
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 88,
+            "numerator": 2187
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 88,
+            "numerator": 1
+          },
+          "minimizing_h": -126,
+          "shifted_crossing": {
+            "denominator": 93,
+            "numerator": -11764
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": null,
       "continuous_envelope_coefficient": {
         "denominator": 31,
         "numerator": 770
@@ -1085,6 +2220,51 @@
       "certified_linear_gain": {
         "denominator": 17,
         "numerator": 6
+      },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 210,
+            "numerator": 2819
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 210,
+            "numerator": 11
+          },
+          "minimizing_h": 1,
+          "shifted_crossing": {
+            "denominator": 221,
+            "numerator": 132
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 21,
+            "numerator": 283
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 105,
+            "numerator": 11
+          },
+          "minimizing_h": 2,
+          "shifted_crossing": {
+            "denominator": 221,
+            "numerator": 342
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 13,
+        "coefficient": {
+          "denominator": 210,
+          "numerator": 2819
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 210,
+          "numerator": 11
+        },
+        "minimizing_h": 1,
+        "minimum_support_at_minimizer": 1
       },
       "continuous_envelope_coefficient": {
         "denominator": 17,
@@ -1126,6 +2306,51 @@
         "denominator": 391,
         "numerator": 1463
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 11,
+            "numerator": 299
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 1155,
+            "numerator": 1
+          },
+          "minimizing_h": -155,
+          "shifted_crossing": {
+            "denominator": 221,
+            "numerator": -34253
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 70,
+            "numerator": 1903
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 210,
+            "numerator": 1
+          },
+          "minimizing_h": -154,
+          "shifted_crossing": {
+            "denominator": 221,
+            "numerator": -34043
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 13,
+        "coefficient": {
+          "denominator": 11,
+          "numerator": 299
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 1155,
+          "numerator": 1
+        },
+        "minimizing_h": -155,
+        "minimum_support_at_minimizer": 1
+      },
       "continuous_envelope_coefficient": {
         "denominator": 17,
         "numerator": 462
@@ -1166,6 +2391,39 @@
         "denominator": 37,
         "numerator": 13
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 247,
+            "numerator": 3561
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 247,
+            "numerator": 12
+          },
+          "minimizing_h": 1,
+          "shifted_crossing": {
+            "denominator": 259,
+            "numerator": 156
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 247,
+            "numerator": 3573
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 247,
+            "numerator": 24
+          },
+          "minimizing_h": 2,
+          "shifted_crossing": {
+            "denominator": 259,
+            "numerator": 403
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": null,
       "continuous_envelope_coefficient": {
         "denominator": 37,
         "numerator": 531
@@ -1205,6 +2463,51 @@
       "certified_linear_gain": {
         "denominator": 80,
         "numerator": 49
+      },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 44,
+            "numerator": 611
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 22,
+            "numerator": 1
+          },
+          "minimizing_h": -8,
+          "shifted_crossing": {
+            "denominator": 24,
+            "numerator": -209
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 44,
+            "numerator": 613
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 11,
+            "numerator": 1
+          },
+          "minimizing_h": -7,
+          "shifted_crossing": {
+            "denominator": 24,
+            "numerator": -187
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 3,
+        "coefficient": {
+          "denominator": 44,
+          "numerator": 611
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 22,
+          "numerator": 1
+        },
+        "minimizing_h": -8,
+        "minimum_support_at_minimizer": 1
       },
       "continuous_envelope_coefficient": {
         "denominator": 16,
@@ -1246,6 +2549,51 @@
         "denominator": 217,
         "numerator": 195
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 3,
+            "numerator": 44
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 42,
+            "numerator": 1
+          },
+          "minimizing_h": -19,
+          "shifted_crossing": {
+            "denominator": 31,
+            "numerator": -587
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 28,
+            "numerator": 411
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 28,
+            "numerator": 1
+          },
+          "minimizing_h": -18,
+          "shifted_crossing": {
+            "denominator": 31,
+            "numerator": -559
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 2,
+        "coefficient": {
+          "denominator": 3,
+          "numerator": 44
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 42,
+          "numerator": 1
+        },
+        "minimizing_h": -19,
+        "minimum_support_at_minimizer": 1
+      },
       "continuous_envelope_coefficient": {
         "denominator": 31,
         "numerator": 453
@@ -1285,6 +2633,51 @@
       "certified_linear_gain": {
         "denominator": 93,
         "numerator": 112
+      },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 56,
+            "numerator": 891
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 112,
+            "numerator": 3
+          },
+          "minimizing_h": -30,
+          "shifted_crossing": {
+            "denominator": 31,
+            "numerator": -948
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 16,
+            "numerator": 255
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 56,
+            "numerator": 3
+          },
+          "minimizing_h": -29,
+          "shifted_crossing": {
+            "denominator": 31,
+            "numerator": -920
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 2,
+        "coefficient": {
+          "denominator": 16,
+          "numerator": 255
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 56,
+          "numerator": 3
+        },
+        "minimizing_h": -29,
+        "minimum_support_at_minimizer": 1
       },
       "continuous_envelope_coefficient": {
         "denominator": 31,
@@ -1326,6 +2719,51 @@
         "denominator": 208,
         "numerator": 387
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 132,
+            "numerator": 2503
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 66,
+            "numerator": 1
+          },
+          "minimizing_h": -58,
+          "shifted_crossing": {
+            "denominator": 24,
+            "numerator": -1409
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 44,
+            "numerator": 835
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 33,
+            "numerator": 1
+          },
+          "minimizing_h": -57,
+          "shifted_crossing": {
+            "denominator": 24,
+            "numerator": -1387
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 3,
+        "coefficient": {
+          "denominator": 132,
+          "numerator": 2503
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 66,
+          "numerator": 1
+        },
+        "minimizing_h": -58,
+        "minimum_support_at_minimizer": 1
+      },
       "continuous_envelope_coefficient": {
         "denominator": 16,
         "numerator": 303
@@ -1366,6 +2804,39 @@
         "denominator": 925,
         "numerator": 3768
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 247,
+            "numerator": 7291
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 247,
+            "numerator": 1
+          },
+          "minimizing_h": -185,
+          "shifted_crossing": {
+            "denominator": 259,
+            "numerator": -47969
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 247,
+            "numerator": 7292
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 247,
+            "numerator": 2
+          },
+          "minimizing_h": -184,
+          "shifted_crossing": {
+            "denominator": 259,
+            "numerator": -47722
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": null,
       "continuous_envelope_coefficient": {
         "denominator": 37,
         "numerator": 1092
@@ -1406,6 +2877,39 @@
         "denominator": 20,
         "numerator": 7
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 287,
+            "numerator": 4423
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 287,
+            "numerator": 13
+          },
+          "minimizing_h": 1,
+          "shifted_crossing": {
+            "denominator": 150,
+            "numerator": 91
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 287,
+            "numerator": 4436
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 287,
+            "numerator": 26
+          },
+          "minimizing_h": 2,
+          "shifted_crossing": {
+            "denominator": 300,
+            "numerator": 469
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": null,
       "continuous_envelope_coefficient": {
         "denominator": 20,
         "numerator": 307
@@ -1446,6 +2950,39 @@
         "denominator": 180,
         "numerator": 793
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 41,
+            "numerator": 1306
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 287,
+            "numerator": 1
+          },
+          "minimizing_h": -218,
+          "shifted_crossing": {
+            "denominator": 75,
+            "numerator": -16357
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 7,
+            "numerator": 223
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 287,
+            "numerator": 2
+          },
+          "minimizing_h": -217,
+          "shifted_crossing": {
+            "denominator": 300,
+            "numerator": -65141
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": null,
       "continuous_envelope_coefficient": {
         "denominator": 20,
         "numerator": 637
@@ -1485,6 +3022,51 @@
       "certified_linear_gain": {
         "denominator": 43,
         "numerator": 15
+      },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 165,
+            "numerator": 2707
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 165,
+            "numerator": 7
+          },
+          "minimizing_h": 1,
+          "shifted_crossing": {
+            "denominator": 172,
+            "numerator": 105
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 165,
+            "numerator": 2714
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 165,
+            "numerator": 14
+          },
+          "minimizing_h": 2,
+          "shifted_crossing": {
+            "denominator": 86,
+            "numerator": 135
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 2,
+        "coefficient": {
+          "denominator": 165,
+          "numerator": 2707
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 165,
+          "numerator": 7
+        },
+        "minimizing_h": 1,
+        "minimum_support_at_minimizer": 1
       },
       "continuous_envelope_coefficient": {
         "denominator": 43,
@@ -1526,6 +3108,39 @@
         "denominator": 185,
         "numerator": 112
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 171,
+            "numerator": 2647
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 171,
+            "numerator": 7
+          },
+          "minimizing_h": -9,
+          "shifted_crossing": {
+            "denominator": 185,
+            "numerator": -1829
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 2,
+            "numerator": 31
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 114,
+            "numerator": 7
+          },
+          "minimizing_h": -9,
+          "shifted_crossing": {
+            "denominator": 185,
+            "numerator": -1658
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": null,
       "continuous_envelope_coefficient": {
         "denominator": 37,
         "numerator": 570
@@ -1566,6 +3181,39 @@
         "denominator": 185,
         "numerator": 399
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 57,
+            "numerator": 1241
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 171,
+            "numerator": 2
+          },
+          "minimizing_h": -81,
+          "shifted_crossing": {
+            "denominator": 185,
+            "numerator": -15054
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 171,
+            "numerator": 3725
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 171,
+            "numerator": 4
+          },
+          "minimizing_h": -80,
+          "shifted_crossing": {
+            "denominator": 185,
+            "numerator": -14883
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": null,
       "continuous_envelope_coefficient": {
         "denominator": 37,
         "numerator": 805
@@ -1605,6 +3253,51 @@
       "certified_linear_gain": {
         "denominator": 1247,
         "numerator": 5908
+      },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 110,
+            "numerator": 3761
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 330,
+            "numerator": 1
+          },
+          "minimizing_h": -253,
+          "shifted_crossing": {
+            "denominator": 172,
+            "numerator": -43627
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 165,
+            "numerator": 5642
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 165,
+            "numerator": 1
+          },
+          "minimizing_h": -252,
+          "shifted_crossing": {
+            "denominator": 86,
+            "numerator": -21731
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 2,
+        "coefficient": {
+          "denominator": 110,
+          "numerator": 3761
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 330,
+          "numerator": 1
+        },
+        "minimizing_h": -253,
+        "minimum_support_at_minimizer": 1
       },
       "continuous_envelope_coefficient": {
         "denominator": 43,
@@ -1646,6 +3339,51 @@
         "denominator": 23,
         "numerator": 8
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 376,
+            "numerator": 6543
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 376,
+            "numerator": 15
+          },
+          "minimizing_h": 1,
+          "shifted_crossing": {
+            "denominator": 391,
+            "numerator": 240
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 188,
+            "numerator": 3279
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 188,
+            "numerator": 15
+          },
+          "minimizing_h": 2,
+          "shifted_crossing": {
+            "denominator": 391,
+            "numerator": 616
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 17,
+        "coefficient": {
+          "denominator": 376,
+          "numerator": 6543
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 376,
+          "numerator": 15
+        },
+        "minimizing_h": 1,
+        "minimum_support_at_minimizer": 1
+      },
       "continuous_envelope_coefficient": {
         "denominator": 23,
         "numerator": 399
@@ -1685,6 +3423,51 @@
       "certified_linear_gain": {
         "denominator": 133,
         "numerator": 117
+      },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 156,
+            "numerator": 2617
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 156,
+            "numerator": 5
+          },
+          "minimizing_h": -22,
+          "shifted_crossing": {
+            "denominator": 57,
+            "numerator": -1271
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 26,
+            "numerator": 437
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 78,
+            "numerator": 5
+          },
+          "minimizing_h": -21,
+          "shifted_crossing": {
+            "denominator": 57,
+            "numerator": -1219
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 3,
+        "coefficient": {
+          "denominator": 156,
+          "numerator": 2617
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 156,
+          "numerator": 5
+        },
+        "minimizing_h": -22,
+        "minimum_support_at_minimizer": 1
       },
       "continuous_envelope_coefficient": {
         "denominator": 19,
@@ -1726,6 +3509,51 @@
         "denominator": 209,
         "numerator": 310
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 13,
+            "numerator": 250
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 52,
+            "numerator": 1
+          },
+          "minimizing_h": -50,
+          "shifted_crossing": {
+            "denominator": 57,
+            "numerator": -2858
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 4,
+            "numerator": 77
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 26,
+            "numerator": 1
+          },
+          "minimizing_h": -49,
+          "shifted_crossing": {
+            "denominator": 57,
+            "numerator": -2806
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 3,
+        "coefficient": {
+          "denominator": 13,
+          "numerator": 250
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 52,
+          "numerator": 1
+        },
+        "minimizing_h": -50,
+        "minimum_support_at_minimizer": 1
+      },
       "continuous_envelope_coefficient": {
         "denominator": 19,
         "numerator": 365
@@ -1765,6 +3593,51 @@
       "certified_linear_gain": {
         "denominator": 713,
         "numerator": 3615
+      },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 188,
+            "numerator": 6867
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 376,
+            "numerator": 1
+          },
+          "minimizing_h": -291,
+          "shifted_crossing": {
+            "denominator": 391,
+            "numerator": -114119
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 376,
+            "numerator": 13735
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 188,
+            "numerator": 1
+          },
+          "minimizing_h": -290,
+          "shifted_crossing": {
+            "denominator": 391,
+            "numerator": -113743
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 17,
+        "coefficient": {
+          "denominator": 376,
+          "numerator": 13735
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 188,
+          "numerator": 1
+        },
+        "minimizing_h": -290,
+        "minimum_support_at_minimizer": 1
       },
       "continuous_envelope_coefficient": {
         "denominator": 23,
@@ -1806,6 +3679,39 @@
         "denominator": 49,
         "numerator": 17
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 425,
+            "numerator": 7819
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 425,
+            "numerator": 16
+          },
+          "minimizing_h": 1,
+          "shifted_crossing": {
+            "denominator": 441,
+            "numerator": 272
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 85,
+            "numerator": 1567
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 425,
+            "numerator": 32
+          },
+          "minimizing_h": 2,
+          "shifted_crossing": {
+            "denominator": 441,
+            "numerator": 697
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": null,
       "continuous_envelope_coefficient": {
         "denominator": 49,
         "numerator": 899
@@ -1845,6 +3751,51 @@
       "certified_linear_gain": {
         "denominator": 5,
         "numerator": 3
+      },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 215,
+            "numerator": 3663
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 215,
+            "numerator": 8
+          },
+          "minimizing_h": -11,
+          "shifted_crossing": {
+            "denominator": 231,
+            "numerator": -2557
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 215,
+            "numerator": 3671
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 215,
+            "numerator": 16
+          },
+          "minimizing_h": -10,
+          "shifted_crossing": {
+            "denominator": 231,
+            "numerator": -2342
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 11,
+        "coefficient": {
+          "denominator": 215,
+          "numerator": 3663
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 215,
+          "numerator": 8
+        },
+        "minimizing_h": -11,
+        "minimum_support_at_minimizer": 1
       },
       "continuous_envelope_coefficient": {
         "denominator": 1,
@@ -1886,6 +3837,51 @@
         "denominator": 6,
         "numerator": 7
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 82,
+            "numerator": 1519
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 41,
+            "numerator": 1
+          },
+          "minimizing_h": -37,
+          "shifted_crossing": {
+            "denominator": 45,
+            "numerator": -1669
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 82,
+            "numerator": 1521
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 41,
+            "numerator": 2
+          },
+          "minimizing_h": -36,
+          "shifted_crossing": {
+            "denominator": 45,
+            "numerator": -1628
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 3,
+        "coefficient": {
+          "denominator": 82,
+          "numerator": 1519
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 41,
+          "numerator": 1
+        },
+        "minimizing_h": -37,
+        "minimum_support_at_minimizer": 1
+      },
       "continuous_envelope_coefficient": {
         "denominator": 2,
         "numerator": 37
@@ -1925,6 +3921,51 @@
       "certified_linear_gain": {
         "denominator": 119,
         "numerator": 292
+      },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 215,
+            "numerator": 5286
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 215,
+            "numerator": 2
+          },
+          "minimizing_h": -107,
+          "shifted_crossing": {
+            "denominator": 231,
+            "numerator": -24865
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 215,
+            "numerator": 5288
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 215,
+            "numerator": 4
+          },
+          "minimizing_h": -106,
+          "shifted_crossing": {
+            "denominator": 231,
+            "numerator": -24650
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 11,
+        "coefficient": {
+          "denominator": 215,
+          "numerator": 5286
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 215,
+          "numerator": 2
+        },
+        "minimizing_h": -107,
+        "minimum_support_at_minimizer": 1
       },
       "continuous_envelope_coefficient": {
         "denominator": 7,
@@ -1966,6 +4007,39 @@
         "denominator": 77,
         "numerator": 416
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 425,
+            "numerator": 16516
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 425,
+            "numerator": 1
+          },
+          "minimizing_h": -332,
+          "shifted_crossing": {
+            "denominator": 441,
+            "numerator": -146743
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 425,
+            "numerator": 16517
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 425,
+            "numerator": 2
+          },
+          "minimizing_h": -331,
+          "shifted_crossing": {
+            "denominator": 441,
+            "numerator": -146318
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": null,
       "continuous_envelope_coefficient": {
         "denominator": 7,
         "numerator": 272
@@ -2005,6 +4079,51 @@
       "certified_linear_gain": {
         "denominator": 26,
         "numerator": 9
+      },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 477,
+            "numerator": 9251
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 477,
+            "numerator": 17
+          },
+          "minimizing_h": 1,
+          "shifted_crossing": {
+            "denominator": 247,
+            "numerator": 153
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 477,
+            "numerator": 9268
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 477,
+            "numerator": 34
+          },
+          "minimizing_h": 2,
+          "shifted_crossing": {
+            "denominator": 494,
+            "numerator": 783
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 19,
+        "coefficient": {
+          "denominator": 477,
+          "numerator": 9251
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 477,
+          "numerator": 17
+        },
+        "minimizing_h": 1,
+        "minimum_support_at_minimizer": 1
       },
       "continuous_envelope_coefficient": {
         "denominator": 26,
@@ -2046,6 +4165,51 @@
         "denominator": 910,
         "numerator": 5219
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 159,
+            "numerator": 6550
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 477,
+            "numerator": 1
+          },
+          "minimizing_h": -376,
+          "shifted_crossing": {
+            "denominator": 247,
+            "numerator": -92947
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 477,
+            "numerator": 19651
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 477,
+            "numerator": 2
+          },
+          "minimizing_h": -375,
+          "shifted_crossing": {
+            "denominator": 494,
+            "numerator": -185417
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 19,
+        "coefficient": {
+          "denominator": 159,
+          "numerator": 6550
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 477,
+          "numerator": 1
+        },
+        "minimizing_h": -376,
+        "minimum_support_at_minimizer": 1
+      },
       "continuous_envelope_coefficient": {
         "denominator": 26,
         "numerator": 1071
@@ -2086,6 +4250,39 @@
         "denominator": 55,
         "numerator": 19
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 133,
+            "numerator": 2712
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 266,
+            "numerator": 9
+          },
+          "minimizing_h": 1,
+          "shifted_crossing": {
+            "denominator": 275,
+            "numerator": 171
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 266,
+            "numerator": 5433
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 133,
+            "numerator": 9
+          },
+          "minimizing_h": 2,
+          "shifted_crossing": {
+            "denominator": 275,
+            "numerator": 437
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": null,
       "continuous_envelope_coefficient": {
         "denominator": 55,
         "numerator": 1119
@@ -2126,6 +4323,39 @@
         "denominator": 47,
         "numerator": 28
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 11,
+            "numerator": 205
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 88,
+            "numerator": 3
+          },
+          "minimizing_h": -12,
+          "shifted_crossing": {
+            "denominator": 47,
+            "numerator": -576
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 88,
+            "numerator": 1643
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 44,
+            "numerator": 3
+          },
+          "minimizing_h": -11,
+          "shifted_crossing": {
+            "denominator": 47,
+            "numerator": -532
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": null,
       "continuous_envelope_coefficient": {
         "denominator": 47,
         "numerator": 874
@@ -2166,6 +4396,39 @@
         "denominator": 15,
         "numerator": 13
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 23,
+            "numerator": 435
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 69,
+            "numerator": 2
+          },
+          "minimizing_h": -25,
+          "shifted_crossing": {
+            "denominator": 25,
+            "numerator": -642
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 69,
+            "numerator": 1307
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 69,
+            "numerator": 4
+          },
+          "minimizing_h": -24,
+          "shifted_crossing": {
+            "denominator": 25,
+            "numerator": -619
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": null,
       "continuous_envelope_coefficient": {
         "denominator": 15,
         "numerator": 283
@@ -2206,6 +4469,39 @@
         "denominator": 195,
         "numerator": 344
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 69,
+            "numerator": 1556
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 69,
+            "numerator": 1
+          },
+          "minimizing_h": -74,
+          "shifted_crossing": {
+            "denominator": 25,
+            "numerator": -1857
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 23,
+            "numerator": 519
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 69,
+            "numerator": 2
+          },
+          "minimizing_h": -73,
+          "shifted_crossing": {
+            "denominator": 25,
+            "numerator": -1834
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": null,
       "continuous_envelope_coefficient": {
         "denominator": 15,
         "numerator": 338
@@ -2246,6 +4542,39 @@
         "denominator": 893,
         "numerator": 2457
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 33,
+            "numerator": 904
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 132,
+            "numerator": 1
+          },
+          "minimizing_h": -137,
+          "shifted_crossing": {
+            "denominator": 47,
+            "numerator": -6463
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 132,
+            "numerator": 3617
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 66,
+            "numerator": 1
+          },
+          "minimizing_h": -136,
+          "shifted_crossing": {
+            "denominator": 47,
+            "numerator": -6419
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": null,
       "continuous_envelope_coefficient": {
         "denominator": 47,
         "numerator": 1287
@@ -2286,6 +4615,39 @@
         "denominator": 2035,
         "numerator": 12348
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 266,
+            "numerator": 11579
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 532,
+            "numerator": 1
+          },
+          "minimizing_h": -422,
+          "shifted_crossing": {
+            "denominator": 275,
+            "numerator": -116194
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 532,
+            "numerator": 23159
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 266,
+            "numerator": 1
+          },
+          "minimizing_h": -421,
+          "shifted_crossing": {
+            "denominator": 275,
+            "numerator": -115928
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": null,
       "continuous_envelope_coefficient": {
         "denominator": 55,
         "numerator": 2394
@@ -2326,6 +4688,39 @@
         "denominator": 29,
         "numerator": 10
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 590,
+            "numerator": 12619
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 590,
+            "numerator": 19
+          },
+          "minimizing_h": 1,
+          "shifted_crossing": {
+            "denominator": 609,
+            "numerator": 380
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 295,
+            "numerator": 6319
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 295,
+            "numerator": 19
+          },
+          "minimizing_h": 2,
+          "shifted_crossing": {
+            "denominator": 609,
+            "numerator": 970
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": null,
       "continuous_envelope_coefficient": {
         "denominator": 29,
         "numerator": 619
@@ -2366,6 +4761,39 @@
         "denominator": 377,
         "numerator": 2413
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 59,
+            "numerator": 2706
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 590,
+            "numerator": 1
+          },
+          "minimizing_h": -471,
+          "shifted_crossing": {
+            "denominator": 609,
+            "numerator": -287089
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 590,
+            "numerator": 27061
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 295,
+            "numerator": 1
+          },
+          "minimizing_h": -470,
+          "shifted_crossing": {
+            "denominator": 609,
+            "numerator": -286499
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": null,
       "continuous_envelope_coefficient": {
         "denominator": 29,
         "numerator": 1330
@@ -2406,6 +4834,39 @@
         "denominator": 61,
         "numerator": 21
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 651,
+            "numerator": 14573
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 651,
+            "numerator": 20
+          },
+          "minimizing_h": 1,
+          "shifted_crossing": {
+            "denominator": 671,
+            "numerator": 420
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 651,
+            "numerator": 14593
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 651,
+            "numerator": 40
+          },
+          "minimizing_h": 2,
+          "shifted_crossing": {
+            "denominator": 671,
+            "numerator": 1071
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": null,
       "continuous_envelope_coefficient": {
         "denominator": 61,
         "numerator": 1363
@@ -2445,6 +4906,51 @@
       "certified_linear_gain": {
         "denominator": 130,
         "numerator": 77
+      },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 106,
+            "numerator": 2145
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 159,
+            "numerator": 5
+          },
+          "minimizing_h": -13,
+          "shifted_crossing": {
+            "denominator": 169,
+            "numerator": -2272
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 318,
+            "numerator": 6445
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 159,
+            "numerator": 10
+          },
+          "minimizing_h": -12,
+          "shifted_crossing": {
+            "denominator": 169,
+            "numerator": -2113
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 13,
+        "coefficient": {
+          "denominator": 106,
+          "numerator": 2145
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 159,
+          "numerator": 5
+        },
+        "minimizing_h": -13,
+        "minimum_support_at_minimizer": 1
       },
       "continuous_envelope_coefficient": {
         "denominator": 26,
@@ -2486,6 +4992,39 @@
         "denominator": 7,
         "numerator": 8
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 45,
+            "numerator": 953
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 45,
+            "numerator": 1
+          },
+          "minimizing_h": -43,
+          "shifted_crossing": {
+            "denominator": 49,
+            "numerator": -2139
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 5,
+            "numerator": 106
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 45,
+            "numerator": 2
+          },
+          "minimizing_h": -42,
+          "shifted_crossing": {
+            "denominator": 49,
+            "numerator": -2094
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": null,
       "continuous_envelope_coefficient": {
         "denominator": 7,
         "numerator": 148
@@ -2526,6 +5065,39 @@
         "denominator": 539,
         "numerator": 775
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 45,
+            "numerator": 1007
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 225,
+            "numerator": 4
+          },
+          "minimizing_h": -60,
+          "shifted_crossing": {
+            "denominator": 49,
+            "numerator": -2980
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 225,
+            "numerator": 5039
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 225,
+            "numerator": 8
+          },
+          "minimizing_h": -59,
+          "shifted_crossing": {
+            "denominator": 49,
+            "numerator": -2935
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": null,
       "continuous_envelope_coefficient": {
         "denominator": 49,
         "numerator": 1095
@@ -2565,6 +5137,51 @@
       "certified_linear_gain": {
         "denominator": 182,
         "numerator": 555
+      },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 5,
+            "numerator": 151
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 530,
+            "numerator": 1
+          },
+          "minimizing_h": -171,
+          "shifted_crossing": {
+            "denominator": 169,
+            "numerator": -28896
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 318,
+            "numerator": 9605
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 159,
+            "numerator": 1
+          },
+          "minimizing_h": -170,
+          "shifted_crossing": {
+            "denominator": 169,
+            "numerator": -28737
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 13,
+        "coefficient": {
+          "denominator": 5,
+          "numerator": 151
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 530,
+          "numerator": 1
+        },
+        "minimizing_h": -171,
+        "minimum_support_at_minimizer": 1
       },
       "continuous_envelope_coefficient": {
         "denominator": 26,
@@ -2606,6 +5223,39 @@
         "denominator": 2501,
         "numerator": 16840
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 651,
+            "numerator": 31378
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 651,
+            "numerator": 1
+          },
+          "minimizing_h": -522,
+          "shifted_crossing": {
+            "denominator": 671,
+            "numerator": -350909
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 5,
+            "numerator": 241
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 1085,
+            "numerator": 2
+          },
+          "minimizing_h": -522,
+          "shifted_crossing": {
+            "denominator": 671,
+            "numerator": -350258
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": null,
       "continuous_envelope_coefficient": {
         "denominator": 61,
         "numerator": 2940
@@ -2645,6 +5295,51 @@
       "certified_linear_gain": {
         "denominator": 32,
         "numerator": 11
+      },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 715,
+            "numerator": 16719
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 715,
+            "numerator": 21
+          },
+          "minimizing_h": 1,
+          "shifted_crossing": {
+            "denominator": 368,
+            "numerator": 231
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 143,
+            "numerator": 3348
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 715,
+            "numerator": 42
+          },
+          "minimizing_h": 2,
+          "shifted_crossing": {
+            "denominator": 736,
+            "numerator": 1177
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 23,
+        "coefficient": {
+          "denominator": 715,
+          "numerator": 16719
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 715,
+          "numerator": 21
+        },
+        "minimizing_h": 1,
+        "minimum_support_at_minimizer": 1
       },
       "continuous_envelope_coefficient": {
         "denominator": 32,
@@ -2686,6 +5381,51 @@
         "denominator": 7,
         "numerator": 6
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 265,
+            "numerator": 5572
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 265,
+            "numerator": 7
+          },
+          "minimizing_h": -29,
+          "shifted_crossing": {
+            "denominator": 286,
+            "numerator": -8315
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 265,
+            "numerator": 5579
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 265,
+            "numerator": 14
+          },
+          "minimizing_h": -28,
+          "shifted_crossing": {
+            "denominator": 143,
+            "numerator": -4025
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 11,
+        "coefficient": {
+          "denominator": 265,
+          "numerator": 5572
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 265,
+          "numerator": 7
+        },
+        "minimizing_h": -29,
+        "minimum_support_at_minimizer": 1
+      },
       "continuous_envelope_coefficient": {
         "denominator": 1,
         "numerator": 21
@@ -2725,6 +5465,51 @@
       "certified_linear_gain": {
         "denominator": 65,
         "numerator": 133
+      },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 7,
+            "numerator": 181
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 1855,
+            "numerator": 1
+          },
+          "minimizing_h": -103,
+          "shifted_crossing": {
+            "denominator": 286,
+            "numerator": -29457
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 53,
+            "numerator": 1371
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 265,
+            "numerator": 3
+          },
+          "minimizing_h": -102,
+          "shifted_crossing": {
+            "denominator": 143,
+            "numerator": -14596
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 11,
+        "coefficient": {
+          "denominator": 7,
+          "numerator": 181
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 1855,
+          "numerator": 1
+        },
+        "minimizing_h": -103,
+        "minimum_support_at_minimizer": 1
       },
       "continuous_envelope_coefficient": {
         "denominator": 13,
@@ -2766,6 +5551,51 @@
         "denominator": 1376,
         "numerator": 9723
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 715,
+            "numerator": 36131
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 715,
+            "numerator": 1
+          },
+          "minimizing_h": -577,
+          "shifted_crossing": {
+            "denominator": 92,
+            "numerator": -53101
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 715,
+            "numerator": 36132
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 715,
+            "numerator": 2
+          },
+          "minimizing_h": -576,
+          "shifted_crossing": {
+            "denominator": 736,
+            "numerator": -424093
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 23,
+        "coefficient": {
+          "denominator": 715,
+          "numerator": 36132
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 715,
+          "numerator": 2
+        },
+        "minimizing_h": -576,
+        "minimum_support_at_minimizer": 1
+      },
       "continuous_envelope_coefficient": {
         "denominator": 32,
         "numerator": 1617
@@ -2806,6 +5636,39 @@
         "denominator": 67,
         "numerator": 23
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 391,
+            "numerator": 9533
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 391,
+            "numerator": 11
+          },
+          "minimizing_h": 1,
+          "shifted_crossing": {
+            "denominator": 402,
+            "numerator": 253
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 391,
+            "numerator": 9544
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 391,
+            "numerator": 22
+          },
+          "minimizing_h": 2,
+          "shifted_crossing": {
+            "denominator": 201,
+            "numerator": 322
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": null,
       "continuous_envelope_coefficient": {
         "denominator": 67,
         "numerator": 1631
@@ -2846,6 +5709,39 @@
         "denominator": 95,
         "numerator": 56
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 377,
+            "numerator": 8232
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 377,
+            "numerator": 11
+          },
+          "minimizing_h": -14,
+          "shifted_crossing": {
+            "denominator": 399,
+            "numerator": -5839
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 377,
+            "numerator": 8243
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 377,
+            "numerator": 22
+          },
+          "minimizing_h": -13,
+          "shifted_crossing": {
+            "denominator": 399,
+            "numerator": -5462
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": null,
       "continuous_envelope_coefficient": {
         "denominator": 19,
         "numerator": 414
@@ -2886,6 +5782,39 @@
         "denominator": 23,
         "numerator": 77
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 377,
+            "numerator": 12443
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 377,
+            "numerator": 2
+          },
+          "minimizing_h": -208,
+          "shifted_crossing": {
+            "denominator": 399,
+            "numerator": -83014
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 377,
+            "numerator": 12445
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 377,
+            "numerator": 4
+          },
+          "minimizing_h": -207,
+          "shifted_crossing": {
+            "denominator": 399,
+            "numerator": -82637
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": null,
       "continuous_envelope_coefficient": {
         "denominator": 1,
         "numerator": 33
@@ -2926,6 +5855,39 @@
         "denominator": 1005,
         "numerator": 7436
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 391,
+            "numerator": 20671
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 782,
+            "numerator": 1
+          },
+          "minimizing_h": -634,
+          "shifted_crossing": {
+            "denominator": 402,
+            "numerator": -254897
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 782,
+            "numerator": 41343
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 391,
+            "numerator": 1
+          },
+          "minimizing_h": -633,
+          "shifted_crossing": {
+            "denominator": 201,
+            "numerator": -127253
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": null,
       "continuous_envelope_coefficient": {
         "denominator": 67,
         "numerator": 3542
@@ -2965,6 +5927,51 @@
       "certified_linear_gain": {
         "denominator": 35,
         "numerator": 12
+      },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 852,
+            "numerator": 21623
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 852,
+            "numerator": 23
+          },
+          "minimizing_h": 1,
+          "shifted_crossing": {
+            "denominator": 875,
+            "numerator": 552
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 426,
+            "numerator": 10823
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 426,
+            "numerator": 23
+          },
+          "minimizing_h": 2,
+          "shifted_crossing": {
+            "denominator": 875,
+            "numerator": 1404
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 5,
+        "coefficient": {
+          "denominator": 852,
+          "numerator": 21623
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 852,
+          "numerator": 23
+        },
+        "minimizing_h": 1,
+        "minimum_support_at_minimizer": 1
       },
       "continuous_envelope_coefficient": {
         "denominator": 35,
@@ -3006,6 +6013,51 @@
         "denominator": 235,
         "numerator": 1817
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 213,
+            "numerator": 11758
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 852,
+            "numerator": 1
+          },
+          "minimizing_h": -693,
+          "shifted_crossing": {
+            "denominator": 875,
+            "numerator": -606923
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 852,
+            "numerator": 47033
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 426,
+            "numerator": 1
+          },
+          "minimizing_h": -692,
+          "shifted_crossing": {
+            "denominator": 875,
+            "numerator": -606071
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 5,
+        "coefficient": {
+          "denominator": 213,
+          "numerator": 11758
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 852,
+          "numerator": 1
+        },
+        "minimizing_h": -693,
+        "minimum_support_at_minimizer": 1
+      },
       "continuous_envelope_coefficient": {
         "denominator": 5,
         "numerator": 276
@@ -3046,6 +6098,39 @@
         "denominator": 73,
         "numerator": 25
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 925,
+            "numerator": 24399
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 925,
+            "numerator": 24
+          },
+          "minimizing_h": 1,
+          "shifted_crossing": {
+            "denominator": 949,
+            "numerator": 600
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 925,
+            "numerator": 24423
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 925,
+            "numerator": 48
+          },
+          "minimizing_h": 2,
+          "shifted_crossing": {
+            "denominator": 949,
+            "numerator": 1525
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": null,
       "continuous_envelope_coefficient": {
         "denominator": 73,
         "numerator": 1923
@@ -3086,6 +6171,39 @@
         "denominator": 155,
         "numerator": 91
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 147,
+            "numerator": 3445
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 147,
+            "numerator": 4
+          },
+          "minimizing_h": -15,
+          "shifted_crossing": {
+            "denominator": 155,
+            "numerator": -2453
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 147,
+            "numerator": 3449
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 147,
+            "numerator": 8
+          },
+          "minimizing_h": -14,
+          "shifted_crossing": {
+            "denominator": 155,
+            "numerator": -2306
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": null,
       "continuous_envelope_coefficient": {
         "denominator": 31,
         "numerator": 725
@@ -3126,6 +6244,39 @@
         "denominator": 413,
         "numerator": 351
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 165,
+            "numerator": 3823
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 165,
+            "numerator": 4
+          },
+          "minimizing_h": -32,
+          "shifted_crossing": {
+            "denominator": 59,
+            "numerator": -1916
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 165,
+            "numerator": 3827
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 165,
+            "numerator": 8
+          },
+          "minimizing_h": -31,
+          "shifted_crossing": {
+            "denominator": 59,
+            "numerator": -1861
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": null,
       "continuous_envelope_coefficient": {
         "denominator": 59,
         "numerator": 1365
@@ -3165,6 +6316,51 @@
       "certified_linear_gain": {
         "denominator": 87,
         "numerator": 98
+      },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 295,
+            "numerator": 7026
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 295,
+            "numerator": 6
+          },
+          "minimizing_h": -50,
+          "shifted_crossing": {
+            "denominator": 319,
+            "numerator": -16029
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 295,
+            "numerator": 7032
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 295,
+            "numerator": 12
+          },
+          "minimizing_h": -49,
+          "shifted_crossing": {
+            "denominator": 319,
+            "numerator": -15734
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 11,
+        "coefficient": {
+          "denominator": 295,
+          "numerator": 7026
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 295,
+          "numerator": 6
+        },
+        "minimizing_h": -50,
+        "minimum_support_at_minimizer": 1
       },
       "continuous_envelope_coefficient": {
         "denominator": 29,
@@ -3206,6 +6402,51 @@
         "denominator": 377,
         "numerator": 645
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 59,
+            "numerator": 1545
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 295,
+            "numerator": 4
+          },
+          "minimizing_h": -90,
+          "shifted_crossing": {
+            "denominator": 319,
+            "numerator": -28745
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 5,
+            "numerator": 131
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 295,
+            "numerator": 8
+          },
+          "minimizing_h": -89,
+          "shifted_crossing": {
+            "denominator": 319,
+            "numerator": -28450
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 11,
+        "coefficient": {
+          "denominator": 59,
+          "numerator": 1545
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 295,
+          "numerator": 4
+        },
+        "minimizing_h": -90,
+        "minimum_support_at_minimizer": 1
+      },
       "continuous_envelope_coefficient": {
         "denominator": 29,
         "numerator": 759
@@ -3246,6 +6487,39 @@
         "denominator": 1003,
         "numerator": 2336
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 55,
+            "numerator": 1604
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 110,
+            "numerator": 1
+          },
+          "minimizing_h": -136,
+          "shifted_crossing": {
+            "denominator": 59,
+            "numerator": -8041
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 110,
+            "numerator": 3209
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 55,
+            "numerator": 1
+          },
+          "minimizing_h": -135,
+          "shifted_crossing": {
+            "denominator": 59,
+            "numerator": -7986
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": null,
       "continuous_envelope_coefficient": {
         "denominator": 59,
         "numerator": 1720
@@ -3286,6 +6560,39 @@
         "denominator": 775,
         "numerator": 2826
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 441,
+            "numerator": 15794
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 441,
+            "numerator": 2
+          },
+          "minimizing_h": -248,
+          "shifted_crossing": {
+            "denominator": 155,
+            "numerator": -38553
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 441,
+            "numerator": 15796
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 441,
+            "numerator": 4
+          },
+          "minimizing_h": -247,
+          "shifted_crossing": {
+            "denominator": 155,
+            "numerator": -38406
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": null,
       "continuous_envelope_coefficient": {
         "denominator": 31,
         "numerator": 1110
@@ -3326,6 +6633,39 @@
         "denominator": 3577,
         "numerator": 28848
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 925,
+            "numerator": 53221
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 925,
+            "numerator": 1
+          },
+          "minimizing_h": -755,
+          "shifted_crossing": {
+            "denominator": 949,
+            "numerator": -717299
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 925,
+            "numerator": 53222
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 925,
+            "numerator": 2
+          },
+          "minimizing_h": -754,
+          "shifted_crossing": {
+            "denominator": 949,
+            "numerator": -716374
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": null,
       "continuous_envelope_coefficient": {
         "denominator": 73,
         "numerator": 4200
@@ -3365,6 +6705,51 @@
       "certified_linear_gain": {
         "denominator": 38,
         "numerator": 13
+      },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 1001,
+            "numerator": 27403
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 1001,
+            "numerator": 25
+          },
+          "minimizing_h": 1,
+          "shifted_crossing": {
+            "denominator": 513,
+            "numerator": 325
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 1001,
+            "numerator": 27428
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 1001,
+            "numerator": 50
+          },
+          "minimizing_h": 2,
+          "shifted_crossing": {
+            "denominator": 1026,
+            "numerator": 1651
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 3,
+        "coefficient": {
+          "denominator": 1001,
+          "numerator": 27428
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 1001,
+          "numerator": 50
+        },
+        "minimizing_h": 2,
+        "minimum_support_at_minimizer": 1
       },
       "continuous_envelope_coefficient": {
         "denominator": 38,
@@ -3406,6 +6791,51 @@
         "denominator": 22,
         "numerator": 31
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 61,
+            "numerator": 1557
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 61,
+            "numerator": 1
+          },
+          "minimizing_h": -71,
+          "shifted_crossing": {
+            "denominator": 33,
+            "numerator": -2362
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 61,
+            "numerator": 1558
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 61,
+            "numerator": 2
+          },
+          "minimizing_h": -70,
+          "shifted_crossing": {
+            "denominator": 66,
+            "numerator": -4663
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 11,
+        "coefficient": {
+          "denominator": 61,
+          "numerator": 1557
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 61,
+          "numerator": 1
+        },
+        "minimizing_h": -71,
+        "minimum_support_at_minimizer": 1
+      },
       "continuous_envelope_coefficient": {
         "denominator": 2,
         "numerator": 51
@@ -3445,6 +6875,51 @@
       "certified_linear_gain": {
         "denominator": 646,
         "numerator": 5425
+      },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 77,
+            "numerator": 4610
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 1001,
+            "numerator": 1
+          },
+          "minimizing_h": -820,
+          "shifted_crossing": {
+            "denominator": 513,
+            "numerator": -421037
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 1001,
+            "numerator": 59931
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 1001,
+            "numerator": 2
+          },
+          "minimizing_h": -819,
+          "shifted_crossing": {
+            "denominator": 54,
+            "numerator": -44267
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 3,
+        "coefficient": {
+          "denominator": 77,
+          "numerator": 4610
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 1001,
+          "numerator": 1
+        },
+        "minimizing_h": -820,
+        "minimum_support_at_minimizer": 1
       },
       "continuous_envelope_coefficient": {
         "denominator": 38,
@@ -3486,6 +6961,39 @@
         "denominator": 79,
         "numerator": 27
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 270,
+            "numerator": 7661
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 540,
+            "numerator": 13
+          },
+          "minimizing_h": 1,
+          "shifted_crossing": {
+            "denominator": 553,
+            "numerator": 351
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 108,
+            "numerator": 3067
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 270,
+            "numerator": 13
+          },
+          "minimizing_h": 2,
+          "shifted_crossing": {
+            "denominator": 553,
+            "numerator": 891
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": null,
       "continuous_envelope_coefficient": {
         "denominator": 79,
         "numerator": 2239
@@ -3525,6 +7033,51 @@
       "certified_linear_gain": {
         "denominator": 335,
         "numerator": 196
+      },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 102,
+            "numerator": 2551
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 102,
+            "numerator": 1
+          },
+          "minimizing_h": -17,
+          "shifted_crossing": {
+            "denominator": 268,
+            "numerator": -4561
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 85,
+            "numerator": 2128
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 85,
+            "numerator": 3
+          },
+          "minimizing_h": -16,
+          "shifted_crossing": {
+            "denominator": 134,
+            "numerator": -2153
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 2,
+        "coefficient": {
+          "denominator": 102,
+          "numerator": 2551
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 102,
+          "numerator": 1
+        },
+        "minimizing_h": -17,
+        "minimum_support_at_minimizer": 1
       },
       "continuous_envelope_coefficient": {
         "denominator": 67,
@@ -3566,6 +7119,51 @@
         "denominator": 201,
         "numerator": 793
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 255,
+            "numerator": 9847
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 3315,
+            "numerator": 1
+          },
+          "minimizing_h": -293,
+          "shifted_crossing": {
+            "denominator": 268,
+            "numerator": -78525
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 255,
+            "numerator": 9848
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 3315,
+            "numerator": 14
+          },
+          "minimizing_h": -292,
+          "shifted_crossing": {
+            "denominator": 134,
+            "numerator": -39135
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 2,
+        "coefficient": {
+          "denominator": 255,
+          "numerator": 9847
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 3315,
+          "numerator": 1
+        },
+        "minimizing_h": -293,
+        "minimum_support_at_minimizer": 1
+      },
       "continuous_envelope_coefficient": {
         "denominator": 67,
         "numerator": 2587
@@ -3606,6 +7204,39 @@
         "denominator": 4187,
         "numerator": 36556
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 54,
+            "numerator": 3359
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 1080,
+            "numerator": 1
+          },
+          "minimizing_h": -888,
+          "shifted_crossing": {
+            "denominator": 553,
+            "numerator": -491224
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 1080,
+            "numerator": 67181
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 540,
+            "numerator": 1
+          },
+          "minimizing_h": -887,
+          "shifted_crossing": {
+            "denominator": 553,
+            "numerator": -490684
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": null,
       "continuous_envelope_coefficient": {
         "denominator": 79,
         "numerator": 4914
@@ -3645,6 +7276,51 @@
       "certified_linear_gain": {
         "denominator": 41,
         "numerator": 14
+      },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 1162,
+            "numerator": 34131
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 1162,
+            "numerator": 27
+          },
+          "minimizing_h": 1,
+          "shifted_crossing": {
+            "denominator": 1189,
+            "numerator": 756
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 581,
+            "numerator": 17079
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 581,
+            "numerator": 27
+          },
+          "minimizing_h": 2,
+          "shifted_crossing": {
+            "denominator": 1189,
+            "numerator": 1918
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 29,
+        "coefficient": {
+          "denominator": 1162,
+          "numerator": 34131
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 1162,
+          "numerator": 27
+        },
+        "minimizing_h": 1,
+        "minimum_support_at_minimizer": 1
       },
       "continuous_envelope_coefficient": {
         "denominator": 41,
@@ -3686,6 +7362,51 @@
         "denominator": 77,
         "numerator": 65
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 67,
+            "numerator": 1696
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 134,
+            "numerator": 3
+          },
+          "minimizing_h": -35,
+          "shifted_crossing": {
+            "denominator": 143,
+            "numerator": -5131
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 3,
+            "numerator": 76
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 402,
+            "numerator": 17
+          },
+          "minimizing_h": -35,
+          "shifted_crossing": {
+            "denominator": 143,
+            "numerator": -4997
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 13,
+        "coefficient": {
+          "denominator": 67,
+          "numerator": 1696
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 134,
+          "numerator": 3
+        },
+        "minimizing_h": -35,
+        "minimum_support_at_minimizer": 1
+      },
       "continuous_envelope_coefficient": {
         "denominator": 11,
         "numerator": 278
@@ -3725,6 +7446,51 @@
       "certified_linear_gain": {
         "denominator": 209,
         "numerator": 546
+      },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 67,
+            "numerator": 2175
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 134,
+            "numerator": 1
+          },
+          "minimizing_h": -174,
+          "shifted_crossing": {
+            "denominator": 13,
+            "numerator": -2264
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 134,
+            "numerator": 4351
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 67,
+            "numerator": 1
+          },
+          "minimizing_h": -173,
+          "shifted_crossing": {
+            "denominator": 143,
+            "numerator": -24770
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 13,
+        "coefficient": {
+          "denominator": 67,
+          "numerator": 2175
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 134,
+          "numerator": 1
+        },
+        "minimizing_h": -174,
+        "minimum_support_at_minimizer": 1
       },
       "continuous_envelope_coefficient": {
         "denominator": 11,
@@ -3766,6 +7532,51 @@
         "denominator": 2255,
         "numerator": 20439
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 1162,
+            "numerator": 74993
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 1162,
+            "numerator": 1
+          },
+          "minimizing_h": -958,
+          "shifted_crossing": {
+            "denominator": 1189,
+            "numerator": -1139669
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 581,
+            "numerator": 37497
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 581,
+            "numerator": 1
+          },
+          "minimizing_h": -957,
+          "shifted_crossing": {
+            "denominator": 1189,
+            "numerator": -1138507
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 29,
+        "coefficient": {
+          "denominator": 1162,
+          "numerator": 74993
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 1162,
+          "numerator": 1
+        },
+        "minimizing_h": -958,
+        "minimum_support_at_minimizer": 1
+      },
       "continuous_envelope_coefficient": {
         "denominator": 41,
         "numerator": 2646
@@ -3806,6 +7617,39 @@
         "denominator": 85,
         "numerator": 29
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 1247,
+            "numerator": 37873
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 1247,
+            "numerator": 28
+          },
+          "minimizing_h": 1,
+          "shifted_crossing": {
+            "denominator": 1275,
+            "numerator": 812
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 1247,
+            "numerator": 37901
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 1247,
+            "numerator": 56
+          },
+          "minimizing_h": 2,
+          "shifted_crossing": {
+            "denominator": 1275,
+            "numerator": 2059
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": null,
       "continuous_envelope_coefficient": {
         "denominator": 85,
         "numerator": 2579
@@ -3845,6 +7689,51 @@
       "certified_linear_gain": {
         "denominator": 12,
         "numerator": 7
+      },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 584,
+            "numerator": 15541
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 292,
+            "numerator": 7
+          },
+          "minimizing_h": -18,
+          "shifted_crossing": {
+            "denominator": 306,
+            "numerator": -5573
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 584,
+            "numerator": 15555
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 146,
+            "numerator": 7
+          },
+          "minimizing_h": -17,
+          "shifted_crossing": {
+            "denominator": 306,
+            "numerator": -5281
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 17,
+        "coefficient": {
+          "denominator": 584,
+          "numerator": 15541
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 292,
+          "numerator": 7
+        },
+        "minimizing_h": -18,
+        "minimum_support_at_minimizer": 1
       },
       "continuous_envelope_coefficient": {
         "denominator": 12,
@@ -3886,6 +7775,39 @@
         "denominator": 201,
         "numerator": 224
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 187,
+            "numerator": 4952
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 374,
+            "numerator": 7
+          },
+          "minimizing_h": -56,
+          "shifted_crossing": {
+            "denominator": 201,
+            "numerator": -11429
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 2,
+            "numerator": 53
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 187,
+            "numerator": 7
+          },
+          "minimizing_h": -56,
+          "shifted_crossing": {
+            "denominator": 201,
+            "numerator": -11242
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": null,
       "continuous_envelope_coefficient": {
         "denominator": 67,
         "numerator": 1772
@@ -3926,6 +7848,39 @@
         "denominator": 67,
         "numerator": 133
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 1,
+            "numerator": 30
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 187,
+            "numerator": 1
+          },
+          "minimizing_h": -125,
+          "shifted_crossing": {
+            "denominator": 201,
+            "numerator": -25118
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 187,
+            "numerator": 5611
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 187,
+            "numerator": 2
+          },
+          "minimizing_h": -124,
+          "shifted_crossing": {
+            "denominator": 201,
+            "numerator": -24931
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": null,
       "continuous_envelope_coefficient": {
         "denominator": 67,
         "numerator": 2009
@@ -3965,6 +7920,51 @@
       "certified_linear_gain": {
         "denominator": 348,
         "numerator": 1477
+      },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 584,
+            "numerator": 24191
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 292,
+            "numerator": 1
+          },
+          "minimizing_h": -340,
+          "shifted_crossing": {
+            "denominator": 306,
+            "numerator": -104309
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 584,
+            "numerator": 24193
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 146,
+            "numerator": 1
+          },
+          "minimizing_h": -339,
+          "shifted_crossing": {
+            "denominator": 306,
+            "numerator": -104017
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 17,
+        "coefficient": {
+          "denominator": 584,
+          "numerator": 24191
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 292,
+          "numerator": 1
+        },
+        "minimizing_h": -340,
+        "minimum_support_at_minimizer": 1
       },
       "continuous_envelope_coefficient": {
         "denominator": 12,
@@ -4006,6 +8006,39 @@
         "denominator": 1615,
         "numerator": 15176
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 1247,
+            "numerator": 83389
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 1247,
+            "numerator": 1
+          },
+          "minimizing_h": -1031,
+          "shifted_crossing": {
+            "denominator": 1275,
+            "numerator": -1315033
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 1247,
+            "numerator": 83390
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 1247,
+            "numerator": 2
+          },
+          "minimizing_h": -1030,
+          "shifted_crossing": {
+            "denominator": 1275,
+            "numerator": -1313786
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": null,
       "continuous_envelope_coefficient": {
         "denominator": 85,
         "numerator": 5684
@@ -4045,6 +8078,51 @@
       "certified_linear_gain": {
         "denominator": 44,
         "numerator": 15
+      },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 1335,
+            "numerator": 41879
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 1335,
+            "numerator": 29
+          },
+          "minimizing_h": 1,
+          "shifted_crossing": {
+            "denominator": 682,
+            "numerator": 435
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 1335,
+            "numerator": 41908
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 1335,
+            "numerator": 58
+          },
+          "minimizing_h": 2,
+          "shifted_crossing": {
+            "denominator": 1364,
+            "numerator": 2205
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 31,
+        "coefficient": {
+          "denominator": 1335,
+          "numerator": 41879
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 1335,
+          "numerator": 29
+        },
+        "minimizing_h": 1,
+        "minimum_support_at_minimizer": 1
       },
       "continuous_envelope_coefficient": {
         "denominator": 44,
@@ -4086,6 +8164,51 @@
         "denominator": 2596,
         "numerator": 25259
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 267,
+            "numerator": 18478
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 1335,
+            "numerator": 1
+          },
+          "minimizing_h": -1106,
+          "shifted_crossing": {
+            "denominator": 341,
+            "numerator": -377471
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 445,
+            "numerator": 30797
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 1335,
+            "numerator": 2
+          },
+          "minimizing_h": -1105,
+          "shifted_crossing": {
+            "denominator": 1364,
+            "numerator": -1508549
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 31,
+        "coefficient": {
+          "denominator": 267,
+          "numerator": 18478
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 1335,
+          "numerator": 1
+        },
+        "minimizing_h": -1106,
+        "minimum_support_at_minimizer": 1
+      },
       "continuous_envelope_coefficient": {
         "denominator": 44,
         "numerator": 3045
@@ -4125,6 +8248,51 @@
       "certified_linear_gain": {
         "denominator": 91,
         "numerator": 31
+      },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 713,
+            "numerator": 23079
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 713,
+            "numerator": 15
+          },
+          "minimizing_h": 1,
+          "shifted_crossing": {
+            "denominator": 728,
+            "numerator": 465
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 713,
+            "numerator": 23094
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 713,
+            "numerator": 30
+          },
+          "minimizing_h": 2,
+          "shifted_crossing": {
+            "denominator": 364,
+            "numerator": 589
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 2,
+        "coefficient": {
+          "denominator": 713,
+          "numerator": 23079
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 713,
+          "numerator": 15
+        },
+        "minimizing_h": 1,
+        "minimum_support_at_minimizer": 1
       },
       "continuous_envelope_coefficient": {
         "denominator": 91,
@@ -4166,6 +8334,39 @@
         "denominator": 55,
         "numerator": 32
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 221,
+            "numerator": 6235
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 221,
+            "numerator": 5
+          },
+          "minimizing_h": -19,
+          "shifted_crossing": {
+            "denominator": 231,
+            "numerator": -4483
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 17,
+            "numerator": 480
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 221,
+            "numerator": 10
+          },
+          "minimizing_h": -18,
+          "shifted_crossing": {
+            "denominator": 231,
+            "numerator": -4262
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": null,
       "continuous_envelope_coefficient": {
         "denominator": 11,
         "numerator": 310
@@ -4206,6 +8407,39 @@
         "denominator": 511,
         "numerator": 429
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 481,
+            "numerator": 13197
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 481,
+            "numerator": 10
+          },
+          "minimizing_h": -39,
+          "shifted_crossing": {
+            "denominator": 511,
+            "numerator": -20078
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 481,
+            "numerator": 13207
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 481,
+            "numerator": 20
+          },
+          "minimizing_h": -38,
+          "shifted_crossing": {
+            "denominator": 511,
+            "numerator": -19597
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": null,
       "continuous_envelope_coefficient": {
         "denominator": 73,
         "numerator": 2001
@@ -4246,6 +8480,39 @@
         "denominator": 781,
         "numerator": 1085
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 22,
+            "numerator": 631
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 66,
+            "numerator": 1
+          },
+          "minimizing_h": -82,
+          "shifted_crossing": {
+            "denominator": 71,
+            "numerator": -5849
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 33,
+            "numerator": 947
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 33,
+            "numerator": 1
+          },
+          "minimizing_h": -81,
+          "shifted_crossing": {
+            "denominator": 71,
+            "numerator": -5783
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": null,
       "continuous_envelope_coefficient": {
         "denominator": 71,
         "numerator": 2035
@@ -4286,6 +8553,39 @@
         "denominator": 923,
         "numerator": 1548
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 198,
+            "numerator": 5909
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 99,
+            "numerator": 1
+          },
+          "minimizing_h": -106,
+          "shifted_crossing": {
+            "denominator": 71,
+            "numerator": -7530
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 132,
+            "numerator": 3941
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 44,
+            "numerator": 1
+          },
+          "minimizing_h": -105,
+          "shifted_crossing": {
+            "denominator": 71,
+            "numerator": -7464
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": null,
       "continuous_envelope_coefficient": {
         "denominator": 71,
         "numerator": 2118
@@ -4326,6 +8626,39 @@
         "denominator": 511,
         "numerator": 1480
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 481,
+            "numerator": 17202
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 481,
+            "numerator": 3
+          },
+          "minimizing_h": -216,
+          "shifted_crossing": {
+            "denominator": 511,
+            "numerator": -110679
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 13,
+            "numerator": 465
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 481,
+            "numerator": 6
+          },
+          "minimizing_h": -215,
+          "shifted_crossing": {
+            "denominator": 511,
+            "numerator": -110198
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": null,
       "continuous_envelope_coefficient": {
         "denominator": 73,
         "numerator": 2610
@@ -4366,6 +8699,39 @@
         "denominator": 2387,
         "numerator": 10845
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 663,
+            "numerator": 29321
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 663,
+            "numerator": 2
+          },
+          "minimizing_h": -392,
+          "shifted_crossing": {
+            "denominator": 231,
+            "numerator": -90634
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 663,
+            "numerator": 29323
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 663,
+            "numerator": 4
+          },
+          "minimizing_h": -391,
+          "shifted_crossing": {
+            "denominator": 231,
+            "numerator": -90413
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": null,
       "continuous_envelope_coefficient": {
         "denominator": 77,
         "numerator": 3405
@@ -4405,6 +8771,51 @@
       "certified_linear_gain": {
         "denominator": 793,
         "numerator": 7980
+      },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 1426,
+            "numerator": 102015
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 1426,
+            "numerator": 1
+          },
+          "minimizing_h": -1185,
+          "shifted_crossing": {
+            "denominator": 728,
+            "numerator": -862807
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 713,
+            "numerator": 51008
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 713,
+            "numerator": 1
+          },
+          "minimizing_h": -1184,
+          "shifted_crossing": {
+            "denominator": 364,
+            "numerator": -431047
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 2,
+        "coefficient": {
+          "denominator": 1426,
+          "numerator": 102015
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 1426,
+          "numerator": 1
+        },
+        "minimizing_h": -1185,
+        "minimum_support_at_minimizer": 1
       },
       "continuous_envelope_coefficient": {
         "denominator": 13,
@@ -4446,6 +8857,39 @@
         "denominator": 47,
         "numerator": 16
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 1520,
+            "numerator": 50719
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 1520,
+            "numerator": 31
+          },
+          "minimizing_h": 1,
+          "shifted_crossing": {
+            "denominator": 1551,
+            "numerator": 992
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 152,
+            "numerator": 5075
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 760,
+            "numerator": 31
+          },
+          "minimizing_h": 2,
+          "shifted_crossing": {
+            "denominator": 1551,
+            "numerator": 2512
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": null,
       "continuous_envelope_coefficient": {
         "denominator": 47,
         "numerator": 1567
@@ -4486,6 +8930,39 @@
         "denominator": 987,
         "numerator": 10261
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 1520,
+            "numerator": 112287
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 1520,
+            "numerator": 1
+          },
+          "minimizing_h": -1266,
+          "shifted_crossing": {
+            "denominator": 1551,
+            "numerator": -1963663
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 95,
+            "numerator": 7018
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 760,
+            "numerator": 1
+          },
+          "minimizing_h": -1265,
+          "shifted_crossing": {
+            "denominator": 1551,
+            "numerator": -1962143
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": null,
       "continuous_envelope_coefficient": {
         "denominator": 47,
         "numerator": 3472
@@ -4526,6 +9003,39 @@
         "denominator": 97,
         "numerator": 33
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 1617,
+            "numerator": 55571
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 1617,
+            "numerator": 32
+          },
+          "minimizing_h": 1,
+          "shifted_crossing": {
+            "denominator": 1649,
+            "numerator": 1056
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 1617,
+            "numerator": 55603
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 1617,
+            "numerator": 64
+          },
+          "minimizing_h": 2,
+          "shifted_crossing": {
+            "denominator": 1649,
+            "numerator": 2673
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": null,
       "continuous_envelope_coefficient": {
         "denominator": 97,
         "numerator": 3331
@@ -4565,6 +9075,51 @@
       "certified_linear_gain": {
         "denominator": 205,
         "numerator": 119
+      },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 747,
+            "numerator": 22271
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 747,
+            "numerator": 16
+          },
+          "minimizing_h": -20,
+          "shifted_crossing": {
+            "denominator": 779,
+            "numerator": -16049
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 249,
+            "numerator": 7429
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 747,
+            "numerator": 32
+          },
+          "minimizing_h": -19,
+          "shifted_crossing": {
+            "denominator": 779,
+            "numerator": -15302
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 19,
+        "coefficient": {
+          "denominator": 747,
+          "numerator": 22271
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 747,
+          "numerator": 16
+        },
+        "minimizing_h": -20,
+        "minimum_support_at_minimizer": 1
       },
       "continuous_envelope_coefficient": {
         "denominator": 41,
@@ -4606,6 +9161,51 @@
         "denominator": 19,
         "numerator": 21
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 77,
+            "numerator": 2243
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 231,
+            "numerator": 4
+          },
+          "minimizing_h": -63,
+          "shifted_crossing": {
+            "denominator": 247,
+            "numerator": -15681
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 231,
+            "numerator": 6733
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 231,
+            "numerator": 8
+          },
+          "minimizing_h": -62,
+          "shifted_crossing": {
+            "denominator": 247,
+            "numerator": -15450
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 13,
+        "coefficient": {
+          "denominator": 77,
+          "numerator": 2243
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 231,
+          "numerator": 4
+        },
+        "minimizing_h": -63,
+        "minimum_support_at_minimizer": 1
+      },
       "continuous_envelope_coefficient": {
         "denominator": 19,
         "numerator": 553
@@ -4645,6 +9245,51 @@
       "certified_linear_gain": {
         "denominator": 323,
         "numerator": 730
+      },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 231,
+            "numerator": 7808
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 231,
+            "numerator": 2
+          },
+          "minimizing_h": -165,
+          "shifted_crossing": {
+            "denominator": 247,
+            "numerator": -40849
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 21,
+            "numerator": 710
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 231,
+            "numerator": 4
+          },
+          "minimizing_h": -164,
+          "shifted_crossing": {
+            "denominator": 247,
+            "numerator": -40618
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 13,
+        "coefficient": {
+          "denominator": 231,
+          "numerator": 7808
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 231,
+          "numerator": 2
+        },
+        "minimizing_h": -165,
+        "minimum_support_at_minimizer": 1
       },
       "continuous_envelope_coefficient": {
         "denominator": 19,
@@ -4686,6 +9331,51 @@
         "denominator": 451,
         "numerator": 2184
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 249,
+            "numerator": 11710
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 747,
+            "numerator": 2
+          },
+          "minimizing_h": -447,
+          "shifted_crossing": {
+            "denominator": 779,
+            "numerator": -348549
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 747,
+            "numerator": 35132
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 747,
+            "numerator": 4
+          },
+          "minimizing_h": -446,
+          "shifted_crossing": {
+            "denominator": 779,
+            "numerator": -347802
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": {
+        "characteristic": 19,
+        "coefficient": {
+          "denominator": 249,
+          "numerator": 11710
+        },
+        "gain_over_lattice_envelope": {
+          "denominator": 747,
+          "numerator": 2
+        },
+        "minimizing_h": -447,
+        "minimum_support_at_minimizer": 1
+      },
       "continuous_envelope_coefficient": {
         "denominator": 41,
         "numerator": 1928
@@ -4726,6 +9416,39 @@
         "denominator": 6305,
         "numerator": 67648
       },
+      "conditional_modular_lift_support": {
+        "1": {
+          "coefficient": {
+            "denominator": 1617,
+            "numerator": 123227
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 1617,
+            "numerator": 1
+          },
+          "minimizing_h": -1349,
+          "shifted_crossing": {
+            "denominator": 1649,
+            "numerator": -2225519
+          }
+        },
+        "2": {
+          "coefficient": {
+            "denominator": 77,
+            "numerator": 5868
+          },
+          "gain_over_lattice_envelope": {
+            "denominator": 1617,
+            "numerator": 2
+          },
+          "minimizing_h": -1348,
+          "shifted_crossing": {
+            "denominator": 1649,
+            "numerator": -2223902
+          }
+        }
+      },
+      "conditional_residue_aware_modular_lift": null,
       "continuous_envelope_coefficient": {
         "denominator": 97,
         "numerator": 7392
@@ -4763,13 +9486,26 @@
   ],
   "independent_checks": {
     "bounded_convex_envelope_instances": 1368,
+    "cf_dual_threshold_instances": 52,
     "conjugate_resonance_bound_instances": 63,
     "convex_envelope_instances": 5386,
     "diagonal_double_tight_instances": 32,
+    "exact_two_six_integral_orders": [
+      1,
+      5,
+      11,
+      16,
+      35,
+      55,
+      96,
+      221
+    ],
     "factor_pair_resonance_instances": 119,
+    "four_line_even_type_spectrum_instances": 121,
     "infinite_family_formula_instances": 11,
     "ordinary_arc_specializations": 37,
     "ordinary_resonance_formula_instances": 30,
+    "sharp_conjugate_resonance_instances": 63,
     "spectral_quadratic_equivalences": 25494
   },
   "meaning": "Necessary-bound thresholds only; projective-plane or arc existence is not asserted.",
@@ -10502,7 +15238,7 @@
       "spectral_minimum": 169
     }
   ],
-  "schema": "c945-higher-arc-defect-v8",
+  "schema": "c945-higher-arc-defect-v12",
   "wide_degree_rows": [
     {
       "degree_regime": "below_sqrt_q",

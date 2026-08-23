@@ -8,7 +8,7 @@ import hashlib
 import json
 from functools import lru_cache
 from fractions import Fraction
-from math import comb
+from math import comb, isqrt
 from pathlib import Path
 
 
@@ -23,6 +23,18 @@ RESONANCE_LAMBDA_MAX = 32
 
 def fraction_record(value: Fraction) -> dict[str, int]:
     return {"numerator": value.numerator, "denominator": value.denominator}
+
+
+def prime_power_base(value: int) -> int | None:
+    for prime in range(2, value + 1):
+        if any(prime % divisor == 0 for divisor in range(2, prime)):
+            continue
+        residual = value
+        while residual % prime == 0:
+            residual //= prime
+        if residual == 1:
+            return prime
+    return None
 
 
 def resonance_record(u: int, v: int) -> dict[str, object]:
@@ -64,6 +76,67 @@ def resonance_record(u: int, v: int) -> dict[str, object]:
         for h in range(h_floor - 8, h_floor + 10)
     )
     assert brute == (lattice, minimizing_h)
+
+    modular_lift_records = {}
+    for support_size in (1, 2):
+        shifted_crossing = h0 + Fraction(support_size, 1 + u * slope)
+        shifted_floor = shifted_crossing.numerator // shifted_crossing.denominator
+        shifted_candidates = (shifted_floor, shifted_floor + 1)
+        shifted_lattice, shifted_h = min(
+            (
+                max(
+                    lower(h) + Fraction(support_size, u),
+                    moment(h),
+                ),
+                h,
+            )
+            for h in shifted_candidates
+        )
+        shifted_brute = min(
+            (
+                max(
+                    lower(h) + Fraction(support_size, u),
+                    moment(h),
+                ),
+                h,
+            )
+            for h in range(shifted_floor - 8, shifted_floor + 10)
+        )
+        assert shifted_brute == (shifted_lattice, shifted_h)
+        assert shifted_lattice > lattice
+        modular_lift_records[str(support_size)] = {
+            "coefficient": fraction_record(shifted_lattice),
+            "minimizing_h": shifted_h,
+            "shifted_crossing": fraction_record(shifted_crossing),
+            "gain_over_lattice_envelope": fraction_record(shifted_lattice - lattice),
+        }
+
+    characteristic = prime_power_base(d)
+    residue_aware_record = None
+    if characteristic is not None:
+        residue_candidates = []
+        search_radius = 4 * characteristic + 20
+        for h in range(h_floor - search_radius, h_floor + search_radius + 1):
+            minimum_support = 2 if (h - u * v) % characteristic == 0 else 1
+            residue_candidates.append(
+                (
+                    max(
+                        lower(h) + Fraction(minimum_support, u),
+                        moment(h),
+                    ),
+                    h,
+                    minimum_support,
+                )
+            )
+        residue_coefficient, residue_h, residue_support = min(residue_candidates)
+        assert residue_coefficient > lattice
+        residue_aware_record = {
+            "characteristic": characteristic,
+            "coefficient": fraction_record(residue_coefficient),
+            "minimizing_h": residue_h,
+            "minimum_support_at_minimizer": residue_support,
+            "gain_over_lattice_envelope": fraction_record(residue_coefficient - lattice),
+        }
     assert continuous - spectral == gain
     assert lattice >= continuous > spectral
     crossing_denominator = 2 * u * v + u + v
@@ -103,6 +176,8 @@ def resonance_record(u: int, v: int) -> dict[str, object]:
         "minimizing_h": minimizing_h,
         "double_tight": h0.denominator == 1,
         "double_tight_exception_per_q": fraction_record(exception_per_q),
+        "conditional_modular_lift_support": modular_lift_records,
+        "conditional_residue_aware_modular_lift": residue_aware_record,
     }
 
 
@@ -380,6 +455,44 @@ def run_checks() -> dict[str, object]:
         assert obstruction > 0
         checked_conjugate_resonance_instances += 1
 
+    checked_sharp_conjugate_resonance_instances = 0
+    for m in range(2, 65):
+        q = 8 * m
+        s = 6 * m + 1
+        point_count = q * q + q + 1
+        blocking_order = 2 * m
+        base = 32 * m * m + 12 * m - 1
+        correction = 0 if m <= 6 else (1 if m <= 12 else 2)
+        threshold = base + correction
+        for k, should_obstruct in ((threshold - 1, True), (threshold, False)):
+            complement_size = point_count - k
+            t_min = (2 * complement_size + blocking_order - 1) // blocking_order
+            obstruction = (
+                convex_degree_minimum(k, s * t_min)
+                + convex_degree_minimum(complement_size, blocking_order * t_min)
+                - comb(t_min, 2)
+            )
+            assert (obstruction > 0) == should_obstruct
+            if not should_obstruct:
+                degree_cap = (k - 1) // (s - 1)
+                matching_cap = k // s
+                internal_minimum = convex_degree_minimum(k, s * t_min)
+                internal_maximum = convex_degree_maximum(k, degree_cap, s * t_min)
+                external_minimum = convex_degree_minimum(
+                    complement_size, blocking_order * t_min
+                )
+                external_maximum = bounded_degree_maximum(
+                    complement_size,
+                    2,
+                    matching_cap,
+                    blocking_order * t_min,
+                )
+                pair_total = comb(t_min, 2)
+                assert max(pair_total - internal_maximum, external_minimum) <= min(
+                    pair_total - internal_minimum, external_maximum
+                )
+        checked_sharp_conjugate_resonance_instances += 1
+
     resonance_rows = []
     for lam in range(1, RESONANCE_LAMBDA_MAX + 1):
         for u in range(1, lam + 1):
@@ -396,10 +509,102 @@ def run_checks() -> dict[str, object]:
     assert known_resonances[(2, 1)]["lattice_envelope_coefficient"] == fraction_record(
         Fraction(6)
     )
+    assert known_resonances[(2, 1)]["conditional_modular_lift_support"]["1"][
+        "coefficient"
+    ] == fraction_record(Fraction(73, 12))
+    assert known_resonances[(2, 1)]["conditional_modular_lift_support"]["2"][
+        "coefficient"
+    ] == fraction_record(Fraction(37, 6))
+    assert known_resonances[(1, 1)]["conditional_residue_aware_modular_lift"] == {
+        "characteristic": 3,
+        "coefficient": fraction_record(Fraction(4)),
+        "minimizing_h": 0,
+        "minimum_support_at_minimizer": 1,
+        "gain_over_lattice_envelope": fraction_record(Fraction(2, 5)),
+    }
+    assert known_resonances[(2, 1)]["conditional_residue_aware_modular_lift"] == {
+        "characteristic": 2,
+        "coefficient": fraction_record(Fraction(73, 12)),
+        "minimizing_h": -3,
+        "minimum_support_at_minimizer": 1,
+        "gain_over_lattice_envelope": fraction_record(Fraction(1, 12)),
+    }
+
+    # On the ordinary (u,v)=(1,1) branch, an exact 1 mod 3 selected-line
+    # multiset pays D+E beyond the unrestricted pair minimum.  Its coefficient
+    # exceeds the entire available slack by 9, independently of C and H.
+    for coefficient_numerator in range(15, 26):
+        coefficient = Fraction(coefficient_numerator, 5)
+        for h in range(-6, 7):
+            unrestricted_slack = 5 * coefficient - h - 18
+            mod_three_surcharge = 5 * coefficient - h - 9
+            assert mod_three_surcharge - unrestricted_slack == 9
     checked_diagonal_double_tight_instances = 0
     for u in range(2, 65, 2):
         assert resonance_record(u, u)["double_tight"]
         checked_diagonal_double_tight_instances += 1
+
+    # The first characteristic-compatible double-tight branch is (u,v)=(2,1).
+    # For q=8m its stable exact paired threshold has T=4q-4 once m>=13.
+    checked_cf_dual_threshold_instances = 0
+    for m in range(13, 65):
+        q = 8 * m
+        s = 6 * m + 1
+        k = 32 * m * m + 12 * m + 1
+        complement_size = q * q + q + 1 - k
+        blocking_order = q + 1 - s
+        t_min = (2 * complement_size + blocking_order - 1) // blocking_order
+        assert t_min == 4 * q - 4
+        internal_degree_sum = s * t_min
+        external_degree_sum = blocking_order * t_min
+        assert external_degree_sum == 2 * complement_size
+        assert 6 * k - internal_degree_sum == 8 * q + 10
+        pair_slack = (
+            comb(t_min, 2)
+            - convex_degree_minimum(k, internal_degree_sum)
+            - convex_degree_minimum(complement_size, external_degree_sum)
+        )
+        assert pair_slack == 45
+        checked_cf_dual_threshold_instances += 1
+
+    # A four-line symmetric difference with exactly three concurrent lines has
+    # the stated spectrum.  In particular q^2-O(q) lines are 4-secants, so no
+    # bounded point edit can have almost all line characters in {2,6}.
+    checked_four_line_even_type_instances = 0
+    for q in range(8, 129):
+        spectrum = {2: 4 * q - 5, 4: q * q - 3 * q + 2, q - 2: 1, q: 3}
+        line_count = sum(spectrum.values())
+        first_moment = sum(j * count for j, count in spectrum.items())
+        second_moment = sum(comb(j, 2) * count for j, count in spectrum.items())
+        set_size = 4 * q - 4
+        assert line_count == q * q + q + 1
+        assert first_moment == set_size * (q + 1)
+        assert second_moment == comb(set_size, 2)
+        checked_four_line_even_type_instances += 1
+
+    # An exact {2,6}-set would satisfy a quadratic whose discriminant is
+    # (q+32)^2-1008.  The positive integral orders are therefore finite.
+    exact_two_six_orders = []
+    for q in range(1, 1009):
+        discriminant = q * q + 64 * q + 16
+        root = isqrt(discriminant)
+        if root * root == discriminant:
+            exact_two_six_orders.append(q)
+    assert exact_two_six_orders == [1, 5, 11, 16, 35, 55, 96, 221]
+    assert [q for q in exact_two_six_orders if q & (q - 1) == 0] == [1, 16]
+
+    odd_parity_candidates = [
+        (max(Fraction(76 + h, 6), Fraction(9 - h)), h)
+        for h in range(-101, 102, 2)
+    ]
+    even_parity_candidates = [
+        (max(Fraction(76 + h, 6), Fraction(10 - h)), h)
+        for h in range(-100, 101, 2)
+    ]
+    odd_parity_minimum = min(odd_parity_candidates)
+    even_parity_minimum = min(even_parity_candidates)
+    assert odd_parity_minimum == (Fraction(73, 6), -3)
+    assert even_parity_minimum == (Fraction(37, 3), -2)
 
     rows = []
     for q in Q_VALUES:
@@ -456,7 +661,7 @@ def run_checks() -> dict[str, object]:
                 )
 
     return {
-        "schema": "c945-higher-arc-defect-v8",
+        "schema": "c945-higher-arc-defect-v12",
         "meaning": "Necessary-bound thresholds only; projective-plane or arc existence is not asserted.",
         "parameters": {"lambda_values": list(LAMBDA_VALUES), "holes": 0, "q_values": list(Q_VALUES), "s_max": 8},
         "independent_checks": {
@@ -467,10 +672,24 @@ def run_checks() -> dict[str, object]:
             "infinite_family_formula_instances": checked_infinite_family_instances,
             "ordinary_resonance_formula_instances": checked_ordinary_resonance_instances,
             "conjugate_resonance_bound_instances": checked_conjugate_resonance_instances,
+            "sharp_conjugate_resonance_instances": checked_sharp_conjugate_resonance_instances,
             "factor_pair_resonance_instances": len(resonance_rows),
             "diagonal_double_tight_instances": checked_diagonal_double_tight_instances,
+            "cf_dual_threshold_instances": checked_cf_dual_threshold_instances,
+            "four_line_even_type_spectrum_instances": checked_four_line_even_type_instances,
+            "exact_two_six_integral_orders": exact_two_six_orders,
         },
         "factor_pair_resonances": resonance_rows,
+        "cf_parity_asymptotic": {
+            "odd_selected_line_count": {
+                "coefficient": fraction_record(odd_parity_minimum[0]),
+                "offset": odd_parity_minimum[1],
+            },
+            "even_selected_line_count": {
+                "coefficient": fraction_record(even_parity_minimum[0]),
+                "offset": even_parity_minimum[1],
+            },
+        },
         "rows": rows,
         "wide_degree_rows": wide_degree_rows,
     }

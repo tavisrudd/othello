@@ -7,13 +7,15 @@
 **Status:** active theorem-development and literature-audit phase; the manuscript is
 untouched pending a go/no-go gate.
 
-**Literature-audit summary:** sixteen individually discussed sources; ten
+**Literature-audit summary:** nineteen individually discussed sources; thirteen
 read at full text and six partially.  The bounded full-text audit settles the main
 classicality question but does not close a global novelty or priority verdict.
 The degree-two moment/variance identity, its spectral form, the
 arc--blocking-set dictionary, and the projective-code extension dictionary are
 classical.  No direct predecessor for the *simultaneous exact integer degree
-envelopes* or the unbounded families `(OF)`, `(UF)`, and `(CF)` were located in the recorded search,
+envelopes*, the unbounded families `(OF)`, `(UF)`, and `(CF)`, or the
+maximal-secant modular-lift surcharge `(MLS)`/`(PF)` were located in the
+recorded search,
 but Semantic Scholar and MathSciNet coverage remain open; zbMATH coverage is a
 recorded targeted search rather than an exhaustive subject classification.
 Accordingly, no manuscript-bound “to our knowledge” sentence is licensed by
@@ -33,9 +35,15 @@ classical incidence moments.  The higher-binomial generating identity is also
 classical machinery and is not itself a headline theorem.  The present package
 with the paired integer envelopes, exact recovery of spectral mixing as its
 continuous relaxation, the modular correction, and the infinite strict-gain
-families are provisionally at the **97th--98th percentile** among specialized
-finite-geometry papers, conditional on finishing the narrow precedence audit
-and replacing the remaining proof sketches by lemmas.  The completed ordered-
+families reached the **97th--98th percentile** among specialized finite-
+geometry papers.  The new characteristic-three ordinary-completeness theorem
+`(OF3)` raises the strongest latent paper provisionally to the **99th
+percentile, with 99+ potential**: it feeds a
+classical modular-repair theorem back through the maximal-secant cap to obtain
+a further linear gain `2q/15` which neither ingredient gives separately.  That
+grade remains conditional on closing the claim-specific modular-repair
+precedence audit and polishing the report proof into manuscript lemma form.
+The completed ordered-
 factor-pair theorem now proves that every rational multiplicity resonance has
 a positive linear gain and identifies a double-tight near-tactical sublocus;
 this removes the main risk that `(OF)`, `(UF)`, and `(CF)` were isolated
@@ -55,13 +63,15 @@ The strongest honest architecture is therefore:
 4. complete `(k,s)`-arcs and multiple blocking sets as the sharp planar
    specialization, where matching/pencil caps add information unavailable in
    an arbitrary design;
-5. `(OF)` as the primary separation theorem—already for ordinary completeness—
-   and `(UF)`/`(CF)` as its two conjugate multiple-coverage companions;
+5. `(OF3)` as the primary separation theorem—ordinary completeness in
+   characteristic three—and `(UF)`/`(PF)` as its multiple-coverage companions;
 6. the complete ordered-factor-pair resonance theorem `(FP)`--`(LC)`, with
    classical spectral mixing as its strict continuous relaxation at every
    rational branch;
 7. the integral-`h0` double-tight sublocus as the entry point for an inverse
-   theorem or structural nonexistence result.
+   theorem or structural nonexistence result;
+8. `(RMLS)` as the general modular-lift crown, with `(OF3)` and `(PF)` as the
+   first unconditional zero-core exclusions.
 
 This makes the classical result a corollary without pretending the elementary
 moment expansion is new.  A higher (`j>=3`) moment should enter the headline
@@ -598,6 +608,87 @@ Feasibility requires `F(6n)<=0`, proving `(OF)`.  The Desarguesian planes of
 orders `q=3^m`, `m>=2`, give an infinite ambient sequence.  As before, this is
 a necessary bound and does not assert attainment.
 
+### The characteristic-three ordinary-completeness crown
+
+On the same Desarguesian tower, modular repair feeds back through the arc cap
+and strengthens `(OF)` again.  The precise sequential statement is
+
+```
+liminf_{n=3^j -> infinity} (k-3n^2)/n >= 4,
+k >= 3n^2+4n-o(n)
+  = q^2/3+4q/3-o(q).                                  (OF3)
+```
+
+Here `k` is the size of any complete `(k,2n+1)`-arc in `PG(2,3n)`.  To see
+the mechanism, write along a putative bounded-coefficient sequence
+
+```
+k=3n^2+C n+o(n),             T=6n+H+o(1).
+```
+
+The paired envelope and external coverage give
+
+```
+5C-H>=18,                    C+H>=3.                  (O1)
+```
+
+The dual selected-secant set has only `O(q)` lines whose intersection is not
+`1 mod 3`, so Szőnyi--Weiner repairs it at `O(1)` support points to an exact
+`1 mod 3` multiset.  Zero support is impossible in the relevant range.  If
+all degrees were already `1 mod 3`, let `D` be the internal deficit below
+degree four and `E` the external excess above degree one.  Then
+
+```
+D=(4C-2H-6)n+o(n),
+E=(C+H-3)n+o(n),
+unrestricted pair slack=(5C-H-18)n+o(n).
+```
+
+Restricting the internal degrees from adjacent `{3,4}` values to `{1,4}`
+adds `D` to the pair minimum; restricting external `{1,2}` values to `{1,4}`
+adds `E`.  Feasibility would therefore require
+
+```
+5C-H-18 >= D/n+E/n =5C-H-9+o(1),
+```
+
+an asymptotic contradiction.  Thus the modular correction is nonzero.
+
+For this branch `u=v=1`,
+
+```
+L(H)=3-H,                 C_mom(H)=18/5+H/5.
+```
+
+The support-one surcharge `(MLS)` adds `1` to `L`.  Moreover an exact
+`1 mod 3` multiset has total multiplicity `1 mod 3`, while `T congruent H
+(mod 3)`.  Hence when `H congruent 1 (mod 3)` the correction cannot have
+support one and the surcharge is at least `2`.  Consequently
+
+```
+C >= min_{H in Z} max(C_mom(H),L(H)+r_min(H))=4,
+r_min(H)=2 if H congruent 1 (mod 3), else 1.           (O2)
+```
+
+The minimum is realized numerically at `H=0,1,2`; this is an envelope
+statement, not an existence assertion.  Relative to `(OF)`, whose linear
+coefficient is `18n/5`, `(OF3)` gains a further `2n/5=2q/15`.  Relative to
+the classical spectral coefficient `q`, the total linear separation is
+`q/3`.  Because this concerns ordinary completeness rather than prescribed
+multiple coverage, `(OF3)` is the primary 99-plus application; `(PF)` below
+is its characteristic-two, double-coverage companion.
+
+The sequential quantifiers close directly.  If the liminf in `(OF3)` were
+below `4`, choose `epsilon>0` and a subsequence with
+`k<=3n^2+(4-epsilon)n`.  The leading paired quadratic has its unique feasible
+contact at `T/n=6`, so `T=6n+o(n)`.  The first-order pair inequality then
+forces `T-6n=O(1)` (an unbounded sublinear offset contributes the wrong-sign
+term `-(T-6n)n`), and an integer subsequence has fixed offset `H`.  Its convex
+defect is `O(n)`, so the number of non-`1 mod 3` lines is `O(n)` and the
+Szőnyi--Weiner repair has fixed support.  The zero-support calculation and
+`(O2)` then force `C>=4`, contradicting the chosen subsequence.  Thus `(OF3)`
+is an epsilon-quantified theorem, not merely a formal coefficient comparison.
+
 ### A double-coverage unbounded family
 
 Let `q=2n` with `n` divisible by `4` and `n>=8`; equivalently,
@@ -706,10 +797,13 @@ P(ell)=ell^2-(40m^2+20m+2)ell
 Substitution in the five classes `m mod 5` gives
 `P(ceil((52m+5)/5)-1)>0>=P(ceil((52m+5)/5))`.
 
-The paired integer envelope gives the cleaner necessary bound
+The paired integer envelope gives the following constant-sharp necessary
+bound (sharp here means for this numerical envelope, not existence of an arc):
 
 ```
-k >= 32m^2+12m-1.                                      (CF)
+k >= 32m^2+12m-1,        2<=m<=6,
+k >= 32m^2+12m,          7<=m<=12,                    (CF)
+k >= 32m^2+12m+1,        m>=13.
 ```
 
 To prove it, write `k=32m^2+ell` and assume the spectral bound but
@@ -741,10 +835,17 @@ delta=(6m+1)^2/k+4m^2/b-1
 ```
 
 The last expression is positive for `T>=34m+5` and `m>=3`; `m=2` is a direct
-substitution.  This proves `(CF)`.  Comparing `(CF)` and `(CS)` gives a gain
+substitution.  This proves the first line of `(CF)`.  The two boundary cases
+give a further exact sharpening.  At `ell=12m-1`, `T=32m-3` and the balanced-
+pair excess is `2m-12`, so this value is excluded for `m>=7`.  At
+`ell=12m`, the same `T` has excess `2m-24`, so it is excluded for `m>=13`.
+The same forward-difference argument `(CD)` excludes every larger `T` in both
+cases.  Direct evaluation of the next value gives a nonempty numerical
+interval, proving that the three displayed thresholds are exact for the
+paired envelope.  Comparing `(CF)` and `(CS)` gives a gain
 
 ```
-12m-1-ceil((52m+5)/5) = q/5+O(1).
+12m+O(1)-ceil((52m+5)/5) = q/5+O(1).
 ```
 
 Thus both conjugate `lambda=2` resonances have linear modular penalties, and
@@ -1063,19 +1164,262 @@ weight word in the projective-plane incidence code has weight `O(q)` and, by
 Szőnyi--Weiner Theorem 4.3, is a linear combination of only `O_{u,v}(1)` line
 words.
 
-This is the correct 99th-percentile target after priority judo:
+The maximal-secant lift feeds back into the numerical bound before any full
+core classification.  On a characteristic-compatible factor-pair branch,
+suppose the repaired exact modular multiset differs from the selected-secant
+dual set at `r>=1` distinct support points (arbitrary nonzero modular
+multiplicities are allowed).  Dualizing those support points gives `r` primal
+generator lines.  Away from their `O(r)` mutual intersections, every point on
+each generator line has a nonzero modular degree error.  At most `s` of those
+points lie in the arc, so one generator already forces
+
+```
+external degree excess >= (q+1-s)-O(r)=v n-O(r).
+```
+
+For `r` fixed generator lines, taking their union and losing only their
+pairwise intersections strengthens this to `rvn-O(r^2)`.  But the exact
+external excess at `T=ud(v+1)n+h+o(1)` is
+
+```
+(q+1-s)T-lambda b
+  =uv(c-L(h))n+o(n),            L(h)=d-h/u.
+```
+
+Hence a repaired core with support size at least `r` obeys the
+**modular-lift surcharge**
+
+```
+c >= L(h)+r/u,
+c >= c_lat^(r):=min_{h in Z} max(C(h),L(h)+r/u).       (MLS)
+```
+
+The shifted real crossing and exact lattice value are
+
+```
+h_r=h0+r/(1+u mu),
+c_lat^(r)=min over h in {floor(h_r),ceil(h_r)}
+             max(C(h),L(h)+r/u).
+```
+
+Because the unshifted functions meet at `h0`, every `r>=1` gives a strict
+gain; continuously the gain is `r mu/(1+u mu)`, and lattice rounding can only
+increase it.  There is a further residue constraint.  An exact `lambda mod p`
+multiset has total multiplicity `lambda mod p` (sum its line intersections
+over a pencil).  Since the leading term of `T` is divisible by `p` on an
+infinite characteristic-compatible tower, the correction has total
+multiplicity `h-lambda mod p`.  Therefore support one is impossible when
+`h congruent lambda (mod p)`.  Once the zero-support case has been excluded,
+the residue-aware envelope is
+
+```
+r_min(h)=2 if h congruent lambda (mod p), and 1 otherwise,
+c >= min_{h in Z} max(C(h),L(h)+r_min(h)/u).           (RMLS)
+```
+
+This is the general 99-level mechanism: classical modular
+repair is a corollary input, while the new arc cap converts each edit location
+into a quantitative external-coverage tax.  A branchwise zero-support
+modular core must be handled by the corresponding `p`-spaced degree envelope;
+the CF branch below is the first case where that alternative is also excluded.
+
+The priority-judo pipeline is now:
 
 ```
 extremal higher arc
   => bounded edit of an exact lambda mod p multiset
-  => classify the modular core or prove it cannot lift to maximal secants.
+  => nonzero edit support pays the explicit surcharge (MLS)
+  => only zero-support or residual equality cores require classification.
 ```
 
 The stability arrow is classical and must be credited.  The new load-bearing
-unit is the factor-pair theorem plus the reduction `(EX)` from extremal maximal-
-secant geometry to a bounded-edit modular core.  The remaining crown is a
-classification/construction theorem for those cores under the additional
-maximal-secant lift constraint, not a generic two-weight stability theorem.
+unit is the factor-pair theorem, the reduction `(EX)`, and the maximal-secant
+feedback `(MLS)`.  A full classification/construction theorem for the residual
+cores would be a beyond-99 crown, not a prerequisite for the CF parity theorem.
+
+### The first characteristic-two core and an elementary obstruction
+
+The smallest characteristic-compatible double-tight branch is `(u,v)=(2,1)`,
+the branch behind `(CF)`.  Here
+
+```
+d=4,       lambda=2,       a=6,       q=8m,       s=6m+1.
+```
+
+At the stable exact paired-envelope threshold `k=32m^2+12m+1` for `m>=13`,
+the complement has size `b=32m^2-4m`, so the selected-secant count forced by
+coverage is not merely asymptotic but
+
+```
+T=ceil(2b/(2m))=32m-4=4q-4.                         (CF-T)
+```
+
+If an arc attains this numerical threshold, the equality bookkeeping is much
+more rigid than the asymptotic statement `(EX)`.  Every external point has
+selected-secant degree exactly `2`, because the external degree sum is exactly
+`2b`.  On the `k` internal points, writing `z_x=6+y_x`, the two degree moments
+give
+
+```
+sum_{x in A} y_x=-8q-10,
+sum_{x in A} y_x^2=8q+100,
+sum_{x in A} y_x(y_x+1)=90.                          (CF-R)
+```
+
+The last identity says that at most 45 internal points can have degree outside
+`{5,6}`; the entire nonlinear deviation from the balanced sequence is the
+absolute constant 90.  Consequently the odd-secants of the dual set `L` are
+all internal dual lines, their number is at most `8q+100`, and every other
+line is a 2- or 6-secant.  For `q=8m>=104`, Szőnyi--Weiner's exact
+characteristic-two repair theorem changes at most nine points to obtain an
+even-type set.  Both `L` and every even-type set have even cardinality, so the
+symmetric-difference distance is even; it is therefore at most eight.  Thus
+threshold attainment implies the completely explicit reduction
+
+```
+|L|=4q-4,
+L is within 8 points of an even-type set,
+all external dual lines are exact 2-secants,
+and only 45 internal degrees lie outside {5,6}.        (CF-8)
+```
+
+In fact `(CF-8)` already contradicts threshold attainment.  The identities
+`(CF-R)` force an odd line, so the repair set is nonempty; its even size makes
+it at least two.  Since every external line has degree two, the full odd-line
+locus lies inside `A`.  But on a generator line of the repair symmetric
+difference at most seven points can cancel, leaving at least `q-6` points of
+`A`, whereas `s=3q/4+1<q-6` for the present orders.  Therefore, in
+`PG(2,q)`, `q=2^h>=128`, the stable paired-envelope boundary is impossible
+and the exact geometric bound improves once more to
+
+```
+k >= 32m^2+12m+2.                                    (CF+)
+```
+
+This uses only the classical repair theorem and the new maximal-secant lift;
+no classification of even-type sets near `4q` is needed.
+
+There is, however, a further payoff which does not require classifying the
+repaired core.  It already raises the asymptotic CF bound.  Write
+
+```
+k=32m^2+C m+o(m),             T=32m+H+o(1).
+```
+
+The unrestricted paired envelope has first-order feasibility condition
+
+```
+6C-H >= 76.                                             (P1)
+```
+
+Let `e` be the total external degree excess over the required degree two.
+Then
+
+```
+e=2(C+H-8)m+o(m).                                      (P2)
+```
+
+Near this resonance only `O(q)` dual lines have odd intersection with `L`,
+so even-type stability writes `L=E triangle R`, where `E` is even type and
+`r=|R|=O(1)`.  If `R` is empty, restricting both balanced degree sequences to
+even degrees adds `(D+e)/2` to the pair minimum, where `D` is the internal
+deficit below degree six.  Explicitly,
+
+```
+D=(6C-6H-32)m+o(m),
+pair slack=(12C-2H-152)m+o(m),
+(D+e)/2=(4C-2H-24)m+o(m).
+```
+
+Comparing the last two expressions simplifies to `C>=16`.  Hence `R` is nonempty throughout the range
+relevant to improving `(CF)`.  Since every even-type set has even size,
+`r congruent T congruent H (mod 2)`.
+
+Dualize the points of `R` back to `r` primal lines.  Their symmetric
+difference is precisely the odd-line locus of `L`.  On each generator line,
+at most `r-1` intersection points can cancel, so at least `q-r+2` points have
+odd `L`-degree.  Since an `s`-secant arc contains at most
+`s=3q/4+1` points of that line, at least `q/4-r+1` of them are external.
+If `r` is odd it can be one, giving
+
+```
+e >= q/4-O(1),             C+H>=9.                    (P3o)
+```
+
+If `r` is even then `r>=2`; two distinct generator lines share at most one
+point, so
+
+```
+e >= q/2-O(1),             C+H>=10.                   (P3e)
+```
+
+The integer offset `H` is odd in `(P3o)` and even in `(P3e)`.  Minimizing
+`max((76+H)/6,9-H)` over odd `H` gives `73/6` at `H=-3`; minimizing
+`max((76+H)/6,10-H)` over even `H` gives `37/3` at `H=-2`.  The odd case is
+the universal minimum.  Hence the new characteristic-two parity bound is
+
+```
+C >= 73/6,
+k >= 32m^2+(73/6)m-o(m)
+  = q^2/2+(73/48)q-o(q).                              (PF)
+```
+
+The earlier constant-sharp `(CF)` has coefficient `12m`, so `(PF)` gains
+`m/6=q/48` beyond it, and still gains linearly over the classical spectral
+bound.  The proof is a genuine interaction of the new paired envelope, the
+classical even-type repair theorem, and the maximal-secant cap: neither the
+moment bound nor modular stability alone contains `(P3)`.  This is now the
+best 99th-percentile headline in the dossier.  Before paper insertion it needs
+conversion from the displayed sequential asymptotic argument into a single
+epsilon-quantified lemma and a claim-specific precedence search for parity-
+repaired multiple-cover arcs; no manuscript claim is yet licensed.
+
+Szőnyi--Weiner's characteristic-two stability theorem repairs the dual set
+`L` to an even-type set by a bounded point edit.  The most obvious classical
+even-type candidates nevertheless cannot lift.  For example, let `E` be the
+symmetric difference of four lines, exactly three of which are concurrent.
+Then `|E|=4q-4` and its complete line spectrum, with geometric line classes
+kept separate when characters coincide, is
+
+```
+character       2             4             q-2       q
+number          4q-5          q^2-3q+2       1         3.       (4L)
+```
+
+Indeed, a non-generator line through the triple point or one of the three
+double points is a 2-secant; a generic line meets the four generators in four
+distinct retained points.  Thus `q^2-O(q)` lines are 4-secants.  Changing a
+bounded number of points changes only `O(q)` line intersections, whereas a CF
+threshold core must have all but `O(q)` line characters in `{2,6}` and both
+regular classes have quadratic size.  Hence neither this set nor any bounded
+edit of it can be a CF core.  The same generic-line argument excludes all
+three concurrency types of a four-line symmetric difference.  More generally,
+it excludes any proposed core obtained as the symmetric difference of a fixed
+number of generator lines whenever its single generic character is not one of
+the two required regular characters.  This disposes of the simplest
+line-generated explanation but does not classify arbitrary even-type sets of
+size about `4q`.
+
+There is also a useful exact benchmark.  If an exact two-character `{2,6}` set
+of size `T` existed, the first two intersection equations would give
+
+```
+T^2-(7q+8)T+12(q^2+q+1)=0,
+Disc=q^2+64q+16=(q+32)^2-1008.                       (26)
+```
+
+Consequently its order belongs to the finite list
+
+```
+q in {1,5,11,16,35,55,96,221};
+```
+
+among powers of two only `q=16` survives.  Thus an infinite CF extremal family
+cannot collapse all the way to an exact `{2,6}` two-character set.  Its
+`O(q)` exceptional lines are arithmetically necessary, not merely an artifact
+of the stability proof.  The 99-plus problem is therefore sharper than exact
+two-weight classification: classify the even-type sets of size `4q+O(1)`
+with only `O(q)` non-`{2,6}` lines and then impose the maximal-secant lift.
 
 ### Projective codes in arbitrary dimension
 
@@ -1325,7 +1669,9 @@ Bishnoi--Mattheus--Schillewaert quadratic are the same polynomial, and checks
 the exact `(UF)` threshold in the 11 orders `q=16,24,...,96`.  It also checks
 the ordinary-completeness formula `(OF)` for all 30 integers `3<=n<=32` and
 the spectral sign change plus boundary obstruction for the conjugate `3/4`
-resonance in all 63 integers `2<=m<=64`.  Schema v8 additionally records all
+resonance in all 63 integers `2<=m<=64`, and verifies the two constant
+sharpenings of `(CF)` at the excluded and admitted boundary values in the same
+63 cases.  Schema v12 additionally records all
 119 ordered divisor-pair resonances with `lambda<=32`.  Exact rational
 arithmetic independently checks `(G)`, checks that the lattice coefficient is
 strictly above the spectral coefficient, and verifies by a bounded convex
@@ -1335,7 +1681,19 @@ observation, not a count of the unrestricted double-tight sublocus.  The
 divisor criterion `(DT)` and the self-conjugate assertion are independently
 checked for the 32 even integers `2<=u<=64`; their proofs are uniform.  The
 same rational records independently verify the exceptional-line coefficient
-in `(EX)` on all 119 bounded branches.
+in `(EX)` on all 119 bounded branches.  It also checks `(CF-T)` in the 52
+stable cases `13<=m<=64`, the complete four-line spectrum `(4L)` in 121
+orders, and the finite discriminant list `(26)` by exact integer arithmetic.
+It independently minimizes the odd- and even-offset parity envelopes in
+`(P3o)` and `(P3e)`, recovering `(73/6,-3)` and `(37/3,-2)` respectively.
+For every one of the 119 factor-pair rows it also records and independently
+checks the support-one and support-two modular-lift envelopes `(MLS)`, their
+shifted crossings, minimizing integer offsets, and strict gains over the
+unshifted lattice coefficient.  On every branch for which `d` is a prime
+power it also records the characteristic and residue-aware conditional
+envelope `(RMLS)`.  The `(1,1)` and `(2,1)` rows recover coefficients `4` and
+`73/12`; a separate exact grid checks that the zero-support `1 mod 3` surcharge
+exceeds the available ordinary-branch pair slack by the invariant amount `9`.
 
 Replay from the repository root:
 
@@ -1345,10 +1703,11 @@ nix shell nixpkgs#python3 --command python3 notes/2026-08-22-c945-higher-arc-def
 
 The generator is deterministic and uses only Python's standard library.
 `generate` rewrites the canonical sorted JSON and checksum manifest; `check`
-recomputes both in memory and fails on drift.  The script is 20,448 bytes with
-SHA-256 `d0bee12381a5d1e0652d4ebda569622066e1c51a1564703732973e8f54d51b57`;
-the JSON is 387,917 bytes with SHA-256
-`39aebc25b04a78efecfc1a47142dfb4b04ad0d791a2aaa3362464ec0f634e3d2`.
+recomputes both in memory and fails on drift.  The script is 29,928 bytes with
+SHA-256 `640d6a267598cee98bc9811c2e2d3f691d224db86118ea964ac78497cf8152f6`;
+the JSON is 511,023 bytes with SHA-256
+`b9c814c9d5aad1723cd1479e8364543f728ca0e1008a6ddbce2f38c89d41c487`.
+The checksum manifest is the authoritative replay record.
 
 ## Candidate new numerical consequence
 
@@ -1532,6 +1891,43 @@ equalities and this specializes to the paper's existing `3/2` term.
   codeword is a combination of `O(1)` lines.  C945 therefore uses this as a
   credited corollary and concentrates the new target on the maximal-secant
   lift and classification of the repaired modular core.
+- Szőnyi--Weiner, *On the stability of sets of even type*, Advances in
+  Mathematics 267 (2014), DOI `10.1016/j.aim.2014.09.007`: **full text**, all
+  sections of the cached 18-page published article read, relying especially
+  on Theorem 1.1 and the spectrum discussion; cache key
+  `10.1016/j.aim.2014.09.007`, SHA-256
+  `84a1c7a75e344fa9fa9479daa10de11e3f0509c79aac99f41d516ca6a9c7a9e9`.
+  For even `q`, their theorem is the sharper direct predecessor of the modular
+  repair step: a set with sufficiently few odd-secants is uniquely repaired
+  to an even-type set using exactly `ceil(delta/(q+1))` point changes.  The
+  paper does not classify even-type sets at the present weight near `4q`; its
+  recorded spectrum results become sparse well before that scale.  C945 uses
+  the theorem as a credited corollary and adds the maximal-secant lift and the
+  elementary exclusion `(4L)` of the first line-generated core candidates.
+- Csajbók--Weiner, *Generalizing Korchmáros--Mazzocca Arcs*, Combinatorica 41
+  (2021), DOI `10.1007/s00493-020-4419-z`: **full text**, all Sections 1--7 of
+  the cached 17-page author manuscript read, relying especially on Definition
+  2.1, Theorems 2.6, 6.9--6.10, and the modular stability reduction in Section
+  6; cache key `10.1007/s00493-020-4419-z`, SHA-256
+  `f087fb4b39df1a08a86f268f1ed5bee88085c5f17b74f0c6e404b7e20464c1ab`.
+  This is the closest classical structural neighbor found for the CF core.
+  Exact generalized KM-arcs of type `(0,2,6)` have size `q+6`, not `4q-4`,
+  and their classification/stability hypotheses require the local unique-
+  exceptional-secant condition absent here.  The paper therefore supplies
+  useful priority judo and proof technology, but does not classify an even-type
+  set with a linear exceptional-line locus and the C945 maximal-secant lift.
+- Csajbók, *On bisecants of Rédei type blocking sets and applications*,
+  arXiv:1504.06748v2: **full text**, all Sections 1--6 of the cached 26-page
+  arXiv version read, relying especially on Theorem 5.1, Corollary 5.3, and
+  Lemma 6.9 through Theorem 6.11; cache key `arXiv:1504.06748`, SHA-256
+  `aa276cb2184cfa2dd279a362de55b5d9e48a9ca1541c5523fd07db94e5d099b5`.
+  This paper makes the broad proof pattern “repair a few odd secants to even
+  type, then use local secant geometry” classical, including applications to
+  semiovals and KM-arcs.  It does not study the dual family of all maximal
+  secants of a complete higher arc, the paired-envelope resonance, or the
+  parity surcharge `(P3o)`--`(P3e)`.  The present novelty claim must therefore
+  be the quantitative maximal-secant feedback `(PF)`, not modular repair as a
+  method.
 - Adriaensen--Szőnyi--Weiner, *Multisets with few special directions and small
   weight codewords in Desarguesian planes*, arXiv:2411.19201v3: **full text**,
   all Sections 1--7 of the cached 25-page arXiv v3 PDF read, relying especially
@@ -1593,10 +1989,11 @@ equalities and this specializes to the paper's existing `3/2` term.
   points on both sides of a partition.  No absence claim rests on this partial
   read.
 
-The audit currently has ten full-text and six partial sources.  It supports a
+The audit currently has thirteen full-text and six partial sources.  It supports a
 firm *classical* verdict for the moment/spectral and code/blocking dictionaries.
 It supports only the narrower bounded statement that no direct predecessor for
-the paired integer-envelope sharpening or `(OF)`/`(UF)`/`(CF)` was found; a global novelty or
+the paired integer-envelope sharpening, `(OF)`/`(UF)`/`(CF)`, or the
+maximal-secant feedback `(MLS)`/`(PF)` was found; a global novelty or
 priority verdict remains open.
 
 Forward-citation audit seed: pinned DOI
@@ -1662,7 +2059,32 @@ Szőnyi Weiner Stability of k mod p multisets and small weight codewords JCTA 15
 weighted multiple blocking sets k mod p small size PG(2,q) Szonyi Weiner
 "0 mod p" point set projective plane small size
 sets of even type projective plane stability classification
+site:arxiv.org finite projective plane "sets of even type" 4q
+site:arxiv.org PG(2,q) even type "2-secants" "6-secants"
+"generalized KM-arc" projective plane even type
+"set of even type" "4q" PG(2,q)
+finite projective plane even type double blocking set 4q
+PG(2,q) "even type" "double blocking"
+"sets of even type" "4q" finite geometry
+"even type" PG(2,q) "4q-4"
+finite projective plane complete (k,n)-arc even type stability parity lower bound maximal secants
+"even-type" "complete arc" projective plane secants
+"sets of even type" maximal secants arc PG(2,q)
+"stability of sets of even type" arc completeness
+Balister Bollobas Furedi Thompson Minimal Symmetric Differences of Lines in Projective Planes DOI PDF
+complete (k,n)-arc PG(2,3^h) lower bound k q^2/3 4q/3
+complete higher arcs characteristic 3 maximal secants modular stability lower bound
+"complete (k,n)-arc" "mod 3" projective plane
+"maximal secants" "1 mod 3" arc PG(2,q)
 ```
+
+The final four strings are the claim-specific locator pass for `(OF3)`.  They
+returned the known Alabdullah--Hirschfeld first-moment lower bound, curve-based
+completeness constructions, and unrelated small-degree/ordinary-arc work, but
+no result combining `1 mod 3` repair with the family of all maximal secants to
+obtain a lower bound at density `k/q^2 ->1/3`.  This is a bounded locator
+negative only; the open Semantic Scholar/MathSciNet/MSC gaps still prevent a
+global priority claim.
 
 OpenAlex was then queried with `per-page=10` and the exact `search` values
 
@@ -1746,7 +2168,10 @@ result.
   `4|n`, `n>=8`, and `(CF)` proves a conjugate double-coverage gain
   `q/5+O(1)` for `q=8n`.  All three floor arguments are uniform; their
   arithmetic ingredients are independently checked in 30, 11, and 63 initial
-  instances, respectively.
+  instances, respectively.  The closeout further sharpens the CF numerical
+  envelope by up to two points, excludes its stable boundary geometrically in
+  `PG(2,2^h)` via `(CF+)`, and proves the additional asymptotic gain `q/48`
+  in `(PF)`.
 - **Why the slopes `2/3`, `1/2`, and `3/4` appear, and whether the phenomenon
   persists — settled at every multiplicity.**  The ordered factorizations
   `lambda=uv` classify all rational resonances.  Theorems `(FP)`--`(LC)` give
@@ -1759,8 +2184,27 @@ result.
   Haemers supply the spectral lineage, and Beker--Mitchell--Piper supply the
   tactical quotient-equation lineage.  These belong in the corollary and
   infrastructure layer, not in a priority claim.
+- **Whether modular repair can improve the numerical bound without a full core
+  classification — settled.**  The support-`r` modular-lift surcharge `(MLS)`
+  converts each nonzero repair location into an exact `r/u` shift of the
+  coverage line.  All 119 bounded factor-pair branches record the support-one
+  and support-two shifts, and `(RMLS)` adds the total-multiplicity residue
+  constraint on every characteristic-compatible branch.  In the ordinary
+  characteristic-three branch the zero-support alternative is impossible by
+  an invariant nine-unit first-order gap, yielding `(OF3)` and its further
+  `2q/15` gain.  In the first characteristic-two branch, the
+  zero-support alternative is weaker only when `C>=16`, so `(PF)` follows
+  unconditionally with coefficient `73/48` in `q`.
+- **Why characteristic three is stronger than the first characteristic-two
+  branch — settled.**  On `(OF3)`, the exact `1 mod 3` zero-support envelope
+  exceeds the available pair slack by `9n+o(n)` for every offset, and total-
+  multiplicity residue upgrades the apparent support-one minimizer to support
+  two.  This makes ordinary completeness the primary corollary and gives the
+  exact residue-aware coefficient `4`.
 - **Attainment or near-attainment of `(OF)`, `(UF)`, or `(CF)` — open.**  The
-  current results are necessary bounds only.  The evidence gap is an explicit
+  original stable CF envelope boundary is now excluded in Desarguesian even
+  order, but attainment near the stronger `(PF)` boundary remains open.  The
+  evidence gap is an explicit
   family of complete `(k,2q/3+1)`-arcs, double-complete `(k,q/2+1)`-arcs, or
   double-complete `(k,3q/4+1)`-arcs near the thresholds, or an independent
   structural obstruction showing the true minima are larger.  Owner: C945
@@ -1773,13 +2217,18 @@ result.
   targeted searches found classical tactical equations but no use of balanced
   and cap-filled extrema on both sides of an arbitrary selected block family.
   The remaining evidence gaps are Semantic Scholar, MathSciNet, and an
-  exhaustive zbMATH MSC screen.  Owner: C945 literature gate.
-- **Rigidity at equality of the paired interval — open.**  Singleton interval
+  exhaustive zbMATH MSC screen.  Four claim-specific `(OF3)` locator queries
+  found no predecessor, but this does not close those database gaps.  Owner:
+  C945 literature gate.
+- **Rigidity at equality of the paired interval — partly settled.**  Singleton interval
   contact forces balanced/cap-filled degree multisets, but geometric
   classification of the resulting clique/tactical structures has not been
   done.  On integral-`h0` Desarguesian branches, Szőnyi--Weiner now reduce the
-  dual structure to a bounded edit of an exact `lambda mod p` multiset.  Owner:
-  C945 modular-core lift/classification gate.
+  dual structure to a bounded edit of an exact `lambda mod p` multiset.  For
+  `(CF)`, exact bookkeeping gives `(CF-R)`, at most eight edits, and the
+  generator-line cap excludes the stable boundary.  Other branches and the
+  prospective `(PF)` equality locus remain open.  Owner: C945 modular-core
+  lift/classification gate.
 - **Which factor-pair resonances have integral `h0` — arithmetic settled,
   geometry open.**  Criterion `(DT)` is an exact divisor parametrization, and
   every self-conjugate branch `(u,u)` with even `u` gives an infinite family of
@@ -1797,7 +2246,10 @@ result.
    multiplicity `lambda`) explicit.
 2. Promote the factor-pair asymptotic proof to lemma form, including the
    bounded endpoint cases in the forward-difference split and an explicit
-   `O_{u,v}(1)` threshold.
+   `O_{u,v}(1)` threshold.  In the same pass, transcribe the quantified
+   `(OF3)` subsequence argument and epsilon-quantify the general `(MLS)` and
+   companion `(PF)` statements, including each zero-support `p`-spaced
+   envelope and the residue of the integer offset.
 3. Compare the numerical bound with Alabdullah--Hirschfeld and other general
    complete `(k,s)`-arc bounds at full-text depth.
 4. Audit specifically whether simultaneous balanced/cap-filled integer degree
@@ -1805,9 +2257,10 @@ result.
    and whether `(OF)`, `(UF)`, or `(CF)` has a known equivalent.  The broader
    second-moment and spectral mechanisms are already classical and should not
    be audited or positioned as candidate novelty.
-5. On integral-`h0`, characteristic-compatible branches, classify the exact
-   `lambda mod p` cores supplied by Szőnyi--Weiner under the additional
-   maximal-secant lift constraint; then test structured curve-derived families
-   where `t`, `d(a)`, or `nu` are known.  A construction or structural
-   nonexistence theorem here is the remaining crown needed for a 99th-
-   percentile paper.
+5. On integral-`h0`, characteristic-compatible branches, apply `(MLS)` first;
+   then classify only the zero-support modular cores or the residual equality
+   cores under the maximal-secant lift constraint.  Test structured curve-
+   derived families where `t`, `d(a)`, or `nu` are known.  The CF branch now
+   reaches the provisional 99th-percentile line without a full core
+   classification; such a classification or a construction would push it
+   beyond that line.
