@@ -103,6 +103,57 @@ ordinary complete arcs, maximal arcs, unitals, and subplanes in one
 maximal-secant concurrency framework.  This is the current positive answer to
 the structural/notability gate, subject to precedence checking.
 
+## `tt` pressure test: the blocking-set dual
+
+Let `B=Pi-A` and `t=q+1-s`.  Then `A` is a `(k,s)`-arc exactly when `B`
+is a `t`-fold blocking set: an `s`-secant of `A` is a `t`-secant of `B`.
+For `x in B`, lying on an `s`-secant of `A` is equivalent to lying on a
+`t`-secant of `B`, which is equivalent to `x` being essential in `B`.
+Consequently:
+
+```
+A is complete outside H
+  iff every point of B-H is essential in the t-fold blocking set B
+  iff the inessential locus of B is contained in H.
+```
+
+Uniform `lambda`-fold maximal-secant coverage says that every point outside
+the prescribed hole lies on at least `lambda` tangent (`t`-secant) lines of
+the multiple blocking set.  Thus the master identity is simultaneously a
+defect theorem for higher arcs and for multiple blocking sets with a
+prescribed inessential locus.  In particular, the conic-hole application has
+a direct dual formulation that was absent from the initial higher-arc proposal.
+
+Bishnoi--Mattheus--Schillewaert give the general upper bound
+
+```
+|B| <= q sqrt(4tq-(3t+1)(t-1))/2 + (t-1)q/2 + t
+```
+
+for a minimal `t`-fold blocking set.  With `t=q+1-s`, its complementary
+lower bound is
+
+```
+k >= q(q+s-sqrt((q+s)^2-4s(s-1)))/2 + s.
+```
+
+For fixed `s` this is only `s^2+O_s(1/q)`, whereas the proposed
+maximal-secant second moment gives
+`sqrt(s(s-1)q)+(s+1)/2-O_s(q^(-1/2))`.  More generally, while `s=o(q)`,
+the two scales are respectively `s^2` and `s sqrt(q)`, crossing at
+`s` of order `sqrt(q)`.  The methods are complementary: the new moment bound
+controls the low-degree side, and the spectral minimal-blocking-set bound
+controls the high-degree side.  A combined all-degree phase diagram is a
+candidate paper-level consequence.
+
+The other structural object exposed by the pressure test is the dual clique
+partition on the `s`-secants.  On its `t_s` vertices, the internal star cliques
+of sizes `d(a)` and the external concurrence cliques of sizes `r(x)` partition
+all pairs.  At zero defect the external block sizes lie in `{lambda,M}`.
+Divisibility, eigenvalue, and pairwise-balanced-design constraints on this
+partition are the highest-EV route to arithmetic nonexistence and positive
+defect gaps beyond the scalar bound.
+
 ## Proof packet
 
 ### Arrangement moments
@@ -353,8 +404,24 @@ equalities and this specializes to the paper's existing `3/2` term.
   variety point-count argument.  It confirms current topical adjacency but the
   sections read do not address universal lower bounds or external-index
   moments; no absence claim rests on this partial read.
+- Ball, *Multiple blocking sets and arcs in finite planes*, Journal of the
+  London Mathematical Society 54 (1996): **partial**, abstract, introduction,
+  Theorems 1.1--1.4, and the complement formulation; cache key
+  `10.1112/jlms/54.3.581`, SHA-256
+  `b0e5ee5e3bb2831fadc045ed1ecf9531730aa52084310542076a840fcbc14784`.
+  This verifies the standard complement duality and concerns lower bounds for
+  multiple blocking sets / upper bounds for arcs, not minimality or the small
+  complete-arc regime.
+- Bishnoi--Mattheus--Schillewaert, *Minimal multiple blocking sets*,
+  arXiv:1703.07843 / Electronic Journal of Combinatorics 25(4) (2018):
+  **partial**, introduction, Theorem 1.1, proof reduction through its quadratic,
+  and paper roadmap; cache SHA-256
+  `4ca2ebf88bc90d94a88552092a9e69bcd0dcc9f234490994bfa4d5fa682694b9`.
+  Their spectral/incidence theorem is the closest dual predecessor located so
+  far.  Its high-`t` specialization is compared explicitly in the `tt` section;
+  the full paper still must be read before a novelty verdict.
 
-The audit currently has one full-text source and four partial sources.  A
+The audit currently has one full-text source and six partial sources.  A
 novelty or priority verdict remains open.
 
 Forward-citation audit seed: DOI `10.1007/s10623-018-00592-8`.
