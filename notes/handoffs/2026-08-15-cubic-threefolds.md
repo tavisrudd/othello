@@ -244,7 +244,10 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   Geometric (rotation-order) route and its 2026-08-23 vetting, which voids the
   grading-multiplicity exclusion and confirms the del Pezzo refutation of the
   dimension bound: card section "Geometric route to the same gate" and
-  `../2026-08-23-c925-fable-opus-vetting.md`.
+  `../2026-08-23-c925-fable-opus-vetting.md`.  Marker reformulated as a
+  \(\Psi\)-invariant Levelt exponent class; the calibration gate is superseded
+  and the \(m=2\) obligation now lives on the centre's own quantum connection:
+  `../2026-08-23-c925-fable-marker-is-levelt-exponent.md`.
 
 - **C924 — closed 2026-08-19.** The direct ordinary-QDM route proves
   irrationality of `X x P^1` after one mandatory local repair: compare the

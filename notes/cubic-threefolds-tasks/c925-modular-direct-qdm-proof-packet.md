@@ -71,6 +71,16 @@ every (k) and unbounded self-dual coweight
 `KummerTraitRescaling`.  The source theorem must instead construct a primitive
 marked valuation or descend the coweight and first jet modulo loop-trivial
 cocharacter drift.  The occurrence-to-port theorem remains external.
+**2026-08-23 reformulation.**  The marker is the Levelt exponent class of
+the rank-two block: \(\delta^\sharp=4/9\) is \(\{1/6,5/6\}\bmod\mathbf Z\)
+and \(\delta^\sharp\in\{0,4\}\) is \(\{1/2,1/2\}\).  Exponent classes are
+invariant under any isomorphism of \(z\)-connections over any coefficient
+field, and Iritani's \(\Psi\) commutes with \(\nabla_{z\partial_z}\)
+(Theorem 5.18(1)).  The marker of a correction block is therefore the marker
+of a block of the centre's own quantum connection in the centre's own lattice;
+the calibration, native-order, Rees-port, and affine-Bruhat obligations above
+are superseded.  Report:
+`../2026-08-23-c925-fable-marker-is-levelt-exponent.md`.
 The unconditional every-smooth theorem is not landed.  Independently, Voisin
 plus the 2025 Engel--de Gaay Fortman--Schreieder parity theorem gives an
 all-\(m\) proof for a very general cubic; that preprint result must not be
@@ -166,6 +176,9 @@ realization of that orbit.
 - vetting of the rotation-order and grading-multiplicity commits, exact dP5
   4-cycle, block-exponent invariant of the marker:
   notes/2026-08-23-c925-fable-opus-vetting.md
+- the marker as a \(\Psi\)-invariant Levelt exponent class; reformulated
+  \(m=2\) gate on the centre's own quantum connection:
+  notes/2026-08-23-c925-fable-marker-is-levelt-exponent.md
 
 The packet index owns the module-to-file map.  Do not append another large
 module to this card or to the index; add one focused companion file and one
@@ -757,7 +770,17 @@ The live frontier is source-side, not another linear consumer.
    occurrence, construct the transported product-loop action on the C924
    primitive factors with exact marker \(\delta^\sharp=4/9\) in its single
    outer correction factor and prove that no point has exact period three.
-   This is the only remaining \(m=2\) correction theorem.  The sharpened
+   This is the only remaining \(m=2\) correction theorem.
+   **Reformulated 2026-08-23:** since the marker is a \(\Psi\)-invariant
+   Levelt exponent class, the obligation is: for every connected smooth
+   projective threefold \(Z\) occurring as a codimension-two centre, the big
+   quantum connection of \(Z\) along Iritani's formal bulk curve
+   \(\varsigma_0\) has no three-cycle, under the transported integral
+   cocharacter of \(Z\)'s own Novikov torus, of rank-two nilpotent blocks with
+   exponent class \(\{1/6,5/6\}\).  Isomonodromy decides this at the small
+   point where the block persists; at a confluence the class is read from the
+   Stokes data of the merging pair.  The calibration machinery in the rest of
+   this item is retained as history only.  The sharpened
    sufficient route is saturated descent to the native effective
    large-radius lattice, including the standard cup-product grading and the
    elementary modification.  Generic cubic-etale/divisor data are
