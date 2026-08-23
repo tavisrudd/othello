@@ -6,11 +6,13 @@
 
 ## Objective
 
-Extend the one-target bounded recovery theory to an arbitrary nonzero linear
-demand space \(A\leq\mathbb F_q^P\) supported on a coordinate set \(P\) in one
-inner block.  Prove exact finite and eventual confinement criteria, derive
-classical simultaneous/cooperative recovery as the full-demand corollary
-\(A=\mathbb F_q^P\), recover the published threshold when
+Extend the one-target bounded recovery theory to an arbitrary presented
+linear demand \(\beta:Q\to\mathbb F_q^P\) supported on a coordinate set \(P\)
+in one inner block.  Preserve the whole filtered affine family of coefficient
+realizations, naturally in the query presentation.  Prove exact finite and
+eventual confinement criteria, derive subspace recovery and classical
+simultaneous/cooperative recovery as corollaries, recover the published
+threshold when
 \(P=\{x\}\), and identify honestly what remains of the proposed
 generalized-weight, MacWilliams/LP, and bandwidth directions.
 
@@ -29,7 +31,74 @@ boundary change is authorized by this report.
 - Treat bandwidth/subpacketization as a separate model. For the present scalar
   \(\mathbb F_q\)-codes, bandwidth cost collapses to helper count.
 
-## Primary object: a linear demand space
+## Primary object: the boundary-lift profile
+
+Let \(Q\) be a nonzero finite-dimensional query space and let
+
+\[
+ \beta:Q\longrightarrow\mathbb F_q^P
+\]
+
+be a nonzero linear map.  The pair \((Q,\beta)\) is a **presented linear
+demand**.  A normalized \(\beta\)-equation system on helpers
+\(H\subseteq E\setminus P\) is a linear map
+
+\[
+ s:Q\longrightarrow C^\perp\cap\mathbb F_q^{P\cup H},
+ \qquad s(q)|_P=\beta(q).
+\]
+
+Its helper cost is
+\(\lvert\operatorname{usupp}(s)\setminus P\rvert\).  If one lift \(s_0\)
+exists, all lifts form the affine space
+
+\[
+ s_0+
+ \operatorname{Hom}\!\left(Q,C^\perp\cap\mathbb F_q^H\right).
+\]
+
+Define
+
+\[
+ \rho_{P,\beta}(C)=
+ \min_{s|_P=\beta}
+ \lvert\operatorname{usupp}(s)\setminus P\rvert.
+\]
+
+The assignment \((Q,\beta)\mapsto\{s:s|_P=\beta\}\), with its helper-support
+filtration, is the **boundary-lift profile** at \(P\).  It is natural under
+precomposition: if \(f:Q'\to Q\), then \(s\mapsto s\circ f\) sends lifts of
+\(\beta\) to lifts of \(\beta\circ f\) without increasing helper support.
+This is the honest level above a single demand subspace: it retains all query
+presentations and all coefficient realizations, not merely which subspaces
+are spanned by which helper sets.
+
+At the support/existence level, however, this abstraction is not new and must
+not be sold as such:
+
+\[
+ \text{a lift on }H\text{ exists}
+ \quad\Longleftrightarrow\quad
+ \operatorname{im}(\beta)
+ \subseteq
+ \operatorname{im}\!\left(
+ C^\perp\cap\mathbb F_q^{P\cup H}\to\mathbb F_q^P
+ \right).
+\]
+
+Thus existence depends only on \(\operatorname{im}(\beta)\), exactly the
+generator-span/subspace-recovery condition already present in functional
+PIR/batch and subspace-recovery work.  Explicitly, for a generator matrix
+\(G\), it is
+
+\[
+ G_P\beta(Q)\subseteq\operatorname{span}(G_H).
+\]
+
+The additional datum is the complete filtered affine lift space and the
+theorem transporting it.
+
+### Linear demand spaces as a specialization
 
 Let \(C\leq\mathbb F_q^E\), let \(\varnothing\neq P\subseteq E\), and fix a
 nonzero subspace \(A\leq\mathbb F_q^P\).  Write
@@ -67,9 +136,11 @@ Define
  |\operatorname{usupp}(s)\setminus P|.
 \]
 
-This is strictly more general than simultaneous recovery of all coordinates
-in \(P\): \(A\) may prescribe one linear combination, a proper space of
-queries, or the full coordinate demand space.
+This is the presented demand \((Q,\beta)=(A,\iota_A)\).  It ranges from one
+linear combination through a proper query subspace to the full coordinate
+demand space.  Recovery of subspaces is established terminology and prior
+art; the point here is that every such slice belongs to one natural
+coefficient-aware profile.
 
 ## Cooperative recovery as the full-demand corollary
 
@@ -136,6 +207,24 @@ splittings and
 \]
 
 ## Exact finite map-valued cost
+
+The finite formula is most general for a presented demand
+\(\beta:Q\to\mathbb F_q^P\).  For \(Y:Q\to\mathbb F_q^E\) and
+\(B:Q\to L^*\), put
+
+\[
+ \lambda_Q(B)=\min_{\Phi Y=B}|\operatorname{usupp}(Y)|,
+ \qquad
+ \mu_{P,\beta}(B)=
+ \min_{\substack{\Phi Y=B\\Y|_P=\beta}}
+ |\operatorname{usupp}(Y)\setminus P|.
+\]
+
+Replacing \(A,\iota_A,\lambda_A,\mu_{P,A}\) below by
+\(Q,\beta,\lambda_Q,\mu_{P,\beta}\) gives the exact finite cost
+\(\Theta_{P,\beta,j}(I,O)\).  The proof is unchanged.  The displayed
+\(A\)-formula is retained as the subspace-demand specialization used by the
+cooperative-recovery corollary.
 
 Retain a nonzero demand space \(A\leq\mathbb F_q^P\), and let
 
@@ -214,6 +303,57 @@ concatenation.
 
 ## Eventual linear-demand confinement theorem
 
+The theorem holds first for every presented nonzero demand
+\(\beta:Q\to\mathbb F_q^P\):
+
+\[
+ \boxed{\quad
+ \text{every normalized \(\beta\)-equation system of cost at most }r
+ \text{ is eventually confined}
+ \quad\Longleftrightarrow\quad
+ r<\rho_{P,\beta}(I)+d(I^\perp).
+ \quad}
+\]
+
+Necessity adds the external rank-one map \(q\mapsto\ell(q)v\) for nonzero
+\(\ell\in Q^*\) and a minimum word \(v\in I^\perp\).  Sufficiency uses only
+that the target-block part remains a \(\beta\)-lift.  Hence the proof is
+natural under precomposition and applies objectwise to the entire
+boundary-lift profile.  The following \(A\)-statement is its inclusion-map
+specialization.
+
+### Uniform transfer of the whole profile
+
+Assume at least one inner-dual word has nonzero restriction to \(P\), and
+define the least nonzero target-boundary cost
+
+\[
+ \eta_P(I)=
+ \min_{\substack{w\in I^\perp\\w|_P\neq0}}
+ |\operatorname{supp}(w)\setminus P|.
+\]
+
+For every nonzero presented demand that is internally realizable,
+\(\rho_{P,\beta}(I)\geq\eta_P(I)\): choose a query whose boundary is nonzero
+and inspect its row in any lift.  Equality is attained by taking
+\(Q=\mathbb F_q\) and \(\beta(1)=w|_P\) for a word attaining \(\eta_P(I)\).
+Consequently the objectwise theorem has a sharp uniform form: every
+cost-\(\leq r\) equation system for every internally realizable nonzero
+presented demand is eventually confined to its target block if and only if
+
+\[
+ \boxed{r<\eta_P(I)+d(I^\perp).}
+\]
+
+Below this threshold, zero-extension preserves the entire radius-\(r\)
+boundary-lift profile simultaneously, including every coefficient fiber and
+every property imposed only on the supports or coefficients of the lifted
+query basis.  Necessity uses the one-dimensional demand attaining
+\(\eta_P(I)\) and the same external minimum-dual-word perturbation.  This is
+the strongest priority-judo formulation: the classical notions are not
+renamed; they are evaluations or support projections of one transferred
+coefficient functor.
+
 Let \(I\leq\mathbb F_q^E\) be a represented inner code with message alphabet
 \(L\), let \(0\neq A\leq\mathbb F_q^P\) admit a normalized equation system,
 and concatenate \(I\) with an \(L\)-linear outer family whose dual distance
@@ -278,9 +418,10 @@ all coordinates in \(P\).  Since
  \quad}
 \]
 
-This is the priority-safe formulation: cooperative recovery is classical,
-while its complete coefficient family and exact concatenation transfer are
-obtained as a corollary of the more general linear-demand theorem.
+This is the priority-safe formulation: cooperative recovery, functional
+linear queries, and recovery of subspaces are classical.  What is obtained as
+a corollary is exact transfer of their complete bounded coefficient
+realizations from the more general presented-demand theorem.
 
 ### One-target reduction
 
@@ -392,9 +533,13 @@ The intrinsic existence criterion is prior art more exactly than the initial
 scout recorded.  Abdel-Ghaffar--Weber, Definition 1 and Lemmas 1--2, use the
 same kernel condition, generator-column span condition, and existence of
 \(|P|\) normalized dual rows supported on the targets and one common helper
-set.  C946's restricted-dual surjection is a basis-free restatement.  The new
-structural refinement is the *complete affine family* of splittings and its
-helper-supported gauge ambiguity, not simultaneous recovery itself.
+set.  Zhang--Etzion--Yaakobi and later functional-batch work recover arbitrary
+linear queries, while Chee--Etzion--Kiah--Zhang explicitly define a recovery
+set for a whole subspace by the same generator-span condition.  Consequently
+neither arbitrary linear demands nor their support-only existence condition
+is a priority route.  The surviving candidate is the exact transfer of the
+*complete filtered affine family* of lifts, naturally for every presented
+demand, not the demand abstraction itself.
 
 Chaiken's primary 1989 text was read at the relevant sections.  His
 \(P\)-ported Tutte polynomial is the established arbitrary-distinguished-set
@@ -428,6 +573,19 @@ candidate novelty, never a categorical priority claim.
   (Local) Data Recovery*, arXiv:2201.07503v2: abstract, introduction, and
   recovery-system definitions read from cached SHA-256
   75dfdc9b233c2f091e987790b6cff029551b59d0289d85f0b9b3d8b30a712bbc.
+- Chee--Etzion--Kiah--Zhang, *Recovery Sets of Subspaces from a Simplex
+  Code*, arXiv:2403.20170 / IEEE TIT 70 (2024): abstract, introduction,
+  recovery-set definition, and theorem statements read from cached SHA-256
+  1d9959130815f7e18c30efa4f9466cea98128b98d1f1e8e1cc1fb52d3a3c1300.
+- Zhang--Etzion--Yaakobi, *Bounds on the Length of Functional PIR and Batch
+  Codes*, arXiv:1901.01605 / IEEE TIT 66 (2020): abstract, formal functional
+  PIR/batch definitions, basic results, and conclusion read from cached
+  SHA-256
+  a0f7a84fa40d200e8a155469559294f9fe2dedb796a1c6e42827ead3313f9aad.
+- Oksner--Hollmann--Riet--Skachek, *On the Minimum Length of Functional Batch
+  Codes with Small Recovery Sets*, arXiv:2601.12302: Definitions 4--6,
+  Theorem 3, and conclusion read from cached SHA-256
+  183fea187fcd6eea26f1bb393117cb60d38d911d200eca0532298531e60ccb31.
 
 ## Acceptance gates
 
@@ -609,24 +767,28 @@ the fixed-demand predicate \(P\subseteq\operatorname{cl}(H)\):
 
 This quantifier view is the precise unification.
 
-### Linear-demand abstraction adopted as the primary research theorem
+### Presented-demand profile adopted as the primary research theorem
 
-Nothing in the splitting or transfer proof requires \(A\) to be the full
-coordinate space \(\mathbb F_q^P\). This report now takes a nonzero subspace
-\(A\leq\mathbb F_q^P\) as the primary object.  This unifies recovery
-of all target coordinates, partial linear queries, and rank-restricted
-demands.  Classical cooperative recovery is the corollary
-\(A=\mathbb F_q^P\), with its established kernel/span/dual-row criterion
-cited rather than claimed.
+Nothing in the splitting or transfer proof requires an inclusion
+\(A\hookrightarrow\mathbb F_q^P\).  The primary theorem therefore takes an
+arbitrary nonzero presentation \(\beta:Q\to\mathbb F_q^P\) and preserves its
+whole filtered affine lift space, naturally under precomposition.  Inclusion
+maps give recovery of a query subspace; the identity gives cooperative
+recovery; a map out of a free space presents a labeled tuple of linear queries
+supported on \(P\).  Their support/existence layers are prior art.  The
+candidate advance is the universal exact concatenation-transfer statement
+across these slices.
 
 ## Mystery ledger
 
 - **Settled by TT:** a hierarchy is not needed for the basic confinement gate.
   Rank one gives the sharp scalar threshold; generalized weights stratify
   stronger rank demands.
-- **Settled by priority-safe generalization:** the primary theorem is for an
-  arbitrary nonzero demand space \(A\leq\mathbb F_q^P\); established
-  cooperative recovery is the full-demand corollary.
+- **Settled after the focused literature check:** arbitrary linear and
+  subspace demands are prior art.  The primary theorem is instead the natural
+  transfer of the filtered affine lift profile for every presented demand
+  \(\beta:Q\to\mathbb F_q^P\); established subspace, functional-query, and
+  cooperative notions are support-level shadows or slices.
 - **Settled by TT:** the support layer is exactly the closure predicate
   \(P\subseteq\operatorname{cl}(H)\), and full-radius reliability is the
   \(Z^0\) slice of \(M\setminus P\to M/P\).

@@ -18,8 +18,9 @@ claim.
 
 1. Is simultaneous linear recovery of a target set from one helper set new?
 2. Is its generator-matrix, kernel, or normalized dual-equation criterion new?
-3. Is the full affine space of normalized equation systems for an arbitrary
-   linear demand space \(A\leq\mathbb F_q^P\) a standard named invariant?
+3. Are arbitrary linear queries or recovery of a whole demand subspace new,
+   and is the full filtered affine space of their normalized equation systems
+   a standard named invariant?
 4. Is target-set support data already carried by a set-pointed or ported Tutte
    invariant?
 5. Are generalized Hamming weights already used for cooperative locality?
@@ -69,25 +70,61 @@ must retain genuinely joint data: target-set restrictions, equation tuples,
 coefficient patterns, or intersections.  Merely renaming \(A_{x,j}\) is not
 new.
 
-The bounded search located **no predecessor** for the following combined
-result, formulated at the more general linear-demand level:
+The focused higher-level audit changes the initial priority framing.
+Arbitrary linear queries are **prior art** in functional PIR and batch codes:
+Zhang--Etzion--Yaakobi define requests as arbitrary linear combinations and
+require disjoint recovery sets, Nassar--Yaakobi add locality and array-access
+constraints, and Oksner--Hollmann--Riet--Skachek give the explicit
+generator-column span characterization with small recovery sets.  Recovery of
+an entire demand subspace is also **prior art**: Chee--Etzion--Kiah--Zhang
+define a helper set to recover \(U\) exactly when its stored one-spaces span a
+space containing \(U\), first in ISIT 2020 and then in the 2024 journal paper.
+For a presented demand \(\beta:Q\to\mathbb F_q^P\), nonemptiness of C946's
+lift space depends only on \(\operatorname{im}\beta\) and, for a generator
+matrix \(G\), is precisely
+\(G_P\beta(Q)\subseteq\operatorname{span}(G_H)\).  Neither “arbitrary demand
+space” nor its existence criterion can carry novelty.
 
-- a nonzero demand space \(A\leq\mathbb F_q^P\), with the complete affine
-  family of normalized equation systems realizing those demands and its
-  helper-supported gauge ambiguity;
+The presentation \(\beta\), rather than only its image, still organizes a
+genuinely richer coefficient object: the complete helper-filtered affine
+space of lifts
+
+\[
+ \{s:Q\to C^\perp\cap\mathbb F_q^{P\cup H}:s|_P=\beta\},
+\]
+
+natural under precomposition.  Inclusion maps give subspace recovery, the
+identity gives cooperative recovery, and maps from a free query space encode
+labeled functional-query tuples.  Functional-batch disjointness is an
+additional support predicate on the basis lifts; C946's universal confinement
+theorem preserves such predicates below its gate, but its sharp “only if”
+need not remain sharp after imposing disjointness.
+
+The bounded search located **no predecessor** for the following narrower
+combined result, formulated at the presented-demand level:
+
+- a nonzero presented demand \(\beta:Q\to\mathbb F_q^P\), with the complete
+  helper-filtered affine family of normalized equation systems and its
+  naturality under precomposition;
 - the exact finite map-valued non-confinement cost
-  \(\Theta_{P,A,j}(I,O)\) for a
-  general represented inner code; and
+  \(\Theta_{P,\beta,j}(I,O)\) for a
+  general represented inner code;
 - the sharp eventual concatenation criterion
-  \(r<\rho_{P,A}(I)+d(I^\perp)\), with cooperative recovery and the
-  one-target theorem recovered as specializations.
+  \(r<\rho_{P,\beta}(I)+d(I^\perp)\), objectwise over the boundary-lift
+  profile, with subspace recovery, cooperative recovery, and the one-target
+  theorem recovered as specializations; and
+- the uniform whole-profile criterion
+  \(r<\eta_P(I)+d(I^\perp)\), where \(\eta_P(I)\) is the least helper cost of
+  any nonzero target-boundary equation.
 
 This is a `NONE-FOUND` candidate contribution, not a priority claim.  Its safe
-description is: **an exact coefficient-aware transfer theorem for arbitrary
-bounded linear-demand equation systems**.  Classical simultaneous/cooperative
-recovery is then the full-demand corollary \(A=\mathbb F_q^P\).  Its intrinsic
-criterion, cooperative-locality concept, target-set Tutte carrier, and use of
-generalized weights must all be credited as prior.
+description is: **an exact coefficient-aware transfer theorem for the
+helper-filtered affine lift profile of presented local linear demands**.
+This wording claims the transfer theorem, not priority for linear demands.
+Classical subspace, functional-query, and simultaneous/cooperative recovery
+are slices or support-level shadows.  Their intrinsic criteria, the
+cooperative-locality concept, target-set Tutte carrier, and use of generalized
+weights must all be credited as prior.
 
 ## Closest-source comparison
 
@@ -97,7 +134,8 @@ generalized weights must all be credited as prior.
 | \(|P|\) normalized dual equations with identity restriction on \(P\) | Abdel-Ghaffar--Weber, Lemma 2 | prior art; C946's surjection and splitting notation is a basis-free repackaging |
 | Quantification over every erased set of size \(e\) with one helper set of size \(r\) | Rawat--Mazumdar--Vishwanath, Definition 1; Abdel-Ghaffar--Weber, Definition 2 | prior art (cooperative locality) |
 | Affine torsor of all splittings under \(\operatorname{Hom}(\mathbb F_q^P,C^\perp\cap\mathbb F_q^H)\) | no exact formulation located | elementary refinement; claim only as structural lemma, not a major novelty by itself |
-| Arbitrary demand subspace \(0\neq A\leq\mathbb F_q^P\), its complete affine equation family, and exact transfer | no predecessor located in the audited recovery, GHW, or ported-matroid sources | primary `NONE-FOUND` formulation; full cooperative recovery is its classical corollary |
+| Arbitrary linear query / recovery of a demand subspace | Zhang--Etzion--Yaakobi, functional-code definition; Chee--Etzion--Kiah--Zhang, introduction and recovery-set definition; Oksner--Hollmann--Riet--Skachek, Definitions 4--6 and Theorem 3 | prior art; existence is generator-column span containment |
+| Presented demand \(\beta:Q\to\mathbb F_q^P\) and its complete filtered affine lift profile | no exact formulation located | organizing refinement; do not claim novelty for the demand or nonemptiness predicate itself |
 | \(P\subseteq\operatorname{cl}_M(H)\) | Abdel-Ghaffar--Weber, Lemma 1, translated to the column matroid | prior art / immediate translation |
 | Arbitrary distinguished-set Tutte data | Chaiken, Sections 1 and 3, especially Theorem 2 and definition (3.4); Las Vergnas, Sections 2--3, especially (3.1)--(3.2) | prior art |
 | \(Z^0\) full-radius recovery slice for \(M\backslash P\to M/P\) | direct specialization of Las Vergnas (3.2) | author-derived adapter from prior polynomial; not a new invariant |
@@ -106,7 +144,7 @@ generalized weights must all be credited as prior.
 | Single-coordinate refined support counts and MacWilliams/LP identities | Gruica--Jany--Ravagnani, Definition 3.2, Theorem 3.8, Corollary 3.10, Section 4 | prior art |
 | Multiple concurrent requests for stored objects | Alfarano--Ravagnani--Soljanin, Definitions 2.2--2.5 | adjacent but different: service-rate allocation, not simultaneous erased-coordinate recovery |
 | Sequential recovery of two erasures | Prakash--Lalitha--Kumar, abstract and model description | adjacent but different quantifiers and sequential process |
-| Exact finite \(\Theta_{P,A,j}(I,O)\) and eventual \(\rho_{P,A}(I)+d(I^\perp)\) gate | no predecessor located in searched sources or screened citing sets | `NONE-FOUND` candidate contribution; cooperative recovery is the full-demand corollary |
+| Exact finite \(\Theta_{P,\beta,j}(I,O)\), objectwise eventual gate \(\rho_{P,\beta}(I)+d(I^\perp)\), and uniform whole-profile gate \(\eta_P(I)+d(I^\perp)\) | no predecessor located in searched sources or screened citing sets | `NONE-FOUND` candidate contribution; subspace, functional-query, cooperative, and one-target recovery are slices or support shadows |
 
 ## Source acquisition and read depth
 
@@ -126,6 +164,11 @@ mathematics, not metadata alone.
 | G. N. Alfarano, A. Ravagnani, and E. Soljanin, *Dual-Code Bounds on Multiple Concurrent (Local) Data Recovery*, arXiv:2201.07503v2 | `pdf/arXiv_2201.07503.pdf`, `75dfdc9b233c2f091e987790b6cff029551b59d0289d85f0b9b3d8b30a712bbc` | opened once; 5,092 words | partial: abstract, Introduction, Definitions 2.2--2.5, minimal-recovery-set discussion |
 | N. Prakash, V. Lalitha, and P. V. Kumar, *Codes with Locality for Two Erasures*, arXiv:1401.2422 | `pdf/arXiv_1401.2422.pdf`, `8596f44adaa5891b774835700717cf8873701e53c15194b70d14724ddeac6d0d` | cached; 9,070 extracted words | abstract/model-level read only; used to classify sequential two-erasure work as adjacent, not for a theorem import |
 | J. Hao and B. Chen, *On the Generalized Hamming Weights of \((r,\delta)\)-Locally Repairable Codes*, DOI `10.1109/ACCESS.2020.3016572` | DOI/OpenAlex/Crossref/ResearchGate metadata; publisher PDF returned HTTP 418 and attempted local files were empty | abstract opened once; no valid cached PDF | metadata/abstract only; no theorem-level conclusion depends on this source |
+| Y. M. Chee, T. Etzion, H. M. Kiah, and H. Zhang, *Recovery Sets of Subspaces from a Simplex Code*, DOI `10.1109/TIT.2024.3407197`, extending ISIT 2020 DOI `10.1109/ISIT44484.2020.9173994` | `pdf/arXiv_2403.20170.pdf`, `1d9959130815f7e18c30efa4f9466cea98128b98d1f1e8e1cc1fb52d3a3c1300` | opened once; 15 pages, 14,956 extracted words | partial: abstract, Introduction, exact recovery-set/span definition, setup, main theorem statements, conclusion; decisive for subspace-demand priority boundary |
+| Y. Zhang, T. Etzion, and E. Yaakobi, *Bounds on the Length of Functional PIR and Batch Codes*, DOI `10.1109/TIT.2020.2977631` | `pdf/arXiv_1901.01605.pdf`, `a0f7a84fa40d200e8a155469559294f9fe2dedb796a1c6e42827ead3313f9aad` | opened once; 27 pages, 17,078 extracted words | partial: abstract, Introduction, formal functional PIR/batch definitions, basic results, conclusion; decisive for arbitrary-linear-query priority boundary |
+| M. Nassar and E. Yaakobi, *Array Codes for Functional PIR and Batch Codes*, DOI `10.1109/TIT.2021.3124925` | `pdf/arXiv_2001.10770.pdf`, `451e08d05147966f87bc8e48a4658d0d6831f4b3d32f0346408e7d566ec98b0d` | opened once; 24 pages, 28,409 extracted words | partial: abstract, Introduction, Definition 1(c)--(d), locality-functional-array definition, selected bounds; establishes bounded recovery sets for arbitrary linear queries in the array model |
+| K. Oksner, H. D. L. Hollmann, A.-E. Riet, and V. Skachek, *On the Minimum Length of Functional Batch Codes with Small Recovery Sets*, arXiv:2601.12302 | `pdf/arXiv_2601.12302.pdf`, `183fea187fcd6eea26f1bb393117cb60d38d911d200eca0532298531e60ccb31` | opened once; 12 pages, 5,034 extracted words | partial: abstract, Definitions 3--6, Theorem 3 and proof, conclusion; exact generator-span and locality comparison read |
+| G. L. Matthews, G. Matthews, and E. Norton, *Linear Exact Repair for Dual Decomposable Codes*, DOI `10.1007/s40590-026-00897-y` | open-access publisher HTML; no immutable local PDF cached | abstract, Introduction, Definition 3.1, Proposition 3.2 and proof read in browser full text | adjacent vector/bandwidth work: uses a basis-indexed family of normalized dual words for one erased extension-field symbol; no bounded scalar lift-profile or concatenation-confinement theorem |
 
 The 1989 Chaiken article was readable through the author's uploaded
 browser-extracted full text, but direct publisher and ResearchGate PDF fetches
@@ -160,6 +203,15 @@ were not treated as absence evidence.
 | zbMATH Open | `ti:"Tutte polynomial of a ported matroid"` | 1 total; screened | exact Chaiken record `Zbl 3993603` |
 | zbMATH Open | `ti:"Bounds for cooperative locality"` | 0 | title syntax returned none although DOI/full text was independently verified; indexing miss, not absence evidence |
 | zbMATH Open | `ti:"Generalized Hamming Weights" & ti:"Locally Repairable Codes"` | 0 | indexing/query miss; not absence evidence |
+| OpenAlex | `"recovery sets of subspaces"` | 5 total; all 5 screened | recovered the 2020 ISIT precursor and 2024 journal version; one unrelated algebraic-coding hit |
+| OpenAlex | `"functional batch codes" locality recovery sets` | 6 total; all 6 screened | recovered functional batch, generalized batch, array, and subspace-recovery work |
+| OpenAlex | `"linear demand" recovery coding` | 275 total; first 25 screened | overwhelmingly non-coding false positives; no absence inference |
+| Crossref | `recovery sets of subspaces` | 539,505 total; first 20 screened | exact-title records ranked first and second; remainder false positives; broad count is not absence evidence |
+| Crossref | `functional batch codes locality recovery sets` | 1,593,604 total; first 20 screened | recovered functional PIR/batch and locality papers; broad count is not absence evidence |
+| Crossref | `linear demand recovery coding` | 1,255,225 total; first 20 screened | false-positive dominated; no absence inference |
+| arXiv API | `all:"recovery sets of subspaces"` | 2 total; both screened | Chee et al. plus one unrelated bibliography hit |
+| arXiv API | `all:"functional batch codes"` | 5 total; all screened | functional batch, simplex, and data-recovery descendants |
+| arXiv API | `all:"boundary map" AND all:recovery AND cat:cs.IT` | 0 | exact terminology returned no result; weak evidence only, not a field-wide absence claim |
 
 MathSciNet and Google Scholar were **not covered** in this run.  The former had
 no configured access path; the latter was not used as a stable, reproducible
@@ -178,6 +230,11 @@ are reported separately, as required, rather than merged.
 | Hao--Chen 2020 | 4 | 5 | 5 | all 4 OpenAlex titles/metadata screened; weight hierarchies, refined distributions, and LP bounds |
 | Chaiken 2006 | 9 | not separately queried | not separately queried | all 9 OpenAlex titles/metadata screened; mostly electrical-circuit applications |
 | Gruica--Jany--Ravagnani 2026 | not used for a negative citation-set claim | 0 | 2 | very recent source; citation counts are too immature for absence evidence |
+| Chee--Etzion--Kiah--Zhang ISIT 2020 | 2 | not separately queried | 1 | both OpenAlex titles screened: the 2024 journal extension and vector-space batch work |
+| Chee--Etzion--Kiah--Zhang TIT 2024 | 0 | not separately queried | 0 | empty provider snapshots recorded as immature indexing, not proof of no descendants |
+| Zhang--Etzion--Yaakobi TIT 2020 | 18 | 15 | 2 | all 18 OpenAlex titles screened; descendants include functional batch/array, generalized batch, simplex, and privacy work, with no exact concatenation lift-profile transfer located |
+| Nassar--Yaakobi TIT 2022 | journal DOI not indexed by OpenAlex in the exact-DOI query; ISIT 2020 precursor has 0 | 4 | 1 | access/indexing limitation recorded; no merged count and no negative citation-set inference |
+| Matthews--Matthews--Norton 2026 | 0 | 0 | 0 | very recent source; counts recorded only, not used as absence evidence |
 
 The citation-graph conclusion is deliberately narrow: none of the screened
 titles/metadata advertises the C946 coefficient-aware concatenation theorem.
@@ -191,10 +248,13 @@ closer, and it does not justify categorical priority language.
 2. State that the kernel, generator-span, and normalized dual-row existence
    criteria are established; cite Abdel-Ghaffar--Weber Definition 1 and
    Lemmas 1--2 at the proposition itself.
-3. State the theorem first for an arbitrary nonzero linear demand space
-   \(A\leq\mathbb F_q^P\), including its complete affine equation family.
-   Present simultaneous recovery as the full-demand corollary.  Do not claim
-   that simultaneous recovery itself is new.
+3. State the theorem first for a presented demand
+   \(\beta:Q\to\mathbb F_q^P\) and its complete helper-filtered affine lift
+   family, naturally under precomposition.  Cite functional PIR/batch and
+   Chee--Etzion--Kiah--Zhang before saying that inclusion maps recover demand
+   subspaces.  Present simultaneous recovery as the identity-map corollary.
+   Do not claim that arbitrary linear queries, subspace recovery, or
+   simultaneous recovery is new.
 4. Cite Chaiken and Las Vergnas wherever the full-radius target-set Tutte
    carrier is introduced.  Reserve “ported” for their established matroid
    terminology.
