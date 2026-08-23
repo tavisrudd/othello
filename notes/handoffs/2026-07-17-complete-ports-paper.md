@@ -3,7 +3,7 @@
 **Lane**: `complete-ports`
 
 **Date**: 2026-07-26
-**Status**: ACTIVE; C944 RECOVERY-TERMINOLOGY REVISION COMPLETE; C325 APPENDIX VERIFIER RESUMES NEXT; REMOTE PUBLICATION GATED
+**Status**: ACTIVE; C946 MULTI-TARGET RECOVERY GENERALIZATION IN PROGRESS; C325 APPENDIX VERIFIER RESUMES AFTER; REMOTE PUBLICATION GATED
 **Theorem source lane**: archived [`repaircodes`](done/2026-07-13-projective-completion-repaircodes.md)
 **Current private paper**: [`complete-repair-ports`](../../papers/complete-repair-ports/README.md)
 **Canonical paper identity**: `complete-ports` — *Bounded Recovery Structures of Linear Codes:
@@ -93,6 +93,14 @@ Completed strengthening:
   review, and leaves a verified local public export; no push or deposit was
   made.
 
+Active sequel research:
+
+- [C946 multi-target recovery and exact confinement](../2026-08-22-c946-multitarget-recovery-confinement.md)
+  derives the restricted-dual splitting object and tests a sharp eventual
+  helper-union threshold reducing to the one-target theorem.  It is outside the
+  frozen manuscript until its finite functional-cost theorem, generalized-
+  weight boundary, literature comparison, and cold reads close.
+
 ## Publication boundary
 
 Every paper is a fresh-history allowlisted export. Never publish, fork, history-filter, or broadly
@@ -122,7 +130,8 @@ Before any nontrivial proof development or formalization for this paper, read th
 paper-specific expert dossier
 [`papers/expert-profiles/05-complete-repair-ports.md`](../../papers/expert-profiles/05-complete-repair-ports.md).
 The proof and assembly sequence C672--C678 and the C944 terminology revision
-are complete.  Run C325 to build the appendix-only finite verifier.  C679 then
+are complete.  Complete the user-prioritized C946 sequel derivation, then run
+C325 to build the appendix-only finite verifier.  C679 then
 performs the aggregate formal/prose audits and independent
 draft-readiness cold reads.
 
