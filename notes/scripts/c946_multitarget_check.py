@@ -186,6 +186,61 @@ def minimum_splitting_costs(length: int) -> tuple[int, int]:
     return minimum_confined, minimum_nonconfined
 
 
+def target_recovery_cost(
+    code_dual: frozenset[int], n: int, target: tuple[int, ...]
+) -> int:
+    target_mask = sum(1 << i for i in target)
+    remaining = tuple(i for i in range(n) if i not in target)
+    for helper_size in range(len(remaining) + 1):
+        for helper in combinations(remaining, helper_size):
+            helper_mask = sum(1 << i for i in helper)
+            restrictions = [
+                restrict(word, target)
+                for word in code_dual
+                if word & ~(target_mask | helper_mask) == 0
+            ]
+            if span_rank(restrictions) == len(target):
+                return helper_size
+    return n + 1
+
+
+def find_first_order_counterexample() -> tuple[tuple[int, ...], ...]:
+    n = 5
+    buckets: dict[tuple[int, tuple[int, ...]], list[tuple[frozenset[int], int]]] = {}
+    for code in all_binary_subspaces(n):
+        if any(all(((word >> coordinate) & 1) == 0 for word in code)
+               for coordinate in range(n)):
+            continue
+        code_dual = dual(code, n)
+        signature = tuple(
+            sum(
+                1
+                for word in code_dual
+                if (word & 1) and word.bit_count() == helper_weight + 1
+            )
+            for helper_weight in range(n)
+        )
+        key = (len(code), signature)
+        cost = target_recovery_cost(code_dual, n, (0, 1))
+        buckets.setdefault(key, []).append((code, cost))
+    for (code_size, signature), records in sorted(buckets.items()):
+        costs = sorted({cost for _, cost in records if cost <= n})
+        if len(costs) < 2:
+            continue
+        first_cost, second_cost = costs[:2]
+        first_code = next(code for code, cost in records if cost == first_cost)
+        second_code = next(code for code, cost in records if cost == second_cost)
+        return (
+            (code_size,),
+            signature,
+            tuple(sorted(first_code)),
+            (first_cost,),
+            tuple(sorted(second_code)),
+            (second_cost,),
+        )
+    raise AssertionError("no first-order counterexample found")
+
+
 def main() -> None:
     tested, recoverable = intrinsic_checks()
     family_results = {
@@ -195,9 +250,19 @@ def main() -> None:
     assert family_results[3] == (1, 2)
     assert family_results[4] == (1, 3)
     assert family_results[5] == (1, 3)
+    counterexample = find_first_order_counterexample()
+    assert counterexample == (
+        (4,),
+        (0, 2, 0, 2, 0),
+        (0, 11, 20, 31),
+        (1,),
+        (0, 10, 21, 31),
+        (2,),
+    )
     print(f"intrinsic_cases={tested}")
     print(f"recoverable_cases={recoverable}")
     print(f"spc_repetition_costs={family_results}")
+    print(f"first_order_counterexample={counterexample}")
     print("c946_multitarget_check=PASS")
 
 

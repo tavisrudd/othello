@@ -388,3 +388,30 @@ all normalized two-row splittings gives
 for \(N=2,3,4,5\), respectively. Thus the finite obstruction is
 \(\min(N-1,3)\): the nonzero outer-functional branch costs \(N-1\) before the
 zero-functional branch takes over, exactly as the map-valued formula predicts.
+
+The same script finds a nondegenerate first-order MacWilliams counterexample
+in length five. Let
+
+\[
+ C_1=\langle(1,1,0,1,0),(0,0,1,0,1)\rangle,\qquad
+ C_2=\langle(0,1,0,1,0),(1,0,1,0,1)\rangle.
+\]
+
+Both are binary dimension-two codes. At \(x=0\), their normalized dual-word
+counts by helper weight \(j=0,\ldots,4\) are identically
+
+\[
+ (A_{x,0},\ldots,A_{x,4})=(0,2,0,2,0).
+\]
+
+For the two-coordinate target \(P=\{0,1\}\), however,
+
+\[
+ \rho_P(C_1)=1,\qquad \rho_P(C_2)=2.
+\]
+
+Thus even equal dimension plus the complete first-order normalized weight
+enumerator at \(x\) does not determine the simultaneous recovery cost for a
+target set containing \(x\). This is the required finite obstruction to
+promoting the existing first-order MacWilliams transform directly to the
+multi-target structure.
