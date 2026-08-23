@@ -15,6 +15,7 @@ ROOT = Path(__file__).resolve().parent
 OUTPUT = ROOT / "2026-08-22-c945-higher-arc-defect.json"
 CHECKSUMS = ROOT / "2026-08-22-c945-higher-arc-defect.sha256"
 Q_VALUES = (4, 5, 7, 8, 9, 11, 13, 16, 17, 19, 23, 25, 27, 31, 32, 49, 64, 81, 125, 128, 243, 256)
+WIDE_DEGREE_Q_VALUES = (7, 8, 9, 11, 13, 16, 17, 19, 23, 25, 27, 31, 32)
 LAMBDA_VALUES = (1, 2, 3)
 
 
@@ -213,6 +214,43 @@ def run_checks() -> dict[str, object]:
         assert lower == 3 * comb(k, 4), (k, lower, 3 * comb(k, 4))
         checked_arc_specializations += 1
 
+    checked_spectral_equivalences = 0
+    for q in range(3, 17):
+        point_count = q * q + q + 1
+        for s in range(2, q + 1):
+            blocking_order = q + 1 - s
+            for lam in LAMBDA_VALUES:
+                for k in range(s + 1, (s - 1) * q + s + 1):
+                    blocking_size = point_count - k
+                    cleared_cauchy = (
+                        lam * blocking_size * s * s
+                        + lam * k * blocking_order * blocking_order
+                        - lam * k * blocking_size
+                        - q * blocking_order * k
+                    )
+                    bms_quadratic = (
+                        lam * blocking_size * blocking_size
+                        - (
+                            2 * lam * blocking_order * (q + 1)
+                            - (lam + blocking_order) * q
+                        )
+                        * blocking_size
+                        - blocking_order
+                        * (q - lam * blocking_order)
+                        * point_count
+                    )
+                    assert cleared_cauchy == bms_quadratic
+                    checked_spectral_equivalences += 1
+
+    checked_infinite_family_instances = 0
+    for q in range(16, 97, 8):
+        s = q // 2 + 1
+        spectral = spectral_minimum(q, s, 2)
+        paired = paired_moment_minimum(q, s, 2)
+        assert spectral == s * s
+        assert paired == s * s + q // 8 - 1
+        checked_infinite_family_instances += 1
+
     rows = []
     for q in Q_VALUES:
         for s in range(2, min(8, q) + 1):
@@ -226,7 +264,7 @@ def run_checks() -> dict[str, object]:
                 assert spectral is None or spectral >= s + 1
                 hybrid = None if second is None or spectral is None else max(second, spectral)
                 assert paired is None or hybrid is None or paired >= hybrid
-                assert paired_spectral is None or paired is None or paired_spectral >= paired
+                assert paired_spectral == paired
                 rows.append(
                     {
                         "q": q,
@@ -243,16 +281,43 @@ def run_checks() -> dict[str, object]:
                     }
                 )
 
+    wide_degree_rows = []
+    for q in WIDE_DEGREE_Q_VALUES:
+        for s in range(2, q + 1):
+            for lam in LAMBDA_VALUES:
+                second = second_moment_minimum(q, s, lam)
+                spectral = spectral_minimum(q, s, lam)
+                hybrid = None if second is None or spectral is None else max(second, spectral)
+                paired = paired_moment_minimum(q, s, lam)
+                wide_degree_rows.append(
+                    {
+                        "q": q,
+                        "s": s,
+                        "lambda": lam,
+                        "hybrid_minimum": hybrid,
+                        "paired_moment_minimum": paired,
+                        "gain_over_hybrid": None
+                        if paired is None or hybrid is None
+                        else paired - hybrid,
+                        "degree_regime": "below_sqrt_q"
+                        if s * s < q
+                        else ("intermediate" if 2 * s < q else "at_least_half_q"),
+                    }
+                )
+
     return {
-        "schema": "c945-higher-arc-defect-v4",
+        "schema": "c945-higher-arc-defect-v5",
         "meaning": "Necessary-bound thresholds only; projective-plane or arc existence is not asserted.",
         "parameters": {"lambda_values": list(LAMBDA_VALUES), "holes": 0, "q_values": list(Q_VALUES), "s_max": 8},
         "independent_checks": {
             "convex_envelope_instances": checked_envelopes,
             "bounded_convex_envelope_instances": checked_bounded_envelopes,
             "ordinary_arc_specializations": checked_arc_specializations,
+            "spectral_quadratic_equivalences": checked_spectral_equivalences,
+            "infinite_family_formula_instances": checked_infinite_family_instances,
         },
         "rows": rows,
+        "wide_degree_rows": wide_degree_rows,
     }
 
 

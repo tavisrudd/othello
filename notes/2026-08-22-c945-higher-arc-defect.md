@@ -7,17 +7,62 @@
 **Status:** active theorem-development and literature-audit phase; the manuscript is
 untouched pending a go/no-go gate.
 
-**Literature-audit summary:** seven individually discussed sources; two read at
-full text and five partially.  No novelty or priority verdict is closed.  The
-Semantic Scholar forward-citation count, zbMATH search, MathSciNet coverage,
-and full-text reads of the five partial sources remain open.  Accordingly, no
-manuscript-bound “to our knowledge” sentence is licensed by this report.
+**Literature-audit summary:** thirteen individually discussed sources; seven
+read at full text and six partially.  The bounded full-text audit settles the main
+classicality question but does not close a global novelty or priority verdict.
+The degree-two moment/variance identity, its spectral form, the
+arc--blocking-set dictionary, and the projective-code extension dictionary are
+classical.  No direct predecessor for the *simultaneous exact integer degree
+envelopes* or the unbounded family `(UF)` was located in the recorded search,
+but Semantic Scholar and MathSciNet coverage remain open; zbMATH coverage is a
+recorded targeted search rather than an exhaustive subject classification.
+Accordingly, no manuscript-bound “to our knowledge” sentence is licensed by
+this report.
 
 ## Objective
 
 Determine the natural theorem level of the prescribed-hole defect method for
 complete `(k,s)`-arcs.  Promote the extension only if it yields structural rigidity
 or a sharper general bound, rather than merely a formally broader identity.
+
+## Current strength and recommended theorem architecture
+
+The raw higher-arc identity is now assessed at roughly the **50th--65th
+percentile** as a standalone result: it is an elementary specialization of
+classical incidence moments.  The higher-binomial generating identity is also
+classical machinery and is not itself a headline theorem.  The present package
+with the paired integer envelopes, exact recovery of spectral mixing as its
+continuous relaxation, the modular correction, and the infinite strict-gain
+family is provisionally at the **90th--94th percentile** among specialized
+finite-geometry papers, conditional on finishing the narrow precedence audit
+and replacing the remaining proof sketches by lemmas.  The arbitrary-
+dimensional code corollary raises audience and conceptual reach, but not the
+percentile by itself.
+
+The strongest honest architecture is therefore:
+
+1. a general integer moment-envelope theorem for selected blocks in symmetric
+   designs, with prescribed lower degrees, holes, and certified upper caps;
+2. classical BIBD variance/expander mixing as the real-relaxation corollary,
+   explicitly credited to Haemers and the later elementary formulation of
+   Murphy--Petridis;
+3. projective point--hyperplane systems and robust nonextendibility of
+   projective codes as the general geometric application;
+4. complete `(k,s)`-arcs and multiple blocking sets as the sharp planar
+   specialization, where matching/pencil caps add information unavailable in
+   an arbitrary design;
+5. `(UF)` as the clean separation theorem showing an unbounded gain over the
+   classical spectral quadratic.
+
+This makes the classical result a corollary without pretending the elementary
+moment expansion is new.  A higher (`j>=3`) moment should enter the headline
+only after a concrete rank-distribution application is proved; at present it
+is the correct umbrella and future direction, not yet the source of the main
+numerical gain.  Likewise, the symmetric-design theorem is the organizing
+theorem, not the safest priority claim: exact quotient equations and arithmetic
+restrictions for tactical decompositions are classical.  The priority-bearing
+unit is the non-tactical selected-family envelope together with `(UF)` and the
+prescribed-hole / robust-nonextendibility applications.
 
 ## Candidate intrinsic theorem
 
@@ -275,10 +320,11 @@ T [N tau-(q+1)b]^2 <= q b k (N-T),       N=q^2+q+1.
 Thus a genuinely coupled spectral--moment theorem requires an integer `T`
 satisfying the packing bounds, the paired interval overlap, and this spectral
 inequality.  On the current grid the paired overlap alone already gives the
-coupled threshold, so the spectral constraint adds no further row.  This is a
-useful negative result: the new gain comes from restoring the discarded half
-of the pair-moment data, not from mechanically intersecting two old scalar
-bounds.
+coupled threshold, so the spectral constraint adds no further row.  The
+symmetric-design calculation below shows that this redundancy is exact: the
+full-family spectral inequality is the real Cauchy relaxation of the paired
+identity.  The new gain comes from its integer convex envelope and geometric
+caps, not from mechanically intersecting two old scalar bounds.
 
 Against the earlier pointwise maximum of the defect and
 Bishnoi--Mattheus--Schillewaert thresholds, the paired condition is strictly
@@ -286,6 +332,331 @@ stronger in 27, 23, and 26 of the 146 rows for `lambda=1,2,3`, respectively.
 The maximum gains are two points for `lambda=1` and one point for
 `lambda=2,3`.  These are necessary parameter bounds only; no existence claim
 is inferred.
+
+## Higher binomial-moment master identity
+
+Let `Omega=A union B` be any finite set and let `F` be any family of `T`
+subsets of `Omega`.  Write `z_x` for the number of members of `F` containing
+`x`.  Expanding pointwise gives the universal intersection enumerator
+
+```
+sum_{x in Omega} (1+u)^(z_x)
+  = sum_{J subseteq F} |intersection J| u^|J|,
+```
+
+where the empty intersection is `Omega`.  Equating the coefficient of `u^j`
+gives, for every `j>=1`,
+
+```
+sum_{x in A} C(z_x,j) + sum_{x in B} C(z_x,j)
+  = sum_{J in C(F,j)} |intersection J|.                 (M_j)
+```
+
+Thus the pair identity is only the `j=2` member of a complete binomial-moment
+hierarchy.  No geometry or design hypothesis is needed for `(M_j)`.
+
+For each `j>=2`, the integer function `C(z,j)` is discretely convex.  Fixed
+degree sums and lower/upper boxes therefore give computable minimum and
+maximum values on each side of the partition: balancing minimizes, and
+successive filling at the largest marginal increment maximizes.  Whenever the
+right side of `(M_j)` is known or bounded, the two feasible moment intervals
+must overlap after reflection about it.  Intersecting these conditions over
+several `j` gives a hierarchy of integer nonexistence tests.
+
+More generally, choose any polynomial `p(z)` that is nonnegative on the
+allowed integer degrees and expand it in the binomial basis
+
+```
+p(z)=sum_j c_j C(z,j).
+```
+
+Summing `p(z_x)` and using `(M_j)` gives an exact defect or linear-programming
+certificate.  The present two-root quadratic is the degree-two choice whose
+zeros are `lambda` and `M`.  Higher-degree choices can force several permitted
+concurrence indices, detect distance from a prescribed degree spectrum, or
+combine information about triple and higher block intersections.  This is the
+natural route beyond the paired second moment.
+
+The generating identity itself is elementary inclusion expansion and should
+be treated as classical machinery.  Any prospective contribution must lie in
+the choice of incidence family, the sharp integer envelopes, or a new
+geometric/code consequence—not in claiming the identity.
+
+### Symmetric designs: the degree-two corollary
+
+The paired squeeze is not intrinsically planar.  Let `D` be a symmetric
+`2-(v,K,Lambda)` design, let its point set be partitioned as `A union B`, and
+let `F` be a family of `T` blocks satisfying `|F intersect A|=s` for every
+`F in F`.  If `d(a)` and `r(b)` are the numbers of selected blocks through
+points of `A` and `B`, then
+
+```
+sum_A d=sT,                 sum_B r=(K-s)T,
+sum_A C(d,2)+sum_B C(r,2)=Lambda C(T,2).
+```
+
+The last identity holds because every two blocks of a symmetric design meet
+in exactly `Lambda` points.  Give the degrees on either side arbitrary integer
+lower and upper bounds.  Let `[P_A^-,P_A^+]` and `[P_B^-,P_B^+]` be the
+separable-convex extrema of their pair sums at the displayed degree totals.
+Every realization necessarily satisfies
+
+```
+[P_B^-,P_B^+] intersects
+[Lambda C(T,2)-P_A^+, Lambda C(T,2)-P_A^-].
+```
+
+The two-root defect itself also transfers verbatim.  Partition `B=R union H`,
+assume `lambda<=r(x)<=M` on `R` and `0<=r(h)<=M` on `H`, and put
+`I_H=sum_H r(h)`.  With
+
+```
+S1=(K-s)T,
+S2=Lambda C(T,2)-sum_A C(d(a),2),
+```
+
+one has
+
+```
+(M+lambda-1)S1 - 2S2 - lambda I_H - lambda M|R|
+ = sum_R (r-lambda)(M-r) + sum_H r(M-r).
+```
+
+Thus prescribed holes, equality roots, and integer stability are already
+features of the symmetric-design theorem; planarity enters only when sharper
+caps or geometric interpretations are required.
+
+This degree-two corollary contains heterogeneous holes, multiple
+coverage requirements, and nonuniform certified caps without changing the
+proof.  The projective-plane theorem is the specialization
+`(v,K,Lambda)=(q^2+q+1,q+1,1)`, where the geometry supplies the much sharper
+matching and pencil caps.
+
+The incidence graph gives a compatible general spectral constraint.  For the
+point set `B` and block family `F`, substitute `i(B,F)=(K-s)T` into
+
+```
+|i(B,F)-K|B|T/v|
+ <= sqrt(K-Lambda)
+    sqrt(|B|T(1-|B|/v)(1-T/v)).
+```
+
+Thus the general feasibility certificate is an integer `T` satisfying the
+degree totals, the paired interval overlap, any geometric packing bounds, and
+this design-spectral inequality.
+
+In fact the spectral inequality is already encoded in the real relaxation of
+the pair identity.  Cauchy--Schwarz on both degree sequences gives
+
+```
+T [s^2/|A| + (K-s)^2/|B| - Lambda] <= K-Lambda.       (*)
+```
+
+Equality requires constant degrees on each side.  Conversely, expanding the
+design mixing inequality above and using
+`K(K-1)=Lambda(v-1)` gives exactly `(*)`.  Hence the paired-moment theorem is
+an integer refinement of the full-family expander-mixing bound: replacing its
+balanced integer minima by the real quantities `(sT)^2/|A|` and
+`((K-s)T)^2/|B|` loses precisely the rounding information.
+
+If every point of `B` has degree at least `lambda`, then
+`T>=lambda|B|/(K-s)`.  Since the bracket in `(*)` is positive, eliminating
+`T` yields the explicit design bound
+
+```
+lambda |B|/(K-s)
+  [s^2/|A| + (K-s)^2/|B| - Lambda]
+ <= K-Lambda.                                             (**)
+```
+
+For the projective plane, substitute `|A|=k`,
+`|B|=q^2+q+1-k`, `K=q+1`, `Lambda=1`, and `K-s=q+1-s`.
+After clearing denominators, `(**)` is exactly the quadratic in
+Bishnoi--Mattheus--Schillewaert Theorem 8.1.  Their spectral predecessor is
+therefore the continuous scalar shadow of the paired identity.  Retaining
+integer degree extrema explains both why the new threshold never needs the
+full-family spectral constraint and why it can be strictly stronger.
+
+### Explicit modular sharpening
+
+The integrality loss has a closed form.  If `R=an+v` with `0<=v<n`, then
+
+```
+Phi_min(n,R)
+ = (R^2/n-R)/2 + v(n-v)/(2n).
+```
+
+For a plane, put `b=q^2+q+1-k`, `tau=q+1-s`,
+`v_A=(sT mod k)`, and `v_B=(tau T mod b)`.  The lower-end paired condition is
+equivalently the strengthened mixing inequality
+
+```
+T [s^2/k + tau^2/b - 1]
+ + v_A(k-v_A)/(kT) + v_B(b-v_B)/(bT)
+ <= q.                                                    (IM)
+```
+
+Dropping the two nonnegative modular terms gives classical expander mixing.
+Both vanish exactly when the selected maximal secants have constant degrees
+on `A` and on its complement.
+
+There is a dual cap-filling correction.  For `n` degrees in `[L,U]` with sum
+`R=nL+E`, put `C=U-L` and `w=(E mod C)` when `C>0`.  Then
+
+```
+Phi_max(n,L,U,R)
+ = ((U+L-1)R-ULn)/2 - w(C-w)/2.
+```
+
+Thus the continuous two-root defect bound discards an explicit nonnegative
+integer term `w(C-w)`.  Applying both remainder formulas on both sides gives
+the exact paired interval test.  This identifies the sharpening mechanism:
+spectral variance is the real relaxation, while modular imbalance supplies
+the extra obstruction.
+
+### An unbounded strict-improvement family
+
+Let `q=2n` with `n` divisible by `4` and `n>=8`; equivalently,
+`q≡0 (mod 8)` and `q>=16`.  Set
+
+```
+s=n+1=q/2+1,             lambda=2.
+```
+
+For double maximal-secant coverage, the
+Bishnoi--Mattheus--Schillewaert quadratic has the exact lower root
+
+```
+k >= s^2.
+```
+
+The integer paired moments give the strictly stronger necessary bound
+
+```
+k >= s^2+n/4-1 = (q/2+1)^2+q/8-1.                       (UF)
+```
+
+Here is the elementary calculation.  Write `k=s^2+c`.  The spectral bound
+already excludes `c<0`.  For `0<=c<n/4`, the complementary size is
+`b=3n^2-c`, and double coverage forces `T>=ceil(2b/n)=6n`.  A direct
+discrete-slope comparison of
+
+```
+Phi_min(k,sT)+Phi_min(b,nT)-C(T,2)
+```
+
+shows that it is minimized over the feasible `T` at `T=6n`.  Explicitly, its
+forward difference at an integer `T` is
+
+```
+sum_{i=0}^{n} floor(((n+1)T+i)/k)
+ + sum_{i=0}^{n-1} floor((nT+i)/b) - T,
+```
+
+because `Phi_min(N,R+1)-Phi_min(N,R)=floor(R/N)`.  The monotonicity
+claim has a short explicit proof.  Put `T=6n+u`.  Since
+
+```
+(n+1)T >= 5((n+1)^2+c),       nT >= 2(3n^2-c)
+```
+
+for `n>=8` and `0<=c<n/4`, the displayed forward difference is at least
+`n+5-u`; hence it is nonnegative for `0<=u<=n+5`.  For
+`T>=7n+5`, use `floor(x)>=x-1` to bound it below by
+
+```
+T delta-(2n+1),
+delta=(n+1)^2/((n+1)^2+c)+n^2/(3n^2-c)-1
+     >= 1/3-n/(4(n+1)^2).
+```
+
+Direct multiplication gives
+`(7n+5)(1/3-n/(4(n+1)^2)) >= 2n+1` for `n>=8`: after
+multiplication by `12(n+1)^2`, the difference is
+`4n^3-5n^2+5n+8>0`.
+Thus the forward difference is nonnegative for every feasible `T>=6n`, with
+no unrecorded quotient case split.  At `T=6n` the internal
+degrees are balanced between `5` and `6`, the external degrees between `2`
+and `3`, and the difference is
+
+```
+Phi_min(k,6ns)+Phi_min(b,6n^2)-C(6n,2)
+ = 3n-15-12c.
+```
+
+Feasibility requires this to be nonpositive, so
+
+```
+c >= ceil((n-5)/4)=n/4-1.
+```
+
+This proves `(UF)`.  The improvement over the classical spectral theorem is
+linear in `q`, rather than a sporadic one-point rounding gain.  Desarguesian
+planes of orders `q=2^m`, `m>=4`, supply an infinite sequence of ambient
+planes to which the necessary bound applies; existence of arcs attaining the
+new threshold is not asserted.
+
+### Projective codes in arbitrary dimension
+
+Take the point--hyperplane design of `PG(r-1,q)`, where
+
+```
+v      = (q^r-1)/(q-1),
+K      = (q^(r-1)-1)/(q-1),
+Lambda = (q^(r-2)-1)/(q-1).
+```
+
+A point set `A` of size `k` with maximum hyperplane intersection `s`
+generates a projective `[k,r,k-s]_q` code.  Its `s`-hyperplanes correspond to
+minimum-weight codewords.  For a candidate new column `x`, every such
+hyperplane through `x` is a distinct witness preventing the extended code's
+minimum distance from increasing to `k+1-s`.  Requiring at least `lambda`
+witnesses at every admissible `x` is therefore robust projective
+nonextendibility in every dimension.
+
+The symmetric-design identity gives an exact paired-moment obstruction for
+these codes:
+
+```
+sum_{a in A} C(d(a),2)
+ + sum_{x notin A} C(r(x),2)
+ = ((q^(r-2)-1)/(q-1)) C(T,2).
+```
+
+For `r=3` this is exactly the higher-arc identity.  Higher dimensions lose the
+plane's matching cap, but retain arbitrary certified degree caps, the convex
+interval obstruction, the spectral constraint, and the equality theory.
+This supplies a direct application class well beyond complete `(k,s)`-arcs.
+
+The higher moments also have a code-theoretic meaning.  A `j`-set of selected
+hyperplanes in `PG(r-1,q)` has intersection size determined by the rank of its
+`j` defining linear forms.  Hence the right side of `(M_j)` is a weighted rank
+enumerator of families of minimum-weight codewords.  Bounds on the rank
+distribution of those words feed directly into the integer moment hierarchy.
+When the selected hyperplanes are in general position through order `j`, the
+right side is constant and the `j`th interval obstruction is explicit.
+
+This connects robust nonextendibility to matroid data that the ordinary
+minimum distance and the degree-two spectral bound do not see.  A concrete
+third- or higher-moment family with a computable rank enumerator would be the
+strongest route to an application exceeding the current scalar bounds.
+
+### Rigidity and arithmetic corollaries
+
+- If the two feasible pair intervals are disjoint, the proposed design, arc,
+  blocking set, or projective code does not exist.
+- If they meet at a single endpoint, equality in convexity forces one side's
+  degrees to be as balanced as possible and the other side's to be filled to
+  its caps.  Hence the incidence partition is two-level up to one remainder
+  class, producing divisibility conditions and a candidate tactical or
+  quasi-symmetric design.
+- The distance between the actual pair sum and either endpoint is a sum of
+  elementary smoothing or anti-smoothing moves.  It gives an integer stability
+  parameter before any geometry-specific argument is invoked.
+- In the planar complement, the result simultaneously bounds higher arcs,
+  minimal multiple blocking sets with several tangents per point, and robust
+  dimension-three code extensions.  These are three readings of one theorem,
+  not separate analogies.
 
 The other structural object exposed by the pressure test is the dual clique
 partition on the `s`-secants.  On its `t_s` vertices, the internal star cliques
@@ -432,7 +803,7 @@ range.  This isolated exclusion and the decreasing frequency of strict
 improvement as `lambda` rises are numerical observations, not yet structural
 theorems.
 
-The v4 rows also evaluate the complementary quadratic from
+The v5 rows also evaluate the complementary quadratic from
 Bishnoi--Mattheus--Schillewaert Theorem 8.1 and record the pointwise hybrid
 threshold.  Against that spectral threshold, the new second moment wins in
 97/86/73 rows, loses in 34/52/59, and ties in 15/8/14 for
@@ -443,6 +814,17 @@ They additionally record the paired-moment and paired-plus-full-spectral
 thresholds.  The paired threshold improves the earlier hybrid in 27/23/26
 rows for `lambda=1/2/3`, with maximum gains 2/1/1.  The full-family spectral
 constraint changes none of those paired thresholds on this grid.
+
+A second, wider-degree sweep covers all `2<=s<=q` for the 13 orders
+`q=7,8,9,11,13,16,17,19,23,25,27,31,32`, giving 225 rows per multiplicity.
+The paired threshold improves the old hybrid in 155, 140, and 116 rows for
+`lambda=1,2,3`, with maximum gains six, five, and three.  The phase separation
+is pronounced: among the 33 rows with `s^2<q`, it improves 0, 1, and 0;
+among the 65 intermediate rows it improves 42, 37, and 36; and among the 127
+rows with `2s>=q` it improves 113, 102, and 80.  This supports a high-degree
+paired-moment regime beginning near `s` of order `sqrt(q)`, complementary to
+the fixed-degree additive bound.  It is evidence for, not yet a proof of, an
+infinite-family phase theorem.
 
 For the eight small `(k,3)` comparison orders
 `q=4,5,7,8,9,11,13,16` at `lambda=1`, the first/second thresholds are
@@ -456,7 +838,10 @@ The generator independently checks the original convex degree envelope by
 dynamic programming in 5,386 bounded instances (`3 <= k <= 20`,
 `2 <= s < min(6,k)`, all feasible degree sums), checks the lower/upper bounded
 degree envelopes in another 1,368 instances, and checks 37 ordinary-arc
-specializations against `3 C(k,4)` for `4 <= k <= 40`.
+specializations against `3 C(k,4)` for `4 <= k <= 40`.  It also verifies in
+25,494 integer substitutions that the eliminated Cauchy inequality and the
+Bishnoi--Mattheus--Schillewaert quadratic are the same polynomial, and checks
+the exact `(UF)` threshold in the 11 orders `q=16,24,...,96`.
 
 Replay from the repository root:
 
@@ -466,10 +851,10 @@ nix shell nixpkgs#python3 --command python3 notes/2026-08-22-c945-higher-arc-def
 
 The generator is deterministic and uses only Python's standard library.
 `generate` rewrites the canonical sorted JSON and checksum manifest; `check`
-recomputes both in memory and fails on drift.  The script is 11,915 bytes with
-SHA-256 `f54d7f2e7ba2accab01415ea83bb36d77760251ccb8790f11f000a6fb87627b4`;
-the JSON is 148,720 bytes with SHA-256
-`6cdbdb8637df1494a9e75bdb1e79d60ec5fae1c8e5326c2204b08124ce70ec9d`.
+recomputes both in memory and fails on drift.  The script is 14,694 bytes with
+SHA-256 `38c085566dfb2c03a73e47cf516ac5792f0cd3403edc11b09b27ad46a8c3ddc8`;
+the JSON is 279,894 bytes with SHA-256
+`fb5df50c58a009e807b899818ed276ec8f266f0f116eca4c72630612d96bb90c`.
 
 ## Candidate new numerical consequence
 
@@ -603,9 +988,82 @@ equalities and this specializes to the paper's existing `3/2` term.
   dual quadratic and the non-dominating numerical comparison are recorded in
   the `tt` section.  The paper does not formulate the external concurrence
   second moment, prescribed holes, or the hypergraph clique defect.
+- Ball--Fancsali, *Multiple blocking sets in finite projective spaces and
+  improvements to the Griesmer bound for linear codes*, DOI
+  `10.1007/s10623-009-9298-7`: **full text**, all sections 1--9 of the
+  23-page author-hosted prepublication manuscript dated 27 February 2009 read,
+  relying especially on Sections 1 and 5--8; this was not the Springer version
+  of record.  Cache key `10.1007/s10623-009-9298-7`, SHA-256
+  `a452ff04053a8082d50953acf53f9cf64495b0c870a0cb6a3753283e86fdbba2`.
+  The paper makes the higher-dimensional projective-code / multiple-blocking-
+  set / minihyper dictionary classical and develops recursive polynomial and
+  Griesmer bounds.  It does not use the paired exact degree-envelope test.
+- Kohnert, *`(l,s)`-Extension of Linear Codes*, arXiv:cs/0701112 / DOI
+  `10.1016/j.disc.2007.12.028`: **full text**, all eight pages of arXiv v1 read,
+  relying especially on Theorem 1, Corollary 2, and Lemma 5; cache key
+  `arXiv:cs/0701112`, SHA-256
+  `8135a111fd72f29a478733b23fc884563f472293ad4724c5ef080b7b6093aace`.
+  Kohnert characterizes one- and multi-column extension by an incidence matrix
+  between projective candidate columns and projective classes of minimum-
+  weight generators.  This establishes the robust-witness dictionary in the
+  dual orientation: Kohnert counts nonvanishing coordinates needed for an
+  extension, whereas `r(x)` counts minimum hyperplanes vanishing at a candidate
+  and hence obstructing a distance increase.  No paired integer envelope is
+  formulated there.
+- Lund--Saraf, *Incidence Bounds for Block Designs*, arXiv:1407.7513v2:
+  **full text**, all sections and the appendix of the 2016 arXiv source read,
+  relying especially on Theorem 1, the prior-work note, the expander-mixing
+  lemma, and the calculation `NN^T=(r-lambda)I+lambda J`; cache key
+  `arXiv:1407.7513v2`, PDF SHA-256
+  `9a9e657663d1b310d9272c9e8e0dcae12a966ac44c8524f1e9b0929cb614efc9`.
+  Their BIBD incidence theorem is precisely the relevant spectral baseline.
+  The authors explicitly record that Haemers had proved this incidence result
+  earlier.  The paper uses real spectral/Cauchy bounds, not balanced integer
+  degree minima on both sides of a selected block family.
+- Murphy--Petridis, *A Point-Line Incidence Identity in Finite Fields, and
+  Applications*, arXiv:1601.03981: **full text**, all sections of the arXiv
+  source read, relying especially on Lemma 1, the higher-dimensional section,
+  the block-design variance lemma, and the comparison with graph-theoretic
+  proofs; cache key `arXiv:1601.03981`, PDF SHA-256
+  `0e40611ca753f297025e8d6f8997d2a4f002f45d8ec3c15c3b2ca68cbd466c14`.
+  They explicitly present the second moment as standard, generalize it to
+  block designs, and show by direct computation that the expander-mixing
+  operator inequality is an equality on balanced functions.  This closes the
+  classicality of the degree-two moment/spectral mechanism.  Their envelopes
+  remain real-valued; the simultaneous modular rounding correction used here
+  is not formulated.
+- Beker--Mitchell--Piper, *Tactical decompositions of designs*, Aequationes
+  Mathematicae 25 (1982), DOI `10.1007/BF02189612`: **full text**, all eleven
+  sections of the 30-page survey article read from a forced-OCR extraction of
+  the Goettingen digitization, relying especially on Sections 2--5 and
+  Theorem 4.4; cache key `10.1007/BF02189612`, source PDF SHA-256
+  `70fbeb318aa1281da9b14e93c8875d9963f754c671106d9e33050aa97f84d6ea`.
+  The survey traces tactical decompositions to Dembowski, develops exact row-
+  and column-class incidence equations, and derives rank, divisibility, and
+  arithmetic nonexistence restrictions.  Thus exact quotient equations for
+  *tactical* partitions are classical and must be part of the credited
+  infrastructure.  Its hypotheses require constant incidences within point
+  and block classes; it does not formulate balanced integer extrema for the
+  non-tactical degree sequence of an arbitrary selected block family or the
+  maximal-secant consequence `(UF)`.
+- Li--Pott, *Intersection distribution, non-hitting index and Kakeya sets in
+  affine planes*, arXiv:2003.06678v2 / FFA 2020: **partial**, abstract,
+  Section 2's definitions and Proposition 2.4, the extremal-bound discussion,
+  and the related-work/open-problem section read from the arXiv source.  Cache
+  key `arXiv:2003.06678v2`; source-bundle SHA-256
+  `78ed05e1df8be325518cd75e8213f29221bf04008249b0cab93e3b774ee085e8`.
+  Their intersection distribution records the numbers of lines meeting one
+  point set in each cardinality and uses the classical first three line-
+  intersection equations.  This is close terminology but a different degree
+  sequence from the present one, which counts selected maximal secants through
+  points on both sides of a partition.  No absence claim rests on this partial
+  read.
 
-The audit currently has two full-text sources and five partial sources.  A
-novelty or priority verdict remains open.
+The audit currently has seven full-text and six partial sources.  It supports a
+firm *classical* verdict for the moment/spectral and code/blocking dictionaries.
+It supports only the narrower bounded statement that no direct predecessor for
+the paired integer-envelope sharpening or `(UF)` was found; a global novelty or
+priority verdict remains open.
 
 Forward-citation audit seed: pinned DOI
 `10.1007/s10623-018-00592-8`.
@@ -631,14 +1089,90 @@ Crossref, and Semantic Scholar requests recorded before it can support a
 negative.  An HTTP 429 is treated as an error, not as an empty Semantic Scholar
 result.
 
+### Recorded locator searches for the classicality boundary
+
+These are locator searches, not an exhaustive title/abstract screen and not a
+bibliographic negative.  Exact query strings issued on 2026-08-22 were:
+
+```
+site:arxiv.org symmetric design minimal blocking set degree sequence convexity pair count
+site:arxiv.org projective linear code nonextendible multiple minimum weight codewords extension
+site:doi.org finite geometry multiple saturating sets projective codes multiplicity
+site:arxiv.org "extendability" "projective codes" finite geometry
+"Multiple blocking sets in finite projective spaces" PDF Ball Fancsali
+"(l,s)-Extension of Linear Codes" PDF Kohnert
+"nonextendible projective codes" finite geometry
+"complete projective system" linear code extendible minimum distance
+site:web.mat.upc.edu/simeon.michael.ball Fancsali multiple blocking pdf
+site:arxiv.org integer degree sequence symmetric design blocking set convex
+site:combinatorics.org symmetric design degree sequence blocking set variance
+"sum" "binom{d" symmetric design blocking set
+symmetric design tactical decomposition integer feasibility degree sequences paper
+finite projective plane variance method secant distribution integer bound blocking sets
+integer refinement expander mixing lemma incidence graph design
+block design prescribed block intersection degree sequence nonexistence
+Murphy Petridis "point-line incidence identity" PDF finite fields applications
+Haemers incidence bound designs interlacing full text theorem 5.1
+"integer" "incidence bound" symmetric designs degree sequence
+"variance trick" blocking sets secants
+```
+
+OpenAlex was then queried with `per-page=10` and the exact `search` values
+
+```
+block design integer degree sequence incidence bound
+finite projective plane secant distribution integer programming blocking set
+symmetric design tactical decomposition integer feasibility
+```
+
+The discriminator was a title advertising an exact integral degree-sequence,
+secant-distribution, or tactical-decomposition obstruction relevant to a
+selected block family.  The first and third result sets were dominated by
+false positives; the second promoted Li--Pott for partial reading.  The exact-
+title arXiv API request
+
+```
+all:"Intersection distribution, non-hitting index and Kakeya sets in affine planes"
+```
+
+resolved `arXiv:2003.06678v2`.  A separate metadata hit, Host's *Tactical
+decompositions in uniform normal designs* (1986), DOI
+`10.1016/0024-3795(86)90183-7`, was not promoted because neither an abstract
+nor accessible full text was obtained; it remains an explicit tactical-
+decomposition follow-up rather than evidence for an absence claim.
+
+The zbMATH Open API was queried with `page_size=20` and the exact
+`search_string` values
+
+```
+"tactical decompositions" design
+"incidence bounds" "block designs"
+"secant distribution" projective plane
+"degree sequence" "symmetric design"
+```
+
+The first returned 20 records and promoted Beker--Mitchell--Piper to full-text
+reading through its EuDML/Goettingen link; the second returned Lund--Saraf; the
+third returned one modern unital paper that did not match the selected-family
+degree discriminator; the fourth returned an explicit no-results response.
+This is meaningful targeted zbMATH coverage, but not an exhaustive MSC
+`05B05/51E15` screen.  A separate exact Semantic Scholar query
+
+```
+integer refinement incidence bound symmetric design degree sequence
+```
+
+again returned HTTP 429.  The error is recorded as a coverage gap, not an empty
+result.
+
 ## Coverage and verdict ownership
 
-- **Not covered:** Semantic Scholar, because the graph API returned HTTP 429;
-  zbMATH Open, because it has not yet been searched; and MathSciNet, because no
-  authenticated access was available.  Google Scholar automated coverage was
-  not attempted because it is normally blocked.  These gaps license no
-  negative inference.
-- The five sources marked `partial` require full-text promotion if a final
+- **Not covered:** Semantic Scholar, because the graph API returned HTTP 429,
+  and MathSciNet, because no authenticated access was available.  Google
+  Scholar automated coverage was not attempted because it is normally blocked.
+  zbMATH has the four targeted searches recorded above, but not an exhaustive
+  MSC screen.  These gaps license no global negative inference.
+- The six sources marked `partial` require full-text promotion if a final
   novelty boundary depends on their silence.  Their present reads support only
   the positive topical and definitional attributions stated above.
 - No higher-arc novelty sentence has been entered in the owning paper's
@@ -660,8 +1194,11 @@ result.
    which its maximum occurs at `T`; prove an explicit asymptotic error term.
 3. Compare the numerical bound with Alabdullah--Hirschfeld and other general
    complete `(k,s)`-arc bounds at full-text depth.
-4. Audit whether the higher-secants second-moment inequality or its additive
-   improvement is already known.  No novelty verdict is made yet.
+4. Audit specifically whether simultaneous balanced/cap-filled integer degree
+   envelopes have already been used for selected blocks of a symmetric design,
+   and whether `(UF)` has a known equivalent.  The broader second-moment and
+   spectral mechanisms are already classical and should not be audited or
+   positioned as candidate novelty.
 5. Test structured curve-derived families where `t`, `d(a)`, or `nu` are known;
    this decides whether the intrinsic theorem has applications beyond the
    universal bound.
