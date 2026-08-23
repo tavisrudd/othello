@@ -779,13 +779,15 @@ The live frontier is source-side, not another linear consumer.
    cocharacter of \(Z\)'s own Novikov torus, of rank-two nilpotent blocks with
    exponent class \(\{1/6,5/6\}\).  Isomonodromy decides this at the small
    point where the block persists; at a confluence the class is read from the
-   Stokes data of the merging pair.  The remaining named gate is **H-C**:
-   marked blocks do not split along Iritani's bulk curves (proved by
-   Hertling--Manin--Teleman plus loop conjugacy at every vertex whose
-   non-semisimple origin ledger is exactly the source triple; open after the
-   first curve-centre edge, with a first-order four-point splitting test and
-   a Stokes obstruction identified), together with the threefold-centre
-   exclusion above.  The calibration machinery in the rest of
+   Stokes data of the merging pair.  **H-C first half is proved on every
+   odd-cohomology carrier**: Theorem 5.18(7)'s invertible Jacobian reduces any
+   vertex bulk deformation to summand bulk deformations, loop conjugacy makes
+   the triple split all-or-nothing at the accumulated formal point, and
+   Hertling--Manin--Teleman forbids all-split unless \(b_3=0\).  The
+   remaining gate is single: exclude cubic-type (\(\{1/6,5/6\}\)) blocks in a
+   marked three-cycle on a \(b_3=0\) carrier or in a threefold centre's
+   correction — "cubic spectral data without cubic odd cohomology".  The
+   calibration machinery in the rest of
    this item is retained as history only.  The sharpened
    sufficient route is saturated descent to the native effective
    large-radius lattice, including the standard cup-product grading and the

@@ -318,6 +318,43 @@ four-point data are assembled (Iritani plus the product formula); first-order
 vanishing there is the open half of H-C, and higher-order or HMT-type
 arguments must supplement it.
 
+## 6e. H-C first half proved on every odd-cohomology vertex
+
+The post-curve-centre case does not need new four-point data.  Three steps:
+
+1. **Reduction to a fixed variety's own bulk.**  Theorem 5.18(7): the
+   Jacobian of \((\tau(\tilde\tau),\varsigma_j(\tilde\tau))\) at
+   \(Q=\tilde\tau=0\) is invertible, so every bulk direction of a vertex
+   corresponds under \(\Psi\) to a pair of bulk directions of the two
+   summands, and a deformation of the vertex QDM deforms each summand within
+   its own big quantum cohomology.  Iterating: as long as the source triple
+   has ambient provenance, its splitting question at any vertex is a
+   splitting question for the triple of one fixed earlier variety \(X\)
+   (ultimately \(B\times\mathbf P^2\)) at an accumulated formal bulk point.
+2. **Conjugacy at the accumulated point.**  The accumulated shift is a formal
+   series in the exceptional inverse variables and the Novikov variables with
+   cohomology coefficients; integral Novikov monodromy fixes it, so the
+   transported loop still conjugates the three blocks there: they split
+   all-or-nothing.
+3. **HMT.**  All-split makes \(X\)'s even big quantum cohomology semisimple
+   at a formal point, hence generically semisimple on the germ, forcing
+   \(b_3(X)=0\) (Hertling–Manin–Teleman).  So on every vertex chain whose
+   carrier variety has odd cohomology, the marked triple never splits and its
+   class is \(\{1/6,5/6\}\) throughout, by isomonodromy.
+
+**Residual tail.**  The argument is silent only at a carrier with \(b_3=0\).
+\(b_3\ge10\) is not automatic along the telescope: a blow-down removes an
+\(H^1(\text{centre})\) Jacobian-type summand, and the intermediate-Jacobian
+part of the cubic *can* sit inside \(H^1(C)(-1)\) for a suitable curve — every
+abelian variety is a sub of a Jacobian.  This is precisely where the
+classical Clemens–Griffiths argument dies in dimension five: the exact
+principally-polarized decomposition degrades to isogeny, which is vacuous.
+The quantum ledger is the exact replacement, and the two tail cases it leaves
+are one and the same statement: a marked (\(\{1/6,5/6\}\)) block or triple on
+a variety with \(b_3=0\), or a marked three-cycle in a threefold centre's
+correction.  Both say "cubic-type spectral data without cubic-type odd
+cohomology"; the second half of H-C (§3.2) subsumes the tail.
+
 ## Mystery ledger (EJ+TT closeout, 2026-08-23)
 
 | status | feature | evidence or remaining gate |
@@ -326,7 +363,7 @@ arguments must supplement it.
 | settled | The class is categorical on all tested rank-one threefolds, matching the three known component types: Jacobian \(\{1/2,1/2\}\), Enriques \(\{0,0\}\), cubic \(\{1/6,5/6\}\). | §6b table; the V14 row is an independent variety sharing only the component. |
 | settled | The cubic's \(J_2\) persists along every bulk curve. | Hertling–Manin–Teleman + rank four (§6c). |
 | settled | e cannot be read from the regularized period operator's indicial exponents at \(t=\infty\): V14, V12, V10 all have integer exponents \(\{1,2,3\}\) there. | Scratch check on the guessed order-three operators; e is a monodromy invariant, not an indicial one. |
-| open | H-C after the first curve-centre edge: marked blocks do not split along Iritani's bulk curves. | First-order four-point splitting test and the \(ss'=2\cos2\pi e-2\) Stokes obstruction identified (§6d); neither yet executed. |
+| settled on odd-cohomology carriers | H-C first half: marked blocks do not split along Iritani's bulk curves. | §6e: Jacobian invertibility (5.18(7)) + loop conjugacy + HMT; the first-order test of §6d validated the machinery on the cubic.  The \(b_3=0\) tail is subsumed by the second half. |
 | open | The confluence rule for actual quantum connections (non-semisimple Gamma-II, numerical part). | §6c derives it in the abstract model only. |
 | open | The threefold classification: no connected \(b_2\ge2\) threefold carries three loop-conjugate \(\{1/6,5/6\}\) blocks. | §3.2; the categorical form is a finite question about cubic-type components of Mori fibre spaces. |
 | queued | Extend the tool to \(J_3\) blocks (V2's rank-three eigenspace) and to V16/V18 once more period terms are available. | Tool limitation; CCGK text has nine terms only. |
