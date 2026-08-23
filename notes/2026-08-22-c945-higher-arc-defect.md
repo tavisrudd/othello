@@ -1185,6 +1185,42 @@ result.
   `lambda`-multiplicity claim.  They required no update.  This C945 report is
   the only changed surface; the manuscript remains untouched.
 
+## Mystery ledger (`ej` + `tt` closeout)
+
+- **Why the paired threshold made the full spectral test redundant — settled.**
+  Cauchy--Schwarz applied to the two exact degree sequences is algebraically
+  identical to design expander mixing, and in the plane its coverage
+  elimination is exactly Bishnoi--Mattheus--Schillewaert Theorem 8.1.  The
+  25,494 symbolic substitutions in the evidence bundle independently check the
+  cleared polynomial identity.
+- **Whether the high-degree numerical wins are sporadic rounding — settled.**
+  `(UF)` proves a gain `q/8-1` on every `q=2n`, `4|n`, `n>=8`; the floor-
+  monotonicity proof is uniform, while 11 initial instances are independently
+  checked computationally.
+- **Whether the broad moment/design mechanism is classical — settled.**
+  Murphy--Petridis close the moment/variance equivalence, Lund--Saraf and
+  Haemers supply the spectral lineage, and Beker--Mitchell--Piper supply the
+  tactical quotient-equation lineage.  These belong in the corollary and
+  infrastructure layer, not in a priority claim.
+- **Attainment or near-attainment of `(UF)` — open.**  The current result is a
+  necessary bound only.  The evidence gap is an explicit family of double-
+  complete `(k,q/2+1)`-arcs near the threshold, or an independent structural
+  obstruction showing the true minimum is larger.  Owner: C945 structured-
+  family gate.
+- **A genuinely stronger `j>=3` application — open.**  The binomial hierarchy
+  is formal until a family of minimum hyperplanes has a controlled rank/
+  intersection enumerator that yields a new obstruction.  Owner: C945 higher-
+  moment application gate; do not headline the hierarchy before this closes.
+- **Exact precedence for the non-tactical integer envelope — open.**  The
+  targeted searches found classical tactical equations but no use of balanced
+  and cap-filled extrema on both sides of an arbitrary selected block family.
+  The remaining evidence gaps are Semantic Scholar, MathSciNet, and an
+  exhaustive zbMATH MSC screen.  Owner: C945 literature gate.
+- **Rigidity at equality of the paired interval — open.**  Singleton interval
+  contact forces balanced/cap-filled degree multisets, but geometric
+  classification of the resulting clique/tactical structures has not been
+  done.  Owner: C945 equality-classification gate.
+
 ## Gates before manuscript work
 
 1. Prove the intrinsic identity, clique decomposition, and stability statements
