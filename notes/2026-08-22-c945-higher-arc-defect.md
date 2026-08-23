@@ -13,7 +13,7 @@ classicality question but does not close a global novelty or priority verdict.
 The degree-two moment/variance identity, its spectral form, the
 arc--blocking-set dictionary, and the projective-code extension dictionary are
 classical.  No direct predecessor for the *simultaneous exact integer degree
-envelopes* or the unbounded family `(UF)` was located in the recorded search,
+envelopes* or the unbounded families `(OF)` and `(UF)` were located in the recorded search,
 but Semantic Scholar and MathSciNet coverage remain open; zbMATH coverage is a
 recorded targeted search rather than an exhaustive subject classification.
 Accordingly, no manuscript-bound “to our knowledge” sentence is licensed by
@@ -33,7 +33,7 @@ classical incidence moments.  The higher-binomial generating identity is also
 classical machinery and is not itself a headline theorem.  The present package
 with the paired integer envelopes, exact recovery of spectral mixing as its
 continuous relaxation, the modular correction, and the infinite strict-gain
-family is provisionally at the **90th--94th percentile** among specialized
+families are provisionally at the **93rd--96th percentile** among specialized
 finite-geometry papers, conditional on finishing the narrow precedence audit
 and replacing the remaining proof sketches by lemmas.  The arbitrary-
 dimensional code corollary raises audience and conceptual reach, but not the
@@ -51,8 +51,10 @@ The strongest honest architecture is therefore:
 4. complete `(k,s)`-arcs and multiple blocking sets as the sharp planar
    specialization, where matching/pencil caps add information unavailable in
    an arbitrary design;
-5. `(UF)` as the clean separation theorem showing an unbounded gain over the
-   classical spectral quadratic.
+5. `(OF)` as the primary separation theorem—already for ordinary completeness—
+   and `(UF)` as its multiple-coverage companion;
+6. the finite resonance equation `(R)` as the explanation and classification
+   program behind the high-degree phase diagram.
 
 This makes the classical result a corollary without pretending the elementary
 moment expansion is new.  A higher (`j>=3`) moment should enter the headline
@@ -61,7 +63,7 @@ is the correct umbrella and future direction, not yet the source of the main
 numerical gain.  Likewise, the symmetric-design theorem is the organizing
 theorem, not the safest priority claim: exact quotient equations and arithmetic
 restrictions for tactical decompositions are classical.  The priority-bearing
-unit is the non-tactical selected-family envelope together with `(UF)` and the
+unit is the non-tactical selected-family envelope together with `(OF)`, `(UF)`, and the
 prescribed-hole / robust-nonextendibility applications.
 
 ## Candidate intrinsic theorem
@@ -514,7 +516,82 @@ the exact paired interval test.  This identifies the sharpening mechanism:
 spectral variance is the real relaxation, while modular imbalance supplies
 the extra obstruction.
 
-### An unbounded strict-improvement family
+### An ordinary-completeness resonance family
+
+The strongest current separation already occurs for ordinary completeness.
+Let `q=3n`, `n>=3`, and set
+
+```
+s=2n+1=2q/3+1,             lambda=1.
+```
+
+The Bishnoi--Mattheus--Schillewaert spectral quadratic has integer threshold
+
+```
+k >= k0=3n^2+3n+1=q^2/3+q+1.
+```
+
+The paired integer moments give
+
+```
+k >= k0+ceil((3n-6)/5)
+  = q^2/3+q+1+ceil((q-6)/5).                            (OF)
+```
+
+Thus even the usual one-secant completeness condition has an unbounded linear
+integer-envelope gain, asymptotic to `q/5`, over the classical spectral
+threshold.
+
+Here is a floor-complete proof.  Write `k=k0+c`.  The cleared spectral
+polynomial is
+
+```
+E(c)=c^2-(9n^2+n)c-2n^2.
+```
+
+Hence `E(-1)>0` and `E(0)<0`, proving the stated spectral integer threshold.
+For `0<=c<ceil((3n-6)/5)<n`, the complementary size is
+`b=6n^2-c`, and coverage forces `T>=ceil(b/n)=6n`.  Put
+
+```
+F(T)=Phi_min(k,(2n+1)T)+Phi_min(b,nT)-C(T,2).
+```
+
+Its forward difference is
+
+```
+sum_{i=0}^{2n} floor(((2n+1)T+i)/k)
+ + sum_{i=0}^{n-1} floor((nT+i)/b) - T.                (D)
+```
+
+For `T=6n+u`, the first floors in `(D)` are at least `3` and the second
+floors at least `1`, so `(D)>=n+3-u`; this handles `0<=u<=n+3`.
+For `T>=7n+3`, use `floor(x)>=x-1`.  Since
+`c<(3n-6)/5`, direct multiplication gives
+
+```
+7(2n+1)^2 > 9k,
+```
+
+while `b<=6n^2`.  Therefore
+
+```
+delta=(2n+1)^2/k+n^2/b-1 > 9/7+1/6-1=19/42,
+```
+
+and `(D)>=T delta-(3n+1)>0`.  Hence `F` is minimized at `T=6n`.
+At that point the internal degrees are `3/4`, the external degrees are `1/2`,
+and
+
+```
+F(6n)=3n-6-5c.
+```
+
+Feasibility requires `F(6n)<=0`, proving `(OF)`.  The Desarguesian planes of
+orders `q=3^m`, `m>=2`, give an infinite ambient sequence.  As before, this is
+a necessary bound and does not assert attainment.
+
+### A double-coverage unbounded family
 
 Let `q=2n` with `n` divisible by `4` and `n>=8`; equivalently,
 `q≡0 (mod 8)` and `q>=16`.  Set
@@ -595,6 +672,47 @@ linear in `q`, rather than a sporadic one-point rounding gain.  Desarguesian
 planes of orders `q=2^m`, `m>=4`, supply an infinite sequence of ambient
 planes to which the necessary bound applies; existence of arcs attaining the
 new threshold is not asserted.
+
+### Why these slopes occur: the resonance equation
+
+The two infinite families are instances of a finite arithmetic resonance
+calculation.  Suppose, with `lambda` fixed,
+
+```
+s/q -> alpha,       k/q^2 -> beta,
+```
+
+coverage is asymptotically tight, and the limiting balanced internal degree is
+an integer `a>lambda`.  Then
+
+```
+a = lambda alpha(1-beta)/((1-alpha)beta),
+lambda(alpha-beta)^2 = beta(1-alpha),
+```
+
+where the second equation is equality in the continuous spectral bound.
+Eliminating `beta`, and writing `d=a-lambda`, gives
+
+```
+d^2 alpha^2-d(d+1)alpha+a=0,
+alpha=[d+1 +/- sqrt((d+1)^2-4a)]/(2d),
+(d+1)^2-4a=(a-lambda-1)^2-4lambda.                    (R)
+```
+
+Thus rational resonant slopes occur exactly when the last discriminant is a
+square.  Equivalently, they are controlled by factor pairs of `4lambda`, so
+there are only finitely many primitive resonances at each multiplicity.  For
+`lambda=1`, `a=4`, equation `(R)` has the double root `alpha=2/3`, producing
+`(OF)`.  For `lambda=2`, `a=6`, it has roots `alpha=1/2` and `3/4`; `(UF)` is
+the first branch, while the observed high-degree gains near `s/q=3/4` are the
+second branch.
+
+This explains the numerical phase diagram conceptually: away from a resonance,
+the real spectral slack usually absorbs rounding, while at a resonance the
+continuous bound is tangent to an integral degree pattern and the first finite-
+size mismatch produces a linear modular obstruction.  The next high-EV theorem
+is a classification of all factor-pair resonances and their first-order gains,
+not another undirected parameter sweep.
 
 ### Projective codes in arbitrary dimension
 
@@ -841,7 +959,8 @@ degree envelopes in another 1,368 instances, and checks 37 ordinary-arc
 specializations against `3 C(k,4)` for `4 <= k <= 40`.  It also verifies in
 25,494 integer substitutions that the eliminated Cauchy inequality and the
 Bishnoi--Mattheus--Schillewaert quadratic are the same polynomial, and checks
-the exact `(UF)` threshold in the 11 orders `q=16,24,...,96`.
+the exact `(UF)` threshold in the 11 orders `q=16,24,...,96`.  It also checks
+the ordinary-completeness formula `(OF)` for all 30 integers `3<=n<=32`.
 
 Replay from the repository root:
 
@@ -851,10 +970,10 @@ nix shell nixpkgs#python3 --command python3 notes/2026-08-22-c945-higher-arc-def
 
 The generator is deterministic and uses only Python's standard library.
 `generate` rewrites the canonical sorted JSON and checksum manifest; `check`
-recomputes both in memory and fails on drift.  The script is 14,694 bytes with
-SHA-256 `38c085566dfb2c03a73e47cf516ac5792f0cd3403edc11b09b27ad46a8c3ddc8`;
-the JSON is 279,894 bytes with SHA-256
-`fb5df50c58a009e807b899818ed276ec8f266f0f116eca4c72630612d96bb90c`.
+recomputes both in memory and fails on drift.  The script is 15,234 bytes with
+SHA-256 `3bd1f5be302585e741ad5f0a2abd6171e4d067bf4822a3bb33dc837061acb053`;
+the JSON is 279,942 bytes with SHA-256
+`b98f054de76de93966dd54aa7d56afbe8f91ca18c3d065b48a312a3de852ca62`.
 
 ## Candidate new numerical consequence
 
@@ -1045,7 +1164,7 @@ equalities and this specializes to the paper's existing `3/2` term.
   infrastructure.  Its hypotheses require constant incidences within point
   and block classes; it does not formulate balanced integer extrema for the
   non-tactical degree sequence of an arbitrary selected block family or the
-  maximal-secant consequence `(UF)`.
+  maximal-secant consequences `(OF)` and `(UF)`.
 - Li--Pott, *Intersection distribution, non-hitting index and Kakeya sets in
   affine planes*, arXiv:2003.06678v2 / FFA 2020: **partial**, abstract,
   Section 2's definitions and Proposition 2.4, the extremal-bound discussion,
@@ -1062,7 +1181,7 @@ equalities and this specializes to the paper's existing `3/2` term.
 The audit currently has seven full-text and six partial sources.  It supports a
 firm *classical* verdict for the moment/spectral and code/blocking dictionaries.
 It supports only the narrower bounded statement that no direct predecessor for
-the paired integer-envelope sharpening or `(UF)` was found; a global novelty or
+the paired integer-envelope sharpening or `(OF)`/`(UF)` was found; a global novelty or
 priority verdict remains open.
 
 Forward-citation audit seed: pinned DOI
@@ -1194,19 +1313,26 @@ result.
   25,494 symbolic substitutions in the evidence bundle independently check the
   cleared polynomial identity.
 - **Whether the high-degree numerical wins are sporadic rounding — settled.**
-  `(UF)` proves a gain `q/8-1` on every `q=2n`, `4|n`, `n>=8`; the floor-
-  monotonicity proof is uniform, while 11 initial instances are independently
-  checked computationally.
+  `(OF)` proves an ordinary-completeness gain `ceil((q-6)/5)` for `q=3n`,
+  `n>=3`, while `(UF)` proves a double-coverage gain `q/8-1` for `q=2n`,
+  `4|n`, `n>=8`.  Both floor-monotonicity proofs are uniform; 30 and 11
+  initial instances, respectively, are independently checked computationally.
+- **Why the slopes `2/3`, `1/2`, and `3/4` appear — settled at leading
+  order.**  Eliminating the limiting density and integral internal degree gives
+  the discriminant equation `(a-lambda-1)^2-y^2=4lambda`; its factor pairs
+  yield the finite resonant slope set.  What remains open is the uniform
+  first-order modular gain at every resonance, owned by the C945 resonance-
+  classification gate.
 - **Whether the broad moment/design mechanism is classical — settled.**
   Murphy--Petridis close the moment/variance equivalence, Lund--Saraf and
   Haemers supply the spectral lineage, and Beker--Mitchell--Piper supply the
   tactical quotient-equation lineage.  These belong in the corollary and
   infrastructure layer, not in a priority claim.
-- **Attainment or near-attainment of `(UF)` — open.**  The current result is a
-  necessary bound only.  The evidence gap is an explicit family of double-
-  complete `(k,q/2+1)`-arcs near the threshold, or an independent structural
-  obstruction showing the true minimum is larger.  Owner: C945 structured-
-  family gate.
+- **Attainment or near-attainment of `(OF)` or `(UF)` — open.**  The current
+  results are necessary bounds only.  The evidence gap is an explicit family
+  of complete `(k,2q/3+1)`-arcs or double-complete `(k,q/2+1)`-arcs near the
+  thresholds, or an independent structural obstruction showing the true
+  minima are larger.  Owner: C945 structured-family gate.
 - **A genuinely stronger `j>=3` application — open.**  The binomial hierarchy
   is formal until a family of minimum hyperplanes has a controlled rank/
   intersection enumerator that yields a new obstruction.  Owner: C945 higher-
@@ -1232,7 +1358,7 @@ result.
    complete `(k,s)`-arc bounds at full-text depth.
 4. Audit specifically whether simultaneous balanced/cap-filled integer degree
    envelopes have already been used for selected blocks of a symmetric design,
-   and whether `(UF)` has a known equivalent.  The broader second-moment and
+   and whether `(OF)` or `(UF)` has a known equivalent.  The broader second-moment and
    spectral mechanisms are already classical and should not be audited or
    positioned as candidate novelty.
 5. Test structured curve-derived families where `t`, `d(a)`, or `nu` are known;

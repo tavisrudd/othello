@@ -251,6 +251,18 @@ def run_checks() -> dict[str, object]:
         assert paired == s * s + q // 8 - 1
         checked_infinite_family_instances += 1
 
+    checked_ordinary_resonance_instances = 0
+    for n in range(3, 33):
+        q = 3 * n
+        s = 2 * n + 1
+        spectral = spectral_minimum(q, s, 1)
+        paired = paired_moment_minimum(q, s, 1)
+        spectral_formula = 3 * n * n + 3 * n + 1
+        paired_formula = spectral_formula + (3 * n - 2) // 5
+        assert spectral == spectral_formula
+        assert paired == paired_formula
+        checked_ordinary_resonance_instances += 1
+
     rows = []
     for q in Q_VALUES:
         for s in range(2, min(8, q) + 1):
@@ -306,7 +318,7 @@ def run_checks() -> dict[str, object]:
                 )
 
     return {
-        "schema": "c945-higher-arc-defect-v5",
+        "schema": "c945-higher-arc-defect-v6",
         "meaning": "Necessary-bound thresholds only; projective-plane or arc existence is not asserted.",
         "parameters": {"lambda_values": list(LAMBDA_VALUES), "holes": 0, "q_values": list(Q_VALUES), "s_max": 8},
         "independent_checks": {
@@ -315,6 +327,7 @@ def run_checks() -> dict[str, object]:
             "ordinary_arc_specializations": checked_arc_specializations,
             "spectral_quadratic_equivalences": checked_spectral_equivalences,
             "infinite_family_formula_instances": checked_infinite_family_instances,
+            "ordinary_resonance_formula_instances": checked_ordinary_resonance_instances,
         },
         "rows": rows,
         "wide_degree_rows": wide_degree_rows,
