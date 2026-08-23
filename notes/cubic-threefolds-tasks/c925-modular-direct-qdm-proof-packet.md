@@ -265,6 +265,16 @@ realization of that orbit.
   \(\deg\Delta\ge7\) over \(\mathbf P^2\) plus a cyclic symmetry of
   \((S,\Delta)\) permuting three cubic-Prym factors.  Note:
   notes/2026-08-23-c925-fable-conic-bundle-b3-formula.md
+- Correction: "class (a) over \(\mathbf P^2\) empty" overreached — the
+  Fano identification does not exhaust \(d=3\).  Explicit first member
+  constructed: the weak-Fano minimal conic bundle
+  \(X\in|2\xi+3h|\subset\mathbf P(\mathcal O^2\oplus\mathcal O(-3))\),
+  smooth, \(b_3=0\), with a forced \(K\)-trivial \(\mathbf P^2\)-section
+  contracting to the E5 germ \(\tfrac13(1,1,1)\) — classes (a) and (c)
+  meet in this family.  No-marked-block test via the toric
+  \(I\)-function queued; the degree-zero Novikov series is the new
+  technical gate.  Note:
+  notes/2026-08-23-c925-fable-weak-fano-conic-bundle.md
 
 The packet index owns the module-to-file map.  Do not append another large
 module to this card or to the index; add one focused companion file and one
