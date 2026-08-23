@@ -154,6 +154,15 @@ Divisibility, eigenvalue, and pairwise-balanced-design constraints on this
 partition are the highest-EV route to arithmetic nonexistence and positive
 defect gaps beyond the scalar bound.
 
+Two formulation corrections follow.  First, the master theorem should allow
+an arbitrary certified cap `M` on the external index.  The hypergraph matching
+number is the sharpest intrinsic choice, while `floor(k/s)` gives a
+parameter-only bound and may expose a more informative pair of equality roots.
+Second, for `lambda>1` equality is not pure maximum-matching rigidity: required
+concurrence cliques may have either size `lambda` or `M`.  The correct general
+object is a two-size clique decomposition (with maximum-matching rigidity as
+the `lambda=1` specialization).
+
 ## Proof packet
 
 ### Arrangement moments
