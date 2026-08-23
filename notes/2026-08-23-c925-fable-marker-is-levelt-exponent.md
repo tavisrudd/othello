@@ -355,6 +355,44 @@ a variety with \(b_3=0\), or a marked three-cycle in a threefold centre's
 correction.  Both say "cubic-type spectral data without cubic-type odd
 cohomology"; the second half of H-C (§3.2) subsumes the tail.
 
+## 6f. The threefold gate reduces to Mori fibre spaces, with proof
+
+**Proposition.**  Let \(Z\) be a smooth projective threefold obtained from a
+threefold \(W\) of Picard rank one by iterated blow-ups along points and
+smooth curves.  Then the block ledger of \(Z\)'s quantum connection over its
+field contains at most one block of class \(\{1/6,5/6\}\), and no cyclic
+triple of them under any integral cocharacter.
+
+*Proof.*  Apply Iritani's decomposition at each blow-up (ambient dimension
+three, centres of codimension two and three).  A point centre contributes two
+copies of \(\mathrm{QDM}(\mathrm{pt})\) on a \(q^{1/2}\)-Kummer pair: simple
+sheets, unmarked.  A curve centre contributes one copy of
+\(\mathrm{QDM}(C)\): a single rank-two block of class \(\{1/2,1/2\}\); a
+curve has no even bulk directions beyond unit and divisor, so this class
+cannot move along the \(\varsigma\)-shift, and splitting only removes it.
+The base summand is \(\mathrm{QDM}(W)\) along a bulk curve; \(W\) has rank
+four, so if \(W\) carries a marked block then \(b_3(W)\ne0\) and the
+rank-four HMT argument (two simple sheets, nowhere-semisimple even big
+quantum cohomology) makes its \(J_2\) persist with constant class.  Distinct
+summand eigenvalues stay distinct at the generic point of the shift curves,
+so no new nilpotent blocks form.  Hence marked blocks of \(Z\) biject with
+those of \(W\); a rank-four even cohomology holds at most two rank-two
+blocks, and a cyclic triple needs three.  \(\square\)
+
+With the Mori programme this reduces the threefold-centre half of the gate
+to: \(Z\) a del Pezzo fibration over \(\mathbf P^1\) or a conic bundle over a
+surface, carrying three loop-conjugate \(\{1/6,5/6\}\) blocks.  (A Fano
+\(Z\) of \(\rho\ge2\) is covered by the proposition when it is such a blow-up
+chain, and is otherwise itself a fibration of one of these two types or a
+product-type exception handled by the tool's table.)  The cubic threefold
+itself is a conic bundle over \(\mathbf P^2\) with quintic discriminant and
+carries one marked block, not three: the question is whether a discriminant
+can be engineered to produce three in a cyclic orbit, which is where the
+"cubic spectral data need cubic odd cohomology" principle — the dictionary —
+does real work: three cubic-type components need \(h^{1,2}\ge15\)-worth of
+Prym data cyclically permuted by a line bundle, and the \(m=2\) consumer
+additionally forces the triple into a single outer correction factor.
+
 ## Mystery ledger (EJ+TT closeout, 2026-08-23)
 
 | status | feature | evidence or remaining gate |
@@ -365,7 +403,7 @@ cohomology"; the second half of H-C (§3.2) subsumes the tail.
 | settled | e cannot be read from the regularized period operator's indicial exponents at \(t=\infty\): V14, V12, V10 all have integer exponents \(\{1,2,3\}\) there. | Scratch check on the guessed order-three operators; e is a monodromy invariant, not an indicial one. |
 | settled on odd-cohomology carriers | H-C first half: marked blocks do not split along Iritani's bulk curves. | §6e: Jacobian invertibility (5.18(7)) + loop conjugacy + HMT; the first-order test of §6d validated the machinery on the cubic.  The \(b_3=0\) tail is subsumed by the second half. |
 | open | The confluence rule for actual quantum connections (non-semisimple Gamma-II, numerical part). | §6c derives it in the abstract model only. |
-| open | The threefold classification: no connected \(b_2\ge2\) threefold carries three loop-conjugate \(\{1/6,5/6\}\) blocks. | §3.2; the categorical form is a finite question about cubic-type components of Mori fibre spaces. |
+| open, reduced | The threefold classification: no connected \(b_2\ge2\) threefold carries three loop-conjugate \(\{1/6,5/6\}\) blocks. | §6f proves it for every blow-up chain over a Picard-rank-one threefold; the residue is del Pezzo fibrations over \(\mathbf P^1\) and conic bundles over surfaces, plus the \(b_{\mathrm{odd}}=0\) carrier tail (§6e). |
 | queued | Extend the tool to \(J_3\) blocks (V2's rank-three eigenspace) and to V16/V18 once more period terms are available. | Tool limitation; CCGK text has nine terms only. |
 
 No manufactured mysteries: the two open rows above are the whole gate.
