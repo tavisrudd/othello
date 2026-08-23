@@ -2,7 +2,7 @@
 
 **Lane**: complete-ports
 
-**Status**: ACTIVE; HUMAN PROOF PACKET AND TT PASS COMPLETE; PRIMARY CHAIKEN COMPARISON AND COLD READS PENDING
+**Status**: ACTIVE; HUMAN PROOF PACKET, TT PASS, AND BOUNDED LITERATURE AUDIT COMPLETE; COLD READS PENDING
 
 ## Objective
 
@@ -308,12 +308,38 @@ helper response maps, and centralized/cooperative/access/rack conventions.
 Even one-target schemes then correspond to spaces of checks. This remains a
 separate sequel rather than an unproved strengthening of C946.
 
-## Literature state used at start
+## Literature verdict
+
+The durable source-by-source audit is
+`notes/2026-08-22-c946-multitarget-recovery-literature-audit.md`.
+
+The intrinsic existence criterion is prior art more exactly than the initial
+scout recorded.  Abdel-Ghaffar--Weber, Definition 1 and Lemmas 1--2, use the
+same kernel condition, generator-column span condition, and existence of
+\(|P|\) normalized dual rows supported on the targets and one common helper
+set.  C946's restricted-dual surjection is a basis-free restatement.  The new
+structural refinement is the *complete affine family* of splittings and its
+helper-supported gauge ambiguity, not simultaneous recovery itself.
+
+Chaiken's primary 1989 text was read at the relevant sections.  His
+\(P\)-ported Tutte polynomial is the established arbitrary-distinguished-set
+carrier, and he explicitly relates its set-pointed specialization to Las
+Vergnas perspectives.  The \(Z^0\) recovery slice below is therefore an
+author-derived specialization of prior machinery, not a new invariant.
+
+Generalized weights in cooperative locality are prior by Abdel-Ghaffar--Weber,
+including the bound \(r\ge d_{|P|}(C^\perp)-|P|\).  The first-order enumerator
+below is contained in Gruica--Jany--Ravagnani.  The bounded audit located no
+predecessor for the combined exact finite map-valued cost and sharp eventual
+coefficient-aware concatenation threshold.  That result is `NONE-FOUND`
+candidate novelty, never a categorical priority claim.
+
+### Literature state used at start
 
 - Chaiken, *The Tutte polynomial of a ported matroid*, JCTB 46 (1989),
-  96--117, DOI 10.1016/0095-8956(89)90010-5: existence and established
-  matroid terminology confirmed; exact specialization still to be read from
-  the primary paper.
+  96--117, DOI 10.1016/0095-8956(89)90010-5: abstract, Sections 1 and 3,
+  Theorem 2, definition (3.4), and Section 4 Example 3 read from the
+  author-uploaded browser full text.
 - Gruica--Jany--Ravagnani, *LRCs: Duality, LP Bounds, and Field Size*, DCC 94
   (2026), article 100, DOI 10.1007/s10623-026-01829-7: abstract,
   introduction, Definitions 2.9 and 3.2, Proposition 3.5, and Theorem 3.8 read
@@ -328,8 +354,6 @@ separate sequel rather than an unproved strengthening of C946.
   recovery-system definitions read from cached SHA-256
   75dfdc9b233c2f091e987790b6cff029551b59d0289d85f0b9b3d8b30a712bbc.
 
-No novelty verdict is assigned yet.
-
 ## Acceptance gates
 
 1. Prove the four intrinsic recovery criteria equivalent, including the affine
@@ -339,7 +363,7 @@ No novelty verdict is assigned yet.
 4. Determine the correct rank-refined support costs and whether ordinary or
    relative generalized weights suffice.
 5. Compare the full-radius target-set invariant directly with Chaiken and with
-   the Las Vergnas perspective \(M\setminus P\to M/P\).
+   the Las Vergnas perspective \(M\setminus P\to M/P\). **Complete.**
 6. Give at least one finite counterexample preventing an overstrong scalar or
    MacWilliams claim.
 7. Run independent mathematical and operational cold reads before proposing a
@@ -347,7 +371,6 @@ No novelty verdict is assigned yet.
 
 ## Immediate next work
 
-- obtain and read Chaiken's primary paper;
 - run independent mathematical and storage-operational cold reads of the human
   proof packet;
 - sharpen the all-singleton-marginals counterexample search only if the cold
@@ -534,9 +557,9 @@ operational multi-erasure theorem.
   contained in the 2026 refined-support MacWilliams identity; the finite pair
   above shows that one fixed-coordinate marginal does not determine
   simultaneous recovery.
-- **Open, exact evidence gap:** the primary Chaiken paper has not yet been
-  obtained. No claim is made about the exact specialization or extra boundary
-  information of its polynomial.
+- **Settled by literature audit:** Chaiken's arbitrary distinguished-set
+  invariant and its Las Vergnas specialization are prior carriers; the exact
+  coefficient splittings and concatenation gate are not attributed to them.
 - **Open, bounded evidence gap:** no length-five binary pair was found with all
   labeled singleton marginals equal and different two-target cost. Existence
   over larger fields or lengths is untested.
