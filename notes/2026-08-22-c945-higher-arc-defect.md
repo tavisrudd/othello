@@ -76,6 +76,32 @@ q^2+q+1-k-h
   <= max_{0 <= t <= T} [tL - t max(0,t-C)/M].
 ```
 
+There is a sharper one-dimensional integer envelope.  For fixed `t`, maximize
+`sum_a C(d(a),2)` subject to `0 <= d(a) <= D` and
+`sum_a d(a)=st`: if `u=floor(st/D)` and `v=st-uD`, the convex maximum is
+`u C(D,2)+C(v,2)`.  Thus one may replace the coarse lower bound on `S2` by
+
+```
+G(t) = C(t,2) - u C(D,2) - C(v,2),
+```
+
+and maximize `tL-2 max(0,G(t))/M` over the feasible integer range
+`t <= min(floor(k(k-1)/(s(s-1))), floor(kD/s))`.  The coarse display is
+retained because it exposes the asymptotics.
+
+When the coarse objective is increasing through its feasible range, replacing
+floors by safe real relaxations gives the clean necessary inequality
+
+```
+q^2+q+1-k-h
+ <= k(k-1)(q+1-s)/(s(s-1))
+    - (k-1)(k-s)(k-s^2+s-1)/(s(s-1)^2),
+```
+
+for `k >= s^2-s+1`.  The factorization follows from
+`P-Cbar=(k-s)(k-s^2+s-1)/(s(s-1))`, where
+`P=k(k-1)/(s(s-1))` and `Cbar=1+s(k-s)/(s-1)`.
+
 For fixed `s` and `q -> infinity`, the candidate asymptotic consequence is
 
 ```
@@ -86,6 +112,31 @@ The classical first-moment argument has the same leading term but only the
 additive threshold `1/2`; thus the second moment appears to improve the
 additive term by `s/2`.  At `s=2`, the degree and pair-packing bounds are
 equalities and this specializes to the paper's existing `3/2` term.
+
+## Literature status
+
+- Alabdullah--Hirschfeld, *A new lower bound for the smallest complete
+  `(k,n)`-arc in `PG(2,q)`*, Designs, Codes and Cryptography (2019), DOI
+  `10.1007/s10623-018-00592-8`: **full text**, published open-access PDF,
+  cache key `10.1007/s10623-018-00592-8`, SHA-256
+  `b70116f426fb6ca1e733fafc4d2f6434993c55006ba900344b7bfa4abbd32961`.
+  Their Theorem 2.1 combines completeness with the pair-packing upper bound
+  on the number of `n`-secants.  It uses only the first external coverage
+  moment; no second external concurrency moment or additive refinement appears.
+- Bastioni--Micheli, *On complete m-arcs*, arXiv:2303.13670v1:
+  **partial**, abstract, introduction, and arc definitions; cache SHA-256
+  `f5eb03dab26f3cc701d9917db70d85409629174fc5ac279c59bbca1505517c40`.
+  This establishes direct topical adjacency through constructions from curves,
+  but has not yet been used for a novelty verdict.
+- Korchmaros--Nagy--Szonyi, *Algebraic approach to the completeness problem
+  for `(k,n)`-arcs in planes over finite fields*, arXiv:2302.10162v1 / later
+  JCTA 204 (2024): **partial**, abstract and introduction; cache SHA-256
+  `32cfd5b1cb4f28c171418f61d467fc0accee8adc269ae9cf36a517158917b6b7`.
+  This confirms the maximal-secant coverage formulation and the relevance of
+  prescribed uncovered loci.  No absence claim rests on this partial read.
+
+The audit currently has one full-text source and two partial sources.  A
+novelty or priority verdict remains open.
 
 ## Gates before manuscript work
 
@@ -100,4 +151,3 @@ equalities and this specializes to the paper's existing `3/2` term.
 5. Test structured curve-derived families where `t`, `d(a)`, or `nu` are known;
    this decides whether the intrinsic theorem has applications beyond the
    universal bound.
-
