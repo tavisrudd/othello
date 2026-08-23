@@ -201,6 +201,92 @@ package is now: an exact two-moment defect with prescribed holes, hypergraph
 concurrency rigidity, an additive low-degree improvement, and its explicit
 hybridization with the existing spectral high-degree theorem.
 
+## Paired-moment squeeze
+
+There is a stronger scalar consequence than the one-sided defect envelope.
+It uses the fact that the same pair count has degree-sequence descriptions on
+both `A` and its complement `B=Pi-A`.
+
+For feasible integers `n,L,U,R`, define
+
+```
+Phi_min(n,R) = (n-v)C(a,2) + v C(a+1,2),
+  where R=an+v and 0<=v<n,
+
+Phi_max(n,L,U,R)
+  = n C(L,2) + L E + u C(U-L,2) + C(w,2),
+  where E=R-nL=u(U-L)+w and 0<=w<U-L.
+```
+
+The evident constant-bound case `U=L` is interpreted separately.  Convexity
+shows that these are respectively the minimum and maximum of
+`sum_i C(z_i,2)` over integer degrees with sum `R` and bounds
+`L<=z_i<=U`: balance minimizes, while filling to the upper bound maximizes.
+
+Let `T` be the number of `s`-secants, put `b=q^2+q+1-k`,
+`tau=q+1-s`, `D=floor((k-1)/(s-1))`, and take
+`M=floor(k/s)` or any other certified external cap.  The internal degrees
+satisfy
+
+```
+0 <= d(a) <= D,             sum_A d(a)=sT,
+```
+
+whereas `lambda`-fold coverage gives
+
+```
+lambda <= r(x) <= M,        sum_B r(x)=tau T.
+```
+
+Writing `I=sum_A C(d(a),2)` and `J=sum_B C(r(x),2)`, every pair of
+`s`-secants meets either in `A` or in `B`, so `I+J=C(T,2)`.  Therefore a
+necessary condition is the exact interval overlap
+
+```
+[Phi_min(b,tau T), Phi_max(b,lambda,M,tau T)]
+  intersects
+[C(T,2)-Phi_max(k,0,D,sT), C(T,2)-Phi_min(k,sT)].
+```
+
+This simultaneously retains both upper and lower pair-count constraints on
+both sides of the complement.  The previous defect capacity uses only a
+relaxation of one side of this overlap.  The new condition is still a
+one-variable integer test in `T`, but it is arithmetically sharper and its
+failure is a direct nonexistence certificate.
+
+The intrinsic statement allows heterogeneous prescribed holes.  Give each
+external point an integer interval `L_x<=r(x)<=U_x`, taking
+`L_x=lambda` on required points and `L_x=0` on holes (and normally
+`U_x=M`).  Replace the two external `Phi` terms by the minimum and maximum of
+`sum_x C(r(x),2)` over these intervals with fixed sum `tau T`.  Separable
+convexity computes both extrema by integer water filling.  The same interval-
+overlap proof is unchanged.  The uniform no-hole formulas above are the closed
+form used by the current numerical bundle; adding prescribed incidence
+`I_H` gives a further affine sum constraint rather than a new argument.
+
+The full maximal-secant family also satisfies an exact incidence-expansion
+constraint.  Applying the projective-plane mixing inequality to the `b`
+points of `B` and its `T` `tau`-secants gives
+
+```
+T [N tau-(q+1)b]^2 <= q b k (N-T),       N=q^2+q+1.
+```
+
+Thus a genuinely coupled spectral--moment theorem requires an integer `T`
+satisfying the packing bounds, the paired interval overlap, and this spectral
+inequality.  On the current grid the paired overlap alone already gives the
+coupled threshold, so the spectral constraint adds no further row.  This is a
+useful negative result: the new gain comes from restoring the discarded half
+of the pair-moment data, not from mechanically intersecting two old scalar
+bounds.
+
+Against the earlier pointwise maximum of the defect and
+Bishnoi--Mattheus--Schillewaert thresholds, the paired condition is strictly
+stronger in 27, 23, and 26 of the 146 rows for `lambda=1,2,3`, respectively.
+The maximum gains are two points for `lambda=1` and one point for
+`lambda=2,3`.  These are necessary parameter bounds only; no existence claim
+is inferred.
+
 The other structural object exposed by the pressure test is the dual clique
 partition on the `s`-secants.  On its `t_s` vertices, the internal star cliques
 of sizes `d(a)` and the external concurrence cliques of sizes `r(x)` partition
@@ -346,12 +432,17 @@ range.  This isolated exclusion and the decreasing frequency of strict
 improvement as `lambda` rises are numerical observations, not yet structural
 theorems.
 
-The v3 rows also evaluate the complementary quadratic from
+The v4 rows also evaluate the complementary quadratic from
 Bishnoi--Mattheus--Schillewaert Theorem 8.1 and record the pointwise hybrid
 threshold.  Against that spectral threshold, the new second moment wins in
 97/86/73 rows, loses in 34/52/59, and ties in 15/8/14 for
 `lambda=1/2/3`.  This comparison is exact integer arithmetic; no floating-point
 root evaluation is used.
+
+They additionally record the paired-moment and paired-plus-full-spectral
+thresholds.  The paired threshold improves the earlier hybrid in 27/23/26
+rows for `lambda=1/2/3`, with maximum gains 2/1/1.  The full-family spectral
+constraint changes none of those paired thresholds on this grid.
 
 For the eight small `(k,3)` comparison orders
 `q=4,5,7,8,9,11,13,16` at `lambda=1`, the first/second thresholds are
@@ -361,10 +452,11 @@ respectively
 7/7, 8/9, 9/9, 9/9, 9/11, 10/11, 11/12, 12/13.
 ```
 
-The generator independently checks the convex degree envelope by dynamic
-programming in 5,386 bounded instances (`3 <= k <= 20`, `2 <= s < min(6,k)`,
-all feasible degree sums), and checks 37 ordinary-arc specializations against
-`3 C(k,4)` for `4 <= k <= 40`.
+The generator independently checks the original convex degree envelope by
+dynamic programming in 5,386 bounded instances (`3 <= k <= 20`,
+`2 <= s < min(6,k)`, all feasible degree sums), checks the lower/upper bounded
+degree envelopes in another 1,368 instances, and checks 37 ordinary-arc
+specializations against `3 C(k,4)` for `4 <= k <= 40`.
 
 Replay from the repository root:
 
@@ -374,10 +466,10 @@ nix shell nixpkgs#python3 --command python3 notes/2026-08-22-c945-higher-arc-def
 
 The generator is deterministic and uses only Python's standard library.
 `generate` rewrites the canonical sorted JSON and checksum manifest; `check`
-recomputes both in memory and fails on drift.  The script is 7,296 bytes with
-SHA-256 `a13821c72ff2aa76e5922d630c4d7a61e95deaf877d16ea80c4b2611c8e970b3`;
-the JSON is 117,105 bytes with SHA-256
-`6ec1a77b92e253eb288cdb9b8626cf9f8bfcd42bbba1bdaf2ee4224d757d818e`.
+recomputes both in memory and fails on drift.  The script is 11,915 bytes with
+SHA-256 `f54d7f2e7ba2accab01415ea83bb36d77760251ccb8790f11f000a6fb87627b4`;
+the JSON is 148,720 bytes with SHA-256
+`6cdbdb8637df1494a9e75bdb1e79d60ec5fae1c8e5326c2204b08124ce70ec9d`.
 
 ## Candidate new numerical consequence
 

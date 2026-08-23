@@ -35,6 +35,27 @@ def convex_degree_maximum(k: int, degree_cap: int, degree_sum: int) -> int:
     return full * comb(degree_cap, 2) + comb(remainder, 2)
 
 
+def convex_degree_minimum(vertices: int, degree_sum: int) -> int:
+    """Minimum pair count for a fixed nonnegative integer degree sum."""
+    quotient, remainder = divmod(degree_sum, vertices)
+    return (vertices - remainder) * comb(quotient, 2) + remainder * comb(quotient + 1, 2)
+
+
+def bounded_degree_maximum(vertices: int, lower: int, upper: int, degree_sum: int) -> int:
+    """Maximum pair count with a common lower and upper degree bound."""
+    excess = degree_sum - vertices * lower
+    capacity = upper - lower
+    if excess < 0 or excess > vertices * capacity:
+        raise ValueError("infeasible bounded degree sum")
+    if capacity == 0:
+        return vertices * comb(lower, 2)
+    return (
+        vertices * comb(lower, 2)
+        + lower * excess
+        + convex_degree_maximum(vertices, capacity, excess)
+    )
+
+
 def capacity_numerator(q: int, k: int, s: int, lam: int, t: int) -> tuple[int, int]:
     matching_cap = k // s
     degree_cap = (k - 1) // (s - 1)
@@ -86,6 +107,47 @@ def spectral_minimum(q: int, s: int, lam: int = 1) -> int | None:
     return None
 
 
+def paired_moment_minimum(q: int, s: int, lam: int = 1, spectral: bool = False) -> int | None:
+    """Threshold from overlapping the internal and external pair-count intervals."""
+    point_count = q * q + q + 1
+    blocking_order = q + 1 - s
+    start = first_moment_minimum(q, s, lam)
+    for k in range(start, (s - 1) * q + s + 1):
+        matching_cap = k // s
+        if matching_cap < lam:
+            continue
+        external_points = point_count - k
+        degree_cap = (k - 1) // (s - 1)
+        t_max = min(k * (k - 1) // (s * (s - 1)), k * degree_cap // s)
+        feasible_t = (t_max,) if s == 2 else range(1, t_max + 1)
+        for t in feasible_t:
+            external_degree_sum = blocking_order * t
+            if not lam * external_points <= external_degree_sum <= matching_cap * external_points:
+                continue
+
+            internal_minimum = convex_degree_minimum(k, s * t)
+            internal_maximum = convex_degree_maximum(k, degree_cap, s * t)
+            pair_total = comb(t, 2)
+            internal_external_minimum = pair_total - internal_maximum
+            internal_external_maximum = pair_total - internal_minimum
+
+            external_minimum = convex_degree_minimum(external_points, external_degree_sum)
+            external_maximum = bounded_degree_maximum(
+                external_points, lam, matching_cap, external_degree_sum
+            )
+            if max(internal_external_minimum, external_minimum) > min(
+                internal_external_maximum, external_maximum
+            ):
+                continue
+
+            if spectral:
+                gap = point_count * blocking_order - (q + 1) * external_points
+                if t * gap * gap > q * external_points * k * (point_count - t):
+                    continue
+            return k
+    return None
+
+
 @lru_cache(maxsize=None)
 def dp_degree_maximum(vertices: int, cap: int, total: int) -> int | None:
     """Independent small dynamic program for the convex-envelope check."""
@@ -100,6 +162,20 @@ def dp_degree_maximum(vertices: int, cap: int, total: int) -> int | None:
     return best
 
 
+@lru_cache(maxsize=None)
+def dp_degree_minimum(vertices: int, cap: int, total: int) -> int | None:
+    """Independent small dynamic program for the balanced-minimum check."""
+    if vertices == 0:
+        return 0 if total == 0 else None
+    best = None
+    for degree in range(min(cap, total) + 1):
+        tail = dp_degree_minimum(vertices - 1, cap, total - degree)
+        if tail is not None:
+            value = comb(degree, 2) + tail
+            best = value if best is None else min(best, value)
+    return best
+
+
 def run_checks() -> dict[str, object]:
     checked_envelopes = 0
     for k in range(3, 21):
@@ -111,6 +187,23 @@ def run_checks() -> dict[str, object]:
                 formula = convex_degree_maximum(k, cap, total)
                 assert direct == formula, (k, s, total, direct, formula)
                 checked_envelopes += 1
+
+    checked_bounded_envelopes = 0
+    for vertices in range(1, 9):
+        for lower in range(4):
+            for upper in range(lower, 6):
+                for total in range(vertices * lower, vertices * upper + 1):
+                    shifted = dp_degree_maximum(vertices, upper - lower, total - vertices * lower)
+                    assert shifted is not None
+                    direct_maximum = vertices * comb(lower, 2) + lower * (
+                        total - vertices * lower
+                    ) + shifted
+                    formula_maximum = bounded_degree_maximum(vertices, lower, upper, total)
+                    assert direct_maximum == formula_maximum
+                    direct_minimum = dp_degree_minimum(vertices, upper, total)
+                    formula_minimum = convex_degree_minimum(vertices, total)
+                    assert direct_minimum == formula_minimum
+                    checked_bounded_envelopes += 1
 
     checked_arc_specializations = 0
     for k in range(4, 41):
@@ -127,9 +220,13 @@ def run_checks() -> dict[str, object]:
                 first = first_moment_minimum(q, s, lam)
                 second = second_moment_minimum(q, s, lam)
                 spectral = spectral_minimum(q, s, lam)
+                paired = paired_moment_minimum(q, s, lam)
+                paired_spectral = paired_moment_minimum(q, s, lam, spectral=True)
                 assert second is None or second >= first
                 assert spectral is None or spectral >= s + 1
                 hybrid = None if second is None or spectral is None else max(second, spectral)
+                assert paired is None or hybrid is None or paired >= hybrid
+                assert paired_spectral is None or paired is None or paired_spectral >= paired
                 rows.append(
                     {
                         "q": q,
@@ -139,17 +236,20 @@ def run_checks() -> dict[str, object]:
                         "second_moment_minimum": second,
                         "spectral_minimum": spectral,
                         "hybrid_minimum": hybrid,
+                        "paired_moment_minimum": paired,
+                        "paired_spectral_minimum": paired_spectral,
                         "improvement": None if second is None else second - first,
                         "excluded_through_universal_arc_maximum": second is None,
                     }
                 )
 
     return {
-        "schema": "c945-higher-arc-defect-v3",
+        "schema": "c945-higher-arc-defect-v4",
         "meaning": "Necessary-bound thresholds only; projective-plane or arc existence is not asserted.",
         "parameters": {"lambda_values": list(LAMBDA_VALUES), "holes": 0, "q_values": list(Q_VALUES), "s_max": 8},
         "independent_checks": {
             "convex_envelope_instances": checked_envelopes,
+            "bounded_convex_envelope_instances": checked_bounded_envelopes,
             "ordinary_arc_specializations": checked_arc_specializations,
         },
         "rows": rows,
