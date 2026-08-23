@@ -1,0 +1,2819 @@
+# rank 1
+1:
+  1:
+    very_ample: no
+    description: double cover of $\mathbb{P}^3$ with branch locus a divisor of degree 6
+    alternative:
+      - hypersurface of degree 6 in $\mathbb{P}(1,1,1,1,3)$
+    -KX3: 2
+    h12: 52
+    moduli: 68
+
+    unirational: "?"
+
+    bivector: [0, 0, 35]
+
+    Kps: 4
+    Kss: 4
+
+
+  2:
+    very_ample: conditional
+    description:
+      - hypersurface of degree 4 in $\mathbb{P}^4$
+      - double cover of ((1-16)) with branch locus a divisor of degree 8
+    -KX3: 4
+    h12: 30
+    moduli: [45, 44]
+
+    unirational: some
+
+    period: 165, 15
+    method:
+      type: "quantum Lefschetz"
+      ambient: [[1,1,1,1]]
+      bundles: [[4]]
+
+    bivector: [0, 0, 15]
+
+    Kps: 4
+    Kss: 4
+
+
+  3:
+    description: complete intersection of quadric and cubic in $\mathbb{P}^5$
+    -KX3: 6
+    h12: 20
+    moduli: 34
+
+    unirational: yes
+
+    period: 164, 19
+    method:
+      type: "quantum Lefschetz"
+      ambient: [[1,1,1,1,1]]
+      bundles: [[2], [3]]
+
+    bivector: [0, 0, 7]
+
+    Kps: 4
+    Kss: 4
+
+
+  4:
+    description: complete intersection of 3 quadrics in $\mathbb{P}^6$
+    -KX3: 8
+    h12: 14
+    moduli: 27
+
+    unirational: yes
+
+    period: 163, 5
+    method:
+      type: "quantum Lefschetz"
+      ambient: [[1,1,1,1,1,1]]
+      bundles: [[2], [2], [2]]
+
+    bivector: [0, 0, 3]
+
+    Kps: 4
+    Kss: 4
+
+
+  5:
+    very_ample: conditional
+    name: Gushel&ndash;Mukai 3-fold
+    description:
+      - section of Plücker embedding of $\mathrm{Gr}(2,5)$ by codimension 2 subspace and a quadric
+      - double cover of ((1-15)) with branch locus an anticanonical divisor
+    -KX3: 10
+    h12: 10
+    moduli: [22, 19]
+
+    rational: generically non-rational
+    unirational: yes
+
+    period: 160, 9
+
+    bivector: [0, 0, 1]
+
+    Kps: 4
+    Kss: 4
+
+
+  6:
+    description: section of half-spinor embedding of a connected component of $\mathrm{OGr}_+(5,10)$ by codimension 7 subspace
+    -KX3: 12
+    h12: 7
+    moduli: 18
+
+    rational: yes
+
+    period: 150, 7
+
+    hilbert:
+      2:
+        description: "the symmetric square of a smooth curve of genus 7"
+        invariants: {pg: 21, q: 7, h12: 50}
+
+    bivector: [0, 0, 0]
+
+    Kps: 4
+    Kss: 4
+
+
+  7:
+    description: section of Plücker embedding of $\mathrm{Gr}(2,6)$ by codimension 5 subspace
+    -KX3: 14
+    h12: 5
+    moduli: 15
+
+    unirational: yes
+
+    period: 147, 18
+
+    hilbert:
+      2:
+        description: "a Fano surface, a minimal surface of general type"
+        invariants: {pg: 10, q: 5, h12: 25}
+
+    bivector: [0, 0, 0]
+
+    Kps: 4
+    Kss: 4
+
+
+  8:
+    description: section of Plücker embedding of $\mathrm{SGr}(3,6)$ by codimension 3 subspace
+    -KX3: 16
+    h12: 3
+    moduli: 12
+
+    rational: yes
+
+    period: 143, 20
+
+    hilbert:
+      2:
+        description: "the ruled surface obtained from projectivisation of simple rank 2 bundle over a smooth curve of genus 3"
+        invariants: {pg: 0, q: 3, h12: 2}
+
+    bivector: [0, 0, 0]
+
+    Kps: 4
+    Kss: 4
+
+
+  9:
+    description: section of the adjoint $\mathrm{G}_2$-Grassmannian $\mathrm{G}_2\mathrm{Gr}(2,7)$ by codimension 2 subspace
+    -KX3: 18
+    h12: 2
+    moduli: 10
+
+    rational: yes
+
+    period: 124, 10
+
+    hilbert:
+      2:
+        description: "an abelian surface"
+        invariants: {pg: 1, q: 2, h12: 4}
+
+    bivector: [1, 0, 0]
+
+    Kps: 3
+    Kss: 3
+
+
+  10:
+    qh:
+      - type: small
+        who: someone
+        when: at some point
+        ref: "?"
+        using: ""
+    description: zero locus of $(\bigwedge^2\mathcal{U}^\vee)^{\oplus 3}$ on $\mathrm{Gr}(3,7)$
+    -KX3: 22
+    h12: 0
+    moduli: 6
+
+    rational: yes
+
+    Kps: 2
+    Kss: 3
+
+    Aut: [["\\mathrm{PGL}_2", 0, 3], ["\\mathbb{G}_{\\mathrm{a}}", 0, 1], ["\\mathbb{G}_{\\mathrm{m}}", 1, 1]]
+
+    remarks:
+      - The unique such threefold where $\mathrm{Aut}(X)\cong\mathrm{PGL}_2$ is called the <em>Mukai&ndash;Umemura 3-fold</em>
+
+    period: 113, 17
+
+    bivector: [3, 0, 0]
+
+    exceptional: ["Kuznetsov", 1996, "MR1445274"]
+
+    hilbert:
+      2:
+        description: "$\\mathbb{P}^2$"
+        invariants: {pg: 0, q: 0, h12: 1}
+
+
+  11:
+    name: double Veronese cone
+    very_ample: no
+    description: hypersurface of degree 6 in $\mathbb{P}(1,1,1,2,3)$
+    -KX3: 8
+    h12: 21
+    moduli: 34
+
+    index: 2
+
+    unirational: "?"
+
+    Kps: 4
+    Kss: 4
+
+    bivector: [3, 0, 7]
+
+
+  12:
+    name: quartic double solid
+    description: double cover of $\mathbb{P}^3$ with branch locus a smooth quartic surface
+    alternative:
+      - hypersurface of degree 4 in $\mathbb{P}(1,1,1,1,2)$
+    -KX3: 16
+    h12: 10
+    moduli: 19
+
+    index: 2
+
+    unirational: yes
+
+    Kps: 4
+    Kss: 4
+
+    period: 140, 1
+
+    bivector: [6, 0, 1]
+
+
+  13:
+    description: hypersurface of degree 3 in $\mathbb{P}^4$
+    -KX3: 24
+    h12: 5
+    moduli: 10
+
+    index: 2
+
+    unirational: yes
+
+    Kps: 4
+    Kss: 4
+
+    period: 106, 0
+    method:
+      type: "quantum Lefschetz"
+      ambient: [[1,1,1,1]]
+      bundles: [[3]]
+
+    hilbert:
+      1:
+        description: "a Fano surface, a minimal surface of general type"
+        invariants: {pg: 10, q: 5, h12: 25}
+
+    bivector: [10, 0, 0]
+
+
+  14:
+    description: complete intersection of 2 quadrics in $\mathbb{P}^5$
+    -KX3: 32
+    h12: 2
+    moduli: 3
+
+    index: 2
+
+    rational: yes
+
+    Kps: 4
+    Kss: 4
+
+    period: 75, 2
+    method:
+      type: "quantum Lefschetz"
+      ambient: [[1,1,1,1,1]]
+      bundles: [[2], [2]]
+
+    hilbert:
+      1:
+        description: "an abelian surface"
+        invariants: {pg: 1, q: 2, h12: 4}
+
+    bivector: [15, 0, 0]
+
+
+  15:
+    name: quintic del Pezzo threefold
+    qh:
+      - type: small
+        who: someone
+        when: at some point
+        ref: "?"
+        using: ""
+    description: section of Plücker embedding of $\mathrm{Gr}(2,5)$ by codimension 3 subspace
+    -KX3: 40
+    h12: 0
+    moduli: 0
+
+    index: 2
+
+    Aut: [["\\mathrm{PGL}_2", 0, 3]]
+
+    rational: yes
+
+    Kps: 4
+    Kss: 4
+
+    period: 46, 14
+
+    bivector: [21, 0, 0]
+
+    exceptional: ["Orlov", 1991, "MR1294662"]
+
+    hilbert:
+      1:
+        description: "$\\mathbb{P}^2$"
+        invariants: {pg: 0, q: 0, h12: 1}
+
+
+  16:
+    qh:
+      - type: small
+        who: someone
+        when: at some point
+        ref: "?"
+        using: ""
+    description: hypersurface of degree 2 in $\mathbb{P}^4$
+    -KX3: 54
+    h12: 0
+    moduli: 0
+
+    index: 3
+
+    Aut: [["\\mathrm{PSO}_5", 0, 10]]
+
+    rational: yes
+
+    Kps: 4
+    Kss: 4
+
+    period: 3, 4
+    method:
+      type: "quantum Lefschetz"
+      ambient: [[1,1,1,1]]
+      bundles: [[2]]
+
+    bivector: [35, 0, 0]
+
+    exceptional: ["Kapranov", 1986, "MR0847146"]
+
+
+  17:
+    qh:
+      - type: small
+        who: someone
+        when: at some point
+        ref: "?"
+        using: ""
+    description: projective space $\mathbb{P}^3$
+    -KX3: 64
+    h12: 0
+    moduli: 0
+
+    index: 4
+
+    Aut: [["\\mathrm{PGL}_4", 0, 15]]
+
+    rational: yes
+
+    Kps: 4
+    Kss: 4
+
+    toric: 23
+
+    period: 1, 12
+
+    bivector: [45, 0, 0]
+
+    exceptional: ["Beilinson", 1978, "MR0509388"]
+
+
+# rank 2
+2:
+  1:
+    very_ample: no
+    basepoint_free: no
+    description: blowup of ((1-11)) in an elliptic curve which is the intersection of two divisors from half the anticanonical linear system
+    -KX3: 4
+    d: -1
+    h12: 22
+    moduli: 36
+
+    unirational: "?"
+    blowdown: ["1-11"]
+
+    Kref:
+      - "MR4719816"
+    Ks: 4
+    Kps: 4
+    Kss: 4
+
+    bivector: [1, 2, 7]
+
+
+  2:
+    very_ample: no
+    hyperelliptic: yes
+    description: double cover of ((2-34)) with branch locus a $(2,4)$-divisor
+    -KX3: 6
+    d: -4
+    h12: 20
+    moduli: 33
+
+    unirational: yes
+
+    Kref:
+      - "MR4719816"
+    Ks: 4
+    Kps: 4
+    Kss: 4
+
+    bivector: [0, 0, 6]
+
+
+  3:
+    very_ample: no
+    hyperelliptic: yes
+    description: blowup of ((1-12)) in an elliptic curve which is the intersection of two divisors from half the anticanonical linear system
+    -KX3: 8
+    d: -4
+    h12: 11
+    moduli: 23
+
+    unirational: yes
+    blowdown: ["1-12"]
+
+    Kref:
+      - "MR4719816"
+      - "2510.13611"
+    Ks: 4
+    Kps: 4
+    Kss: 4
+
+    bivector: [1, 3, 1]
+
+
+  4:
+    trigonal: yes
+    description: blowup of ((1-17)) in the intersection of two cubics
+    alternative:
+      - $(1,3)$-divisor on $\mathbb{P}^1\times\mathbb{P}^3$
+    -KX3: 10
+    d: -9
+    h12: 10
+    moduli: 21
+
+    rational: yes
+    blowdown: ["1-17"]
+
+    Kref:
+      - "MR4719816"
+    Ks: 4
+    Kps: 4
+    Kss: 4
+
+    period: 161, 49
+    method:
+      type: "quantum Lefschetz"
+      ambient: [[1,1,0,0,0,0], [0,0,1,1,1,1]]
+      bundles: [[1,3]]
+
+    bivector: [0, 0, 0]
+
+
+  5:
+    trigonal: yes
+    description: blowup of ((1-13)) in a plane cubic
+    -KX3: 12
+    d: -9
+    h12: 6
+    moduli: 16
+
+    unirational: yes
+    blowdown: ["1-13"]
+
+    Kref:
+      - "MR4719816"
+    Ks: 3
+    Kps: 3
+    Kss: 3
+
+    period: 158, 34
+    method:
+      type: "quantum Lefschetz"
+      ambient: [[1,1,-1,0,0,0], [0,0,1,1,1,1]]
+      bundles: [[0,3]]
+
+    bivector: [1, 3, 0]
+
+
+  6:
+    name: Verra 3-fold
+    description:
+      - $(2,2)$-divisor on $\mathbb{P}^2\times\mathbb{P}^2$
+      - double cover of ((2-32)) with branch locus an anticanonical divisor
+    -KX3: 12
+    d: -12
+    h12: 9
+    moduli: [19, 18]
+
+    unirational: yes
+
+    Kref:
+      - "MR4719816"
+    Ks: 4
+    Kps: 4
+    Kss: 4
+
+    fibrelike: yes
+
+    period: 149, 11
+    method:
+      type: "quantum Lefschetz"
+      ambient: [[1,1,1,0,0,0], [0,0,0,1,1,1]]
+      bundles: [[2,2]]
+
+    bivector: [0, 0, 1]
+
+
+  7:
+    description: blowup of ((1-16)) in the intersection of two divisors from $|\mathcal{O}_Q(2)|$
+    -KX3: 14
+    d: -16
+    h12: 5
+    moduli: 14
+
+    rational: yes
+    blowdown: ["1-16"]
+
+    Kref:
+      - "MR4719816"
+    Ks: 4
+    Kps: 4
+    Kss: 4
+
+    period: 148, 51
+    method:
+      type: "quantum Lefschetz"
+      ambient: [[1,1,0,0,0,0], [0,0,1,1,1,1]]
+      bundles: [[2,0], [1,2]]
+
+    bivector: [0, 1, 0]
+
+
+  8:
+    description:
+      - double cover of ((2-35)) with branch locus an anticanonical divisor such that the intersection with the exceptional divisor is smooth
+      - double cover of ((2-35)) with branch locus an anticanonical divisor such that the intersection with the exceptional divisor is singular but reduced
+    -KX3: 14
+    d: -8
+    h12: 9
+    moduli: [18, 17]
+
+    unirational: yes
+
+    Kref:
+      - "MR4530187"
+    Kps: 4
+    Kss: 4
+
+    period: 144, 26
+    method:
+      type: "quantum Lefschetz"
+      ambient: [[1,1,1,-1,0,1], [0,0,0,1,1,1]]
+      bundles: [[2,2]]
+
+    bivector: [3, 1, 1] # some educated guesswork was used
+
+
+  9:
+    description: complete intersection of degree $(1,1)$ and $(2,1)$ in $\mathbb{P}^3\times\mathbb{P}^2$
+    alternative:
+      - blowup of ((1-17)) in a curve of degree 7 and genus 5, which is an intersection of 3 cubics
+    -KX3: 16
+    d: -17
+    h12: 5
+    moduli: 13
+
+    rational: yes
+    blowdown: ["1-17"]
+
+    Kps: 3
+    Kss: 3
+
+    period: 139, 62
+    method:
+      type: "quantum Lefschetz"
+      ambient: [[1,1,1,1,0,0,0], [0,0,0,0,1,1,1]]
+      bundles: [[1,1], [2,1]]
+
+    bivector: [1, 0, 0]
+
+
+  10:
+    description: blowup of ((1-14)) in an elliptic curve which is an intersection of 2 hyperplanes
+    -KX3: 16
+    d: -16
+    h12: 3
+    moduli: 11
+
+    rational: yes
+    blowdown: ["1-14"]
+
+    Kps: 3
+    Kss: 3
+
+    period: 145, 40
+    method:
+      type: "quantum Lefschetz"
+      ambient: [[1,1,-1,0,0,0,0], [0,0,1,1,1,1,1]]
+      bundles: [[0,2], [0,2]]
+
+    bivector: [1, 2, 0]
+
+
+  11:
+    description: blowup of ((1-13)) in a line
+    -KX3: 18
+    d: -13
+    h12: 5
+    moduli: 12
+
+    unirational: yes
+    blowdown: ["1-13"]
+
+    Kps: 3
+    Kss: 3
+
+    period: 120, 56
+    method:
+      type: "quantum Lefschetz"
+      ambient: [[1,1,1,-1,0,0], [0,0,0,1,1,1]]
+      bundles: [[1,2]]
+
+    bivector: [3, 0, 0]
+
+
+  12:
+    description: intersection of 3 $(1,1)$-divisors in $\mathbb{P}^3\times\mathbb{P}^3$
+    alternative:
+      - blowup of ((1-17)) in a curve of degree 6 and genus 3 which is an intersection of 4 cubics
+    -KX3: 20
+    d: -20
+    h12: 3
+    moduli: 9
+
+    rational: yes
+    blowdown: ["1-17"]
+
+    Kref:
+      - "2404.07803"
+    Kps: 3
+    Kss: 3
+
+    fibrelike: yes
+
+    period: 118, 13
+    method:
+      type: "quantum Lefschetz"
+      ambient: [[1,1,1,1,0,0,0,0], [0,0,0,0,1,1,1,1]]
+      bundles: [[1,1], [1,1], [1,1]]
+
+    hilbert:
+      2:
+        description: the symmetric square of a genus 3 curve
+        invariants: {pg: 3, q: 3, h12: 10}
+
+    bivector: [3, 0, 0]
+
+
+  13:
+    description: blowup of ((1-16)) in a curve of degree 6 and genus 2
+    -KX3: 20
+    d: -24
+    h12: 2
+    moduli: 8
+
+    rational: yes
+    blowdown: ["1-16"]
+
+    Kps: 3
+    Kss: 3
+
+    period: 119, 52
+    method:
+      type: "quantum Lefschetz"
+      ambient: [[1,1,1,0,0,0,0,0], [0,0,0,1,1,1,1,1]]
+      bundles: [[1,1], [1,1], [0,2]]
+
+    bivector: [2, 0, 0]
+
+
+  14:
+    description: blowup of ((1-15)) in an elliptic curve which is an intersection of 2 hyperplanes
+    -KX3: 20
+    d: -25
+    h12: 1
+    moduli: 7
+
+    rational: yes
+    blowdown: ["1-15"]
+
+    Kps: 3
+    Kss: 3
+
+    period: 122, 39 # see comments of http://coates.ma.ic.ac.uk/fanosearch/?page_id=175
+
+    bivector: [1, 0, 0]
+
+
+  15:
+    description:
+      - blowup of ((1-17)) in the intersection of a quadric and a cubic where the quadric is smooth
+      - blowup of ((1-17)) in the intersection of a quadric and a cubic where the quadric is singular but reduced
+    -KX3: 22
+    d: -12
+    h12: 4
+    moduli: [9, 8]
+
+    rational: yes
+
+    Kref:
+      - "2403.16747"
+      - "2304.11420"
+    Kps: 4
+    Kss: 4
+
+    blowdown: ["1-17"]
+
+    period: 109, 35
+    method:
+      type: "quantum Lefschetz"
+      ambient: [[1,1,1,1,-1,0], [0,0,0,0,1,1]]
+      bundles: [[2,1]]
+
+    bivector: [6, 0, 0]
+
+
+  16:
+    description: blowup of ((1-14)) in a conic
+    -KX3: 22
+    d: -20
+    h12: 2
+    moduli: 7
+
+    rational: yes
+    blowdown: ["1-14"]
+
+    Kps: 3
+    Kss: 3
+
+    period: 104, 59
+    method:
+      type: "quantum Lefschetz"
+      ambient: [[1,1,1,-1,0,0,0], [0,0,0,1,1,1,1]]
+      bundles: [[1,1], [0,2]]
+
+    bivector: [4, 0, 0]
+
+
+  17:
+    description: blowup of ((1-16)) in an elliptic curve of degree 5
+    -KX3: 24
+    d: -25
+    h12: 1
+    moduli: 5
+
+    rational: yes
+    blowdown: ["1-16", "1-17"]
+
+    Kref:
+      - "MR4767563"
+    Kps: 3
+    Kss: 3
+
+    period: 101, 38
+
+    bivector: [5, 0, 0]
+
+
+  18:
+    description: double cover of ((2-34)) with branch locus a divisor of degree $(2,2)$
+    -KX3: 24
+    d: -16
+    h12: 2
+    moduli: 6
+
+    rational: yes
+
+    Kref:
+      - "2304.11334"
+      - "2403.09557"
+    Ks: 4
+    Kps: 4
+    Kss: 4
+
+    period: 74, 60
+    method:
+      type: "quantum Lefschetz"
+      ambient: [[1,1,1,0,0,1], [0,0,0,1,1,1]]
+      bundles: [[2,2]]
+
+    bivector: [6, 0, 0]
+
+
+  19:
+    description: blowup of ((1-14)) in a line
+    -KX3: 26
+    d: -17
+    h12: 2
+    moduli: 5
+
+    rational: yes
+    blowdown: ["1-14", "1-17"]
+
+    period: 86, 55
+    method:
+      type: "quantum Lefschetz"
+      ambient: [[1,1,1,1,-1,0,0], [0,0,0,0,1,1,1]]
+      bundles: [[1,1], [1,1]]
+
+    Kps: 3
+    Kss: 3
+
+    bivector: [8, 0, 0]
+
+
+  20:
+    description: blowup of ((1-15)) in a twisted cubic
+    -KX3: 26
+    d: -29
+    h12: 0
+    moduli: 3
+
+    rational: yes
+    blowdown: ["1-15"]
+
+    Kps: 2
+    Kss: 3
+
+    Aut: [["\\mathbb{G}_{\\mathrm{m}}", 0, 1]]
+
+    period: 87, 46
+
+    bivector: [6, 0, 0]
+
+
+  21:
+    qh:
+      - type: small
+        who: Ciolli
+        when: 2005
+        ref: MR2168069
+        using: 'the description of a 1 or 2-curve blowup of $\mathbb{P}^3$ or $Q^3$'
+    description: blowup of ((1-16)) in a twisted quartic
+    -KX3: 28
+    d: -28
+    h12: 0
+    moduli: 2
+
+    rational: yes
+    blowdown: ["1-16", "1-16"]
+
+    Kref:
+      - "2304.12295"
+    Kps: 2
+    Kss: 3
+
+    fibrelike: yes
+
+    Aut: [["\\mathrm{PGL}_2", 0, 3], ["\\mathbb{G}_{\\mathrm{a}}", 0, 1], ["\\mathbb{G}_{\\mathrm{m}}", 1, 1]]
+
+    period: 84, 8
+
+    hilbert:
+      2:
+        description: a quadric surface
+        invariants: {pg: 0, q: 0, h12: 2}
+
+    bivector: [8, 0, 0]
+
+
+  22:
+    qh:
+      - type: small
+        who: Ciolli
+        when: 2005
+        ref: MR2168069
+        using: 'the description of a 1 or 2-curve blowup of $\mathbb{P}^3$ or $Q^3$'
+    description: blowup of ((1-15)) in a conic
+    -KX3: 30
+    d: -24
+    h12: 0
+    moduli: 1
+
+    rational: yes
+    blowdown: ["1-15", "1-17"]
+
+    Kref:
+      - "MR4498816"
+      - "2309.12518"
+      - "2507.08528"
+    Ks: 2
+    Kps: 2
+    Kss: 4
+
+    Aut: [["\\mathbb{G}_{\\mathrm{m}}", 0, 1]]
+
+    period: 69, 50
+
+    bivector: [10, 0, 0]
+
+
+  23:
+    description:
+      - blowup of ((1-16)) in an intersection of $A\in|\mathcal{O}_Q(1)|$ and $B\in|\mathcal{O}_Q(2)|$ such that $A$ is smooth
+      - blowup of ((1-16)) in an intersection of $A\in|\mathcal{O}_Q(1)|$ and $B\in|\mathcal{O}_Q(2)|$ such that $A$ is singular
+    -KX3: 30
+    d: -16
+    h12: 1
+    moduli: [2, 1]
+
+    rational: yes
+    blowdown: ["1-16"]
+
+    Kref:
+      - "MR3570238"
+    Kps: 0
+    Kss: 0
+
+    period: 78, 29
+    method:
+      type: "quantum Lefschetz"
+      ambient: [[1,1,1,1,1,-1,0], [0,0,0,0,0,1,1]]
+      bundles: [[1,1], [2,0]]
+
+    bivector: [11, 0, 0]
+
+
+  24:
+    exceptional:
+      - Orlov's projective bundle formula
+    description: divisor on $\mathbb{P}^2\times\mathbb{P}^2$ of bidegree $(1,2)$
+    -KX3: 30
+    d: -21
+    h12: 0
+    moduli: 1
+
+    rational: yes
+
+    Kref:
+      - "2309.12518"
+    Kps: 2
+    Kss: 4
+
+    Aut: [["\\mathbb{G}_{\\mathrm{m}}^2", 0, 2], ["\\mathbb{G}_{\\mathrm{m}}", 0, 1]]
+
+    period: 44, 66
+    method:
+      type: "quantum Lefschetz"
+      ambient: [[1,1,1,0,0,0], [0,0,0,1,1,1]]
+      bundles: [[1,2]]
+
+    MMP:
+      - ["P1", "\\mathbb{P}^2", "0\\to\\mathcal{O}_{\\mathbb{P}^2}(-2)\\to\\mathcal{O}_{\\mathbb{P}^2}^{\\oplus3}\\to\\mathcal{E}(1)\\to 0"]
+
+    bivector: [10, 0, 0]
+
+
+  25:
+    description: blowup of ((1-17)) in an elliptic curve which is an intersection of 2 quadrics
+    alternative:
+      - $(1,2)$-divisor on $\mathbb{P}^1\times\mathbb{P}^3$
+    -KX3: 32
+    d: -16
+    h12: 1
+    moduli: 1
+
+    rational: yes
+    blowdown: ["1-17"]
+
+    Kref:
+      - "2309.12518"
+    Kps: 4
+    Kss: 4
+
+    period: 43, 28
+    method:
+      type: "quantum Lefschetz"
+      ambient: [[1,1,0,0,0,0], [0,0,1,1,1,1]]
+      bundles: [[1,2]]
+
+    bivector: [13, 0, 0]
+
+
+  26:
+    bott: yes
+    qh:
+      - type: small
+        who: Ciolli
+        when: 2005
+        ref: MR2168069
+        using: 'the description of a 1 or 2-curve blowup of $\mathbb{P}^3$ or $Q^3$'
+    description: blowup of ((1-15)) in a line
+    -KX3: 34
+    d: -21
+    h12: 0
+    moduli: 0
+
+    rational: yes
+    blowdown: ["1-15", "1-16"]
+
+    Kps: 0
+    Kss: 2
+
+    Aut: [["\\mathrm{B}", 0, 2], ["\\mathbb{G}_{\\mathrm{m}}", 0, 1]]
+
+    period: 58, 47
+
+    bivector: [14, 0, 0]
+
+
+  27:
+    qh:
+      - type: small
+        who: Ciolli
+        when: 2005
+        ref: MR2168069
+        using: 'the description of a 1 or 2-curve blowup of $\mathbb{P}^3$ or $Q^3$'
+    description: blowup of ((1-17)) in a twisted cubic
+    -KX3: 38
+    d: -17
+    h12: 0
+    moduli: 0
+
+    rational: yes
+    blowdown: ["1-17"]
+
+    Kps: 4
+    Kss: 4
+
+    Aut: [["\\mathrm{PGL}_2", 0, 3]]
+
+    period: 19, 61
+    method:
+      type: "quantum Lefschetz"
+      ambient: [[1,1,1,1,0,0,0], [0,0,0,0,1,1,1]]
+      bundles: [[1,1], [1,1]]
+
+    MMP:
+      - ["P1", "\\mathbb{P}^2", "0\\to\\mathcal{O}_{\\mathbb{P}^2}(-1)^{\\oplus2}\\to\\mathcal{O}_{\\mathbb{P}^2}^{\\oplus4}\\to\\mathcal{E}(1)\\to 0"]
+
+    bivector: [18, 0, 0]
+
+
+  28:
+    description: blowup of ((1-17)) in a plane cubic
+    -KX3: 40
+    d: -9
+    h12: 1
+    moduli: 1
+
+    rational: yes
+    blowdown: ["1-17"]
+
+    Kref:
+      - "MR3570238"
+    Kps: 0
+    Kss: 0
+
+    Aut: [["\\mathbb{G}_{\\mathrm{a}}^3\\rtimes\\mathbb{G}_{\\mathrm{m}}", 1, 4]]
+
+    period: 5, 33
+    method:
+      type: "quantum Lefschetz"
+      ambient: [[1,1,1,1,-2,0], [0,0,0,0,1,1]]
+      bundles: [[1,1]]
+
+    bivector: [21, 0, 0]
+
+
+  29:
+    qh:
+      - type: small
+        who: Ciolli
+        when: 2005
+        ref: MR2168069
+        using: 'the description of a 1 or 2-curve blowup of $\mathbb{P}^3$ or $Q^3$'
+    description: blowup of ((1-16)) in a conic
+    -KX3: 40
+    d: -16
+    h12: 0
+    moduli: 0
+
+    rational: yes
+    blowdown: ["1-16"]
+
+    Kps: 4
+    Kss: 4
+
+    Aut: [["\\mathbb{G}_{\\mathrm{m}}\\times\\mathrm{PGL}_2", 0, 4]]
+
+    period: 35, 42
+    method:
+      type: "quantum Lefschetz"
+      ambient: [[1,1,-1,0,0,0], [0,0,1,1,1,1]]
+      bundles: [[0,2]]
+
+    bivector: [20, 0, 0]
+
+
+  30:
+    bott: yes
+    qh:
+      - type: small
+        who: Ciolli
+        when: 2005
+        ref: MR2168069
+        using: 'the description of a 1 or 2-curve blowup of $\mathbb{P}^3$ or $Q^3$'
+    description: blowup of ((1-17)) in a conic
+    -KX3: 46
+    d: -12
+    h12: 0
+    moduli: 0
+
+    rational: yes
+    blowdown: ["1-17"]
+
+    Kref:
+      - "MR3570238"
+    Kps: 0
+    Kss: 0
+
+    Aut: [["\\mathrm{PSO}_{5;1}", 0, 7]]
+
+    period: 4, 70
+    method:
+      type: "quantum Lefschetz"
+      ambient: [[1,1,1,1,-1,0], [0,0,0,0,1,1]]
+      bundles: [[1,1]]
+
+    bivector: [26, 0, 0]
+
+
+  31:
+    description: blowup of ((1-16)) in a line
+    -KX3: 46
+    d: -13
+    h12: 0
+    moduli: 0
+
+    rational: yes
+    blowdown: ["1-16"]
+
+    Kref:
+      - "MR3570238"
+    Kps: 0
+    Kss: 0
+
+    Aut: [["\\mathrm{PSO}_{5;2}", 0, 7]]
+
+    period: 15, 48
+    method:
+      type: "quantum Lefschetz"
+      ambient: [[1,1,1,-1,0,0], [0,0,0,1,1,1]]
+      bundles: [[1,1]]
+
+    MMP:
+      - ["P1", "\\mathbb{P}^2", "0\\to\\mathcal{O}_{\\mathbb{P}^2}\\to\\mathcal{E}\\to\\mathcal{J}_x\\to0"]
+
+    bivector: [26, 0, 0]
+
+
+  32:
+    exceptional:
+      - Orlov's projective bundle formula
+    description: divisor on $\mathbb{P}^2\times\mathbb{P}^2$ of bidegree $(1,1)$
+    alternative:
+      - $\mathbb{P}(\mathrm{T}_{\mathbb{P}^2})$
+      - the complete flag variety for $\mathbb{P}^2$
+    -KX3: 48
+    d: -12
+    h12: 0
+    moduli: 0
+
+    index: 2
+
+    rational: yes
+
+    Kps: 4
+    Kss: 4
+
+    Aut: [["\\mathrm{PGL}_3", 0, 8]]
+
+    fibrelike: yes
+
+    period: 24, 6
+    method:
+      type: "quantum Lefschetz"
+      ambient: [[1,1,1,0,0,0], [0,0,0,1,1,1]]
+      bundles: [[1,1]]
+
+    MMP:
+      - ["P1", "\\mathbb{P}^2", "\\mathrm{T}_{\\mathbb{P}^2}"]
+
+    bivector: [28, 0, 0]
+
+
+  33:
+    qh:
+      - type: small
+        who: Ciolli
+        when: 2005
+        ref: MR2168069
+        using: 'the description of a 1 or 2-curve blowup of $\mathbb{P}^3$ or $Q^3$'
+    description: blowup of ((1-17)) in a line
+    -KX3: 54
+    d: -9
+    h12: 0
+    moduli: 0
+
+    rational: yes
+    blowdown: ["1-17"]
+
+    Kref:
+      - "MR3570238"
+    Kps: 0
+    Kss: 0
+
+    Aut: [["\\mathrm{PGL}_{4;2}", 0, 11]]
+
+    toric: 19
+
+    period: 2, 54
+    method:
+      type: "toric"
+      weights: [[1,1,-1,0,0], [0,0,1,1,1]]
+
+    bivector: [34, 0, 0]
+
+
+  34:
+    exceptional:
+      - Orlov's projective bundle formula
+    description: $\mathbb{P}^1\times\mathbb{P}^2$
+    -KX3: 54
+    d: -9
+    h12: 0
+    moduli: 0
+
+    rational: yes
+
+    Kps: 4
+    Kss: 4
+
+    Aut: [["\\mathrm{PGL}_2\\times\\mathrm{PGL}_3", 0, 11]]
+
+    toric: 22
+
+    period: 10, 44
+    method:
+      type: "toric"
+      weights: [[1,1,0,0,0], [0,0,1,1,1]]
+
+    MMP:
+      - ["P1", "\\mathbb{P}^2", "\\mathcal{O}_{\\mathbb{P}^2}\\oplus\\mathcal{O}_{\\mathbb{P}^2}"]
+
+    bivector: [34, 0, 0]
+
+
+  35:
+    exceptional:
+      - Orlov's projective bundle formula
+    description: $\mathrm{Bl}_p\mathbb{P}^3$
+    alternative:
+      - $\mathbb{P}(\mathcal{O}_{\mathbb{P}^2}\oplus\mathcal{O}_{\mathbb{P}^2}(1))$
+    -KX3: 56
+    d: -8
+    h12: 0
+    moduli: 0
+
+    rational: yes
+
+    Kref:
+      - "MR3570238"
+    Kps: 0
+    Kss: 0
+
+    Aut: [["\\mathrm{PGL}_{4;1}", 0, 12]]
+
+    index: 2
+
+    toric: 20
+
+    period: 7, 30
+    method:
+      type: "toric"
+      weights: [[1,1,1,-1,0], [0,0,0,1,1]]
+
+    MMP:
+      - ["P1", "\\mathbb{P}^2", "\\mathcal{O}_{\\mathbb{P}^2}\\oplus\\mathcal{O}_{\\mathbb{P}^2}(1)"]
+
+    bivector: [36, 0, 0]
+
+
+  36:
+    exceptional:
+      - Orlov's projective bundle formula
+    description: $\mathbb{P}(\mathcal{O}_{\mathbb{P}^2}\oplus\mathcal{O}_{\mathbb{P}^2}(2))$
+    -KX3: 62
+    d: -5
+    h12: 0
+    moduli: 0
+
+    rational: yes
+
+    Kref:
+      - "MR3570238"
+    Kps: 0
+    Kss: 0
+
+    Aut: [["\\mathrm{Aut}(\\mathbb{P}(1,1,1,2))", 0, 15]]
+
+    toric: 7
+
+    period: 6, 58
+    method:
+      type: "toric"
+      weights: [[1,1,1,-2,0], [0,0,0,1,1]]
+
+    MMP:
+      - ["P1", "\\mathbb{P}^2", "\\mathcal{O}_{\\mathbb{P}^2}\\oplus\\mathcal{O}_{\\mathbb{P}^2}(2)"]
+
+    bivector: [42, 0, 0]
+
+
+# rank 3
+3:
+  1:
+    description: double cover of ((3-27)) with branch locus a divisor of degree $(2,2,2)$
+    -KX3: 12
+    d: 16
+    h12: 8
+    moduli: 17
+
+    unirational: yes
+
+    Kps: 4
+    Kss: 4
+
+    fibrelike: yes
+
+    period: 154, 22
+    method:
+      type: "quantum Lefschetz"
+      ambient: [[1,1,0,0,0,0,1], [0,0,1,1,0,0,1], [0,0,0,0,1,1,1]]
+      bundles: [[2,2,2]]
+
+    bivector: [0, 2, 1]
+
+
+  2:
+    trigonal: yes
+    description: divisor from $|\mathcal{L}^{\otimes 2}\otimes\mathcal{O}(2,3)|$ on the $\mathbb{P}^2$-bundle $\mathbb{P}(\mathcal{O}\oplus\mathcal{O}(-1,-1)^{\oplus 2})$ over $\mathbb{P}^1\times\mathbb{P}^1$ such that $X\cap Y$ is irreducible, and $\mathcal{L}$ is the tautological bundle, and $Y\in|\mathcal{L}|$
+    -KX3: 14
+    d: 16
+    h12: 3
+    moduli: 11
+
+    rational: yes
+
+    Kref:
+      - "2403.03700"
+    Kps: 3
+    Kss: 3
+
+    period: 157, 97
+    method:
+      type: "quantum Lefschetz"
+      ambient: [[1,1,0,0,-1,0,0], [0,0,1,1,-1,0,0], [0,0,0,0,1,1,1]]
+      bundles: [[0,1,2]]
+
+    bivector: [2, 6, 0]
+
+
+  3:
+    description: divisor on $\mathbb{P}^1\times\mathbb{P}^1\times\mathbb{P}^2$ of degree $(1,1,2)$
+    -KX3: 18
+    d: 28
+    h12: 3
+    moduli: 9
+
+    rational: yes
+    blowdown: ["2-34", "2-34"]
+
+    Kref:
+      - "MR4637147"
+    Ks: 4
+    Kps: 4
+    Kss: 4
+
+    period: 135, 31
+    method:
+      type: "quantum Lefschetz"
+      ambient: [[1,1,0,0,0,0,0], [0,0,1,1,0,0,0], [0,0,0,0,1,1,1]]
+      bundles: [[1,1,2]]
+
+    bivector: [0, 0, 0]
+
+
+  4:
+    description: blowup of ((2-18)) in a smooth fiber of the composition of the projection to $\mathbb{P}^1\times\mathbb{P}^2$ with the projection to $\mathbb{P}^2$ of the double cover with the projection
+    -KX3: 18
+    d: 24
+    h12: 2
+    moduli: 8
+
+    rational: yes
+    blowdown: ["2-18"]
+
+    Kref:
+      - "2304.11334"
+    Ks: 4
+    Kps: 4
+    Kss: 4
+
+    period: 142, 151
+    method:
+      type: "quantum Lefschetz"
+      ambient: [[1,1,-1,0,0,0,0], [0,0,1,1,-1,-1,0], [0,0,0,0,1,1,1]]
+      bundles: [[0,0,2]]
+
+    bivector: [2, 3, 0]
+
+
+  5:
+    description: blowup of ((2-34)) in a curve $C$ of degree $(5,2)$ such that $C\hookrightarrow\mathbb{P}^1\times\mathbb{P}^2\to\mathbb{P}^2$ is an embedding
+    -KX3: 20
+    d: 28
+    h12: 0
+    moduli: 5
+
+    rational: yes
+    blowdown: ["2-34"]
+
+    Kref:
+      - "MR4767555"
+    Ks: 2
+    Kps: 2
+    Kss: 3
+
+    Aut: [["\\mathbb{G}_{\\mathrm{m}}", 0, 1]]
+
+    period: 138, 109
+    method:
+      type: "quantum Lefschetz"
+      ambient: [[1,1,0,0,0,-1,0,0], [0,0,1,1,1,-1,0,0], [0,0,0,0,0,1,1,1]]
+      bundles: [[0,1,1], [0,1,1]]
+
+    bivector: [3, 4, 0]
+
+
+  6:
+    description: blowup of ((1-17)) in the disjoint union of a line and an elliptic curve of degree 4
+    alternative:
+      - complete intersection of degree $(1,0,2)$ and $(0,1,1)$ in $\mathbb{P}^1\times\mathbb{P}^1\times\mathbb{P}^3$
+    -KX3: 22
+    d: 32
+    h12: 1
+    moduli: 5
+
+    rational: yes
+    blowdown: ["2-25", "2-33"]
+
+    Kref:
+      - "MR4837283"
+    Ks: 3
+    Kps: 3
+    Kss: 3
+
+    period: 117, 146
+    method:
+      type: "quantum Lefschetz"
+      ambient: [[1,1,-1,0,0,0,0], [0,0,1,1,1,0,0], [0,0,0,0,0,1,1]]
+      bundles: [[0,2,1]]
+
+    bivector: [2, 0, 0]
+
+
+  7:
+    description: blowup of ((2-32)) in an elliptic curve which is the intersection of two divisors from $|-\frac{1}{2}\mathrm{K}_W|$
+    -KX3: 24
+    d: 36
+    h12: 1
+    moduli: 4
+
+    rational: yes
+    blowdown: ["2-32", "2-34", "2-34"]
+
+    Kps: 3
+    Kss: 3
+
+    period: 103, 36
+    method:
+      type: "quantum Lefschetz"
+      ambient: [[1,1,0,0,0,0,0,0], [0,0,1,1,1,0,0,0], [0,0,0,0,0,1,1,1]]
+      bundles: [[0,1,1], [1,1,1]]
+
+    bivector: [4, 0, 0]
+
+
+  8:
+    description: divisor from the linear system $|(\alpha\circ\pi_1)^*(\mathcal{O}_{\mathbb{P}^2}(1)\otimes\pi_2^*(\mathcal{O}_{\mathbb{P}^2}(2))|$ where $\pi_i\colon\mathrm{Bl}_1\mathbb{P}^2\times\mathbb{P}^2\to\mathrm{Bl}_1\mathbb{P}^2,\mathbb{P}^2$ are the projections, and $\alpha\colon\mathrm{Bl}_1\mathbb{P}^2\to\mathbb{P}^2$ is the blowup
+    -KX3: 24
+    d: 34
+    h12: 0
+    moduli: 3
+
+    rational: yes
+    blowdown: ["2-24", "2-34"]
+
+    Kps: 2
+    Kss: 3
+
+    Aut: [["\\mathbb{G}_{\\mathrm{m}}", 0, 1]]
+
+    period: 112, 85
+    method:
+      type: "quantum Lefschetz"
+      ambient: [[1,1,-1,0,0,0,0], [0,0,1,1,0,0,0], [0,0,0,0,1,1,1]]
+      bundles: [[0,1,2]]
+
+    bivector: [3, 0, 0]
+
+
+  9:
+    description: blowup of the cone over the Veronese of $\mathbb{P}^2$ in $\mathbb{P}^5$ with center the disjoint union of the vertex and a quartic curve on $\mathbb{P}^2$
+    -KX3: 26
+    d: 12
+    h12: 3
+    moduli: 6
+
+    rational: yes
+    blowdown: ["2-36", "2-36"]
+
+    Kref:
+      - "MR4846021"
+    Kps: 4
+    Kss: 4
+
+    Aut: [["\\mathbb{G}_{\\mathrm{m}}", 6, 1]]
+
+    period: 22, 68
+    method:
+      type: "quantum Lefschetz"
+      ambient: [[1,1,1,-2,0,0], [0,0,0,1,1,1]]
+      bundles: [[0,2]]
+
+    bivector: [8, 0, 0]
+
+
+  10:
+    qh:
+      - type: small
+        who: Ciolli
+        when: 2005
+        ref: MR2168069
+        using: 'the description of a 1 or 2-curve blowup of $\mathbb{P}^3$ or $Q^3$'
+    description: blowup of ((1-16)) in the disjoint union of 2 conics
+    alternative:
+      - complete intersection of degree $(1,0,1)$, $(0,1,1)$ and $(0,0,2)$ in $\mathbb{P}^1\times\mathbb{P}^1\times\mathbb{P}^4$
+    -KX3: 26
+    d: 40
+    h12: 0
+    moduli: 2
+
+    rational: yes
+    blowdown: ["2-29", "2-29"]
+
+    Kref:
+      - "2309.12524"
+    Kps: 2
+    Kss: 4
+
+    Aut: [["\\mathbb{G}_{\\mathrm{m}}^2", 0, 2], ["\\mathbb{G}_{\\mathrm{m}}", 1, 1]]
+
+    period: 99, 67
+    method:
+      type: "quantum Lefschetz"
+      ambient: [[1,1,0,0,-1,0,0], [0,0,1,1,0,-1,0], [0,0,0,0,1,1,1]]
+      bundles: [[0,0,2]]
+
+    bivector: [5, 0, 0]
+
+
+  11:
+    description: blowup of ((2-35)) in an elliptic curve which is the intersection of two divisors from $|-\frac{1}{2}\mathrm{K}_{V_7}|$
+    -KX3: 28
+    d: 28
+    h12: 1
+    moduli: 2
+
+    rational: yes
+    blowdown: ["2-25", "2-34", "2-35"]
+
+    Kref:
+      - "MR4621852"
+    Kps: 3
+    Kss: 3
+
+    period: 72, 107
+    method:
+      type: "quantum Lefschetz"
+      ambient: [[1,1,1,-1,0,0,0], [0,0,0,1,1,0,0], [0,0,0,0,0,1,1]]
+      bundles: [[1,1,1]]
+
+    bivector: [8, 0, 0]
+
+
+  12:
+    qh:
+      - type: small
+        who: Ciolli
+        when: 2005
+        ref: MR2168069
+        using: 'the description of a 1 or 2-curve blowup of $\mathbb{P}^3$ or $Q^3$'
+    description: blowup of ((1-17)) in the disjoint union of a line and a twisted cubic
+    -KX3: 28
+    d: 36
+    h12: 0
+    moduli: 1
+
+    rational: yes
+    blowdown: ["2-27", "2-33", "2-34"]
+
+    Kref:
+      - "MR4719816"
+      - "2309.12518"
+    Kps: 2
+    Kss: 4
+
+    Aut: [["\\mathbb{G}_{\\mathrm{m}}", 0, 1]]
+
+    period: 85, 144
+    method:
+      type: "quantum Lefschetz"
+      ambient: [[1,1,-1,0,0,0,0,0], [0,0,1,1,1,0,0,0], [0,0,0,0,0,1,1,1]]
+      bundles: [[0,1,1], [0,1,1]]
+
+    bivector: [7, 0, 0]
+
+
+  13:
+    description: blowup of ((2-32)) in a curve $C$ of bidegree $(2,2)$ such that the composition $C\hookrightarrow W\hookrightarrow\mathbb{P}^2\times\mathbb{P}^2\overset{p_i}{\to}\mathbb{P}^2$ is an embedding for $i=1,2$
+    -KX3: 30
+    d: 40
+    h12: 0
+    moduli: 1
+
+    rational: yes
+    blowdown: ["2-32", "2-32", "2-32"]
+
+    Kref:
+      - "2309.12518"
+    Kps: 2
+    Kss: 4
+
+    Aut: [["\\mathrm{PGL}_2", 0, 3], ["\\mathbb{G}_{\\mathrm{a}}", 0, 1], ["\\mathbb{G}_{\\mathrm{m}}", 1, 1]]
+
+    fibrelike: yes
+
+    period: 70, 16
+    method:
+      type: "quantum Lefschetz"
+      ambient: [[1,1,1,0,0,0,0,0,0], [0,0,0,1,1,1,0,0,0], [0,0,0,0,0,0,1,1,1]]
+      bundles: [[1,1,0], [1,0,1], [0,1,1]]
+
+    hilbert:
+      2:
+        description: the disjoint union of 3 projective planes
+        invariants: {pg: 0, q: 0, h12: 1}
+
+    bivector: [9, 0, 0]
+
+
+
+  14:
+    description: blowup of ((1-17)) in the disjoint union of a plane cubic curve and a point outside the plane
+    -KX3: 32
+    d: 18
+    h12: 1
+    moduli: 1
+
+    rational: yes
+    blowdown: ["2-35", "2-36"]
+
+    Kref:
+      - "MR3570238"
+    Kps: 0
+    Kss: 0
+
+    Aut: [["\\mathbb{G}_{\\mathrm{m}}", 1, 1]]
+
+    period: 21, 98
+    method:
+      type: "quantum Lefschetz"
+      ambient: [[1,1,1,1,0,-2,0], [0,0,0,1,1,0,0], [0,0,0,0,0,1,1]]
+      bundles: [[0,1,1]]
+
+    bivector: [12, 0, 0]
+
+
+
+  15:
+    bott: yes
+    qh:
+      - type: small
+        who: Ciolli
+        when: 2005
+        ref: MR2168069
+        using: 'the description of a 1 or 2-curve blowup of $\mathbb{P}^3$ or $Q^3$'
+    description: blowup of ((1-16)) in the disjoint union of a line and a conic
+    -KX3: 32
+    d: 34
+    h12: 0
+    moduli: 0
+
+    rational: yes
+    blowdown: ["2-29", "2-31", "2-34"]
+
+    Kps: 4
+    Kss: 4
+
+    Aut: [["\\mathbb{G}_{\\mathrm{m}}", 0, 1]]
+
+    period: 67, 112
+    method:
+      type: "quantum Lefschetz"
+      ambient: [[1,1,1,0,0,-1,0], [0,0,0,1,1,0,-1], [0,0,0,0,0,1,1]]
+      bundles: [[1,0,1]]
+
+    bivector: [11, 0, 0]
+
+
+
+  16:
+    bott: yes
+    description: blowup of ((2-35)) in the proper transform of a twisted cubic containing the center of the blowup
+    -KX3: 34
+    d: 30
+    h12: 0
+    moduli: 0
+
+    rational: yes
+    blowdown: ["2-27", "2-32", "2-35"]
+
+    Kref:
+      - "MR3570238"
+    Kps: 0
+    Kss: 0
+
+    Aut: [["\\mathrm{B}", 0, 2]]
+
+    period: 42, 119
+    method:
+      type: "quantum Lefschetz"
+      ambient: [[1,1,1,-1,0,0,-1,-1], [0,0,0,1,1,-1,0,0], [0,0,0,0,0,1,1,1]]
+      bundles: [[0,0,1], [0,0,1]]
+
+    bivector: [13, 0, 0]
+
+
+  17:
+    description: divisor on $\mathbb{P}^1\times\mathbb{P}^1\times\mathbb{P}^2$ of degree $(1,1,1)$
+    -KX3: 36
+    d: 28
+    h12: 0
+    moduli: 0
+
+    rational: yes
+    blowdown: ["2-34", "2-34"]
+
+    Kps: 4
+    Kss: 4
+
+    Aut: [["\\mathrm{PGL}_2", 0, 3]]
+
+    period: 39, 37
+    method:
+      type: "quantum Lefschetz"
+      ambient: [[1,1,0,0,0,0,0], [0,0,1,1,0,0,0], [0,0,0,0,1,1,1]]
+      bundles: [[1,1,1]]
+
+    MMP:
+      - ["P1", "\\mathbb{P}^1\\times\\mathbb{P}^1", "0\\to\\mathcal{O}_{\\mathbb{P}^1\\times\\mathbb{P}^1}(-1,-1)\\to\\mathcal{O}_{\\mathbb{P}^1\\times\\mathbb{P}^1}^{\\oplus3}\\to\\mathcal{E}(1,1)\\to0"]
+
+    bivector: [15, 0, 0]
+
+
+  18:
+    bott: yes
+    qh:
+      - type: small
+        who: Ciolli
+        when: 2005
+        ref: MR2168069
+        using: 'the description of a 1 or 2-curve blowup of $\mathbb{P}^3$ or $Q^3$'
+    description: blowup of ((1-17)) in the disjoint union of a line and a conic
+    -KX3: 36
+    d: 26
+    h12: 0
+    moduli: 0
+
+    rational: yes
+    blowdown: ["2-29", "2-30", "2-33"]
+
+    Kref:
+      - "MR3570238"
+    Kps: 0
+    Kss: 0
+
+    Aut: [["\\mathrm{B}\\times\\mathbb{G}_{\\mathrm{m}}", 0, 3]]
+
+    period: 41, 160
+    method:
+      type: "quantum Lefschetz"
+      ambient: [[1,1,-1,0,0,0,0], [0,0,1,1,1,-1,0], [0,0,0,0,0,1,1]]
+      bundles: [[0,1,1]]
+
+    bivector: [15, 0, 0]
+
+
+  19:
+    bott: yes
+    description: blowup of ((1-16)) in two non-collinear points
+    -KX3: 38
+    d: 24
+    h12: 0
+    moduli: 0
+
+    rational: yes
+    blowdown: ["2-35", "2-35"]
+
+    Kref:
+      - "MR3592691"
+    Kps: 4
+    Kss: 4
+
+    Aut: [["\\mathbb{G}_{\\mathrm{m}}\\times\\mathrm{PGL}_2", 0, 4]]
+
+    period: 18, 57
+    method:
+      type: "quantum Lefschetz"
+      ambient: [[1,1,1,-1,0,0], [0,0,0,1,1,1]]
+      bundles: [[0,2]]
+
+    bivector: [17, 0, 0]
+
+
+  20:
+    bott: yes
+    qh:
+      - type: small
+        who: Ciolli
+        when: 2005
+        ref: MR2168069
+        using: 'the description of a 1 or 2-curve blowup of $\mathbb{P}^3$ or $Q^3$'
+    description: blowup of ((1-16)) in the disjoint union of two lines
+    -KX3: 38
+    d: 28
+    h12: 0
+    moduli: 0
+
+    rational: yes
+    blowdown: ["2-31", "2-31", "2-32"]
+
+    Kps: 4
+    Kss: 4
+
+    Aut: [["\\mathbb{G}_{\\mathrm{m}}\\times\\mathrm{PGL}_2", 0, 4]]
+
+    period: 38, 63
+    method:
+      type: "quantum Lefschetz"
+      ambient: [[1,1,0,0,1,-1,0], [0,0,1,1,1,0,-1], [0,0,0,0,-1,1,1]]
+      bundles: [[1,1,0]]
+
+    bivector: [17, 0, 0]
+
+
+  21:
+    bott: yes
+    description: blowup of ((2-34)) in a curve of degree $(2,1)$
+    -KX3: 38
+    d: 22
+    h12: 0
+    moduli: 0
+
+    rational: yes
+    blowdown: ["2-34"]
+
+    Kref:
+      - "MR3570238"
+    Kps: 0
+    Kss: 0
+
+    Aut: [["\\mathbb{G}_{\\mathrm{a}}^2\\rtimes\\mathbb{G}_{\\mathrm{m}}^2", 0, 4]]
+
+    period: 49, 98
+    method:
+      type: "quantum Lefschetz"
+      ambient: [[1,1,0,0,0,0,-1], [0,0,1,1,1,0,-1], [0,0,0,0,0,1,1]]
+      bundles: [[0,1,1]]
+
+    bivector: [17, 0, 0]
+
+
+  22:
+    bott: yes
+    description: blowup of ((2-34)) in a conic on $\{x\}\times\mathbb{P}^2$, $x\in\mathbb{P}^1$
+    -KX3: 40
+    d: 18
+    h12: 0
+    moduli: 0
+
+    rational: yes
+    blowdown: ["2-34", "2-36"]
+
+    Kref:
+      - "MR3570238"
+    Kps: 0
+    Kss: 0
+
+    Aut: [["\\mathrm{B}\\times\\mathrm{PGL}_2", 0, 5]]
+
+    period: 13, 152
+    method:
+      type: "quantum Lefschetz"
+      ambient: [[1,1,0,0,0,-1,0], [0,0,1,1,1,0,-2], [0,0,0,0,0,1,1]]
+      bundles: [[0,0,1]]
+
+    bivector: [19, 0, 0]
+
+
+  23:
+    bott: yes
+    description: blowup of ((2-35)) in the proper transform of a conic containing the center of the blowup
+    -KX3: 42
+    d: 20
+    h12: 0
+    moduli: 0
+
+    rational: yes
+    blowdown: ["2-30", "2-31", "2-35"]
+
+    Kref:
+      - "MR3570238"
+    Kps: 0
+    Kss: 0
+
+    Aut: [["\\mathbb{G}_{\\mathrm{a}}^3\\rtimes(\\mathrm{B}\\times\\mathbb{G}_{\\mathrm{m}})", 0, 6]]
+
+    period: 17, 158
+    method:
+      type: "quantum Lefschetz"
+      ambient: [[1,1,1,-1,0,0,0], [0,0,0,1,1,-1,0], [0,0,0,0,0,1,1]]
+      bundles: [[1,0,1]]
+
+    bivector: [21, 0, 0]
+
+
+  24:
+    bott: yes
+    description: the fiber product of ((2-32)) with $\mathrm{Bl}_p\mathbb{P}^2$ over $\mathbb{P}^2$
+    alternative:
+      - complete intersection of degree $(1,1,0)$ and $(0,1,1)$ in $\mathbb{P}^1\times\mathbb{P}^2\times\mathbb{P}^2$
+    -KX3: 42
+    d: 22
+    h12: 0
+    moduli: 0
+
+    rational: yes
+    blowdown: ["2-32", "2-34"]
+
+    Kref:
+      - "MR3570238"
+    Kps: 0
+    Kss: 0
+
+    Aut: [["\\mathrm{PGL}_{3;1}", 0, 6]]
+
+    period: 31, 86
+    method:
+      type: "quantum Lefschetz"
+      ambient: [[1,1,-1,0,0,0,0], [0,0,1,1,0,0,0], [0,0,0,0,1,1,1]]
+      bundles: [[0,1,1]]
+
+    MMP:
+      - ["P1", "\\mathbb{F}_1", "\\pi^*(\\mathrm{T}_{\\mathbb{P}^2})"]
+
+    bivector: [21, 0, 0]
+
+
+  25:
+    qh:
+      - type: small
+        who: Ciolli
+        when: 2005
+        ref: MR2168069
+        using: 'the description of a 1 or 2-curve blowup of $\mathbb{P}^3$ or $Q^3$'
+    description: blowup of ((1-17)) in the disjoint union of two lines
+    alternative:
+      - $\mathbb{P}(\mathcal{O}(1,0)\oplus\mathcal{O}(0,1))$ over $\mathbb{P}^1\times\mathbb{P}^1$
+    -KX3: 44
+    d: 20
+    h12: 0
+    moduli: 0
+
+    rational: yes
+    blowdown: ["2-33", "2-33"]
+
+    Kps: 4
+    Kss: 4
+
+    Aut: [["\\mathrm{PGL}_{(2,2)}", 0, 7]]
+
+    toric: 18
+
+    period: 16, 41
+    method:
+      type: "toric"
+      weights: [[1,1,0,0,-1,0], [0,0,1,1,0,-1], [0,0,0,0,1,1]]
+
+    MMP:
+      - ["P1", "\\mathbb{P}^1\\times\\mathbb{P}^1", "\\mathcal{O}_{\\mathbb{P}^1\\times\\mathbb{P}^1}(1,0)\\oplus\\mathcal{O}_{\\mathbb{P}^1\\times\\mathbb{P}^1}(0,1)"]
+
+    bivector: [23, 0, 0]
+
+
+  26:
+    description: blowup of ((1-17)) in the disjoint union of a point and a line
+    alternative:
+      - blowup of line on a plane which is section of ((2-34)) mapping to $\mathbb{P}^2$
+    -KX3: 46
+    d: 18
+    h12: 0
+    moduli: 0
+
+    rational: yes
+    blowdown: ["2-34", "2-35"]
+
+    Kref:
+      - "MR3570238"
+    Kps: 0
+    Kss: 0
+
+    Aut: [["\\mathbb{G}_{\\mathrm{a}}^3\\rtimes(\\mathrm{GL}_2\\times\\mathbb{G}_{\\mathrm{m}})", 0, 8]]
+
+    toric: 16
+
+    period: 12, 113
+    method:
+      type: "toric"
+      weights: [[1,1,0,1,-1,0], [0,0,1,1,0,-1], [0,0,0,-1,1,1]]
+
+    bivector: [25, 0, 0]
+
+
+  27:
+    exceptional:
+      - Orlov's projective bundle formula
+    description: $\mathbb{P}^1\times\mathbb{P}^1\times\mathbb{P}^1$
+    -KX3: 48
+    d: 16
+    h12: 0
+    moduli: 0
+
+    index: 2
+
+    rational: yes
+
+    Kps: 4
+    Kss: 4
+
+    Aut: [["\\mathrm{PGL}_2^3", 0, 9]]
+
+    fibrelike: yes
+
+    toric: 21
+
+    period: 45, 21
+    method:
+      type: "toric"
+      weights: [[1,1,0,0,0,0], [0,0,1,1,0,0], [0,0,0,0,1,1]]
+
+    MMP:
+      - ["P1", "\\mathbb{P}^1\\times\\mathbb{P}^1", "\\mathcal{O}_{\\mathbb{P}^1\\times\\mathbb{P}^1}\\oplus\\mathcal{O}_{\\mathbb{P}^1\\times\\mathbb{P}^1}"]
+
+    hilbert:
+      2:
+        description: the disjoint union of 6 quadrics
+        invariants: {pg: 0, q: 0, h12: 2}
+
+    bivector: [27, 0, 0]
+
+
+  28:
+    description: $\mathbb{P}^1\times\mathrm{Bl}_p\mathbb{P}^2$
+    -KX3: 48
+    d: 16
+    h12: 0
+    moduli: 0
+
+    rational: yes
+    blowdown: ["2-34"]
+
+    Kref:
+      - "MR3570238"
+    Kps: 0
+    Kss: 0
+
+    Aut: [["\\mathrm{PGL}_2\\times\\mathrm{PGL}_{3;1}", 0, 9]]
+
+    toric: 17
+
+    period: 28, 90
+    method:
+      type: "toric"
+      weights: [[1,1,0,0,0,0], [0,0,1,1,-1,0], [0,0,0,0,1,1]]
+
+    MMP:
+      - ["P1", "\\mathbb{P}^1\\times\\mathbb{P}^1", "\\mathcal{O}_{\\mathbb{P}^1\\times\\mathbb{P}^1}\\oplus\\mathcal{O}_{\\mathbb{P}^1\\times\\mathbb{P}^1}(0,1)"]
+      - ["P1", "\\mathbb{F}_1", "\\mathcal{O}_{\\mathbb{F}_1}\\oplus\\mathcal{O}_{\\mathbb{F}_1}"]
+
+    bivector: [27, 0, 0]
+
+
+  29:
+    description: blowup of ((2-35)) in a line on the exceptional divisor
+    -KX3: 50
+    d: 12
+    h12: 0
+    moduli: 0
+
+    rational: yes
+    blowdown: ["2-35", "2-35"]
+
+    Kref:
+      - "MR3570238"
+    Kps: 0
+    Kss: 0
+
+    Aut: [["\\mathrm{PGL}_{4;3,1}", 0, 10]]
+
+    toric: 6
+
+    period: 8, 163
+    method:
+      type: "toric"
+      weights: [[1,0,0,-1,0,1], [0,1,1,0,-2,1], [0,0,0,1,1,-1]]
+
+    bivector: [29, 0, 0]
+
+
+  30:
+    description: blowup of ((2-35)) in the proper transform of a line containing the center of the blowup
+    alternative:
+      - $\mathbb{P}_{\mathbb{F}_1}(\mathcal{O}\oplus\mathcal{O}(\ell))$ where $\ell^2=1$
+    -KX3: 50
+    d: 14
+    h12: 0
+    moduli: 0
+
+    rational: yes
+    blowdown: ["2-33", "2-35"]
+
+    Kref:
+      - "MR3570238"
+    Kps: 0
+    Kss: 0
+
+    Aut: [["\\mathrm{PGL}_{4;2,1}", 0, 10]]
+
+    toric: 12
+
+    period: 11, 84
+    method:
+      type: "toric"
+      weights: [[1,1,-1,0,0,0], [0,0,1,1,-1,0], [0,0,0,0,1,1]]
+
+    MMP:
+      - ["P1", "\\mathbb{F}_1", "\\pi^*(\\mathcal{O}_{\\mathbb{P}^2}\\oplus\\mathcal{O}_{\\mathbb{P}^2}(1))"]
+
+    bivector: [29, 0, 0]
+
+
+  31:
+    exceptional:
+      - Orlov's projective bundle formula
+    description: blowup of the cone over a smooth quadric in $\mathbb{P}^3$ in the vertex
+    alternative:
+      - $\mathbb{P}(\mathcal{O}\oplus\mathcal{O}(1,1))$ over $\mathbb{P}^1\times\mathbb{P}^1$
+    -KX3: 52
+    d: 12
+    h12: 0
+    moduli: 0
+
+    rational: yes
+
+    Kref:
+      - "MR3570238"
+    Kps: 0
+    Kss: 0
+
+    Aut: [["\\mathrm{PSO}_{6;1}", 0, 11]]
+
+    toric: 11
+
+    period: 14, 53
+    method:
+      type: "toric"
+      weights: [[1,1,0,0,-1,0], [0,0,1,1,-1,0], [0,0,0,0,1,1]]
+
+    MMP:
+      - ["P1", "\\mathbb{P}^1\\times\\mathbb{P}^1", "\\mathcal{O}_{\\mathbb{P}^1\\times\\mathbb{P}^1}\\oplus\\mathcal{O}_{\\mathbb{P}^1\\times\\mathbb{P}^1}(1,1)"]
+
+    bivector: [31, 0, 0]
+
+
+# rank 4
+4:
+  1:
+    description: divisor on $\mathbb{P}^1\times\mathbb{P}^1\times\mathbb{P}^1\times\mathbb{P}^1$ of degree $(1,1,1,1)$
+    -KX3: 24
+    d: -48
+    h12: 1
+    moduli: 3
+
+    rational: yes
+    blowdown: ["3-27", "3-27", "3-27", "3-27"]
+
+    Kref:
+      - "MR4632872"
+    Kps: 4
+    Kss: 4
+
+    fibrelike: yes
+
+    period: 111, 3
+    method:
+      type: "quantum Lefschetz"
+      ambient: [[1,1,0,0,0,0,0,0], [0,0,1,1,0,0,0,0], [0,0,0,0,1,1,0,0], [0,0,0,0,0,0,1,1]]
+      bundles: [[1,1,1,1]]
+
+    bivector: [3, 0, 0]
+
+
+  2:
+    description: blowup of the cone over a smooth quadric in $\mathbb{P}^3$ in the disjoint union of the vertex and an elliptic curve on the quadric
+    -KX3: 28
+    d: -32
+    h12: 1
+    moduli: 2 # this is H^1(X,T_X), there are really just 1 moduli
+
+    rational: yes
+    blowdown: ["3-31", "3-31"]
+
+    Kref:
+      - "MR4846021"
+    Kps: 4
+    Kss: 4
+
+    Aut: [["\\mathbb{G}_{\\mathrm{m}}", 2, 1]]
+
+    period: 110, 88 # there is an issue with the labeling on http://coates.ma.ic.ac.uk/fanosearch/?page_id=277
+    method:
+      type: "quantum Lefschetz"
+      ambient: [[1,1,0,0,-1,0,0], [0,0,1,1,-1,0,0], [0,0,0,0,1,1,1]]
+      bundles: [[0,0,2]]
+
+    bivector: [7, 0, 0]
+
+
+  3:
+    bott: yes
+    description: blowup of ((3-27)) in a curve of degree $(1,1,2)$
+    -KX3: 30
+    d: -48
+    h12: 0
+    moduli: 0
+
+    rational: yes
+    blowdown: ["3-17", "3-27", "3-28", "3-28"]
+
+    Kps: 4
+    Kss: 4
+
+    Aut: [["\\mathbb{G}_{\\mathrm{m}}", 0, 1]]
+
+    period: 83, 122
+    method:
+      type: "quantum Lefschetz"
+      ambient: [[1,1,0,0,0,0,0,0], [0,0,1,1,0,0,0,0], [0,0,0,0,1,1,-1,0], [0,0,0,0,0,0,1,1]]
+      bundles: [[1,1,0,1]]
+
+    bivector: [8, 0, 0]
+
+
+  4:
+    bott: yes
+    description: blowup of ((3-19)) in the proper transform of a conic through the points
+    -KX3: 32
+    d: -40
+    h12: 0
+    moduli: 0
+
+    rational: yes
+    blowdown: ["3-18", "3-18", "3-19", "3-30", "3-30"]
+
+    Kref:
+      - "MR3592691"
+    Kps: 4
+    Kss: 4
+
+    Aut: [["\\mathbb{G}_{\\mathrm{m}}^2", 0, 2]]
+
+    period: 68, 103
+    method:
+      type: "quantum Lefschetz"
+      ambient: [[1,1,-1,0,0,0,0], [0,0,1,1,-1,0,0], [0,0,0,0,1,1,1]]
+      bundles: [[0,0,2]]
+
+    bivector: [10, 0, 0]
+
+
+  5:
+    bott: yes
+    description: blowup of ((2-34)) in the disjoint union of a curve of degree $(2,1)$ and a curve of degree $(1,0)$
+    -KX3: 32
+    d: -39
+    h12: 0
+    moduli: 0
+
+    rational: yes
+    blowdown: ["3-21", "3-28", "3-31"]
+
+    Kref:
+      - "MR3570238"
+    Kps: 0
+    Kss: 0
+
+    Aut: [["\\mathbb{G}_{\\mathrm{m}}^2", 0, 2]]
+
+    period: 81, 147
+    method:
+      type: "quantum Lefschetz"
+      ambient: [[1,1,0,0,-1,0,-1,0], [0,0,1,1,0,0,-1,0], [0,0,0,0,1,1,0,0], [0,0,0,0,0,0,1,1]]
+      bundles: [[0,0,1,1]]
+
+    bivector: [10, 0, 0]
+
+
+  6:
+    bott: yes
+    description: blowup of ((1-17)) in the disjoint union of 3 lines
+    alternative:
+      - blowup of ((3-27)) in the tridiagonal
+    -KX3: 34
+    d: -44
+    h12: 0
+    moduli: 0
+
+    rational: yes
+
+    Kps: 4
+    Kss: 4
+
+    blowdown: ["3-25", "3-25", "3-25", "3-27"]
+
+    Aut: [["\\mathrm{PGL}_2", 0, 3]]
+
+    period: 65, 65
+    method:
+      type: "quantum Lefschetz"
+      ambient: [[1,1,0,0,0,0,-1,0,0], [0,0,1,1,0,0,0,-1,0], [0,0,0,0,1,1,0,0,-1], [0,0,0,0,0,0,1,1,1]]
+      bundles: [[0,0,0,1], [0,0,0,1]]
+
+    bivector: [12, 0, 0]
+
+
+  7:
+    bott: yes
+    description: blowup of ((2-32)) in the disjoint union of a curve of degree $(0,1)$ and a curve of degree $(1,0)$
+    -KX3: 36
+    d: -39
+    h12: 0
+    moduli: 0
+
+    rational: yes
+    blowdown: ["3-24", "3-24", "3-28", "3-28"]
+
+    Kps: 4
+    Kss: 4
+
+    Aut: [["\\mathrm{GL}_2", 0, 4]]
+
+    period: 57, 69
+    method:
+      type: "quantum Lefschetz"
+      ambient: [[1,1,-1,0,0,0,0,0], [0,0,1,1,0,0,0,0], [0,0,0,0,1,1,-1,0], [0,0,0,0,0,0,1,1]]
+      bundles: [[0,1,0,1]]
+
+    bivector: [14, 0, 0]
+
+
+  8:
+    bott: yes
+    description: blowup of ((3-27)) in a curve of degree $(0,1,1)$
+    -KX3: 38
+    d: -32
+    h12: 0
+    moduli: 0
+
+    rational: yes
+    blowdown: ["3-27", "3-31"]
+
+    Kref:
+      - "MR3570238"
+    Kps: 0
+    Kss: 0
+
+    Aut: [["\\mathrm{B}\\times\\mathrm{PGL}_2", 0, 5]]
+
+    period: 54, 105
+    method:
+      type: "quantum Lefschetz"
+      ambient: [[1,1,0,0,0,0,0,-1], [0,0,1,1,0,0,0,-1], [0,0,0,0,1,1,-1,0], [0,0,0,0,0,0,1,1]]
+      bundles: [[0,0,0,1]]
+
+    bivector: [16, 0, 0]
+
+
+  9:
+    description: blowup of ((3-25)) in an exceptional curve of the blowup
+    -KX3: 40
+    d: -31
+    h12: 0
+    moduli: 0
+
+    rational: yes
+    blowdown: ["3-25", "3-26", "3-28", "3-30"]
+
+    Kref:
+      - "MR3570238"
+    Kps: 0
+    Kss: 0
+
+    Aut: [["\\mathrm{PGL}_{(2,2);1}", 0, 6]]
+
+    toric: 13
+
+    period: 37, 102
+    method:
+      type: "toric"
+      weights: [[1,1,0,0,-1,0,0], [0,0,1,1,0,-1,0], [0,0,0,-1,0,1,1], [0,0,0,1,1,0,-1]]
+
+    bivector: [18, 0, 0]
+
+
+  10:
+    description: $\mathbb{P}^1\times\mathrm{Bl}_2\mathbb{P}^2$
+    -KX3: 42
+    d: -28
+    h12: 0
+    moduli: 0
+
+    rational: yes
+    blowdown: ["3-27", "3-28", "3-28"]
+
+    Kref:
+      - "MR3570238"
+    Kps: 0
+    Kss: 0
+
+    Aut: [["\\mathrm{PGL}_2\\times\\mathrm{B}^2", 0, 7]]
+
+    toric: 14
+
+    period: 48, 142
+
+    MMP:
+      - ["P1", "\\mathrm{Bl}_2\\mathbb{P}^2", "\\mathcal{O}_{\\mathrm{Bl}_2\\mathbb{P}^2}\\oplus\\mathcal{O}_{\\mathrm{Bl}_2\\mathbb{P}^2}"]
+
+    bivector: [20, 0, 0]
+
+
+  11:
+    description: blowup of ((3-28)) in $\{x\}\times E$, $x\in\mathbb{P}^1$ and $E$ the $(-1)$-curve
+    -KX3: 44
+    d: -23
+    h12: 0
+    moduli: 0
+
+    rational: yes
+    blowdown: ["3-28", "3-31"]
+
+    Kref:
+      - "MR3570238"
+    Kps: 0
+    Kss: 0
+
+    Aut: [["\\mathrm{B}\\times\\mathrm{PGL}_{3;1}", 0, 8]]
+
+    toric: 10
+
+    period: 34, 93
+    method:
+      type: "toric"
+      weights: [[1,0,0,0,-1,0,1], [0,0,1,1,-1,0,0], [0,-1,0,0,0,1,1], [0,1,0,0,1,0,-1]]
+
+    bivector: [22, 0, 0]
+
+
+  12:
+    description: blowup of ((2-33)) in the disjoint union of two exceptional lines of the blowup
+    -KX3: 46
+    d: -20
+    h12: 0
+    moduli: 0
+
+    rational: yes
+    blowdown: ["3-30", "3-30"]
+
+    Kref:
+      - "MR3570238"
+    Kps: 0
+    Kss: 0
+
+    Aut: [["\\mathbb{G}_{\\mathrm{a}}^4\\rtimes(\\mathrm{GL}_2\\times\\mathbb{G}_{\\mathrm{m}})", 0, 9]]
+
+    toric: 8
+
+    period: 29, 150
+    method:
+      type: "toric"
+      weights: [[1,1,-1,0,0,0,0], [0,0,-1,0,0,1,1], [0,0,1,1,0,-1,0], [0,0,1,0,1,0,-1]]
+
+    bivector: [24, 0, 0]
+
+
+  13:
+    description: blowup of ((3-27)) in a curve of degree $(1,1,3)$
+    -KX3: 26
+    d: -44
+    h12: 0
+    moduli: 1
+
+    rational: yes
+    blowdown: ["3-27", "3-31", "3-31"]
+
+    Kref:
+      - "2309.12518"
+    Kps: 2
+    Kss: 4
+
+    Aut: [["\\mathbb{G}_{\\mathrm{m}}", 0, 1]]
+
+    period: 88, 32
+    method:
+      type: "quantum Lefschetz"
+      ambient: [[1,1,0,0,0,0,-1,0], [0,0,1,1,0,0,-1,0], [0,0,0,0,1,1,0,0], [0,0,0,0,0,0,1,1]]
+      bundles: [[0,1,1,1]]
+
+    bivector: [4, 0, 0]
+
+
+# rank 5
+5:
+  1:
+    bott: yes
+    description: blowup of ((2-29)) in the disjoint union of three exceptional lines of the blowup
+    -KX3: 28
+    d: 56
+    h12: 0
+    moduli: 0
+
+    rational: yes
+    blowdown: ["4-4", "4-4", "4-4", "4-12", "4-12", "4-12"]
+
+    Kps: 4
+    Kss: 4
+
+    Aut: [["\\mathbb{G}_{\\mathrm{m}}", 0, 1]]
+
+    period: 100, 114
+    method:
+      type: "quantum Lefschetz"
+      ambient: [[1,1,1,1,1,0,0,0,0], [1,1,1,0,0,1,0,0,0], [1,0,0,0,0,0,1,0,0], [0,1,0,0,0,0,0,1,0], [0,0,1,0,0,0,0,0,0,1]]
+      bundles: [[2,2,1,1,1]]
+
+    bivector: [5, 0, 0]
+
+
+  2:
+    description: blowup of ((3-25)) in the disjoint union of two exceptional lines on the same irreducible component
+    -KX3: 36
+    d: 44
+    h12: 0
+    moduli: 0
+
+    rational: yes
+    blowdown: ["4-9", "4-9", "4-11", "4-11", "4-12"]
+
+    Kref:
+      - "MR3570238"
+    Kps: 0
+    Kss: 0
+
+    Aut: [["\\mathbb{G}_{\\mathrm{m}}\\times\\mathrm{GL}_2", 0, 5]]
+
+    toric: 9
+
+    period: 64, 87
+    method:
+      type: "toric"
+      weights: [[1,1,0,0,-1,0,0,0], [0,0,1,1,0,-1,0,0], [0,0,0,1,1,0,-1,0], [0,0,1,0,1,0,0,-1], [0,0,-1,-1,-1,1,1,1]]
+
+    bivector: [13, 0, 0]
+
+
+  3:
+    description: $\mathbb{P}^1\times\mathrm{Bl}_3\mathbb{P}^2$
+    -KX3: 36
+    d: 48
+    h12: 0
+    moduli: 0
+
+    rational: yes
+    blowdown: ["4-10", "4-10", "4-10", "4-10", "4-10", "4-10"]
+
+    Kps: 4
+    Kss: 4
+
+    Aut: [["\\mathrm{PGL}_2\\times\\mathbb{G}_{\\mathrm{m}}^2", 0, 5]]
+
+    toric: 15
+
+    period: 76, 43
+
+    MMP:
+      - ["P1", "\\mathrm{Bl}_3\\mathbb{P}^2", "\\mathcal{O}_{\\mathrm{Bl}_3\\mathbb{P}^2}\\oplus\\mathcal{O}_{\\mathrm{Bl}_3\\mathbb{P}^2}"]
+
+    bivector: [13, 0, 0]
+
+
+# rank 6
+6:
+  1:
+    bott: yes
+    description: $\mathbb{P}^1\times\mathrm{Bl}_4\mathbb{P}^2$
+    -KX3: 30
+    d: -80
+    h12: 0
+    moduli: 0
+
+    rational: yes
+    blowdown: ["5-3"]
+
+    Kps: 4
+    Kss: 4
+
+    Aut: [["\\mathrm{PGL}_2", 0, 3]]
+
+    period: 107, 64
+
+    MMP:
+      - ["P1", "\\mathrm{Bl}_4\\mathbb{P}^2", "\\mathcal{O}_{\\mathrm{Bl}_4\\mathbb{P}^2}\\oplus\\mathcal{O}_{\\mathrm{Bl}_4\\mathbb{P}^2}"]
+
+    bivector: [6, 0, 0]
+
+
+# rank 7
+7:
+  1:
+    description: $\mathbb{P}^1\times\mathrm{Bl}_5\mathbb{P}^2$
+    -KX3: 24
+    d: 128
+    h12: 0
+    moduli: 2
+
+    rational: yes
+    blowdown: ["6-1"]
+
+    Kps: 4
+    Kss: 4
+
+    Aut: [["\\mathrm{PGL}_2", 2, 3]]
+
+    period: 136, 71
+
+    MMP:
+      - ["P1", "\\mathrm{Bl}_5\\mathbb{P}^2", "\\mathcal{O}_{\\mathrm{Bl}_5\\mathbb{P}^2}\\oplus\\mathcal{O}_{\\mathrm{Bl}_5\\mathbb{P}^2}"]
+
+    bivector: [5, 6, 0]
+
+
+# rank 8
+8:
+  1:
+    trigonal: yes
+    description: $\mathbb{P}^1\times\mathrm{Bl}_6\mathbb{P}^2$
+    -KX3: 18
+    d: -192
+    h12: 0
+    moduli: 4
+
+    rational: yes
+    blowdown: ["7-1"]
+
+    Kps: 4
+    Kss: 4
+
+    Aut: [["\\mathrm{PGL}_2", 4, 3]]
+
+    period: 155, 45
+
+    MMP:
+      - ["P1", "\\mathrm{Bl}_6\\mathbb{P}^2", "\\mathcal{O}_{\\mathrm{Bl}_6\\mathbb{P}^2}\\oplus\\mathcal{O}_{\\mathrm{Bl}_6\\mathbb{P}^2}"]
+
+    bivector: [4, 12, 0]
+
+
+# rank 9
+9:
+  1:
+    very_ample: no
+    description: $\mathbb{P}^1\times\mathrm{Bl}_7\mathbb{P}^2$
+    -KX3: 12
+    d: 256
+    h12: 0
+    moduli: 6
+
+    rational: yes
+    blowdown: ["8-1"]
+
+    Kps: 4
+    Kss: 4
+
+    Aut: [["\\mathrm{PGL}_2", 6, 3]]
+
+    MMP:
+      - ["P1", "\\mathrm{Bl}_7\\mathbb{P}^2", "\\mathcal{O}_{\\mathrm{Bl}_7\\mathbb{P}^2}\\oplus\\mathcal{O}_{\\mathrm{Bl}_7\\mathbb{P}^2}"]
+
+    bivector: [3, 18, 0]
+
+
+# rank 10
+10:
+  1:
+    very_ample: no
+    basepoint_free: no
+    hyperelliptic: yes
+    description: $\mathbb{P}^1\times\mathrm{Bl}_8\mathbb{P}^2$
+    -KX3: 6
+    d: -256
+    h12: 0
+    moduli: 8
+
+    rational: yes
+    blowdown: ["9-1"]
+
+    Kps: 4
+    Kss: 4
+
+    Aut: [["\\mathrm{PGL}_2", 8, 3]]
+
+    MMP:
+      - ["P1", "\\mathrm{Bl}_8\\mathbb{P}^2", "\\mathcal{O}_{\\mathrm{Bl}_8\\mathbb{P}^2}\\oplus\\mathcal{O}_{\\mathrm{Bl}_8\\mathbb{P}^2}"]
+
+    bivector: [2, 24, 0]

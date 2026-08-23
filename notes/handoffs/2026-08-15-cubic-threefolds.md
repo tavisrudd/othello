@@ -255,7 +255,11 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   \(\mathbf P^2\) and Iritani--Koto Theorem 5.1 splits its ledger into two
   semisimple \(\mathbf P^2\) summands; the \(b_3=0\) tail residue is now
   the Mori--Mukai enumeration completion plus non-chain non-Fano carriers:
-  `../2026-08-23-c925-fable-mm224-projective-bundle-closure.md`.
+  `../2026-08-23-c925-fable-mm224-projective-bundle-closure.md`.  The
+  enumeration is complete: all 59 \(h^{1,2}=0\) Mori--Mukai families are
+  ledger-closed with zero escapees, so the Fano \(b_3=0\) tail is fully
+  discharged and the sole remaining tail item is non-Fano carriers:
+  `../2026-08-23-c925-fable-b3zero-enumeration-closure.md`.
 
 - **C924 — closed 2026-08-19.** The direct ordinary-QDM route proves
   irrationality of `X x P^1` after one mandatory local repair: compare the

@@ -225,6 +225,16 @@ realization of that orbit.
   was necessary, not just cheaper); tail residue = enumeration completion
   plus non-chain non-Fano carriers:
   notes/2026-08-23-c925-fable-mm224-projective-bundle-closure.md
+- Fano \(b_3=0\) tail fully closed: all 59 Mori--Mukai \(h^{1,2}=0\)
+  families enumerated from the fanography source data and classified with
+  zero escapees (3-8 and 3-17 resolved as chains over toric 2-34, with
+  independent bundle/2-24 routes and exact degree cross-checks); the
+  closure-class lemma makes ledger-closedness the induction invariant,
+  closed under chains, projective bundles, and the product presentations;
+  CCGK's rank-4 label offset is dictionaried.  Tail residue = non-Fano
+  carriers only (irregular-Hodge lead).  Table:
+  notes/cubic-threefolds-tasks/c925-fable-b3zero-enumeration.md; note:
+  notes/2026-08-23-c925-fable-b3zero-enumeration-closure.md
 
 The packet index owns the module-to-file map.  Do not append another large
 module to this card or to the index; add one focused companion file and one
