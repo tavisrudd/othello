@@ -532,17 +532,36 @@ in that work asserts these are realizable; they are simply unexcluded.  The
 dimension bound closes them outright, since a marked \(\ell\)-cycle needs
 dimension \(\ell+2\) while a centre has dimension at most \(m+1\).
 
-### 12.5 The gap is unchanged and is now the only thing between here and \(m=2\)
+### 12.5 Status of the gap after the Newton-slope theorem
 
-Still to prove: that the boundary rotation order of the spectral cover equals
-the index of the limiting Fano, for a general threefold carrying an integral
-cocharacter, not merely in the toric mirror picture and not merely at the
-first Newton–Puiseux stage.  The cubic's own marked block verifies it
-(\(\chi_K=T^2(T^2-108q)\), ramification two, index two), and
-\(\mathbf P^2\times C_g\) and \(Q^3\) verify it at order three.  If it holds,
-it closes the codimension-two threefold gate without constructing the native
-calibration that the algebraic route is pursuing, and it does so uniformly in
-\(m\).
+Superseded by `2026-08-23-c925-fable-quantum-newton-slope-theorem.md`, which
+removes the mirror hypothesis.  The degree axiom alone forces every Newton
+slope of the spectral cover to be \((b\cdot\gamma)/(c_1\cdot\gamma)\) for a
+difference \(\gamma\) of effective curve classes realizing an edge, so the
+rotation order is \((c_1\cdot\gamma)/\gcd(b\cdot\gamma,c_1\cdot\gamma)\) and
+divides the edge length.  Consequences for the gap:
+
+- **Picard rank one is proved.**  Every rotation order divides the index, with
+  equality for a primitive cocharacter.  This is the identification, as a
+  theorem, for the cubic threefold, the quadric, projective space, and every
+  prime Fano threefold.
+- **The Kobayashi–Ochiai borderline is now rigorous.**  A threefold that is
+  both marked and of rotation order three would need index three in dimension
+  three, hence be the quadric, which has Picard rank one; the theorem gives
+  its rotation order exactly three and the quantum Chevalley table shows it is
+  unmarked.
+- **Every Picard-rank-one threefold centre is excluded by counting.**  A
+  cyclic triple of rank-two blocks needs even cohomology of rank at least six,
+  while Picard rank one gives four.  In particular a cubic threefold centre —
+  the most natural marked threefold — can contribute a marked block but never
+  a marked three-cycle.
+- **What remains** is Picard rank at least two, where the criterion is exact
+  but gives no dimension bound: the rotation order can be any divisor of
+  \(c_1\cdot\gamma\), and nothing yet bounds \(c_1\cdot\gamma\) on the edge
+  carrying the marked blocks.  Mori's cone theorem bounds \(c_1\cdot C\) on an
+  extremal rational curve by \(\dim+1\), the curve-level analogue of
+  Kobayashi–Ochiai, but \(\gamma\) is a difference of effective classes and is
+  not covered by it.  That is the exact residue.
 
 ## 10. Suggested next step on this branch
 
