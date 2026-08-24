@@ -1,0 +1,5 @@
+leg1: C924 family is eps-integral; special-fibre Levelt class = ['1/6', '5/6'] (the marked class; matches the diag(1,z) leg of the confluence certificate)
+leg2: the flat cluster projector on the mixed side has intrinsic z = 0 seed, is idempotent and flat at all 5 orders, is eps-integral, and is unique (cross-cluster ad U invertible)
+leg3: compressed cluster connection on the mixed side is eps-integral; its special-fibre Levelt class = ['1/6', '5/6'] = the summand decoration: transport holds
+leg4: same U_eps, second integral family has special-fibre class ['0', '0'] != ['1/6', '5/6'] - the merged class is invisible in the generic split-pair data, so the decoration lives on the integral model and (INT-Psi) is load-bearing
+all checks passed

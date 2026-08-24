@@ -302,6 +302,18 @@ realization of that orbit.
   target: make the Stokes-decorated ledger (\(ss'\) on split pairs)
   transport along chain fields — non-semisimple Gamma-II.  Note:
   notes/2026-08-23-c925-fable-birational-invariance-redteam.md
+- Stokes-decorated ledger landed: the decoration is defined valuatively
+  (merged-block Levelt class at the edge's large-radius specialization;
+  (R2.4) bridges it to the analytic \(ss'\), (HR) not consumed), and
+  one-step Iritani transport is proved in both directions modulo one
+  named hypothesis (INT-\(\Psi\)) — \(q\)-integrality of \(\Psi\)'s base
+  row-block — which Iritani's property (4)/(5.28) proves on the initial
+  slice \(Q=\tilde\tau=0\).  Exact four-leg model certificate, including
+  the negative control that realizes the red-team hiding mechanism
+  (decoration is a model invariant, not a generic-fibre invariant).
+  Successor: (INT-\(\Psi\)) beyond the initial slice via Iritani's §5.8
+  reconstruction recursion, then chain composition.  Note:
+  notes/2026-08-23-c925-fable-stokes-decorated-ledger.md
 
 The packet index owns the module-to-file map.  Do not append another large
 module to this card or to the index; add one focused companion file and one

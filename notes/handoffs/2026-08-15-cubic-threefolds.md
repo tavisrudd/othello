@@ -288,7 +288,20 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   curve-anchored transport along arbitrary AKMW chains, and the tail's
   single technical target is now the Stokes-decorated ledger
   (non-semisimple Gamma-II):
-  `../2026-08-23-c925-fable-birational-invariance-redteam.md`.
+  `../2026-08-23-c925-fable-birational-invariance-redteam.md`.  That
+  target is now built: the decoration on split pairs is defined
+  valuatively over the chain rings (merged-block Levelt class at the
+  edge's large-radius specialization, bridged to the analytic \(ss'\) by
+  the proved confluence rule, with the open analytic cluster-factor
+  problem sidestepped), and one-step Iritani transport is proved in both
+  directions modulo one named integrality hypothesis (INT-\(\Psi\)) on
+  the base row-block of Iritani's \(\Psi\), proved unconditionally on
+  the initial slice by his property (4).  An exact four-leg certificate
+  replays the mechanism, with a negative control showing the decoration
+  is an integral-model invariant, so (INT-\(\Psi\)) is load-bearing.
+  The tail's spine is now: (INT-\(\Psi\)) beyond the initial slice
+  (Iritani §5.8 reconstruction recursion), then chain composition:
+  `../2026-08-23-c925-fable-stokes-decorated-ledger.md`.
 
 - **C924 — closed 2026-08-19.** The direct ordinary-QDM route proves
   irrationality of `X x P^1` after one mandatory local repair: compare the
