@@ -275,9 +275,10 @@ of CARAT class `(3,25,2)`. The exact tangent one-point slice works over the
 splitting field but its selected boundary ruling does not descend: Galois
 exchanges it with the complementary opposite ruling. The invariant rank-two
 planes are now exhausted: their orbit degrees are `2,6,6,6`, boundary-edge
-orbits force descended linear open degree divisible by two or three, and the
+orbits force every descended ambient codimension-two open degree divisible by
+two or three (all ambient codimension-two cycles have class `dH^2`), and the
 fourth residual torus is non-retract-rational class `(3,6,3)`. Resolving the
-necessarily nonlinear
+necessarily intrinsic
 descent either lowers the rationality bound to three or, if
 \(X\times\mathbf P^3\) is irrational, gives a nonrational \(Y\) with
 \(Y\times\mathbf A^1\) rational. Exact report:

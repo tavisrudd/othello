@@ -184,9 +184,19 @@ non-retract-rational rank-three classes. Thus
 linear one-point OADP slice}.} \tag{10}
 \]
 
+In fact the obstruction is stronger than linearity. Every codimension-two
+cycle in the ambient \(\mathbf P^{15}\) has class \(dH^2\). Its proper
+intersection with an orbit surface therefore has total degree \(2d\) or
+\(6d\), while its boundary part still has degree divisible by two or three as
+in the table. The open intersection can never have degree one. Thus no
+ambient projective codimension-two slice—linear, complete-intersection, or
+otherwise—can be a descended rational section.
+
 This turns “nonlinear descent” from a description of one failed choice into
-an exhaustive structural requirement. It does not rule out a nonlinear
-slice or a direct invariant-field parametrization.
+an intrinsic structural requirement. A successful level-three argument must
+construct a rational section/correspondence inside the quotient geometry or
+give a direct invariant-field parametrization; replacing the hyperplanes by
+higher-degree ambient equations cannot work.
 
 ## Cancellation dichotomy
 
@@ -330,8 +340,8 @@ Replay the GAP certificate from `RatProbAlgTori/` with:
 | settled | Split-field one-point slice | Jacobian rank six and factorized nonzero minor (7). |
 | settled | Residual rank-three torus | Character CARAT class \((3,25,2)\), rational by Kunyavskii. |
 | settled | Direct linear descent fails | Opposite conjugate ruling spaces span all \(\mathbf P^{15}\). |
-| settled | All invariant rank-two linear slices fail | Four-plane exhaustion; open intersection degree is divisible by two or three. |
-| open | Level three | Requires a nonlinear descended slice or direct invariant-field parametrization. |
+| settled | All ambient rank-two slices fail | Four-plane exhaustion; every ambient codimension-two open intersection degree is divisible by two or three. |
+| open | Level three | Requires an intrinsic rational section/correspondence or direct invariant-field parametrization. |
 | open | Cancellation outcome | Irrational level three would yield \(Y\not\sim\mathbf P\) but \(Y\times\mathbf A^1\sim\mathbf P\). |
 | settled | Finite cancellation certificate | One of \(X\times\mathbf P^i\), \(1\le i\le3\), is nonrational with rational \(\mathbf A^1\)-stabilization. |
 
