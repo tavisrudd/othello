@@ -2,8 +2,10 @@
 
 **Lane**: `complete-ports`
 
-**Date**: 2026-07-26
-**Status**: ACTIVE; C946 MULTI-TARGET RECOVERY GENERALIZATION IN PROGRESS; C325 APPENDIX VERIFIER RESUMES AFTER; REMOTE PUBLICATION GATED
+**Date**: 2026-08-24
+**Status**: ACTIVE; C950 PRIMARY-PAPER ARCHITECTURE IN PROGRESS; C951 FORMAL
+BOUNDARY, C952 MANUSCRIPT REBUILD, C325 APPENDIX VERIFIER, AND C953 AGGREGATE
+REVIEW FOLLOW IN THAT ORDER; REMOTE PUBLICATION GATED
 **Theorem source lane**: archived [`repaircodes`](done/2026-07-13-projective-completion-repaircodes.md)
 **Current private paper**: [`complete-repair-ports`](../../papers/complete-repair-ports/README.md)
 **Canonical paper identity**: `complete-ports` — *Bounded Recovery Structures of Linear Codes:
@@ -34,23 +36,30 @@ Results failing this gate are marked `TO FORMALIZE`, `APPENDIX COMPUTATION`, or 
 Classical literature inputs may remain cited, but the paper and Lean boundary must expose the same
 input explicitly.
 
-## Revised paper spine
+## Current paper spine
 
-1. complete bounded ports, reconstruction radius, support/coefficient/probability layers, intrinsic
-   port isomorphisms, and the general MDS local-reconstruction theorem on page 2;
-2. exact pointed confinement and weighted-functional transfer;
-3. positive-density geometric fingerprints, led by the general MDS theorem and followed by compact
-   Clebsch/arc/PRS/AME consequences;
-4. reliability and bounded EXIT;
-5. pointed Tutte structure and the radius-filtration boundary;
-6. cubic--axis versus quartic--nucleus/harmonic applications as demonstrations of different port
-   geometries;
-7. verification and provenance; and
-8. appendices containing every retained computation, certificate, exact finite table, and replay
-   description.
+Working title: *Exact Transfer of Bounded Linear Recovery and Relative Weight
+Hierarchies*.
 
-The working title is *Complete Bounded Repair Ports: Local Memory, Transfer, and Reliability*;
-C671 freezes the final adopted title and theorem hierarchy.
+1. recovery sets, normalized recovery equations, and stochastic repair as
+   distinct forgetful layers;
+2. the associated nested code pair and its exact sequence;
+3. relative generalized Hamming weights as the exact minimum helper costs for
+   recovering subspaces of each dimension;
+4. exact eventual confinement and transfer of all normalized equations;
+5. the best-target GHW identity, cooperative-locality min--max corollary, and
+   MDS rigidity;
+6. positive-density realization and bounded service-rate-region transfer;
+7. reliability and coefficient-presentation separations beyond the RGHW
+   hierarchy;
+8. the projective simplex code as the principal non-MDS application; and
+9. compact formal-verification and reproducibility appendices.
+
+Use only established coding-theory terminology. “Associated nested code pair”
+is a literal description of $K_P\subseteq D_P$, not a coined term. Research
+and referee reports must contain factual findings and result ordering only;
+they must not contain percentiles, venue-prestige judgments, or overall-quality
+grades that could bias later cold reads.
 
 ## Lane lineage and ownership
 
@@ -96,16 +105,22 @@ Completed strengthening:
 Sequel research:
 
 - [C946 multi-target recovery and exact confinement](../2026-08-22-c946-multitarget-recovery-confinement.md)
-  derives the restricted-dual splitting object and tests a sharp eventual
-  helper-union threshold reducing to the one-target theorem.  It is outside the
-  frozen manuscript until its finite functional-cost theorem, generalized-
-  weight boundary, literature comparison, and cold reads close.
+  derives the restricted-dual splitting object and proves the exact finite and
+  eventual helper-union thresholds reducing to the one-target theorem; C948
+  closes its cold-read and generalized-weight gates.
 - [C947 recovery-cost lattice and theory audit](../2026-08-22-c947-recovery-cost-lattice-theory.md)
   proves that the demand cost is finite-field minimum joint row support,
   neither submodular nor supermodular and NP-complete already for one binary
   demand; it packages all presented-demand lifts as a Yoneda representable and
   bounds the arithmetic-matroid/Smith-normal-form sequel. It is math-only and
   made no manuscript or formal-boundary change.
+- [C948 recovery of target subspaces and relative-weight confinement](../2026-08-22-c948-rank-stratified-recovery-hierarchy.md)
+  proves that the RGHWs of the associated nested pair are the exact minimum
+  helper costs, derives the sharp dimension-by-dimension confinement threshold,
+  best-target GHW identity, MDS rigidity, service-rate and reliability
+  corollaries, projective example, and coefficient-presentation separation;
+  its independent proof reread closes all findings and selects the primary-paper
+  rebuild above. BGS/disjoint-recovery work remains a separate gated project.
 
 ## Publication boundary
 
@@ -114,17 +129,19 @@ copy the private monorepo. The shared Lean monorepo is separately owned and deri
 paper-facing target closures. Compiled Lean reuse requires the guarded `lake pack` path plus an
 independent restore/trace validation; never copy raw build trees or selected `.olean` files.
 
-## Frozen scope
+## Current scope
 
-Retain complete ports, pointed transfer, prescribed realization, reliability/EXIT, pointed Tutte,
-and the two geometric flagships. Exclude sequential-composition semantics, general service regions,
-the full coefficient-optimization programme, log-concavity history, product architecture, and
-generic tract/foundation exposition. The user chose to omit C220's optional cubic
-blocker-stability strengthening.
+Retain the exact transfer theorem, positive-density realization, represented
+$[10,4,6]$ separation, only the pointed-Tutte material required by that
+separation, compact MDS reconstruction, the service-rate corollary, and the
+projective simplex example. Compress or move extended EXIT,
+deletion--contraction, secondary geometric inventories, and competing examples.
+Exclude sequential composition, vector-bandwidth claims, the full coefficient-
+optimization programme, generic tract/foundation exposition, and BGS packing.
 
 The manuscript now includes one bounded cross-paper application. For the
-Clebsch `[6,3,4]_11` code, its full pointed coefficient port reconstructs
-the inner code, has `z_x=8`, and occurs with density `1/6` in an
+Clebsch `[6,3,4]_11` code, its full family of normalized recovery equations
+reconstructs the inner code, has `z_x=8`, and occurs with density `1/6` in an
 asymptotically good fixed-`F_11` family. The support-only clutter is generic
 MDS data; the scalar coefficient layer is the exact Clebsch-bearing part.
 The proof ledger records this as manuscript-derived rather than a new Lean
@@ -132,15 +149,12 @@ terminal.
 
 ## Next step
 
-Before any nontrivial proof development or formalization for this paper, read the required
-paper-specific expert dossier
+C950 freezes the exact section/theorem architecture and retain/rewrite/move/cut
+map without editing the manuscript. Then run C951 formal-boundary closure,
+C952 manuscript reconstruction, C325 appendix-only verification, and C953
+aggregate referee/export review. Before nontrivial proof development or
+formalization, read the paper-specific expert dossier
 [`papers/expert-profiles/05-complete-repair-ports.md`](../../papers/expert-profiles/05-complete-repair-ports.md).
-The proof and assembly sequence C672--C678, the C944 terminology revision, and
-the C947 theory audit are complete. Complete the user-prioritized C946 sequel
-derivation, then run
-C325 to build the appendix-only finite verifier.  C679 then
-performs the aggregate formal/prose audits and independent
-draft-readiness cold reads.
 
 The prior monolithic draft and its cold reads remain inputs, not acceptance of the modular
 hierarchy. C220 remains omitted. Shared-Lean extraction is planned under
