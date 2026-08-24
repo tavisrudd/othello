@@ -2,9 +2,9 @@
 
 **Lane**: `complete-ports`
 
-**Status**: IN PROGRESS; PAPER-LOCAL LEAN PACKAGE ESTABLISHED; ASSOCIATED
-NESTED-PAIR EXACT-SEQUENCE DATA KERNEL-CHECKED; CENTRAL CLAIM MAP FROZEN;
-SHARED LEAN TREE UNCHANGED
+**Status**: COMPLETE; PAPER-LOCAL LEAN PACKAGE ESTABLISHED; ASSOCIATED
+NESTED-PAIR EXACT-SEQUENCE DATA KERNEL-CHECKED; CENTRAL CLAIM MAP AND AXIOM
+BOUNDARY FROZEN; SHARED LEAN TREE UNCHANGED
 
 ## Scope and ownership
 
@@ -170,6 +170,43 @@ This table is also encoded in
 not evidence for or against the mathematical statement; it records that the
 paper-local kernel does not establish it.
 
+## Statement-adequacy audit
+
+| Field | Paper statement | Paper-local representation |
+| --- | --- | --- |
+| target set | coordinates $P$ and coefficient space $\mathbb F_q^P$ | abstract target coefficient module `A` and map `target` |
+| helper universe | coordinates $J=E\setminus P$ and $\mathbb F_q^J$ | abstract helper coefficient module `H` and map `helper` |
+| represented generator | split generator maps $G_P,G_J$ | `target`, `helper` |
+| recoverable message space | $W_P=\operatorname{im}G_P\cap\operatorname{im}G_J$ | exact definition and surjectivity theorem |
+| associated nested pair | $K_P=\ker G_J\le D_P=G_J^{-1}(U_P)$ | exact kernel inclusion, image, and restricted-kernel theorems |
+| message rank $t$ | $1\le t\le\dim W_P$ | absent; cannot be inferred from the exact-sequence terminals |
+| helper union | union of supports of a recovery-equation subspace | absent |
+| normalized recovery equations | target restriction equal to the chosen identity/basis presentation | absent |
+| RGHW minimum | standard $M_t(D_P,K_P)$ | absent |
+| confinement | every bounded rank-$t$ system remains in one inner block | absent paper-locally; earlier rank-one shared mechanism is not promoted |
+| positive density | fixed type $1/|E|$, target union $|P|/|E|$ | absent |
+| coefficient transfer | literal equality of normalized recovery equations under zero extension | absent |
+
+The exact-sequence terminals are statement-adequate for the associated nested
+pair and for no stronger row. C952 must not describe the central theorem as
+formally verified.
+
+## Classical source boundary
+
+- Geil--Martin--Matsumoto--Ruano--Luo, arXiv:1403.7985, Definition 4 and
+  Section 3 supply the standard RGHW, Singleton, and duality framework.
+- San-José, arXiv:2503.17764, Section 2 through Theorem 2.8 supplies a current
+  consolidated statement of GHW/RGHW definitions, strict growth, Singleton
+  bounds, and duality.
+- Abdel-Ghaffar--Weber, DOI `10.1109/ISIT.2017.8006618`, Lemma 2 and Theorem 1
+  supply the cooperative-recovery normalization and the generalized-weight
+  lower bound used for comparison.
+- Stichtenoth, arXiv:math/0506264, Theorem 1.6(ii), is the explicit self-dual
+  TVZ-family input if the square-field AG specialization is retained.
+
+These are imported mathematical results in the human proof and bibliography.
+They are not Lean axioms in the paper-local package.
+
 ## Axiom boundary
 
 The paper-local reviewer terminals report only
@@ -199,20 +236,30 @@ classification debt remains outside the paper-local artifact.
 - `RecoveryStructuresVerification`: guarded build passed.
 - Four reviewer terminals: each reports exactly the three standard logical
   axioms listed above.
+- Paper-local source/claim partition: passed with seven claim rows and four
+  reviewer terminals.
+- Paper-local expected-axiom comparison against captured kernel output:
+  passed.
+- The committed paper-local tree contains no `AGENTS.md` or `CLAUDE.md`; the
+  ignored development symlink resolves to the shared norms and cannot enter an
+  immutable-source export.
 - Shared `complete_ports` scoped trust audit: zero findings.
 - Shared portfolio-wide check: reproduced the unowned Stichtenoth axiom plus
   unrelated foreign-area findings; no shared file was changed.
 - Manuscript and shared Lean sources: unchanged.
 
-## Remaining C951 work
+## Closeout decisions
 
-1. Add the paper-local source/axiom checker and verify the tracked claim
-   partition.
-2. Decide whether to formalize the complement/support lemma defining the RGHW
-   identity now or retain it as an explicitly human-only main theorem.
-3. Record exact classical source pinpoints for relative generalized weights,
-   relative Singleton, and Wei duality.
-4. Run the paper export plan from an immutable source commit and verify that
-   `lean/AGENTS.md` is excluded.
-5. Close the statement-adequacy table against every C950 theorem and
-   corollary.
+1. The main RGHW and confinement theorems remain explicitly human-only in the
+   first paper-local companion release. No conditional wrapper or renamed
+   definition is used to inflate coverage.
+2. The associated nested-pair exact sequence is the complete paper-local Lean
+   contribution at this stage.
+3. C952 may cite the older shared rank-one terminals as provenance for the
+   predecessor theorem, but they are not part of the rebuilt paper's axiom
+   audit or package dependency graph.
+4. The standalone mirror should copy the tracked `lean/` package verbatim.
+   The ignored development symlink is absent from the committed tree.
+5. Any later formalization of RGHWs, support unions, or rank-stratified
+   confinement must add exact claim rows and reviewer terminals before the
+   manuscript may upgrade its formalization statement.
