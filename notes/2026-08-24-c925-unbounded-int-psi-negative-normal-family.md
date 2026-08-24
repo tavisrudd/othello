@@ -114,6 +114,17 @@ terms cannot cancel it.
    closes only the universal (INT-\(\Psi\)) provider across arbitrary AKMW
    chains.
 
+There is a sharp dimensional reason this obstruction first matters at
+\(m=2\). For an exceptional Fourier index \(l\), the product of the initial
+mixing's \(z^l\) with the centre unit term \(z^{-2}\) has degree \(z^{l-2}\),
+and \(l\le r-2\). In codimensions two and three this is always a negative
+\(z\)-power and cannot enter the positive Birkhoff factor by this mechanism.
+Codimension four is the first case: \(l=2\) gives \(z^0\). A rational curve
+of codimension four first occurs in a fivefold, exactly the dimension of
+\(X_3\times\mathbf P^2\). Thus the universal transport route has a structural
+cutoff between the established \(m=1\) setting and the open \(m=2\) setting,
+independently of Tschinkel--Zhang's eventual rationality.
+
 ## Exact certificate
 
 - `notes/cubic-threefolds-tasks/c925-int-psi-negative-normal-family-check.py`,
@@ -153,6 +164,7 @@ projective bundles, nor for cubic stabilizations.
 | settled | Universal base-square INT-\(\Psi\) | False for all \(r\ge4\), with leakage \(q^kz^{r-4}\). |
 | settled | Bounded reindexing repair | Impossible because \(k\) is arbitrary. |
 | settled | Fourier or base cancellation | Constant Fourier mode and negative virtual dimension (8). |
+| settled | First dangerous dimension | Codimension four / ambient dimension five, matching cubic \(m=2\). |
 | open | Cubic \(m=2\) | Requires factorization control or a valuation-jump-tolerant marker. |
 
 **Resume line:** go C925 cubic-threefolds — universal INT-\(\Psi\) now fails

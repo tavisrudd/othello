@@ -223,7 +223,9 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   the nonzero term \(q^kz^{r-4}\). Thus no finite universal Novikov shift
   repairs the decorated transport across arbitrary blowup edges. This is a
   general local mechanism compatible with Tschinkel--Zhang's required
-  eventual marker failure, but it does not identify an edge in their
+  eventual marker failure. Its \(z\)-degree shows that codimension four is
+  the first dangerous case, hence ambient dimension five—exactly cubic
+  stabilization \(m=2\). It does not identify an edge in their
   rationalization or decide \(m=2\). Report and exact certificate:
   `../2026-08-24-c925-unbounded-int-psi-negative-normal-family.md`.
 
