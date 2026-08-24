@@ -52,6 +52,11 @@ Polyhedral Templates*
 
 ## Geometry / coding track — Package 2 (arc extension & reconstruction)
 
+**`integral_secant_arcs`** — *Integral Secant Distributions and Improved
+Bounds for Complete (k,n)-Arcs*
+- *Contents:* manuscript, exact-arithmetic evidence bundle, partial Lean
+  companion, imported-source registry, and referee guide.
+
 **3 · `arcs_complete_outside_conic`** — *Arcs complete outside a conic: a prescribed-hole defect
 identity and matching-design rigidity*
 - *Status:* self-contained manuscript + PDF + independent checkers + strict-trust Lean

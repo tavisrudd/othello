@@ -2505,6 +2505,10 @@ care: labels count anything labelled, and corollary-heavy papers inflate against
 the arcs manuscript alone carries 21 corollaries against 8 theorems, so its 77 labels are not 77
 independent results. Neither column measures depth, and none of them should be summed across rows.
 
+The finite-geometry portfolio also contains *Integral Secant Distributions and
+Improved Bounds for Complete (k,n)-Arcs* under the alias
+`integral_secant_arcs`.
+
 <!-- trust-spine:begin area=papers section=manuscripts version=1 -->
 | Manuscript                          | Title                                                                                                                                    | Lane               | Pages | Thm | Lem | Prop | Cor | Labels |
 |-------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------|--------------------|-------|-----|-----|------|-----|--------|

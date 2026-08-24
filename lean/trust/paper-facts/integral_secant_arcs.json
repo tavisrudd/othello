@@ -161,6 +161,10 @@
       "label": "eq:arc-integer-condition"
     },
     {
+      "environment": "equation",
+      "label": "eq:balancing-loss"
+    },
+    {
       "environment": "align",
       "label": "eq:c-balanced"
     },
@@ -432,17 +436,17 @@
   "paper": "integral_secant_arcs",
   "pdfs": [
     {
-      "bytes": 138860,
-      "pages": 14,
+      "bytes": 144164,
+      "pages": 15,
       "path": "papers/integral_secant_arcs/integral_secant_arcs.pdf",
-      "sha256": "ea5607775c9190c9dcbce3c5ff0e4ce294222b049fc9faf543334c6b7a34fa49"
+      "sha256": "ae5e27c6b72e9f3a01c94d60b05440689fe902e6e8ac588aebea5581442bfda7"
     }
   ],
   "schema_version": 1,
   "sources": [
     {
       "path": "papers/integral_secant_arcs/integral_secant_arcs.tex",
-      "sha256": "48994a746d6244390b7c07d00a90428a7feac9b9a0b5b28f0961f25768795f0a"
+      "sha256": "ab2d976d25c4fe38435e3e943390d2cbe37adb4e44a0544457dd9d91b6d57ec1"
     },
     {
       "path": "papers/integral_secant_arcs/formal-annotations.tex",
@@ -450,11 +454,11 @@
     },
     {
       "path": "papers/integral_secant_arcs/sections/01-introduction.tex",
-      "sha256": "1047d295dc56125d4d010e16dfb30465dddb16b0ec85ab5c9004a9f1304866a8"
+      "sha256": "70bfbdbbe2929c781fa5f56c58af60220fe8bd66d7f4430304bae13d53f15f91"
     },
     {
       "path": "papers/integral_secant_arcs/sections/02-integer-envelopes.tex",
-      "sha256": "d59faf76da946090fb29219c0a31c79ab697d81c79de3bc7754f690e9bbf7dc9"
+      "sha256": "14712f2b527732f3330d3339a0a53c88720ae9d1dafa35433671fa11ad8dc973"
     },
     {
       "path": "papers/integral_secant_arcs/sections/03-maximal-secants.tex",
@@ -462,24 +466,22 @@
     },
     {
       "path": "papers/integral_secant_arcs/sections/04-rational-parameters.tex",
-      "sha256": "e2e5bc69c68294d12d725d99e4d20a00aab62d2fa4e47bc7ebe78d79dbcb0742"
+      "sha256": "0def3d6d0086ab76efe3ef3d3d6410eb7ce0866549b352f3a0119548ceb9b768"
     },
     {
       "path": "papers/integral_secant_arcs/sections/05-modular-stability.tex",
-      "sha256": "d01f246cca6a1a4d9aa482edaf27694e413117d9c01b2b45a10e6793415e78a3"
+      "sha256": "86f7ff82b83652fe6dfb747131abe0be5f197d3c4a570ccd6a8e05b8bb9fdbce"
     },
     {
       "path": "papers/integral_secant_arcs/sections/06-characteristic-two.tex",
-      "sha256": "086235f86186be4f36b5b6907ae811b80a2a7b6c442b6c0dd589fa58f13fd65a"
+      "sha256": "496beb722fc7ce8b0fe3c6d848b38eef4a31f9691b4b9789e4b493a7b9d35934"
     },
     {
       "path": "papers/integral_secant_arcs/sections/07-translations.tex",
-      "sha256": "f3fbf5dc67cef7da1e014ae0c55cec37d76b5732f8b6f39575693ed441787d77"
+      "sha256": "ad5ea55be2ce1da3c0987adc4739c7fa05931abf82c29ca505030cd37faa4711"
     }
   ],
-  "title": "Integral Secant Distributions and Improved Bounds for Complete \\texorpdfstring{\\((k,n)\\)}{(k,n)}-Arcs",
-  "title_normalized": "integral secant distributions and improved bounds for complete \\((k,n)\\)(k,n)-arcs",
-  "untracked_bibliography": [
-    "papers/integral_secant_arcs/lean/.lake/packages/mathlib/docs/references.bib"
-  ]
+  "title": "Integral Secant Distributions and Improved Bounds for Complete (k,n)-Arcs",
+  "title_normalized": "integral secant distributions and improved bounds for complete (k,n)-arcs",
+  "untracked_bibliography": []
 }

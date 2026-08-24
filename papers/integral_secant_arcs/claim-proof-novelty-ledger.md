@@ -15,3 +15,24 @@ The paper-local `literature-audit.md` records the search depth, per-source read
 markers, recent arXiv screen through 2026-08-24, citation-locator coverage, and
 the remaining database gaps.  The standalone exporter excludes both this
 ledger and that audit as internal research records.
+
+## Cold proof audit, 2026-08-24
+
+An independent hostile read checked the complete theorem chain against an
+expert finite-geometry context dossier, the imported-source records, the
+computational evidence, and the Lean claim map.  It found no contradiction in
+the stated characteristic-three or characteristic-two bounds.  It identified
+the exceptional-line estimate in the modular-stability reductions as the
+least expanded load-bearing step.  The manuscript now derives this estimate
+from the exact decomposition of `-F(T)` into two nonnegative balancing losses,
+the exact balancing-loss identity, and separate counts of the wrong adjacent
+degrees.
+
+The same audit led to the following hypothesis repairs: the rational
+classification now assumes integral limiting degree `a > lambda`; the real
+relaxation states its nonempty-class and positive-`T` assumptions; the
+characteristic-two parity cost uses `|D|/2`; bounded repair size is fixed only
+after passage to a subsequence; and the projective-code translation assumes a
+spanning point set.  The public reviewer guide records these checks.  The Lean
+map continues to classify the modular and asymptotic reductions as absent; no
+formal or computational fragment is used as a premise for them.
