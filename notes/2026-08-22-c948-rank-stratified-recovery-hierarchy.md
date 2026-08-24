@@ -782,7 +782,7 @@ research-reproducibility gate.
 
 ## 11. Literature and priority audit
 
-**Read-depth summary:** Two sources were read at full text, ten primary sources
+**Read-depth summary:** Five sources were read at full text, seven primary sources
 were read partially at the theorem/definition/positioning sections stated
 below, and eight additional primary records were read at
 abstract/metadata depth. The priority verdict therefore remains a bounded,
@@ -790,12 +790,13 @@ targeted audit and supports only "to our knowledge" language.
 
 ### Sources and read depth
 
-- **Partial:** Abdel-Ghaffar and Weber, *Bounds for Cooperative Locality Using
+- **Full text:** Abdel-Ghaffar and Weber, *Bounds for Cooperative Locality Using
   Generalized Hamming Weights*, accepted-author manuscript of the 2017 ISIT
-  paper. Read: introduction; Section II, Lemma 2 and Definition 2; Section III,
-  GHW definition and Theorem 1 with proof; conclusion. It proves
-  (r\ge d_e(C^\perp)-e) for ((r,e))-cooperative locality, but neither an
-  exact fixed-target relative-weight identity nor concatenation confinement.
+  paper. The complete manuscript was read. Lemma 2 characterizes cooperative
+  recovery by one suitably normalized dual word for each erased coordinate,
+  and Theorem 1 proves $r\ge d_e(C^\perp)-e$. The remaining results derive
+  global parameter and generalized-weight bounds. The paper contains neither
+  an exact fixed-target relative-weight identity nor concatenation confinement.
   Cache key `10.1109/ISIT.2017.8006618`; SHA-256
   `acae6904b1b9865754a15c44d7572965b6a313fc9a6d78510c196ca022fe4433`.
 - **Partial:** Geil--Martin--Matsumoto--Ruano--Luo, *Relative generalized
@@ -818,19 +819,22 @@ targeted audit and supports only "to our knowledge" language.
   bounds; it does not give the simultaneous fixed-target RGHW or confinement
   theorem. Cache key `arXiv:1401.2422`; SHA-256
   `8596f44adaa5891b774835700717cf8873701e53c15194b70d14724ddeac6d0d`.
-- **Partial:** Márquez-Corbella--Martínez-Moro--Munuera, *Computing sharp
+- **Full text:** Márquez-Corbella--Martínez-Moro--Munuera, *Computing sharp
   recovery structures for Locally Recoverable codes*, cached arXiv preprint.
-  Read: introduction and Section 2 through Proposition 1. It establishes the
-  standard single-coordinate recovery-set/recovery-structure language and its
-  dual-support characterization, but retains neither multi-target ranks nor
-  normalized coefficient fibers. Cache key `arXiv:1907.05316`; SHA-256
+  The complete preprint was read. It establishes the standard single-coordinate
+  recovery-set/recovery-structure language and its dual-support
+  characterization, then computes one sharp elementary recovery structure from
+  minimal dual supports using a Gr\"obner test set. It retains neither all
+  bounded normalized coefficient fibers nor multi-target ranks or transfer.
+  Cache key `arXiv:1907.05316`; SHA-256
   `a9060ca8f7901885f1e077076c73dd7d03f8ae995a2232e891ce74c39e4ea927`.
-- **Partial:** Jin--Fu, *Constructions of Locally Repairable Codes via
+- **Full text:** Jin--Fu, *Constructions of Locally Repairable Codes via
   Concatenated Codes*, arXiv v1 of 6 May 2026. Read: abstract/introduction,
-  Section 2's concatenation/locality definitions, Section 3's scope and
-  Construction 3.2. It fixes the binary ([3,2,2]) inner code and chooses
-  outer (mathbb F_4)-codes for parameter-optimal binary LRCs; it does not
-  study exact dual-equation confinement for a general represented inner code.
+  all definitions, constructions, parameter theorems, and proofs in the full
+  preprint. Its main construction fixes the binary ([3,2,2]) inner code and
+  chooses outer $\mathbb F_4$-codes to obtain binary LRCs with optimal or near-
+  optimal parameters. It does not study exact dual-equation confinement for a
+  general represented inner code or preserve a complete recovery structure.
   Cache key `arXiv:2605.04618`; SHA-256
   `69847fc4ed1ada75f615ab8d2b2c08484da31253d278f9485cd03f5ab9587d93`.
 - **Partial:** Gruica--Jany--Ravagnani, *LRCs: Duality, LP Bounds, and Field
@@ -1019,6 +1023,60 @@ stated indexing gap, not a closure result. The 9 July 2026 two-hole BGS
 preprint is outside the one-month window and remains part of the earlier
 frontier, not a new delta hit.
 
+### Forward-citation and zbMATH closure
+
+The three closest sources were pinned by exact identifiers and queried
+independently in OpenAlex, Crossref, and Semantic Scholar on 24 August 2026.
+Counts are reported separately because the services disagree about coverage;
+an HTTP or indexing failure is not treated as an empty citing set.
+
+- **Abdel-Ghaffar--Weber:** DOI
+  `10.1109/ISIT.2017.8006618`; OpenAlex work `W2743336384` reported four
+  citations, Crossref reported `is-referenced-by-count = 0`, and Semantic
+  Scholar paper `f23c30653647d086d2706f05ea775db6d87a34a8` reported five.
+  The largest returned set, all five Semantic Scholar citing records, was
+  screened on title, abstract when supplied, year, and identifiers. Four
+  abstracts were available; *Comparing Various Locality Approaches for Codes
+  Repairing Two Erasures* had title/metadata only. The five records concern
+  availability, $(r,t,x)$-locality, or generalized-weight parameter bounds.
+  None combines a fixed-target nested pair with exact concatenation
+  confinement or coefficient-fiber transfer.
+- **M\'arquez-Corbella--Mart\'inez-Moro--Munuera:** arXiv
+  `1907.05316`, published DOI `10.1007/s10623-020-00746-7`; OpenAlex work
+  `W2956888074`, Crossref, and Semantic Scholar paper
+  `4ccca807212ec13911a70d99d26ea747db4b54ee` each reported zero citations.
+  These were successful empty responses, not transport errors.
+- **Jin--Fu:** arXiv `2605.04618`; OpenAlex work `W7160525301` and Semantic
+  Scholar paper `37ff65e8b915d633790a96f48e38835466b53f21` each reported zero
+  citations. Crossref returned HTTP 404 for the arXiv DOI, so Crossref coverage
+  is **unavailable**, not zero. An initial Semantic Scholar request returned
+  HTTP 429; a later exact-identifier retry succeeded and supplied the zero.
+
+This citation screen covers 5 distinct citing records, all from the largest
+provider set. Its mechanical discriminator was: **promote any citing record
+whose title or abstract mentions a fixed target/set, relative generalized
+weight, exact recovery witnesses or coefficients, concatenation confinement,
+or preservation/transfer of a complete recovery family.** No record passed.
+This is evidence against an immediately visible citation-line predecessor, not
+proof that no uncited or unindexed predecessor exists.
+
+The official zbMATH Open API was also queried rather than relying on web-search
+snippets. Exact-title query
+`ti:"Computing sharp recovery structures for locally recoverable codes"`
+returned the published paper, Zbl `1442.14091`; its review describes the main
+contribution as computing sharp recovery structures from minimal dual
+codewords, consistent with the full-text boundary above. Exact-title queries
+for the Abdel-Ghaffar--Weber ISIT paper and the May 2026 Jin--Fu preprint each
+returned a successful no-result response. The phrase query
+`"relative generalized Hamming weights"` returned 22 records, and the stricter
+title-field query `ti:"relative generalized Hamming weights"` returned 11.
+Their titles and metadata were screened for locality/recovery/concatenation;
+none crossed that discriminator. The combined queries
+`"locally recoverable codes" & "generalized Hamming weights"` and
+`"recovery equations" & concatenation & codes` each returned a successful
+no-result response. These counts describe the API results at the audit date,
+not the size of the underlying subject literature.
+
 ### Cheap corollary exposed by the service-rate literature
 
 For a finite family $A$ of target demands and server radius $r$, let
@@ -1070,9 +1128,10 @@ application, but does not challenge C948's priority claim.
 
 MathSciNet was **NOT COVERED** because institutional authentication was not
 available. Google Scholar was **NOT COVERED** because automated access was not
-used. No claim is made about sources indexed only there. zbMATH and a complete
-forward-citation closure were also not covered in this pass. These gaps require
-"to our knowledge" wording.
+used. No claim is made about sources indexed only there. The three-provider
+forward-citation screen is complete for the three pinned near sources subject
+to the explicit Crossref indexing failure above; these remaining database gaps
+still require "to our knowledge" wording.
 
 ### Priority verdict
 
