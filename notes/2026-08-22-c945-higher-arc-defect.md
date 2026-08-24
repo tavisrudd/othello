@@ -4,8 +4,9 @@
 
 **Date:** 2026-08-22
 
-**Status:** manuscript-entry gate green; final priority audit remains open and
-both manuscripts are untouched.
+**Status:** the separate `integral_secant_arcs` manuscript is in development;
+the final priority audit remains open and the existing conic manuscript is
+untouched.
 
 **Literature-audit summary:** twenty-two individually discussed sources; fifteen
 read at full text and seven partially.  The bounded full-text audit settles the main
@@ -33,33 +34,26 @@ Determine the natural theorem level of the prescribed-hole defect method for
 complete `(k,s)`-arcs.  Promote the extension only if it yields structural rigidity
 or a sharper general bound, rather than merely a formally broader identity.
 
-## Current strength and recommended theorem architecture
+## Theorem architecture and quantitative comparison
 
-The raw higher-arc identity is now assessed at roughly the **50th--65th
-percentile** as a standalone result: it is an elementary specialization of
-classical incidence moments.  The higher-binomial generating identity is also
-classical machinery and is not itself a headline theorem.  The present package
-with the paired integer envelopes, exact recovery of spectral mixing as its
-continuous relaxation, the modular correction, and the infinite strict-gain
-families reached the **97th--98th percentile** among specialized finite-
-geometry papers.  The new characteristic-three ordinary-completeness theorem
-`(OF3)` raises the strongest latent paper provisionally to the **99th
-percentile, with 99+ potential**: it feeds a
-classical modular-repair theorem back through the maximal-secant cap to obtain
-a further linear gain `2q/15` which neither ingredient gives separately.  That
-grade is supported by a claim-specific modular-repair precedence audit through
-24 August 2026, but remains conditional on polishing the report proof into
-manuscript lemma form and on avoiding global priority language until the open
-database coverage is closed.
-The completed ordered-
-factor-pair theorem now proves that every rational multiplicity resonance has
-a positive linear gain and identifies a double-tight near-tactical sublocus;
-this removes the main risk that `(OF)`, `(UF)`, and `(CF)` were isolated
-arithmetic accidents.  The arbitrary-
-dimensional code corollary raises audience and conceptual reach, but not the
-percentile by itself.
+The raw higher-arc identity is an elementary specialization of classical
+incidence moments, and the higher-binomial generating identity is classical
+machinery.  The additional results are the paired integer bounds, the exact
+recovery of spectral mixing as their real relaxation, the modular correction,
+and the infinite strict-gain families.  In characteristic three, `(OF3)` feeds
+the Szőnyi--Weiner repair theorem through the maximal-secant cap and gains a
+further `2q/15` over `(OF)`.  The claim-specific precedence audit is current
+through 24 August 2026; global priority language remains disallowed until the
+open database coverage is closed.
 
-The strongest honest architecture is therefore:
+The ordered-factor-pair theorem proves that every rational multiplicity
+parameter has a positive linear gain and identifies the sublocus where the
+coverage and pair inequalities are simultaneously tight to first order.
+Thus `(OF)`, `(UF)`, and `(CF)` belong to one divisor-indexed family.  The
+arbitrary-dimensional corollary gives the corresponding statement for
+projective codes.
+
+The manuscript-entry architecture is:
 
 1. a general integer moment-envelope theorem for selected blocks in symmetric
    designs, with prescribed lower degrees, holes, and certified upper caps;
@@ -71,15 +65,15 @@ The strongest honest architecture is therefore:
 4. complete `(k,s)`-arcs and multiple blocking sets as the sharp planar
    specialization, where matching/pencil caps add information unavailable in
    an arbitrary design;
-5. `(OF3)` as the primary separation theorem—ordinary completeness in
-   characteristic three—and `(UF)`/`(PF)` as its multiple-coverage companions;
+5. `(OF3)` for ordinary completeness in characteristic three, followed by
+   `(UF)` and `(PF)` under multiple coverage;
 6. the complete ordered-factor-pair resonance theorem `(FP)`--`(LC)`, with
    classical spectral mixing as its strict continuous relaxation at every
    rational branch;
 7. the integral-`h0` double-tight sublocus as the entry point for an inverse
    theorem or structural nonexistence result;
-8. `(RMLS)` as the general modular-lift crown, with `(OF3)` and `(PF)` as the
-   first unconditional zero-core exclusions.
+8. `(RMLS)` as the general modular-repair consequence, with `(OF3)` and `(PF)`
+   as unconditional applications after excluding zero repair support.
 
 This makes the classical result a corollary without pretending the elementary
 moment expansion is new.  A higher (`j>=3`) moment should enter the headline
@@ -128,7 +122,7 @@ The paper should package the present calculations in the following order.
    excluded on the branch in question.  The correction is measured by its
    number of distinct support points; its nonzero modular multiplicities do not
    affect the generator-line count.
-4. **Unconditional crowns.**  The `1 mod 3` degree envelope excludes the exact
+4. **Unconditional applications.**  The `1 mod 3` degree envelope excludes the exact
    core on `(u,v)=(1,1)`, giving `(OF3)`.  The even-degree envelope excludes the
    exact core below coefficient `8` in the factor-pair normalization on
    `(u,v)=(2,1)`; parity of the nonempty repair support then gives `(PF)`.
@@ -593,7 +587,7 @@ the extra obstruction.
 
 ### An ordinary-completeness resonance family
 
-The strongest current separation already occurs for ordinary completeness.
+An unbounded separation already occurs for ordinary completeness.
 Let `q=3n`, `n>=3`, and set
 
 ```
@@ -666,7 +660,7 @@ Feasibility requires `F(6n)<=0`, proving `(OF)`.  The Desarguesian planes of
 orders `q=3^m`, `m>=2`, give an infinite ambient sequence.  As before, this is
 a necessary bound and does not assert attainment.
 
-### The characteristic-three ordinary-completeness crown
+### The characteristic-three ordinary-completeness theorem
 
 On the same Desarguesian tower, modular repair feeds back through the arc cap
 and strengthens `(OF)` again.  The precise sequential statement is
@@ -947,9 +941,8 @@ second branch.
 This explains the numerical phase diagram conceptually: away from a resonance,
 the real spectral slack usually absorbs rounding, while at a resonance the
 continuous bound is tangent to an integral degree pattern and the first finite-
-size mismatch produces a linear modular obstruction.  The next high-EV theorem
-is a classification of all factor-pair resonances and their first-order gains,
-not another undirected parameter sweep.
+size mismatch produces a linear modular obstruction.  The factor-pair theorem
+below classifies these rational parameters and their first-order gains.
 
 ### Complete factor-pair resonance theorem
 
@@ -1112,9 +1105,8 @@ degree `lambda`, and the total smoothing defect from the two balanced degree
 sequences is `o(n)`.  Thus exact double tightness forces an asymptotically
 tactical incidence structure outside a codimension-one exceptional locus.
 The branch `(u,v)=(2,1)` underlying `(CF)` has `h0=-4` and is the first such
-case.  Classifying or excluding these near-tactical structures is now the
-highest-value route from the general bound to a genuine extremal-geometry
-crown.
+case.  The remaining geometric problem is to classify or exclude these
+near-tactical structures.
 
 The arithmetic classification of that sublocus is elementary and complete.
 Set
@@ -1292,8 +1284,8 @@ extremal higher arc
 
 The stability arrow is classical and must be credited.  The new load-bearing
 unit is the factor-pair theorem, the reduction `(EX)`, and the maximal-secant
-feedback `(MLS)`.  A full classification/construction theorem for the residual
-cores would be a beyond-99 crown, not a prerequisite for the CF parity theorem.
+feedback `(MLS)`.  A classification or construction theorem for the residual
+cores is not needed for the CF parity theorem.
 
 ### The first characteristic-two core and an elementary obstruction
 
@@ -1428,11 +1420,9 @@ The earlier constant-sharp `(CF)` has coefficient `12m`, so `(PF)` gains
 `m/6=q/48` beyond it, and still gains linearly over the classical spectral
 bound.  The proof is a genuine interaction of the new paired envelope, the
 classical even-type repair theorem, and the maximal-secant cap: neither the
-moment bound nor modular stability alone contains `(P3)`.  This is now the
-best 99th-percentile headline in the dossier.  Before paper insertion it needs
-conversion from the displayed sequential asymptotic argument into a single
-epsilon-quantified lemma and a claim-specific precedence search for parity-
-repaired multiple-cover arcs; no manuscript claim is yet licensed.
+moment bound nor modular stability alone contains `(P3)`.  Before manuscript
+insertion, the argument requires an epsilon-quantified statement and a
+claim-specific precedence search for parity-repaired multiple-cover arcs.
 
 Szőnyi--Weiner's characteristic-two stability theorem repairs the dual set
 `L` to an even-type set by a bounded point edit.  The most obvious classical
@@ -1523,8 +1513,8 @@ right side is constant and the `j`th interval obstruction is explicit.
 
 This connects robust nonextendibility to matroid data that the ordinary
 minimum distance and the degree-two spectral bound do not see.  A concrete
-third- or higher-moment family with a computable rank enumerator would be the
-strongest route to an application exceeding the current scalar bounds.
+third- or higher-moment family with a computable rank enumerator would test
+whether these identities improve the present scalar bounds.
 
 ### Rigidity and arithmetic corollaries
 
@@ -2383,17 +2373,15 @@ from the report into LaTeX independently.
 - The seven sources marked `partial` require full-text promotion if a final
   novelty boundary depends on their silence.  Their present reads support only
   the positive topical and definitional attributions stated above.
-- No higher-arc novelty sentence has been entered in the owning paper's
-  claim--proof--novelty ledger.  The C945 formulations are therefore candidate
-  positioning only and must not be copied into the manuscript, snapshot, or
-  public summary as novelty claims.
+- The new paper's claim--proof--novelty ledger records the qualified posture
+  from this audit.  The manuscript states the mathematical comparisons without
+  a novelty adjective or an unqualified absence claim.
 - Surface check after the Theorem 8.1 and recent-weeks corrections: this C945
-  report owns the candidate positioning; the live queue and relconic handoff
-  are updated to point to its qualified verdict.  No C945 paper ledger exists
-  yet, so no novelty sentence can propagate.  The conic manuscript, its
-  claim--proof--novelty ledger, the results snapshot, and the public summary do
-  not state the C945 priority claim and require no update.  Both manuscripts
-  remain untouched.
+  report owns the detailed audit, and the new paper ledger points back to it;
+  the live queue and relconic handoff record the qualified verdict.  The conic
+  manuscript, its claim--proof--novelty ledger, the results snapshot, and the
+  public summary do not state the C945 priority claim and require no update.
+  The conic manuscript remains untouched.
 
 ## Mystery ledger (`ej` + `tt` closeout)
 

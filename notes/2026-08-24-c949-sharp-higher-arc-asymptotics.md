@@ -116,21 +116,21 @@ t_s(2,q)=f(alpha)q^2+g(alpha; p, tower, residues)q+o(q).
 
 The first-order term cannot in general be indexed by `alpha` alone: C945's
 mechanism depends on characteristic, the field tower, and congruence data.  A
-piecewise arithmetic phase-transition theorem is a flagship target only after
-one branch has matching constructions.
+A piecewise arithmetic phase-transition theorem is deferred until one branch
+has matching constructions.
 
 The projective-code translation—to minimum length for robustly nonextendible
 projective `[k,3,k-s]_q` codes—may broaden the eventual audience, but the
 finite-geometry extremal function remains primary.
 
-## Significance and stopping rule
+## Scope and stopping rule
 
-- `(LB3)` alone belongs to C945 and is provisionally a 99th-percentile
-  specialist result after its proof and literature gates close.
-- Matching `(UB3)`, preferably with stability or classification, is a genuine
-  99-plus sequel.
-- A nontrivial density interval with matching first-order arithmetic terms is
-  stronger still.
+- `(LB3)` belongs to C945; C949 owns the construction problem.
+- A matching `(UB3)` would determine the two displayed asymptotic terms.
+- Stability or classification would describe near-extremal or extremal
+  configurations in addition to determining the value.
+- A density-interval theorem would extend the calculation from one parameter
+  family to a nontrivial interval of `alpha`.
 
 C949 does not start until C945 has a settled theorem package and manuscript
 disposition.  It must not delay the existing arcs paper's review/release path.
