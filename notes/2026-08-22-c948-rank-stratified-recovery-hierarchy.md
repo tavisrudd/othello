@@ -2,12 +2,127 @@
 
 **Lane**: complete-ports
 
-**Status**: IN PROGRESS; CORE THEOREMS, EJ UPGRADES, BOUNDED LITERATURE AUDIT, AND PRELIMINARY BGS PACKING-BRIDGE VET RECORDED; INDEPENDENT COLD READ AND FULL-TEXT NOVELTY CLOSURE PENDING
+**Status**: IN PROGRESS; CORE THEOREMS, EJ UPGRADES, BOUNDED LITERATURE AUDIT, PRELIMINARY BGS PACKING-BRIDGE VET, AND POST-CLOSURE PUBLICATION PLAN RECORDED; INDEPENDENT COLD READ AND FULL-TEXT NOVELTY CLOSURE PENDING
 
 ## Scope
 
 This is a math-only successor to C946 and C947. It does not authorize edits to
 the manuscript, bibliography, README, Lean boundary, or public mirror.
+
+## Post-closure publication and research plan
+
+No successor task IDs are allocated by this report. Allocation occurs only
+after the C948 closure verdict fixes which claims survive and which paper shape
+they support.
+
+### Phase A — close C948 before restructuring anything
+
+1. Run the claim-specific priority closure for the canonical helper pair,
+   exact RGHW cost identity, additive confinement threshold, best-target GHW
+   identity, rigidity statement, projective-simplex application, and
+   coefficient-presentation separation. Promote the nearest partial reads to
+   full-text reads where possible and record the remaining database and
+   forward-citation limits literally.
+2. Obtain independent referee-style reads of the complete human theorem
+   packet. The audit must separately check definitions and quantifiers,
+   off-by-one conventions, C946 dependence, MDS equality hypotheses,
+   projective reliability inversion, and the forced-padding reliability
+   separation.
+3. Reconcile every surviving theorem with C946 and the current paper's scalar
+   rank-one theorem. Produce one frozen claim ledger distinguishing classical
+   input, new theorem, corollary, example, computational evidence, and open
+   conjecture.
+4. Run the required final EJ and TT pass, settle or assign every mystery below,
+   and issue a binary packaging verdict:
+   **flagship rebuild**, **separate sequel**, or **retain the current paper and
+   defer C948**.
+
+The preferred verdict, conditional on clean closure, is **flagship rebuild**.
+The fallback is deliberately conservative: if priority or proof audit weakens
+the rank-stratified spine, preserve the already verified single-coordinate
+paper and package C948 as a sequel rather than forcing a merger.
+
+### Phase B — primary paper if C948 closes cleanly
+
+Working title:
+
+> *Exact Transfer of Bounded Linear Recovery and Relative Weight Hierarchies*
+
+The paper should be rebuilt around one dependency chain rather than enlarged
+by insertion:
+
+1. normalized recovery equations, exact helper supports, recovery-set upward
+   closure, and stochastic repair as distinct forgetful layers;
+2. the canonical nested helper pair and its exact sequence;
+3. the identification of rank-\(t\) helper cost with relative generalized
+   Hamming weight;
+4. the sharp eventual confinement threshold and exact coefficient-aware
+   transfer;
+5. the best-target GHW identity, cooperative-locality min--max corollary, and
+   MDS rigidity;
+6. positive-density realization;
+7. stochastic and coefficient-presentation separations beyond the complete
+   RGHW hierarchy;
+8. the projective-simplex family as the main non-MDS geometric application;
+9. a compact formal-verification and provenance appendix.
+
+The current paper supplies reusable proofs and examples, but its table of
+contents is not binding. Retain the exact transfer theorem, positive-density
+realization, the represented \([10,4,6]\) separation, only the pointed-Tutte
+material needed by that separation, compact MDS reconstruction, and one
+geometric flagship. Compress or move extended EXIT, deletion--contraction,
+secondary geometric inventories, and competing examples unless a referee read
+shows that they are necessary to the main chain. Aim for one coherent
+approximately 24--28 page paper, not a survey of every consequence.
+
+This phase requires newly allocated tasks after C948 closes: manuscript
+architecture, theorem/formal-boundary closure, manuscript reconstruction,
+and aggregate referee/export review. Their exact IDs and order belong in the
+queue at that time.
+
+### Phase C — disjoint-recovery successor, separately gated
+
+The BGS material is connected but is not part of the primary paper. It studies
+capacity-one packing of many exact recovery witnesses, whereas C948 studies
+minimum helper unions for recovery systems whose witnesses may share helpers.
+The exact recovery fibers supplied by the primary paper are the correct input
+object; adding a disjointness constraint produces the packing fibers relevant
+to the additive matching problem.
+
+Only after the four-hole proof is rebuilt with fixed global conventions should
+a second paper be queued, provisionally titled
+
+> *Prescribed Differences in Additive 1-Factorizations: Profile Saturation and
+> Four Holes*.
+
+Its minimal spine is:
+
+1. the additive 1-factorization and exact coding convention;
+2. the proved profile-lattice theorem;
+3. the correctly restricted semigroup slice and hafnian support formulation;
+4. complementary Walsh minors and deleted-character coefficient lemmas;
+5. the fully signed unrestricted four-hole theorem;
+6. the disjoint-recovery corollary.
+
+Do not queue a six-hole paper until the compressed-pairing multiplicities,
+six-boundary transforms, and global signs are independently proved. If those
+close, a third paper may develop the deleted-Walsh-minor/exterior-degree
+hierarchy. Fixed-hole progress must not be advertised as a route to full BGS
+without an additional growing-hole, recursive, or global saturation theorem.
+
+### Allocation rule after C948
+
+When C948 closes, allocate successors in this order:
+
+1. the primary-paper architecture/rebuild task, if the flagship verdict wins;
+2. its formalization and independent referee gates;
+3. the fixed-convention four-hole proof audit;
+4. the BGS paper task only if that audit proves the theorem;
+5. six-hole work only after Paper II is stable.
+
+This order protects the nearly mature coding-theory result from being delayed
+by the substantially higher-risk BGS program, while preserving the precise
+conceptual bridge between them.
 
 ## Executive result
 
