@@ -135,6 +135,13 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   Engel--de Gaay Fortman--Schreieder route proves all stabilizations for a
   very general cubic, conditional on the cited 2025 preprint; it does not
   cover Voisin's special universally-\(\mathrm{CH}_0\)-trivial loci.
+  The explicit type-\(I_1\) cubic of Tschinkel--Zhang Proposition 5.1 now has
+  the actual improved upper bound
+  \(X\times\mathbf P^{10}\) rational over \(\mathbf Q\): quotienting the
+  rational universal torsor by the scalar anticanonical \(\mathbf G_m\)
+  replaces the \(6+4+1\) permutation torus by its rational weight-\((2,-3,4)\)
+  quotient.  Report and exact certificate:
+  `../2026-08-24-c925-type-i1-level-ten-rationality.md`.
 
   **Conditional finite reduction:** put \(n=m+1\).  For a connected center,
   after a native pure-Euler inner \(n\)-cycle has been placed inside one fixed

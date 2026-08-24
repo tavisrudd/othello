@@ -121,12 +121,29 @@ group \(C_2\times S_3\), all fourteen rational-character candidates with
 target rank below eleven fail by a mod-two or mod-three group-algebra rank
 invariant.  Thus their bound eleven is optimal within the direct
 stable-permutation method, although nonlinear birational stabilization below
-eleven remains open.  Report:
+eleven is not excluded by that test.  Report:
 `../2026-08-24-c925-i1-permutation-resolution-optimality.md`.
+
+**2026-08-24 result below eleven.**  The explicit type-\(I_1\) cubic in
+Tschinkel--Zhang Proposition 5.1 satisfies
+\[
+X\times\mathbf P^{10}\quad\text{is rational over }\mathbf Q.
+\]
+The improvement does not shorten the method-optimal permutation identity.
+Instead, quotient the rational universal torsor by the primitive scalar
+anticanonical \(\mathbf G_m\).  Its projectivization remains rational, while
+the rank-eleven permutation torus has type-\(I_1\) orbits \(6+4+1\) with
+scalar weights \(2,-3,4\).  Its quotient is rational by the unimodular
+monomial change \(t=x_1^2y_1\), \(s=x_1^3y_1^2\), whose weights are \(1,0\).
+Thus the generic quartic del Pezzo fibre satisfies
+\(S\times\mathbf A^{10}\) rational, and the function-field passage gives the
+cubic result.  Report and exact lattice certificate:
+`../2026-08-24-c925-type-i1-level-ten-rationality.md`.
 
 ## Goal
 
-Land the every-smooth \(m=2\) theorem without a Stokes connector; an
+The requested below-eleven alternative is landed at \(m=10\).  Continue
+toward the every-smooth \(m=2\) theorem without a Stokes connector; an
 every-smooth all-\(m\) theorem is false by Tschinkel--Zhang.  Keep the finite
 consumer and the external geometric
 provider separately typed.  The live source targets are exact-period
