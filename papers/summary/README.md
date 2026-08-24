@@ -924,7 +924,7 @@ defect in the present paper's matching-design sense.
 
 #### Integral Secant Distributions and Improved Bounds for Complete (k,n)-Arcs
 
-[PDF](https://github.com/tavisrudd/integral-secant-arcs/blob/main/integral_secant_arcs.pdf) · [Repository](https://github.com/tavisrudd/integral-secant-arcs)
+[PDF](https://github.com/tavisrudd/integral-secant-arcs/blob/main/integral_secant_arcs.pdf) · [Repository](https://github.com/tavisrudd/integral-secant-arcs) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.22087679-blue.svg)](https://doi.org/10.5281/zenodo.22087679)
 
 **Standout result.** Exact integer degree envelopes for all maximal secants
 give a divisor-indexed linear improvement over the classical incidence bound.
