@@ -1,5 +1,5 @@
 {
-  "c925-slice-cover": {
+  "quartic-del-pezzo-slice-cover": {
     "checksum_manifest": "verification/SHA256SUMS",
     "commands": [
       "uv run --with sympy==1.14.0 python3 verification/check_slice_cover.py --check-certificate verification/slice-cover-certificate.json"
