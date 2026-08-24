@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "paper": "Exact Transfer of Bounded Linear Recovery and Relative Weight Hierarchies",
+  "claims": [
+    {
+      "id": "associated-nested-code-pair",
+      "status": "complete",
+      "statement": "The helper kernel is contained in the helper code associated with the target-message space; the restricted helper map has image equal to the recoverable target-message space, is surjective onto that space, and has the stated kernel.",
+      "terminals": [
+        "TavisRuddFiniteGeom.Papers.RecoveryStructures.helper_ker_le_helperCodeForTargetSpace",
+        "TavisRuddFiniteGeom.Papers.RecoveryStructures.map_helperCodeForTargetSpace_eq_recoverableTargetMessageSpace",
+        "TavisRuddFiniteGeom.Papers.RecoveryStructures.recoverableTargetMap_surjective",
+        "TavisRuddFiniteGeom.Papers.RecoveryStructures.mem_ker_recoverableTargetMap_iff"
+      ]
+    },
+    {
+      "id": "relative-generalized-hamming-weight-identity",
+      "status": "absent",
+      "statement": "The minimum helper-union size for a rank-t internally realizable demand equals the t-th relative generalized Hamming weight of the associated nested code pair.",
+      "terminals": []
+    },
+    {
+      "id": "rank-stratified-confinement",
+      "status": "absent",
+      "statement": "The eventual rank-t nonconfinement helper threshold is the t-th relative generalized Hamming weight plus the inner dual distance.",
+      "terminals": []
+    },
+    {
+      "id": "best-target-generalized-hamming-weight",
+      "status": "absent",
+      "statement": "Minimizing the rank-t helper cost over target sets of size t gives the t-th generalized Hamming weight of the dual code minus t.",
+      "terminals": []
+    },
+    {
+      "id": "positive-density-transfer",
+      "status": "absent",
+      "statement": "Outer families satisfying the stated primal and dual asymptotic hypotheses copy every bounded recovery equation onto the designated positive-density target classes.",
+      "terminals": []
+    },
+    {
+      "id": "bounded-reliability-and-service-rate-transfer",
+      "status": "absent",
+      "statement": "Exact transfer of inclusion-minimal helper supports preserves the bounded reliability law and bounded service-rate region.",
+      "terminals": []
+    },
+    {
+      "id": "projective-simplex-family",
+      "status": "absent",
+      "statement": "The projective-simplex family has the displayed relative-weight staircase, confinement thresholds, and rank-stratified reliability law.",
+      "terminals": []
+    }
+  ]
+}
