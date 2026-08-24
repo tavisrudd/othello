@@ -442,8 +442,12 @@ path = "claim-proof-novelty-ledger.md"
 reason = "internal claim-development ledger; public claim boundaries remain in the manuscript"
 
 [[repository.exclude_path]]
-path = "literature-audit.md"
-reason = "private source-depth audit; cited public sources remain in the bibliography"
+path = "editorial-spine.md"
+reason = "internal manuscript-framing document; the public theorem hierarchy is in the manuscript"
+
+[[repository.exclude_path]]
+path = "results-inventory.md"
+reason = "internal editorial inventory; the public claims and scope are in the manuscript"
 
 [[repository.rewrite]]
 path = "Makefile"
