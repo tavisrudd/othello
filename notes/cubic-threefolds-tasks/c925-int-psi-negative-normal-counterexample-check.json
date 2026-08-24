@@ -1,27 +1,26 @@
 {
   "birkhoff": {
-    "normalized_delta_psi_base_row": "1",
+    "normalized_delta_psi_base_to_base": "q = eps^-3",
     "q_integral": false,
-    "raw_delta_psi_base_row": "q = eps^-3"
+    "raw_delta_psi_exceptional_to_base": "q^2 = eps^-6"
   },
-  "conclusion": "The Q-linear raw base row of Iritani's reconstructed Psi has a nonzero q^1 coefficient for this blowup edge; universal INT-Psi is false.",
+  "conclusion": "The Q-linear base-to-base block of Iritani's reconstructed Psi has a nonzero q^1 coefficient for this blowup edge; even the weakened square-block INT-Psi needed by transport is false.",
   "geometry": {
-    "ambient_c1_degree": -4,
+    "ambient_c1_degree": -7,
     "ambient_dimension": 5,
-    "base_two_point_virtual_dimension": 0,
+    "base_one_point_virtual_dimension": -4,
     "centre": "P1",
     "codimension": 4,
-    "mixing_input_codimension": 4,
     "normal_bundle_degrees": [
+      -3,
       -2,
       -2,
-      -1,
-      -1
+      -2
     ],
-    "normal_degree": -6
+    "normal_degree": -9
   },
   "iritani_terms": {
-    "centre_term": "q^2*z^-2",
+    "centre_term": "q^3*z^-2",
     "exceptional_index_l": 2,
     "fourier_mode": "constant",
     "normalized_base_term": "q^-2*z^2",

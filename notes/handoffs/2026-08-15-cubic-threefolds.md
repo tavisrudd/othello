@@ -308,8 +308,9 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   extension (5.40) produces positive \(q\)-powers at negative-normal rational
   centres.  The joint \((q,z)\)-calculation is now complete and closes
   universal (INT-\(\Psi\)) false: a codimension-four \(\mathbf P^1\) with
-  normal degrees \((-2,-2,-1,-1)\) contributes a nonzero raw \(q^{+1}\)
-  base-row coefficient at first Novikov order.  Arbitrary chain composition
+  normal degrees \((-3,-2,-2,-2)\) contributes a nonzero \(q^{+1}\)
+  coefficient already in the base-to-base square block at first Novikov
+  order.  Arbitrary chain composition
   therefore needs negative-normal factorization control or a replacement
   lattice.  Report:
   `../2026-08-24-c925-int-psi-negative-normal-counterexample.md`.

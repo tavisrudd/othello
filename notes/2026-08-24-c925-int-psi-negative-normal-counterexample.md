@@ -12,17 +12,17 @@ There is a smooth projective fivefold \(X\) containing
 \(Z\cong\mathbf P^1\) in codimension four with
 \[
  N_{Z/X}\cong
- \mathcal O(-2)^{\oplus2}\oplus\mathcal O(-1)^{\oplus2}
+ \mathcal O(-3)\oplus\mathcal O(-2)^{\oplus3}
 \]
-such that the coefficient of \(Q^{[Z]}\) in the raw exceptional-to-base row
-of Iritani's reconstructed \(\Psi\) contains a nonzero \(q^{+1}\) term.  It
-therefore does not lie in the \(q^{-1/s}\)-valuation ring.
+such that the coefficient of \(Q^{[Z]}\) in the base-to-base square block of
+Iritani's reconstructed \(\Psi\) contains a nonzero \(q^{+1}\) term.  Thus
+even the weakened integrality actually needed by the transport proof fails.
 
 One realization is the line-projectivization
 \[
  X=\mathbf P_{\mathbf P^1}
- \bigl(\mathcal O\oplus\mathcal O(-2)^{\oplus2}
-                   \oplus\mathcal O(-1)^{\oplus2}\bigr),
+ \bigl(\mathcal O\oplus\mathcal O(-3)
+                   \oplus\mathcal O(-2)^{\oplus3}\bigr),
 \]
 with \(Z\) the section defined by the subline \(\mathcal O\).  Its normal
 bundle is the displayed quotient.  Blowing up this section is an ordinary
@@ -37,11 +37,11 @@ factorization-specific lattice could still transport the marker.
 ## Calculation
 
 Put \(r=4\), \(l=2\), and \(\rho_Z=c_1(N_{Z/X})\), so
-\(\rho_Z\cdot[Z]=-6\).
+\(\rho_Z\cdot[Z]=-9\).
 
 1. Iritani (5.40) sends the degree-one centre monomial to
    \[
-   Q_Z\longmapsto Q^{[Z]}q^{-(-6)/3}=Q^{[Z]}q^2.
+   Q_Z\longmapsto Q^{[Z]}q^{-(-9)/3}=Q^{[Z]}q^3.
    \]
    The unit component of the degree-one \(\mathbf P^1\) fundamental
    solution is nonzero:
@@ -56,25 +56,27 @@ Put \(r=4\), \(l=2\), and \(\rho_Z=c_1(N_{Z/X})\), so
    in the base row.  Lemma 5.12 uses the normalized source
    \(q^{-(l+1)/(r-1)}c_{2,1}=q^{-1}c_{2,1}\), so the normalized entry is
    \(q^{-2}z^2\).
-3. The centre bulk phases are constant: \(\rho_Z\cdot[Z]=-6\) and
+3. The centre bulk phases are constant: \(\rho_Z\cdot[Z]=-9\) and
    \(l+1=3\) are divisible by \(r-1=3\).  Thus the degree-one centre term
    lies in the same constant Fourier mode as \(l=2\); there is no Fourier
    cancellation.
-4. The competing base-block coefficient on \(\iota_*1\) vanishes.  Here
-   \(c_1(X)\cdot[Z]=2-6=-4\), so
-   \(\overline M_{0,2}(X,[Z])\) has virtual dimension zero, while
-   \(\iota_*1\) has complex codimension four.
+4. The competing base-block coefficient from the unit to \(\iota_*1\)
+   vanishes.  Here \(c_1(X)\cdot[Z]=2-9=-7\), so the one-point space
+   \(\overline M_{0,1}(X,[Z])\) appearing after the String Equation has
+   virtual dimension \(-4\).
 5. At first order in \(Q^{[Z]}\), Birkhoff factorization is linear.  Write
    \(\epsilon=q^{-1/3}\).  On the extremal base/constant-centre quotient,
    the normalized initial mixing and centre variation are
    \[
-   b=\epsilon^6z^2,\qquad m=\epsilon^{-6}z^{-2}.
+   b=\epsilon^6z^2,\qquad m=\epsilon^{-9}z^{-2}.
    \]
    Conjugation and projection to nonnegative \(z\)-powers give
-   \(\delta\Psi_{\mathrm{base},2}=bm=1\), independently of the lower
-   restriction block in (5.28).  Returning from \(q^{-1}c_{2,1}\) to the
-   raw column \(c_{2,1}\) multiplies this by
-   \(q=\epsilon^{-3}\).  The raw base row is therefore nonintegral.
+   the base-to-base coefficient
+   \(\delta\Psi_{\mathrm{base},\mathrm{base}}=bm\,\iota^*
+   =q\,\iota^*\), independently of the remaining lower restriction data in
+   (5.28).  On the unit column \(\iota^*1=1\), so it is nonzero.  The
+   normalized exceptional-to-base coefficient is also \(q\), and returning
+   from \(q^{-1}c_{2,1}\) to the raw exceptional column makes it \(q^2\).
 
 The term is first order in its ambient Novikov monomial, has extremal
 \((q,z)\)-bidegree, and has no base or Fourier competitor.  Hence higher
@@ -85,11 +87,11 @@ Novikov products and lower terms of the initial comparison cannot cancel it.
 Artifacts:
 
 - `notes/cubic-threefolds-tasks/c925-int-psi-negative-normal-counterexample-check.py`,
-  5,443 bytes, SHA-256
-  `48aa99ffed42582703dafd016330f17f0a9e95c2ac422a5d88b62b844a32a1b5`;
+  5,797 bytes, SHA-256
+  `129cb4e4641a230a6cb575be4f0bdde1587072bcd9acd4b1c0bb90290c390136`;
 - `notes/cubic-threefolds-tasks/c925-int-psi-negative-normal-counterexample-check.json`,
-  867 bytes, SHA-256
-  `b925df00acd025d2557d4f231e1b3d6817a78a44d276f69424e714e178d60948`.
+  906 bytes, SHA-256
+  `c4ceb723f9a1acdfce864f0ec2ba54abc4718c3dced7d602730e334ef4973366`.
 
 Replay from the repository root:
 
@@ -123,7 +125,7 @@ No source was read at full-text depth for this focused audit.
 | status | feature | evidence or remaining gate |
 | --- | --- | --- |
 | settled | Plain whole-loop integrality was insufficient but a joint \((q,z)\)-filtration might have saved the base row at mildly negative centres. | The earlier \(\mathcal O(-1)^2\) example is filtration-safe. |
-| settled | The joint filtration itself fails universally once \(-\rho_Z\cdot d\) outruns the centre anticanonical pole order. | The codimension-four degree \(-6\) example gives raw \(q^{+1}\). |
+| settled | The joint filtration itself fails universally once \(-\rho_Z\cdot d\) outruns the centre anticanonical pole order. | The codimension-four degree \(-9\) example gives \(q^{+1}\) already in the base-to-base block. |
 | settled | Lower-triangular restriction data and the three Fourier modes cannot cancel the coefficient. | Arbitrary restriction parameter in the exact checker; constant-mode congruences. |
 | open | Can weak factorization for a rationalization of a cubic stabilization be normalized to exclude such negative-normal edges? | No such factorization theorem is known or supplied by AKMW. |
 | open | What replacement model transports the decoration through negative-normal edges? | A Rees lattice allowing controlled elementary modification, rather than raw base-row integrality. |

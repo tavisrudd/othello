@@ -109,10 +109,10 @@ gate is a joint \((q,z)\)-filtered base-row calculation.  Report:
 That filtered calculation is now executed and closes universal
 (INT-\(\Psi\)) false.  For the smooth projective codimension-four edge with
 centre \(\mathbf P^1\) and normal bundle
-\(\mathcal O(-2)^{\oplus2}\oplus\mathcal O(-1)^{\oplus2}\), the first
-centre term \(q^2z^{-2}\) meets the normalized \(l=2\) base entry
-\(q^{-2}z^2\); undoing the source normalization gives a nonzero raw
-\(q^{+1}\) base-row coefficient.  Thus arbitrary AKMW chain composition
+\(\mathcal O(-3)\oplus\mathcal O(-2)^{\oplus3}\), the first centre term
+\(q^3z^{-2}\) meets the normalized \(l=2\) base entry \(q^{-2}z^2\),
+giving a nonzero \(q^{+1}\) coefficient already in the base-to-base square
+block.  Thus arbitrary AKMW chain composition
 needs either negative-normal factorization control or a replacement lattice.
 Report: `../2026-08-24-c925-int-psi-negative-normal-counterexample.md`.
 The first opposite-route test is also closed exactly: after restricting
@@ -351,8 +351,8 @@ realization of that orbit.
   while leaving \(m=2\) open:
   notes/2026-08-24-c925-int-psi-reconstruction-and-stable-rationality-boundary.md
 - Universal (INT-\(\Psi\)) counterexample: a codimension-four rational
-  section with normal degrees \((-2,-2,-1,-1)\) produces a nonzero raw
-  \(q^{+1}\) base-row coefficient at first Novikov order; the exact
+  section with normal degrees \((-3,-2,-2,-2)\) produces a nonzero
+  \(q^{+1}\) base-to-base coefficient at first Novikov order; the exact
   associated-graded Birkhoff calculation includes arbitrary lower
   restriction data:
   notes/2026-08-24-c925-int-psi-negative-normal-counterexample.md
