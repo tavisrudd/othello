@@ -3455,8 +3455,17 @@
       "last": 955,
       "purpose": "Dual failure-threshold upgrade and coefficient-presentation spectrum successor",
       "sequence": 384
+    },
+    {
+      "count": 1,
+      "first": 956,
+      "kind": "reservation",
+      "lane": "cubic-threefolds",
+      "last": 956,
+      "purpose": "Finish, audit, and release the exact level-two cubic threefold manuscript",
+      "sequence": 385
     }
   ],
-  "next_id": 956,
+  "next_id": 957,
   "schema": "codex-task-id-allocations-v1"
 }
