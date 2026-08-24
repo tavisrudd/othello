@@ -9487,6 +9487,7 @@
   "independent_checks": {
     "bounded_convex_envelope_instances": 1368,
     "cf_dual_threshold_instances": 52,
+    "congruence_envelope_instances": 600,
     "conjugate_resonance_bound_instances": 63,
     "convex_envelope_instances": 5386,
     "diagonal_double_tight_instances": 32,
@@ -9503,8 +9504,11 @@
     "factor_pair_resonance_instances": 119,
     "four_line_even_type_spectrum_instances": 121,
     "infinite_family_formula_instances": 11,
+    "of3_zero_core_instances": 144,
     "ordinary_arc_specializations": 37,
     "ordinary_resonance_formula_instances": 30,
+    "pf_zero_core_instances": 4736,
+    "raw_factor_pair_expansion_instances": 246,
     "sharp_conjugate_resonance_instances": 63,
     "spectral_quadratic_equivalences": 25494
   },
@@ -15238,7 +15242,7 @@
       "spectral_minimum": 169
     }
   ],
-  "schema": "c945-higher-arc-defect-v12",
+  "schema": "c945-higher-arc-defect-v13",
   "wide_degree_rows": [
     {
       "degree_regime": "below_sqrt_q",

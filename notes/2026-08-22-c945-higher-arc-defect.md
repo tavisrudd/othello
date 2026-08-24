@@ -4,11 +4,11 @@
 
 **Date:** 2026-08-22
 
-**Status:** active theorem-development and literature-audit phase; the manuscript is
-untouched pending a go/no-go gate.
+**Status:** manuscript-entry gate green; final priority audit remains open and
+both manuscripts are untouched.
 
-**Literature-audit summary:** nineteen individually discussed sources; thirteen
-read at full text and six partially.  The bounded full-text audit settles the main
+**Literature-audit summary:** twenty-two individually discussed sources; fifteen
+read at full text and seven partially.  The bounded full-text audit settles the main
 classicality question but does not close a global novelty or priority verdict.
 The degree-two moment/variance identity, its spectral form, the
 arc--blocking-set dictionary, and the projective-code extension dictionary are
@@ -20,6 +20,12 @@ but Semantic Scholar and MathSciNet coverage remain open; zbMATH coverage is a
 recorded targeted search rather than an exhaustive subject classification.
 Accordingly, no manuscript-bound “to our knowledge” sentence is licensed by
 this report.
+
+**Manuscript-entry verdict (2026-08-24): GO.**  The theorem/evidence packet is
+solid enough to begin a separate C945 paper.  This licenses drafting, not a
+final priority sentence or submission: the remaining database gaps and the six
+partial reads stay visible in the claim--proof--novelty ledger.  The existing
+conic manuscript remains untouched and on its independent C900 path.
 
 ## Objective
 
@@ -41,8 +47,10 @@ geometry papers.  The new characteristic-three ordinary-completeness theorem
 percentile, with 99+ potential**: it feeds a
 classical modular-repair theorem back through the maximal-secant cap to obtain
 a further linear gain `2q/15` which neither ingredient gives separately.  That
-grade remains conditional on closing the claim-specific modular-repair
-precedence audit and polishing the report proof into manuscript lemma form.
+grade is supported by a claim-specific modular-repair precedence audit through
+24 August 2026, but remains conditional on polishing the report proof into
+manuscript lemma form and on avoiding global priority language until the open
+database coverage is closed.
 The completed ordered-
 factor-pair theorem now proves that every rational multiplicity resonance has
 a positive linear gain and identifies a double-tight near-tactical sublocus;
@@ -83,6 +91,53 @@ restrictions for tactical decompositions are classical.  The priority-bearing
 unit is the non-tactical selected-family envelope together with `(OF)`, `(UF)`, `(CF)`, and the
 prescribed-hole / robust-nonextendibility applications.
 
+### Manuscript-entry theorem packet
+
+The paper should package the present calculations in the following order.
+
+1. **Exact integer-envelope theorem.**  For a selected block family in a
+   symmetric design, prescribe the degree sums on the two point classes, lower
+   degrees on the required class, and upper caps where geometry supplies them.
+   The sum of the two balanced integer minima cannot exceed the fixed block-pair
+   intersection count.  Its real relaxation is exactly the classical
+   BIBD/expander-mixing inequality.
+2. **Factor-pair resonance theorem.**  For fixed `lambda=uv`, `d=u+v+1`,
+   `q=dn`, `s=(u+1)n+1`, every `lambda`-fold complete `(k,s)`-arc satisfies
+
+   ```text
+   k >= ud n^2+c_lat n-O_{u,v}(1),
+   c_lat=min_{h in Z} max(C(h),L(h)),
+   ```
+
+   with `C,L` as in `(LC)`, and `c_lat>c_sp`.  Every rational resonance arises
+   from one ordered factorization `lambda=uv`.
+3. **Modular-lift dichotomy.**  Suppose additionally that `d` is a power of
+   the characteristic and take the Desarguesian tower `q=p^H`, so eventually
+   `n=q/d` is divisible by `p`.  Along any bounded-coefficient counterexample
+   sequence, pass to a subsequence with fixed selected-line offset `h`.  Either
+   the dual maximal-secant set is already an exact `lambda mod p` multiset, or
+
+   ```text
+   c >= C(h),
+   c >= L(h)+r_min(h)/u,
+   r_min(h)=2 if h congruent lambda (mod p), else 1.    (MD)
+   ```
+
+   This is the precise general statement: `(RMLS)` is a repair-or-exact-core
+   dichotomy, not an unconditional bound until the zero-support core is
+   excluded on the branch in question.  The correction is measured by its
+   number of distinct support points; its nonzero modular multiplicities do not
+   affect the generator-line count.
+4. **Unconditional crowns.**  The `1 mod 3` degree envelope excludes the exact
+   core on `(u,v)=(1,1)`, giving `(OF3)`.  The even-degree envelope excludes the
+   exact core below coefficient `8` in the factor-pair normalization on
+   `(u,v)=(2,1)`; parity of the nonempty repair support then gives `(PF)`.
+
+This packet separates the universal theorem, its classical relaxation, the
+conditional modular dichotomy, and the two unconditional geometric
+applications.  It is the drafting spine; the higher-binomial hierarchy and
+the C949 construction programme are not part of the first paper.
+
 ## Candidate intrinsic theorem
 
 Let `A` be a `(k,s)`-arc in a projective plane of order `q`.  Let `E_s(A)` be
@@ -116,7 +171,10 @@ concurrence classes canonically decompose the disjointness graph of `E_s(A)`
 into cliques.  At zero defect every nontrivial clique has order `nu`; covered
 required points have index `1` or `nu`, and holes have index `0` or `nu`.
 The existing edge- and vertex-deletion stability proofs appear to transfer with
-`floor(k/2)` replaced by `nu`.
+`floor(k/2)` replaced by `nu`, but that transfer is not part of the
+manuscript-entry packet.  Version 1 should claim only the exact equality
+indices and the integer smoothing defects proved below; a general deletion-
+stability theorem requires its own proof before inclusion.
 
 ## Multiplicity extension
 
@@ -1284,8 +1342,10 @@ and only 45 internal degrees lie outside {5,6}.        (CF-8)
 ```
 
 In fact `(CF-8)` already contradicts threshold attainment.  The identities
-`(CF-R)` force an odd line, so the repair set is nonempty; its even size makes
-it at least two.  Since every external line has degree two, the full odd-line
+`(CF-R)` force an odd line: if every degree were even, then `y_x=2z_x`, so
+`sum z_x=-4q-5` and `sum z_x^2=2q+25`, contradicting
+`sum z_x^2>=-sum z_x` for `q>10`.  Thus the repair set is nonempty; its even
+size makes it at least two.  Since every external line has degree two, the full odd-line
 locus lies inside `A`.  But on a generator line of the repair symmetric
 difference at most seven points can cancel, leaving at least `q-6` points of
 `A`, whereas `s=3q/4+1<q-6` for the present orders.  Therefore, in
@@ -1671,7 +1731,7 @@ the ordinary-completeness formula `(OF)` for all 30 integers `3<=n<=32` and
 the spectral sign change plus boundary obstruction for the conjugate `3/4`
 resonance in all 63 integers `2<=m<=64`, and verifies the two constant
 sharpenings of `(CF)` at the excluded and admitted boundary values in the same
-63 cases.  Schema v12 additionally records all
+63 cases.  Schema v13 additionally records all
 119 ordered divisor-pair resonances with `lambda<=32`.  Exact rational
 arithmetic independently checks `(G)`, checks that the lattice coefficient is
 strictly above the spectral coefficient, and verifies by a bounded convex
@@ -1694,6 +1754,10 @@ power it also records the characteristic and residue-aware conditional
 envelope `(RMLS)`.  The `(1,1)` and `(2,1)` rows recover coefficients `4` and
 `73/12`; a separate exact grid checks that the zero-support `1 mod 3` surcharge
 exceeds the available ordinary-branch pair slack by the invariant amount `9`.
+The v13 additions independently brute-check the congruence-class degree
+minimum in 600 instances, recompute 246 factor-pair first-order expansions
+from the raw exact balanced pair count, and reject 144 admissible `(OF3)` and
+4,736 admissible `(PF)` zero-core instances in their declared bounded grids.
 
 Replay from the repository root:
 
@@ -1701,12 +1765,14 @@ Replay from the repository root:
 nix shell nixpkgs#python3 --command python3 notes/2026-08-22-c945-higher-arc-defect.py check
 ```
 
-The generator is deterministic and uses only Python's standard library.
+The working directory is the repository root.  The generator is deterministic
+and uses only Python's standard library; there are no random seeds or external
+data inputs.
 `generate` rewrites the canonical sorted JSON and checksum manifest; `check`
-recomputes both in memory and fails on drift.  The script is 29,928 bytes with
-SHA-256 `640d6a267598cee98bc9811c2e2d3f691d224db86118ea964ac78497cf8152f6`;
-the JSON is 511,023 bytes with SHA-256
-`b9c814c9d5aad1723cd1479e8364543f728ca0e1008a6ddbce2f38c89d41c487`.
+recomputes both in memory and fails on drift.  The script is 36,606 bytes with
+SHA-256 `ead11d27a9f195d21059381abf9614272a5872b5426d4375869cab4456ef3097`;
+the JSON is 511,185 bytes with SHA-256
+`a266a64e0fe45cffa76edf4b4320cdd17ab97e750cb9dcb4388009e6c054c75f`.
 The checksum manifest is the authoritative replay record.
 
 ## Candidate new numerical consequence
@@ -1820,6 +1886,20 @@ equalities and this specializes to the paper's existing `3/2` term.
   variety point-count argument.  It confirms current topical adjacency but the
   sections read do not address universal lower bounds or external-index
   moments; no absence claim rests on this partial read.
+- Van de Voorde--Zullo, *Weak arcs and applications to the DNA-based storage
+  access problem*, arXiv:2608.19550v1 (submitted 20 August 2026): **partial**,
+  abstract, the opening of Section 1, Section 2.1.1 around Theorem 1 and its
+  extremal example, and a targeted full-text search for `complete arc`,
+  `maximal secant`, `blocking set`, `second moment`, `defect identity`, and
+  `(k,n)`-arc read from the cached 31-page PDF; cache key
+  `arXiv:2608.19550`, SHA-256
+  `74cba859eff90472e9e424c6356fb81c44c0c1359c0e0d814f1f19550ab91727`.
+  Their weak arcs constrain intersections only with the *general* hyperplanes
+  avoiding the fundamental points, and their planar extremizers have size
+  `2q+3`.  This is a current finite-geometric arc neighbor, but not the
+  complete higher-arc/maximal-secant problem or C945's integer-envelope and
+  modular-repair mechanism.  No broader absence claim rests on this partial
+  read.
 - Ball, *Multiple blocking sets and arcs in finite planes*, Journal of the
   London Mathematical Society 54 (1996): **partial**, abstract, introduction,
   Theorems 1.1--1.4, and the complement formulation read from the cached
@@ -1841,6 +1921,31 @@ equalities and this specializes to the paper's existing `3/2` term.
   dual quadratic and the non-dominating numerical comparison are recorded in
   the `tt` section.  The paper does not formulate the external concurrence
   second moment, prescribed holes, or the hypergraph clique defect.
+- Schillewaert, *Solution to Bishnoi's conjecture on minimal `t`-fold blocking
+  sets of maximal size*, arXiv:1705.03775v1: **full text**, both pages of the
+  cached arXiv version read, relying on the Main Theorem and its four-case
+  arithmetic proof; cache key `arXiv:1705.03775`, SHA-256
+  `196f70d63ff3a8af0d7c61f6586c4f436fa555d37447fe82476bcc1e0b41ac2f`.
+  This closes the equality classification for the Bishnoi--Mattheus--
+  Schillewaert spectral bound over prime-power planes: equality gives only a
+  unital, the complement of a Baer subplane, or the plane minus one point.
+  It strengthens the classical equality layer and should be cited there.  It
+  does not pre-empt C945's strict integer-envelope gain away from spectral
+  equality or its modular-lift surcharge.
+- Ramani, *Blocking Amalgamations, Maximal Arcs, and Generalized Crowns*,
+  arXiv:2608.16035v1 (submitted 17 August 2026): **full text**, all 17 pages
+  read from the cached arXiv version; cache key `arXiv:2608.16035`, SHA-256
+  `bb2fc5ce5f4d1627a2b9608cf94b7064bb1ce595315f14a9395b0c1bdffbc4a8`.
+  Ramani gives an exact first-incidence slack identity for an `h`-fold
+  transversal of a finite linear intersecting uniform hypergraph, dualizes
+  equality to a pairwise balanced design with a distinguished regular
+  subfamily, and uses maximal arcs to attain a generalized-crown extremum.
+  This is the nearest paper found in the recent-weeks screen and makes the
+  elementary degree-cap defect/classical-design layer especially important to
+  credit.  It does not formulate C945's paired internal/external second-moment
+  envelopes, completeness surcharge, or modular repair.  Priority language
+  should therefore attach to that combined mechanism, not to a generic defect
+  identity.
 - Ball--Fancsali, *Multiple blocking sets in finite projective spaces and
   improvements to the Griesmer bound for linear codes*, DOI
   `10.1007/s10623-009-9298-7`: **full text**, all sections 1--9 of the
@@ -2086,6 +2191,26 @@ obtain a lower bound at density `k/q^2 ->1/3`.  This is a bounded locator
 negative only; the open Semantic Scholar/MathSciNet/MSC gaps still prevent a
 global priority claim.
 
+A second claim-specific web locator pass on 2026-08-24 used the exact strings
+
+```text
+"2q/3+1" complete arc PG(2,q)
+"q^2/3" "complete (k,n)-arc"
+"t_n(2,q)" "2q/3"
+"q/3-fold blocking set" minimal projective plane
+"minimal multiple blocking sets" integer bound secants
+"complete (k,n)-arc" "lower bound" secants
+"t_n(2,q)" lower bound
+"maximal secants" "minimal t-fold blocking"
+```
+
+The pass recovered the already audited Alabdullah--Hirschfeld bound,
+Bishnoi--Mattheus--Schillewaert, and the Korchmáros--Nagy--Szőnyi construction
+paper.  It also exposed Schillewaert's two-page solution of the equality
+conjecture, which was promoted to full-text reading above.  No hit stated the
+`2q/3+1` characteristic-three lower bound or a modular-repair surcharge.  This
+remains a locator result rather than an exhaustive bibliographic negative.
+
 OpenAlex was then queried with `per-page=10` and the exact `search` values
 
 ```
@@ -2134,6 +2259,120 @@ integer refinement incidence bound symmetric design degree sequence
 again returned HTTP 429.  The error is recorded as a coverage gap, not an empty
 result.
 
+### Recent-weeks screen through 24 August 2026
+
+The recency check was extended beyond ordinary web ranking.  The arXiv
+`math.CO` Atom API endpoint `https://export.arxiv.org/api/query` was queried on
+24 August 2026 with
+
+```text
+search_query=cat:math.CO AND submittedDate:[202607010000 TO 202608242359]
+start=0
+max_results=2000
+sortBy=submittedDate
+sortOrder=descending
+```
+
+It returned 1,792 records.  Titles were mechanically screened for `arc`,
+`blocking`, `projective`, `secant`, `finite geometr`, and `design`; all 30
+title hits then received a title-and-abstract relevance screen.  The
+discriminator was a finite-projective arc/blocking/secant result or an exact
+selected-design incidence obstruction capable of subsuming C945's claimed
+mechanism.  The current page
+`https://arxiv.org/list/math.CO/recent?skip=0&show=2000` was also screened
+separately (267 entries when accessed).  Its title, subject, and comment fields
+were screened with the same six literal strings so that indexing delay at the
+upper endpoint would be less likely to hide a new submission.
+
+Two records were promoted.  Ramani's 17 August paper was read in full and is
+the nearest recent mechanism-level neighbor; it materially narrows the safe
+claim from a generic defect identity to the *paired second-moment integer
+envelope plus modular-lift surcharge*.  Van de Voorde--Zullo's 20 August weak-
+arc paper received the partial/targeted read recorded above and concerns a
+different general-hyperplane intersection condition.  The remaining 28 title
+hits were rejected at title/abstract depth as unrelated design constructions,
+Euclidean or spherical incidence problems, graph/digraph arc terminology, or
+different finite-projective questions.  This is an exact eight-week
+title/abstract screen, not an exhaustive all-subject arXiv or database
+negative.
+
+As an independent indexed check, the OpenAlex works endpoint
+`https://api.openalex.org/works` was queried with the filter
+`from_publication_date:2026-06-15` and exact search values
+
+```text
+"complete arc" finite projective plane
+"multiple blocking set" projective
+"(k,n)-arc" completeness finite field
+"minimal t-fold blocking" projective plane
+```
+
+The searches returned respectively 3, 1, 0, and 0 records; every returned
+title was a false positive under the same discriminator.  Together these
+screens cover the recent weeks requested, while the already recorded
+Semantic Scholar rate limit and absent exhaustive MathSciNet/MSC pass remain
+the reason no global priority sentence is licensed.
+
+## Manuscript-entry red team — 2026-08-24
+
+The hostile review attacked the load-bearing chain in the order a referee is
+most likely to attack it.
+
+1. **Repair theorem hypotheses.**  Szőnyi--Weiner Theorem 1.2 was reread in
+   the cached full text.  It applies to multisets in `PG(2,p^H)` with `H>1`,
+   `q>27`, under an explicit exceptional-line threshold of order `q^(3/2)`
+   when `H>2`; C945 has only `O(q)` exceptional lines.  Along the fixed-
+   characteristic asymptotic towers, the hypotheses therefore hold
+   eventually.  Its conclusion changes exactly `ceil(delta/(q+1))` distinct
+   support points, with arbitrary modular multiplicities, matching the use in
+   `(MLS)`.  Theorem 4.3 supplies the dual line-code formulation but is not
+   needed as an additional mathematical hypothesis.
+2. **Generator-line feedback.**  At a repair support point with nonzero
+   coefficient, every nonintersection point of the dual generator line has
+   selected-secant degree noncongruent to `lambda`.  External completeness
+   gives degree at least `lambda`, so each such external point contributes at
+   least one unit of excess.  Removing at most `s` arc points and `O(r)` mutual
+   intersections gives `q+1-s-O(r)` per generator, and inclusion--exclusion
+   over fixed `r` gives the stated `rvn-O(r^2)` lower bound.  No sign choice for
+   the modular correction changes this argument.
+3. **Residue obstruction.**  Summing exact `lambda mod p` line intersections
+   over a pencil gives total multiplicity `lambda mod p`.  Far enough up a
+   characteristic-compatible tower the leading term of `T` is divisible by
+   `p`; hence a one-point nonzero correction is impossible precisely when
+   `h congruent lambda (mod p)`.  The manuscript statement should use only
+   this support consequence, avoiding an unnecessary sign convention for the
+   correction multiplicity.
+4. **Zero-core exclusions.**  Schema v13 adds a separately implemented
+   congruence-class convex envelope, brute-checked in 600 small instances.
+   It also recomputes 246 first-order factor-pair expansions directly from the
+   raw finite balanced pair count rather than from the affine formulas.
+   It then checks 144 arithmetically admissible `1 mod 3` zero-core instances
+   below the `(OF3)` coefficient, including bounded constant terms, and 4,736
+   even-degree zero-core instances below the characteristic-two coefficient
+   `16`.  Every instance violates the exact block-pair count.  These tests
+   independently reproduce the displayed first-order `D+E` and `(D+e)/2`
+   obstructions; they are evidence, not substitutes for the proofs.
+5. **Parity branch.**  In characteristic two the repair is a symmetric
+   difference, `|R| congruent T (mod 2)`, and the odd-degree locus is exactly
+   the symmetric difference of the `r` dual generator lines.  Outside their
+   mutual intersections each generator supplies at least `q-r+2-s` external
+   points.  The odd/even minima are respectively `73/6` at `H=-3` and `37/3`
+   at `H=-2`, exactly as replayed in the artifact.
+6. **Sequential quantifiers.**  A hypothetical liminf counterexample first
+   passes to a bounded-coefficient subsequence.  The unique leading contact
+   forces the selected-line offset to be `o(n)`; the signed first-order term
+   then bounds it, and integrality permits a fixed-offset subsequence.  The
+   repair support is uniformly bounded because `delta=O(q)`.  Thus the uses of
+   fixed `h` and fixed `r` do not assume attainment or an unproved uniform
+   expansion.
+
+**Red-team verdict:** no false theorem or central gap found.  The repairs made
+in this pass are expository but load-bearing: `(RMLS)` is now labelled a
+dichotomy until zero support is excluded, and the omitted integer argument
+forcing an odd line in `(CF+)` is explicit.  The proof packet is ready for
+lemma-form drafting.  A later referee pass should still check the transcription
+from the report into LaTeX independently.
+
 ## Coverage and verdict ownership
 
 - **Not covered:** Semantic Scholar, because the graph API returned HTTP 429,
@@ -2141,18 +2380,20 @@ result.
   Scholar automated coverage was not attempted because it is normally blocked.
   zbMATH has the four targeted searches recorded above, but not an exhaustive
   MSC screen.  These gaps license no global negative inference.
-- The six sources marked `partial` require full-text promotion if a final
+- The seven sources marked `partial` require full-text promotion if a final
   novelty boundary depends on their silence.  Their present reads support only
   the positive topical and definitional attributions stated above.
 - No higher-arc novelty sentence has been entered in the owning paper's
   claim--proof--novelty ledger.  The C945 formulations are therefore candidate
   positioning only and must not be copied into the manuscript, snapshot, or
   public summary as novelty claims.
-- Surface check after the Theorem 8.1 precedence correction: the manuscript,
-  existing proof/novelty audit, results snapshot, and public summary discuss
-  the ordinary prescribed-hole theorem but do not repeat the new
-  `lambda`-multiplicity claim.  They required no update.  This C945 report is
-  the only changed surface; the manuscript remains untouched.
+- Surface check after the Theorem 8.1 and recent-weeks corrections: this C945
+  report owns the candidate positioning; the live queue and relconic handoff
+  are updated to point to its qualified verdict.  No C945 paper ledger exists
+  yet, so no novelty sentence can propagate.  The conic manuscript, its
+  claim--proof--novelty ledger, the results snapshot, and the public summary do
+  not state the C945 priority claim and require no update.  Both manuscripts
+  remain untouched.
 
 ## Mystery ledger (`ej` + `tt` closeout)
 
@@ -2184,6 +2425,14 @@ result.
   Haemers supply the spectral lineage, and Beker--Mitchell--Piper supply the
   tactical quotient-equation lineage.  These belong in the corollary and
   infrastructure layer, not in a priority claim.
+- **Whether the latest weeks contain a direct pre-emption — settled for the
+  declared eight-week screen, globally open.**  Of 1,792 arXiv `math.CO`
+  records, Ramani is the only new mechanism-level neighbor and reinforces the
+  need to credit first-incidence defect/PBD equality as classical-adjacent;
+  Van de Voorde--Zullo use a different weak-arc condition.  Neither contains
+  the paired second-moment/modular-lift mechanism.  Semantic Scholar,
+  MathSciNet, and an exhaustive MSC screen remain the exact evidence gap and
+  are owned by the future paper ledger before any priority wording.
 - **Whether modular repair can improve the numerical bound without a full core
   classification — settled.**  The support-`r` modular-lift surcharge `(MLS)`
   converts each nonzero repair location into an exact `r/u` shift of the
@@ -2242,28 +2491,22 @@ result.
   stability step; neither classifies which repaired modular cores lift to a
   maximal-secant family.  Owner: C945 modular-core lift/classification gate.
 
-## Gates before manuscript work
+## Remaining gates after manuscript entry
 
-1. Prove the intrinsic identity, clique decomposition, and stability statements
-   with all edge cases (`nu=1`, holes, incomplete arcs, and uniform required
-   multiplicity `lambda`) explicit.
-2. Promote the factor-pair asymptotic proof to lemma form, including the
-   bounded endpoint cases in the forward-difference split and an explicit
-   `O_{u,v}(1)` threshold.  In the same pass, transcribe the quantified
-   `(OF3)` subsequence argument and epsilon-quantify the general `(MLS)` and
-   companion `(PF)` statements, including each zero-support `p`-spaced
-   envelope and the residue of the integer offset.
-3. Compare the numerical bound with Alabdullah--Hirschfeld and other general
-   complete `(k,s)`-arc bounds at full-text depth.
-4. Audit specifically whether simultaneous balanced/cap-filled integer degree
-   envelopes have already been used for selected blocks of a symmetric design,
-   and whether `(OF)`, `(UF)`, or `(CF)` has a known equivalent.  The broader
-   second-moment and spectral mechanisms are already classical and should not
-   be audited or positioned as candidate novelty.
-5. On integral-`h0`, characteristic-compatible branches, apply `(MLS)` first;
-   then classify only the zero-support modular cores or the residual equality
-   cores under the maximal-secant lift constraint.  Test structured curve-
-   derived families where `t`, `d(a)`, or `nu` are known.  The CF branch now
-   reaches the provisional 99th-percentile line without a full core
-   classification; such a classification or a construction would push it
-   beyond that line.
+1. During drafting, promote the factor-pair forward-difference argument and
+   the `(OF3)`/`(PF)` subsequence arguments from this proof packet into numbered
+   lemmas with explicit epsilon quantifiers and bounded endpoint constants.
+   This is transcription and exposition work; the mathematical gate is green.
+2. Create the new paper's claim--proof--novelty ledger before writing any
+   “first,” “new,” or “to our knowledge” sentence.  The exact non-tactical
+   integer-envelope and modular-lift precedence questions remain qualified
+   because Semantic Scholar, MathSciNet, and an exhaustive zbMATH MSC screen
+   are not covered.
+3. Promote a partial adjacent source to full text only if a final novelty
+   sentence would depend on its silence.  Their present positive topical uses
+   are already licensed at the recorded depths.
+4. Keep general deletion stability, higher moments without an application,
+   modular-core classification, and construction sharpness out of Version 1.
+   They are upgrades, not prerequisites; C949 owns the construction programme.
+5. After a complete draft exists, run a fresh proof-only hostile review and a
+   separate literature/positioning review before allowing submission language.

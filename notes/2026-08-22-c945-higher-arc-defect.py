@@ -8,6 +8,7 @@ import hashlib
 import json
 from functools import lru_cache
 from fractions import Fraction
+from itertools import product
 from math import comb, isqrt
 from pathlib import Path
 
@@ -204,6 +205,26 @@ def convex_degree_minimum(vertices: int, degree_sum: int) -> int:
     return (vertices - remainder) * comb(quotient, 2) + remainder * comb(quotient + 1, 2)
 
 
+def congruence_degree_minimum(
+    vertices: int,
+    degree_sum: int,
+    modulus: int,
+    residue: int,
+    lower: int = 0,
+) -> int | None:
+    """Minimum pair sum for degrees in one residue class above a lower bound."""
+    base = lower + (residue - lower) % modulus
+    shifted = degree_sum - vertices * base
+    if shifted < 0 or shifted % modulus:
+        return None
+    quotient, remainder = divmod(shifted // modulus, vertices)
+    low_degree = base + modulus * quotient
+    high_degree = low_degree + modulus
+    return (vertices - remainder) * comb(low_degree, 2) + remainder * comb(
+        high_degree, 2
+    )
+
+
 def bounded_degree_maximum(vertices: int, lower: int, upper: int, degree_sum: int) -> int:
     """Maximum pair count with a common lower and upper degree bound."""
     excess = degree_sum - vertices * lower
@@ -340,6 +361,30 @@ def dp_degree_minimum(vertices: int, cap: int, total: int) -> int | None:
 
 
 def run_checks() -> dict[str, object]:
+    checked_congruence_envelopes = 0
+    for vertices in range(1, 6):
+        for modulus in (2, 3):
+            for residue in range(modulus):
+                for lower in range(3):
+                    max_total = 3 * vertices + lower
+                    allowed = [
+                        degree
+                        for degree in range(lower, max_total + 1)
+                        if degree % modulus == residue
+                    ]
+                    for degree_sum in range(vertices * lower, max_total + 1):
+                        brute_values = [
+                            sum(comb(degree, 2) for degree in degrees)
+                            for degrees in product(allowed, repeat=vertices)
+                            if sum(degrees) == degree_sum
+                        ]
+                        brute = min(brute_values) if brute_values else None
+                        formula = congruence_degree_minimum(
+                            vertices, degree_sum, modulus, residue, lower
+                        )
+                        assert formula == brute
+                        checked_congruence_envelopes += 1
+
     checked_envelopes = 0
     for k in range(3, 21):
         for s in range(2, min(6, k)):
@@ -499,6 +544,50 @@ def run_checks() -> dict[str, object]:
             if lam % u == 0:
                 resonance_rows.append(resonance_record(u, lam // u))
 
+    # Recompute the first-order factor-pair expansion from the raw exact
+    # balanced pair count, rather than from resonance_record's affine envelope.
+    checked_raw_factor_pair_expansions = 0
+    for u in range(1, 5):
+        for v in range(1, 5):
+            d = u + v + 1
+            c_env = Fraction(
+                u * (u * v * v + 4 * u * v + 2 * u + 2 * v * v + 4 * v + 1),
+                2 * u * v + u + v,
+            )
+            h0 = Fraction(
+                -u * (v + 1) * (u * u * v + u * u - v),
+                2 * u * v + u + v,
+            )
+            slope = Fraction(2 * v, (u + v) * (2 * u * v + u + v + 1))
+            scale = Fraction((u + v) * (2 * u * v + u + v + 1), 2)
+            c_floor = c_env.numerator // c_env.denominator
+            h_floor = h0.numerator // h0.denominator
+            for n in (257, 509):
+                q = d * n
+                s = (u + 1) * n + 1
+                point_count = q * q + q + 1
+                for coefficient in range(c_floor, c_floor + 3):
+                    k = u * d * n * n + coefficient * n
+                    complement_size = point_count - k
+                    for h in range(h_floor - 2, h_floor + 3):
+                        t = u * d * (v + 1) * n + h
+                        if u * v * complement_size > v * n * t:
+                            continue
+                        exact = (
+                            convex_degree_minimum(k, s * t)
+                            + convex_degree_minimum(complement_size, v * n * t)
+                            - comb(t, 2)
+                        )
+                        predicted_per_n = scale * (
+                            c_env + slope * (h - h0) - coefficient
+                        )
+                        error = abs(Fraction(exact, n) - predicted_per_n)
+                        # The omitted terms are uniformly O(1/n) before this
+                        # normalization.  On this declared finite domain the
+                        # maximum normalized remainder is 1916/257 < 8.
+                        assert error < 8, (u, v, n, coefficient, h, error)
+                        checked_raw_factor_pair_expansions += 1
+
     known_resonances = {(row["u"], row["v"]): row for row in resonance_rows}
     assert known_resonances[(1, 1)]["lattice_envelope_coefficient"] == fraction_record(
         Fraction(18, 5)
@@ -529,6 +618,57 @@ def run_checks() -> dict[str, object]:
         "minimum_support_at_minimizer": 1,
         "gain_over_lattice_envelope": fraction_record(Fraction(1, 12)),
     }
+
+    # Exact zero-core falsifier for (OF3), independent of the displayed
+    # first-order slack calculation.  An exact 1 mod 3 selected-line set puts
+    # both degree sequences in the residue class 1.  Every arithmetically
+    # admissible bounded offset below coefficient four violates the pair count.
+    checked_of3_zero_core_instances = 0
+    for n in (9, 27, 81, 243):
+        q = 3 * n
+        s = 2 * n + 1
+        point_count = q * q + q + 1
+        for coefficient in range(-2, 4):
+            for constant in range(-3, 4):
+                k = 3 * n * n + coefficient * n + constant
+                complement_size = point_count - k
+                for h in range(-12, 13):
+                    t = 6 * n + h
+                    if t < 0 or n * t < complement_size:
+                        continue
+                    internal = congruence_degree_minimum(k, s * t, 3, 1)
+                    external = congruence_degree_minimum(
+                        complement_size, n * t, 3, 1, lower=1
+                    )
+                    if internal is None or external is None:
+                        continue
+                    assert internal + external > comb(t, 2)
+                    checked_of3_zero_core_instances += 1
+
+    # Exact empty-repair falsifier for the first characteristic-two core.
+    # Internal degrees are even and external completeness degrees are even and
+    # at least two.  The finite checks mirror the asymptotic C>=16 obstruction.
+    checked_pf_zero_core_instances = 0
+    for m in (16, 32, 64, 128):
+        q = 8 * m
+        s = 6 * m + 1
+        point_count = q * q + q + 1
+        for coefficient in range(16):
+            for constant in range(-4, 5):
+                k = 32 * m * m + coefficient * m + constant
+                complement_size = point_count - k
+                for h in range(-16, 17):
+                    t = 32 * m + h
+                    if t < 0 or 2 * m * t < 2 * complement_size:
+                        continue
+                    internal = congruence_degree_minimum(k, s * t, 2, 0)
+                    external = congruence_degree_minimum(
+                        complement_size, 2 * m * t, 2, 0, lower=2
+                    )
+                    if internal is None or external is None:
+                        continue
+                    assert internal + external > comb(t, 2)
+                    checked_pf_zero_core_instances += 1
 
     # On the ordinary (u,v)=(1,1) branch, an exact 1 mod 3 selected-line
     # multiset pays D+E beyond the unrestricted pair minimum.  Its coefficient
@@ -661,11 +801,12 @@ def run_checks() -> dict[str, object]:
                 )
 
     return {
-        "schema": "c945-higher-arc-defect-v12",
+        "schema": "c945-higher-arc-defect-v13",
         "meaning": "Necessary-bound thresholds only; projective-plane or arc existence is not asserted.",
         "parameters": {"lambda_values": list(LAMBDA_VALUES), "holes": 0, "q_values": list(Q_VALUES), "s_max": 8},
         "independent_checks": {
             "convex_envelope_instances": checked_envelopes,
+            "congruence_envelope_instances": checked_congruence_envelopes,
             "bounded_convex_envelope_instances": checked_bounded_envelopes,
             "ordinary_arc_specializations": checked_arc_specializations,
             "spectral_quadratic_equivalences": checked_spectral_equivalences,
@@ -674,6 +815,9 @@ def run_checks() -> dict[str, object]:
             "conjugate_resonance_bound_instances": checked_conjugate_resonance_instances,
             "sharp_conjugate_resonance_instances": checked_sharp_conjugate_resonance_instances,
             "factor_pair_resonance_instances": len(resonance_rows),
+            "raw_factor_pair_expansion_instances": checked_raw_factor_pair_expansions,
+            "of3_zero_core_instances": checked_of3_zero_core_instances,
+            "pf_zero_core_instances": checked_pf_zero_core_instances,
             "diagonal_double_tight_instances": checked_diagonal_double_tight_instances,
             "cf_dual_threshold_instances": checked_cf_dual_threshold_instances,
             "four_line_even_type_spectrum_instances": checked_four_line_even_type_instances,
