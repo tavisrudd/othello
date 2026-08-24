@@ -145,25 +145,30 @@ Zhang's Lemma 3.2 and Theorem 2.4 supply the tangent-projection hypothesis.
    tangent covector at \((a,b,z_1,z_2,z_3)=(2,5,1,3,7)\) which vanishes on
    \(B\) and is nonzero on both middle blocks; openness verifies the theorem's
    generic nonvanishing hypothesis.
+3. For the saturated rank-three type-\(I_1\) three-sign subtorus, the four
+   blocks outside the same \(B\) form a unimodular tetrahedron. Three exact
+   tangent equations have rank three and a kernel with every coordinate
+   nonzero. The higher-rank theorem therefore proves \(Z/T_3\) rational.
+   Its residual torus has rank two, giving \(S\times\mathbf A^2\) rational.
 
 Consequently Tschinkel--Zhang's quartic-del-Pezzo OADP construction is one
 application of a general quotient mechanism: any OADP Cox closure with an
 adjacent two-weight window and a rational residual torus inherits the
 corresponding stable-rationality bound.
 
-## Why the theorem stops at the next level
+## Saturation and the level-two application
 
 For a rank-two torus, the natural type-\(I_1\) orbit polytopes are a square,
 two rectangles, and a hexagon. The higher-rank theorem would require a
 Galois-stable unimodular triangle window. The exact rank-two exhaustion shows
 more strongly that no invariant polygon has any Galois-stable three-weight
 subset; the boundary-edge calculation independently forces open degree
-divisible by two or three. At rank three, the only Galois-stable four-weight windows have
-lattice indices two and six, not one. Thus the general theorem explains the
-level-four success without silently implying level three or level two.
-The index-two tetrahedron is attained by an exact tangent slice and gives a
-rational generically double cover of the rank-three quotient; rationality of
-the deck-involution quotient is the resulting sharp direct-slice gate.
+divisible by two or three. At rank three, the obvious three-sign eigenbasis
+has index two in the actual cocharacter lattice. After saturation, its two
+stable four-weight windows have lattice indices three and one, not six and
+two. The index-one window is attained by the exact tangent slice and proves
+the rank-three quotient rational. This is the level-two application recorded
+in `notes/2026-08-24-c925-type-i1-level-two-rationality.md`.
 
 ## Evidence and scope
 
@@ -181,9 +186,10 @@ the deck-involution quotient is the resulting sharp direct-slice gate.
   SHA-256
   `be1dedd42662eae0c9d83d08d7379cdd78974000f0be048db50680833a5d01e6`.
 
-This note proves a general quotient lemma. It does not improve the current
-\(2\le s(X)\le4\) interval by itself.
+This note proves a general quotient lemma. Applied to the saturated
+three-sign subtorus, it proves \(m=2\) rationality for the type-\(I_1\)
+Tschinkel--Zhang cubic family.
 
-**Resume line:** go C925 cubic-threefolds — use the adjacent-weight OADP
-theorem as the general level-four provider; level three requires an intrinsic
-rank-two quotient because no descended unimodular window exists.
+**Resume line:** go C925 cubic-threefolds — audit the saturated
+unimodular-window proof and its explicit birational \(\mathbf A^1\)-cancellation
+corollary for manuscript-level priority.

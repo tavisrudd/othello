@@ -1,0 +1,15 @@
+{
+  "ambient_completion_determinant": 1,
+  "conclusion": "The actual three-sign subtorus lattice is saturated, its stable four-weight window is unimodular, the tangent slice has one open-orbit point, and the residual torus has rank two.",
+  "raw_isotypic_basis_saturation_index": 2,
+  "residual_torus_rank": 2,
+  "saturated_basis_index": 1,
+  "schema": "c925-i1-level2-saturation-independent-check-v1",
+  "slice_maximal_minors": [
+    "-17/1260",
+    "119/270",
+    "-187/168",
+    "187/270"
+  ],
+  "stable_window_affine_lattice_index": 1
+}

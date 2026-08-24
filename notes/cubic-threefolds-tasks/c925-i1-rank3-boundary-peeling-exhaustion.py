@@ -40,6 +40,15 @@ def primitive(vector):
     return result if first > 0 else -result
 
 
+def lattice_index(basis):
+    """Index of the column lattice in its saturation."""
+    minors = [
+        abs(int(basis[list(rows), :].det()))
+        for rows in itertools.combinations(range(basis.rows), basis.cols)
+    ]
+    return math.gcd(*minors)
+
+
 def sign_line(signs):
     equations = sp.Matrix.vstack(*(
         generator - sign * sp.eye(5)
@@ -163,12 +172,44 @@ for character in itertools.product((1, -1), repeat=2):
     ))
     assert equations.nullspace() == []
 
-rank_three_spaces = [
+raw_rank_three_spaces = [
     ("three_sign_lines", sp.Matrix.hstack(*sign_vectors)),
 ] + [
     (f"sign_{index}_plus_irreducible", sp.Matrix.hstack(vector, irreducible_basis))
     for index, vector in enumerate(sign_vectors)
 ]
+
+# Rational invariant subspaces define saturated intersections with the
+# ambient cocharacter lattice.  The obvious isotypic bases miss that lattice
+# in two cases.  These replacements explicitly adjoin the missing half-sum
+# and third-sum vectors.
+three_sign_raw = raw_rank_three_spaces[0][1]
+three_sign_half_sum = sum(
+    (three_sign_raw.col(column) for column in range(3)), sp.zeros(5, 1)
+)/2
+sign_two_raw = raw_rank_three_spaces[3][1]
+sign_two_third_sum = (
+    2*sign_two_raw.col(0)+2*sign_two_raw.col(1)+sign_two_raw.col(2)
+)/3
+rank_three_spaces = [
+    (
+        "three_sign_lines",
+        sp.Matrix.hstack(
+            three_sign_raw.col(0), three_sign_raw.col(1), three_sign_half_sum
+        ),
+        three_sign_raw,
+    ),
+    *[(name, basis, basis) for name, basis in raw_rank_three_spaces[1:3]],
+    (
+        "sign_2_plus_irreducible",
+        sp.Matrix.hstack(
+            sign_two_raw.col(0), sign_two_raw.col(1), sign_two_third_sum
+        ),
+        sign_two_raw,
+    ),
+]
+assert [lattice_index(raw) for _, _, raw in rank_three_spaces] == [2, 1, 1, 3]
+assert all(lattice_index(basis) == 1 for _, basis, _ in rank_three_spaces)
 
 cox_classes = []
 cox_names = []
@@ -187,7 +228,7 @@ cox_classes.append(sp.Matrix([2, -1, -1, -1, -1, -1]))
 cox_names.append("Q")
 
 records = []
-for name, basis in rank_three_spaces:
+for name, basis, raw_basis in rank_three_spaces:
     left_inverse = (basis.T*basis).inv()*basis.T
     actions = []
     for generator in COCHARACTER_GENERATORS:
@@ -260,6 +301,10 @@ for name, basis in rank_three_spaces:
 
     records.append({
         "name": name,
+        "raw_isotypic_basis_saturation_index": lattice_index(raw_basis),
+        "raw_isotypic_basis": [
+            [int(entry) for entry in raw_basis.col(column)] for column in range(3)
+        ],
         "cocharacter_basis": [
             [int(entry) for entry in basis.col(column)] for column in range(3)
         ],
@@ -280,19 +325,44 @@ for name, basis in rank_three_spaces:
         "galois_stable_four_weight_windows": stable_four_weight_windows,
     })
 
-assert [record["orbit_threefold_degree"] for record in records] == [14, 18, 18, 18]
+assert [record["orbit_threefold_degree"] for record in records] == [7, 18, 18, 6]
 assert [[item["orbit_size"] for item in record["facet_orbits"]] for record in records] == [
     [2, 2, 4], [2, 3, 3], [2, 3, 3], [6],
 ]
 assert [
     [window["affine_lattice_index"] for window in record["galois_stable_four_weight_windows"]]
     for record in records
-] == [[6, 2], [], [], []]
-assert not any(
+] == [[3, 1], [], [], []]
+assert sum(
     window["is_unimodular"]
     for record in records
     for window in record["galois_stable_four_weight_windows"]
+) == 1
+
+# Complete the saturated three-sign lattice to an integral basis of the
+# ambient cocharacter lattice.  The lower-right blocks are the exact
+# cocharacter actions on the residual rank-two quotient torus.
+three_sign_basis = rank_three_spaces[0][1]
+ambient_completion = sp.Matrix.hstack(
+    three_sign_basis,
+    sp.Matrix([1, 0, 0, 0, 0]),
+    sp.Matrix([0, 1, 0, 0, 0]),
 )
+assert abs(int(ambient_completion.det())) == 1
+completed_generator_actions = [
+    ambient_completion.inv()*generator*ambient_completion
+    for generator in COCHARACTER_GENERATORS
+]
+assert all(
+    all(entry.q == 1 for entry in action)
+    and action[3:5, 0:3] == sp.zeros(2, 3)
+    for action in completed_generator_actions
+)
+residual_cocharacter_actions = [action[3:5, 3:5] for action in completed_generator_actions]
+residual_character_actions = [
+    action.inv().T for action in residual_cocharacter_actions
+]
+assert all(all(entry.q == 1 for entry in action) for action in residual_character_actions)
 
 # In the two sign-plus-irreducible cases where a size-three facet orbit does
 # not span every weight block, its complement is always the same four Cox
@@ -337,6 +407,7 @@ standard_point = {
     l45: (b-a)*z1+(1-b)*z2+(a-1)*z3,
     q: b*(1-a)*z1*z2+a*(b-1)*z1*z3+(a-b)*z2*z3,
 }
+assert all(sp.factor(relation.subs(standard_point)) == 0 for relation in relations)
 jacobian = sp.Matrix(relations).jacobian(coordinate_symbols).subs(standard_point)
 minor_rows = (0, 1, 2, 3, 4, 5, 7, 11)
 minor_coordinate_names = ("E1", "E2", "E5", "L12", "L13", "L14", "L15", "L23")
@@ -375,8 +446,8 @@ assert any(mixed_tangent_covector[cox_names.index(name)] for name in middle_weig
 assert any(mixed_tangent_covector[cox_names.index(name)] for name in middle_weight_two)
 assert sp.Matrix.vstack(specialized_jacobian, mixed_tangent_covector).rank() == 8
 
-# The index-two stable window in the three-sign representation gives a
-# generically double (rather than one-point) tangent slice. Construct three
+# The unimodular stable window in the saturated three-sign representation
+# gives a generically one-point tangent slice. Construct three
 # exact boundary-vanishing tangent hyperplanes and check on a second general
 # torsor point that their four window coefficients have rank three and a
 # kernel with no zero coordinate.
@@ -389,6 +460,71 @@ boundary_vanishing_hyperplanes = [
     coefficient.T*tangent_row_basis
     for coefficient in boundary_vanishing_coefficients
 ]
+
+def symbolic_slice_determinant(tangent_z, orbit_e, orbit_z):
+    """Four-hyperplane evaluation determinant, with Cox moduli a,b free."""
+    tangent_rows = jacobian[list(minor_rows), :].subs(dict(zip((z1, z2, z3), tangent_z)))
+    coefficient_basis = tangent_rows[:, boundary_indices].T.nullspace()
+    assert len(coefficient_basis) == 4
+    hyperplanes = [coefficient.T*tangent_rows for coefficient in coefficient_basis]
+    ee1, ee2, ee3, ee4, ee5 = orbit_e
+    zz1, zz2, zz3 = orbit_z
+    values = {
+        e1: ee1, e2: ee2, e3: ee3, e4: ee4, e5: ee5,
+        l12: sp.Rational(zz3, ee1*ee2),
+        l13: sp.Rational(zz2, ee1*ee3),
+        l14: sp.Rational(zz2-zz3, ee1*ee4),
+        l15: (b*zz2-a*zz3)/(ee1*ee5),
+        l23: sp.Rational(zz1, ee2*ee3),
+        l24: sp.Rational(zz1-zz3, ee2*ee4),
+        l25: (b*zz1-zz3)/(ee2*ee5),
+        l34: sp.Rational(zz1-zz2, ee3*ee4),
+        l35: (a*zz1-zz2)/(ee3*ee5),
+        l45: ((b-a)*zz1+(1-b)*zz2+(a-1)*zz3)/(ee4*ee5),
+        q: (
+            b*(1-a)*zz1*zz2+a*(b-1)*zz1*zz3+(a-b)*zz2*zz3
+        )/(ee1*ee2*ee3*ee4*ee5),
+    }
+    assert all(sp.factor(relation.subs(values)) == 0 for relation in relations)
+    matrix = sp.Matrix([
+        [
+            sum(
+                hyperplane[cox_names.index(name)]
+                * values[coordinate_symbols[cox_names.index(name)]]
+                for name in block
+            )
+            for block in [
+                ["E1", "E2", "E5"], ["L14", "L24", "L45"],
+                ["L13", "L23", "L35"], ["L12", "L15", "L25"],
+            ]
+        ]
+        for hyperplane in hyperplanes
+    ])
+    return sp.factor(matrix.det()), sp.factor(minor.subs(dict(zip((z1, z2, z3), tangent_z))))
+
+
+symbolic_slice_witnesses = [
+    ((1, 3, 7), (2, 3, 5, 7, 11), (2, 4, 9)),
+    ((2, 5, 11), (3, 4, 7, 13, 17), (1, 6, 10)),
+    ((3, 8, 13), (5, 7, 11, 17, 19), (2, 9, 15)),
+]
+symbolic_slice_data = [
+    symbolic_slice_determinant(*witness) for witness in symbolic_slice_witnesses
+]
+symbolic_window_determinants = [value[0] for value in symbolic_slice_data]
+symbolic_tangent_minors = [value[1] for value in symbolic_slice_data]
+assert all(value != 0 for value in symbolic_window_determinants)
+symbolic_slice_ideal = sp.groebner(
+    [sp.together(value).as_numer_denom()[0] for value in symbolic_window_determinants],
+    a, b,
+)
+symbolic_slice_common_zero_basis = [
+    sp.factor(polynomial.as_expr()) for polynomial in symbolic_slice_ideal.polys
+]
+assert symbolic_slice_common_zero_basis == [a-1, b-1]
+# At (a,b)=(1,1), the fifth blown-up point (1:a:b) equals (1:1:1), so the
+# standard five-point configuration is not a smooth quartic del Pezzo model.
+symbolic_slices_cover_smooth_moduli = True
 orbit_values = {
     e1: 2, e2: 3, e3: 5, e4: 7, e5: 11,
     l12: sp.Rational(9, 2*3),
@@ -408,7 +544,7 @@ orbit_values = {
     a: 2, b: 5,
 }
 assert all(sp.factor(relation.subs(orbit_values)) == 0 for relation in relations)
-index_two_window_blocks = [
+unimodular_window_blocks = [
     ["E1", "E2", "E5"],
     ["L14", "L24", "L45"],
     ["L13", "L23", "L35"],
@@ -420,7 +556,7 @@ window_coefficient_matrix = sp.Matrix([
             hyperplane[cox_names.index(name)]*orbit_values[coordinate_symbols[cox_names.index(name)]]
             for name in block
         )
-        for block in index_two_window_blocks
+        for block in unimodular_window_blocks
     ]
     for hyperplane in boundary_vanishing_hyperplanes[:3]
 ])
@@ -434,7 +570,7 @@ assert window_coefficient_matrix.rank() == 3
 assert all(value != 0 for value in window_maximal_minors)
 
 certificate = {
-    "schema": "c925-i1-rank3-boundary-peeling-exhaustion-v1",
+    "schema": "c925-i1-rank3-boundary-peeling-exhaustion-v2",
     "rational_representation_decomposition": {
         "three_distinct_sign_characters": [list(value) for value in sign_characters],
         "irreducible_plane_generator_actions": [
@@ -471,9 +607,9 @@ certificate = {
             "proves the generic nonvanishing condition by openness."
         ),
     },
-    "three_sign_index_two_tangent_slice": {
-        "stable_window_weight_blocks": index_two_window_blocks,
-        "affine_lattice_index": 2,
+    "three_sign_unimodular_tangent_slice": {
+        "stable_window_weight_blocks": unimodular_window_blocks,
+        "affine_lattice_index": 1,
         "tangent_specialization": {"a": 2, "b": 5, "z1": 1, "z2": 3, "z3": 7},
         "orbit_test_point": {
             "e1,e2,e3,e4,e5": [2, 3, 5, 7, 11],
@@ -484,27 +620,57 @@ certificate = {
             for row in range(3)
         ],
         "four_maximal_minors": [str(value) for value in window_maximal_minors],
+        "symbolic_four_hyperplane_evaluation_determinants": [
+            str(value) for value in symbolic_window_determinants
+        ],
+        "symbolic_tangent_smoothness_minors": [
+            str(value) for value in symbolic_tangent_minors
+        ],
+        "symbolic_witness_common_zero_groebner_basis": [
+            str(value) for value in symbolic_slice_common_zero_basis
+        ],
+        "symbolic_witnesses_cover_smooth_moduli": symbolic_slices_cover_smooth_moduli,
         "all_kernel_coordinates_nonzero": True,
-        "geometric_open_orbit_degree": 2,
+        "geometric_open_orbit_degree": 1,
         "conclusion": (
             "A descended tangent codimension-three slice supported on the "
-            "index-two stable four-weight window is rational by OADP "
-            "projection and meets a general three-sign torus orbit in two "
-            "points. Thus it is a rational generically double cover of the "
-            "rank-three quotient; rationality of the quotient itself is not "
-            "asserted."
+            "unimodular stable four-weight window is rational by OADP "
+            "projection and meets a general saturated three-sign torus orbit "
+            "in one point. Thus the rank-three quotient is rational."
+        ),
+    },
+    "three_sign_residual_rank_two_torus": {
+        "ambient_unimodular_completion_columns": [
+            [int(entry) for entry in ambient_completion.col(column)]
+            for column in range(5)
+        ],
+        "completion_determinant": int(ambient_completion.det()),
+        "quotient_cocharacter_generator_actions": [
+            [[int(entry) for entry in action.row(row)] for row in range(2)]
+            for action in residual_cocharacter_actions
+        ],
+        "quotient_character_generator_actions": [
+            [[int(entry) for entry in action.row(row)] for row in range(2)]
+            for action in residual_character_actions
+        ],
+        "rank": 2,
+        "conclusion": (
+            "The saturated three-sign subtorus has a rank-two residual torus. "
+            "Every two-dimensional torus over a characteristic-zero field is "
+            "rational."
         ),
     },
     "conclusion": (
         "The four invariant rank-three rational subspaces are exhausted. "
-        "Their only Galois-stable four-weight windows have affine lattice "
-        "indices six and two, so no descended unimodular tetrahedron exists. "
+        "After saturation, the three-sign subtorus has a Galois-stable "
+        "unimodular four-weight window. The exact tangent slice therefore "
+        "proves its quotient rational; its residual rank-two torus is rational. "
         "For three-sign and sign_2-plus-irreducible, every facet orbit spans "
         "all weight blocks. For sign_0 and sign_1 plus the irreducible plane, "
         "the only nonspanning facet orbits leave the four central Cox "
         "coordinates, but the exact tangent minor rules out a tangent "
-        "hyperplane supported there. Thus no invariant rank-three subtorus "
-        "supports the direct descended first boundary-divisor peel."
+        "hyperplane supported there. The three-sign unimodular window, rather "
+        "than a first boundary-divisor peel, lands level-two rationality."
     ),
 }
 

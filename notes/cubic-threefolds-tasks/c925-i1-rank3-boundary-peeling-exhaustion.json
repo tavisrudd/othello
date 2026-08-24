@@ -29,7 +29,7 @@
     ],
     "nonzero_minor_factorization": "-(a - 1)*(b*z1 - z3)*(a*z1 - a*z3 - b*z1 + b*z2 - z2 + z3)*(a*b*z1*z2 - a*b*z1*z3 + a*z1*z3 - a*z2*z3 - b*z1*z2 + b*z2*z3)"
   },
-  "conclusion": "The four invariant rank-three rational subspaces are exhausted. Their only Galois-stable four-weight windows have affine lattice indices six and two, so no descended unimodular tetrahedron exists. For three-sign and sign_2-plus-irreducible, every facet orbit spans all weight blocks. For sign_0 and sign_1 plus the irreducible plane, the only nonspanning facet orbits leave the four central Cox coordinates, but the exact tangent minor rules out a tangent hyperplane supported there. Thus no invariant rank-three subtorus supports the direct descended first boundary-divisor peel.",
+  "conclusion": "The four invariant rank-three rational subspaces are exhausted. After saturation, the three-sign subtorus has a Galois-stable unimodular four-weight window. The exact tangent slice therefore proves its quotient rational; its residual rank-two torus is rational. For three-sign and sign_2-plus-irreducible, every facet orbit spans all weight blocks. For sign_0 and sign_1 plus the irreducible plane, the only nonspanning facet orbits leave the four central Cox coordinates, but the exact tangent minor rules out a tangent hyperplane supported there. The three-sign unimodular window, rather than a first boundary-divisor peel, lands level-two rationality.",
   "full_i3_adjacent_window_tangent_witness": {
     "augmented_rank": 8,
     "boundary_coordinates_with_zero_coefficients": [
@@ -98,7 +98,7 @@
           0,
           1,
           1,
-          0
+          1
         ]
       ],
       "cocharacter_generator_actions": [
@@ -106,7 +106,7 @@
           [
             1,
             0,
-            0
+            1
           ],
           [
             0,
@@ -128,7 +128,7 @@
           [
             0,
             1,
-            0
+            1
           ],
           [
             0,
@@ -141,7 +141,7 @@
         "0,0,0": [
           "L34"
         ],
-        "0,0,2": [
+        "0,0,1": [
           "E1",
           "E2",
           "E5"
@@ -151,7 +151,7 @@
           "L24",
           "L45"
         ],
-        "0,1,3": [
+        "0,1,2": [
           "E3"
         ],
         "1,0,1": [
@@ -159,10 +159,10 @@
           "L23",
           "L35"
         ],
-        "1,0,3": [
+        "1,0,2": [
           "E4"
         ],
-        "1,1,0": [
+        "1,1,1": [
           "Q"
         ],
         "1,1,2": [
@@ -173,9 +173,9 @@
       },
       "ehrhart_counts_at_0_1_2_3": [
         1,
-        12,
-        47,
-        120
+        8,
+        28,
+        68
       ],
       "facet_count": 8,
       "facet_orbits": [
@@ -214,7 +214,7 @@
       ],
       "galois_stable_four_weight_windows": [
         {
-          "affine_lattice_index": 6,
+          "affine_lattice_index": 3,
           "is_unimodular": false,
           "weights": [
             [
@@ -225,28 +225,28 @@
             [
               0,
               1,
-              3
+              2
             ],
             [
               1,
               0,
-              3
+              2
             ],
             [
               1,
               1,
-              0
+              1
             ]
           ]
         },
         {
-          "affine_lattice_index": 2,
-          "is_unimodular": false,
+          "affine_lattice_index": 1,
+          "is_unimodular": true,
           "weights": [
             [
               0,
               0,
-              2
+              1
             ],
             [
               0,
@@ -267,7 +267,31 @@
         }
       ],
       "name": "three_sign_lines",
-      "orbit_threefold_degree": 14,
+      "orbit_threefold_degree": 7,
+      "raw_isotypic_basis": [
+        [
+          0,
+          0,
+          0,
+          1,
+          1
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          1,
+          1,
+          0
+        ]
+      ],
+      "raw_isotypic_basis_saturation_index": 2,
       "weight_count": 8
     },
     {
@@ -453,6 +477,30 @@
       "galois_stable_four_weight_windows": [],
       "name": "sign_0_plus_irreducible",
       "orbit_threefold_degree": 18,
+      "raw_isotypic_basis": [
+        [
+          0,
+          0,
+          0,
+          1,
+          1
+        ],
+        [
+          1,
+          -1,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          2,
+          1,
+          1,
+          3
+        ]
+      ],
+      "raw_isotypic_basis_saturation_index": 1,
       "weight_count": 14
     },
     {
@@ -638,11 +686,154 @@
       "galois_stable_four_weight_windows": [],
       "name": "sign_1_plus_irreducible",
       "orbit_threefold_degree": 18,
+      "raw_isotypic_basis": [
+        [
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        [
+          1,
+          -1,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          2,
+          1,
+          1,
+          3
+        ]
+      ],
+      "raw_isotypic_basis_saturation_index": 1,
       "weight_count": 14
     },
     {
       "affine_weight_group_order": 6,
       "cocharacter_basis": [
+        [
+          0,
+          0,
+          1,
+          1,
+          0
+        ],
+        [
+          1,
+          -1,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          1,
+          1,
+          1
+        ]
+      ],
+      "cocharacter_generator_actions": [
+        [
+          [
+            -1,
+            2,
+            0
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            -3,
+            -1
+          ]
+        ],
+        [
+          [
+            -1,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            1
+          ],
+          [
+            0,
+            0,
+            -1
+          ]
+        ]
+      ],
+      "cox_weight_blocks": {
+        "0,1,0": [
+          "L34",
+          "Q"
+        ],
+        "1,0,0": [
+          "L13",
+          "L14"
+        ],
+        "1,1,1": [
+          "L35",
+          "L45"
+        ],
+        "1,2,1": [
+          "L23",
+          "L24"
+        ],
+        "2,0,1": [
+          "E2",
+          "L15"
+        ],
+        "2,1,1": [
+          "E5",
+          "L12"
+        ],
+        "2,2,2": [
+          "E1",
+          "L25"
+        ],
+        "3,1,2": [
+          "E3",
+          "E4"
+        ]
+      },
+      "ehrhart_counts_at_0_1_2_3": [
+        1,
+        8,
+        27,
+        64
+      ],
+      "facet_count": 6,
+      "facet_orbits": [
+        {
+          "covered_weight_count": 8,
+          "facet_vertex_counts": [
+            4,
+            4,
+            4,
+            4,
+            4,
+            4
+          ],
+          "orbit_size": 6,
+          "uncovered_coordinates": [],
+          "uncovered_weights": []
+        }
+      ],
+      "galois_stable_four_weight_windows": [],
+      "name": "sign_2_plus_irreducible",
+      "orbit_threefold_degree": 6,
+      "raw_isotypic_basis": [
         [
           0,
           0,
@@ -665,102 +856,7 @@
           3
         ]
       ],
-      "cocharacter_generator_actions": [
-        [
-          [
-            -1,
-            0,
-            0
-          ],
-          [
-            0,
-            -1,
-            0
-          ],
-          [
-            0,
-            -1,
-            1
-          ]
-        ],
-        [
-          [
-            -1,
-            0,
-            0
-          ],
-          [
-            0,
-            1,
-            -1
-          ],
-          [
-            0,
-            0,
-            -1
-          ]
-        ]
-      ],
-      "cox_weight_blocks": {
-        "0,1,1": [
-          "L34",
-          "Q"
-        ],
-        "1,0,1": [
-          "L13",
-          "L14"
-        ],
-        "1,1,2": [
-          "L35",
-          "L45"
-        ],
-        "1,2,0": [
-          "L23",
-          "L24"
-        ],
-        "2,0,2": [
-          "E2",
-          "L15"
-        ],
-        "2,1,0": [
-          "E5",
-          "L12"
-        ],
-        "2,2,1": [
-          "E1",
-          "L25"
-        ],
-        "3,1,1": [
-          "E3",
-          "E4"
-        ]
-      },
-      "ehrhart_counts_at_0_1_2_3": [
-        1,
-        10,
-        43,
-        118
-      ],
-      "facet_count": 6,
-      "facet_orbits": [
-        {
-          "covered_weight_count": 8,
-          "facet_vertex_counts": [
-            4,
-            4,
-            4,
-            4,
-            4,
-            4
-          ],
-          "orbit_size": 6,
-          "uncovered_coordinates": [],
-          "uncovered_weights": []
-        }
-      ],
-      "galois_stable_four_weight_windows": [],
-      "name": "sign_2_plus_irreducible",
-      "orbit_threefold_degree": 18,
+      "raw_isotypic_basis_saturation_index": 3,
       "weight_count": 8
     }
   ],
@@ -804,18 +900,104 @@
       ]
     ]
   },
-  "schema": "c925-i1-rank3-boundary-peeling-exhaustion-v1",
-  "three_sign_index_two_tangent_slice": {
-    "affine_lattice_index": 2,
+  "schema": "c925-i1-rank3-boundary-peeling-exhaustion-v2",
+  "three_sign_residual_rank_two_torus": {
+    "ambient_unimodular_completion_columns": [
+      [
+        0,
+        0,
+        0,
+        1,
+        1
+      ],
+      [
+        0,
+        0,
+        1,
+        0,
+        1
+      ],
+      [
+        0,
+        0,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0,
+        0,
+        0
+      ]
+    ],
+    "completion_determinant": 1,
+    "conclusion": "The saturated three-sign subtorus has a rank-two residual torus. Every two-dimensional torus over a characteristic-zero field is rational.",
+    "quotient_character_generator_actions": [
+      [
+        [
+          -1,
+          0
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      [
+        [
+          0,
+          -1
+        ],
+        [
+          -1,
+          0
+        ]
+      ]
+    ],
+    "quotient_cocharacter_generator_actions": [
+      [
+        [
+          -1,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      [
+        [
+          0,
+          -1
+        ],
+        [
+          -1,
+          0
+        ]
+      ]
+    ],
+    "rank": 2
+  },
+  "three_sign_unimodular_tangent_slice": {
+    "affine_lattice_index": 1,
     "all_kernel_coordinates_nonzero": true,
-    "conclusion": "A descended tangent codimension-three slice supported on the index-two stable four-weight window is rational by OADP projection and meets a general three-sign torus orbit in two points. Thus it is a rational generically double cover of the rank-three quotient; rationality of the quotient itself is not asserted.",
+    "conclusion": "A descended tangent codimension-three slice supported on the unimodular stable four-weight window is rational by OADP projection and meets a general saturated three-sign torus orbit in one point. Thus the rank-three quotient is rational.",
     "four_maximal_minors": [
       "-17/1260",
       "119/270",
       "-187/168",
       "187/270"
     ],
-    "geometric_open_orbit_degree": 2,
+    "geometric_open_orbit_degree": 1,
     "orbit_test_point": {
       "a,b,z1,z2,z3": [
         2,
@@ -854,6 +1036,21 @@
         "L25"
       ]
     ],
+    "symbolic_four_hyperplane_evaluation_determinants": [
+      "17*(8*a - 27)**2*(3968*a - 1349*b - 2619)/15093540",
+      "(568453977*a**3 - 373279764*a**2*b - 1658788404*a**2 + 59068867*a*b**2 + 976763788*a*b + 925668016*a - 128537024*b**2 - 359163728*b - 10185728)/2575198080",
+      "3*(1643918400*a**3 - 1105797420*a**2*b - 7261914240*a**2 + 154718524*a*b**2 + 3804690316*a*b + 9944961600*a - 282623593*b**2 - 3443769343*b - 3454184244)/109985779750"
+    ],
+    "symbolic_tangent_smoothness_minors": [
+      "-4*(a - 1)*(b - 7)*(3*a - b - 2)*(2*a*b + 7*a - 9*b)",
+      "-9*(a - 1)*(2*b - 11)*(3*a - b - 2)*(4*a*b + 11*a - 15*b)",
+      "-25*(a - 1)*(3*b - 13)*(2*a - b - 1)*(3*a*b + 13*a - 16*b)"
+    ],
+    "symbolic_witness_common_zero_groebner_basis": [
+      "a - 1",
+      "b - 1"
+    ],
+    "symbolic_witnesses_cover_smooth_moduli": true,
     "tangent_specialization": {
       "a": 2,
       "b": 5,

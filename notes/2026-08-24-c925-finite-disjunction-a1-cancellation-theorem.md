@@ -2,6 +2,21 @@
 
 **Lane:** cubic-threefolds · **Task:** C925 · **Date:** 2026-08-24
 
+## Strengthening
+
+For the type-\(I_1\) cubic of Tschinkel--Zhang Proposition 5.1, the saturation
+correction now proves \(X\times\mathbf P^2\) rational. Hence \(s(X)=2\) and
+the single identified witness
+
+\[
+Y=X\times\mathbf P^1
+\]
+
+is nonrational while \(Y\times\mathbf A^1\) is rational. See
+`notes/2026-08-24-c925-type-i1-level-two-rationality.md`. The finite
+disjunction below remains valid and still records the unconditional fallback
+for the type-\(I_3\) cubic of Proposition 5.2.
+
 ## Theorem
 
 Let \(X/\mathbf Q\) be either explicit Tschinkel--Zhang cubic threefold in

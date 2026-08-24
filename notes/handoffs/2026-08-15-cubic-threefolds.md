@@ -128,9 +128,11 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   `../2026-08-20-c930-independent-referee-report.md` and
   `../2026-08-20-c930-second-referee-pass.md`. Card:
   `../cubic-threefolds-tasks/c930-categorical-direct-qdm-paper-preparation.md`.
-- **C925 — every-smooth stabilization irrationality, active.**
+- **C925 — stabilization threshold and cancellation, active.**
   **Result boundary:** no unconditional every-smooth \(m=2\) theorem has
-  been landed, and the every-smooth all-\(m\) target is false by
+  been landed, but the explicit type-\(I_1\) Tschinkel--Zhang cubic now has
+  exact threshold \(s(X)=2\): \(X\times\mathbf P^1\) is irrational and
+  \(X\times\mathbf P^2\) is rational. The every-smooth all-\(m\) target is false by
   Tschinkel--Zhang's stably rational smooth cubic threefolds.  The separate Voisin plus
   Engel--de Gaay Fortman--Schreieder route proves all stabilizations for a
   very general cubic, conditional on the cited 2025 preprint; it does not
@@ -144,7 +146,7 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   satisfies \(S\times\mathbf A^5\) rational, and every cubic hypersurface in
   both Tschinkel--Zhang families satisfies
   \(X\times\mathbf P^5\) rational over \(\mathbf Q\).  Their cubic
-  threefolds therefore have certified interval \(2\le s(X)\le5\).  The exact
+  threefolds therefore had certified interval \(2\le s(X)\le5\).  The exact
   CARAT replay also resolves class `(5,232,15)`, listed as unknown in
   Jamshidpey's 2017 Table B.2.  Its dual `(5,232,14)` is not retract rational
   by Hoshi--Yamasaki Table 15, giving a rational torus whose dual is not
@@ -171,7 +173,8 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   quartic del Pezzo surface with a point satisfies
   \(S\times\mathbf A^4\) rational, and every cubic in Tschinkel--Zhang
   Proposition 5.1 satisfies \(X\times\mathbf P^4\) rational. Their cubic
-  threefolds have certified interval \(2\le s(X)\le4\). Report:
+  threefolds then had certified interval \(2\le s(X)\le4\), superseded below
+  by the exact level-two result. Report:
   `../2026-08-24-c925-type-i1-level-four-rationality.md`.
 
   **Uniform level-four result:** for the full type-\(I_3\) action, the sign
@@ -244,26 +247,28 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   screen support only correspondingly bounded priority language. Report:
   `../2026-08-24-c925-finite-disjunction-a1-cancellation-theorem.md`.
 
-  **Rank-three \(m=2\) tangent-slice frontier:** the multiplicity-free
-  type-\(I_1\) cocharacter representation has exactly four invariant
-  three-planes: the sum of the three sign lines and each sign line plus the
-  irreducible two-plane. Their toric Cox-orbit degrees are `14,18,18,18`.
-  Exact facet enumeration shows that every complete Galois facet orbit spans
-  all weight blocks except for two size-three orbits in each of two cases;
-  those leave only `E3,E4,L34,Q`. An exact nonzero eight-by-eight minor after
-  deleting those four columns proves that no tangent hyperplane can be
-  supported there. Thus the direct descended first boundary-divisor peel is
-  exhausted for every invariant rank-three subtorus. Independently, the only
-  Galois-stable four-weight windows have affine lattice indices two and six,
-  so the general unimodular-window OADP theorem also cannot yield level two.
-  The index-two window is attained: an exact three-by-four tangent
-  coefficient matrix has all four maximal minors nonzero, producing a
-  rational generically double cover of the rank-three quotient. Thus the best
-  direct slice reduces \(m=2\) to a concrete deck-involution quotient of a
-  rational fourfold; it does not prove that quotient rational. This does not
-  decide \(m=2\): an intrinsic invariant field or non-toric base scheme
-  remains.
-  Report and certificate:
+  **Identified cancellation counterexample and exact type-\(I_1\) threshold:**
+  the three-sign eigenbasis used in the first rank-three pass had saturation
+  index two. Replacing its third vector by the integral half-sum gives the
+  actual saturated subtorus. Its central four-block weight window is
+  unimodular, not index two, and the exact tangent coefficient matrix has
+  rank three with all kernel coordinates nonzero. The higher-rank OADP
+  theorem therefore makes the quotient rational. Its residual torus has rank
+  two, so every type-\(I_1\) quartic del Pezzo surface in the
+  Tschinkel--Zhang setting satisfies \(S\times\mathbf A^2\) rational and
+  every Proposition 5.1 cubic satisfies \(X\times\mathbf P^2\) rational over
+  \(\mathbf Q\). For their cubic threefold, the \(m=1\) theorem gives
+  \(s(X)=2\). Hence the single smooth projective variety
+  \(Y=X\times\mathbf P^1\) is nonrational while
+  \(Y\times\mathbf A^1\) is rational, answering their stated construction
+  problem. Primary SymPy and independent stdlib certificates agree. Report:
+  `../2026-08-24-c925-type-i1-level-two-rationality.md`.
+
+  **Corrected rank-three frontier:** the former index-two/double-cover
+  conclusion was a nonsaturated-lattice artifact and is withdrawn. In the
+  actual lattice the orbit degrees are `7,18,18,6`; the three-sign stable
+  windows have indices three and one. The index-one window lands type-\(I_1\)
+  level-two rationality as above. Report and corrected certificate:
   `../2026-08-24-c925-rank-three-boundary-peeling-frontier.md`.
 
   **Unbounded INT-\(\Psi\) falsifier:** the isolated codimension-four
@@ -460,7 +465,8 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   `../2026-08-24-c925-int-psi-negative-normal-counterexample.md`.
   Tschinkel--Zhang (arXiv:2608.20029v1) construct
   stably rational smooth cubic threefolds, definitively closing the
-  every-smooth all-\(m\) target false while leaving \(m=2\) open; their
+  every-smooth all-\(m\) target false. The type-\(I_1\) level-two theorem
+  below now also makes the every-smooth \(m=2\) irrationality target false; their
   Section 4 bound implies \(X\times\mathbf P^{11}\) is rational for the
   explicit \(r=0\) cubic by a function-field argument.  Report:
   `../2026-08-24-c925-int-psi-reconstruction-and-stable-rationality-boundary.md`.

@@ -265,35 +265,38 @@ Tschinkel--Zhang families satisfies \(X\times\mathbf P^4\) rational.
 Report and exact certificates:
 `../2026-08-24-c925-uniform-level-four-rationality.md`.
 
+**2026-08-24 type-\(I_1\) level-two theorem.** The three-sign cocharacter
+basis used in the first rank-three pass had saturation index two. In the
+actual saturated lattice, its central four-block window is a unimodular
+tetrahedron. The exact tangent codimension-three slice has a coefficient
+matrix of rank three with all kernel coordinates nonzero, so the general
+OADP theorem makes the quotient rational. The residual torus has rank two.
+Hence every type-\(I_1\) quartic del Pezzo surface in the Tschinkel--Zhang
+setting satisfies \(S\times\mathbf A^2\) rational, and every Proposition 5.1
+cubic satisfies \(X\times\mathbf P^2\) rational. For their cubic threefold,
+the \(m=1\) theorem gives \(s(X)=2\), and
+\(Y=X\times\mathbf P^1\) is an identified nonrational smooth projective
+variety with rational \(Y\times\mathbf A^1\). Report and two independent
+certificates:
+`../2026-08-24-c925-type-i1-level-two-rationality.md`.
+
 ## Goal
 
-The requested opposite bound is now landed uniformly at \(m=4\) for both
-Tschinkel--Zhang cubic families, giving their cubic threefolds the explicit
-interval \(2\le s(X)\le4\). At \(m=3\), two type-\(I_1\) sign directions
-give Segre-quadric orbit closures and a rational residual rank-three torus
-of CARAT class `(3,25,2)`. The exact tangent one-point slice works over the
-splitting field but its selected boundary ruling does not descend: Galois
-exchanges it with the complementary opposite ruling. The invariant rank-two
-planes are now exhausted: their orbit degrees are `2,6,6,6`, boundary-edge
-orbits force every descended ambient codimension-two open degree divisible by
-two or three (all ambient codimension-two cycles have class `dH^2`), and the
-fourth residual torus is non-retract-rational class `(3,6,3)`. Resolving the
-necessarily intrinsic
-descent either lowers the rationality bound to three or, if
-\(X\times\mathbf P^3\) is irrational, gives a nonrational \(Y\) with
-\(Y\times\mathbf A^1\) rational. Exact report:
-`../2026-08-24-c925-level-three-descent-and-cancellation-frontier.md`.
-Unconditionally, \(s(X)\in\{2,3,4\}\), so one of the three named varieties
-\(X\times\mathbf P^i\), \(1\le i\le3\), is nonrational and becomes rational
-after one \(\mathbf A^1\); the unresolved threshold is exactly which one.
+The requested opposite bound is now exact for the type-\(I_1\)
+Tschinkel--Zhang cubic threefold: \(s(X)=2\). The type-\(I_3\) family retains
+the uniform interval \(2\le s(X)\le4\). The earlier rank-three
+index-two/deck-involution frontier is withdrawn because it used a
+nonsaturated lattice basis. The rank-two level-three exhaustion remains
+correct but is bypassed by the saturated rank-three quotient.
 Universal INT-\(\Psi\) is now closed false in an unbounded family: in every
 codimension \(r\ge4\), negative-normal projective-bundle sections give
 base-square leakage \(q^kz^{r-4}\) for arbitrary \(k\ge1\). Report:
 `../2026-08-24-c925-unbounded-int-psi-negative-normal-family.md`.
 The adjacent priority task is the post-2017 literature audit
-for the now-solved CARAT class `(5,232,15)`.  Independently, the every-smooth
-\(m=2\) target remains open without a Stokes connector, while the
-every-smooth all-\(m\) target is false by Tschinkel--Zhang.
+for the now-solved CARAT class `(5,232,15)`. The every-smooth \(m=2\)
+irrationality target is false by the type-\(I_1\) level-two theorem; the QDM
+connector route can now apply only after imposing a hypothesis that excludes
+that family. The every-smooth all-\(m\) target is also false.
 
 ## Stable entry points
 
@@ -1244,9 +1247,11 @@ oracle.
    type failures are recorded in
    `../2026-08-21-c925-no-stokes-source-dossier.md`.
 
-No unconditional every-smooth \(m=2\) theorem has been landed.  The
-every-smooth all-\(m\) target is false by Tschinkel--Zhang.  The very-general
-all-\(m\) theorem from Voisin plus
+The every-smooth \(m=2\) irrationality target is now false: the type-\(I_1\)
+Tschinkel--Zhang cubic satisfies \(X\times\mathbf P^2\) rational. Any QDM
+source theorem developed below must therefore have a geometric hypothesis
+excluding that family. The every-smooth all-\(m\) target is likewise false.
+The very-general all-\(m\) theorem from Voisin plus
 Engel--de Gaay Fortman--Schreieder remains a separate benchmark.
 
 ## Geometric route to the same gate: rotation orders and centre dimension
