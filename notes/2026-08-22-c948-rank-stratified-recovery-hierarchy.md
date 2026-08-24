@@ -2,7 +2,7 @@
 
 **Lane**: complete-ports
 
-**Status**: IN PROGRESS; CORE THEOREMS, EJ UPGRADES, BOUNDED LITERATURE AUDIT, PRELIMINARY BGS PACKING-BRIDGE VET, AND POST-CLOSURE PUBLICATION PLAN RECORDED; INDEPENDENT COLD READ AND FULL-TEXT NOVELTY CLOSURE PENDING
+**Status**: IN PROGRESS; CORE THEOREMS, EJ UPGRADES, BOUNDED LITERATURE AUDIT WITH 24 JULY--24 AUGUST 2026 DELTA SCREEN, PRELIMINARY BGS PACKING-BRIDGE VET, AND POST-CLOSURE PUBLICATION PLAN RECORDED; INDEPENDENT COLD READ AND FULL-TEXT NOVELTY CLOSURE PENDING
 
 ## Scope
 
@@ -60,7 +60,8 @@ by insertion:
    transfer;
 5. the best-target GHW identity, cooperative-locality min--max corollary, and
    MDS rigidity;
-6. positive-density realization;
+6. positive-density realization, with the bounded service-rate polytope as a
+   short exact-transfer corollary;
 7. stochastic and coefficient-presentation separations beyond the complete
    RGHW hierarchy;
 8. the projective-simplex family as the main non-MDS geometric application;
@@ -781,10 +782,11 @@ research-reproducibility gate.
 
 ## 11. Literature and priority audit
 
-**Read-depth summary:** 0 sources were read at full text. Nine primary sources
+**Read-depth summary:** Two sources were read at full text, ten primary sources
 were read partially at the theorem/definition/positioning sections stated
-below. The priority verdict therefore remains a bounded, targeted audit and
-supports only "to our knowledge" language.
+below, and six additional recent primary records were read at
+abstract/metadata depth. The priority verdict therefore remains a bounded,
+targeted audit and supports only "to our knowledge" language.
 
 ### Sources and read depth
 
@@ -850,6 +852,54 @@ supports only "to our knowledge" language.
   that nested-pair information recovery and RGHW access thresholds are standard;
   it does not discuss local recovery equations or concatenation confinement.
   DOI `10.1007/s10623-026-01808-y`; no PDF was cached.
+- **Partial:** Choudhary--Yadav--Bhaintwal, *Maximal achievable service rates
+  of some classes of linear codes*, arXiv v1 of 6 August 2026. Read: abstract,
+  introduction, Section II through Definitions 1--3 and Proposition 1, and
+  Section III through Theorem 4. It defines the service-rate region as the
+  fractional capacity polytope of a chosen recovery-set system, reduces to
+  minimal recovery sets, and derives design-based service-rate bounds from
+  dual supports. It neither retains normalized recovery coefficients nor
+  transports a recovery system through concatenation. Cache key
+  `arXiv:2608.05657`; SHA-256
+  `924083acbe565988992ce323ce81d56a4d9099906de6b5df029fc2b88690e1c1`.
+- **Full text:** Stylianou--Ramkumar--Boche--Bitar, *CSS Quantum LRCs with
+  Intersecting Recovery Sets: Constructions and Bounds*, arXiv v1 of 11 August
+  2026. Read in full from the cached six-page preprint. It studies quantum
+  ((r,t,x))-locality, common classical recovery sets, subset-inclusion
+  constructions, and parameter bounds. Its recovery-set overlap statistics do
+  not contain the fixed-target RGHW hierarchy, normalized coefficient fibers,
+  or concatenation confinement. Cache key `arXiv:2608.10912`; SHA-256
+  `87346f1756fc21cc69c420701e8daf9ad27343343ed0722922e55d35538b594d`.
+- **Full text:** Stylianou--Boche, *Bounds for Pure Disjoint
+  ((r,delta))-Quantum Locally Recoverable Codes*, arXiv v1 of 11 August 2026.
+  Read in full from the cached six-page preprint. It introduces blockwise
+  quantum weight enumerators and LP/Singleton-like bounds for a partition into
+  disjoint recovery blocks. Here "disjoint" describes blocks that are equal or
+  disjoint, not capacity-one packing of classical recovery witnesses, and the
+  paper does not touch C948's exact relative-weight/confinement theorem. Cache
+  key `arXiv:2608.10922`; SHA-256
+  `170052f4c33c89b32fae3b77019236deaf7c9c13ceeaa7984d2b5d430f4bbdbb`.
+- **Abstract/metadata only:** Garnier--Lavauzelle--Nardi--Zappatore, *New
+  perspectives for code locality in the rank metric*, arXiv v1 of 27 July
+  2026, official arXiv abstract record `arXiv:2607.24295`. It develops a
+  basis-free rank-metric locality notion and Singleton-like bounds, not the
+  Hamming-metric exact recovery-equation transfer considered here.
+- **Abstract/metadata only:** the official arXiv records for Matsumoto,
+  *Information locality of a quantum locally recoverable code*
+  (`arXiv:2608.04403`, 5 August); Li--Ling--Lu--Luo--Zhu,
+  *Entanglement-Assisted Quantum Locally Recoverable Codes:
+  Characterizations, Bounds, and Constructions* (`arXiv:2607.27091`, 29 July);
+  Kumar--Bandi, *Entanglement-Assisted Quantum Locally Recoverable Codes:
+  Bounds, Optimal Constructions, and Achievability* (`arXiv:2608.06854`,
+  7 August); and Kshirsagar--Matthews--Shapiro,
+  *Entanglement-assisted quantum locally recoverable codes: bounds and
+  constructions with availability* (`arXiv:2608.09886` v2, 11 August); and
+  Galindo--Hernando--Martín-Cruz--Matsumoto, *Entanglement assisted quantum
+  ((r,delta))-locally recoverable codes* (`arXiv:2608.17118`, 17 August).
+  These records concern quantum information locality, stabilizer/entanglement-
+  assisted constructions, and parameter bounds. None states the classical
+  canonical helper pair or exact concatenation threshold. Their full texts
+  were not read, so this is only a scope screen, not a theorem-level dismissal.
 
 ### Search coverage
 
@@ -879,6 +929,113 @@ pages were relevance screens, not exhaustively enumerated citing sets, and no
 negative verdict rests on their reported total-result counts. Accordingly the
 three-graph forward-citation rule was not triggered. Promoted exact-title and
 exact-phrase hits received the source-level reads above.
+
+### One-month delta screen: 24 July--24 August 2026
+
+Because the current literature is moving unusually quickly, a separate dated
+screen was run on 24 August 2026. Eight web-search batches displayed 81 records
+with duplicates retained. The screen covered title, abstract/snippet,
+identifier/URL, and displayed submission date. The literal queries were:
+
+- `site:arxiv.org linear codes recovery structure generalized Hamming weights locality cooperative repair July 2026 August 2026`
+- `site:arxiv.org locally recoverable codes concatenated recovery equations dual code July 2026 August 2026`
+- `site:arxiv.org relative generalized Hamming weights locally recoverable codes July 2026 August 2026`
+- `site:arxiv.org functional batch codes disjoint recovery simplex Hadamard July 2026 August 2026`
+- `site:arxiv.org/abs/2607 locally repairable code`
+- `site:arxiv.org/abs/2608 locally repairable code`
+- `site:arxiv.org/abs/2607 generalized Hamming weights code recovery`
+- `site:arxiv.org/abs/2608 generalized Hamming weights code recovery`
+- `arXiv "locally recoverable codes" "2026" "Aug"`
+- `arXiv "locally repairable codes" "August 2026"`
+- `arXiv "cooperative locality" code "2026"`
+- `arXiv "functional batch codes" "2026"`
+- `arXiv Balister Gyori Schelp conjecture prescribed differences perfect matching 2026`
+- `arXiv additive 1-factorization prescribed differences F_2 2026`
+- `arXiv Walsh minors deleted characters perfect matching 2026`
+- `arXiv Hadamard functional batch code simplex disjoint recovery August 2026`
+- `site:arxiv.org/abs/2608 "recovery sets" codes`
+- `site:arxiv.org/abs/2608 "recovery equations" codes`
+- `site:arxiv.org/abs/2608 "generalized Hamming weight"`
+- `site:arxiv.org/abs/2608 "relative generalized Hamming"`
+- `site:arxiv.org/abs/2607 "recovery sets" code after July 23 2026`
+- `site:arxiv.org/abs/2607 "locally recoverable codes" after July 23 2026`
+- `site:arxiv.org/abs/2607 "functional batch" code`
+- `site:arxiv.org/abs/2607 "generalized Hamming weights"`
+- `site:arxiv.org/abs/2608 coding theory "repair" "recovery" linear code`
+- `site:arxiv.org/abs/2608 coding theory "locality" "availability"`
+- `site:arxiv.org/abs/2608 coding theory "batch codes" OR "PIR codes"`
+- `site:arxiv.org/abs/2608 coding theory "weight hierarchy" OR "support distribution"`
+- `site:arxiv.org/abs/2608 "nested linear codes"`
+- `site:arxiv.org/abs/2608 "relative weights" coding`
+- `site:arxiv.org/abs/2608 "ramp secret sharing" generalized Hamming`
+- `site:arxiv.org/abs/2608 "support weights" linear codes locality`
+
+The discriminator was: **promote every record in the date window whose title or
+abstract combined coding theory with recovery sets, locality, service rate,
+GHW/RGHW, batch/PIR recovery, prescribed differences, or exact dual-support
+data.** A broad OpenAlex query for `locally recoverable codes` in the same date
+window reported 2,866 fuzzy matches; its first 100 records were title/date/DOI
+screened and promoted the service-rate and rank-metric papers above in addition
+to the quantum-LRC cluster. Because the OpenAlex match count was visibly
+dominated by lexical false positives, it is recorded as a discovery screen and
+does not license a negative by itself.
+
+The official arXiv API query returned HTTP 429 during this pass, so the dated
+screen is not an exhaustive ingestion of every arXiv category entry. No new
+BGS/prescribed-difference, RGHW-locality, or classical exact-recovery-transfer
+paper dated inside the window was located. This is a bounded negative with the
+stated indexing gap, not a closure result. The 9 July 2026 two-hole BGS
+preprint is outside the one-month window and remains part of the earlier
+frontier, not a new delta hit.
+
+### Cheap corollary exposed by the service-rate literature
+
+For a finite family $A$ of target demands and server radius $r$, let
+$\mathcal R_a^{(\le r)}$ be the complete recovery-set family in the transported
+server universe for demand $a\in A$. A permitted direct systematic singleton
+may be adjoined identically on both sides. With a nonnegative server-capacity
+vector $c$, define the bounded
+service-rate polytope by
+
+$$
+ \Lambda_A^{(\le r)}(c)
+ =\left\{\lambda\ge0:
+ \begin{array}{l}
+ \lambda_a=\sum_{R\in\mathcal R_a^{(\le r)}}\lambda_{a,R},\\
+ \sum_a\sum_{R\ni j}\lambda_{a,R}\le c_j
+ \quad\text{for every helper }j,
+ \end{array}
+ \quad \lambda_{a,R}\ge0\right\}.
+$$
+
+This polytope is a functor of the labelled bounded recovery-set families. Hence
+any exact bounded recovery-structure isomorphism induces, after relabelling
+helpers,
+
+$$
+ \boxed{\Lambda_{A,\mathrm{concat}}^{(\le r)}(c)
+       =\Lambda_{A,\mathrm{inner}}^{(\le r)}(c).}
+$$
+
+For all nonzero demands in $W_P$, the uniform sharp eventual gate is
+
+$$
+ r<M_1(D_P,K_P)+d(I^\perp),
+$$
+
+with the larger objectwise gate available when $A$ omits the minimum-cost
+demands. Under positive-density realization, the entire bounded service-rate
+polytope—and therefore every coordinatewise maximum service rate and every
+linear load-balancing objective—is reproduced on each prescribed block; the
+polytopes of disjoint blocks combine by the corresponding product/capacity
+constraints.
+
+This corollary uses only the support layer once the recovery sets are known;
+the coefficient-aware transfer is stronger. It is also distinct from BGS:
+service-rate regions are fractional capacity polytopes, while BGS asks for one
+integral capacity-one packing that serves a full multiset of demands. The new
+August paper therefore strengthens the motivation and provides a timely
+application, but does not challenge C948's priority claim.
 
 MathSciNet was **NOT COVERED** because institutional authentication was not
 available. Google Scholar was **NOT COVERED** because automated access was not
@@ -940,6 +1097,9 @@ are no repeated novelty surfaces to synchronize at this stage.
    Its positive-density exact transport is the worthwhile payoff.
 7. **Corrected:** reliability separation requires forced supports and an exact
    total-radius budget; arbitrary direct-sum factorization is false.
+8. **Delta-audit corollary:** exact recovery-family transfer preserves the
+   entire bounded service-rate polytope, not only locality, availability, or
+   one coordinatewise service maximum.
 
 ## 13. BGS disjoint-packing bridge — preliminary mathematical vet
 
@@ -1135,6 +1295,9 @@ rather than as a competing theme.
   reformulation without an explicitly restricted slice construction.
 - Targeted finite checks found no defect in the proposed four-hole coefficient
   valuations or the sampled six-deletion arithmetic.
+- The August 2026 service-rate literature yields an immediate exact-transfer
+  corollary for bounded fractional service polytopes; it is support-level and
+  does not pre-empt the coefficient-aware confinement theorem.
 
 ### Open
 
@@ -1144,6 +1307,8 @@ rather than as a competing theme.
   classical RGHW ingredients separately.
 - Full-text promotion of the nearest partial reads and zbMATH/forward-citation
   closure if a manuscript-bound priority sentence is proposed.
+- Repeat the dated delta screen at C948 closure; the present 24 July--24 August
+  screen was index-based and the official arXiv API was rate-limited.
 - Decide whether the projective-simplex family or coefficient-presentation
   separation should lead the eventual sequel application section.
 - Derive the dual relative-weight failure thresholds in literal recovery
