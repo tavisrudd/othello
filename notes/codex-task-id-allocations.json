@@ -3446,8 +3446,17 @@
       "last": 953,
       "purpose": "flagship recovery paper architecture, formal boundary, manuscript rebuild, and aggregate referee-export gates",
       "sequence": 383
+    },
+    {
+      "count": 2,
+      "first": 954,
+      "kind": "reservation",
+      "lane": "complete-ports",
+      "last": 955,
+      "purpose": "Dual failure-threshold upgrade and coefficient-presentation spectrum successor",
+      "sequence": 384
     }
   ],
-  "next_id": 954,
+  "next_id": 956,
   "schema": "codex-task-id-allocations-v1"
 }
