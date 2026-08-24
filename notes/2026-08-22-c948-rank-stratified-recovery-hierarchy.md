@@ -4,8 +4,8 @@
 
 **Status**: COMPLETE; PROOF-CORRECTNESS COLD READ PASSED AFTER ALL FINDINGS WERE
 CLOSED; BOUNDED PRIORITY AUDIT, 24 JULY--24 AUGUST 2026 DELTA SCREEN, EJ/TT
-CLOSEOUT, CLAIM LEDGER, AND POST-CLOSURE PUBLICATION PLAN RECORDED; FLAGSHIP
-REBUILD VERDICT
+CLOSEOUT, CLAIM LEDGER, AND POST-CLOSURE PUBLICATION PLAN RECORDED; PRIMARY-
+PAPER REBUILD VERDICT
 
 ## Scope
 
@@ -50,10 +50,10 @@ they support.
    conjecture.
 4. Run the required final EJ and TT pass, settle or assign every mystery below,
    and issue a binary packaging verdict:
-   **flagship rebuild**, **separate sequel**, or **retain the current paper and
+   **primary-paper rebuild**, **separate sequel**, or **retain the current paper and
    defer C948**.
 
-The preferred verdict, conditional on clean closure, is **flagship rebuild**.
+The selected verdict, conditional on clean closure, is **primary-paper rebuild**.
 The fallback is deliberately conservative: if priority or proof audit weakens
 the rank-stratified spine, preserve the already verified single-coordinate
 paper and package C948 as a sequel rather than forcing a merger.
@@ -87,7 +87,7 @@ The current paper supplies reusable proofs and examples, but its table of
 contents is not binding. Retain the exact transfer theorem, positive-density
 realization, the represented \([10,4,6]\) separation, only the pointed-Tutte
 material needed by that separation, compact MDS reconstruction, and one
-geometric flagship. Compress or move extended EXIT, deletion--contraction,
+geometric application. Compress or move extended EXIT, deletion--contraction,
 secondary geometric inventories, and competing examples unless a referee read
 shows that they are necessary to the main chain. Aim for one coherent
 approximately 24--28 page paper, not a survey of every consequence.
@@ -131,15 +131,14 @@ without an additional growing-hole, recursive, or global saturation theorem.
 
 When C948 closes, allocate successors in this order:
 
-1. the primary-paper architecture/rebuild task, if the flagship verdict wins;
+1. the primary-paper architecture/rebuild task, if the rebuild verdict applies;
 2. its formalization and independent referee gates;
 3. the fixed-convention four-hole proof audit;
 4. the BGS paper task only if that audit proves the theorem;
 5. six-hole work only after Paper II is stable.
 
-This order protects the nearly mature coding-theory result from being delayed
-by the substantially higher-risk BGS program, while preserving the precise
-conceptual bridge between them.
+This order completes the coding-theory dependency chain before beginning the
+BGS proof audit, while preserving the precise conceptual bridge between them.
 
 ## Executive result
 
@@ -444,7 +443,7 @@ helper survival,
 The two systems retain identical complete relative-weight hierarchies but
 different full-demand bounded reliability laws.
 
-## 6. Projective-simplex non-MDS flagship
+## 6. Projective-simplex non-MDS application
 
 Assume $m\ge2$. Let (A) contain one representative of every point of
 (\mathrm{PG}(m-1,q)), so
@@ -1296,24 +1295,26 @@ are no repeated novelty surfaces to synchronize at this stage.
 
 ## 12. TT and EJ verdict
 
-1. **Flagship:** the exact rank-(t) threshold
-   (M_t(D_P,K_P)+d(I^\perp)). This is the strongest paper-specific theorem.
+1. **Main theorem:** the exact rank-(t) threshold
+   (M_t(D_P,K_P)+d(I^\perp)). This is the theorem on which the transfer
+   corollaries depend.
 2. **Priority judo:** the identity
    (d_t(C^\perp)-t=\min_{|P|=t}\kappa_C(P)) makes the classical cooperative-
    locality GHW bound a min--max corollary and yields the global concatenation
    minimum nonconfinement cost over target sets
    (d_t(C^\perp)-t+d(C^\perp)).
-3. **Strong corollary:** relative-Singleton/MDS extremality and the rank-one
+3. **Extremal corollary:** relative-Singleton/MDS extremality and the rank-one
    rigidity theorem. The inequalities are classical inputs; their exact
    confinement interpretation is new in this package.
-4. **Concrete flagship:** the projective-simplex family gives a non-MDS
+4. **Worked family:** the projective-simplex family gives a non-MDS
    nonlinear threshold hierarchy and an exact geometric reliability law.
 5. **Structural separation:** the binary two-presentation example proves that
    the associated nested pair and its entire RGHW hierarchy do not determine
    the nonconfinement threshold. Target coefficients matter through
    (d(I^\perp)).
-6. **Demote:** universality of nested pairs is standard quotient/graph algebra.
-   Its positive-density exact transport is the worthwhile payoff.
+6. **Classical input:** universality of nested pairs is standard quotient/graph
+   algebra. The paper-specific conclusion is their positive-density exact
+   transport.
 7. **Corrected:** reliability separation requires forced supports and an exact
    total-radius budget; arbitrary direct-sum factorization is false.
 8. **Delta-audit corollary:** exact recovery-family transfer preserves the
@@ -1670,6 +1671,6 @@ minimum helper costs for recovering subspaces of each dimension, proving that
 concatenation adds precisely $d(I^\perp)$ to the nonconfinement threshold, and
 transporting every normalized recovery equation to positive-density target
 classes. The projective-simplex and coefficient-presentation examples give the
-general result concrete mathematical force. The binary packaging verdict is
-**flagship rebuild**; BGS remains a separate, later paper after its four-hole
+general result explicit applications. The binary packaging verdict is
+**primary-paper rebuild**; BGS remains a separate, later paper after its four-hole
 proof audit.

@@ -27,7 +27,7 @@ claims cannot simultaneously be accepted:
 The cubic exact-row proof and the public trust boundary also need material
 completion before re-review.
 
-## Strongest passages
+## Principal proof mechanisms
 
 - **Exact weighted-functional transfer, PDF pp. 4--5,
   `thm:transfer`.** The block-functional decomposition cleanly separates the
@@ -113,7 +113,7 @@ realization” by the theorem's construction and hypotheses.
 
 Location: PDF pp. 15--16; Appendix A and A.1.
 
-The trust categories and axiom footprint are credible, but the public paper
+The trust categories and axiom footprint are internally consistent, but the public paper
 does not provide a release-grade audit path. It needs the exact public module
 closure, Lean/toolchain identity, replay entry point, and a statement-to-
 declaration/certificate map for the main MDS and geometric theorems. The

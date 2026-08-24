@@ -25,14 +25,14 @@ radius-three repair clutters, exact zero-functional cost eight, and hence
 distinct reliability laws on density-`1/7` target classes after concatenation
 with one common asymptotically good outer family.
 
-## Strongest mechanism and first confidence drop
+## Principal mechanism and first unresolved point
 
-The strongest mechanism is Theorem 3.1 together with Theorem 4.1: decompose a
+The principal mechanism is Theorem 3.1 together with Theorem 4.1: decompose a
 concatenated dual word by its induced block functionals, minimize each fiber
 with the exact costs `lambda` and `mu_x`, and keep the all-zero functional
 sector separate. This produces both the exact weighted nonzero-functional
 cost and the persistent pointed obstruction
-`z_x(I) = mu_x(0) + d(I^perp)`. The zero sector is the important insight: outer
+`z_x(I) = mu_x(0) + d(I^perp)`. In the zero sector, outer
 dual distance can eliminate bounded nonzero-functional tuples but can never
 eliminate a pointed inner-dual word in the target block plus an inner-dual word
 in another block. The resulting eventual iff in Theorem 4.1 is substantially

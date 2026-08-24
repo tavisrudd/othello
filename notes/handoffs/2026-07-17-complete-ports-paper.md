@@ -3,8 +3,8 @@
 **Lane**: `complete-ports`
 
 **Date**: 2026-08-24
-**Status**: ACTIVE; C950 PRIMARY-PAPER ARCHITECTURE IN PROGRESS; C951 FORMAL
-BOUNDARY, C952 MANUSCRIPT REBUILD, C325 APPENDIX VERIFIER, AND C953 AGGREGATE
+**Status**: ACTIVE; C950 PRIMARY-PAPER ARCHITECTURE COMPLETE; C951 FORMAL
+BOUNDARY IN PROGRESS; C952 MANUSCRIPT REBUILD, C325 APPENDIX VERIFIER, AND C953 AGGREGATE
 REVIEW FOLLOW IN THAT ORDER; REMOTE PUBLICATION GATED
 **Theorem source lane**: archived [`repaircodes`](done/2026-07-13-projective-completion-repaircodes.md)
 **Current private paper**: [`complete-repair-ports`](../../papers/complete-repair-ports/README.md)
@@ -149,8 +149,8 @@ terminal.
 
 ## Next step
 
-C950 freezes the exact section/theorem architecture and retain/rewrite/move/cut
-map without editing the manuscript. Then run C951 formal-boundary closure,
+C950 froze the exact section/theorem architecture and retain/rewrite/move/cut
+map without editing the manuscript. Run C951 formal-boundary closure next, then
 C952 manuscript reconstruction, C325 appendix-only verification, and C953
 aggregate referee/export review. Before nontrivial proof development or
 formalization, read the paper-specific expert dossier

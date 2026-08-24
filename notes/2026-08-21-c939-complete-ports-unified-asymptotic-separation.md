@@ -345,7 +345,7 @@ forward-committed at `581357f` and verifies as 29 tracked files sourced from
 
 ## `ej` + `tt` closeout and mystery ledger
 
-The closeout identified two cheap, high-value upgrades and both are settled:
+The closeout identified two follow-up checks and both are settled:
 
 - availability, transversal number, minimum-blocker count, and helper degrees
   are now matched in the main pair, so the separation is genuinely driven by
