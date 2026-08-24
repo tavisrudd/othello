@@ -1,6 +1,6 @@
 {
-  "title": "Two-Dimensional Stabilization of Quartic del Pezzo Surfaces",
-  "description": "Let k be a field of characteristic zero and S/k a smooth quartic del Pezzo surface with a rational point and stably permutation geometric Picard lattice. This preprint proves that S times A^2, equivalently S times P^2, is k-rational. It applies the theorem to both explicit Tschinkel–Zhang families of smooth cubic hypersurfaces over Q. For their cubic threefolds, the result and a separately cited theorem that X times P^1 is irrational give stabilization index two over Q and C. Consequently there are smooth projective nonrational fourfolds Y over Q for which Y times A^1 is rational. This is a statement about birational rationality after affine-line stabilization, not a counterexample to Zariski cancellation. The release includes an exact-arithmetic certificate for the tangent-incidence calculation; the new rationality theorem is not formalized in Lean.",
+  "title": "Explicit Cubic Threefolds Rational after Two Stabilizations",
+  "description": "For each of two explicit smooth cubic threefolds X over Q, this preprint determines the least m for which X times P^m is rational: it is exactly two over both Q and C. The reusable theorem proves that if k has characteristic zero and S/k is a smooth quartic del Pezzo surface with a rational point and stably permutation geometric Picard lattice, then S times A^2, equivalently S times P^2, is k-rational. Applied to both explicit Tschinkel–Zhang families of smooth cubic hypersurfaces, it gives a uniform P^2 rationality bound. Consequently there are smooth projective nonrational fourfolds Y over Q for which Y times A^1 is rational. The release includes an exact-arithmetic certificate for the tangent-incidence calculation; the new rationality theorem is not formalized in Lean.",
   "creators": [
     {
       "name": "Rudd, Tavis",
@@ -16,12 +16,13 @@
   "keywords": [
     "quartic del Pezzo surfaces",
     "stable rationality",
-    "stabilization index",
+    "levels of stable rationality",
     "universal torsors",
     "Néron–Severi tori",
     "Cox rings",
     "generic tangent projection",
     "rational quotients",
+    "explicit rational parametrizations",
     "cubic threefolds",
     "birational geometry",
     "affine-line stabilization"
@@ -30,6 +31,16 @@
   "related_identifiers": [
     {
       "identifier": "https://doi.org/10.48550/arXiv.2608.20029",
+      "relation": "references",
+      "resource_type": "publication-preprint"
+    },
+    {
+      "identifier": "https://doi.org/10.5281/zenodo.21909943",
+      "relation": "references",
+      "resource_type": "publication-preprint"
+    },
+    {
+      "identifier": "https://doi.org/10.48550/arXiv.2507.15704",
       "relation": "references",
       "resource_type": "publication-preprint"
     }

@@ -1,9 +1,9 @@
 # Claim, proof, and novelty ledger
 
-## Audit boundary
+## Source boundary
 
-No global first-priority claim appears in the manuscript.  The bounded audit
-supporting its positioning read two sources at targeted full-text depth:
+The theorem statements do not depend on a literature-absence claim.  The
+source audit read two load-bearing references at targeted full-text depth:
 
 - Yuri Tschinkel and Zhijia Zhang, *Universal torsors over quartic del Pezzo
   surfaces and stable rationality*, arXiv:2608.20029v1. Read depth: partial;
@@ -17,24 +17,18 @@ supporting its positioning read two sources at targeted full-text depth:
   point; PDF SHA-256
   `ed5b1bbade653b7feab309b5d43a775fbc971cead2d904a4f0e94c1aca8271af`.
 
-Two bounded title/snippet screens returned 45 displayed results for exact
-queries concerning rationality of a nonrational `Y x A1` and torus quotients
-parametrized by generic tangent projection. No displayed result met either discriminator. OpenAlex
-resolved the pinned DataCite DOI `10.48550/arXiv.2608.20029` to W7203907824
-with citing count zero; Crossref returned 404 and Semantic Scholar returned
-429.  The required three-graph closure therefore failed. MathSciNet and a
-systematic zbMATH search were not covered. The negative licenses no
-"to our knowledge" sentence.
-
-The durable audit with the verbatim search queries and service outcomes is
-`notes/2026-08-24-c925-tz-priority-judo-synthesis.md` in the monorepo.
+The bounded novelty screen and its exact limitations remain in the durable
+research report; the manuscript uses no "first" or "to our knowledge"
+formulation derived from that screen.
 
 ## Claim ledger
 
-| label | claim | proof source | novelty wording |
+| label | claim | proof source | scope |
 |---|---|---|---|
-| `thm:torus-quotient` | A saturated cocharacter lattice with the stated unimodularity property gives a rational torus quotient of a variety parametrized by generic tangent projection. | Text proof; signed-minor orbit correction and displayed inverse graph. | No priority claim. |
+| `thm:torus-quotient` | A saturated cocharacter lattice with the stated unimodularity property gives a rational torus quotient of a variety parametrized by generic tangent projection. | Text proof; signed-minor orbit correction and displayed inverse graph. | Reusable quotient theorem; all descent hypotheses are explicit. |
 | `prop:tangent-section` | All four Tschinkel--Zhang minimal Picard types admit the required rank-three saturated sublattice and a descended good linear section. | Exact certificate plus incidence descent. | Complete only within the four types; no claim for all subgroups of `W(D5)`. |
-| `thm:two-variable` | `S x A2` is rational under the rational-point and stably-permutation hypotheses. | `thm:torus-quotient`, `prop:tangent-section`, and imported Tschinkel--Zhang/Voskresenskii results. | Stated as a theorem of this paper, without a global firstness claim. |
+| `thm:two-variable` | `S x A2` is rational under the rational-point and stably-permutation hypotheses. | `thm:torus-quotient`, `prop:tangent-section`, and imported Tschinkel--Zhang/Voskresenskii results. | The Cox/OADP geometry and four-type classification are imported. |
 | `cor:cubics` | Both Tschinkel--Zhang cubic families become rational after `P2`. | Generic-fibre function-field argument. | Direct consequence; their universal-torsor theorem remains an input. |
-| `cor:cancellation` | The two cubic threefolds have exact threshold two and yield `Y` nonrational with `Y x A1` rational. | `cor:cubics` plus the cited one-stabilization theorem. | No global firstness claim; the paper notes only the mathematical consequence. |
+| `thm:cubic-level` | For the two displayed cubic threefolds, the smallest `m` with `X x P^m` rational is two over `Q` and `C`. | `cor:cubics` plus the cited one-stabilization theorem. | The upper bound is specific to the two displayed cubics. |
+| `cor:affine-line` | Each displayed cubic gives a nonrational smooth projective fourfold `Y` with `Y x A1` rational. | `thm:cubic-level` and a function-field identity. | Birational affine-line stabilization, not isomorphic-cylinder cancellation. |
+| `cor:moduli` | The function `ell_C` is two at the displayed points and infinite at a very general complex point. | `thm:cubic-level` plus Engel--de Gaay Fortman--Schreieder Corollary 1.4. | The infinite value is only a very-general statement. |

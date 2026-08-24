@@ -1,23 +1,33 @@
 {
-  "cor:cancellation": {
-    "cautions": "Nonrationality imports the separate one-stabilization theorem; the rationality theorem alone does not prove the exact index.",
-    "conclusion": "Both cubic threefolds have stabilization index two over Q and C and yield nonrational Y with rational Y times A1.",
+  "cor:affine-line": {
+    "cautions": "This is birational rationality after affine-line stabilization, not Zariski cancellation for isomorphic affine cylinders.",
+    "conclusion": "Each displayed cubic yields a nonrational smooth projective fourfold Y for which Y times A1 is rational.",
     "coverage": "absent",
     "declarations": [],
-    "digest": "1df40dd2be597cd419d7038fa63ccc007f504c9acc5983a6d94e82efb0da5bd0",
+    "digest": "7506b970d79e292705bdc26bdc011a56dc79d1f7d982609efc94a559105927a4",
     "environment": "corollary",
-    "hypotheses": "X is either displayed smooth Tschinkel--Zhang cubic threefold; the cited m=1 theorem is used after base change to C.",
-    "objects": "The field-indexed stabilization index and Y=X times P1."
+    "hypotheses": "X is either displayed cubic threefold and Y is X times P1.",
+    "objects": "The smooth projective fourfold Y and its affine-line stabilization."
   },
   "cor:cubics": {
     "cautions": "This is restricted to the two Tschinkel--Zhang families, not every smooth cubic hypersurface.",
     "conclusion": "X times P2 is rational over Q for every member of either family.",
     "coverage": "absent",
     "declarations": [],
-    "digest": "6c5f36f96720207d69ecb0fa220edb7b55380ba07e61d05340e233b434d6e3d5",
+    "digest": "13b11f6eda759c8c92ec27b45bea35a6bd5d839bee92ee8ddf12f57dfde90fa9",
     "environment": "corollary",
     "hypotheses": "r is nonnegative and X is one of the cubics in Tschinkel--Zhang Propositions 5.1 or 5.2.",
     "objects": "The two explicit families of cubic hypersurfaces."
+  },
+  "cor:moduli": {
+    "cautions": "The finite value is proved only at the two displayed points; the infinite value is a very-general statement.",
+    "conclusion": "The function ell_C is two at the displayed cubic points and infinite at a very general point.",
+    "coverage": "absent",
+    "declarations": [],
+    "digest": "fd1864cbf8ccf02fc3feca35d7eef007f28abd50d153c3cff53c15cf33285050",
+    "environment": "corollary",
+    "hypotheses": "The base field is C and the cubic is either displayed or very general as specified.",
+    "objects": "The level-of-stable-rationality function ell_C on smooth cubic-threefold moduli."
   },
   "prop:tangent-section": {
     "cautions": "The subgroup classification is complete only for the four hereditary-H1 types; no classification of all W(D5) subgroups is claimed.",
@@ -44,10 +54,20 @@
     "conclusion": "The Rosenlicht quotient Z/T is k-rational.",
     "coverage": "absent",
     "declarations": [],
-    "digest": "b13aaa37563c2b1f4b1354903ea10db5d824f975fae0f767857272ce7d6b9bf0",
+    "digest": "ecb2bbe1aea6a12e3d51508b4e5503f815cdc7090f24ba800bdbba7190d1c598",
     "environment": "theorem",
-    "hypotheses": "A generically free rank-r torus action, birational generic tangent projection, a Galois-stable complementary subspace, an integral basis of weight differences, and a nondegenerate tangent linear section.",
-    "objects": "A torus action on a projective variety and its Rosenlicht quotient."
+    "hypotheses": "A generically free projectively linear rank-r torus action, birational generic tangent projection, descended complementary sums of projective weight spaces, an integral basis of weight differences, and a nondegenerate tangent linear section.",
+    "objects": "A projective torus action on a projective variety and its Rosenlicht quotient."
+  },
+  "thm:cubic-level": {
+    "cautions": "The upper bound is for the two displayed cubics; nonrationality after one stabilization imports a separate theorem applying to all smooth complex cubic threefolds.",
+    "conclusion": "For each displayed cubic, the smallest m with X times P^m rational is two over Q and C.",
+    "coverage": "absent",
+    "declarations": [],
+    "digest": "f01f6acaba79c2a8f2f62490f2a973dbd61e61713fe65b3d278c0df5fd1acaf4",
+    "environment": "theorem",
+    "hypotheses": "X is one of the two displayed smooth cubic threefolds.",
+    "objects": "The smallest rational stabilization over Q and after base change to C."
   },
   "thm:two-variable": {
     "cautions": "Universal-torsor geometry and the four-type classification are imported from Tschinkel--Zhang.",

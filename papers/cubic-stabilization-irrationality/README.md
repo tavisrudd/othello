@@ -1,19 +1,21 @@
-# Two-Dimensional Stabilization of Quartic del Pezzo Surfaces
+# Explicit Cubic Threefolds Rational after Two Stabilizations
 
-The main theorem concerns a smooth quartic del Pezzo surface `S` over a field
-`k` of characteristic zero. If `S(k)` is nonempty and the geometric Picard
+For each of the two displayed smooth cubic threefolds `X/Q`, the least `m`
+for which `X × P^m` is rational is exactly two, over both `Q` and `C`.
+Rationality at `m=2` is proved here; irrationality at `m=1` is supplied by the
+separately cited theorem for all smooth complex cubic threefolds.
+
+The reusable theorem concerns a smooth quartic del Pezzo surface `S` over a
+characteristic-zero field `k`: if `S(k)` is nonempty and the geometric Picard
 lattice is a stably permutation Galois module, then `S × A²`, equivalently
-`S × P²`, is `k`-rational. In particular, the conclusion holds for every
-stably `k`-rational smooth quartic del Pezzo surface.
+`S × P²`, is `k`-rational. It applies to every member of both explicit
+Tschinkel–Zhang families of cubic hypersurfaces. Their stable-rationality
+conclusions therefore hold with the uniform bound `P²`.
 
-The theorem applies to both explicit Tschinkel–Zhang families of smooth cubic
-hypersurfaces over `Q`: every member becomes rational after multiplication by
-`P²`. For their cubic threefolds, combining this result with the separately
-cited theorem that `X × P¹` is irrational determines the stabilization index
-to be two over both `Q` and `C`. Thus `Y = X × P¹` is a nonrational smooth
-projective fourfold over `Q` while `Y × A¹` is rational. This is a birational
-rationality statement after affine-line stabilization, not a counterexample
-to the Zariski cancellation problem for isomorphic affine cylinders.
+Taking `Y = X × P¹` gives a nonrational smooth projective fourfold over `Q`
+for which `Y × A¹` is rational. This is birational rationality after
+affine-line stabilization, not the Zariski cancellation problem for
+isomorphic affine cylinders.
 
 The canonical release files are:
 
@@ -38,7 +40,11 @@ descent, and generic-fibre function-field arguments are proved in the text,
 not delegated to the checker. No Lean development formalizes the new theorem
 or its corollaries, and their formal coverage is recorded as `absent`.
 
-The manuscript makes no global priority claim. Its bounded literature audit
-and imported-source ledger are recorded in `claim-proof-novelty-ledger.md` and
+The quotient proof is constructive: a tangent-section witness determines the
+orbit correction by signed maximal minors and the inverse parametrization by
+the displayed elimination graph. No complexity estimate is claimed.
+
+The exact boundary between proved, computationally certified, and imported
+claims is recorded in `claim-proof-novelty-ledger.md` and
 `verification/imported-sources.json`. No manuscript DOI or release version is
-asserted in the metadata because none has been assigned authoritatively.
+asserted because none has been assigned authoritatively.

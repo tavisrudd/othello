@@ -1,4 +1,21 @@
 {
+  "egfs-very-general-cubic": {
+    "citation": "EGFS",
+    "conventions": [
+      {
+        "aspect": "domain",
+        "matched": "The moduli corollary concerns a very general smooth cubic threefold over C.",
+        "requirement": "Corollary 1.4 applies to very general cubic threefolds in P4 over C."
+      },
+      {
+        "aspect": "implication",
+        "matched": "Failure of stable rationality means no finite projective-space stabilization is rational.",
+        "requirement": "Corollary 1.4 states that a very general cubic threefold is not stably rational."
+      }
+    ],
+    "pinpoint": "Corollary 1.4",
+    "used": "A very general smooth complex cubic threefold is not stably rational."
+  },
   "high-degree-del-pezzo": {
     "citation": "VarillyAlvarado",
     "conventions": [
@@ -59,6 +76,11 @@
         "aspect": "domain",
         "matched": "The argument is applied over the function field of the stated projection base.",
         "requirement": "The generic fibre is the quartic del Pezzo surface constructed in Propositions 5.1 or 5.2."
+      },
+      {
+        "aspect": "equation",
+        "matched": "The second family uses the cubic tail x3^3 - x3*x4^2 + x4^3, exactly as in Proposition 5.2.",
+        "requirement": "The displayed equations, coefficients, and added Fermat cubes agree with Propositions 5.1 and 5.2."
       }
     ],
     "pinpoint": "Propositions 5.1 and 5.2",

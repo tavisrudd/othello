@@ -1,0 +1,114 @@
+# C956 result inventory
+
+This document ranks only the proved results relevant to the replacement
+manuscript. It is an editorial map, not part of the mathematical argument.
+
+## The paper's theorem spine
+
+### 1. Exact level for two explicit cubic threefolds
+
+For each displayed smooth cubic threefold `X/Q`,
+
+`ell_Q(X) = ell_C(X_C) = 2`.
+
+Equivalently, `X_C x P1` is irrational and `X x P2` is rational over `Q`.
+This is the title theorem: it is sharp, immediately legible, and directly
+answers the level-of-stable-rationality question for explicit smooth cubic
+threefolds.
+
+The lower bound is the separately cited theorem that every smooth complex
+cubic threefold remains irrational after multiplication by `P1`. The upper
+bound is proved in this paper.
+
+### 2. Two-variable rationality for quartic del Pezzo surfaces
+
+Let `k` have characteristic zero and let `S/k` be a smooth quartic del Pezzo
+surface. If `S(k)` is nonempty and `Pic(S_bar)` is a stably permutation
+Galois module, then `S x A2` is `k`-rational. In particular, this holds for
+every stably `k`-rational smooth quartic del Pezzo surface.
+
+This is the strongest general geometric theorem in the paper. It turns the
+existence of a stable-permutation decomposition into a uniform bound of two
+variables by a nonlinear quotient construction.
+
+### 3. Rational quotients from tangent sections
+
+Let a rank-`r` torus act projectively linearly and generically freely on a
+variety parametrized by generic tangent projection. A descended
+codimension-`r` tangent section is a rational section of the action when it
+retains `r+1` weight blocks whose differences form an integral basis and its
+coefficient matrix has nonzero maximal minors. Hence the Rosenlicht quotient
+is rational.
+
+This is the most reusable theorem in the paper. The proof is constructive:
+signed maximal minors compute the orbit correction and the inverse graph
+computes the birational parametrization. It applies independently of the
+quartic-del-Pezzo setting when its geometric and descent hypotheses can be
+verified.
+
+### 4. A descended tangent section for the four Galois types
+
+For each of the four hereditary-`H1` Galois types of a minimal quartic del
+Pezzo surface, the projective Cox model has the saturated rank-three subtorus
+and descended tangent section required by the quotient theorem.
+
+This is the technical bridge between the general quotient criterion and the
+surface theorem. The main text explains the incidence and descent argument;
+the appendix and exact-arithmetic certificate verify the four-witness cover.
+
+## Consequences retained in the paper
+
+### Both cubic families in every dimension
+
+For every `r >= 0` and each of the two explicit families,
+`X_{j,r} x P2` is rational over `Q`. The proof is an identity of function
+fields over the generic-fibre base and uses no specialization argument.
+
+The smoothness, quartic-del-Pezzo fibrations, and Galois-type computations are
+imported from Tschinkel--Zhang Propositions 5.1 and 5.2. The surface theorem
+then gives their stable-rationality conclusions with the uniform `P2` bound.
+
+### Rationality after affine-line stabilization
+
+For `Y = X x P1`, where `X` is either displayed cubic threefold, `Y` is a
+smooth projective nonrational fourfold over `Q`, remains nonrational over `C`,
+and `Y x A1` is rational over `Q`.
+
+This is the most memorable secondary consequence. It is a birational
+rationality statement after affine-line stabilization, not an assertion about
+isomorphic affine cylinders.
+
+### Variation in cubic-threefold moduli
+
+The function `ell_C` takes the value two at the two displayed cubic points and
+is infinite at a very general point, using the cited very-general stable-
+irrationality theorem. This places the explicit calculation in the geometry
+of the smooth cubic-threefold moduli space without asserting anything about
+all special points.
+
+## Essential proof repair retained
+
+The visible sign cocharacters span an index-two sublattice. Passing to its
+saturation adds the half-sum cocharacter and removes the apparent projective
+`mu_2` kernel. The integral-basis hypothesis in the quotient theorem is what
+distinguishes a rational section from a finite orbit cover.
+
+## Independent follow-up
+
+The calculations also isolate a rational five-dimensional torus with CARAT
+character class `(5,232,15)` whose dual class `(5,232,14)` is reported as not
+retract rational in the cited classification. This is mathematically
+independent of the cubic paper and should be developed, source-audited, and
+released separately if pursued.
+
+## Final hierarchy
+
+| Role | Result |
+|---|---|
+| Title and abstract | exact level two for the two explicit cubic threefolds |
+| General geometric theorem | `S x A2` rational for the stated quartic del Pezzo surfaces |
+| Reusable mechanism | rational torus quotient from a unimodular tangent section |
+| Main family consequence | both explicit cubic families are rational after `P2` |
+| Memorable secondary consequence | a nonrational projective fourfold rational after `A1` stabilization |
+| Moduli context | level two at explicit points and infinite very generally |
+| Separate follow-up | rational torus with non-retract-rational dual |

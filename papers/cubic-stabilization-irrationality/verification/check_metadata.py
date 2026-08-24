@@ -29,6 +29,7 @@ readme = (ROOT / "README.md").read_text(encoding="utf-8")
 
 title_match = re.search(r"\\title\{([^}]+)\}", text)
 assert title_match and zenodo["title"] == title_match.group(1)
+assert readme.splitlines()[0] == f"# {zenodo['title']}"
 assert zenodo["upload_type"] == "publication"
 assert zenodo["publication_type"] == "preprint"
 assert zenodo["access_right"] == "open"
@@ -39,6 +40,13 @@ assert zenodo["creators"] == [{
     "orcid": "0009-0003-6405-3275",
     "affiliation": "Independent researcher",
 }]
+assert {item["identifier"] for item in zenodo["related_identifiers"]} == {
+    "https://doi.org/10.48550/arXiv.2608.20029",
+    "https://doi.org/10.5281/zenodo.21909943",
+    "https://doi.org/10.48550/arXiv.2507.15704",
+}
+assert "cubic threefolds" in zenodo["keywords"]
+assert "levels of stable rationality" in zenodo["keywords"]
 for relative in (
     "cubic_stabilization_irrationality.tex",
     "cubic_stabilization_irrationality.pdf",

@@ -12,13 +12,12 @@ ranking is in `results-inventory.md`.
 ## One-sentence result
 
 There are explicit smooth cubic threefolds `X/Q` for which `X × P¹` is
-irrational but `X × P²` is rational; hence the least stabilizing dimension is
-exactly two over both `Q` and `C`.
+irrational but `X × P²` is rational; hence the smallest stabilizing integer
+is exactly two over both `Q` and `C`.
 
 ## Mathematical framing
 
-The paper begins from a rationality question, not from a technical
-improvement to another paper.
+The paper begins from the rationality question for smooth cubic threefolds.
 
 - The one-stabilization theorem says that `X_C × P¹` is irrational for every
   smooth complex cubic threefold.
@@ -60,20 +59,19 @@ qualification being supplied only in fine print.
    projective variable does not suffice and two do. This is not a
    classification of stable rationality for every smooth cubic threefold:
    very general cubics are not stably rational.
-2. **It recovers and sharpens the Tschinkel–Zhang stable-rationality
-   conclusions.** The surface theorem implies their Corollary 4.3 under the
-   same hypotheses, and the family theorem implies their Theorem 1.3 with
-   the quantitative bound `P²`.
+2. **It gives quantitative forms of the stable-rationality conclusions in
+   Tschinkel–Zhang.** The surface theorem gives the positive direction of
+   their Corollary 4.3 with the bound `A²`, and the family theorem gives the
+   examples of their Theorem 1.3 with the bound `P²`.
 3. **Its mechanism is more general than the application.** The
    unimodular-window quotient criterion concerns projective torus actions on
    varieties with birational generic tangent projection. It is not specific
    to quartic del Pezzo surfaces or cubic hypersurfaces.
 
-This is not presented as an extension of Tschinkel–Zhang. The organizing
-results are the standalone quotient criterion, surface theorem, and exact
-cubic threshold. Their universal-torsor rationality theorem, Cox/OADP
-construction, Galois classification, and explicit fibrations are cited as
-independent geometric inputs at the points where they are used.
+The organizing results are the standalone quotient criterion, surface
+theorem, and exact cubic level. Tschinkel–Zhang's Cox/OADP construction,
+Galois classification, universal-torsor splitting, and explicit fibrations
+are cited as geometric inputs at the points where they are used.
 
 ## Alternate framing options
 
@@ -86,21 +84,21 @@ Stabilizations*
 Stabilizations*. The adjective “explicit” is preferable because the theorem
 does not concern every smooth cubic threefold.
 
-**Opening claim:** explicit smooth cubic threefolds have least stabilizing
-dimension two.
+**Opening claim:** the smallest `m` for these explicit smooth cubic
+threefolds is two.
 
 **Advantages**
 
 - Directly answers the motivating cubic-threefold question.
-- Makes the `m=1` and Tschinkel–Zhang results collide in one sharp theorem.
+- Brings the one-stabilization theorem and the stably rational examples
+  together in one sharp statement.
 - The statement is understood before any Cox-ring or torus terminology.
 - It naturally accommodates the fourfold consequence and the moduli contrast.
 
 **Risk**
 
-- The strongest general theorem is not in the title. Counter this by stating
-  it as Theorem B on page 2 and by saying in the abstract that it recovers the
-  Tschinkel–Zhang stable-rationality conclusions quantitatively.
+- The strongest general theorem is not in the title. State it as Theorem B
+  on page 2 and give its `A²` consequence in the abstract.
 
 **Verdict:** best balance of memorability, mathematical importance, and the
 user's intended focus.
@@ -180,7 +178,7 @@ Threefolds*
 **Advantages**
 
 - Maximizes immediacy and makes the relation to their paper unmistakable.
-- Signals the strongest priority-judo point honestly.
+- Makes the source examples explicit in the title.
 
 **Risks**
 
@@ -196,20 +194,24 @@ architecture.
 ## Recommended hybrid
 
 Use Option A as the title and narrative, Option C as Theorem B, Option D as
-the proof mechanism, and Option B as the first corollary. This produces a
+the proof mechanism, and Option B as a secondary corollary. This produces a
 simple hierarchy:
 
 ```text
-Theorem A: exact cubic threshold 2
+Theorem A: exact cubic level 2
     |
-    +-- Corollary: nonrational fourfold rational after A¹
-    +-- Corollary: value 2 at explicit moduli points, infinity very generally
+    +-- derived after the family theorem
 
 Theorem B: quartic del Pezzo × A² is rational
     |
-    +-- recovers TZ Corollary 4.3 quantitatively
+    +-- quantifies the positive direction of TZ Corollary 4.3
     +-- gives both TZ cubic families × P² rational
-    +-- recovers TZ's cubic stable-rationality existence theorem
+    +-- implies the corresponding stable-rationality conclusions
+
+Consequences
+    |
+    +-- nonrational fourfold rational after A¹ stabilization
+    +-- value 2 at explicit moduli points, infinity very generally
 
 Technical theorem: unimodular-window torus quotient is rational
     |
@@ -232,11 +234,11 @@ equations.
    existence of such cubic threefolds only as the context making the question
    concrete.
 2. Display the two cubic equations and state the exact answer `m=2`.
-3. State the affine-line fourfold consequence and distinguish it from
-   isomorphism cancellation.
-4. State the general quartic-del-Pezzo theorem. In a separate relation-to-the-
-   literature paragraph, explain precisely which recent conclusions it
-   recovers and which geometric results it uses.
+3. State the general quartic-del-Pezzo theorem and the all-dimensional family
+   consequence. In a separate source paragraph, identify the imported
+   geometry and the resulting quantitative conclusions.
+4. State the affine-line fourfold and moduli consequences; distinguish the
+   former from isomorphism cancellation.
 5. Give the proof idea: saturated rank-three torus, Galois-stable four-block
    window, one-point tangent slice, rational quotient, residual rank-two
    torus. End with the section roadmap.
@@ -258,10 +260,10 @@ asking the reader to learn the mechanism.
 5. **Moduli contrast.** The value is two at the explicit cubic points and
    infinite at a very general complex cubic threefold.
 
-6. **Quantitative recovery of the source results.** The surface theorem
-   implies the stable-rationality conclusion of Tschinkel–Zhang Corollary 4.3,
-   and the all-dimensional family theorem implies their headline existence
-   theorem for stably rational smooth cubic hypersurfaces.
+6. **Quantitative relation to the source results.** The surface theorem gives
+   the positive direction of Tschinkel–Zhang Corollary 4.3 with an `A²`
+   bound, and the all-dimensional family theorem gives the examples in their
+   existence theorem with a `P²` bound.
 
 The cubic theorem is the headline. The surface theorem is the mechanism. The
 fourfold statement is a memorable reformulation, not the organizing subject.
@@ -312,18 +314,13 @@ ell_Q(X)=ell_C(X_C)=2
 | fourfold × `A¹` rational | exact cubic theorem and equality of two-variable function fields | none | Zariski cancellation terminology |
 | moduli contrast | exact cubic theorem | Engel–de Gaay Fortman–Schreieder on very general cubic threefolds | deformation invariance of stable rationality |
 
-### Non-circular recovery of the Tschinkel–Zhang conclusions
+### Source-chain check for the Tschinkel–Zhang conclusions
 
-The surface proof uses their geometric and group-theoretic ingredients but
-does not invoke their Corollary 4.3. Therefore the stronger conclusion
-`S × A²` rational legitimately implies the stable-rationality conclusion of
-that corollary. Likewise, the cubic-family proof takes their explicit smooth
-fibrations and generic-fibre descriptions as input, but does not invoke their
-final stable-rationality theorem. Rationality after `P²` therefore recovers
-that theorem's existence conclusion.
-
-This distinction must be stated wherever the paper says that a
-Tschinkel–Zhang result follows as a corollary.
+The surface proof uses their geometric and group-theoretic ingredients, then
+deduces `S × A²` rational from the quotient construction. The cubic-family
+proof takes their explicit smooth fibrations and generic-fibre descriptions
+as input, then deduces rationality after `P²` by a function-field argument.
+These implications and inputs are stated together with pinpoint citations.
 
 The exact source chain is:
 
@@ -349,15 +346,14 @@ The second Tschinkel–Zhang family must be copied exactly from Proposition
 
 `x_3^3 - x_3 x_4^2 + x_4^3`,
 
-not `x_3^3 - x_3^2 x_4 + x_4^3`. The current draft contains the latter
-incorrect transcription and must be repaired before the next build. The
-first family agrees with Proposition 5.1.
+not `x_3^3 - x_3^2 x_4 + x_4^3`. The manuscript now contains the correct
+transcription. The first family agrees with Proposition 5.1.
 
 ## Layered exposition
 
-- **Page 1:** state the explicit cubic equations, Theorem A, and the
-  affine-line fourfold corollary. State Theorem B immediately afterward as
-  the engine.
+- **Page 1:** state the explicit cubic equations and Theorem A. On page 2,
+  state Theorem B and the family theorem before the affine-line and moduli
+  consequences.
 - **Conceptual layer:** begin each major proof with a short roadmap. Keep the
   quotient construction, descent, torsor splitting, residual-torus argument,
   and function-field passage in the main text.
@@ -370,10 +366,9 @@ first family agrees with Proposition 5.1.
 
 ## Relation to Tschinkel–Zhang
 
-The paper is not organized as an extension of Tschinkel–Zhang. Its general
-quotient criterion is stated and proved independently, its surface theorem is
-the main geometric application, and the exact cubic threshold is the
-headline. The relation to their work is an input/consequence comparison:
+The exact cubic level is the headline, the surface theorem is its geometric
+engine, and the quotient criterion is the reusable mechanism. The relation
+to Tschinkel–Zhang is stated through precise inputs and consequences:
 
 - the paper's surface theorem has the same rational-point and
   stably-permutation hypotheses as their Corollary 4.3 and has the stronger
@@ -387,22 +382,21 @@ headline. The relation to their work is an input/consequence comparison:
   irrationality theorem makes the level exactly two.
 
 The proof imports their OADP Cox geometry, tangent-projection theorem,
-Galois-type classification, and explicit generic-fibre construction. It does
-not import their stable-rationality conclusions when deriving the two stronger
-statements above. Present these as cited geometric inputs, not as the paper's
-organizing framework. Do not make a global firstness claim. State the
-input-versus-consequence boundary with pinpoint citations.
+Galois-type classification, universal-torsor splitting, and explicit
+generic-fibre construction. Each input receives a pinpoint citation, and the
+paper's quotient and function-field deductions are then stated separately.
 
 ### Attribution standard
 
-- Never write that the Tschinkel–Zhang paper is subsumed.
-- Write that the **conclusion of Corollary 4.3** follows from their Lemma 4.2,
-  Manin's necessary condition, and the stronger surface theorem here.
+- Write that the **positive direction of Corollary 4.3** follows with the
+  bound `S x A²` from the surface theorem, while their Proposition 4.1 and
+  Lemma 4.2 identify the equivalent lattice and Galois-type conditions and
+  Manin supplies the converse.
 - Write that the **stable-rationality conclusions of Propositions 5.1–5.2
   and Theorem 1.3** follow with a two-variable bound once their explicit
   fibrations and Galois-type computations are taken as input.
-- State that their Theorem 1.1/3.4 on rational universal torsors is not
-  recovered and has separate arithmetic scope.
+- Attribute their Theorem 1.1/3.4 on rational universal torsors according to
+  its actual role; the present quotient theorem has a different conclusion.
 - Attribute their Cox equations, OADP lemma, tangent-projection theorem,
   density lemma, four-type classification, and generic-fibre constructions
   at the first point each is used.
@@ -411,7 +405,9 @@ input-versus-consequence boundary with pinpoint citations.
 
 ## Terminology and notation
 
-- Use **least stabilizing dimension** in prose and `ell_k(X)` in formulas.
+- Use the standard phrase **level of stable rationality** where appropriate;
+  otherwise say explicitly "the smallest integer `m` such that
+  `X x P^m` is rational." Use `ell_k(X)` in formulas.
 - Attribute **levels of stable rationality** to Tschinkel–Zhang when used.
 - Use **projectively linear torus action**, **Rosenlicht quotient**,
   **universal torsor**, **Néron–Severi torus**, and **stably permutation
@@ -444,7 +440,6 @@ input-versus-consequence boundary with pinpoint citations.
 - No claim about every smooth cubic threefold becoming rational after two
   stabilizations.
 - No claim about arbitrary stabilization or stable irrationality.
-- No survival or transport claim from the abandoned quantum argument.
 - No claim that the four weight blocks are individually Galois stable.
 - No claim that the exact coefficients alone prove Galois descent.
 - No claim that the affine-line fourfold is an isomorphism-cancellation
@@ -462,7 +457,7 @@ and with a reusable geometric reason: a saturated rank-three torus quotient
 of the projective Cox model reduces stable rationality of the quartic del
 Pezzo fibre to a rational two-dimensional torus.
 
-The reader should also understand the exact division of credit: the paper
-uses Tschinkel–Zhang's geometric construction to prove stronger quantitative
-conclusions from it; it neither reproves nor supersedes their universal-torsor
-geometry.
+The reader should also understand the exact source chain: Tschinkel–Zhang's
+geometric construction supplies the Cox model, descent classification, and
+explicit fibrations; the quotient theorem here supplies the two-variable
+rationality conclusion.
