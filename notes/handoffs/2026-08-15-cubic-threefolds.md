@@ -194,8 +194,13 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   one boundary point plus one open-orbit point. It does not descend by the
   direct linear construction, because Galois exchanges the chosen boundary
   ruling with its opposite and their coordinate spaces span all
-  \(\mathbf P^{15}\). Thus the remaining gate is nonlinear descent, not
-  residual-torus rationality. Moreover, if
+  \(\mathbf P^{15}\). This is now exhaustive: the multiplicity-free
+  cocharacter representation has exactly four invariant two-planes, with
+  orbit-surface degrees `2,6,6,6`; their boundary-edge orbit sizes force
+  every descended proper linear section to have open degree divisible by two
+  or three. The fourth residual torus is additionally the non-retract-rational
+  class `(3,6,3)`. Thus the remaining gate is genuinely nonlinear descent,
+  not a missed linear subtorus or residual-torus calculation. Moreover, if
   \(Y=X\times\mathbf P^3\) is irrational, then the uniform level-four
   theorem makes \(Y\times\mathbf A^1\) rational, producing the cancellation
   example Tschinkel--Zhang record as unknown; if \(Y\) is rational, the

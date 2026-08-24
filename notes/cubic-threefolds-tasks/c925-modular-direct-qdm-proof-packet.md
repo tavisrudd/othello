@@ -273,7 +273,11 @@ interval \(2\le s(X)\le4\). At \(m=3\), two type-\(I_1\) sign directions
 give Segre-quadric orbit closures and a rational residual rank-three torus
 of CARAT class `(3,25,2)`. The exact tangent one-point slice works over the
 splitting field but its selected boundary ruling does not descend: Galois
-exchanges it with the complementary opposite ruling. Resolving this nonlinear
+exchanges it with the complementary opposite ruling. The invariant rank-two
+planes are now exhausted: their orbit degrees are `2,6,6,6`, boundary-edge
+orbits force descended linear open degree divisible by two or three, and the
+fourth residual torus is non-retract-rational class `(3,6,3)`. Resolving the
+necessarily nonlinear
 descent either lowers the rationality bound to three or, if
 \(X\times\mathbf P^3\) is irrational, gives a nonrational \(Y\) with
 \(Y\times\mathbf A^1\) rational. Exact report:

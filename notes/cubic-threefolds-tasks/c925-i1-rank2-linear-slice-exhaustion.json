@@ -1,0 +1,608 @@
+{
+  "conclusion": "All four type-I1 invariant rational rank-two subspaces are exhausted. Their toric orbit surfaces have degrees 2,6,6,6. For the three sign-pair cases the boundary-edge orbits have size two, so a proper descended codimension-two linear section has even open degree. In the irreducible hexagon case the boundary-edge orbits have size three, so open degree is divisible by three; moreover its residual torus has non-retract-rational CARAT class (3,6,3). No invariant rank-two subtorus can therefore yield level three by a descended linear one-point OADP slice.",
+  "rank_two_subtori": [
+    {
+      "boundary_edge_orbit_sizes": [
+        2,
+        2
+      ],
+      "cocharacter_basis": [
+        [
+          0,
+          0,
+          0,
+          1,
+          1
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          1
+        ]
+      ],
+      "cocharacter_generator_actions": [
+        [
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            -1
+          ]
+        ],
+        [
+          [
+            -1,
+            0
+          ],
+          [
+            0,
+            1
+          ]
+        ]
+      ],
+      "cox_weight_blocks": {
+        "0,0": [
+          "E1",
+          "E2",
+          "E5",
+          "L34"
+        ],
+        "0,1": [
+          "E3",
+          "L14",
+          "L24",
+          "L45"
+        ],
+        "1,0": [
+          "E4",
+          "L13",
+          "L23",
+          "L35"
+        ],
+        "1,1": [
+          "L12",
+          "L15",
+          "L25",
+          "Q"
+        ]
+      },
+      "name": "sign_square",
+      "orbit_surface_degree": 2,
+      "proper_descended_linear_slice_open_degree_cannot_be_one": true,
+      "quotient_character_carat_class": [
+        3,
+        25,
+        2
+      ],
+      "quotient_character_generator_actions": [
+        [
+          [
+            3,
+            -2,
+            -1
+          ],
+          [
+            4,
+            -3,
+            -1
+          ],
+          [
+            0,
+            0,
+            -1
+          ]
+        ],
+        [
+          [
+            -1,
+            0,
+            0
+          ],
+          [
+            0,
+            -1,
+            0
+          ],
+          [
+            0,
+            -1,
+            1
+          ]
+        ]
+      ],
+      "quotient_torus_rational": true,
+      "weight_polygon_vertices": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "boundary_edge_orbit_sizes": [
+        2,
+        2
+      ],
+      "cocharacter_basis": [
+        [
+          0,
+          0,
+          0,
+          1,
+          1
+        ],
+        [
+          0,
+          0,
+          1,
+          1,
+          0
+        ]
+      ],
+      "cocharacter_generator_actions": [
+        [
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            -1
+          ]
+        ],
+        [
+          [
+            -1,
+            0
+          ],
+          [
+            0,
+            -1
+          ]
+        ]
+      ],
+      "cox_weight_blocks": {
+        "0,0": [
+          "L34"
+        ],
+        "0,1": [
+          "L14",
+          "L24",
+          "L45"
+        ],
+        "0,2": [
+          "E1",
+          "E2",
+          "E5"
+        ],
+        "0,3": [
+          "E3"
+        ],
+        "1,0": [
+          "Q"
+        ],
+        "1,1": [
+          "L13",
+          "L23",
+          "L35"
+        ],
+        "1,2": [
+          "L12",
+          "L15",
+          "L25"
+        ],
+        "1,3": [
+          "E4"
+        ]
+      },
+      "name": "sign_rectangle_1",
+      "orbit_surface_degree": 6,
+      "proper_descended_linear_slice_open_degree_cannot_be_one": true,
+      "quotient_character_carat_class": [
+        3,
+        19,
+        2
+      ],
+      "quotient_character_generator_actions": [
+        [
+          [
+            3,
+            -2,
+            -1
+          ],
+          [
+            4,
+            -3,
+            -1
+          ],
+          [
+            0,
+            0,
+            -1
+          ]
+        ],
+        [
+          [
+            -3,
+            2,
+            0
+          ],
+          [
+            -4,
+            3,
+            0
+          ],
+          [
+            -2,
+            1,
+            1
+          ]
+        ]
+      ],
+      "quotient_torus_rational": true,
+      "weight_polygon_vertices": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          0,
+          3
+        ]
+      ]
+    },
+    {
+      "boundary_edge_orbit_sizes": [
+        2,
+        2
+      ],
+      "cocharacter_basis": [
+        [
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          1,
+          1,
+          0
+        ]
+      ],
+      "cocharacter_generator_actions": [
+        [
+          [
+            -1,
+            0
+          ],
+          [
+            0,
+            -1
+          ]
+        ],
+        [
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            -1
+          ]
+        ]
+      ],
+      "cox_weight_blocks": {
+        "0,0": [
+          "L34"
+        ],
+        "0,1": [
+          "L13",
+          "L23",
+          "L35"
+        ],
+        "0,2": [
+          "E1",
+          "E2",
+          "E5"
+        ],
+        "0,3": [
+          "E4"
+        ],
+        "1,0": [
+          "Q"
+        ],
+        "1,1": [
+          "L14",
+          "L24",
+          "L45"
+        ],
+        "1,2": [
+          "L12",
+          "L15",
+          "L25"
+        ],
+        "1,3": [
+          "E3"
+        ]
+      },
+      "name": "sign_rectangle_2",
+      "orbit_surface_degree": 6,
+      "proper_descended_linear_slice_open_degree_cannot_be_one": true,
+      "quotient_character_carat_class": [
+        3,
+        19,
+        2
+      ],
+      "quotient_character_generator_actions": [
+        [
+          [
+            1,
+            0,
+            -1
+          ],
+          [
+            0,
+            1,
+            -1
+          ],
+          [
+            0,
+            0,
+            -1
+          ]
+        ],
+        [
+          [
+            -1,
+            0,
+            0
+          ],
+          [
+            0,
+            -1,
+            0
+          ],
+          [
+            -2,
+            1,
+            1
+          ]
+        ]
+      ],
+      "quotient_torus_rational": true,
+      "weight_polygon_vertices": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          0,
+          3
+        ]
+      ]
+    },
+    {
+      "boundary_edge_orbit_sizes": [
+        3,
+        3
+      ],
+      "cocharacter_basis": [
+        [
+          1,
+          -1,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          2,
+          1,
+          1,
+          3
+        ]
+      ],
+      "cocharacter_generator_actions": [
+        [
+          [
+            -1,
+            0
+          ],
+          [
+            -1,
+            1
+          ]
+        ],
+        [
+          [
+            1,
+            -1
+          ],
+          [
+            0,
+            -1
+          ]
+        ]
+      ],
+      "cox_weight_blocks": {
+        "0,1": [
+          "L13",
+          "L14"
+        ],
+        "0,2": [
+          "E2",
+          "L15"
+        ],
+        "1,0": [
+          "E5",
+          "L12"
+        ],
+        "1,1": [
+          "E3",
+          "E4",
+          "L34",
+          "Q"
+        ],
+        "1,2": [
+          "L35",
+          "L45"
+        ],
+        "2,0": [
+          "L23",
+          "L24"
+        ],
+        "2,1": [
+          "E1",
+          "L25"
+        ]
+      },
+      "name": "irreducible_hexagon",
+      "orbit_surface_degree": 6,
+      "proper_descended_linear_slice_open_degree_cannot_be_one": true,
+      "quotient_character_carat_class": [
+        3,
+        6,
+        3
+      ],
+      "quotient_character_generator_actions": [
+        [
+          [
+            -3,
+            1,
+            1
+          ],
+          [
+            -4,
+            1,
+            2
+          ],
+          [
+            -4,
+            2,
+            1
+          ]
+        ],
+        [
+          [
+            -7,
+            4,
+            -1
+          ],
+          [
+            -12,
+            7,
+            -2
+          ],
+          [
+            0,
+            0,
+            -1
+          ]
+        ]
+      ],
+      "quotient_torus_rational": false,
+      "weight_polygon_vertices": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          0,
+          2
+        ]
+      ]
+    }
+  ],
+  "rational_representation_decomposition": {
+    "invariant_rank_two_subspace_count": 4,
+    "irreducible_plane_generator_actions": [
+      [
+        [
+          -1,
+          0
+        ],
+        [
+          -1,
+          1
+        ]
+      ],
+      [
+        [
+          1,
+          -1
+        ],
+        [
+          0,
+          -1
+        ]
+      ]
+    ],
+    "multiplicity_free": true,
+    "three_distinct_sign_characters": [
+      [
+        1,
+        -1
+      ],
+      [
+        -1,
+        1
+      ],
+      [
+        -1,
+        -1
+      ]
+    ]
+  },
+  "schema": "c925-i1-rank2-linear-slice-exhaustion-v1"
+}

@@ -1,0 +1,2 @@
+rank2_quotient_character_carat=[ [ 3, 25, 2 ], [ 3, 19, 2 ], [ 3, 19, 2 ], [ 3, 6, 3 ] ]
+rank2_quotient_kunyavskii_rational=[ true, true, true, false ]
