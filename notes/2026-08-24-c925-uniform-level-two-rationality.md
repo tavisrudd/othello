@@ -120,6 +120,12 @@ holds for all four types. Their Corollary 4.3 stable-rationality implication
 for the four minimal types is therefore strengthened to the uniform
 quantitative bound two.
 
+The “up to conjugacy” qualification causes no marking gap. Conjugating in
+\(W(D_5)\) changes the marking of the split exceptional curves and therefore
+permutes the Cox-coordinate description. The tangent certificate is uniform
+on the full smooth two-parameter Cox moduli, so the conjugated marking has the
+same nonempty descended-slice open.
+
 If \(S\) is not \(K\)-minimal, contract a nonempty \(K\)-stable collection of
 disjoint exceptional curves. Iterating produces a del Pezzo surface of degree
 at least five over \(K\); it has a \(K\)-point, the image of any point of
