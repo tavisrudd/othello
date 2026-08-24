@@ -13,8 +13,8 @@ PRESENTATION SPECTRUM IS QUEUED AFTER C953; NO PUSH OR DEPOSIT
 Relative Weight Hierarchies*
 **Standalone paper repository**: `tavisrudd/complete-repair-ports` at
 `~/src/math-papers/complete-repair-ports`
-**Current local standalone commit**: `171da01` (C954 dual failure thresholds;
-verified; no push or deposit)
+**Current local standalone commit**: `113f707` (C954 paper plus corrected Lean
+companion description; verified; no push or deposit)
 **Approved paper license**: MIT
 
 ## Goal
