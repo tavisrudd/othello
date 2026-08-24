@@ -2208,7 +2208,10 @@ result.
   family of complete `(k,2q/3+1)`-arcs, double-complete `(k,q/2+1)`-arcs, or
   double-complete `(k,3q/4+1)`-arcs near the thresholds, or an independent
   structural obstruction showing the true minima are larger.  Owner: C945
-  structured-family gate.
+  structured-family gate.  The separate construction/extremal sequel is queued
+  as C949; see `2026-08-24-c949-sharp-higher-arc-asymptotics.md`.  C949 treats
+  `(OF3)` attainment as conjectural and does not enlarge the present theorem or
+  manuscript gate.
 - **A genuinely stronger `j>=3` application — open.**  The binomial hierarchy
   is formal until a family of minimum hyperplanes has a controlled rank/
   intersection enumerator that yields a new obstruction.  Owner: C945 higher-
