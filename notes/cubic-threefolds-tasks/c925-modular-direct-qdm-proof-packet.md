@@ -95,10 +95,23 @@ plus the 2025 Engel--de Gaay Fortman--Schreieder parity theorem gives an
 all-\(m\) proof for a very general cubic; that preprint result must not be
 promoted to every smooth cubic.
 
+**2026-08-24 boundary correction.**  Tschinkel--Zhang
+(arXiv:2608.20029v1) construct stably rational smooth cubic threefolds over
+\(\mathbf Q\), so the every-smooth all-\(m\) target is false.  Their quartic
+del Pezzo bound also implies \(X\times\mathbf P^{11}\) is rational for their
+\(r=0\) cubic by a function-field argument.  The every-smooth \(m=2\) target
+remains open and becomes the sole endpoint of C925.  Iritani Section 5.8's
+Birkhoff lifting preserves \(q\)-integrality conditional on integrality of
+the whole reconstruction loop, but (5.40) gives genuine positive \(q\)-powers
+at negative-normal centres, so this does not prove (INT-\(\Psi\)); the next
+gate is a joint \((q,z)\)-filtered base-row calculation.  Report:
+`../2026-08-24-c925-int-psi-reconstruction-and-stable-rationality-boundary.md`.
+
 ## Goal
 
-Land the every-smooth \(m=2\) theorem, ideally uniformly in \(m\), without a
-Stokes connector.  Keep the finite consumer and the external geometric
+Land the every-smooth \(m=2\) theorem without a Stokes connector; an
+every-smooth all-\(m\) theorem is false by Tschinkel--Zhang.  Keep the finite
+consumer and the external geometric
 provider separately typed.  The live source targets are exact-period
 exclusion for every correction packet in every codimension, or prior
 inner-orbit provenance followed by native-effective descent and pure-Euler
@@ -314,6 +327,13 @@ realization of that orbit.
   Successor: (INT-\(\Psi\)) beyond the initial slice via Iritani's §5.8
   reconstruction recursion, then chain composition.  Note:
   notes/2026-08-23-c925-fable-stokes-decorated-ledger.md
+- Section 5.8 reconstruction audit and the new stable-rationality boundary:
+  integral Birkhoff lifting is conditional on whole-loop integrality, which
+  fails as an automatic premise at negative-normal centres; the actual base
+  row remains open to a joint \((q,z)\)-filtration.  Tschinkel--Zhang's
+  stably rational cubic threefolds refute the every-smooth all-\(m\) target
+  while leaving \(m=2\) open:
+  notes/2026-08-24-c925-int-psi-reconstruction-and-stable-rationality-boundary.md
 
 The packet index owns the module-to-file map.  Do not append another large
 module to this card or to the index; add one focused companion file and one
@@ -1018,7 +1038,10 @@ The six new terminals report only `propext`, `Classical.choice`, and
 `Quot.sound`.  They use no `native_decide`, generated certificate, or external
 oracle.
 
-3. **All-\(m\) remainder.**  Before the strict equality case, the candidate
+3. **All-\(m\) boundary (closed false).**  Tschinkel--Zhang construct
+   stably rational smooth cubic threefolds, so these tables are now only
+   mechanism diagnostics and cannot support an every-smooth theorem.  Before
+   the strict equality case, the candidate
    center dimensions at \(n=2,3,4,5,14\) are respectively
    \(\{1,2\}\), \(\{1,3\}\), \(\{1,3,4\}\), \(\{1,5\}\), and
    \(\{1,7,8,9,11,13,14\}\).  After a separate strict equality-case
@@ -1033,8 +1056,9 @@ oracle.
    type failures are recorded in
    `../2026-08-21-c925-no-stokes-source-dossier.md`.
 
-No unconditional every-smooth \(m=2\) or all-\(m\) theorem has been landed.
-The very-general all-\(m\) theorem from Voisin plus
+No unconditional every-smooth \(m=2\) theorem has been landed.  The
+every-smooth all-\(m\) target is false by Tschinkel--Zhang.  The very-general
+all-\(m\) theorem from Voisin plus
 Engel--de Gaay Fortman--Schreieder remains a separate benchmark.
 
 ## Geometric route to the same gate: rotation orders and centre dimension

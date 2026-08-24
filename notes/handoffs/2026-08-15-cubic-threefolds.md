@@ -2,7 +2,7 @@
 
 **Lane:** `cubic-threefolds`
 
-**Date:** 2026-08-22
+**Date:** 2026-08-24
 
 > **LIVE MAP ONLY.** This is the routing and state surface for this lane.
 > Per-task detail belongs in the task cards under `notes/cubic-threefolds-tasks/`;
@@ -129,8 +129,9 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   `../2026-08-20-c930-second-referee-pass.md`. Card:
   `../cubic-threefolds-tasks/c930-categorical-direct-qdm-paper-preparation.md`.
 - **C925 — every-smooth stabilization irrationality, active.**
-  **Result boundary:** no unconditional every-smooth \(m=2\) or all-\(m\)
-  theorem has been landed.  The separate Voisin plus
+  **Result boundary:** no unconditional every-smooth \(m=2\) theorem has
+  been landed, and the every-smooth all-\(m\) target is false by
+  Tschinkel--Zhang's stably rational smooth cubic threefolds.  The separate Voisin plus
   Engel--de Gaay Fortman--Schreieder route proves all stabilizations for a
   very general cubic, conditional on the cited 2025 preprint; it does not
   cover Voisin's special universally-\(\mathrm{CH}_0\)-trivial loci.
@@ -302,6 +303,16 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   The tail's spine is now: (INT-\(\Psi\)) beyond the initial slice
   (Iritani §5.8 reconstruction recursion), then chain composition:
   `../2026-08-23-c925-fable-stokes-decorated-ledger.md`.
+  The 2026-08-24 reconstruction audit shows that the Birkhoff recursion is
+  integral only after whole-loop integrality is supplied; Iritani's centre
+  extension (5.40) produces positive \(q\)-powers at negative-normal rational
+  centres, so the next gate is a joint \((q,z)\)-filtered base-row calculation,
+  not plain adic lifting.  Tschinkel--Zhang (arXiv:2608.20029v1) construct
+  stably rational smooth cubic threefolds, definitively closing the
+  every-smooth all-\(m\) target false while leaving \(m=2\) open; their
+  Section 4 bound implies \(X\times\mathbf P^{11}\) is rational for the
+  explicit \(r=0\) cubic by a function-field argument.  Report:
+  `../2026-08-24-c925-int-psi-reconstruction-and-stable-rationality-boundary.md`.
 
 - **C924 — closed 2026-08-19.** The direct ordinary-QDM route proves
   irrationality of `X x P^1` after one mandatory local repair: compare the

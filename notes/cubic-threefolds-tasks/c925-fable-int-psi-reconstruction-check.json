@@ -1,0 +1,19 @@
+{
+  "leg_a": {
+    "base_row_reduction": "(I_2,0)",
+    "division_free": true,
+    "epsilon_precision": 5,
+    "factorization_congruence": "N*P = B mod eps^5",
+    "z_support_exact": true
+  },
+  "leg_b": {
+    "centre": "P1",
+    "codimension": 2,
+    "j_linear_coefficient_mod_H2": "z^-2 - 2*H*z^-3",
+    "normal_bundle": "O(-1)+O(-1)",
+    "normal_degree": -2,
+    "q_exponent_after_5_40": 2
+  },
+  "schema": "c925-int-psi-reconstruction-v1",
+  "scope": "Leg A certifies integral Birkhoff lifting only when the whole input loop is eps-integral. Leg B proves that this premise is not automatic; it does not prove that Iritani's actual base row is nonintegral."
+}
