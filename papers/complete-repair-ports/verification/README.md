@@ -2,7 +2,8 @@
 
 The manuscript has two independently inspectable verification layers.
 
-The paper-local Mathlib package in `lean/` proves the exact sequence attached
+The paper-local Lean 4 package in `lean/`, built against a pinned Mathlib
+revision, proves the exact sequence attached
 to the target/helper split. Its reviewer interface contains four terminals,
 and its kernel axiom audit reports exactly `Classical.choice`, `Quot.sound`,
 and `propext`. The claim map in `lean/verification/claims.json` records one

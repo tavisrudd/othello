@@ -1,7 +1,7 @@
 # Lean companion to *Exact Transfer of Bounded Linear Recovery and Relative Weight Hierarchies*
 
-This Mathlib-only package is the paper-owned formal companion. Its
-reviewer-facing entry point is
+This paper-owned Lean 4 package is the formal companion. It depends on a
+pinned Mathlib revision. Its reviewer-facing entry point is
 
 ```text
 TavisRuddFiniteGeom.Papers.RecoveryStructures.PaperInterface

@@ -57,7 +57,8 @@ changes, convention shifts, and evidence-boundary claims.
 ## Proof and evidence boundary
 
 The manuscript contains human proofs of the complete theorem chain. The
-paper-local Mathlib package in [`lean/`](lean/) kernel-checks the exact sequence
+paper-local Lean 4 package in [`lean/`](lean/), built against a pinned Mathlib
+revision, kernel-checks the exact sequence
 
 ```text
 0 → K_P → D_P → W_P → 0
@@ -100,7 +101,8 @@ axiom-audit instructions in [`lean/README.md`](lean/README.md).
   dependency macros used by the manuscript.
 - `sections/` contains the proofs, applications, conclusion, and verification
   statement.
-- `lean/` is the paper-owned Mathlib companion.
+- `lean/` is the paper-owned Lean 4 companion and depends on a pinned Mathlib
+  revision.
 - `verification/` contains release and evidence checks.
 - `refs.bib` contains the bibliography.
 - `.zenodo.json` contains deposit metadata; it creates no deposit or DOI.
