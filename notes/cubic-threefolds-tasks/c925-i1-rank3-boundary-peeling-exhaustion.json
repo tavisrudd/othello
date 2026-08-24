@@ -29,7 +29,7 @@
     ],
     "nonzero_minor_factorization": "-(a - 1)*(b*z1 - z3)*(a*z1 - a*z3 - b*z1 + b*z2 - z2 + z3)*(a*b*z1*z2 - a*b*z1*z3 + a*z1*z3 - a*z2*z3 - b*z1*z2 + b*z2*z3)"
   },
-  "conclusion": "The four invariant rank-three rational subspaces are exhausted. For three-sign and sign_2-plus-irreducible, every facet orbit spans all weight blocks. For sign_0 and sign_1 plus the irreducible plane, the only nonspanning facet orbits leave the four central Cox coordinates, but the exact tangent minor rules out a tangent hyperplane supported there. Thus no invariant rank-three subtorus supports the direct descended first boundary-divisor peel.",
+  "conclusion": "The four invariant rank-three rational subspaces are exhausted. Their only Galois-stable four-weight windows have affine lattice indices six and two, so no descended unimodular tetrahedron exists. For three-sign and sign_2-plus-irreducible, every facet orbit spans all weight blocks. For sign_0 and sign_1 plus the irreducible plane, the only nonspanning facet orbits leave the four central Cox coordinates, but the exact tangent minor rules out a tangent hyperplane supported there. Thus no invariant rank-three subtorus supports the direct descended first boundary-divisor peel.",
   "full_i3_adjacent_window_tangent_witness": {
     "augmented_rank": 8,
     "boundary_coordinates_with_zero_coefficients": [
@@ -210,6 +210,60 @@
           "orbit_size": 4,
           "uncovered_coordinates": [],
           "uncovered_weights": []
+        }
+      ],
+      "galois_stable_four_weight_windows": [
+        {
+          "affine_lattice_index": 6,
+          "is_unimodular": false,
+          "weights": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              3
+            ],
+            [
+              1,
+              0,
+              3
+            ],
+            [
+              1,
+              1,
+              0
+            ]
+          ]
+        },
+        {
+          "affine_lattice_index": 2,
+          "is_unimodular": false,
+          "weights": [
+            [
+              0,
+              0,
+              2
+            ],
+            [
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              2
+            ]
+          ]
         }
       ],
       "name": "three_sign_lines",
@@ -396,6 +450,7 @@
           ]
         }
       ],
+      "galois_stable_four_weight_windows": [],
       "name": "sign_0_plus_irreducible",
       "orbit_threefold_degree": 18,
       "weight_count": 14
@@ -580,6 +635,7 @@
           ]
         }
       ],
+      "galois_stable_four_weight_windows": [],
       "name": "sign_1_plus_irreducible",
       "orbit_threefold_degree": 18,
       "weight_count": 14
@@ -702,6 +758,7 @@
           "uncovered_weights": []
         }
       ],
+      "galois_stable_four_weight_windows": [],
       "name": "sign_2_plus_irreducible",
       "orbit_threefold_degree": 18,
       "weight_count": 8

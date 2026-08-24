@@ -157,8 +157,9 @@ For a rank-two torus, the natural type-\(I_1\) orbit polytopes are a square,
 two rectangles, and a hexagon. The higher-rank theorem would require a
 Galois-stable unimodular triangle window. The exact rank-two exhaustion shows
 that every available boundary-edge orbit forces open degree divisible by two
-or three. Thus the general theorem explains the level-four success without
-silently implying level three or level two.
+or three. At rank three, the only Galois-stable four-weight windows have
+lattice indices two and six, not one. Thus the general theorem explains the
+level-four success without silently implying level three or level two.
 
 ## Evidence and scope
 

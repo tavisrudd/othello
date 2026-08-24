@@ -251,7 +251,10 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   those leave only `E3,E4,L34,Q`. An exact nonzero eight-by-eight minor after
   deleting those four columns proves that no tangent hyperplane can be
   supported there. Thus the direct descended first boundary-divisor peel is
-  exhausted for every invariant rank-three subtorus. This does not decide
+  exhausted for every invariant rank-three subtorus. Independently, the only
+  Galois-stable four-weight windows have affine lattice indices two and six,
+  so the general unimodular-window OADP theorem also cannot yield level two.
+  This does not decide
   (m=2): an intrinsic invariant field or non-toric base scheme remains.
   Report and certificate:
   `../2026-08-24-c925-rank-three-boundary-peeling-frontier.md`.

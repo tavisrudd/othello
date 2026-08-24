@@ -224,6 +224,22 @@ for name, basis in rank_three_spaces:
     facets = supporting_facets(points)
     orbits = face_orbits(facets, group)
     degree, ehrhart_counts = normalized_volume(points, facets)
+    stable_four_weight_windows = []
+    for window in itertools.combinations(points, 4):
+        window_set = set(window)
+        if all(
+            {action[point] for point in window_set} == window_set
+            for action in group
+        ):
+            origin = sp.Matrix(window[0])
+            index = abs(int(sp.Matrix.hstack(*(
+                sp.Matrix(point)-origin for point in window[1:]
+            )).det()))
+            stable_four_weight_windows.append({
+                "weights": [list(point) for point in window],
+                "affine_lattice_index": index,
+                "is_unimodular": index == 1,
+            })
 
     orbit_records = []
     for orbit in sorted(orbits, key=lambda value: (len(value), sorted(map(sorted, value)))):
@@ -261,12 +277,22 @@ for name, basis in rank_three_spaces:
         "facet_orbits": orbit_records,
         "ehrhart_counts_at_0_1_2_3": ehrhart_counts,
         "orbit_threefold_degree": degree,
+        "galois_stable_four_weight_windows": stable_four_weight_windows,
     })
 
 assert [record["orbit_threefold_degree"] for record in records] == [14, 18, 18, 18]
 assert [[item["orbit_size"] for item in record["facet_orbits"]] for record in records] == [
     [2, 2, 4], [2, 3, 3], [2, 3, 3], [6],
 ]
+assert [
+    [window["affine_lattice_index"] for window in record["galois_stable_four_weight_windows"]]
+    for record in records
+] == [[6, 2], [], [], []]
+assert not any(
+    window["is_unimodular"]
+    for record in records
+    for window in record["galois_stable_four_weight_windows"]
+)
 
 # In the two sign-plus-irreducible cases where a size-three facet orbit does
 # not span every weight block, its complement is always the same four Cox
@@ -389,6 +415,8 @@ certificate = {
     },
     "conclusion": (
         "The four invariant rank-three rational subspaces are exhausted. "
+        "Their only Galois-stable four-weight windows have affine lattice "
+        "indices six and two, so no descended unimodular tetrahedron exists. "
         "For three-sign and sign_2-plus-irreducible, every facet orbit spans "
         "all weight blocks. For sign_0 and sign_1 plus the irreducible plane, "
         "the only nonspanning facet orbits leave the four central Cox "
