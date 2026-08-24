@@ -7,16 +7,19 @@
 The level-two theorem yields two solid consequences beyond merely lowering a
 numerical bound.
 
-1. **The four-type stable-rationality application is quantitatively
-   subsumed.** For every quartic del Pezzo surface in the
-   Tschinkel--Zhang \(I_0,I_1,I_2,I_3\) setting,
+1. **The stable-rationality classification is quantitatively
+   subsumed.** For every stably rational smooth quartic del Pezzo surface in
+   the Tschinkel--Zhang characteristic-zero setting,
 
    \[
    S\times\mathbf A^2\text{ is rational}.
    \]
 
-   Hence the four-type stable-rationality implication in their Corollary 4.3
-   and the conclusions of Propositions 5.1 and 5.2 are corollaries. This does not
+   The minimal case follows uniformly from the full-\(I_3\) window and
+   subgroup restriction; the nonminimal case is already rational after
+   contraction to degree at least five. Hence their Corollary 4.3
+   stable-rationality conclusion and Propositions 5.1 and 5.2 are
+   quantitative corollaries. This does not
    subsume their universal-torsor rationality theorem: the proof uses their
    OADP Lemma 3.2 and tangent-projection Theorem 2.4 as inputs.
 
@@ -69,7 +72,8 @@ calculation and makes future applications to other torsors possible.
 
 - Both explicit cubics have exact stabilization threshold \(s(X)=2\) over
   both \(\mathbf Q\) and \(\mathbf C\).
-- All four quartic-del-Pezzo types have stabilization level at most two,
+- Every stably rational smooth quartic del Pezzo in the stated setting has
+  stabilization level at most two,
   improving the uniform eleven-dimensional construction in
   Tschinkel--Zhang's “Levels of stable rationality” paragraph.
 - The full-\(I_3\) saturated subtorus restricts to \(I_0,I_1,I_2\), so the
@@ -151,7 +155,7 @@ No publisher DOI was located.
 | status | feature | evidence or remaining gate |
 |---|---|---|
 | settled | Does the result do more than lower \(m\)? | Yes: identified cancellation example and stronger type-\(I_1\) theorem. |
-| settled | Which TZ statements become corollaries? | Four-type Corollary 4.3 implication and Propositions 5.1--5.2 stable rationality. |
+| settled | Which TZ statements become corollaries? | Full Corollary 4.3 stable-rationality conclusion and Propositions 5.1--5.2. |
 | settled | Does it subsume TZ torsor rationality? | No; their OADP results are inputs. |
 | open | Global priority | Full database and citation-graph audit. |
 | settled | Types \(I_2,I_3\) at level two | Full-\(I_3\) saturated rank-three window. |

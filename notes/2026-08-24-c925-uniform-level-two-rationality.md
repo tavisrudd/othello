@@ -5,9 +5,7 @@
 ## Theorem
 
 Let \(K\) be an infinite field of characteristic zero and let \(S/K\) be a
-smooth quartic del Pezzo surface with a \(K\)-point whose geometric Picard
-action factors through one of the Tschinkel--Zhang types
-\(I_0,I_1,I_2,I_3\). Then
+stably rational smooth quartic del Pezzo surface with a \(K\)-point. Then
 
 \[
 \boxed{S\times\mathbf A^2\text{ is }K\text{-rational}.} \tag{1}
@@ -122,6 +120,15 @@ holds for all four types. Their Corollary 4.3 stable-rationality implication
 for the four minimal types is therefore strengthened to the uniform
 quantitative bound two.
 
+If \(S\) is not \(K\)-minimal, contract a nonempty \(K\)-stable collection of
+disjoint exceptional curves. Iterating produces a del Pezzo surface of degree
+at least five over \(K\); it has a \(K\)-point, the image of any point of
+\(S(K)\). The classical high-degree del Pezzo theorem makes that surface
+\(K\)-rational, hence \(S\) is already \(K\)-rational. If \(S\) is minimal
+and stably rational, Tschinkel--Zhang Proposition 4.1 and Corollary 4.3 place
+its Picard action in exactly the four types above. This proves (1) for every
+stably rational smooth quartic del Pezzo surface in the stated setting.
+
 The generic-fibre function-field argument in Section 5 then proves (2) for
 both cubic families.
 
@@ -151,11 +158,9 @@ boundary space, merely with a different saturated weight basis.
 
 ## Scope
 
-This theorem strengthens the stable-rationality implication for the four
-minimal Picard-action types used by Tschinkel--Zhang. It does not assert that
-every stably rational quartic del Pezzo surface outside those hypotheses has
-level at most two. Global novelty remains subject to the literature audit
-recorded in the priority-judo synthesis.
+This theorem strengthens the full Tschinkel--Zhang stable-rationality
+classification to a uniform level-two bound. Global novelty remains subject
+to the literature audit recorded in the priority-judo synthesis.
 
 ## Mystery ledger
 
@@ -165,5 +170,5 @@ recorded in the priority-judo synthesis.
 | settled | Full \(I_3\) window | Galois-stable and unimodular. |
 | settled | Types \(I_0,I_1,I_2\) | Restriction from the containing \(I_3\) group. |
 | settled | Both cubic thresholds | \(s(X)=2\). |
-| open | Nonminimal surfaces outside the four-type formulation | Separate birational classification check. |
+| settled | Nonminimal surfaces | Contraction to a rational del Pezzo surface of degree at least five. |
 | open | Explicit rational parametrizations | Constructive formulas not extracted. |

@@ -257,8 +257,11 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   cocharacters. Its four surviving Cox blocks form the same unimodular
   tetrahedron, with the same boundary space, as the type-\(I_1\) slice. The
   residual torus again has rank two. Since \(I_0,I_1,I_2\) embed in \(I_3\)
-  up to conjugacy, all four Tschinkel--Zhang types satisfy
-  \(S\times\mathbf A^2\) rational. Both cubic families therefore satisfy
+  up to conjugacy, all four Tschinkel--Zhang minimal types satisfy
+  \(S\times\mathbf A^2\) rational; nonminimal quartic del Pezzo surfaces
+  contract to rational del Pezzo surfaces of degree at least five. Thus every
+  stably rational smooth quartic del Pezzo in their setting has level at most
+  two. Both cubic families therefore satisfy
   \(X\times\mathbf P^2\) rational, and both cubic threefolds have exact
   threshold \(s(X)=2\). Report and certificate:
   `../2026-08-24-c925-uniform-level-two-rationality.md`.
