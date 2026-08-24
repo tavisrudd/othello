@@ -185,6 +185,17 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   \(X\times\mathbf P^4\) rational. Report:
   `../2026-08-24-c925-uniform-level-four-rationality.md`.
 
+  **General OADP quotient theorem:** the line and cubic slices are now
+  instances of one adjacent-weight principle. If a one-dimensional torus
+  acts on an OADP variety and a Galois-stable linear boundary space contains
+  every weight block except two adjacent ones, a tangent hyperplane restricts
+  to a binomial and meets each open orbit once. Hence the quotient is
+  rational. No normality or rational-normal-curve hypothesis on the orbit
+  closure is needed. This makes the Tschinkel--Zhang level-four theorem a
+  corollary of a reusable result while the exact rank-two polytope exhaustion
+  explains why it does not iterate to level three. Report:
+  `../2026-08-24-c925-adjacent-weight-oadp-quotient-theorem.md`.
+
   **Exact level-three frontier:** for type \(I_1\), the saturated span of
   two sign cocharacters has four Cox weight blocks of size four, so its
   generic orbit closure is a Segre quadric. The residual rank-three

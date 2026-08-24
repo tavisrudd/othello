@@ -104,10 +104,10 @@ a boundary base scheme that is not a union of complete toric divisors.
 
 - `notes/cubic-threefolds-tasks/c925-i1-rank3-boundary-peeling-exhaustion.py`,
   SHA-256
-  `ef13729e30b34d639a156d7a0ef313caba7b097583d1cc0d9d09b4d3517a0a75`;
+  `f03244b75a8e25cc6750256c019b4ee7e056db593c4e90378e776e38e5675c2a`;
 - `notes/cubic-threefolds-tasks/c925-i1-rank3-boundary-peeling-exhaustion.json`,
   SHA-256
-  `0baea0ebf4060466519b773fe9dea7bf889c5ebe1d4db597b2ea77729280b751`.
+  `14c1032f205ece320c37b139d57d6e177f7ac2875247f83a369f08dee7c9aedd`.
 
 Replay from `/home/tavis/src/othello`:
 
@@ -120,7 +120,10 @@ The checker reconstructs the rational representation decomposition, proves
 irreducibility of (W) against all four sign characters, enumerates the four
 rank-three spaces, computes all Cox weights, enumerates supporting facets
 over the integers, closes their affine Galois orbits, computes exact Ehrhart
-degrees, and verifies (5).
+degrees, and verifies (5). It also exhibits an exact tangent covector at
+\((a,b,z_1,z_2,z_3)=(2,5,1,3,7)\) which vanishes on
+\(E_3,E_4,L_{34},Q\) and is nonzero on both full-\(I_3\) middle-weight
+blocks; openness supplies the generic adjacent-window nonvanishing check.
 
 ## Sources and scope
 

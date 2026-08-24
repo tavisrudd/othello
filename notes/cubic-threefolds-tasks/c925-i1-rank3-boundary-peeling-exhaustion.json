@@ -30,6 +30,51 @@
     "nonzero_minor_factorization": "-(a - 1)*(b*z1 - z3)*(a*z1 - a*z3 - b*z1 + b*z2 - z2 + z3)*(a*b*z1*z2 - a*b*z1*z3 + a*z1*z3 - a*z2*z3 - b*z1*z2 + b*z2*z3)"
   },
   "conclusion": "The four invariant rank-three rational subspaces are exhausted. For three-sign and sign_2-plus-irreducible, every facet orbit spans all weight blocks. For sign_0 and sign_1 plus the irreducible plane, the only nonspanning facet orbits leave the four central Cox coordinates, but the exact tangent minor rules out a tangent hyperplane supported there. Thus no invariant rank-three subtorus supports the direct descended first boundary-divisor peel.",
+  "full_i3_adjacent_window_tangent_witness": {
+    "augmented_rank": 8,
+    "boundary_coordinates_with_zero_coefficients": [
+      "E3",
+      "E4",
+      "L34",
+      "Q"
+    ],
+    "conclusion": "The boundary-vanishing tangent linear system has a member nonzero on both adjacent middle weights. This exact witness proves the generic nonvanishing condition by openness.",
+    "middle_weight_one_coordinates": [
+      "L13",
+      "L14",
+      "L23",
+      "L24",
+      "L35",
+      "L45"
+    ],
+    "middle_weight_two_coordinates": [
+      "E1",
+      "E2",
+      "E5",
+      "L12",
+      "L15",
+      "L25"
+    ],
+    "nonzero_tangent_covector_coefficients": {
+      "E1": 210,
+      "E2": -217,
+      "E5": 7,
+      "L12": -1,
+      "L13": 10,
+      "L14": -45,
+      "L15": 7,
+      "L23": -30,
+      "L24": 30
+    },
+    "specialization": {
+      "a": 2,
+      "b": 5,
+      "z1": 1,
+      "z2": 3,
+      "z3": 7
+    },
+    "specialized_jacobian_rank": 8
+  },
   "rank_three_subtori": [
     {
       "affine_weight_group_order": 4,

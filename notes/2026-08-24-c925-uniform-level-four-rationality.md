@@ -31,6 +31,12 @@ not cancellation.
 
 ## Cubic-orbit slice
 
+This construction is a special case of the later adjacent-weight OADP
+quotient theorem in
+`2026-08-24-c925-adjacent-weight-oadp-quotient-theorem.md`: the stable
+boundary space removes weights zero and three, leaving the adjacent window
+of weights one and two.
+
 It suffices to prove (1) for the maximal type-\(I_3\) action: the types
 \(I_0,I_1,I_2\) are subgroups of \(I_3\), and a rational surface is
 trivial. Choose a universal torsor with a point and write

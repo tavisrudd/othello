@@ -327,6 +327,28 @@ for record in records[1:3]:
     assert len(nonspanning) == 2
     assert all(set(item["uncovered_coordinates"]) == central_coordinates for item in nonspanning)
 
+# The full-I3 adjacent-window application uses the same split Cox variety.
+# At one exact dense specialization, exhibit a tangent covector which vanishes
+# on the extreme-weight boundary B but is nonzero on both middle weights.
+# Since these are open rank/nonvanishing conditions, this proves the generic
+# hypothesis in the adjacent-weight OADP lemma.
+middle_weight_one = {"L13", "L14", "L23", "L24", "L35", "L45"}
+middle_weight_two = {"E1", "E2", "E5", "L12", "L15", "L25"}
+tangent_specialization = {a: 2, b: 5, z1: 1, z2: 3, z3: 7}
+specialized_jacobian = jacobian.subs(tangent_specialization)
+assert specialized_jacobian.rank() == 8
+mixed_tangent_coefficients = {
+    "L13": 10, "L14": -45, "L23": -30, "L24": 30,
+    "E1": 210, "E2": -217, "E5": 7, "L12": -1, "L15": 7,
+}
+mixed_tangent_covector = sp.Matrix([[
+    mixed_tangent_coefficients.get(name, 0) for name in cox_names
+]])
+assert all(mixed_tangent_covector[cox_names.index(name)] == 0 for name in central_coordinates)
+assert any(mixed_tangent_covector[cox_names.index(name)] for name in middle_weight_one)
+assert any(mixed_tangent_covector[cox_names.index(name)] for name in middle_weight_two)
+assert sp.Matrix.vstack(specialized_jacobian, mixed_tangent_covector).rank() == 8
+
 certificate = {
     "schema": "c925-i1-rank3-boundary-peeling-exhaustion-v1",
     "rational_representation_decomposition": {
@@ -349,6 +371,20 @@ certificate = {
             "four columns. Hence its rowspace contains no nonzero covector "
             "supported on those columns, so no tangent hyperplane contains "
             "either surviving Galois-stable size-three facet orbit."
+        ),
+    },
+    "full_i3_adjacent_window_tangent_witness": {
+        "specialization": {"a": 2, "b": 5, "z1": 1, "z2": 3, "z3": 7},
+        "boundary_coordinates_with_zero_coefficients": sorted(central_coordinates),
+        "middle_weight_one_coordinates": sorted(middle_weight_one),
+        "middle_weight_two_coordinates": sorted(middle_weight_two),
+        "nonzero_tangent_covector_coefficients": mixed_tangent_coefficients,
+        "specialized_jacobian_rank": 8,
+        "augmented_rank": 8,
+        "conclusion": (
+            "The boundary-vanishing tangent linear system has a member "
+            "nonzero on both adjacent middle weights. This exact witness "
+            "proves the generic nonvanishing condition by openness."
         ),
     },
     "conclusion": (
