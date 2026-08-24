@@ -1,0 +1,712 @@
+# Standalone release-repository map for C684.
+#
+# This file maps physical manuscript roots to local/GitHub repository identities. It does not
+# authorize remote creation or publication. `papers/scripts/export-paper-repos.py` cross-checks
+# paper IDs, source roots, and entry points against `lean/trust/papers.toml`.
+
+schema_version = 1
+
+[destinations]
+local_root = "~/src/math-papers"
+github_owner = "tavisrudd"
+
+[[repository]]
+name = "ame-lu"
+include_release_pdfs = true
+source = "papers/ame_lu"
+paper_ids = ["ame_lu"]
+disposition = "active"
+
+[[repository.exclude_path]]
+path = "adversarial-proof-evidence-audit.md"
+reason = "private review record, not part of the public manuscript repository"
+
+[[repository.exclude_path]]
+path = "claim-proof-novelty-ledger.md"
+reason = "internal claim-development ledger, superseded by the public theorem and verification maps"
+
+[[repository.exclude_path]]
+path = "cross-paper-theorem-ownership.md"
+reason = "internal split-ownership ledger; public theorem ownership is expressed by the two manuscripts and their citations"
+
+[[repository.exclude_path]]
+path = "formal-statement-adequacy.md"
+reason = "internal formalization review record, superseded by the public verification map"
+
+[[repository.exclude_path]]
+path = "formalization-ledger.md"
+reason = "internal formalization work ledger, superseded by the public verification map"
+
+[[repository.exclude_path]]
+path = "second-draft-fix-plan.md"
+reason = "private revision plan, not part of the public manuscript repository"
+
+[[repository.exclude_path]]
+path = "theorem-map.md"
+reason = "internal theorem-adoption ledger; public claims and boundaries remain in the manuscript"
+
+[[repository.exclude_path]]
+path = "verification-map.md"
+reason = "internal lane-to-proof map; public verification contracts remain in the manuscript and supplement"
+
+[[repository.exclude_path]]
+path = "release/PUBLIC-EXPORT.md"
+reason = "private monorepo-to-public export plan, superseded by the standalone repository manifest"
+
+[[repository.exclude_path]]
+path = "release/QUANTUM-CHECKLIST.md"
+reason = "internal submission checklist, not part of the public manuscript repository"
+
+[[repository]]
+name = "mds-css-transversal-groups"
+include_release_pdfs = true
+source = "papers/mds_css_transversal_groups"
+paper_ids = ["mds_css_transversal_groups"]
+disposition = "active"
+
+[[repository.exclude_path]]
+path = "adversarial-proof-evidence-audit.md"
+reason = "private review record, not part of the public manuscript repository"
+
+[[repository.exclude_path]]
+path = "claim-proof-novelty-ledger.md"
+reason = "internal claim-development ledger; public boundaries remain in the manuscript"
+
+[[repository.exclude_path]]
+path = "formalization-ledger.md"
+reason = "internal formalization work ledger; public trust boundaries remain in the manuscript and release contract"
+
+[[repository.exclude_path]]
+path = "second-draft-fix-plan.md"
+reason = "private revision plan, not part of the public manuscript repository"
+
+[[repository.exclude_path]]
+path = "theorem-map.md"
+reason = "internal theorem-adoption ledger; public claims remain in the manuscript"
+
+[[repository.exclude_path]]
+path = "verification-map.md"
+reason = "internal lane-to-proof map; public verification contracts remain in the manuscript and supplement"
+
+[[repository]]
+name = "arcs-complete-outside-conic"
+include_release_pdfs = true
+source = "papers/arcs_complete_outside_conic"
+paper_ids = ["arcs_complete_outside_conic"]
+disposition = "active"
+
+[[repository.exclude_glob]]
+pattern = "analyze_*"
+reason = "private exploratory analysis workspace; the public certificates and replay entry points are retained separately"
+
+[[repository.exclude_glob]]
+pattern = "probe_*"
+reason = "private exploratory search workspace, not part of the public proof surface"
+
+[[repository.exclude_glob]]
+pattern = "size_*"
+reason = "private exploratory sizing calculations outside the paper's public claim boundary"
+
+[[repository.exclude_glob]]
+pattern = "optimize_*"
+reason = "private exploratory optimization workspace, not part of the public proof surface"
+
+[[repository.exclude_glob]]
+pattern = "classify_*"
+reason = "private exploratory classification workspace, superseded by the public certificates"
+
+[[repository.exclude_glob]]
+pattern = "check_c*"
+reason = "lane-named development checks, superseded by the mathematically named public verification bundle"
+
+[[repository.exclude_path]]
+path = "arcs_complete_outside_conic_proof_audit.md"
+reason = "private proof-development audit, superseded by the manuscript verification appendix"
+
+[[repository]]
+name = "beyond4-prs"
+include_release_pdfs = true
+source = "papers/beyond4_prs"
+paper_ids = ["beyond4_prs", "beyond4_prs_submission"]
+disposition = "active"
+
+[[repository.exclude_path]]
+path = "RELEASE-CHECKLIST.md"
+reason = "internal release workflow, not part of the public manuscript repository"
+
+[[repository.exclude_path]]
+path = "adversarial-proof-evidence-audit.md"
+reason = "private review record, not part of the public manuscript repository"
+
+[[repository.exclude_path]]
+path = "claim-proof-novelty-ledger.md"
+reason = "internal claim-development ledger, superseded by the public theorem and verification maps"
+
+[[repository.exclude_path]]
+path = "formalization-ledger.md"
+reason = "internal formalization work ledger, superseded by the public verification map"
+
+[[repository.exclude_path]]
+path = "literature-audit.md"
+reason = "private literature-audit work record; cited public sources remain in the bibliography"
+
+[[repository.exclude_path]]
+path = "second-draft-fix-plan.md"
+reason = "private revision plan, not part of the public manuscript repository"
+
+[[repository.exclude_path]]
+path = "theorem-map.md"
+reason = "internal theorem-adoption ledger; public claims and boundaries remain in the manuscript"
+
+[[repository.exclude_path]]
+path = "verification-map.md"
+reason = "internal lane-to-proof map; public verification contracts remain in the manuscript and supplement"
+
+[[repository.exclude_path]]
+path = "supplement/FINAL-READER-SIGNOFF.md"
+reason = "private pre-release reader workflow, not part of the public reproducibility supplement"
+
+[[repository.exclude_path]]
+path = "supplement/prepare_release_export.py"
+reason = "superseded private-monorepo extraction tool; standalone exports are produced by the portfolio exporter"
+
+[[repository.exclude_path]]
+path = "submission/tit-cover-letter.md"
+reason = "private editor correspondence, not part of the public manuscript repository"
+
+[[repository.exclude_path]]
+path = "submission/tit-submission-checklist.md"
+reason = "internal submission checklist, not part of the public manuscript repository"
+
+[[repository]]
+name = "clebsch-factorization"
+include_release_pdfs = true
+source = "papers/clebsch-factorization"
+paper_ids = ["clebsch_factorization"]
+disposition = "active"
+
+[[repository]]
+name = "clebsch-passages"
+include_release_pdfs = true
+source = "papers/clebsch-passages"
+paper_ids = ["clebsch_passages"]
+disposition = "active"
+
+[[repository.rewrite]]
+path = "verification/README.md"
+old = "papers/clebsch-passages/"
+new = ""
+expected_count = 14
+reason = "commands are executed from the standalone repository root after flattening"
+
+[[repository]]
+name = "clebsch-rigidity"
+include_release_pdfs = true
+source = "papers/clebsch-rigidity"
+paper_ids = ["clebsch_rigidity", "clebsch_rigidity_companion"]
+disposition = "active"
+
+[[repository]]
+name = "chordal-conference-reconstruction"
+include_release_pdfs = true
+source = "papers/chordal-conference-reconstruction"
+paper_ids = ["chordal_conference_reconstruction"]
+disposition = "active"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = "TEXSHELL ?= nix develop ..\\#manuscript --command"
+new = "TEXSHELL ?= nix develop .\\#manuscript --command"
+expected_count = 1
+reason = "the standalone repository carries its own pinned manuscript flake"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = ".PHONY: all check evidence lint manuscript warnings clean distclean"
+new = ".PHONY: all check evidence manuscript warnings clean distclean"
+expected_count = 1
+reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = "all: lint manuscript\n\ncheck: evidence lint manuscript warnings"
+new = "all: manuscript\n\ncheck: evidence manuscript warnings"
+expected_count = 1
+reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = "lint:\n\t$(PYTHON) ../scripts/lint_tex_spacing.py $(SOURCE)\n\n"
+new = ""
+expected_count = 1
+reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = "manuscript: $(SOURCE)\n\t$(PYTHON) ../scripts/lint_tex_spacing.py $(SOURCE)\n"
+new = "manuscript: $(SOURCE)\n"
+expected_count = 1
+reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
+
+[[repository]]
+name = "complete-repair-ports"
+include_release_pdfs = true
+release_output_policy = "immutable-source"
+source = "papers/complete-repair-ports"
+paper_ids = ["complete_repair_ports"]
+disposition = "active"
+
+[[repository.exclude_path]]
+path = "adversarial_novelty_review.md"
+reason = "private review record, not part of the public manuscript repository"
+
+[[repository.exclude_path]]
+path = "claim-proof-novelty-ledger.md"
+reason = "internal claim-development ledger; public boundaries are stated in the manuscript"
+
+[[repository.exclude_path]]
+path = "formal-statement-adequacy.md"
+reason = "internal formalization review record; the appendix states the public trust boundary"
+
+[[repository.exclude_path]]
+path = "formalization-ledger.md"
+reason = "internal formalization work ledger; the appendix states the public theorem map"
+
+[[repository.exclude_path]]
+path = "proof_ledger.md"
+reason = "internal proof-development ledger, superseded by the manuscript proofs and appendix"
+
+[[repository.exclude_path]]
+path = "referee-dossier.md"
+reason = "private cold-read context, not part of the public manuscript repository"
+
+[[repository.exclude_path]]
+path = "second-draft-fix-plan.md"
+reason = "private revision plan, not part of the public manuscript repository"
+
+[[repository.exclude_path]]
+path = "theorem-map.md"
+reason = "internal theorem-adoption ledger; public claims remain in the manuscript"
+
+[[repository.exclude_path]]
+path = "verification-map.md"
+reason = "internal lane-to-proof map; the appendix states the public verification boundary"
+
+[[repository]]
+name = "continuation-graph-rigidity"
+source = "papers/continuation-graph-rigidity"
+paper_ids = ["continuation_graph_rigidity"]
+disposition = "active"
+
+[[repository.exclude_symlink]]
+path = "2026-07-10-continuation-graph-rigidity-upgrades.md"
+reason = "private research-planning note, not part of the public manuscript repository"
+
+[[repository.exclude_symlink]]
+path = "2026-07-11-continuation-rigidity-audit-scope.md"
+reason = "private audit-scope note, not part of the public manuscript repository"
+
+[[repository]]
+name = "cubic-stabilization-m1"
+include_release_pdfs = true
+source = "papers/cubic-stabilization-m1"
+paper_ids = ["cubic_stabilization_m1"]
+disposition = "active"
+
+[[repository.exclude_path]]
+path = "claim-proof-novelty-ledger.md"
+reason = "private claim-development and priority ledger, superseded publicly by the manuscript"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = "TEXSHELL ?= nix develop ..\\#manuscript --command"
+new = "TEXSHELL ?= nix develop .\\#manuscript --command"
+expected_count = 1
+reason = "the standalone repository carries its own pinned manuscript flake"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = ".PHONY: all check lint formal-static formal-audit manuscript warnings clean distclean"
+new = ".PHONY: all check formal-static formal-audit manuscript warnings clean distclean"
+expected_count = 1
+reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = "all: lint manuscript\n\ncheck: lint formal-static manuscript warnings"
+new = "all: manuscript\n\ncheck: formal-static manuscript warnings"
+expected_count = 1
+reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = "lint:\n\t$(PYTHON) ../scripts/lint_tex_spacing.py $(SOURCE) sections/*.tex\n\n"
+new = ""
+expected_count = 1
+reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = "manuscript: $(SOURCE) sections/*.tex\n\t$(PYTHON) ../scripts/lint_tex_spacing.py $(SOURCE) sections/*.tex\n"
+new = "manuscript: $(SOURCE) sections/*.tex\n"
+expected_count = 1
+reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
+
+[[repository]]
+name = "integral-secant-arcs"
+include_release_pdfs = true
+release_output_policy = "immutable-source"
+source = "papers/integral_secant_arcs"
+paper_ids = ["integral_secant_arcs"]
+disposition = "active"
+
+[[repository.exclude_path]]
+path = "claim-proof-novelty-ledger.md"
+reason = "private claim-development ledger, not part of the public manuscript repository"
+
+[[repository.exclude_path]]
+path = "literature-audit.md"
+reason = "internal literature-audit record; cited public sources remain in the bibliography"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = "TEXSHELL ?= nix develop ..\\#manuscript --command"
+new = "TEXSHELL ?= nix develop .\\#manuscript --command"
+expected_count = 1
+reason = "the standalone repository carries its own pinned manuscript flake"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = ".PHONY: all check lint evidence formal-static formal-audit manuscript warnings clean distclean"
+new = ".PHONY: all check evidence formal-static formal-audit manuscript warnings clean distclean"
+expected_count = 1
+reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = "all: lint manuscript\n\ncheck: lint evidence formal-static manuscript warnings"
+new = "all: manuscript\n\ncheck: evidence formal-static manuscript warnings"
+expected_count = 1
+reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = "lint:\n\t$(PYTHON) ../scripts/lint_tex_spacing.py $(SOURCE) sections/*.tex\n\n"
+new = ""
+expected_count = 1
+reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = "manuscript: $(SOURCE) sections/*.tex\n\t$(PYTHON) ../scripts/lint_tex_spacing.py $(SOURCE) sections/*.tex\n"
+new = "manuscript: $(SOURCE) sections/*.tex\n"
+expected_count = 1
+reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
+
+[[repository]]
+name = "discrepancy-one-flips"
+include_release_pdfs = true
+source = "papers/discrepancy-one-flips"
+paper_ids = ["discrepancy_one_flips"]
+disposition = "active"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = "TEXSHELL ?= nix develop ..\\#manuscript --command"
+new = "TEXSHELL ?= nix develop .\\#manuscript --command"
+expected_count = 1
+reason = "the standalone repository carries its own pinned manuscript flake"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = ".PHONY: all check lint manuscript warnings clean distclean"
+new = ".PHONY: all check manuscript warnings clean distclean"
+expected_count = 1
+reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = "all: lint manuscript\n\ncheck: lint manuscript warnings"
+new = "all: manuscript\n\ncheck: manuscript warnings"
+expected_count = 1
+reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = "lint:\n\t$(PYTHON) ../scripts/lint_tex_spacing.py $(SOURCE) sections/*.tex\n\n"
+new = ""
+expected_count = 1
+reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = "manuscript: $(SOURCE) sections/*.tex\n\t$(PYTHON) ../scripts/lint_tex_spacing.py $(SOURCE) sections/*.tex\n"
+new = "manuscript: $(SOURCE) sections/*.tex\n"
+expected_count = 1
+reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
+
+[[repository]]
+name = "cubic-stabilization-irrationality"
+include_release_pdfs = true
+release_output_policy = "immutable-source"
+source = "papers/cubic-stabilization-irrationality"
+paper_ids = ["cubic_stabilization_irrationality"]
+disposition = "active"
+
+[[repository.exclude_path]]
+path = "claim-proof-novelty-ledger.md"
+reason = "internal claim-development ledger; public claim boundaries remain in the manuscript"
+
+[[repository.exclude_path]]
+path = "literature-audit.md"
+reason = "private source-depth audit; cited public sources remain in the bibliography"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = "TEXSHELL ?= nix develop ..\\#manuscript --command"
+new = "TEXSHELL ?= nix develop .\\#manuscript --command"
+expected_count = 1
+reason = "the standalone repository carries its own pinned manuscript flake"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = ".PHONY: all check evidence lint manuscript warnings manuscript-check manuscript-update clean distclean"
+new = ".PHONY: all check evidence manuscript warnings manuscript-check manuscript-update clean distclean"
+expected_count = 1
+reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = "all: evidence lint manuscript-check\n\ncheck: evidence lint manuscript-check"
+new = "all: evidence manuscript-check\n\ncheck: evidence manuscript-check"
+expected_count = 1
+reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = "lint:\n\t$(PYTHON) ../scripts/lint_tex_spacing.py $(SOURCE) sections/*.tex\n\n"
+new = ""
+expected_count = 1
+reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = "manuscript: $(SOURCE) sections/*.tex refs.bib\n\t$(PYTHON) ../scripts/lint_tex_spacing.py $(SOURCE) sections/*.tex\n"
+new = "manuscript: $(SOURCE) sections/*.tex refs.bib\n"
+expected_count = 1
+reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
+
+[[repository]]
+name = "cubic-gluing-resolvent"
+include_release_pdfs = true
+release_output_policy = "immutable-source"
+source = "papers/cubic-gluing-resolvent"
+paper_ids = ["cubic_gluing_resolvent"]
+disposition = "active"
+
+[[repository.exclude_path]]
+path = "claim-proof-novelty-ledger.md"
+reason = "private claim and priority ledger, not part of the public manuscript repository"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = "TEXSHELL ?= nix develop ..\\#manuscript --command"
+new = "TEXSHELL ?= nix develop .\\#manuscript --command"
+expected_count = 1
+reason = "the standalone repository carries the same pinned manuscript shell"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = ".PHONY: all check lint evidence manuscript warnings clean distclean"
+new = ".PHONY: all check evidence manuscript warnings clean distclean"
+expected_count = 1
+reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = "check: lint evidence manuscript warnings"
+new = "check: evidence manuscript warnings"
+expected_count = 1
+reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = "lint:\n\t$(PYTHON) ../scripts/lint_tex_spacing.py $(SOURCE)\n\n"
+new = ""
+expected_count = 1
+reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = "manuscript: $(SOURCE)\n\t$(PYTHON) ../scripts/lint_tex_spacing.py $(SOURCE)\n"
+new = "manuscript: $(SOURCE)\n"
+expected_count = 1
+reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
+
+[[repository]]
+name = "dihedral-schreier-node-kayles"
+source = "papers/dihedral-schreier-node-kayles"
+paper_ids = ["dihedral_schreier_node_kayles"]
+disposition = "gated"
+gate = "repair the documented even-h classification error and complete the polyhedral integration before removing rendered phase notes"
+
+[[repository.exclude_symlink]]
+path = "2026-07-04-cayley-nodekayles-outcome-law.md"
+reason = "private research note, not part of the public manuscript repository"
+
+[[repository.exclude_symlink]]
+path = "2026-07-12-conic-involution-residual-graphs.md"
+reason = "private research note, not part of the public manuscript repository"
+
+[[repository.exclude_symlink]]
+path = "2026-07-12-conic-involution-schreier-graphs.md"
+reason = "private research note, not part of the public manuscript repository"
+
+[[repository.exclude_symlink]]
+path = "2026-07-12-dihedral-schreier-node-kayles-submission.md"
+reason = "private submission-planning note, not part of the public manuscript repository"
+
+[[repository.exclude_symlink]]
+path = "2026-07-12-polyhedral-nk-templates.md"
+reason = "private research note, not part of the public manuscript repository"
+
+[[repository]]
+name = "equivariant-robust-completion"
+include_release_pdfs = true
+source = "papers/equivariant-robust-completion"
+paper_ids = ["equivariant_robust_completion"]
+disposition = "active"
+
+[[repository]]
+name = "conference-cut-spectra"
+include_release_pdfs = true
+release_output_policy = "immutable-source"
+source = "papers/conference-cut-spectra"
+paper_ids = ["conference_cut_spectra"]
+disposition = "active"
+
+[[repository]]
+name = "golden-operator"
+source = "papers/golden-operator"
+paper_ids = ["golden_operator"]
+disposition = "gated"
+gate = "source programme is not adopted as a standalone publication"
+
+[[repository]]
+name = "hodge-atom-marker-ledger"
+include_release_pdfs = true
+release_output_policy = "immutable-source"
+source = "papers/hodge-atom-marker-ledger"
+paper_ids = ["hodge_atom_marker_ledger"]
+disposition = "active"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = ".PHONY: all check lint manuscript warnings clean distclean"
+new = ".PHONY: all check manuscript warnings clean distclean"
+expected_count = 1
+reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = "all: lint manuscript\n\ncheck: lint manuscript warnings"
+new = "all: manuscript\n\ncheck: manuscript warnings"
+expected_count = 1
+reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = "lint:\n\t$(PYTHON) ../scripts/lint_tex_spacing.py $(SOURCE) sections/*.tex\n\n"
+new = ""
+expected_count = 1
+reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = "manuscript: $(SOURCE) sections/*.tex\n\t$(PYTHON) ../scripts/lint_tex_spacing.py $(SOURCE) sections/*.tex\n"
+new = "manuscript: $(SOURCE) sections/*.tex\n"
+expected_count = 1
+reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
+
+[[repository]]
+name = "q13-passant-code"
+include_release_pdfs = true
+source = "papers/q13-passant-code"
+paper_ids = ["passant_code_q13"]
+disposition = "active"
+
+[[repository.exclude_glob]]
+pattern = "lean-certificates/**"
+reason = "the formal companion depends on the shared Lean library by a monorepo-relative path and is deposited separately once that library is published and pinned"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = "all: lint passant_code_q13.pdf\n\ncheck: evidence lean lint manuscript\n"
+new = "all: passant_code_q13.pdf\n\ncheck: evidence manuscript\n"
+expected_count = 1
+reason = "the formal companion and the monorepo-wide TeX lint helper are outside the standalone repository boundary"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = "lean:\n\tcd lean-certificates && nix develop --command lake build \\\n\t\tPassantCodeQ13.Gates.Main PassantCodeQ13.Gates.AxiomAudit\n\nlint:\n\tpython3 ../scripts/lint_tex_spacing.py $(SOURCE)\n\n"
+new = ""
+expected_count = 1
+reason = "the formal companion and the monorepo-wide TeX lint helper are outside the standalone repository boundary"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = ".PHONY: all check evidence lean lint manuscript warnings clean distclean"
+new = ".PHONY: all check evidence manuscript warnings clean distclean"
+expected_count = 1
+reason = "the formal companion and the monorepo-wide TeX lint helper are outside the standalone repository boundary"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = "passant_code_q13.pdf: $(SOURCE)\n\tpython3 ../scripts/lint_tex_spacing.py $(SOURCE)\n"
+new = "passant_code_q13.pdf: $(SOURCE)\n"
+expected_count = 1
+reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
+
+[[repository]]
+name = "blown-up-theta-lattice"
+include_release_pdfs = true
+release_output_policy = "immutable-source"
+source = "papers/blown-up-theta-lattice"
+paper_ids = ["blown_up_theta_lattice"]
+disposition = "active"
+
+[[repository.exclude_path]]
+path = "claim-proof-novelty-ledger.md"
+reason = "private claim and priority ledger, not part of the public manuscript repository"
+
+[[repository.exclude_path]]
+path = "literature-audit.md"
+reason = "private literature-audit record, not part of the public manuscript repository"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = ".PHONY: all check lint manuscript warnings clean distclean"
+new = ".PHONY: all check manuscript warnings clean distclean"
+expected_count = 1
+reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = "all: lint manuscript\n\ncheck: lint manuscript warnings"
+new = "all: manuscript\n\ncheck: manuscript warnings"
+expected_count = 1
+reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = "lint:\n\t$(PYTHON) ../scripts/lint_tex_spacing.py $(SOURCE) sections/*.tex\n\n"
+new = ""
+expected_count = 1
+reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
+
+[[repository.rewrite]]
+path = "Makefile"
+old = "manuscript: $(SOURCE) sections/*.tex refs.bib\n\t$(PYTHON) ../scripts/lint_tex_spacing.py $(SOURCE) sections/*.tex\n"
+new = "manuscript: $(SOURCE) sections/*.tex refs.bib\n"
+expected_count = 1
+reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"

@@ -236,6 +236,28 @@ lean_terminals = [
 ]
 
 [[paper]]
+id = "integral_secant_arcs"
+dir = "papers/integral_secant_arcs"
+main = "integral_secant_arcs.tex"
+lane = "relconic"
+adopted_labels = [
+  "thm:characteristic-three",
+  "thm:factor-pair",
+  "thm:characteristic-two",
+]
+manifest = "lean/verification/claims.json"
+manifest_labels = "claims[].manuscript_label"
+lean_terminals = [
+  "TavisRuddFiniteGeom.Papers.IntegralSecantArcs.characteristicThree_affine_bounds",
+  "TavisRuddFiniteGeom.Papers.IntegralSecantArcs.coefficient_difference_factorization",
+  "TavisRuddFiniteGeom.Papers.IntegralSecantArcs.characteristicTwo_odd_affine_bounds",
+  "TavisRuddFiniteGeom.Papers.IntegralSecantArcs.characteristicTwo_even_affine_bounds",
+  "TavisRuddFiniteGeom.Papers.IntegralSecantArcs.balanced_twicePairCount_lower",
+  "TavisRuddFiniteGeom.Papers.IntegralSecantArcs.integerPairIntervals_overlap",
+  "TavisRuddFiniteGeom.Papers.IntegralSecantArcs.rationalEqualityParameters_satisfy_equations",
+]
+
+[[paper]]
 id = "dihedral_schreier_node_kayles"
 dir = "papers/dihedral-schreier-node-kayles"
 main = "dihedral_schreier_node_kayles.tex"

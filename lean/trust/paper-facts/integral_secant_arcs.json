@@ -1,0 +1,485 @@
+{
+  "bibliography": [
+    {
+      "key": "AdriaensenSzonyiWeiner",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/integral_secant_arcs/integral_secant_arcs.tex"
+    },
+    {
+      "key": "AlabdullahHirschfeld",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/integral_secant_arcs/integral_secant_arcs.tex"
+    },
+    {
+      "key": "BMS",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/integral_secant_arcs/integral_secant_arcs.tex"
+    },
+    {
+      "key": "BallFancsali",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/integral_secant_arcs/integral_secant_arcs.tex"
+    },
+    {
+      "key": "BartoliTimpanella",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/integral_secant_arcs/integral_secant_arcs.tex"
+    },
+    {
+      "key": "BastioniMicheli",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/integral_secant_arcs/integral_secant_arcs.tex"
+    },
+    {
+      "key": "BekerMitchellPiper",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/integral_secant_arcs/integral_secant_arcs.tex"
+    },
+    {
+      "key": "CalderbankKantor",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/integral_secant_arcs/integral_secant_arcs.tex"
+    },
+    {
+      "key": "CsajbokWeiner",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/integral_secant_arcs/integral_secant_arcs.tex"
+    },
+    {
+      "key": "KNS",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/integral_secant_arcs/integral_secant_arcs.tex"
+    },
+    {
+      "key": "Kohnert",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/integral_secant_arcs/integral_secant_arcs.tex"
+    },
+    {
+      "key": "LundSaraf",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/integral_secant_arcs/integral_secant_arcs.tex"
+    },
+    {
+      "key": "MurphyPetridis",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/integral_secant_arcs/integral_secant_arcs.tex"
+    },
+    {
+      "key": "Ramani",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/integral_secant_arcs/integral_secant_arcs.tex"
+    },
+    {
+      "key": "SWeven",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/integral_secant_arcs/integral_secant_arcs.tex"
+    },
+    {
+      "key": "SWmodp",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/integral_secant_arcs/integral_secant_arcs.tex"
+    },
+    {
+      "key": "Schillewaert",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/integral_secant_arcs/integral_secant_arcs.tex"
+    }
+  ],
+  "dir": "papers/integral_secant_arcs",
+  "environment_counts": {
+    "corollary": 4,
+    "lemma": 8,
+    "proposition": 1,
+    "remark": 1,
+    "theorem": 4
+  },
+  "labels": [
+    {
+      "environment": "corollary",
+      "label": "cor:blocking-set-form"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:mixing-relaxation"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:n-secant-feasibility"
+    },
+    {
+      "environment": "corollary",
+      "label": "cor:projective-codes"
+    },
+    {
+      "environment": "align",
+      "label": "eq:D-characteristic-three"
+    },
+    {
+      "environment": "align",
+      "label": "eq:E-characteristic-three"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:F-definition"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:F-difference"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:T-localization"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:T-minimum"
+    },
+    {
+      "environment": "gather",
+      "label": "eq:T-range"
+    },
+    {
+      "environment": "gather",
+      "label": "eq:arc-integer-condition"
+    },
+    {
+      "environment": "align",
+      "label": "eq:c-balanced"
+    },
+    {
+      "environment": "align",
+      "label": "eq:c-integer"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:characteristic-three-asymptotic"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:characteristic-three-bound"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:characteristic-three-linear-bounds"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:characteristic-three-minimum"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:characteristic-two-asymptotic"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:characteristic-two-bound"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:characteristic-two-linear"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:classical-arc-bound"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:coverage-linear"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:even-repair-bound"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:even-type-repair"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:factor-pair-bound"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:first-integer-coefficients"
+    },
+    {
+      "environment": "align",
+      "label": "eq:h-star"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:integer-incidence-bound"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:interval-overlap"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:lambda-coverage"
+    },
+    {
+      "environment": "align",
+      "label": "eq:n-secant-incidences"
+    },
+    {
+      "environment": "align",
+      "label": "eq:n-secant-pairs"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:odd-repair-bound"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:open-asymptotic"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:pair-linear"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:pair-partition"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:pair-slack-characteristic-three"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:pencil-bounds"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:phi-max"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:phi-min"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:projective-design-parameters"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:rational-discriminant"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:rational-parameter-values"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:rational-system"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:real-relaxation"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:repair-excess-exact"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:repair-excess-lower"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:repair-support-bound"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:rounding-remainder"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:simultaneous-equality-divisibility"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:strict-gap"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:support-one-obstruction"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:degree-extrema"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:even-type-case"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:no-uncorrected-characteristic-three"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:pencil-bounds"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:rational-parameters"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:repair-parity"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:repair-support"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:secant-number-near-equality"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:simultaneous-equality"
+    },
+    {
+      "environment": "remark",
+      "label": "rem:ordinary-completeness"
+    },
+    {
+      "environment": "",
+      "label": "sec:characteristic-two"
+    },
+    {
+      "environment": "",
+      "label": "sec:conclusion"
+    },
+    {
+      "environment": "",
+      "label": "sec:integer-envelopes"
+    },
+    {
+      "environment": "",
+      "label": "sec:modular-stability"
+    },
+    {
+      "environment": "",
+      "label": "sec:n-secants"
+    },
+    {
+      "environment": "",
+      "label": "sec:rational-parameters"
+    },
+    {
+      "environment": "",
+      "label": "sec:translations"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:characteristic-three"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:characteristic-two"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:factor-pair"
+    },
+    {
+      "environment": "theorem",
+      "label": "thm:paired-envelope"
+    }
+  ],
+  "main": "papers/integral_secant_arcs/integral_secant_arcs.tex",
+  "manifest_labels": [
+    "thm:characteristic-three",
+    "thm:factor-pair",
+    "thm:characteristic-two",
+    "lem:degree-extrema",
+    "thm:paired-envelope",
+    "cor:mixing-relaxation",
+    "lem:pencil-bounds",
+    "cor:n-secant-feasibility",
+    "lem:rational-parameters",
+    "lem:secant-number-near-equality",
+    "prop:simultaneous-equality",
+    "lem:repair-support",
+    "lem:no-uncorrected-characteristic-three",
+    "lem:even-type-case",
+    "lem:repair-parity",
+    "cor:blocking-set-form",
+    "cor:projective-codes"
+  ],
+  "paper": "integral_secant_arcs",
+  "pdfs": [
+    {
+      "bytes": 138860,
+      "pages": 14,
+      "path": "papers/integral_secant_arcs/integral_secant_arcs.pdf",
+      "sha256": "ea5607775c9190c9dcbce3c5ff0e4ce294222b049fc9faf543334c6b7a34fa49"
+    }
+  ],
+  "schema_version": 1,
+  "sources": [
+    {
+      "path": "papers/integral_secant_arcs/integral_secant_arcs.tex",
+      "sha256": "48994a746d6244390b7c07d00a90428a7feac9b9a0b5b28f0961f25768795f0a"
+    },
+    {
+      "path": "papers/integral_secant_arcs/formal-annotations.tex",
+      "sha256": "e35bad8668cd91db9b6e1de818418b8f21b5490fa980b7440177d7e0aa4e364c"
+    },
+    {
+      "path": "papers/integral_secant_arcs/sections/01-introduction.tex",
+      "sha256": "1047d295dc56125d4d010e16dfb30465dddb16b0ec85ab5c9004a9f1304866a8"
+    },
+    {
+      "path": "papers/integral_secant_arcs/sections/02-integer-envelopes.tex",
+      "sha256": "d59faf76da946090fb29219c0a31c79ab697d81c79de3bc7754f690e9bbf7dc9"
+    },
+    {
+      "path": "papers/integral_secant_arcs/sections/03-maximal-secants.tex",
+      "sha256": "c7af6bf2f65554d6a24c78de81d04a6f68a2075dac412f546f406d3c9c6998d4"
+    },
+    {
+      "path": "papers/integral_secant_arcs/sections/04-rational-parameters.tex",
+      "sha256": "e2e5bc69c68294d12d725d99e4d20a00aab62d2fa4e47bc7ebe78d79dbcb0742"
+    },
+    {
+      "path": "papers/integral_secant_arcs/sections/05-modular-stability.tex",
+      "sha256": "d01f246cca6a1a4d9aa482edaf27694e413117d9c01b2b45a10e6793415e78a3"
+    },
+    {
+      "path": "papers/integral_secant_arcs/sections/06-characteristic-two.tex",
+      "sha256": "086235f86186be4f36b5b6907ae811b80a2a7b6c442b6c0dd589fa58f13fd65a"
+    },
+    {
+      "path": "papers/integral_secant_arcs/sections/07-translations.tex",
+      "sha256": "f3fbf5dc67cef7da1e014ae0c55cec37d76b5732f8b6f39575693ed441787d77"
+    }
+  ],
+  "title": "Integral Secant Distributions and Improved Bounds for Complete \\texorpdfstring{\\((k,n)\\)}{(k,n)}-Arcs",
+  "title_normalized": "integral secant distributions and improved bounds for complete \\((k,n)\\)(k,n)-arcs",
+  "untracked_bibliography": [
+    "papers/integral_secant_arcs/lean/.lake/packages/mathlib/docs/references.bib"
+  ]
+}
