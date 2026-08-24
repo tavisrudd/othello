@@ -7,31 +7,29 @@
 The level-two theorem yields two solid consequences beyond merely lowering a
 numerical bound.
 
-1. **The type-\(I_1\) stable-rationality application is quantitatively
-   subsumed.** For every type-\(I_1\) quartic del Pezzo surface in the
-   Tschinkel--Zhang setting,
+1. **The four-type stable-rationality application is quantitatively
+   subsumed.** For every quartic del Pezzo surface in the
+   Tschinkel--Zhang \(I_0,I_1,I_2,I_3\) setting,
 
    \[
    S\times\mathbf A^2\text{ is rational}.
    \]
 
-   Hence the type-\(I_1\) part of their Corollary 4.3 and the stable
-   rationality conclusion of Proposition 5.1 are corollaries. This does not
+   Hence the four-type stable-rationality implication in their Corollary 4.3
+   and the conclusions of Propositions 5.1 and 5.2 are corollaries. This does not
    subsume their universal-torsor rationality theorem: the proof uses their
    OADP Lemma 3.2 and tangent-projection Theorem 2.4 as inputs.
 
 2. **Their stated birational \(\mathbf A^1\)-cancellation construction
-   problem gets a single identified answer.** For the explicit cubic
-   threefold \(X/\mathbf Q\) in Proposition 5.1,
+   problem gets identified answers.** The Proposition 5.1 example is
 
    \[
    (x_4-2x_3)x_1^2+3(x_4+2x_3)x_2^2
    +3x_3^2x_4-x_4^3+x_5^3=0,
    \]
 
-   \[
-   Y=X\times\mathbf P^1
-   \]
+   For either explicit cubic threefold \(X/\mathbf Q\) in Propositions 5.1
+   and 5.2, \(Y=X\times\mathbf P^1\)
 
    is smooth projective and nonrational, while
 
@@ -61,14 +59,13 @@ calculation and makes future applications to other torsors possible.
 
 ## Further implications
 
-- The explicit type-\(I_1\) cubic has exact stabilization threshold
-  \(s(X)=2\) over both \(\mathbf Q\) and \(\mathbf C\).
-- The type-\(I_1\) quartic-del-Pezzo stabilization level is at most two,
+- Both explicit cubics have exact stabilization threshold \(s(X)=2\) over
+  both \(\mathbf Q\) and \(\mathbf C\).
+- All four quartic-del-Pezzo types have stabilization level at most two,
   improving the uniform eleven-dimensional construction in
   Tschinkel--Zhang's “Levels of stable rationality” paragraph.
-- The old type-\(I_0\) level-two result and the new type-\(I_1\) theorem now
-  place both types at level at most two; types \(I_2\) and \(I_3\) remain the
-  natural quantitative frontier.
+- The full-\(I_3\) saturated subtorus restricts to \(I_0,I_1,I_2\), so the
+  same theorem treats the complete four-type list uniformly.
 - Any every-smooth \(m=2\) cubic-threefold irrationality theorem is false.
   A quantum obstruction at level two must exclude the type-\(I_1\) family or
   detect a hypothesis that fails there.
@@ -115,7 +112,7 @@ No publisher DOI was located.
 ## Evidence
 
 - theorem and certificates:
-  notes/2026-08-24-c925-type-i1-level-two-rationality.md;
+  notes/2026-08-24-c925-uniform-level-two-rationality.md;
 - general quotient theorem:
   notes/2026-08-24-c925-adjacent-weight-oadp-quotient-theorem.md;
 - corrected saturation record:
@@ -126,7 +123,7 @@ No publisher DOI was located.
 | status | feature | evidence or remaining gate |
 |---|---|---|
 | settled | Does the result do more than lower \(m\)? | Yes: identified cancellation example and stronger type-\(I_1\) theorem. |
-| settled | Which TZ statements become corollaries? | Type-\(I_1\) Corollary 4.3 application and Proposition 5.1 stable rationality. |
+| settled | Which TZ statements become corollaries? | Four-type Corollary 4.3 implication and Propositions 5.1--5.2 stable rationality. |
 | settled | Does it subsume TZ torsor rationality? | No; their OADP results are inputs. |
 | open | Global priority | Full database and citation-graph audit. |
-| open | Types \(I_2,I_3\) at level two | Requires new invariant subtori or quotient geometry. |
+| settled | Types \(I_2,I_3\) at level two | Full-\(I_3\) saturated rank-three window. |

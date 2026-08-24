@@ -282,9 +282,9 @@ certificates:
 
 ## Goal
 
-The requested opposite bound is now exact for the type-\(I_1\)
-Tschinkel--Zhang cubic threefold: \(s(X)=2\). The type-\(I_3\) family retains
-the uniform interval \(2\le s(X)\le4\). The earlier rank-three
+The requested opposite bound is now exact for both Tschinkel--Zhang cubic
+threefolds: \(s(X)=2\). The full type-\(I_3\) group preserves a saturated
+rank-three unimodular window, which restricts to types \(I_0,I_1,I_2\). The earlier rank-three
 index-two/deck-involution frontier is withdrawn because it used a
 nonsaturated lattice basis. The rank-two level-three exhaustion remains
 correct but is bypassed by the saturated rank-three quotient.

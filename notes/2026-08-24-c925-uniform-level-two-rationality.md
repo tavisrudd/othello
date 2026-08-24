@@ -1,0 +1,152 @@
+# Uniform level-two rationality for the Tschinkel--Zhang types
+
+**Lane:** cubic-threefolds · **Task:** C925 · **Date:** 2026-08-24
+
+## Theorem
+
+Let \(K\) be an infinite field of characteristic zero and let \(S/K\) be a
+smooth quartic del Pezzo surface with a \(K\)-point whose geometric Picard
+action factors through one of the Tschinkel--Zhang types
+\(I_0,I_1,I_2,I_3\). Then
+
+\[
+\boxed{S\times\mathbf A^2\text{ is }K\text{-rational}.} \tag{1}
+\]
+
+Consequently every cubic hypersurface in both Tschinkel--Zhang
+Propositions 5.1 and 5.2 satisfies
+
+\[
+\boxed{X\times\mathbf P^2\text{ is }\mathbf Q\text{-rational}.} \tag{2}
+\]
+
+For their two cubic threefolds, the C925 \(m=1\) theorem gives the exact
+threshold
+
+\[
+\boxed{s(X)=2.} \tag{3}
+\]
+
+Thus each
+
+\[
+Y=X\times\mathbf P^1
+\]
+
+is a smooth projective nonrational variety with
+\(Y\times\mathbf A^1\) rational.
+
+## Full-\(I_3\) quotient
+
+Work in the rank-five cocharacter lattice of the projective
+Neron--Severi torus \(T_0\). The full type-\(I_3\) group preserves the
+saturated rank-three lattice
+
+\[
+N_3=\mathbf Ze_3\oplus\mathbf Ze_4\oplus\mathbf Ze_5. \tag{4}
+\]
+
+The two generators act on this basis by
+
+\[
+\begin{pmatrix}
+-1&0&0\\-1&0&1\\-1&1&0
+\end{pmatrix},
+\qquad
+\begin{pmatrix}
+1&0&-1\\0&1&-1\\0&0&-1
+\end{pmatrix}. \tag{5}
+\]
+
+Pairing with the 16 Cox coordinates gives the Galois-stable unimodular
+window
+
+| weight | Cox block |
+|---|---|
+| \((0,1,1)\) | \(L_{13},L_{23},L_{35}\) |
+| \((1,0,1)\) | \(L_{14},L_{24},L_{45}\) |
+| \((1,1,0)\) | \(E_1,E_2,E_5\) |
+| \((1,1,1)\) | \(L_{12},L_{15},L_{25}\) |
+
+The three weight differences have determinant \(1\). Every other block lies
+in
+
+\[
+B=\mathbf P\langle E_3,E_4,L_{34},Q\rangle. \tag{6}
+\]
+
+This is exactly the boundary space and four-block partition in the symbolic
+tangent certificate. Its three tangent equations have rank three and every
+kernel coordinate nonzero; three symbolic witnesses cover the full smooth
+quartic-del-Pezzo moduli. The higher-rank unimodular-window OADP theorem
+therefore proves
+
+\[
+Z/T_3\text{ rational}. \tag{7}
+\]
+
+Completing (4) by \(e_1,e_2\) has determinant \(1\). The residual torus
+\(T_0/T_3\) has rank two, hence is rational by Voskresenskii. The
+Tschinkel--Zhang generic splitting gives
+
+\[
+Z/T_3\sim_K S\times(T_0/T_3), \tag{8}
+\]
+
+proving (1) for type \(I_3\).
+
+## The other three types
+
+Tschinkel--Zhang Lemma 4.2 records that, up to conjugacy in \(W(D_5)\), the
+groups of types \(I_0,I_1,I_2\) are subgroups of the type-\(I_3\) group.
+Restricting the \(I_3\)-stable saturated subtorus, its boundary space, and
+its descended slice to any subgroup preserves every hypothesis. Thus (1)
+holds for all four types. Their Corollary 4.3 stable-rationality implication
+for the four minimal types is therefore strengthened to the uniform
+quantitative bound two.
+
+The generic-fibre function-field argument in Section 5 then proves (2) for
+both cubic families.
+
+## Evidence and replay
+
+Full-\(I_3\) lattice and weight certificate:
+
+- notes/cubic-threefolds-tasks/c925-i3-level4-cubic-slice-check.py,
+  SHA-256
+  18c62d35c2f739ed816146cd9c8a1a1d0e14dbc668dff4d9a366b9d516575efe;
+- notes/cubic-threefolds-tasks/c925-i3-level4-cubic-slice-check.json,
+  SHA-256
+  6fcd194e8ca17ee06740277e2d515b8a991768974934e04f58e024b9f982d0be.
+
+Replay:
+
+    uv run --with sympy==1.14.0 python3 \
+      notes/cubic-threefolds-tasks/c925-i3-level4-cubic-slice-check.py \
+      --check-certificate \
+      notes/cubic-threefolds-tasks/c925-i3-level4-cubic-slice-check.json
+
+The tangent slice, smooth-moduli cover, and an independent stdlib replay are
+recorded in
+notes/2026-08-24-c925-type-i1-level-two-rationality.md. They apply here
+because the full-\(I_3\) window has exactly the same four Cox blocks and
+boundary space, merely with a different saturated weight basis.
+
+## Scope
+
+This theorem strengthens the stable-rationality implication for the four
+minimal Picard-action types used by Tschinkel--Zhang. It does not assert that
+every stably rational quartic del Pezzo surface outside those hypotheses has
+level at most two. Global novelty remains subject to the literature audit
+recorded in the priority-judo synthesis.
+
+## Mystery ledger
+
+| status | feature | evidence or remaining gate |
+|---|---|---|
+| settled | Full \(I_3\) rank-three subtorus | Saturated basis (4), integral actions (5). |
+| settled | Full \(I_3\) window | Galois-stable and unimodular. |
+| settled | Types \(I_0,I_1,I_2\) | Restriction from the containing \(I_3\) group. |
+| settled | Both cubic thresholds | \(s(X)=2\). |
+| open | Nonminimal surfaces outside the four-type formulation | Separate birational classification check. |
+| open | Explicit rational parametrizations | Constructive formulas not extracted. |

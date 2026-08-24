@@ -1,5 +1,5 @@
 {
-  "conclusion": "The full type-I3 anticanonical quotient torus has a primitive sign subtorus with Cox weights 0^2,1^6,2^6,3^2. General orbit closures are rational normal cubics, and their two boundary points lie in the fixed Galois-stable projective 3-space spanned by E3,E4,L34,Q. The actual rank-four quotient character actions are computed.",
+  "conclusion": "The full type-I3 anticanonical quotient torus has both the certified rank-one level-four cubic window and a saturated rank-three level-two unimodular window. The latter leaves E3,E4,L34,Q as its boundary and has a rational rank-two residual torus.",
   "cox_coordinate_order": [
     "E1",
     "E2",
@@ -121,6 +121,164 @@
       ]
     ]
   ],
+  "saturated_rank_three_level_two_subtorus": {
+    "ambient_completion_determinant": 1,
+    "boundary_coordinates": [
+      "E3",
+      "E4",
+      "L34",
+      "Q"
+    ],
+    "cocharacter_basis": [
+      [
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        1
+      ]
+    ],
+    "conclusion": "The full type-I3 group preserves a saturated rank-three subtorus with a Galois-stable unimodular four-block window and rational rank-two residual torus.",
+    "generator_actions": [
+      [
+        [
+          -1,
+          0,
+          0
+        ],
+        [
+          -1,
+          0,
+          1
+        ],
+        [
+          -1,
+          1,
+          0
+        ]
+      ],
+      [
+        [
+          1,
+          0,
+          -1
+        ],
+        [
+          0,
+          1,
+          -1
+        ],
+        [
+          0,
+          0,
+          -1
+        ]
+      ]
+    ],
+    "residual_rank_two_character_actions": [
+      [
+        [
+          -1,
+          0
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      [
+        [
+          0,
+          1
+        ],
+        [
+          -1,
+          -1
+        ]
+      ]
+    ],
+    "residual_rank_two_cocharacter_actions": [
+      [
+        [
+          -1,
+          1
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      [
+        [
+          -1,
+          1
+        ],
+        [
+          -1,
+          0
+        ]
+      ]
+    ],
+    "unimodular_window_blocks": [
+      [
+        "L13",
+        "L23",
+        "L35"
+      ],
+      [
+        "L14",
+        "L24",
+        "L45"
+      ],
+      [
+        "E1",
+        "E2",
+        "E5"
+      ],
+      [
+        "L12",
+        "L15",
+        "L25"
+      ]
+    ],
+    "unimodular_window_weights": [
+      [
+        0,
+        1,
+        1
+      ],
+      [
+        1,
+        0,
+        1
+      ],
+      [
+        1,
+        1,
+        0
+      ],
+      [
+        1,
+        1,
+        1
+      ]
+    ],
+    "window_affine_lattice_index": 1
+  },
   "schema": "c925-i3-level4-cubic-slice-v1",
   "type_i3_group_order": 24
 }

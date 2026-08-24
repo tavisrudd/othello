@@ -150,6 +150,11 @@ Zhang's Lemma 3.2 and Theorem 2.4 supply the tangent-projection hypothesis.
    tangent equations have rank three and a kernel with every coordinate
    nonzero. The higher-rank theorem therefore proves \(Z/T_3\) rational.
    Its residual torus has rank two, giving \(S\times\mathbf A^2\) rational.
+4. The full type-\(I_3\) group preserves the saturated rank-three lattice
+   spanned by the last three standard cocharacters. It has the same four Cox
+   blocks and boundary space, now with another unimodular weight basis. Thus
+   the same tangent certificate proves the type-\(I_3\) quotient rational;
+   restriction treats types \(I_0,I_1,I_2\) as well.
 
 Consequently Tschinkel--Zhang's quartic-del-Pezzo OADP construction is one
 application of a general quotient mechanism: any OADP Cox closure with an
@@ -186,9 +191,9 @@ in `notes/2026-08-24-c925-type-i1-level-two-rationality.md`.
   SHA-256
   `be1dedd42662eae0c9d83d08d7379cdd78974000f0be048db50680833a5d01e6`.
 
-This note proves a general quotient lemma. Applied to the saturated
-three-sign subtorus, it proves \(m=2\) rationality for the type-\(I_1\)
-Tschinkel--Zhang cubic family.
+This note proves a general quotient lemma. Applied to the full type-\(I_3\)
+saturated rank-three subtorus and its subgroups, it proves \(m=2\)
+rationality for both Tschinkel--Zhang cubic families.
 
 **Resume line:** go C925 cubic-threefolds — audit the saturated
 unimodular-window proof and its explicit birational \(\mathbf A^1\)-cancellation

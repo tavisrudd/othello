@@ -130,8 +130,8 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   `../cubic-threefolds-tasks/c930-categorical-direct-qdm-paper-preparation.md`.
 - **C925 — stabilization threshold and cancellation, active.**
   **Result boundary:** no unconditional every-smooth \(m=2\) theorem has
-  been landed, but the explicit type-\(I_1\) Tschinkel--Zhang cubic now has
-  exact threshold \(s(X)=2\): \(X\times\mathbf P^1\) is irrational and
+  been landed, but both explicit Tschinkel--Zhang cubics now have exact
+  threshold \(s(X)=2\): \(X\times\mathbf P^1\) is irrational and
   \(X\times\mathbf P^2\) is rational. The every-smooth all-\(m\) target is false by
   Tschinkel--Zhang's stably rational smooth cubic threefolds.  The separate Voisin plus
   Engel--de Gaay Fortman--Schreieder route proves all stabilizations for a
@@ -266,6 +266,17 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   The exact “priority judo” boundary—what becomes a corollary, what remains an
   input, and which novelty checks remain open—is recorded in
   `../2026-08-24-c925-tz-priority-judo-synthesis.md`.
+
+  **Uniform level-two extension:** the full type-\(I_3\) group preserves the
+  saturated rank-three lattice spanned by the last three standard
+  cocharacters. Its four surviving Cox blocks form the same unimodular
+  tetrahedron, with the same boundary space, as the type-\(I_1\) slice. The
+  residual torus again has rank two. Since \(I_0,I_1,I_2\) embed in \(I_3\)
+  up to conjugacy, all four Tschinkel--Zhang types satisfy
+  \(S\times\mathbf A^2\) rational. Both cubic families therefore satisfy
+  \(X\times\mathbf P^2\) rational, and both cubic threefolds have exact
+  threshold \(s(X)=2\). Report and certificate:
+  `../2026-08-24-c925-uniform-level-two-rationality.md`.
 
   **Corrected rank-three frontier:** the former index-two/double-cover
   conclusion was a nonsaturated-lattice artifact and is withdrawn. In the

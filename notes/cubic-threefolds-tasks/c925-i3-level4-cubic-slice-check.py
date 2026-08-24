@@ -114,6 +114,89 @@ expected_quotient_character_actions = [
 ]
 assert quotient_character_actions == expected_quotient_character_actions
 
+# Saturated rank-three subtorus.  The cocharacter lattice spanned by the last
+# three standard basis vectors is invariant under the full type-I3 group.
+# Its central four-block window is unimodular and its residual torus has rank
+# two, giving the level-two quotient when combined with the universal tangent
+# certificate.
+rank_three_basis = sp.Matrix.hstack(
+    sp.eye(5).col(2), sp.eye(5).col(3), sp.eye(5).col(4)
+)
+rank_three_left_inverse = (
+    (rank_three_basis.T*rank_three_basis).inv()*rank_three_basis.T
+)
+rank_three_actions = [
+    rank_three_left_inverse*generator*rank_three_basis
+    for generator in COCHARACTER_GENERATORS
+]
+assert all(
+    rank_three_basis*action == generator*rank_three_basis
+    for action, generator in zip(rank_three_actions, COCHARACTER_GENERATORS)
+)
+rank_three_lifts = []
+for column in range(3):
+    variables = sp.symbols("u0:6")
+    solution = next(iter(sp.linsolve([
+        sum(variables[row]*ROOT_BASIS[row, root] for row in range(6))
+        - rank_three_basis[root, column]
+        for root in range(5)
+    ] + [variables[5]], variables)))
+    assert all(entry.q == 1 for entry in solution)
+    rank_three_lifts.append(sp.Matrix(1, 6, solution))
+rank_three_raw_weights = [
+    tuple(int((lift*divisor)[0]) for lift in rank_three_lifts)
+    for divisor in cox_classes
+]
+rank_three_minima = tuple(
+    min(weight[index] for weight in rank_three_raw_weights) for index in range(3)
+)
+rank_three_weights = [
+    tuple(weight[index]-rank_three_minima[index] for index in range(3))
+    for weight in rank_three_raw_weights
+]
+rank_three_blocks = {
+    weight: [
+        name for name, value in zip(cox_names, rank_three_weights) if value == weight
+    ]
+    for weight in sorted(set(rank_three_weights))
+}
+unimodular_window_weights = (
+    (0, 1, 1), (1, 0, 1), (1, 1, 0), (1, 1, 1),
+)
+unimodular_window_blocks = [rank_three_blocks[weight] for weight in unimodular_window_weights]
+assert unimodular_window_blocks == [
+    ["L13", "L23", "L35"],
+    ["L14", "L24", "L45"],
+    ["E1", "E2", "E5"],
+    ["L12", "L15", "L25"],
+]
+window_difference_matrix = sp.Matrix.hstack(*(
+    sp.Matrix(weight)-sp.Matrix(unimodular_window_weights[0])
+    for weight in unimodular_window_weights[1:]
+))
+assert abs(int(window_difference_matrix.det())) == 1
+assert set(rank_three_blocks)-set(unimodular_window_weights) == {
+    (0, 0, 1), (0, 0, 2), (1, 2, 0), (2, 1, 0),
+}
+assert sorted(
+    name
+    for weight in set(rank_three_blocks)-set(unimodular_window_weights)
+    for name in rank_three_blocks[weight]
+) == ["E3", "E4", "L34", "Q"]
+
+rank_three_completion = sp.Matrix.hstack(
+    rank_three_basis, sp.eye(5).col(0), sp.eye(5).col(1)
+)
+assert abs(int(rank_three_completion.det())) == 1
+rank_two_cocharacter_actions = []
+rank_two_character_actions = []
+for generator in COCHARACTER_GENERATORS:
+    changed = rank_three_completion.inv()*generator*rank_three_completion
+    assert changed[3:5, 0:3] == sp.zeros(2, 3)
+    residual = changed[3:5, 3:5]
+    rank_two_cocharacter_actions.append(residual)
+    rank_two_character_actions.append(residual.inv().T)
+
 certificate = {
     "schema": "c925-i3-level4-cubic-slice-v1",
     "type_i3_group_order": len(group),
@@ -128,12 +211,39 @@ certificate = {
         [[int(entry) for entry in matrix.row(row)] for row in range(4)]
         for matrix in quotient_character_actions
     ],
+    "saturated_rank_three_level_two_subtorus": {
+        "cocharacter_basis": [
+            [int(entry) for entry in rank_three_basis.col(column)]
+            for column in range(3)
+        ],
+        "generator_actions": [
+            [[int(entry) for entry in matrix.row(row)] for row in range(3)]
+            for matrix in rank_three_actions
+        ],
+        "unimodular_window_weights": [list(weight) for weight in unimodular_window_weights],
+        "unimodular_window_blocks": unimodular_window_blocks,
+        "window_affine_lattice_index": abs(int(window_difference_matrix.det())),
+        "boundary_coordinates": ["E3", "E4", "L34", "Q"],
+        "ambient_completion_determinant": int(rank_three_completion.det()),
+        "residual_rank_two_cocharacter_actions": [
+            [[int(entry) for entry in matrix.row(row)] for row in range(2)]
+            for matrix in rank_two_cocharacter_actions
+        ],
+        "residual_rank_two_character_actions": [
+            [[int(entry) for entry in matrix.row(row)] for row in range(2)]
+            for matrix in rank_two_character_actions
+        ],
+        "conclusion": (
+            "The full type-I3 group preserves a saturated rank-three subtorus "
+            "with a Galois-stable unimodular four-block window and rational "
+            "rank-two residual torus."
+        ),
+    },
     "conclusion": (
-        "The full type-I3 anticanonical quotient torus has a primitive sign "
-        "subtorus with Cox weights 0^2,1^6,2^6,3^2. General orbit closures "
-        "are rational normal cubics, and their two boundary points lie in "
-        "the fixed Galois-stable projective 3-space spanned by E3,E4,L34,Q. "
-        "The actual rank-four quotient character actions are computed."
+        "The full type-I3 anticanonical quotient torus has both the certified "
+        "rank-one level-four cubic window and a saturated rank-three level-two "
+        "unimodular window. The latter leaves E3,E4,L34,Q as its boundary and "
+        "has a rational rank-two residual torus."
     ),
 }
 
