@@ -261,18 +261,6 @@ path = "adversarial_novelty_review.md"
 reason = "private review record, not part of the public manuscript repository"
 
 [[repository.exclude_path]]
-path = "claim-proof-novelty-ledger.md"
-reason = "internal claim-development ledger; public boundaries are stated in the manuscript"
-
-[[repository.exclude_path]]
-path = "formal-statement-adequacy.md"
-reason = "internal formalization review record; the appendix states the public trust boundary"
-
-[[repository.exclude_path]]
-path = "formalization-ledger.md"
-reason = "internal formalization work ledger; the appendix states the public theorem map"
-
-[[repository.exclude_path]]
 path = "proof_ledger.md"
 reason = "internal proof-development ledger, superseded by the manuscript proofs and appendix"
 
@@ -287,10 +275,6 @@ reason = "private revision plan, not part of the public manuscript repository"
 [[repository.exclude_path]]
 path = "theorem-map.md"
 reason = "internal theorem-adoption ledger; public claims remain in the manuscript"
-
-[[repository.exclude_path]]
-path = "verification-map.md"
-reason = "internal lane-to-proof map; the appendix states the public verification boundary"
 
 [[repository]]
 name = "continuation-graph-rigidity"
