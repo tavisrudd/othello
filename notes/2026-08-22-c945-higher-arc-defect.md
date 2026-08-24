@@ -4,9 +4,11 @@
 
 **Date:** 2026-08-22
 
-**Status:** the separate `integral_secant_arcs` manuscript is in development;
-the final priority audit remains open and the existing conic manuscript is
-untouched.
+**Status:** the separate `integral_secant_arcs` manuscript has a complete
+15-page draft, public reviewer guide, partial Lean companion, exact evidence
+bundle, and synchronized standalone mirror.  Its paper gate and independent
+hostile proof read are complete; the final priority audit remains open and the
+existing conic manuscript is untouched.
 
 **Literature-audit summary:** twenty-two individually discussed sources; fifteen
 read at full text and seven partially.  The bounded full-text audit settles the main
@@ -2481,20 +2483,39 @@ from the report into LaTeX independently.
 
 ## Remaining gates after manuscript entry
 
-1. During drafting, promote the factor-pair forward-difference argument and
-   the `(OF3)`/`(PF)` subsequence arguments from this proof packet into numbered
-   lemmas with explicit epsilon quantifiers and bounded endpoint constants.
-   This is transcription and exposition work; the mathematical gate is green.
-2. Create the new paper's claim--proof--novelty ledger before writing any
-   “first,” “new,” or “to our knowledge” sentence.  The exact non-tactical
-   integer-envelope and modular-lift precedence questions remain qualified
-   because Semantic Scholar, MathSciNet, and an exhaustive zbMATH MSC screen
-   are not covered.
-3. Promote a partial adjacent source to full text only if a final novelty
+1. Complete the remaining Semantic Scholar, MathSciNet, and exhaustive zbMATH
+   MSC coverage before considering any global priority sentence.  The current
+   manuscript makes none.
+2. Promote a partial adjacent source to full text only if a final novelty
    sentence would depend on its silence.  Their present positive topical uses
    are already licensed at the recorded depths.
-4. Keep general deletion stability, higher moments without an application,
+3. Keep general deletion stability, higher moments without an application,
    modular-core classification, and construction sharpness out of Version 1.
    They are upgrades, not prerequisites; C949 owns the construction programme.
-5. After a complete draft exists, run a fresh proof-only hostile review and a
-   separate literature/positioning review before allowing submission language.
+4. Run a separate final literature/positioning cold read after the database
+   coverage closes and before allowing submission language.
+
+### 2026-08-24 manuscript and trust closeout
+
+The hostile proof read found no contradiction in either headline asymptotic
+bound.  It identified the transition from near equality to `O(q)`
+wrong-residue dual lines as the least expanded load-bearing step.  The draft
+now proves that transition from the exact decomposition into two nonnegative
+balancing losses, an exact pointwise balancing-loss identity, and separate
+counts of the wrong adjacent degrees.  It also now states the integral-degree,
+nondegeneracy, signed-deficiency, fixed-subsequence, and spanning hypotheses
+that the same read identified as previously implicit.
+
+The formalization boundary remains explicit: Lean checks arithmetic fragments
+and the terminal affine minima, not the projective-geometric or asymptotic
+reductions.  The public `REVIEWER_GUIDE.md` exposes that boundary and an
+anti-smuggling checklist.  The repository trust audit and paper gate both pass;
+the standalone export contains the manuscript, reviewer guide, Lean sources,
+claim map, imported-source registry, expected-axiom record, and exact evidence,
+but excludes `AGENTS.md` and the internal literature and novelty ledgers.
+
+Mystery-ledger update: the exceptional-line estimate is settled at the human
+proof level and remains intentionally absent from Lean.  No further cheap
+strengthening emerged from the final `ej` + `tt` pass.  The genuine open items
+remain construction sharpness (C949), modular-core realization, and the final
+database coverage listed above.
