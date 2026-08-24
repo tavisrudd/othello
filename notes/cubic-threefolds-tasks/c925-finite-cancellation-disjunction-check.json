@@ -1,0 +1,39 @@
+{
+  "cases": [
+    {
+      "candidate": "X x P^1",
+      "candidate_index": 1,
+      "candidate_is_nonrational_by_minimality": true,
+      "candidate_times_A1_function_field": "K(X)(t_1,...,t_2)",
+      "candidate_times_A1_is_rational_from_threshold": true,
+      "stabilization_threshold": 2
+    },
+    {
+      "candidate": "X x P^2",
+      "candidate_index": 2,
+      "candidate_is_nonrational_by_minimality": true,
+      "candidate_times_A1_function_field": "K(X)(t_1,...,t_3)",
+      "candidate_times_A1_is_rational_from_threshold": true,
+      "stabilization_threshold": 3
+    },
+    {
+      "candidate": "X x P^3",
+      "candidate_index": 3,
+      "candidate_is_nonrational_by_minimality": true,
+      "candidate_times_A1_function_field": "K(X)(t_1,...,t_4)",
+      "candidate_times_A1_is_rational_from_threshold": true,
+      "stabilization_threshold": 4
+    }
+  ],
+  "conclusion": "For the minimal s in {2,3,4} with X x P^s rational, Y=X x P^(s-1) is nonrational and Y x A1 is rational. Hence one of X x P^1, X x P^2, X x P^3 is a birational A1-cancellation counterexample.",
+  "premises": {
+    "X_times_P1_is_nonrational": true,
+    "X_times_P4_is_rational": true,
+    "therefore_threshold_interval": [
+      2,
+      4
+    ]
+  },
+  "schema": "c925-finite-cancellation-disjunction-v1",
+  "scope": "This finite checker verifies only the threshold implication. The two geometric premises are supplied by the separate m=1 irrationality theorem and uniform m=4 rationality theorem."
+}

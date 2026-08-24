@@ -215,6 +215,19 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   single-example construction problem. Report and exact certificates:
   `../2026-08-24-c925-level-three-descent-and-cancellation-frontier.md`.
 
+  **Standalone cancellation consequence:** the same threshold argument has
+  now been hardened over (mathbf Q). The complex (m=1) irrationality
+  theorem rules out (mathbf Q)-rationality at level one, while the uniform
+  OADP theorem gives (mathbf Q)-rationality at level four. For the minimal
+  (s_{\mathbf Q}\in\{2,3,4\}), the smooth projective variety
+  (X\times\mathbf P^{s-1}) is nonrational but becomes rational after one
+  (mathbf A^1). This settles the existential birational-cancellation
+  statement with the explicit three-element candidate list
+  (X\times\mathbf P^i), (1\le i\le3), but does not identify one member.
+  The source's August 21 open statement and a bounded August 24 arXiv/OpenAlex
+  screen support only correspondingly bounded priority language. Report:
+  `../2026-08-24-c925-finite-disjunction-a1-cancellation-theorem.md`.
+
   **Rank-three (m=2) tangent-slice frontier:** the multiplicity-free
   type-(I_1) cocharacter representation has exactly four invariant
   three-planes: the sum of the three sign lines and each sign line plus the
