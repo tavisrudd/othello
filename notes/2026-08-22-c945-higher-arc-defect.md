@@ -2543,3 +2543,48 @@ mechanism: integer secant distributions retain arithmetic lost by spectral
 mixing, while characteristic-compatible near equality forces bounded modular
 repair whose support completeness converts into a linear penalty.  The
 bounded-repair inverse realization remains open and belongs to C949.
+
+### 2026-08-24 branch repair, framing audit, and portfolio entry
+
+A sealed read found that the first-order calculation in the proof of
+Theorem 1.2 had written the low internal balancing branch as an equality even
+when the balanced degrees cross from `(a-1,a)` to `(a,a+1)`.  The proof now
+uses equality on the low branch and the convex supporting-line lower bound on
+the high branch.  This is the inequality needed with `F(T)<=0`; the theorem
+statement and coefficient are unchanged.  The same revision corrects the
+sign of the modular correction total from `h-lambda` to `lambda-h`.  Its zero
+residue criterion and all later applications are unchanged.
+
+An independent framing audit through 24 August 2026 preserved the bounded
+literature verdict and added Kurz's Section 5 as an expository check of the
+classical two-weight/two-intersection transform.  The audit now records 23
+individually discussed sources (15 full text, eight partial), the exact
+eight-week arXiv screen, and the uncovered Semantic Scholar, MathSciNet,
+Google Scholar, and exhaustive-MSC gaps.  The abstract and conclusion now
+say “the rational equality families classified here” or the equivalent
+integral-limiting-degree qualification.  Ball's 1996 finite-plane treatment
+of multiple blocking sets is cited in the translation section.
+
+The public portfolio summary now includes the paper in its programme table,
+finite-geometry headlines, infinite-family theorem table, entry-point table,
+and detailed guide.  Its headline is the mathematical mechanism rather than
+the exact two-character inverse: integral maximal-secant distributions retain
+arithmetic discarded by the real relaxation; bounded modular repair and
+completeness supply the additional linear term.  The exact inverse remains a
+credited classical corollary in the detailed guide.
+
+The authority paper gate, repository trust check, standalone paper gate, and
+export verification pass at source commit `3c30073e3`.  The public paper
+mirror commit is `7e4ee34`; the public portfolio-summary mirror commit is
+`e56d028`.  The 17-page PDFs agree byte for byte between the authority and
+paper mirror, with SHA-256
+`9ab93d6c47799b8bdcc0791dc779e8f5d83ddd576e9438525938c8f8e60a434e`.
+
+The post-repair sealed referee returned `GO`.  It found no concrete defect,
+no proof smuggling, and no trust-boundary overstatement.  It independently
+checked the factor-pair hypotheses, localization, branch crossing, corrected
+repair residue, both characteristic-specific theorem chains, public claim
+counts, exact evidence replay, and source/PDF agreement.  Its only clarity
+risk was that the branch-crossing sentence named convexity without separating
+the internal `Phi_min` term from the common external and `-binom(T,2)` terms;
+the manuscript now states that comparison explicitly.
