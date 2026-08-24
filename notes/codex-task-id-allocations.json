@@ -3473,8 +3473,17 @@
       "last": 957,
       "purpose": "Restore exact weighted finite rank-one transfer theorem",
       "sequence": 386
+    },
+    {
+      "count": 1,
+      "first": 958,
+      "kind": "reservation",
+      "lane": "cubic-threefolds",
+      "last": 958,
+      "purpose": "Compute and certify explicit birational parametrizations for the level-two cubic stabilizations",
+      "sequence": 387
     }
   ],
-  "next_id": 958,
+  "next_id": 959,
   "schema": "codex-task-id-allocations-v1"
 }
