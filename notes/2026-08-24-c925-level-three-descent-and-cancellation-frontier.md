@@ -181,6 +181,33 @@ Thus an irrationality proof at \(m=3\) would not merely improve the lower
 bound; it would solve the adjacent cancellation problem. This explains why
 the final step is qualitatively different from levels five and four.
 
+There is also an unconditional finite-list consequence. Let
+
+\[
+Y_i=X\times\mathbf P^i,\qquad i=1,2,3.
+\]
+
+The already proved bounds give \(s(X)\in\{2,3,4\}\). For
+\(i=s(X)-1\), the variety \(Y_i\) is nonrational, while
+
+\[
+K(Y_i\times\mathbf A^1)
+ =K(X)(t_1,\ldots,t_{i+1})
+\]
+
+is a rational field. Hence
+
+\[
+\boxed{\text{at least one of }Y_1,Y_2,Y_3\text{ is a rationality-cancellation counterexample}.} \tag{11}
+\]
+
+This is a three-candidate certificate, not an identification of a single
+candidate: if \(s(X)=2,3,4\), the boundary example is respectively
+\(Y_1,Y_2,Y_3\). It therefore does not by itself close the construction
+problem as Tschinkel--Zhang phrase it, but it cuts their explicit search to
+three named smooth projective varieties. Any decision at \(m=2\) or \(m=3\)
+identifies the first one-step cancellation example.
+
 ## Exact evidence
 
 Rank-two weights, Galois action, Cox Jacobian rank/minor, and residual
@@ -244,6 +271,7 @@ From the extracted `RatProbAlgTori/` directory:
 | settled | Direct linear descent fails | Opposite conjugate ruling spaces span all \(\mathbf P^{15}\). |
 | open | Level three | Requires a nonlinear descended slice, direct invariant-field parametrization, or different quotient. |
 | open | Cancellation outcome | Irrational level three would yield \(Y\not\sim\mathbf P\) but \(Y\times\mathbf A^1\sim\mathbf P\). |
+| settled | Finite cancellation certificate | One of \(X\times\mathbf P^i\), \(1\le i\le3\), is nonrational with rational \(\mathbf A^1\)-stabilization. |
 
 **Resume line:** go C925 cubic-threefolds — the certified interval is
 \(2\le s(X)\le4\); attack the nonlinear descent of the rank-two Segre-orbit

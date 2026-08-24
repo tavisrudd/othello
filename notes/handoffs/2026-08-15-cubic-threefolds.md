@@ -199,7 +199,12 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   \(Y=X\times\mathbf P^3\) is irrational, then the uniform level-four
   theorem makes \(Y\times\mathbf A^1\) rational, producing the cancellation
   example Tschinkel--Zhang record as unknown; if \(Y\) is rational, the
-  bound drops to three. Report and exact certificates:
+  bound drops to three. Unconditionally, since \(s(X)\in\{2,3,4\}\), one
+  of the three named smooth projective varieties
+  \(X\times\mathbf P^i\), \(1\le i\le3\), is nonrational but has rational
+  \(\mathbf A^1\)-stabilization. This finite-list certificate does not yet
+  identify which candidate, so it does not close Tschinkel--Zhang's
+  single-example construction problem. Report and exact certificates:
   `../2026-08-24-c925-level-three-descent-and-cancellation-frontier.md`.
 
   **Conditional finite reduction:** put \(n=m+1\).  For a connected center,

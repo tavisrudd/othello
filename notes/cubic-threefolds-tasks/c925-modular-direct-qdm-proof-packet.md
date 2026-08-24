@@ -278,6 +278,9 @@ descent either lowers the rationality bound to three or, if
 \(X\times\mathbf P^3\) is irrational, gives a nonrational \(Y\) with
 \(Y\times\mathbf A^1\) rational. Exact report:
 `../2026-08-24-c925-level-three-descent-and-cancellation-frontier.md`.
+Unconditionally, \(s(X)\in\{2,3,4\}\), so one of the three named varieties
+\(X\times\mathbf P^i\), \(1\le i\le3\), is nonrational and becomes rational
+after one \(\mathbf A^1\); the unresolved threshold is exactly which one.
 The adjacent priority task is the post-2017 literature audit
 for the now-solved CARAT class `(5,232,15)`.  Independently, the every-smooth
 \(m=2\) target remains open without a Stokes connector, while the
