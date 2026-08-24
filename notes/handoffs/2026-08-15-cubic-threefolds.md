@@ -213,7 +213,9 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   orbit-surface degrees `2,6,6,6`; their boundary-edge orbit sizes force
   every descended proper ambient codimension-two section to have open degree
   divisible by two or three (an arbitrary ambient codimension-two cycle has
-  class `dH^2`). The fourth residual torus is additionally the
+  class `dH^2`). Exact affine Galois closure also shows that none of the four
+  polygons has any stable three-weight subset, so there is no descended
+  unimodular triangle window. The fourth residual torus is additionally the
   non-retract-rational class `(3,6,3)`. Thus the remaining gate is an
   intrinsic rational correspondence or invariant-field parametrization, not
   a missed linear subtorus, higher-degree ambient slice, or residual-torus

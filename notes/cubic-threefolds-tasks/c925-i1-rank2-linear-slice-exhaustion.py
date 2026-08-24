@@ -116,6 +116,21 @@ def edge_orbit_sizes(vertices, actions):
     return sorted(sizes)
 
 
+def affine_group(points, generators):
+    identity = {point: point for point in points}
+    group = {tuple(points): identity}
+    queue = [identity]
+    while queue:
+        current = queue.pop()
+        for generator in generators:
+            product = {point: generator[current[point]] for point in points}
+            key = tuple(product[point] for point in points)
+            if key not in group:
+                group[key] = product
+                queue.append(product)
+    return list(group.values())
+
+
 def unimodular_completion(rank_two_basis):
     candidates = [
         sp.Matrix(entries)
@@ -222,6 +237,25 @@ for name, basis, carat_class in rank_two_spaces:
     degree = normalized_area(vertices)
     affine_actions = [affine_weight_action(sorted(set(weights)), action) for action in actions]
     edge_sizes = edge_orbit_sizes(vertices, affine_actions)
+    points = sorted(set(weights))
+    affine_actions_group = affine_group(points, affine_actions)
+    stable_three_weight_windows = []
+    for window in itertools.combinations(points, 3):
+        window_set = set(window)
+        if all(
+            {action[point] for point in window_set} == window_set
+            for action in affine_actions_group
+        ):
+            origin = sp.Matrix(window[0])
+            index = abs(int(sp.Matrix.hstack(
+                sp.Matrix(window[1])-origin,
+                sp.Matrix(window[2])-origin,
+            ).det()))
+            stable_three_weight_windows.append({
+                "weights": [list(point) for point in window],
+                "affine_lattice_index": index,
+                "is_unimodular": index == 1,
+            })
 
     completion = unimodular_completion(basis)
     quotient_character_actions = []
@@ -246,6 +280,7 @@ for name, basis, carat_class in rank_two_spaces:
         "weight_polygon_vertices": [list(vertex) for vertex in vertices],
         "orbit_surface_degree": degree,
         "boundary_edge_orbit_sizes": edge_sizes,
+        "galois_stable_three_weight_windows": stable_three_weight_windows,
         "proper_descended_linear_slice_open_degree_cannot_be_one": (
             degree % math.gcd(*edge_sizes) == 0
             and 1 % math.gcd(*edge_sizes) != degree % math.gcd(*edge_sizes)
@@ -266,6 +301,7 @@ assert all(
     record["proper_descended_linear_slice_open_degree_cannot_be_one"]
     for record in records
 )
+assert all(not record["galois_stable_three_weight_windows"] for record in records)
 
 certificate = {
     "schema": "c925-i1-rank2-linear-slice-exhaustion-v1",
@@ -281,6 +317,9 @@ certificate = {
     "rank_two_subtori": records,
     "conclusion": (
         "All four type-I1 invariant rational rank-two subspaces are exhausted. "
+        "None of their weight polygons has any Galois-stable three-weight "
+        "window, so the higher-rank OADP theorem has no descended triangle "
+        "candidate. "
         "Their toric orbit surfaces have degrees 2,6,6,6. For the three sign-"
         "pair cases the boundary-edge orbits have size two, so a proper "
         "descended codimension-two linear section has even open degree. In "

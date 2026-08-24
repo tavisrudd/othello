@@ -1,5 +1,5 @@
 {
-  "conclusion": "All four type-I1 invariant rational rank-two subspaces are exhausted. Their toric orbit surfaces have degrees 2,6,6,6. For the three sign-pair cases the boundary-edge orbits have size two, so a proper descended codimension-two linear section has even open degree. In the irreducible hexagon case the boundary-edge orbits have size three, so open degree is divisible by three; moreover its residual torus has non-retract-rational CARAT class (3,6,3). No invariant rank-two subtorus can therefore yield level three by a descended linear one-point OADP slice.",
+  "conclusion": "All four type-I1 invariant rational rank-two subspaces are exhausted. None of their weight polygons has any Galois-stable three-weight window, so the higher-rank OADP theorem has no descended triangle candidate. Their toric orbit surfaces have degrees 2,6,6,6. For the three sign-pair cases the boundary-edge orbits have size two, so a proper descended codimension-two linear section has even open degree. In the irreducible hexagon case the boundary-edge orbits have size three, so open degree is divisible by three; moreover its residual torus has non-retract-rational CARAT class (3,6,3). No invariant rank-two subtorus can therefore yield level three by a descended linear one-point OADP slice.",
   "rank_two_subtori": [
     {
       "boundary_edge_orbit_sizes": [
@@ -70,6 +70,7 @@
           "Q"
         ]
       },
+      "galois_stable_three_weight_windows": [],
       "name": "sign_square",
       "orbit_surface_degree": 2,
       "proper_descended_linear_slice_open_degree_cannot_be_one": true,
@@ -211,6 +212,7 @@
           "E4"
         ]
       },
+      "galois_stable_three_weight_windows": [],
       "name": "sign_rectangle_1",
       "orbit_surface_degree": 6,
       "proper_descended_linear_slice_open_degree_cannot_be_one": true,
@@ -352,6 +354,7 @@
           "E3"
         ]
       },
+      "galois_stable_three_weight_windows": [],
       "name": "sign_rectangle_2",
       "orbit_surface_degree": 6,
       "proper_descended_linear_slice_open_degree_cannot_be_one": true,
@@ -491,6 +494,7 @@
           "L25"
         ]
       },
+      "galois_stable_three_weight_windows": [],
       "name": "irreducible_hexagon",
       "orbit_surface_degree": 6,
       "proper_descended_linear_slice_open_degree_cannot_be_one": true,
