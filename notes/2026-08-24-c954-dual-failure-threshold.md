@@ -123,6 +123,15 @@ the San-José counterexample to hierarchy-level dual determination.
   “complement”; the repaired proof, citations, terminology, manifest boundary,
   and rendered integration all passed reread.
 
+## Post-close local export
+
+Authority commit `8dcd6d591` was audited and synchronized through
+`papers/scripts/export-paper-repos.py` to the existing standalone repository.
+The mirror release gate passes with 18 warning-free pages, 18 claims, and four
+Lean terminals; exporter verification reports 40 tracked files derived from
+the same authority commit.  The forward mirror commit is `171da01`.  No push,
+tag, deposit, or submission was performed.
+
 ## Mystery ledger
 
 ### Settled

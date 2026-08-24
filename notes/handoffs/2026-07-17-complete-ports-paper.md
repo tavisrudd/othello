@@ -13,6 +13,8 @@ PRESENTATION SPECTRUM IS QUEUED AFTER C953; NO PUSH OR DEPOSIT
 Relative Weight Hierarchies*
 **Standalone paper repository**: `tavisrudd/complete-repair-ports` at
 `~/src/math-papers/complete-repair-ports`
+**Current local standalone commit**: `171da01` (C954 dual failure thresholds;
+verified; no push or deposit)
 **Approved paper license**: MIT
 
 ## Goal
@@ -95,7 +97,7 @@ Current and completed strengthening:
   with the RGHWs of the dual nested pair, using pointwise
   shortening--puncturing duality rather than a false hierarchy-level duality;
   a fresh cold read found one proof-wording defect, which was repaired and
-  passed reread.
+  passed reread, and the verified local standalone is commit `171da01`.
 
 - [C952 manuscript rebuild](../2026-08-24-c952-recovery-manuscript-rebuild.md)
   produces the 17-page theorem-led paper, strengthens confinement to its exact
