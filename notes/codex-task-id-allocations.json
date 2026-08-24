@@ -3464,8 +3464,17 @@
       "last": 956,
       "purpose": "Finish, audit, and release the exact level-two cubic threefold manuscript",
       "sequence": 385
+    },
+    {
+      "count": 1,
+      "first": 957,
+      "kind": "reservation",
+      "lane": "complete-ports",
+      "last": 957,
+      "purpose": "Restore exact weighted finite rank-one transfer theorem",
+      "sequence": 386
     }
   ],
-  "next_id": 957,
+  "next_id": 958,
   "schema": "codex-task-id-allocations-v1"
 }
