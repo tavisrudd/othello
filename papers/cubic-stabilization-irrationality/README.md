@@ -6,7 +6,9 @@ geometric Picard lattice, becomes rational after adjoining two independent
 variables. It applies the theorem to both Tschinkel--Zhang cubic families.
 Combined with the separately cited one-stabilization irrationality theorem,
 this determines the stabilization index of their cubic threefolds and gives
-four-dimensional examples relevant to birational cancellation.
+nonrational smooth projective fourfolds that become rational after
+affine-line stabilization.  This birational statement is distinct from the
+isomorphism problem usually called Zariski cancellation.
 
 Build and verify from this directory with:
 

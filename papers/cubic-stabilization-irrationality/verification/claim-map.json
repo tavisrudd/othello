@@ -4,7 +4,7 @@
     "conclusion": "Both cubic threefolds have stabilization index two over Q and C and yield nonrational Y with rational Y times A1.",
     "coverage": "absent",
     "declarations": [],
-    "digest": "71ab5e624d3e0f94d5d6c8f798de0da353a7f241eb6b4c7db93eb7c080de9e2d",
+    "digest": "1df40dd2be597cd419d7038fa63ccc007f504c9acc5983a6d94e82efb0da5bd0",
     "environment": "corollary",
     "hypotheses": "X is either displayed smooth Tschinkel--Zhang cubic threefold; the cited m=1 theorem is used after base change to C.",
     "objects": "The field-indexed stabilization index and Y=X times P1."

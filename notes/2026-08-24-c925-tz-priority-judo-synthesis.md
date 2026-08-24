@@ -141,6 +141,44 @@ DataCite DOI
 
 No publisher DOI was located.
 
+## Summer-2026 DOI overlap audit
+
+The bounded screen covered 2026-06-01 through 2026-08-24 using Crossref,
+OpenAlex, web metadata, and targeted full-text reading.  It found no direct
+pre-emption of the two-variable quartic-del-Pezzo parametrization, the
+Tschinkel--Zhang cubic-family consequence, or the nonrational projective
+fourfold that becomes rational after affine-line stabilization.
+
+- Schreieder, *Rationality of Hypersurfaces*, DOI
+  `10.1137/25M1806454`, PDF SHA-256
+  `da0d66fe12291c968b1236afc8dd36d9dce7a31b7b03f603787fc995061a803a`.
+  Read: Introduction, Theorems 1.1--1.4, and Section 5.4, Theorem 5.20 and
+  Corollary 5.21.  The survey records that a very general cubic threefold is
+  not retract rational; it does not address the special Tschinkel--Zhang
+  families or affine-line stabilization.
+- Colliot-Th\'el\`ene--Pirutka--Scavia, DOI `10.5802/jep.343`, PDF SHA-256
+  `46d6bad57301882b96f9b3cfddfe7f5b10217f8787996acb8347e7381b9432bc`.
+  Read: Introduction and theorem overview.  Their cubic threefolds over real
+  Puiseux series are not stably rational; this is a different field and the
+  opposite rationality direction.
+- Tschinkel--Zhang, DOI `10.1093/imrn/rnag166`, PDF SHA-256
+  `363fecf58d75291a03276c415d85a07ea7e86233916249dc78923f024d5165ac`.
+  Read: Introduction, the degree-four del Pezzo analysis, and Theorem 3.
+  This concerns cohomological obstructions to equivariant unirationality for
+  finite-group actions, not Galois descent or stable-rationality
+  parametrization.  It is relevant only to a future subgroup classification.
+- DataCite DOIs `10.48550/arXiv.2606.26890` and
+  `10.48550/arXiv.2607.13593` concern isomorphism cancellation for affine
+  cylinders.  They expose a terminology collision but do not address
+  birational rationality after multiplying by \(\A^1\).
+- DOI `10.1007/s00209-026-04082-9` and DOI
+  `10.14231/ag-2026-021` were screened and found irrelevant.
+
+This is a cautious negative from a bounded date window, not a global
+priority or forward-citation-closure claim.  The manuscript therefore uses
+the precise phrase ``nonrational smooth projective fourfold \(Y\) with
+\(Y\times\A^1\) rational'' and distinguishes it from Zariski cancellation.
+
 ## Evidence
 
 - theorem and certificates:
