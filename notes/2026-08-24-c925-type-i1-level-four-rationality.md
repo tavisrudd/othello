@@ -2,6 +2,10 @@
 
 **Lane:** cubic-threefolds · **Task:** C925 · **Date:** 2026-08-24
 
+> **Broadened later on 2026-08-24.** The full type-\(I_3\) cubic-orbit
+> construction proves the same level-four bound uniformly for all four
+> types; see `2026-08-24-c925-uniform-level-four-rationality.md`.
+
 ## Result
 
 Let \(K\) be a characteristic-zero field and let \(S/K\) be a smooth

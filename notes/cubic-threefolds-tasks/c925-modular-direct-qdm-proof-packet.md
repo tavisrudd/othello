@@ -251,12 +251,25 @@ and every cubic in Tschinkel--Zhang Proposition 5.1 satisfies
 \(2\le s(X)\le4\). Report and exact certificates:
 `../2026-08-24-c925-type-i1-level-four-rationality.md`.
 
+**2026-08-24 uniform level-four theorem.** The maximal type-\(I_3\) action
+has a primitive sign subtorus with projective Cox weights
+\(0^2,1^6,2^6,3^2\). Its generic orbit closure is a rational normal cubic;
+the two boundary points lie in the Galois-stable
+\(\mathbf P\langle E_3,E_4,L_{34},Q\rangle\). A tangent hyperplane
+containing this boundary space cuts one remaining open-orbit point and is
+rational by OADP tangent projection. The residual rank-four character
+lattice is CARAT `(4,99,3)`, inside Lemire's hereditarily rational class
+`[4,20,22,1]`. Consequently every stably rational quartic del Pezzo surface
+satisfies \(S\times\mathbf A^4\) rational, and every cubic in both
+Tschinkel--Zhang families satisfies \(X\times\mathbf P^4\) rational.
+Report and exact certificates:
+`../2026-08-24-c925-uniform-level-four-rationality.md`.
+
 ## Goal
 
-The requested opposite bound is now landed at \(m=4\) for the type-\(I_1\)
-Tschinkel--Zhang cubic family, giving its cubic threefolds the explicit
-interval \(2\le s(X)\le4\). The uniform bound for both families remains
-\(m=5\). The next geometric bound \(m=3\) encounters invariant rank-two
+The requested opposite bound is now landed uniformly at \(m=4\) for both
+Tschinkel--Zhang cubic families, giving their cubic threefolds the explicit
+interval \(2\le s(X)\le4\). The next geometric bound \(m=3\) encounters invariant rank-two
 quadric orbit closures rather than linear planes. The adjacent priority task is the post-2017 literature audit
 for the now-solved CARAT class `(5,232,15)`.  Independently, the every-smooth
 \(m=2\) target remains open without a Stokes connector, while the

@@ -2,6 +2,10 @@
 
 **Lane:** cubic-threefolds · **Task:** C925 · **Date:** 2026-08-24
 
+> **Superseded later on 2026-08-24.** The full type-\(I_3\) cubic-orbit
+> tangent slice lowers the uniform bound from five to four; see
+> `2026-08-24-c925-uniform-level-four-rationality.md`.
+
 ## Result
 
 Let (K) be a field of characteristic zero and let (S/K) be a stably

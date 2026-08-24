@@ -1,0 +1,126 @@
+{
+  "conclusion": "The full type-I3 anticanonical quotient torus has a primitive sign subtorus with Cox weights 0^2,1^6,2^6,3^2. General orbit closures are rational normal cubics, and their two boundary points lie in the fixed Galois-stable projective 3-space spanned by E3,E4,L34,Q. The actual rank-four quotient character actions are computed.",
+  "cox_coordinate_order": [
+    "E1",
+    "E2",
+    "E3",
+    "E4",
+    "E5",
+    "L12",
+    "L13",
+    "L14",
+    "L15",
+    "L23",
+    "L24",
+    "L25",
+    "L34",
+    "L35",
+    "L45",
+    "Q"
+  ],
+  "galois_stable_boundary_coordinate_sum": [
+    "E3",
+    "E4",
+    "L34",
+    "Q"
+  ],
+  "generator_signs": [
+    -1,
+    1
+  ],
+  "picard_cocharacter_lift": [
+    0,
+    0,
+    0,
+    1,
+    1,
+    0
+  ],
+  "primitive_sign_subtorus_cocharacter": [
+    0,
+    0,
+    1,
+    1,
+    0
+  ],
+  "projective_cox_weights": {
+    "E1": 2,
+    "E2": 2,
+    "E3": 3,
+    "E4": 3,
+    "E5": 2,
+    "L12": 2,
+    "L13": 1,
+    "L14": 1,
+    "L15": 2,
+    "L23": 1,
+    "L24": 1,
+    "L25": 2,
+    "L34": 0,
+    "L35": 1,
+    "L45": 1,
+    "Q": 0
+  },
+  "projective_weight_multiplicities": {
+    "0": 2,
+    "1": 6,
+    "2": 6,
+    "3": 2
+  },
+  "quotient_character_generator_actions": [
+    [
+      [
+        -1,
+        0,
+        1,
+        -1
+      ],
+      [
+        1,
+        1,
+        1,
+        2
+      ],
+      [
+        0,
+        0,
+        0,
+        -1
+      ],
+      [
+        0,
+        0,
+        -1,
+        0
+      ]
+    ],
+    [
+      [
+        0,
+        1,
+        0,
+        2
+      ],
+      [
+        -1,
+        -1,
+        0,
+        -1
+      ],
+      [
+        0,
+        0,
+        1,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        -1
+      ]
+    ]
+  ],
+  "schema": "c925-i3-level4-cubic-slice-v1",
+  "type_i3_group_order": 24
+}

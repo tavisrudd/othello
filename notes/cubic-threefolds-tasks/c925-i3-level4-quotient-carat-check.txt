@@ -1,0 +1,1 @@
+i3_rank_four_quotient_character_carat=[ 4, 99, 3 ] hereditary_container=[ 4, 20, 22, 1 ]

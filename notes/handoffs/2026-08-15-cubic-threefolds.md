@@ -174,6 +174,17 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   threefolds have certified interval \(2\le s(X)\le4\). Report:
   `../2026-08-24-c925-type-i1-level-four-rationality.md`.
 
+  **Uniform level-four result:** for the full type-\(I_3\) action, the sign
+  subtorus with Cox weights \(0^2,1^6,2^6,3^2\) has rational-normal-cubic
+  orbits. Their two boundary points lie in a fixed Galois-stable
+  \(\mathbf P^3\). A tangent hyperplane through that boundary space is a
+  rational one-point quotient slice. The residual character lattice is
+  `(4,99,3)`, inside a Lemire hereditary-rational class. Hence every stably
+  rational quartic del Pezzo satisfies \(S\times\mathbf A^4\) rational and
+  every cubic in both Tschinkel--Zhang families satisfies
+  \(X\times\mathbf P^4\) rational. Report:
+  `../2026-08-24-c925-uniform-level-four-rationality.md`.
+
   **Conditional finite reduction:** put \(n=m+1\).  For a connected center,
   after a native pure-Euler inner \(n\)-cycle has been placed inside one fixed
   outer correction factor, Lean's cyclic dimension consumer forces \(d=n\)
