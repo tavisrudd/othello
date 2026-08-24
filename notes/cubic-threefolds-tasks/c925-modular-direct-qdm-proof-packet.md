@@ -218,18 +218,37 @@ even retract rational.  No post-2017 priority claim is made without a
 separate literature audit.  Report and certificates:
 `../2026-08-24-c925-uniform-quartic-del-pezzo-level-five.md`.
 
+**2026-08-24 level-four cancellation frontier.**  After removing the
+anticanonical direction, the type-(I_1) rank-five lattice has no invariant
+character or cocharacter, so the split-scalar projectivization cannot be
+iterated.  Its exactly three rank-one sign directions are all integrally
+nonsplit, with injection--quotient indices \(2,2,6\).  Their rank-four
+quotient tori are nevertheless all rational: the CARAT classes are
+`(4,76,3)`, `(4,76,3)`, and `(4,78,3)`, lying in Lemire's hereditarily
+rational maximal classes.  Thus the remaining issue is cancellation, not
+torus rationality.  For either explicit cubic threefold, put
+\(Y=X\times\mathbf P^4\).  The level-five theorem gives
+\[
+Y\times\mathbf A^1\quad\text{rational}.
+\]
+Hence \(m=4\) rationality lowers the bound, while \(m=4\) irrationality
+produces the kind of nonrational \(Y\) with rational \(Y\times\mathbf A^1\)
+which Tschinkel--Zhang state is not currently known.  Report and exact
+certificates:
+`../2026-08-24-c925-level-four-cancellation-frontier.md`.
+
 ## Goal
 
-The requested opposite bound is now landed uniformly at (m=5) for both
+The requested opposite bound is now landed uniformly at \(m=5\) for both
 Tschinkel--Zhang cubic families, giving their cubic threefolds the explicit
-interval (2\le s(X)\le5).  The next geometric bound (m=4) requires
-cancellation beyond rationality of (T_0), or a smaller rational quotient of
+interval \(2\le s(X)\le5\).  The next geometric bound \(m=4\) requires
+cancellation beyond rationality of \(T_0\), or a smaller rational quotient of
 the projectivized universal torsor.  A second split-scalar quotient is
-impossible for type (I_1): the rank-five lattice has no invariant
+impossible for type \(I_1\): the rank-five lattice has no invariant
 cocharacter.  The adjacent priority task is the post-2017 literature audit
 for the now-solved CARAT class `(5,232,15)`.  Independently, the every-smooth
-(m=2) target remains open without a Stokes connector, while the
-every-smooth all-(m) target is false by Tschinkel--Zhang.
+\(m=2\) target remains open without a Stokes connector, while the
+every-smooth all-\(m\) target is false by Tschinkel--Zhang.
 
 ## Stable entry points
 

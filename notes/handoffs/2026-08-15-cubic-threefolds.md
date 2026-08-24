@@ -152,6 +152,16 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   certificates:
   `../2026-08-24-c925-uniform-quartic-del-pezzo-level-five.md`.
 
+  Level four is now isolated as a cancellation frontier.  The type-\(I_1\)
+  rank-five lattice has no second split direction; its three sign directions
+  have nonsplitting indices \(2,2,6\), although all three rank-four quotient
+  tori are rational.  For either explicit cubic threefold, putting
+  \(Y=X\times\mathbf P^4\) gives \(Y\times\mathbf A^1\) rational.  Thus
+  \(m=4\) irrationality would produce the cancellation example
+  Tschinkel--Zhang state is currently unknown, while \(m=4\) rationality
+  lowers the bound.  Report:
+  `../2026-08-24-c925-level-four-cancellation-frontier.md`.
+
   **Conditional finite reduction:** put \(n=m+1\).  For a connected center,
   after a native pure-Euler inner \(n\)-cycle has been placed inside one fixed
   outer correction factor, Lean's cyclic dimension consumer forces \(d=n\)
