@@ -3437,8 +3437,17 @@
       "last": 949,
       "purpose": "sharp asymptotics and constructions for complete higher arcs",
       "sequence": 382
+    },
+    {
+      "count": 4,
+      "first": 950,
+      "kind": "reservation",
+      "lane": "complete-ports",
+      "last": 953,
+      "purpose": "flagship recovery paper architecture, formal boundary, manuscript rebuild, and aggregate referee-export gates",
+      "sequence": 383
     }
   ],
-  "next_id": 950,
+  "next_id": 954,
   "schema": "codex-task-id-allocations-v1"
 }
