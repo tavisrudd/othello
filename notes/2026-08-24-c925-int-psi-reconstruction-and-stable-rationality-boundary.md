@@ -1,5 +1,11 @@
 # C925: the INT-Psi reconstruction gate and the stable-rationality boundary
 
+> **Superseded twice later on 2026-08-24.** The filtered rescue is false in
+> an unbounded negative-normal family, documented in
+> `2026-08-24-c925-unbounded-int-psi-negative-normal-family.md`. Separately,
+> the Tschinkel--Zhang upper bound was improved uniformly from eight to four;
+> the current explicit cubic interval is \(2\le s(X)\le4\).
+
 **Lane:** `cubic-threefolds` · **Task:** C925 · **Date:** 2026-08-24
 
 ## Outcome
@@ -37,11 +43,11 @@ stated theorem of the paper.
 The every-smooth \(m=2\) target survives.  For a Tschinkel--Zhang cubic, the
 lane's unconditional \(m=1\) theorem and the preceding upper bound give
 \[
- 2\le s(X):=\min\{m:X\times\mathbf P^m\text{ is rational}\}\le8.
+ 2\le s(X):=\min\{m:X\times\mathbf P^m\text{ is rational}\}\le4.
 \]
-An \(m=2\) theorem would sharpen this to \(3\le s(X)\le8\).  The upper
-bound is improved by the successor three-scalar projectivized-torsor argument
-in `2026-08-24-c925-type-i1-level-eight-rationality.md`.  C925 should
+An \(m=2\) theorem would sharpen this to \(3\le s(X)\le4\). The upper
+bound is the later uniform cubic-orbit tangent-slice theorem in
+`2026-08-24-c925-uniform-level-four-rationality.md`. C925 should
 therefore retain \(m=2\) as its endpoint and treat all-\(m\) transport only
 as falsifier-guided mechanism analysis.
 
@@ -186,7 +192,7 @@ allocated by this extraction pass.
 | settled | Iritani's stated reconstruction does not provide that full-loop premise; negative normal degree creates genuine positive powers of \(q\) in centre blocks. | Section 2, (5.40), certificate leg B. |
 | settled | The every-smooth all-\(m\) target is false; special smooth cubic threefolds are stably rational. | Tschinkel--Zhang Theorem 1.3 and Proposition 5.1. |
 | open | Does a joint \((q,z)\)-filtration protect only the positive factor's base row despite nonintegral centre blocks? | First successor in Section 2. |
-| open | What is the exact stabilization level of the Tschinkel--Zhang cubic? | Current bounds \(2\le s(X)\le8\); the upper bound is the successor three-scalar result, while \(m=2\) remains the lower-bound gate. |
+| open | What is the exact stabilization level of the Tschinkel--Zhang cubic? | Current bounds \(2\le s(X)\le4\); the upper bound is the later uniform tangent-slice result, while \(m=2\) remains the lower-bound gate. |
 
 ## Next
 

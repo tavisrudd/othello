@@ -215,6 +215,18 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   single-example construction problem. Report and exact certificates:
   `../2026-08-24-c925-level-three-descent-and-cancellation-frontier.md`.
 
+  **Unbounded INT-\(\Psi\) falsifier:** the isolated codimension-four
+  negative-normal example extends to every \(r\ge4\) and every \(k\ge1\).
+  For the section \(Z\cong\mathbf P^1\) in
+  `P_{P1}(O + N)` with
+  `-deg(N)=(r-1)(k+2)`, the first reconstructed base-square coefficient is
+  the nonzero term \(q^kz^{r-4}\). Thus no finite universal Novikov shift
+  repairs the decorated transport across arbitrary blowup edges. This is a
+  general local mechanism compatible with Tschinkel--Zhang's required
+  eventual marker failure, but it does not identify an edge in their
+  rationalization or decide \(m=2\). Report and exact certificate:
+  `../2026-08-24-c925-unbounded-int-psi-negative-normal-family.md`.
+
   **Conditional finite reduction:** put \(n=m+1\).  For a connected center,
   after a native pure-Euler inner \(n\)-cycle has been placed inside one fixed
   outer correction factor, Lean's cyclic dimension consumer forces \(d=n\)

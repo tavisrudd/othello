@@ -286,6 +286,10 @@ descent either lowers the rationality bound to three or, if
 Unconditionally, \(s(X)\in\{2,3,4\}\), so one of the three named varieties
 \(X\times\mathbf P^i\), \(1\le i\le3\), is nonrational and becomes rational
 after one \(\mathbf A^1\); the unresolved threshold is exactly which one.
+Universal INT-\(\Psi\) is now closed false in an unbounded family: in every
+codimension \(r\ge4\), negative-normal projective-bundle sections give
+base-square leakage \(q^kz^{r-4}\) for arbitrary \(k\ge1\). Report:
+`../2026-08-24-c925-unbounded-int-psi-negative-normal-family.md`.
 The adjacent priority task is the post-2017 literature audit
 for the now-solved CARAT class `(5,232,15)`.  Independently, the every-smooth
 \(m=2\) target remains open without a Stokes connector, while the

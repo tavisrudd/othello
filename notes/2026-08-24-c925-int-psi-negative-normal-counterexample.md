@@ -1,5 +1,10 @@
 # C925: universal INT-Psi fails at a negative-normal rational curve
 
+> **Generalized later on 2026-08-24.** The same calculation gives an
+> unbounded family in every codimension \(r\ge4\), with reconstructed
+> base-square leakage \(q^kz^{r-4}\) for every \(k\ge1\); see
+> `2026-08-24-c925-unbounded-int-psi-negative-normal-family.md`.
+
 **Lane:** `cubic-threefolds` · **Task:** C925 · **Date:** 2026-08-24
 
 ## Result
