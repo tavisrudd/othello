@@ -2519,3 +2519,27 @@ proof level and remains intentionally absent from Lean.  No further cheap
 strengthening emerged from the final `ej` + `tt` pass.  The genuine open items
 remain construction sharpness (C949), modular-core realization, and the final
 database coverage listed above.
+
+Second-cold-read update: the referee verified the exceptional-line estimate
+and found no contradiction in either headline bound, but requested a uniform
+quantitative proof of the secant-number localization lemma.  Lemma 4.2 now
+fixes bounds for the first-order coefficient and bounded remainder, proves
+`|F(T_0)| <= Am`, and covers all later secant counts by two explicit
+forward-difference regimes.  The same pass made the zero-repair hypotheses
+local, replaced the unnamed divisibility polynomial by a direct congruence,
+qualified the two-character translation, adopted the standard “complete
+`(k,n)`-arc” terminology, and completed the available published bibliography
+metadata.  This settles the new proof-compression mystery at the human-proof
+level; the lemma remains correctly classified as absent from Lean.
+
+The closeout also lands the exact inverse available without a new construction
+theory.  For a nontrivial two-character point set in the dual plane,
+Proposition 7.3 reconstructs the high-character primal point set, proves that
+it is a complete arc, and recovers the original dual set as its full family of
+maximal secants.  This is credited as the dual incidence form of the classical
+Calderbank--Kantor dictionary and is used in the conclusion rather than as the
+paper's main headline.  The abstract instead foregrounds the paper's stronger
+mechanism: integer secant distributions retain arithmetic lost by spectral
+mixing, while characteristic-compatible near equality forces bounded modular
+repair whose support completeness converts into a linear penalty.  The
+bounded-repair inverse realization remains open and belongs to C949.

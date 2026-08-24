@@ -211,6 +211,19 @@ retrieved bytes; SHA-256 values are included where the bytes were cached.
     Its line-intersection distribution is adjacent terminology but is not the
     selected-block degree sequence used in the manuscript.
 
+### Published-metadata refresh, 24 August 2026
+
+Official publisher records were checked to replace preprint-only or incomplete
+bibliography fields.  The records consulted were Springer Nature for
+Alabdullah--Hirschfeld, Ball--Fancsali, Csajbók--Weiner, and
+Bartoli--Timpanella; Elsevier for Bastioni--Micheli,
+Korchmáros--Nagy--Szőnyi, and both Szőnyi--Weiner papers; the Electronic
+Journal of Combinatorics for Bishnoi--Mattheus--Schillewaert; and SIAM for
+Lund--Saraf.  The author publication record for Murphy--Petridis supplied the
+Moscow Journal volume and pages.  This pass changed bibliographic metadata
+only; it made no negative literature inference and did not promote any partial
+full-text read.
+
 ## Recorded searches
 
 ### Claim-specific locator searches
