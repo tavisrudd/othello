@@ -49,6 +49,9 @@ Y=X\times\mathbf P^1
 
 is a smooth projective nonrational variety with
 \(Y\times\mathbf A^1\) rational.
+Thus the construction gives explicit four-dimensional smooth projective
+counterexamples to birational \(\mathbf A^1\)-cancellation over \(\mathbf Q\)
+and, after base change, over \(\mathbf C\).
 
 ## Full-\(I_3\) quotient
 

@@ -46,6 +46,8 @@ numerical bound.
    is rational. Nonrationality is the C925 \(m=1\) theorem after base change
    to \(\mathbf C\); rationality follows from
    \(\mathbf Q(Y\times\mathbf A^1)=\mathbf Q(X\times\mathbf P^2)\).
+   These are explicit smooth projective fourfold counterexamples to
+   birational \(\mathbf A^1\)-cancellation.
 
 The first consequence is the clean general-theorem judo. The second is the
 strongest direct implication relative to the new paper's own list of open
