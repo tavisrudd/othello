@@ -1,0 +1,2 @@
+root_lattice_carat_id=[ 5, 232, 14 ]
+character_lattice_carat_id=[ 5, 232, 15 ]

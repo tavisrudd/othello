@@ -1,0 +1,67 @@
+{
+  "base_certificate": "c925-i1-level5-rationality-check.json",
+  "base_certificate_sha256": "ea3c54677625d028723174812f091c0e525bcc27dfca1ced69e36ab4cb2d973a",
+  "conclusion": "The level-five quotient proof is valid for the full type-I3 group, hence for its type-I0, I1, and I2 subgroups.",
+  "kernel_weight_on_four_block": [
+    -1,
+    -1,
+    -1,
+    -1
+  ],
+  "primitive_split_kernel": [
+    -1,
+    -4,
+    -4,
+    -4,
+    2,
+    2
+  ],
+  "rank_two_quotient_character_basis": [
+    [
+      1,
+      0,
+      0,
+      1,
+      -1,
+      -1,
+      0
+    ],
+    [
+      0,
+      1,
+      -1,
+      -1,
+      0,
+      1,
+      0
+    ]
+  ],
+  "residual_actor_character_orbits": [
+    3,
+    2
+  ],
+  "schema": "c925-dp4-level5-generalization-v1",
+  "type_i3_generator_actions_on_rank_two_quotient": [
+    [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        0
+      ]
+    ],
+    [
+      [
+        0,
+        -1
+      ],
+      [
+        1,
+        -1
+      ]
+    ]
+  ],
+  "type_i3_group_order": 24
+}

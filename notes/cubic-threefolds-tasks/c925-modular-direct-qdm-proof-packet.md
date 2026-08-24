@@ -195,17 +195,39 @@ X\times\mathbf P^5\quad\text{rational over }\mathbf Q.
 Report and exact certificate:
 `../2026-08-24-c925-type-i1-level-five-rationality.md`.
 
+**2026-08-24 uniformization and torus corollary.**  The level-five argument
+holds for the full order-24 type-(I_3) group: the same primitive kernel is
+split and scalar on the four-block, the residual actor has permutation
+character orbits (3+2), and the residual quotient has rank two.  Since
+(I_0,I_1,I_2\subset I_3), every stably rational quartic del Pezzo surface
+over a characteristic-zero field satisfies
+\[
+S\times\mathbf A^5\quad\text{rational}.
+\]
+Consequently every cubic hypersurface in both Tschinkel--Zhang families,
+in every dimension (n\ge3), satisfies
+\[
+X\times\mathbf P^5\quad\text{rational over }\mathbf Q.
+\]
+An exact CARAT convention replay also identifies the type-(I_1) character
+lattice as `(5,232,15)`, so the proof resolves that individual
+five-dimensional torus class, which Jamshidpey's 2017 Table B.2 listed as
+unknown.  No post-2017 priority claim is made without a separate literature
+audit.  Report and certificates:
+`../2026-08-24-c925-uniform-quartic-del-pezzo-level-five.md`.
+
 ## Goal
 
-The requested opposite bound is now landed at (m=5), giving the explicit
-interval (2\le s(X)\le5).  The immediate priority frontier is the durable
-CARAT convention replay and post-2017 literature audit: the theorem appears
-to settle the five-dimensional class `(5,232,15)` left open by Jamshidpey.
-The next geometric bound (m=4) requires cancellation beyond rationality of
-(T_0), or a smaller rational quotient of the projectivized universal
-torsor.  Independently, the every-smooth (m=2) target remains open without
-a Stokes connector, while the every-smooth all-(m) target is false by
-Tschinkel--Zhang.
+The requested opposite bound is now landed uniformly at (m=5) for both
+Tschinkel--Zhang cubic families, giving their cubic threefolds the explicit
+interval (2\le s(X)\le5).  The next geometric bound (m=4) requires
+cancellation beyond rationality of (T_0), or a smaller rational quotient of
+the projectivized universal torsor.  A second split-scalar quotient is
+impossible for type (I_1): the rank-five lattice has no invariant
+cocharacter.  The adjacent priority task is the post-2017 literature audit
+for the now-solved CARAT class `(5,232,15)`.  Independently, the every-smooth
+(m=2) target remains open without a Stokes connector, while the
+every-smooth all-(m) target is false by Tschinkel--Zhang.
 
 ## Stable entry points
 

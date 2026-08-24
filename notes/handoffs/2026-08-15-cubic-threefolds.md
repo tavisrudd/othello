@@ -135,16 +135,20 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   Engel--de Gaay Fortman--Schreieder route proves all stabilizations for a
   very general cubic, conditional on the cited 2025 preprint; it does not
   cover Voisin's special universally-\(\mathrm{CH}_0\)-trivial loci.
-  The explicit type-\(I_1\) cubic of Tschinkel--Zhang Proposition 5.1 now has
-  the improved upper bound
-  \(X\times\mathbf P^5\) rational over \(\mathbf Q\).  Quotient by the
-  anticanonical scalar and both full auxiliary permutation tori.  A primitive
-  split kernel projectivizes the target four-block; the residual actor is
-  quasi-trivial and its quotient of the \(6+1\) block is a rational
-  rank-two torus.  Thus the rank-five type-\(I_1\) torus itself is rational,
-  and every type-\(I_1\) quartic del Pezzo surface with a point satisfies
-  \(S\times\mathbf A^5\) rational.  Report and exact certificate:
-  `../2026-08-24-c925-type-i1-level-five-rationality.md`.
+  The improved level-five theorem is uniform.  For the full type-\(I_3\)
+  group, quotient by the anticanonical scalar and both full auxiliary
+  permutation tori.  A primitive split kernel projectivizes the target
+  four-block; the residual actor is quasi-trivial and its quotient of the
+  \(6+1\) block is a rational rank-two torus.  Since
+  \(I_0,I_1,I_2\subset I_3\), every stably rational quartic del Pezzo surface
+  satisfies \(S\times\mathbf A^5\) rational, and every cubic hypersurface in
+  both Tschinkel--Zhang families satisfies
+  \(X\times\mathbf P^5\) rational over \(\mathbf Q\).  Their cubic
+  threefolds therefore have certified interval \(2\le s(X)\le5\).  The exact
+  CARAT replay also resolves class `(5,232,15)`, listed as unknown in
+  Jamshidpey's 2017 Table B.2; post-2017 priority remains unaudited.  Report
+  and certificates:
+  `../2026-08-24-c925-uniform-quartic-del-pezzo-level-five.md`.
 
   **Conditional finite reduction:** put \(n=m+1\).  For a connected center,
   after a native pure-Euler inner \(n\)-cycle has been placed inside one fixed
