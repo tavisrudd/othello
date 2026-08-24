@@ -215,6 +215,20 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   single-example construction problem. Report and exact certificates:
   `../2026-08-24-c925-level-three-descent-and-cancellation-frontier.md`.
 
+  **Rank-three (m=2) tangent-slice frontier:** the multiplicity-free
+  type-(I_1) cocharacter representation has exactly four invariant
+  three-planes: the sum of the three sign lines and each sign line plus the
+  irreducible two-plane. Their toric Cox-orbit degrees are `14,18,18,18`.
+  Exact facet enumeration shows that every complete Galois facet orbit spans
+  all weight blocks except for two size-three orbits in each of two cases;
+  those leave only `E3,E4,L34,Q`. An exact nonzero eight-by-eight minor after
+  deleting those four columns proves that no tangent hyperplane can be
+  supported there. Thus the direct descended first boundary-divisor peel is
+  exhausted for every invariant rank-three subtorus. This does not decide
+  (m=2): an intrinsic invariant field or non-toric base scheme remains.
+  Report and certificate:
+  `../2026-08-24-c925-rank-three-boundary-peeling-frontier.md`.
+
   **Unbounded INT-\(\Psi\) falsifier:** the isolated codimension-four
   negative-normal example extends to every \(r\ge4\) and every \(k\ge1\).
   For the section \(Z\cong\mathbf P^1\) in
