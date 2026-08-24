@@ -28,8 +28,14 @@ numerical bound.
    +3x_3^2x_4-x_4^3+x_5^3=0,
    \]
 
-   For either explicit cubic threefold \(X/\mathbf Q\) in Propositions 5.1
-   and 5.2, \(Y=X\times\mathbf P^1\)
+   The Proposition 5.2 example is
+
+   \[
+   x_4(x_1^2+2x_1x_2)+x_3(x_1^2+x_1x_2+x_2^2)
+   +x_3^3-x_3^2x_4+x_4^3+2x_5^3=0.
+   \]
+
+   For either explicit cubic threefold \(X/\mathbf Q\), \(Y=X\times\mathbf P^1\)
 
    is smooth projective and nonrational, while
 

@@ -27,6 +27,20 @@ threshold
 \boxed{s(X)=2.} \tag{3}
 \]
 
+The two explicit equations are
+
+\[
+\begin{aligned}
+X_1={}&\{(x_4-2x_3)x_1^2+3(x_4+2x_3)x_2^2
++3x_3^2x_4-x_4^3+x_5^3=0\},\\
+X_3={}&\{x_4(x_1^2+2x_1x_2)+x_3(x_1^2+x_1x_2+x_2^2)
++x_3^3-x_3^2x_4+x_4^3+2x_5^3=0\},
+\end{aligned}
+\tag{3a}
+\]
+
+inside \(\mathbf P^4\).
+
 Thus each
 
 \[
