@@ -1,5 +1,8 @@
 # C925: the explicit type-I1 cubic is rational after ten stabilizations
 
+> **Superseded on 2026-08-24:** the simultaneous three-scalar quotient in
+> `2026-08-24-c925-type-i1-level-eight-rationality.md` improves ten to eight.
+
 **Lane:** `cubic-threefolds` · **Task:** C925 · **Date:** 2026-08-24
 
 ## Result
@@ -25,7 +28,7 @@ theorem, not a method-optimality statement.  Combined with C924's
 for this explicit cubic is
 
 \[
-2\le s(X)\le10,
+2\le s(X)\le8,
 \qquad
 s(X)=\min\{m:X\times\mathbf P^m\text{ is rational}\}.
 \]

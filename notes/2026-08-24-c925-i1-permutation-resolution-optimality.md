@@ -23,8 +23,8 @@ smaller one.
 
 This is a method-optimality theorem, not a lower bound on the intrinsic
 stable-rationality level.  The successor report
-`2026-08-24-c925-type-i1-level-ten-rationality.md` supplies exactly the
-nonlinear operation omitted here and proves rationality at ten.  This result
+`2026-08-24-c925-type-i1-level-eight-rationality.md` supplies exactly the
+nonlinear operations omitted here and proves rationality at eight.  This result
 by itself proves neither rationality nor irrationality of
 \(X\times\mathbf P^m\) for any \(m<11\).
 
@@ -123,11 +123,11 @@ No source was read at full-text depth for this focused result.
 | settled | The tempting rank-seven character identity is not integral; its determinant form has content nine. | Exact determinant polynomial. |
 | settled | No target rank seven, eight, nine, or ten occurs in any direct stable-permutation identity for the type-\(I_1\) Picard lattice. | Fourteen-candidate exhaustion and modular rank obstructions. |
 | settled | Rank eleven is attained and is optimal within this method. | Tschinkel--Zhang Lemma 4.2 plus the lower bound above. |
-| settled by successor | A nonlinear birational construction lowers the actual stabilization bound to ten. | Projectivized-torsor scalar quotient; `../2026-08-24-c925-type-i1-level-ten-rationality.md`. |
+| settled by successor | A nonlinear birational construction lowers the actual stabilization bound to eight. | Three-scalar projectivized-torsor quotient; `../2026-08-24-c925-type-i1-level-eight-rationality.md`. |
 | open | Is \(X\times\mathbf P^2\) irrational? | C925's primary quantum/decorated-ledger gate remains unchanged. |
 
 ## Effect on the four-hour goal
 
 The published eleven cannot be lowered by optimizing the same permutation
 resolution.  The successor projectivized-torsor argument bypasses this
-restriction and lands ten; see the report linked above.
+restriction and lands eight; see the report linked above.

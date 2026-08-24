@@ -140,9 +140,21 @@ Thus the generic quartic del Pezzo fibre satisfies
 cubic result.  Report and exact lattice certificate:
 `../2026-08-24-c925-type-i1-level-ten-rationality.md`.
 
+**2026-08-24 improvement to eight.**  The same argument admits both diagonal
+split subtori of the auxiliary degree-three and degree-two Weil restrictions.
+Together with the anticanonical scalar, their weights on the \(6+4+1\)
+target blocks form a determinant-one matrix.  The simultaneous quotient is
+therefore a rational rank-eight torus.  Combining it with the rational
+projectivized universal torsor proves
+\[
+X\times\mathbf P^8\quad\text{is rational over }\mathbf Q
+\]
+for the explicit type-\(I_1\) cubic.  Report and exact certificate:
+`../2026-08-24-c925-type-i1-level-eight-rationality.md`.
+
 ## Goal
 
-The requested below-eleven alternative is landed at \(m=10\).  Continue
+The requested bound is now landed at \(m=8\).  Continue
 toward the every-smooth \(m=2\) theorem without a Stokes connector; an
 every-smooth all-\(m\) theorem is false by Tschinkel--Zhang.  Keep the finite
 consumer and the external geometric

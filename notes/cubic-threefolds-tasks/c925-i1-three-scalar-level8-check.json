@@ -1,0 +1,102 @@
+{
+  "cocharacter_weights": [
+    [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      -3,
+      -3,
+      -3,
+      -3,
+      4
+    ],
+    [
+      -2,
+      -2,
+      -2,
+      -2,
+      -2,
+      -2,
+      3,
+      3,
+      3,
+      3,
+      -3
+    ],
+    [
+      -3,
+      -3,
+      -3,
+      -3,
+      -3,
+      -3,
+      4,
+      4,
+      4,
+      4,
+      -4
+    ]
+  ],
+  "conclusion": "The anticanonical scalar and the two diagonal scalars of the auxiliary degree-3 and degree-2 permutation tori act with a unimodular 3-by-3 weight matrix on the 6+4+1 target blocks. Their simultaneous quotient is rational of dimension eight.",
+  "inverse_weight_matrix": [
+    [
+      0,
+      4,
+      -3
+    ],
+    [
+      1,
+      4,
+      -2
+    ],
+    [
+      1,
+      1,
+      0
+    ]
+  ],
+  "lemma_4_2_change_of_basis_determinant": -1,
+  "orbit_weight_determinant": 1,
+  "orbit_weight_matrix": [
+    [
+      2,
+      -3,
+      4
+    ],
+    [
+      -2,
+      3,
+      -3
+    ],
+    [
+      -3,
+      4,
+      -4
+    ]
+  ],
+  "quotient_dimension": 8,
+  "schema": "c925-i1-three-scalar-level8-v1",
+  "target_orbits": [
+    [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    [
+      6,
+      7,
+      8,
+      9
+    ],
+    [
+      10
+    ]
+  ],
+  "type_i1_group_order": 12
+}
