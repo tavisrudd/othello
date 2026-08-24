@@ -23,6 +23,7 @@ The canonical release files are:
 - `cubic_stabilization_irrationality.pdf` — generated manuscript;
 - `.zenodo.json` — deposition metadata;
 - `LICENSE` — CC BY 4.0 license;
+- `flake.nix` and `flake.lock` — pinned standalone build environment;
 - `verification/slice-cover-certificate.json` — exact certificate;
 - `verification/check_slice_cover.py` — exact-arithmetic replay checker;
 - `verification/claim-map.json` and `formal-annotations.tex` — claim and

@@ -51,6 +51,8 @@ for relative in (
     "cubic_stabilization_irrationality.tex",
     "cubic_stabilization_irrationality.pdf",
     "LICENSE",
+    "flake.nix",
+    "flake.lock",
     "verification/slice-cover-certificate.json",
     "verification/check_slice_cover.py",
 ):
