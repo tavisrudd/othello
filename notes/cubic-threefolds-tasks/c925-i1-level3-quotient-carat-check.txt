@@ -1,0 +1,2 @@
+rank_three_quotient_character_carat=[ 3, 25, 2 ]
+rank_three_quotient_kunyavskii_rational=true

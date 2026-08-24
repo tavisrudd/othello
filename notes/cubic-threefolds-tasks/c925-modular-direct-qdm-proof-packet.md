@@ -269,8 +269,16 @@ Report and exact certificates:
 
 The requested opposite bound is now landed uniformly at \(m=4\) for both
 Tschinkel--Zhang cubic families, giving their cubic threefolds the explicit
-interval \(2\le s(X)\le4\). The next geometric bound \(m=3\) encounters invariant rank-two
-quadric orbit closures rather than linear planes. The adjacent priority task is the post-2017 literature audit
+interval \(2\le s(X)\le4\). At \(m=3\), two type-\(I_1\) sign directions
+give Segre-quadric orbit closures and a rational residual rank-three torus
+of CARAT class `(3,25,2)`. The exact tangent one-point slice works over the
+splitting field but its selected boundary ruling does not descend: Galois
+exchanges it with the complementary opposite ruling. Resolving this nonlinear
+descent either lowers the rationality bound to three or, if
+\(X\times\mathbf P^3\) is irrational, gives a nonrational \(Y\) with
+\(Y\times\mathbf A^1\) rational. Exact report:
+`../2026-08-24-c925-level-three-descent-and-cancellation-frontier.md`.
+The adjacent priority task is the post-2017 literature audit
 for the now-solved CARAT class `(5,232,15)`.  Independently, the every-smooth
 \(m=2\) target remains open without a Stokes connector, while the
 every-smooth all-\(m\) target is false by Tschinkel--Zhang.

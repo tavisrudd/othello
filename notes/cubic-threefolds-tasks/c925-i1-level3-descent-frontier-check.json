@@ -1,0 +1,159 @@
+{
+  "boundary_ruling_jacobian_generic_rank": 6,
+  "conclusion": "The two sign directions have four Cox weight blocks of size four, so general orbit closures are Segre quadrics. Over a splitting field, the tangent space meets a boundary-ruling coordinate space in projective dimension one, enabling the expected one-boundary-plus-one-open tangent slice. The ruling does not descend: a type-I1 generator exchanges it with the opposite ruling, and the two coordinate spaces span all P15. The residual rank-three character lattice has CARAT class (3,25,2).",
+  "cox_weight_blocks": {
+    "0,0": [
+      "E1",
+      "E2",
+      "E5",
+      "L34"
+    ],
+    "0,1": [
+      "E3",
+      "L14",
+      "L24",
+      "L45"
+    ],
+    "1,0": [
+      "E4",
+      "L13",
+      "L23",
+      "L35"
+    ],
+    "1,1": [
+      "L12",
+      "L15",
+      "L25",
+      "Q"
+    ]
+  },
+  "galois_conjugate_opposite_ruling_coordinate_space": [
+    "E4",
+    "L13",
+    "L23",
+    "L35",
+    "L12",
+    "L15",
+    "L25",
+    "Q"
+  ],
+  "generator_actions_on_weight_blocks": [
+    {
+      "0,0": "0,1",
+      "0,1": "0,0",
+      "1,0": "1,1",
+      "1,1": "1,0"
+    },
+    {
+      "0,0": "1,0",
+      "0,1": "1,1",
+      "1,0": "0,0",
+      "1,1": "0,1"
+    }
+  ],
+  "nonzero_six_minor_columns_zero_based": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "nonzero_six_minor_factorization": "z3*(b*z1 - z3)*(a*b*z1*z2 - a*b*z1*z3 + a*z1*z3 - a*z2*z3 - b*z1*z2 + b*z2*z3)",
+  "nonzero_six_minor_rows_zero_based": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    7
+  ],
+  "one_boundary_ruling_coordinate_space": [
+    "E1",
+    "E2",
+    "E5",
+    "L34",
+    "E3",
+    "L14",
+    "L24",
+    "L45"
+  ],
+  "opposite_ruling_spaces_span_all_coordinates": true,
+  "picard_cocharacter_lifts": [
+    [
+      1,
+      0,
+      0,
+      0,
+      1,
+      0
+    ],
+    [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+    ]
+  ],
+  "quotient_character_carat_class": [
+    3,
+    25,
+    2
+  ],
+  "quotient_character_generator_actions": [
+    [
+      [
+        -1,
+        0,
+        0
+      ],
+      [
+        1,
+        1,
+        -1
+      ],
+      [
+        0,
+        0,
+        -1
+      ]
+    ],
+    [
+      [
+        0,
+        -1,
+        0
+      ],
+      [
+        -1,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        -1
+      ]
+    ]
+  ],
+  "rank_two_sign_cocharacters": [
+    [
+      0,
+      0,
+      0,
+      1,
+      1
+    ],
+    [
+      0,
+      0,
+      1,
+      0,
+      1
+    ]
+  ],
+  "schema": "c925-i1-level3-descent-frontier-v1",
+  "type_i1_group_order": 12
+}

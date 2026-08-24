@@ -185,6 +185,23 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   \(X\times\mathbf P^4\) rational. Report:
   `../2026-08-24-c925-uniform-level-four-rationality.md`.
 
+  **Exact level-three frontier:** for type \(I_1\), the saturated span of
+  two sign cocharacters has four Cox weight blocks of size four, so its
+  generic orbit closure is a Segre quadric. The residual rank-three
+  character torus is CARAT `(3,25,2)` and is rational by Kunyavskii's
+  complete classification. Over the splitting field, an exact Cox-Jacobian
+  rank-six calculation produces the expected tangent two-hyperplane slice:
+  one boundary point plus one open-orbit point. It does not descend by the
+  direct linear construction, because Galois exchanges the chosen boundary
+  ruling with its opposite and their coordinate spaces span all
+  \(\mathbf P^{15}\). Thus the remaining gate is nonlinear descent, not
+  residual-torus rationality. Moreover, if
+  \(Y=X\times\mathbf P^3\) is irrational, then the uniform level-four
+  theorem makes \(Y\times\mathbf A^1\) rational, producing the cancellation
+  example Tschinkel--Zhang record as unknown; if \(Y\) is rational, the
+  bound drops to three. Report and exact certificates:
+  `../2026-08-24-c925-level-three-descent-and-cancellation-frontier.md`.
+
   **Conditional finite reduction:** put \(n=m+1\).  For a connected center,
   after a native pure-Euler inner \(n\)-cycle has been placed inside one fixed
   outer correction factor, Lean's cyclic dimension consumer forces \(d=n\)
