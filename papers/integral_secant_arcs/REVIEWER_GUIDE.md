@@ -34,6 +34,10 @@ The load-bearing modular steps are in Sections 5 and 6.
    forward difference through `T_0+vm`, and then proves that the real lower
    bound for the forward difference is positive for every later `T`.  Thus it
    proves `T = ud(v+1)m + O_{u,v,C,K}(1)` uniformly over the bounded family.
+   Before applying the lemma in Theorem 1.2, the classical incidence bound
+   supplies `c_m >= c_mix - O_{u,v}(m^-1)`; the automatic case supplies the
+   upper bound.  Hence the lemma's two-sided boundedness hypothesis holds
+   with `e_m=0`.
    In the subsequent coefficient calculation, the balanced internal degrees
    can cross from `(a-1,a)` to `(a,a+1)`.  The display labelled
    `eq:pair-linear` uses equality on the first branch and the convex
@@ -54,9 +58,13 @@ The load-bearing modular steps are in Sections 5 and 6.
    size is bounded; the proofs pass to a subsequence on which it is fixed.
 6. **Where does completeness enter after repair?**
    Lemma 5.1 dualizes every repair-support point to a primal line.  Away from
-   intersections of those lines, a wrong residue and the external lower
-   degree force positive secant excess.  This produces the additional linear
-   term.  Equation (5.4) rules out support one in one residue class.
+   intersections of those lines, the dual line contains exactly one support
+   point, whose correction coefficient is nonzero modulo `p`; hence its
+   original residue is wrong.  The external lower degree then forces positive
+   secant excess.  This produces the additional linear term.  For `d=p^j`
+   and `q=p^e=dm`, one has `m=p^(e-j)`, so the leading term of `T` vanishes
+   modulo `p` once `e>j`; Equation (5.4) then rules out support one in one
+   residue class.
 7. **Are the final constants correct?**
    The characteristic-three proof minimizes two affine bounds over the three
    residue classes.  The characteristic-two proof separates odd and even

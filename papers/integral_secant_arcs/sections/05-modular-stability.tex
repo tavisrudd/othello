@@ -41,8 +41,9 @@ Fix an ordered factorization \(\lambda=uv\) and suppose
 \]
 where \(h\in\mathbb Z\).  Suppose every external point is on at least
 \(\lambda\) \(n\)-secants, and suppose \(\mathcal L^*\) can be changed at
-\(r\) distinct support points into a multiset meeting every line in
-\(\lambda\pmod p\) points.  If \(r\) is fixed and nonzero, then
+\(r\) distinct support points, with nonzero correction coefficient modulo
+\(p\) at each, into a multiset meeting every line in \(\lambda\pmod p\)
+points.  If \(r\) is fixed and nonzero, then
 \begin{equation}\label{eq:repair-support-bound}
  c\ge L(h)+\frac ru.
 \end{equation}
@@ -50,8 +51,10 @@ where \(h\in\mathbb Z\).  Suppose every external point is on at least
 
 \begin{proof}
 Dualize the \(r\) support points to \(r\) lines of the original plane.
-Away from their pairwise intersections, a point on one of these lines has
-\(n\)-secant multiplicity different from \(\lambda\pmod p\).  If it is
+Away from their pairwise intersections, a primal point on one support line
+corresponds dually to a line containing exactly one support point.  The
+correction coefficient there is nonzero modulo \(p\), so the original
+\(n\)-secant multiplicity differs from \(\lambda\pmod p\).  If the point is
 external, its multiplicity is at least \(\lambda+1\).  A support line contains
 at most \(n\) points of \(\mathcal K\), and the union loses only
 \(O(r^2)\) points at pairwise intersections.  Hence the total external excess
@@ -71,8 +74,10 @@ Comparing \eqref{eq:repair-excess-lower} and
 There is a useful restriction when \(r=1\).  Summing the line intersections
 of an exact \(\lambda\pmod p\) multiset over a pencil shows that its total
 multiplicity is \(\lambda\pmod p\).  Along a characteristic-compatible
-family the leading term of \(T\) is divisible by \(p\), so the correction has
-total multiplicity \(\lambda-h\pmod p\).  Consequently, if
+family write \(d=p^j\) and \(q=p^e=dm\).  Then \(m=p^{e-j}\) is divisible
+by \(p\) once \(e>j\), so the leading term of \(T\) is divisible by \(p\).
+The correction therefore has total multiplicity
+\(\lambda-h\pmod p\).  Consequently, if
 \begin{equation}\label{eq:support-one-obstruction}
  h\equiv\lambda\pmod p,
 \end{equation}
