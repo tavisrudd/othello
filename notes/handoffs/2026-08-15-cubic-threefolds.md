@@ -193,7 +193,10 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   rational. No normality or rational-normal-curve hypothesis on the orbit
   closure is needed. This makes the Tschinkel--Zhang level-four theorem a
   corollary of a reusable result while the exact rank-two polytope exhaustion
-  explains why it does not iterate to level three. Report:
+  explains why it does not iterate to level three. More generally, a
+  rank-\(r\) torus quotient is rational when a tangent codimension-\(r\)
+  section leaves exactly a Galois-stable unimodular \(r\)-simplex of weight
+  blocks: the section equations have a unique open-orbit solution. Report:
   `../2026-08-24-c925-adjacent-weight-oadp-quotient-theorem.md`.
 
   **Exact level-three frontier:** for type \(I_1\), the saturated span of

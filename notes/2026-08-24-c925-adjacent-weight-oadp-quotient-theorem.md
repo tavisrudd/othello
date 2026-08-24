@@ -72,6 +72,57 @@ The proof does not require the orbit closure to be normal, a rational normal
 curve, or to have every intermediate weight. All unused degree is absorbed
 at the toric boundary by (2); adjacency is exactly what leaves one open root.
 
+## Higher-rank unimodular-window form
+
+The same argument is not intrinsically one-dimensional. Let \(T\) be a
+rank-\(r\) \(K\)-torus acting generically freely on the same OADP variety
+\(Z\). Over a separable closure, suppose there are \(r+1\) nonzero weight
+blocks
+
+\[
+V_{w_0},V_{w_1},\ldots,V_{w_r} \tag{7}
+\]
+
+such that
+
+\[
+w_1-w_0,\ldots,w_r-w_0
+\]
+
+is a \(\mathbf Z\)-basis of \(X^*(T_{\bar K})\). Suppose a \(K\)-defined
+linear subspace \(B\) contains every other weight block, and for general
+\(z\in Z(K)\) there is a \(K\)-defined codimension-\(r\) linear space
+
+\[
+\Lambda\supset\langle T_zZ,B\rangle \tag{8}
+\]
+
+whose \(r\) equations restrict to an \(r\times(r+1)\) coefficient matrix of
+rank \(r\) with every coordinate of its kernel vector nonzero. Then
+
+\[
+\boxed{Z/T\text{ is }K\text{-rational}.} \tag{9}
+\]
+
+Indeed, tangent projection maps \(\Lambda\cap Z\) birationally to
+\(\mathbf P^{n-r}\). On a general open \(T\)-orbit, the equations of
+\(\Lambda\) involve only the \(r+1\) characters in (7). Their coefficient
+matrix fixes all ratios
+
+\[
+\chi^{w_i-w_0}(t),\qquad 1\le i\le r.
+\]
+
+The unimodularity hypothesis makes these ratios a coordinate system on
+\(T_{\bar K}\), so there is exactly one geometric open-orbit solution.
+Because the construction is defined over \(K\), this is a generically
+one-point \(K\)-slice and proves (9).
+
+The rank-one theorem is the case in which the unimodular simplex consists of
+two adjacent integer weights. The higher-rank formulation isolates the
+precise sought-for geometry at levels three and two: a descended unimodular
+weight window compatible with the OADP tangent center.
+
 ## Tschinkel--Zhang applications
 
 Let \(Z=\mathbf P(\mathcal U)\subset\mathbf P^{15}\) be the projective Cox
@@ -103,11 +154,11 @@ corresponding stable-rationality bound.
 ## Why the theorem stops at the next level
 
 For a rank-two torus, the natural type-\(I_1\) orbit polytopes are a square,
-two rectangles, and a hexagon. A codimension-two analogue would need a
-Galois-stable unimodular simplex window. The exact rank-two exhaustion shows
+two rectangles, and a hexagon. The higher-rank theorem would require a
+Galois-stable unimodular triangle window. The exact rank-two exhaustion shows
 that every available boundary-edge orbit forces open degree divisible by two
-or three. Thus the adjacent-weight theorem explains the level-four success
-without silently implying level three or level two.
+or three. Thus the general theorem explains the level-four success without
+silently implying level three or level two.
 
 ## Evidence and scope
 
