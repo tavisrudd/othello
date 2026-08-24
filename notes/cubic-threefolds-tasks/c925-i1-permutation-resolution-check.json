@@ -1,0 +1,591 @@
+{
+  "conclusion": "For the displayed type-I1 Picard lattice, no stable-permutation identity Pic+P=P' has rank(P')<11. The paper's rank-11 identity is therefore optimal within this method, not an intrinsic lower bound on the stable-rationality level.",
+  "exhaustion": {
+    "candidates": [
+      {
+        "obstructions": [
+          [
+            3,
+            [
+              "sum",
+              2,
+              2,
+              3,
+              4
+            ]
+          ]
+        ],
+        "source": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "source_rank": 1,
+        "target": [
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "target_rank": 7
+      },
+      {
+        "obstructions": [
+          [
+            3,
+            [
+              "sum",
+              2,
+              2,
+              5,
+              6
+            ]
+          ]
+        ],
+        "source": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "source_rank": 4,
+        "target": [
+          0,
+          0,
+          0,
+          0,
+          2,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "target_rank": 10
+      },
+      {
+        "obstructions": [
+          [
+            2,
+            [
+              "product",
+              2,
+              2,
+              1,
+              0
+            ]
+          ]
+        ],
+        "source": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "source_rank": 4,
+        "target": [
+          0,
+          0,
+          1,
+          1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        "target_rank": 10
+      },
+      {
+        "obstructions": [
+          [
+            3,
+            [
+              "sum",
+              2,
+              2,
+              4,
+              5
+            ]
+          ]
+        ],
+        "source": [
+          1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "source_rank": 3,
+        "target": [
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "target_rank": 9
+      },
+      {
+        "obstructions": [
+          [
+            3,
+            [
+              "sum",
+              2,
+              2,
+              3,
+              4
+            ]
+          ]
+        ],
+        "source": [
+          1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "source_rank": 3,
+        "target": [
+          0,
+          0,
+          1,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "target_rank": 9
+      },
+      {
+        "obstructions": [
+          [
+            3,
+            [
+              "sum",
+              2,
+              2,
+              4,
+              5
+            ]
+          ]
+        ],
+        "source": [
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "source_rank": 3,
+        "target": [
+          0,
+          1,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "target_rank": 9
+      },
+      {
+        "obstructions": [
+          [
+            3,
+            [
+              "sum",
+              2,
+              2,
+              3,
+              4
+            ]
+          ]
+        ],
+        "source": [
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "source_rank": 2,
+        "target": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "target_rank": 8
+      },
+      {
+        "obstructions": [
+          [
+            3,
+            [
+              "sum",
+              2,
+              2,
+              4,
+              5
+            ]
+          ]
+        ],
+        "source": [
+          2,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "source_rank": 4,
+        "target": [
+          1,
+          0,
+          0,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "target_rank": 10
+      },
+      {
+        "obstructions": [
+          [
+            3,
+            [
+              "sum",
+              2,
+              2,
+              3,
+              4
+            ]
+          ]
+        ],
+        "source": [
+          2,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "source_rank": 4,
+        "target": [
+          1,
+          0,
+          1,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "target_rank": 10
+      },
+      {
+        "obstructions": [
+          [
+            3,
+            [
+              "sum",
+              2,
+              2,
+              4,
+              5
+            ]
+          ]
+        ],
+        "source": [
+          2,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "source_rank": 4,
+        "target": [
+          1,
+          1,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "target_rank": 10
+      },
+      {
+        "obstructions": [
+          [
+            2,
+            [
+              "product",
+              2,
+              2,
+              1,
+              0
+            ]
+          ]
+        ],
+        "source": [
+          3,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "source_rank": 3,
+        "target": [
+          0,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "target_rank": 9
+      },
+      {
+        "obstructions": [
+          [
+            3,
+            [
+              "sum",
+              2,
+              2,
+              3,
+              4
+            ]
+          ]
+        ],
+        "source": [
+          3,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "source_rank": 3,
+        "target": [
+          2,
+          0,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "target_rank": 9
+      },
+      {
+        "obstructions": [
+          [
+            2,
+            [
+              "product",
+              2,
+              2,
+              1,
+              0
+            ]
+          ]
+        ],
+        "source": [
+          4,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "source_rank": 4,
+        "target": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "target_rank": 10
+      },
+      {
+        "obstructions": [
+          [
+            3,
+            [
+              "sum",
+              2,
+              2,
+              3,
+              4
+            ]
+          ]
+        ],
+        "source": [
+          4,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "source_rank": 4,
+        "target": [
+          3,
+          0,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "target_rank": 10
+      }
+    ],
+    "rational_candidates_target_rank_below_11": 14,
+    "target_rank_counts": {
+      "10": 7,
+      "7": 1,
+      "8": 1,
+      "9": 5
+    },
+    "unobstructed_candidates": 0
+  },
+  "group": {
+    "i1_order_profile": {
+      "1": 1,
+      "2": 7,
+      "3": 2,
+      "6": 2
+    },
+    "i3_order": 24,
+    "subgroup_conjugacy_classes": 10
+  },
+  "schema": "c925-i1-permutation-resolution-v1",
+  "source_reconstruction": {
+    "lemma_4_2_change_of_basis_determinant": -1,
+    "rank_seven_determinant_content": 9,
+    "rank_seven_determinant_terms": 153
+  }
+}

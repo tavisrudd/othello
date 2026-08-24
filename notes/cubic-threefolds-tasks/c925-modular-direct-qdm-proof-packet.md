@@ -106,6 +106,14 @@ the whole reconstruction loop, but (5.40) gives genuine positive \(q\)-powers
 at negative-normal centres, so this does not prove (INT-\(\Psi\)); the next
 gate is a joint \((q,z)\)-filtered base-row calculation.  Report:
 `../2026-08-24-c925-int-psi-reconstruction-and-stable-rationality-boundary.md`.
+The first opposite-route test is also closed exactly: after restricting
+Tschinkel--Zhang's displayed permutation resolution to the type-\(I_1\)
+group \(C_2\times S_3\), all fourteen rational-character candidates with
+target rank below eleven fail by a mod-two or mod-three group-algebra rank
+invariant.  Thus their bound eleven is optimal within the direct
+stable-permutation method, although nonlinear birational stabilization below
+eleven remains open.  Report:
+`../2026-08-24-c925-i1-permutation-resolution-optimality.md`.
 
 ## Goal
 
@@ -334,6 +342,11 @@ realization of that orbit.
   stably rational cubic threefolds refute the every-smooth all-\(m\) target
   while leaving \(m=2\) open:
   notes/2026-08-24-c925-int-psi-reconstruction-and-stable-rationality-boundary.md
+- Type-\(I_1\) stable-permutation resolution audit: exact restriction of
+  Tschinkel--Zhang's lattice, all fourteen target-rank \(<11\) rational
+  character candidates rejected integrally by modular group-algebra ranks;
+  eleven is method-optimal but not an intrinsic stabilization lower bound:
+  notes/2026-08-24-c925-i1-permutation-resolution-optimality.md
 
 The packet index owns the module-to-file map.  Do not append another large
 module to this card or to the index; add one focused companion file and one

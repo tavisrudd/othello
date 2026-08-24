@@ -313,6 +313,12 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   Section 4 bound implies \(X\times\mathbf P^{11}\) is rational for the
   explicit \(r=0\) cubic by a function-field argument.  Report:
   `../2026-08-24-c925-int-psi-reconstruction-and-stable-rationality-boundary.md`.
+  The direct opposite-route optimization is now exhausted as well: the
+  type-\(I_1\) Picard lattice admits no stable-permutation identity with
+  target rank below eleven (fourteen character candidates, each obstructed
+  modulo two or three), so the published eleven is optimal within that
+  method but remains no intrinsic lower bound.  Report:
+  `../2026-08-24-c925-i1-permutation-resolution-optimality.md`.
 
 - **C924 — closed 2026-08-19.** The direct ordinary-QDM route proves
   irrationality of `X x P^1` after one mandatory local repair: compare the
