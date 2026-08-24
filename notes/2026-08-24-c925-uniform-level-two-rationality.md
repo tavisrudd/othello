@@ -114,10 +114,10 @@ Full-\(I_3\) lattice and weight certificate:
 
 - notes/cubic-threefolds-tasks/c925-i3-level4-cubic-slice-check.py,
   SHA-256
-  18c62d35c2f739ed816146cd9c8a1a1d0e14dbc668dff4d9a366b9d516575efe;
+  eccf2a5e20f4f8c24b29f24c170dbf6726ebe20078b0af27a26733960321180f;
 - notes/cubic-threefolds-tasks/c925-i3-level4-cubic-slice-check.json,
   SHA-256
-  6fcd194e8ca17ee06740277e2d515b8a991768974934e04f58e024b9f982d0be.
+  c8ceaf4187ba09b3828d264f58b35ccf5131d34acc3f274449ed9447bd091fd6.
 
 Replay:
 

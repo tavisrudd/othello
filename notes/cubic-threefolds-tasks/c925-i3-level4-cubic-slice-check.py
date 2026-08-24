@@ -160,6 +160,20 @@ rank_three_blocks = {
     ]
     for weight in sorted(set(rank_three_weights))
 }
+rank_three_points = sorted(rank_three_blocks)
+rank_three_affine_actions = []
+for action in rank_three_actions:
+    dual = action.inv().T
+    for target in map(sp.Matrix, rank_three_points):
+        shift = target-dual*sp.Matrix(rank_three_points[0])
+        images = [
+            tuple(dual*sp.Matrix(weight)+shift) for weight in rank_three_points
+        ]
+        if set(images) == set(rank_three_points):
+            rank_three_affine_actions.append(dict(zip(rank_three_points, images)))
+            break
+    else:
+        raise AssertionError("type-I3 action did not preserve rank-three weights")
 unimodular_window_weights = (
     (0, 1, 1), (1, 0, 1), (1, 1, 0), (1, 1, 1),
 )
@@ -170,6 +184,11 @@ assert unimodular_window_blocks == [
     ["E1", "E2", "E5"],
     ["L12", "L15", "L25"],
 ]
+assert all(
+    {action[weight] for weight in unimodular_window_weights}
+    == set(unimodular_window_weights)
+    for action in rank_three_affine_actions
+)
 window_difference_matrix = sp.Matrix.hstack(*(
     sp.Matrix(weight)-sp.Matrix(unimodular_window_weights[0])
     for weight in unimodular_window_weights[1:]
@@ -219,6 +238,13 @@ certificate = {
         "generator_actions": [
             [[int(entry) for entry in matrix.row(row)] for row in range(3)]
             for matrix in rank_three_actions
+        ],
+        "affine_weight_generator_actions": [
+            {
+                ",".join(map(str, weight)): [int(entry) for entry in action[weight]]
+                for weight in rank_three_points
+            }
+            for action in rank_three_affine_actions
         ],
         "unimodular_window_weights": [list(weight) for weight in unimodular_window_weights],
         "unimodular_window_blocks": unimodular_window_blocks,
