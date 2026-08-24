@@ -3,10 +3,10 @@
 **Lane**: `complete-ports`
 
 **Date**: 2026-08-24
-**Status**: ACTIVE; C950--C952 ARCHITECTURE, PAPER-LOCAL FORMAL BOUNDARY, AND
-17-PAGE MANUSCRIPT REBUILD COMPLETE; C325 APPENDIX VERIFIER AND C953 AGGREGATE
-REVIEW FOLLOW IN THAT ORDER; LOCAL STANDALONE EXPORT AT `2d90a8b` COMPLETE;
-NO PUSH OR DEPOSIT
+**Status**: ACTIVE; C954 DUAL FAILURE-THRESHOLD UPGRADE COMPLETE AFTER
+LITERATURE, PROOF, FRESH-COLD-READ, AND 18-PAGE RELEASE GATES; C325 APPENDIX
+VERIFIER AND C953 AGGREGATE REVIEW FOLLOW; C955 COEFFICIENT-
+PRESENTATION SPECTRUM IS QUEUED AFTER C953; NO PUSH OR DEPOSIT
 **Theorem source lane**: archived [`repaircodes`](done/2026-07-13-projective-completion-repaircodes.md)
 **Current private paper**: [`complete-repair-ports`](../../papers/complete-repair-ports/README.md)
 **Canonical paper identity**: `complete-ports` — *Exact Transfer of Bounded Linear Recovery and
@@ -88,7 +88,14 @@ Completed preparation:
 
 **Discovery companion**: [complete-ports discovery track](../complete-ports-discovery-track.md).
 
-Completed strengthening:
+Current and completed strengthening:
+
+- [C954 dual failure-threshold upgrade](../2026-08-24-c954-dual-failure-threshold.md)
+  identifies the minimum failures leaving each dimension of target ambiguity
+  with the RGHWs of the dual nested pair, using pointwise
+  shortening--puncturing duality rather than a false hierarchy-level duality;
+  a fresh cold read found one proof-wording defect, which was repaired and
+  passed reread.
 
 - [C952 manuscript rebuild](../2026-08-24-c952-recovery-manuscript-rebuild.md)
   produces the 17-page theorem-led paper, strengthens confinement to its exact
@@ -149,8 +156,9 @@ generic coefficient optimization, and BGS packing remain outside this paper.
 
 ## Next step
 
-C952 is closed. Run C325 appendix-only verification next, then C953 aggregate
-referee/export review. Before nontrivial proof development or
+C954 is closed.  Run C325 appendix-only verification next, then C953
+aggregate referee/export review.  C955
+owns the later coefficient-presentation spectrum. Before nontrivial proof development or
 formalization, read the paper-specific expert dossier
 [`papers/expert-profiles/05-complete-repair-ports.md`](../../papers/expert-profiles/05-complete-repair-ports.md).
 

@@ -158,8 +158,9 @@ target is closed-negative by `notes/2026-07-24-c80-capok-depth-obstruction.md`.
 
 ### `complete-ports`
 
-- **C325 `[complete-ports]` [QUEUED AFTER C952; APPENDIX-ONLY]** — build one consolidated executable verifier reproducing every retained finite appendix table from a versioned manifest, with independent replay and per-claim evidence routes; no certificate or generated table may carry a main-spine theorem → `notes/2026-07-18-c151-certificate-portfolio-fable-review.md`.
+- **C325 `[complete-ports]` [QUEUED NEXT; APPENDIX-ONLY]** — build one consolidated executable verifier reproducing every retained finite appendix table from a versioned manifest, with independent replay and per-claim evidence routes; no certificate or generated table may carry a main-spine theorem → `notes/2026-07-18-c151-certificate-portfolio-fable-review.md`.
 - **C953 `[complete-ports]` [QUEUED AFTER C325; AGGREGATE REFEREE/EXPORT GATE]** — run aggregate theorem, human-proof, Lean adequacy, axiom, terminology, literature, computation-independence, rendered-manuscript, and hostile referee audits of the rebuilt paper; repair all findings, issue the draft-readiness verdict, and perform only the already authorized local standalone synchronization/verification, with no push, deposit, or submission → `notes/2026-08-24-c953-recovery-aggregate-review.md`.
+- **C955 `[complete-ports]` [QUEUED AFTER C953; COEFFICIENT-PRESENTATION SPECTRUM]** — for a fixed nested code pair and target dimension, characterize the attainable minimum distances of represented coefficient presentations and optimize the additive confinement term without changing the relative-weight hierarchy → `notes/2026-08-24-c955-coefficient-presentation-spectrum.md`.
 ### `continuation`
 
 - **C271 `[continuation]` [QUEUED]** — N2-gate literature closure: obtain full texts of Drake–Sané and Metsch (LNM 1490) and run the MathSciNet/zbMATH forward-citation check, then record the outcome in the audit note (implements the audit's recorded residual diligence for the N2 SOFTEN verdict; does not re-decide N1 SURVIVES) → `notes/2026-07-11-continuation-rigidity-audit-scope.md`.

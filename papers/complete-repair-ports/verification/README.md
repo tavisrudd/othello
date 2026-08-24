@@ -6,7 +6,7 @@ The paper-local Mathlib package in `lean/` proves the exact sequence attached
 to the target/helper split. Its reviewer interface contains four terminals,
 and its kernel axiom audit reports exactly `Classical.choice`, `Quot.sound`,
 and `propext`. The claim map in `lean/verification/claims.json` records one
-Lean-complete manuscript statement and sixteen statements with no Lean
+Lean-complete manuscript statement and seventeen statements with no Lean
 coverage. In particular, the relative-weight identity and concatenation
 theorems have human proofs only.
 

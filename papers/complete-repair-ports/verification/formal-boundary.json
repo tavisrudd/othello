@@ -7,7 +7,7 @@
   "terminal_namespace": "TavisRuddFiniteGeom.Papers.RecoveryStructures.",
   "lean_toolchain": "leanprover/lean4:v4.32.0-rc1",
   "mathlib_rev": "571b8a8e54219b4d393f75f4b8653fac08197fcc",
-  "claim_count": 17,
+  "claim_count": 18,
   "complete_claim_count": 1,
   "terminal_count": 4,
   "permitted_axioms": [

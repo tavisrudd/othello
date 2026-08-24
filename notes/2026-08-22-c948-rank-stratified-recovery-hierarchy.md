@@ -660,22 +660,28 @@ This is a sharp coefficient-aware separation: internal rank recoverability is
 unchanged, but the target coefficient presentation changes the least cost of a
 nonconfined recovery system.
 
-## 8. Relative duality
+## 8. Pointwise shortening--puncturing duality
 
-Relative Wei duality for ((D_P,K_P)) and
-((K_P^\perp,D_P^\perp)) supplies the complementary failure hierarchy. The
-primal weights give the minimum helpers needed to reveal (t) independent
-linear combinations of the target coordinates; the dual weights give the
-complementary support thresholds for
-remaining target ambiguity. Together these two established hierarchies state
-both the minimum helpers needed for recovery and the complementary support
-thresholds for residual ambiguity. This is the clean bridge to erasure
-resilience, ramp secret sharing, and the two endpoint regimes of the EXIT
-curve.
+For a surviving helper set (H\subseteq J) and failed complement
+(F=J\setminus H), the standard shortening--puncturing identity gives
 
-No new relative-duality theorem is claimed here. The new content is its exact
-translation through the associated nested pair and the additive
-nonconfinement threshold under concatenation.
+\[
+ \ell-\dim\bigl(W_P\cap\operatorname{span}(G_H)\bigr)
+ =\dim(K_P^\perp\cap\mathbb F_q^F)
+  -\dim(D_P^\perp\cap\mathbb F_q^F).
+\]
+
+It follows that (M_t(K_P^\perp,D_P^\perp)) is the minimum number of helper
+failures leaving at least (t) target dimensions ambiguous.  The primal weights
+give minimum helper costs for recovery, while the dual-pair weights give
+minimum failure costs for residual ambiguity.
+
+This statement must not be called relative Wei duality.  In general, the RGHW
+hierarchy of a nested pair does not determine that of its dual pair; San-José's
+Example 2.10 gives an explicit counterexample.  What is used here is the
+pointwise shortening--puncturing duality recorded in Luo et al. and in
+equations (1)--(2) of Geil--Martin--Matsumoto--Ruano--Luo.  The recovery
+interpretation through the associated nested pair is the paper-specific step.
 
 ## 9. Best-target dual-weight identity and cooperative-locality corollary
 
