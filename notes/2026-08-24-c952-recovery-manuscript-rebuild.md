@@ -278,6 +278,22 @@ identity.  The accepted PDF SHA-256 is
 the distribution-manifest SHA-256 is
 `7ecdba5e8a871567ae5c101a58ee146e3701d3a20b7900749f5073ec34d02f6d`.
 
+## Post-close local export
+
+On 2026-08-24 the committed authority was exported through
+`papers/scripts/export-paper-repos.py` to the existing standalone repository
+`/home/tavis/src/math-papers/complete-repair-ports`.  The exporter plan and
+audit reported 37 distributed files and zero findings.  Five superseded
+finite-evidence/figure files were removed in the separate recoverable mirror
+commit `c934fc1`; the synchronized paper is mirror commit `2d90a8b`, derived
+from authority commit `ae05e168e`.
+
+The standalone release gate passes with 17 warning-free pages, 17 claims, and
+four Lean terminals.  The exporter verification reports 40 tracked files: the
+37-file scholarly distribution plus `.gitignore`, `PROVENANCE.md`, and
+`export-manifest.json`.  The PDF and distribution-manifest hashes match the
+authority byte for byte.  No push or Zenodo deposit was made.
+
 Formalization of the RGHW and confinement theorems is absent by explicit
 choice, not silently assumed. A future formalization would require new claim
 rows and reviewer terminals before the paper could change that statement.

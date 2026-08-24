@@ -5,12 +5,14 @@
 **Date**: 2026-08-24
 **Status**: ACTIVE; C950--C952 ARCHITECTURE, PAPER-LOCAL FORMAL BOUNDARY, AND
 17-PAGE MANUSCRIPT REBUILD COMPLETE; C325 APPENDIX VERIFIER AND C953 AGGREGATE
-REVIEW FOLLOW IN THAT ORDER; REMOTE PUBLICATION GATED
+REVIEW FOLLOW IN THAT ORDER; LOCAL STANDALONE EXPORT AT `2d90a8b` COMPLETE;
+NO PUSH OR DEPOSIT
 **Theorem source lane**: archived [`repaircodes`](done/2026-07-13-projective-completion-repaircodes.md)
 **Current private paper**: [`complete-repair-ports`](../../papers/complete-repair-ports/README.md)
 **Canonical paper identity**: `complete-ports` — *Exact Transfer of Bounded Linear Recovery and
 Relative Weight Hierarchies*
-**Approved paper repository**: `tavisrudd/complete-ports` at `~/src/papers/complete-ports`
+**Standalone paper repository**: `tavisrudd/complete-repair-ports` at
+`~/src/math-papers/complete-repair-ports`
 **Approved paper license**: MIT
 
 ## Goal
