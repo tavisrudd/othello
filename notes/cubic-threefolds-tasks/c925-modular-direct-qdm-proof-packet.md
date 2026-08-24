@@ -174,15 +174,38 @@ X\times\mathbf P^6\quad\text{rational over }\mathbf Q.
 Report and exact certificate:
 `../2026-08-24-c925-type-i1-level-six-rationality.md`.
 
+**2026-08-24 improvement to five.**  Quotient by both full auxiliary tori.
+The primitive kernel on the (6+1) target block is now
+\[
+(-1,-4,-4,-4,2,2);
+\]
+it remains split and acts scalarly with weight (-1) on the four-block.  The
+residual acting torus is quasi-trivial, with character lattice the direct sum
+of the degree-three and degree-two permutation lattices, and its quotient of
+the (6+1) block has rank two.  Voskresenskii's theorem makes that quotient
+rational.  Therefore the rank-five type-(I_1) torus (T_0) itself is
+rational, every such quartic del Pezzo surface with a point satisfies
+\[
+S\times\mathbf A^5\quad\text{rational},
+\]
+and the explicit cubic satisfies
+\[
+X\times\mathbf P^5\quad\text{rational over }\mathbf Q.
+\]
+Report and exact certificate:
+`../2026-08-24-c925-type-i1-level-five-rationality.md`.
+
 ## Goal
 
-The requested opposite bound is now landed at (m=6), giving the explicit
-interval (2\le s(X)\le6).  The immediate lower-bound frontier is rationality
-of the rank-five type-(I_1) torus (T_0), which would give (m=5); the
-consulted five-dimensional torus literature leaves its CARAT class
-`(5,232,15)` unresolved.  Independently, the every-smooth (m=2) target
-remains open without a Stokes connector, while the every-smooth all-(m)
-target is false by Tschinkel--Zhang.
+The requested opposite bound is now landed at (m=5), giving the explicit
+interval (2\le s(X)\le5).  The immediate priority frontier is the durable
+CARAT convention replay and post-2017 literature audit: the theorem appears
+to settle the five-dimensional class `(5,232,15)` left open by Jamshidpey.
+The next geometric bound (m=4) requires cancellation beyond rationality of
+(T_0), or a smaller rational quotient of the projectivized universal
+torsor.  Independently, the every-smooth (m=2) target remains open without
+a Stokes connector, while the every-smooth all-(m) target is false by
+Tschinkel--Zhang.
 
 ## Stable entry points
 

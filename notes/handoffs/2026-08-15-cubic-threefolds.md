@@ -137,14 +137,14 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   cover Voisin's special universally-\(\mathrm{CH}_0\)-trivial loci.
   The explicit type-\(I_1\) cubic of Tschinkel--Zhang Proposition 5.1 now has
   the improved upper bound
-  \(X\times\mathbf P^6\) rational over \(\mathbf Q\).  Quotient by the
-  anticanonical scalar, the full degree-three auxiliary torus, and the
-  degree-two diagonal.  A primitive split kernel projectivizes the target
-  four-block, while the residual \(6+1\) quotient has signed-permutation
-  character basis \(e_0-e_4,e_1-e_2,e_3-e_5\).  The theorem holds more
-  generally for every type-\(I_1\) quartic del Pezzo surface with a point:
-  \(S\times\mathbf A^6\) is rational.  Report and exact certificate:
-  `../2026-08-24-c925-type-i1-level-six-rationality.md`.
+  \(X\times\mathbf P^5\) rational over \(\mathbf Q\).  Quotient by the
+  anticanonical scalar and both full auxiliary permutation tori.  A primitive
+  split kernel projectivizes the target four-block; the residual actor is
+  quasi-trivial and its quotient of the \(6+1\) block is a rational
+  rank-two torus.  Thus the rank-five type-\(I_1\) torus itself is rational,
+  and every type-\(I_1\) quartic del Pezzo surface with a point satisfies
+  \(S\times\mathbf A^5\) rational.  Report and exact certificate:
+  `../2026-08-24-c925-type-i1-level-five-rationality.md`.
 
   **Conditional finite reduction:** put \(n=m+1\).  For a connected center,
   after a native pure-Euler inner \(n\)-cycle has been placed inside one fixed
