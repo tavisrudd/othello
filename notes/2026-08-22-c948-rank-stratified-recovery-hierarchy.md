@@ -784,7 +784,7 @@ research-reproducibility gate.
 
 **Read-depth summary:** Two sources were read at full text, ten primary sources
 were read partially at the theorem/definition/positioning sections stated
-below, and six additional recent primary records were read at
+below, and eight additional primary records were read at
 abstract/metadata depth. The priority verdict therefore remains a bounded,
 targeted audit and supports only "to our knowledge" language.
 
@@ -900,6 +900,16 @@ targeted audit and supports only "to our knowledge" language.
   assisted constructions, and parameter bounds. None states the classical
   canonical helper pair or exact concatenation threshold. Their full texts
   were not read, so this is only a scope screen, not a theorem-level dismissal.
+- **Abstract/metadata only:** Zabokritskiy, *Perfect Matchings with Prescribed
+  Differences Beyond Hall: The Two-Hole Problem*, official arXiv abstract
+  record `arXiv:2607.08630`, submitted 9 July 2026. It proves the unrestricted
+  two-hole case and is the immediate BGS frontier, but predates the delta
+  window. Its full text was not read in this pass.
+- **Abstract/metadata only:** Salgado--Vicino, *Locally Recoverable Codes with
+  availability from a family of fibered surfaces*, official arXiv abstract
+  record `arXiv:2512.08100`, submitted 8 December 2025. Its apparent August
+  search date came from later publication/indexing activity; it is not a new
+  preprint in the delta window. Its full text was not read in this pass.
 
 ### Search coverage
 
@@ -970,6 +980,18 @@ identifier/URL, and displayed submission date. The literal queries were:
 - `site:arxiv.org/abs/2608 "ramp secret sharing" generalized Hamming`
 - `site:arxiv.org/abs/2608 "support weights" linear codes locality`
 
+A separate four-query exact-title follow-up displayed 18 records with
+duplicates retained. Its literal queries were:
+
+- `"Locally Recoverable Codes with availability from a family of fibered surfaces"`
+- `"New perspectives for code locality in the rank metric"`
+- `"Maximal achievable service rates of some classes of linear codes"`
+- `site:arxiv.org/abs/2608 "recovery" "linear codes" service rates`
+
+This follow-up established that the fibered-surface preprint was submitted in
+December 2025 rather than in the delta window, and promoted the rank-metric and
+service-rate papers recorded above.
+
 The discriminator was: **promote every record in the date window whose title or
 abstract combined coding theory with recovery sets, locality, service rate,
 GHW/RGHW, batch/PIR recovery, prescribed differences, or exact dual-support
@@ -980,8 +1002,17 @@ to the quantum-LRC cluster. Because the OpenAlex match count was visibly
 dominated by lexical false positives, it is recorded as a discovery screen and
 does not license a negative by itself.
 
-The official arXiv API query returned HTTP 429 during this pass, so the dated
-screen is not an exhaustive ingestion of every arXiv category entry. No new
+The exact OpenAlex request was a `works` search with
+`search=locally recoverable codes`,
+`filter=from_publication_date:2026-07-24,to_publication_date:2026-08-24`, and
+`per-page=100`. No OpenAlex citing-set count was used.
+
+The official arXiv API request used
+`search_query=all:"locally recoverable code" AND submittedDate:[202607240000 TO 202608242359]`,
+`start=0`, `max_results=50`, `sortBy=submittedDate`, and
+`sortOrder=descending`. It returned HTTP 429, which distinguishes an access
+error from an empty result. The dated screen is therefore not an exhaustive
+ingestion of every arXiv category entry. No new
 BGS/prescribed-difference, RGHW-locality, or classical exact-recovery-transfer
 paper dated inside the window was located. This is a bounded negative with the
 stated indexing gap, not a closure result. The 9 July 2026 two-hole BGS
