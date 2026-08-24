@@ -436,10 +436,10 @@
   "paper": "integral_secant_arcs",
   "pdfs": [
     {
-      "bytes": 144164,
+      "bytes": 143504,
       "pages": 15,
       "path": "papers/integral_secant_arcs/integral_secant_arcs.pdf",
-      "sha256": "ae5e27c6b72e9f3a01c94d60b05440689fe902e6e8ac588aebea5581442bfda7"
+      "sha256": "a3e710e95b2a7002e6880b16baafa3e97f423a25b13e9597d6144e727642505e"
     }
   ],
   "schema_version": 1,
@@ -450,7 +450,7 @@
     },
     {
       "path": "papers/integral_secant_arcs/formal-annotations.tex",
-      "sha256": "e35bad8668cd91db9b6e1de818418b8f21b5490fa980b7440177d7e0aa4e364c"
+      "sha256": "9e1ec64c66ac4adde61d6ae9b21cb241773978e82500a58757f420f6ece31c54"
     },
     {
       "path": "papers/integral_secant_arcs/sections/01-introduction.tex",
