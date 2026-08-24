@@ -8,8 +8,12 @@
 
 - authority: `papers/cubic-stabilization-irrationality/`
 - manuscript: `papers/cubic-stabilization-irrationality/cubic_stabilization_irrationality.tex`
-- editorial spine: `papers/cubic-stabilization-irrationality/editorial-spine.md`
-- result inventory: `papers/cubic-stabilization-irrationality/results-inventory.md`
+- editorial spine:
+  `notes/2026-08-24-c956-exact-level-two-cubic-manuscript-framing.md`
+- result inventory:
+  `notes/2026-08-24-c956-exact-level-two-cubic-manuscript-results.md`
+- source and claim ledger:
+  `notes/2026-08-24-c956-exact-level-two-cubic-manuscript-source-ledger.md`
 - verification map: `papers/cubic-stabilization-irrationality/verification/claim-map.json`
 - imported-source ledger:
   `papers/cubic-stabilization-irrationality/verification/imported-sources.json`
@@ -106,6 +110,6 @@ the mathematical narrative.
 
 Read `../AGENTS.md` in a dedicated command, route with
 `go C956 cubic-threefolds`, read this card and then
-`papers/cubic-stabilization-irrationality/editorial-spine.md` in full, inspect
-the scoped git status, and resume at Remaining work item 1.  Do not reopen the
-C925 research programme unless a named proof dependency fails.
+`notes/2026-08-24-c956-exact-level-two-cubic-manuscript-framing.md` in full,
+inspect the scoped git status, and resume at Remaining work item 1. Do not
+reopen the C925 research programme unless a named proof dependency fails.

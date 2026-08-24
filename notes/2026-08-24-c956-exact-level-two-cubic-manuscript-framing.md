@@ -2,12 +2,14 @@
 
 **Owner:** C956 (`cubic-threefolds`)
 
-This is the authoritative editorial plan for the replacement manuscript in
-this directory.  C925 remains the research record; a fresh manuscript session
-starts from the C956 task card and this document, not from C925's history.
+This is the authoritative editorial plan for
+`papers/cubic-stabilization-irrationality/`. C925 remains the research record;
+a fresh manuscript session starts from the C956 task card and this document,
+not from C925's history.
 
 This document controls the paper's argument and emphasis. The detailed result
-ranking is in `results-inventory.md`.
+ranking is in
+`notes/2026-08-24-c956-exact-level-two-cubic-manuscript-results.md`.
 
 ## One-sentence result
 

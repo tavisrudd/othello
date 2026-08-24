@@ -43,7 +43,7 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   leads with the two explicit cubic threefolds having least stabilizing
   dimension exactly two, then gives the uniform quartic-del-Pezzo theorem and
   the reusable torus-quotient criterion.  Its authoritative editorial plan is
-  `../../papers/cubic-stabilization-irrationality/editorial-spine.md`; its
+  `../2026-08-24-c956-exact-level-two-cubic-manuscript-framing.md`; its
   complete resume card is
   `../cubic-threefolds-tasks/c956-exact-level-two-cubic-manuscript.md`.
 - **C936 — accepted after cold-referee repair audit.**  The warning-free eleven-page paper

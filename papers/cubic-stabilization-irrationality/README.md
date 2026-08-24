@@ -45,6 +45,6 @@ orbit correction by signed maximal minors and the inverse parametrization by
 the displayed elimination graph. No complexity estimate is claimed.
 
 The exact boundary between proved, computationally certified, and imported
-claims is recorded in `claim-proof-novelty-ledger.md` and
+claims is recorded in the manuscript annotations and
 `verification/imported-sources.json`. No manuscript DOI or release version is
 asserted because none has been assigned authoritatively.

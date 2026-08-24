@@ -1,4 +1,4 @@
-# Claim, proof, and novelty ledger
+# C956 source and claim ledger
 
 ## Source boundary
 

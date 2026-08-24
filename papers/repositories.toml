@@ -437,18 +437,6 @@ source = "papers/cubic-stabilization-irrationality"
 paper_ids = ["cubic_stabilization_irrationality"]
 disposition = "active"
 
-[[repository.exclude_path]]
-path = "claim-proof-novelty-ledger.md"
-reason = "internal claim-development ledger; public claim boundaries remain in the manuscript"
-
-[[repository.exclude_path]]
-path = "editorial-spine.md"
-reason = "internal manuscript-framing document; the public theorem hierarchy is in the manuscript"
-
-[[repository.exclude_path]]
-path = "results-inventory.md"
-reason = "internal editorial inventory; the public claims and scope are in the manuscript"
-
 [[repository.rewrite]]
 path = "Makefile"
 old = "TEXSHELL ?= nix develop ..\\#manuscript --command"
@@ -458,29 +446,29 @@ reason = "the standalone repository carries its own pinned manuscript flake"
 
 [[repository.rewrite]]
 path = "Makefile"
-old = ".PHONY: all check evidence lint manuscript warnings manuscript-check manuscript-update clean distclean"
-new = ".PHONY: all check evidence manuscript warnings manuscript-check manuscript-update clean distclean"
+old = ".PHONY: all check lint verify manuscript warnings clean distclean"
+new = ".PHONY: all check verify manuscript warnings clean distclean"
 expected_count = 1
 reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
 
 [[repository.rewrite]]
 path = "Makefile"
-old = "all: evidence lint manuscript-check\n\ncheck: evidence lint manuscript-check"
-new = "all: evidence manuscript-check\n\ncheck: evidence manuscript-check"
+old = "all: lint verify manuscript\n\ncheck: lint verify manuscript warnings"
+new = "all: verify manuscript\n\ncheck: verify manuscript warnings"
 expected_count = 1
 reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
 
 [[repository.rewrite]]
 path = "Makefile"
-old = "lint:\n\t$(PYTHON) ../scripts/lint_tex_spacing.py $(SOURCE) sections/*.tex\n\n"
+old = "lint:\n\t$(LINT_PYTHON) ../scripts/lint_tex_spacing.py $(SOURCE)\n\n"
 new = ""
 expected_count = 1
 reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
 
 [[repository.rewrite]]
 path = "Makefile"
-old = "manuscript: $(SOURCE) sections/*.tex refs.bib\n\t$(PYTHON) ../scripts/lint_tex_spacing.py $(SOURCE) sections/*.tex\n"
-new = "manuscript: $(SOURCE) sections/*.tex refs.bib\n"
+old = "manuscript: $(SOURCE) formal-annotations.tex\n\t$(LINT_PYTHON) ../scripts/lint_tex_spacing.py $(SOURCE)\n"
+new = "manuscript: $(SOURCE) formal-annotations.tex\n"
 expected_count = 1
 reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
 
