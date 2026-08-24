@@ -162,6 +162,18 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   lowers the bound.  Report:
   `../2026-08-24-c925-level-four-cancellation-frontier.md`.
 
+  **Superseding level-four result:** the cancellation gate is bypassed by a
+  geometric slice. Two type-\(I_1\) sign subtori have projective Cox weights
+  \(0^8,1^8\), hence line orbit closures. A hyperplane through a general
+  OADP tangent center is both rational by tangent projection and a one-point
+  quotient slice. The residual rank-four torus has actual character class
+  `(4,76,4)` and is hereditarily rational. Therefore every type-\(I_1\)
+  quartic del Pezzo surface with a point satisfies
+  \(S\times\mathbf A^4\) rational, and every cubic in Tschinkel--Zhang
+  Proposition 5.1 satisfies \(X\times\mathbf P^4\) rational. Their cubic
+  threefolds have certified interval \(2\le s(X)\le4\). Report:
+  `../2026-08-24-c925-type-i1-level-four-rationality.md`.
+
   **Conditional finite reduction:** put \(n=m+1\).  For a connected center,
   after a native pure-Euler inner \(n\)-cycle has been placed inside one fixed
   outer correction factor, Lean's cyclic dimension consumer forces \(d=n\)

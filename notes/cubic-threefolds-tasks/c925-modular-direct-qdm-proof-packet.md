@@ -237,15 +237,27 @@ which Tschinkel--Zhang state is not currently known.  Report and exact
 certificates:
 `../2026-08-24-c925-level-four-cancellation-frontier.md`.
 
+**2026-08-24 type-\(I_1\) level-four theorem.** The cancellation frontier
+is bypassed geometrically. Two primitive sign subtori of \(T_0\) have
+projective Cox weights \(0^8,1^8\), so their generic orbit closures in the
+OADP torsor closure are lines. A general hyperplane through a tangent
+center is rational by tangent projection and meets a general orbit line
+once; it is therefore a rational quotient slice. The residual rank-four
+torus has actual character class `(4,76,4)`, contained in Lemire's
+hereditarily rational class `[4,31,7,1]`. Hence every type-\(I_1\) quartic
+del Pezzo surface with a point satisfies \(S\times\mathbf A^4\) rational,
+and every cubic in Tschinkel--Zhang Proposition 5.1 satisfies
+\(X\times\mathbf P^4\) rational. For their cubic threefolds,
+\(2\le s(X)\le4\). Report and exact certificates:
+`../2026-08-24-c925-type-i1-level-four-rationality.md`.
+
 ## Goal
 
-The requested opposite bound is now landed uniformly at \(m=5\) for both
-Tschinkel--Zhang cubic families, giving their cubic threefolds the explicit
-interval \(2\le s(X)\le5\).  The next geometric bound \(m=4\) requires
-cancellation beyond rationality of \(T_0\), or a smaller rational quotient of
-the projectivized universal torsor.  A second split-scalar quotient is
-impossible for type \(I_1\): the rank-five lattice has no invariant
-cocharacter.  The adjacent priority task is the post-2017 literature audit
+The requested opposite bound is now landed at \(m=4\) for the type-\(I_1\)
+Tschinkel--Zhang cubic family, giving its cubic threefolds the explicit
+interval \(2\le s(X)\le4\). The uniform bound for both families remains
+\(m=5\). The next geometric bound \(m=3\) encounters invariant rank-two
+quadric orbit closures rather than linear planes. The adjacent priority task is the post-2017 literature audit
 for the now-solved CARAT class `(5,232,15)`.  Independently, the every-smooth
 \(m=2\) target remains open without a Stokes connector, while the
 every-smooth all-\(m\) target is false by Tschinkel--Zhang.

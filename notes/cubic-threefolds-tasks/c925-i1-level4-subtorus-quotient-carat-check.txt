@@ -1,0 +1,3 @@
+subtorus_quotient_1_character_carat=[ 4, 76, 4 ] hereditary_container=[ 4, 31, 7, 1 ]
+subtorus_quotient_2_character_carat=[ 4, 76, 4 ] hereditary_container=[ 4, 31, 7, 1 ]
+subtorus_quotient_3_character_carat=[ 4, 78, 4 ] hereditary_container=[ 4, 20, 22, 1 ]

@@ -2,6 +2,11 @@
 
 **Lane:** cubic-threefolds · **Task:** C925 · **Date:** 2026-08-24
 
+> **Superseded later on 2026-08-24.** The nonsplit rank-one extension is
+> bypassed by a linear-orbit tangent slice of the OADP universal-torsor
+> closure. See `2026-08-24-c925-type-i1-level-four-rationality.md`, which
+> proves the type-\(I_1\) bound \(S\times\mathbf A^4\) rational.
+
 ## Result
 
 Let \(X/\mathbf Q\) be either of the explicit type-\(I_1\) cubic threefolds

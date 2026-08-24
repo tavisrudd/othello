@@ -1,0 +1,359 @@
+{
+  "conclusion": "The first two primitive type-I1 sign subtori act on the sixteen projective Cox coordinates with exactly two consecutive weights, eight coordinates of each weight. Their generic orbit closures are lines. The corresponding rank-four quotient character actions are computed integrally for independent CARAT rationality checks.",
+  "cox_coordinate_order": [
+    "E1",
+    "E2",
+    "E3",
+    "E4",
+    "E5",
+    "L12",
+    "L13",
+    "L14",
+    "L15",
+    "L23",
+    "L24",
+    "L25",
+    "L34",
+    "L35",
+    "L45",
+    "Q"
+  ],
+  "root_basis_columns": [
+    [
+      0,
+      1,
+      0,
+      0,
+      0,
+      -1
+    ],
+    [
+      0,
+      0,
+      1,
+      0,
+      0,
+      -1
+    ],
+    [
+      0,
+      0,
+      0,
+      1,
+      0,
+      -1
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      1,
+      -1
+    ],
+    [
+      1,
+      0,
+      0,
+      0,
+      0,
+      -3
+    ]
+  ],
+  "schema": "c925-i1-level4-linear-slice-v1",
+  "sign_subtori": [
+    {
+      "picard_cocharacter_lift": [
+        1,
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      "primitive_sign_subtorus_cocharacter": [
+        0,
+        0,
+        0,
+        1,
+        1
+      ],
+      "projective_cox_weights": {
+        "E1": 0,
+        "E2": 0,
+        "E3": 0,
+        "E4": 1,
+        "E5": 0,
+        "L12": 1,
+        "L13": 1,
+        "L14": 0,
+        "L15": 1,
+        "L23": 1,
+        "L24": 0,
+        "L25": 1,
+        "L34": 0,
+        "L35": 1,
+        "L45": 0,
+        "Q": 1
+      },
+      "projective_weight_multiplicities": {
+        "0": 8,
+        "1": 8
+      },
+      "quotient_character_generator_actions": [
+        [
+          [
+            -1,
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            1,
+            1,
+            -2
+          ],
+          [
+            0,
+            0,
+            -1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            -1
+          ]
+        ],
+        [
+          [
+            0,
+            -1,
+            -1,
+            1
+          ],
+          [
+            -1,
+            0,
+            -1,
+            1
+          ],
+          [
+            0,
+            0,
+            0,
+            -1
+          ],
+          [
+            0,
+            0,
+            -1,
+            0
+          ]
+        ]
+      ],
+      "signs": [
+        1,
+        -1
+      ]
+    },
+    {
+      "picard_cocharacter_lift": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "primitive_sign_subtorus_cocharacter": [
+        0,
+        0,
+        1,
+        0,
+        1
+      ],
+      "projective_cox_weights": {
+        "E1": 0,
+        "E2": 0,
+        "E3": 1,
+        "E4": 0,
+        "E5": 0,
+        "L12": 1,
+        "L13": 0,
+        "L14": 1,
+        "L15": 1,
+        "L23": 0,
+        "L24": 1,
+        "L25": 1,
+        "L34": 0,
+        "L35": 0,
+        "L45": 1,
+        "Q": 1
+      },
+      "projective_weight_multiplicities": {
+        "0": 8,
+        "1": 8
+      },
+      "quotient_character_generator_actions": [
+        [
+          [
+            -1,
+            0,
+            1,
+            -1
+          ],
+          [
+            1,
+            1,
+            -1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            -1
+          ],
+          [
+            0,
+            0,
+            -1,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            -1,
+            0,
+            0
+          ],
+          [
+            -1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            -1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            -1
+          ]
+        ]
+      ],
+      "signs": [
+        -1,
+        1
+      ]
+    },
+    {
+      "picard_cocharacter_lift": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        0
+      ],
+      "primitive_sign_subtorus_cocharacter": [
+        0,
+        0,
+        1,
+        1,
+        0
+      ],
+      "projective_cox_weights": {
+        "E1": 2,
+        "E2": 2,
+        "E3": 3,
+        "E4": 3,
+        "E5": 2,
+        "L12": 2,
+        "L13": 1,
+        "L14": 1,
+        "L15": 2,
+        "L23": 1,
+        "L24": 1,
+        "L25": 2,
+        "L34": 0,
+        "L35": 1,
+        "L45": 1,
+        "Q": 0
+      },
+      "projective_weight_multiplicities": {
+        "0": 2,
+        "1": 6,
+        "2": 6,
+        "3": 2
+      },
+      "quotient_character_generator_actions": [
+        [
+          [
+            -1,
+            0,
+            1,
+            -1
+          ],
+          [
+            1,
+            1,
+            1,
+            2
+          ],
+          [
+            0,
+            0,
+            0,
+            -1
+          ],
+          [
+            0,
+            0,
+            -1,
+            0
+          ]
+        ],
+        [
+          [
+            0,
+            -1,
+            -1,
+            -1
+          ],
+          [
+            -1,
+            0,
+            -1,
+            -1
+          ],
+          [
+            0,
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            0,
+            1,
+            0
+          ]
+        ]
+      ],
+      "signs": [
+        -1,
+        -1
+      ]
+    }
+  ]
+}
