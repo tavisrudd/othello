@@ -2,7 +2,7 @@
 
 **Lane:** cubic-threefolds
 
-**Status:** complete
+**Status:** release candidate; reopened for multiple hostile referee rounds
 
 ## Result
 
@@ -87,8 +87,9 @@ open.
 | Is any global firstness claim supported? | settled editorially | none is needed or made; the theorem is stated on its mathematical content and exact source chain |
 | Is there a remaining descent, saturation, incidence, or function-field gap found by the cold audits? | settled | no fatal gap found; all identified repairs are in the committed manuscript and the integrated gate passes |
 
-No further mystery blocks the present theorem or release.
+The hostile referee rounds requested after the first release-candidate build
+remain an acceptance gate. Their findings and repairs will be appended here
+before final closure.
 
-**Vibe:** strong and clean. The paper now has one sharp cubic statement, one
-general geometric engine, and one reusable constructive mechanism, with the
-source boundary visible and the obsolete argument absent from the release.
+**Vibe:** strong release candidate, not yet closed. The deterministic and
+export gates are green; independent hostile proof verdicts remain outstanding.

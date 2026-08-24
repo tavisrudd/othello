@@ -38,13 +38,19 @@ promoted mathematical assertion maps to a kernel-checked declaration.
 
 ## Current status
 
-- **C956 — exact level-two cubic manuscript, complete.**  The paper
-  leads with the two explicit cubic threefolds having least stabilizing
-  dimension exactly two, then gives the uniform quartic-del-Pezzo theorem and
-  the reusable torus-quotient criterion.  Its authoritative editorial plan is
-  `../2026-08-24-c956-exact-level-two-cubic-manuscript-framing.md`; its
-  complete report is
-  `../2026-08-24-c956-exact-level-two-cubic-manuscript.md`.
+- **C956 — exact level-two cubic manuscript, hostile referee rounds active.**
+  The authority and standalone candidate pass their deterministic gates, but
+  closure is withheld pending independent algebraic-geometry,
+  quotient/descent/computation, and public-repository/exposition reviews plus
+  fresh re-referees after every accepted repair.  Report and live card:
+  `../2026-08-24-c956-exact-level-two-cubic-manuscript.md` and
+  `../cubic-threefolds-tasks/c956-exact-level-two-cubic-manuscript.md`.
+- **C958 — explicit level-two parametrizations, queued behind C956.**  Starting from
+  C956's constructive quotient theorem and exact tangent witnesses, compute
+  and certify explicit birational maps for the two products
+  \(X_j\times\mathbf P^2\).  The task must separate existence of a rational
+  map from formula size and any genuine complexity bound.  Card:
+  `../cubic-threefolds-tasks/c958-explicit-level-two-parametrizations.md`.
 - **C936 — accepted after cold-referee repair audit.**  The warning-free eleven-page paper
   develops the signed nonstandard \(A_5\)-cubic parameter as the
   sign/discriminant resolvent of the actual

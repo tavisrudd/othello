@@ -2,7 +2,7 @@
 
 **Lane:** cubic-threefolds
 
-**Status:** complete; authority and standalone release gates pass
+**Status:** active; hostile referee and repair rounds in progress
 
 ## Stable entry point
 
@@ -68,9 +68,16 @@ the mathematical narrative.
 
 ## Remaining work, in order
 
-All seven manuscript, metadata, verification, stale-source, closeout, and
-standalone-export items passed. See the dated report
-`notes/2026-08-24-c956-exact-level-two-cubic-manuscript.md`.
+The deterministic manuscript, metadata, verification, stale-source, and
+standalone-export gates pass. Remaining acceptance work is:
+
+1. independent hostile algebraic-geometry review;
+2. independent hostile quotient/descent/computation review;
+3. independent full-public-repository and expert-exposition review, using the
+   complete `m=1` paper as context only;
+4. repair every accepted finding and rerun fresh referee rounds on the
+   repaired candidate;
+5. close only after all three specialties return clean verdicts.
 
 ## Acceptance gate
 
@@ -89,8 +96,6 @@ standalone-export items passed. See the dated report
 
 ## Fresh-session first action
 
-Read `../AGENTS.md` in a dedicated command, route with
-`go C956 cubic-threefolds`, read this card and then
-`notes/2026-08-24-c956-exact-level-two-cubic-manuscript-framing.md` in full,
-inspect the scoped git status, and resume at Remaining work item 1. Do not
-reopen the C925 research programme unless a named proof dependency fails.
+Read the dated report, framing note, and the newest referee reports. Resume at
+the highest-severity open finding, then rebuild and re-referee. C958 remains
+queued behind C956.
