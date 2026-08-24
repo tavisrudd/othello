@@ -1,0 +1,4 @@
+TavisRuddFiniteGeom.Papers.RecoveryStructures.helper_ker_le_helperCodeForTargetSpace: propext
+TavisRuddFiniteGeom.Papers.RecoveryStructures.map_helperCodeForTargetSpace_eq_recoverableTargetMessageSpace: Classical.choice, Quot.sound, propext
+TavisRuddFiniteGeom.Papers.RecoveryStructures.recoverableTargetMap_surjective: Classical.choice, Quot.sound, propext
+TavisRuddFiniteGeom.Papers.RecoveryStructures.mem_ker_recoverableTargetMap_iff: propext

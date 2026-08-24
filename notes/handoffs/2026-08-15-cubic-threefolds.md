@@ -136,12 +136,15 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   very general cubic, conditional on the cited 2025 preprint; it does not
   cover Voisin's special universally-\(\mathrm{CH}_0\)-trivial loci.
   The explicit type-\(I_1\) cubic of Tschinkel--Zhang Proposition 5.1 now has
-  the actual improved upper bound
-  \(X\times\mathbf P^8\) rational over \(\mathbf Q\): quotienting by the
-  anticanonical scalar and both diagonal scalars of the auxiliary
-  degree-three and degree-two permutation tori gives a determinant-one
-  weight matrix on the \(6+4+1\) target blocks.  Report and exact certificate:
-  `../2026-08-24-c925-type-i1-level-eight-rationality.md`.
+  the improved upper bound
+  \(X\times\mathbf P^6\) rational over \(\mathbf Q\).  Quotient by the
+  anticanonical scalar, the full degree-three auxiliary torus, and the
+  degree-two diagonal.  A primitive split kernel projectivizes the target
+  four-block, while the residual \(6+1\) quotient has signed-permutation
+  character basis \(e_0-e_4,e_1-e_2,e_3-e_5\).  The theorem holds more
+  generally for every type-\(I_1\) quartic del Pezzo surface with a point:
+  \(S\times\mathbf A^6\) is rational.  Report and exact certificate:
+  `../2026-08-24-c925-type-i1-level-six-rationality.md`.
 
   **Conditional finite reduction:** put \(n=m+1\).  For a connected center,
   after a native pure-Euler inner \(n\)-cycle has been placed inside one fixed

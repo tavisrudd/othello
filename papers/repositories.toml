@@ -256,6 +256,10 @@ source = "papers/complete-repair-ports"
 paper_ids = ["complete_repair_ports"]
 disposition = "active"
 
+[[repository.exclude_symlink]]
+path = "lean/AGENTS.md"
+reason = "repository-local development instructions; not part of the scholarly Lean artifact"
+
 [[repository.exclude_path]]
 path = "adversarial_novelty_review.md"
 reason = "private review record, not part of the public manuscript repository"

@@ -152,16 +152,37 @@ X\times\mathbf P^8\quad\text{is rational over }\mathbf Q
 for the explicit type-\(I_1\) cubic.  Report and exact certificate:
 `../2026-08-24-c925-type-i1-level-eight-rationality.md`.
 
+**2026-08-24 improvement to six.**  Quotient instead by the anticanonical
+scalar, the full degree-three auxiliary torus, and the degree-two diagonal.
+On the target (6+1) block, this rank-five torus has a primitive split
+one-dimensional kernel; that kernel acts with scalar weight (-1) on the
+remaining four-block.  After projectivizing the four-block, the residual
+quotient of the (6+1) block has the signed-permutation character basis
+\[
+e_0-e_4,\qquad e_1-e_2,\qquad e_3-e_5.
+\]
+The residual acting torus is quasi-trivial, so the generic associated
+projective bundle is untwisted.  This proves, for every type-(I_1) quartic
+del Pezzo surface with a point,
+\[
+S\times\mathbf A^6\quad\text{rational},
+\]
+and for the explicit cubic of Tschinkel--Zhang Proposition 5.1,
+\[
+X\times\mathbf P^6\quad\text{rational over }\mathbf Q.
+\]
+Report and exact certificate:
+`../2026-08-24-c925-type-i1-level-six-rationality.md`.
+
 ## Goal
 
-The requested bound is now landed at \(m=8\).  Continue
-toward the every-smooth \(m=2\) theorem without a Stokes connector; an
-every-smooth all-\(m\) theorem is false by Tschinkel--Zhang.  Keep the finite
-consumer and the external geometric
-provider separately typed.  The live source targets are exact-period
-exclusion for every correction packet in every codimension, or prior
-inner-orbit provenance followed by native-effective descent and pure-Euler
-realization of that orbit.
+The requested opposite bound is now landed at (m=6), giving the explicit
+interval (2\le s(X)\le6).  The immediate lower-bound frontier is rationality
+of the rank-five type-(I_1) torus (T_0), which would give (m=5); the
+consulted five-dimensional torus literature leaves its CARAT class
+`(5,232,15)` unresolved.  Independently, the every-smooth (m=2) target
+remains open without a Stokes connector, while the every-smooth all-(m)
+target is false by Tschinkel--Zhang.
 
 ## Stable entry points
 
