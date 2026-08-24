@@ -2,12 +2,28 @@
 
 **Lane**: complete-ports
 
-**Status**: IN PROGRESS; CORE THEOREMS, EJ UPGRADES, BOUNDED LITERATURE AUDIT WITH 24 JULY--24 AUGUST 2026 DELTA SCREEN, PRELIMINARY BGS PACKING-BRIDGE VET, AND POST-CLOSURE PUBLICATION PLAN RECORDED; INDEPENDENT COLD READ AND FULL-TEXT NOVELTY CLOSURE PENDING
+**Status**: COMPLETE; PROOF-CORRECTNESS COLD READ PASSED AFTER ALL FINDINGS WERE
+CLOSED; BOUNDED PRIORITY AUDIT, 24 JULY--24 AUGUST 2026 DELTA SCREEN, EJ/TT
+CLOSEOUT, CLAIM LEDGER, AND POST-CLOSURE PUBLICATION PLAN RECORDED; FLAGSHIP
+REBUILD VERDICT
 
 ## Scope
 
 This is a math-only successor to C946 and C947. It does not authorize edits to
 the manuscript, bibliography, README, Lean boundary, or public mirror.
+
+### Terminology discipline
+
+Use established coding-theory terms whenever they identify the object:
+**recovery set**, **recovery structure**, **recovery equation**, **cooperative
+recovery**, **relative generalized Hamming weight**, **relative
+dimension/length profile**, and **service-rate region**. The inclusion
+$K_P\subseteq D_P$ is called only the **associated nested code pair**, a
+literal linear-algebra description rather than a proposed term of art.
+Likewise, “nonconfinement threshold” means the displayed minimum cost and is
+not a named invariant. Avoid “port,” “fiber,” “escape barrier,” and new nouns
+introduced merely to shorten prose. When a formula is nearby, state the
+formula or say exactly which recovery sets/equations are meant.
 
 ## Post-closure publication and research plan
 
@@ -17,7 +33,7 @@ they support.
 
 ### Phase A — close C948 before restructuring anything
 
-1. Run the claim-specific priority closure for the canonical helper pair,
+1. Run the claim-specific priority closure for the associated nested code pair,
    exact RGHW cost identity, additive confinement threshold, best-target GHW
    identity, rigidity statement, projective-simplex application, and
    coefficient-presentation separation. Promote the nearest partial reads to
@@ -53,14 +69,14 @@ by insertion:
 
 1. normalized recovery equations, exact helper supports, recovery-set upward
    closure, and stochastic repair as distinct forgetful layers;
-2. the canonical nested helper pair and its exact sequence;
+2. the associated nested code pair and its exact sequence;
 3. the identification of rank-\(t\) helper cost with relative generalized
    Hamming weight;
 4. the sharp eventual confinement threshold and exact coefficient-aware
    transfer;
 5. the best-target GHW identity, cooperative-locality min--max corollary, and
    MDS rigidity;
-6. positive-density realization, with the bounded service-rate polytope as a
+6. positive-density realization, with the bounded service-rate region as a
    short exact-transfer corollary;
 7. stochastic and coefficient-presentation separations beyond the complete
    RGHW hierarchy;
@@ -86,9 +102,9 @@ queue at that time.
 The BGS material is connected but is not part of the primary paper. It studies
 capacity-one packing of many exact recovery witnesses, whereas C948 studies
 minimum helper unions for recovery systems whose witnesses may share helpers.
-The exact recovery fibers supplied by the primary paper are the correct input
-object; adding a disjointness constraint produces the packing fibers relevant
-to the additive matching problem.
+The complete sets of recovery equations supplied by the primary paper are the
+correct input; imposing disjoint helper supports asks for simultaneous
+capacity-one realizations relevant to the additive matching problem.
 
 Only after the four-hole proof is rebuilt with fixed global conventions should
 a second paper be queued, provisionally titled
@@ -127,8 +143,8 @@ conceptual bridge between them.
 
 ## Executive result
 
-For an inner code (I) with target set (P) and helper set
-(J=E\setminus P), write its generator matrix as
+Let $q$ be a prime power. For a nontrivial inner code (I) with target set (P)
+and helper set (J=E\setminus P), write a full-row-rank generator matrix as
 (G=(G_P\mid G_J)), and define
 
 \[
@@ -136,10 +152,10 @@ For an inner code (I) with target set (P) and helper set
  \qquad
  W_P=U_P\cap\operatorname{im}G_J,
  \qquad
- \ell=\dim W_P.
+ \ell=\dim W_P\ge1.
 \]
 
-The canonical nested helper pair is
+The target set determines the nested code pair
 
 \[
  K_P=\ker G_J,
@@ -154,8 +170,8 @@ It lies in the exact sequence
  \xrightarrow{\;G_J\;}W_P\longrightarrow0.
 \]
 
-The minimum union of helpers required to recover (t) independent
-target-message dimensions is exactly the (t)-th relative generalized
+For $1\le t\le\ell$, the minimum union of helpers required to recover $t$
+independent target linear combinations is exactly the $t$-th relative generalized
 Hamming weight
 
 \[
@@ -163,14 +179,14 @@ Hamming weight
 \]
 
 Combining this identity with C946's objectwise exact confinement theorem gives
-the eventual rank-(t) escape threshold
+the eventual rank-$t$ nonconfinement threshold
 
 \[
  \boxed{\Gamma_t=M_t(D_P,K_P)+d(I^\perp)}.
 \]
 
-Thus, under C946's outer-family hypotheses, every radius-\\(r\\) recovery system
-for every internally realizable rank-\\(t\\) demand is eventually confined to
+Thus, for $1\le t\le\ell$ and under C946's outer-family hypotheses, every radius-$r$ recovery system
+for every internally realizable rank-$t$ demand is eventually confined to
 its inner block if and only if
 
 \[
@@ -197,6 +213,14 @@ normalized recovery-equation system on the same helper union. Therefore
  =M_t(D_P,K_P).
 \]
 
+This agrees with the standard RGHW definition that minimizes over arbitrary
+$L'\le D_P$ with
+$\dim L'-\dim(L'\cap K_P)=t$: a vector-space complement $L$ of
+$L'\cap K_P$ in $L'$ has dimension $t$, is disjoint from $K_P$, and has
+$\operatorname{supp}L\subseteq\operatorname{supp}L'$. The reverse inclusion
+of feasible classes is immediate. Thus no canonical-complement hypothesis is
+hidden in the displayed identity.
+
 In particular,
 
 \[
@@ -211,7 +235,7 @@ The relative dimension/length profile has the direct recovery meaning
    \dim\bigl(W_P\cap\operatorname{span}G_H\bigr).
 \]
 
-It is the maximum number of independent target-message dimensions recoverable
+It is the maximum number of independent target linear combinations recoverable
 from (s) helpers, and
 
 \[
@@ -243,10 +267,18 @@ nondegenerate singleton target,
  z_x=\Gamma_1+1.
 \]
 
-The positive-density transport corollary remains conditional on the final
-closure of C946: at radius (M_t), all minimum rank-(t) systems are confined
-because (M_t<M_t+d(I^\perp)), so their complete normalized coefficient
-systems are copied on the positive-density inner-block coordinate classes.
+The positive-density transport corollary uses C946's theorem and hypotheses.
+Let the inner length be $m=|E|$, put $p=|P|$, and use an $L$-linear outer
+family $O_N\le L^N$ with $d(O_N^\perp)\to\infty$. At radius $M_t$, all
+minimum rank-$t$ systems are confined because
+$M_t<M_t+d(I^\perp)$, so their complete normalized coefficient systems are
+copied in every one of the $N$ inner blocks. Each fixed coordinate type has
+density exactly $1/m$ among concatenated coordinates, the union of the $p$
+types in $P$ has density $p/m$, and the blockwise $P$-demand occurs once per
+block. Write $k=\dim_{\mathbb F_q}I$, $K_N=\dim_L O_N$, and
+$D_N=d(O_N)$. If in addition $K_N/N\to R>0$ and
+$\liminf D_N/N\ge\delta>0$, the concatenated family is asymptotically good,
+with rate $kR/m$ and relative distance at least $d(I)\delta/m$.
 
 ## 3. Singleton bounds, MDS equality, and rigidity
 
@@ -273,7 +305,8 @@ Consequently
 \]
 
 If (I) is MDS, (P) consists of (p\le k) independent targets, and
-(|J|\ge k), then (b=k), (\ell=p), the canonical pair is relative-MDS,
+(|J|\ge k), then (b=k), (\ell=p), the associated pair meets the relative
+Singleton bound at every rank,
 and
 
 \[
@@ -283,6 +316,18 @@ and
  \qquad
  \Gamma_t=2k-p+t+1.
 \]
+
+Indeed, for $h\le k$ helper columns, uniformity of the MDS column matroid
+gives
+
+\[
+ \dim\bigl(U_P\cap\operatorname{span}G_H\bigr)
+ =\max\{0,p+h-k\}.
+\]
+
+The least $h$ making this dimension at least $t$ is $k-p+t$; the assumption
+$|J|\ge k$ ensures that all required helper sets exist. This verifies the
+relative Singleton equalities directly rather than using them as extra hypotheses.
 
 There is a useful rigidity upgrade. Because (M_{t+1}\ge M_t+1), equality at
 rank one,
@@ -315,8 +360,9 @@ hierarchy.
 
 ## 4. Universality and its priority boundary
 
-Every nested pair (K\subsetneq D\subseteq\mathbb F_q^J) occurs as a
-canonical recovery pair. Put (V=\mathbb F_q^J/K), let
+Every nested pair (K\subsetneq D\subseteq\mathbb F_q^J) occurs as the
+associated pair of some target/helper decomposition. Put
+(V=\mathbb F_q^J/K), let
 (\pi:\mathbb F_q^J\to V) be the quotient map, and choose an isomorphism
 
 \[
@@ -329,26 +375,32 @@ The generator map
  G(a,x)=\alpha(a)+\pi(x)
 \]
 
-has canonical pair (D_P=D), (K_P=K). Its dual is the graph code
+has associated pair (D_P=D), (K_P=K). Its dual is the graph code
 
 \[
  I^\perp
  =\{(-\alpha^{-1}(x+K),x):x\in D\}.
 \]
 
-Thus every relative-weight hierarchy occurs as a recovery-rank hierarchy.
+Thus every relative-weight hierarchy occurs as the sequence of minimum helper
+costs for recovering subspaces of increasing dimension.
 The quotient/graph realization and the information interpretation of relative
 weights are standard nested-code and ramp-secret-sharing algebra; they are
 not the priority claim. The paper-specific advance is the exact additive
-escape threshold, complete coefficient-fiber transport, and positive-density
+nonconfinement threshold, transfer of all normalized recovery equations, and positive-density
 realization.
 
 ## 5. Same hierarchy, different reliability
 
 Direct-sum reliability does not factor under an arbitrary total-radius bound.
-The corrected construction uses forced padding. Start from two quotient-rank
-one pairs with the same minimum recovery cost but different bounded
-reliability at radius (r_0). Add identical one-dimensional padding pairs
+The corrected construction uses forced padding. For a concrete base, take the
+associated quotient-rank-one pairs $(K_0\subset D_0)$ at the distinguished
+coordinates of the paper's two represented $[10,4,6]$ seeds. Both have
+$M_1=3$, while their radius-$r_0=3$ reliability polynomials are the two
+different polynomials displayed in the current abstract. More generally, the
+argument starts from any two quotient-rank-one pairs with the same $M_1$ and
+different bounded reliability at a common radius $r_0$. Add identical
+one-dimensional padding pairs
 
 \[
  0\subset\langle\mathbf 1_{L_i}\rangle
@@ -360,8 +412,29 @@ having unique forced helper supports of sizes (L_i), and set
  R=r_0+\sum_iL_i.
 \]
 
-Full-rank recovery must consume every padding support, leaving exactly the
-base budget (r_0). Under uniform independent helper survival,
+Explicitly, on disjoint helper blocks use
+
+\[
+ K=K_0\oplus0\oplus\cdots\oplus0,
+ \qquad
+ D=D_0\oplus\langle\mathbf1_{L_1}\rangle\oplus\cdots
+       \oplus\langle\mathbf1_{L_a}\rangle.
+\]
+
+Every quotient component has rank one. Hence the relative hierarchy of the
+direct sum is obtained by summing the $t$ smallest component costs from the
+multiset $\{M_1(D_0,K_0),L_1,\ldots,L_a\}$, and is identical for the two
+base choices.
+
+For the reliability equivalence, project any full-quotient-rank recovery
+subspace to a padding block. Its quotient image is nonzero, so its union
+support contains that padding line's entire forced support. After removing all
+padding blocks from the radius budget, projection to the base block supplies a
+valid base recovery witness using at most $r_0$ helpers. Conversely, a base
+radius-$r_0$ witness together with the padding generators is a full-rank
+recovery system of radius $R$. Thus full-rank recovery consumes every padding
+support and leaves exactly the base budget $r_0$. Under uniform independent
+helper survival,
 
 \[
  R_{\mathrm{full},R}(s)
@@ -373,7 +446,7 @@ different full-demand bounded reliability laws.
 
 ## 6. Projective-simplex non-MDS flagship
 
-Let (A) contain one representative of every point of
+Assume $m\ge2$. Let (A) contain one representative of every point of
 (\mathrm{PG}(m-1,q)), so
 
 \[
@@ -407,8 +480,8 @@ and the exact nonconfinement thresholds are
  =\frac{q^m-q^{m-t}}{q-1}+q^{m-1}+1.}
 \]
 
-This is an explicit infinite non-MDS family with a nonlinear confinement
-staircase.
+This is an explicit infinite non-MDS family; for $m\ge3$ its unequal
+successive increments give a genuinely nonlinear confinement staircase.
 
 If (F\subseteq\mathrm{PG}(m-1,q)) is the failed helper set, then the
 available recovery-equation space is the annihilator of
@@ -531,7 +604,7 @@ with (r>\lambda), hence is nonsingular over (\mathbb R). The constant
 hyperplane-sum equations have the unique solution (c=\mathbf1), proving the
 classification.
 
-## 7. Coefficient presentation changes the escape barrier
+## 7. Coefficient presentation changes the nonconfinement threshold
 
 The relative-weight hierarchy alone does not determine (d(I^\perp)), hence
 does not determine the confinement thresholds. A smallest binary example uses
@@ -574,9 +647,9 @@ the three graph-code dual weights are (2,3,5), and
  01\mapsto u+v,
 \]
 
-they are (3,3,4), and (d(I^\perp)=3). Thus the same nested helper pair,
-the same helper supports, and the same complete RGHW hierarchy give different
-threshold staircases:
+they are (3,3,4), and (d(I^\perp)=3). Thus the same associated nested code pair,
+the same unlabeled inventory of helper supports, and the same complete RGHW
+hierarchy give different threshold staircases:
 
 \[
  (\Gamma_1,\Gamma_2)=(3,5)
@@ -585,23 +658,25 @@ threshold staircases:
 \]
 
 This is a sharp coefficient-aware separation: internal rank recoverability is
-unchanged, but the target coefficient presentation changes the cheapest
-cross-block escape.
+unchanged, but the target coefficient presentation changes the least cost of a
+nonconfined recovery system.
 
 ## 8. Relative duality
 
 Relative Wei duality for ((D_P,K_P)) and
 ((K_P^\perp,D_P^\perp)) supplies the complementary failure hierarchy. The
-primal weights give the minimum helpers needed to reveal (t) target-message
-dimensions; the dual weights give the complementary support thresholds for
-remaining target ambiguity. The resulting object is naturally a two-sided
-recoverability/ambiguity profile and provides the clean bridge to erasure
+primal weights give the minimum helpers needed to reveal (t) independent
+linear combinations of the target coordinates; the dual weights give the
+complementary support thresholds for
+remaining target ambiguity. Together these two established hierarchies state
+both the minimum helpers needed for recovery and the complementary support
+thresholds for residual ambiguity. This is the clean bridge to erasure
 resilience, ramp secret sharing, and the two endpoint regimes of the EXIT
 curve.
 
 No new relative-duality theorem is claimed here. The new content is its exact
-translation through the recovery pair and the additive concatenation escape
-barrier.
+translation through the associated nested pair and the additive
+nonconfinement threshold under concatenation.
 
 ## 9. Best-target dual-weight identity and cooperative-locality corollary
 
@@ -651,7 +726,7 @@ This theorem separates two quantifiers that the classical GHW suppresses:
 
 - (d_t(C^\perp)-t) is the best target set's simultaneous helper cost;
 - fixed-(P) recovery is measured by (kappa_C(P)), and, when the (t)
-  target message dimensions are independent, by the canonical relative weight
+  target coordinate functions are independent, by
   (M_t(D_P,K_P));
 - worst-target cooperative locality is
   [
@@ -681,7 +756,8 @@ identity demand on (P), its objectwise theorem gives
  \Gamma_C(P)=\kappa_C(P)+d(C^\perp).
 \]
 
-Minimizing over all (t)-targets yields the global escape envelope
+Minimizing over all (t)-targets yields the earliest nonconfinement cost over
+all such target sets
 
 \[
  \boxed{
@@ -690,14 +766,14 @@ Minimizing over all (t)-targets yields the global escape envelope
  }
 \]
 
-Thus the ordinary dual weight hierarchy governs the earliest possible escape
-somewhere, the fixed-target relative hierarchy governs escape at a prescribed
-target set, and the complete coefficient systems govern what is actually
-transported.
+Thus the ordinary dual weight hierarchy governs the least nonconfinement cost
+over all target sets, the fixed-target relative hierarchy governs that cost at
+a prescribed target set, and the complete normalized equations govern what is
+actually transported.
 
 ### EJ consequences — target heterogeneity and MDS collapse
 
-For (t<d(C)), define the target-cost distribution
+For (t<d(C)), record the distribution of simultaneous-recovery costs by
 
 \[
  B_{t,h}(C)
@@ -740,7 +816,7 @@ every set of at most (k) generator columns is independent. Equivalently,
 \]
 
 and the best and worst endpoints coincide. Consequently every full-(t)-target
-identity demand has the same eventual escape threshold
+identity demand has the same eventual nonconfinement threshold
 
 \[
  \boxed{\Gamma_C(P)=2k+1,}
@@ -763,7 +839,7 @@ Two exploratory checks were run while deriving the theorem packet:
   (\\Gamma_1,\\Gamma_2)=(6,7),
   $$
   exactly as predicted by the MDS formula.
-- An exhaustive enumeration inside 1,244 sampled small binary canonical-pair
+- An exhaustive enumeration inside 1,244 sampled small binary associated-pair
   cases verified strict growth of the computed relative-weight profiles and
   the relative-Singleton ceiling in every checked case.
 - Direct subset enumeration for the binary projective systems with
@@ -825,7 +901,7 @@ targeted audit and supports only "to our knowledge" language.
   recovery-set/recovery-structure language and its dual-support
   characterization, then computes one sharp elementary recovery structure from
   minimal dual supports using a Gr\"obner test set. It retains neither all
-  bounded normalized coefficient fibers nor multi-target ranks or transfer.
+  bounded normalized recovery equations nor multi-target ranks or transfer.
   Cache key `arXiv:1907.05316`; SHA-256
   `a9060ca8f7901885f1e077076c73dd7d03f8ae995a2232e891ce74c39e4ea927`.
 - **Full text:** Jin--Fu, *Constructions of Locally Repairable Codes via
@@ -840,7 +916,7 @@ targeted audit and supports only "to our knowledge" language.
 - **Partial:** Gruica--Jany--Ravagnani, *LRCs: Duality, LP Bounds, and Field
   Size*, cached arXiv preprint. Read: abstract/introduction, Section 2's locality
   definitions, and Section 3 through Definition 3.2 and the MacWilliams-type
-  framing. Its coordinate-refined weight counts and LP do not use the canonical
+  framing. Its coordinate-refined weight counts and LP do not use the associated
   nested recovery pair or exact concatenation sum. Cache key
   `arXiv:2309.03676`; SHA-256
   `1b941cf8445e40039a988ea0124e15fd94f0bbeb278205ec7bf934bf3e9a71a3`.
@@ -871,7 +947,7 @@ targeted audit and supports only "to our knowledge" language.
   2026. Read in full from the cached six-page preprint. It studies quantum
   ((r,t,x))-locality, common classical recovery sets, subset-inclusion
   constructions, and parameter bounds. Its recovery-set overlap statistics do
-  not contain the fixed-target RGHW hierarchy, normalized coefficient fibers,
+  not contain the fixed-target RGHW hierarchy, normalized recovery equations,
   or concatenation confinement. Cache key `arXiv:2608.10912`; SHA-256
   `87346f1756fc21cc69c420701e8daf9ad27343343ed0722922e55d35538b594d`.
 - **Full text:** Stylianou--Boche, *Bounds for Pure Disjoint
@@ -902,7 +978,7 @@ targeted audit and supports only "to our knowledge" language.
   ((r,delta))-locally recoverable codes* (`arXiv:2608.17118`, 17 August).
   These records concern quantum information locality, stabilizer/entanglement-
   assisted constructions, and parameter bounds. None states the classical
-  canonical helper pair or exact concatenation threshold. Their full texts
+  associated fixed-target nested pair or exact concatenation threshold. Their full texts
   were not read, so this is only a scope screen, not a theorem-level dismissal.
 - **Abstract/metadata only:** Zabokritskiy, *Perfect Matchings with Prescribed
   Differences Beyond Hall: The Two-Hole Problem*, official arXiv abstract
@@ -940,9 +1016,10 @@ its displayed record combines at least two of GHW/RGHW, cooperative or multiple-
 erasure recovery, concatenation, recovery structures, or exact dual supports;
 also promote every exact-title hit for a named near predecessor.** The result
 pages were relevance screens, not exhaustively enumerated citing sets, and no
-negative verdict rests on their reported total-result counts. Accordingly the
-three-graph forward-citation rule was not triggered. Promoted exact-title and
-exact-phrase hits received the source-level reads above.
+negative verdict rests on their reported total-result counts. At this discovery
+stage the three-graph rule was not yet triggered; the later claim-specific
+closure below pins three near sources and performs that audit. Promoted
+exact-title and exact-phrase hits received the source-level reads above.
 
 ### One-month delta screen: 24 July--24 August 2026
 
@@ -1040,7 +1117,7 @@ an HTTP or indexing failure is not treated as an empty citing set.
   Repairing Two Erasures* had title/metadata only. The five records concern
   availability, $(r,t,x)$-locality, or generalized-weight parameter bounds.
   None combines a fixed-target nested pair with exact concatenation
-  confinement or coefficient-fiber transfer.
+  confinement or transfer of normalized recovery equations.
 - **M\'arquez-Corbella--Mart\'inez-Moro--Munuera:** arXiv
   `1907.05316`, published DOI `10.1007/s10623-020-00746-7`; OpenAlex work
   `W2956888074`, Crossref, and Semantic Scholar paper
@@ -1080,29 +1157,35 @@ not the size of the underlying subject literature.
 ### Cheap corollary exposed by the service-rate literature
 
 For a finite family $A$ of target demands and server radius $r$, let
-$\mathcal R_a^{(\le r)}$ be the complete recovery-set family in the transported
-server universe for demand $a\in A$. A permitted direct systematic singleton
-may be adjoined identically on both sides. With a nonnegative server-capacity
-vector $c$, define the bounded
-service-rate polytope by
+$\mathcal M_a^{(\le r)}$ be the inclusion-minimal exact helper supports of
+size at most $r$ for demand $a\in A$. A permitted direct systematic singleton
+may be adjoined identically on both sides. With a nonnegative capacity vector
+$c$ on the target block's helper universe, define the bounded service-rate
+region by
 
 $$
  \Lambda_A^{(\le r)}(c)
- =\left\{\lambda\ge0:
+ =\left\{\lambda\ge0:\ \exists(f_{a,R})\ge0\text{ such that }
  \begin{array}{l}
- \lambda_a=\sum_{R\in\mathcal R_a^{(\le r)}}\lambda_{a,R},\\
- \sum_a\sum_{R\ni j}\lambda_{a,R}\le c_j
+ \lambda_a=\sum_{R\in\mathcal M_a^{(\le r)}}f_{a,R},\\
+ \sum_a\sum_{R\ni j}f_{a,R}\le c_j
  \quad\text{for every helper }j,
- \end{array}
- \quad \lambda_{a,R}\ge0\right\}.
+ \end{array}\right\}.
 $$
 
-This polytope is a functor of the labelled bounded recovery-set families. Hence
-any exact bounded recovery-structure isomorphism induces, after relabelling
-helpers,
+This is the same region obtained from the full upward-closed recovery-set
+families: any allocation placed on a nonminimal recovery set can be moved to a
+contained minimal set, weakly decreasing every server load. This observation
+also removes a global-universe nuisance in the concatenation. Upward closure
+there contains irrelevant cross-block supersets, but confinement copies every
+minimal support into the target block and no cross-block minimal support
+survives below the gate. Hence an exact bounded recovery-structure
+isomorphism induces, under the helper bijection $\phi$ and the capacity
+transport $c_{\phi(j)}'=c_j$ (with arbitrary nonnegative capacities outside
+the target block),
 
 $$
- \boxed{\Lambda_{A,\mathrm{concat}}^{(\le r)}(c)
+ \boxed{\Lambda_{A,\mathrm{concat}}^{(\le r)}(c')
        =\Lambda_{A,\mathrm{inner}}^{(\le r)}(c).}
 $$
 
@@ -1114,9 +1197,9 @@ $$
 
 with the larger objectwise gate available when $A$ omits the minimum-cost
 demands. Under positive-density realization, the entire bounded service-rate
-polytope—and therefore every coordinatewise maximum service rate and every
+region—and therefore every coordinatewise maximum service rate and every
 linear load-balancing objective—is reproduced on each prescribed block; the
-polytopes of disjoint blocks combine by the corresponding product/capacity
+regions of disjoint blocks combine by the corresponding product/capacity
 constraints.
 
 This corollary uses only the support layer once the recovery sets are known;
@@ -1125,6 +1208,50 @@ service-rate regions are fractional capacity polytopes, while BGS asks for one
 integral capacity-one packing that serves a full multiset of demands. The new
 August paper therefore strengthens the motivation and provides a timely
 application, but does not challenge C948's priority claim.
+
+### EJ corollary: all bounded rank-recovery events transfer
+
+For a surviving inner-helper set $S\subseteq J$, define
+
+$$
+ a_{P,r}(S)
+ =\max_{\substack{H\subseteq S\\|H|\le r}}
+   \dim\bigl(W_P\cap\operatorname{span}G_H\bigr).
+$$
+
+This is the largest dimension of a subspace of linear combinations of the
+target coordinates recoverable from $S$ by a system using at most $r$
+helpers. For each $t$,
+
+$$
+ a_{P,r}(S)\ge t
+$$
+
+is exactly the existence event for a radius-$r$ rank-$t$ recovery system.
+Consequently, whenever
+
+$$
+ r<M_t(D_P,K_P)+d(I^\perp),
+$$
+
+that rank-$t$ event is copied exactly to every designated inner block. Under
+independent helper survival with probability $s$, so is the complete bounded
+rank-$t$ reliability law
+
+$$
+ R_{P,t}^{(\le r)}(s)
+ =\sum_{S\subseteq J}
+   \mathbf1\{a_{P,r}(S)\ge t\}
+   s^{|S|}(1-s)^{|J|-|S|}.
+$$
+
+External-block survival variables disappear from the concatenated expression
+because confinement makes them irrelevant and summing over their states gives
+one. If the stronger uniform gate
+$r<M_1(D_P,K_P)+d(I^\perp)$ holds, the entire function
+$S\mapsto a_{P,r}(S)$, hence all rank reliabilities simultaneously, transfers.
+The RGHWs recover only its first-support thresholds; the complete function
+retains the stochastic information those thresholds discard.
 
 MathSciNet was **NOT COVERED** because institutional authentication was not
 available. Google Scholar was **NOT COVERED** because automated access was not
@@ -1138,9 +1265,9 @@ still require "to our knowledge" wording.
 No source found in this bounded audit states the combination
 
 \[
- \text{canonical recovery pair}
- +\text{exact rank-stratified confinement}
- +\text{coefficient-fiber transfer}
+ \text{associated fixed-target nested code pair}
+ +\text{exact confinement for every recovered dimension}
+ +\text{transfer of all normalized recovery equations}
  +\text{positive-density realization}.
 \]
 
@@ -1164,7 +1291,7 @@ the defensible priority claim begins with their exact fixed-target role in the
 confinement theorem.
 
 No manuscript, bibliography, public summary, or novelty ledger was updated.
-The existing C948 report is the sole home of this provisional verdict, so there
+The existing C948 report is the sole home of this bounded verdict, so there
 are no repeated novelty surfaces to synchronize at this stage.
 
 ## 12. TT and EJ verdict
@@ -1174,24 +1301,136 @@ are no repeated novelty surfaces to synchronize at this stage.
 2. **Priority judo:** the identity
    (d_t(C^\perp)-t=\min_{|P|=t}\kappa_C(P)) makes the classical cooperative-
    locality GHW bound a min--max corollary and yields the global concatenation
-   escape envelope (d_t(C^\perp)-t+d(C^\perp)).
+   minimum nonconfinement cost over target sets
+   (d_t(C^\perp)-t+d(C^\perp)).
 3. **Strong corollary:** relative-Singleton/MDS extremality and the rank-one
    rigidity theorem. The inequalities are classical inputs; their exact
    confinement interpretation is new in this package.
 4. **Concrete flagship:** the projective-simplex family gives a non-MDS
    nonlinear threshold hierarchy and an exact geometric reliability law.
 5. **Structural separation:** the binary two-presentation example proves that
-   the helper pair and its entire RGHW hierarchy do not determine the escape
-   barrier. Target coefficients matter through (d(I^\perp)).
+   the associated nested pair and its entire RGHW hierarchy do not determine
+   the nonconfinement threshold. Target coefficients matter through
+   (d(I^\perp)).
 6. **Demote:** universality of nested pairs is standard quotient/graph algebra.
    Its positive-density exact transport is the worthwhile payoff.
 7. **Corrected:** reliability separation requires forced supports and an exact
    total-radius budget; arbitrary direct-sum factorization is false.
 8. **Delta-audit corollary:** exact recovery-family transfer preserves the
-   entire bounded service-rate polytope, not only locality, availability, or
+   entire bounded service-rate region, not only locality, availability, or
    one coordinatewise service maximum.
+9. **EJ corollary:** for each survivor set, exact transfer preserves the
+   maximum dimension of recoverable target linear combinations under the
+   helper bound; hence it preserves every rank-$t$ reliability law, while the
+   RGHWs retain only the first-support thresholds.
 
-## 13. BGS disjoint-packing bridge — preliminary mathematical vet
+## 13. Proof-level reconciliation with C946
+
+The C948 packet was reread line by line against C946's definitions and proof
+of the objectwise finite/eventual confinement theorem. The internal audit
+found no mathematical contradiction or failed implication. The following
+points are load-bearing.
+
+1. The relative weight is indexed by the **dimension of the recoverable
+   subspace of linear combinations of the target coordinates**. C946's
+   later generalized-weight discussion instead stratifies the rank of an
+   **external zero-functional perturbation**. Rank one controls the yes/no
+   nonconfinement gate in that latter stratification; this does not conflict with the
+   internal rank-$t$ staircase in C948.
+2. The standard RGHW minimization permits an arbitrary subspace $L'$ with
+   $\dim L'-\dim(L'\cap K_P)=t$. Passing to a complement of $L'\cap K_P$
+   cannot enlarge support, so the transverse $t$-space formula used here is
+   exactly equivalent, not a stronger definition.
+3. The quantifier in the uniform rank-$t$ gate is a minimum over all
+   internally realizable $t$-dimensional subspaces of linear combinations of
+   the target coordinates. Every such demand
+   has objectwise threshold $\rho_A+d(I^\perp)$; the minimum $\rho_A$ is
+   $M_t(D_P,K_P)$. Hence "every radius-$r$ system for every rank-$t$ demand"
+   holds exactly below $M_t+d(I^\perp)$, while a minimizing demand supplies
+   necessity at equality.
+4. The singleton conversion has the correct convention: $\Gamma_1$ counts
+   helpers and $z_x$ counts total dual weight, so $z_x=\Gamma_1+1$.
+5. Eventual sufficiency still requires C946's fixed-radius outer family with
+   $d(O_N^\perp)>r+1$ eventually. Positive-density transport additionally uses
+   the same asymptotically good outer-family and block-class hypotheses as the
+   current realization theorem; C948 does not remove those hypotheses.
+6. The MDS staircase uses all three stated assumptions: independent target
+   columns, $p\le k$, and at least $k$ helper columns. The rigidity implication
+   follows because equality in
+   $M_1+d(I^\perp)\le b-\ell+1+k+1$ forces both $b=k$ and
+   $d(I^\perp)=k+1$, while strict RGHW growth then forces equality at every
+   rank.
+7. The quotient construction really has kernel $K$ and preimage $D$; its
+   displayed graph is $\ker G$. This verifies universality but does not upgrade
+   its classical priority status.
+8. Forced-padding reliability is valid only at
+   $R=r_0+\sum_iL_i$. Full quotient-rank recovery forces every unique padding
+   support, and projecting any mixed equation system to the base component
+   leaves a base recovery within budget $r_0$. This gives the stated exact
+   factor and avoids the false arbitrary-radius direct-sum claim.
+9. In the projective family, an equation survives exactly when the failed
+   points lie in its kernel hyperplane. Thus the surviving equation space is
+   the annihilator of the failed-point span. Möbius inversion, the low-$s$
+   minimum-survivor coefficient, the high-$s$ projective-frame coefficient,
+   and the point--hyperplane incidence proof of uniqueness all have the stated
+   indices and exponents.
+10. The two coefficient presentations have the same associated nested pair and weights
+    $(M_1,M_2)=(1,3)$ but dual distances $2$ and $3$. The resulting threshold
+    staircases $(3,5)$ and $(4,6)$ follow without an off-by-one shift.
+11. The best-target identity follows in both directions from an information
+    set of a minimum-support $t$-dimensional dual subcode. Its cooperative-
+    locality consequence is a min--max corollary, and the minimum
+    nonconfinement cost over target sets inherits C946's eventual outer-family
+    qualifier.
+12. The bounded service-rate region uses only labelled support families, so
+    exact recovery-family transport induces its equality by relabelling. It is
+    a support-level corollary, not a coefficient-level invariant or an integral
+    packing theorem.
+
+The only internal exposition defect found was that item 2's complement
+argument had been left implicit; Section 1 now states it.
+
+### Independent referee read
+
+An independent cold reader rebuilt every load-bearing argument listed above.
+The first pass found no theorem failure, but placed a statement-level hold on
+three points: global service-rate regions needed minimal-set domination;
+positive-density realization needed its full outer hypotheses and exact
+density; and the forced-padding separation needed an explicit direct-sum pair
+and both implications. It also requested the executive ranges, projective
+dimension range, and unlabeled-support qualification. After those repairs, a
+targeted second read marked every finding closed and found no introduced
+mathematical defect. Its final verdict is **READY TO PACKAGE on proof
+correctness**. The literature verdict remains bounded by the database limits
+stated in Section 11.
+
+### Frozen claim ledger
+
+- **Classical inputs:** cooperative/subspace recovery existence criteria;
+  RGHWs, their strict hierarchy, relative Singleton bounds and Wei duality;
+  nested-code quotient/access algebra; ordinary GHWs and the 2017 cooperative-
+  locality bound; MDS and projective-simplex weight facts.
+- **Candidate new theorem package:** the associated nested pair as the exact
+  fixed-target linear-algebraic datum; $\mu_t=M_t(D_P,K_P)$ in that recovery role;
+  the sharp additive threshold $\Gamma_t=M_t+d(I^\perp)$; exact transport of
+  all normalized minimizing systems; and positive-density realization under
+  the inherited outer-family hypotheses.
+- **Derived theorem/corollaries:** the best-target identity and the minimum
+  nonconfinement cost over target sets;
+  cooperative-locality min--max recovery; relative-Singleton/MDS staircase and
+  rank-one rigidity; bounded service-rate-region transfer; simultaneous
+  transfer of all bounded rank-recovery events.
+- **Examples and separations:** forced-padding reliability beyond the complete
+  RGHW hierarchy; the projective-simplex nonlinear staircase, reliability law,
+  and uniqueness theorem; the binary coefficient-presentation separation.
+- **Computational evidence only:** the sampled associated nested pairs, the explicit
+  Reed--Solomon instance, finite projective reliability evaluations, and the
+  coefficient-presentation arithmetic in Section 10.
+- **Open or separately gated:** literal relative-dual failure formulas; a
+  manuscript-facing reproducibility bundle; BGS four-hole signs and priority;
+  all six-hole statements; bandwidth-aware vector recovery.
+
+## 14. BGS disjoint-packing bridge — preliminary mathematical vet
 
 This section vets the proposed additive 1-factorization/hole-hierarchy report.
 It is not a literature-priority closure and makes no manuscript claim.
@@ -1316,8 +1555,9 @@ not validate the complete four- or six-hole Fourier argument.
   cancellation.
 - Track repeated-column factorials and compatible-pairing multiplicities in
   the compression arguments before promoting six-hole claims.
-- Replace the strict displayed hierarchy between RGHWs, recovery fibers, and
-  packing fibers by explicit forgetful maps; numerical strictness need not
+- Replace the strict displayed hierarchy between RGHWs, complete families of
+  recovery equations, and disjoint simultaneous realizations by explicit
+  forgetful maps; numerical strictness need not
   occur for every code.
 - Treat all low-dimensional verification and frontier statements as unverified
   until scripts/certificates and the promised claim-specific literature audit
@@ -1343,10 +1583,9 @@ generic BGS instances.
 Ideally packaged, the combined mathematics is now a plausible 99-level coding-
 theory package and suitable for a strong IEEE Transactions on Information
 Theory submission. The uniqueness theorem upgrades the projective family from
-an illustrative example to an extremal classification. An independent cold
+an illustrative example to an extremal classification. The independent cold
 read of the full theorem packet and proof-level audit of the projective
-reliability inversion remain the main gates before treating that assessment as
-locked.
+reliability inversion have now passed after all findings were repaired.
 
 The current best sequel title is *Exact Transfer of Bounded Linear Recovery
 and Relative Weight Hierarchies*. The single-coordinate theorem should appear
@@ -1358,7 +1597,8 @@ rather than as a competing theme.
 
 ### Settled
 
-- The correct rank parameter is message rank, not presentation dimension.
+- The correct rank parameter is the dimension of the recoverable subspace of
+  linear combinations of target coordinates, not presentation dimension.
 - The uniform rank-(t) cost is exactly a relative generalized Hamming weight.
 - The nonconfinement threshold is the relative weight plus (d(I^\perp)).
 - The singleton-target shift relative to (z_x) is accounted for.
@@ -1370,14 +1610,14 @@ rather than as a competing theme.
 - Its exact reliability is a projective-rank/Tutte specialization with closed
   subspace-lattice inversion.
 - The coefficient presentation can change all confinement thresholds while
-  leaving the canonical helper pair and complete RGHW hierarchy fixed.
+  leaving the associated nested code pair and complete RGHW hierarchy fixed.
 - At the projective helper budget, the simplex configuration is the unique
   rank-one extremizer up to projective column equivalence.
 - The dual GHW minus target size is exactly the best-target simultaneous
   recovery cost, not merely a lower bound.
 - Abdel-Ghaffar--Weber's cooperative-locality inequality is the corresponding
   min--max corollary.
-- The earliest rank-(t) identity-demand escape over all target sets is
+- The least rank-(t) identity-demand nonconfinement cost over all target sets is
   (d_t(C^\perp)-t+d(C^\perp)).
 - The proposed BGS profile lattice follows completely from the affine $2$-flat
   and $3$-cube moves; only its literature priority remains open.
@@ -1386,36 +1626,52 @@ rather than as a competing theme.
 - Targeted finite checks found no defect in the proposed four-hole coefficient
   valuations or the sampled six-deletion arithmetic.
 - The August 2026 service-rate literature yields an immediate exact-transfer
-  corollary for bounded fractional service polytopes; it is support-level and
+  corollary for bounded fractional service-rate regions; it is support-level and
   does not pre-empt the coefficient-aware confinement theorem.
+- Minimal-set domination closes the apparent cross-block-superset issue in the
+  service-rate corollary.
+- The bounded survivor-set rank function, and therefore every bounded
+  rank-$t$ reliability law, transfers under the corresponding confinement
+  gate; the RGHWs retain only its first-support thresholds.
+- Full-text reads of the three nearest sources, three-provider citation-graph
+  screening, zbMATH queries, and the one-month delta screen found no predecessor
+  for the combined theorem, subject to the explicit database limits below.
+- The independent proof cold read and targeted repair reread passed every
+  theorem, example, endpoint, and quantifier in the frozen claim ledger.
+- Paper-facing vocabulary can remain entirely native: recovery sets,
+  recovery structures, normalized recovery equations, cooperative recovery,
+  RGHWs, relative dimension/length profiles, service-rate regions, and literal
+  nonconfinement thresholds. “Associated nested code pair” is descriptive
+  linear algebra, not a proposed branded noun.
 
-### Open
+### Open, with exact owner or evidence limit
 
-- Independent cold read of the exact-sequence, threshold, rigidity, projective
-  reliability, and coefficient-presentation arguments.
-- Full literature closure for the combined exact threshold, rather than the
-  classical RGHW ingredients separately.
-- Full-text promotion of the nearest partial reads and zbMATH/forward-citation
-  closure if a manuscript-bound priority sentence is proposed.
-- Repeat the dated delta screen at C948 closure; the present 24 July--24 August
-  screen was index-based and the official arXiv API was rate-limited.
-- Decide whether the projective-simplex family or coefficient-presentation
-  separation should lead the eventual sequel application section.
-- Derive the dual relative-weight failure thresholds in literal recovery
-  language, with all index reversals checked.
-- Complete the four-hole global boundary-transform/sign audit; local
+- **Database limit, not a proof gate:** MathSciNet and Google Scholar were not
+  covered; Crossref did not index the Jin--Fu arXiv DOI, and the official arXiv
+  API rate-limited the dated query. Manuscript priority language must remain
+  “to our knowledge,” and the dated screen should be refreshed at submission.
+- **Primary-paper architecture successor:** use the projective simplex code as
+  the main non-MDS application and the coefficient-presentation example as the
+  compact separation immediately following the general theorem.
+- **Optional recovery-theory successor:** derive the relative-dual failure
+  thresholds in literal recovery language, with all index reversals checked.
+- **Reproducibility successor:** turn the ephemeral finite checks into a
+  citable script/certificate bundle before using them as manuscript evidence.
+- **BGS successor:** complete the four-hole global boundary-transform/sign audit; local
   coefficient nonvanishing is not enough.
-- Prove the omitted tetrahedral boundary-frequency existence lemma.
-- Audit the BGS frontier and profile-lattice precedence before any priority
+- **BGS successor:** prove the omitted tetrahedral boundary-frequency existence
+  lemma and audit the BGS frontier/profile-lattice precedence before any priority
   claim, and keep six-hole conclusions provisional meanwhile.
 
 ## Current verdict
 
-The theorem packet has crossed from an attractive generalization to a coherent
-paper spine. Its priority does not rest on introducing relative generalized
-weights. It rests on proving that those weights are the exact rank-stratified
-local costs, that concatenation adds precisely the global dual-distance escape
-barrier, and that the complete coefficient systems can be reproduced on
-positive-density target classes. The projective-simplex and coefficient-
-presentation examples now give the abstract result concrete mathematical
-teeth.
+The theorem packet is ready to package on proof correctness. Its priority does
+not rest on introducing relative generalized weights or on naming a new local
+object. It rests on identifying those established weights with the exact
+minimum helper costs for recovering subspaces of each dimension, proving that
+concatenation adds precisely $d(I^\perp)$ to the nonconfinement threshold, and
+transporting every normalized recovery equation to positive-density target
+classes. The projective-simplex and coefficient-presentation examples give the
+general result concrete mathematical force. The binary packaging verdict is
+**flagship rebuild**; BGS remains a separate, later paper after its four-hole
+proof audit.
