@@ -145,11 +145,11 @@ independent post-2017 solution exists.
 
 ## Exact certificates
 
-General type-(I_3) extension:
+General type-$I_3$ extension:
 
 - `notes/cubic-threefolds-tasks/c925-dp4-level5-generalization-check.py`,
-  5,313 bytes, SHA-256
-  `551927fffb743d013b7d3ca2139ae21aa0cf6db3f93cffad0b6d91247306b83e`;
+  5,512 bytes, SHA-256
+  `c12e9df32e831e34997d57eb1e672e6272f9dd1ba102456d62e288e50660cec5`;
 - `notes/cubic-threefolds-tasks/c925-dp4-level5-generalization-check.json`,
   1,015 bytes, SHA-256
   `bf083f42aa14e140e537d66edeac7128ad2f5c4f8e2fdf191bcf96dbb2e65809`.
@@ -161,8 +161,9 @@ Replay from `/home/tavis/src/othello`:
       --check-certificate \
       notes/cubic-threefolds-tasks/c925-dp4-level5-generalization-check.json
 
-The checker pins the SHA-256 of the type-(I_1) base certificate, verifies
-(5)--(8), and checks every element of the full order-24 type-(I_3) group.
+The checker pins the SHA-256 of the type-$I_1$ base certificate, verifies
+(5)--(8), checks equivariance of all six weight rows, and checks every element
+of the full order-24 type-$I_3$ group.
 
 CARAT convention:
 

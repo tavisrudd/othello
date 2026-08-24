@@ -84,7 +84,9 @@ auxiliary_generators = (
     (permutation(3, ((1, 2),)), permutation(2, ((0, 1),))),
     (permutation(3, ((0, 2, 1),)), permutation(2, ())),
 )
-for q_three, q_two in auxiliary_generators:
+for (q_three, q_two), target_generator in zip(
+    auxiliary_generators, (generator_one, generator_two)
+):
     h_character_action = sp.diag(
         1, permutation_matrix(q_three), permutation_matrix(q_two)
     )
@@ -93,6 +95,12 @@ for q_three, q_two in auxiliary_generators:
     )
     assert h_character_action * h_bar_character_basis == (
         h_bar_character_basis * h_bar_action
+    )
+    assert (
+        h_character_action.T
+        * h_weights
+        * permutation_matrix(target_generator)
+        == h_weights
     )
 
 
