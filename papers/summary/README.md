@@ -39,7 +39,7 @@ examples.
 | Cubic stabilization | Rank-two formal quantum-connection block | Irrationality after multiplication by `P¹` |
 | Projective Reed–Solomon deep holes | Coherent marked contractions | Persistent and modular obstruction carriers |
 | Stabilizer AME states | Marginal Weyl atlas | Local-Clifford rigidity and quantitative rounding |
-| Bounded recovery structures | Normalized recovery equations | Code reconstruction and transfer |
+| Bounded linear recovery | Relative weights and normalized recovery equations | Exact costs and transfer thresholds |
 | Finite planes and codes | Deep-hole or minimum-word data | Recovery of the marked geometry |
 | Cubic-threefold theta divisor | Integral lattice and local link data | Global lattice and perverse decomposition |
 
@@ -163,11 +163,14 @@ complex as separate victories.
   one. Its nullity determines whether the projective transversal group is
   `Fq² ⋊ SL₂(q)` or the smaller split-torus branch. [Diagonal Isoduality and Transversal Clifford Groups](https://github.com/tavisrudd/mds-css-transversal-groups/blob/main/mds-css-transversal-groups.pdf).
 
-- **Bounded recovery structures transfer exactly.** Normalized bounded
-  recovery equations retain both their helper supports and their coefficients.
-  A sharp confinement threshold copies this represented local structure into
-  every inner block, and asymptotically good outer families place it on a
-  positive-density target class. [Bounded Recovery Structures of Linear Codes](https://github.com/tavisrudd/complete-repair-ports/blob/main/complete_repair_ports.pdf).
+- **Relative weights are exact local recovery costs and transfer thresholds.**
+  A target/helper split determines nested codes `K_P ⊆ D_P`; their `t`th
+  relative generalized Hamming weight is the minimum helper union needed to
+  recover `t` independent target combinations.  For an outer code with at
+  least two blocks and `d(O⊥) > r + 1`, every cost-`r` system is confined to
+  its inner block exactly when `r < M_t(D_P,K_P) + d(I⊥)`.  Below that gate,
+  concatenation preserves normalized equations and exact helper supports.
+  [Exact Transfer of Bounded Linear Recovery and Relative Weight Hierarchies](https://github.com/tavisrudd/complete-repair-ports/blob/main/complete_repair_ports.pdf).
 
 - **Order six is the unique nontrivial cut-rigid symmetric conference
   order.** For a balanced half (Y) of a symmetric conference matrix, the
@@ -219,8 +222,8 @@ the theorem column.
 | Local-Unitary Rigidity and Quantitative Rounding for Stabilizer AME States | Every product-unitary intertwiner between stabilizer `AME(2m,q)` states is Clifford on each party. | Every prime power `q = pᵉ` and `m ≥ 2`. |
 | Diagonal Isoduality and Transversal Clifford Groups of MDS–CSS Codes | The diagonal multiplier nullity fixes the transversal logical group. | All `[2m,m,m+1]q` MDS codes over odd prime fields. |
 | Balanced Cuts of Conference Matrices: Squared-Spectrum Rigidity and Hermitian Holonomy | Order six is the unique nontrivial realized symmetric conference order whose normalized balanced cross-block Gram spectrum is cut-independent. | Every symmetric conference matrix and every balanced half. |
-| Bounded Recovery Structures of Linear Codes: Transfer, Reliability, and Geometry | The minimum-weight normalized recovery equations reconstruct the represented code, although their support projection is the generic complete uniform family. | Every proper `[n,k]q` MDS code with `1 ≤ k < n`, at every distinguished coordinate. |
-| Bounded Recovery Structures of Linear Codes: Transfer, Reliability, and Geometry | The inequality `r + 1 < z_x(I)` exactly characterizes confinement of every radius-`r` recovery equation to its inner block; under it, supports and normalized coefficients transfer to a designated positive-density target class. | Every fixed represented inner code and every outer family with dual distance tending to infinity; asymptotic goodness follows from the stated classical outer-family inputs. |
+| Exact Transfer of Bounded Linear Recovery and Relative Weight Hierarchies | For `u=min(k,|P|)`, `b=min(k,|J|)`, and `ell=u+b-k`, an MDS inner code has `M_t(D_P,K_P)=k-u+t` at every recoverable rank; helper-span gives equality in the global ceiling, and rank-one ceiling equality is rigid. | Every proper MDS inner code and every target/helper split with `1 ≤ t ≤ ell`. |
+| Exact Transfer of Bounded Linear Recovery and Relative Weight Hierarchies | `M_t(D_P,K_P)` is the exact minimum helper-union cost for rank-`t` recovery. Under `N ≥ 2` and `d(O⊥)>r+1`, all cost-`r` systems are block-confined exactly when `r<M_t(D_P,K_P)+d(I⊥)`, and normalized equations and exact supports transfer. | Every represented inner code with nonzero dual, every target set with `1 ≤ t ≤ dim W_P`, and every linear outer code satisfying the finite gate; growing outer dual distance gives the eventual family form. |
 | Integral Cohomology and Modular Decomposition for the Theta Divisor of a Cubic Threefold | The integral middle lattice has rank `130` and saturation quotient `(Z/2)^10`; the integral resolution complex has central Smith factor three, a length-three mod-three Loewy chain, and modular relative-hard-Lefschetz failure. | The theta divisor of every smooth complex cubic threefold. |
 
 ## Papers and entry points
@@ -249,7 +252,7 @@ boundary, and reproducible entry points.
 | Balanced Cuts of Conference Matrices: Squared-Spectrum Rigidity and Hermitian Holonomy | Matrix theory / algebraic combinatorics / mathematical physics | Order six is the unique nontrivial cut-independent case; Hermitian triangle holonomy controls the degree-three frontier and rigidity. | [PDF](https://github.com/tavisrudd/conference-cut-spectra/blob/main/conference_cut_spectra.pdf) · [repo](https://github.com/tavisrudd/conference-cut-spectra) |
 | Integral Cohomology and Modular Decomposition for the Theta Divisor of a Cubic Threefold | Algebraic geometry / topology | The rank-130 integral middle lattice has canonical mod-two glue, while the same resolution carries a factor-three integral perverse attachment, a length-three modular Loewy chain, and failure of relative hard Lefschetz modulo three. | [PDF](https://github.com/tavisrudd/blown-up-theta-lattice/blob/main/blown_up_theta_lattice.pdf) · [repo](https://github.com/tavisrudd/blown-up-theta-lattice) |
 | Frobenius-equivariant Pair Extension and Robust Repair of Eight-Arcs | Finite geometry / coding theory | Fixed mate-line carriers and exact collision corrections give Frobenius-compatible paired MDS extensions, including the exact two-fixed-point minimum over F₂₅. | [PDF](https://github.com/tavisrudd/equivariant-robust-completion/blob/main/equivariant-robust-completion.pdf) · [repo](https://github.com/tavisrudd/equivariant-robust-completion) |
-| Bounded Recovery Structures of Linear Codes: Transfer, Reliability, and Geometry | Coding theory / reliability | A sharp confinement threshold transfers exact helper supports and normalized recovery equations to positive-density coordinate classes. | [PDF](https://github.com/tavisrudd/complete-repair-ports/blob/main/complete_repair_ports.pdf) · [repo](https://github.com/tavisrudd/complete-repair-ports) |
+| Exact Transfer of Bounded Linear Recovery and Relative Weight Hierarchies | Coding theory / distributed storage | Relative generalized weights give exact rank-stratified helper costs and the sharp finite gate for transferring normalized recovery equations. | [PDF](https://github.com/tavisrudd/complete-repair-ports/blob/main/complete_repair_ports.pdf) · [repo](https://github.com/tavisrudd/complete-repair-ports) |
 
 The repository for *Reconstructing the Clebsch Code from Its Deep-Hole
 Syndrome Locus* also contains the computational companion
@@ -645,56 +648,62 @@ a fixed code.
 
 ---
 
-#### Bounded Recovery Structures of Linear Codes: Transfer, Reliability, and Geometry
+#### Exact Transfer of Bounded Linear Recovery and Relative Weight Hierarchies
 
 [PDF](https://github.com/tavisrudd/complete-repair-ports/blob/main/complete_repair_ports.pdf) · [Repository](https://github.com/tavisrudd/complete-repair-ports) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.22051903-blue.svg)](https://doi.org/10.5281/zenodo.22051903)
 
-**Standout result.** The inequality `r + 1 < z_x(I)` exactly characterizes
-when every radius-`r` recovery equation is confined to its inner block. Under
-this condition, concatenation copies both the exact helper supports and the
-normalized coefficients, and asymptotically good outer families realize the
-recovery structure on a positive-density coordinate class.
+**Standout result.** For a target/helper split, the relative generalized
+Hamming weights of the associated nested code pair are exactly the minimum
+helper-union costs for recovering independent target combinations. Under the
+finite outer gate `N >= 2` and `d(O^perp) > r + 1`, every rank-`t` recovery
+system of cost at most `r` remains in its inner block exactly when
+`r < M_t(D_P,K_P) + d(I^perp)`; below the gate, normalized equations and exact
+helper supports transfer.
 
-> *Abstract* Fix a represented inner code `I`, a target `x`, and a helper
-> bound `r`. Its normalized dual words through `x` of weight at most `r + 1`
-> give the bounded recovery equations and their exact helper supports. For an
-> outer family whose dual distance tends to infinity, we prove that all
-> sufficiently long concatenations confine every such equation to its inner
-> block if and only if `r + 1 < z_x(I)`. Under this condition the supports and
-> normalized coefficients are copied. Asymptotically good outer families
-> therefore realize represented recovery data on a positive-density coordinate
-> class over a fixed alphabet.
+> *Abstract* Let `I <= F_q^E` be a represented inner code, let `P` be a target
+> set, and put `J = E \ P`. The target and helper parts of a generator matrix
+> determine an associated nested code pair `K_P <= D_P <= F_q^J`. We prove
+> that the `t`th relative generalized Hamming weight `M_t(D_P,K_P)` is exactly
+> the minimum helper-union size needed to recover `t` independent target
+> combinations.
 >
-> Two represented `[10,4,6]` inner codes have the same pointed-perspective
-> polynomial and matched locality, availability, transversal, blocker, and
-> helper-degree statistics, but their radius-three reliabilities are
-> `5s³ - 7s⁵ - s⁶ + 5s⁷ - s⁹` and
-> `5s³ - 7s⁵ - 2s⁶ + 8s⁷ - 3s⁸`. A common outer family preserves matched
-> global parameter bounds and places these recovery structures on target
-> classes of density `1/10`. Thus these pointed-Tutte and conventional local
-> invariants do not determine bounded stochastic repair behavior after
-> positive-density realization.
+> For any linear outer code `O` with at least two blocks and
+> `d(O^perp) > r + 1`, every such recovery system using at most `r` helpers is
+> confined to its inner block exactly when
+> `r < M_t(D_P,K_P) + d(I^perp)`. Below this threshold, concatenation preserves
+> every bounded normalized dual recovery equation, its exact helper support,
+> and every inclusion-minimal recovery set. Consequences include an exact
+> best-target generalized-Hamming-weight formula, exact MDS thresholds,
+> bounded service-rate transfer, and positive-density realization in
+> asymptotically good fixed-alphabet families.
 >
-> We prove deletion–contraction and pivotal identities, a bounded BEC EXIT
-> hierarchy whose differences recover the cheapest available repair radius,
-> and reconstruction of MDS codes from minimum-weight recovery equations.
-> Characteristic-three cubic–axis and quartic–nucleus examples exhibit
-> geometric recovery structures.
+> We construct pairs with the same complete relative-weight hierarchy but
+> different bounded recovery reliability, and pairs with the same associated
+> nested code pair but different confinement thresholds. For a
+> projective-simplex family we compute
+> `M_t = (q^m - q^(m-t))/(q - 1)` and express the recovery probability through
+> the projective-rank distribution. The one-coordinate criterion
+> `r + 1 < z_x(I)` is the rank-one case.
 
-**Delivers.** An exact block-confinement threshold, transfer of supports and
-normalized coefficients, positive-density realization, separated stochastic
-reliability examples, deletion–contraction and bounded-EXIT identities, MDS
-reconstruction from minimum-weight recovery equations, and exact geometric
-examples.
+**Delivers.** The associated nested code pair and its exact relative-weight
+interpretation; finite and eventual rank-stratified confinement theorems;
+best-target generalized-weight and cooperative-locality consequences; an MDS
+staircase and rigidity theorem; positive-density and bounded service-rate
+transfer; reliability and coefficient-sensitive separations; and explicit
+projective-simplex formulas. The paper-local Lean companion proves the
+associated exact sequence only; the stronger results are human-proved and
+explicitly marked absent from Lean coverage.
 
-**Who cares.** Coding theorists working on locality and availability,
-distributed storage, erasure decoding, code concatenation, matroid
-reliability, or finite-geometric code constructions.
+**Who cares.** Coding theorists working on locally recoverable and cooperative
+codes, distributed storage, concatenation, generalized Hamming weights,
+service rate, or stochastic repair reliability.
 
-**Why it matters.** Locality and disjoint availability retain only coarse
-support data. Normalized recovery equations keep the scalar decoder and the
-full failure event visible, while the transfer theorem identifies exactly
-when that richer local structure survives concatenation.
+**Why it matters.** Relative weights give the exact numerical spine of
+bounded linear recovery, while actual repair behavior depends on the full
+family of normalized equations, their overlap, and their coefficients. The
+paper identifies the sharp condition under which concatenation transports
+that richer witness family; its earlier single-coordinate theorem becomes the
+rank-one case.
 
 ---
 
