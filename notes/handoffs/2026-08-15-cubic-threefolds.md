@@ -232,20 +232,20 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   `../2026-08-24-c925-level-three-descent-and-cancellation-frontier.md`.
 
   **Standalone cancellation consequence:** the same threshold argument has
-  now been hardened over (mathbf Q). The complex (m=1) irrationality
-  theorem rules out (mathbf Q)-rationality at level one, while the uniform
-  OADP theorem gives (mathbf Q)-rationality at level four. For the minimal
-  (s_{\mathbf Q}\in\{2,3,4\}), the smooth projective variety
-  (X\times\mathbf P^{s-1}) is nonrational but becomes rational after one
-  (mathbf A^1). This settles the existential birational-cancellation
+  now been hardened over \(\mathbf Q\). The complex \(m=1\) irrationality
+  theorem rules out \(\mathbf Q\)-rationality at level one, while the uniform
+  OADP theorem gives \(\mathbf Q\)-rationality at level four. For the minimal
+  \(s_{\mathbf Q}\in\{2,3,4\}\), the smooth projective variety
+  \(X\times\mathbf P^{s-1}\) is nonrational but becomes rational after one
+  \(\mathbf A^1\). This settles the existential birational-cancellation
   statement with the explicit three-element candidate list
-  (X\times\mathbf P^i), (1\le i\le3), but does not identify one member.
+  \(X\times\mathbf P^i\), \(1\le i\le3\), but does not identify one member.
   The source's August 21 open statement and a bounded August 24 arXiv/OpenAlex
   screen support only correspondingly bounded priority language. Report:
   `../2026-08-24-c925-finite-disjunction-a1-cancellation-theorem.md`.
 
-  **Rank-three (m=2) tangent-slice frontier:** the multiplicity-free
-  type-(I_1) cocharacter representation has exactly four invariant
+  **Rank-three \(m=2\) tangent-slice frontier:** the multiplicity-free
+  type-\(I_1\) cocharacter representation has exactly four invariant
   three-planes: the sum of the three sign lines and each sign line plus the
   irreducible two-plane. Their toric Cox-orbit degrees are `14,18,18,18`.
   Exact facet enumeration shows that every complete Galois facet orbit spans
@@ -256,8 +256,13 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   exhausted for every invariant rank-three subtorus. Independently, the only
   Galois-stable four-weight windows have affine lattice indices two and six,
   so the general unimodular-window OADP theorem also cannot yield level two.
-  This does not decide
-  (m=2): an intrinsic invariant field or non-toric base scheme remains.
+  The index-two window is attained: an exact three-by-four tangent
+  coefficient matrix has all four maximal minors nonzero, producing a
+  rational generically double cover of the rank-three quotient. Thus the best
+  direct slice reduces \(m=2\) to a concrete deck-involution quotient of a
+  rational fourfold; it does not prove that quotient rational. This does not
+  decide \(m=2\): an intrinsic invariant field or non-toric base scheme
+  remains.
   Report and certificate:
   `../2026-08-24-c925-rank-three-boundary-peeling-frontier.md`.
 

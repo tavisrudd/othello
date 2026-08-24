@@ -804,5 +804,82 @@
       ]
     ]
   },
-  "schema": "c925-i1-rank3-boundary-peeling-exhaustion-v1"
+  "schema": "c925-i1-rank3-boundary-peeling-exhaustion-v1",
+  "three_sign_index_two_tangent_slice": {
+    "affine_lattice_index": 2,
+    "all_kernel_coordinates_nonzero": true,
+    "conclusion": "A descended tangent codimension-three slice supported on the index-two stable four-weight window is rational by OADP projection and meets a general three-sign torus orbit in two points. Thus it is a rational generically double cover of the rank-three quotient; rationality of the quotient itself is not asserted.",
+    "four_maximal_minors": [
+      "-17/1260",
+      "119/270",
+      "-187/168",
+      "187/270"
+    ],
+    "geometric_open_orbit_degree": 2,
+    "orbit_test_point": {
+      "a,b,z1,z2,z3": [
+        2,
+        5,
+        2,
+        4,
+        9
+      ],
+      "e1,e2,e3,e4,e5": [
+        2,
+        3,
+        5,
+        7,
+        11
+      ]
+    },
+    "stable_window_weight_blocks": [
+      [
+        "E1",
+        "E2",
+        "E5"
+      ],
+      [
+        "L14",
+        "L24",
+        "L45"
+      ],
+      [
+        "L13",
+        "L23",
+        "L35"
+      ],
+      [
+        "L12",
+        "L15",
+        "L25"
+      ]
+    ],
+    "tangent_specialization": {
+      "a": 2,
+      "b": 5,
+      "z1": 1,
+      "z2": 3,
+      "z3": 7
+    },
+    "window_coefficient_matrix": [
+      [
+        "-77/15",
+        "17/84",
+        "0",
+        "-19/660"
+      ],
+      [
+        "-77/3",
+        "0",
+        "0",
+        "1/2"
+      ],
+      [
+        "-11",
+        "0",
+        "2/15",
+        "0"
+      ]
+    ]
+  }
 }

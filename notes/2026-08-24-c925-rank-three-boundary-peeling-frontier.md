@@ -72,6 +72,62 @@ Galois-stable four-weight subsets occur for the three-sign representation:
 Neither is unimodular. Thus the higher-rank unimodular-window theorem is
 exhausted before imposing any tangent condition.
 
+## The best direct window is a rational double cover
+
+The index-two window in (5) nevertheless gives an exact reduction. Its four
+weight blocks are
+
+\[
+\begin{gathered}
+\{E_1,E_2,E_5\},\quad
+\{L_{14},L_{24},L_{45}\},\\
+\{L_{13},L_{23},L_{35}\},\quad
+\{L_{12},L_{15},L_{25}\}.
+\end{gathered} \tag{6}
+\]
+
+At the tangent specialization
+\((a,b,z_1,z_2,z_3)=(2,5,1,3,7)\), take the first three members of the
+four-dimensional boundary-vanishing tangent system. At the independent
+torsor test point
+
+\[
+(e_1,\ldots,e_5)=(2,3,5,7,11),\qquad
+(a,b,z_1,z_2,z_3)=(2,5,2,4,9),
+\]
+
+their coefficient matrix on the four blocks (6) is
+
+\[
+\begin{pmatrix}
+-77/15&17/84&0&-19/660\\
+-77/3&0&0&1/2\\
+-11&0&2/15&0
+\end{pmatrix}. \tag{7}
+\]
+
+Its four maximal minors are
+
+\[
+-17/1260,\quad119/270,\quad-187/168,\quad187/270. \tag{8}
+\]
+
+They are all nonzero, so the kernel has no zero coordinate. These are open
+conditions defined over the ground field; density of rational torsor points
+and infinitude of the field descend the construction. A tangent
+codimension-three section \(W\) supported on (6) is rational by OADP
+projection and intersects a general three-sign orbit in exactly two points,
+because (6) spans a character sublattice of index two. Therefore
+
+\[
+\boxed{W\dashrightarrow Z/L_3\text{ is a rational generically double
+cover}.} \tag{9}
+\]
+
+Equivalently, the remaining \(m=2\) rationality gate can be phrased as the
+rationality of this explicit deck-involution quotient of a rational
+fourfold. Equation (9) does not prove that quotient rational.
+
 The two middle rows have precisely two nonspanning facet orbits apiece.
 Each leaves the same two central weights and hence only the four Cox
 coordinates
@@ -106,7 +162,7 @@ have determinant
  (az_1-az_3-bz_1+bz_2-z_2+z_3)\\
 &\qquad\cdot
  (abz_1z_2-abz_1z_3+az_1z_3-az_2z_3-bz_1z_2+bz_2z_3),
-\end{aligned} \tag{6}
+\end{aligned} \tag{10}
 \]
 
 which is not identically zero.  Hence the restricted Jacobian has generic
@@ -123,10 +179,10 @@ a boundary base scheme that is not a union of complete toric divisors.
 
 - `notes/cubic-threefolds-tasks/c925-i1-rank3-boundary-peeling-exhaustion.py`,
   SHA-256
-  `13d6d0abf76ab3895b1289e4489232b8a1f524175614ee2a8e4b82a6dce8f71c`;
+  `6f4f6508b4f1247492ee007852552a0b80d88416829b65210e08ed04866f0f72`;
 - `notes/cubic-threefolds-tasks/c925-i1-rank3-boundary-peeling-exhaustion.json`,
   SHA-256
-  `5c18c4f066de981b8693155103b167455ffa1917aef97b7057c9b608aaf20afb`.
+  `58bb1a70ad2ad79307748813346631111aea55b070f8b8fe46d6f1c007361f80`.
 
 Replay from `/home/tavis/src/othello`:
 
@@ -140,7 +196,8 @@ irreducibility of \(W\) against all four sign characters, enumerates the four
 rank-three spaces, computes all Cox weights, exhausts Galois-stable
 four-weight windows and their exact lattice indices, enumerates supporting
 facets over the integers, closes their affine Galois orbits, computes exact
-Ehrhart degrees, and verifies the tangent minor (6). It also exhibits an exact tangent covector at
+Ehrhart degrees, verifies the tangent minor (10), and checks the exact
+double-slice matrix (7)--(8). It also exhibits an exact tangent covector at
 \((a,b,z_1,z_2,z_3)=(2,5,1,3,7)\) which vanishes on
 \(E_3,E_4,L_{34},Q\) and is nonzero on both full-\(I_3\) middle-weight
 blocks; openness supplies the generic adjacent-window nonvanishing check.
@@ -159,7 +216,8 @@ blocks; openness supplies the generic adjacent-window nonvanishing check.
 | settled | Invariant rank-three subtori | Exactly the four spaces (3). |
 | settled | Toric orbit combinatorics | Degrees \(14,18,18,18\) and complete facet-orbit enumeration. |
 | settled | Unimodular-window route | The only stable four-weight windows have indices two and six. |
-| settled | Direct first boundary peel | Impossible by full-span or the tangent minor (6). |
+| settled | Best direct rank-three slice | Rational generically double cover (9). |
+| settled | Direct first boundary peel | Impossible by full-span or the tangent minor (10). |
 | open | \(m=3\) rationality | Intrinsic quotient for one of the rational-residual rank-two slices. |
 | open | \(m=2\) rationality | Intrinsic rank-three invariant field or non-toric slice. |
 | open | \(m=2\) irrationality | Requires a factorization-specific marker beyond universal INT-\(\Psi\). |

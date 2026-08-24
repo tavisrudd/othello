@@ -161,6 +161,9 @@ subset; the boundary-edge calculation independently forces open degree
 divisible by two or three. At rank three, the only Galois-stable four-weight windows have
 lattice indices two and six, not one. Thus the general theorem explains the
 level-four success without silently implying level three or level two.
+The index-two tetrahedron is attained by an exact tangent slice and gives a
+rational generically double cover of the rank-three quotient; rationality of
+the deck-involution quotient is the resulting sharp direct-slice gate.
 
 ## Evidence and scope
 

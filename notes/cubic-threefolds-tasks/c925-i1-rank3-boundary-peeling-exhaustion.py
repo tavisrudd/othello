@@ -375,6 +375,64 @@ assert any(mixed_tangent_covector[cox_names.index(name)] for name in middle_weig
 assert any(mixed_tangent_covector[cox_names.index(name)] for name in middle_weight_two)
 assert sp.Matrix.vstack(specialized_jacobian, mixed_tangent_covector).rank() == 8
 
+# The index-two stable window in the three-sign representation gives a
+# generically double (rather than one-point) tangent slice. Construct three
+# exact boundary-vanishing tangent hyperplanes and check on a second general
+# torsor point that their four window coefficients have rank three and a
+# kernel with no zero coordinate.
+tangent_row_basis = specialized_jacobian[list(minor_rows), :]
+assert tangent_row_basis.rank() == 8
+boundary_indices = [cox_names.index(name) for name in sorted(central_coordinates)]
+boundary_vanishing_coefficients = tangent_row_basis[:, boundary_indices].T.nullspace()
+assert len(boundary_vanishing_coefficients) == 4
+boundary_vanishing_hyperplanes = [
+    coefficient.T*tangent_row_basis
+    for coefficient in boundary_vanishing_coefficients
+]
+orbit_values = {
+    e1: 2, e2: 3, e3: 5, e4: 7, e5: 11,
+    l12: sp.Rational(9, 2*3),
+    l13: sp.Rational(4, 2*5),
+    l14: sp.Rational(4-9, 2*7),
+    l15: sp.Rational(5*4-2*9, 2*11),
+    l23: sp.Rational(2, 3*5),
+    l24: sp.Rational(2-9, 3*7),
+    l25: sp.Rational(5*2-9, 3*11),
+    l34: sp.Rational(2-4, 5*7),
+    l35: sp.Rational(2*2-4, 5*11),
+    l45: sp.Rational((5-2)*2+(1-5)*4+(2-1)*9, 7*11),
+    q: sp.Rational(
+        5*(1-2)*2*4+2*(5-1)*2*9+(2-5)*4*9,
+        2*3*5*7*11,
+    ),
+    a: 2, b: 5,
+}
+assert all(sp.factor(relation.subs(orbit_values)) == 0 for relation in relations)
+index_two_window_blocks = [
+    ["E1", "E2", "E5"],
+    ["L14", "L24", "L45"],
+    ["L13", "L23", "L35"],
+    ["L12", "L15", "L25"],
+]
+window_coefficient_matrix = sp.Matrix([
+    [
+        sum(
+            hyperplane[cox_names.index(name)]*orbit_values[coordinate_symbols[cox_names.index(name)]]
+            for name in block
+        )
+        for block in index_two_window_blocks
+    ]
+    for hyperplane in boundary_vanishing_hyperplanes[:3]
+])
+window_maximal_minors = [
+    sp.factor(window_coefficient_matrix[:, [
+        column for column in range(4) if column != omitted
+    ]].det())
+    for omitted in range(4)
+]
+assert window_coefficient_matrix.rank() == 3
+assert all(value != 0 for value in window_maximal_minors)
+
 certificate = {
     "schema": "c925-i1-rank3-boundary-peeling-exhaustion-v1",
     "rational_representation_decomposition": {
@@ -411,6 +469,30 @@ certificate = {
             "The boundary-vanishing tangent linear system has a member "
             "nonzero on both adjacent middle weights. This exact witness "
             "proves the generic nonvanishing condition by openness."
+        ),
+    },
+    "three_sign_index_two_tangent_slice": {
+        "stable_window_weight_blocks": index_two_window_blocks,
+        "affine_lattice_index": 2,
+        "tangent_specialization": {"a": 2, "b": 5, "z1": 1, "z2": 3, "z3": 7},
+        "orbit_test_point": {
+            "e1,e2,e3,e4,e5": [2, 3, 5, 7, 11],
+            "a,b,z1,z2,z3": [2, 5, 2, 4, 9],
+        },
+        "window_coefficient_matrix": [
+            [str(entry) for entry in window_coefficient_matrix.row(row)]
+            for row in range(3)
+        ],
+        "four_maximal_minors": [str(value) for value in window_maximal_minors],
+        "all_kernel_coordinates_nonzero": True,
+        "geometric_open_orbit_degree": 2,
+        "conclusion": (
+            "A descended tangent codimension-three slice supported on the "
+            "index-two stable four-weight window is rational by OADP "
+            "projection and meets a general three-sign torus orbit in two "
+            "points. Thus it is a rational generically double cover of the "
+            "rank-three quotient; rationality of the quotient itself is not "
+            "asserted."
         ),
     },
     "conclusion": (
