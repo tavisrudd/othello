@@ -9,8 +9,11 @@
 C949 is the construction/extremal sequel to C945, not an enlargement of the
 current arcs manuscript.  C945 owns the integer-envelope and modular-lift lower
 bound.  C949 asks whether that obstruction is sharp for a canonical extremal
-function and, if so, whether the extremizers are explained by the same
-arithmetic structure.
+function.  Its two acceptable mathematical exits are a matching asymptotic
+construction or a classification theorem that identifies the actual
+extremal cores, proves their realizability or nonrealizability, and thereby
+determines the correct asymptotic target.  A necessary bounded-repair
+reduction alone is an input, not a successful exit.
 
 Nothing below is a novelty or attainability claim.  Literature statements and
 any eventual priority verdict remain subject to
@@ -70,6 +73,15 @@ than reconstructing the entire maximal-secant family:
 Equality between `L` and the set of all maximal secants is unnecessary for an
 upper bound and should not be imposed unless classification requires it.
 
+The classification branch asks for more than the bounded-edit conclusion
+already available from C945.  It must classify the exact modular cores that
+can occur, determine which bounded repairs admit primal realization, and
+show that every extremal or asymptotically extremal arc arises from the
+resulting list (up to projective equivalence and the explicitly allowed
+bounded edits).  If none realizes the coefficient in `(LB3)`, the first
+nonrealizable core must yield the next obstruction and a revised lower-bound
+coefficient.
+
 The bounded construction programmes are:
 
 1. **Perturbed modular/two-character cores.**  Start from a line or point
@@ -126,9 +138,15 @@ finite-geometry extremal function remains primary.
 ## Scope and stopping rule
 
 - `(LB3)` belongs to C945; C949 owns the construction problem.
-- A matching `(UB3)` would determine the two displayed asymptotic terms.
-- Stability or classification would describe near-extremal or extremal
-  configurations in addition to determining the value.
+- **Optimum exit:** a matching `(UB3)` determines the two displayed
+  asymptotic terms; ideally its construction theorem also describes all
+  equality or near-equality families.
+- **Classification exit:** classify the realizable exact modular cores and
+  bounded repairs, prove exhaustiveness, and use that classification either
+  to recover `(UB3)` or to derive the stronger obstruction and replacement
+  asymptotic target.
+- Merely proving that near equality is a bounded edit of some exact modular
+  multiset does not finish C949.
 - A density-interval theorem would extend the calculation from one parameter
   family to a nontrivial interval of `alpha`.
 
