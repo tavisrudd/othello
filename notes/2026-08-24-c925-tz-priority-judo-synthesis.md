@@ -101,12 +101,19 @@ A bounded web screen on 2026-08-24 used the exact queries
 - "nonrational variety" "times A1" rational stable rationality;
 - arXiv 2608.20029 DOI Tschinkel Zhang universal torsors quartic del Pezzo;
 - "unimodular" torus quotient OADP variety tangent projection.
+- site:arxiv.org algebraic variety "A1" "nonrational" rational cancellation;
+- site:zbmath.org nonrational variety affine line rational stable rationality;
+- site:projecteuclid.org nonrational variety product affine line rational;
+- site:arxiv.org OADP torus quotient tangent projection rational.
 
-The returned results contained no direct predecessor for either the
-identified cancellation example or the unimodular-window theorem. This was
-only a bounded title/snippet screen, not a full novelty audit; MathSciNet,
-zbMATH, and the three forward-citation graphs were not closed. Accordingly
-this report makes no global first-priority claim.
+The two screens returned 45 displayed results in total. Titles and snippets
+were screened for either (a) birational rationality of a nonrational
+\(Y\times\mathbf A^1\), or (b) an OADP tangent section giving a rational torus
+quotient from a unimodular weight window. No result met either discriminator.
+This was only a bounded title/snippet screen, not a full novelty audit;
+MathSciNet, a systematic zbMATH query, and the three forward-citation graphs
+were not closed. Accordingly this report makes no global first-priority
+claim.
 
 As of the same check, the only DOI located for the new paper is the arXiv
 DataCite DOI
