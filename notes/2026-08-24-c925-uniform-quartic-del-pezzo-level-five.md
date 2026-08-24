@@ -143,6 +143,14 @@ rationality was unknown there. The corollary supplies a solution for that
 listed case. This is a comparison with the 2017 table, not yet a claim that no
 independent post-2017 solution exists.
 
+There is also a sharp duality asymmetry. The exact convention replay gives
+the dual character lattice the CARAT identifier `(5,232,14)`, and
+Hoshi--Yamasaki Table 15 places that class among the five-dimensional tori
+which are not retract rational. Thus `(5,232,15)` is rational while its dual
+torus is not even retract rational. In particular, rationality and retract
+rationality are not preserved by dualizing the character lattice, already in
+this explicit dimension-five pair.
+
 ## Exact certificates
 
 General type-$I_3$ extension:
@@ -189,7 +197,7 @@ its `RatProbAlgTori/` directory:
 
 ## Sources and read depth
 
-This report names four sources; none was read at full-text depth for this
+This report names five sources; none was read at full-text depth for this
 bounded result.
 
 - Yuri Tschinkel and Zhijia Zhang, *Universal torsors over quartic del Pezzo
@@ -207,6 +215,12 @@ bounded result.
   2018.05.22.
   **Read depth: partial (software source)** — `caratnumber.gap`, its CARAT
   tables, and the load path used by the convention checker.
+- Akinari Hoshi and Aiichi Yamasaki, *Rationality problem for algebraic
+  tori*, arXiv:1210.4525.
+  **Read depth: partial** — the dimension-five classification statement and
+  Table 15, including the `(5,232,14)` row. Shared-cache key
+  `arXiv:1210.4525`, PDF SHA-256
+  `7757592cfb063d93e7eed299af335584b4704daebcc5576a3e39e5bf6cb707ac`.
 - Armin Jamshidpey, *Algebraic Tori: A Computational Approach*, PhD thesis,
   Western University, 2017.
   **Read depth: partial** — Appendix B, especially Table B.1 and Table B.2.
@@ -222,6 +236,7 @@ bounded result.
 | settled | Every stably rational quartic del Pezzo surface has level at most five. | Tschinkel--Zhang's four-type classification plus the block-kernel criterion. |
 | settled | Every cubic hypersurface in Tschinkel--Zhang's two families has level at most five. | Generic-fibre passage in every dimension. |
 | settled | CARAT `(5,232,15)` is rational. | Durable convention check and the type-(I_1) specialization. |
+| settled | Duality need not preserve retract rationality. | `(5,232,15)` is rational here, while its dual `(5,232,14)` is not retract rational by Hoshi--Yamasaki Table 15. |
 | open | Is the CARAT corollary new after 2017? | Exact-ID searches found no later solution, but a priority claim requires a dedicated forward literature audit. |
 | open | Can the uniform bound drop to four? | The type-(I_1) rank-five lattice has no invariant cocharacter after removing (-K); a second split-scalar quotient is impossible. A nonsplit quotient or a new cancellation theorem is required. |
 

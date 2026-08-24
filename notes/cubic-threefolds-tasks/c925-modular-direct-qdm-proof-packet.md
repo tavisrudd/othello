@@ -209,11 +209,13 @@ in every dimension (n\ge3), satisfies
 \[
 X\times\mathbf P^5\quad\text{rational over }\mathbf Q.
 \]
-An exact CARAT convention replay also identifies the type-(I_1) character
+An exact CARAT convention replay also identifies the type-$I_1$ character
 lattice as `(5,232,15)`, so the proof resolves that individual
 five-dimensional torus class, which Jamshidpey's 2017 Table B.2 listed as
-unknown.  No post-2017 priority claim is made without a separate literature
-audit.  Report and certificates:
+unknown.  Its dual class `(5,232,14)` is not retract rational by
+Hoshi--Yamasaki Table 15, giving an explicit rational torus whose dual is not
+even retract rational.  No post-2017 priority claim is made without a
+separate literature audit.  Report and certificates:
 `../2026-08-24-c925-uniform-quartic-del-pezzo-level-five.md`.
 
 ## Goal

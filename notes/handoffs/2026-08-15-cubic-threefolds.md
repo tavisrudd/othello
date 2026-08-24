@@ -146,8 +146,10 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   \(X\times\mathbf P^5\) rational over \(\mathbf Q\).  Their cubic
   threefolds therefore have certified interval \(2\le s(X)\le5\).  The exact
   CARAT replay also resolves class `(5,232,15)`, listed as unknown in
-  Jamshidpey's 2017 Table B.2; post-2017 priority remains unaudited.  Report
-  and certificates:
+  Jamshidpey's 2017 Table B.2.  Its dual `(5,232,14)` is not retract rational
+  by Hoshi--Yamasaki Table 15, giving a rational torus whose dual is not
+  retract rational; post-2017 priority remains unaudited.  Report and
+  certificates:
   `../2026-08-24-c925-uniform-quartic-del-pezzo-level-five.md`.
 
   **Conditional finite reduction:** put \(n=m+1\).  For a connected center,
