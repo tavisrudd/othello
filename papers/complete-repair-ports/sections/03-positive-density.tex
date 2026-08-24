@@ -1,208 +1,120 @@
-\section{Prescribed positive-density realization}
-\label{sec:realization}
+\section{Exact confinement under concatenation}
+\label{sec:confinement}
 
-The pointed zero-functional sector persists even when outer dual distance
-grows.
-
-\begin{theorem}[Prescribed represented recovery structures]
-\label{thm:prescribed}
-Let $O_N\leq L^N$ be $L$-linear outer codes with
-$d(O_N^\perp)\to\infty$, and let $C_N=O_N\circ I$.  For all sufficiently
-large $N$, every pointed dual witness through $(j,x)$ of weight at most
-$r+1$ is confined to block $j$ if and only if
+Let $L/\F_q$ be a finite extension and let
+$\iota:L\longrightarrow I\leq\F_q^E$ be an $\F_q$-linear inner encoder.
+Assume $0<\dim I<|E|$.
+For an $L$-linear outer code $O\leq L^N$, write
 \[
- r+1<z_x(I).
+ O\circ I=\{(\iota(a_1),\ldots,\iota(a_N)):(a_1,\ldots,a_N)\in O\}.
 \]
-Under this condition the radius-$r$ helper supports and normalized equations
-at $x$ occur on the designated
-class of $N$ targets $(j,x)$, a class of density exactly $1/m$ in $C_N$.
-Other inner coordinate types may carry isomorphic recovery data as well.  More
-precisely, at every block
+The proof of confinement uses the linear map
 \[
- \cH_{(j,x)}^{(\leq r)}(C_N)
-   =\operatorname{embed}_j\bigl(\cH_x^{(\leq r)}(I)\bigr),
+ \Phi_I:\F_q^E\longrightarrow L^*,
  \qquad
- \cP_{(j,x)}^{(\leq r)}(C_N)
-   =\operatorname{embed}_j\bigl(\cP_x^{(\leq r)}(I)\bigr).
+ \Phi_I(y)(a)=\langle y,\iota(a)\rangle.
 \]
+Its kernel is $I^\perp$.  A block vector
+$y=(y_1,\ldots,y_N)$ belongs to $(O\circ I)^\perp$ precisely when
+\begin{equation}
+ (\Phi_I(y_1),\ldots,\Phi_I(y_N))\in
+ \operatorname{FD}(O),
+ \label{eq:block-functional-dual}
+\end{equation}
+where
+\[
+ \operatorname{FD}(O)=
+ \{(\beta_j)\in(L^*)^N:\textstyle\sum_j\beta_j(a_j)=0
+       \text{ for every }(a_j)\in O\}.
+\]
+Indeed, both conditions say that $y$ is orthogonal to every encoded outer
+word.  Under the trace identification $L\cong L^*$, $L$-linearity of $O$
+identifies $\operatorname{FD}(O)$ with $O^\perp$ and preserves block
+support.  Thus its support distance is $d(O^\perp)$.
+
+Fix a target block and a nonzero internally recoverable subspace
+$T\leq W_P$.  Let $\rho_T(I)$ be the minimum helper-union size of a
+normalized recovery system for $T$ in the inner code.  A system in the
+concatenation is \emph{confined} if every one of its equations is supported
+in the target block.
+
+\begin{theorem}[Confinement for a fixed target subspace]
+\label{thm:objectwise-confinement}
+\coverage{absent}%
+Let $(O_N)$ be an $L$-linear outer family with
+$d(O_N^\perp)\to\infty$, and suppose $N\geq2$ eventually.  For every fixed
+helper bound $r$, all sufficiently long concatenations $O_N\circ I$ confine
+every normalized recovery system for $T$ of cost at most $r$ if and only if
+\begin{equation}
+ r<\rho_T(I)+d(I^\perp).
+ \label{eq:objectwise-confinement}
+\end{equation}
+Below this bound, zero-extension gives a support-preserving bijection between
+the inner systems of cost at most $r$ and the corresponding systems in the
+concatenation.
 \end{theorem}
 
 \begin{proof}
-Every \(\F_q\)-linear functional on \(L\) has a unique form
-\(a\mapsto\Tr_{L/\F_q}(ba)\), by nondegeneracy of the trace pairing.  Let
-\(\beta=(\beta_j)\) lie in the functional dual of the outer code,
-and write \(\beta_j(a)=\Tr(b_ja)\).  Since \(O_N\) is \(L\)-linear, applying
-\(\beta\) to every scalar multiple \(ca\) of every \(a\in O_N\) shows
-\[
- \Tr\!\left(c\sum_j b_ja_j\right)=0
- \quad\text{for every }c\in L.
-\]
-Trace nondegeneracy gives \((b_j)\in O_N^\perp\).  Conversely, every outer
-dual word gives such a functional tuple.  The trace representation is
-coordinatewise injective, so it preserves support exactly.  Thus the
-functional-dual support distance is \(d(O_N^\perp)\).
+Apply~\eqref{eq:block-functional-dual} to every equation in a recovery
+system.  If one of the resulting functional tuples is nonzero, its block
+support has size at least $d(O_N^\perp)$.  A system with a fixed helper bound
+can meet only a bounded number of blocks: every nonzero block outside the
+target block contains a helper, while the target block contributes at most
+one further block.  A cost-$\leq r$ system therefore meets at most $r+1$
+blocks.  Hence
+$d(O_N^\perp)\to\infty$ excludes this case for all sufficiently large $N$.
 
-Fix \(r\).  For all sufficiently large \(N\),
-\(d(O_N^\perp)\ge r+2\).  Every realization of a nonzero functional tuple
-then has weight at least \(r+2\): each nonzero functional requires a nonzero
-inner block.  The exact pointed decomposition of
-Theorem~\ref{thm:transfer} consequently leaves only the zero-functional
-sector in the bounded range.  For \(N\ge2\), its exact cost is the
-block-independent quantity \(z_x(I)\).  Hence confinement through every
-\((j,x)\) holds exactly when \(r+1<z_x(I)\).
+Every remaining block component lies in $I^\perp$.  The target-block
+component is an inner recovery system for $T$, so its helper union has size
+at least $\rho_T(I)$.  If the system is not confined, some equation map in
+another block is nonzero.  Its image is a nonzero subspace of $I^\perp$ and
+therefore has union support at least $d(I^\perp)$.  Disjoint blocks make the
+two costs additive.  Every nonconfined system consequently costs at least
+$\rho_T(I)+d(I^\perp)$.
 
-If \(r+1<z_x(I)\), Theorem~\ref{thm:transfer} identifies both exact helper
-supports and normalized equations by zero-extension.  If
-\(r+1\ge z_x(I)\), the attained pointed inner-dual minimum at \(x\), together
-with a minimum nonzero inner-dual word in a second block, gives a
-zero-functional pointed nonembedded witness of weight at most \(r+1\).
-This proves necessity as well as sufficiency.  Finally, the \(N\) designated
-targets \((j,x)\) among the \(mN\) concatenated coordinates form a class of
-density exactly \(1/m\), irrespective of any additional occurrences.
+This lower bound is attained.  Take a minimum inner system for $T$, a
+minimum-weight word $v\in I^\perp$, and a nonzero linear functional
+$\lambda:T\to\F_q$.  In a second block add the rank-one equation map
+$a\mapsto\lambda(a)v$.  Both block-functional images vanish, so the new
+system belongs to the concatenated dual; it is nonconfined and has the stated
+cost.  This proves both directions of~\eqref{eq:objectwise-confinement}.
+Below the bound every system is confined, and restriction to the target block
+is inverse to zero-extension.
 \end{proof}
 
-\begin{proposition}[Concatenated parameters]
-\label{prop:concat-parameters}
-If \(I\) has parameters \([m,k,d]_q\) and
-\(O_N\leq L^N\) has \(L\)-dimension \(K_N\) and symbol distance \(D_N\),
-then \(C_N=O_N\circ I\) has length \(mN\), \(\F_q\)-dimension \(kK_N\),
-and minimum distance at least \(dD_N\).  In particular, if
-\[
- \frac{K_N}{N}\longrightarrow R>0,
- \qquad
- \liminf_N\frac{D_N}{N}\geq\delta>0,
-\]
-then the concatenated family has asymptotic rate \(kR/m\) and relative
-distance at least \(d\delta/m\).
-\end{proposition}
+Minimizing the fixed-subspace threshold over all recovered subspaces of fixed
+dimension gives the promised hierarchy.
+
+\begin{theorem}[Confinement by recovered dimension]
+\label{thm:ranked-confinement}
+\coverage{absent}%
+With the hypotheses above, let $\ell=\dim W_P$ and $1\leq t\leq\ell$.
+For every fixed $r$, all sufficiently long concatenations confine every
+cost-$\leq r$ recovery system for every internally recoverable
+$t$-dimensional target subspace if and only if
+\begin{equation}
+ r<M_t(D_P,K_P)+d(I^\perp).
+ \label{eq:ranked-confinement}
+\end{equation}
+When~\eqref{eq:ranked-confinement} holds, restriction and zero-extension
+preserve every normalized equation and its exact helper support.
+\end{theorem}
 
 \begin{proof}
-The blockwise inner encoder is injective, so restriction of scalars multiplies
-the outer \(L\)-dimension by \([L:\F_q]=k\).  A nonzero outer word has at
-least \(D_N\) nonzero symbols, and each nonzero symbol encodes to an inner
-word of weight at least \(d\).  The finite parameter statements follow;
-division by \(mN\) gives the asymptotic claims.
+By Theorem~\ref{thm:relative-weight-recovery}, every such target subspace
+has inner cost at least $M_t(D_P,K_P)$, and some target subspace attains this
+minimum.  Apply Theorem~\ref{thm:objectwise-confinement} to each subspace.
+The lower bound gives sufficiency uniformly; an attaining subspace and the
+external rank-one perturbation in that proof give necessity.
+\uses{thm:relative-weight-recovery, thm:objectwise-confinement}%
 \end{proof}
 
-\begin{corollary}[Positive-density MDS coefficient fingerprints]
-\label{cor:mds-fingerprints}
-Let \(I\) be an \([m,k]_q\) MDS code with \(1\leq k<m\), and fix \(x\).
-Its radius-\(k\) exact helper-support family is the complete \(k\)-uniform
-clutter on the other coordinates, while its minimum-weight normalized
-recovery equations reconstruct \(I\), and \(z_x(I)=2(k+1)\).  Both layers
-occur on a designated target class
-of density \(1/m\) in every sufficiently long
-concatenation by an outer family with dual distance tending to infinity.
-\end{corollary}
-
-\begin{proof}
-The minimum-weight assertions are Theorem~\ref{thm:mds-reconstruction}.  Every
-minimum dual support through \(x\) has size \(k+1\), so
-\(\mu_x(0)=d(I^\perp)=k+1\) and
-\[
- z_x(I)=2(k+1)>k+1.
-\]
-Apply Theorem~\ref{thm:prescribed} with \(r=k\).  The helper-support family depends
-only on the MDS parameters; the transferred normalized coefficients retain
-the represented inner code.
-\end{proof}
-
-\begin{corollary}[Positive-density Clebsch recovery equations]
-\label{cor:clebsch-port}
-Let $I$ be the $[6,3,4]_{11}$ Clebsch hexagon code
-\cite{RuddClebschRigidity2026}, and fix a coordinate $x$.
-The minimal radius-three repair clutter at $x$ is the complete
-three-uniform hypergraph on the other five coordinates.  Hence it has ten
-minimal repair supports,
-\[
- \nu_x^{(\leq3)}=1,\qquad \tau_x^{(\leq3)}=3,
-\]
-and homogeneous helper-survival reliability
-\[
- 10s^3(1-s)^2+5s^4(1-s)+s^5.
-\]
-Already the radius-three equations at $x$ determine $I$.
-Moreover $z_x(I)=8$, so both the minimum-weight radius-three recovery equations
-and the full radius-five equation family occur on a
-designated target class of density
-$1/6$ in an asymptotically
-good fixed-$\F_{11}$ family.
-\end{corollary}
-
-\begin{proof}
-The dual $I^\perp$ is again an $[6,3,4]_{11}$ MDS code.  Every four-set
-containing $x$ is therefore the support of a dual word, unique up to scalar.
-The minimal helper sets are consequently all $\binom53=10$ triples on the
-other coordinates.  Their matching and transversal numbers are one and
-three, and recovery succeeds exactly when at least three of the five
-helpers survive, giving the displayed polynomial.
-
-At radius three the common-core star of minimum normalized dual words is
-already a basis of \(I^\perp\), by
-Corollary~\ref{cor:mds-fingerprints}.  Thus the minimum-weight normalized
-recovery equations, and hence also the full radius-five family, recover
-\(I^\perp\) and \(I\).
-
-Finally, the minimum dual-word weight through $x$ is four, so
-\[
- z_x(I)=\mu_x(0)+d(I^\perp)=4+4=8.
-\]
-Taking $r=5$ gives $r+1=6<8$.  Theorem~\ref{thm:prescribed} therefore
-confines every full pointed witness to its inner block and reproduces the
-coefficient fibers at one of the six coordinate types in every block.
-Choosing asymptotically good outer codes over $\F_{11^3}$ gives the claimed
-fixed-$\F_{11}$ family and density.
-\end{proof}
-
-\begin{remark}
-The support clutter and reliability polynomial in
-Corollary~\ref{cor:clebsch-port} are shared by every $[6,3,4]$ MDS code.
-The Clebsch-specific information lies in the scalar coefficient fibers:
-they recover the inner code that is characterized geometrically in
-\cite{RuddClebschRigidity2026}.
-\end{remark}
-
-\begin{remark}
-Corollary~\ref{cor:mds-fingerprints} applies without a new transfer argument
-to every represented MDS inner code.  This includes the usual arc and
-projective Reed--Solomon presentations, and the classical MDS code
-presentations underlying AME constructions, whenever their displayed field
-and dimension hypotheses hold.  Their minimum exact helper-support families
-are generic MDS data; only their normalized equations distinguish the represented
-geometric or quantum-code realization.
-\end{remark}
-
-This is a represented-recovery theorem: it does not say that every abstract
-hypergraph is linearly representable.  It yields standard scaled asymptotic
-regions.  If $Q=q^k$, random $L$-linear outer codes of rate $R$ can have
-relative distances $\delta,\delta^\perp$ whenever
-\[
- H_Q(\delta)<1-R,
- \qquad H_Q(\delta^\perp)<R.
-\]
-For an inner $[m,k,d]_q$ code the concatenated parameters satisfy
-\[
- R_{\rm concat}\to\frac{k}{m}R,
- \qquad
- \delta_{\rm concat}\geq\frac{d}{m}\delta.
-\]
-Indeed, for a random $L$-linear outer code the expected numbers of nonzero
-words and dual words below the two cutoffs have exponential rates
-$R+H_Q(\delta)-1$ and $H_Q(\delta^\perp)-R$, respectively, so both vanish
-simultaneously; this is the random-linear-code form of the
-Gilbert--Varshamov argument \cite[Chapter~17]{MacWilliamsSloane1977}.
-When $Q$ is square, algebraic-geometry outer codes similarly give, for
-$\gamma=1/A(Q)$ and $\gamma<R<1-\gamma$,
-\[
- \delta(O_N)\geq1-R-\gamma,
- \qquad
- \delta(O_N^\perp)\geq R-\gamma,
- \qquad
- \delta_{\rm concat}\geq\frac{d}{m}(1-R-\gamma).
-\]
-These are the classical GV and TVZ ingredients.  For the completed
-$[20,4,9]_9$ seed, $Q=6561$ and $\gamma\leq1/80$, recovering the concrete
-rate-$1/10$ family as one instance
-\cite[Chapters~2 and~7]{Stichtenoth2009}.  The stronger self-dual family used
-for that concrete instance is precisely Stichtenoth's theorem over
-\(\F_{6561}\) \cite[Theorem~1.6(ii)]{Stichtenoth2005}.
+For a nondegenerate singleton target $P=\{x\}$, the first relative weight is
+the least number of helpers in a dual word through $x$.  If the total-weight
+threshold used for one-coordinate equations is denoted by $z_x(I)$, then
+\begin{equation}
+ z_x(I)=M_1(D_P,K_P)+1+d(I^\perp).
+ \label{eq:singleton-threshold}
+\end{equation}
+The helper-radius condition~\eqref{eq:ranked-confinement} is therefore
+$r+1<z_x(I)$, with no change of convention hidden in the reduction.

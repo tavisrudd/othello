@@ -1,6 +1,6 @@
 {
-  "title": "Bounded Recovery Structures of Linear Codes: Transfer, Reliability, and Geometry",
-  "description": "This preprint studies bounded local recovery at a distinguished coordinate of a represented linear code: all normalized dual recovery equations within a helper bound, their exact helper supports, the resulting recovery-set family, and helper-failure reliability. It proves that the minimum-weight recovery equations of an MDS code reconstruct the represented code, gives an exact weighted-functional transfer theorem for concatenation, and realizes every fixed represented bounded recovery structure satisfying the persistent confinement bound with positive density in an asymptotically good fixed-alphabet family. A structural sparse-paving construction gives two represented seeds with the same pointed-perspective data, repair count, locality, matching and transversal numbers, unique minimum-blocker count, and helper-degree multiset, but different bounded reliability and EXIT curves; one common outer family preserves the separation at positive density. The paper also develops deletion-contraction reliability and bounded-EXIT calculi. Twisted-cubic-axis and quartic-normal-rational-curve nucleus codes in characteristic three provide geometric applications, including a harmonic Steiner recovery structure.",
+  "title": "Exact Transfer of Bounded Linear Recovery and Relative Weight Hierarchies",
+  "description": "For a represented inner code and a fixed target set, this preprint associates a nested pair of helper codes and identifies its relative generalized Hamming weights with the exact minimum helper-union costs for recovering target subspaces of each dimension. It proves that, in concatenations whose outer dual distance tends to infinity, the sharp eventual confinement threshold is the corresponding relative generalized Hamming weight plus the inner dual distance. Below that threshold, zero-extension preserves every bounded normalized recovery equation and its exact helper support. Consequences include a best-target generalized-weight identity, MDS threshold rigidity, positive-density realization in asymptotically good fixed-alphabet families, and transfer of bounded service-rate regions. Separations show that the complete relative-weight hierarchy does not determine bounded repair reliability and that different coefficient presentations of the same nested pair can have different confinement thresholds. A projective-simplex family gives an explicit non-MDS hierarchy and projective-rank reliability law.",
   "creators": [
     {
       "name": "Rudd, Tavis",
@@ -15,17 +15,17 @@
   "keywords": [
     "locally repairable codes",
     "linear codes",
+    "relative generalized Hamming weights",
+    "generalized Hamming weights",
     "MDS codes",
     "recovery sets",
     "recovery structures",
     "code concatenation",
+    "cooperative recovery",
+    "service-rate regions",
     "reliability polynomials",
-    "EXIT functions",
-    "matroid perspectives",
-    "Las Vergnas polynomial",
     "finite geometry",
-    "Steiner systems",
-    "normal rational curves",
+    "projective simplex codes",
     "formalized mathematics",
     "Lean 4"
   ],

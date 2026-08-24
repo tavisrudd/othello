@@ -1,54 +1,52 @@
-# Theorem adoption map
+# Theorem and evidence map
 
-This map controls which results may appear in the main proof spine of
-*Bounded Recovery Structures of Linear Codes*.  Adoption records the intended paper theorem;
-body admission additionally requires a complete human proof, a matching Lean
-declaration, statement adequacy, an axiom audit, and no computational dependency.
+This internal map follows the current manuscript *Exact Transfer of Bounded
+Linear Recovery and Relative Weight Hierarchies*. It records mathematical
+dependence and evidence status. It assigns no quality grade.
 
-## Status vocabulary
+## Main proof chain
 
-- `ADOPTED`: the result and its exact scope belong in the paper.
-- `RECONCILE`: human and Lean proofs exist, but the paper-facing terminal and
-  field-by-field adequacy check remain to be closed.
-- `TO FORMALIZE`: the mathematical result is retained but may not carry the
-  main spine until its Lean and adequacy gates pass.
-- `APPENDIX COMPUTATION`: finite data may illustrate a theorem but may not prove
-  a body result.
-- `CUT/DERIVE`: omit the standalone claim or state it only as a consequence of
-  an admitted theorem.
+| Stable label | Statement | Proof mechanism | Imported input | Paper-local Lean status |
+|---|---|---|---|---|
+| `thm:mds-reconstruction` | Minimum-weight normalized equations through one coordinate span the dual of an MDS code. | Private-coordinate triangular basis. | MDS dual parameters. | absent |
+| `eq:associated-exact-sequence` | `0 -> K_P -> D_P -> W_P -> 0`. | Restrict `G_J` to the preimage of `im G_P`. | none. | complete: four constituent terminals |
+| `thm:relative-weight-recovery` | The minimum helper union for recovered dimension `t` is `M_t(D_P,K_P)`. | Recovery systems correspond to `t`-subspaces disjoint from `K_P`; a complement compares this with the standard RGHW minimum. | standard RGHW definition. | absent |
+| `prop:relative-profile` | The relative dimension/length profile is the maximum recoverable target dimension from `s` helpers. | Restrict the exact sequence to vectors supported on a helper set. | standard inverse relation between RGHWs and the relative profile. | absent |
+| `thm:objectwise-confinement` | A fixed target subspace has eventual confinement gate `r < rho_T(I) + d(I^perp)`. | Block-functional dual decomposition; outer dual growth removes nonzero functional tuples; a rank-one external inner-dual map attains the remaining bound. | finite-field trace duality. | absent |
+| `thm:ranked-confinement` | Uniformly over recovered dimension `t`, the gate is `r < M_t(D_P,K_P) + d(I^perp)`. | Minimize the fixed-subspace gate and use an attaining RGHW subspace. | preceding two theorems. | absent |
 
-## Adopted theorem hierarchy
+## Consequences
 
-| Paper slot | Stable label | Adopted result and exact boundary | Present evidence | Admission status | Owning task |
-|---|---|---|---|---|---|
-| Bounded recovery data | `def:complete-port` | The radius-\(r\) pointed data comprise exact helper supports, target-normalized equations, their upward-closed recovery-set family, and a survival-probability layer; matching and transversal depend only on the minimal support clutter. | Support/coefficient definitions, their exact bridge, recovery from the coefficient span, and the finite survival-probability layer are kernel checked. | `ADOPTED / KERNEL` | C672, C675 |
-| Reconstruction radius | `def:reconstruction-radius` | The least radius at which the normalized equation family determines the pointed code is intrinsic under the formal pointed coefficient-family isomorphism. | `RepairPorts.reconstructionRadius`, `PointedCoefficientPortIso.reconstructsAt_iff`, and `.reconstructionRadius_eq`. | `ADOPTED / KERNEL` | C672 |
-| MDS reconstruction | `thm:mds-reconstruction` | For a proper MDS code with \(1\le k<n\), equivalently the explicit nonzero-dual parameter characterization, the minimum-weight normalized equations at one target reconstruct the code, have reconstruction radius \(k\), and have the generic complete \(k\)-uniform exact-support family. | Complete human proof and `RepairPorts.HasMDSDualParameters.*` paper-facing terminals. | `ADOPTED / KERNEL` | C672 |
-| Exact confinement and transfer | `thm:transfer` | The pointed nonembedded threshold is the exact minimum of the zero-functional and nonzero functional-tuple costs; below it, all bounded exact supports and normalized equations transfer.  The nonzero sector retains the singleton/multisupport partition, and the numeric sufficient form uses the exact weighted-fiber lower bound. | Complete human proof and `RepairPorts.exactFunctionalStrata`, `RepairPorts.exactPointedConfinementAndTransfer`. | `ADOPTED / KERNEL` | C673 |
-| Strict transfer example | `cor:strict-transfer` | The completed \(q=9\) seed and Singer-shifted generalized-SPC outer code realize strict weighted radius-four transfer. | `RepairCodes.projectiveAxisTwistedCubic_strict_weighted_transfer_of_regular_projective_action`, conditional on the displayed regular Singer-action input. | `ADOPTED / KERNEL`; secondary | C673 |
-| Positive-density realization | `thm:prescribed` | Every represented radius-\(r\) equation family satisfying \(r+1<z_x(I)\) occurs on a designated target class of density exactly \(1/m\) in an asymptotically good fixed-alphabet family; eventual confinement holds iff this inequality. | Complete human proof; `RepairPorts.eventually_pointedConfinement_iff_zeroCost`, `.eventually_prescribedPorts`, designated-class count and parameter terminals.  Random-GV or AG/TVZ outer-family existence remains the named classical input. | `ADOPTED / KERNEL + NAMED INPUT` | C674 |
-| MDS fingerprints | `cor:mds-fingerprints` | Every proper MDS code with \(1\le k<m\) has a minimum-weight equation family that reconstructs its represented code, has \(z_x=2(k+1)\), and occurs on a designated target class of density \(1/m\); its exact helper-support family is the generic complete uniform clutter. | `RepairPorts.HasMDSDualParameters.pointedZeroFunctionalCost_eq`, `RepairPorts.eventually_mdsMinimumCoefficientFingerprints`. | `ADOPTED / KERNEL` | C674 |
-| Clebsch consequence | `cor:clebsch-port` | The Clebsch \([6,3,4]_{11}\) minimum-weight normalized equations reconstruct the pointed code, have \(z_x=8\), and occur on a designated target class of density \(1/6\); their minimum support clutter is generic MDS data. | MDS reconstruction/fingerprint terminals plus the manuscript's exact \(z_x=8\) specialization and random-GV outer-family input. | `CUT/DERIVE`: compact admitted corollary | C674 |
-| Reliability calculus | `thm:reliability` | Finite repair reliability satisfies deletion--contraction, pivotal influence, Russo--Margulis, and the blocker-controlled high-survival expansion. | Complete finite-sum proof and `RepairPorts.Reliability` kernel terminals; exact profiles are appendix refinements. | `ADOPTED / KERNEL` | C675 |
-| Bounded EXIT | `prop:bounded-exit` | Radius-truncated extrinsic failure obeys the erasure-sign recurrence, and successive curves encode the cheapest available repair radius; no finite-radius MAP or capacity claim is made. | Complete conditioning/event proof and `RepairPorts.Reliability` kernel terminals; exact curves are appendix refinements. | `ADOPTED / KERNEL` | C675 |
-| Pointed Tutte | `thm:tutte` | Full repair reliability is the stated specialization of the Las Vergnas perspective of \(M\backslash x\to M/x\); pointed duality exchanges repair and failure. | Complete human derivation and kernel-checked `RepairPorts.PointedTutte` terminals; Las Vergnas duality is the named classical input; aggregate gate and axiom audit pass. | `ADOPTED / KERNEL` | C676 |
-| Filtration boundary | `prop:filtration-boundary` | The unfiltered pointed invariant does not determine the bounded-radius filtration, even for rank-four \(\mathbb F_7\)-represented systems. | Complete sparse-paving/minor proof, exact replay bundle, and kernel-checked symbolic reliability separation; aggregate gate and axiom audit pass. | `ADOPTED / KERNEL` | C676 |
-| Matched asymptotic separation | `thm:asymptotic-separation` | One common outer family concatenated with the two \([7,4,3]_7\) seeds gives matched length, dimension, and distance-bound formulas, designated target classes of density \(1/7\), and distinct radius-three reliability laws. Equality is claimed for the seed pointed profiles, not for the large codes' full pointed invariants; availability remains unmatched. | Structural sparse-paving and exact \(z_0=8\) proof; `RepairPorts.eventually_radiusThree_prescribedPortPair`; the C676 symbolic reliability terminals; random-linear outer-family existence as a named classical input. | `ADOPTED / KERNEL-CORE + NAMED INPUT` | C939 |
-| Transfer synthesis | `cor:transfer-synthesis` | Literal equality of the radius-\(r\) supports and normalized equations transports every smaller filtration, decoder, matching/transversal and blocker data, multivariate reliability, and bounded EXIT through radius \(r\). | Direct human functoriality proof from `eventually_prescribedPorts`; the individual reliability and blocker constructions are kernel checked. | `ADOPTED / DERIVED` | C939 |
-| Cubic application | `thm:cubic` | The characteristic-three cubic--axis family has the retained code parameters, exact bounded recovery structure types, and strict matching/transversal contrast for (q\ge9); its projective completion is \([2q+2,4,q]_q\), stabilizes at radius four, and has two uniform exact rows. | Human coordinate/combinatorial proof; the affine cubic--axis chain plus `FiniteGeom.projectiveAxisTwistedCubic_code_parameters`, `RepairCodes.minimalProjectiveAxisTwistedCubicRepair_full_eq_four`, and the projective cubic/axis four- and full-invariant terminals. | `ADOPTED / KERNEL` | C678 |
-| Harmonic application | `thm:harmonic` | The quartic normal-rational curve plus nucleus has the stated code parameters and harmonic \(S(3,4,q+1)\) radius-four equations and exact helper-support family, with theorem-derived nucleus/curve contrast. | Complete symbolic manuscript proof and kernel-checked `RepairPorts.HarmonicQuartic` chain: determinant factors, unique projective completion, arbitrary-order harmonic-family iff, exclusion of circuits below five, dual distance five, pointed block-recovery terminals, and nucleus-gate closure. The sharp five-point section bound is exposed in the exact parameter terminal and proved in the manuscript; finite \(q=9,q=27\) bundles are appendix-only. | `ADOPTED / KERNEL` | C677 |
+| Stable label | Statement | Proof mechanism | Imported input | Paper-local Lean status |
+|---|---|---|---|---|
+| `thm:best-target-ghw` | `min_{|P|=t} kappa_C(P) = d_t(C^perp)-t`, with the corresponding earliest nonconfinement cost. | Information set of a minimum-support `t`-dimensional dual subcode. | GHW definition. | absent |
+| `thm:mds-thresholds` | Relative-Singleton ceiling, exact MDS formulas, and equality-at-rank-one rigidity. | Relative Singleton plus a direct uniform-matroid intersection calculation; strict RGHW growth closes rigidity. | relative Singleton and strict growth. | absent |
+| `cor:positive-density` | Exact blockwise copying and concatenated parameter bounds; random outer families make rate and primal/dual distances positive. | Coordinate counting, blockwise injectivity, distance multiplication, and a first-moment random-code argument. | `q`-ary entropy estimate. | absent |
+| `cor:service-rate-transfer` | Bounded service-rate regions agree after capacity transport. | Minimal-support bijection; upward-closed supersets are dominated. | standard fractional service-rate definition. | absent |
 
-## Appendix-only finite claims
+## Separations and application
 
-The following may not carry a body proof: exact \(q=9\) Bernstein
-coefficients, EXIT deficits and total-area ledger, finite harmonic closure
-witnesses, exact \(q=9/q=27\) circuit replays, finite Poisson error tables, and
-any generated profile table.  C678 freezes these as evidence-only appendix
-content; C325 owns their consolidated manifest and replay.
+| Stable label | Statement | Proof mechanism | Computational dependence | Paper-local Lean status |
+|---|---|---|---|---|
+| `prop:rank-one-reliability-separation` | Same `M_1`, different radius-three reliability. | Printed 31-subfamily union-size table plus inclusion--exclusion; generic five-line representation and specialization. | none load-bearing. | absent |
+| `thm:rghw-reliability-separation` | Equal full RGHW hierarchies, different reliability for full recovery, at every quotient rank. | Disjoint rank-one padding with forced supports and exact remaining-radius calculation. | none. | absent |
+| `prop:coefficient-presentation` | The same nested helper pair can have different additive confinement thresholds. | Three nonzero graph-code words computed explicitly. | none. | absent |
+| `thm:projective-thresholds` | Exact simplex RGHWs, inner-dual distance, and confinement thresholds. | Count projective points outside an annihilator. | standard projective-space counts. | absent |
+| `thm:projective-reliability` | Exact recovery probability and endpoint coefficients. | Failed-set rank criterion, subspace-lattice Möbius inversion, and projective-frame counts. | none. | absent |
+| `prop:projective-uniqueness` | Equality in the first helper-cost bound characterizes the projective-simplex multiset. | Averaging followed by nonsingularity of the point--hyperplane incidence matrix over the reals. | standard projective incidence parameters. | absent |
 
-## Deliberate exclusions
+## Formal boundary
 
-Sequential composition, general service regions, coefficient optimization,
-log-concavity, product architecture, generic tract/foundation exposition,
-propagation-completeness, harmonic cascade thresholds, and C220's optional
-cubic blocker strengthening remain outside the paper.
+The paper-local package establishes only the exact-sequence row. Its reviewer
+terminals use `Classical.choice`, `Quot.sound`, and `propext`. Every other row
+has a human proof in the manuscript and is marked absent in
+`lean/verification/claims.json`. No computation or declared project axiom is a
+premise of the main proof chain.
+
+## Excluded claims
+
+The manuscript does not claim finite-length confinement after deleting the
+outer-functional term, equality of full pointed invariants after
+concatenation, bandwidth optimality, subpacketization bounds, integral
+disjoint-request packing, or formal verification of the RGHW and confinement
+theorems.

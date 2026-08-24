@@ -1,25 +1,25 @@
 # Section map
 
-`complete_repair_ports.tex` is the active driver.  Its modular sources follow
-this mathematical dependency order:
+`complete_repair_ports.tex` is the active driver. Its modular sources follow
+the theorem dependency order:
 
-1. `01-complete-ports.tex` — exact helper-support, recovery-set, coefficient,
-   and probability layers; reconstruction radius; intrinsic pointed
-   recovery-data isomorphisms; MDS
-   reconstruction as the first application of the introduction's main
-   transfer-and-separation theorem.
-2. `02-confinement-transfer.tex` — exact pointed obstruction and weighted
-   functional transfer.
-3. `03-positive-density.tex` — prescribed realization and compact
-   MDS/Clebsch/arc/PRS/AME consequences.
-4. `04-reliability-exit.tex` — reliability calculus and bounded EXIT.
-5. `05-pointed-tutte.tex` — pointed perspective structure and the
-   radius-filtration boundary.
-6. `06-geometric-flagships.tex` — cubic--axis and
-   quartic--nucleus/harmonic applications.
-7. `08-conclusion.tex` — mathematical synthesis and precise open boundary.
-8. `07-verification-provenance.tex` — appendix trust map and evidence-only
-   finite outputs.
+1. `01-complete-ports.tex` — recovery sets, normalized equations, bounded
+   reliability, and MDS reconstruction.
+2. `02-confinement-transfer.tex` — the associated nested code pair, relative
+   generalized Hamming weights, and the relative dimension/length profile.
+3. `03-positive-density.tex` — the block-functional decomposition and exact
+   objectwise and rank-stratified confinement thresholds.
+4. `04-reliability-exit.tex` — best-target generalized weights, cooperative
+   locality, MDS rigidity, positive-density realization, and service-rate
+   transfer.
+5. `05-pointed-tutte.tex` — reliability and coefficient-presentation
+   separations beyond the relative-weight hierarchy.
+6. `06-geometric-flagships.tex` — projective-simplex weights, thresholds,
+   reliability, and the equality case for the first recovery cost.
+7. `07-verification-provenance.tex` — the exact paper-local Lean boundary and
+   the role of finite arithmetic checks.
+8. `08-conclusion.tex` — mathematical synthesis and the boundary with
+   disjoint-packing and bandwidth-aware models.
 
-The appendix contains all surviving finite computations, tables, certificates,
-and replay descriptions.  It is not a dependency of Sections 1--6.
+The filenames are retained for repository continuity. Their old private nouns
+and former subject headings are not manuscript terminology.

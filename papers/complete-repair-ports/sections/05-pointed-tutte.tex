@@ -1,241 +1,44 @@
-\section{Pointed Tutte structure}
-\label{sec:tutte}
+\section{What the relative-weight hierarchy forgets}
+\label{sec:separations}
 
-Let $M$ be the column matroid of a projective-system code on
-$E=V\sqcup\{x\}$, with $x$ neither a loop nor a coloop.  Put
-\[
- \epsilon_x(A)=r_M(A\cup\{x\})-r_M(A)\in\{0,1\}.
-\]
-The set $A$ repairs $x$ exactly when $\epsilon_x(A)=0$.
+Relative generalized weights record minimum support sizes.  They do not
+record the overlap pattern of all recovery sets, which controls stochastic
+repair, and they do not record the target coefficient presentation, which
+enters the additive confinement threshold.  We give one separation of each
+kind.
 
-\begin{theorem}[Pointed perspective polynomial]
-\label{thm:tutte}
-Let $D=M\backslash x$ and $Q=M/x$.  The Las Vergnas polynomial of the
-elementary perspective $D\to Q$ is
+First consider a one-dimensional recovered space.  On the helper set
+$\{0,\ldots,8\}$, let
 \[
- T_{D\to Q}(X,Y,Z)=
- \sum_{A\subseteq V}
- (X-1)^{r(M)-r_M(A\cup\{x\})}
- (Y-1)^{|A|-r_M(A)}Z^{\epsilon_x(A)}.
+ \begin{split}
+  \mathcal A&=\{158,026,045,013,478\},\\
+  \mathcal B&=\{168,237,078,015,124\},
+ \end{split}
 \]
-If
-\[
- S_x(u)=\sum_{\epsilon_x(A)=0}u^{|A|},
-\]
-then, for $n=|V|$,
-\[
- R_{(M,x)}(s)=
- \sum_{\epsilon_x(A)=0}s^{|A|}(1-s)^{n-|A|}.
-\]
-Consequently, when $s\ne1$,
-\[
- R_{(M,x)}(s)=(1-s)^nS_x\!\left(\frac{s}{1-s}\right).
-\]
-Writing $U_K(u,y)=\sum_Au^{|A|}y^{r_K(A)}$, one also has
-\[
- S_x(u)=\left.\frac{\partial}{\partial y}
- \bigl(U_D(u,y)-U_Q(u,y)\bigr)\right|_{y=1}.
-\]
-\end{theorem}
+where, for example, $158$ denotes $\{1,5,8\}$.  Both are realizable as the
+minimum recovery sets at a distinguished coordinate of a represented
+$[10,4,6]_q$ code over a common finite prime field.
 
-\begin{proof}
-Contraction gives
-$r_D(A)=r_M(A)$ and $r_Q(A)=r_M(A\cup\{x\})-1$, so
-$r_D(A)-r_Q(A)=1-\epsilon_x(A)$.  Substitution in the rank-one
-perspective expansion gives the displayed polynomial term by term.  The
-$Z^0$ terms are exactly the successful sets; more explicitly, for $u\ne0$,
-\[
- S_x(u)=u^{r(M)}[Z^0]T_{D\to Q}(1+u^{-1},1+u,Z),
-\]
-because a term with exponents $a,b,0$ has
-$|A|=r(M)-a+b$.  Multiplying the coefficient of $u^{|A|}$ by
-$s^{|A|}(1-s)^{n-|A|}$ and summing gives the reliability formula.
-Finally,
-\[
- \left.\partial_y(y^{r_D(A)}-y^{r_Q(A)})\right|_{y=1}
- =r_D(A)-r_Q(A),
-\]
-which is one when $\epsilon_x(A)=0$ and zero when
-$\epsilon_x(A)=1$.  Summing the differentiated terms proves the last
-identity.
-\end{proof}
-
-This identification is the singleton specialization of standard set-pointed
-Tutte theory \cite[equation~(3.1)]{LasVergnas1999}; it is not a new polynomial.
-\begin{corollary}[Pointed repair--failure duality]
-\label{cor:pointed-duality}
-Pointed duality gives
-\[
- R_{(M,x)}(s)+R_{(M^*,x)}(1-s)=1,
-\]
-and the minimal failure blockers of $(M,x)$ are exactly the minimal repair
-sets of $(M^*,x)$.  For a represented matroid they are the sets
-$Q'\setminus\{x\}$, where $Q'$ ranges over cocircuits containing $x$;
-equivalently, $Q'$ is an inclusion-minimal row-code support through $x$.
-In particular,
-\[
- \tau_{\rm full}(x)=d_x(C)-1,
- \qquad
- d_x(C)=\min\{\wt(c):c\in C,\ c_x\neq0\}.
-\]
-\end{corollary}
-
-\begin{proof}
-For $F\subseteq V$, put $A=V\setminus F$.  The dual rank formula, applied
-once to $F$ and once to $F\cup\{x\}$, gives
-\[
- r_{M^*}(F\cup\{x\})-r_{M^*}(F)=1-\epsilon_x(A).
-\]
-Thus $F$ repairs $x$ in $M^*$ exactly when its complement fails to repair
-$x$ in $M$.  Complementation preserves the product measure after replacing
-$s$ by $1-s$, which proves the reliability identity.  It also exchanges
-minimal dual repairs with minimal primal failure blockers.  Circuits of
-$M^*$ are cocircuits of $M$, so the blockers are $Q'\setminus\{x\}$ for
-cocircuits $Q'$ through $x$.  In a represented matroid, cocircuits are the
-inclusion-minimal nonzero row-code supports.  Taking the smallest support
-through $x$ proves the distance formula.
-\end{proof}
-
-\begin{lemma}[Sparse-paving pointed enumerator]
-\label{lem:sparse-paving-profile}
-For a rank-$r$ sparse paving matroid on $n$ elements with distinguished
-element $x$, the multiplicity enumerator of the rank triples
-\(
- (r_M(A),r_M(A\cup\{x\}),|A|)
-\), over all \(A\subseteq E\setminus\{x\}\), is determined by $n,r$, the
-number of circuit-hyperplanes containing $x$, and the number avoiding $x$.
-Equivalently, these data determine the full pointed-perspective polynomial.
-They do not determine the labeled subset-rank function \(A\mapsto r_M(A)\).
-\end{lemma}
-
-\begin{proof}
-Every set of size below $r$ is independent, every set of size above $r$ has
-full rank, and an $r$-set has rank $r-1$ exactly when it is a
-circuit-hyperplane.  Hence the rank triple
-\[
- \bigl(r_M(A),r_M(A\cup\{x\}),|A|\bigr),\qquad
- A\subseteq E\setminus\{x\},
-\]
-has its uniform-matroid value except when $A$ or $A\cup\{x\}$ is one of the
-two indicated types of circuit-hyperplane.  Their two counts therefore
-determine the multiplicity of every rank triple.
-\end{proof}
-
-\begin{proposition}[The radius filtration is not a pointed-Tutte specialization]
-\label{prop:filtration-boundary}
-The complete pointed polynomial does not determine the bounded-radius
-reliability filtration, even among rank-four systems represented over
-$\F_7$.
+\begin{proposition}[Rank-one reliability separation]
+\label{prop:rank-one-reliability-separation}
+\coverage{absent}%
+The two distinguished coordinates above have the same minimum helper cost
+$M_1=3$.  Under independent homogeneous helper survival with probability
+$s$, their radius-three repair reliabilities are
+\begin{align}
+ R_{\mathcal A}(s)&=5s^3-7s^5-s^6+5s^7-s^9,
+ \label{eq:reliability-A}\\
+ R_{\mathcal B}(s)&=5s^3-7s^5-2s^6+8s^7-3s^8.
+ \label{eq:reliability-B}
+\end{align}
+In particular, the complete rank-one relative-weight hierarchy does not
+determine bounded repair reliability.
 \end{proposition}
 
 \begin{proof}
-The mechanism is sparse paving.  Lemma~\ref{lem:sparse-paving-profile} does
-not record how the circuit-hyperplanes through $x$ meet after $x$ is removed.
-The radius-$(r-1)$ reliability does record those intersections, because it is
-the probability of the union of their containment events.
-
-Distinguish column $0$ in each of the following matrices; columns $1,\ldots,6$
-are the helpers:
-\[
- G_{\rm dis}=
- \begin{pmatrix}
- 1&1&1&1&0&1&1\\
- 0&3&1&4&0&6&1\\
- 0&2&3&2&1&5&0\\
- 0&1&4&1&2&4&3
- \end{pmatrix},
- \qquad
- G_{\rm ov}=
- \begin{pmatrix}
- 1&1&1&1&1&1&1\\
- 0&1&2&5&4&0&6\\
- 0&4&2&0&2&1&2\\
- 0&4&1&6&4&5&4
- \end{pmatrix}.
-\]
-All entries and determinants below are in $\F_7$.  Every three-column set
-is independent.  The dependent four-column sets are, respectively,
-\[
- \{0145,0236,2345\},
- \qquad
- \{0123,0256,3456\}.
-\]
-Here, for example, $0145$ denotes $\{0,1,4,5\}$.  Direct elimination gives
-the two lists: all other four-column minors are nonzero, and every triple
-extends to one of them.  The complete determinant ledger and exact replay
-are recorded in Appendix~\ref{sec:seed-evidence}.  Thus each displayed
-representation has rank four, has no circuit of size at most three, and has
-exactly the three listed circuit-hyperplanes.
-
-Both matroids are rank-four sparse paving matroids with three
-circuit-hyperplanes, two through the distinguished column and one avoiding
-it.  The preceding sparse-paving count therefore gives, for both systems,
-\[
-\begin{split}
-T(X,Y,Z)={}&(X-1)^3Z+6(X-1)^2Z+15(X-1)Z+2(X-1)\\
-&+18Z+(Y-1)Z+14+6(Y-1)+(Y-1)^2.
-\end{split}
-\]
-Equivalently, their complete successful-set enumerators are both
-\[
- 2u^3+14u^4+6u^5+u^6.
-\]
-
-At radius three, however, the minimal repairs are
-\[
- \{145,236\}\quad\hbox{for }G_{\rm dis},
- \qquad
- \{123,256\}\quad\hbox{for }G_{\rm ov}.
-\]
-The first pair is disjoint and the second pair meets in helper $2$.
-Inclusion--exclusion under homogeneous survival consequently gives
-\[
- R_{\rm dis}^{(\leq3)}(s)=2s^3-s^6,
- \qquad
- R_{\rm ov}^{(\leq3)}(s)=2s^3-s^5.
-\]
-The pointed polynomials agree while the filtered curves do not.
-\end{proof}
-
-\begin{theorem}[Availability- and blocker-matched asymptotic separation]
-\label{thm:asymptotic-separation}
-Over a finite prime field $\F_q$ there are two represented $[10,4,6]_q$
-inner codes whose distinguished radius-three recovery data have the same pointed
-rank-triple multiplicity enumerator, five minimum repairs, locality three,
-matching number two, transversal number two, exactly one minimum blocker, and
-helper degree multiset
-\[
- (1,1,1,1,2,2,2,2,3).
-\]
-Their homogeneous reliability polynomials are nevertheless
-\[
- R_{\mathcal A}^{(\leq3)}(s)=5s^3-7s^5-s^6+5s^7-s^9,
- \qquad
- R_{\mathcal B}^{(\leq3)}(s)=5s^3-7s^5-2s^6+8s^7-3s^8.
-\]
-Using one common outer family gives two asymptotically good fixed-alphabet
-families with the same length and dimension formulas, the same proved distance
-lower bound, and designated target classes of density exactly $1/10$ carrying
-these distinct bounded recovery data.
-\end{theorem}
-
-\begin{proof}
-On helpers $H=\{0,\ldots,8\}$ consider the two $3$-uniform linear clutters
-\[
-\begin{split}
- \mathcal A&=\{158,026,045,013,478\},\\
- \mathcal B&=\{168,237,078,015,124\}.
-\end{split}
-\]
-Here $158$ denotes $\{1,5,8\}$.  Their helper degrees have the displayed
-common multiset.  The pairs $\{0,8\}$ and $\{1,7\}$ are respectively their
-unique minimum transversals.  Each clutter contains two disjoint edges, while
-a three-edge matching is impossible because every edge meets its two-point
-transversal.  Hence both have matching and transversal numbers two and one
-minimum blocker.
-
-Their different higher intersections are visible without a search.  For each
-$k$, the table records the number of $k$-edge subfamilies by union size:
+The five triples in each clutter are the minimum recovery sets, so both
+minimum costs are three.  For $k=1,\ldots,5$, the numbers of $k$-edge
+subfamilies according to union size are
 \[
 \begin{array}{c|c|c}
 k&\mathcal A&\mathcal B\\ \hline
@@ -243,94 +46,161 @@ k&\mathcal A&\mathcal B\\ \hline
 2&7u^5+3u^6&7u^5+3u^6\\
 3&2u^6+6u^7+2u^8&u^6+8u^7+u^8\\
 4&u^7+2u^8+2u^9&4u^8+u^9\\
-5&u^9&u^9
+5&u^9&u^9.
 \end{array}
 \]
-Alternating these rows is inclusion--exclusion for the union of the five
-edge-containment events and gives the two stated reliability polynomials.
+Inclusion--exclusion for the five edge-containment events gives
+\eqref{eq:reliability-A} and~\eqref{eq:reliability-B}.
 
-It remains to represent both clutters, and this is a generic geometric
-construction.  Work first over an infinite field.  For $\mathcal A$, choose
-five lines $\ell_1,\ldots,\ell_5$ in a projective plane with
-$\ell_2,\ell_3,\ell_4$ concurrent and otherwise in general position.  Label
-their displayed intersections by
+We now give the representation argument.  Over an infinite field $K$, choose
+five projective lines $\ell_1,\ldots,\ell_5$.  For
+$\mathcal A$, make $\ell_2,\ell_3,\ell_4$ concurrent and label
 \[
  0=\ell_2\cap\ell_3\cap\ell_4,\quad
- 1=\ell_1\cap\ell_4,\quad 4=\ell_3\cap\ell_5,\quad
- 5=\ell_1\cap\ell_3,\quad 8=\ell_1\cap\ell_5,
+ 1=\ell_1\cap\ell_4,\quad
+ 4=\ell_3\cap\ell_5,\quad
+ 5=\ell_1\cap\ell_3,\quad
+ 8=\ell_1\cap\ell_5.
 \]
-and choose $2,6$ generically on $\ell_2$, $3$ on $\ell_4$, and $7$ on
-$\ell_5$.  For $\mathcal B$, make $\ell_1,\ell_4,\ell_5$ concurrent at
-$1$, put
+Choose $2,6$ on $\ell_2$, $3$ on $\ell_4$, and $7$ on $\ell_5$.
+For $\mathcal B$, make $\ell_1,\ell_4,\ell_5$ concurrent at $1$, put
 \[
- 8=\ell_1\cap\ell_3,\quad 7=\ell_2\cap\ell_3,\quad
- 0=\ell_3\cap\ell_4,\quad 2=\ell_2\cap\ell_5,
+ 8=\ell_1\cap\ell_3,\quad
+ 7=\ell_2\cap\ell_3,\quad
+ 0=\ell_3\cap\ell_4,\quad
+ 2=\ell_2\cap\ell_5,
 \]
-and choose $6,3,5,4$ generically on $\ell_1,\ell_2,\ell_4,\ell_5$.
-The choices can avoid the finitely many unwanted joining lines, so the listed
-edges are exactly the collinear triples in each configuration.
+and choose $6,3,5,4$ on $\ell_1,\ell_2,\ell_4,\ell_5$, respectively.
+At each free choice, avoid the finitely many unwanted joining lines.  The
+displayed triples are then exactly the collinear triples.
 
-Choose representatives $p_i\in K^3$ of either plane configuration and put
-$x=(1,0,0,0)$.  Lift helper $i$ to $h_i=(t_i,p_i)\in K^4$.  Dependence of
-the three lifts above any listed line is one proper linear condition on the
-$t_i$, and dependence of any four helper lifts is also one proper linear
-condition, because every four quotient points span $K^3$.  Avoiding this
-finite union of hyperplanes makes every helper triple and quadruple
-independent.  The dependent four-sets containing $x$ are then exactly
-$\{x\}\cup A$ with $A\in\mathcal A$ or $A\in\mathcal B$.  Performing the
-construction over the rationals and reducing modulo one prime avoiding the
-finitely many nonzero determinants gives both representations over one finite
-prime field $\F_q$.  Appendix~\ref{sec:matched-seed-evidence} records an
-explicit $\F_{29}$ instance as an independent cross-check, not as a premise of
-this existence proof.
-
-Each resulting column matroid is rank-four sparse paving on ten elements,
-with five circuit-hyperplanes through $x$ and none avoiding it.  Thus the two
-pointed rank-triple multiplicity enumerators agree by
-Lemma~\ref{lem:sparse-paving-profile}.  A hyperplane contains at most four
-columns and a displayed circuit-hyperplane contains four, so both row-span
-codes have parameters $[10,4,6]_q$.  Their dual distance is four, and a
-displayed target circuit shows $\mu_x(0)=4$; hence $z_x=8$ for both seeds.
-
-Put $L=\F_{q^4}$ and choose one asymptotically good $L$-linear outer family
-$O_N\leq L^N$ with dual distance tending to infinity.  If its dimension and
-distance are $K_N,D_N$, the two concatenations have
-\[
- n_N=10N,\qquad k_N=4K_N,\qquad d_N\geq6D_N.
-\]
-Since $3+1<8$, Theorem~\ref{thm:prescribed} eventually copies both the complete
-radius-three exact supports and normalized equations at
-every designated block target.  Those $N$ targets have density $1/10$, and
-literal equality of both layers preserves all
-the matched clutter invariants and the two distinct reliability laws.
+Choose representatives $p_i\in K^3$ of either plane configuration, let
+$x=(1,0,0,0)$, and lift helper $i$ to $h_i=(t_i,p_i)\in K^4$.  Dependence of
+the lifts over any displayed line and dependence of any four helper lifts are
+proper linear conditions on the $t_i$.  For a displayed line, its three
+quotient vectors have a unique dependence up to scalar, and the same
+coefficients give one nonzero linear equation in the $t_i$.  For four helper
+points, the quotient vectors span $K^3$, so their lifted determinant is a
+nonzero linear form in the four first coordinates.  Avoiding this finite union
+makes
+every helper triple and quadruple independent, while the dependent
+four-sets through $x$ are exactly $\{x\}\cup A$ for the five prescribed
+triples $A$.  Choose the construction over $\mathbb Q$ and reduce both
+configurations modulo one prime avoiding the finitely many nonzero
+determinants.  The two row-span codes then have rank four, dual distance four,
+and minimum recovery sets exactly $\mathcal A$ and $\mathcal B$.  A
+hyperplane not containing $x$ contains at most three helpers because every
+four helpers are independent.  A hyperplane containing $x$ contains at most
+one displayed collinear triple, and such a triple gives four columns in a
+hyperplane.  Thus the maximum hyperplane intersection has size four, so both
+codes have distance $10-4=6$.
 \end{proof}
 
-\begin{corollary}[Synthesis under exact recovery-structure transfer]
-\label{cor:transfer-synthesis}
-Whenever Theorem~\ref{thm:prescribed} transfers a radius-$r$ exact-support
-family and its normalized equations, it simultaneously transfers every smaller support
-filtration and every normalized decoder in that range.  Consequently it
-preserves matching and transversal numbers, minimal blockers and their
-leading failure terms, multivariate reliability, and every bounded-EXIT
-curve through radius $r$.  Any difference between two inner codes in one of
-these quantities therefore persists on their designated positive-density
-target classes.
-\end{corollary}
+The rank-one separation extends to every quotient rank without changing any
+relative generalized weight.
+
+\begin{theorem}[Equal relative weights, different reliability for full recovery]
+\label{thm:rghw-reliability-separation}
+\coverage{absent}%
+For every $\ell\geq1$, there are two nested code pairs of quotient dimension
+$\ell$ with identical relative generalized Hamming weights
+$M_1,\ldots,M_\ell$ but different bounded reliability laws for recovery of
+the full quotient.
+\end{theorem}
 
 \begin{proof}
-For each $t\leq r$, the radius-$t$ data are obtained from the radius-$r$ data
-by retaining precisely the witnesses with at most $t$ helpers.  The
-zero-extension bijection in Theorem~\ref{thm:prescribed} preserves supports,
-coefficients, and cardinality, so it commutes with every such truncation.
-Matching numbers, transversal numbers, and minimal blockers depend only on
-the resulting clutter.  Reliability is the finite product-measure sum over
-its upward closure, the leading failure term is determined by its minimum
-blockers, and bounded EXIT is the complementary reliability under
-$s_v=1-p_v$.  Each claimed consequence therefore follows from literal
-equality after relabeling.
+For $\ell=1$, use Proposition~\ref{prop:rank-one-reliability-separation}.
+For $\ell>1$, let $K_0\subset D_0$ be either of its two associated rank-one
+pairs.  On disjoint helper blocks, add the same $\ell-1$ pairs
+\[
+ 0\subset\langle\mathbf1_{L_i}\rangle
+ \qquad(1\leq i\leq\ell-1),
+\]
+where each padding line has the unique support of size $L_i$.  Thus
+\[
+ K=K_0\oplus0\oplus\cdots\oplus0,
+ \qquad
+ D=D_0\oplus\langle\mathbf1_{L_1}\rangle\oplus\cdots
+       \oplus\langle\mathbf1_{L_{\ell-1}}\rangle.
+\]
+For a direct sum of rank-one quotient pairs, the $t$th relative weight is the
+sum of the $t$ smallest component costs.  Both constructions therefore have
+the same hierarchy, obtained from the common multiset
+$\{3,L_1,\ldots,L_{\ell-1}\}$.
+
+To verify the direct-sum formula, project a feasible helper subspace to each
+quotient component.  A $t$-dimensional quotient image has nonzero projection
+to at least $t$ of the one-dimensional components.  On disjoint helper
+blocks, each active projection pays at least that component's minimum cost,
+so the total support is at least the sum of the $t$ smallest costs.  The
+direct sum of minimum words from the $t$ cheapest components attains the
+bound.
+
+Set $R=3+\sum_iL_i$.  A recovery subspace of full quotient rank projects
+nontrivially to every padding component and hence uses its entire forced
+support.  Removing those supports leaves a radius-three recovery set in the
+base component.  Conversely, any base radius-three recovery set together
+with the padding generators recovers the full quotient at radius $R$.  Thus
+\[
+ R_{\mathrm{full},R}(s)
+ =s^{\sum_iL_i}R_{\mathrm{base},3}(s).
+\]
+The two polynomials remain different by
+\eqref{eq:reliability-A}--\eqref{eq:reliability-B}.
+
+Every pair in the construction is realized by an inner code.  Put
+$V=\F_q^J/K$, let $\pi:\F_q^J\to V$ be the quotient map, and choose an
+isomorphism $\alpha:\F_q^\ell\to D/K\leq V$.  The generator map
+\[
+ G:\F_q^\ell\oplus\F_q^J\longrightarrow V,
+ \qquad G(a,x)=\alpha(a)+\pi(x),
+\]
+has helper kernel $K$ and helper preimage of the target span equal to $D$.
+Its associated nested pair is therefore $K\subseteq D$.
+\uses{prop:rank-one-reliability-separation}%
 \end{proof}
 
-The retained field-nine harmonic computation gives a geometric instance of
-the same boundary: six-element circuits in a rank-five code add five-helper
-repairs beyond the classified radius-four supports.  It illustrates the effect
-but is not evidence for Proposition~\ref{prop:filtration-boundary}.
+The second separation fixes the nested pair itself.  Let
+\[
+ K=0,\qquad
+ D=\langle u,v\rangle\leq\F_2^3,\qquad
+ u=100,\quad v=011.
+\]
+The nonzero helper words have weights $1,2,3$, so
+$(M_1,M_2)=(1,3)$.
+
+\begin{proposition}[The coefficient presentation affects confinement]
+\label{prop:coefficient-presentation}
+\coverage{absent}%
+Present the target space first by
+\[
+ 10\mapsto u,\qquad01\mapsto v,\qquad11\mapsto u+v,
+\]
+and then by
+\[
+ 11\mapsto u,\qquad10\mapsto v,\qquad01\mapsto u+v.
+\]
+The two inner codes have the same associated nested pair, the same unlabeled
+set of helper supports, and the same complete relative-weight
+hierarchy.  Their inner-dual weight multisets are respectively
+$\{2,3,5\}$ and $\{3,3,4\}$.  Hence their confinement thresholds are
+\[
+ (\Gamma_1,\Gamma_2)=(3,5)
+ \qquad\text{and}\qquad
+ (\Gamma_1,\Gamma_2)=(4,6).
+\]
+\end{proposition}
+
+\begin{proof}
+Use the graph-code realization
+\[
+ I^\perp=\{(-\alpha^{-1}(x),x):x\in D\},
+\]
+where $\alpha$ is the displayed identification of the two-dimensional target
+space with $D$.  Adding the target weight to the helper weight gives the two
+listed multisets directly.  Thus $d(I^\perp)$ is two in the first
+presentation and three in the second.  Adding this distance to
+$(M_1,M_2)=(1,3)$ gives the two threshold sequences by
+Theorem~\ref{thm:ranked-confinement}.
+\uses{thm:ranked-confinement}%
+\end{proof}

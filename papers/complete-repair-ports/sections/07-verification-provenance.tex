@@ -1,185 +1,53 @@
-\section{Formal verification and finite evidence}
+\section{Verification boundary}
 \label{sec:verification}
 
-The recovery-equation reconstruction and exact transfer chains are checked in
-Lean.  The import-only gate
-\path{RepairPorts.Gates.CompletePorts} audits the paper-facing declarations.
-Its two transfer terminals are
-\begin{quote}\small\raggedright
-\path{RepairPorts.exactFunctionalStrata},\\
-\path{RepairPorts.exactPointedConfinementAndTransfer}.
-\end{quote}
-The first gives the exact zero-, singleton-, and multisupport-functional
-profiles; the second gives the pointed minimum formula and exact equality of
-the bounded helper supports and normalized equations.  Both report only
-\texttt{propext}, \texttt{Classical.choice}, and \texttt{Quot.sound}.  The
-strict field-nine corollary is the conclusion of
-\begin{quote}\small\raggedright
-\path{RepairCodes.projectiveAxisTwistedCubic_strict_weighted_transfer_of_regular_projective_action}.
-\end{quote}
-Singer regularity is an explicit hypothesis of that declaration, not a hidden
-formal axiom.
-
-The completed cubic parameters and rows are independently exposed by
-\begin{quote}\small\raggedright
-\path{FiniteGeom.projectiveAxisTwistedCubic_code_parameters},\\
-\path{RepairCodes.minimalProjectiveAxisTwistedCubicRepair_full_eq_four},\\
-\path{RepairCodes.minimalProjectiveCubicRepair_four_invariants},\\
-\path{RepairCodes.minimalProjectiveAxisRepair_four_invariants}.
-\end{quote}
-The gate also prints the corresponding full-radius invariant terminals.
-
-The paper's \path{verification/formal-boundary.json} fixes the formal source
-commit, the finitegeom base and release commits, Lean and mathlib revisions,
-36-module closure, and 61 paper-facing terminals:
-\begin{quote}\tiny\raggedright
-source \path{bb3d7c34b0381ee1ba77ad95076959e53f742d19},\\
-finitegeom base \path{e69fbe7ac9e2dd6fb193f6f3c914d3831cbe806e},\\
-finitegeom release \path{36c83268ddaeec9ee22824cad44d6222a9e67081},\\
-gate fact SHA-256
-\path{fbb29ef0bc559b9ac2ce3308a7b3c0572753ffd7163d6c15cd18e57464fc0a4d}.
-\end{quote}
-The immutable area-export planner reports 888036 closure bytes and no prose
-drift at those commits.  The companion
-\path{verification/README.md} gives the guarded build, axiom-audit, and
-area-export replay commands.  These identifiers distinguish the kernel-checked
-module closure from the manuscript PDF and from evidence-only finite
-calculations.  The named \path{verification/} files are supplementary files
-distributed with the paper's source archive.
-
-Trace duality, scaled concatenated parameters, exact designated-class density,
-eventual necessity and sufficiency, support/coefficient transfer, and the MDS
-fingerprint corollary are audited through separate declarations.  In
-particular, the paired declaration below covers only simultaneous eventual
-radius-three support/coefficient transfer through one common outer family; it
-does not encode the quotient-plane seed construction, the resulting
-$[10,4,6]_q$ representations, their finite clutter invariants, or the human
-assembly of Theorem~\ref{thm:asymptotic-separation}:
-\begin{quote}\small\raggedright
-\path{RepairPorts.concatenatedRestrictedCode_parameters},\\
-\path{RepairPorts.eventually_pointedConfinement_iff_zeroCost},\\
-\path{RepairPorts.eventually_prescribedPorts},\\
-\path{RepairPorts.eventually_radiusThree_prescribedPortPair},\\
-\path{RepairPorts.eventually_mdsMinimumCoefficientFingerprints}.
-\end{quote}
-They report only \texttt{propext}, \texttt{Classical.choice}, and
-\texttt{Quot.sound}.  Random-GV or AG/TVZ existence of an outer family is the
-explicit classical input; no such existence theorem occurs in the Lean
-dependency closure.
-
-The finite reliability and bounded-EXIT calculus is audited through
-\begin{quote}\small\raggedright
-\path{RepairPorts.portReliability_delete_contract},\\
-\path{RepairPorts.hasDerivAt_portReliability_update},\\
-\path{RepairPorts.hasDerivAt_homogeneous_portReliability},\\
-\path{RepairPorts.erasureFailureProbability_delete_contract},\\
-\path{RepairPorts.noRepairProbability_eq_erasureFailure},\\
-\path{RepairPorts.cheapestRepairRadiusProbability_eq_failure_sub},\\
-\path{RepairPorts.blockerFailurePolynomial_eq_minimum_term_add_remainder}.
-\end{quote}
-These declarations use finite sums and polynomial algebra only.  Exact finite
-profiles and Poisson approximations remain computational refinements outside
-the body proof chain.
-
-For the concrete completed field-nine family, the external existence input is
-Stichtenoth's self-dual TVZ-family theorem over \(\F_{6561}\)
-\cite[Theorem~1.6(ii)]{Stichtenoth2005}.  Classical inputs are labeled as
-such: outer-family existence, concatenated-dual decomposition, Singer
-regularity, normal-rational-curve nuclei, and the Las Vergnas perspective
-polynomial.
-
-\subsection{The two field-seven seed representations}
-\label{sec:seed-evidence}
-
-For completeness, order the four-subsets of $\{0,\ldots,6\}$
-lexicographically as
+The paper has a Mathlib-only Lean companion.  It formalizes the construction
+of the associated nested code pair from abstract target and helper generator
+maps.  In the notation of~\eqref{eq:associated-exact-sequence}, the checked
+statements are
 \[
-\begin{split}
-&0123,0124,0125,0126,0134,0135,0136,0145,0146,0156,\\
-&0234,0235,0236,0245,0246,0256,0345,0346,0356,0456,\\
-&1234,1235,1236,1245,1246,1256,1345,1346,1356,1456,\\
-&2345,2346,2356,2456,3456.
-\end{split}
+ K_P\leq D_P,\qquad G_J(D_P)=W_P,\qquad
+ G_J|_{D_P}:D_P\twoheadrightarrow W_P,\qquad
+ \ker(G_J|_{D_P})=K_P.
 \]
-The corresponding determinants in $\F_7$ are
+The corresponding declarations are
+\begin{center}
+\small
+\begin{tabular}{ll}
+\toprule
+Paper statement & Lean declaration\\
+\midrule
+$K_P\leq D_P$ & \texttt{helper\_ker\_le\_helperCodeForTargetSpace}\\
+$G_J(D_P)=W_P$ & \texttt{map\_helperCodeForTargetSpace\_eq\_recoverableTargetMessageSpace}\\
+surjectivity & \texttt{recoverableTargetMap\_surjective}\\
+restricted kernel & \texttt{mem\_ker\_recoverableTargetMap\_iff}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The companion uses Lean~4.32.0-rc1 and the Mathlib commit
 \[
-\begin{split}
-G_{\rm dis}:{}&
-5,3,3,5,4,4,1,0,5,5,2,5,0,6,5,2,1,1,6,4,\\
-&1,6,6,3,4,6,4,6,5,2,0,1,6,3,4,\\
-G_{\rm ov}:{}&
-0,2,5,1,2,5,1,5,2,6,1,6,4,4,5,0,5,4,4,5,\\
-&1,6,4,2,2,4,3,1,1,3,6,2,2,6,0.
-\end{split}
+ \texttt{571b8a8e54219b4d393f75f4b8653fac08197fcc}.
 \]
-Each triple extends to a displayed nonzero minor, and each set of at least
-five columns contains one.  This proves the finite representation facts used
-in Proposition~\ref{prop:filtration-boundary}.  The independent exact replay
-bundle is
-\begin{quote}\small\raggedright
-\path{verification/f7-seed.py},\\
-\path{verification/f7-seed.json}.
-\end{quote}
-It checks the circuit-hyperplane lists, pointed rank-triple multiplicity
-enumerator, minimal
-radius-three repairs, and survivor-set counts.  Its certificate SHA-256 is
-\begin{quote}\scriptsize
-\path{8096230e66f634c820ae7ec4bacd9b2493006782ff02b8be3a8c7e1caf80de07}.
-\end{quote}
-
-\subsection{Concrete matched-seed cross-check}
-\label{sec:matched-seed-evidence}
-
-The proof of Theorem~\ref{thm:asymptotic-separation} is the generic line-and-lift
-argument in the body and does not depend on a finite search.  For an exact
-replayable instance, the supplementary bundle
-\begin{quote}\small\raggedright
-\path{verification/matched-seed.py},\\
-\path{verification/matched-seed.json}
-\end{quote}
-records two $4\times10$ matrices over $\F_{29}$.  It independently checks rank
-four by elimination, every four-column dependence both by elimination and by
-the determinant formula, the complete circuit-hyperplane lists, parameters
-$[10,4,6]_{29}$ and dual distance four, equality of the complete pointed
-rank-triple histograms, the matching, transversal, blocker, and degree data,
-and the two reliability polynomials.  Its certificate SHA-256 is
-\begin{quote}\scriptsize
-\path{16a378edc882a6dda7f5642c7d21bfa49913b45ef5409398de117897b19dd2b8}.
-\end{quote}
-This concrete instance cross-checks the structural proof; it is not a premise
-of the theorem.
-
-\subsection{Field-nine evidence}
-\label{sec:finite-evidence}
-
-For the uncompleted field-nine cubic--axis code on
-\(T_9\sqcup L_9\), \(Z_3(9)=4\), and the cubic, finite-axis, and
-axis-infinity coordinate types have exact radius-three \((\nu,\tau)\) rows
+The axiom audit of all four reviewer-facing declarations reports only
 \[
- (4,7),\qquad(6,12),\qquad(7,13),
+ \{\texttt{Classical.choice},\texttt{Quot.sound},\texttt{propext}\}.
 \]
-with multiplicities \(9,9,1\).  These are not rows of the completed code.
-After adjoining \(C(\infty)\), Theorem~\ref{thm:cubic} gives the two uniform
-radius-four/full-radius recovery-set rows
-\[
- (4,8)\quad\text{on the ten cubic coordinates},\qquad
- (7,15)\quad\text{on the ten axis coordinates}.
-\]
+No coding-theory result is introduced as a Lean axiom.
 
-Corollary~\ref{cor:strict-transfer} uses the completed 20-coordinate code.
-Its generalized-SPC check has coefficients
-\((1,a,1,1,1)\), where \(a\) is a linear Singer multiplier whose translate of
-the 20 unit-cost projective functional classes is disjoint from the original
-20-set.  Regularity on 820 classes and \(20^2<820\) prove that such an \(a\)
-exists.  Thus this is an exact conditional-on-Singer existence proof, not a
-claim that five field elements or a hidden finite multiplier certificate were
-computed.  The functional support distance is five, both the weighted nonzero
-sector and the exact pointed nonembedded threshold are at least six, and
-radius-four transfer follows.
+The formal coverage stops at the exact sequence.  In particular,
+Theorems~\ref{thm:relative-weight-recovery},
+\ref{thm:objectwise-confinement}, and~\ref{thm:ranked-confinement}, together
+with the consequences and examples in Sections~\ref{sec:consequences}--
+\ref{sec:projective-simplex}, are proved in the text but are not established
+by the paper-local Lean package.  The claim manifest records these statements
+as absent rather than treating the exact-sequence formalization as evidence
+for them.
 
-For the quartic--nucleus code at $q=9$, the general formulas give 30 nucleus
-repairs and 12 repairs at each curve target.  The certificate additionally
-gives nucleus values $(\nu,\tau)=(2,5)$, exact Bernstein and EXIT rows, and
-finite propagation witnesses.  In particular, a block-free rank-five spanning
-set completes in one round after adjoining the nucleus.  These exact outputs
-are evidence-only refinements: no theorem in the main body depends on them.
+The reliability polynomials in
+Proposition~\ref{prop:rank-one-reliability-separation} follow from the
+displayed union-size table by inclusion--exclusion.  No exhaustive
+computation is a premise of that proposition or of any theorem in the main
+proof chain.  Machine-readable examples and replay checks may therefore be
+used to audit arithmetic without changing the logical dependence of the
+paper.

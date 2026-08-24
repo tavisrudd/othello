@@ -5,10 +5,12 @@ copy	papers/complete-repair-ports/.zenodo.json	.zenodo.json	validated deposit me
 copy	papers/complete-repair-ports/LICENSE	LICENSE	approved MIT license
 copy	papers/complete-repair-ports/Makefile	Makefile	standalone warning-failing build entry point
 copy	papers/complete-repair-ports/README.md	README.md	external-reader-facing repository entry point
+copy	papers/complete-repair-ports/REVIEWER_GUIDE.md	REVIEWER_GUIDE.md	public route through proof and evidence boundary
 copy	papers/complete-repair-ports/flake.lock	flake.lock	pinned manuscript toolchain
 copy	papers/complete-repair-ports/flake.nix	flake.nix	pinned manuscript toolchain
 copy	papers/complete-repair-ports/complete_repair_ports.pdf	complete_repair_ports.pdf	tracked release PDF selected by repository policy
 copy	papers/complete-repair-ports/complete_repair_ports.tex	complete_repair_ports.tex	modular manuscript driver
+copy	papers/complete-repair-ports/formal-annotations.tex	formal-annotations.tex	typographically empty formal-coverage and dependency macros
 copy	papers/complete-repair-ports/refs.bib	refs.bib	citation-audit-required
 copy	papers/complete-repair-ports/sections/01-complete-ports.tex	sections/01-complete-ports.tex	main theorem source
 copy	papers/complete-repair-ports/sections/02-confinement-transfer.tex	sections/02-confinement-transfer.tex	main theorem source

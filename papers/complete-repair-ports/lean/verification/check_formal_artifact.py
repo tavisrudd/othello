@@ -15,13 +15,18 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
+PAPER_ROOT = ROOT.parent
 SOURCE_ROOT = ROOT / "TavisRuddFiniteGeom" / "Papers" / "RecoveryStructures"
 CLAIMS = ROOT / "verification" / "claims.json"
 EXPECTED_AXIOMS = ROOT / "verification" / "expected_axioms.txt"
 PREFIX = "TavisRuddFiniteGeom.Papers.RecoveryStructures."
-ALLOWED_STATUSES = {"complete", "conditional", "fragmentary", "absent"}
+ALLOWED_STATUSES = {"complete", "conditional_deduction", "fragment", "absent"}
 FORBIDDEN = re.compile(r"\b(?:axiom|sorry|admit|native_decide|unsafe)\b")
 THEOREM = re.compile(r"^theorem\s+([A-Za-z0-9_']+)", re.MULTILINE)
+MANUSCRIPT_ENV = re.compile(
+    r"\\begin\{(theorem|proposition|corollary|lemma)\}(.*?)\\end\{\1\}",
+    re.DOTALL,
+)
 
 
 def load_claims() -> dict:
@@ -67,6 +72,84 @@ def claimed_terminals(data: dict) -> set[str]:
     return result
 
 
+def manuscript_environments() -> dict[str, str]:
+    paths = [PAPER_ROOT / "complete_repair_ports.tex"]
+    paths.extend(sorted((PAPER_ROOT / "sections").glob("*.tex")))
+    result: dict[str, str] = {}
+    for path in paths:
+        text = path.read_text()
+        for _, body in MANUSCRIPT_ENV.findall(text):
+            labels = [
+                label
+                for label in re.findall(r"\\label\{([^}]+)\}", body)
+                if label.startswith(("thm:", "prop:", "cor:", "lem:"))
+            ]
+            if len(labels) != 1:
+                raise SystemExit(
+                    f"theorem-like environment in {path.relative_to(PAPER_ROOT)} "
+                    f"has {len(labels)} labels"
+                )
+            label = labels[0]
+            if label in result:
+                raise SystemExit(f"repeated manuscript label: {label}")
+            result[label] = body
+    return result
+
+
+def tex_annotation(label: str, body: str, macro: str) -> list[str]:
+    matches = re.findall(rf"\\{macro}\{{([^}}]*)\}}", body, re.DOTALL)
+    if len(matches) > 1:
+        raise SystemExit(f"{label} carries multiple \\{macro} annotations")
+    if not matches:
+        return []
+    payload = matches[0].replace("%", "")
+    return [item.strip() for item in payload.split(",") if item.strip()]
+
+
+def check_manuscript_annotations(data: dict) -> None:
+    environments = manuscript_environments()
+    rows: dict[str, dict] = {}
+    for row in data["claims"]:
+        label = row.get("manuscript_label")
+        if not isinstance(label, str) or label in rows:
+            raise SystemExit(f"invalid or repeated manuscript label in claims: {label!r}")
+        rows[label] = row
+    if set(rows) != set(environments):
+        raise SystemExit(
+            f"manuscript claim partition mismatch; "
+            f"unclaimed={sorted(set(environments) - set(rows))}, "
+            f"unknown={sorted(set(rows) - set(environments))}"
+        )
+
+    for label, body in environments.items():
+        coverage = tex_annotation(label, body, "coverage")
+        if len(coverage) != 1:
+            raise SystemExit(f"{label} must carry exactly one \\coverage annotation")
+        status = rows[label]["status"]
+        if coverage[0] != status:
+            raise SystemExit(
+                f"{label} annotates coverage {coverage[0]!r} but claims records {status!r}"
+            )
+        lean = tex_annotation(label, body, "lean")
+        annotated = {PREFIX + name for name in lean}
+        recorded = set(rows[label]["terminals"])
+        if annotated != recorded:
+            raise SystemExit(
+                f"{label} Lean annotation mismatch; "
+                f"annotated={sorted(annotated)}, recorded={sorted(recorded)}"
+            )
+
+    known_labels = set(environments)
+    all_text = (PAPER_ROOT / "complete_repair_ports.tex").read_text()
+    all_text += "\n".join(
+        path.read_text() for path in sorted((PAPER_ROOT / "sections").glob("*.tex"))
+    )
+    for payload in re.findall(r"\\uses\{([^}]*)\}", all_text, re.DOTALL):
+        for used in (item.strip() for item in payload.replace("%", "").split(",")):
+            if used and used not in known_labels:
+                raise SystemExit(f"unknown manuscript dependency in \\uses: {used}")
+
+
 def expected_axioms() -> dict[str, set[str]]:
     result: dict[str, set[str]] = {}
     for raw in EXPECTED_AXIOMS.read_text().splitlines():
@@ -95,6 +178,7 @@ def main() -> None:
         parser.error("choose --source-only or --axiom-log")
 
     data = load_claims()
+    check_manuscript_annotations(data)
     source = source_terminals()
     claimed = claimed_terminals(data)
     if source != claimed:

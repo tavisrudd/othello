@@ -1,267 +1,178 @@
-\section{Geometric flagships}
-\label{sec:flagships}
+\section{The projective-simplex family}
+\label{sec:projective-simplex}
 
-The general transfer and separation theorems do not depend on this section.
-These two characteristic-three applications exhibit the abstract data
-geometrically; the first supplies Corollary~\ref{cor:strict-transfer}.
+The relative-weight hierarchy can be computed exactly for a non-MDS family.
+Assume $m\geq2$, put
+\[
+ N=\frac{q^m-1}{q-1},
+\]
+and let $A$ be an $m\times N$ matrix containing one representative of every
+point of $\operatorname{PG}(m-1,q)$.  Define the inner code by
+\begin{equation}
+ I_m^\perp=\{(a,aA):a\in\F_q^m\}.
+ \label{eq:projective-inner-dual}
+\end{equation}
+Take the first $m$ coordinates as targets and the projective coordinates as
+helpers.  The associated nested pair is isomorphic to
+\[
+ 0\subseteq S_m=\{aA:a\in\F_q^m\},
+\]
+where $S_m$ is the $q$-ary simplex code.
 
-\subsection{The twisted-cubic--axis family}
-\label{subsec:cubic-axis}
+\begin{theorem}[Projective-simplex thresholds]
+\label{thm:projective-thresholds}
+\coverage{absent}%
+For $1\leq t\leq m$,
+\begin{equation}
+ M_t(S_m,0)=\frac{q^m-q^{m-t}}{q-1},
+ \label{eq:simplex-weights}
+\end{equation}
+and
+\begin{equation}
+ d(I_m^\perp)=q^{m-1}+1.
+ \label{eq:projective-dual-distance}
+\end{equation}
+Hence the first nonconfined helper cost at recovered dimension $t$ is
+\begin{equation}
+ \Gamma_t=\frac{q^m-q^{m-t}}{q-1}+q^{m-1}+1.
+ \label{eq:projective-thresholds}
+\end{equation}
+The family is non-MDS for $m\geq2$; for $m\geq3$ the successive increments
+of $\Gamma_t$ are unequal.
+\end{theorem}
 
-Let $q=3^h$ and work in $\mathrm{PG}(3,q)$.  Put
-\[
- T_q=\{C(t)=(1:t:t^2:t^3):t\in\F_q\},
-\]
-\[
- L_q=\{A(u)=(0:1:u:0):u\in\F_q\}
- \cup\{A_\infty=(0:0:1:0)\}.
-\]
-The line $L_q$ is the characteristic-three axis of the osculating-plane
-pencil \cite{DavydovEtAl2021}; all statements below follow directly from
-the displayed coordinates.
+\begin{proof}
+The target restriction of a word $(a,aA)\in I_m^\perp$ is $a$, and no
+nonzero dual word has zero target restriction.  Hence normalized recovery
+systems correspond, with support preserved, to subcodes of $S_m$; this proves
+the asserted identification of the associated pair.
 
-\begin{theorem}[Cubic--axis recovery structure]
-\label{thm:cubic}
-The row code on $T_q\sqcup L_q$ is $[2q+1,4,q-1]_q$.  Its minimal circuits
-of size at most four are the triples on $L_q$ and the sets
+Let $U\leq\F_q^m$ have dimension $t$.  The common zero coordinates of the
+subcode $UA$ are the projective points in $U^\perp$, a subspace of projective
+dimension $m-t-1$.  Thus
 \[
- \{C(s),C(t),C(u),(0:e_1:e_2:0)\}
+ |\supp(UA)|=N-\frac{q^{m-t}-1}{q-1}
+ =\frac{q^m-q^{m-t}}{q-1},
 \]
-for distinct $s,t,u$, where $e_1=s+t+u$ and
-$e_2=st+su+tu$.  Every cubic coordinate has
-\[
- (\nu,\tau)=\left(\frac{q-1}{2},q-2\right).
-\]
-If $Z_3(q)$ is the maximum size of a subset of \((\F_q,+)\) containing no
-three distinct elements with sum zero, then
-\[
- (\nu,\tau)_{A_\infty}
- =\left(\frac{5q-3}{6},2q-1-Z_3(q)\right),
-\]
-\[
- (\nu,\tau)_{A(a)}
- =\left(\frac{5q-9}{6},2q-2-Z_3(q)\right).
-\]
-In particular every coordinate satisfies $\tau>\nu$ for $q\geq9$.
+independently of $U$.  This proves~\eqref{eq:simplex-weights}.  Every
+nonzero simplex word $aA$ has weight $q^{m-1}$, while a nonzero target vector
+$a$ has weight at least one.  Equality is attained by a coordinate vector,
+which proves~\eqref{eq:projective-dual-distance}.  The confinement formula is
+Theorem~\ref{thm:ranked-confinement}.  The non-MDS and increment assertions
+follow from the displayed parameters.
+\uses{thm:ranked-confinement}%
+\end{proof}
 
-After adjoining \(C(\infty)=(0:0:0:1)\), the completed row code is
-\([2q+2,4,q]_q\).  Radius four exhausts its full minimal recovery-set family,
-and its rows are
-uniform on the two projective blocks:
+This family also gives an exact stochastic law at every recovered dimension.
+Let each helper survive independently with probability $s$, and let $F$ be
+the set of failed projective points.  The available recovery equations are
+indexed by
 \[
- \left(\frac{q-1}{2},q-1\right)\text{ on the cubic},
+ \{a\in\F_q^m:aA|_F=0\}
+ =\bigl(\operatorname{span}F\bigr)^\perp,
+\]
+which has dimension $m-\rank(F)$.
+
+\begin{theorem}[Projective rank reliability]
+\label{thm:projective-reliability}
+\coverage{absent}%
+The probability of retaining at least $t$ independent target recovery
+equations is
+\begin{equation}
+ R_t(s)=
+ \sum_{\substack{F\subseteq\operatorname{PG}(m-1,q)\\
+                  \rank(F)\leq m-t}}
+ (1-s)^{|F|}s^{N-|F|}.
+ \label{eq:projective-rank-reliability}
+\end{equation}
+Writing $N_v=(q^v-1)/(q-1)$, this equals
+\begin{equation}
+ R_t(s)=
+ \sum_{u=0}^{m-t}\qbinom{m}{u}
+ \sum_{v=0}^{u}\qbinom{u}{v}
+ (-1)^{u-v}q^{\binom{u-v}{2}}s^{N-N_v}.
+ \label{eq:projective-mobius-reliability}
+\end{equation}
+Its endpoint terms are
+\begin{align}
+ R_t(s)&=\qbinom{m}{t}s^{M_t}+O(s^{M_t+1})
+ &&(s\to0),
+ \label{eq:rare-survival}\\
+ 1-R_t(s)&=B_{m,m-t+1}(1-s)^{m-t+1}
+            +O((1-s)^{m-t+2})
+ &&(s\to1),
+ \label{eq:rare-failure}
+\end{align}
+where
+\[
+ B_{m,r}=\qbinom{m}{r}
+          \frac{|\operatorname{GL}(r,q)|}{r!(q-1)^r}
+\]
+is the number of unordered projective $r$-frames.
+\end{theorem}
+
+\begin{proof}
+Recovery of $t$ independent target combinations is possible exactly when
+$m-\rank(F)\geq t$, which gives~\eqref{eq:projective-rank-reliability}.
+For a vector subspace $U\leq\F_q^m$, let $\mathbb P(U)$ denote its projective
+points.  M\"obius inversion in the subspace lattice gives the total
+probability of failed sets spanning a fixed $u$-space $U$ as
+\[
+ \sum_{V\leq U}\mu(V,U)s^{N-N_{\dim V}},
  \qquad
- \left(\frac{5q-3}{6},2q-3\right)\text{ on the axis}.
+ \mu(V,U)=(-1)^{u-v}q^{\binom{u-v}{2}},
+ \qquad v=\dim V.
 \]
-\end{theorem}
-
-\begin{proof}
-A plane containing $L_q$ contains at most one cubic point by Frobenius
-injectivity; a plane not containing it meets the line once and the cubic at
-most three times.  A plane through \(L_q\) and one cubic point has \(q+2\)
-columns, so the largest section has size \(q+2\); the length \(2q+1\) and
-rank four therefore give distance \(q-1\).
-
-Write \(\Delta(s,t,u)=(s-t)(s-u)(t-u)\).  Direct expansion gives, up to the
-fixed ordering sign,
+Here the total weight of all failed sets contained in $\mathbb P(V)$ is
 \[
- \det\bigl(C(s),C(t),C(u),(0:a:b:0)\bigr)
-   =\Delta(s,t,u)(a e_2-b e_1).
+ \sum_{F\subseteq\mathbb P(V)}(1-s)^{|F|}s^{N-|F|}
+ =s^{N-N_{\dim V}},
 \]
-Thus three distinct cubic points meet the axis in the unique point
-\((0:e_1:e_2:0)\).  If \(e_1=0\), then in characteristic three
-\(e_2=-(s-t)^2\neq0\), so this point is \(A_\infty\).  Four cubic columns
-have nonzero Vandermonde determinant.  Two distinct cubic and two distinct
-axis columns also have nonzero determinant, while any set containing three
-axis points already contains an axis triple.  These calculations prove both
-the displayed circuit list and its completeness through size four.
+which accounts for the power of $s$ before inversion.
+There are $\qbinom{m}{u}$ choices for $U$ and $\qbinom{u}{v}$ subspaces
+$V\leq U$ of dimension $v$.  Summing over $u\leq m-t$ proves
+\eqref{eq:projective-mobius-reliability}.
 
-We record the elementary hypergraph calculation used for the exact rows.
-Let \(\mathcal Z\) be the triples of \(\F_q\) with sum zero.  The parallel
-class
-\(\{a,a+1,a-1\}\) partitions \(\F_q\), so
-\(\nu(\mathcal Z)=q/3\); after deleting all triples through zero, deleting the
-one affected parallel-class member gives \(\nu=q/3-1\).  A set avoids
-\(\mathcal Z\) exactly when it is three-term-zero-sum-free, hence
-\(\tau(\mathcal Z)=q-Z_3(q)\).  Translation preserves \(\mathcal Z\) and
-lets a maximum avoiding set omit zero; adjoining the now-isolated zero shows
-that the deleted hypergraph has transversal number \(q-1-Z_3(q)\).
-
-At an axis target, the minimal clutter is the disjoint union of the complete
-graph on the other \(q\) axis points and a three-cubic component.  At
-\(A_\infty\) that component is \(\mathcal Z\).  At \(A(a)\), the bijection
-\[
- s\longmapsto(s+a)^{-1}
-\]
-identifies it with the zero-sum triples avoiding zero: expanding the numerator
-of the sum of the three inverses gives exactly
-\(e_2-ae_1=0\).  Matching and transversal numbers add across the two disjoint
-helper blocks.  Since \(K_q\) contributes \(((q-1)/2,q-1)\), the two stated
-axis rows follow.
-
-Fix now a cubic target \(C(x)\).  Relabel every other cubic parameter by
-\(u=(s-x)^{-1}\in\F_q^*\).  The repair using parameters \(s,t\) has axis
-completion
-\[
- \chi_x(u+v),\qquad
- \chi_x(w)=
- \begin{cases}A_\infty,&w=0,\\ A(-x+w^{-1}),&w\ne0,
- \end{cases}
-\]
-and \(\chi_x\) is injective.  If \(g\) generates \(\F_q^*\), pairing
-\(g^{2i}\) with \(g^{2i+1}\) uses every nonzero parameter once and gives
-distinct colors \(g^{2i}(1+g)\).  This is a matching of size
-\((q-1)/2\), and no matching can be larger because every repair uses two
-cubic helpers.  For the transversal, all but one cubic helper give a cover of
-size \(q-2\).  Conversely, if a cover selects \(t\) cubic helpers and leaves a
-nonempty set \(U\) unselected, fix \(u_0\in U\).  For every
-\(v\in U\setminus\{u_0\}\), the distinct axis color
-\(\chi_x(u_0+v)\) must be selected.  Hence the cover has at least
-\(t+(|U|-1)=q-2\) vertices.  This proves the cubic row without an unstated
-complement lemma.  The \(q/3\) disjoint parallel-class triples force
-\(Z_3(q)\le 2q/3\le q-2\) for \(q\ge9\), which gives \(\tau>\nu\).
-
-For the completion, projective shifted inversion
-\(s\mapsto(s+a)^{-1}\), with its pole sent to infinity and infinity to zero,
-is induced by an invertible ambient map; it is transitive on each of the
-cubic and axis blocks.  It therefore suffices to use targets \(C(\infty)\)
-and \(A_\infty\).  At \(C(\infty)\) the radius-three repairs are
-\(\{C(s),C(t),A(s+t)\}\).  The same pairing and covering argument gives
-\(((q-1)/2,q-1)\).  At \(A_\infty\), the radius-three matching already has
-\((q-1)/2+q/3=(5q-3)/6\) edges.  In any matching of minimal radius-four
-repairs, if an edge uses \(c\) cubic and \(a\) axis helpers, independence of
-the helper columns and the circuit classification give \(2c+3a\ge6\): an
-axis-only edge has \(a\ge2\), a cubic-only edge has \(c\ge3\), and a mixed
-edge cannot have \(c=1\) or \((c,a)=(2,1)\), since the corresponding sets are
-independent by the size-at-most-four classification.  Every remaining mixed
-case satisfies the inequality.
-Summing over the disjoint edges and using the \(q+1\) cubic and \(q\)
-available axis coordinates yields
-\(6\nu\le2(q+1)+3q=5q+2\), hence the same upper bound
-\((5q-3)/6\).
-
-Finally, a helper set contains no full repair exactly when it lies in a
-hyperplane section avoiding the target.  For \(C(\infty)\), the largest such
-section has \(q+2\) points (the plane \(X_3=0\) attains it), giving
-\(\tau=(2q+1)-(q+2)=q-1\).  A plane avoiding \(A_\infty\) meets the axis once
-and the cubic at most three times.  To see sharpness, choose
-\(\alpha\in\F_q\setminus\F_3\).  The plane through
-\(C(0),C(1),C(\alpha)\) and their finite axis completion
-\((0:e_1:e_2:0)\), where \(e_1=1+\alpha\ne0\), contains four displayed
-points and avoids \(A_\infty\).  Hence \(\tau=(2q+1)-4=2q-3\).  Rank four
-makes every minimal circuit
-have at most five points, so radius four exhausts the full minimal recovery-set family.
+For $s\to0$, a smallest surviving set that permits rank-$t$ recovery is the
+complement of the points in an $(m-t)$-dimensional vector subspace.  It has
+size $M_t$, and there are $\qbinom{m}{m-t}=\qbinom{m}{t}$ such subspaces.
+For $s\to1$, failure first occurs when the failed points span dimension
+$m-t+1$.  A smallest such set is a projective frame of that size.  Counting
+its span and then its unordered projective bases gives $B_{m,m-t+1}$.
 \end{proof}
 
-This is the inner code in the strict weighted-transfer example above.
-The exact $q=9$ rows are recorded in Appendix~\ref{sec:finite-evidence}.
+At the same helper length, the simplex presentation is characterized by its
+first recovery cost.
 
-\subsection{The quartic--nucleus harmonic family}
-
-Let
+\begin{proposition}[Equality in the first projective bound]
+\label{prop:projective-uniqueness}
+\coverage{absent}%
+Let $B$ be any full-row-rank $m\times N$ matrix over $\F_q$, with
+$N=(q^m-1)/(q-1)$.  Then
 \[
- V(t)=(1,t,t^2,t^3,t^4),\qquad V(\infty)=e_4,
- \qquad N=e_2,
+ \min_{0\ne a\in\F_q^m}\wt(aB)\leq q^{m-1}.
 \]
-and let $S_q=\{V(t):t\in\mathbb P^1(\F_q)\}\cup\{N\}$.
-The classical normal-rational-curve nucleus formula identifies $N$ as the
-hyperplane nucleus in characteristic three \cite[Theorem~1]{GmainerHavlicek2013}.
-
-\begin{theorem}[Quartic--nucleus recovery structure]
-\label{thm:harmonic}
-For $q=3^h\geq9$, the row code $Q_q$ on $S_q$ has parameters
-\[
- [q+2,5,q-3]_q,\qquad d(Q_q^\perp)=5.
-\]
-Its minimal circuits of size at most five are exactly
-\[
- \{N\}\cup B,
-\]
-where $B$ is a harmonic quadruple of $\mathbb P^1(\F_q)$.  These quadruples
-form a Steiner system $S(3,4,q+1)$, the characteristic-three four-set orbit
-in the standard $\operatorname{PGL}(2,q)$ design construction
-\cite[Section~2]{Tricot2024}.  Hence the radius-four repairs are all
-$B$ at the nucleus and all $\{N\}\cup(B\setminus\{x\})$ at a curve target
-$x\in B$.  The nucleus has
-\[
- \frac{(q+1)q(q-1)}{24}
-\]
-radius-four repairs, and every curve target has $q(q-1)/6$.  Every curve
-target has $(\nu,\tau)=(1,1)$.
-\end{theorem}
+Equality holds if and only if, up to column scaling and permutation, the
+columns of $B$ represent every point of $\operatorname{PG}(m-1,q)$ exactly
+once.
+\end{proposition}
 
 \begin{proof}
-For distinct finite $a,b,c,d$, the hyperplane through their quartic columns
-contains $N$ exactly when $e_2(a,b,c,d)=0$; with $\infty$ present the condition
-is $a+b+c=0$.  Given three finite points, if $e_1=a+b+c\neq0$, the unique
-completion is $d=-e_2/e_1$; if $e_1=0$, the unique completion is $\infty$.
-In the first case, substituting $d=a$, for example, changes the harmonic
-equation to $(a-b)(a-c)=0$, and similarly for $b$ and $c$; hence the
-completion is distinct.  In the second case, writing $c=-a-b$ gives
-$e_2(a,b,c)=-(a-b)^2\neq0$, so no finite completion exists.  A triple
-$\{\infty,a,b\}$ has the unique completion $-a-b$, distinct from $a,b$
-in characteristic three.  This proves the Steiner property.  Since
-$\{\infty,0,1,-1\}$ is one block and $\operatorname{PGL}(2,q)$ is
-3-transitive, unique completion also identifies the blocks with its
-projective orbit.
-
-Any five curve points are independent by the extended Vandermonde
-determinant.  Expanding the determinant of $N,V(a),V(b),V(c),V(d)$ along
-the nucleus row gives
+For each nonzero column, the fraction of nonzero $a\in\F_q^m$ for which its
+entry in $aB$ is nonzero is
 \[
- \Delta(a,b,c,d)e_2(a,b,c,d),
+ \frac{q^{m-1}(q-1)}{q^m-1}.
 \]
-and with infinity present it gives $\Delta(a,b,c)e_1(a,b,c)$.  The
-Vandermonde factor is nonzero for distinct parameters.  Thus
-$\{N\}\cup B$ is dependent exactly for a harmonic block.  A complementary
-minor shows that $N$ with any three distinct curve points is independent;
-in the zero-sum finite branch its determinant reduces to
-$-\Delta(a,b,c)e_2(a,b,c)$, which is nonzero by the calculation above.
-Deleting any point therefore restores independence.  These are all circuits
-of size at most five, so the dual distance is five.
+Averaging $\wt(aB)$ over $a\ne0$ gives at most $q^{m-1}$, strictly less if
+$B$ has a zero column.  If the minimum attains this average, every nonzero
+linear combination has weight $q^{m-1}$ and every projective hyperplane
+contains total column multiplicity
+$(q^{m-1}-1)/(q-1)$.
 
-A nonzero hyperplane restricts to a nonzero polynomial of degree at most four
-on the normal rational curve, counting infinity as a root when the quartic
-coefficient vanishes.  It therefore contains at most four curve points.  If
-it also contains $N$, equality occurs exactly on a harmonic block, so the
-largest section of $S_q$ has five points.  Hence the primal distance is
-$(q+2)-5=q-3$.  Finally, the Steiner count is
-$\binom{q+1}{3}/\binom43$, and the number of blocks through a fixed curve
-point is $\binom q2/\binom32$.  The circuit--repair correspondence gives the
-stated recovery sets and counts.
+Let $c$ be the vector of projective column multiplicities.  The
+point--hyperplane incidence matrix is square, and its real Gram matrix has
+the form $(r-\lambda)I+\lambda J$ with $r>\lambda$.  It is nonsingular, so
+the constant hyperplane-sum equations have the unique solution
+$c=\mathbf1$.  Conversely, the simplex matrix has constant nonzero weight
+$q^{m-1}$.
 \end{proof}
-
-The inner-dual half of the coarse transfer gate is automatic at radius four
-because $5<2d(Q_q^\perp)=10$.  Theorem~\ref{thm:prescribed} therefore places the
-entire harmonic recovery structure with positive density in asymptotically good
-fixed-$\F_q$ families.
-
-\subsection{Reliability, EXIT, and the geometric contrast}
-
-The nucleus repairs are the blocks of the Steiner system
-\(S(3,4,q+1)\).  At a curve target, every radius-four repair contains the
-nucleus.  Thus the nucleus recovery structure is a parallel family of
-four-helper repairs, whereas the curve recovery structure has a compulsory
-series helper.  The reliability and bounded-EXIT theorem applies to both
-target types without an exact finite profile.
-Exact field-nine profiles are computational refinements recorded in
-Appendix~\ref{sec:finite-evidence}; they are not used in the body theorem chain.
-
-Finally, the harmonic small-circuit closure has a deterministic nucleus gate.
-Let $D(S)$ close curve set $S$ under ``three points of a harmonic block add
-the fourth.''  Then
-\[
- \operatorname{cl}_4(S)=S\quad\text{if $S$ contains no block},
-\qquad
- \operatorname{cl}_4(S)=\{N\}\cup D(S)\quad\text{otherwise},
-\]
-and $\operatorname{cl}_4(S\cup\{N\})=\{N\}\cup D(S)$.
-Indeed, without $N$ no curve point can be repaired, while a complete block
-$B\subseteq S$ repairs $N$.  Once $N$ is present, the curve-target repairs
-are exactly $N$ together with three points of a harmonic block, so iteration
-is precisely harmonic completion.  This proves all three identities.
-
-Appendix~\ref{sec:finite-evidence} gives a field-nine block-free rank-five
-spanning set and its one-round completion after adjoining $N$.  These witnesses
-illustrate the nucleus gate but are not inputs to the closure identities, an
-asymptotic propagation claim, or a threshold theorem.

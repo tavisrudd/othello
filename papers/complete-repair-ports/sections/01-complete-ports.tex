@@ -1,127 +1,121 @@
-\section{Bounded recovery structures}
-\label{sec:ports}
+\section{Recovery sets and normalized equations}
+\label{sec:recovery-equations}
 
-Let $C\leq\F_q^X$ be a linear code, let $x\in X$, and let $r\geq0$.
+Let $C\leq\F_q^E$ be a linear code.  We first separate four layers that are
+often harmlessly conflated when only locality is at issue.
 
-Throughout, whenever matching, transversal, failure tolerance
-$\tau-1$, or a minimum-blocker leading term is asserted, the minimal repair
-clutter is nonempty and does not contain the empty helper set.  The support,
-coefficient, and reliability definitions themselves remain valid in the two
-degenerate cases: an empty support family never repairs, while an empty repair edge
-repairs without a helper.  We state those cases separately rather than assign
-them an adversarial-tolerance interpretation.
-We use the extended-distance convention \(d(\{0\})=\infty\).
-
-\begin{definition}[Exact helper-support layer]
-\label{def:complete-port}
-The complete radius-$r$ exact-support hypergraph at $x$ is
+Fix a target $x\in E$ and a helper bound $r$.  A dual word $w\in C^\perp$
+with $w_x\ne0$ gives
 \[
- \cH_x^{(\leq r)}(C)=
- \left\{R\subseteq X\setminus\{x\}: |R|\leq r,
- \ \exists w\in C^\perp,\ w_x\neq0,\
- \supp(w)\setminus\{x\}=R\right\}.
+ c_x=\sum_{y\ne x}-\frac{w_y}{w_x}c_y
+ \qquad(c\in C).
 \]
-Its minimal members form the repair clutter
-$\min\cH_x^{(\leq r)}(C)$.  Write $\nu_x^{(\leq r)}$ and
-$\tau_x^{(\leq r)}$ for its matching and transversal numbers.
-\end{definition}
-
-The distinction between the complete hypergraph and its minimal clutter is
-useful: the former records every bounded witness, while every monotone support
-invariant below depends only on the latter.
-
-\begin{proposition}[Basic invariants]
-\label{prop:basic-invariants}
-Assume the empty helper set is not a repair.  Then
+Its exact helper support is $\supp(w)\setminus\{x\}$.  Define
 \[
- \nu_x^{(\leq r)}\leq\tau_x^{(\leq r)}.
+ \cH_x^{(\le r)}(C)=
+ \{\supp(w)\setminus\{x\}:w\in C^\perp, w_x\ne0,
+       \wt(w)\le r+1\}.
 \]
-Both numbers are unchanged after deleting nonminimal repair sets, so either
-the complete hypergraph or its minimal clutter may be used for these optima.
-\end{proposition}
+The usual bounded recovery-set family is the upward closure of
+$\cH_x^{(\le r)}(C)$ inside the subsets of $E\setminus\{x\}$ of size at most
+$r$.  Its inclusion-minimal members form the minimal recovery-set clutter.
+Thus exact supports, recovery sets, and minimal recovery sets are distinct
+but determine the same monotone success event.
+
+The coefficient layer is
+\[
+ \cP_x^{(\le r)}(C)=
+ \{w\in C^\perp:w_x=1, \wt(w)\le r+1\}.
+\]
+These normalized recovery equations determine their exact supports, while
+the converse generally fails.  The operational model is scalar exact repair:
+each participating helper supplies one symbol of $\F_q$.  Array-code access,
+subpacketization, and repair bandwidth are different optimization problems
+\cite{ShahEtAl2010,YeBarg2016,KurzYaakobi2021}.
+
+If $A\subseteq E\setminus\{x\}$ is the surviving helper set, put
+\[
+ f_{x,r}(A)=1
+ \quad\Longleftrightarrow\quad
+ \text{$A$ contains a member of $\cH_x^{(\le r)}(C)$}.
+\]
+Under independent helper survival with probabilities $(s_y)$, the bounded
+repair reliability is
+\[
+ R_{x,r}((s_y))=\mathbb E[f_{x,r}].
+\]
+It depends only on the minimal recovery sets, but it is not determined by
+their minimum cardinality.  Section~\ref{sec:separations} shows that even the
+complete relative-weight hierarchy does not determine the corresponding
+bounded reliability law.
+
+For several target coordinates, a recovery equation is a dual subspace rather
+than one dual word.  Let $P\subseteq E$, $J=E\setminus P$, and let
+$G=(G_P\mid G_J)$ be a full-row-rank generator matrix.  If
+$T\leq\operatorname{im}G_P$ is a subspace of target linear combinations, a
+normalized recovery system for $T$ consists of linear maps
+\[
+ \alpha:T\longrightarrow\F_q^P,
+ \qquad
+ \beta:T\longrightarrow\F_q^J
+\]
+such that
+\[
+ G_P\alpha=\operatorname{id}_T,
+ \qquad
+ G_J\beta=-\operatorname{id}_T.
+\]
+For each $t\in T$, the vector $(\alpha(t),\beta(t))$ is then a dual word.
+The map $\alpha$ records the chosen target normalization and $\beta$ records
+the helper coefficients.
+
+The helper union of the system is the support of $\beta(T)$:
+\[
+ \supp(\beta(T))=
+ \{j\in J:\text{some }t\in T\text{ has }\beta(t)_j\ne0\}.
+\]
+Its helper cost is $|\supp(\beta(T))|$.  We call a target subspace internally
+recoverable when it lies in
+\[
+ W_P=\operatorname{im}G_P\cap\operatorname{im}G_J.
+\]
+Only this recovered subspace dimension is counted below.  Relations supported
+entirely on $P$ have recovered dimension zero and do not consume helpers.
+
+For later comparison, the normalized equations at one coordinate reconstruct
+the represented code at radius $r$ when their span is $C^\perp$.  The least
+such $r$ is the reconstruction radius.
+
+\begin{theorem}[MDS reconstruction from minimum-weight recovery equations]
+\label{thm:mds-reconstruction}
+\coverage{absent}%
+Let $C\leq\F_q^E$ be an $[n,k]_q$ MDS code with $1\leq k<n$, and let
+$x\in E$.  Then
+\[
+ \operatorname{span}\cP_x^{(\leq k)}(C)=C^\perp,
+\]
+the reconstruction radius is $k$, and the supports of the minimum-weight
+recovery equations form the complete $k$-uniform clutter on
+$E\setminus\{x\}$.
+\end{theorem}
 
 \begin{proof}
-A matching of $m$ nonempty edges forces every transversal to select at least
-one point from each edge.  Minimalization preserves the upward closure of the
-success event, hence preserves matching and transversal optima.
+The dual has dimension $n-k$ and minimum distance $k+1$.  For every
+$(k+1)$-set $T\subseteq E$, restriction of $C^\perp$ to $E\setminus T$ has
+domain dimension $n-k$ and codomain dimension $n-k-1$.  Its kernel contains a
+nonzero word supported on $T$, and the distance bound forces its support to be
+all of $T$.  Hence the exact helper supports through $x$ are precisely the
+$k$-subsets of $E\setminus\{x\}$.
+
+Choose a fixed $(k-1)$-set $Q\subseteq E\setminus\{x\}$.  For every
+$t\in E\setminus(\{x\}\cup Q)$, choose the normalized minimum dual word
+supported on $\{x,t\}\cup Q$.  Evaluation at the private coordinates $t$
+shows that these $n-k$ words are independent.  They are therefore a basis of
+$C^\perp$.  No smaller radius contains a nonzero normalized equation, again
+by the dual-distance bound.
 \end{proof}
 
-Every member of $\cH_x^{(\leq r)}(C)$ is a recovery set in the standard
-sense.  The standard bounded recovery-set family is its upward closure within
-the helper bound: it consists of the sets containing some member of
-$\cH_x^{(\leq r)}(C)$.  Thus $\cH_x^{(\leq r)}(C)$ records the helpers with
-nonzero coefficients, while the upward closure records all sets from which
-recovery is possible.
-
-\begin{definition}[Normalized recovery equations]
-\label{def:coefficient-port}
-Write
-\[
- \cP_x^{(\leq r)}(C)=
- \{w\in C^\perp:w_x=1,\
-   |\supp(w)\setminus\{x\}|\leq r\}
-\]
-for the normalized bounded recovery equations through $x$.
-For $R\in\cH_x^{(\leq r)}(C)$, its coefficient fiber is the set of normalized
-coefficient vectors
-\[
- \left(-\frac{w_y}{w_x}\right)_{y\in R}
- \quad(w\in C^\perp,\ \supp(w)=R\cup\{x\}).
-\]
-Each vector gives the exact recovery equation
-$c_x=\sum_{y\in R}(-w_y/w_x)c_y$.  Operationally, a helper transmits its
-stored scalar in $\F_q$ and the decoder applies the displayed coefficient.
-Thus a radius-$r$ repair contacts at most $r$ helpers and downloads one whole
-base-field symbol from each.  This scalar exact-repair model does not optimize
-subsymbol access or repair bandwidth in an array-code model
-\cite{KurzYaakobi2021,YeBarg2016,ShahEtAl2010}.
-\end{definition}
-
-\begin{definition}[Reconstruction radius]
-\label{def:reconstruction-radius}
-These equations \emph{reconstruct} $C$ at radius $r$ when their linear span is
-$C^\perp$; equivalently, double duality recovers $C$ from them.
-Its reconstruction radius is the least such $r$, or infinity if no such
-radius exists.
-\end{definition}
-
-\begin{proof}[Proof of Theorem~\ref{thm:mds-reconstruction}]
-The dual has dimension $n-k$ and minimum distance $k+1$.  Given any
-$(k+1)$-set $T\subseteq E$, restrict $C^\perp$ to $E\setminus T$.  Its domain
-has dimension $n-k$ and its codomain dimension $n-k-1$, so the restriction
-has a nonzero kernel vector $y$ supported on $T$.  The dual-distance bound
-forces $\supp(y)=T$.  If $x\in T$, then $y_x\neq0$ and scaling gives a
-normalized repair word.  Thus every $k$-subset of $E\setminus\{x\}$ is a
-minimum helper set.  Conversely, any normalized repair with at most $k$
-helpers has total weight at most $k+1$, so the same distance bound forces
-equality.  This proves the support-clutter assertion.
-
-Choose $Q\subseteq E\setminus\{x\}$ with $|Q|=k-1$ and set
-$U=E\setminus(\{x\}\cup Q)$.  For every $t\in U$, choose the normalized
-minimum dual word $y_t$ supported on $\{x,t\}\cup Q$.  The coordinate $t$ is
-nonzero in $y_t$ and zero in every $y_s$ with $s\neq t$.  Evaluating a linear
-relation at the private coordinates $t$ shows that the $y_t$ are independent.
-There are $|U|=n-k=\dim C^\perp$ of them, so they form a basis of $C^\perp$
-contained in the radius-$k$ equation family.  Double duality therefore
-recovers $C$.  No smaller radius contains any normalized word, since that
-would produce a nonzero dual word of weight at most $k$.  Hence
-$\rho_x(C)=k$.
-\end{proof}
-
-\begin{definition}[Probability layer]
-\label{def:probability-layer}
-Let $A\subseteq X\setminus\{x\}$ be the surviving helpers and put
-\[
- f_x^{(\leq r)}(A)=1
- \quad\Longleftrightarrow\quad
- \exists R\in\cH_x^{(\leq r)}(C)\text{ with }R\subseteq A.
-\]
-For independent survival probabilities $(s_y)$, the reliability is
-$R_x^{(\leq r)}(s)=\mathbb E[f_x^{(\leq r)}]$.
-\end{definition}
-
-Exact equality of the helper supports and equations
-preserves all support-derived invariants:
-matching, transversals, blocker clutters, multivariate reliability, and every
-correlated-law reliability after transporting the helper labels.  Coefficient
-fibers require the finer functional data used next.
+The support clutter in this theorem depends only on the MDS parameters.  The
+normalized equations retain the represented dual code.  This is the first
+instance of the support--coefficient distinction used in the transfer and
+separation results below.

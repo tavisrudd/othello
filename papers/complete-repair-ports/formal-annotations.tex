@@ -1,0 +1,21 @@
+% Formal annotations.
+%
+% Each theorem-like environment carries a machine-readable provenance record.
+% The six macros are typographically empty and take comma-separated identifiers:
+%
+%   \coverage{...}  absent, fragment, conditional_deduction, or complete;
+%   \lean{...}      reviewer terminals, without the common namespace;
+%   \uses{...}      semantic labels of manuscript dependencies;
+%   \proves{...}    the label established by a detached proof;
+%   \imports{...}   external-result identifiers resolved by the source registry;
+%   \evidence{...}  computational bundles resolved by the evidence registry.
+%
+% The annotation checker, claim map, source registry, and evidence registry own
+% the details. An absent statement carries no \lean annotation. The present
+% paper has no theorem whose proof rests on computational evidence.
+\newcommand{\lean}[1]{}
+\newcommand{\coverage}[1]{}
+\newcommand{\uses}[1]{}
+\newcommand{\imports}[1]{}
+\newcommand{\evidence}[1]{}
+\newcommand{\proves}[1]{}
