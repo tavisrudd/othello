@@ -118,22 +118,59 @@ Its four maximal minors are
 They are all nonzero. Thus the kernel has no zero coordinate and the rank is
 three.
 
-For uniformity in the quartic-del-Pezzo moduli, the primary checker repeats
-the construction at three symbolic pairs of torsor points while leaving the
-standard Cox parameters \(a,b\) free. The three four-hyperplane evaluation
-determinants generate the ideal
+For uniformity in the quartic-del-Pezzo moduli, the primary checker uses four
+symbolic pairs of points while leaving the standard Cox parameters \(a,b\)
+free. A witness is counted only when both its four-hyperplane evaluation
+determinant \(D_i\) and its displayed tangent smoothness minor \(M_i\) are
+nonzero. This corrects the weaker determinant-only check in the first
+certificate.
+
+Put \(\Delta=ab(a-1)(b-1)(a-b)\). On the smooth open \(\Delta\ne0\), the
+eight choices obtained from \(D_iM_i=0\), for \(i=1,2,3\), have only two
+surviving branches. Both force \(3a-b-2=0\), and their remaining equations
+are
 
 \[
-(a-1,b-1). \tag{11}
+ Q_0(b)=31223016b^2-435944529b+1306078948=0
 \]
 
-Their only common zero is therefore \((a,b)=(1,1)\), where the fifth blown-up
-point \((1:a:b)\) equals \((1:1:1)\); this is outside the smooth quartic del
-Pezzo moduli. Hence at least one witness is nonzero for every smooth geometric
-surface. Rank and nonvanishing are open and Galois-invariant conditions.
-Density of rational points on the universal torsor, together with rationality
-of the relevant Grassmannian of three-planes, supplies the required general
-\(K\)-defined tangent section on every twist in the stated setting.
+and
+
+\[
+ (3b-26)(3b-13)=0. \tag{11}
+\]
+
+On the line \(3a-b-2=0\), the primitive numerator of the fourth product is
+
+\[
+ -(b-1)^4(4b-17)(16b-85)
+ (83246b^2-872181b+2185995). \tag{11a}
+\]
+
+It is coprime to the product of the two polynomials in (11). A short exact
+check is supplied by
+
+\[
+\begin{aligned}
+Q_0(17/4)&=69121705/4,&Q_0(85/16)&=-4117757269/32,\\
+Q_4(26/3)&=7918133/9,&Q_4(13/3)&=-272530/9,\\
+\operatorname{Res}(Q_0,Q_4)&=-48353381094689774718359510,
+\end{aligned}
+\]
+
+where \(Q_4=83246b^2-872181b+2185995\). Thus the four corrected witnesses
+cover every smooth geometric fibre.
+
+For a fixed geometric surface, goodness is open in the tangent centre, the
+three-plane of tangent equations, and the orbit test point. The corrected
+cover makes this open nonempty on every geometric fibre. Its projection to
+the tangent-centre factor contains a nonempty open. The projective
+universal-torsor closure has dense \(K\)-points by Tschinkel--Zhang Lemma 2.1,
+so this open contains \(p\in Z(K)\). For that \(p\), good frames form a
+nonempty \(K\)-open in an affine frame space, hence have a \(K\)-point because
+\(K\) is infinite. This supplies the required \(K\)-defined tangent section
+on every twist without assuming that a particular split-coordinate witness
+descends.
 
 The higher-rank unimodular-window OADP quotient theorem in
 notes/2026-08-24-c925-adjacent-weight-oadp-quotient-theorem.md now applies:
@@ -168,6 +205,64 @@ Z/T_3\sim_K S\times(T_0/T_3). \tag{14}
 Equations (12)--(14) prove (1). Passing to the generic quartic-del-Pezzo
 fibre in Proposition 5.1 proves (2).
 
+The splitting in (14) is equivariant. Let \(\mathcal T\to S\) be the
+universal torsor and let \(T\) be its Neron--Severi torus. Tschinkel--Zhang
+Remark 2.2 gives \(H^1(F,T)=0\) for every extension \(F/K\), in particular
+for \(F=K(S)\). A section over the generic point gives the \(T\)-equivariant
+birational map
+
+\[
+ S\times T\dashrightarrow\mathcal T,\qquad (s,t)\longmapsto\sigma(s)t.
+\]
+
+Quotienting the anticanonical scalar gives a \(T_0\)-equivariant
+birationality \(Z\sim_K S\times T_0\). Quotienting this identity by the
+descended subtorus \(T_3\) proves (14). Thus (14) does not follow merely from
+an abstract birationality of the total space.
+
+## Explicit quotient map
+
+The quotient part of the parametrization can be written without elimination.
+Let \(\lambda_1,\lambda_2,\lambda_3\) be the three \(K\)-defined tangent
+equations of a good slice. Over a separable closure, write a point as
+\(q=q_B+q_0+q_1+q_2+q_3\) according to the boundary block and the four
+unimodular weight blocks, and set
+
+\[
+ A(q)_{ij}=\lambda_i(q_j),\qquad
+ \kappa_j(q)=(-1)^j\det A(q)_{\widehat j}. \tag{16}
+\]
+
+On the certified open all \(\kappa_j\) are nonzero. There is a unique
+\(t(q)\in T_3\) satisfying
+
+\[
+ \chi^{w_j-w_0}(t(q))=\frac{\kappa_j(q)}{\kappa_0(q)},
+ \qquad j=1,2,3. \tag{17}
+\]
+
+The determinant-one weight matrix makes (17) a Laurent-monomial formula,
+with no root extraction. Cramer's identity gives
+\(t(q)q\in\Lambda\cap Z\). Uniqueness makes the construction Galois
+equivariant, so it descends to \(K\) and is constant on \(T_3\)-orbits.
+
+Choose five linear forms \(\rho_0,\ldots,\rho_4\) completing the three
+\(\lambda_i\) in the conormal space at the tangent centre. The birational
+quotient map is
+
+\[
+ [q]\longmapsto
+ [\rho_0(t(q)q):\cdots:\rho_4(t(q)q)]\in\mathbf P^4. \tag{18}
+\]
+
+Its inverse is the inverse tangent projection on \(\Lambda\cap Z\); it is
+uniquely characterized by the twenty displayed Cox quadrics, the equations
+\(\lambda_i=0\), and the five projective coordinates in (18). Formulae
+(16)--(18) extract the one-point quotient and all torus coordinates. What
+remains unexpanded is this final quadratic elimination and the Hilbert-90
+section needed for a single coordinate parametrization of the nonsplit cubic
+(2a).
+
 Finally, the C925 \(m=1\) theorem says that
 \(X_{\mathbf C}\times\mathbf P^1\) is irrational, so \(Y\) is nonrational
 already over \(\mathbf Q\). On the other hand,
@@ -194,9 +289,9 @@ which is purely transcendental by (2). This proves (5).
   \(T_0\)-torsor on a dense open, so its restriction to \(T_3\) is generically
   free. The one-point slice is therefore birational to the Rosenlicht
   quotient \(Z/T_3\).
-- **Surface product identity.** Tschinkel--Zhang Remark 2.2 and Proposition
-  2.3 give the generic splitting used in (14); quotienting the split torus
-  factor by \(T_3\) yields the displayed residual product.
+- **Surface product identity.** Tschinkel--Zhang Remark 2.2 gives a section
+  over \(K(S)\), hence a \(T_0\)-equivariant generic splitting. Quotienting
+  the split torus factor by \(T_3\) yields the displayed residual product.
 - **Cubic passage.** Over the function field of the projection base, (1)
   makes the generic fibre rational after two variables. Hence
   \(\mathbf Q(X)(u,v)\) is purely transcendental over \(\mathbf Q\), which is
@@ -225,11 +320,11 @@ Primary exact reconstruction:
 
 - notes/cubic-threefolds-tasks/c925-i1-rank3-boundary-peeling-exhaustion.py,
   SHA-256
-  3a685d8bb66d908ee4df0b1d68220b3278740d784ba7385c4956ef8e6abd016e;
+  ead9ec015efd2a3fe74f8bb809ab449d53d651e3ef47e592ffd12387d20636cd;
 - certificate
   notes/cubic-threefolds-tasks/c925-i1-rank3-boundary-peeling-exhaustion.json,
   SHA-256
-  67ac08dfe16bdfd972235fbfd101b5afdc4bc7db9cd094186b67dab8e3b82841.
+  5f4ff4d6e6dc06e308b791198635f956cf6c6f8dd9a6ee5992875078be9a4dff.
 
 Replay from /home/tavis/src/othello:
 
@@ -265,8 +360,9 @@ The primary checker additionally verifies the symbolic smooth-moduli cover.
 | status | feature | evidence or remaining gate |
 |---|---|---|
 | settled | Apparent index-two slice | Nonsaturated-basis artifact. |
-| settled | Smooth-moduli coverage | Three symbolic determinants have common ideal \((a-1,b-1)\), outside the smooth locus. |
+| settled | Smooth-moduli coverage | Four determinant--smoothness products cover \(\Delta\ne0\); (11)--(11a) give a compact exact certificate. |
+| settled | Equivariant generic splitting | The generic section from Remark 2.2 gives \(Z\sim S\times T_0\) equivariantly. |
 | settled | Residual torus | Rank two, hence rational. |
 | settled | Type-\(I_1\) threshold | \(s(X)=2\). |
 | open | Manuscript-level priority | Full novelty and forward-citation audit. |
-| open | Explicit parametrization | The proof is constructive through tangent projection, but formulas have not been extracted. |
+| partial | Explicit parametrization | The quotient retraction and monomial torus coordinates are (16)--(18); inverse tangent elimination and a nonsplit Hilbert-90 section remain unexpanded. |

@@ -1,0 +1,9 @@
+{
+  "c925-slice-cover": {
+    "checksum_manifest": "verification/SHA256SUMS",
+    "commands": [
+      "uv run --with sympy==1.14.0 python3 verification/check_slice_cover.py --check-certificate verification/slice-cover-certificate.json"
+    ],
+    "role": "Exact arithmetic certificate for the unimodular weight matrix, numerical tangent slice, and four-witness smooth-moduli incidence cover."
+  }
+}

@@ -1,0 +1,101 @@
+{
+  "manin-stable-permutation": {
+    "citation": "Manin1966",
+    "conventions": [
+      {
+        "aspect": "domain",
+        "matched": "The paper works in characteristic zero, hence over a perfect field.",
+        "requirement": "The stable-permutation obstruction is used for a stably rational geometrically rational surface over a perfect field."
+      }
+    ],
+    "pinpoint": "stable-permutation necessity for stably rational surfaces, as invoked in Tschinkel--Zhang Section 4",
+    "used": "Stable rationality implies that the geometric Picard lattice is stably permutation."
+  },
+  "rudd-one-stabilization": {
+    "citation": "RuddM1",
+    "conventions": [
+      {
+        "aspect": "domain",
+        "matched": "The two explicit rational cubics are smooth cubic threefolds after base change to C.",
+        "requirement": "The theorem applies to every smooth complex cubic threefold."
+      }
+    ],
+    "pinpoint": "Theorem 1.1",
+    "used": "Irrationality of X times P1 for the two explicit cubic threefolds."
+  },
+  "tz-cox-model": {
+    "citation": "TZ",
+    "conventions": [
+      {
+        "aspect": "coordinates",
+        "matched": "The proof uses the same marking E_i, L_ij, Q and the same parameters a,b.",
+        "requirement": "The five blown-up points and sixteen Cox coordinates follow Tschinkel--Zhang Section 3."
+      },
+      {
+        "aspect": "hypothesis",
+        "matched": "The paper restricts to Delta nonzero.",
+        "requirement": "The five points are in general position: ab(a-1)(b-1)(a-b) is nonzero."
+      }
+    ],
+    "pinpoint": "Section 3, equations (3.1)--(3.2), and Lemma 3.2",
+    "used": "The split Cox model, its Jacobian, and the OADP property."
+  },
+  "tz-cubic-families": {
+    "citation": "TZ",
+    "conventions": [
+      {
+        "aspect": "domain",
+        "matched": "The argument is applied over the function field of the stated projection base.",
+        "requirement": "The generic fibre is the quartic del Pezzo surface constructed in Propositions 5.1 or 5.2."
+      }
+    ],
+    "pinpoint": "Propositions 5.1 and 5.2",
+    "used": "The two cubic families and their quartic-del-Pezzo generic fibres."
+  },
+  "tz-type-classification": {
+    "citation": "TZ",
+    "conventions": [
+      {
+        "aspect": "hypothesis",
+        "matched": "The minimal branch assumes the stably permutation Picard condition.",
+        "requirement": "The classification is for k-minimal quartic del Pezzo surfaces satisfying the hereditary H1 condition."
+      },
+      {
+        "aspect": "framing",
+        "matched": "Weyl conjugation is treated as a change of Cox marking.",
+        "requirement": "Types I0, I1, and I2 occur as subgroups of I3 only up to conjugacy in W(D5)."
+      }
+    ],
+    "pinpoint": "Proposition 4.1 and Lemma 4.2",
+    "used": "Reduction of the minimal case to the four Galois-image types and subgroup containment."
+  },
+  "tz-universal-torsor": {
+    "citation": "TZ",
+    "conventions": [
+      {
+        "aspect": "hypothesis",
+        "matched": "A rational point is included in the main theorem hypotheses.",
+        "requirement": "The universal torsor has a k-point."
+      },
+      {
+        "aspect": "framing",
+        "matched": "The proof constructs the product map by translating a rational generic section before quotienting.",
+        "requirement": "Equivariant generic splitting, rather than abstract rationality of the total space, is needed for the subtorus quotient."
+      }
+    ],
+    "pinpoint": "Lemma 2.1, Remark 2.2, Theorem 3.4, and Corollary 3.5",
+    "used": "Density and rationality of the universal torsor and its equivariant generic splitting."
+  },
+  "voskresenskii-rank-two": {
+    "citation": "Voskresenskii1967",
+    "conventions": [
+      {
+        "aspect": "domain",
+        "matched": "The residual actor is a two-dimensional algebraic torus over k.",
+        "requirement": "The theorem concerns algebraic tori of dimension two over their field of definition."
+      }
+    ],
+    "pinpoint": "main theorem",
+    "used": "Every two-dimensional algebraic torus is rational."
+  }
+}

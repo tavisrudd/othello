@@ -263,8 +263,15 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   stably rational smooth quartic del Pezzo in their setting has level at most
   two. Both cubic families therefore satisfy
   \(X\times\mathbf P^2\) rational, and both cubic threefolds have exact
-  threshold \(s(X)=2\). Report and certificate:
-  `../2026-08-24-c925-uniform-level-two-rationality.md`.
+  threshold \(s(X)=2\). A cold-referee pass accepts the theorem after one
+  substantive certificate repair: four determinant--smoothness witnesses,
+  rather than the original determinant-only ideal, cover the smooth Cox
+  moduli. Tschinkel--Zhang Remark 2.2 supplies the required equivariant
+  generic splitting, and signed maximal minors now give an explicit
+  Laurent-monomial quotient retraction. Only inverse tangent elimination and
+  a compact nonsplit Hilbert-90 section remain optional. Reports:
+  `../2026-08-24-c925-uniform-level-two-rationality.md` and
+  `../2026-08-24-c925-uniform-level-two-cold-referee.md`.
 
   **Corrected rank-three frontier:** the former index-two/double-cover
   conclusion was a nonsaturated-lattice artifact and is withdrawn. In the

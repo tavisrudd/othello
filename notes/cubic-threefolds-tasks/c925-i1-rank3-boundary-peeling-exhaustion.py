@@ -507,6 +507,7 @@ symbolic_slice_witnesses = [
     ((1, 3, 7), (2, 3, 5, 7, 11), (2, 4, 9)),
     ((2, 5, 11), (3, 4, 7, 13, 17), (1, 6, 10)),
     ((3, 8, 13), (5, 7, 11, 17, 19), (2, 9, 15)),
+    ((4, 9, 17), (2, 5, 11, 19, 23), (3, 10, 18)),
 ]
 symbolic_slice_data = [
     symbolic_slice_determinant(*witness) for witness in symbolic_slice_witnesses
@@ -514,16 +515,71 @@ symbolic_slice_data = [
 symbolic_window_determinants = [value[0] for value in symbolic_slice_data]
 symbolic_tangent_minors = [value[1] for value in symbolic_slice_data]
 assert all(value != 0 for value in symbolic_window_determinants)
-symbolic_slice_ideal = sp.groebner(
-    [sp.together(value).as_numer_denom()[0] for value in symbolic_window_determinants],
-    a, b,
-)
-symbolic_slice_common_zero_basis = [
-    sp.factor(polynomial.as_expr()) for polynomial in symbolic_slice_ideal.polys
+# A witness is certified only where both its four-hyperplane evaluation
+# determinant D_i and its displayed tangent smoothness minor M_i are nonzero.
+# The former determinant-only ideal was insufficient for that implication.
+# Here is a compact exact case certificate for the corrected products D_i M_i.
+# On the smooth moduli open Delta != 0, the first three products can vanish in
+# only two of the eight choices D_i=0 or M_i=0. Both survivors lie on
+# 3*a-b-2=0 and on the displayed finite b-locus. The fourth product is
+# coprime to their union after restriction to that line.
+smooth_moduli_discriminant = a*b*(a-1)*(b-1)*(a-b)
+symbolic_determinant_numerators = [
+    sp.together(value).as_numer_denom()[0]
+    for value in symbolic_window_determinants
 ]
-assert symbolic_slice_common_zero_basis == [a-1, b-1]
-# At (a,b)=(1,1), the fifth blown-up point (1:a:b) equals (1:1:1), so the
-# standard five-point configuration is not a smooth quartic del Pezzo model.
+symbolic_minor_numerators = [
+    sp.together(value).as_numer_denom()[0]
+    for value in symbolic_tangent_minors
+]
+localizer = sp.symbols("localizer")
+surviving_first_three_branches = []
+for choices in itertools.product((0, 1), repeat=3):
+    # 0 means D_i=0 and 1 means M_i=0.
+    branch = [
+        (symbolic_minor_numerators if choice else symbolic_determinant_numerators)[index]
+        for index, choice in enumerate(choices)
+    ]
+    basis = sp.groebner(
+        branch+[localizer*smooth_moduli_discriminant-1],
+        localizer, a, b,
+        order="lex",
+    )
+    if not any(polynomial.as_expr() == 1 for polynomial in basis.polys):
+        surviving_first_three_branches.append((
+            choices,
+            [sp.factor(polynomial.as_expr()) for polynomial in basis.polys[-2:]],
+        ))
+first_survivor = 31223016*b**2-435944529*b+1306078948
+second_survivor = (3*b-26)*(3*b-13)
+assert surviving_first_three_branches == [
+    ((1, 1, 0), [3*a-b-2, first_survivor]),
+    ((1, 1, 1), [3*a-b-2, second_survivor]),
+]
+fourth_product_on_survivor_line = sp.Poly(
+    sp.together(
+        symbolic_window_determinants[3]*symbolic_tangent_minors[3]
+    ).as_numer_denom()[0].subs(a, (b+2)/3),
+    b,
+).primitive()[1]
+combined_survivor = sp.Poly(first_survivor*second_survivor, b)
+assert sp.gcd(fourth_product_on_survivor_line, combined_survivor).degree() == 0
+fourth_product_on_survivor_line_factorization = sp.factor(
+    fourth_product_on_survivor_line.as_expr()
+)
+assert fourth_product_on_survivor_line_factorization == (
+    -(b-1)**4*(4*b-17)*(16*b-85)
+    *(83246*b**2-872181*b+2185995)
+)
+fourth_quadratic = 83246*b**2-872181*b+2185995
+human_coprimality_checks = {
+    "first_survivor_at_17_over_4": sp.factor(first_survivor.subs(b, sp.Rational(17, 4))),
+    "first_survivor_at_85_over_16": sp.factor(first_survivor.subs(b, sp.Rational(85, 16))),
+    "fourth_quadratic_at_26_over_3": sp.factor(fourth_quadratic.subs(b, sp.Rational(26, 3))),
+    "fourth_quadratic_at_13_over_3": sp.factor(fourth_quadratic.subs(b, sp.Rational(13, 3))),
+    "quadratic_resultant": sp.factor(sp.resultant(first_survivor, fourth_quadratic, b)),
+}
+assert all(value != 0 for value in human_coprimality_checks.values())
 symbolic_slices_cover_smooth_moduli = True
 orbit_values = {
     e1: 2, e2: 3, e3: 5, e4: 7, e5: 11,
@@ -570,7 +626,7 @@ assert window_coefficient_matrix.rank() == 3
 assert all(value != 0 for value in window_maximal_minors)
 
 certificate = {
-    "schema": "c925-i1-rank3-boundary-peeling-exhaustion-v2",
+    "schema": "c925-i1-rank3-boundary-peeling-exhaustion-v3",
     "rational_representation_decomposition": {
         "three_distinct_sign_characters": [list(value) for value in sign_characters],
         "irreducible_plane_generator_actions": [
@@ -626,9 +682,19 @@ certificate = {
         "symbolic_tangent_smoothness_minors": [
             str(value) for value in symbolic_tangent_minors
         ],
-        "symbolic_witness_common_zero_groebner_basis": [
-            str(value) for value in symbolic_slice_common_zero_basis
+        "corrected_first_three_branch_survivors": [
+            {
+                "zero_choice_0_D_1_M": list(choices),
+                "smooth_localized_elimination_basis": [str(value) for value in basis],
+            }
+            for choices, basis in surviving_first_three_branches
         ],
+        "fourth_product_on_survivor_line_factorization": str(
+            fourth_product_on_survivor_line_factorization
+        ),
+        "human_coprimality_checks": {
+            key: str(value) for key, value in human_coprimality_checks.items()
+        },
         "symbolic_witnesses_cover_smooth_moduli": symbolic_slices_cover_smooth_moduli,
         "all_kernel_coordinates_nonzero": True,
         "geometric_open_orbit_degree": 1,

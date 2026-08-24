@@ -92,8 +92,10 @@ B=\mathbf P\langle E_3,E_4,L_{34},Q\rangle. \tag{6}
 
 This is exactly the boundary space and four-block partition in the symbolic
 tangent certificate. Its three tangent equations have rank three and every
-kernel coordinate nonzero; three symbolic witnesses cover the full smooth
-quartic-del-Pezzo moduli. The higher-rank unimodular-window OADP theorem
+kernel coordinate nonzero. Four symbolic determinant--smoothness witnesses
+cover the full smooth quartic-del-Pezzo moduli; the corrected localized case
+certificate is recorded in the type-\(I_1\) report. The higher-rank
+unimodular-window OADP theorem
 therefore proves
 
 \[
@@ -108,7 +110,11 @@ Tschinkel--Zhang generic splitting gives
 Z/T_3\sim_K S\times(T_0/T_3), \tag{8}
 \]
 
-proving (1) for type \(I_3\).
+proving (1) for type \(I_3\). More precisely, Tschinkel--Zhang Remark 2.2
+trivializes the universal torsor over \(K(S)\). Translation by that rational
+section gives a \(T_0\)-equivariant birationality
+\(Z\sim_K S\times T_0\), so quotienting by \(T_3\) really yields (8); an
+abstract birationality of the total spaces would not have sufficed.
 
 ## The other three types
 
@@ -162,6 +168,16 @@ notes/2026-08-24-c925-type-i1-level-two-rationality.md. They apply here
 because the full-\(I_3\) window has exactly the same four Cox blocks and
 boundary space, merely with a different saturated weight basis.
 
+That report also extracts the quotient retraction. If \(A(q)\) is the
+three-by-four matrix obtained by evaluating the tangent equations on the four
+surviving weight blocks, its signed maximal minors \(\kappa_j(q)\) give the
+unique orbit correction through
+\(\chi^{w_j-w_0}(t)=\kappa_j/\kappa_0\). Composing this correction with the
+five surviving tangent-projection coordinates is a concrete rational map
+\(Z/T_3\dashrightarrow\mathbf P^4\). The inverse tangent elimination and the
+nonsplit Hilbert-90 section have not been expanded into cubic-coordinate
+formulae.
+
 ## Scope
 
 This theorem strengthens the full Tschinkel--Zhang stable-rationality
@@ -174,7 +190,8 @@ to the literature audit recorded in the priority-judo synthesis.
 |---|---|---|
 | settled | Full \(I_3\) rank-three subtorus | Saturated basis (4), integral actions (5). |
 | settled | Full \(I_3\) window | Galois-stable and unimodular. |
+| settled | Equivariant product identity | Generic section from Tschinkel--Zhang Remark 2.2. |
 | settled | Types \(I_0,I_1,I_2\) | Restriction from the containing \(I_3\) group. |
 | settled | Both cubic thresholds | \(s(X)=2\). |
 | settled | Nonminimal surfaces | Contraction to a rational del Pezzo surface of degree at least five. |
-| open | Explicit rational parametrizations | Constructive formulas not extracted. |
+| partial | Explicit rational parametrizations | Quotient retraction extracted; inverse tangent elimination and nonsplit section remain. |

@@ -280,6 +280,18 @@ variety with rational \(Y\times\mathbf A^1\). Report and two independent
 certificates:
 `../2026-08-24-c925-type-i1-level-two-rationality.md`.
 
+**2026-08-24 cold-referee acceptance and replacement manuscript.** The
+uniform full-\(I_3\) extension survives both critical descent gates. A
+rational generic section gives the required equivariant product before
+quotienting by the saturated subtorus. The original determinant-only moduli
+cover was insufficient; four determinant--smoothness products now cover the
+entire smooth Cox open, with a compact branch and coprimality certificate.
+Signed maximal minors give an explicit Laurent-monomial quotient retraction.
+The new six-page manuscript `papers/quartic-del-pezzo-level-two/` presents the
+uniform theorem, both cubic families, exact threshold two, and cancellation;
+it leaves the old all-stabilizations manuscript untouched. Report:
+`../2026-08-24-c925-uniform-level-two-cold-referee.md`.
+
 ## Goal
 
 The requested opposite bound is now exact for both Tschinkel--Zhang cubic

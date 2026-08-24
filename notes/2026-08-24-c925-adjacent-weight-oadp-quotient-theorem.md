@@ -118,6 +118,30 @@ The unimodularity hypothesis makes these ratios a coordinate system on
 Because the construction is defined over \(K\), this is a generically
 one-point \(K\)-slice and proves (9).
 
+The one-point correction is explicit. If
+\(\lambda_1,\ldots,\lambda_r\) are equations of \(\Lambda\), decompose a
+general point (q) into the surviving weight blocks and put
+
+\[
+ A(q)_{ij}=\lambda_i(q_{w_j}),\qquad
+ \kappa_j(q)=(-1)^j\det A(q)_{\widehat j}. \tag{10}
+\]
+
+Then the unique correcting element (t(q)\in T\) is given by
+
+\[
+ \chi^{w_j-w_0}(t(q))=\kappa_j(q)/\kappa_0(q),
+ \qquad 1\le j\le r. \tag{11}
+\]
+
+Because the weight differences form an integral basis, (11) is a Laurent
+monomial formula and requires no finite cover or root extraction. Cramer's
+identity gives \(t(q)q\in\Lambda\); uniqueness makes this formula Galois
+equivariant even when the individual weight blocks do not descend. Thus
+\(q\mapsto t(q)q\) is a rational retraction from the generic orbit to the
+slice. Composing it with the linear coordinates of tangent projection gives
+an explicit rational quotient map to \(\mathbf P^{n-r}\).
+
 The rank-one theorem is the case in which the unimodular simplex consists of
 two adjacent integer weights. The higher-rank formulation isolates the
 precise sought-for geometry at levels three and two: a descended unimodular
@@ -148,7 +172,9 @@ Zhang's Lemma 3.2 and Theorem 2.4 supply the tangent-projection hypothesis.
 3. For the saturated rank-three type-\(I_1\) three-sign subtorus, the four
    blocks outside the same \(B\) form a unimodular tetrahedron. Three exact
    tangent equations have rank three and a kernel with every coordinate
-   nonzero. The higher-rank theorem therefore proves \(Z/T_3\) rational.
+   nonzero. Four corrected determinant--smoothness witnesses cover the whole
+   smooth Cox moduli. The higher-rank theorem therefore proves \(Z/T_3\)
+   rational.
    Its residual torus has rank two, giving \(S\times\mathbf A^2\) rational.
 4. The full type-\(I_3\) group preserves the saturated rank-three lattice
    spanned by the last three standard cocharacters. It has the same four Cox
