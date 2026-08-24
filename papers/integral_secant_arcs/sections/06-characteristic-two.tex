@@ -16,13 +16,16 @@ The integer pair condition and the external incidence count give
 where \(e=\sum_{Q\notin\mathcal K}(\sigma_n(Q)-2)\) is the total excess
 above the required two \(n\)-secants.
 
-The dual set \(\mathcal L^*\) has only \(O(q)\) odd-secants.  By
-Sz\H{o}nyi--Weiner~\cite[Theorem~1.1]{SWeven}, it is the symmetric difference
+The dual set \(\mathcal L^*\) has only \(O(q)\) odd-secants.  For sufficiently
+large even \(q\), this is below the Sz\H{o}nyi--Weiner threshold
+\((\lfloor\sqrt q\rfloor+1)(q+1-\lfloor\sqrt q\rfloor)\).  Their stability
+theorem~\cite[Theorem~1.1]{SWeven} therefore writes it as the symmetric difference
 \begin{equation}\label{eq:even-type-repair}
  \mathcal L^*=\mathcal E\mathbin{\triangle}R,
 \end{equation}
 where every line meets \(\mathcal E\) in an even number of points and
-\(|R|=r=O(1)\).
+\(|R|=r=\lceil\delta/(q+1)\rceil=O(1)\), with \(\delta\) the number of
+odd-secants of \(\mathcal L^*\).
 
 \begin{lemma}[The even-type case]\label{lem:even-type-case}
 \coverage{absent}
@@ -31,8 +34,9 @@ If \(R=\varnothing\) in \eqref{eq:even-type-repair}, then \(c\ge16\).
 
 \begin{proof}
 The balanced internal multiplicities are five and six, and the balanced
-external multiplicity is two.  Let \(D\) be the internal deficit below six.
-The incidence equations and the unrestricted integer pair bound give
+external multiplicity is two.  Put \(D=6k-nT\), the signed internal
+deficiency from six.  The incidence equations and the unrestricted integer
+pair bound give
 \begin{align*}
  D&=(6c-6h-32)m+o(m),\\
  e&=2(c+h-8)m+o(m),\\
@@ -82,13 +86,16 @@ with \eqref{eq:characteristic-two-linear} proves
 
 \begin{proof}[Proof of Theorem~\ref{thm:characteristic-two}]
 Suppose the theorem fails.  Pass to a sequence for which the coefficient
-\(c\) in \eqref{eq:characteristic-two-asymptotic} is bounded above by
-\(73/6-8\varepsilon\).  As in
-Lemma~\ref{lem:secant-number-near-equality}, the leading incidence bound
-forces \(T=32m+o(m)\), and the first-order integer condition bounds
-\(T-32m\).  Pass to a subsequence with fixed integer difference \(h\).
+\(c_m=(k-32m^2)/m\) is bounded above by
+\(73/6-8\varepsilon\).  The classical incidence bound bounds \(c_m\) below,
+so pass to a subsequence with \(c_m\to c\).  The leading incidence bound and
+Lemma~\ref{lem:secant-number-near-equality} give
+\(T-32m=O(1)\).  Pass to a further subsequence with fixed integer difference
+\(h\).
 
-The total deviation from the balanced multiplicities is \(O(m)\), so
+The incidence sums and the \(O(m)\) pair-count slack show, by the same strict
+convexity argument as in the characteristic-three proof, that only \(O(q)\)
+dual lines have the wrong parity.  Therefore
 Sz\H{o}nyi--Weiner's theorem gives \eqref{eq:even-type-repair} with fixed \(r\).
 Lemma~\ref{lem:even-type-case} excludes \(r=0\) in the range under
 consideration.  If \(h\) is odd, Lemma~\ref{lem:repair-parity} and

@@ -2084,7 +2084,7 @@ equalities and this specializes to the paper's existing `3/2` term.
   points on both sides of a partition.  No absence claim rests on this partial
   read.
 
-The audit currently has thirteen full-text and six partial sources.  It supports a
+The audit currently has fifteen full-text and seven partial sources.  It supports a
 firm *classical* verdict for the moment/spectral and code/blocking dictionaries.
 It supports only the narrower bounded statement that no direct predecessor for
 the paired integer-envelope sharpening, `(OF)`/`(UF)`/`(CF)`, or the

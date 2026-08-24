@@ -24,7 +24,7 @@ If \(d=a-\lambda\), eliminating \(\beta\) gives
 
 \begin{lemma}[Classification of the rational parameters]
 \label{lem:rational-parameters}
-\coverage{absent}
+\coverage{fragment}
 The rational solutions of \eqref{eq:rational-system} are in bijection with
 ordered factorizations \(\lambda=uv\), where \(u,v\ge1\).  They are
 \begin{equation}\label{eq:rational-parameter-values}
@@ -33,6 +33,7 @@ ordered factorizations \(\lambda=uv\), where \(u,v\ge1\).  They are
  \beta=\frac{u}{u+v+1},\qquad
  a=(u+1)(v+1).
 \end{equation}
+\lean{rationalEqualityParameters_satisfy_equations}
 \end{lemma}
 
 \begin{proof}
@@ -57,13 +58,12 @@ Fix \(u,v\ge1\), put \(d=u+v+1\), and suppose
  k=udm^2+cm+O(1),
 \]
 where \(c\) remains bounded.  If every external point is on at least
-\(uv\) \(n\)-secants, then the minimum, over the permitted values of \(T\),
-of
+\(uv\) \(n\)-secants and
 \begin{equation}\label{eq:F-definition}
- F(T)=\Phimin(k,nT)
+ F(T):=\Phimin(k,nT)
  +\Phimin(q^2+q+1-k,vmT)-\binom T2
 \end{equation}
-occurs at
+is nonpositive, then
 \begin{equation}\label{eq:T-localization}
  T=ud(v+1)m+O_{u,v,c}(1).
 \end{equation}
@@ -75,7 +75,8 @@ Set \(b=q^2+q+1-k\).  The external incidence count gives
  T\ge T_0:=\left\lceil\frac{uvb}{vm}\right\rceil
  =ud(v+1)m+O(1).
 \end{equation}
-From \eqref{eq:phi-min},
+Direct substitution in \eqref{eq:phi-min} gives
+\(F(T_0)=O_{u,v,c}(m)\).  Moreover,
 \begin{equation}\label{eq:F-difference}
  F(T+1)-F(T)
  =\sum_{i=0}^{n-1}\left\lfloor\frac{nT+i}{k}\right\rfloor
@@ -90,25 +91,34 @@ Thus \eqref{eq:F-difference} is at least
  \frac{n^2}{k}+\frac{v^2m^2}{b}-1
  =\frac1{u(v+1)}+O(m^{-1}).
 \]
-At the end of the first interval this gives a positive quantity of order
-\(m\), and the associated real quadratic is increasing throughout the
-remaining permitted range.  Hence a minimizer differs from \(T_0\) by only a
-bounded amount.
+By the midpoint of the first interval, \(F\) has increased by a positive
+quantity of order \(m^2\), whereas \(F(T_0)=O(m)\).  For larger \(T\), a
+lower bound for \eqref{eq:F-difference} is
+\[
+ T\left(\frac{n^2}{k}+\frac{v^2m^2}{b}-1\right)-(n+vm),
+\]
+which is increasing because the coefficient of \(T\) is positive and is
+already positive at the end of the first interval.  It follows that
+\(F(T)>0\) whenever \(T-T_0\) exceeds a constant depending only on the fixed
+parameters.  Therefore \(F(T)\le0\) implies
+\eqref{eq:T-localization}.
 \end{proof}
 
 \begin{proof}[Proof of Theorem~\ref{thm:factor-pair}]
-Lemma~\ref{lem:rational-parameters} proves the classification.  The lower
-bound is automatic if \((k-udm^2)/m\) is unbounded, so pass to a subsequence
-on which
+Lemma~\ref{lem:rational-parameters} proves the classification.  If
+\((k-udm^2)/m\) exceeds a fixed constant larger than
+\(c_{\mathbb Z}\), the claimed bound is automatic.
+In the remaining range, Lemma~\ref{lem:secant-number-near-equality} applies
+uniformly to the actual number of \(n\)-secants, because
+\eqref{eq:arc-integer-condition} implies \(F(T)\le0\).  Hence
 \[
- k=udm^2+cm+O(1),\qquad
  T=ud(v+1)m+h
 \]
-with \(c\) bounded and \(h\in\mathbb Z\) fixed.  The second passage follows
-from Lemma~\ref{lem:secant-number-near-equality}.  Expanding
-\eqref{eq:T-minimum} to first order gives
+for an integer \(h\) in a fixed finite set.  Put
+\(c_m=(k-udm^2)/m\).  Substitution in the external coverage inequality
+\(uvb\le vmT\) gives
 \begin{equation}\label{eq:coverage-linear}
- c\ge L(h)+o(1)=d-\frac hu+o(1).
+ k\ge udm^2+L(h)m-O_{u,v}(1).
 \end{equation}
 
 At these parameters the balanced internal degrees are
@@ -116,13 +126,18 @@ At these parameters the balanced internal degrees are
 \(uv\) and \(uv+1\).  Substitution in \eqref{eq:phi-min} gives
 \begin{equation}\label{eq:pair-linear}
  \frac{F(T)}m
- =\frac{(u+v)(2uv+u+v+1)}2\bigl(C(h)-c\bigr)+o(1).
+ =\frac{(u+v)(2uv+u+v+1)}2\bigl(C(h)-c_m\bigr)+O_{u,v}(m^{-1}).
 \end{equation}
 The integer condition \eqref{eq:arc-integer-condition} implies \(F(T)\le0\),
-so \(c\ge C(h)+o(1)\).  The affine functions \(L\) and \(C\) are decreasing
-and increasing, respectively, and meet at \(h_*\).  It follows that their
-maximum over the integers is minimized at \(\lfloor h_*\rfloor\) or
-\(\lceil h_*\rceil\).  This proves \eqref{eq:factor-pair-bound}.
+so
+\[
+ k\ge udm^2+C(h)m-O_{u,v}(1).
+\]
+The affine functions \(L\) and \(C\) are decreasing and increasing,
+respectively, and meet at \(h_*\).  Their maximum over the integers is
+minimized at \(\lfloor h_*\rfloor\) or \(\lceil h_*\rceil\).  Since \(h\)
+ranges over a fixed finite set, the bounded terms are uniform.  This proves
+\eqref{eq:factor-pair-bound}.
 
 Expanding the real bound \eqref{eq:classical-arc-bound} gives
 \(c_{\mathrm{mix}}\).  Subtraction from \(c_{\mathrm{bal}}\) gives the
@@ -162,7 +177,7 @@ gives
  =M_0Q(u,v)+u^2(u+1)(u^2+u+1)
 \]
 for an integer polynomial \(Q\).  Since
-\(\gcd(M_0,2u+1)=\gcd(M_0,u)=1\), integrality of \(h_*\) is equivalent to
+\(\gcd(M_0,2u+1)=1\), integrality of \(h_*\) is equivalent to
 \eqref{eq:simultaneous-equality-divisibility}.  When \(v=u\),
 \[
  h_*=-\frac{u(u^2+u-1)}2,

@@ -8,14 +8,24 @@ PYTHON ?= nix shell nixpkgs\#python3 -c python3
 SOURCE := integral_secant_arcs.tex
 JOBNAME := integral_secant_arcs
 
-.PHONY: all check lint manuscript warnings clean distclean
+.PHONY: all check lint evidence formal-static formal-audit manuscript warnings clean distclean
 
 all: lint manuscript
 
-check: lint manuscript warnings
+check: lint evidence formal-static manuscript warnings
 
 lint:
 	$(PYTHON) ../scripts/lint_tex_spacing.py $(SOURCE) sections/*.tex
+
+evidence:
+	$(PYTHON) verification/check_integral_secant_distributions.py check
+
+formal-static:
+	$(PYTHON) lean/verification/check_formal_artifact.py --source-only
+
+formal-audit:
+	@test -n "$(AXIOM_LOG)" || { echo "AXIOM_LOG must name captured AxiomAudit stdout" >&2; exit 2; }
+	$(PYTHON) lean/verification/check_formal_artifact.py --axiom-log "$(AXIOM_LOG)"
 
 manuscript: $(SOURCE) sections/*.tex
 	$(PYTHON) ../scripts/lint_tex_spacing.py $(SOURCE) sections/*.tex

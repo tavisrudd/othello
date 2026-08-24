@@ -25,7 +25,9 @@ Let \(q=3^h\) and let \(B\) be the complement of a complete
 \end{corollary}
 
 There is also a standard coding interpretation; compare Kohnert's incidence
-criterion for projective code extension~\cite{Kohnert}.  Projective representatives
+criterion for projective code extension~\cite{Kohnert} and the
+multiple-blocking-set/code correspondence of Ball--Fancsali~\cite{BallFancsali}.
+Projective representatives
 of the points of a \((k,n)\)-arc form the columns of a generator matrix for a
 projective \([k,3,k-n]_q\) code.  A line meeting the arc in \(n\) points
 corresponds to a minimum-weight projective codeword.  Adding a new projective
@@ -34,8 +36,8 @@ hyperplane contains that column.  Hence completeness is equivalent to
 nonextendibility.  The condition \(\sigma_n(Q)\ge\lambda\) records at least
 \(\lambda\) minimum-weight hyperplanes through every candidate column.
 
-The same statement is available in every projective dimension.  Points and
-hyperplanes of \(\PG(r-1,q)\) form a symmetric design with parameters
+The same statement is available in every projective dimension \(r-1\ge2\).
+Points and hyperplanes of \(\PG(r-1,q)\) form a symmetric design with parameters
 \begin{equation}\label{eq:projective-design-parameters}
  v=\frac{q^r-1}{q-1},\qquad
  K=\frac{q^{r-1}-1}{q-1},\qquad
@@ -44,13 +46,14 @@ hyperplanes of \(\PG(r-1,q)\) form a symmetric design with parameters
 
 \begin{corollary}[Projective codes]\label{cor:projective-codes}
 \coverage{absent}
-Let \(C\) be a projective \([k,r,k-n]_q\) code, and let \(\cS\) be its
-minimum-weight hyperplanes.  Partition the points of \(\PG(r-1,q)\) into the
+Let \(C\) be a projective \([k,r,k-n]_q\) code, and let \(\cS\) be the
+hyperplanes containing \(n\) columns of a projective system for \(C\).
+Partition the points of \(\PG(r-1,q)\) into the
 \(k\) columns of \(C\) and the remaining candidate columns.  For every
-integer \(T=|\cS|\), the two minimum-hyperplane degree sequences satisfy the
+integer \(T=|\cS|\), the two selected-hyperplane degree sequences satisfy the
 exact interval condition \eqref{eq:interval-overlap}, with the parameters in
 \eqref{eq:projective-design-parameters}.  Any prescribed lower bound on the
-number of minimum-weight hyperplanes through a candidate column may be used
+number of hyperplanes in \(\cS\) through a candidate column may be used
 as the lower endpoint of its integer degree interval.
 \end{corollary}
 

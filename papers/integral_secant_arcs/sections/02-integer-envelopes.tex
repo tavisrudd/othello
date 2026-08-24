@@ -14,10 +14,11 @@ If \(L\le U\), \(NL\le R\le NU\), put
 When \(L=U\), the latter expression has its evident constant interpretation.
 
 \begin{lemma}[Balanced and filled degree sequences]\label{lem:degree-extrema}
-\coverage{absent}
+\coverage{fragment}
 Among integer sequences \(z_1,\dots,z_N\) with sum \(R\), the minimum of
 \(\sum_i\binomtwo{z_i}\) is \(\Phimin(N,R)\).  With the additional bounds
 \(L\le z_i\le U\), its maximum is \(\Phimax(N,L,U,R)\).
+\lean{balanced_twicePairCount_lower}
 \end{lemma}
 
 \begin{proof}
@@ -31,7 +32,7 @@ lie at \(L\) or \(U\); counting the filled coordinates gives
 \end{proof}
 
 \begin{theorem}[Exact integer incidence condition]\label{thm:paired-envelope}
-\coverage{absent}
+\coverage{fragment}
 Let \(\mathcal D\) be a symmetric \(2\)-\((v,K,\Lambda)\) design whose point
 set is partitioned into \(A\sqcup B\).  Let \(\cS\) be a family of \(T\)
 blocks, each meeting \(A\) in \(s\) points.  Suppose the selected-block
@@ -57,6 +58,7 @@ Then
 For uniform boxes the endpoints are given by
 Lemma~\ref{lem:degree-extrema}; heterogeneous endpoints are obtained by
 integer water filling.
+\lean{integerPairIntervals_overlap}
 \end{theorem}
 
 \begin{proof}
@@ -111,6 +113,6 @@ closed form
  \Phimin(N,R)=\frac{R^2/N-R}{2}+\frac{w(N-w)}{2N},
  \qquad R\equiv w\pmod N,\qquad 0\le w<N.
 \end{equation}
-The last term is precisely what the real relaxation discards.  At a resonant
-parameter sequence, it has linear size and cannot be absorbed into lower-order
-error.
+The last term is precisely what the real relaxation discards.  Along some
+rational equality families, it has linear size and cannot be absorbed into
+lower-order error.
