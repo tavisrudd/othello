@@ -244,8 +244,22 @@ only substantive defect.
 | settled | incidence descent on every twist | Dense `K`-points plus nonempty frame open. |
 | settled | determinant/smoothness mismatch | Fourth witness and corrected product certificate. |
 | settled | absence of a hidden finite quotient | Unimodular Laurent formula for `t(q)`. |
-| open, optional | compact inverse tangent formula | Explicit elimination, not a theorem gate. |
+| settled at graph level | inverse tangent map | The inverse graph is displayed by the Cox quadrics, slice equations, and projective coordinate equations; both composites are checked on the stated dense opens. A coordinate-expanded straight-line program remains optional. |
 | open, publication gate | global priority | Existing bounded audit is not forward-citation closure. |
-| open, citation repair | nonminimal surface reduction | Add an exact classical source before manuscript promotion. |
+| settled | nonminimal surface reduction | Várilly-Alvarado, Theorem 2.1, supplies the exact degree-at-least-five rationality input. |
 | settled | intrinsic saturation explanation | Even-sum lattice of index two; the spurious degree is the parameter mu-2 kernel. |
 | settled in the relevant domain | subgroup classification | All four hereditary-H1 types admit the restricted full-I3 window; arbitrary `W(D5)` subgroups remain unclassified. |
+| queued upgrade | effective rationality certificate and parametrization bounds | Express both maps as a reproducible symbolic construction; bound four charts and map degrees/field extensions; extend exact arithmetic checks to both composites and both explicit cubic families; assess bit complexity without an algorithmic overclaim. |
+
+## Hostile-revision verdict
+
+The descent and incidence objections are repaired, not fatal.  The universal
+torsor is generically split equivariantly because its chosen rational point
+trivializes the relevant fibre and stable permutation of the Picard lattice
+gives the required hereditary cohomology vanishing.  The cubic consequence
+is a function-field identity over the generic fibre, so no spreading claim is
+used.  The four-witness cover now includes the displayed B\'ezout identity.
+The replacement manuscript is canonical at
+`papers/cubic-stabilization-irrationality`; the obsolete conditional sources
+and paper-local Lean package were removed from that directory.  No Lean
+formalization of the new theorem is claimed.

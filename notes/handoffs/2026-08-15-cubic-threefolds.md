@@ -889,3 +889,14 @@ observation neither allocates work nor adds it to a paper.
 - Prior lane history (pre-2026-08-15, while this program lived under
   `clebsch`): `notes/handoffs/2026-07-13-clebsch-lane.md` and its archive
   `notes/handoffs/done/2026-07-13-clebsch-lane-archive.md`.
+# C925 hostile-referee revision (2026-08-24)
+
+The canonical manuscript is now `papers/cubic-stabilization-irrationality`.
+It proves two-variable rationality for the stated quartic del Pezzo surfaces,
+applies it to both Tschinkel--Zhang cubic families, and records exact
+stabilization index two and the affine-line cancellation consequence.  The
+descent, tangent-incidence, inverse-graph, and four-witness B\'ezout checks
+survived hostile review.  Next effective upgrade: symbolic straight-line maps,
+uniform chart/degree/field bounds, exact composite checking, and specialization
+to both explicit cubic families.  Full `W(D5)` subgroup classification remains
+a successor project.

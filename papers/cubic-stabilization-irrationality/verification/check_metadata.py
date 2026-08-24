@@ -8,7 +8,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCE = ROOT / "quartic_del_pezzo_level_two.tex"
+SOURCE = ROOT / "cubic_stabilization_irrationality.tex"
 text = SOURCE.read_text(encoding="utf-8")
 
 

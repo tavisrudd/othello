@@ -1,64 +1,40 @@
-# Claim--proof--novelty ledger
+# Claim, proof, and novelty ledger
 
-Date: 2026-08-14
+## Audit boundary
 
-This ledger governs the public claim surface of the manuscript. It is not
-exported to the standalone paper repository. The audit is a
-source-characterization audit, not an exhaustive priority search. The paper
-makes no negative novelty claim.
+No global first-priority claim appears in the manuscript.  The bounded audit
+supporting its positioning read two sources at targeted full-text depth:
 
-| Stable id | Public claim | Status | Proof or evidence | Source boundary |
-|---|---|---|---|---|
-| `def:point-row` | The point in the second Gamma-pairing slot reads ordinary rank. | imported | Iritani Gamma framing and Euler pairing; elementary `chi(E,O_p)=rank(E)` | `IritaniGamma`, Section 1 |
-| `thm:simple-wall-point-column` | For a simple wall oriented by `r_+<r_-`, the ambient coordinate of the common-open point is exactly the target point at the Gu--Yu--Yu extremal specialization. | unconditional | Common-point lift from Lemma 3.27; Lemma 5.10 on `a_p` and `lambda a_p`; specialized completed-source injectivity; Fourier covariance; minimal-coefficient recursion | Does not assert that centre coordinates vanish; does not identify the intrinsic large-radius Gamma frame |
-| `hyp:one-wall-sectorial` | A common pairing-preserving sectorial realization identifies the formal ambient and wall summands with the stated Gamma spans. | explicit hypothesis | Not proved in the paper | Not a corollary of the formal Gu--Yu--Yu theorem or extremal Shen--Shoemaker asymptotics alone |
-| `cor:simple-wall-rank` | In one receiver, the primitive-sixth rank Boolean is preserved across a simple wall. | conditional | Exact ambient point column plus supported Euler orthogonality under `hyp:one-wall-sectorial` | Wall-local only; no adjacent-receiver coherence |
-| `thm:ordinary-flop-point-row` | The intrinsic point section is preserved on one fixed ordinary-flop continuation domain. | unconditional | Pure-extremal support vanishing and transverse divisor recursion | One column only; no full descendant or Gamma/Fourier--Mukai theorem |
-| `cor:ordinary-flop-packet` | The point-row Boolean is preserved on a graph-gauge transported formal packet. | unconditional and path-local | Flop point-row theorem plus graph-gauge preservation of connection, grading, Chern class, and pairing | No phase-independence statement outside the fixed domain |
-| `prop:incomplete-gamma` | Formal monodromy, pairing, integrality, and a length-three nilpotent tag do not determine the point row. | unconditional abstract no-go | Explicit incomplete-Gamma flat columns, continuation shear, hyperbolic double, and tensor tag | Not a smooth-projective quantum counterexample |
-| `prop:punctual-corner` | A module killed by either Fourier localization can have full-support inverse transform. | unconditional algebraic no-go | Weyl-algebra Fourier transform exchanges `O_A2` and `delta_00` | Up to conventional signs and cohomological shift |
-| `hyp:rank-zero-target` | Every complete ray-ordered correction has point-row-zero output target. | explicit hypothesis | Not proved in the paper | Boundary-supported targets are one sufficient geometric source; bare Fourier support and one global signed coefficient do not imply the condition |
-| `thm:rank-zero-target` | The rank-zero-target condition is sufficient for point-row invariance through a finite factorization. | unconditional implication from named hypothesis | One-line covector calculation and induction | No general factorization consequence without the hypothesis |
-| `eq:blockwise-boundary-marking` | A blockwise identity between the point row of a ray target and a marked punctual coefficient would reduce the remaining problem to singular data. | open comparison, not a theorem | The semantically labeled displayed identity in Section 7 | The global alternating coefficient can vanish by cancellation and is not sufficient |
-| `def:gauged-admissible` | Packages the stability, proper-DM master-stack, perfect-obstruction-theory, numerical-separation, and orbit-cylinder assumptions used by the global gauged argument. | explicit geometric assumptions | Definition only | Włodarczyk supplies the smooth completion and orbit cylinder, not every gauged-theory condition in this package |
-| `lem:point-insertion-row` | The normalized cohomological point insertion agrees with the Gamma point row after the localized graph fundamental solution up to an invertible dimension-dependent convention scalar. | unconditional within the gauged-admissible scope | Gamma framing of the top class and fundamental-solution unitarity | The scalar is common to equal-dimensional birational endpoints and cancels; the lemma separates ordinary Kirwan restriction of the point lift from the quantum Kirwan derivative |
-| `prop:support-collapse` | Degreewise, the point-marked virtual Kalkman formula has no intermediate contribution; in any common realization the endpoint rows agree. | conditional on gauged-admissibility | Global orbit-cylinder class; commuting graph rotation; full equivariant divisor-character extraction; placement of the distinguished class at the output evaluation, whose wall values lie in the semistable fixed locus of the principal component; `lem:point-insertion-row` | Does not construct the common realization required by the conditional theorem; the vanishing does not extend to an ordinary marking carried off on a bubble tree |
-| `lem:orbit-cylinder-disjoint` | The closure of a bistable free orbit adds only its two limit points, which stay unstable along the whole polarization segment; its equivariant Poincaré dual restricts to the two endpoint point classes and vanishes on every fixed component that is semistable for some interpolated polarization. | unconditional | Gm numerical criterion in fibre-weight form; affine interpolation of the linearization weight; free-quotient descent | Bistability of the cylinder orbit comes from the birational identification of the extreme quotients in `def:gauged-admissible`(i); no boundary structure of the completion is used, so the argument is insensitive to the resolution |
-| `prop:gamma-ratio-reduction` | Every individual neutral fixed-graph coefficient has balanced Gamma-ratio form, while nonneutral homogeneous coefficients are Laurent-finite. | unconditional | Woodward exhaustive fixed loci and virtual-normal splitting; whole-integer Gamma continuation of each moving index; adjacent-ratio bubble factors; exact oriented residues | Does not construct a common contour for the complete nonlinear graph sum |
-| `thm:tailwise-derived` | Along each affine clutching tail, degree shifts identify the fixed derived clutching stacks, universal domains, evaluation maps, fixed parts of the relative perfect obstruction theories, virtual classes, stack automorphisms, and inertia gluing. | unconditional within the standing proper-DM/POT scope | Derived intersection of the two attracting strata; invariant Cech complex; fixed ordinary stable-map factors; the one-chart appendix carries out the attractor equivalence, obstruction-theory square, and rigidification descent, citing the mapping-stack cotangent formula (`ToenVezzosiHAGII`) as precedent while deriving the equivariant relative form and its perfectness internally, and fixing Woodward's obstruction morphism by convention so that the comparison with the derived truncation is made in the paper rather than imported from `SchurgToenVezzosi` | The universal gauged maps vary with affine degree; their invariant deformation complexes are constant only between thresholds |
-| `prop:clutching-tail-holonomicity` | Every complete neutral clutching tail is a finite nilpotent derivative of an affine Gamma recurrence, hence D-finite with tempered growth after exponential rescaling. | unconditional within the standing scope | Woodward clutching factorization and normal-complex splitting; `thm:tailwise-derived`; Gamma recurrence; neutral Stirling cancellation | Does not identify the finite threshold maps |
-| `def:finite-dual-cyclic-rees` | Defines the row-generated cyclic Rees--Stokes module by a finite monodromy--deck orbit and strict saturation inside a fixed finite ambient module. | definition | Cayley--Hamilton bounds the monodromy orbit; finite local freeness and strictness are required by `hyp:marked-threshold-wall` and `hyp:marked-threshold-zero` | Avoids assuming an ambient abelian/noetherian category of all coherent Stokes modules |
-| `hyp:marked-threshold-wall` | At every Artin level, ordinary degree, neutral direction, and sign or stability threshold, one marked local Fourier object induces a strict comparison of the cyclic Rees z-modules which intertwines formal monodromy and carries the Gamma point row. All maps respect Stokes/deck, Artin, derivative, and Rees data. | explicit inverse-system one-object comparison assumption | Not proved in the paper | `conj:gamma-window` would supply the required one-object comparisons; the available linear abelian GLSM theorem does not prove them for nonlinear virtual fixed graphs |
-| `def:reduced-nearby` | Defines reduced nearby cycles of a marked meromorphic Rees family by quotienting nearby cycles by the strict saturation of the monodromy--deck orbit of the variation image. | definition | Cayley--Hamilton and the deck orbit give stability; strictness and finite local freeness are required by `hyp:marked-threshold-zero` | Defined by the nearby/vanishing-cycle triangle, not by a choice of complementary summand |
-| `hyp:marked-threshold-zero` | At every zero-mode rank change, a marked meromorphic family realizes the two adjacent tails as its punctured boundary germs, its reduced nearby cycles are strict and finite locally free, specialization induces strict isomorphisms from the complete adjacent row-generated cyclic modules, and the one-object continuation induces a comparison with the same properties as at sign or stability thresholds. | explicit inverse-system one-object comparison assumption | Not proved in the paper | Compares row-generated reduced nearby-cycle modules, not ambient modules of unequal rank |
-| `conj:gamma-window` | Every threshold object of the two hypotheses exists and admits a Gamma/window presentation: boundary restrictions generated by Gamma sections of one common window containing the common-open skyscraper, wall-supported mutation cone, and wall-supported generation of the vanishing-cycle submodule at zero modes. | explicit conjecture, new to this manuscript | Not proved in the paper; would imply `hyp:marked-threshold-wall` and `hyp:marked-threshold-zero` | No instance is proved beyond the linear-toric calibrations recorded in `rem:verification-status` |
-| `rem:endpoint-only` | The cubic application needs gauged-admissibility and the threshold hypotheses only for birational maps `X × P^m -> P^(m+3)`, universally over maps with these endpoints. | unconditional observation | Direct inspection of the proof of `thm:intro-cubic-conditional` | The universal quantifier over maps with these endpoints cannot be dropped |
-| `lem:finite-threshold-gluing` | At a finite Artin level, the marked threshold maps glue the finitely many tail germs and preserve every primary Boolean. | formal implication from `hyp:marked-threshold-wall` and `hyp:marked-threshold-zero` | Finite ordered composition, strict zero-mode specialization isomorphisms, and polynomial primary projectors | Does not construct a threshold map |
-| `lem:cyclic-row-support` | The generalized-eigenvalue support detected by a covector is exactly the primary support of its dual cyclic module. | unconditional linear algebra | Primary decomposition of the cyclic row module | Does not construct the marked continuation |
-| `thm:birational-point-primary` | Nonvanishing of the point row on a formal-monodromy primary packet is invariant under smooth projective birational equivalence. | conditional | Gauged-admissible completion; support collapse; `thm:tailwise-derived`; clutching-tail holonomicity; `hyp:marked-threshold-wall`; `hyp:marked-threshold-zero`; finite threshold gluing; Rees half-Tate shift; cyclic-row spectral support | A one-row Boolean implication under the stated geometric assumptions and inverse-system marked-threshold family |
-| `lem:cubic-central-charge` | The unit component of the cubic Gamma point section is the cubic hypergeometric period, up to a nonzero constant and a half-integral power `z^{k-3/2}` with `k` integral. | unconditional, proved here | grading and Gamma factors evaluated on the top class; small `I`-function of the degree-three hypersurface with trivial mirror map by its `z^{-2d}` degree count | Givental mirror theorem for toric complete intersections; conventions absorbed into the constant and the integer `k`, the `z^{-3/2}` coming from the grading operator |
-| `prop:cubic-endpoint` | The cubic Gamma point row is nonzero on both primitive-sixth lines. | unconditional endpoint lemma | Cai matrices reconstructed through the exact indicial polynomial; direct hypergeometric Barnes coefficients | Cai is used only for the cubic connection and big/small flatness; point coefficient is proved independently |
-| `thm:intro-cubic-conditional` | For every smooth complex cubic threefold `X`, `X × P^m` is irrational for every `m ≥ 0` if every relevant birational map admits a gauged-admissible completion satisfying marked threshold compatibility. | conditional application | Cubic endpoint lemma; quantum Künneth; uniform projective-space exponent calculation; conditional birational point-primary invariance | The endpoint contrast is unconditional; `m=2` and higher remain conditional here |
+- Yuri Tschinkel and Zhijia Zhang, *Universal torsors over quartic del Pezzo
+  surfaces and stable rationality*, arXiv:2608.20029v1. Read depth: partial;
+  cached as `arXiv:2608.20029`, PDF SHA-256
+  `be1dedd42662eae0c9d83d08d7379cdd78974000f0be048db50680833a5d01e6`.
+  Sections checked: Theorem 2.4, Lemma 3.2, Theorem 3.4, Corollary 3.5,
+  Proposition 4.1, Lemma 4.2, Corollary 4.3, the levels paragraph, and
+  Propositions 5.1--5.2 at the uses made in the paper.
+- Anthony Várilly-Alvarado, *Arithmetic of del Pezzo surfaces*, Theorem 2.1,
+  for rationality of degree at least five del Pezzo surfaces with a rational
+  point; PDF SHA-256
+  `ed5b1bbade653b7feab309b5d43a775fbc971cead2d904a4f0e94c1aca8271af`.
 
-## Novelty language
+Two bounded title/snippet screens returned 45 displayed results for exact
+queries concerning rationality of a nonrational `Y x A1` and torus quotients
+parametrized by generic tangent projection. No displayed result met either discriminator. OpenAlex
+resolved the pinned DataCite DOI `10.48550/arXiv.2608.20029` to W7203907824
+with citing count zero; Crossref returned 404 and Semantic Scholar returned
+429.  The required three-graph closure therefore failed. MathSciNet and a
+systematic zbMATH search were not covered. The negative licenses no
+"to our knowledge" sentence.
 
-The manuscript uses direct proof verbs: “we prove,” “we isolate,” and “we
-formulate.” It does not use “first,” “new,” “novel,” “previously unknown,” or
-“to our knowledge” as priority claims.
+The durable audit with the verbatim search queries and service outcomes is
+`notes/2026-08-24-c925-tz-priority-judo-synthesis.md` in the monorepo.
 
-The closest source-level relationship is stated positively:
+## Claim ledger
 
-- Gu--Yu--Yu supply the formal pairing-preserving comparison and Fourier maps;
-- Shen--Shoemaker supply the extremal Gamma asymptotic blocks;
-- Lee--Lin--Qu--Wang supply ordinary-flop continuation;
-- Woodward and Gonzalez--Woodward supply the global gauged fixed-locus and
-  virtual Kalkman formulas;
-- Aleshkin--Liu supply the balanced linear Mellin--Barnes model; nonlinear
-  marked threshold compatibility remains an explicit hypothesis;
-- Cai supplies the cubic connection matrices and big/small flatness, while
-  the point coefficient is recomputed in the manuscript;
-- Reichelt--Schulze--Sevenheck--Walther identify the localized
-  Fourier--Laplace kernel used in the methodological boundary.
-
-Any later priority sentence requires a new literature audit and a new ledger
-row before entering the manuscript, README, metadata, or portfolio summary.
+| label | claim | proof source | novelty wording |
+|---|---|---|---|
+| `thm:torus-quotient` | A saturated cocharacter lattice with the stated unimodularity property gives a rational torus quotient of a variety parametrized by generic tangent projection. | Text proof; signed-minor orbit correction and displayed inverse graph. | No priority claim. |
+| `prop:tangent-section` | All four Tschinkel--Zhang minimal Picard types admit the required rank-three saturated sublattice and a descended good linear section. | Exact certificate plus incidence descent. | Complete only within the four types; no claim for all subgroups of `W(D5)`. |
+| `thm:two-variable` | `S x A2` is rational under the rational-point and stably-permutation hypotheses. | `thm:torus-quotient`, `prop:tangent-section`, and imported Tschinkel--Zhang/Voskresenskii results. | Stated as a theorem of this paper, without a global firstness claim. |
+| `cor:cubics` | Both Tschinkel--Zhang cubic families become rational after `P2`. | Generic-fibre function-field argument. | Direct consequence; their universal-torsor theorem remains an input. |
+| `cor:cancellation` | The two cubic threefolds have exact threshold two and yield `Y` nonrational with `Y x A1` rational. | `cor:cubics` plus the cited one-stabilization theorem. | No global firstness claim; the paper notes only the mathematical consequence. |

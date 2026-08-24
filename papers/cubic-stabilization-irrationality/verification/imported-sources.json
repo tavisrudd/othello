@@ -1,4 +1,16 @@
 {
+  "high-degree-del-pezzo": {
+    "citation": "VarillyAlvarado",
+    "conventions": [
+      {
+        "aspect": "domain",
+        "matched": "The contracted surface has degree at least five, characteristic zero, and a rational point.",
+        "requirement": "Theorem 2.1 applies to a del Pezzo surface of degree at least five with a rational point."
+      }
+    ],
+    "pinpoint": "Theorem 2.1",
+    "used": "A nonminimal quartic del Pezzo surface with a rational point is birational to a rational del Pezzo surface of degree at least five."
+  },
   "manin-stable-permutation": {
     "citation": "Manin1966",
     "conventions": [
@@ -79,8 +91,8 @@
       },
       {
         "aspect": "framing",
-        "matched": "The proof constructs the product map by translating a rational generic section before quotienting.",
-        "requirement": "Equivariant generic splitting, rather than abstract rationality of the total space, is needed for the subtorus quotient."
+        "matched": "The proof translates a generic rational section before quotienting first by the anticanonical scalar and then by the rank-three subtorus.",
+        "requirement": "Remark 2.2 gives splitting over the function field for the Neron--Severi torus; equivariance is supplied by translation."
       }
     ],
     "pinpoint": "Lemma 2.1, Remark 2.2, Theorem 3.4, and Corollary 3.5",

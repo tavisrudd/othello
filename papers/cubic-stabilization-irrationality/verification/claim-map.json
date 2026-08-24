@@ -1,0 +1,62 @@
+{
+  "cor:cancellation": {
+    "cautions": "Nonrationality imports the separate one-stabilization theorem; the rationality theorem alone does not prove the exact index.",
+    "conclusion": "Both cubic threefolds have stabilization index two over Q and C and yield nonrational Y with rational Y times A1.",
+    "coverage": "absent",
+    "declarations": [],
+    "digest": "71ab5e624d3e0f94d5d6c8f798de0da353a7f241eb6b4c7db93eb7c080de9e2d",
+    "environment": "corollary",
+    "hypotheses": "X is either displayed smooth Tschinkel--Zhang cubic threefold; the cited m=1 theorem is used after base change to C.",
+    "objects": "The field-indexed stabilization index and Y=X times P1."
+  },
+  "cor:cubics": {
+    "cautions": "This is restricted to the two Tschinkel--Zhang families, not every smooth cubic hypersurface.",
+    "conclusion": "X times P2 is rational over Q for every member of either family.",
+    "coverage": "absent",
+    "declarations": [],
+    "digest": "6c5f36f96720207d69ecb0fa220edb7b55380ba07e61d05340e233b434d6e3d5",
+    "environment": "corollary",
+    "hypotheses": "r is nonnegative and X is one of the cubics in Tschinkel--Zhang Propositions 5.1 or 5.2.",
+    "objects": "The two explicit families of cubic hypersurfaces."
+  },
+  "prop:tangent-section": {
+    "cautions": "The subgroup classification is complete only for the four hereditary-H1 types; no classification of all W(D5) subgroups is claimed.",
+    "conclusion": "A codimension-three tangent linear section exists geometrically and descends on every twist of the four types.",
+    "coverage": "absent",
+    "declarations": [],
+    "digest": "3e8ece42f81742ac18e8ada7001a8b328b30c0d90b8b53a5a923dc4b3e7dcac3",
+    "environment": "proposition",
+    "hypotheses": "The Cox parameters lie on the smooth open and the Galois image has type I0, I1, I2, or I3.",
+    "objects": "The saturated rank-three subtorus, complementary Cox-coordinate subspace, and tangent-frame incidence."
+  },
+  "rem:saturation": {
+    "cautions": "The degree-two artifact belongs to the parameter isogeny, not the Rosenlicht quotient.",
+    "conclusion": "Adjoining the half-sum saturates the cocharacter lattice and removes the projective mu_2 kernel.",
+    "coverage": "absent",
+    "declarations": [],
+    "digest": "493ead3382f13e96659af60cb2500e8bdf4ec6a56bc1bbb99da3a632d5c0c9fc",
+    "environment": "remark",
+    "hypotheses": "The three pairwise-sign cocharacters are used in the last three coordinates.",
+    "objects": "An index-two even-sum cocharacter sublattice and its saturation."
+  },
+  "thm:torus-quotient": {
+    "cautions": "A finite-index set of weight differences would give a finite orbit cover and does not suffice.",
+    "conclusion": "The Rosenlicht quotient Z/T is k-rational.",
+    "coverage": "absent",
+    "declarations": [],
+    "digest": "b13aaa37563c2b1f4b1354903ea10db5d824f975fae0f767857272ce7d6b9bf0",
+    "environment": "theorem",
+    "hypotheses": "A generically free rank-r torus action, birational generic tangent projection, a Galois-stable complementary subspace, an integral basis of weight differences, and a nondegenerate tangent linear section.",
+    "objects": "A torus action on a projective variety and its Rosenlicht quotient."
+  },
+  "thm:two-variable": {
+    "cautions": "Universal-torsor geometry and the four-type classification are imported from Tschinkel--Zhang.",
+    "conclusion": "S times A2 and S times P2 are k-rational; this applies to every stably k-rational S.",
+    "coverage": "absent",
+    "declarations": [],
+    "digest": "58121d919f0a6137a6896ef4ff7b3626a429e886672a25b9d129f96c9f7fd393",
+    "environment": "theorem",
+    "hypotheses": "Characteristic zero, S smooth quartic del Pezzo, S(k) nonempty, and geometric Picard lattice stably permutation.",
+    "objects": "A quartic del Pezzo surface and a two-dimensional stabilization."
+  }
+}

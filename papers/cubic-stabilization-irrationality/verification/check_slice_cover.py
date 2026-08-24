@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check the exact unimodular-window and smooth-moduli cover certificate."""
+"""Check the Cox-weight lattice and smooth-moduli tangent cover."""
 
 import argparse
 import itertools
@@ -24,6 +24,7 @@ def build_certificate():
     delta = a*b*(a-1)*(b-1)*(a-b)
 
     survivors = []
+    branch_outcomes = []
     for choices in itertools.product((0, 1), repeat=3):
         branch = [
             (minor_numerators if choice else determinant_numerators)[index]
@@ -32,7 +33,12 @@ def build_certificate():
         basis = sp.groebner(
             branch+[localizer*delta-1], localizer, a, b, order="lex"
         )
-        if not any(polynomial.as_expr() == 1 for polynomial in basis.polys):
+        empty = any(polynomial.as_expr() == 1 for polynomial in basis.polys)
+        branch_outcomes.append({
+            "chosen_zero_factors": "".join("M" if choice else "D" for choice in choices),
+            "localized_zero_locus": "empty" if empty else "survives",
+        })
+        if not empty:
             survivors.append({
                 "zero_choice_0_D_1_M": list(choices),
                 "smooth_localized_elimination_basis": [
@@ -46,6 +52,10 @@ def build_certificate():
     fourth_on_line = sp.Poly(fourth_product.subs(a, (b+2)/3), b).primitive()[1]
     fourth_factor = sp.factor(fourth_on_line.as_expr())
     fourth_quadratic = 83246*b**2-872181*b+2185995
+    bezout_left = 2265746679974131615-377042650728395274*b
+    bezout_right = 141417109727495582904*b-1342668830289072756147
+    bezout_constant = 24176690547344887359179755
+    assert sp.expand(bezout_left*first+bezout_right*fourth_quadratic) == bezout_constant
     checks = {
         "first_survivor_at_17_over_4": first.subs(b, sp.Rational(17, 4)),
         "first_survivor_at_85_over_16": first.subs(b, sp.Rational(85, 16)),
@@ -55,11 +65,11 @@ def build_certificate():
     }
     assert sp.gcd(fourth_on_line, sp.Poly(first*second, b)).degree() == 0
 
-    window = sp.Matrix(source["unimodular_weight_difference_matrix"])
-    assert abs(int(window.det())) == 1
+    weight_differences = sp.Matrix(source["weight_difference_matrix"])
+    assert abs(int(weight_differences.det())) == 1
     coefficient_matrix = sp.Matrix([
         [sp.Rational(value) for value in row]
-        for row in source["window_coefficient_matrix"]
+        for row in source["slice_coefficient_matrix"]
     ])
     maximal_minors = [
         coefficient_matrix[:, [column for column in range(4) if column != omitted]].det()
@@ -69,7 +79,13 @@ def build_certificate():
     assert all(value != 0 for value in maximal_minors)
 
     return {
+        "bezout_identity": {
+            "left_coefficient": str(bezout_left),
+            "right_coefficient": str(bezout_right),
+            "constant": str(bezout_constant),
+        },
         "corrected_first_three_branch_survivors": survivors,
+        "first_three_branch_outcomes": branch_outcomes,
         "fourth_product_on_survivor_line_factorization": str(fourth_factor),
         "human_coprimality_checks": {key: str(value) for key, value in checks.items()},
         "schema": source["schema"],
@@ -79,8 +95,9 @@ def build_certificate():
         "symbolic_tangent_smoothness_minors": source[
             "symbolic_tangent_smoothness_minors"
         ],
-        "unimodular_weight_difference_matrix": source["unimodular_weight_difference_matrix"],
-        "window_coefficient_matrix": source["window_coefficient_matrix"],
+        "tangent_orbit_witnesses": source["tangent_orbit_witnesses"],
+        "weight_difference_matrix": source["weight_difference_matrix"],
+        "slice_coefficient_matrix": source["slice_coefficient_matrix"],
     }
 
 

@@ -1,44 +1,35 @@
-export SOURCE_DATE_EPOCH = 1785888000
+export SOURCE_DATE_EPOCH = 1787875200
 export FORCE_SOURCE_DATE = 1
-
-# The tracked PDF is byte-reproducible.  The isolated-build check below makes
-# source/PDF staleness an exact failure instead of trusting latexmk's local
-# auxiliary-file state.  Use `make manuscript-update` to refresh the PDF from
-# the same clean deterministic build used by the release gate.
 
 TEXSHELL ?= nix develop ..\#manuscript --command
 LATEXMK ?= $(TEXSHELL) latexmk
 LATEXMK_FLAGS ?= -xelatex -interaction=nonstopmode -halt-on-error
-PYTHON ?= nix shell nixpkgs\#python3 -c python3
+PYTHON ?= uv run --with sympy==1.14.0 python3
+LINT_PYTHON ?= nix shell nixpkgs\#python3 -c python3
 SOURCE := cubic_stabilization_irrationality.tex
 
-.PHONY: all check evidence lint manuscript warnings manuscript-check manuscript-update clean distclean
+.PHONY: all check lint verify manuscript warnings clean distclean
 
-all: evidence lint manuscript-check
+all: lint verify manuscript
 
-check: evidence lint manuscript-check
-
-evidence:
-	$(PYTHON) verification/check_release_surface.py
-	$(PYTHON) verification/check_cubic_endpoint.py --check
+check: lint verify manuscript warnings
 
 lint:
-	$(PYTHON) ../scripts/lint_tex_spacing.py $(SOURCE) sections/*.tex
+	$(LINT_PYTHON) ../scripts/lint_tex_spacing.py $(SOURCE)
 
-manuscript: $(SOURCE) sections/*.tex refs.bib
-	$(PYTHON) ../scripts/lint_tex_spacing.py $(SOURCE) sections/*.tex
+verify:
+	$(PYTHON) verification/check_slice_cover.py \
+		--check-certificate verification/slice-cover-certificate.json
+	$(LINT_PYTHON) verification/check_metadata.py
+
+manuscript: $(SOURCE) formal-annotations.tex
+	$(LINT_PYTHON) ../scripts/lint_tex_spacing.py $(SOURCE)
 	$(LATEXMK) $(LATEXMK_FLAGS) $(SOURCE)
 
 warnings: manuscript
 	@if grep -En 'Overfull|Underfull|LaTeX Warning|Package .* Warning|undefined references|Citation .* undefined' cubic_stabilization_irrationality.log; then \
 		exit 1; \
 	fi
-
-manuscript-check:
-	$(TEXSHELL) python3 verification/check_manuscript_build.py
-
-manuscript-update:
-	$(TEXSHELL) python3 verification/check_manuscript_build.py --update
 
 clean:
 	$(LATEXMK) -c $(SOURCE)
