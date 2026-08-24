@@ -3,9 +3,9 @@
 
 Relative generalized weights record minimum support sizes.  They do not
 record the overlap pattern of all recovery sets, which controls stochastic
-repair, and they do not record the target coefficient presentation, which
-enters the additive confinement threshold.  We give one separation of each
-kind.
+repair.  Nor do they record the target coefficient presentation, which can
+change $d(I^\perp)$ and hence the sum $M_t(D_P,K_P)+d(I^\perp)$.  We give one
+separation of each kind.
 
 First consider a one-dimensional recovered space.  On the helper set
 $\{0,\ldots,8\}$, let
@@ -94,10 +94,18 @@ four helpers are independent.  A hyperplane containing $x$ contains at most
 one displayed collinear triple, and such a triple gives four columns in a
 hyperplane.  Thus the maximum hyperplane intersection has size four, so both
 codes have distance $10-4=6$.
+\proves{prop:rank-one-reliability-separation}%
 \end{proof}
 
 The rank-one separation extends to every quotient rank without changing any
-relative generalized weight.
+relative generalized weight.  For a nested pair $K\subseteq D\leq\F_q^J$
+with $\dim(D/K)=\ell$, define its radius-$R$ full-quotient reliability by
+\[
+ \Pr\{\exists L\leq D:\ L+K=D,\ |\supp L|\leq R,
+                     \ \supp L\subseteq S\},
+\]
+where $S\subseteq J$ is the random set of independently surviving helpers,
+each present with probability $s$.
 
 \begin{theorem}[Equal relative weights, different reliability for full recovery]
 \label{thm:rghw-reliability-separation}
@@ -158,6 +166,7 @@ isomorphism $\alpha:\F_q^\ell\to D/K\leq V$.  The generator map
 has helper kernel $K$ and helper preimage of the target span equal to $D$.
 Its associated nested pair is therefore $K\subseteq D$.
 \uses{prop:rank-one-reliability-separation}%
+\proves{thm:rghw-reliability-separation}%
 \end{proof}
 
 The second separation fixes the nested pair itself.  Let
@@ -183,7 +192,9 @@ and then by
 The two inner codes have the same associated nested pair, the same unlabeled
 set of helper supports, and the same complete relative-weight
 hierarchy.  Their inner-dual weight multisets are respectively
-$\{2,3,5\}$ and $\{3,3,4\}$.  Hence their confinement thresholds are
+$\{2,3,5\}$ and $\{3,3,4\}$.  Hence their values of
+$M_t(D,K)+d(I^\perp)$, equivalently their eventual confinement thresholds,
+are
 \[
  (\Gamma_1,\Gamma_2)=(3,5)
  \qquad\text{and}\qquad
@@ -203,4 +214,5 @@ presentation and three in the second.  Adding this distance to
 $(M_1,M_2)=(1,3)$ gives the two threshold sequences by
 Theorem~\ref{thm:ranked-confinement}.
 \uses{thm:ranked-confinement}%
+\proves{prop:coefficient-presentation}%
 \end{proof}

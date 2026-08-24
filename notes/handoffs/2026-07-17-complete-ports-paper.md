@@ -3,20 +3,20 @@
 **Lane**: `complete-ports`
 
 **Date**: 2026-08-24
-**Status**: ACTIVE; C950 PRIMARY-PAPER ARCHITECTURE AND C951 PAPER-LOCAL FORMAL
-BOUNDARY COMPLETE; C952 MANUSCRIPT REBUILD IN PROGRESS; C325 APPENDIX VERIFIER AND C953 AGGREGATE
+**Status**: ACTIVE; C950--C952 ARCHITECTURE, PAPER-LOCAL FORMAL BOUNDARY, AND
+17-PAGE MANUSCRIPT REBUILD COMPLETE; C325 APPENDIX VERIFIER AND C953 AGGREGATE
 REVIEW FOLLOW IN THAT ORDER; REMOTE PUBLICATION GATED
 **Theorem source lane**: archived [`repaircodes`](done/2026-07-13-projective-completion-repaircodes.md)
 **Current private paper**: [`complete-repair-ports`](../../papers/complete-repair-ports/README.md)
-**Canonical paper identity**: `complete-ports` — *Bounded Recovery Structures of Linear Codes:
-Transfer, Reliability, and Geometry*
+**Canonical paper identity**: `complete-ports` — *Exact Transfer of Bounded Linear Recovery and
+Relative Weight Hierarchies*
 **Approved paper repository**: `tavisrudd/complete-ports` at `~/src/papers/complete-ports`
 **Approved paper license**: MIT
 
 ## Goal
 
-Produce one short theorem-led complete-ports manuscript whose main proof spine consists entirely of
-complete human proofs backed by statement-adequate Lean declarations. Computations, finite tables,
+Produce one short theorem-led complete-ports manuscript whose main proof spine consists of complete
+human proofs and whose formal coverage is stated claim by claim. Computations, finite tables,
 certificates, and replay machinery may support appendices but may not carry a body theorem. Public
 release remains a separate fresh-history operation that never publishes the private monorepo or its
 history.
@@ -27,14 +27,13 @@ A result enters the body proof spine only when it has:
 
 1. an exact stable paper statement;
 2. a complete human proof exposing the mathematical mechanism;
-3. a matching Lean declaration;
-4. a field-by-field statement-adequacy check;
-5. an axiom audit naming every classical imported input; and
-6. no computation or certificate in its logical dependency chain.
+3. an explicit formal-coverage classification;
+4. exact attribution of every imported mathematical input; and
+5. no computation or certificate in its logical dependency chain.
 
-Results failing this gate are marked `TO FORMALIZE`, `APPENDIX COMPUTATION`, or `CUT/DERIVE`.
-Classical literature inputs may remain cited, but the paper and Lean boundary must expose the same
-input explicitly.
+Only the associated-pair exact sequence is currently Lean-complete.  Every stronger theorem is
+marked absent from the paper-local Lean package and is supported by its human proof and cited
+classical inputs.
 
 ## Current paper spine
 
@@ -89,6 +88,12 @@ Completed preparation:
 
 Completed strengthening:
 
+- [C952 manuscript rebuild](../2026-08-24-c952-recovery-manuscript-rebuild.md)
+  produces the 17-page theorem-led paper, strengthens confinement to its exact
+  finite outer gate, gives the target/helper-symmetric MDS staircase, records
+  the four-terminal paper-local Lean boundary, and passes independent referee
+  and exact-manifest standalone checks without export or push.
+
 - [C944 recovery-terminology revision](../2026-08-22-c944-complete-ports-recovery-terminology.md)
   removes “port” as visible technical terminology, distinguishes exact helper
   supports from the upward-closed recovery-set family, preserves normalized
@@ -125,42 +130,32 @@ Sequel research:
 ## Publication boundary
 
 Every paper is a fresh-history allowlisted export. Never publish, fork, history-filter, or broadly
-copy the private monorepo. The shared Lean monorepo is separately owned and derived from the union of
-paper-facing target closures. Compiled Lean reuse requires the guarded `lake pack` path plus an
-independent restore/trace validation; never copy raw build trees or selected `.olean` files.
+copy the private monorepo. This paper's formal companion is the paper-local Mathlib package listed
+in its exact 37-file distribution manifest; monorepo trust files and local `lean/AGENTS.md` norms are
+excluded. The shared Lean monorepo remains separately owned. Never copy raw build trees or selected
+`.olean` files.
 
 ## Current scope
 
-Retain the exact transfer theorem, positive-density realization, represented
-$[10,4,6]$ separation, only the pointed-Tutte material required by that
-separation, compact MDS reconstruction, the service-rate corollary, and the
-projective simplex example. Compress or move extended EXIT,
-deletion--contraction, secondary geometric inventories, and competing examples.
-Exclude sequential composition, vector-bandwidth claims, the full coefficient-
-optimization programme, generic tract/foundation exposition, and BGS packing.
-
-The manuscript now includes one bounded cross-paper application. For the
-Clebsch `[6,3,4]_11` code, its full family of normalized recovery equations
-reconstructs the inner code, has `z_x=8`, and occurs with density `1/6` in an
-asymptotically good fixed-`F_11` family. The support-only clutter is generic
-MDS data; the scalar coefficient layer is the exact Clebsch-bearing part.
-The proof ledger records this as manuscript-derived rather than a new Lean
-terminal.
+The rebuilt manuscript contains the associated nested code pair, its RGHW
+interpretation, exact finite and eventual rank-stratified confinement,
+best-target GHW and cooperative-locality consequences, the symmetric MDS
+staircase and rigidity, positive-density and service-rate transfer, reliability
+and coefficient-presentation separations, and the projective-simplex family.
+Extended EXIT, deletion--contraction, secondary geometries, vector bandwidth,
+generic coefficient optimization, and BGS packing remain outside this paper.
 
 ## Next step
 
-C950 froze the exact section/theorem architecture and retain/rewrite/move/cut
-map without editing the manuscript. C951 froze the paper-local formal boundary.
-Run C952 manuscript reconstruction next, then C325 appendix-only verification and C953
-aggregate referee/export review. Before nontrivial proof development or
+C952 is closed. Run C325 appendix-only verification next, then C953 aggregate
+referee/export review. Before nontrivial proof development or
 formalization, read the paper-specific expert dossier
 [`papers/expert-profiles/05-complete-repair-ports.md`](../../papers/expert-profiles/05-complete-repair-ports.md).
 
 The prior monolithic draft and its cold reads remain inputs, not acceptance of the modular
 hierarchy. C220 remains omitted. Shared-Lean extraction is planned under
-[C287](../2026-07-17-c287-shared-lean-extraction-plan.md) and remains separately build-system-owned.
+[C287](../2026-07-17-c287-shared-lean-extraction-plan.md), remains separately build-system-owned,
+and is not evidence for or a release dependency of the paper-local companion.
 
-Public export remains gated on the public checker/archive identity and C287 shared-Lean export. The
-paper repo pins an exact validated shared-Lean commit and contains no copied Lean sources. The
-approved repository metadata and private rename do not authorize repository initialization, copy,
-publication, or push.
+Public export remains gated on C325 and C953 plus the explicit mirror/export workflow. The approved
+repository metadata and private rename do not authorize synchronization, publication, or push.

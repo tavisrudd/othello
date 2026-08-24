@@ -292,6 +292,10 @@ reason = "internal theorem-adoption ledger; public claims remain in the manuscri
 path = "verification-map.md"
 reason = "internal lane-to-proof map; the appendix states the public verification boundary"
 
+[[repository.exclude_symlink]]
+path = "lean/AGENTS.md"
+reason = "private link to monorepo Lean working norms; not part of the scholarly artifact"
+
 [[repository]]
 name = "continuation-graph-rigidity"
 source = "papers/continuation-graph-rigidity"

@@ -32,11 +32,14 @@ and
  d(I_m^\perp)=q^{m-1}+1.
  \label{eq:projective-dual-distance}
 \end{equation}
-Hence the first nonconfined helper cost at recovered dimension $t$ is
+Hence
 \begin{equation}
- \Gamma_t=\frac{q^m-q^{m-t}}{q-1}+q^{m-1}+1.
+ \Gamma_t:=M_t(S_m,0)+d(I_m^\perp)
+ =\frac{q^m-q^{m-t}}{q-1}+q^{m-1}+1.
  \label{eq:projective-thresholds}
 \end{equation}
+In outer families with dual distance tending to infinity, $\Gamma_t$ is the
+eventual first nonconfined helper cost at recovered dimension $t$.
 The family is non-MDS for $m\geq2$; for $m\geq3$ the successive increments
 of $\Gamma_t$ are unequal.
 \end{theorem}
@@ -61,6 +64,7 @@ which proves~\eqref{eq:projective-dual-distance}.  The confinement formula is
 Theorem~\ref{thm:ranked-confinement}.  The non-MDS and increment assertions
 follow from the displayed parameters.
 \uses{thm:ranked-confinement}%
+\proves{thm:projective-thresholds}%
 \end{proof}
 
 This family also gives an exact stochastic law at every recovered dimension.
@@ -139,10 +143,14 @@ size $M_t$, and there are $\qbinom{m}{m-t}=\qbinom{m}{t}$ such subspaces.
 For $s\to1$, failure first occurs when the failed points span dimension
 $m-t+1$.  A smallest such set is a projective frame of that size.  Counting
 its span and then its unordered projective bases gives $B_{m,m-t+1}$.
+\proves{thm:projective-reliability}%
 \end{proof}
 
 At the same helper length, the simplex presentation is characterized by its
-first recovery cost.
+first recovery cost.  This is the length-$N$, multiplicity-one specialization
+of Bonisoli's classification of linear equidistant codes
+\cite{Bonisoli1984}; the proof below records the precise zero-column and
+projective-multiplicity conventions used here.
 
 \begin{proposition}[Equality in the first projective bound]
 \label{prop:projective-uniqueness}
@@ -175,4 +183,5 @@ the form $(r-\lambda)I+\lambda J$ with $r>\lambda$.  It is nonsingular, so
 the constant hyperplane-sum equations have the unique solution
 $c=\mathbf1$.  Conversely, the simplex matrix has constant nonzero weight
 $q^{m-1}$.
+\proves{prop:projective-uniqueness}%
 \end{proof}

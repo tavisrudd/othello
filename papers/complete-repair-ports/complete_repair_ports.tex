@@ -53,14 +53,16 @@ target set, and put $J=E\setminus P$.  The target and helper parts of a
 generator matrix determine a nested pair
 $K_P\subseteq D_P\leq\mathbb F_q^J$.  We identify its relative generalized
 Hamming weight $M_t(D_P,K_P)$ with the minimum helper union needed to recover
-$t$ independent target combinations.  In concatenations whose outer dual
-distance tends to infinity, every such recovery system using at most $r$
-helpers is eventually confined to its inner block exactly when
+$t$ independent target combinations.  For any linear outer code $O$ with at
+least two blocks and $d(O^\perp)>r+1$, every such
+recovery system using at most $r$ helpers is confined to its inner block
+exactly when
 \[
  r<M_t(D_P,K_P)+d(I^\perp).
 \]
-Below this threshold, concatenation preserves all bounded recovery sets and
-their normalized dual equations.
+Below this threshold, concatenation preserves every bounded normalized dual
+recovery equation, its exact helper support, and every inclusion-minimal
+recovery set.
 
 Consequences include an exact best-target generalized-weight formula, exact
 MDS thresholds, transfer of bounded service-rate regions, and
@@ -81,7 +83,8 @@ Locality asks how many helpers recover one erased coordinate.  Cooperative
 locality and $(r,\delta)$-locality ask for recovery after several erasures, and
 availability asks for disjoint choices of helpers.  Generalized Hamming
 weights give global lower bounds for cooperative recovery
-\cite{GopalanEtAl2012,PamiesEtAl2013,AbdelGhaffarWeber2017}.  Recovery sets and
+\cite{RawatMazumdarVishwanath2015,GopalanEtAl2012,PamiesEtAl2013,
+AbdelGhaffarWeber2017}.  Recovery sets and
 coordinate-indexed recovery structures record more local information
 \cite{MarquezCorbellaEtAl2019}, but support data alone discard the dual
 coefficients that implement the recovery equations.
@@ -90,10 +93,14 @@ This paper identifies the relative generalized Hamming weights of the
 associated nested pair in the generator matrix as the exact fixed-target
 helper costs.  The same quantities are then the sharp obstructions to exact
 transfer through concatenation.  Relative generalized Hamming weights and
-their access interpretation for nested codes are classical
-\cite{GeilEtAl2014,SanJose2025,Geil2026}.  The result here is their local
-recovery and concatenation role, including the transfer of every minimizing
-equation rather than only the numerical weight.
+the relative dimension/length profile were introduced for nested codes by
+Luo, Mitrpant, Vinck, and Chen, who interpreted them as access thresholds in
+a wiretap model~\cite{LuoEtAl2005}; later work develops their
+ramp-secret-sharing and algorithmic roles
+\cite{GeilEtAl2014,SanJose2025,Geil2026}.  The result here is the canonical
+nested pair attached to a represented target/helper split, its exact recovery
+interpretation, and its sharp concatenation role, including transfer of every
+minimizing equation rather than only the numerical weight.
 
 Let $q$ be a prime power.  Let $I\leq\F_q^E$ have a full-row-rank generator matrix
 $G=(G_P\mid G_J)$, where $P$ is the target set and $J=E\setminus P$.  Put
@@ -109,8 +116,13 @@ and define the associated nested code pair
 \]
 We assume $0<\dim I<|E|$, so both the represented message space and
 $I^\perp$ are nonzero.
+We use the convention $d(0)=\infty$ for the zero code.
 The quotient $D_P/K_P\cong W_P$ is exactly the space of target linear
 combinations recoverable from the helper coordinates.
+Here $t$ is the dimension of a recovered subspace of $W_P$, not the number
+of erased coordinate positions.  Recovering all values on $P$ is the special
+case $U_P\subseteq\operatorname{im}G_J$ and $t=\dim U_P$; dependent target
+columns may make this dimension smaller than $|P|$.
 
 \begin{theorem}[Main theorem]
 \label{thm:main}
@@ -122,10 +134,10 @@ $W_P$ is
 \[
  \mu_t(P)=M_t(D_P,K_P).
 \]
-Let $I$ be used as the fixed represented inner code in a family of
-concatenations with $L$-linear outer codes, where $L$ is the message space of
-$I$, and suppose the outer dual distance tends to infinity.  For every fixed
-$r$, all sufficiently long concatenations confine every recovery system using
+Let $I$ be used as the represented inner code in a concatenation with an
+$L$-linear outer code $O\leq L^N$, where $L$ is the message space of $I$.
+For every nonnegative integer $r$, if $N\geq2$ and
+$d(O^\perp)>r+1$, then the concatenation confines every recovery system using
 at most $r$ helpers for every internally recoverable $t$-dimensional target
 subspace to its target inner block if and only if
 \[
@@ -133,6 +145,9 @@ subspace to its target inner block if and only if
 \]
 When the inequality holds, zero-extension gives a bijection on the normalized
 recovery-equation systems and their exact helper supports.
+Consequently, for any outer family with dual distance tending to infinity,
+the same statement holds for all sufficiently long concatenations at every
+fixed $r$.
 \end{theorem}
 
 The first assertion follows by identifying a recovery system with a subspace
@@ -140,8 +155,17 @@ $A\leq D_P$ disjoint from $K_P$.  Passing between this form and the standard
 definition of $M_t(D_P,K_P)$ uses a complement to $A\cap K_P$.  The second
 assertion combines that identity with a fixed-demand dual decomposition: a
 nonconfined recovery system consists of its least inner realization together
-with a nonzero inner-dual perturbation in another block.  Outer dual-distance
-growth eventually removes every nonzero outer-functional alternative.
+with a nonzero inner-dual perturbation in another block.  The finite outer
+gate removes every nonzero outer-functional alternative; dual-distance growth
+makes that gate automatic at fixed radius.
+
+The same bijection yields the later transfer results.  It preserves every
+block-local statistic determined by normalized recovery systems of cost at
+most $r$.  After forgetting coefficients, it also preserves statistics
+determined by inclusion-minimal helper supports, including bounded repair
+reliability and the bounded service-rate region.  This statement is
+block-local: the upward-closed recovery-set family in the full concatenated
+coordinate set also contains irrelevant cross-block supersets.
 
 The theorem contains the previous one-coordinate criterion.  If $P=\{x\}$
 and $t=1$, then $M_1(D_P,K_P)$ is the least number of helpers in a dual word

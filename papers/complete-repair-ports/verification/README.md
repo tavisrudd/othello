@@ -1,86 +1,56 @@
-# Formal verification boundary
+# Verification boundary
 
-This directory identifies the exact Lean boundary supporting the paper. It
-does not treat a generated table or native computation as a proof of a body
-theorem.
+The manuscript has two independently inspectable verification layers.
 
-The field-seven sparse-paving representations have an independent exact
-finite replay:
+The paper-local Mathlib package in `lean/` proves the exact sequence attached
+to the target/helper split. Its reviewer interface contains four terminals,
+and its kernel axiom audit reports exactly `Classical.choice`, `Quot.sound`,
+and `propext`. The claim map in `lean/verification/claims.json` records one
+Lean-complete manuscript statement and sixteen statements with no Lean
+coverage. In particular, the relative-weight identity and concatenation
+theorems have human proofs only.
 
-~~~text
-python3 verification/f7-seed.py \
-  --check verification/f7-seed.json
-~~~
+The source-only annotation check is
 
-This checks the displayed circuit-hyperplane lists and their derived pointed
-rank-triple multiplicity enumerator and radius-three reliability data.  The
-body proof uses the displayed
-minor ledger and the structural sparse-paving argument; it does not use the
-script as a proof.
+```text
+python3 lean/verification/check_formal_artifact.py --source-only
+```
 
-The stronger matched seeds also have a concrete independent instance over
-`F_29`:
+It checks that every theorem-like environment has exactly one claim-map row,
+that coverage and reviewer-terminal annotations agree, that every `uses`
+reference resolves, that each detached proof names exactly one statement with
+`proves`, that the terminal inventory partitions the Lean source, and that the
+expected-axiom inventory covers the same four terminals. This mode does not
+invoke Lean.
 
-~~~text
-python3 verification/matched-seed.py \
-  --check verification/matched-seed.json
-~~~
+The standalone Lean package can be rebuilt from `lean/` using the pinned
+toolchain and Mathlib revision described in `lean/README.md`. Its axiom-audit
+module is part of that build.
 
-This checks the two `4 x 10` matrices, all three- and four-column ranks, the
-complete circuit-hyperplane lists, `[10,4,6]` parameters and dual distance
-four, equality of the pointed rank-triple histograms, the matched clutter
-statistics, and the distinct reliability polynomials. The manuscript's
-line-arrangement and generic-lift proof is independent of this concrete
-cross-check.
+The release verifier
 
-The immutable inputs are recorded in formal-boundary.json:
-
-- finitegeom repository https://github.com/tavisrudd/finitegeom;
-- finitegeom release commit 36c83268ddaeec9ee22824cad44d6222a9e67081;
-- Lean v4.32.0-rc1;
-- mathlib revision 571b8a8e54219b4d393f75f4b8653fac08197fcc;
-- import-only gate RepairPorts.Gates.CompletePorts;
-- 36 modules and 61 paper-facing terminals.
-
-From a checkout of the public finitegeom repository at the pinned release
-commit, the complete library replay is:
-
-~~~text
-git clone https://github.com/tavisrudd/finitegeom.git
-cd finitegeom
-git checkout 36c83268ddaeec9ee22824cad44d6222a9e67081
-nix run .#verify
-~~~
-
-The area statement is `trust/COMPLETE_PORTS.md`; its two content-addressed
-source manifests agree on the 36-module closure and 61 terminals. The observed
-axiom union is exactly `Classical.choice`, `Quot.sound`, and `propext`. The
-strict weighted example remains conditional on the regular Singer-action
-hypothesis displayed in its theorem statement.
-
-The paper-local release verifier rejects stale PDFs, TeX warnings, stale seed
-evidence, metadata drift, private-repository coupling, missing AI disclosure,
-and malformed formal-boundary pins:
-
-~~~text
+```text
 nix develop .#manuscript --command \
   python3 verification/verify_release.py
-~~~
+```
 
-After the area export has been adopted in a public finitegeom checkout, the
-full release gate additionally binds the paper to that exported manifest and
-the clean adopted finitegeom revision recorded as
-`finitegeom_release_commit` in `formal-boundary.json`:
+checks the public source inventory, metadata, formal-boundary metadata,
+machine-readable annotations, TeX warnings, expected page count, and bytewise
+identity of the tracked PDF with a deterministic clean build. It does not
+infer formal coverage from prose or from older external libraries.
 
-~~~text
-nix develop .#manuscript --command \
-  python3 verification/verify_release.py \
-    --require-public-formal --lean-root /path/to/finitegeom
-~~~
+`verification/distribution-files.txt` is the explicit shipped-file manifest.
+Every listed text file is scanned for private paths and workflow identifiers.
+In a standalone checkout, the verifier also requires the Git tracked-file set
+to equal that manifest, so an unlisted tracked file fails the release gate.
 
-Refresh the tracked PDF only through the same deterministic checker:
+Refresh the tracked PDF only through the deterministic path:
 
-~~~text
+```text
 nix develop .#manuscript --command \
   python3 verification/verify_release.py --update-pdf
-~~~
+```
+
+No exhaustive computation is a premise of a manuscript theorem. The finite
+reliability table is printed in the paper and evaluated there by
+inclusion--exclusion.

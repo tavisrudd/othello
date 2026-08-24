@@ -7,16 +7,17 @@ It contains no score, venue recommendation, or overall quality judgment.
 
 For the associated nested pair `K_P <= D_P`, the `t`th relative generalized
 Hamming weight is the minimum helper-union cost for recovering a
-`t`-dimensional target message subspace. In fixed-inner concatenations with
-outer dual distance tending to infinity, every radius-`r` system at that
-recovered dimension is eventually confined exactly when
+`t`-dimensional target message subspace. For a fixed outer code with at least
+two blocks and `d(O^perp)>r+1`, every radius-`r` system at that recovered
+dimension is confined exactly when
 
 ```text
 r < M_t(D_P,K_P) + d(I^perp).
 ```
 
 Below the gate, restriction and zero-extension are inverse on normalized
-recovery systems and preserve exact helper supports.
+recovery systems and preserve exact helper supports. Outer dual-distance
+growth makes the finite outer gate automatic at fixed radius.
 
 ## Questions for the main proof
 
@@ -25,26 +26,30 @@ recovery systems and preserve exact helper supports.
 2. Does the complement argument prove equality with the standard RGHW rather
    than a restricted variant?
 3. Does the block-functional proof retain the nonzero outer-functional branch
-   until outer dual-distance growth removes it?
+   until the explicit finite outer gate removes it?
 4. Is the block-support bound `r+1`, including the target block, stated and
    used?
 5. Does necessity construct a nonconfined system at the exact additive cost?
-6. Is the eventual quantifier stated before the equivalence?
+6. Is the finite gate stated before the equivalence, with the eventual family
+   form only as its consequence?
 7. Does the singleton reduction account for the target coordinate?
 
 ## Questions for consequences
 
 1. Is the best-target formula proved in both directions by a dual subcode and
-   its information set?
-2. Is the MDS relative-weight formula derived from uniformity, with
-   `p <= k` and `|J| >= k` visible?
+   its information set, and does its escape argument handle dependent target
+   columns by separating `im G_P` from target-kernel equations?
+2. Is the MDS relative-weight formula derived from uniformity with
+   `u=min(k,|P|)`, `b=min(k,|J|)`, `ell=u+b-k`, and `M_t=k-u+t`, and is
+   `|J| >= k` used only for `ell=u` and equality in the global ceiling?
 3. Does equality at rank one force each inequality in the ceiling chain?
 4. Are positive outer rate and primal distance separate hypotheses from outer
    dual-distance growth?
 5. Does the manuscript prove existence of outer families meeting the three
    asymptotic requirements?
 6. Does service-rate transfer use minimal-support domination instead of
-   equating the global upward-closed set families literally?
+   equating the global upward-closed set families literally, and does it state
+   the finite gate `d(O^perp)>r+1` or the corresponding eventual qualifier?
 
 ## Questions for separations
 

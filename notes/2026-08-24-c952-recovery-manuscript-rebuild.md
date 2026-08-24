@@ -95,12 +95,11 @@ human-only.
 
 ## Open manuscript work
 
-- Hand the rebuilt source to the separately scheduled verifier refresh and
-  independent referee review.
+- Obtain post-repair independent referee reads.
 
 ## Validation state
 
-- A clean temporary XeLaTeX build produces a 16-page PDF.
+- The post-referee manuscript builds to a 17-page PDF.
 - The annotation census finds 17 theorem-like environments, 17 coverage
   annotations, one Lean-complete statement, and no Lean terminal attached to
   an absent statement.
@@ -115,11 +114,20 @@ human-only.
   or visible use of `port` as terminology.
 - The PDF title and author metadata match the manuscript.
 - `.zenodo.json` parses successfully, and scoped `git diff --check` passes.
-- The tracked release PDF was not updated and no mirror was touched.
-- The existing release verifier still expects the former source commit,
-  23-page PDF, and shared-Lean evidence boundary. Its failure is an expected
-  stale-verifier signal; the separately scheduled verifier task owns that
-  refresh.
+- The tracked release PDF is the deterministic 17-page rebuild. Extracted
+  first-page text has the current title and abstract and contains none of the
+  former shared-library boundary language.
+- The release verifier now checks the paper-local 17-claim/four-terminal Lean
+  package and no longer imports the former 36-module/61-terminal boundary.
+- `make check` passes on the tracked deterministic PDF: 17 pages, warning-free,
+  17 annotated claims, and four reviewer terminals.
+- Four obsolete field-seven/matched-seed replay files were removed from the
+  paper directory because no theorem in the rewritten manuscript depends on
+  them; their history remains recoverable from Git.
+- The local `lean/AGENTS.md` symlink points to the monorepo Lean norms and is
+  explicitly excluded from publication; neither that file nor the norms are
+  copied by the publication allowlist.
+- No mirror or external deposit was changed.
 
 ## Trust boundary
 
@@ -149,14 +157,161 @@ It confirmed the following points.
 
 ### Mystery ledger
 
-No unresolved mathematical mystery remains inside the admitted theorem chain.
-Two evidence/packaging gaps remain visible and have named downstream gates:
+The first independent referee read found one proof gap in the best-target
+escape consequence: the proof applied a recovered-message theorem directly to
+the full coordinate identity when the target columns could be dependent. The
+repair now factors the identity through `im G_P`, proves that target-kernel
+directions use no helpers, and then repeats the block-functional lower and
+attainment argument. The same read found and closed the abstract's
+upward-closure overstatement and the stale release package.
 
-1. the release verifier and tracked PDF still describe the preceding
-   manuscript and require the scheduled verifier refresh; and
-2. the rebuilt paper has not yet received the scheduled independent aggregate
-   referee read.
+The original independent referee re-read the repaired tree and returned PASS:
+all eight prior mathematical, terminology, citation, metadata, and release
+findings are closed. A fresh independent referee then found a finite-length
+quantifier error in the service-rate corollary. The corollary now assumes the
+exact outer gate `d(O^perp)>r+1` and states the growing-dual-distance family
+consequence only eventually. The same qualifier is explicit in the
+positive-density statement and conclusion.
+
+The fresh read also prompted four non-theorem repairs: the concatenated
+normalization for a fixed inner target space and the outer-coordinate
+surjectivity criterion are explicit; full-quotient reliability is defined
+before use; every detached proof carries a checked `proves` label; and the
+release gate consumes an exact 37-file distribution manifest and rejects
+unexpected tracked files in a standalone checkout.
+
+A subsequent qualification-removal pass strengthened the confinement
+statements from an eventual-family formulation to the exact finite form.  For
+one `L`-linear outer code, `N>=2` and `d(O^perp)>r+1` remove every nonzero
+outer-functional tuple, after which the inner inequality
+`r<M_t(D_P,K_P)+d(I^perp)` is necessary and sufficient.  Outer families of
+growing dual distance now appear as a corollary.  The abstract, main theorem,
+two confinement theorems, claim manifest, theorem map, proof ledger, README,
+and reviewer guide state the same quantifiers.
+
+The same pass added two scope clarifications.  Recovery rank `t` is the
+dimension of a subspace of `W_P`, not the cardinality of the erased target
+set; full target recovery is the case `U_P` lies in the helper-column span and
+`t=dim U_P`.  A single block-local transfer paragraph explains that normalized
+systems transfer coefficient-dependent statistics and their inclusion-minimal
+supports transfer reliability and service-rate data, while explicitly
+excluding equality of the global upward-closed set families.
+
+The MDS calculation now has no target-size or helper-span restriction.  With
+`u=min(k,|P|)` and `b=min(k,|J|)`, it gives `ell=u+b-k` and
+`M_t=k-u+t` for every recoverable rank `1<=t<=ell`.  The helper-span
+hypothesis `|J|>=k` is used only for `ell=u` and equality in the global
+ceiling.  This follows directly from the uniform-matroid intersection formula;
+no relative-MDS property is assumed.
+
+The exact 37-file distribution was also copied into a temporary standalone
+Git repository and checked there.  The manifest equality gate, deterministic
+TeX rebuild, source-level formal checker, 17-claim partition, four Lean
+terminals, and byte comparison all passed; the result was 17 warning-free
+pages.  No Lean or Lake command was run.
+
+A final fresh read identified four unused private control files that still
+described the superseded monolithic manuscript and shared formal boundary:
+`formalization-ledger.md`, `formal-statement-adequacy.md`,
+`verification-map.md`, and `claim-proof-novelty-ledger.md`.  They were not in
+the public distribution manifest and no current file referred to them.  They
+were removed; the current control surfaces are `theorem-map.md`,
+`proof_ledger.md`, `referee-dossier.md`, the claim manifest, and the reviewer
+guide.
+
+The same read found one strict annotation-boundary mismatch.  The four named
+Lean terminals prove the inclusion, image, surjectivity, and kernel statements
+making up the displayed exact sequence, but no named terminal states the
+quotient isomorphism.  The quotient sentence was moved outside the
+Lean-complete proposition and is now explicitly obtained by the first
+isomorphism theorem.  Thus `complete` scopes exactly to what the four reviewer
+terminals state; the quotient consequence remains a human derivation.
+
+The projective and coefficient-presentation examples were also synchronized
+with the finite outer gate.  They now compute the literal sum
+`M_t(D_P,K_P)+d(I^perp)` and identify it as the first nonconfinement cost only
+in outer families with growing dual distance.  They no longer imply that a
+short fixed outer code cannot have a cheaper nonzero-functional escape.
+
+Two edge conventions are now explicit in the paper setup: the inner
+encoder is an `F_q`-linear isomorphism from the outer alphabet onto `I`, which
+justifies `ker Phi_I=I^perp`, and the minimum distance of the zero code is
+`infinity`, so the finite gate includes the full-space outer code without an
+undefined expression.
+
+The read-only trust audit found that the monorepo files
+`lean/trust/paper-facts/complete_repair_ports.json` and
+`lean/trust/areas/complete_ports.toml` still describe the superseded shared
+61-terminal boundary.  The current manuscript, checker, reviewer guide, and
+37-file distribution do not consume or cite them.  They remain explicitly
+outside the paper-local four-terminal boundary and outside this task's edit
+scope; no claim in the rebuilt paper derives authority from them.
+
+The final `ej` and `tt` closeout settled the remaining task-owned questions:
+
+- **Finite versus eventual confinement — settled.**  The finite outer gate is
+  now the theorem statement; the eventual form is a corollary.
+- **MDS hypothesis slack — settled.**  The target/helper-symmetric formula
+  removes both size restrictions and isolates helper-span only as the equality
+  condition for the global ceiling.
+- **Formal overcoverage — settled.**  The four Lean terminals cover exactly the
+  displayed exact sequence; the quotient isomorphism is separately
+  human-derived.
+- **Block-local versus global recovery sets — settled.**  Transfer is stated
+  for normalized systems and inclusion-minimal supports, with global
+  upward-closed supersets explicitly excluded.
+- **Legacy shared trust records — outside C952.**  They are excluded from and
+  unused by the paper-local release.  Updating or retiring them belongs to the
+  separately owned shared-Lean/export work, not this manuscript rebuild.
+
+No other genuine C952 mathematical mystery remains.  Relative Wei duality may
+give a useful ambiguity/failure interpretation, but adding that branch would
+expand rather than simplify this manuscript and is left to a successor.
+
+The final independent referee verdict is READY with no open mathematical,
+formal-boundary, terminology, or packaging finding.  The final paper-local
+gate and an exact-manifest standalone rehearsal both pass: 17 warning-free
+pages, 17 claim rows, four Lean reviewer terminals, and deterministic PDF byte
+identity.  The accepted PDF SHA-256 is
+`4310ef67c29c5f5bbd87239c594cde1af7cd805375e836553bd95e62ce3b849a`;
+the distribution-manifest SHA-256 is
+`7ecdba5e8a871567ae5c101a58ee146e3701d3a20b7900749f5073ec34d02f6d`.
 
 Formalization of the RGHW and confinement theorems is absent by explicit
 choice, not silently assumed. A future formalization would require new claim
 rows and reviewer terminals before the paper could change that statement.
+
+## Post-referee literature positioning audit
+
+This focused attribution audit names three sources: one was read at full text
+and two at abstract/metadata depth.
+
+- **Full text:** Yuan Luo, Chaichana Mitrpant, A. J. Han Vinck, and Kefei Chen,
+  *Some New Characters on the Wire-Tap Channel of Type II*, IEEE Transactions
+  on Information Theory 51 (2005), 1222--1229, DOI
+  `10.1109/TIT.2004.842763`. The published PDF was read in full, with Sections
+  III--IV used for the original RDLP/RGHW definitions, their inverse relation,
+  strict growth, access interpretation, and generalized Singleton bound.
+  Shared-cache key `10.1109/TIT.2004.842763`, SHA-256
+  `eecbc9e01441c1a6955eeb60d17536856957c9d8b3b5ce110dbd1226d9276fd1`.
+- **Abstract/metadata only:** Arrigo Bonisoli, *Every Equidistant Linear Code Is
+  a Sequence of Dual Hamming Codes*, Ars Combinatoria 18 (1984), 181--186.
+  The University of Modena and Reggio Emilia institutional record and the
+  journal's volume contents were consulted on 2026-08-24. They state the
+  classification and bibliographic data; full text was not located. The
+  manuscript uses this only for historical positioning, while retaining its
+  complete fixed-length proof.
+- **Abstract/metadata only:** Ankit Singh Rawat, Arya Mazumdar, and Sriram
+  Vishwanath, *Cooperative Local Repair in Distributed Storage*, EURASIP
+  Journal on Advances in Signal Processing 2015, article 107, DOI
+  `10.1186/s13634-015-0292-0`. The open-access publisher page and article
+  metadata were consulted on 2026-08-24 for the originating cooperative-local
+  repair terminology and bibliographic data; no theorem in this manuscript
+  imports a result from that paper.
+
+Load-bearing web queries were `"Relative generalized Hamming weight" first
+introduced Luo Mitrpant Vinck Chen DOI`, `10.1109/TIT.2004.842763 pdf`, and
+`Bonisoli Every equidistant linear code is a sequence of dual Hamming codes
+1984 DOI`. No negative novelty claim rests on this focused audit. MathSciNet
+and Google Scholar were not covered; zbMATH Open supplied corroborating
+metadata for the Bonisoli record.

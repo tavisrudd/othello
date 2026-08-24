@@ -25,7 +25,6 @@ Restriction of $G_J$ gives an exact sequence
  \xrightarrow{G_J}W_P\longrightarrow0.
  \label{eq:associated-exact-sequence}
 \end{equation}
-In particular, $D_P/K_P\cong W_P$.
 \end{proposition}
 
 \begin{proof}
@@ -36,7 +35,11 @@ Its image is
  G_J(D_P)=\operatorname{im}G_J\cap U_P=W_P,
 \]
 so the restricted map is onto $W_P$.
+\proves{prop:associated-pair}%
 \end{proof}
+
+The first isomorphism theorem applied to the restricted map gives
+$D_P/K_P\cong W_P$.
 
 The pair depends on the represented
 generator matrix and the target set.  A change of message basis gives an
@@ -51,8 +54,9 @@ generalized Hamming weight is
      \dim L-\dim(L\cap K)=t\}.
 \]
 Equivalently, one may minimize over subspaces disjoint from $K$ and of
-dimension $t$.  Relative generalized weights, their strict growth, relative
-Singleton bounds, and Wei duality are standard
+dimension $t$.  Strict growth and the relative Singleton bound are
+Proposition~2 and Theorem~4 of Luo et al.~\cite{LuoEtAl2005}; standard
+treatments also cover Wei duality and computational forms
 \cite{GeilEtAl2014,SanJose2025}.
 
 \begin{theorem}[Relative weights are exact recovery costs]
@@ -97,6 +101,7 @@ choose a vector-space complement $L$ to $L'\cap K_P$ inside $L'$.  Then
 $\dim L=t$, $L\cap K_P=0$, and $\supp L\subseteq\supp L'$.  The reverse
 inclusion of feasible classes is immediate.  The two minima are equal.
 \uses{prop:associated-pair}%
+\proves{thm:relative-weight-recovery}%
 \end{proof}
 
 The corresponding relative dimension/length profile is
@@ -132,6 +137,7 @@ after maximizing over $H$.  The second is the standard inverse relation
 between the relative dimension/length profile and relative generalized
 weights; it also follows directly from Theorem~\ref{thm:relative-weight-recovery}.
 \uses{prop:associated-pair, thm:relative-weight-recovery}%
+\proves{prop:relative-profile}%
 \end{proof}
 
 The strict inequalities

@@ -12,17 +12,17 @@ dependence and evidence status. It assigns no quality grade.
 | `eq:associated-exact-sequence` | `0 -> K_P -> D_P -> W_P -> 0`. | Restrict `G_J` to the preimage of `im G_P`. | none. | complete: four constituent terminals |
 | `thm:relative-weight-recovery` | The minimum helper union for recovered dimension `t` is `M_t(D_P,K_P)`. | Recovery systems correspond to `t`-subspaces disjoint from `K_P`; a complement compares this with the standard RGHW minimum. | standard RGHW definition. | absent |
 | `prop:relative-profile` | The relative dimension/length profile is the maximum recoverable target dimension from `s` helpers. | Restrict the exact sequence to vectors supported on a helper set. | standard inverse relation between RGHWs and the relative profile. | absent |
-| `thm:objectwise-confinement` | A fixed target subspace has eventual confinement gate `r < rho_T(I) + d(I^perp)`. | Block-functional dual decomposition; outer dual growth removes nonzero functional tuples; a rank-one external inner-dual map attains the remaining bound. | finite-field trace duality. | absent |
-| `thm:ranked-confinement` | Uniformly over recovered dimension `t`, the gate is `r < M_t(D_P,K_P) + d(I^perp)`. | Minimize the fixed-subspace gate and use an attaining RGHW subspace. | preceding two theorems. | absent |
+| `thm:objectwise-confinement` | For `N >= 2` and `d(O^perp)>r+1`, a fixed target subspace has confinement gate `r < rho_T(I) + d(I^perp)`; growing outer dual distance gives the eventual form. | Block-functional dual decomposition; the finite outer gate removes nonzero functional tuples; a rank-one external inner-dual map attains the remaining bound. | finite-field trace duality. | absent |
+| `thm:ranked-confinement` | Under the same finite outer gate, uniformly over recovered dimension `t`, the gate is `r < M_t(D_P,K_P) + d(I^perp)`; growing outer dual distance gives the eventual form. | Minimize the fixed-subspace gate and use an attaining RGHW subspace. | preceding two theorems. | absent |
 
 ## Consequences
 
 | Stable label | Statement | Proof mechanism | Imported input | Paper-local Lean status |
 |---|---|---|---|---|
-| `thm:best-target-ghw` | `min_{|P|=t} kappa_C(P) = d_t(C^perp)-t`, with the corresponding earliest nonconfinement cost. | Information set of a minimum-support `t`-dimensional dual subcode. | GHW definition. | absent |
+| `thm:best-target-ghw` | `min_{|P|=t} kappa_C(P) = d_t(C^perp)-t`, with the corresponding earliest nonconfinement cost. | Information set of a minimum-support `t`-dimensional dual subcode; factor an identity system through `im G_P` and adjoin target-kernel equations at zero helper cost before applying the block-functional escape argument. | GHW definition. | absent |
 | `thm:mds-thresholds` | Relative-Singleton ceiling, exact MDS formulas, and equality-at-rank-one rigidity. | Relative Singleton plus a direct uniform-matroid intersection calculation; strict RGHW growth closes rigidity. | relative Singleton and strict growth. | absent |
 | `cor:positive-density` | Exact blockwise copying and concatenated parameter bounds; random outer families make rate and primal/dual distances positive. | Coordinate counting, blockwise injectivity, distance multiplication, and a first-moment random-code argument. | `q`-ary entropy estimate. | absent |
-| `cor:service-rate-transfer` | Bounded service-rate regions agree after capacity transport. | Minimal-support bijection; upward-closed supersets are dominated. | standard fractional service-rate definition. | absent |
+| `cor:service-rate-transfer` | If `d(O^perp)>r+1` and every demand is below its inner threshold, bounded service-rate regions agree after capacity transport; growing-dual-distance families satisfy this eventually. | The finite outer gate excludes nonzero functional tuples, the inner gate gives the minimal-support bijection, and upward-closed supersets are dominated. | standard fractional service-rate definition. | absent |
 
 ## Separations and application
 

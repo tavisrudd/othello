@@ -13,27 +13,32 @@ For a target set `P` and helper set `J`, the target and helper parts of a
 generator matrix determine nested codes `K_P ⊆ D_P ⊆ F_q^J`. The paper proves
 that the `t`th relative generalized Hamming weight `M_t(D_P,K_P)` is the exact
 minimum helper-union size for recovering `t` independent target combinations.
-In concatenations whose outer dual distance tends to infinity, the sharp
-eventual confinement condition is
+For any outer code with at least two blocks and `d(O⊥) > r+1`, the sharp
+confinement condition is
 
 ```text
 r < M_t(D_P,K_P) + d(I⊥).
 ```
 
 Below this threshold, zero-extension preserves every bounded normalized
-recovery equation and its exact helper support.
+recovery equation and its exact helper support. For outer families whose dual
+distance tends to infinity, the finite outer gate is automatic for all
+sufficiently large lengths at each fixed `r`.
 
 ## Main consequences
 
 - Minimizing the fixed-target recovery cost over all target `t`-sets gives
   `d_t(C⊥) − t`.
-- MDS inner codes attain the relative-Singleton confinement ceiling at every
-  recovered dimension; equality at dimension one forces equality at every
-  dimension.
+- MDS inner codes have an exact recovery-cost staircase. When the helper
+  columns span the message space, it attains the confinement ceiling at every
+  recovered dimension; equality in that ceiling at dimension one forces
+  equality at every dimension.
 - Suitable outer families copy the normalized equations onto coordinate
   classes of positive density while retaining positive rate and relative
   distance.
-- Exact support transfer preserves bounded service-rate regions.
+- Once the finite outer-dual-distance gate holds, exact support transfer
+  preserves bounded service-rate regions; outer families with growing dual
+  distance satisfy the gate eventually.
 - Two systems can have identical complete relative-weight hierarchies but
   different bounded repair reliabilities.
 - Two coefficient presentations of the same associated nested code pair can
@@ -68,7 +73,8 @@ Each theorem-like environment also carries a typographically empty
 machine-readable annotation from [`formal-annotations.tex`](formal-annotations.tex).
 The annotations mark the exact sequence as Lean-complete and mark every
 stronger theorem as absent from the formal package; they do not alter the
-rendered manuscript.
+rendered manuscript. Detached proofs identify the statement they prove, so
+their dependency annotations are checked at claim level.
 
 The two displayed rank-one reliability polynomials are obtained from the
 printed union-size table by inclusion–exclusion. Finite replay artifacts may
@@ -84,7 +90,7 @@ make check
 
 performs a clean deterministic rebuild, checks the tracked PDF and metadata,
 rejects TeX warnings and private-path leakage, and validates the declared
-evidence boundary. The standalone formal package has its own guarded build and
+evidence boundary. The standalone formal package has its own pinned build and
 axiom-audit instructions in [`lean/README.md`](lean/README.md).
 
 ## Files
@@ -101,8 +107,10 @@ axiom-audit instructions in [`lean/README.md`](lean/README.md).
 
 ## Citation
 
-The archival identifier is
-[`10.5281/zenodo.22051903`](https://doi.org/10.5281/zenodo.22051903).
+The existing Zenodo record is
+[`10.5281/zenodo.22051903`](https://doi.org/10.5281/zenodo.22051903). A new
+record version must be deposited before that record can be cited as the
+archive of this rewrite.
 
 ## License
 

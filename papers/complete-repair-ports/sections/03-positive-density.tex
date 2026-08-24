@@ -2,7 +2,8 @@
 \label{sec:confinement}
 
 Let $L/\F_q$ be a finite extension and let
-$\iota:L\longrightarrow I\leq\F_q^E$ be an $\F_q$-linear inner encoder.
+$\iota:L\xrightarrow{\sim} I\leq\F_q^E$ be an $\F_q$-linear isomorphism,
+used as the inner encoder.
 Assume $0<\dim I<|E|$.
 For an $L$-linear outer code $O\leq L^N$, write
 \[
@@ -11,9 +12,10 @@ For an $L$-linear outer code $O\leq L^N$, write
 The proof of confinement uses the linear map
 \[
  \Phi_I:\F_q^E\longrightarrow L^*,
- \qquad
- \Phi_I(y)(a)=\langle y,\iota(a)\rangle.
+\qquad
+\Phi_I(y)(a)=\langle y,\iota(a)\rangle.
 \]
+Here $L^*=\operatorname{Hom}_{\F_q}(L,\F_q)$.
 Its kernel is $I^\perp$.  A block vector
 $y=(y_1,\ldots,y_N)$ belongs to $(O\circ I)^\perp$ precisely when
 \begin{equation}
@@ -34,35 +36,42 @@ support.  Thus its support distance is $d(O^\perp)$.
 
 Fix a target block and a nonzero internally recoverable subspace
 $T\leq W_P$.  Let $\rho_T(I)$ be the minimum helper-union size of a
-normalized recovery system for $T$ in the inner code.  A system in the
-concatenation is \emph{confined} if every one of its equations is supported
-in the target block.
+normalized recovery system for $T$ in the inner code.  In a concatenation, a
+normalized system for $T$ means a linear family of dual equations whose
+target-block coefficient map $\alpha:T\to\F_q^P$ satisfies
+$G_P\alpha=\operatorname{id}_T$ under the fixed inner-message
+identification.  This agrees with the intrinsic target image of the
+concatenated generator whenever the outer projection onto the chosen block is
+surjective.  In particular, $d(O^\perp)>1$ guarantees surjectivity: an
+$L$-linear coordinate image is either $0$ or $L$, and a zero image would put a
+weight-one word in $O^\perp$.  A system is \emph{confined} if every one of its
+equations is supported in the target block.
 
 \begin{theorem}[Confinement for a fixed target subspace]
 \label{thm:objectwise-confinement}
 \coverage{absent}%
-Let $(O_N)$ be an $L$-linear outer family with
-$d(O_N^\perp)\to\infty$, and suppose $N\geq2$ eventually.  For every fixed
-helper bound $r$, all sufficiently long concatenations $O_N\circ I$ confine
-every normalized recovery system for $T$ of cost at most $r$ if and only if
+Let $r$ be a nonnegative integer and let $O\leq L^N$ be an $L$-linear outer
+code with $N\geq2$ and $d(O^\perp)>r+1$.  Then $O\circ I$ confines every
+normalized recovery system for $T$ of cost at most $r$ if and only if
 \begin{equation}
  r<\rho_T(I)+d(I^\perp).
  \label{eq:objectwise-confinement}
 \end{equation}
 Below this bound, zero-extension gives a support-preserving bijection between
 the inner systems of cost at most $r$ and the corresponding systems in the
-concatenation.
+concatenation.  Hence the same conclusions hold for all sufficiently long
+members of any outer family with dual distance tending to infinity, at every
+fixed $r$.
 \end{theorem}
 
 \begin{proof}
 Apply~\eqref{eq:block-functional-dual} to every equation in a recovery
 system.  If one of the resulting functional tuples is nonzero, its block
-support has size at least $d(O_N^\perp)$.  A system with a fixed helper bound
+support has size at least $d(O^\perp)$.  A system with helper bound $r$
 can meet only a bounded number of blocks: every nonzero block outside the
 target block contains a helper, while the target block contributes at most
 one further block.  A cost-$\leq r$ system therefore meets at most $r+1$
-blocks.  Hence
-$d(O_N^\perp)\to\infty$ excludes this case for all sufficiently large $N$.
+blocks.  Hence $d(O^\perp)>r+1$ excludes this case.
 
 Every remaining block component lies in $I^\perp$.  The target-block
 component is an inner recovery system for $T$, so its helper union has size
@@ -80,6 +89,7 @@ system belongs to the concatenated dual; it is nonconfined and has the stated
 cost.  This proves both directions of~\eqref{eq:objectwise-confinement}.
 Below the bound every system is confined, and restriction to the target block
 is inverse to zero-extension.
+\proves{thm:objectwise-confinement}%
 \end{proof}
 
 Minimizing the fixed-subspace threshold over all recovered subspaces of fixed
@@ -88,8 +98,9 @@ dimension gives the promised hierarchy.
 \begin{theorem}[Confinement by recovered dimension]
 \label{thm:ranked-confinement}
 \coverage{absent}%
-With the hypotheses above, let $\ell=\dim W_P$ and $1\leq t\leq\ell$.
-For every fixed $r$, all sufficiently long concatenations confine every
+Let $r$ be a nonnegative integer, let $O\leq L^N$ be $L$-linear with
+$N\geq2$ and $d(O^\perp)>r+1$, and let $\ell=\dim W_P$ and
+$1\leq t\leq\ell$.  The concatenation $O\circ I$ confines every
 cost-$\leq r$ recovery system for every internally recoverable
 $t$-dimensional target subspace if and only if
 \begin{equation}
@@ -98,6 +109,8 @@ $t$-dimensional target subspace if and only if
 \end{equation}
 When~\eqref{eq:ranked-confinement} holds, restriction and zero-extension
 preserve every normalized equation and its exact helper support.
+For an outer family with dual distance tending to infinity, these conclusions
+hold for all sufficiently long members at every fixed $r$.
 \end{theorem}
 
 \begin{proof}
@@ -107,6 +120,7 @@ minimum.  Apply Theorem~\ref{thm:objectwise-confinement} to each subspace.
 The lower bound gives sufficiency uniformly; an attaining subspace and the
 external rank-one perturbation in that proof give necessity.
 \uses{thm:relative-weight-recovery, thm:objectwise-confinement}%
+\proves{thm:ranked-confinement}%
 \end{proof}
 
 For a nondegenerate singleton target $P=\{x\}$, the first relative weight is

@@ -16,10 +16,25 @@ TavisRuddFiniteGeom.Papers.RecoveryStructures.Verification.AxiomAudit
 The package proves the linear-algebraic construction of the nested helper-code
 pair associated with target and helper generator maps. The relative generalized
 Hamming-weight identification, the concatenation-confinement theorem, and the
-asymptotic realization theorem remain classified separately until their exact
-paper statements are represented here. No literature theorem is declared as a
+asymptotic realization theorem are not formalized in this package and are
+classified as absent in the claim map. No literature theorem is declared as a
 Lean axiom.
 
-The older shared `RepairPorts` and `RepairCodes` libraries contain
-machine-checked components used by the previous manuscript. They are upstream
-evidence, not dependencies of this paper-owned package.
+The source and annotation boundary can be checked without invoking Lean:
+
+```text
+python3 verification/check_formal_artifact.py --source-only
+```
+
+To rebuild the package with its pinned Lean and Mathlib revisions, enter the
+Nix development shell and build the two library targets:
+
+```text
+nix develop
+lake build RecoveryStructures RecoveryStructuresVerification
+```
+
+The axiom-audit target prints the dependencies of every reviewer-facing
+terminal. The expected sets are recorded in
+`verification/expected_axioms.txt`; the release claim is limited to those
+terminals.

@@ -24,8 +24,9 @@ $r_t^{\mathrm{coop}}(C)=\max_{|P|=t}\kappa_C(P)$, then
 \[
  r_t^{\mathrm{coop}}(C)\geq d_t(C^\perp)-t.
 \]
-For an inner concatenation block, the least first nonconfinement cost over
-all $t$-coordinate target sets is
+For a fixed inner code in the eventual concatenation regime of
+Theorem~\ref{thm:objectwise-confinement}, the least first nonconfinement cost
+over all $t$-coordinate target sets is
 \begin{equation}
  d_t(C^\perp)-t+d(C^\perp).
  \label{eq:best-target-escape}
@@ -43,9 +44,34 @@ size $t$, and restriction $A\to\F_q^P$ is an isomorphism.  Row reduction on
 these columns gives normalized identity equations whose helper union is
 $\supp(A)\setminus P$.  This proves~\eqref{eq:best-target-ghw}; the
 cooperative-locality inequality follows by taking the maximum instead of the
-minimum.  Finally apply Theorem~\ref{thm:objectwise-confinement} to the
-identity demand and minimize its additive threshold over $P$.
+minimum.
+
+It remains to justify the escape formula when the target columns indexed by
+$P$ are dependent.  Put $U=\operatorname{im}G_P$.  A normalized identity
+system on $\F_q^P$ and a normalized recovery system on $U$ have the same
+minimum helper union.  Indeed, restricting an identity system along a linear
+section $\alpha:U\to\F_q^P$ gives a system on $U$.  Conversely, given a
+system on $U$, write
+\[
+ a=\alpha(G_Pa)+\bigl(a-\alpha(G_Pa)\bigr)
+ \qquad(a\in\F_q^P).
+\]
+The second summand lies in $\ker G_P$ and hence is a target-only dual
+equation, so adjoining these kernel equations recovers the full identity
+without adding helpers.  Thus the common minimum is $\kappa_C(P)$.
+
+Now repeat the block-functional argument of
+Theorem~\ref{thm:objectwise-confinement}.  Once the outer-functional case is
+excluded, the target block of any identity system uses at least
+$\kappa_C(P)$ helpers.  If the system is nonconfined, a nonzero equation map
+in another block has union support at least $d(C^\perp)$; the two supports
+are disjoint.  Conversely, attach a minimum-weight word of $C^\perp$ in a
+second block through any nonzero linear functional on $\F_q^P$.  Hence the
+first nonconfinement cost for this $P$ is
+$\kappa_C(P)+d(C^\perp)$.  Minimizing over $P$ and using
+\eqref{eq:best-target-ghw} proves~\eqref{eq:best-target-escape}.
 \uses{thm:objectwise-confinement}%
+\proves{thm:best-target-ghw}%
 \end{proof}
 
 The fixed-target hierarchy also has a sharp elementary ceiling.  Put
@@ -68,29 +94,40 @@ For $1\leq t\leq\ell$,
  \leq2k-\ell+t+1.
  \label{eq:threshold-ceiling}
 \end{equation}
-Suppose $I$ is MDS, $P$ consists of $p\leq k$ independent target columns,
-and $|J|\geq k$.  Then $\ell=p$ and, for $1\leq t\leq p$,
+Suppose $I$ is MDS, and put
+\[
+ u=\min\{k,|P|\},\qquad b=\min\{k,|J|\}.
+\]
+Then $\ell=u+b-k$.  If $\ell\geq1$, then, for $1\leq t\leq\ell$,
 \begin{equation}
- M_t(D_P,K_P)=k-p+t,
+ M_t(D_P,K_P)=k-u+t,
  \qquad
- M_t(D_P,K_P)+d(I^\perp)=2k-p+t+1.
+ M_t(D_P,K_P)+d(I^\perp)=2k-u+t+1.
  \label{eq:mds-staircase}
 \end{equation}
-Conversely, equality in~\eqref{eq:threshold-ceiling} at $t=1$ forces $I$ to
-be MDS and forces equality at every rank.
+If $|J|\geq k$, then $\ell=u$ and these values attain the ceiling in
+\eqref{eq:threshold-ceiling} at every rank.
+Conversely, when $\ell\geq1$, equality in~\eqref{eq:threshold-ceiling} at
+$t=1$ forces $I$ to be MDS and forces equality at every rank.
 \end{theorem}
 
 \begin{proof}
 Since $b\leq k$, summing~\eqref{eq:singleton-bounds} proves
 \eqref{eq:threshold-ceiling}.  For an MDS code the column matroid of $G$ is
-uniform.  The hypotheses on $P$ and $J$ give $\ell=p$ and $b=k$, while for
+uniform, so $\rank G_P=u$, $\rank G_J=b$, and the displayed formula for
+$\ell$ follows from
+$\operatorname{span}G_P+\operatorname{span}G_J=\F_q^k$.  For
 $H\subseteq J$ with $|H|=h\leq k$,
 \[
  \dim\bigl(\operatorname{span}G_P\cap\operatorname{span}G_H\bigr)
- =\max\{0,p+h-k\}.
+ =\max\{0,u+h-k\}.
 \]
 Proposition~\ref{prop:relative-profile} therefore gives
-$M_t=k-p+t$.  Since $d(I^\perp)=k+1$, the second formula follows.
+$M_t=k-u+t$ throughout $1\leq t\leq\ell$: the required helper size
+$k-u+t$ does not exceed $b\leq|J|$ because $t\leq\ell=u+b-k$.  Since
+$d(I^\perp)=k+1$, the second formula follows.  If $|J|\geq k$, then $b=k$
+and $\ell=u$, so both inequalities in~\eqref{eq:singleton-bounds} are
+equalities.
 
 If equality holds at $t=1$, then every inequality used in
 \[
@@ -102,6 +139,7 @@ $M_1=b-\ell+1$.  Strict growth of relative generalized weights gives
 $M_t\geq b-\ell+t$, while the relative Singleton bound gives the reverse
 inequality.  Hence every rank is extremal.
 \uses{prop:relative-profile}%
+\proves{thm:mds-thresholds}%
 \end{proof}
 
 We next record the global parameters and the density of the transferred
@@ -113,10 +151,11 @@ $[L:\F_q]=k$.  Let $K_N=\dim_L O_N$ and $D_N=d(O_N)$.
 \coverage{absent}%
 Assume $d(O_N^\perp)\to\infty$.  Below any fixed threshold supplied by
 Theorem~\ref{thm:objectwise-confinement} or
-Theorem~\ref{thm:ranked-confinement}, every inner normalized recovery system
-and exact helper support is copied in each of the $N$ blocks.  Each fixed
-inner coordinate type has density $1/m$ among the concatenated coordinates;
-the union of the types in $P$ has density $p/m$.
+Theorem~\ref{thm:ranked-confinement}, for all sufficiently large $N$ every
+inner normalized recovery system and exact helper support is copied in each
+of the $N$ blocks.  Each fixed inner coordinate type has density $1/m$ among
+the concatenated coordinates; the union of the types in $P$ has density
+$p/m$.
 
 The concatenated code has length $mN$, dimension $kK_N$, and minimum distance
 at least $dD_N$.  If
@@ -153,6 +192,7 @@ choose a sequence with rate tending to $R$, primal relative distance at least
 $\delta$, and dual relative distance at least $\delta^\perp$
 \cite[Chapter~17]{MacWilliamsSloane1977}.
 \uses{thm:objectwise-confinement, thm:ranked-confinement}%
+\proves{cor:positive-density}%
 \end{proof}
 
 Exact support transfer also preserves the fractional load-balancing region
@@ -160,7 +200,8 @@ used in service-rate problems.  We state the consequence because it requires
 only the inclusion-minimal recovery sets, whereas the theorem transfers all
 normalized coefficients as well.
 
-Let $\mathcal A$ be a finite set of target demands, and let
+Fix one inner target block with helper set $J$.  Let $\mathcal A$ be a finite
+set of demands on that block, and let
 $\mathcal M_a^{(\leq r)}$ be the inclusion-minimal exact helper supports of
 size at most $r$ for $a\in\mathcal A$.  For a nonnegative helper-capacity
 vector $c$, define
@@ -179,20 +220,26 @@ This is the bounded service-rate region of the recovery-set system
 \begin{corollary}[Transfer of bounded service-rate regions]
 \label{cor:service-rate-transfer}
 \coverage{absent}%
-Suppose the radius $r$ lies below the confinement threshold for every demand
-in $\mathcal A$.  Transport capacities from the inner helper set to its copy
-in a target block.  Then the inner and concatenated bounded service-rate
-regions are equal.  Capacities assigned outside the target block do not
-change this equality.
+Let $O\leq L^N$ be an outer code with $d(O^\perp)>r+1$.  Suppose the radius
+$r$ lies below the inner confinement threshold for every demand in
+$\mathcal A$.  Transport capacities from the inner helper set to its copy in
+a target block of $O\circ I$.  Then the inner and concatenated bounded
+service-rate regions are equal.  Capacities assigned outside the target block
+do not change this equality.  Consequently, for an outer family with
+$d(O_N^\perp)\to\infty$, the equality holds for all sufficiently large $N$.
 \end{corollary}
 
 \begin{proof}
-The confinement theorem copies every inclusion-minimal support and creates no
-cross-block minimal support.  The helper bijection therefore transports the
+$d(O^\perp)>r+1$ excludes every nonzero outer-functional tuple in a
+cost-$\leq r$ system, and the inner threshold excludes the remaining
+zero-functional nonconfined systems.  Thus restriction and zero-extension
+copy every inclusion-minimal support and create no cross-block minimal
+support.  The helper bijection therefore transports the
 feasible variables $f_{a,R}$ and every capacity inequality in both
 directions.  Allowing the full upward-closed recovery-set family gives the
 same region: flow assigned to a nonminimal set can be moved to a contained
 minimal set and weakly decreases every helper load.  Thus cross-block
 supersets and capacities outside the target block are irrelevant.
 \uses{thm:objectwise-confinement, thm:ranked-confinement}%
+\proves{cor:service-rate-transfer}%
 \end{proof}

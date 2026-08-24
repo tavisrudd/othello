@@ -27,6 +27,8 @@ MANUSCRIPT_ENV = re.compile(
     r"\\begin\{(theorem|proposition|corollary|lemma)\}(.*?)\\end\{\1\}",
     re.DOTALL,
 )
+PROOF_ENV = re.compile(r"\\begin\{proof\}(.*?)\\end\{proof\}", re.DOTALL)
+STATEMENTS_WITHOUT_DETACHED_PROOF = {"thm:main"}
 
 
 def load_claims() -> dict:
@@ -144,6 +146,26 @@ def check_manuscript_annotations(data: dict) -> None:
     all_text += "\n".join(
         path.read_text() for path in sorted((PAPER_ROOT / "sections").glob("*.tex"))
     )
+    proved: set[str] = set()
+    for body in PROOF_ENV.findall(all_text):
+        matches = re.findall(r"\\proves\{([^}]*)\}", body, re.DOTALL)
+        if len(matches) != 1:
+            raise SystemExit(
+                f"detached proof carries {len(matches)} \\proves annotations"
+            )
+        label = matches[0].strip()
+        if label not in known_labels:
+            raise SystemExit(f"detached proof names unknown statement: {label}")
+        if label in proved:
+            raise SystemExit(f"multiple detached proofs name {label}")
+        proved.add(label)
+    expected_proved = known_labels - STATEMENTS_WITHOUT_DETACHED_PROOF
+    if proved != expected_proved:
+        raise SystemExit(
+            f"detached-proof partition mismatch; "
+            f"missing={sorted(expected_proved - proved)}, "
+            f"unexpected={sorted(proved - expected_proved)}"
+        )
     for payload in re.findall(r"\\uses\{([^}]*)\}", all_text, re.DOTALL):
         for used in (item.strip() for item in payload.replace("%", "").split(",")):
             if used and used not in known_labels:
