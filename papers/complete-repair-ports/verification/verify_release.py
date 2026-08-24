@@ -14,6 +14,7 @@ from pathlib import Path
 
 
 PAPER = Path(__file__).resolve().parents[1]
+EXPORTER_METADATA = {".gitignore", "PROVENANCE.md", "export-manifest.json"}
 SOURCE = "complete_repair_ports.tex"
 PDF = PAPER / "complete_repair_ports.pdf"
 TITLE = "Exact Transfer of Bounded Linear Recovery and Relative Weight Hierarchies"
@@ -96,13 +97,18 @@ def check_public_surface() -> None:
         tracked = run(["git", "ls-files"], PAPER)
         require(tracked.returncode == 0, "cannot enumerate standalone tracked files")
         tracked_paths = {line for line in tracked.stdout.splitlines() if line}
+        distributed = set(paths)
         require(
-            tracked_paths == set(paths),
+            distributed <= tracked_paths <= distributed | EXPORTER_METADATA,
             "standalone tracked files disagree with distribution manifest; "
-            f"unexpected={sorted(tracked_paths - set(paths))}, "
-            f"missing={sorted(set(paths) - tracked_paths)}",
+            f"unexpected={sorted(tracked_paths - distributed - EXPORTER_METADATA)}, "
+            f"missing={sorted(distributed - tracked_paths)}",
         )
-    files = public_text_files()
+    files = public_text_files() + [
+        PAPER / relative
+        for relative in sorted(EXPORTER_METADATA)
+        if (PAPER / relative).is_file()
+    ]
     for path in files:
         require(path.is_file(), f"missing public file {path.relative_to(PAPER)}")
         text = path.read_text(encoding="utf-8")

@@ -178,7 +178,8 @@ normalization for a fixed inner target space and the outer-coordinate
 surjectivity criterion are explicit; full-quotient reliability is defined
 before use; every detached proof carries a checked `proves` label; and the
 release gate consumes an exact 37-file distribution manifest and rejects
-unexpected tracked files in a standalone checkout.
+unexpected tracked files in a standalone checkout, except for the exporter's
+three standard metadata files, which are scanned when present.
 
 A subsequent qualification-removal pass strengthened the confinement
 statements from an eventual-family formulation to the exact finite form.  For

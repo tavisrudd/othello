@@ -42,7 +42,9 @@ infer formal coverage from prose or from older external libraries.
 `verification/distribution-files.txt` is the explicit shipped-file manifest.
 Every listed text file is scanned for private paths and workflow identifiers.
 In a standalone checkout, the verifier also requires the Git tracked-file set
-to equal that manifest, so an unlisted tracked file fails the release gate.
+to equal that manifest, apart from the exporter's optional `.gitignore`,
+`PROVENANCE.md`, and `export-manifest.json`.  Those files are scanned when
+present; any other unlisted tracked file fails the release gate.
 
 Refresh the tracked PDF only through the deterministic path:
 
