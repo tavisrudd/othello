@@ -20,6 +20,15 @@ the type-\(I_1\) generic fibre in Tschinkel--Zhang Proposition 5.1, then
 \boxed{X\times\mathbf P^2\text{ is }\mathbf Q\text{-rational}.} \tag{2}
 \]
 
+For the cubic threefold this is the explicit smooth hypersurface
+
+\[
+X=\left\{
+(x_4-2x_3)x_1^2+3(x_4+2x_3)x_2^2
++3x_3^2x_4-x_4^3+x_5^3=0
+\right\}\subset\mathbf P^4. \tag{2a}
+\]
+
 For their cubic threefold and the C925 \(m=1\) theorem this identifies the
 exact stabilization threshold:
 
@@ -171,6 +180,28 @@ already over \(\mathbf Q\). On the other hand,
 
 which is purely transcendental by (2). This proves (5).
 
+## Proof-audit gates
+
+- **Descent of the subtorus.** The saturated lattice is preserved by both
+  type-\(I_1\) Galois generators, with integral action matrices recorded in
+  the certificate. It therefore defines a \(K\)-subtorus, not merely a
+  geometric subtorus.
+- **Descent of the slice.** The boundary space, tangent conormal space, and
+  good Grassmannian open are \(K\)-defined. Their geometric nonemptiness is
+  uniform on the smooth moduli by (11); density over infinite \(K\) supplies
+  a \(K\)-defined three-plane of equations.
+- **Generic freeness and quotient.** The projectivized universal torsor is a
+  \(T_0\)-torsor on a dense open, so its restriction to \(T_3\) is generically
+  free. The one-point slice is therefore birational to the Rosenlicht
+  quotient \(Z/T_3\).
+- **Surface product identity.** Tschinkel--Zhang Remark 2.2 and Proposition
+  2.3 give the generic splitting used in (14); quotienting the split torus
+  factor by \(T_3\) yields the displayed residual product.
+- **Cubic passage.** Over the function field of the projection base, (1)
+  makes the generic fibre rational after two variables. Hence
+  \(\mathbf Q(X)(u,v)\) is purely transcendental over \(\mathbf Q\), which is
+  exactly rationality of \(X\times\mathbf P^2\).
+
 ## Priority relation and scope
 
 Tschinkel--Zhang explicitly single out the construction of a nonrational
@@ -238,3 +269,4 @@ The primary checker additionally verifies the symbolic smooth-moduli cover.
 | settled | Residual torus | Rank two, hence rational. |
 | settled | Type-\(I_1\) threshold | \(s(X)=2\). |
 | open | Manuscript-level priority | Full novelty and forward-citation audit. |
+| open | Explicit parametrization | The proof is constructive through tangent projection, but formulas have not been extracted. |

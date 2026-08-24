@@ -263,6 +263,9 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   \(Y\times\mathbf A^1\) is rational, answering their stated construction
   problem. Primary SymPy and independent stdlib certificates agree. Report:
   `../2026-08-24-c925-type-i1-level-two-rationality.md`.
+  The exact “priority judo” boundary—what becomes a corollary, what remains an
+  input, and which novelty checks remain open—is recorded in
+  `../2026-08-24-c925-tz-priority-judo-synthesis.md`.
 
   **Corrected rank-three frontier:** the former index-two/double-cover
   conclusion was a nonsaturated-lattice artifact and is withdrawn. In the
