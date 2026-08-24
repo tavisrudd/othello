@@ -118,8 +118,8 @@ gate remain release checks rather than results of this cold review.
 
 ### Exposition
 
-Apart from the required “profile” clarification, the exposition is unusually
-careful about degenerate ports, singleton functional-dual tuples, exact versus
+Apart from the required “profile” clarification, the exposition explicitly
+distinguishes degenerate ports, singleton functional-dual tuples, exact versus
 coarse transfer gates, and seed-level versus concatenated claims. An optional
 improvement on page 6 would define the unit-cost projective set `S` and write
 the chosen disjointness relation explicitly (`S cap a^*S = empty`, with the

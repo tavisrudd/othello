@@ -27,8 +27,8 @@ for a body theorem.
 On a cold read of the PDF before opening any verification artifact, the provisional verdict was
 **MINOR, conditional on an exact artifact match**.  The human proof of Theorem 6.5 is coherent:
 the displayed matrices supply the seed data, a common outer family supplies matched global
-parameters, and Theorem 4.1 transfers the ports.  The only apparent risk was the unusually broad
-formal-verification paragraph on pages 18--19.  Artifact inspection changed the verdict to MAJOR
+parameters, and Theorem 4.1 transfers the ports. The apparent risk was the scope of the
+formal-verification paragraph on pages 18--19. Artifact inspection changed the verdict to MAJOR
 because the named matched-pair terminal covers only one part of the paper theorem.
 
 ## Field-by-field correspondence for Theorem 6.5

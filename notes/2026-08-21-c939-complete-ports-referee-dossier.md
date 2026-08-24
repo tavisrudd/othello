@@ -70,20 +70,19 @@ label; separate correctness, missing proof, scope, formal correspondence,
 reproducibility, and exposition; and state the result of each falsification
 attempt.
 
-### Percentile and upgrade report
+### Contribution-ordering and upgrade report
 
-Score the revision against:
+Classify the paper's results as:
 
-- annual papers in coding theory/local repair with finite-geometry or matroid
-  methods; and
-- annual mathematics papers generally, for dimensions that transfer across
-  specialties.
+- main theorem;
+- supporting theorem or corollary;
+- application or example;
+- computational evidence; or
+- material that should be cut or moved.
 
-Give ranges and best estimates for correctness, theorem novelty, conceptual
-originality, technical depth, proof completeness, specialty significance,
-breadth, exposition, examples/formal support, reproducibility, and overall
-strength. Then give a prioritized list of upgrades that would both unify and
-strengthen the paper, with estimated percentile lift, effort, and risk.
+State the factual basis for the ordering. Then give a prioritized list of
+upgrades, with dependency, effort, and mathematical risk, but no percentile,
+venue-prestige, or overall-quality score.
 
 ## Release gate
 

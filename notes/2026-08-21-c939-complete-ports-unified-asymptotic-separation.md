@@ -4,13 +4,10 @@
 
 **Status**: COMPLETE — FINAL REFEREE GO; LOCAL PUBLIC EXPORT VERIFIED
 **Allocated**: 2026-08-21
-**Source assessment**:
-`notes/2026-08-21-c678-complete-ports-percentile-referee.md`
 
 ## Intent
 
-Raise the complete-ports paper's mathematical ceiling by making one program
-structurally dominant:
+Organize the complete-ports paper around one theorem chain:
 
 > a represented seed port is produced geometrically or explicitly; weighted
 > transfer embeds it on a positive-density coordinate class; its bounded
@@ -325,21 +322,17 @@ final human synthesis.
 
 ## Referee state
 
-The matched-availability cold review found only one stale conclusion paragraph;
-the percentile review scored the revision at the 95th specialty percentile and
-88th general-mathematics percentile; and the formal review found the
-formal-correspondence boundary honest.  The conclusion is now synchronized and
-the explicit field-29 instance supplies the highest-value requested
-cross-check.  A final review must grade the new frozen PDF rather than the
-earlier worktree-mutating build.
+The matched-availability cold review found only one stale conclusion paragraph,
+and the formal review found the formal-correspondence boundary honest. The
+conclusion is now synchronized, and the explicit field-29 instance supplies
+the requested exact cross-check. A final review must assess the new frozen PDF
+rather than the earlier worktree-mutating build.
 
 The final cold review is GO with no issue.  The formal referee first caught a
 stale rendered source/base-pin paragraph; commit
 `4cd32e1a78b009f76f44dbf130eb4ebbaa19675a` synchronizes the printed source,
 base, and public release pins with `formal-boundary.json` and makes the release
-verifier enforce all three equalities.  The formal rereview is GO.  The final
-percentile estimate is 96th against annual specialty papers and 90th on
-transferable dimensions against annual mathematics papers generally.
+verifier enforce all three equalities. The formal rereview is GO.
 
 The final tracked PDF has 23 warning-free pages and SHA-256
 `c2611c12114492b47b1af5a8ac77f5550fb11ec9eba81c54acbf6c3523f6ccc9`.

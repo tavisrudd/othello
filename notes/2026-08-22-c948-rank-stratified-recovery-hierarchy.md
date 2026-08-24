@@ -1580,10 +1580,8 @@ stratifies profile fibers by possible translation stabilizers and may be useful
 for Burnside counts or recursive reductions. It does not by itself approach
 generic BGS instances.
 
-Ideally packaged, the combined mathematics is now a plausible 99-level coding-
-theory package and suitable for a strong IEEE Transactions on Information
-Theory submission. The uniqueness theorem upgrades the projective family from
-an illustrative example to an extremal classification. The independent cold
+The uniqueness theorem upgrades the projective family from an illustrative
+example to an extremal classification. The independent cold
 read of the full theorem packet and proof-level audit of the projective
 reliability inversion have now passed after all findings were repaired.
 
