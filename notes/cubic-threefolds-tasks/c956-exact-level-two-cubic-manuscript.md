@@ -2,7 +2,7 @@
 
 **Lane:** cubic-threefolds
 
-**Status:** active; theorem spine implemented, release audit open
+**Status:** complete; authority and standalone release gates pass
 
 ## Stable entry point
 
@@ -68,28 +68,9 @@ the mathematical narrative.
 
 ## Remaining work, in order
 
-1. Finish the prose pass required by `papers/style-guide.md`: remove defensive
-   priority language from the public manuscript and README, keep exact credit,
-   and check standard terminology and notation throughout.
-2. Update README, `.zenodo.json`, the claim/novelty ledger, and imported-source
-   records to the cubic-first title and current theorem labels.  Replace
-   `cor:cancellation` by `thm:cubic-level`, `cor:affine-line`, and
-   `cor:moduli`.  Avoid the nonstandard phrase "stabilization index"; use
-   "least stabilizing dimension" or display the defined invariant `ell_k`.
-3. Parse the two JSON ledgers, run `make check` from the paper directory, and
-   inspect the generated PDF metadata and extracted text.
-4. Visually inspect the first page, theorem ladder, quotient proof, and exact
-   appendix.  Confirm that page one sells the cubic theorem and the main proof
-   remains readable without the certificate appendix.
-5. Run stale-term scans for the abandoned `INT-Psi`, quantum-transport,
-   conditional all-`m`, and obsolete theorem-label material across the release
-   files and PDF text.
-6. Check that every paper-owned changed/untracked file is intended, update the
-   checksum manifest if required, run the C956 `ej`+`tt` closeout and mystery
-   ledger, then commit only C956-owned paths.
-7. After authority validation, read
-   `notes/export-and-mirror-conventions.md` and synchronize the standalone
-   mirror if one exists; never edit the mirror first.
+All seven manuscript, metadata, verification, stale-source, closeout, and
+standalone-export items passed. See the dated report
+`notes/2026-08-24-c956-exact-level-two-cubic-manuscript.md`.
 
 ## Acceptance gate
 

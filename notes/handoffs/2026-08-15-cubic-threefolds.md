@@ -38,14 +38,13 @@ promoted mathematical assertion maps to a kernel-checked declaration.
 
 ## Current status
 
-- **C956 — exact level-two cubic manuscript, active.**  This task owns all
-  further edits under `papers/cubic-stabilization-irrationality/`.  The paper
+- **C956 — exact level-two cubic manuscript, complete.**  The paper
   leads with the two explicit cubic threefolds having least stabilizing
   dimension exactly two, then gives the uniform quartic-del-Pezzo theorem and
   the reusable torus-quotient criterion.  Its authoritative editorial plan is
   `../2026-08-24-c956-exact-level-two-cubic-manuscript-framing.md`; its
-  complete resume card is
-  `../cubic-threefolds-tasks/c956-exact-level-two-cubic-manuscript.md`.
+  complete report is
+  `../2026-08-24-c956-exact-level-two-cubic-manuscript.md`.
 - **C936 — accepted after cold-referee repair audit.**  The warning-free eleven-page paper
   develops the signed nonstandard \(A_5\)-cubic parameter as the
   sign/discriminant resolvent of the actual
