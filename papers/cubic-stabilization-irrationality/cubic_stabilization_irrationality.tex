@@ -99,7 +99,7 @@ theorem.
 \begin{theorem}[Two-dimensional stabilization]
 \label{thm:two-variable}
 \coverage{absent}%
-\imports{high-degree-del-pezzo,manin-stable-permutation,tz-type-classification,tz-universal-torsor,voskresenskii-rank-two}%
+\imports{high-degree-del-pezzo,manin-stable-permutation,tz-torsor-splitting,tz-type-classification,voskresenskii-rank-two}%
 \evidence{c925-slice-cover}%
 Let \(k\) be a field of characteristic zero and let \(S/k\) be a smooth
 quartic del Pezzo surface.  Suppose that \(S(k)\ne\varnothing\) and that
@@ -443,10 +443,13 @@ geometric fibre.
 It remains to descend a good pair.  Fix a twist of one of the four types.
 Because \(T_3\) and \(B\) are Galois stable, tangent points, three-frames of
 hyperplanes containing \(\langle T_pZ,B\rangle\), and orbit test points form
-a geometrically integral incidence space over \(k\).  Rank, nonvanishing,
+a geometrically integral incidence space over \(k\).  More explicitly, after
+restricting to the open where \(\dim\langle T_pZ,B\rangle\) is constant, the
+three-frames form an open in a relative frame bundle over the product of the
+smooth tangent-point locus with the orbit-test locus.  Rank, nonvanishing,
 smoothness, and birational tangent projection define a nonempty
-Galois-invariant open.  Its projection to the tangent-point factor is dense
-constructible and therefore contains a nonempty open.
+Galois-invariant open in this bundle.  Its projection to the tangent-point
+factor is dense constructible and therefore contains a nonempty open.
 
 Choose the universal torsor whose fibre over a fixed point of \(S(k)\) is
 trivial.  Its \(k\)-points are Zariski dense by
@@ -514,10 +517,10 @@ The quotient \(T_0/T_3\) is a two-dimensional \(k\)-torus, hence is
 \eqref{eq:rational-quotient} and \eqref{eq:product-quotient} prove that
 \(S\times\A^2\) is \(k\)-rational.
 
-If \(S\) is not \(k\)-minimal, a \(k\)-defined union of pairwise disjoint
-exceptional curves contracts to a del Pezzo surface \(S'\) of degree at
-least five.  The image of a \(k\)-point of \(S\) is a \(k\)-point of \(S'\),
-so \(S'\), and therefore \(S\), is \(k\)-rational by
+If \(S\) is not \(k\)-minimal, successively contracting \(k\)-defined unions
+of pairwise disjoint exceptional curves gives a del Pezzo surface \(S'\) of
+degree at least five.  The image of a \(k\)-point of \(S\) is a \(k\)-point
+of \(S'\), so \(S'\), and therefore \(S\), is \(k\)-rational by
 \cite[Theorem~2.1]{VarillyAlvarado}.
 
 Finally, if \(S\) is stably \(k\)-rational, a nonempty open of a projective
@@ -526,7 +529,7 @@ infinite, this supplies a \(k\)-point on \(S\).  Manin's theorem makes
 \(\Pic(S_{\bar k})\) stably permutation \cite{Manin1966}.  This proves the
 last assertion.
 \uses{prop:tangent-section,thm:torus-quotient}%
-\imports{high-degree-del-pezzo,manin-stable-permutation,tz-type-classification,tz-universal-torsor,voskresenskii-rank-two}%
+\imports{high-degree-del-pezzo,manin-stable-permutation,tz-torsor-splitting,tz-type-classification,voskresenskii-rank-two}%
 \end{proof}
 
 \begin{proof}[Proof of Corollary~\ref{cor:cubics}]

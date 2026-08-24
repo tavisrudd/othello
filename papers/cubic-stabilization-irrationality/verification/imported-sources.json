@@ -103,7 +103,7 @@
     "pinpoint": "Proposition 4.1 and Lemma 4.2",
     "used": "Reduction of the minimal case to the four Galois-image types and subgroup containment."
   },
-  "tz-universal-torsor": {
+  "tz-torsor-splitting": {
     "citation": "TZ",
     "conventions": [
       {
@@ -117,8 +117,8 @@
         "requirement": "Remark 2.2 gives splitting over the function field for the Neron--Severi torus; equivariance is supplied by translation."
       }
     ],
-    "pinpoint": "Lemma 2.1, Remark 2.2, Theorem 3.4, and Corollary 3.5",
-    "used": "Density and rationality of the universal torsor and its equivariant generic splitting."
+    "pinpoint": "Lemma 2.1, Remark 2.2, and the Cox embedding at the start of Section 3",
+    "used": "Density of rational points, generic splitting of the universal torsor, and its dense-open Cox embedding."
   },
   "voskresenskii-rank-two": {
     "citation": "Voskresenskii1967",
