@@ -1,5 +1,9 @@
 # Explicit Cubic Threefolds Rational after Two Stabilizations
 
+[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21937490-blue.svg)](https://doi.org/10.5281/zenodo.21937490)
+
+[Open the manuscript PDF](cubic_stabilization_irrationality.pdf)
+
 For each of the two displayed smooth cubic threefolds `X/Q`, the least `m`
 for which `X × P^m` is rational is exactly two, over both `Q` and `C`.
 Rationality at `m=2` is proved here; irrationality at `m=1` is supplied by the
@@ -47,5 +51,5 @@ the displayed elimination graph. No complexity estimate is claimed.
 
 The exact boundary between proved, computationally certified, and imported
 claims is recorded in the manuscript annotations and
-`verification/imported-sources.json`. No manuscript DOI or release version is
-asserted because none has been assigned authoritatively.
+`verification/imported-sources.json`. The assigned Zenodo DOI is displayed
+above.

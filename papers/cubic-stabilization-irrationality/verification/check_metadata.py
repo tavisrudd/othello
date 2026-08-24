@@ -47,6 +47,8 @@ assert {item["identifier"] for item in zenodo["related_identifiers"]} == {
 }
 assert "cubic threefolds" in zenodo["keywords"]
 assert "levels of stable rationality" in zenodo["keywords"]
+assert "https://doi.org/10.5281/zenodo.21937490" in readme
+assert "(cubic_stabilization_irrationality.pdf)" in readme
 for relative in (
     "cubic_stabilization_irrationality.tex",
     "cubic_stabilization_irrationality.pdf",
