@@ -106,6 +106,15 @@ the whole reconstruction loop, but (5.40) gives genuine positive \(q\)-powers
 at negative-normal centres, so this does not prove (INT-\(\Psi\)); the next
 gate is a joint \((q,z)\)-filtered base-row calculation.  Report:
 `../2026-08-24-c925-int-psi-reconstruction-and-stable-rationality-boundary.md`.
+That filtered calculation is now executed and closes universal
+(INT-\(\Psi\)) false.  For the smooth projective codimension-four edge with
+centre \(\mathbf P^1\) and normal bundle
+\(\mathcal O(-2)^{\oplus2}\oplus\mathcal O(-1)^{\oplus2}\), the first
+centre term \(q^2z^{-2}\) meets the normalized \(l=2\) base entry
+\(q^{-2}z^2\); undoing the source normalization gives a nonzero raw
+\(q^{+1}\) base-row coefficient.  Thus arbitrary AKMW chain composition
+needs either negative-normal factorization control or a replacement lattice.
+Report: `../2026-08-24-c925-int-psi-negative-normal-counterexample.md`.
 The first opposite-route test is also closed exactly: after restricting
 Tschinkel--Zhang's displayed permutation resolution to the type-\(I_1\)
 group \(C_2\times S_3\), all fourteen rational-character candidates with
@@ -337,11 +346,16 @@ realization of that orbit.
   notes/2026-08-23-c925-fable-stokes-decorated-ledger.md
 - Section 5.8 reconstruction audit and the new stable-rationality boundary:
   integral Birkhoff lifting is conditional on whole-loop integrality, which
-  fails as an automatic premise at negative-normal centres; the actual base
-  row remains open to a joint \((q,z)\)-filtration.  Tschinkel--Zhang's
+  fails as an automatic premise at negative-normal centres; Tschinkel--Zhang's
   stably rational cubic threefolds refute the every-smooth all-\(m\) target
   while leaving \(m=2\) open:
   notes/2026-08-24-c925-int-psi-reconstruction-and-stable-rationality-boundary.md
+- Universal (INT-\(\Psi\)) counterexample: a codimension-four rational
+  section with normal degrees \((-2,-2,-1,-1)\) produces a nonzero raw
+  \(q^{+1}\) base-row coefficient at first Novikov order; the exact
+  associated-graded Birkhoff calculation includes arbitrary lower
+  restriction data:
+  notes/2026-08-24-c925-int-psi-negative-normal-counterexample.md
 - Type-\(I_1\) stable-permutation resolution audit: exact restriction of
   Tschinkel--Zhang's lattice, all fourteen target-rank \(<11\) rational
   character candidates rejected integrally by modular group-algebra ranks;

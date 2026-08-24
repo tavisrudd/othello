@@ -306,8 +306,14 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   The 2026-08-24 reconstruction audit shows that the Birkhoff recursion is
   integral only after whole-loop integrality is supplied; Iritani's centre
   extension (5.40) produces positive \(q\)-powers at negative-normal rational
-  centres, so the next gate is a joint \((q,z)\)-filtered base-row calculation,
-  not plain adic lifting.  Tschinkel--Zhang (arXiv:2608.20029v1) construct
+  centres.  The joint \((q,z)\)-calculation is now complete and closes
+  universal (INT-\(\Psi\)) false: a codimension-four \(\mathbf P^1\) with
+  normal degrees \((-2,-2,-1,-1)\) contributes a nonzero raw \(q^{+1}\)
+  base-row coefficient at first Novikov order.  Arbitrary chain composition
+  therefore needs negative-normal factorization control or a replacement
+  lattice.  Report:
+  `../2026-08-24-c925-int-psi-negative-normal-counterexample.md`.
+  Tschinkel--Zhang (arXiv:2608.20029v1) construct
   stably rational smooth cubic threefolds, definitively closing the
   every-smooth all-\(m\) target false while leaving \(m=2\) open; their
   Section 4 bound implies \(X\times\mathbf P^{11}\) is rational for the

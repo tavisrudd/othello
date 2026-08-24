@@ -1,0 +1,32 @@
+{
+  "birkhoff": {
+    "normalized_delta_psi_base_row": "1",
+    "q_integral": false,
+    "raw_delta_psi_base_row": "q = eps^-3"
+  },
+  "conclusion": "The Q-linear raw base row of Iritani's reconstructed Psi has a nonzero q^1 coefficient for this blowup edge; universal INT-Psi is false.",
+  "geometry": {
+    "ambient_c1_degree": -4,
+    "ambient_dimension": 5,
+    "base_two_point_virtual_dimension": 0,
+    "centre": "P1",
+    "codimension": 4,
+    "mixing_input_codimension": 4,
+    "normal_bundle_degrees": [
+      -2,
+      -2,
+      -1,
+      -1
+    ],
+    "normal_degree": -6
+  },
+  "iritani_terms": {
+    "centre_term": "q^2*z^-2",
+    "exceptional_index_l": 2,
+    "fourier_mode": "constant",
+    "normalized_base_term": "q^-2*z^2",
+    "raw_base_term": "q^-1*z^2",
+    "source_normalization": "q^-1*c_2"
+  },
+  "schema": "c925-int-psi-negative-normal-v1"
+}
