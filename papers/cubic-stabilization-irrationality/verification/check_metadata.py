@@ -24,6 +24,32 @@ bibitems = set(re.findall(r"\\bibitem\{([^}]+)\}", text))
 imports = json.loads((ROOT / "verification/imported-sources.json").read_text())
 evidence = json.loads((ROOT / "verification/evidence.json").read_text())
 claims = json.loads((ROOT / "verification/claim-map.json").read_text())
+zenodo = json.loads((ROOT / ".zenodo.json").read_text(encoding="utf-8"))
+readme = (ROOT / "README.md").read_text(encoding="utf-8")
+
+title_match = re.search(r"\\title\{([^}]+)\}", text)
+assert title_match and zenodo["title"] == title_match.group(1)
+assert zenodo["upload_type"] == "publication"
+assert zenodo["publication_type"] == "preprint"
+assert zenodo["access_right"] == "open"
+assert zenodo["license"] == "cc-by-4.0"
+assert zenodo["language"] == "eng"
+assert zenodo["creators"] == [{
+    "name": "Rudd, Tavis",
+    "orcid": "0009-0003-6405-3275",
+    "affiliation": "Independent researcher",
+}]
+for relative in (
+    "cubic_stabilization_irrationality.tex",
+    "cubic_stabilization_irrationality.pdf",
+    "LICENSE",
+    "verification/slice-cover-certificate.json",
+    "verification/check_slice_cover.py",
+):
+    assert (ROOT / relative).is_file() and relative in readme
+stale = re.compile(r"INT[-_ ]?Psi|all[- ]m|quantum.?D|marked block|conditional", re.I)
+assert not stale.search(json.dumps(zenodo))
+assert not stale.search(readme)
 
 assert set(identifiers("imports")) <= set(imports)
 assert set(identifiers("evidence")) <= set(evidence)
