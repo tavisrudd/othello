@@ -222,29 +222,14 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   non-retract-rational class `(3,6,3)`. Thus the remaining gate is an
   intrinsic rational correspondence or invariant-field parametrization, not
   a missed linear subtorus, higher-degree ambient slice, or residual-torus
-  calculation. Moreover, if
-  \(Y=X\times\mathbf P^3\) is irrational, then the uniform level-four
-  theorem makes \(Y\times\mathbf A^1\) rational, producing the cancellation
-  example Tschinkel--Zhang record as unknown; if \(Y\) is rational, the
-  bound drops to three. Unconditionally, since \(s(X)\in\{2,3,4\}\), one
-  of the three named smooth projective varieties
-  \(X\times\mathbf P^i\), \(1\le i\le3\), is nonrational but has rational
-  \(\mathbf A^1\)-stabilization. This finite-list certificate does not yet
-  identify which candidate, so it does not close Tschinkel--Zhang's
-  single-example construction problem. Report and exact certificates:
+  calculation. Its former finite-list cancellation consequence is superseded
+  by the exact level-two theorem below. Report and exact certificates:
   `../2026-08-24-c925-level-three-descent-and-cancellation-frontier.md`.
 
-  **Standalone cancellation consequence:** the same threshold argument has
-  now been hardened over \(\mathbf Q\). The complex \(m=1\) irrationality
-  theorem rules out \(\mathbf Q\)-rationality at level one, while the uniform
-  OADP theorem gives \(\mathbf Q\)-rationality at level four. For the minimal
-  \(s_{\mathbf Q}\in\{2,3,4\}\), the smooth projective variety
-  \(X\times\mathbf P^{s-1}\) is nonrational but becomes rational after one
-  \(\mathbf A^1\). This settles the existential birational-cancellation
-  statement with the explicit three-element candidate list
-  \(X\times\mathbf P^i\), \(1\le i\le3\), but does not identify one member.
-  The source's August 21 open statement and a bounded August 24 arXiv/OpenAlex
-  screen support only correspondingly bounded priority language. Report:
+  **Superseded finite-disjunction consequence:** the earlier threshold
+  argument confined a cancellation witness to three explicit candidates.
+  The uniform level-two theorem below now identifies the first candidate for
+  both cubic families. Historical report:
   `../2026-08-24-c925-finite-disjunction-a1-cancellation-theorem.md`.
 
   **Identified cancellation counterexample and exact type-\(I_1\) threshold:**
