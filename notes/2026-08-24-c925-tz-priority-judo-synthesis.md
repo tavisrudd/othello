@@ -115,6 +115,19 @@ MathSciNet, a systematic zbMATH query, and the three forward-citation graphs
 were not closed. Accordingly this report makes no global first-priority
 claim.
 
+The forward-citation probe used the pinned DOI on 2026-08-24:
+
+- OpenAlex resolved it to W7203907824 and returned
+  cited_by_count \(=0\); the successful JSON response distinguished an empty
+  citing set from an error.
+- Crossref's exact DOI endpoint returned HTTP 404, so Crossref supplied no
+  citing-set count.
+- Semantic Scholar's exact arXiv endpoint returned HTTP 429, so Semantic
+  Scholar supplied no citing-set count.
+
+Because only one of the three required graphs returned a count, this licenses
+no forward-citation-closure claim.
+
 As of the same check, the only DOI located for the new paper is the arXiv
 DataCite DOI
 
