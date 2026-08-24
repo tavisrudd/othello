@@ -180,7 +180,10 @@ complex as separate victories.
   recover `t` independent target combinations.  For an outer code with at
   least two blocks and `d(O⊥) > r + 1`, every cost-`r` system is confined to
   its inner block exactly when `r < M_t(D_P,K_P) + d(I⊥)`.  Below that gate,
-  concatenation preserves normalized equations and exact helper supports.
+  concatenation preserves normalized equations and exact helper supports.  At
+  one target coordinate with nonzero outer projection, a second finite theorem
+  retains every outer-functional fiber and gives an exact weighted criterion
+  without the outer-distance hypothesis.
   [Exact Transfer of Bounded Linear Recovery and Relative Weight Hierarchies](https://github.com/tavisrudd/complete-repair-ports/blob/main/complete_repair_ports.pdf).
 
 - **Order six is the unique nontrivial cut-rigid symmetric conference
@@ -200,12 +203,11 @@ complex as separate victories.
   dimension four depend on explicit reconstruction-tail and residual
   divisor-tagging hypotheses. [Framed Formal Monodromy of Cubic Threefolds](https://github.com/tavisrudd/cubic-stabilization-m1/blob/main/companions/cubic-framed-monodromy/cubic_framed_monodromy.pdf).
 
-- **All projective stabilizations.** The cubic endpoint calculation,
-  simple-wall coordinate, ordinary-flop transport, support collapse, Gamma
-  reduction, and tail holonomicity are proved. The conclusion that every
-  `X × P^m` is irrational still assumes gauged-admissibility and one-object
-  marked threshold compatibility for the cyclic Rees `z`-modules. The paper
-  is an early draft. [Gamma Point Rows under Quantum Wall Crossing and a Criterion for Stable Irrationality](https://github.com/tavisrudd/cubic-stabilization-irrationality/blob/main/cubic_stabilization_irrationality.pdf).
+- **Exact level two.** Two explicit smooth cubic threefolds satisfy
+  `X × P¹` irrational and `X × P²` rational. More generally, a quartic del
+  Pezzo surface with a rational point and stably permutation geometric
+  Picard lattice becomes rational after adjoining two variables.
+  [Explicit Cubic Threefolds with Level of Stable Rationality Two](https://github.com/tavisrudd/cubic-stabilization-irrationality/blob/main/cubic_stabilization_irrationality.pdf).
 
 ## Theorems over infinite families
 
@@ -229,6 +231,7 @@ the theorem column.
 | The Clebsch Cubic: Hitchin’s Icosahedral Double Cover and Conference-Matrix Rigidity | Aligned four-sets reconstruct the two-graph up to complement, and seven is sharp. | Every two-graph on at least seven vertices. |
 | Arcs complete outside a conic: a prescribed-hole defect identity and matching-design rigidity | The first two secant moments give an exact defect identity with pointwise nonnegative remainder. | Every `k`-arc with `k ≥ 3` in every finite projective plane, and every prescribed hole set disjoint from the arc. |
 | Integral Secant Distributions and Improved Bounds for Complete `(k,n)`-Arcs | Exact integer envelopes for the internal and external maximal-secant degrees give a positive linear correction to the real incidence bound. | Every ordered factorization `lambda = uv` in positive integers, with `q = (u+v+1)m`, `n = (u+1)m+1`, and the stated external coverage hypothesis. |
+| Integral Secant Distributions and Improved Bounds for Complete `(k,n)`-Arcs | The full dual maximal-secant set can be changed at `O(1)` support points into an exact `lambda mod p` multiset. | Every fixed factor pair `lambda=uv` with `u+v+1` a power of `p`, along `q=p^e`, for arcs at the leading equality density with the stated external coverage. |
 | Integral Secant Distributions and Improved Bounds for Complete `(k,n)`-Arcs | `t_{2q/3+1}(2,q) ≥ q²/3 + 4q/3 − o(q)`. | `q = 3^h` as `h` tends to infinity. |
 | Deep Holes of Projective Reed–Solomon Codes Beyond Redundancy Four: Recursive Carriers and Exact Classifications Through Redundancy Ten | Split-free directions, and deep holes wherever the covering-radius gate applies, are classified in the stated ranges. | R5–R6: every `q ≥ 7`; R7: split-free for every `q ≥ 7` and deep holes for `q ≥ 11`; R8–R10: `q ≥ 43, 53, 59`. |
 | Deep Holes of Projective Reed–Solomon Codes Beyond Redundancy Four: Recursive Carriers and Exact Classifications Through Redundancy Ten | On the trivial-gcd separable stratum, `#Y = 6N + 3d₂ + d₃` in every characteristic. | Every field order and characteristic. |
@@ -236,7 +239,7 @@ the theorem column.
 | Diagonal Isoduality and Transversal Clifford Groups of MDS–CSS Codes | The diagonal multiplier nullity fixes the transversal logical group. | All `[2m,m,m+1]q` MDS codes over odd prime fields. |
 | Balanced Cuts of Conference Matrices: Squared-Spectrum Rigidity and Hermitian Holonomy | Order six is the unique nontrivial realized symmetric conference order whose normalized balanced cross-block Gram spectrum is cut-independent. | Every symmetric conference matrix and every balanced half. |
 | Exact Transfer of Bounded Linear Recovery and Relative Weight Hierarchies | For `u=min(k,|P|)`, `b=min(k,|J|)`, and `ell=u+b-k`, an MDS inner code has `M_t(D_P,K_P)=k-u+t` at every recoverable rank; helper-span gives equality in the global ceiling, and rank-one ceiling equality is rigid. | Every proper MDS inner code and every target/helper split with `1 ≤ t ≤ ell`. |
-| Exact Transfer of Bounded Linear Recovery and Relative Weight Hierarchies | `M_t(D_P,K_P)` is the exact minimum helper-union cost for rank-`t` recovery. Under `N ≥ 2` and `d(O⊥)>r+1`, all cost-`r` systems are block-confined exactly when `r<M_t(D_P,K_P)+d(I⊥)`, and normalized equations and exact supports transfer. | Every represented inner code with nonzero dual, every target set with `1 ≤ t ≤ dim W_P`, and every linear outer code satisfying the finite gate; growing outer dual distance gives the eventual family form. |
+| Exact Transfer of Bounded Linear Recovery and Relative Weight Hierarchies | `M_t(D_P,K_P)` is the exact minimum helper-union cost for rank-`t` recovery. Under `N ≥ 2` and `d(O⊥)>r+1`, all cost-`r` systems are block-confined exactly when `r<M_t(D_P,K_P)+d(I⊥)`, and normalized equations and exact supports transfer; in rank one, target-constrained inner coset weights give a finer exact finite criterion before that distance gate. | Every represented inner code with nonzero dual and every target set with `1 ≤ t ≤ dim W_P` under the ranked gate; the ungated rank-one form assumes nonzero projection onto the target outer block. |
 | Integral Cohomology and Modular Decomposition for the Theta Divisor of a Cubic Threefold | The integral middle lattice has rank `130` and saturation quotient `(Z/2)^10`; the integral resolution complex has central Smith factor three, a length-three mod-three Loewy chain, and modular relative-hard-Lefschetz failure. | The theta divisor of every smooth complex cubic threefold. |
 
 ## Papers and entry points
@@ -258,7 +261,7 @@ boundary, and reproducible entry points.
 | Reconstructing PG(2,13), its conic, and polarity from the minimum words of a binary conic code | Coding / finite geometry | Weighted pair data on minimum words recover a marked projective plane, conic, and polarity. | [PDF](https://github.com/tavisrudd/q13-passant-code/blob/main/passant_code_q13.pdf) · [repo](https://github.com/tavisrudd/q13-passant-code) |
 | Chordal and Conference Cubics: Reconstruction and a Residual C₂-Torsor | Invariant theory / algebraic combinatorics | Distinct chordal and conference cubics recover one marked six-axis carrier; the residual chordal-line torsor is distinct from the global-negation/Frobenius torsor. | [PDF](https://github.com/tavisrudd/chordal-conference-reconstruction/blob/main/chordal_conference_reconstruction.pdf) · [repo](https://github.com/tavisrudd/chordal-conference-reconstruction) |
 | Hodge Atoms as Occurrence-Indexed Marker Ledgers | Algebraic geometry / quantum cohomology | The standard abstract Hodge-atom chemical formula is the Hodge specialization of an occurrence-indexed categorical marker ledger, with an effective weak-factorization quotient and a strictly one-step rank-two obstruction. | [PDF](https://github.com/tavisrudd/hodge-atom-marker-ledger/blob/main/hodge_atom_marker_ledger.pdf) · [repo](https://github.com/tavisrudd/hodge-atom-marker-ledger) |
-| Gamma Point Rows under Quantum Wall Crossing and a Criterion for Stable Irrationality | Algebraic geometry / quantum cohomology | A rank-one derived-clutching theorem, an exact simple-wall ambient point coordinate, ordinary-flop point-row transport, global support collapse, and Gamma reduction give an all-stabilizations criterion under explicit gauged-admissibility and marked threshold assumptions. | [PDF](https://github.com/tavisrudd/cubic-stabilization-irrationality/blob/main/cubic_stabilization_irrationality.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-irrationality) |
+| Explicit Cubic Threefolds with Level of Stable Rationality Two | Algebraic geometry / birational geometry | Two explicit smooth cubic threefolds have exact stable-rationality level two; the reusable surface theorem proves `S × A²` rational from a rational point and a stably permutation geometric Picard lattice. | [PDF](https://github.com/tavisrudd/cubic-stabilization-irrationality/blob/main/cubic_stabilization_irrationality.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-irrationality) |
 | Standard Flips of Discrepancy One: Extremal J-Normalization and the Meijer Aperture at ν=1 | Algebraic geometry / quantum cohomology | An exact `z`-order count and the `ν=1` Barnes sector complete the discrepancy-one range in Shen--Shoemaker's extremal flip theorem. | [PDF](https://github.com/tavisrudd/discrepancy-one-flips/blob/main/discrepancy_one_flips.pdf) · [repo](https://github.com/tavisrudd/discrepancy-one-flips) |
 | Arcs complete outside a conic: a prescribed-hole defect identity and matching-design rigidity | Finite geometry / designs | A universal pointwise defect identity gives matching-design rigidity, stability, and conic-relative bounds. | [PDF](https://github.com/tavisrudd/arcs-complete-outside-conic/blob/main/arcs_complete_outside_conic.pdf) · [repo](https://github.com/tavisrudd/arcs-complete-outside-conic) |
 | Integral Secant Distributions and Improved Bounds for Complete `(k,n)`-Arcs | Finite geometry / designs / coding theory | Integer maximal-secant distributions give divisor-indexed linear improvements, followed by modular-lift bounds in characteristics two and three. | [PDF](https://github.com/tavisrudd/integral-secant-arcs/blob/main/integral_secant_arcs.pdf) · [repo](https://github.com/tavisrudd/integral-secant-arcs) |
@@ -672,7 +675,9 @@ helper-union costs for recovering independent target combinations. Under the
 finite outer gate `N >= 2` and `d(O^perp) > r + 1`, every rank-`t` recovery
 system of cost at most `r` remains in its inner block exactly when
 `r < M_t(D_P,K_P) + d(I^perp)`; below the gate, normalized equations and exact
-helper supports transfer.
+helper supports transfer. At one target coordinate with nonzero outer
+projection, target-constrained inner coset weights give a finer exact finite
+criterion that retains the nonzero outer-functional sector.
 
 > *Abstract* Let `I <= F_q^E` be a represented inner code, let `P` be a target
 > set, and put `J = E \ P`. The target and helper parts of a generator matrix
@@ -691,6 +696,12 @@ helper supports transfer.
 > bounded service-rate transfer, and positive-density realization in
 > asymptotically good fixed-alphabet families.
 >
+> Before the outer-distance gate, the one-coordinate theorem minimizes exact
+> target-constrained and ordinary inner coset weights over the full outer
+> functional dual. A construction using a Singer cycle and `[k+1,k,2]_q`
+> inner codes shows nonvacuously that this weighted criterion can succeed when
+> outer support distance does not decide transfer.
+>
 > We construct pairs with the same complete relative-weight hierarchy but
 > different bounded recovery reliability, and pairs with the same associated
 > nested code pair but different confinement thresholds. For a
@@ -700,7 +711,8 @@ helper supports transfer.
 > `r + 1 < z_x(I)` is the rank-one case.
 
 **Delivers.** The associated nested code pair and its exact relative-weight
-interpretation; finite and eventual rank-stratified confinement theorems;
+interpretation; finite and eventual rank-stratified confinement after the
+outer-distance gate; an ungated exact weighted rank-one theorem;
 best-target generalized-weight and cooperative-locality consequences; an MDS
 staircase and rigidity theorem; positive-density and bounded service-rate
 transfer; reliability and coefficient-sensitive separations; and explicit
@@ -715,9 +727,9 @@ service rate, or stochastic repair reliability.
 **Why it matters.** Relative weights give the exact numerical spine of
 bounded linear recovery, while actual repair behavior depends on the full
 family of normalized equations, their overlap, and their coefficients. The
-paper identifies the sharp condition under which concatenation transports
-that richer witness family; its earlier single-coordinate theorem becomes the
-rank-one case.
+paper identifies the exact gated rank-stratified condition and the finer
+weighted finite rank-one condition under which concatenation transports that
+richer witness family.
 
 ---
 
@@ -792,75 +804,35 @@ changes no higher-discrepancy statement.
 
 ---
 
-#### Gamma Point Rows under Quantum Wall Crossing and a Criterion for Stable Irrationality
-
-**Early draft, likely to contain logical gaps and notational issues.**
+#### Explicit Cubic Threefolds with Level of Stable Rationality Two
 
 [PDF](https://github.com/tavisrudd/cubic-stabilization-irrationality/blob/main/cubic_stabilization_irrationality.pdf) · [Repository](https://github.com/tavisrudd/cubic-stabilization-irrationality) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21937490-blue.svg)](https://doi.org/10.5281/zenodo.21937490)
 
-**Standout result.** A rank-one derived-intersection theorem identifies the
-fixed clutching data along every tail. Together with an exact simple-wall
-point coordinate, ordinary-flop point-row transport, global support collapse,
-and coefficientwise Gamma reduction, it reduces the remaining analytic input
-to one-object threshold isomorphisms of the cyclic point-row `z`-modules. Under those
-isomorphisms and the stated gauged-admissibility conditions, every projective
-stabilization of every smooth cubic threefold is irrational.
+**Standout result.** For two explicit smooth cubic threefolds over `Q`, the
+smallest `m` for which `X × P^m` is rational is exactly two, over both `Q`
+and `C`: `X × P¹` is irrational, while `X × P²` is rational.
 
-> *Abstract* Assume that every smooth projective birational map admits a
-> gauged-admissible marked Włodarczyk completion and, on every finite Artin
-> truncation of that completion, the one-object marked threshold comparisons
-> stated in the paper. We prove that
-> `X × P^m` is irrational for every smooth complex cubic threefold `X` and
-> every `m ≥ 0`.
->
-> The endpoint contrast is unconditional. Cai's small quantum-connection
-> matrices give a rank-two block with
-> primitive-sixth formal monodromy. We reconstruct its indicial polynomial
-> directly, and an elementary `₂F₃` Barnes calculation shows that the Gamma
-> point row is nonzero on both primitive-sixth lines. Under multiplication by
-> `P^m`, quantum Künneth produces `m+1` copies and preserves detection of the
-> resulting packet, whereas projective space itself has no primitive-sixth
-> packet.
->
-> For the global comparison, the Gamma integral structure turns the class of
-> a point into the flat Euler covector which reads ordinary rank. We prove an
-> exact ambient point-column identity at a simple VGIT wall's extremal
-> specialization and exact point-row transport across an ordinary flop on a
-> fixed continuation domain. In a global cobordism, a common-open orbit
-> cylinder gives one endpoint point row, rotation localization kills every
-> intermediate fixed stratum, and Woodward's clutching factorization packages
-> every remaining bubble tree into endpoint tails. The rank-one derived
-> clutching theorem proved here makes each such tail holonomic and tempered.
-> Beyond gauged-admissibility, the remaining unproved input is an inverse-system
-> family of one-object marked threshold comparisons, finite at every
-> Artin-energy truncation. At each sign or stability threshold, and on reduced
-> nearby cycles at each zero-mode rank change, one marked local Fourier object
-> must induce an isomorphism of the cyclic Rees `z`-modules which intertwines
-> formal monodromy, carries the marked row, preserves the stated Stokes and deck
-> data, and, at a zero mode, identifies the entire adjacent row-generated cyclic
-> module with its reduced nearby-cycle realization. Preservation of primary
-> projections then follows from polynomial functional calculus. Under these assumptions,
-> Rees homogenization makes point-row nonvanishing on a formal-monodromy
-> primary packet birationally invariant. A two-tail rational counterexample
-> shows that separate holonomicity does not determine the threshold map. The
-> incomplete-Gamma and Fourier-boundary countermodels rule out still weaker
-> replacements based only on formal monodromy, pairing, integrality, or
-> localized Fourier support.
+> *Abstract.* The rationality statement follows from a general theorem for
+> quartic del Pezzo surfaces. If `S(k)` is nonempty and the geometric Picard
+> lattice is a stably permutation Galois module, then `S × A²` is
+> `k`-rational. The proof constructs a rational quotient of the projective Cox
+> model by a saturated rank-three subtorus; the residual two-dimensional torus
+> is rational. Applied to both explicit Tschinkel--Zhang cubic families, this
+> gives a uniform `P²` rationality bound. It also yields smooth projective
+> nonrational fourfolds `Y` for which `Y × A¹` is rational.
 
-**Delivers.** An exact simple-wall ambient point coordinate, exact
-ordinary-flop point-row transport, three explicit failure models,
-global support collapse, coefficientwise Gamma reduction, an unconditional
-tail-holonomicity theorem, an unconditional cubic endpoint calculation, and
-a conditional all-stabilizations criterion.
+**Delivers.** Exact stable-rationality level two for two explicit cubic
+threefolds, a two-variable rationality theorem for quartic del Pezzo surfaces,
+a constructive rational-torus-quotient criterion, a uniform `P²` bound for
+both cubic families, and the affine-line fourfold consequence.
 
-**Who cares.** Researchers in quantum cohomology, birational wall crossing,
-Gamma structures, irregular connections, Fourier--Laplace methods, and
-stable-rationality obstructions.
+**Who cares.** Researchers in cubic hypersurfaces, rationality questions,
+quartic del Pezzo surfaces, universal torsors, Cox rings, and algebraic tori.
 
-**Why it matters.** It separates the proved rank-one derived geometry from the
-locally finite marked threshold comparisons still needed, in addition to the
-explicit gauged-admissibility conditions, to turn the cubic endpoint contrast
-into a global birational obstruction.
+**Why it matters.** It locates the first rational stabilization of explicit
+stably rational but nonrational cubic threefolds and turns an eventual
+stable-rationality statement into the sharp transition
+`X × P¹` irrational / `X × P²` rational.
 
 ---
 
@@ -936,8 +908,9 @@ yield further linear terms; over `q = 3^h` this gives
 
 **Delivers.** A general integer incidence theorem for selected blocks of a
 symmetric design, its maximal-secant specialization, the complete
-factor-pair classification of the integral rational equality families, and
-characteristic-specific modular-lift bounds.
+factor-pair classification of the integral rational equality families, a
+bounded-edit modular stability theorem for every characteristic-compatible
+family, and characteristic-specific modular-lift bounds.
 
 **Who cares.** Finite geometers studying complete higher arcs and multiple
 blocking sets, design theorists working with incidence inequalities, and

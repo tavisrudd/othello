@@ -48,33 +48,30 @@
 \maketitle
 
 \begin{abstract}
-Let $I\leq\mathbb F_q^E$ be a represented inner code, let $P\subseteq E$ be a
-target set, and put $J=E\setminus P$.  The target and helper parts of a
-generator matrix determine a nested pair
-$K_P\subseteq D_P\leq\mathbb F_q^J$.  We identify its relative generalized
-Hamming weight $M_t(D_P,K_P)$ with the minimum helper union needed to recover
-$t$ independent target combinations.  For any linear outer code $O$ with at
-least two blocks and $d(O^\perp)>r+1$, every such
-recovery system using at most $r$ helpers is confined to its inner block
-exactly when
+Let $I\leq\mathbb F_q^E$, let $P\subseteq E$ be a target set, and put
+$J=E\setminus P$.  The target and helper columns determine a nested pair
+$K_P\subseteq D_P\leq\mathbb F_q^J$.  Its relative generalized Hamming
+weight $M_t(D_P,K_P)$ is the minimum helper union recovering $t$
+independent target combinations.  We prove two exact transfer theorems.
+First, for an $L$-linear outer code $O\leq L^N$ with $N\geq2$ and
+$d(O^\perp)>r+1$, every such cost-$\leq r$ system is confined to its inner
+block exactly when
 \[
  r<M_t(D_P,K_P)+d(I^\perp).
 \]
-Below this threshold, concatenation preserves every bounded normalized dual
-recovery equation, its exact helper support, and every inclusion-minimal
-recovery set.
+Below it, zero-extension preserves normalized equations and exact supports.
+Second, for one target coordinate in a block onto which $O$ projects
+nontrivially, target-constrained inner coset weights and the functional dual
+of $O$ give the exact finite nonconfinement cost without an outer-distance
+hypothesis.  A single-parity-check family
+transfers beyond the ordinary outer support-distance gate.
 
-Consequences include an exact best-target generalized-weight formula, exact
-MDS thresholds, transfer of bounded service-rate regions, and
-positive-density realization in asymptotically good fixed-alphabet families.
-We construct pairs with the same complete relative-weight hierarchy but
-different bounded repair reliabilities, and presentations of the same nested
-pair with different confinement thresholds.  For a projective-simplex family,
-\[
- M_t=\frac{q^m-q^{m-t}}{q-1}
-\]
-and the recovery probability is an explicit projective-rank distribution.
-The one-coordinate criterion $r+1<z_x(I)$ is the rank-one case.
+Positive-density and bounded service-rate transfer follow.  Equal
+relative-weight hierarchies need not determine
+bounded repair reliability, and presentations of the same nested pair can
+have different confinement thresholds.  A projective-simplex family gives a
+non-MDS hierarchy and projective-rank reliability.  The criterion
+$r+1<z_x(I)$ is the rank-one zero-functional case.
 \end{abstract}
 
 \section{Introduction}
@@ -89,18 +86,19 @@ coordinate-indexed recovery structures record more local information
 \cite{MarquezCorbellaEtAl2019}, but support data alone discard the dual
 coefficients that implement the recovery equations.
 
-This paper identifies the relative generalized Hamming weights of the
-associated nested pair in the generator matrix as the exact fixed-target
-helper costs.  The same quantities are then the sharp obstructions to exact
-transfer through concatenation.  Relative generalized Hamming weights and
+This paper applies the relative generalized Hamming weights of the associated
+nested pair in the generator matrix to fixed-target helper costs.  Relative generalized Hamming weights and
 the relative dimension/length profile were introduced for nested codes by
 Luo, Mitrpant, Vinck, and Chen, who interpreted them as access thresholds in
 a wiretap model~\cite{LuoEtAl2005}; later work develops their
 ramp-secret-sharing and algorithmic roles
-\cite{GeilEtAl2014,SanJose2025,Geil2026}.  The result here is the canonical
-nested pair attached to a represented target/helper split, its exact recovery
-interpretation, and its sharp concatenation role, including transfer of every
-minimizing equation rather than only the numerical weight.
+\cite{GeilEtAl2014,SanJose2025,Geil2026}.  The RGHW identity below is the
+standard nested-code support invariant applied to the pair induced by a
+represented target/helper split.  The new content begins with concatenation:
+after the outer-dual-distance gate, each relative weight acquires the same
+additive inner-dual obstruction and every bounded normalized equation transfers,
+not only its numerical cost.  At one target coordinate a finer weighted theorem
+removes the gate and gives the exact finite-length obstruction.
 
 Let $q$ be a prime power.  Let $I\leq\F_q^E$ have a full-row-rank generator matrix
 $G=(G_P\mid G_J)$, where $P$ is the target set and $J=E\setminus P$.  Put
@@ -124,7 +122,7 @@ of erased coordinate positions.  Recovering all values on $P$ is the special
 case $U_P\subseteq\operatorname{im}G_J$ and $t=\dim U_P$; dependent target
 columns may make this dimension smaller than $|P|$.
 
-\begin{theorem}[Main theorem]
+\begin{theorem}[Main theorem: ranked transfer after the outer-distance gate]
 \label{thm:main}
 \coverage{absent}%
 \uses{thm:relative-weight-recovery, thm:ranked-confinement}%
@@ -159,6 +157,14 @@ with a nonzero inner-dual perturbation in another block.  The finite outer
 gate removes every nonzero outer-functional alternative; dual-distance growth
 makes that gate automatic at fixed radius.
 
+Section~\ref{sec:confinement} also retains the nonzero-functional sector in
+rank one.  Target-constrained inner coset weights then give the exact finite
+minimum for every outer code whose projection onto the target block is
+nonzero, including cases where ordinary outer support distance does not decide
+transfer.  These are two distinct levels of
+exactness: arbitrary recovered dimension after the outer-distance gate, and
+fully weighted finite-length exactness at one coordinate.
+
 The same bijection yields the later transfer results.  It preserves every
 block-local statistic determined by normalized recovery systems of cost at
 most $r$.  After forgetting coefficients, it also preserves statistics
@@ -175,12 +181,23 @@ through $x$, and
 \]
 Thus $r<M_1+d(I^\perp)$ is exactly $r+1<z_x(I)$.
 
+The separation results delimit the information carried by this hierarchy:
+\[
+ \text{relative-weight hierarchy}
+ \not\Longrightarrow \text{bounded repair reliability},
+ \qquad
+ (K_P,D_P)\not\Longrightarrow \text{confinement threshold}.
+\]
+The first failure comes from the overlap pattern of all recovery equations;
+the second comes from the coefficient presentation through $d(I^\perp)$.
+
 Concatenation has long been used to construct LRCs with prescribed parameter
 properties \cite{LiuEtAl2022,JinFu2026}.  Jin and Fu fix a binary $[3,2,2]$
 inner code and choose $\F_4$ outer codes to obtain parameter-optimal binary
 locality-two codes.  Here the inner representation is arbitrary, and the
-question is the sharp obstruction to preserving every bounded dual recovery
-equation.  We make no minimum-bandwidth claim.
+question is the exact obstruction to preserving every bounded dual recovery
+equation: weighted and ungated in rank one, or rank-stratified after the
+outer-distance gate.  We make no minimum-bandwidth claim.
 
 \input{sections/01-complete-ports}
 \input{sections/02-confinement-transfer}

@@ -3,9 +3,9 @@
 **Lane**: `complete-ports`
 
 **Date**: 2026-08-24
-**Status**: ACTIVE; C954 DUAL FAILURE-THRESHOLD UPGRADE COMPLETE AFTER
-LITERATURE, PROOF, FRESH-COLD-READ, AND 18-PAGE RELEASE GATES; C325 APPENDIX
-VERIFIER AND C953 AGGREGATE REVIEW FOLLOW; C955 COEFFICIENT-
+**Status**: ACTIVE; C957 UNGATED WEIGHTED RANK-ONE TRANSFER RESTORED AFTER
+LITERATURE, ANTI-SMUGGLING, FRESH-COLD-READ, AND 20-PAGE RELEASE GATES; C325
+APPENDIX VERIFIER AND C953 AGGREGATE REVIEW FOLLOW; C955 COEFFICIENT-
 PRESENTATION SPECTRUM IS QUEUED AFTER C953; NO PUSH OR DEPOSIT
 **Theorem source lane**: archived [`repaircodes`](done/2026-07-13-projective-completion-repaircodes.md)
 **Current private paper**: [`complete-repair-ports`](../../papers/complete-repair-ports/README.md)
@@ -50,13 +50,15 @@ Hierarchies*.
 3. relative generalized Hamming weights as the exact minimum helper costs for
    recovering subspaces of each dimension;
 4. exact eventual confinement and transfer of all normalized equations;
-5. the best-target GHW identity, cooperative-locality min--max corollary, and
+5. exact ungated finite rank-one transfer from target-constrained inner coset
+   weights and the complete outer functional dual;
+6. the best-target GHW identity, cooperative-locality min--max corollary, and
    MDS rigidity;
-6. positive-density realization and bounded service-rate-region transfer;
-7. reliability and coefficient-presentation separations beyond the RGHW
+7. positive-density realization and bounded service-rate-region transfer;
+8. reliability and coefficient-presentation separations beyond the RGHW
    hierarchy;
-8. the projective simplex code as the principal non-MDS application; and
-9. compact formal-verification and reproducibility appendices.
+9. the projective simplex code as the principal non-MDS application; and
+10. compact formal-verification and reproducibility appendices.
 
 Use only established coding-theory terminology. “Associated nested code pair”
 is a literal description of $K_P\subseteq D_P$, not a coined term. Research
@@ -91,6 +93,13 @@ Completed preparation:
 **Discovery companion**: [complete-ports discovery track](../complete-ports-discovery-track.md).
 
 Current and completed strengthening:
+
+- [C957 weighted finite rank-one transfer](../2026-08-24-c957-weighted-rank-one-transfer.md)
+  restores the exact finite formula over all outer-functional fibers for a
+  target block with nonzero projection, separates it from the arbitrary-rank
+  theorem after the distance gate, gives a nonvacuous strict family from a
+  Singer cycle, and passes literature, anti-smuggling, cold-read, and 20-page
+  release gates.
 
 - [C954 dual failure-threshold upgrade](../2026-08-24-c954-dual-failure-threshold.md)
   identifies the minimum failures leaving each dimension of target ambiguity
@@ -149,7 +158,8 @@ excluded. The shared Lean monorepo remains separately owned. Never copy raw buil
 ## Current scope
 
 The rebuilt manuscript contains the associated nested code pair, its RGHW
-interpretation, exact finite and eventual rank-stratified confinement,
+interpretation, exact finite and eventual rank-stratified confinement after
+the outer-distance gate, exact ungated weighted finite transfer in rank one,
 best-target GHW and cooperative-locality consequences, the symmetric MDS
 staircase and rigidity, positive-density and service-rate transfer, reliability
 and coefficient-presentation separations, and the projective-simplex family.
@@ -158,7 +168,7 @@ generic coefficient optimization, and BGS packing remain outside this paper.
 
 ## Next step
 
-C954 is closed.  Run C325 appendix-only verification next, then C953
+C957 is closed.  Run C325 appendix-only verification next, then C953
 aggregate referee/export review.  C955
 owns the later coefficient-presentation spectrum. Before nontrivial proof development or
 formalization, read the paper-specific expert dossier

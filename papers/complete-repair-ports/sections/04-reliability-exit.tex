@@ -2,45 +2,45 @@
 \label{sec:consequences}
 
 The fixed-target relative weights sit between ordinary generalized weights
-and worst-case cooperative locality.  Let $d_t(C^\perp)$ denote the $t$th
-generalized Hamming weight of $C^\perp$.  For a $t$-set $P\subseteq E$, let
-$\kappa_C(P)$ be the least $|H|$ for which some $t$-dimensional subcode
+and worst-case cooperative locality.  Let $d_e(C^\perp)$ denote the $e$th
+generalized Hamming weight of $C^\perp$.  For an $e$-set $P\subseteq E$, let
+$\kappa_C(P)$ be the least $|H|$ for which some $e$-dimensional subcode
 $A\leq C^\perp$, supported on $P\cup H$, restricts isomorphically to
 $\F_q^P$.  Set $\kappa_C(P)=\infty$ when no such subcode exists.  Thus
 $\kappa_C(P)$ is the minimum number of helpers needed to recover all
 coordinates in $P$ simultaneously.
 
-\begin{theorem}[Best-target generalized-weight identity]
+\begin{theorem}[Best-target generalized weight and first escape cost]
 \label{thm:best-target-ghw}
 \coverage{absent}%
-For $1\leq t\leq\dim C^\perp$,
+For $1\leq e\leq\dim C^\perp$,
 \begin{equation}
- \min_{\substack{P\subseteq E\\|P|=t}}\kappa_C(P)
- =d_t(C^\perp)-t.
+ \min_{\substack{P\subseteq E\\|P|=e}}\kappa_C(P)
+ =d_e(C^\perp)-e.
  \label{eq:best-target-ghw}
 \end{equation}
-Consequently, if every $t$-set is recoverable and
-$r_t^{\mathrm{coop}}(C)=\max_{|P|=t}\kappa_C(P)$, then
+Consequently, if every $e$-set is recoverable and
+$r_e^{\mathrm{coop}}(C)=\max_{|P|=e}\kappa_C(P)$, then
 \[
- r_t^{\mathrm{coop}}(C)\geq d_t(C^\perp)-t.
+ r_e^{\mathrm{coop}}(C)\geq d_e(C^\perp)-e.
 \]
 For a fixed inner code in the eventual concatenation regime of
 Theorem~\ref{thm:objectwise-confinement}, the least first nonconfinement cost
-over all $t$-coordinate target sets is
+over all $e$-coordinate target sets is
 \begin{equation}
- d_t(C^\perp)-t+d(C^\perp).
+ d_e(C^\perp)-e+d(C^\perp).
  \label{eq:best-target-escape}
 \end{equation}
 \end{theorem}
 
 \begin{proof}
-A normalized identity system on $P$ spans a $t$-dimensional subcode of
+A normalized identity system on $P$ spans an $e$-dimensional subcode of
 $C^\perp$ whose support is $P$ together with its helper union.  Hence
-$d_t(C^\perp)\leq t+\kappa_C(P)$.
+$d_e(C^\perp)\leq e+\kappa_C(P)$.
 
-Conversely, let $A\leq C^\perp$ have dimension $t$ and support size
-$d_t(C^\perp)$.  An information set $P$ of a generator matrix of $A$ has
-size $t$, and restriction $A\to\F_q^P$ is an isomorphism.  Row reduction on
+Conversely, let $A\leq C^\perp$ have dimension $e$ and support size
+$d_e(C^\perp)$.  An information set $P$ of a generator matrix of $A$ has
+size $e$, and restriction $A\to\F_q^P$ is an isomorphism.  Row reduction on
 these columns gives normalized identity equations whose helper union is
 $\supp(A)\setminus P$.  This proves~\eqref{eq:best-target-ghw}; the
 cooperative-locality inequality follows by taking the maximum instead of the

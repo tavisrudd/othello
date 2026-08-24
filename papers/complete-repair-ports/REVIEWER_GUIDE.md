@@ -12,11 +12,13 @@ Read `thm:main` and the three paragraphs following it in
 sequence and `thm:relative-weight-recovery` in
 [`sections/02-confinement-transfer.tex`](sections/02-confinement-transfer.tex),
 followed by `thm:objectwise-confinement` and `thm:ranked-confinement` in
-[`sections/03-positive-density.tex`](sections/03-positive-density.tex).
+[`sections/03-positive-density.tex`](sections/03-positive-density.tex), then
+`thm:weighted-pointed-confinement` and `prop:strict-weighted-transfer` in the
+same section.
 Those statements contain the principal theorem and its proof. Sections 5 and
 6 test what the numerical hierarchy retains and discards.
 
-## Eight checks against hidden assumptions
+## Nine checks against hidden assumptions
 
 1. **What is the recovered dimension?** A target subspace is
    `T ≤ im G_P ∩ im G_J`. A normalized system consists of explicit maps
@@ -39,27 +41,39 @@ Those statements contain the principal theorem and its proof. Sections 5 and
    realization of the demand and a nonzero inner-dual equation in another
    block, on disjoint supports. The converse construction uses a rank-one
    external equation map, so the lower bound is attained.
-4. **Are the eventual and finite quantifiers separated?** Yes.
+4. **What happens before the outer-distance gate?** In rank one,
+   `thm:weighted-pointed-confinement` minimizes independently over every
+   functional-dual fiber, assuming only that the target outer projection is
+   nonzero (hence surjective). The zero-functional sector costs
+   `mu_x(0)+d(I^perp)`; each nonzero tuple costs its target-constrained inner
+   coset weight plus the ordinary inner coset weights in the other blocks.
+   This is an exact finite minimum, not a support-distance estimate. The
+   Singer-cycle construction with `[k+1,k,2]_q` inner codes and
+   $k+1\leq n\leq2k+1$ has outer
+   dual distance $n$ but weighted cost at least $n+1$, so nonvacuous
+   radius-$(n-1)$ transfer follows although the ordinary gate is inconclusive;
+   $(q,k,n)=(5,3,5)$ is a concrete instance.
+5. **Are the eventual and finite quantifiers separated?** Yes.
    `thm:objectwise-confinement` and `thm:ranked-confinement` first treat one
    finite outer code with `N ≥ 2` and the explicit gate
    `d(O^⊥) > r+1`. Under that gate, `r < M_t + d(I^⊥)` is necessary and
    sufficient. For a family with `d(O_N^⊥) → ∞`, the finite gate holds for all
    sufficiently large `N` at each fixed `r`. The paper does not claim that the
    inner inequality alone excludes nonzero outer-functional mechanisms.
-5. **Is there an off-by-one in the one-coordinate theorem?** No.
+6. **Is there an off-by-one in the one-coordinate theorem?** No.
    `M_1(D_P,K_P)` counts helpers. The older quantity `z_x(I)` counts total dual
    weight and therefore includes the target coordinate. Equation
    `eq:singleton-threshold` states
    `z_x(I) = M_1(D_P,K_P) + 1 + d(I^⊥)`, so the two conditions are exactly
    `r < M_1 + d(I^⊥)` and `r + 1 < z_x(I)`.
-6. **Which consequences import outside theorems?** Strict growth and the
+7. **Which consequences import outside theorems?** Strict growth and the
    relative Singleton bound for RGHWs are classical and cited where used. The
    best-target generalized-weight identity is proved directly from an
    information set of a minimum-support dual subcode. The MDS formula is
    derived from the uniform column matroid rather than assumed. The existence
    of outer families with simultaneous primal and dual relative distance uses
    the stated random-linear-code first-moment argument.
-7. **Do the separations use an unchecked search?** No. The two rank-one
+8. **Do the separations use an unchecked search?** No. The two rank-one
    reliability polynomials follow from the printed 31-subfamily union-size
    table by inclusion–exclusion. Their representability is proved by a
    five-line configuration, a generic lift, and finite-field specialization.
@@ -67,7 +81,7 @@ Those statements contain the principal theorem and its proof. Sections 5 and
    forces every padding support, leaving exactly the base radius. The
    coefficient-presentation example is a three-word calculation printed in
    full.
-8. **Are the projective formulas numerical guesses?** No. The simplex RGHWs
+9. **Are the projective formulas numerical guesses?** No. The simplex RGHWs
    follow by counting projective points outside `U^⊥`. The reliability event is
    `rank(F) ≤ m−t` for the failed point set `F`; Möbius inversion on the
    subspace lattice gives the closed formula. The two endpoint coefficients
@@ -84,7 +98,8 @@ Those statements contain the principal theorem and its proof. Sections 5 and
   proves the exact sequence, RGHW identity, and relative dimension/length
   profile formula.
 - [`sections/03-positive-density.tex`](sections/03-positive-density.tex) proves
-  fixed-demand and dimension-by-dimension confinement.
+  fixed-demand and dimension-by-dimension confinement, the exact ungated
+  weighted rank-one formula, and its strictness example.
 - [`sections/04-reliability-exit.tex`](sections/04-reliability-exit.tex) proves
   the generalized-weight, MDS, asymptotic, and service-rate consequences.
 - [`sections/05-pointed-tutte.tex`](sections/05-pointed-tutte.tex) proves both
@@ -109,7 +124,7 @@ The paper-local Lean package proves exactly the associated-pair sequence
 Its four reviewer terminals and axiom list are described in
 [`lean/README.md`](lean/README.md), while
 [`lean/verification/claims.json`](lean/verification/claims.json) marks the
-RGHW identity, confinement theorem, consequences, and projective family as
+RGHW identity, both confinement theorems, consequences, and projective family as
 absent. Those statements have human proofs in the manuscript and are not
 described as formally verified. No literature theorem is declared as a Lean
 axiom.

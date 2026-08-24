@@ -13,8 +13,8 @@ For a target set `P` and helper set `J`, the target and helper parts of a
 generator matrix determine nested codes `K_P ⊆ D_P ⊆ F_q^J`. The paper proves
 that the `t`th relative generalized Hamming weight `M_t(D_P,K_P)` is the exact
 minimum helper-union size for recovering `t` independent target combinations.
-For any outer code with at least two blocks and `d(O⊥) > r+1`, the sharp
-confinement condition is
+For any outer code with at least two blocks and `d(O⊥) > r+1`, the exact
+confinement condition after that outer-distance gate is
 
 ```text
 r < M_t(D_P,K_P) + d(I⊥).
@@ -25,10 +25,17 @@ recovery equation and its exact helper support. For outer families whose dual
 distance tends to infinity, the finite outer gate is automatic for all
 sufficiently large lengths at each fixed `r`.
 
+For one target coordinate in a block with nonzero outer projection, a second
+theorem retains every nonzero outer functional and gives the exact finite-length
+criterion without the distance gate. Target-constrained inner coset weights can certify transfer when ordinary
+outer support distance cannot; a construction using a Singer cycle gives a
+family of `[k+1,k,2]_q` inner
+codes gives explicit examples.
+
 ## Main consequences
 
-- Minimizing the fixed-target recovery cost over all target `t`-sets gives
-  `d_t(C⊥) − t`.
+- Minimizing simultaneous recovery cost over all target `e`-sets gives
+  `d_e(C⊥) − e`.
 - MDS inner codes have an exact recovery-cost staircase. When the helper
   columns span the message space, it attains the confinement ceiling at every
   recovered dimension; equality in that ceiling at dimension one forces
