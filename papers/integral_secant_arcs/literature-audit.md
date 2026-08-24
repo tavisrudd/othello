@@ -3,8 +3,8 @@
 ## Scope and bounded finding
 
 This audit supports the literature positioning of *Integral Secant
-Distributions and Improved Bounds for Complete (k,n)-Arcs*. It records 22
-individually discussed sources: 15 were read at full-text depth and seven at
+Distributions and Improved Bounds for Complete (k,n)-Arcs*. It records 23
+individually discussed sources: 15 were read at full-text depth and eight at
 partial depth. It also records an exact eight-week arXiv title-and-abstract
 screen through 24 August 2026.
 
@@ -211,6 +211,15 @@ retrieved bytes; SHA-256 values are included where the bytes were cached.
     Its line-intersection distribution is adjacent terminology but is not the
     selected-block degree sequence used in the manuscript.
 
+23. **Kurz, *Two-weight codes and strongly regular graphs*.** **Partial.**
+    Published open-access HTML at PubMed Central, corresponding to
+    *Entropy* 26 (2024), article 289, DOI `10.3390/e26040289`; Section 5 was
+    read. The publisher endpoint supplied HTML rather than stable PDF bytes,
+    so no cache SHA-256 is recorded. The section was used only to check the
+    standard projective two-weight-code/two-intersection-set transform. The
+    manuscript continues to cite Calderbank--Kantor for the exact result it
+    invokes.
+
 ### Published-metadata refresh, 24 August 2026
 
 Official publisher records were checked to replace preprint-only or incomplete
@@ -317,6 +326,29 @@ OpenAlex supplied an independent indexed check with
 
 The respective result counts were 3, 1, 0, and 0. The four returned titles
 were false positives under the same discriminator.
+
+### Independent framing check, 24 August 2026
+
+A fresh audit, performed without the earlier report or claim ledger, tested
+the paper's combined framing against the same date cutoff. It separately
+searched recent records from 1 July through 24 August 2026 for the literal
+phrases `projective plane`, `blocking set`, `two-weight`, `expander`, and
+`complete arc`. The respective candidate counts were 30, 6, 0, 1, and 0;
+titles and abstracts were screened for an integral selected-secant envelope,
+a rational-resonance correction, or a completeness surcharge from bounded
+modular repair. Ramani's 17 August paper was the only promoted recent record,
+and its full-text read was already recorded above. The six blocking-set hits
+and the one expander hit did not meet the discriminator.
+
+Targeted OpenAlex and Crossref searches for the combined mechanism located
+the classical real incidence bounds, tactical decompositions, multiple
+blocking sets, and two-weight-code dictionaries already recorded here, but
+no direct predecessor for the three-step implication stated in the Scope and
+bounded finding. The check also identified Kurz's Section 5 as an additional
+expository source for the classical exact inverse dictionary. Semantic
+Scholar returned HTTP 429; MathSciNet and Google Scholar were not covered.
+Accordingly this pass preserves the bounded wording and does not license a
+global priority statement.
 
 ## Citation-graph and database coverage
 
