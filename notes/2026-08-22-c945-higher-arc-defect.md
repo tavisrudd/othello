@@ -2574,11 +2574,11 @@ completeness supply the additional linear term.  The exact inverse remains a
 credited classical corollary in the detailed guide.
 
 The authority paper gate, repository trust check, standalone paper gate, and
-export verification pass at source commit `3c30073e3`.  The public paper
-mirror commit is `7e4ee34`; the public portfolio-summary mirror commit is
+export verification pass at source commit `edf4d49f7`.  The public paper
+mirror commit is `5791722`; the public portfolio-summary mirror commit is
 `e56d028`.  The 17-page PDFs agree byte for byte between the authority and
 paper mirror, with SHA-256
-`9ab93d6c47799b8bdcc0791dc779e8f5d83ddd576e9438525938c8f8e60a434e`.
+`466b93e8ec6e737e0cdb6c9e1b68ef2423026c78d2928cb9e3eb584a3077146a`.
 
 The post-repair sealed referee returned `GO`.  It found no concrete defect,
 no proof smuggling, and no trust-boundary overstatement.  It independently
@@ -2588,3 +2588,12 @@ counts, exact evidence replay, and source/PDF agreement.  Its only clarity
 risk was that the branch-crossing sentence named convexity without separating
 the internal `Phi_min` term from the common external and `-binom(T,2)` terms;
 the manuscript now states that comparison explicitly.
+
+Mystery-ledger refresh after the final `ej` + `tt` pass: the branch crossing,
+residue sign, and exact-inverse posture are settled.  The coefficient
+substitution remains compressed but is independently checked by the exact
+evidence and Lean fragment; the convex supporting-line and asymptotic uses
+remain accurately outside Lean.  No additional cheap theorem or corollary
+survived the paper-scope and precedence gates.  The genuine open items remain
+the final database coverage, bounded-repair realization and construction
+sharpness (C949), and modular-core classification.
