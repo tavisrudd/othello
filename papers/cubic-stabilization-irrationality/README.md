@@ -21,12 +21,12 @@ the upper bound.
 ## Main results and consequences
 
 - If `k` has characteristic zero and `S/k` is a smooth quartic del Pezzo
-  surface with `S(k)` nonempty and stably permutation geometric Picard
-  lattice, then `S × A²`, equivalently `S × P²`, is `k`-rational. In
-  particular, this holds for every stably `k`-rational smooth quartic del
+  surface such that `S(k)` is nonempty and its geometric Picard lattice is
+  stably permutation, then `S × A²`, equivalently `S × P²`, is `k`-rational.
+  In particular, this holds for every stably `k`-rational smooth quartic del
   Pezzo surface.
 - The proof gives a reusable rational-quotient criterion for a generically
-  free torus action on a variety parametrized by generic tangent projection.
+  free torus action on a variety with birational generic tangent projection.
   A saturated unimodular weight window cuts a rational section of the general
   orbit, and a tangent-projection open identifies that section with projective
   space.
@@ -60,11 +60,12 @@ The exact-arithmetic generator
 starts from the transcribed type-`I₃` matrices and twenty Cox quadrics. It
 reconstructs the saturated rank-three lattice, Cox weights, residual rank-two
 quotient, tangent Jacobian, four symbolic evaluation determinants, and the
-smooth-moduli witness cover. For each of the six empty localized branches,
+smooth-moduli witness cover. It also constructs the evaluation-kernel slice
+through the orbit-test point. For each of the six empty localized branches,
 [`verification/groebner-empty-certificates.json`](verification/groebner-empty-certificates.json)
 retains an exact identity expressing a nonzero constant in the localized
-branch ideal. It also constructs the actual evaluation-kernel slice through
-the orbit-test point and renders all computation-derived values printed in the manuscript into the checked
+branch ideal. The generator renders all computation-derived values printed in
+the manuscript into the checked
 [`verification/slice-cover-values.tex`](verification/slice-cover-values.tex)
 artifact. A second program,
 [`verification/check_slice_cover.py`](verification/check_slice_cover.py),
@@ -88,8 +89,8 @@ nix develop --command make check
 ```
 
 This command reconstructs and independently checks the exact certificate,
-validates the claim and source ledgers, performs a deterministic manuscript build, and
-rejects TeX warnings or stale metadata.
+validates the claim and source ledgers, performs a deterministic manuscript
+build, and rejects TeX warnings or stale metadata.
 
 The retained empty-branch identities can be regenerated independently with
 Singular 4.4.1 and then rechecked by the full gate:
@@ -122,8 +123,7 @@ nix shell nixpkgs#singular -c uv run --with sympy==1.14.0 python3 \
 ## Citation
 
 No archival DOI is claimed for this revision. The `.zenodo.json` file prepares
-the metadata for a replacement deposit; it does not create or update a Zenodo
-record.
+the metadata for a new deposit; it does not create or update a Zenodo record.
 
 ## License
 

@@ -5,7 +5,7 @@
       {
         "aspect": "domain",
         "matched": "The moduli corollary concerns a very general smooth cubic threefold over C.",
-        "requirement": "Corollary 1.4 applies to very general cubic threefolds in P4 over C."
+        "requirement": "EGFS Corollary 1.4 applies to very general cubic threefolds in P4 over C."
       },
       {
         "aspect": "implication",
@@ -119,7 +119,7 @@
       {
         "aspect": "framing",
         "matched": "The proof translates a generic rational section before quotienting first by the anticanonical scalar and then by the rank-three subtorus.",
-        "requirement": "Remark 2.2 gives splitting over the function field for the Neron--Severi torus; equivariance is supplied by translation."
+        "requirement": "Remark 2.2 gives splitting over the function field for the Néron–Severi torus; equivariance is supplied by translation."
       }
     ],
     "pinpoint": "Lemma 2.1, Remark 2.2, Corollary 3.5, and the Cox embedding at the start of Section 3",

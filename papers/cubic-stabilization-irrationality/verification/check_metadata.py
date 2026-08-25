@@ -74,7 +74,7 @@ placed_artifacts = (
     r"is saturated and Galois stable. The two generators act on this basis by \[ \IThreeActionOne, \qquad \IThreeActionTwo. \]",
     r"Four blocks of Cox generators have the following projective \(T_3\)-weights: \begin{center} \IThreeWeightTable \end{center}",
     r"B=\PP\langle\IThreeBoundaryGenerators\rangle.",
-    r"The following exact choices are used; \(e=(e_1,\ldots,e_5)\) and \(z'\) specify the second Cox point at which the evaluation matrix is tested. \begin{center} \SliceWitnessTable \end{center}",
+    r"The following exact choices are used; \(e=(e_1,\ldots,e_5)\) and \(z'\) specify the orbit-test point at which the evaluation matrix is tested. \begin{center} \SliceWitnessTable \end{center}",
     r"After discarding nonzero rational factors, the four evaluation determinants are \SliceDeterminants and the corresponding smoothness minors are \SliceMinors",
     r"A lexicographic Gr\"obner calculation in \(\mathbf Q[a,b,h]/(h\Delta-1)\) gives \SliceCoverArithmetic Thus \(D_4M_4\ne0\)",
 )

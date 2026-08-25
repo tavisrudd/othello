@@ -34,7 +34,7 @@
     "conclusion": "A codimension-three tangent linear section and an orbit-test point on its quotient component and in the tangent-projection isomorphism open exist geometrically, and descend for quartic del Pezzo surfaces with a rational point in each of the four types.",
     "coverage": "absent",
     "declarations": [],
-    "digest": "0511a3b04063d1ebf297af3b1f02498d9e9121248d7e3631c6903034b03a7f0c",
+    "digest": "ec93a04cb21cea643b7a7bacb83d6be2352727f886fa7e5b6c7984a75e1e09e8",
     "environment": "proposition",
     "hypotheses": "The Cox parameters lie on the smooth open; for ground-field descent the quartic del Pezzo surface has a rational point and the Galois image has type I0, I1, I2, or I3.",
     "objects": "The saturated rank-three subtorus, complementary Cox-coordinate subspace, and tangent-frame incidence."
