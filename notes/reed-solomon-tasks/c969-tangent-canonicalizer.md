@@ -54,3 +54,17 @@ returns the same canonical syndrome as all 4,896 explicit PGL transports. A
 nontrivial affine image canonicalizes to the same artifact. The refreshed
 benchmark records the formula path separately from the still-generic terminal
 oracle and from independent certificate replay.
+
+## Sigma boundary
+
+The analogous shortcut through one centered irreducible quadratic and its
+normalizer is false. Over `F_7`, the R5 sigma recurrence with characteristic
+polynomial `X^2+1` and initial pair `(1,1)` gives the syndrome
+`[1,1,6,6,1]`. Restricting to centered irreducible forms gives minimum
+`[1,1,6,6,1]`, while the full PGL orbit has the strictly smaller minimum
+`[1,0,3,3,5]`.
+
+Thus the gcd's centered form does not determine the relevant sigma fiber: a
+future reduction must also track the induced torus/fiber invariant. The sigma
+path deliberately retains exact explicit semilinear enumeration, and the
+counterexample is frozen as a regression test.

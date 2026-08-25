@@ -1168,7 +1168,7 @@ gates remain binding.
 | EV rank | Task | Current gate | Why this position |
 |---:|---|---|---|
 | 1 | C915 | edits E1--E6 applied and checklist green; three independent audits open | the external referee package blocks the Version 2 release |
-| 2 | C969 | active; schemas/core/frozen/formula adapters, proved R5--R7 terminal selector, positive verifier, tangent `mq(q-1)` canonicalizer, and first benchmark green; sigma/nonpersistent canonicalizers, general complexity theorem, and wider benchmarks open | compile the proved R5--R10 geometry into one exact canonical classifier and decoder while settling the general split-locator decision/recovery complexity boundary |
+| 2 | C969 | active; schemas/core/frozen/formula adapters, proved R5--R7 terminal selector, positive verifier, tangent `mq(q-1)` canonicalizer, and prime/extension benchmarks green; centered-gcd sigma reduction falsified by an exact R5 counterexample, so the sigma fiber invariant, nonpersistent canonicalizer, and general complexity theorem remain open | compile the proved R5--R10 geometry into one exact canonical classifier and decoder while settling the general split-locator decision/recovery complexity boundary |
 
 ## Unallocated level-ups
 
@@ -1230,10 +1230,11 @@ history.
 
 `go C969`
 
-(Replace the explicit group-scale canonicalizer on the persistent sigma family
-by mapping its irreducible quadratic gcd to a canonical nonsplit form and
-enumerating only the norm-one torus normalizer.  Return the same lexicographic
-canonical syndrome and an exact transporter, then extend the benchmark matrix
-to extension fields.  Keep the general C607 split-factorization exponent
-theorem separate.  C915's three independent Version 2 audits remain the
+(Resolve the persistent-sigma fiber invariant before attempting another fast
+canonicalizer.  The centered irreducible-gcd plus torus-normalizer reduction is
+false: over `F_7`, the R5 syndrome `[1,1,6,6,1]` has restricted minimum
+`[1,1,6,6,1]` but full-PGL minimum `[1,0,3,3,5]`.  Derive the missing
+`T/T^(r-1)`-type class and preserve the exact explicit fallback until equality
+with the full orbit is proved.  Keep the general C607 split-factorization
+exponent theorem separate.  C915's three independent Version 2 audits remain the
 higher-EV external-release gate but are a separate active card.)

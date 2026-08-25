@@ -1963,6 +1963,26 @@ mod tests {
                 .canonical_syndrome,
             fast.canonical_syndrome
         );
+
+        let sigma_request = request(prime_field(17), 6, vec![0, 1, 0, 3, 0, 9]);
+        let sigma_explicit =
+            canonicalize_explicit(&field, sigma_request.syndrome.clone(), 5_000).unwrap();
+        assert_eq!(
+            canonicalize_syndrome(&sigma_request, 5_000)
+                .unwrap()
+                .canonical_syndrome,
+            sigma_explicit.canonical_syndrome
+        );
+        for matrix in [[1, 2, 0, 1], [1, 0, 3, 1]] {
+            let (equivalent, _) =
+                apply_semilinear(&field, &sigma_request.syndrome, 0, matrix).unwrap();
+            assert_eq!(
+                canonicalize_syndrome(&request(prime_field(17), 6, equivalent), 5_000)
+                    .unwrap()
+                    .canonical_syndrome,
+                sigma_explicit.canonical_syndrome
+            );
+        }
     }
 
     #[test]
@@ -2140,6 +2160,20 @@ mod tests {
             r7_formula_family(&even_degree_field, &[0, 0, 0, 1, 0, 0, 0]),
             None
         );
+    }
+
+    #[test]
+    fn centered_sigma_form_is_not_a_canonical_orbit_representative() {
+        let input = request(prime_field(7), 5, vec![1, 1, 6, 6, 1]);
+        let field = Field::new(input.field.clone()).unwrap();
+        assert_eq!(
+            persistent_kind(&field, &input.syndrome),
+            PersistentKind::Sigma
+        );
+
+        let canonical = canonicalize_syndrome(&input, 1_000).unwrap();
+        assert_eq!(canonical.canonical_syndrome, vec![1, 0, 3, 3, 5]);
+        assert_eq!(canonical.transporters_examined, 336);
     }
 
     #[test]
