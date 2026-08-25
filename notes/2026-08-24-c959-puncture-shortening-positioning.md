@@ -141,4 +141,9 @@ No other task-owned mystery remains.
 
 ## Export status
 
-Authority and standalone commit identities are recorded after synchronization.
+The validated paper and summary authority state is monorepo commit
+`191a54ac3`. The allowlisted paper export audit returned zero findings; the
+standalone paper is commit `5e350c1`, and its clean post-commit gate reports 21
+pages, no TeX warnings, 21 claims, four Lean terminals, and 40 manifest files
+from source commit `191a54ac353305f718379e58fccb6e84f13def2e`. The portfolio
+summary mirror is commit `7f5f11c`. No push or Zenodo deposit was made.

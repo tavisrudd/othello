@@ -3,18 +3,18 @@
 **Lane**: `complete-ports`
 
 **Date**: 2026-08-24
-**Status**: ACTIVE; C957 UNGATED WEIGHTED RANK-ONE TRANSFER RESTORED AFTER
-LITERATURE, ANTI-SMUGGLING, FRESH-COLD-READ, AND 20-PAGE RELEASE GATES; C325
-APPENDIX VERIFIER AND C953 AGGREGATE REVIEW FOLLOW; C955 COEFFICIENT-
-PRESENTATION SPECTRUM IS QUEUED AFTER C953; NO PUSH OR DEPOSIT
+**Status**: ACTIVE; C959 CANONICAL PUNCTURING--SHORTENING POSITIONING REPAIRED,
+21-PAGE AUTHORITY AND 40-FILE STANDALONE GATES PASSED, AND LOCAL EXPORT
+COMMITTED; C325 APPENDIX VERIFIER AND C953 AGGREGATE REVIEW FOLLOW; C955
+AMBIENT-REALIZATION SPECTRUM IS QUEUED AFTER C953; NO PUSH OR DEPOSIT
 **Theorem source lane**: archived [`repaircodes`](done/2026-07-13-projective-completion-repaircodes.md)
 **Current private paper**: [`complete-repair-ports`](../../papers/complete-repair-ports/README.md)
 **Canonical paper identity**: `complete-ports` — *Exact Transfer of Bounded Linear Recovery and
 Relative Weight Hierarchies*
 **Standalone paper repository**: `tavisrudd/complete-repair-ports` at
 `~/src/math-papers/complete-repair-ports`
-**Current local standalone commit**: `e5074e0` (C957 weighted-transfer paper
-plus verification/Singer/MDS editorial pass; verified; no push or deposit)
+**Current local standalone commit**: `5e350c1` (C959 canonical-pair and
+positioning revision; verified; no push or deposit)
 **Approved paper license**: MIT
 
 ## Goal
@@ -94,6 +94,13 @@ Completed preparation:
 
 Current and completed strengthening:
 
+- [C959 puncturing--shortening identification and positioning repair](../2026-08-24-c959-puncture-shortening-positioning.md)
+  identifies the associated pair as the shortening--puncturing pair of the
+  inner dual, identifies its dual pair from the primal inner code, removes
+  generator-row-basis dependence, centers the two transfer theorems, and
+  exports verified local paper and portfolio-summary commits without push or
+  deposit.
+
 - [C957 weighted finite rank-one transfer](../2026-08-24-c957-weighted-rank-one-transfer.md)
   restores the exact finite formula over all outer-functional fibers for a
   target block with nonzero projection, separates it from the arbitrary-rank
@@ -150,14 +157,16 @@ Sequel research:
 ## Publication boundary
 
 Every paper is a fresh-history allowlisted export. Never publish, fork, history-filter, or broadly
-copy the private monorepo. This paper's formal companion is the paper-local Mathlib package listed
+copy the private monorepo. This paper's formal companion is the paper-owned Lean 4 project, built
+against a pinned Mathlib revision and listed
 in its exact 37-file distribution manifest; monorepo trust files and local `lean/AGENTS.md` norms are
 excluded. The shared Lean monorepo remains separately owned. Never copy raw build trees or selected
 `.olean` files.
 
 ## Current scope
 
-The rebuilt manuscript contains the associated nested code pair, its RGHW
+The rebuilt manuscript contains the shortening--puncturing pair of the inner
+dual, its RGHW
 interpretation, exact finite and eventual rank-stratified confinement after
 the outer-distance gate, exact ungated weighted finite transfer in rank one,
 best-target GHW and cooperative-locality consequences, the symmetric MDS
@@ -168,7 +177,7 @@ generic coefficient optimization, and BGS packing remain outside this paper.
 
 ## Next step
 
-C957 is closed.  Run C325 appendix-only verification next, then C953
+C959 is closed.  Run C325 appendix-only verification next, then C953
 aggregate referee/export review.  C955
 owns the later coefficient-presentation spectrum. Before nontrivial proof development or
 formalization, read the paper-specific expert dossier
@@ -179,5 +188,6 @@ hierarchy. C220 remains omitted. Shared-Lean extraction is planned under
 [C287](../2026-07-17-c287-shared-lean-extraction-plan.md), remains separately build-system-owned,
 and is not evidence for or a release dependency of the paper-local companion.
 
-Public export remains gated on C325 and C953 plus the explicit mirror/export workflow. The approved
-repository metadata and private rename do not authorize synchronization, publication, or push.
+Local standalone synchronization is complete at `5e350c1`. Publication, push,
+and deposit remain gated on C325 and C953; the approved repository metadata
+does not authorize any of those external actions.
