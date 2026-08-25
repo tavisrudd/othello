@@ -194,9 +194,10 @@ results.
   least two blocks and `d(O⊥) > r + 1`, every cost-`r` system is confined to
   its inner block exactly when `r < M_t(D_P,K_P) + d(I⊥)`.  Below that gate,
   concatenation preserves normalized equations and exact helper supports.  At
-  one target coordinate with nonzero outer projection, a second finite theorem
-  retains every outer-functional fiber and gives an exact weighted criterion
-  without the outer-distance hypothesis.
+  more generally, for every fixed target-message subspace and nonzero outer
+  projection, a finite theorem optimizes prescribed-coset support costs over
+  the complete outer functional dual and gives the exact first nonconfined
+  cost without an outer-distance hypothesis.
   [Exact Transfer of Bounded Linear Recovery and Relative Weight Hierarchies](https://github.com/tavisrudd/complete-repair-ports/blob/main/complete_repair_ports.pdf).
 
 - **Order six is the unique nontrivial cut-rigid symmetric conference
@@ -248,7 +249,7 @@ the theorem column.
 | Diagonal Isoduality and Transversal Clifford Groups of MDS–CSS Codes | The diagonal multiplier nullity fixes the transversal logical group. | All `[2m,m,m+1]q` MDS codes over odd prime fields. |
 | Balanced Cuts of Conference Matrices: Squared-Spectrum Rigidity and Hermitian Holonomy | Order six is the unique nontrivial realized symmetric conference order whose normalized balanced cross-block Gram spectrum is cut-independent. | Every symmetric conference matrix and every balanced half. |
 | Exact Transfer of Bounded Linear Recovery and Relative Weight Hierarchies | For `u=min(k,|P|)`, `b=min(k,|J|)`, and `ell=u+b-k`, an MDS inner code has `M_t(D_P,K_P)=k-u+t` at every recoverable rank; helper-span gives equality in the global ceiling, and rank-one ceiling equality is rigid. | Every proper MDS inner code and every target/helper split with `1 ≤ t ≤ ell`. |
-| Exact Transfer of Bounded Linear Recovery and Relative Weight Hierarchies | `K_P=short_J(I⊥) ⊆ D_P=punct_J(I⊥)`, and `M_t(D_P,K_P)` is the exact minimum helper-union cost for rank-`t` recovery. Under `N ≥ 2` and `d(O⊥)>r+1`, all cost-`r` systems are block-confined exactly when `r<M_t(D_P,K_P)+d(I⊥)`, and normalized equations and exact supports transfer; in rank one, target-constrained inner coset weights give a finer exact finite criterion before that distance gate. | Every inner code with nonzero dual and every target set with `1 ≤ t ≤ dim W_P` under the ranked gate; the ungated rank-one form assumes nonzero projection onto the target outer block. |
+| Exact Transfer of Bounded Linear Recovery and Relative Weight Hierarchies | `K_P=short_J(I⊥) ⊆ D_P=punct_J(I⊥)`, and `M_t(D_P,K_P)` is the exact minimum helper-union cost for rank-`t` recovery. For any fixed nonzero target-message subspace, joint prescribed-coset support costs over the complete outer functional dual give the exact finite first nonconfined cost. Under `N ≥ 2` and `d(O⊥)>r+1`, this reduces to `r<M_t(D_P,K_P)+d(I⊥)`, and normalized equations and exact supports transfer. | Every proper inner code and every nonzero target-message subspace, for outer codes with at least two blocks and nonzero projection onto the target block; the RGHW specialization uses `1 ≤ t ≤ dim W_P`. |
 | Integral Cohomology and Modular Decomposition for the Theta Divisor of a Cubic Threefold | The integral middle lattice has rank `130` and saturation quotient `(Z/2)^10`; the integral resolution complex has central Smith factor three, a length-three mod-three Loewy chain, and modular relative-hard-Lefschetz failure. | The theta divisor of every smooth complex cubic threefold. |
 
 ## Papers and entry points
@@ -278,7 +279,7 @@ boundary, and reproducible entry points.
 | Balanced Cuts of Conference Matrices: Squared-Spectrum Rigidity and Hermitian Holonomy | Matrix theory / algebraic combinatorics / mathematical physics | Order six is the unique nontrivial cut-independent case; Hermitian triangle holonomy controls the degree-three frontier and rigidity. | [PDF](https://github.com/tavisrudd/conference-cut-spectra/blob/main/conference_cut_spectra.pdf) · [repo](https://github.com/tavisrudd/conference-cut-spectra) |
 | Integral Cohomology and Modular Decomposition for the Theta Divisor of a Cubic Threefold | Algebraic geometry / topology | The rank-130 integral middle lattice has canonical mod-two glue, while the same resolution carries a factor-three integral perverse attachment, a length-three modular Loewy chain, and failure of relative hard Lefschetz modulo three. | [PDF](https://github.com/tavisrudd/blown-up-theta-lattice/blob/main/blown_up_theta_lattice.pdf) · [repo](https://github.com/tavisrudd/blown-up-theta-lattice) |
 | Frobenius-equivariant Pair Extension and Robust Repair of Eight-Arcs | Finite geometry / coding theory | Fixed mate-line carriers and exact collision corrections give Frobenius-compatible paired MDS extensions, including the exact two-fixed-point minimum over F₂₅. | [PDF](https://github.com/tavisrudd/equivariant-robust-completion/blob/main/equivariant-robust-completion.pdf) · [repo](https://github.com/tavisrudd/equivariant-robust-completion) |
-| Exact Transfer of Bounded Linear Recovery and Relative Weight Hierarchies | Coding theory / distributed storage | Relative generalized weights give exact rank-stratified helper costs and the sharp finite gate for transferring normalized recovery equations. | [PDF](https://github.com/tavisrudd/complete-repair-ports/blob/main/complete_repair_ports.pdf) · [repo](https://github.com/tavisrudd/complete-repair-ports) |
+| Exact Transfer of Bounded Linear Recovery and Relative Weight Hierarchies | Coding theory / distributed storage | A complete outer-functional prescribed-coset optimization gives the exact finite nonconfinement cost; relative generalized weights are its outer-distance specialization. | [PDF](https://github.com/tavisrudd/complete-repair-ports/blob/main/complete_repair_ports.pdf) · [repo](https://github.com/tavisrudd/complete-repair-ports) |
 
 The repository for *Reconstructing the Clebsch Code from Its Deep-Hole
 Syndrome Locus* also contains the computational companion
@@ -724,49 +725,38 @@ a fixed code.
 inner dual onto the helper coordinates give
 `K_P = short_J(I^perp) <= D_P = punct_J(I^perp)`.
 Its relative generalized Hamming weights are exactly the minimum
-helper-union costs for recovering independent target combinations. Under the
-finite outer gate `N >= 2` and `d(O^perp) > r + 1`, every rank-`t` recovery
-system of cost at most `r` remains in its inner block exactly when
-`r < M_t(D_P,K_P) + d(I^perp)`; below the gate, normalized equations and exact
-helper supports transfer. At one target coordinate with nonzero outer
-projection, target-constrained inner coset weights give a finer exact finite
-criterion that retains the nonzero outer-functional sector.
+helper-union costs for recovering independent target combinations. For every
+fixed nonzero target-message subspace, a joint prescribed-coset optimization
+over the complete outer functional dual gives the exact finite first
+nonconfined cost. Under `N >= 2` and `d(O^perp) > r + 1`, this reduces in
+recovered dimension `t` to `r < M_t(D_P,K_P) + d(I^perp)`; below either exact
+threshold, normalized equations and exact helper supports transfer.
 
-> *Abstract* Let `I <= F_q^E` be an inner code, let `P` be a target set, and
-> put `J = E \ P`. Shortening and puncturing `I^perp` onto `J` give an
-> associated nested code pair `K_P <= D_P <= F_q^J`. We prove
-> that the `t`th relative generalized Hamming weight `M_t(D_P,K_P)` is exactly
-> the minimum helper-union size needed to recover `t` independent target
-> combinations.
+> *Abstract* Let `I <= F_q^E`, let `P` be a target set, and put
+> `J = E \ P`. Shortening and puncturing `I^perp` onto `J` give a nested pair
+> `K_P <= D_P <= F_q^J`. Its relative generalized Hamming weight
+> `M_t(D_P,K_P)` is the minimum helper union recovering `t` independent target
+> combinations. For a fixed nonzero target-message subspace and an outer code
+> with at least two blocks and nonzero projection onto the target block, we
+> express the exact least helper union of a nonconfined recovery system as an
+> optimization of prescribed-coset support costs over the complete outer
+> functional dual. This requires no outer-distance gate. If `O <= L^N` is
+> `L`-linear, `N >= 2`, and `d(O^perp) > r + 1`, its criterion reduces in
+> recovered dimension `t` to `r < M_t(D_P,K_P) + d(I^perp)`. Below either
+> exact threshold, zero-extension preserves normalized equations and exact
+> supports. The one-coordinate specialization recovers the weighted coset
+> formula, and a single-parity-check family transfers beyond the ordinary
+> outer support-distance gate.
 >
-> For any linear outer code `O` with at least two blocks and
-> `d(O^perp) > r + 1`, every such recovery system using at most `r` helpers is
-> confined to its inner block exactly when
-> `r < M_t(D_P,K_P) + d(I^perp)`. Below this threshold, concatenation preserves
-> every bounded normalized dual recovery equation, its exact helper support,
-> and every inclusion-minimal recovery set. Consequences include an exact
-> best-target generalized-Hamming-weight formula, exact MDS thresholds,
-> bounded service-rate transfer, and positive-density realization in
-> asymptotically good fixed-alphabet families.
->
-> Before the outer-distance gate, the one-coordinate theorem minimizes exact
-> target-constrained and ordinary inner coset weights over the full outer
-> functional dual. A construction using a Singer cycle and `[k+1,k,2]_q`
-> inner codes shows nonvacuously that this weighted criterion can succeed when
-> outer support distance does not decide transfer.
->
-> We construct pairs with the same complete relative-weight hierarchy but
-> different bounded recovery reliability, and different ambient inner-dual
-> realizations of the same abstract nested pair with different confinement
-> thresholds. For a
-> projective-simplex family we compute
-> `M_t = (q^m - q^(m-t))/(q - 1)` and express the recovery probability through
-> the projective-rank distribution. The one-coordinate criterion
-> `r + 1 < z_x(I)` is the rank-one case.
+> Positive-density and bounded service-rate transfer follow. Equal
+> relative-weight hierarchies need not determine bounded repair reliability,
+> and ambient inner-dual realizations of one nested pair can have different
+> confinement thresholds. A projective-simplex family gives a non-MDS
+> hierarchy and projective-rank reliability.
 
 **Delivers.** The associated nested code pair and its exact relative-weight
-interpretation; finite and eventual rank-stratified confinement after the
-outer-distance gate; an ungated exact weighted rank-one theorem;
+interpretation; an exact ungated arbitrary-rank prescribed-coset theorem;
+finite and eventual rank-stratified confinement after the outer-distance gate;
 best-target generalized-weight and cooperative-locality consequences; an MDS
 staircase and rigidity theorem; positive-density and bounded service-rate
 transfer; reliability and coefficient-sensitive separations; and explicit
@@ -778,12 +768,12 @@ explicitly marked absent from Lean coverage.
 codes, distributed storage, concatenation, generalized Hamming weights,
 service rate, or stochastic repair reliability.
 
-**Why it matters.** Relative weights give the exact numerical spine of
-bounded linear recovery, while actual repair behavior depends on the full
-family of normalized equations, their overlap, and their coefficients. The
-paper identifies the exact gated rank-stratified condition and the finer
-weighted finite rank-one condition under which concatenation transports that
-richer witness family.
+**Why it matters.** Relative weights give the zero-functional numerical spine
+of bounded linear recovery, while exact finite transfer also depends on the
+complete outer functional dual and the minimum joint supports of compatible
+inner coset representatives. The paper combines these data in one exact
+arbitrary-rank optimization and shows when its coarser RGHW specialization
+transports normalized equations and exact supports.
 
 ---
 
