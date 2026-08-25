@@ -13,7 +13,7 @@
       devShells = forAllSystems (system:
         let
           pkgs = nixpkgs.legacyPackages.${system};
-          base = with pkgs; [ python3 texlive.combined.scheme-full git coreutils ];
+          base = with pkgs; [ python3 uv gnumake texlive.combined.scheme-full git coreutils ];
         in {
           default = pkgs.mkShell { packages = base; };
           manuscript = pkgs.mkShell { packages = base; };

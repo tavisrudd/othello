@@ -34,9 +34,11 @@ smooth complex cubic threefold; this paper proves the upper bound.
   bound.
 - For either cubic threefold `X`, the smooth projective fourfold
   `Y = X × P¹` is nonrational even over `C`, while `Y × A¹` is rational over
-  `Q`.
+  `Q`. This answers the affine-line stabilization question raised by
+  Tschinkel and Zhang.
 - On the moduli space of smooth complex cubic threefolds, the stabilization
-  level is two at the displayed points and infinite at a very general point.
+  level is two on the classes represented by the displayed examples and
+  infinite at a very general point.
 
 The paper does not claim that every smooth cubic threefold has finite
 stabilization level. The fourfold consequence concerns birational rationality
@@ -56,7 +58,11 @@ The exact-arithmetic generator
 starts from the transcribed type-`I₃` matrices and twenty Cox quadrics. It
 reconstructs the saturated rank-three lattice, Cox weights, residual rank-two
 quotient, tangent Jacobian, four symbolic evaluation determinants, and the
-smooth-moduli witness cover. A second program,
+smooth-moduli witness cover. It also constructs the actual evaluation-kernel
+slice through the orbit-test point and renders all computation-derived values
+printed in the manuscript into the checked
+[`verification/slice-cover-values.tex`](verification/slice-cover-values.tex)
+artifact. A second program,
 [`verification/check_slice_cover.py`](verification/check_slice_cover.py),
 independently checks the resulting certificate and quotient minors. Both
 programs reject optimized Python execution so that assertion checks cannot be
@@ -71,14 +77,14 @@ recorded there and in
 
 ## Verification
 
-From this directory,
+From this directory, enter the pinned development shell and run the full gate:
 
 ```text
-make check
+nix develop --command make check
 ```
 
-reconstructs and independently checks the exact certificate, validates the
-claim and source ledgers, performs a deterministic manuscript build, and
+This command reconstructs and independently checks the exact certificate,
+validates the claim and source ledgers, performs a deterministic manuscript build, and
 rejects TeX warnings or stale metadata.
 
 ## Files
@@ -89,6 +95,7 @@ rejects TeX warnings or stale metadata.
 - `verification/derive_slice_cover.py` — exact reconstruction program;
 - `verification/check_slice_cover.py` — independent consequence checker;
 - `verification/slice-cover-certificate.json` — canonical exact certificate;
+- `verification/slice-cover-values.tex` — generated, checked manuscript values;
 - `verification/claim-map.json` and `verification/imported-sources.json` —
   theorem coverage and imported-source ledgers;
 - `.zenodo.json` — deposition metadata;

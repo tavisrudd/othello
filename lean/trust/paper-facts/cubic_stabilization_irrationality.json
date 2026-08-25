@@ -160,17 +160,17 @@
   "paper": "cubic_stabilization_irrationality",
   "pdfs": [
     {
-      "bytes": 107629,
+      "bytes": 108250,
       "pages": 10,
       "path": "papers/cubic-stabilization-irrationality/cubic_stabilization_irrationality.pdf",
-      "sha256": "46f8dab11f2da718518a377aef49d45a733dabec1967659410ca478021122846"
+      "sha256": "be5beefe4e7435e5a0717f4cc2f4957b1a52fa2087bfda73819659345769847b"
     }
   ],
   "schema_version": 1,
   "sources": [
     {
       "path": "papers/cubic-stabilization-irrationality/cubic_stabilization_irrationality.tex",
-      "sha256": "6d2f2c5e16ef2775da0293a6af98a277dc45213c635cf594c3e98862aacd9129"
+      "sha256": "81ef9a71d27bb7c646c6e38f165ca5b9af84c912886c0d24446931104632b454"
     },
     {
       "path": "papers/cubic-stabilization-irrationality/formal-annotations.tex",

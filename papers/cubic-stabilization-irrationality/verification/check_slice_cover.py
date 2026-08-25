@@ -71,6 +71,19 @@ def build_certificate():
 
     weight_differences = sp.Matrix(source["weight_difference_matrix"])
     assert abs(int(weight_differences.det())) == 1
+    type_i3_actions = [sp.Matrix(value) for value in source["type_i3_action_matrices"]]
+    assert all(abs(int(value.det())) == 1 for value in type_i3_actions)
+    selected_blocks = source["selected_weight_blocks"]
+    assert len(selected_blocks) == 4
+    assert sorted(
+        generator
+        for block in selected_blocks
+        for generator in block["generators"]
+    ) == sorted([
+        "E1", "E2", "E5", "L12", "L13", "L14",
+        "L15", "L23", "L24", "L25", "L35", "L45",
+    ])
+    assert source["boundary_generators"] == ["E3", "E4", "L34", "Q"]
     coefficient_matrix = sp.Matrix([
         [sp.Rational(value) for value in row]
         for row in source["slice_coefficient_matrix"]
@@ -80,6 +93,7 @@ def build_certificate():
         for omitted in range(4)
     ]
     assert coefficient_matrix.rank() == 3
+    assert coefficient_matrix * sp.ones(4, 1) == sp.zeros(3, 1)
     assert all(value != 0 for value in maximal_minors)
 
     return {
@@ -93,6 +107,9 @@ def build_certificate():
         "fourth_product_on_survivor_line_factorization": str(fourth_factor),
         "human_coprimality_checks": {key: str(value) for key, value in checks.items()},
         "schema": source["schema"],
+        "type_i3_action_matrices": source["type_i3_action_matrices"],
+        "selected_weight_blocks": source["selected_weight_blocks"],
+        "boundary_generators": source["boundary_generators"],
         "symbolic_four_hyperplane_evaluation_determinants": source[
             "symbolic_four_hyperplane_evaluation_determinants"
         ],

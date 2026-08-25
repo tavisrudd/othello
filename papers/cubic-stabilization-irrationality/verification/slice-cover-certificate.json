@@ -4,6 +4,12 @@
     "left_coefficient": "2265746679974131615 - 377042650728395274*b",
     "right_coefficient": "141417109727495582904*b - 1342668830289072756147"
   },
+  "boundary_generators": [
+    "E3",
+    "E4",
+    "L34",
+    "Q"
+  ],
   "corrected_first_three_branch_survivors": [
     {
       "smooth_localized_elimination_basis": [
@@ -70,25 +76,75 @@
     "fourth_quadratic_at_26_over_3": "7918133/9",
     "quadratic_resultant": "-48353381094689774718359510"
   },
-  "schema": "quartic-del-pezzo-two-variable-slice-cover-v3",
+  "schema": "quartic-del-pezzo-two-variable-slice-cover-v4",
+  "selected_weight_blocks": [
+    {
+      "generators": [
+        "L13",
+        "L23",
+        "L35"
+      ],
+      "weight": [
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "generators": [
+        "L14",
+        "L24",
+        "L45"
+      ],
+      "weight": [
+        1,
+        0,
+        1
+      ]
+    },
+    {
+      "generators": [
+        "E1",
+        "E2",
+        "E5"
+      ],
+      "weight": [
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      "generators": [
+        "L12",
+        "L15",
+        "L25"
+      ],
+      "weight": [
+        1,
+        1,
+        1
+      ]
+    }
+  ],
   "slice_coefficient_matrix": [
     [
-      "-77/15",
-      "17/84",
+      "-1",
+      "1",
       "0",
-      "-19/660"
-    ],
-    [
-      "-77/3",
-      "0",
-      "0",
-      "1/2"
-    ],
-    [
-      "-11",
-      "0",
-      "2/15",
       "0"
+    ],
+    [
+      "-1",
+      "0",
+      "1",
+      "0"
+    ],
+    [
+      "-1",
+      "0",
+      "0",
+      "1"
     ]
   ],
   "symbolic_four_hyperplane_evaluation_determinants": [
@@ -180,6 +236,42 @@
         17
       ]
     }
+  ],
+  "type_i3_action_matrices": [
+    [
+      [
+        -1,
+        0,
+        0
+      ],
+      [
+        -1,
+        0,
+        1
+      ],
+      [
+        -1,
+        1,
+        0
+      ]
+    ],
+    [
+      [
+        1,
+        0,
+        -1
+      ],
+      [
+        0,
+        1,
+        -1
+      ],
+      [
+        0,
+        0,
+        -1
+      ]
+    ]
   ],
   "weight_difference_matrix": [
     [

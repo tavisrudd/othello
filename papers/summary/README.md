@@ -80,7 +80,8 @@ results.
   with a rational point and stably permutation geometric Picard lattice
   becomes rational after adjoining two variables.  Applied to the two
   Tschinkel--Zhang series, it gives a uniform `P²` bound and produces
-  nonrational smooth projective fourfolds `Y` with `Y × A¹` rational.
+  nonrational smooth projective fourfolds `Y` with `Y × A¹` rational, answering
+  the affine-line stabilization question raised in that paper.
   [Sharpness of Irrationality after One Stabilization for Cubic Threefolds](https://github.com/tavisrudd/cubic-stabilization-irrationality/blob/main/cubic_stabilization_irrationality.pdf).
 
 - **Integral divisor products on the nonstandard `A₅` cubic pencil.** An
@@ -357,7 +358,7 @@ smooth cubic threefolds over `Q` become rational after multiplication by
 > Applied to the quartic-del-Pezzo fibrations of Tschinkel and Zhang, this
 > proves rationality after adjoining two variables for both of their cubic
 > series, strengthening their stable-rationality conclusion to the uniform
-> bound `P²`. Consequently the stabilization level is two at explicit points
+> bound `P²`. Consequently the stabilization level is two on explicit examples
 > of cubic-threefold moduli and infinite at a very general point. There are
 > also smooth projective nonrational fourfolds `Y/Q` such that `Y × A¹` is
 > rational.

@@ -147,7 +147,7 @@ F13*)
   rational point and stably permutation geometric Picard lattice; and gives a
   reusable constructive criterion for rational torus quotients from descended
   tangent sections.
-- *Boundary:* the upper bound concerns the two displayed cubic families, not
+- *Boundary:* the upper bound concerns the two displayed cubic series, not
   every smooth cubic threefold; the independent one-stabilization theorem
   supplies the lower bound for the cubic threefold members.
 

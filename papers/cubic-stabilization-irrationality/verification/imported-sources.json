@@ -69,7 +69,7 @@
     "pinpoint": "Section 3, equations (3.1)--(3.2), and Lemma 3.2",
     "used": "The split Cox model, its Jacobian, and the OADP property."
   },
-  "tz-cubic-families": {
+  "tz-cubic-series": {
     "citation": "TZ",
     "conventions": [
       {
@@ -84,7 +84,7 @@
       }
     ],
     "pinpoint": "Propositions 5.1 and 5.2",
-    "used": "The two cubic families and their quartic-del-Pezzo generic fibres."
+    "used": "The two cubic series and their quartic-del-Pezzo generic fibres."
   },
   "tz-type-classification": {
     "citation": "TZ",

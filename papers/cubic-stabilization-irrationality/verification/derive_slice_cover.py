@@ -10,6 +10,7 @@ four witness triples printed in the manuscript.
 import argparse
 import itertools
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -175,7 +176,16 @@ def type_i3_lattice_data():
         assert changed[3:5, 0:3] == sp.zeros(2, 3)
         residual_actions.append(changed[3:5, 3:5].inv().T)
     assert all(matrix.det() in (-1, 1) for matrix in residual_actions)
-    return cox_names, difference_matrix
+    return {
+        "cox_names": cox_names,
+        "difference_matrix": difference_matrix,
+        "type_i3_action_matrices": actions,
+        "selected_weight_blocks": [
+            {"weight": list(weight), "generators": blocks[weight]}
+            for weight in window_weights
+        ],
+        "boundary_generators": boundary,
+    }
 
 
 def cox_data(cox_names):
@@ -231,7 +241,9 @@ def cox_data(cox_names):
 
 
 def build_certificate():
-    cox_names, difference_matrix = type_i3_lattice_data()
+    lattice = type_i3_lattice_data()
+    cox_names = lattice["cox_names"]
+    difference_matrix = lattice["difference_matrix"]
     symbols, coordinates, relations, jacobian, rows, tangent_minor = cox_data(cox_names)
     a, b, z1, z2, z3 = symbols
     coordinate_by_name = dict(zip(cox_names, coordinates))
@@ -285,7 +297,7 @@ def build_certificate():
         ])
         determinant = sp.factor(matrix.det())
         minor = sp.factor(tangent_minor.subs(dict(zip((z1, z2, z3), tangent_z))))
-        return determinant, minor, hyperplanes, values
+        return determinant, minor, hyperplanes, values, matrix
 
     witnesses = [
         ((1, 3, 7), (2, 3, 5, 7, 11), (2, 4, 9)),
@@ -341,18 +353,35 @@ def build_certificate():
     }
     assert sp.gcd(fourth_on_line, sp.Poly(first*second, b)).degree() == 0
 
-    first_hyperplanes = derived[0][2][:3]
+    first_hyperplanes = derived[0][2]
     first_values = derived[0][3]
+    first_evaluation = derived[0][4]
     coefficient_matrix = sp.Matrix([
-        [
-            sum(
-                hyperplane[cox_names.index(name)] * first_values[coordinate_by_name[name]]
-                for name in block
-            )
-            for block in window_blocks
-        ]
-        for hyperplane in first_hyperplanes
-    ]).subs({a: 2, b: 5})
+        [-1, 1, 0, 0],
+        [-1, 0, 1, 0],
+        [-1, 0, 0, 1],
+    ])
+    hyperplane_combinations = coefficient_matrix * first_evaluation.inv()
+    slice_hyperplanes = [
+        sum(
+            (
+                hyperplane_combinations[row, column] * first_hyperplanes[column]
+                for column in range(4)
+            ),
+            sp.zeros(1, len(cox_names)),
+        )
+        for row in range(3)
+    ]
+    assert (
+        hyperplane_combinations * first_evaluation - coefficient_matrix
+    ).applyfunc(sp.factor) == sp.zeros(3, 4)
+    assert all(
+        sp.factor(sum(
+            hyperplane[cox_names.index(name)] * first_values[coordinate_by_name[name]]
+            for name in cox_names
+        )) == 0
+        for hyperplane in slice_hyperplanes
+    )
     maximal_minors = [
         coefficient_matrix[:, [column for column in range(4) if column != omitted]].det()
         for omitted in range(4)
@@ -369,7 +398,13 @@ def build_certificate():
         "first_three_branch_outcomes": outcomes,
         "fourth_product_on_survivor_line_factorization": str(fourth_factor),
         "human_coprimality_checks": {key: str(value) for key, value in checks.items()},
-        "schema": "quartic-del-pezzo-two-variable-slice-cover-v3",
+        "schema": "quartic-del-pezzo-two-variable-slice-cover-v4",
+        "type_i3_action_matrices": [
+            [[int(entry) for entry in matrix.row(row)] for row in range(3)]
+            for matrix in lattice["type_i3_action_matrices"]
+        ],
+        "selected_weight_blocks": lattice["selected_weight_blocks"],
+        "boundary_generators": lattice["boundary_generators"],
         "symbolic_four_hyperplane_evaluation_determinants": [str(value) for value in determinants],
         "symbolic_tangent_smoothness_minors": [str(value) for value in minors],
         "tangent_orbit_witnesses": [
@@ -387,14 +422,224 @@ def build_certificate():
     }
 
 
+def render_tex_artifact(certificate):
+    """Render every computation-derived value printed in the manuscript."""
+    a, b = sp.symbols("a b")
+    parse = {"a": a, "b": b}
+    determinants = [
+        sp.sympify(value, locals=parse)
+        for value in certificate["symbolic_four_hyperplane_evaluation_determinants"]
+    ]
+    minors = [
+        sp.sympify(value, locals=parse)
+        for value in certificate["symbolic_tangent_smoothness_minors"]
+    ]
+    determinant_numerators = []
+    for value in determinants:
+        numerator = sp.together(value).as_numer_denom()[0]
+        determinant_numerators.append(sp.Poly(numerator, a, b).primitive()[1].as_expr())
+    minor_numerators = [
+        sp.together(value).as_numer_denom()[0] for value in minors
+    ]
+
+    def polynomial_rows(name, polynomial):
+        terms = sp.Add.make_args(sp.expand(polynomial))
+        terms = sorted(
+            terms,
+            key=lambda term: sp.Poly(term, a, b).monoms()[0],
+            reverse=True,
+        )
+        rendered = []
+        for index, term in enumerate(terms):
+            sign = "-" if term.could_extract_minus_sign() else "+"
+            body = sp.latex(-term if sign == "-" else term)
+            if index == 0 and sign == "+":
+                sign = ""
+            rendered.append(sign + body)
+        rows = [
+            "".join(rendered[index:index + 3])
+            for index in range(0, len(rendered), 3)
+        ]
+        return (
+            f"{name}={{}}&" + rows[0]
+            + "".join(r"\\" + "\n&" + row for row in rows[1:])
+        )
+
+    determinant_rows = []
+    for index, value in enumerate(determinant_numerators, start=1):
+        factored = sp.factor(value)
+        if index == 1:
+            determinant_rows.append(f"D_1={{}}&{sp.latex(factored)}")
+        else:
+            determinant_rows.append(polynomial_rows(f"D_{index}", value))
+    minor_rows = [
+        f"M_{index}={{}}&{sp.latex(sp.factor(value))}"
+        for index, value in enumerate(minor_numerators, start=1)
+    ]
+
+    survivors = certificate["corrected_first_three_branch_survivors"]
+    first_basis = survivors[0]["smooth_localized_elimination_basis"]
+    q0 = sp.sympify(first_basis[1], locals=parse)
+    fourth_factor = sp.sympify(
+        certificate["fourth_product_on_survivor_line_factorization"],
+        locals=parse,
+    )
+    q4_candidates = [
+        factor
+        for factor, _multiplicity in sp.factor_list(fourth_factor)[1]
+        if sp.Poly(factor, b).degree() == 2
+    ]
+    assert len(q4_candidates) == 1
+    q4 = q4_candidates[0]
+    checks = certificate["human_coprimality_checks"]
+    bezout = certificate["bezout_identity"]
+    left = sp.sympify(bezout["left_coefficient"], locals=parse)
+    right = sp.sympify(bezout["right_coefficient"], locals=parse)
+
+    action_matrices = [
+        sp.latex(sp.Matrix(matrix)) for matrix in certificate["type_i3_action_matrices"]
+    ]
+    block_rows = []
+    for block in certificate["selected_weight_blocks"]:
+        weight = ",".join(str(value) for value in block["weight"])
+        generators = ",".join(
+            re.sub(r"([A-Z]+)([0-9]+)$", r"\1_{\2}", name)
+            for name in block["generators"]
+        )
+        block_rows.append(rf"$({weight})$ & ${generators}$\\")
+    boundary = ",".join(
+        re.sub(r"([A-Z]+)([0-9]+)$", r"\1_{\2}", name)
+        for name in certificate["boundary_generators"]
+    )
+    witness_rows = []
+    for index, witness in enumerate(certificate["tangent_orbit_witnesses"], start=1):
+        tangent = ",".join(str(value) for value in witness["tangent_z"])
+        orbit_e = ",".join(str(value) for value in witness["orbit_e"])
+        orbit_z = ",".join(str(value) for value in witness["orbit_z"])
+        witness_rows.append(rf"{index}&$({tangent})$&$({orbit_e})$&$({orbit_z})$\\")
+
+    def branch_formula(code):
+        return "".join(f"{letter}_{index}" for index, letter in enumerate(code, start=1))
+
+    branch_rows = []
+    outcomes = certificate["first_three_branch_outcomes"]
+    for initial in ("D", "M"):
+        empty_codes = [
+            outcome["chosen_zero_factors"]
+            for outcome in outcomes
+            if outcome["localized_zero_locus"] == "empty"
+            and outcome["chosen_zero_factors"].startswith(initial)
+        ]
+        if empty_codes:
+            equations = ", ".join(branch_formula(code) for code in empty_codes)
+            branch_rows.append(rf"${equations}$&empty\\")
+    survivor_by_code = {
+        "".join("M" if value else "D" for value in survivor["zero_choice_0_D_1_M"]):
+            survivor["smooth_localized_elimination_basis"]
+        for survivor in survivors
+    }
+    for outcome in outcomes:
+        code = outcome["chosen_zero_factors"]
+        if outcome["localized_zero_locus"] != "survives":
+            continue
+        basis = survivor_by_code[code]
+        basis_expressions = [sp.sympify(value, locals=parse) for value in basis]
+        locus = "=".join(
+            "Q_0(b)" if sp.expand(value - q0) == 0 else sp.latex(value)
+            for value in basis_expressions
+        )
+        branch_rows.append(rf"${branch_formula(code)}$&${locus}=0$\\")
+
+    return "\n".join([
+        "% Generated by verification/derive_slice_cover.py; do not edit by hand.",
+        rf"\newcommand{{\IThreeActionOne}}{{{action_matrices[0]}}}",
+        rf"\newcommand{{\IThreeActionTwo}}{{{action_matrices[1]}}}",
+        r"\newcommand{\IThreeWeightTable}{%",
+        r"\begin{tabular}{@{}cl@{}}",
+        r"\toprule",
+        r"weight & Cox generators\\",
+        r"\midrule",
+        *block_rows,
+        r"\bottomrule",
+        r"\end{tabular}%",
+        r"}",
+        rf"\newcommand{{\IThreeBoundaryGenerators}}{{{boundary}}}",
+        r"\newcommand{\SliceWitnessTable}{%",
+        r"\begin{tabular}{@{}ccll@{}}",
+        r"\toprule",
+        r"$i$&$z$&$e$&$z'$\\",
+        r"\midrule",
+        *witness_rows,
+        r"\bottomrule",
+        r"\end{tabular}%",
+        r"}",
+        r"\newcommand{\SliceDeterminants}{%",
+        r"\begin{align*}",
+        (r",\\" + "\n").join(determinant_rows) + ".",
+        r"\end{align*}",
+        r"}",
+        r"\newcommand{\SliceMinors}{%",
+        r"\begin{align*}",
+        (r",\\" + "\n").join(minor_rows) + ".",
+        r"\end{align*}",
+        r"}",
+        r"\newcommand{\SliceCoverArithmetic}{%",
+        r"\begin{center}",
+        r"\begin{tabular}{@{}cc@{}}",
+        r"\toprule",
+        r"chosen equations & localized zero locus\\",
+        r"\midrule",
+        *branch_rows,
+        r"\bottomrule",
+        r"\end{tabular}",
+        r"\end{center}",
+        r"where",
+        r"\[",
+        f" Q_0(b)={sp.latex(q0)}.",
+        r"\]",
+        r"On the line $3a-b-2=0$, the primitive numerator of $D_4M_4$ is",
+        r"\begin{align*}",
+        f" &{sp.latex(fourth_factor)},\\\\",
+        rf" Q_4(b)&={sp.latex(q4)}.",
+        r"\end{align*}",
+        r"The evaluations",
+        r"\begin{align*}",
+        rf" Q_0(17/4)&={sp.latex(sp.Rational(checks['first_survivor_at_17_over_4']))}, &",
+        rf" Q_0(85/16)&={sp.latex(sp.Rational(checks['first_survivor_at_85_over_16']))},\\",
+        rf" Q_4(26/3)&={sp.latex(sp.Rational(checks['fourth_quadratic_at_26_over_3']))}, &",
+        rf" Q_4(13/3)&={sp.latex(sp.Rational(checks['fourth_quadratic_at_13_over_3']))}",
+        r"\end{align*}",
+        r"exclude the four linear roots.  Finally, the two quadratics are coprime by",
+        r"the identity",
+        r"\begingroup\small",
+        r"\begin{align*}",
+        rf" &\bigl({sp.latex(left)}\bigr)Q_0(b)\\",
+        rf" &\quad +\bigl({sp.latex(right)}\bigr)Q_4(b)\\",
+        rf" &={bezout['constant']}.",
+        r"\end{align*}",
+        r"\endgroup",
+        r"}",
+        "",
+    ])
+
+
 parser = argparse.ArgumentParser()
 mode = parser.add_mutually_exclusive_group(required=True)
 mode.add_argument("--write-certificate", type=Path)
 mode.add_argument("--check-certificate", type=Path)
+artifact_mode = parser.add_mutually_exclusive_group()
+artifact_mode.add_argument("--write-tex-artifact", type=Path)
+artifact_mode.add_argument("--check-tex-artifact", type=Path)
 arguments = parser.parse_args()
-payload = json.dumps(build_certificate(), indent=2, sort_keys=True) + "\n"
+certificate = build_certificate()
+payload = json.dumps(certificate, indent=2, sort_keys=True) + "\n"
+tex_artifact = render_tex_artifact(certificate)
 if arguments.write_certificate is not None:
     arguments.write_certificate.write_text(payload, encoding="utf-8")
 else:
     assert arguments.check_certificate.read_text(encoding="utf-8") == payload
+if arguments.write_tex_artifact is not None:
+    arguments.write_tex_artifact.write_text(tex_artifact, encoding="utf-8")
+if arguments.check_tex_artifact is not None:
+    assert arguments.check_tex_artifact.read_text(encoding="utf-8") == tex_artifact
 print("slice-cover derivation: ok")

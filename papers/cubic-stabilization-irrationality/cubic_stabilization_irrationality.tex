@@ -4,6 +4,7 @@
 \usepackage{lmodern,microtype,amsmath,amssymb,amsthm,mathtools,booktabs}
 \usepackage[hidelinks]{hyperref}
 \input{formal-annotations}
+\input{verification/slice-cover-values}
 
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{proposition}[theorem]{Proposition}
@@ -46,7 +47,7 @@ two-dimensional torus is rational.  Applied to the quartic-del-Pezzo
 fibrations of Tschinkel and Zhang, this proves rationality after adjoining two
 variables for both of their cubic series, strengthening their
 stable-rationality conclusion to the uniform bound \(\PP^2\).  Consequently
-the stabilization level is two at explicit points of cubic-threefold moduli
+the stabilization level is two on explicit examples in cubic-threefold moduli
 and infinite at a very general point.  There are also smooth projective
 nonrational fourfolds \(Y/\mathbf Q\) such that \(Y\times\A^1\) is rational.
 \end{abstract}
@@ -86,7 +87,7 @@ X_3:\quad &x_4(x_1^2+2x_1x_2)+x_3(x_1^2+x_1x_2+x_2^2)
 \begin{theorem}[Exact level for the cubic threefolds]
 \label{thm:cubic-level}
 \coverage{absent}%
-\imports{rudd-one-stabilization,tz-cubic-families}%
+\imports{rudd-one-stabilization,tz-cubic-series}%
 \evidence{quartic-del-pezzo-slice-cover}%
 For \(j\in\{1,3\}\),
 \[
@@ -133,11 +134,11 @@ For \(r\geq0\), let \(X_{j,r}\subset\PP^{r+4}_{\mathbf Q}\) be obtained
 from equation \eqref{eq:cubic-one} or \eqref{eq:cubic-three} by adding
 \(w_1^3+\cdots+w_r^3\) to its left-hand side.  Thus \(X_{j,0}=X_j\).
 
-\begin{corollary}[Two families of cubic hypersurfaces]
+\begin{corollary}[Two series of cubic hypersurfaces]
 \label{cor:cubics}
 \coverage{absent}%
 \uses{thm:two-variable}%
-\imports{tz-cubic-families,tz-type-classification}%
+\imports{tz-cubic-series,tz-type-classification}%
 For every \(r\geq0\) and \(j\in\{1,3\}\), the variety
 \(X_{j,r}\times\PP^2\) is rational over \(\mathbf Q\).
 \end{corollary}
@@ -158,7 +159,9 @@ projective fourfold over \(\mathbf Q\) which remains nonrational over
 \end{corollary}
 
 This is a statement about birational rationality after taking a product with
-\(\A^1\).  It is not a counterexample to the Zariski cancellation problem,
+\(\A^1\).  In particular, it answers the question raised in
+\cite[p.~13]{TZ} asking for a nonrational variety \(Y\) such that
+\(Y\times\A^1\) is rational.  It is not a counterexample to the Zariski cancellation problem,
 which concerns isomorphisms between affine cylinders.
 
 \begin{corollary}[Variation in the moduli of cubic threefolds]
@@ -167,8 +170,8 @@ which concerns isomorphisms between affine cylinders.
 \uses{thm:cubic-level}%
 \imports{egfs-very-general-cubic}%
 On the moduli space of smooth complex cubic threefolds, \(\ell_{\C}\) is
-equal to two at the two displayed points and is infinite at a very general
-point.
+equal to two on every isomorphism class represented by \(X_1\) or \(X_3\),
+and is infinite at a very general point.
 \end{corollary}
 
 \section{A criterion for rational torus quotients}
@@ -199,8 +202,8 @@ Suppose that it has nonzero weight spaces
 other weight spaces descend to complementary \(k\)-subspaces of \(V\); write
 \(B=\PP(\widehat B)\).
 
-Suppose that, for a general \(p\in Z(k)\), there is a \(k\)-defined
-codimension-\(r\) linear subspace
+Suppose that there is a point \(p\in Z(k)\) for which \(\pi_p\) is
+birational, together with a \(k\)-defined codimension-\(r\) linear subspace
 \[
  \Lambda\supset\langle T_pZ,B\rangle
 \]
@@ -278,7 +281,7 @@ the diagonal torus action.  Then
 \end{equation}
 is the quotient parametrization.  If \(R_\alpha(x)\) are homogeneous
 equations for \(Z\), the graph of its inverse over \(\Phi(U/T)\) is the
-unique component dominating that open of
+closure of the locus with \(x\in C\cap U_p\) satisfying
 \begin{equation}
  \begin{aligned}
  R_\alpha(x)&=0 &&\text{for every }\alpha,\\
@@ -339,23 +342,14 @@ image, the sublattice
 \end{equation}
 is saturated and Galois stable.  The two generators act on this basis by
 \[
- \begin{pmatrix}-1&0&0\\-1&0&1\\-1&1&0\end{pmatrix},
+ \IThreeActionOne,
  \qquad
- \begin{pmatrix}1&0&-1\\0&1&-1\\0&0&-1\end{pmatrix}.
+ \IThreeActionTwo.
 \]
 Let \(T_3\subset T_0\) be the corresponding rank-three subtorus.  Four
 blocks of Cox generators have the following projective \(T_3\)-weights:
 \begin{center}
-\begin{tabular}{@{}cl@{}}
-\toprule
-weight & Cox generators\\
-\midrule
-\((0,1,1)\) & \(L_{13},L_{23},L_{35}\)\\
-\((1,0,1)\) & \(L_{14},L_{24},L_{45}\)\\
-\((1,1,0)\) & \(E_1,E_2,E_5\)\\
-\((1,1,1)\) & \(L_{12},L_{15},L_{25}\)\\
-\bottomrule
-\end{tabular}
+\IThreeWeightTable
 \end{center}
 The four blocks form a Galois-stable set, but they are not individually
 Galois stable.  On their displayed weights, the first generator acts by
@@ -367,7 +361,7 @@ affine actions on projective weights: a different diagonal lift translates
 all four weights by a common character.  Every other Cox generator lies in
 the Galois-stable subspace
 \begin{equation}
- B=\PP\langle E_3,E_4,L_{34},Q\rangle.
+ B=\PP\langle\IThreeBoundaryGenerators\rangle.
  \label{eq:boundary-subspace}
 \end{equation}
 The determinant of the three weight differences from \((0,1,1)\) is one.
@@ -425,16 +419,7 @@ on the four groups of Cox generators gives a \(4\)-by-\(4\) matrix.  The
 following exact choices are used; \(e=(e_1,\ldots,e_5)\) and \(z'\) specify
 the second Cox point at which the evaluation matrix is tested.
 \begin{center}
-\begin{tabular}{@{}ccll@{}}
-\toprule
-\(i\)&\(z\)&\(e\)&\(z'\)\\
-\midrule
-1&\((1,3,7)\)&\((2,3,5,7,11)\)&\((2,4,9)\)\\
-2&\((2,5,11)\)&\((3,4,7,13,17)\)&\((1,6,10)\)\\
-3&\((3,8,13)\)&\((5,7,11,17,19)\)&\((2,9,15)\)\\
-4&\((4,9,17)\)&\((2,5,11,19,23)\)&\((3,10,18)\)\\
-\bottomrule
-\end{tabular}
+\SliceWitnessTable
 \end{center}
 
 Let \(D_i\) be the determinant of this evaluation matrix, and let \(M_i\)
@@ -581,7 +566,7 @@ is purely transcendental.  This is rationality of \(X\times\A^2\),
 equivalently of \(X\times\PP^2\).  The argument is an identity of function
 fields; no specialization assertion is used.
 \uses{thm:two-variable}%
-\imports{tz-cubic-families}%
+\imports{tz-cubic-series}%
 \end{proof}
 
 \begin{proof}[Proof of Theorem~\ref{thm:cubic-level}]
@@ -594,7 +579,7 @@ because rationality survives extension of the ground field.  Corollary
 also over \(\mathbf C\).  This proves both equalities of stabilization
 levels.
 \uses{cor:cubics}%
-\imports{rudd-one-stabilization,tz-cubic-families}%
+\imports{rudd-one-stabilization,tz-cubic-series}%
 \end{proof}
 
 \begin{proof}[Proof of Corollary~\ref{cor:affine-line}]
@@ -610,8 +595,8 @@ is purely transcendental by Corollary~\ref{cor:cubics}.  Equivalently,
 \end{proof}
 
 \begin{proof}[Proof of Corollary~\ref{cor:moduli}]
-Theorem~\ref{thm:cubic-level} gives the value two at the two displayed
-points.  Engel, de Gaay Fortman, and Schreieder prove that a very general
+Theorem~\ref{thm:cubic-level} gives the value two on each isomorphism class
+represented by the displayed examples.  Engel, de Gaay Fortman, and Schreieder prove that a very general
 smooth complex cubic threefold does not admit a decomposition of the
 diagonal and hence is not stably rational
 \cite[Corollary~1.4]{EGFS}.  For such a threefold no finite \(m\) makes
@@ -632,64 +617,15 @@ program as an oracle.
 
 After discarding nonzero rational factors, the four evaluation determinants
 are
-\begin{align*}
-D_1={}&(8a-27)^2(3968a-1349b-2619),\\
-D_2={}&568453977a^3-373279764a^2b-1658788404a^2+59068867ab^2\\
-&+976763788ab+925668016a-128537024b^2-359163728b-10185728,\\
-D_3={}&1643918400a^3-1105797420a^2b-7261914240a^2+154718524ab^2\\
-&+3804690316ab+9944961600a-282623593b^2-3443769343b-3454184244,\\
-D_4={}&35068545a^3+2864538a^2b-236376549a^2-5350827ab^2\\
-&+24417420ab+469658574a+14536855b^2-90750394b-214068162,
-\end{align*}
+\SliceDeterminants
 and the corresponding smoothness minors are
-\begin{align*}
-M_1={}&-4(a-1)(b-7)(3a-b-2)(2ab+7a-9b),\\
-M_2={}&-9(a-1)(2b-11)(3a-b-2)(4ab+11a-15b),\\
-M_3={}&-25(a-1)(3b-13)(2a-b-1)(3ab+13a-16b),\\
-M_4={}&-(a-1)(4b-17)(13a-5b-8)(32ab+85a-117b).
-\end{align*}
+\SliceMinors
 
 To prove \eqref{eq:witness-cover}, suppose first that
 \(D_iM_i=0\) for \(i=1,2,3\).  Choosing one factor from each product gives
 eight cases.  A lexicographic Gr\"obner calculation in
 \(\mathbf Q[a,b,h]/(h\Delta-1)\) gives
-\begin{center}
-\begin{tabular}{@{}cc@{}}
-\toprule
-chosen equations & localized zero locus\\
-\midrule
-\(D_1D_2D_3, D_1D_2M_3, D_1M_2D_3, D_1M_2M_3\)&empty\\
-\(M_1D_2D_3, M_1D_2M_3\)&empty\\
-\(M_1M_2D_3\)&\(3a-b-2=Q_0(b)=0\)\\
-\(M_1M_2M_3\)&\(3a-b-2=(3b-26)(3b-13)=0\)\\
-\bottomrule
-\end{tabular}
-\end{center}
-where
-\[
- Q_0(b)=31223016b^2-435944529b+1306078948.
-\]
-On the line \(3a-b-2=0\), the primitive numerator of \(D_4M_4\) is
-\[
- -(b-1)^4(4b-17)(16b-85)Q_4(b),
- \qquad Q_4(b)=83246b^2-872181b+2185995.
-\]
-The evaluations
-\begin{align*}
- Q_0(17/4)&=\frac{69121705}{4}, &
- Q_0(85/16)&=-\frac{4117757269}{32},\\
- Q_4(26/3)&=\frac{7918133}{9}, &
- Q_4(13/3)&=-\frac{272530}{9}
-\end{align*}
-exclude the four linear roots.  Finally, the two quadratics are coprime by
-the identity
-\begingroup\small
-\begin{align*}
- &(2265746679974131615-377042650728395274b)Q_0(b)\\
- &\quad +(141417109727495582904b-1342668830289072756147)Q_4(b)\\
- &=24176690547344887359179755.
-\end{align*}
-\endgroup
+\SliceCoverArithmetic
 Thus \(D_4M_4\ne0\) in both remaining cases.  This proves that the four
 opens \(D_iM_i\ne0\) cover \(\Delta\ne0\).
 
@@ -702,8 +638,11 @@ character matrices and a transcription of the twenty Cox quadrics in
 \cite[Section~3]{TZ}.  It reconstructs the saturated rank-three lattice, the
 residual rank-two quotient, the tangent Jacobian, all four pairs
 \((D_i,M_i)\), the eight localized branches, and the B\'ezout identity above
-with SymPy~1.14.0.  A second checker independently verifies the resulting
-cover and quotient minors.  The transcription of the source equations and
+with SymPy~1.14.0.  It also derives the evaluation-kernel slice through the
+orbit-test point and renders every computation-derived matrix, block, witness,
+determinant, minor, and B\'ezout coefficient printed in the manuscript into a
+checked TeX artifact.  A second checker independently verifies the resulting
+cover, kernel slice, and quotient minors.  The transcription of the source equations and
 the quotient criterion, equivariant generic trivialization, incidence
 descent, and function-field argument are checked in the text and are not
 delegated to those programs.

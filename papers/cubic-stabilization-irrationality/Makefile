@@ -19,12 +19,13 @@ lint:
 
 verify:
 	$(PYTHON) verification/derive_slice_cover.py \
-		--check-certificate verification/slice-cover-certificate.json
+		--check-certificate verification/slice-cover-certificate.json \
+		--check-tex-artifact verification/slice-cover-values.tex
 	$(PYTHON) verification/check_slice_cover.py \
 		--check-certificate verification/slice-cover-certificate.json
 	$(LINT_PYTHON) verification/check_metadata.py
 
-manuscript: $(SOURCE) formal-annotations.tex
+manuscript: $(SOURCE) formal-annotations.tex verification/slice-cover-values.tex
 	$(LINT_PYTHON) ../scripts/lint_tex_spacing.py $(SOURCE)
 	$(LATEXMK) $(LATEXMK_FLAGS) $(SOURCE)
 

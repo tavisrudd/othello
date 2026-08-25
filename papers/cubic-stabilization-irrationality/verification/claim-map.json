@@ -10,21 +10,21 @@
     "objects": "The smooth projective fourfold Y and its affine-line stabilization."
   },
   "cor:cubics": {
-    "cautions": "This is restricted to the two Tschinkel--Zhang families, not every smooth cubic hypersurface.",
-    "conclusion": "X times P2 is rational over Q for every member of either family.",
+    "cautions": "This is restricted to the two Tschinkel--Zhang series, not every smooth cubic hypersurface.",
+    "conclusion": "X times P2 is rational over Q for every member of either series.",
     "coverage": "absent",
     "declarations": [],
-    "digest": "13b11f6eda759c8c92ec27b45bea35a6bd5d839bee92ee8ddf12f57dfde90fa9",
+    "digest": "20f1d3e655ea75ae31ce42b91b45b608f7226aa5dcbfbafd22d34d009f5cd828",
     "environment": "corollary",
     "hypotheses": "r is nonnegative and X is one of the cubics in Tschinkel--Zhang Propositions 5.1 or 5.2.",
-    "objects": "The two explicit families of cubic hypersurfaces."
+    "objects": "The two explicit series of cubic hypersurfaces."
   },
   "cor:moduli": {
-    "cautions": "The finite value is proved only at the two displayed points; the infinite value is a very-general statement.",
-    "conclusion": "The function ell_C is two at the displayed cubic points and infinite at a very general point.",
+    "cautions": "The finite value is proved only on the isomorphism classes represented by the displayed examples; the infinite value is a very-general statement.",
+    "conclusion": "The function ell_C is two on the displayed cubic examples and infinite at a very general point.",
     "coverage": "absent",
     "declarations": [],
-    "digest": "fd1864cbf8ccf02fc3feca35d7eef007f28abd50d153c3cff53c15cf33285050",
+    "digest": "3727875ecc1ed80a7a1d328edef9da78abf2da1ee12059ddf763f10287308ea4",
     "environment": "corollary",
     "hypotheses": "The base field is C and the cubic is either displayed or very general as specified.",
     "objects": "The level-of-stable-rationality function ell_C on smooth cubic-threefold moduli."
@@ -54,9 +54,9 @@
     "conclusion": "The Rosenlicht quotient Z/T is k-rational.",
     "coverage": "absent",
     "declarations": [],
-    "digest": "1b758a44257e0dbe98b5af380fa25eb622e622c6b4a2bb157ebda52e647949fc",
+    "digest": "3fc834a9aebd64d459871a16f471587c1e071888791265ffd8c0500a76fbdbcc",
     "environment": "theorem",
-    "hypotheses": "A generically free projectively linear rank-r torus action, birational generic tangent projection, descended complementary sums of projective weight spaces, an integral basis of weight differences, and a nondegenerate tangent linear section whose orbit-section component meets the tangent-projection isomorphism open.",
+    "hypotheses": "A generically free projectively linear rank-r torus action, a rational point in the birational tangent-projection locus, descended complementary sums of projective weight spaces, an integral basis of weight differences, and a nondegenerate tangent linear section whose orbit-section component meets the tangent-projection isomorphism open.",
     "objects": "A projective torus action on a projective variety and its Rosenlicht quotient."
   },
   "thm:cubic-level": {

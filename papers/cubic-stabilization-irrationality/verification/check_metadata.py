@@ -61,10 +61,23 @@ for relative in (
     "flake.nix",
     "flake.lock",
     "verification/slice-cover-certificate.json",
+    "verification/slice-cover-values.tex",
     "verification/derive_slice_cover.py",
     "verification/check_slice_cover.py",
 ):
     assert (ROOT / relative).is_file() and relative in readme
+assert text.count(r"\input{verification/slice-cover-values}") == 1
+normalized_tex = " ".join(text.split())
+placed_artifacts = (
+    r"is saturated and Galois stable. The two generators act on this basis by \[ \IThreeActionOne, \qquad \IThreeActionTwo. \]",
+    r"Four blocks of Cox generators have the following projective \(T_3\)-weights: \begin{center} \IThreeWeightTable \end{center}",
+    r"B=\PP\langle\IThreeBoundaryGenerators\rangle.",
+    r"The following exact choices are used; \(e=(e_1,\ldots,e_5)\) and \(z'\) specify the second Cox point at which the evaluation matrix is tested. \begin{center} \SliceWitnessTable \end{center}",
+    r"After discarding nonzero rational factors, the four evaluation determinants are \SliceDeterminants and the corresponding smoothness minors are \SliceMinors",
+    r"A lexicographic Gr\"obner calculation in \(\mathbf Q[a,b,h]/(h\Delta-1)\) gives \SliceCoverArithmetic Thus \(D_4M_4\ne0\)",
+)
+for snippet in placed_artifacts:
+    assert normalized_tex.count(snippet) == 1, snippet
 stale = re.compile(r"INT[-_ ]?Psi|all[- ]m|quantum.?D|marked block|conditional", re.I)
 assert not stale.search(json.dumps(zenodo))
 assert not stale.search(readme)
