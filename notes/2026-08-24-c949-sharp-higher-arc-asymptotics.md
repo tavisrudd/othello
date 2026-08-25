@@ -1619,6 +1619,21 @@ vertex lines.  If their value sets are `A_0,B_0,C_0` for the projections
 product A_0=(product B_0)(product C_0).              (SR19)
 ```
 
+There is an exact finite completion test behind this identity.  The set `H`
+extends by three new torus cells to a full duplex if and only if there is a
+bijection `pi:A_0 -> B_0` such that
+
+```text
+{a/pi(a):a in A_0}=C_0
+```
+
+as a multiset and none of the three cells `(a,pi(a))` is already in `H`.
+Indeed the deficient fibers in each projection are exactly its three
+singletons, so any completion must, and such a bijection does, fill all nine
+deficits once.  Thus the product equation `(SR19)` is necessary but not by
+itself a completion theorem: the nonextendable branch is a literal
+three-by-three transversal obstruction.                         (SR19c)
+
 The selected bisecants are `q-3` double fibers drawn from the three
 projections; their edges form a perfect matching of `H\{t}`, where `t` is the
 unique tangent-line element and lies in no selected fiber.  What remains
@@ -2088,6 +2103,8 @@ family is lower priority.
   every local `1/2/3/4` profile is prescribed by `(SR17)`.  The other
   `2q-5` generic-or-tangent lines form the almost-duplex `(SR18)` in the
   multiplicative Latin square, with singleton product constraint `(SR19)`.
+  Completion to a full duplex is governed exactly by the three-by-three
+  singleton transversal `(SR19c)`, not by the product constraint alone.
   Its three double-fiber colors form a `3`-edge-colored graph on `2q-5`
   vertices with only nine missing color incidences; the selector is a
   near-perfect matching, and maximality imposes the strict color caps

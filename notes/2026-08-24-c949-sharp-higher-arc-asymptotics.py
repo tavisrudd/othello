@@ -3456,6 +3456,10 @@ def audit_sharp_linear_coefficient(output: Path) -> None:
                             "edge_color_count_upper_bound": 2 * q // 3 - 2,
                         },
                         "singleton_product_identity": "prod(A0)=prod(B0)prod(C0)",
+                        "full_duplex_completion_gate": (
+                            "bijection pi:A0->B0 with ratio multiset C0 and "
+                            "three new cells"
+                        ),
                         "canonical_cyclic_duplex": {
                             "carrier": ["a*b=1", "a*b=gamma"],
                             "common_external_line_lower_bound": (
