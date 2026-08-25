@@ -216,11 +216,23 @@ general 4      (3,4,6,0,0)            (2,5,3,2,1).
 ```
 
 For each branch the compatible fixed-line assignments form one orbit under
-the stabilizer of the fixed core.  Thus the Frobenius question is no longer
-one undifferentiated 261-signature model, but two fully normalized finite
-branches.  Five-minute exact searches of both remain `UNKNOWN`; that status
-supplies no evidence either way.  All exclusions here are
-symmetry-restricted statements, not an unrestricted nonexistence theorem.
+the stabilizer of the fixed core.  Removing the fixed data gives the exact
+orbit inventories
+
+```text
+branch       core point C3-orbits: fixed-line/off-line   line C3-orbits by type 1,...,5
+collinear    5 / 12                                      (152,5,25,64,2)
+general      6 / 11                                      (153,4,25,64,2).
+```
+
+Thus the Frobenius question is no longer one undifferentiated 261-signature
+model, but two fully normalized finite branches, each with only two nonfixed
+5-secant orbits.  The exact search now exposes, rather than merely relying on,
+the projective pair moment, every point-incidence sum, the sparse type-2 and
+type-5 counts, and the degree-19 equality at core points.  Five-minute runs of
+both strengthened branches remain `UNKNOWN`; that status supplies no evidence
+either way.  All exclusions here are symmetry-restricted statements, not an
+unrestricted nonexistence theorem.
 
 ### Exact `q=9` result
 

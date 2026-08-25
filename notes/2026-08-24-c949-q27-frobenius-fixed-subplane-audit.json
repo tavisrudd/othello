@@ -25,6 +25,8 @@
   "normalized_pattern_count": 2,
   "normalized_patterns": [
     {
+      "core_nonfixed_point_orbits_off_fixed_lines": 12,
+      "core_nonfixed_point_orbits_on_fixed_lines": 5,
       "fixed_core_point_indices": [
         0,
         1,
@@ -62,9 +64,18 @@
         "2": 3,
         "3": 1,
         "4": 0
+      },
+      "nonfixed_line_orbit_type_counts": {
+        "1": 152,
+        "2": 5,
+        "3": 25,
+        "4": 64,
+        "5": 2
       }
     },
     {
+      "core_nonfixed_point_orbits_off_fixed_lines": 11,
+      "core_nonfixed_point_orbits_on_fixed_lines": 6,
       "fixed_core_point_indices": [
         0,
         1,
@@ -102,6 +113,13 @@
         "2": 6,
         "3": 0,
         "4": 0
+      },
+      "nonfixed_line_orbit_type_counts": {
+        "1": 153,
+        "2": 4,
+        "3": 25,
+        "4": 64,
+        "5": 2
       }
     }
   ],

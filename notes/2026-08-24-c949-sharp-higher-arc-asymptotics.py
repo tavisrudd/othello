@@ -802,6 +802,10 @@ def search_five_character_core(q: int, symmetry: str, output: Path,
         fixed_line_degree_by_index = dict(zip(singleton_lines, fixed_line_degrees))
     high_secants = []
     high_secant_incidences = []
+    line_intersections = []
+    pair_incidences = []
+    two_secants = []
+    five_secants = []
     signature_multiplicities = []
     fixed_line_types = []
     signature_index_of_line = [0] * len(on_line)
@@ -821,8 +825,23 @@ def search_five_character_core(q: int, symmetry: str, output: Path,
         high_incidence = model.new_int_var(0, 5, f"core_line_{signature_index}_high_incidence")
         model.add(high_incidence == intersection).only_enforce_if(high)
         model.add(high_incidence == 0).only_enforce_if(high.Not())
+        pair_incidence = model.new_int_var(0, 10, f"core_line_{signature_index}_pairs")
+        model.add_allowed_assignments(
+            [intersection, pair_incidence],
+            [(degree, degree * (degree - 1) // 2) for degree in range(1, 6)],
+        )
+        two = model.new_bool_var(f"core_line_{signature_index}_is_two")
+        model.add(intersection == 2).only_enforce_if(two)
+        model.add(intersection != 2).only_enforce_if(two.Not())
+        five = model.new_bool_var(f"core_line_{signature_index}_is_five")
+        model.add(intersection == 5).only_enforce_if(five)
+        model.add(intersection <= 4).only_enforce_if(five.Not())
         high_secants.append(high)
         high_secant_incidences.append(high_incidence)
+        line_intersections.append(intersection)
+        pair_incidences.append(pair_incidence)
+        two_secants.append(two)
+        five_secants.append(five)
         signature_multiplicities.append(len(equivalent_lines))
         if len(equivalent_lines) == 1 and fixed_line_type_counts is not None:
             types = [model.new_bool_var(f"fixed_line_{signature_index}_type_{degree}")
@@ -836,11 +855,25 @@ def search_five_character_core(q: int, symmetry: str, output: Path,
     model.add(sum(multiplicity * incidence for multiplicity, incidence in
                   zip(signature_multiplicities, high_secant_incidences)) ==
               (2 * q + 1) * (2 * q // 3 + 1))
+    model.add(sum(multiplicity * incidence for multiplicity, incidence in
+                  zip(signature_multiplicities, pair_incidences)) ==
+              math.comb(2 * q + 1, 2))
+    model.add(sum(multiplicity * five for multiplicity, five in
+                  zip(signature_multiplicities, five_secants)) == line_type_counts[5])
+    model.add(sum(multiplicity * two for multiplicity, two in
+                  zip(signature_multiplicities, two_secants)) == line_type_counts[2])
+    for orbit in orbits:
+        point = orbit[0]
+        model.add(sum(line_intersections[signature_index_of_line[line]]
+                      for line in through_point[point]) == 2 * q + 1 + q * core[point])
     if require_concurrency_cap:
         arc_intersection = 2 * q // 3 + 1
-        for incident in through_point:
-            model.add(sum(high_secants[signature_index_of_line[line]]
-                          for line in incident) <= arc_intersection)
+        for orbit in orbits:
+            point = orbit[0]
+            high_degree = sum(high_secants[signature_index_of_line[line]]
+                              for line in through_point[point])
+            model.add(high_degree <= arc_intersection)
+            model.add(high_degree == arc_intersection).only_enforce_if(core[point])
     if fixed_line_type_counts is not None:
         if len(fixed_line_type_counts) != 5:
             raise ValueError("fixed line type counts must have five entries")
@@ -869,6 +902,13 @@ def search_five_character_core(q: int, symmetry: str, output: Path,
         "required_fixed_line_type_counts": fixed_line_type_counts,
         "required_fixed_line_degrees": fixed_line_degrees,
         "require_concurrency_cap": require_concurrency_cap,
+        "encoded_projective_pair_moment": math.comb(2 * q + 1, 2),
+        "encoded_sparse_line_type_counts": {
+            "2": line_type_counts[2],
+            "5": line_type_counts[5],
+        },
+        "encoded_point_incidence_identity": "sum_{lines through P} |D intersect line| = |D| + q 1_D(P)",
+        "encoded_core_high_degree_equality": require_concurrency_cap,
         "search": {
             "random_seed": 949,
             "workers": workers,
@@ -1254,6 +1294,15 @@ def audit_frobenius_fixed_subplane(output: Path) -> None:
                 "fixed_line_assignment_orbit_count_under_core_stabilizer":
                     len(assignment_representatives),
                 "fixed_line_degrees_in_fixed_index_order": fixed_line_degrees,
+                "core_nonfixed_point_orbits_on_fixed_lines":
+                    (sum(fixed_line_degrees) - 4 * fixed_core_size) // 3,
+                "core_nonfixed_point_orbits_off_fixed_lines":
+                    (2 * q + 1 - fixed_core_size) // 3
+                    - (sum(fixed_line_degrees) - 4 * fixed_core_size) // 3,
+                "nonfixed_line_orbit_type_counts": {
+                    str(degree): (target[degree] - fixed_types[degree - 1]) // 3
+                    for degree in range(1, 6)
+                },
             }
             if key in patterns and patterns[key] != record:
                 raise AssertionError("assignment count should be projectively invariant")

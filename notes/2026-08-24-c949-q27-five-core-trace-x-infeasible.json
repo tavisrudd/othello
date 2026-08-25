@@ -7,6 +7,13 @@
     "5": 7
   },
   "dual_core_size": 55,
+  "encoded_core_high_degree_equality": false,
+  "encoded_point_incidence_identity": "sum_{lines through P} |D intersect line| = |D| + q 1_D(P)",
+  "encoded_projective_pair_moment": 1485,
+  "encoded_sparse_line_type_counts": {
+    "2": 17,
+    "5": 7
+  },
   "field_modulus_low_to_high": [
     1,
     2,
