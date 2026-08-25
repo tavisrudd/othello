@@ -6,6 +6,7 @@
     "every displayed section lies on the generic cubic surface",
     "the four generators act by the stated type-I3 odd-subset permutations"
   ],
+  "generated_permutation_group_order": 24,
   "generator_actions": {
     "iota": {
       "E1": "L23",

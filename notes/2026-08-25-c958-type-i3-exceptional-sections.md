@@ -56,7 +56,8 @@ the 64 graph coefficients agrees with
 
 in the odd-subset model.  Thus this is the actual type-`I3` marking required
 by the generic C956 Cox formulas, not merely a list of lines over an
-unspecified closure.
+unspecified closure.  The four induced permutations generate a group of
+order 24, checked by exact enumeration.
 
 The certificate contains 16 sections and four complete action tables.  Its
 longest individual coefficient string is 540 characters; these are suitable

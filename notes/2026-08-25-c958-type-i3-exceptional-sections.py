@@ -21,6 +21,12 @@ RELATIONS = [
 ]
 DOMAIN = sp.QQ.frac_field(a, beta)
 GROEBNER = sp.groebner(RELATIONS, delta, g, d, r, order="lex", domain=DOMAIN)
+assert [str(poly.LM(order=GROEBNER.order)) for poly in GROEBNER.polys] == [
+    "delta**2*g**0*d**0*r**0",
+    "delta**0*g**2*d**0*r**0",
+    "delta**0*g**0*d**2*r**0",
+    "delta**0*g**0*d**0*r**3",
+]
 
 
 def remainder(expression):
@@ -156,6 +162,19 @@ def derive_sections():
     order = [f"E{index}" for index in range(1, 6)]
     order += [f"L{left}{right}" for left in range(1, 6) for right in range(left + 1, 6)]
     order += ["Q"]
+    identity = tuple(order)
+    generator_permutations = [tuple(table[name] for name in order)
+                              for table in action_table.values()]
+    permutation_group = {identity}
+    queue = [identity]
+    while queue:
+        current = queue.pop()
+        for generator in generator_permutations:
+            product = tuple(generator[order.index(current[index])] for index in range(16))
+            if product not in permutation_group:
+                permutation_group.add(product)
+                queue.append(product)
+    assert len(permutation_group) == 24
     return {
         "schema": "c958-type-i3-exceptional-sections-v1",
         "base_field": "K=Q(a,beta)",
@@ -179,6 +198,7 @@ def derive_sections():
             for name in order
         },
         "generator_actions": action_table,
+        "generated_permutation_group_order": len(permutation_group),
         "certified": [
             "the degree-24 splitting algebra has the displayed type-I3 automorphisms",
             "exactly the sixteen odd component choices give line sections",
