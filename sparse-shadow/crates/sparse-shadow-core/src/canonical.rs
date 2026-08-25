@@ -29,11 +29,13 @@ pub struct BranchDecision {
 #[serde(deny_unknown_fields)]
 pub struct CanonicalCertificate {
     pub certificate_schema: String,
+    pub proof_system: String,
     pub input_to_canonical: Vec<u32>,
     pub canonical_json: String,
     pub canonical_id: String,
     pub winning_trace: Vec<BranchDecision>,
     pub automorphisms: Vec<Vec<u32>>,
+    pub search_stats: SearchStats,
 }
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
@@ -74,11 +76,13 @@ pub fn canonicalize(input: &InputArtifact) -> Result<CanonicalArtifact, ShadowEr
         .map_err(|_| ShadowError::Invalid("automorphism count exceeds u64".into()))?;
     let certificate = CanonicalCertificate {
         certificate_schema: "sparse-shadow-certificate/v1".into(),
+        proof_system: "paper-i-ir-exhaustion/v1".into(),
         input_to_canonical: input_to_canonical.clone(),
         canonical_json,
         canonical_id: canonical_id.clone(),
         winning_trace: search.winning_trace,
         automorphisms: automorphisms.clone(),
+        search_stats: search.stats.clone(),
     };
 
     Ok(CanonicalArtifact {

@@ -32,6 +32,6 @@ cargo run -p sparse-shadow-cli -- equivalent LEFT.json RIGHT.json
 backed by both exhaustive canonical certificates. Dedicated verifier commands
 replay equivalence and reconstruction artifacts from the raw input(s).
 
-See `docs/schema-v1.md`, `docs/dependency-audit.md`,
-`docs/prior-art-audit.md`, and `docs/performance-paper-i.md` for the frozen
-boundaries and measured evidence.
+See `docs/schema-v1.md`, `docs/certificate-rules-v1.md`,
+`docs/dependency-audit.md`, `docs/prior-art-audit.md`, and
+`docs/performance-paper-i.md` for the frozen boundaries and measured evidence.

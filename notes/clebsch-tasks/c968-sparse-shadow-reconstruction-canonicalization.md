@@ -2,7 +2,7 @@
 
 **Lane:** clebsch
 
-**Status:** active; Paper-I producer/replay/certificate/hot-layout gates green; Papers II--V fail-closed pending frozen exports; standalone Rust tool; no manuscript or Lean edits
+**Status:** active at four external source gates; Paper-I producer/replay/proof-system/hot-layout gates green; Papers II--V fail-closed pending frozen exports; standalone Rust tool; no manuscript or Lean edits
 
 ## Goal
 
@@ -170,10 +170,11 @@ winning trace, and complete automorphism set and rejects corruption. See
 `../2026-08-25-c968-sparse-shadow-first-gate.md` and
 `../../sparse-shadow/docs/prior-art-audit.md`.
 
-The first gate is closed. The next certificate step is a compact, separately
-specified proof-rule calculus, taking Bankovic--Drecun--Maric `isocert` as the
-minimum trust comparator. Papers II--V remain schema-gated, and hot-path
-representation/performance work now follows the passed correctness gate.
+The Paper-I proof system is frozen in
+`../../sparse-shadow/docs/certificate-rules-v1.md`: its separate checker
+rederives the complete search and requires exact result, trace, automorphism,
+and counter agreement. Bankovic--Drecun--Maric `isocert` remains the general
+trust comparator. Papers II--V remain schema-gated.
 
 The gated schemas are not generic placeholders: each owns its frozen source
 hash, observed shadow shape, declared permutation or projective-semilinear
@@ -187,3 +188,9 @@ its exact 193-node fixture search. Equivalence/inequivalence and reconstruction
 certificates have independent replay and corruption tests. The performance
 record is `../../sparse-shadow/docs/performance-paper-i.md`; its wall-time drift
 licenses no optimization claim.
+
+No unblocked C968 implementation frontier remains: each next adapter first
+requires the complete paper-owned export named in its `fixtures/gated-*.json`.
+Nearby evidence JSON and trust manifests are explicitly insufficient. Once an
+owning paper stream freezes one export, C968 resumes with that adapter's exact
+action/arithmetic checker, reference orbit fixtures, and performance gate.

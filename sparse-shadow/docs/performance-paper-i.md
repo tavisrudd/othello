@@ -21,7 +21,7 @@ taskset -c 0 cargo bench --bench paper_i -- --noplot
 | automorphism-buffer cold grows | 0 | measured exact counter |
 | automorphism group order | 120 | independently replayed exact result |
 | emitted generators | 3 | closure checked against the 120 returned actions |
-| compact canonical certificate | 5,082 bytes | deterministic compact JSON, excludes surrounding artifact |
+| compact canonical certificate | 5,237 bytes | deterministic compact JSON, excludes surrounding artifact |
 
 The allocation test wraps the system allocator and brackets only the search
 loop after its 256-entry automorphism buffer is allocated. Across the full
@@ -62,4 +62,3 @@ colored incidence encoding whose version/options change the canonical form, and
 Vole/Sage need a separately frozen action adapter. The prior-art audit names
 these future baselines; the current format does not permit a like-for-like run
 without changing the measured object.
-

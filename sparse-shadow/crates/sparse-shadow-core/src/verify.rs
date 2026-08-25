@@ -105,6 +105,11 @@ pub fn verify_certificate(
             "unsupported certificate schema".into(),
         ));
     }
+    if certificate.proof_system != "paper-i-ir-exhaustion/v1" {
+        return Err(ShadowError::Certificate(
+            "unsupported canonical proof system".into(),
+        ));
+    }
     // This reference search is separate from the producing canonicalizer. It
     // starts from raw relations and trusts neither cached refinement nor hashes.
     let recomputed = reference_canonicalize(input)?;
@@ -136,6 +141,11 @@ pub fn verify_certificate(
             "automorphism set is incomplete or corrupt".into(),
         ));
     }
+    if recomputed.search_stats != certificate.search_stats {
+        return Err(ShadowError::Certificate(
+            "exhausted-search counters differ".into(),
+        ));
+    }
     let checked = certificate.automorphisms.len();
     for permutation in &certificate.automorphisms {
         verify_automorphism(input, permutation)?;
@@ -152,6 +162,7 @@ struct ReferenceResult {
     input_to_canonical: Vec<u32>,
     winning_trace: Vec<BranchDecision>,
     automorphisms: Vec<Vec<u32>>,
+    search_stats: crate::SearchStats,
 }
 
 struct ReferenceSearch<'a> {
@@ -161,6 +172,7 @@ struct ReferenceSearch<'a> {
     best_permutation: Vec<u32>,
     winning_trace: Vec<BranchDecision>,
     equal_permutations: Vec<Vec<u32>>,
+    stats: crate::SearchStats,
 }
 
 fn reference_canonicalize(input: &InputArtifact) -> Result<ReferenceResult, ShadowError> {
@@ -183,6 +195,13 @@ fn reference_canonicalize(input: &InputArtifact) -> Result<ReferenceResult, Shad
         best_permutation: Vec::new(),
         winning_trace: Vec::new(),
         equal_permutations: Vec::new(),
+        stats: crate::SearchStats {
+            search_nodes: 0,
+            canonical_leaves: 0,
+            refinement_rounds: 0,
+            max_depth: 0,
+            arena_grows: 0,
+        },
     };
     search.walk(reference_initial_partition(paper), &mut Vec::new())?;
     let canonical_json = search
@@ -195,6 +214,7 @@ fn reference_canonicalize(input: &InputArtifact) -> Result<ReferenceResult, Shad
         input_to_canonical: search.best_permutation,
         winning_trace: search.winning_trace,
         automorphisms,
+        search_stats: search.stats,
     })
 }
 
@@ -204,8 +224,14 @@ impl ReferenceSearch<'_> {
         partition: Vec<Vec<u32>>,
         trace: &mut Vec<BranchDecision>,
     ) -> Result<(), ShadowError> {
+        self.stats.search_nodes += 1;
+        self.stats.max_depth = self
+            .stats
+            .max_depth
+            .max(u32::try_from(trace.len()).expect("Paper-I depth fits u32"));
         let partition = self.equitable_partition(partition);
         if partition.iter().all(|cell| cell.len() == 1) {
+            self.stats.canonical_leaves += 1;
             let mut permutation = vec![0; partition.len()];
             for (new, cell) in partition.iter().enumerate() {
                 permutation[cell[0] as usize] =
@@ -256,8 +282,9 @@ impl ReferenceSearch<'_> {
         self.equal_permutations.push(permutation);
     }
 
-    fn equitable_partition(&self, mut partition: Vec<Vec<u32>>) -> Vec<Vec<u32>> {
+    fn equitable_partition(&mut self, mut partition: Vec<Vec<u32>>) -> Vec<Vec<u32>> {
         loop {
+            self.stats.refinement_rounds += 1;
             let old = partition;
             let mut changed = false;
             let mut next = Vec::with_capacity(old.len());

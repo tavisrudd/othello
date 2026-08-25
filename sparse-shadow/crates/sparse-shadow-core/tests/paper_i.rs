@@ -68,6 +68,10 @@ fn certificate_replays_and_corruption_is_rejected() {
     let mut missing_automorphism = canonicalize(&input).expect("canonical fixture").certificate;
     missing_automorphism.automorphisms.pop();
     assert!(verify_certificate(&input, &missing_automorphism).is_err());
+
+    let mut corrupt_exhaustion = canonicalize(&input).expect("canonical fixture").certificate;
+    corrupt_exhaustion.search_stats.search_nodes += 1;
+    assert!(verify_certificate(&input, &corrupt_exhaustion).is_err());
 }
 
 #[test]

@@ -21,10 +21,11 @@ The producer now uses guarded fixed/preallocated hot records, emits three
 generators closing to all 120 actions, and produces independently replayable
 equivalence/inequivalence and reconstruction artifacts.
 
-This closes C968's first implementation gate, not C968. Papers II--V remain
-schema-gated pending exact frozen exports, and the current independent replay
-exhaustively recomputes the reference search rather than checking a compact,
-separately specified proof-rule calculus.
+This closes C968's Paper-I implementation, trust, and performance gates, not
+C968. Papers II--V remain schema-gated pending exact frozen exports. The
+specialized `paper-i-ir-exhaustion/v1` rule system keeps the certificate compact
+by making the separate checker rederive all 193 search nodes rather than trust a
+serialized tree.
 
 ## Frozen boundary
 
@@ -77,11 +78,11 @@ baseline. No novelty or priority claim is licensed.
   canonical identity. Canonical serialization now normalizes the theorem
   locator to the adapter identity, and a regression test proves that a second
   frozen export of the same shadow remains equivalent.
-- **Partly settled — certificate trust:** independent exhaustive replay now
-  exists and shares no canonical-search implementation with the producer.
-  Remaining question: what is the smallest compact proof language that covers
-  richer relation/action adapters? Evidence gap: no explicit proof-rule calculus
-  yet. Owning next gate: adapt and minimize the `isocert` rule/checker split.
+- **Settled for Paper I — certificate trust:** the explicit eight-rule
+  `paper-i-ir-exhaustion/v1` system is implemented by a separate exhaustive
+  checker; result, trace, full automorphism set, and every search counter must
+  agree. Future adapters will require action-specific rule extensions and may
+  not inherit this verdict automatically.
 - **Open — source exports:** nearby evidence files exist for Papers II--V, but
   none is the complete frozen shadow required by its typed adapter. Four
   fail-closed schema fixtures name the missing export paths. Owning next gate:
@@ -98,7 +99,6 @@ baseline. No novelty or priority claim is licensed.
 
 ## Next gate
 
-Specify an `isocert`-caliber compact proof-rule calculus, using the independent
-reference search as oracle. In parallel, the owning paper streams may freeze
-the exact exports named by the four gated fixtures; no further adapter can be
-enabled before that source gate.
+The owning paper streams must freeze the exact exports named by the four gated
+fixtures. Once one exists, extend the proof rules and arithmetic/action replay
+for that adapter; no further adapter can be enabled before its source gate.
