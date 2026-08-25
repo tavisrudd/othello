@@ -40,6 +40,15 @@ target-constrained coset-weight formula. It can certify transfer when ordinary
 outer support distance cannot; a construction using a Singer cycle and
 `[k+1,k,2]_q` inner codes gives explicit examples.
 
+For repeated concatenation, the labelled ordinary prescribed-coset support
+functions compose by exact min-sum substitution. Helper-restriction costs
+together with the target images give the target-normalized recursion, and the
+inner-dual distance obeys a compatible formula. Thus the exact nonconfinement
+cost can be evaluated through any finite tower while retaining the zero and
+nonzero functional sectors. A single scalar threshold is not sufficient input
+for this recursion; in particular, the persistent value
+`rho_T(I)+d(I⊥)` loses the required functional labels.
+
 ## Main consequences
 
 - Minimizing simultaneous recovery cost over all target `e`-sets gives

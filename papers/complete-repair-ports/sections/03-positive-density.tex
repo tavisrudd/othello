@@ -168,6 +168,123 @@ with coefficients and supports unchanged.
 \proves{thm:ungated-ranked-confinement}%
 \end{proof}
 
+\subsection{Repeated concatenation}
+
+The ordinary prescribed-coset costs retain the intermediate labels needed at
+the next concatenation level.  Target-normalized composition also retains the
+target image in each inner block.  The resulting formulas are instances of
+variable elimination over the min-sum semiring \cite{AjiMcEliece2000}.  This is also the algebraic
+form of passing symbol-indexed inner costs to an outer decoder, as in soft and
+generalized-concatenated decoding \cite{GuruswamiSudan2002,BlomqvistEtAl2020}.
+
+Let $\F_q\subseteq L\subseteq M$ be a tower of finite fields.  Let $B$ be an
+$\F_q$-linear represented code with message space $L$, and let $A$ be an
+$L$-linear represented code with message space $M$.  After the trace identifications, write their
+dual restriction maps as
+\[
+ \phi_B:\F_q^{E_B}\longrightarrow L,
+ \qquad
+ \phi_A:L^{E_A}\longrightarrow M.
+\]
+For an $\F_q$-space $T$ and $b:T\to L$, put
+\[
+ \Lambda_{B,T}(b)=
+ \min_{\phi_BY=b}|\supp Y(T)|.
+\]
+Define $\Lambda_{A,T}$ and $\Lambda_{A\circ B,T}$ similarly.  If
+$J\subseteq E_B$, let $\Lambda_{B,J,T}$ denote the same minimum with $Y$
+supported on $J$ and $\phi_B$ restricted to those coordinates.
+
+\begin{proposition}[Composition of prescribed-coset support costs]
+\label{prop:prescribed-coset-composition}
+\coverage{absent}%
+\uses{thm:ungated-ranked-confinement}%
+For every $\F_q$-linear map $c:T\to M$,
+\begin{equation}
+ \Lambda_{A\circ B,T}(c)=
+ \min_{\substack{X:T\to L^{E_A}\ \phi_AX=c}}
+ \sum_{e\in E_A}\Lambda_{B,T}(X_e).
+ \label{eq:coset-cost-composition}
+\end{equation}
+Suppose that a target set in $A\circ B$ meets block $e$ in
+$P_e\subseteq E_B$, and put $J_e=E_B\setminus P_e$ and
+$U_{P_e}=\operatorname{im}\phi_{B,P_e}$.  If $T\leq M$ and $\iota_T:T\hookrightarrow M$
+is the inclusion, then the target-normalized cost satisfies
+\begin{equation}
+ \mu_{A\circ B,P,T}(c)=
+ \min_{\substack{U,X:T\to L^{E_A}\
+                  U_e(T)\subseteq U_{P_e}\ (e\in E_A)\\
+                  \phi_AU=\iota_T,\ \phi_AX=c}}
+ \sum_{e\in E_A}\Lambda_{B,J_e,T}(X_e-U_e).
+ \label{eq:target-cost-composition}
+\end{equation}
+Moreover,
+\begin{equation}
+ d((A\circ B)^\perp)=
+ \min\left\{
+ d(B^\perp),
+ \min_{0\ne z\in A^\perp}
+ \sum_{e\in E_A}\Lambda_{B,\F_q}(u\mapsto uz_e)
+ \right\}.
+ \label{eq:dual-distance-composition}
+\end{equation}
+These formulas iterate associatively.  Substitution into
+\eqref{eq:weighted-subspace-cost} therefore gives the exact nonconfinement
+cost through any finite tower, with the zero and nonzero functional sectors
+kept separate at every level.
+\end{proposition}
+
+\begin{proof}
+A leaf-level lift $Y:T\to\F_q^{E_A\times E_B}$ determines intermediate maps
+$X_e=\phi_BY_e$.  Its support is the disjoint union of its supports in the
+inner blocks.  At fixed $X$, the block lifts are independent and attain their
+minima separately, which proves \eqref{eq:coset-cost-composition}.
+
+For the target formula, let $a_e:T\to\F_q^{P_e}$ be the target coefficients
+and set $U_e=\phi_{B,P_e}a_e$.  Every map into $U_{P_e}$ has such a linear
+lift.  Target normalization is exactly $\phi_AU=\iota_T$.  If $X_e$ is the
+total intermediate map in block $e$, its helper contribution must lift
+$X_e-U_e$ through $\phi_{B,J_e}$, proving
+\eqref{eq:target-cost-composition}.  Before taking minimum supports, retain
+the actual target maps $a_e$ and the full helper lift sets.  These compose by
+fiber product over the intermediate total maps $X$, so the same argument also
+transports every coefficient-labelled equation and its support.
+
+A word in $(A\circ B)^\perp$ either has zero intermediate label, when a
+minimum word of $B^\perp$ in one block is optimal, or has a nonzero label
+$z\in A^\perp$, when the block representatives minimize independently.  This
+proves \eqref{eq:dual-distance-composition}.  At three or more levels, either
+parenthesization minimizes over the same intermediate arrays and sums the same
+leaf-block costs, proving associativity and the final assertion.
+\uses{thm:ungated-ranked-confinement}%
+\proves{prop:prescribed-coset-composition}%
+\end{proof}
+
+The trace identifications in this proposition are compatible with the tower.
+Indeed, trace transitivity gives
+\[
+ \sum_e\Tr_{L/\F_q}\bigl(X_e(v)\,\iota_A(m)_e\bigr)
+ =\Tr_{M/\F_q}\bigl(\phi_A(X(v))m\bigr),
+\]
+and nondegeneracy of the trace pairing identifies the composite restriction
+map with $\phi_A\circ(\phi_B)_e$.
+
+The scalar persistent obstruction alone is not compositional.  Over
+$\F_2\subseteq\F_4$, write the nonzero elements as
+$1,\omega,\omega^2=1+\omega$ and take inner generator columns
+\[
+ I_1:(1,1,\omega),
+ \qquad
+ I_2:(1,1,\omega^2),
+\]
+with the first coordinate targeted.  Both have target recovery cost $1$,
+dual distance $2$, and hence persistent value $3$.  Their ordinary coset
+costs on $(1,\omega,\omega^2)$ are $(1,1,2)$ and $(1,2,1)$; their normalized
+target costs are $(0,2,1)$ and $(0,1,2)$.  For an outer functional dual
+spanned by $(1,\omega)$, the nonzero-functional minima are respectively $1$
+and $2$.  Thus the labelled prescribed-coset functions, rather than one
+persistent minimum, are the closed numerical data under repeated concatenation.
+
 The complete bounded structure across all recoverable ranks has a single
 bottleneck.  If a system on $0\ne T\leq W_P$ is nonconfined, some external
 block map is nonzero on a vector $u\in T$; restriction to

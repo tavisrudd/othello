@@ -15,8 +15,8 @@ followed by `thm:objectwise-confinement` and `thm:ranked-confinement` in
 [`sections/03-positive-density.tex`](sections/03-positive-density.tex). In that
 section read `thm:ungated-ranked-confinement` first, then its gated
 specializations `thm:objectwise-confinement` and `thm:ranked-confinement`, then
-`thm:weighted-pointed-confinement` and `prop:strict-weighted-transfer` in the
-same section.
+`prop:prescribed-coset-composition`, `thm:weighted-pointed-confinement`, and
+`prop:strict-weighted-transfer` in the same section.
 Those statements contain the principal theorem and its proof. Sections 5 and
 6 test what the numerical hierarchy retains and discards.
 
@@ -50,6 +50,10 @@ Those statements contain the principal theorem and its proof. Sections 5 and
    `rho_T(I)+d(I⊥)`, while every nonzero sector retains its actual inner
    realization costs. The target outer projection is assumed nonzero so that a
    nonzero functional sector cannot be confined to the target block.
+   `prop:prescribed-coset-composition` shows that the ordinary labelled costs
+   compose by blockwise min-sum substitution. Helper-restriction costs and the
+   target images give the target-normalized recursion. The scalar threshold
+   `rho_T(I)+d(I⊥)` alone is not used as recursive input.
 5. **Where does the additive RGHW cost come from?** The map
    `Φ_I : F_q^E → L*` sends each concatenated dual block to its induced inner
    message functional. A dual vector gives a tuple in the functional dual of
