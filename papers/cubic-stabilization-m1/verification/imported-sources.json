@@ -49,8 +49,8 @@
       "conventions": [
         {
           "aspect": "coefficient maps",
-          "requirement": "The graded completed source rings map injectively as in equation (1.1); no finite algebraic coefficient algebra is asserted for an arbitrary non-Fano fourfold.",
-          "matched": "The comparison is transported through the displayed injective maps and a common algebraically closed generic overfield."
+          "requirement": "Equation (1.1) supplies common graded completed coefficient maps; the raw center Novikov map can be noninjective, and no finite algebraic coefficient algebra is asserted for an arbitrary non-Fano fourfold.",
+          "matched": "The ambient comparison uses the common coefficient image. Each center occurrence first receives the separate target-only tagging proved injective in the manuscript, and only then passes to the common algebraically closed generic overfield."
         },
         {
           "aspect": "loop coordinate",

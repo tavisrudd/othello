@@ -174,12 +174,16 @@ Four compatibility facts place the comparison theorems in the preceding
 framework.
 First, the intrinsic ample-adic completion and the Laurent neighborhood of a
 fibre or exceptional cusp need not map to one another.  Iritani's
-display~(1.1) supplies the required injective maps of graded completed
-coefficient rings \cite[(1.1)]{IritaniBlowup}.  For projective bundles the common
-source is \(\C[z,q][[Q,\widehat\tau]]\); on the blowup side one uses the
-corresponding graded source and, for center terms, the reduced image ring of
-Iritani's Remark~5.6.  Embed the generic fields of these common images in a
-fixed algebraically closed overfield and form every primary block there.  Base
+display~(1.1) supplies the required common coefficient maps
+\cite[(1.1)]{IritaniBlowup}; injectivity for each center occurrence is
+established below.  For projective bundles the common source is
+\(\C[z,q][[Q,\widehat\tau]]\).  On the blowup side the ambient term uses the
+corresponding graded source.  A center term begins with its intrinsic reduced
+coefficient ring from Remark~2.3, maps to the possibly smaller image ring of
+Remark~5.6, and is then pulled to a faithfully tagged occurrence ring in the
+external direct sum.  Embed the generic fields of the ambient common image and
+of these faithfully tagged occurrence images in a fixed algebraically closed
+overfield and form every primary block there.  Base
 change after this splitting extension preserves the rank, nilpotent Jordan
 type, regular formal gauge, and formal exponent classes of each block; forming
 primary factors over a nonsplitting field before extension would not.
@@ -219,17 +223,19 @@ Fourth, Iritani's center map need not be injective
  \label{eq:center-novikov-map-atomic}
 \end{equation}
 Here \(\rho_Z=c_1(N_{Z/Y})\).
-The raw map is not the coefficient map used below.  By the divisor equation,
-the center connection is defined over Iritani's reduced source ring, whose
-Novikov generators are the combined symbols
+The raw map is not the coefficient map used below.  Remark~2.3 gives the
+intrinsic divisor-equation-reduced coefficient ring, whose Novikov generators
+are the combined symbols
 \[
  X_d=Q_Z^d\exp\!\bigl(\sigma^{(2)}\cdot d\bigr);
 \]
 the divisor coordinates \(\sigma^{(2)}\) are not separate elements of this
-ring \cite[Remarks~2.3 and~5.6]{IritaniBlowup}.  In the external direct sum of
-Section~5.8.2, by contrast, the variables \(s_j\in H^*(Z)\) are independent
-coordinates on the common comparison target, and the center parameter is
-identified as \(\varsigma_j=\varsigma_j^\circ+s_j\)
+ring.  Remark~5.6 places its pushforward under the raw Novikov map over the
+image of that reduced ring \cite[Remarks~2.3 and~5.6]{IritaniBlowup}.  In the
+external direct sum of Section~5.8.2, by contrast, the variables
+\(s_j\in H^*(Z)\) are independent coordinates on the common comparison target,
+and the center parameter is identified as
+\(\varsigma_j=\varsigma_j^\circ+s_j\)
 \cite[(5.47)--(5.48)]{IritaniBlowup}.  The divisor components of these
 \emph{target-only} coordinates retain the curve-class information lost by
 \eqref{eq:center-novikov-map-atomic}.
@@ -676,8 +682,9 @@ surface \(\PP_C(V)\) \cite[Chapter~VI]{BeauvilleSurfaces}.  The relation
 Every nonminimal surface is obtained from a minimal one by point blowups;
 formula~\eqref{eq:marker-blowup} adds only zero point terms.  This proves
 intrinsic nullity.  Lemma~\ref{lem:faithful-center-base-change} identifies
-every actual center term with a faithful scalar extension of the corresponding
-intrinsic generic block, and the marker is unchanged by that extension.
+every faithfully tagged actual center occurrence with a faithful scalar
+extension of the corresponding intrinsic generic block, and the marker is
+unchanged by that extension.
 \end{proof}
 
 \subsection{The projective endpoint and the contradiction}
