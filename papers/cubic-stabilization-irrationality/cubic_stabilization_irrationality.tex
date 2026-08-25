@@ -367,7 +367,10 @@ the Galois-stable subspace
 The determinant of the three weight differences from \((0,1,1)\) is one.
 Consequently the direct sum of the four selected blocks and the affine cone
 over \(B\) are complementary subspaces defined over the ground field, as
-required in Theorem~\ref{thm:torus-quotient}.
+required in Theorem~\ref{thm:torus-quotient}.  On the open where the four
+selected block components are nonzero, a projective stabilizer fixes their
+three ratios.  The three weight differences form a basis, so that stabilizer
+is trivial.  In particular, the \(T_3\)-action is generically free.
 
 \begin{remark}[Saturation and the projective kernel]
 \label{rem:saturation}
@@ -611,9 +614,11 @@ diagonal and hence is not stably rational
 \label{app:slice-certificate}
 
 This appendix records the exact cover used in
-Proposition~\ref{prop:tangent-section}.  It is included so that the
-geometric nonemptiness claim can be checked without treating the replay
-program as an oracle.
+Proposition~\ref{prop:tangent-section}.  It exposes the polynomials and the
+two surviving localized branches used in the geometric nonemptiness claim.
+The six empty branches below are exact Gr\"obner computations replayed by the
+public generator; the two surviving branches are then excluded by the
+displayed evaluations and B\'ezout identity.
 
 After discarding nonzero rational factors, the four evaluation determinants
 are
@@ -682,8 +687,9 @@ Publ. Math. IH\'ES 30 \(1966\), 55--113,
 
 \bibitem{RuddM1} T.~Rudd,
 \emph{Irrationality of cubic threefolds after one stabilization},
-Zenodo, 2026, \href{https://doi.org/10.5281/zenodo.21909943}
-{doi:10.5281/zenodo.21909943}.
+version 0.15.0, Zenodo, 2026,
+\href{https://doi.org/10.5281/zenodo.22088961}
+{doi:10.5281/zenodo.22088961}.
 
 \bibitem{TZ} Yu.~Tschinkel and Zh.~Zhang,
 \emph{Universal torsors over quartic del Pezzo surfaces and stable

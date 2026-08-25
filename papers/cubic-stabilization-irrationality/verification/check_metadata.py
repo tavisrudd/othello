@@ -46,7 +46,7 @@ assert zenodo["creators"] == [{
 }]
 assert {item["identifier"] for item in zenodo["related_identifiers"]} == {
     "https://doi.org/10.48550/arXiv.2608.20029",
-    "https://doi.org/10.5281/zenodo.21909943",
+    "https://doi.org/10.5281/zenodo.22088961",
     "https://doi.org/10.48550/arXiv.2507.15704",
 }
 assert "cubic threefolds" in zenodo["keywords"]
@@ -98,11 +98,26 @@ statement_pattern = re.compile(
     re.S,
 )
 statements = {}
+expected_statement_evidence = {
+    "thm:cubic-level": {"quartic-del-pezzo-slice-cover"},
+    "thm:two-variable": {"quartic-del-pezzo-slice-cover"},
+    "prop:tangent-section": {"quartic-del-pezzo-slice-cover"},
+}
 for environment, body in statement_pattern.findall(text):
     label_match = re.search(r"\\label\{([^}]+)\}", body)
     if label_match is None:
         raise AssertionError(f"unlabelled {environment}")
     label = label_match.group(1)
+    statement_evidence = {
+        value.strip()
+        for group in re.findall(r"\\evidence\{([^}]*)\}", body)
+        for value in group.split(",")
+        if value.strip()
+    }
+    assert statement_evidence == expected_statement_evidence.get(label, set()), (
+        label,
+        statement_evidence,
+    )
     coverage = re.findall(r"\\coverage\{([^}]+)\}", body)
     assert coverage == ["absent"], (label, coverage)
     assert "\\lean{" not in body
