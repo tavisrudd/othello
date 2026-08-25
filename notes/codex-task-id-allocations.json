@@ -3550,7 +3550,7 @@
       "count": 1,
       "first": 967,
       "kind": "reservation",
-      "lane": "clebsch",
+      "lane": "quantum-codes",
       "last": 967,
       "purpose": "Jet-quotient quantum-code compiler from the Clebsch Schur-Sarkisov spine",
       "sequence": 395
