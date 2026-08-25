@@ -2656,3 +2656,21 @@ process references, the standalone paper gate passes, and export verification
 matches that source commit at public-mirror commit `75c2979`.  The 18-page
 authority and standalone PDFs agree byte for byte, with SHA-256
 `c7732e4930704066e9a14896d4b21e50e0d61e35b4eb639074514ed2618bf5dc`.
+
+### Final disposition without inaccessible database coverage
+
+C945 closes on the bounded audit recorded above.  MathSciNet was not covered
+because it requires institutional access; Google Scholar's automated interface
+was not covered; and the proposed Semantic Scholar and exhaustive zbMATH MSC
+screens were not completed.  These gaps license no negative literature claim.
+The manuscript therefore retains no global “first” or “to our knowledge”
+sentence.  Its related-work discussion makes only source-supported positive
+comparisons, while the claim--proof--novelty ledger records the search scope and
+read depths behind the narrower statement that no direct predecessor was
+located in the completed audit.
+
+Those unavailable searches are not needed for any theorem, attribution, trust
+claim, or public artifact.  With the stated priority boundary, the manuscript,
+reviewer guide, Lean claim map, trust records, PDF, standalone export, and
+portfolio entry are ready for paper disposition.  Construction sharpness and
+extremizer classification remain the separate C949 programme.
