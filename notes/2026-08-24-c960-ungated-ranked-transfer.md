@@ -20,12 +20,7 @@ Let the represented inner code have coordinate split (E=P\sqcup J), let
 \]
 
 be the inner functional map, and let (0\ne T\le W_P=\operatorname{im}G_P\cap
-\operatorname{im}G_J). Fix a section
-
-\[
- \alpha:T\longrightarrow\mathbb F_q^P,
- \qquad G_P\alpha=\operatorname{id}_T.
-\]
+\operatorname{im}G_J).
 
 For (B\in\operatorname{Hom}_{\mathbb F_q}(T,L^*)), define the ordinary and target-constrained
 minimum-support lifting functions
@@ -43,15 +38,16 @@ minimum-support lifting functions
  \mu_{I,P,T}(B)=
  \min\left\{
  |\operatorname{supp}\beta(T)|:
+ \alpha:T\longrightarrow\mathbb F_q^P,\ 
  \beta:T\longrightarrow\mathbb F_q^J\text{ linear},\ 
+ G_P\alpha=\operatorname{id}_T,\ 
  \Phi_I(\alpha,\beta)=B
  \right\}.
 \]
 
 The value is (+\infty) if the displayed lifting set is empty. Here support of the image of a
-linear map is the union of the supports of all its values. A different section changes the
-target-coordinate normalization but not the exact obstruction after that normalization has been
-fixed. In particular,
+linear map is the union of the supports of all its values. The minimum in \(\mu_{I,P,T}\) ranges
+over the target normalization as well as the helper coefficients. In particular,
 
 \[
  \mu_{I,P,T}(0)=\rho_T(I),
@@ -230,6 +226,8 @@ It should not be described as a general lower bound on the ungated obstruction.
   functional tuples for a basis of (T). This retains all linear compatibility conditions.
 - Each \(\lambda_{I,T}\) and \(\mu_{I,P,T}\) minimizes the union support of the whole image
   subspace. Summing per-vector or per-basis minima would be invalid and is not used.
+- The target normalization map is minimized together with the target-block helper map. Fixing one
+  section would define a legitimate finer cost but would not equal \(\rho_T(I)\) in general.
 - Blockwise additivity is legitimate only because distinct inner blocks have disjoint coordinate
   sets. No within-block support additivity is asserted.
 - The target projection hypothesis is essential for identifying a nonzero functional sector with
