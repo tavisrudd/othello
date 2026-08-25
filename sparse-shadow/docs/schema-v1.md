@@ -32,6 +32,9 @@ whose three pairs lie in `orbital_positive`. This is the schema realization of
 the frozen calibrated triangle sign, not an arbitrary odd-cardinality marking.
 The committed exhaustive census checks all 220 triples: precisely 20 are
 admissible, and all 20 lie in one canonical orbit with automorphism order 6.
+For the uncalibrated fixture, exchanging the two five-valent orbital payloads
+has the same canonical identity and an independently replayed transporter. This
+is the regression law for the residual orientation involution.
 
 Source locators are validated provenance but are normalized to the adapter
 identifier before canonical serialization. They cannot change mathematical

@@ -217,6 +217,28 @@ fn provenance_does_not_change_mathematical_identity() {
 }
 
 #[test]
+fn uncalibrated_orbital_exchange_realizes_the_orientation_involution() {
+    let left = fixture();
+    let mut exchanged = left.clone();
+    let ProfileInput::PaperIOrientation(paper) = &mut exchanged.profile else {
+        unreachable!();
+    };
+    let (positive, negative) = paper.shadow.relations.split_at_mut(1);
+    std::mem::swap(&mut positive[0].edges, &mut negative[0].edges);
+
+    let certificate = compare(&left, &exchanged).expect("orbital exchange compares");
+    assert!(matches!(
+        certificate.result,
+        EquivalenceOutcome::Equivalent { .. }
+    ));
+    assert!(
+        verify_equivalence(&left, &exchanged, &certificate)
+            .expect("orbital exchange replays")
+            .valid
+    );
+}
+
+#[test]
 fn reconstruction_reports_unoriented_c2_fibre() {
     let reconstructed = reconstruct(&fixture()).expect("reconstruction");
     assert!(!reconstructed.exact_oriented_return);

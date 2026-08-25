@@ -204,7 +204,9 @@ versions, edge normalization, partitions, and calibration distinctness. The
 calibration gate also requires an increasing `orbital_positive` clique, matching
 the frozen C905 triangle-sign boundary rather than accepting an arbitrary
 three-set. The exhaustive 220-triple census admits exactly 20 triangles, all in
-one canonical orbit with automorphism order 6. Equivalent transporters and
+one canonical orbit with automorphism order 6. Uncalibrated exchange of the two
+orbital payloads is explicitly equivalent with a replayed transporter, matching
+the frozen residual orientation involution. Equivalent transporters and
 inequivalence separators have direct corruption coverage. The committed
 Paper-I golden contract fixes canonical
 identities, group/stabilizer summaries, vertex orbits, search counters, and

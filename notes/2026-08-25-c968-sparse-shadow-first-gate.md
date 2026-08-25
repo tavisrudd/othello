@@ -68,6 +68,9 @@ serialized tree.
   sign rather than an arbitrary three-set;
 - exhaustive calibration census: all 220 triples checked, exactly 20 admitted,
   one canonical orbit, automorphism order 6 throughout;
+- uncalibrated exchange of the two five-valent orbital payloads preserves the
+  canonical identity and emits a replayed transporter, matching the residual
+  orientation involution;
 - black-box CLI tests: Paper-I validation succeeds, every gated Paper-II--V
   input exits nonzero while naming its own exact required export, repeated
   canonicalize runs are byte-identical, and identical inputs compare
