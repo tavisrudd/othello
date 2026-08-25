@@ -467,8 +467,8 @@ reason = "the monorepo-wide TeX lint helper is outside the standalone repository
 
 [[repository.rewrite]]
 path = "Makefile"
-old = "manuscript: $(SOURCE) formal-annotations.tex\n\t$(LINT_PYTHON) ../scripts/lint_tex_spacing.py $(SOURCE)\n"
-new = "manuscript: $(SOURCE) formal-annotations.tex\n"
+old = "manuscript: $(SOURCE) formal-annotations.tex verification/slice-cover-values.tex\n\t$(LINT_PYTHON) ../scripts/lint_tex_spacing.py $(SOURCE)\n"
+new = "manuscript: $(SOURCE) formal-annotations.tex verification/slice-cover-values.tex\n"
 expected_count = 1
 reason = "the monorepo-wide TeX lint helper is outside the standalone repository boundary"
 
