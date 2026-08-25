@@ -2597,3 +2597,56 @@ remain accurately outside Lean.  No additional cheap theorem or corollary
 survived the paper-scope and precedence gates.  The genuine open items remain
 the final database coverage, bounded-repair realization and construction
 sharpness (C949), and modular-core classification.
+
+### 2026-08-24 external-referee repair and bounded-repair reduction
+
+An additional full-source referee check found no counterexample to either
+headline application and identified one omitted hypothesis bridge in the
+factor-pair theorem.  The localization lemma requires the normalized linear
+coefficient `c_m` to be bounded on both sides, while the proof had explicitly
+disposed only of large positive values.  The revised proof derives the missing
+lower bound from the classical real incidence inequality before applying the
+lemma.  It also replaces a pointwise limiting-degree phrase by the limiting
+average internal degree, explains why a point on one repair line changes the
+dual-line residue, and writes out the characteristic-power divisibility used
+in the support-one obstruction.  The introduction now separates the elementary
+integer envelope from the paper's use of its linear remainder, secant-number
+localization, modular repair, and completeness penalty, and places that use
+beside tactical-decomposition and congruence-stability methods.
+
+Proposition `prop:rational-family-stability` extracts the general structural
+consequence already implicit in the characteristic-specific proofs.  For a
+fixed factor pair `lambda=uv` with `u+v+1` a power of the characteristic, an
+arc at the leading equality density has only `O(q)` wrong-residue dual lines;
+the Szőnyi--Weiner theorem then changes its full dual maximal-secant set at
+`O(1)` support points into an exact `lambda mod p` multiset.  The proof uses
+the localized secant number, the exact nonnegative balancing-loss
+decomposition, a signed count of the wrong internal adjacent degree, and the
+external coverage excess.  This is a necessary near-extremal structural
+reduction.  It neither classifies the exact modular cores nor proves which
+bounded repairs arise from arcs; C949 owns those realization and construction
+questions.
+
+The source claim map now records 19 manuscript claims: 13 absent from Lean and
+six fragmentary.  Lean still checks only the advertised arithmetic fragments;
+the new geometric/asymptotic proposition is marked absent.  The manuscript
+build and paper gate pass, the rendered proposition and conclusion have no box
+warnings, and the repository paper-facts extraction is current.  The final
+database/positioning audit and public export remain the two C945 release steps.
+
+A fresh hostile read of the revised proposition checked the localization
+quantifiers, both wrong-residue counts, the Szőnyi--Weiner threshold and repair
+conclusion, the factor-pair lower-bound repair, and all six referee-driven
+revisions.  It found one remaining compressed inequality rather than a
+correctness defect.  The printed proof now sets
+`b_0=floor(nT/k)` and displays the bound
+`|z-a| <= (z-b_0)(z-b_0-1)` outside the adjacent balanced pair.  Summing it
+against the exact balancing-loss identity supplies the asserted `O(m)` total
+absolute exceptional deviation before the signed adjacent-degree count.
+
+Mystery-ledger update: the two-sided localization hypothesis and the general
+bounded-repair consequence are settled in the human proof.  Matching the
+characteristic-three lower bound still requires a construction, while full
+extremizer classification requires exact-core classification, bounded-repair
+realizability, and exhaustiveness.  These are the explicit alternative exits
+of C949 rather than claims of the present manuscript.

@@ -44,12 +44,15 @@ The load-bearing modular steps are in Sections 5 and 6.
    supporting-line lower bound on the second; it does not identify the two
    branches.
 4. **Why are there only `O(q)` exceptional dual lines?**
-   In the proofs of Theorems 1.1 and 1.3, the pair identity writes `-F(T)` as
+   Proposition `prop:rational-family-stability` packages the general
+   characteristic-compatible argument.  The pair identity writes `-F(T)` as
    the sum of two nonnegative balancing losses.  The exact balancing-loss
-   identity charges every degree outside the adjacent balanced pair.  The
-   signed deficiency and external excess then count the wrong member of each
-   adjacent pair.  This is the step to check before applying either modular
-   stability theorem.
+   identity charges every degree outside the adjacent balanced pair; the proof
+   displays the pointwise inequality that also controls their total absolute
+   deviation.  The signed internal deviation and external excess then count
+   the wrong member of each adjacent pair.  This is the step to check before
+   applying either
+   modular stability theorem.
 5. **Do the imported repair theorems apply?**
    Section 5 records the Szőnyi--Weiner hypotheses `q=p^e>27`, `e>1`, their
    exceptional-line threshold, and the exact support size
@@ -57,14 +60,15 @@ The load-bearing modular steps are in Sections 5 and 6.
    size.  Since `delta=O(q)`, both thresholds hold eventually and the support
    size is bounded; the proofs pass to a subsequence on which it is fixed.
 6. **Where does completeness enter after repair?**
-   Lemma 5.1 dualizes every repair-support point to a primal line.  Away from
+   Lemma `lem:repair-support` dualizes every repair-support point to a primal
+   line.  Away from
    intersections of those lines, the dual line contains exactly one support
    point, whose correction coefficient is nonzero modulo `p`; hence its
    original residue is wrong.  The external lower degree then forces positive
    secant excess.  This produces the additional linear term.  For `d=p^j`
    and `q=p^e=dm`, one has `m=p^(e-j)`, so the leading term of `T` vanishes
-   modulo `p` once `e>j`; Equation (5.4) then rules out support one in one
-   residue class.
+   modulo `p` once `e>j`; the display `eq:support-one-obstruction` then rules
+   out support one in one residue class.
 7. **Are the final constants correct?**
    The characteristic-three proof minimizes two affine bounds over the three
    residue classes.  The characteristic-two proof separates odd and even
@@ -72,7 +76,8 @@ The load-bearing modular steps are in Sections 5 and 6.
    independently check these terminal arithmetic calculations, but neither
    substitutes for the preceding geometric proof.
 8. **What inverse realization is actually proved?**
-   Proposition 7.3 treats an exact two-character point set in the dual plane.
+   Proposition `prop:two-character-inverse` treats an exact two-character
+   point set in the dual plane.
    Summing its line characters through one dual point reconstructs the primal
    arc and proves that the dual point set is exactly its full maximal-secant
    family.  The proposition does not assert that a bounded repair of a modular
@@ -93,7 +98,7 @@ The adjacent Lean package is a partial formal companion.  Its public interface
 is
 [`PaperInterface.lean`](lean/TavisRuddFiniteGeom/Papers/IntegralSecantArcs/PaperInterface.lean),
 and [`claims.json`](lean/verification/claims.json) gives the exact
-manuscript-to-declaration map.  It classifies 18 manuscript claims as 12 absent
+manuscript-to-declaration map.  It classifies 19 manuscript claims as 13 absent
 and 6 fragmentary; none is complete.  Lean checks integer balancing and
 interval overlap, forward rational substitutions and coefficient algebra, and
 the terminal affine minima.  It does not formalize projective planes,

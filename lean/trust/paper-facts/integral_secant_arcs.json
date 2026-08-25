@@ -19,6 +19,12 @@
       "source": "papers/integral_secant_arcs/integral_secant_arcs.tex"
     },
     {
+      "key": "Ball1996",
+      "kind": "bibitem",
+      "self_authored": false,
+      "source": "papers/integral_secant_arcs/integral_secant_arcs.tex"
+    },
+    {
       "key": "BallFancsali",
       "kind": "bibitem",
       "self_authored": false,
@@ -107,7 +113,7 @@
   "environment_counts": {
     "corollary": 4,
     "lemma": 8,
-    "proposition": 2,
+    "proposition": 3,
     "remark": 1,
     "theorem": 4
   },
@@ -378,6 +384,10 @@
     },
     {
       "environment": "proposition",
+      "label": "prop:rational-family-stability"
+    },
+    {
+      "environment": "proposition",
       "label": "prop:simultaneous-equality"
     },
     {
@@ -446,6 +456,7 @@
     "lem:rational-parameters",
     "lem:secant-number-near-equality",
     "prop:simultaneous-equality",
+    "prop:rational-family-stability",
     "lem:repair-support",
     "lem:no-uncorrected-characteristic-three",
     "lem:even-type-case",
@@ -457,17 +468,17 @@
   "paper": "integral_secant_arcs",
   "pdfs": [
     {
-      "bytes": 152823,
-      "pages": 16,
+      "bytes": 162383,
+      "pages": 18,
       "path": "papers/integral_secant_arcs/integral_secant_arcs.pdf",
-      "sha256": "8004d1d77f309cbc0dfb581ce7f6c32b4a4f708dea4d91f893ee75ce7d40fc36"
+      "sha256": "8f5e04041422e210045d30b4400c3e0b2b8455a993d419ada9561562a4f48ced"
     }
   ],
   "schema_version": 1,
   "sources": [
     {
       "path": "papers/integral_secant_arcs/integral_secant_arcs.tex",
-      "sha256": "fdd0af3796bfea65bc9a11476b7f655a3c30b164c2c4e3709a58d3b0f6a2bd39"
+      "sha256": "63e0962376a5f7fe450b11a5af43e133be6ec66a37c769de8a4715c0b8f82e12"
     },
     {
       "path": "papers/integral_secant_arcs/formal-annotations.tex",
@@ -475,7 +486,7 @@
     },
     {
       "path": "papers/integral_secant_arcs/sections/01-introduction.tex",
-      "sha256": "87c868735c75d951e42d309a3e5c0fd1e02a272efeca625dab77f57727e59b58"
+      "sha256": "781b08e643cfbc6bd611b91bd0226ca4d591360ece78f32dd48d856f591f4c93"
     },
     {
       "path": "papers/integral_secant_arcs/sections/02-integer-envelopes.tex",
@@ -487,11 +498,11 @@
     },
     {
       "path": "papers/integral_secant_arcs/sections/04-rational-parameters.tex",
-      "sha256": "49c270529698b12084a8cade252f72b2ca39c20dcee927ef557881268aa71e3d"
+      "sha256": "d309abb49a29495d7afebd8fcaa2de7b84401926f9e75bba6a33238512cfc2a2"
     },
     {
       "path": "papers/integral_secant_arcs/sections/05-modular-stability.tex",
-      "sha256": "ae34605fce02984c967100f8aeae14c3b18be2bd7b55aeca630733df9be520a9"
+      "sha256": "ab754de23794fc6b774517a6f4fff1142c64013d0a22e386a676ea7787db99d7"
     },
     {
       "path": "papers/integral_secant_arcs/sections/06-characteristic-two.tex",
@@ -499,7 +510,7 @@
     },
     {
       "path": "papers/integral_secant_arcs/sections/07-translations.tex",
-      "sha256": "fd312b9d35cbb9940a60032f23e8a85781644e32530f3326bd3929ef27059dae"
+      "sha256": "d7f7911c52436d3249842a8160ac25126244d8b1f217bb90c389e3c05a05c6ba"
     }
   ],
   "title": "Integral Secant Distributions and Improved Bounds for Complete (k,n)-Arcs",
