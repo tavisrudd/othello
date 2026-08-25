@@ -75,19 +75,19 @@ the mathematical narrative.
 
 ## Remaining work, in order
 
-The authority manuscript, metadata, verification, and stale-source gates
-pass. The standalone and public repositories remain at the pre-repair
-candidate. Remaining acceptance work is:
+Authority commit `7e9e1f38f` and standalone commit `f2ad292` pass their
+release gates and the export manifest agrees. The public GitHub remote and
+Zenodo record remain at the retired public version. Remaining acceptance work
+is:
 
 1. independent hostile algebraic-geometry review;
 2. independent hostile quotient/descent/computation review;
 3. independent full-public-repository and expert-exposition review, using the
    complete `m=1` paper as context only;
-4. commit the repaired authority and evidence bundle, then synchronize and
-   validate the standalone mirror;
-5. rerun fresh referee rounds on the synchronized candidate and close only
+4. rerun fresh referee rounds on the synchronized candidate and close only
    after all three specialties return clean verdicts;
-6. deposit a new Zenodo version before restoring the concept-DOI badge.
+5. after acceptance, publish the standalone commit and deposit a new Zenodo
+   version before restoring the concept-DOI badge.
 
 ## Acceptance gate
 

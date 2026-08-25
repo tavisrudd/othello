@@ -69,10 +69,10 @@ absence assertion.
   resolves to the retired manuscript and has been removed from release-facing
   README surfaces until a new version is deposited.
 
-The repaired authority remains ahead of standalone commit `d7dd18a`; the
-standalone mirror, export provenance, and public GitHub repository must be
-updated only after the present hostile-review round passes. The removed
-conditional sources remain recoverable from Git history.
+The repaired authority is commit `7e9e1f38f`; standalone commit `f2ad292`
+records the synchronized twenty-file export, and both release gates plus the
+export-manifest verification pass.  The public GitHub remote has not been
+pushed. The removed conditional sources remain recoverable from Git history.
 
 ## EJ + TT closeout
 
@@ -98,6 +98,6 @@ The hostile referee rounds requested after the first release-candidate build
 remain an acceptance gate. Their findings and repairs will be appended here
 before final closure.
 
-**Vibe:** strong mathematical candidate, not yet releasable. The authority
-gate is green; standalone, public GitHub, Zenodo, and fresh hostile verdicts
-remain outstanding.
+**Vibe:** strong synchronized candidate, not yet releasable. Fresh hostile
+verdicts, the public GitHub push, and a replacement Zenodo version remain
+outstanding.

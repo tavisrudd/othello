@@ -442,7 +442,8 @@ paper's quotient and function-field deductions are then stated separately.
 
 - No claim about every smooth cubic threefold becoming rational after two
   stabilizations.
-- No claim about arbitrary stabilization or stable irrationality.
+- No new pointwise family-wide stable-irrationality claim.  The only
+  infinite-level statement is the cited theorem for a very general cubic.
 - No claim that the four weight blocks are individually Galois stable.
 - No claim that the exact coefficients alone prove Galois descent.
 - No claim that the affine-line fourfold is an isomorphism-cancellation

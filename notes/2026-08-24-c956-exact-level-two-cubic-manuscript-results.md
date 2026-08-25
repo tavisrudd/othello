@@ -86,6 +86,14 @@ irrationality theorem. This places the explicit calculation in the geometry
 of the smooth cubic-threefold moduli space without asserting anything about
 all special points.
 
+A bounded review of C925 found no proved pointwise stable-irrationality
+theorem for every smooth member of a positive-dimensional cubic family.  Its
+all-members result concerns auxiliary `b_3=0` Fano carrier families, and its
+candidate origin-anchored marked-block invariant was withdrawn after a
+splitting gap.  The adjacent `A_5` pencil is universally `CH_0`-trivial, so it
+does not supply the desired diagonal obstruction.  Such a family theorem is a
+separate research problem and is not part of this manuscript.
+
 ## Essential proof repair retained
 
 The visible sign cocharacters span an index-two sublattice. Passing to its
