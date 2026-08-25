@@ -65,6 +65,10 @@ serialized tree.
   carrier containing the six exact antipodal axes in canonical coordinates;
   replay recomputes those axes from the independently checked canonical shadow,
   and the ambiguity enum is now part of the usable public API;
+- schema docs explicitly separate coordinate bases: group/orbit/stabilizer data
+  act on raw input labels, carrier axes use canonical labels, and
+  `input_to_canonical` bridges them; every emitted generator is conjugated
+  across that bridge and checked to preserve the exact canonical shadow;
 - schema rejection tests cover unknown fields, unsupported versions,
   non-normalized undirected edges, malformed orbital partitions, and duplicate
   calibration vertices; Paper-I calibration must additionally be an increasing

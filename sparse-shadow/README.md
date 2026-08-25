@@ -17,6 +17,8 @@ schema is `sparse-shadow/v1`; the expanded canonical wrapper is
 Reconstruction output is `sparse-shadow-reconstruction/v2`. It contains a
 typed `sparse-shadow-paper-i-carrier/v1` payload with the six recovered
 antipodal axes in canonical coordinates, rather than only a carrier label.
+Automorphism, orbit, and point-stabilizer fields use raw input coordinates;
+`input_to_canonical` is the explicit bridge between the two bases.
 
 The first development gate enables only the hand-checkable Paper-I orientation
 fixtures: an uncalibrated shadow with residual `C2` and a calibrated triangle

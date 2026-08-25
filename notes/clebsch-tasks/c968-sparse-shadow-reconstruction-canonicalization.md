@@ -246,6 +246,12 @@ structs: profiles, actions, base fields, input/reconstruction ambiguities, and
 equivalence outcomes. Empty ambiguity variants retain their frozen JSON shape,
 and all four gated fixtures have exact value-level round-trip tests.
 
+Canonical wrapper v2 now documents its coordinate bases explicitly. Full-group,
+orbit, and point-stabilizer fields act on raw input vertices; canonical shadows
+and recovered six-axis carriers use canonical vertices; the transporter is the
+declared bridge. Both Paper-I fixtures conjugate every emitted generator across
+that bridge and require exact preservation of the canonical shadow.
+
 No unblocked C968 implementation frontier remains: each next adapter first
 requires the complete paper-owned export named in its `fixtures/gated-*.json`.
 Nearby evidence JSON and trust manifests are explicitly insufficient. Once an

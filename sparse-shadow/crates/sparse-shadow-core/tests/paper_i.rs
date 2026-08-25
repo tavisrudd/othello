@@ -89,6 +89,17 @@ fn relabel(input: &mut InputArtifact, permutation: &[u32]) {
     }
 }
 
+fn conjugate_to_canonical(input_to_canonical: &[u32], input_action: &[u32]) -> Vec<u32> {
+    let mut canonical_to_input = vec![0; input_to_canonical.len()];
+    for (input, &canonical) in input_to_canonical.iter().enumerate() {
+        canonical_to_input[canonical as usize] = u32::try_from(input).expect("fixture degree");
+    }
+    canonical_to_input
+        .iter()
+        .map(|&input| input_to_canonical[input_action[input as usize] as usize])
+        .collect()
+}
+
 #[test]
 fn fixture_validates_and_has_expected_symmetry() {
     let input = fixture();
@@ -139,6 +150,19 @@ fn canonicalization_is_idempotent() {
     let second = canonicalize(&first.canonical).expect("canonical form canonicalizes");
     assert_eq!(second.canonical_id, first.canonical_id);
     assert_eq!(second.canonical, first.canonical);
+}
+
+#[test]
+fn transporter_conjugates_input_generators_to_canonical_actions() {
+    for input in [fixture(), calibrated_fixture()] {
+        let artifact = canonicalize(&input).expect("canonical fixture");
+        for generator in &artifact.automorphism_generators {
+            let canonical_action = conjugate_to_canonical(&artifact.input_to_canonical, generator);
+            let mut acted = artifact.canonical.clone();
+            relabel(&mut acted, &canonical_action);
+            assert_eq!(acted, artifact.canonical);
+        }
+    }
 }
 
 #[test]

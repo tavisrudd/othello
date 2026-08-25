@@ -33,6 +33,21 @@ generators, and vertex-orbit decomposition.
 The committed Paper-I golden contract pins the stable summary of both
 calibrated and uncalibrated canonical artifacts and their recovered carriers.
 
+Canonical wrapper v2 uses two explicit coordinate bases:
+
+| field | coordinate basis |
+|---|---|
+| `canonical` and the typed carrier's six `axes` | canonical vertices |
+| `input_to_canonical` | map from raw input vertices to canonical vertices |
+| `automorphism_generators`, `vertex_orbits`, and `point_stabilizers` | raw input vertices |
+| certificate `automorphisms` and `input_to_canonical` | raw input vertices, with the latter mapping to canonical vertices |
+
+Thus a consumer conjugates an input automorphism by `input_to_canonical` before
+applying it to `canonical` or to recovered carrier axes. Point-stabilizer
+representatives are likewise input labels, not canonical labels. A regression
+test performs this conjugation for every emitted generator in both Paper-I
+fixtures and requires the canonical shadow to remain exactly unchanged.
+
 The optional Paper-I calibration is an increasing triple of distinct vertices
 whose three pairs lie in `orbital_positive`. This is the schema realization of
 the frozen calibrated triangle sign, not an arbitrary odd-cardinality marking.
