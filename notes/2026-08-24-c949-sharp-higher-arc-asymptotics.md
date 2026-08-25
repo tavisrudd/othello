@@ -133,6 +133,28 @@ CP-SAT's integer solver; no second exhaustive implementation is available.
 This exact base equality is encouraging but remains explicitly noisy finite
 evidence, not asymptotic evidence.
 
+The witness also lands on the exact first-order lattice branch selected by
+C945, not only on its final coefficient.  Here `q=3m` with `m=3`, and
+
+```text
+k=39=3m^2+4m,       T=19=6m+1,
+```
+
+so `(c,h)=(4,1)`.  This is the residue class in which C945's support-one
+obstruction forces repair support at least two and the modular-lift minimum is
+attained.  Consequently the first sharp `q=27` realization target is not the
+whole previous window but
+
+```text
+m=9,       k=279,       T=55.
+```
+
+A non-two-character dual blocking core of size 55, followed by feasible weak
+inverse realization with maximal intersection 19, would reproduce the full
+first-order equality data at the next field order.  Failure at this single
+parameter would not disprove `(ASY3)`, but it is the highest-information first
+test before widening `T` or the linear coefficient.
+
 #### Structural construction of the 39-point witness
 
 The positive half no longer depends on the optimizer.  It has the following
@@ -476,7 +498,7 @@ t_s(2,q)=f(alpha)q^2+g(alpha; p, tower, residues)q+o(q).
 
 The first-order term cannot in general be indexed by `alpha` alone: C945's
 mechanism depends on characteristic, the field tower, and congruence data.  A
-A piecewise arithmetic phase-transition theorem is deferred until one branch
+piecewise arithmetic phase-transition theorem is deferred until one branch
 has matching constructions.
 
 The projective-code translation—to minimum length for robustly nonextendible
@@ -498,5 +520,6 @@ finite-geometry extremal function remains primary.
 - A density-interval theorem would extend the calculation from one parameter
   family to a nontrivial interval of `alpha`.
 
-C949 does not start until C945 has a settled theorem package and manuscript
-disposition.  It must not delay the existing arcs paper's review/release path.
+C945 has a settled theorem package and manuscript disposition.  C949 remains a
+separate construction programme and must not delay the existing arcs paper's
+review/release path.
