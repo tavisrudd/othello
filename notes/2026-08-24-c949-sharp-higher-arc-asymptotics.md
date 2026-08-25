@@ -229,10 +229,20 @@ Thus the Frobenius question is no longer one undifferentiated 261-signature
 model, but two fully normalized finite branches, each with only two nonfixed
 5-secant orbits.  The exact search now exposes, rather than merely relying on,
 the projective pair moment, every point-incidence sum, the sparse type-2 and
-type-5 counts, and the degree-19 equality at core points.  Five-minute runs of
-both strengthened branches remain `UNKNOWN`; that status supplies no evidence
-either way.  All exclusions here are symmetry-restricted statements, not an
-unrestricted nonexistence theorem.
+type-5 counts, and the degree-19 equality at core points.  It also encodes the
+resulting local identity
+
+```text
+sum_{high lines ell through P} |D intersect ell| + a_2(P)
+    = 8q/3+1 = 73                         for P in D.
+```
+
+Three-minute runs with this additional channel remain `UNKNOWN`; that status
+supplies no evidence either way.  A direct split by the unordered pair of
+nonfixed 5-secant orbits is also too coarse: the fixed-structure stabilizer has
+order four and leaves 7,768 pair orbits in either branch.  That split is not
+promoted as a useful proof route.  All exclusions here are symmetry-restricted
+statements, not an unrestricted nonexistence theorem.
 
 ### Exact `q=9` result
 
@@ -434,8 +444,10 @@ family is lower priority.
   trace-`x`, and scalar `C_13` invariance are excluded.  Frobenius invariance
   first reduces to ten aggregate fixed-subplane branches; the local degree-19
   congruence then leaves exactly two canonical four-fixed-point branches.
-  Those two branches and asymmetric cores remain open.  The alternative
-  54-maximal-secant envelope branch is also unclassified.
+  Those two branches and asymmetric cores remain open.  The naive split by
+  their two nonfixed 5-secant orbits still has 7,768 cases per branch and is
+  not a useful terminal classification.  The alternative 54-maximal-secant
+  envelope branch is also unclassified.
 - **Open — can `t_7(2,9)>=39` be proved without exhaustive search?**  The
   positive construction is structural, but exclusion of a 38-point complete
   arc still trusts one normalized CP-SAT infeasibility certificate.  A second

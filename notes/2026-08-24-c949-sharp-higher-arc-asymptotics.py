@@ -874,6 +874,14 @@ def search_five_character_core(q: int, symmetry: str, output: Path,
                               for line in through_point[point])
             model.add(high_degree <= arc_intersection)
             model.add(high_degree == arc_intersection).only_enforce_if(core[point])
+            core_high_incidence = sum(
+                high_secant_incidences[signature_index_of_line[line]]
+                for line in through_point[point]
+            )
+            core_two_degree = sum(two_secants[signature_index_of_line[line]]
+                                  for line in through_point[point])
+            model.add(core_high_incidence + core_two_degree ==
+                      8 * q // 3 + 1).only_enforce_if(core[point])
     if fixed_line_type_counts is not None:
         if len(fixed_line_type_counts) != 5:
             raise ValueError("fixed line type counts must have five entries")
@@ -909,6 +917,7 @@ def search_five_character_core(q: int, symmetry: str, output: Path,
         },
         "encoded_point_incidence_identity": "sum_{lines through P} |D intersect line| = |D| + q 1_D(P)",
         "encoded_core_high_degree_equality": require_concurrency_cap,
+        "encoded_core_local_secant_identity": require_concurrency_cap,
         "search": {
             "random_seed": 949,
             "workers": workers,
@@ -1125,9 +1134,14 @@ def audit_symmetry_orbits(q: int, output: Path) -> None:
 def audit_frobenius_fixed_subplane(output: Path) -> None:
     """Reduce a Frobenius-invariant q=27 five-character core on PG(2,3)."""
     q = 27
+    field = Field(q)
     points, on_line, _ = incidence(q)
-    fixed_indices = sorted(orbit[0] for orbit in symmetry_orbits(q, "frobenius")
-                           if len(orbit) == 1)
+    frobenius_orbits = symmetry_orbits(q, "frobenius")
+    fixed_indices = sorted(orbit[0] for orbit in frobenius_orbits if len(orbit) == 1)
+    nonfixed_orbits = [orbit for orbit in frobenius_orbits if len(orbit) == 3]
+    nonfixed_orbit_of = {point: orbit_index for orbit_index, orbit in
+                         enumerate(nonfixed_orbits) for point in orbit}
+    point_index = {point: index for index, point in enumerate(points)}
     if len(fixed_indices) != 13:
         raise ValueError("the Frobenius fixed plane should have 13 points")
     fixed_position = {point: position for position, point in enumerate(fixed_indices)}
@@ -1162,18 +1176,24 @@ def audit_frobenius_fixed_subplane(output: Path) -> None:
     ]
     permutations = [point_permutation(matrix) for matrix in generators]
     identity = tuple(range(13))
-    generated_group = {identity}
+    identity_matrix = [[1 if row == column else 0 for column in range(3)]
+                       for row in range(3)]
+    group_matrices = {identity: identity_matrix}
     group_frontier = [identity]
     while group_frontier:
         current = group_frontier.pop()
-        for generator in permutations:
+        current_matrix = group_matrices[current]
+        for generator, generator_matrix in zip(permutations, generators):
             product = tuple(generator[current[position]] for position in range(13))
-            if product not in generated_group:
-                generated_group.add(product)
+            if product not in group_matrices:
+                group_matrices[product] = matrix_multiply(
+                    field, [list(row) for row in generator_matrix], current_matrix
+                )
                 group_frontier.append(product)
     expected_pgl_order = ((3 ** 3 - 1) * (3 ** 3 - 3) * (3 ** 3 - 3 ** 2)) // 2
-    if len(generated_group) != expected_pgl_order:
+    if len(group_matrices) != expected_pgl_order:
         raise ValueError("fixed-subplane generators do not generate PGL(3,3)")
+    generated_group = set(group_matrices)
 
     def permute_mask(mask: int, permutation: tuple[int, ...]) -> int:
         return sum(1 << permutation[position] for position in range(13)
@@ -1269,6 +1289,41 @@ def audit_frobenius_fixed_subplane(output: Path) -> None:
                     images.append(image)
                 assignment_representatives.add(min(images))
             canonical_low_lines = min(assignment_representatives)
+            structure_matrices = []
+            for permutation, matrix in group_matrices.items():
+                if permute_mask(mask, permutation) != mask:
+                    continue
+                low_image = 0
+                for line_index, line in enumerate(fixed_line_masks):
+                    if canonical_low_lines & (1 << line_index):
+                        low_image |= 1 << line_mask_index[permute_mask(line, permutation)]
+                if low_image == canonical_low_lines:
+                    structure_matrices.append(matrix)
+
+            nonfixed_line_permutations = []
+            for matrix in structure_matrices:
+                inverse = matrix_inverse(field, matrix)
+                if inverse is None:
+                    raise AssertionError
+                dual_matrix = [[inverse[column][row] for column in range(3)]
+                               for row in range(3)]
+                nonfixed_line_permutations.append(tuple(
+                    nonfixed_orbit_of[point_index[normalize_projective(
+                        field, matrix_vector(field, dual_matrix, points[orbit[0]])
+                    )]]
+                    for orbit in nonfixed_orbits
+                ))
+            unseen_pairs = {(left, right) for left in range(len(nonfixed_orbits))
+                            for right in range(left + 1, len(nonfixed_orbits))}
+            pair_orbit_sizes = []
+            while unseen_pairs:
+                seed = min(unseen_pairs)
+                pair_orbit = {
+                    tuple(sorted((permutation[seed[0]], permutation[seed[1]])))
+                    for permutation in nonfixed_line_permutations
+                }
+                unseen_pairs.difference_update(pair_orbit)
+                pair_orbit_sizes.append(len(pair_orbit))
             fixed_line_degrees = []
             for line_index, line in enumerate(fixed_line_masks):
                 intersection = (mask & line).bit_count()
@@ -1293,6 +1348,11 @@ def audit_frobenius_fixed_subplane(output: Path) -> None:
                     len(fixed_line_assignments),
                 "fixed_line_assignment_orbit_count_under_core_stabilizer":
                     len(assignment_representatives),
+                "fixed_structure_stabilizer_order": len(structure_matrices),
+                "nonfixed_line_pair_orbit_count": len(pair_orbit_sizes),
+                "nonfixed_line_pair_orbit_size_spectrum": dict(sorted(
+                    Counter(pair_orbit_sizes).items()
+                )),
                 "fixed_line_degrees_in_fixed_index_order": fixed_line_degrees,
                 "core_nonfixed_point_orbits_on_fixed_lines":
                     (sum(fixed_line_degrees) - 4 * fixed_core_size) // 3,

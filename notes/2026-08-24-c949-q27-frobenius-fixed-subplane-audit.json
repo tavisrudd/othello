@@ -58,6 +58,7 @@
         2,
         1
       ],
+      "fixed_structure_stabilizer_order": 4,
       "fixed_subline_intersection_counts": {
         "0": 2,
         "1": 7,
@@ -71,6 +72,12 @@
         "3": 25,
         "4": 64,
         "5": 2
+      },
+      "nonfixed_line_pair_orbit_count": 7768,
+      "nonfixed_line_pair_orbit_size_spectrum": {
+        "1": 12,
+        "2": 204,
+        "4": 7552
       }
     },
     {
@@ -107,6 +114,7 @@
         2,
         1
       ],
+      "fixed_structure_stabilizer_order": 4,
       "fixed_subline_intersection_counts": {
         "0": 3,
         "1": 4,
@@ -120,6 +128,12 @@
         "3": 25,
         "4": 64,
         "5": 2
+      },
+      "nonfixed_line_pair_orbit_count": 7768,
+      "nonfixed_line_pair_orbit_size_spectrum": {
+        "1": 12,
+        "2": 204,
+        "4": 7552
       }
     }
   ],
