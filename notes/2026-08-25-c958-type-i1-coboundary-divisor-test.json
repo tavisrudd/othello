@@ -1,0 +1,58 @@
+{
+  "certified": [
+    "the geometric marked-plane sigma action is dual to the recorded cocharacter action",
+    "the direct sigma convention makes the coboundary divisor equations inconsistent",
+    "the dual convention gives a one-dimensional rational solution space",
+    "no integral solution exists, by the displayed two-coordinate parity witness",
+    "there is no coboundary which is a Laurent monomial in the sixteen standard Cox forms"
+  ],
+  "direct_sigma_system_ranks": [
+    31,
+    32
+  ],
+  "dual_sigma_system_ranks": [
+    31,
+    31
+  ],
+  "input_sha256": {
+    "cox_descent": "c7057b2471d76873e1cf358d7044241e64da76ae8e0bb44ae1c8c51d191accd7",
+    "exceptional_sections": "cb7ad6fbd78b44f692d28c057c6d591ffcca87e6f0973a50ad23d002c17fab24"
+  },
+  "not_certified": [
+    "nonexistence of a general rational coboundary",
+    "an additive Hilbert-90 formula",
+    "the final stabilized maps for the cubic family"
+  ],
+  "parameter": "tau0",
+  "parity_witness": {
+    "argument": "integrality of E1 forces parameter=1/2 mod Z, making E2=3/2 mod Z",
+    "first_coordinate_E1": "-(2*tau0 - 1)/2",
+    "first_coordinate_E2": "(4*tau0 + 1)/2"
+  },
+  "sample_half_integral_solution": {
+    "first_coordinate": {
+      "E1": "1/2",
+      "E2": "1/2",
+      "E3": "-1",
+      "L13": "1/2",
+      "L23": "-1/2",
+      "L24": "1/2",
+      "L25": "1/2",
+      "L34": "-1/2",
+      "L35": "-1/2"
+    },
+    "second_coordinate": {
+      "E1": "-1/2",
+      "E2": "1",
+      "E3": "-1/2",
+      "L12": "1/2",
+      "L14": "-1/2",
+      "L15": "-1/2",
+      "L23": "-1/2",
+      "L24": "1/2",
+      "L25": "1/2"
+    }
+  },
+  "schema": "c958-type-i1-coboundary-divisor-test-v1",
+  "solution_dimension": 1
+}

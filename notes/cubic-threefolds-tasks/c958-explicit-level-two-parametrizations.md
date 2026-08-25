@@ -106,6 +106,17 @@ Hilbert--90 coboundary for that cocycle.  Report and replay:
 `notes/2026-08-25-c958-type-i1-cox-descent-cocycle.md` and its adjacent
 bundle.
 
+A Cox-monomial coboundary has been ruled out exactly.  With the correct dual
+action convention, the divisor equations have a one-dimensional rational
+solution space, but the `E1,E2` exponents have an unavoidable half-integral
+parity defect; the direct convention is inconsistent.  This rules out only
+Laurent monomials in the sixteen standard Cox forms, not general rational
+coboundaries.  The next constructive route is therefore the full
+stable-permutation resolution `Pic(Sbar) + P5 = P11`, followed by orbitwise
+Hilbert--90 coordinates.  Report and replay:
+`notes/2026-08-25-c958-type-i1-coboundary-divisor-test.md` and its adjacent
+bundle.
+
 ## Goal
 
 Turn the constructive existence proof in C956 into explicit, independently
