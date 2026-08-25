@@ -18,11 +18,13 @@ is now proved and implemented by a streaming 12-point bilinear selector with
 exact
 `O(q)`, `O(q^2)`, and `O(q^3)` prefix counts, both infinity charts, and a
 bounded small-field fallback.  Uniform nonpersistent formula adapters and
-formula-speed canonicalizers remain open; the remaining complexity work is
+formula-speed canonicalizers remain open, but the R5 tame osculating and
+characteristic-three nucleus/wild adapters now replay intrinsically above the
+finite registry; the remaining complexity work is
 C607's general fixed-parameter theorem and the nonterminal classifier
 branches.  Positive `DEEP` results now include an independently replayed
 certificate binding the theorem-domain row, canonical transporter, intrinsic
-or frozen family evidence, split-free route, and radius promotion.  Exact
+formula or frozen family evidence, split-free route, and radius promotion.  Exact
 decoding remains complete within an explicit candidate budget.  Code and
 mathematics only; no manuscript edits.
 

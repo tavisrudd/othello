@@ -111,6 +111,9 @@ pub enum DeepFamilyEvidence {
         semilinear_orbit_size: u64,
         semilinear_stabilizer_order: u64,
     },
+    Formula {
+        invariant: String,
+    },
 }
 
 #[derive(Clone, Debug, Serialize, PartialEq, Eq)]
@@ -439,6 +442,214 @@ pub fn persistent_kind(field: &Field, syndrome: &[u32]) -> PersistentKind {
     }
 }
 
+fn homogeneous_cubic_derivatives(field: &Field, cubic: &[u32]) -> (Vec<u32>, Vec<u32>) {
+    let mut derivative_t = vec![0u32; 3];
+    let mut derivative_u = vec![0u32; 3];
+    for (i, &coefficient) in cubic.iter().enumerate().take(4) {
+        if i > 0 {
+            derivative_t[i - 1] = field.mul(coefficient, (i as u32) % field.spec.p);
+        }
+        if i < 3 {
+            derivative_u[i] = field.mul(coefficient, ((3 - i) as u32) % field.spec.p);
+        }
+    }
+    (derivative_t, derivative_u)
+}
+
+fn cubic_pencil_jacobian(field: &Field, basis: &[Vec<u32>]) -> Option<Vec<u32>> {
+    if basis.len() != 2 || basis.iter().any(|cubic| cubic.len() != 4) {
+        return None;
+    }
+    let (c_t, c_u) = homogeneous_cubic_derivatives(field, &basis[0]);
+    let (d_t, d_u) = homogeneous_cubic_derivatives(field, &basis[1]);
+    let left = polynomial_mul(field, &c_t, &d_u);
+    let right = polynomial_mul(field, &c_u, &d_t);
+    Some(
+        left.into_iter()
+            .zip(right)
+            .map(|(a, b)| field.sub(a, b))
+            .collect(),
+    )
+}
+
+fn homogeneous_quadratic_square_root(field: &Field, quartic: &[u32]) -> Option<Vec<u32>> {
+    if quartic.len() != 5 || quartic.iter().all(|&x| x == 0) {
+        return None;
+    }
+    let mut quadratic = vec![0u32; 3];
+    let scale;
+    if field.spec.p == 2 {
+        if quartic[1] != 0 || quartic[3] != 0 {
+            return None;
+        }
+        let pivot = [0usize, 2, 4].into_iter().find(|&i| quartic[i] != 0)?;
+        scale = quartic[pivot];
+        let scale_inverse = field.inv(scale)?;
+        for j in 0..3 {
+            quadratic[j] = field.pow(
+                field.mul(quartic[2 * j], scale_inverse),
+                u64::from(field.order()) / 2,
+            );
+        }
+    } else if quartic[0] != 0 {
+        scale = quartic[0];
+        quadratic[0] = 1;
+        let two_inverse = field.inv(2 % field.spec.p)?;
+        let scale_inverse = field.inv(scale)?;
+        quadratic[1] = field.mul(field.mul(quartic[1], scale_inverse), two_inverse);
+        quadratic[2] = field.mul(
+            field.sub(
+                field.mul(quartic[2], scale_inverse),
+                field.mul(quadratic[1], quadratic[1]),
+            ),
+            two_inverse,
+        );
+    } else if quartic[2] != 0 {
+        if quartic[1] != 0 {
+            return None;
+        }
+        scale = quartic[2];
+        quadratic[1] = 1;
+        quadratic[2] = field.mul(
+            field.mul(quartic[3], field.inv(scale)?),
+            field.inv(2 % field.spec.p)?,
+        );
+    } else {
+        if quartic[..4].iter().any(|&x| x != 0) {
+            return None;
+        }
+        scale = quartic[4];
+        quadratic[2] = 1;
+    }
+    let rebuilt = polynomial_mul(field, &quadratic, &quadratic)
+        .into_iter()
+        .map(|coefficient| field.mul(scale, coefficient))
+        .collect::<Vec<_>>();
+    (rebuilt == quartic)
+        .then(|| normalize_projective(field, &quadratic).ok())
+        .flatten()
+}
+
+fn r5_tame_formula_family(field: &Field, syndrome: &[u32]) -> Option<(&'static str, &'static str)> {
+    if syndrome.len() != 5 || field.spec.p == 3 {
+        return None;
+    }
+    let basis = locator_kernel(field, syndrome, 3);
+    let (gcd, infinity_multiplicity) = homogeneous_basis_gcd(field, &basis, 3)?;
+    if polynomial_degree(&gcd).unwrap_or(0) + infinity_multiplicity != 0 {
+        return None;
+    }
+    let quadratic =
+        homogeneous_quadratic_square_root(field, &cubic_pencil_jacobian(field, &basis)?)?;
+    let finite_roots = (0..field.order())
+        .filter(|&x| field.eval(&quadratic, x) == 0)
+        .count();
+    let infinity_root = usize::from(polynomial_degree(&quadratic)? < 2);
+    match (finite_roots + infinity_root, field.order() % 3) {
+        (2, 2) => Some((
+            "r5.osculating_rational",
+            "r5.cyclic_jacobian_square:rational_ramification_pair:q_mod_3=2",
+        )),
+        (0, 1) => Some((
+            "r5.osculating_conjugate",
+            "r5.cyclic_jacobian_square:conjugate_ramification_pair:q_mod_3=1",
+        )),
+        _ => None,
+    }
+}
+
+fn substitute_binary_cubic(
+    field: &Field,
+    cubic: &[u32],
+    old_t: [u32; 2],
+    old_u: [u32; 2],
+) -> Vec<u32> {
+    let mut out = vec![0u32; 4];
+    for (i, &coefficient) in cubic.iter().enumerate().take(4) {
+        let term = polynomial_mul(
+            field,
+            &polynomial_power(field, &old_t, i),
+            &polynomial_power(field, &old_u, 3 - i),
+        );
+        for (target, value) in out.iter_mut().zip(term) {
+            *target = field.add(*target, field.mul(coefficient, value));
+        }
+    }
+    out
+}
+
+fn r5_char3_formula_family(
+    field: &Field,
+    syndrome: &[u32],
+) -> Option<(&'static str, &'static str)> {
+    if syndrome.len() != 5 || field.spec.p != 3 {
+        return None;
+    }
+    if syndrome == [0, 0, 1, 0, 0] {
+        return Some(("r5.char3_nucleus", "r5.char3_cube_pencil:fixed_nucleus"));
+    }
+    let basis = locator_kernel(field, syndrome, 3);
+    if basis.len() != 2 {
+        return None;
+    }
+    let cube_scalars = nullspace(
+        field,
+        &[
+            vec![basis[0][1], basis[1][1]],
+            vec![basis[0][2], basis[1][2]],
+        ],
+        2,
+    );
+    if cube_scalars.len() != 1 {
+        return None;
+    }
+    let scalars = &cube_scalars[0];
+    let cube = (0..4)
+        .map(|i| {
+            field.add(
+                field.mul(scalars[0], basis[0][i]),
+                field.mul(scalars[1], basis[1][i]),
+            )
+        })
+        .collect::<Vec<_>>();
+    if cube[1] != 0 || cube[2] != 0 {
+        return None;
+    }
+    let cube_root_power = u64::from(field.order() / 3);
+    let linear_t = field.pow(cube[3], cube_root_power);
+    let linear_u = field.pow(cube[0], cube_root_power);
+    let (root_t, root_u) = (linear_u, field.neg(linear_t));
+    let (base_t, base_u) = if linear_t != 0 {
+        (field.inv(linear_t)?, 0)
+    } else {
+        (0, field.inv(linear_u)?)
+    };
+    let other = if scalars[1] != 0 {
+        &basis[0]
+    } else {
+        &basis[1]
+    };
+    let transformed = substitute_binary_cubic(field, other, [base_t, root_t], [base_u, root_u]);
+    let lead_inverse = field.inv(transformed[3])?;
+    let quadratic_term = field.mul(transformed[2], lead_inverse);
+    let linear_term = field.mul(transformed[1], lead_inverse);
+    if quadratic_term != 0 || linear_term == 0 {
+        return None;
+    }
+    let minus_linear = field.neg(linear_term);
+    if field.pow(minus_linear, u64::from(field.order() - 1) / 2) == 1 {
+        return None;
+    }
+    Some((
+        "r5.char3_wild",
+        "r5.char3_additive_kernel:minus_linear_nonsquare",
+    ))
+}
+
+fn r5_formula_family(field: &Field, syndrome: &[u32]) -> Option<(&'static str, &'static str)> {
+    r5_tame_formula_family(field, syndrome).or_else(|| r5_char3_formula_family(field, syndrome))
+}
+
 pub fn apply_semilinear(
     field: &Field,
     syndrome: &[u32],
@@ -564,12 +775,17 @@ fn deep_domain_level(redundancy: usize, q: u32) -> Option<TheoremDomainLevel> {
         })
 }
 
-fn split_free_source(kind: PersistentKind, frozen: Option<&FrozenOrbit>) -> String {
+fn split_free_source(
+    kind: PersistentKind,
+    frozen: Option<&FrozenOrbit>,
+    formula: Option<(&str, &str)>,
+) -> String {
     match kind {
         PersistentKind::Tangent | PersistentKind::Sigma => {
             "intrinsic quadratic Hankel-gcd replay".into()
         }
         _ if frozen.is_some() => "frozen semilinear exception registry".into(),
+        _ if formula.is_some() => "intrinsic R5 formula-family replay".into(),
         _ => "locator search exhausted through degree r-2".into(),
     }
 }
@@ -577,16 +793,23 @@ fn split_free_source(kind: PersistentKind, frozen: Option<&FrozenOrbit>) -> Stri
 fn deep_family_evidence(
     kind: PersistentKind,
     frozen: Option<&FrozenOrbit>,
+    formula: Option<(&str, &str)>,
 ) -> Option<DeepFamilyEvidence> {
     match kind {
         PersistentKind::Tangent | PersistentKind::Sigma => {
             Some(DeepFamilyEvidence::Persistent { kind })
         }
-        _ => frozen.map(|record| DeepFamilyEvidence::FrozenOrbit {
-            pgl_orbit_count: record.pgl_orbit_count,
-            semilinear_orbit_size: record.semilinear_orbit_size,
-            semilinear_stabilizer_order: record.semilinear_stabilizer_order,
-        }),
+        _ => frozen
+            .map(|record| DeepFamilyEvidence::FrozenOrbit {
+                pgl_orbit_count: record.pgl_orbit_count,
+                semilinear_orbit_size: record.semilinear_orbit_size,
+                semilinear_stabilizer_order: record.semilinear_stabilizer_order,
+            })
+            .or_else(|| {
+                formula.map(|(_, invariant)| DeepFamilyEvidence::Formula {
+                    invariant: invariant.into(),
+                })
+            }),
     }
 }
 
@@ -631,15 +854,19 @@ pub fn verify_deep_certificate(
         certificate.request.redundancy,
         &certificate.canonical_syndrome,
     );
+    let formula = r5_formula_family(&field, &syndrome);
     let replayed_family = match persistent {
         PersistentKind::Tangent => Some("persistent.tangent"),
         PersistentKind::Sigma => Some("persistent.sigma"),
-        _ => frozen.as_ref().map(|record| record.family.as_str()),
+        _ => frozen
+            .as_ref()
+            .map(|record| record.family.as_str())
+            .or_else(|| formula.map(|(family, _)| family)),
     };
     if replayed_family != Some(certificate.family.as_str())
-        || deep_family_evidence(persistent, frozen.as_ref())
+        || deep_family_evidence(persistent, frozen.as_ref(), formula)
             != Some(certificate.family_evidence.clone())
-        || split_free_source(persistent, frozen.as_ref()) != certificate.split_free_source
+        || split_free_source(persistent, frozen.as_ref(), formula) != certificate.split_free_source
     {
         return Err(Error::BadDeepCertificate);
     }
@@ -695,10 +922,14 @@ pub fn classify(
         request.redundancy,
         &canonicalization.canonical_syndrome,
     );
+    let formula = r5_formula_family(&field, &syndrome);
     let family = match persistent {
         PersistentKind::Tangent => Some("persistent.tangent".to_string()),
         PersistentKind::Sigma => Some("persistent.sigma".to_string()),
-        _ => frozen.as_ref().map(|record| record.family.clone()),
+        _ => frozen
+            .as_ref()
+            .map(|record| record.family.clone())
+            .or_else(|| formula.map(|(family, _)| family.into())),
     };
     let q = field.order();
     let domain_level = deep_domain_level(request.redundancy, q);
@@ -744,7 +975,7 @@ pub fn classify(
             },
         )
     };
-    let replay_source = split_free_source(persistent, frozen.as_ref());
+    let replay_source = split_free_source(persistent, frozen.as_ref(), formula);
     let deep_certificate = if status == VerdictStatus::Deep {
         Some(DeepCertificate {
             schema: DEEP_CERTIFICATE_SCHEMA.into(),
@@ -753,7 +984,7 @@ pub fn classify(
             normalized_syndrome: syndrome.clone(),
             distance: distance.expect("DEEP verdict has radius"),
             family: family.clone().expect("DEEP verdict has family"),
-            family_evidence: deep_family_evidence(persistent, frozen.as_ref())
+            family_evidence: deep_family_evidence(persistent, frozen.as_ref(), formula)
                 .expect("DEEP verdict has family evidence"),
             canonical_syndrome: canonicalization.canonical_syndrome.clone(),
             transporter: canonicalization.transporter.clone(),
@@ -1603,6 +1834,84 @@ mod tests {
                 verify_certificate(&certificate).unwrap();
             }
         }
+    }
+
+    #[test]
+    fn r5_tame_formula_adapter_covers_fields_above_registry() {
+        let rational_field = Field::new(prime_field(53)).unwrap();
+        assert_eq!(
+            r5_tame_formula_family(&rational_field, &[0, 0, 1, 0, 0]),
+            Some((
+                "r5.osculating_rational",
+                "r5.cyclic_jacobian_square:rational_ramification_pair:q_mod_3=2"
+            ))
+        );
+        let result = classify(
+            &request(prime_field(53), 5, vec![0, 0, 1, 0, 0]),
+            10_000,
+            200_000,
+        )
+        .unwrap();
+        assert_eq!(result.status, VerdictStatus::Deep);
+        let certificate = result.deep_certificate.unwrap();
+        verify_deep_certificate(&certificate, 200_000).unwrap();
+        assert!(matches!(
+            certificate.family_evidence,
+            DeepFamilyEvidence::Formula { .. }
+        ));
+
+        let conjugate_field = Field::new(prime_field(61)).unwrap();
+        let norm = (1..61)
+            .find(|&candidate| {
+                (0..61).all(|x| conjugate_field.add(conjugate_field.mul(x, x), candidate) != 0)
+            })
+            .unwrap();
+        let three = 3;
+        let six = 6;
+        let cubics = [
+            vec![0, conjugate_field.neg(conjugate_field.mul(six, norm)), 0, 2],
+            vec![norm, 0, conjugate_field.neg(three), 0],
+        ];
+        let equations = cubics
+            .iter()
+            .flat_map(|cubic| {
+                [
+                    vec![cubic[0], cubic[1], cubic[2], cubic[3], 0],
+                    vec![0, cubic[0], cubic[1], cubic[2], cubic[3]],
+                ]
+            })
+            .collect::<Vec<_>>();
+        let syndrome = normalize_projective(
+            &conjugate_field,
+            nullspace(&conjugate_field, &equations, 5).first().unwrap(),
+        )
+        .unwrap();
+        assert_eq!(
+            r5_tame_formula_family(&conjugate_field, &syndrome).map(|(family, _)| family),
+            Some("r5.osculating_conjugate")
+        );
+    }
+
+    #[test]
+    fn r5_characteristic_three_formula_adapter_replays_frozen_shapes() {
+        let field = Field::new(FieldSpec {
+            p: 3,
+            degree: 2,
+            modulus: vec![1, 0, 1],
+            encoding: "polynomial-basis-base-p-integer-v1".into(),
+        })
+        .unwrap();
+        assert_eq!(
+            r5_char3_formula_family(&field, &[0, 0, 1, 0, 0]),
+            Some(("r5.char3_nucleus", "r5.char3_cube_pencil:fixed_nucleus"))
+        );
+        assert_eq!(
+            r5_char3_formula_family(&field, &[0, 0, 1, 0, 4]),
+            Some((
+                "r5.char3_wild",
+                "r5.char3_additive_kernel:minus_linear_nonsquare"
+            ))
+        );
     }
 
     #[test]

@@ -76,8 +76,9 @@
           "type": "object",
           "required": ["route"],
           "properties": {
-            "route": {"enum": ["persistent", "frozen_orbit"]},
+            "route": {"enum": ["persistent", "frozen_orbit", "formula"]},
             "kind": {"enum": ["tangent", "sigma"]},
+            "invariant": {"type": "string"},
             "pgl_orbit_count": {"type": "integer", "minimum": 1},
             "semilinear_orbit_size": {"type": "integer", "minimum": 1},
             "semilinear_stabilizer_order": {"type": "integer", "minimum": 1}

@@ -8,6 +8,8 @@ This is the C969 implementation crate.  Its current executable slice provides:
 - increasing-degree Hankel-kernel search over projective locator space;
 - the proved 12-point terminal-hyperplane selector for R5--R7, with streaming
   `O(q)`, `O(q^2)`, and `O(q^3)` prefix enumeration;
+- intrinsic uniform R5 adapters for the tame rational/conjugate osculating
+  families and the characteristic-three nucleus/wild families;
 - distinct rational-root recovery, Vandermonde magnitude recovery, and an
   independently replayed locator certificate;
 - positive deep certificates whose independent verifier replays the frozen

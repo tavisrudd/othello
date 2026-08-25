@@ -171,6 +171,14 @@ frozen theorem-domain row, recomputes the canonical transporter, replays the
 intrinsic persistent invariant or frozen orbit row, and checks the independent
 covering-radius promotion.
 
+The first uniform nonpersistent adapter is also live.  At R5 it recognizes the
+tame rational/conjugate osculating families from the square binary-quartic
+Jacobian and ramification-quadratic splitting type, including characteristic
+two, and recognizes the characteristic-three nucleus/wild replacements from
+the cube subspace and additive-kernel square class.  Its proof contract is
+`c969-r5-uniform-family-adapter.md`; finite fields retain registry evidence,
+while fields above the registry emit intrinsic formula evidence.
+
 ## Partial mystery and risk ledger
 
 - **Settled:** the former R10 binary unresolved residue was only a proof
