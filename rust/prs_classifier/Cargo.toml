@@ -1,0 +1,21 @@
+[package]
+name = "prs-classifier"
+version = "0.1.0"
+edition = "2021"
+description = "Proof-carrying structural decoder for full-length projective Reed-Solomon syndromes"
+license = "MIT"
+
+[lib]
+name = "prs_classifier"
+path = "src/lib.rs"
+
+[[bin]]
+name = "prs-classifier"
+path = "src/main.rs"
+
+[dependencies]
+clap = { version = "4.5", features = ["derive"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "2"
+

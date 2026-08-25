@@ -5,8 +5,12 @@
 **Status:** active; the Version 2 R5--R10 theorem/correction surface,
 machine-readable domain registry, normalized request/action/certificate schema,
 hand-classified branch representatives, and absorbed C607/C608 interface gates
-are frozen in `c969-freeze-and-schema.md`; code and mathematics only; no
-manuscript edits
+are frozen in `c969-freeze-and-schema.md`.  The independent Rust core now has
+exact extension-field arithmetic, projective normalization, both locator
+charts, increasing-degree Hankel search, magnitude recovery, and certificate
+replay, including the frozen R10 q=16 Lucas witness.  Structural family/orbit
+adapters, the R5--R7 terminal solver, full-distance fallback, and complexity
+proofs remain open.  Code and mathematics only; no manuscript edits.
 
 ## Goal
 
