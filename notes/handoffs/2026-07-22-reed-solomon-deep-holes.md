@@ -1168,7 +1168,7 @@ gates remain binding.
 | EV rank | Task | Current gate | Why this position |
 |---:|---|---|---|
 | 1 | C915 | edits E1--E6 applied and checklist green; three independent audits open | the external referee package blocks the Version 2 release |
-| 2 | C969 | active; schemas/core/frozen adapters, proved R5--R7 terminal selector, positive verifier, and recurring nonpersistent R5--R7 formula adapters green; formula-speed canonicalizers, general complexity theorem, and benchmarks open | compile the proved R5--R10 geometry into one exact canonical classifier and decoder while settling the general split-locator decision/recovery complexity boundary |
+| 2 | C969 | active; schemas/core/frozen/formula adapters, proved R5--R7 terminal selector, positive verifier, and first selector/oracle benchmark green; formula-speed canonicalizers, general complexity theorem, and wider benchmarks open | compile the proved R5--R10 geometry into one exact canonical classifier and decoder while settling the general split-locator decision/recovery complexity boundary |
 
 ## Unallocated level-ups
 
@@ -1230,9 +1230,9 @@ history.
 
 `go C969`
 
-(Add reproducible end-to-end classifier/decoder benchmarks against the named
-projective locator-enumeration oracle, separating field arithmetic, locator
-selection, full semilinear canonicalization, and certificate replay.  Do not
-present the still-explicit `m(q^3-q)` canonicalizer as formula-speed.  C915's
-three independent Version 2 audits remain the higher-EV external-release gate
-but are a separate active card.)
+(Replace the explicit group-scale canonicalizer first on the persistent
+tangent/sigma families, returning the same canonical syndrome and exact
+transporter as the fallback; then extend the benchmark matrix to extension
+fields.  Keep the general C607 split-factorization exponent theorem separate.
+C915's three independent Version 2 audits remain the higher-EV external-release
+gate but are a separate active card.)

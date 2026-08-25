@@ -30,6 +30,12 @@ formula or frozen family evidence, split-free route, and radius promotion.  Exac
 decoding remains complete within an explicit candidate budget.  Code and
 mathematics only; no manuscript edits.
 
+The first reproducible release benchmark now separates the 12-point terminal
+selector from the projective-locator oracle and reports canonicalization,
+end-to-end classification, and positive replay independently; see
+`c969-benchmark-v1.md`.  A wider extension-field matrix and external-software
+comparison remain open.
+
 ## Goal
 
 Replace brute-force search over closer projective Reed--Solomon codewords by an

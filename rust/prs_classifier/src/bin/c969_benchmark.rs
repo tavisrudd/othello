@@ -1,0 +1,191 @@
+use clap::Parser;
+use prs_classifier::{
+    canonicalize_syndrome, classify, search_fast_terminal_locator, search_locator,
+    verify_deep_certificate, DeepCertificate, FieldSpec, Request, REQUEST_SCHEMA,
+};
+use serde::Serialize;
+use std::hint::black_box;
+use std::time::Instant;
+
+#[derive(Parser)]
+#[command(name = "c969-benchmark")]
+struct Args {
+    #[arg(long, default_value_t = 1)]
+    iterations: u32,
+    #[arg(long, default_value_t = 10_000_000)]
+    candidate_limit: u64,
+}
+
+#[derive(Serialize)]
+struct BenchmarkReport {
+    schema: &'static str,
+    crate_version: &'static str,
+    build_profile: &'static str,
+    iterations: u32,
+    rows: Vec<BenchmarkRow>,
+}
+
+#[derive(Serialize)]
+struct BenchmarkRow {
+    operation: String,
+    field_order: u32,
+    redundancy: usize,
+    elapsed_ns_total: u128,
+    elapsed_ns_per_iteration: u128,
+    candidates_examined: Option<u64>,
+    baseline: &'static str,
+}
+
+fn prime_field(p: u32) -> FieldSpec {
+    FieldSpec {
+        p,
+        degree: 1,
+        modulus: vec![0, 1],
+        encoding: "polynomial-basis-base-p-integer-v1".into(),
+    }
+}
+
+fn request(field: FieldSpec, redundancy: usize, syndrome: Vec<u32>) -> Request {
+    Request {
+        schema: REQUEST_SCHEMA.into(),
+        field,
+        redundancy,
+        evaluation: "full-projective-nrc-v1".into(),
+        syndrome,
+        operation: None,
+    }
+}
+
+fn elapsed<F, T>(iterations: u32, mut operation: F) -> Result<u128, Box<dyn std::error::Error>>
+where
+    F: FnMut() -> Result<T, prs_classifier::Error>,
+{
+    let start = Instant::now();
+    for _ in 0..iterations {
+        black_box(operation()?);
+    }
+    Ok(start.elapsed().as_nanos())
+}
+
+fn terminal_rows(
+    request: &Request,
+    q: u32,
+    iterations: u32,
+    candidate_limit: u64,
+) -> Result<Vec<BenchmarkRow>, Box<dyn std::error::Error>> {
+    let selector_certificate = search_fast_terminal_locator(request, candidate_limit)?;
+    let selector_elapsed = elapsed(iterations, || {
+        search_fast_terminal_locator(request, candidate_limit)
+    })?;
+    let oracle_certificate = search_locator(request, request.redundancy - 1, candidate_limit)?;
+    let oracle_elapsed = elapsed(iterations, || {
+        search_locator(request, request.redundancy - 1, candidate_limit)
+    })?;
+    Ok(vec![
+        BenchmarkRow {
+            operation: format!("r{}_terminal_12_point_selector", request.redundancy),
+            field_order: q,
+            redundancy: request.redundancy,
+            elapsed_ns_total: selector_elapsed,
+            elapsed_ns_per_iteration: selector_elapsed / u128::from(iterations),
+            candidates_examined: Some(selector_certificate.candidates_examined),
+            baseline: "streamed degree-(r-4) prefix supports; two fixed 12-point charts",
+        },
+        BenchmarkRow {
+            operation: format!("r{}_projective_locator_oracle", request.redundancy),
+            field_order: q,
+            redundancy: request.redundancy,
+            elapsed_ns_total: oracle_elapsed,
+            elapsed_ns_per_iteration: oracle_elapsed / u128::from(iterations),
+            candidates_examined: Some(oracle_certificate.candidates_examined),
+            baseline: "increasing-degree projective Hankel-kernel enumeration through r-1",
+        },
+    ])
+}
+
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let args = Args::parse();
+    if args.iterations == 0 {
+        return Err("--iterations must be positive".into());
+    }
+    let r5 = request(prime_field(7), 5, vec![0, 0, 0, 1, 0]);
+    let r6 = request(prime_field(17), 6, vec![0, 0, 0, 0, 1, 0]);
+    let r7 = request(prime_field(7), 7, vec![0, 0, 0, 0, 1, 0, 0]);
+    let mut rows = Vec::new();
+    rows.extend(terminal_rows(
+        &r5,
+        7,
+        args.iterations,
+        args.candidate_limit,
+    )?);
+    rows.extend(terminal_rows(
+        &r6,
+        17,
+        args.iterations,
+        args.candidate_limit,
+    )?);
+    rows.extend(terminal_rows(
+        &r7,
+        7,
+        args.iterations,
+        args.candidate_limit,
+    )?);
+
+    let canonical_elapsed = elapsed(args.iterations, || {
+        canonicalize_syndrome(&r6, args.candidate_limit)
+    })?;
+    rows.push(BenchmarkRow {
+        operation: "r6_explicit_semilinear_canonicalization".into(),
+        field_order: 17,
+        redundancy: 6,
+        elapsed_ns_total: canonical_elapsed,
+        elapsed_ns_per_iteration: canonical_elapsed / u128::from(args.iterations),
+        candidates_examined: Some(17u64.pow(3) - 17),
+        baseline: "explicit m*(q^3-q) PGL(2,q) x Gal transports",
+    });
+
+    let classification = classify(&r6, args.candidate_limit, args.candidate_limit)?;
+    let deep_certificate: DeepCertificate = classification
+        .deep_certificate
+        .ok_or("R6 benchmark fixture did not produce a deep certificate")?;
+    let classify_elapsed = elapsed(args.iterations, || {
+        classify(&r6, args.candidate_limit, args.candidate_limit)
+    })?;
+    rows.push(BenchmarkRow {
+        operation: "r6_end_to_end_classify".into(),
+        field_order: 17,
+        redundancy: 6,
+        elapsed_ns_total: classify_elapsed,
+        elapsed_ns_per_iteration: classify_elapsed / u128::from(args.iterations),
+        candidates_examined: None,
+        baseline: "intrinsic family detection plus explicit semilinear canonicalization",
+    });
+    let verify_elapsed = elapsed(args.iterations, || {
+        verify_deep_certificate(&deep_certificate, args.candidate_limit)
+    })?;
+    rows.push(BenchmarkRow {
+        operation: "r6_positive_certificate_replay".into(),
+        field_order: 17,
+        redundancy: 6,
+        elapsed_ns_total: verify_elapsed,
+        elapsed_ns_per_iteration: verify_elapsed / u128::from(args.iterations),
+        candidates_examined: None,
+        baseline: "independent domain, transporter, family, split-free, and radius replay",
+    });
+
+    println!(
+        "{}",
+        serde_json::to_string_pretty(&BenchmarkReport {
+            schema: "c969-benchmark-report-v1",
+            crate_version: env!("CARGO_PKG_VERSION"),
+            build_profile: if cfg!(debug_assertions) {
+                "debug"
+            } else {
+                "release"
+            },
+            iterations: args.iterations,
+            rows,
+        })?
+    );
+    Ok(())
+}

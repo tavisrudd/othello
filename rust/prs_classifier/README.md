@@ -48,3 +48,13 @@ degree count are recorded in
 witnesses and `c969-deep-certificate-v1` positive certificates.  A deep
 certificate is emitted only for `DEEP`, never for `UNRESOLVED` or
 `UNSUPPORTED`.
+
+The reproducible benchmark harness is built and run with:
+
+```text
+cargo run --release --manifest-path rust/prs_classifier/Cargo.toml \
+  --bin c969_benchmark -- --iterations 10
+```
+
+Its selector, projective-oracle, canonicalization, classification, and replay
+rows are documented in `notes/reed-solomon-tasks/c969-benchmark-v1.md`.
