@@ -54,6 +54,9 @@ serialized tree.
 - property tests: canonical identity invariant under generated arbitrary
   permutations for both uncalibrated and calibrated fixtures, with explicit
   idempotence;
+- the committed golden contract pins both Paper-I canonical identities,
+  automorphism and stabilizer summaries, vertex orbits, exhaustive search
+  counters, and certificate/proof-system schemas across builds;
 - schema rejection tests cover unknown fields, unsupported versions,
   non-normalized undirected edges, malformed orbital partitions, and duplicate
   calibration vertices;

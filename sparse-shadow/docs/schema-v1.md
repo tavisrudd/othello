@@ -19,6 +19,8 @@ computing its BLAKE3 identity. It reports the full automorphism order, a compact
 generating set, vertex orbits, and the point stabilizer of the least
 representative in each vertex orbit. Each stabilizer carries its own order,
 generators, and vertex-orbit decomposition.
+The committed Paper-I golden contract pins the stable summary of both
+calibrated and uncalibrated canonical artifacts.
 
 Source locators are validated provenance but are normalized to the adapter
 identifier before canonical serialization. They cannot change mathematical

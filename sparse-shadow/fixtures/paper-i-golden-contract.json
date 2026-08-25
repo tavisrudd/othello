@@ -1,0 +1,48 @@
+{
+  "contract_schema": "sparse-shadow-paper-i-golden/v1",
+  "uncalibrated": {
+    "schema": "sparse-shadow-canonical/v1",
+    "canonical_id": "4a75738e99eb23a8a7a033f8b7c54552929b7813f14af51a91765b78711ea95c",
+    "automorphism_order": 120,
+    "automorphism_generator_count": 3,
+    "vertex_orbits": [[0,1,2,3,4,5,6,7,8,9,10,11]],
+    "point_stabilizers": [
+      {
+        "fixed_vertex": 0,
+        "automorphism_order": 10,
+        "automorphism_generator_count": 2
+      }
+    ],
+    "stats": {
+      "search_nodes": 193,
+      "canonical_leaves": 120,
+      "refinement_rounds": 385,
+      "max_depth": 3,
+      "arena_grows": 0
+    },
+    "certificate_schema": "sparse-shadow-certificate/v1",
+    "proof_system": "paper-i-ir-exhaustion/v1"
+  },
+  "calibrated": {
+    "schema": "sparse-shadow-canonical/v1",
+    "canonical_id": "00d68674bd6417ba1233fa80c7221469474d8139dfdf9d37cdf5b59e06717a4d",
+    "automorphism_order": 6,
+    "automorphism_generator_count": 2,
+    "vertex_orbits": [[0,1,2],[3,5,6],[4,7,10],[8,9,11]],
+    "point_stabilizers": [
+      {"fixed_vertex": 0, "automorphism_order": 2, "automorphism_generator_count": 1},
+      {"fixed_vertex": 3, "automorphism_order": 2, "automorphism_generator_count": 1},
+      {"fixed_vertex": 4, "automorphism_order": 2, "automorphism_generator_count": 1},
+      {"fixed_vertex": 8, "automorphism_order": 2, "automorphism_generator_count": 1}
+    ],
+    "stats": {
+      "search_nodes": 10,
+      "canonical_leaves": 6,
+      "refinement_rounds": 21,
+      "max_depth": 2,
+      "arena_grows": 0
+    },
+    "certificate_schema": "sparse-shadow-certificate/v1",
+    "proof_system": "paper-i-ir-exhaustion/v1"
+  }
+}

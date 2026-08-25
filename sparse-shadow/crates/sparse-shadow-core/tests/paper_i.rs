@@ -8,6 +8,7 @@ use sparse_shadow_core::{
 const FIXTURE: &str = include_str!("../../../fixtures/paper-i-icosahedral-orbitals.json");
 const CALIBRATED_FIXTURE: &str =
     include_str!("../../../fixtures/paper-i-calibrated-icosahedral-orbitals.json");
+const GOLDEN_CONTRACT: &str = include_str!("../../../fixtures/paper-i-golden-contract.json");
 
 fn fixture() -> InputArtifact {
     serde_json::from_str(FIXTURE).expect("committed fixture parses")
@@ -15,6 +16,26 @@ fn fixture() -> InputArtifact {
 
 fn calibrated_fixture() -> InputArtifact {
     serde_json::from_str(CALIBRATED_FIXTURE).expect("committed calibrated fixture parses")
+}
+
+fn contract_view(artifact: &sparse_shadow_core::CanonicalArtifact) -> serde_json::Value {
+    serde_json::json!({
+        "schema": artifact.schema,
+        "canonical_id": artifact.canonical_id,
+        "automorphism_order": artifact.automorphism_order,
+        "automorphism_generator_count": artifact.automorphism_generators.len(),
+        "vertex_orbits": artifact.vertex_orbits,
+        "point_stabilizers": artifact.point_stabilizers.iter().map(|stabilizer| {
+            serde_json::json!({
+                "fixed_vertex": stabilizer.fixed_vertex,
+                "automorphism_order": stabilizer.automorphism_order,
+                "automorphism_generator_count": stabilizer.automorphism_generators.len(),
+            })
+        }).collect::<Vec<_>>(),
+        "stats": artifact.stats,
+        "certificate_schema": artifact.certificate.certificate_schema,
+        "proof_system": artifact.certificate.proof_system,
+    })
 }
 
 fn relabel(input: &mut InputArtifact, permutation: &[u32]) {
@@ -54,6 +75,20 @@ fn fixture_validates_and_has_expected_symmetry() {
     assert_eq!(artifact.point_stabilizers[0].fixed_vertex, 0);
     assert_eq!(artifact.point_stabilizers[0].automorphism_order, 10);
     assert_eq!(artifact.point_stabilizers[0].vertex_orbits[0], vec![0]);
+}
+
+#[test]
+fn committed_golden_contract_is_stable() {
+    let expected: serde_json::Value =
+        serde_json::from_str(GOLDEN_CONTRACT).expect("golden contract parses");
+    assert_eq!(
+        contract_view(&canonicalize(&fixture()).expect("uncalibrated canonical fixture")),
+        expected["uncalibrated"]
+    );
+    assert_eq!(
+        contract_view(&canonicalize(&calibrated_fixture()).expect("calibrated canonical fixture")),
+        expected["calibrated"]
+    );
 }
 
 #[test]

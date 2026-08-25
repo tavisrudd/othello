@@ -17,6 +17,12 @@ with exact oriented return. The other four typed profiles are represented in
 schema version 1 but remain explicitly gated until their frozen exported
 fixtures exist; failure diagnostics name the required export.
 
+`fixtures/paper-i-golden-contract.json` freezes the enabled adapter's canonical
+identities, group and point-stabilizer summaries, vertex orbits, exhaustive
+search counters, and proof-system identifiers. Changes to those values require
+an explicit contract review rather than merely remaining deterministic within
+one build.
+
 ## Toolchain and commands
 
 The MSRV is Rust 1.85.0 (edition 2024); `rust-toolchain.toml` pins the same
