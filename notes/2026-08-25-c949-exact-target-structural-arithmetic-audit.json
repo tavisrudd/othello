@@ -1,0 +1,212 @@
+{
+  "all_positive_capacity_margins": [
+    "1-5c",
+    "2/3-5c"
+  ],
+  "bounded_repair_coefficient_rows": [
+    {
+      "coefficient_sums": [
+        -1,
+        5
+      ],
+      "covering_line_count": 5,
+      "leading_discrepancy_allowance": 2,
+      "moment_survivors": [
+        5
+      ],
+      "secant_offset": -1
+    },
+    {
+      "coefficient_sums": [
+        -4,
+        2
+      ],
+      "covering_line_count": 6,
+      "leading_discrepancy_allowance": 1,
+      "moment_survivors": [],
+      "secant_offset": -1
+    },
+    {
+      "coefficient_sums": [
+        -7,
+        -1,
+        5
+      ],
+      "covering_line_count": 7,
+      "leading_discrepancy_allowance": 0,
+      "moment_survivors": [],
+      "secant_offset": -1
+    },
+    {
+      "coefficient_sums": [
+        -2,
+        4
+      ],
+      "covering_line_count": 4,
+      "leading_discrepancy_allowance": 2,
+      "moment_survivors": [
+        4
+      ],
+      "secant_offset": 0
+    },
+    {
+      "coefficient_sums": [
+        -5,
+        1
+      ],
+      "covering_line_count": 5,
+      "leading_discrepancy_allowance": 1,
+      "moment_survivors": [],
+      "secant_offset": 0
+    },
+    {
+      "coefficient_sums": [
+        -2,
+        4
+      ],
+      "covering_line_count": 6,
+      "leading_discrepancy_allowance": 0,
+      "moment_survivors": [],
+      "secant_offset": 0
+    },
+    {
+      "coefficient_sums": [
+        0
+      ],
+      "covering_line_count": 4,
+      "leading_discrepancy_allowance": 1,
+      "moment_survivors": [],
+      "secant_offset": 1
+    },
+    {
+      "coefficient_sums": [
+        -3,
+        3
+      ],
+      "covering_line_count": 5,
+      "leading_discrepancy_allowance": 0,
+      "moment_survivors": [],
+      "secant_offset": 1
+    },
+    {
+      "coefficient_sums": [
+        -1
+      ],
+      "covering_line_count": 3,
+      "leading_discrepancy_allowance": 1,
+      "moment_survivors": [],
+      "secant_offset": 2
+    },
+    {
+      "coefficient_sums": [
+        -4,
+        2
+      ],
+      "covering_line_count": 4,
+      "leading_discrepancy_allowance": 0,
+      "moment_survivors": [],
+      "secant_offset": 2
+    }
+  ],
+  "bounded_repair_moment_survivors": [
+    [
+      -1,
+      5,
+      5
+    ],
+    [
+      0,
+      4,
+      4
+    ]
+  ],
+  "checked": true,
+  "field_checks": [
+    {
+      "branches": [
+        {
+          "maximal_secant_count": 162,
+          "shell_defect": 55,
+          "u_norm_squared": 406,
+          "u_sum": 244
+        },
+        {
+          "maximal_secant_count": 163,
+          "shell_defect": 25,
+          "u_norm_squared": 318,
+          "u_sum": 162
+        }
+      ],
+      "field_order": 81,
+      "maximum_intersection": 55,
+      "small_codeword_exact_representation_threshold": 730,
+      "target_size": 2295
+    },
+    {
+      "branches": [
+        {
+          "maximal_secant_count": 486,
+          "shell_defect": 163,
+          "u_norm_squared": 1216,
+          "u_sum": 730
+        },
+        {
+          "maximal_secant_count": 487,
+          "shell_defect": 79,
+          "u_norm_squared": 966,
+          "u_sum": 486
+        }
+      ],
+      "field_order": 243,
+      "maximum_intersection": 163,
+      "small_codeword_exact_representation_threshold": 3664,
+      "target_size": 20007
+    },
+    {
+      "branches": [
+        {
+          "maximal_secant_count": 1458,
+          "shell_defect": 487,
+          "u_norm_squared": 3646,
+          "u_sum": 2188
+        },
+        {
+          "maximal_secant_count": 1459,
+          "shell_defect": 241,
+          "u_norm_squared": 2910,
+          "u_sum": 1458
+        }
+      ],
+      "field_order": 729,
+      "maximum_intersection": 487,
+      "small_codeword_exact_representation_threshold": 19684,
+      "target_size": 178119
+    }
+  ],
+  "four_line_transversal_checks": [
+    {
+      "field_order": 27,
+      "lower": 864,
+      "upper": 567
+    },
+    {
+      "field_order": 81,
+      "lower": 11232,
+      "upper": 1701
+    },
+    {
+      "field_order": 243,
+      "lower": 112320,
+      "upper": 5103
+    },
+    {
+      "field_order": 729,
+      "lower": 1045440,
+      "upper": 15309
+    }
+  ],
+  "linear_gap_open_endpoint": "1/18",
+  "nonexceptional_coefficient_margin_for_c_below_endpoint": "1-18c",
+  "schema": "c949-exact-target-structural-arithmetic-audit-v2",
+  "scope": "arithmetic replay only; the structural nonexistence proof and Sz\u0151nyi--Weiner input remain human-proof dependencies"
+}

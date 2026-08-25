@@ -2,8 +2,9 @@
 
 **Lane**: `relconic`
 
-**Status:** active by explicit user override of the C945 sequencing gate; bounded
-first-gate work only, with no manuscript work
+**Status:** complete on the stronger-obstruction exit; the proposed `4/3`
+linear coefficient is excluded and replaced by the lower coefficient `25/18`;
+sharpness of the new coefficient is successor work; no manuscript work
 
 ## First-gate findings — 24 August 2026
 
@@ -740,23 +741,370 @@ reference checker for the bounded certificates.  Widening the three-orbit
 test to all 1,458 branch lifts by repeating the present Python loops would be
 raw throughput, not additional mathematics.
 
-#### Bound status after the structural upgrade
-
-The unconditional asymptotic statement remains C945's sharp lower side
+There is, however, a structural argument which supersedes that widening and
+does not use Frobenius symmetry.  Reduce `(SD)` modulo three.  Since
 
 ```text
-T_3(q)>=q^2/3+4q/3-o(q).
+z = 1-Mc  (mod 3),       Mz=0  (mod 3),
 ```
+
+the signed word lies in the hull `C_1(2,q) intersect C_1(2,q)^perp` of the
+ternary line code.  Here `1` belongs to the line code: the sum of the lines in
+any point-pencil is `1+q 1_P=1` modulo three.  Thus hull membership is forced
+by the five-character core; it is not an additional model assumption.
+
+Szőnyi--Weiner, Theorem 4.2, says that a line-code word of weight `w` in
+`PG(2,q)`, `q>17`, has support covered by `ceil(w/(q+1))` lines whenever
+
+```text
+w < sqrt(q/2)(q+1).                                      (SW)
+```
+
+For `w=4q-6`, condition `(SW)` holds for every `q>=27`: after squaring, the
+difference is
+
+```text
+q(q+1)^2-2(4q-6)^2 = q^3-30q^2+97q-72,
+```
+
+which is `360` at `q=27` and strictly increasing thereafter.  Also
+`ceil((4q-6)/(q+1))=4`.  Hence the signed support would lie on four lines.
+
+The following elementary signed-transversal lemma rules this out.
+
+> **Four-line hull obstruction.**  Let `q>=27`, and let `z` take values
+> `-1,0,1` in `PG(2,q)`.  Suppose `z` is a line-code word, every line sum is
+> zero modulo three, `|supp(z)|=4q-6`, `sum z=2q`, and exactly `q-3`
+> coordinates are negative.  Then no such `z` exists.
+
+Indeed, let `L_1,...,L_4` cover the support and let `V` be their set of
+distinct pairwise intersection points, `r=|V|<=6`.  Three lines contain fewer
+than `4q-6` points, so all four are needed.  Their union has at most `4q+1`
+points and therefore contains at most seven holes of the support.  Let `G` be
+the lines avoiding `V`.  Every line of `G` meets the four covering lines in
+four distinct nonvertex points.  If it meets respectively zero, one, two,
+three, or four holes, its integer signed sum is respectively `0`, `+/-3`,
+`0`, impossible, or `0`; this is just divisibility by three for four, three,
+two, one, or zero signs.  Each nonvertex hole lies on at most `q` lines of
+`G`, so
+
+```text
+| sum_{ell in G} sum_{P in ell} z_P | <= 3q*7 = 21q.       (U)
+```
+
+On the other hand, a nonvertex point of the four-line union lies on between
+`q-r` and `q` lines of `G`.  Removing the at most `r` signed vertices leaves
+signed imbalance at least `2q-r`, and there are at most `q-3` negative
+nonvertices.  Consequently the same double sum is at least
+
+```text
+(q-r)(2q-r)-r(q-3)
+  >= (q-6)(2q-6)-6(q-3) = 2q^2-24q+54.                    (L)
+```
+
+For `q>=27`, `(L)` exceeds `(U)` because
+`2q^2-45q+54>0`.  This contradiction proves the lemma.
+
+Applying it to `(SD)` eliminates the prescribed five-character
+`T=2q+1` inverse-construction branch for every ternary `q>=27`, including all
+asymmetric cores.  The earlier Frobenius and low-complexity hull enumerations
+remain exact checks, but they are no longer the reason the branch fails.
+This is still conditional on the five-character inverse branch: it does not
+classify arbitrary target-size extremizers or eliminate the separate
+`T=2q` envelope.
+
+There is a second structural step which removes that scope restriction once
+`q>=81`.  It starts with an arbitrary complete target-size arc, not an inverse
+core.
+
+> **Exact-target obstruction.**  Let `q=3^h>=81`.  There is no complete
+> `(q^2/3+4q/3, 2q/3+1)`-arc in `PG(2,q)`.
+
+Write `q=3r`, let `A` be such an arc, and let `D` be the dual point set of
+all its maximal secants.  If `T=|D|` and `d=M 1_D`, completeness gives
+`d_P>=1` outside `A`.  The two degree sums and the pair partition are
+
+```text
+sum_A d=(2r+1)T,      sum_out d=rT,
+sum_P binom(d_P,2)=binom(T,2).                         (E1)
+```
+
+They first force the exact envelope
+
+```text
+T in {6r,6r+1}={2q,2q+1}.                             (E2)
+```
+
+Here is a short arithmetic verification, included to keep `(E2)` independent
+of a finite search.  There are `K=3r^2+4r` points of `A` and
+`N=6r^2-r+1` outside.  Coverage gives `T>=6r`.  Cauchy applied separately to
+the two degree classes says that feasibility requires
+
+```text
+F(T)=(2r+1)^2 T^2/K-(2r+1)T+r^2 T^2/N-rT-T(T-1) <= 0.
+```
+
+The quadratic has positive leading coefficient.  At `T=6r+5`, both it and
+its derivative are positive; explicitly their numerators over the positive
+denominator `r(3r+4)(6r^2-r+1)` are
+
+```text
+(6r+5)(60r^3+17r^2+r+5),
+54r^5+63r^4+117r^3+46r^2+2r+10.
+```
+
+Thus `T<=6r+4`.  For `T=6r+j`, `j=2,3,4`, the balanced integral degrees are
+still `3/4` on `A` and `1/2` outside.  The pair budget minus their exact
+minimum is respectively `-4,-r-5,-2r-5`, excluding all three values and
+proving `(E2)`.
+
+Now put
+
+```text
+u=1+3 1_A-d,                    c=u mod 3,
+R=supp(c),                      w=|R|.
+```
+
+The design identity gives `c=1-M1_D` in the ternary line code and
+
+```text
+M u=(q+1-T)1+3M1_A-q1_D.                              (E3)
+```
+
+Directly expanding the three moments in `(E1)` gives the following complete
+branch table:
+
+```text
+T             sum u       ||u||^2       shell defect E
+2q            3q+1        5q+1          2r+1
+2q+1          2q          4q-6          r-2.
+```
+
+The last column means exactly
+
+```text
+E=sum_{P in A} u_P(u_P-1)/2
+   +sum_{P outside A} u_P(u_P+1)/2.                    (E4)
+```
+
+All summands are nonnegative: on `A`, `u=4-d`; outside, `u=1-d<=0`.
+If `P in A` and `u_P=0 mod 3`, then
+`u_P<=u_P(u_P-1)/2`; otherwise
+`u_P<=1+u_P(u_P-1)/2`.  Consequently
+
+```text
+|A intersect R| >= sum_A u-E.                         (E5)
+```
+
+Because `w<=||u||^2<=5q+1`, Szőnyi--Weiner Theorem 4.3 applies.  Indeed
+`h>2`, `q>27`, and
+
+```text
+5q+1 < (floor(sqrt(q))+1)(q+1-floor(sqrt(q)))
+```
+
+for `q>=81`.  Hence `c` is a linear combination of exactly
+`t=ceil(w/(q+1))` distinct lines, with every coefficient `epsilon_i` equal
+to `+1` or `-1`.  Set `z_P` to the balanced representative in
+`{-1,0,1}` of `c_P`.  The pointwise inequality
+
+```text
+|u_P-z_P| <= u_P^2-z_P^2                              (E6)
+```
+
+shows that `|sum u-sum z|<=Delta:=||u||^2-w`.
+
+Consider first `T=2q+1`.  Formula `(E3)` says that `c` is also in the dual
+code.  From `(E5)`, `|A intersect R|>=7r+1`; three covering lines contain at
+most `3(2r+1)=6r+3` arc points, so `t=4`.  The four coefficients sum to zero
+modulo three, hence two are positive and two negative.  Their formal integer
+incidence sum has total zero.  Away from the at most six covering-line
+vertices it equals `z`; at each vertex the discrepancy has absolute value at
+most three.  Since `w>3(q+1)`, `Delta<=q-10`, and therefore
+
+```text
+2q=|sum u| <= Delta+18 <= q+8,
+```
+
+a contradiction.
+
+Finally let `T=2q`.  Now `(E5)` gives `|A intersect R|>=8r-1`, so `t>=4`,
+while the norm bound gives `t<=5`.  By `(E3)` the coefficient sum is one
+modulo three.  If `t=4`, that integer sum is `-2` or `4`.  The first case is
+impossible because the formal total is `-2(q+1)`, its vertex correction is at
+most 18, and `Delta<=2q-3`, whereas its distance from `sum u=3q+1` is
+`5q+3`.  In the second case all four coefficients are positive.  The four
+lines have at least `4q-8` nonvertex positions with `z=1`.  Every such point
+outside `A` has `u<=-2` and consumes at least three units of `Delta`; hence
+
+```text
+|A intersect R| >= 4q-8-Delta/3
+                >= 4q-8-(2q-3)/3 > 4(2q/3+1),
+```
+
+contradicting the arc cap on the four covering lines.  If `t=5`, the five
+coefficients have integer sum `1` or `-5`.  The formal total is therefore
+`q+1` or `-5(q+1)`.  There are at most ten vertices, each changing the
+balanced sum by at most six, and now `Delta<=q-4`.  Even the closer first
+total would require a change `2q`, but `(E6)` permits at most `q+56<2q` for
+`q>=81`.  This is the final contradiction.
+
+Thus both branches in `(E2)` are impossible.  Unlike the preceding
+five-character lemma, this theorem applies to every complete arc of the exact
+target size.  It does **not** imply a one-sided bound on `t_s(2,q)`: complete
+arc sizes are not monotone, and a smaller size has not been excluded.  What it
+does prove is that literal equality at the conjectural center is impossible;
+any matching asymptotic construction must carry a nonzero repair in its size
+or parameters.
+
+In fact the same compression excludes every bounded additive size repair.
+
+> **Bounded-repair obstruction.**  For each fixed integer `delta`, and all
+> sufficiently large `q=3^h`, there is no complete
+> `(q^2/3+4q/3+delta, 2q/3+1)`-arc in `PG(2,q)`.  Uniformly, for every fixed
+> `H`, no such arc exists with `|delta|<=H` once `q>=q_0(H)`.
+
+Only the bookkeeping changes.  Keep `q=3r` and write `T=6r+j`.  Coverage and
+the two-class Cauchy bound localize `j` to a bounded interval depending only
+on `H`; the latter bound has its upper root at `6r+O_H(1)`.  The nonnegative
+shell defect is now
+
+```text
+E=(2-j)r+1+5 delta+j(j-7)/2.                           (BR1)
+```
+
+For bounded `j,delta` and large `r`, `(BR1)` leaves only
+`j in {-1,0,1,2}`; coverage removes `j=-1` when `delta<=0`.  The other exact
+moments are
+
+```text
+sum u   =(9-3j)r+3 delta-j+1,
+||u||^2 =(15-3j)r+15 delta+j^2-8j+1,
+sum_A u =(10-2j)r+4 delta-j.                           (BR2)
+```
+
+Theorem 4.3 again writes `c=u mod 3` as a sum of `t` distinct lines.  From
+`(E5)`, the arc cap, and the norm bound, the only asymptotic ranges are
+
+```text
+j=-1: t in {5,6,7};   j=0: t in {4,5,6};
+j= 1: t in {4,5};     j=2: t in {3,4}.                 (BR3)
+```
+
+Let `sigma=sum epsilon_i`.  Equation `(E3)` gives
+`sigma congruent 1-j (mod 3)`, while parity gives
+`sigma congruent t (mod 2)`.  Away from `O(t^2)` vertices, the balanced
+residue sum is the formal total `sigma(q+1)`.  Also
+
+```text
+Delta=||u||^2-w <= (6-j-t)q+O_H(1).                   (BR4)
+```
+
+Comparing `(BR2)`, `(BR4)`, and `(E6)` eliminates every coefficient pattern
+in `(BR3)` except
+
+```text
+(j,t,sigma)=(-1,5,5) or (0,4,4).                      (BR5)
+```
+
+For transparency, these are not hidden optimization cases: they are the only
+parity/congruence possibilities whose leading discrepancy
+`|3-j-sigma|q` is at most `(6-j-t)q`.  In both cases every coefficient is
+positive.  The `t` lines then have at least `t(q+2-t)` nonvertex coordinates
+with balanced residue `+1`.  Each such coordinate outside `A` has `u<=-2`
+and costs at least three units of `Delta`.  For `(j,t)=(-1,5)` this forces
+at least `(13/3)q-O_H(1)` arc points onto five lines, whose arc-capacity is
+only `(10/3)q+5`; for `(j,t)=(0,4)` it forces at least
+`(10/3)q-O_H(1)` arc points onto four lines, whose capacity is
+`(8/3)q+4`.  Both are impossible for large `q`, proving the theorem.
+
+At this stage alone, any putative matching `(UB3)` witness would need an
+unbounded `o(q)` repair.  The next quantitative pass shows that even this is
+impossible and determines the sign of the deviation using C945's lower side.
+
+The inequalities actually have enough uniform slack to rule out a linear
+band, which changes the asymptotic conclusion.
+
+> **Linear-gap theorem.**  Fix `c<1/18`.  For all sufficiently large
+> `q=3^h`, there is no complete `(k,2q/3+1)`-arc with
+>
+> ```text
+> |k-(q^2/3+4q/3)| <= cq.                              (LG1)
+> ```
+
+To see the uniformity, write `delta=alpha q` with `|alpha|<=c`.  Coverage
+still gives `j>=-1`.  The two-class Cauchy polynomial at `T=6r+7` has leading
+term `(6-45alpha)r`, and its derivative there has positive leading term;
+hence `j<=6` for large `q`.  Dividing `(BR1)` by `r` gives
+
+```text
+E/r=2-j+15alpha+o(1).
+```
+
+Since `c<1/18<1/15`, nonnegativity excludes `j=3,4,5,6`, leaving the same
+four offsets and the same line-count ranges `(BR3)`.  The exact small-codeword
+threshold remains applicable because all norms are still `O(q)`.
+
+After division by `q`, the necessary coefficient comparison becomes
+
+```text
+|3-j+3alpha-sigma| <= 6-j-t+15alpha+o(1).             (LG2)
+```
+
+The ten parity/congruence rows in the tracked arithmetic audit show that,
+apart from the two all-positive cases `(BR5)`, the smallest unused margin in
+`(LG2)` is `1-18c>0`.  The all-positive cases also remain impossible
+uniformly: their excesses over the five- and four-line arc capacities are
+respectively
+
+```text
+(1-5alpha)q-O(1),       (2/3-5alpha)q-O(1),
+```
+
+both positive for `c<1/18`.  This proves `(LG1)`.
+
+Now combine `(LG1)` with C945's unconditional lower side `(LB3)`.  For each
+fixed `c<1/18`, `(LB3)` eventually rules out the component below the forbidden
+band, so the minimum must lie above its upper edge.  Letting `c` increase to
+`1/18` gives the sharpened asymptotic lower bound
+
+```text
+T_3(q) >= q^2/3+25q/18-o(q).                           (LB3+)
+```
+
+In particular `(UB3)` and `(ASY3)` with linear coefficient `4/3` are false.
+The endpoint `1/18` here is the limiting margin of this four-offset
+coefficient argument; no construction matching `25/18`, and no claim that
+this new coefficient is optimal, is made.
+
+#### Bound status after the structural upgrade
+
+The unconditional asymptotic statement is now strengthened from C945's lower
+side
+
+```text
+T_3(q)>=q^2/3+4q/3-o(q)
+```
+
+to `(LB3+)`, with linear coefficient `25/18`.
 
 No matching upper bound is proved here.  What is now proved is that the exact
 `q=9` equality mechanism is Hermitian-unital-minus-secant, that its sign
 counts match C949 only at `q=9`, and that its broader collinear-negative
 replacement is exactly the modular-multiset problem `(M31)` with defect
-`(M32)`.  At the first nonsquare field `q=27`, neither Frobenius branch can
-use that collinear replacement.  Consequently any Frobenius realization of
-the candidate upper-bound core must contain a genuinely noncollinear signed
-24-set; the existence or exclusion of that object is the remaining finite
-gate.  This narrows `(UB3)` but does not assert it.
+`(M32)`.  More decisively, the hull/stability/transversal argument above
+eliminates the entire `T=2q+1` five-character branch for every ternary
+`q>=27`, without symmetry.  For `q>=81`, the exact-target theorem goes
+further: it eliminates both envelope branches for arbitrary complete arcs.
+This obstructs the literal `(FC5)` route to `(UB3)` and rules out an arc at
+the exact central size.  The exact-target theorem alone gives no one-sided
+bound; the uniformization below is what supplies one.
+The bounded-repair theorem strengthens this first to every fixed additive
+repair, and the linear-gap theorem then excludes the entire `c q` band for
+each `c<1/18`.  Thus the proposed matching `(UB3)` is false.  Determining the
+true coefficient, or constructing arcs matching the new `25/18` lower side,
+is the next extremal problem rather than an unfinished proof obligation of
+the rejected `4/3` target.
 
 Finally, for a core-line intersection `1<=d<=5`, the threshold itself has the
 binomial-energy expansion
@@ -983,16 +1331,16 @@ family is lower priority.
   the core at least three times.  No ad hoc secant trade is needed, and the
   local equality on core points follows automatically from the single global
   concurrency cap by averaging.
-- **Open — does the `2q+1` five-character blocking core generalize?**  The
-  correct `q=27` target is `1^461 2^17 3^78 4^194 5^7`.  Trace-`x/y`,
-  trace-`x`, and scalar `C_13` invariance are excluded.  Frobenius invariance
-  first reduces to ten aggregate fixed-subplane branches; the local degree-19
-  congruence then leaves exactly two canonical four-fixed-point branches.
-  Those two branches and asymmetric cores remain open.  The naive split by
-  their two nonfixed 5-secant orbits still has 7,768 cases per branch and is
-  not a useful terminal classification.  The alternative 54-maximal-secant
-  envelope branch is also unclassified.
-- **Open after `tt` — classify the centered incidence codeword at `q=27`.**
+- **Settled structurally — does the `2q+1` five-character blocking core
+  generalize?**  No for every ternary `q>=27`.  Its signed transform is forced
+  into the line-code hull with weight `4q-6`; Szőnyi--Weiner covers that
+  support by four lines, and the signed-transversal double count gives the
+  incompatible bounds `2q^2-24q+54` and `21q`.  This uses no symmetry and
+  supersedes the trace, scalar, Frobenius, and low-complexity hull searches.
+  The alternative `T=2q` maximal-secant envelope remains open at `q=27`, but
+  the exact-target theorem below excludes it for every `q>=81`.
+- **Settled as an obsolete gate — classify the centered incidence codeword at
+  `q=27`.**
   The exact shell has defect 126, at most 63 exceptional external points, and
   satisfies `M^T(e-9 1)=27(1+a)`.  Frobenius residues together with the local
   blocking-core cap `e<=13` still leave 50,261 degree histograms.  Thus the
@@ -1000,10 +1348,10 @@ family is lower priority.
   or a contradiction from its line sums.  The
   ternary affine space has dimension 184, drops to the 76-dimensional
   full-modulus-liftable subspace, and has dimension 70 after fixed-coordinate
-  pinning.  Both branches survive all these congruences; the additional gate
-  is the norm-6075 lattice condition.  This supersedes the 7,768-way
-  five-secant-pair split as the primary C949 route.
-- **Open after the signed descent — classify the weight-102 word.**  The
+  pinning.  Those congruences did not decide the branch, but the later
+  four-line hull obstruction does; no closest-vector classification is now
+  needed for `T=55`.
+- **Settled after the signed descent — classify the weight-102 word.**  The
   secant-type vector `z=1+3a-d` lies in the ternary dual incidence code, has
   signs `(-1)^24 1^78`, and satisfies `Mz=3x` with `||x||^2=630`.  The two
   fixed branches leave only 32 and 31 supported nonfixed Frobenius orbits.
@@ -1012,10 +1360,34 @@ family is lower priority.
   ambient 126 to 66.  Neither branch can be a fixed-line dual lift plus at
   most two conjugate-line orbit sums, across all 729 fixed lifts per branch;
   all 17 fixed lifts of coefficient weight at most four also fail with three
-  orbit sums.  The next exhaustive widening should use the 261-trit Rust
-  quotient kernel described above, with this Python audit as checker.
-  Recovering `d in {1,...,5}` from such a word, or excluding both sign cosets,
-  is now the most compressed structural gate.
+  orbit sums.  More importantly, hull membership is automatic and the
+  four-line structural obstruction excludes every such word, without
+  Frobenius invariance or a Rust widening.
+- **Settled asymptotically for the exact target; open at `q=27` — classify the
+  residual `T=2q` envelope.**  At `q=27`, writing `d`
+  for the number of 54 maximal secants through a point, its exact excess over
+  the balanced degree shell is
+  `sum_A binom(d-3,2)+sum_{outside} binom(d-1,2)=19`.  This defect-19 branch,
+  not the dead five-character core, is the remaining first-field gate.  For
+  all ternary `q>=81`, however, its residue codeword has norm at most `5q+1`,
+  is an exact combination of four or five lines, and each coefficient pattern
+  contradicts the arc cap or the integral sum/norm budget.
+- **Settled — can an arbitrary exact target-size arc evade the inverse-core
+  model?**  No for `q=3^h>=81`.  Completeness and the paired degree moments
+  force exactly `T in {2q,2q+1}` maximal secants.  The exact small-codeword
+  theorem and the shell defect then exclude both branches without assuming a
+  threshold reconstruction, five line-intersection characters, Frobenius
+  symmetry, or any other inverse model.  This rules out the exact central
+  size; the next item supplies the uniform fixed-repair strengthening.  It is
+  not a matching asymptotic upper bound.
+- **Settled structurally — can a fixed additive size repair evade the exact
+  obstruction?**  No.  For every fixed `delta`, the four possible
+  maximal-secant offsets reduce to at most seven line-code generators.  Their
+  coefficient sum and integral moment eliminate all but two all-positive
+  patterns, and the arc cap eliminates those.  The uniform version excludes
+  every relative repair `|delta|<=cq` for fixed `c<1/18`; combined with C945,
+  this proves `(LB3+)` and refutes `(UB3)`.  The true optimal linear
+  coefficient beyond `25/18` remains open.
 - **Settled by the signed descent — what geometry does its support have?**
   Field-uniformly it is a signed untouchable set of size `4q-6`: it has no
   tangents, and every support 2-secant joins opposite signs.  At `q=9` its
@@ -1044,6 +1416,31 @@ family is lower priority.
   arc still trusts one normalized CP-SAT infeasibility certificate.  A second
   checker or a combinatorial contradiction for the forced 18-secant envelope
   remains absent.
+
+### Closeout audit (`ej` + `tt`)
+
+The hostile `ej` pass rederived the maximal-secant envelope from coverage,
+Cauchy, and exact balanced pair minima; expanded all four `u` moments from the
+design identity; checked the `q>27`, `h>2`, and weight hypotheses of
+Szőnyi--Weiner Theorem 4.3; and separated “no arc at this size” from a
+one-sided extremal bound before invoking C945.  It also restored the sharp
+seven-hole count in the four-line lemma.  The tracked arithmetic replay checks
+the exact branch table, the ten coefficient rows, their `1/18` limiting
+margin, and the transversal inequality.  No bounded solver status is used in
+`(LB3+)`.
+
+The `tt` pass is the compression itself: replace a hypothetical arc by its
+full maximal-secant set, then by the integral word `u`, then by at most seven
+line coefficients.  The coefficient sum sees the line-code coset, the norm
+controls the lift away from balanced residues, and the arc cap kills the only
+two positive patterns.  This chain applies to arbitrary complete arcs in the
+linear band, so it discharges the earlier five-intersection scope warning.
+
+Closeout verdict: **GO** for C949's stronger-obstruction exit and `(LB3+)`.
+The unresolved mysteries are sharpness of `25/18`, construction on the new
+scale, the endpoint coefficient patterns, the finite arbitrary `q=27,T=54`
+branch, and a structural replacement for the `q=9` lower-bound certificate.
+None is needed to reject the original `4/3` target.
 
 ### Reproducibility
 
@@ -1090,6 +1487,12 @@ python3 notes/2026-08-24-c949-sharp-higher-arc-asymptotics.py \
   --output /tmp/c949-q27-frobenius-hull-mechanism-audit.json
 cmp /tmp/c949-q27-frobenius-hull-mechanism-audit.json \
   notes/2026-08-25-c949-q27-frobenius-hull-mechanism-audit.json
+
+python3 notes/2026-08-24-c949-sharp-higher-arc-asymptotics.py \
+  exact-target-obstruction-audit \
+  --output /tmp/c949-exact-target-structural-arithmetic-audit.json
+cmp /tmp/c949-exact-target-structural-arithmetic-audit.json \
+  notes/2026-08-25-c949-exact-target-structural-arithmetic-audit.json
 ```
 
 The corrected fixed-core lift replays the five-character mechanism at `q=9`
@@ -1141,10 +1544,18 @@ cyclic line orbits, the degree tables, and the completeness cover.  Its trust
 boundary is the short Python finite-field implementation and its explicit
 assertions; no computer-algebra or second implementation is used.  The
 `q=27` artifacts certify only the stated finite parameter/orbit audits.
+The exact-target arithmetic artifact checks moment expansions, the envelope
+at three fields, the bounded-repair coefficient table, and the corrected
+four-line inequality.  It is explicitly not a nonexistence certificate: the
+Szőnyi--Weiner input and the geometric line-cover contradictions are the human
+proof above.
 
-The two normalized five-character Frobenius branches and the unrestricted
-`q=27` core search are not completed; no unrestricted existence or
-nonexistence conclusion is licensed.
+The former normalized Frobenius searches and unrestricted `q=27` core search
+are not used as nonexistence certificates.  The structural hull/stability/
+transversal proof now excludes the full five-character branch without a
+symmetry assumption.  The later exact-representation argument addresses both
+maximal-secant envelopes for arbitrary arcs, and its uniform linear-gap form
+is the source of `(LB3+)`; the finite searches play no role in that theorem.
 
 ### Source depths for this audit
 
@@ -1181,6 +1592,14 @@ nonexistence conclusion is licensed.
   1.4--1.5 and Theorems 1.7--1.9 for the projection-function/mod-special-
   direction dictionary; cache key `arXiv:2411.19201`, SHA-256
   `0fc810af52d3d70424f72c82878b69d55fa4abb285c344934dfac65587c86c19`.
+- Szőnyi--Weiner, *Stability of `k mod p` multisets and small weight codewords
+  of the code generated by the lines of `PG(2,q)`*: **partial**, introduction,
+  Theorems 1.1, 4.2, 4.3, and their proofs read; Theorem 4.2 is the
+  support-cover input to the four-line obstruction, while Theorem 4.3 gives
+  the exact bounded-line representation in the arbitrary-extremizer theorem.
+  Cache key
+  `arXiv:1901.09649`, SHA-256
+  `4161216751349d453fc8e8fbf40df6132de24f8e83581e85eeeb33ec936c046f`.
 
 ## Purpose and boundary
 
@@ -1193,12 +1612,19 @@ extremal cores, proves their realizability or nonrealizability, and thereby
 determines the correct asymptotic target.  A necessary bounded-repair
 reduction alone is an input, not a successful exit.
 
+The completed structural pass takes the obstruction exit in stronger form:
+it excludes a linear-width band around the proposed target for arbitrary
+complete arcs, not only the prescribed modular cores, and combines this with
+C945 to prove `(LB3+)`.  It therefore decides that the proposed target is not
+sharp.  It does not claim that `25/18` is the final coefficient; matching or
+improving that new lower side is a distinct successor problem.
+
 Nothing below is a novelty or attainability claim.  Literature statements and
 any eventual priority verdict remain subject to
 `literature-audit-conventions.md`; C945's recorded source depths and uncovered
 databases are inherited as open gates, not converted into negative evidence.
 
-## Canonical first target
+## Canonical first target (now structurally refuted)
 
 Avoid the collision between the standard subscript in `t_s(2,q)` and the
 normalization `q/3` by writing
@@ -1214,7 +1640,8 @@ C945 proves the lower bound
 T_3(q) >= q^2/3+4q/3-o(q).                            (LB3)
 ```
 
-The first conjectural construction target is
+The first conjectural construction target, retained here to state what C949
+tested, was
 
 ```text
 T_3(q) <= q^2/3+4q/3+o(q),                            (UB3)
@@ -1277,7 +1704,7 @@ The bounded construction programmes are:
    exponent towers with divisibility, for example `h_i | h_{i+1}`, or maps
    defined directly over each `F_{3^h}`.
 
-## First computational gate
+## First computational gate (completed historical route)
 
 1. Audit known constructions at `s=2q/3+1`, translating each into both the
    complementary blocking-set and selected-secant languages.
@@ -1290,11 +1717,15 @@ The bounded construction programmes are:
 5. Record whether examples approach the linear coefficient `4/3`, exceed it
    systematically, or show no stable pattern.
 
-Proceed toward `(ASY3)` only if a structured family has
+The original routing rule was to proceed toward `(ASY3)` only if a structured family had
 `k=q^2/3+O(q)` and the correct maximum line intersection.  If computation
 instead exposes a larger linear term, return the pattern to C945 as a candidate
 new obstruction.  If neither occurs, retain C949 as a bounded negative
 construction audit rather than an open-ended search.
+
+The structural pass superseded this computational fork: it proves `(LB3+)`
+for arbitrary complete arcs.  No bounded search is being promoted as the
+reason for the stronger coefficient.
 
 ## Later targets, conditional on the first gate
 
@@ -1328,6 +1759,9 @@ finite-geometry extremal function remains primary.
 - A density-interval theorem would extend the calculation from one parameter
   family to a nontrivial interval of `alpha`.
 
-C945 has a settled theorem package and manuscript disposition.  C949 remains a
-separate construction programme and must not delay the existing arcs paper's
-review/release path.
+C949 meets its classification/obstruction exit through the linear-gap theorem:
+the proposed `(UB3)` is impossible and the replacement certified lower side is
+`(LB3+)`.  Sharpness of `25/18`, a matching construction, and any
+density-interval theorem are successor tasks and must receive new routing;
+they are not smuggled into this closeout.  C945's settled manuscript remains
+unchanged and must not be delayed by those successors.

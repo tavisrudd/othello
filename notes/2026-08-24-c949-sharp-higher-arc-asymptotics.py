@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import argparse
 from collections import Counter
+from fractions import Fraction
 import itertools
 import json
 import math
@@ -2941,6 +2942,149 @@ def audit_frobenius_hull_mechanism(frobenius_audit: Path, output: Path) -> None:
     }, indent=2, sort_keys=True) + "\n")
 
 
+def audit_exact_target_obstruction(output: Path) -> None:
+    """Check the scalar arithmetic used by the structural C949 obstruction.
+
+    This is deliberately not a nonexistence search.  The report's geometric
+    proof uses the Szőnyi--Weiner line-code theorem; this audit only replays
+    its exact moment, envelope, and finite coefficient calculations.
+    """
+
+    def minimum_pairs(count: int, degree_sum: int, lower: int) -> int:
+        if degree_sum < count * lower:
+            raise ValueError("degree sum is below its lower bound")
+        quotient, remainder = divmod(degree_sum - count * lower, count)
+        low = lower + quotient
+        return ((count - remainder) * low * (low - 1) // 2
+                + remainder * (low + 1) * low // 2)
+
+    field_records = []
+    for q in (81, 243, 729):
+        r = q // 3
+        point_count = q * q + q + 1
+        target_size = 3 * r * r + 4 * r
+        maximum_intersection = 2 * r + 1
+        outside_count = point_count - target_size
+        feasible = []
+        for tangent_count in range(2 * q, 2 * q + 8):
+            internal = minimum_pairs(
+                target_size, maximum_intersection * tangent_count, 0
+            )
+            external = minimum_pairs(outside_count, r * tangent_count, 1)
+            if internal + external <= tangent_count * (tangent_count - 1) // 2:
+                feasible.append(tangent_count)
+        if feasible != [2 * q, 2 * q + 1]:
+            raise AssertionError("the exact maximal-secant envelope changed")
+        branches = []
+        for tangent_count in feasible:
+            incidence_sum = (q + 1) * tangent_count
+            incidence_square_sum = (
+                incidence_sum + tangent_count * (tangent_count - 1)
+            )
+            arc_incidence_sum = maximum_intersection * tangent_count
+            u_sum = point_count + 3 * target_size - incidence_sum
+            u_norm = (
+                point_count + 15 * target_size + incidence_square_sum
+                - 2 * incidence_sum - 6 * arc_incidence_sum
+            )
+            shell_defect = (
+                tangent_count * (tangent_count - 1) // 2
+                - (3 * arc_incidence_sum - 6 * target_size
+                   + r * tangent_count - outside_count)
+            )
+            expected = (
+                (3 * q + 1, 5 * q + 1, 2 * r + 1)
+                if tangent_count == 2 * q
+                else (2 * q, 4 * q - 6, r - 2)
+            )
+            if (u_sum, u_norm, shell_defect) != expected:
+                raise AssertionError("an integral branch moment changed")
+            branches.append({
+                "maximal_secant_count": tangent_count,
+                "u_sum": u_sum,
+                "u_norm_squared": u_norm,
+                "shell_defect": shell_defect,
+            })
+        threshold = ((math.isqrt(q) + 1) * (q + 1 - math.isqrt(q)))
+        if not 5 * q + 1 < threshold:
+            raise AssertionError("small-codeword threshold does not apply")
+        field_records.append({
+            "field_order": q,
+            "target_size": target_size,
+            "maximum_intersection": maximum_intersection,
+            "small_codeword_exact_representation_threshold": threshold,
+            "branches": branches,
+        })
+
+    coefficient_rows = []
+    survivors = []
+    nonexceptional_thresholds = []
+    ranges = {-1: (5, 6, 7), 0: (4, 5, 6), 1: (4, 5), 2: (3, 4)}
+    for secant_offset, line_counts in ranges.items():
+        target_leading_sum = 3 - secant_offset
+        required_residue = (1 - secant_offset) % 3
+        for line_count in line_counts:
+            coefficient_sums = [
+                value for value in range(-line_count, line_count + 1, 2)
+                if value % 3 == required_residue
+            ]
+            allowance = 6 - secant_offset - line_count
+            row_survivors = [
+                value for value in coefficient_sums
+                if abs(target_leading_sum - value) <= allowance
+            ]
+            survivors.extend(
+                (secant_offset, line_count, value) for value in row_survivors
+            )
+            for value in coefficient_sums:
+                if (secant_offset, line_count, value) in {
+                    (-1, 5, 5), (0, 4, 4)
+                }:
+                    continue
+                baseline_margin = (
+                    abs(target_leading_sum - value) - allowance
+                )
+                slope = 18 if value > target_leading_sum else 12
+                nonexceptional_thresholds.append(
+                    Fraction(baseline_margin, slope)
+                )
+            coefficient_rows.append({
+                "secant_offset": secant_offset,
+                "covering_line_count": line_count,
+                "coefficient_sums": coefficient_sums,
+                "leading_discrepancy_allowance": allowance,
+                "moment_survivors": row_survivors,
+            })
+    if survivors != [(-1, 5, 5), (0, 4, 4)]:
+        raise AssertionError("the bounded-repair coefficient table changed")
+    if min(nonexceptional_thresholds) != Fraction(1, 18):
+        raise AssertionError("the linear-gap coefficient margin changed")
+
+    four_line_checks = []
+    for q in (27, 81, 243, 729):
+        lower = 2 * q * q - 24 * q + 54
+        upper = 21 * q
+        if lower <= upper:
+            raise AssertionError("the four-line transversal bounds do not separate")
+        four_line_checks.append({"field_order": q, "lower": lower, "upper": upper})
+
+    output.write_text(json.dumps({
+        "schema": "c949-exact-target-structural-arithmetic-audit-v2",
+        "scope": (
+            "arithmetic replay only; the structural nonexistence proof and "
+            "Szőnyi--Weiner input remain human-proof dependencies"
+        ),
+        "field_checks": field_records,
+        "bounded_repair_coefficient_rows": coefficient_rows,
+        "bounded_repair_moment_survivors": [list(row) for row in survivors],
+        "linear_gap_open_endpoint": str(min(nonexceptional_thresholds)),
+        "nonexceptional_coefficient_margin_for_c_below_endpoint": "1-18c",
+        "all_positive_capacity_margins": ["1-5c", "2/3-5c"],
+        "four_line_transversal_checks": four_line_checks,
+        "checked": True,
+    }, indent=2, sort_keys=True) + "\n")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     subparsers = parser.add_subparsers(dest="command", required=True)
@@ -3000,6 +3144,8 @@ def main() -> None:
     hull_mechanism = subparsers.add_parser("frobenius-hull-mechanism-audit")
     hull_mechanism.add_argument("--frobenius-audit", type=Path, required=True)
     hull_mechanism.add_argument("--output", type=Path, required=True)
+    exact_target = subparsers.add_parser("exact-target-obstruction-audit")
+    exact_target.add_argument("--output", type=Path, required=True)
     structure = subparsers.add_parser("analyze-blocking-certificate")
     structure.add_argument("--certificate", type=Path, required=True)
     structure.add_argument("--output", type=Path, required=True)
@@ -3065,6 +3211,8 @@ def main() -> None:
         audit_degree_defect(args.q9_construction, args.frobenius_audit, args.output)
     elif args.command == "frobenius-hull-mechanism-audit":
         audit_frobenius_hull_mechanism(args.frobenius_audit, args.output)
+    elif args.command == "exact-target-obstruction-audit":
+        audit_exact_target_obstruction(args.output)
     elif args.command == "analyze-blocking-certificate":
         analyze_blocking_certificate(args.certificate, args.output)
     elif args.command == "analyze-unital-mechanism":
