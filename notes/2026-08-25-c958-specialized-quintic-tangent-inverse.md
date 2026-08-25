@@ -53,6 +53,14 @@ different prime `1000033` it checks two hundred points of each composite:
 E -> y -> E,  y -> E -> y.
 ```
 
+A second independent implementation in Rust removes sampling from the first
+of those composites.  It clears the Cramer and Cox denominators structurally,
+constructs the five tangent coordinates as sparse four-variable polynomials,
+homogenizes the retained quintics, and checks every coefficient of
+`N_j(rho)-E_j D(rho)`.  Over `1000033` all four residual polynomials vanish;
+the cleared common denominator is nonzero and has `124666` terms.  The release
+replay takes about sixteen seconds on the development host.
+
 Primary replay:
 
 ```bash
@@ -69,6 +77,14 @@ python3 notes/2026-08-25-c958-type-i1-tangent-inverse-check.py \
 sha256sum -c notes/2026-08-25-c958-type-i1-tangent-inverse.sha256
 ```
 
+Exact finite-field polynomial replay:
+
+```bash
+cargo run --release --manifest-path rust/Cargo.toml \
+  --example c958_tangent_polynomial_check -- \
+  notes/2026-08-25-c958-type-i1-tangent-inverse.json
+```
+
 ## Trust boundary
 
 No characteristic-zero rational-function identity is claimed yet.  Two exact
@@ -79,9 +95,11 @@ and were stopped.  Their unfinished scripts and outputs are not retained.
 
 Accordingly, this bundle certifies the exact coefficient construction,
 minimal-degree modular obstruction, rational holdouts, and independent
-two-sided finite-field checks.  It does **not** certify a symbolic
-characteristic-zero composite, uniform formulas over `Q(a,b)`, a ground-field
-map `Z/T3 <-> P4`, the cubic-product maps, or type `I3`.
+two-sided finite-field checks.  It also certifies the full forward-then-inverse
+polynomial identity over the independent prime `1000033`, rather than merely
+at sampled points.  It does **not** certify a symbolic characteristic-zero
+composite, uniform formulas over `Q(a,b)`, a ground-field map `Z/T3 <-> P4`,
+the cubic-product maps, or type `I3`.
 
 ## EJ + TT closeout
 
@@ -107,7 +125,7 @@ ground orbit-trace basis.
 |---|---|---|
 | Why is the inverse degree exactly five? | established at one modular specialization, unexplained geometrically | a divisor-class or inverse-linear-system calculation should predict the quintic degree uniformly |
 | Why do all four coordinates share a 55-term denominator? | exact in the rational lift | identify the denominator as the exceptional or Jacobian divisor of the tangent chart |
-| Are the displayed rational formulas identities in characteristic zero? | open exact gate | localized ideal reduction or another bounded sparse proof is required; holdouts are not promoted to proof |
+| Are the displayed rational formulas identities in characteristic zero? | open exact gate | the exact polynomial identity now holds modulo `1000033`, but localized ideal reduction over the integers or rationals is still required |
 | Do the quintics persist over `Q(a,b)`? | open, next | reconstruct or derive the uniform coefficient functions, then prove both composites |
 | Does this complete `Z/T3 <-> P4` or `X_1 x P2`? | no | ground descent, uniformity, and final function-field composition remain |
 

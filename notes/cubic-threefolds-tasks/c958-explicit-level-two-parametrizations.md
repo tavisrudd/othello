@@ -157,11 +157,14 @@ candidate.  Complete modular searches rule out degrees one through four and
 give a unique relation in degree five; exact rational lifting yields sparse
 integer formulas, and an independent stdlib checker verifies both composites
 at two hundred fresh points over a second prime.  Thirty exact rational
-holdouts per coordinate pass as well.  This is strong coefficient-level
-evidence, not yet a characteristic-zero identity: direct expansion exceeded
-the bounded CPU and memory cutoffs.  The next exact gate is localized ideal
-reduction of the four graph equations, followed by reconstruction over
-`Q(a,b)` and ground specialization.  Report and replay:
+holdouts per coordinate pass as well.  A sparse Rust checker additionally
+clears all forward denominators and proves the entire forward-then-inverse
+polynomial identity coefficientwise over that second prime in about sixteen
+seconds.  This is strong coefficient-level evidence, not yet a
+characteristic-zero identity: direct integer expansion exceeded the bounded
+CPU and memory cutoffs.  The next exact gate is localized ideal reduction of
+the four graph equations over `Q`, followed by reconstruction over `Q(a,b)`
+and ground specialization.  Report and replay:
 `notes/2026-08-25-c958-specialized-quintic-tangent-inverse.md` and its adjacent
 bundle.
 
