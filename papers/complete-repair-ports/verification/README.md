@@ -2,14 +2,14 @@
 
 The manuscript has two independently inspectable verification layers.
 
-The paper-local Lean 4 package in `lean/`, built against a pinned Mathlib
+The paper-owned Lean companion in `lean/`, built with Lean 4 against a pinned Mathlib
 revision, proves the exact sequence attached
 to the target/helper split. Its reviewer interface contains four terminals,
 and its kernel axiom audit reports exactly `Classical.choice`, `Quot.sound`,
 and `propext`. The claim map in `lean/verification/claims.json` records one
-Lean-complete manuscript statement and twenty statements with no Lean
-coverage. In particular, the relative-weight identity and concatenation
-theorems have human proofs only.
+Lean-complete manuscript statement and twenty-one statements with no Lean
+coverage. In particular, the relative-weight identity, exact prescribed-coset
+transfer theorem, and its confinement specializations have human proofs only.
 
 The source-only annotation check is
 
@@ -24,7 +24,7 @@ reference resolves, that each detached proof names exactly one statement with
 expected-axiom inventory covers the same four terminals. This mode does not
 invoke Lean.
 
-The standalone Lean package can be rebuilt from `lean/` using the pinned
+The standalone Lean companion can be rebuilt from `lean/` using the pinned
 toolchain and Mathlib revision described in `lean/README.md`. Its axiom-audit
 module is part of that build.
 

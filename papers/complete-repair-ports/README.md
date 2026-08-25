@@ -15,8 +15,11 @@ only on the inner code and the target/helper split, not on a generator-row
 basis. The paper proves
 that the `t`th relative generalized Hamming weight `M_t(D_P,K_P)` is the exact
 minimum helper-union size for recovering `t` independent target combinations.
-For any outer code with at least two blocks and `d(O⊥) > r+1`, the exact
-confinement condition after that outer-distance gate is
+For any nonzero target-message subspace and any outer block with nonzero
+coordinate projection, the exact finite nonconfinement cost is an optimization
+of prescribed-coset support costs over the complete outer functional dual. For
+any outer code with at least two blocks and `d(O⊥) > r+1`, this criterion
+reduces to
 
 ```text
 r < M_t(D_P,K_P) + d(I⊥).
@@ -27,9 +30,8 @@ recovery equation and its exact helper support. For outer families whose dual
 distance tends to infinity, the finite outer gate is automatic for all
 sufficiently large lengths at each fixed `r`.
 
-For one target coordinate in a block with nonzero outer projection, a second
-theorem retains every nonzero outer functional and gives the exact finite-length
-criterion without the distance gate. Target-constrained inner coset weights can certify transfer when ordinary
+For one target coordinate, the general theorem becomes the scalar
+target-constrained coset-weight formula. It can certify transfer when ordinary
 outer support distance cannot; a construction using a Singer cycle and
 `[k+1,k,2]_q` inner codes gives explicit examples.
 
@@ -44,9 +46,10 @@ outer support distance cannot; a construction using a Singer cycle and
 - Suitable outer families copy the normalized equations onto coordinate
   classes of positive density while retaining positive rate and relative
   distance.
-- Once the finite outer-dual-distance gate holds, exact support transfer
-  preserves bounded service-rate regions; outer families with growing dual
-  distance satisfy the gate eventually.
+- Whenever the exact prescribed-coset threshold holds for each demand, support
+  transfer preserves bounded service-rate regions. The outer-dual-distance
+  gate is a sufficient condition and holds eventually in families with growing
+  dual distance.
 - Two systems can have identical complete relative-weight hierarchies but
   different bounded repair reliabilities.
 - Different ambient inner-dual realizations of the same abstract nested pair
@@ -66,23 +69,24 @@ changes, convention shifts, and evidence-boundary claims.
 ## Proof and evidence boundary
 
 The manuscript contains human proofs of the complete theorem chain. The
-paper-local Lean 4 package in [`lean/`](lean/), built against a pinned Mathlib
-revision, kernel-checks the exact sequence
+paper-owned Lean companion in [`lean/`](lean/), built with Lean 4 against a
+pinned Mathlib revision, kernel-checks the exact sequence
 
 ```text
 0 → K_P → D_P → W_P → 0
 ```
 
 for the associated nested code pair. Its reviewer terminals report only
-`Classical.choice`, `Quot.sound`, and `propext`. The RGHW identity,
-concatenation-confinement theorem, applications, and separations are explicitly
+`Classical.choice`, `Quot.sound`, and `propext`. The RGHW identity, exact
+prescribed-coset transfer theorem, its confinement specializations,
+applications, and separations are explicitly
 classified as human-only in [`lean/verification/claims.json`](lean/verification/claims.json).
 No coding-theory result is introduced as a Lean axiom.
 
 Each theorem-like environment also carries a typographically empty
 machine-readable annotation from [`formal-annotations.tex`](formal-annotations.tex).
 The annotations mark the exact sequence as Lean-complete and mark every
-stronger theorem as absent from the formal package; they do not alter the
+stronger theorem as absent from the formal companion; they do not alter the
 rendered manuscript. Detached proofs identify the statement they prove, so
 their dependency annotations are checked at claim level.
 
@@ -100,7 +104,7 @@ make check
 
 performs a clean deterministic rebuild, checks the tracked PDF and metadata,
 rejects TeX warnings and private-path leakage, and validates the declared
-evidence boundary. The standalone formal package has its own pinned build and
+evidence boundary. The standalone formal companion has its own pinned build and
 axiom-audit instructions in [`lean/README.md`](lean/README.md).
 
 ## Files

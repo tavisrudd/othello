@@ -1,7 +1,7 @@
 # Lean companion to *Exact Transfer of Bounded Linear Recovery and Relative Weight Hierarchies*
 
-This paper-owned Lean 4 package is the formal companion. It depends on a
-pinned Mathlib revision. Its reviewer-facing entry point is
+This paper-owned formal companion uses Lean 4 with a pinned Mathlib revision.
+Its reviewer-facing entry point is
 
 ```text
 TavisRuddFiniteGeom.Papers.RecoveryStructures.PaperInterface
@@ -15,8 +15,9 @@ TavisRuddFiniteGeom.Papers.RecoveryStructures.Verification.AxiomAudit
 
 The package proves the linear-algebraic construction of the nested helper-code
 pair associated with target and helper generator maps. The relative generalized
-Hamming-weight identification, the concatenation-confinement theorem, and the
-asymptotic realization theorem are not formalized in this package and are
+Hamming-weight identification, the exact prescribed-coset transfer theorem,
+its confinement specializations, and the asymptotic realization theorem are
+not formalized in this companion and are
 classified as absent in the claim map. No literature theorem is declared as a
 Lean axiom.
 
@@ -26,7 +27,7 @@ The source and annotation boundary can be checked without invoking Lean:
 python3 verification/check_formal_artifact.py --source-only
 ```
 
-To rebuild the package with its pinned Lean and Mathlib revisions, enter the
+To rebuild the companion with its pinned Lean and Mathlib revisions, enter the
 Nix development shell and build the two library targets:
 
 ```text

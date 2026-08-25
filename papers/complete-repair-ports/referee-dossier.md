@@ -7,9 +7,11 @@ It contains no score, venue recommendation, or overall quality judgment.
 
 For the associated nested pair `K_P <= D_P`, the `t`th relative generalized
 Hamming weight is the minimum helper-union cost for recovering a
-`t`-dimensional target message subspace. For a fixed outer code with at least
-two blocks and `d(O^perp)>r+1`, every radius-`r` system at that recovered
-dimension is confined exactly when
+`t`-dimensional target message subspace. For a target block with nonzero outer
+projection, minimizing prescribed-coset support costs over linear maps into
+the complete outer functional dual gives the exact finite first nonconfined
+cost. For a fixed outer code with at least two blocks and
+`d(O^perp)>r+1`, this criterion reduces to
 
 ```text
 r < M_t(D_P,K_P) + d(I^perp).
@@ -25,14 +27,17 @@ growth makes the finite outer gate automatic at fixed radius.
    message dimension?
 2. Does the complement argument prove equality with the standard RGHW rather
    than a restricted variant?
-3. Does the block-functional proof retain the nonzero outer-functional branch
+3. Do the prescribed-coset costs minimize union support of a whole linear
+   image, rather than separate supports of chosen basis vectors?
+4. Is the target normalization minimized jointly with the target helper map?
+5. Does the block-functional proof retain every nonzero outer-functional map
    until the explicit finite outer gate removes it?
-4. Is the block-support bound `r+1`, including the target block, stated and
-   used?
-5. Does necessity construct a nonconfined system at the exact additive cost?
-6. Is the finite gate stated before the equivalence, with the eventual family
+6. Is the target-block projection hypothesis used to identify nonzero
+   functional sectors with nonconfinement?
+7. Does necessity construct a nonconfined system at the exact additive cost?
+8. Is the finite gate stated before the RGHW equivalence, with the eventual family
    form only as its consequence?
-7. Does the singleton reduction account for the target coordinate?
+9. Does the singleton reduction account for the target coordinate?
 
 ## Questions for consequences
 
@@ -78,7 +83,7 @@ growth makes the finite outer gate automatic at fixed radius.
 
 ## Evidence questions
 
-- The paper-local Lean package proves the exact sequence only. Verify that the
+- The paper-owned Lean companion proves the exact sequence only. Verify that the
   manuscript never promotes this to formal verification of the RGHW or
   confinement theorem.
 - The reviewer terminals should report only `Classical.choice`, `Quot.sound`,

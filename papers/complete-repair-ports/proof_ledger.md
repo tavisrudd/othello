@@ -27,7 +27,7 @@ quantifier changes, circularity, and evidence overstatement.
 
 `K_P = ker G_J`, `D_P = G_J^{-1}(im G_P)`, and
 `W_P = im G_P intersect im G_J`. Restricting `G_J` gives kernel `K_P`, image
-`W_P`, and a surjection. This row is checked in the paper-local Lean package.
+`W_P`, and a surjection. This row is checked in the paper-owned Lean companion.
 
 Since `I^perp = ker(G_P | G_J)`, projection onto the helper coordinates gives
 `D_P = punct_J(I^perp)`, while the words supported on the helpers give
@@ -55,22 +55,40 @@ vector-space complement to that intersection has quotient dimension `t` and
 no larger support. Hence the complement-only minimum is equal to, not smaller
 than, the standard RGHW.
 
+### Exact finite prescribed-coset formula
+
+For a fixed recovered subspace `T`, the ordinary inner quantity minimizes the
+union support of a linear lift `Y : T -> F_q^E` of one prescribed map
+`B : T -> L*`. The target-block quantity minimizes jointly over the target
+normalization `alpha` and helper map `beta`; fixing `alpha` would not recover
+`rho_T(I)` in general. After a basis of `T` is chosen, the ordinary quantity is
+the fixed-instance joint coset-support cost underlying generalized covering
+radii. No per-vector or per-basis support sum is used.
+
+A concatenated recovery system gives one linear map
+`B : T -> FD(O)`. Conversely, compatible linear lifts of its block maps give a
+linear recovery system. Since block coordinate sets are disjoint, the minimum
+helper union for fixed `B` is the sum of the blockwise joint support minima.
+Surjectivity of the target-block projection excludes a nonzero
+functional-dual tuple supported only in that block; therefore every nonzero
+`B` sector is nonconfined.
+
+For `B=0`, every block map lands in `I^perp`. The target block costs
+`rho_T(I)`. A nonzero external map costs at least `d(I^perp)`, with equality
+from a rank-one map into a minimum-weight inner-dual word. These sectors are
+exhaustive and all minima are attained because the spaces are finite. Thus the
+displayed `Gamma_{j,T}` is the exact first nonconfined helper cost. Minimizing
+over `dim T=t` proves the uniform ranked statement.
+
 ### Fixed-subspace confinement
 
-For each concatenated dual equation, the block-functional tuple belongs to
-the functional dual of the outer code. Trace nondegeneracy and outer
-`L`-linearity identifies its block support distance with `d(O^perp)`. A
-cost-`<= r` system meets at most `r+1` blocks, including the target block.
-Therefore the finite gate `d(O^perp)>r+1` removes every nonzero
-block-functional tuple. Outer dual-distance growth makes this automatic
+For nonzero `B`, choose one target vector on which `B` is nonzero. Its
+functional-dual tuple has at least `d(O^perp)` nonzero blocks, hence at least
+`d(O^perp)-1` nonzero helper blocks outside the target. The finite gate
+`d(O^perp)>r+1` therefore removes every nonzero functional sector at radius
+`r`. The exact formula reduces to its zero-functional cost
+`rho_T(I)+d(I^perp)`. Outer dual-distance growth makes this automatic
 uniformly for fixed `r`.
-
-In the remaining zero-functional case, the target block costs at least
-`rho_T(I)`. Any nonzero external block contains a nonzero inner-dual word and
-costs at least `d(I^perp)`. Blocks are disjoint. A minimum inner system plus a
-rank-one map into a minimum inner-dual word in a second block attains the sum.
-This proves both directions under the stated finite outer gate; the eventual
-family statement is a direct consequence.
 
 ### Dimension-by-dimension confinement
 

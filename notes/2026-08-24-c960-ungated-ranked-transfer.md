@@ -3,7 +3,8 @@
 **Lane**: `complete-ports`
 
 **Date**: 2026-08-24
-**Status**: active; theorem proved, priority audit in progress, no manuscript change yet
+**Status**: active; theorem and priority audit passed, manuscript integration and deterministic
+22-page authority gate passed, independent closeout pending
 
 ## Question
 
@@ -19,8 +20,7 @@ Let the represented inner code have coordinate split (E=P\sqcup J), let
  \Phi_I:\mathbb F_q^E\longrightarrow L^*
 \]
 
-be the inner functional map, and let (0\ne T\le W_P=\operatorname{im}G_P\cap
-\operatorname{im}G_J).
+be the inner functional map, and let (0\ne T\le U_P=\operatorname{im}G_P).
 
 For (B\in\operatorname{Hom}_{\mathbb F_q}(T,L^*)), define the ordinary and target-constrained
 minimum-support lifting functions
@@ -54,6 +54,9 @@ over the target normalization as well as the helper coefficients. In particular,
 \]
 
 the least helper-union size of an internal normalized recovery system for (T).
+It is (+\infty) when (T\not\le W_P). Thus the exact finite formula also
+covers a target subspace that has no inner recovery system but may acquire one
+through a nonzero outer-functional sector.
 
 Let (O\le L^N) be an (L)-linear outer code, fix block (j), and assume the coordinate projection
 (O\to L) at (j) is nonzero, hence surjective. Put
@@ -228,6 +231,8 @@ It should not be described as a general lower bound on the ungated obstruction.
   subspace. Summing per-vector or per-basis minima would be invalid and is not used.
 - The target normalization map is minimized together with the target-block helper map. Fixing one
   section would define a legitimate finer cost but would not equal \(\rho_T(I)\) in general.
+- Internal recoverability is not assumed in the exact finite theorem. It enters only when the
+  uniform rank-(t) RGHW specialization minimizes over (T\le W_P).
 - Blockwise additivity is legitimate only because distinct inner blocks have disjoint coordinate
   sets. No within-block support additivity is asserted.
 - The target projection hypothesis is essential for identifying a nonzero functional sector with
@@ -346,6 +351,37 @@ description “minimum union support of prescribed cosets,” cite generalized c
 avoid introducing a branded fiber metric. The arbitrary-rank formula becomes the principal exact
 finite theorem; the outer-distance RGHW theorem and the pointed weighted theorem become transparent
 specializations.
+
+## Applied manuscript changes
+
+- Section 4 now defines the ordinary and target-constrained joint coset-support costs and proves
+  `thm:ungated-ranked-confinement` for every nonzero target-message subspace. Internal
+  recoverability is required only for the RGHW minimization over (T\le W_P).
+- `thm:objectwise-confinement` and `thm:ranked-confinement` are derived from the exact finite
+  formula after the outer-distance gate. The gate proof uses one vector (u\in T) on which the
+  outer-functional map is nonzero and counts at least (d(O^\perp)-1) nonzero helper blocks.
+- `thm:weighted-pointed-confinement` is the one-coordinate specialization. Its direct block-fiber
+  argument remains in the proof to cover a zero target column, while a nonzero target column gives
+  (Z_{j,x}=\Gamma_{j,T}+1).
+- The bounded service-rate corollary now assumes the exact demandwise inequalities
+  (r<\Gamma_{j,T_a}). The former outer-distance and inner inequalities remain a sufficient
+  specialization and the route to the eventual-family statement.
+- The abstract, introduction, main theorem, conclusion, README, metadata, theorem map, proof
+  ledger, referee guide, referee dossier, verification prose, and claim manifest now present one
+  exact finite theorem with the RGHW and scalar formulas as specializations.
+- Zhang--Yaakobi--Etzion--Schwartz and Elimelech--Firer--Schwartz are cited for generalized coset
+  weights and generalized covering radii. No new branded metric terminology was introduced.
+- The information-loss diagram is stated as normalized recovery systems to exact helper supports
+  to relative-weight minima. The text distinguishes this support hierarchy from the additional
+  realization data needed by the finite concatenation formula.
+
+## Validation so far
+
+- source-only formal-boundary check: PASS, 22 claims, four reviewer terminals, no axiom audit run;
+- deterministic `make update-pdf`: PASS, 22 pages, warning-free, 22 claims, four Lean terminals;
+- visual inspection of the new theorem and specialization on rendered pages 8--10: PASS;
+- `git diff --check`: PASS;
+- no Lean source, theorem, terminal, toolchain pin, or expected-axiom file changed.
 
 ## Mystery ledger
 

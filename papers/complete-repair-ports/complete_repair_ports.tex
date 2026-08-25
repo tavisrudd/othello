@@ -50,28 +50,28 @@
 \begin{abstract}
 Let $I\leq\mathbb F_q^E$, let $P\subseteq E$ be a target set, and put
 $J=E\setminus P$.  Shortening and puncturing $I^\perp$ onto $J$ give a
-nested pair $K_P\subseteq D_P\leq\mathbb F_q^J$.  Its relative generalized Hamming
-weight $M_t(D_P,K_P)$ is the minimum helper union recovering $t$
-independent target combinations.  We prove two exact transfer theorems.
-First, for an $L$-linear outer code $O\leq L^N$ with $N\geq2$ and
-$d(O^\perp)>r+1$, every such cost-$\leq r$ system is confined to its inner
-block exactly when
+nested pair $K_P\subseteq D_P\leq\mathbb F_q^J$.  Its relative generalized
+Hamming weight $M_t(D_P,K_P)$ is the minimum helper union recovering $t$
+independent target combinations.  For a fixed nonzero target-message
+subspace and an outer block with nonzero coordinate projection, we express
+the exact least helper union of a nonconfined recovery system as an
+optimization of prescribed-coset support costs over the complete outer
+functional dual.  This theorem is finite length and requires no
+outer-distance gate.  If $O\leq L^N$ is $L$-linear, $N\geq2$, and
+$d(O^\perp)>r+1$, its criterion reduces in recovered dimension $t$ to
 \[
  r<M_t(D_P,K_P)+d(I^\perp).
 \]
-Below it, zero-extension preserves normalized equations and exact supports.
-Second, for one target coordinate in a block onto which $O$ projects
-nontrivially, target-constrained inner coset weights and the functional dual
-of $O$ give the exact finite nonconfinement cost without an outer-distance
-hypothesis.  A single-parity-check family
-transfers beyond the ordinary outer support-distance gate.
+Below either exact threshold, zero-extension preserves normalized equations
+and exact supports.  The one-coordinate specialization recovers the weighted
+coset formula, and a single-parity-check family transfers beyond the ordinary
+outer support-distance gate.
 
 Positive-density and bounded service-rate transfer follow.  Equal
-relative-weight hierarchies need not determine
-bounded repair reliability, and ambient inner-dual realizations of one nested
-pair can have different confinement thresholds.  A projective-simplex family gives a
-non-MDS hierarchy and projective-rank reliability.  The criterion
-$r+1<z_x(I)$ is the rank-one zero-functional case.
+relative-weight hierarchies need not determine bounded repair reliability,
+and ambient inner-dual realizations of one nested pair can have different
+confinement thresholds.  A projective-simplex family gives a non-MDS
+hierarchy and projective-rank reliability.
 \end{abstract}
 
 \section{Introduction}
@@ -98,11 +98,13 @@ In particular, Kurihara, Uyematsu, and Matsumoto characterize exact
 information and reconstruction thresholds of linear secret-sharing schemes by
 RDLPs and RGHWs.  Our recovery-cost identity is this standard nested-code
 support invariant specialized to the puncturing--shortening pair induced by a
-target/helper split.  The paper's principal results begin with concatenation:
-after the outer-dual-distance gate, each relative weight acquires the same
-additive inner-dual obstruction and every bounded normalized equation transfers,
-not only its numerical cost.  At one target coordinate a finer weighted theorem
-removes the gate and gives the exact finite-length obstruction.
+target/helper split.  The paper's principal result begins with concatenation.
+For every recovered target subspace, the exact finite obstruction is an
+optimization of joint coset-support costs over the complete outer functional
+dual.  The ordinary outer-dual-distance gate removes all nonzero-functional
+terms, leaving the relative weight plus one additive inner-dual obstruction.
+At one target coordinate the same formula becomes the pointed weighted
+coset-leader theorem.
 
 Let $q$ be a prime power.  Let $I\leq\F_q^E$ have a full-row-rank generator matrix
 $G=(G_P\mid G_J)$, where $P$ is the target set and $J=E\setminus P$.  Put
@@ -131,10 +133,10 @@ of erased coordinate positions.  Recovering all values on $P$ is the special
 case $U_P\subseteq\operatorname{im}G_J$ and $t=\dim U_P$; dependent target
 columns may make this dimension smaller than $|P|$.
 
-\begin{theorem}[Main theorem: ranked transfer after the outer-distance gate]
+\begin{theorem}[Main theorem: exact finite transfer and its RGHW specialization]
 \label{thm:main}
 \coverage{absent}%
-\uses{thm:relative-weight-recovery, thm:ranked-confinement}%
+\uses{thm:relative-weight-recovery, thm:ungated-ranked-confinement, thm:ranked-confinement}%
 Let $\ell=\dim W_P\geq1$ and $1\leq t\leq\ell$.  The minimum cardinality of
 the union of helpers in a system recovering a $t$-dimensional subspace of
 $W_P$ is
@@ -142,11 +144,15 @@ $W_P$ is
  \mu_t(P)=M_t(D_P,K_P).
 \]
 Let $I$ be used as the represented inner code in a concatenation with an
-$L$-linear outer code $O\leq L^N$, where $L$ is the message space of $I$.
-For every nonnegative integer $r$, if $N\geq2$ and
-$d(O^\perp)>r+1$, then the concatenation confines every recovery system using
-at most $r$ helpers for every internally recoverable $t$-dimensional target
-subspace to its target inner block if and only if
+$L$-linear outer code $O\leq L^N$, where $L$ is the message space of $I$,
+and fix a block onto which $O$ projects nontrivially.  The quantity
+$\Gamma_{j,t}(O,I)$ in~\eqref{eq:ranked-weighted-cost}, obtained by minimizing
+the joint support of compatible inner coset representatives over the complete
+outer functional dual, is exactly the first nonconfined helper cost in
+recovered dimension $t$.  Hence confinement through radius $r$ holds exactly
+when $r<\Gamma_{j,t}(O,I)$.
+
+If in addition $N\geq2$ and $d(O^\perp)>r+1$, this exact criterion reduces to
 \[
  r<M_t(D_P,K_P)+d(I^\perp).
 \]
@@ -160,20 +166,15 @@ fixed $r$.
 The first assertion is the recovery-language specialization of the standard
 nested-code invariant: a recovery system identifies with a subspace
 $A\leq D_P$ disjoint from $K_P$.  Passing between this form and the standard
-definition of $M_t(D_P,K_P)$ uses a complement to $A\cap K_P$.  The second
-assertion combines that identity with a fixed-demand dual decomposition: a
-nonconfined recovery system consists of its least inner realization together
-with a nonzero inner-dual perturbation in another block.  The finite outer
-gate removes every nonzero outer-functional alternative; dual-distance growth
-makes that gate automatic at fixed radius.
-
-Section~\ref{sec:confinement} also retains the nonzero-functional sector in
-rank one.  Target-constrained inner coset weights then give the exact finite
-minimum for every outer code whose projection onto the target block is
-nonzero, including cases where ordinary outer support distance does not decide
-transfer.  These are two distinct levels of
-exactness: arbitrary recovered dimension after the outer-distance gate, and
-fully weighted finite-length exactness at one coordinate.
+definition of $M_t(D_P,K_P)$ uses a complement to $A\cap K_P$.  The finite
+transfer formula then separates the concatenated dual by its outer functional
+tuple and minimizes the joint support of all compatible inner representatives.
+Its zero-functional sector is the least inner recovery system together with a
+minimum inner-dual perturbation in another block.  The outer-distance gate
+excludes every other sector at radius $r$; dual-distance growth makes that gate
+automatic at fixed radius.  For one target coordinate, the general joint
+support minimum is the scalar weighted coset formula of
+Section~\ref{sec:confinement}.
 
 The same bijection yields the later transfer results.  It preserves every
 block-local statistic determined by normalized recovery systems of cost at
@@ -207,8 +208,8 @@ properties \cite{LiuEtAl2022,JinFu2026}.  Jin and Fu fix a binary $[3,2,2]$
 inner code and choose $\F_4$ outer codes to obtain parameter-optimal binary
 locality-two codes.  Here the inner code and target split are arbitrary, and the
 question is the exact obstruction to preserving every bounded dual recovery
-equation: weighted and ungated in rank one, or rank-stratified after the
-outer-distance gate.  We make no minimum-bandwidth claim.
+equation.  The finite formula is rank-stratified and ungated; the RGHW formula
+is its outer-distance specialization.  We make no minimum-bandwidth claim.
 
 \input{sections/01-complete-ports}
 \input{sections/02-confinement-transfer}

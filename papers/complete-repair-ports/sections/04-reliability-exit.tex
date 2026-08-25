@@ -195,7 +195,8 @@ only the inclusion-minimal recovery sets, whereas the theorem transfers all
 normalized coefficients as well.
 
 Fix one inner target block with helper set $J$.  Let $\mathcal A$ be a finite
-set of demands on that block, and let
+set of demands on that block, with demand $a$ represented by a nonzero target
+subspace $T_a\leq U_P$, and let
 $\mathcal M_a^{(\leq r)}$ be the inclusion-minimal exact helper supports of
 size at most $r$ for $a\in\mathcal A$.  For a nonnegative helper-capacity
 vector $c$, define
@@ -214,26 +215,31 @@ This is the bounded service-rate region of the recovery-set system
 \begin{corollary}[Transfer of bounded service-rate regions]
 \label{cor:service-rate-transfer}
 \coverage{absent}%
-Let $O\leq L^N$ be an outer code with $d(O^\perp)>r+1$.  Suppose the radius
-$r$ lies below the inner confinement threshold for every demand in
-$\mathcal A$.  Transport capacities from the inner helper set to its copy in
-a target block of $O\circ I$.  Then the inner and concatenated bounded
-service-rate regions are equal.  Capacities assigned outside the target block
-do not change this equality.  Consequently, for an outer family with
-$d(O_N^\perp)\to\infty$, the equality holds for all sufficiently large $N$.
+Let $O\leq L^N$ be an outer code whose projection onto the target block is
+nonzero.  Suppose
+\[
+ r<\Gamma_{j,T_a}(O,I)
+ \qquad(a\in\mathcal A).
+\]
+Transport capacities from the inner helper set to its copy in that block of
+$O\circ I$.  Then the inner and concatenated bounded service-rate regions are
+equal.  Capacities assigned outside the target block do not change this
+equality.  In particular, the hypothesis follows from
+$d(O^\perp)>r+1$ and the corresponding inner inequalities.  Consequently,
+for an outer family with $d(O_N^\perp)\to\infty$, the equality holds for all
+sufficiently large $N$ whenever those inner inequalities hold.
 \end{corollary}
 
 \begin{proof}
-$d(O^\perp)>r+1$ excludes every nonzero outer-functional tuple in a
-cost-$\leq r$ system, and the inner threshold excludes the remaining
-zero-functional nonconfined systems.  Thus restriction and zero-extension
-copy every inclusion-minimal support and create no cross-block minimal
-support.  The helper bijection therefore transports the
+Theorem~\ref{thm:ungated-ranked-confinement} confines every cost-$\leq r$
+system for every demand.  Thus restriction and zero-extension copy every
+inclusion-minimal support and create no cross-block minimal support.  The
+helper bijection therefore transports the
 feasible variables $f_{a,R}$ and every capacity inequality in both
 directions.  Allowing the full upward-closed recovery-set family gives the
 same region: flow assigned to a nonminimal set can be moved to a contained
 minimal set and weakly decreases every helper load.  Thus cross-block
 supersets and capacities outside the target block are irrelevant.
-\uses{thm:objectwise-confinement, thm:ranked-confinement}%
+\uses{thm:ungated-ranked-confinement, thm:objectwise-confinement}%
 \proves{cor:service-rate-transfer}%
 \end{proof}

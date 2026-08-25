@@ -13,11 +13,14 @@ leave prescribed dimensions of target ambiguity.  Thus helper cost, erasure
 ambiguity, and rank reliability are different summaries of the recovered
 dimension as the surviving helper set varies.
 
-After the outer-distance gate, concatenation turns the relative-weight
-hierarchy into an additive hierarchy of exact confinement thresholds:
+The finite concatenation theorem minimizes prescribed-coset support costs over
+the complete outer functional dual.  Its zero-functional sector has cost
 \[
  M_t(D_P,K_P)+d(I^\perp).
 \]
+After the outer-distance gate, every nonzero-functional sector lies above the
+chosen radius, so this additive expression gives the exact confinement
+criterion.
 In sufficiently long concatenations whose outer dual distance grows, every
 bounded equation below the corresponding threshold remains in its inner block
 and zero-extension copies its coefficients and exact support.  This yields
@@ -25,13 +28,10 @@ positive-density realizations and eventually transfers any consequence that
 depends only on the copied minimal recovery sets, including bounded repair
 reliability and service-rate regions.
 
-At one target coordinate in a block with nonzero outer projection, retaining
-the nonzero functional-dual fibers removes that gate.  The target-constrained
-inner coset weights give the exact finite nonconfinement cost, and the
-Singer-cycle construction shows that this weighted criterion can certify transfer
-when ordinary outer support distance cannot.
-Thus the paper gives arbitrary-rank exactness after the block-distance gate
-and a finer ungated finite-length theorem in rank one.
+At one target coordinate, the same finite formula becomes the scalar
+target-constrained coset-weight formula.  The Singer-cycle construction shows
+that this specialization can certify transfer when ordinary outer support
+distance cannot.
 
 The two separations locate the remaining information.  Equal relative
 weights do not determine the stochastic law because they do not retain the
@@ -49,4 +49,6 @@ service-rate problem.  Bandwidth-aware repair for array codes allows each
 helper to transmit a subspace of functionals, so its cost is not Hamming
 support.  Neither extension follows by changing terminology in the present
 theorems; each requires a new confinement invariant adapted to its cost
-model.
+model.  A separate compositional question is whether the prescribed-coset
+support data admit a min-plus law under repeated concatenation; the nonzero
+and zero functional sectors must remain distinct in any such law.

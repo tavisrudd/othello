@@ -42,9 +42,10 @@ $\sum_jb_ja_j=0$.  Hence $(b_j)\in O^\perp$, and the converse is immediate.
 This identification preserves block support, so the support distance of
 $\operatorname{FD}(O)$ is $d(O^\perp)$.
 
-Fix a target block and a nonzero internally recoverable subspace
-$T\leq W_P$.  Let $\rho_T(I)$ be the minimum helper-union size of a
-normalized recovery system for $T$ in the inner code.  In a concatenation, a
+Fix a target block and a nonzero target-message subspace $T\leq U_P$.  Let
+$\rho_T(I)$ be the minimum helper-union size of a normalized recovery system
+for $T$ in the inner code, with value $\infty$ when no such system exists.
+Thus $\rho_T(I)<\infty$ exactly when $T\leq W_P$.  In a concatenation, a
 normalized system for $T$ means a linear family of dual equations whose
 target-block coefficient map $\alpha:T\to\F_q^P$ satisfies
 $G_P\alpha=\operatorname{id}_T$ under the fixed inner-message
@@ -55,11 +56,123 @@ $L$-linear coordinate image is either $0$ or $L$, and a zero image would put a
 weight-one word in $O^\perp$.  A system is \emph{confined} if every one of its
 equations is supported in the target block.
 
+For an $\F_q$-linear map $B:T\to L^*$, define
+\begin{equation}
+ \lambda_{I,T}(B)=
+ \min_{\substack{Y:T\to\F_q^E\ \mathrm{linear}\\
+                  \Phi_IY=B}}
+ |\supp Y(T)|.
+ \label{eq:ordinary-joint-coset-cost}
+\end{equation}
+For the target block, define
+\begin{equation}
+ \mu_{I,P,T}(B)=
+ \min_{\substack{\alpha:T\to\F_q^P,\ \beta:T\to\F_q^J\ \mathrm{linear}\\
+                  G_P\alpha=\operatorname{id}_T\\
+                  \Phi_I(\alpha,\beta)=B}}
+ |\supp\beta(T)|.
+ \label{eq:target-joint-coset-cost}
+\end{equation}
+An empty minimum is $\infty$.  After choosing a basis of $T$,
+\eqref{eq:ordinary-joint-coset-cost} is the minimum union support of
+representatives of prescribed cosets of $I^\perp$.  This is the fixed-instance
+quantity underlying generalized coset weights and generalized covering radii
+\cite{ZhangEtAl2019,ElimelechFirerSchwartz2021}.  The target version retains
+the normalization required by the recovery problem.  In particular,
+\begin{equation}
+ \mu_{I,P,T}(0)=\rho_T(I).
+ \label{eq:zero-target-joint-coset-cost}
+\end{equation}
+
+Let
+\[
+ \mathcal B_T(O)=
+ \operatorname{Hom}_{\F_q}\bigl(T,\operatorname{FD}(O)\bigr).
+\]
+For $B\in\mathcal B_T(O)$, write $B=(B_h)_{h=1}^N$ with
+$B_h:T\to L^*$.  Fix a target block $j$ whose coordinate projection
+$O\to L$ is nonzero, hence surjective, and put
+\begin{equation}
+ \begin{split}
+ \Gamma_{j,T}(O,I)=\min\Biggl\{&
+ \mu_{I,P,T}(0)+d(I^\perp),\\
+ &\min_{0\ne B\in\mathcal B_T(O)}
+ \left(
+ \mu_{I,P,T}(B_j)+
+ \sum_{h\ne j}\lambda_{I,T}(B_h)
+ \right)
+ \Biggr\}.
+ \end{split}
+ \label{eq:weighted-subspace-cost}
+\end{equation}
+
+\begin{theorem}[Exact finite confinement from prescribed coset supports]
+\label{thm:ungated-ranked-confinement}
+\coverage{absent}%
+Under the hypotheses above, $\Gamma_{j,T}(O,I)$ is the least helper-union
+size of a nonconfined normalized recovery system for $T$ in $O\circ I$.
+Thus every cost-$\leq r$ system for $T$ is confined if and only if
+\begin{equation}
+ r<\Gamma_{j,T}(O,I).
+ \label{eq:weighted-subspace-gate}
+\end{equation}
+For $1\leq t\leq\ell=\dim W_P$, set
+\begin{equation}
+ \Gamma_{j,t}(O,I)=
+ \min_{\substack{T\leq W_P\\\dim T=t}}\Gamma_{j,T}(O,I).
+ \label{eq:ranked-weighted-cost}
+\end{equation}
+Then every cost-$\leq r$ system for every internally recoverable
+$t$-dimensional target subspace is confined if and only if
+$r<\Gamma_{j,t}(O,I)$.  Below either threshold, restriction and zero-extension
+are inverse bijections on normalized systems and preserve exact helper
+supports.
+\end{theorem}
+
+\begin{proof}
+Write a recovery system as an $\F_q$-linear map
+$Y:T\to(O\circ I)^\perp$ and let $Y_h$ be its block maps.  By
+\eqref{eq:block-functional-dual},
+\[
+ B_h=\Phi_IY_h
+\]
+defines a linear map $B:T\to\operatorname{FD}(O)$.  Conversely, compatible
+linear lifts of the block maps of any such $B$ give a map into the
+concatenated dual.  At the target block, compatibility with the chosen target
+space is exactly the constraint in~\eqref{eq:target-joint-coset-cost}.
+
+Suppose first that $B\ne0$.  No nonzero element of
+$\operatorname{FD}(O)$ is supported only at $j$: testing such an element
+against outer words whose $j$th coordinate ranges over $L$ would force its
+$j$th functional to vanish.  Hence some block map $B_h$ with $h\ne j$ is
+nonzero, and every lift is nonconfined.  Distinct inner blocks have disjoint
+helper coordinates, so the minimum helper union for this fixed $B$ is
+\[
+ \mu_{I,P,T}(B_j)+
+ \sum_{h\ne j}\lambda_{I,T}(B_h).
+\]
+The block lifts can be chosen independently, so this lower bound is attained.
+
+If $B=0$, every block map takes values in $I^\perp=\ker\Phi_I$.  The target
+block costs $\rho_T(I)=\mu_{I,P,T}(0)$.  Nonconfinement requires a nonzero map
+$T\to I^\perp$ in another block.  Its image has union support at least
+$d(I^\perp)$, and equality is attained by $u\mapsto f(u)v$, where
+$0\ne f\in T^*$ and $v$ is a minimum-weight word of $I^\perp$.
+
+The zero and nonzero functional sectors are exhaustive, proving
+\eqref{eq:weighted-subspace-cost} and~\eqref{eq:weighted-subspace-gate}.
+Minimizing over $t$-dimensional $T$ proves the ranked statement.  Below the
+first nonconfined cost, restriction to block $j$ is inverse to zero-extension,
+with coefficients and supports unchanged.
+\proves{thm:ungated-ranked-confinement}%
+\end{proof}
+
 \begin{theorem}[Confinement for a fixed target subspace]
 \label{thm:objectwise-confinement}
 \coverage{absent}%
 Let $r$ be a nonnegative integer and let $O\leq L^N$ be an $L$-linear outer
-code with $N\geq2$ and $d(O^\perp)>r+1$.  Then $O\circ I$ confines every
+code with $N\geq2$ and $d(O^\perp)>r+1$, and assume $T\leq W_P$.  Then
+$O\circ I$ confines every
 normalized recovery system for $T$ of cost at most $r$ if and only if
 \begin{equation}
  r<\rho_T(I)+d(I^\perp).
@@ -73,30 +186,17 @@ fixed $r$.
 \end{theorem}
 
 \begin{proof}
-Apply~\eqref{eq:block-functional-dual} to every equation in a recovery
-system.  If one of the resulting functional tuples is nonzero, its block
-support has size at least $d(O^\perp)$.  A system with helper bound $r$
-can meet only a bounded number of blocks: every nonzero block outside the
-target block contains a helper, while the target block contributes at most
-one further block.  A cost-$\leq r$ system therefore meets at most $r+1$
-blocks.  Hence $d(O^\perp)>r+1$ excludes this case.
+If $0\ne B\in\mathcal B_T(O)$, choose $u\in T$ with $B(u)\ne0$.  The tuple
+$B(u)\in\operatorname{FD}(O)$ has at least $d(O^\perp)$ nonzero blocks.
+At most one is the target block, so every lift has at least
+$d(O^\perp)-1>r$ helpers outside it.  Thus no nonzero-functional sector in
+\eqref{eq:weighted-subspace-cost} occurs at cost at most $r$.
 
-Every remaining block component lies in $I^\perp$.  The target-block
-component is an inner recovery system for $T$, so its helper union has size
-at least $\rho_T(I)$.  If the system is not confined, some equation map in
-another block is nonzero.  Its image is a nonzero subspace of $I^\perp$ and
-therefore has union support at least $d(I^\perp)$.  Disjoint blocks make the
-two costs additive.  Every nonconfined system consequently costs at least
-$\rho_T(I)+d(I^\perp)$.
-
-This lower bound is attained.  Take a minimum inner system for $T$, a
-minimum-weight word $v\in I^\perp$, and a nonzero linear functional
-$\lambda:T\to\F_q$.  In a second block add the rank-one equation map
-$a\mapsto\lambda(a)v$.  Both block-functional images vanish, so the new
-system belongs to the concatenated dual; it is nonconfined and has the stated
-cost.  This proves both directions of~\eqref{eq:objectwise-confinement}.
-Below the bound every system is confined, and restriction to the target block
-is inverse to zero-extension.
+The zero-functional sector has exact cost
+$\mu_{I,P,T}(0)+d(I^\perp)=\rho_T(I)+d(I^\perp)$.  Theorem
+\ref{thm:ungated-ranked-confinement} now gives both directions of
+\eqref{eq:objectwise-confinement} and the support-preserving bijection.
+\uses{thm:ungated-ranked-confinement}%
 \proves{thm:objectwise-confinement}%
 \end{proof}
 
@@ -131,10 +231,9 @@ external rank-one perturbation in that proof give necessity.
 \proves{thm:ranked-confinement}%
 \end{proof}
 
-\subsection{An ungated finite formula for one target coordinate}
+\subsection{One-coordinate specialization}
 
-The block-functional decomposition also gives a fully weighted finite-length
-criterion in rank one.  For $\beta\in L^*$, put
+For $\beta\in L^*$, put
 \[
  \lambda_I(\beta)=\min_{\Phi_I(y)=\beta}\wt(y),
  \qquad
@@ -142,9 +241,9 @@ criterion in rank one.  For $\beta\in L^*$, put
  \min_{\substack{\Phi_I(y)=\beta\\y_x\neq0}}\wt(y),
 \]
 with value $\infty$ when a constrained fiber is empty.  The first quantity is
-the usual coset-leader weight for the inner encoder.  The second retains the
-target-coordinate constraint.  The functional-dual decomposition itself is
-classical concatenation machinery
+the usual coset-leader weight for the inner encoder, while the second retains
+the target-coordinate constraint.  The functional-dual decomposition itself
+is classical concatenation machinery
 \cite[Theorem~2.1]{ChenLingXing2005}.
 
 \begin{theorem}[Exact weighted finite-length confinement at one coordinate]
@@ -179,31 +278,30 @@ conditions hold, the inclusion-minimal recovery sets are copied as well.
 \end{theorem}
 
 \begin{proof}
-Write a concatenated dual word in blocks as $y=(y_h)_{h=1}^N$ and put
-$\beta_h=\Phi_I(y_h)$.  By~\eqref{eq:block-functional-dual}, the blocks lie
-in independent fibers indexed by one tuple
-$\beta\in\operatorname{FD}(O)$.  For fixed $\beta$, the least target-block
-weight subject to $y_j(x)\neq0$ is $\mu_{I,x}(\beta_j)$, and the least weight
-in every other block is $\lambda_I(\beta_h)$.  Thus a nonzero functional
-tuple has the second cost in~\eqref{eq:weighted-pointed-cost}.  Such a word
-cannot be an embedded inner-dual word, because the latter induces the zero
-functional in every block.
+Write a concatenated dual word in blocks and apply
+\eqref{eq:block-functional-dual}.  For a fixed nonzero functional tuple, the
+block representatives minimize independently, giving the second term of
+\eqref{eq:weighted-pointed-cost}.  For the zero tuple, nonconfinement costs
+$\mu_{I,x}(0)$ in the target block and $d(I^\perp)$ in another block.  The
+projection hypothesis makes confined words exactly the zero-extensions of
+inner-dual words, so these two sectors prove~\eqref{eq:weighted-pointed-cost}.
 
-Surjectivity of $O\to L$ at block $j$ also shows that a dual word confined to
-block $j$ has $\beta_j=0$.  Thus the embedded inner-dual words are exactly the
-confined words.  If $\beta=0$, every block lies in $I^\perp$.  A word through $(j,x)$ that is
-not confined to block $j$ pays at least $\mu_{I,x}(0)$ in the target block
-and $d(I^\perp)$ in another block.  Placing minimizers in two blocks attains
-their sum.  The zero and nonzero functional sectors exhaust all nonconfined
-words, proving~\eqref{eq:weighted-pointed-cost}.
-
-A normalized recovery equation with at most $r$ helpers has total weight at
-most $r+1$.  Hence~\eqref{eq:weighted-pointed-gate} excludes every
-nonconfined equation at that radius.  Restriction and zero-extension then
-give the asserted bijections.  Conversely, if
-$Z_{j,x}(O,I)\leq r+1$, normalize an attaining word at $(j,x)$; it is a
-nonconfined recovery equation using at most $r$ helpers.  This proves the
-equivalence.
+If the target column is nonzero, take $P=\{x\}$ and let $T\leq U_P$ be its
+span.  After choosing a nonzero vector of $T$, a linear map $T\to L^*$ is one
+functional.  Normalizing its target coefficient and rescaling the functional
+tuple identify the minima in~\eqref{eq:weighted-subspace-cost} with those in
+\eqref{eq:weighted-pointed-cost}.  The target coordinate contributes one to
+total word weight and is not a helper, so
+\[
+ Z_{j,x}(O,I)=\Gamma_{j,T}(O,I)+1.
+\]
+Theorem~\ref{thm:ungated-ranked-confinement} gives the claimed gate.  If the
+target column is zero, the same gate follows directly from the exact minimum
+already proved.  In either case, below the minimum every equation is confined,
+so restriction and zero-extension are inverse.  In one dimension every exact
+helper support is the support of its normalized equation; the equivalence also
+holds for exact helper-support families and their inclusion-minimal members.
+\uses{thm:ungated-ranked-confinement}%
 \proves{thm:weighted-pointed-confinement}%
 \end{proof}
 
@@ -279,10 +377,8 @@ threshold used for one-coordinate equations is denoted by $z_x(I)$, then
 \end{equation}
 The helper-radius condition~\eqref{eq:ranked-confinement} is therefore
 $r+1<z_x(I)$, with no change of convention hidden in the reduction.
-Under the outer-distance gate, every nonzero tuple in
-$\operatorname{FD}(O)$ already meets more than $r+1$ blocks, so
-Theorem~\ref{thm:weighted-pointed-confinement} reduces to this zero-functional
-condition.  Thus the ranked theorem is the clean higher-dimensional result
-after the nonzero-functional sector is excluded, while
-Theorem~\ref{thm:weighted-pointed-confinement} gives the ungated finite
-criterion in rank one.
+Theorem~\ref{thm:ungated-ranked-confinement} is the common finite formula.
+The outer-distance gate removes its nonzero-functional sector and gives the
+RGHW threshold in every recovered dimension.  Restricting instead to one
+target coordinate gives Theorem~\ref{thm:weighted-pointed-confinement} without
+the gate.
