@@ -74,6 +74,7 @@ with no lane selected — ask which lane. An explicit alias switches lanes.
 | `kayles` | `notes/handoffs/2026-07-04-node-kayles-games.md` (dormant) |
 | `nofil` | `notes/handoffs/2026-07-17-nofil-paper.md` |
 | `paper-frob-eq` | `notes/handoffs/2026-07-14-alternate-orbit-repair.md` |
+| `quantum-codes` | `notes/handoffs/2026-08-25-quantum-codes.md` |
 | `reed-solomon` | `notes/handoffs/2026-07-22-reed-solomon-deep-holes.md` |
 | `relconic` | `notes/handoffs/2026-07-17-c210.md` |
 
