@@ -46,7 +46,7 @@ Those statements contain the principal theorem and its proof. Sections 5 and
    prescribed cosets of `I⊥`; the target-block version also imposes the target
    normalization. These are fixed-instance generalized covering costs, not a
    newly named metric. `thm:ungated-ranked-confinement` minimizes their block
-   sum over linear maps `T → FD(O)`. The zero-functional sector costs
+   sum over linear maps `T → FD(O)` for `N ≥ 2`. The zero-functional sector costs
    `rho_T(I)+d(I⊥)`, while every nonzero sector retains its actual inner
    realization costs. The target outer projection is assumed nonzero so that a
    nonzero functional sector cannot be confined to the target block.

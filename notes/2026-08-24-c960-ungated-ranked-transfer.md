@@ -58,7 +58,7 @@ It is (+\infty) when (T\not\le W_P). Thus the exact finite formula also
 covers a target subspace that has no inner recovery system but may acquire one
 through a nonzero outer-functional sector.
 
-Let (O\le L^N) be an (L)-linear outer code, fix block (j), and assume the coordinate projection
+Let (O\le L^N) be an (L)-linear outer code with (N\ge2), fix block (j), and assume the coordinate projection
 (O\to L) at (j) is nonzero, hence surjective. Put
 
 \[
@@ -239,6 +239,8 @@ It should not be described as a general lower bound on the ungated obstruction.
   nonconfinement. Without it, a nonzero tuple supported at the target block can be block-confined.
 - The zero-functional external cost is (d(I^\perp)), not a higher generalized weight, because a
   rank-one external perturbation suffices regardless of \(\dim T\).
+- The assumption (N\ge2) is necessary for the zero-functional construction to have an external
+  block. No one-block version of the displayed minimum is claimed.
 - The theorem gives an exact finite-length optimization but not a closed formula for its lifting
   functions. The RGHW formula is the computable specialization after the outer-distance gate.
 - No computation, certificate, or formal theorem is used in the proof.
@@ -385,4 +387,50 @@ specializations.
 
 ## Mystery ledger
 
-To be completed after the priority, manuscript, and closeout gates.
+### Hard red-team repairs
+
+- The exact zero-functional escape construction needs a second inner block.  The theorem,
+  abstract, main-theorem synopsis, service-rate corollary, reviewer guide, claim manifest, and
+  proof records now state (N\ge2).  Without this hypothesis the displayed zero-sector candidate
+  need not be attainable; this was a real missing hypothesis, not an expository preference.
+- The target normalization is minimized together with the helper lift.  Fixing an arbitrary
+  section of (G_P) would overcharge a target subspace and would not give an intrinsic minimum.
+- The exact theorem allows every nonzero (T\le U_P), assigning cost infinity when no normalized
+  inner system exists.  The RGHW and service-rate specializations correctly restrict to
+  (T\le W_P).
+- The nonzero target-block projection of the outer code remains explicit.  It is used to rule out
+  nonzero functional-dual tuples supported only on the target block, so it cannot be dropped while
+  retaining “nonzero functional sector = nonconfined sector.”
+
+### Extra-juice and adversarial closeout
+
+- **Settled:** the exact formula also removes the radius from the coarse specialization.  If
+  \[
+  d(O^\perp)\ge M_t(D_P,K_P)+d(I^\perp)+1,
+  \]
+  then every nonzero functional sector costs at least the zero-sector minimum and therefore
+  \[
+  \Gamma_{j,t}=M_t(D_P,K_P)+d(I^\perp).
+  \]
+  This is now recorded directly after the exact theorem.
+- **Settled:** demandwise exact confinement, not the coarser outer-distance gate, is sufficient for
+  bounded service-rate transfer.  The corollary now uses (r<\Gamma_{j,T_a}) and keeps
+  (T_a\le W_P).
+- **Settled:** the support cost is basis-independent because it is the union support of the image
+  of a linear lift; choosing a basis only identifies it with the established joint-coset problem.
+- **Settled:** there is no hidden cancellation between blocks.  Their coordinate sets are disjoint,
+  so fixed-functional lift costs add exactly, while cancellation within a block is already included
+  in the coset minimum.
+- **Open, successor-owned:** determine whether these prescribed-coset support functions compose
+  under repeated concatenation by an exact min-plus law.  The zero and nonzero functional sectors
+  must remain distinguished; no composition theorem is asserted here.
+- **No other unresolved theorem defect:** the proof, priority boundary, finite/eventual quantifiers,
+  target-section minimization, two-block edge case, and terminology have explicit resolutions.
+
+### Final validation
+
+- source-only formal-boundary check: PASS, 22 claims, four reviewer terminals;
+- deterministic PDF/release build: PASS after the two-block repair, 22 pages, warning-free, 22
+  claims, four Lean terminals;
+- `git diff --check`: PASS;
+- no Lean source, theorem, reviewer terminal, toolchain pin, or expected-axiom file changed.

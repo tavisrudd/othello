@@ -15,8 +15,9 @@ only on the inner code and the target/helper split, not on a generator-row
 basis. The paper proves
 that the `t`th relative generalized Hamming weight `M_t(D_P,K_P)` is the exact
 minimum helper-union size for recovering `t` independent target combinations.
-For any nonzero target-message subspace and any outer block with nonzero
-coordinate projection, the exact finite nonconfinement cost is an optimization
+For any nonzero target-message subspace, an outer code with at least two
+blocks, and a target block with nonzero coordinate projection, the exact finite
+nonconfinement cost is an optimization
 of prescribed-coset support costs over the complete outer functional dual. For
 any outer code with at least two blocks and `d(O⊥) > r+1`, this criterion
 reduces to

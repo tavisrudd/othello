@@ -53,11 +53,12 @@ $J=E\setminus P$.  Shortening and puncturing $I^\perp$ onto $J$ give a
 nested pair $K_P\subseteq D_P\leq\mathbb F_q^J$.  Its relative generalized
 Hamming weight $M_t(D_P,K_P)$ is the minimum helper union recovering $t$
 independent target combinations.  For a fixed nonzero target-message
-subspace and an outer block with nonzero coordinate projection, we express
+subspace and an outer code with at least two blocks and nonzero projection
+onto the target block, we express
 the exact least helper union of a nonconfined recovery system as an
 optimization of prescribed-coset support costs over the complete outer
-functional dual.  This theorem is finite length and requires no
-outer-distance gate.  If $O\leq L^N$ is $L$-linear, $N\geq2$, and
+functional dual.  This requires no outer-distance gate.  If
+$O\leq L^N$ is $L$-linear, $N\geq2$, and
 $d(O^\perp)>r+1$, its criterion reduces in recovered dimension $t$ to
 \[
  r<M_t(D_P,K_P)+d(I^\perp).
@@ -144,15 +145,21 @@ $W_P$ is
  \mu_t(P)=M_t(D_P,K_P).
 \]
 Let $I$ be used as the represented inner code in a concatenation with an
-$L$-linear outer code $O\leq L^N$, where $L$ is the message space of $I$,
+$L$-linear outer code $O\leq L^N$ with $N\geq2$, where $L$ is the message space of $I$,
 and fix a block onto which $O$ projects nontrivially.  The quantity
 $\Gamma_{j,t}(O,I)$ in~\eqref{eq:ranked-weighted-cost}, obtained by minimizing
 the joint support of compatible inner coset representatives over the complete
 outer functional dual, is exactly the first nonconfined helper cost in
 recovered dimension $t$.  Hence confinement through radius $r$ holds exactly
 when $r<\Gamma_{j,t}(O,I)$.
+Moreover,
+\[
+ d(O^\perp)\geq M_t(D_P,K_P)+d(I^\perp)+1
+ \quad\Longrightarrow\quad
+ \Gamma_{j,t}(O,I)=M_t(D_P,K_P)+d(I^\perp).
+\]
 
-If in addition $N\geq2$ and $d(O^\perp)>r+1$, this exact criterion reduces to
+If in addition $d(O^\perp)>r+1$, this exact criterion reduces to
 \[
  r<M_t(D_P,K_P)+d(I^\perp).
 \]

@@ -8,7 +8,7 @@ It contains no score, venue recommendation, or overall quality judgment.
 For the associated nested pair `K_P <= D_P`, the `t`th relative generalized
 Hamming weight is the minimum helper-union cost for recovering a
 `t`-dimensional target message subspace. For a target block with nonzero outer
-projection, minimizing prescribed-coset support costs over linear maps into
+projection and at least two outer blocks, minimizing prescribed-coset support costs over linear maps into
 the complete outer functional dual gives the exact finite first nonconfined
 cost. For a fixed outer code with at least two blocks and
 `d(O^perp)>r+1`, this criterion reduces to

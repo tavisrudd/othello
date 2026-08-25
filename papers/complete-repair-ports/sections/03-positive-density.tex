@@ -90,7 +90,7 @@ Let
  \operatorname{Hom}_{\F_q}\bigl(T,\operatorname{FD}(O)\bigr).
 \]
 For $B\in\mathcal B_T(O)$, write $B=(B_h)_{h=1}^N$ with
-$B_h:T\to L^*$.  Fix a target block $j$ whose coordinate projection
+$B_h:T\to L^*$.  Assume $N\geq2$, fix a target block $j$ whose coordinate projection
 $O\to L$ is nonzero, hence surjective, and put
 \begin{equation}
  \begin{split}
@@ -110,7 +110,8 @@ $O\to L$ is nonzero, hence surjective, and put
 \label{thm:ungated-ranked-confinement}
 \coverage{absent}%
 Under the hypotheses above, $\Gamma_{j,T}(O,I)$ is the least helper-union
-size of a nonconfined normalized recovery system for $T$ in $O\circ I$.
+size of a nonconfined normalized recovery system for $T$ in $O\circ I$, with
+value $\infty$ if no such system exists.
 Thus every cost-$\leq r$ system for $T$ is confined if and only if
 \begin{equation}
  r<\Gamma_{j,T}(O,I).
@@ -166,6 +167,17 @@ first nonconfined cost, restriction to block $j$ is inverse to zero-extension,
 with coefficients and supports unchanged.
 \proves{thm:ungated-ranked-confinement}%
 \end{proof}
+
+The exact optimization also recovers the persistent obstruction without
+choosing a radius.  Indeed, every nonzero functional sector costs at least
+$d(O^\perp)-1$, while the zero-functional sector attains
+$M_t(D_P,K_P)+d(I^\perp)$ after minimization over $T$.  Consequently,
+\begin{equation}
+ d(O^\perp)\geq M_t(D_P,K_P)+d(I^\perp)+1
+ \quad\Longrightarrow\quad
+ \Gamma_{j,t}(O,I)=M_t(D_P,K_P)+d(I^\perp).
+ \label{eq:ranked-weighted-collapse}
+\end{equation}
 
 \begin{theorem}[Confinement for a fixed target subspace]
 \label{thm:objectwise-confinement}
