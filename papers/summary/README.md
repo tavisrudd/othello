@@ -249,7 +249,7 @@ the theorem column.
 | Diagonal Isoduality and Transversal Clifford Groups of MDS–CSS Codes | The diagonal multiplier nullity fixes the transversal logical group. | All `[2m,m,m+1]q` MDS codes over odd prime fields. |
 | Balanced Cuts of Conference Matrices: Squared-Spectrum Rigidity and Hermitian Holonomy | Order six is the unique nontrivial realized symmetric conference order whose normalized balanced cross-block Gram spectrum is cut-independent. | Every symmetric conference matrix and every balanced half. |
 | Exact Transfer of Bounded Linear Recovery and Relative Weight Hierarchies | For `u=min(k,|P|)`, `b=min(k,|J|)`, and `ell=u+b-k`, an MDS inner code has `M_t(D_P,K_P)=k-u+t` at every recoverable rank; helper-span gives equality in the global ceiling, and rank-one ceiling equality is rigid. | Every proper MDS inner code and every target/helper split with `1 ≤ t ≤ ell`. |
-| Exact Transfer of Bounded Linear Recovery and Relative Weight Hierarchies | `K_P=short_J(I⊥) ⊆ D_P=punct_J(I⊥)`, and `M_t(D_P,K_P)` is the exact minimum helper-union cost for rank-`t` recovery. For any fixed nonzero target-message subspace, joint prescribed-coset support costs over the complete outer functional dual give the exact finite first nonconfined cost. Under `N ≥ 2` and `d(O⊥)>r+1`, this reduces to `r<M_t(D_P,K_P)+d(I⊥)`, and normalized equations and exact supports transfer. | Every proper inner code and every nonzero target-message subspace, for outer codes with at least two blocks and nonzero projection onto the target block; the RGHW specialization uses `1 ≤ t ≤ dim W_P`. |
+| Exact Transfer of Bounded Linear Recovery and Relative Weight Hierarchies | `K_P=short_J(I⊥) ⊆ D_P=punct_J(I⊥)`, and `M_t(D_P,K_P)` is the exact minimum helper-union cost for rank-`t` recovery. For any fixed nonzero target-message subspace, joint prescribed-coset support costs over the complete outer functional dual give the exact finite first nonconfined cost. Under `N ≥ 2` and `d(O⊥)>r+1`, this reduces to `r<M_t(D_P,K_P)+d(I⊥)`, and normalized equations and exact supports transfer. The labelled ordinary coset-support functions compose exactly under repeated concatenation; helper-restriction costs and target images give the normalized recursion. | Every proper inner code and every nonzero target-message subspace, for outer codes with at least two blocks and nonzero projection onto the target block; the RGHW specialization uses `1 ≤ t ≤ dim W_P`, and the composition law applies to every finite field tower. |
 | Integral Cohomology and Modular Decomposition for the Theta Divisor of a Cubic Threefold | The integral middle lattice has rank `130` and saturation quotient `(Z/2)^10`; the integral resolution complex has central Smith factor three, a length-three mod-three Loewy chain, and modular relative-hard-Lefschetz failure. | The theta divisor of every smooth complex cubic threefold. |
 
 ## Papers and entry points
@@ -279,7 +279,7 @@ boundary, and reproducible entry points.
 | Balanced Cuts of Conference Matrices: Squared-Spectrum Rigidity and Hermitian Holonomy | Matrix theory / algebraic combinatorics / mathematical physics | Order six is the unique nontrivial cut-independent case; Hermitian triangle holonomy controls the degree-three frontier and rigidity. | [PDF](https://github.com/tavisrudd/conference-cut-spectra/blob/main/conference_cut_spectra.pdf) · [repo](https://github.com/tavisrudd/conference-cut-spectra) |
 | Integral Cohomology and Modular Decomposition for the Theta Divisor of a Cubic Threefold | Algebraic geometry / topology | The rank-130 integral middle lattice has canonical mod-two glue, while the same resolution carries a factor-three integral perverse attachment, a length-three modular Loewy chain, and failure of relative hard Lefschetz modulo three. | [PDF](https://github.com/tavisrudd/blown-up-theta-lattice/blob/main/blown_up_theta_lattice.pdf) · [repo](https://github.com/tavisrudd/blown-up-theta-lattice) |
 | Frobenius-equivariant Pair Extension and Robust Repair of Eight-Arcs | Finite geometry / coding theory | Fixed mate-line carriers and exact collision corrections give Frobenius-compatible paired MDS extensions, including the exact two-fixed-point minimum over F₂₅. | [PDF](https://github.com/tavisrudd/equivariant-robust-completion/blob/main/equivariant-robust-completion.pdf) · [repo](https://github.com/tavisrudd/equivariant-robust-completion) |
-| Exact Transfer of Bounded Linear Recovery and Relative Weight Hierarchies | Coding theory / distributed storage | A complete outer-functional prescribed-coset optimization gives the exact finite nonconfinement cost; relative generalized weights are its outer-distance specialization. | [PDF](https://github.com/tavisrudd/complete-repair-ports/blob/main/complete_repair_ports.pdf) · [repo](https://github.com/tavisrudd/complete-repair-ports) |
+| Exact Transfer of Bounded Linear Recovery and Relative Weight Hierarchies | Coding theory / distributed storage | A complete outer-functional prescribed-coset optimization gives the exact finite nonconfinement cost, relative generalized weights are its outer-distance specialization, and the labelled costs compose through finite concatenation towers. | [PDF](https://github.com/tavisrudd/complete-repair-ports/blob/main/complete_repair_ports.pdf) · [repo](https://github.com/tavisrudd/complete-repair-ports) |
 
 The repository for *Reconstructing the Clebsch Code from Its Deep-Hole
 Syndrome Locus* also contains the computational companion
@@ -733,6 +733,11 @@ recovered dimension `t` to `r < M_t(D_P,K_P) + d(I^perp)`; below either exact
 threshold, normalized equations and exact helper supports transfer. Restriction
 to a line shows that the rank-one escape cost is the bottleneck for simultaneous
 transfer across every recoverable rank.
+The labelled ordinary coset-support functions compose exactly under repeated
+concatenation. Helper-restriction costs and target images give the
+target-normalized recursion, while the inner-dual distance has a compatible
+two-sector formula. The persistent scalar threshold alone does not determine
+the next-level cost.
 
 > *Abstract* Let `I <= F_q^E`, let `P` be a target set, and put
 > `J = E \ P`. Shortening and puncturing `I^perp` onto `J` give a nested pair
@@ -762,7 +767,8 @@ finite and eventual rank-stratified confinement after the outer-distance gate;
 best-target generalized-weight and cooperative-locality consequences; an MDS
 staircase and rigidity theorem; positive-density and bounded service-rate
 transfer; reliability and coefficient-sensitive separations; and explicit
-projective-simplex formulas. The paper-local Lean companion proves the
+projective-simplex formulas; and exact min-sum composition through finite
+concatenation towers. The paper-local Lean companion proves the
 associated exact sequence only; the stronger results are human-proved and
 explicitly marked absent from Lean coverage.
 
@@ -775,7 +781,9 @@ of bounded linear recovery, while exact finite transfer also depends on the
 complete outer functional dual and the minimum joint supports of compatible
 inner coset representatives. The paper combines these data in one exact
 arbitrary-rank optimization and shows when its coarser RGHW specialization
-transports normalized equations and exact supports.
+transports normalized equations and exact supports. The same labelled cost
+data, augmented by target images for normalized demands, can be reused at the
+next concatenation level without collapsing to a distance-only bound.
 
 ---
 
