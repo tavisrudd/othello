@@ -6,7 +6,8 @@
 `4/3` linear coefficient is excluded and the structural lower coefficient is
 now `5/3`; the exact `5/3` endpoint is also absent, while a matching
 `5/3+o(1)` construction remains open; the sharpest `+1` triangular target is
-reduced to the almost-duplex/near-Rédei conditions `(SR18)--(SR24)`; no
+reduced to the almost-duplex/near-Rédei/moment conditions
+`(SR18)--(SR24l)`; no
 manuscript work
 
 ## First-gate findings — 24 August 2026
@@ -1775,6 +1776,221 @@ the third connector `z=0`, this direction ledger reconstructs all of
 `(SR12)`.  It is also the strongest input form for a search: parallel classes
 need not be rediscovered.
 
+The ledger has a further characteristic-three consequence that is invisible
+in the integer counts.  Put the affine triangle vertex at `(0,0)` and retain
+the other two triangle vertices as the horizontal and vertical directions.
+For the affine core
+
+```text
+B_aff=H union {the six affine boundary points},
+```
+
+the fiber multisets in the `q+1` directions are exactly
+
+```text
+2 vertex directions:       2^(q-1) 3^1;
+3 infinity-boundary dirs:  0^(q/3-1) 1^1 3^(2q/3);
+q-4 remaining directions:  1^(2q/3-1) 2^1 4^(q/3). (SR24a)
+```
+
+In each row the distinguished fiber is the line through `(0,0)`: it is the
+unique triple fiber in a vertex direction, the unique singleton fiber in an
+infinity-boundary direction, and the unique double fiber in every remaining
+direction.  For every `1<=k<=q-2`, the sum of the `k`th powers of all elements
+of `F_q` is zero.  Reducing the three profiles modulo the characteristic
+therefore gives, for every affine linear direction `L`,
+
+```text
+sum_{P in B_aff} L(P)^k=0,             1<=k<=q-2.    (SR24b)
+```
+
+This is a structural identity, not a sampling test.  To extract its exact
+content, write `L(x,y)=y-mx` and expand in `m`.  The resulting polynomial has
+degree at most `k<q` and vanishes at every `m in F_q`, so each coefficient
+vanishes.  Hence
+
+```text
+binom(i+j,i) sum_{P in B_aff} x(P)^i y(P)^j=0
+                       whenever i,j>=0 and 1<=i+j<=q-2. (SR24c)
+```
+
+For `i,j>0` the six axis points contribute zero.  Lucas' theorem now yields
+the torus moment obstruction
+
+```text
+sum_{(a,b) in H} a^i b^j=0                            (SR24d)
+```
+
+for every positive pair `(i,j)` with `i+j<=q-2` whose base-three addition is
+carry-free.  If `q=3^h`, there are exactly
+
+```text
+6^h-3q+3
+```
+
+such ordered pairs: choose one of the six digit pairs with sum at most two at
+each of the `h` positions, remove the two coordinate axes, and then remove
+the `q-2` positive pairs whose sum is `q-1`.  Thus a candidate almost-duplex
+must satisfy a superlinear family of exact mixed-moment cancellations in
+addition to the fiber, matching, and line-cap constraints.  Coefficients with
+a base-three carry are deliberately not claimed: their binomial coefficient
+vanishes in the field.
+
+The carry-free triangle can be resummed into a two-sheeted algebraic normal
+form.  Put `r=q/3`.  For each `a in F_q^*`, include a formal second value
+`b=0` when the `a`-fiber of `H` is a singleton, and apply the Frobenius
+bijection `z=b^r` to its two values.  Define their sum and sum of squares by
+
+```text
+w(a)=sum z,                    v(a)=sum z^2.
+```
+
+Taking `j=r` in `(SR24d)` is legitimate for every consecutive
+`1<=i<=2r-2`: the leading base-three digit of `r` is one and all its lower
+digits are zero, so these additions are carry-free and have total at most
+`q-2`.  Hence `sum_a w(a)a^i=0` on that interval.  If
+`W(X)=sum_{d=0}^{q-2}c_dX^d` is the unique polynomial representing `w` on
+`F_q^*`, multiplicative power-sum orthogonality gives
+
+```text
+sum_a w(a)a^i=-c_{q-1-i}.
+```
+
+It follows that `c_d=0` for `r+1<=d<=q-2`, and therefore
+
+```text
+deg W<=r.                                           (SR24e)
+```
+
+Likewise `j=2r` permits the consecutive interval `1<=i<=r-2`.  The
+polynomial `V` representing `v` consequently has `deg V<=2r`.  In
+characteristic three, if the two Frobenius values are `z_1,z_2`, then
+
+```text
+z_1 z_2=v-w^2.
+```
+
+Thus `P=V-W^2` has degree at most `2r`, and the zero-completed carrier is
+exactly
+
+```text
+H union {(a,0):a in A_0}
+  --under (a,b) |-> (a,z=b^r)-->
+{(a,z):a!=0, z^2-W(a)z+P(a)=0},
+deg W<=q/3,                deg P<=2q/3.              (SR24f)
+```
+
+The three singleton values `A_0` are precisely the nonzero roots of `P`.
+Moreover `V+P=(z_1-z_2)^2` is nonzero at every `a in F_q^*`, since the two
+completed fiber values are always distinct.  This is an exact inverse
+normal form, not an existence assertion.  The Frobenius change is not a
+projectivity: in these coordinates an original affine line becomes a cubic
+relation `z^3=ma+c`, so the line-cap and blocking tests must still be imposed.
+
+The argument is cyclic in the support triangle.  Choosing each connector in
+turn as the line at infinity gives the same quadratic normal form in the
+three torus charts
+
+```text
+(u,v)=(a,b),          (b/a,1/a),          (a/b,1/b). (SR24g)
+```
+
+In each chart, after adding zero to the three singleton `u`-fibers and
+putting `z=v^(q/3)`, there are chart-dependent polynomials
+`W_u,P_u` of degrees at most `q/3,2q/3` with
+`z^2-W_u(u)z+P_u(u)=0`.  Thus the remaining object is not one arbitrary
+almost-duplex: it must admit three compatible Frobenius-quadratic
+descriptions related by the displayed birational coordinate changes.
+
+This moment normal form excludes an entire completion branch.  Suppose a
+full duplex `K` is the union of two same-exponent monomial graphs
+
+```text
+b=alpha a^d,                    b=beta a^d,          (SR24h)
+```
+
+and `H=K\R` is obtained by deleting three cells.  The `a`-fiber profile
+forces their coordinates `a_1,a_2,a_3` to be distinct.  For `r=q/3` and
+every `1<=i<=2r-2`, `(SR24d)` gives
+
+```text
+sum_{t=1}^3 b_t^r a_t^i
+ =sum_{(a,b) in K} a^i b^r
+ =(alpha^r+beta^r) sum_{a!=0} a^(i+dr).             (SR24i)
+```
+
+The right side is zero for all but at most one `i` in that interval, because
+a nonzero-field power sum vanishes unless its exponent is divisible by
+`q-1`.  Removing one index from a consecutive interval of length `2r-2`
+leaves a run of at least `r-1>=3` consecutive zero values.  But three
+consecutive equations
+
+```text
+sum_t b_t^r a_t^(i_0+s)=0,             s=0,1,2,
+```
+
+have coefficient matrix `diag(a_t^i_0)` times the Vandermonde matrix of the
+three distinct nonzero `a_t`.  It is invertible, contradicting
+`b_t^r!=0`.  Therefore no same-exponent two-monomial full duplex can be
+completed into the target core for ternary `q>=27`.  This includes the
+cyclic hyperbola duplex `(SR20)` as `d=-1`; `(SR21)` remains an independent
+geometric exclusion.
+
+The same proof gives a complexity lower bound for every extendable branch,
+without assuming monomials.  For a full-duplex completion `K=H union R`, put
+
+```text
+mu_i(K)=sum_{(a,b) in K}a^i b^r,       1<=i<=2r-2.
+```
+
+The deletion identity says that `mu_i(K)=sum_t b_t^r a_t^i`.  Since the
+right side cannot vanish at three consecutive indices, the support of
+`i |-> mu_i(K)` must meet every length-three interval.  Consequently
+
+```text
+#{i in [1,2r-2]:mu_i(K)!=0} >= floor((2r-2)/3).     (SR24j)
+```
+
+Equivalently, the interpolation polynomial for the completed fiber-sum
+function must have at least that many nonzero coefficients in the high-degree
+band `r+1,...,q-2`, with no run of three zeros.  By `(SR24g)` this linear
+spectral-complexity requirement holds in all three triangle charts.  Hence a
+successful extendable construction cannot come from a bounded-Fourier-support
+duplex family; its nonlinearity must be `Omega(q)` in each chart.
+
+There is an equivalent exact dual-code certificate.  Let `V` be the three
+triangle vertices and let `L_infty` be the connector chosen as the line at
+infinity.  Over `F_3` put
+
+```text
+g=1_D-1_{L_infty}-1_V.                              (SR24k)
+```
+
+On the affine patch this is `1_{B_aff}-1_{(0,0)}`.  On `L_infty` it is zero
+at the three points of `D`, `+1` at the two triangle vertices, and `-1` at
+the other `q-4` points.  Thus
+
+```text
+g: (+1)^(2q+3) (-1)^(q-3) 0^(q^2-2q+1),
+wt(g)=3q.                                           (SR24l)
+```
+
+For an affine line of direction `d`, the sum of
+`1_{B_aff}-1_{(0,0)}` is the direction constant `c_d`: it is `2` in the two
+vertex directions, zero in the three infinity-boundary directions, and one
+otherwise.  The point of `L_infty` in that direction has coefficient
+`-c_d`, so every affine projective line has `g`-sum zero.  The line at
+infinity has sum `2-(q-4)=6-q=0` in `F_3`.  Hence
+
+```text
+M g=0 over F_3.
+```
+
+This places every `+1` triangular core behind a weight-`3q` ternary
+dual-incidence word with a prescribed sign split.  Hull membership is not
+asserted: the existing small-line-cover theorem applies to words also known
+to lie in the line code, and `(SR24k)` by itself proves only dual membership.
+
 For comparison, the other triangular survivor `(j,sigma)=(5,-1)` has
 
 ```text
@@ -2138,7 +2354,14 @@ family is lower priority.
   nine boundary points' rescue capacity.  More generally `(SR22)--(SR23)`
   force `H` to occupy at least `q-6` intercepts in each of `q-2` directions,
   with no fiber above four, and `(SR24)` fixes every full-core parallel-class
-  profile.  The other triangular row requires a linear high-secant trade and
+  profile.  In characteristic three these profiles force the carry-free
+  moment triangle `(SR24b)--(SR24d)`, the three compatible
+  Frobenius-quadratic normal forms `(SR24e)--(SR24g)`, and the weight-`3q`
+  dual word `(SR24k)--(SR24l)`.  The Vandermonde obstruction
+  `(SR24h)--(SR24j)` eliminates every same-exponent two-monomial completion
+  and, more generally, forces `Omega(q)` completed-fiber spectral complexity
+  in each triangle chart.  The other triangular row requires a linear
+  high-secant trade and
   is therefore a less rigid first target.
 - **Settled by `ej`+`tt` — is the nearest classical four-blocking-set core a
   cheap source of the admissible rows?**  Bruen--Fisher is exactly the

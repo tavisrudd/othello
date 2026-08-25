@@ -190,8 +190,25 @@
           "almost_duplex": {
             "affine_redei_gate": {
               "affine_boundary_points": 6,
+              "carry_free_mixed_moment_vanishing": {
+                "constraint_count": 1056,
+                "criterion": "base-3 addition of positive exponents has no carry",
+                "maximum_total_degree": 79
+              },
               "directions_with_at_most_six_missing_intercepts": 79,
               "exceptional_directions": 3,
+              "frobenius_fiber_quadratic_normal_form": {
+                "compatible_triangle_charts": 3,
+                "fiber_product_polynomial_degree_bound": 54,
+                "fiber_square_sum_consecutive_moments": 25,
+                "fiber_sum_consecutive_moments": 52,
+                "fiber_sum_polynomial_degree_bound": 27,
+                "frobenius_exponent": 27,
+                "minimum_completion_moment_support_per_chart": 17,
+                "monomial_vandermonde_zero_run": 26,
+                "same_exponent_two_monomial_completion_possible": false,
+                "zero_completed_singleton_fibers": 3
+              },
               "full_core_direction_ledger": {
                 "remaining_direction_count": 77,
                 "remaining_direction_profile": {
@@ -211,7 +228,17 @@
                 }
               },
               "maximum_fiber_size": 4,
-              "minimum_distinct_intercepts": 75
+              "minimum_distinct_intercepts": 75,
+              "ternary_dual_incidence_word": {
+                "formula": "1_D-1_L_infty-1_V",
+                "line_code_membership_proved": false,
+                "symbol_counts": {
+                  "negative": 78,
+                  "positive": 165,
+                  "zero": 6400
+                },
+                "weight": 243
+              }
             },
             "canonical_cyclic_duplex": {
               "blocking_possible": false,
@@ -403,8 +430,25 @@
           "almost_duplex": {
             "affine_redei_gate": {
               "affine_boundary_points": 6,
+              "carry_free_mixed_moment_vanishing": {
+                "constraint_count": 7050,
+                "criterion": "base-3 addition of positive exponents has no carry",
+                "maximum_total_degree": 241
+              },
               "directions_with_at_most_six_missing_intercepts": 241,
               "exceptional_directions": 3,
+              "frobenius_fiber_quadratic_normal_form": {
+                "compatible_triangle_charts": 3,
+                "fiber_product_polynomial_degree_bound": 162,
+                "fiber_square_sum_consecutive_moments": 79,
+                "fiber_sum_consecutive_moments": 160,
+                "fiber_sum_polynomial_degree_bound": 81,
+                "frobenius_exponent": 81,
+                "minimum_completion_moment_support_per_chart": 53,
+                "monomial_vandermonde_zero_run": 80,
+                "same_exponent_two_monomial_completion_possible": false,
+                "zero_completed_singleton_fibers": 3
+              },
               "full_core_direction_ledger": {
                 "remaining_direction_count": 239,
                 "remaining_direction_profile": {
@@ -424,7 +468,17 @@
                 }
               },
               "maximum_fiber_size": 4,
-              "minimum_distinct_intercepts": 237
+              "minimum_distinct_intercepts": 237,
+              "ternary_dual_incidence_word": {
+                "formula": "1_D-1_L_infty-1_V",
+                "line_code_membership_proved": false,
+                "symbol_counts": {
+                  "negative": 240,
+                  "positive": 489,
+                  "zero": 58564
+                },
+                "weight": 729
+              }
             },
             "canonical_cyclic_duplex": {
               "blocking_possible": false,
@@ -616,8 +670,25 @@
           "almost_duplex": {
             "affine_redei_gate": {
               "affine_boundary_points": 6,
+              "carry_free_mixed_moment_vanishing": {
+                "constraint_count": 44472,
+                "criterion": "base-3 addition of positive exponents has no carry",
+                "maximum_total_degree": 727
+              },
               "directions_with_at_most_six_missing_intercepts": 727,
               "exceptional_directions": 3,
+              "frobenius_fiber_quadratic_normal_form": {
+                "compatible_triangle_charts": 3,
+                "fiber_product_polynomial_degree_bound": 486,
+                "fiber_square_sum_consecutive_moments": 241,
+                "fiber_sum_consecutive_moments": 484,
+                "fiber_sum_polynomial_degree_bound": 243,
+                "frobenius_exponent": 243,
+                "minimum_completion_moment_support_per_chart": 161,
+                "monomial_vandermonde_zero_run": 242,
+                "same_exponent_two_monomial_completion_possible": false,
+                "zero_completed_singleton_fibers": 3
+              },
               "full_core_direction_ledger": {
                 "remaining_direction_count": 725,
                 "remaining_direction_profile": {
@@ -637,7 +708,17 @@
                 }
               },
               "maximum_fiber_size": 4,
-              "minimum_distinct_intercepts": 723
+              "minimum_distinct_intercepts": 723,
+              "ternary_dual_incidence_word": {
+                "formula": "1_D-1_L_infty-1_V",
+                "line_code_membership_proved": false,
+                "symbol_counts": {
+                  "negative": 726,
+                  "positive": 1461,
+                  "zero": 529984
+                },
+                "weight": 2187
+              }
             },
             "canonical_cyclic_duplex": {
               "blocking_possible": false,

@@ -3376,6 +3376,45 @@ def audit_sharp_linear_coefficient(output: Path) -> None:
         }
         if direction_reconstruction != triangle_j4_spectrum:
             raise AssertionError("the triangular parallel-class ledger changed")
+        extension_degree = 0
+        q_cursor = q
+        while q_cursor > 1:
+            if q_cursor % 3:
+                raise AssertionError("the audited field order is not ternary")
+            q_cursor //= 3
+            extension_degree += 1
+        carry_free_mixed_moments = 6**extension_degree - 3 * q + 3
+        if carry_free_mixed_moments <= q:
+            raise AssertionError("the carry-free moment family lost superlinearity")
+        triangular_dual_word = {
+            "positive": 2 * q + 3,
+            "negative": q - 3,
+            "zero": q * q - 2 * q + 1,
+        }
+        if sum(triangular_dual_word.values()) != q * q + q + 1:
+            raise AssertionError("the triangular dual-word length changed")
+        if (triangular_dual_word["positive"]
+                + triangular_dual_word["negative"] != 3 * q):
+            raise AssertionError("the triangular dual-word weight changed")
+        frobenius_fiber_normal_form = {
+            "frobenius_exponent": q // 3,
+            "fiber_sum_polynomial_degree_bound": q // 3,
+            "fiber_product_polynomial_degree_bound": 2 * q // 3,
+            "fiber_sum_consecutive_moments": 2 * q // 3 - 2,
+            "fiber_square_sum_consecutive_moments": q // 3 - 2,
+            "zero_completed_singleton_fibers": 3,
+            "compatible_triangle_charts": 3,
+            "same_exponent_two_monomial_completion_possible": False,
+            "monomial_vandermonde_zero_run": q // 3 - 1,
+            "minimum_completion_moment_support_per_chart": (
+                (2 * q // 3 - 2) // 3
+            ),
+        }
+        if frobenius_fiber_normal_form["monomial_vandermonde_zero_run"] < 3:
+            raise AssertionError("the monomial Vandermonde exclusion lost its zero run")
+        if (frobenius_fiber_normal_form[
+                "minimum_completion_moment_support_per_chart"] <= 0):
+            raise AssertionError("the duplex spectral-complexity bound vanished")
 
         field_checks.append({
             "field_order": q,
@@ -3476,6 +3515,23 @@ def audit_sharp_linear_coefficient(output: Path) -> None:
                             "directions_with_at_most_six_missing_intercepts": q - 2,
                             "minimum_distinct_intercepts": q - 6,
                             "maximum_fiber_size": 4,
+                            "carry_free_mixed_moment_vanishing": {
+                                "maximum_total_degree": q - 2,
+                                "constraint_count": carry_free_mixed_moments,
+                                "criterion": (
+                                    "base-3 addition of positive exponents "
+                                    "has no carry"
+                                ),
+                            },
+                            "ternary_dual_incidence_word": {
+                                "formula": "1_D-1_L_infty-1_V",
+                                "symbol_counts": triangular_dual_word,
+                                "weight": 3 * q,
+                                "line_code_membership_proved": False,
+                            },
+                            "frobenius_fiber_quadratic_normal_form": (
+                                frobenius_fiber_normal_form
+                            ),
                             "full_core_direction_ledger": {
                                 "two_vertex_directions": {
                                     "3_secants": 1,
