@@ -3423,6 +3423,9 @@ def audit_sharp_linear_coefficient(output: Path) -> None:
             "minimum_completion_trace_fourier_support_per_chart": (
                 (2 * q // 3 - 2) // 3
             ),
+            "minimum_completion_trace_degree_per_chart": (
+                (2 * q // 3 - 2) // 3 - 1
+            ),
         }
         if frobenius_fiber_normal_form["monomial_vandermonde_zero_run"] < 3:
             raise AssertionError("the monomial Vandermonde exclusion lost its zero run")

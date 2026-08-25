@@ -1979,7 +1979,16 @@ Fourier-support(tau) >= floor((2r-2)/3)              (SR24j')
 
 in each of the three charts.  The obstruction is thus not an artifact of a
 particular two-permutation decomposition: every successful full-duplex trace
-must already have linear multiplicative-Fourier complexity.
+must already have linear multiplicative-Fourier complexity.  Since a
+polynomial with `s` nonzero monomials has degree at least `s-1`, its unique
+interpolation polynomial also obeys
+
+```text
+deg tau >= floor((2r-2)/3)-1.                        (SR24j'')
+```
+
+Thus low-degree trace families are excluded even when their two permutation
+graphs are individually complicated.
 
 There is an equivalent exact dual-code certificate.  Let `V` be the three
 triangle vertices and let `L_infty` be the connector chosen as the line at
