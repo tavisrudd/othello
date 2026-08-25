@@ -50,6 +50,21 @@ not describe same-implementation recomputation as independent certification.
 5. Benchmark whole canonicalization workloads against a named version/options
    tuple. bliss explicitly warns that its canonical form depends on both.
 
+## Implemented mapping
+
+| prior-art consequence | C968 implementation state | evidence boundary |
+|---|---|---|
+| explicit individualization/refinement rather than opaque FFI | implemented for Paper I | producer exhausts 193 nodes; independent checker rederives the same leaf, trace, full 120-action group, and counters |
+| transporter and stabilizer as first-class outputs | implemented for Paper I | canonical wrapper v2 emits the input transporter, full-group generators/orbits, and point stabilizers for orbit representatives; wrapper replay recomputes them from the certified group |
+| exact projective/semilinear action metadata | schema only, fail-closed | Papers II--V name field moduli, encodings, matrices, and Frobenius powers but cannot execute until their complete exports and arithmetic checkers exist |
+| proof producer/checker separation comparable to `isocert` | implemented for Paper I only | `paper-i-ir-exhaustion/v1` uses a structurally separate raw-relation search and rejects result, trace, automorphism, counter, wrapper, equivalence, and reconstruction corruption |
+| named external canonical-labeling benchmark | deliberately not yet implemented | nauty/bliss/Vole/Sage require a separately frozen incidence/action encoding and version/options tuple; current timing records only the producer and its independent checker |
+
+This mapping records engineering influence, not novelty. In particular, the
+new point-stabilizer surface follows the Feulner/Vole action contract, while the
+full-artifact verifier and corruption suite follow the trust separation exposed
+most directly by `isocert`.
+
 ## Search record and limits
 
 Queries covered combinations of “canonical labeling,” “automorphism group,”

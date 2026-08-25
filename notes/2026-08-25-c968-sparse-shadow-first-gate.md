@@ -118,6 +118,10 @@ closest arbitrary-permutation-action engine; Feulner and Sage `codecan` are the
 closest projective/semilinear canonical-form precedent; and
 Bankovic--Drecun--Maric `isocert` is the direct independent-certificate
 baseline. No novelty or priority claim is licensed.
+The audit now maps each design consequence to its implementation state:
+explicit Paper-I IR, first-class transporters/stabilizers, fail-closed
+semilinear schemas, separate proof replay, and the still-deferred external
+benchmark encoding.
 
 ## Mystery ledger
 

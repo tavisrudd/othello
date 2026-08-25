@@ -232,6 +232,13 @@ prerequisite. A fresh extraction of the actual core `.crate` passes
 locked/offline unit and doc tests; the packaged unit fixture is synchronized
 semantically with the public workspace fixture.
 
+The bounded prior-art audit now includes an implementation mapping. It records
+McKay--Piperno/nauty/bliss/Vole as canonicalization baselines, Feulner/Vole as
+the reason transporters and stabilizers are first-class, and `isocert` as the
+proof/checker trust comparator. It also keeps the external-tool benchmark
+explicitly deferred until a versioned encoding exists; no novelty claim is
+made.
+
 No unblocked C968 implementation frontier remains: each next adapter first
 requires the complete paper-owned export named in its `fixtures/gated-*.json`.
 Nearby evidence JSON and trust manifests are explicitly insufficient. Once an
