@@ -22,6 +22,7 @@
   "require_concurrency_cap": false,
   "required_fixed_core_indices": null,
   "required_fixed_core_points": null,
+  "required_fixed_line_degrees": null,
   "required_fixed_line_type_counts": null,
   "schema": "c949-five-character-core-v1",
   "search": {

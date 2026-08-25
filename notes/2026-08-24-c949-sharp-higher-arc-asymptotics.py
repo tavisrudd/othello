@@ -748,6 +748,7 @@ def search_five_character_core(q: int, symmetry: str, output: Path,
                                fixed_core_points: int | None = None,
                                fixed_line_type_counts: list[int] | None = None,
                                fixed_core_indices: list[int] | None = None,
+                               fixed_line_degrees: list[int] | None = None,
                                require_concurrency_cap: bool = False) -> None:
     """Stage 1: find only the symmetric five-character blocking core."""
     from ortools.sat.python import cp_model
@@ -790,6 +791,15 @@ def search_five_character_core(q: int, symmetry: str, output: Path,
         orbit_counts = Counter(orbit_of[point] for point in members)
         signature = tuple(orbit_counts.get(index, 0) for index in range(len(orbits)))
         signature_lines.setdefault(signature, []).append(line)
+    fixed_line_degree_by_index = None
+    if fixed_line_degrees is not None:
+        singleton_lines = sorted(equivalent_lines[0] for equivalent_lines in
+                                 signature_lines.values() if len(equivalent_lines) == 1)
+        if len(fixed_line_degrees) != len(singleton_lines):
+            raise ValueError("fixed line degrees must list every singleton line")
+        if any(degree not in range(1, 6) for degree in fixed_line_degrees):
+            raise ValueError("fixed line degrees must lie between one and five")
+        fixed_line_degree_by_index = dict(zip(singleton_lines, fixed_line_degrees))
     high_secants = []
     high_secant_incidences = []
     signature_multiplicities = []
@@ -803,6 +813,8 @@ def search_five_character_core(q: int, symmetry: str, output: Path,
             multiplicity * chosen_orbit[orbit_index]
             for orbit_index, multiplicity in enumerate(signature) if multiplicity
         ))
+        if fixed_line_degree_by_index is not None and len(equivalent_lines) == 1:
+            model.add(intersection == fixed_line_degree_by_index[equivalent_lines[0]])
         high = model.new_bool_var(f"core_line_{signature_index}_is_high")
         model.add(intersection >= 3).only_enforce_if(high)
         model.add(intersection <= 2).only_enforce_if(high.Not())
@@ -855,6 +867,7 @@ def search_five_character_core(q: int, symmetry: str, output: Path,
         "required_fixed_core_points": fixed_core_points,
         "required_fixed_core_indices": fixed_core_indices,
         "required_fixed_line_type_counts": fixed_line_type_counts,
+        "required_fixed_line_degrees": fixed_line_degrees,
         "require_concurrency_cap": require_concurrency_cap,
         "search": {
             "random_seed": 949,
@@ -1152,6 +1165,7 @@ def audit_frobenius_fixed_subplane(output: Path) -> None:
         4: (q * q - 6 * q + 15) // 3,
         5: q // 3 - 2,
     }
+    aggregate_patterns: set[tuple[int, tuple[int, ...]]] = set()
     patterns: dict[tuple[int, tuple[int, ...]], dict[str, object]] = {}
     candidate_subset_count = 0
     for mask in range(1 << 13):
@@ -1182,14 +1196,68 @@ def audit_frobenius_fixed_subplane(output: Path) -> None:
                                   if representative & (1 << position)]
         for fixed_types in choices:
             key = (representative, fixed_types)
-            patterns.setdefault(key, {
+            aggregate_patterns.add(key)
+            if mask != representative:
+                continue
+            type_one_lines = [line_index for line_index, line in enumerate(fixed_line_masks)
+                              if (mask & line).bit_count() == 1]
+            type_two_lines = [line_index for line_index, line in enumerate(fixed_line_masks)
+                              if (mask & line).bit_count() == 2]
+            fixed_line_assignments = []
+            for low_type_one in itertools.combinations(type_one_lines, fixed_types[0]):
+                for low_type_two in itertools.combinations(type_two_lines, fixed_types[1]):
+                    low_lines = set(low_type_one) | set(low_type_two)
+                    if all(
+                        sum(1 for line_index, line in enumerate(fixed_line_masks)
+                            if line & (1 << position) and line_index not in low_lines) in (1, 4)
+                        for position in range(13) if mask & (1 << position)
+                    ):
+                        fixed_line_assignments.append(sum(1 << line for line in low_lines))
+            if not fixed_line_assignments:
+                continue
+            line_mask_index = {line: index for index, line in enumerate(fixed_line_masks)}
+            assignment_representatives = set()
+            for assignment in fixed_line_assignments:
+                images = []
+                for permutation in generated_group:
+                    if permute_mask(mask, permutation) != mask:
+                        continue
+                    image = 0
+                    for line_index, line in enumerate(fixed_line_masks):
+                        if assignment & (1 << line_index):
+                            image |= 1 << line_mask_index[permute_mask(line, permutation)]
+                    images.append(image)
+                assignment_representatives.add(min(images))
+            canonical_low_lines = min(assignment_representatives)
+            fixed_line_degrees = []
+            for line_index, line in enumerate(fixed_line_masks):
+                intersection = (mask & line).bit_count()
+                low = bool(canonical_low_lines & (1 << line_index))
+                if intersection in (0, 3):
+                    degree = 3
+                elif intersection == 1:
+                    degree = 1 if low else 4
+                elif intersection == 2:
+                    degree = 2 if low else 5
+                else:
+                    degree = 4
+                fixed_line_degrees.append(degree)
+            record = {
                 "fixed_core_size": fixed_core_size,
                 "fixed_core_point_indices": representative_indices,
                 "fixed_subline_intersection_counts": {
                     str(intersection): r_counts[intersection] for intersection in range(5)
                 },
                 "fixed_line_type_counts": list(fixed_types),
-            })
+                "fixed_line_assignment_count_after_core_congruences":
+                    len(fixed_line_assignments),
+                "fixed_line_assignment_orbit_count_under_core_stabilizer":
+                    len(assignment_representatives),
+                "fixed_line_degrees_in_fixed_index_order": fixed_line_degrees,
+            }
+            if key in patterns and patterns[key] != record:
+                raise AssertionError("assignment count should be projectively invariant")
+            patterns.setdefault(key, record)
 
     ordered_patterns = sorted(patterns.values(), key=lambda record: (
         record["fixed_core_size"],
@@ -1197,7 +1265,7 @@ def audit_frobenius_fixed_subplane(output: Path) -> None:
         record["fixed_line_type_counts"],
     ))
     output.write_text(json.dumps({
-        "schema": "c949-q27-frobenius-fixed-subplane-audit-v1",
+        "schema": "c949-q27-frobenius-fixed-subplane-audit-v2",
         "field_order": q,
         "fixed_subplane_order": 3,
         "fixed_point_indices": fixed_indices,
@@ -1208,6 +1276,7 @@ def audit_frobenius_fixed_subplane(output: Path) -> None:
         "target_dual_core_size": 2 * q + 1,
         "target_line_type_counts": target,
         "candidate_fixed_point_subset_count": candidate_subset_count,
+        "aggregate_normalized_pattern_count": len(aggregate_patterns),
         "normalized_pattern_count": len(ordered_patterns),
         "normalized_patterns": ordered_patterns,
     }, indent=2, sort_keys=True) + "\n")
@@ -1737,6 +1806,7 @@ def main() -> None:
     core_search.add_argument("--fixed-core-points", type=int)
     core_search.add_argument("--fixed-core-indices", type=int, nargs="+")
     core_search.add_argument("--fixed-line-type-counts", type=int, nargs=5)
+    core_search.add_argument("--fixed-line-degrees", type=int, nargs="+")
     core_search.add_argument("--require-concurrency-cap", action="store_true")
     core_lift = subparsers.add_parser("five-character-core-lift")
     core_lift.add_argument("--core", type=Path, required=True)
@@ -1780,6 +1850,7 @@ def main() -> None:
         search_five_character_core(args.q, args.symmetry, args.output,
                                    args.seconds, args.workers, args.fixed_core_points,
                                    args.fixed_line_type_counts, args.fixed_core_indices,
+                                   args.fixed_line_degrees,
                                    args.require_concurrency_cap)
     elif args.command == "five-character-core-lift":
         lift_five_character_core(args.core, args.output, args.seconds, args.workers)

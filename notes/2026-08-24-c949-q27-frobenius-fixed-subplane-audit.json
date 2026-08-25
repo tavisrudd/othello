@@ -1,4 +1,5 @@
 {
+  "aggregate_normalized_pattern_count": 10,
   "candidate_fixed_point_subset_count": 1950,
   "field_order": 27,
   "fixed_line_count": 13,
@@ -21,7 +22,7 @@
   "fixed_subplane_order": 3,
   "fixed_subplane_projective_subset_orbit_count": 30,
   "generated_projective_group_order": 5616,
-  "normalized_pattern_count": 10,
+  "normalized_pattern_count": 2,
   "normalized_patterns": [
     {
       "fixed_core_point_indices": [
@@ -31,29 +32,23 @@
         27
       ],
       "fixed_core_size": 4,
-      "fixed_line_type_counts": [
+      "fixed_line_assignment_count_after_core_congruences": 3,
+      "fixed_line_assignment_orbit_count_under_core_stabilizer": 1,
+      "fixed_line_degrees_in_fixed_index_order": [
+        3,
+        1,
+        1,
+        3,
+        1,
+        1,
+        1,
         2,
         2,
         3,
-        5,
-        1
+        4,
+        4,
+        5
       ],
-      "fixed_subline_intersection_counts": {
-        "0": 2,
-        "1": 7,
-        "2": 3,
-        "3": 1,
-        "4": 0
-      }
-    },
-    {
-      "fixed_core_point_indices": [
-        0,
-        1,
-        2,
-        27
-      ],
-      "fixed_core_size": 4,
       "fixed_line_type_counts": [
         5,
         2,
@@ -77,29 +72,23 @@
         28
       ],
       "fixed_core_size": 4,
-      "fixed_line_type_counts": [
-        2,
-        2,
+      "fixed_line_assignment_count_after_core_congruences": 6,
+      "fixed_line_assignment_orbit_count_under_core_stabilizer": 1,
+      "fixed_line_degrees_in_fixed_index_order": [
+        3,
         3,
         2,
-        4
-      ],
-      "fixed_subline_intersection_counts": {
-        "0": 3,
-        "1": 4,
-        "2": 6,
-        "3": 0,
-        "4": 0
-      }
-    },
-    {
-      "fixed_core_point_indices": [
-        0,
+        3,
+        4,
+        4,
+        2,
         1,
-        27,
-        28
+        2,
+        2,
+        1,
+        2,
+        5
       ],
-      "fixed_core_size": 4,
       "fixed_line_type_counts": [
         2,
         5,
@@ -113,166 +102,10 @@
         "2": 6,
         "3": 0,
         "4": 0
-      }
-    },
-    {
-      "fixed_core_point_indices": [
-        0,
-        1,
-        2,
-        27,
-        28,
-        54,
-        729
-      ],
-      "fixed_core_size": 7,
-      "fixed_line_type_counts": [
-        2,
-        2,
-        3,
-        2,
-        4
-      ],
-      "fixed_subline_intersection_counts": {
-        "0": 0,
-        "1": 3,
-        "2": 6,
-        "3": 3,
-        "4": 1
-      }
-    },
-    {
-      "fixed_core_point_indices": [
-        0,
-        1,
-        2,
-        27,
-        28,
-        54,
-        729
-      ],
-      "fixed_core_size": 7,
-      "fixed_line_type_counts": [
-        2,
-        5,
-        3,
-        2,
-        1
-      ],
-      "fixed_subline_intersection_counts": {
-        "0": 0,
-        "1": 3,
-        "2": 6,
-        "3": 3,
-        "4": 1
-      }
-    },
-    {
-      "fixed_core_point_indices": [
-        0,
-        1,
-        2,
-        28,
-        29,
-        54,
-        729
-      ],
-      "fixed_core_size": 7,
-      "fixed_line_type_counts": [
-        2,
-        2,
-        6,
-        2,
-        1
-      ],
-      "fixed_subline_intersection_counts": {
-        "0": 0,
-        "1": 4,
-        "2": 3,
-        "3": 6,
-        "4": 0
-      }
-    },
-    {
-      "fixed_core_point_indices": [
-        0,
-        1,
-        27,
-        28,
-        54,
-        55,
-        729
-      ],
-      "fixed_core_size": 7,
-      "fixed_line_type_counts": [
-        2,
-        2,
-        0,
-        2,
-        7
-      ],
-      "fixed_subline_intersection_counts": {
-        "0": 0,
-        "1": 2,
-        "2": 9,
-        "3": 0,
-        "4": 2
-      }
-    },
-    {
-      "fixed_core_point_indices": [
-        0,
-        1,
-        27,
-        28,
-        54,
-        55,
-        729
-      ],
-      "fixed_core_size": 7,
-      "fixed_line_type_counts": [
-        2,
-        5,
-        0,
-        2,
-        4
-      ],
-      "fixed_subline_intersection_counts": {
-        "0": 0,
-        "1": 2,
-        "2": 9,
-        "3": 0,
-        "4": 2
-      }
-    },
-    {
-      "fixed_core_point_indices": [
-        0,
-        1,
-        27,
-        28,
-        54,
-        55,
-        729
-      ],
-      "fixed_core_size": 7,
-      "fixed_line_type_counts": [
-        2,
-        8,
-        0,
-        2,
-        1
-      ],
-      "fixed_subline_intersection_counts": {
-        "0": 0,
-        "1": 2,
-        "2": 9,
-        "3": 0,
-        "4": 2
       }
     }
   ],
-  "schema": "c949-q27-frobenius-fixed-subplane-audit-v1",
+  "schema": "c949-q27-frobenius-fixed-subplane-audit-v2",
   "target_dual_core_size": 55,
   "target_line_type_counts": {
     "1": 461,

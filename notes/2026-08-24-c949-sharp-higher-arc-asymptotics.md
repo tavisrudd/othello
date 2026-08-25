@@ -189,8 +189,8 @@ Moreover, the numbers of fixed lines of types `1,...,5` must be congruent
 modulo three to `(461,17,78,194,7)`, hence to `(2,2,0,2,1)`.  Exhausting all
 `2^13` fixed-point subsets and quotienting by the generated order-5616 group
 `PGL(3,3)` leaves exactly ten normalized branches: four with `f=4` and six
-with `f=7`.  Their fixed-subline count vectors and admissible fixed-line type
-vectors are
+with `f=7` before imposing the concurrency cap.  Their fixed-subline count
+vectors and admissible fixed-line type vectors are
 
 ```text
 (2,7,3,1,0): (2,2,3,5,1), (5,2,3,2,1)
@@ -200,11 +200,27 @@ vectors are
 (0,2,9,0,2): (2,2,0,2,7), (2,5,0,2,4), (2,8,0,2,1).
 ```
 
-Thus the Frobenius question is no longer one undifferentiated 261-signature
-model, but these ten finite branches.  Bounded searches of them, including the
-required concurrency cap, remain `UNKNOWN`; that status supplies no evidence
-either way.  All exclusions here are symmetry-restricted statements, not an
-unrestricted nonexistence theorem.
+The concurrency cap makes this much sharper.  Every point of `D` has selected
+degree exactly `s=19` by the averaging argument above.  At a Frobenius-fixed
+core point, the nonfixed incident lines occur in triples, so the number of
+selected fixed lines through it is congruent to `19` modulo three.  Since
+there are four fixed lines through it, that number is exactly one or four.
+Exhausting the compatible assignments of types `1/4` on the `r=1` lines and
+types `2/5` on the `r=2` lines eliminates eight of the ten branches, including
+every `f=7` branch.  Exactly two canonical branches survive:
+
+```text
+fixed core     fixed-subline counts   fixed-line type counts
+collinear 4    (2,7,3,1,0)            (5,2,3,2,1)
+general 4      (3,4,6,0,0)            (2,5,3,2,1).
+```
+
+For each branch the compatible fixed-line assignments form one orbit under
+the stabilizer of the fixed core.  Thus the Frobenius question is no longer
+one undifferentiated 261-signature model, but two fully normalized finite
+branches.  Five-minute exact searches of both remain `UNKNOWN`; that status
+supplies no evidence either way.  All exclusions here are
+symmetry-restricted statements, not an unrestricted nonexistence theorem.
 
 ### Exact `q=9` result
 
@@ -404,10 +420,10 @@ family is lower priority.
 - **Open — does the `2q+1` five-character blocking core generalize?**  The
   correct `q=27` target is `1^461 2^17 3^78 4^194 5^7`.  Trace-`x/y`,
   trace-`x`, and scalar `C_13` invariance are excluded.  Frobenius invariance
-  is reduced exactly to ten normalized fixed-subplane branches, four with
-  four fixed core points and six with seven; those branches and asymmetric
-  cores remain open.  Any surviving core must satisfy the concurrency cap.
-  The alternative 54-maximal-secant envelope branch is also unclassified.
+  first reduces to ten aggregate fixed-subplane branches; the local degree-19
+  congruence then leaves exactly two canonical four-fixed-point branches.
+  Those two branches and asymmetric cores remain open.  The alternative
+  54-maximal-secant envelope branch is also unclassified.
 - **Open — can `t_7(2,9)>=39` be proved without exhaustive search?**  The
   positive construction is structural, but exclusion of a 38-point complete
   arc still trusts one normalized CP-SAT infeasibility certificate.  A second
@@ -496,7 +512,7 @@ boundary is the short Python finite-field implementation and its explicit
 assertions; no computer-algebra or second implementation is used.  The
 `q=27` artifacts certify only the stated finite parameter/orbit audits.
 
-The ten normalized five-character Frobenius branches and the unrestricted
+The two normalized five-character Frobenius branches and the unrestricted
 `q=27` core search are not completed; no unrestricted existence or
 nonexistence conclusion is licensed.
 
