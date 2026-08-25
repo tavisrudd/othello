@@ -1168,7 +1168,7 @@ gates remain binding.
 | EV rank | Task | Current gate | Why this position |
 |---:|---|---|---|
 | 1 | C915 | edits E1--E6 applied and checklist green; three independent audits open | the external referee package blocks the Version 2 release |
-| 2 | C969 | active; schemas/core/frozen/formula adapters, proved R5--R7 terminal selector, positive verifier, tangent `mq(q-1)` canonicalizer, and prime/extension benchmarks green; centered-gcd sigma reduction falsified by an exact R5 counterexample, so the sigma fiber invariant, nonpersistent canonicalizer, and general complexity theorem remain open | compile the proved R5--R10 geometry into one exact canonical classifier and decoder while settling the general split-locator decision/recovery complexity boundary |
+| 2 | C969 | active; schemas/core/frozen/formula adapters, proved R5--R7 terminal selector, positive verifier, tangent `mq(q-1)` canonicalizer, and prime/extension benchmarks green; the fixed-pair sigma quotient `T/T^(r-1)` modulo inversion is proved and matches the q7 census, but its intrinsic extractor, lex-min target chart, nonpersistent canonicalizer, and general complexity theorem remain open | compile the proved R5--R10 geometry into one exact canonical classifier and decoder while settling the general split-locator decision/recovery complexity boundary |
 
 ## Unallocated level-ups
 
@@ -1230,11 +1230,11 @@ history.
 
 `go C969`
 
-(Resolve the persistent-sigma fiber invariant before attempting another fast
-canonicalizer.  The centered irreducible-gcd plus torus-normalizer reduction is
-false: over `F_7`, the R5 syndrome `[1,1,6,6,1]` has restricted minimum
-`[1,1,6,6,1]` but full-PGL minimum `[1,0,3,3,5]`.  Derive the missing
-`T/T^(r-1)`-type class and preserve the exact explicit fallback until equality
-with the full orbit is proved.  Keep the general C607 split-factorization
-exponent theorem separate.  C915's three independent Version 2 audits remain the
+(Build a basis-independent extractor for the proved persistent-sigma class
+`T/T^(r-1)` modulo inversion, then prove how that class selects the
+lexicographically minimal target quadratic.  The q7 R5 census gives exactly
+the predicted three quotient classes, while `[1,1,6,6,1]` still disproves any
+class-independent centered target.  Preserve the exact explicit fallback until
+equality with the full orbit is proved.  Keep the general C607
+split-factorization exponent theorem separate.  C915's three independent Version 2 audits remain the
 higher-EV external-release gate but are a separate active card.)

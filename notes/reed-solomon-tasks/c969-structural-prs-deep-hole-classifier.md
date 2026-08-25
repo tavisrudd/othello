@@ -43,7 +43,8 @@ to restrict exact lexicographic minimization to `m q(q-1)` affine transports;
 Sigma and nonpersistent canonicalizers retain the explicit group fallback.  A
 frozen R5 counterexample proves that centering an irreducible sigma gcd and
 enumerating its torus normalizer does not preserve the full-orbit minimum; any
-future sigma speedup must retain the missing torus/fiber class.
+future sigma speedup must extract the now-proved fixed-pair class
+`T/T^(r-1)` modulo inversion and show how it selects the lex-min target chart.
 
 ## Goal
 
