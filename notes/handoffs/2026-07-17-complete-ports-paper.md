@@ -13,8 +13,8 @@ PRESENTATION SPECTRUM IS QUEUED AFTER C953; NO PUSH OR DEPOSIT
 Relative Weight Hierarchies*
 **Standalone paper repository**: `tavisrudd/complete-repair-ports` at
 `~/src/math-papers/complete-repair-ports`
-**Current local standalone commit**: `113f707` (C954 paper plus corrected Lean
-companion description; verified; no push or deposit)
+**Current local standalone commit**: `dc3a9cf` (C957 weighted-transfer paper;
+verified; no push or deposit)
 **Approved paper license**: MIT
 
 ## Goal
@@ -99,7 +99,7 @@ Current and completed strengthening:
   target block with nonzero projection, separates it from the arbitrary-rank
   theorem after the distance gate, gives a nonvacuous strict family from a
   Singer cycle, and passes literature, anti-smuggling, cold-read, and 20-page
-  release gates.
+  release gates; the verified local standalone is commit `dc3a9cf`.
 
 - [C954 dual failure-threshold upgrade](../2026-08-24-c954-dual-failure-threshold.md)
   identifies the minimum failures leaving each dimension of target ambiguity

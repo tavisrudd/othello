@@ -225,6 +225,16 @@ the exact-sequence result.
   generic specialization, or unproved existence oracle.  Both new claims
   remain explicitly Lean-absent.
 
+## Post-close local export
+
+Authority commit `aa66b98d1` was audited and synchronized through
+`papers/scripts/export-paper-repos.py` to the existing standalone repository.
+The mirror release gate passes with 20 warning-free pages, 20 claims, and four
+Lean terminals; exporter verification reports 40 tracked files derived from
+the same authority commit.  The forward paper-mirror commit is `dc3a9cf`.
+The portfolio-summary authority was also forwarded to its standalone mirror
+as commit `3f6062f`.  No push, tag, deposit, or submission was performed.
+
 ## Mystery ledger
 
 ### Settled
