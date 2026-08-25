@@ -52,6 +52,17 @@ blowdown to the marked plane, followed by invariant descent.  Report and
 replay: `notes/2026-08-24-c958-type-i1-rational-splitting-cover.md` and its
 adjacent bundle.
 
+The split blowdown is explicit.  Three unique quadrics through a common
+reducible twisted cubic and the three coordinate twisted cubics give the
+marked plane map.  After normalization the six contracted lines map to the
+four standard points together with `[1:A^2:B^2]` and `[1:A:B]`.  Hence the
+actual change to the C956 split Cox moduli is
+`(a_Cox,b_Cox)=(A^2,B^2)`.  The next algebraic step is the inverse
+anticanonical cubic map through these six points; the remaining arithmetic
+step is invariant descent under the explicit Möbius group.  Report and
+replay: `notes/2026-08-24-c958-type-i1-split-blowdown.md` and its adjacent
+bundle.
+
 ## Goal
 
 Turn the constructive existence proof in C956 into explicit, independently
