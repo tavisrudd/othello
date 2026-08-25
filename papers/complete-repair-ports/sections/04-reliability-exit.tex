@@ -74,11 +74,8 @@ $\kappa_C(P)+d(C^\perp)$.  Minimizing over $P$ and using
 \proves{thm:best-target-ghw}%
 \end{proof}
 
-The fixed-target hierarchy also has a sharp elementary ceiling.  Put
-$k=\dim I$ and $b=\rank G_J$.  From the exact
-sequence~\eqref{eq:associated-exact-sequence},
-$\dim D_P=|J|-b+\ell$.  The relative Singleton bound and the ordinary
-Singleton bound give
+Put $k=\dim I$ and $b=\rank G_J$.  The exact sequence and the relative and
+ordinary Singleton bounds give
 \begin{equation}
  M_t(D_P,K_P)\leq b-\ell+t,
  \qquad d(I^\perp)\leq k+1.
@@ -112,32 +109,22 @@ $t=1$ forces $I$ to be MDS and forces equality at every rank.
 \end{theorem}
 
 \begin{proof}
-Since $b\leq k$, summing~\eqref{eq:singleton-bounds} proves
-\eqref{eq:threshold-ceiling}.  For an MDS code the column matroid of $G$ is
-uniform, so $\rank G_P=u$, $\rank G_J=b$, and the displayed formula for
-$\ell$ follows from
-$\operatorname{span}G_P+\operatorname{span}G_J=\F_q^k$.  For
-$H\subseteq J$ with $|H|=h\leq k$,
+The ceiling follows from~\eqref{eq:singleton-bounds} and $b\leq k$.  For an
+MDS code the column matroid is uniform, so $\rank G_P=u$, $\rank G_J=b$,
+$\ell=u+b-k$, and, for $H\subseteq J$ with $|H|=h\leq k$,
 \[
  \dim\bigl(\operatorname{span}G_P\cap\operatorname{span}G_H\bigr)
  =\max\{0,u+h-k\}.
 \]
-Proposition~\ref{prop:relative-profile} therefore gives
-$M_t=k-u+t$ throughout $1\leq t\leq\ell$: the required helper size
-$k-u+t$ does not exceed $b\leq|J|$ because $t\leq\ell=u+b-k$.  Since
-$d(I^\perp)=k+1$, the second formula follows.  If $|J|\geq k$, then $b=k$
-and $\ell=u$, so both inequalities in~\eqref{eq:singleton-bounds} are
-equalities.
+Thus Proposition~\ref{prop:relative-profile} gives $M_t=k-u+t$ for
+$1\leq t\leq\ell$; here $k-u+t\leq b\leq|J|$.  Now
+$d(I^\perp)=k+1$, and if $|J|\geq k$, then $b=k$ and $\ell=u$, proving the
+remaining direct assertions.
 
-If equality holds at $t=1$, then every inequality used in
-\[
- M_1+d(I^\perp)\leq b-\ell+1+d(I^\perp)
- \leq2k-\ell+2
-\]
-is an equality.  In particular $d(I^\perp)=k+1$, so $I$ is MDS, and
-$M_1=b-\ell+1$.  Strict growth of relative generalized weights gives
-$M_t\geq b-\ell+t$, while the relative Singleton bound gives the reverse
-inequality.  Hence every rank is extremal.
+Equality at $t=1$ forces equality in both Singleton bounds and $b\leq k$.
+Hence $d(I^\perp)=k+1$, so $I$ is MDS, and $M_1=b-\ell+1$.  Strict growth
+then gives $M_t\geq b-\ell+t$, while relative Singleton gives the reverse
+inequality; every rank is extremal.
 \uses{prop:relative-profile}%
 \proves{thm:mds-thresholds}%
 \end{proof}
