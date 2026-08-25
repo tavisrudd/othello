@@ -226,13 +226,13 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         canonicalize_syndrome(&r6_sigma, args.candidate_limit)
     })?;
     rows.push(BenchmarkRow {
-        operation: "r6_sigma_explicit_semilinear_canonicalization".into(),
+        operation: "r6_sigma_simple_root_semilinear_canonicalization".into(),
         field_order: 17,
         redundancy: 6,
         elapsed_ns_total: sigma_elapsed,
         elapsed_ns_per_iteration: sigma_elapsed / u128::from(args.iterations),
         candidates_examined: Some(sigma_canonicalization.transporters_examined),
-        baseline: "remaining explicit m*(q^3-q) nonsplit-quadratic orbit",
+        baseline: "simple rational syndrome-form root; lex-forced prefix: O(m*r*q)",
     });
 
     let classification = classify(&r6, args.candidate_limit, args.candidate_limit)?;

@@ -1168,7 +1168,7 @@ gates remain binding.
 | EV rank | Task | Current gate | Why this position |
 |---:|---|---|---|
 | 1 | C915 | edits E1--E6 applied and checklist green; three independent audits open | the external referee package blocks the Version 2 release |
-| 2 | C969 | active; schemas/core/frozen/formula adapters, proved R5--R7 terminal selector, positive verifier, tangent `mq(q-1)` and rootless-sigma `m(q^2-1)` canonicalizers, and prime/extension benchmarks green; the sigma quotient has an intrinsic extractor and certificate replay, while the root-bearing sigma chart, nonpersistent canonicalizer, and general complexity theorem remain open | compile the proved R5--R10 geometry into one exact canonical classifier and decoder while settling the general split-locator decision/recovery complexity boundary |
+| 2 | C969 | active; schemas/core/frozen/formula adapters, proved R5--R7 terminal selector, positive verifier, tangent `mq(q-1)`, rootless-sigma `m(q^2-1)`, and simple-root-sigma `O(mrq)` canonicalizers, and prime/extension benchmarks green; the sigma quotient has intrinsic certificate replay, while the degenerate-root sigma chart, nonpersistent canonicalizer, and general complexity theorem remain open | compile the proved R5--R10 geometry into one exact canonical classifier and decoder while settling the general split-locator decision/recovery complexity boundary |
 
 ## Unallocated level-ups
 
@@ -1230,11 +1230,12 @@ history.
 
 `go C969`
 
-(Resolve the root-bearing persistent-sigma lex chart. The intrinsic
-`F_q[X]/Q` quotient extractor, certificate replay, and exact `m(q^2-1)`
-rootless-form canonicalizer are green. For a rational root of the syndrome
-binary form, derive the forced second/third-coordinate strata before reducing
-the remaining top-row parameters. Preserve the exact explicit fallback until
+(Resolve the degenerate-root persistent-sigma lex chart. The intrinsic
+`F_q[X]/Q` quotient extractor, certificate replay, exact `m(q^2-1)` rootless
+canonicalizer, and `O(mrq)` simple-root canonicalizer are green. For multiple
+roots and the characteristic-two zero-third-coordinate stratum, derive the
+next forced coordinate before reducing the remaining top-row parameters.
+Preserve the exact explicit fallback until
 equality with the full orbit is proved. Keep the general C607
 split-factorization exponent theorem separate.  C915's three independent Version 2 audits remain the
 higher-EV external-release gate but are a separate active card.)

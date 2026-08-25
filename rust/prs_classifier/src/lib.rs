@@ -859,6 +859,11 @@ pub fn canonicalize_syndrome(
         {
             return Ok(canonicalization);
         }
+        if let Some(canonicalization) =
+            canonicalize_simple_root_sigma(&field, syndrome.clone(), transporter_limit)?
+        {
+            return Ok(canonicalization);
+        }
     }
     canonicalize_explicit(&field, syndrome, transporter_limit)
 }
@@ -939,6 +944,108 @@ fn canonicalize_rootless_sigma(
         transporter: best_transporter.ok_or(Error::BadSigmaInvariant)?,
         transporters_examined: examined,
         complexity: "rootless sigma form: m*(q^2-1) lex-forced second-coordinate transports",
+    }))
+}
+
+fn canonicalize_simple_root_sigma(
+    field: &Field,
+    syndrome: Vec<u32>,
+    transporter_limit: u64,
+) -> Result<Option<Canonicalization>, Error> {
+    let rows = projective_rows(field);
+    let mut root_count = 0u64;
+    for &(bottom, complement) in &rows {
+        let matrix = [complement[0], complement[1], bottom[0], bottom[1]];
+        let (candidate, _) = apply_semilinear(field, &syndrome, 0, matrix)?;
+        if candidate[0] != 0 {
+            continue;
+        }
+        root_count += 1;
+        if candidate[1] != 1 || (field.spec.p == 2 && candidate[2] == 0) {
+            return Ok(None);
+        }
+    }
+    if root_count == 0 {
+        return Ok(None);
+    }
+    let per_root = if field.spec.p == 2 {
+        u64::from(field.order())
+    } else {
+        u64::from(field.order() - 1)
+    };
+    let total = root_count
+        .checked_mul(per_root)
+        .and_then(|count| count.checked_mul(u64::try_from(field.spec.degree).unwrap_or(u64::MAX)))
+        .ok_or(Error::FieldTooLarge)?;
+    if total > transporter_limit {
+        return Err(Error::CandidateLimit {
+            limit: transporter_limit,
+        });
+    }
+
+    let mut best: Option<Vec<u32>> = None;
+    let mut best_transporter = None;
+    let mut examined = 0;
+    for exponent in 0..field.spec.degree {
+        for &(bottom, complement) in &rows {
+            let base_matrix = [complement[0], complement[1], bottom[0], bottom[1]];
+            let (base_candidate, _) = apply_semilinear(field, &syndrome, exponent, base_matrix)?;
+            if base_candidate[0] != 0 {
+                continue;
+            }
+            if base_candidate[1] != 1 || (field.spec.p == 2 && base_candidate[2] == 0) {
+                return Ok(None);
+            }
+            let parameters = if field.spec.p == 2 {
+                let scale = field
+                    .inv(base_candidate[2])
+                    .ok_or(Error::BadSigmaInvariant)?;
+                (0..field.order())
+                    .map(|shift| (scale, shift))
+                    .collect::<Vec<_>>()
+            } else {
+                let two_inverse = field.inv(field.add(1, 1)).expect("odd characteristic");
+                (1..field.order())
+                    .map(|scale| {
+                        let shift =
+                            field.neg(field.mul(field.mul(scale, base_candidate[2]), two_inverse));
+                        (scale, shift)
+                    })
+                    .collect::<Vec<_>>()
+            };
+            for (scale, shift) in parameters {
+                let matrix = normalize_matrix(
+                    field,
+                    [
+                        field.add(field.mul(scale, complement[0]), field.mul(shift, bottom[0])),
+                        field.add(field.mul(scale, complement[1]), field.mul(shift, bottom[1])),
+                        bottom[0],
+                        bottom[1],
+                    ],
+                )?;
+                let (candidate, output_scale) =
+                    apply_semilinear(field, &syndrome, exponent, matrix)?;
+                debug_assert_eq!(&candidate[..2], &[0, 1]);
+                debug_assert_eq!(candidate[2], u32::from(field.spec.p == 2));
+                examined += 1;
+                if best.as_ref().is_none_or(|current| candidate < *current) {
+                    best = Some(candidate);
+                    best_transporter = Some(Transporter {
+                        frobenius_exponent: exponent,
+                        matrix,
+                        projective_output_scale: output_scale,
+                    });
+                }
+            }
+        }
+    }
+    Ok(Some(Canonicalization {
+        normalized_input: syndrome,
+        canonical_syndrome: best.ok_or(Error::BadSigmaInvariant)?,
+        transporter: best_transporter.ok_or(Error::BadSigmaInvariant)?,
+        transporters_examined: examined,
+        complexity:
+            "simple-root sigma form: lex-forced first three coordinates; O(m*r*q) transports",
     }))
 }
 
@@ -2456,14 +2563,14 @@ mod tests {
     fn sigma_q7_fibres_match_three_torus_quotient_classes() {
         let field = Field::new(prime_field(7)).unwrap();
         let expected = [
-            (vec![0, 1, 0, 3, 0], 2, 336),
+            (vec![0, 1, 0, 3, 0], 2, 24),
             (vec![1, 0, 3, 3, 5], 5, 48),
             (vec![1, 0, 1, 1, 2], 0, 48),
             (vec![1, 0, 1, 1, 2], 0, 48),
             (vec![1, 0, 1, 1, 2], 0, 48),
             (vec![1, 0, 1, 1, 2], 0, 48),
             (vec![1, 0, 3, 3, 5], 5, 48),
-            (vec![0, 1, 0, 3, 0], 2, 336),
+            (vec![0, 1, 0, 3, 0], 2, 24),
         ];
         for ([s0, s1], (expected_minimum, expected_trace, expected_transports)) in (0..7)
             .map(|second| [1, second])
@@ -2517,6 +2624,13 @@ mod tests {
         let invariant = sigma_invariant(&field, &syndrome).unwrap();
         assert_eq!(invariant.quadratic_gcd, quadratic);
         assert_eq!(invariant.quotient_order, 3);
+
+        let reduced = canonicalize_simple_root_sigma(&field, syndrome.clone(), 2_000)
+            .unwrap()
+            .expect("GF(8) fixture has a nondegenerate simple syndrome-form root");
+        let explicit = canonicalize_explicit(&field, syndrome.clone(), 2_000).unwrap();
+        assert_eq!(reduced.canonical_syndrome, explicit.canonical_syndrome);
+        assert!(reduced.transporters_examined < explicit.transporters_examined);
 
         for exponent in 0..field.spec.degree {
             for matrix in normalized_pgl_matrices(&field) {

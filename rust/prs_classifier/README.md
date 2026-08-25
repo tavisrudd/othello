@@ -15,8 +15,9 @@ This is the C969 implementation crate.  Its current executable slice provides:
 - the uniform R7 odd-binary central-nucleus adapter, kept separate from the
   q=7,8,9 radius gap;
 - exact tangent-family canonicalization in `m*q*(q-1)` transports and
-  rootless-form sigma canonicalization in `m*(q^2-1)` transports, with the full
-  `m*(q^3-q)` path retained for root-bearing sigma and other inputs;
+  sigma canonicalization in `m*(q^2-1)` on the rootless-form stratum and
+  `O(m*r*q)` on the simple-root stratum, with the full `m*(q^3-q)` path retained
+  for degenerate-root sigma and other inputs;
 - an intrinsic persistent-sigma `T/T^(r-1)` modulo inversion/Frobenius
   extractor in `F_q[X]/Q`, using no discrete logarithm or torus enumeration;
 - distinct rational-root recovery, Vandermonde magnitude recovery, and an

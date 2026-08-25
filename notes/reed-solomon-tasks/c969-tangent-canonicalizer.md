@@ -154,8 +154,9 @@ logarithm nor torus enumeration.
 Regression tests recover traces `2,5,0` for the three q7/R5 classes and verify
 the trace over all 336 PGL transports. A characteristic-two R7 fixture checks
 the nontrivial order-three quotient over GF(8) across all 1,512 semilinear
-transports. What remains genuinely geometric is the rule taking this extracted
-class to the globally lex-minimal irreducible target quadratic.
+transports. The canonicalizers below avoid choosing a target quadratic by
+working directly with forced lexicographic coordinates; only their degenerate
+root stratum remains open.
 
 ### Rootless-form lex chart
 
@@ -187,6 +188,28 @@ forces the second coordinate to zero. For each `h` this uniquely forces
 semilinear transports. The implementation enumerates precisely these cosets,
 retains the exact transporter, and returns the same minimum as full PGL
 enumeration. If `F_s` has a rational root, a leading zero beats every point in
-this chart; that branch deliberately retains the explicit fallback. Over the
-q7/R5 quotient census, the trace-zero and trace-five classes use 48 transports,
-while the trace-two root-bearing class continues to use all 336.
+this chart and the next stratum applies. Over the q7/R5 quotient census, the
+trace-zero and trace-five classes use 48 transports.
+
+### Simple-root lex chart
+
+Suppose `v` is a rational root and retain the notation above. If it is simple,
+then `B` is nonzero. After normalizing, the transformed syndrome begins
+`[0,1]`, and its third coordinate is
+
+\[
+ hC/B+2c,
+ \qquad C=F_s(w^2v^{n-2}).
+\]
+
+In odd characteristic, lex order forces this coordinate to zero and uniquely
+sets `c=-hC/(2B)` for each of the `q-1` scales `h`. In characteristic two, if
+`C` is nonzero, lex order forces the third coordinate to one, uniquely setting
+`h=B/C` and leaving the `q` shifts `c`. There are at most `n` rational roots,
+so both cases use `O(m n q)` transports. The implementation checks the forced
+prefix and retains exact transporters.
+
+Multiple roots, and the characteristic-two `C=0` stratum, retain the full
+explicit fallback. On q7/R5 the trace-two class has four simple roots and now
+uses 24 rather than 336 transports. The R6 q17 sigma benchmark has one simple
+root and uses 16 rather than 4,896 transports.
