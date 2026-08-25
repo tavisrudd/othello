@@ -174,3 +174,9 @@ The first gate is closed. The next certificate step is a compact, separately
 specified proof-rule calculus, taking Bankovic--Drecun--Maric `isocert` as the
 minimum trust comparator. Papers II--V remain schema-gated, and hot-path
 representation/performance work now follows the passed correctness gate.
+
+The gated schemas are not generic placeholders: each owns its frozen source
+hash, observed shadow shape, declared permutation or projective-semilinear
+action (including exact field normalization), recovered carrier, ambiguity,
+odd calibration, and minimality-collision artifacts. Enabling remains forbidden
+until an exact paper-owned export and independent arithmetic replay exist.

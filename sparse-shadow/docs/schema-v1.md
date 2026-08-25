@@ -17,9 +17,17 @@ undirected relation is a duplicate-free list of ordered-normalized pairs
 renumbers vertices, sorts relation pairs, and serializes compact JSON before
 computing its BLAKE3 identity.
 
-Version 1 intentionally supports permutation actions only. Semilinear and
-projective witnesses require a later schema version rather than silent
-normalization.
+The enabled engine supports permutation actions only. The gated profile schemas
+already distinguish vertex-permutation from projective-semilinear actions and
+require an exact field modulus, element encoding, matrices, and Frobenius powers.
+Those witnesses cannot be enabled until their arithmetic and normalization are
+implemented and independently replayed; the schema never silently converts them
+to graph permutations.
+
+Every gated profile also carries a frozen source locator and SHA-256, its
+recovered-carrier name, an explicit ambiguity kind, optional odd calibration,
+and collision artifacts for each minimality boundary it claims. An empty
+collision list means that the artifact makes no minimality claim.
 
 The Paper-I source locator is the C905 reconstruction-profile report, section
 “Paper I: syndrome geometry and golden orientation,” itself a synthesis of the
@@ -27,4 +35,3 @@ frozen Paper-I theorem surfaces. The fixture encodes the twelve-point `A5` set:
 the icosahedral adjacency relation and its distance-two mate are the two
 five-valent orbitals, and the perfect matching is the antipodal relation. The
 fixture is a schema test, not a new theorem export.
-

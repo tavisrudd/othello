@@ -33,10 +33,10 @@ impl InputArtifact {
 #[serde(tag = "adapter", content = "input", rename_all = "snake_case")]
 pub enum ProfileInput {
     PaperIOrientation(PaperIOrientation),
-    PaperIiTrade(GatedPaperIi),
-    PaperIiiFourShadow(GatedPaperIii),
-    PaperIvMinimumWords(GatedPaperIv),
-    PaperVChordalConference(GatedPaperV),
+    PaperIiTrade(Box<GatedPaperIi>),
+    PaperIiiFourShadow(Box<GatedPaperIii>),
+    PaperIvMinimumWords(Box<GatedPaperIv>),
+    PaperVChordalConference(Box<GatedPaperV>),
 }
 
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Serialize, Deserialize)]
@@ -87,18 +87,156 @@ pub struct FixtureGate {
     pub required_export: String,
 }
 
-macro_rules! gated_profile {
-    ($name:ident) => {
-        #[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
-        #[serde(deny_unknown_fields)]
-        pub struct $name {
-            pub gate: FixtureGate,
-            pub shadow: RelationalShadow,
-        }
-    };
+#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct FrozenSource {
+    pub paper: String,
+    pub theorem: String,
+    pub artifact: String,
+    pub sha256: String,
 }
 
-gated_profile!(GatedPaperIi);
-gated_profile!(GatedPaperIii);
-gated_profile!(GatedPaperIv);
-gated_profile!(GatedPaperV);
+#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct FiniteFieldSpec {
+    pub characteristic: u32,
+    pub degree: u32,
+    pub modulus_coefficients_low_to_high: Vec<u32>,
+    pub element_encoding: String,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
+#[serde(tag = "kind", rename_all = "snake_case")]
+pub enum DeclaredAction {
+    VertexPermutations {
+        degree: u32,
+        generators: Vec<Vec<u32>>,
+    },
+    ProjectiveSemilinear {
+        field: FiniteFieldSpec,
+        vector_dimension: u32,
+        generators: Vec<SemilinearGenerator>,
+    },
+}
+
+#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct SemilinearGenerator {
+    pub matrix_rows: Vec<Vec<u32>>,
+    pub frobenius_power: u32,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
+#[serde(tag = "kind", rename_all = "snake_case")]
+pub enum AmbiguitySpec {
+    ProjectiveOrbit,
+    OrientationC2,
+    HomogeneousFibre {
+        numerator: String,
+        denominator: String,
+    },
+    MarkingTorsor {
+        group: String,
+    },
+}
+
+#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct OddCalibration {
+    pub name: String,
+    pub support: Vec<u32>,
+    pub value: i64,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct CollisionWitness {
+    pub boundary: String,
+    pub left_artifact: String,
+    pub right_artifact: String,
+    pub common_restricted_shadow_blake3: String,
+    pub distinguishing_datum: String,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct WeightedBlock {
+    pub support: Vec<u32>,
+    pub weight: i64,
+    pub sign: i8,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct GatedPaperIi {
+    pub gate: FixtureGate,
+    pub source: FrozenSource,
+    pub field: FiniteFieldSpec,
+    pub matching_count: u32,
+    pub trade_halves: [Vec<WeightedBlock>; 2],
+    pub action: DeclaredAction,
+    pub carrier_hypothesis: String,
+    pub recovered_carrier: String,
+    pub ambiguity: AmbiguitySpec,
+    pub odd_calibration: Option<OddCalibration>,
+    pub minimality_collisions: Vec<CollisionWitness>,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct ShadowChannel {
+    pub name: String,
+    pub relation: BinaryRelation,
+    pub weight: i64,
+    pub sign: i8,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct GatedPaperIii {
+    pub gate: FixtureGate,
+    pub source: FrozenSource,
+    pub vertex_count: u32,
+    pub four_channels: [ShadowChannel; 4],
+    pub action: DeclaredAction,
+    pub recovered_carrier: String,
+    pub ambiguity: AmbiguitySpec,
+    pub odd_calibration: Option<OddCalibration>,
+    pub minimality_collisions: Vec<CollisionWitness>,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct MinimumWord {
+    pub support: Vec<u32>,
+    pub weight: u32,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct GatedPaperIv {
+    pub gate: FixtureGate,
+    pub source: FrozenSource,
+    pub field: FiniteFieldSpec,
+    pub point_count: u32,
+    pub minimum_words: Vec<MinimumWord>,
+    pub action: DeclaredAction,
+    pub recovered_carrier: String,
+    pub ambiguity: AmbiguitySpec,
+    pub minimality_collisions: Vec<CollisionWitness>,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct GatedPaperV {
+    pub gate: FixtureGate,
+    pub source: FrozenSource,
+    pub field: FiniteFieldSpec,
+    pub chordal_shadow: RelationalShadow,
+    pub conference_shadow: RelationalShadow,
+    pub action: DeclaredAction,
+    pub recovered_carrier: String,
+    pub ambiguity: AmbiguitySpec,
+    pub odd_calibration: Option<OddCalibration>,
+    pub minimality_collisions: Vec<CollisionWitness>,
+}

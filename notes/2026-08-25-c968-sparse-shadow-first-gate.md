@@ -30,8 +30,12 @@ separately specified proof-rule calculus.
 - commands: `validate`, `canonicalize`, `equivalent`, `reconstruct`,
   `verify-certificate`;
 - enabled action: color-preserving permutations over named binary relations;
-- deferred actions: projective and semilinear witnesses require an explicit
-  schema extension;
+- gated actions: projective and semilinear profiles already require exact field
+  moduli, element encodings, matrices, and Frobenius powers, but cannot be
+  enabled until arithmetic and replay exist;
+- every gated profile carries a frozen source hash, explicit carrier and
+  ambiguity, optional odd calibration, and collision artifacts for each
+  minimality claim;
 - no manuscript, Lean, or existing paper fixture was modified.
 
 ## Validation

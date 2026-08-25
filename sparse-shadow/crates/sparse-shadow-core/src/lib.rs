@@ -12,8 +12,9 @@ pub use canonical::{
 pub use error::ShadowError;
 pub use reconstruct::{ReconstructionArtifact, reconstruct};
 pub use schema::{
-    ActionKind, BinaryRelation, FixtureGate, GatedPaperIi, GatedPaperIii, GatedPaperIv,
-    GatedPaperV, InputArtifact, PaperIOrientation, ProfileInput, RelationalShadow, SCHEMA_VERSION,
-    Vertex,
+    ActionKind, AmbiguitySpec, BinaryRelation, CollisionWitness, DeclaredAction, FiniteFieldSpec,
+    FixtureGate, FrozenSource, GatedPaperIi, GatedPaperIii, GatedPaperIv, GatedPaperV,
+    InputArtifact, MinimumWord, OddCalibration, PaperIOrientation, ProfileInput, RelationalShadow,
+    SCHEMA_VERSION, SemilinearGenerator, ShadowChannel, Vertex, WeightedBlock,
 };
 pub use verify::{VerificationReport, validate, verify_certificate};
