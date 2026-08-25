@@ -1,0 +1,194 @@
+{
+  "birational_pipeline": [
+    "P2 -> R^1_{E/K}(Gm) by the certified norm-cubic/quadric chart",
+    "convert its three conjugates to residual coordinates (r1,r2)",
+    "evaluate the six-coordinate coboundary SLP at the marked-plane point",
+    "form q_D=f_D*h_D^-1*r1^a_D*r2^b_D and take its T3-orbit",
+    "recover the surface from the three degree-H Cox monomials and the torus from the two quotient-character ratios"
+  ],
+  "certified": [
+    "the residual Cox weights are the characters E1-E3 and E2-E3",
+    "the augmentation-lattice change gives (r1,r2)=(t3,1/t1)",
+    "the three plane-recovery Cox monomials all have class H and zero residual weight",
+    "the forward coordinate recipe is Galois equivariant because h is the certified cocycle coboundary",
+    "the displayed inverse recovers the marked-plane point and both residual torus coordinates",
+    "coupling with the certified norm-torus chart gives both composites on the stated dense open",
+    "there is a K-birational map S times P2 to Z/T3, represented by the finite SLP"
+  ],
+  "coboundary_evaluation": "h_D=product_j h_old[j]^class(D)_j, with h_old given by the retained finite SLP",
+  "cox_section_forms": {
+    "E_i": "1",
+    "L12": "w",
+    "L13": "v",
+    "L23": "u",
+    "remaining": "the standard marked-plane forms retained in the Cox descent certificate"
+  },
+  "dense_open": [
+    "all denominators and three Hilbert-90 seeds in the coboundary SLP are nonzero",
+    "the Cox section lies in the universal-torsor open",
+    "the norm-torus chart satisfies B(P,q)*h*N(Z) != 0",
+    "the exceptional coordinates used by the inverse ratios are nonzero"
+  ],
+  "forward_coordinate_recipe": {
+    "E1": {
+      "coboundary_factor": "h_E1^-1",
+      "cox_section": "f_E1(z,u,v)",
+      "residual_exponents_r1_r2": [
+        1,
+        0
+      ]
+    },
+    "E2": {
+      "coboundary_factor": "h_E2^-1",
+      "cox_section": "f_E2(z,u,v)",
+      "residual_exponents_r1_r2": [
+        0,
+        1
+      ]
+    },
+    "E3": {
+      "coboundary_factor": "h_E3^-1",
+      "cox_section": "f_E3(z,u,v)",
+      "residual_exponents_r1_r2": [
+        0,
+        0
+      ]
+    },
+    "E4": {
+      "coboundary_factor": "h_E4^-1",
+      "cox_section": "f_E4(z,u,v)",
+      "residual_exponents_r1_r2": [
+        0,
+        0
+      ]
+    },
+    "E5": {
+      "coboundary_factor": "h_E5^-1",
+      "cox_section": "f_E5(z,u,v)",
+      "residual_exponents_r1_r2": [
+        0,
+        0
+      ]
+    },
+    "L12": {
+      "coboundary_factor": "h_L12^-1",
+      "cox_section": "f_L12(z,u,v)",
+      "residual_exponents_r1_r2": [
+        -1,
+        -1
+      ]
+    },
+    "L13": {
+      "coboundary_factor": "h_L13^-1",
+      "cox_section": "f_L13(z,u,v)",
+      "residual_exponents_r1_r2": [
+        -1,
+        0
+      ]
+    },
+    "L14": {
+      "coboundary_factor": "h_L14^-1",
+      "cox_section": "f_L14(z,u,v)",
+      "residual_exponents_r1_r2": [
+        -1,
+        0
+      ]
+    },
+    "L15": {
+      "coboundary_factor": "h_L15^-1",
+      "cox_section": "f_L15(z,u,v)",
+      "residual_exponents_r1_r2": [
+        -1,
+        0
+      ]
+    },
+    "L23": {
+      "coboundary_factor": "h_L23^-1",
+      "cox_section": "f_L23(z,u,v)",
+      "residual_exponents_r1_r2": [
+        0,
+        -1
+      ]
+    },
+    "L24": {
+      "coboundary_factor": "h_L24^-1",
+      "cox_section": "f_L24(z,u,v)",
+      "residual_exponents_r1_r2": [
+        0,
+        -1
+      ]
+    },
+    "L25": {
+      "coboundary_factor": "h_L25^-1",
+      "cox_section": "f_L25(z,u,v)",
+      "residual_exponents_r1_r2": [
+        0,
+        -1
+      ]
+    },
+    "L34": {
+      "coboundary_factor": "h_L34^-1",
+      "cox_section": "f_L34(z,u,v)",
+      "residual_exponents_r1_r2": [
+        0,
+        0
+      ]
+    },
+    "L35": {
+      "coboundary_factor": "h_L35^-1",
+      "cox_section": "f_L35(z,u,v)",
+      "residual_exponents_r1_r2": [
+        0,
+        0
+      ]
+    },
+    "L45": {
+      "coboundary_factor": "h_L45^-1",
+      "cox_section": "f_L45(z,u,v)",
+      "residual_exponents_r1_r2": [
+        0,
+        0
+      ]
+    },
+    "Q": {
+      "coboundary_factor": "h_Q^-1",
+      "cox_section": "f_Q(z,u,v)",
+      "residual_exponents_r1_r2": [
+        -1,
+        -1
+      ]
+    }
+  },
+  "input_sha256": {
+    "coboundary": "2dfbac5ca93ffe8257f30ddc4380a416e538362820cc243ba8a25644fdddc654",
+    "residual_torus": "da4037611943c566bfd9041d989bb444845ddd729032b62b54bd57685671b105",
+    "torus_chart": "b0032d9c5206c229553a9ccf737cf71ccb7b41263f627e69a7b5ef83ffdbb0aa"
+  },
+  "inverse_residual_coordinates": [
+    "r1=(q_E1/q_E3)*(h_E1/h_E3)",
+    "r2=(q_E2/q_E3)*(h_E2/h_E3)",
+    "these are the quotient-character ratios in the neutral E3 lift"
+  ],
+  "inverse_surface_coordinates": {
+    "U": "q_E2*q_E3*q_L23",
+    "V": "q_E1*q_E3*q_L13",
+    "W": "q_E1*q_E2*q_L12"
+  },
+  "not_certified": [
+    "an explicit K-rational tangent-section map Z/T3 to P4",
+    "the final cubic-product maps after the fibration function-field passage",
+    "type-I3 coupling"
+  ],
+  "residual_norm_coordinate_change": {
+    "forward": [
+      "r1=t3",
+      "r2=1/t1"
+    ],
+    "inverse": [
+      "t1=1/r2",
+      "t2=r2/r1",
+      "t3=r1"
+    ]
+  },
+  "schema": "c958-type-i1-torsor-coupling-v1"
+}

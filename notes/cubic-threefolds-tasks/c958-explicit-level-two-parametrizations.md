@@ -129,6 +129,17 @@ norm-torus chart and the certified tangent quotient, then verify the forward
 and inverse cubic-product maps.  Report and replay:
 `notes/2026-08-25-c958-type-i1-full-coboundary.md` and its adjacent bundle.
 
+The coboundary is now coupled to the norm-torus chart.  In split coordinates
+the forward recipe is `q_D=f_D h_D^-1 r1^a_D r2^b_D`; dualizing the lattice
+change gives `(r1,r2)=(t3,1/t1)`.  Three degree-`H`, residual-weight-zero Cox
+monomials recover the marked-plane point, and two corrected exceptional
+ratios recover `(r1,r2)`, so both composites of
+`S x P2 <-> Z/T3` are certified on a dense open.  The only remaining
+type-`I1` geometric map is an explicit ground-field tangent quotient
+`Z/T3 <-> P4`, after which the cubic function-field composition is routine.
+Report and replay: `notes/2026-08-25-c958-type-i1-torsor-coupling.md` and its
+adjacent bundle.
+
 ## Goal
 
 Turn the constructive existence proof in C956 into explicit, independently
