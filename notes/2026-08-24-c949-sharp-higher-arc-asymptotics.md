@@ -6,7 +6,7 @@
 `4/3` linear coefficient is excluded and the structural lower coefficient is
 now `5/3`; the exact `5/3` endpoint is also absent, while a matching
 `5/3+o(1)` construction remains open; the sharpest `+1` triangular target is
-reduced to the almost-duplex/near-Rédei conditions `(SR18)--(SR23)`; no
+reduced to the almost-duplex/near-Rédei conditions `(SR18)--(SR24)`; no
 manuscript work
 
 ## First-gate findings — 24 August 2026
@@ -1641,6 +1641,18 @@ unmatched.  This graph, together with the singleton product identity and the
 line-cap tests, is the appropriate Rust discovery state; the full
 `q^2+q+1`-point plane is no longer the search state.
 
+If `b_i` is the number of selected matching edges of the three colors, then
+
+```text
+b_1+b_2+b_3=q-3,             0<=b_i<=2q/3-2.         (SR19b)
+```
+
+The strict upper bound uses that `D` contains *all* maximal secants.  The
+triangle vertex for color `i` lies outside `D` and is incident with its two
+selected connector trisecants and the `b_i` selected ordinary bisecants.  Its
+selected degree is therefore `b_i+2<=s-1`, not merely `<=s`; equality would
+make it another point of `D`.
+
 Indeed the canonical cyclic duplex fails for a sharp geometric reason.  If
 `gamma` generates `F_q^*`, the two graphs
 
@@ -2076,6 +2088,10 @@ family is lower priority.
   every local `1/2/3/4` profile is prescribed by `(SR17)`.  The other
   `2q-5` generic-or-tangent lines form the almost-duplex `(SR18)` in the
   multiplicative Latin square, with singleton product constraint `(SR19)`.
+  Its three double-fiber colors form a `3`-edge-colored graph on `2q-5`
+  vertices with only nine missing color incidences; the selector is a
+  near-perfect matching, and maximality imposes the strict color caps
+  `(SR19b)`.
   The canonical cyclic duplex given by two hyperbolas is excluded by
   `(SR21)`: it has quadratically many common external lines, far beyond the
   nine boundary points' rescue capacity.  More generally `(SR22)--(SR23)`

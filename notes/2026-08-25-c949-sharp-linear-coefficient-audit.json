@@ -223,6 +223,8 @@
               "nine_boundary_point_rescue_upper_bound": 738
             },
             "colored_fiber_graph": {
+              "edge_color_count_sum": 78,
+              "edge_color_count_upper_bound": 52,
               "edges": 231,
               "missing_color_incidences": 9,
               "selector_matching_edges": 78,
@@ -433,6 +435,8 @@
               "nine_boundary_point_rescue_upper_bound": 2196
             },
             "colored_fiber_graph": {
+              "edge_color_count_sum": 240,
+              "edge_color_count_upper_bound": 160,
               "edges": 717,
               "missing_color_incidences": 9,
               "selector_matching_edges": 240,
@@ -643,6 +647,8 @@
               "nine_boundary_point_rescue_upper_bound": 6570
             },
             "colored_fiber_graph": {
+              "edge_color_count_sum": 726,
+              "edge_color_count_upper_bound": 484,
               "edges": 2175,
               "missing_color_incidences": 9,
               "selector_matching_edges": 726,

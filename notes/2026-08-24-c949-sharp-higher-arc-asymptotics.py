@@ -3452,6 +3452,8 @@ def audit_sharp_linear_coefficient(output: Path) -> None:
                             "missing_color_incidences": 9,
                             "selector_matching_edges": q - 3,
                             "unmatched_vertices": 1,
+                            "edge_color_count_sum": q - 3,
+                            "edge_color_count_upper_bound": 2 * q // 3 - 2,
                         },
                         "singleton_product_identity": "prod(A0)=prod(B0)prod(C0)",
                         "canonical_cyclic_duplex": {
