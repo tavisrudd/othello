@@ -75,6 +75,14 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   inverse is therefore certified at this specialization.  Reconstruction and
   sparse verification over `Q(a,b)` is the next exact gate, followed by ground
   specialization.
+  A second cold point `(3,5)` now passes the same exact integer checker with
+  identical quintic supports.  The generic reconstruction pipeline has stable
+  482-coefficient support and degree data across seven primes; CRT resolves
+  39456 of 39492 dense scalar slots, leaving exactly 36 above the current
+  `~7e20` uniqueness bound.  This is not yet promoted to `Q(a,b)`: further CRT,
+  fresh-prime holdouts, and the generic cleared identity remain mandatory.
+  Frontier report:
+  `../2026-08-25-c958-generic-reconstruction-frontier.md`.
   Type `I_3` remains afterward.  Card:
   `../cubic-threefolds-tasks/c958-explicit-level-two-parametrizations.md`;
   latest report:

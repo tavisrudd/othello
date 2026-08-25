@@ -167,6 +167,17 @@ followed by ground specialization.  Report and replay:
 `notes/2026-08-25-c958-specialized-quintic-tangent-inverse.md` and its adjacent
 bundle.
 
+A second cold specialization `(a,b)=(3,5)` is now proved over `Z` by the same
+parameterized Rust checker, with identical quintic supports.  Generic modular
+reconstruction is also sharply bounded: all 482 coefficient functions have
+stable supports and validated one-variable degree bounds, and seven-prime CRT
+resolves 39456 of 39492 dense scalar coefficients.  The remaining 36 exceed
+the current `~7e20` uniqueness bound.  No uniform characteristic-zero formula
+is claimed until those coefficients, fresh-prime holdouts, and the generic
+denominator-cleared identity pass.  Report and replay:
+`notes/2026-08-25-c958-generic-reconstruction-frontier.md` and its adjacent
+scripts/hash manifest.
+
 ## Goal
 
 Turn the constructive existence proof in C956 into explicit, independently

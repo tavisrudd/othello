@@ -108,7 +108,7 @@ def monomial_values(point, exponents):
     ]
 
 
-def build(a_value=2, b_value=3, tangent_z=(1, 3, 7)):
+def build(a_value=2, b_value=3, tangent_z=(1, 3, 7), modular_only=False):
     for path, expected in INPUT_SHA256.items():
         assert hashlib.sha256(path.read_bytes()).hexdigest() == expected
     generic = load_generator()
@@ -194,16 +194,19 @@ def build(a_value=2, b_value=3, tangent_z=(1, 3, 7)):
 
     rng = random.Random(958)
     samples = []
-    while len(samples) < 420:
+    sample_count = 300 if modular_only else 420
+    holdout_count = 20 if modular_only else 100
+    while len(samples) < sample_count:
         e = tuple(rng.randrange(1, PRIME) for _ in range(4))
         image = tangent_map(e)
         if image is not None:
             samples.append((e, image))
 
-    for degree in range(1, 6):
+    degrees = range(5, 6) if modular_only else range(1, 6)
+    for degree in degrees:
         exponents = exponent_tuples(degree)
         width = 2 * len(exponents)
-        training = samples[:min(len(samples) - 100, width + 20)]
+        training = samples[:min(len(samples) - holdout_count, width + 20)]
         results = []
         chosen_vectors = []
         for target in range(4):
@@ -219,7 +222,7 @@ def build(a_value=2, b_value=3, tangent_z=(1, 3, 7)):
                     (sum(coefficient * value for coefficient, value in zip(numerator, monomial_values(image, exponents)))
                      - e[target] * sum(coefficient * value for coefficient, value in zip(denominator, monomial_values(image, exponents))))
                     % PRIME == 0
-                    for e, image in samples[-100:]
+                    for e, image in samples[-holdout_count:]
                 ):
                     valid.append(vector)
             results.append((len(basis), len(valid)))
@@ -241,6 +244,18 @@ def build(a_value=2, b_value=3, tangent_z=(1, 3, 7)):
                 f"degree={degree} nonzero numerator/denominator={nonzero_counts} "
                 f"common_denominator={len(set(normalized_denominators)) == 1}"
             )
+            if modular_only:
+                return {
+                    "prime": PRIME,
+                    "specialization": {"a": a_value, "b": b_value,
+                                       "tangent_z": list(tangent_z)},
+                    "degree": degree,
+                    "vectors": [
+                        [{"index": index, "value": value}
+                         for index, value in enumerate(vector) if value]
+                        for vector in chosen_vectors
+                    ],
+                }
 
             # Lift the first unique modular relation to characteristic zero
             # on its certified support.  The other three use the same method.
@@ -308,6 +323,7 @@ def build(a_value=2, b_value=3, tangent_z=(1, 3, 7)):
                     image = rational_tangent_map(e)
                 except (StopIteration, ZeroDivisionError):
                     continue
+                assert tuple(residue(value) for value in image) == tangent_map(e)
                 monomials = [
                     image[0]**exponent[0] * image[1]**exponent[1]
                     * image[2]**exponent[2] * image[3]**exponent[3]
@@ -317,7 +333,7 @@ def build(a_value=2, b_value=3, tangent_z=(1, 3, 7)):
 
             exact_full_vectors = []
             for target, support in enumerate(supports):
-                training = exact_samples[:len(support) + 4]
+                training = exact_samples
                 exact_rows = []
                 for e, monomials in training:
                     full_row = monomials + [-Fraction(e[target])*value for value in monomials]
@@ -425,8 +441,8 @@ def build(a_value=2, b_value=3, tangent_z=(1, 3, 7)):
                     ),
                 },
                 "certified": [
-                    "no affine rational inverse of total degree at most four exists in the searched full monomial spaces modulo 1000003",
-                    "each degree-five interpolation kernel is one-dimensional modulo 1000003",
+                    f"no affine rational inverse of total degree at most four exists in the searched full monomial spaces modulo {PRIME}",
+                    f"each degree-five interpolation kernel is one-dimensional modulo {PRIME}",
                     "all four modular formulas pass one hundred independent holdouts",
                     "all four characteristic-zero lifts pass thirty independent rational holdouts",
                     "the four characteristic-zero formulas have one exact common denominator",
@@ -442,18 +458,23 @@ def build(a_value=2, b_value=3, tangent_z=(1, 3, 7)):
 
 
 def main():
+    global PRIME
     parser = argparse.ArgumentParser()
     mode = parser.add_mutually_exclusive_group(required=True)
     mode.add_argument("--write", type=Path)
     mode.add_argument("--check", type=Path)
+    mode.add_argument("--modular-only", type=Path)
     parser.add_argument("--a", type=int, default=2)
     parser.add_argument("--b", type=int, default=3)
     parser.add_argument("--tangent-z", type=int, nargs=3, default=(1, 3, 7))
+    parser.add_argument("--prime", type=int, default=PRIME)
     arguments = parser.parse_args()
-    payload = json.dumps(build(arguments.a, arguments.b, tuple(arguments.tangent_z)),
+    PRIME = arguments.prime
+    payload = json.dumps(build(arguments.a, arguments.b, tuple(arguments.tangent_z),
+                               arguments.modular_only is not None),
                          indent=2, sort_keys=True) + "\n"
-    if arguments.write:
-        arguments.write.write_text(payload)
+    if arguments.write or arguments.modular_only:
+        (arguments.write or arguments.modular_only).write_text(payload)
     else:
         assert arguments.check.read_text() == payload
 
