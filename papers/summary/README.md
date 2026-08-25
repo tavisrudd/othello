@@ -36,7 +36,7 @@ examples.
 
 | Problem | Shadow or marker | Result |
 |---|---|---|
-| Cubic stabilization | Rank-two formal quantum-connection block | Irrationality after multiplication by `P¹` |
+| Cubic stabilization | Rank-two formal block and saturated Cox-torus quotient | Universal irrationality after `P¹`, with exact level-two examples |
 | Projective Reed–Solomon deep holes | Coherent marked contractions | Persistent and modular obstruction carriers |
 | Stabilizer AME states | Marginal Weyl atlas | Local-Clifford rigidity and quantitative rounding |
 | Bounded linear recovery | Relative weights and normalized recovery equations | Exact costs and transfer thresholds |
@@ -53,9 +53,10 @@ examples.
 
 ## Selected headline results
 
-These are selected headlines, not a ranking. They are grouped to show the
-range of the programme and to avoid counting several facets of one theorem
-complex as separate victories.
+These are selected headlines grouped by area. Within each area, their order
+reflects the present assessment of theorem strength, breadth, and reusability;
+closely related facets of one theorem complex are not counted as separate
+results.
 
 ### Algebraic geometry and rationality
 
@@ -71,6 +72,16 @@ complex as separate victories.
   classes differ modulo the integers. The same construction gives an
   irrationality criterion for smooth projective threefolds.
   [Irrationality of Cubic Threefolds after One Stabilization](https://github.com/tavisrudd/cubic-stabilization-m1/blob/main/irrationality_after_one_stabilization.pdf).
+
+- **Sharpness at the next stabilization.** The preceding universal bound is
+  sharp: two explicit smooth cubic threefolds over `Q` have stabilization
+  level exactly two over both `Q` and `C`.  The reusable theorem proves that
+  every smooth quartic del Pezzo surface over a characteristic-zero field
+  with a rational point and stably permutation geometric Picard lattice
+  becomes rational after adjoining two variables.  Applied to the two
+  Tschinkel--Zhang series, it gives a uniform `P²` bound and produces
+  nonrational smooth projective fourfolds `Y` with `Y × A¹` rational.
+  [Sharpness of Irrationality after One Stabilization for Cubic Threefolds](https://github.com/tavisrudd/cubic-stabilization-irrationality/blob/main/cubic_stabilization_irrationality.pdf).
 
 - **Integral divisor products on the nonstandard `A₅` cubic pencil.** An
   all-degree graph-saturation theorem makes the primitive minimal class of
@@ -203,12 +214,6 @@ complex as separate victories.
   dimension four depend on explicit reconstruction-tail and residual
   divisor-tagging hypotheses. [Framed Formal Monodromy of Cubic Threefolds](https://github.com/tavisrudd/cubic-stabilization-m1/blob/main/companions/cubic-framed-monodromy/cubic_framed_monodromy.pdf).
 
-- **Exact level two.** Two explicit smooth cubic threefolds satisfy
-  `X × P¹` irrational and `X × P²` rational. More generally, a quartic del
-  Pezzo surface with a rational point and stably permutation geometric
-  Picard lattice becomes rational after adjoining two variables.
-  [Sharpness of Irrationality after One Stabilization for Cubic Threefolds](https://github.com/tavisrudd/cubic-stabilization-irrationality/blob/main/cubic_stabilization_irrationality.pdf).
-
 ## Theorems over infinite families
 
 The following table records selected infinite-family statements from the
@@ -220,6 +225,8 @@ the theorem column.
 | Irrationality of Cubic Threefolds after One Stabilization | `X × P¹` is irrational, detected by a rank-two generic-even-QDM block with distinct formal exponent classes modulo the integers. | Every smooth complex cubic threefold `X`. |
 | Irrationality of Cubic Threefolds after One Stabilization | A smooth projective threefold whose generic even QDM contains such a marked block is irrational. | Every smooth projective complex threefold. |
 | Irrationality of Cubic Threefolds after One Stabilization | `V × P¹` is irrational. | Every smooth prime Fano threefold `V` of genus eight. |
+| Sharpness of Irrationality after One Stabilization for Cubic Threefolds | `S × A²`, equivalently `S × P²`, is rational. | Every smooth quartic del Pezzo surface over a characteristic-zero field with a rational point and stably permutation geometric Picard lattice. |
+| Sharpness of Irrationality after One Stabilization for Cubic Threefolds | `X_{j,r} × P²` is rational over `Q`. | Both Tschinkel--Zhang cubic series, for every `r ≥ 0` and `j ∈ {1,3}`. |
 | Integral Divisor Products on the Nonstandard A₅-Invariant Cubic Pencil | Finite-etale graph slopes make every divided power of the marked graph divisor lattice an ordinary integral divisor product. | Every marked finite-etale graph quotient of an elliptic power satisfying the stated local depth and self-adjointness hypotheses, in every degree. |
 | Integral Divisor Products on the Nonstandard A₅-Invariant Cubic Pencil | Every smooth pencil member is universally `CH₀`-trivial; after multiplication by `P¹`, it remains universally `CH₀`-trivial and is irrational. | Every smooth member of the nonstandard `A₅`-invariant cubic pencil. |
 | Framed Formal Monodromy of Cubic Threefolds | The primitive-sixth framed-monodromy count of the numerical small even quantum connection equals two. | Every smooth complex cubic threefold `X`. |
@@ -251,6 +258,7 @@ boundary, and reproducible entry points.
 | Paper | Area | Central result | Public entry |
 |---|---|---|---|
 | Irrationality of Cubic Threefolds after One Stabilization | Algebraic geometry / birational geometry | Every smooth cubic threefold stays irrational after multiplication by `P¹`, detected by a rank-two block of the generic even quantum `D`-module with distinct formal exponent classes modulo the integers. | [PDF](https://github.com/tavisrudd/cubic-stabilization-m1/blob/main/irrationality_after_one_stabilization.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-m1) |
+| Sharpness of Irrationality after One Stabilization for Cubic Threefolds | Algebraic geometry / birational geometry | The universal one-stabilization irrationality bound is sharp: two smooth cubic threefolds have exact stable-rationality level two; the reusable surface theorem proves `S × A²` rational from a rational point and a stably permutation geometric Picard lattice. | [PDF](https://github.com/tavisrudd/cubic-stabilization-irrationality/blob/main/cubic_stabilization_irrationality.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-irrationality) |
 | Integral Divisor Products on the Nonstandard A₅-Invariant Cubic Pencil | Algebraic geometry / algebraic cycles | Every smooth member of the non-isotrivial pencil is universally `CH₀`-trivial; after multiplication by `P¹`, it remains universally `CH₀`-trivial and is irrational. | [PDF](https://github.com/tavisrudd/cubic-stabilization-m1/blob/main/companions/six-axis-cubic-pencil/six_axis_cubic_pencil.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-m1) |
 | Framed Formal Monodromy of Cubic Threefolds | Algebraic geometry / quantum cohomology | The unconditional count is `ν₆(X) = 2` and satisfies the projective-space product formula; its operation formulas and birational invariance remain conditional on two explicit hypotheses. | [PDF](https://github.com/tavisrudd/cubic-stabilization-m1/blob/main/companions/cubic-framed-monodromy/cubic_framed_monodromy.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-m1) |
 | Deep Holes of Projective Reed–Solomon Codes Beyond Redundancy Four: Recursive Carriers and Exact Classifications Through Redundancy Ten | Coding theory | Deep-hole classifications extend through redundancy ten in stated ranges. | [PDF](https://github.com/tavisrudd/beyond4-prs/blob/main/prs-beyond-redundancy-four.pdf) · [repo](https://github.com/tavisrudd/beyond4-prs) |
@@ -261,7 +269,6 @@ boundary, and reproducible entry points.
 | Reconstructing PG(2,13), its conic, and polarity from the minimum words of a binary conic code | Coding / finite geometry | Weighted pair data on minimum words recover a marked projective plane, conic, and polarity. | [PDF](https://github.com/tavisrudd/q13-passant-code/blob/main/passant_code_q13.pdf) · [repo](https://github.com/tavisrudd/q13-passant-code) |
 | Chordal and Conference Cubics: Reconstruction and a Residual C₂-Torsor | Invariant theory / algebraic combinatorics | Distinct chordal and conference cubics recover one marked six-axis carrier; the residual chordal-line torsor is distinct from the global-negation/Frobenius torsor. | [PDF](https://github.com/tavisrudd/chordal-conference-reconstruction/blob/main/chordal_conference_reconstruction.pdf) · [repo](https://github.com/tavisrudd/chordal-conference-reconstruction) |
 | Hodge Atoms as Occurrence-Indexed Marker Ledgers | Algebraic geometry / quantum cohomology | The standard abstract Hodge-atom chemical formula is the Hodge specialization of an occurrence-indexed categorical marker ledger, with an effective weak-factorization quotient and a strictly one-step rank-two obstruction. | [PDF](https://github.com/tavisrudd/hodge-atom-marker-ledger/blob/main/hodge_atom_marker_ledger.pdf) · [repo](https://github.com/tavisrudd/hodge-atom-marker-ledger) |
-| Sharpness of Irrationality after One Stabilization for Cubic Threefolds | Algebraic geometry / birational geometry | The universal one-stabilization irrationality bound is sharp: two smooth cubic threefolds have exact stable-rationality level two; the reusable surface theorem proves `S × A²` rational from a rational point and a stably permutation geometric Picard lattice. | [PDF](https://github.com/tavisrudd/cubic-stabilization-irrationality/blob/main/cubic_stabilization_irrationality.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-irrationality) |
 | Standard Flips of Discrepancy One: Extremal J-Normalization and the Meijer Aperture at ν=1 | Algebraic geometry / quantum cohomology | An exact `z`-order count and the `ν=1` Barnes sector complete the discrepancy-one range in Shen--Shoemaker's extremal flip theorem. | [PDF](https://github.com/tavisrudd/discrepancy-one-flips/blob/main/discrepancy_one_flips.pdf) · [repo](https://github.com/tavisrudd/discrepancy-one-flips) |
 | Arcs complete outside a conic: a prescribed-hole defect identity and matching-design rigidity | Finite geometry / designs | A universal pointwise defect identity gives matching-design rigidity, stability, and conic-relative bounds. | [PDF](https://github.com/tavisrudd/arcs-complete-outside-conic/blob/main/arcs_complete_outside_conic.pdf) · [repo](https://github.com/tavisrudd/arcs-complete-outside-conic) |
 | Integral Secant Distributions and Improved Bounds for Complete `(k,n)`-Arcs | Finite geometry / designs / coding theory | Integer maximal-secant distributions give divisor-indexed linear improvements, followed by modular-lift bounds in characteristics two and three. | [PDF](https://github.com/tavisrudd/integral-secant-arcs/blob/main/integral_secant_arcs.pdf) · [repo](https://github.com/tavisrudd/integral-secant-arcs) |
@@ -325,6 +332,48 @@ packets do not reach this geometry either, since they assume `b₃ = 0` and a
 large vanishing middle `H⁴`.  The paper claims no novelty for that broad
 philosophy; what is new is the formal-exponent marker and the operation ledger
 that carries it through one stabilization.
+
+---
+
+#### Sharpness of Irrationality after One Stabilization for Cubic Threefolds
+
+[PDF](https://github.com/tavisrudd/cubic-stabilization-irrationality/blob/main/cubic_stabilization_irrationality.pdf) · [Repository](https://github.com/tavisrudd/cubic-stabilization-irrationality)
+
+**Standout result.** The theorem that every smooth complex cubic threefold
+remains irrational after multiplication by `P¹` is sharp.  Two explicit
+smooth cubic threefolds over `Q` become rational after multiplication by
+`P²`, so their stabilization level is exactly two over both `Q` and `C`.
+
+> *Abstract.* The theorem that every smooth complex cubic threefold remains
+> irrational after multiplication by `P¹` is sharp. We exhibit explicit
+> smooth cubic threefolds `X/Q` for which `X × P²` is rational. Thus the least
+> number of independent variables required to make these threefolds rational
+> is exactly two, over both `Q` and `C`. The rationality statement follows
+> from a general result for quartic del Pezzo surfaces: if `k` has
+> characteristic zero, `S(k)` is nonempty, and `Pic(S_kbar)` is a stably
+> permutation Galois module, then `S × A²` is `k`-rational. Its proof
+> identifies a rational quotient of the projective Cox model by a saturated
+> rank-three subtorus; the residual two-dimensional torus is rational.
+> Applied to the quartic-del-Pezzo fibrations of Tschinkel and Zhang, this
+> proves rationality after adjoining two variables for both of their cubic
+> series, strengthening their stable-rationality conclusion to the uniform
+> bound `P²`. Consequently the stabilization level is two at explicit points
+> of cubic-threefold moduli and infinite at a very general point. There are
+> also smooth projective nonrational fourfolds `Y/Q` such that `Y × A¹` is
+> rational.
+
+**Delivers.** Exact stabilization level two for two explicit cubic
+threefolds; a two-variable rationality theorem for quartic del Pezzo surfaces;
+a constructive rational-torus-quotient criterion; a uniform `P²` bound for
+both Tschinkel--Zhang series; and the affine-line fourfold consequence.
+
+**Who cares.** Researchers in cubic hypersurfaces, rationality questions,
+quartic del Pezzo surfaces, universal torsors, Cox rings, and algebraic tori.
+
+**Why it matters.** It identifies the first rational stabilization of
+explicit stably rational but nonrational cubic threefolds.  Together with the
+very-general stable-irrationality theorem, it shows that the stabilization
+level on smooth cubic-threefold moduli takes both the values two and infinity.
 
 ---
 
@@ -801,38 +850,6 @@ asymptotics.
 every codimension-two blow-up. The repair proves the cone membership that
 the source only asserts, uses the source's own Appendix A for the sector, and
 changes no higher-discrepancy statement.
-
----
-
-#### Sharpness of Irrationality after One Stabilization for Cubic Threefolds
-
-[PDF](https://github.com/tavisrudd/cubic-stabilization-irrationality/blob/main/cubic_stabilization_irrationality.pdf) · [Repository](https://github.com/tavisrudd/cubic-stabilization-irrationality)
-
-**Standout result.** For two explicit smooth cubic threefolds over `Q`, the
-smallest `m` for which `X × P^m` is rational is exactly two, over both `Q`
-and `C`: `X × P¹` is irrational, while `X × P²` is rational.
-
-> *Abstract.* The rationality statement follows from a general theorem for
-> quartic del Pezzo surfaces. If `S(k)` is nonempty and the geometric Picard
-> lattice is a stably permutation Galois module, then `S × A²` is
-> `k`-rational. The proof constructs a rational quotient of the projective Cox
-> model by a saturated rank-three subtorus; the residual two-dimensional torus
-> is rational. Applied to both explicit Tschinkel--Zhang cubic families, this
-> gives a uniform `P²` rationality bound. It also yields smooth projective
-> nonrational fourfolds `Y` for which `Y × A¹` is rational.
-
-**Delivers.** Exact stable-rationality level two for two explicit cubic
-threefolds, a two-variable rationality theorem for quartic del Pezzo surfaces,
-a constructive rational-torus-quotient criterion, a uniform `P²` bound for
-both cubic families, and the affine-line fourfold consequence.
-
-**Who cares.** Researchers in cubic hypersurfaces, rationality questions,
-quartic del Pezzo surfaces, universal torsors, Cox rings, and algebraic tori.
-
-**Why it matters.** It locates the first rational stabilization of explicit
-stably rational but nonrational cubic threefolds and turns an eventual
-stable-rationality statement into the sharp transition
-`X × P¹` irrational / `X × P²` rational.
 
 ---
 
