@@ -74,7 +74,8 @@ serialized tree.
   kinds, reconstruction ambiguity, and equivalence outcomes; all gated fixtures
   round-trip exactly as JSON values;
 - exhaustive calibration census: all 220 triples checked, exactly 20 admitted,
-  one canonical orbit, automorphism order 6 throughout;
+  one exact canonical payload, automorphism order 6 throughout, and a replayed
+  transporter from every admitted triangle to a fixed representative;
 - uncalibrated exchange of the two five-valent orbital payloads preserves the
   canonical identity and emits a replayed transporter, matching the residual
   orientation involution;

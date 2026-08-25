@@ -346,6 +346,7 @@ fn tagged_certificate_variants_reject_unknown_fields() {
 fn all_calibrated_triangles_form_one_exhaustive_orbit() {
     let mut accepted = Vec::new();
     let mut canonical_ids = BTreeSet::new();
+    let mut canonical_payloads = BTreeSet::new();
     for left in 0..12 {
         for middle in (left + 1)..12 {
             for right in (middle + 1)..12 {
@@ -358,7 +359,8 @@ fn all_calibrated_triangles_form_one_exhaustive_orbit() {
                     let artifact = canonicalize(&input).expect("admitted triangle canonicalizes");
                     assert_eq!(artifact.automorphism_order, 6);
                     canonical_ids.insert(artifact.canonical_id);
-                    accepted.push([left, middle, right]);
+                    canonical_payloads.insert(artifact.certificate.canonical_json);
+                    accepted.push(input);
                 }
             }
         }
@@ -366,10 +368,25 @@ fn all_calibrated_triangles_form_one_exhaustive_orbit() {
 
     assert_eq!(accepted.len(), 20);
     assert_eq!(canonical_ids.len(), 1);
+    assert_eq!(canonical_payloads.len(), 1);
     assert_eq!(
         canonical_ids.into_iter().next().expect("one orbit"),
         "00d68674bd6417ba1233fa80c7221469474d8139dfdf9d37cdf5b59e06717a4d"
     );
+
+    let representative = &accepted[0];
+    for input in &accepted[1..] {
+        let certificate = compare(representative, input).expect("triangle orbit comparison");
+        assert!(matches!(
+            certificate.result,
+            EquivalenceOutcome::Equivalent { .. }
+        ));
+        assert!(
+            verify_equivalence(representative, input, &certificate)
+                .expect("triangle orbit transporter replays")
+                .valid
+        );
+    }
 }
 
 #[test]
