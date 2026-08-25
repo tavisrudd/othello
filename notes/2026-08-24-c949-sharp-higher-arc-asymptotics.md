@@ -1619,6 +1619,12 @@ vertex lines.  If their value sets are `A_0,B_0,C_0` for the projections
 product A_0=(product B_0)(product C_0).              (SR19)
 ```
 
+To see the sign exactly, a projection with singleton product `P` has product
+over all its values on `H` equal to `P^(-1)`: the product of every element of
+`F_q^*` is `-1`, whose square is one, while the nonsingleton values occur
+twice.  Applying this to `a`, `b`, and `a/b`, then using
+`product(a/b)=product(a)/product(b)`, gives `(SR19)`.
+
 There is an exact finite completion test behind this identity.  The set `H`
 extends by three new torus cells to a full duplex if and only if there is a
 bijection `pi:A_0 -> B_0` such that
