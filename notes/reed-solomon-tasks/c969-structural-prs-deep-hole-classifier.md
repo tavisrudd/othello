@@ -17,8 +17,8 @@ deep orbit and the R7 small-field radius-gap verdict.  The R5--R7 terminal gate
 is now proved and implemented by a streaming 12-point bilinear selector with
 exact
 `O(q)`, `O(q^2)`, and `O(q^3)` prefix counts, both infinity charts, and a
-bounded small-field fallback.  Uniform nonpersistent formula adapters and
-formula-speed canonicalizers remain open, but the R5 tame osculating and
+bounded small-field fallback.  Further R8--R10 nonpersistent formula adapters
+and formula-speed canonicalizers remain open, but the R5 tame osculating and
 characteristic-three nucleus/wild adapters and R6 recurring odd-binary nucleus
 plus R7 central odd-binary nucleus now replay intrinsically above the finite
 registry.  This closes the recurring nonpersistent R5--R7 formula inventory;
@@ -33,13 +33,17 @@ mathematics only; no manuscript edits.
 The first reproducible release benchmark now separates the 12-point terminal
 selector from the projective-locator oracle and reports canonicalization,
 end-to-end classification, and positive replay independently; see
-`c969-benchmark-v1.md`.  A wider extension-field matrix and external-software
-comparison remain open.
+`c969-benchmark-v1.md`.  The same harness now includes a GF(8) selector,
+canonicalization, classification, and replay matrix; external-software
+comparison remains open.
 
 Persistent tangent canonicalization now uses the repeated quadratic-gcd root
 to restrict exact lexicographic minimization to `m q(q-1)` affine transports;
 `c969-tangent-canonicalizer.md` proves equivalence to the full orbit minimum.
-Sigma and nonpersistent canonicalizers retain the explicit group fallback.
+Sigma and nonpersistent canonicalizers retain the explicit group fallback.  A
+frozen R5 counterexample proves that centering an irreducible sigma gcd and
+enumerating its torus normalizer does not preserve the full-orbit minimum; any
+future sigma speedup must retain the missing torus/fiber class.
 
 ## Goal
 
