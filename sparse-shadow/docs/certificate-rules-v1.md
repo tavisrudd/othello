@@ -50,7 +50,9 @@ valid embedded certificate.
 The library's `verify_canonical_artifact` entry point and the CLI's
 `verify-certificate` command replay this complete wrapper. The CLI accepts the
 output of `canonicalize` without extraction, while retaining support for a bare
-`CanonicalCertificate`.
+`CanonicalCertificate`. The wrapper is versioned
+`sparse-shadow-canonical/v2`; the proof remains v1 because the certified search
+rules and payload are unchanged.
 
 The first fixture's certificate is about 5.1 KiB because it carries all 120
 automorphisms. The public artifact reports a three-element generating set, but

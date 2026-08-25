@@ -7,6 +7,8 @@ use crate::{
     VerificationReport, validate, verify_certificate,
 };
 
+pub const CANONICAL_SCHEMA_VERSION: &str = "sparse-shadow-canonical/v2";
+
 #[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct SearchStats {
@@ -97,7 +99,7 @@ pub fn canonicalize(input: &InputArtifact) -> Result<CanonicalArtifact, ShadowEr
     };
 
     Ok(CanonicalArtifact {
-        schema: "sparse-shadow-canonical/v1".into(),
+        schema: CANONICAL_SCHEMA_VERSION.into(),
         canonical_id,
         canonical,
         input_to_canonical,
@@ -128,7 +130,7 @@ pub fn verify_canonical_artifact(
 
 fn verify_canonical_artifact_fields(artifact: &CanonicalArtifact) -> Result<(), ShadowError> {
     let certificate = &artifact.certificate;
-    if artifact.schema != "sparse-shadow-canonical/v1"
+    if artifact.schema != CANONICAL_SCHEMA_VERSION
         || artifact.canonical_id != certificate.canonical_id
         || artifact.input_to_canonical != certificate.input_to_canonical
         || artifact.stats != certificate.search_stats

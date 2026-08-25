@@ -3,6 +3,11 @@
 Schema `sparse-shadow/v1` has five tagged profile adapters. It does not assert
 that the profiles are instances of one mathematical functor.
 
+This version names the input interchange schema. Canonical output uses
+`sparse-shadow-canonical/v2`: v2 adds the verified point-stabilizer surface to
+the earlier canonical wrapper. The independent canonical proof remains
+`sparse-shadow-certificate/v1` because its eight-rule payload did not change.
+
 | adapter | observed shadow | action | recovered carrier | residual ambiguity | v1 state |
 |---|---|---|---|---|---|
 | `paper_i_orientation` | two five-valent orbital relations, antipodes, optional calibrated triangle | color-preserving vertex permutations preserving named relations | six-axis/conference carrier | free orientation `C2` unless calibrated | enabled |

@@ -9,8 +9,8 @@ mod schema;
 mod verify;
 
 pub use canonical::{
-    BranchDecision, CanonicalArtifact, CanonicalCertificate, PointStabilizer, SearchStats,
-    canonicalize, verify_canonical_artifact,
+    BranchDecision, CANONICAL_SCHEMA_VERSION, CanonicalArtifact, CanonicalCertificate,
+    PointStabilizer, SearchStats, canonicalize, verify_canonical_artifact,
 };
 pub use equivalence::{
     EquivalenceCertificate, EquivalenceOutcome, SeparatingInvariant, compare, verify_equivalence,

@@ -212,6 +212,10 @@ no optimization claim. A current post-stabilizer CPU-pinned smoke run is
 recorded separately and likewise licenses no speedup claim; documentation and
 locked/offline resolution gates are green.
 
+The point-stabilizer surface is explicitly versioned as canonical wrapper v2.
+The input interchange and unchanged eight-rule certificate correctly remain at
+v1; no expanded artifact is emitted under the earlier canonical wrapper tag.
+
 No unblocked C968 implementation frontier remains: each next adapter first
 requires the complete paper-owned export named in its `fixtures/gated-*.json`.
 Nearby evidence JSON and trust manifests are explicitly insufficient. Once an

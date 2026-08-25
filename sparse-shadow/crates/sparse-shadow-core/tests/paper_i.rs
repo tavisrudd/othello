@@ -1,8 +1,8 @@
 use proptest::prelude::*;
 use sparse_shadow_core::{
     CanonicalCertificate, EquivalenceOutcome, InputArtifact, ProfileInput, ShadowError,
-    canonicalize, compare, reconstruct, validate, verify_certificate, verify_equivalence,
-    verify_reconstruction,
+    canonicalize, compare, reconstruct, validate, verify_canonical_artifact, verify_certificate,
+    verify_equivalence, verify_reconstruction,
 };
 
 const FIXTURE: &str = include_str!("../../../fixtures/paper-i-icosahedral-orbitals.json");
@@ -82,6 +82,10 @@ fn committed_golden_contract_is_stable() {
     let expected: serde_json::Value =
         serde_json::from_str(GOLDEN_CONTRACT).expect("golden contract parses");
     assert_eq!(
+        expected["contract_schema"],
+        "sparse-shadow-paper-i-golden/v1"
+    );
+    assert_eq!(
         contract_view(&canonicalize(&fixture()).expect("uncalibrated canonical fixture")),
         expected["uncalibrated"]
     );
@@ -97,6 +101,14 @@ fn canonicalization_is_idempotent() {
     let second = canonicalize(&first.canonical).expect("canonical form canonicalizes");
     assert_eq!(second.canonical_id, first.canonical_id);
     assert_eq!(second.canonical, first.canonical);
+}
+
+#[test]
+fn expanded_canonical_wrapper_requires_v2() {
+    let input = fixture();
+    let mut artifact = canonicalize(&input).expect("canonical fixture");
+    artifact.schema = "sparse-shadow-canonical/v1".into();
+    assert!(verify_canonical_artifact(&input, &artifact).is_err());
 }
 
 #[test]

@@ -57,6 +57,9 @@ serialized tree.
 - the committed golden contract pins both Paper-I canonical identities,
   automorphism and stabilizer summaries, vertex orbits, exhaustive search
   counters, and certificate/proof-system schemas across builds;
+- canonical wrapper v2 explicitly versions the point-stabilizer addition;
+  input schema v1 and canonical proof v1 remain unchanged rather than drifting
+  under reused tags;
 - schema rejection tests cover unknown fields, unsupported versions,
   non-normalized undirected edges, malformed orbital partitions, and duplicate
   calibration vertices; Paper-I calibration must additionally be an increasing

@@ -9,7 +9,10 @@ action, carrier, reconstruction map, and residual ambiguity. The shared engine
 provides deterministic canonicalization, witnesses, certificates, replay, and
 stable JSON artifacts. Canonical output includes the complete certified
 automorphism order and generators, vertex orbits, and an explicit point
-stabilizer for one representative of every vertex orbit.
+stabilizer for one representative of every vertex orbit. The input interchange
+schema is `sparse-shadow/v1`; the expanded canonical wrapper is
+`sparse-shadow-canonical/v2`, while its unchanged exhaustive proof is
+`sparse-shadow-certificate/v1`.
 
 The first development gate enables only the hand-checkable Paper-I orientation
 fixtures: an uncalibrated shadow with residual `C2` and a calibrated triangle
