@@ -1444,6 +1444,117 @@ def audit_degree_defect(q9_construction: Path, frobenius_audit: Path,
            for line in q9_on_line
            if len(q9_signed_support.intersection(line)) == 2):
         raise ValueError("a q=9 signed support 2-secant has equal signs")
+    q9_signed_positive = {
+        point for point, value in enumerate(q9_signed_secant_defect) if value == 1
+    }
+    q9_signed_negative = {
+        point for point, value in enumerate(q9_signed_secant_defect) if value == -1
+    }
+    q9_negative_carriers = [
+        line_index for line_index, line in enumerate(q9_on_line)
+        if q9_signed_negative.issubset(line)
+    ]
+    if len(q9_negative_carriers) != 1:
+        raise ValueError("the q=9 negative sign class has no unique carrier line")
+    q9_negative_carrier = q9_negative_carriers[0]
+    if q9_signed_positive.intersection(q9_on_line[q9_negative_carrier]):
+        raise ValueError("the q=9 positive sign class meets the negative carrier")
+    q9_signed_joint_line_spectrum = Counter(
+        (len(q9_signed_positive.intersection(line)),
+         len(q9_signed_negative.intersection(line)))
+        for line in q9_on_line
+    )
+    q9_carrier_points = set(q9_on_line[q9_negative_carrier])
+    q9_carrier_holes = sorted(q9_carrier_points - q9_signed_negative)
+    q9_secondary_hermitian_matrix = [[2, 6, 2], [3, 0, 5], [2, 8, 1]]
+    q9_field = Field(9)
+    q9_secondary_hermitian_inverse = matrix_inverse(
+        q9_field, q9_secondary_hermitian_matrix
+    )
+    if q9_secondary_hermitian_inverse is None:
+        raise ValueError("the secondary q=9 Hermitian form is singular")
+    if any(q9_secondary_hermitian_matrix[column][row]
+           != q9_field.pow(q9_secondary_hermitian_matrix[row][column], 3)
+           for row in range(3) for column in range(3)):
+        raise ValueError("the secondary q=9 matrix is not Hermitian")
+    q9_secondary_unital = set()
+    q9_points = projective_points(q9_field)
+    for point_index, point in enumerate(q9_points):
+        conjugate = tuple(q9_field.pow(value, 3) for value in point)
+        hermitian_value = sum_field(q9_field, [
+            q9_field.mul(conjugate[row], q9_field.mul(
+                q9_secondary_hermitian_matrix[row][column], point[column]
+            ))
+            for row in range(3) for column in range(3)
+        ])
+        if hermitian_value == 0:
+            q9_secondary_unital.add(point_index)
+    if q9_secondary_unital != q9_signed_positive.union(q9_carrier_holes):
+        raise ValueError("the secondary q=9 unital does not recover the signed word")
+    q9_secondary_unital_line_spectrum = Counter(
+        len(q9_secondary_unital.intersection(line)) for line in q9_on_line
+    )
+    if q9_secondary_unital_line_spectrum != Counter({1: 28, 4: 63}):
+        raise ValueError("the secondary q=9 Hermitian zero locus is not a unital")
+    q9_secondary_line_quotients = [
+        (len(q9_secondary_unital.intersection(line)) - 1) // 3
+        for line in q9_on_line
+    ]
+    if (sum(q9_secondary_line_quotients) != 63
+            or sum(value * value for value in q9_secondary_line_quotients) != 63):
+        raise ValueError("the q=9 exact modular-multiset moments failed")
+    q9_secondary_tangent_dual = {
+        line_index for line_index, line in enumerate(q9_on_line)
+        if len(q9_secondary_unital.intersection(line)) == 1
+    }
+    if q9_secondary_tangent_dual != q9_unital:
+        raise ValueError("the original q=9 unital is not the secondary tangent dual")
+    q9_secondary_dual_matrix = [
+        [q9_field.pow(value, 3) for value in row]
+        for row in q9_secondary_hermitian_inverse
+    ]
+    if any(q9["hermitian_matrix"][row][column]
+           != q9_field.mul(2, q9_secondary_dual_matrix[row][column])
+           for row in range(3) for column in range(3)):
+        raise ValueError("the two q=9 Hermitian matrices are not polarity dual")
+    if (not q9_core.isdisjoint(q9_secondary_tangent_dual)
+            or q9_negative_carrier in q9_core):
+        raise ValueError("the q=9 core is not contained in the noncarrier secant dual")
+    if any(q9_signed_secant_defect[point]
+           != int(point in q9_secondary_unital) - int(point in q9_carrier_points)
+           for point in range(len(q9_on_line))):
+        raise ValueError("the q=9 signed word is not unital minus line")
+    q9_affine_parallel_classes = [
+        [line for line, members in enumerate(q9_on_line)
+         if hole in members and line != q9_negative_carrier]
+        for hole in q9_carrier_holes
+    ]
+    q9_four_line_correction_weights = Counter()
+    q9_four_line_minimum_symbol_spectra = set()
+    q9_four_line_minimum_weight = None
+    for chosen_lines in itertools.product(*q9_affine_parallel_classes):
+        four_line_sum = [0] * len(q9_on_line)
+        for line in chosen_lines:
+            for point in q9_on_line[line]:
+                if point not in q9_carrier_points:
+                    four_line_sum[point] = (four_line_sum[point] + 1) % 3
+        correction = [
+            ((int(point in q9_signed_positive) - four_line_sum[point]) % 3
+             if point not in q9_carrier_points else 0)
+            for point in range(len(q9_on_line))
+        ]
+        if any(sum(correction[point] for point in line) % 3
+               for line in q9_on_line):
+            raise ValueError("the four-direction correction is not a dual word")
+        weight = sum(value != 0 for value in correction)
+        q9_four_line_correction_weights[weight] += 1
+        if q9_four_line_minimum_weight is None or weight < q9_four_line_minimum_weight:
+            q9_four_line_minimum_weight = weight
+            q9_four_line_minimum_symbol_spectra.clear()
+        if weight == q9_four_line_minimum_weight:
+            q9_four_line_minimum_symbol_spectra.add(
+                tuple(sorted(Counter(correction).items()))
+            )
 
     q = 27
     r = q // 3
@@ -1696,6 +1807,16 @@ def audit_degree_defect(q9_construction: Path, frobenius_audit: Path,
             - fixed_line_degrees[line]
             for line in fixed_indices
         ]
+        fixed_negative = {
+            point for point, value in zip(fixed_indices, fixed_signed_secant_defect)
+            if value == -1
+        }
+        fixed_negative_carriers = [
+            line for line in fixed_indices if fixed_negative.issubset(on_line[line])
+        ] if len(fixed_negative) <= 4 else []
+        transform_compatible_negative_carriers = [
+            line for line in fixed_negative_carriers if line not in core
+        ]
         fixed_external_high_degrees = []
         for point in fixed_indices:
             if point in core:
@@ -1782,11 +1903,35 @@ def audit_degree_defect(q9_construction: Path, frobenius_audit: Path,
             for degree in range(maximal_degree)
             if max(spectrum[degree] for spectrum in global_spectra)
         }
+        centered_mod_3_weights = [
+            maximal_line_count + sum(
+                spectrum[degree] for degree in range(maximal_degree)
+                if (degree - r) % 3
+            )
+            for spectrum in global_spectra
+        ]
         branch_records.append({
             "fixed_core_point_indices": sorted(core),
             "fixed_signed_secant_defect_spectrum": dict(sorted(
                 Counter(fixed_signed_secant_defect).items()
             )),
+            "fixed_negative_collinear_carrier_indices": fixed_negative_carriers,
+            "collinear_negative_candidate_hole_orbit_case_count": sum(
+                math.comb(8, len(fixed_negative) // 3)
+                for _ in fixed_negative_carriers
+                if len(fixed_negative) in (0, 3)
+            ),
+            "collinear_negative_carriers_in_fixed_core": sorted(
+                set(fixed_negative_carriers).intersection(core)
+            ),
+            "collinear_negative_signed_transform_compatible": bool(
+                transform_compatible_negative_carriers
+            ),
+            "collinear_negative_surviving_hole_orbit_case_count": sum(
+                math.comb(8, len(fixed_negative) // 3)
+                for _ in transform_compatible_negative_carriers
+                if len(fixed_negative) in (0, 3)
+            ),
             "nonfixed_signed_secant_defect_orbit_spectrum": {
                 "-1": (24 - fixed_signed_secant_defect.count(-1)) // 3,
                 "0": (655 - fixed_signed_secant_defect.count(0)) // 3,
@@ -1809,6 +1954,10 @@ def audit_degree_defect(q9_construction: Path, frobenius_audit: Path,
             "fixed_degree_histogram_count": len(fixed_states),
             "feasible_fixed_degree_histogram_count": feasible_fixed_histograms,
             "compatible_external_degree_spectrum_count": len(global_spectra),
+            "centered_mod_3_codeword_weight_range": {
+                "minimum": min(centered_mod_3_weights),
+                "maximum": max(centered_mod_3_weights),
+            },
             "external_degree_count_ranges": ranges,
             "fixed_centered_residues_mod_3": {
                 str(point): fixed_centered_residues[point] for point in fixed_indices
@@ -1820,8 +1969,47 @@ def audit_degree_defect(q9_construction: Path, frobenius_audit: Path,
                 len(liftable_columns) - fixed_liftable_restriction_rank,
         })
 
+    if any(branch["collinear_negative_signed_transform_compatible"]
+           for branch in branch_records):
+        raise ValueError("a Frobenius collinear-negative branch unexpectedly survives")
+
+    def q27_collinear_spectra(carrier_degree: int) -> list[tuple[int, ...]]:
+        carrier_x = carrier_degree - r
+        remaining_sum = centered_sum - carrier_x
+        remaining_defect = defect - carrier_x * (carrier_x - 1)
+        spectra = []
+        for count_x4 in range(remaining_defect // 12 + 1):
+            for count_x3 in range(remaining_defect // 6 + 1):
+                leftover = remaining_defect - 12 * count_x4 - 6 * count_x3
+                if leftover < 0 or leftover % 2:
+                    continue
+                count_x2 = leftover // 2
+                count_x1 = (remaining_sum - 4 * count_x4 - 3 * count_x3
+                            - 2 * count_x2)
+                count_x0 = (external_count - 1 - count_x1 - count_x2
+                            - count_x3 - count_x4)
+                spectrum = (count_x0, count_x1, count_x2, count_x3, count_x4)
+                if min(spectrum) >= 0:
+                    spectra.append(spectrum)
+        return spectra
+
+    q27_collinear_cases = {}
+    for positive_carrier_count, carrier_degree in ((0, 1), (3, 2)):
+        spectra = q27_collinear_spectra(carrier_degree)
+        q27_collinear_cases[str(positive_carrier_count)] = {
+            "carrier_selected_degree": carrier_degree,
+            "external_degree_spectrum_count": len(spectra),
+            "noncarrier_degree_count_ranges": {
+                str(r + offset): {
+                    "minimum": min(spectrum[offset] for spectrum in spectra),
+                    "maximum": max(spectrum[offset] for spectrum in spectra),
+                }
+                for offset in range(5)
+            },
+        }
+
     output.write_text(json.dumps({
-        "schema": "c949-degree-defect-audit-v5",
+        "schema": "c949-degree-defect-audit-v7",
         "field_uniform_identities": {
             "q": "3r",
             "external_point_count": "q^2-q",
@@ -1834,6 +2022,38 @@ def audit_degree_defect(q9_construction: Path, frobenius_audit: Path,
             "signed_secant_defect_spectrum":
                 "(-1)^(q-3) 0^(q^2-3q+7) 1^(3q-3)",
             "signed_support_size": "4q-6",
+            "collinear_negative_conditional": {
+                "positive_count_on_carrier": "0 or 3",
+                "positive_count_zero_case": {
+                    "carrier_core_normalized_value": "-(r-1)",
+                    "carrier_selected_degree": 1,
+                    "carrier_defect": "r(r-1)",
+                    "remaining_noncarrier_defect": "r(r-3)",
+                    "remaining_exception_count_upper_bound": "r(r-3)/2",
+                    "q27_remaining_exception_count_range": "5..27",
+                },
+                "positive_count_three_case": {
+                    "carrier_core_normalized_value": "-(r-2)",
+                    "carrier_selected_degree": 2,
+                    "carrier_defect": "(r-2)(r-1)",
+                    "remaining_noncarrier_defect": "(r-2)(r+1)",
+                    "remaining_exception_count_upper_bound": "(r-2)(r+1)/2",
+                    "q27_remaining_exception_count_range": "6..35",
+                },
+            },
+            "collinear_negative_affine_radon_reduction":
+                "1_P is a four-affine-line sum plus a projective dual word mod 3",
+            "collinear_negative_exact_modular_multiset": {
+                "definition": "u=z+1_L",
+                "total_multiplicity": "3q+1",
+                "line_intersections_mod_3": 1,
+                "carrier_multiplicity": "4 or 7",
+                "coordinate_multiplicities": "0,1,2",
+                "line_quotient_sum": "2q^2/3+q",
+                "line_quotient_squared_sum": "7q^2/9+2qR/9",
+                "line_quotient_defect": "q(q-9+2R)/9",
+                "repeated_point_pair_count_R": "0 or 3",
+            },
             "core_normalized_sum": "2r(3r+1)",
             "core_normalized_squared_norm": "2r(4r-1)",
             "signed_support_has_no_tangents": True,
@@ -1865,6 +2085,47 @@ def audit_degree_defect(q9_construction: Path, frobenius_audit: Path,
             )),
             "signed_support_has_no_tangents": True,
             "signed_support_two_secants_have_opposite_signs": True,
+            "signed_negative_points_are_collinear": True,
+            "signed_negative_carrier_line_index": q9_negative_carrier,
+            "signed_negative_carrier_hole_count":
+                len(q9_on_line[q9_negative_carrier]) - len(q9_signed_negative),
+            "signed_positive_points_avoid_negative_carrier": True,
+            "signed_word_equals_secondary_unital_minus_carrier_line": True,
+            "secondary_hermitian_matrix": q9_secondary_hermitian_matrix,
+            "secondary_unital_size": len(q9_secondary_unital),
+            "secondary_unital_carrier_intersection_size":
+                len(q9_secondary_unital.intersection(q9_carrier_points)),
+            "secondary_unital_line_intersection_spectrum": dict(sorted(
+                q9_secondary_unital_line_spectrum.items()
+            )),
+            "secondary_unital_line_quotient_sum":
+                sum(q9_secondary_line_quotients),
+            "secondary_unital_line_quotient_squared_sum":
+                sum(value * value for value in q9_secondary_line_quotients),
+            "original_unital_equals_secondary_tangent_dual": True,
+            "original_secondary_hermitian_matrix_relation":
+                "H_original=2*(H_secondary^-1)^(3)",
+            "core_is_subset_of_secondary_noncarrier_secant_dual": True,
+            "original_secondary_unital_intersection_size":
+                len(q9_unital.intersection(q9_secondary_unital)),
+            "signed_positive_negative_line_intersection_spectrum": {
+                f"{positive},{negative}": count
+                for (positive, negative), count in sorted(
+                    q9_signed_joint_line_spectrum.items()
+                )
+            },
+            "four_direction_line_sum_choice_count":
+                math.prod(len(lines) for lines in q9_affine_parallel_classes),
+            "four_direction_dual_correction_weight_spectrum": dict(sorted(
+                q9_four_line_correction_weights.items()
+            )),
+            "four_direction_dual_correction_minimum_weight":
+                q9_four_line_minimum_weight,
+            "four_direction_dual_correction_minimum_symbol_spectra": [
+                dict(spectrum) for spectrum in sorted(
+                    q9_four_line_minimum_symbol_spectra
+                )
+            ],
         },
         "q27_T55": {
             "arc_size": arc_size,
@@ -1895,6 +2156,19 @@ def audit_degree_defect(q9_construction: Path, frobenius_audit: Path,
             "signed_secant_defect_ternary_dual_weight": 102,
             "signed_support_has_no_tangents": True,
             "signed_support_two_secants_have_opposite_signs": True,
+            "frobenius_collinear_negative_excluded": not any(
+                branch["collinear_negative_signed_transform_compatible"]
+                for branch in branch_records
+            ),
+            "frobenius_collinear_negative_candidate_case_count": sum(
+                branch["collinear_negative_candidate_hole_orbit_case_count"]
+                for branch in branch_records
+            ),
+            "frobenius_collinear_negative_surviving_case_count": sum(
+                branch["collinear_negative_surviving_hole_orbit_case_count"]
+                for branch in branch_records
+            ),
+            "asymmetric_collinear_negative_degree_spectra": q27_collinear_cases,
             "core_normalized_line_sum_spectrum": {
                 "9": 24,
                 "18": 655,

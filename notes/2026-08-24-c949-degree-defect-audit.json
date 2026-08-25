@@ -2,6 +2,37 @@
   "field_uniform_identities": {
     "centered_external_degree_sum": "6r^2-4r-1",
     "centered_incidence_equation": "M^T(e-r*1)=q*(1+1_A)",
+    "collinear_negative_affine_radon_reduction": "1_P is a four-affine-line sum plus a projective dual word mod 3",
+    "collinear_negative_conditional": {
+      "positive_count_on_carrier": "0 or 3",
+      "positive_count_three_case": {
+        "carrier_core_normalized_value": "-(r-2)",
+        "carrier_defect": "(r-2)(r-1)",
+        "carrier_selected_degree": 2,
+        "q27_remaining_exception_count_range": "6..35",
+        "remaining_exception_count_upper_bound": "(r-2)(r+1)/2",
+        "remaining_noncarrier_defect": "(r-2)(r+1)"
+      },
+      "positive_count_zero_case": {
+        "carrier_core_normalized_value": "-(r-1)",
+        "carrier_defect": "r(r-1)",
+        "carrier_selected_degree": 1,
+        "q27_remaining_exception_count_range": "5..27",
+        "remaining_exception_count_upper_bound": "r(r-3)/2",
+        "remaining_noncarrier_defect": "r(r-3)"
+      }
+    },
+    "collinear_negative_exact_modular_multiset": {
+      "carrier_multiplicity": "4 or 7",
+      "coordinate_multiplicities": "0,1,2",
+      "definition": "u=z+1_L",
+      "line_intersections_mod_3": 1,
+      "line_quotient_defect": "q(q-9+2R)/9",
+      "line_quotient_squared_sum": "7q^2/9+2qR/9",
+      "line_quotient_sum": "2q^2/3+q",
+      "repeated_point_pair_count_R": "0 or 3",
+      "total_multiplicity": "3q+1"
+    },
     "core_normalized_squared_norm": "2r(4r-1)",
     "core_normalized_sum": "2r(3r+1)",
     "core_normalized_vector": "x=e-r*(1+1_D)",
@@ -16,8 +47,72 @@
   },
   "q27_T55": {
     "arc_size": 279,
+    "asymmetric_collinear_negative_degree_spectra": {
+      "0": {
+        "carrier_selected_degree": 1,
+        "external_degree_spectrum_count": 30,
+        "noncarrier_degree_count_ranges": {
+          "10": {
+            "maximum": 438,
+            "minimum": 403
+          },
+          "11": {
+            "maximum": 27,
+            "minimum": 0
+          },
+          "12": {
+            "maximum": 9,
+            "minimum": 0
+          },
+          "13": {
+            "maximum": 4,
+            "minimum": 0
+          },
+          "9": {
+            "maximum": 271,
+            "minimum": 258
+          }
+        }
+      },
+      "3": {
+        "carrier_selected_degree": 2,
+        "external_degree_spectrum_count": 42,
+        "noncarrier_degree_count_ranges": {
+          "10": {
+            "maximum": 429,
+            "minimum": 386
+          },
+          "11": {
+            "maximum": 35,
+            "minimum": 2
+          },
+          "12": {
+            "maximum": 11,
+            "minimum": 0
+          },
+          "13": {
+            "maximum": 5,
+            "minimum": 0
+          },
+          "9": {
+            "maximum": 280,
+            "minimum": 264
+          }
+        }
+      }
+    },
     "branches": [
       {
+        "centered_mod_3_codeword_weight_range": {
+          "maximum": 630,
+          "minimum": 441
+        },
+        "collinear_negative_candidate_hole_orbit_case_count": 8,
+        "collinear_negative_carriers_in_fixed_core": [
+          27
+        ],
+        "collinear_negative_signed_transform_compatible": false,
+        "collinear_negative_surviving_hole_orbit_case_count": 0,
         "compatible_external_degree_spectrum_count": 50261,
         "external_degree_count_ranges": {
           "1": {
@@ -106,6 +201,9 @@
           "1": 2,
           "2": 6
         },
+        "fixed_negative_collinear_carrier_indices": [
+          27
+        ],
         "fixed_signed_secant_defect_spectrum": {
           "-1": 3,
           "0": 7,
@@ -124,6 +222,14 @@
         "pinned_ternary_incidence_rank": 83
       },
       {
+        "centered_mod_3_codeword_weight_range": {
+          "maximum": 630,
+          "minimum": 441
+        },
+        "collinear_negative_candidate_hole_orbit_case_count": 0,
+        "collinear_negative_carriers_in_fixed_core": [],
+        "collinear_negative_signed_transform_compatible": false,
+        "collinear_negative_surviving_hole_orbit_case_count": 0,
         "compatible_external_degree_spectrum_count": 50261,
         "external_degree_count_ranges": {
           "1": {
@@ -213,6 +319,7 @@
           "1": 2,
           "2": 6
         },
+        "fixed_negative_collinear_carrier_indices": [],
         "fixed_signed_secant_defect_spectrum": {
           "-1": 6,
           "0": 4,
@@ -257,6 +364,9 @@
     "fixed_full_modulus_kernel_projection_index_log_3": 7,
     "fixed_full_modulus_kernel_projection_log_3_size": 32,
     "fixed_liftable_residue_restriction_rank": 6,
+    "frobenius_collinear_negative_candidate_case_count": 8,
+    "frobenius_collinear_negative_excluded": true,
+    "frobenius_collinear_negative_surviving_case_count": 0,
     "frobenius_invariant_coordinate_count": 261,
     "frobenius_invariant_incidence_3adic_valuation_spectrum": {
       "0": 77,
@@ -286,6 +396,7 @@
     "centered_incidence_equation_checked": true,
     "centered_mod_3_support_equals_unital_complement": true,
     "centered_mod_3_support_size": 63,
+    "core_is_subset_of_secondary_noncarrier_secant_dual": true,
     "core_normalized_defect": 6,
     "core_normalized_spectrum": {
       "-2": 1,
@@ -295,12 +406,70 @@
     "core_normalized_squared_norm": 66,
     "core_normalized_sum": 60,
     "external_defect": 6,
+    "four_direction_dual_correction_minimum_symbol_spectra": [
+      {
+        "0": 61,
+        "1": 15,
+        "2": 15
+      }
+    ],
+    "four_direction_dual_correction_minimum_weight": 30,
+    "four_direction_dual_correction_weight_spectrum": {
+      "30": 160,
+      "33": 1176,
+      "36": 1512,
+      "39": 2552,
+      "42": 984,
+      "45": 144,
+      "48": 32,
+      "57": 1
+    },
+    "four_direction_line_sum_choice_count": 6561,
     "line_degree_spectrum": {
       "1": 1,
       "3": 28,
       "4": 43,
       "7": 19
     },
+    "original_secondary_hermitian_matrix_relation": "H_original=2*(H_secondary^-1)^(3)",
+    "original_secondary_unital_intersection_size": 4,
+    "original_unital_equals_secondary_tangent_dual": true,
+    "secondary_hermitian_matrix": [
+      [
+        2,
+        6,
+        2
+      ],
+      [
+        3,
+        0,
+        5
+      ],
+      [
+        2,
+        8,
+        1
+      ]
+    ],
+    "secondary_unital_carrier_intersection_size": 4,
+    "secondary_unital_line_intersection_spectrum": {
+      "1": 28,
+      "4": 63
+    },
+    "secondary_unital_line_quotient_squared_sum": 63,
+    "secondary_unital_line_quotient_sum": 63,
+    "secondary_unital_size": 28,
+    "signed_negative_carrier_hole_count": 4,
+    "signed_negative_carrier_line_index": 86,
+    "signed_negative_points_are_collinear": true,
+    "signed_positive_negative_line_intersection_spectrum": {
+      "0,0": 4,
+      "0,6": 1,
+      "1,1": 24,
+      "3,0": 32,
+      "4,1": 30
+    },
+    "signed_positive_points_avoid_negative_carrier": true,
     "signed_secant_defect_spectrum": {
       "-1": 6,
       "0": 61,
@@ -316,7 +485,8 @@
       "6": 1
     },
     "signed_support_two_secants_have_opposite_signs": true,
+    "signed_word_equals_secondary_unital_minus_carrier_line": true,
     "unital_complement_size": 63
   },
-  "schema": "c949-degree-defect-audit-v5"
+  "schema": "c949-degree-defect-audit-v7"
 }

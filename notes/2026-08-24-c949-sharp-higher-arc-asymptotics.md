@@ -7,7 +7,7 @@ first-gate work only, with no manuscript work
 
 ## First-gate findings — 24 August 2026
 
-The construction audit currently names six sources: two were read at **full
+The construction audit currently names seven sources: three were read at **full
 text** in C945's recorded audit and four at **partial** depth.  No novelty or
 priority claim is made.  The exact read depths, versions, access paths, and
 hashes are recorded below.
@@ -442,6 +442,246 @@ Its 24 support 2-secants all join opposite signs.  This exact small case is a
 concrete model for the signed untouchable-set classification, not merely a
 weight calculation.
 
+#### Collinear-negative reduction and the four-direction coset
+
+The signed word has a further exact feature which is stronger than
+untouchability.  Write `P={z=1}` and `N={z=-1}`.  In the `q=9` witness all six
+points of `N` lie on one line `L`, `P` avoids `L`, and the joint line spectrum
+is
+
+```text
+(|ell intersect P|,|ell intersect N|):
+  (0,0)^4 (0,6)^1 (1,1)^24 (3,0)^32 (4,1)^30.       (CL9)
+```
+
+The four holes complete `P` to a second classical Hermitian unital `U'`.
+In the integer encoding `GF(9)=GF(3)[w]/(w^2+1)`, it is the zero locus of the
+nonsingular Hermitian matrix
+
+```text
+H' = [[2,6,2],[3,0,5],[2,8,1]],
+```
+
+and has line spectrum `1^28 4^63`.  The signed word has the exact geometric
+factorization
+
+```text
+z = 1_{U'}-1_L.                                      (HU)
+```
+
+Indeed `U' intersect L` is the four-hole set, so `(HU)` gives `+1` on the 24
+off-line unital points and `-1` on the other six carrier points.  For every
+line other than `L`, subtracting its unique intersection with `L` turns the
+unital intersections `1/4` into signed sums `0/3`; on `L` itself the signed
+sum is `4-10=-6`.  Hence `(SD)` becomes
+
+```text
+x=-2 on L,  x=0 on the 28 tangents to U',
+x=1 on the other 62 secants to U'.
+```
+
+Under the symmetric polarity used throughout the audit, those 28 tangent
+lines are exactly the *original* Hermitian unital from the `C_4` construction.
+At matrix level the relation is
+
+```text
+H_original = 2 (H'^{-1})^(3),
+```
+
+where the exponent is entrywise Frobenius.  This independently gives the
+tangent-dual Hermitian form, rather than recognizing it only from its point
+set.
+The 19-point blocking core `D` is disjoint from that tangent dual and avoids
+`L`, hence lies entirely among the 62 other secant coordinates.  The complete
+degree stratification is therefore
+
+```text
+e=1 on L;  e=3 on the 28 tangents;  e=4 on 43 noncore secants;
+e=7 on the 19 core secants.
+```
+
+Thus the unital which survived the switch as `supp(x mod 3)^c` is the tangent
+dual of `U'`; the switch secretly relates two Hermitian unitals meeting in
+four points.  This settles the previously unexplained intrinsic object behind
+the signed base witness.
+
+It also proves that `(HU)` is intrinsically a base-field resonance, not an
+asymptotic construction.  In a plane of square order `Q=sqrt(Q)^2`, replacing
+`U'` by a Hermitian unital and subtracting one secant produces sign classes of
+sizes
+
+```text
+positive: (Q-1)sqrt(Q),       negative: Q-sqrt(Q).
+```
+
+Matching the required `(3Q-3,Q-3)` forces `sqrt(Q)=3`, hence `Q=9`.  For
+larger squares the signed support has the exact size
+
+```text
+Q sqrt(Q)+Q-2sqrt(Q),
+```
+
+rather than `4Q-6`.  In characteristic three the same incidence calculation
+still gives a genuine ternary dual word.  Writing `s=sqrt(Q)`, its integral
+transform `Mz/3` is zero on all tangent lines, equals `s/3` on every
+noncarrier secant, and equals `-s(s-1)/3` on the carrier.  Thus the construction
+is an infinite signed-code family, but both its support and transform leave
+the C949 small-defect scale as soon as `s>3`.  Nonsquare fields do not carry
+this Hermitian construction.  The exact factorization explains the base
+equality while simultaneously ruling out its literal lift toward `(UB3)`.
+
+The factorization has a field-uniform converse which does not assume a
+unital.  If the negative class of any target signed word is carried by a line
+`L`, put
+
+```text
+u=z+1_L.
+```
+
+Off `L` this is a `0/1` vector.  On `L` the `q-3` negatives cancel, while the
+four holes have multiplicity one or two.  Since the number of positive holes
+is zero or three, `u` is a nonnegative `{0,1,2}` multiset with
+
+```text
+sum u=3q+1,       every line sum is 1 (mod 3),
+sum_{P in L} u_P=4 or 7.                              (M31)
+```
+
+Conversely, subtracting `1_L` from a multiset of this form with the prescribed
+carrier pattern recovers the collinear signed word.  In the zero-positive
+case `u` is an honest `3q+1`-point `1 mod 3` blocking set with a 4-secant; the
+`q=9` instance is exactly `U'`.  In the three-positive case the carrier has
+three double points and one simple point.  Thus asymmetric collinear lifts are
+not an amorphous signed-code problem: they are a sharply parameterized exact
+modular-multiset classification problem `(M31)`.
+
+This modular object has a sharp moment defect of its own.  Write every line
+sum as `1+3y_ell`, and let `R=sum_P binom(u_P,2)`, so `R=0` in the set case and
+`R=3` in the three-double-point case.  The two projective-plane incidence
+moments give exactly
+
+```text
+sum y_ell   =2q^2/3+q,
+sum y_ell^2 =7q^2/9+2qR/9,
+sum y_ell(y_ell-1)=q(q-9+2R)/9.                       (M32)
+```
+
+For `R=0`, the final quantity is zero exactly at `q=9`; this is why the second
+unital can have only `1/4` intersections there.  Every larger field forces a
+line of multiplicity at least seven and total excess `q(q-9)/9`.  At `q=27`
+that excess is 54.  For `R=3` the total is 72, of which the carrier's value
+`y_L=2` consumes two, leaving the earlier noncarrier defect 70.  Thus `(M32)`
+recovers `(CL0)`/`(CL3)` from the exact modular multiset and identifies the
+base resonance without reference to the arc coordinates.
+
+Thus the four holes `H=L minus N` are the only exceptional directions after
+declaring `L` to be the line at infinity.  Every affine line in a direction
+from `N` meets `P` in `1 mod 3` points, while every affine line in a direction
+from `H` meets `P` in `0 mod 3` points.  This is not just terminology: choose
+arbitrarily one affine line in each of the four hole directions.  The sum of
+their four characteristic vectors has exactly the same line sums modulo three
+as `1_P`.  Consequently
+
+```text
+1_P = 1_{L_1}+1_{L_2}+1_{L_3}+1_{L_4}+w  (mod 3),
+```
+
+where `w`, extended by zero on `L`, lies in the ternary dual projective-plane
+code.  This turns the base mechanism into a four-direction affine Radon coset,
+the setting of the projection-function/special-direction method, rather than
+an unstructured weight-30 word.  Exhausting the `9^4=6561` four-line choices
+in the exact witness gives correction weights
+
+```text
+30^160 33^1176 36^1512 39^2552 42^984 45^144 48^32 57^1.
+```
+
+In particular the correction never collapses to a minimum or two-line dual
+word; its minimum weight is 30, with fifteen `+1` and fifteen `-1`
+coordinates.  This finite enumeration is an invariant diagnostic, not an
+asymptotic existence claim.
+
+There is also a field-uniform conditional defect theorem.  Suppose at
+`q=3r` that the `q-3` negative coordinates are collinear.  Their carrier has
+four holes, and divisibility of its signed sum by three forces it to contain
+either zero or three positive coordinates.  In the zero-positive case its
+`x`-coordinate is `-(r-1)`, so it is an external point of selected degree one
+and consumes defect `r(r-1)`.  The exact defect left off the carrier is
+
+```text
+2r(r-2)-r(r-1)=r(r-3).                              (CL0)
+```
+
+In the three-positive case the carrier has `x=-(r-2)`, selected degree two,
+and leaves
+
+```text
+2r(r-2)-(r-2)(r-1)=(r-2)(r+1).                     (CL3)
+```
+
+Since every other exceptional coordinate costs at least two, the respective
+noncarrier exception bounds are `r(r-3)/2` and `(r-2)(r+1)/2`.  For `q=27`
+these are 27 and 35, improving the unrestricted bound 63.  The external cap
+also gives `0<=x<=4` away from the carrier in this collinear setting, so one
+coordinate costs at most 12; hence the exact `q=27` ranges are in fact
+`5<=number of noncarrier exceptions<=27` and `6<=...<=35`.  The `q=9`
+witness is the zero-positive resonance `r=3`, where `(CL0)` vanishes and all
+other `x`-coordinates are exactly zero or one.  For every larger field the
+same clean pattern is arithmetically impossible: a collinear-negative lift
+must develop positive residual defect.
+
+The same positivity collapses the `q=27` scalar search from 50,261 spectra to
+two tiny exact lists.  With no positive carrier holes, the carrier has degree
+one and the other 701 external degrees lie in `9,...,13`; there are exactly 30
+moment spectra, with count ranges
+
+```text
+N_9:258..271  N_10:403..438  N_11:0..27  N_12:0..9  N_13:0..4.
+```
+
+With three positive holes, the carrier has degree two and there are exactly
+42 spectra, with
+
+```text
+N_9:264..280  N_10:386..429  N_11:2..35  N_12:0..11  N_13:0..5.
+```
+
+These are conditional asymmetric-core data: the Frobenius branches are
+excluded from the collinear case below.
+
+The Frobenius fixed data make this reduction decisive at the branch level.
+The three fixed negatives of the `3 collinear + 1 off-line` branch have the
+unique fixed carrier indexed by point 27 under the symmetric polarity.  That
+point belongs to the fixed blocking core, so `(SD)` requires the signed sum on
+its carrier to be `3x_27=3`.  Collinearity would instead put all 24 negatives
+there, with only four remaining positions; even filling all four positively
+gives signed sum `-20` (and divisibility actually permits only zero or three
+positives, giving `-24` or `-21`).  This is an exact contradiction.  The six
+fixed negatives of the `general 4` branch cannot lie on one fixed line, which
+has only four fixed points: the unique carrier of a Frobenius-invariant set of
+at least two collinear points must itself be Frobenius-fixed.  Therefore
+neither normalized Frobenius branch
+can realize a collinear negative class.  The eight apparent hole-orbit cases
+in the first branch disappear before search once the core equation is used.
+
+#### Bound status after the structural upgrade
+
+The unconditional asymptotic statement remains C945's sharp lower side
+
+```text
+T_3(q)>=q^2/3+4q/3-o(q).
+```
+
+No matching upper bound is proved here.  What is now proved is that the exact
+`q=9` equality mechanism is Hermitian-unital-minus-secant, that its sign
+counts match C949 only at `q=9`, and that its broader collinear-negative
+replacement is exactly the modular-multiset problem `(M31)` with defect
+`(M32)`.  At the first nonsquare field `q=27`, neither Frobenius branch can
+use that collinear replacement.  Consequently any Frobenius realization of
+the candidate upper-bound core must contain a genuinely noncollinear signed
+24-set; the existence or exclusion of that object is the remaining finite
+gate.  This narrows `(UB3)` but does not assert it.
+
 Finally, for a core-line intersection `1<=d<=5`, the threshold itself has the
 binomial-energy expansion
 
@@ -594,15 +834,23 @@ calculation.
 The 15-line switch is **not** a disguised union of unital spreads: it contains
 no spread.  Its structural object is instead the five-orbit `C_4` line class
 with the displayed equitable incidence table.  That distinction matters for
-generalization.
+generalization.  The later signed descent identifies its algebraic shadow:
+the sign word is a second Hermitian unital minus one secant, and the original
+unital is the tangent dual of that second unital.  This does not make the
+15-line family a spread construction; it explains why the final degree vector
+retains an exact Hermitian invariant.
 
 #### What the mechanism says about a paper upgrade
 
 This is now suitable as a self-contained finite proposition or appendix: it
 has a coordinate-free outer mechanism (Hermitian unital, exterior point,
 tangent deletion, cyclic secant switch), an explicit five-seed construction,
-and a short incidence proof.  It is not yet the construction theorem needed
-for `(UB3)`.  In a plane of square order `Q=s^2`, the analogue of `T` has only
+and a short incidence proof.  The signed factorization `z=1_{U'}-1_L` supplies
+an even cleaner structural after-proof: the switch creates a second Hermitian
+unital whose tangent dual is the original one, and the entire line-degree
+spectrum follows from its tangent/secant partition plus the 19-point core.
+It is not yet the construction theorem needed for `(UB3)`.  In a plane of
+square order `Q=s^2`, the analogue of `T` has only
 `s^3-s=Q^(3/2)-sqrt(Q)` lines, whereas the target arc has order `Q^2/3`.
 Thus the tangent part becomes lower order and the five-orbit switch would have
 to be replaced by a genuinely `Theta(Q^2)` secant class.  Moreover `q=27` is
@@ -641,13 +889,18 @@ family is lower priority.
   twice.  Completeness is not being inferred merely from the maximum line
   intersection.
 - **Settled by `tt` — why does the Hermitian unital remain intrinsic after
-  the switch?**  For the final arc degree vector `e`, the support of
-  `(e-3 1) mod 3` is exactly the complement of the unital.  This is checked
-  directly from all 91 incidences, not inferred from the construction labels.
-- **Open — what intrinsic object is the `C_4` switch?**  The current evidence
-  identifies its cyclic symmetry and incidence parameters but does not
-  classify such switches or prove uniqueness under the stabilizer of `(U,P)`.
-  This is owned by C949's structural-classification branch.
+  the switch?**  The signed word is exactly `1_{U'}-1_L` for a second
+  nonsingular Hermitian unital `U'` and one of its secants.  The original
+  unital is precisely the tangent-line dual of `U'`, so
+  `supp((e-3 1) mod 3)` is its complement for a geometric reason, not merely
+  as a 91-incidence fingerprint.
+- **Settled — what intrinsic object underlies the signed `C_4` switch?**  A
+  pair of Hermitian unitals meeting in four points, together with a secant of
+  the second: `z=1_{U'}-1_L`.  The unital-minus-secant sign counts equal the
+  required `(3q-3,q-3)` only at `q=9`, so this identifies the exact base
+  mechanism and proves it cannot literally yield `(UB3)`.  Uniqueness of the
+  five-orbit switch under the original stabilizer remains a separate finite
+  classification question, no longer the asymptotic gate.
 - **Settled — what is the field-uniform lift arithmetic suggested by `q=9`?**
   The corrected five-character template `(FC5)` gives an exact sufficient
   condition for `(UB3)`: take as primal points exactly the dual lines meeting
@@ -684,6 +937,25 @@ family is lower priority.
   Field-uniformly it is a signed untouchable set of size `4q-6`: it has no
   tangents, and every support 2-secant joins opposite signs.  At `q=9` its
   full support spectrum is `0^4 2^24 3^32 5^30 6^1`.
+- **Settled at `q=9` — where do the six negative signs live?**  They are
+  collinear, the 24 positives avoid their carrier, and the joint spectrum is
+  `(0,0)^4 (0,6)^1 (1,1)^24 (3,0)^32 (4,1)^30`.  After moving the carrier to
+  infinity, the positive set is a four-exceptional-direction Radon coset; with
+  the four holes it is a second Hermitian unital `U'`, and exactly
+  `z=1_{U'}-1_L`.  The original unital is the tangent dual of `U'`.  Its
+  exact four-line correction audit has minimum dual weight 30, attained 160
+  times among the 6,561 choices.
+- **Settled for the Frobenius branches — does negative collinearity persist?**
+  No.  In the 3-collinear+1-off branch the unique carrier is point 27, which
+  is a core point and must have signed line sum three, contradicting the 24
+  negative signs on that carrier.  The general-four branch has six fixed
+  negatives, more than a fixed line can contain.  Thus any Frobenius solution
+  must use a genuinely noncollinear negative 24-set.  For asymmetric cores the
+  conditional carrier formulas remain valid and leave defect 54 or 70 at
+  `q=27`; equivalently `u=z+1_L` is an exact `1 mod 3` multiset of total
+  multiplicity `3q+1`, carrier multiplicity four or seven, and quotient defect
+  `(M32)`.  Classifying or excluding that asymmetric modular coset is still
+  open.
 - **Open — can `t_7(2,9)>=39` be proved without exhaustive search?**  The
   positive construction is structural, but exclusion of a 38-point complete
   arc still trusts one normalized CP-SAT infeasibility certificate.  A second
@@ -813,6 +1085,12 @@ nonexistence conclusion is licensed.
   `PG(2,13)` triple-blocking example, and Section 7 read; cache key
   `10.3390/math14071137`, SHA-256
   `417190b17f1fdd152cad6bc02cfb167b8a18952e6cbdf2a4da8ccbb59890e5c9`.
+- Adriaensen--Szőnyi--Weiner, *Multisets with few special directions and small
+  weight codewords in Desarguesian planes*, arXiv:2411.19201v3: **full text**,
+  inherited C945 read of Sections 1--7 and revisited here at Definitions
+  1.4--1.5 and Theorems 1.7--1.9 for the projection-function/mod-special-
+  direction dictionary; cache key `arXiv:2411.19201`, SHA-256
+  `0fc810af52d3d70424f72c82878b69d55fa4abb285c344934dfac65587c86c19`.
 
 ## Purpose and boundary
 
