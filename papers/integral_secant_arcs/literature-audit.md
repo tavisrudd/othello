@@ -23,7 +23,7 @@ priority claim.
 
 | Manuscript claim | Classical material credited | Search outcome |
 |---|---|---|
-| Exact integer incidence condition | Exact design moments, tactical decompositions, and real incidence bounds | No inspected source formulates the simultaneous integer-box overlap for an arbitrary selected block family. |
+| Exact integer necessary condition | Exact design moments, tactical decompositions, and real incidence bounds | No inspected source formulates the simultaneous integer-box overlap for an arbitrary selected block family. |
 | Rational equality families | Bishnoi--Mattheus--Schillewaert's quadratic and the standard design incidence inequality | No inspected source derives the ordered-factorization classification and its stated linear integer correction. |
 | Characteristic-three bound | Szőnyi--Weiner's `k mod p` multiset repair theorem | No inspected source applies repair support to the complete arc's full family of `n`-secants to obtain the displayed `2q/3+1` bound. |
 | Characteristic-two bound | Szőnyi--Weiner's stability theorem for sets of even type and the established local-secant method | No inspected source combines that repair with the selected `n`-secant degree bounds to obtain the displayed coefficient. |

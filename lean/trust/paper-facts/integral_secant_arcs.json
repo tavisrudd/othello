@@ -468,10 +468,10 @@
   "paper": "integral_secant_arcs",
   "pdfs": [
     {
-      "bytes": 163374,
+      "bytes": 164079,
       "pages": 18,
       "path": "papers/integral_secant_arcs/integral_secant_arcs.pdf",
-      "sha256": "aabe21feccd224b72ad601b735be91451eae90e21aead475d90ecb03e8f88c9f"
+      "sha256": "8598a0c554b172c1443b783b89cbdc6f856099b1ccac2a50005655ed7e02f93f"
     }
   ],
   "schema_version": 1,
@@ -486,15 +486,15 @@
     },
     {
       "path": "papers/integral_secant_arcs/sections/01-introduction.tex",
-      "sha256": "71445a919403a6e07e218a8c6ac4f5ca96574836398aa469c027d9e859368bce"
+      "sha256": "cb0c64586026c2eb82d7736efde8bb11c17eb5261ac7d947ba20d6b45ed011b6"
     },
     {
       "path": "papers/integral_secant_arcs/sections/02-integer-envelopes.tex",
-      "sha256": "14712f2b527732f3330d3339a0a53c88720ae9d1dafa35433671fa11ad8dc973"
+      "sha256": "1cbfad5d41e6205bf0e4e78cff2806c09547d0fbcc2c418b86a99253bcd10119"
     },
     {
       "path": "papers/integral_secant_arcs/sections/03-maximal-secants.tex",
-      "sha256": "c7af6bf2f65554d6a24c78de81d04a6f68a2075dac412f546f406d3c9c6998d4"
+      "sha256": "309e213bee7a24e399ecd292ae05093dfaa6ff1fec43d4cdeb0c841bf7bf4814"
     },
     {
       "path": "papers/integral_secant_arcs/sections/04-rational-parameters.tex",
@@ -502,15 +502,15 @@
     },
     {
       "path": "papers/integral_secant_arcs/sections/05-modular-stability.tex",
-      "sha256": "2cb0a3381597173c3fac64dc1c63186da2b8fbaa0bc2efaed2b13cce22c9fddd"
+      "sha256": "a3d26b538b1bcb02d541efe9b3f1265a6431f8b36f95c728e04730b166208329"
     },
     {
       "path": "papers/integral_secant_arcs/sections/06-characteristic-two.tex",
-      "sha256": "7ccc449a8ae913b2fc637adf2919c27e0c928cdc55a5ac4e6d4d579d9e55f3a4"
+      "sha256": "25f719d8b483f42d3842f720f7fa76572f5ac0ca6b07dbdddd07db914bfe3398"
     },
     {
       "path": "papers/integral_secant_arcs/sections/07-translations.tex",
-      "sha256": "d7f7911c52436d3249842a8160ac25126244d8b1f217bb90c389e3c05a05c6ba"
+      "sha256": "b2f01e9d1026bae7193c36660b3f5909ab673419460d25ab7b02441f1cf65b93"
     }
   ],
   "title": "Integral Secant Distributions and Improved Bounds for Complete (k,n)-Arcs",

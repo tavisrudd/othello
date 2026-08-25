@@ -2692,3 +2692,23 @@ remaining phrase “limiting internal degree” is corrected to “limiting aver
 internal degree.”  The reviewer guide exposes both checks, the factor-pair
 claim digest has been refreshed after review, and the theorem statements and
 formal coverage classifications are unchanged.
+
+### Post-close real-relaxation and support-normalization clarifications
+
+A further full-source referee read found no theorem defect and requested seven
+explicit transitions.  The derivation of the classical bound now proves that
+the coefficient of `T` is positive by
+`n^2/k+tau^2/b >= (q+1)^2/(q^2+q+1)>1` before substituting the coverage lower
+bound.  The symmetric-design theorem is retitled an exact integer necessary
+condition, deletes the informal heterogeneous-box transfer rule, and states
+that interval overlap does not imply attainability or geometric realization.
+
+Section 5 now opens with the full localization--balancing--repair--completeness
+chain and normalizes correction support modulo the characteristic before the
+repair-support lemma.  The even-type lemma writes the exact parity cost as
+`(|D|+e)/2` and invokes `|D|>=D` before its weaker affine bound.  The
+two-weight translation replaces a broad divisibility remark by the exact fact
+used here: `u+v+1` divides `q=p^e` in the parameter family and is therefore a
+power of the characteristic.  The reviewer guide exposes each check, and the
+paired-envelope claim digest has been refreshed after reviewing its renamed
+statement and unchanged fragmentary Lean coverage.
