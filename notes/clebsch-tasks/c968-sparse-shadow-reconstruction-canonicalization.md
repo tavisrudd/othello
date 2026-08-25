@@ -2,7 +2,7 @@
 
 **Lane:** clebsch
 
-**Status:** queued; standalone Rust tool; no manuscript or Lean edits
+**Status:** active; first Paper-I schema/canonicalization/independent-replay gate green; standalone Rust tool; no manuscript or Lean edits
 
 ## Goal
 
@@ -159,3 +159,18 @@ Create `sparse-shadow/` with Cargo, freeze the minimal workspace/crate layout an
 dependency audit, then write the typed schema plus one hand-checkable Paper-I
 fixture. Do not optimize or add all five adapters until canonicalization and
 independent certificate replay agree on that first fixture.
+
+## 2026-08-25 first-gate state
+
+The workspace, dependency audit, schema-v1 profile variants, CLI, Paper-I
+icosahedral-orbital fixture, explicit canonicalizer, reconstruction ambiguity,
+and separately implemented raw-input reference replay are implemented and
+green. The checker independently rederives the canonical payload, witness,
+winning trace, and complete automorphism set and rejects corruption. See
+`../2026-08-25-c968-sparse-shadow-first-gate.md` and
+`../../sparse-shadow/docs/prior-art-audit.md`.
+
+The first gate is closed. The next certificate step is a compact, separately
+specified proof-rule calculus, taking Bankovic--Drecun--Maric `isocert` as the
+minimum trust comparator. Papers II--V remain schema-gated, and hot-path
+representation/performance work now follows the passed correctness gate.
