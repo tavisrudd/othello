@@ -3335,6 +3335,36 @@ def audit_sharp_linear_coefficient(output: Path) -> None:
         if sum(degree * count for degree, count
                in triangle_j4_selector_eta1.items()) != eta1_incidence:
             raise AssertionError("the triangular +1 selector incidence changed")
+        triangle_j4_vertex_line_profile = {
+            1: q // 3 - 1,
+            2: 1,
+            3: 1,
+            4: 2 * q // 3,
+        }
+        triangle_j4_generic_line_profile = {
+            1: q // 3 - 2,
+            2: 3,
+            3: 0,
+            4: 2 * q // 3,
+        }
+        for degree in range(1, 5):
+            reconstructed = (
+                9 * triangle_j4_vertex_line_profile[degree]
+                + (2 * q - 5) * triangle_j4_generic_line_profile[degree]
+            )
+            if reconstructed != degree * triangle_j4_spectrum[degree]:
+                raise AssertionError("the triangular +1 local profile changed")
+        if 2 * (q - 3) != 2 * q - 6:
+            raise AssertionError("the selected bisecant matching count changed")
+        if (9 + 2 * (2 * q - 6) + 3) // 2 != 2 * q:
+            raise AssertionError("the unselected side matching count changed")
+        if 3 + 2 * (q - 4) != 2 * q - 5:
+            raise AssertionError("the almost-duplex projection count changed")
+        cyclic_duplex_common_external_lower_bound = (q - 1) * (q - 5) // 4
+        cyclic_duplex_boundary_rescue_upper_bound = 9 * (q + 1)
+        if (cyclic_duplex_common_external_lower_bound
+                <= cyclic_duplex_boundary_rescue_upper_bound):
+            raise AssertionError("the cyclic-duplex coverage gap changed")
 
         field_checks.append({
             "field_order": q,
@@ -3393,6 +3423,38 @@ def audit_sharp_linear_coefficient(output: Path) -> None:
                 "j4_all_negative_eta1_selector_spectrum": {
                     str(degree): count for degree, count
                     in triangle_j4_selector_eta1.items()
+                },
+                "j4_all_negative_eta1_line_partition": {
+                    "vertex_lines": 9,
+                    "tangent_line": 1,
+                    "generic_lines": 2 * q - 6,
+                    "selected_bisecants_form_perfect_matching_on": 2 * q - 6,
+                    "almost_duplex": {
+                        "size": 2 * q - 5,
+                        "projection_fibers_for_a_b_and_a_over_b": {
+                            "singletons": 3,
+                            "doubletons": q - 4,
+                        },
+                        "singleton_product_identity": "prod(A0)=prod(B0)prod(C0)",
+                        "canonical_cyclic_duplex": {
+                            "carrier": ["a*b=1", "a*b=gamma"],
+                            "common_external_line_lower_bound": (
+                                cyclic_duplex_common_external_lower_bound
+                            ),
+                            "nine_boundary_point_rescue_upper_bound": (
+                                cyclic_duplex_boundary_rescue_upper_bound
+                            ),
+                            "blocking_possible": False,
+                        },
+                    },
+                    "vertex_line_profile": {
+                        str(degree): count for degree, count
+                        in triangle_j4_vertex_line_profile.items()
+                    },
+                    "generic_or_tangent_line_profile": {
+                        str(degree): count for degree, count
+                        in triangle_j4_generic_line_profile.items()
+                    },
                 },
                 "j5_mixed_core_spectrum": {
                     str(degree): count for degree, count

@@ -1548,17 +1548,129 @@ Conversely, every `+1` realization in this row has exactly that form.  This is
 substantially smaller than searching all primal point sets: the only selector
 freedom is one tangent and `q-3` bisecants after the core is known.
 
+There is also an exact local normal form.  Let `V` be the three triangle
+vertices, let `B` be the `q-3` selected side-nonvertices, let `U` be the other
+`2q` side-nonvertices, and let `T` be the unique selected tangent point.  At
+`eta=1` the integer shell is
+
+```text
+u=3 1_T+2 1_B-1 1_U+1 1_V.                          (SR15)
+```
+
+For every maximal-secant line `ell in D`, the exact design identity gives
+`sum_{P in ell}u_P=0`.  Hence the `2q+4` lines of `D` split rigidly:
+
+```text
+9 vertex lines:    three through each vertex of V; each meets the
+                   opposite side in U and avoids T;
+1 tangent line:    the unique D-line through T; its three side
+                   intersections all lie in U;
+2q-6 generic lines: avoid V union {T} and meet the three sides in
+                    exactly one point of B and two points of U.   (SR16)
+```
+
+Every side nonvertex has `D`-degree two.  It follows that the `q-3` points of
+`B` pair the `2q-6` generic lines into a perfect matching.  The three triangle
+sides themselves give three near-perfect matchings on `D`: the matching on a
+side omits the six vertex lines through its endpoints, and the union of its
+selected edges over the three sides is exactly that perfect matching.
+
+Equivalently, if `r_L` is the number of selected low-degree points needed on
+a line `L in D` and `c_L` records whether it passes through a triangle vertex,
+the pencil equations are
+
+```text
+n_3(L)=c_L,
+n_2(L)=3r_L+c_L,
+n_4(L)=2q/3+1-r_L-c_L,
+n_1(L)=q/3-2r_L-c_L.                                (SR17)
+```
+
+Thus the nine vertex lines have
+`(n_1,n_2,n_3,n_4)=(q/3-1,1,1,2q/3)`, while the tangent line and all generic
+lines have `(q/3-2,3,0,2q/3)`.  This converts the `+1` sharpness problem into
+a geometric realization of three compatible near-perfect matchings plus the
+off-core fourfold-intersection condition; no free degree sequence remains.
+
+In coordinates this becomes an almost-duplex rather than an unstructured
+point set.  Take the support triangle as the coordinate triangle and write a
+generic line of `D` as
+
+```text
+a x+b y+z=0,             (a,b) in (F_q^*)^2.
+```
+
+The `2q-5` generic-or-tangent lines give a set
+`H subset (F_q^*)^2`.  Pairing at the three triangle sides is equality of,
+respectively, `a`, `b`, and `a/b`.  In each of these three projections the
+fiber distribution on `H` is exactly
+
+```text
+1^3 2^(q-4): every value of F_q^* occurs, three once and q-4 twice. (SR18)
+```
+
+The three singleton fibers are paired on that side with the three appropriate
+vertex lines.  If their value sets are `A_0,B_0,C_0` for the projections
+`a,b,a/b`, multiplication over `H` gives the necessary product constraint
+
+```text
+product A_0=(product B_0)(product C_0).              (SR19)
+```
+
+The selected bisecants are `q-3` double fibers drawn from the three
+projections; their edges form a perfect matching of `H\{t}`, where `t` is the
+unique tangent-line element and lies in no selected fiber.  What remains
+beyond this almost-duplex layer is precisely geometric: adjoining the nine
+boundary elements must produce a blocking `2q+4`-set with no intersections
+above four, and every noncoordinate line must have degree `1,2`, or `4`.
+This is the appropriate reduced input for discovery computation; a duplex
+alone is not the sought construction.
+
+Indeed the canonical cyclic duplex fails for a sharp geometric reason.  If
+`gamma` generates `F_q^*`, the two graphs
+
+```text
+b=a^(-1),             b=gamma a^(-1)                (SR20)
+```
+
+form a full duplex: the `a`- and `b`-fibers have size two, while in exponent
+coordinates the `a/b` values are the even and odd residues, each twice.
+Deleting three cells supplies the fiber counts `(SR18)`.  Geometrically,
+however, `(SR20)` is the affine part of the two conics
+`ab=z^2` and `ab=gamma z^2`.  For `c!=0`, an affine line `b=ma+c` misses both
+conics whenever
+
+```text
+chi(c^2+m)=chi(c^2+gamma m)=-1.
+```
+
+The two linear factors in `m` have distinct roots.  Their quadratic-character
+correlation sums to `-1`, so for each `c!=0` at least `(q-5)/4` slopes miss
+both conics.  Thus at least
+
+```text
+(q-1)(q-5)/4                                             (SR21)
+```
+
+affine lines miss the duplex carrier.  The nine boundary points can cover at
+most `9(q+1)` of them, and `(SR21)>9(q+1)` for every ternary `q>=81`.
+Deleting cells only worsens coverage.  Hence the canonical cyclic duplex
+cannot produce the blocking core.  A successful almost-duplex must be
+geometrically nonlinear enough to collapse a quadratic number of common
+external lines, while retaining the three projection profiles and the
+four-secant cap.
+
 For comparison, the other triangular survivor `(j,sigma)=(5,-1)` has
 
 ```text
 (N_1,N_2,N_3,N_4)
  =((2q^2-8q+3)/3, 2q-2, q, q(q+2)/3+2),
 A_1=q/3-1+2eta-h-2H,
-A_2=-q/3-1-eta+2h+3H.                               (SR15)
+A_2=-q/3-1-eta+2h+3H.                               (SR22)
 ```
 
 It therefore requires a linear trade among its high secants even when
-`eta=1`; `(SR12)--(SR14)` is the sharper construction target.
+`eta=1`; `(SR12)--(SR17)` is the sharper construction target.
 
 #### Bound status after the structural upgrade
 
@@ -1894,8 +2006,16 @@ family is lower priority.
   spectrum and the selector uniquely by line degree: take every three- and
   four-secant, exactly `q-3` bisecants, and one tangent.  These lines must be
   regular of degree `2q/3+1` on the `2q+4` core points and respect the same
-  cap off the core.  The other triangular row requires a linear high-secant
-  trade and is therefore a less rigid first target.
+  cap off the core.  The local zero-sum identity further forces `(SR16)`: the
+  selected bisecants form a perfect matching on `2q-6` generic maximal
+  secants, while nine vertex lines and one tangent line have fixed roles and
+  every local `1/2/3/4` profile is prescribed by `(SR17)`.  The other
+  `2q-5` generic-or-tangent lines form the almost-duplex `(SR18)` in the
+  multiplicative Latin square, with singleton product constraint `(SR19)`.
+  The canonical cyclic duplex given by two hyperbolas is excluded by
+  `(SR21)`: it has quadratically many common external lines, far beyond the
+  nine boundary points' rescue capacity.  The other triangular row requires
+  a linear high-secant trade and is therefore a less rigid first target.
 - **Settled by `ej`+`tt` — is the nearest classical four-blocking-set core a
   cheap source of the admissible rows?**  Bruen--Fisher is exactly the
   adjacent signed triangle `(j,sigma)=(0,1)`, and adjoining its horizontal

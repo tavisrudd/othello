@@ -186,6 +186,41 @@
           "3": 3,
           "4": 2241
         },
+        "j4_all_negative_eta1_line_partition": {
+          "almost_duplex": {
+            "canonical_cyclic_duplex": {
+              "blocking_possible": false,
+              "carrier": [
+                "a*b=1",
+                "a*b=gamma"
+              ],
+              "common_external_line_lower_bound": 1520,
+              "nine_boundary_point_rescue_upper_bound": 738
+            },
+            "projection_fibers_for_a_b_and_a_over_b": {
+              "doubletons": 77,
+              "singletons": 3
+            },
+            "singleton_product_identity": "prod(A0)=prod(B0)prod(C0)",
+            "size": 157
+          },
+          "generic_lines": 156,
+          "generic_or_tangent_line_profile": {
+            "1": 25,
+            "2": 3,
+            "3": 0,
+            "4": 54
+          },
+          "selected_bisecants_form_perfect_matching_on": 156,
+          "tangent_line": 1,
+          "vertex_line_profile": {
+            "1": 26,
+            "2": 1,
+            "3": 1,
+            "4": 54
+          },
+          "vertex_lines": 9
+        },
         "j4_all_negative_eta1_selector_spectrum": {
           "1": 1,
           "2": 78,
@@ -329,6 +364,41 @@
           "3": 3,
           "4": 19845
         },
+        "j4_all_negative_eta1_line_partition": {
+          "almost_duplex": {
+            "canonical_cyclic_duplex": {
+              "blocking_possible": false,
+              "carrier": [
+                "a*b=1",
+                "a*b=gamma"
+              ],
+              "common_external_line_lower_bound": 14399,
+              "nine_boundary_point_rescue_upper_bound": 2196
+            },
+            "projection_fibers_for_a_b_and_a_over_b": {
+              "doubletons": 239,
+              "singletons": 3
+            },
+            "singleton_product_identity": "prod(A0)=prod(B0)prod(C0)",
+            "size": 481
+          },
+          "generic_lines": 480,
+          "generic_or_tangent_line_profile": {
+            "1": 79,
+            "2": 3,
+            "3": 0,
+            "4": 162
+          },
+          "selected_bisecants_form_perfect_matching_on": 480,
+          "tangent_line": 1,
+          "vertex_line_profile": {
+            "1": 80,
+            "2": 1,
+            "3": 1,
+            "4": 162
+          },
+          "vertex_lines": 9
+        },
         "j4_all_negative_eta1_selector_spectrum": {
           "1": 1,
           "2": 240,
@@ -471,6 +541,41 @@
           "2": 2184,
           "3": 3,
           "4": 177633
+        },
+        "j4_all_negative_eta1_line_partition": {
+          "almost_duplex": {
+            "canonical_cyclic_duplex": {
+              "blocking_possible": false,
+              "carrier": [
+                "a*b=1",
+                "a*b=gamma"
+              ],
+              "common_external_line_lower_bound": 131768,
+              "nine_boundary_point_rescue_upper_bound": 6570
+            },
+            "projection_fibers_for_a_b_and_a_over_b": {
+              "doubletons": 725,
+              "singletons": 3
+            },
+            "singleton_product_identity": "prod(A0)=prod(B0)prod(C0)",
+            "size": 1453
+          },
+          "generic_lines": 1452,
+          "generic_or_tangent_line_profile": {
+            "1": 241,
+            "2": 3,
+            "3": 0,
+            "4": 486
+          },
+          "selected_bisecants_form_perfect_matching_on": 1452,
+          "tangent_line": 1,
+          "vertex_line_profile": {
+            "1": 242,
+            "2": 1,
+            "3": 1,
+            "4": 486
+          },
+          "vertex_lines": 9
         },
         "j4_all_negative_eta1_selector_spectrum": {
           "1": 1,
