@@ -50,11 +50,13 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   inverse anticanonical map are explicit.  The residual factor is the cubic
   norm-one torus, and a ground-field Cremona transformation now gives compact
   certified maps `P2 <-> R^1_{E/K}(Gm)` with both composites checked.  The
-  remaining type-`I_1` gate is the equivariant universal-torsor translation
-  coupling this chart to the surface; type `I_3` remains afterward.  Card:
+  marked-plane Galois action and all residual Cox scalars are explicit too;
+  normalization at a ground point gives a strict `Z/T3` descent datum and a
+  compact rank-two cocycle.  The remaining type-`I_1` gate is its generic
+  Hilbert--90 coboundary; type `I_3` remains afterward.  Card:
   `../cubic-threefolds-tasks/c958-explicit-level-two-parametrizations.md`;
   latest report:
-  `../2026-08-25-c958-type-i1-norm-torus-parametrization.md`.
+  `../2026-08-25-c958-type-i1-cox-descent-cocycle.md`.
 - **C936 — accepted after cold-referee repair audit.**  The warning-free eleven-page paper
   develops the signed nonstandard \(A_5\)-cubic parameter as the
   sign/discriminant resolvent of the actual

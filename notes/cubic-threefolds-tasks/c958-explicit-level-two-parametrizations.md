@@ -95,6 +95,17 @@ already explicit surface maps.  Report and replay:
 `notes/2026-08-25-c958-type-i1-norm-torus-parametrization.md` and its adjacent
 bundle.
 
+The projective Cox scalar ambiguity is now normalized as well.  Exact
+composition of the split inverse with each conjugate blowdown gives the three
+marked-plane Cremona actions.  Pullback through the C956 marking identifies
+the quotient characters as `E1-E3,E2-E3`.  Normalizing the Cox lift above the
+ground point represented by `[1:0:0:1]` makes every defining relation of
+`C2 x S3` have trivial residual defect, and leaves a compact explicit
+rank-two cocycle.  The remaining type-`I_1` gate is now precisely the generic
+Hilbert--90 coboundary for that cocycle.  Report and replay:
+`notes/2026-08-25-c958-type-i1-cox-descent-cocycle.md` and its adjacent
+bundle.
+
 ## Goal
 
 Turn the constructive existence proof in C956 into explicit, independently
