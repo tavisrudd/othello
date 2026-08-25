@@ -32,6 +32,16 @@ construct the scalar normalization and trace coordinates over the generic
 function field, not to identify the Galois permutations.  Report and replay:
 `notes/2026-08-24-c958-type-i1-descent-action.md` and its adjacent bundle.
 
+The divisor-level change of marking is explicit as well.  Solving the five
+singular-fibre component conditions produces exactly sixteen line sections,
+indexed by the odd subsets, over the degree-twelve field
+`K(r,d,v)`.  Exact substitution checks the cubic equation and the full
+`C2 x S3` action on every coefficient.  After contraction of the distinguished
+line these are the marked exceptional curves `Ei,Lij,Q`.  The next step is to
+contract the five singleton curves, or equivalently normalize their Cox
+sections at a rational torsor point.  Report and replay:
+`notes/2026-08-24-c958-type-i1-exceptional-sections.md` and its adjacent bundle.
+
 ## Goal
 
 Turn the constructive existence proof in C956 into explicit, independently
