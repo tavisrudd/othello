@@ -108,7 +108,7 @@ def monomial_values(point, exponents):
     ]
 
 
-def build():
+def build(a_value=2, b_value=3, tangent_z=(1, 3, 7)):
     for path, expected in INPUT_SHA256.items():
         assert hashlib.sha256(path.read_bytes()).hexdigest() == expected
     generic = load_generator()
@@ -117,11 +117,14 @@ def build():
     cox_names = lattice["cox_names"]
     symbols, _, _, jacobian, rows, _ = source.cox_data(cox_names)
     a, b, z1, z2, z3 = symbols
-    tangent_rows = jacobian[list(rows), :].subs({z1: 1, z2: 3, z3: 7, a: 2, b: 3})
+    tangent_rows = jacobian[list(rows), :].subs({
+        z1: tangent_z[0], z2: tangent_z[1], z3: tangent_z[2],
+        a: a_value, b: b_value,
+    })
     split = json.loads(CERTIFICATE.read_text())
     slice_rows = [
-        sp.Matrix(1, 16, [sp.sympify(entry, locals={"a": a, "b": b}).subs({a: 2, b: 3})
-                          for entry in row])
+        sp.Matrix(1, 16, [sp.sympify(entry, locals={"a": a, "b": b})
+                          for entry in row]).subs({a: a_value, b: b_value})
         for row in split["slice_hyperplane_coefficients"]
     ]
     accumulated = sp.Matrix.vstack(*slice_rows)
@@ -147,14 +150,16 @@ def build():
             zz3 * inv(e1 * e2 % PRIME),
             zz2 * inv(e1),
             (zz2 - zz3) * inv(e1 * e4 % PRIME),
-            (3 * zz2 - 2 * zz3) * inv(e1 * e5 % PRIME),
+            (b_value * zz2 - a_value * zz3) * inv(e1 * e5 % PRIME),
             zz1 * inv(e2),
             (zz1 - zz3) * inv(e2 * e4 % PRIME),
-            (3 * zz1 - zz3) * inv(e2 * e5 % PRIME),
+            (b_value * zz1 - zz3) * inv(e2 * e5 % PRIME),
             (zz1 - zz2) * inv(e4),
-            (2 * zz1 - zz2) * inv(e5),
-            (zz1 - 2 * zz2 + zz3) * inv(e4 * e5 % PRIME),
-            (-3 * zz1 * zz2 + 4 * zz1 * zz3 - zz2 * zz3)
+            (a_value * zz1 - zz2) * inv(e5),
+            ((b_value-a_value) * zz1 + (1-b_value) * zz2 + (a_value-1) * zz3)
+            * inv(e4 * e5 % PRIME),
+            (b_value*(1-a_value)*zz1*zz2 + a_value*(b_value-1)*zz1*zz3
+             + (a_value-b_value)*zz2*zz3)
             * inv(e1 * e2 % PRIME * e4 % PRIME * e5 % PRIME),
         ]
         return [value % PRIME for value in values]
@@ -250,11 +255,12 @@ def build():
                 return [
                     ee1, ee2, Fraction(1), ee4, ee5,
                     zz3/(ee1*ee2), zz2/ee1, (zz2-zz3)/(ee1*ee4),
-                    (3*zz2-2*zz3)/(ee1*ee5), zz1/ee2,
-                    (zz1-zz3)/(ee2*ee4), (3*zz1-zz3)/(ee2*ee5),
-                    (zz1-zz2)/ee4, (2*zz1-zz2)/ee5,
-                    (zz1-2*zz2+zz3)/(ee4*ee5),
-                    (-3*zz1*zz2+4*zz1*zz3-zz2*zz3)/(ee1*ee2*ee4*ee5),
+                    (b_value*zz2-a_value*zz3)/(ee1*ee5), zz1/ee2,
+                    (zz1-zz3)/(ee2*ee4), (b_value*zz1-zz3)/(ee2*ee5),
+                    (zz1-zz2)/ee4, (a_value*zz1-zz2)/ee5,
+                    ((b_value-a_value)*zz1+(1-b_value)*zz2+(a_value-1)*zz3)/(ee4*ee5),
+                    (b_value*(1-a_value)*zz1*zz2+a_value*(b_value-1)*zz1*zz3
+                     +(a_value-b_value)*zz2*zz3)/(ee1*ee2*ee4*ee5),
                 ]
 
             def rational_evaluate(row, values):
@@ -384,7 +390,7 @@ def build():
                 "input_sha256": {
                     str(path.relative_to(ROOT)): expected for path, expected in INPUT_SHA256.items()
                 },
-                "specialization": {"a": 2, "b": 3, "tangent_z": [1, 3, 7]},
+                "specialization": {"a": a_value, "b": b_value, "tangent_z": list(tangent_z)},
                 "affine_target_coordinates": ["rho1/rho0", "rho2/rho0", "rho3/rho0", "rho4/rho0"],
                 "recovered_coordinates": ["E1", "E2", "E4", "E5"],
                 "forward_linear_forms": {
@@ -440,8 +446,12 @@ def main():
     mode = parser.add_mutually_exclusive_group(required=True)
     mode.add_argument("--write", type=Path)
     mode.add_argument("--check", type=Path)
+    parser.add_argument("--a", type=int, default=2)
+    parser.add_argument("--b", type=int, default=3)
+    parser.add_argument("--tangent-z", type=int, nargs=3, default=(1, 3, 7))
     arguments = parser.parse_args()
-    payload = json.dumps(build(), indent=2, sort_keys=True) + "\n"
+    payload = json.dumps(build(arguments.a, arguments.b, tuple(arguments.tangent_z)),
+                         indent=2, sort_keys=True) + "\n"
     if arguments.write:
         arguments.write.write_text(payload)
     else:

@@ -65,7 +65,9 @@ charts is dominant and hence birational, so this also supplies the opposite
 rational composite on a dense open.  The release replay takes about ninety
 seconds on the development host, including compilation.  The checker reads
 `a` and `b` from the certificate rather than embedding `2,3`, so the same exact
-gate is ready for further cold specializations without source edits.
+gate is ready for further cold specializations without source edits.  The
+generator likewise accepts `--a`, `--b`, and three `--tangent-z` values; its
+default parameterized replay reproduces the retained JSON byte for byte.
 
 Primary replay:
 
