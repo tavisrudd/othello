@@ -1,0 +1,194 @@
+{
+  "schema": "c969-theorem-domain-v1",
+  "registry_version": 1,
+  "frozen_at_authority_commit": "9da3651b5f1e0cd390f8fb40f74415e0fedc0b0e",
+  "frozen_surface": {
+    "theorem_map": {
+      "path": "papers/beyond4_prs/theorem-map.md",
+      "sha256": "e10bee52b38b0d6cf8198b22a20566be2dfede583690d9d80847dbc960c61605"
+    },
+    "r5_certificate": {
+      "path": "notes/2026-07-22-c491-prs-deep-hole-census.json",
+      "sha256": "7055b428ef0738921ddc472173e6d51da1c36660caa56d2e4dc1add156733283"
+    },
+    "r6_certificate": {
+      "path": "notes/2026-07-22-c498-prs-deep-hole-census.json",
+      "sha256": "b993fd7c1b8a5cd813e52aa54ce7c087465097730e9748c37d2ed043540672a3"
+    },
+    "r7_certificate": {
+      "path": "notes/2026-07-23-c509-prs-deep-hole-calibration.json",
+      "sha256": "9034befae239a1d578556e78a06df1d04dccc828a7f6cb08f874533c84c50906"
+    },
+    "r10_binary_q16_certificate": {
+      "path": "notes/2026-08-02-c620-higher-lucas-modular-carriers-q16.json",
+      "sha256": "70803c52fc11bbe2c465721651a1d73af5c1b1e9e79ecee79ecbfe3c2a26268e"
+    }
+  },
+  "code_convention": {
+    "name": "full-length-projective-reed-solomon",
+    "length": "q+1",
+    "dimension": "q+1-r",
+    "parity_check_finite_column": "h_r(a)=(1,a,...,a^(r-1))^T",
+    "parity_check_infinity_column": "h_r(infinity)=e_(r-1)",
+    "syndrome_coordinates": "projective divided-power coordinates (s_0:...:s_(r-1))",
+    "split_free_depth": "no split squarefree locator of degree r-2 in the two-row Hankel kernel"
+  },
+  "verdicts": {
+    "DEEP": "exact distance equals a certified covering radius, with a replayable split-free and radius route",
+    "NOT_DEEP": "a verified lower-weight split locator and recovered nonzero magnitudes give a closer error pattern",
+    "UNRESOLVED": "the syndrome-side statement is exact but a required covering-radius or arithmetic residue is not settled on the frozen surface",
+    "UNSUPPORTED": "the requested parameter or structural classification lies outside the frozen theorem-domain table"
+  },
+  "levels": [
+    {
+      "redundancy": 5,
+      "code_parameter_predicate": "q is a prime power and q>=7",
+      "split_free_classification": "complete",
+      "split_free_predicate": "q>=7",
+      "covering_radius": 4,
+      "covering_radius_predicate": "q>=7",
+      "deep_classification": "complete",
+      "deep_predicate": "q>=7",
+      "families": [
+        "persistent.tangent",
+        "persistent.sigma",
+        "r5.osculating_rational",
+        "r5.osculating_conjugate",
+        "r5.char3_nucleus",
+        "r5.char3_wild",
+        "r5.sporadic"
+      ],
+      "finite_exception_fields": [7, 8, 9, 11, 13, 17, 19],
+      "source_locators": [
+        "papers/beyond4_prs theorem-map row R5",
+        "papers/beyond4_prs label thm:r5",
+        "notes/2026-07-22-c491-prs-redundancy-five.md",
+        "notes/2026-08-07-c881-r5-cubic-pencil-literature-audit.md"
+      ]
+    },
+    {
+      "redundancy": 6,
+      "code_parameter_predicate": "q is a prime power and q>=7",
+      "split_free_classification": "complete",
+      "split_free_predicate": "q>=7",
+      "covering_radius": 5,
+      "covering_radius_predicate": "q>=7",
+      "deep_classification": "complete",
+      "deep_predicate": "q>=7",
+      "families": [
+        "persistent.tangent",
+        "persistent.sigma",
+        "r6.char2_nucleus",
+        "r6.sporadic"
+      ],
+      "finite_exception_fields": [7, 8, 9, 11, 13],
+      "source_locators": [
+        "papers/beyond4_prs theorem-map row R6",
+        "papers/beyond4_prs label thm:r6",
+        "notes/2026-07-22-c498-prs-redundancy-six.md",
+        "notes/2026-07-23-c498-small-exceptional-normal-forms.md"
+      ]
+    },
+    {
+      "redundancy": 7,
+      "code_parameter_predicate": "q is a prime power and q>=7",
+      "split_free_classification": "complete",
+      "split_free_predicate": "q>=7",
+      "covering_radius": 6,
+      "covering_radius_predicate": "q>=11",
+      "deep_classification": "complete only where q>=11",
+      "deep_predicate": "q>=11",
+      "unresolved_predicate": "q in {7,8,9} and the syndrome is split-free",
+      "families": [
+        "persistent.tangent",
+        "persistent.sigma",
+        "r7.char2_central",
+        "r7.sporadic"
+      ],
+      "finite_exception_fields": [7, 8, 9, 11],
+      "source_locators": [
+        "papers/beyond4_prs theorem-map row R7",
+        "papers/beyond4_prs label thm:r7",
+        "notes/2026-07-23-c509-prs-redundancy-seven.md",
+        "notes/2026-08-02-c660-r7-independent-completeness.md"
+      ]
+    },
+    {
+      "redundancy": 8,
+      "code_parameter_predicate": "q is a prime power and q>=8",
+      "split_free_classification": "persistent-only in the proved range",
+      "split_free_predicate": "q>=43",
+      "covering_radius": 7,
+      "covering_radius_predicate": "q>=43",
+      "deep_classification": "complete only where q>=43",
+      "deep_predicate": "q>=43",
+      "unsupported_predicate": "q<43",
+      "families": [
+        "persistent.tangent",
+        "persistent.sigma"
+      ],
+      "finite_exception_fields": [],
+      "source_locators": [
+        "papers/beyond4_prs theorem-map row R8",
+        "papers/beyond4_prs label thm:r8",
+        "notes/2026-07-23-c513-prs-redundancy-eight.md"
+      ]
+    },
+    {
+      "redundancy": 9,
+      "code_parameter_predicate": "q is a prime power and q>=9",
+      "split_free_classification": "persistent-only in the proved range",
+      "split_free_predicate": "q>=53",
+      "covering_radius": 8,
+      "covering_radius_predicate": "q>=53",
+      "deep_classification": "complete only where q>=53",
+      "deep_predicate": "q>=53",
+      "unsupported_predicate": "q<53",
+      "families": [
+        "persistent.tangent",
+        "persistent.sigma",
+        "r9.char7_quartic_carrier_shallow"
+      ],
+      "local_geometric_rules": [
+        "at q=7 the characteristic-seven carrier has 819 split-free quartics, but r=9 is not an admissible positive-dimension full-length code parameter",
+        "at q=49 every characteristic-seven carrier point is shallow",
+        "at q=7^m>=343 every characteristic-seven carrier point is shallow",
+        "the characteristic-five point is shallow for every q>5"
+      ],
+      "finite_exception_fields": [],
+      "source_locators": [
+        "papers/beyond4_prs theorem-map row R9",
+        "papers/beyond4_prs label thm:r9",
+        "notes/2026-07-23-c516-prs-redundancy-nine.md"
+      ]
+    },
+    {
+      "redundancy": 10,
+      "code_parameter_predicate": "q is a prime power and q>=10",
+      "split_free_classification": "persistent-only in the proved range",
+      "split_free_predicate": "q>=59",
+      "covering_radius": 9,
+      "covering_radius_predicate": "q>=59",
+      "deep_classification": "complete only where q>=59",
+      "deep_predicate": "q>=59",
+      "unsupported_predicate": "q<59",
+      "families": [
+        "persistent.tangent",
+        "persistent.sigma",
+        "r10.char2_maximal_lucas_shallow"
+      ],
+      "local_geometric_rules": [
+        "for q=2^m with m>=4 every point of P<e2,e3,e4,e5,e6,e7> is shallow",
+        "C620 supersedes C532's former rank-two and positive-moduli unresolved residues"
+      ],
+      "finite_exception_fields": [],
+      "source_locators": [
+        "papers/beyond4_prs theorem-map row R10",
+        "papers/beyond4_prs label cor:r10",
+        "papers/beyond4_prs label thm:m9-shallow",
+        "notes/2026-07-23-c532-prs-redundancy-ten-synthesis.md",
+        "notes/2026-08-02-c620-higher-lucas-modular-carriers.md"
+      ]
+    }
+  ]
+}

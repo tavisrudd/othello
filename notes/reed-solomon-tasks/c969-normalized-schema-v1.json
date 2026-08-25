@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "c969-normalized-schema-v1",
+  "title": "C969 normalized PRS request, transporter, and verdict",
+  "type": "object",
+  "required": ["schema", "field", "redundancy", "evaluation", "syndrome"],
+  "properties": {
+    "schema": {"const": "c969-request-v1"},
+    "field": {
+      "type": "object",
+      "required": ["p", "degree", "modulus", "encoding"],
+      "properties": {
+        "p": {"type": "integer", "minimum": 2},
+        "degree": {"type": "integer", "minimum": 1},
+        "modulus": {
+          "description": "monic irreducible polynomial, low coefficient first; [0,1] for a prime field",
+          "type": "array",
+          "items": {"type": "integer", "minimum": 0}
+        },
+        "encoding": {"const": "polynomial-basis-base-p-integer-v1"}
+      },
+      "additionalProperties": false
+    },
+    "redundancy": {"type": "integer", "minimum": 5, "maximum": 10},
+    "evaluation": {"const": "full-projective-nrc-v1"},
+    "syndrome": {
+      "description": "nonzero divided-power coordinates, each encoded in [0,q)",
+      "type": "array",
+      "items": {"type": "integer", "minimum": 0}
+    },
+    "operation": {
+      "enum": ["distance", "decode", "classify", "canonicalize", "verify-certificate"]
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "transporter": {
+      "type": "object",
+      "required": ["frobenius_exponent", "matrix", "projective_output_scale"],
+      "properties": {
+        "frobenius_exponent": {"type": "integer", "minimum": 0},
+        "matrix": {
+          "description": "row-major 2-by-2 PGL matrix in canonical field encoding, projectively normalized",
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "items": {"type": "integer", "minimum": 0}
+        },
+        "projective_output_scale": {"type": "integer", "minimum": 1}
+      },
+      "additionalProperties": false
+    },
+    "verdict": {
+      "type": "object",
+      "required": ["status", "distance", "domain_registry_version", "certificate"],
+      "properties": {
+        "status": {"enum": ["DEEP", "NOT_DEEP", "UNRESOLVED", "UNSUPPORTED"]},
+        "distance": {"type": ["integer", "null"], "minimum": 0},
+        "family": {"type": ["string", "null"]},
+        "invariants": {"type": "object"},
+        "canonical_syndrome": {"type": ["array", "null"], "items": {"type": "integer", "minimum": 0}},
+        "transporter": {"anyOf": [{"$ref": "#/$defs/transporter"}, {"type": "null"}]},
+        "domain_registry_version": {"const": 1},
+        "certificate": {"type": "object"}
+      },
+      "additionalProperties": false
+    }
+  }
+}

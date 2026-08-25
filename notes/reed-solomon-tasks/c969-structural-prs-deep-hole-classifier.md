@@ -2,9 +2,11 @@
 
 **Lane:** `reed-solomon`
 
-**Status:** queued after the Version 2 R5--R10 theorem and correction surface is
-frozen; fully absorbs C607 and C608; code and mathematics only; no manuscript
-edits
+**Status:** active; the Version 2 R5--R10 theorem/correction surface,
+machine-readable domain registry, normalized request/action/certificate schema,
+hand-classified branch representatives, and absorbed C607/C608 interface gates
+are frozen in `c969-freeze-and-schema.md`; code and mathematics only; no
+manuscript edits
 
 ## Goal
 
