@@ -151,6 +151,20 @@ from five ground tangent coordinates to the exceptional parameters, not Cox
 descent or plane-coordinate elimination.  Report and replay:
 `notes/2026-08-25-c958-type-i1-tangent-quotient.md` and its adjacent bundle.
 
+At the cold specialization `(a,b)=(2,3)`, tangent `z=(1,3,7)`, the remaining
+four-parameter map now has an exact common-denominator quintic inverse
+candidate.  Complete modular searches rule out degrees one through four and
+give a unique relation in degree five; exact rational lifting yields sparse
+integer formulas, and an independent stdlib checker verifies both composites
+at two hundred fresh points over a second prime.  Thirty exact rational
+holdouts per coordinate pass as well.  This is strong coefficient-level
+evidence, not yet a characteristic-zero identity: direct expansion exceeded
+the bounded CPU and memory cutoffs.  The next exact gate is localized ideal
+reduction of the four graph equations, followed by reconstruction over
+`Q(a,b)` and ground specialization.  Report and replay:
+`notes/2026-08-25-c958-specialized-quintic-tangent-inverse.md` and its adjacent
+bundle.
+
 ## Goal
 
 Turn the constructive existence proof in C956 into explicit, independently

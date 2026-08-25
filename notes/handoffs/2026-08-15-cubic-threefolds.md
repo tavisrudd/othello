@@ -63,12 +63,18 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   the explicit ground-field tangent quotient `Z/T3 <-> P4`.  Its strict Cox
   descent now has an explicit invertible ground orbit-trace basis, and the
   split section recovers all three marked-plane coordinates by Cramer's rule.
-  The exact remaining subgate is the four-parameter inverse from ground
-  tangent coordinates to the exceptional parameters.  Type `I_3` remains
-  afterward.  Card:
+  At the cold specialization `(a,b)=(2,3)`, tangent `z=(1,3,7)`, that
+  four-parameter inverse is now exposed as a unique common-denominator
+  quintic: degrees at most four are excluded in the complete modular search,
+  exact rational coefficient lifting passes thirty holdouts per coordinate,
+  and an independent stdlib checker verifies both composites over a second
+  prime.  This remains a specialized inverse candidate, not a proved
+  characteristic-zero identity; localized ideal reduction is the next exact
+  gate, followed by reconstruction over `Q(a,b)` and ground specialization.
+  Type `I_3` remains afterward.  Card:
   `../cubic-threefolds-tasks/c958-explicit-level-two-parametrizations.md`;
   latest report:
-  `../2026-08-25-c958-type-i1-tangent-quotient.md`.
+  `../2026-08-25-c958-specialized-quintic-tangent-inverse.md`.
 - **C963 — proof-producing stable-rationality workbench, queued after C958.**
   Consume C958's accepted type-`I_1` and type-`I_3` ground-field maps as frozen
   interfaces; emit compact straight-line programs, independently checked
