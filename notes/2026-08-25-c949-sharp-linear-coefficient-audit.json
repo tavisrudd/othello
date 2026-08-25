@@ -182,7 +182,12 @@
       "endpoint_delta": 27,
       "field_order": 81,
       "mixed_degree_four_line_count": 2243,
-      "mixed_positive_generator_cap_gap": 1
+      "mixed_positive_generator_cap_gap": 1,
+      "two_term_linearized_cubic_family": {
+        "equal_linear_terms": "one finite double-cover slope and one graph intersection",
+        "maximum_wrong_slopes_allowed_by_concurrent_ledger": 9,
+        "minimum_wrong_slopes_if_linear_terms_differ": 39
+      }
     },
     {
       "all_negative_final_gap": 3,
@@ -300,7 +305,12 @@
       "endpoint_delta": 81,
       "field_order": 243,
       "mixed_degree_four_line_count": 19847,
-      "mixed_positive_generator_cap_gap": 1
+      "mixed_positive_generator_cap_gap": 1,
+      "two_term_linearized_cubic_family": {
+        "equal_linear_terms": "one finite double-cover slope and one graph intersection",
+        "maximum_wrong_slopes_allowed_by_concurrent_ledger": 9,
+        "minimum_wrong_slopes_if_linear_terms_differ": 120
+      }
     },
     {
       "all_negative_final_gap": 3,
@@ -418,7 +428,12 @@
       "endpoint_delta": 243,
       "field_order": 729,
       "mixed_degree_four_line_count": 177635,
-      "mixed_positive_generator_cap_gap": 1
+      "mixed_positive_generator_cap_gap": 1,
+      "two_term_linearized_cubic_family": {
+        "equal_linear_terms": "one finite double-cover slope and one graph intersection",
+        "maximum_wrong_slopes_allowed_by_concurrent_ledger": 9,
+        "minimum_wrong_slopes_if_linear_terms_differ": 363
+      }
     }
   ],
   "raw_concurrent_rows_for_sublinear_repair": [

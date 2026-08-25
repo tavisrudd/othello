@@ -1347,6 +1347,34 @@ in every remaining direction.  It also shows why a numerical search is not
 yet a proof mechanism: the unknown object is now a field-uniform family of
 Rédei factorizations, not merely a finite configuration.
 
+The normal form immediately excludes the obvious Bruen--Fisher-style affine
+repair.  Consider two shifted two-term linearized cubics
+
+```text
+f(x)=alpha x^3+a x+c,       g(x)=beta x^3+b x+d,      (SR1d)
+```
+
+with `alpha beta !=0`.  The projection `f(x)-mx` has three-element kernel
+exactly when `(m-a)/alpha` is a nonzero square, and similarly for `g`.
+For an ordinary direction to have residue one, exactly one of these two
+kernels must have size three.  If `a!=b`, the correlation identity
+
+```text
+sum_m chi((m-a)(m-b))=-1
+```
+
+shows that, among the `q-2` slopes away from `a,b`, the two character signs
+agree `(q-3)/2` times and disagree `(q-1)/2` times.  Whichever square classes
+`alpha,beta` occupy, at least `(q-3)/2` slopes therefore have the wrong
+kernel pattern, whereas `(SR1c)` permits only two further double-cover slopes
+and `m_0<=7` cube slopes.  If `a=b`, the pattern is constant away from `a`
+only when `alpha beta` is a nonsquare; then `m=a` is the sole finite
+double-cover direction.  Worse, `alpha!=beta` and
+`f-g=(alpha-beta)x^3+(c-d)` has exactly one zero, so the two graphs are not
+disjoint.  Thus no pair `(SR1d)` realizes a concurrent row for large `q`.
+The obstruction is family-specific; it does not classify the arbitrary
+permutations in `(SR1a)`.
+
 For any surviving triangular row the remaining task is to construct such a
 binary blocking core and choose the primal lines through it so that every
 core point has degree `2q/3+1` and no other point exceeds that degree.  This
@@ -1813,7 +1841,10 @@ family is lower priority.
   factorization ledger `(SR1a)--(SR1c)`; the triangular survivors have
   connector degrees `(3,3,3)` or `(4,4,3)`.  What remains open is existence
   and regular inverse realization of those cores, beginning with the constant
-  repair `+1`.
+  repair `+1`.  The natural pair of shifted two-term linearized cubics is
+  already excluded: unequal linear coefficients create at least `(q-3)/2`
+  wrong directions, while equal coefficients leave only one finite special
+  direction and one unavoidable graph intersection.
 - **Settled by `ej`+`tt` — is the nearest classical four-blocking-set core a
   cheap source of the admissible rows?**  Bruen--Fisher is exactly the
   adjacent signed triangle `(j,sigma)=(0,1)`, and adjoining its horizontal

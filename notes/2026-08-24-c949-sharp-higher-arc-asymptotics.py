@@ -3297,6 +3297,8 @@ def audit_sharp_linear_coefficient(output: Path) -> None:
         if (2 * bf_plus_minimum_omitted_trisecants
                 != q - 1 + bf_plus_minimum_repair):
             raise AssertionError("the augmented Bruen--Fisher repair threshold changed")
+        if (q - 3) // 2 <= 9:
+            raise AssertionError("the linearized-cubic bad-slope gap changed")
 
         field_checks.append({
             "field_order": q,
@@ -3339,6 +3341,13 @@ def audit_sharp_linear_coefficient(output: Path) -> None:
                         bf_plus_minimum_repair
                     ),
                 },
+            },
+            "two_term_linearized_cubic_family": {
+                "minimum_wrong_slopes_if_linear_terms_differ": (q - 3) // 2,
+                "maximum_wrong_slopes_allowed_by_concurrent_ledger": 9,
+                "equal_linear_terms": (
+                    "one finite double-cover slope and one graph intersection"
+                ),
             },
         })
 
