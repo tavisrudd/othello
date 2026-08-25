@@ -2,6 +2,10 @@
 
 **Lane:** `reed-solomon`
 
+**Status:** superseded 2026-08-25; fully subsumed by C969. All decoder,
+operation-count, terminal-hyperplane, small-field, and review gates below remain
+mandatory C969 deliverables rather than an independent task.
+
 **Dependency gate:** Cleared by C545's 2026-07-29 Version 1 publication. This
 task must not change the immutable Version 1 manuscript or release artifact.
 

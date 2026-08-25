@@ -2,7 +2,9 @@
 
 **Lane:** `reed-solomon`
 
-**Status:** active; launched 2026-07-26 by explicit user direction.
+**Status:** superseded 2026-08-25; fully subsumed by C969. All target,
+complexity, factorization, literature, and review gates below remain mandatory
+C969 deliverables rather than an independent task.
 
 **Version 1 boundary:** The user explicitly authorized theorem development
 before C545 publishes Version 1.  This task must remain a separate companion

@@ -1134,9 +1134,10 @@ from queue-row placement:
    fixed R8--R10 packages, higher-Lucas arithmetic, Wang--Wu--Hu endpoint,
    and novelty/trust/reproducibility surfaces are integrated.
 
-C607 is parallel context on the broader decoding-complexity question, not an
-alternative dispatch.  C608 is a later explicit-decoder consequence
-and is not on the Version 2 theorem critical path.  The public Version 1
+C607 and C608 are superseded as separate tasks and fully subsumed by C969,
+which owns their general split-locator decision/recovery theorem and explicit
+R5--R7 decoder gates together with the R5--R10 structural classifier. C969 is
+not on the Version 2 theorem critical path. The public Version 1
 repository and DOI are immutable inputs; no successor edits or retags them.
 
 If any step fails, record the strongest proved obstruction in its report and
@@ -1152,8 +1153,7 @@ gates remain binding.
 | EV rank | Task | Current gate | Why this position |
 |---:|---|---|---|
 | 1 | C915 | edits E1--E6 applied and checklist green; three independent audits open | the external referee package blocks the Version 2 release |
-| 2 | C608 | publication and Version 2 gates cleared | extract the immediate decoding consequence of the R5--R7 Hankel criterion |
-| 3 | C607 | active, broader algorithmic scope | settle the FPT/XP decoding boundary after the absolute \(q\)-exponent and prior-decoding audit are rigorous |
+| 2 | C969 | queued after the Version 2 theorem surface freezes; absorbs C607/C608 | compile the proved R5--R10 geometry into one exact canonical classifier and decoder while settling the general split-locator decision/recovery complexity boundary |
 
 ## Unallocated level-ups
 
@@ -1217,5 +1217,5 @@ history.
 
 (The external referee correction package is applied and its checklist is green;
 the independent dependency, hostile redundancy-ten, and primary-source audits
-remain.  C608 is the immediate decoder consequence after that, and C607 remains
-the broader parallel decoding task.)
+remain. C969 is the unified structural-classifier and exact-decoder successor;
+it fully absorbs the former C607 and C608 scopes.)
