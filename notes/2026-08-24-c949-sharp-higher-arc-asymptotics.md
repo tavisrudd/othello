@@ -1660,13 +1660,38 @@ geometrically nonlinear enough to collapse a quadratic number of common
 external lines, while retaining the three projection profiles and the
 four-secant cap.
 
+There is a complementary affine-blocking formulation.  In the same dual
+coordinates, the nine boundary elements consist of three points on each
+coordinate side.  Six are affine and three lie at infinity.  Hence
+
+```text
+B_aff=H union {the six affine boundary points},      |B_aff|=2q+1, (SR23)
+```
+
+meets every affine line in all but the three directions represented by the
+infinite boundary points.  In any one of those `q-2` directions, the six
+added points lie on at most six parallel lines.  Consequently the projection
+of `H` in that direction omits at most six values of `F_q`.  Thus the unknown
+torus set simultaneously satisfies
+
+```text
+three projections: 1^3 2^(q-4) on F_q^*;
+q-2 other directions: at least q-6 distinct intercepts;
+every affine line: at most four points of H.          (SR24)
+```
+
+This near-surjective Rédei condition is much stronger than the almost-duplex
+ledger alone.  It is the remaining structural gate: prove that a
+`2q-5`-point torus set with `(SR24)` must fall into a low-degree carrier such
+as the dead two-conic family, or construct a genuinely different carrier.
+
 For comparison, the other triangular survivor `(j,sigma)=(5,-1)` has
 
 ```text
 (N_1,N_2,N_3,N_4)
  =((2q^2-8q+3)/3, 2q-2, q, q(q+2)/3+2),
 A_1=q/3-1+2eta-h-2H,
-A_2=-q/3-1-eta+2h+3H.                               (SR22)
+A_2=-q/3-1-eta+2h+3H.                               (SR25)
 ```
 
 It therefore requires a linear trade among its high secants even when
@@ -2014,8 +2039,10 @@ family is lower priority.
   multiplicative Latin square, with singleton product constraint `(SR19)`.
   The canonical cyclic duplex given by two hyperbolas is excluded by
   `(SR21)`: it has quadratically many common external lines, far beyond the
-  nine boundary points' rescue capacity.  The other triangular row requires
-  a linear high-secant trade and is therefore a less rigid first target.
+  nine boundary points' rescue capacity.  More generally `(SR23)--(SR24)`
+  force `H` to occupy at least `q-6` intercepts in each of `q-2` directions,
+  with no fiber above four.  The other triangular row requires a linear
+  high-secant trade and is therefore a less rigid first target.
 - **Settled by `ej`+`tt` — is the nearest classical four-blocking-set core a
   cheap source of the admissible rows?**  Bruen--Fisher is exactly the
   adjacent signed triangle `(j,sigma)=(0,1)`, and adjoining its horizontal

@@ -188,6 +188,13 @@
         },
         "j4_all_negative_eta1_line_partition": {
           "almost_duplex": {
+            "affine_redei_gate": {
+              "affine_boundary_points": 6,
+              "directions_with_at_most_six_missing_intercepts": 79,
+              "exceptional_directions": 3,
+              "maximum_fiber_size": 4,
+              "minimum_distinct_intercepts": 75
+            },
             "canonical_cyclic_duplex": {
               "blocking_possible": false,
               "carrier": [
@@ -366,6 +373,13 @@
         },
         "j4_all_negative_eta1_line_partition": {
           "almost_duplex": {
+            "affine_redei_gate": {
+              "affine_boundary_points": 6,
+              "directions_with_at_most_six_missing_intercepts": 241,
+              "exceptional_directions": 3,
+              "maximum_fiber_size": 4,
+              "minimum_distinct_intercepts": 237
+            },
             "canonical_cyclic_duplex": {
               "blocking_possible": false,
               "carrier": [
@@ -544,6 +558,13 @@
         },
         "j4_all_negative_eta1_line_partition": {
           "almost_duplex": {
+            "affine_redei_gate": {
+              "affine_boundary_points": 6,
+              "directions_with_at_most_six_missing_intercepts": 727,
+              "exceptional_directions": 3,
+              "maximum_fiber_size": 4,
+              "minimum_distinct_intercepts": 723
+            },
             "canonical_cyclic_duplex": {
               "blocking_possible": false,
               "carrier": [

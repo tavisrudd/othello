@@ -3446,6 +3446,13 @@ def audit_sharp_linear_coefficient(output: Path) -> None:
                             ),
                             "blocking_possible": False,
                         },
+                        "affine_redei_gate": {
+                            "affine_boundary_points": 6,
+                            "exceptional_directions": 3,
+                            "directions_with_at_most_six_missing_intercepts": q - 2,
+                            "minimum_distinct_intercepts": q - 6,
+                            "maximum_fiber_size": 4,
+                        },
                     },
                     "vertex_line_profile": {
                         str(degree): count for degree, count
