@@ -112,12 +112,47 @@ count supports the proposed quotient and is frozen in the test suite, but it
 does not replace the missing intrinsic-extraction and lexicographic-minimum
 proofs.
 
-The extractor need not construct a separately encoded `F_(q^2)`. Given the
-monic irreducible gcd `Q`, use the quadratic algebra `A=F_q[X]/(Q)`. The trace
-pairing is nondegenerate, so the first two syndrome coordinates uniquely solve
-for `lambda in A` from `s_i=Tr(lambda a^i)`, `i=0,1`. Then
-`rho=lambda^(q-1)` lies in `T`; projective rescaling by `F_q^*` leaves it
-unchanged, while choosing the conjugate root inverts it. This gives the
-implementation route for a basis-independent quotient-class extractor. What
-remains genuinely geometric is the rule taking that class to the globally
-lex-minimal irreducible target quadratic.
+### Intrinsic extractor
+
+The implementation does not construct a separately encoded `F_(q^2)`. Given
+the monic irreducible gcd
+
+\[
+ Q=X^2+q_1X+q_0,
+\]
+
+it uses the quadratic algebra `A=F_q[X]/(Q)`. If `a` denotes the class of `X`,
+the first two trace equations for `lambda=lambda_0+lambda_1 a` have matrix
+
+\[
+ \begin{pmatrix}
+ 2&-q_1\\
+ -q_1&q_1^2-2q_0
+ \end{pmatrix}.
+\]
+
+Its determinant is the discriminant `q_1^2-4q_0`, which is nonzero because an
+irreducible quadratic over a finite field is separable. Thus `s_0,s_1`
+recover `lambda` uniquely in every characteristic, including characteristic
+two.
+
+Put `g=gcd(q+1,n)`, `rho=lambda^(q-1)`, and
+`eta=rho^((q+1)/g)`. The kernel of `rho -> eta` is exactly `T^n`, so `eta`
+represents the class in `T/T^n`. Instead of choosing between `eta` and
+`eta^(-1)`, the extractor returns
+
+\[
+ \tau=\operatorname{Tr}_{E/F_q}(\eta)=\eta+\eta^{-1}.
+\]
+
+Two norm-one elements have the same `tau` exactly when they are equal or
+inverse, because both are roots of `Z^2-tau Z+1`. Finally, taking the least
+base-field Frobenius conjugate of `tau` gives the semilinear invariant. The
+post-gcd cost is `O(log q)` field operations and uses neither a discrete
+logarithm nor torus enumeration.
+
+Regression tests recover traces `2,5,0` for the three q7/R5 classes and verify
+the trace over all 336 PGL transports. A characteristic-two R7 fixture checks
+the nontrivial order-three quotient over GF(8) across all 1,512 semilinear
+transports. What remains genuinely geometric is the rule taking this extracted
+class to the globally lex-minimal irreducible target quadratic.

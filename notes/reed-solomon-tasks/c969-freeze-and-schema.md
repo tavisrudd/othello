@@ -169,7 +169,10 @@ by the proved 12-point bilinear selector in
 now carry a separate `c969-deep-certificate-v1`; its verifier reparses the
 frozen theorem-domain row, recomputes the canonical transporter, replays the
 intrinsic persistent invariant or frozen orbit row, and checks the independent
-covering-radius promotion.
+covering-radius promotion.  Persistent sigma evidence now includes the
+intrinsically extracted `T/T^(r-1)` quotient order and its inversion/Frobenius
+trace.  The verifier recomputes that datum in `F_q[X]/Q`; it does not trust a
+chosen quadratic-extension encoding or a discrete logarithm.
 
 The first uniform nonpersistent adapter is also live.  At R5 it recognizes the
 tame rational/conjugate osculating families from the square binary-quartic

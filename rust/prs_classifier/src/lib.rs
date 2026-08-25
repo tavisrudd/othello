@@ -44,6 +44,8 @@ pub enum Error {
     BadSchema,
     #[error("positive deep certificate failed independent replay")]
     BadDeepCertificate,
+    #[error("persistent sigma invariant extraction failed")]
+    BadSigmaInvariant,
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Eq)]
@@ -105,6 +107,8 @@ pub struct DeepCertificate {
 pub enum DeepFamilyEvidence {
     Persistent {
         kind: PersistentKind,
+        #[serde(default, skip_serializing_if = "Option::is_none")]
+        invariant: Option<String>,
     },
     FrozenOrbit {
         pgl_orbit_count: usize,
@@ -148,6 +152,14 @@ pub enum PersistentKind {
     Sigma,
     RationalSecant,
     Other,
+}
+
+#[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Eq)]
+pub struct SigmaInvariant {
+    pub quadratic_gcd: Vec<u32>,
+    pub quotient_order: u64,
+    pub quotient_trace: u32,
+    pub semilinear_quotient_trace: u32,
 }
 
 #[derive(Clone, Copy, Debug, Deserialize, Serialize, PartialEq, Eq)]
@@ -440,6 +452,110 @@ pub fn persistent_kind(field: &Field, syndrome: &[u32]) -> PersistentKind {
         2 => PersistentKind::RationalSecant,
         _ => PersistentKind::Other,
     }
+}
+
+fn quadratic_mul(field: &Field, quadratic: &[u32], x: [u32; 2], y: [u32; 2]) -> [u32; 2] {
+    let cross = field.add(field.mul(x[0], y[1]), field.mul(x[1], y[0]));
+    let high = field.mul(x[1], y[1]);
+    [
+        field.sub(field.mul(x[0], y[0]), field.mul(quadratic[0], high)),
+        field.sub(cross, field.mul(quadratic[1], high)),
+    ]
+}
+
+fn quadratic_pow(field: &Field, quadratic: &[u32], mut x: [u32; 2], mut exponent: u64) -> [u32; 2] {
+    let mut out = [1, 0];
+    while exponent > 0 {
+        if exponent & 1 == 1 {
+            out = quadratic_mul(field, quadratic, out, x);
+        }
+        x = quadratic_mul(field, quadratic, x, x);
+        exponent >>= 1;
+    }
+    out
+}
+
+fn gcd_u64(mut a: u64, mut b: u64) -> u64 {
+    while b != 0 {
+        (a, b) = (b, a % b);
+    }
+    a
+}
+
+pub fn sigma_invariant(field: &Field, syndrome: &[u32]) -> Result<SigmaInvariant, Error> {
+    if syndrome.len() < 4 || syndrome.iter().any(|&x| field.check(x).is_err()) {
+        return Err(Error::BadSigmaInvariant);
+    }
+    let syndrome = normalize_projective(field, syndrome).map_err(|_| Error::BadSigmaInvariant)?;
+    if persistent_kind(field, &syndrome) != PersistentKind::Sigma {
+        return Err(Error::BadSigmaInvariant);
+    }
+    let kernel_degree = syndrome.len() - 2;
+    let basis = locator_kernel(field, &syndrome, kernel_degree);
+    let (quadratic, infinity_multiplicity) =
+        homogeneous_basis_gcd(field, &basis, kernel_degree).ok_or(Error::BadSigmaInvariant)?;
+    if infinity_multiplicity != 0 || quadratic.len() != 3 || quadratic[2] != 1 {
+        return Err(Error::BadSigmaInvariant);
+    }
+
+    let two = field.add(1, 1);
+    let trace_a = field.neg(quadratic[1]);
+    let trace_a_squared_coefficient = field.sub(
+        field.mul(quadratic[1], quadratic[1]),
+        field.mul(two, quadratic[0]),
+    );
+    let determinant = field.sub(
+        field.mul(two, trace_a_squared_coefficient),
+        field.mul(trace_a, trace_a),
+    );
+    let determinant_inverse = field.inv(determinant).ok_or(Error::BadSigmaInvariant)?;
+    let lambda = [
+        field.mul(
+            field.sub(
+                field.mul(syndrome[0], trace_a_squared_coefficient),
+                field.mul(trace_a, syndrome[1]),
+            ),
+            determinant_inverse,
+        ),
+        field.mul(
+            field.sub(field.mul(two, syndrome[1]), field.mul(trace_a, syndrome[0])),
+            determinant_inverse,
+        ),
+    ];
+
+    let q = u64::from(field.order());
+    let torus_order = q + 1;
+    if lambda == [0, 0] {
+        return Err(Error::BadSigmaInvariant);
+    }
+    let rho = quadratic_pow(field, &quadratic, lambda, q - 1);
+    if quadratic_pow(field, &quadratic, rho, torus_order) != [1, 0] {
+        return Err(Error::BadSigmaInvariant);
+    }
+    let quotient_order = gcd_u64(torus_order, (syndrome.len() - 1) as u64);
+    let quotient_element = quadratic_pow(field, &quadratic, rho, torus_order / quotient_order);
+    if quadratic_pow(field, &quadratic, quotient_element, quotient_order) != [1, 0] {
+        return Err(Error::BadSigmaInvariant);
+    }
+    let quotient_inverse = quadratic_pow(field, &quadratic, quotient_element, torus_order - 1);
+    let trace_pair = [
+        field.add(quotient_element[0], quotient_inverse[0]),
+        field.add(quotient_element[1], quotient_inverse[1]),
+    ];
+    if trace_pair[1] != 0 {
+        return Err(Error::BadSigmaInvariant);
+    }
+    let quotient_trace = trace_pair[0];
+    let semilinear_quotient_trace = (0..field.spec.degree)
+        .map(|exponent| field.frobenius(quotient_trace, exponent))
+        .min()
+        .ok_or(Error::BadSigmaInvariant)?;
+    Ok(SigmaInvariant {
+        quadratic_gcd: quadratic,
+        quotient_order,
+        quotient_trace,
+        semilinear_quotient_trace,
+    })
 }
 
 fn homogeneous_cubic_derivatives(field: &Field, cubic: &[u32]) -> (Vec<u32>, Vec<u32>) {
@@ -937,13 +1053,15 @@ fn split_free_source(
 
 fn deep_family_evidence(
     kind: PersistentKind,
+    persistent_invariant: Option<&str>,
     frozen: Option<&FrozenOrbit>,
     formula: Option<(&str, &str)>,
 ) -> Option<DeepFamilyEvidence> {
     match kind {
-        PersistentKind::Tangent | PersistentKind::Sigma => {
-            Some(DeepFamilyEvidence::Persistent { kind })
-        }
+        PersistentKind::Tangent | PersistentKind::Sigma => Some(DeepFamilyEvidence::Persistent {
+            kind,
+            invariant: persistent_invariant.map(str::to_owned),
+        }),
         _ => frozen
             .map(|record| DeepFamilyEvidence::FrozenOrbit {
                 pgl_orbit_count: record.pgl_orbit_count,
@@ -956,6 +1074,24 @@ fn deep_family_evidence(
                 })
             }),
     }
+}
+
+fn persistent_invariant_label(
+    field: &Field,
+    syndrome: &[u32],
+    kind: PersistentKind,
+) -> Result<Option<String>, Error> {
+    if kind != PersistentKind::Sigma {
+        return Ok(None);
+    }
+    let invariant = sigma_invariant(field, syndrome)?;
+    Ok(Some(format!(
+        "sigma:T/T^{}:order={}:trace={}:frobenius-trace={}",
+        syndrome.len() - 1,
+        invariant.quotient_order,
+        invariant.quotient_trace,
+        invariant.semilinear_quotient_trace
+    )))
 }
 
 pub fn verify_deep_certificate(
@@ -1000,6 +1136,8 @@ pub fn verify_deep_certificate(
         &certificate.canonical_syndrome,
     );
     let formula = formula_family(&field, &syndrome);
+    let persistent_invariant = persistent_invariant_label(&field, &syndrome, persistent)
+        .map_err(|_| Error::BadDeepCertificate)?;
     let replayed_family = match persistent {
         PersistentKind::Tangent => Some("persistent.tangent"),
         PersistentKind::Sigma => Some("persistent.sigma"),
@@ -1009,8 +1147,12 @@ pub fn verify_deep_certificate(
             .or_else(|| formula.map(|(family, _)| family)),
     };
     if replayed_family != Some(certificate.family.as_str())
-        || deep_family_evidence(persistent, frozen.as_ref(), formula)
-            != Some(certificate.family_evidence.clone())
+        || deep_family_evidence(
+            persistent,
+            persistent_invariant.as_deref(),
+            frozen.as_ref(),
+            formula,
+        ) != Some(certificate.family_evidence.clone())
         || split_free_source(persistent, frozen.as_ref(), formula) != certificate.split_free_source
     {
         return Err(Error::BadDeepCertificate);
@@ -1068,6 +1210,7 @@ pub fn classify(
         &canonicalization.canonical_syndrome,
     );
     let formula = formula_family(&field, &syndrome);
+    let persistent_invariant = persistent_invariant_label(&field, &syndrome, persistent)?;
     let family = match persistent {
         PersistentKind::Tangent => Some("persistent.tangent".to_string()),
         PersistentKind::Sigma => Some("persistent.sigma".to_string()),
@@ -1129,8 +1272,13 @@ pub fn classify(
             normalized_syndrome: syndrome.clone(),
             distance: distance.expect("DEEP verdict has radius"),
             family: family.clone().expect("DEEP verdict has family"),
-            family_evidence: deep_family_evidence(persistent, frozen.as_ref(), formula)
-                .expect("DEEP verdict has family evidence"),
+            family_evidence: deep_family_evidence(
+                persistent,
+                persistent_invariant.as_deref(),
+                frozen.as_ref(),
+                formula,
+            )
+            .expect("DEEP verdict has family evidence"),
             canonical_syndrome: canonicalization.canonical_syndrome.clone(),
             transporter: canonicalization.transporter.clone(),
             split_free_source: replay_source.clone(),
@@ -2192,31 +2340,108 @@ mod tests {
         let canonical = canonicalize_syndrome(&input, 1_000).unwrap();
         assert_eq!(canonical.canonical_syndrome, vec![1, 0, 3, 3, 5]);
         assert_eq!(canonical.transporters_examined, 336);
+
+        let result = classify(&input, 1_000, 1_000).unwrap();
+        let certificate = result.deep_certificate.unwrap();
+        assert_eq!(
+            certificate.family_evidence,
+            DeepFamilyEvidence::Persistent {
+                kind: PersistentKind::Sigma,
+                invariant: Some("sigma:T/T^4:order=4:trace=5:frobenius-trace=5".into()),
+            }
+        );
+        verify_deep_certificate(&certificate, 1_000).unwrap();
+        let mut corrupted = certificate;
+        if let DeepFamilyEvidence::Persistent {
+            invariant: Some(invariant),
+            ..
+        } = &mut corrupted.family_evidence
+        {
+            invariant.push_str("-corrupt");
+        }
+        assert_eq!(
+            verify_deep_certificate(&corrupted, 1_000),
+            Err(Error::BadDeepCertificate)
+        );
     }
 
     #[test]
     fn sigma_q7_fibres_match_three_torus_quotient_classes() {
         let field = Field::new(prime_field(7)).unwrap();
         let expected = [
-            vec![0, 1, 0, 3, 0],
-            vec![1, 0, 3, 3, 5],
-            vec![1, 0, 1, 1, 2],
-            vec![1, 0, 1, 1, 2],
-            vec![1, 0, 1, 1, 2],
-            vec![1, 0, 1, 1, 2],
-            vec![1, 0, 3, 3, 5],
-            vec![0, 1, 0, 3, 0],
+            (vec![0, 1, 0, 3, 0], 2),
+            (vec![1, 0, 3, 3, 5], 5),
+            (vec![1, 0, 1, 1, 2], 0),
+            (vec![1, 0, 1, 1, 2], 0),
+            (vec![1, 0, 1, 1, 2], 0),
+            (vec![1, 0, 1, 1, 2], 0),
+            (vec![1, 0, 3, 3, 5], 5),
+            (vec![0, 1, 0, 3, 0], 2),
         ];
-        for ([s0, s1], expected_minimum) in (0..7)
+        for ([s0, s1], (expected_minimum, expected_trace)) in (0..7)
             .map(|second| [1, second])
             .chain(std::iter::once([0, 1]))
             .zip(expected)
         {
             let syndrome = vec![s0, s1, field.neg(s0), field.neg(s1), s0];
+            let invariant = sigma_invariant(&field, &syndrome).unwrap();
+            assert_eq!(invariant.quadratic_gcd, vec![1, 0, 1]);
+            assert_eq!(invariant.quotient_order, 4);
+            assert_eq!(invariant.quotient_trace, expected_trace);
+            assert_eq!(invariant.semilinear_quotient_trace, expected_trace);
             let canonical =
                 canonicalize_syndrome(&request(prime_field(7), 5, syndrome), 1_000).unwrap();
             assert_eq!(canonical.canonical_syndrome, expected_minimum);
         }
+
+        let syndrome = vec![1, 1, 6, 6, 1];
+        for matrix in normalized_pgl_matrices(&field) {
+            let (candidate, _) = apply_semilinear(&field, &syndrome, 0, matrix).unwrap();
+            let invariant = sigma_invariant(&field, &candidate).unwrap();
+            assert_eq!(invariant.quotient_order, 4);
+            assert_eq!(invariant.quotient_trace, 5);
+        }
+    }
+
+    #[test]
+    fn sigma_invariant_is_semilinear_over_gf8() {
+        let field_spec = FieldSpec {
+            p: 2,
+            degree: 3,
+            modulus: vec![1, 1, 0, 1],
+            encoding: "polynomial-basis-base-p-integer-v1".into(),
+        };
+        let field = Field::new(field_spec.clone()).unwrap();
+        let quadratic = (1..field.order())
+            .flat_map(|constant| (0..field.order()).map(move |linear| vec![constant, linear, 1]))
+            .find(|candidate| (0..field.order()).all(|x| field.eval(candidate, x) != 0))
+            .unwrap();
+        let mut syndrome = vec![1, 1];
+        while syndrome.len() < 7 {
+            let last = syndrome.len() - 1;
+            syndrome.push(field.neg(field.add(
+                field.mul(quadratic[1], syndrome[last]),
+                field.mul(quadratic[0], syndrome[last - 1]),
+            )));
+        }
+        let invariant = sigma_invariant(&field, &syndrome).unwrap();
+        assert_eq!(invariant.quadratic_gcd, quadratic);
+        assert_eq!(invariant.quotient_order, 3);
+
+        for exponent in 0..field.spec.degree {
+            for matrix in normalized_pgl_matrices(&field) {
+                let (candidate, _) = apply_semilinear(&field, &syndrome, exponent, matrix).unwrap();
+                let candidate_invariant = sigma_invariant(&field, &candidate).unwrap();
+                assert_eq!(
+                    candidate_invariant.semilinear_quotient_trace,
+                    invariant.semilinear_quotient_trace
+                );
+            }
+        }
+        assert_eq!(
+            sigma_invariant(&field, &[0, 0, 0, 0, 1, 0, 0]),
+            Err(Error::BadSigmaInvariant)
+        );
     }
 
     #[test]

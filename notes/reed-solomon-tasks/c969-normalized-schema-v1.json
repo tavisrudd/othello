@@ -78,7 +78,10 @@
           "properties": {
             "route": {"enum": ["persistent", "frozen_orbit", "formula"]},
             "kind": {"enum": ["tangent", "sigma"]},
-            "invariant": {"type": "string"},
+            "invariant": {
+              "description": "intrinsic formula invariant; persistent sigma uses the replayed T/T^(r-1) order and inversion/Frobenius trace",
+              "type": "string"
+            },
             "pgl_orbit_count": {"type": "integer", "minimum": 1},
             "semilinear_orbit_size": {"type": "integer", "minimum": 1},
             "semilinear_stabilizer_order": {"type": "integer", "minimum": 1}
