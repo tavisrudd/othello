@@ -52,8 +52,8 @@ Polyhedral Templates*
 
 ## Geometry / coding track — Package 2 (arc extension & reconstruction)
 
-**`integral_secant_arcs`** — *Integral Secant Distributions and Improved
-Bounds for Complete (k,n)-Arcs*
+**`integral_secant_arcs`** — *Integral Secant Distributions and Line-Code
+Obstructions for Complete \((k,n)\)-Arcs*
 - *Contents:* manuscript, exact-arithmetic evidence bundle, partial Lean
   companion, imported-source registry, and referee guide.
 

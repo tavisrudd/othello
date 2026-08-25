@@ -112,10 +112,10 @@
   "dir": "papers/integral_secant_arcs",
   "environment_counts": {
     "corollary": 4,
-    "lemma": 8,
-    "proposition": 3,
+    "lemma": 9,
+    "proposition": 5,
     "remark": 1,
-    "theorem": 4
+    "theorem": 5
   },
   "labels": [
     {
@@ -195,6 +195,18 @@
       "label": "eq:c-integer"
     },
     {
+      "environment": "align",
+      "label": "eq:centered-internal-sum"
+    },
+    {
+      "environment": "align",
+      "label": "eq:centered-norm"
+    },
+    {
+      "environment": "align",
+      "label": "eq:centered-sum"
+    },
+    {
       "environment": "equation",
       "label": "eq:characteristic-three-asymptotic"
     },
@@ -252,6 +264,10 @@
     },
     {
       "environment": "equation",
+      "label": "eq:incidence-of-centered-word"
+    },
+    {
+      "environment": "equation",
       "label": "eq:integer-incidence-bound"
     },
     {
@@ -261,6 +277,26 @@
     {
       "environment": "equation",
       "label": "eq:lambda-coverage"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:line-code-cauchy"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:line-code-degree-moments"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:line-code-gap"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:line-code-offsets"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:line-code-weight"
     },
     {
       "environment": "align",
@@ -273,10 +309,6 @@
     {
       "environment": "equation",
       "label": "eq:odd-repair-bound"
-    },
-    {
-      "environment": "equation",
-      "label": "eq:open-asymptotic"
     },
     {
       "environment": "equation",
@@ -301,6 +333,10 @@
     {
       "environment": "equation",
       "label": "eq:phi-min"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:positive-line-cost"
     },
     {
       "environment": "equation",
@@ -336,7 +372,27 @@
     },
     {
       "environment": "equation",
+      "label": "eq:residue-word"
+    },
+    {
+      "environment": "equation",
       "label": "eq:rounding-remainder"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:shell-defect"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:shell-defect-definition"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:shell-support-lower"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:signed-norm-correction"
     },
     {
       "environment": "equation",
@@ -349,6 +405,22 @@
     {
       "environment": "equation",
       "label": "eq:support-one-obstruction"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:three-line-support"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:three-line-upper"
+    },
+    {
+      "environment": "equation",
+      "label": "eq:three-lines-needed"
+    },
+    {
+      "environment": "lemma",
+      "label": "lem:centered-moment-identities"
     },
     {
       "environment": "lemma",
@@ -384,11 +456,19 @@
     },
     {
       "environment": "proposition",
+      "label": "prop:characteristic-three-modular-bound"
+    },
+    {
+      "environment": "proposition",
       "label": "prop:rational-family-stability"
     },
     {
       "environment": "proposition",
       "label": "prop:simultaneous-equality"
+    },
+    {
+      "environment": "proposition",
+      "label": "prop:three-line-rigidity"
     },
     {
       "environment": "proposition",
@@ -409,6 +489,10 @@
     {
       "environment": "",
       "label": "sec:integer-envelopes"
+    },
+    {
+      "environment": "",
+      "label": "sec:line-code-obstruction"
     },
     {
       "environment": "",
@@ -440,12 +524,20 @@
     },
     {
       "environment": "theorem",
+      "label": "thm:line-code-gap"
+    },
+    {
+      "environment": "theorem",
       "label": "thm:paired-envelope"
     }
   ],
   "main": "papers/integral_secant_arcs/integral_secant_arcs.tex",
   "manifest_labels": [
     "thm:characteristic-three",
+    "prop:characteristic-three-modular-bound",
+    "lem:centered-moment-identities",
+    "thm:line-code-gap",
+    "prop:three-line-rigidity",
     "thm:factor-pair",
     "thm:characteristic-two",
     "lem:degree-extrema",
@@ -468,17 +560,17 @@
   "paper": "integral_secant_arcs",
   "pdfs": [
     {
-      "bytes": 164079,
-      "pages": 18,
+      "bytes": 181879,
+      "pages": 21,
       "path": "papers/integral_secant_arcs/integral_secant_arcs.pdf",
-      "sha256": "8598a0c554b172c1443b783b89cbdc6f856099b1ccac2a50005655ed7e02f93f"
+      "sha256": "d356b5965e441e3025dae48eadde9c6d5e3fa7e31ac48ea23e82f40e4f99920e"
     }
   ],
   "schema_version": 1,
   "sources": [
     {
       "path": "papers/integral_secant_arcs/integral_secant_arcs.tex",
-      "sha256": "63e0962376a5f7fe450b11a5af43e133be6ec66a37c769de8a4715c0b8f82e12"
+      "sha256": "3db0c880d045ec9b4080e744f0f1835c07940191d2f4d4fccfed64da2db4a0fc"
     },
     {
       "path": "papers/integral_secant_arcs/formal-annotations.tex",
@@ -486,7 +578,7 @@
     },
     {
       "path": "papers/integral_secant_arcs/sections/01-introduction.tex",
-      "sha256": "cb0c64586026c2eb82d7736efde8bb11c17eb5261ac7d947ba20d6b45ed011b6"
+      "sha256": "41fb454ed85ea3eb77231d251d981b9c7f3b4c94eb0143a57f039b08a76a5a46"
     },
     {
       "path": "papers/integral_secant_arcs/sections/02-integer-envelopes.tex",
@@ -502,7 +594,11 @@
     },
     {
       "path": "papers/integral_secant_arcs/sections/05-modular-stability.tex",
-      "sha256": "a3d26b538b1bcb02d541efe9b3f1265a6431f8b36f95c728e04730b166208329"
+      "sha256": "0a333523074db1443298fab67ae85248218b39626eee86350dee1a0a1fb31161"
+    },
+    {
+      "path": "papers/integral_secant_arcs/sections/06-line-code-obstruction.tex",
+      "sha256": "9b0a8f29011dcee134f2f1df9dd78040a3039d41b8fd75c1291f39e58e0e736a"
     },
     {
       "path": "papers/integral_secant_arcs/sections/06-characteristic-two.tex",
@@ -510,10 +606,12 @@
     },
     {
       "path": "papers/integral_secant_arcs/sections/07-translations.tex",
-      "sha256": "b2f01e9d1026bae7193c36660b3f5909ab673419460d25ab7b02441f1cf65b93"
+      "sha256": "6de6d4bfdd3dcb526018bcf8b05562e4e0326df9d1b3b857a392b2d0fb5fb446"
     }
   ],
-  "title": "Integral Secant Distributions and Improved Bounds for Complete (k,n)-Arcs",
-  "title_normalized": "integral secant distributions and improved bounds for complete (k,n)-arcs",
-  "untracked_bibliography": []
+  "title": "Integral Secant Distributions and Line-Code Obstructions for Complete \\((k,n)\\)-Arcs",
+  "title_normalized": "integral secant distributions and line-code obstructions for complete \\((k,n)\\)-arcs",
+  "untracked_bibliography": [
+    "papers/integral_secant_arcs/lean/.lake/packages/mathlib/docs/references.bib"
+  ]
 }

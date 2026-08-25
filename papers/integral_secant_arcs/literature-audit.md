@@ -3,10 +3,10 @@
 ## Scope and bounded finding
 
 This audit supports the literature positioning of *Integral Secant
-Distributions and Improved Bounds for Complete (k,n)-Arcs*. It records 23
+Distributions and Line-Code Obstructions for Complete (k,n)-Arcs*. It records 23
 individually discussed sources: 15 were read at full-text depth and eight at
 partial depth. It also records an exact eight-week arXiv title-and-abstract
-screen through 24 August 2026.
+screen through 25 August 2026.
 
 The first and second incidence moments, their real spectral or variance
 relaxation, tactical decompositions, the complement correspondence with
@@ -15,7 +15,9 @@ dictionary are classical. No inspected source states the combination used in
 the manuscript: simultaneous sharp integer bounds for the two selected-block
 degree sequences, the resulting divisor-indexed first-order bounds for
 complete `(k,n)`-arcs, and the additional lower bound obtained by feeding the
-support of a modular repair back through completeness. This is a bounded
+support of a modular repair back through completeness. In characteristic
+three, the manuscript further centers the full maximal-secant degrees into a
+small ternary line-code word and derives the three-line phase boundary. This is a bounded
 finding about the searches and texts recorded below. It is not an exhaustive
 priority claim.
 
@@ -25,7 +27,7 @@ priority claim.
 |---|---|---|
 | Exact integer necessary condition | Exact design moments, tactical decompositions, and real incidence bounds | No inspected source formulates the simultaneous integer-box overlap for an arbitrary selected block family. |
 | Rational equality families | Bishnoi--Mattheus--Schillewaert's quadratic and the standard design incidence inequality | No inspected source derives the ordered-factorization classification and its stated linear integer correction. |
-| Characteristic-three bound | Szőnyi--Weiner's `k mod p` multiset repair theorem | No inspected source applies repair support to the complete arc's full family of `n`-secants to obtain the displayed `2q/3+1` bound. |
+| Characteristic-three bound | Szőnyi--Weiner's `k mod p` repair and exact small-line-codeword theorems | No inspected source applies the exact small-codeword representation to the centered full maximal-secant word, derives the three-line phase boundary, or states the displayed `5/3` coefficient. |
 | Characteristic-two bound | Szőnyi--Weiner's stability theorem for sets of even type and the established local-secant method | No inspected source combines that repair with the selected `n`-secant degree bounds to obtain the displayed coefficient. |
 
 These rows govern the manuscript's positioning. They do not license “first,”
@@ -349,6 +351,28 @@ expository source for the classical exact inverse dictionary. Semantic
 Scholar returned HTTP 429; MathSciNet and Google Scholar were not covered.
 Accordingly this pass preserves the bounded wording and does not license a
 global priority statement.
+
+### Sharp line-code framing refresh, 25 August 2026
+
+After the characteristic-three coefficient sharpened to `5/3`, a targeted
+current search used the exact strings
+
+```text
+"25/18" "complete arc"
+"2q/3+1" arc projective plane
+small weight codewords line code PG(2,q) arcs
+2026 complete (k,n)-arc finite projective plane maximal secants line code
+```
+
+and a separate August-2026 screen for `complete arcs`, `multiple blocking`,
+`line code PG(2,q)`, and `secants projective plane`.  The searches recovered
+the already recorded Bishnoi--Mattheus--Schillewaert,
+Korchmáros--Nagy--Szőnyi, and projective-geometric-code literature, including
+the general projective-geometric-code literature.  No returned title or
+abstract stated the centered maximal-secant construction, the inequalities
+`t>=3` and `t<=1+6 alpha+o(1)`, or the resulting `5/3` coefficient.  This was
+a targeted web/arXiv locator refresh through 25 August 2026, not an exhaustive
+database or MSC search; the database gaps below remain unchanged.
 
 ## Citation-graph and database coverage
 

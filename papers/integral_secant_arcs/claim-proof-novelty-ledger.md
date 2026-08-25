@@ -1,12 +1,13 @@
 # Claim, proof, and novelty ledger
 
 This is the owning surface for priority language in *Integral Secant
-Distributions and Improved Bounds for Complete (k,n)-Arcs*.  No manuscript,
+Distributions and Line-Code Obstructions for Complete (k,n)-Arcs*.  No manuscript,
 README, snapshot, or public summary may strengthen these entries independently.
 
 | Claim family | Proof status | Literature posture | Manuscript action |
 |---|---|---|---|
-| Characteristic-three bound `thm:characteristic-three` | Proof is present; theorem-chain line review completed through the incidence, localization, modular-repair, support, and discrete-minimum steps | No predecessor located in the recorded 23-source audit and exact eight-week arXiv screen. The generic moment identity, spectral relaxation, modular repair, and first-incidence defect mechanisms are classical. Semantic Scholar, MathSciNet, and exhaustive MSC coverage remain open, so no “first” or unqualified “to our knowledge” claim is licensed | State without a novelty adjective and credit Szőnyi--Weiner at the repair step |
+| Characteristic-three bound `thm:characteristic-three` | Proof is present; it combines the Section 5 modular-repair lower side with the three-line gap in `thm:line-code-gap` | No predecessor for the `5/3` coefficient was located in the recorded source audit or the refreshed recent screen. The incidence moments, projective-plane line code, and imported small-codeword theorem are classical. MathSciNet and exhaustive MSC coverage remain open, so no “first” or unqualified “to our knowledge” claim is licensed | State without a novelty adjective, credit Szőnyi--Weiner at both imported steps, and make no optimality claim for `5/3` |
+| Ternary line-code gap `thm:line-code-gap` | Printed proof derives the centered moments, localizes the secant offset, applies the exact small-codeword theorem, and combines two pointwise shell inequalities with the arc cap; Python and Lean independently check the arithmetic fragments | Szőnyi--Weiner's exact representation of small line-code words is imported. No inspected source applies that representation to the centered maximal-secant word or states the resulting phase boundary | Present as the mechanism that rules out every displacement below `q/3-o(q)`, not as a classification of small codewords or extremizers |
 | Rational equality parameters `thm:factor-pair` | Uniform exact-arithmetic proof is present; symbolic expansion, bounded exact tests, and Lean fragments independently check the coefficient identities and discrete arithmetic | Beker--Mitchell--Piper make tactical quotient arithmetic classical; Lund--Saraf, Haemers, and Murphy--Petridis make the real spectral/variance layer classical. No inspected source gives the simultaneous non-tactical sharp integer degree bounds or divisor-indexed linear gain | The manuscript makes the classical mixing inequality a corollary and states the stronger integer condition first |
 | Rational-family modular stability `prop:rational-family-stability` | Printed proof combines secant-number localization, the exact balancing-loss decomposition, signed adjacent-degree counts, and the imported Szőnyi--Weiner repair theorem | Szőnyi--Weiner's modular repair theorem and related small-weight-code applications are classical. The proposition records the paper's necessary structural reduction from a leading-density maximal-secant family to a bounded edit of an exact modular multiset; it makes no classification claim for the exact cores or their geometric realizations | State as a stability reduction, not as a classification of extremizers or an attainability theorem |
 | Characteristic-two parity bound `thm:characteristic-two` | Proof is present; theorem-chain line review, finite exact checks, and Lean verification of the terminal odd/even affine minima are complete | Szőnyi--Weiner and Csajbók make repair-to-even-type and local secant arguments classical. No inspected source combines them with the paired integer necessary condition for the stated coefficient | The manuscript records the imported stability threshold and exact repair size |
@@ -14,7 +15,7 @@ README, snapshot, or public summary may strengthen these entries independently.
 | Exact two-character inverse `prop:two-character-inverse` | Printed elementary dual-incidence proof | Two-character sets and their projective two-weight-code dictionary are classical by Calderbank--Kantor. The proposition is presented as the dual incidence form of that dictionary | Use in the translation and conclusion layer; make no independent priority claim |
 
 The paper-local `literature-audit.md` records the search depth, per-source read
-markers, recent arXiv screen through 2026-08-24, citation-locator coverage, and
+markers, recent arXiv screen through 2026-08-25, citation-locator coverage, and
 the remaining database gaps.  The standalone exporter excludes both this
 ledger and that audit as internal research records.
 

@@ -2555,7 +2555,7 @@ not papers — `golden_operator` is a source-lane draft feeding forward versions
 paper, and `conference_cut_spectra` is the lane-local exchange-statistics companion written as a
 design-limit and theory note. The generated rows now include Paper V and the registered
 cubic-threefold manuscripts, but they are still not a complete portfolio count: the separate
-*Integral Secant Distributions and Improved Bounds for Complete `(k,n)`-Arcs* manuscript is not yet
+*Integral Secant Distributions and Line-Code Obstructions for Complete \((k,n)\)-Arcs* manuscript is not yet
 represented in that block, and the withdrawn conditional all-stabilization draft is not a current
 paper. `passant_code_q13` is the fourth numbered Clebsch paper, and
 `conference_cut_spectra` is a short note. The statement and label columns need the same
@@ -2565,7 +2565,7 @@ a count of independent results. Neither column measures depth, and none of them 
 across rows.
 
 The finite-geometry portfolio also contains *Integral Secant Distributions and
-Improved Bounds for Complete (k,n)-Arcs* under the alias
+Line-Code Obstructions for Complete \((k,n)\)-Arcs* under the alias
 `integral_secant_arcs`.
 
 <!-- trust-spine:begin area=papers section=manuscripts version=1 -->
@@ -2592,7 +2592,7 @@ Improved Bounds for Complete (k,n)-Arcs* under the alias
 | `equivariant_robust_completion`     | Frobenius-equivariant pair extension and robust repair of eight-arcs                                                                     | `paper-frob-eq`    | 17    | 5   | 2   | 3    | 7   | 37     |
 | `golden_operator`                   | The golden conference operator and its shadow sisters                                                                                    | `golden`           | —     | 7   | 1   | 3    | 2   | 14     |
 | `hodge_atom_marker_ledger`          | Hodge Atoms as Occurrence-Indexed Marker Ledgers                                                                                         | `cubic-threefolds` | 6     | 3   | 0   | 0    | 1   | 26     |
-| `integral_secant_arcs`              | Integral Secant Distributions and Improved Bounds for Complete (k,n)-Arcs                                                                | `relconic`         | 18    | 4   | 8   | 3    | 4   | 81     |
+| `integral_secant_arcs`              | Integral Secant Distributions and Line-Code Obstructions for Complete \((k,n)\)-Arcs                                                    | `relconic`         | 21    | 5   | 9   | 5    | 4   | 103    |
 | `mds_css_transversal_groups`        | Diagonal Isoduality and Transversal Clifford Groups of MDS--CSS Codes                                                                    | `ame-lu`           | 23    | 7   | 4   | 5    | 3   | 42     |
 | `passant_code_q13`                  | Reconstructing $\PG(2,13)$, its conic, and polarity from the minimum words of a binary conic code                                        | `clebsch`          | 16    | 1   | 0   | 1    | 0   | 12     |
 <!-- trust-spine:end area=papers section=manuscripts -->
