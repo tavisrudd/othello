@@ -14,8 +14,8 @@ ARE QUEUED AFTERWARD; NO PUSH OR DEPOSIT
 Relative Weight Hierarchies*
 **Standalone paper repository**: `tavisrudd/complete-repair-ports` at
 `~/src/math-papers/complete-repair-ports`
-**Current local standalone commit**: `11bbd01` (C960 exact ranked finite
-transfer revision; verified; no push or deposit)
+**Current local standalone commit**: `573f658` (C960 exact ranked finite
+transfer and all-rank local-to-global bottleneck; verified; no push or deposit)
 **Approved paper license**: MIT
 
 ## Goal
@@ -54,13 +54,15 @@ Hierarchies*.
    coset-support costs and the complete outer functional dual;
 5. the RGHW outer-distance criterion and the pointed weighted formula as
    specializations of that exact optimization;
-6. the best-target GHW identity, cooperative-locality min--max corollary, and
+6. the rank-one escape cost as the exact bottleneck for simultaneous bounded
+   transfer across all recoverable target dimensions;
+7. the best-target GHW identity, cooperative-locality min--max corollary, and
    MDS rigidity;
-7. positive-density realization and bounded service-rate-region transfer;
-8. reliability and coefficient-presentation separations beyond the RGHW
+8. positive-density realization and bounded service-rate-region transfer;
+9. reliability and coefficient-presentation separations beyond the RGHW
    hierarchy;
-9. the projective simplex code as the principal non-MDS application; and
-10. compact formal-verification and reproducibility appendices.
+10. the projective simplex code as the principal non-MDS application; and
+11. compact formal-verification and reproducibility appendices.
 
 Use only established coding-theory terminology. “Associated nested code pair”
 is a literal description of $K_P\subseteq D_P$, not a coined term. Research
@@ -201,6 +203,6 @@ hierarchy. C220 remains omitted. Shared-Lean extraction is planned under
 [C287](../2026-07-17-c287-shared-lean-extraction-plan.md), remains separately build-system-owned,
 and is not evidence for or a release dependency of the paper-local companion.
 
-Local standalone synchronization is complete at `11bbd01`. Publication, push,
+Local standalone synchronization is complete at `573f658`. Publication, push,
 and deposit remain gated on C325 and C953; the approved repository metadata
 does not authorize any of those external actions.

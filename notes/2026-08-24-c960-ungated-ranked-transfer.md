@@ -461,4 +461,5 @@ The manuscript now states this bottleneck explicitly and records the resulting s
 positive-density transfer: under the eventual outer gate and
 (r<M_1(D_P,K_P)+d(I^\perp)), every cost-(\le r) system at every recoverable rank is copied in
 every block.  The deterministic release gate still passes at 22 pages, 22 claims, and four Lean
-terminals.
+terminals.  The refreshed standalone is commit `573f658`, verified against authority commit
+`11826d150`; no push or deposit was performed.
