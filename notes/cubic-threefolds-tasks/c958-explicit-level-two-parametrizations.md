@@ -205,3 +205,12 @@ Read `../AGENTS.md` in a dedicated command, route with
 `go C958 cubic-threefolds`, read this card and the C956 report, then extract
 the exact formulas in Theorem 2.1 and Proposition 3.2 before choosing the
 type-`I_1` witness. Do not begin from the superseded intermediate bounds.
+
+## Queued successor
+
+C963 consumes the accepted type-`I_1` and type-`I_3` ground-field maps after
+this task closes. It packages them as a proof-producing stable-rationality
+workbench with exact straight-line programs, localized inverse certificates,
+exceptional-locus data, measured complexity profiles, and a certified account
+of the one-extra-variable cancellation geometry. C963 must not begin by
+replacing or weakening any C958 acceptance gate.

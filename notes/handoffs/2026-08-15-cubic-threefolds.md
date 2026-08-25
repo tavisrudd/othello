@@ -2,7 +2,7 @@
 
 **Lane:** `cubic-threefolds`
 
-**Date:** 2026-08-24
+**Date:** 2026-08-25
 
 > **LIVE MAP ONLY.** This is the routing and state surface for this lane.
 > Per-task detail belongs in the task cards under `notes/cubic-threefolds-tasks/`;
@@ -69,6 +69,15 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   `../cubic-threefolds-tasks/c958-explicit-level-two-parametrizations.md`;
   latest report:
   `../2026-08-25-c958-type-i1-tangent-quotient.md`.
+- **C963 — proof-producing stable-rationality workbench, queued after C958.**
+  Consume C958's accepted type-`I_1` and type-`I_3` ground-field maps as frozen
+  interfaces; emit compact straight-line programs, independently checked
+  localized inverse certificates, exceptional-locus data, and measured
+  degree/height/formula-size profiles.  Expose rational-point and function-field
+  operations and the one-extra-variable cancellation constraint, with no
+  uniform complexity, finite-field, cryptographic, or general decision claim
+  beyond separately proved gates. Card:
+  `../cubic-threefolds-tasks/c963-stable-rationality-workbench.md`.
 - **C936 — accepted after cold-referee repair audit.**  The warning-free eleven-page paper
   develops the signed nonstandard \(A_5\)-cubic parameter as the
   sign/discriminant resolvent of the actual
