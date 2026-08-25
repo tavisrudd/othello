@@ -434,3 +434,17 @@ specializations.
   claims, four Lean terminals;
 - `git diff --check`: PASS;
 - no Lean source, theorem, reviewer terminal, toolchain pin, or expected-axiom file changed.
+
+### Publication surfaces
+
+- Authority integration commits: `b3e43de5f` (exact ranked theorem and literature
+  positioning) and `c6dfffe34` (two-block edge condition, radius-free collapse criterion,
+  and closeout repairs).
+- Portfolio-summary authority commit: `e8dee71c7`; the downstream summary contains byte-identical
+  prose and was committed as `81433b9`.
+- The paper export audit reported zero private-reference findings.  The standalone repository was
+  synchronized from authority commit `e8dee71c7`, committed as `11bbd01`, and verified against its
+  40-file export manifest.
+- The standalone deterministic release gate passes at 22 pages, warning-free, with 22 claim rows
+  and four Lean reviewer terminals.
+- No push, deposit, or submission was performed.
