@@ -1293,6 +1293,61 @@ selection, not an expanding line-code search.  The exact endpoint proof says
 only that repair zero fails; repair `+1` is the first honest construction
 target.
 
+The closest field-uniform object is classical, but a short switch from it is
+impossible.  Bruen--Fisher Theorem 12 constructs, for a nonsquare `tau` in
+`F_q` and `q=3^h`, `h>=2`, the blocking set
+
+```text
+D_BF={(x,x^3):x in F_q} union {(x,tau x^3):x in F_q}
+     union {vertical point at infinity}.             (SR2)
+```
+
+The affine cubics meet at the origin, so `|D_BF|=2q`.  Their discriminant
+argument gives the exact line spectrum
+
+```text
+1^[2(q^2-q+3)/3]  2^q  3^[2q-2]
+4^[(q-1)(q-3)/3].                                   (SR3)
+```
+
+More revealingly, let `C` be the vertical point at infinity, `H` the
+horizontal point at infinity, and `O` the origin.  In the dual line-index
+plane,
+
+```text
+1-M1_{D_BF}=1_{L_C}+1_{L_O}-1_{L_H}  (mod 3).        (SR4)
+```
+
+Indeed, the supported lines are the vertical pencil, the nonzero horizontal
+lines, and the non-axis lines through `O`; their three vertex values give
+exactly the signed triangle in `(SR4)`.  Thus Bruen--Fisher realizes the
+adjacent core `(j,sigma)=(0,1)`.  Adding `H` flips the negative coefficient
+and realizes `(1,3)`, precisely the scalar row already excluded from inverse
+arc realization.
+
+There is no four- or five-point switch from `(SR2)` to either admissible core.
+For any three-line core write its dual coefficient vector as `epsilon`, so
+
+```text
+M(1_D+epsilon)=1  (mod 3).                            (SR5)
+```
+
+If `D,D'` are two such cores, then
+`v=(1_{D'}-1_D)+(epsilon'-epsilon)` lies in the ternary dual incidence code.
+Any nonzero dual word has weight at least `q+2`: choose a nonzero coordinate;
+each of the `q+1` lines through it needs a second support point, and those
+lines are disjoint away from the chosen point.  Hence
+`|D triangle D'|<q-4` forces `v=0`.  Applied to `(SR4)`, coordinatewise
+binary feasibility then forces the same three dual points.  Flipping a
+positive sign removes that point from `D`, while flipping the negative sign
+adds it.  The all-negative and one-positive/two-negative outcomes therefore
+have sizes only `2q-2` and `2q-1`, not `2q+4` and `2q+5`.
+
+So the sharpness construction, if it exists, is a genuinely global
+`Omega(q)` Radon trade away from Bruen--Fisher, followed by the regular
+incidence selection.  A bounded local switch or a wider bounded census cannot
+find the mechanism.
+
 #### Bound status after the structural upgrade
 
 The unconditional asymptotic statement is now strengthened from C945's lower
@@ -1837,6 +1892,11 @@ is the source of `(LB3+)`; the finite searches play no role in that theorem.
   Cache key
   `arXiv:1901.09649`, SHA-256
   `4161216751349d453fc8e8fbf40df6132de24f8e83581e85eeeb33ec936c046f`.
+- Bruen--Fisher, *Blocking sets and complete `k`-arcs*: **partial**, Lemmas
+  7--11 and Theorem 12 with its full proof read from the version-of-record
+  PDF; `(SR2)`--`(SR4)` rederive its line spectrum and ternary residue
+  factorization.  Cache key `10.2140/pjm.1974.53.73`, SHA-256
+  `59527c2e89a60a57f2a24c28862fa9b930373260179e33800c54b5c3a8fe2cd5`.
 
 ## Purpose and boundary
 

@@ -3172,6 +3172,26 @@ def audit_sharp_linear_coefficient(output: Path) -> None:
         if j5_degree_four != q * (q + 2) // 3 + 2:
             raise AssertionError("the mixed endpoint spectrum changed")
 
+        bruen_fisher_spectrum = {
+            1: 2 * (q * q - q + 3) // 3,
+            2: q,
+            3: 2 * q - 2,
+            4: (q - 1) * (q - 3) // 3,
+        }
+        point_count = q * q + q + 1
+        if sum(bruen_fisher_spectrum.values()) != point_count:
+            raise AssertionError("the Bruen--Fisher line count changed")
+        if sum(degree * count for degree, count
+               in bruen_fisher_spectrum.items()) != 2 * q * (q + 1):
+            raise AssertionError("the Bruen--Fisher incidence sum changed")
+        if sum(degree * (degree - 1) // 2 * count
+               for degree, count in bruen_fisher_spectrum.items()
+               ) != q * (2 * q - 1):
+            raise AssertionError("the Bruen--Fisher pair sum changed")
+        if (bruen_fisher_spectrum[2] + bruen_fisher_spectrum[3]
+                != 3 * q - 2):
+            raise AssertionError("the Bruen--Fisher residue support changed")
+
         field_checks.append({
             "field_order": q,
             "endpoint_delta": delta,
@@ -3181,6 +3201,16 @@ def audit_sharp_linear_coefficient(output: Path) -> None:
             ),
             "mixed_degree_four_line_count": j5_degree_four,
             "mixed_positive_generator_cap_gap": 1,
+            "bruen_fisher_adjacent_core": {
+                "size": 2 * q,
+                "secant_offset": 0,
+                "coefficient_sum": 1,
+                "line_spectrum": {
+                    str(degree): count for degree, count
+                    in bruen_fisher_spectrum.items()
+                },
+                "residue_support": 3 * q - 2,
+            },
         })
 
     output.write_text(json.dumps({
