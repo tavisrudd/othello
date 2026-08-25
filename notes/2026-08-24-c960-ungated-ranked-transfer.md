@@ -238,12 +238,114 @@ It should not be described as a general lower bound on the ungated obstruction.
   functions. The RGHW formula is the computable specialization after the outer-distance gate.
 - No computation, certificate, or formal theorem is used in the proof.
 
-## Literature-audit status
+## Priority audit
+
+**Read-depth summary:** zero sources were read at full-text depth; five primary sources were read
+partially at the exact portions listed below, and one August 2026 preprint was screened at
+abstract/metadata depth. The audit supports a bounded priority boundary, not an exhaustive first-use
+claim.
+
+### Closest mathematical inputs
+
+- **Partial:** Elimelech, Firer, and Schwartz, *The Generalized Covering Radii of Linear Codes*,
+  arXiv:2012.06467, Sections I and III (Definition 1, Definition 4, and Lemma 5) and Section V
+  (Proposition 25). Their fixed-instance problem is to lift several prescribed syndromes with
+  minimum union support; their generalized covering radius maximizes that cost over the prescribed
+  syndromes. Proposition 25 gives additivity of the worst-case radius under direct sums. After a
+  basis of (T) is chosen, \(\lambda_{I,T}(B)\) is exactly the fixed-instance joint coset-support
+  cost underlying this established invariant. The manuscript must attribute that relationship and
+  must not present the ordinary lifting function as a new metric. Cache key `arXiv:2012.06467`;
+  SHA-256 `3824adb41a84705d902d9d4933a9467103129c9e32a83f122b36da09eefc71f2`.
+- **Partial:** Zhang, Yaakobi, Etzion, and Schwartz, *On the Access Complexity of PIR Schemes*,
+  arXiv:1804.02692, Section III-B (Generalized coset weights, Lemma 7, and Theorems 8--10). They
+  define the minimum union support of representatives of prescribed cosets and then the worst case
+  over collections of cosets. This is the direct terminology predecessor for the ordinary block
+  costs, but it has neither the target-coordinate normalization nor the outer-functional
+  concatenation optimization. Cache key `arXiv:1804.02692`; SHA-256
+  `904ff548b692a9a44ff89f238f0240004cc6cb2201b3f2e2e4b823dd16f83ccc`.
+- **Partial:** Chen, Ling, and Xing, *Quantum Codes from Concatenated Algebraic-Geometric Codes*,
+  published version, Section II through Theorem 2.1. They give the classical decomposition of the
+  dual of a concatenated code into an outer-dual image plus the direct sum of inner duals. This is
+  the algebraic ancestor of the block-functional decomposition. They do not optimize a prescribed
+  target subspace over joint coset supports. Cache key `10.1109/TIT.2005.851760`; SHA-256
+  `e566d78ab3a82d08ea4fc0441b98a85677dda41ee727a91b365c13b907733f0f`.
+- **Partial:** Luo, Mitrpant, Vinck, and Chen, *Some New Characters on the Wire-Tap Channel of Type
+  II*, published version, Section III (definitions (12)--(13), Theorems 2--3, and the inverse
+  relation to relative generalized weights). This establishes the relative-weight/RDLP support
+  hierarchy and its quotient-information role. It does not retain prescribed coset representatives
+  or concatenated coefficient lifts. Cache key `10.1109/TIT.2004.842763`; SHA-256
+  `eecbc9e01441c1a6955eeb60d17536856957c9d8b3b5ce110dbd1226d9276fd1`.
+- **Partial, reused from C957:** Jin and Fu, *Constructions of Locally Repairable Codes via
+  Concatenated Codes*, arXiv:2605.04618, Section 3 around Construction 3.2. They use a fixed
+  single-parity-check inner code and outer codes over an extension field to obtain parameter
+  properties of LRCs. They do not state a functional-fiber optimization or exact transfer of all
+  bounded recovery systems. Cache key `arXiv:2605.04618`; SHA-256
+  `69847fc4ed1ada75f615ab8d2b2c08484da31253d278f9485cd03f5ab9587d93`.
+- **Abstract/metadata only:** Essayag and Zabokritskiy, *The Exact Second Generalized Covering Radius
+  of Binary Primitive Triple-Error-Correcting BCH Codes*, arXiv:2608.07215v1, submitted 7 August
+  2026. The abstract determines (R_2) for a BCH family and describes it as spanning every
+  two-dimensional syndrome subspace with at most eight parity-check columns. It is a new result in
+  the established generalized-covering direction, not a concatenation-transfer theorem. Cache key
+  `arXiv:2608.07215`; SHA-256
+  `aa881c58deef835be03ec522dc0e60a7c5860ea6af0a9dca1f02a3e9edda9490`.
+
+### Search record
 
 The first broad four-query web call exceeded the context-output budget and was discarded as a
-command-shaping failure. It supplies no evidence. The replacement audit uses narrow primary-source
-queries, records every consulted source with read depth, and distinguishes classical quotient/code
-support invariants from the exact concatenated-recovery formula above.
+command-shaping failure. It supplies no evidence. Replacement searches were narrow and used primary
+sources for technical conclusions.
+
+The official arXiv API was queried with `start=0` and `max_results=20`. The exact all-time queries
+
+1. `all:"concatenated code" AND all:"generalized covering radius"`,
+2. `all:"concatenated code" AND all:"generalized coset weight"`, and
+3. `all:"functional dual" AND all:"recovery" AND all:code`
+
+each returned a valid Atom response with explicit `totalResults=0`. For the interval 2026-07-24
+00:00 through 2026-08-24 23:59, the exact query
+`all:"generalized covering radius" AND submittedDate:[202607240000 TO 202608242359]` returned one
+record, arXiv:2608.07215v1, while
+
+1. `all:"concatenated code" AND (all:"generalized covering radius" OR all:"coset weight") AND
+   submittedDate:[202607240000 TO 202608242359]`, and
+2. `all:"local recovery" AND (all:"functional dual" OR all:"minimum-support lift") AND
+   submittedDate:[202607240000 TO 202608242359]`
+
+both returned explicit zero counts.
+
+Exact web searches for `"generalized coset weights" linear code`, `"coset weight hierarchy"
+coding theory`, `"tau-coset weight" code`, and `"relative generalized covering radius" code`
+located the generalized-coset and generalized-covering literature above but no combined
+concatenated-recovery statement. A zbMATH Open exact-phrase web search returned no relevant record.
+MathSciNet and Google Scholar were not accessible. The Semantic Scholar API returned HTTP 429.
+Crossref and OpenAlex token searches were too noisy to license a negative and were discarded.
+
+### Priority boundary
+
+The following ingredients are established mathematics and are attributed as such:
+
+- minimum union support for several prescribed cosets or syndromes;
+- generalized covering radii obtained by maximizing that cost;
+- RGHWs/RDLPs of a nested pair;
+- blockwise decompositions of concatenated dual codes; and
+- support additivity across direct-sum coordinate blocks.
+
+The manuscript-level result that survives the audit is the exact combination: target-normalized
+joint coset-support costs indexed by a linear map (T\to\operatorname{FD}(O)), optimized over the
+complete outer functional dual, give the first nonconfined recovery system in a finite
+concatenation. Its zero-functional and outer-distance specializations are the existing RGHW
+threshold, and its one-dimensional specialization is the pointed weighted theorem. No consulted
+source states this formula or its exact coefficient/support transfer consequence. Because the
+search was not exhaustive over MathSciNet or Google Scholar, the manuscript should describe the
+classical components precisely and state the combined theorem without an absolute priority claim.
+
+## Integration decision
+
+The theorem survives the proof and bounded priority gates. Integration should use the native
+description “minimum union support of prescribed cosets,” cite generalized covering radii, and
+avoid introducing a branded fiber metric. The arbitrary-rank formula becomes the principal exact
+finite theorem; the outer-distance RGHW theorem and the pointed weighted theorem become transparent
+specializations.
 
 ## Mystery ledger
 
