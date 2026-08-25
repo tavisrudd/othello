@@ -154,6 +154,7 @@ any of the above.
 | [C811 — quadratic-twist specialization](../clebsch-tasks/c811-quadratic-twist-specialization.md) | queued; math only, paper promotion excluded | stress-test the fibre-recovery claim, delimit standard Kummer precedence |
 | [C813 — harmonic restriction generalization](../clebsch-tasks/c813-harmonic-restriction-generalization.md) | queued; math only, paper promotion excluded | compute bounded `A_5`-branching, Petersen-channel eigenvalues, exact restriction scalars |
 | [C896 — corrected universal finite-group socle theorem](../clebsch-tasks/c896-corrected-universal-socle-theorem.md) | queued future mathematics; independent of Paper II | run `q=9,25` and exponent-three reconnaissance, then attempt a carry/borrow theorem only if the data support one |
+| [C968 — sparse-shadow reconstruction and canonicalization](../clebsch-tasks/c968-sparse-shadow-reconstruction-canonicalization.md) | queued; standalone Rust tool, no manuscript edits | create the top-level `sparse-shadow/` Cargo project and freeze its typed shadow/action/certificate schema before implementing the canonicalizer |
 
 C756 optional stuck-state/review reading:
 [`c756-proof-expert-dossier.md`](../clebsch-tasks/c756-proof-expert-dossier.md).
@@ -221,7 +222,8 @@ the next export of any area.
 ## Lane boundaries
 
 This lane owns the five Clebsch paper roots, the preserved mega-paper
-fallback, Clebsch checkers/reports, and exact Clebsch queue rows. It does not
+fallback, Clebsch checkers/reports, the top-level `sparse-shadow/` Cargo project
+under C968, and exact Clebsch queue rows. It does not
 own Baer, alternate-orbit, gem-mining, golden, crowns, or (as of 2026-08-15)
 `cubic-threefolds` work. Cross-lane results are
 read-only until an owning split-paper task explicitly admits them.
