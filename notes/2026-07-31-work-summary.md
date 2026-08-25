@@ -292,6 +292,26 @@ This is now the larger half of the repo's proven mathematics and the whole of it
   sense). The boundary is kept narrow and stated as such: this shows the *line-hole instance* was
   previously asked for, **not** that the conic parameter itself was.
 
+- **Integral secant distributions for complete higher arcs** (`relconic`). A separate eighteen-page
+  manuscript lifts the prescribed-hole method to selected block families in symmetric designs. Its
+  exact integer degree envelopes have classical variance/expander mixing as their real relaxation,
+  while ordered factorizations `λ = uv` index unbounded resonance families with a strictly stronger
+  linear coefficient. A modular-lift dichotomy supplies a further surcharge unless the dual
+  maximal-secant family is already an exact `λ mod p` multiset; the ordinary characteristic-three
+  and relevant even-degree branches exclude that core and give unconditional improvements. The same
+  theorem applies to projective point–hyperplane systems and robust nonextendibility of projective
+  codes. Human proof, evidence, partial Lean coverage, hostile review, and standalone export pass;
+  the bounded literature audit licenses no global firstness sentence.
+
+  The sharp-asymptotics successor is open and deliberately separate. It proves the exact base value
+  `t₇(2,9) = 39` by a Hermitian-unital plus five-orbit switch and identifies the nineteen maximal
+  secants as a five-character dual blocking core. At `q=27`, the candidate target is a 55-point core
+  with spectrum `1^461 2^17 3^78 4^194 5^7`; weak inverse realization would produce a complete
+  `(279,19)`-arc from that 55-point core. Three natural symmetry models are excluded;
+  Frobenius reduction leaves two canonical branches. The centered incidence descent gives a signed
+  word of weight `4q−6`, with no tangents and opposite signs on every support 2-secant. This is a
+  structural construction gate, not a completed asymptotic theorem.
+
 - **The Clebsch hexagon code** (`clebsch`) — the reading of that q=11 witness, and the sharpest
   single result in the portfolio. **Rigidity (five-way TFAE):** for a six-arc `A ⊂ PG(2,11)`, `U(A)`
   lies on *some* conic ⟺ `U(A)` is *all* `𝔽₁₁`-points of a nonsingular conic ⟺ `#U(A) ≤ 15` (in fact
@@ -706,8 +726,29 @@ This is now the larger half of the repo's proven mathematics and the whole of it
   Computed-exact signal: twisted-cubic repair tolerance `τ` is not even monotone in representation count
   or in disjoint availability `ν` (`q = 5,7,11`).
 
-- **Complete repair hypergraphs under concatenation** (`coding`) — the sweep above, matured into a
-  manuscript with a Lean package. The twisted-cubic–axis seed `[2q+1,4,q−1]_q` has an **exact**
+- **Exact transfer of bounded linear recovery and relative weight hierarchies** (`complete-ports`) —
+  the sweep above matured into a theorem-led manuscript with a paper-local Lean package. Its current
+  organizing object is the associated nested pair `K_P ⊆ D_P`, identified canonically as the
+  shortening–puncturing pair of the inner dual. The relative generalized Hamming weights of that pair
+  are exactly the minimum helper-union costs for recoverable target subspaces of each dimension; the
+  dual hierarchy gives the exact failure thresholds leaving each dimension of target ambiguity.
+  This yields sharp rank-stratified confinement, the best-target GHW identity, cooperative-locality
+  min–max bounds, MDS rigidity, and service-rate and reliability consequences.
+
+  The main transfer theorem is now ungated and exact. It optimizes target-normalized joint
+  prescribed-coset support over all maps into the full outer functional dual; the resulting
+  `Γ_{j,T}` is precisely the first nonconfined helper cost for target subspace `T`. Below it,
+  restriction and zero extension are inverse bijections preserving coefficients and exact supports.
+  The earlier RGHW and pointed weighted formulas are specializations. Under repeated concatenation,
+  ordinary prescribed-coset costs compose associatively by exact min-plus substitution; normalized
+  numerical costs additionally retain intermediate target contributions, while coefficient-level
+  composition retains the lift relation. A scalar threshold alone does not compose because it has
+  forgotten the functional labels constrained at the next level. The twenty-four-page authority and
+  verified standalone export pass; publication remains gated. The human proofs carry these stronger
+  results, while the paper-local Lean package verifies four terminals and records the new theorems as
+  absent rather than overstating coverage.
+
+  The twisted-cubic–axis seed `[2q+1,4,q−1]_q` has an **exact**
   all-symbol profile in characteristic three: every cubic coordinate has `(ν,τ) = ((q−1)/2, q−2)`
   (via a shifted-inverse consecutive-power rainbow matching), giving **`τ > ν` at every coordinate**
   for `q ≥ 9`. Its **projective completion** `[2q+2,4,q]_q` has dual distance three, radius four
@@ -1228,6 +1269,23 @@ them.
   on the exotic pair** — the same two-element torsor Paper V's golden orientation supplies. On the
   quartic side, unimodular standard-type `S₆` lattice rigidity forces the `A₅` root–weight lattice
   with stabilizer `Γ₀(6)`, so the quartic period closes up on `X₀(6)` with cusp widths `1,2,3,6`.
+- **Exact level two for two explicit cubics.** If a smooth quartic del Pezzo surface `S` over a
+  characteristic-zero field has a rational point and stably permutation geometric Picard lattice,
+  then `S × A²` is rational. A descended unimodular tangent section for the projectively linear torus
+  action gives the rational Rosenlicht quotient. Applied to both Tschinkel–Zhang cubic families, it
+  proves `X_{j,r} × P²` rational for every member; combined with one-step irrationality, the two
+  displayed smooth cubic threefolds satisfy **`ℓ_Q(X) = ℓ_C(X_C) = 2`**. Equivalently,
+  `Y = X × P¹` is nonrational over `Q` and `C` but `Y × A¹` is rational over `Q`. Exact Cox-weight,
+  saturation, tangent, inverse-graph and Bézout replays support the human proof; no Lean coverage is
+  claimed. The synchronized ten-page release candidate remains behind fresh hostile-referee rounds,
+  with no push or replacement deposit.
+- **The elliptic modular resolvent is explicit.** A separate eleven-page companion identifies the
+  signed nonstandard `A₅` cubic parameter with the sign/discriminant resolvent of the relative
+  norm-axis elliptic two-division cover: `T = 81t²`, `r = 9t`, base `X₀(6)`, exact `A₃` monodromy,
+  cusp widths and modular-interior boundary values. At the chordal value, an orbit-and-ideal
+  certificate gives the reduced twelve-point icosahedral divisor subject to the stated secant-cubic
+  identification. Golden orientation selects the cyclic cubic splitting cover and gives
+  `t = 3(η(3τ)/η(τ))⁶`. Independent algebra and subgroup enumeration replay under the paper gate.
 - **Proved fibrewise.** For all twenty `A₅`-stable principal gluings of `(E⁵, 6I−J)`, the rank-15
   fourfold-divisor-intersection lattice is saturated in its rational span; on the exotic gluing a
   15-term identity plus coprime Smith types `(1¹⁴,7)`, `(1¹⁴,17)` force `Θ⁴/4!` into it. Hence
@@ -2495,17 +2553,16 @@ hand-written.
 material the rigidity paper, its companion, and the trade-rigidity paper now carry; and two rows are
 not papers — `golden_operator` is a source-lane draft feeding forward versions of the passages
 paper, and `conference_cut_spectra` is the lane-local exchange-statistics companion written as a
-design-limit and theory note. The generated rows predate the fifth numbered Paper V and therefore
-are no longer a complete portfolio count; Paper V is an eleven-page standalone manuscript not yet
-represented in that block, and neither are the three manuscripts of the cubic-threefold
-stabilization programme — *Irrationality of Cubic Threefolds after One Stabilization*, *Gamma Point
-Rows under Quantum Wall Crossing and a Criterion for Stable Irrationality*, and the published
-standalone note *Standard Flips of Discrepancy One*. `passant_code_q13` is the fourth numbered
-Clebsch paper, and
+design-limit and theory note. The generated rows now include Paper V and the registered
+cubic-threefold manuscripts, but they are still not a complete portfolio count: the separate
+*Integral Secant Distributions and Improved Bounds for Complete `(k,n)`-Arcs* manuscript is not yet
+represented in that block, and the withdrawn conditional all-stabilization draft is not a current
+paper. `passant_code_q13` is the fourth numbered Clebsch paper, and
 `conference_cut_spectra` is a short note. The statement and label columns need the same
 care: labels count anything labelled, and corollary-heavy papers inflate against theorem-heavy ones —
-the arcs manuscript alone carries 21 corollaries against 8 theorems, so its 77 labels are not 77
-independent results. Neither column measures depth, and none of them should be summed across rows.
+the arcs manuscript alone carries many corollaries alongside its theorems, so its label count is not
+a count of independent results. Neither column measures depth, and none of them should be summed
+across rows.
 
 The finite-geometry portfolio also contains *Integral Secant Distributions and
 Improved Bounds for Complete (k,n)-Arcs* under the alias
@@ -2520,21 +2577,22 @@ Improved Bounds for Complete (k,n)-Arcs* under the alias
 | `beyond4_prs_submission`            | Deep Holes of Projective Reed--Solomon Codes Beyond Redundancy Four: Recursive Carriers and Exact Classifications Through Redundancy Ten | `reed-solomon`     | 71    | 12  | 19  | 47   | 6   | 143    |
 | `blown_up_theta_lattice`            | Integral Cohomology and Modular Decomposition for the Theta Divisor of a Cubic Threefold                                                 | `cubic-threefolds` | 11    | 4   | 3   | 2    | 2   | 45     |
 | `chordal_conference_reconstruction` | Chordal and Conference Cubics: Reconstruction and a Residual \(C_2\)-Torsor                                                              | `clebsch`          | 23    | 4   | 5   | 8    | 3   | 36     |
-| `clebsch_factorization`             | Quadratic trade rigidity and cubic orientation in conic matching quotients                                                               | `clebsch`          | 47    | 7   | 9   | 5    | 10  | 53     |
-| `clebsch_passages`                  | Golden descent and operator realizations of the Clebsch cubic                                                                            | `clebsch`          | 39    | 7   | 0   | 4    | 0   | 38     |
-| `clebsch_rigidity`                  | Reconstructing the Clebsch code and its golden orientation from its deep-hole syndrome locus                                             | `clebsch`          | 29    | 4   | 1   | 9    | 4   | 34     |
+| `clebsch_factorization`             | Quadratic Trade Rigidity and Cubic Orientation in Conic Matching Quotients                                                               | `clebsch`          | 47    | 7   | 9   | 5    | 10  | 53     |
+| `clebsch_passages`                  | The Clebsch Cubic: Hitchin's Icosahedral Double Cover and Conference-Matrix Rigidity                                                     | `clebsch`          | 39    | 7   | 0   | 4    | 0   | 38     |
+| `clebsch_rigidity`                  | Reconstructing the Clebsch Code from Its Deep-Hole Syndrome Locus                                                                        | `clebsch`          | 29    | 4   | 1   | 9    | 4   | 34     |
 | `clebsch_rigidity_companion`        | Computational strengthenings of Clebsch syndrome rigidity                                                                                | `clebsch`          | 29    | 7   | 2   | 2    | 1   | 22     |
-| `complete_repair_ports`             | Complete Bounded Repair Ports: Transfer, Reliability, and Geometric Structure                                                            | `complete-ports`   | 23    | 9   | 1   | 4    | 5   | 35     |
+| `complete_repair_ports`             | Exact Transfer of Bounded Linear Recovery and Relative Weight Hierarchies                                                                | `complete-ports`   | 24    | 12  | 0   | 9    | 2   | 69     |
 | `conference_cut_spectra`            | Balanced Cuts of Conference Matrices: Squared-Spectrum Rigidity and Hermitian Holonomy                                                   | `golden`           | 16    | 6   | 0   | 2    | 1   | 19     |
 | `continuation_graph_rigidity`       | Semilinear rigidity of four-point-frame continuation graphs                                                                              | `continuation`     | —     | 5   | 3   | 3    | 0   | 18     |
 | `cubic_gluing_resolvent`            | The Discriminant Resolvent of the \(A_5\)-Cubic Pencil                                                                                   | `cubic-threefolds` | 11    | 1   | 1   | 3    | 3   | 22     |
-| `cubic_stabilization_irrationality` | Sharpness of Irrationality after One Stabilization for Cubic Threefolds                                                           | `cubic-threefolds` | 10    | 3   | 1   | 5    | 3   | 6      |
+| `cubic_stabilization_irrationality` | Sharpness of Irrationality after One Stabilization for Cubic Threefolds                                                                  | `cubic-threefolds` | 10    | 3   | 0   | 1    | 3   | 27     |
 | `cubic_stabilization_m1`            | Irrationality of Cubic Threefolds after One Stabilization                                                                                | `cubic-threefolds` | 21    | 2   | 2   | 6    | 5   | 40     |
 | `dihedral_schreier_node_kayles`     | Node Kayles on Conic Schreier Graphs: Dihedral and Polyhedral Templates                                                                  | `dihedral`         | 19    | 15  | 4   | 4    | 5   | 90     |
 | `discrepancy_one_flips`             | Standard Flips of Discrepancy One: Extremal \(J\)-Normalization and the Meijer Aperture at \(\nu=1\)                                     | `clebsch`          | 12    | 3   | 6   | 2    | 3   | 34     |
 | `equivariant_robust_completion`     | Frobenius-equivariant pair extension and robust repair of eight-arcs                                                                     | `paper-frob-eq`    | 17    | 5   | 2   | 3    | 7   | 37     |
 | `golden_operator`                   | The golden conference operator and its shadow sisters                                                                                    | `golden`           | —     | 7   | 1   | 3    | 2   | 14     |
 | `hodge_atom_marker_ledger`          | Hodge Atoms as Occurrence-Indexed Marker Ledgers                                                                                         | `cubic-threefolds` | 6     | 3   | 0   | 0    | 1   | 26     |
+| `integral_secant_arcs`              | Integral Secant Distributions and Improved Bounds for Complete (k,n)-Arcs                                                                | `relconic`         | 18    | 4   | 8   | 3    | 4   | 81     |
 | `mds_css_transversal_groups`        | Diagonal Isoduality and Transversal Clifford Groups of MDS--CSS Codes                                                                    | `ame-lu`           | 23    | 7   | 4   | 5    | 3   | 42     |
 | `passant_code_q13`                  | Reconstructing $\PG(2,13)$, its conic, and polarity from the minimum words of a binary conic code                                        | `clebsch`          | 16    | 1   | 0   | 1    | 0   | 12     |
 <!-- trust-spine:end area=papers section=manuscripts -->
@@ -2545,7 +2603,7 @@ Improved Bounds for Complete (k,n)-Arcs* under the alias
 | 2 | Node Kayles on Conic Schreier Graphs: Dihedral and Polyhedral Templates | exact nimbers for an explicit infinite family | rebuilt as LaTeX on a spine; owes a value fix |
 | 3 | Arcs complete outside a conic: a prescribed-hole defect identity and matching-design rigidity | defect identity → rigidity → stability | local candidate + scoped Lean; archive gate |
 | 4 | Reconstructing the Clebsch code and its golden orientation from its deep-hole syndrome locus | conic-filling rigidity, gaps, decoding, universal chord defect, golden orientation | human core + computational companion, synchronized release gates green |
-| 5 | Complete Bounded Repair Ports: Transfer, Reliability, and Geometric Structure | general MDS local reconstruction + exact bounded transfer | spine refrozen under a no-computation admission rule |
+| 5 | Exact Transfer of Bounded Linear Recovery and Relative Weight Hierarchies | associated shortening–puncturing pair, exact rank-stratified helper costs, ungated transfer, and associative composition | 24-page verified standalone candidate; algorithm/bound development active; publication gated |
 | 6 | Frobenius-equivariant pair extension and robust repair of eight-arcs | every invariant eight-arc in `PG(2,25)` pair-extends | extremal gate cleared; bookkeeping + graph remain |
 | 7 | Semilinear rigidity of four-point-frame continuation graphs | `Aut(frame graph)` = ambient semilinear group, `q ≥ 13` | manuscript complete; Lean planned; audit gated |
 | — | Deep holes of projective Reed–Solomon codes beyond redundancy four: exact classifications through redundancy ten | exact R5–R10 at stated field ranges + coherent-polar high-field containment | 56-page reproducible V2; local release gates green, public revision unset |

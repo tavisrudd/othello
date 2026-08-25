@@ -1,7 +1,7 @@
 # Work Summary — Week-by-Week Timeline
 
 Companion to [`2026-07-31-work-summary.md`](2026-07-31-work-summary.md) (the timeless scope report).
-Activity spans **2026-06-14 → 2026-08-20**, with quiet stretches Jun 28–30, Jul 27, and Aug 16–17.
+Activity spans **2026-06-14 → 2026-08-25**, with quiet stretches Jun 28–30, Jul 27, and Aug 16–17.
 This is the *chronological* view; the scope report is the *state* view.
 
 ## Content split between the two documents — binding rule
@@ -1197,6 +1197,62 @@ marking rather than absolute.
   odd-label Frobenius marking that selects the exotic member, and C925 continued the modular
   direct-QDM proof packet, whose `m = 2` ambiguity is now localized to consecutive discrepant
   receiver overlaps.
+
+## Week 14 — Aug 21–25 · Three manuscript spines are rebuilt and exact level two emerges
+
+- **Aug 21 — the elliptic resolvent becomes its own paper, while two other manuscripts clear cold
+  review.** C935 identified the exotic gluing torsor with the discriminant orientation of the actual
+  elliptic two-division cover. C936 then built the eleven-page modular-resolvent companion: `T=81t²`,
+  `r=9t`, base `X₀(6)`, cyclic `A₃` monodromy, exact cusp and boundary data, the factor-five Prym
+  comparison, and the chordal twelve-point icosahedral certificate; hostile re-review accepted the
+  repaired paper and a closeout pass added the eta-quotient formula for `t`. C937 rebuilt the
+  Frobenius-equivariant completion paper in layers and C938's bounded conceptual scout confirmed
+  that its residual `PG(2,25)` certificate still has no honest global replacement. C939 proved the
+  matched-availability seed pair and its positive-density asymptotically good lift for the recovery
+  paper. C942 finished the public reviewer guide for the one-stabilization epilogue after formal,
+  mathematical, and hostile cold reads.
+
+- **Aug 22 — higher-arc integer envelopes and rank-stratified recovery land.** C943 replaced coined
+  conference/recovery vocabulary across the paper portfolio with conventional terminology, leaving
+  only Paper I's pre-existing trust dependency before full export. C944 applied the same discipline
+  inside the recovery manuscript. C945 produced the separate *Integral Secant Distributions* paper:
+  exact integer degree envelopes, factor-pair resonance families, modular-lift surcharges, human
+  proofs, evidence, partial Lean coverage, and a bounded priority ledger. C946 derived exact
+  multi-target confinement; C947 identified finite-field minimum joint row support, proved neither
+  submodularity nor supermodularity and NP-completeness already for one binary demand, and bounded the
+  arithmetic sequel; C948 then proved that relative generalized Hamming weights of the associated
+  nested pair are exactly the rank-stratified helper costs, with the dual ambiguity hierarchy and
+  best-target, MDS, service-rate, and reliability consequences.
+
+- **Aug 23 — the speculative all-stabilizations route is stress-tested to failure boundaries.** A
+  dense C925 sequence enumerated the `b₃=0` Fano tail, closed toric and blow-up-chain carriers,
+  reduced the non-Fano residue through conic bundles and del Pezzo fibrations, and built a
+  Stokes-decorated ledger. The same run corrected a false empty-class assertion and withdrew a
+  candidate birational-invariance theorem after a splitting counterexample exposed circularity.
+  The surviving value was a sharply delimited cancellation/rationality route, not a proof of the
+  conditional all-`m` headline.
+
+- **Aug 24 — the recovery paper is rebuilt, exact level two replaces the failed cubic headline, and
+  the sharp higher-arc construction gate opens.** C950–C952 rebuilt the recovery manuscript around
+  the shortening–puncturing pair and exact relative-weight hierarchy; C954 added dual failure
+  thresholds; C957 restored the exact finite weighted rank-one formula; C959 removed generator-basis
+  dependence; C960 proved ungated arbitrary-rank transfer through joint prescribed-coset costs; and
+  C961 proved associative min-plus composition with sharp envelopes, producing a verified
+  twenty-four-page standalone candidate. In the cubic lane, the bounded C925 chain was distilled
+  into C956's ten-page paper: a quartic-del-Pezzo two-variable rationality theorem and exact
+  stabilization level two for two explicit smooth cubic threefolds. C958 began extracting explicit
+  maps. In the relative-conic lane, C949 proved `t₇(2,9)=39` structurally, isolated the five-character
+  blocking core, excluded three natural `q=27` symmetry models, and reduced the Frobenius case to two
+  canonical branches.
+
+- **Aug 25 — explicit formulas and signed incidence take over the frontiers.** C958 identified and
+  parametrized the residual norm-one torus, constructed the full rational Cox coboundary, coupled it
+  to the norm chart, and reduced the type-`I₁` tangent quotient to one four-parameter inverse; type
+  `I₃` remains. C949 descended the centered incidence vector to a signed secant codeword of support
+  `4q−6`, with no tangents and opposite signs on every support 2-secant, sharpening the remaining
+  `q=27` construction gate without completing it. C962 was allocated for paper-owned recovery
+  algorithms and bounds, explicitly excluding manuscript and formalization work until the mathematics
+  is ready.
 
 ---
 

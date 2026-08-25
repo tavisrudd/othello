@@ -1,6 +1,6 @@
 # Portfolio results summary snapshot
 
-**Date:** 2026-08-20
+**Date:** 2026-08-25
 
 A self-contained summary of the major results of an ongoing programme in
 finite geometry, coding theory, and combinatorial game theory. It is written
@@ -42,12 +42,13 @@ The results are grouped as follows.
    same \(A_5\)-invariant cubic pencil as the conference member in sections 1
    and 3, with an exact oriented return to the six-axis carrier.
 6. The cubic-threefold stabilization programme — the exotic cubic realization
-   of the golden carrier, now carried by two of its own manuscripts. For every
-   smooth complex cubic threefold \(X\), the product \(X\times\mathbf P^1\) is
-   irrational; and every smooth \(A_5\)-invariant cubic threefold in Roulleau's
-   pencil is universally \(CH_0\)-trivial. The one-stabilization manuscript is
-   an unnumbered epilogue to the numbered series; a second manuscript states
-   the all-\(m\) claim conditionally.
+   of the golden carrier. For every smooth complex cubic threefold \(X\), the
+   product \(X\times\mathbf P^1\) is irrational; every smooth \(A_5\)-invariant
+   cubic threefold in Roulleau's pencil is universally \(CH_0\)-trivial; and two
+   explicit smooth cubic threefolds have exact stabilization level two. The
+   one-stabilization epilogue and the exact-level-two paper are separate
+   manuscripts. An older all-\(m\) route remains only as a conditional research
+   programme.
 7. The golden conference operator source programme — one marked order-six
    conference operator and the cubic, polar, determinantal, fermionic,
    anomaly, and lattice shadows it generates. This is a source-development
@@ -55,30 +56,34 @@ The results are grouped as follows.
    section 3, not a manuscript of its own.
 8. *Arcs complete outside a conic: a prescribed-hole defect identity and
    matching-design rigidity*.
-9. *Deep holes of projective Reed–Solomon codes beyond redundancy four:
+9. *Integral Secant Distributions and Improved Bounds for Complete
+   \((k,n)\)-Arcs* — exact integer degree envelopes and modular-lift
+   improvements for complete higher arcs.
+10. *Deep holes of projective Reed–Solomon codes beyond redundancy four:
    recursive carriers and exact classifications through redundancy ten*.
-10. *Bounded Recovery Structures of Linear Codes: Transfer, Reliability, and
-   Geometry* — local memory and exact transfer of erasure repair.
-11. *Local-Unitary Rigidity and Quantitative Rounding for Stabilizer AME
+11. *Exact Transfer of Bounded Linear Recovery and Relative Weight
+   Hierarchies* — local memory, exact rank-stratified transfer, and
+   compositional recovery costs.
+12. *Local-Unitary Rigidity and Quantitative Rounding for Stabilizer AME
    States* — every product-unitary intertwiner of a stabilizer absolutely
    maximally entangled state is local Clifford.  The transversal-group half of
    this material now stands alone as *Diagonal Isoduality and Transversal
    Clifford Groups of MDS–CSS Codes*.
-12. *Frobenius-equivariant pair extension and robust repair of eight-arcs* —
-    extending Frobenius-invariant arcs by conjugate point pairs.
-13. *Semilinear rigidity of four-point-frame continuation graphs* — an abstract
-    graph that remembers its ambient plane.
-14. *The Clebsch Schur--Sarkisov spine* — the conic deep-hole port
-    Schur-generates the two outer Fano modules, while the conic-link code is
-    their defect-two jet modification.
-15. *The discrepancy-one case of the Shen--Shoemaker extremal flip spectrum* —
-    a short standalone correction note that supplies the two steps their proof
-    chain omits, so their conclusions cover every codimension-two blow-up.
-16. Unassigned adjacent results: a residual-multiplier exclusion for Hadamard
-    matrices of order 668, the query complexity of reconstructing an aligned
-    design, and a ladder of binary codes along the exceptional root systems
-    that is proved but closed as a publication route.
-17. Two open programmes with substantial partial results: complete arcs of
+13. *Frobenius-equivariant pair extension and robust repair of eight-arcs* —
+   extending Frobenius-invariant arcs by conjugate point pairs.
+14. *Semilinear rigidity of four-point-frame continuation graphs* — an abstract
+   graph that remembers its ambient plane.
+15. *The Clebsch Schur--Sarkisov spine* — the conic deep-hole port
+   Schur-generates the two outer Fano modules, while the conic-link code is
+   their defect-two jet modification.
+16. *The discrepancy-one case of the Shen--Shoemaker extremal flip spectrum* —
+   a short standalone correction note that supplies the two steps their proof
+   chain omits, so their conclusions cover every codimension-two blow-up.
+17. Unassigned adjacent results: a residual-multiplier exclusion for Hadamard
+   matrices of order 668, the query complexity of reconstructing an aligned
+   design, and a ladder of binary codes along the exceptional root systems
+   that is proved but closed as a publication route.
+18. Two open programmes with substantial partial results: complete arcs of
     square-root size relative to a conic, and the outcome of the cap game on
     odd projective planes.
 
@@ -1105,16 +1110,44 @@ not another finite-field census.
 ## The cubic-threefold stabilization programme: the exotic cubic realization
 
 This began as quarantined research built after the fifth paper was frozen, and
-it now has two manuscripts of its own. The **one-stabilization epilogue** proves
+it now has several manuscript outputs of its own. The **one-stabilization epilogue** proves
 that \(X\times\mathbf P^1\) is irrational for every smooth complex cubic
 threefold \(X\), and carries the universal \(CH_0\)-triviality of Roulleau's
 pencil alongside it; it is an unnumbered epilogue to the numbered series and
-deliberately not a sixth numbered paper. A **second manuscript** states the
-all-\(m\) claim, that \(X\times\mathbf P^m\) is irrational for every \(m\), and
-is explicitly conditional on two stated hypotheses about a marked continuation
-across the thresholds of one equivariant cobordism. Both manuscripts are
-complete drafts under referee-style revision; neither has been submitted, and
-priority closure is not complete for the research material around them.
+deliberately not a sixth numbered paper.  *Sharpness of Irrationality after One
+Stabilization for Cubic Threefolds* proves exact stabilization level two for
+two displayed smooth cubic threefolds.  An older all-\(m\) manuscript remains
+explicitly conditional on two stated hypotheses about marked continuation
+across the thresholds of one equivariant cobordism. None has been submitted,
+and priority closure is not complete for the surrounding research material.
+
+The exact-level-two result is constructive.  If a smooth quartic del Pezzo
+surface \(S\) over a characteristic-zero field has a rational point and
+stably permutation geometric Picard lattice, then \(S\times\mathbf A^2\) is
+rational.  The engine is a descended unimodular tangent section for a
+projectively linear torus action, producing a rational Rosenlicht quotient.
+Applied to both explicit Tschinkel--Zhang cubic families, it gives
+\(X_{j,r}\times\mathbf P^2\) rational for every member.  For the two displayed
+smooth cubic threefolds \(X/\mathbf Q\), the one-stabilization theorem supplies
+the lower bound and the quotient construction supplies the upper bound:
+\[
+ \ell_{\mathbf Q}(X)=\ell_{\mathbf C}(X_{\mathbf C})=2.
+\]
+Equivalently, \(Y=X\times\mathbf P^1\) is nonrational over both fields while
+\(Y\times\mathbf A^1\) is rational over \(\mathbf Q\).  Exact Cox-weight,
+saturation, tangent-matrix, localized-branch, inverse-graph, and Bézout checks
+support the human proof; no Lean formalization of this new theorem is claimed.
+
+A separate modular-resolvent companion identifies the signed nonstandard
+\(A_5\)-cubic parameter with the sign/discriminant resolvent of the actual
+relative norm-axis elliptic two-division cover.  With \(T=81t^2\) and \(r=9t\),
+the base is \(X_0(6)\); the sign and split level-six subgroups, cyclic
+\(A_3\)-monodromy, cusp widths, and the two additional modular-interior cubic
+boundary values are explicit.  At the chordal value an exact orbit-and-ideal
+certificate gives the reduced twelve-point icosahedral transverse divisor,
+conditional only on the stated secant-cubic identification.  Golden
+orientation turns the rational two-division triple into the cyclic cubic
+splitting cover, with \(t=3(\eta(3\tau)/\eta(\tau))^6\).
 
 ### Which cubics, and why the exotic sheet is forced
 
@@ -1896,6 +1929,58 @@ visible on its fibres, with equality realized by two collinear triples on a
 split quadratic meeting the arc once on each component. A classification-free
 proof of that six-hole stability statement is the remaining route.
 
+## *Integral Secant Distributions and Improved Bounds for Complete \((k,n)\)-Arcs*
+
+The prescribed-hole method extends from ordinary arcs to selected block
+families in symmetric designs.  Prescribing the two degree sums, lower degrees
+on the required point class, and geometric upper caps gives two balanced
+integer minima whose sum cannot exceed the fixed block-pair intersection
+count.  Its real relaxation is exactly the classical BIBD variance, or
+expander-mixing, inequality; the new information is the simultaneous integral
+envelope and its arithmetic correction.
+
+For a complete \((k,s)\)-arc, maximal secants form a linear hypergraph.  Their
+matching number is the correct concurrence cap, and disjoint secant pairs
+decompose canonically into concurrence cliques.  The resulting prescribed-hole
+identity has a rigid zero-defect equality pattern.  More generally, for fixed
+\(\lambda=uv\), \(d=u+v+1\), \(q=dn\), and \(s=(u+1)n+1\), every
+\(\lambda\)-fold complete arc satisfies
+\[
+ k\ge udn^2+c_{\mathrm{lat}}n-O_{u,v}(1),
+\]
+where \(c_{\mathrm{lat}}\) is the minimum over an explicit integer offset of
+the larger of the coverage and line-degree envelopes.  Every rational
+resonance comes from one ordered factorization \(\lambda=uv\), and the integral
+coefficient is strictly stronger than the spectral relaxation on every such
+branch.
+
+When \(d\) is a power of the characteristic, a modular-lift dichotomy gives a
+further surcharge unless the dual maximal-secant family is already an exact
+\(\lambda\bmod p\) multiset.  The exact core is excluded unconditionally in
+the ordinary characteristic-three and the relevant even-degree branches,
+giving the paper's sharpened applications.  The same integer-envelope theorem
+also applies to projective point--hyperplane systems and robust
+nonextendibility of projective codes.
+
+The manuscript is eighteen pages with human proofs, an exact evidence bundle,
+a partial Lean companion, hostile review, and a verified standalone export.
+Its literature audit deliberately licenses no global firstness sentence: the
+moment identity and its spectral form are classical, while the recorded search
+found no direct predecessor for the simultaneous integer envelopes, their
+unbounded resonance families, or the modular-lift surcharge.
+
+The construction problem opened by these bounds is separate and remains
+unfinished.  At \(q=9\), a Hermitian-unital plus five-orbit switch proves the
+exact base value \(t_7(2,9)=39\).  Its nineteen maximal secants form a
+five-character dual blocking core of size \(2q+1\).  At \(q=27\), the matching
+candidate would be a 55-point blocking core with spectrum
+\(1^{461}2^{17}3^{78}4^{194}5^7\), producing a complete \((279,19)\)-arc.
+Trace-\(x/y\), trace-\(x\), and scalar-\(C_{13}\) invariant cores are excluded;
+the Frobenius-fixed audit leaves two canonical four-point branches.  The
+centered incidence descent produces a signed codeword of weight \(4q-6\), with
+no tangents and opposite signs on every support two-secant.  This is a sharp
+structural reduction, not an asymptotic construction or a completed theorem.
+
 ## *Deep holes of projective Reed–Solomon codes beyond redundancy four: recursive carriers and exact classifications through redundancy ten*
 
 A projective Reed–Solomon code is the evaluation code of polynomials of bounded
@@ -2056,11 +2141,14 @@ The methods combine exact invariant theory, Plücker inversion, Gale duality,
 catalecticants and apolarity, finite-group descent, low-genus point bounds, and
 independently replayed bounded classifications.
 
-## *Bounded Recovery Structures of Linear Codes: Transfer, Reliability, and Geometry*
+## *Exact Transfer of Bounded Linear Recovery and Relative Weight Hierarchies*
 
-The organizing object is the family of normalized radius-\(r\) recovery
-equations at a target coordinate.  It retains the exact helper supports,
-scalar recovery coefficients, and failure probabilities.
+The organizing object is the family of normalized recovery equations on a
+target coordinate set. It retains exact helper supports and scalar recovery
+coefficients.  Its associated nested code pair is the
+shortening--puncturing pair of the inner dual; this removes any dependence on
+a chosen generator-row basis and makes relative generalized Hamming weights
+the natural rank-stratified invariants.
 
 ### General MDS local reconstruction
 
@@ -2132,6 +2220,46 @@ formally verified.
 - A finite-separable trace theorem converts ordinary extension-field dual
   distance into the functional-dual condition while preserving exact
   support.
+
+### Relative weights, ungated transfer, and composition
+
+Let \(K_P\subseteq D_P\) be the associated shortening--puncturing pair for a
+target set \(P\).  For every \(t\), its \(t\)-th relative generalized Hamming
+weight is exactly the minimum helper-union size of a normalized recovery
+system for a \(t\)-dimensional recoverable target subspace.  Consequently the
+relative-weight hierarchy gives the sharp dimension-by-dimension confinement
+threshold, the best-target generalized-Hamming-weight identity, cooperative
+locality min--max bounds, MDS rigidity, and demandwise service-rate and
+reliability consequences.  The dual relative hierarchy likewise gives the
+minimum number of failures leaving each dimension of target ambiguity; the
+proof uses pointwise shortening--puncturing duality, not a false
+hierarchy-level duality formula.
+
+The distance gate can be removed completely.  For a target subspace \(T\),
+minimize the target-normalized joint coset-support cost over every linear map
+from \(T\) into the full outer functional dual, and add the independently
+minimized costs in the other inner blocks.  The resulting number
+\(\Gamma_{j,T}\) is exactly the first nonconfined helper cost at block \(j\).
+Below it, restriction to the target block and zero extension are inverse
+bijections on normalized recovery systems, preserving both coefficients and
+exact supports.  The earlier relative-weight and pointed weighted formulas are
+specializations of this ungated optimization, not competing theorems.
+
+These costs compose exactly through repeated concatenation.  Ordinary
+prescribed-coset support is substituted by a min-plus law over the labelled
+intermediate functional maps.  Target-normalized numerical composition needs
+the helper-restriction coset-support function together with the intermediate
+target contribution; coefficient-level composition retains the full lift
+relation.  Both forms are associative.  A single scalar threshold does not
+compose by itself, because it forgets precisely the functional labels that the
+next outer code constrains.  Compatible two-sector dual-distance recursions and
+sharp cost envelopes follow from the same law.
+
+The paper's main proofs are human proofs with cited classical inputs.  Its
+paper-local Lean package verifies the associated-pair exact sequence and four
+terminal statements; the stronger relative-weight, ungated-transfer, and
+composition theorems are explicitly recorded as absent from that formal
+package rather than being represented by certificates or assumed interfaces.
 
 ### Prescribed positive-density recovery structures
 
@@ -2315,20 +2443,19 @@ Stichtenoth self-dual TVZ theorem.
 
 ### Material outside the current manuscript
 
-The paper deliberately omits sequential-composition semantics, general service
-regions, coefficient optimization, the log-concavity history, product
-constructions, generic tract/foundation exposition, and an optional
-blocker-stability strengthening. The formal library also contains a
+The paper deliberately omits extended EXIT theory, deletion--contraction,
+secondary geometries, vector bandwidth, generic coefficient optimization,
+and BGS packing. Sequential timing semantics and finite separator-control
+algebras remain a separate theory layer. The formal library also contains a
 \([10,4,6]_9\) seed with dual distance four that the manuscript does not use.
 
 The admission rule for the main proof spine is deliberately strict: a result
 enters the body only with an exact stable statement, a complete human proof
-exposing the mechanism, a matching formal declaration, a field-by-field
-adequacy check, an axiom audit naming every imported classical input, and **no
-computation or certificate anywhere in its logical dependency chain**.
-Computations, finite tables, and certificates support appendices but may not
-carry a body theorem. The general MDS reconstruction theorem above is what the
-revised spine leads with.
+exposing the mechanism, an explicit claim-by-claim formal-coverage
+classification, and exact attribution of imported inputs. Computations and
+certificates may support appendices but do not carry a body theorem. Formal
+absence is allowed only when it is stated honestly; it is not silently
+promoted to verification.
 
 ### Related negatives
 
@@ -3478,8 +3605,8 @@ are vacuous because a natural number can encode the whole residual.
   the paper's geometric contrast as Segre against Veronese and supersedes an
   earlier Gröbner certification over \(\mathbf F_{11}\), which survives as an
   independent replay.
-- **The cubic-threefold stabilization programme:** now two manuscripts rather
-  than quarantined research. The one-stabilization epilogue proves
+- **The cubic-threefold stabilization programme:** now several manuscript
+  outputs rather than quarantined research. The one-stabilization epilogue proves
   unconditionally that \(X\times\mathbf P^1\) is irrational for every smooth
   complex cubic threefold, through the ordinary Hodge-atom package and a
   rank-two atomic residue discriminant equal to \(4/9\) on the cubic atom, and
@@ -3494,7 +3621,13 @@ are vacuous because a natural number can encode the whole residual.
   Colliot-Thélène's separated-variable locus, all but finitely many members lie
   outside the Yang–Yu–Zhu coprime-degree locus because Eckardt points separate
   them, and no elliptic-product route reaches Voisin's criterion. The second
-  manuscript states the all-\(m\) claim conditionally, on a marked continuation
+  exact-level-two paper proves
+  \(\ell_{\mathbf Q}(X)=\ell_{\mathbf C}(X_{\mathbf C})=2\) for two explicit
+  smooth cubic threefolds and gives a two-variable rationality theorem for
+  quartic del Pezzo surfaces with a rational point and stably permutation
+  geometric Picard lattice. A modular-resolvent companion identifies the
+  signed cubic parameter with the elliptic two-division discriminant cover over
+  \(X_0(6)\). The older all-\(m\) manuscript states its claim conditionally, on a marked continuation
   across the thresholds of one equivariant cobordism; the endpoint contrast
   there is unconditional and the transport is proved, but the threshold
   comparison is not. The finer invariant \(\nu_6\) gives a second proof of the
@@ -3534,14 +3667,27 @@ are vacuous because a natural number can encode the whole residual.
   rigidity, and stability formally verified; six exact values of
   \(\rho_{\mathcal C}\); the \(q=16\) classification compressed to three
   exceptional cases.
+- ***Integral Secant Distributions and Improved Bounds for Complete
+  \((k,n)\)-Arcs:*** an eighteen-page manuscript proves exact integer degree
+  envelopes whose real relaxation is classical spectral mixing, ordered
+  factor-pair resonance families, and modular-lift surcharges with two
+  unconditional geometric applications. The separate sharp-asymptotics
+  programme proves \(t_7(2,9)=39\) structurally and reduces the first
+  \(q=27\) target to two Frobenius branches and a signed support codeword; no
+  asymptotic construction is yet claimed.
 - ***Deep holes of projective Reed–Solomon codes beyond redundancy four:***
   exact at redundancies three, five, six, seven, eight, nine, and ten at the
   stated field ranges, with a uniform high-field containment theorem at
   arbitrary redundancy; not a proof of the general deep-hole conjecture.
-- ***Bounded Recovery Structures of Linear Codes:*** manuscript assembled
-  around the sharp confinement threshold and general MDS reconstruction
-  theorem; central transfer and cubic results formally verified; specialist
-  citation review outstanding.
+- ***Exact Transfer of Bounded Linear Recovery and Relative Weight
+  Hierarchies:*** the associated shortening--puncturing pair's relative
+  generalized Hamming weights are the exact rank-stratified helper costs; an
+  ungated joint prescribed-coset optimization gives the exact first
+  nonconfined cost; and the labelled costs and lift relations compose
+  associatively by min-plus substitution through repeated concatenation. The
+  twenty-four-page authority and verified standalone gates pass. Human proofs
+  carry the main spine; the paper-local Lean package verifies four terminals
+  and explicitly does not cover the stronger new theorems.
 - ***Local-Unitary Rigidity of Stabilizer AME States:*** rigidity proved for
   every stabilizer AME state, not only the MDS–CSS family, and stable under
   approximate equality with explicit constants; the \(m=2\) proof bridge is
