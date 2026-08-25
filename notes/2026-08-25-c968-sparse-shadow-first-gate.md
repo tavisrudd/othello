@@ -49,8 +49,12 @@ serialized tree.
 - `cargo test --workspace --all-features`: pass;
 - `cargo clippy --workspace --all-targets --all-features -- -D warnings`: pass;
 - Paper-I exhaustive search: automorphism order 120, one vertex orbit;
-- property test: canonical identity invariant under all tested cyclic
-  relabelings;
+- property tests: canonical identity invariant under generated arbitrary
+  permutations for both uncalibrated and calibrated fixtures, with explicit
+  idempotence;
+- schema rejection tests cover unknown fields, unsupported versions,
+  non-normalized undirected edges, malformed orbital partitions, and duplicate
+  calibration vertices;
 - black-box CLI tests: Paper-I validation succeeds, every gated Paper-II--V
   input exits nonzero while naming its own exact required export, repeated
   canonicalize runs are byte-identical, and identical inputs compare

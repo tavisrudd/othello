@@ -194,7 +194,10 @@ have end-to-end CLI production, replay, and corruption-rejection coverage.
 Reconstruction replay binds the full public canonical wrapper—including group
 order, generator closure, and vertex orbits—to its independently checked inner
 proof; the closure walk cannot leave the certified finite group.
-Canonicalization idempotence is explicit. The performance
+Canonicalization idempotence is explicit, and generated arbitrary permutations
+now exercise invariance for both calibrated and uncalibrated fixtures instead
+of the earlier cyclic-only sample. Strict schema tests cover unknown fields,
+versions, edge normalization, partitions, and calibration distinctness. The performance
 record is `../../sparse-shadow/docs/performance-paper-i.md`; its wall-time drift
 licenses no optimization claim.
 

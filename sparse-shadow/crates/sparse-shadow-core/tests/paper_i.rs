@@ -1,7 +1,8 @@
 use proptest::prelude::*;
 use sparse_shadow_core::{
-    CanonicalCertificate, EquivalenceOutcome, InputArtifact, ProfileInput, canonicalize, compare,
-    reconstruct, validate, verify_certificate, verify_equivalence, verify_reconstruction,
+    CanonicalCertificate, EquivalenceOutcome, InputArtifact, ProfileInput, ShadowError,
+    canonicalize, compare, reconstruct, validate, verify_certificate, verify_equivalence,
+    verify_reconstruction,
 };
 
 const FIXTURE: &str = include_str!("../../../fixtures/paper-i-icosahedral-orbitals.json");
@@ -16,26 +17,28 @@ fn calibrated_fixture() -> InputArtifact {
     serde_json::from_str(CALIBRATED_FIXTURE).expect("committed calibrated fixture parses")
 }
 
-fn rotate(input: &mut InputArtifact, amount: u32) {
+fn relabel(input: &mut InputArtifact, permutation: &[u32]) {
     let ProfileInput::PaperIOrientation(paper) = &mut input.profile else {
         unreachable!();
     };
-    let n = u32::try_from(paper.shadow.vertices.len()).expect("fixture size fits u32");
     let mut vertices = paper.shadow.vertices.clone();
     for (old, value) in paper.shadow.vertices.iter().enumerate() {
-        let old = u32::try_from(old).expect("fixture index fits u32");
-        vertices[(old + amount).rem_euclid(n) as usize] = value.clone();
+        vertices[permutation[old] as usize] = value.clone();
     }
     paper.shadow.vertices = vertices;
     for relation in &mut paper.shadow.relations {
         for edge in &mut relation.edges {
-            edge[0] = (edge[0] + amount).rem_euclid(n);
-            edge[1] = (edge[1] + amount).rem_euclid(n);
+            edge[0] = permutation[edge[0] as usize];
+            edge[1] = permutation[edge[1] as usize];
             if !relation.directed && edge[0] > edge[1] {
                 edge.swap(0, 1);
             }
         }
         relation.edges.sort_unstable();
+    }
+    if let Some(triangle) = &mut paper.calibrated_triangle {
+        *triangle = triangle.map(|vertex| permutation[vertex as usize]);
+        triangle.sort_unstable();
     }
 }
 
@@ -96,6 +99,34 @@ fn malformed_orbital_partition_is_rejected() {
     };
     paper.shadow.relations[0].edges.pop();
     assert!(validate(&input).is_err());
+}
+
+#[test]
+fn schema_and_normalization_boundaries_reject_malformed_inputs() {
+    let mut unknown: serde_json::Value = serde_json::from_str(FIXTURE).expect("fixture JSON");
+    unknown["unexpected"] = serde_json::Value::Bool(true);
+    assert!(serde_json::from_value::<InputArtifact>(unknown).is_err());
+
+    let mut wrong_version = fixture();
+    wrong_version.schema = "sparse-shadow/v2".into();
+    assert!(matches!(
+        validate(&wrong_version),
+        Err(ShadowError::SchemaVersion { .. })
+    ));
+
+    let mut non_normal_edge = fixture();
+    let ProfileInput::PaperIOrientation(paper) = &mut non_normal_edge.profile else {
+        unreachable!();
+    };
+    paper.shadow.relations[0].edges[0] = [1, 0];
+    assert!(validate(&non_normal_edge).is_err());
+
+    let mut duplicate_calibration = fixture();
+    let ProfileInput::PaperIOrientation(paper) = &mut duplicate_calibration.profile else {
+        unreachable!();
+    };
+    paper.calibrated_triangle = Some([0, 0, 1]);
+    assert!(validate(&duplicate_calibration).is_err());
 }
 
 #[test]
@@ -164,7 +195,7 @@ fn calibrated_reconstruction_is_an_exact_oriented_return() {
 fn equivalence_and_inequivalence_certificates_replay() {
     let left = fixture();
     let mut relabeled = left.clone();
-    rotate(&mut relabeled, 3);
+    relabel(&mut relabeled, &[3, 8, 1, 10, 5, 0, 11, 4, 9, 2, 7, 6]);
     let equivalent = compare(&left, &relabeled).expect("comparison");
     assert!(matches!(
         equivalent.result,
@@ -195,12 +226,20 @@ fn equivalence_and_inequivalence_certificates_replay() {
 
 proptest! {
     #[test]
-    fn canonical_identity_is_rotation_invariant(amount in 0u32..12) {
-        let original = fixture();
-        let expected = canonicalize(&original).expect("canonical fixture");
-        let mut relabeled = original;
-        rotate(&mut relabeled, amount);
-        let actual = canonicalize(&relabeled).expect("canonical relabeling");
-        prop_assert_eq!(actual.canonical_id, expected.canonical_id);
+    fn canonical_identity_is_arbitrary_relabeling_invariant(
+        swaps in prop::collection::vec(0usize..12, 0..48)
+    ) {
+        let mut permutation: Vec<u32> = (0..12).collect();
+        for (step, &other) in swaps.iter().enumerate() {
+            permutation.swap(step % 12, other);
+        }
+
+        for original in [fixture(), calibrated_fixture()] {
+            let expected = canonicalize(&original).expect("canonical fixture");
+            let mut relabeled = original;
+            relabel(&mut relabeled, &permutation);
+            let actual = canonicalize(&relabeled).expect("canonical relabeling");
+            prop_assert_eq!(actual.canonical_id, expected.canonical_id);
+        }
     }
 }
