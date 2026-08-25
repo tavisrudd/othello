@@ -3536,8 +3536,17 @@
       "last": 964,
       "purpose": "Frobenius orbit-replacement graph: component census, connectivity, diameter, and Hall expansion",
       "sequence": 393
+    },
+    {
+      "count": 2,
+      "first": 965,
+      "kind": "reservation",
+      "lane": "cubic-threefolds",
+      "last": 966,
+      "purpose": "Post-C963 automated Galois descent and later triage of remaining cubic-threefold algorithmic implications",
+      "sequence": 394
     }
   ],
-  "next_id": 965,
+  "next_id": 967,
   "schema": "codex-task-id-allocations-v1"
 }
