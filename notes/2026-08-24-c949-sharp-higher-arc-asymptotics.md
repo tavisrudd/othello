@@ -1671,6 +1671,16 @@ family is lower priority.
   with three two-uniform directions; triangular cores have connector degrees
   `(3,3,3)` or `(4,4,3)`.  What remains open is existence and regular inverse
   realization of those cores, beginning with the constant repair `+1`.
+- **Settled by `ej`+`tt` — is the nearest classical four-blocking-set core a
+  cheap source of the admissible rows?**  Bruen--Fisher is exactly the
+  adjacent signed triangle `(j,sigma)=(0,1)`, and adjoining its horizontal
+  infinity point gives the dead `(1,3)` row.  No local repair works: the
+  difference of two three-line cores is a dual incidence-code word, whose
+  elementary support bound is `q+2`; below that bound coordinatewise binary
+  feasibility only flips the three distinguished points and yields sizes
+  `2q-2` or `2q-1`, not `2q+4` or `2q+5`.  The unexplained object is therefore
+  a global `Omega(q)` Radon trade that lands on one of `(SR1)` and admits the
+  regular inverse selection.
 - **Settled by the signed descent — what geometry does its support have?**
   Field-uniformly it is a signed untouchable set of size `4q-6`: it has no
   tangents, and every support 2-secant joins opposite signs.  At `q=9` its
