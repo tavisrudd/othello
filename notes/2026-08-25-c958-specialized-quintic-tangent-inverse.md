@@ -63,7 +63,9 @@ polynomials vanish over `Z`; the cleared common denominator is nonzero and has
 `124666` terms.  A left inverse between irreducible four-dimensional affine
 charts is dominant and hence birational, so this also supplies the opposite
 rational composite on a dense open.  The release replay takes about ninety
-seconds on the development host, including compilation.
+seconds on the development host, including compilation.  The checker reads
+`a` and `b` from the certificate rather than embedding `2,3`, so the same exact
+gate is ready for further cold specializations without source edits.
 
 Primary replay:
 

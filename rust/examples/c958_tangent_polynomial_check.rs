@@ -197,6 +197,8 @@ fn main() {
     let value: Value = serde_json::from_str(&fs::read_to_string(path).unwrap()).unwrap();
     let slices = row_values(&value, "slice_rows", false);
     let tangents = row_values(&value, "tangent_rows", true);
+    let a = value["specialization"]["a"].as_i64().unwrap();
+    let b = value["specialization"]["b"].as_i64().unwrap();
 
     let p = Poly::monomial([1, 1, 1, 1], BigInt::one());
     let constants = [
@@ -211,13 +213,13 @@ fn main() {
         (5, [0, 0, 1, 1], [0, 0, 1]),
         (6, [0, 1, 1, 1], [0, 1, 0]),
         (7, [0, 1, 0, 1], [0, 1, -1]),
-        (8, [0, 1, 1, 0], [0, 3, -2]),
+        (8, [0, 1, 1, 0], [0, b, -a]),
         (9, [1, 0, 1, 1], [1, 0, 0]),
         (10, [1, 0, 0, 1], [1, 0, -1]),
-        (11, [1, 0, 1, 0], [3, 0, -1]),
+        (11, [1, 0, 1, 0], [b, 0, -1]),
         (12, [1, 1, 0, 1], [1, -1, 0]),
-        (13, [1, 1, 1, 0], [2, -1, 0]),
-        (14, [1, 1, 0, 0], [1, -2, 1]),
+        (13, [1, 1, 1, 0], [a, -1, 0]),
+        (14, [1, 1, 0, 0], [b - a, 1 - b, a - 1]),
     ];
     for (index, exp, coefficients) in specifications {
         for (variable, coefficient) in coefficients.into_iter().enumerate() {
@@ -262,9 +264,9 @@ fn main() {
     }
     scaled_cox[15] = z[0]
         .mul(&z[1])
-        .scale(&BigInt::from(-3))
-        .add(&z[0].mul(&z[2]).scale(&BigInt::from(4)))
-        .sub(&z[1].mul(&z[2]));
+        .scale(&BigInt::from(b * (1 - a)))
+        .add(&z[0].mul(&z[2]).scale(&BigInt::from(a * (b - 1))))
+        .add(&z[1].mul(&z[2]).scale(&BigInt::from(a - b)));
 
     let mut rho = vec![Poly::default(); 5];
     for row in 0..5 {
