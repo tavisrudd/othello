@@ -33,19 +33,19 @@
 \maketitle
 
 \begin{abstract}
-The theorem that every smooth complex cubic threefold remains irrational
-after multiplication by \(\PP^1\) is sharp.  We exhibit explicit smooth cubic
-threefolds \(X/\mathbf Q\) for which \(X\times\PP^2\) is rational.  Thus the
-least number of independent variables required to make these threefolds
-rational is exactly two, over both \(\mathbf Q\) and \(\mathbf C\).  The
-rationality statement follows from a general result for quartic del Pezzo
-surfaces: if \(k\) has characteristic zero, \(S(k)\ne\varnothing\), and
-\(\Pic(S_{\bar k})\) is a stably permutation Galois module, then
-\(S\times\A^2\) is \(k\)-rational.  Its proof identifies a rational quotient
-of the projective Cox model by a saturated rank-three subtorus; the residual
-two-dimensional torus is rational.  Applied to the quartic-del-Pezzo
-fibrations of Tschinkel and Zhang, this proves rationality after adjoining two
-variables for both of their cubic series, strengthening their
+The irrationality of \(X\times\PP^1\) for every smooth complex cubic
+threefold \(X\) is sharp: two explicit smooth cubic threefolds over
+\(\mathbf Q\) become rational after product with \(\PP^2\).  Thus the least
+number of independent variables required to make these threefolds rational is
+exactly two, over both \(\mathbf Q\) and \(\mathbf C\).  We prove more
+generally that if \(k\) has characteristic zero, \(S\) is a smooth quartic del
+Pezzo surface with \(S(k)\ne\varnothing\), and \(\Pic(S_{\bar k})\) is a
+stably permutation Galois module, then \(S\times\A^2\) is \(k\)-rational.  We
+identify a rational quotient of the projective Cox model by a saturated
+rank-three subtorus; the residual two-dimensional torus is rational.  Applying
+this theorem to the quartic del Pezzo fibrations of Tschinkel and Zhang, we
+prove rationality after adjoining two variables for both of their cubic
+series, strengthening their
 stable-rationality conclusion to the uniform bound \(\PP^2\).  Consequently
 the stabilization level is two on explicit examples in cubic-threefold moduli
 and infinite at a very general point.  There are also smooth projective
@@ -573,9 +573,10 @@ fields; no specialization assertion is used.
 \end{proof}
 
 \begin{proof}[Proof of Theorem~\ref{thm:cubic-level}]
-The one-stabilization theorem states that, for every smooth complex cubic
-threefold \(X\), the variety \(X\times\PP^1\) is irrational
-\cite[Theorem~1.1]{RuddM1}.  It applies to \((X_j)_{\mathbf C}\).  Therefore
+Theorem~1.1 of version~0.15.0 of the one-stabilization manuscript states that,
+for every smooth complex cubic threefold \(X\), the variety
+\(X\times\PP^1\) is irrational \cite[Theorem~1.1]{RuddM1}.  It applies to
+\((X_j)_{\mathbf C}\).  Therefore
 neither \(X_j\) nor \(X_j\times\PP^1\) can be rational over \(\mathbf Q\),
 because rationality survives extension of the ground field.  Corollary
 \ref{cor:cubics} gives rationality at \(m=2\) over \(\mathbf Q\), and hence
@@ -617,7 +618,9 @@ This appendix records the exact cover used in
 Proposition~\ref{prop:tangent-section}.  It exposes the polynomials and the
 two surviving localized branches used in the geometric nonemptiness claim.
 The six empty branches below are exact Gr\"obner computations replayed by the
-public generator; the two surviving branches are then excluded by the
+public generator.  For each one, the public certificate also retains a
+machine-readable identity expressing a nonzero constant in the corresponding
+localized ideal.  The two surviving branches are then excluded by the
 displayed evaluations and B\'ezout identity.
 
 After discarding nonzero rational factors, the four evaluation determinants
@@ -643,7 +646,9 @@ character matrices and a transcription of the twenty Cox quadrics in
 \cite[Section~3]{TZ}.  It reconstructs the saturated rank-three lattice, the
 residual rank-two quotient, the tangent Jacobian, all four pairs
 \((D_i,M_i)\), the eight localized branches, and the B\'ezout identity above
-with SymPy~1.14.0.  It also derives the evaluation-kernel slice through the
+with SymPy~1.14.0.  The certificate retains exact Nullstellensatz identities
+for the six empty branches; both public programs verify those identities
+directly.  The generator also derives the evaluation-kernel slice through the
 orbit-test point and renders every computation-derived matrix, block, witness,
 determinant, minor, and B\'ezout coefficient printed in the manuscript into a
 checked TeX artifact.  A second checker independently verifies the resulting

@@ -61,8 +61,10 @@ for relative in (
     "flake.nix",
     "flake.lock",
     "verification/slice-cover-certificate.json",
+    "verification/groebner-empty-certificates.json",
     "verification/slice-cover-values.tex",
     "verification/derive_slice_cover.py",
+    "verification/generate_groebner_empty_certificates.py",
     "verification/check_slice_cover.py",
 ):
     assert (ROOT / relative).is_file() and relative in readme

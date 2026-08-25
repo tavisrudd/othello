@@ -623,6 +623,53 @@ def render_tex_artifact(certificate):
     ])
 
 
+def verify_empty_branch_certificates(path, slice_certificate):
+    """Verify retained identities for every localized branch marked empty."""
+    retained = json.loads(path.read_text(encoding="utf-8"))
+    assert retained["schema"] == "quartic-del-pezzo-groebner-empty-identities-v1"
+    assert retained["variables"] == ["a", "b", "localizer"]
+    a, b, localizer = sp.symbols("a b localizer")
+    parse = {"a": a, "b": b, "localizer": localizer}
+    determinants = [
+        sp.sympify(value, locals=parse)
+        for value in slice_certificate["symbolic_four_hyperplane_evaluation_determinants"]
+    ]
+    minors = [
+        sp.sympify(value, locals=parse)
+        for value in slice_certificate["symbolic_tangent_smoothness_minors"]
+    ]
+    determinant_numerators = [
+        sp.together(value).as_numer_denom()[0] for value in determinants
+    ]
+    minor_numerators = [
+        sp.together(value).as_numer_denom()[0] for value in minors
+    ]
+    delta = a * b * (a - 1) * (b - 1) * (a - b)
+    empty_codes = {
+        outcome["chosen_zero_factors"]
+        for outcome in slice_certificate["first_three_branch_outcomes"]
+        if outcome["localized_zero_locus"] == "empty"
+    }
+    assert set(retained["branches"]) == empty_codes
+    for code, record in retained["branches"].items():
+        generators = [
+            (minor_numerators if choice == "M" else determinant_numerators)[position]
+            for position, choice in enumerate(code)
+        ] + [localizer * delta - 1]
+        assert record["generators"] == [str(value) for value in generators]
+        assert len(record["multipliers"]) == len(generators) == 4
+        constant = sp.Integer(record["constant"])
+        assert constant != 0
+        multipliers = [
+            sp.sympify(value, locals=parse) for value in record["multipliers"]
+        ]
+        assert sp.expand(
+            sum(multiplier * generator for multiplier, generator in zip(
+                multipliers, generators
+            )) - constant
+        ) == 0
+
+
 parser = argparse.ArgumentParser()
 mode = parser.add_mutually_exclusive_group(required=True)
 mode.add_argument("--write-certificate", type=Path)
@@ -630,8 +677,10 @@ mode.add_argument("--check-certificate", type=Path)
 artifact_mode = parser.add_mutually_exclusive_group()
 artifact_mode.add_argument("--write-tex-artifact", type=Path)
 artifact_mode.add_argument("--check-tex-artifact", type=Path)
+parser.add_argument("--check-empty-certificates", type=Path, required=True)
 arguments = parser.parse_args()
 certificate = build_certificate()
+verify_empty_branch_certificates(arguments.check_empty_certificates, certificate)
 payload = json.dumps(certificate, indent=2, sort_keys=True) + "\n"
 tex_artifact = render_tex_artifact(certificate)
 if arguments.write_certificate is not None:

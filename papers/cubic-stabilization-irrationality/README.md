@@ -49,20 +49,22 @@ for isomorphic affine cylinders.
 
 ## Proof and evidence boundary
 
-The quotient, Galois descent, quartic-del-Pezzo reduction, and generic-fibre
-function-field arguments are proved in the manuscript. The proof imports the
-Cox and one-apparent-double-point geometry, universal-torsor splitting,
-four-type Galois classification, and explicit cubic fibrations from
-Tschinkel and Zhang at their stated pinpoints.
+We prove the quotient, Galois descent, quartic del Pezzo reduction, and
+generic-fibre function-field arguments in the manuscript. We use the Cox and
+one-apparent-double-point geometry, universal-torsor splitting, four-type
+Galois classification, and explicit cubic fibrations of Tschinkel and Zhang
+at their stated pinpoints.
 
 The exact-arithmetic generator
 [`verification/derive_slice_cover.py`](verification/derive_slice_cover.py)
 starts from the transcribed type-`I₃` matrices and twenty Cox quadrics. It
 reconstructs the saturated rank-three lattice, Cox weights, residual rank-two
 quotient, tangent Jacobian, four symbolic evaluation determinants, and the
-smooth-moduli witness cover. It also constructs the actual evaluation-kernel
-slice through the orbit-test point and renders all computation-derived values
-printed in the manuscript into the checked
+smooth-moduli witness cover. For each of the six empty localized branches,
+[`verification/groebner-empty-certificates.json`](verification/groebner-empty-certificates.json)
+retains an exact identity expressing a nonzero constant in the localized
+branch ideal. It also constructs the actual evaluation-kernel slice through
+the orbit-test point and renders all computation-derived values printed in the manuscript into the checked
 [`verification/slice-cover-values.tex`](verification/slice-cover-values.tex)
 artifact. A second program,
 [`verification/check_slice_cover.py`](verification/check_slice_cover.py),
@@ -89,14 +91,27 @@ This command reconstructs and independently checks the exact certificate,
 validates the claim and source ledgers, performs a deterministic manuscript build, and
 rejects TeX warnings or stale metadata.
 
+The retained empty-branch identities can be regenerated independently with
+Singular 4.4.1 and then rechecked by the full gate:
+
+```text
+nix shell nixpkgs#singular -c uv run --with sympy==1.14.0 python3 \
+  verification/generate_groebner_empty_certificates.py \
+  --write-certificate verification/groebner-empty-certificates.json
+```
+
 ## Files
 
 - `cubic_stabilization_irrationality.tex` — manuscript source;
 - `cubic_stabilization_irrationality.pdf` — generated manuscript;
 - `formal-annotations.tex` — nonprinting claim annotations;
 - `verification/derive_slice_cover.py` — exact reconstruction program;
+- `verification/generate_groebner_empty_certificates.py` — optional Singular
+  regeneration of the retained empty-branch identities;
 - `verification/check_slice_cover.py` — independent consequence checker;
 - `verification/slice-cover-certificate.json` — canonical exact certificate;
+- `verification/groebner-empty-certificates.json` — retained exact identities
+  for the six empty localized branches;
 - `verification/slice-cover-values.tex` — generated, checked manuscript values;
 - `verification/claim-map.json` and `verification/imported-sources.json` —
   theorem coverage and imported-source ledgers;
