@@ -68,12 +68,13 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   quintic: degrees at most four are excluded in the complete modular search,
   exact rational coefficient lifting passes thirty holdouts per coordinate,
   and an independent stdlib checker verifies both composites over a second
-  prime.  A sparse Rust checker now also proves the full
-  forward-then-inverse polynomial identity coefficientwise over that second
-  prime in about sixteen seconds.  This remains a specialized inverse
-  candidate, not a proved characteristic-zero identity; localized ideal
-  reduction over `Q` is the next exact gate, followed by reconstruction over
-  `Q(a,b)` and ground specialization.
+  prime.  A sparse arbitrary-precision Rust checker now also clears all
+  rational row, Cramer, and Cox denominators and proves the full
+  forward-then-inverse polynomial identity coefficientwise over `Z`; its
+  nonzero cleared denominator has `124666` terms.  The characteristic-zero
+  inverse is therefore certified at this specialization.  Reconstruction and
+  sparse verification over `Q(a,b)` is the next exact gate, followed by ground
+  specialization.
   Type `I_3` remains afterward.  Card:
   `../cubic-threefolds-tasks/c958-explicit-level-two-parametrizations.md`;
   latest report:

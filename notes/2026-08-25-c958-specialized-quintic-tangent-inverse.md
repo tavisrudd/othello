@@ -9,7 +9,7 @@ At the exact split specialization
 ```
 
 the remaining four-parameter tangent map has a compact rational inverse of
-total degree five as a candidate with strong independent evidence.  With
+total degree five, now certified by an exact integer polynomial identity.  With
 
 ```text
 y_i=rho_i/rho_0,  1 <= i <= 4,
@@ -53,13 +53,17 @@ different prime `1000033` it checks two hundred points of each composite:
 E -> y -> E,  y -> E -> y.
 ```
 
-A second independent implementation in Rust removes sampling from the first
-of those composites.  It clears the Cramer and Cox denominators structurally,
-constructs the five tangent coordinates as sparse four-variable polynomials,
-homogenizes the retained quintics, and checks every coefficient of
-`N_j(rho)-E_j D(rho)`.  Over `1000033` all four residual polynomials vanish;
-the cleared common denominator is nonzero and has `124666` terms.  The release
-replay takes about sixteen seconds on the development host.
+A second independent implementation in Rust removes sampling and modular
+qualification from the first of those composites.  It clears every rational
+row coefficient by explicit LCM scaling, clears the Cramer and Cox
+denominators structurally, constructs the five tangent coordinates as sparse
+four-variable integer polynomials, homogenizes the retained quintics, and
+checks every coefficient of `N_j(rho)-E_j D(rho)`.  All four residual
+polynomials vanish over `Z`; the cleared common denominator is nonzero and has
+`124666` terms.  A left inverse between irreducible four-dimensional affine
+charts is dominant and hence birational, so this also supplies the opposite
+rational composite on a dense open.  The release replay takes about ninety
+seconds on the development host, including compilation.
 
 Primary replay:
 
@@ -77,7 +81,7 @@ python3 notes/2026-08-25-c958-type-i1-tangent-inverse-check.py \
 sha256sum -c notes/2026-08-25-c958-type-i1-tangent-inverse.sha256
 ```
 
-Exact finite-field polynomial replay:
+Exact characteristic-zero polynomial replay:
 
 ```bash
 cargo run --release --manifest-path rust/Cargo.toml \
@@ -87,19 +91,21 @@ cargo run --release --manifest-path rust/Cargo.toml \
 
 ## Trust boundary
 
-No characteristic-zero rational-function identity is claimed yet.  Two exact
-symbolic approaches were tried with explicit cutoffs: general expression
+The specialized characteristic-zero identity is now certified.  Two earlier
+exact symbolic approaches were tried with explicit cutoffs: general expression
 expansion remained CPU-bound after twenty minutes, while two FLINT sparse
-denominator-clearing layouts reached `4.8 GB` and `3.4 GB` before completion
-and were stopped.  Their unfinished scripts and outputs are not retained.
+denominator-clearing layouts reached `4.8 GB` and `3.4 GB` before completion.
+The Rust checker avoids generic fraction cancellation and termwise expansion
+by clearing denominators before a sparse multivariate Horner evaluation.
 
-Accordingly, this bundle certifies the exact coefficient construction,
-minimal-degree modular obstruction, rational holdouts, and independent
-two-sided finite-field checks.  It also certifies the full forward-then-inverse
-polynomial identity over the independent prime `1000033`, rather than merely
-at sampled points.  It does **not** certify a symbolic characteristic-zero
-composite, uniform formulas over `Q(a,b)`, a ground-field map `Z/T3 <-> P4`,
-the cubic-product maps, or type `I3`.
+Accordingly, the complete companion bundle certifies the exact coefficient
+construction, minimal-degree modular obstruction, rational holdouts,
+independent two-sided finite-field checks, and the characteristic-zero
+birational inverse at the displayed specialization.  The JSON's conservative
+`not_certified` field records the interpolation generator's scope by itself;
+the hashed Rust companion closes that one specialized identity.  The bundle
+does **not** certify uniform formulas over `Q(a,b)`, a ground-field map
+`Z/T3 <-> P4`, the cubic-product maps, or type `I3`.
 
 ## EJ + TT closeout
 
@@ -110,14 +116,12 @@ exceptional directions rather than becoming dense in all 126 monomials.
 This is evidence that the quintics arise from a single projective inverse map,
 not four accidental affine fits.
 
-The highest-EV exact verification is now ideal reduction rather than expanded
-substitution.  Introduce the three linear slice equations and the four graph
-equations `rho_i-y_i rho_0`; reduce `D E_j-N_j` in the localized coordinate
-ring, using the Cramer determinant and `rho_0 D` as explicit denominators.
-That keeps the equations sparse and should certify both composites without
-forming the giant cleared numerator.  Once it passes at the generic
-`Q(a,b)` level, specialize `(a,b)=(A(z)^2,B(z)^2)` and conjugate through the
-ground orbit-trace basis.
+The highest-EV next step is generic reconstruction over `Q(a,b)`.  The Rust
+checker shows that denominator-cleared sparse Horner evaluation is practical,
+so the same representation should replace generic fraction simplification:
+retain coefficient polynomials in `(a,b)`, reconstruct them from enough cold
+specializations, and check the four cleared residuals before specializing
+`(a,b)=(A(z)^2,B(z)^2)` and conjugating through the ground orbit-trace basis.
 
 ## Mystery ledger
 
@@ -125,10 +129,9 @@ ground orbit-trace basis.
 |---|---|---|
 | Why is the inverse degree exactly five? | established at one modular specialization, unexplained geometrically | a divisor-class or inverse-linear-system calculation should predict the quintic degree uniformly |
 | Why do all four coordinates share a 55-term denominator? | exact in the rational lift | identify the denominator as the exceptional or Jacobian divisor of the tangent chart |
-| Are the displayed rational formulas identities in characteristic zero? | open exact gate | the exact polynomial identity now holds modulo `1000033`, but localized ideal reduction over the integers or rationals is still required |
+| Are the displayed rational formulas identities in characteristic zero? | closed at `(a,b)=(2,3)` | all four denominator-cleared residuals vanish coefficientwise over `Z` in the independent Rust replay |
 | Do the quintics persist over `Q(a,b)`? | open, next | reconstruct or derive the uniform coefficient functions, then prove both composites |
 | Does this complete `Z/T3 <-> P4` or `X_1 x P2`? | no | ground descent, uniformity, and final function-field composition remain |
 
-**Vibe:** substantial and honest progress: the inverse shape and exact
-coefficients are exposed, but the characteristic-zero identity and generic
-ground map remain gated.
+**Vibe:** the cold specialization is genuinely closed now; the remaining risk
+has moved to uniform reconstruction and ground descent, where it belongs.

@@ -1,31 +1,33 @@
-//! Exact finite-field polynomial-identity checker for the C958 quintic inverse.
+//! Exact integer polynomial-identity checker for the C958 quintic inverse.
 
+use num_bigint::BigInt;
+use num_integer::Integer;
+use num_traits::{One, Zero};
 use serde_json::Value;
 use std::collections::HashMap;
 use std::env;
 use std::fs;
 
-const PRIME: u64 = 1_000_033;
 type Exp = [u8; 4];
 
 #[derive(Clone, Default)]
-struct Poly(HashMap<Exp, u64>);
+struct Poly(HashMap<Exp, BigInt>);
 
 impl Poly {
-    fn monomial(exp: Exp, coefficient: u64) -> Self {
+    fn monomial(exp: Exp, coefficient: BigInt) -> Self {
         let mut terms = HashMap::new();
-        if !coefficient.is_multiple_of(PRIME) {
-            terms.insert(exp, coefficient % PRIME);
+        if !coefficient.is_zero() {
+            terms.insert(exp, coefficient);
         }
         Self(terms)
     }
 
-    fn add_scaled(&mut self, other: &Self, scale: u64) {
-        for (&exp, &coefficient) in &other.0 {
-            let value = (coefficient * scale) % PRIME;
+    fn add_scaled(&mut self, other: &Self, scale: &BigInt) {
+        for (&exp, coefficient) in &other.0 {
+            let value = coefficient * scale;
             let entry = self.0.entry(exp).or_default();
-            *entry = (*entry + value) % PRIME;
-            if *entry == 0 {
+            *entry += value;
+            if entry.is_zero() {
                 self.0.remove(&exp);
             }
         }
@@ -33,19 +35,19 @@ impl Poly {
 
     fn add(&self, other: &Self) -> Self {
         let mut answer = self.clone();
-        answer.add_scaled(other, 1);
+        answer.add_scaled(other, &BigInt::one());
         answer
     }
 
     fn sub(&self, other: &Self) -> Self {
         let mut answer = self.clone();
-        answer.add_scaled(other, PRIME - 1);
+        answer.add_scaled(other, &(-BigInt::one()));
         answer
     }
 
-    fn scale(&self, scalar: u64) -> Self {
+    fn scale(&self, scalar: &BigInt) -> Self {
         let mut answer = Self::default();
-        answer.add_scaled(self, scalar % PRIME);
+        answer.add_scaled(self, scalar);
         answer
     }
 
@@ -53,16 +55,16 @@ impl Poly {
         // Cartesian product size is a catastrophically bad capacity estimate:
         // thousands of products coalesce onto each four-variable monomial.
         let capacity = self.0.len().saturating_mul(other.0.len()).min(262_144);
-        let mut answer = HashMap::with_capacity(capacity);
-        for (&left_exp, &left_coefficient) in &self.0 {
-            for (&right_exp, &right_coefficient) in &other.0 {
+        let mut answer: HashMap<Exp, BigInt> = HashMap::with_capacity(capacity);
+        for (&left_exp, left_coefficient) in &self.0 {
+            for (&right_exp, right_coefficient) in &other.0 {
                 let exp = std::array::from_fn(|i| left_exp[i] + right_exp[i]);
-                let value = (left_coefficient * right_coefficient) % PRIME;
+                let value = left_coefficient * right_coefficient;
                 let entry = answer.entry(exp).or_default();
-                *entry = (*entry + value) % PRIME;
+                *entry += value;
             }
         }
-        answer.retain(|_, coefficient| *coefficient != 0);
+        answer.retain(|_, coefficient| !coefficient.is_zero());
         Self(answer)
     }
 }
@@ -90,42 +92,16 @@ fn determinant3(matrix: &[Vec<Poly>]) -> Poly {
         )
 }
 
-fn decimal_mod(text: &str) -> u64 {
-    let (negative, digits) = text
-        .strip_prefix('-')
-        .map_or((false, text), |rest| (true, rest));
-    let value = digits.bytes().fold(0, |value, digit| {
-        (value * 10 + u64::from(digit - b'0')) % PRIME
-    });
-    if negative && value != 0 {
-        PRIME - value
-    } else {
-        value
-    }
-}
-
-fn mod_pow(mut base: u64, mut exponent: u64) -> u64 {
-    let mut answer = 1;
-    while exponent != 0 {
-        if exponent & 1 != 0 {
-            answer = answer * base % PRIME;
-        }
-        base = base * base % PRIME;
-        exponent >>= 1;
-    }
-    answer
-}
-
-fn scalar(text: &str) -> u64 {
+fn scalar(text: &str) -> (BigInt, BigInt) {
     if let Some((numerator, denominator)) = text.split_once('/') {
-        decimal_mod(numerator) * mod_pow(decimal_mod(denominator), PRIME - 2) % PRIME
+        (numerator.parse().unwrap(), denominator.parse().unwrap())
     } else {
-        decimal_mod(text)
+        (text.parse().unwrap(), BigInt::one())
     }
 }
 
-fn row_values(value: &Value, key: &str) -> Vec<Vec<u64>> {
-    value["forward_linear_forms"][key]
+fn row_values(value: &Value, key: &str, one_scale: bool) -> Vec<Vec<BigInt>> {
+    let rows: Vec<Vec<(BigInt, BigInt)>> = value["forward_linear_forms"][key]
         .as_array()
         .unwrap()
         .iter()
@@ -136,10 +112,27 @@ fn row_values(value: &Value, key: &str) -> Vec<Vec<u64>> {
                 .map(|x| scalar(x.as_str().unwrap()))
                 .collect()
         })
+        .collect();
+    let global_lcm = rows
+        .iter()
+        .flatten()
+        .fold(BigInt::one(), |lcm, entry| lcm.lcm(&entry.1));
+    rows.iter()
+        .map(|row| {
+            let lcm = if one_scale {
+                global_lcm.clone()
+            } else {
+                row.iter()
+                    .fold(BigInt::one(), |lcm, entry| lcm.lcm(&entry.1))
+            };
+            row.iter()
+                .map(|(numerator, denominator)| numerator * (&lcm / denominator))
+                .collect()
+        })
         .collect()
 }
 
-type HomogeneousTerm = (u64, [u8; 5]);
+type HomogeneousTerm = (BigInt, [u8; 5]);
 
 fn horner(terms: &[HomogeneousTerm], variable: usize, bases: &[Poly]) -> Poly {
     if terms.is_empty() {
@@ -148,7 +141,7 @@ fn horner(terms: &[HomogeneousTerm], variable: usize, bases: &[Poly]) -> Poly {
     if variable == 5 {
         return Poly::monomial(
             [0; 4],
-            terms.iter().fold(0, |sum, term| (sum + term.0) % PRIME),
+            terms.iter().fold(BigInt::zero(), |sum, term| sum + &term.0),
         );
     }
     let mut groups: [Vec<HomogeneousTerm>; 6] = std::array::from_fn(|_| Vec::new());
@@ -156,7 +149,7 @@ fn horner(terms: &[HomogeneousTerm], variable: usize, bases: &[Poly]) -> Poly {
     for term in terms {
         let exponent = usize::from(term.1[variable]);
         maximum = maximum.max(exponent);
-        groups[exponent].push(*term);
+        groups[exponent].push(term.clone());
     }
     let mut answer = horner(&groups[maximum], variable + 1, bases);
     for exponent in (0..maximum).rev() {
@@ -174,7 +167,7 @@ fn homogeneous(sparse: &Value, degree: usize, bases: &[Poly]) -> Poly {
         .unwrap()
         .iter()
         .map(|term| {
-            let coefficient = decimal_mod(term["coefficient"].as_str().unwrap());
+            let coefficient = term["coefficient"].as_str().unwrap().parse().unwrap();
             let affine: Vec<u8> = term["exponents"]
                 .as_array()
                 .unwrap()
@@ -202,16 +195,16 @@ fn main() {
         .nth(1)
         .expect("usage: c958_tangent_polynomial_check CERTIFICATE");
     let value: Value = serde_json::from_str(&fs::read_to_string(path).unwrap()).unwrap();
-    let slices = row_values(&value, "slice_rows");
-    let tangents = row_values(&value, "tangent_rows");
+    let slices = row_values(&value, "slice_rows", false);
+    let tangents = row_values(&value, "tangent_rows", true);
 
-    let p = Poly::monomial([1, 1, 1, 1], 1);
+    let p = Poly::monomial([1, 1, 1, 1], BigInt::one());
     let constants = [
-        Poly::monomial([2, 1, 1, 1], 1),
-        Poly::monomial([1, 2, 1, 1], 1),
+        Poly::monomial([2, 1, 1, 1], BigInt::one()),
+        Poly::monomial([1, 2, 1, 1], BigInt::one()),
         p,
-        Poly::monomial([1, 1, 2, 1], 1),
-        Poly::monomial([1, 1, 1, 2], 1),
+        Poly::monomial([1, 1, 2, 1], BigInt::one()),
+        Poly::monomial([1, 1, 1, 2], BigInt::one()),
     ];
     let mut linear = vec![vec![Poly::default(); 3]; 16];
     let specifications: [(usize, Exp, [i64; 3]); 10] = [
@@ -228,8 +221,7 @@ fn main() {
     ];
     for (index, exp, coefficients) in specifications {
         for (variable, coefficient) in coefficients.into_iter().enumerate() {
-            let reduced = coefficient.rem_euclid(PRIME as i64) as u64;
-            linear[index][variable] = Poly::monomial(exp, reduced);
+            linear[index][variable] = Poly::monomial(exp, coefficient.into());
         }
     }
 
@@ -237,14 +229,14 @@ fn main() {
     let mut rhs = vec![Poly::default(); 3];
     for row in 0..3 {
         for (index, constant) in constants.iter().enumerate() {
-            rhs[row].add_scaled(constant, (PRIME - slices[row][index]) % PRIME);
+            rhs[row].add_scaled(constant, &(-&slices[row][index]));
         }
         for variable in 0..3 {
             for (index, entry) in linear.iter().enumerate() {
-                matrix[row][variable].add_scaled(&entry[variable], slices[row][index]);
+                matrix[row][variable].add_scaled(&entry[variable], &slices[row][index]);
             }
         }
-        assert_eq!(slices[row][15], 0);
+        assert!(slices[row][15].is_zero());
     }
     let delta = determinant3(&matrix);
     let mut z = Vec::new();
@@ -270,14 +262,14 @@ fn main() {
     }
     scaled_cox[15] = z[0]
         .mul(&z[1])
-        .scale(PRIME - 3)
-        .add(&z[0].mul(&z[2]).scale(4))
+        .scale(&BigInt::from(-3))
+        .add(&z[0].mul(&z[2]).scale(&BigInt::from(4)))
         .sub(&z[1].mul(&z[2]));
 
     let mut rho = vec![Poly::default(); 5];
     for row in 0..5 {
         for (coefficient, coordinate) in tangents[row].iter().zip(&scaled_cox) {
-            rho[row].add_scaled(coordinate, *coefficient);
+            rho[row].add_scaled(coordinate, coefficient);
         }
         eprintln!("rho{row}: {} terms", rho[row].0.len());
     }
@@ -285,10 +277,10 @@ fn main() {
     let denominator = homogeneous(&value["common_denominator"], degree, &rho);
     eprintln!("denominator: {} terms", denominator.0.len());
     let coordinate_polys = [
-        Poly::monomial([1, 0, 0, 0], 1),
-        Poly::monomial([0, 1, 0, 0], 1),
-        Poly::monomial([0, 0, 1, 0], 1),
-        Poly::monomial([0, 0, 0, 1], 1),
+        Poly::monomial([1, 0, 0, 0], BigInt::one()),
+        Poly::monomial([0, 1, 0, 0], BigInt::one()),
+        Poly::monomial([0, 0, 1, 0], BigInt::one()),
+        Poly::monomial([0, 0, 0, 1], BigInt::one()),
     ];
     for (index, coordinate) in coordinate_polys.iter().enumerate() {
         let numerator = homogeneous(&value["numerators"][index], degree, &rho);
@@ -297,6 +289,6 @@ fn main() {
             residual.0.is_empty(),
             "nonzero residual for coordinate {index}"
         );
-        println!("coordinate {index}: exact polynomial identity modulo {PRIME}");
+        println!("coordinate {index}: exact polynomial identity over Z");
     }
 }
