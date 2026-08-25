@@ -1,0 +1,33 @@
+{
+  "dual_core_line_type_counts": {
+    "1": 461,
+    "2": 17,
+    "3": 78,
+    "4": 194,
+    "5": 7
+  },
+  "dual_core_size": 55,
+  "field_modulus_low_to_high": [
+    1,
+    2,
+    0,
+    1
+  ],
+  "field_order": 27,
+  "line_orbit_incidence_signature_count": 109,
+  "orbit_size_spectrum": {
+    "1": 28,
+    "9": 81
+  },
+  "schema": "c949-five-character-core-v1",
+  "search": {
+    "random_seed": 949,
+    "time_limit_seconds": 300.0,
+    "workers": 4
+  },
+  "solver": "OR-Tools CP-SAT",
+  "solver_objective_bound": 0,
+  "solver_status": "INFEASIBLE",
+  "solver_version": "9.14.6206",
+  "symmetry_on_dual_core": "trace-x"
+}

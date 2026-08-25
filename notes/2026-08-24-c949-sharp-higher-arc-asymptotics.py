@@ -621,6 +621,294 @@ def solve_symmetry_cpsat(q: int, t: int, symmetry: str, output: Path,
     output.write_text(json.dumps(base, indent=2, sort_keys=True) + "\n")
 
 
+def solve_five_character_core(q: int, symmetry: str, output: Path,
+                              seconds: float, workers: int) -> None:
+    """Search the q=3^h five-character dual-core template and its primal lift."""
+    from ortools.sat.python import cp_model
+
+    if q not in (9, 27):
+        raise ValueError("the current exact field implementation supports q=9 and q=27")
+    points, on_line, through_point = incidence(q)
+    if symmetry == "none":
+        orbits = [[point] for point in range(len(points))]
+    else:
+        orbits = symmetry_orbits(q, symmetry)
+    orbit_of = [0] * len(points)
+    for orbit_index, orbit in enumerate(orbits):
+        for point in orbit:
+            orbit_of[point] = orbit_index
+
+    core_size = 2 * q + 1
+    arc_intersection = 2 * q // 3 + 1
+    arc_size = q * q // 3 + 4 * q // 3
+    line_type_counts = {
+        1: (2 * q * q - 3 * q + 6) // 3,
+        2: 2 * q // 3 - 1,
+        3: 3 * q - 3,
+        4: (q * q - 6 * q + 15) // 3,
+        5: q // 3 - 2,
+    }
+    selected_type_counts = {
+        1: 0,
+        2: 0,
+        3: line_type_counts[3],
+        4: line_type_counts[4],
+        5: line_type_counts[5],
+    }
+    assert sum(line_type_counts.values()) == len(points)
+    assert sum(selected_type_counts.values()) == arc_size
+    assert sum(degree * count for degree, count in selected_type_counts.items()) == (
+        core_size * arc_intersection
+    )
+
+    model = cp_model.CpModel()
+    chosen_orbit = [model.new_bool_var(f"core_orbit_{index}")
+                    for index in range(len(orbits))]
+    core = [chosen_orbit[orbit_of[point]] for point in range(len(points))]
+    model.add(sum(len(orbit) * chosen_orbit[index]
+                  for index, orbit in enumerate(orbits)) == core_size)
+
+    line_types = []
+    selected_types = []
+    selected_lines = []
+    for line, members in enumerate(on_line):
+        intersection = model.new_int_var(1, 5, f"core_line_sum_{line}")
+        model.add(intersection == sum(core[point] for point in members))
+        types = [model.new_bool_var(f"core_line_{line}_type_{degree}")
+                 for degree in range(1, 6)]
+        model.add_exactly_one(types)
+        for degree, type_variable in enumerate(types, start=1):
+            model.add(intersection == degree).only_enforce_if(type_variable)
+        selected = model.new_bool_var(f"arc_point_{line}")
+        selected_as_type = [model.new_bool_var(f"arc_point_{line}_type_{degree}")
+                            for degree in range(1, 6)]
+        model.add(sum(selected_as_type) == selected)
+        for selected_type, type_variable in zip(selected_as_type, types):
+            model.add(selected_type <= type_variable)
+        line_types.append(types)
+        selected_types.append(selected_as_type)
+        selected_lines.append(selected)
+
+    for degree in range(1, 6):
+        model.add(sum(types[degree - 1] for types in line_types) == line_type_counts[degree])
+        model.add(sum(types[degree - 1] for types in selected_types)
+                  == selected_type_counts[degree])
+
+    selected_degrees = []
+    for point, incident in enumerate(through_point):
+        degree = model.new_int_var(0, arc_intersection, f"selected_degree_{point}")
+        model.add(degree == sum(selected_lines[line] for line in incident))
+        model.add(degree == arc_intersection).only_enforce_if(core[point])
+        selected_degrees.append(degree)
+
+    solver = cp_model.CpSolver()
+    solver.parameters.max_time_in_seconds = seconds
+    solver.parameters.num_search_workers = workers
+    solver.parameters.random_seed = 949
+    status = solver.solve(model)
+    status_name = solver.status_name(status)
+    result = {
+        "schema": "c949-five-character-core-lift-v1",
+        "solver": "OR-Tools CP-SAT",
+        "solver_version": __import__("ortools").__version__,
+        "solver_status": status_name,
+        "field_order": q,
+        "field_modulus_low_to_high": list(IRREDUCIBLE[q]),
+        "symmetry_on_dual_core": symmetry,
+        "dual_core_size": core_size,
+        "dual_core_line_type_counts": line_type_counts,
+        "selected_line_type_counts": selected_type_counts,
+        "arc_intersection": arc_intersection,
+        "required_arc_size": arc_size,
+        "search": {
+            "random_seed": 949,
+            "workers": workers,
+            "time_limit_seconds": seconds,
+        },
+    }
+    if status in (cp_model.OPTIMAL, cp_model.FEASIBLE):
+        core_points = [point for point in range(len(points)) if solver.value(core[point])]
+        arc_points = [line for line in range(len(points)) if solver.value(selected_lines[line])]
+        degree_spectrum = Counter(solver.value(degree) for degree in selected_degrees)
+        result.update({
+            "dual_core_point_indices": core_points,
+            "arc_point_indices": arc_points,
+            "arc_size": len(arc_points),
+            "arc_line_intersection_spectrum": dict(sorted(degree_spectrum.items())),
+            "complete": all(
+                bool(set(core_points).intersection(on_line[line]))
+                for line in set(range(len(points))) - set(arc_points)
+            ),
+        })
+    output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n")
+
+
+def search_five_character_core(q: int, symmetry: str, output: Path,
+                               seconds: float, workers: int) -> None:
+    """Stage 1: find only the symmetric five-character blocking core."""
+    from ortools.sat.python import cp_model
+
+    if q not in (9, 27):
+        raise ValueError("the current exact field implementation supports q=9 and q=27")
+    points, on_line, _ = incidence(q)
+    orbits = ([[point] for point in range(len(points))] if symmetry == "none"
+              else symmetry_orbits(q, symmetry))
+    orbit_of = [0] * len(points)
+    for orbit_index, orbit in enumerate(orbits):
+        for point in orbit:
+            orbit_of[point] = orbit_index
+    line_type_counts = {
+        1: (2 * q * q - 3 * q + 6) // 3,
+        2: 2 * q // 3 - 1,
+        3: 3 * q - 3,
+        4: (q * q - 6 * q + 15) // 3,
+        5: q // 3 - 2,
+    }
+    model = cp_model.CpModel()
+    chosen_orbit = [model.new_bool_var(f"core_orbit_{index}")
+                    for index in range(len(orbits))]
+    core = [chosen_orbit[orbit_of[point]] for point in range(len(points))]
+    model.add(sum(len(orbit) * chosen_orbit[index]
+                  for index, orbit in enumerate(orbits)) == 2 * q + 1)
+    signature_lines: dict[tuple[int, ...], list[int]] = {}
+    for line, members in enumerate(on_line):
+        orbit_counts = Counter(orbit_of[point] for point in members)
+        signature = tuple(orbit_counts.get(index, 0) for index in range(len(orbits)))
+        signature_lines.setdefault(signature, []).append(line)
+    line_types = []
+    line_type_multiplicities = []
+    for signature_index, (signature, equivalent_lines) in enumerate(sorted(signature_lines.items())):
+        intersection = model.new_int_var(1, 5, f"core_line_sum_{signature_index}")
+        model.add(intersection == sum(
+            multiplicity * chosen_orbit[orbit_index]
+            for orbit_index, multiplicity in enumerate(signature) if multiplicity
+        ))
+        types = [model.new_bool_var(f"core_line_{signature_index}_type_{degree}")
+                 for degree in range(1, 6)]
+        model.add_exactly_one(types)
+        for degree, type_variable in enumerate(types, start=1):
+            model.add(intersection == degree).only_enforce_if(type_variable)
+        line_types.append(types)
+        line_type_multiplicities.append(len(equivalent_lines))
+    for degree in range(1, 6):
+        model.add(sum(multiplicity * types[degree - 1]
+                      for multiplicity, types in zip(line_type_multiplicities, line_types))
+                  == line_type_counts[degree])
+    solver = cp_model.CpSolver()
+    solver.parameters.max_time_in_seconds = seconds
+    solver.parameters.num_search_workers = workers
+    solver.parameters.random_seed = 949
+    status = solver.solve(model)
+    result = {
+        "schema": "c949-five-character-core-v1",
+        "solver": "OR-Tools CP-SAT",
+        "solver_version": __import__("ortools").__version__,
+        "solver_status": solver.status_name(status),
+        "solver_objective_bound": int(round(solver.best_objective_bound)),
+        "field_order": q,
+        "field_modulus_low_to_high": list(IRREDUCIBLE[q]),
+        "symmetry_on_dual_core": symmetry,
+        "dual_core_size": 2 * q + 1,
+        "dual_core_line_type_counts": line_type_counts,
+        "orbit_size_spectrum": dict(sorted(Counter(len(orbit) for orbit in orbits).items())),
+        "line_orbit_incidence_signature_count": len(signature_lines),
+        "search": {
+            "random_seed": 949,
+            "workers": workers,
+            "time_limit_seconds": seconds,
+        },
+    }
+    if status in (cp_model.OPTIMAL, cp_model.FEASIBLE):
+        core_points = [point for point in range(len(points)) if solver.value(core[point])]
+        intersections = [len(set(core_points).intersection(line)) for line in on_line]
+        result.update({
+            "dual_core_point_indices": core_points,
+            "checked_line_type_counts": dict(sorted(Counter(intersections).items())),
+        })
+    output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n")
+
+
+def lift_five_character_core(core_path: Path, output: Path,
+                             seconds: float, workers: int) -> None:
+    """Stage 2: select the primal arc lines for a fixed five-character core."""
+    from ortools.sat.python import cp_model
+
+    certificate = json.loads(core_path.read_text())
+    q = certificate["field_order"]
+    core_indices = certificate.get(
+        "dual_core_point_indices", certificate.get("degree_seven_point_indices")
+    )
+    if core_indices is None:
+        raise ValueError("input certificate has no dual core point list")
+    core = set(core_indices)
+    points, on_line, through_point = incidence(q)
+    intersections = [len(core.intersection(line)) for line in on_line]
+    expected_line_type_counts = {
+        1: (2 * q * q - 3 * q + 6) // 3,
+        2: 2 * q // 3 - 1,
+        3: 3 * q - 3,
+        4: (q * q - 6 * q + 15) // 3,
+        5: q // 3 - 2,
+    }
+    if len(core) != 2 * q + 1 or Counter(intersections) != Counter(expected_line_type_counts):
+        raise ValueError("input is not the required five-character blocking core")
+    selected_type_counts = {
+        1: 0,
+        2: 0,
+        3: expected_line_type_counts[3],
+        4: expected_line_type_counts[4],
+        5: expected_line_type_counts[5],
+    }
+    arc_intersection = 2 * q // 3 + 1
+    model = cp_model.CpModel()
+    selected = [model.new_bool_var(f"arc_point_{line}") for line in range(len(points))]
+    for degree in range(1, 6):
+        model.add(sum(selected[line] for line, value in enumerate(intersections) if value == degree)
+                  == selected_type_counts[degree])
+    selected_degrees = []
+    for point, incident in enumerate(through_point):
+        degree = model.new_int_var(0, arc_intersection, f"arc_line_sum_{point}")
+        model.add(degree == sum(selected[line] for line in incident))
+        if point in core:
+            model.add(degree == arc_intersection)
+        selected_degrees.append(degree)
+    solver = cp_model.CpSolver()
+    solver.parameters.max_time_in_seconds = seconds
+    solver.parameters.num_search_workers = workers
+    solver.parameters.random_seed = 949
+    status = solver.solve(model)
+    result = {
+        "schema": "c949-five-character-core-fixed-lift-v1",
+        "solver": "OR-Tools CP-SAT",
+        "solver_version": __import__("ortools").__version__,
+        "solver_status": solver.status_name(status),
+        "solver_objective_bound": int(round(solver.best_objective_bound)),
+        "field_order": q,
+        "field_modulus_low_to_high": list(IRREDUCIBLE[q]),
+        "source_core_certificate": core_path.name,
+        "dual_core_point_indices": sorted(core),
+        "dual_core_line_type_counts": expected_line_type_counts,
+        "selected_line_type_counts": selected_type_counts,
+        "arc_intersection": arc_intersection,
+        "required_arc_size": sum(selected_type_counts.values()),
+        "search": {
+            "random_seed": 949,
+            "workers": workers,
+            "time_limit_seconds": seconds,
+        },
+    }
+    if status in (cp_model.OPTIMAL, cp_model.FEASIBLE):
+        arc = [line for line in range(len(points)) if solver.value(selected[line])]
+        degree_spectrum = Counter(solver.value(degree) for degree in selected_degrees)
+        result.update({
+            "arc_point_indices": arc,
+            "arc_size": len(arc),
+            "arc_line_intersection_spectrum": dict(sorted(degree_spectrum.items())),
+            "complete": min(intersections) >= 1,
+        })
+    output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n")
+
+
 def extract_selected_secants(certificate_path: Path, output: Path) -> None:
     certificate = json.loads(certificate_path.read_text())
     q = certificate["field_order"]
@@ -1140,6 +1428,7 @@ def construct_q9_unital_arc(output: Path) -> None:
 
     output.write_text(json.dumps({
         "schema": "c949-q9-unital-c4-construction-v1",
+        "field_order": 9,
         "field": {
             "description": "GF(9)=GF(3)[w]/(w^2+1)",
             "integer_encoding": "a+b*w is encoded as a+3*b",
@@ -1237,6 +1526,29 @@ def main() -> None:
     unital_mechanism.add_argument("--output", type=Path, required=True)
     q9_construction = subparsers.add_parser("construct-q9-unital-arc")
     q9_construction.add_argument("--output", type=Path, required=True)
+    five_character = subparsers.add_parser("five-character-core-cpsat")
+    five_character.add_argument("--q", type=int, required=True)
+    five_character.add_argument(
+        "--symmetry", choices=("none", "trace-x", "trace-xy", "scalar-13", "frobenius"),
+        default="none",
+    )
+    five_character.add_argument("--output", type=Path, required=True)
+    five_character.add_argument("--seconds", type=float, default=300.0)
+    five_character.add_argument("--workers", type=int, default=8)
+    core_search = subparsers.add_parser("five-character-core-search")
+    core_search.add_argument("--q", type=int, required=True)
+    core_search.add_argument(
+        "--symmetry", choices=("none", "trace-x", "trace-xy", "scalar-13", "frobenius"),
+        default="none",
+    )
+    core_search.add_argument("--output", type=Path, required=True)
+    core_search.add_argument("--seconds", type=float, default=300.0)
+    core_search.add_argument("--workers", type=int, default=8)
+    core_lift = subparsers.add_parser("five-character-core-lift")
+    core_lift.add_argument("--core", type=Path, required=True)
+    core_lift.add_argument("--output", type=Path, required=True)
+    core_lift.add_argument("--seconds", type=float, default=300.0)
+    core_lift.add_argument("--workers", type=int, default=8)
     args = parser.parse_args()
     if args.command == "emit-blocking-lp":
         emit_blocking_lp(args.q, args.t, args.output)
@@ -1265,6 +1577,14 @@ def main() -> None:
         analyze_unital_mechanism(args.certificate, args.output)
     elif args.command == "construct-q9-unital-arc":
         construct_q9_unital_arc(args.output)
+    elif args.command == "five-character-core-cpsat":
+        solve_five_character_core(args.q, args.symmetry, args.output,
+                                  args.seconds, args.workers)
+    elif args.command == "five-character-core-search":
+        search_five_character_core(args.q, args.symmetry, args.output,
+                                   args.seconds, args.workers)
+    elif args.command == "five-character-core-lift":
+        lift_five_character_core(args.core, args.output, args.seconds, args.workers)
     else:
         check_certificate(args.certificate)
 

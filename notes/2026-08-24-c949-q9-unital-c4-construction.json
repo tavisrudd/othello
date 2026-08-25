@@ -69,6 +69,7 @@
     "description": "GF(9)=GF(3)[w]/(w^2+1)",
     "integer_encoding": "a+b*w is encoded as a+3*b"
   },
+  "field_order": 9,
   "hermitian_matrix": [
     [
       1,

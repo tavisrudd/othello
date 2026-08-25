@@ -96,6 +96,86 @@ chosen covering subfamily of maximal secants.  Minimizing `|A|` under these
 constraints is therefore the promised weak inverse problem, without the
 unnecessary demand that `L` contain *all* maximal secants.
 
+### Five-character dual-core mechanism
+
+The corrected `q=9` structure suggests a field-uniform sufficient condition
+that is substantially sharper than the generic weak inverse problem.  Put
+
+```text
+q=3^h>=9,   s=2q/3+1,   k=q^2/3+4q/3.
+```
+
+Suppose the dual plane contains a blocking set `D` of size `2q+1` whose line
+intersection spectrum is
+
+```text
+n1=(2q^2-3q+6)/3,   n2=2q/3-1,   n3=3q-3,
+n4=(q^2-6q+15)/3,   n5=q/3-2.                       (FC5)
+```
+
+Let `S` be precisely the dual lines meeting `D` in at least three points, and
+assume the single global concurrency cap that every dual point lies on at
+most `s` members of `S`.  Then
+
+```text
+A={x : the dual line ell_x belongs to S}
+```
+
+is a complete `(k,s)`-arc.  Direct substitution gives
+
+```text
+|S|=n3+n4+n5=k,
+3n3+4n4+5n5=(2q+1)s.
+```
+
+The second identity and the cap imply that every point of `D` lies on exactly
+`s` members of `S`: their average degree is already `s`.  Hence every member
+of `D` is dual to an `s`-secant of `A`, while the global cap makes `A` an
+`s`-arc.  Every dual line meets the blocking set `D`; therefore the dual line
+of every primal point outside `A` contains a member of `D`, so that point lies
+on an `s`-secant.  Thus `A` is complete.
+
+The spectrum `(FC5)` is forced once one asks for a `2q+1` blocking core with
+no line longer than five, `|S|=k`, and total selected incidence `(2q+1)s`:
+solve the three projective-plane incidence moments together with the last two
+displayed identities.  At `q=9` it gives the actual core
+
+```text
+1^47 2^5 3^24 4^14 5^1,
+```
+
+and the fixed-core lift reproduces the structural 39-point arc exactly.  At
+`q=27` the target is
+
+```text
+|D|=55,  spectrum 1^461 2^17 3^78 4^194 5^7,
+|S|=78+194+7=279.
+```
+
+The paired degree envelope independently forces the number `T` of maximal
+19-secants of any target-size complete arc to be either 54 or 55.  If
+`m(v,e,a)` denotes the minimum of `sum binom(d_i,2)` over `v` integers of sum
+`e` and lower bound `a`, balancing degrees gives the necessary inequality
+
+```text
+m(279,19T,0)+m(478,9T,1) <= binom(T,2).
+```
+
+Together with `9T>=478` and the two elementary pair bounds, integer
+substitution leaves exactly `T in {54,55}`.  Thus `(FC5)` occupies one of only
+two possible envelope branches.
+
+The earlier four-character extrapolation was rejected by the fixed-core
+replay: it had misidentified a diagnostic spectrum.  Its `q=27` symmetry
+searches therefore carry no mathematical conclusion and are not retained as
+evidence.  For the corrected five-character spectrum, trace-`x/y` invariance
+is arithmetically impossible because 55 cannot be assembled from its nine
+81-orbits and 28 fixed points.  The trace-`x` and scalar `C_13` core models are
+exactly infeasible after collapsing the lines to 109 and 85 orbit-incidence
+signatures, respectively.  The Frobenius model has 261 signatures and remains
+`UNKNOWN` after 300 seconds; this supplies no evidence either way.  These are
+only symmetry-restricted core statements, before the local lift condition.
+
 ### Exact `q=9` result
 
 The complement formulation gives the exact base value
@@ -123,7 +203,7 @@ Thus `A` is a complete `(39,7)`-arc, while `|B|<=52` proves no smaller one
 exists.  The selected 19 secants form a dual blocking set with spectrum
 
 ```text
-1^47 2^6 3^21 4^17.
+1^47 2^5 3^24 4^14 5^1.
 ```
 
 The positive witness is independently checked by reconstructing `GF(9)`, all
@@ -258,7 +338,7 @@ degree-seven points `D` are precisely the duals of the maximal secants of `A`.
 They form a blocking set of size
 
 ```text
-|D|=19=2q+1,       line spectrum 1^47 2^6 3^21 4^17.
+|D|=19=2q+1,       line spectrum 1^47 2^5 3^24 4^14 5^1.
 ```
 
 Thus the small object that certifies completeness is `O(q)` even though the
@@ -285,10 +365,18 @@ family is lower priority.
   identifies its cyclic symmetry and incidence parameters but does not
   classify such switches or prove uniqueness under the stabilizer of `(U,P)`.
   This is owned by C949's structural-classification branch.
-- **Open — does the `2q+1` four-character blocking core generalize?**  No
-  `q=27` construction or obstruction is known.  The next gate is a bounded
-  non-two-character core search followed by weak inverse realization; the
-  two-character audit is not an answer to this question.
+- **Settled — what is the field-uniform lift arithmetic suggested by `q=9`?**
+  The corrected five-character template `(FC5)` gives an exact sufficient
+  condition for `(UB3)`: take as primal points exactly the dual lines meeting
+  the core at least three times.  No ad hoc secant trade is needed, and the
+  local equality on core points follows automatically from the single global
+  concurrency cap by averaging.
+- **Open — does the `2q+1` five-character blocking core generalize?**  The
+  correct `q=27` target is `1^461 2^17 3^78 4^194 5^7`.  Trace-`x/y`,
+  trace-`x`, and scalar `C_13` invariance are excluded; Frobenius and
+  asymmetric cores remain open.  Any surviving core must then pass the fixed
+  lift.  The alternative 54-maximal-secant envelope branch is also
+  unclassified.
 - **Open — can `t_7(2,9)>=39` be proved without exhaustive search?**  The
   positive construction is structural, but exclusion of a 38-point complete
   arc still trusts one normalized CP-SAT infeasibility certificate.  A second
@@ -321,6 +409,36 @@ cmp /tmp/c949-q27-symmetry-orbits.json \
   notes/2026-08-24-c949-q27-symmetry-orbits.json
 ```
 
+The corrected fixed-core lift replays the five-character mechanism at `q=9`
+with the pinned solver version:
+
+```bash
+uv run --with ortools==9.14.6206 python3 \
+  notes/2026-08-24-c949-sharp-higher-arc-asymptotics.py \
+  five-character-core-lift \
+  --core notes/2026-08-24-c949-q9-unital-c4-construction.json \
+  --seconds 60 --workers 8 \
+  --output /tmp/c949-q9-five-character-lift.json
+cmp /tmp/c949-q9-five-character-lift.json \
+  notes/2026-08-24-c949-q9-five-character-lift.json
+
+uv run --with ortools==9.14.6206 python3 \
+  notes/2026-08-24-c949-sharp-higher-arc-asymptotics.py \
+  five-character-core-search --q 27 --symmetry trace-x \
+  --seconds 300 --workers 4 \
+  --output /tmp/c949-q27-five-core-trace-x-infeasible.json
+cmp /tmp/c949-q27-five-core-trace-x-infeasible.json \
+  notes/2026-08-24-c949-q27-five-core-trace-x-infeasible.json
+
+uv run --with ortools==9.14.6206 python3 \
+  notes/2026-08-24-c949-sharp-higher-arc-asymptotics.py \
+  five-character-core-search --q 27 --symmetry scalar-13 \
+  --seconds 300 --workers 4 \
+  --output /tmp/c949-q27-five-core-scalar13-infeasible.json
+cmp /tmp/c949-q27-five-core-scalar13-infeasible.json \
+  notes/2026-08-24-c949-q27-five-core-scalar13-infeasible.json
+```
+
 The normalized lower-bound replay uses `ortools==9.14.6206` and trusts CP-SAT's
 exact `INFEASIBLE` status:
 
@@ -341,8 +459,9 @@ boundary is the short Python finite-field implementation and its explicit
 assertions; no computer-algebra or second implementation is used.  The
 `q=27` artifacts certify only the stated finite parameter/orbit audits.
 
-The remaining `q=27` subgroup-restricted CP-SAT searches are not completed;
-no unrestricted conclusion is licensed.
+The corrected five-character Frobenius and unrestricted `q=27` core searches
+are not completed; no unrestricted existence or nonexistence conclusion is
+licensed.
 
 ### Source depths for this audit
 
