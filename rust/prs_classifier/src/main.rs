@@ -1,6 +1,6 @@
 use clap::{Parser, Subcommand};
 use prs_classifier::{
-    canonicalize_syndrome, classify, search_locator, verify_certificate, LocatorCertificate,
+    canonicalize_syndrome, classify, search_exact_locator, verify_certificate, LocatorCertificate,
     Request,
 };
 use std::fs;
@@ -26,8 +26,6 @@ enum Command {
 #[derive(clap::Args)]
 struct SearchArgs {
     input: Option<PathBuf>,
-    #[arg(long)]
-    max_degree: Option<usize>,
     #[arg(long, default_value_t = 10_000_000)]
     candidate_limit: u64,
 }
@@ -52,10 +50,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         }
         Command::Distance(args) | Command::Decode(args) => {
             let request: Request = serde_json::from_str(&read_input(&args.input)?)?;
-            let max_degree = args
-                .max_degree
-                .unwrap_or(request.redundancy.saturating_sub(2));
-            let certificate = search_locator(&request, max_degree, args.candidate_limit)?;
+            let certificate = search_exact_locator(&request, args.candidate_limit)?;
             println!("{}", serde_json::to_string_pretty(&certificate)?);
         }
         Command::Classify(args) => {

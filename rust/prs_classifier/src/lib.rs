@@ -19,6 +19,8 @@ pub enum Error {
     ReducibleModulus,
     #[error("redundancy must lie in 5..=10")]
     BadRedundancy,
+    #[error("full-length PRS requires q>=r so that the code has positive dimension")]
+    BadCodeParameters,
     #[error("the syndrome dimension does not equal the redundancy")]
     BadSyndromeDimension,
     #[error("the zero syndrome has no projective normalization")]
@@ -332,6 +334,9 @@ pub fn validate_request(request: &Request) -> Result<(Field, Vec<u32>), Error> {
         return Err(Error::BadSyndromeDimension);
     }
     let field = Field::new(request.field.clone())?;
+    if field.order() < request.redundancy as u32 {
+        return Err(Error::BadCodeParameters);
+    }
     for &x in &request.syndrome {
         field.check(x)?;
     }
@@ -716,6 +721,37 @@ pub fn search_locator(
         }
     }
     Err(Error::NoLocator(stop))
+}
+
+pub fn search_exact_locator(
+    request: &Request,
+    candidate_limit: u64,
+) -> Result<LocatorCertificate, Error> {
+    match search_locator(request, request.redundancy - 1, candidate_limit) {
+        Ok(certificate) => return Ok(certificate),
+        Err(Error::NoLocator(_)) => {}
+        Err(error) => return Err(error),
+    }
+    let (field, syndrome) = validate_request(request)?;
+    let support = (0..request.redundancy as u32)
+        .map(Root::Finite)
+        .collect::<Vec<_>>();
+    let magnitudes =
+        recover_magnitudes(&field, &syndrome, &support).ok_or(Error::BadSyndromeWitness)?;
+    let locator = locator_from_support(&field, &support)?;
+    let certificate = LocatorCertificate {
+        schema: CERTIFICATE_SCHEMA.into(),
+        field: request.field.clone(),
+        redundancy: request.redundancy,
+        normalized_syndrome: syndrome,
+        distance: request.redundancy,
+        locator,
+        support,
+        magnitudes,
+        candidates_examined: 0,
+    };
+    verify_certificate(&certificate)?;
+    Ok(certificate)
 }
 
 pub fn verify_certificate(certificate: &LocatorCertificate) -> Result<(), Error> {
@@ -1189,5 +1225,20 @@ mod tests {
         assert_eq!(result.status, VerdictStatus::Unresolved);
         assert_eq!(result.distance, None);
         assert_eq!(result.family.as_deref(), Some("r7.sporadic"));
+    }
+
+    #[test]
+    fn exact_decoder_returns_terminal_nearest_word_for_r5_tangent() {
+        let certificate =
+            search_exact_locator(&request(prime_field(7), 5, vec![0, 0, 0, 1, 0]), 10_000).unwrap();
+        assert_eq!(certificate.distance, 4);
+        verify_certificate(&certificate).unwrap();
+    }
+
+    #[test]
+    fn rejects_geometric_carrier_outside_positive_dimension_code_range() {
+        let error = validate_request(&request(prime_field(7), 9, vec![0, 0, 1, 0, 0, 0, 1, 0, 0]))
+            .unwrap_err();
+        assert_eq!(error, Error::BadCodeParameters);
     }
 }

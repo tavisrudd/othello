@@ -158,6 +158,10 @@ The green tests cover prime and extension-field arithmetic, both locator
 charts, a weight-two decode and independent replay, the q=16 R10 Lucas witness,
 the frozen R6 tangent/sigma representatives, semilinear action and transporter
 canonicalization, an R5 wild exception, and the R7 `UNRESOLVED` radius gap.
-The current deep result is classification-only: the terminal `r-1` locator and
-nearest-word witness remain an explicit open gate, so the crate is not yet an
-accepted C969 decoder.
+Exact decoding now searches through degree `r-1`; if that complete search is
+empty, any fixed `r` distinct NRC columns form a basis and the failed lower
+search forces every recovered coefficient to be nonzero.  This supplies a
+replayable nearest-word certificate at distance `r` as well.  The implementation
+is exact within its candidate budget, but its terminal fallback has
+`q^(r-2)` projective candidates before root testing and does not discharge
+C608's faster `O(q),O(q^2),O(q^3)` selection bounds.

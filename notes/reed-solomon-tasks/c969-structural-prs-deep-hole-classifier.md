@@ -14,9 +14,10 @@ transporter through an explicit `m(q^3-q)` canonicalization fallback.  A
 deterministically regenerated 338-row semilinear exception registry now
 compresses the frozen R5--R7 certificates; classifier tests cover an R5 wild
 deep orbit and the R7 small-field radius-gap verdict.  Uniform nonpersistent
-formula adapters, formula-speed canonicalizers, the R5--R7 terminal solver,
-full-distance fallback, and complexity proofs remain open.  Code and
-mathematics only; no manuscript edits.
+formula adapters, formula-speed canonicalizers, the fast R5--R7 terminal
+solver, and complexity proofs remain open.  Exact decoding is nevertheless
+complete within an explicit candidate budget through an exhaustive terminal
+hyperplane fallback.  Code and mathematics only; no manuscript edits.
 
 ## Goal
 
