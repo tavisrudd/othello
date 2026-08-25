@@ -2195,6 +2195,31 @@ mod tests {
     }
 
     #[test]
+    fn sigma_q7_fibres_match_three_torus_quotient_classes() {
+        let field = Field::new(prime_field(7)).unwrap();
+        let expected = [
+            vec![0, 1, 0, 3, 0],
+            vec![1, 0, 3, 3, 5],
+            vec![1, 0, 1, 1, 2],
+            vec![1, 0, 1, 1, 2],
+            vec![1, 0, 1, 1, 2],
+            vec![1, 0, 1, 1, 2],
+            vec![1, 0, 3, 3, 5],
+            vec![0, 1, 0, 3, 0],
+        ];
+        for ([s0, s1], expected_minimum) in (0..7)
+            .map(|second| [1, second])
+            .chain(std::iter::once([0, 1]))
+            .zip(expected)
+        {
+            let syndrome = vec![s0, s1, field.neg(s0), field.neg(s1), s0];
+            let canonical =
+                canonicalize_syndrome(&request(prime_field(7), 5, syndrome), 1_000).unwrap();
+            assert_eq!(canonical.canonical_syndrome, expected_minimum);
+        }
+    }
+
+    #[test]
     fn pgl_action_preserves_nrc_and_canonicalizes_equivalent_inputs() {
         let field_spec = prime_field(7);
         let field = Field::new(field_spec.clone()).unwrap();

@@ -86,3 +86,17 @@ basis-independent extractor for that class and a proof that the class selects
 the lexicographically minimal target quadratic.  The `F_7` counterexample
 shows exactly why choosing the target quadratic independently of this datum
 cannot work.
+
+As bounded regression evidence, for `q=7`, `r=5`, and the fixed recurrence
+`X^2+1`, the eight projective initial conditions collapse under full PGL to
+exactly three canonical syndromes:
+
+```
+[0,1,0,3,0], [1,0,3,3,5], [1,0,1,1,2].
+```
+
+Here the norm-one torus has order eight, while quotienting by fourth powers
+gives a cyclic group of order four with three inversion orbits. The matching
+count supports the proposed quotient and is frozen in the test suite, but it
+does not replace the missing intrinsic-extraction and lexicographic-minimum
+proofs.
