@@ -3093,6 +3093,55 @@ def audit_sharp_linear_coefficient(output: Path) -> None:
     the report.
     """
 
+    raw_concurrent_rows = []
+    raw_triangular_rows = []
+    triangular_connector_degrees = {}
+    for secant_offset in range(-2, 8):
+        support_lower_offset = -(
+            (secant_offset - 1) * (secant_offset - 4) // 2
+        )
+        for coefficient_sum in (-3, -1, 1, 3):
+            if coefficient_sum % 3 != (1 - secant_offset) % 3:
+                continue
+            if 2 * secant_offset + coefficient_sum > 11:
+                continue
+            positive_lines = (3 + coefficient_sum) // 2
+
+            concurrent_support_offset = (
+                0 if abs(coefficient_sum) == 3 else 1
+            )
+            if (secant_offset >= positive_lines
+                    and concurrent_support_offset >= support_lower_offset):
+                raw_concurrent_rows.append((secant_offset, coefficient_sum))
+
+            triangle_support_offset = (
+                0 if abs(coefficient_sum) == 3 else -2
+            )
+            memberships = [1] * positive_lines + [0] * (3 - positive_lines)
+            connector_numerators = [
+                secant_offset + 2 + memberships[i] + memberships[j]
+                - memberships[k]
+                for i, j, k in ((0, 1, 2), (0, 2, 1), (1, 2, 0))
+            ]
+            if (triangle_support_offset >= support_lower_offset
+                    and all(value > 0 and value % 2 == 0
+                            for value in connector_numerators)):
+                row = (secant_offset, coefficient_sum)
+                raw_triangular_rows.append(row)
+                triangular_connector_degrees[str(row)] = [
+                    value // 2 for value in connector_numerators
+                ]
+
+    expected_raw_concurrent = [
+        (1, -3), (2, -1), (3, 1), (4, -3),
+        (4, 3), (5, -1), (7, -3),
+    ]
+    expected_raw_triangular = [(0, 1), (1, 3), (4, -3), (5, -1)]
+    if raw_concurrent_rows != expected_raw_concurrent:
+        raise AssertionError("the raw concurrent core ledger changed")
+    if raw_triangular_rows != expected_raw_triangular:
+        raise AssertionError("the raw triangular core ledger changed")
+
     endpoint_candidates = []
     for secant_offset in range(-2, 8):
         for coefficient_sum in (-3, -1, 1, 3):
@@ -3192,6 +3241,63 @@ def audit_sharp_linear_coefficient(output: Path) -> None:
                 != 3 * q - 2):
             raise AssertionError("the Bruen--Fisher residue support changed")
 
+        # The origin and the vertical point at infinity each lie on one
+        # tangent, one bisecant, and q-1 trisecants.  Every other core point
+        # lies on q/3 tangents, one bisecant, two trisecants, and 2q/3-2
+        # four-secants.  The latter profile follows either from the cubic
+        # construction or by subtracting the two exceptional profiles from
+        # the global spectrum and using the known vertical/radial/horizontal
+        # lines through a generic point.
+        bf_special_profile = {1: 1, 2: 1, 3: q - 1, 4: 0}
+        bf_generic_profile = {
+            1: q // 3,
+            2: 1,
+            3: 2,
+            4: 2 * q // 3 - 2,
+        }
+        for degree in range(1, 5):
+            reconstructed = (
+                2 * bf_special_profile[degree]
+                + 2 * (q - 1) * bf_generic_profile[degree]
+            )
+            if reconstructed != degree * bruen_fisher_spectrum[degree]:
+                raise AssertionError("the Bruen--Fisher point profile changed")
+
+        # If this exact 2q-point set were the saturated maximal-secant core
+        # of an arc with repair eta, write h,H for omitted 3- and 4-secants.
+        # The two selected-line equations force
+        # A_2=q/3+1-eta+2h+3H <= q.  The two exceptional points force
+        # h>=2(q-1-s)=2q/3-4.  Therefore eta>=2q/3-7.
+        bf_minimum_omitted_trisecants = 2 * q // 3 - 4
+        bf_minimum_repair = 2 * q // 3 - 7
+        if (2 * bf_minimum_omitted_trisecants
+                > 2 * q // 3 - 1 + bf_minimum_repair):
+            raise AssertionError("the Bruen--Fisher repair threshold changed")
+        if (2 * bf_minimum_omitted_trisecants
+                != 2 * q // 3 - 1 + bf_minimum_repair):
+            raise AssertionError("the Bruen--Fisher threshold is not sharp in the ledger")
+
+        bf_plus_spectrum = {
+            1: bruen_fisher_spectrum[1] - 2,
+            2: 3,
+            3: 3 * q - 3,
+            4: bruen_fisher_spectrum[4],
+        }
+        if sum(bf_plus_spectrum.values()) != point_count:
+            raise AssertionError("the augmented Bruen--Fisher line count changed")
+        if sum(degree * count for degree, count
+               in bf_plus_spectrum.items()) != (2 * q + 1) * (q + 1):
+            raise AssertionError("the augmented Bruen--Fisher incidence sum changed")
+        if sum(degree * (degree - 1) // 2 * count
+               for degree, count in bf_plus_spectrum.items()
+               ) != (2 * q + 1) * q:
+            raise AssertionError("the augmented Bruen--Fisher pair sum changed")
+        bf_plus_minimum_omitted_trisecants = q - 6
+        bf_plus_minimum_repair = q - 11
+        if (2 * bf_plus_minimum_omitted_trisecants
+                != q - 1 + bf_plus_minimum_repair):
+            raise AssertionError("the augmented Bruen--Fisher repair threshold changed")
+
         field_checks.append({
             "field_order": q,
             "endpoint_delta": delta,
@@ -3210,11 +3316,34 @@ def audit_sharp_linear_coefficient(output: Path) -> None:
                     in bruen_fisher_spectrum.items()
                 },
                 "residue_support": 3 * q - 2,
+                "exceptional_point_profile": {
+                    str(degree): count for degree, count
+                    in bf_special_profile.items()
+                },
+                "generic_point_profile": {
+                    str(degree): count for degree, count
+                    in bf_generic_profile.items()
+                },
+                "minimum_omitted_trisecants": bf_minimum_omitted_trisecants,
+                "repair_lower_bound_if_exact_saturated_core": bf_minimum_repair,
+                "augmented_core": {
+                    "size": 2 * q + 1,
+                    "line_spectrum": {
+                        str(degree): count for degree, count
+                        in bf_plus_spectrum.items()
+                    },
+                    "minimum_omitted_trisecants": (
+                        bf_plus_minimum_omitted_trisecants
+                    ),
+                    "repair_lower_bound_if_exact_saturated_core": (
+                        bf_plus_minimum_repair
+                    ),
+                },
             },
         })
 
     output.write_text(json.dumps({
-        "schema": "c949-sharp-linear-coefficient-audit-v1",
+        "schema": "c949-sharp-linear-coefficient-audit-v2",
         "scope": (
             "exact arithmetic replay only; the line-code representation and "
             "pointwise/geometric inequalities remain human-proof dependencies"
@@ -3230,7 +3359,16 @@ def audit_sharp_linear_coefficient(output: Path) -> None:
         "endpoint_candidates_after_norm_and_scalar_checks": [
             [1, -3], [2, -1], [3, 1], [4, -3], [4, 3], [5, -1]
         ],
-        "triangular_connector_survivors": [[4, -3], [5, -1]],
+        "raw_concurrent_rows_for_sublinear_repair": [
+            list(row) for row in raw_concurrent_rows
+        ],
+        "raw_triangular_connector_rows_for_sublinear_repair": [
+            list(row) for row in raw_triangular_rows
+        ],
+        "raw_triangular_connector_degrees": triangular_connector_degrees,
+        "triangular_connector_survivors_after_adjacent_core_overload": [
+            [4, -3], [5, -1]
+        ],
         "field_checks": field_checks,
         "checked": True,
     }, indent=2, sort_keys=True) + "\n")

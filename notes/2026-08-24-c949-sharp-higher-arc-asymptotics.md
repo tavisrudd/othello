@@ -1258,15 +1258,37 @@ problem.
 Indeed, coverage and Cauchy again keep `j=T-2q` bounded, while `(TL3)` gives
 `t>=3` and `(TL7)` gives `t<=3+6eta(q)/q+o(1)`.  Integrality forces `t=3`.
 After passage to a subsequence, `j`, the coefficient signs, and whether the
-three lines are concurrent or triangular are fixed.  The same leading
-capacity ledger used at the endpoint leaves the following complete core
+three lines are concurrent or triangular are fixed.  Here one must not reuse
+the endpoint's constant-slack exclusions: an `o(q)` repair can absorb them.
+The raw enumeration is short enough to expose.  Coverage and nonnegative
+shell defect give `-2<=j<=7`; coefficient congruence gives
+`sigma congruent 1-j (mod 3)`; and the leading sum/norm correction gives
+`2j+sigma<=11`.  The exact support of three concurrent lines is `3q` for
+`sigma=+-3` and `3q+1` for `sigma=+-1`, while for a triangle it is `3q` and
+`3q-2`, respectively.  In the concurrent case the infinity line contains
+`j` core points, including exactly `a=(3+sigma)/2` distinguished points, so
+`j>=a`.  In the triangular case, if `p_i` records whether generator vertex
+`Q_i` is positive, its connector to `Q_j` has degree
+
+```text
+x_ij=(j+2+p_i+p_j-p_k)/2.
+```
+
+Requiring these three degrees to be positive integers completes the pencil
+audit.  Together these conditions give the following complete *raw* core
 list:
 
 ```text
 concurrent: (j,sigma)=(1,-3),(2,-1),(3,1),(4,-3),
                       (4,3),(5,-1),(7,-3),
-triangle:   (j,sigma)=(4,-3),(5,-1).                 (SR1)
+triangle:   (j,sigma)=(0,1),(1,3),(4,-3),(5,-1).     (SR1)
 ```
+
+For the triangle rows the connector degrees are, respectively,
+`(2,1,1)`, `(2,2,2)`, `(3,3,3)`, and `(4,4,3)`.  The first two are exactly
+the Bruen--Fisher adjacent cores treated below; the endpoint proof excludes
+them only when `eta=0`, so their sublinear exclusion needs a separate
+argument.
 
 The concurrent branch has an especially compact affine form.  Dualize the
 three generator lines to collinear points `Q_1,Q_2,Q_3` on a connector
@@ -1284,14 +1306,53 @@ constant modulo three.  Thus concurrence is exactly the problem of
 classifying `2q`-point binary affine Radon ghosts with three genuinely
 two-uniform directions.
 
-In the triangular branch, the connector degrees are rigid: they are
-`(3,3,3)` for `(4,-3)` and `(4,4,3)` for `(5,-1)`.  The remaining task is to
-construct such a binary blocking core and choose the primal lines through it
-so that every core point has degree `2q/3+1` and no other point exceeds that
-degree.  This is a finite geometric classification plus a regular incidence
-selection, not an expanding line-code search.  The exact endpoint proof says
-only that repair zero fails; repair `+1` is the first honest construction
-target.
+This affine statement has an exact two-permutation normal form.  Send the
+three distinguished directions to `infinity,0,1`.  The first two
+two-uniform parallel classes make the incidence graph of `X` on the two
+coordinate copies of `F_q` a two-regular bipartite graph.  Its two perfect
+matchings give disjoint permutations `f,g:F_q -> F_q` with
+
+```text
+X={(x,f(x)):x in F_q} disjoint union {(x,g(x)):x in F_q},
+{f(x)-x,g(x)-x:x in F_q}=2 F_q                         (SR1a)
+```
+
+as multisets.  For a finite slope `m` put
+
+```text
+R_m(T)=product_x (T-f(x)+mx)(T-g(x)+mx).              (SR1b)
+```
+
+Let `a=(3+sigma)/2` be the number of positive generators and
+`m_0=j-a` the number of nondistinguished infinity points that lie in `D`.
+The constant-residue condition on every parallel class is equivalent,
+without any degree-size assumption, to the exact factorization ledger
+
+```text
+three distinguished directions: R_m=(T^q-T)^2;
+m_0 other directions:             R_m=H_m(T)^3,
+                                   deg H_m=2q/3;
+q-2-m_0 other directions:         R_m=(T^q-T)H_m(T)^3,
+                                   deg H_m=q/3.         (SR1c)
+```
+
+Here the first line includes the vertical direction in the natural
+homogeneous interpretation.  Conversely, `(SR1a)--(SR1c)` recover all the
+parallel-class residues, hence the concurrent Radon core.  The seven rows of
+`(SR1)` have `m_0=1,1,1,4,1,4,7`, respectively.  This is the sharp algebraic
+interface for the remaining construction problem: one needs two disjoint
+permutations whose combined projections are exact double covers in three
+directions, cubes in `m_0` directions, and a field polynomial times a cube
+in every remaining direction.  It also shows why a numerical search is not
+yet a proof mechanism: the unknown object is now a field-uniform family of
+Rédei factorizations, not merely a finite configuration.
+
+For any surviving triangular row the remaining task is to construct such a
+binary blocking core and choose the primal lines through it so that every
+core point has degree `2q/3+1` and no other point exceeds that degree.  This
+is a finite geometric classification plus a regular incidence selection,
+not an expanding line-code search.  The exact endpoint proof says only that
+repair zero fails; repair `+1` is the first honest construction target.
 
 The closest field-uniform object is classical, but a short switch from it is
 impossible.  Bruen--Fisher Theorem 12 constructs, for a nonsquare `tau` in
@@ -1343,10 +1404,89 @@ positive sign removes that point from `D`, while flipping the negative sign
 adds it.  The all-negative and one-positive/two-negative outcomes therefore
 have sizes only `2q-2` and `2q-1`, not `2q+4` and `2q+5`.
 
-So the sharpness construction, if it exists, is a genuinely global
-`Omega(q)` Radon trade away from Bruen--Fisher, followed by the regular
-incidence selection.  A bounded local switch or a wider bounded census cannot
-find the mechanism.
+There is a second, independent reason the adjacent core itself cannot be
+repaired.  It rules out even a sublinear change in the selected-line family.
+The origin `O` and vertical point `C` in `(SR2)` each lie on one tangent, one
+bisecant, and `q-1` trisecants; their trisecant pencils are disjoint because
+their common line is the bisecant `OC`.  Every other point of `D_BF` lies on
+
+```text
+q/3 tangents, 1 bisecant, 2 trisecants, 2q/3-2 four-secants. (SR6)
+```
+
+For completeness, `(SR6)` follows without another character sum.  Scaling
+is transitive on the nonzero points of each cubic.  A generic point has its
+horizontal bisecant and its vertical and radial trisecants.  Subtracting the
+two exceptional point profiles from the global spectrum `(SR3)` forces the
+two generic-orbit profiles to have, in total, `2q/3,2,4,4q/3-4` lines of
+degrees `1,2,3,4`; the three displayed known lines split the middle two
+counts equally, and the point-pencil sum then gives `(SR6)` for each orbit.
+In particular every point has a tangent, so `D_BF` is minimal as a blocking
+set.
+
+Now suppose `D_BF` itself were the exact saturated maximal-secant core of an
+arc of size
+
+```text
+k=q^2/3+5q/3+eta.
+```
+
+Let `A_i` count selected dual lines meeting `D_BF` in `i` points, and write
+`h=N_3-A_3`, `H=N_4-A_4`.  Saturation gives
+`sum i A_i=2q(2q/3+1)`, while `sum A_i=k`.  Substitution of `(SR3)` yields
+the exact identity
+
+```text
+A_2=q/3+1-eta+2h+3H.                                (SR7)
+```
+
+Since there are only `N_2=q` bisecants,
+
+```text
+2h+3H <= 2q/3-1+eta.                                (SR8)
+```
+
+At each of `O,C`, the arc cap forces omission of at least
+`q-1-(2q/3+1)=q/3-2` of its trisecants.  The pencils are disjoint, so
+`h>=2q/3-4`.  Combining this with `(SR8)` gives
+
+```text
+eta >= 2q/3-7.                                      (SR9)
+```
+
+The adjacent all-positive row is equally rigid.  Put
+`D_BF^+=D_BF union {H}`.  Its exact spectrum is
+
+```text
+(N_1,N_2,N_3,N_4)
+ =(2(q^2-q+3)/3-2, 3, 3q-3, (q-1)(q-3)/3).          (SR10)
+```
+
+The three points `O,C,H` each lie on `q-1` trisecants, and these three
+pencils are pairwise disjoint because their connector triangle consists of
+bisecants.  If `D_BF^+` were the exact saturated core, the same notation and
+the two selected-line equations would give
+
+```text
+A_2=-q+4-eta+2h+3H <= N_2=3,
+h>=3(q/3-2)=q-6.
+```
+
+Consequently `eta>=q-11`.  Thus neither of the two adjacent triangular rows
+in the raw list `(SR1)` can occur with `eta=o(q)`.  The genuine sublinear
+frontier is therefore exactly
+
+```text
+concurrent: (j,sigma)=(1,-3),(2,-1),(3,1),(4,-3),
+                      (4,3),(5,-1),(7,-3),
+triangle:   (j,sigma)=(4,-3),(5,-1).                (SR11)
+```
+
+Bruen--Fisher is not merely one bounded switch away from sharpness.  A
+sharpness construction, if it exists, needs a genuinely global `Omega(q)`
+Radon trade that also removes the overloaded trisecant pencils, followed by
+the regular incidence selection.  A bounded local switch or a wider bounded
+census cannot find the mechanism.
 
 #### Bound status after the structural upgrade
 
@@ -1665,12 +1805,15 @@ family is lower priority.
   positive repair can construct the matching upper side remains open.
 - **Settled by the sharpness pass — can a `5/3+o(1)` construction hide in
   larger line-code support?**  No.  Integrality between `t>=3` and
-  `t<=3+o(1)` forces exactly three generators.  The complete surviving list
-  is `(SR1)`: seven concurrent sign/offset cores and two triangular cores.
-  Concurrent cores are equivalently `2q`-point affine binary Radon ghosts
-  with three two-uniform directions; triangular cores have connector degrees
-  `(3,3,3)` or `(4,4,3)`.  What remains open is existence and regular inverse
-  realization of those cores, beginning with the constant repair `+1`.
+  `t<=3+o(1)` forces exactly three generators.  The raw connector ledger has
+  seven concurrent and four triangular rows; the two adjacent triangular
+  rows are then excluded by `(SR9)--(SR10)`, leaving exactly `(SR11)`: seven
+  concurrent sign/offset cores and two triangular cores.  Concurrent cores
+  are equivalently two disjoint permutations satisfying the exact Rédei
+  factorization ledger `(SR1a)--(SR1c)`; the triangular survivors have
+  connector degrees `(3,3,3)` or `(4,4,3)`.  What remains open is existence
+  and regular inverse realization of those cores, beginning with the constant
+  repair `+1`.
 - **Settled by `ej`+`tt` — is the nearest classical four-blocking-set core a
   cheap source of the admissible rows?**  Bruen--Fisher is exactly the
   adjacent signed triangle `(j,sigma)=(0,1)`, and adjoining its horizontal
@@ -1678,9 +1821,12 @@ family is lower priority.
   difference of two three-line cores is a dual incidence-code word, whose
   elementary support bound is `q+2`; below that bound coordinatewise binary
   feasibility only flips the three distinguished points and yields sizes
-  `2q-2` or `2q-1`, not `2q+4` or `2q+5`.  The unexplained object is therefore
-  a global `Omega(q)` Radon trade that lands on one of `(SR1)` and admits the
-  regular inverse selection.
+  `2q-2` or `2q-1`, not `2q+4` or `2q+5`.  More strongly, its two exceptional
+  points force `eta>=2q/3-7` if Bruen--Fisher is the exact saturated core;
+  after adjoining the infinity point, three exceptional pencils force
+  `eta>=q-11`.  Thus neither adjacent row can support any sublinear repair.
+  The unexplained object is a global `Omega(q)` Radon trade that lands on one
+  of `(SR11)` and admits the regular inverse selection.
 - **Settled by the signed descent — what geometry does its support have?**
   Field-uniformly it is a signed untouchable set of size `4q-6`: it has no
   tangents, and every support 2-secant joins opposite signs.  At `q=9` its

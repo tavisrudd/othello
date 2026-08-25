@@ -69,13 +69,38 @@
     {
       "all_negative_final_gap": 3,
       "bruen_fisher_adjacent_core": {
+        "augmented_core": {
+          "line_spectrum": {
+            "1": 4320,
+            "2": 3,
+            "3": 240,
+            "4": 2080
+          },
+          "minimum_omitted_trisecants": 75,
+          "repair_lower_bound_if_exact_saturated_core": 70,
+          "size": 163
+        },
         "coefficient_sum": 1,
+        "exceptional_point_profile": {
+          "1": 1,
+          "2": 1,
+          "3": 80,
+          "4": 0
+        },
+        "generic_point_profile": {
+          "1": 27,
+          "2": 1,
+          "3": 2,
+          "4": 52
+        },
         "line_spectrum": {
           "1": 4322,
           "2": 81,
           "3": 160,
           "4": 2080
         },
+        "minimum_omitted_trisecants": 50,
+        "repair_lower_bound_if_exact_saturated_core": 47,
         "residue_support": 241,
         "secant_offset": 0,
         "size": 162
@@ -162,13 +187,38 @@
     {
       "all_negative_final_gap": 3,
       "bruen_fisher_adjacent_core": {
+        "augmented_core": {
+          "line_spectrum": {
+            "1": 39204,
+            "2": 3,
+            "3": 726,
+            "4": 19360
+          },
+          "minimum_omitted_trisecants": 237,
+          "repair_lower_bound_if_exact_saturated_core": 232,
+          "size": 487
+        },
         "coefficient_sum": 1,
+        "exceptional_point_profile": {
+          "1": 1,
+          "2": 1,
+          "3": 242,
+          "4": 0
+        },
+        "generic_point_profile": {
+          "1": 81,
+          "2": 1,
+          "3": 2,
+          "4": 160
+        },
         "line_spectrum": {
           "1": 39206,
           "2": 243,
           "3": 484,
           "4": 19360
         },
+        "minimum_omitted_trisecants": 158,
+        "repair_lower_bound_if_exact_saturated_core": 155,
         "residue_support": 727,
         "secant_offset": 0,
         "size": 486
@@ -255,13 +305,38 @@
     {
       "all_negative_final_gap": 3,
       "bruen_fisher_adjacent_core": {
+        "augmented_core": {
+          "line_spectrum": {
+            "1": 353808,
+            "2": 3,
+            "3": 2184,
+            "4": 176176
+          },
+          "minimum_omitted_trisecants": 723,
+          "repair_lower_bound_if_exact_saturated_core": 718,
+          "size": 1459
+        },
         "coefficient_sum": 1,
+        "exceptional_point_profile": {
+          "1": 1,
+          "2": 1,
+          "3": 728,
+          "4": 0
+        },
+        "generic_point_profile": {
+          "1": 243,
+          "2": 1,
+          "3": 2,
+          "4": 484
+        },
         "line_spectrum": {
           "1": 353810,
           "2": 729,
           "3": 1456,
           "4": 176176
         },
+        "minimum_omitted_trisecants": 482,
+        "repair_lower_bound_if_exact_saturated_core": 479,
         "residue_support": 2185,
         "secant_offset": 0,
         "size": 1458
@@ -346,9 +421,79 @@
       "mixed_positive_generator_cap_gap": 1
     }
   ],
-  "schema": "c949-sharp-linear-coefficient-audit-v1",
+  "raw_concurrent_rows_for_sublinear_repair": [
+    [
+      1,
+      -3
+    ],
+    [
+      2,
+      -1
+    ],
+    [
+      3,
+      1
+    ],
+    [
+      4,
+      -3
+    ],
+    [
+      4,
+      3
+    ],
+    [
+      5,
+      -1
+    ],
+    [
+      7,
+      -3
+    ]
+  ],
+  "raw_triangular_connector_degrees": {
+    "(0, 1)": [
+      2,
+      1,
+      1
+    ],
+    "(1, 3)": [
+      2,
+      2,
+      2
+    ],
+    "(4, -3)": [
+      3,
+      3,
+      3
+    ],
+    "(5, -1)": [
+      4,
+      4,
+      3
+    ]
+  },
+  "raw_triangular_connector_rows_for_sublinear_repair": [
+    [
+      0,
+      1
+    ],
+    [
+      1,
+      3
+    ],
+    [
+      4,
+      -3
+    ],
+    [
+      5,
+      -1
+    ]
+  ],
+  "schema": "c949-sharp-linear-coefficient-audit-v2",
   "scope": "exact arithmetic replay only; the line-code representation and pointwise/geometric inequalities remain human-proof dependencies",
-  "triangular_connector_survivors": [
+  "triangular_connector_survivors_after_adjacent_core_overload": [
     [
       4,
       -3
