@@ -14,9 +14,8 @@ path = "src/main.rs"
 clap.workspace = true
 serde.workspace = true
 serde_json.workspace = true
-sparse-shadow-core = { path = "../sparse-shadow-core" }
+sparse-shadow-core = { path = "../sparse-shadow-core", version = "0.1.0" }
 thiserror.workspace = true
-tracing.workspace = true
 
 [lints]
 workspace = true

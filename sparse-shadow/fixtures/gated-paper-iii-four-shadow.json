@@ -1,0 +1,36 @@
+{
+  "schema": "sparse-shadow/v1",
+  "profile": {
+    "adapter": "paper_iii_four_shadow",
+    "input": {
+      "gate": {
+        "enabled": false,
+        "reason": "formal closure metadata exists but no frozen branch-fibre plus aligned-four-set export exists",
+        "required_export": "papers/clebsch-passages/verification/sparse_shadow_export.json"
+      },
+      "source": {
+        "paper": "III",
+        "theorem": "arithmetic descent and aligned four-set reconstruction",
+        "artifact": "PENDING",
+        "sha256": ""
+      },
+      "branch_sextic": "J_0=0",
+      "rational_fibre_point": [],
+      "fibre_quadratic_algebra": "PENDING_EXPORT",
+      "vertex_count": 0,
+      "aligned_four_sets": [],
+      "action": {"kind": "vertex_permutations", "degree": 0, "generators": []},
+      "recovered_twist": "z^2=5J_0",
+      "recovered_two_graph": "PENDING_EXPORT",
+      "twist_ambiguity": {
+        "kind": "homogeneous_fibre",
+        "numerator": "Q^times",
+        "denominator": "(Q^times)^2"
+      },
+      "complement_ambiguity": {"kind": "orientation_c2"},
+      "calibrated_triangle_product": null,
+      "minimality_collisions": []
+    }
+  }
+}
+

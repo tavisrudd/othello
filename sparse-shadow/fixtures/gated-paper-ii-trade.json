@@ -1,0 +1,34 @@
+{
+  "schema": "sparse-shadow/v1",
+  "profile": {
+    "adapter": "paper_ii_trade",
+    "input": {
+      "gate": {
+        "enabled": false,
+        "reason": "profile_incidence.json proves moments but is not a frozen full matching-shadow export",
+        "required_export": "papers/clebsch-factorization/verification/evidence/sparse_shadow_export.json"
+      },
+      "source": {
+        "paper": "II",
+        "theorem": "quadratic trade, carrier gate, and cubic orientation",
+        "artifact": "PENDING",
+        "sha256": ""
+      },
+      "field": {
+        "characteristic": 11,
+        "degree": 1,
+        "modulus_coefficients_low_to_high": [],
+        "element_encoding": "least_nonnegative_residue"
+      },
+      "matching_count": 0,
+      "trade_halves": [[], []],
+      "action": {"kind": "vertex_permutations", "degree": 0, "generators": []},
+      "carrier_hypothesis": "complete splitting into secants",
+      "recovered_carrier": "PENDING_EXPORT",
+      "ambiguity": {"kind": "orientation_c2"},
+      "odd_calibration": null,
+      "minimality_collisions": []
+    }
+  }
+}
+

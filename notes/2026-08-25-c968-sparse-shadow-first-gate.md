@@ -17,6 +17,9 @@ residual uncalibrated orientation `C2`. Relabeling and corruption tests pass.
 An independently implemented reference search rederives the canonical payload,
 witness, winning trace, and complete automorphism set from raw relations; it
 rejects hash, trace, and missing-automorphism corruption.
+The producer now uses guarded fixed/preallocated hot records, emits three
+generators closing to all 120 actions, and produces independently replayable
+equivalence/inequivalence and reconstruction artifacts.
 
 This closes C968's first implementation gate, not C968. Papers II--V remain
 schema-gated pending exact frozen exports, and the current independent replay
@@ -47,6 +50,12 @@ separately specified proof-rule calculus.
   relabelings;
 - deliberate canonical-identity, branch-trace, and automorphism-set corruption:
   rejected by the independent reference implementation.
+- hot Paper-I search: fixed 32/64/128-byte guarded records; zero allocations,
+  reallocations, deallocations, and cold arena grows over 193 nodes;
+- equivalence certificates carry an explicit isomorphism or two exhaustive
+  canonical proofs plus a separating identity; reconstruction artifacts replay
+  their carrier, residual `C2`, and round trip;
+- `cargo deny check`: advisories, bans, licenses, and sources green.
 
 ## Prior-art result
 
@@ -62,24 +71,34 @@ baseline. No novelty or priority claim is licensed.
 
 - **Settled:** the fixture's 120 automorphisms are not the orientation-preserving
   `A5` alone; the two unlabeled orientations retain the central `C2`, exactly
-  matching the declared residual orientation ambiguity.
+  matching the declared residual orientation ambiguity. Three generators close
+  to all 120 verified actions.
+- **Settled in the closeout pass:** source provenance initially contaminated
+  canonical identity. Canonical serialization now normalizes the theorem
+  locator to the adapter identity, and a regression test proves that a second
+  frozen export of the same shadow remains equivalent.
 - **Partly settled — certificate trust:** independent exhaustive replay now
   exists and shares no canonical-search implementation with the producer.
   Remaining question: what is the smallest compact proof language that covers
   richer relation/action adapters? Evidence gap: no explicit proof-rule calculus
   yet. Owning next gate: adapt and minimize the `isocert` rule/checker split.
-- **Open — source exports:** the exact stable machine exports for Papers II--V
-  have not been identified. Owning next gate: freeze one adapter export at a
-  time; do not infer it from manuscript prose.
-- **Open — hot representation:** current search allocates cloned partitions and
-  signatures. This was intentional for the first correctness gate, but fails
-  the final Tiger-style acceptance gate. Owning next gate: proof-checker design
-  first, then a fixed/preallocated search representation with size/alignment
-  assertions and allocation instrumentation.
+- **Open — source exports:** nearby evidence files exist for Papers II--V, but
+  none is the complete frozen shadow required by its typed adapter. Four
+  fail-closed schema fixtures name the missing export paths. Owning next gate:
+  the respective paper stream must freeze one exact export at a time; C968 will
+  not infer it from manuscript prose or trust metadata.
+- **Settled — hot representation:** the Paper-I producer uses fixed/preallocated
+  search data with compile-time size/alignment guards and a zero-allocation
+  instrumented fixture run. The slower independent checker intentionally keeps
+  simple cold structures.
+- **Open — timing drift:** two consecutive CPU-0-pinned runs differed by 37%.
+  No optimization verdict uses them. Evidence gap: interleaved A/B plus
+  cycles/instructions per node; owning successor is the first actual
+  optimization proposal, not routine correctness work.
 
 ## Next gate
 
-Specify an `isocert`-caliber compact proof-rule certificate for the Paper-I
-fixture, using the independent reference search as the oracle during
-development. Then freeze/profile the hot representation before enabling the
-next exported adapter.
+Specify an `isocert`-caliber compact proof-rule calculus, using the independent
+reference search as oracle. In parallel, the owning paper streams may freeze
+the exact exports named by the four gated fixtures; no further adapter can be
+enabled before that source gate.

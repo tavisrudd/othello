@@ -1,7 +1,7 @@
 use proptest::prelude::*;
 use sparse_shadow_core::{
-    CanonicalCertificate, InputArtifact, ProfileInput, canonicalize, reconstruct, validate,
-    verify_certificate,
+    CanonicalCertificate, EquivalenceOutcome, InputArtifact, ProfileInput, canonicalize, compare,
+    reconstruct, validate, verify_certificate, verify_equivalence, verify_reconstruction,
 };
 
 const FIXTURE: &str = include_str!("../../../fixtures/paper-i-icosahedral-orbitals.json");
@@ -39,6 +39,7 @@ fn fixture_validates_and_has_expected_symmetry() {
     assert!(validate(&input).expect("valid fixture").valid);
     let artifact = canonicalize(&input).expect("canonical fixture");
     assert_eq!(artifact.automorphism_order, 120);
+    assert!(artifact.automorphism_generators.len() < 120);
     assert_eq!(artifact.vertex_orbits, vec![(0..12).collect::<Vec<_>>()]);
 }
 
@@ -80,12 +81,73 @@ fn malformed_orbital_partition_is_rejected() {
 }
 
 #[test]
+fn provenance_does_not_change_mathematical_identity() {
+    let left = fixture();
+    let mut right = left.clone();
+    let ProfileInput::PaperIOrientation(paper) = &mut right.profile else {
+        unreachable!();
+    };
+    paper.theorem_locator = "a-second-frozen-export-of-the-same-shadow".into();
+    let certificate = compare(&left, &right).expect("comparison");
+    assert!(matches!(
+        certificate.result,
+        EquivalenceOutcome::Equivalent { .. }
+    ));
+    assert!(
+        verify_equivalence(&left, &right, &certificate)
+            .expect("equivalence replays")
+            .valid
+    );
+}
+
+#[test]
 fn reconstruction_reports_unoriented_c2_fibre() {
     let reconstructed = reconstruct(&fixture()).expect("reconstruction");
     assert!(!reconstructed.exact_oriented_return);
     assert_eq!(
         reconstructed.round_trip_shadow,
         reconstructed.canonical.canonical
+    );
+    assert!(
+        verify_reconstruction(&fixture(), &reconstructed)
+            .expect("reconstruction replays")
+            .valid
+    );
+    let mut corrupt = reconstructed;
+    corrupt.carrier = "wrong_carrier".into();
+    assert!(verify_reconstruction(&fixture(), &corrupt).is_err());
+}
+
+#[test]
+fn equivalence_and_inequivalence_certificates_replay() {
+    let left = fixture();
+    let mut relabeled = left.clone();
+    rotate(&mut relabeled, 3);
+    let equivalent = compare(&left, &relabeled).expect("comparison");
+    assert!(matches!(
+        equivalent.result,
+        EquivalenceOutcome::Equivalent { .. }
+    ));
+    assert!(
+        verify_equivalence(&left, &relabeled, &equivalent)
+            .expect("equivalence replays")
+            .valid
+    );
+
+    let mut calibrated = left.clone();
+    let ProfileInput::PaperIOrientation(paper) = &mut calibrated.profile else {
+        unreachable!();
+    };
+    paper.calibrated_triangle = Some([0, 1, 2]);
+    let inequivalent = compare(&left, &calibrated).expect("comparison");
+    assert!(matches!(
+        inequivalent.result,
+        EquivalenceOutcome::Inequivalent { .. }
+    ));
+    assert!(
+        verify_equivalence(&left, &calibrated, &inequivalent)
+            .expect("inequivalence replays")
+            .valid
     );
 }
 

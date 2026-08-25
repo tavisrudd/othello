@@ -9,14 +9,20 @@ closure.
 | `serde`, `serde_json` | strict versioned artifacts | MIT OR Apache-2.0 | derive only; no preserve-order dependency |
 | `thiserror` | typed library errors | MIT OR Apache-2.0 | default |
 | `clap` | thin CLI | MIT OR Apache-2.0 | derive only |
-| `indexmap` | deterministic schema maps when adapters need them | MIT OR Apache-2.0 | serde only |
 | `blake3` | artifact identities, never proof evidence | CC0-1.0 OR Apache-2.0 OR Apache-2.0 WITH LLVM-exception | default; hashing stays outside search |
-| `tracing` | cold-path diagnostics | MIT | default; no subscriber in the core |
 | `proptest` | development-only invariance/corruption tests | MIT OR Apache-2.0 | dev dependency only |
+| `stats_alloc` | development-only hot-loop allocation assertion | MIT | dev dependency only; wraps the system allocator outside production |
+| `criterion` 0.7 | statistically sampled representative end-to-end benchmarks; Rust 1.80 MSRV | MIT OR Apache-2.0 | dev dependency only; default features disabled, so neither Rayon nor plotting enters the lockfile |
 
 The lockfile is authoritative for resolved versions. Before a release, rerun a
 machine-readable license audit over the lockfile and record advisories and
-maintenance status. `rayon`, `criterion`, `fixedbitset`, `petgraph`, and an
+maintenance status. `rayon`, `fixedbitset`, `petgraph`, and an
 exact finite-field crate are deferred until a measured or adapter-specific need
 exists; adding any of them reopens this audit.
 
+Resolved direct versions at the 2026-08-25 gate are `blake3 1.8.7`, `clap
+4.6.6`, `serde 1.0.229`, `serde_json 1.0.151`, `thiserror 2.0.20`, `criterion
+0.7.0`, `proptest 1.11.0`, and `stats_alloc 0.1.10`. `cargo-deny 0.19.4`
+reports advisories, bans, licenses, and sources all green. `deny.toml` rejects
+wildcard and unknown registry/git dependencies; duplicate transitive versions
+are visible warnings rather than hidden failures.

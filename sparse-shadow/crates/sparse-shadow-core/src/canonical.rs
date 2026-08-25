@@ -4,7 +4,7 @@ use serde::{Deserialize, Serialize};
 
 use crate::{
     BinaryRelation, InputArtifact, PaperIOrientation, ProfileInput, RelationalShadow, ShadowError,
-    Vertex, validate,
+    validate,
 };
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
@@ -14,6 +14,7 @@ pub struct SearchStats {
     pub canonical_leaves: u64,
     pub refinement_rounds: u64,
     pub max_depth: u32,
+    pub arena_grows: u64,
 }
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
@@ -49,22 +50,6 @@ pub struct CanonicalArtifact {
     pub certificate: CanonicalCertificate,
 }
 
-#[derive(Clone)]
-struct DenseRelation {
-    directed: bool,
-    adjacency: Vec<Vec<bool>>,
-}
-
-struct Search<'a> {
-    paper: &'a PaperIOrientation,
-    dense: Vec<DenseRelation>,
-    best_json: Option<String>,
-    best_permutation: Vec<usize>,
-    winning_trace: Vec<BranchDecision>,
-    equal_permutations: Vec<Vec<usize>>,
-    stats: SearchStats,
-}
-
 /// Compute the deterministic canonical form and replay certificate.
 ///
 /// # Errors
@@ -77,31 +62,12 @@ pub fn canonicalize(input: &InputArtifact) -> Result<CanonicalArtifact, ShadowEr
         return Err(gated_error(&input.profile));
     };
 
-    let dense = dense_relations(&paper.shadow);
-    let mut search = Search {
-        paper,
-        dense,
-        best_json: None,
-        best_permutation: Vec::new(),
-        winning_trace: Vec::new(),
-        equal_permutations: Vec::new(),
-        stats: SearchStats {
-            search_nodes: 0,
-            canonical_leaves: 0,
-            refinement_rounds: 0,
-            max_depth: 0,
-        },
-    };
-    let partition = initial_partition(&paper.shadow.vertices);
-    search.visit(partition, &mut Vec::new(), 0)?;
-
-    let canonical_json = search
-        .best_json
-        .clone()
-        .ok_or_else(|| ShadowError::Invalid("canonical search produced no leaf".into()))?;
-    let canonical: InputArtifact = serde_json::from_str(&canonical_json)?;
+    let search = crate::hot::search(paper);
+    let canonical = relabel(paper, &search.best_permutation);
+    let canonical_json = serde_json::to_string(&canonical)?;
     let input_to_canonical = to_u32_permutation(&search.best_permutation)?;
     let automorphisms = automorphisms(&search.best_permutation, &search.equal_permutations)?;
+    let automorphism_generators = generating_set(&automorphisms);
     let vertex_orbits = permutation_orbits(paper.shadow.vertices.len(), &automorphisms)?;
     let canonical_id = blake3::hash(canonical_json.as_bytes()).to_hex().to_string();
     let automorphism_order = u64::try_from(automorphisms.len())
@@ -120,7 +86,7 @@ pub fn canonicalize(input: &InputArtifact) -> Result<CanonicalArtifact, ShadowEr
         canonical_id,
         canonical,
         input_to_canonical,
-        automorphism_generators: automorphisms.clone(),
+        automorphism_generators,
         automorphism_order,
         vertex_orbits,
         stats: search.stats,
@@ -140,167 +106,6 @@ fn gated_error(profile: &ProfileInput) -> ShadowError {
         profile: name,
         reason: gate.reason.clone(),
     }
-}
-
-impl Search<'_> {
-    fn visit(
-        &mut self,
-        mut partition: Vec<Vec<usize>>,
-        trace: &mut Vec<BranchDecision>,
-        depth: u32,
-    ) -> Result<(), ShadowError> {
-        self.stats.search_nodes += 1;
-        self.stats.max_depth = self.stats.max_depth.max(depth);
-        self.refine(&mut partition);
-        if partition.iter().all(|cell| cell.len() == 1) {
-            self.stats.canonical_leaves += 1;
-            let order: Vec<usize> = partition.iter().map(|cell| cell[0]).collect();
-            let permutation = inverse_order(&order);
-            let candidate = relabel(self.paper, &permutation);
-            let json = serde_json::to_string(&candidate)?;
-            match self.best_json.as_ref() {
-                None => self.install_best(json, permutation, trace),
-                Some(best) if json < *best => self.install_best(json, permutation, trace),
-                Some(best) if json == *best => self.equal_permutations.push(permutation),
-                Some(_) => {}
-            }
-            return Ok(());
-        }
-
-        let cell_index = partition
-            .iter()
-            .enumerate()
-            .filter(|(_, cell)| cell.len() > 1)
-            .min_by_key(|(_, cell)| cell.len())
-            .map(|(index, _)| index)
-            .expect("non-discrete partition has a non-singleton cell");
-        let candidates = partition[cell_index].clone();
-        for vertex in candidates.iter().copied() {
-            trace.push(BranchDecision {
-                depth,
-                cell: candidates.iter().map(|&v| index_u32(v)).collect(),
-                chosen_vertex: index_u32(vertex),
-            });
-            let mut child = partition.clone();
-            let rest: Vec<usize> = child[cell_index]
-                .iter()
-                .copied()
-                .filter(|&v| v != vertex)
-                .collect();
-            child.splice(cell_index..=cell_index, [vec![vertex], rest]);
-            self.visit(child, trace, depth + 1)?;
-            trace.pop();
-        }
-        Ok(())
-    }
-
-    fn install_best(&mut self, json: String, permutation: Vec<usize>, trace: &[BranchDecision]) {
-        self.best_json = Some(json);
-        self.best_permutation.clone_from(&permutation);
-        self.winning_trace = trace.to_vec();
-        self.equal_permutations.clear();
-        self.equal_permutations.push(permutation);
-    }
-
-    fn refine(&mut self, partition: &mut Vec<Vec<usize>>) {
-        loop {
-            self.stats.refinement_rounds += 1;
-            let old = partition.clone();
-            let mut changed = false;
-            let mut refined = Vec::with_capacity(old.len());
-            for cell in &old {
-                let mut buckets: Vec<(Vec<u32>, Vec<usize>)> = Vec::new();
-                for &vertex in cell {
-                    let signature = self.signature(vertex, &old);
-                    match buckets.iter_mut().find(|(key, _)| *key == signature) {
-                        Some((_, vertices)) => vertices.push(vertex),
-                        None => buckets.push((signature, vec![vertex])),
-                    }
-                }
-                buckets.sort_by(|left, right| left.0.cmp(&right.0));
-                changed |= buckets.len() > 1;
-                refined.extend(buckets.into_iter().map(|(_, vertices)| vertices));
-            }
-            *partition = refined;
-            if !changed {
-                break;
-            }
-        }
-    }
-
-    fn signature(&self, vertex: usize, partition: &[Vec<usize>]) -> Vec<u32> {
-        let mut signature = Vec::with_capacity(self.dense.len() * partition.len() * 2 + 3);
-        let data = &self.paper.shadow.vertices[vertex];
-        signature.push(data.color);
-        signature.extend(data.weight.to_be_bytes().map(u32::from));
-        signature.push(u32::from_ne_bytes(i32::from(data.sign).to_ne_bytes()));
-        for relation in &self.dense {
-            for cell in partition {
-                let outgoing = u32::try_from(
-                    cell.iter()
-                        .filter(|&&other| relation.adjacency[vertex][other])
-                        .count(),
-                )
-                .expect("validated vertex count fits u32");
-                signature.push(outgoing);
-                if relation.directed {
-                    let incoming = u32::try_from(
-                        cell.iter()
-                            .filter(|&&other| relation.adjacency[other][vertex])
-                            .count(),
-                    )
-                    .expect("validated vertex count fits u32");
-                    signature.push(incoming);
-                }
-            }
-        }
-        if let Some(triangle) = self.paper.calibrated_triangle {
-            signature.push(u32::from(triangle.contains(&index_u32(vertex))));
-        }
-        signature
-    }
-}
-
-fn initial_partition(vertices: &[Vertex]) -> Vec<Vec<usize>> {
-    let mut keyed: Vec<(Vertex, usize)> = vertices.iter().cloned().zip(0..vertices.len()).collect();
-    keyed.sort_by(|left, right| left.0.cmp(&right.0));
-    let mut partition: Vec<Vec<usize>> = Vec::new();
-    for (key, vertex) in keyed {
-        match partition.last_mut() {
-            Some(cell) if vertices[cell[0]] == key => cell.push(vertex),
-            _ => partition.push(vec![vertex]),
-        }
-    }
-    partition
-}
-
-fn dense_relations(shadow: &RelationalShadow) -> Vec<DenseRelation> {
-    let n = shadow.vertices.len();
-    shadow
-        .relations
-        .iter()
-        .map(|relation| {
-            let mut adjacency = vec![vec![false; n]; n];
-            for &[left, right] in &relation.edges {
-                adjacency[left as usize][right as usize] = true;
-                if !relation.directed {
-                    adjacency[right as usize][left as usize] = true;
-                }
-            }
-            DenseRelation {
-                directed: relation.directed,
-                adjacency,
-            }
-        })
-        .collect()
-}
-
-fn inverse_order(order: &[usize]) -> Vec<usize> {
-    let mut permutation = vec![0; order.len()];
-    for (new, &old) in order.iter().enumerate() {
-        permutation[old] = new;
-    }
-    permutation
 }
 
 fn relabel(paper: &PaperIOrientation, permutation: &[usize]) -> InputArtifact {
@@ -323,7 +128,7 @@ fn relabel(paper: &PaperIOrientation, permutation: &[usize]) -> InputArtifact {
     InputArtifact {
         schema: crate::SCHEMA_VERSION.into(),
         profile: ProfileInput::PaperIOrientation(PaperIOrientation {
-            theorem_locator: paper.theorem_locator.clone(),
+            theorem_locator: "clebsch-paper-i-orientation/v1".into(),
             shadow: RelationalShadow {
                 action: paper.shadow.action,
                 vertices,
@@ -372,6 +177,47 @@ fn automorphisms(best: &[usize], equal: &[Vec<usize>]) -> Result<Vec<Vec<u32>>, 
         result.insert(automorphism);
     }
     Ok(result.into_iter().collect())
+}
+
+fn generating_set(group: &[Vec<u32>]) -> Vec<Vec<u32>> {
+    let Some(first) = group.first() else {
+        return Vec::new();
+    };
+    let identity: Vec<u32> = (0..first.len())
+        .map(|value| u32::try_from(value).expect("validated degree fits u32"))
+        .collect();
+    let mut generators = Vec::new();
+    let mut generated = BTreeSet::from([identity]);
+    for candidate in group {
+        if !generated.contains(candidate) {
+            generators.push(candidate.clone());
+            generated = generated_closure(first.len(), &generators);
+            if generated.len() == group.len() {
+                break;
+            }
+        }
+    }
+    generators
+}
+
+fn generated_closure(degree: usize, generators: &[Vec<u32>]) -> BTreeSet<Vec<u32>> {
+    let identity: Vec<u32> = (0..degree)
+        .map(|value| u32::try_from(value).expect("validated degree fits u32"))
+        .collect();
+    let mut closure = BTreeSet::from([identity.clone()]);
+    let mut frontier = vec![identity];
+    while let Some(element) = frontier.pop() {
+        for generator in generators {
+            let product: Vec<u32> = element
+                .iter()
+                .map(|&image| generator[image as usize])
+                .collect();
+            if closure.insert(product.clone()) {
+                frontier.push(product);
+            }
+        }
+    }
+    closure
 }
 
 fn permutation_orbits(n: usize, automorphisms: &[Vec<u32>]) -> Result<Vec<Vec<u32>>, ShadowError> {

@@ -356,7 +356,7 @@ fn reference_relabel(paper: &PaperIOrientation, permutation: &[u32]) -> InputArt
     InputArtifact {
         schema: crate::SCHEMA_VERSION.into(),
         profile: ProfileInput::PaperIOrientation(PaperIOrientation {
-            theorem_locator: paper.theorem_locator.clone(),
+            theorem_locator: "clebsch-paper-i-orientation/v1".into(),
             shadow: RelationalShadow {
                 action: paper.shadow.action,
                 vertices,

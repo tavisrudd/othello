@@ -106,6 +106,20 @@ pub struct FiniteFieldSpec {
 }
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
+#[serde(tag = "kind", content = "spec", rename_all = "snake_case")]
+pub enum BaseFieldSpec {
+    Rational,
+    Finite(FiniteFieldSpec),
+}
+
+#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct RationalCoefficient {
+    pub numerator: i64,
+    pub denominator: u64,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
 #[serde(tag = "kind", rename_all = "snake_case")]
 pub enum DeclaredAction {
     VertexPermutations {
@@ -184,24 +198,20 @@ pub struct GatedPaperIi {
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
-pub struct ShadowChannel {
-    pub name: String,
-    pub relation: BinaryRelation,
-    pub weight: i64,
-    pub sign: i8,
-}
-
-#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
-#[serde(deny_unknown_fields)]
 pub struct GatedPaperIii {
     pub gate: FixtureGate,
     pub source: FrozenSource,
+    pub branch_sextic: String,
+    pub rational_fibre_point: Vec<RationalCoefficient>,
+    pub fibre_quadratic_algebra: String,
     pub vertex_count: u32,
-    pub four_channels: [ShadowChannel; 4],
+    pub aligned_four_sets: Vec<[u32; 4]>,
     pub action: DeclaredAction,
-    pub recovered_carrier: String,
-    pub ambiguity: AmbiguitySpec,
-    pub odd_calibration: Option<OddCalibration>,
+    pub recovered_twist: String,
+    pub recovered_two_graph: String,
+    pub twist_ambiguity: AmbiguitySpec,
+    pub complement_ambiguity: AmbiguitySpec,
+    pub calibrated_triangle_product: Option<i8>,
     pub minimality_collisions: Vec<CollisionWitness>,
 }
 
@@ -214,12 +224,21 @@ pub struct MinimumWord {
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
+pub struct WeightedPair {
+    pub left: u32,
+    pub right: u32,
+    pub multiplicity: u32,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub struct GatedPaperIv {
     pub gate: FixtureGate,
     pub source: FrozenSource,
     pub field: FiniteFieldSpec,
-    pub point_count: u32,
-    pub minimum_words: Vec<MinimumWord>,
+    pub coordinate_count: u32,
+    pub minimum_support_count: u32,
+    pub weighted_pair_section: Vec<WeightedPair>,
     pub action: DeclaredAction,
     pub recovered_carrier: String,
     pub ambiguity: AmbiguitySpec,
@@ -231,10 +250,12 @@ pub struct GatedPaperIv {
 pub struct GatedPaperV {
     pub gate: FixtureGate,
     pub source: FrozenSource,
-    pub field: FiniteFieldSpec,
-    pub chordal_shadow: RelationalShadow,
-    pub conference_shadow: RelationalShadow,
+    pub base_field: BaseFieldSpec,
+    pub retained_residue: RelationalShadow,
     pub action: DeclaredAction,
+    pub selected_chordal_line: Option<u32>,
+    pub outer_involution: Vec<u32>,
+    pub delta_matrix: Vec<Vec<RationalCoefficient>>,
     pub recovered_carrier: String,
     pub ambiguity: AmbiguitySpec,
     pub odd_calibration: Option<OddCalibration>,

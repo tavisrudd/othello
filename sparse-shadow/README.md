@@ -21,10 +21,17 @@ compiler for reproducible development.
 ```sh
 cargo test --workspace --all-features
 cargo clippy --workspace --all-targets --all-features -- -D warnings
+cargo deny check
+cargo bench --bench paper_i -- --noplot
 cargo run -p sparse-shadow-cli -- validate fixtures/paper-i-icosahedral-orbitals.json
 cargo run -p sparse-shadow-cli -- canonicalize fixtures/paper-i-icosahedral-orbitals.json
+cargo run -p sparse-shadow-cli -- equivalent LEFT.json RIGHT.json
 ```
 
-See `docs/schema-v1.md`, `docs/dependency-audit.md`, and
-`docs/prior-art-audit.md` for the frozen boundaries.
+`equivalent` emits explicit isomorphism witnesses or an inequivalence separator
+backed by both exhaustive canonical certificates. Dedicated verifier commands
+replay equivalence and reconstruction artifacts from the raw input(s).
 
+See `docs/schema-v1.md`, `docs/dependency-audit.md`,
+`docs/prior-art-audit.md`, and `docs/performance-paper-i.md` for the frozen
+boundaries and measured evidence.

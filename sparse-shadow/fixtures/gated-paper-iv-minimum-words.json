@@ -1,0 +1,33 @@
+{
+  "schema": "sparse-shadow/v1",
+  "profile": {
+    "adapter": "paper_iv_minimum_words",
+    "input": {
+      "gate": {
+        "enabled": false,
+        "reason": "minimum_geometry.json records conclusions but not the frozen 78-coordinate weighted pair section",
+        "required_export": "papers/q13-passant-code/verification/sparse_shadow_export.json"
+      },
+      "source": {
+        "paper": "IV",
+        "theorem": "exact arity-two minimum-word reconstruction",
+        "artifact": "PENDING",
+        "sha256": ""
+      },
+      "field": {
+        "characteristic": 13,
+        "degree": 1,
+        "modulus_coefficients_low_to_high": [],
+        "element_encoding": "least_nonnegative_residue"
+      },
+      "coordinate_count": 78,
+      "minimum_support_count": 0,
+      "weighted_pair_section": [],
+      "action": {"kind": "vertex_permutations", "degree": 78, "generators": []},
+      "recovered_carrier": "PG(2,13), conic, and polarity",
+      "ambiguity": {"kind": "marking_torsor", "group": "PGL2(13)"},
+      "minimality_collisions": []
+    }
+  }
+}
+

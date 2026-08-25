@@ -3,8 +3,9 @@ use std::{fs, path::PathBuf, process::ExitCode};
 use clap::{Parser, Subcommand};
 use serde::Serialize;
 use sparse_shadow_core::{
-    CanonicalCertificate, InputArtifact, ShadowError, canonicalize, reconstruct, validate,
-    verify_certificate,
+    CanonicalCertificate, EquivalenceCertificate, InputArtifact, ReconstructionArtifact,
+    ShadowError, canonicalize, compare, reconstruct, validate, verify_certificate,
+    verify_equivalence, verify_reconstruction,
 };
 use thiserror::Error;
 
@@ -34,6 +35,15 @@ enum Command {
         input: PathBuf,
         certificate: PathBuf,
     },
+    VerifyEquivalenceCertificate {
+        left: PathBuf,
+        right: PathBuf,
+        certificate: PathBuf,
+    },
+    VerifyReconstructionCertificate {
+        input: PathBuf,
+        certificate: PathBuf,
+    },
 }
 
 #[derive(Debug, Error)]
@@ -45,13 +55,6 @@ enum CliError {
         path: PathBuf,
         source: std::io::Error,
     },
-}
-
-#[derive(Serialize)]
-struct EquivalenceResult {
-    equivalent: bool,
-    left_canonical_id: String,
-    right_canonical_id: String,
 }
 
 fn main() -> ExitCode {
@@ -70,18 +73,28 @@ fn run() -> Result<(), CliError> {
         Command::Validate { input } => print_json(&validate(&read_input(&input)?)?)?,
         Command::Canonicalize { input } => print_json(&canonicalize(&read_input(&input)?)?)?,
         Command::Equivalent { left, right } => {
-            let left = canonicalize(&read_input(&left)?)?;
-            let right = canonicalize(&read_input(&right)?)?;
-            print_json(&EquivalenceResult {
-                equivalent: left.canonical_id == right.canonical_id,
-                left_canonical_id: left.canonical_id,
-                right_canonical_id: right.canonical_id,
-            })?;
+            print_json(&compare(&read_input(&left)?, &read_input(&right)?)?)?;
         }
         Command::Reconstruct { input } => print_json(&reconstruct(&read_input(&input)?)?)?,
         Command::VerifyCertificate { input, certificate } => {
             let certificate = read_json::<CanonicalCertificate>(&certificate)?;
             print_json(&verify_certificate(&read_input(&input)?, &certificate)?)?;
+        }
+        Command::VerifyEquivalenceCertificate {
+            left,
+            right,
+            certificate,
+        } => {
+            let certificate = read_json::<EquivalenceCertificate>(&certificate)?;
+            print_json(&verify_equivalence(
+                &read_input(&left)?,
+                &read_input(&right)?,
+                &certificate,
+            )?)?;
+        }
+        Command::VerifyReconstructionCertificate { input, certificate } => {
+            let certificate = read_json::<ReconstructionArtifact>(&certificate)?;
+            print_json(&verify_reconstruction(&read_input(&input)?, &certificate)?)?;
         }
     }
     Ok(())

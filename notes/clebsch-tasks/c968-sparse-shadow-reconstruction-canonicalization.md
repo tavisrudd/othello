@@ -2,7 +2,7 @@
 
 **Lane:** clebsch
 
-**Status:** active; first Paper-I schema/canonicalization/independent-replay gate green; standalone Rust tool; no manuscript or Lean edits
+**Status:** active; Paper-I producer/replay/certificate/hot-layout gates green; Papers II--V fail-closed pending frozen exports; standalone Rust tool; no manuscript or Lean edits
 
 ## Goal
 
@@ -180,3 +180,10 @@ hash, observed shadow shape, declared permutation or projective-semilinear
 action (including exact field normalization), recovered carrier, ambiguity,
 odd calibration, and minimality-collision artifacts. Enabling remains forbidden
 until an exact paper-owned export and independent arithmetic replay exist.
+
+The Paper-I hot search now has compile-time 32/64/128-byte layout guards, a
+preallocated equality arena, and an instrumented zero-allocation result across
+its exact 193-node fixture search. Equivalence/inequivalence and reconstruction
+certificates have independent replay and corruption tests. The performance
+record is `../../sparse-shadow/docs/performance-paper-i.md`; its wall-time drift
+licenses no optimization claim.

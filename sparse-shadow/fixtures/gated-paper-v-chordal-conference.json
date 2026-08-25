@@ -1,0 +1,34 @@
+{
+  "schema": "sparse-shadow/v1",
+  "profile": {
+    "adapter": "paper_v_chordal_conference",
+    "input": {
+      "gate": {
+        "enabled": false,
+        "reason": "conference_node_completeness.json is evidence, not a frozen retained-residue and selected-line export",
+        "required_export": "papers/chordal-conference-reconstruction/verification/evidence/sparse_shadow_export.json"
+      },
+      "source": {
+        "paper": "V",
+        "theorem": "carrier recovery and exact marked return",
+        "artifact": "PENDING",
+        "sha256": ""
+      },
+      "base_field": {"kind": "rational"},
+      "retained_residue": {
+        "action": "color_preserving_permutations",
+        "vertices": [],
+        "relations": []
+      },
+      "action": {"kind": "vertex_permutations", "degree": 0, "generators": []},
+      "selected_chordal_line": null,
+      "outer_involution": [],
+      "delta_matrix": [],
+      "recovered_carrier": "singular quartic, twelve points, six axes, and conference switching class",
+      "ambiguity": {"kind": "orientation_c2"},
+      "odd_calibration": null,
+      "minimality_collisions": []
+    }
+  }
+}
+
