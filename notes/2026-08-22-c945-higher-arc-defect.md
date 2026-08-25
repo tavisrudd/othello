@@ -2651,8 +2651,8 @@ extremizer classification requires exact-core classification, bounded-repair
 realizability, and exhaustiveness.  These are the explicit alternative exits
 of C949 rather than claims of the present manuscript.
 
-The repaired authority is commit `d155f39ce`.  Export audit found no private
+The repaired authority is commit `96cb67baf`.  Export audit found no private
 process references, the standalone paper gate passes, and export verification
-matches that source commit at public-mirror commit `76b236a`.  The 18-page
+matches that source commit at public-mirror commit `75c2979`.  The 18-page
 authority and standalone PDFs agree byte for byte, with SHA-256
-`8f5e04041422e210045d30b4400c3e0b2b8455a993d419ada9561562a4f48ced`.
+`c7732e4930704066e9a14896d4b21e50e0d61e35b4eb639074514ed2618bf5dc`.
