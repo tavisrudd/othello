@@ -2043,19 +2043,18 @@ particular two-permutation decomposition: every successful full-duplex trace
 must already have linear multiplicative-Fourier complexity.  The location of
 those frequencies gives a sharper degree bound.  Since `3r=q=1 mod (q-1)`,
 the inverse frequency map from `w_K=tau^r` back to `tau` is multiplication by
-three modulo `q-1`.  The image of the high band `r+1,...,3r-2` is, in
-increasing order,
+three modulo `q-1`.  In particular, the three consecutive moments with
+indices `r,r+1,r+2` correspond to trace exponents
 
 ```text
-2;  4,5;  7,8;  ...;  3r-5,3r-4;  3r-2.
+q-2, q-5, q-8.
 ```
 
-Among `r-2` distinct positions in this set, the smallest possible largest
-one is its `(r-2)`nd entry, `(3r-5)/2`.  Hence the unique interpolation
-polynomial obeys
+They cannot all vanish by the consecutive Vandermonde gate.  Hence the
+unique interpolation polynomial obeys the near-maximal bound
 
 ```text
-deg tau >= (3r-5)/2=(q-5)/2.                        (SR24j'')
+deg tau >= q-8.                                     (SR24j'')
 ```
 
 Thus low-degree trace families are excluded even when their two permutation
@@ -2601,7 +2600,7 @@ family is lower priority.
   dual word and signed spectrum `(SR24k)--(SR24l')`.  The Vandermonde obstruction
   `(SR24h)--(SR24j)` eliminates every two-monomial completion
   and, more generally, forces at least `q/3-2` completed-fiber frequencies
-  and trace degree at least `(q-5)/2` in each triangle chart; the leading
+  and trace degree at least `q-8` in each triangle chart; the leading
   coefficient is recurrence-sharp before the geometric gates are imposed.
   The other triangular row requires a linear
   high-secant trade and

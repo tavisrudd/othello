@@ -3427,7 +3427,7 @@ def audit_sharp_linear_coefficient(output: Path) -> None:
                 r - 2
             ),
             "minimum_completion_trace_degree_per_chart": (
-                (q - 5) // 2
+                q - 8
             ),
             "minimum_nonzero_moments_per_length_five_window": 2,
             "forbidden_completion_moment_zero_patterns": [
@@ -3476,12 +3476,11 @@ def audit_sharp_linear_coefficient(output: Path) -> None:
                 != frobenius_fiber_normal_form[
                     "minimum_completion_moment_support_per_chart"]):
             raise AssertionError("Frobenius failed to preserve trace sparsity")
-        trace_exponents_from_high_band = sorted({
-            (3 * exponent) % (q - 1)
-            for exponent in range(r + 1, q - 1)
-        })
-        if (len(trace_exponents_from_high_band) != 2 * r - 2
-                or trace_exponents_from_high_band[r - 3] != (q - 5) // 2):
+        critical_trace_exponents = [
+            (-3 * index) % (q - 1)
+            for index in (r, r + 1, r + 2)
+        ]
+        if critical_trace_exponents != [q - 2, q - 5, q - 8]:
             raise AssertionError("the trace-frequency degree gate changed")
         critical_band = list(range(1, 2 * r - 1))
         reversed_band = [2 * r - 1 - i for i in critical_band]
