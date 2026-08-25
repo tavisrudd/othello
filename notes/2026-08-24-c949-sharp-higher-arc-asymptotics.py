@@ -3404,8 +3404,8 @@ def audit_sharp_linear_coefficient(output: Path) -> None:
             "fiber_square_sum_consecutive_moments": q // 3 - 2,
             "zero_completed_singleton_fibers": 3,
             "compatible_triangle_charts": 3,
-            "same_exponent_two_monomial_completion_possible": False,
-            "monomial_vandermonde_zero_run": q // 3 - 1,
+            "two_monomial_completion_possible": False,
+            "monomial_vandermonde_zero_run": (2 * q // 3 - 2) // 3,
             "minimum_completion_moment_support_per_chart": (
                 (2 * q // 3 - 2) // 3
             ),

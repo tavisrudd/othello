@@ -1903,10 +1903,10 @@ almost-duplex: it must admit three compatible Frobenius-quadratic
 descriptions related by the displayed birational coordinate changes.
 
 This moment normal form excludes an entire completion branch.  Suppose a
-full duplex `K` is the union of two same-exponent monomial graphs
+full duplex `K` is the union of two monomial graphs
 
 ```text
-b=alpha a^d,                    b=beta a^d,          (SR24h)
+b=alpha a^d,                    b=beta a^e,          (SR24h)
 ```
 
 and `H=K\R` is obtained by deleting three cells.  The `a`-fiber profile
@@ -1916,13 +1916,15 @@ every `1<=i<=2r-2`, `(SR24d)` gives
 ```text
 sum_{t=1}^3 b_t^r a_t^i
  =sum_{(a,b) in K} a^i b^r
- =(alpha^r+beta^r) sum_{a!=0} a^(i+dr).             (SR24i)
+ =alpha^r sum_{a!=0} a^(i+dr)
+  +beta^r sum_{a!=0} a^(i+er).                      (SR24i)
 ```
 
-The right side is zero for all but at most one `i` in that interval, because
+The right side is zero for all but at most two `i` in that interval, because
 a nonzero-field power sum vanishes unless its exponent is divisible by
-`q-1`.  Removing one index from a consecutive interval of length `2r-2`
-leaves a run of at least `r-1>=3` consecutive zero values.  But three
+`q-1`.  Removing two indices from a consecutive interval of length `2r-2`
+leaves a run of at least `ceil((2r-4)/3)>=3` consecutive zero values when
+`q>=27`.  But three
 consecutive equations
 
 ```text
@@ -1931,7 +1933,7 @@ sum_t b_t^r a_t^(i_0+s)=0,             s=0,1,2,
 
 have coefficient matrix `diag(a_t^i_0)` times the Vandermonde matrix of the
 three distinct nonzero `a_t`.  It is invertible, contradicting
-`b_t^r!=0`.  Therefore no same-exponent two-monomial full duplex can be
+`b_t^r!=0`.  Therefore no two-monomial full duplex can be
 completed into the target core for ternary `q>=27`.  This includes the
 cyclic hyperbola duplex `(SR20)` as `d=-1`; `(SR21)` remains an independent
 geometric exclusion.
@@ -2358,7 +2360,7 @@ family is lower priority.
   moment triangle `(SR24b)--(SR24d)`, the three compatible
   Frobenius-quadratic normal forms `(SR24e)--(SR24g)`, and the weight-`3q`
   dual word `(SR24k)--(SR24l)`.  The Vandermonde obstruction
-  `(SR24h)--(SR24j)` eliminates every same-exponent two-monomial completion
+  `(SR24h)--(SR24j)` eliminates every two-monomial completion
   and, more generally, forces `Omega(q)` completed-fiber spectral complexity
   in each triangle chart.  The other triangular row requires a linear
   high-secant trade and

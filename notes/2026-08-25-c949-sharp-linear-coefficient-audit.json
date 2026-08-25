@@ -205,8 +205,8 @@
                 "fiber_sum_polynomial_degree_bound": 27,
                 "frobenius_exponent": 27,
                 "minimum_completion_moment_support_per_chart": 17,
-                "monomial_vandermonde_zero_run": 26,
-                "same_exponent_two_monomial_completion_possible": false,
+                "monomial_vandermonde_zero_run": 17,
+                "two_monomial_completion_possible": false,
                 "zero_completed_singleton_fibers": 3
               },
               "full_core_direction_ledger": {
@@ -445,8 +445,8 @@
                 "fiber_sum_polynomial_degree_bound": 81,
                 "frobenius_exponent": 81,
                 "minimum_completion_moment_support_per_chart": 53,
-                "monomial_vandermonde_zero_run": 80,
-                "same_exponent_two_monomial_completion_possible": false,
+                "monomial_vandermonde_zero_run": 53,
+                "two_monomial_completion_possible": false,
                 "zero_completed_singleton_fibers": 3
               },
               "full_core_direction_ledger": {
@@ -685,8 +685,8 @@
                 "fiber_sum_polynomial_degree_bound": 243,
                 "frobenius_exponent": 243,
                 "minimum_completion_moment_support_per_chart": 161,
-                "monomial_vandermonde_zero_run": 242,
-                "same_exponent_two_monomial_completion_possible": false,
+                "monomial_vandermonde_zero_run": 161,
+                "two_monomial_completion_possible": false,
                 "zero_completed_singleton_fibers": 3
               },
               "full_core_direction_ledger": {
