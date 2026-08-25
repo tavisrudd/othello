@@ -49,6 +49,7 @@ serialized tree.
 ## Validation
 
 - `cargo test --workspace --all-features`: pass;
+- `cargo test --release --workspace --all-features --locked --offline`: pass;
 - `cargo clippy --workspace --all-targets --all-features -- -D warnings`: pass;
 - Paper-I exhaustive search: automorphism order 120, one vertex orbit;
 - property tests: canonical identity invariant under generated arbitrary
@@ -65,6 +66,8 @@ serialized tree.
   calibration vertices; Paper-I calibration must additionally be an increasing
   triple forming a clique in `orbital_positive`, matching the frozen triangle
   sign rather than an arbitrary three-set;
+- exhaustive calibration census: all 220 triples checked, exactly 20 admitted,
+  one canonical orbit, automorphism order 6 throughout;
 - black-box CLI tests: Paper-I validation succeeds, every gated Paper-II--V
   input exits nonzero while naming its own exact required export, repeated
   canonicalize runs are byte-identical, and identical inputs compare

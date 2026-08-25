@@ -203,14 +203,17 @@ of the earlier cyclic-only sample. Strict schema tests cover unknown fields,
 versions, edge normalization, partitions, and calibration distinctness. The
 calibration gate also requires an increasing `orbital_positive` clique, matching
 the frozen C905 triangle-sign boundary rather than accepting an arbitrary
-three-set. Equivalent transporters and inequivalence separators have direct
-corruption coverage. The committed Paper-I golden contract fixes canonical
+three-set. The exhaustive 220-triple census admits exactly 20 triangles, all in
+one canonical orbit with automorphism order 6. Equivalent transporters and
+inequivalence separators have direct corruption coverage. The committed
+Paper-I golden contract fixes canonical
 identities, group/stabilizer summaries, vertex orbits, search counters, and
 proof-system identifiers across builds. The performance record is
 `../../sparse-shadow/docs/performance-paper-i.md`; its wall-time drift licenses
 no optimization claim. A current post-stabilizer CPU-pinned smoke run is
 recorded separately and likewise licenses no speedup claim; documentation and
-locked/offline resolution gates are green.
+locked/offline resolution gates are green, as is the full optimized
+locked/offline test suite.
 
 The point-stabilizer surface is explicitly versioned as canonical wrapper v2.
 The input interchange and unchanged eight-rule certificate correctly remain at

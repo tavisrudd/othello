@@ -30,6 +30,8 @@ calibrated and uncalibrated canonical artifacts.
 The optional Paper-I calibration is an increasing triple of distinct vertices
 whose three pairs lie in `orbital_positive`. This is the schema realization of
 the frozen calibrated triangle sign, not an arbitrary odd-cardinality marking.
+The committed exhaustive census checks all 220 triples: precisely 20 are
+admissible, and all 20 lie in one canonical orbit with automorphism order 6.
 
 Source locators are validated provenance but are normalized to the adapter
 identifier before canonical serialization. They cannot change mathematical

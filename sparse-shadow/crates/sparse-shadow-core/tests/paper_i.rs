@@ -1,3 +1,5 @@
+use std::collections::BTreeSet;
+
 use proptest::prelude::*;
 use sparse_shadow_core::{
     CanonicalCertificate, EquivalenceOutcome, InputArtifact, ProfileInput, ShadowError,
@@ -257,6 +259,36 @@ fn calibrated_reconstruction_is_an_exact_oriented_return() {
         verify_reconstruction(&input, &reconstructed)
             .expect("calibrated reconstruction replays")
             .valid
+    );
+}
+
+#[test]
+fn all_calibrated_triangles_form_one_exhaustive_orbit() {
+    let mut accepted = Vec::new();
+    let mut canonical_ids = BTreeSet::new();
+    for left in 0..12 {
+        for middle in (left + 1)..12 {
+            for right in (middle + 1)..12 {
+                let mut input = fixture();
+                let ProfileInput::PaperIOrientation(paper) = &mut input.profile else {
+                    unreachable!();
+                };
+                paper.calibrated_triangle = Some([left, middle, right]);
+                if validate(&input).is_ok() {
+                    let artifact = canonicalize(&input).expect("admitted triangle canonicalizes");
+                    assert_eq!(artifact.automorphism_order, 6);
+                    canonical_ids.insert(artifact.canonical_id);
+                    accepted.push([left, middle, right]);
+                }
+            }
+        }
+    }
+
+    assert_eq!(accepted.len(), 20);
+    assert_eq!(canonical_ids.len(), 1);
+    assert_eq!(
+        canonical_ids.into_iter().next().expect("one orbit"),
+        "00d68674bd6417ba1233fa80c7221469474d8139dfdf9d37cdf5b59e06717a4d"
     );
 }
 
