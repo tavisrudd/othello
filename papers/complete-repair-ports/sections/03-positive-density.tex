@@ -206,6 +206,20 @@ For every $\F_q$-linear map $c:T\to M$,
  \sum_{e\in E_A}\Lambda_{B,T}(X_e).
  \label{eq:coset-cost-composition}
 \end{equation}
+When $T\ne0$, set
+\[
+ \delta_{B,T}=\min_{0\ne b:T\to L}\Lambda_{B,T}(b),
+ \qquad
+ R_{B,T}=\max_{0\ne b:T\to L}\Lambda_{B,T}(b).
+\]
+For $c\ne0$, the exact formula has the sharp coarsening
+\begin{equation}
+ \delta_{B,T}\Lambda_{A,T}(c)
+ \leq \Lambda_{A\circ B,T}(c)
+ \leq R_{B,T}\Lambda_{A,T}(c).
+ \label{eq:coset-cost-envelope}
+\end{equation}
+Neither constant can be improved without further hypotheses.
 Suppose that a target set in $A\circ B$ meets block $e$ in
 $P_e\subseteq E_B$, and put $J_e=E_B\setminus P_e$ and
 $U_{P_e}=\operatorname{im}\phi_{B,P_e}$.  If $T\leq M$ and $\iota_T:T\hookrightarrow M$
@@ -239,6 +253,10 @@ A leaf-level lift $Y:T\to\F_q^{E_A\times E_B}$ determines intermediate maps
 $X_e=\phi_BY_e$.  Its support is the disjoint union of its supports in the
 inner blocks.  At fixed $X$, the block lifts are independent and attain their
 minima separately, which proves \eqref{eq:coset-cost-composition}.
+Every nonzero intermediate coordinate map costs between $\delta_{B,T}$ and
+$R_{B,T}$.  Minimizing its number of nonzero coordinates proves
+\eqref{eq:coset-cost-envelope}; a one-coordinate outer realization and a map
+attaining either extremum show that the constants are sharp.
 
 For the target formula, let $a_e:T\to\F_q^{P_e}$ be the target coefficients
 and set $U_e=\phi_{B,P_e}a_e$.  Every map into $U_{P_e}$ has such a linear
