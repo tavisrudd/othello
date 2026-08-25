@@ -60,11 +60,15 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   next type-`I_1` step is composition with the norm-torus chart and tangent
   quotient.  The norm-torus coupling is now complete too, with both
   composites of `S x P2 <-> Z/T3` certified; the remaining type-`I1` map is
-  the explicit ground-field tangent quotient `Z/T3 <-> P4`.  Type `I_3`
-  remains afterward.  Card:
+  the explicit ground-field tangent quotient `Z/T3 <-> P4`.  Its strict Cox
+  descent now has an explicit invertible ground orbit-trace basis, and the
+  split section recovers all three marked-plane coordinates by Cramer's rule.
+  The exact remaining subgate is the four-parameter inverse from ground
+  tangent coordinates to the exceptional parameters.  Type `I_3` remains
+  afterward.  Card:
   `../cubic-threefolds-tasks/c958-explicit-level-two-parametrizations.md`;
   latest report:
-  `../2026-08-25-c958-type-i1-torsor-coupling.md`.
+  `../2026-08-25-c958-type-i1-tangent-quotient.md`.
 - **C936 — accepted after cold-referee repair audit.**  The warning-free eleven-page paper
   develops the signed nonstandard \(A_5\)-cubic parameter as the
   sign/discriminant resolvent of the actual

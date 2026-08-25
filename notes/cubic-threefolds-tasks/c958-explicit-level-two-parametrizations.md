@@ -140,6 +140,17 @@ type-`I1` geometric map is an explicit ground-field tangent quotient
 Report and replay: `notes/2026-08-25-c958-type-i1-torsor-coupling.md` and its
 adjacent bundle.
 
+The ground-coordinate infrastructure for the tangent quotient is now exact.
+The strict twelve-element semilinear Cox descent has an explicit invertible
+orbit-trace basis; a bounded closeout reduces its seed from `z^11` to `z`.
+In the split chart `E3=1`, the three tangent-section equations are linear in
+the marked-plane coordinates, so Cramer's rule recovers `(z1,z2,z3)` from
+`(E1,E2,E4,E5)`.  A primary SymPy replay and independent stdlib determinant
+checker agree.  The remaining type-`I1` gate is now the four-parameter inverse
+from five ground tangent coordinates to the exceptional parameters, not Cox
+descent or plane-coordinate elimination.  Report and replay:
+`notes/2026-08-25-c958-type-i1-tangent-quotient.md` and its adjacent bundle.
+
 ## Goal
 
 Turn the constructive existence proof in C956 into explicit, independently
