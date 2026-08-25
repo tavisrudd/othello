@@ -374,6 +374,20 @@ The design identity and `|D|=2q+1` now give the mutually exact transforms
 M z=3x,                       M x=r(z+2 1).          (SD)
 ```
 
+The signed spectrum is field-uniform, not a `q=27` coincidence:
+
+```text
+z: (-1)^(q-3) 0^(q^2-3q+7) 1^(3q-3),
+|supp(z)|=4q-6,       sum z=2q,
+sum x=2r(3r+1),       ||x||^2=2r(4r-1).
+```
+
+Moreover `Mz=0 (mod 3)`.  Hence the `4q-6` point support of `z` has no
+tangent: a line cannot contain exactly one nonzero coordinate.  Every
+2-secant of the support contains one positive and one negative coordinate.
+This converts the higher-arc mechanism into a signed untouchable-set problem
+with prescribed color classes, as well as a dual-code problem.
+
 At `q=27` this means
 
 ```text
@@ -417,6 +431,16 @@ complement.  The lone value `-2` is the unique degree-one line and consumes
 the full defect.  This explains simultaneously why the unital survives the
 switch and what should replace it at `q=27`: a sparse signed secant-defect
 word satisfying `(SD)`.
+
+The 30-point support of the `q=9` signed word has line spectrum
+
+```text
+0^4 2^24 3^32 5^30 6^1.
+```
+
+Its 24 support 2-secants all join opposite signs.  This exact small case is a
+concrete model for the signed untouchable-set classification, not merely a
+weight calculation.
 
 Finally, for a core-line intersection `1<=d<=5`, the threshold itself has the
 binomial-energy expansion
@@ -656,6 +680,10 @@ family is lower priority.
   fixed branches leave only 32 and 31 supported nonfixed Frobenius orbits.
   Recovering `d in {1,...,5}` from such a word, or excluding both sign cosets,
   is now the most compressed structural gate.
+- **Settled by the signed descent — what geometry does its support have?**
+  Field-uniformly it is a signed untouchable set of size `4q-6`: it has no
+  tangents, and every support 2-secant joins opposite signs.  At `q=9` its
+  full support spectrum is `0^4 2^24 3^32 5^30 6^1`.
 - **Open — can `t_7(2,9)>=39` be proved without exhaustive search?**  The
   positive construction is structural, but exclusion of a 38-point complete
   arc still trusts one normalized CP-SAT infeasibility certificate.  A second

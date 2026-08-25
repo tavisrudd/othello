@@ -1432,6 +1432,18 @@ def audit_degree_defect(q9_construction: Path, frobenius_audit: Path,
            != 3 * (q9_signed_secant_defect[line_index] + 2)
            for line_index, line in enumerate(q9_on_line)):
         raise ValueError("the q=9 inverse signed transform failed")
+    q9_signed_support = {
+        point for point, value in enumerate(q9_signed_secant_defect) if value
+    }
+    q9_signed_support_line_spectrum = Counter(
+        len(q9_signed_support.intersection(line)) for line in q9_on_line
+    )
+    if q9_signed_support_line_spectrum[1]:
+        raise ValueError("the q=9 signed support has a tangent")
+    if any(sum(q9_signed_secant_defect[point] for point in line) != 0
+           for line in q9_on_line
+           if len(q9_signed_support.intersection(line)) == 2):
+        raise ValueError("a q=9 signed support 2-secant has equal signs")
 
     q = 27
     r = q // 3
@@ -1809,7 +1821,7 @@ def audit_degree_defect(q9_construction: Path, frobenius_audit: Path,
         })
 
     output.write_text(json.dumps({
-        "schema": "c949-degree-defect-audit-v4",
+        "schema": "c949-degree-defect-audit-v5",
         "field_uniform_identities": {
             "q": "3r",
             "external_point_count": "q^2-q",
@@ -1819,6 +1831,12 @@ def audit_degree_defect(q9_construction: Path, frobenius_audit: Path,
             "core_normalized_vector": "x=e-r*(1+1_D)",
             "signed_secant_defect": "z=1+3*1_A-M*1_D",
             "signed_transform_equations": "M*z=3*x and M*x=r*(z+2*1)",
+            "signed_secant_defect_spectrum":
+                "(-1)^(q-3) 0^(q^2-3q+7) 1^(3q-3)",
+            "signed_support_size": "4q-6",
+            "core_normalized_sum": "2r(3r+1)",
+            "core_normalized_squared_norm": "2r(4r-1)",
+            "signed_support_has_no_tangents": True,
         },
         "q9": {
             "arc_size": len(q9_arc),
@@ -1842,6 +1860,11 @@ def audit_degree_defect(q9_construction: Path, frobenius_audit: Path,
                 Counter(q9_signed_secant_defect).items()
             )),
             "signed_secant_defect_transform_checked": True,
+            "signed_support_line_intersection_spectrum": dict(sorted(
+                q9_signed_support_line_spectrum.items()
+            )),
+            "signed_support_has_no_tangents": True,
+            "signed_support_two_secants_have_opposite_signs": True,
         },
         "q27_T55": {
             "arc_size": arc_size,
@@ -1870,6 +1893,8 @@ def audit_degree_defect(q9_construction: Path, frobenius_audit: Path,
             "signed_secant_defect_sum": 54,
             "signed_secant_defect_squared_norm": 102,
             "signed_secant_defect_ternary_dual_weight": 102,
+            "signed_support_has_no_tangents": True,
+            "signed_support_two_secants_have_opposite_signs": True,
             "core_normalized_line_sum_spectrum": {
                 "9": 24,
                 "18": 655,

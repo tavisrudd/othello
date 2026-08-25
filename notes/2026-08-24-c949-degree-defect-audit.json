@@ -2,11 +2,16 @@
   "field_uniform_identities": {
     "centered_external_degree_sum": "6r^2-4r-1",
     "centered_incidence_equation": "M^T(e-r*1)=q*(1+1_A)",
+    "core_normalized_squared_norm": "2r(4r-1)",
+    "core_normalized_sum": "2r(3r+1)",
     "core_normalized_vector": "x=e-r*(1+1_D)",
     "external_defect_sum": "sum (e-r)(e-r-1) = 2r(r-2)",
     "external_point_count": "q^2-q",
     "q": "3r",
     "signed_secant_defect": "z=1+3*1_A-M*1_D",
+    "signed_secant_defect_spectrum": "(-1)^(q-3) 0^(q^2-3q+7) 1^(3q-3)",
+    "signed_support_has_no_tangents": true,
+    "signed_support_size": "4q-6",
     "signed_transform_equations": "M*z=3*x and M*x=r*(z+2*1)"
   },
   "q27_T55": {
@@ -272,7 +277,9 @@
     },
     "signed_secant_defect_squared_norm": 102,
     "signed_secant_defect_sum": 54,
-    "signed_secant_defect_ternary_dual_weight": 102
+    "signed_secant_defect_ternary_dual_weight": 102,
+    "signed_support_has_no_tangents": true,
+    "signed_support_two_secants_have_opposite_signs": true
   },
   "q9": {
     "arc_size": 39,
@@ -300,7 +307,16 @@
       "1": 24
     },
     "signed_secant_defect_transform_checked": true,
+    "signed_support_has_no_tangents": true,
+    "signed_support_line_intersection_spectrum": {
+      "0": 4,
+      "2": 24,
+      "3": 32,
+      "5": 30,
+      "6": 1
+    },
+    "signed_support_two_secants_have_opposite_signs": true,
     "unital_complement_size": 63
   },
-  "schema": "c949-degree-defect-audit-v4"
+  "schema": "c949-degree-defect-audit-v5"
 }
