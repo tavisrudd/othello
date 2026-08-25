@@ -173,10 +173,17 @@ $\delta,\delta^\perp$ such that
  H_Q(\delta^\perp)<R,
 \]
 where $H_Q$ is the $Q$-ary entropy function.  The first-moment argument for a
-random $L$-linear code shows that the expected numbers of nonzero primal and
-dual words below the two relative-weight cutoffs tend to zero.  Hence one may
+random $K_N$-dimensional $L$-linear code bounds the expected numbers of
+nonzero primal and dual words below the two cutoffs, up to subexponential
+factors, by
+\[
+ Q^{N(H_Q(\delta)+R-1)}
+ \qquad\text{and}\qquad
+ Q^{N(H_Q(\delta^\perp)-R)},
+\]
+respectively.  Both tend to zero by the displayed inequalities, so one may
 choose a sequence with rate tending to $R$, primal relative distance at least
-$\delta$, and dual relative distance at least $\delta^\perp$
+$\delta$, and dual relative distance at least $\delta^\perp$; see also
 \cite[Chapter~17]{MacWilliamsSloane1977}.
 \uses{thm:objectwise-confinement, thm:ranked-confinement}%
 \proves{cor:positive-density}%

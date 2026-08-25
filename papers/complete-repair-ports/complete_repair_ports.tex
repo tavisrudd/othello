@@ -49,8 +49,8 @@
 
 \begin{abstract}
 Let $I\leq\mathbb F_q^E$, let $P\subseteq E$ be a target set, and put
-$J=E\setminus P$.  The target and helper columns determine a nested pair
-$K_P\subseteq D_P\leq\mathbb F_q^J$.  Its relative generalized Hamming
+$J=E\setminus P$.  Shortening and puncturing $I^\perp$ onto $J$ give a
+nested pair $K_P\subseteq D_P\leq\mathbb F_q^J$.  Its relative generalized Hamming
 weight $M_t(D_P,K_P)$ is the minimum helper union recovering $t$
 independent target combinations.  We prove two exact transfer theorems.
 First, for an $L$-linear outer code $O\leq L^N$ with $N\geq2$ and
@@ -68,8 +68,8 @@ transfers beyond the ordinary outer support-distance gate.
 
 Positive-density and bounded service-rate transfer follow.  Equal
 relative-weight hierarchies need not determine
-bounded repair reliability, and presentations of the same nested pair can
-have different confinement thresholds.  A projective-simplex family gives a
+bounded repair reliability, and ambient inner-dual realizations of one nested
+pair can have different confinement thresholds.  A projective-simplex family gives a
 non-MDS hierarchy and projective-rank reliability.  The criterion
 $r+1<z_x(I)$ is the rank-one zero-functional case.
 \end{abstract}
@@ -86,15 +86,19 @@ coordinate-indexed recovery structures record more local information
 \cite{MarquezCorbellaEtAl2019}, but support data alone discard the dual
 coefficients that implement the recovery equations.
 
-This paper applies the relative generalized Hamming weights of the associated
-nested pair in the generator matrix to fixed-target helper costs.  Relative generalized Hamming weights and
-the relative dimension/length profile were introduced for nested codes by
+This paper applies relative generalized Hamming weights to a canonical nested
+pair obtained by shortening and puncturing the inner dual.  Relative
+generalized Hamming weights and the relative dimension/length profile were
+introduced for nested codes by
 Luo, Mitrpant, Vinck, and Chen, who interpreted them as access thresholds in
 a wiretap model~\cite{LuoEtAl2005}; later work develops their
 ramp-secret-sharing and algorithmic roles
-\cite{GeilEtAl2014,SanJose2025,Geil2026}.  The RGHW identity below is the
-standard nested-code support invariant applied to the pair induced by a
-represented target/helper split.  The new content begins with concatenation:
+\cite{KuriharaUyematsuMatsumoto2012,GeilEtAl2014,SanJose2025,Geil2026}.
+In particular, Kurihara, Uyematsu, and Matsumoto characterize exact
+information and reconstruction thresholds of linear secret-sharing schemes by
+RDLPs and RGHWs.  Our recovery-cost identity is this standard nested-code
+support invariant specialized to the puncturing--shortening pair induced by a
+target/helper split.  The paper's principal results begin with concatenation:
 after the outer-dual-distance gate, each relative weight acquires the same
 additive inner-dual obstruction and every bounded normalized equation transfers,
 not only its numerical cost.  At one target coordinate a finer weighted theorem
@@ -111,6 +115,11 @@ and define the associated nested code pair
  K_P=\ker G_J
  \subseteq
  D_P=\{a\in\F_q^J:G_Ja\in U_P\}.
+\]
+Equivalently, and independently of the chosen row basis of $G$,
+\[
+ D_P=\operatorname{punct}_J(I^\perp),
+ \qquad K_P=\operatorname{short}_J(I^\perp).
 \]
 We assume $0<\dim I<|E|$, so both the represented message space and
 $I^\perp$ are nonzero.
@@ -148,7 +157,8 @@ the same statement holds for all sufficiently long concatenations at every
 fixed $r$.
 \end{theorem}
 
-The first assertion follows by identifying a recovery system with a subspace
+The first assertion is the recovery-language specialization of the standard
+nested-code invariant: a recovery system identifies with a subspace
 $A\leq D_P$ disjoint from $K_P$.  Passing between this form and the standard
 definition of $M_t(D_P,K_P)$ uses a complement to $A\cap K_P$.  The second
 assertion combines that identity with a fixed-demand dual decomposition: a
@@ -188,13 +198,14 @@ The separation results delimit the information carried by this hierarchy:
  \qquad
  (K_P,D_P)\not\Longrightarrow \text{confinement threshold}.
 \]
-The first failure comes from the overlap pattern of all recovery equations;
-the second comes from the coefficient presentation through $d(I^\perp)$.
+The first failure comes from the overlap pattern of all recovery equations.
+The second compares different ambient inner-dual realizations of the same
+abstract nested pair; it is not a change of generator-row basis for one code.
 
 Concatenation has long been used to construct LRCs with prescribed parameter
 properties \cite{LiuEtAl2022,JinFu2026}.  Jin and Fu fix a binary $[3,2,2]$
 inner code and choose $\F_4$ outer codes to obtain parameter-optimal binary
-locality-two codes.  Here the inner representation is arbitrary, and the
+locality-two codes.  Here the inner code and target split are arbitrary, and the
 question is the exact obstruction to preserving every bounded dual recovery
 equation: weighted and ungated in rank one, or rank-stratified after the
 outer-distance gate.  We make no minimum-bandwidth claim.

@@ -9,7 +9,7 @@ used to stand in for the relative-weight or concatenation proofs.
 
 Read `thm:main` and the three paragraphs following it in
 [`complete_repair_ports.tex`](complete_repair_ports.tex). Then read the exact
-sequence and `thm:relative-weight-recovery` in
+sequence, `prop:puncture-shorten-pair`, and `thm:relative-weight-recovery` in
 [`sections/02-confinement-transfer.tex`](sections/02-confinement-transfer.tex),
 followed by `thm:objectwise-confinement` and `thm:ranked-confinement` in
 [`sections/03-positive-density.tex`](sections/03-positive-density.tex), then
@@ -18,7 +18,7 @@ same section.
 Those statements contain the principal theorem and its proof. Sections 5 and
 6 test what the numerical hierarchy retains and discards.
 
-## Nine checks against hidden assumptions
+## Ten checks against hidden assumptions
 
 1. **What is the recovered dimension?** A target subspace is
    `T ≤ im G_P ∩ im G_J`. A normalized system consists of explicit maps
@@ -26,13 +26,20 @@ Those statements contain the principal theorem and its proof. Sections 5 and
    `G_P α = id_T` and `G_J β = −id_T`. Thus `t = dim T` is recovered-message
    dimension. Target-only coefficient relations have dimension zero in this
    count. See Section 2 of the paper.
-2. **Why is the minimum a standard RGHW?** The helper image
+2. **Does the pair depend on a generator presentation?** No. With puncturing
+   and shortening onto the helper coordinates,
+   `D_P = punct_J(I⊥)` and `K_P = short_J(I⊥)`. A generator-row-basis
+   change leaves both codes unchanged. Dually,
+   `D_P⊥ = short_J(I)` and `K_P⊥ = punct_J(I)`, so the failure-side pair is
+   equally intrinsic. The later separation compares different
+   ambient inner-dual realizations of one abstract nested pair.
+3. **Why is the minimum a standard RGHW?** The helper image
    `L = β(T)` lies in `D_P`, has dimension `t`, and meets `K_P` trivially.
    Conversely, any such `L` gives a normalized system after choosing a linear
    section through `G_P`. To compare with the standard RGHW definition, the
    proof takes a vector-space complement to `L' ∩ K_P`; this can only shrink
    support. No canonical-complement assumption is used.
-3. **Where does the additive confinement cost come from?** The map
+4. **Where does the additive confinement cost come from?** The map
    `Φ_I : F_q^E → L*` sends each concatenated dual block to its induced inner
    message functional. A dual vector gives a tuple in the functional dual of
    the outer code. Trace duality identifies its support distance with
@@ -41,7 +48,7 @@ Those statements contain the principal theorem and its proof. Sections 5 and
    realization of the demand and a nonzero inner-dual equation in another
    block, on disjoint supports. The converse construction uses a rank-one
    external equation map, so the lower bound is attained.
-4. **What happens before the outer-distance gate?** In rank one,
+5. **What happens before the outer-distance gate?** In rank one,
    `thm:weighted-pointed-confinement` minimizes independently over every
    functional-dual fiber, assuming only that the target outer projection is
    nonzero (hence surjective). The zero-functional sector costs
@@ -53,27 +60,27 @@ Those statements contain the principal theorem and its proof. Sections 5 and
    dual distance $n$ but weighted cost at least $n+1$, so nonvacuous
    radius-$(n-1)$ transfer follows although the ordinary gate is inconclusive;
    $(q,k,n)=(5,3,5)$ is a concrete instance.
-5. **Are the eventual and finite quantifiers separated?** Yes.
+6. **Are the eventual and finite quantifiers separated?** Yes.
    `thm:objectwise-confinement` and `thm:ranked-confinement` first treat one
    finite outer code with `N ≥ 2` and the explicit gate
    `d(O^⊥) > r+1`. Under that gate, `r < M_t + d(I^⊥)` is necessary and
    sufficient. For a family with `d(O_N^⊥) → ∞`, the finite gate holds for all
    sufficiently large `N` at each fixed `r`. The paper does not claim that the
    inner inequality alone excludes nonzero outer-functional mechanisms.
-6. **Is there an off-by-one in the one-coordinate theorem?** No.
+7. **Is there an off-by-one in the one-coordinate theorem?** No.
    `M_1(D_P,K_P)` counts helpers. The older quantity `z_x(I)` counts total dual
    weight and therefore includes the target coordinate. Equation
    `eq:singleton-threshold` states
    `z_x(I) = M_1(D_P,K_P) + 1 + d(I^⊥)`, so the two conditions are exactly
    `r < M_1 + d(I^⊥)` and `r + 1 < z_x(I)`.
-7. **Which consequences import outside theorems?** Strict growth and the
+8. **Which consequences import outside theorems?** Strict growth and the
    relative Singleton bound for RGHWs are classical and cited where used. The
    best-target generalized-weight identity is proved directly from an
    information set of a minimum-support dual subcode. The MDS formula is
    derived from the uniform column matroid rather than assumed. The existence
    of outer families with simultaneous primal and dual relative distance uses
    the stated random-linear-code first-moment argument.
-8. **Do the separations use an unchecked search?** No. The two rank-one
+9. **Do the separations use an unchecked search?** No. The two rank-one
    reliability polynomials follow from the printed 31-subfamily union-size
    table by inclusion–exclusion. Their representability is proved by a
    five-line configuration, a generic lift, and finite-field specialization.
@@ -81,7 +88,7 @@ Those statements contain the principal theorem and its proof. Sections 5 and
    forces every padding support, leaving exactly the base radius. The
    coefficient-presentation example is a three-word calculation printed in
    full.
-9. **Are the projective formulas numerical guesses?** No. The simplex RGHWs
+10. **Are the projective formulas numerical guesses?** No. The simplex RGHWs
    follow by counting projective points outside `U^⊥`. The reliability event is
    `rank(F) ≤ m−t` for the failed point set `F`; Möbius inversion on the
    subspace lattice gives the closed formula. The two endpoint coefficients

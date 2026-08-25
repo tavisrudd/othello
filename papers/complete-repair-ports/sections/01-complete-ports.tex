@@ -82,11 +82,10 @@ recoverable when it lies in
 Only this recovered subspace dimension is counted below.  Relations supported
 entirely on $P$ have recovered dimension zero and do not consume helpers.
 
-For later comparison, the normalized equations at one coordinate reconstruct
-the represented code at radius $r$ when their span is $C^\perp$.  The least
-such $r$ is the reconstruction radius.
+As a brief illustration of the coefficient layer, minimum-weight equations
+already recover the whole dual of an MDS code.
 
-\begin{theorem}[MDS reconstruction from minimum-weight recovery equations]
+\begin{theorem}[Minimum-weight MDS recovery equations span the dual]
 \label{thm:mds-reconstruction}
 \coverage{absent}%
 Let $C\leq\F_q^E$ be an $[n,k]_q$ MDS code with $1\leq k<n$, and let
@@ -94,25 +93,18 @@ $x\in E$.  Then
 \[
  \operatorname{span}\cP_x^{(\leq k)}(C)=C^\perp,
 \]
-the reconstruction radius is $k$, and the supports of the minimum-weight
-recovery equations form the complete $k$-uniform clutter on
+and their supports form the complete $k$-uniform clutter on
 $E\setminus\{x\}$.
 \end{theorem}
 
 \begin{proof}
-The dual has dimension $n-k$ and minimum distance $k+1$.  For every
-$(k+1)$-set $T\subseteq E$, restriction of $C^\perp$ to $E\setminus T$ has
-domain dimension $n-k$ and codomain dimension $n-k-1$.  Its kernel contains a
-nonzero word supported on $T$, and the distance bound forces its support to be
-all of $T$.  Hence the exact helper supports through $x$ are precisely the
-$k$-subsets of $E\setminus\{x\}$.
-
-Choose a fixed $(k-1)$-set $Q\subseteq E\setminus\{x\}$.  For every
-$t\in E\setminus(\{x\}\cup Q)$, choose the normalized minimum dual word
-supported on $\{x,t\}\cup Q$.  Evaluation at the private coordinates $t$
-shows that these $n-k$ words are independent.  They are therefore a basis of
-$C^\perp$.  No smaller radius contains a nonzero normalized equation, again
-by the dual-distance bound.
+The dual has dimension $n-k$ and distance $k+1$.  For each $(k+1)$-set $T$,
+restriction $C^\perp\to\F_q^{E\setminus T}$ has a nonzero kernel, whose words
+have support exactly $T$ by the distance bound.  Thus all stated supports
+occur.  Fix a $(k-1)$-set $Q\subseteq E\setminus\{x\}$ and take the normalized
+word on $\{x,t\}\cup Q$ for each
+$t\in E\setminus(\{x\}\cup Q)$.  Their private coordinates $t$ make these
+$n-k$ words independent, hence a basis of $C^\perp$.
 \proves{thm:mds-reconstruction}%
 \end{proof}
 

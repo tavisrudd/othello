@@ -120,7 +120,7 @@ check is not paper evidence and no reproducibility claim is made for it.
 
 ## Literature audit
 
-**Read-depth summary:** zero sources were newly read at full-text depth; two
+**Read-depth summary:** zero sources were newly read at full-text depth; three
 primary sources were read partially at the exact portions listed below.  This
 audit establishes attribution and terminology.  It does not assert exhaustive
 priority closure.

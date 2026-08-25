@@ -29,7 +29,21 @@ quantifier changes, circularity, and evidence overstatement.
 `W_P = im G_P intersect im G_J`. Restricting `G_J` gives kernel `K_P`, image
 `W_P`, and a surjection. This row is checked in the paper-local Lean package.
 
+Since `I^perp = ker(G_P | G_J)`, projection onto the helper coordinates gives
+`D_P = punct_J(I^perp)`, while the words supported on the helpers give
+`K_P = short_J(I^perp)`. Thus the pair is intrinsic to the inner code and the
+target/helper split; a generator-row-basis change leaves it unchanged. This
+puncturing--shortening identification is human-proved and not Lean-formalized.
+Standard puncturing--shortening duality also gives
+`D_P^perp = short_J(I)` and `K_P^perp = punct_J(I)`, so the failure-side pair
+is the corresponding nested pair formed directly from the primal inner code.
+
 ### Relative-weight identity
+
+The numerical invariant and its quotient-information interpretation are the
+standard RGHW/RDLP theory of nested codes. The paper specializes that theory
+to the puncturing--shortening pair and records the exact normalized-recovery
+correspondence; the new transfer input begins with concatenation.
 
 For a normalized system, `G_J beta = -id_T` makes `beta` injective. Thus
 `L = beta(T)` has dimension `t`, lies in `D_P`, and meets `K_P` trivially.

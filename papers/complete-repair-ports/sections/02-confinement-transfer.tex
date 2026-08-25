@@ -1,4 +1,4 @@
-\section{Relative weights of the associated nested pair}
+\section{Puncturing, shortening, and relative recovery costs}
 \label{sec:relative-weights}
 
 Continue with $G=(G_P\mid G_J)$ and set
@@ -41,10 +41,40 @@ so the restricted map is onto $W_P$.
 The first isomorphism theorem applied to the restricted map gives
 $D_P/K_P\cong W_P$.
 
-The pair depends on the represented
-generator matrix and the target set.  A change of message basis gives an
-isomorphic pair; monomial relabeling of helpers gives the corresponding
-monomially equivalent pair.
+\begin{proposition}[Canonical puncturing--shortening description]
+\label{prop:puncture-shorten-pair}
+\coverage{absent}%
+With puncturing and shortening taken onto the helper set $J$,
+\begin{equation}
+ D_P=\operatorname{punct}_J(I^\perp),
+ \qquad
+ K_P=\operatorname{short}_J(I^\perp).
+ \label{eq:puncture-shorten-pair}
+\end{equation}
+Taking duals inside $\F_q^J$ gives
+\begin{equation}
+ D_P^\perp=\operatorname{short}_J(I),
+ \qquad
+ K_P^\perp=\operatorname{punct}_J(I).
+ \label{eq:dual-puncture-shorten-pair}
+\end{equation}
+Consequently the nested pair depends only on the code $I$ and the split
+$E=P\sqcup J$; changing the row basis of a generator matrix leaves it
+unchanged.
+\end{proposition}
+
+\begin{proof}
+A vector $a\in\F_q^J$ lies in $\operatorname{punct}_J(I^\perp)$ exactly when
+some $p\in\F_q^P$ satisfies $G_Pp+G_Ja=0$, equivalently
+$G_Ja\in\operatorname{im}G_P$, which is $a\in D_P$.  It lies in
+$\operatorname{short}_J(I^\perp)$ exactly when $(0,a)\in I^\perp$,
+equivalently $G_Ja=0$, which is $a\in K_P$.
+The dual identities follow from the standard puncturing--shortening duality.
+\proves{prop:puncture-shorten-pair}%
+\end{proof}
+
+Thus a monomial relabeling of helpers gives the corresponding monomially
+equivalent pair, while a row-basis change does nothing to the pair itself.
 
 For a subspace $A\leq\F_q^J$, write $\supp A$ for the union of the supports
 of its vectors.  For nested linear codes $K\subseteq D\leq\F_q^J$, the $t$th relative
@@ -59,6 +89,13 @@ dimension $t$.  Strict growth and the relative Singleton bound are
 Proposition~2 and Theorem~4 of Luo et al.~\cite{LuoEtAl2005}; standard
 treatments also cover ordinary Wei duality and computational forms
 \cite{GeilEtAl2014,SanJose2025}.
+For nested code pairs in linear secret sharing, RDLPs and RGHWs already give
+exact information and reconstruction thresholds
+\cite{KuriharaUyematsuMatsumoto2012}.
+
+The following result is the standard nested-code support invariant applied to
+the canonical puncturing--shortening pair, with the normalization and helper
+support correspondence stated in recovery language.
 
 \begin{theorem}[Relative weights are exact recovery costs]
 \label{thm:relative-weight-recovery}
@@ -150,7 +187,10 @@ failure-side counterpart of Theorem~\ref{thm:relative-weight-recovery}.
 \begin{proposition}[Failures and residual ambiguity]
 \label{prop:dual-failure-threshold}
 \coverage{absent}%
-Let $\ell=\dim W_P$.  If the helpers in $H\subseteq J$ survive and those in
+Let $\ell=\dim W_P$.  By~\eqref{eq:dual-puncture-shorten-pair}, the dual
+nested pair is
+$\operatorname{short}_J(I)\subseteq\operatorname{punct}_J(I)$.
+If the helpers in $H\subseteq J$ survive and those in
 $F=J\setminus H$ fail, then the unrecovered target dimension is
 \begin{equation}
  \ell-\dim\bigl(W_P\cap\operatorname{span}(G_H)\bigr)

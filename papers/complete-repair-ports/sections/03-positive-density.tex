@@ -30,9 +30,17 @@ where
        \text{ for every }(a_j)\in O\}.
 \]
 Indeed, both conditions say that $y$ is orthogonal to every encoded outer
-word.  Under the trace identification $L\cong L^*$, $L$-linearity of $O$
-identifies $\operatorname{FD}(O)$ with $O^\perp$ and preserves block
-support.  Thus its support distance is $d(O^\perp)$.
+word.  Write $\beta_j(a)=\operatorname{Tr}_{L/\F_q}(b_ja)$.  The functional-dual
+condition becomes
+\[
+ \operatorname{Tr}_{L/\F_q}\!\left(\sum_j b_ja_j\right)=0
+ \qquad\text{for every }(a_j)\in O.
+\]
+Because $O$ is $L$-linear, the same holds after multiplying $(a_j)$ by every
+$\lambda\in L$.  Nondegeneracy of the trace pairing then forces
+$\sum_jb_ja_j=0$.  Hence $(b_j)\in O^\perp$, and the converse is immediate.
+This identification preserves block support, so the support distance of
+$\operatorname{FD}(O)$ is $d(O^\perp)$.
 
 Fix a target block and a nonzero internally recoverable subspace
 $T\leq W_P$.  Let $\rho_T(I)$ be the minimum helper-union size of a

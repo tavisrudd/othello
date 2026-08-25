@@ -187,7 +187,8 @@ results.
   `Fq² ⋊ SL₂(q)` or the smaller split-torus branch. [Diagonal Isoduality and Transversal Clifford Groups](https://github.com/tavisrudd/mds-css-transversal-groups/blob/main/mds-css-transversal-groups.pdf).
 
 - **Relative weights are exact local recovery costs and transfer thresholds.**
-  A target/helper split determines nested codes `K_P ⊆ D_P`; their `t`th
+  Shortening and puncturing the inner dual onto the helper coordinates give
+  `K_P = short_J(I⊥) ⊆ D_P = punct_J(I⊥)`; their `t`th
   relative generalized Hamming weight is the minimum helper union needed to
   recover `t` independent target combinations.  For an outer code with at
   least two blocks and `d(O⊥) > r + 1`, every cost-`r` system is confined to
@@ -247,7 +248,7 @@ the theorem column.
 | Diagonal Isoduality and Transversal Clifford Groups of MDS–CSS Codes | The diagonal multiplier nullity fixes the transversal logical group. | All `[2m,m,m+1]q` MDS codes over odd prime fields. |
 | Balanced Cuts of Conference Matrices: Squared-Spectrum Rigidity and Hermitian Holonomy | Order six is the unique nontrivial realized symmetric conference order whose normalized balanced cross-block Gram spectrum is cut-independent. | Every symmetric conference matrix and every balanced half. |
 | Exact Transfer of Bounded Linear Recovery and Relative Weight Hierarchies | For `u=min(k,|P|)`, `b=min(k,|J|)`, and `ell=u+b-k`, an MDS inner code has `M_t(D_P,K_P)=k-u+t` at every recoverable rank; helper-span gives equality in the global ceiling, and rank-one ceiling equality is rigid. | Every proper MDS inner code and every target/helper split with `1 ≤ t ≤ ell`. |
-| Exact Transfer of Bounded Linear Recovery and Relative Weight Hierarchies | `M_t(D_P,K_P)` is the exact minimum helper-union cost for rank-`t` recovery. Under `N ≥ 2` and `d(O⊥)>r+1`, all cost-`r` systems are block-confined exactly when `r<M_t(D_P,K_P)+d(I⊥)`, and normalized equations and exact supports transfer; in rank one, target-constrained inner coset weights give a finer exact finite criterion before that distance gate. | Every represented inner code with nonzero dual and every target set with `1 ≤ t ≤ dim W_P` under the ranked gate; the ungated rank-one form assumes nonzero projection onto the target outer block. |
+| Exact Transfer of Bounded Linear Recovery and Relative Weight Hierarchies | `K_P=short_J(I⊥) ⊆ D_P=punct_J(I⊥)`, and `M_t(D_P,K_P)` is the exact minimum helper-union cost for rank-`t` recovery. Under `N ≥ 2` and `d(O⊥)>r+1`, all cost-`r` systems are block-confined exactly when `r<M_t(D_P,K_P)+d(I⊥)`, and normalized equations and exact supports transfer; in rank one, target-constrained inner coset weights give a finer exact finite criterion before that distance gate. | Every inner code with nonzero dual and every target set with `1 ≤ t ≤ dim W_P` under the ranked gate; the ungated rank-one form assumes nonzero projection onto the target outer block. |
 | Integral Cohomology and Modular Decomposition for the Theta Divisor of a Cubic Threefold | The integral middle lattice has rank `130` and saturation quotient `(Z/2)^10`; the integral resolution complex has central Smith factor three, a length-three mod-three Loewy chain, and modular relative-hard-Lefschetz failure. | The theta divisor of every smooth complex cubic threefold. |
 
 ## Papers and entry points
@@ -719,8 +720,10 @@ a fixed code.
 
 [PDF](https://github.com/tavisrudd/complete-repair-ports/blob/main/complete_repair_ports.pdf) · [Repository](https://github.com/tavisrudd/complete-repair-ports) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.22051903-blue.svg)](https://doi.org/10.5281/zenodo.22051903)
 
-**Standout result.** For a target/helper split, the relative generalized
-Hamming weights of the associated nested code pair are exactly the minimum
+**Standout result.** For a target/helper split, shortening and puncturing the
+inner dual onto the helper coordinates give
+`K_P = short_J(I^perp) <= D_P = punct_J(I^perp)`.
+Its relative generalized Hamming weights are exactly the minimum
 helper-union costs for recovering independent target combinations. Under the
 finite outer gate `N >= 2` and `d(O^perp) > r + 1`, every rank-`t` recovery
 system of cost at most `r` remains in its inner block exactly when
@@ -729,9 +732,9 @@ helper supports transfer. At one target coordinate with nonzero outer
 projection, target-constrained inner coset weights give a finer exact finite
 criterion that retains the nonzero outer-functional sector.
 
-> *Abstract* Let `I <= F_q^E` be a represented inner code, let `P` be a target
-> set, and put `J = E \ P`. The target and helper parts of a generator matrix
-> determine an associated nested code pair `K_P <= D_P <= F_q^J`. We prove
+> *Abstract* Let `I <= F_q^E` be an inner code, let `P` be a target set, and
+> put `J = E \ P`. Shortening and puncturing `I^perp` onto `J` give an
+> associated nested code pair `K_P <= D_P <= F_q^J`. We prove
 > that the `t`th relative generalized Hamming weight `M_t(D_P,K_P)` is exactly
 > the minimum helper-union size needed to recover `t` independent target
 > combinations.
@@ -753,8 +756,9 @@ criterion that retains the nonzero outer-functional sector.
 > outer support distance does not decide transfer.
 >
 > We construct pairs with the same complete relative-weight hierarchy but
-> different bounded recovery reliability, and pairs with the same associated
-> nested code pair but different confinement thresholds. For a
+> different bounded recovery reliability, and different ambient inner-dual
+> realizations of the same abstract nested pair with different confinement
+> thresholds. For a
 > projective-simplex family we compute
 > `M_t = (q^m - q^(m-t))/(q - 1)` and express the recovery probability through
 > the projective-rank distribution. The one-coordinate criterion

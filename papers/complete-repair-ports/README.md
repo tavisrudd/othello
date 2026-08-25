@@ -9,8 +9,10 @@
 **Title:** *Exact Transfer of Bounded Linear Recovery and Relative Weight
 Hierarchies*
 
-For a target set `P` and helper set `J`, the target and helper parts of a
-generator matrix determine nested codes `K_P ⊆ D_P ⊆ F_q^J`. The paper proves
+For a target set `P` and helper set `J`, shortening and puncturing the inner
+dual onto `J` give `K_P = short_J(I⊥) ⊆ D_P = punct_J(I⊥)`. Thus the pair depends
+only on the inner code and the target/helper split, not on a generator-row
+basis. The paper proves
 that the `t`th relative generalized Hamming weight `M_t(D_P,K_P)` is the exact
 minimum helper-union size for recovering `t` independent target combinations.
 For any outer code with at least two blocks and `d(O⊥) > r+1`, the exact
@@ -28,9 +30,8 @@ sufficiently large lengths at each fixed `r`.
 For one target coordinate in a block with nonzero outer projection, a second
 theorem retains every nonzero outer functional and gives the exact finite-length
 criterion without the distance gate. Target-constrained inner coset weights can certify transfer when ordinary
-outer support distance cannot; a construction using a Singer cycle gives a
-family of `[k+1,k,2]_q` inner
-codes gives explicit examples.
+outer support distance cannot; a construction using a Singer cycle and
+`[k+1,k,2]_q` inner codes gives explicit examples.
 
 ## Main consequences
 
@@ -48,8 +49,9 @@ codes gives explicit examples.
   distance satisfy the gate eventually.
 - Two systems can have identical complete relative-weight hierarchies but
   different bounded repair reliabilities.
-- Two coefficient presentations of the same associated nested code pair can
-  have different confinement thresholds.
+- Different ambient inner-dual realizations of the same abstract nested pair
+  can have different confinement thresholds. This is not a change of generator
+  basis for one fixed inner code.
 - A projective-simplex family has
   `M_t = (q^m − q^(m−t))/(q−1)` and an explicit reliability law in terms of
   projective ranks.
