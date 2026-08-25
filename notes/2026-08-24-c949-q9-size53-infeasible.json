@@ -1,0 +1,16 @@
+{
+  "blocking_multiplicity": 3,
+  "field_order": 9,
+  "normalized_maximum_external_degree": null,
+  "required_blocking_set_size": 53,
+  "required_tangent_count": null,
+  "schema": "c949-minimal-multiple-blocking-decision-v1",
+  "search": {
+    "random_seed": 949,
+    "time_limit_seconds": 600.0,
+    "workers": 8
+  },
+  "solver": "OR-Tools CP-SAT",
+  "solver_status": "INFEASIBLE",
+  "solver_version": "9.14.6206"
+}

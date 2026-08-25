@@ -1,0 +1,24 @@
+{
+  "candidate_count": 1,
+  "candidates": [
+    {
+      "intersection_gap_is_power_of_3": true,
+      "is_blocking": false,
+      "line_counts": [
+        225,
+        532
+      ],
+      "line_intersections": [
+        0,
+        3
+      ],
+      "point_set_size": 57
+    }
+  ],
+  "field_order": 27,
+  "point_set_size_range": [
+    45,
+    70
+  ],
+  "schema": "c949-two-character-parameter-audit-v1"
+}

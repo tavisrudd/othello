@@ -1,0 +1,41 @@
+{
+  "field_order": 27,
+  "projective_point_count": 757,
+  "schema": "c949-q27-symmetry-orbits-v1",
+  "singer_group_order": 757,
+  "singer_group_order_is_prime": true,
+  "symmetries": [
+    {
+      "orbit_count": 109,
+      "orbit_size_spectrum": {
+        "1": 28,
+        "9": 81
+      },
+      "symmetry": "trace-x"
+    },
+    {
+      "orbit_count": 37,
+      "orbit_size_spectrum": {
+        "1": 28,
+        "81": 9
+      },
+      "symmetry": "trace-xy"
+    },
+    {
+      "orbit_count": 85,
+      "orbit_size_spectrum": {
+        "1": 29,
+        "13": 56
+      },
+      "symmetry": "scalar-13"
+    },
+    {
+      "orbit_count": 261,
+      "orbit_size_spectrum": {
+        "1": 13,
+        "3": 248
+      },
+      "symmetry": "frobenius"
+    }
+  ]
+}
