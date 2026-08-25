@@ -96,3 +96,33 @@ Files:
 
 **Vibe:** the constructive quotient is explicit and manageable as an
 artifact; ground-field descent, not elimination, is now the genuine gate.
+
+## EJ + TT closeout
+
+The large hyperplane coefficients conceal a small invariant core: all sixteen
+orbit-correction factors are Laurent monomials in only three signed-minor
+ratios, with exponents in `{-1,0,1}`.  Descent should therefore act first on
+the four block evaluations and their Plücker coordinates, not on the expanded
+hyperplane coefficients.
+
+For type `I_1`, the five singular conic fibres give an intrinsic route.  Model
+their components in the cubic étale algebra `K[t]/(t^3-3a^2t-beta)` together
+with its quadratic factor, and use trace coordinates to descend the permuted
+Cox blocks.  This avoids choosing radicals or first identifying the split
+blow-up parameters.  Only after the signed-minor ratios and quotient
+coordinates are expressed in that descended basis should the inverse graph be
+eliminated.
+
+The first witness was chosen to cover the generic Cox moduli, not to minimize
+formula size.  A bounded small-height witness search may shorten the ancillary
+formulas, but it is lower value than closing descent and should not delay it.
+
+## Mystery ledger
+
+| feature | status | evidence gap or owner |
+|---|---|---|
+| Why are the expanded formulas large while the correction exponents are tiny? | settled | hyperplanes depend on the arbitrary tangent frame; the orbit correction depends only on the unimodular four-block weight simplex |
+| Can the type-`I_1` section be written over `K` without radicals? | open, next | construct the conic-fibre component module over the cubic and quadratic étale algebras and descend by traces |
+| Can a smaller witness materially reduce formula size? | open, optional | bounded height search after descent; current formulas already fit a compact artifact |
+| Will inverse tangent elimination remain tractable after descent? | open | no elimination has been run; first obtain descended quotient coordinates and choose an affine chart |
+| Does this stage give maps for either cubic product? | no, explicitly delimited | C958 acceptance still requires descent, both composites, exceptional loci, and function-field composition |

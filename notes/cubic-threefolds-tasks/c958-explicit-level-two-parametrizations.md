@@ -17,8 +17,11 @@ before inverse tangent elimination.
 The first genuine gate is descent.  Tschinkel--Zhang's fibration coordinate
 `a` is not the split blow-up modulus `a`; their type computation supplies the
 Galois action but not an explicit change to the marked Cox basis.  Begin with
-type `I_1`: derive the `C2 x S3`-equivariant descended Cox representation and
-express a rational tangent/orbit-test pair in it.
+type `I_1`: realize the permuted conic-fibre components over the cubic and
+quadratic étale algebras, use trace coordinates to derive the `C2 x S3`-
+equivariant descended Cox representation, and express a rational
+tangent/orbit-test pair in it.  Descend the four block evaluations and their
+Plücker coordinates before expanding the full hyperplanes.
 
 ## Goal
 
