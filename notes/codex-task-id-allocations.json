@@ -3563,8 +3563,17 @@
       "last": 968,
       "purpose": "Sparse-shadow reconstruction and canonicalization in a top-level Rust Cargo project",
       "sequence": 396
+    },
+    {
+      "count": 1,
+      "first": 969,
+      "kind": "reservation",
+      "lane": "reed-solomon",
+      "last": 969,
+      "purpose": "Structural PRS deep-hole classifier for redundancies 5 through 10",
+      "sequence": 397
     }
   ],
-  "next_id": 969,
+  "next_id": 970,
   "schema": "codex-task-id-allocations-v1"
 }
