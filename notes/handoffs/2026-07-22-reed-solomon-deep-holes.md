@@ -1168,7 +1168,7 @@ gates remain binding.
 | EV rank | Task | Current gate | Why this position |
 |---:|---|---|---|
 | 1 | C915 | edits E1--E6 applied and checklist green; three independent audits open | the external referee package blocks the Version 2 release |
-| 2 | C969 | active; schemas/core/frozen adapters green; fast terminal solver, uniform adapters, complexity theorem, verifier, and benchmarks open | compile the proved R5--R10 geometry into one exact canonical classifier and decoder while settling the general split-locator decision/recovery complexity boundary |
+| 2 | C969 | active; schemas/core/frozen adapters and proved R5--R7 terminal selector green; uniform adapters, general complexity theorem, positive verifier, and benchmarks open | compile the proved R5--R10 geometry into one exact canonical classifier and decoder while settling the general split-locator decision/recovery complexity boundary |
 
 ## Unallocated level-ups
 
@@ -1230,8 +1230,9 @@ history.
 
 `go C969`
 
-(Resume the fast R5--R7 terminal-hyperplane solver: both infinity charts,
-bilinear final-root equation, collision divisor, constant-grid proof, bounded
-small-field branch, and exact operation counts.  C915's three independent
-Version 2 audits remain the higher-EV external-release gate but are a separate
-active card.)
+(Implement the independent positive deep-certificate verifier next: replay the
+theorem-domain row, family invariant, semilinear transporter, split-freeness
+source, and covering-radius promotion without trusting `classify`.  The proved
+R5--R7 12-point terminal selector is now in the Rust exact decoder.  C915's
+three independent Version 2 audits remain the higher-EV external-release gate
+but are a separate active card.)

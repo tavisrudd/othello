@@ -723,10 +723,225 @@ pub fn search_locator(
     Err(Error::NoLocator(stop))
 }
 
+const TERMINAL_GRID_SIZE: u32 = 12;
+
+fn reverse_root(field: &Field, root: Root) -> Root {
+    match root {
+        Root::Infinity => Root::Finite(0),
+        Root::Finite(0) => Root::Infinity,
+        Root::Finite(x) => Root::Finite(field.inv(x).expect("nonzero field element")),
+    }
+}
+
+fn cubic_completions_in_chart(
+    field: &Field,
+    functional: &[u32; 4],
+    forbidden: &[Root],
+) -> Vec<Vec<Root>> {
+    let grid_stop = field.order().min(TERMINAL_GRID_SIZE);
+    let mut completions = Vec::new();
+    let forbidden_finite = forbidden
+        .iter()
+        .filter_map(|root| match root {
+            Root::Finite(x) => Some(*x),
+            Root::Infinity => None,
+        })
+        .collect::<BTreeSet<_>>();
+    for x in 0..grid_stop {
+        if forbidden_finite.contains(&x) {
+            continue;
+        }
+        let a = field.add(field.neg(field.mul(functional[0], x)), functional[1]);
+        let b = field.sub(field.mul(functional[1], x), functional[2]);
+        let c = field.sub(functional[3], field.mul(functional[2], x));
+        for y in 0..grid_stop {
+            if y == x || forbidden_finite.contains(&y) {
+                continue;
+            }
+            let denominator = field.add(field.mul(a, y), b);
+            let numerator = field.add(field.mul(b, y), c);
+            if denominator == 0 {
+                if numerator != 0 {
+                    continue;
+                }
+                for z in 0..grid_stop {
+                    if z != x && z != y && !forbidden_finite.contains(&z) {
+                        completions.push(vec![Root::Finite(x), Root::Finite(y), Root::Finite(z)]);
+                    }
+                }
+                continue;
+            }
+            let z = field.mul(
+                field.neg(numerator),
+                field.inv(denominator).expect("nonzero denominator"),
+            );
+            if z == x || z == y || forbidden_finite.contains(&z) {
+                continue;
+            }
+            completions.push(vec![Root::Finite(x), Root::Finite(y), Root::Finite(z)]);
+        }
+    }
+    completions
+}
+
+fn terminal_cubic_completions(
+    field: &Field,
+    functional: [u32; 4],
+    forbidden: &[Root],
+) -> Vec<Vec<Root>> {
+    let mut completions = cubic_completions_in_chart(field, &functional, forbidden);
+    let reversed_functional = [functional[3], functional[2], functional[1], functional[0]];
+    let reversed_forbidden = forbidden
+        .iter()
+        .map(|&root| reverse_root(field, root))
+        .collect::<Vec<_>>();
+    completions.extend(
+        cubic_completions_in_chart(field, &reversed_functional, &reversed_forbidden)
+            .into_iter()
+            .map(|support| {
+                support
+                    .into_iter()
+                    .map(|root| reverse_root(field, root))
+                    .collect()
+            }),
+    );
+    completions
+}
+
+struct ProjectivePrefixes {
+    q: u32,
+    point_count: u64,
+    indices: Vec<u64>,
+    first: bool,
+    done: bool,
+}
+
+impl ProjectivePrefixes {
+    fn new(field: &Field, size: usize) -> Self {
+        let point_count = u64::from(field.order()) + 1;
+        Self {
+            q: field.order(),
+            point_count,
+            indices: (0..size as u64).collect(),
+            first: true,
+            done: size as u64 > point_count,
+        }
+    }
+
+    fn support(&self) -> Vec<Root> {
+        self.indices
+            .iter()
+            .map(|&index| {
+                if index < u64::from(self.q) {
+                    Root::Finite(index as u32)
+                } else {
+                    Root::Infinity
+                }
+            })
+            .collect()
+    }
+}
+
+impl Iterator for ProjectivePrefixes {
+    type Item = Vec<Root>;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        if self.done {
+            return None;
+        }
+        if self.first {
+            self.first = false;
+            return Some(self.support());
+        }
+        let size = self.indices.len();
+        let Some(position) = (0..size)
+            .rev()
+            .find(|&i| self.indices[i] < self.point_count - (size - i) as u64)
+        else {
+            self.done = true;
+            return None;
+        };
+        self.indices[position] += 1;
+        for i in position + 1..size {
+            self.indices[i] = self.indices[i - 1] + 1;
+        }
+        Some(self.support())
+    }
+}
+
+pub fn search_fast_terminal_locator(
+    request: &Request,
+    prefix_limit: u64,
+) -> Result<LocatorCertificate, Error> {
+    let (field, syndrome) = validate_request(request)?;
+    if !(5..=7).contains(&request.redundancy) {
+        return Err(Error::NoLocator(request.redundancy - 1));
+    }
+    let prefix_degree = request.redundancy - 4;
+    for (prefix, index) in ProjectivePrefixes::new(&field, prefix_degree).zip(0u64..) {
+        if index >= prefix_limit {
+            return Err(Error::CandidateLimit {
+                limit: prefix_limit,
+            });
+        }
+        let examined = index + 1;
+        let prefix_locator = locator_from_support(&field, &prefix)?;
+        let mut functional = [0u32; 4];
+        for (j, output) in functional.iter_mut().enumerate() {
+            for (i, &coefficient) in prefix_locator.iter().enumerate() {
+                *output = field.add(*output, field.mul(syndrome[i + j], coefficient));
+            }
+        }
+        for completion in terminal_cubic_completions(&field, functional, &prefix) {
+            let mut support = prefix.clone();
+            support.extend(completion);
+            support.sort_unstable();
+            let locator = locator_from_support(&field, &support)?;
+            let hankel_value = syndrome
+                .iter()
+                .zip(&locator)
+                .map(|(&s, &coefficient)| field.mul(s, coefficient))
+                .fold(0, |sum, term| field.add(sum, term));
+            if hankel_value != 0 {
+                continue;
+            }
+            let Some(magnitudes) = recover_magnitudes(&field, &syndrome, &support) else {
+                continue;
+            };
+            let certificate = LocatorCertificate {
+                schema: CERTIFICATE_SCHEMA.into(),
+                field: request.field.clone(),
+                redundancy: request.redundancy,
+                normalized_syndrome: syndrome.clone(),
+                distance: support.len(),
+                locator,
+                support,
+                magnitudes,
+                candidates_examined: examined,
+            };
+            verify_certificate(&certificate)?;
+            return Ok(certificate);
+        }
+    }
+    Err(Error::NoLocator(request.redundancy - 1))
+}
+
 pub fn search_exact_locator(
     request: &Request,
     candidate_limit: u64,
 ) -> Result<LocatorCertificate, Error> {
+    match search_locator(request, request.redundancy - 2, candidate_limit) {
+        Ok(certificate) => return Ok(certificate),
+        Err(Error::NoLocator(_)) => {}
+        Err(error) => return Err(error),
+    }
+    if (5..=7).contains(&request.redundancy) {
+        match search_fast_terminal_locator(request, candidate_limit) {
+            Ok(certificate) => return Ok(certificate),
+            Err(Error::NoLocator(_)) => {}
+            Err(error) => return Err(error),
+        }
+    }
     match search_locator(request, request.redundancy - 1, candidate_limit) {
         Ok(certificate) => return Ok(certificate),
         Err(Error::NoLocator(_)) => {}
@@ -1184,6 +1399,43 @@ mod tests {
     }
 
     #[test]
+    fn fast_terminal_selector_covers_r6_and_r7_representatives() {
+        for input in [
+            request(prime_field(17), 6, vec![0, 0, 0, 0, 1, 0]),
+            request(prime_field(17), 6, vec![0, 1, 0, 3, 0, 9]),
+            request(prime_field(7), 7, vec![0, 0, 0, 0, 1, 0, 0]),
+        ] {
+            let certificate = search_fast_terminal_locator(&input, 10_000).unwrap();
+            assert_eq!(certificate.distance, input.redundancy - 1);
+            verify_certificate(&certificate).unwrap();
+        }
+    }
+
+    #[test]
+    fn fast_terminal_selector_exhausts_all_r5_q5_syndromes() {
+        let field_spec = prime_field(5);
+        let field = Field::new(field_spec.clone()).unwrap();
+        let basis = (0..5)
+            .map(|i| {
+                let mut vector = vec![0; 5];
+                vector[i] = 1;
+                vector
+            })
+            .collect::<Vec<_>>();
+        let mut examined = 0;
+        let syndromes = projective_span(&field, &basis, 1_000, &mut examined).unwrap();
+        assert_eq!(syndromes.len(), 781);
+        for syndrome in syndromes {
+            let input = request(field_spec.clone(), 5, syndrome);
+            if matches!(search_locator(&input, 3, 1_000), Err(Error::NoLocator(3))) {
+                let certificate = search_fast_terminal_locator(&input, 1_000).unwrap();
+                assert_eq!(certificate.distance, 4);
+                verify_certificate(&certificate).unwrap();
+            }
+        }
+    }
+
+    #[test]
     fn pgl_action_preserves_nrc_and_canonicalizes_equivalent_inputs() {
         let field_spec = prime_field(7);
         let field = Field::new(field_spec.clone()).unwrap();
@@ -1229,10 +1481,14 @@ mod tests {
 
     #[test]
     fn exact_decoder_returns_terminal_nearest_word_for_r5_tangent() {
-        let certificate =
-            search_exact_locator(&request(prime_field(7), 5, vec![0, 0, 0, 1, 0]), 10_000).unwrap();
+        let input = request(prime_field(7), 5, vec![0, 0, 0, 1, 0]);
+        let certificate = search_fast_terminal_locator(&input, 10_000).unwrap();
         assert_eq!(certificate.distance, 4);
         verify_certificate(&certificate).unwrap();
+
+        let exact = search_exact_locator(&input, 10_000).unwrap();
+        assert_eq!(exact.distance, 4);
+        verify_certificate(&exact).unwrap();
     }
 
     #[test]

@@ -13,11 +13,16 @@ persistent tangent/sigma gcd branches and returns an exact semilinear
 transporter through an explicit `m(q^3-q)` canonicalization fallback.  A
 deterministically regenerated 338-row semilinear exception registry now
 compresses the frozen R5--R7 certificates; classifier tests cover an R5 wild
-deep orbit and the R7 small-field radius-gap verdict.  Uniform nonpersistent
-formula adapters, formula-speed canonicalizers, the fast R5--R7 terminal
-solver, and complexity proofs remain open.  Exact decoding is nevertheless
-complete within an explicit candidate budget through an exhaustive terminal
-hyperplane fallback.  Code and mathematics only; no manuscript edits.
+deep orbit and the R7 small-field radius-gap verdict.  The R5--R7 terminal gate
+is now proved and implemented by a streaming 12-point bilinear selector with
+exact
+`O(q)`, `O(q^2)`, and `O(q^3)` prefix counts, both infinity charts, and a
+bounded small-field fallback.  Uniform nonpersistent formula adapters and
+formula-speed canonicalizers remain open; the remaining complexity work is
+C607's general fixed-parameter theorem and the nonterminal classifier
+branches.  Exact
+decoding remains complete within an explicit candidate budget.  Code and
+mathematics only; no manuscript edits.
 
 ## Goal
 
