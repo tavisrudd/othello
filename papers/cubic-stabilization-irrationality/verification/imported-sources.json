@@ -45,8 +45,13 @@
     "conventions": [
       {
         "aspect": "domain",
-        "matched": "The two explicit rational cubics are smooth cubic threefolds after base change to C.",
+        "matched": "The two displayed cubic threefolds are smooth after base change to C.",
         "requirement": "The theorem applies to every smooth complex cubic threefold."
+      },
+      {
+        "aspect": "dependency boundary",
+        "matched": "Only the lower bound is imported from the one-stabilization theorem; the rationality after product with P2 is proved independently in this manuscript.",
+        "requirement": "The cited theorem supplies irrationality of X times P1, and no part of the upper-bound argument depends on its quantum-D-module proof."
       }
     ],
     "pinpoint": "Theorem 1.1",
