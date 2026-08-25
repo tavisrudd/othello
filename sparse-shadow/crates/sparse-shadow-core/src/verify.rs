@@ -308,9 +308,16 @@ impl ReferenceSearch<'_> {
         loop {
             self.stats.refinement_rounds += 1;
             let old = partition;
+            if old.iter().all(|cell| cell.len() == 1) {
+                return old;
+            }
             let mut changed = false;
             let mut next = Vec::with_capacity(old.len());
             for cell in &old {
+                if cell.len() == 1 {
+                    next.push(cell.clone());
+                    continue;
+                }
                 let mut buckets = std::collections::BTreeMap::<Vec<u32>, Vec<u32>>::new();
                 for &vertex in cell {
                     let signature = self.reference_signature(vertex, &old);

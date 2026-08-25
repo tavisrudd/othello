@@ -277,6 +277,9 @@ fn refine(
 ) -> HotPartition {
     loop {
         *refinement_rounds += 1;
+        if partition.cell_count == partition.vertex_count {
+            return partition;
+        }
         let mut cell_masks = [0u16; PAPER_I_VERTICES];
         for (cell, cell_mask) in cell_masks
             .iter_mut()
@@ -292,8 +295,14 @@ fn refine(
             bytes: [0; 63],
             len: 0,
         }; PAPER_I_VERTICES];
-        for (vertex, slot) in signatures.iter_mut().enumerate() {
-            *slot = signature(vertex, &partition, dense, &cell_masks);
+        for cell in 0..usize::from(partition.cell_count) {
+            let (start, end) = partition.cell_range(cell);
+            if end - start > 1 {
+                for &vertex in &partition.order[start..end] {
+                    signatures[usize::from(vertex)] =
+                        signature(usize::from(vertex), &partition, dense, &cell_masks);
+                }
+            }
         }
         let mut next = partition;
         next.cell_count = 0;

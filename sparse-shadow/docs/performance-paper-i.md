@@ -71,3 +71,29 @@ colored incidence encoding whose version/options change the canonical form, and
 Vole/Sage need a separately frozen action adapter. The prior-art audit names
 these future baselines; the current format does not permit a like-for-like run
 without changing the measured object.
+
+## Profile-guided refinement optimization
+
+At the 2026-08-25 C968 performance pass, Linux `perf` attributed 62.6% of
+canonicalization cycles to `hot::refine` and 62.4% of independent replay cycles
+to `ReferenceSearch::walk`. Both implementations were computing relation
+signatures after a partition was already discrete and were bucketing singleton
+cells that cannot split. The optimized implementations return after preserving
+the frozen refinement-round increment and skip signature work for singleton
+cells. The reference checker retains its independent `Vec`/`BTreeMap` algorithm
+and does not call the production hot search.
+
+The untouched commit and optimized working tree were compiled separately, then
+alternated twice on CPU 0 with 20 Criterion samples, one-second warmup, and
+two-second measurement windows. Absolute 95% intervals were:
+
+| run | canonicalize baseline | canonicalize optimized | replay baseline | replay optimized |
+|---|---:|---:|---:|---:|
+| 1 | 489.74--493.28 us | 278.65--280.46 us | 6.9641--7.0021 ms | 3.5796--3.6371 ms |
+| 2 | 479.67--481.28 us | 279.05--279.93 us | 6.8287--6.9452 ms | 3.5113--3.5247 ms |
+
+Using interval midpoints, the paired improvements are 43.1%/41.8% for
+canonicalization and 48.3%/48.9% for independent replay. The post-change
+canonicalization profile reduced `hot::refine` from 62.6% to 42.5% of sampled
+cycles. Frozen canonical identities, certificates, exhaustive search counters,
+and the zero-allocation hot-loop gate remain unchanged.

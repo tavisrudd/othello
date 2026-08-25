@@ -266,6 +266,14 @@ identical-input equivalence. This converts the former same-build repeatability
 check into a cross-build byte-level serialization contract; `blake3` is reused
 as a CLI dev dependency and adds no resolved package.
 
+Linux `perf` identified redundant refinement signatures as the dominant cost in
+both production canonicalization and independent replay. Discrete partitions
+now return immediately after the frozen round increment, and singleton cells
+bypass signature computation/bucketing. Two interleaved CPU-0 comparisons
+against a separately compiled untouched worktree measured 41.8--43.1% faster
+canonicalization and 48.3--48.9% faster replay while preserving exact artifacts,
+search counters, verifier independence, and the zero-allocation hot-loop gate.
+
 No unblocked C968 implementation frontier remains: each next adapter first
 requires the complete paper-owned export named in its `fixtures/gated-*.json`.
 Nearby evidence JSON and trust manifests are explicitly insufficient. Once an
