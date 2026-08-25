@@ -668,8 +668,25 @@ fn r6_formula_family(field: &Field, syndrome: &[u32]) -> Option<(&'static str, &
     }
 }
 
+fn r7_formula_family(field: &Field, syndrome: &[u32]) -> Option<(&'static str, &'static str)> {
+    if syndrome.len() == 7
+        && field.spec.p == 2
+        && field.spec.degree % 2 == 1
+        && syndrome == [0, 0, 0, 1, 0, 0, 0]
+    {
+        Some((
+            "r7.char2_central",
+            "r7.char2_central_nucleus:odd_extension_degree",
+        ))
+    } else {
+        None
+    }
+}
+
 fn formula_family(field: &Field, syndrome: &[u32]) -> Option<(&'static str, &'static str)> {
-    r5_formula_family(field, syndrome).or_else(|| r6_formula_family(field, syndrome))
+    r5_formula_family(field, syndrome)
+        .or_else(|| r6_formula_family(field, syndrome))
+        .or_else(|| r7_formula_family(field, syndrome))
 }
 
 pub fn apply_semilinear(
@@ -1966,6 +1983,39 @@ mod tests {
     }
 
     #[test]
+    fn r7_odd_binary_central_adapter_preserves_arithmetic_toggle() {
+        let odd_degree_field = Field::new(FieldSpec {
+            p: 2,
+            degree: 5,
+            modulus: vec![1, 0, 1, 0, 0, 1],
+            encoding: "polynomial-basis-base-p-integer-v1".into(),
+        })
+        .unwrap();
+        assert_eq!(
+            r7_formula_family(&odd_degree_field, &[0, 0, 0, 1, 0, 0, 0]),
+            Some((
+                "r7.char2_central",
+                "r7.char2_central_nucleus:odd_extension_degree"
+            ))
+        );
+        assert_eq!(
+            r7_formula_family(&odd_degree_field, &[0, 0, 1, 1, 0, 0, 0]),
+            None
+        );
+        let even_degree_field = Field::new(FieldSpec {
+            p: 2,
+            degree: 4,
+            modulus: vec![1, 1, 0, 0, 1],
+            encoding: "polynomial-basis-base-p-integer-v1".into(),
+        })
+        .unwrap();
+        assert_eq!(
+            r7_formula_family(&even_degree_field, &[0, 0, 0, 1, 0, 0, 0]),
+            None
+        );
+    }
+
+    #[test]
     fn pgl_action_preserves_nrc_and_canonicalizes_equivalent_inputs() {
         let field_spec = prime_field(7);
         let field = Field::new(field_spec.clone()).unwrap();
@@ -2021,6 +2071,7 @@ mod tests {
         assert_eq!(result.status, VerdictStatus::Unresolved);
         assert_eq!(result.distance, None);
         assert_eq!(result.family.as_deref(), Some("r7.sporadic"));
+        assert!(result.deep_certificate.is_none());
     }
 
     #[test]

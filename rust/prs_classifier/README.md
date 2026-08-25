@@ -12,6 +12,8 @@ This is the C969 implementation crate.  Its current executable slice provides:
   families and the characteristic-three nucleus/wild families;
 - the uniform R6 odd-binary third-nucleus adapter, including its exact
   extension-degree toggle;
+- the uniform R7 odd-binary central-nucleus adapter, kept separate from the
+  q=7,8,9 radius gap;
 - distinct rational-root recovery, Vandermonde magnitude recovery, and an
   independently replayed locator certificate;
 - positive deep certificates whose independent verifier replays the frozen

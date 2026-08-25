@@ -185,6 +185,12 @@ At R6 the recurring nonpersistent family is now uniform as well:
 The q=8 row keeps frozen orbit evidence; q=32 and higher odd binary extensions
 use formula evidence without extending the registry.
 
+R7's only recurring nonpersistent family is now formula-backed too.  The
+consecutive-polar contraction reduces the R6 nucleus line to the fixed central
+point `e3`, and the same odd-binary extension toggle decides split-freeness;
+see `c969-r7-uniform-family-adapter.md`.  The adapter does not supply a radius
+premise and therefore cannot promote the q=7,8,9 gap.
+
 ## Partial mystery and risk ledger
 
 - **Settled:** the former R10 binary unresolved residue was only a proof

@@ -1168,7 +1168,7 @@ gates remain binding.
 | EV rank | Task | Current gate | Why this position |
 |---:|---|---|---|
 | 1 | C915 | edits E1--E6 applied and checklist green; three independent audits open | the external referee package blocks the Version 2 release |
-| 2 | C969 | active; schemas/core/frozen adapters, proved R5--R7 terminal selector, positive verifier, and uniform R5 plus recurring R6 formula adapters green; R7 uniform adapter, general complexity theorem, and benchmarks open | compile the proved R5--R10 geometry into one exact canonical classifier and decoder while settling the general split-locator decision/recovery complexity boundary |
+| 2 | C969 | active; schemas/core/frozen adapters, proved R5--R7 terminal selector, positive verifier, and recurring nonpersistent R5--R7 formula adapters green; formula-speed canonicalizers, general complexity theorem, and benchmarks open | compile the proved R5--R10 geometry into one exact canonical classifier and decoder while settling the general split-locator decision/recovery complexity boundary |
 
 ## Unallocated level-ups
 
@@ -1230,9 +1230,9 @@ history.
 
 `go C969`
 
-(Implement the uniform R7 characteristic-two central-nucleus adapter above the
-frozen registry, then audit whether any nonpersistent R7 formula family recurs
-outside the bounded certificate rows.  Preserve formula evidence in the
-positive certificate and the q=7,8,9 radius gap.  C915's three independent
-Version 2 audits remain the higher-EV external-release gate but are a separate
-active card.)
+(Add reproducible end-to-end classifier/decoder benchmarks against the named
+projective locator-enumeration oracle, separating field arithmetic, locator
+selection, full semilinear canonicalization, and certificate replay.  Do not
+present the still-explicit `m(q^3-q)` canonicalizer as formula-speed.  C915's
+three independent Version 2 audits remain the higher-EV external-release gate
+but are a separate active card.)
