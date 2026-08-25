@@ -5,7 +5,8 @@
 **Date**: 2026-08-24
 **Status**: ACTIVE; C961 REPEATED-CONCATENATION COST COMPOSITION PROVED,
 PRIORITY-BOUNDED, HARD-RED-TEAMED, AND EXPORTED; 24-PAGE AUTHORITY AND 40-FILE
-STANDALONE GATES PASS; C325 APPENDIX VERIFIER AND C953 AGGREGATE REVIEW FOLLOW;
+STANDALONE GATES PASS; C962 ALGORITHM/BOUND DEVELOPMENT IS IN PROGRESS; C325
+APPENDIX VERIFIER AND C953 AGGREGATE REVIEW FOLLOW;
 C955 AMBIENT-REALIZATION SPECTRUM REMAINS QUEUED; NO PUSH OR DEPOSIT
 **Theorem source lane**: archived [`repaircodes`](done/2026-07-13-projective-completion-repaircodes.md)
 **Current private paper**: [`complete-repair-ports`](../../papers/complete-repair-ports/README.md)
@@ -199,7 +200,8 @@ generic coefficient optimization, and BGS packing remain outside this paper.
 
 ## Next step
 
-C961 is closed.  Run C325 appendix-only verification next, then C953
+C961 is closed.  Run C962 paper-owned algorithm and bound development next,
+then C325 appendix-only verification, then C953
 aggregate referee/export review.  C955 owns the later coefficient-presentation
 spectrum. Before nontrivial proof development or
 formalization, read the paper-specific expert dossier
