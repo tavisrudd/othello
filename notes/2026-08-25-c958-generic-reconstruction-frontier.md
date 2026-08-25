@@ -50,24 +50,64 @@ distinct denominators.  Their exact least common multiple has bidegree
 `(6,7)`, and clearing it gives a single polynomial projective inverse whose
 integer coefficients have at most 26 digits.
 
-This is a complete and independently checked generic candidate, but not yet
-a characteristic-zero identity.  The large scratch grids and modular formula
-files remain reproducible inputs rather than promoted certificates.  A
-denominator-cleared generic identity check is still mandatory before the map
-enters the paper.
+This is now an exact generic split inverse.  The denominator-cleared identity
+certificate proves all four residuals over `Z` by an injective Kronecker grid
+at fourteen primes and a coefficient-height lift; see
+`2026-08-25-c958-generic-identity.md`.  The large scratch grids and modular formula
+files remain reproducible inputs rather than promoted certificates.  The two
+load-bearing degree certificates are retained as
+`2026-08-25-c958-generic-degree-a.json` and
+`2026-08-25-c958-generic-degree-b.json`; both regenerate byte for byte.
+
+## Reproducibility boundary
+
+From the repository root, the degree boxes replay as follows:
+
+```text
+uv run --with python-flint --with sympy==1.14.0 python3 \
+  notes/2026-08-25-c958-generic-degree-probe.py \
+  /tmp/c958-line-{2..33}-17.json --training 16 --axis a --exclude-a 17 \
+  --write /tmp/c958-degree-a-replay.json
+cmp /tmp/c958-degree-a-replay.json \
+  notes/2026-08-25-c958-generic-degree-a.json
+
+uv run --with python-flint --with sympy==1.14.0 python3 \
+  notes/2026-08-25-c958-generic-degree-probe.py \
+  /tmp/c958-line-37-{2..33}.json --training 16 --axis b --exclude-a 7 \
+  --write /tmp/c958-degree-b-replay.json
+cmp /tmp/c958-degree-b-replay.json \
+  notes/2026-08-25-c958-generic-degree-b.json
+```
+
+The excluded values are the two visibly degenerate line specializations; the
+remaining 31 points give sixteen training values and fifteen holdouts.  Each
+degree certificate is 53,337 bytes.  The retained rational certificate is
+3,490,587 bytes, the consolidated polynomial certificate 1,889,955 bytes,
+and the forward data 32,876 bytes.  Their generators/checkers are respectively
+5,361 bytes (`generic-rational-reconstruct.py`), 2,372 bytes
+(`generic-rational-check.py`), 3,893 bytes (`generic-consolidate.py`), and
+4,575 bytes (`generic-forward.py`).
+
+The fresh-prime checker is independent stdlib arithmetic: it does not import
+the SymPy/python-flint reconstruction implementation.  It validates the
+candidate, not the pending characteristic-zero identity.  The modular grids
+are intentionally regenerable scratch data; the degree boxes, reconstructed
+formula, consolidated formula, and forward data are the compact load-bearing
+outputs retained in the repository.
 
 ## Paper and composition boundary
 
-The paper can already be upgraded from “inverse tangent elimination remains”
-to: explicit quintic inverse formulas are proved at two independent smooth
-specializations, and the uniform candidate over `Q(a,b)` is fully reconstructed,
-compressed to one common denominator, and validated on a fresh prime.  It
-cannot yet claim that uniform map until the generic identity proof passes.
+The paper can be upgraded from “inverse tangent elimination remains” to an
+exact uniform split statement: the quintic inverse over `Q(a,b)` is fully
+reconstructed, compressed to one common denominator, and proved by the
+denominator-cleared characteristic-zero identity certificate.  The expanded
+formula belongs in the ancillary JSON artifact, not the main proof.
 
-Consequently the ground substitution `(a,b)=(A(z)^2,B(z)^2)`, final cubic
-function-field composites, and type `I3` remain open.  The next highest-value
-action is the exact generic denominator-cleared identity, using the retained
-degree and coefficient-height bounds rather than an unbounded expansion.
+This still does not certify the ground substitution
+`(a,b)=(A(z)^2,B(z)^2)`, a ground tangent witness, either final cubic
+function-field composite, or type `I3` descent.  The next highest-value action
+is to transport the exact split inverse through the strict Cox descent and
+verify the resulting localized ground composites.
 
 ## EJ + TT closeout
 
@@ -80,6 +120,6 @@ functions, CRT, denominator consolidation, and bounded sparse identity
 checking form the reusable path.  The geometric explanation of the quintic
 degree and stable support remains open.
 
-**Vibe:** the generic inverse is now a complete, compact candidate and one
-exact identity short of a theorem; the boundary is verification, not missing
+**Vibe:** the generic split inverse is now a compact exact theorem; the
+remaining boundary is ground-field descent and composition, not missing
 formula data.

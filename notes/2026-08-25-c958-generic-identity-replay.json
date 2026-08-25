@@ -1,0 +1,89 @@
+{
+  "conclusion": "All four denominator-cleared residuals vanish over Z by the degree, injective-Kronecker, and coefficient-height argument in the bound certificate.",
+  "evaluation_range": [
+    0,
+    6230
+  ],
+  "input_sha256": {
+    "notes/2026-08-25-c958-generic-identity-grid-check.py": "0342e4df82770f53785559f00f7a9bb1ef2a8af20656496003d0db35eb474a19",
+    "notes/2026-08-25-c958-generic-forward.json": "13a91f5116a4609c6f67c0b771b396b6005a08ec395a207a7a648791ab98b1b0",
+    "notes/2026-08-25-c958-generic-identity-bound.json": "0388b89989df5e5d7af3fa2119ffb10306832402720df08e20538abae67bf6d4",
+    "notes/2026-08-25-c958-generic-polynomial.json": "aac6f2420f76b59a4a7b9b4edbf2ce459d94958e02719ff4fad7e7c3f7319618"
+  },
+  "kronecker_base": 89,
+  "prime_results": [
+    {
+      "elapsed_seconds": 6153.966,
+      "prime": 9223372036854775837,
+      "result": "prime=9223372036854775837 zero_grid=[0,6230) kronecker_base=89"
+    },
+    {
+      "elapsed_seconds": 6118.655,
+      "prime": 9223372036854775907,
+      "result": "prime=9223372036854775907 zero_grid=[0,6230) kronecker_base=89"
+    },
+    {
+      "elapsed_seconds": 6025.895,
+      "prime": 9223372036854775931,
+      "result": "prime=9223372036854775931 zero_grid=[0,6230) kronecker_base=89"
+    },
+    {
+      "elapsed_seconds": 6114.534,
+      "prime": 9223372036854775939,
+      "result": "prime=9223372036854775939 zero_grid=[0,6230) kronecker_base=89"
+    },
+    {
+      "elapsed_seconds": 6520.105,
+      "prime": 9223372036854775963,
+      "result": "prime=9223372036854775963 zero_grid=[0,6230) kronecker_base=89"
+    },
+    {
+      "elapsed_seconds": 6472.547,
+      "prime": 9223372036854776063,
+      "result": "prime=9223372036854776063 zero_grid=[0,6230) kronecker_base=89"
+    },
+    {
+      "elapsed_seconds": 6296.228,
+      "prime": 9223372036854776077,
+      "result": "prime=9223372036854776077 zero_grid=[0,6230) kronecker_base=89"
+    },
+    {
+      "elapsed_seconds": 6189.201,
+      "prime": 9223372036854776167,
+      "result": "prime=9223372036854776167 zero_grid=[0,6230) kronecker_base=89"
+    },
+    {
+      "elapsed_seconds": 5979.75,
+      "prime": 9223372036854776243,
+      "result": "prime=9223372036854776243 zero_grid=[0,6230) kronecker_base=89"
+    },
+    {
+      "elapsed_seconds": 6442.176,
+      "prime": 9223372036854776257,
+      "result": "prime=9223372036854776257 zero_grid=[0,6230) kronecker_base=89"
+    },
+    {
+      "elapsed_seconds": 6220.62,
+      "prime": 9223372036854776261,
+      "result": "prime=9223372036854776261 zero_grid=[0,6230) kronecker_base=89"
+    },
+    {
+      "elapsed_seconds": 6125.858,
+      "prime": 9223372036854776293,
+      "result": "prime=9223372036854776293 zero_grid=[0,6230) kronecker_base=89"
+    },
+    {
+      "elapsed_seconds": 6305.71,
+      "prime": 9223372036854776299,
+      "result": "prime=9223372036854776299 zero_grid=[0,6230) kronecker_base=89"
+    },
+    {
+      "elapsed_seconds": 6444.717,
+      "prime": 9223372036854776351,
+      "result": "prime=9223372036854776351 zero_grid=[0,6230) kronecker_base=89"
+    }
+  ],
+  "schema": "c958-generic-identity-replay-v1",
+  "wall_seconds": 6520.129,
+  "workers": 14
+}
