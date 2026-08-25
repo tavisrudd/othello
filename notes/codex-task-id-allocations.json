@@ -3554,8 +3554,17 @@
       "last": 967,
       "purpose": "Jet-quotient quantum-code compiler from the Clebsch Schur-Sarkisov spine",
       "sequence": 395
+    },
+    {
+      "count": 1,
+      "first": 968,
+      "kind": "reservation",
+      "lane": "clebsch",
+      "last": 968,
+      "purpose": "Sparse-shadow reconstruction and canonicalization in a top-level Rust Cargo project",
+      "sequence": 396
     }
   ],
-  "next_id": 968,
+  "next_id": 969,
   "schema": "codex-task-id-allocations-v1"
 }
