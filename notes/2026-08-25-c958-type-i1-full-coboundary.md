@@ -53,6 +53,14 @@ These data evaluate the coboundary using a fixed finite sequence of rational
 operations.  They are both shorter and more independently auditable than a
 fully expanded expression.
 
+The retained syntactic profile makes the algorithmic content concrete.  The
+twelve canonical words use 24 generator steps in total.  The three
+Hilbert--90 seeds contain 17 terms and require 14 additions, with eight
+nontrivial orbit transports.  Pullback to the six Picard coordinates uses 41
+nonzero integral exponents, has total absolute exponent 44, and maximum
+absolute exponent three.  These are operation counts for this certificate,
+not an asymptotic complexity theorem.
+
 ## Replay
 
 ```bash
@@ -77,4 +85,3 @@ six-coordinate SLP into the already certified residual norm-torus chart and
 the `Z/T3 -> P4` tangent quotient, then check the two composites and eliminate
 the fibration coordinate to obtain maps for the cubic product.  Type `I3`
 remains separate.
-

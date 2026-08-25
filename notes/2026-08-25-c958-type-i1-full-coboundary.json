@@ -384,6 +384,31 @@
     "the final forward and inverse maps for the stabilized cubic",
     "type-I3 formulas"
   ],
+  "operation_profile": {
+    "canonical_word_generator_steps": 24,
+    "generator_base_action_count_ops": [
+      6,
+      229,
+      45
+    ],
+    "generator_permutation_cocycle_count_ops": [
+      160,
+      1676,
+      248
+    ],
+    "generator_picard_cocycle_count_ops": [
+      13,
+      311,
+      52
+    ],
+    "hilbert90_seed_additions": 14,
+    "hilbert90_seed_terms": 17,
+    "interpretation": "syntactic replay profile, not an asymptotic complexity theorem",
+    "nontrivial_orbit_transports": 8,
+    "picard_pullback_l1_exponent_sum": 44,
+    "picard_pullback_max_abs_exponent": 3,
+    "picard_pullback_nonzero_exponents": 41
+  },
   "permutation_actions_on_b_1_based": {
     "1": [
       1,

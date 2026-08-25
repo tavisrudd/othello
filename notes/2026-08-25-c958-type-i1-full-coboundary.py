@@ -507,6 +507,31 @@ def build():
     assert numeric_by_name is not None
 
     generator_names = ("sigma", "tau", "iota")
+    operation_profile = {
+        "canonical_word_generator_steps": sum(len(word) for word in words),
+        "generator_base_action_count_ops": [
+            sum(int(sp.count_ops(value)) for value in values) for values in generator_base_actions
+        ],
+        "generator_picard_cocycle_count_ops": [
+            sum(int(sp.count_ops(value)) for value in values[:6]) for values in generator_old_cocycles
+        ],
+        "generator_permutation_cocycle_count_ops": [
+            sum(int(sp.count_ops(value)) for value in values) for values in generator_b_cocycles
+        ],
+        "hilbert90_seed_terms": sum(len(data["stabilizer_elements"]) for data in orbit_data),
+        "hilbert90_seed_additions": sum(len(data["stabilizer_elements"]) - 1 for data in orbit_data),
+        "nontrivial_orbit_transports": sum(len(data["orbit_indices_1_based"]) - 1 for data in orbit_data),
+        "picard_pullback_nonzero_exponents": sum(
+            basis_inverse[row, column] != 0 for row in range(11) for column in range(6)
+        ),
+        "picard_pullback_l1_exponent_sum": sum(
+            abs(int(basis_inverse[row, column])) for row in range(11) for column in range(6)
+        ),
+        "picard_pullback_max_abs_exponent": max(
+            abs(int(basis_inverse[row, column])) for row in range(11) for column in range(6)
+        ),
+        "interpretation": "syntactic replay profile, not an asymptotic complexity theorem",
+    }
     return {
         "schema": "c958-type-i1-full-coboundary-slp-v1",
         "input_sha256": {"descent_action": ACTION_SHA256, "cox_descent": COCYCLE_SHA256},
@@ -538,6 +563,7 @@ def build():
         "inverse_basis_rows": [[int(basis_inverse[row, column]) for column in range(11)]
                                for row in range(11)],
         "pullback_recipe": "h_old[j] = product_i h_b[i]^(B_inverse[i,j]); retain j=H,E1,...,E5",
+        "operation_profile": operation_profile,
         "certified": [
             "the type-I1 generators are matched to the restricted TZ rank-eleven permutation basis",
             "ground-lift normalization makes the three Cox maps satisfy every defining group relation exactly",
