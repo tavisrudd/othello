@@ -260,6 +260,12 @@ inputs return their shared canonical identity, while inequivalent inputs leave
 that singular field empty; both report the exact total number of automorphisms
 checked across their two exhaustive proofs.
 
+The Paper-I golden contract now also freezes BLAKE3 digests of exact CLI stdout
+for validate, calibrated and uncalibrated canonicalize/reconstruct, and
+identical-input equivalence. This converts the former same-build repeatability
+check into a cross-build byte-level serialization contract; `blake3` is reused
+as a CLI dev dependency and adds no resolved package.
+
 No unblocked C968 implementation frontier remains: each next adapter first
 requires the complete paper-owned export named in its `fixtures/gated-*.json`.
 Nearby evidence JSON and trust manifests are explicitly insufficient. Once an

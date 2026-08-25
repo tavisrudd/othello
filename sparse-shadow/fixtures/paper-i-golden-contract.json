@@ -1,5 +1,13 @@
 {
   "contract_schema": "sparse-shadow-paper-i-golden/v1",
+  "cli_stdout_blake3": {
+    "validate": "b1966498a22218038812e79cce2e6c330c961becc255d4cb7128a6826410012e",
+    "canonicalize": "62a4ede46609df10a997311ed6de0a6939aece261ab04fd0b22ae5a68cce3648",
+    "canonicalize_calibrated": "4e3d007452bfdb339f9c33263c9da425b94c9c86a1a6e85b9a94530ad115e8a6",
+    "reconstruct": "e80f85d387ef9e742553c2db851d59dab4bd59d408c99d757f8af85511d32a4f",
+    "reconstruct_calibrated": "74434a88eabd4aadff365bb2ec83e13f3863698131fc34eaf2b1dc8041dac348",
+    "equivalent_identical": "89eb64fbe21d9516c621e058dfb2142a839fe88b17b6fe16dbb627a6bb398e63"
+  },
   "uncalibrated": {
     "schema": "sparse-shadow-canonical/v2",
     "canonical_id": "4a75738e99eb23a8a7a033f8b7c54552929b7813f14af51a91765b78711ea95c",

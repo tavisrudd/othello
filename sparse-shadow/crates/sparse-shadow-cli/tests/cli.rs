@@ -6,6 +6,7 @@ use std::{
 };
 
 static TEMP_SEQUENCE: AtomicU64 = AtomicU64::new(0);
+const GOLDEN_CONTRACT: &str = include_str!("../../../fixtures/paper-i-golden-contract.json");
 
 fn fixture(name: &str) -> PathBuf {
     PathBuf::from(env!("CARGO_MANIFEST_DIR"))
@@ -42,6 +43,10 @@ fn assert_valid(output: &std::process::Output) {
 fn assert_certificate_failure(output: &std::process::Output) {
     assert!(!output.status.success());
     assert!(String::from_utf8_lossy(&output.stderr).contains("certificate mismatch"));
+}
+
+fn digest(bytes: &[u8]) -> String {
+    blake3::hash(bytes).to_hex().to_string()
 }
 
 #[test]
@@ -95,6 +100,47 @@ fn canonicalize_is_byte_deterministic() {
     assert!(first.status.success());
     assert!(second.status.success());
     assert_eq!(first.stdout, second.stdout);
+}
+
+#[test]
+fn cli_stdout_matches_cross_build_golden_digests() {
+    let input = fixture("paper-i-icosahedral-orbitals.json");
+    let calibrated = fixture("paper-i-calibrated-icosahedral-orbitals.json");
+    let input_path = input.to_str().expect("UTF-8 fixture path");
+    let calibrated_path = calibrated.to_str().expect("UTF-8 fixture path");
+    let commands: [(&str, std::process::Output); 6] = [
+        ("validate", run(&["validate", input_path])),
+        ("canonicalize", run(&["canonicalize", input_path])),
+        (
+            "canonicalize_calibrated",
+            run(&["canonicalize", calibrated_path]),
+        ),
+        ("reconstruct", run(&["reconstruct", input_path])),
+        (
+            "reconstruct_calibrated",
+            run(&["reconstruct", calibrated_path]),
+        ),
+        (
+            "equivalent_identical",
+            run(&["equivalent", input_path, input_path]),
+        ),
+    ];
+    let actual: serde_json::Map<String, serde_json::Value> = commands
+        .into_iter()
+        .map(|(name, output)| {
+            assert!(output.status.success(), "{name}");
+            (
+                name.into(),
+                serde_json::Value::String(digest(&output.stdout)),
+            )
+        })
+        .collect();
+    let expected: serde_json::Value =
+        serde_json::from_str(GOLDEN_CONTRACT).expect("golden contract parses");
+    assert_eq!(
+        serde_json::Value::Object(actual),
+        expected["cli_stdout_blake3"]
+    );
 }
 
 #[test]

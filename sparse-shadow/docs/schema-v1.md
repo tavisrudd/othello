@@ -32,6 +32,9 @@ representative in each vertex orbit. Each stabilizer carries its own order,
 generators, and vertex-orbit decomposition.
 The committed Paper-I golden contract pins the stable summary of both
 calibrated and uncalibrated canonical artifacts and their recovered carriers.
+Its `cli_stdout_blake3` map additionally freezes exact stdout bytes for the six
+enabled validate, canonicalize, reconstruct, and equivalence invocations, so a
+cross-build serialization change fails independently of semantic summaries.
 
 Canonical wrapper v2 uses two explicit coordinate bases:
 

@@ -29,7 +29,8 @@ fixtures exist; failure diagnostics name the required export.
 `fixtures/paper-i-golden-contract.json` freezes the enabled adapter's canonical
 identities, group and point-stabilizer summaries, vertex orbits, exhaustive
 search counters, proof-system identifiers, and both reconstructed six-axis
-carriers. Changes to those values require
+carriers. It also pins BLAKE3 digests of exact stdout bytes for validate,
+canonicalize, reconstruct, and equivalence commands. Changes to those values require
 an explicit contract review rather than merely remaining deterministic within
 one build.
 

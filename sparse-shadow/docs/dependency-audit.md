@@ -25,7 +25,7 @@ closure.
 | `serde`, `serde_json` | strict versioned artifacts | MIT OR Apache-2.0 | derive only; no preserve-order dependency |
 | `thiserror` | typed library errors | MIT OR Apache-2.0 | default |
 | `clap` | thin CLI | MIT OR Apache-2.0 | derive only |
-| `blake3` | artifact identities, never proof evidence | CC0-1.0 OR Apache-2.0 OR Apache-2.0 WITH LLVM-exception | default; hashing stays outside search |
+| `blake3` | core artifact identities and CLI-test stdout digests, never proof evidence | CC0-1.0 OR Apache-2.0 OR Apache-2.0 WITH LLVM-exception | core runtime; CLI dev-only; hashing stays outside search |
 | `proptest` | development-only invariance/corruption tests | MIT OR Apache-2.0 | dev dependency only |
 | `stats_alloc` | development-only hot-loop allocation assertion | MIT | dev dependency only; wraps the system allocator outside production |
 | `criterion` 0.7 | statistically sampled representative end-to-end benchmarks; Rust 1.80 MSRV | MIT OR Apache-2.0 | dev dependency only; default features disabled, so neither Rayon nor plotting enters the lockfile |
