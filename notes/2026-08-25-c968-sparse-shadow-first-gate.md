@@ -59,7 +59,9 @@ serialized tree.
   counters, and certificate/proof-system schemas across builds;
 - schema rejection tests cover unknown fields, unsupported versions,
   non-normalized undirected edges, malformed orbital partitions, and duplicate
-  calibration vertices;
+  calibration vertices; Paper-I calibration must additionally be an increasing
+  triple forming a clique in `orbital_positive`, matching the frozen triangle
+  sign rather than an arbitrary three-set;
 - black-box CLI tests: Paper-I validation succeeds, every gated Paper-II--V
   input exits nonzero while naming its own exact required export, repeated
   canonicalize runs are byte-identical, and identical inputs compare
@@ -74,7 +76,8 @@ serialized tree.
   independently replayed certificate; hostile generators are rejected by a
   closure walk bounded inside the certified full group;
 - deliberate canonical-identity, branch-trace, and automorphism-set corruption:
-  rejected by the independent reference implementation.
+  rejected by the independent reference implementation; equivalence
+  transporters and inequivalence separators have direct corruption tests.
 - hot Paper-I search: fixed 32/64/128-byte guarded records; zero allocations,
   reallocations, deallocations, and cold arena grows over 193 nodes;
 - equivalence certificates carry an explicit isomorphism or two exhaustive

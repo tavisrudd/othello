@@ -68,6 +68,28 @@ pub fn validate(input: &InputArtifact) -> Result<VerificationReport, ShadowError
                         "calibrated triangle must contain three distinct in-range vertices".into(),
                     ));
                 }
+                let mut normalized = triangle;
+                normalized.sort_unstable();
+                if triangle != normalized {
+                    return Err(ShadowError::Invalid(
+                        "calibrated triangle must be stored in increasing order".into(),
+                    ));
+                }
+                let positive_edges: BTreeSet<_> =
+                    paper.shadow.relations[0].edges.iter().copied().collect();
+                let triangle_edges = [
+                    [triangle[0], triangle[1]],
+                    [triangle[0], triangle[2]],
+                    [triangle[1], triangle[2]],
+                ];
+                if triangle_edges
+                    .iter()
+                    .any(|edge| !positive_edges.contains(edge))
+                {
+                    return Err(ShadowError::Invalid(
+                        "calibrated triangle is not a clique in `orbital_positive`".into(),
+                    ));
+                }
             }
         }
         ProfileInput::PaperIiTrade(value) => validate_gate("paper_ii_trade", &value.gate)?,

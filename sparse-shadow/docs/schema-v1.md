@@ -22,6 +22,10 @@ generators, and vertex-orbit decomposition.
 The committed Paper-I golden contract pins the stable summary of both
 calibrated and uncalibrated canonical artifacts.
 
+The optional Paper-I calibration is an increasing triple of distinct vertices
+whose three pairs lie in `orbital_positive`. This is the schema realization of
+the frozen calibrated triangle sign, not an arbitrary odd-cardinality marking.
+
 Source locators are validated provenance but are normalized to the adapter
 identifier before canonical serialization. They cannot change mathematical
 identity; relation names, action metadata, vertex data, and calibration remain

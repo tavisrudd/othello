@@ -201,7 +201,11 @@ Canonicalization idempotence is explicit, and generated arbitrary permutations
 now exercise invariance for both calibrated and uncalibrated fixtures instead
 of the earlier cyclic-only sample. Strict schema tests cover unknown fields,
 versions, edge normalization, partitions, and calibration distinctness. The
-committed Paper-I golden contract fixes canonical identities, group/stabilizer
+calibration gate also requires an increasing `orbital_positive` clique, matching
+the frozen C905 triangle-sign boundary rather than accepting an arbitrary
+three-set. Equivalent transporters and inequivalence separators have direct
+corruption coverage. The committed Paper-I golden contract fixes canonical
+identities, group/stabilizer
 summaries, vertex orbits, search counters, and proof-system identifiers across
 builds. The performance record is
 `../../sparse-shadow/docs/performance-paper-i.md`; its

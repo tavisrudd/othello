@@ -166,6 +166,20 @@ fn schema_and_normalization_boundaries_reject_malformed_inputs() {
     };
     paper.calibrated_triangle = Some([0, 0, 1]);
     assert!(validate(&duplicate_calibration).is_err());
+
+    let mut non_normal_calibration = fixture();
+    let ProfileInput::PaperIOrientation(paper) = &mut non_normal_calibration.profile else {
+        unreachable!();
+    };
+    paper.calibrated_triangle = Some([2, 1, 0]);
+    assert!(validate(&non_normal_calibration).is_err());
+
+    let mut non_triangle_calibration = fixture();
+    let ProfileInput::PaperIOrientation(paper) = &mut non_triangle_calibration.profile else {
+        unreachable!();
+    };
+    paper.calibrated_triangle = Some([0, 1, 11]);
+    assert!(validate(&non_triangle_calibration).is_err());
 }
 
 #[test]
@@ -249,6 +263,12 @@ fn equivalence_and_inequivalence_certificates_replay() {
             .expect("equivalence replays")
             .valid
     );
+    let mut corrupt_equivalent = equivalent;
+    let EquivalenceOutcome::Equivalent { left_to_right } = &mut corrupt_equivalent.result else {
+        unreachable!();
+    };
+    left_to_right[0] = left_to_right[1];
+    assert!(verify_equivalence(&left, &relabeled, &corrupt_equivalent).is_err());
 
     let mut calibrated = left.clone();
     let ProfileInput::PaperIOrientation(paper) = &mut calibrated.profile else {
@@ -265,6 +285,15 @@ fn equivalence_and_inequivalence_certificates_replay() {
             .expect("inequivalence replays")
             .valid
     );
+    let mut corrupt_inequivalent = inequivalent;
+    let EquivalenceOutcome::Inequivalent {
+        separating_invariant,
+    } = &mut corrupt_inequivalent.result
+    else {
+        unreachable!();
+    };
+    separating_invariant.right_value = separating_invariant.left_value.clone();
+    assert!(verify_equivalence(&left, &calibrated, &corrupt_inequivalent).is_err());
 }
 
 proptest! {
