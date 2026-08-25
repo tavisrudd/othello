@@ -2,7 +2,7 @@
 
 **Lane:** `relconic`
 
-**Status:** authority validated; standalone export pending
+**Status:** complete; authority and standalone export validated
 
 ## Objective
 
@@ -85,6 +85,8 @@ geometric capacity argument, or the asymptotic localization as Lean-verified.
   localization, both pointwise shell inequalities, the imported theorem's
   convention, line-support size, positive-line capacity, and rigidity.
 - Abstract: 166 source words, active voice.
+- Authority commit: `72867117a`; standalone paper commit: `6d2a74f`;
+  portfolio-summary commit: `0b98625`.
 
 ## Literature refresh
 
