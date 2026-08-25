@@ -235,6 +235,13 @@ the same authority commit.  The forward paper-mirror commit is `dc3a9cf`.
 The portfolio-summary authority was also forwarded to its standalone mirror
 as commit `3f6062f`.  No push, tag, deposit, or submission was performed.
 
+A subsequent editorial pass explicitly named the weighted theorem and its
+strictness construction as human-only in the verification section, wrote the
+Singer multiplier as $a(u)=\gamma u$ with $\gamma\in L^\times$, and shortened
+the MDS discussion without changing its statements or proof inputs.  Authority
+commit `0605a6a1d` and mirror commit `e5074e0` pass the same 20-page release and
+40-file export-verification gates.
+
 ## Mystery ledger
 
 ### Settled
