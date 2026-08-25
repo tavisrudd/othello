@@ -1239,8 +1239,59 @@ The tracked arithmetic replay for `(TL3)`, `(TL8)`, and the two final exact
 contradictions is
 `notes/2026-08-25-c949-sharp-linear-coefficient-audit.json`.  This endpoint
 nonexistence is not a matching upper bound: sharpness of the coefficient
-`5/3` would require constructions with an unbounded `o(q)` positive repair,
-and no such construction is presently known.
+`5/3` would require constructions with a nonzero `o(q)` positive repair
+(possibly the constant repair `+1`), and no such construction is presently
+known.
+
+There is nevertheless a sharp stability reduction for that construction
+problem.
+
+> **Sublinear-repair rigidity.**  Suppose a sequence of complete arcs has
+>
+> ```text
+> k=q^2/3+5q/3+eta(q),      eta(q)=o(q).
+> ```
+>
+> Then, for all sufficiently large fields in the sequence, the residue word
+> `c=u mod 3` is an exact signed combination of exactly three distinct lines.
+
+Indeed, coverage and Cauchy again keep `j=T-2q` bounded, while `(TL3)` gives
+`t>=3` and `(TL7)` gives `t<=3+6eta(q)/q+o(1)`.  Integrality forces `t=3`.
+After passage to a subsequence, `j`, the coefficient signs, and whether the
+three lines are concurrent or triangular are fixed.  The same leading
+capacity ledger used at the endpoint leaves the following complete core
+list:
+
+```text
+concurrent: (j,sigma)=(1,-3),(2,-1),(3,1),(4,-3),
+                      (4,3),(5,-1),(7,-3),
+triangle:   (j,sigma)=(4,-3),(5,-1).                 (SR1)
+```
+
+The concurrent branch has an especially compact affine form.  Dualize the
+three generator lines to collinear points `Q_1,Q_2,Q_3` on a connector
+`ell_infinity`.  The connector contains exactly `j` points of `D`, so
+
+```text
+X=D\ell_infinity,             |X|=2q.
+```
+
+Every affine line in each of the three distinguished directions contains
+exactly two points of `X`: a positive `Q_i` belongs to `D` and its projective
+lines have degree three, whereas a negative `Q_i` is outside `D` and its
+lines have degree two.  In every other direction the affine line sums are
+constant modulo three.  Thus concurrence is exactly the problem of
+classifying `2q`-point binary affine Radon ghosts with three genuinely
+two-uniform directions.
+
+In the triangular branch, the connector degrees are rigid: they are
+`(3,3,3)` for `(4,-3)` and `(4,4,3)` for `(5,-1)`.  The remaining task is to
+construct such a binary blocking core and choose the primal lines through it
+so that every core point has degree `2q/3+1` and no other point exceeds that
+degree.  This is a finite geometric classification plus a regular incidence
+selection, not an expanding line-code search.  The exact endpoint proof says
+only that repair zero fails; repair `+1` is the first honest construction
+target.
 
 #### Bound status after the structural upgrade
 
@@ -1253,7 +1304,7 @@ T_3(q)>=q^2/3+4q/3-o(q)
 
 to `(LB3++)`, with linear coefficient `5/3`.  The exact coefficient endpoint
 is absent as well, so any construction proving sharpness must approach it
-from above by an unbounded sublinear repair.
+from above by a nonzero sublinear repair.
 
 No matching upper bound is proved here.  What is now proved is that the exact
 `q=9` equality mechanism is Hermitian-unital-minus-secant, that its sign
@@ -1271,7 +1322,7 @@ repair.  The three-line compression then excludes every displacement below
 `q/3-o(q)`, proving the coefficient `5/3`, and the exact endpoint audit rules
 out displacement exactly `q/3`.  Thus the proposed matching `(UB3)` is false.
 A sharp construction, if the new coefficient is optimal, must approach it
-from above with an unbounded sublinear repair.
+from above with a nonzero sublinear repair; `+1` is not excluded.
 
 Finally, for a core-line intersection `1<=d<=5`, the threshold itself has the
 binomial-energy expansion
@@ -1555,8 +1606,16 @@ family is lower priority.
   every relative repair `|delta|<=cq` for fixed `c<1/18`.  The later
   three-line shell inequality supersedes that margin: `t>=3` and
   `t<=1+6alpha+o(1)` force `alpha>=1/3`, proving `(LB3++)` with coefficient
-  `5/3`.  Exact equality is also impossible.  Whether an unbounded `o(q)`
+  `5/3`.  Exact equality is also impossible.  Whether a nonzero `o(q)`
   positive repair can construct the matching upper side remains open.
+- **Settled by the sharpness pass — can a `5/3+o(1)` construction hide in
+  larger line-code support?**  No.  Integrality between `t>=3` and
+  `t<=3+o(1)` forces exactly three generators.  The complete surviving list
+  is `(SR1)`: seven concurrent sign/offset cores and two triangular cores.
+  Concurrent cores are equivalently `2q`-point affine binary Radon ghosts
+  with three two-uniform directions; triangular cores have connector degrees
+  `(3,3,3)` or `(4,4,3)`.  What remains open is existence and regular inverse
+  realization of those cores, beginning with the constant repair `+1`.
 - **Settled by the signed descent — what geometry does its support have?**
   Field-uniformly it is a signed untouchable set of size `4q-6`: it has no
   tangents, and every support 2-secant joins opposite signs.  At `q=9` its
@@ -1608,8 +1667,9 @@ so it discharges the earlier five-intersection scope warning.
 Interim verdict: **GO** for the structural theorem `(LB3++)`, but C949 remains
 active under the user's sharpness continuation.  The endpoint coefficient
 patterns are settled.  The principal unresolved mystery is a construction
-with displacement `q/3+o(q)` (necessarily an unbounded positive repair), or a
-further structural obstruction proving that `5/3` is still not sharp.  The
+with displacement `q/3+eta(q)`, where `1<=eta(q)=o(q)` (constant repair is
+not excluded), or a further structural obstruction proving that `5/3` is
+still not sharp.  The
 finite arbitrary `q=27,T=54` branch and a structural replacement for the
 `q=9` lower-bound certificate remain separate finite mysteries.
 
