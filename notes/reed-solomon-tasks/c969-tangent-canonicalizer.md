@@ -68,3 +68,21 @@ Thus the gcd's centered form does not determine the relevant sigma fiber: a
 future reduction must also track the induced torus/fiber invariant. The sigma
 path deliberately retains exact explicit semilinear enumeration, and the
 counterexample is frozen as a regression test.
+
+The next candidate invariant has a precise representation-theoretic shape.
+Over `E=F_(q^2)`, write a rational nonsplit-secant syndrome projectively as
+`Tr_(E/F_q)(lambda nu(a))`, and put `n=r-1`.  After fixing the conjugate root
+pair, its nonsplit torus acts on the two eigenlines of `Sym^n` by an
+`n`th-power ratio; the normalizer exchanges those eigenlines.  Consequently
+the residual coefficient datum must descend to a class of
+
+\[
+ \ker(N_{E/F_q})/\ker(N_{E/F_q})^n
+\]
+
+modulo inversion (and the compatible Frobenius action).  This is a proof
+target, not yet a classifier claim: the implementation still needs a
+basis-independent extractor for that class and a proof that the class selects
+the lexicographically minimal target quadratic.  The `F_7` counterexample
+shows exactly why choosing the target quadratic independently of this datum
+cannot work.
