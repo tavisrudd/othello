@@ -233,6 +233,14 @@
               "ternary_dual_incidence_word": {
                 "formula": "1_D-1_L_infty-1_V",
                 "line_code_membership_proved": false,
+                "signed_line_profiles": {
+                  "0_positive_0_negative": 78,
+                  "1_positive_1_negative": 4084,
+                  "2_positive_2_negative": 77,
+                  "2_positive_q_minus_4_negative": 1,
+                  "3_positive_0_negative": 322,
+                  "4_positive_1_negative": 2081
+                },
                 "symbol_counts": {
                   "negative": 78,
                   "positive": 165,
@@ -474,6 +482,14 @@
               "ternary_dual_incidence_word": {
                 "formula": "1_D-1_L_infty-1_V",
                 "line_code_membership_proved": false,
+                "signed_line_profiles": {
+                  "0_positive_0_negative": 240,
+                  "1_positive_1_negative": 38482,
+                  "2_positive_2_negative": 239,
+                  "2_positive_q_minus_4_negative": 1,
+                  "3_positive_0_negative": 970,
+                  "4_positive_1_negative": 19361
+                },
                 "symbol_counts": {
                   "negative": 240,
                   "positive": 489,
@@ -715,6 +731,14 @@
               "ternary_dual_incidence_word": {
                 "formula": "1_D-1_L_infty-1_V",
                 "line_code_membership_proved": false,
+                "signed_line_profiles": {
+                  "0_positive_0_negative": 726,
+                  "1_positive_1_negative": 351628,
+                  "2_positive_2_negative": 725,
+                  "2_positive_q_minus_4_negative": 1,
+                  "3_positive_0_negative": 2914,
+                  "4_positive_1_negative": 176177
+                },
                 "symbol_counts": {
                   "negative": 726,
                   "positive": 1461,

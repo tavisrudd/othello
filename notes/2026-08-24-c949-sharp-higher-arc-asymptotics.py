@@ -3396,6 +3396,17 @@ def audit_sharp_linear_coefficient(output: Path) -> None:
         if (triangular_dual_word["positive"]
                 + triangular_dual_word["negative"] != 3 * q):
             raise AssertionError("the triangular dual-word weight changed")
+        triangular_dual_word_line_profiles = {
+            "0_positive_0_negative": q - 3,
+            "1_positive_1_negative": 3 + (q - 4) * (2 * q // 3 - 1),
+            "2_positive_2_negative": q - 4,
+            "3_positive_0_negative": 4 * q - 2,
+            "4_positive_1_negative": 2 + (q - 4) * q // 3,
+            "2_positive_q_minus_4_negative": 1,
+        }
+        if (sum(triangular_dual_word_line_profiles.values())
+                != q * q + q + 1):
+            raise AssertionError("the triangular dual-word line spectrum changed")
         frobenius_fiber_normal_form = {
             "frobenius_exponent": q // 3,
             "fiber_sum_polynomial_degree_bound": q // 3,
@@ -3536,6 +3547,9 @@ def audit_sharp_linear_coefficient(output: Path) -> None:
                                 "symbol_counts": triangular_dual_word,
                                 "weight": 3 * q,
                                 "line_code_membership_proved": False,
+                                "signed_line_profiles": (
+                                    triangular_dual_word_line_profiles
+                                ),
                             },
                             "frobenius_fiber_quadratic_normal_form": (
                                 frobenius_fiber_normal_form

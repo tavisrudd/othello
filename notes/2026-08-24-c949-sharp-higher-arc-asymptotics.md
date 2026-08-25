@@ -1798,7 +1798,7 @@ unique triple fiber in a vertex direction, the unique singleton fiber in an
 infinity-boundary direction, and the unique double fiber in every remaining
 direction.  For every `1<=k<=q-2`, the sum of the `k`th powers of all elements
 of `F_q` is zero.  Reducing the three profiles modulo the characteristic
-therefore gives, for every affine linear direction `L`,
+therefore gives, for every nonzero homogeneous linear form `L`,
 
 ```text
 sum_{P in B_aff} L(P)^k=0,             1<=k<=q-2.    (SR24b)
@@ -1924,8 +1924,7 @@ The right side is zero for all but at most two `i` in that interval, because
 a nonzero-field power sum vanishes unless its exponent is divisible by
 `q-1`.  Removing two indices from a consecutive interval of length `2r-2`
 leaves a run of at least `ceil((2r-4)/3)>=3` consecutive zero values when
-`q>=27`.  But three
-consecutive equations
+`q>=27`.  But three consecutive equations
 
 ```text
 sum_t b_t^r a_t^(i_0+s)=0,             s=0,1,2,
@@ -2014,6 +2013,24 @@ This places every `+1` triangular core behind a weight-`3q` ternary
 dual-incidence word with a prescribed sign split.  Hull membership is not
 asserted: the existing small-line-cover theorem applies to words also known
 to lie in the line code, and `(SR24k)` by itself proves only dual membership.
+
+The signed support spectrum is also fixed.  Writing `(p,n)` for the numbers
+of positive and negative coordinates on a line, its projective lines split as
+
+```text
+(0,0)^(q-3),
+(1,1)^[3+(q-4)(2q/3-1)],
+(2,2)^(q-4),
+(3,0)^(4q-2),
+(4,1)^[2+(q-4)q/3],
+(2,q-4)^1.                                         (SR24l')
+```
+
+The last line is `L_infty`.  The other profiles follow direction by
+direction from `(SR24a)`: subtract the negative origin on its line and add
+the direction coefficient at infinity.  In particular the support has no
+tangent, every support bisecant joins opposite signs, and all non-infinity
+support lines have size at most five.
 
 For comparison, the other triangular survivor `(j,sigma)=(5,-1)` has
 
