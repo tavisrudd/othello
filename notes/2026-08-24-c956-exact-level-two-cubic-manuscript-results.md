@@ -58,9 +58,9 @@ the appendix and exact-arithmetic certificate verify the four-witness cover.
 
 ## Consequences retained in the paper
 
-### Both cubic families in every dimension
+### Both cubic series in every dimension
 
-For every `r >= 0` and each of the two explicit families,
+For every `r >= 0` and each of the two explicit series,
 `X_{j,r} x P2` is rational over `Q`. The proof is an identity of function
 fields over the generic-fibre base and uses no specialization argument.
 
@@ -74,17 +74,19 @@ For `Y = X x P1`, where `X` is either displayed cubic threefold, `Y` is a
 smooth projective nonrational fourfold over `Q`, remains nonrational over `C`,
 and `Y x A1` is rational over `Q`.
 
-This is the most memorable secondary consequence. It is a birational
-rationality statement after affine-line stabilization, not an assertion about
-isomorphic affine cylinders.
+This is the most memorable secondary consequence. It answers the question
+raised by Tschinkel--Zhang on p. 13 asking for a nonrational variety `Y` with
+`Y x A1` rational. It is a birational rationality statement after affine-line
+stabilization, not an assertion about isomorphic affine cylinders.
 
 ### Variation in cubic-threefold moduli
 
-The function `ell_C` takes the value two at the two displayed cubic points and
-is infinite at a very general point, using the cited very-general stable-
-irrationality theorem. This places the explicit calculation in the geometry
-of the smooth cubic-threefold moduli space without asserting anything about
-all special points.
+The function `ell_C` takes the value two on every isomorphism class represented
+by the displayed examples and is infinite at a very general point, using the
+cited very-general stable-irrationality theorem. This places the explicit
+calculation in the geometry of the smooth cubic-threefold moduli space without
+asserting that the two displayed complex points are distinct or saying
+anything about all special points.
 
 A bounded review of C925 found no proved pointwise stable-irrationality
 theorem for every smooth member of a positive-dimensional cubic family.  Its
@@ -116,7 +118,55 @@ released separately if pursued.
 | Title and abstract | exact level two for the two explicit cubic threefolds |
 | General geometric theorem | `S x A2` rational for the stated quartic del Pezzo surfaces |
 | Reusable mechanism | rational torus quotient from a unimodular tangent section |
-| Main family consequence | both explicit cubic families are rational after `P2` |
+| Main series consequence | both explicit cubic series are rational after `P2` |
 | Memorable secondary consequence | a nonrational projective fourfold rational after `A1` stabilization |
 | Moduli context | level two at explicit points and infinite very generally |
 | Separate follow-up | rational torus with non-retract-rational dual |
+
+## Final review and replay state
+
+The full one-stabilization manuscript was read as context, including its
+complete QDM-marker proof. It supplies only the cited universal lower bound;
+the present paper does not import its proof mechanism or suggest an unproved
+second-stabilization consequence.
+
+Three hostile specialties now clear the mathematics. The final quotient and
+computation audit mutation-tested both artifact values and macro placement.
+The generator constructs the actual evaluation-kernel slice through the
+orbit-test point, verifies that its coefficient matrix annihilates
+`(1,1,1,1)^t`, checks all maximal minors, derives the branch table and
+coprimality arithmetic, and renders every computation-derived manuscript
+value into a checksum-bound TeX artifact. Lean coverage for the new theorems
+is honestly absent; the tracked paper-facts audit is current.
+
+Authority commits:
+
+- `f966149e5`: final mathematical, computational, README, metadata, and
+  portfolio-summary repairs;
+- `91f619b28`: corresponding standalone-export rewrite repair.
+
+Local forward exports:
+
+- paper mirror `/home/tavis/src/math-papers/cubic-stabilization-irrationality`
+  at `4255cbc`, with standalone `nix develop --command make check` and exporter
+  verification green;
+- portfolio mirror `/home/tavis/src/math-papers/math-papers-summary` at
+  `01b7fb0`, with the authority and mirror README hashes identical.
+
+## Next fresh session
+
+Do not reopen the retired conditional all-stabilizations route. The local
+manuscript and both local exports are the canonical release candidates.
+Before public publication, make three explicit author-side archival decisions:
+
+1. push the two local mirror commits only when the author approves publishing;
+2. replace the obsolete GitHub About description and clearly mark the old
+   releases/tags as superseded without erasing the history;
+3. create a new Zenodo concept DOI for this mathematically different paper and
+   mark `10.5281/zenodo.21937490` superseded or withdrawn rather than adding a
+   seventh version to that retired concept.
+
+The current arXiv DOI for Tschinkel--Zhang is
+`10.48550/arXiv.2608.20029`; no publisher DOI was found in the bounded final
+audit. No manuscript DOI is claimed in the repository until a new deposit
+exists.

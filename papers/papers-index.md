@@ -140,7 +140,7 @@ F13*)
 *Sharpness of Irrationality after One Stabilization for Cubic Threefolds*
 - *Status:* ten-page release candidate with an exact-arithmetic tangent-slice
   certificate, current claim/import ledgers, a clean standalone export, and
-  multiple hostile referee rounds in progress.
+  cleared hostile geometry, quotient/computation, and public-surface review.
 - *Scope:* proves that two explicit smooth cubic threefolds have level of
   stable rationality exactly two over both \(\mathbf Q\) and \(\mathbf C\);
   proves \(S\times\mathbf A^2\) rational for quartic del Pezzo surfaces with a
