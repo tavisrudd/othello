@@ -2,8 +2,9 @@
 
 **Lane**: `complete-ports`
 
-**Status**: ACTIVE; EXACT ORDINARY AND TARGET-NORMALIZED COMPOSITION DERIVED; SCALAR
-NONCOMPOSITION EXHIBITED; PRIORITY AND MANUSCRIPT GATES IN PROGRESS
+**Status**: COMPLETE; EXACT ORDINARY AND TARGET-NORMALIZED COMPOSITION PROVED; SHARP
+ENVELOPES AND SCALAR NONCOMPOSITION ESTABLISHED; PRIORITY BOUNDED; 24-PAGE MANUSCRIPT AND
+STANDALONE RELEASE GATES PASS
 
 ## Question
 
@@ -354,3 +355,65 @@ should state (C1), the target-normalized specialization (C6), the dual-distance 
 (C7), and the associativity consequence.  The full lift relation belongs in the proof.  The small
 (F_2/F_4) example should be included only to justify the assertion that a scalar threshold is not
 compositional.
+
+## 9. Manuscript application and validation
+
+The accepted material was added to Section 4.1 as
+Proposition `prop:prescribed-coset-composition`.
+
+- Equation `eq:coset-cost-composition` gives (C1).
+- Equation `eq:coset-cost-envelope` records the sharp constants in (C8).
+- Equation `eq:target-cost-composition` gives the target-normalized recursion (C6), explicitly
+  retaining the target images rather than claiming that the marginalized target cost composes by
+  itself.
+- Equation `eq:dual-distance-composition` gives (C7), preserving the zero and nonzero intermediate
+  sectors.
+- The proof retains the actual target coefficient maps and full helper lift sets before
+  minimum-support marginalization, so equation-level transport is not inferred from numerical
+  costs alone.
+- The binary/quaternary example proves that the persistent scalar
+  (\rho_T(I)+d(I^\perp)) does not determine the next-level cost.
+
+The proposition is classified `absent` in the claim manifest.  No Lean theorem, axiom, or
+computational certificate is asserted for it.  The verification prose names the proposition among
+the human proofs.  The bibliography credits min-sum elimination, soft concatenated decoding, and
+repeated generalized-concatenated decoding at their established strength.
+
+Authority commit `5e91f853f` contains the final sharp-envelope upgrade.  The deterministic release
+gate passes at 24 pages, warning-free, with 23 classified claims and four Lean terminals.  The
+standalone paper repository passes the same gate at commit `84e2175`; its export manifest identifies
+authority commit `5e91f853f650a83022a5ed86741d59f84be3535f`.  The portfolio summary authority and
+downstream repository were updated at commits `8e77c5d44` and `323a56f`.  No push or archival
+deposit was made.
+
+## 10. EJ and TT closeout
+
+The closeout pass checked what data are genuinely closed under composition.
+
+1. The ordinary labelled support function is closed under min-sum substitution.
+2. The marginalized target-normalized cost is not closed by itself.  Numerical composition needs
+   the helper-restriction support functions and target images; coefficient-level composition needs
+   the support-filtered lift relation indexed by the actual target maps.
+3. The persistent scalar threshold is not closed, as the explicit (F_2/F_4) pair shows.
+4. Replacing the labelled costs by their least and greatest nonzero values gives the sharp envelope
+   (C8); this was added to the proposition.
+5. The local-to-global bottleneck remains intact through a tower: after the tower is evaluated as
+   one composite inner code, restriction of a nonconfined system to a line still shows that its
+   rank-one escape cost governs simultaneous bounded transfer at all recovered dimensions.
+
+### Mystery ledger
+
+- **Settled — minimal numerical state at a target boundary.**  Target images plus the
+  helper-restriction prescribed-coset functions suffice; the proof of (C6) supplies both directions.
+- **Settled — equation-level state.**  The full lift relation, not its minimum, composes by fiber
+  product and retains target and helper coefficients.
+- **Settled — distance coarsening.**  The sharp constants are (\delta_{B,T}) and (R_{B,T});
+  one-coordinate outer realizations prove optimality.
+- **Open — escape-depth profile.**  The nested minimization identifies the first escape from the
+  deepest target block, but this task does not classify the least cost of first escape at each
+  intermediate depth or relations among those depth-indexed costs.  No manuscript claim depends on
+  such a classification, and no successor is allocated here.
+- **Open — compressed equation-state representations.**  The lift relation is sufficient but may
+  be much larger than necessary.  No canonical smaller representation preserving all coefficient
+  equations and support filtrations was proved.  This is an algorithmic representation question,
+  not a gap in the composition theorem.

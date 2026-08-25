@@ -3,19 +3,18 @@
 **Lane**: `complete-ports`
 
 **Date**: 2026-08-24
-**Status**: ACTIVE; C960 EXACT UNGATED ARBITRARY-RANK TRANSFER PROVED,
-PRIORITY-BOUNDED, HARD-RED-TEAMED, AND EXPORTED; 22-PAGE AUTHORITY AND 40-FILE
+**Status**: ACTIVE; C961 REPEATED-CONCATENATION COST COMPOSITION PROVED,
+PRIORITY-BOUNDED, HARD-RED-TEAMED, AND EXPORTED; 24-PAGE AUTHORITY AND 40-FILE
 STANDALONE GATES PASS; C325 APPENDIX VERIFIER AND C953 AGGREGATE REVIEW FOLLOW;
-C955 AMBIENT-REALIZATION SPECTRUM AND C961 REPEATED-CONCATENATION COMPOSITION
-ARE QUEUED AFTERWARD; NO PUSH OR DEPOSIT
+C955 AMBIENT-REALIZATION SPECTRUM REMAINS QUEUED; NO PUSH OR DEPOSIT
 **Theorem source lane**: archived [`repaircodes`](done/2026-07-13-projective-completion-repaircodes.md)
 **Current private paper**: [`complete-repair-ports`](../../papers/complete-repair-ports/README.md)
 **Canonical paper identity**: `complete-ports` — *Exact Transfer of Bounded Linear Recovery and
 Relative Weight Hierarchies*
 **Standalone paper repository**: `tavisrudd/complete-repair-ports` at
 `~/src/math-papers/complete-repair-ports`
-**Current local standalone commit**: `573f658` (C960 exact ranked finite
-transfer and all-rank local-to-global bottleneck; verified; no push or deposit)
+**Current local standalone commit**: `84e2175` (C961 repeated-concatenation
+composition and sharp cost envelopes; verified; no push or deposit)
 **Approved paper license**: MIT
 
 ## Goal
@@ -97,6 +96,14 @@ Completed preparation:
 **Discovery companion**: [complete-ports discovery track](../complete-ports-discovery-track.md).
 
 Current and completed strengthening:
+
+- [C961 repeated-concatenation composition](../2026-08-24-c961-recovery-composition-law.md)
+  proves exact min-sum substitution for labelled ordinary prescribed-coset
+  support costs, identifies the additional target-image and full-lift data
+  needed for normalized numerical and coefficient-level composition, derives
+  the compatible two-sector dual-distance recursion and sharp envelopes, and
+  exports the verified 24-page paper and synchronized portfolio summary
+  without push or deposit.
 
 - [C960 exact ungated arbitrary-rank transfer](../2026-08-24-c960-ungated-ranked-transfer.md)
   proves that target-normalized joint coset-support costs optimized over maps
@@ -183,6 +190,7 @@ dual, its RGHW
 interpretation, exact ungated finite rank-stratified transfer through joint
 prescribed-coset support optimization, the outer-distance RGHW and pointed
 weighted specializations,
+exact repeated-concatenation composition of the labelled costs,
 best-target GHW and cooperative-locality consequences, the symmetric MDS
 staircase and rigidity, positive-density and service-rate transfer, reliability
 and coefficient-presentation separations, and the projective-simplex family.
@@ -191,10 +199,9 @@ generic coefficient optimization, and BGS packing remain outside this paper.
 
 ## Next step
 
-C960 is closed.  Run C325 appendix-only verification next, then C953
-aggregate referee/export review.  C955
-owns the later coefficient-presentation spectrum, followed by C961 on repeated-concatenation
-composition. Before nontrivial proof development or
+C961 is closed.  Run C325 appendix-only verification next, then C953
+aggregate referee/export review.  C955 owns the later coefficient-presentation
+spectrum. Before nontrivial proof development or
 formalization, read the paper-specific expert dossier
 [`papers/expert-profiles/05-complete-repair-ports.md`](../../papers/expert-profiles/05-complete-repair-ports.md).
 
@@ -203,6 +210,6 @@ hierarchy. C220 remains omitted. Shared-Lean extraction is planned under
 [C287](../2026-07-17-c287-shared-lean-extraction-plan.md), remains separately build-system-owned,
 and is not evidence for or a release dependency of the paper-local companion.
 
-Local standalone synchronization is complete at `573f658`. Publication, push,
+Local standalone synchronization is complete at `84e2175`. Publication, push,
 and deposit remain gated on C325 and C953; the approved repository metadata
 does not authorize any of those external actions.
