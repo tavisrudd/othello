@@ -2171,6 +2171,24 @@ mod tests {
             PersistentKind::Sigma
         );
 
+        let centered_gcd = vec![1, 0, 1];
+        let mut restricted_minimum = input.syndrome.clone();
+        let mut normalizer_size = 0;
+        for matrix in normalized_pgl_matrices(&field) {
+            let (candidate, _) = apply_semilinear(&field, &input.syndrome, 0, matrix).unwrap();
+            let basis = locator_kernel(&field, &candidate, candidate.len() - 2);
+            let (gcd, infinity_multiplicity) =
+                homogeneous_basis_gcd(&field, &basis, candidate.len() - 2).unwrap();
+            if infinity_multiplicity == 0
+                && normalize_projective(&field, &gcd).unwrap() == centered_gcd
+            {
+                normalizer_size += 1;
+                restricted_minimum = restricted_minimum.min(candidate);
+            }
+        }
+        assert_eq!(normalizer_size, 16);
+        assert_eq!(restricted_minimum, vec![1, 1, 6, 6, 1]);
+
         let canonical = canonicalize_syndrome(&input, 1_000).unwrap();
         assert_eq!(canonical.canonical_syndrome, vec![1, 0, 3, 3, 5]);
         assert_eq!(canonical.transporters_examined, 336);
