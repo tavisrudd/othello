@@ -45,7 +45,7 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   fresh re-referees after every accepted repair.  Report and live card:
   `../2026-08-24-c956-exact-level-two-cubic-manuscript.md` and
   `../cubic-threefolds-tasks/c956-exact-level-two-cubic-manuscript.md`.
-- **C958 — explicit level-two parametrizations, queued behind C956.**  Starting from
+- **C958 — explicit level-two parametrizations, active.**  Starting from
   C956's constructive quotient theorem and exact tangent witnesses, compute
   and certify explicit birational maps for the two products
   \(X_j\times\mathbf P^2\).  The task must separate existence of a rational

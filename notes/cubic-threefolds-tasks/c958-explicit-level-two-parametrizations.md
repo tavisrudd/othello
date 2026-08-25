@@ -2,7 +2,23 @@
 
 **Lane:** cubic-threefolds
 
-**Status:** queued behind C956
+**Status:** active; C956's accepted quotient and rationality statements are
+frozen inputs
+
+## Current state
+
+The generic split Cox orbit section is explicit and certified over `Q(a,b)`:
+three tangent hyperplanes, four signed minors, and all sixteen Laurent
+correction factors.  The formulas and replay are in
+`notes/2026-08-24-c958-generic-split-parametrization.md` and its adjacent
+`.py`, `.json`, and `.sha256` bundle.  The certificate deliberately stops
+before inverse tangent elimination.
+
+The first genuine gate is descent.  Tschinkel--Zhang's fibration coordinate
+`a` is not the split blow-up modulus `a`; their type computation supplies the
+Galois action but not an explicit change to the marked Cox basis.  Begin with
+type `I_1`: derive the `C2 x S3`-equivariant descended Cox representation and
+express a rational tangent/orbit-test pair in it.
 
 ## Goal
 
@@ -52,7 +68,7 @@ C925 research history.
 - A human derivation explains the maps independently of the replay.
 - Any manuscript change passes the full C956 authority and standalone gates.
 
-## First action
+## Completed first action
 
 Read `../AGENTS.md` in a dedicated command, route with
 `go C958 cubic-threefolds`, read this card and the C956 report, then extract
