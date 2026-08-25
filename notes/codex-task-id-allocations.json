@@ -3491,8 +3491,17 @@
       "last": 959,
       "purpose": "puncture-shortening canonicalization and novelty rebalance",
       "sequence": 388
+    },
+    {
+      "count": 1,
+      "first": 960,
+      "kind": "reservation",
+      "lane": "complete-ports",
+      "last": 960,
+      "purpose": "arbitrary-rank ungated transfer via minimum-support lifts",
+      "sequence": 389
     }
   ],
-  "next_id": 960,
+  "next_id": 961,
   "schema": "codex-task-id-allocations-v1"
 }
