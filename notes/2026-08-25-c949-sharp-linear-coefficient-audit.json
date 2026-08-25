@@ -199,7 +199,42 @@
               "exceptional_directions": 3,
               "frobenius_fiber_quadratic_normal_form": {
                 "all_other_nonzero_line_functional_root_cap": 4,
+                "balanced_shifted_coordinate": "t=y-w*X^r=b^r",
+                "balanced_shifted_global_moment_extraction": "S_k=-sum_j [X^(j*(q-1))]Q_k",
+                "balanced_shifted_local_newton_degree_cap": "deg(Q_k)<=k*r",
+                "balanced_shifted_local_quadratic_product": "C-A*w*X^r+w^2*X^(2r)",
+                "balanced_shifted_local_quadratic_trace": "A+w*X^r",
+                "balanced_shifted_maximum_extracted_diagonal_index": 26,
+                "balanced_shifted_missing_nonzero_values": 0,
+                "balanced_shifted_moment_identity_range": [
+                  1,
+                  79
+                ],
+                "balanced_shifted_nontrivial_moment_defect_rank": 3,
+                "balanced_shifted_nonzero_doubleton_fibers": 77,
+                "balanced_shifted_nonzero_singleton_fibers": 3,
+                "balanced_shifted_order_three_recurrence_starts": 76,
+                "balanced_shifted_zero_4_by_4_hankel_minors": 73,
+                "balanced_shifted_zero_fiber_size": 3,
+                "canonical_section_branch_dichotomy": [
+                  "generic",
+                  "balanced_shear"
+                ],
+                "canonical_section_critical_point_cap_at_nonzero_exceptional_derivative": 26,
+                "canonical_section_critical_point_cap_off_exceptional_slopes": 27,
+                "canonical_section_derivative_exceptional_slope_cap": 2,
+                "canonical_section_derivative_form": "(B-m^r*A)^3+(-m^2+s*m-rho)X-(m+s)c",
+                "canonical_section_root_multiplicity_cap_off_exceptional_slopes": 2,
                 "compatible_triangle_charts": 3,
+                "completion_prony_seed_moments": 3,
+                "countermodel_marked_graph_intersections": 3,
+                "countermodel_nonzero_level_root_count": 2,
+                "countermodel_original_b_projection": {
+                  "distinct_nonzero_values": 53,
+                  "doubleton_fibers": 2,
+                  "missing_nonzero_values": 27,
+                  "tripleton_fibers": 51
+                },
                 "critical_moment_band": [
                   1,
                   52
@@ -215,7 +250,24 @@
                   "001010"
                 ],
                 "frobenius_exponent": 27,
+                "fully_inseparable_carrier_shear": "y=z+w_r*X^r",
+                "fully_inseparable_direction_conditions": [
+                  "m=-s",
+                  "rho=s^2",
+                  "B=-s^r*A"
+                ],
+                "fully_inseparable_discriminant_condition": "A(X)^2-C(X) is a nonzero square on F_q^*",
+                "fully_inseparable_gate_countermodel": "(y-X-u)(y-X-v)=0, v in im(X^r-X), u outside",
+                "fully_inseparable_level_root_cap": 5,
+                "fully_inseparable_marked_graph_intersections": 3,
+                "fully_inseparable_marked_zero_completion_graph": "y=w*X^r",
+                "fully_inseparable_quadratic_cover": "y^2-A(X)y+C(X)=0",
+                "fully_inseparable_section_pencil": "(C-c^r*A+c^(2r))^3",
+                "fully_inseparable_sheared_coefficient_degree_cap": 26,
+                "identically_zero_section_derivative_cap_outside_shear_branch": 2,
                 "independent_quadratic_chart_forms_after_reciprocal_transition": 2,
+                "linearized_split_balanced_completion_possible": false,
+                "linearized_split_forced_triple_b_fibers": 25,
                 "maximum_zero_minus_nonzero_count_in_any_interval": 2,
                 "minimum_completion_moment_support_per_chart": 25,
                 "minimum_completion_trace_degree_per_chart": 73,
@@ -225,6 +277,7 @@
                 "nonvertical_line_parameters_allowing_a_fifth_root": 240,
                 "nonzero_consecutive_3_by_3_hankel_minors": 48,
                 "original_line_functional_root_cap": 5,
+                "other_chart_completion_bands_independent": false,
                 "reciprocal_chart_reversal": "i -> 2r-1-i",
                 "reciprocal_chart_reversal_pairs": 26,
                 "reciprocal_fiber_product_degree_reversal_range": [
@@ -487,7 +540,42 @@
               "exceptional_directions": 3,
               "frobenius_fiber_quadratic_normal_form": {
                 "all_other_nonzero_line_functional_root_cap": 4,
+                "balanced_shifted_coordinate": "t=y-w*X^r=b^r",
+                "balanced_shifted_global_moment_extraction": "S_k=-sum_j [X^(j*(q-1))]Q_k",
+                "balanced_shifted_local_newton_degree_cap": "deg(Q_k)<=k*r",
+                "balanced_shifted_local_quadratic_product": "C-A*w*X^r+w^2*X^(2r)",
+                "balanced_shifted_local_quadratic_trace": "A+w*X^r",
+                "balanced_shifted_maximum_extracted_diagonal_index": 80,
+                "balanced_shifted_missing_nonzero_values": 0,
+                "balanced_shifted_moment_identity_range": [
+                  1,
+                  241
+                ],
+                "balanced_shifted_nontrivial_moment_defect_rank": 3,
+                "balanced_shifted_nonzero_doubleton_fibers": 239,
+                "balanced_shifted_nonzero_singleton_fibers": 3,
+                "balanced_shifted_order_three_recurrence_starts": 238,
+                "balanced_shifted_zero_4_by_4_hankel_minors": 235,
+                "balanced_shifted_zero_fiber_size": 3,
+                "canonical_section_branch_dichotomy": [
+                  "generic",
+                  "balanced_shear"
+                ],
+                "canonical_section_critical_point_cap_at_nonzero_exceptional_derivative": 80,
+                "canonical_section_critical_point_cap_off_exceptional_slopes": 81,
+                "canonical_section_derivative_exceptional_slope_cap": 2,
+                "canonical_section_derivative_form": "(B-m^r*A)^3+(-m^2+s*m-rho)X-(m+s)c",
+                "canonical_section_root_multiplicity_cap_off_exceptional_slopes": 2,
                 "compatible_triangle_charts": 3,
+                "completion_prony_seed_moments": 3,
+                "countermodel_marked_graph_intersections": 3,
+                "countermodel_nonzero_level_root_count": 2,
+                "countermodel_original_b_projection": {
+                  "distinct_nonzero_values": 161,
+                  "doubleton_fibers": 2,
+                  "missing_nonzero_values": 81,
+                  "tripleton_fibers": 159
+                },
                 "critical_moment_band": [
                   1,
                   160
@@ -503,7 +591,24 @@
                   "001010"
                 ],
                 "frobenius_exponent": 81,
+                "fully_inseparable_carrier_shear": "y=z+w_r*X^r",
+                "fully_inseparable_direction_conditions": [
+                  "m=-s",
+                  "rho=s^2",
+                  "B=-s^r*A"
+                ],
+                "fully_inseparable_discriminant_condition": "A(X)^2-C(X) is a nonzero square on F_q^*",
+                "fully_inseparable_gate_countermodel": "(y-X-u)(y-X-v)=0, v in im(X^r-X), u outside",
+                "fully_inseparable_level_root_cap": 5,
+                "fully_inseparable_marked_graph_intersections": 3,
+                "fully_inseparable_marked_zero_completion_graph": "y=w*X^r",
+                "fully_inseparable_quadratic_cover": "y^2-A(X)y+C(X)=0",
+                "fully_inseparable_section_pencil": "(C-c^r*A+c^(2r))^3",
+                "fully_inseparable_sheared_coefficient_degree_cap": 80,
+                "identically_zero_section_derivative_cap_outside_shear_branch": 2,
                 "independent_quadratic_chart_forms_after_reciprocal_transition": 2,
+                "linearized_split_balanced_completion_possible": false,
+                "linearized_split_forced_triple_b_fibers": 79,
                 "maximum_zero_minus_nonzero_count_in_any_interval": 2,
                 "minimum_completion_moment_support_per_chart": 79,
                 "minimum_completion_trace_degree_per_chart": 235,
@@ -513,6 +618,7 @@
                 "nonvertical_line_parameters_allowing_a_fifth_root": 726,
                 "nonzero_consecutive_3_by_3_hankel_minors": 156,
                 "original_line_functional_root_cap": 5,
+                "other_chart_completion_bands_independent": false,
                 "reciprocal_chart_reversal": "i -> 2r-1-i",
                 "reciprocal_chart_reversal_pairs": 80,
                 "reciprocal_fiber_product_degree_reversal_range": [
@@ -775,7 +881,42 @@
               "exceptional_directions": 3,
               "frobenius_fiber_quadratic_normal_form": {
                 "all_other_nonzero_line_functional_root_cap": 4,
+                "balanced_shifted_coordinate": "t=y-w*X^r=b^r",
+                "balanced_shifted_global_moment_extraction": "S_k=-sum_j [X^(j*(q-1))]Q_k",
+                "balanced_shifted_local_newton_degree_cap": "deg(Q_k)<=k*r",
+                "balanced_shifted_local_quadratic_product": "C-A*w*X^r+w^2*X^(2r)",
+                "balanced_shifted_local_quadratic_trace": "A+w*X^r",
+                "balanced_shifted_maximum_extracted_diagonal_index": 242,
+                "balanced_shifted_missing_nonzero_values": 0,
+                "balanced_shifted_moment_identity_range": [
+                  1,
+                  727
+                ],
+                "balanced_shifted_nontrivial_moment_defect_rank": 3,
+                "balanced_shifted_nonzero_doubleton_fibers": 725,
+                "balanced_shifted_nonzero_singleton_fibers": 3,
+                "balanced_shifted_order_three_recurrence_starts": 724,
+                "balanced_shifted_zero_4_by_4_hankel_minors": 721,
+                "balanced_shifted_zero_fiber_size": 3,
+                "canonical_section_branch_dichotomy": [
+                  "generic",
+                  "balanced_shear"
+                ],
+                "canonical_section_critical_point_cap_at_nonzero_exceptional_derivative": 242,
+                "canonical_section_critical_point_cap_off_exceptional_slopes": 243,
+                "canonical_section_derivative_exceptional_slope_cap": 2,
+                "canonical_section_derivative_form": "(B-m^r*A)^3+(-m^2+s*m-rho)X-(m+s)c",
+                "canonical_section_root_multiplicity_cap_off_exceptional_slopes": 2,
                 "compatible_triangle_charts": 3,
+                "completion_prony_seed_moments": 3,
+                "countermodel_marked_graph_intersections": 3,
+                "countermodel_nonzero_level_root_count": 2,
+                "countermodel_original_b_projection": {
+                  "distinct_nonzero_values": 485,
+                  "doubleton_fibers": 2,
+                  "missing_nonzero_values": 243,
+                  "tripleton_fibers": 483
+                },
                 "critical_moment_band": [
                   1,
                   484
@@ -791,7 +932,24 @@
                   "001010"
                 ],
                 "frobenius_exponent": 243,
+                "fully_inseparable_carrier_shear": "y=z+w_r*X^r",
+                "fully_inseparable_direction_conditions": [
+                  "m=-s",
+                  "rho=s^2",
+                  "B=-s^r*A"
+                ],
+                "fully_inseparable_discriminant_condition": "A(X)^2-C(X) is a nonzero square on F_q^*",
+                "fully_inseparable_gate_countermodel": "(y-X-u)(y-X-v)=0, v in im(X^r-X), u outside",
+                "fully_inseparable_level_root_cap": 5,
+                "fully_inseparable_marked_graph_intersections": 3,
+                "fully_inseparable_marked_zero_completion_graph": "y=w*X^r",
+                "fully_inseparable_quadratic_cover": "y^2-A(X)y+C(X)=0",
+                "fully_inseparable_section_pencil": "(C-c^r*A+c^(2r))^3",
+                "fully_inseparable_sheared_coefficient_degree_cap": 242,
+                "identically_zero_section_derivative_cap_outside_shear_branch": 2,
                 "independent_quadratic_chart_forms_after_reciprocal_transition": 2,
+                "linearized_split_balanced_completion_possible": false,
+                "linearized_split_forced_triple_b_fibers": 241,
                 "maximum_zero_minus_nonzero_count_in_any_interval": 2,
                 "minimum_completion_moment_support_per_chart": 241,
                 "minimum_completion_trace_degree_per_chart": 721,
@@ -801,6 +959,7 @@
                 "nonvertical_line_parameters_allowing_a_fifth_root": 2184,
                 "nonzero_consecutive_3_by_3_hankel_minors": 480,
                 "original_line_functional_root_cap": 5,
+                "other_chart_completion_bands_independent": false,
                 "reciprocal_chart_reversal": "i -> 2r-1-i",
                 "reciprocal_chart_reversal_pairs": 242,
                 "reciprocal_fiber_product_degree_reversal_range": [
@@ -941,8 +1100,21 @@
     "zero_pattern_over_two_periods": "00110011"
   },
   "q27_chart_compatibility_microcheck": {
+    "balanced_shifted_diagonal_extraction_checks": 25,
+    "balanced_shifted_moment_identity_evaluations": 25,
+    "balanced_shifted_order_three_recurrence_checks": 22,
+    "balanced_shifted_zero_consecutive_4_by_4_hankel_minors": 19,
+    "canonical_section_derivative_evaluations": 2187,
     "critical_band_reversal_evaluations": 16,
     "field_order": 27,
+    "fully_inseparable_countermodel_marked_intersections": 3,
+    "fully_inseparable_countermodel_maximum_y_fiber_size": 2,
+    "fully_inseparable_countermodel_removed_x_profile": {
+      "doubletons": 23,
+      "singletons": 3
+    },
+    "fully_inseparable_countermodel_x_fiber_size": 2,
+    "fully_inseparable_pencil_evaluations": 729,
     "nonzero_consecutive_3_by_3_hankel_minors": 12,
     "reciprocal_P_evaluations": 26,
     "reciprocal_W_evaluations": 26,

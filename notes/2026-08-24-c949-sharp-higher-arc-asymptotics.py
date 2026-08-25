@@ -3438,12 +3438,71 @@ def audit_sharp_linear_coefficient(output: Path) -> None:
             "nonvertical_line_parameters_allowing_a_fifth_root": 3 * (q - 1),
             "all_other_nonzero_line_functional_root_cap": 4,
             "zero_line_exact_roots": 3,
+            "canonical_section_derivative_form": (
+                "(B-m^r*A)^3+(-m^2+s*m-rho)X-(m+s)c"
+            ),
+            "canonical_section_derivative_exceptional_slope_cap": 2,
+            "canonical_section_root_multiplicity_cap_off_exceptional_slopes": 2,
+            "canonical_section_critical_point_cap_off_exceptional_slopes": r,
+            "canonical_section_critical_point_cap_at_nonzero_exceptional_derivative": (
+                r - 1
+            ),
+            "identically_zero_section_derivative_cap_outside_shear_branch": 2,
+            "fully_inseparable_direction_conditions": [
+                "m=-s", "rho=s^2", "B=-s^r*A"
+            ],
+            "fully_inseparable_carrier_shear": "y=z+w_r*X^r",
+            "fully_inseparable_sheared_coefficient_degree_cap": r - 1,
+            "fully_inseparable_marked_zero_completion_graph": "y=w*X^r",
+            "fully_inseparable_marked_graph_intersections": 3,
+            "fully_inseparable_section_pencil": "(C-c^r*A+c^(2r))^3",
+            "fully_inseparable_quadratic_cover": "y^2-A(X)y+C(X)=0",
+            "fully_inseparable_discriminant_condition": (
+                "A(X)^2-C(X) is a nonzero square on F_q^*"
+            ),
+            "fully_inseparable_level_root_cap": 5,
+            "fully_inseparable_gate_countermodel": (
+                "(y-X-u)(y-X-v)=0, v in im(X^r-X), u outside"
+            ),
+            "countermodel_nonzero_level_root_count": 2,
+            "countermodel_marked_graph_intersections": 3,
+            "countermodel_original_b_projection": {
+                "distinct_nonzero_values": 2 * q // 3 - 1,
+                "missing_nonzero_values": q // 3,
+                "doubleton_fibers": 2,
+                "tripleton_fibers": 2 * q // 3 - 3,
+            },
+            "canonical_section_branch_dichotomy": [
+                "generic", "balanced_shear"
+            ],
+            "linearized_split_balanced_completion_possible": False,
+            "linearized_split_forced_triple_b_fibers": r - 2,
+            "balanced_shifted_coordinate": "t=y-w*X^r=b^r",
+            "balanced_shifted_zero_fiber_size": 3,
+            "balanced_shifted_nonzero_singleton_fibers": 3,
+            "balanced_shifted_nonzero_doubleton_fibers": q - 4,
+            "balanced_shifted_missing_nonzero_values": 0,
+            "balanced_shifted_nontrivial_moment_defect_rank": 3,
+            "balanced_shifted_moment_identity_range": [1, q - 2],
+            "balanced_shifted_order_three_recurrence_starts": q - 5,
+            "balanced_shifted_zero_4_by_4_hankel_minors": q - 8,
+            "balanced_shifted_local_quadratic_trace": "A+w*X^r",
+            "balanced_shifted_local_quadratic_product": (
+                "C-A*w*X^r+w^2*X^(2r)"
+            ),
+            "balanced_shifted_local_newton_degree_cap": "deg(Q_k)<=k*r",
+            "balanced_shifted_global_moment_extraction": (
+                "S_k=-sum_j [X^(j*(q-1))]Q_k"
+            ),
+            "balanced_shifted_maximum_extracted_diagonal_index": r - 1,
             "critical_moment_band": [1, 2 * r - 2],
             "critical_moment_band_length": 2 * r - 2,
             "reciprocal_chart_reversal": "i -> 2r-1-i",
             "reciprocal_chart_reversal_pairs": r - 1,
             "nonzero_consecutive_3_by_3_hankel_minors": 2 * r - 6,
             "zero_consecutive_4_by_4_hankel_minors": 2 * r - 8,
+            "completion_prony_seed_moments": 3,
+            "other_chart_completion_bands_independent": False,
         }
         zero_pattern_states = {"": 0}
         for _ in range(2 * r - 2):
@@ -3476,6 +3535,34 @@ def audit_sharp_linear_coefficient(output: Path) -> None:
                 != frobenius_fiber_normal_form[
                     "minimum_completion_moment_support_per_chart"]):
             raise AssertionError("Frobenius failed to preserve trace sparsity")
+        if frobenius_fiber_normal_form[
+                "canonical_section_derivative_exceptional_slope_cap"] != 2:
+            raise AssertionError("the canonical derivative slope cap changed")
+        if frobenius_fiber_normal_form[
+                "linearized_split_forced_triple_b_fibers"] <= 0:
+            raise AssertionError("the linearized-split exclusion changed")
+        if (frobenius_fiber_normal_form[
+                "balanced_shifted_zero_fiber_size"]
+                + frobenius_fiber_normal_form[
+                    "balanced_shifted_nonzero_singleton_fibers"]
+                + 2 * frobenius_fiber_normal_form[
+                    "balanced_shifted_nonzero_doubleton_fibers"]
+                != 2 * (q - 1)):
+            raise AssertionError("the balanced shifted-fiber mass changed")
+        if (frobenius_fiber_normal_form[
+                "balanced_shifted_nonzero_singleton_fibers"]
+                + frobenius_fiber_normal_form[
+                    "balanced_shifted_nonzero_doubleton_fibers"]
+                != q - 1):
+            raise AssertionError("the balanced shifted projection lost a value")
+        if (frobenius_fiber_normal_form[
+                "balanced_shifted_zero_4_by_4_hankel_minors"]
+                != q - 8):
+            raise AssertionError("the balanced shifted Hankel window changed")
+        if ((q - 2) * r // (q - 1)
+                != frobenius_fiber_normal_form[
+                    "balanced_shifted_maximum_extracted_diagonal_index"]):
+            raise AssertionError("the balanced diagonal range changed")
         critical_trace_exponents = [
             (-3 * index) % (q - 1)
             for index in (r, r + 1, r + 2)
@@ -3683,6 +3770,26 @@ def audit_sharp_linear_coefficient(output: Path) -> None:
             )
         return result
 
+    def polynomial_add(left: list[int], right: list[int]) -> list[int]:
+        length = max(len(left), len(right))
+        return [chart_field.add(
+            left[index] if index < len(left) else 0,
+            right[index] if index < len(right) else 0,
+        ) for index in range(length)]
+
+    def polynomial_neg(coefficients: list[int]) -> list[int]:
+        return [chart_field.neg(coefficient) for coefficient in coefficients]
+
+    def polynomial_mul(left: list[int], right: list[int]) -> list[int]:
+        product = [0] * (len(left) + len(right) - 1)
+        for left_index, left_value in enumerate(left):
+            for right_index, right_value in enumerate(right):
+                product[left_index + right_index] = chart_field.add(
+                    product[left_index + right_index],
+                    chart_field.mul(left_value, right_value),
+                )
+        return product
+
     def determinant(matrix: list[list[int]]) -> int:
         work = [row[:] for row in matrix]
         result = 1
@@ -3741,8 +3848,256 @@ def audit_sharp_linear_coefficient(output: Path) -> None:
                 )):
             raise AssertionError("the reciprocal P transition failed")
 
+    derivative_A = sum_coefficients[:chart_r]
+    derivative_B = product_coefficients[:chart_r]
+    derivative_C = list(reversed(sum_coefficients[:chart_r]))
+    derivative_s = chart_field.pow(primitive, 5)
+    derivative_rho = chart_field.pow(primitive, 7)
+    shifted_h = [0] * chart_r + [primitive]
+    shifted_trace_polynomial = polynomial_add(derivative_A, shifted_h)
+    shifted_product_polynomial = polynomial_add(
+        polynomial_add(derivative_C, polynomial_mul(shifted_h, shifted_h)),
+        polynomial_neg(polynomial_mul(derivative_A, shifted_h)),
+    )
+    shifted_newton_polynomials = [[2], shifted_trace_polynomial]
+    shifted_diagonal_extraction_checks = 0
+    for index in range(2, chart_q - 1):
+        shifted_newton_polynomials.append(polynomial_add(
+            polynomial_mul(
+                shifted_trace_polynomial,
+                shifted_newton_polynomials[index - 1],
+            ),
+            polynomial_neg(polynomial_mul(
+                shifted_product_polynomial,
+                shifted_newton_polynomials[index - 2],
+            )),
+        ))
+    for index in range(1, chart_q - 1):
+        evaluation_sum = 0
+        for x in range(1, chart_q):
+            evaluation_sum = chart_field.add(
+                evaluation_sum,
+                polynomial_value(shifted_newton_polynomials[index], x),
+            )
+        diagonal_sum = 0
+        polynomial = shifted_newton_polynomials[index]
+        for degree in range(0, len(polynomial), chart_q - 1):
+            diagonal_sum = chart_field.add(diagonal_sum, polynomial[degree])
+        if evaluation_sum != chart_field.neg(diagonal_sum):
+            raise AssertionError("the shifted diagonal extraction changed")
+        shifted_diagonal_extraction_checks += 1
+    derivative_checks = 0
+    for m in range(chart_q):
+        cube_root_m = chart_field.pow(m, chart_r)
+        alpha = chart_field.add(
+            chart_field.neg(chart_field.mul(m, m)),
+            chart_field.add(
+                chart_field.mul(derivative_s, m),
+                chart_field.neg(derivative_rho),
+            ),
+        )
+        for c in (0, 1, primitive):
+            constant = chart_field.neg(chart_field.mul(
+                chart_field.add(m, derivative_s), c
+            ))
+            for x in range(chart_q):
+                a_value = polynomial_value(derivative_A, x)
+                b_value = polynomial_value(derivative_B, x)
+                t_value = chart_field.add(chart_field.mul(m, x), c)
+                trace_value = chart_field.add(
+                    chart_field.mul(derivative_s, x),
+                    chart_field.pow(a_value, 3),
+                )
+                left = chart_field.add(
+                    chart_field.neg(chart_field.mul(m, t_value)),
+                    chart_field.add(
+                        chart_field.neg(chart_field.mul(
+                            derivative_s, t_value
+                        )),
+                        chart_field.add(
+                            chart_field.neg(chart_field.mul(
+                                m, trace_value
+                            )),
+                            chart_field.add(
+                                chart_field.pow(b_value, 3),
+                                chart_field.neg(chart_field.mul(
+                                    derivative_rho, x
+                                )),
+                            ),
+                        ),
+                    ),
+                )
+                cube_term = chart_field.add(
+                    b_value,
+                    chart_field.neg(chart_field.mul(cube_root_m, a_value)),
+                )
+                right = chart_field.add(
+                    chart_field.pow(cube_term, 3),
+                    chart_field.add(chart_field.mul(alpha, x), constant),
+                )
+                if left != right:
+                    raise AssertionError("the canonical section derivative changed")
+                derivative_checks += 1
+
+    degenerate_m = chart_field.neg(derivative_s)
+    degenerate_rho = chart_field.mul(derivative_s, derivative_s)
+    degenerate_scale = chart_field.neg(chart_field.pow(
+        derivative_s, chart_r
+    ))
+    degenerate_B = [
+        chart_field.mul(degenerate_scale, coefficient)
+        for coefficient in derivative_A
+    ]
+    perfect_cube_checks = 0
+    for c in range(chart_q):
+        for x in range(chart_q):
+            a_value = polynomial_value(derivative_A, x)
+            b_value = polynomial_value(degenerate_B, x)
+            c_value = polynomial_value(derivative_C, x)
+            t_value = chart_field.add(chart_field.mul(degenerate_m, x), c)
+            trace_value = chart_field.add(
+                chart_field.mul(derivative_s, x),
+                chart_field.pow(a_value, 3),
+            )
+            product_value = chart_field.add(
+                chart_field.pow(c_value, 3),
+                chart_field.add(
+                    chart_field.mul(x, chart_field.pow(b_value, 3)),
+                    chart_field.mul(
+                        degenerate_rho, chart_field.mul(x, x)
+                    ),
+                ),
+            )
+            section_value = chart_field.add(
+                chart_field.mul(t_value, t_value),
+                chart_field.add(
+                    chart_field.neg(chart_field.mul(trace_value, t_value)),
+                    product_value,
+                ),
+            )
+            pencil_value = chart_field.add(
+                c_value,
+                chart_field.add(
+                    chart_field.neg(chart_field.mul(
+                        chart_field.pow(c, chart_r), a_value
+                    )),
+                    chart_field.pow(c, 2 * chart_r),
+                ),
+            )
+            if section_value != chart_field.pow(pencil_value, 3):
+                raise AssertionError("the fully inseparable pencil changed")
+            perfect_cube_checks += 1
+    linearized_image = {
+        chart_field.add(
+            chart_field.pow(x, chart_r), chart_field.neg(x)
+        )
+        for x in range(chart_q)
+    }
+    countermodel_v = next(value for value in linearized_image if value != 0)
+    countermodel_u = next(
+        value for value in range(1, chart_q)
+        if value not in linearized_image
+    )
+    countermodel_x_fibers = {}
+    countermodel_y_fibers = {}
+    marked_countermodel_x = set()
+    countermodel_b_fibers = {}
+    for x in range(1, chart_q):
+        roots = {
+            chart_field.add(x, countermodel_u),
+            chart_field.add(x, countermodel_v),
+        }
+        countermodel_x_fibers[x] = len(roots)
+        marked_y = chart_field.pow(x, chart_r)
+        if marked_y in roots:
+            marked_countermodel_x.add(x)
+        for y in roots:
+            countermodel_y_fibers[y] = countermodel_y_fibers.get(y, 0) + 1
+            if y != marked_y:
+                b_value = chart_field.pow(
+                    chart_field.add(y, chart_field.neg(marked_y)), 3
+                )
+                countermodel_b_fibers[b_value] = (
+                    countermodel_b_fibers.get(b_value, 0) + 1
+                )
+    removed_x_fibers = {
+        x: count - (x in marked_countermodel_x)
+        for x, count in countermodel_x_fibers.items()
+    }
+    removed_x_profile = Counter(removed_x_fibers.values())
+    countermodel_b_profile = Counter(countermodel_b_fibers.values())
+    if (len(linearized_image) != chart_q // 3
+            or set(countermodel_x_fibers.values()) != {2}
+            or max(countermodel_y_fibers.values()) != 2
+            or len(marked_countermodel_x) != 3
+            or removed_x_profile != Counter({1: 3, 2: chart_q - 4})
+            or 0 in countermodel_b_fibers
+            or countermodel_b_profile != Counter({
+                2: 2, 3: 2 * chart_q // 3 - 3
+            })):
+        raise AssertionError("the fully inseparable countermodel changed")
+
     cell_a = [chart_field.pow(primitive, exponent) for exponent in (1, 2, 4)]
     cell_c = [chart_field.pow(primitive, exponent) for exponent in (3, 5, 7)]
+    shifted_singletons = set(cell_c)
+
+    def field_sum(values: list[int]) -> int:
+        total = 0
+        for value in values:
+            total = chart_field.add(total, value)
+        return total
+
+    shifted_direct_moments = {}
+    shifted_defect_moments = {}
+    for index in range(1, chart_q - 1):
+        direct = 0
+        for value in range(1, chart_q):
+            multiplicity = 1 if value in shifted_singletons else 2
+            for _ in range(multiplicity):
+                direct = chart_field.add(
+                    direct, chart_field.pow(value, index)
+                )
+        defect = chart_field.neg(field_sum([
+            chart_field.pow(value, index) for value in cell_c
+        ]))
+        if direct != defect:
+            raise AssertionError("the balanced shifted moment identity changed")
+        shifted_direct_moments[index] = direct
+        shifted_defect_moments[index] = defect
+    shifted_sigma_one = field_sum(cell_c)
+    shifted_sigma_two = field_sum([
+        chart_field.mul(cell_c[0], cell_c[1]),
+        chart_field.mul(cell_c[0], cell_c[2]),
+        chart_field.mul(cell_c[1], cell_c[2]),
+    ])
+    shifted_sigma_three = chart_field.mul(
+        chart_field.mul(cell_c[0], cell_c[1]), cell_c[2]
+    )
+    shifted_recurrence_checks = 0
+    for index in range(1, chart_q - 4):
+        right = chart_field.add(
+            chart_field.mul(
+                shifted_sigma_one, shifted_defect_moments[index + 2]
+            ),
+            chart_field.add(
+                chart_field.neg(chart_field.mul(
+                    shifted_sigma_two, shifted_defect_moments[index + 1]
+                )),
+                chart_field.mul(
+                    shifted_sigma_three, shifted_defect_moments[index]
+                ),
+            ),
+        )
+        if shifted_defect_moments[index + 3] != right:
+            raise AssertionError("the balanced shifted recurrence changed")
+        shifted_recurrence_checks += 1
+    shifted_zero_hankel_four = 0
+    for start in range(1, chart_q - 7):
+        matrix = [[shifted_defect_moments[start + row + column]
+                   for column in range(4)] for row in range(4)]
+        if determinant(matrix) != 0:
+            raise AssertionError("a balanced shifted rank-four minor survived")
+        shifted_zero_hankel_four += 1
     lambda_one = [chart_field.pow(a, chart_q - 1 - chart_r) for a in cell_a]
     lambda_two = [
         chart_field.mul(weight, chart_field.pow(c, chart_q - 1 - chart_r))
@@ -3791,6 +4146,24 @@ def audit_sharp_linear_coefficient(output: Path) -> None:
         "critical_band_reversal_evaluations": 2 * chart_r - 2,
         "nonzero_consecutive_3_by_3_hankel_minors": nonzero_hankel_three,
         "zero_consecutive_4_by_4_hankel_minors": zero_hankel_four,
+        "canonical_section_derivative_evaluations": derivative_checks,
+        "fully_inseparable_pencil_evaluations": perfect_cube_checks,
+        "fully_inseparable_countermodel_x_fiber_size": 2,
+        "fully_inseparable_countermodel_maximum_y_fiber_size": 2,
+        "fully_inseparable_countermodel_marked_intersections": 3,
+        "fully_inseparable_countermodel_removed_x_profile": {
+            "singletons": 3, "doubletons": chart_q - 4
+        },
+        "balanced_shifted_moment_identity_evaluations": chart_q - 2,
+        "balanced_shifted_order_three_recurrence_checks": (
+            shifted_recurrence_checks
+        ),
+        "balanced_shifted_zero_consecutive_4_by_4_hankel_minors": (
+            shifted_zero_hankel_four
+        ),
+        "balanced_shifted_diagonal_extraction_checks": (
+            shifted_diagonal_extraction_checks
+        ),
     }
 
     sharp_field = Field(9)

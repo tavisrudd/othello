@@ -7,7 +7,7 @@
 now `5/3`; the exact `5/3` endpoint is also absent, while a matching
 `5/3+o(1)` construction remains open; the sharpest `+1` triangular target is
 reduced to the almost-duplex/near-Rédei/moment conditions
-`(SR18)--(SR24p)`; no
+`(SR18)--(SR24s)`; no
 manuscript work
 
 ## First-gate findings — 24 August 2026
@@ -2098,6 +2098,321 @@ are precisely `3(q-1)` such parameter pairs `(m,c)`; every other nonzero
 exactly two points.  Thus any polynomial attack only needs to control a
 linear-sized exceptional subfamily of the `q^2` nonvertical line tests.
 
+There is also a canonical derivative compression of these section
+polynomials.  Write
+
+```text
+W(X)=w_rX^r+A(X),
+P(X)=C(X)+X^rB(X)+p_(2r)X^(2r),
+deg A,deg B,deg C<=r-1,
+s=w_r^3,                       rho=p_(2r)^3.
+```
+
+Using `X^q=X` and `X^(q+j)=X^(j+1)` on `F_q`, the original-coordinate
+fiber trace and product in `(SR24m)` have the reduced representatives
+
+```text
+W(X)^3=sX+A(X)^3,
+P(X)^3=C(X)^3+X B(X)^3+rho X^2.                    (SR24m')
+```
+
+For `t=mX+c`, differentiate the corresponding reduced section
+`R_{m,c}=t^2-W^3t+P^3`.  Since the cube terms have zero derivative and
+`m=(m^r)^3`, one obtains
+
+```text
+R'_(m,c)(X)
+ =(B(X)-m^rA(X))^3+(-m^2+sm-rho)X-(m+s)c.          (SR24m'')
+```
+
+Thus only the at most two slopes satisfying `m^2-sm+rho=0` can make this
+canonical section derivative a pure cube.  For every other slope its own
+derivative is the nonzero constant `-m^2+sm-rho`; it is squarefree, and a
+root of the reduced `R_{m,c}` cannot have multiplicity above two.  This is a
+statement about the canonical reduced section polynomial, not a claim about
+geometric tangency of the unreduced Frobenius curve: reduction modulo
+`X^q-X` does not preserve derivatives.  The gain is that any multiplicity-
+based polynomial attack has only two chart-global exceptional slopes.
+
+The critical-point equation itself drops back to degree `r`.  If
+`alpha=-m^2+sm-rho!=0`, taking the inverse Frobenius cube of `(SR24m'')`
+on `F_q` gives
+
+```text
+B(X)-m^rA(X)+alpha^r X^r-((m+s)c)^r=0.             (SR24m''')
+```
+
+Its degree is exactly `r`, so the reduced section has at most `r=q/3`
+critical field points.  At an exceptional slope `alpha=0`, the same operation
+gives a polynomial of degree at most `r-1`, unless it vanishes identically;
+that final escape is the explicit coefficient identity obtained from
+`B-m^rA-((m+s)c)^r=0`.  Hence all anomalous multiplicity behavior is confined
+to two slopes and an immediately testable low-degree identity.  This still
+does not bound the number of distinct roots beyond the geometric cap in
+`(SR24m)`; it sharpens the algebraic state rather than closing it.
+
+Unless the all-intercept escape below occurs, there is at most one
+identically-zero derivative section on each exceptional slope.  Indeed
+`B-m^rA` must first be constant, and when `m+s!=0` the map
+`c |-> ((m+s)c)^r` is bijective; when `m+s=0`, the derivative either never
+vanishes identically or does so for every `c`.  Thus outside the balanced
+shear branch, at most two of the `q^2` nonvertical section polynomials are
+purely inseparable.
+
+The worst escape, in which one exceptional slope has `R'_(m,c)=0` for
+every intercept `c`, is completely rigid.  The coefficient of `c` forces
+`m=-s`; the exceptional-slope equation and the cube term then force
+
+```text
+rho=s^2,                         B=-s^rA.
+```
+
+This has an intrinsic carrier interpretation.  Put `w=w_r`, so
+`s=w^3`; injectivity of cubing turns the displayed conditions into
+`p_(2r)=w^2` and `B=-wA`.  The Frobenius-coordinate shear
+
+```text
+y=z+wX^r
+```
+
+then transforms the carrier `z^2-Wz+P=0` exactly into
+
+```text
+y^2-A(X)y+C(X)=0.                                   (SR24m-shear)
+```
+
+Indeed the mixed and `X^(2r)` terms cancel in characteristic three.  On a
+line of slope `m=-s`, its intercept is `c=b+sa`, and hence
+`c^r=z+s^r a^r=z+w a^r=y`.  The exceptional derivative direction is
+therefore precisely the direction in which the carrier admits this balanced
+degree-`r-1` shear normal form.
+
+The three zero completions become marked points in this form.  Original
+`z=0` maps to `y=wX^r`, so
+
+```text
+{X in F_q^*: C(X)-wX^rA(X)+w^2X^(2r)=0}=A_0,       (SR24m-mark)
+```
+
+and the corresponding carrier points are exactly
+`{(a,w a^r):a in A_0}`.  Thus the residual quadratic cover is not unmarked:
+it contains precisely three prescribed points on the Frobenius monomial
+graph `y=wX^r`.  These are also the zero-completion points responsible for
+the sparse fifth-root allowances.
+
+Direct substitution in `(SR24m)` gives the perfect-cube pencil
+
+```text
+R_(-s,c)(X)=(C(X)-c^rA(X)+c^(2r))^3.               (SR24m'''')
+```
+
+Thus even this fully inseparable direction is governed by a family of
+degree-at-most-`r-1` polynomials, each with at most five nonzero roots by the
+line cap.  The exceptional derivative branch has therefore become a
+low-degree quadratic pencil in the parameter `c^r`, rather than an
+unstructured high-degree section family.
+
+Equivalently, put `y=c^r`; this is a bijective reparameterization of the
+intercepts.  The fully inseparable branch is the quadratic cover
+
+```text
+y^2-A(X)y+C(X)=0,                  deg A,deg C<=r-1.
+```
+
+For every `X in F_q^*` its two roots are the two completed line intercepts,
+so they are distinct field elements.  Therefore
+
+```text
+A(X)^2-C(X) is a nonzero square for every X in F_q^*.
+```
+
+Conversely, for every `y in F_q`, the level polynomial
+`C(X)-yA(X)+y^2` has at most five nonzero roots by `(SR24m)`, with the
+fifth-root exceptions already localized above.  This is the exact residual
+fully inseparable gate: a degree-`r-1` square-value quadratic cover with a
+uniform five-root Redei pencil.  Its degree grows linearly with `q`, so a
+fixed-degree character-sum argument does not by itself close the branch.
+
+This quantifies the present algebraic stopping boundary.  The two independent
+carrier equations above have total degree at most `2r`, but their common
+torus set has only `2q-5=6r-5` points, far below the `4r^2` Bezout threshold
+that would force a common component.  In the fully inseparable branch the
+square-value discriminant still has degree at most `2r-2`; an estimate on the
+scale `degree*sqrt(q)` is larger than the entire field and cannot force it to
+be a square polynomial.  Finally, a single degree-`r-1` level polynomial
+having at most five roots is entirely compatible with its degree.  Therefore
+none of component forcing, one-polynomial root counting, or an ordinary
+square-value estimate closes the branch.  A successful next step must use
+the five-root restriction simultaneously for all `q` members of the pencil,
+or couple that pencil back to the other independent triangle carrier.
+
+Even the uniform pencil conditions together with exactly three marked
+intersections are consistent.  The `F_3`-linear map
+
+```text
+L(X)=X^r-X
+```
+
+has kernel `F_3` and image of size `q/3`.  Choose nonzero
+`v in image(L)` and `u notin image(L)`.  Then the cover
+
+```text
+(y-X-u)(y-X-v)=0                                   (SR24q-example)
+```
+
+has coefficient degrees one and two, discriminant `(u-v)^2`, and two
+distinct roots over every `X`.  Each `y`-level has at most two nonzero
+`X`-roots because both factors are affine permutations.  On the marked graph
+`y=X^r`, the first factor has no intersection, while the second has exactly
+the three solutions of `L(X)=v`; all are nonzero because `v!=0`.  Removing
+those three marked points even produces the required `1^3 2^(q-4)` profile
+in the `X`-projection.  Thus the balanced pencil, square values, uniform
+root cap, and exact singleton count still do not contradict one another.
+The boundary blocking data or compatibility with the other carrier must
+enter essentially; this affine duplex model marks the precise information
+missing from a one-pencil proof.
+
+Mapping the example back to the original coordinate makes its failure
+quantitative.  Here `w=1`, so `b=(y-X^r)^3`.  If
+`U=image(L)`, the two affine graphs give `b`-values in the disjoint additive
+cosets `(u-U)^3` and `(v-U)^3`.  After deleting the three marked `b=0`
+cells, the nonzero `b`-projection has exact profile
+
+```text
+2^2 3^(2q/3-3) on 2q/3-1 values,
+with q/3 nonzero values missing.                    (SR24q-example-fail)
+```
+
+It is therefore linearly far from the required `1^3 2^(q-4)` second
+projection.  The other carrier is not a cosmetic extra condition: it must
+destroy precisely this additive-coset concentration while preserving the
+three marked defects.
+
+The same calculation excludes the much larger linearized-split balanced
+family, not just the example.  Suppose
+
+```text
+y=F(X)+u,                     y=G(X)+v              (SR24r)
+```
+
+are the two roots of the balanced cover for every `X`, where `F,G` are
+`F_3`-linearized polynomials.  On either graph the original coordinate is
+the cube of an affine `F_3`-linear map, for example
+
+```text
+b^r=F(X)+u-wX^r.
+```
+
+The three marked deletions are exactly its nonzero zeros across the two
+graphs.  One graph therefore contributes two or three.  A nonempty zero
+fiber is a coset of the kernel of its linear part; it has `|ker|` nonzero
+points, or `|ker|-1` when it contains `X=0`.  Since kernel sizes are powers
+of three and the total marked count is three, this forces `|ker|=3`.
+Every nonempty affine fiber then has size three.  After excluding `X=0` and
+deleting the marked zero fiber,
+at most one remaining fiber drops to size two; at least `r-2=q/3-2`
+nonzero `b`-fibers are still triple.  This contradicts the target
+`1^3 2^(q-4)` projection.  Constant linear parts give either zero or
+`q-1` marks and do not evade the count.  Therefore no balanced carrier split
+into two affine-linearized `y`-graphs can underlie the target core.  Any
+surviving balanced cover is nonlinear in a stronger, nonadditive sense before
+the second carrier is even imposed.
+
+There is an exact coordinate-free way to retain that second projection inside
+the sheared picture.  Put
+
+```text
+t=y-wX^r=b^r.
+```
+
+On the full balanced cover over `X in F_q^*`, the three marked cells are
+exactly the `t=0` fiber.  After they are deleted, the target core has three
+singleton and `q-4` doubleton nonzero `b`-fibers.  Frobenius is bijective, so
+the complete `t`-fiber profile is forced to be
+
+```text
+t=0: 3;       three nonzero fibers: 1;
+               the other q-4 nonzero fibers: 2.    (SR24s)
+```
+
+In particular every nonzero field value occurs, and if `E` is the set of the
+three singleton `t`-values, then for `1<=k<=q-2`
+
+```text
+ sum_((X,y) on the cover) (y-wX^r)^k
+      =-sum_(e in E) e^k.                           (SR24s')
+```
+
+Indeed the left side is twice the power sum over `F_q^*`, minus the three
+singleton contributions, and the full nonzero power sum vanishes in this
+range.  If the elementary symmetric functions of `E` are
+`sigma_1,sigma_2,sigma_3`, the global moments `S_k` on the left therefore
+satisfy
+
+```text
+S_(k+3)=sigma_1 S_(k+2)-sigma_2 S_(k+1)+sigma_3 S_k,
+                                                   1<=k<=q-5. (SR24s'')
+```
+
+Equivalently, every consecutive `4 by 4` Hankel determinant of these moments
+with start index `1<=k<=q-8` vanishes.  On the carrier side this is an explicit
+polynomial condition.  With `h=wX^r`, the two shifted roots at `X` solve
+
+```text
+t^2-(A+h)t+(C-Ah+h^2)=0,
+```
+
+so their local power sums satisfy the quadratic Newton recurrence with trace
+`A+h` and product `C-Ah+h^2`; summing those local expressions over
+`F_q^*` gives `S_k`.  More explicitly, let `Q_0=2`, `Q_1=A+h`, and
+
+```text
+Q_k=(A+h)Q_(k-1)-(C-Ah+h^2)Q_(k-2).
+```
+
+Then `deg Q_k<=kr`, and the multiplicative-field power sum gives the exact
+diagonal extraction formula
+
+```text
+S_k=-sum_(0<=j<=floor(kr/(q-1))) [X^(j(q-1))]Q_k(X).
+                                                        (SR24s''')
+```
+
+Thus the residual balanced problem is not merely a square-value pencil: its
+shifted-root multiset has a rank-three power-sum defect across the entire
+nontrivial frequency range, now written directly in the coefficients `A,C`.
+The prospective contradiction has been compressed to an explicit mismatch:
+the diagonal-coefficient extraction of a local order-two Newton sequence must
+itself obey the global order-three recurrence `(SR24s'')` for `q-5` steps.
+
+The proof of `(SR24r)` is transparent from `(SR24s)`: a contributing
+affine-linearized graph has a kernel of size three and hence leaves triple
+`t`-fibers, forbidden by the exact cap two.  Any surviving balanced carrier
+must satisfy the simultaneous five-root `y`-level cap and this almost-two-to-one
+shifted projection, including the `q-8` Hankel window.  This packages both
+projections sharply, but it still does not prove that no nonlinear cover has
+both properties.
+
+Summarizing, every Frobenius-quadratic carrier satisfies the following exact
+section dichotomy:
+
+```text
+generic branch:
+  at most two identically-zero section derivatives in total;
+  every other nonexceptional-slope derivative is squarefree and has
+  at most r critical field points;
+
+balanced-shear branch:
+  the unique all-intercept slope is m=-s;
+  all q sections are cubes of the marked degree-(r-1) pencil
+  C-yA+y^2, with y=c^r.                              (SR24q)
+```
+
+There is no third derivative branch.  In the generic case the remaining
+difficulty is simultaneous distinct-root control for squarefree sections;
+in the balanced case it is the marked square-value/Redei pencil plus the
+second carrier.  This dichotomy is structural but not an upper-bound proof.
+
 One of the three chart compatibilities is in fact completely explicit and
 does not require extendability.  Between the last two charts in `(SR24g)`,
 write `c=b/a`.  Their coordinates obey
@@ -2177,6 +2492,24 @@ no-three-consecutive-zeros condition separately.  Its scope is deliberately
 conditional: it obstructs candidates that pass the singleton completion
 gate, but it neither proves that every target core is extendable nor closes
 the nonextendable branch.
+
+In fact one completed chart band determines the missing transversal and both
+other bands.  Order `A_0={a_1,a_2,a_3}` arbitrarily and let
+`lambda_t=b_t^r`.  The first three equations in chart zero are
+
+```text
+(mu_1^(0),mu_2^(0),mu_3^(0))^T
+  =(a_t^i)_(1<=i,t<=3) (lambda_1,lambda_2,lambda_3)^T. (SR24p')
+```
+
+The matrix is a Vandermonde matrix times `diag(a_t)` and is invertible.
+Hence these three moments recover the `lambda_t`, cubing recovers
+`b_t=lambda_t^3`, and the completion test is exactly that the recovered
+`b_t` and `a_t/b_t` give `B_0` and `C_0` with new cells.  Once it passes,
+the three explicit sums in `(SR24o)` determine both remaining critical
+bands.  Thus a construction search must not choose three Prony sequences
+independently: one three-moment seed plus the singleton sets fixes the entire
+coupled certificate.
 
 There is an equivalent exact dual-code certificate.  Let `V` be the three
 triangle vertices and let `L_infty` be the connector chosen as the line at
@@ -2595,7 +2928,9 @@ family is lower priority.
   profile.  In characteristic three these profiles force the carry-free
   moment triangle `(SR24b)--(SR24d)`, the Frobenius-quadratic normal forms
   `(SR24e)--(SR24g)` (only two independent by `(SR24n)`), the original-line
-  root gate `(SR24m)`, the coupled Prony/reversal obstruction
+  root gate, generic/balanced derivative dichotomy, affine-split exclusion,
+  and exact shifted-fiber/moment constraint `(SR24m)--(SR24s)`,
+  the coupled Prony/reversal obstruction
   `(SR24n)--(SR24p)`, and the weight-`3q`
   dual word and signed spectrum `(SR24k)--(SR24l')`.  The Vandermonde obstruction
   `(SR24h)--(SR24j)` eliminates every two-monomial completion
