@@ -7,6 +7,7 @@ Build and run the standalone harness from the repository root:
 ```text
 cargo build --release --manifest-path rust/prs_classifier/Cargo.toml --bin c969_benchmark
 rust/prs_classifier/target/release/c969_benchmark --iterations 10
+rust/prs_classifier/target/release/c969_benchmark --iterations 10 --extension-fields
 ```
 
 The program emits `c969-benchmark-report-v1` JSON. Each operation is timed in
@@ -31,15 +32,26 @@ not a codeword scan and not the optimized selector.
 
 | operation | q | redundancy | ns / iteration | locator candidates |
 |---|---:|---:|---:|---:|
-| 12-point terminal selector | 7 | 5 | 6,794 | 1 |
-| projective locator oracle | 7 | 5 | 57,226 | 409 |
-| 12-point terminal selector | 17 | 6 | 17,961 | 1 |
-| projective locator oracle | 17 | 6 | 16,018,546 | 89,067 |
-| 12-point terminal selector | 7 | 7 | 4,441 | 1 |
-| projective locator oracle | 7 | 7 | 7,212,734 | 20,017 |
-| tangent semilinear canonicalization | 17 | 6 | 469,797 | 272 transports |
-| end-to-end classification | 17 | 6 | 641,709 | -- |
-| positive deep-certificate replay | 17 | 6 | 626,997 | -- |
+| 12-point terminal selector | 7 | 5 | 6,429 | 1 |
+| projective locator oracle | 7 | 5 | 54,371 | 409 |
+| 12-point terminal selector | 17 | 6 | 16,632 | 1 |
+| projective locator oracle | 17 | 6 | 16,529,830 | 89,067 |
+| 12-point terminal selector | 7 | 7 | 4,567 | 1 |
+| projective locator oracle | 7 | 7 | 8,296,680 | 20,017 |
+| tangent semilinear canonicalization | 17 | 6 | 504,884 | 272 transports |
+| sigma explicit semilinear canonicalization | 17 | 6 | 9,260,663 | 4,896 transports |
+| end-to-end tangent classification | 17 | 6 | 719,086 | -- |
+| positive tangent deep-certificate replay | 17 | 6 | 717,723 | -- |
+
+The optional polynomial-basis extension-field pass adds:
+
+| operation | q | redundancy | ns / iteration | candidates/transports |
+|---|---:|---:|---:|---:|
+| 12-point terminal selector | 8 | 5 | 122,916 | 1 |
+| projective locator oracle | 8 | 5 | 789,781 | 594 |
+| explicit semilinear canonicalization | 8 | 5 | 19,275,349 | 1,512 |
+| end-to-end classification | 8 | 5 | 19,618,460 | -- |
+| positive deep-certificate replay | 8 | 5 | 19,085,015 | -- |
 
 The terminal fixtures are respectively the R5 tangent, R6 tangent, and frozen
 R7 sporadic representative. Their one-prefix selector outcomes are favorable
@@ -60,5 +72,5 @@ The benchmark separates four costs which must not be conflated:
 No timing is a novelty or state-of-the-art claim. Sigma and nonpersistent
 canonicalization still use an honest group-scale fallback. Their formula-speed
 canonicalizers, extension-field matrices, a wider q/field/redundancy benchmark
-grid, bit-operation accounting, and comparison with external decoder software
-remain open benchmark work.
+grid beyond the first GF(8) fixture, bit-operation accounting, and comparison
+with external decoder software remain open benchmark work.

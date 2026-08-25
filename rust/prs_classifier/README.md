@@ -55,7 +55,7 @@ The reproducible benchmark harness is built and run with:
 
 ```text
 cargo run --release --manifest-path rust/prs_classifier/Cargo.toml \
-  --bin c969_benchmark -- --iterations 10
+  --bin c969_benchmark -- --iterations 10 --extension-fields
 ```
 
 Its selector, projective-oracle, canonicalization, classification, and replay

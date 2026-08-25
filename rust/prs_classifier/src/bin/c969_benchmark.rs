@@ -14,6 +14,8 @@ struct Args {
     iterations: u32,
     #[arg(long, default_value_t = 10_000_000)]
     candidate_limit: u64,
+    #[arg(long)]
+    extension_fields: bool,
 }
 
 #[derive(Serialize)]
@@ -41,6 +43,15 @@ fn prime_field(p: u32) -> FieldSpec {
         p,
         degree: 1,
         modulus: vec![0, 1],
+        encoding: "polynomial-basis-base-p-integer-v1".into(),
+    }
+}
+
+fn gf8() -> FieldSpec {
+    FieldSpec {
+        p: 2,
+        degree: 3,
+        modulus: vec![1, 1, 0, 1],
         encoding: "polynomial-basis-base-p-integer-v1".into(),
     }
 }
@@ -110,6 +121,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     }
     let r5 = request(prime_field(7), 5, vec![0, 0, 0, 1, 0]);
     let r6 = request(prime_field(17), 6, vec![0, 0, 0, 0, 1, 0]);
+    let r6_sigma = request(prime_field(17), 6, vec![0, 1, 0, 3, 0, 9]);
     let r7 = request(prime_field(7), 7, vec![0, 0, 0, 0, 1, 0, 0]);
     let mut rows = Vec::new();
     rows.extend(terminal_rows(
@@ -130,6 +142,56 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         args.iterations,
         args.candidate_limit,
     )?);
+    if args.extension_fields {
+        let r5_q8 = request(gf8(), 5, vec![0, 0, 1, 0, 0]);
+        rows.extend(terminal_rows(
+            &r5_q8,
+            8,
+            args.iterations,
+            args.candidate_limit,
+        )?);
+        let canonicalization = canonicalize_syndrome(&r5_q8, args.candidate_limit)?;
+        let canonical_elapsed = elapsed(args.iterations, || {
+            canonicalize_syndrome(&r5_q8, args.candidate_limit)
+        })?;
+        rows.push(BenchmarkRow {
+            operation: "r5_q8_extension_field_canonicalization".into(),
+            field_order: 8,
+            redundancy: 5,
+            elapsed_ns_total: canonical_elapsed,
+            elapsed_ns_per_iteration: canonical_elapsed / u128::from(args.iterations),
+            candidates_examined: Some(canonicalization.transporters_examined),
+            baseline: "polynomial-basis GF(8), explicit PGL(2,8) x Gal transports",
+        });
+        let classification = classify(&r5_q8, args.candidate_limit, args.candidate_limit)?;
+        let certificate = classification
+            .deep_certificate
+            .ok_or("R5 q=8 extension fixture did not produce a deep certificate")?;
+        let classify_elapsed = elapsed(args.iterations, || {
+            classify(&r5_q8, args.candidate_limit, args.candidate_limit)
+        })?;
+        rows.push(BenchmarkRow {
+            operation: "r5_q8_extension_field_classify".into(),
+            field_order: 8,
+            redundancy: 5,
+            elapsed_ns_total: classify_elapsed,
+            elapsed_ns_per_iteration: classify_elapsed / u128::from(args.iterations),
+            candidates_examined: None,
+            baseline: "GF(8) locator rejection, family route, and explicit semilinear transport",
+        });
+        let verify_elapsed = elapsed(args.iterations, || {
+            verify_deep_certificate(&certificate, args.candidate_limit)
+        })?;
+        rows.push(BenchmarkRow {
+            operation: "r5_q8_extension_field_positive_replay".into(),
+            field_order: 8,
+            redundancy: 5,
+            elapsed_ns_total: verify_elapsed,
+            elapsed_ns_per_iteration: verify_elapsed / u128::from(args.iterations),
+            candidates_examined: None,
+            baseline: "GF(8) frozen orbit, transporter, split-free, and radius replay",
+        });
+    }
 
     let canonicalization = canonicalize_syndrome(&r6, args.candidate_limit)?;
     let canonical_elapsed = elapsed(args.iterations, || {
@@ -143,6 +205,19 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         elapsed_ns_per_iteration: canonical_elapsed / u128::from(args.iterations),
         candidates_examined: Some(canonicalization.transporters_examined),
         baseline: "tangent gcd root sent to infinity; m*q*(q-1) affine transports",
+    });
+    let sigma_canonicalization = canonicalize_syndrome(&r6_sigma, args.candidate_limit)?;
+    let sigma_elapsed = elapsed(args.iterations, || {
+        canonicalize_syndrome(&r6_sigma, args.candidate_limit)
+    })?;
+    rows.push(BenchmarkRow {
+        operation: "r6_sigma_explicit_semilinear_canonicalization".into(),
+        field_order: 17,
+        redundancy: 6,
+        elapsed_ns_total: sigma_elapsed,
+        elapsed_ns_per_iteration: sigma_elapsed / u128::from(args.iterations),
+        candidates_examined: Some(sigma_canonicalization.transporters_examined),
+        baseline: "remaining explicit m*(q^3-q) nonsplit-quadratic orbit",
     });
 
     let classification = classify(&r6, args.candidate_limit, args.candidate_limit)?;
@@ -159,7 +234,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         elapsed_ns_total: classify_elapsed,
         elapsed_ns_per_iteration: classify_elapsed / u128::from(args.iterations),
         candidates_examined: None,
-        baseline: "intrinsic family detection plus explicit semilinear canonicalization",
+        baseline: "intrinsic family detection plus tangent-restricted canonicalization",
     });
     let verify_elapsed = elapsed(args.iterations, || {
         verify_deep_certificate(&deep_certificate, args.candidate_limit)
