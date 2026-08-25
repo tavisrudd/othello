@@ -6,6 +6,7 @@ rust-version.workspace = true
 license.workspace = true
 repository.workspace = true
 description = "Exact sparse-shadow canonicalization, reconstruction, and certificate replay"
+include = ["src/**", "testdata/**", "Cargo.toml"]
 
 [dependencies]
 blake3.workspace = true

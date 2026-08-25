@@ -9,6 +9,13 @@ package dry run is expected to fail closed until that exact core version exists
 in the configured registry; the path dependency is not rewritten or vendored
 to conceal this prerequisite. No publication was performed during C968.
 
+The core archive includes its unit-test Paper-I fixture under `testdata/`; a
+workspace test requires semantic equality with the public top-level fixture.
+The full integration and benchmark suites remain workspace evidence and are
+excluded from the registry archive because their calibrated, gated, and golden
+fixtures live at the standalone workspace boundary. A fresh temporary
+extraction of the actual `.crate` passes locked/offline unit and doc tests.
+
 Audit date: 2026-08-25. The initial manifest keeps network, FFI, finite-field,
 parallel-search, graph-library, and benchmark dependencies out of the runtime
 closure.

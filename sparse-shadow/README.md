@@ -39,6 +39,9 @@ compiler for reproducible development.
 For registry release, `sparse-shadow-core` must be packaged and published before
 the same-version CLI. The CLI manifest deliberately retains both the local path
 and exact compatible version; no crate was published as part of this task.
+The core `.crate` is self-contained for unit/doc testing; the complete
+integration, golden-contract, gate, and benchmark evidence remains in this
+standalone workspace.
 
 ```sh
 cargo test --workspace --all-features

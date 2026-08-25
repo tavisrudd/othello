@@ -228,7 +228,9 @@ part of the public artifact API.
 The core crate package dry run is green. Registry release order is explicit:
 core 0.1.0 must exist before the CLI package can resolve its versioned path
 dependency. No publication was attempted, and the manifest does not hide the
-prerequisite.
+prerequisite. A fresh extraction of the actual core `.crate` passes
+locked/offline unit and doc tests; the packaged unit fixture is synchronized
+semantically with the public workspace fixture.
 
 No unblocked C968 implementation frontier remains: each next adapter first
 requires the complete paper-owned export named in its `fixtures/gated-*.json`.

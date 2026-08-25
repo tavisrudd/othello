@@ -461,7 +461,7 @@ mod tests {
     #[test]
     fn paper_i_search_loop_allocates_nothing() {
         let input: InputArtifact = serde_json::from_str(include_str!(
-            "../../../fixtures/paper-i-icosahedral-orbitals.json"
+            "../testdata/paper-i-icosahedral-orbitals.json"
         ))
         .expect("committed fixture parses");
         let crate::ProfileInput::PaperIOrientation(paper) = input.profile else {

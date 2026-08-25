@@ -11,9 +11,17 @@ const FIXTURE: &str = include_str!("../../../fixtures/paper-i-icosahedral-orbita
 const CALIBRATED_FIXTURE: &str =
     include_str!("../../../fixtures/paper-i-calibrated-icosahedral-orbitals.json");
 const GOLDEN_CONTRACT: &str = include_str!("../../../fixtures/paper-i-golden-contract.json");
+const PACKAGED_FIXTURE: &str = include_str!("../testdata/paper-i-icosahedral-orbitals.json");
 
 fn fixture() -> InputArtifact {
     serde_json::from_str(FIXTURE).expect("committed fixture parses")
+}
+
+#[test]
+fn packaged_unit_test_fixture_matches_the_public_fixture() {
+    let packaged: InputArtifact =
+        serde_json::from_str(PACKAGED_FIXTURE).expect("packaged fixture parses");
+    assert_eq!(packaged, fixture());
 }
 
 fn calibrated_fixture() -> InputArtifact {
