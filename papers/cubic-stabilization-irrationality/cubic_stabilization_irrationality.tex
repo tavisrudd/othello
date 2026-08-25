@@ -58,23 +58,22 @@ point; algebraic torus; rationality after affine-line stabilization.
 
 \section{Introduction and main results}
 
-For a stably rational but nonrational variety, one can ask for the least
-number of independent variables that makes its function field rational.  For
-cubic threefolds the first stabilization never suffices: every smooth complex
-cubic threefold remains irrational after multiplication by \(\PP^1\)
-\cite[Theorem~1.1]{RuddM1}.  On the other hand, Tschinkel and Zhang constructed
-explicit smooth cubic threefolds over \(\mathbf Q\) that are stably rational
-\cite[Theorem~1.3]{TZ}.  We prove that their cubic-threefold examples become
-rational after the next stabilization.
-
 For a projective variety \(V/k\), put
 \[
  \ell_k(V)=\min\{m\geq0:V\times\A^m\text{ is }k\text{-rational}\}.
 \]
-We set \(\ell_k(V)=\infty\) if the set is empty.  Since \(\A^m\) and
-\(\PP^m\) are birational, one obtains the same value with \(\PP^m\) in
-place of \(\A^m\).  Tschinkel and Zhang consider this minimum in their
-discussion of levels of stable rationality \cite[p.~13]{TZ}.
+If the set is empty, put \(\ell_k(V)=\infty\).  Since \(\A^m\) and
+\(\PP^m\) are birational, either factor gives the same invariant.  This is
+the level of stable rationality considered by Tschinkel and Zhang
+\cite[p.~13]{TZ}.
+
+By the one-stabilization theorem \cite[Theorem~1.1]{RuddM1}, every smooth
+complex cubic threefold \(X\) satisfies \(\ell_{\C}(X)\geq2\).  Tschinkel and
+Zhang constructed explicit smooth cubic threefolds over \(\mathbf Q\) that
+are stably rational \cite[Theorem~1.3]{TZ}.  Their levels are finite, and
+rationality after base change gives
+\(\ell_{\mathbf Q}(X)\geq\ell_{\C}(X_{\C})\geq2\).  We prove equality for
+two of these threefolds.
 
 Consider the smooth cubic threefolds
 \begin{align}
@@ -97,8 +96,8 @@ Equivalently, \((X_j)_{\C}\times\PP^1\) is irrational, whereas
 \(X_j\times\PP^2\) is rational over \(\mathbf Q\).
 \end{theorem}
 
-The mechanism behind Theorem~\ref{thm:cubic-level} is the following surface
-theorem.
+The following surface theorem supplies the upper bound in
+Theorem~\ref{thm:cubic-level}.
 
 \begin{theorem}[Two-dimensional stabilization]
 \label{thm:two-variable}
@@ -116,19 +115,18 @@ are \(k\)-rational.  In particular, this holds for every stably
 \(k\)-rational smooth quartic del Pezzo surface.
 \end{theorem}
 
-The proof combines the Cox model, tangent-projection theorem, Galois-type
-classification, and generic splitting of the universal torsor developed in
-\cite{TZ} with the rank-three quotient constructed below.  Under the
-rational-point hypothesis, condition~(1) of \cite[Corollary~4.3]{TZ} is
-exactly the stably permutation hypothesis in Theorem
-\ref{thm:two-variable}.  Theorem~\ref{thm:two-variable} proves that this
-condition implies rationality after two variables; Manin's necessary
-condition gives the converse from stable rationality, while
-\cite[Proposition~4.1 and Lemma~4.2]{TZ} identify the other equivalent
-conditions in that corollary.  Thus its equivalence holds with the positive
-direction quantified by \(S\times\A^2\) rational.  The
-stable-permutation resolution in \cite[p.~13]{TZ} gives the uniform bound
-eleven; the quotient construction here gives two.
+From \cite{TZ} we use the Cox model, tangent-projection theorem, Galois
+classification, and generic splitting of the universal torsor.  We supply a
+rank-three quotient of the projective Cox model.
+
+When \(S(k)\ne\varnothing\), the hypothesis on \(\Pic(S_{\bar k})\) is
+condition~(1) of \cite[Corollary~4.3]{TZ}.  Manin proves that stable
+rationality implies this condition \cite[Theorem~2.2]{Manin1966};
+\cite[Proposition~4.1 and Lemma~4.2]{TZ} identify the remaining equivalent
+conditions.  We prove that condition~(1) implies the stronger conclusion
+that \(S\times\A^2\) is rational.  The stable-permutation resolution in
+\cite[p.~13]{TZ} gives a uniform bound of eleven variables; the quotient
+construction gives two.
 
 For \(r\geq0\), let \(X_{j,r}\subset\PP^{r+4}_{\mathbf Q}\) be obtained
 from equation \eqref{eq:cubic-one} or \eqref{eq:cubic-three} by adding
@@ -143,11 +141,11 @@ For every \(r\geq0\) and \(j\in\{1,3\}\), the variety
 \(X_{j,r}\times\PP^2\) is rational over \(\mathbf Q\).
 \end{corollary}
 
-The smoothness, fibrations, and generic-fibre Galois calculations in
-\cite[Propositions~5.1--5.2]{TZ} are the inputs to Corollary
-\ref{cor:cubics}.  Consequently the stable-rationality conclusions of those
-propositions, and hence the examples in \cite[Theorem~1.3]{TZ}, hold with the
-uniform bound \(X_{j,r}\times\PP^2\) rational.
+Tschinkel and Zhang supply the smoothness, fibrations, and generic-fibre
+Galois types in \cite[Propositions~5.1--5.2]{TZ}.  Applying
+Theorem~\ref{thm:two-variable} over the two base function fields proves
+Corollary~\ref{cor:cubics} and sharpens their stable-rationality conclusions
+to \(X_{j,r}\times\PP^2\) rational.
 
 \begin{corollary}[Rationality after affine-line stabilization]
 \label{cor:affine-line}
@@ -158,11 +156,10 @@ projective fourfold over \(\mathbf Q\) which remains nonrational over
 \(\C\), while \(Y_j\times\A^1\) is rational over \(\mathbf Q\).
 \end{corollary}
 
-This is a statement about birational rationality after taking a product with
-\(\A^1\).  In particular, it answers the question raised in
-\cite[p.~13]{TZ} asking for a nonrational variety \(Y\) such that
-\(Y\times\A^1\) is rational.  It is not a counterexample to the Zariski cancellation problem,
-which concerns isomorphisms between affine cylinders.
+The fourfolds \(Y_j\) answer the question in \cite[p.~13]{TZ} asking for a
+nonrational variety \(Y\) such that \(Y\times\A^1\) is rational.  This is a
+birational statement, not Zariski cancellation for isomorphic affine
+cylinders.
 
 \begin{corollary}[Variation in the moduli of cubic threefolds]
 \label{cor:moduli}
@@ -173,6 +170,22 @@ On the moduli space of smooth complex cubic threefolds, \(\ell_{\C}\) is
 equal to two on every isomorphism class represented by \(X_1\) or \(X_3\),
 and is infinite at a very general point.
 \end{corollary}
+
+Here is the proof of the surface theorem.  Let \(Z\) be the projective Cox
+model of \(S\).  The rank-five torus \(T_0\) acting on \(Z\) contains a
+saturated rank-three subtorus \(T_3\).  Four of its weight blocks form a
+Galois-stable set, and their weight differences form a lattice basis.  A
+codimension-three tangent section meets a general \(T_3\)-orbit once, so
+tangent projection identifies \(Z/T_3\) birationally with \(\PP^4\).
+Generic splitting of the universal torsor also gives
+\(Z/T_3\sim_k S\times(T_0/T_3)\).
+The residual torus \(T_0/T_3\) has dimension two and is rational; the two
+descriptions of the quotient therefore give the rationality of
+\(S\times\A^2\).  Applying the argument over the two base function fields
+proves Corollary~\ref{cor:cubics}.  In Section~2 we prove the quotient
+criterion, in Section~3 we construct the
+required Cox-model section, and in Section~4 we deduce the rationality
+statements.
 
 \section{A criterion for rational torus quotients}
 
