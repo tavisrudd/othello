@@ -1634,8 +1634,8 @@ deficits once.  Thus the product equation `(SR19)` is necessary but not by
 itself a completion theorem: the nonextendable branch is a literal
 three-by-three transversal obstruction.                         (SR19c)
 
-The distinction is real already over `F_81`.  For an element `zeta` of order
-eight, take singleton sets with exponent sets
+The distinction is real already at the singleton-data level over `F_81`.
+For an element `zeta` of order eight, take singleton sets with exponent sets
 
 ```text
 A_0=B_0={0,1,2},             C_0={0,3,5}.
