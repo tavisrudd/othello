@@ -71,6 +71,6 @@ The benchmark separates four costs which must not be conflated:
 
 No timing is a novelty or state-of-the-art claim. Sigma and nonpersistent
 canonicalization still use an honest group-scale fallback. Their formula-speed
-canonicalizers, extension-field matrices, a wider q/field/redundancy benchmark
-grid beyond the first GF(8) fixture, bit-operation accounting, and comparison
-with external decoder software remain open benchmark work.
+canonicalizers, a wider q/field/redundancy benchmark grid beyond the first
+GF(8) fixture, bit-operation accounting, and comparison with external decoder
+software remain open benchmark work.
