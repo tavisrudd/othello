@@ -2632,7 +2632,7 @@ six fragmentary.  Lean still checks only the advertised arithmetic fragments;
 the new geometric/asymptotic proposition is marked absent.  The manuscript
 build and paper gate pass, the rendered proposition and conclusion have no box
 warnings, and the repository paper-facts extraction is current.  The final
-database/positioning audit and public export remain the two C945 release steps.
+database/positioning audit remains the C945 release step.
 
 A fresh hostile read of the revised proposition checked the localization
 quantifiers, both wrong-residue counts, the Szőnyi--Weiner threshold and repair
@@ -2650,3 +2650,9 @@ characteristic-three lower bound still requires a construction, while full
 extremizer classification requires exact-core classification, bounded-repair
 realizability, and exhaustiveness.  These are the explicit alternative exits
 of C949 rather than claims of the present manuscript.
+
+The repaired authority is commit `d155f39ce`.  Export audit found no private
+process references, the standalone paper gate passes, and export verification
+matches that source commit at public-mirror commit `76b236a`.  The 18-page
+authority and standalone PDFs agree byte for byte, with SHA-256
+`8f5e04041422e210045d30b4400c3e0b2b8455a993d419ada9561562a4f48ced`.
