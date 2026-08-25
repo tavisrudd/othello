@@ -198,18 +198,48 @@
               "directions_with_at_most_six_missing_intercepts": 79,
               "exceptional_directions": 3,
               "frobenius_fiber_quadratic_normal_form": {
+                "all_other_nonzero_line_functional_root_cap": 4,
                 "compatible_triangle_charts": 3,
+                "critical_moment_band": [
+                  1,
+                  52
+                ],
+                "critical_moment_band_length": 52,
                 "fiber_product_polynomial_degree_bound": 54,
                 "fiber_square_sum_consecutive_moments": 25,
                 "fiber_sum_consecutive_moments": 52,
                 "fiber_sum_polynomial_degree_bound": 27,
+                "forbidden_completion_moment_zero_patterns": [
+                  "000",
+                  "00100",
+                  "001010"
+                ],
                 "frobenius_exponent": 27,
-                "minimum_completion_moment_support_per_chart": 17,
-                "minimum_completion_trace_degree_per_chart": 16,
-                "minimum_completion_trace_fourier_support_per_chart": 17,
+                "independent_quadratic_chart_forms_after_reciprocal_transition": 2,
+                "maximum_zero_minus_nonzero_count_in_any_interval": 2,
+                "minimum_completion_moment_support_per_chart": 25,
+                "minimum_completion_trace_degree_per_chart": 38,
+                "minimum_completion_trace_fourier_support_per_chart": 25,
+                "minimum_nonzero_moments_per_length_five_window": 2,
                 "monomial_vandermonde_zero_run": 17,
+                "nonvertical_line_parameters_allowing_a_fifth_root": 240,
+                "nonzero_consecutive_3_by_3_hankel_minors": 48,
+                "original_line_functional_root_cap": 5,
+                "reciprocal_chart_reversal": "i -> 2r-1-i",
+                "reciprocal_chart_reversal_pairs": 26,
+                "reciprocal_fiber_product_degree_reversal_range": [
+                  0,
+                  54
+                ],
+                "reciprocal_fiber_sum_degree_reversal_range": [
+                  0,
+                  27
+                ],
                 "two_monomial_completion_possible": false,
-                "zero_completed_singleton_fibers": 3
+                "zero_completed_singleton_fibers": 3,
+                "zero_consecutive_4_by_4_hankel_minors": 46,
+                "zero_line_exact_roots": 3,
+                "zero_pattern_automaton_minimum_band_support": 25
               },
               "full_core_direction_ledger": {
                 "remaining_direction_count": 77,
@@ -267,6 +297,14 @@
               "selector_matching_edges": 78,
               "unmatched_vertices": 1,
               "vertices": 157
+            },
+            "completion_gate_compression": {
+              "candidate_bijections": 6,
+              "checks": [
+                "sum a/pi(a)=e1(C0)",
+                "sum pi(a)/a=e2(C0)/e3(C0)"
+              ],
+              "symmetric_scalar_checks_after_product_identity": 2
             },
             "full_duplex_completion_gate": "bijection pi:A0->B0 with ratio multiset C0 and three new cells",
             "projection_fibers_for_a_b_and_a_over_b": {
@@ -448,18 +486,48 @@
               "directions_with_at_most_six_missing_intercepts": 241,
               "exceptional_directions": 3,
               "frobenius_fiber_quadratic_normal_form": {
+                "all_other_nonzero_line_functional_root_cap": 4,
                 "compatible_triangle_charts": 3,
+                "critical_moment_band": [
+                  1,
+                  160
+                ],
+                "critical_moment_band_length": 160,
                 "fiber_product_polynomial_degree_bound": 162,
                 "fiber_square_sum_consecutive_moments": 79,
                 "fiber_sum_consecutive_moments": 160,
                 "fiber_sum_polynomial_degree_bound": 81,
+                "forbidden_completion_moment_zero_patterns": [
+                  "000",
+                  "00100",
+                  "001010"
+                ],
                 "frobenius_exponent": 81,
-                "minimum_completion_moment_support_per_chart": 53,
-                "minimum_completion_trace_degree_per_chart": 52,
-                "minimum_completion_trace_fourier_support_per_chart": 53,
+                "independent_quadratic_chart_forms_after_reciprocal_transition": 2,
+                "maximum_zero_minus_nonzero_count_in_any_interval": 2,
+                "minimum_completion_moment_support_per_chart": 79,
+                "minimum_completion_trace_degree_per_chart": 119,
+                "minimum_completion_trace_fourier_support_per_chart": 79,
+                "minimum_nonzero_moments_per_length_five_window": 2,
                 "monomial_vandermonde_zero_run": 53,
+                "nonvertical_line_parameters_allowing_a_fifth_root": 726,
+                "nonzero_consecutive_3_by_3_hankel_minors": 156,
+                "original_line_functional_root_cap": 5,
+                "reciprocal_chart_reversal": "i -> 2r-1-i",
+                "reciprocal_chart_reversal_pairs": 80,
+                "reciprocal_fiber_product_degree_reversal_range": [
+                  0,
+                  162
+                ],
+                "reciprocal_fiber_sum_degree_reversal_range": [
+                  0,
+                  81
+                ],
                 "two_monomial_completion_possible": false,
-                "zero_completed_singleton_fibers": 3
+                "zero_completed_singleton_fibers": 3,
+                "zero_consecutive_4_by_4_hankel_minors": 154,
+                "zero_line_exact_roots": 3,
+                "zero_pattern_automaton_minimum_band_support": 79
               },
               "full_core_direction_ledger": {
                 "remaining_direction_count": 239,
@@ -517,6 +585,14 @@
               "selector_matching_edges": 240,
               "unmatched_vertices": 1,
               "vertices": 481
+            },
+            "completion_gate_compression": {
+              "candidate_bijections": 6,
+              "checks": [
+                "sum a/pi(a)=e1(C0)",
+                "sum pi(a)/a=e2(C0)/e3(C0)"
+              ],
+              "symmetric_scalar_checks_after_product_identity": 2
             },
             "full_duplex_completion_gate": "bijection pi:A0->B0 with ratio multiset C0 and three new cells",
             "projection_fibers_for_a_b_and_a_over_b": {
@@ -698,18 +774,48 @@
               "directions_with_at_most_six_missing_intercepts": 727,
               "exceptional_directions": 3,
               "frobenius_fiber_quadratic_normal_form": {
+                "all_other_nonzero_line_functional_root_cap": 4,
                 "compatible_triangle_charts": 3,
+                "critical_moment_band": [
+                  1,
+                  484
+                ],
+                "critical_moment_band_length": 484,
                 "fiber_product_polynomial_degree_bound": 486,
                 "fiber_square_sum_consecutive_moments": 241,
                 "fiber_sum_consecutive_moments": 484,
                 "fiber_sum_polynomial_degree_bound": 243,
+                "forbidden_completion_moment_zero_patterns": [
+                  "000",
+                  "00100",
+                  "001010"
+                ],
                 "frobenius_exponent": 243,
-                "minimum_completion_moment_support_per_chart": 161,
-                "minimum_completion_trace_degree_per_chart": 160,
-                "minimum_completion_trace_fourier_support_per_chart": 161,
+                "independent_quadratic_chart_forms_after_reciprocal_transition": 2,
+                "maximum_zero_minus_nonzero_count_in_any_interval": 2,
+                "minimum_completion_moment_support_per_chart": 241,
+                "minimum_completion_trace_degree_per_chart": 362,
+                "minimum_completion_trace_fourier_support_per_chart": 241,
+                "minimum_nonzero_moments_per_length_five_window": 2,
                 "monomial_vandermonde_zero_run": 161,
+                "nonvertical_line_parameters_allowing_a_fifth_root": 2184,
+                "nonzero_consecutive_3_by_3_hankel_minors": 480,
+                "original_line_functional_root_cap": 5,
+                "reciprocal_chart_reversal": "i -> 2r-1-i",
+                "reciprocal_chart_reversal_pairs": 242,
+                "reciprocal_fiber_product_degree_reversal_range": [
+                  0,
+                  486
+                ],
+                "reciprocal_fiber_sum_degree_reversal_range": [
+                  0,
+                  243
+                ],
                 "two_monomial_completion_possible": false,
-                "zero_completed_singleton_fibers": 3
+                "zero_completed_singleton_fibers": 3,
+                "zero_consecutive_4_by_4_hankel_minors": 478,
+                "zero_line_exact_roots": 3,
+                "zero_pattern_automaton_minimum_band_support": 241
               },
               "full_core_direction_ledger": {
                 "remaining_direction_count": 725,
@@ -768,6 +874,14 @@
               "unmatched_vertices": 1,
               "vertices": 1453
             },
+            "completion_gate_compression": {
+              "candidate_bijections": 6,
+              "checks": [
+                "sum a/pi(a)=e1(C0)",
+                "sum pi(a)/a=e2(C0)/e3(C0)"
+              ],
+              "symmetric_scalar_checks_after_product_identity": 2
+            },
             "full_duplex_completion_gate": "bijection pi:A0->B0 with ratio multiset C0 and three new cells",
             "projection_fibers_for_a_b_and_a_over_b": {
               "doubletons": 725,
@@ -817,6 +931,23 @@
       }
     }
   ],
+  "period_four_recurrence_sharpness_microcheck": {
+    "consequence": "q/3 leading moment-support coefficient is recurrence-sharp",
+    "distinct_bases": 3,
+    "distinct_missing_b_coordinates": 3,
+    "distinct_missing_ratio_coordinates": 3,
+    "distinct_nonzero_weights": 3,
+    "field_order": 9,
+    "zero_pattern_over_two_periods": "00110011"
+  },
+  "q27_chart_compatibility_microcheck": {
+    "critical_band_reversal_evaluations": 16,
+    "field_order": 27,
+    "nonzero_consecutive_3_by_3_hankel_minors": 12,
+    "reciprocal_P_evaluations": 26,
+    "reciprocal_W_evaluations": 26,
+    "zero_consecutive_4_by_4_hankel_minors": 10
+  },
   "raw_concurrent_rows_for_sublinear_repair": [
     [
       1,

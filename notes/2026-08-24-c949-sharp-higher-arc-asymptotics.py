@@ -3415,18 +3415,57 @@ def audit_sharp_linear_coefficient(output: Path) -> None:
             "fiber_square_sum_consecutive_moments": q // 3 - 2,
             "zero_completed_singleton_fibers": 3,
             "compatible_triangle_charts": 3,
+            "independent_quadratic_chart_forms_after_reciprocal_transition": 2,
+            "reciprocal_fiber_sum_degree_reversal_range": [0, r],
+            "reciprocal_fiber_product_degree_reversal_range": [0, 2 * r],
             "two_monomial_completion_possible": False,
             "monomial_vandermonde_zero_run": (2 * q // 3 - 2) // 3,
             "minimum_completion_moment_support_per_chart": (
-                (2 * q // 3 - 2) // 3
+                r - 2
             ),
             "minimum_completion_trace_fourier_support_per_chart": (
-                (2 * q // 3 - 2) // 3
+                r - 2
             ),
             "minimum_completion_trace_degree_per_chart": (
-                (2 * q // 3 - 2) // 3 - 1
+                (q - 5) // 2
             ),
+            "minimum_nonzero_moments_per_length_five_window": 2,
+            "forbidden_completion_moment_zero_patterns": [
+                "000", "00100", "001010"
+            ],
+            "maximum_zero_minus_nonzero_count_in_any_interval": 2,
+            "original_line_functional_root_cap": 5,
+            "nonvertical_line_parameters_allowing_a_fifth_root": 3 * (q - 1),
+            "all_other_nonzero_line_functional_root_cap": 4,
+            "zero_line_exact_roots": 3,
+            "critical_moment_band": [1, 2 * r - 2],
+            "critical_moment_band_length": 2 * r - 2,
+            "reciprocal_chart_reversal": "i -> 2r-1-i",
+            "reciprocal_chart_reversal_pairs": r - 1,
+            "nonzero_consecutive_3_by_3_hankel_minors": 2 * r - 6,
+            "zero_consecutive_4_by_4_hankel_minors": 2 * r - 8,
         }
+        zero_pattern_states = {"": 0}
+        for _ in range(2 * r - 2):
+            next_states = {}
+            for tail, support in zero_pattern_states.items():
+                for bit in "01":
+                    word = tail + bit
+                    if any(pattern in word
+                           for pattern in ("000", "00100", "001010")):
+                        continue
+                    next_tail = word[-5:]
+                    next_support = support + (bit == "1")
+                    next_states[next_tail] = min(
+                        next_states.get(next_tail, 2 * r), next_support
+                    )
+            zero_pattern_states = next_states
+        zero_pattern_minimum_support = min(zero_pattern_states.values())
+        if zero_pattern_minimum_support != r - 2:
+            raise AssertionError("the zero-run support bound changed")
+        frobenius_fiber_normal_form[
+            "zero_pattern_automaton_minimum_band_support"
+        ] = zero_pattern_minimum_support
         if frobenius_fiber_normal_form["monomial_vandermonde_zero_run"] < 3:
             raise AssertionError("the monomial Vandermonde exclusion lost its zero run")
         if (frobenius_fiber_normal_form[
@@ -3437,6 +3476,30 @@ def audit_sharp_linear_coefficient(output: Path) -> None:
                 != frobenius_fiber_normal_form[
                     "minimum_completion_moment_support_per_chart"]):
             raise AssertionError("Frobenius failed to preserve trace sparsity")
+        trace_exponents_from_high_band = sorted({
+            (3 * exponent) % (q - 1)
+            for exponent in range(r + 1, q - 1)
+        })
+        if (len(trace_exponents_from_high_band) != 2 * r - 2
+                or trace_exponents_from_high_band[r - 3] != (q - 5) // 2):
+            raise AssertionError("the trace-frequency degree gate changed")
+        critical_band = list(range(1, 2 * r - 1))
+        reversed_band = [2 * r - 1 - i for i in critical_band]
+        if sorted(reversed_band) != critical_band:
+            raise AssertionError("the reciprocal-chart band is not preserved")
+        if any(2 * r - 1 - (2 * r - 1 - i) != i
+               for i in critical_band):
+            raise AssertionError("the reciprocal-chart reversal is not involutive")
+        if any(2 * i == 2 * r - 1 for i in critical_band):
+            raise AssertionError("the reciprocal-chart reversal gained a fixed index")
+        if len(critical_band) // 2 != frobenius_fiber_normal_form[
+                "reciprocal_chart_reversal_pairs"]:
+            raise AssertionError("the reciprocal-chart pair count changed")
+        if (frobenius_fiber_normal_form[
+                "nonzero_consecutive_3_by_3_hankel_minors"] <= 0
+                or frobenius_fiber_normal_form[
+                    "zero_consecutive_4_by_4_hankel_minors"] <= 0):
+            raise AssertionError("the Prony-rank audit lost its consecutive windows")
 
         field_checks.append({
             "field_order": q,
@@ -3521,6 +3584,14 @@ def audit_sharp_linear_coefficient(output: Path) -> None:
                             "bijection pi:A0->B0 with ratio multiset C0 and "
                             "three new cells"
                         ),
+                        "completion_gate_compression": {
+                            "candidate_bijections": 6,
+                            "symmetric_scalar_checks_after_product_identity": 2,
+                            "checks": [
+                                "sum a/pi(a)=e1(C0)",
+                                "sum pi(a)/a=e2(C0)/e3(C0)",
+                            ],
+                        },
                         "canonical_cyclic_duplex": {
                             "carrier": ["a*b=1", "a*b=gamma"],
                             "common_external_line_lower_bound": (
@@ -3593,6 +3664,181 @@ def audit_sharp_linear_coefficient(output: Path) -> None:
             },
         })
 
+    # Deterministic finite-field replay of the new reciprocal-chart formulas.
+    # This is a microcheck of the identities, not evidence for existence of a
+    # target carrier.
+    chart_field = Field(27)
+    chart_q = chart_field.q
+    chart_r = chart_q // 3
+    primitive = next(
+        value for value in range(2, chart_q)
+        if len({chart_field.pow(value, exponent)
+                for exponent in range(chart_q - 1)}) == chart_q - 1
+    )
+
+    def polynomial_value(coefficients: list[int], value: int) -> int:
+        result = 0
+        for coefficient in reversed(coefficients):
+            result = chart_field.add(
+                chart_field.mul(result, value), coefficient
+            )
+        return result
+
+    def determinant(matrix: list[list[int]]) -> int:
+        work = [row[:] for row in matrix]
+        result = 1
+        for column in range(len(work)):
+            pivot = next(
+                (row for row in range(column, len(work))
+                 if work[row][column] != 0),
+                None,
+            )
+            if pivot is None:
+                return 0
+            if pivot != column:
+                work[column], work[pivot] = work[pivot], work[column]
+                result = chart_field.neg(result)
+            pivot_value = work[column][column]
+            result = chart_field.mul(result, pivot_value)
+            pivot_inverse = chart_field.inv(pivot_value)
+            for entry in range(column, len(work)):
+                work[column][entry] = chart_field.mul(
+                    work[column][entry], pivot_inverse
+                )
+            for row in range(column + 1, len(work)):
+                multiple = work[row][column]
+                for entry in range(column, len(work)):
+                    work[row][entry] = chart_field.add(
+                        work[row][entry],
+                        chart_field.neg(chart_field.mul(
+                            multiple, work[column][entry]
+                        )),
+                    )
+        return result
+
+    sum_coefficients = [
+        chart_field.pow(primitive, (degree * degree + 1) % (chart_q - 1))
+        for degree in range(chart_r + 1)
+    ]
+    product_coefficients = [
+        chart_field.pow(primitive, (degree * degree + degree + 1)
+                        % (chart_q - 1))
+        for degree in range(2 * chart_r + 1)
+    ]
+    reversed_sum_coefficients = list(reversed(sum_coefficients))
+    reversed_product_coefficients = list(reversed(product_coefficients))
+    for c in range(1, chart_q):
+        inverse_c = chart_field.inv(c)
+        if polynomial_value(reversed_sum_coefficients, inverse_c) != (
+                chart_field.mul(
+                    chart_field.pow(c, chart_q - 1 - chart_r),
+                    polynomial_value(sum_coefficients, c),
+                )):
+            raise AssertionError("the reciprocal W transition failed")
+        if polynomial_value(reversed_product_coefficients, inverse_c) != (
+                chart_field.mul(
+                    chart_field.pow(c, chart_q - 1 - 2 * chart_r),
+                    polynomial_value(product_coefficients, c),
+                )):
+            raise AssertionError("the reciprocal P transition failed")
+
+    cell_a = [chart_field.pow(primitive, exponent) for exponent in (1, 2, 4)]
+    cell_c = [chart_field.pow(primitive, exponent) for exponent in (3, 5, 7)]
+    lambda_one = [chart_field.pow(a, chart_q - 1 - chart_r) for a in cell_a]
+    lambda_two = [
+        chart_field.mul(weight, chart_field.pow(c, chart_q - 1 - chart_r))
+        for weight, c in zip(lambda_one, cell_c)
+    ]
+
+    def exponential_moment(weights: list[int], bases: list[int], index: int) -> int:
+        total = 0
+        for weight, base in zip(weights, bases):
+            total = chart_field.add(
+                total, chart_field.mul(weight, chart_field.pow(base, index))
+            )
+        return total
+
+    moment_one = {
+        index: exponential_moment(lambda_one, cell_c, index)
+        for index in range(1, 2 * chart_r - 1)
+    }
+    inverse_cell_c = [chart_field.inv(c) for c in cell_c]
+    moment_two = {
+        index: exponential_moment(lambda_two, inverse_cell_c, index)
+        for index in range(1, 2 * chart_r - 1)
+    }
+    if any(moment_two[index] != moment_one[2 * chart_r - 1 - index]
+           for index in moment_two):
+        raise AssertionError("the reciprocal critical-band reversal failed")
+    nonzero_hankel_three = 0
+    for start in range(1, 2 * chart_r - 5):
+        matrix = [[moment_one[start + row + column] for column in range(3)]
+                  for row in range(3)]
+        if determinant(matrix) == 0:
+            raise AssertionError("a rank-three Prony minor vanished")
+        nonzero_hankel_three += 1
+    zero_hankel_four = 0
+    for start in range(1, 2 * chart_r - 7):
+        matrix = [[moment_one[start + row + column] for column in range(4)]
+                  for row in range(4)]
+        if determinant(matrix) != 0:
+            raise AssertionError("a rank-four Prony minor survived")
+        zero_hankel_four += 1
+
+    chart_compatibility_microcheck = {
+        "field_order": chart_q,
+        "reciprocal_W_evaluations": chart_q - 1,
+        "reciprocal_P_evaluations": chart_q - 1,
+        "critical_band_reversal_evaluations": 2 * chart_r - 2,
+        "nonzero_consecutive_3_by_3_hankel_minors": nonzero_hankel_three,
+        "zero_consecutive_4_by_4_hankel_minors": zero_hankel_four,
+    }
+
+    sharp_field = Field(9)
+    minus_one = sharp_field.neg(1)
+    omega = next(value for value in range(1, sharp_field.q)
+                 if sharp_field.mul(value, value) == minus_one)
+    sharp_bases = [1, omega, minus_one]
+    sharp_weights = [
+        sharp_field.add(1, omega),
+        1,
+        sharp_field.add(1, sharp_field.neg(omega)),
+    ]
+    sharp_sequence = []
+    for index in range(8):
+        value = 0
+        for weight, base in zip(sharp_weights, sharp_bases):
+            value = sharp_field.add(
+                value, sharp_field.mul(weight, sharp_field.pow(base, index))
+            )
+        sharp_sequence.append(value)
+    if [value == 0 for value in sharp_sequence] != [
+            True, True, False, False, True, True, False, False]:
+        raise AssertionError("the period-four recurrence pattern changed")
+    sharp_b_coordinates = [sharp_field.pow(weight, 3) for weight in sharp_weights]
+    sharp_ratios = [
+        sharp_field.mul(b_value, sharp_field.inv(a_value))
+        for a_value, b_value in zip(sharp_bases, sharp_b_coordinates)
+    ]
+    if (len(set(sharp_bases)) != 3
+            or len(set(sharp_weights)) != 3
+            or len(set(sharp_b_coordinates)) != 3
+            or len(set(sharp_ratios)) != 3
+            or 0 in sharp_bases
+            or 0 in sharp_weights
+            or 0 in sharp_b_coordinates
+            or 0 in sharp_ratios):
+        raise AssertionError("the period-four transversal lost distinctness")
+    recurrence_sharpness_microcheck = {
+        "field_order": sharp_field.q,
+        "zero_pattern_over_two_periods": "00110011",
+        "distinct_bases": len(set(sharp_bases)),
+        "distinct_nonzero_weights": len(set(sharp_weights)),
+        "distinct_missing_b_coordinates": len(set(sharp_b_coordinates)),
+        "distinct_missing_ratio_coordinates": len(set(sharp_ratios)),
+        "consequence": "q/3 leading moment-support coefficient is recurrence-sharp",
+    }
+
     output.write_text(json.dumps({
         "schema": "c949-sharp-linear-coefficient-audit-v2",
         "scope": (
@@ -3621,6 +3867,10 @@ def audit_sharp_linear_coefficient(output: Path) -> None:
             [4, -3], [5, -1]
         ],
         "field_checks": field_checks,
+        "q27_chart_compatibility_microcheck": chart_compatibility_microcheck,
+        "period_four_recurrence_sharpness_microcheck": (
+            recurrence_sharpness_microcheck
+        ),
         "checked": True,
     }, indent=2, sort_keys=True) + "\n")
 

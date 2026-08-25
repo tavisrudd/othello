@@ -7,7 +7,7 @@
 now `5/3`; the exact `5/3` endpoint is also absent, while a matching
 `5/3+o(1)` construction remains open; the sharpest `+1` triangular target is
 reduced to the almost-duplex/near-Rédei/moment conditions
-`(SR18)--(SR24l')`; no
+`(SR18)--(SR24p)`; no
 manuscript work
 
 ## First-gate findings — 24 August 2026
@@ -1646,6 +1646,23 @@ matchings.  So that branch is exactly a two-permutation full duplex followed
 by deletion of a three-cell transversal; the complementary branch fails the
 finite test before any geometric line-cap analysis.
 
+The gate has an exact two-scalar form.  For a three-set `S`, write
+`e_j(S)` for its elementary symmetric functions.  For each of the six
+bijections `pi:A_0 -> B_0`, put `r_a=a/pi(a)`.  The product identity
+`(SR19)` already gives `e_3({r_a})=e_3(C_0)`, so equality of the two
+three-element multisets is equivalent to just
+
+```text
+sum_a a/pi(a) = e_1(C_0),
+sum_a pi(a)/a = e_2(C_0)/e_3(C_0).                  (SR19d)
+```
+
+Indeed the second equation is the `e_2` equation divided by the common
+nonzero product.  Thus nonextendability is not an amorphous Latin-square
+failure: after deleting forbidden cells, it is the failure of six explicitly
+defined points in `F_q^2` to hit one prescribed pair.  This compresses the
+finite gate but does not make the product identity sufficient.
+
 The distinction is real already at the singleton-data level over `F_81`.
 For an element `zeta` of order eight, take singleton sets with exponent sets
 
@@ -1946,11 +1963,55 @@ mu_i(K)=sum_{(a,b) in K}a^i b^r,       1<=i<=2r-2.
 
 The deletion identity says that `mu_i(K)=sum_t b_t^r a_t^i`.  Since the
 right side cannot vanish at three consecutive indices, the support of
-`i |-> mu_i(K)` must meet every length-three interval.  Consequently
+`i |-> mu_i(K)` must meet every length-three interval.  There is a sharper
+characteristic-three consequence.  Write its recurrence polynomial as
 
 ```text
-#{i in [1,2r-2]:mu_i(K)!=0} >= floor((2r-2)/3).     (SR24j)
+T^3-e_1T^2+e_2T-e_3=prod_t(T-a_t).
 ```
+
+If five consecutive moments had only their middle term nonzero, the first
+two recurrence steps would force `e_1=e_2=0`.  But then the polynomial would
+be `T^3-e_3`, a cube over the perfect field `F_q`, contradicting the three
+distinct `a_t`.  Thus the zero pattern `00100` is forbidden.  The longer
+pattern `001010` is also impossible: after normalizing its nonzero middle
+entry to `A`, the zero at the fourth position forces `e_1=0`, while the zero
+at the sixth would read `0=e_3A`, contradicting `e_3!=0`.
+
+These three forbidden patterns give a sharp elementary density count.  Split
+the zeros in any finite moment interval into singleton and double runs;
+`000` is forbidden.  There is at least one nonzero between consecutive zero
+runs.  After every double run except possibly the last, there is one
+additional nonzero: a single intervening nonzero before another double run
+would give `00100`, while a single intervening nonzero, then a singleton zero
+run, then another single nonzero would begin `001010`.  Hence the number of
+zeros exceeds the number of nonzeros by at most two.  On the interval of
+length `2r-2` this gives
+
+```text
+#{i in [1,2r-2]:mu_i(K)!=0} >= r-2=q/3-2.           (SR24j)
+```
+
+This improves the earlier no-three-zero bound `2q/9-O(1)` to the
+half-density scale `q/3-O(1)` on the critical band.
+
+The leading constant here is sharp for the recurrence information alone.
+When the extension degree `h` is even, choose `omega in F_q` with
+`omega^2=-1`.  The three distinct bases and nonzero weights
+
+```text
+(x_1,x_2,x_3)=(1,omega,-1),
+(lambda_1,lambda_2,lambda_3)=(1+omega,1,1-omega)
+```
+
+give `mu_0=mu_1=0`, `mu_2=1`, `mu_3=omega`, and then repeat with period
+four.  Since `2r-2` is divisible by four, the critical band has exactly
+`r-1` nonzero terms.  Moreover the corresponding missing-cell coordinates
+`b_t=lambda_t^3` and ratios `b_t/x_t` (hence also `x_t/b_t`) are three
+distinct nonzero values.  Thus even the transversal distinctness conditions
+do not improve the `q/3` leading spectral coefficient.  This is not a construction of
+`H`: any stronger asymptotic exclusion must use the common-carrier or line
+root gates, rather than the order-three recurrence by itself.
 
 Equivalently, the interpolation polynomial for the completed fiber-sum
 function must have at least that many nonzero coefficients in the high-degree
@@ -1974,21 +2035,149 @@ polynomial on `F_q^*` to the `r`th power permutes its exponent frequencies
 modulo `q-1` without collisions.  Therefore `(SR24j)` also forces
 
 ```text
-Fourier-support(tau) >= floor((2r-2)/3)              (SR24j')
+Fourier-support(tau) >= r-2=q/3-2                    (SR24j')
 ```
 
 in each of the three charts.  The obstruction is thus not an artifact of a
 particular two-permutation decomposition: every successful full-duplex trace
-must already have linear multiplicative-Fourier complexity.  Since a
-polynomial with `s` nonzero monomials has degree at least `s-1`, its unique
-interpolation polynomial also obeys
+must already have linear multiplicative-Fourier complexity.  The location of
+those frequencies gives a sharper degree bound.  Since `3r=q=1 mod (q-1)`,
+the inverse frequency map from `w_K=tau^r` back to `tau` is multiplication by
+three modulo `q-1`.  The image of the high band `r+1,...,3r-2` is, in
+increasing order,
 
 ```text
-deg tau >= floor((2r-2)/3)-1.                        (SR24j'')
+2;  4,5;  7,8;  ...;  3r-5,3r-4;  3r-2.
+```
+
+Among `r-2` distinct positions in this set, the smallest possible largest
+one is its `(r-2)`nd entry, `(3r-5)/2`.  Hence the unique interpolation
+polynomial obeys
+
+```text
+deg tau >= (3r-5)/2=(q-5)/2.                        (SR24j'')
 ```
 
 Thus low-degree trace families are excluded even when their two permutation
 graphs are individually complicated.
+
+The Frobenius normal form also puts the original line test back into one
+exact equation.  Since `z=b^r` and `3r=q`, cubing the carrier equation in
+`(SR24f)` gives, pointwise on `F_q^*`, the following equivalent equation
+(the Frobenius cube is injective):
+
+```text
+b^2-W(a)^3 b+P(a)^3=0.                              (SR24m)
+```
+
+Consequently a nonvertical affine line `b=ma+c` meets the zero-completed
+carrier at precisely the nonzero roots of
+
+```text
+R_{m,c}(a)=(ma+c)^2-W(a)^3(ma+c)+P(a)^3.
+```
+
+More explicitly, its number of such roots is
+
+```text
+#(H intersection {b=ma+c})
+  +#{a in A_0:ma+c=0}.
+```
+
+Thus `R_{m,c}` has at most five roots in `F_q^*` for every `(m,c)`, while
+`R_{0,0}` has exactly the three roots `A_0`.  This is a functional root
+condition, not a claim that the displayed formal polynomial has small
+degree: `W^3` and `P^3` must be reduced as functions on `F_q^*`.  It is the
+exact way the geometric four-secant cap survives the nonprojective
+Frobenius change.
+
+The possible fifth root is sparse and completely located.  Apart from the
+zero line, it can occur only when `m!=0` and `-c/m in A_0`, because that is
+exactly when the line contains one of the three adjoined zero cells.  There
+are precisely `3(q-1)` such parameter pairs `(m,c)`; every other nonzero
+`R_{m,c}` has at most four roots, and every vertical completed fiber has
+exactly two points.  Thus any polynomial attack only needs to control a
+linear-sized exceptional subfamily of the `q^2` nonvertical line tests.
+
+One of the three chart compatibilities is in fact completely explicit and
+does not require extendability.  Between the last two charts in `(SR24g)`,
+write `c=b/a`.  Their coordinates obey
+
+```text
+(u_2,v_2)=(c,1/a),          (u_3,v_3)=(c^(-1),c^(-1)v_2).
+```
+
+The singleton fibers correspond under `c |-> c^(-1)`, and their adjoined
+zero values correspond as well.  Scaling the two Frobenius roots in each
+fiber therefore gives the exact transition laws
+
+```text
+W_3(c^(-1))=c^(-r)W_2(c),
+P_3(c^(-1))=c^(-2r)P_2(c).                          (SR24n)
+```
+
+Equivalently, if `W_2(X)=sum_{d=0}^r w_dX^d`, then
+`W_3(Y)=sum_d w_dY^(r-d)`, and the same reversal holds across degrees
+`0,...,2r` for `P`.  Thus the third quadratic normal form is determined by
+the second; it is not a third independent constraint.  The genuinely
+nonlinear compatibility gate is between the first carrier and the second:
+on the torus their common set `H` is described equivalently by
+
+```text
+b^(2r)-W_1(a)b^r+P_1(a)=0,
+1-W_2(b/a)a^r+P_2(b/a)a^(2r)=0.
+```
+
+Both cleared expressions have total degree at most `2r`, but the shared
+set has only `2q-5` points, far below a Bezout factor-forcing threshold;
+the transition law alone is therefore a compression, not a contradiction.
+
+For an extendable almost-duplex there is a further coupled obstruction.
+Write the three completing cells as
+`R={(a_t,b_t):1<=t<=3}` and put, in each chart,
+
+```text
+mu_i^(nu)=sum_{(u,v) in K_nu} u^i v^r,
+                                      1<=i<=2r-2.   (SR24o)
+```
+
+The carry-free moment vanishing on `H` says that these are exactly the
+three-cell deletion sums.  In the three charts of `(SR24g)` they are
+
+```text
+mu_i^(0)=sum_t b_t^r a_t^i,
+mu_i^(1)=sum_t a_t^(-r)(b_t/a_t)^i,
+mu_i^(2)=sum_t b_t^(-r)(a_t/b_t)^i.
+```
+
+Set `c_t=b_t/a_t`.  Since `q-1=3r-1`, the last two formulas give the exact
+critical-band reversal
+
+```text
+mu_i^(2)=mu_(2r-1-i)^(1),             1<=i<=2r-2.   (SR24p)
+```
+
+Moreover each displayed moment sequence has exact Prony rank three on this
+band.  Indeed it has the form `mu_i=sum_t lambda_t x_t^i`, with three
+distinct nonzero `x_t` and three nonzero `lambda_t`.  Therefore, whenever
+the indicated entries stay in the band,
+
+```text
+det(mu_(k+i+j))_(0<=i,j<=2)
+ = (prod_t lambda_t x_t^k) prod_(s<t)(x_t-x_s)^2 !=0,
+det(mu_(k+i+j))_(0<=i,j<=3)=0.
+```
+
+Equivalently, every completion band obeys one third-order recurrence whose
+characteristic roots are its three singleton coordinates.  The two
+reciprocal charts must have reciprocal characteristic roots, paired weights
+`lambda_t^(2)=lambda_t^(1)c_t^(-r)`, and the full reversal `(SR24p)`; the
+third chart comes from the same three cells.  This is a coupled three-chart
+compatibility certificate, substantially stronger than imposing the
+no-three-consecutive-zeros condition separately.  Its scope is deliberately
+conditional: it obstructs candidates that pass the singleton completion
+gate, but it neither proves that every target core is extendable nor closes
+the nonextendable branch.
 
 There is an equivalent exact dual-code certificate.  Let `V` be the three
 triangle vertices and let `L_infty` be the connector chosen as the line at
@@ -2405,12 +2594,16 @@ family is lower priority.
   force `H` to occupy at least `q-6` intercepts in each of `q-2` directions,
   with no fiber above four, and `(SR24)` fixes every full-core parallel-class
   profile.  In characteristic three these profiles force the carry-free
-  moment triangle `(SR24b)--(SR24d)`, the three compatible
-  Frobenius-quadratic normal forms `(SR24e)--(SR24g)`, and the weight-`3q`
+  moment triangle `(SR24b)--(SR24d)`, the Frobenius-quadratic normal forms
+  `(SR24e)--(SR24g)` (only two independent by `(SR24n)`), the original-line
+  root gate `(SR24m)`, the coupled Prony/reversal obstruction
+  `(SR24n)--(SR24p)`, and the weight-`3q`
   dual word and signed spectrum `(SR24k)--(SR24l')`.  The Vandermonde obstruction
   `(SR24h)--(SR24j)` eliminates every two-monomial completion
-  and, more generally, forces `Omega(q)` completed-fiber spectral complexity
-  in each triangle chart.  The other triangular row requires a linear
+  and, more generally, forces at least `q/3-2` completed-fiber frequencies
+  and trace degree at least `(q-5)/2` in each triangle chart; the leading
+  coefficient is recurrence-sharp before the geometric gates are imposed.
+  The other triangular row requires a linear
   high-secant trade and
   is therefore a less rigid first target.
 - **Settled by `ej`+`tt` — is the nearest classical four-blocking-set core a
