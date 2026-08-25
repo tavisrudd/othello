@@ -1,0 +1,204 @@
+{
+  "action_convention": "an element (p,F) sends an odd subset I to p(I) symmetric-difference F",
+  "certified": [
+    "the Proposition 5.1 group has order 12",
+    "the C956 type-I3 group has order 24",
+    "the chosen W(D5) conjugation embeds the former into the latter",
+    "the pulled-back four-block set and boundary are type-I1 stable",
+    "the displayed coordinate and block permutations follow from the odd-subset action",
+    "the selected twelve coordinates form a regular type-I1 G-set and the boundary is G/C3"
+  ],
+  "chosen_conjugator": {
+    "flipped_indices_1_based": [],
+    "permutation_images_1_based": [
+      1,
+      2,
+      5,
+      3,
+      4
+    ]
+  },
+  "coordinate_orbits": [
+    [
+      "E4",
+      "E5",
+      "L45",
+      "Q"
+    ],
+    [
+      "E1",
+      "E2",
+      "E3",
+      "L12",
+      "L13",
+      "L14",
+      "L15",
+      "L23",
+      "L24",
+      "L25",
+      "L34",
+      "L35"
+    ]
+  ],
+  "not_certified": [
+    "scalar normalization of Cox generators under semilinear Galois descent",
+    "a ground-field tangent point or orbit-test point",
+    "ground-field signed-minor formulas"
+  ],
+  "number_of_conjugators_into_type_i3": 48,
+  "permutation_module_structure": {
+    "boundary_four_stabilizer_order": 3,
+    "four_block_action_image_order": 4,
+    "four_block_action_kernel_order": 3,
+    "interpretation": "the selected coordinates are the regular G-set; the boundary and four blocks are G/C3",
+    "selected_twelve_is_regular": true,
+    "selected_twelve_stabilizer_order": 1
+  },
+  "pulled_back_boundary": [
+    "E4",
+    "E5",
+    "L45",
+    "Q"
+  ],
+  "pulled_back_selected_blocks": [
+    [
+      "L14",
+      "L24",
+      "L34"
+    ],
+    [
+      "L15",
+      "L25",
+      "L35"
+    ],
+    [
+      "E1",
+      "E2",
+      "E3"
+    ],
+    [
+      "L12",
+      "L13",
+      "L23"
+    ]
+  ],
+  "schema": "c958-type-i1-descent-action-v1",
+  "type_i1_generator_block_actions_zero_based": [
+    [
+      0,
+      1,
+      2,
+      3
+    ],
+    [
+      2,
+      3,
+      0,
+      1
+    ],
+    [
+      1,
+      0,
+      3,
+      2
+    ]
+  ],
+  "type_i1_generator_coordinate_actions": [
+    {
+      "E1": "E2",
+      "E2": "E3",
+      "E3": "E1",
+      "E4": "E4",
+      "E5": "E5",
+      "L12": "L23",
+      "L13": "L12",
+      "L14": "L24",
+      "L15": "L25",
+      "L23": "L13",
+      "L24": "L34",
+      "L25": "L35",
+      "L34": "L14",
+      "L35": "L15",
+      "L45": "L45",
+      "Q": "Q"
+    },
+    {
+      "E1": "L14",
+      "E2": "L34",
+      "E3": "L24",
+      "E4": "Q",
+      "E5": "L45",
+      "L12": "L25",
+      "L13": "L35",
+      "L14": "E1",
+      "L15": "L23",
+      "L23": "L15",
+      "L24": "E3",
+      "L25": "L12",
+      "L34": "E2",
+      "L35": "L13",
+      "L45": "E5",
+      "Q": "E4"
+    },
+    {
+      "E1": "L23",
+      "E2": "L13",
+      "E3": "L12",
+      "E4": "E5",
+      "E5": "E4",
+      "L12": "E3",
+      "L13": "E2",
+      "L14": "L15",
+      "L15": "L14",
+      "L23": "E1",
+      "L24": "L25",
+      "L25": "L24",
+      "L34": "L35",
+      "L35": "L34",
+      "L45": "Q",
+      "Q": "L45"
+    }
+  ],
+  "type_i1_generators": [
+    {
+      "flipped_indices_1_based": [],
+      "permutation_images_1_based": [
+        2,
+        3,
+        1,
+        4,
+        5
+      ]
+    },
+    {
+      "flipped_indices_1_based": [
+        1,
+        2,
+        3,
+        5
+      ],
+      "permutation_images_1_based": [
+        1,
+        3,
+        2,
+        4,
+        5
+      ]
+    },
+    {
+      "flipped_indices_1_based": [
+        4,
+        5
+      ],
+      "permutation_images_1_based": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    }
+  ],
+  "type_i1_order": 12,
+  "type_i3_order": 24
+}

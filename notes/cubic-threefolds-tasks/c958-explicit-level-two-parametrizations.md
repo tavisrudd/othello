@@ -23,6 +23,15 @@ equivariant descended Cox representation, and express a rational
 tangent/orbit-test pair in it.  Descend the four block evaluations and their
 Plücker coordinates before expanding the full hyperplanes.
 
+The finite permutation part of this descent is now exact.  After an explicit
+`W(D5)` conjugation, the twelve selected Cox coordinates form the regular
+type-`I_1` Galois set, while the four boundary coordinates and the four
+quotient blocks are both `G/C3`.  Thus the scalar-normalized affine Cox module
+has the prospective descended form `L + L^C3`.  The remaining gate is to
+construct the scalar normalization and trace coordinates over the generic
+function field, not to identify the Galois permutations.  Report and replay:
+`notes/2026-08-24-c958-type-i1-descent-action.md` and its adjacent bundle.
+
 ## Goal
 
 Turn the constructive existence proof in C956 into explicit, independently
