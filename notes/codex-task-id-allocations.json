@@ -3518,8 +3518,17 @@
       "last": 962,
       "purpose": "develop, validate, and benchmark exact recovery-cost composition algorithms and derived bounds",
       "sequence": 391
+    },
+    {
+      "count": 1,
+      "first": 963,
+      "kind": "reservation",
+      "lane": "cubic-threefolds",
+      "last": 963,
+      "purpose": "C958 successor: proof-producing stable-rationality workbench with explicit maps, complexity bounds, exceptional loci, and cancellation specialization",
+      "sequence": 392
     }
   ],
-  "next_id": 963,
+  "next_id": 964,
   "schema": "codex-task-id-allocations-v1"
 }
