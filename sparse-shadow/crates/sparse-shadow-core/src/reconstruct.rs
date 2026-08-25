@@ -74,6 +74,7 @@ pub fn verify_reconstruction(
         ));
     };
     verify_certificate(input, &artifact.canonical.certificate)?;
+    crate::canonical::verify_canonical_artifact_fields(&artifact.canonical)?;
     if artifact.round_trip_shadow != artifact.canonical.canonical {
         return Err(ShadowError::Certificate(
             "round-trip shadow differs from the verified canonical shadow".into(),
@@ -93,6 +94,6 @@ pub fn verify_reconstruction(
     Ok(VerificationReport {
         valid: true,
         canonical_id: Some(artifact.canonical.canonical_id.clone()),
-        checked_automorphisms: artifact.canonical.automorphism_generators.len(),
+        checked_automorphisms: artifact.canonical.certificate.automorphisms.len(),
     })
 }

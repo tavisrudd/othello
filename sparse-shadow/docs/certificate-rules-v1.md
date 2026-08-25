@@ -37,9 +37,14 @@ Only after rules 1--8 pass is BLAKE3 recomputed as the stable artifact identity.
 Equivalence additionally verifies the composed left-to-right transporter.
 Inequivalence requires two accepted canonical certificates with unequal
 identities. Reconstruction additionally verifies the carrier label, residual
-orientation ambiguity, calibrated exact-return flag, and round-trip shadow.
+orientation ambiguity, calibrated exact-return flag, and round-trip shadow. It
+also binds every enclosing canonical-artifact field to the replayed proof:
+schema, identity, payload, transporter, search statistics, group order,
+generator closure, and vertex orbits. Generator replay is membership-bounded by
+the certified full group, so hostile wrapper data cannot trigger an unbounded
+closure search. Wrapper metadata cannot be altered while retaining a valid
+embedded certificate.
 
 The first fixture's certificate is about 5.1 KiB because it carries all 120
 automorphisms. The public artifact reports a three-element generating set, but
 the proof retains the full set so completeness is independently checkable.
-

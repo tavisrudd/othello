@@ -33,7 +33,9 @@ cargo run -p sparse-shadow-cli -- equivalent LEFT.json RIGHT.json
 
 `equivalent` emits explicit isomorphism witnesses or an inequivalence separator
 backed by both exhaustive canonical certificates. Dedicated verifier commands
-replay equivalence and reconstruction artifacts from the raw input(s).
+replay canonical, equivalence, and reconstruction artifacts from the raw
+input(s). Black-box tests pass each emitted certificate back through its CLI
+verifier and require corrupted artifacts to exit nonzero.
 
 See `docs/schema-v1.md`, `docs/certificate-rules-v1.md`,
 `docs/dependency-audit.md`, `docs/prior-art-audit.md`, and

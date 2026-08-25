@@ -50,6 +50,14 @@ fn fixture_validates_and_has_expected_symmetry() {
 }
 
 #[test]
+fn canonicalization_is_idempotent() {
+    let first = canonicalize(&fixture()).expect("canonical fixture");
+    let second = canonicalize(&first.canonical).expect("canonical form canonicalizes");
+    assert_eq!(second.canonical_id, first.canonical_id);
+    assert_eq!(second.canonical, first.canonical);
+}
+
+#[test]
 fn certificate_replays_and_corruption_is_rejected() {
     let input = fixture();
     let artifact = canonicalize(&input).expect("canonical fixture");
@@ -126,6 +134,18 @@ fn reconstruction_reports_unoriented_c2_fibre() {
     let mut corrupt = reconstructed;
     corrupt.carrier = "wrong_carrier".into();
     assert!(verify_reconstruction(&fixture(), &corrupt).is_err());
+
+    let mut corrupt_wrapper = reconstruct(&fixture()).expect("reconstruction");
+    corrupt_wrapper.canonical.automorphism_order -= 1;
+    assert!(verify_reconstruction(&fixture(), &corrupt_wrapper).is_err());
+
+    let mut corrupt_generators = reconstruct(&fixture()).expect("reconstruction");
+    corrupt_generators.canonical.automorphism_generators.clear();
+    assert!(verify_reconstruction(&fixture(), &corrupt_generators).is_err());
+
+    let mut corrupt_orbits = reconstruct(&fixture()).expect("reconstruction");
+    corrupt_orbits.canonical.vertex_orbits.clear();
+    assert!(verify_reconstruction(&fixture(), &corrupt_orbits).is_err());
 }
 
 #[test]

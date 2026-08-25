@@ -54,7 +54,13 @@ serialized tree.
 - black-box CLI tests: Paper-I validation succeeds, every gated Paper-II--V
   input exits nonzero while naming its own exact required export, repeated
   canonicalize runs are byte-identical, and identical inputs compare
-  equivalent;
+  equivalent; canonical, equivalence, and reconstruction outputs all replay
+  through their CLI verifier, while a corrupted form of each exits nonzero;
+- canonicalization idempotence is tested; reconstruction replay binds the
+  enclosing canonical schema, identity, payload, transporter, statistics,
+  group order, generator closure, and vertex orbits to the independently
+  replayed certificate; hostile generators are rejected by a closure walk
+  bounded inside the certified full group;
 - deliberate canonical-identity, branch-trace, and automorphism-set corruption:
   rejected by the independent reference implementation.
 - hot Paper-I search: fixed 32/64/128-byte guarded records; zero allocations,
@@ -87,8 +93,10 @@ baseline. No novelty or priority claim is licensed.
 - **Settled for Paper I — certificate trust:** the explicit eight-rule
   `paper-i-ir-exhaustion/v1` system is implemented by a separate exhaustive
   checker; result, trace, full automorphism set, and every search counter must
-  agree. Future adapters will require action-specific rule extensions and may
-  not inherit this verdict automatically.
+  agree. A later wrapper audit also closed the possibility of retaining a valid
+  embedded proof while corrupting public group/order/orbit metadata. Future
+  adapters will require action-specific rule extensions and may not inherit
+  this verdict automatically.
 - **Open — source exports:** nearby evidence files exist for Papers II--V, but
   none is the complete frozen shadow required by its typed adapter. Four
   fail-closed schema fixtures and CLI diagnostics name the missing export paths.

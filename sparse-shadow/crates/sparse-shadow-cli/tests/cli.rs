@@ -1,4 +1,11 @@
-use std::{path::PathBuf, process::Command};
+use std::{
+    fs,
+    path::PathBuf,
+    process::Command,
+    sync::atomic::{AtomicU64, Ordering},
+};
+
+static TEMP_SEQUENCE: AtomicU64 = AtomicU64::new(0);
 
 fn fixture(name: &str) -> PathBuf {
     PathBuf::from(env!("CARGO_MANIFEST_DIR"))
@@ -11,6 +18,30 @@ fn run(args: &[&str]) -> std::process::Output {
         .args(args)
         .output()
         .expect("CLI starts")
+}
+
+fn write_temp_json(label: &str, bytes: &[u8]) -> PathBuf {
+    let sequence = TEMP_SEQUENCE.fetch_add(1, Ordering::Relaxed);
+    let path = std::env::temp_dir().join(format!(
+        "sparse-shadow-{label}-{}-{sequence}.json",
+        std::process::id()
+    ));
+    fs::write(&path, bytes).expect("temporary certificate writes");
+    path
+}
+
+fn assert_valid(output: &std::process::Output) {
+    assert!(
+        output.status.success(),
+        "{}",
+        String::from_utf8_lossy(&output.stderr)
+    );
+    assert!(String::from_utf8_lossy(&output.stdout).contains("\"valid\": true"));
+}
+
+fn assert_certificate_failure(output: &std::process::Output) {
+    assert!(!output.status.success());
+    assert!(String::from_utf8_lossy(&output.stderr).contains("certificate mismatch"));
 }
 
 #[test]
@@ -73,4 +104,105 @@ fn equivalent_accepts_identical_inputs() {
     let output = run(&["equivalent", path, path]);
     assert!(output.status.success());
     assert!(String::from_utf8_lossy(&output.stdout).contains("equivalent"));
+}
+
+#[test]
+fn every_emitted_certificate_replays_through_the_cli() {
+    let input = fixture("paper-i-icosahedral-orbitals.json");
+    let calibrated = fixture("paper-i-calibrated-icosahedral-orbitals.json");
+    let input_path = input.to_str().expect("UTF-8 fixture path");
+    let calibrated_path = calibrated.to_str().expect("UTF-8 fixture path");
+
+    let canonical = run(&["canonicalize", input_path]);
+    assert!(canonical.status.success());
+    let canonical_json: serde_json::Value =
+        serde_json::from_slice(&canonical.stdout).expect("canonical JSON parses");
+    let certificate = serde_json::to_vec_pretty(&canonical_json["certificate"])
+        .expect("canonical certificate serializes");
+    let certificate_path = write_temp_json("canonical", &certificate);
+    let verified = run(&[
+        "verify-certificate",
+        input_path,
+        certificate_path.to_str().expect("UTF-8 temporary path"),
+    ]);
+    assert_valid(&verified);
+    fs::remove_file(certificate_path).expect("temporary certificate removes");
+
+    let equivalence = run(&["equivalent", input_path, input_path]);
+    assert!(equivalence.status.success());
+    let equivalence_path = write_temp_json("equivalence", &equivalence.stdout);
+    let verified = run(&[
+        "verify-equivalence-certificate",
+        input_path,
+        input_path,
+        equivalence_path.to_str().expect("UTF-8 temporary path"),
+    ]);
+    assert_valid(&verified);
+    fs::remove_file(equivalence_path).expect("temporary certificate removes");
+
+    let reconstruction = run(&["reconstruct", calibrated_path]);
+    assert!(reconstruction.status.success());
+    let reconstruction_path = write_temp_json("reconstruction", &reconstruction.stdout);
+    let verified = run(&[
+        "verify-reconstruction-certificate",
+        calibrated_path,
+        reconstruction_path.to_str().expect("UTF-8 temporary path"),
+    ]);
+    assert_valid(&verified);
+    fs::remove_file(reconstruction_path).expect("temporary certificate removes");
+}
+
+#[test]
+fn every_cli_verifier_rejects_a_corrupted_artifact() {
+    let input = fixture("paper-i-icosahedral-orbitals.json");
+    let input_path = input.to_str().expect("UTF-8 fixture path");
+
+    let canonical = run(&["canonicalize", input_path]);
+    assert!(canonical.status.success());
+    let mut canonical_json: serde_json::Value =
+        serde_json::from_slice(&canonical.stdout).expect("canonical JSON parses");
+    canonical_json["certificate"]["canonical_id"] = serde_json::Value::String("corrupt".into());
+    let certificate = serde_json::to_vec_pretty(&canonical_json["certificate"])
+        .expect("canonical certificate serializes");
+    let certificate_path = write_temp_json("corrupt-canonical", &certificate);
+    let rejected = run(&[
+        "verify-certificate",
+        input_path,
+        certificate_path.to_str().expect("UTF-8 temporary path"),
+    ]);
+    assert_certificate_failure(&rejected);
+    fs::remove_file(certificate_path).expect("temporary certificate removes");
+
+    let equivalence = run(&["equivalent", input_path, input_path]);
+    assert!(equivalence.status.success());
+    let mut equivalence_json: serde_json::Value =
+        serde_json::from_slice(&equivalence.stdout).expect("equivalence JSON parses");
+    equivalence_json["certificate_schema"] = serde_json::Value::String("corrupt".into());
+    let equivalence =
+        serde_json::to_vec_pretty(&equivalence_json).expect("equivalence certificate serializes");
+    let equivalence_path = write_temp_json("corrupt-equivalence", &equivalence);
+    let rejected = run(&[
+        "verify-equivalence-certificate",
+        input_path,
+        input_path,
+        equivalence_path.to_str().expect("UTF-8 temporary path"),
+    ]);
+    assert_certificate_failure(&rejected);
+    fs::remove_file(equivalence_path).expect("temporary certificate removes");
+
+    let reconstruction = run(&["reconstruct", input_path]);
+    assert!(reconstruction.status.success());
+    let mut reconstruction_json: serde_json::Value =
+        serde_json::from_slice(&reconstruction.stdout).expect("reconstruction JSON parses");
+    reconstruction_json["canonical"]["automorphism_order"] = serde_json::Value::from(119);
+    let reconstruction = serde_json::to_vec_pretty(&reconstruction_json)
+        .expect("reconstruction certificate serializes");
+    let reconstruction_path = write_temp_json("corrupt-reconstruction", &reconstruction);
+    let rejected = run(&[
+        "verify-reconstruction-certificate",
+        input_path,
+        reconstruction_path.to_str().expect("UTF-8 temporary path"),
+    ]);
+    assert_certificate_failure(&rejected);
+    fs::remove_file(reconstruction_path).expect("temporary certificate removes");
 }

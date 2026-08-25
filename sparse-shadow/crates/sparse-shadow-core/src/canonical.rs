@@ -98,6 +98,102 @@ pub fn canonicalize(input: &InputArtifact) -> Result<CanonicalArtifact, ShadowEr
     })
 }
 
+pub(crate) fn verify_canonical_artifact_fields(
+    artifact: &CanonicalArtifact,
+) -> Result<(), ShadowError> {
+    let certificate = &artifact.certificate;
+    if artifact.schema != "sparse-shadow-canonical/v1"
+        || artifact.canonical_id != certificate.canonical_id
+        || artifact.input_to_canonical != certificate.input_to_canonical
+        || artifact.stats != certificate.search_stats
+    {
+        return Err(ShadowError::Certificate(
+            "canonical artifact wrapper differs from its certificate".into(),
+        ));
+    }
+    if serde_json::to_string(&artifact.canonical)? != certificate.canonical_json {
+        return Err(ShadowError::Certificate(
+            "canonical artifact payload differs from its certificate".into(),
+        ));
+    }
+    let expected_order = u64::try_from(certificate.automorphisms.len())
+        .map_err(|_| ShadowError::Certificate("automorphism count exceeds u64".into()))?;
+    if artifact.automorphism_order != expected_order {
+        return Err(ShadowError::Certificate(
+            "canonical artifact automorphism order differs from its certificate".into(),
+        ));
+    }
+
+    let degree = artifact.input_to_canonical.len();
+    for generator in &artifact.automorphism_generators {
+        validate_permutation(generator, degree)?;
+    }
+    let expected: BTreeSet<_> = certificate.automorphisms.iter().cloned().collect();
+    let generated = generated_closure_within(degree, &artifact.automorphism_generators, &expected)?;
+    if generated != expected {
+        return Err(ShadowError::Certificate(
+            "canonical artifact generators do not close to the certified automorphism group".into(),
+        ));
+    }
+    if artifact.vertex_orbits != permutation_orbits(degree, &certificate.automorphisms)? {
+        return Err(ShadowError::Certificate(
+            "canonical artifact vertex orbits differ from its certificate".into(),
+        ));
+    }
+    Ok(())
+}
+
+fn generated_closure_within(
+    degree: usize,
+    generators: &[Vec<u32>],
+    expected: &BTreeSet<Vec<u32>>,
+) -> Result<BTreeSet<Vec<u32>>, ShadowError> {
+    let identity: Vec<u32> = (0..degree)
+        .map(|value| u32::try_from(value).expect("validated degree fits u32"))
+        .collect();
+    if !expected.contains(&identity)
+        || generators
+            .iter()
+            .any(|generator| !expected.contains(generator))
+    {
+        return Err(ShadowError::Certificate(
+            "canonical artifact generator is outside the certified automorphism group".into(),
+        ));
+    }
+    let mut closure = BTreeSet::from([identity.clone()]);
+    let mut frontier = vec![identity];
+    while let Some(element) = frontier.pop() {
+        for generator in generators {
+            let product: Vec<u32> = element
+                .iter()
+                .map(|&image| generator[image as usize])
+                .collect();
+            if !expected.contains(&product) {
+                return Err(ShadowError::Certificate(
+                    "canonical artifact generators leave the certified automorphism group".into(),
+                ));
+            }
+            if closure.insert(product.clone()) {
+                frontier.push(product);
+            }
+        }
+    }
+    Ok(closure)
+}
+
+fn validate_permutation(permutation: &[u32], degree: usize) -> Result<(), ShadowError> {
+    let image: BTreeSet<_> = permutation.iter().copied().collect();
+    if permutation.len() != degree
+        || image.len() != degree
+        || image.iter().any(|&vertex| vertex as usize >= degree)
+    {
+        return Err(ShadowError::Certificate(
+            "canonical artifact generator is not a permutation".into(),
+        ));
+    }
+    Ok(())
+}
+
 fn gated_error(profile: &ProfileInput) -> ShadowError {
     let (name, gate) = match profile {
         ProfileInput::PaperIiTrade(value) => ("paper_ii_trade", &value.gate),
