@@ -83,6 +83,18 @@ parametrization of this norm-one surface, then couple it to the equivariant
 torsor trivialization.  Report and replay:
 `notes/2026-08-25-c958-type-i1-residual-norm-torus.md` and its adjacent bundle.
 
+The norm-one torus is now parametrized explicitly over `Q(a,beta)`.  A
+Cremona transformation sends its norm cubic to a quadric with the rational
+point `[-3a^2:0:1:3a^2]`; projection from that point and the formulas
+`(Z,h)=(x+x^-1+1-Tr(x),N(x-1))`, `x=1+h/Z` give compact forward and inverse
+maps.  Both composites are exact symbolic identities.  The conjugate-ratio
+attempt is also diagnosed: it uses an index-three character sublattice and
+therefore has degree three.  The only remaining type-`I_1` descent gate is
+the equivariant universal-torsor translation coupling this chart to the
+already explicit surface maps.  Report and replay:
+`notes/2026-08-25-c958-type-i1-norm-torus-parametrization.md` and its adjacent
+bundle.
+
 ## Goal
 
 Turn the constructive existence proof in C956 into explicit, independently

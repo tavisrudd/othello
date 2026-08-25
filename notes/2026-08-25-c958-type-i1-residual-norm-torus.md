@@ -88,17 +88,19 @@ split coordinates is not a descended parametrization.
 
 ## Consequence for C958
 
-The final type-`I_1` descent has separated into two standard explicit tasks:
+The final type-`I_1` descent separated into two explicit tasks:
 
 1. give a ground-field rational parametrization of the displayed cubic
    norm-one torus, specialized to `rho^3-3a^2rho-beta`;
 2. write the equivariant birational trivialization
    `S x R^1_{E/K}(Gm) -> Z/T3` in the already explicit split coordinates.
 
-The first is the constructive content hidden by the general theorem that all
-two-dimensional tori are rational.  The second is the remaining universal-
-torsor translation.  The split cubic geometry, marked Cox change, and both
-split maps are already complete.
+The first is now complete: a Cremona transformation of the norm cubic gives
+an explicit quadric with a ground-field point, and projection from that point
+gives certified forward and inverse maps.  See
+`notes/2026-08-25-c958-type-i1-norm-torus-parametrization.md`.  The second is
+the remaining universal-torsor translation.  The split cubic geometry,
+marked Cox change, and both split maps are already complete.
 
 This calculation also prevents a tempting wrong shortcut: the quotient torus
 `R_E(Gm)/Gm` has the dual index-three lattice.  The cubic norm-one torus is
@@ -121,10 +123,11 @@ source.  It reconstructs the Picard and cocharacter actions, checks the
 unimodular augmentation-lattice identification, derives the norm polynomial
 as a multiplication determinant, and checks the split Cayley equation.
 
-The computations use one SymPy implementation.  The bundle does not certify
-a rational parametrization of the norm-one surface, the equivariant torsor
-trivialization, or final stabilized maps.  The classical rationality input is
-Voskresenskii's theorem on two-dimensional tori,
+The computations use one SymPy implementation.  This bundle identifies the
+torus but does not itself certify its rational parametrization, the
+equivariant torsor trivialization, or final stabilized maps.  The adjacent
+parametrization bundle now certifies the first omitted item.  The classical
+rationality input is Voskresenskii's theorem on two-dimensional tori,
 DOI `10.1070/IM1967v001n03ABEH000580`; no claim of novelty is made for the
 torus identification or model without a dedicated audit.
 
@@ -145,6 +148,6 @@ cubic norm-one torus, and a misleading index-three shortcut is ruled out.
 | Which two-dimensional torus occurs? | settled | exact quotient cocharacter matrices identify the cubic norm-one torus |
 | Does the quadratic `e1` extension matter to the residual torus? | settled | its residual matrix is the identity |
 | Why was naive projectivization almost plausible but wrong? | settled | root and weight `A2` lattices differ by index three |
-| What is the smallest ground-field parametrization? | open, next | extract or derive the constructive cubic norm-one parametrization |
-| Can the Cayley model make that parametrization compact? | open | it is symmetric and low degree, but two split coordinates do not descend |
+| What is a compact ground-field parametrization? | settled | the norm cubic is Cremona-birational to an explicit quadric with a ground-field point |
+| Can the Cayley model make that parametrization compact? | superseded | the direct norm-cubic/quadric map is compact and avoids split coordinates |
 | How is the torus parametrization coupled to the surface map? | open | compute the equivariant universal-torsor translation after the torus chart is fixed |

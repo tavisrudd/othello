@@ -45,12 +45,16 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   fresh re-referees after every accepted repair.  Report and live card:
   `../2026-08-24-c956-exact-level-two-cubic-manuscript.md` and
   `../cubic-threefolds-tasks/c956-exact-level-two-cubic-manuscript.md`.
-- **C958 — explicit level-two parametrizations, active.**  Starting from
-  C956's constructive quotient theorem and exact tangent witnesses, compute
-  and certify explicit birational maps for the two products
-  \(X_j\times\mathbf P^2\).  The task must separate existence of a rational
-  map from formula size and any genuine complexity bound.  Card:
-  `../cubic-threefolds-tasks/c958-explicit-level-two-parametrizations.md`.
+- **C958 — explicit level-two parametrizations, active.**  The type-`I_1`
+  splitting field, sixteen exceptional sections, marked-plane blowdown, and
+  inverse anticanonical map are explicit.  The residual factor is the cubic
+  norm-one torus, and a ground-field Cremona transformation now gives compact
+  certified maps `P2 <-> R^1_{E/K}(Gm)` with both composites checked.  The
+  remaining type-`I_1` gate is the equivariant universal-torsor translation
+  coupling this chart to the surface; type `I_3` remains afterward.  Card:
+  `../cubic-threefolds-tasks/c958-explicit-level-two-parametrizations.md`;
+  latest report:
+  `../2026-08-25-c958-type-i1-norm-torus-parametrization.md`.
 - **C936 — accepted after cold-referee repair audit.**  The warning-free eleven-page paper
   develops the signed nonstandard \(A_5\)-cubic parameter as the
   sign/discriminant resolvent of the actual
