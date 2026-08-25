@@ -179,6 +179,26 @@
           "u_sum": -249
         }
       ],
+      "constant_repair_triangular_targets": {
+        "j4_all_negative_core_spectrum": {
+          "1": 4159,
+          "2": 240,
+          "3": 3,
+          "4": 2241
+        },
+        "j4_all_negative_eta1_selector_spectrum": {
+          "1": 1,
+          "2": 78,
+          "3": 3,
+          "4": 2241
+        },
+        "j5_mixed_core_spectrum": {
+          "1": 4159,
+          "2": 160,
+          "3": 81,
+          "4": 2243
+        }
+      },
       "endpoint_delta": 27,
       "field_order": 81,
       "mixed_degree_four_line_count": 2243,
@@ -302,6 +322,26 @@
           "u_sum": -735
         }
       ],
+      "constant_repair_triangular_targets": {
+        "j4_all_negative_core_spectrum": {
+          "1": 38719,
+          "2": 726,
+          "3": 3,
+          "4": 19845
+        },
+        "j4_all_negative_eta1_selector_spectrum": {
+          "1": 1,
+          "2": 240,
+          "3": 3,
+          "4": 19845
+        },
+        "j5_mixed_core_spectrum": {
+          "1": 38719,
+          "2": 484,
+          "3": 243,
+          "4": 19847
+        }
+      },
       "endpoint_delta": 81,
       "field_order": 243,
       "mixed_degree_four_line_count": 19847,
@@ -425,6 +465,26 @@
           "u_sum": -2193
         }
       ],
+      "constant_repair_triangular_targets": {
+        "j4_all_negative_core_spectrum": {
+          "1": 352351,
+          "2": 2184,
+          "3": 3,
+          "4": 177633
+        },
+        "j4_all_negative_eta1_selector_spectrum": {
+          "1": 1,
+          "2": 726,
+          "3": 3,
+          "4": 177633
+        },
+        "j5_mixed_core_spectrum": {
+          "1": 352351,
+          "2": 1456,
+          "3": 729,
+          "4": 177635
+        }
+      },
       "endpoint_delta": 243,
       "field_order": 729,
       "mixed_degree_four_line_count": 177635,

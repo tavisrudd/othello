@@ -1516,6 +1516,50 @@ Radon trade that also removes the overloaded trisecant pencils, followed by
 the regular incidence selection.  A bounded local switch or a wider bounded
 census cannot find the mechanism.
 
+The first honest constant-repair target is now completely numerical.  In the
+triangular `(j,sigma)=(4,-3)` row, equality in the shell gives the exact core
+spectrum
+
+```text
+(N_1,N_2,N_3,N_4)
+ =((2q^2-8q+3)/3, 3q-3, 3, q(q+2)/3).               (SR12)
+```
+
+For an arc of size `q^2/3+5q/3+eta`, let `h=N_3-A_3` and
+`H=N_4-A_4` count omitted high secants.  The selected-line count and saturated
+incidence count solve to
+
+```text
+A_1=-1+2eta-h-2H,          A_2=q-2-eta+2h+3H.       (SR13)
+```
+
+Thus `h+2H<=2eta-1`.  At the minimal possible repair `eta=1`, necessarily
+`h=H=0`, and the selector spectrum is uniquely
+
+```text
+(A_1,A_2,A_3,A_4)=(1,q-3,3,q(q+2)/3).               (SR14)
+```
+
+Consequently a field-uniform `(SR12)` core, all of whose three trisecants and
+four-secants together with `q-3` bisecants and one tangent form an
+`s=2q/3+1` regular incidence selection on the core and have off-core degree at
+most `s`, would prove the sharp upper bound with constant repair `+1`.
+Conversely, every `+1` realization in this row has exactly that form.  This is
+substantially smaller than searching all primal point sets: the only selector
+freedom is one tangent and `q-3` bisecants after the core is known.
+
+For comparison, the other triangular survivor `(j,sigma)=(5,-1)` has
+
+```text
+(N_1,N_2,N_3,N_4)
+ =((2q^2-8q+3)/3, 2q-2, q, q(q+2)/3+2),
+A_1=q/3-1+2eta-h-2H,
+A_2=-q/3-1-eta+2h+3H.                               (SR15)
+```
+
+It therefore requires a linear trade among its high secants even when
+`eta=1`; `(SR12)--(SR14)` is the sharper construction target.
+
 #### Bound status after the structural upgrade
 
 The unconditional asymptotic statement is now strengthened from C945's lower
@@ -1845,6 +1889,13 @@ family is lower priority.
   already excluded: unequal linear coefficients create at least `(q-3)/2`
   wrong directions, while equal coefficients leave only one finite special
   direction and one unavoidable graph intersection.
+- **Compressed sharpness target — what exactly must a `+1` triangular
+  construction do?**  In row `(4,-3)`, `(SR12)--(SR14)` force the core
+  spectrum and the selector uniquely by line degree: take every three- and
+  four-secant, exactly `q-3` bisecants, and one tangent.  These lines must be
+  regular of degree `2q/3+1` on the `2q+4` core points and respect the same
+  cap off the core.  The other triangular row requires a linear high-secant
+  trade and is therefore a less rigid first target.
 - **Settled by `ej`+`tt` — is the nearest classical four-blocking-set core a
   cheap source of the admissible rows?**  Bruen--Fisher is exactly the
   adjacent signed triangle `(j,sigma)=(0,1)`, and adjoining its horizontal

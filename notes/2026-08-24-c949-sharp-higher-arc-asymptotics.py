@@ -3300,6 +3300,42 @@ def audit_sharp_linear_coefficient(output: Path) -> None:
         if (q - 3) // 2 <= 9:
             raise AssertionError("the linearized-cubic bad-slope gap changed")
 
+        triangle_j4_spectrum = {
+            1: (2 * q * q - 8 * q + 3) // 3,
+            2: 3 * q - 3,
+            3: 3,
+            4: q * (q + 2) // 3,
+        }
+        triangle_j4_selector_eta1 = {
+            1: 1,
+            2: q - 3,
+            3: 3,
+            4: triangle_j4_spectrum[4],
+        }
+        triangle_j5_spectrum = {
+            1: (2 * q * q - 8 * q + 3) // 3,
+            2: 2 * q - 2,
+            3: q,
+            4: q * (q + 2) // 3 + 2,
+        }
+        for size, spectrum in ((2 * q + 4, triangle_j4_spectrum),
+                               (2 * q + 5, triangle_j5_spectrum)):
+            if sum(spectrum.values()) != point_count:
+                raise AssertionError("a triangular survivor line count changed")
+            if sum(degree * count for degree, count in spectrum.items()
+                   ) != size * (q + 1):
+                raise AssertionError("a triangular survivor incidence sum changed")
+            if sum(degree * (degree - 1) // 2 * count
+                   for degree, count in spectrum.items()) != size * (size - 1) // 2:
+                raise AssertionError("a triangular survivor pair sum changed")
+        eta1_size = q * q // 3 + 5 * q // 3 + 1
+        eta1_incidence = (2 * q + 4) * (2 * q // 3 + 1)
+        if sum(triangle_j4_selector_eta1.values()) != eta1_size:
+            raise AssertionError("the triangular +1 selector size changed")
+        if sum(degree * count for degree, count
+               in triangle_j4_selector_eta1.items()) != eta1_incidence:
+            raise AssertionError("the triangular +1 selector incidence changed")
+
         field_checks.append({
             "field_order": q,
             "endpoint_delta": delta,
@@ -3348,6 +3384,20 @@ def audit_sharp_linear_coefficient(output: Path) -> None:
                 "equal_linear_terms": (
                     "one finite double-cover slope and one graph intersection"
                 ),
+            },
+            "constant_repair_triangular_targets": {
+                "j4_all_negative_core_spectrum": {
+                    str(degree): count for degree, count
+                    in triangle_j4_spectrum.items()
+                },
+                "j4_all_negative_eta1_selector_spectrum": {
+                    str(degree): count for degree, count
+                    in triangle_j4_selector_eta1.items()
+                },
+                "j5_mixed_core_spectrum": {
+                    str(degree): count for degree, count
+                    in triangle_j5_spectrum.items()
+                },
             },
         })
 
