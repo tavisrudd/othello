@@ -468,10 +468,10 @@
   "paper": "integral_secant_arcs",
   "pdfs": [
     {
-      "bytes": 162383,
+      "bytes": 162389,
       "pages": 18,
       "path": "papers/integral_secant_arcs/integral_secant_arcs.pdf",
-      "sha256": "8f5e04041422e210045d30b4400c3e0b2b8455a993d419ada9561562a4f48ced"
+      "sha256": "c7732e4930704066e9a14896d4b21e50e0d61e35b4eb639074514ed2618bf5dc"
     }
   ],
   "schema_version": 1,
@@ -502,7 +502,7 @@
     },
     {
       "path": "papers/integral_secant_arcs/sections/05-modular-stability.tex",
-      "sha256": "ab754de23794fc6b774517a6f4fff1142c64013d0a22e386a676ea7787db99d7"
+      "sha256": "2cb0a3381597173c3fac64dc1c63186da2b8fbaa0bc2efaed2b13cce22c9fddd"
     },
     {
       "path": "papers/integral_secant_arcs/sections/06-characteristic-two.tex",
