@@ -3527,8 +3527,17 @@
       "last": 963,
       "purpose": "C958 successor: proof-producing stable-rationality workbench with explicit maps, complexity bounds, exceptional loci, and cancellation specialization",
       "sequence": 392
+    },
+    {
+      "count": 1,
+      "first": 964,
+      "kind": "reservation",
+      "lane": "complete-ports",
+      "last": 964,
+      "purpose": "Frobenius orbit-replacement graph: component census, connectivity, diameter, and Hall expansion",
+      "sequence": 393
     }
   ],
-  "next_id": 964,
+  "next_id": 965,
   "schema": "codex-task-id-allocations-v1"
 }
