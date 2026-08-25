@@ -103,6 +103,7 @@
     },
     "branches": [
       {
+        "all_fixed_pencil_centered_vectors_survive_global_degree_shell": true,
         "centered_mod_3_codeword_weight_range": {
           "maximum": 630,
           "minimum": 441
@@ -204,6 +205,43 @@
         "fixed_negative_collinear_carrier_indices": [
           27
         ],
+        "fixed_pencil_centered_histogram_count": 130,
+        "fixed_pencil_centered_sum_range": {
+          "maximum": 24,
+          "minimum": 0
+        },
+        "fixed_pencil_centered_vector_count": 2573,
+        "fixed_pencil_centered_vectors_compatible_with_global_degree_shell": 2573,
+        "fixed_pencil_defect_spectrum": [
+          12,
+          18,
+          24,
+          30,
+          36,
+          42,
+          48,
+          54,
+          60,
+          66,
+          72,
+          78,
+          84,
+          96
+        ],
+        "fixed_pencil_minimum_positive_plus_twice_negative_orbits": 21,
+        "fixed_pencil_negative_orbit_count_range": {
+          "maximum": 7,
+          "minimum": 0
+        },
+        "fixed_pencil_positive_orbit_count_range": {
+          "maximum": 25,
+          "minimum": 7
+        },
+        "fixed_pencil_signed_allocation_state_count": 5915,
+        "fixed_pencil_supported_orbit_count_range": {
+          "maximum": 32,
+          "minimum": 14
+        },
         "fixed_signed_secant_defect_spectrum": {
           "-1": 3,
           "0": 7,
@@ -217,11 +255,20 @@
           "0": 216,
           "1": 25
         },
+        "off_fixed_subplane_negative_orbit_count_range": {
+          "maximum": 7,
+          "minimum": 0
+        },
+        "off_fixed_subplane_positive_orbit_count_range": {
+          "maximum": 18,
+          "minimum": 0
+        },
         "pinned_full_modulus_liftable_ternary_affine_dimension": 70,
         "pinned_ternary_affine_dimension": 178,
         "pinned_ternary_incidence_rank": 83
       },
       {
+        "all_fixed_pencil_centered_vectors_survive_global_degree_shell": true,
         "centered_mod_3_codeword_weight_range": {
           "maximum": 630,
           "minimum": 441
@@ -320,6 +367,39 @@
           "2": 6
         },
         "fixed_negative_collinear_carrier_indices": [],
+        "fixed_pencil_centered_histogram_count": 101,
+        "fixed_pencil_centered_sum_range": {
+          "maximum": 21,
+          "minimum": 0
+        },
+        "fixed_pencil_centered_vector_count": 1975,
+        "fixed_pencil_centered_vectors_compatible_with_global_degree_shell": 1975,
+        "fixed_pencil_defect_spectrum": [
+          12,
+          18,
+          24,
+          30,
+          36,
+          42,
+          48,
+          54,
+          60,
+          66
+        ],
+        "fixed_pencil_minimum_positive_plus_twice_negative_orbits": 22,
+        "fixed_pencil_negative_orbit_count_range": {
+          "maximum": 6,
+          "minimum": 0
+        },
+        "fixed_pencil_positive_orbit_count_range": {
+          "maximum": 25,
+          "minimum": 10
+        },
+        "fixed_pencil_signed_allocation_state_count": 3940,
+        "fixed_pencil_supported_orbit_count_range": {
+          "maximum": 31,
+          "minimum": 16
+        },
         "fixed_signed_secant_defect_spectrum": {
           "-1": 6,
           "0": 4,
@@ -332,6 +412,14 @@
           "-1": 6,
           "0": 217,
           "1": 25
+        },
+        "off_fixed_subplane_negative_orbit_count_range": {
+          "maximum": 6,
+          "minimum": 0
+        },
+        "off_fixed_subplane_positive_orbit_count_range": {
+          "maximum": 15,
+          "minimum": 0
         },
         "pinned_full_modulus_liftable_ternary_affine_dimension": 70,
         "pinned_ternary_affine_dimension": 178,
@@ -380,6 +468,9 @@
     "full_modulus_liftable_ternary_dimension": 76,
     "maximal_degree": 19,
     "maximal_line_count": 55,
+    "nonfixed_line_orbits_avoiding_fixed_points": 144,
+    "nonfixed_line_orbits_per_fixed_point_pencil": 8,
+    "nonfixed_line_orbits_through_fixed_points": 104,
     "signed_secant_defect_spectrum": {
       "-1": 24,
       "0": 655,
@@ -488,5 +579,5 @@
     "signed_word_equals_secondary_unital_minus_carrier_line": true,
     "unital_complement_size": 63
   },
-  "schema": "c949-degree-defect-audit-v7"
+  "schema": "c949-degree-defect-audit-v8"
 }

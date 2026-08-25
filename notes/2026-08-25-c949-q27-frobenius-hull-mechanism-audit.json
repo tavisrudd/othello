@@ -1,0 +1,70 @@
+{
+  "branches": [
+    {
+      "fixed_core_point_indices": [
+        0,
+        1,
+        2,
+        27
+      ],
+      "fixed_line_coefficient_weight_spectrum": {
+        "2": 1,
+        "4": 9,
+        "5": 12,
+        "6": 51,
+        "7": 96,
+        "8": 162,
+        "9": 168,
+        "10": 132,
+        "11": 68,
+        "12": 24,
+        "13": 6
+      },
+      "fixed_line_dual_lift_count": 729,
+      "fixed_line_lift_count_of_coefficient_weight_at_most_4": 10,
+      "one_nonfixed_orbit_sum_target_sign_count": 0,
+      "sparsest_fixed_line_coefficient_weight": 2,
+      "sparsest_fixed_line_lift_count": 1,
+      "three_nonfixed_orbit_sum_target_sign_count_for_fixed_lifts_of_coefficient_weight_at_most_4": 0,
+      "two_nonfixed_orbit_sum_target_sign_count": 0
+    },
+    {
+      "fixed_core_point_indices": [
+        0,
+        1,
+        27,
+        28
+      ],
+      "fixed_line_coefficient_weight_spectrum": {
+        "3": 1,
+        "4": 6,
+        "5": 18,
+        "6": 51,
+        "7": 99,
+        "8": 153,
+        "9": 165,
+        "10": 135,
+        "11": 72,
+        "12": 26,
+        "13": 3
+      },
+      "fixed_line_dual_lift_count": 729,
+      "fixed_line_lift_count_of_coefficient_weight_at_most_4": 7,
+      "one_nonfixed_orbit_sum_target_sign_count": 0,
+      "sparsest_fixed_line_coefficient_weight": 3,
+      "sparsest_fixed_line_lift_count": 1,
+      "three_nonfixed_orbit_sum_target_sign_count_for_fixed_lifts_of_coefficient_weight_at_most_4": 0,
+      "two_nonfixed_orbit_sum_target_sign_count": 0
+    }
+  ],
+  "checked": true,
+  "distinct_unordered_two_generator_sum_count": 123009,
+  "field_order": 27,
+  "fixed_line_coefficients_sum_to_zero_mod_3": true,
+  "nonfixed_line_orbit_count": 248,
+  "representation": "a fixed-line coefficient lift plus at most two scalar multiples of incidence sums of nonfixed Frobenius line orbits",
+  "scaled_nonfixed_line_orbit_generator_count": 496,
+  "schema": "c949-q27-frobenius-hull-mechanism-audit-v1",
+  "target_negative_count": 24,
+  "target_positive_count": 78
+}

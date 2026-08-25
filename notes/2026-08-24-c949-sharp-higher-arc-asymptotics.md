@@ -353,6 +353,10 @@ affine incidence-code lattice.  That is the concrete next attack licensed by
 the audit.
 
 There is a sharper descent which exposes the small object inside that lattice.
+Everything in this descent is conditional on the prescribed five-intersection
+inverse-construction branch `(FC5)`: it is not known to hold for every
+hypothetical target-size extremizer.  In particular, the sparse signed word
+below neither proves the asymptotic upper bound nor classifies all extremizers.
 Use the polarity coordinates of the audit, in which the incidence matrix `M`
 is symmetric.  Let `c` be the characteristic vector of `D`, put `d=M c`, and
 retain `a=1_{d>=3}` and `e=M a`.  Define
@@ -664,6 +668,78 @@ neither normalized Frobenius branch
 can realize a collinear negative class.  The eight apparent hole-orbit cases
 in the first branch disappear before search once the core equation is used.
 
+There is a further exact fixed-pencil reduction for the genuinely
+noncollinear case.  Of the 248 nonfixed Frobenius line orbits, 104 split into
+eight orbits through each of the 13 fixed points; the remaining 144 meet no
+fixed point.  No nonfixed orbit belongs to two fixed pencils.  If `p_Q,n_Q`
+are the positive and negative orbit counts in the eight-orbit pencil at a
+fixed point `Q`, then `(SD)` gives the local integer equation
+
+```text
+x_Q = (sum of z on the four fixed lines through Q)/3 + p_Q-n_Q.       (FP)
+```
+
+Enumerating the possible external degrees in their required residue classes,
+the eight slots in each pencil, and the global nonfixed sign budgets
+is therefore a small exact dynamic program.  In the
+`3 collinear + 1 off-line` branch it leaves 5,915 signed allocation states,
+2,573 fixed centered vectors, and 130 centered histograms; their fixed defect
+is one of
+
+```text
+12,18,24,30,36,42,48,54,60,66,72,78,84,96,
+```
+
+and their fixed centered sum lies in `0..24`.  In the `general 4` branch it
+leaves 3,940 allocations, 1,975 vectors, and 101 histograms, but now the fixed
+defect is only one of `12,18,...,66` and the fixed centered sum lies in
+`0..21`.  More sharply, if `p,n` now denote the total positive and negative
+orbits in all fixed pencils, the enumeration proves `p+2n>=21` and
+`p+2n>=22` in the two branches.  Since globally `n<=7` and `n<=6`, the two
+branches must place at least 14 and 16 of their respectively 32 and 31
+supported nonfixed orbits in fixed-point pencils; in particular at least 7
+and 10 positive orbits are pencil-anchored.  Thus the pencil
+projection sharpens the second branch's local norm budget and spatially
+anchors at least half the sparse support, but does not yet contradict either
+branch.  Indeed every one of the 2,573 and 1,975 fixed vectors extends at the
+level of the global degree sum and defect moments.  The next obstruction must
+use spatial incidence or recoverability, not those scalar moments alone.
+
+Characteristic three also suggests a natural hull mechanism which can now be
+excluded at low complexity.  For a nonfixed Frobenius orbit `O` of three
+lines, let `g_O` be the sum modulo three of their incidence vectors.  Then
+`g_O` is a dual word and vanishes on the fixed subplane.  For each branch there
+are exactly 729 fixed-line coefficient lifts `b` which match the prescribed
+fixed signs and whose coefficients sum to zero.  The exact hull audit tests
+all 496 scalar multiples of the 248 words `g_O` and all 123,009 distinct
+unordered two-generator sums.  Neither branch has even the target sign counts
+`(+,-)=(78,24)` in a representation
+
+```text
+z = b + lambda_1 g_{O_1} + lambda_2 g_{O_2},       lambda_i in F_3,
+```
+
+with at most two nonzero orbit terms.  This rules out the simplest
+conjugate-line explanation of the noncollinear word.  There are respectively
+10 and 7 fixed lifts whose coefficient support uses at most four fixed lines
+(including the unique sparsest lifts, of weights two and three).  Every one of
+those 17 low-complexity lifts also misses the target after three nonfixed
+orbit terms.  The result for three terms applies only to this coefficient-
+weight-at-most-four subfamily.  This is a bounded hull mechanism exclusion,
+not a classification of arbitrary hull words and still less of all ternary
+dual words.
+
+This is also the point where the next exhaustive widening needs a compiled
+kernel.  The correct Rust state space is the 261-coordinate Frobenius quotient,
+not the 757-point plane: 13 fixed trits have weight one and 248 moving trits
+have weight three.  Store the two nonzero symbols as bit masks, precompute the
+123,009 two-generator sums, and shard those sums deterministically.  The 729
+fixed lifts form an affine `F_3^6` fiber, so a ternary Gray walk can update
+their masks incrementally.  The Python implementation above remains the
+reference checker for the bounded certificates.  Widening the three-orbit
+test to all 1,458 branch lifts by repeating the present Python loops would be
+raw throughput, not additional mathematics.
+
 #### Bound status after the structural upgrade
 
 The unconditional asymptotic statement remains C945's sharp lower side
@@ -931,6 +1007,13 @@ family is lower priority.
   secant-type vector `z=1+3a-d` lies in the ternary dual incidence code, has
   signs `(-1)^24 1^78`, and satisfies `Mz=3x` with `||x||^2=630`.  The two
   fixed branches leave only 32 and 31 supported nonfixed Frobenius orbits.
+  The exact fixed-pencil projection leaves 2,573 and 1,975 centered vectors;
+  in the general-four branch it also cuts the fixed defect ceiling from the
+  ambient 126 to 66.  Neither branch can be a fixed-line dual lift plus at
+  most two conjugate-line orbit sums, across all 729 fixed lifts per branch;
+  all 17 fixed lifts of coefficient weight at most four also fail with three
+  orbit sums.  The next exhaustive widening should use the 261-trit Rust
+  quotient kernel described above, with this Python audit as checker.
   Recovering `d in {1,...,5}` from such a word, or excluding both sign cosets,
   is now the most compressed structural gate.
 - **Settled by the signed descent — what geometry does its support have?**
@@ -965,7 +1048,7 @@ family is lower priority.
 ### Reproducibility
 
 All commands below run from the repository root.  The construction and the
-four `q=27` audits use only Python's standard library and deterministic
+`q=27` audits use only Python's standard library and deterministic
 canonical enumeration.
 
 ```bash
@@ -1000,6 +1083,13 @@ python3 notes/2026-08-24-c949-sharp-higher-arc-asymptotics.py \
   --output /tmp/c949-degree-defect-audit.json
 cmp /tmp/c949-degree-defect-audit.json \
   notes/2026-08-24-c949-degree-defect-audit.json
+
+python3 notes/2026-08-24-c949-sharp-higher-arc-asymptotics.py \
+  frobenius-hull-mechanism-audit \
+  --frobenius-audit notes/2026-08-24-c949-q27-frobenius-fixed-subplane-audit.json \
+  --output /tmp/c949-q27-frobenius-hull-mechanism-audit.json
+cmp /tmp/c949-q27-frobenius-hull-mechanism-audit.json \
+  notes/2026-08-25-c949-q27-frobenius-hull-mechanism-audit.json
 ```
 
 The corrected fixed-core lift replays the five-character mechanism at `q=9`

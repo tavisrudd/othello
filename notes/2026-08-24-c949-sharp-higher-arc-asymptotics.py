@@ -1656,6 +1656,27 @@ def audit_degree_defect(q9_construction: Path, frobenius_audit: Path,
         for line in through_point[point_orbit[0]]:
             row[orbit_of[line]] += 1
         invariant_incidence.append(row)
+    nonfixed_line_orbits = [orbit for orbit in frobenius_orbits if len(orbit) == 3]
+    fixed_point_of_nonfixed_line_orbit = []
+    for orbit in nonfixed_line_orbits:
+        incident_fixed_points = [
+            point for point in fixed_indices if point in on_line[orbit[0]]
+        ]
+        if len(incident_fixed_points) > 1:
+            raise AssertionError("a nonfixed line contains two fixed points")
+        if incident_fixed_points and any(
+            point not in on_line[line]
+            for point in incident_fixed_points for line in orbit
+        ):
+            raise AssertionError("a conjugate line orbit does not share its fixed point")
+        fixed_point_of_nonfixed_line_orbit.append(
+            incident_fixed_points[0] if incident_fixed_points else None
+        )
+    fixed_pencil_orbit_spectrum = Counter(fixed_point_of_nonfixed_line_orbit)
+    if (fixed_pencil_orbit_spectrum[None] != 144
+            or any(fixed_pencil_orbit_spectrum[point] != 8
+                   for point in fixed_indices)):
+        raise AssertionError("unexpected Frobenius line-orbit pencil decomposition")
 
     def ternary_rank(rows: list[list[int]], column_count: int) -> int:
         matrix = [row[:] for row in rows]
@@ -1862,9 +1883,71 @@ def audit_degree_defect(q9_construction: Path, frobenius_audit: Path,
                 f"restriction rank {fixed_liftable_restriction_rank}, "
                 f"augmented rank {liftable_augmented_rank}"
             )
+        nonfixed_positive_orbits = (
+            78 - fixed_signed_secant_defect.count(1)
+        ) // 3
+        nonfixed_negative_orbits = (
+            24 - fixed_signed_secant_defect.count(-1)
+        ) // 3
+        fixed_pencil_states = {(0, 0, 0, tuple())}
+        for point in fixed_indices:
+            fixed_signed_sum = sum(
+                fixed_signed_secant_defect[fixed_indices.index(line)]
+                for line in through_point[point] if line in fixed_line_degrees
+            )
+            if fixed_signed_sum % 3:
+                raise AssertionError("fixed-pencil signed sum is not divisible by three")
+            fixed_high_degree = sum(
+                line in selected_fixed_lines
+                for line in through_point[point] if line in fixed_line_degrees
+            )
+            centered_values = (
+                [1] if point in core else
+                [degree - r for degree in range(
+                    fixed_high_degree, external_degree_upper_bound + 1, 3
+                )]
+            )
+            local_options = set()
+            for centered_value in centered_values:
+                signed_difference = centered_value - fixed_signed_sum // 3
+                for negative_count in range(9):
+                    positive_count = negative_count + signed_difference
+                    if (0 <= positive_count <= 8
+                            and positive_count + negative_count <= 8):
+                        local_options.add((
+                            positive_count,
+                            negative_count,
+                            centered_value,
+                            centered_value * (centered_value - 1),
+                        ))
+            replacements = set()
+            for positive_total, negative_total, defect_total, vector in fixed_pencil_states:
+                for positive_count, negative_count, centered_value, local_defect in local_options:
+                    if (positive_total + positive_count > nonfixed_positive_orbits
+                            or negative_total + negative_count > nonfixed_negative_orbits):
+                        continue
+                    replacements.add((
+                        positive_total + positive_count,
+                        negative_total + negative_count,
+                        defect_total + local_defect,
+                        vector + (centered_value,),
+                    ))
+            fixed_pencil_states = replacements
+        fixed_pencil_vectors = {state[3] for state in fixed_pencil_states}
+        fixed_pencil_histograms = {
+            tuple(sorted(Counter(vector).items()))
+            for vector in fixed_pencil_vectors
+        }
+        fixed_pencil_defects = sorted({state[2] for state in fixed_pencil_states})
+        fixed_pencil_sums = [sum(vector) for vector in fixed_pencil_vectors]
+        fixed_pencil_positive_counts = [state[0] for state in fixed_pencil_states]
+        fixed_pencil_negative_counts = [state[1] for state in fixed_pencil_states]
+        fixed_pencil_support_counts = [state[0] + state[1]
+                                       for state in fixed_pencil_states]
         fixed_states = fixed_histograms(high_count_spectrum)
         global_spectra = set()
         feasible_fixed_histograms = 0
+        globally_feasible_fixed_histograms = set()
         for fixed_histogram, fixed_sum, fixed_defect in fixed_states:
             if fixed_defect > defect or (defect - fixed_defect) % 3:
                 continue
@@ -1895,6 +1978,21 @@ def audit_degree_defect(q9_construction: Path, frobenius_audit: Path,
                 global_spectra.add(tuple(spectrum))
                 fixed_is_feasible = True
             feasible_fixed_histograms += int(fixed_is_feasible)
+            if fixed_is_feasible:
+                globally_feasible_fixed_histograms.add(fixed_histogram)
+        globally_feasible_fixed_pencil_vectors = 0
+        for vector in fixed_pencil_vectors:
+            histogram = [0] * maximal_degree
+            for point, centered_value in zip(fixed_indices, vector):
+                if point not in core:
+                    histogram[r + centered_value] += 1
+            globally_feasible_fixed_pencil_vectors += int(
+                tuple(histogram) in globally_feasible_fixed_histograms
+            )
+        if globally_feasible_fixed_pencil_vectors != len(fixed_pencil_vectors):
+            raise AssertionError(
+                "the global scalar shell unexpectedly removes a fixed-pencil vector"
+            )
         ranges = {
             str(degree): {
                 "minimum": min(spectrum[degree] for spectrum in global_spectra),
@@ -1933,9 +2031,43 @@ def audit_degree_defect(q9_construction: Path, frobenius_audit: Path,
                 if len(fixed_negative) in (0, 3)
             ),
             "nonfixed_signed_secant_defect_orbit_spectrum": {
-                "-1": (24 - fixed_signed_secant_defect.count(-1)) // 3,
+                "-1": nonfixed_negative_orbits,
                 "0": (655 - fixed_signed_secant_defect.count(0)) // 3,
-                "1": (78 - fixed_signed_secant_defect.count(1)) // 3,
+                "1": nonfixed_positive_orbits,
+            },
+            "fixed_pencil_signed_allocation_state_count": len(fixed_pencil_states),
+            "fixed_pencil_centered_vector_count": len(fixed_pencil_vectors),
+            "fixed_pencil_centered_vectors_compatible_with_global_degree_shell":
+                globally_feasible_fixed_pencil_vectors,
+            "all_fixed_pencil_centered_vectors_survive_global_degree_shell": True,
+            "fixed_pencil_centered_histogram_count": len(fixed_pencil_histograms),
+            "fixed_pencil_defect_spectrum": fixed_pencil_defects,
+            "fixed_pencil_centered_sum_range": {
+                "minimum": min(fixed_pencil_sums),
+                "maximum": max(fixed_pencil_sums),
+            },
+            "fixed_pencil_positive_orbit_count_range": {
+                "minimum": min(fixed_pencil_positive_counts),
+                "maximum": max(fixed_pencil_positive_counts),
+            },
+            "fixed_pencil_negative_orbit_count_range": {
+                "minimum": min(fixed_pencil_negative_counts),
+                "maximum": max(fixed_pencil_negative_counts),
+            },
+            "fixed_pencil_supported_orbit_count_range": {
+                "minimum": min(fixed_pencil_support_counts),
+                "maximum": max(fixed_pencil_support_counts),
+            },
+            "fixed_pencil_minimum_positive_plus_twice_negative_orbits": min(
+                state[0] + 2 * state[1] for state in fixed_pencil_states
+            ),
+            "off_fixed_subplane_positive_orbit_count_range": {
+                "minimum": nonfixed_positive_orbits - max(fixed_pencil_positive_counts),
+                "maximum": nonfixed_positive_orbits - min(fixed_pencil_positive_counts),
+            },
+            "off_fixed_subplane_negative_orbit_count_range": {
+                "minimum": nonfixed_negative_orbits - max(fixed_pencil_negative_counts),
+                "maximum": nonfixed_negative_orbits - min(fixed_pencil_negative_counts),
             },
             "fixed_external_high_degree_spectrum": dict(sorted(high_count_spectrum.items())),
             "fixed_external_residue_spectrum_mod_3": dict(sorted(
@@ -2009,7 +2141,7 @@ def audit_degree_defect(q9_construction: Path, frobenius_audit: Path,
         }
 
     output.write_text(json.dumps({
-        "schema": "c949-degree-defect-audit-v7",
+        "schema": "c949-degree-defect-audit-v8",
         "field_uniform_identities": {
             "q": "3r",
             "external_point_count": "q^2-q",
@@ -2175,6 +2307,9 @@ def audit_degree_defect(q9_construction: Path, frobenius_audit: Path,
                 "27": 78,
             },
             "frobenius_invariant_coordinate_count": len(frobenius_orbits),
+            "nonfixed_line_orbits_through_fixed_points": 104,
+            "nonfixed_line_orbits_avoiding_fixed_points": 144,
+            "nonfixed_line_orbits_per_fixed_point_pencil": 8,
             "frobenius_invariant_ternary_incidence_rank": invariant_rank,
             "frobenius_invariant_ternary_kernel_dimension":
                 len(frobenius_orbits) - invariant_rank,
@@ -2647,6 +2782,165 @@ def construct_q9_unital_arc(output: Path) -> None:
     }, indent=2, sort_keys=True) + "\n")
 
 
+def audit_frobenius_hull_mechanism(frobenius_audit: Path, output: Path) -> None:
+    """Exclude the two-orbit conjugate-line mechanism for the signed word."""
+    q = 27
+    point_count = q * q + q + 1
+    all_coordinates = (1 << point_count) - 1
+    _, on_line, _ = incidence(q)
+    certificate = json.loads(frobenius_audit.read_text())
+    fixed_indices = certificate["fixed_point_indices"]
+    nonfixed_orbits = [
+        orbit for orbit in symmetry_orbits(q, "frobenius") if len(orbit) == 3
+    ]
+
+    def masks(values: list[int]) -> tuple[int, int]:
+        ones = sum(1 << index for index, value in enumerate(values) if value % 3 == 1)
+        twos = sum(1 << index for index, value in enumerate(values) if value % 3 == 2)
+        return ones, twos
+
+    def add(left: tuple[int, int], right: tuple[int, int]) -> tuple[int, int]:
+        left_one, left_two = left
+        right_one, right_two = right
+        left_zero = all_coordinates ^ (left_one | left_two)
+        right_zero = all_coordinates ^ (right_one | right_two)
+        return (
+            ((left_zero & right_one) | (left_one & right_zero)
+             | (left_two & right_two)),
+            ((left_zero & right_two) | (left_two & right_zero)
+             | (left_one & right_one)),
+        )
+
+    orbit_generators = []
+    for orbit in nonfixed_orbits:
+        values = [0] * point_count
+        for line in orbit:
+            for point in on_line[line]:
+                values[point] = (values[point] + 1) % 3
+        generator = masks(values)
+        if any((generator[0] | generator[1]) & (1 << point)
+               for point in fixed_indices):
+            raise AssertionError("a conjugate-line orbit sum is nonzero on the fixed subplane")
+        orbit_generators.extend([generator, (generator[1], generator[0])])
+    pair_sums = {
+        add(orbit_generators[left], orbit_generators[right])
+        for left in range(len(orbit_generators))
+        for right in range(left, len(orbit_generators))
+    }
+    if len(orbit_generators) != 496 or len(pair_sums) != 123009:
+        raise AssertionError("unexpected conjugate-line orbit-sum counts")
+
+    branch_records = []
+    for pattern in certificate["normalized_patterns"]:
+        fixed_line_degrees = dict(zip(
+            fixed_indices, pattern["fixed_line_degrees_in_fixed_index_order"]
+        ))
+        target = [
+            (1 + 3 * int(fixed_line_degrees[line] >= 3)
+             - fixed_line_degrees[line]) % 3
+            for line in fixed_indices
+        ]
+        fixed_lifts = []
+        sparsest_fixed_lifts = []
+        low_weight_fixed_lifts = []
+        minimum_coefficient_weight = None
+        coefficient_weight_spectrum = Counter()
+        for coefficients in itertools.product(range(3), repeat=len(fixed_indices)):
+            if sum(coefficients) % 3:
+                continue
+            if any(
+                sum(coefficients[index]
+                    for index, line in enumerate(fixed_indices)
+                    if point in on_line[line]) % 3 != target[point_index]
+                for point_index, point in enumerate(fixed_indices)
+            ):
+                continue
+            values = [0] * point_count
+            for coefficient, line in zip(coefficients, fixed_indices):
+                if coefficient:
+                    for point in on_line[line]:
+                        values[point] = (values[point] + coefficient) % 3
+            fixed_lift = masks(values)
+            fixed_lifts.append(fixed_lift)
+            coefficient_weight = sum(value != 0 for value in coefficients)
+            coefficient_weight_spectrum[coefficient_weight] += 1
+            if coefficient_weight <= 4:
+                low_weight_fixed_lifts.append(fixed_lift)
+            if (minimum_coefficient_weight is None
+                    or coefficient_weight < minimum_coefficient_weight):
+                minimum_coefficient_weight = coefficient_weight
+                sparsest_fixed_lifts = [fixed_lift]
+            elif coefficient_weight == minimum_coefficient_weight:
+                sparsest_fixed_lifts.append(fixed_lift)
+        one_orbit_target_count = 0
+        two_orbit_target_count = 0
+        for fixed_lift in fixed_lifts:
+            for generator in orbit_generators:
+                candidate = add(fixed_lift, generator)
+                one_orbit_target_count += int(
+                    candidate[0].bit_count() == 78
+                    and candidate[1].bit_count() == 24
+                )
+            for pair_sum in pair_sums:
+                candidate = add(fixed_lift, pair_sum)
+                two_orbit_target_count += int(
+                    candidate[0].bit_count() == 78
+                    and candidate[1].bit_count() == 24
+                )
+        three_orbit_target_count_for_low_weight_lifts = 0
+        for fixed_lift in low_weight_fixed_lifts:
+            for pair_sum in pair_sums:
+                partial = add(fixed_lift, pair_sum)
+                for generator in orbit_generators:
+                    candidate = add(partial, generator)
+                    three_orbit_target_count_for_low_weight_lifts += int(
+                        candidate[0].bit_count() == 78
+                        and candidate[1].bit_count() == 24
+                    )
+        expected_low_weight_lift_count = (
+            10 if pattern["fixed_core_point_indices"] == [0, 1, 2, 27] else 7
+        )
+        if (len(fixed_lifts) != 729 or one_orbit_target_count
+                or two_orbit_target_count
+                or len(sparsest_fixed_lifts) != 1
+                or len(low_weight_fixed_lifts) != expected_low_weight_lift_count
+                or three_orbit_target_count_for_low_weight_lifts):
+            raise AssertionError("a bounded conjugate-line mechanism unexpectedly survives")
+        branch_records.append({
+            "fixed_core_point_indices": pattern["fixed_core_point_indices"],
+            "fixed_line_dual_lift_count": len(fixed_lifts),
+            "fixed_line_coefficient_weight_spectrum": dict(sorted(
+                coefficient_weight_spectrum.items()
+            )),
+            "sparsest_fixed_line_coefficient_weight": minimum_coefficient_weight,
+            "sparsest_fixed_line_lift_count": len(sparsest_fixed_lifts),
+            "fixed_line_lift_count_of_coefficient_weight_at_most_4":
+                len(low_weight_fixed_lifts),
+            "one_nonfixed_orbit_sum_target_sign_count": one_orbit_target_count,
+            "two_nonfixed_orbit_sum_target_sign_count": two_orbit_target_count,
+            "three_nonfixed_orbit_sum_target_sign_count_for_fixed_lifts_of_"
+            "coefficient_weight_at_most_4":
+                three_orbit_target_count_for_low_weight_lifts,
+        })
+
+    output.write_text(json.dumps({
+        "schema": "c949-q27-frobenius-hull-mechanism-audit-v1",
+        "field_order": q,
+        "representation": (
+            "a fixed-line coefficient lift plus at most two scalar multiples "
+            "of incidence sums of nonfixed Frobenius line orbits"
+        ),
+        "fixed_line_coefficients_sum_to_zero_mod_3": True,
+        "nonfixed_line_orbit_count": len(nonfixed_orbits),
+        "scaled_nonfixed_line_orbit_generator_count": len(orbit_generators),
+        "distinct_unordered_two_generator_sum_count": len(pair_sums),
+        "target_positive_count": 78,
+        "target_negative_count": 24,
+        "branches": branch_records,
+        "checked": True,
+    }, indent=2, sort_keys=True) + "\n")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     subparsers = parser.add_subparsers(dest="command", required=True)
@@ -2703,6 +2997,9 @@ def main() -> None:
     degree_defect.add_argument("--q9-construction", type=Path, required=True)
     degree_defect.add_argument("--frobenius-audit", type=Path, required=True)
     degree_defect.add_argument("--output", type=Path, required=True)
+    hull_mechanism = subparsers.add_parser("frobenius-hull-mechanism-audit")
+    hull_mechanism.add_argument("--frobenius-audit", type=Path, required=True)
+    hull_mechanism.add_argument("--output", type=Path, required=True)
     structure = subparsers.add_parser("analyze-blocking-certificate")
     structure.add_argument("--certificate", type=Path, required=True)
     structure.add_argument("--output", type=Path, required=True)
@@ -2766,6 +3063,8 @@ def main() -> None:
         audit_frobenius_fixed_subplane(args.output)
     elif args.command == "degree-defect-audit":
         audit_degree_defect(args.q9_construction, args.frobenius_audit, args.output)
+    elif args.command == "frobenius-hull-mechanism-audit":
+        audit_frobenius_hull_mechanism(args.frobenius_audit, args.output)
     elif args.command == "analyze-blocking-certificate":
         analyze_blocking_certificate(args.certificate, args.output)
     elif args.command == "analyze-unital-mechanism":
