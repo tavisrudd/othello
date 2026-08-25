@@ -21,6 +21,7 @@ taskset -c 0 cargo bench --bench paper_i -- --noplot
 | automorphism-buffer cold grows | 0 | measured exact counter |
 | automorphism group order | 120 | independently replayed exact result |
 | emitted generators | 3 | closure checked against the 120 returned actions |
+| representative point stabilizer order | 10 | recomputed from the certified full group |
 | compact canonical certificate | 5,237 bytes | deterministic compact JSON, excludes surrounding artifact |
 
 The allocation test wraps the system allocator and brackets only the search
@@ -55,6 +56,14 @@ optimization was accepted from these wall times. The hot representation was
 accepted on the contractually required layout/allocation evidence plus unchanged
 exact search outputs. A future optimization decision must use an interleaved A/B
 harness and cycles/instructions per search node.
+
+After point stabilizers, full-wrapper replay, strict calibration, and the golden
+contract landed, a CPU-0-pinned smoke run at commit `7d0344136` measured
+`canonicalize_end_to_end` at 256.83--257.90 us and
+`independent_replay_end_to_end` at 3.9228--3.9395 ms. This single run confirms
+the current benchmark target executes and preserves the frozen counters; it is
+not an A/B experiment. Criterion's comparison against its local historical
+baseline is again ignored, and no speedup claim is made.
 
 The independent reference implementation is a correctness baseline, not a
 performance baseline. No established tool was timed: nauty/bliss require a

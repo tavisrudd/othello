@@ -84,6 +84,11 @@ serialized tree.
   canonical proofs plus a separating identity; reconstruction artifacts replay
   their carrier, residual `C2`, and round trip;
 - `cargo deny check`: advisories, bans, licenses, and sources green.
+- `cargo doc --workspace --all-features --no-deps` and locked/offline Cargo
+  metadata resolution: pass;
+- post-stabilizer CPU-0 benchmark smoke at `7d0344136`: canonicalize
+  256.83--257.90 us, independent replay 3.9228--3.9395 ms; one run, no A/B or
+  performance claim.
 
 ## Prior-art result
 
