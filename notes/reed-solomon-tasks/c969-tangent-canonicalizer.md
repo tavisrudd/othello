@@ -69,23 +69,34 @@ future reduction must also track the induced torus/fiber invariant. The sigma
 path deliberately retains exact explicit semilinear enumeration, and the
 counterexample is frozen as a regression test.
 
-The next candidate invariant has a precise representation-theoretic shape.
+### Fixed-pair quotient lemma
+
 Over `E=F_(q^2)`, write a rational nonsplit-secant syndrome projectively as
-`Tr_(E/F_q)(lambda nu(a))`, and put `n=r-1`.  After fixing the conjugate root
-pair, its nonsplit torus acts on the two eigenlines of `Sym^n` by an
-`n`th-power ratio; the normalizer exchanges those eigenlines.  Consequently
-the residual coefficient datum must descend to a class of
 
 \[
- \ker(N_{E/F_q})/\ker(N_{E/F_q})^n
+ s(\lambda,a)=\lambda\nu_n(a)+\lambda^q\nu_n(a^q),
+ \qquad n=r-1.
 \]
 
-modulo inversion (and the compatible Frobenius action).  This is a proof
-target, not yet a classifier claim: the implementation still needs a
-basis-independent extractor for that class and a proof that the class selects
-the lexicographically minimal target quadratic.  The `F_7` counterexample
-shows exactly why choosing the target quadratic independently of this datum
-cannot work.
+Multiplying `lambda` by `F_q^*` changes only the projective output scale, and
+Hilbert 90 identifies these coefficient lines with the norm-one torus `T` via
+`rho=lambda^(q-1)`.  An element fixing the conjugate pair diagonalizes over
+`E`; if its eigenvalue ratio is `t in T`, its `Sym^n` action changes `rho` by
+`t^n`.  Every `t in T` occurs.  The other normalizer component exchanges the
+two conjugate eigenlines, sending `rho` to `rho^q=rho^(-1)`.  Hence the
+fixed-pair projective-normalizer orbits are exactly the classes of
+
+\[
+ T/T^n
+\]
+
+modulo inversion (and the compatible base-field Frobenius action). This proves
+the residual orbit invariant once a conjugate pair is fixed. It is not yet a
+fast canonicalizer: the implementation still needs a basis-independent
+extractor for the class and a proof that the class selects the
+lexicographically minimal target quadratic. The `F_7` counterexample shows
+exactly why choosing the target quadratic independently of this datum cannot
+work.
 
 As bounded regression evidence, for `q=7`, `r=5`, and the fixed recurrence
 `X^2+1`, the eight projective initial conditions collapse under full PGL to
