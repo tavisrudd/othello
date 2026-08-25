@@ -2674,3 +2674,21 @@ claim, or public artifact.  With the stated priority boundary, the manuscript,
 reviewer guide, Lean claim map, trust records, PDF, standalone export, and
 portfolio entry are ready for paper disposition.  Construction sharpness and
 extremizer classification remain the separate C949 programme.
+
+### Post-close characteristic-two branch clarification
+
+A later exposition check found that Lemma `lem:even-type-case` described the
+balanced internal pair as `{5,6}` without conditioning on the sign of
+`D=6k-nT`.  The revised proof separates the two cases.  For `D>=0` the pair is
+`{5,6}` and the displayed affine slack is exact to first order; for `D<0` the
+pair is `{6,7}` and convexity makes the low-branch affine continuation an upper
+bound on the actual slack.  Restriction to even multiplicities costs `|D|/2`
+internally in either case, so the same necessary inequality gives `c>=16`.
+
+The proof of the characteristic-two theorem now also establishes its actual
+branch before using `{5,6}`: from `6c-h>=76` and `c<=73/6`,
+`6c-6h-32>=424-30c>=59`, hence `D>0` asymptotically.  The introduction's
+remaining phrase “limiting internal degree” is corrected to “limiting average
+internal degree.”  The reviewer guide exposes both checks, the factor-pair
+claim digest has been refreshed after review, and the theorem statements and
+formal coverage classifications are unchanged.

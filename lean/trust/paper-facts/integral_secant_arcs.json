@@ -468,10 +468,10 @@
   "paper": "integral_secant_arcs",
   "pdfs": [
     {
-      "bytes": 162389,
+      "bytes": 163374,
       "pages": 18,
       "path": "papers/integral_secant_arcs/integral_secant_arcs.pdf",
-      "sha256": "c7732e4930704066e9a14896d4b21e50e0d61e35b4eb639074514ed2618bf5dc"
+      "sha256": "aabe21feccd224b72ad601b735be91451eae90e21aead475d90ecb03e8f88c9f"
     }
   ],
   "schema_version": 1,
@@ -486,7 +486,7 @@
     },
     {
       "path": "papers/integral_secant_arcs/sections/01-introduction.tex",
-      "sha256": "781b08e643cfbc6bd611b91bd0226ca4d591360ece78f32dd48d856f591f4c93"
+      "sha256": "71445a919403a6e07e218a8c6ac4f5ca96574836398aa469c027d9e859368bce"
     },
     {
       "path": "papers/integral_secant_arcs/sections/02-integer-envelopes.tex",
@@ -506,7 +506,7 @@
     },
     {
       "path": "papers/integral_secant_arcs/sections/06-characteristic-two.tex",
-      "sha256": "c085bf01d801d3cc363710d70f070aee1388385debb6577035b5f91c4cc6f7a6"
+      "sha256": "7ccc449a8ae913b2fc637adf2919c27e0c928cdc55a5ac4e6d4d579d9e55f3a4"
     },
     {
       "path": "papers/integral_secant_arcs/sections/07-translations.tex",
