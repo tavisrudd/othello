@@ -36,6 +36,10 @@ one build.
 The MSRV is Rust 1.85.0 (edition 2024); `rust-toolchain.toml` pins the same
 compiler for reproducible development.
 
+For registry release, `sparse-shadow-core` must be packaged and published before
+the same-version CLI. The CLI manifest deliberately retains both the local path
+and exact compatible version; no crate was published as part of this task.
+
 ```sh
 cargo test --workspace --all-features
 cargo clippy --workspace --all-targets --all-features -- -D warnings

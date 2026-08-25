@@ -1,5 +1,14 @@
 # Initial dependency audit
 
+## Packaging order
+
+The two crates are versioned together but have the normal registry publication
+dependency: package or publish `sparse-shadow-core 0.1.0` before
+`sparse-shadow-cli 0.1.0`. A local package dry run for the core succeeds. A CLI
+package dry run is expected to fail closed until that exact core version exists
+in the configured registry; the path dependency is not rewritten or vendored
+to conceal this prerequisite. No publication was performed during C968.
+
 Audit date: 2026-08-25. The initial manifest keeps network, FFI, finite-field,
 parallel-search, graph-library, and benchmark dependencies out of the runtime
 closure.

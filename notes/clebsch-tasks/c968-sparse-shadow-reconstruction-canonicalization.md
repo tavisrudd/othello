@@ -225,6 +225,11 @@ carrier: its six antipodal axes are emitted in canonical coordinates and
 recomputed during replay. The previously private ambiguity enum is exported as
 part of the public artifact API.
 
+The core crate package dry run is green. Registry release order is explicit:
+core 0.1.0 must exist before the CLI package can resolve its versioned path
+dependency. No publication was attempted, and the manifest does not hide the
+prerequisite.
+
 No unblocked C968 implementation frontier remains: each next adapter first
 requires the complete paper-owned export named in its `fixtures/gated-*.json`.
 Nearby evidence JSON and trust manifests are explicitly insufficient. Once an

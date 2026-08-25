@@ -99,6 +99,9 @@ serialized tree.
 - `cargo deny check`: advisories, bans, licenses, and sources green.
 - `cargo doc --workspace --all-features --no-deps` and locked/offline Cargo
   metadata resolution: pass;
+- core crate package dry run: pass; CLI packaging is explicitly gated on the
+  normal prior registry publication of `sparse-shadow-core 0.1.0`; no publish
+  action was taken;
 - post-stabilizer CPU-0 benchmark smoke at `7d0344136`: canonicalize
   256.83--257.90 us, independent replay 3.9228--3.9395 ms; one run, no A/B or
   performance claim.

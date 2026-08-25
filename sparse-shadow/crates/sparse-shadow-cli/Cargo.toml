@@ -5,6 +5,7 @@ edition.workspace = true
 rust-version.workspace = true
 license.workspace = true
 repository.workspace = true
+description = "Command-line interface for exact sparse-shadow reconstruction"
 
 [[bin]]
 name = "sparse-shadow"
