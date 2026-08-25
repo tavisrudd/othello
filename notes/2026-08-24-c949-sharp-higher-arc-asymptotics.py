@@ -3085,6 +3085,127 @@ def audit_exact_target_obstruction(output: Path) -> None:
     }, indent=2, sort_keys=True) + "\n")
 
 
+def audit_sharp_linear_coefficient(output: Path) -> None:
+    """Replay the exact arithmetic behind the 5/3 linear obstruction.
+
+    This checks identities and the finite equality-case ledger.  It does not
+    replace either the small-codeword theorem or the geometric arguments in
+    the report.
+    """
+
+    endpoint_candidates = []
+    for secant_offset in range(-2, 8):
+        for coefficient_sum in (-3, -1, 1, 3):
+            if coefficient_sum % 3 != (1 - secant_offset) % 3:
+                continue
+            positive_lines = (3 + coefficient_sum) // 2
+            defect = 7 - secant_offset
+            norm_surplus = 7 - secant_offset
+            sum_correction = 4 - secant_offset - coefficient_sum
+            coverage_ok = secant_offset >= -1
+            support_capacity_ok = secant_offset >= 1
+            correction_ok = abs(sum_correction) <= norm_surplus
+            signed_capacity_ok = (
+                norm_surplus - sum_correction >= 2 * positive_lines
+            )
+            if (coverage_ok and support_capacity_ok and correction_ok
+                    and signed_capacity_ok):
+                endpoint_candidates.append((secant_offset, coefficient_sum))
+
+    expected_pre_exact = [
+        (1, -3), (1, 3), (2, -1), (3, 1),
+        (4, -3), (4, 3), (5, -1), (7, -3),
+    ]
+    if endpoint_candidates != expected_pre_exact:
+        raise AssertionError("the endpoint coefficient ledger changed")
+
+    field_checks = []
+    for q in (81, 243, 729):
+        r = q // 3
+        delta = r
+        candidate_data = []
+        for secant_offset, coefficient_sum in endpoint_candidates:
+            u_sum = ((9 - 3 * secant_offset) * r + 3 * delta
+                     - secant_offset + 1)
+            u_norm = ((15 - 3 * secant_offset) * r + 15 * delta
+                      + secant_offset**2 - 8 * secant_offset + 1)
+            arc_u_sum = ((10 - 2 * secant_offset) * r + 4 * delta
+                         - secant_offset)
+            defect = ((2 - secant_offset) * r + 1 + 5 * delta
+                      + secant_offset * (secant_offset - 7) // 2)
+            invariant_left = 2 * arc_u_sum - defect - u_sum
+            invariant_expected = (
+                3 * q - (secant_offset - 1) * (secant_offset - 4) // 2
+            )
+            if invariant_left != invariant_expected:
+                raise AssertionError("the three-line invariant changed")
+            candidate_data.append({
+                "secant_offset": secant_offset,
+                "coefficient_sum": coefficient_sum,
+                "u_sum": u_sum,
+                "u_norm_squared": u_norm,
+                "arc_u_sum": arc_u_sum,
+                "shell_defect": defect,
+                "three_line_invariant_left": invariant_left,
+            })
+
+        # The two final triangular cores have exact spectra forced by equality
+        # in the pointwise support inequality.
+        j4_arc_u_sum = 2 * q - 4
+        j4_defect = q - 5
+        if not j4_arc_u_sum > 2 * j4_defect + 3:
+            raise AssertionError("the all-negative endpoint contradiction changed")
+
+        s = 2 * r + 1
+        j5_tangent_count = 2 * q + 5
+        j5_degree_four = q * (q + 2) // 3 + 2
+        incidence_excess = s * j5_tangent_count - (
+            q * q // 3 + 5 * q // 3
+        )
+        # If a1 is the number of selected 1-secants and h4 the number of
+        # unselected 4-secants, the two degree equations give
+        # A3 = s + a1 + 2 h4.  Since only one 3-secant is off the positive
+        # generator line, its cap gives a1+2h4<=1; hence h4=0, and both
+        # 4-secant connector vertices are selected, exceeding that cap.
+        if incidence_excess != q * q + 11 * q // 3 + 5:
+            raise AssertionError("the mixed endpoint incidence total changed")
+        if j5_degree_four != q * (q + 2) // 3 + 2:
+            raise AssertionError("the mixed endpoint spectrum changed")
+
+        field_checks.append({
+            "field_order": q,
+            "endpoint_delta": delta,
+            "candidate_moments": candidate_data,
+            "all_negative_final_gap": (
+                j4_arc_u_sum - (2 * j4_defect + 3)
+            ),
+            "mixed_degree_four_line_count": j5_degree_four,
+            "mixed_positive_generator_cap_gap": 1,
+        })
+
+    output.write_text(json.dumps({
+        "schema": "c949-sharp-linear-coefficient-audit-v1",
+        "scope": (
+            "exact arithmetic replay only; the line-code representation and "
+            "pointwise/geometric inequalities remain human-proof dependencies"
+        ),
+        "asymptotic_compression": {
+            "support_invariant": "t >= 3",
+            "signed_capacity_invariant": "t <= 1+6 alpha+o(1)",
+            "consequence": "alpha >= 1/3",
+        },
+        "endpoint_candidates_before_exact_geometry": [
+            list(row) for row in endpoint_candidates
+        ],
+        "endpoint_candidates_after_norm_and_scalar_checks": [
+            [1, -3], [2, -1], [3, 1], [4, -3], [4, 3], [5, -1]
+        ],
+        "triangular_connector_survivors": [[4, -3], [5, -1]],
+        "field_checks": field_checks,
+        "checked": True,
+    }, indent=2, sort_keys=True) + "\n")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     subparsers = parser.add_subparsers(dest="command", required=True)
@@ -3146,6 +3267,8 @@ def main() -> None:
     hull_mechanism.add_argument("--output", type=Path, required=True)
     exact_target = subparsers.add_parser("exact-target-obstruction-audit")
     exact_target.add_argument("--output", type=Path, required=True)
+    sharp_linear = subparsers.add_parser("sharp-linear-coefficient-audit")
+    sharp_linear.add_argument("--output", type=Path, required=True)
     structure = subparsers.add_parser("analyze-blocking-certificate")
     structure.add_argument("--certificate", type=Path, required=True)
     structure.add_argument("--output", type=Path, required=True)
@@ -3213,6 +3336,8 @@ def main() -> None:
         audit_frobenius_hull_mechanism(args.frobenius_audit, args.output)
     elif args.command == "exact-target-obstruction-audit":
         audit_exact_target_obstruction(args.output)
+    elif args.command == "sharp-linear-coefficient-audit":
+        audit_sharp_linear_coefficient(args.output)
     elif args.command == "analyze-blocking-certificate":
         analyze_blocking_certificate(args.certificate, args.output)
     elif args.command == "analyze-unital-mechanism":

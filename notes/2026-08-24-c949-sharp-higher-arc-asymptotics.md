@@ -2,9 +2,10 @@
 
 **Lane**: `relconic`
 
-**Status:** complete on the stronger-obstruction exit; the proposed `4/3`
-linear coefficient is excluded and replaced by the lower coefficient `25/18`;
-sharpness of the new coefficient is successor work; no manuscript work
+**Status:** active on the user-requested sharpness continuation; the proposed
+`4/3` linear coefficient is excluded and the structural lower coefficient is
+now `5/3`; the exact `5/3` endpoint is also absent, while a matching
+`5/3+o(1)` construction remains open; no manuscript work
 
 ## First-gate findings — 24 August 2026
 
@@ -1077,6 +1078,170 @@ The endpoint `1/18` here is the limiting margin of this four-offset
 coefficient argument; no construction matching `25/18`, and no claim that
 this new coefficient is optimal, is made.
 
+#### Sharp compression of the linear obstruction
+
+The preceding coefficient table leaves substantial artificial slack.  Two
+pointwise identities remove it and locate the actual first phase boundary.
+
+> **Three-line linear-gap theorem.**  Fix `C>0` and `epsilon>0`.  For all
+> sufficiently large `q=3^h`, there is no complete
+> `(k,2q/3+1)`-arc with
+>
+> ```text
+> k=q^2/3+4q/3+delta,
+> -Cq <= delta <= (1/3-epsilon)q.                    (TL1)
+> ```
+
+As before, write `T=2q+j` for the number of maximal secants.  Coverage and
+the two-class Cauchy inequality make `j=O_{C,epsilon}(1)`; at
+`delta=alpha q`, the leading Cauchy term at `T=2q+j` is
+`(3j-15-45alpha)q/3`.  Hence the exact moment formulas `(BR1)`--`(BR2)` give
+`E, ||u||^2=O(q)`, and Szőnyi--Weiner writes `c=u mod 3` as an exact sum of a
+bounded number `t` of distinct lines with coefficients `+1` and `-1`.
+
+Let `z in {-1,0,1}` be the balanced residue of `u`, let `w=|supp(z)|`, and
+write `e_P` for the summand of `(E4)` at `P`.  The first new pointwise
+inequality is
+
+```text
+2 1_A(P) u_P-e_P-u_P <= 1_{z_P != 0}.                (TL2)
+```
+
+It is just the integer shell: on `A` its left side is
+`u-u(u-1)/2`, and outside it is `-u(u+3)/2`; checking the three residue
+classes gives `(TL2)`.  After summation, the exact moments collapse to
+
+```text
+3q-(j-1)(j-4)/2 = 2 sum_A u-E-sum u <= w.            (TL3)
+```
+
+The support of a sum of `t` fixed distinct lines has size `tq+O(t^2)`:
+every nonvertex point of every generator line is nonzero.  Thus `(TL3)`
+forces
+
+```text
+t>=3.                                                  (TL4)
+```
+
+For the opposite inequality, let `sigma` be the sum of the line
+coefficients and let `a=(t+sigma)/2` be the number of positive generator
+lines.  Pointwise,
+
+```text
+(u_P^2-z_P^2)-(u_P-z_P) >=0,                          (TL5)
+```
+
+and it is at least six whenever `z_P=1` and `P` is outside `A`.  Away from
+`O(t^2)` vertices, the positive residue occurs at `aq+O(1)` points.  The
+`a` positive lines carry at most `a(2q/3+1)` arc points, so at least
+`aq/3-O(1)` of those positive residues are outside `A`.  Consequently
+
+```text
+(||u||^2-w)-(sum u-sum z) >= 2aq-O(1).                (TL6)
+```
+
+Now `w=tq+O(1)` and `sum z=sigma q+O(1)`.  Substitution of `(BR2)` into
+`(TL6)` cancels `j` and `sigma` completely:
+
+```text
+(2+12alpha-t+sigma)q+O(1)
+    >= (t+sigma)q+O(1),
+t <= 1+6alpha+o(1).                                  (TL7)
+```
+
+Together `(TL4)` and `(TL7)` give `alpha>=1/3-o(1)`, contradicting `(TL1)`.
+This is the structural reason the earlier `1/18` margin was loose: the shell
+itself needs three generator lines, while positive-line capacity cannot pay
+for three lines before displacement `q/3`.
+
+Combining this theorem with C945's lower side gives
+
+```text
+T_3(q) >= q^2/3+5q/3-o(q).                            (LB3++)
+```
+
+The equality scale is rigid as well.
+
+> **Exact `5/3` endpoint obstruction.**  For all sufficiently large
+> `q=3^h`, there is no complete
+> `(q^2/3+5q/3,2q/3+1)`-arc in `PG(2,q)`.
+
+At `delta=q/3`, `(TL3)`--`(TL7)` force `t=3`.  Coverage, the arc cap,
+coefficient congruence, and the exact sum/norm budget leave, after two scalar
+rows are removed, only
+
+```text
+(j,sigma)=(1,-3),(2,-1),(3,1),(4,-3),(4,3),(5,-1).   (TL8)
+```
+
+The discarded `(7,-3)` row has `||u||^2=3q-6<w`, while `(1,3)` has no
+negative support at leading order and the inequality
+`sum_A u <= E-|R_+|+2|A intersect R_+|+O(1)` bounds its left side by
+`3q+O(1)` instead of the required `4q+O(1)`.
+
+The three generator lines cannot be concurrent.  For the all-equal signs in
+`(TL8)`, the exact inequalities `|sum u-sum z|<=||u||^2-w` exclude
+`(1,-3)`, `(4,-3)`, and `(4,3)`.  For the mixed rows, `(TL6)` is short by
+exactly six: the positive generators are maximal secants, but their positive
+nonvertices leave at least `q/3-1` external positive residues for
+`j=2,5`, and at least `2q/3-1` for `j=3`.
+
+Thus the generators form a triangle.  Dualize them to noncollinear points
+`Q_i`.  A positive `Q_i` belongs to `D`, every ordinary line through it has
+degree three, and the sum of its two connector degrees is `j+3`.  A negative
+`Q_i` is outside `D`, every ordinary line through it has degree two, and its
+connector sum is `j+2`.  Solving these three pencil equations eliminates the
+first four rows of `(TL8)` and leaves only
+
+```text
+(j,sigma)=(4,-3), (5,-1).                             (TL9)
+```
+
+For `(4,-3)`, the positive residue consists only of the three triangle
+vertices.  On `A`, the sharper pointwise inequality
+
+```text
+u_P <= 2e_P+1_{z_P=1}
+```
+
+would give
+
+```text
+2q-4=sum_A u <=2E+3=2q-7,
+```
+
+which is impossible.
+
+Finally consider `(5,-1)`.  Equality in `(TL3)` forces every line degree to
+be one of `1,2,3,4`; the exact spectrum has `2q-2` degree-two lines, `q`
+degree-three lines, and
+
+```text
+N_4=q(q+2)/3+2
+```
+
+degree-four lines.  Let `A_i` count selected primal points whose dual line
+has degree `i`, put `a=A_1`, and put `h=N_4-A_4`.  The equations
+`sum A_i=k` and `sum i A_i=(2q/3+1)(2q+5)` reduce exactly to
+
+```text
+A_3=2q/3+1+a+2h.                                     (TL10)
+```
+
+Only one of the degree-three points lies off the positive generator line, so
+its arc cap gives `a+2h<=1`.  Hence `h=0`: both degree-four connector
+vertices are selected.  Equation `(TL10)` then puts at least `2q/3` selected
+degree-three points on that same generator, and the two connector vertices
+raise its intersection to at least `2q/3+2`, one above the allowed maximum.
+This excludes the last row.
+
+The tracked arithmetic replay for `(TL3)`, `(TL8)`, and the two final exact
+contradictions is
+`notes/2026-08-25-c949-sharp-linear-coefficient-audit.json`.  This endpoint
+nonexistence is not a matching upper bound: sharpness of the coefficient
+`5/3` would require constructions with an unbounded `o(q)` positive repair,
+and no such construction is presently known.
+
 #### Bound status after the structural upgrade
 
 The unconditional asymptotic statement is now strengthened from C945's lower
@@ -1086,7 +1251,9 @@ side
 T_3(q)>=q^2/3+4q/3-o(q)
 ```
 
-to `(LB3+)`, with linear coefficient `25/18`.
+to `(LB3++)`, with linear coefficient `5/3`.  The exact coefficient endpoint
+is absent as well, so any construction proving sharpness must approach it
+from above by an unbounded sublinear repair.
 
 No matching upper bound is proved here.  What is now proved is that the exact
 `q=9` equality mechanism is Hermitian-unital-minus-secant, that its sign
@@ -1100,11 +1267,11 @@ This obstructs the literal `(FC5)` route to `(UB3)` and rules out an arc at
 the exact central size.  The exact-target theorem alone gives no one-sided
 bound; the uniformization below is what supplies one.
 The bounded-repair theorem strengthens this first to every fixed additive
-repair, and the linear-gap theorem then excludes the entire `c q` band for
-each `c<1/18`.  Thus the proposed matching `(UB3)` is false.  Determining the
-true coefficient, or constructing arcs matching the new `25/18` lower side,
-is the next extremal problem rather than an unfinished proof obligation of
-the rejected `4/3` target.
+repair.  The three-line compression then excludes every displacement below
+`q/3-o(q)`, proving the coefficient `5/3`, and the exact endpoint audit rules
+out displacement exactly `q/3`.  Thus the proposed matching `(UB3)` is false.
+A sharp construction, if the new coefficient is optimal, must approach it
+from above with an unbounded sublinear repair.
 
 Finally, for a core-line intersection `1<=d<=5`, the threshold itself has the
 binomial-energy expansion
@@ -1385,9 +1552,11 @@ family is lower priority.
   maximal-secant offsets reduce to at most seven line-code generators.  Their
   coefficient sum and integral moment eliminate all but two all-positive
   patterns, and the arc cap eliminates those.  The uniform version excludes
-  every relative repair `|delta|<=cq` for fixed `c<1/18`; combined with C945,
-  this proves `(LB3+)` and refutes `(UB3)`.  The true optimal linear
-  coefficient beyond `25/18` remains open.
+  every relative repair `|delta|<=cq` for fixed `c<1/18`.  The later
+  three-line shell inequality supersedes that margin: `t>=3` and
+  `t<=1+6alpha+o(1)` force `alpha>=1/3`, proving `(LB3++)` with coefficient
+  `5/3`.  Exact equality is also impossible.  Whether an unbounded `o(q)`
+  positive repair can construct the matching upper side remains open.
 - **Settled by the signed descent — what geometry does its support have?**
   Field-uniformly it is a signed untouchable set of size `4q-6`: it has no
   tangents, and every support 2-secant joins opposite signs.  At `q=9` its
@@ -1425,22 +1594,24 @@ design identity; checked the `q>27`, `h>2`, and weight hypotheses of
 Szőnyi--Weiner Theorem 4.3; and separated “no arc at this size” from a
 one-sided extremal bound before invoking C945.  It also restored the sharp
 seven-hole count in the four-line lemma.  The tracked arithmetic replay checks
-the exact branch table, the ten coefficient rows, their `1/18` limiting
-margin, and the transversal inequality.  No bounded solver status is used in
-`(LB3+)`.
+the exact branch table, the ten coefficient rows, their obsolete `1/18`
+limiting margin, the transversal inequality, and the new exact three-line
+endpoint ledger.  No bounded solver status is used in `(LB3++)`.
 
-The `tt` pass is the compression itself: replace a hypothetical arc by its
-full maximal-secant set, then by the integral word `u`, then by at most seven
-line coefficients.  The coefficient sum sees the line-code coset, the norm
-controls the lift away from balanced residues, and the arc cap kills the only
-two positive patterns.  This chain applies to arbitrary complete arcs in the
-linear band, so it discharges the earlier five-intersection scope warning.
+The refreshed `tt` pass is the two-inequality compression: the shell identity
+forces three generator lines, while the signed norm correction and the cap on
+positive generators force `t<=1+6alpha+o(1)`.  At equality, concurrency,
+three connector equations, and two one-line cap contradictions exhaust every
+three-line core.  This applies to arbitrary complete arcs in the linear band,
+so it discharges the earlier five-intersection scope warning.
 
-Closeout verdict: **GO** for C949's stronger-obstruction exit and `(LB3+)`.
-The unresolved mysteries are sharpness of `25/18`, construction on the new
-scale, the endpoint coefficient patterns, the finite arbitrary `q=27,T=54`
-branch, and a structural replacement for the `q=9` lower-bound certificate.
-None is needed to reject the original `4/3` target.
+Interim verdict: **GO** for the structural theorem `(LB3++)`, but C949 remains
+active under the user's sharpness continuation.  The endpoint coefficient
+patterns are settled.  The principal unresolved mystery is a construction
+with displacement `q/3+o(q)` (necessarily an unbounded positive repair), or a
+further structural obstruction proving that `5/3` is still not sharp.  The
+finite arbitrary `q=27,T=54` branch and a structural replacement for the
+`q=9` lower-bound certificate remain separate finite mysteries.
 
 ### Reproducibility
 
@@ -1493,6 +1664,12 @@ python3 notes/2026-08-24-c949-sharp-higher-arc-asymptotics.py \
   --output /tmp/c949-exact-target-structural-arithmetic-audit.json
 cmp /tmp/c949-exact-target-structural-arithmetic-audit.json \
   notes/2026-08-25-c949-exact-target-structural-arithmetic-audit.json
+
+python3 notes/2026-08-24-c949-sharp-higher-arc-asymptotics.py \
+  sharp-linear-coefficient-audit \
+  --output /tmp/c949-sharp-linear-coefficient-audit.json
+cmp /tmp/c949-sharp-linear-coefficient-audit.json \
+  notes/2026-08-25-c949-sharp-linear-coefficient-audit.json
 ```
 
 The corrected fixed-core lift replays the five-character mechanism at `q=9`

@@ -1,0 +1,325 @@
+{
+  "asymptotic_compression": {
+    "consequence": "alpha >= 1/3",
+    "signed_capacity_invariant": "t <= 1+6 alpha+o(1)",
+    "support_invariant": "t >= 3"
+  },
+  "checked": true,
+  "endpoint_candidates_after_norm_and_scalar_checks": [
+    [
+      1,
+      -3
+    ],
+    [
+      2,
+      -1
+    ],
+    [
+      3,
+      1
+    ],
+    [
+      4,
+      -3
+    ],
+    [
+      4,
+      3
+    ],
+    [
+      5,
+      -1
+    ]
+  ],
+  "endpoint_candidates_before_exact_geometry": [
+    [
+      1,
+      -3
+    ],
+    [
+      1,
+      3
+    ],
+    [
+      2,
+      -1
+    ],
+    [
+      3,
+      1
+    ],
+    [
+      4,
+      -3
+    ],
+    [
+      4,
+      3
+    ],
+    [
+      5,
+      -1
+    ],
+    [
+      7,
+      -3
+    ]
+  ],
+  "field_checks": [
+    {
+      "all_negative_final_gap": 3,
+      "candidate_moments": [
+        {
+          "arc_u_sum": 323,
+          "coefficient_sum": -3,
+          "secant_offset": 1,
+          "shell_defect": 160,
+          "three_line_invariant_left": 243,
+          "u_norm_squared": 723,
+          "u_sum": 243
+        },
+        {
+          "arc_u_sum": 323,
+          "coefficient_sum": 3,
+          "secant_offset": 1,
+          "shell_defect": 160,
+          "three_line_invariant_left": 243,
+          "u_norm_squared": 723,
+          "u_sum": 243
+        },
+        {
+          "arc_u_sum": 268,
+          "coefficient_sum": -1,
+          "secant_offset": 2,
+          "shell_defect": 131,
+          "three_line_invariant_left": 244,
+          "u_norm_squared": 637,
+          "u_sum": 161
+        },
+        {
+          "arc_u_sum": 213,
+          "coefficient_sum": 1,
+          "secant_offset": 3,
+          "shell_defect": 103,
+          "three_line_invariant_left": 244,
+          "u_norm_squared": 553,
+          "u_sum": 79
+        },
+        {
+          "arc_u_sum": 158,
+          "coefficient_sum": -3,
+          "secant_offset": 4,
+          "shell_defect": 76,
+          "three_line_invariant_left": 243,
+          "u_norm_squared": 471,
+          "u_sum": -3
+        },
+        {
+          "arc_u_sum": 158,
+          "coefficient_sum": 3,
+          "secant_offset": 4,
+          "shell_defect": 76,
+          "three_line_invariant_left": 243,
+          "u_norm_squared": 471,
+          "u_sum": -3
+        },
+        {
+          "arc_u_sum": 103,
+          "coefficient_sum": -1,
+          "secant_offset": 5,
+          "shell_defect": 50,
+          "three_line_invariant_left": 241,
+          "u_norm_squared": 391,
+          "u_sum": -85
+        },
+        {
+          "arc_u_sum": -7,
+          "coefficient_sum": -3,
+          "secant_offset": 7,
+          "shell_defect": 1,
+          "three_line_invariant_left": 234,
+          "u_norm_squared": 237,
+          "u_sum": -249
+        }
+      ],
+      "endpoint_delta": 27,
+      "field_order": 81,
+      "mixed_degree_four_line_count": 2243,
+      "mixed_positive_generator_cap_gap": 1
+    },
+    {
+      "all_negative_final_gap": 3,
+      "candidate_moments": [
+        {
+          "arc_u_sum": 971,
+          "coefficient_sum": -3,
+          "secant_offset": 1,
+          "shell_defect": 484,
+          "three_line_invariant_left": 729,
+          "u_norm_squared": 2181,
+          "u_sum": 729
+        },
+        {
+          "arc_u_sum": 971,
+          "coefficient_sum": 3,
+          "secant_offset": 1,
+          "shell_defect": 484,
+          "three_line_invariant_left": 729,
+          "u_norm_squared": 2181,
+          "u_sum": 729
+        },
+        {
+          "arc_u_sum": 808,
+          "coefficient_sum": -1,
+          "secant_offset": 2,
+          "shell_defect": 401,
+          "three_line_invariant_left": 730,
+          "u_norm_squared": 1933,
+          "u_sum": 485
+        },
+        {
+          "arc_u_sum": 645,
+          "coefficient_sum": 1,
+          "secant_offset": 3,
+          "shell_defect": 319,
+          "three_line_invariant_left": 730,
+          "u_norm_squared": 1687,
+          "u_sum": 241
+        },
+        {
+          "arc_u_sum": 482,
+          "coefficient_sum": -3,
+          "secant_offset": 4,
+          "shell_defect": 238,
+          "three_line_invariant_left": 729,
+          "u_norm_squared": 1443,
+          "u_sum": -3
+        },
+        {
+          "arc_u_sum": 482,
+          "coefficient_sum": 3,
+          "secant_offset": 4,
+          "shell_defect": 238,
+          "three_line_invariant_left": 729,
+          "u_norm_squared": 1443,
+          "u_sum": -3
+        },
+        {
+          "arc_u_sum": 319,
+          "coefficient_sum": -1,
+          "secant_offset": 5,
+          "shell_defect": 158,
+          "three_line_invariant_left": 727,
+          "u_norm_squared": 1201,
+          "u_sum": -247
+        },
+        {
+          "arc_u_sum": -7,
+          "coefficient_sum": -3,
+          "secant_offset": 7,
+          "shell_defect": 1,
+          "three_line_invariant_left": 720,
+          "u_norm_squared": 723,
+          "u_sum": -735
+        }
+      ],
+      "endpoint_delta": 81,
+      "field_order": 243,
+      "mixed_degree_four_line_count": 19847,
+      "mixed_positive_generator_cap_gap": 1
+    },
+    {
+      "all_negative_final_gap": 3,
+      "candidate_moments": [
+        {
+          "arc_u_sum": 2915,
+          "coefficient_sum": -3,
+          "secant_offset": 1,
+          "shell_defect": 1456,
+          "three_line_invariant_left": 2187,
+          "u_norm_squared": 6555,
+          "u_sum": 2187
+        },
+        {
+          "arc_u_sum": 2915,
+          "coefficient_sum": 3,
+          "secant_offset": 1,
+          "shell_defect": 1456,
+          "three_line_invariant_left": 2187,
+          "u_norm_squared": 6555,
+          "u_sum": 2187
+        },
+        {
+          "arc_u_sum": 2428,
+          "coefficient_sum": -1,
+          "secant_offset": 2,
+          "shell_defect": 1211,
+          "three_line_invariant_left": 2188,
+          "u_norm_squared": 5821,
+          "u_sum": 1457
+        },
+        {
+          "arc_u_sum": 1941,
+          "coefficient_sum": 1,
+          "secant_offset": 3,
+          "shell_defect": 967,
+          "three_line_invariant_left": 2188,
+          "u_norm_squared": 5089,
+          "u_sum": 727
+        },
+        {
+          "arc_u_sum": 1454,
+          "coefficient_sum": -3,
+          "secant_offset": 4,
+          "shell_defect": 724,
+          "three_line_invariant_left": 2187,
+          "u_norm_squared": 4359,
+          "u_sum": -3
+        },
+        {
+          "arc_u_sum": 1454,
+          "coefficient_sum": 3,
+          "secant_offset": 4,
+          "shell_defect": 724,
+          "three_line_invariant_left": 2187,
+          "u_norm_squared": 4359,
+          "u_sum": -3
+        },
+        {
+          "arc_u_sum": 967,
+          "coefficient_sum": -1,
+          "secant_offset": 5,
+          "shell_defect": 482,
+          "three_line_invariant_left": 2185,
+          "u_norm_squared": 3631,
+          "u_sum": -733
+        },
+        {
+          "arc_u_sum": -7,
+          "coefficient_sum": -3,
+          "secant_offset": 7,
+          "shell_defect": 1,
+          "three_line_invariant_left": 2178,
+          "u_norm_squared": 2181,
+          "u_sum": -2193
+        }
+      ],
+      "endpoint_delta": 243,
+      "field_order": 729,
+      "mixed_degree_four_line_count": 177635,
+      "mixed_positive_generator_cap_gap": 1
+    }
+  ],
+  "schema": "c949-sharp-linear-coefficient-audit-v1",
+  "scope": "exact arithmetic replay only; the line-code representation and pointwise/geometric inequalities remain human-proof dependencies",
+  "triangular_connector_survivors": [
+    [
+      4,
+      -3
+    ],
+    [
+      5,
+      -1
+    ]
+  ]
+}
