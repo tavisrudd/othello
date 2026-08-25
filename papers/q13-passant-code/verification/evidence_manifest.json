@@ -221,9 +221,27 @@
       "bytes": 22121,
       "sha256": "cdb5300d08c8d491e09fc1d83f581d1a82956350aab9dcf58188af6c3c3a91b0",
       "role": "hash manifest of the generated isolated weight-ten reachability modules"
+    },
+    {
+      "paper_iv_path": "verification/generate_sparse_shadow_export.py",
+      "bytes": 4907,
+      "sha256": "0ae6a5694c0d4dc5f36e356b13e98e70ab385b44bf6d4e655a2dab4074c9aaf7",
+      "role": "deterministic generator and byte-for-byte checker for the complete weighted-pair section and a three-generator PGL(2,13) coordinate action"
+    },
+    {
+      "paper_iv_path": "verification/sparse_shadow_export.json",
+      "bytes": 287045,
+      "sha256": "dbccc767a9054ac17253f55347efe9917d53d40eb8ab398b5b1123881b021aa2",
+      "role": "paper-owned sparse-shadow export of all 3003 pair concurrences and the generating coordinate action"
     }
   ],
   "commands": [
+    {
+      "cwd": "verification",
+      "command": "python3 generate_sparse_shadow_export.py --check sparse_shadow_export.json",
+      "output_contains": "Paper IV sparse-shadow export: PASS",
+      "certifies": "the tracked export is byte-identical to deterministic regeneration from all 364 minimum supports and its three permutations generate a group of order 2184"
+    },
     {
       "cwd": "verification",
       "command": "python3 generate_weight_ten_profiles.py --check",

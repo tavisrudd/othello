@@ -1,10 +1,11 @@
-use std::collections::BTreeSet;
+use std::collections::{BTreeMap, BTreeSet, VecDeque};
 
 use serde::{Deserialize, Serialize};
 
 use crate::{
-    ActionKind, BinaryRelation, BranchDecision, CanonicalCertificate, InputArtifact,
-    PaperIOrientation, ProfileInput, RelationalShadow, ShadowError,
+    ActionKind, AmbiguitySpec, BinaryRelation, BranchDecision, CanonicalCertificate,
+    DeclaredAction, GatedPaperIv, InputArtifact, PaperIOrientation, ProfileInput, RelationalShadow,
+    ShadowError,
 };
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
@@ -22,6 +23,7 @@ pub struct VerificationReport {
 /// Returns an error for any unknown, inconsistent, unsupported, or gated input.
 pub fn validate(input: &InputArtifact) -> Result<VerificationReport, ShadowError> {
     input.check_version()?;
+    let mut checked_automorphisms = 0;
     match &input.profile {
         ProfileInput::PaperIOrientation(paper) => {
             if paper.shadow.action != ActionKind::ColorPreservingPermutations {
@@ -97,7 +99,7 @@ pub fn validate(input: &InputArtifact) -> Result<VerificationReport, ShadowError
             validate_gate("paper_iii_four_shadow", &value.gate)?;
         }
         ProfileInput::PaperIvMinimumWords(value) => {
-            validate_gate("paper_iv_minimum_words", &value.gate)?;
+            checked_automorphisms = validate_paper_iv(value)?;
         }
         ProfileInput::PaperVChordalConference(value) => {
             validate_gate("paper_v_chordal_conference", &value.gate)?;
@@ -106,7 +108,7 @@ pub fn validate(input: &InputArtifact) -> Result<VerificationReport, ShadowError
     Ok(VerificationReport {
         valid: true,
         canonical_id: None,
-        checked_automorphisms: 0,
+        checked_automorphisms,
     })
 }
 
@@ -465,6 +467,139 @@ fn validate_gate(profile: &'static str, gate: &crate::FixtureGate) -> Result<(),
             format!("{}; required export: {}", gate.reason, gate.required_export)
         },
     })
+}
+
+fn validate_paper_iv(value: &GatedPaperIv) -> Result<usize, ShadowError> {
+    if !value.gate.enabled {
+        validate_gate("paper_iv_minimum_words", &value.gate)?;
+        unreachable!();
+    }
+    if value.field.characteristic != 13
+        || value.field.degree != 1
+        || !value.field.modulus_coefficients_low_to_high.is_empty()
+        || value.field.element_encoding != "least_nonnegative_residue"
+        || value.coordinate_count != 78
+        || value.minimum_support_count != 364
+    {
+        return Err(ShadowError::Invalid(
+            "invalid Paper-IV field or census contract".into(),
+        ));
+    }
+    if value.recovered_carrier != "PG(2,13), conic, and polarity"
+        || !matches!(&value.ambiguity, AmbiguitySpec::MarkingTorsor { group } if group == "PGL2(13)")
+    {
+        return Err(ShadowError::Invalid(
+            "invalid Paper-IV recovery contract".into(),
+        ));
+    }
+    if value.source.paper != "IV"
+        || value.source.theorem != "exact arity-two minimum-word reconstruction"
+        || value.source.artifact != "papers/q13-passant-code/verification/pair_reconstruction.json"
+        || value.source.sha256 != "cb9c1da169cef5f23402bb87d28d4f5885ddecb9ae7d92f784803a2d9d8d0ae6"
+    {
+        return Err(ShadowError::Invalid(
+            "invalid Paper-IV frozen-source identity".into(),
+        ));
+    }
+
+    let degree = value.coordinate_count as usize;
+    let mut weights = vec![0_u32; degree * degree];
+    let mut distribution = BTreeMap::<u32, usize>::new();
+    for pair in &value.weighted_pair_section {
+        let (left, right) = (pair.left as usize, pair.right as usize);
+        if left >= right || right >= degree || weights[left * degree + right] != 0 {
+            return Err(ShadowError::Invalid(
+                "Paper-IV pair section is not a simple complete upper triangle".into(),
+            ));
+        }
+        weights[left * degree + right] = pair.multiplicity;
+        weights[right * degree + left] = pair.multiplicity;
+        *distribution.entry(pair.multiplicity).or_default() += 1;
+    }
+    if value.weighted_pair_section.len() != degree * (degree - 1) / 2
+        || distribution != BTreeMap::from([(6, 1092), (7, 546), (8, 273), (9, 546), (12, 546)])
+    {
+        return Err(ShadowError::Invalid(
+            "invalid Paper-IV pair-concurrence distribution".into(),
+        ));
+    }
+
+    let DeclaredAction::VertexPermutations {
+        degree: action_degree,
+        generators,
+    } = &value.action
+    else {
+        return Err(ShadowError::Invalid(
+            "Paper-IV action must use vertex permutations".into(),
+        ));
+    };
+    if *action_degree as usize != degree || generators.is_empty() {
+        return Err(ShadowError::Invalid(
+            "invalid Paper-IV action degree or generator set".into(),
+        ));
+    }
+    for generator in generators {
+        validate_permutation(generator, degree)?;
+        for left in 0..degree {
+            for right in left + 1..degree {
+                let image_left = generator[left] as usize;
+                let image_right = generator[right] as usize;
+                if weights[left * degree + right] != weights[image_left * degree + image_right] {
+                    return Err(ShadowError::Invalid(
+                        "Paper-IV generator does not preserve pair weights".into(),
+                    ));
+                }
+            }
+        }
+    }
+    let group_order = generated_permutation_group_order(generators, degree, 2184)?;
+    if group_order != 2184 {
+        return Err(ShadowError::Invalid(
+            "Paper-IV generators do not generate PGL2(13)".into(),
+        ));
+    }
+    Ok(group_order)
+}
+
+fn validate_permutation(permutation: &[u32], degree: usize) -> Result<(), ShadowError> {
+    let image = permutation.iter().copied().collect::<BTreeSet<_>>();
+    if permutation.len() != degree
+        || image.len() != degree
+        || image.iter().any(|&point| point as usize >= degree)
+    {
+        return Err(ShadowError::Invalid(
+            "action generator is not a permutation".into(),
+        ));
+    }
+    Ok(())
+}
+
+fn generated_permutation_group_order(
+    generators: &[Vec<u32>],
+    degree: usize,
+    limit: usize,
+) -> Result<usize, ShadowError> {
+    let degree_u32 = u32::try_from(degree)
+        .map_err(|_| ShadowError::Invalid("action degree exceeds u32".into()))?;
+    let identity = (0..degree_u32).collect::<Vec<_>>();
+    let mut seen = BTreeSet::from([identity.clone()]);
+    let mut pending = VecDeque::from([identity]);
+    while let Some(element) = pending.pop_front() {
+        for generator in generators {
+            let product = (0..degree)
+                .map(|point| generator[element[point] as usize])
+                .collect::<Vec<_>>();
+            if seen.insert(product.clone()) {
+                if seen.len() > limit {
+                    return Err(ShadowError::Invalid(
+                        "action closure exceeds declared group order".into(),
+                    ));
+                }
+                pending.push_back(product);
+            }
+        }
+    }
+    Ok(seen.len())
 }
 
 fn validate_relation(relation: &BinaryRelation, n: usize) -> Result<(), ShadowError> {

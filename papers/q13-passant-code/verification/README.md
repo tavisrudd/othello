@@ -67,6 +67,8 @@ recovery and expansion masks used by the semantic rank theorem.
 - `verify_weight_ten_moment.py --check weight_ten_moment.json` for the global moment and two
   stabilizer leaves;
 - `verify_pair_reconstruction.py --check pair_reconstruction.json` for exact arity-two recovery;
+- `generate_sparse_shadow_export.py --check sparse_shadow_export.json` for the complete
+  78-coordinate weighted-pair section and generating `PGL(2,13)` action consumed by C968;
 - `verify_minimum_geometry.py --check minimum_geometry.json` for the toric--octahedral families;
 - `verify_ambient_plane.py --check ambient_plane.json` for the Sylow/involution plane; and
 - `verify_hidden_field.py --check hidden_field.json` for the compact operator-field theorem.

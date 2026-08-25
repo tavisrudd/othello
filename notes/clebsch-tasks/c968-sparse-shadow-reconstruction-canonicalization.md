@@ -2,7 +2,7 @@
 
 **Lane:** clebsch
 
-**Status:** active at four external source gates; Paper-I producer/replay/proof-system/hot-layout gates green; Papers II--V fail-closed pending frozen exports; standalone Rust tool; no manuscript or Lean edits
+**Status:** active; Paper-I gates green; Paper IV now has a frozen paper-owned export and an independent C968 structural/action gate, with canonical reconstruction next; Papers II, III, and V remain at external source gates; standalone Rust tool; no manuscript or Lean edits
 
 ## Goal
 
@@ -283,8 +283,12 @@ and independently recovers automorphism orders 120 and 6 for the uncalibrated
 and calibrated fixtures, respectively. External results never replace the
 native transporter, reconstruction, or replay certificate.
 
-No unblocked C968 implementation frontier remains: each next adapter first
-requires the complete paper-owned export named in its `fixtures/gated-*.json`.
-Nearby evidence JSON and trust manifests are explicitly insufficient. Once an
-owning paper stream freezes one export, C968 resumes with that adapter's exact
-action/arithmetic checker, reference orbit fixtures, and performance gate.
+Paper IV's paper-owned `verification/sparse_shadow_export.json` now supplies
+all 3003 weighted pairs and three coordinate generators.  C968 independently
+checks the exact source identity, pair census and distribution, permutation
+action, weight preservation, and generated order 2184; see
+`../2026-08-25-c968-paper-iv-sparse-shadow-export.md`.  Its next gate is full
+scheme automorphism equality and intrinsic recovery of the elliptic relations,
+78 incidence rows, plane, conic, polarity, and marking torsor.  Papers II, III,
+and V still require the complete paper-owned export named in their gated
+fixtures; nearby evidence JSON and trust manifests remain insufficient.
