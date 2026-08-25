@@ -42,6 +42,16 @@ contract the five singleton curves, or equivalently normalize their Cox
 sections at a rational torsor point.  Report and replay:
 `notes/2026-08-24-c958-type-i1-exceptional-sections.md` and its adjacent bundle.
 
+The entire splitting field has now been rationalized as `Q(a,z)`.  The base
+parameter `beta` is a coprime degree-twelve invariant of an explicit
+order-twelve Möbius group isomorphic to `C2 x S3`; the radical generators and
+all sixteen exceptional sections are compact rational functions of `a,z`.
+This cuts the total line-formula size by more than half.  The preferred next
+step is therefore the six-line quadric interpolation giving the split
+blowdown to the marked plane, followed by invariant descent.  Report and
+replay: `notes/2026-08-24-c958-type-i1-rational-splitting-cover.md` and its
+adjacent bundle.
+
 ## Goal
 
 Turn the constructive existence proof in C956 into explicit, independently
