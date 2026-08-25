@@ -1,11 +1,11 @@
 use std::{fs, path::PathBuf, process::ExitCode};
 
 use clap::{Parser, Subcommand};
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 use sparse_shadow_core::{
-    CanonicalCertificate, EquivalenceCertificate, InputArtifact, ReconstructionArtifact,
-    ShadowError, canonicalize, compare, reconstruct, validate, verify_certificate,
-    verify_equivalence, verify_reconstruction,
+    CanonicalArtifact, CanonicalCertificate, EquivalenceCertificate, InputArtifact,
+    ReconstructionArtifact, ShadowError, canonicalize, compare, reconstruct, validate,
+    verify_canonical_artifact, verify_certificate, verify_equivalence, verify_reconstruction,
 };
 use thiserror::Error;
 
@@ -57,6 +57,13 @@ enum CliError {
     },
 }
 
+#[derive(Debug, Deserialize)]
+#[serde(untagged)]
+enum CanonicalProof {
+    Artifact(Box<CanonicalArtifact>),
+    Certificate(CanonicalCertificate),
+}
+
 fn main() -> ExitCode {
     match run() {
         Ok(()) => ExitCode::SUCCESS,
@@ -77,8 +84,15 @@ fn run() -> Result<(), CliError> {
         }
         Command::Reconstruct { input } => print_json(&reconstruct(&read_input(&input)?)?)?,
         Command::VerifyCertificate { input, certificate } => {
-            let certificate = read_json::<CanonicalCertificate>(&certificate)?;
-            print_json(&verify_certificate(&read_input(&input)?, &certificate)?)?;
+            let input = read_input(&input)?;
+            match read_json::<CanonicalProof>(&certificate)? {
+                CanonicalProof::Artifact(artifact) => {
+                    print_json(&verify_canonical_artifact(&input, &artifact)?)?;
+                }
+                CanonicalProof::Certificate(certificate) => {
+                    print_json(&verify_certificate(&input, &certificate)?)?;
+                }
+            }
         }
         Command::VerifyEquivalenceCertificate {
             left,

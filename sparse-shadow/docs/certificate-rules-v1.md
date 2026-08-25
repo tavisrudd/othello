@@ -47,6 +47,11 @@ membership-bounded by that group, so hostile wrapper data cannot trigger an
 unbounded closure search. Wrapper metadata cannot be altered while retaining a
 valid embedded certificate.
 
+The library's `verify_canonical_artifact` entry point and the CLI's
+`verify-certificate` command replay this complete wrapper. The CLI accepts the
+output of `canonicalize` without extraction, while retaining support for a bare
+`CanonicalCertificate`.
+
 The first fixture's certificate is about 5.1 KiB because it carries all 120
 automorphisms. The public artifact reports a three-element generating set, but
 the proof retains the full set so completeness is independently checkable.

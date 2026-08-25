@@ -31,13 +31,16 @@ cargo run -p sparse-shadow-cli -- validate fixtures/paper-i-icosahedral-orbitals
 cargo run -p sparse-shadow-cli -- canonicalize fixtures/paper-i-icosahedral-orbitals.json
 cargo run -p sparse-shadow-cli -- reconstruct fixtures/paper-i-calibrated-icosahedral-orbitals.json
 cargo run -p sparse-shadow-cli -- equivalent LEFT.json RIGHT.json
+cargo run -p sparse-shadow-cli -- verify-certificate INPUT.json CANONICAL-OUTPUT.json
 ```
 
 `equivalent` emits explicit isomorphism witnesses or an inequivalence separator
 backed by both exhaustive canonical certificates. Dedicated verifier commands
 replay canonical, equivalence, and reconstruction artifacts from the raw
 input(s). Black-box tests pass each emitted certificate back through its CLI
-verifier and require corrupted artifacts to exit nonzero.
+verifier and require corrupted artifacts to exit nonzero. `verify-certificate`
+accepts the complete output of `canonicalize` directly; it also accepts a bare
+nested canonical certificate for compatibility.
 
 See `docs/schema-v1.md`, `docs/certificate-rules-v1.md`,
 `docs/dependency-audit.md`, `docs/prior-art-audit.md`, and

@@ -62,11 +62,14 @@ serialized tree.
   canonicalize runs are byte-identical, and identical inputs compare
   equivalent; canonical, equivalence, and reconstruction outputs all replay
   through their CLI verifier, while a corrupted form of each exits nonzero;
+- `verify-certificate` consumes the complete `canonicalize` output directly
+  and retains bare-certificate compatibility; the library exposes the same
+  full-wrapper verifier;
 - canonicalization idempotence is tested; reconstruction replay binds the
   enclosing canonical schema, identity, payload, transporter, statistics,
   group order, generator closure, vertex orbits, and point stabilizers to the
-  independently replayed certificate; hostile generators are rejected by a closure walk
-  bounded inside the certified full group;
+  independently replayed certificate; hostile generators are rejected by a
+  closure walk bounded inside the certified full group;
 - deliberate canonical-identity, branch-trace, and automorphism-set corruption:
   rejected by the independent reference implementation.
 - hot Paper-I search: fixed 32/64/128-byte guarded records; zero allocations,

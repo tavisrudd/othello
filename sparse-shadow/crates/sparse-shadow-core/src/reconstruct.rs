@@ -2,7 +2,7 @@ use serde::{Deserialize, Serialize};
 
 use crate::{
     CanonicalArtifact, InputArtifact, ProfileInput, ShadowError, VerificationReport, canonicalize,
-    verify_certificate,
+    verify_canonical_artifact,
 };
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
@@ -73,8 +73,7 @@ pub fn verify_reconstruction(
             "reconstruction replay supports only Paper I".into(),
         ));
     };
-    verify_certificate(input, &artifact.canonical.certificate)?;
-    crate::canonical::verify_canonical_artifact_fields(&artifact.canonical)?;
+    verify_canonical_artifact(input, &artifact.canonical)?;
     if artifact.round_trip_shadow != artifact.canonical.canonical {
         return Err(ShadowError::Certificate(
             "round-trip shadow differs from the verified canonical shadow".into(),

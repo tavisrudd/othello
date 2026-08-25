@@ -4,7 +4,7 @@ use serde::{Deserialize, Serialize};
 
 use crate::{
     BinaryRelation, InputArtifact, PaperIOrientation, ProfileInput, RelationalShadow, ShadowError,
-    validate,
+    VerificationReport, validate, verify_certificate,
 };
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
@@ -110,9 +110,23 @@ pub fn canonicalize(input: &InputArtifact) -> Result<CanonicalArtifact, ShadowEr
     })
 }
 
-pub(crate) fn verify_canonical_artifact_fields(
+/// Replay a full canonical artifact and bind every public wrapper field to its
+/// independently checked certificate.
+///
+/// # Errors
+///
+/// Returns an error when the inner proof fails or any wrapper field is
+/// inconsistent with it.
+pub fn verify_canonical_artifact(
+    input: &InputArtifact,
     artifact: &CanonicalArtifact,
-) -> Result<(), ShadowError> {
+) -> Result<VerificationReport, ShadowError> {
+    let report = verify_certificate(input, &artifact.certificate)?;
+    verify_canonical_artifact_fields(artifact)?;
+    Ok(report)
+}
+
+fn verify_canonical_artifact_fields(artifact: &CanonicalArtifact) -> Result<(), ShadowError> {
     let certificate = &artifact.certificate;
     if artifact.schema != "sparse-shadow-canonical/v1"
         || artifact.canonical_id != certificate.canonical_id

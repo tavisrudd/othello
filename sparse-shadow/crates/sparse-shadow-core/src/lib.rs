@@ -10,7 +10,7 @@ mod verify;
 
 pub use canonical::{
     BranchDecision, CanonicalArtifact, CanonicalCertificate, PointStabilizer, SearchStats,
-    canonicalize,
+    canonicalize, verify_canonical_artifact,
 };
 pub use equivalence::{
     EquivalenceCertificate, EquivalenceOutcome, SeparatingInvariant, compare, verify_equivalence,

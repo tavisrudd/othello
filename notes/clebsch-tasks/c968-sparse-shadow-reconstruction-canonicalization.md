@@ -191,6 +191,8 @@ black-box CLI tests cover success, fail-closed export diagnostics, equivalence,
 and byte-deterministic canonical output; all four gated adapters are checked
 against their own exact required-export paths. All three certificate forms now
 have end-to-end CLI production, replay, and corruption-rejection coverage.
+Canonical output feeds directly into `verify-certificate` without manual JSON
+extraction, with bare-certificate input retained for compatibility.
 Reconstruction replay binds the full public canonical wrapper—including group
 order, generator closure, vertex orbits, and point stabilizers—to its
 independently checked inner proof; the closure walk cannot leave the certified
@@ -198,9 +200,9 @@ finite group.
 Canonicalization idempotence is explicit, and generated arbitrary permutations
 now exercise invariance for both calibrated and uncalibrated fixtures instead
 of the earlier cyclic-only sample. Strict schema tests cover unknown fields,
-versions, edge normalization, partitions, and calibration distinctness. The performance
-record is `../../sparse-shadow/docs/performance-paper-i.md`; its wall-time drift
-licenses no optimization claim.
+versions, edge normalization, partitions, and calibration distinctness. The
+performance record is `../../sparse-shadow/docs/performance-paper-i.md`; its
+wall-time drift licenses no optimization claim.
 
 No unblocked C968 implementation frontier remains: each next adapter first
 requires the complete paper-owned export named in its `fixtures/gated-*.json`.

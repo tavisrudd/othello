@@ -115,11 +115,20 @@ fn every_emitted_certificate_replays_through_the_cli() {
 
     let canonical = run(&["canonicalize", input_path]);
     assert!(canonical.status.success());
+    let certificate_path = write_temp_json("canonical-artifact", &canonical.stdout);
+    let verified = run(&[
+        "verify-certificate",
+        input_path,
+        certificate_path.to_str().expect("UTF-8 temporary path"),
+    ]);
+    assert_valid(&verified);
+    fs::remove_file(certificate_path).expect("temporary certificate removes");
+
     let canonical_json: serde_json::Value =
         serde_json::from_slice(&canonical.stdout).expect("canonical JSON parses");
-    let certificate = serde_json::to_vec_pretty(&canonical_json["certificate"])
+    let bare_certificate = serde_json::to_vec_pretty(&canonical_json["certificate"])
         .expect("canonical certificate serializes");
-    let certificate_path = write_temp_json("canonical", &certificate);
+    let certificate_path = write_temp_json("canonical-certificate", &bare_certificate);
     let verified = run(&[
         "verify-certificate",
         input_path,
@@ -161,9 +170,9 @@ fn every_cli_verifier_rejects_a_corrupted_artifact() {
     assert!(canonical.status.success());
     let mut canonical_json: serde_json::Value =
         serde_json::from_slice(&canonical.stdout).expect("canonical JSON parses");
-    canonical_json["certificate"]["canonical_id"] = serde_json::Value::String("corrupt".into());
-    let certificate = serde_json::to_vec_pretty(&canonical_json["certificate"])
-        .expect("canonical certificate serializes");
+    canonical_json["automorphism_order"] = serde_json::Value::from(119);
+    let certificate =
+        serde_json::to_vec_pretty(&canonical_json).expect("canonical artifact serializes");
     let certificate_path = write_temp_json("corrupt-canonical", &certificate);
     let rejected = run(&[
         "verify-certificate",
