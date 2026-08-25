@@ -168,6 +168,20 @@ with coefficients and supports unchanged.
 \proves{thm:ungated-ranked-confinement}%
 \end{proof}
 
+The complete bounded structure across all recoverable ranks has a single
+bottleneck.  If a system on $0\ne T\leq W_P$ is nonconfined, some external
+block map is nonzero on a vector $u\in T$; restriction to
+$\langle u\rangle$ is still nonconfined and cannot enlarge its helper union.
+Consequently
+\begin{equation}
+ \min_{0\ne T\leq W_P}\Gamma_{j,T}(O,I)=\Gamma_{j,1}(O,I).
+ \label{eq:all-rank-bottleneck}
+\end{equation}
+Thus every cost-$\leq r$ system for every internally recoverable target
+subspace is confined if and only if $r<\Gamma_{j,1}(O,I)$.  This is the exact
+finite local-to-global gate for the complete bounded recovery data of the
+target/helper split.
+
 The exact optimization also recovers the persistent obstruction without
 choosing a radius.  Indeed, every nonzero functional sector costs at least
 $d(O^\perp)-1$, while the zero-functional sector attains

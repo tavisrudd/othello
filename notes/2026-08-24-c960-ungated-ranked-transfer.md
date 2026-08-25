@@ -448,3 +448,17 @@ specializations.
 - The standalone deterministic release gate passes at 22 pages, warning-free, with 22 claim rows
   and four Lean reviewer terminals.
 - No push, deposit, or submission was performed.
+
+### Post-close TT clarification
+
+The local-to-global consequence can be stated with one threshold across all recovered dimensions.
+Every nonconfined system on a nonzero (T\le W_P) restricts to a nonconfined one-dimensional
+subspace without increasing its helper union.  Hence
+\[
+ \min_{0\ne T\le W_P}\Gamma_{j,T}=\Gamma_{j,1}.
+\]
+The manuscript now states this bottleneck explicitly and records the resulting simultaneous
+positive-density transfer: under the eventual outer gate and
+(r<M_1(D_P,K_P)+d(I^\perp)), every cost-(\le r) system at every recoverable rank is copied in
+every block.  The deterministic release gate still passes at 22 pages, 22 claims, and four Lean
+terminals.

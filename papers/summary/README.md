@@ -730,7 +730,9 @@ fixed nonzero target-message subspace, a joint prescribed-coset optimization
 over the complete outer functional dual gives the exact finite first
 nonconfined cost. Under `N >= 2` and `d(O^perp) > r + 1`, this reduces in
 recovered dimension `t` to `r < M_t(D_P,K_P) + d(I^perp)`; below either exact
-threshold, normalized equations and exact helper supports transfer.
+threshold, normalized equations and exact helper supports transfer. Restriction
+to a line shows that the rank-one escape cost is the bottleneck for simultaneous
+transfer across every recoverable rank.
 
 > *Abstract* Let `I <= F_q^E`, let `P` be a target set, and put
 > `J = E \ P`. Shortening and puncturing `I^perp` onto `J` give a nested pair

@@ -30,6 +30,10 @@ Below this threshold, zero-extension preserves every bounded normalized
 recovery equation and its exact helper support. For outer families whose dual
 distance tends to infinity, the finite outer gate is automatic for all
 sufficiently large lengths at each fixed `r`.
+Across all recoverable target subspaces, the first possible escape already
+occurs in dimension one: restricting a nonconfined higher-rank system to a
+line cannot increase its helper support. Thus the rank-one threshold governs
+simultaneous transfer of the complete bounded local data at every rank.
 
 For one target coordinate, the general theorem becomes the scalar
 target-constrained coset-weight formula. It can certify transfer when ordinary
