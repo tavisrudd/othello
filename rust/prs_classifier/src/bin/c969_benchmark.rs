@@ -120,6 +120,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         return Err("--iterations must be positive".into());
     }
     let r5 = request(prime_field(7), 5, vec![0, 0, 0, 1, 0]);
+    let r5_sigma_rootless = request(prime_field(7), 5, vec![1, 1, 6, 6, 1]);
     let r6 = request(prime_field(17), 6, vec![0, 0, 0, 0, 1, 0]);
     let r6_sigma = request(prime_field(17), 6, vec![0, 1, 0, 3, 0, 9]);
     let r7 = request(prime_field(7), 7, vec![0, 0, 0, 0, 1, 0, 0]);
@@ -205,6 +206,20 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         elapsed_ns_per_iteration: canonical_elapsed / u128::from(args.iterations),
         candidates_examined: Some(canonicalization.transporters_examined),
         baseline: "tangent gcd root sent to infinity; m*q*(q-1) affine transports",
+    });
+    let rootless_sigma_canonicalization =
+        canonicalize_syndrome(&r5_sigma_rootless, args.candidate_limit)?;
+    let rootless_sigma_elapsed = elapsed(args.iterations, || {
+        canonicalize_syndrome(&r5_sigma_rootless, args.candidate_limit)
+    })?;
+    rows.push(BenchmarkRow {
+        operation: "r5_sigma_rootless_semilinear_canonicalization".into(),
+        field_order: 7,
+        redundancy: 5,
+        elapsed_ns_total: rootless_sigma_elapsed,
+        elapsed_ns_per_iteration: rootless_sigma_elapsed / u128::from(args.iterations),
+        candidates_examined: Some(rootless_sigma_canonicalization.transporters_examined),
+        baseline: "rootless syndrome form; lex-forced second coordinate: m*(q^2-1)",
     });
     let sigma_canonicalization = canonicalize_syndrome(&r6_sigma, args.candidate_limit)?;
     let sigma_elapsed = elapsed(args.iterations, || {

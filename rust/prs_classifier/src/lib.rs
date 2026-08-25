@@ -849,10 +849,97 @@ pub fn canonicalize_syndrome(
     transporter_limit: u64,
 ) -> Result<Canonicalization, Error> {
     let (field, syndrome) = validate_request(request)?;
-    if persistent_kind(&field, &syndrome) == PersistentKind::Tangent {
+    let persistent = persistent_kind(&field, &syndrome);
+    if persistent == PersistentKind::Tangent {
         return canonicalize_tangent(&field, syndrome, transporter_limit);
     }
+    if persistent == PersistentKind::Sigma {
+        if let Some(canonicalization) =
+            canonicalize_rootless_sigma(&field, syndrome.clone(), transporter_limit)?
+        {
+            return Ok(canonicalization);
+        }
+    }
     canonicalize_explicit(&field, syndrome, transporter_limit)
+}
+
+fn projective_rows(field: &Field) -> Vec<([u32; 2], [u32; 2])> {
+    let mut rows = (0..field.order())
+        .map(|delta| ([1, delta], [0, 1]))
+        .collect::<Vec<_>>();
+    rows.push(([0, 1], [1, 0]));
+    rows
+}
+
+fn canonicalize_rootless_sigma(
+    field: &Field,
+    syndrome: Vec<u32>,
+    transporter_limit: u64,
+) -> Result<Option<Canonicalization>, Error> {
+    let rows = projective_rows(field);
+    for &(bottom, complement) in &rows {
+        let matrix = [complement[0], complement[1], bottom[0], bottom[1]];
+        let (candidate, _) = apply_semilinear(field, &syndrome, 0, matrix)?;
+        if candidate[0] == 0 {
+            return Ok(None);
+        }
+    }
+
+    let per_frobenius = u64::from(field.order()).pow(2) - 1;
+    let total = per_frobenius
+        .checked_mul(u64::try_from(field.spec.degree).unwrap_or(u64::MAX))
+        .ok_or(Error::FieldTooLarge)?;
+    if total > transporter_limit {
+        return Err(Error::CandidateLimit {
+            limit: transporter_limit,
+        });
+    }
+
+    let mut best: Option<Vec<u32>> = None;
+    let mut best_transporter = None;
+    let mut examined = 0;
+    for exponent in 0..field.spec.degree {
+        for &(bottom, complement) in &rows {
+            let base_matrix = [complement[0], complement[1], bottom[0], bottom[1]];
+            let (base_candidate, _) = apply_semilinear(field, &syndrome, exponent, base_matrix)?;
+            debug_assert_eq!(base_candidate[0], 1);
+            let shift = field.neg(base_candidate[1]);
+            let shifted_top = [
+                field.add(complement[0], field.mul(shift, bottom[0])),
+                field.add(complement[1], field.mul(shift, bottom[1])),
+            ];
+            for scale in 1..field.order() {
+                let matrix = normalize_matrix(
+                    field,
+                    [
+                        field.mul(scale, shifted_top[0]),
+                        field.mul(scale, shifted_top[1]),
+                        bottom[0],
+                        bottom[1],
+                    ],
+                )?;
+                let (candidate, output_scale) =
+                    apply_semilinear(field, &syndrome, exponent, matrix)?;
+                debug_assert_eq!(&candidate[..2], &[1, 0]);
+                examined += 1;
+                if best.as_ref().is_none_or(|current| candidate < *current) {
+                    best = Some(candidate);
+                    best_transporter = Some(Transporter {
+                        frobenius_exponent: exponent,
+                        matrix,
+                        projective_output_scale: output_scale,
+                    });
+                }
+            }
+        }
+    }
+    Ok(Some(Canonicalization {
+        normalized_input: syndrome,
+        canonical_syndrome: best.ok_or(Error::BadSigmaInvariant)?,
+        transporter: best_transporter.ok_or(Error::BadSigmaInvariant)?,
+        transporters_examined: examined,
+        complexity: "rootless sigma form: m*(q^2-1) lex-forced second-coordinate transports",
+    }))
 }
 
 fn canonicalize_explicit(
@@ -2339,7 +2426,7 @@ mod tests {
 
         let canonical = canonicalize_syndrome(&input, 1_000).unwrap();
         assert_eq!(canonical.canonical_syndrome, vec![1, 0, 3, 3, 5]);
-        assert_eq!(canonical.transporters_examined, 336);
+        assert_eq!(canonical.transporters_examined, 48);
 
         let result = classify(&input, 1_000, 1_000).unwrap();
         let certificate = result.deep_certificate.unwrap();
@@ -2369,16 +2456,16 @@ mod tests {
     fn sigma_q7_fibres_match_three_torus_quotient_classes() {
         let field = Field::new(prime_field(7)).unwrap();
         let expected = [
-            (vec![0, 1, 0, 3, 0], 2),
-            (vec![1, 0, 3, 3, 5], 5),
-            (vec![1, 0, 1, 1, 2], 0),
-            (vec![1, 0, 1, 1, 2], 0),
-            (vec![1, 0, 1, 1, 2], 0),
-            (vec![1, 0, 1, 1, 2], 0),
-            (vec![1, 0, 3, 3, 5], 5),
-            (vec![0, 1, 0, 3, 0], 2),
+            (vec![0, 1, 0, 3, 0], 2, 336),
+            (vec![1, 0, 3, 3, 5], 5, 48),
+            (vec![1, 0, 1, 1, 2], 0, 48),
+            (vec![1, 0, 1, 1, 2], 0, 48),
+            (vec![1, 0, 1, 1, 2], 0, 48),
+            (vec![1, 0, 1, 1, 2], 0, 48),
+            (vec![1, 0, 3, 3, 5], 5, 48),
+            (vec![0, 1, 0, 3, 0], 2, 336),
         ];
-        for ([s0, s1], (expected_minimum, expected_trace)) in (0..7)
+        for ([s0, s1], (expected_minimum, expected_trace, expected_transports)) in (0..7)
             .map(|second| [1, second])
             .chain(std::iter::once([0, 1]))
             .zip(expected)
@@ -2389,9 +2476,12 @@ mod tests {
             assert_eq!(invariant.quotient_order, 4);
             assert_eq!(invariant.quotient_trace, expected_trace);
             assert_eq!(invariant.semilinear_quotient_trace, expected_trace);
+            let explicit = canonicalize_explicit(&field, syndrome.clone(), 1_000).unwrap();
             let canonical =
                 canonicalize_syndrome(&request(prime_field(7), 5, syndrome), 1_000).unwrap();
             assert_eq!(canonical.canonical_syndrome, expected_minimum);
+            assert_eq!(canonical.canonical_syndrome, explicit.canonical_syndrome);
+            assert_eq!(canonical.transporters_examined, expected_transports);
         }
 
         let syndrome = vec![1, 1, 6, 6, 1];

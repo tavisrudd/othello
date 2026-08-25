@@ -39,6 +39,7 @@ not a codeword scan and not the optimized selector.
 | 12-point terminal selector | 7 | 7 | 4,567 | 1 |
 | projective locator oracle | 7 | 7 | 8,296,680 | 20,017 |
 | tangent semilinear canonicalization | 17 | 6 | 504,884 | 272 transports |
+| rootless sigma semilinear canonicalization | 7 | 5 | 57,140 | 48 transports |
 | sigma explicit semilinear canonicalization | 17 | 6 | 9,260,663 | 4,896 transports |
 | end-to-end tangent classification | 17 | 6 | 719,086 | -- |
 | positive tangent deep-certificate replay | 17 | 6 | 717,723 | -- |
@@ -64,13 +65,14 @@ The benchmark separates four costs which must not be conflated:
 
 1. fixed-grid terminal completion after streamed prefix selection;
 2. the generic exact projective-locator oracle;
-3. exact tangent `mq(q-1)` semilinear canonicalization (with the explicit
-   `m(q^3-q)` fallback still used outside that family); and
+3. exact tangent `mq(q-1)` and rootless-sigma `m(q^2-1)` semilinear
+   canonicalization, with the explicit `m(q^3-q)` fallback retained for
+   root-bearing sigma and other families; and
 4. independent certificate replay, which intentionally repeats canonical
    transport before checking family and radius evidence.
 
-No timing is a novelty or state-of-the-art claim. Sigma and nonpersistent
-canonicalization still use an honest group-scale fallback. Their formula-speed
-canonicalizers, a wider q/field/redundancy benchmark grid beyond the first
-GF(8) fixture, bit-operation accounting, and comparison with external decoder
-software remain open benchmark work.
+No timing is a novelty or state-of-the-art claim. Root-bearing sigma and
+nonpersistent canonicalization still use an honest group-scale fallback. Their
+remaining formula-speed canonicalizers, a wider q/field/redundancy benchmark
+grid beyond the first GF(8) fixture, bit-operation accounting, and comparison
+with external decoder software remain open benchmark work.

@@ -156,3 +156,37 @@ the trace over all 336 PGL transports. A characteristic-two R7 fixture checks
 the nontrivial order-three quotient over GF(8) across all 1,512 semilinear
 transports. What remains genuinely geometric is the rule taking this extracted
 class to the globally lex-minimal irreducible target quadratic.
+
+### Rootless-form lex chart
+
+One full sigma subbranch can be canonicalized without selecting a target
+quadratic. Let `F_s` be the degree-`n` binary form dual to the syndrome. For a
+fixed projective bottom row `v` and any complement `w`, write every compatible
+top row uniquely as
+
+\[
+ h w+c v,\qquad h\in F_q^*,\ c\in F_q.
+\]
+
+The first two transformed coordinates are
+
+\[
+ A=F_s(v^n),\qquad hB+cA,
+ \quad B=F_s(wv^{n-1}).
+\]
+
+If `F_s` has no rational projective root, `A` is nonzero for all `q+1` choices
+of `v`. After normalizing the first coordinate to one, lexicographic minimality
+forces the second coordinate to zero. For each `h` this uniquely forces
+`c=-hB/A`. Therefore every possible full-orbit minimizer occurs among exactly
+
+\[
+ m(q+1)(q-1)=m(q^2-1)
+\]
+
+semilinear transports. The implementation enumerates precisely these cosets,
+retains the exact transporter, and returns the same minimum as full PGL
+enumeration. If `F_s` has a rational root, a leading zero beats every point in
+this chart; that branch deliberately retains the explicit fallback. Over the
+q7/R5 quotient census, the trace-zero and trace-five classes use 48 transports,
+while the trace-two root-bearing class continues to use all 336.
