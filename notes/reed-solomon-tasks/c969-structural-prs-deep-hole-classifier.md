@@ -10,10 +10,13 @@ exact extension-field arithmetic, projective normalization, both locator
 charts, increasing-degree Hankel search, magnitude recovery, and certificate
 replay, including the frozen R10 q=16 Lucas witness.  It also detects the
 persistent tangent/sigma gcd branches and returns an exact semilinear
-transporter through an explicit `m(q^3-q)` canonicalization fallback.
-Finite-exception family adapters, formula-speed canonicalizers, the R5--R7
-terminal solver, full-distance fallback, and complexity proofs remain open.
-Code and mathematics only; no manuscript edits.
+transporter through an explicit `m(q^3-q)` canonicalization fallback.  A
+deterministically regenerated 338-row semilinear exception registry now
+compresses the frozen R5--R7 certificates; classifier tests cover an R5 wild
+deep orbit and the R7 small-field radius-gap verdict.  Uniform nonpersistent
+formula adapters, formula-speed canonicalizers, the R5--R7 terminal solver,
+full-distance fallback, and complexity proofs remain open.  Code and
+mathematics only; no manuscript edits.
 
 ## Goal
 

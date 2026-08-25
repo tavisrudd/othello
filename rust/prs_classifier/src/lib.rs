@@ -114,6 +114,53 @@ pub enum PersistentKind {
     Other,
 }
 
+#[derive(Clone, Copy, Debug, Deserialize, Serialize, PartialEq, Eq)]
+#[serde(rename_all = "SCREAMING_SNAKE_CASE")]
+pub enum VerdictStatus {
+    Deep,
+    NotDeep,
+    Unresolved,
+    Unsupported,
+}
+
+#[derive(Clone, Debug, Serialize, PartialEq, Eq)]
+pub struct ClassificationResult {
+    pub status: VerdictStatus,
+    pub distance: Option<usize>,
+    pub distance_lower_bound: usize,
+    pub family: Option<String>,
+    pub canonicalization: Option<Canonicalization>,
+    pub locator_certificate: Option<LocatorCertificate>,
+    pub split_free_source: Option<String>,
+    pub radius_source: Option<String>,
+    pub note: String,
+}
+
+#[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Eq)]
+pub struct FrozenOrbit {
+    pub redundancy: usize,
+    pub q: u32,
+    pub field: FrozenField,
+    pub canonical_representative: Vec<u32>,
+    pub family: String,
+    pub pgl_orbit_count: usize,
+    pub semilinear_orbit_size: u64,
+    pub semilinear_stabilizer_order: u64,
+}
+
+#[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Eq)]
+pub struct FrozenField {
+    pub p: u32,
+    pub degree: usize,
+    pub modulus: Vec<u32>,
+}
+
+#[derive(Debug, Deserialize)]
+struct FrozenOrbitRegistry {
+    schema: String,
+    records: Vec<FrozenOrbit>,
+}
+
 #[derive(Clone, Debug)]
 pub struct Field {
     spec: FieldSpec,
@@ -419,6 +466,141 @@ pub fn canonicalize_syndrome(
         transporter: best_transporter,
         transporters_examined: examined,
         complexity: "explicit PGL(2,q) x Gal enumeration: m*(q^3-q) transports",
+    })
+}
+
+pub fn frozen_orbit_lookup(
+    field: &Field,
+    redundancy: usize,
+    canonical_syndrome: &[u32],
+) -> Option<FrozenOrbit> {
+    let registry: FrozenOrbitRegistry =
+        serde_json::from_str(include_str!("../data/frozen-orbits-v1.json"))
+            .expect("generated frozen orbit registry must parse");
+    assert_eq!(registry.schema, "c969-frozen-orbit-registry-v1");
+    registry.records.into_iter().find(|record| {
+        record.redundancy == redundancy
+            && record.q == field.order()
+            && record.field.p == field.spec.p
+            && record.field.degree == field.spec.degree
+            && record.field.modulus == field.spec.modulus
+            && record.canonical_representative == canonical_syndrome
+    })
+}
+
+pub fn classify(
+    request: &Request,
+    locator_candidate_limit: u64,
+    transporter_limit: u64,
+) -> Result<ClassificationResult, Error> {
+    let (field, syndrome) = validate_request(request)?;
+    let split_degree = request.redundancy - 2;
+    let persistent = persistent_kind(&field, &syndrome);
+    if !matches!(persistent, PersistentKind::Tangent | PersistentKind::Sigma) {
+        match search_locator(request, split_degree, locator_candidate_limit) {
+            Ok(certificate) => {
+                return Ok(ClassificationResult {
+                    status: VerdictStatus::NotDeep,
+                    distance: Some(certificate.distance),
+                    distance_lower_bound: certificate.distance,
+                    family: None,
+                    canonicalization: None,
+                    locator_certificate: Some(certificate),
+                    split_free_source: None,
+                    radius_source: None,
+                    note: "explicit split locator and nonzero magnitudes certify a closer word"
+                        .into(),
+                });
+            }
+            Err(Error::NoLocator(_)) => {}
+            Err(error) => return Err(error),
+        }
+    }
+
+    let canonicalization = canonicalize_syndrome(request, transporter_limit)?;
+    let frozen = frozen_orbit_lookup(
+        &field,
+        request.redundancy,
+        &canonicalization.canonical_syndrome,
+    );
+    let family = match persistent {
+        PersistentKind::Tangent => Some("persistent.tangent".to_string()),
+        PersistentKind::Sigma => Some("persistent.sigma".to_string()),
+        _ => frozen.as_ref().map(|record| record.family.clone()),
+    };
+    let q = field.order();
+    let (status, distance, radius_source, note) = match request.redundancy {
+        5 if q >= 7 && family.is_some() => (
+            VerdictStatus::Deep,
+            Some(4),
+            Some("theorem-domain-v1:R5 rho=4".into()),
+            "frozen R5 family and radius routes are both complete".into(),
+        ),
+        6 if q >= 7 && family.is_some() => (
+            VerdictStatus::Deep,
+            Some(5),
+            Some("theorem-domain-v1:R6 rho=5".into()),
+            "frozen R6 family and radius routes are both complete".into(),
+        ),
+        7 if matches!(q, 7..=9) && family.is_some() => (
+            VerdictStatus::Unresolved,
+            None,
+            None,
+            "split-free classification is exact, but the frozen surface has no covering-radius premise".into(),
+        ),
+        7 if q >= 11 && family.is_some() => (
+            VerdictStatus::Deep,
+            Some(6),
+            Some("theorem-domain-v1:R7 rho=6 for q>=11".into()),
+            "frozen R7 family and radius routes are both complete".into(),
+        ),
+        8 if q >= 43 && family.is_some() => (
+            VerdictStatus::Deep,
+            Some(7),
+            Some("theorem-domain-v1:R8 rho=7 for q>=43".into()),
+            "persistent-only R8 theorem applies".into(),
+        ),
+        9 if q >= 53 && family.is_some() => (
+            VerdictStatus::Deep,
+            Some(8),
+            Some("theorem-domain-v1:R9 rho=8 for q>=53".into()),
+            "persistent-only R9 theorem applies".into(),
+        ),
+        10 if q >= 59 && family.is_some() => (
+            VerdictStatus::Deep,
+            Some(9),
+            Some("theorem-domain-v1:R10 rho=9 for q>=59".into()),
+            "persistent-only R10 theorem applies".into(),
+        ),
+        _ => (
+            VerdictStatus::Unsupported,
+            None,
+            None,
+            if family.is_some() {
+                "family recognized, but code classification lies outside the frozen theorem range"
+                    .into()
+            } else {
+                "split-free input has no enabled structural adapter in this implementation"
+                    .into()
+            },
+        ),
+    };
+    Ok(ClassificationResult {
+        status,
+        distance,
+        distance_lower_bound: request.redundancy - 1,
+        family,
+        canonicalization: Some(canonicalization),
+        locator_certificate: None,
+        split_free_source: Some(match persistent {
+            PersistentKind::Tangent | PersistentKind::Sigma => {
+                "intrinsic quadratic Hankel-gcd replay".into()
+            }
+            _ if frozen.is_some() => "frozen semilinear exception registry".into(),
+            _ => "locator search exhausted through degree r-2".into(),
+        }),
+        radius_source,
+        note,
     })
 }
 
@@ -979,5 +1161,33 @@ mod tests {
         let right = canonicalize_syndrome(&request(field_spec, 5, image), 1_000).unwrap();
         assert_eq!(left.canonical_syndrome, right.canonical_syndrome);
         assert_eq!(left.transporters_examined, 336);
+    }
+
+    #[test]
+    fn frozen_exception_registry_classifies_r5_wild() {
+        let field_spec = FieldSpec {
+            p: 3,
+            degree: 2,
+            modulus: vec![1, 0, 1],
+            encoding: "polynomial-basis-base-p-integer-v1".into(),
+        };
+        let result =
+            classify(&request(field_spec, 5, vec![0, 0, 1, 0, 4]), 10_000, 10_000).unwrap();
+        assert_eq!(result.status, VerdictStatus::Deep);
+        assert_eq!(result.distance, Some(4));
+        assert_eq!(result.family.as_deref(), Some("r5.char3_wild"));
+    }
+
+    #[test]
+    fn frozen_r7_radius_gap_is_unresolved() {
+        let result = classify(
+            &request(prime_field(7), 7, vec![0, 0, 0, 0, 1, 0, 0]),
+            10_000,
+            10_000,
+        )
+        .unwrap();
+        assert_eq!(result.status, VerdictStatus::Unresolved);
+        assert_eq!(result.distance, None);
+        assert_eq!(result.family.as_deref(), Some("r7.sporadic"));
     }
 }

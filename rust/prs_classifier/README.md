@@ -12,11 +12,11 @@ This is the C969 implementation crate.  Its current executable slice provides:
   `m(q^3-q)` cost exposed; and
 - the five required command names.
 
-`classify` currently returns only witness-backed `NOT_DEEP` results;
-`canonicalize` is functional but currently uses the explicit group-scale
-fallback.  The frozen finite-exception and theorem-domain adapters must be
-enabled before this crate can issue `DEEP` or `UNRESOLVED`.  This fail-closed
-boundary is intentional.
+`classify` returns witness-backed `NOT_DEEP`, persistent-family `DEEP`, and
+frozen R5--R7 finite-exception `DEEP`/`UNRESOLVED` results. `canonicalize` is
+functional but currently uses the explicit group-scale fallback.  Uniform
+nonpersistent formula adapters and nearest-word witnesses for split-free
+inputs remain open.  Unsupported paths fail closed.
 
 The locator enumeration has projective kernel dimension
 `2t+1-r` at degree `t`.  At terminal split-free testing `t=r-2`, this gives

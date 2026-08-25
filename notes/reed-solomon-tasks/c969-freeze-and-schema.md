@@ -144,3 +144,20 @@ dependent query path.  Its first executable slice is the field/projective/
 Hankel core plus witness verifier; structural adapters follow only after that
 slice reproduces the hand classifications above.
 
+## Implementation checkpoint
+
+`rust/prs_classifier` now implements the field/projective/Hankel core.  Its
+compact finite-exception data is regenerated from the frozen C491, C498, and
+C509 certificates by
+`notes/reed-solomon-tasks/c969-build-frozen-orbit-registry.py`; the generated
+registry has 338 semilinear rows and retains family, canonical representative,
+orbit size, and stabilizer order.  No ambient syndrome record is copied into
+the query path.
+
+The green tests cover prime and extension-field arithmetic, both locator
+charts, a weight-two decode and independent replay, the q=16 R10 Lucas witness,
+the frozen R6 tangent/sigma representatives, semilinear action and transporter
+canonicalization, an R5 wild exception, and the R7 `UNRESOLVED` radius gap.
+The current deep result is classification-only: the terminal `r-1` locator and
+nearest-word witness remain an explicit open gate, so the crate is not yet an
+accepted C969 decoder.

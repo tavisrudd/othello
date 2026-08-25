@@ -1,8 +1,8 @@
 use clap::{Parser, Subcommand};
 use prs_classifier::{
-    canonicalize_syndrome, search_locator, verify_certificate, LocatorCertificate, Request,
+    canonicalize_syndrome, classify, search_locator, verify_certificate, LocatorCertificate,
+    Request,
 };
-use serde::Serialize;
 use std::fs;
 use std::io::{self, Read};
 use std::path::PathBuf;
@@ -30,13 +30,6 @@ struct SearchArgs {
     max_degree: Option<usize>,
     #[arg(long, default_value_t = 10_000_000)]
     candidate_limit: u64,
-}
-
-#[derive(Serialize)]
-struct PartialResult<'a> {
-    status: &'a str,
-    note: &'a str,
-    certificate: LocatorCertificate,
 }
 
 fn read_input(path: &Option<PathBuf>) -> Result<String, Box<dyn std::error::Error>> {
@@ -67,15 +60,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         }
         Command::Classify(args) => {
             let request: Request = serde_json::from_str(&read_input(&args.input)?)?;
-            let max_degree = args
-                .max_degree
-                .unwrap_or(request.redundancy.saturating_sub(2));
-            let certificate = search_locator(&request, max_degree, args.candidate_limit)?;
-            let result = PartialResult {
-                status: "NOT_DEEP",
-                note: "witness-backed shallow verdict; structural deep-family adapters are not yet enabled",
-                certificate,
-            };
+            let result = classify(&request, args.candidate_limit, args.candidate_limit)?;
             println!("{}", serde_json::to_string_pretty(&result)?);
         }
         Command::Canonicalize(args) => {
