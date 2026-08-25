@@ -2,9 +2,12 @@
   "field_uniform_identities": {
     "centered_external_degree_sum": "6r^2-4r-1",
     "centered_incidence_equation": "M^T(e-r*1)=q*(1+1_A)",
+    "core_normalized_vector": "x=e-r*(1+1_D)",
     "external_defect_sum": "sum (e-r)(e-r-1) = 2r(r-2)",
     "external_point_count": "q^2-q",
-    "q": "3r"
+    "q": "3r",
+    "signed_secant_defect": "z=1+3*1_A-M*1_D",
+    "signed_transform_equations": "M*z=3*x and M*x=r*(z+2*1)"
   },
   "q27_T55": {
     "arc_size": 279,
@@ -98,9 +101,19 @@
           "1": 2,
           "2": 6
         },
+        "fixed_signed_secant_defect_spectrum": {
+          "-1": 3,
+          "0": 7,
+          "1": 3
+        },
         "full_modulus_residue_compatible": true,
         "minimum_fixed_defect": 12,
         "minimum_fixed_exception_count": 6,
+        "nonfixed_signed_secant_defect_orbit_spectrum": {
+          "-1": 7,
+          "0": 216,
+          "1": 25
+        },
         "pinned_full_modulus_liftable_ternary_affine_dimension": 70,
         "pinned_ternary_affine_dimension": 178,
         "pinned_ternary_incidence_rank": 83
@@ -195,9 +208,19 @@
           "1": 2,
           "2": 6
         },
+        "fixed_signed_secant_defect_spectrum": {
+          "-1": 6,
+          "0": 4,
+          "1": 3
+        },
         "full_modulus_residue_compatible": true,
         "minimum_fixed_defect": 12,
         "minimum_fixed_exception_count": 6,
+        "nonfixed_signed_secant_defect_orbit_spectrum": {
+          "-1": 6,
+          "0": 217,
+          "1": 25
+        },
         "pinned_full_modulus_liftable_ternary_affine_dimension": 70,
         "pinned_ternary_affine_dimension": 178,
         "pinned_ternary_incidence_rank": 83
@@ -206,6 +229,14 @@
     "centered_external_degree_sum": 449,
     "centered_squared_norm": 6075,
     "centered_total_sum": 999,
+    "core_normalized_defect": 126,
+    "core_normalized_line_sum_spectrum": {
+      "18": 655,
+      "27": 78,
+      "9": 24
+    },
+    "core_normalized_squared_norm": 630,
+    "core_normalized_sum": 504,
     "external_centered_squared_norm": 575,
     "external_defect": 126,
     "external_degree_sum": 6767,
@@ -233,13 +264,29 @@
     "full_modulus_kernel_log_3_size": 390,
     "full_modulus_liftable_ternary_dimension": 76,
     "maximal_degree": 19,
-    "maximal_line_count": 55
+    "maximal_line_count": 55,
+    "signed_secant_defect_spectrum": {
+      "-1": 24,
+      "0": 655,
+      "1": 78
+    },
+    "signed_secant_defect_squared_norm": 102,
+    "signed_secant_defect_sum": 54,
+    "signed_secant_defect_ternary_dual_weight": 102
   },
   "q9": {
     "arc_size": 39,
     "centered_incidence_equation_checked": true,
     "centered_mod_3_support_equals_unital_complement": true,
     "centered_mod_3_support_size": 63,
+    "core_normalized_defect": 6,
+    "core_normalized_spectrum": {
+      "-2": 1,
+      "0": 28,
+      "1": 62
+    },
+    "core_normalized_squared_norm": 66,
+    "core_normalized_sum": 60,
     "external_defect": 6,
     "line_degree_spectrum": {
       "1": 1,
@@ -247,7 +294,13 @@
       "4": 43,
       "7": 19
     },
+    "signed_secant_defect_spectrum": {
+      "-1": 6,
+      "0": 61,
+      "1": 24
+    },
+    "signed_secant_defect_transform_checked": true,
     "unital_complement_size": 63
   },
-  "schema": "c949-degree-defect-audit-v3"
+  "schema": "c949-degree-defect-audit-v4"
 }

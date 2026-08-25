@@ -352,6 +352,45 @@ This recasts the `T=55` branch as a constrained closest-vector problem in an
 affine incidence-code lattice.  That is the concrete next attack licensed by
 the audit.
 
+There is a sharper descent which exposes the small object inside that lattice.
+Use the polarity coordinates of the audit, in which the incidence matrix `M`
+is symmetric.  Let `c` be the characteristic vector of `D`, put `d=M c`, and
+retain `a=1_{d>=3}` and `e=M a`.  Define
+
+```text
+x=e-r(1+c),                 z=1+3a-d.
+```
+
+Thus `x=1` on the core and equals the previous centered coordinate `e-r`
+outside it.  The five line types make `z` a signed sparse vector:
+
+```text
+d=1,4 -> z=0;    d=2,5 -> z=-1;    d=3 -> z=1.
+```
+
+The design identity and `|D|=2q+1` now give the mutually exact transforms
+
+```text
+M z=3x,                       M x=r(z+2 1).          (SD)
+```
+
+At `q=27` this means
+
+```text
+z:  (-1)^24 0^655 1^78,      sum z=54,  ||z||^2=102,
+x:  sum x=504,  ||x||^2=630, sum x(x-1)=126,
+M x: 9^24 18^655 27^78.
+```
+
+So the norm-6075 lift contains a weight-102 ternary dual incidence-codeword,
+with only 24 negative and 78 positive coordinates.  In the two Frobenius
+branches its nonfixed support occupies respectively 32 and 31 of the 248
+three-cycles: `(+,-,0)=(25,7,216)` for 3-on-line+1-off and
+`(25,6,217)` for general four.  This signed-word classification is strictly
+smaller and more geometric than the 70-dimensional closest-vector statement.
+No external classification theorem is invoked here: `(SD)` is the next proof
+gate, not completion.
+
 The `q=9` witness makes the codeword mechanism concrete.  Its external
 spectrum is `1^1 3^28 4^43`, and the unique degree-one line contributes the
 entire defect
@@ -365,6 +404,19 @@ complement of the 28-point Hermitian unital.  Thus the unital is visible after
 the `C_4` switch as an intrinsic ternary incidence-code invariant.  This is
 the cleanest structural bridge presently known from the exact base case to a
 field-uniform attack.
+
+For the same witness the signed descent is exact:
+
+```text
+z: (-1)^6 0^61 1^24,         x: (-2)^1 0^28 1^62,
+sum x=60,  ||x||^2=66,       sum x(x-1)=6.
+```
+
+Here `x mod 3` is literally the characteristic vector of the 63-point unital
+complement.  The lone value `-2` is the unique degree-one line and consumes
+the full defect.  This explains simultaneously why the unital survives the
+switch and what should replace it at `q=27`: a sparse signed secant-defect
+word satisfying `(SD)`.
 
 Finally, for a core-line intersection `1<=d<=5`, the threshold itself has the
 binomial-energy expansion
@@ -598,6 +650,12 @@ family is lower priority.
   pinning.  Both branches survive all these congruences; the additional gate
   is the norm-6075 lattice condition.  This supersedes the 7,768-way
   five-secant-pair split as the primary C949 route.
+- **Open after the signed descent — classify the weight-102 word.**  The
+  secant-type vector `z=1+3a-d` lies in the ternary dual incidence code, has
+  signs `(-1)^24 1^78`, and satisfies `Mz=3x` with `||x||^2=630`.  The two
+  fixed branches leave only 32 and 31 supported nonfixed Frobenius orbits.
+  Recovering `d in {1,...,5}` from such a word, or excluding both sign cosets,
+  is now the most compressed structural gate.
 - **Open — can `t_7(2,9)>=39` be proved without exhaustive search?**  The
   positive construction is structural, but exclusion of a 38-point complete
   arc still trusts one normalized CP-SAT infeasibility certificate.  A second

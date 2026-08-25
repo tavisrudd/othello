@@ -1415,6 +1415,23 @@ def audit_degree_defect(q9_construction: Path, frobenius_audit: Path,
         raise ValueError("the q=9 centered incidence identity failed")
     if q9_support != set(range(91)) - q9_unital:
         raise ValueError("the q=9 centered support is not the unital complement")
+    q9_core_degrees = [len(q9_core.intersection(line)) for line in q9_on_line]
+    q9_signed_secant_defect = [
+        1 + 3 * int(line in q9_arc) - q9_core_degrees[line]
+        for line in range(91)
+    ]
+    q9_core_normalized = [
+        q9_centered[point] - 3 * int(point in q9_core)
+        for point in range(91)
+    ]
+    if any(sum(q9_signed_secant_defect[line] for line in incident)
+           != 3 * q9_core_normalized[point]
+           for point, incident in enumerate(q9_through_point)):
+        raise ValueError("the q=9 signed secant-defect transform failed")
+    if any(sum(q9_core_normalized[point] for point in line)
+           != 3 * (q9_signed_secant_defect[line_index] + 2)
+           for line_index, line in enumerate(q9_on_line)):
+        raise ValueError("the q=9 inverse signed transform failed")
 
     q = 27
     r = q // 3
@@ -1662,6 +1679,11 @@ def audit_degree_defect(q9_construction: Path, frobenius_audit: Path,
         fixed_line_degrees = dict(zip(
             fixed_indices, pattern["fixed_line_degrees_in_fixed_index_order"]
         ))
+        fixed_signed_secant_defect = [
+            1 + 3 * int(fixed_line_degrees[line] >= 3)
+            - fixed_line_degrees[line]
+            for line in fixed_indices
+        ]
         fixed_external_high_degrees = []
         for point in fixed_indices:
             if point in core:
@@ -1750,6 +1772,14 @@ def audit_degree_defect(q9_construction: Path, frobenius_audit: Path,
         }
         branch_records.append({
             "fixed_core_point_indices": sorted(core),
+            "fixed_signed_secant_defect_spectrum": dict(sorted(
+                Counter(fixed_signed_secant_defect).items()
+            )),
+            "nonfixed_signed_secant_defect_orbit_spectrum": {
+                "-1": (24 - fixed_signed_secant_defect.count(-1)) // 3,
+                "0": (655 - fixed_signed_secant_defect.count(0)) // 3,
+                "1": (78 - fixed_signed_secant_defect.count(1)) // 3,
+            },
             "fixed_external_high_degree_spectrum": dict(sorted(high_count_spectrum.items())),
             "fixed_external_residue_spectrum_mod_3": dict(sorted(
                 Counter(degree % 3 for degree in fixed_external_high_degrees).items()
@@ -1779,13 +1809,16 @@ def audit_degree_defect(q9_construction: Path, frobenius_audit: Path,
         })
 
     output.write_text(json.dumps({
-        "schema": "c949-degree-defect-audit-v3",
+        "schema": "c949-degree-defect-audit-v4",
         "field_uniform_identities": {
             "q": "3r",
             "external_point_count": "q^2-q",
             "centered_external_degree_sum": "6r^2-4r-1",
             "external_defect_sum": "sum (e-r)(e-r-1) = 2r(r-2)",
             "centered_incidence_equation": "M^T(e-r*1)=q*(1+1_A)",
+            "core_normalized_vector": "x=e-r*(1+1_D)",
+            "signed_secant_defect": "z=1+3*1_A-M*1_D",
+            "signed_transform_equations": "M*z=3*x and M*x=r*(z+2*1)",
         },
         "q9": {
             "arc_size": len(q9_arc),
@@ -1797,6 +1830,18 @@ def audit_degree_defect(q9_construction: Path, frobenius_audit: Path,
             "unital_complement_size": 91 - len(q9_unital),
             "centered_mod_3_support_equals_unital_complement": True,
             "centered_incidence_equation_checked": True,
+            "core_normalized_spectrum": dict(sorted(Counter(q9_core_normalized).items())),
+            "core_normalized_sum": sum(q9_core_normalized),
+            "core_normalized_squared_norm": sum(
+                value * value for value in q9_core_normalized
+            ),
+            "core_normalized_defect": sum(
+                value * (value - 1) for value in q9_core_normalized
+            ),
+            "signed_secant_defect_spectrum": dict(sorted(
+                Counter(q9_signed_secant_defect).items()
+            )),
+            "signed_secant_defect_transform_checked": True,
         },
         "q27_T55": {
             "arc_size": arc_size,
@@ -1813,6 +1858,23 @@ def audit_degree_defect(q9_construction: Path, frobenius_audit: Path,
             "external_centered_squared_norm": external_centered_norm,
             "centered_total_sum": centered_total_sum,
             "centered_squared_norm": centered_norm,
+            "core_normalized_sum": centered_total_sum - r * maximal_line_count,
+            "core_normalized_squared_norm":
+                maximal_line_count + external_centered_norm,
+            "core_normalized_defect": defect,
+            "signed_secant_defect_spectrum": {
+                "-1": 24,
+                "0": 655,
+                "1": 78,
+            },
+            "signed_secant_defect_sum": 54,
+            "signed_secant_defect_squared_norm": 102,
+            "signed_secant_defect_ternary_dual_weight": 102,
+            "core_normalized_line_sum_spectrum": {
+                "9": 24,
+                "18": 655,
+                "27": 78,
+            },
             "frobenius_invariant_coordinate_count": len(frobenius_orbits),
             "frobenius_invariant_ternary_incidence_rank": invariant_rank,
             "frobenius_invariant_ternary_kernel_dimension":
