@@ -165,3 +165,32 @@ replayable nearest-word certificate at distance `r` as well.  The implementation
 is exact within its candidate budget, but its terminal fallback has
 `q^(r-2)` projective candidates before root testing and does not discharge
 C608's faster `O(q),O(q^2),O(q^3)` selection bounds.
+
+## Partial mystery and risk ledger
+
+- **Settled:** the former R10 binary unresolved residue was only a proof
+  residue.  C620's final-pair theorem makes the whole first higher Lucas
+  carrier shallow, and the q=16 witness replays in the independent core.
+- **Settled:** the finite R5--R7 exception surface compresses to 338 semilinear
+  rows without ambient syndrome data.  Most of the residual size is real R7
+  small-field structure (273 rows), so uniform formulas rather than a larger
+  table are the next compression gate.
+- **Settled:** an exact fallback decoder needs no radius theorem.  Exhaustive
+  failure through degree `r-1` followed by one NRC basis gives distance `r`
+  and forces every basis magnitude nonzero.
+- **Open:** the terminal-hyperplane solver has not replaced the exhaustive
+  `q^(r-2)` fallback.  Exact missing evidence: both infinity charts, the
+  bilinear last-root equation, collision divisor, constant-grid proof, bounded
+  small-field branch, and the advertised R5--R7 operation counts.
+- **Open:** field arithmetic is exact only in the supplied polynomial basis.
+  The schema's canonical cross-model isomorphism and its certificate are not
+  implemented, so extension-field exception lookup currently requires the
+  frozen modulus.
+- **Open:** shallow locator certificates have an independent verifier and a
+  corruption test.  Positive deep results still need a separate verifier for
+  theorem-domain hashes, family invariants, orbit transporter, exhaustiveness,
+  and radius promotion.
+- **Open:** uniform nonpersistent adapters are missing above the finite
+  certificates: R5 osculating/wild formulas, the recurring R6 binary nucleus,
+  and formula-speed canonicalizers.  The implementation returns
+  `UNSUPPORTED`, not a guessed family, on those paths.

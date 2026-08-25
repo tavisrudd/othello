@@ -1241,4 +1241,12 @@ mod tests {
             .unwrap_err();
         assert_eq!(error, Error::BadCodeParameters);
     }
+
+    #[test]
+    fn certificate_verifier_rejects_corrupted_magnitude() {
+        let mut certificate =
+            search_exact_locator(&request(prime_field(7), 5, vec![0, 3, 5, 4, 1]), 10_000).unwrap();
+        certificate.magnitudes[0] = 0;
+        assert_eq!(verify_certificate(&certificate), Err(Error::BadMagnitude));
+    }
 }
