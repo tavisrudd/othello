@@ -9,7 +9,7 @@ pub const RECONSTRUCTION_SCHEMA_VERSION: &str = "sparse-shadow-reconstruction/v2
 pub const PAPER_I_CARRIER_SCHEMA_VERSION: &str = "sparse-shadow-paper-i-carrier/v1";
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
-#[serde(tag = "kind", rename_all = "snake_case")]
+#[serde(tag = "kind", rename_all = "snake_case", deny_unknown_fields)]
 pub enum Ambiguity {
     OrientationC2 { killed_by_calibration: bool },
 }

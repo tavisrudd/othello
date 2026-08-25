@@ -70,6 +70,9 @@ serialized tree.
   calibration vertices; Paper-I calibration must additionally be an increasing
   triple forming a clique in `orbital_positive`, matching the frozen triangle
   sign rather than an arbitrary three-set;
+- tagged-enum strictness now covers profiles, actions, base fields, ambiguity
+  kinds, reconstruction ambiguity, and equivalence outcomes; all gated fixtures
+  round-trip exactly as JSON values;
 - exhaustive calibration census: all 220 triples checked, exactly 20 admitted,
   one canonical orbit, automorphism order 6 throughout;
 - uncalibrated exchange of the two five-valent orbital payloads preserves the

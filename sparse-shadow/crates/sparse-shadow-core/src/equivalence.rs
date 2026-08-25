@@ -8,7 +8,7 @@ use crate::{
 };
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
-#[serde(tag = "outcome", rename_all = "snake_case")]
+#[serde(tag = "outcome", rename_all = "snake_case", deny_unknown_fields)]
 pub enum EquivalenceOutcome {
     Equivalent {
         left_to_right: Vec<u32>,

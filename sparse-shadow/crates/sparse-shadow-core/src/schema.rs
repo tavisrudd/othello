@@ -30,7 +30,12 @@ impl InputArtifact {
 }
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
-#[serde(tag = "adapter", content = "input", rename_all = "snake_case")]
+#[serde(
+    tag = "adapter",
+    content = "input",
+    rename_all = "snake_case",
+    deny_unknown_fields
+)]
 pub enum ProfileInput {
     PaperIOrientation(PaperIOrientation),
     PaperIiTrade(Box<GatedPaperIi>),
@@ -106,7 +111,12 @@ pub struct FiniteFieldSpec {
 }
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
-#[serde(tag = "kind", content = "spec", rename_all = "snake_case")]
+#[serde(
+    tag = "kind",
+    content = "spec",
+    rename_all = "snake_case",
+    deny_unknown_fields
+)]
 pub enum BaseFieldSpec {
     Rational,
     Finite(FiniteFieldSpec),
@@ -120,7 +130,7 @@ pub struct RationalCoefficient {
 }
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
-#[serde(tag = "kind", rename_all = "snake_case")]
+#[serde(tag = "kind", rename_all = "snake_case", deny_unknown_fields)]
 pub enum DeclaredAction {
     VertexPermutations {
         degree: u32,
@@ -141,10 +151,10 @@ pub struct SemilinearGenerator {
 }
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
-#[serde(tag = "kind", rename_all = "snake_case")]
+#[serde(tag = "kind", rename_all = "snake_case", deny_unknown_fields)]
 pub enum AmbiguitySpec {
-    ProjectiveOrbit,
-    OrientationC2,
+    ProjectiveOrbit {},
+    OrientationC2 {},
     HomogeneousFibre {
         numerator: String,
         denominator: String,

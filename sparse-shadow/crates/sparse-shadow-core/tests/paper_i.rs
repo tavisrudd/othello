@@ -196,6 +196,11 @@ fn schema_and_normalization_boundaries_reject_malformed_inputs() {
     unknown["unexpected"] = serde_json::Value::Bool(true);
     assert!(serde_json::from_value::<InputArtifact>(unknown).is_err());
 
+    let mut unknown_profile: serde_json::Value =
+        serde_json::from_str(FIXTURE).expect("fixture JSON");
+    unknown_profile["profile"]["unexpected"] = serde_json::Value::Bool(true);
+    assert!(serde_json::from_value::<InputArtifact>(unknown_profile).is_err());
+
     let mut wrong_version = fixture();
     wrong_version.schema = "sparse-shadow/v2".into();
     assert!(matches!(
@@ -318,6 +323,22 @@ fn calibrated_reconstruction_is_an_exact_oriented_return() {
         verify_reconstruction(&input, &reconstructed)
             .expect("calibrated reconstruction replays")
             .valid
+    );
+}
+
+#[test]
+fn tagged_certificate_variants_reject_unknown_fields() {
+    let input = fixture();
+    let mut reconstruction =
+        serde_json::to_value(reconstruct(&input).expect("reconstruction")).expect("artifact JSON");
+    reconstruction["ambiguity"]["unexpected"] = serde_json::Value::Bool(true);
+    assert!(serde_json::from_value::<ReconstructionArtifact>(reconstruction).is_err());
+
+    let mut equivalence =
+        serde_json::to_value(compare(&input, &input).expect("equivalence")).expect("artifact JSON");
+    equivalence["result"]["unexpected"] = serde_json::Value::Bool(true);
+    assert!(
+        serde_json::from_value::<sparse_shadow_core::EquivalenceCertificate>(equivalence).is_err()
     );
 }
 

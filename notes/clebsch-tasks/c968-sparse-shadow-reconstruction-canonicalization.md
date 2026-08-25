@@ -239,6 +239,11 @@ proof/checker trust comparator. It also keeps the external-tool benchmark
 explicitly deferred until a versioned encoding exists; no novelty claim is
 made.
 
+Strict unknown-field rejection now applies uniformly to tagged enums as well as
+structs: profiles, actions, base fields, input/reconstruction ambiguities, and
+equivalence outcomes. Empty ambiguity variants retain their frozen JSON shape,
+and all four gated fixtures have exact value-level round-trip tests.
+
 No unblocked C968 implementation frontier remains: each next adapter first
 requires the complete paper-owned export named in its `fixtures/gated-*.json`.
 Nearby evidence JSON and trust manifests are explicitly insufficient. Once an

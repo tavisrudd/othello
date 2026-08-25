@@ -19,7 +19,10 @@ axes are the antipodal pairs of the verified canonical shadow.
 | `paper_iv_minimum_words` | weighted pair section of the 78-coordinate minimum-support hypergraph | coordinate action preserving pair multiplicities | incidence/code, elliptic scheme, `PG(2,13)`, conic, polarity | ordered-frame/field-labeling `PGL2(13)` torsor | gated |
 | `paper_v_chordal_conference` | retained Paper-II residue, outer involution, and optional selected chordal line | marked residue action | singular quartic, twelve points, six-axis carrier, chordal/conference companions | conference opposition `C2`; exact return only with the selected line | gated |
 
-Unknown fields are rejected. Vertices are numbered `0..n-1`; each named
+Unknown fields are rejected at struct and tagged-enum boundaries, including
+profile tags, actions, base fields, ambiguity kinds, and certificate outcomes.
+The four gated fixtures have exact value-level parse/serialize round trips.
+Vertices are numbered `0..n-1`; each named
 undirected relation is a duplicate-free list of ordered-normalized pairs
 `[min,max]`. Relation order is semantic and frozen. A canonical artifact
 renumbers vertices, sorts relation pairs, and serializes compact JSON before
