@@ -749,12 +749,15 @@ def search_five_character_core(q: int, symmetry: str, output: Path,
                                fixed_line_type_counts: list[int] | None = None,
                                fixed_core_indices: list[int] | None = None,
                                fixed_line_degrees: list[int] | None = None,
-                               require_concurrency_cap: bool = False) -> None:
+                               require_concurrency_cap: bool = False,
+                               require_exact_maximal_core: bool = False) -> None:
     """Stage 1: find only the symmetric five-character blocking core."""
     from ortools.sat.python import cp_model
 
     if q not in (9, 27):
         raise ValueError("the current exact field implementation supports q=9 and q=27")
+    if require_exact_maximal_core and not require_concurrency_cap:
+        raise ValueError("an exact maximal core requires the concurrency cap")
     points, on_line, through_point = incidence(q)
     orbits = ([[point] for point in range(len(points))] if symmetry == "none"
               else symmetry_orbits(q, symmetry))
@@ -874,6 +877,8 @@ def search_five_character_core(q: int, symmetry: str, output: Path,
                               for line in through_point[point])
             model.add(high_degree <= arc_intersection)
             model.add(high_degree == arc_intersection).only_enforce_if(core[point])
+            if require_exact_maximal_core:
+                model.add(high_degree <= arc_intersection - 1).only_enforce_if(core[point].Not())
             core_high_incidence = sum(
                 high_secant_incidences[signature_index_of_line[line]]
                 for line in through_point[point]
@@ -910,6 +915,7 @@ def search_five_character_core(q: int, symmetry: str, output: Path,
         "required_fixed_line_type_counts": fixed_line_type_counts,
         "required_fixed_line_degrees": fixed_line_degrees,
         "require_concurrency_cap": require_concurrency_cap,
+        "require_exact_maximal_core": require_exact_maximal_core,
         "encoded_projective_pair_moment": math.comb(2 * q + 1, 2),
         "encoded_sparse_line_type_counts": {
             "2": line_type_counts[2],
@@ -1388,6 +1394,288 @@ def audit_frobenius_fixed_subplane(output: Path) -> None:
         "aggregate_normalized_pattern_count": len(aggregate_patterns),
         "normalized_pattern_count": len(ordered_patterns),
         "normalized_patterns": ordered_patterns,
+    }, indent=2, sort_keys=True) + "\n")
+
+
+def audit_degree_defect(q9_construction: Path, frobenius_audit: Path,
+                        output: Path) -> None:
+    """Audit the T=2q+1 second-moment shell and its ternary centered codeword."""
+    q9 = json.loads(q9_construction.read_text())
+    _, q9_on_line, q9_through_point = incidence(9)
+    q9_arc = set(q9["primal_arc_point_indices"])
+    q9_unital = set(q9["unital_dual_point_indices"])
+    q9_core = set(q9["degree_seven_point_indices"])
+    q9_degrees = [len(q9_arc.intersection(line)) for line in q9_on_line]
+    q9_centered = [degree - 3 for degree in q9_degrees]
+    q9_support = {point for point, value in enumerate(q9_centered) if value % 3}
+    q9_centered_line_sums = [sum(q9_centered[line] for line in incident)
+                             for incident in q9_through_point]
+    if any(value != 9 * (1 + int(point in q9_arc))
+           for point, value in enumerate(q9_centered_line_sums)):
+        raise ValueError("the q=9 centered incidence identity failed")
+    if q9_support != set(range(91)) - q9_unital:
+        raise ValueError("the q=9 centered support is not the unital complement")
+
+    q = 27
+    r = q // 3
+    arc_size = q * q // 3 + 4 * q // 3
+    maximal_degree = 2 * q // 3 + 1
+    maximal_line_count = 2 * q + 1
+    external_count = q * q - q
+    external_degree_sum = arc_size * (q + 1) - maximal_line_count * maximal_degree
+    external_pair_sum = (math.comb(arc_size, 2)
+                         - maximal_line_count * math.comb(maximal_degree, 2))
+    centered_sum = external_degree_sum - r * external_count
+    defect = 2 * external_pair_sum - 2 * r * external_degree_sum + (
+        r * r + r
+    ) * external_count
+    if centered_sum != 6 * r * r - 4 * r - 1 or defect != 2 * r * (r - 2):
+        raise AssertionError("the field-uniform defect identities failed")
+    external_centered_norm = defect + centered_sum
+    centered_norm = maximal_line_count * (r + 1) ** 2 + external_centered_norm
+    centered_total_sum = maximal_line_count * (r + 1) + centered_sum
+
+    def defect_cost(degree: int) -> int:
+        return (degree - r) * (degree - r - 1)
+
+    exceptional_degrees = [degree for degree in range(maximal_degree)
+                           if degree not in (r, r + 1)]
+    nonfixed_exception_histograms: dict[int, list[tuple[tuple[int, ...], int, int]]] = {
+        cost: [] for cost in range(defect // 3 + 1)
+    }
+
+    def enumerate_nonfixed(index: int, remaining: int, histogram: list[int],
+                           count: int, centered: int, target_cost: int) -> None:
+        if index == len(exceptional_degrees):
+            if remaining == 0:
+                nonfixed_exception_histograms[target_cost].append(
+                    (tuple(histogram), count, centered)
+                )
+            return
+        degree = exceptional_degrees[index]
+        cost = defect_cost(degree)
+        for multiplicity in range(remaining // cost + 1):
+            histogram[degree] = multiplicity
+            enumerate_nonfixed(
+                index + 1,
+                remaining - multiplicity * cost,
+                histogram,
+                count + multiplicity,
+                centered + multiplicity * (degree - r),
+                target_cost,
+            )
+        histogram[degree] = 0
+
+    for target_cost in nonfixed_exception_histograms:
+        enumerate_nonfixed(0, target_cost, [0] * maximal_degree, 0, 0, target_cost)
+
+    def compositions(total: int, parts: int) -> list[tuple[int, ...]]:
+        if parts == 1:
+            return [(total,)]
+        out = []
+        for first in range(total + 1):
+            for tail in compositions(total - first, parts - 1):
+                out.append((first,) + tail)
+        return out
+
+    def fixed_histograms(high_count_spectrum: Counter[int]) -> set[tuple[tuple[int, ...], int, int]]:
+        states = {(tuple([0] * maximal_degree), 0, 0)}
+        for fixed_high_degree, point_count in sorted(high_count_spectrum.items()):
+            allowed = list(range(fixed_high_degree, maximal_degree, 3))
+            replacements = set()
+            for multiplicities in compositions(point_count, len(allowed)):
+                addition = [0] * maximal_degree
+                for degree, multiplicity in zip(allowed, multiplicities):
+                    addition[degree] = multiplicity
+                addition_sum = sum(degree * addition[degree]
+                                   for degree in range(maximal_degree))
+                addition_defect = sum(defect_cost(degree) * addition[degree]
+                                      for degree in range(maximal_degree))
+                for histogram, degree_sum, defect_sum in states:
+                    replacements.add((
+                        tuple(histogram[degree] + addition[degree]
+                              for degree in range(maximal_degree)),
+                        degree_sum + addition_sum,
+                        defect_sum + addition_defect,
+                    ))
+            states = replacements
+        return states
+
+    certificate = json.loads(frobenius_audit.read_text())
+    _, on_line, through_point = incidence(q)
+    fixed_indices = certificate["fixed_point_indices"]
+    frobenius_orbits = symmetry_orbits(q, "frobenius")
+    orbit_of = {point: orbit_index for orbit_index, orbit in
+                enumerate(frobenius_orbits) for point in orbit}
+    invariant_incidence = []
+    for point_orbit in frobenius_orbits:
+        row = [0] * len(frobenius_orbits)
+        for line in through_point[point_orbit[0]]:
+            row[orbit_of[line]] = (row[orbit_of[line]] + 1) % 3
+        invariant_incidence.append(row)
+
+    def ternary_rank(rows: list[list[int]], column_count: int) -> int:
+        matrix = [row[:] for row in rows]
+        rank = 0
+        for column in range(column_count):
+            pivot = next((index for index in range(rank, len(matrix))
+                          if matrix[index][column] % 3), None)
+            if pivot is None:
+                continue
+            matrix[rank], matrix[pivot] = matrix[pivot], matrix[rank]
+            if matrix[rank][column] % 3 == 2:
+                matrix[rank] = [(2 * value) % 3 for value in matrix[rank]]
+            for index in range(len(matrix)):
+                factor = matrix[index][column] % 3
+                if index != rank and factor:
+                    matrix[index] = [
+                        (value - factor * pivot_value) % 3
+                        for value, pivot_value in zip(matrix[index], matrix[rank])
+                    ]
+            rank += 1
+        return rank
+
+    invariant_rank = ternary_rank(invariant_incidence, len(frobenius_orbits))
+    branch_records = []
+    for pattern in certificate["normalized_patterns"]:
+        core = set(pattern["fixed_core_point_indices"])
+        fixed_line_degrees = dict(zip(
+            fixed_indices, pattern["fixed_line_degrees_in_fixed_index_order"]
+        ))
+        fixed_external_high_degrees = []
+        for point in fixed_indices:
+            if point in core:
+                continue
+            fixed_external_high_degrees.append(sum(
+                1 for line in fixed_indices
+                if point in on_line[line] and fixed_line_degrees[line] >= 3
+            ))
+        high_count_spectrum = Counter(fixed_external_high_degrees)
+        fixed_centered_residues = {}
+        selected_fixed_lines = {
+            line for line in fixed_indices if fixed_line_degrees[line] >= 3
+        }
+        for point in fixed_indices:
+            fixed_centered_residues[point] = sum(
+                point in on_line[line] for line in selected_fixed_lines
+            ) % 3
+        augmented = [row + [0] for row in invariant_incidence]
+        for point in fixed_indices:
+            fixed_row = [0] * (len(frobenius_orbits) + 1)
+            fixed_row[orbit_of[point]] = 1
+            fixed_row[-1] = fixed_centered_residues[point]
+            augmented.append(fixed_row)
+        pinned_rank = ternary_rank(augmented, len(frobenius_orbits))
+        augmented_rank = ternary_rank(augmented, len(frobenius_orbits) + 1)
+        if pinned_rank != augmented_rank:
+            raise ValueError("fixed centered residues are inconsistent")
+        fixed_states = fixed_histograms(high_count_spectrum)
+        global_spectra = set()
+        feasible_fixed_histograms = 0
+        for fixed_histogram, fixed_sum, fixed_defect in fixed_states:
+            if fixed_defect > defect or (defect - fixed_defect) % 3:
+                continue
+            orbit_defect = (defect - fixed_defect) // 3
+            fixed_is_feasible = False
+            for orbit_histogram, exceptional_orbits, exceptional_centered in (
+                nonfixed_exception_histograms[orbit_defect]
+            ):
+                remaining_degree = external_degree_sum - fixed_sum
+                if remaining_degree % 3:
+                    continue
+                degree_r_plus_one_orbits = (
+                    remaining_degree // 3 - r * 231 - exceptional_centered
+                )
+                degree_r_orbits = 231 - exceptional_orbits - degree_r_plus_one_orbits
+                if degree_r_orbits < 0 or degree_r_plus_one_orbits < 0:
+                    continue
+                spectrum = [fixed_histogram[degree] + 3 * orbit_histogram[degree]
+                            for degree in range(maximal_degree)]
+                spectrum[r] += 3 * degree_r_orbits
+                spectrum[r + 1] += 3 * degree_r_plus_one_orbits
+                if (sum(spectrum) != external_count
+                        or sum(degree * spectrum[degree]
+                               for degree in range(maximal_degree)) != external_degree_sum
+                        or sum(defect_cost(degree) * spectrum[degree]
+                               for degree in range(maximal_degree)) != defect):
+                    raise AssertionError("bad external degree spectrum")
+                global_spectra.add(tuple(spectrum))
+                fixed_is_feasible = True
+            feasible_fixed_histograms += int(fixed_is_feasible)
+        ranges = {
+            str(degree): {
+                "minimum": min(spectrum[degree] for spectrum in global_spectra),
+                "maximum": max(spectrum[degree] for spectrum in global_spectra),
+            }
+            for degree in range(maximal_degree)
+            if max(spectrum[degree] for spectrum in global_spectra)
+        }
+        branch_records.append({
+            "fixed_core_point_indices": sorted(core),
+            "fixed_external_high_degree_spectrum": dict(sorted(high_count_spectrum.items())),
+            "fixed_external_residue_spectrum_mod_3": dict(sorted(
+                Counter(degree % 3 for degree in fixed_external_high_degrees).items()
+            )),
+            "minimum_fixed_exception_count": sum(
+                count for residue, count in
+                Counter(degree % 3 for degree in fixed_external_high_degrees).items()
+                if residue == 2
+            ),
+            "minimum_fixed_defect": sum(
+                min(defect_cost(degree)
+                    for degree in range(fixed_high_degree, maximal_degree, 3))
+                for fixed_high_degree in fixed_external_high_degrees
+            ),
+            "fixed_degree_histogram_count": len(fixed_states),
+            "feasible_fixed_degree_histogram_count": feasible_fixed_histograms,
+            "compatible_external_degree_spectrum_count": len(global_spectra),
+            "external_degree_count_ranges": ranges,
+            "fixed_centered_residues_mod_3": {
+                str(point): fixed_centered_residues[point] for point in fixed_indices
+            },
+            "pinned_ternary_incidence_rank": pinned_rank,
+            "pinned_ternary_affine_dimension": len(frobenius_orbits) - pinned_rank,
+        })
+
+    output.write_text(json.dumps({
+        "schema": "c949-degree-defect-audit-v1",
+        "field_uniform_identities": {
+            "q": "3r",
+            "external_point_count": "q^2-q",
+            "centered_external_degree_sum": "6r^2-4r-1",
+            "external_defect_sum": "sum (e-r)(e-r-1) = 2r(r-2)",
+            "centered_incidence_equation": "M^T(e-r*1)=q*(1+1_A)",
+        },
+        "q9": {
+            "arc_size": len(q9_arc),
+            "line_degree_spectrum": dict(sorted(Counter(q9_degrees).items())),
+            "external_defect": sum((degree - 3) * (degree - 4)
+                                   for point, degree in enumerate(q9_degrees)
+                                   if point not in q9_core),
+            "centered_mod_3_support_size": len(q9_support),
+            "unital_complement_size": 91 - len(q9_unital),
+            "centered_mod_3_support_equals_unital_complement": True,
+            "centered_incidence_equation_checked": True,
+        },
+        "q27_T55": {
+            "arc_size": arc_size,
+            "maximal_degree": maximal_degree,
+            "maximal_line_count": maximal_line_count,
+            "external_point_count": external_count,
+            "external_degree_sum": external_degree_sum,
+            "external_pair_sum": external_pair_sum,
+            "centered_external_degree_sum": centered_sum,
+            "external_defect": defect,
+            "external_exception_count_upper_bound": defect // 2,
+            "external_centered_squared_norm": external_centered_norm,
+            "centered_total_sum": centered_total_sum,
+            "centered_squared_norm": centered_norm,
+            "frobenius_invariant_coordinate_count": len(frobenius_orbits),
+            "frobenius_invariant_ternary_incidence_rank": invariant_rank,
+            "frobenius_invariant_ternary_kernel_dimension":
+                len(frobenius_orbits) - invariant_rank,
+            "branches": branch_records,
+        },
     }, indent=2, sort_keys=True) + "\n")
 
 
@@ -1886,6 +2174,10 @@ def main() -> None:
     orbit_audit.add_argument("--output", type=Path, required=True)
     fixed_subplane = subparsers.add_parser("frobenius-fixed-subplane-audit")
     fixed_subplane.add_argument("--output", type=Path, required=True)
+    degree_defect = subparsers.add_parser("degree-defect-audit")
+    degree_defect.add_argument("--q9-construction", type=Path, required=True)
+    degree_defect.add_argument("--frobenius-audit", type=Path, required=True)
+    degree_defect.add_argument("--output", type=Path, required=True)
     structure = subparsers.add_parser("analyze-blocking-certificate")
     structure.add_argument("--certificate", type=Path, required=True)
     structure.add_argument("--output", type=Path, required=True)
@@ -1917,6 +2209,7 @@ def main() -> None:
     core_search.add_argument("--fixed-line-type-counts", type=int, nargs=5)
     core_search.add_argument("--fixed-line-degrees", type=int, nargs="+")
     core_search.add_argument("--require-concurrency-cap", action="store_true")
+    core_search.add_argument("--require-exact-maximal-core", action="store_true")
     core_lift = subparsers.add_parser("five-character-core-lift")
     core_lift.add_argument("--core", type=Path, required=True)
     core_lift.add_argument("--output", type=Path, required=True)
@@ -1946,6 +2239,8 @@ def main() -> None:
         audit_symmetry_orbits(args.q, args.output)
     elif args.command == "frobenius-fixed-subplane-audit":
         audit_frobenius_fixed_subplane(args.output)
+    elif args.command == "degree-defect-audit":
+        audit_degree_defect(args.q9_construction, args.frobenius_audit, args.output)
     elif args.command == "analyze-blocking-certificate":
         analyze_blocking_certificate(args.certificate, args.output)
     elif args.command == "analyze-unital-mechanism":
@@ -1960,7 +2255,8 @@ def main() -> None:
                                    args.seconds, args.workers, args.fixed_core_points,
                                    args.fixed_line_type_counts, args.fixed_core_indices,
                                    args.fixed_line_degrees,
-                                   args.require_concurrency_cap)
+                                   args.require_concurrency_cap,
+                                   args.require_exact_maximal_core)
     elif args.command == "five-character-core-lift":
         lift_five_character_core(args.core, args.output, args.seconds, args.workers)
     else:

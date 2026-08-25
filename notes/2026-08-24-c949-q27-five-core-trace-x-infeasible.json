@@ -28,6 +28,7 @@
     "9": 81
   },
   "require_concurrency_cap": false,
+  "require_exact_maximal_core": false,
   "required_fixed_core_indices": null,
   "required_fixed_core_points": null,
   "required_fixed_line_degrees": null,

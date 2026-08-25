@@ -1,0 +1,272 @@
+{
+  "field_uniform_identities": {
+    "centered_external_degree_sum": "6r^2-4r-1",
+    "centered_incidence_equation": "M^T(e-r*1)=q*(1+1_A)",
+    "external_defect_sum": "sum (e-r)(e-r-1) = 2r(r-2)",
+    "external_point_count": "q^2-q",
+    "q": "3r"
+  },
+  "q27_T55": {
+    "arc_size": 279,
+    "branches": [
+      {
+        "compatible_external_degree_spectrum_count": 104873,
+        "external_degree_count_ranges": {
+          "1": {
+            "maximum": 1,
+            "minimum": 0
+          },
+          "10": {
+            "maximum": 512,
+            "minimum": 323
+          },
+          "11": {
+            "maximum": 63,
+            "minimum": 0
+          },
+          "12": {
+            "maximum": 19,
+            "minimum": 0
+          },
+          "13": {
+            "maximum": 9,
+            "minimum": 0
+          },
+          "14": {
+            "maximum": 6,
+            "minimum": 0
+          },
+          "15": {
+            "maximum": 3,
+            "minimum": 0
+          },
+          "16": {
+            "maximum": 2,
+            "minimum": 0
+          },
+          "17": {
+            "maximum": 2,
+            "minimum": 0
+          },
+          "18": {
+            "maximum": 1,
+            "minimum": 0
+          },
+          "2": {
+            "maximum": 2,
+            "minimum": 0
+          },
+          "3": {
+            "maximum": 1,
+            "minimum": 0
+          },
+          "4": {
+            "maximum": 3,
+            "minimum": 0
+          },
+          "5": {
+            "maximum": 6,
+            "minimum": 0
+          },
+          "6": {
+            "maximum": 9,
+            "minimum": 0
+          },
+          "7": {
+            "maximum": 19,
+            "minimum": 0
+          },
+          "8": {
+            "maximum": 63,
+            "minimum": 0
+          },
+          "9": {
+            "maximum": 316,
+            "minimum": 127
+          }
+        },
+        "feasible_fixed_degree_histogram_count": 5774,
+        "fixed_centered_residues_mod_3": {
+          "0": 1,
+          "1": 1,
+          "2": 1,
+          "27": 1,
+          "28": 1,
+          "29": 1,
+          "54": 2,
+          "55": 2,
+          "56": 2,
+          "729": 2,
+          "730": 2,
+          "731": 2,
+          "756": 0
+        },
+        "fixed_core_point_indices": [
+          0,
+          1,
+          2,
+          27
+        ],
+        "fixed_degree_histogram_count": 58212,
+        "fixed_external_high_degree_spectrum": {
+          "1": 2,
+          "2": 6,
+          "3": 1
+        },
+        "fixed_external_residue_spectrum_mod_3": {
+          "0": 1,
+          "1": 2,
+          "2": 6
+        },
+        "minimum_fixed_defect": 12,
+        "minimum_fixed_exception_count": 6,
+        "pinned_ternary_affine_dimension": 178,
+        "pinned_ternary_incidence_rank": 83
+      },
+      {
+        "compatible_external_degree_spectrum_count": 104873,
+        "external_degree_count_ranges": {
+          "1": {
+            "maximum": 1,
+            "minimum": 0
+          },
+          "10": {
+            "maximum": 512,
+            "minimum": 323
+          },
+          "11": {
+            "maximum": 63,
+            "minimum": 0
+          },
+          "12": {
+            "maximum": 19,
+            "minimum": 0
+          },
+          "13": {
+            "maximum": 9,
+            "minimum": 0
+          },
+          "14": {
+            "maximum": 6,
+            "minimum": 0
+          },
+          "15": {
+            "maximum": 3,
+            "minimum": 0
+          },
+          "16": {
+            "maximum": 2,
+            "minimum": 0
+          },
+          "17": {
+            "maximum": 2,
+            "minimum": 0
+          },
+          "18": {
+            "maximum": 1,
+            "minimum": 0
+          },
+          "2": {
+            "maximum": 2,
+            "minimum": 0
+          },
+          "3": {
+            "maximum": 1,
+            "minimum": 0
+          },
+          "4": {
+            "maximum": 3,
+            "minimum": 0
+          },
+          "5": {
+            "maximum": 6,
+            "minimum": 0
+          },
+          "6": {
+            "maximum": 9,
+            "minimum": 0
+          },
+          "7": {
+            "maximum": 19,
+            "minimum": 0
+          },
+          "8": {
+            "maximum": 63,
+            "minimum": 0
+          },
+          "9": {
+            "maximum": 316,
+            "minimum": 127
+          }
+        },
+        "feasible_fixed_degree_histogram_count": 5774,
+        "fixed_centered_residues_mod_3": {
+          "0": 1,
+          "1": 1,
+          "2": 2,
+          "27": 1,
+          "28": 1,
+          "29": 2,
+          "54": 1,
+          "55": 1,
+          "56": 2,
+          "729": 0,
+          "730": 2,
+          "731": 2,
+          "756": 2
+        },
+        "fixed_core_point_indices": [
+          0,
+          1,
+          27,
+          28
+        ],
+        "fixed_degree_histogram_count": 55440,
+        "fixed_external_high_degree_spectrum": {
+          "1": 1,
+          "2": 6,
+          "3": 1,
+          "4": 1
+        },
+        "fixed_external_residue_spectrum_mod_3": {
+          "0": 1,
+          "1": 2,
+          "2": 6
+        },
+        "minimum_fixed_defect": 12,
+        "minimum_fixed_exception_count": 6,
+        "pinned_ternary_affine_dimension": 178,
+        "pinned_ternary_incidence_rank": 83
+      }
+    ],
+    "centered_external_degree_sum": 449,
+    "centered_squared_norm": 6075,
+    "centered_total_sum": 999,
+    "external_centered_squared_norm": 575,
+    "external_defect": 126,
+    "external_degree_sum": 6767,
+    "external_exception_count_upper_bound": 63,
+    "external_pair_sum": 29376,
+    "external_point_count": 702,
+    "frobenius_invariant_coordinate_count": 261,
+    "frobenius_invariant_ternary_incidence_rank": 77,
+    "frobenius_invariant_ternary_kernel_dimension": 184,
+    "maximal_degree": 19,
+    "maximal_line_count": 55
+  },
+  "q9": {
+    "arc_size": 39,
+    "centered_incidence_equation_checked": true,
+    "centered_mod_3_support_equals_unital_complement": true,
+    "centered_mod_3_support_size": 63,
+    "external_defect": 6,
+    "line_degree_spectrum": {
+      "1": 1,
+      "3": 28,
+      "4": 43,
+      "7": 19
+    },
+    "unital_complement_size": 63
+  },
+  "schema": "c949-degree-defect-audit-v1"
+}

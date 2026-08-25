@@ -237,12 +237,118 @@ sum_{high lines ell through P} |D intersect ell| + a_2(P)
     = 8q/3+1 = 73                         for P in D.
 ```
 
-Three-minute runs with this additional channel remain `UNKNOWN`; that status
-supplies no evidence either way.  A direct split by the unordered pair of
+Five-minute runs with this additional channel and the exact `T=55` condition
+that no point outside `D` has degree 19 remain `UNKNOWN`; that status supplies
+no evidence either way.  A direct split by the unordered pair of
 nonfixed 5-secant orbits is also too coarse: the fixed-structure stabilizer has
 order four and leaves 7,768 pair orbits in either branch.  That split is not
 promoted as a useful proof route.  All exclusions here are symmetry-restricted
 statements, not an unrestricted nonexistence theorem.
+
+### Second-moment shell and centered incidence codeword
+
+The higher-value `tt` reformulation starts from the primal arc rather than
+from the two exceptional five-secant orbits.  Let `M` be the line-by-point
+incidence matrix, let `a` be the characteristic vector of a target arc `A`,
+and let `e=M a` be its line-degree vector.  The projective-plane identity
+`M^T M=qI+J` gives
+
+```text
+M^T e=q a+k 1.
+```
+
+Write `q=3r`, so `k=3r^2+4r`.  Since `k-r(q+1)=q`, centering at the two
+expected external degrees gives the exact integer identity
+
+```text
+M^T(e-r 1)=q(1+a).                                  (CI)
+```
+
+Thus `(e-r 1) mod 3` is an incidence-codeword, not merely a numerical degree
+profile.  This is the spatial constraint that the raw orbit searches were
+missing.
+
+On the `T=2q+1=6r+1` branch, the core points have degree `2r+1`.  Removing
+them from the two standard incidence moments yields
+
+```text
+sum_{P outside D}(e_P-r)=6r^2-4r-1,
+sum_{P outside D}(e_P-r)(e_P-r-1)=2r(r-2).           (DS)
+```
+
+Every summand in the second line is a nonnegative integer, vanishing exactly
+at `e_P in {r,r+1}`.  Hence all but at most `r(r-2)` external points have one
+of those two degrees.  At `q=27`, `(DS)` becomes
+
+```text
+702 external points,  sum e_P=6767,  sum binom(e_P,2)=29376,
+sum(e_P-9)=449,       sum(e_P-9)(e_P-10)=126.
+```
+
+Consequently at most 63 external lines have degree outside `{9,10}`.  The
+Frobenius fixed-subplane data force six of the nine fixed external points to
+have degree congruent to two modulo three, so at least six fixed points are
+exceptional and consume at least 12 units of the defect.
+
+The deterministic degree audit also identifies the limitation of scalar
+moment data: after the exact Frobenius residue conditions, each canonical
+branch still admits 104,873 external degree histograms.  The two branches
+have different fixed high-line counts,
+
+```text
+3-on-line+1-off:  1^2 2^6 3^1,
+general 4:        1^1 2^6 3^1 4^1,
+```
+
+but the same residue spectrum `0^1 1^2 2^6`, minimum fixed defect 12, and set
+of compatible global histograms.  The audit nevertheless forces `N_0=0`,
+`N_1<=1`, `N_18<=1`, `N_9>=127`, and `N_10>=323` in either branch.  Therefore
+the next classification must use the spatial code equation `(CI)`, not
+another degree-distribution or raw five-secant-pair split.
+
+Pure reduction modulo three is still too loose.  On Frobenius-invariant
+vectors the ternary incidence matrix has 261 coordinates, rank 77, and kernel
+dimension 184.  Pinning all 13 fixed coordinates is consistent in both
+branches but leaves affine dimension 178.  The useful object is therefore the
+small-norm integral lift `u=e-9 1`, not an arbitrary ternary codeword.  Its
+remaining exact data are
+
+```text
+sum u=999,   ||u||^2=6075,
+u_P=10 for the 55 core points,
+sum_{P outside D} u_P^2=575,
+M^T u in {27,54}, with value 54 exactly on A.
+```
+
+This recasts the `T=55` branch as a constrained closest-vector problem in an
+affine incidence-code lattice.  That is the concrete next attack licensed by
+the audit.
+
+The `q=9` witness makes the codeword mechanism concrete.  Its external
+spectrum is `1^1 3^28 4^43`, and the unique degree-one line contributes the
+entire defect
+
+```text
+(1-3)(1-4)=6=2*3*(3-2).
+```
+
+More strongly, the support of `(e-3 1) mod 3` is exactly the 63-point
+complement of the 28-point Hermitian unital.  Thus the unital is visible after
+the `C_4` switch as an intrinsic ternary incidence-code invariant.  This is
+the cleanest structural bridge presently known from the exact base case to a
+field-uniform attack.
+
+Finally, for a core-line intersection `1<=d<=5`, the threshold itself has the
+binomial-energy expansion
+
+```text
+1_{d>=3}=binom(d,3)-3binom(d,4)+6binom(d,5).
+```
+
+At a core point the corresponding formula is
+`binom(d-1,2)-2binom(d-1,3)+3binom(d-1,4)`.  This converts the selected-secant
+condition into exact collinearity energies and supplies a second route to a
+stability or incidence-code classification.
 
 ### Exact `q=9` result
 
@@ -429,6 +535,10 @@ family is lower priority.
   points form a blocking set; every unselected dual line meets it once or
   twice.  Completeness is not being inferred merely from the maximum line
   intersection.
+- **Settled by `tt` — why does the Hermitian unital remain intrinsic after
+  the switch?**  For the final arc degree vector `e`, the support of
+  `(e-3 1) mod 3` is exactly the complement of the unital.  This is checked
+  directly from all 91 incidences, not inferred from the construction labels.
 - **Open — what intrinsic object is the `C_4` switch?**  The current evidence
   identifies its cyclic symmetry and incidence parameters but does not
   classify such switches or prove uniqueness under the stabilizer of `(U,P)`.
@@ -448,6 +558,14 @@ family is lower priority.
   their two nonfixed 5-secant orbits still has 7,768 cases per branch and is
   not a useful terminal classification.  The alternative 54-maximal-secant
   envelope branch is also unclassified.
+- **Open after `tt` — classify the centered incidence codeword at `q=27`.**
+  The exact shell has defect 126, at most 63 exceptional external points, and
+  satisfies `M^T(e-9 1)=27(1+a)`.  Frobenius residues alone leave 104,873
+  degree histograms, so the evidence gap is a spatial classification of the
+  small-defect integer lift or a contradiction from its line sums.  The
+  ternary affine space still has dimension 178 after fixed-coordinate pinning;
+  the additional gate is the norm-6075 lattice condition.  This supersedes
+  the 7,768-way five-secant-pair split as the primary C949 route.
 - **Open — can `t_7(2,9)>=39` be proved without exhaustive search?**  The
   positive construction is structural, but exclusion of a 38-point complete
   arc still trusts one normalized CP-SAT infeasibility certificate.  A second
@@ -457,7 +575,7 @@ family is lower priority.
 ### Reproducibility
 
 All commands below run from the repository root.  The construction and the
-three `q=27` audits use only Python's standard library and deterministic
+four `q=27` audits use only Python's standard library and deterministic
 canonical enumeration.
 
 ```bash
@@ -484,6 +602,14 @@ python3 notes/2026-08-24-c949-sharp-higher-arc-asymptotics.py \
   --output /tmp/c949-q27-frobenius-fixed-subplane-audit.json
 cmp /tmp/c949-q27-frobenius-fixed-subplane-audit.json \
   notes/2026-08-24-c949-q27-frobenius-fixed-subplane-audit.json
+
+python3 notes/2026-08-24-c949-sharp-higher-arc-asymptotics.py \
+  degree-defect-audit \
+  --q9-construction notes/2026-08-24-c949-q9-unital-c4-construction.json \
+  --frobenius-audit notes/2026-08-24-c949-q27-frobenius-fixed-subplane-audit.json \
+  --output /tmp/c949-degree-defect-audit.json
+cmp /tmp/c949-degree-defect-audit.json \
+  notes/2026-08-24-c949-degree-defect-audit.json
 ```
 
 The corrected fixed-core lift replays the five-character mechanism at `q=9`
