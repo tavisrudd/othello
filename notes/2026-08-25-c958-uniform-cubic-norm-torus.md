@@ -105,6 +105,13 @@ matrices.  The cubic equation is checked against Tschinkel--Zhang,
 arXiv:2608.20029v1, cached PDF SHA-256
 `be1dedd42662eae0c9d83d08d7379cdd78974000f0be048db50680833a5d01e6`.
 
+Artifact sizes are 4,178 bytes for the residual-lattice generator, 1,269 for
+its JSON certificate, 5,984 for the uniform-chart generator, and 2,534 for
+its JSON certificate.  There is not yet a second algebra implementation of
+the universal symbolic identities; the two specializations are independently
+checked again when composed with the family maps, and no broader independent
+claim is made here.
+
 ## Mystery ledger
 
 | feature | status | evidence or remaining gate |

@@ -77,6 +77,10 @@ sha256sum -c notes/2026-08-25-c958-type-i3-exceptional-sections.sha256
 The source formulas were checked against Tschinkel--Zhang,
 arXiv:2608.20029v1, cached PDF SHA-256
 `be1dedd42662eae0c9d83d08d7379cdd78974000f0be048db50680833a5d01e6`.
+The generator is 8,306 bytes and the canonical JSON certificate is 26,097
+bytes.  Regeneration is deterministic.  There is no second implementation
+of the degree-24 field arithmetic yet; the independent downstream check is
+the six-line blowdown regenerated in Sage's function-field implementation.
 
 This closes the type-`I3` splitting-field and marking gate.  It does not yet
 certify the six-line blowdown, the strict Cox descent and Hilbert--90
