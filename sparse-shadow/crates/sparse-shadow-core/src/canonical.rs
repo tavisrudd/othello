@@ -108,7 +108,7 @@ fn gated_error(profile: &ProfileInput) -> ShadowError {
     };
     ShadowError::ProfileGated {
         profile: name,
-        reason: gate.reason.clone(),
+        reason: format!("{}; required export: {}", gate.reason, gate.required_export),
     }
 }
 

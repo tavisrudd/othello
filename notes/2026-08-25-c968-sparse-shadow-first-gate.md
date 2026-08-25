@@ -14,6 +14,8 @@ The explicit individualization/refinement search returns a canonical form,
 input-to-canonical witness, all verified automorphisms (order 120 on the
 fixture), vertex orbits, deterministic BLAKE3 identity, branch trace, and the
 residual uncalibrated orientation `C2`. Relabeling and corruption tests pass.
+The companion committed calibrated-triangle fixture reconstructs with exact
+oriented return, and its reconstruction certificate replays independently.
 An independently implemented reference search rederives the canonical payload,
 witness, winning trace, and complete automorphism set from raw relations; it
 rejects hash, trace, and missing-automorphism corruption.
@@ -49,6 +51,9 @@ serialized tree.
 - Paper-I exhaustive search: automorphism order 120, one vertex orbit;
 - property test: canonical identity invariant under all tested cyclic
   relabelings;
+- black-box CLI tests: Paper-I validation succeeds, a gated Paper-II input
+  exits nonzero while naming its exact required export, repeated canonicalize
+  runs are byte-identical, and identical inputs compare equivalent;
 - deliberate canonical-identity, branch-trace, and automorphism-set corruption:
   rejected by the independent reference implementation.
 - hot Paper-I search: fixed 32/64/128-byte guarded records; zero allocations,
@@ -85,7 +90,8 @@ baseline. No novelty or priority claim is licensed.
   not inherit this verdict automatically.
 - **Open — source exports:** nearby evidence files exist for Papers II--V, but
   none is the complete frozen shadow required by its typed adapter. Four
-  fail-closed schema fixtures name the missing export paths. Owning next gate:
+  fail-closed schema fixtures and CLI diagnostics name the missing export paths.
+  Owning next gate:
   the respective paper stream must freeze one exact export at a time; C968 will
   not infer it from manuscript prose or trust metadata.
 - **Settled — hot representation:** the Paper-I producer uses fixed/preallocated

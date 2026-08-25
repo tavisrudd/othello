@@ -433,7 +433,7 @@ fn validate_gate(profile: &'static str, gate: &crate::FixtureGate) -> Result<(),
                 gate.required_export
             )
         } else {
-            gate.reason.clone()
+            format!("{}; required export: {}", gate.reason, gate.required_export)
         },
     })
 }

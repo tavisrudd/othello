@@ -185,7 +185,10 @@ until an exact paper-owned export and independent arithmetic replay exist.
 The Paper-I hot search now has compile-time 32/64/128-byte layout guards, a
 preallocated equality arena, and an instrumented zero-allocation result across
 its exact 193-node fixture search. Equivalence/inequivalence and reconstruction
-certificates have independent replay and corruption tests. The performance
+certificates have independent replay and corruption tests. A committed
+calibrated-triangle fixture proves the exact-oriented-return branch, while
+black-box CLI tests cover success, fail-closed export diagnostics, equivalence,
+and byte-deterministic canonical output. The performance
 record is `../../sparse-shadow/docs/performance-paper-i.md`; its wall-time drift
 licenses no optimization claim.
 

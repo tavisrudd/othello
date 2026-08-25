@@ -10,8 +10,10 @@ provides deterministic canonicalization, witnesses, certificates, replay, and
 stable JSON artifacts.
 
 The first development gate enables only the hand-checkable Paper-I orientation
-fixture. The other four typed profiles are represented in schema version 1 but
-remain explicitly gated until their frozen exported fixtures exist.
+fixtures: an uncalibrated shadow with residual `C2` and a calibrated triangle
+with exact oriented return. The other four typed profiles are represented in
+schema version 1 but remain explicitly gated until their frozen exported
+fixtures exist; failure diagnostics name the required export.
 
 ## Toolchain and commands
 
@@ -25,6 +27,7 @@ cargo deny check
 cargo bench --bench paper_i -- --noplot
 cargo run -p sparse-shadow-cli -- validate fixtures/paper-i-icosahedral-orbitals.json
 cargo run -p sparse-shadow-cli -- canonicalize fixtures/paper-i-icosahedral-orbitals.json
+cargo run -p sparse-shadow-cli -- reconstruct fixtures/paper-i-calibrated-icosahedral-orbitals.json
 cargo run -p sparse-shadow-cli -- equivalent LEFT.json RIGHT.json
 ```
 

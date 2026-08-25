@@ -5,9 +5,15 @@ use sparse_shadow_core::{
 };
 
 const FIXTURE: &str = include_str!("../../../fixtures/paper-i-icosahedral-orbitals.json");
+const CALIBRATED_FIXTURE: &str =
+    include_str!("../../../fixtures/paper-i-calibrated-icosahedral-orbitals.json");
 
 fn fixture() -> InputArtifact {
     serde_json::from_str(FIXTURE).expect("committed fixture parses")
+}
+
+fn calibrated_fixture() -> InputArtifact {
+    serde_json::from_str(CALIBRATED_FIXTURE).expect("committed calibrated fixture parses")
 }
 
 fn rotate(input: &mut InputArtifact, amount: u32) {
@@ -120,6 +126,18 @@ fn reconstruction_reports_unoriented_c2_fibre() {
     let mut corrupt = reconstructed;
     corrupt.carrier = "wrong_carrier".into();
     assert!(verify_reconstruction(&fixture(), &corrupt).is_err());
+}
+
+#[test]
+fn calibrated_reconstruction_is_an_exact_oriented_return() {
+    let input = calibrated_fixture();
+    let reconstructed = reconstruct(&input).expect("calibrated reconstruction");
+    assert!(reconstructed.exact_oriented_return);
+    assert!(
+        verify_reconstruction(&input, &reconstructed)
+            .expect("calibrated reconstruction replays")
+            .valid
+    );
 }
 
 #[test]
