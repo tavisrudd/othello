@@ -131,17 +131,18 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         args.candidate_limit,
     )?);
 
+    let canonicalization = canonicalize_syndrome(&r6, args.candidate_limit)?;
     let canonical_elapsed = elapsed(args.iterations, || {
         canonicalize_syndrome(&r6, args.candidate_limit)
     })?;
     rows.push(BenchmarkRow {
-        operation: "r6_explicit_semilinear_canonicalization".into(),
+        operation: "r6_tangent_semilinear_canonicalization".into(),
         field_order: 17,
         redundancy: 6,
         elapsed_ns_total: canonical_elapsed,
         elapsed_ns_per_iteration: canonical_elapsed / u128::from(args.iterations),
-        candidates_examined: Some(17u64.pow(3) - 17),
-        baseline: "explicit m*(q^3-q) PGL(2,q) x Gal transports",
+        candidates_examined: Some(canonicalization.transporters_examined),
+        baseline: "tangent gcd root sent to infinity; m*q*(q-1) affine transports",
     });
 
     let classification = classify(&r6, args.candidate_limit, args.candidate_limit)?;

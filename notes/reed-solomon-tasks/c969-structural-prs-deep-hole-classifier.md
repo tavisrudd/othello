@@ -36,6 +36,11 @@ end-to-end classification, and positive replay independently; see
 `c969-benchmark-v1.md`.  A wider extension-field matrix and external-software
 comparison remain open.
 
+Persistent tangent canonicalization now uses the repeated quadratic-gcd root
+to restrict exact lexicographic minimization to `m q(q-1)` affine transports;
+`c969-tangent-canonicalizer.md` proves equivalence to the full orbit minimum.
+Sigma and nonpersistent canonicalizers retain the explicit group fallback.
+
 ## Goal
 
 Replace brute-force search over closer projective Reed--Solomon codewords by an

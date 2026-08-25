@@ -733,7 +733,18 @@ pub fn canonicalize_syndrome(
     transporter_limit: u64,
 ) -> Result<Canonicalization, Error> {
     let (field, syndrome) = validate_request(request)?;
-    let matrices = normalized_pgl_matrices(&field);
+    if persistent_kind(&field, &syndrome) == PersistentKind::Tangent {
+        return canonicalize_tangent(&field, syndrome, transporter_limit);
+    }
+    canonicalize_explicit(&field, syndrome, transporter_limit)
+}
+
+fn canonicalize_explicit(
+    field: &Field,
+    syndrome: Vec<u32>,
+    transporter_limit: u64,
+) -> Result<Canonicalization, Error> {
+    let matrices = normalized_pgl_matrices(field);
     let total = u64::try_from(matrices.len()).unwrap_or(u64::MAX)
         * u64::try_from(field.spec.degree).unwrap_or(u64::MAX);
     if total > transporter_limit {
@@ -751,7 +762,7 @@ pub fn canonicalize_syndrome(
     for exponent in 0..field.spec.degree {
         for &matrix in &matrices {
             examined += 1;
-            let (candidate, scale) = apply_semilinear(&field, &syndrome, exponent, matrix)?;
+            let (candidate, scale) = apply_semilinear(field, &syndrome, exponent, matrix)?;
             if candidate < best {
                 best = candidate;
                 best_transporter = Transporter {
@@ -768,6 +779,101 @@ pub fn canonicalize_syndrome(
         transporter: best_transporter,
         transporters_examined: examined,
         complexity: "explicit PGL(2,q) x Gal enumeration: m*(q^3-q) transports",
+    })
+}
+
+fn normalize_matrix(field: &Field, matrix: [u32; 4]) -> Result<[u32; 4], Error> {
+    let normalized = normalize_projective(field, &matrix)?;
+    Ok([normalized[0], normalized[1], normalized[2], normalized[3]])
+}
+
+fn tangent_gcd_root(field: &Field, syndrome: &[u32]) -> Option<Root> {
+    let degree = syndrome.len() - 2;
+    let basis = locator_kernel(field, syndrome, degree);
+    let (gcd, infinity_multiplicity) = homogeneous_basis_gcd(field, &basis, degree)?;
+    if infinity_multiplicity == 2 {
+        return Some(Root::Infinity);
+    }
+    if infinity_multiplicity != 0 || polynomial_degree(&gcd)? != 2 {
+        return None;
+    }
+    (0..field.order())
+        .find(|&x| field.eval(&gcd, x) == 0)
+        .map(Root::Finite)
+}
+
+fn canonicalize_tangent(
+    field: &Field,
+    syndrome: Vec<u32>,
+    transporter_limit: u64,
+) -> Result<Canonicalization, Error> {
+    let root = tangent_gcd_root(field, &syndrome).ok_or(Error::BadSyndromeWitness)?;
+    let per_frobenius = u64::from(field.order()) * u64::from(field.order() - 1);
+    let total = per_frobenius
+        .checked_mul(u64::try_from(field.spec.degree).unwrap_or(u64::MAX))
+        .ok_or(Error::FieldTooLarge)?;
+    if total > transporter_limit {
+        return Err(Error::CandidateLimit {
+            limit: transporter_limit,
+        });
+    }
+    let mut best: Option<Vec<u32>> = None;
+    let mut best_transporter = None;
+    let mut examined = 0u64;
+    for exponent in 0..field.spec.degree {
+        let frobenius_root = match root {
+            Root::Finite(x) => Root::Finite(field.frobenius(x, exponent)),
+            Root::Infinity => Root::Infinity,
+        };
+        match frobenius_root {
+            Root::Finite(root) => {
+                for alpha in 0..field.order() {
+                    for beta in 0..field.order() {
+                        if field.add(field.mul(alpha, root), beta) == 0 {
+                            continue;
+                        }
+                        let matrix = normalize_matrix(field, [alpha, beta, 1, field.neg(root)])?;
+                        examined += 1;
+                        let (candidate, scale) =
+                            apply_semilinear(field, &syndrome, exponent, matrix)?;
+                        if best.as_ref().is_none_or(|current| candidate < *current) {
+                            best = Some(candidate);
+                            best_transporter = Some(Transporter {
+                                frobenius_exponent: exponent,
+                                matrix,
+                                projective_output_scale: scale,
+                            });
+                        }
+                    }
+                }
+            }
+            Root::Infinity => {
+                for alpha in 1..field.order() {
+                    for beta in 0..field.order() {
+                        let matrix = [alpha, beta, 0, 1];
+                        examined += 1;
+                        let (candidate, scale) =
+                            apply_semilinear(field, &syndrome, exponent, matrix)?;
+                        if best.as_ref().is_none_or(|current| candidate < *current) {
+                            best = Some(candidate);
+                            best_transporter = Some(Transporter {
+                                frobenius_exponent: exponent,
+                                matrix,
+                                projective_output_scale: scale,
+                            });
+                        }
+                    }
+                }
+            }
+        }
+    }
+    debug_assert_eq!(examined, total);
+    Ok(Canonicalization {
+        normalized_input: syndrome,
+        canonical_syndrome: best.ok_or(Error::BadSyndromeWitness)?,
+        transporter: best_transporter.ok_or(Error::BadSyndromeWitness)?,
+        transporters_examined: examined,
+        complexity: "tangent gcd root to infinity, then m*q*(q-1) affine transports",
     })
 }
 
@@ -1835,6 +1941,27 @@ mod tests {
         assert_eq!(
             persistent_kind(&field, &[0, 1, 0, 3, 0, 9]),
             PersistentKind::Sigma
+        );
+
+        let tangent_request = request(prime_field(17), 6, vec![0, 0, 0, 0, 1, 0]);
+        let fast = canonicalize_syndrome(&tangent_request, 500).unwrap();
+        let explicit = canonicalize_explicit(
+            &field,
+            normalize_projective(&field, &tangent_request.syndrome).unwrap(),
+            5_000,
+        )
+        .unwrap();
+        assert_eq!(fast.canonical_syndrome, explicit.canonical_syndrome);
+        assert_eq!(fast.transporters_examined, 272);
+
+        let (equivalent, _) =
+            apply_semilinear(&field, &tangent_request.syndrome, 0, [1, 2, 0, 1]).unwrap();
+        let equivalent_request = request(prime_field(17), 6, equivalent);
+        assert_eq!(
+            canonicalize_syndrome(&equivalent_request, 500)
+                .unwrap()
+                .canonical_syndrome,
+            fast.canonical_syndrome
         );
     }
 
