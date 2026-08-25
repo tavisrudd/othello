@@ -1168,7 +1168,7 @@ gates remain binding.
 | EV rank | Task | Current gate | Why this position |
 |---:|---|---|---|
 | 1 | C915 | edits E1--E6 applied and checklist green; three independent audits open | the external referee package blocks the Version 2 release |
-| 2 | C969 | active; schemas/core/frozen adapters, proved R5--R7 terminal selector, positive verifier, and uniform R5 formula adapter green; R6/R7 uniform adapters, general complexity theorem, and benchmarks open | compile the proved R5--R10 geometry into one exact canonical classifier and decoder while settling the general split-locator decision/recovery complexity boundary |
+| 2 | C969 | active; schemas/core/frozen adapters, proved R5--R7 terminal selector, positive verifier, and uniform R5 plus recurring R6 formula adapters green; R7 uniform adapter, general complexity theorem, and benchmarks open | compile the proved R5--R10 geometry into one exact canonical classifier and decoder while settling the general split-locator decision/recovery complexity boundary |
 
 ## Unallocated level-ups
 
@@ -1230,9 +1230,9 @@ history.
 
 `go C969`
 
-(Implement the uniform R6 nonpersistent adapter above the frozen registry,
-beginning with the recurring odd-binary nucleus and the proved sporadic
-boundary.  Preserve formula evidence in the positive certificate and keep
-finite rows on their exact orbit/stabilizer evidence.  C915's three independent
+(Implement the uniform R7 characteristic-two central-nucleus adapter above the
+frozen registry, then audit whether any nonpersistent R7 formula family recurs
+outside the bounded certificate rows.  Preserve formula evidence in the
+positive certificate and the q=7,8,9 radius gap.  C915's three independent
 Version 2 audits remain the higher-EV external-release gate but are a separate
 active card.)

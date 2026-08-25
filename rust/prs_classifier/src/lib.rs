@@ -650,6 +650,28 @@ fn r5_formula_family(field: &Field, syndrome: &[u32]) -> Option<(&'static str, &
     r5_tame_formula_family(field, syndrome).or_else(|| r5_char3_formula_family(field, syndrome))
 }
 
+fn r6_formula_family(field: &Field, syndrome: &[u32]) -> Option<(&'static str, &'static str)> {
+    if syndrome.len() == 6
+        && field.spec.p == 2
+        && field.spec.degree % 2 == 1
+        && syndrome
+            .iter()
+            .enumerate()
+            .all(|(i, &coefficient)| matches!(i, 2 | 3) || coefficient == 0)
+    {
+        Some((
+            "r6.char2_nucleus",
+            "r6.char2_three_nucleus:odd_extension_degree",
+        ))
+    } else {
+        None
+    }
+}
+
+fn formula_family(field: &Field, syndrome: &[u32]) -> Option<(&'static str, &'static str)> {
+    r5_formula_family(field, syndrome).or_else(|| r6_formula_family(field, syndrome))
+}
+
 pub fn apply_semilinear(
     field: &Field,
     syndrome: &[u32],
@@ -785,7 +807,7 @@ fn split_free_source(
             "intrinsic quadratic Hankel-gcd replay".into()
         }
         _ if frozen.is_some() => "frozen semilinear exception registry".into(),
-        _ if formula.is_some() => "intrinsic R5 formula-family replay".into(),
+        _ if formula.is_some() => "intrinsic formula-family replay".into(),
         _ => "locator search exhausted through degree r-2".into(),
     }
 }
@@ -854,7 +876,7 @@ pub fn verify_deep_certificate(
         certificate.request.redundancy,
         &certificate.canonical_syndrome,
     );
-    let formula = r5_formula_family(&field, &syndrome);
+    let formula = formula_family(&field, &syndrome);
     let replayed_family = match persistent {
         PersistentKind::Tangent => Some("persistent.tangent"),
         PersistentKind::Sigma => Some("persistent.sigma"),
@@ -922,7 +944,7 @@ pub fn classify(
         request.redundancy,
         &canonicalization.canonical_syndrome,
     );
-    let formula = r5_formula_family(&field, &syndrome);
+    let formula = formula_family(&field, &syndrome);
     let family = match persistent {
         PersistentKind::Tangent => Some("persistent.tangent".to_string()),
         PersistentKind::Sigma => Some("persistent.sigma".to_string()),
@@ -1911,6 +1933,35 @@ mod tests {
                 "r5.char3_wild",
                 "r5.char3_additive_kernel:minus_linear_nonsquare"
             ))
+        );
+    }
+
+    #[test]
+    fn r6_odd_binary_nucleus_adapter_covers_q32() {
+        let field = Field::new(FieldSpec {
+            p: 2,
+            degree: 5,
+            modulus: vec![1, 0, 1, 0, 0, 1],
+            encoding: "polynomial-basis-base-p-integer-v1".into(),
+        })
+        .unwrap();
+        assert_eq!(
+            r6_formula_family(&field, &[0, 0, 0, 1, 0, 0]),
+            Some((
+                "r6.char2_nucleus",
+                "r6.char2_three_nucleus:odd_extension_degree"
+            ))
+        );
+        let even_degree_field = Field::new(FieldSpec {
+            p: 2,
+            degree: 4,
+            modulus: vec![1, 1, 0, 0, 1],
+            encoding: "polynomial-basis-base-p-integer-v1".into(),
+        })
+        .unwrap();
+        assert_eq!(
+            r6_formula_family(&even_degree_field, &[0, 0, 0, 1, 0, 0]),
+            None
         );
     }
 

@@ -179,6 +179,12 @@ the cube subspace and additive-kernel square class.  Its proof contract is
 `c969-r5-uniform-family-adapter.md`; finite fields retain registry evidence,
 while fields above the registry emit intrinsic formula evidence.
 
+At R6 the recurring nonpersistent family is now uniform as well:
+`c969-r6-uniform-family-adapter.md` records the invariant third-nucleus line
+`P<e2,e3>` and proves its characteristic-two odd-extension-degree toggle.
+The q=8 row keeps frozen orbit evidence; q=32 and higher odd binary extensions
+use formula evidence without extending the registry.
+
 ## Partial mystery and risk ledger
 
 - **Settled:** the former R10 binary unresolved residue was only a proof

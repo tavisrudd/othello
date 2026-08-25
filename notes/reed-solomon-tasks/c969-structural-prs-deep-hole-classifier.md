@@ -19,8 +19,8 @@ exact
 `O(q)`, `O(q^2)`, and `O(q^3)` prefix counts, both infinity charts, and a
 bounded small-field fallback.  Uniform nonpersistent formula adapters and
 formula-speed canonicalizers remain open, but the R5 tame osculating and
-characteristic-three nucleus/wild adapters now replay intrinsically above the
-finite registry; the remaining complexity work is
+characteristic-three nucleus/wild adapters and R6 recurring odd-binary nucleus
+now replay intrinsically above the finite registry; the remaining complexity work is
 C607's general fixed-parameter theorem and the nonterminal classifier
 branches.  Positive `DEEP` results now include an independently replayed
 certificate binding the theorem-domain row, canonical transporter, intrinsic
