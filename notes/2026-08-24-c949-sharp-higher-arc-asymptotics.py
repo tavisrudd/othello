@@ -1511,7 +1511,7 @@ def audit_degree_defect(q9_construction: Path, frobenius_audit: Path,
     for point_orbit in frobenius_orbits:
         row = [0] * len(frobenius_orbits)
         for line in through_point[point_orbit[0]]:
-            row[orbit_of[line]] = (row[orbit_of[line]] + 1) % 3
+            row[orbit_of[line]] += 1
         invariant_incidence.append(row)
 
     def ternary_rank(rows: list[list[int]], column_count: int) -> int:
@@ -1535,7 +1535,124 @@ def audit_degree_defect(q9_construction: Path, frobenius_audit: Path,
             rank += 1
         return rank
 
+    def padic_smith_profile(
+        rows: list[list[int]], prime: int, levels: int,
+        track_columns: bool = False,
+    ) -> tuple[list[int], list[list[int]] | None]:
+        """Return truncated p-adic Smith valuations and a right transform."""
+        matrix = [row[:] for row in rows]
+        row_count = len(matrix)
+        column_count = len(matrix[0])
+        diagonal_count = min(row_count, column_count)
+        full_modulus = prime ** levels
+        modulus = full_modulus
+        right = (
+            [[int(row == column) for column in range(column_count)]
+             for row in range(column_count)]
+            if track_columns else None
+        )
+        start = 0
+        valuation = 0
+        valuations = []
+        while start < diagonal_count and valuation < levels:
+            while True:
+                pivot = next((
+                    (row, column)
+                    for row in range(start, row_count)
+                    for column in range(start, column_count)
+                    if matrix[row][column] % prime
+                ), None)
+                if pivot is None:
+                    break
+                pivot_row, pivot_column = pivot
+                matrix[start], matrix[pivot_row] = matrix[pivot_row], matrix[start]
+                for row in matrix:
+                    row[start], row[pivot_column] = row[pivot_column], row[start]
+                if right is not None:
+                    for row in right:
+                        row[start], row[pivot_column] = row[pivot_column], row[start]
+                inverse = pow(matrix[start][start] % modulus, -1, modulus)
+                matrix[start] = [value * inverse % modulus
+                                 for value in matrix[start]]
+                for row in range(row_count):
+                    if row == start:
+                        continue
+                    factor = matrix[row][start] % modulus
+                    if factor:
+                        matrix[row] = [
+                            (value - factor * pivot_value) % modulus
+                            for value, pivot_value in zip(matrix[row], matrix[start])
+                        ]
+                for column in range(column_count):
+                    if column == start:
+                        continue
+                    factor = matrix[start][column] % modulus
+                    if factor:
+                        for row in range(row_count):
+                            matrix[row][column] = (
+                                matrix[row][column] - factor * matrix[row][start]
+                            ) % modulus
+                        if right is not None:
+                            for row in range(column_count):
+                                right[row][column] = (
+                                    right[row][column] - factor * right[row][start]
+                                ) % full_modulus
+                valuations.append(valuation)
+                start += 1
+                if start == diagonal_count:
+                    break
+            if start == diagonal_count:
+                break
+            reduced_modulus = modulus // prime
+            for row in range(start, row_count):
+                for column in range(start, column_count):
+                    if matrix[row][column] % prime:
+                        raise AssertionError("p-adic residual block is not divisible")
+                    matrix[row][column] = (
+                        matrix[row][column] // prime
+                    ) % reduced_modulus
+            valuation += 1
+            modulus = reduced_modulus
+        valuations.extend([valuation] * (diagonal_count - start))
+        return valuations, right
+
     invariant_rank = ternary_rank(invariant_incidence, len(frobenius_orbits))
+    padic_valuations, right_transform = padic_smith_profile(
+        invariant_incidence, 3, 3, track_columns=True
+    )
+    if right_transform is None:
+        raise AssertionError
+    padic_spectrum = Counter(padic_valuations)
+    liftable_columns = [index for index, valuation in enumerate(padic_valuations)
+                        if valuation >= 3]
+    fixed_orbit_indices = [orbit_of[point] for point in fixed_indices]
+    fixed_liftable_restriction = [
+        [right_transform[orbit_index][column] % 3 for column in liftable_columns]
+        for orbit_index in fixed_orbit_indices
+    ]
+    fixed_liftable_restriction_rank = ternary_rank(
+        fixed_liftable_restriction, len(liftable_columns)
+    )
+    kernel_generators = []
+    for column, valuation in enumerate(padic_valuations):
+        if valuation == 0:
+            continue
+        scale = 3 ** (3 - min(valuation, 3))
+        generator = [scale * right_transform[row][column] % 27
+                     for row in range(len(frobenius_orbits))]
+        if any(sum(invariant_incidence[row][entry] * generator[entry]
+                   for entry in range(len(frobenius_orbits))) % 27
+               for row in range(len(frobenius_orbits))):
+            raise AssertionError("bad full-modulus kernel generator")
+        kernel_generators.append(generator)
+    fixed_kernel_projection = [
+        [generator[orbit_index] for generator in kernel_generators]
+        for orbit_index in fixed_orbit_indices
+    ]
+    fixed_projection_valuations, _ = padic_smith_profile(
+        fixed_kernel_projection, 3, 3
+    )
+    fixed_projection_spectrum = Counter(fixed_projection_valuations)
     branch_records = []
     for pattern in certificate["normalized_patterns"]:
         core = set(pattern["fixed_core_point_indices"])
@@ -1569,6 +1686,24 @@ def audit_degree_defect(q9_construction: Path, frobenius_audit: Path,
         augmented_rank = ternary_rank(augmented, len(frobenius_orbits) + 1)
         if pinned_rank != augmented_rank:
             raise ValueError("fixed centered residues are inconsistent")
+        fixed_residue_vector = [fixed_centered_residues[point]
+                                for point in fixed_indices]
+        liftable_augmented = [
+            row + [value] for row, value in
+            zip(fixed_liftable_restriction, fixed_residue_vector)
+        ]
+        liftable_augmented_rank = ternary_rank(
+            liftable_augmented, len(liftable_columns) + 1
+        )
+        full_modulus_residue_compatible = (
+            liftable_augmented_rank == fixed_liftable_restriction_rank
+        )
+        if not full_modulus_residue_compatible:
+            raise ValueError(
+                "fixed residues do not lift through modulus 27: "
+                f"restriction rank {fixed_liftable_restriction_rank}, "
+                f"augmented rank {liftable_augmented_rank}"
+            )
         fixed_states = fixed_histograms(high_count_spectrum)
         global_spectra = set()
         feasible_fixed_histograms = 0
@@ -1635,10 +1770,13 @@ def audit_degree_defect(q9_construction: Path, frobenius_audit: Path,
             },
             "pinned_ternary_incidence_rank": pinned_rank,
             "pinned_ternary_affine_dimension": len(frobenius_orbits) - pinned_rank,
+            "full_modulus_residue_compatible": full_modulus_residue_compatible,
+            "pinned_full_modulus_liftable_ternary_affine_dimension":
+                len(liftable_columns) - fixed_liftable_restriction_rank,
         })
 
     output.write_text(json.dumps({
-        "schema": "c949-degree-defect-audit-v1",
+        "schema": "c949-degree-defect-audit-v2",
         "field_uniform_identities": {
             "q": "3r",
             "external_point_count": "q^2-q",
@@ -1674,6 +1812,27 @@ def audit_degree_defect(q9_construction: Path, frobenius_audit: Path,
             "frobenius_invariant_ternary_incidence_rank": invariant_rank,
             "frobenius_invariant_ternary_kernel_dimension":
                 len(frobenius_orbits) - invariant_rank,
+            "frobenius_invariant_incidence_3adic_valuation_spectrum": {
+                str(valuation): padic_spectrum[valuation]
+                for valuation in range(4)
+            },
+            "full_modulus_kernel_log_3_size": sum(
+                min(valuation, 3) for valuation in padic_valuations
+            ),
+            "full_modulus_liftable_ternary_dimension": len(liftable_columns),
+            "fixed_liftable_residue_restriction_rank":
+                fixed_liftable_restriction_rank,
+            "fixed_full_modulus_kernel_projection_3adic_valuation_spectrum": {
+                str(valuation): fixed_projection_spectrum[valuation]
+                for valuation in range(3)
+            },
+            "fixed_full_modulus_kernel_projection_log_3_size": sum(
+                3 - valuation for valuation in fixed_projection_valuations
+            ),
+            "fixed_full_modulus_kernel_projection_index_log_3":
+                3 * len(fixed_indices) - sum(
+                    3 - valuation for valuation in fixed_projection_valuations
+                ),
             "branches": branch_records,
         },
     }, indent=2, sort_keys=True) + "\n")

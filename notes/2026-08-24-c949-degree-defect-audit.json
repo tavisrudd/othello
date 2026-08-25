@@ -118,8 +118,10 @@
           "1": 2,
           "2": 6
         },
+        "full_modulus_residue_compatible": true,
         "minimum_fixed_defect": 12,
         "minimum_fixed_exception_count": 6,
+        "pinned_full_modulus_liftable_ternary_affine_dimension": 70,
         "pinned_ternary_affine_dimension": 178,
         "pinned_ternary_incidence_rank": 83
       },
@@ -233,8 +235,10 @@
           "1": 2,
           "2": 6
         },
+        "full_modulus_residue_compatible": true,
         "minimum_fixed_defect": 12,
         "minimum_fixed_exception_count": 6,
+        "pinned_full_modulus_liftable_ternary_affine_dimension": 70,
         "pinned_ternary_affine_dimension": 178,
         "pinned_ternary_incidence_rank": 83
       }
@@ -248,9 +252,25 @@
     "external_exception_count_upper_bound": 63,
     "external_pair_sum": 29376,
     "external_point_count": 702,
+    "fixed_full_modulus_kernel_projection_3adic_valuation_spectrum": {
+      "0": 6,
+      "1": 7,
+      "2": 0
+    },
+    "fixed_full_modulus_kernel_projection_index_log_3": 7,
+    "fixed_full_modulus_kernel_projection_log_3_size": 32,
+    "fixed_liftable_residue_restriction_rank": 6,
     "frobenius_invariant_coordinate_count": 261,
+    "frobenius_invariant_incidence_3adic_valuation_spectrum": {
+      "0": 77,
+      "1": 54,
+      "2": 54,
+      "3": 76
+    },
     "frobenius_invariant_ternary_incidence_rank": 77,
     "frobenius_invariant_ternary_kernel_dimension": 184,
+    "full_modulus_kernel_log_3_size": 390,
+    "full_modulus_liftable_ternary_dimension": 76,
     "maximal_degree": 19,
     "maximal_line_count": 55
   },
@@ -268,5 +288,5 @@
     },
     "unital_complement_size": 63
   },
-  "schema": "c949-degree-defect-audit-v1"
+  "schema": "c949-degree-defect-audit-v2"
 }

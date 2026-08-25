@@ -264,9 +264,9 @@ expected external degrees gives the exact integer identity
 M^T(e-r 1)=q(1+a).                                  (CI)
 ```
 
-Thus `(e-r 1) mod 3` is an incidence-codeword, not merely a numerical degree
-profile.  This is the spatial constraint that the raw orbit searches were
-missing.
+Thus `(e-r 1) mod 3` is a dual incidence-codeword, not merely a numerical
+degree profile.  This is the spatial constraint that the raw orbit searches
+were missing.
 
 On the `T=2q+1=6r+1` branch, the core points have degree `2r+1`.  Removing
 them from the two standard incidence moments yields
@@ -309,9 +309,25 @@ another degree-distribution or raw five-secant-pair split.
 Pure reduction modulo three is still too loose.  On Frobenius-invariant
 vectors the ternary incidence matrix has 261 coordinates, rank 77, and kernel
 dimension 184.  Pinning all 13 fixed coordinates is consistent in both
-branches but leaves affine dimension 178.  The useful object is therefore the
-small-norm integral lift `u=e-9 1`, not an arbitrary ternary codeword.  Its
-remaining exact data are
+branches but leaves affine dimension 178.
+
+The full modulus in `(CI)` is 27, however, and its `3`-adic Smith profile is
+
+```text
+v_3=0^77 1^54 2^54 3^76.
+```
+
+Consequently the reductions modulo three of vectors that actually lift
+through `M^T u=0 (mod 27)` form only a 76-dimensional subspace of the
+184-dimensional kernel.  Its restriction to the 13 fixed coordinates has
+rank six.  Both canonical residue patterns lie in that image, and pinning
+either one leaves affine dimension 70.  The projection of the full
+modulo-27 kernel onto the fixed coordinates has Smith profile `0^6 1^7`, so
+it imposes exactly those seven residue relations and no additional higher
+`3`-adic obstruction on the fixed degrees.
+
+The useful object is therefore the small-norm integral lift `u=e-9 1`, not an
+arbitrary ternary codeword.  Its remaining exact data are
 
 ```text
 sum u=999,   ||u||^2=6075,
@@ -507,8 +523,9 @@ next field in the full characteristic-three tower.  The construction explains
 the exact `q=9` equality; it is evidence for the constant but not a candidate
 proof of the asymptotic upper bound.
 
-The `ej`+`tt` closeout changes the preferred generalization target.  The 19
-degree-seven points `D` are precisely the duals of the maximal secants of `A`.
+The `ej` audit plus `tt` structural pass changes the preferred generalization
+target.  The 19 degree-seven points `D` are precisely the duals of the maximal
+secants of `A`.
 They form a blocking set of size
 
 ```text
@@ -523,7 +540,7 @@ non-two-character dual blocking cores and feed them to the weak inverse
 realization model.  Searching for a literal large unital tangent-plus-switch
 family is lower priority.
 
-### Mystery ledger (`ej`+`tt` closeout)
+### Mystery ledger (`ej` audit + `tt` structural pass)
 
 - **Settled — is the 28-point fingerprint genuinely Hermitian?**  Yes.  The
   displayed nonsingular Hermitian matrix has exactly those 28 isotropic
@@ -563,9 +580,11 @@ family is lower priority.
   satisfies `M^T(e-9 1)=27(1+a)`.  Frobenius residues alone leave 104,873
   degree histograms, so the evidence gap is a spatial classification of the
   small-defect integer lift or a contradiction from its line sums.  The
-  ternary affine space still has dimension 178 after fixed-coordinate pinning;
-  the additional gate is the norm-6075 lattice condition.  This supersedes
-  the 7,768-way five-secant-pair split as the primary C949 route.
+  ternary affine space has dimension 184, drops to the 76-dimensional
+  full-modulus-liftable subspace, and has dimension 70 after fixed-coordinate
+  pinning.  Both branches survive all these congruences; the additional gate
+  is the norm-6075 lattice condition.  This supersedes the 7,768-way
+  five-secant-pair split as the primary C949 route.
 - **Open — can `t_7(2,9)>=39` be proved without exhaustive search?**  The
   positive construction is structural, but exclusion of a 38-point complete
   arc still trusts one normalized CP-SAT infeasibility certificate.  A second
