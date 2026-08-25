@@ -52,13 +52,16 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   certified maps `P2 <-> R^1_{E/K}(Gm)` with both composites checked.  The
   marked-plane Galois action and all residual Cox scalars are explicit too;
   normalization at a ground point gives a strict `Z/T3` descent datum and a
-  compact rank-two cocycle.  A certified divisor calculation now rules out a
-  Laurent-monomial Cox coboundary by a half-integral parity obstruction.  The
-  remaining type-`I_1` route is the full stable-permutation resolution and
-  orbitwise Hilbert--90 coordinates; type `I_3` remains afterward.  Card:
+  compact rank-two cocycle.  A certified divisor calculation rules out a
+  Laurent-monomial Cox coboundary, but the full rational coboundary is now an
+  explicit straight-line program: strict ground-lift normalization, the
+  rank-eleven permutation basis, three orbitwise Hilbert--90 sums, and the
+  unimodular pullback close the generic universal-torsor splitting gate.  The
+  next type-`I_1` step is composition with the norm-torus chart and tangent
+  quotient; type `I_3` remains afterward.  Card:
   `../cubic-threefolds-tasks/c958-explicit-level-two-parametrizations.md`;
   latest report:
-  `../2026-08-25-c958-type-i1-coboundary-divisor-test.md`.
+  `../2026-08-25-c958-type-i1-full-coboundary.md`.
 - **C936 — accepted after cold-referee repair audit.**  The warning-free eleven-page paper
   develops the signed nonstandard \(A_5\)-cubic parameter as the
   sign/discriminant resolvent of the actual

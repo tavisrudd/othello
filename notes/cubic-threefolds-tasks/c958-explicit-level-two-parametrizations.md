@@ -117,6 +117,18 @@ Hilbert--90 coordinates.  Report and replay:
 `notes/2026-08-25-c958-type-i1-coboundary-divisor-test.md` and its adjacent
 bundle.
 
+The general rational coboundary is now constructed as a straight-line
+program.  Ground-lift normalization makes the Cox descent strict; comparison
+with the affine generic Cox section produces a genuine rank-six Picard-torus
+cocycle.  Tschinkel--Zhang's unimodular rank-eleven permutation basis has
+type-`I1` orbits of sizes `6,4,1`; three orbitwise Hilbert--90 sums and the
+integral inverse basis give the six-coordinate coboundary.  An exact rational
+specialization proves all chosen sums nonzero.  Thus the generic
+universal-torsor splitting gate is closed.  Next compose this SLP with the
+norm-torus chart and the certified tangent quotient, then verify the forward
+and inverse cubic-product maps.  Report and replay:
+`notes/2026-08-25-c958-type-i1-full-coboundary.md` and its adjacent bundle.
+
 ## Goal
 
 Turn the constructive existence proof in C956 into explicit, independently
