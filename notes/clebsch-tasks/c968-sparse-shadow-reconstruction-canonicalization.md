@@ -42,6 +42,44 @@ verification, deterministic serialization, and performance instrumentation.
   before freezing the initial manifest. Avoid network services and untracked
   generated state.
 
+## Repository performance and Tiger-style rules
+
+Before designing any hot representation or running a benchmark, read and apply
+the repository's [Queens/Othello performance playbook](../queens-othello-perf-playbook.md).
+Use the [performance methodology and war stories](../perf-methodology-warstories.md)
+to select counters and avoid measurement confounds, and consult the existing
+[Rust engine performance notes](../../rust/NOTES.md) for the repository's
+measured successes and rejected optimizations. These are mandatory engineering
+inputs to C968, not merely background analogies.
+
+In particular:
+
+- Mark the canonicalization search loop and every per-branch structure as hot.
+  Apply the playbook's Tiger-style contract: plain fixed-size data, contiguous
+  arenas, index-based references, explicit representation, range-sized integer
+  fields, and compile-time size/alignment assertions. Keep cold metadata,
+  strings, owned graphs, errors, and certificate serialization out of hot
+  records.
+- Perform no allocation, deallocation, syscall, environment lookup, logging,
+  formatting, hashing setup, lock acquisition, or atomic counter update in the
+  hot loop. Preallocate bounded arenas when the instance schema supplies a safe
+  bound; otherwise make growth an explicit cold-path event with measured and
+  reported limits.
+- Resolve run-constant modes once at startup. Prefer const-generic
+  monomorphization when instrumentation or algorithm choice would otherwise add
+  a branch inside refinement or search; do not read `env::var` per node.
+- Parallelize only after the sequential search and certificate surface are
+  correct and profiled. Give workers private scratch/arenas and deterministic
+  merge order; do not introduce shared hot-path atomics or contention merely
+  for counters. `rayon` is optional and must earn its place on end-to-end runs.
+- Napkin the available leverage first, profile the actual workload, and change
+  one variable at a time. Keep or reject an optimization using interleaved A/B
+  runs and appropriate node-independent counters as well as end-to-end time;
+  do not promote a microbenchmark win without a representative canonicalization
+  workload.
+- Record instructive negatives and never claim a performance floor or that a
+  target is unreachable. Report the measured bottleneck and remaining levers.
+
 ## Source boundary and adapters
 
 Freeze exact locators before implementation. Each adapter must identify which
@@ -104,8 +142,13 @@ silently normalized by the tool.
   certificates replay independently and deliberate corruption is rejected.
 - Outputs and artifact hashes are deterministic across repeated runs and
   supported thread counts.
+- Hot structs have compile-time size/alignment guards; representative profiles
+  show no allocation, environment lookup, syscall, lock, or shared atomic in the
+  refinement/search loop. Any exception requires a measured design review in
+  the task report.
 - Benchmarks identify fixture versions, toolchain, hardware, baseline, and
-  whether each bound is proved or merely measured.
+  whether each bound is proved or merely measured; optimization decisions use
+  interleaved end-to-end A/B evidence rather than microbenchmarks alone.
 - No universal graph-isomorphism, asymptotic, optimality, novelty, or manuscript
   claim is made without a separate proof or audit. Existing paper sources and
   Lean companions remain untouched.
