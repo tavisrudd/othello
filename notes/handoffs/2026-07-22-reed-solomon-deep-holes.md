@@ -64,6 +64,21 @@ Kaipa--Pradhan cover comparison by the explicit square normalization.  Optional 
 exposition, sporadic-table enrichment, and higher-genus reinterpretation were not promoted and do
 not block the paper.  The closure review is `notes/2026-08-07-c883-full-review.md`.
 
+C969 is active.  Its first-action gate freezes the R5--R10 theorem-domain
+matrix, four-state verdict semantics, normalized syndrome/action schema, and
+the absorbed C607/C608 decoder obligations.  A separate Rust crate now has
+exact polynomial-basis field arithmetic, both locator charts, projective
+Hankel search, magnitude recovery, shallow-certificate replay, exact decoding
+through a budgeted exhaustive terminal fallback, intrinsic persistent-family
+detection, explicit semilinear canonicalization, and a regenerated 338-row
+R5--R7 exception registry.  Eleven tests, corruption rejection, clippy, the
+registry replay, and a release build are green.  The current open gates are the
+fast R5--R7 terminal-hyperplane proof and operation counts, canonical field-
+model transport, uniform nonpersistent family adapters, positive deep-
+certificate verification, the general C607 complexity/factorization theorem,
+benchmarks, and independent reviews.  Checkpoint:
+`notes/reed-solomon-tasks/c969-freeze-and-schema.md`.
+
 C886 is complete.  The paper now has a layered two-track exposition: a mature
 generalist can follow the syndrome-to-carrier mechanism without entering every
 elimination, while the specialist proof, exceptional cases, and verification
@@ -1153,7 +1168,7 @@ gates remain binding.
 | EV rank | Task | Current gate | Why this position |
 |---:|---|---|---|
 | 1 | C915 | edits E1--E6 applied and checklist green; three independent audits open | the external referee package blocks the Version 2 release |
-| 2 | C969 | queued after the Version 2 theorem surface freezes; absorbs C607/C608 | compile the proved R5--R10 geometry into one exact canonical classifier and decoder while settling the general split-locator decision/recovery complexity boundary |
+| 2 | C969 | active; schemas/core/frozen adapters green; fast terminal solver, uniform adapters, complexity theorem, verifier, and benchmarks open | compile the proved R5--R10 geometry into one exact canonical classifier and decoder while settling the general split-locator decision/recovery complexity boundary |
 
 ## Unallocated level-ups
 
@@ -1213,9 +1228,10 @@ history.
 
 ## Next command
 
-`go C915`
+`go C969`
 
-(The external referee correction package is applied and its checklist is green;
-the independent dependency, hostile redundancy-ten, and primary-source audits
-remain. C969 is the unified structural-classifier and exact-decoder successor;
-it fully absorbs the former C607 and C608 scopes.)
+(Resume the fast R5--R7 terminal-hyperplane solver: both infinity charts,
+bilinear final-root equation, collision divisor, constant-grid proof, bounded
+small-field branch, and exact operation counts.  C915's three independent
+Version 2 audits remain the higher-EV external-release gate but are a separate
+active card.)
