@@ -179,6 +179,7 @@ TavisRuddFiniteGeom.Papers.CubicStabilizationM1.completedNovikov_lowestSupport_e
 TavisRuddFiniteGeom.Papers.CubicStabilizationM1.associatedGradedTagging_taggedImage_ne_zero: propext, Classical.choice, Quot.sound
 TavisRuddFiniteGeom.Papers.CubicStabilizationM1.associatedGradedTagging_taggedImage_eq_zero_iff: propext, Classical.choice, Quot.sound
 TavisRuddFiniteGeom.Papers.CubicStabilizationM1.associatedGradedTagging_taggedImage_injective: propext, Classical.choice, Quot.sound
+TavisRuddFiniteGeom.Papers.CubicStabilizationM1.faithfulCenterBaseChange_targetOnly_injective: propext, Classical.choice, Quot.sound
 TavisRuddFiniteGeom.Papers.CubicStabilizationM1.divisorTagging_vanishing_of_comparison_inputs: propext, Classical.choice, Quot.sound
 TavisRuddFiniteGeom.Papers.CubicStabilizationM1.effectiveBlockLedger_fold_unique: propext, Classical.choice, Quot.sound
 TavisRuddFiniteGeom.Papers.CubicStabilizationM1.genericSpectralConnection_normalizedSplitting: propext, Classical.choice, Quot.sound

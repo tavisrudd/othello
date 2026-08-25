@@ -143,8 +143,8 @@ the aggregate to import each one, and computes terminal and signature coverage
 across their union.  This keeps the manuscript split visible without weakening
 the exact terminal census.
 
-Checked coverage snapshot: 57 claims; 5 absent; 24 fragmentary; 27 conditional;
-1 complete; 317 reviewer terminals, of which 83 are machinery serving no current
+Checked coverage snapshot: 57 claims; 4 absent; 25 fragmentary; 27 conditional;
+1 complete; 318 reviewer terminals, of which 83 are machinery serving no current
 manuscript claim.
 
 The Lean modules and axiom audit can be built with the pinned package command
@@ -258,8 +258,9 @@ objects, hypotheses, conclusions, and cautions recorded in
   maximal-isotropic kernel remain unconstructed.
 - Formalize the remaining quantum inputs: the separation family, construct the
   filtered target/associated graded and prove the now-explicit compatibility
-  identifying the initial form of a geometric specialized series with its
-  finite lowest-support exponential combination in divisor tagging, the
+  identifying the initial form of a reduced-source series with its finite
+  lowest-support exponential combination in the target-only center coordinates
+  of Iritani's external direct sum, the
   source/common coefficient fields and embeddings for the comparison maps,
   multiplicative filtration laws and identification of the now-constructed
   abstract ideal quotients with the actual geometric finite-level coefficient

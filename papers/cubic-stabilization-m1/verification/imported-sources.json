@@ -44,7 +44,7 @@
     },
     "IritaniBlowup:thm-5.18": {
       "citation": "IritaniBlowup",
-      "pinpoint": "Equation (1.1), Theorem 5.18, especially parts (3), (4), (6), and (7), Section 5.8, Remarks 2.3 and 5.6, and equation (5.15)",
+      "pinpoint": "Equation (1.1), Theorem 5.18, especially parts (3), (4), (6), and (7), Section 5.8.2, especially equations (5.47)--(5.48), Remarks 2.3 and 5.6, and equation (5.15)",
       "used": "The regular parity-preserving quantum-D-module comparison for a blowup, with one ambient summand, c-1 occurrence-indexed center summands, explicit homogeneous degree shifts, leading branch asymptotics, and an invertible reconstruction Jacobian.",
       "conventions": [
         {
@@ -59,8 +59,8 @@
         },
         {
           "aspect": "center variables",
-          "requirement": "The center Novikov map can have a kernel and divisor variables occur through the divisor-equation characters.",
-          "matched": "Each occurrence retains its induced specialization and is made faithful by the finite-fibre divisor-character adapter."
+          "requirement": "The center Novikov map can have a kernel; the reduced source contains the combined divisor-equation monomials rather than separate divisor coordinates; and Section 5.8.2 introduces independent center coordinates on the external direct-sum target.",
+          "matched": "Each occurrence is pulled back from the reduced source to the external direct-sum ring. The target-only divisor coordinates separate every finite collision fibre, giving the faithful coefficient embedding used by the marker ledger."
         },
         {
           "aspect": "parity",

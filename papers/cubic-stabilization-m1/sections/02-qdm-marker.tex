@@ -219,40 +219,48 @@ Fourth, Iritani's center map need not be injective
  \label{eq:center-novikov-map-atomic}
 \end{equation}
 Here \(\rho_Z=c_1(N_{Z/Y})\).
-Choose divisors \(D_1,\ldots,D_\rho\) separating \(N_1(Z)\) and retain the
-characters \(\exp(\sum_k(D_k\cdot d)s_k)\).  Every fibre of
-\eqref{eq:center-novikov-map-atomic} is finite: an ample degree from \(Y\)
-bounds the lattice points in the corresponding slice of
-\(\overline{NE}(Z)\).  On a fibre of size \(n\), a generic one-parameter
-restriction gives distinct exponentials.  Their derivatives of orders
-\(0,\ldots,n-1\) form an invertible Vandermonde matrix, so the
-character-tagged map is injective.
-The resulting base change is the following.
+The raw map is not the coefficient map used below.  By the divisor equation,
+the center connection is defined over Iritani's reduced source ring, whose
+Novikov generators are the combined symbols
+\[
+ X_d=Q_Z^d\exp\!\bigl(\sigma^{(2)}\cdot d\bigr);
+\]
+the divisor coordinates \(\sigma^{(2)}\) are not separate elements of this
+ring \cite[Remarks~2.3 and~5.6]{IritaniBlowup}.  In the external direct sum of
+Section~5.8.2, by contrast, the variables \(s_j\in H^*(Z)\) are independent
+coordinates on the common comparison target, and the center parameter is
+identified as \(\varsigma_j=\varsigma_j^\circ+s_j\)
+\cite[(5.47)--(5.48)]{IritaniBlowup}.  The divisor components of these
+\emph{target-only} coordinates retain the curve-class information lost by
+\eqref{eq:center-novikov-map-atomic}.
 
 \begin{lemma}[Faithful center base change]
 \label{lem:faithful-center-base-change}
-\coverage{absent}%
+\coverage{fragment}%
+\lean{faithfulCenterBaseChange_targetOnly_injective}%
 Let \(R_{Z,\mathrm{src}}^{\mathrm{red}}\) be the coefficient domain whose
-\(\C[z]\)-extension is Iritani's divisor-equation source ring
-\(\C[z][[Q_Ze^{\sigma^{(2)}},\sigma']][\sigma^0]\), and let
-\(R_{\mathrm{cmp},j}^{\mathrm{red}}\) be its completed image coefficient
-domain in the \(j\)-th common comparison ring
-\cite[Remark~5.6]{IritaniBlowup}.  After adjoining independent divisor
-variables \(s_1,\ldots,s_\rho\), the continuous map
-\(\iota_j:R_{Z,\mathrm{src}}^{\mathrm{red}}[[s]]
-\to R_{\mathrm{cmp},j}^{\mathrm{red}}[[s]]\) defined by
+\(\C[z]\)-extension is Iritani's divisor-equation-reduced source ring
+\(\C[z][[Q_Ze^{\sigma^{(2)}},\sigma']][\sigma^0]\).  Let \(A_j\) be the
+numerical coefficient domain of the external direct sum in Section~5.8.2,
+with the independent target coordinates \(t,s_0,\ldots,s_{c-2}\) and with
+\(z\) omitted.  The pullback determined by the center Novikov map and
+\(\varsigma_j=\varsigma_j^\circ+s_j\) gives a continuous homomorphism
+\[
+ \iota_j:R_{Z,\mathrm{src}}^{\mathrm{red}}\longrightarrow A_j.
+\]
+On a combined divisor-equation generator it is
 \begin{equation}
- Q_Z^d\exp\!\left(\sum_k(D_k\cdot d)s_k\right)
+ X_d=Q_Z^d\exp\!\bigl(\sigma^{(2)}\cdot d\bigr)
  \longmapsto
  Q^{i_*d}q_{\mathrm{exc}}^{-\rho_Z\cdot d/(c-1)}
- \exp\!\left(\sum_k(D_k\cdot d)s_k\right)
+ \exp\!\bigl((\varsigma_j^{\circ,(2)}+s_j^{(2)})\cdot d\bigr).
  \label{eq:faithful-center-map}
 \end{equation}
-is injective.  It induces a field embedding
+This map is injective.  In particular, it induces a field embedding
 \[
- \operatorname{Frac}(R_{Z,\mathrm{src}}^{\mathrm{red}}[[s]])
+ \operatorname{Frac}(R_{Z,\mathrm{src}}^{\mathrm{red}})
  \lhook\joinrel\longrightarrow
- \operatorname{Frac}(R_{\mathrm{cmp},j}^{\mathrm{red}}[[s]]).
+ \operatorname{Frac}(A_j).
 \]
 After this field extension, each center summand in Iritani's comparison is the
 faithful scalar extension, followed by the formal coordinate change
@@ -260,24 +268,48 @@ faithful scalar extension, followed by the formal coordinate change
 \end{lemma}
 
 \begin{proof}
-Filter both completed rings by an ample degree pulled back from \(Y\).  In
-each bounded quotient, every fibre of the untagged monomial map is finite.
-On such a fibre choose an integral linear combination of the \(D_k\) that
-separates its curve classes.  Restriction to the corresponding one-parameter
-subgroup turns a putative kernel element into a finite sum of distinct
-exponentials; its first \(n\) derivatives give a Vandermonde matrix, so every
-coefficient is zero.  The map is therefore injective on every quotient and,
-by separated completeness, on the inverse limit.
+Choose integral divisors \(D_1,\ldots,D_\rho\) whose pairings separate
+\(N_1(Z)\), and use their dual coordinates in \(s_j^{(2)}\).  The variables
+\(s_j\) occur only in the target \(A_j\), not as coefficients in
+\(R_{Z,\mathrm{src}}^{\mathrm{red}}\).  This asymmetry is essential.
 
-Remark~5.6 of \cite{IritaniBlowup} defines the center connection over exactly
-the image of this divisor-equation-reduced ring, rather than over the bare
-noninjective map~(5.15).  Base-change the comparison of
-\cite[Theorem~5.18]{IritaniBlowup} and its inverse along
-\eqref{eq:faithful-center-map}; their two identities remain identities.
-The resulting extension of fraction fields is faithfully flat.
-Finally, the invertible combined bulk Jacobian in Theorem~5.18(7) identifies
-the retained divisor coordinates with the center coordinates and supplies
-the formal reparametrization \(\varsigma_j\).
+Filter the source by an ample degree pulled back from \(Y\), together with
+the ordinary bulk order.  Every fibre of the untagged monomial map in a
+bounded piece is finite: the restriction of an ample divisor from \(Y\) is
+ample on \(Z\), and its bounded slice of \(\overline{NE}(Z)\) contains only
+finitely many lattice points.  This filtration is respected by the target
+map because \(H\cdot i_*d=(i^*H)\cdot d\).  The fixed shift
+\(\varsigma_j^\circ\) and the
+translations of the nondivisor and unit coordinates are invertible formal
+changes of target coordinates, so they do not affect injectivity.
+
+Suppose a nonzero source element maps to zero and take its first nonzero
+filtered part.  Group its finitely many terms by their common untagged target
+monomial and by their nondivisor bulk monomial.  On one nonzero group the
+remaining relation has the form
+\[
+ \sum_{d\in F}a_d
+ \exp\!\left(\sum_{k=1}^\rho(D_k\cdot d)s_{j,k}\right)=0,
+ \qquad a_d\ne0,
+\]
+over a characteristic-zero coefficient domain that does not contain the
+variables \(s_{j,k}\).  The exponent vectors are distinct.  Choose an integral
+one-parameter restriction on which they remain distinct.  Derivatives of
+orders \(0,\ldots,|F|-1\) at the origin give a Vandermonde matrix, hence every
+\(a_d\) is zero, a contradiction.  Thus \(\iota_j\) is injective on every
+bounded quotient and, by separated completeness, on the full reduced source.
+
+Remark~2.3 of \cite{IritaniBlowup} gives the intrinsic reduced source, and
+Remark~5.6 gives its image under the noninjective map~(5.15).
+Equations~(5.47)--(5.48) then pull that image into the external direct sum over
+\(A_j\), where the variables \(s_j\) are independent, and identify the direct
+sum with the blowup module.  Associativity of scalar extension therefore
+identifies the center summand with scalar extension directly along the
+injective composite \(\iota_j\).  Passing to fraction fields is faithfully
+flat.  Finally, the inverse of the combined formal coordinate change
+\((\tau,\varsigma_0,\ldots,\varsigma_{c-2})\), supplied by
+Theorem~5.18(7) and Section~5.8.2, transports the same statement to the
+original blowup coordinates.
 \end{proof}
 
 \begin{proposition}[QDM operation ledgers]

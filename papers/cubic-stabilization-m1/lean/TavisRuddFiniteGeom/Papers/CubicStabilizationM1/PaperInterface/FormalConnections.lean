@@ -28,6 +28,25 @@ open TensorProduct
 
 open scoped MatrixGroups
 
+/-- Algebraic core of faithful center base change with target-only divisor
+coordinates.  The source is a completed Novikov coefficient family and has no
+formal tag variables among its coefficients.  The target and its initial-form
+detectors are supplied by `AssociatedGradedTaggingInput`; the compatibility
+field says that the first nonzero filtered part is the finite sum of distinct
+exponential characters.  Lean proves that the resulting additive pullback is
+injective.
+
+The declaration deliberately has no tag variable in the source type.  It does
+not construct Iritani's reduced QDM coefficient ring, the external direct-sum
+target, or their geometric identification. -/
+theorem faithfulCenterBaseChange_targetOnly_injective
+    {Curve K Target : Type*} [Field K] [CharZero K] [AddCommGroup Target]
+    {length : Curve → ℕ} {rank : ℕ}
+    (input : Quantum.AssociatedGradedTaggingInput
+      Curve K Target length rank) :
+    Function.Injective input.taggedImage :=
+  input.taggedImage_injective
+
 /-- For a constant finite square connection matrix over a commutative
 `ℚ`-algebra, Lean constructs the normalized exponential coefficients and
 proves `G₀=1`, the flat recursion `(n+1)Gₙ₊₁ = -A Gₙ` in every degree,

@@ -887,13 +887,16 @@
     },
     {
       "manuscript_label": "lem:faithful-center-base-change",
-      "coverage": "absent",
-      "declarations": [],
-      "objects": "Iritani's divisor-equation-reduced completed coefficient ring for a blowup center, its numerical Novikov monomials, independent divisor-character variables, the common Laurent comparison ring, and the intrinsic and occurrence-indexed generic even quantum D-modules of the center.",
-      "hypotheses": "Divisor pairings separate numerical curve classes; fibres of the untagged center monomial map are finite in every bounded ample-degree slice; Iritani's reduced center connection and mutually inverse comparison maps are defined over the reduced image ring; and the combined bulk Jacobian is invertible.",
-      "conclusion": "The character-tagged completed coefficient map is injective, and after passage to generic fraction fields every actual center summand is a faithful scalar extension and formal reparametrization of the intrinsic generic numerical even QDM of the center.",
-      "cautions": "Absent from Lean. The package proves abstract finite exponential-character independence and a proxy completed-tagging injection elsewhere, but it does not construct these geometric completed rings, their filtrations, Iritani's comparison and inverse, the bulk Jacobian, or the claimed QDM base-change diagram.",
-      "statement_digest": "ff4c6212c6ddf74454f5d9b819fa3829ae79ea01e6cd33fb70febfb030b5c3e6"
+      "coverage": "fragment",
+      "declarations": [
+        "TavisRuddFiniteGeom.Papers.CubicStabilizationM1.faithfulCenterBaseChange_targetOnly_injective"
+      ],
+      "objects": "Iritani's divisor-equation-reduced completed coefficient ring for a blowup center, its combined Novikov-divisor generators, the independent target-only center coordinates in the Section 5.8 external direct sum, the common Laurent comparison ring, and the intrinsic and occurrence-indexed generic even quantum D-modules of the center.",
+      "hypotheses": "Divisor pairings separate numerical curve classes; fibres of the untagged center monomial map are finite in every bounded ample-degree slice; the reduced source does not contain the independent target coordinates as coefficients; Iritani's reduced center connection and external direct-sum comparison are defined over the stated rings; and the combined bulk Jacobian is invertible.",
+      "conclusion": "The pullback from the reduced source to the external direct-sum target is injective because target-only exponential characters separate every finite collision fibre. After passage to generic fraction fields, every actual center summand is a faithful scalar extension and formal reparametrization of the intrinsic generic numerical even QDM of the center.",
+      "cautions": "Fragment. Lean proves the completed-series injection from typed target-only initial-form data, and the source type deliberately contains no target tag variables. It does not construct the geometric reduced source, the target-only Section 5.8 coordinates, the completed filtrations and initial-form detector from Iritani's rings, the comparison and inverse, the bulk Jacobian, or the claimed QDM base-change diagram.",
+      "statement_digest": "3ad0369ee31cb82ff4fb3a40172ceeb7a4ce08bc0632fc2b91091b440b097fcd",
+      "terminal_digest": "be590125a3df1d1b3fcc5f61b18adae20fb8fb14cb93839ae248b8c14c566ff7"
     },
     {
       "manuscript_label": "prop:qdm-operation-ledgers",

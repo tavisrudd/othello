@@ -23,7 +23,7 @@ digraph manuscript {
   "lem:eckardt-involution" [fillcolor="#ffffff", tooltip="absent"];
   "lem:eckardt-rank" [fillcolor="#fde8c8", tooltip="fragment"];
   "lem:exact-low-degree-shifts" [fillcolor="#fde8c8", tooltip="fragment"];
-  "lem:faithful-center-base-change" [fillcolor="#ffffff", tooltip="absent"];
+  "lem:faithful-center-base-change" [fillcolor="#fde8c8", tooltip="fragment"];
   "lem:graph-coefficient-lattice" [fillcolor="#fde8c8", tooltip="fragment"];
   "lem:hirzebruch-euler-spectrum" [fillcolor="#fde8c8", tooltip="fragment"];
   "lem:numerical-base-change" [fillcolor="#fde8c8", tooltip="fragment"];
