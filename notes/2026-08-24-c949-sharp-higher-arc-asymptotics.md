@@ -1634,6 +1634,19 @@ deficits once.  Thus the product equation `(SR19)` is necessary but not by
 itself a completion theorem: the nonextendable branch is a literal
 three-by-three transversal obstruction.                         (SR19c)
 
+The distinction is real already over `F_81`.  For an element `zeta` of order
+eight, take singleton sets with exponent sets
+
+```text
+A_0=B_0={0,1,2},             C_0={0,3,5}.
+```
+
+Their exponent sums satisfy `(SR19)`.  The six bijections give ratio-exponent
+multisets
+`{0,0,0}`, `{0,1,7}` twice, `{2,7,7}`, `{1,1,6}`, and `{0,2,6}`;
+none is `C_0`.  Hence no appeal to the scalar product identity may silently
+replace the transversal gate.
+
 The selected bisecants are `q-3` double fibers drawn from the three
 projections; their edges form a perfect matching of `H\{t}`, where `t` is the
 unique tangent-line element and lies in no selected fiber.  What remains
