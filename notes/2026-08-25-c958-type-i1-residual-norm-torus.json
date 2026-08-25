@@ -1,0 +1,96 @@
+{
+  "augmentation_actions": [
+    [
+      [
+        0,
+        1
+      ],
+      [
+        -1,
+        -1
+      ]
+    ],
+    [
+      [
+        1,
+        0
+      ],
+      [
+        -1,
+        -1
+      ]
+    ],
+    [
+      [
+        1,
+        0
+      ],
+      [
+        0,
+        1
+      ]
+    ]
+  ],
+  "augmentation_change_of_basis": [
+    [
+      -1,
+      -1
+    ],
+    [
+      -1,
+      0
+    ]
+  ],
+  "cayley_split_model": "x1+x2+x3+x1*x2*x3=0, where xi=(ti-1)/(ti+1) and t1*t2*t3=1",
+  "certified": [
+    "the type-I1 residual cocharacter lattice is the A2 augmentation lattice",
+    "the residual torus is the cubic norm-one torus R^1_{E/K}(Gm)",
+    "the independent quadratic generator acts trivially on the residual torus",
+    "the displayed cubic is the norm polynomial in the basis 1,rho,rho^2",
+    "the coordinatewise Cayley transform gives the displayed symmetric split model"
+  ],
+  "cubic_etale_algebra": "E=K[rho]/(rho^3-3*a^2*rho-beta)",
+  "input_sha256": {
+    "c956_lattice_source": "89eee9a9d04cb555e45c8b4f461bbf20ccb6b1d38cfabdad2b8ce67c1ff42373",
+    "weyl_action": "a5719a9afe2465d8135b89d5d7242bb7f695d33030dd47f595806cc768dda8c7"
+  },
+  "norm_polynomial": "9*a**4*x0*x2**2 - 3*a**2*beta*x1*x2**2 + 6*a**2*x0**2*x2 - 3*a**2*x0*x1**2 + beta**2*x2**3 - 3*beta*x0*x1*x2 + beta*x1**3 + x0**3",
+  "not_certified": [
+    "a ground-field rational parametrization of the norm-one cubic surface",
+    "an explicit equivariant trivialization S times T_residual to Z/T3",
+    "the final stabilized maps for the cubic family"
+  ],
+  "residual_cocharacter_actions": [
+    [
+      [
+        0,
+        -1
+      ],
+      [
+        1,
+        -1
+      ]
+    ],
+    [
+      [
+        -1,
+        1
+      ],
+      [
+        0,
+        1
+      ]
+    ],
+    [
+      [
+        1,
+        0
+      ],
+      [
+        0,
+        1
+      ]
+    ]
+  ],
+  "schema": "c958-type-i1-residual-norm-torus-v1"
+}

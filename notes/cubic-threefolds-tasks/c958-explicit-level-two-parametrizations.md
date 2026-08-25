@@ -73,6 +73,16 @@ ground-field descent with the two stabilizing variables remains for type
 `I_1`.  Report and replay:
 `notes/2026-08-24-c958-type-i1-split-inverse.md` and its adjacent bundle.
 
+The residual rank-two factor is now identified integrally: it is the norm-one
+torus of `E=K[rho]/(rho^3-3a^2rho-beta)`.  The independent quadratic
+generator acts trivially.  Its cocharacter lattice is the `A2` augmentation
+lattice, not the index-three dual quotient lattice, so naive projectivization
+does not give the required chart.  The exact norm cubic and a symmetric
+Cayley model are retained.  Next derive the explicit ground-field rational
+parametrization of this norm-one surface, then couple it to the equivariant
+torsor trivialization.  Report and replay:
+`notes/2026-08-25-c958-type-i1-residual-norm-torus.md` and its adjacent bundle.
+
 ## Goal
 
 Turn the constructive existence proof in C956 into explicit, independently
