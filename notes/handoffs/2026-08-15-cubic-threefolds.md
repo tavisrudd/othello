@@ -78,6 +78,18 @@ promoted mathematical assertion maps to a kernel-checked declaration.
   uniform complexity, finite-field, cryptographic, or general decision claim
   beyond separately proved gates. Card:
   `../cubic-threefolds-tasks/c963-stable-rationality-workbench.md`.
+- **C965 — automated Galois descent, queued after C963.** Extract the accepted
+  Cox/Picard descent chain into a proof-producing algorithm for supplied finite
+  Galois actions, stable-permutation resolutions, Hilbert--90 coboundaries, and
+  norm-torus charts. It must distinguish a monomial-ansatz obstruction from
+  failure of descent and makes no general rationality-decision claim. Card:
+  `../cubic-threefolds-tasks/c965-automated-galois-descent.md`.
+- **C966 — remaining algorithmic implications, later triage after C965.**
+  Deduplicate and rank broader stabilized parametrization, level-certificate,
+  modular-recognition, integral-cycle-lattice, and reusable certificate-protocol
+  directions. Run bounded feasibility probes only; allocate successors later
+  only for user-approved promotions. Card:
+  `../cubic-threefolds-tasks/c966-algorithmic-implications-triage.md`.
 - **C936 — accepted after cold-referee repair audit.**  The warning-free eleven-page paper
   develops the signed nonstandard \(A_5\)-cubic parameter as the
   sign/discriminant resolvent of the actual

@@ -85,3 +85,12 @@ Freeze C958's two map/certificate interfaces, then write a one-page schema and
 threat model covering field descent, localization, certificate corruption,
 expression swell, and the noncancellation specialization trap before choosing
 an implementation stack.
+
+## Queued successors
+
+- C965 extracts the accepted C958/C963 descent chain into a generic,
+  proof-producing Galois-descent engine for supplied Cox, Picard, permutation-
+  resolution, and torus-chart data.
+- C966 is a later bounded triage of the remaining algorithmic implications. It
+  must deduplicate against C963 and C965 before proposing any implementation or
+  successor allocation.
