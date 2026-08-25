@@ -49,6 +49,7 @@ standalone workspace.
 cargo test --workspace --all-features
 cargo clippy --workspace --all-targets --all-features -- -D warnings
 cargo deny check
+sha256sum --check fixtures/SHA256SUMS
 cargo bench --bench paper_i -- --noplot
 cargo run -p sparse-shadow-cli -- validate fixtures/paper-i-icosahedral-orbitals.json
 cargo run -p sparse-shadow-cli -- canonicalize fixtures/paper-i-icosahedral-orbitals.json

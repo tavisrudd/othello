@@ -252,6 +252,9 @@ and recovered six-axis carriers use canonical vertices; the transporter is the
 declared bridge. Both Paper-I fixtures conjugate every emitted generator across
 that bridge and require exact preservation of the canonical shadow.
 
+`fixtures/SHA256SUMS` now freezes the exact bytes of the four fail-closed gates,
+the two Paper-I inputs, and the golden contract.
+
 No unblocked C968 implementation frontier remains: each next adapter first
 requires the complete paper-owned export named in its `fixtures/gated-*.json`.
 Nearby evidence JSON and trust manifests are explicitly insufficient. Once an

@@ -88,3 +88,5 @@ Their `PENDING` source hashes and empty mathematical payloads are deliberate:
 nearby evidence JSON files prove component claims but are not complete exported
 shadows. A gate cannot be enabled by filling those placeholders from manuscript
 prose or by treating a trust manifest as the missing mathematical export.
+`fixtures/SHA256SUMS` freezes the exact bytes of all four gates, both Paper-I
+inputs, and the golden contract.

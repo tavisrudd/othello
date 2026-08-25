@@ -105,6 +105,7 @@ serialized tree.
   canonical proofs plus a separating identity; reconstruction artifacts replay
   their carrier, residual `C2`, and round trip;
 - `cargo deny check`: advisories, bans, licenses, and sources green.
+- `sha256sum --check fixtures/SHA256SUMS`: all seven public fixtures green;
 - `cargo doc --workspace --all-features --no-deps` and locked/offline Cargo
   metadata resolution: pass;
 - core crate package dry run: pass; CLI packaging is explicitly gated on the
