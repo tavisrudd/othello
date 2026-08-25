@@ -2,8 +2,8 @@
 
 **Lane**: `complete-ports`
 
-**Status**: ACTIVE; EXACT ORDINARY COMPOSITION AND THE REQUIRED TARGET-BOUNDARY REFINEMENT DERIVED;
-PRIORITY AND COUNTEREXAMPLE GATES OPEN
+**Status**: ACTIVE; EXACT ORDINARY AND TARGET-NORMALIZED COMPOSITION DERIVED; SCALAR
+NONCOMPOSITION EXHIBITED; PRIORITY AND MANUSCRIPT GATES IN PROGRESS
 
 ## Question
 
@@ -21,9 +21,10 @@ outer-functional sectors must remain separate.
 The ordinary prescribed-coset support function composes by an exact min-plus substitution.
 For numerical target-normalized costs, the corresponding closed input is the prescribed-coset
 support function of the helper restriction, together with the intermediate target contribution.
-If exact target coefficients are also to be transported, the boundary-conditioned lift kernel
-retains them.  Both forms compose exactly and associatively.  The scalar threshold (\Gamma) does
-not compose by itself: it forgets the functional labels that the next outer code constrains.
+If exact equations are also to be transported, one must retain the corresponding lift relation,
+not only its minimum support.  The numerical functions and the lift relations compose exactly and
+associatively.  The scalar threshold (\Gamma) does not compose by itself: it forgets the
+functional labels that the next outer code constrains.
 
 ## 1. Ordinary prescribed-coset support
 
@@ -71,6 +72,16 @@ Repeated application of (C1) is associative: both parenthesizations minimize ove
 array of intermediate maps and add the same leaf-block support costs.  This is ordinary elimination
 of independent variables in the min-plus semiring.
 
+The trace identifications introduce no extra scalar.  If
+(x_e:T\to L)_{e\in E_A}) is the intermediate array, then for (v\in T)
+the leaf functional evaluated on a message (m\in M) is
+\[
+ \sum_e\operatorname{Tr}_{L/F}\bigl(x_e(v)\,\iota_A(m)_e\bigr)
+ =\operatorname{Tr}_{M/F}\bigl(\phi_A(x(v))m\bigr).
+\]
+The equality is trace transitivity after the definition of (\phi_A); nondegeneracy of the trace
+pairing gives exactly the constraint (\phi_Ax=c).
+
 ## 2. Target contributions and the boundary-conditioned kernel
 
 Let a represented code have dual restriction map (\phi:F^E\to V) and split
@@ -106,9 +117,18 @@ Then
 \]
 because the target coordinates are uncharged and the helper constraint is exactly
 (\phi_Jy_J=b-u).  Thus the helper-restriction prescribed-coset function
-(\Lambda_{\phi_J,T}) is enough for numerical composition.  The fuller kernel (\mathcal K) is
-needed only when the actual target coefficients, rather than their minimum support cost, are part
-of the output.
+(\Lambda_{\phi_J,T}) is enough for numerical composition.  The scalar kernel (\mathcal K) retains
+the target coefficient label but only the minimum support.  To transport all equations, retain the
+lift relation
+\[
+ \mathscr L_{\phi,P,T}(a,b)=
+ \{y_J:T\to F^J:\phi_Jy_J=b-\phi_Pa\},
+ \tag{C4}
+\]
+together with its support filtration.  Blockwise concatenation is the fiber product of these
+relations over the intermediate maps; helper coordinates in distinct blocks then form a disjoint
+product.  Thus the relations compose associatively and their minimum-support marginalization is
+the min-plus law below.
 
 If the target set in (A\circ B) meets the inner block (e) in (P_e\subseteq E_B), write
 (a=(a_e)_e).  Then
@@ -118,7 +138,7 @@ If the target set in (A\circ B) meets the inner block (e) in (P_e\subseteq E_B),
  \min_{\substack{x:T\to L^{E_A}\\\phi_Ax=c}}
  \sum_{e\in E_A}\mathcal K_{B,P_e,T}(a_e,x_e).
  }
- \tag{C4}
+ \tag{C5}
 \]
 Here (P) is the union of the copies of (P_e), and an empty (P_e) makes the local kernel equal to
 the ordinary cost (\Lambda_{B,T}(x_e)).  The proof is the same blockwise disjoint-support argument
@@ -133,17 +153,18 @@ Equivalently, set (u_e=\phi_{B,P_e}a_e).  The target-normalized numerical cost i
                   \phi_Au=\operatorname{id}_T,\ \phi_Ax=c}}
  \sum_{e\in E_A}\Lambda_{\phi_{B,J_e},T}(x_e-u_e).
  }
- \tag{C5}
+ \tag{C6}
 \]
-For (P_e=\varnothing), this local term is the ordinary full-block cost
-(\Lambda_{B,T}(x_e)).  Formula (C5) is the exact numerical target composition law.  It also shows
+Here (\operatorname{id}_T) denotes the inclusion (T\hookrightarrow M).  For
+(P_e=\varnothing), this local term is the ordinary full-block cost
+(\Lambda_{B,T}(x_e)).  Formula (C6) is the exact numerical target composition law.  It also shows
 why the single marginalized value (\mu_{I,P,T}(b)) is not the natural compositional input: the
 next level optimizes over the labelled intermediate maps (u_e,x_e), not merely over their final
 minimum.
 
 ## 3. Consequences for exact confinement
 
-For a composite inner code (C=A\circ B), substitute (C1) and (C5) into C960's exact formula
+For a composite inner code (C=A\circ B), substitute (C1) and (C6) into C960's exact formula
 \[
  \Gamma_{j,T}(O,C)=
  \min\left\{
@@ -165,7 +186,7 @@ The same calculation gives the inner-dual distance needed by the zero-functional
  \min_{0\ne z\in\operatorname{FD}(A)}
  \sum_{e\in E_A}\Lambda_{B,\langle1\rangle}(z_e)
  \right\}.
- \tag{C6}
+ \tag{C7}
 \]
 The first term is a nonzero inner-dual word in one block; the second is a nonzero middle
 functional tuple with independently minimum inner representatives.  This keeps the two sectors
@@ -210,7 +231,7 @@ Let the length-two outer code have trace-dual (\operatorname{FD}(O)) equal to th
 \]
 Hence the exact first nonconfined costs are (1) and (2), although the two zero-functional scalar
 inputs are both (3).  A single scalar threshold therefore cannot be iterated; the labelled coset
-costs in (C1) and (C5) are necessary.
+costs in (C1) and (C6) are necessary.
 
 ## 5. Sharp support-distance envelopes
 
@@ -227,21 +248,109 @@ If (c\ne0), then (C1) gives
  \leq \Lambda_{A\circ B,T}(c)
  \leq R_{B,T}\Lambda_{A,T}(c).
  }
- \tag{C7}
+ \tag{C8}
 \]
 Every lift of (c) has at least (\Lambda_{A,T}(c)) nonzero coordinate maps, proving the lower
 bound.  A support-minimizing lift has exactly that many, and each costs at most (R_{B,T}), proving
 the upper bound.  Both constants are optimal without further hypotheses: take a one-coordinate
 outer realization and prescribe a map attaining the relevant extremum.
 
-Replacing (\Lambda_{B,T}) by the helper-restriction costs in (C5) gives the analogous sharp
+Replacing (\Lambda_{B,T}) by the helper-restriction costs in (C6) gives the analogous sharp
 weighted-support envelopes for target-normalized recovery.  These inequalities are the precise
 coarsening obtained when the labelled fiber costs are replaced by their extreme nonzero values.
 
-## Open gates
+## 6. Proof audit
 
-1. Audit generalized concatenated-code, trellis/dynamic-programming, generalized covering-radius,
-   and min-plus factor-graph literature for (C1)--(C6).
-2. Independently red-team the trace-tower identifications, the target normalization in (C5), and
-   the explicit scalar separation.
-3. Apply to the manuscript only if the exact closed object and priority boundary remain concise.
+The following checks were carried out without computational premises.
+
+1. **Type and trace check.**  The two constituent restriction maps are surjective transposes of
+   injective encoders.  Trace transitivity gives the displayed composite restriction map, and
+   nondegeneracy removes any possible ambiguity in its (M)-label.
+2. **Both inequalities in (C1).**  Every composite lift supplies an intermediate array and has
+   cost at least the sum of the corresponding inner minima.  Conversely, every intermediate array
+   and a minimizing lift in each block produce a composite lift with exactly that sum.
+3. **Target normalization.**  Every map (u_e:T\to U_{P_e}) has a linear target-coordinate lift,
+   because (\phi_{B,P_e}) is surjective onto its image.  The condition
+   (\phi_Au=\operatorname{id}_T) is therefore equivalent to the original target normalization,
+   and the helper contribution in block (e) is exactly (x_e-u_e).
+4. **Equation-level transport.**  Minimum-support kernels do not retain all helper coefficients.
+   The relation (\mathscr L) does.  Its fiber-product composition proves equation-level transport;
+   (C5) and (C6) are only its minimum-support marginals.
+5. **Dual-distance sectors.**  A composite dual word either has zero intermediate label, in which
+   case one inner-dual block realizes the first term of (C7), or a nonzero tuple in
+   (\operatorname{FD}(A)), in which case independent block minima give the second.  The cases are
+   disjoint and exhaustive.
+6. **Scalar counterexample.**  Direct evaluation of the eight binary coefficient vectors in each
+   length-three inner code gives the two displayed tables.  For the three nonzero multiples of
+   ((1,\omega)), the target-plus-external costs are respectively ((1,4,2)) and ((2,2,3)).  Thus
+   the minima are (1) and (2), while both persistent zero-sector values are (3).
+7. **No hidden gate.**  The composition identities do not assume an outer-distance bound.  The
+   projection-surjectivity hypothesis enters only when C960 interprets the optimized value as
+   exact nonconfinement at a chosen outer block.
+8. **Sharp envelopes.**  Each nonzero intermediate coordinate costs between (\delta_{B,T}) and
+   (R_{B,T}); a one-coordinate outer realization shows that neither universal constant can be
+   improved.
+
+These checks leave no quantifier, off-by-one, cancellation, or attainability defect in
+(C1)--(C8).
+
+## 7. Literature and priority audit
+
+Search date: 2026-08-24.  The audit used four full or partial primary texts and exact-title,
+exact-phrase, forward-neighborhood, and recent-arXiv searches.  Three sources were read in relevant
+full-text sections during C961; the generalized-coset-weight sources already audited in C960 were
+reused for the boundary below.
+
+- Aji and McEliece, *The Generalized Distributive Law*, Sections II--III, was read from the official
+  author PDF (DOI 10.1109/18.825794; 19 pages; SHA-256
+  `6aed6b53e9c21951f801b4bac509db26c6a68b65aa26c5a1de690cff0277779a`).  It treats the
+  min-sum semiring and exact variable elimination on junction trees.  Therefore min-plus
+  associativity and the generic elimination mechanism in (C1) carry no priority claim here.
+- Guruswami and Sudan, *Decoding Concatenated Codes using Soft Information*, pp. 1--3, was read
+  from the official author PDF (DOI 10.1109/CCC.2002.1004350; 10 pages; SHA-256
+  `9de8a233c00ce45aea3db34023727a3f564c1ce8760c0e96452c3afe93407865`).  It passes
+  symbol-indexed weights derived from inner coset-weight data to an outer decoder.  This is the
+  closest operational precedent for retaining labelled inner costs rather than one scalar.
+- Blomqvist, Gnilke, and Greferath, *On Decoding of Generalized Concatenated Codes and
+  Matrix-Product Codes*, Sections III, VI, and VII, was read from arXiv:2004.03538 (23 pages;
+  SHA-256 `77096b0638c851a7aad9aaff4b48c091cc5de04a5357913bfaa284080bbd1974`).  It reviews
+  constituent encoding and repeated generalized-concatenated decoding.  Its objective is
+  error/erasure and GMD decoding, not exact recovery-support or nonconfinement costs.
+- Elimelech--Firer--Schwartz and Zhang et al., already read and pinned in C960, supply the
+  generalized covering-radius and generalized coset-weight neighborhood.  They define joint coset
+  support quantities but do not study their repeated-concatenation substitution in the inspected
+  results.
+
+The first attempted broad extraction of two large Blomqvist text ranges exceeded the output
+budget and was discarded.  It was replaced by the bounded section reads listed above; no claim
+rests on the discarded output.
+
+Exact all-time searches for `"prescribed-coset support"`, `"coset weight" "concatenated
+codes"`, `"min-plus" "concatenated codes"`, and `"repeated concatenation" "local
+recovery"` found the soft-decoding and generalized-concatenated-decoding neighbors above, but no
+source stating (C5)--(C7) for bounded recovery or exact confinement.  Exact arXiv API searches on
+the interval 2026-07-24 through 2026-08-24 returned:
+
+- two results for `"concatenated code"`, both quantum and unrelated to the claimed identity;
+- zero results for the union of `"repeated concatenation"`, `"generalized concatenated"`, and
+  `"coset weight"`; and
+- two results for `"local recovery"` combined with composition, min-plus, or concatenation, both
+  unrelated quantum papers.
+
+**Priority boundary.**  The min-sum algebra, constituentwise decoding, and use of inner
+coset-weight information are established.  The defensible paper-specific result is narrower: the
+ordinary and target-normalized prescribed-coset support functions are the closed numerical state
+for repeated concatenation; the support-filtered lift relation is the closed equation-level state;
+substitution into the exact recovery theorem preserves the zero and nonzero functional sectors;
+and the scalar confinement threshold is not a closed state.  No search result combined these
+statements.  The manuscript should present the composition law as a structural consequence, not
+as a new min-plus principle.
+
+## 8. Manuscript decision
+
+The result is concise enough to enter the paper as one proposition after the exact finite
+confinement theorem, with the generic min-sum and soft-decoding precedents cited.  The manuscript
+should state (C1), the target-normalized specialization (C6), the dual-distance sector formula
+(C7), and the associativity consequence.  The full lift relation belongs in the proof.  The small
+(F_2/F_4) example should be included only to justify the assertion that a scalar threshold is not
+compositional.
