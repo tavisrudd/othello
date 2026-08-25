@@ -1639,6 +1639,11 @@ singletons, so any completion must, and such a bijection does, fill all nine
 deficits once.  Thus the product equation `(SR19)` is necessary but not by
 itself a completion theorem: the nonextendable branch is a literal
 three-by-three transversal obstruction.                         (SR19c)
+In the extendable branch, the completed `a`--`b` incidence graph is
+two-regular bipartite and therefore splits into two disjoint perfect
+matchings.  So that branch is exactly a two-permutation full duplex followed
+by deletion of a three-cell transversal; the complementary branch fails the
+finite test before any geometric line-cap analysis.
 
 The distinction is real already at the singleton-data level over `F_81`.
 For an element `zeta` of order eight, take singleton sets with exponent sets
