@@ -3509,8 +3509,17 @@
       "last": 961,
       "purpose": "repeated-concatenation composition law for prescribed-coset recovery costs",
       "sequence": 390
+    },
+    {
+      "count": 1,
+      "first": 962,
+      "kind": "reservation",
+      "lane": "complete-ports",
+      "last": 962,
+      "purpose": "develop, validate, and benchmark exact recovery-cost composition algorithms and derived bounds",
+      "sequence": 391
     }
   ],
-  "next_id": 962,
+  "next_id": 963,
   "schema": "codex-task-id-allocations-v1"
 }
