@@ -172,9 +172,39 @@ evidence.  For the corrected five-character spectrum, trace-`x/y` invariance
 is arithmetically impossible because 55 cannot be assembled from its nine
 81-orbits and 28 fixed points.  The trace-`x` and scalar `C_13` core models are
 exactly infeasible after collapsing the lines to 109 and 85 orbit-incidence
-signatures, respectively.  The Frobenius model has 261 signatures and remains
-`UNKNOWN` after 300 seconds; this supplies no evidence either way.  These are
-only symmetry-restricted core statements, before the local lift condition.
+signatures, respectively.
+
+Frobenius invariance has a further exact reduction.  Its 13 fixed points and
+13 fixed lines form `PG(2,3)`.  If `f` fixed points belong to `D`, then
+`f congruent 55 congruent 1 (mod 3)`.  If a fixed line contains `r` of them,
+its full intersection size `d` satisfies `d congruent r (mod 3)`.  Blocking
+and `1<=d<=5` therefore permit only
+
+```text
+r=0 -> d=3;  r=1 -> d in {1,4};  r=2 -> d in {2,5};
+r=3 -> d=3;  r=4 -> d=4.
+```
+
+Moreover, the numbers of fixed lines of types `1,...,5` must be congruent
+modulo three to `(461,17,78,194,7)`, hence to `(2,2,0,2,1)`.  Exhausting all
+`2^13` fixed-point subsets and quotienting by the generated order-5616 group
+`PGL(3,3)` leaves exactly ten normalized branches: four with `f=4` and six
+with `f=7`.  Their fixed-subline count vectors and admissible fixed-line type
+vectors are
+
+```text
+(2,7,3,1,0): (2,2,3,5,1), (5,2,3,2,1)
+(3,4,6,0,0): (2,2,3,2,4), (2,5,3,2,1)
+(0,3,6,3,1): (2,2,3,2,4), (2,5,3,2,1)
+(0,4,3,6,0): (2,2,6,2,1)
+(0,2,9,0,2): (2,2,0,2,7), (2,5,0,2,4), (2,8,0,2,1).
+```
+
+Thus the Frobenius question is no longer one undifferentiated 261-signature
+model, but these ten finite branches.  Bounded searches of them, including the
+required concurrency cap, remain `UNKNOWN`; that status supplies no evidence
+either way.  All exclusions here are symmetry-restricted statements, not an
+unrestricted nonexistence theorem.
 
 ### Exact `q=9` result
 
@@ -373,10 +403,11 @@ family is lower priority.
   concurrency cap by averaging.
 - **Open — does the `2q+1` five-character blocking core generalize?**  The
   correct `q=27` target is `1^461 2^17 3^78 4^194 5^7`.  Trace-`x/y`,
-  trace-`x`, and scalar `C_13` invariance are excluded; Frobenius and
-  asymmetric cores remain open.  Any surviving core must then pass the fixed
-  lift.  The alternative 54-maximal-secant envelope branch is also
-  unclassified.
+  trace-`x`, and scalar `C_13` invariance are excluded.  Frobenius invariance
+  is reduced exactly to ten normalized fixed-subplane branches, four with
+  four fixed core points and six with seven; those branches and asymmetric
+  cores remain open.  Any surviving core must satisfy the concurrency cap.
+  The alternative 54-maximal-secant envelope branch is also unclassified.
 - **Open — can `t_7(2,9)>=39` be proved without exhaustive search?**  The
   positive construction is structural, but exclusion of a 38-point complete
   arc still trusts one normalized CP-SAT infeasibility certificate.  A second
@@ -386,7 +417,7 @@ family is lower priority.
 ### Reproducibility
 
 All commands below run from the repository root.  The construction and the
-two `q=27` audits use only Python's standard library and deterministic
+three `q=27` audits use only Python's standard library and deterministic
 canonical enumeration.
 
 ```bash
@@ -407,6 +438,12 @@ python3 notes/2026-08-24-c949-sharp-higher-arc-asymptotics.py \
   --output /tmp/c949-q27-symmetry-orbits.json
 cmp /tmp/c949-q27-symmetry-orbits.json \
   notes/2026-08-24-c949-q27-symmetry-orbits.json
+
+python3 notes/2026-08-24-c949-sharp-higher-arc-asymptotics.py \
+  frobenius-fixed-subplane-audit \
+  --output /tmp/c949-q27-frobenius-fixed-subplane-audit.json
+cmp /tmp/c949-q27-frobenius-fixed-subplane-audit.json \
+  notes/2026-08-24-c949-q27-frobenius-fixed-subplane-audit.json
 ```
 
 The corrected fixed-core lift replays the five-character mechanism at `q=9`
@@ -459,9 +496,9 @@ boundary is the short Python finite-field implementation and its explicit
 assertions; no computer-algebra or second implementation is used.  The
 `q=27` artifacts certify only the stated finite parameter/orbit audits.
 
-The corrected five-character Frobenius and unrestricted `q=27` core searches
-are not completed; no unrestricted existence or nonexistence conclusion is
-licensed.
+The ten normalized five-character Frobenius branches and the unrestricted
+`q=27` core search are not completed; no unrestricted existence or
+nonexistence conclusion is licensed.
 
 ### Source depths for this audit
 

@@ -19,6 +19,10 @@
     "1": 29,
     "13": 56
   },
+  "require_concurrency_cap": false,
+  "required_fixed_core_indices": null,
+  "required_fixed_core_points": null,
+  "required_fixed_line_type_counts": null,
   "schema": "c949-five-character-core-v1",
   "search": {
     "random_seed": 949,

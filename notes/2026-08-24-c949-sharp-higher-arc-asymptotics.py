@@ -744,13 +744,17 @@ def solve_five_character_core(q: int, symmetry: str, output: Path,
 
 
 def search_five_character_core(q: int, symmetry: str, output: Path,
-                               seconds: float, workers: int) -> None:
+                               seconds: float, workers: int,
+                               fixed_core_points: int | None = None,
+                               fixed_line_type_counts: list[int] | None = None,
+                               fixed_core_indices: list[int] | None = None,
+                               require_concurrency_cap: bool = False) -> None:
     """Stage 1: find only the symmetric five-character blocking core."""
     from ortools.sat.python import cp_model
 
     if q not in (9, 27):
         raise ValueError("the current exact field implementation supports q=9 and q=27")
-    points, on_line, _ = incidence(q)
+    points, on_line, through_point = incidence(q)
     orbits = ([[point] for point in range(len(points))] if symmetry == "none"
               else symmetry_orbits(q, symmetry))
     orbit_of = [0] * len(points)
@@ -770,30 +774,66 @@ def search_five_character_core(q: int, symmetry: str, output: Path,
     core = [chosen_orbit[orbit_of[point]] for point in range(len(points))]
     model.add(sum(len(orbit) * chosen_orbit[index]
                   for index, orbit in enumerate(orbits)) == 2 * q + 1)
+    if fixed_core_points is not None:
+        model.add(sum(chosen_orbit[index] for index, orbit in enumerate(orbits)
+                      if len(orbit) == 1) == fixed_core_points)
+    if fixed_core_indices is not None:
+        required_fixed = set(fixed_core_indices)
+        singleton_points = {orbit[0] for orbit in orbits if len(orbit) == 1}
+        if not required_fixed <= singleton_points:
+            raise ValueError("fixed core indices must be singleton symmetry orbits")
+        for orbit_index, orbit in enumerate(orbits):
+            if len(orbit) == 1:
+                model.add(chosen_orbit[orbit_index] == (1 if orbit[0] in required_fixed else 0))
     signature_lines: dict[tuple[int, ...], list[int]] = {}
     for line, members in enumerate(on_line):
         orbit_counts = Counter(orbit_of[point] for point in members)
         signature = tuple(orbit_counts.get(index, 0) for index in range(len(orbits)))
         signature_lines.setdefault(signature, []).append(line)
-    line_types = []
-    line_type_multiplicities = []
+    high_secants = []
+    high_secant_incidences = []
+    signature_multiplicities = []
+    fixed_line_types = []
+    signature_index_of_line = [0] * len(on_line)
     for signature_index, (signature, equivalent_lines) in enumerate(sorted(signature_lines.items())):
+        for line in equivalent_lines:
+            signature_index_of_line[line] = signature_index
         intersection = model.new_int_var(1, 5, f"core_line_sum_{signature_index}")
         model.add(intersection == sum(
             multiplicity * chosen_orbit[orbit_index]
             for orbit_index, multiplicity in enumerate(signature) if multiplicity
         ))
-        types = [model.new_bool_var(f"core_line_{signature_index}_type_{degree}")
-                 for degree in range(1, 6)]
-        model.add_exactly_one(types)
-        for degree, type_variable in enumerate(types, start=1):
-            model.add(intersection == degree).only_enforce_if(type_variable)
-        line_types.append(types)
-        line_type_multiplicities.append(len(equivalent_lines))
-    for degree in range(1, 6):
-        model.add(sum(multiplicity * types[degree - 1]
-                      for multiplicity, types in zip(line_type_multiplicities, line_types))
-                  == line_type_counts[degree])
+        high = model.new_bool_var(f"core_line_{signature_index}_is_high")
+        model.add(intersection >= 3).only_enforce_if(high)
+        model.add(intersection <= 2).only_enforce_if(high.Not())
+        high_incidence = model.new_int_var(0, 5, f"core_line_{signature_index}_high_incidence")
+        model.add(high_incidence == intersection).only_enforce_if(high)
+        model.add(high_incidence == 0).only_enforce_if(high.Not())
+        high_secants.append(high)
+        high_secant_incidences.append(high_incidence)
+        signature_multiplicities.append(len(equivalent_lines))
+        if len(equivalent_lines) == 1 and fixed_line_type_counts is not None:
+            types = [model.new_bool_var(f"fixed_line_{signature_index}_type_{degree}")
+                     for degree in range(1, 6)]
+            model.add_exactly_one(types)
+            for degree, type_variable in enumerate(types, start=1):
+                model.add(intersection == degree).only_enforce_if(type_variable)
+            fixed_line_types.append(types)
+    model.add(sum(multiplicity * high for multiplicity, high in
+                  zip(signature_multiplicities, high_secants)) == q * q // 3 + 4 * q // 3)
+    model.add(sum(multiplicity * incidence for multiplicity, incidence in
+                  zip(signature_multiplicities, high_secant_incidences)) ==
+              (2 * q + 1) * (2 * q // 3 + 1))
+    if require_concurrency_cap:
+        arc_intersection = 2 * q // 3 + 1
+        for incident in through_point:
+            model.add(sum(high_secants[signature_index_of_line[line]]
+                          for line in incident) <= arc_intersection)
+    if fixed_line_type_counts is not None:
+        if len(fixed_line_type_counts) != 5:
+            raise ValueError("fixed line type counts must have five entries")
+        for degree, required in enumerate(fixed_line_type_counts, start=1):
+            model.add(sum(types[degree - 1] for types in fixed_line_types) == required)
     solver = cp_model.CpSolver()
     solver.parameters.max_time_in_seconds = seconds
     solver.parameters.num_search_workers = workers
@@ -812,6 +852,10 @@ def search_five_character_core(q: int, symmetry: str, output: Path,
         "dual_core_line_type_counts": line_type_counts,
         "orbit_size_spectrum": dict(sorted(Counter(len(orbit) for orbit in orbits).items())),
         "line_orbit_incidence_signature_count": len(signature_lines),
+        "required_fixed_core_points": fixed_core_points,
+        "required_fixed_core_indices": fixed_core_indices,
+        "required_fixed_line_type_counts": fixed_line_type_counts,
+        "require_concurrency_cap": require_concurrency_cap,
         "search": {
             "random_seed": 949,
             "workers": workers,
@@ -1022,6 +1066,150 @@ def audit_symmetry_orbits(q: int, output: Path) -> None:
         "singer_group_order": singer_order,
         "singer_group_order_is_prime": singer_prime,
         "symmetries": records,
+    }, indent=2, sort_keys=True) + "\n")
+
+
+def audit_frobenius_fixed_subplane(output: Path) -> None:
+    """Reduce a Frobenius-invariant q=27 five-character core on PG(2,3)."""
+    q = 27
+    points, on_line, _ = incidence(q)
+    fixed_indices = sorted(orbit[0] for orbit in symmetry_orbits(q, "frobenius")
+                           if len(orbit) == 1)
+    if len(fixed_indices) != 13:
+        raise ValueError("the Frobenius fixed plane should have 13 points")
+    fixed_position = {point: position for position, point in enumerate(fixed_indices)}
+    fixed_line_masks = []
+    for line in fixed_indices:
+        mask = sum(1 << fixed_position[point] for point in on_line[line]
+                   if point in fixed_position)
+        if mask.bit_count() != 4:
+            raise ValueError("a fixed subplane line should contain four fixed points")
+        fixed_line_masks.append(mask)
+
+    fixed_coords = [points[index] for index in fixed_indices]
+    coord_position = {coordinate: position for position, coordinate in enumerate(fixed_coords)}
+
+    def base_normalize(vector: tuple[int, int, int]) -> tuple[int, int, int]:
+        first = next(value for value in vector if value)
+        inverse = 1 if first == 1 else 2
+        return tuple(inverse * value % 3 for value in vector)  # type: ignore[return-value]
+
+    def point_permutation(matrix: tuple[tuple[int, int, int], ...]) -> tuple[int, ...]:
+        images = []
+        for vector in fixed_coords:
+            image = tuple(sum(matrix[row][column] * vector[column]
+                              for column in range(3)) % 3 for row in range(3))
+            images.append(coord_position[base_normalize(image)])
+        return tuple(images)
+
+    generators = [
+        ((0, 1, 0), (1, 0, 0), (0, 0, 1)),
+        ((1, 0, 0), (0, 0, 1), (0, 1, 0)),
+        ((1, 1, 0), (0, 1, 0), (0, 0, 1)),
+    ]
+    permutations = [point_permutation(matrix) for matrix in generators]
+    identity = tuple(range(13))
+    generated_group = {identity}
+    group_frontier = [identity]
+    while group_frontier:
+        current = group_frontier.pop()
+        for generator in permutations:
+            product = tuple(generator[current[position]] for position in range(13))
+            if product not in generated_group:
+                generated_group.add(product)
+                group_frontier.append(product)
+    expected_pgl_order = ((3 ** 3 - 1) * (3 ** 3 - 3) * (3 ** 3 - 3 ** 2)) // 2
+    if len(generated_group) != expected_pgl_order:
+        raise ValueError("fixed-subplane generators do not generate PGL(3,3)")
+
+    def permute_mask(mask: int, permutation: tuple[int, ...]) -> int:
+        return sum(1 << permutation[position] for position in range(13)
+                   if mask & (1 << position))
+
+    orbit_representative: dict[int, int] = {}
+    orbit_count = 0
+    for seed in range(1 << 13):
+        if seed in orbit_representative:
+            continue
+        orbit = {seed}
+        frontier = [seed]
+        while frontier:
+            current = frontier.pop()
+            for permutation in permutations:
+                image = permute_mask(current, permutation)
+                if image not in orbit:
+                    orbit.add(image)
+                    frontier.append(image)
+        representative = min(orbit)
+        for mask in orbit:
+            orbit_representative[mask] = representative
+        orbit_count += 1
+
+    target = {
+        1: (2 * q * q - 3 * q + 6) // 3,
+        2: 2 * q // 3 - 1,
+        3: 3 * q - 3,
+        4: (q * q - 6 * q + 15) // 3,
+        5: q // 3 - 2,
+    }
+    patterns: dict[tuple[int, tuple[int, ...]], dict[str, object]] = {}
+    candidate_subset_count = 0
+    for mask in range(1 << 13):
+        fixed_core_size = mask.bit_count()
+        if fixed_core_size % 3 != (2 * q + 1) % 3:
+            continue
+        r_counts = Counter((mask & line).bit_count() for line in fixed_line_masks)
+        if any(intersection > 4 for intersection in r_counts):
+            raise AssertionError
+        choices = []
+        for type_one in range(r_counts[1] + 1):
+            for type_two in range(r_counts[2] + 1):
+                fixed_types = (
+                    type_one,
+                    type_two,
+                    r_counts[0] + r_counts[3],
+                    r_counts[1] - type_one + r_counts[4],
+                    r_counts[2] - type_two,
+                )
+                if all(fixed_types[degree - 1] % 3 == target[degree] % 3
+                       for degree in range(1, 6)):
+                    choices.append(fixed_types)
+        if not choices:
+            continue
+        candidate_subset_count += 1
+        representative = orbit_representative[mask]
+        representative_indices = [fixed_indices[position] for position in range(13)
+                                  if representative & (1 << position)]
+        for fixed_types in choices:
+            key = (representative, fixed_types)
+            patterns.setdefault(key, {
+                "fixed_core_size": fixed_core_size,
+                "fixed_core_point_indices": representative_indices,
+                "fixed_subline_intersection_counts": {
+                    str(intersection): r_counts[intersection] for intersection in range(5)
+                },
+                "fixed_line_type_counts": list(fixed_types),
+            })
+
+    ordered_patterns = sorted(patterns.values(), key=lambda record: (
+        record["fixed_core_size"],
+        record["fixed_core_point_indices"],
+        record["fixed_line_type_counts"],
+    ))
+    output.write_text(json.dumps({
+        "schema": "c949-q27-frobenius-fixed-subplane-audit-v1",
+        "field_order": q,
+        "fixed_subplane_order": 3,
+        "fixed_point_indices": fixed_indices,
+        "fixed_point_count": len(fixed_indices),
+        "fixed_line_count": len(fixed_line_masks),
+        "generated_projective_group_order": len(generated_group),
+        "fixed_subplane_projective_subset_orbit_count": orbit_count,
+        "target_dual_core_size": 2 * q + 1,
+        "target_line_type_counts": target,
+        "candidate_fixed_point_subset_count": candidate_subset_count,
+        "normalized_pattern_count": len(ordered_patterns),
+        "normalized_patterns": ordered_patterns,
     }, indent=2, sort_keys=True) + "\n")
 
 
@@ -1518,6 +1706,8 @@ def main() -> None:
     orbit_audit = subparsers.add_parser("symmetry-orbit-audit")
     orbit_audit.add_argument("--q", type=int, required=True)
     orbit_audit.add_argument("--output", type=Path, required=True)
+    fixed_subplane = subparsers.add_parser("frobenius-fixed-subplane-audit")
+    fixed_subplane.add_argument("--output", type=Path, required=True)
     structure = subparsers.add_parser("analyze-blocking-certificate")
     structure.add_argument("--certificate", type=Path, required=True)
     structure.add_argument("--output", type=Path, required=True)
@@ -1544,6 +1734,10 @@ def main() -> None:
     core_search.add_argument("--output", type=Path, required=True)
     core_search.add_argument("--seconds", type=float, default=300.0)
     core_search.add_argument("--workers", type=int, default=8)
+    core_search.add_argument("--fixed-core-points", type=int)
+    core_search.add_argument("--fixed-core-indices", type=int, nargs="+")
+    core_search.add_argument("--fixed-line-type-counts", type=int, nargs=5)
+    core_search.add_argument("--require-concurrency-cap", action="store_true")
     core_lift = subparsers.add_parser("five-character-core-lift")
     core_lift.add_argument("--core", type=Path, required=True)
     core_lift.add_argument("--output", type=Path, required=True)
@@ -1571,6 +1765,8 @@ def main() -> None:
         check_weak_inverse(args.certificate)
     elif args.command == "symmetry-orbit-audit":
         audit_symmetry_orbits(args.q, args.output)
+    elif args.command == "frobenius-fixed-subplane-audit":
+        audit_frobenius_fixed_subplane(args.output)
     elif args.command == "analyze-blocking-certificate":
         analyze_blocking_certificate(args.certificate, args.output)
     elif args.command == "analyze-unital-mechanism":
@@ -1582,7 +1778,9 @@ def main() -> None:
                                   args.seconds, args.workers)
     elif args.command == "five-character-core-search":
         search_five_character_core(args.q, args.symmetry, args.output,
-                                   args.seconds, args.workers)
+                                   args.seconds, args.workers, args.fixed_core_points,
+                                   args.fixed_line_type_counts, args.fixed_core_indices,
+                                   args.require_concurrency_cap)
     elif args.command == "five-character-core-lift":
         lift_five_character_core(args.core, args.output, args.seconds, args.workers)
     else:
