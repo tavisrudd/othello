@@ -7,13 +7,16 @@ This is the C969 implementation crate.  Its current executable slice provides:
 - both affine and infinity locator charts;
 - increasing-degree Hankel-kernel search over projective locator space;
 - distinct rational-root recovery, Vandermonde magnitude recovery, and an
-  independently replayed locator certificate; and
+  independently replayed locator certificate;
+- explicit `PGL(2,q) x Gal(F_q/F_p)` canonicalization with the exact
+  `m(q^3-q)` cost exposed; and
 - the five required command names.
 
-`classify` and `canonicalize` currently return only witness-backed
-`NOT_DEEP` results.  The frozen theorem-domain and orbit adapters must be
-enabled before this crate can issue `DEEP`, `UNRESOLVED`, or structural
-canonicalization results.  This fail-closed boundary is intentional.
+`classify` currently returns only witness-backed `NOT_DEEP` results;
+`canonicalize` is functional but currently uses the explicit group-scale
+fallback.  The frozen finite-exception and theorem-domain adapters must be
+enabled before this crate can issue `DEEP` or `UNRESOLVED`.  This fail-closed
+boundary is intentional.
 
 The locator enumeration has projective kernel dimension
 `2t+1-r` at degree `t`.  At terminal split-free testing `t=r-2`, this gives
@@ -21,4 +24,3 @@ the absorbed C608 field-scale exponents `q`, `q^2`, and `q^3` for
 redundancies five, six, and seven, before the `O(q)` exhaustive-root factor
 check used by this reference implementation.  A later factoring backend must
 separate locator selection cost from root-factorization cost.
-

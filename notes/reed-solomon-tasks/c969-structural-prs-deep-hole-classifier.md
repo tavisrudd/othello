@@ -8,9 +8,12 @@ hand-classified branch representatives, and absorbed C607/C608 interface gates
 are frozen in `c969-freeze-and-schema.md`.  The independent Rust core now has
 exact extension-field arithmetic, projective normalization, both locator
 charts, increasing-degree Hankel search, magnitude recovery, and certificate
-replay, including the frozen R10 q=16 Lucas witness.  Structural family/orbit
-adapters, the R5--R7 terminal solver, full-distance fallback, and complexity
-proofs remain open.  Code and mathematics only; no manuscript edits.
+replay, including the frozen R10 q=16 Lucas witness.  It also detects the
+persistent tangent/sigma gcd branches and returns an exact semilinear
+transporter through an explicit `m(q^3-q)` canonicalization fallback.
+Finite-exception family adapters, formula-speed canonicalizers, the R5--R7
+terminal solver, full-distance fallback, and complexity proofs remain open.
+Code and mathematics only; no manuscript edits.
 
 ## Goal
 

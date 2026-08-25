@@ -89,6 +89,31 @@ pub struct SearchBoundary {
     pub conclusion: &'static str,
 }
 
+#[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Eq)]
+pub struct Transporter {
+    pub frobenius_exponent: usize,
+    pub matrix: [u32; 4],
+    pub projective_output_scale: u32,
+}
+
+#[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Eq)]
+pub struct Canonicalization {
+    pub normalized_input: Vec<u32>,
+    pub canonical_syndrome: Vec<u32>,
+    pub transporter: Transporter,
+    pub transporters_examined: u64,
+    pub complexity: &'static str,
+}
+
+#[derive(Clone, Copy, Debug, Deserialize, Serialize, PartialEq, Eq)]
+#[serde(rename_all = "snake_case")]
+pub enum PersistentKind {
+    Tangent,
+    Sigma,
+    RationalSecant,
+    Other,
+}
+
 #[derive(Clone, Debug)]
 pub struct Field {
     spec: FieldSpec,
@@ -229,6 +254,14 @@ impl Field {
         out
     }
 
+    pub fn frobenius(&self, a: u32, exponent: usize) -> u32 {
+        let mut power = 1u64;
+        for _ in 0..(exponent % self.spec.degree) {
+            power *= u64::from(self.spec.p);
+        }
+        self.pow(a, power)
+    }
+
     pub fn inv(&self, a: u32) -> Option<u32> {
         (a != 0).then(|| self.pow(a, u64::from(self.q) - 2))
     }
@@ -275,6 +308,118 @@ pub fn locator_kernel(field: &Field, syndrome: &[u32], degree: usize) -> Vec<Vec
         .map(|i| (0..=degree).map(|j| syndrome[i + j]).collect())
         .collect();
     nullspace(field, &matrix, degree + 1)
+}
+
+pub fn persistent_kind(field: &Field, syndrome: &[u32]) -> PersistentKind {
+    if syndrome.len() < 4 {
+        return PersistentKind::Other;
+    }
+    let degree = syndrome.len() - 2;
+    let basis = locator_kernel(field, syndrome, degree);
+    let Some((gcd, infinity_multiplicity)) = homogeneous_basis_gcd(field, &basis, degree) else {
+        return PersistentKind::Other;
+    };
+    let total_degree = polynomial_degree(&gcd).unwrap_or(0) + infinity_multiplicity;
+    if total_degree != 2 {
+        return PersistentKind::Other;
+    }
+    if infinity_multiplicity == 2 {
+        return PersistentKind::Tangent;
+    }
+    if infinity_multiplicity == 1 {
+        return PersistentKind::RationalSecant;
+    }
+    let roots = (0..field.order())
+        .filter(|&x| field.eval(&gcd, x) == 0)
+        .count();
+    match roots {
+        0 => PersistentKind::Sigma,
+        1 => PersistentKind::Tangent,
+        2 => PersistentKind::RationalSecant,
+        _ => PersistentKind::Other,
+    }
+}
+
+pub fn apply_semilinear(
+    field: &Field,
+    syndrome: &[u32],
+    frobenius_exponent: usize,
+    matrix: [u32; 4],
+) -> Result<(Vec<u32>, u32), Error> {
+    for &entry in &matrix {
+        field.check(entry)?;
+    }
+    let [alpha, beta, gamma, delta] = matrix;
+    if field.sub(field.mul(alpha, delta), field.mul(beta, gamma)) == 0 {
+        return Err(Error::BadSupport);
+    }
+    let n = syndrome.len() - 1;
+    let frobenius_syndrome: Vec<u32> = syndrome
+        .iter()
+        .map(|&x| field.frobenius(x, frobenius_exponent))
+        .collect();
+    let mut out = vec![0u32; syndrome.len()];
+    for (i, output) in out.iter_mut().enumerate() {
+        let left = polynomial_power(field, &[beta, alpha], i);
+        let right = polynomial_power(field, &[delta, gamma], n - i);
+        let row = polynomial_mul(field, &left, &right);
+        for j in 0..=n {
+            *output = field.add(*output, field.mul(row[j], frobenius_syndrome[j]));
+        }
+    }
+    let pivot = out
+        .iter()
+        .copied()
+        .find(|&x| x != 0)
+        .ok_or(Error::ZeroSyndrome)?;
+    let scale = field.inv(pivot).expect("nonzero pivot has inverse");
+    for x in &mut out {
+        *x = field.mul(scale, *x);
+    }
+    Ok((out, scale))
+}
+
+pub fn canonicalize_syndrome(
+    request: &Request,
+    transporter_limit: u64,
+) -> Result<Canonicalization, Error> {
+    let (field, syndrome) = validate_request(request)?;
+    let matrices = normalized_pgl_matrices(&field);
+    let total = u64::try_from(matrices.len()).unwrap_or(u64::MAX)
+        * u64::try_from(field.spec.degree).unwrap_or(u64::MAX);
+    if total > transporter_limit {
+        return Err(Error::CandidateLimit {
+            limit: transporter_limit,
+        });
+    }
+    let mut best = syndrome.clone();
+    let mut best_transporter = Transporter {
+        frobenius_exponent: 0,
+        matrix: [1, 0, 0, 1],
+        projective_output_scale: 1,
+    };
+    let mut examined = 0u64;
+    for exponent in 0..field.spec.degree {
+        for &matrix in &matrices {
+            examined += 1;
+            let (candidate, scale) = apply_semilinear(&field, &syndrome, exponent, matrix)?;
+            if candidate < best {
+                best = candidate;
+                best_transporter = Transporter {
+                    frobenius_exponent: exponent,
+                    matrix,
+                    projective_output_scale: scale,
+                };
+            }
+        }
+    }
+    Ok(Canonicalization {
+        normalized_input: syndrome,
+        canonical_syndrome: best,
+        transporter: best_transporter,
+        transporters_examined: examined,
+        complexity: "explicit PGL(2,q) x Gal enumeration: m*(q^3-q) transports",
+    })
 }
 
 pub fn split_support(field: &Field, locator: &[u32]) -> Option<Vec<Root>> {
@@ -474,6 +619,105 @@ fn projective_span(
         }
     }
     Ok(out)
+}
+
+fn normalized_pgl_matrices(field: &Field) -> Vec<[u32; 4]> {
+    let q = field.order();
+    let capacity = u64::from(q).pow(3) - u64::from(q);
+    let mut matrices = Vec::with_capacity(capacity as usize);
+    for beta in 0..q {
+        for gamma in 0..q {
+            for delta in 0..q {
+                if field.sub(delta, field.mul(beta, gamma)) != 0 {
+                    matrices.push([1, beta, gamma, delta]);
+                }
+            }
+        }
+    }
+    for gamma in 1..q {
+        for delta in 0..q {
+            matrices.push([0, 1, gamma, delta]);
+        }
+    }
+    debug_assert_eq!(matrices.len() as u64, capacity);
+    matrices
+}
+
+fn homogeneous_basis_gcd(
+    field: &Field,
+    basis: &[Vec<u32>],
+    homogeneous_degree: usize,
+) -> Option<(Vec<u32>, usize)> {
+    let first = basis.first()?;
+    let mut gcd = polynomial_trim(first.clone());
+    let mut infinity_multiplicity = homogeneous_degree - polynomial_degree(first)?;
+    for polynomial in &basis[1..] {
+        infinity_multiplicity =
+            infinity_multiplicity.min(homogeneous_degree - polynomial_degree(polynomial)?);
+        gcd = polynomial_gcd(field, gcd, polynomial_trim(polynomial.clone()));
+    }
+    Some((gcd, infinity_multiplicity))
+}
+
+fn polynomial_degree(polynomial: &[u32]) -> Option<usize> {
+    polynomial.iter().rposition(|&x| x != 0)
+}
+
+fn polynomial_trim(mut polynomial: Vec<u32>) -> Vec<u32> {
+    while polynomial.last() == Some(&0) {
+        polynomial.pop();
+    }
+    polynomial
+}
+
+fn polynomial_mul(field: &Field, a: &[u32], b: &[u32]) -> Vec<u32> {
+    let mut out = vec![0u32; a.len() + b.len() - 1];
+    for (i, &x) in a.iter().enumerate() {
+        for (j, &y) in b.iter().enumerate() {
+            out[i + j] = field.add(out[i + j], field.mul(x, y));
+        }
+    }
+    out
+}
+
+fn polynomial_power(field: &Field, polynomial: &[u32], exponent: usize) -> Vec<u32> {
+    let mut out = vec![1u32];
+    for _ in 0..exponent {
+        out = polynomial_mul(field, &out, polynomial);
+    }
+    out
+}
+
+fn polynomial_gcd(field: &Field, mut a: Vec<u32>, mut b: Vec<u32>) -> Vec<u32> {
+    while !b.is_empty() {
+        let remainder = polynomial_division_remainder(field, &a, &b);
+        a = b;
+        b = remainder;
+    }
+    if let Some(&lead) = a.last() {
+        let inv = field.inv(lead).expect("nonzero leading coefficient");
+        for x in &mut a {
+            *x = field.mul(*x, inv);
+        }
+    }
+    a
+}
+
+fn polynomial_division_remainder(field: &Field, dividend: &[u32], divisor: &[u32]) -> Vec<u32> {
+    let mut out = polynomial_trim(dividend.to_vec());
+    let divisor_degree = divisor.len() - 1;
+    let divisor_lead_inverse = field
+        .inv(divisor[divisor_degree])
+        .expect("divisor leading coefficient is nonzero");
+    while out.len() >= divisor.len() {
+        let shift = out.len() - divisor.len();
+        let factor = field.mul(*out.last().unwrap(), divisor_lead_inverse);
+        for (j, &coefficient) in divisor.iter().enumerate() {
+            out[shift + j] = field.sub(out[shift + j], field.mul(factor, coefficient));
+        }
+        out = polynomial_trim(out);
+    }
+    out
 }
 
 fn nullspace(field: &Field, matrix: &[Vec<u32>], columns: usize) -> Vec<Vec<u32>> {
@@ -706,5 +950,34 @@ mod tests {
             candidates_examined: 0,
         };
         verify_certificate(&certificate).unwrap();
+    }
+
+    #[test]
+    fn persistent_r6_representatives_match_frozen_certificate() {
+        let field = Field::new(prime_field(17)).unwrap();
+        assert_eq!(
+            persistent_kind(&field, &[0, 0, 0, 0, 1, 0]),
+            PersistentKind::Tangent
+        );
+        assert_eq!(
+            persistent_kind(&field, &[0, 1, 0, 3, 0, 9]),
+            PersistentKind::Sigma
+        );
+    }
+
+    #[test]
+    fn pgl_action_preserves_nrc_and_canonicalizes_equivalent_inputs() {
+        let field_spec = prime_field(7);
+        let field = Field::new(field_spec.clone()).unwrap();
+        let point = (0..5).map(|i| field.pow(3, i)).collect::<Vec<_>>();
+        let matrix = [1, 2, 0, 1];
+        let (image, _) = apply_semilinear(&field, &point, 0, matrix).unwrap();
+        let expected = (0..5).map(|i| field.pow(5, i)).collect::<Vec<_>>();
+        assert_eq!(image, expected);
+
+        let left = canonicalize_syndrome(&request(field_spec.clone(), 5, point), 1_000).unwrap();
+        let right = canonicalize_syndrome(&request(field_spec, 5, image), 1_000).unwrap();
+        assert_eq!(left.canonical_syndrome, right.canonical_syndrome);
+        assert_eq!(left.transporters_examined, 336);
     }
 }
