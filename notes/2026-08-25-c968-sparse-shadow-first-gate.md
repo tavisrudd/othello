@@ -104,6 +104,10 @@ serialized tree.
 - equivalence certificates carry an explicit isomorphism or two exhaustive
   canonical proofs plus a separating identity; reconstruction artifacts replay
   their carrier, residual `C2`, and round trip;
+- verified equivalence reports return the shared canonical identity and exactly
+  240 checked actions on the uncalibrated pair; inequivalence reports leave the
+  singular identity empty and report all 126 actions checked across the
+  uncalibrated/calibrated proofs;
 - `cargo deny check`: advisories, bans, licenses, and sources green.
 - `sha256sum --check fixtures/SHA256SUMS`: all seven public fixtures green;
 - `cargo doc --workspace --all-features --no-deps` and locked/offline Cargo

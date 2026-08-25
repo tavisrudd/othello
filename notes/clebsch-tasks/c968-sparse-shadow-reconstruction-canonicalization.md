@@ -255,6 +255,11 @@ that bridge and require exact preservation of the canonical shadow.
 `fixtures/SHA256SUMS` now freezes the exact bytes of the four fail-closed gates,
 the two Paper-I inputs, and the golden contract.
 
+Equivalence verification reports now preserve useful proof output: equivalent
+inputs return their shared canonical identity, while inequivalent inputs leave
+that singular field empty; both report the exact total number of automorphisms
+checked across their two exhaustive proofs.
+
 No unblocked C968 implementation frontier remains: each next adapter first
 requires the complete paper-owned export named in its `fixtures/gated-*.json`.
 Nearby evidence JSON and trust manifests are explicitly insufficient. Once an

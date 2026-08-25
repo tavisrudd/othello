@@ -423,10 +423,12 @@ fn equivalence_and_inequivalence_certificates_replay() {
         equivalent.result,
         EquivalenceOutcome::Equivalent { .. }
     ));
-    assert!(
-        verify_equivalence(&left, &relabeled, &equivalent)
-            .expect("equivalence replays")
-            .valid
+    let report = verify_equivalence(&left, &relabeled, &equivalent).expect("equivalence replays");
+    assert!(report.valid);
+    assert_eq!(report.checked_automorphisms, 240);
+    assert_eq!(
+        report.canonical_id,
+        Some(equivalent.left.canonical_id.clone())
     );
     let mut corrupt_equivalent = equivalent;
     let EquivalenceOutcome::Equivalent { left_to_right } = &mut corrupt_equivalent.result else {
@@ -445,11 +447,11 @@ fn equivalence_and_inequivalence_certificates_replay() {
         inequivalent.result,
         EquivalenceOutcome::Inequivalent { .. }
     ));
-    assert!(
-        verify_equivalence(&left, &calibrated, &inequivalent)
-            .expect("inequivalence replays")
-            .valid
-    );
+    let report =
+        verify_equivalence(&left, &calibrated, &inequivalent).expect("inequivalence replays");
+    assert!(report.valid);
+    assert_eq!(report.checked_automorphisms, 126);
+    assert_eq!(report.canonical_id, None);
     let mut corrupt_inequivalent = inequivalent;
     let EquivalenceOutcome::Inequivalent {
         separating_invariant,

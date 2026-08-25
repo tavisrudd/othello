@@ -36,7 +36,10 @@ The checker accepts a canonical certificate exactly when these rules succeed:
 Only after rules 1--8 pass is BLAKE3 recomputed as the stable artifact identity.
 Equivalence additionally verifies the composed left-to-right transporter.
 Inequivalence requires two accepted canonical certificates with unequal
-identities. Reconstruction additionally recomputes the typed six-axis carrier
+identities. A successful equivalence report returns the shared canonical
+identity; an inequivalence report leaves that singular field empty and reports
+the total automorphisms checked across both proofs. Reconstruction additionally
+recomputes the typed six-axis carrier
 from the canonical antipodal relation and verifies the residual orientation
 ambiguity, calibrated exact-return flag, and round-trip shadow. It
 also binds every enclosing canonical-artifact field to the replayed proof:

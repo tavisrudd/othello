@@ -89,7 +89,7 @@ pub fn verify_equivalence(
     }
     verify_certificate(left, &certificate.left)?;
     verify_certificate(right, &certificate.right)?;
-    match &certificate.result {
+    let canonical_id = match &certificate.result {
         EquivalenceOutcome::Equivalent { left_to_right } => {
             if certificate.left.canonical_id != certificate.right.canonical_id {
                 return Err(ShadowError::Certificate(
@@ -97,6 +97,7 @@ pub fn verify_equivalence(
                 ));
             }
             verify_isomorphism(left, right, left_to_right)?;
+            Some(certificate.left.canonical_id.clone())
         }
         EquivalenceOutcome::Inequivalent {
             separating_invariant,
@@ -110,11 +111,12 @@ pub fn verify_equivalence(
                     "inequivalence separator is inconsistent".into(),
                 ));
             }
+            None
         }
-    }
+    };
     Ok(VerificationReport {
         valid: true,
-        canonical_id: None,
+        canonical_id,
         checked_automorphisms: certificate.left.automorphisms.len()
             + certificate.right.automorphisms.len(),
     })
