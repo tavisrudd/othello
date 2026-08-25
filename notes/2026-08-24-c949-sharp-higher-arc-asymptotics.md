@@ -1960,6 +1960,28 @@ spectral-complexity requirement holds in all three triangle charts.  Hence a
 successful extendable construction cannot come from a bounded-Fourier-support
 duplex family; its nonlinearity must be `Omega(q)` in each chart.
 
+This has a decomposition-independent permutation formulation.  The
+two-regular `a`--`b` incidence graph of any full duplex splits into two
+permutation graphs `b=f(a),g(a)`, but their trace
+
+```text
+tau(a)=f(a)+g(a)
+```
+
+is simply the sum of the two values in the `a`-fiber and hence does not
+depend on the chosen splitting.  Its Frobenius fiber sum is
+`w_K(a)=tau(a)^r`.  Since `gcd(r,q-1)=1`, raising the unique interpolation
+polynomial on `F_q^*` to the `r`th power permutes its exponent frequencies
+modulo `q-1` without collisions.  Therefore `(SR24j)` also forces
+
+```text
+Fourier-support(tau) >= floor((2r-2)/3)              (SR24j')
+```
+
+in each of the three charts.  The obstruction is thus not an artifact of a
+particular two-permutation decomposition: every successful full-duplex trace
+must already have linear multiplicative-Fourier complexity.
+
 There is an equivalent exact dual-code certificate.  Let `V` be the three
 triangle vertices and let `L_infty` be the connector chosen as the line at
 infinity.  Over `F_3` put

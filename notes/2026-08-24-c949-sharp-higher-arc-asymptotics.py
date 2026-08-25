@@ -3409,12 +3409,20 @@ def audit_sharp_linear_coefficient(output: Path) -> None:
             "minimum_completion_moment_support_per_chart": (
                 (2 * q // 3 - 2) // 3
             ),
+            "minimum_completion_trace_fourier_support_per_chart": (
+                (2 * q // 3 - 2) // 3
+            ),
         }
         if frobenius_fiber_normal_form["monomial_vandermonde_zero_run"] < 3:
             raise AssertionError("the monomial Vandermonde exclusion lost its zero run")
         if (frobenius_fiber_normal_form[
                 "minimum_completion_moment_support_per_chart"] <= 0):
             raise AssertionError("the duplex spectral-complexity bound vanished")
+        if (frobenius_fiber_normal_form[
+                "minimum_completion_trace_fourier_support_per_chart"]
+                != frobenius_fiber_normal_form[
+                    "minimum_completion_moment_support_per_chart"]):
+            raise AssertionError("Frobenius failed to preserve trace sparsity")
 
         field_checks.append({
             "field_order": q,
