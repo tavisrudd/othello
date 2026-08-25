@@ -2,8 +2,9 @@
   "quartic-del-pezzo-slice-cover": {
     "checksum_manifest": "verification/SHA256SUMS",
     "commands": [
+      "uv run --with sympy==1.14.0 python3 verification/derive_slice_cover.py --check-certificate verification/slice-cover-certificate.json",
       "uv run --with sympy==1.14.0 python3 verification/check_slice_cover.py --check-certificate verification/slice-cover-certificate.json"
     ],
-    "role": "Exact arithmetic certificate for the unimodular weight matrix, numerical tangent slice, and four-witness smooth-moduli incidence cover."
+    "role": "Exact reconstruction of the saturated type-I3 lattice, Cox weights, residual quotient, tangent Jacobian, symbolic witness determinants, and four-witness smooth-moduli cover from transcribed source matrices and the twenty Cox quadrics, followed by an independent consequence check."
   }
 }

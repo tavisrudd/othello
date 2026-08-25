@@ -63,21 +63,31 @@ the mathematical narrative.
   proof gives the geometric rank argument and a compact witness table.
 - The inverse graph and both compositions are written out in the quotient
   theorem.
+- The quotient theorem isolates the orbit-section component and requires the
+  same corrected point to lie in the tangent-projection isomorphism open.  In
+  the Cox application this is enforced by taking the kernel of evaluation at
+  one orbit-test point in that open.
+- The public derivation program reconstructs the saturated lattice, Cox
+  weights, Jacobian minors, and four-witness cover from the transcribed source
+  data.  All Python verification entry points reject optimized execution.
 - The new theorem is not formalized in Lean.  Paper metadata must continue to
   record formal coverage as absent.
 
 ## Remaining work, in order
 
-The deterministic manuscript, metadata, verification, stale-source, and
-standalone-export gates pass. Remaining acceptance work is:
+The authority manuscript, metadata, verification, and stale-source gates
+pass. The standalone and public repositories remain at the pre-repair
+candidate. Remaining acceptance work is:
 
 1. independent hostile algebraic-geometry review;
 2. independent hostile quotient/descent/computation review;
 3. independent full-public-repository and expert-exposition review, using the
    complete `m=1` paper as context only;
-4. repair every accepted finding and rerun fresh referee rounds on the
-   repaired candidate;
-5. close only after all three specialties return clean verdicts.
+4. commit the repaired authority and evidence bundle, then synchronize and
+   validate the standalone mirror;
+5. rerun fresh referee rounds on the synchronized candidate and close only
+   after all three specialties return clean verdicts;
+6. deposit a new Zenodo version before restoring the concept-DOI badge.
 
 ## Acceptance gate
 

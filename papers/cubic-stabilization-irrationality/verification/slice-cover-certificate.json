@@ -10,25 +10,57 @@
         "3*a - b - 2",
         "31223016*b**2 - 435944529*b + 1306078948"
       ],
-      "zero_choice_0_D_1_M": [1, 1, 0]
+      "zero_choice_0_D_1_M": [
+        1,
+        1,
+        0
+      ]
     },
     {
       "smooth_localized_elimination_basis": [
         "3*a - b - 2",
         "(3*b - 26)*(3*b - 13)"
       ],
-      "zero_choice_0_D_1_M": [1, 1, 1]
+      "zero_choice_0_D_1_M": [
+        1,
+        1,
+        1
+      ]
     }
   ],
   "first_three_branch_outcomes": [
-    {"chosen_zero_factors": "DDD", "localized_zero_locus": "empty"},
-    {"chosen_zero_factors": "DDM", "localized_zero_locus": "empty"},
-    {"chosen_zero_factors": "DMD", "localized_zero_locus": "empty"},
-    {"chosen_zero_factors": "DMM", "localized_zero_locus": "empty"},
-    {"chosen_zero_factors": "MDD", "localized_zero_locus": "empty"},
-    {"chosen_zero_factors": "MDM", "localized_zero_locus": "empty"},
-    {"chosen_zero_factors": "MMD", "localized_zero_locus": "survives"},
-    {"chosen_zero_factors": "MMM", "localized_zero_locus": "survives"}
+    {
+      "chosen_zero_factors": "DDD",
+      "localized_zero_locus": "empty"
+    },
+    {
+      "chosen_zero_factors": "DDM",
+      "localized_zero_locus": "empty"
+    },
+    {
+      "chosen_zero_factors": "DMD",
+      "localized_zero_locus": "empty"
+    },
+    {
+      "chosen_zero_factors": "DMM",
+      "localized_zero_locus": "empty"
+    },
+    {
+      "chosen_zero_factors": "MDD",
+      "localized_zero_locus": "empty"
+    },
+    {
+      "chosen_zero_factors": "MDM",
+      "localized_zero_locus": "empty"
+    },
+    {
+      "chosen_zero_factors": "MMD",
+      "localized_zero_locus": "survives"
+    },
+    {
+      "chosen_zero_factors": "MMM",
+      "localized_zero_locus": "survives"
+    }
   ],
   "fourth_product_on_survivor_line_factorization": "-(b - 1)**4*(4*b - 17)*(16*b - 85)*(83246*b**2 - 872181*b + 2185995)",
   "human_coprimality_checks": {
@@ -38,7 +70,27 @@
     "fourth_quadratic_at_26_over_3": "7918133/9",
     "quadratic_resultant": "-48353381094689774718359510"
   },
-  "schema": "quartic-del-pezzo-two-variable-slice-cover-v2",
+  "schema": "quartic-del-pezzo-two-variable-slice-cover-v3",
+  "slice_coefficient_matrix": [
+    [
+      "-77/15",
+      "17/84",
+      "0",
+      "-19/660"
+    ],
+    [
+      "-77/3",
+      "0",
+      "0",
+      "1/2"
+    ],
+    [
+      "-11",
+      "0",
+      "2/15",
+      "0"
+    ]
+  ],
   "symbolic_four_hyperplane_evaluation_determinants": [
     "17*(8*a - 27)**2*(3968*a - 1349*b - 2619)/15093540",
     "(568453977*a**3 - 373279764*a**2*b - 1658788404*a**2 + 59068867*a*b**2 + 976763788*a*b + 925668016*a - 128537024*b**2 - 359163728*b - 10185728)/2575198080",
@@ -52,19 +104,98 @@
     "-(a - 1)*(4*b - 17)*(13*a - 5*b - 8)*(32*a*b + 85*a - 117*b)"
   ],
   "tangent_orbit_witnesses": [
-    {"tangent_z": [1, 3, 7], "orbit_e": [2, 3, 5, 7, 11], "orbit_z": [2, 4, 9]},
-    {"tangent_z": [2, 5, 11], "orbit_e": [3, 4, 7, 13, 17], "orbit_z": [1, 6, 10]},
-    {"tangent_z": [3, 8, 13], "orbit_e": [5, 7, 11, 17, 19], "orbit_z": [2, 9, 15]},
-    {"tangent_z": [4, 9, 17], "orbit_e": [2, 5, 11, 19, 23], "orbit_z": [3, 10, 18]}
+    {
+      "orbit_e": [
+        2,
+        3,
+        5,
+        7,
+        11
+      ],
+      "orbit_z": [
+        2,
+        4,
+        9
+      ],
+      "tangent_z": [
+        1,
+        3,
+        7
+      ]
+    },
+    {
+      "orbit_e": [
+        3,
+        4,
+        7,
+        13,
+        17
+      ],
+      "orbit_z": [
+        1,
+        6,
+        10
+      ],
+      "tangent_z": [
+        2,
+        5,
+        11
+      ]
+    },
+    {
+      "orbit_e": [
+        5,
+        7,
+        11,
+        17,
+        19
+      ],
+      "orbit_z": [
+        2,
+        9,
+        15
+      ],
+      "tangent_z": [
+        3,
+        8,
+        13
+      ]
+    },
+    {
+      "orbit_e": [
+        2,
+        5,
+        11,
+        19,
+        23
+      ],
+      "orbit_z": [
+        3,
+        10,
+        18
+      ],
+      "tangent_z": [
+        4,
+        9,
+        17
+      ]
+    }
   ],
   "weight_difference_matrix": [
-    [1, -1, 0],
-    [1, 0, -1],
-    [1, 0, 0]
-  ],
-  "slice_coefficient_matrix": [
-    ["-77/15", "17/84", "0", "-19/660"],
-    ["-77/3", "0", "0", "1/2"],
-    ["-11", "0", "2/15", "0"]
+    [
+      1,
+      1,
+      1
+    ],
+    [
+      -1,
+      0,
+      0
+    ],
+    [
+      0,
+      -1,
+      0
+    ]
   ]
 }

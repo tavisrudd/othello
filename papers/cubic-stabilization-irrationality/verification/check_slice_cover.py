@@ -4,9 +4,13 @@
 import argparse
 import itertools
 import json
+import sys
 from pathlib import Path
 
 import sympy as sp
+
+if sys.flags.optimize:
+    raise RuntimeError("verification must run with Python assertions enabled")
 
 
 def build_certificate():

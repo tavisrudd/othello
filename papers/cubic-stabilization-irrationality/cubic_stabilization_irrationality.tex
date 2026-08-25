@@ -18,22 +18,23 @@
 \newcommand{\ks}{k^{\mathrm s}}
 \newcommand{\Pic}{\operatorname{Pic}}
 
-\title{Explicit Cubic Threefolds Rational after Two Stabilizations}
+\title{Sharpness of Irrationality after One Stabilization for Cubic Threefolds}
 \author{Tavis Rudd\thanks{\texttt{tavisrudd@damnsimple.com}}}
 \date{August 2026}
 \hypersetup{
-  pdftitle={Explicit Cubic Threefolds Rational after Two Stabilizations},
+  pdftitle={Sharpness of Irrationality after One Stabilization for Cubic Threefolds},
   pdfauthor={Tavis Rudd},
   pdfsubject={Exact stable-rationality level of explicit cubic threefolds},
-  pdfkeywords={cubic threefolds, quartic del Pezzo surfaces, stable rationality, universal torsors, Neron-Severi tori, explicit rational parametrizations, birational geometry}
+  pdfkeywords={cubic threefolds, quartic del Pezzo surfaces, stable rationality, universal torsors, Neron-Severi tori, constructive rational quotients, birational geometry}
 }
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
-We exhibit explicit smooth cubic threefolds \(X/\mathbf Q\) for which
-\(X\times\PP^1\) is irrational but \(X\times\PP^2\) is rational.  Thus the
+The theorem that every smooth complex cubic threefold remains irrational
+after multiplication by \(\PP^1\) is sharp.  We exhibit explicit smooth cubic
+threefolds \(X/\mathbf Q\) for which \(X\times\PP^2\) is rational.  Thus the
 least number of independent variables required to make these threefolds
 rational is exactly two, over both \(\mathbf Q\) and \(\mathbf C\).  The
 rationality statement follows from a general result for quartic del Pezzo
@@ -42,11 +43,12 @@ surfaces: if \(k\) has characteristic zero, \(S(k)\ne\varnothing\), and
 \(S\times\A^2\) is \(k\)-rational.  Its proof identifies a rational quotient
 of the projective Cox model by a saturated rank-three subtorus; the residual
 two-dimensional torus is rational.  Applied to the quartic-del-Pezzo
-fibrations of Tschinkel and Zhang, this proves rationality after two
-stabilizations for both of their cubic families.  Their stable-rationality
-conclusions therefore hold with the uniform bound \(\PP^2\).  As a
-consequence, there are smooth projective nonrational fourfolds
-\(Y/\mathbf Q\) such that \(Y\times\A^1\) is rational.
+fibrations of Tschinkel and Zhang, this proves rationality after adjoining two
+variables for both of their cubic series, strengthening their
+stable-rationality conclusion to the uniform bound \(\PP^2\).  Consequently
+the stabilization level is two at explicit points of cubic-threefold moduli
+and infinite at a very general point.  There are also smooth projective
+nonrational fourfolds \(Y/\mathbf Q\) such that \(Y\times\A^1\) is rational.
 \end{abstract}
 
 \noindent\textbf{Keywords.} cubic threefold; quartic del Pezzo surface;
@@ -56,12 +58,13 @@ point; algebraic torus; rationality after affine-line stabilization.
 \section{Introduction and main results}
 
 For a stably rational but nonrational variety, one can ask for the least
-number of independent variables that makes its function field rational.  The
-question is especially sharp for cubic threefolds.  Every smooth complex
+number of independent variables that makes its function field rational.  For
+cubic threefolds the first stabilization never suffices: every smooth complex
 cubic threefold remains irrational after multiplication by \(\PP^1\)
-\cite[Theorem~1.1]{RuddM1}, while explicit smooth cubic threefolds over
-\(\mathbf Q\) are now known to be stably rational \cite[Theorem~1.3]{TZ}.
-We determine the least number for two such threefolds.
+\cite[Theorem~1.1]{RuddM1}.  On the other hand, Tschinkel and Zhang constructed
+explicit smooth cubic threefolds over \(\mathbf Q\) that are stably rational
+\cite[Theorem~1.3]{TZ}.  We prove that their cubic-threefold examples become
+rational after the next stabilization.
 
 For a projective variety \(V/k\), put
 \[
@@ -134,7 +137,7 @@ from equation \eqref{eq:cubic-one} or \eqref{eq:cubic-three} by adding
 \label{cor:cubics}
 \coverage{absent}%
 \uses{thm:two-variable}%
-\imports{tz-cubic-families}%
+\imports{tz-cubic-families,tz-type-classification}%
 For every \(r\geq0\) and \(j\in\{1,3\}\), the variety
 \(X_{j,r}\times\PP^2\) is rational over \(\mathbf Q\).
 \end{corollary}
@@ -201,32 +204,25 @@ codimension-\(r\) linear subspace
 \[
  \Lambda\supset\langle T_pZ,B\rangle
 \]
-with equations \(\lambda_1,\ldots,\lambda_r\) such that, at a general
-\(q\in Z\), the matrix
+with equations \(\lambda_1,\ldots,\lambda_r\).  Suppose there is an open
+\(U_p\subset Z\) on which \(\pi_p\) is an isomorphism and a geometric point
+\(x\in(\Lambda\cap U_p)(\ks)\) in the generically free locus such that the
+matrix
 \begin{equation}
- A(q)_{ij}=\lambda_i(q_j),\qquad q_j\in V_{w_j},
+ A(x)_{ij}=\lambda_i(x_j),\qquad x_j\in V_{w_j},
  \label{eq:coefficient-matrix}
 \end{equation}
-has rank \(r\) and all \(r+1\) maximal minors are nonzero.  Then the
+has rank \(r\) and all \(r+1\) maximal minors nonzero.  Then the
 Rosenlicht quotient \(Z/T\) is \(k\)-rational.
 \end{theorem}
 
 \begin{proof}
-The proof has two parts.  The maximal minors produce a unique point of
-\(\Lambda\) on a general \(T\)-orbit.  The tangent projection then identifies
-that rational section with projective space.
-
-The image of \(\Lambda\) under \(\pi_p\) is a linear
-\(\PP^{n-r}\subset\PP^n\), and
-\begin{equation}
- \pi_p|_{\Lambda\cap Z}:\Lambda\cap Z\dashrightarrow\PP^{n-r}
- \label{eq:restricted-tangent-projection}
-\end{equation}
-is birational on the open where \(\pi_p\) is an isomorphism.  It remains to
-show that \(\Lambda\cap Z\) is a rational section of the \(T\)-action.
+The maximal minors first produce a unique point of \(\Lambda\) on a general
+\(T\)-orbit.  The hypothesis that this section meets \(U_p\) then identifies
+it birationally with projective space.
 
 For a geometric point \(q=\sum q_j+q_B\), where \(q_j\in V_{w_j}\) and
-\(q_B\in\widehat B\), define
+\(q_B\in\widehat B\), put \(A(q)_{ij}=\lambda_i(q_j)\) and define
 \begin{equation}
  \kappa_j(q)=(-1)^j\det A(q)_{\widehat j},\qquad 0\leq j\leq r.
  \label{eq:signed-minors}
@@ -250,16 +246,31 @@ differences occur.  It is also independent of the ordering of the selected
 weight spaces: intrinsically, \(s(q)=t(q)q\) is the unique point of
 \(Tq\cap\Lambda\).  Because \(W\), \(\widehat B\), and \(\Lambda\) descend,
 this uniqueness makes \(s\) Galois equivariant.  Thus \(s\) is a
-\(k\)-rational, orbit-invariant retraction to \(\Lambda\cap Z\) on the open
-where the minors do not vanish.  Hence
-\(\Lambda\cap Z\dashrightarrow Z/T\) is birational.
+\(k\)-rational, orbit-invariant retraction on the open where the action is
+free and the minors do not vanish.  Let \(C\) be the closure of its image.
+Then \(C\dashrightarrow Z/T\) is birational and
+\(C\subset\Lambda\cap Z\).  Since \(x\in\Lambda\), the vector
+\((1,\ldots,1)\) lies in the kernel of \(A(x)\); uniqueness gives
+\(s(x)=x\).  Thus \(C\) meets \(U_p\).
+
+The image of \(\Lambda\) under \(\pi_p\) is a linear
+\(\PP^{n-r}\subset\PP^n\), because \(\Lambda\) contains the centre of the
+linear projection.  The irreducible variety \(C\) has dimension \(n-r\),
+and \(\pi_p\) is injective on the nonempty open \(C\cap U_p\).  Consequently
+\begin{equation}
+ \pi_p|_C:C\dashrightarrow\PP^{n-r}
+ \label{eq:restricted-tangent-projection}
+\end{equation}
+is birational.  Hence \(Z/T\) is \(k\)-rational.
 
 We record the inverse and its domain.  Choose linear forms
 \(\rho_0,\ldots,\rho_{n-r}\) whose restrictions give homogeneous coordinates
 on the image of \(\Lambda\) in \(\PP(V/\widehat T_pZ)\).  Let
-\(U_p\subset Z\) be an open on which \(\pi_p\) is an isomorphism, and let
-\(U\subset U_p\) be the further open where all \(\kappa_j\),
-\(\rho_0(s(q))\) is nonzero and the action is free.  Then
+\(U\subset Z\) be the invariant open where the action is free, all
+\(\kappa_j(q)\) are nonzero, \(s(q)\in U_p\), and
+\(\rho_0(s(q))\ne0\).  These conditions are invariant because \(s\) is
+orbit invariant and nonvanishing of the signed minors is invariant under
+the diagonal torus action.  Then
 \begin{equation}
  \Phi:U/T\longrightarrow\PP^{n-r},\qquad
  [q]\longmapsto[\rho_0(s(q)):\cdots:\rho_{n-r}(s(q))]
@@ -388,14 +399,17 @@ Theorem~\ref{thm:torus-quotient}.
 \label{prop:tangent-section}
 \coverage{absent}%
 \uses{thm:torus-quotient}%
-\imports{tz-cox-model,tz-type-classification}%
+\imports{tz-cox-model,tz-torsor-splitting,tz-type-classification}%
 \evidence{quartic-del-pezzo-slice-cover}%
-For a smooth geometric quartic del Pezzo Cox model, there is a general
-tangent point \(p\) and a codimension-three linear subspace
-\(\Lambda\supset\langle T_pZ,B\rangle\) which satisfies the maximal-minor
-condition of Theorem~\ref{thm:torus-quotient} for \(T_3\).  If the Galois
-image has type \(I_0,I_1,I_2\), or \(I_3\), such a pair
-\((p,\Lambda)\) exists over the ground field.
+For a smooth geometric quartic del Pezzo Cox model, there are a general
+tangent point \(p\), an orbit-test point \(x\), and a codimension-three
+linear subspace \(\Lambda\supset\langle T_pZ,B\rangle\) which satisfy the
+same-orbit tangent-open and maximal-minor conditions of Theorem
+\ref{thm:torus-quotient} for \(T_3\).  If \(Z\) is the projective Cox model
+of a smooth quartic del Pezzo surface \(S/k\) with
+\(S(k)\ne\varnothing\), and the Galois image has type
+\(I_0,I_1,I_2\), or \(I_3\), such a triple \((p,x,\Lambda)\) exists over
+the ground field.
 \end{proposition}
 
 \begin{proof}
@@ -434,30 +448,37 @@ one explicit B\'ezout identity, that
  \label{eq:witness-cover}
 \end{equation}
 Thus every smooth geometric Cox model has a witness for which the tangent
-point is smooth and the four-block evaluation map is an isomorphism.  A
-general three-frame in its four-dimensional source then gives a
-\(3\)-by-\(4\) matrix of rank three with all four maximal minors nonzero.
-In particular, the good incidence open used below is nonempty on every
-geometric fibre.
+point is smooth and the four-block evaluation map is an isomorphism at the
+second Cox point.  Invertibility is open in the pair of points.  Since the
+projective Cox model is geometrically integral, this nonempty open meets the
+open where \(p\) is general for tangent projection and, for that \(p\), the
+open \(U_p\) on which \(\pi_p\) is an isomorphism.  We may also require that
+the \(T_3\)-action be free at the second point \(x\).
 
-It remains to descend a good pair.  Fix a twist of one of the four types.
-Because \(T_3\) and \(B\) are Galois stable, tangent points, three-frames of
-hyperplanes containing \(\langle T_pZ,B\rangle\), and orbit test points form
-a geometrically integral incidence space over \(k\).  More explicitly, after
-restricting to the open where \(\dim\langle T_pZ,B\rangle\) is constant, the
-three-frames form an open in a relative frame bundle over the product of the
-smooth tangent-point locus with the orbit-test locus.  Rank, nonvanishing,
-smoothness, and birational tangent projection define a nonempty
-Galois-invariant open in this bundle.  Its projection to the tangent-point
-factor is dense constructible and therefore contains a nonempty open.
+Let \(H_p\) be the four-dimensional space of tangent hyperplanes containing
+\(B\).  The evaluation isomorphism identifies \(H_p\) with the four selected
+blocks at \(x\).  Hyperplanes in \(H_p\) that vanish at \(x\) form a
+three-dimensional subspace; choose a basis
+\(\lambda_1,\lambda_2,\lambda_3\) and let \(\Lambda\) be their common zero
+locus.  Then \(x\in\Lambda\cap U_p\).  Under the evaluation isomorphism the
+three rows span the hyperplane \(u_0+u_1+u_2+u_3=0\), so their four maximal
+minors are all nonzero.  Thus the point satisfying the minor condition is
+the same point that lies in the tangent-projection isomorphism open.
 
-Choose the universal torsor whose fibre over a fixed point of \(S(k)\) is
-trivial.  Its \(k\)-points are Zariski dense by
+It remains to descend a good triple.  Fix a twist of one of the four types.
+Because \(T_3\) and \(B\) are Galois stable, the preceding conditions define
+a nonempty Galois-invariant open in the product of the tangent-point and
+orbit-test loci.  Its projection to the tangent-point factor is dense
+constructible and therefore contains a nonempty open.
+
+Corollary~3.5 of \cite{TZ} supplies the universal torsor whose fibre over a
+fixed point of \(S(k)\) is trivial.  Its \(k\)-points are Zariski dense by
 \cite[Lemma~2.1]{TZ}, and the same holds in the projective Cox model.  Hence
-the tangent-point open has a \(k\)-point.  At that point, good three-frames
-form a nonempty open in an affine space over \(k\), which has a \(k\)-point
-because \(k\) is infinite.  No individual split-coordinate witness is
-asserted to descend.
+the tangent-point open has a \(k\)-point.  At that point, density again
+supplies a \(k\)-rational orbit-test point in the corresponding
+nonempty open.  The kernel of evaluation at that point is a
+three-dimensional \(k\)-space, so a \(k\)-basis gives \(\Lambda\).  No
+individual split-coordinate witness is asserted to descend.
 
 For type \(I_3\), stability of \(N_3\), \(B\), and the set of four selected
 Cox blocks is checked on the two displayed generators.  Up to conjugacy in
@@ -486,8 +507,9 @@ in Proposition~\ref{prop:tangent-section}.  Lemma~3.2 and Theorem~2.4 of
  \label{eq:rational-quotient}
 \end{equation}
 
-Let \(\mathcal T\to S\) be a universal torsor under the N\'eron--Severi
-torus \(T\), chosen to have a \(k\)-point above a fixed point of \(S(k)\).
+By \cite[Corollary~3.5]{TZ}, let \(\mathcal T\to S\) be a universal torsor
+under the N\'eron--Severi torus \(T\), chosen to have a \(k\)-point above a
+fixed point of \(S(k)\).
 The stable-permutation hypothesis and Hilbert's Theorem~90 give
 \begin{equation}
  H^1(F,T)=0\quad\text{for every field extension }F/k
@@ -525,9 +547,11 @@ of \(S'\), so \(S'\), and therefore \(S\), is \(k\)-rational by
 
 Finally, if \(S\) is stably \(k\)-rational, a nonempty open of a projective
 space is birational to a nonempty open of \(S\times\PP^m\).  Since \(k\) is
-infinite, this supplies a \(k\)-point on \(S\).  Manin's theorem makes
-\(\Pic(S_{\bar k})\) stably permutation \cite{Manin1966}.  This proves the
-last assertion.
+infinite, this supplies a \(k\)-point on \(S\).  Manin's stable birational
+Picard-module obstruction makes \(\Pic(S_{\bar k})\) stably permutation.  In
+the form used here, this consequence of \cite[Theorem~2.2]{Manin1966} is
+recalled immediately before \cite[Proposition~4.1]{TZ} and included in
+\cite[Corollary~4.3]{TZ}.  This proves the last assertion.
 \uses{prop:tangent-section,thm:torus-quotient}%
 \imports{high-degree-del-pezzo,manin-stable-permutation,tz-torsor-splitting,tz-type-classification,voskresenskii-rank-two}%
 \end{proof}
@@ -542,7 +566,8 @@ field \(K=\mathbf Q(t_1,\ldots,t_{r+1})\), and the generic cubic-surface
 fibre is \(K\)-birational, after contracting the distinguished line, to a
 smooth quartic del Pezzo surface \(S/K\) with a \(K\)-point.  Their
 calculation identifies the Galois image as type \(I_1\) for \(j=1\) and type
-\(I_3\) for \(j=3\) \cite[Propositions~5.1--5.2]{TZ}.  Theorem
+\(I_3\) for \(j=3\) \cite[Propositions~5.1--5.2]{TZ}.  Lemma~4.2 of
+\cite{TZ} then makes \(\Pic(S_{\bar K})\) stably permutation.  Theorem
 \ref{thm:two-variable} gives
 \[
  K(S)(u,v)\simeq K(z_1,z_2,z_3,z_4).
@@ -672,13 +697,16 @@ opens \(D_iM_i\ne0\) cover \(\Delta\ne0\).
 
 The cocharacter saturation, type-\(I_3\) actions, Cox weights, determinant-one
 weight differences, and tangent-incidence cover use exact integer and
-rational arithmetic.  The verification bundle checks all four pairs
+rational arithmetic.  The public generator starts from the two type-\(I_3\)
+character matrices and a transcription of the twenty Cox quadrics in
+\cite[Section~3]{TZ}.  It reconstructs the saturated rank-three lattice, the
+residual rank-two quotient, the tangent Jacobian, all four pairs
 \((D_i,M_i)\), the eight localized branches, and the B\'ezout identity above
-with SymPy~1.14.0.  A separate implementation checks the saturated lattice,
-the full type-\(I_3\) action, the rank-two quotient lattice, and the displayed
-numerical tangent matrices.  The quotient criterion, equivariant generic
-trivialization, incidence descent, and function-field argument are proved in
-the text and are not delegated to those programs.
+with SymPy~1.14.0.  A second checker independently verifies the resulting
+cover and quotient minors.  The transcription of the source equations and
+the quotient criterion, equivariant generic trivialization, incidence
+descent, and function-field argument are checked in the text and are not
+delegated to those programs.
 
 No Lean development formalizes Theorem~\ref{thm:cubic-level}, Theorem
 \ref{thm:two-variable}, Theorem~\ref{thm:torus-quotient},
@@ -709,7 +737,9 @@ arXiv:2507.15704v3, 2026,
 
 \bibitem{Manin1966} Yu.~I.~Manin,
 \emph{Rational surfaces over perfect fields},
-Publ. Math. IH\'ES 30 \(1966\), 55--113.
+Publ. Math. IH\'ES 30 \(1966\), 55--113,
+\href{https://doi.org/10.1007/BF02684357}
+{doi:10.1007/BF02684357}.
 
 \bibitem{RuddM1} T.~Rudd,
 \emph{Irrationality of cubic threefolds after one stabilization},

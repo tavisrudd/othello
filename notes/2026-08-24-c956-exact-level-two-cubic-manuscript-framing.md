@@ -79,12 +79,13 @@ are cited as geometric inputs at the points where they are used.
 
 ### Option A — exact cubic threshold (recommended)
 
-**Preferred title:** *Explicit Cubic Threefolds Rational after Two
-Stabilizations*
+**Preferred title:** *Sharpness of Irrationality after One Stabilization for
+Cubic Threefolds*
 
-**Shorter alternative:** *Cubic Threefolds Rational after Two
-Stabilizations*. The adjective “explicit” is preferable because the theorem
-does not concern every smooth cubic threefold.
+This title leads with the universal theorem's sharpness: every smooth cubic
+threefold remains irrational after multiplication by \(\mathbf P^1\), and
+the displayed examples become rational after multiplication by
+\(\mathbf P^2\). It does not assert that every cubic has finite level.
 
 **Opening claim:** the smallest `m` for these explicit smooth cubic
 threefolds is two.
@@ -224,10 +225,10 @@ The abstract should devote roughly equal space to the exact cubic threshold
 and the general surface theorem. The fourfold is one final sentence. The
 technical certificate gets no coefficients in the abstract.
 
-The title must not suggest a universal theorem for smooth cubic threefolds.
-The preferred title therefore includes “Explicit”; the first sentence of the
-abstract names the two examples and the first theorem displays their
-equations.
+The title names the sharpness of the universal one-stabilization theorem; it
+does not claim that every cubic has finite stabilization level.  The first
+sentence of the abstract now makes that logic explicit, and the first theorem
+displays the two examples that witness sharpness.
 
 ## Introduction pitch in five paragraphs
 

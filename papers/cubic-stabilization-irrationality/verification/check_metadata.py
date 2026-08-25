@@ -4,7 +4,11 @@
 import hashlib
 import json
 import re
+import sys
 from pathlib import Path
+
+if sys.flags.optimize:
+    raise RuntimeError("verification must run with Python assertions enabled")
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -47,7 +51,8 @@ assert {item["identifier"] for item in zenodo["related_identifiers"]} == {
 }
 assert "cubic threefolds" in zenodo["keywords"]
 assert "levels of stable rationality" in zenodo["keywords"]
-assert "https://doi.org/10.5281/zenodo.21937490" in readme
+assert "https://doi.org/10.5281/zenodo.21937490" not in readme
+assert re.search(r"No archival DOI is claimed for this\s+revision\.", readme)
 assert "(cubic_stabilization_irrationality.pdf)" in readme
 for relative in (
     "cubic_stabilization_irrationality.tex",
@@ -56,6 +61,7 @@ for relative in (
     "flake.nix",
     "flake.lock",
     "verification/slice-cover-certificate.json",
+    "verification/derive_slice_cover.py",
     "verification/check_slice_cover.py",
 ):
     assert (ROOT / relative).is_file() and relative in readme
@@ -100,7 +106,12 @@ for environment, body in statement_pattern.findall(text):
 assert set(statements) == set(claims)
 for label, statement in statements.items():
     for key, value in statement.items():
-        assert claims[label][key] == value, (label, key)
+        assert claims[label][key] == value, (
+            label,
+            key,
+            claims[label][key],
+            value,
+        )
     assert claims[label]["declarations"] == []
     for key in ("objects", "hypotheses", "conclusion", "cautions"):
         assert claims[label][key]

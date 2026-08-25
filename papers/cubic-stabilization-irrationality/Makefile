@@ -18,6 +18,8 @@ lint:
 	$(LINT_PYTHON) ../scripts/lint_tex_spacing.py $(SOURCE)
 
 verify:
+	$(PYTHON) verification/derive_slice_cover.py \
+		--check-certificate verification/slice-cover-certificate.json
 	$(PYTHON) verification/check_slice_cover.py \
 		--check-certificate verification/slice-cover-certificate.json
 	$(LINT_PYTHON) verification/check_metadata.py

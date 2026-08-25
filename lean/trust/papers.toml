@@ -267,13 +267,11 @@ lane = "clebsch"
 id = "cubic_stabilization_irrationality"
 dir = "papers/cubic-stabilization-irrationality"
 main = "cubic_stabilization_irrationality.tex"
-lane = "clebsch"
+lane = "cubic-threefolds"
 adopted_labels = [
-  "thm:simple-wall-point-column",
-  "thm:ordinary-flop-point-row",
-  "prop:incomplete-gamma",
-  "prop:punctual-corner",
-  "thm:rank-zero-target",
+  "thm:cubic-level",
+  "thm:two-variable",
+  "thm:torus-quotient",
 ]
 
 [[paper]]

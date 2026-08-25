@@ -1,6 +1,6 @@
 {
-  "title": "Explicit Cubic Threefolds Rational after Two Stabilizations",
-  "description": "For each of two explicit smooth cubic threefolds X over Q, this preprint determines the least m for which X times P^m is rational: it is exactly two over both Q and C. The reusable theorem proves that if k has characteristic zero and S/k is a smooth quartic del Pezzo surface with a rational point and stably permutation geometric Picard lattice, then S times A^2, equivalently S times P^2, is k-rational. Applied to both explicit Tschinkel–Zhang families of smooth cubic hypersurfaces, it gives a uniform P^2 rationality bound. Consequently there are smooth projective nonrational fourfolds Y over Q for which Y times A^1 is rational. The release includes an exact-arithmetic certificate for the tangent-incidence calculation; the new rationality theorem is not formalized in Lean.",
+  "title": "Sharpness of Irrationality after One Stabilization for Cubic Threefolds",
+  "description": "The theorem that every smooth complex cubic threefold remains irrational after multiplication by P^1 is sharp. For each of two explicit smooth cubic threefolds X over Q, this preprint proves that the least m for which X times P^m is rational is exactly two, over both Q and C. The reusable theorem proves that if k has characteristic zero and S/k is a smooth quartic del Pezzo surface with a rational point and stably permutation geometric Picard lattice, then S times A^2, equivalently S times P^2, is k-rational. Applied to both Tschinkel–Zhang series of smooth cubic hypersurfaces, it gives a uniform P^2 rationality bound. Consequently there are smooth projective nonrational fourfolds Y over Q for which Y times A^1 is rational. The release includes an exact-arithmetic certificate for the tangent-incidence calculation; the new rationality theorem is not formalized in Lean.",
   "creators": [
     {
       "name": "Rudd, Tavis",
@@ -22,7 +22,7 @@
     "Cox rings",
     "generic tangent projection",
     "rational quotients",
-    "explicit rational parametrizations",
+    "constructive rational quotients",
     "cubic threefolds",
     "birational geometry",
     "affine-line stabilization"

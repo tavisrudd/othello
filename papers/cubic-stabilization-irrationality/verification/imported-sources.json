@@ -37,7 +37,7 @@
         "requirement": "The stable-permutation obstruction is used for a stably rational geometrically rational surface over a perfect field."
       }
     ],
-    "pinpoint": "stable-permutation necessity for stably rational surfaces, as invoked in Tschinkel--Zhang Section 4",
+    "pinpoint": "Theorem 2.2 for birational surfaces; the stable-rational consequence is recalled by Tschinkel--Zhang immediately before Proposition 4.1 and included in Corollary 4.3",
     "used": "Stable rationality implies that the geometric Picard lattice is stably permutation."
   },
   "rudd-one-stabilization": {
@@ -117,8 +117,8 @@
         "requirement": "Remark 2.2 gives splitting over the function field for the Neron--Severi torus; equivariance is supplied by translation."
       }
     ],
-    "pinpoint": "Lemma 2.1, Remark 2.2, and the Cox embedding at the start of Section 3",
-    "used": "Density of rational points, generic splitting of the universal torsor, and its dense-open Cox embedding."
+    "pinpoint": "Lemma 2.1, Remark 2.2, Corollary 3.5, and the Cox embedding at the start of Section 3",
+    "used": "Existence of the pointed universal torsor, density of rational points, generic splitting, and its dense-open Cox embedding."
   },
   "voskresenskii-rank-two": {
     "citation": "Voskresenskii1967",

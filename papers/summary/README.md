@@ -207,7 +207,7 @@ complex as separate victories.
   `X × P¹` irrational and `X × P²` rational. More generally, a quartic del
   Pezzo surface with a rational point and stably permutation geometric
   Picard lattice becomes rational after adjoining two variables.
-  [Explicit Cubic Threefolds with Level of Stable Rationality Two](https://github.com/tavisrudd/cubic-stabilization-irrationality/blob/main/cubic_stabilization_irrationality.pdf).
+  [Sharpness of Irrationality after One Stabilization for Cubic Threefolds](https://github.com/tavisrudd/cubic-stabilization-irrationality/blob/main/cubic_stabilization_irrationality.pdf).
 
 ## Theorems over infinite families
 
@@ -261,7 +261,7 @@ boundary, and reproducible entry points.
 | Reconstructing PG(2,13), its conic, and polarity from the minimum words of a binary conic code | Coding / finite geometry | Weighted pair data on minimum words recover a marked projective plane, conic, and polarity. | [PDF](https://github.com/tavisrudd/q13-passant-code/blob/main/passant_code_q13.pdf) · [repo](https://github.com/tavisrudd/q13-passant-code) |
 | Chordal and Conference Cubics: Reconstruction and a Residual C₂-Torsor | Invariant theory / algebraic combinatorics | Distinct chordal and conference cubics recover one marked six-axis carrier; the residual chordal-line torsor is distinct from the global-negation/Frobenius torsor. | [PDF](https://github.com/tavisrudd/chordal-conference-reconstruction/blob/main/chordal_conference_reconstruction.pdf) · [repo](https://github.com/tavisrudd/chordal-conference-reconstruction) |
 | Hodge Atoms as Occurrence-Indexed Marker Ledgers | Algebraic geometry / quantum cohomology | The standard abstract Hodge-atom chemical formula is the Hodge specialization of an occurrence-indexed categorical marker ledger, with an effective weak-factorization quotient and a strictly one-step rank-two obstruction. | [PDF](https://github.com/tavisrudd/hodge-atom-marker-ledger/blob/main/hodge_atom_marker_ledger.pdf) · [repo](https://github.com/tavisrudd/hodge-atom-marker-ledger) |
-| Explicit Cubic Threefolds with Level of Stable Rationality Two | Algebraic geometry / birational geometry | Two explicit smooth cubic threefolds have exact stable-rationality level two; the reusable surface theorem proves `S × A²` rational from a rational point and a stably permutation geometric Picard lattice. | [PDF](https://github.com/tavisrudd/cubic-stabilization-irrationality/blob/main/cubic_stabilization_irrationality.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-irrationality) |
+| Sharpness of Irrationality after One Stabilization for Cubic Threefolds | Algebraic geometry / birational geometry | The universal one-stabilization irrationality bound is sharp: two smooth cubic threefolds have exact stable-rationality level two; the reusable surface theorem proves `S × A²` rational from a rational point and a stably permutation geometric Picard lattice. | [PDF](https://github.com/tavisrudd/cubic-stabilization-irrationality/blob/main/cubic_stabilization_irrationality.pdf) · [repo](https://github.com/tavisrudd/cubic-stabilization-irrationality) |
 | Standard Flips of Discrepancy One: Extremal J-Normalization and the Meijer Aperture at ν=1 | Algebraic geometry / quantum cohomology | An exact `z`-order count and the `ν=1` Barnes sector complete the discrepancy-one range in Shen--Shoemaker's extremal flip theorem. | [PDF](https://github.com/tavisrudd/discrepancy-one-flips/blob/main/discrepancy_one_flips.pdf) · [repo](https://github.com/tavisrudd/discrepancy-one-flips) |
 | Arcs complete outside a conic: a prescribed-hole defect identity and matching-design rigidity | Finite geometry / designs | A universal pointwise defect identity gives matching-design rigidity, stability, and conic-relative bounds. | [PDF](https://github.com/tavisrudd/arcs-complete-outside-conic/blob/main/arcs_complete_outside_conic.pdf) · [repo](https://github.com/tavisrudd/arcs-complete-outside-conic) |
 | Integral Secant Distributions and Improved Bounds for Complete `(k,n)`-Arcs | Finite geometry / designs / coding theory | Integer maximal-secant distributions give divisor-indexed linear improvements, followed by modular-lift bounds in characteristics two and three. | [PDF](https://github.com/tavisrudd/integral-secant-arcs/blob/main/integral_secant_arcs.pdf) · [repo](https://github.com/tavisrudd/integral-secant-arcs) |
@@ -804,9 +804,9 @@ changes no higher-discrepancy statement.
 
 ---
 
-#### Explicit Cubic Threefolds with Level of Stable Rationality Two
+#### Sharpness of Irrationality after One Stabilization for Cubic Threefolds
 
-[PDF](https://github.com/tavisrudd/cubic-stabilization-irrationality/blob/main/cubic_stabilization_irrationality.pdf) · [Repository](https://github.com/tavisrudd/cubic-stabilization-irrationality) · [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21937490-blue.svg)](https://doi.org/10.5281/zenodo.21937490)
+[PDF](https://github.com/tavisrudd/cubic-stabilization-irrationality/blob/main/cubic_stabilization_irrationality.pdf) · [Repository](https://github.com/tavisrudd/cubic-stabilization-irrationality)
 
 **Standout result.** For two explicit smooth cubic threefolds over `Q`, the
 smallest `m` for which `X × P^m` is rational is exactly two, over both `Q`

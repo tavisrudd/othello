@@ -33,16 +33,16 @@ a sixth numbered paper — it is a source-development body feeding future forwar
 passages paper. Downstream of Paper V sits the **cubic-threefold stabilization** programme on
 `A₅`-invariant cubic threefolds (§3), which now has two manuscripts of its own: *Irrationality of
 Cubic Threefolds after One Stabilization*, an unnumbered epilogue to the series rather than a sixth
-number, and *Gamma Point Rows under Quantum Wall Crossing and a Criterion for Stable Irrationality*,
-which states the all-`m` claim conditionally. A short standalone correction note, *Standard Flips of
+number, and *Sharpness of Irrationality after One Stabilization for Cubic Threefolds*, which determines the
+level exactly for two explicit smooth cubic threefolds. A short standalone correction note, *Standard Flips of
 Discrepancy One*, came out of the same work and is published with a DOI.
 [`papers/papers-index.md`](../papers/papers-index.md) is the registry — it maps every result to its
 paper and its proof location.
 
-The quantum-birational methods branch carries the all-`m` manuscript named
-above, *Gamma Point Rows under Quantum Wall Crossing and a Criterion for Stable
-Irrationality*. It separates an unconditional endpoint contrast and a proved
-transport mechanism from the threshold comparison it does not prove.
+The second cubic-stabilization manuscript now uses quartic-del-Pezzo torsors
+and rational torus quotients rather than the retired all-stabilization route.
+It proves the exact transition from irrationality after \(\mathbf P^1\) to
+rationality after \(\mathbf P^2\) for the two displayed examples.
 
 ---
 
@@ -1212,9 +1212,11 @@ The remaining headline Clebsch-facing results and censuses are:
 
 **Two manuscripts, both complete drafts and neither submitted.** *Irrationality of Cubic Threefolds
 after One Stabilization* is the unnumbered epilogue to the numbered series — deliberately not a
-sixth number — and proves its headline unconditionally. *Gamma Point Rows under Quantum Wall
-Crossing and a Criterion for Stable Irrationality* states the all-`m` claim conditionally. Priority
-closure is open for most of the research material around them.
+sixth number — and proves its headline unconditionally. *Sharpness of
+Irrationality after One Stabilization for Cubic Threefolds* proves that the first
+rational stabilization of two displayed smooth cubic threefolds occurs at
+level two. Priority closure is open for most of the research material around
+them.
 
 - **The carrier, and why the exotic sheet is forced.** Roulleau's pencil of `A₅`-invariant cubic
   threefolds. Its six `D₅` axes have Gram `6I − J` and Winger's five `A₄` quotient axes have Gram
@@ -2526,7 +2528,7 @@ Improved Bounds for Complete (k,n)-Arcs* under the alias
 | `conference_cut_spectra`            | Balanced Cuts of Conference Matrices: Squared-Spectrum Rigidity and Hermitian Holonomy                                                   | `golden`           | 16    | 6   | 0   | 2    | 1   | 19     |
 | `continuation_graph_rigidity`       | Semilinear rigidity of four-point-frame continuation graphs                                                                              | `continuation`     | —     | 5   | 3   | 3    | 0   | 18     |
 | `cubic_gluing_resolvent`            | The Discriminant Resolvent of the \(A_5\)-Cubic Pencil                                                                                   | `cubic-threefolds` | 11    | 1   | 1   | 3    | 3   | 22     |
-| `cubic_stabilization_irrationality` | Gamma Point Rows under Quantum Wall Crossing and a Criterion for Stable Irrationality                                                    | `clebsch`          | 48    | 9   | 9   | 12   | 2   | 148    |
+| `cubic_stabilization_irrationality` | Sharpness of Irrationality after One Stabilization for Cubic Threefolds                                                           | `cubic-threefolds` | 10    | 3   | 1   | 5    | 3   | 6      |
 | `cubic_stabilization_m1`            | Irrationality of Cubic Threefolds after One Stabilization                                                                                | `cubic-threefolds` | 21    | 2   | 2   | 6    | 5   | 40     |
 | `dihedral_schreier_node_kayles`     | Node Kayles on Conic Schreier Graphs: Dihedral and Polyhedral Templates                                                                  | `dihedral`         | 19    | 15  | 4   | 4    | 5   | 90     |
 | `discrepancy_one_flips`             | Standard Flips of Discrepancy One: Extremal \(J\)-Normalization and the Meijer Aperture at \(\nu=1\)                                     | `clebsch`          | 12    | 3   | 6   | 2    | 3   | 34     |
@@ -2574,8 +2576,10 @@ Its exchange-statistics material sits in a separate lane-local companion, writte
 and theory note rather than an experimental proposal. **The stabilization epilogue is a manuscript
 but not a numbered paper** — one unnumbered, independently readable companion downstream of Paper V,
 whose headline is proved and whose remaining relative, descent, boundary, and priority gates belong
-to the surrounding research programme rather than to it. The all-`m` companion, *Gamma Point Rows
-under Quantum Wall Crossing*, is unnumbered as well and explicitly conditional. The Paper-I computational companion stays
+to the surrounding research programme rather than to it. The second
+stabilization manuscript, *Sharpness of Irrationality after One Stabilization
+for Cubic Threefolds*, is also unnumbered and replaces the withdrawn conditional
+all-stabilization draft. The Paper-I computational companion stays
 unnumbered and becomes a forward-pointing evidence companion once the q13 paper is public. The
 37-page integrated manuscript *Deep-hole rigidity and factorization memory in the Clebsch hexagon
 code* is preserved only as a fallback. The rigidity paper has itself split — a human

@@ -137,19 +137,19 @@ F13*)
   reconstruction branch.
 
 **Active unnumbered candidate — cubic-stabilization-irrationality** —
-*Gamma Point Rows under Quantum Wall Crossing and a Criterion for Stable
-Irrationality*
-- *Status:* externally circulation-ready preprint with exact claim and
-  literature ledgers, a paper-owned release checker, an isolated referee
-  dossier, and a verified standalone export.
-- *Scope:* proves an exact ambient common-point coordinate for smooth
-  projective simple VGIT walls oriented by \(r_+<r_-\), and a path-local
-  point-row theorem for projective ordinary flops; gives incomplete-Gamma and Fourier-boundary
-  no-go theorems; proves the cubic/projective endpoint contrast; and derives
-  irrationality of every \(X\times\mathbf P^m\) under the explicitly named
-  complete-neutral continuation hypothesis.
-- *Boundary:* the all-stabilizations conclusion is conditional; no
-  unconditional general factorization theorem is claimed.
+*Sharpness of Irrationality after One Stabilization for Cubic Threefolds*
+- *Status:* ten-page release candidate with an exact-arithmetic tangent-slice
+  certificate, current claim/import ledgers, a clean standalone export, and
+  multiple hostile referee rounds in progress.
+- *Scope:* proves that two explicit smooth cubic threefolds have level of
+  stable rationality exactly two over both \(\mathbf Q\) and \(\mathbf C\);
+  proves \(S\times\mathbf A^2\) rational for quartic del Pezzo surfaces with a
+  rational point and stably permutation geometric Picard lattice; and gives a
+  reusable constructive criterion for rational torus quotients from descended
+  tangent sections.
+- *Boundary:* the upper bound concerns the two displayed cubic families, not
+  every smooth cubic threefold; the independent one-stabilization theorem
+  supplies the lower bound for the cubic threefold members.
 
 **5 · `complete-repair-ports`** — *Complete Bounded Repair Ports: Transfer, Reliability, and
 Geometric Structure*

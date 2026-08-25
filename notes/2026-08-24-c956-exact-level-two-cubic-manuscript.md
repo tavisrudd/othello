@@ -6,8 +6,8 @@
 
 ## Result
 
-The replacement paper is *Explicit Cubic Threefolds Rational after Two
-Stabilizations*. For each of the two displayed smooth cubic threefolds
+The replacement paper is *Sharpness of Irrationality after One Stabilization
+for Cubic Threefolds*. For each of the two displayed smooth cubic threefolds
 `X/Q`, it proves
 
 `ell_Q(X) = ell_C(X_C) = 2`.
@@ -42,30 +42,37 @@ absence assertion.
 - The projective weights are handled up to common translation; only the
   selected weight sum and its complement are asserted to descend.
 - Saturation removes the spurious projective `mu_2` kernel.
-- The quotient proof gives signed-minor orbit correction, an inverse graph,
-  and both composites on stated dense opens.
-- The incidence descent is exhibited as an open in a relative frame bundle.
+- The quotient proof gives signed-minor orbit correction, isolates the image
+  component, makes that same component meet the tangent-projection
+  isomorphism open, and records an inverse graph with both composites.
+- The incidence proof chooses one orbit-test point in the tangent-projection
+  open and takes the kernel of evaluation there; this forces the
+  maximal-minor and tangent-open conditions to hold on the same component.
 - The generic-fibre proof is an explicit function-field identity and invokes
   no specialization principle.
 - The Proposition 5.2 cubic tail is transcribed as
   `x_3^3 - x_3*x_4^2 + x_4^3`.
 - The coefficient wall is confined to an appendix; the main proof has a
   compact four-witness table and geometric explanation.
-- `make check` passes in the authority and standalone repositories. The PDF
-  is warning-free, nine pages, and visually inspected on the title, theorem,
-  quotient, rationality-proof, certificate, and references pages.
-- The exact-arithmetic replay checks the Cox weights, saturation, tangent
-  matrices, eight localized branches, and Bezout identity.
+- `make check` passes in the authority. The PDF is warning-free, ten pages,
+  and its revised title and first-page hierarchy have been visually inspected.
+- The exact-arithmetic replay reconstructs the Cox weights, saturation,
+  tangent matrices, eight localized branches, and Bezout identity from the
+  transcribed source data. A second checker verifies the resulting
+  certificate, and all verification programs reject optimized Python so that
+  assertions cannot be bypassed.
 - No Lean development formalizes the new result; the claim map records
   coverage as `absent`. The earlier unrelated paper-local Lean package was
   audited and removed with the obsolete manuscript rather than represented as
   coverage of this theorem.
-- Assigned DOI: `10.5281/zenodo.21937490`.
+- No archival DOI is claimed for this revision. The old concept DOI still
+  resolves to the retired manuscript and has been removed from release-facing
+  README surfaces until a new version is deposited.
 
-Authority release source: `2fa9c0564`. Standalone cleanup commit: `2a5f0d2`.
-Standalone synchronized commit: `d7dd18a`. Export verification records source
-commit `2fa9c056477b5f334d76868a772c4c526ebb69b3` and nineteen tracked files.
-The removed conditional sources remain recoverable from Git history.
+The repaired authority remains ahead of standalone commit `d7dd18a`; the
+standalone mirror, export provenance, and public GitHub repository must be
+updated only after the present hostile-review round passes. The removed
+conditional sources remain recoverable from Git history.
 
 ## EJ + TT closeout
 
@@ -85,11 +92,12 @@ open.
 | Does the rational CARAT class `(5,232,15)` with non-retract-rational dual yield a separate torus theorem? | open, independent | requires a dedicated post-2017 source audit and standalone proof packet; excluded from this paper |
 | Is there kernel-checked formal coverage of the new quotient and rationality theorems? | open coverage gap | claim map honestly records `absent`; a future formalization needs its own task and scope |
 | Is any global firstness claim supported? | settled editorially | none is needed or made; the theorem is stated on its mathematical content and exact source chain |
-| Is there a remaining descent, saturation, incidence, or function-field gap found by the cold audits? | settled | no fatal gap found; all identified repairs are in the committed manuscript and the integrated gate passes |
+| Is there a remaining descent, saturation, incidence, or function-field gap found by the cold audits? | under final recheck | the latest same-component gap is repaired in the authority; fresh quotient and geometry reads must accept it before release |
 
 The hostile referee rounds requested after the first release-candidate build
 remain an acceptance gate. Their findings and repairs will be appended here
 before final closure.
 
-**Vibe:** strong release candidate, not yet closed. The deterministic and
-export gates are green; independent hostile proof verdicts remain outstanding.
+**Vibe:** strong mathematical candidate, not yet releasable. The authority
+gate is green; standalone, public GitHub, Zenodo, and fresh hostile verdicts
+remain outstanding.
