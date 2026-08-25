@@ -3,18 +3,19 @@
 **Lane**: `complete-ports`
 
 **Date**: 2026-08-24
-**Status**: ACTIVE; C959 CANONICAL PUNCTURING--SHORTENING POSITIONING REPAIRED,
-21-PAGE AUTHORITY AND 40-FILE STANDALONE GATES PASSED, AND LOCAL EXPORT
-COMMITTED; C325 APPENDIX VERIFIER AND C953 AGGREGATE REVIEW FOLLOW; C955
-AMBIENT-REALIZATION SPECTRUM IS QUEUED AFTER C953; NO PUSH OR DEPOSIT
+**Status**: ACTIVE; C960 EXACT UNGATED ARBITRARY-RANK TRANSFER PROVED,
+PRIORITY-BOUNDED, HARD-RED-TEAMED, AND EXPORTED; 22-PAGE AUTHORITY AND 40-FILE
+STANDALONE GATES PASS; C325 APPENDIX VERIFIER AND C953 AGGREGATE REVIEW FOLLOW;
+C955 AMBIENT-REALIZATION SPECTRUM AND C961 REPEATED-CONCATENATION COMPOSITION
+ARE QUEUED AFTERWARD; NO PUSH OR DEPOSIT
 **Theorem source lane**: archived [`repaircodes`](done/2026-07-13-projective-completion-repaircodes.md)
 **Current private paper**: [`complete-repair-ports`](../../papers/complete-repair-ports/README.md)
 **Canonical paper identity**: `complete-ports` — *Exact Transfer of Bounded Linear Recovery and
 Relative Weight Hierarchies*
 **Standalone paper repository**: `tavisrudd/complete-repair-ports` at
 `~/src/math-papers/complete-repair-ports`
-**Current local standalone commit**: `5e350c1` (C959 canonical-pair and
-positioning revision; verified; no push or deposit)
+**Current local standalone commit**: `11bbd01` (C960 exact ranked finite
+transfer revision; verified; no push or deposit)
 **Approved paper license**: MIT
 
 ## Goal
@@ -49,9 +50,10 @@ Hierarchies*.
 2. the associated nested code pair and its exact sequence;
 3. relative generalized Hamming weights as the exact minimum helper costs for
    recovering subspaces of each dimension;
-4. exact eventual confinement and transfer of all normalized equations;
-5. exact ungated finite rank-one transfer from target-constrained inner coset
-   weights and the complete outer functional dual;
+4. exact ungated finite arbitrary-rank transfer from target-normalized joint
+   coset-support costs and the complete outer functional dual;
+5. the RGHW outer-distance criterion and the pointed weighted formula as
+   specializations of that exact optimization;
 6. the best-target GHW identity, cooperative-locality min--max corollary, and
    MDS rigidity;
 7. positive-density realization and bounded service-rate-region transfer;
@@ -93,6 +95,15 @@ Completed preparation:
 **Discovery companion**: [complete-ports discovery track](../complete-ports-discovery-track.md).
 
 Current and completed strengthening:
+
+- [C960 exact ungated arbitrary-rank transfer](../2026-08-24-c960-ungated-ranked-transfer.md)
+  proves that target-normalized joint coset-support costs optimized over maps
+  into the full outer functional dual give the exact first nonconfined cost,
+  recovers the RGHW and pointed formulas as specializations, derives the
+  radius-free collapse and demandwise service-rate consequences, closes the
+  generalized-covering/coset-weight priority boundary, and exports the
+  verified 22-page paper and synchronized portfolio summary without push or
+  deposit.
 
 - [C959 puncturing--shortening identification and positioning repair](../2026-08-24-c959-puncture-shortening-positioning.md)
   identifies the associated pair as the shortening--puncturing pair of the
@@ -167,8 +178,9 @@ excluded. The shared Lean monorepo remains separately owned. Never copy raw buil
 
 The rebuilt manuscript contains the shortening--puncturing pair of the inner
 dual, its RGHW
-interpretation, exact finite and eventual rank-stratified confinement after
-the outer-distance gate, exact ungated weighted finite transfer in rank one,
+interpretation, exact ungated finite rank-stratified transfer through joint
+prescribed-coset support optimization, the outer-distance RGHW and pointed
+weighted specializations,
 best-target GHW and cooperative-locality consequences, the symmetric MDS
 staircase and rigidity, positive-density and service-rate transfer, reliability
 and coefficient-presentation separations, and the projective-simplex family.
@@ -177,9 +189,10 @@ generic coefficient optimization, and BGS packing remain outside this paper.
 
 ## Next step
 
-C959 is closed.  Run C325 appendix-only verification next, then C953
+C960 is closed.  Run C325 appendix-only verification next, then C953
 aggregate referee/export review.  C955
-owns the later coefficient-presentation spectrum. Before nontrivial proof development or
+owns the later coefficient-presentation spectrum, followed by C961 on repeated-concatenation
+composition. Before nontrivial proof development or
 formalization, read the paper-specific expert dossier
 [`papers/expert-profiles/05-complete-repair-ports.md`](../../papers/expert-profiles/05-complete-repair-ports.md).
 
@@ -188,6 +201,6 @@ hierarchy. C220 remains omitted. Shared-Lean extraction is planned under
 [C287](../2026-07-17-c287-shared-lean-extraction-plan.md), remains separately build-system-owned,
 and is not evidence for or a release dependency of the paper-local companion.
 
-Local standalone synchronization is complete at `5e350c1`. Publication, push,
+Local standalone synchronization is complete at `11bbd01`. Publication, push,
 and deposit remain gated on C325 and C953; the approved repository metadata
 does not authorize any of those external actions.
