@@ -3500,8 +3500,17 @@
       "last": 960,
       "purpose": "arbitrary-rank ungated transfer via minimum-support lifts",
       "sequence": 389
+    },
+    {
+      "count": 1,
+      "first": 961,
+      "kind": "reservation",
+      "lane": "complete-ports",
+      "last": 961,
+      "purpose": "repeated-concatenation composition law for prescribed-coset recovery costs",
+      "sequence": 390
     }
   ],
-  "next_id": 961,
+  "next_id": 962,
   "schema": "codex-task-id-allocations-v1"
 }
