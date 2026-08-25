@@ -7,7 +7,7 @@
 now `5/3`; the exact `5/3` endpoint is also absent, while a matching
 `5/3+o(1)` construction remains open; the sharpest `+1` triangular target is
 reduced to the almost-duplex/near-Rédei/moment conditions
-`(SR18)--(SR24l)`; no
+`(SR18)--(SR24l')`; no
 manuscript work
 
 ## First-gate findings — 24 August 2026
@@ -2398,7 +2398,7 @@ family is lower priority.
   profile.  In characteristic three these profiles force the carry-free
   moment triangle `(SR24b)--(SR24d)`, the three compatible
   Frobenius-quadratic normal forms `(SR24e)--(SR24g)`, and the weight-`3q`
-  dual word `(SR24k)--(SR24l)`.  The Vandermonde obstruction
+  dual word and signed spectrum `(SR24k)--(SR24l')`.  The Vandermonde obstruction
   `(SR24h)--(SR24j)` eliminates every two-monomial completion
   and, more generally, forces `Omega(q)` completed-fiber spectral complexity
   in each triangle chart.  The other triangular row requires a linear
