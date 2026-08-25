@@ -192,6 +192,24 @@
               "affine_boundary_points": 6,
               "directions_with_at_most_six_missing_intercepts": 79,
               "exceptional_directions": 3,
+              "full_core_direction_ledger": {
+                "remaining_direction_count": 77,
+                "remaining_direction_profile": {
+                  "1_secants": 53,
+                  "2_secants": 1,
+                  "4_secants": 27
+                },
+                "third_connector_3_secants": 1,
+                "three_infinity_boundary_directions": {
+                  "1_secants": 26,
+                  "2_secants": 1,
+                  "4_secants": 54
+                },
+                "two_vertex_directions": {
+                  "2_secants": 80,
+                  "3_secants": 1
+                }
+              },
               "maximum_fiber_size": 4,
               "minimum_distinct_intercepts": 75
             },
@@ -203,6 +221,13 @@
               ],
               "common_external_line_lower_bound": 1520,
               "nine_boundary_point_rescue_upper_bound": 738
+            },
+            "colored_fiber_graph": {
+              "edges": 231,
+              "missing_color_incidences": 9,
+              "selector_matching_edges": 78,
+              "unmatched_vertices": 1,
+              "vertices": 157
             },
             "projection_fibers_for_a_b_and_a_over_b": {
               "doubletons": 77,
@@ -377,6 +402,24 @@
               "affine_boundary_points": 6,
               "directions_with_at_most_six_missing_intercepts": 241,
               "exceptional_directions": 3,
+              "full_core_direction_ledger": {
+                "remaining_direction_count": 239,
+                "remaining_direction_profile": {
+                  "1_secants": 161,
+                  "2_secants": 1,
+                  "4_secants": 81
+                },
+                "third_connector_3_secants": 1,
+                "three_infinity_boundary_directions": {
+                  "1_secants": 80,
+                  "2_secants": 1,
+                  "4_secants": 162
+                },
+                "two_vertex_directions": {
+                  "2_secants": 242,
+                  "3_secants": 1
+                }
+              },
               "maximum_fiber_size": 4,
               "minimum_distinct_intercepts": 237
             },
@@ -388,6 +431,13 @@
               ],
               "common_external_line_lower_bound": 14399,
               "nine_boundary_point_rescue_upper_bound": 2196
+            },
+            "colored_fiber_graph": {
+              "edges": 717,
+              "missing_color_incidences": 9,
+              "selector_matching_edges": 240,
+              "unmatched_vertices": 1,
+              "vertices": 481
             },
             "projection_fibers_for_a_b_and_a_over_b": {
               "doubletons": 239,
@@ -562,6 +612,24 @@
               "affine_boundary_points": 6,
               "directions_with_at_most_six_missing_intercepts": 727,
               "exceptional_directions": 3,
+              "full_core_direction_ledger": {
+                "remaining_direction_count": 725,
+                "remaining_direction_profile": {
+                  "1_secants": 485,
+                  "2_secants": 1,
+                  "4_secants": 243
+                },
+                "third_connector_3_secants": 1,
+                "three_infinity_boundary_directions": {
+                  "1_secants": 242,
+                  "2_secants": 1,
+                  "4_secants": 486
+                },
+                "two_vertex_directions": {
+                  "2_secants": 728,
+                  "3_secants": 1
+                }
+              },
               "maximum_fiber_size": 4,
               "minimum_distinct_intercepts": 723
             },
@@ -573,6 +641,13 @@
               ],
               "common_external_line_lower_bound": 131768,
               "nine_boundary_point_rescue_upper_bound": 6570
+            },
+            "colored_fiber_graph": {
+              "edges": 2175,
+              "missing_color_incidences": 9,
+              "selector_matching_edges": 726,
+              "unmatched_vertices": 1,
+              "vertices": 1453
             },
             "projection_fibers_for_a_b_and_a_over_b": {
               "doubletons": 725,

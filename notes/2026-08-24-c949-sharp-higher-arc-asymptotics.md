@@ -5,7 +5,9 @@
 **Status:** active on the user-requested sharpness continuation; the proposed
 `4/3` linear coefficient is excluded and the structural lower coefficient is
 now `5/3`; the exact `5/3` endpoint is also absent, while a matching
-`5/3+o(1)` construction remains open; no manuscript work
+`5/3+o(1)` construction remains open; the sharpest `+1` triangular target is
+reduced to the almost-duplex/near-Rédei conditions `(SR18)--(SR23)`; no
+manuscript work
 
 ## First-gate findings — 24 August 2026
 
@@ -1626,6 +1628,19 @@ above four, and every noncoordinate line must have degree `1,2`, or `4`.
 This is the appropriate reduced input for discovery computation; a duplex
 alone is not the sought construction.
 
+Equivalently, join two elements of `H` by an edge of color `a`, `b`, or
+`a/b` when they form a double fiber in that projection.  The resulting
+three-edge-colored graph has
+
+```text
+|V|=2q-5,       |E|=3(q-4),       9 missing color incidences. (SR19a)
+```
+
+The selector is a near-perfect matching of size `q-3` leaving exactly `t`
+unmatched.  This graph, together with the singleton product identity and the
+line-cap tests, is the appropriate Rust discovery state; the full
+`q^2+q+1`-point plane is no longer the search state.
+
 Indeed the canonical cyclic duplex fails for a sharp geometric reason.  If
 `gamma` generates `F_q^*`, the two graphs
 
@@ -1665,7 +1680,7 @@ coordinates, the nine boundary elements consist of three points on each
 coordinate side.  Six are affine and three lie at infinity.  Hence
 
 ```text
-B_aff=H union {the six affine boundary points},      |B_aff|=2q+1, (SR23)
+B_aff=H union {the six affine boundary points},      |B_aff|=2q+1, (SR22)
 ```
 
 meets every affine line in all but the three directions represented by the
@@ -1677,13 +1692,37 @@ torus set simultaneously satisfies
 ```text
 three projections: 1^3 2^(q-4) on F_q^*;
 q-2 other directions: at least q-6 distinct intercepts;
-every affine line: at most four points of H.          (SR24)
+every affine line: at most four points of H.          (SR23)
 ```
 
 This near-surjective Rédei condition is much stronger than the almost-duplex
 ledger alone.  It is the remaining structural gate: prove that a
-`2q-5`-point torus set with `(SR24)` must fall into a low-degree carrier such
+`2q-5`-point torus set with `(SR23)` must fall into a low-degree carrier such
 as the dead two-conic family, or construct a genuinely different carrier.
+
+The parallel-class ledger of the full core is exact.  Keep the connector
+`z=0` at infinity.  The two directions given by its triangle vertices each
+contain one connector trisecant and `q-1` bisecants.  The three directions
+given by `D intersect {z=0}` each contain one bisecant through the affine
+triangle vertex and
+
+```text
+(N_1,N_2,N_4)=(q/3-1,1,2q/3).
+```
+
+Every remaining one of the `q-4` directions has
+
+```text
+(N_1,N_2,N_4)=(2q/3-1,1,q/3).                       (SR24)
+```
+
+Indeed, in any such direction the line through the affine triangle vertex is
+the unique bisecant; all other lines have core degree one or four.  Summing
+their degrees gives `2q+1` when the infinity point is outside `D`, and
+`3q+1` when it belongs to `D`, forcing the displayed counts.  Together with
+the third connector `z=0`, this direction ledger reconstructs all of
+`(SR12)`.  It is also the strongest input form for a search: parallel classes
+need not be rediscovered.
 
 For comparison, the other triangular survivor `(j,sigma)=(5,-1)` has
 
@@ -2039,10 +2078,11 @@ family is lower priority.
   multiplicative Latin square, with singleton product constraint `(SR19)`.
   The canonical cyclic duplex given by two hyperbolas is excluded by
   `(SR21)`: it has quadratically many common external lines, far beyond the
-  nine boundary points' rescue capacity.  More generally `(SR23)--(SR24)`
+  nine boundary points' rescue capacity.  More generally `(SR22)--(SR23)`
   force `H` to occupy at least `q-6` intercepts in each of `q-2` directions,
-  with no fiber above four.  The other triangular row requires a linear
-  high-secant trade and is therefore a less rigid first target.
+  with no fiber above four, and `(SR24)` fixes every full-core parallel-class
+  profile.  The other triangular row requires a linear high-secant trade and
+  is therefore a less rigid first target.
 - **Settled by `ej`+`tt` — is the nearest classical four-blocking-set core a
   cheap source of the admissible rows?**  Bruen--Fisher is exactly the
   adjacent signed triangle `(j,sigma)=(0,1)`, and adjoining its horizontal

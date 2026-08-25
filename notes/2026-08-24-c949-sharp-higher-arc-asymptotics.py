@@ -3360,11 +3360,22 @@ def audit_sharp_linear_coefficient(output: Path) -> None:
             raise AssertionError("the unselected side matching count changed")
         if 3 + 2 * (q - 4) != 2 * q - 5:
             raise AssertionError("the almost-duplex projection count changed")
+        almost_duplex_colored_edges = 3 * (q - 4)
+        if 2 * almost_duplex_colored_edges != 3 * (2 * q - 5) - 9:
+            raise AssertionError("the almost-duplex colored graph count changed")
         cyclic_duplex_common_external_lower_bound = (q - 1) * (q - 5) // 4
         cyclic_duplex_boundary_rescue_upper_bound = 9 * (q + 1)
         if (cyclic_duplex_common_external_lower_bound
                 <= cyclic_duplex_boundary_rescue_upper_bound):
             raise AssertionError("the cyclic-duplex coverage gap changed")
+        direction_reconstruction = {
+            1: 3 * (q // 3 - 1) + (q - 4) * (2 * q // 3 - 1),
+            2: 2 * (q - 1) + 3 + (q - 4),
+            3: 3,
+            4: 3 * (2 * q // 3) + (q - 4) * (q // 3),
+        }
+        if direction_reconstruction != triangle_j4_spectrum:
+            raise AssertionError("the triangular parallel-class ledger changed")
 
         field_checks.append({
             "field_order": q,
@@ -3435,6 +3446,13 @@ def audit_sharp_linear_coefficient(output: Path) -> None:
                             "singletons": 3,
                             "doubletons": q - 4,
                         },
+                        "colored_fiber_graph": {
+                            "vertices": 2 * q - 5,
+                            "edges": almost_duplex_colored_edges,
+                            "missing_color_incidences": 9,
+                            "selector_matching_edges": q - 3,
+                            "unmatched_vertices": 1,
+                        },
                         "singleton_product_identity": "prod(A0)=prod(B0)prod(C0)",
                         "canonical_cyclic_duplex": {
                             "carrier": ["a*b=1", "a*b=gamma"],
@@ -3452,6 +3470,24 @@ def audit_sharp_linear_coefficient(output: Path) -> None:
                             "directions_with_at_most_six_missing_intercepts": q - 2,
                             "minimum_distinct_intercepts": q - 6,
                             "maximum_fiber_size": 4,
+                            "full_core_direction_ledger": {
+                                "two_vertex_directions": {
+                                    "3_secants": 1,
+                                    "2_secants": q - 1,
+                                },
+                                "three_infinity_boundary_directions": {
+                                    "1_secants": q // 3 - 1,
+                                    "2_secants": 1,
+                                    "4_secants": 2 * q // 3,
+                                },
+                                "remaining_direction_count": q - 4,
+                                "remaining_direction_profile": {
+                                    "1_secants": 2 * q // 3 - 1,
+                                    "2_secants": 1,
+                                    "4_secants": q // 3,
+                                },
+                                "third_connector_3_secants": 1,
+                            },
                         },
                     },
                     "vertex_line_profile": {
