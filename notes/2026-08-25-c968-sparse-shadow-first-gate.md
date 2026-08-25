@@ -51,9 +51,10 @@ serialized tree.
 - Paper-I exhaustive search: automorphism order 120, one vertex orbit;
 - property test: canonical identity invariant under all tested cyclic
   relabelings;
-- black-box CLI tests: Paper-I validation succeeds, a gated Paper-II input
-  exits nonzero while naming its exact required export, repeated canonicalize
-  runs are byte-identical, and identical inputs compare equivalent;
+- black-box CLI tests: Paper-I validation succeeds, every gated Paper-II--V
+  input exits nonzero while naming its own exact required export, repeated
+  canonicalize runs are byte-identical, and identical inputs compare
+  equivalent;
 - deliberate canonical-identity, branch-trace, and automorphism-set corruption:
   rejected by the independent reference implementation.
 - hot Paper-I search: fixed 32/64/128-byte guarded records; zero allocations,
