@@ -25,9 +25,10 @@ This is the C969 implementation crate.  Its current executable slice provides:
 - the five required command names.
 
 `classify` returns witness-backed `NOT_DEEP`, persistent-family `DEEP`, and
-frozen R5--R7 finite-exception `DEEP`/`UNRESOLVED` results. `canonicalize` is
-functional but currently uses the explicit group-scale fallback.  Uniform
-nonpersistent formula adapters remain open.  `distance` and `decode` are
+frozen R5--R7 finite-exception `DEEP`/`UNRESOLVED` results. `canonicalize` uses
+the proved affine-coset path on tangent inputs and the explicit group-scale
+fallback on sigma and other inputs.  Further R8--R10 nonpersistent formula
+adapters remain open.  `distance` and `decode` are
 exact within their explicit
 candidate budget: after degrees through `r-1` they use an arbitrary NRC basis
 at degree `r`, whose coefficients are forced nonzero by the failed lower
