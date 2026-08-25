@@ -210,9 +210,9 @@ types `2/5` on the `r=2` lines eliminates eight of the ten branches, including
 every `f=7` branch.  Exactly two canonical branches survive:
 
 ```text
-fixed core     fixed-subline counts   fixed-line type counts
-collinear 4    (2,7,3,1,0)            (5,2,3,2,1)
-general 4      (3,4,6,0,0)            (2,5,3,2,1).
+fixed core type            fixed-subline counts  fixed-line type counts
+3 collinear + 1 off-line  (2,7,3,1,0)  (5,2,3,2,1)
+general 4                  (3,4,6,0,0)  (2,5,3,2,1).
 ```
 
 For each branch the compatible fixed-line assignments form one orbit under
@@ -220,9 +220,9 @@ the stabilizer of the fixed core.  Removing the fixed data gives the exact
 orbit inventories
 
 ```text
-branch       core point C3-orbits: fixed-line/off-line   line C3-orbits by type 1,...,5
-collinear    5 / 12                                      (152,5,25,64,2)
-general      6 / 11                                      (153,4,25,64,2).
+branch type      core point C3-orbits: fixed-line/off-line  line C3-orbits by type 1,...,5
+3-on-line+1-off  5 / 12                                  (152,5,25,64,2)
+general 4        6 / 11                                  (153,4,25,64,2).
 ```
 
 Thus the Frobenius question is no longer one undifferentiated 261-signature
