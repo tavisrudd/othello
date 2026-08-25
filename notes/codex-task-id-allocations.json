@@ -3482,8 +3482,17 @@
       "last": 958,
       "purpose": "Compute and certify explicit birational parametrizations for the level-two cubic stabilizations",
       "sequence": 387
+    },
+    {
+      "count": 1,
+      "first": 959,
+      "kind": "reservation",
+      "lane": "complete-ports",
+      "last": 959,
+      "purpose": "puncture-shortening canonicalization and novelty rebalance",
+      "sequence": 388
     }
   ],
-  "next_id": 959,
+  "next_id": 960,
   "schema": "codex-task-id-allocations-v1"
 }
