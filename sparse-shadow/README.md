@@ -70,3 +70,12 @@ nested canonical certificate for compatibility.
 See `docs/schema-v1.md`, `docs/certificate-rules-v1.md`,
 `docs/dependency-audit.md`, `docs/prior-art-audit.md`, and
 `docs/performance-paper-i.md` for the frozen boundaries and measured evidence.
+
+## External canonicalization baselines
+
+The native Rust engine remains the always-available authority. The excluded
+`integrations/sparse-shadow-nauty` crate implements the first optional external
+cross-check using bundled nauty 2.9.3; it compares canonical colored-incidence
+digests and automorphism orders for the raw and native-canonical inputs. A bliss
+backend is retained as an open second path behind the same versioned contract.
+See `docs/backend-architecture.md` for the trust boundary and frozen encoding.

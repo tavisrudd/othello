@@ -1,5 +1,6 @@
 [workspace]
 members = ["crates/sparse-shadow-core", "crates/sparse-shadow-cli"]
+exclude = ["integrations/sparse-shadow-nauty"]
 resolver = "2"
 
 [workspace.package]

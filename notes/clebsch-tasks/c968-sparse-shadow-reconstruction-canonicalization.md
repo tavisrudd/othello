@@ -274,6 +274,15 @@ against a separately compiled untouched worktree measured 41.8--43.1% faster
 canonicalization and 48.3--48.9% faster replay while preserving exact artifacts,
 search counters, verifier independence, and the zero-allocation hot-loop gate.
 
+The backend hierarchy is now explicit: native Rust remains mandatory and
+authoritative; an excluded optional crate cross-checks Paper I with bundled
+nauty 2.9.3; bliss is reserved as the second backend path. Both engines share
+the frozen colored-incidence v1 encoding and backend-comparison v1 artifact.
+Nauty assigns raw and native-canonical encodings identical BLAKE3 identities
+and independently recovers automorphism orders 120 and 6 for the uncalibrated
+and calibrated fixtures, respectively. External results never replace the
+native transporter, reconstruction, or replay certificate.
+
 No unblocked C968 implementation frontier remains: each next adapter first
 requires the complete paper-owned export named in its `fixtures/gated-*.json`.
 Nearby evidence JSON and trust manifests are explicitly insufficient. Once an

@@ -42,3 +42,10 @@ Resolved direct versions at the 2026-08-25 gate are `blake3 1.8.7`, `clap
 reports advisories, bans, licenses, and sources all green. `deny.toml` rejects
 wildcard and unknown registry/git dependencies; duplicate transitive versions
 are visible warnings rather than hidden failures.
+
+The optional `integrations/sparse-shadow-nauty` crate is excluded from the main
+workspace and has a separate lockfile, so it does not alter the native release
+graph. It pins Apache-2.0 `nauty-Traces-sys 0.11.0`, which bundles Apache-2.0
+nauty/Traces 2.9.3 and requires a C compiler plus libclang at build time. Its
+committed Nix shell supplies those tools. A future bliss adapter must remain
+similarly isolated and receive its own license/source audit.
