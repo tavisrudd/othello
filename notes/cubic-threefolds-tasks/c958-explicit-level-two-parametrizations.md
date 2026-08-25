@@ -63,6 +63,16 @@ step is invariant descent under the explicit Möbius group.  Report and
 replay: `notes/2026-08-24-c958-type-i1-split-blowdown.md` and its adjacent
 bundle.
 
+The inverse split map is complete as well.  The cubics through the six plane
+points form a four-dimensional anticanonical system; the six exceptional
+tangent lines determine its alignment with the given cubic by a rank-fifteen
+linear system.  Exact substitution proves that the four cubics land on the
+surface and that the quadratic blowdown after the cubic map is the identity.
+Birationality of the proved blowdown gives the opposite composite.  Thus only
+ground-field descent with the two stabilizing variables remains for type
+`I_1`.  Report and replay:
+`notes/2026-08-24-c958-type-i1-split-inverse.md` and its adjacent bundle.
+
 ## Goal
 
 Turn the constructive existence proof in C956 into explicit, independently
