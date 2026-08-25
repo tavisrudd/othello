@@ -5,6 +5,9 @@ use crate::{
     verify_canonical_artifact,
 };
 
+pub const RECONSTRUCTION_SCHEMA_VERSION: &str = "sparse-shadow-reconstruction/v2";
+pub const PAPER_I_CARRIER_SCHEMA_VERSION: &str = "sparse-shadow-paper-i-carrier/v1";
+
 #[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
 #[serde(tag = "kind", rename_all = "snake_case")]
 pub enum Ambiguity {
@@ -13,10 +16,18 @@ pub enum Ambiguity {
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
+pub struct PaperICarrier {
+    pub schema: String,
+    pub axes: Vec<[u32; 2]>,
+    pub conference_switching_class: String,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub struct ReconstructionArtifact {
     pub schema: String,
     pub profile: String,
-    pub carrier: String,
+    pub carrier: PaperICarrier,
     pub ambiguity: Ambiguity,
     pub exact_oriented_return: bool,
     pub round_trip_shadow: InputArtifact,
@@ -37,10 +48,11 @@ pub fn reconstruct(input: &InputArtifact) -> Result<ReconstructionArtifact, Shad
         ));
     };
     let calibrated = paper.calibrated_triangle.is_some();
+    let carrier = recover_paper_i_carrier(&canonical.canonical)?;
     Ok(ReconstructionArtifact {
-        schema: "sparse-shadow-reconstruction/v1".into(),
+        schema: RECONSTRUCTION_SCHEMA_VERSION.into(),
         profile: "paper_i_orientation".into(),
-        carrier: "six_axis_conference_switching_class".into(),
+        carrier,
         ambiguity: Ambiguity::OrientationC2 {
             killed_by_calibration: calibrated,
         },
@@ -60,9 +72,7 @@ pub fn verify_reconstruction(
     input: &InputArtifact,
     artifact: &ReconstructionArtifact,
 ) -> Result<VerificationReport, ShadowError> {
-    if artifact.schema != "sparse-shadow-reconstruction/v1"
-        || artifact.profile != "paper_i_orientation"
-        || artifact.carrier != "six_axis_conference_switching_class"
+    if artifact.schema != RECONSTRUCTION_SCHEMA_VERSION || artifact.profile != "paper_i_orientation"
     {
         return Err(ShadowError::Certificate(
             "reconstruction metadata is inconsistent".into(),
@@ -74,6 +84,11 @@ pub fn verify_reconstruction(
         ));
     };
     verify_canonical_artifact(input, &artifact.canonical)?;
+    if artifact.carrier != recover_paper_i_carrier(&artifact.canonical.canonical)? {
+        return Err(ShadowError::Certificate(
+            "recovered Paper-I carrier differs from the verified canonical shadow".into(),
+        ));
+    }
     if artifact.round_trip_shadow != artifact.canonical.canonical {
         return Err(ShadowError::Certificate(
             "round-trip shadow differs from the verified canonical shadow".into(),
@@ -94,5 +109,24 @@ pub fn verify_reconstruction(
         valid: true,
         canonical_id: Some(artifact.canonical.canonical_id.clone()),
         checked_automorphisms: artifact.canonical.certificate.automorphisms.len(),
+    })
+}
+
+fn recover_paper_i_carrier(canonical: &InputArtifact) -> Result<PaperICarrier, ShadowError> {
+    let ProfileInput::PaperIOrientation(paper) = &canonical.profile else {
+        return Err(ShadowError::Invalid(
+            "Paper-I carrier recovery received another profile".into(),
+        ));
+    };
+    let antipodal = paper
+        .shadow
+        .relations
+        .iter()
+        .find(|relation| relation.name == "antipodal")
+        .ok_or_else(|| ShadowError::Invalid("canonical Paper-I shadow has no antipodes".into()))?;
+    Ok(PaperICarrier {
+        schema: PAPER_I_CARRIER_SCHEMA_VERSION.into(),
+        axes: antipodal.edges.clone(),
+        conference_switching_class: "icosahedral_six_axis_switching_class".into(),
     })
 }

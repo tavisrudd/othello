@@ -44,5 +44,23 @@
     },
     "certificate_schema": "sparse-shadow-certificate/v1",
     "proof_system": "paper-i-ir-exhaustion/v1"
+  },
+  "reconstruction": {
+    "uncalibrated": {
+      "schema": "sparse-shadow-reconstruction/v2",
+      "carrier_schema": "sparse-shadow-paper-i-carrier/v1",
+      "axes": [[0,1],[2,7],[3,10],[4,11],[5,9],[6,8]],
+      "conference_switching_class": "icosahedral_six_axis_switching_class",
+      "killed_by_calibration": false,
+      "exact_oriented_return": false
+    },
+    "calibrated": {
+      "schema": "sparse-shadow-reconstruction/v2",
+      "carrier_schema": "sparse-shadow-paper-i-carrier/v1",
+      "axes": [[0,3],[1,4],[2,5],[6,11],[7,10],[8,9]],
+      "conference_switching_class": "icosahedral_six_axis_switching_class",
+      "killed_by_calibration": true,
+      "exact_oriented_return": true
+    }
   }
 }

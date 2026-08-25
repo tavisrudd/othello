@@ -2,9 +2,9 @@ use std::collections::BTreeSet;
 
 use proptest::prelude::*;
 use sparse_shadow_core::{
-    CanonicalCertificate, EquivalenceOutcome, InputArtifact, ProfileInput, ShadowError,
-    canonicalize, compare, reconstruct, validate, verify_canonical_artifact, verify_certificate,
-    verify_equivalence, verify_reconstruction,
+    Ambiguity, CanonicalCertificate, EquivalenceOutcome, InputArtifact, ProfileInput,
+    ReconstructionArtifact, ShadowError, canonicalize, compare, reconstruct, validate,
+    verify_canonical_artifact, verify_certificate, verify_equivalence, verify_reconstruction,
 };
 
 const FIXTURE: &str = include_str!("../../../fixtures/paper-i-icosahedral-orbitals.json");
@@ -37,6 +37,22 @@ fn contract_view(artifact: &sparse_shadow_core::CanonicalArtifact) -> serde_json
         "stats": artifact.stats,
         "certificate_schema": artifact.certificate.certificate_schema,
         "proof_system": artifact.certificate.proof_system,
+    })
+}
+
+fn reconstruction_contract_view(artifact: &ReconstructionArtifact) -> serde_json::Value {
+    let killed_by_calibration = match &artifact.ambiguity {
+        Ambiguity::OrientationC2 {
+            killed_by_calibration,
+        } => *killed_by_calibration,
+    };
+    serde_json::json!({
+        "schema": artifact.schema,
+        "carrier_schema": artifact.carrier.schema,
+        "axes": artifact.carrier.axes,
+        "conference_switching_class": artifact.carrier.conference_switching_class,
+        "killed_by_calibration": killed_by_calibration,
+        "exact_oriented_return": artifact.exact_oriented_return,
     })
 }
 
@@ -94,6 +110,18 @@ fn committed_golden_contract_is_stable() {
     assert_eq!(
         contract_view(&canonicalize(&calibrated_fixture()).expect("calibrated canonical fixture")),
         expected["calibrated"]
+    );
+    assert_eq!(
+        reconstruction_contract_view(
+            &reconstruct(&fixture()).expect("uncalibrated reconstruction")
+        ),
+        expected["reconstruction"]["uncalibrated"]
+    );
+    assert_eq!(
+        reconstruction_contract_view(
+            &reconstruct(&calibrated_fixture()).expect("calibrated reconstruction")
+        ),
+        expected["reconstruction"]["calibrated"]
     );
 }
 
@@ -242,6 +270,7 @@ fn uncalibrated_orbital_exchange_realizes_the_orientation_involution() {
 fn reconstruction_reports_unoriented_c2_fibre() {
     let reconstructed = reconstruct(&fixture()).expect("reconstruction");
     assert!(!reconstructed.exact_oriented_return);
+    assert_eq!(reconstructed.carrier.axes.len(), 6);
     assert_eq!(
         reconstructed.round_trip_shadow,
         reconstructed.canonical.canonical
@@ -252,7 +281,7 @@ fn reconstruction_reports_unoriented_c2_fibre() {
             .valid
     );
     let mut corrupt = reconstructed;
-    corrupt.carrier = "wrong_carrier".into();
+    corrupt.carrier.axes.pop();
     assert!(verify_reconstruction(&fixture(), &corrupt).is_err());
 
     let mut corrupt_wrapper = reconstruct(&fixture()).expect("reconstruction");

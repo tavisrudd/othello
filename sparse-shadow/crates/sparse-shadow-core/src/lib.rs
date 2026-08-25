@@ -16,7 +16,10 @@ pub use equivalence::{
     EquivalenceCertificate, EquivalenceOutcome, SeparatingInvariant, compare, verify_equivalence,
 };
 pub use error::ShadowError;
-pub use reconstruct::{ReconstructionArtifact, reconstruct, verify_reconstruction};
+pub use reconstruct::{
+    Ambiguity, PAPER_I_CARRIER_SCHEMA_VERSION, PaperICarrier, RECONSTRUCTION_SCHEMA_VERSION,
+    ReconstructionArtifact, reconstruct, verify_reconstruction,
+};
 pub use schema::{
     ActionKind, AmbiguitySpec, BaseFieldSpec, BinaryRelation, CollisionWitness, DeclaredAction,
     FiniteFieldSpec, FixtureGate, FrozenSource, GatedPaperIi, GatedPaperIii, GatedPaperIv,

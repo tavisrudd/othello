@@ -220,6 +220,10 @@ locked/offline test suite.
 The point-stabilizer surface is explicitly versioned as canonical wrapper v2.
 The input interchange and unchanged eight-rule certificate correctly remain at
 v1; no expanded artifact is emitted under the earlier canonical wrapper tag.
+Reconstruction v2 likewise replaces the old carrier label with a typed Paper-I
+carrier: its six antipodal axes are emitted in canonical coordinates and
+recomputed during replay. The previously private ambiguity enum is exported as
+part of the public artifact API.
 
 No unblocked C968 implementation frontier remains: each next adapter first
 requires the complete paper-owned export named in its `fixtures/gated-*.json`.

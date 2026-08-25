@@ -61,6 +61,10 @@ serialized tree.
 - canonical wrapper v2 explicitly versions the point-stabilizer addition;
   input schema v1 and canonical proof v1 remain unchanged rather than drifting
   under reused tags;
+- reconstruction v2 replaces the former carrier label with a typed Paper-I
+  carrier containing the six exact antipodal axes in canonical coordinates;
+  replay recomputes those axes from the independently checked canonical shadow,
+  and the ambiguity enum is now part of the usable public API;
 - schema rejection tests cover unknown fields, unsupported versions,
   non-normalized undirected edges, malformed orbital partitions, and duplicate
   calibration vertices; Paper-I calibration must additionally be an increasing

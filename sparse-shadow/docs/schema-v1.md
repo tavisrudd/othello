@@ -7,6 +7,9 @@ This version names the input interchange schema. Canonical output uses
 `sparse-shadow-canonical/v2`: v2 adds the verified point-stabilizer surface to
 the earlier canonical wrapper. The independent canonical proof remains
 `sparse-shadow-certificate/v1` because its eight-rule payload did not change.
+Reconstruction uses `sparse-shadow-reconstruction/v2`; v2 replaces the earlier
+carrier label with a typed `sparse-shadow-paper-i-carrier/v1` payload whose six
+axes are the antipodal pairs of the verified canonical shadow.
 
 | adapter | observed shadow | action | recovered carrier | residual ambiguity | v1 state |
 |---|---|---|---|---|---|
@@ -25,7 +28,7 @@ generating set, vertex orbits, and the point stabilizer of the least
 representative in each vertex orbit. Each stabilizer carries its own order,
 generators, and vertex-orbit decomposition.
 The committed Paper-I golden contract pins the stable summary of both
-calibrated and uncalibrated canonical artifacts.
+calibrated and uncalibrated canonical artifacts and their recovered carriers.
 
 The optional Paper-I calibration is an increasing triple of distinct vertices
 whose three pairs lie in `orbital_positive`. This is the schema realization of

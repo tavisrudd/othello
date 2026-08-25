@@ -14,6 +14,10 @@ schema is `sparse-shadow/v1`; the expanded canonical wrapper is
 `sparse-shadow-canonical/v2`, while its unchanged exhaustive proof is
 `sparse-shadow-certificate/v1`.
 
+Reconstruction output is `sparse-shadow-reconstruction/v2`. It contains a
+typed `sparse-shadow-paper-i-carrier/v1` payload with the six recovered
+antipodal axes in canonical coordinates, rather than only a carrier label.
+
 The first development gate enables only the hand-checkable Paper-I orientation
 fixtures: an uncalibrated shadow with residual `C2` and a calibrated triangle
 with exact oriented return. The other four typed profiles are represented in
@@ -22,7 +26,8 @@ fixtures exist; failure diagnostics name the required export.
 
 `fixtures/paper-i-golden-contract.json` freezes the enabled adapter's canonical
 identities, group and point-stabilizer summaries, vertex orbits, exhaustive
-search counters, and proof-system identifiers. Changes to those values require
+search counters, proof-system identifiers, and both reconstructed six-axis
+carriers. Changes to those values require
 an explicit contract review rather than merely remaining deterministic within
 one build.
 
