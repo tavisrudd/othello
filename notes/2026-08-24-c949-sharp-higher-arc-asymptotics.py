@@ -878,7 +878,7 @@ def search_five_character_core(q: int, symmetry: str, output: Path,
             model.add(high_degree <= arc_intersection)
             model.add(high_degree == arc_intersection).only_enforce_if(core[point])
             if require_exact_maximal_core:
-                model.add(high_degree <= arc_intersection - 1).only_enforce_if(core[point].Not())
+                model.add(high_degree <= q // 2).only_enforce_if(core[point].Not())
             core_high_incidence = sum(
                 high_secant_incidences[signature_index_of_line[line]]
                 for line in through_point[point]
@@ -1421,6 +1421,7 @@ def audit_degree_defect(q9_construction: Path, frobenius_audit: Path,
     arc_size = q * q // 3 + 4 * q // 3
     maximal_degree = 2 * q // 3 + 1
     maximal_line_count = 2 * q + 1
+    external_degree_upper_bound = q // 2
     external_count = q * q - q
     external_degree_sum = arc_size * (q + 1) - maximal_line_count * maximal_degree
     external_pair_sum = (math.comb(arc_size, 2)
@@ -1438,7 +1439,7 @@ def audit_degree_defect(q9_construction: Path, frobenius_audit: Path,
     def defect_cost(degree: int) -> int:
         return (degree - r) * (degree - r - 1)
 
-    exceptional_degrees = [degree for degree in range(maximal_degree)
+    exceptional_degrees = [degree for degree in range(external_degree_upper_bound + 1)
                            if degree not in (r, r + 1)]
     nonfixed_exception_histograms: dict[int, list[tuple[tuple[int, ...], int, int]]] = {
         cost: [] for cost in range(defect // 3 + 1)
@@ -1481,7 +1482,9 @@ def audit_degree_defect(q9_construction: Path, frobenius_audit: Path,
     def fixed_histograms(high_count_spectrum: Counter[int]) -> set[tuple[tuple[int, ...], int, int]]:
         states = {(tuple([0] * maximal_degree), 0, 0)}
         for fixed_high_degree, point_count in sorted(high_count_spectrum.items()):
-            allowed = list(range(fixed_high_degree, maximal_degree, 3))
+            allowed = list(range(
+                fixed_high_degree, external_degree_upper_bound + 1, 3
+            ))
             replacements = set()
             for multiplicities in compositions(point_count, len(allowed)):
                 addition = [0] * maximal_degree
@@ -1776,7 +1779,7 @@ def audit_degree_defect(q9_construction: Path, frobenius_audit: Path,
         })
 
     output.write_text(json.dumps({
-        "schema": "c949-degree-defect-audit-v2",
+        "schema": "c949-degree-defect-audit-v3",
         "field_uniform_identities": {
             "q": "3r",
             "external_point_count": "q^2-q",
@@ -1805,6 +1808,8 @@ def audit_degree_defect(q9_construction: Path, frobenius_audit: Path,
             "centered_external_degree_sum": centered_sum,
             "external_defect": defect,
             "external_exception_count_upper_bound": defect // 2,
+            "external_degree_upper_bound_from_blocking_core":
+                external_degree_upper_bound,
             "external_centered_squared_norm": external_centered_norm,
             "centered_total_sum": centered_total_sum,
             "centered_squared_norm": centered_norm,

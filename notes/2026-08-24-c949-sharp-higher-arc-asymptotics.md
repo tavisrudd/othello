@@ -237,9 +237,19 @@ sum_{high lines ell through P} |D intersect ell| + a_2(P)
     = 8q/3+1 = 73                         for P in D.
 ```
 
-Five-minute runs with this additional channel and the exact `T=55` condition
-that no point outside `D` has degree 19 remain `UNKNOWN`; that status supplies
-no evidence either way.  A direct split by the unordered pair of
+Five-minute runs with this additional channel remain `UNKNOWN`; that status
+supplies no evidence either way.  The exact `T=55` condition does not require
+a separate search constraint.  Indeed, if a point `P` is outside the blocking
+core and lies on `e(P)` selected lines, then
+
+```text
+2q+1 = sum_{lines ell through P} |D intersect ell|
+     >= 3e(P) + (q+1-e(P)),
+```
+
+so `e(P)<=floor(q/2)`.  At `q=27`, every external degree is at most 13,
+strictly below 19; hence `D` is automatically the full set of maximal
+secants.  A direct split by the unordered pair of
 nonfixed 5-secant orbits is also too coarse: the fixed-structure stabilizer has
 order four and leaves 7,768 pair orbits in either branch.  That split is not
 promoted as a useful proof route.  All exclusions here are symmetry-restricted
@@ -288,12 +298,14 @@ sum(e_P-9)=449,       sum(e_P-9)(e_P-10)=126.
 Consequently at most 63 external lines have degree outside `{9,10}`.  The
 Frobenius fixed-subplane data force six of the nine fixed external points to
 have degree congruent to two modulo three, so at least six fixed points are
-exceptional and consume at least 12 units of the defect.
+exceptional and consume at least 12 units of the defect.  The blocking-core
+inequality above also removes degrees 14 through 18 completely.
 
 The deterministic degree audit also identifies the limitation of scalar
-moment data: after the exact Frobenius residue conditions, each canonical
-branch still admits 104,873 external degree histograms.  The two branches
-have different fixed high-line counts,
+moment data.  Even after the exact Frobenius residues and the local
+blocking-core bound `e(P)<=13`, each canonical branch still admits 50,261
+external degree histograms.  The two branches have different fixed high-line
+counts,
 
 ```text
 3-on-line+1-off:  1^2 2^6 3^1,
@@ -577,9 +589,10 @@ family is lower priority.
   envelope branch is also unclassified.
 - **Open after `tt` — classify the centered incidence codeword at `q=27`.**
   The exact shell has defect 126, at most 63 exceptional external points, and
-  satisfies `M^T(e-9 1)=27(1+a)`.  Frobenius residues alone leave 104,873
-  degree histograms, so the evidence gap is a spatial classification of the
-  small-defect integer lift or a contradiction from its line sums.  The
+  satisfies `M^T(e-9 1)=27(1+a)`.  Frobenius residues together with the local
+  blocking-core cap `e<=13` still leave 50,261 degree histograms.  Thus the
+  evidence gap is a spatial classification of the small-defect integer lift
+  or a contradiction from its line sums.  The
   ternary affine space has dimension 184, drops to the 76-dimensional
   full-modulus-liftable subspace, and has dimension 70 after fixed-coordinate
   pinning.  Both branches survive all these congruences; the additional gate

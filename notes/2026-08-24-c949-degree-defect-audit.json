@@ -10,7 +10,7 @@
     "arc_size": 279,
     "branches": [
       {
-        "compatible_external_degree_spectrum_count": 104873,
+        "compatible_external_degree_spectrum_count": 50261,
         "external_degree_count_ranges": {
           "1": {
             "maximum": 1,
@@ -30,26 +30,6 @@
           },
           "13": {
             "maximum": 9,
-            "minimum": 0
-          },
-          "14": {
-            "maximum": 6,
-            "minimum": 0
-          },
-          "15": {
-            "maximum": 3,
-            "minimum": 0
-          },
-          "16": {
-            "maximum": 2,
-            "minimum": 0
-          },
-          "17": {
-            "maximum": 2,
-            "minimum": 0
-          },
-          "18": {
-            "maximum": 1,
             "minimum": 0
           },
           "2": {
@@ -85,7 +65,7 @@
             "minimum": 127
           }
         },
-        "feasible_fixed_degree_histogram_count": 5774,
+        "feasible_fixed_degree_histogram_count": 1511,
         "fixed_centered_residues_mod_3": {
           "0": 1,
           "1": 1,
@@ -107,7 +87,7 @@
           2,
           27
         ],
-        "fixed_degree_histogram_count": 58212,
+        "fixed_degree_histogram_count": 5040,
         "fixed_external_high_degree_spectrum": {
           "1": 2,
           "2": 6,
@@ -126,7 +106,7 @@
         "pinned_ternary_incidence_rank": 83
       },
       {
-        "compatible_external_degree_spectrum_count": 104873,
+        "compatible_external_degree_spectrum_count": 50261,
         "external_degree_count_ranges": {
           "1": {
             "maximum": 1,
@@ -146,26 +126,6 @@
           },
           "13": {
             "maximum": 9,
-            "minimum": 0
-          },
-          "14": {
-            "maximum": 6,
-            "minimum": 0
-          },
-          "15": {
-            "maximum": 3,
-            "minimum": 0
-          },
-          "16": {
-            "maximum": 2,
-            "minimum": 0
-          },
-          "17": {
-            "maximum": 2,
-            "minimum": 0
-          },
-          "18": {
-            "maximum": 1,
             "minimum": 0
           },
           "2": {
@@ -201,7 +161,7 @@
             "minimum": 127
           }
         },
-        "feasible_fixed_degree_histogram_count": 5774,
+        "feasible_fixed_degree_histogram_count": 1511,
         "fixed_centered_residues_mod_3": {
           "0": 1,
           "1": 1,
@@ -223,7 +183,7 @@
           27,
           28
         ],
-        "fixed_degree_histogram_count": 55440,
+        "fixed_degree_histogram_count": 4704,
         "fixed_external_high_degree_spectrum": {
           "1": 1,
           "2": 6,
@@ -249,6 +209,7 @@
     "external_centered_squared_norm": 575,
     "external_defect": 126,
     "external_degree_sum": 6767,
+    "external_degree_upper_bound_from_blocking_core": 13,
     "external_exception_count_upper_bound": 63,
     "external_pair_sum": 29376,
     "external_point_count": 702,
@@ -288,5 +249,5 @@
     },
     "unital_complement_size": 63
   },
-  "schema": "c949-degree-defect-audit-v2"
+  "schema": "c949-degree-defect-audit-v3"
 }
