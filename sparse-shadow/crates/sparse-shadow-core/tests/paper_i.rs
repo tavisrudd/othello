@@ -50,6 +50,10 @@ fn fixture_validates_and_has_expected_symmetry() {
     assert_eq!(artifact.automorphism_order, 120);
     assert!(artifact.automorphism_generators.len() < 120);
     assert_eq!(artifact.vertex_orbits, vec![(0..12).collect::<Vec<_>>()]);
+    assert_eq!(artifact.point_stabilizers.len(), 1);
+    assert_eq!(artifact.point_stabilizers[0].fixed_vertex, 0);
+    assert_eq!(artifact.point_stabilizers[0].automorphism_order, 10);
+    assert_eq!(artifact.point_stabilizers[0].vertex_orbits[0], vec![0]);
 }
 
 #[test]
@@ -177,6 +181,10 @@ fn reconstruction_reports_unoriented_c2_fibre() {
     let mut corrupt_orbits = reconstruct(&fixture()).expect("reconstruction");
     corrupt_orbits.canonical.vertex_orbits.clear();
     assert!(verify_reconstruction(&fixture(), &corrupt_orbits).is_err());
+
+    let mut corrupt_stabilizers = reconstruct(&fixture()).expect("reconstruction");
+    corrupt_stabilizers.canonical.point_stabilizers.clear();
+    assert!(verify_reconstruction(&fixture(), &corrupt_stabilizers).is_err());
 }
 
 #[test]

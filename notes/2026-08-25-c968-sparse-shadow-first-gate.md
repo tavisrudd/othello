@@ -12,8 +12,10 @@ and an enabled Paper-I orientation adapter. Its hand-checkable twelve-point
 fixture carries the two five-valent icosahedral orbitals and antipodal matching.
 The explicit individualization/refinement search returns a canonical form,
 input-to-canonical witness, all verified automorphisms (order 120 on the
-fixture), vertex orbits, deterministic BLAKE3 identity, branch trace, and the
-residual uncalibrated orientation `C2`. Relabeling and corruption tests pass.
+fixture), vertex orbits, verified point stabilizers for orbit representatives,
+deterministic BLAKE3 identity, branch trace, and the residual uncalibrated
+orientation `C2`. The fixture's single point stabilizer has order 10.
+Relabeling and corruption tests pass.
 The companion committed calibrated-triangle fixture reconstructs with exact
 oriented return, and its reconstruction certificate replays independently.
 An independently implemented reference search rederives the canonical payload,
@@ -62,8 +64,8 @@ serialized tree.
   through their CLI verifier, while a corrupted form of each exits nonzero;
 - canonicalization idempotence is tested; reconstruction replay binds the
   enclosing canonical schema, identity, payload, transporter, statistics,
-  group order, generator closure, and vertex orbits to the independently
-  replayed certificate; hostile generators are rejected by a closure walk
+  group order, generator closure, vertex orbits, and point stabilizers to the
+  independently replayed certificate; hostile generators are rejected by a closure walk
   bounded inside the certified full group;
 - deliberate canonical-identity, branch-trace, and automorphism-set corruption:
   rejected by the independent reference implementation.
@@ -98,8 +100,8 @@ baseline. No novelty or priority claim is licensed.
   `paper-i-ir-exhaustion/v1` system is implemented by a separate exhaustive
   checker; result, trace, full automorphism set, and every search counter must
   agree. A later wrapper audit also closed the possibility of retaining a valid
-  embedded proof while corrupting public group/order/orbit metadata. Future
-  adapters will require action-specific rule extensions and may not inherit
+  embedded proof while corrupting public group/order/orbit/stabilizer metadata.
+  Future adapters will require action-specific rule extensions and may not inherit
   this verdict automatically.
 - **Open — source exports:** nearby evidence files exist for Papers II--V, but
   none is the complete frozen shadow required by its typed adapter. Four

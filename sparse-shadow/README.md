@@ -7,7 +7,9 @@ Shadows*.
 The project is deliberately paperwise: every adapter declares its own input,
 action, carrier, reconstruction map, and residual ambiguity. The shared engine
 provides deterministic canonicalization, witnesses, certificates, replay, and
-stable JSON artifacts.
+stable JSON artifacts. Canonical output includes the complete certified
+automorphism order and generators, vertex orbits, and an explicit point
+stabilizer for one representative of every vertex orbit.
 
 The first development gate enables only the hand-checkable Paper-I orientation
 fixtures: an uncalibrated shadow with residual `C2` and a calibrated triangle

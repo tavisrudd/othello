@@ -15,7 +15,10 @@ Unknown fields are rejected. Vertices are numbered `0..n-1`; each named
 undirected relation is a duplicate-free list of ordered-normalized pairs
 `[min,max]`. Relation order is semantic and frozen. A canonical artifact
 renumbers vertices, sorts relation pairs, and serializes compact JSON before
-computing its BLAKE3 identity.
+computing its BLAKE3 identity. It reports the full automorphism order, a compact
+generating set, vertex orbits, and the point stabilizer of the least
+representative in each vertex orbit. Each stabilizer carries its own order,
+generators, and vertex-orbit decomposition.
 
 Source locators are validated provenance but are normalized to the adapter
 identifier before canonical serialization. They cannot change mathematical

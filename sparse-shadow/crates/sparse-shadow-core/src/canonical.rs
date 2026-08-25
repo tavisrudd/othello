@@ -40,6 +40,15 @@ pub struct CanonicalCertificate {
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
+pub struct PointStabilizer {
+    pub fixed_vertex: u32,
+    pub automorphism_generators: Vec<Vec<u32>>,
+    pub automorphism_order: u64,
+    pub vertex_orbits: Vec<Vec<u32>>,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub struct CanonicalArtifact {
     pub schema: String,
     pub canonical_id: String,
@@ -48,6 +57,7 @@ pub struct CanonicalArtifact {
     pub automorphism_generators: Vec<Vec<u32>>,
     pub automorphism_order: u64,
     pub vertex_orbits: Vec<Vec<u32>>,
+    pub point_stabilizers: Vec<PointStabilizer>,
     pub stats: SearchStats,
     pub certificate: CanonicalCertificate,
 }
@@ -71,6 +81,7 @@ pub fn canonicalize(input: &InputArtifact) -> Result<CanonicalArtifact, ShadowEr
     let automorphisms = automorphisms(&search.best_permutation, &search.equal_permutations)?;
     let automorphism_generators = generating_set(&automorphisms);
     let vertex_orbits = permutation_orbits(paper.shadow.vertices.len(), &automorphisms)?;
+    let point_stabilizers = point_stabilizers(&vertex_orbits, &automorphisms)?;
     let canonical_id = blake3::hash(canonical_json.as_bytes()).to_hex().to_string();
     let automorphism_order = u64::try_from(automorphisms.len())
         .map_err(|_| ShadowError::Invalid("automorphism count exceeds u64".into()))?;
@@ -93,6 +104,7 @@ pub fn canonicalize(input: &InputArtifact) -> Result<CanonicalArtifact, ShadowEr
         automorphism_generators,
         automorphism_order,
         vertex_orbits,
+        point_stabilizers,
         stats: search.stats,
         certificate,
     })
@@ -138,6 +150,14 @@ pub(crate) fn verify_canonical_artifact_fields(
     if artifact.vertex_orbits != permutation_orbits(degree, &certificate.automorphisms)? {
         return Err(ShadowError::Certificate(
             "canonical artifact vertex orbits differ from its certificate".into(),
+        ));
+    }
+    let expected_stabilizers =
+        point_stabilizers(&artifact.vertex_orbits, &certificate.automorphisms)
+            .map_err(|error| ShadowError::Certificate(error.to_string()))?;
+    if artifact.point_stabilizers != expected_stabilizers {
+        return Err(ShadowError::Certificate(
+            "canonical artifact point stabilizers differ from its certificate".into(),
         ));
     }
     Ok(())
@@ -336,6 +356,34 @@ fn permutation_orbits(n: usize, automorphisms: &[Vec<u32>]) -> Result<Vec<Vec<u3
         );
     }
     Ok(roots.into_values().collect())
+}
+
+fn point_stabilizers(
+    vertex_orbits: &[Vec<u32>],
+    automorphisms: &[Vec<u32>],
+) -> Result<Vec<PointStabilizer>, ShadowError> {
+    let degree = automorphisms.first().map_or(0, Vec::len);
+    vertex_orbits
+        .iter()
+        .map(|orbit| {
+            let &fixed_vertex = orbit
+                .first()
+                .ok_or_else(|| ShadowError::Invalid("vertex orbit is empty".into()))?;
+            let subgroup: Vec<Vec<u32>> = automorphisms
+                .iter()
+                .filter(|permutation| permutation[fixed_vertex as usize] == fixed_vertex)
+                .cloned()
+                .collect();
+            let automorphism_order = u64::try_from(subgroup.len())
+                .map_err(|_| ShadowError::Invalid("stabilizer order exceeds u64".into()))?;
+            Ok(PointStabilizer {
+                fixed_vertex,
+                automorphism_generators: generating_set(&subgroup),
+                automorphism_order,
+                vertex_orbits: permutation_orbits(degree, &subgroup)?,
+            })
+        })
+        .collect()
 }
 
 fn find(parent: &mut [usize], vertex: usize) -> usize {
