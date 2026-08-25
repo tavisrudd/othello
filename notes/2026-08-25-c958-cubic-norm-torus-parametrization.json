@@ -1,0 +1,64 @@
+{
+  "birational_open": "q*(4*p^3+27*q^2)*polar*h*N(Z) != 0",
+  "certified": [
+    "the norm-one cubic is Cremona-birational over K to the displayed quadric",
+    "projection from [p:0:1:-p] parametrizes that quadric by P2",
+    "x maps to (Z,h)=(x+x^-1+1-Tr(x),N(x-1)) and back by x=1+h/Z",
+    "both composites are identities on the displayed dense open",
+    "the type-I1 and type-I3 residual cubic algebras are both specializations"
+  ],
+  "cremona_quadric": "h**2 - 2*h*p*z2 + 3*h*z0 + p**2*z2**2 - 4*p*z0*z2 + p*z1**2 + 3*q*z1*z2 + 3*z0**2",
+  "cubic_etale_algebra": "E=K[rho]/(rho^3+p*rho+q)",
+  "norm_polynomial": "p**2*x0*x2**2 - p*q*x1*x2**2 - 2*p*x0**2*x2 + p*x0*x1**2 + q**2*x2**3 + 3*q*x0*x1*x2 - q*x1**3 + x0**3",
+  "plane_to_quadric": {
+    "coordinates": [
+      "p**2*v**2 + 4*p*u**2 + 4*p*u*w + p*w**2 - 3*q*u*v",
+      "v*(p*u + p*w - 3*q*v)",
+      "p*v**2 + 3*u**2 + 3*u*w + w**2",
+      "-p**2*v**2 - 3*p*u**2 - 2*p*u*w - 3*q*v*w"
+    ],
+    "inverse_projection": [
+      "z0-p*z2",
+      "z1",
+      "h+p*z2"
+    ],
+    "polar_exceptional_factor": "-p*u - p*w + 3*q*v"
+  },
+  "quadric_rational_point": [
+    "p",
+    "0",
+    "1",
+    "-p"
+  ],
+  "quadric_to_torus": {
+    "common_denominator": "p**2*z0*z2**2 - p*q*z1*z2**2 - 2*p*z0**2*z2 + p*z0*z1**2 + q**2*z2**3 + 3*q*z0*z1*z2 - q*z1**3 + z0**3",
+    "coordinate_numerators": [
+      "h*p**2*z2**2 - 2*h*p*z0*z2 + h*p*z1**2 + h*q*z1*z2 + h*z0**2 + p**2*z0*z2**2 - p*q*z1*z2**2 - 2*p*z0**2*z2 + p*z0*z1**2 + q**2*z2**3 + 3*q*z0*z1*z2 - q*z1**3 + z0**3",
+      "-h*(q*z2**2 + z0*z1)",
+      "-h*(-p*z2**2 + z0*z2 - z1**2)"
+    ]
+  },
+  "schema": "c958-cubic-norm-torus-parametrization-v1",
+  "separability_open": "q*(4*p^3+27*q^2) != 0",
+  "torus_to_plane": [
+    "-p*x0*x2 + p*x2 + q*x1*x2 + x0**2 - 2*x0 + 1",
+    "-q*x2**2 - x0*x1 + x1",
+    "p**2*x0*x2**2 - p*q*x1*x2**2 - 2*p*x0**2*x2 + p*x0*x1**2 + 3*p*x0*x2 - p*x2 + q**2*x2**3 + 3*q*x0*x1*x2 - q*x1**3 - 3*q*x1*x2 + x0**3 - 3*x0**2 + 3*x0 - 1"
+  ],
+  "torus_to_quadric": {
+    "h_coordinate": "p**2*x0*x2**2 - p**2*x2**2 - p*q*x1*x2**2 - 2*p*x0**2*x2 + p*x0*x1**2 + 4*p*x0*x2 - p*x1**2 - 2*p*x2 + q**2*x2**3 + 3*q*x0*x1*x2 - q*x1**3 - 3*q*x1*x2 + x0**3 - 3*x0**2 + 3*x0 - 1",
+    "z_coordinates": [
+      "p**2*x2**2 - 2*p*x0*x2 + p*x1**2 + 2*p*x2 + q*x1*x2 + x0**2 - 2*x0 + 1",
+      "-q*x2**2 - x0*x1 + x1",
+      "p*x2**2 - x0*x2 + x1**2 + x2"
+    ]
+  },
+  "type_i1_specialization": {
+    "p": "-3*a^2",
+    "q": "-beta"
+  },
+  "type_i3_specialization": {
+    "p": "-a^2",
+    "q": "a^3+beta"
+  }
+}

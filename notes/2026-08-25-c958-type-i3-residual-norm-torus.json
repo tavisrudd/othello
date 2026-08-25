@@ -1,0 +1,70 @@
+{
+  "augmentation_generators": [
+    [
+      [
+        -1,
+        -1
+      ],
+      [
+        1,
+        0
+      ]
+    ],
+    [
+      [
+        1,
+        0
+      ],
+      [
+        -1,
+        -1
+      ]
+    ]
+  ],
+  "conclusion": "The type-I3 quotient cocharacter lattice is the S3 augmentation lattice, so T0/T3 is R^1_{E3/K}(Gm); the order-four kernel acts trivially on this residual torus.",
+  "cubic_discriminant": "-23*a**6 - 54*a**3*beta - 27*beta**2",
+  "cubic_etale_algebra": "E3=K[rho]/(rho^3-a^2*rho+a^3+beta)",
+  "full_type_i3_group_order": 24,
+  "input_sha256": {
+    "papers/cubic-stabilization-irrationality/verification/derive_slice_cover.py": "89eee9a9d04cb555e45c8b4f461bbf20ccb6b1d38cfabdad2b8ce67c1ff42373"
+  },
+  "residual_cocharacter_generators": [
+    [
+      [
+        -1,
+        1
+      ],
+      [
+        0,
+        1
+      ]
+    ],
+    [
+      [
+        -1,
+        1
+      ],
+      [
+        -1,
+        0
+      ]
+    ]
+  ],
+  "residual_group_order": 6,
+  "residual_kernel_order": 4,
+  "schema": "c958-type-i3-residual-norm-torus-v1",
+  "uniform_norm_torus_specialization": {
+    "p": "-a^2",
+    "q": "a^3+beta"
+  },
+  "unimodular_conjugation_to_augmentation_group": [
+    [
+      -1,
+      -1
+    ],
+    [
+      -1,
+      0
+    ]
+  ]
+}
