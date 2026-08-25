@@ -111,3 +111,13 @@ gives a cyclic group of order four with three inversion orbits. The matching
 count supports the proposed quotient and is frozen in the test suite, but it
 does not replace the missing intrinsic-extraction and lexicographic-minimum
 proofs.
+
+The extractor need not construct a separately encoded `F_(q^2)`. Given the
+monic irreducible gcd `Q`, use the quadratic algebra `A=F_q[X]/(Q)`. The trace
+pairing is nondegenerate, so the first two syndrome coordinates uniquely solve
+for `lambda in A` from `s_i=Tr(lambda a^i)`, `i=0,1`. Then
+`rho=lambda^(q-1)` lies in `T`; projective rescaling by `F_q^*` leaves it
+unchanged, while choosing the conjugate root inverts it. This gives the
+implementation route for a basis-independent quotient-class extractor. What
+remains genuinely geometric is the rule taking that class to the globally
+lex-minimal irreducible target quadratic.
