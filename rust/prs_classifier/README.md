@@ -10,6 +10,8 @@ This is the C969 implementation crate.  Its current executable slice provides:
   `O(q)`, `O(q^2)`, and `O(q^3)` prefix enumeration;
 - distinct rational-root recovery, Vandermonde magnitude recovery, and an
   independently replayed locator certificate;
+- positive deep certificates whose independent verifier replays the frozen
+  theorem-domain row, transporter, family route, and radius promotion;
 - explicit `PGL(2,q) x Gal(F_q/F_p)` canonicalization with the exact
   `m(q^3-q)` cost exposed; and
 - the five required command names.
@@ -35,3 +37,8 @@ hyperplane.  For R5--R7 it is now reached only as the bounded-small-field and
 defensive correctness branch after the 12-point selector.  The proof and
 degree count are recorded in
 `notes/reed-solomon-tasks/c969-terminal-hyperplane-solver.md`.
+
+`verify-certificate` accepts both `c969-locator-certificate-v1` negative
+witnesses and `c969-deep-certificate-v1` positive certificates.  A deep
+certificate is emitted only for `DEEP`, never for `UNRESOLVED` or
+`UNSUPPORTED`.

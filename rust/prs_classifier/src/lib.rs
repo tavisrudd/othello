@@ -4,6 +4,7 @@ use thiserror::Error;
 
 pub const REQUEST_SCHEMA: &str = "c969-request-v1";
 pub const CERTIFICATE_SCHEMA: &str = "c969-locator-certificate-v1";
+pub const DEEP_CERTIFICATE_SCHEMA: &str = "c969-deep-certificate-v1";
 
 #[derive(Debug, Error, PartialEq, Eq)]
 pub enum Error {
@@ -41,6 +42,8 @@ pub enum Error {
     NoLocator(usize),
     #[error("unsupported request schema or evaluation convention")]
     BadSchema,
+    #[error("positive deep certificate failed independent replay")]
+    BadDeepCertificate,
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Eq)]
@@ -80,6 +83,34 @@ pub struct LocatorCertificate {
     pub support: Vec<Root>,
     pub magnitudes: Vec<u32>,
     pub candidates_examined: u64,
+}
+
+#[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Eq)]
+pub struct DeepCertificate {
+    pub schema: String,
+    pub domain_registry_version: u32,
+    pub request: Request,
+    pub normalized_syndrome: Vec<u32>,
+    pub distance: usize,
+    pub family: String,
+    pub family_evidence: DeepFamilyEvidence,
+    pub canonical_syndrome: Vec<u32>,
+    pub transporter: Transporter,
+    pub split_free_source: String,
+    pub radius_source: String,
+}
+
+#[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Eq)]
+#[serde(tag = "route", rename_all = "snake_case")]
+pub enum DeepFamilyEvidence {
+    Persistent {
+        kind: PersistentKind,
+    },
+    FrozenOrbit {
+        pgl_orbit_count: usize,
+        semilinear_orbit_size: u64,
+        semilinear_stabilizer_order: u64,
+    },
 }
 
 #[derive(Clone, Debug, Serialize, PartialEq, Eq)]
@@ -133,6 +164,7 @@ pub struct ClassificationResult {
     pub family: Option<String>,
     pub canonicalization: Option<Canonicalization>,
     pub locator_certificate: Option<LocatorCertificate>,
+    pub deep_certificate: Option<DeepCertificate>,
     pub split_free_source: Option<String>,
     pub radius_source: Option<String>,
     pub note: String,
@@ -161,6 +193,21 @@ pub struct FrozenField {
 struct FrozenOrbitRegistry {
     schema: String,
     records: Vec<FrozenOrbit>,
+}
+
+#[derive(Debug, Deserialize)]
+struct TheoremDomainRegistry {
+    schema: String,
+    registry_version: u32,
+    levels: Vec<TheoremDomainLevel>,
+}
+
+#[derive(Debug, Deserialize)]
+struct TheoremDomainLevel {
+    redundancy: usize,
+    covering_radius: usize,
+    deep_predicate: String,
+    families: Vec<String>,
 }
 
 #[derive(Clone, Debug)]
@@ -493,6 +540,125 @@ pub fn frozen_orbit_lookup(
     })
 }
 
+fn theorem_domain_registry() -> TheoremDomainRegistry {
+    let registry: TheoremDomainRegistry = serde_json::from_str(include_str!(
+        "../../../notes/reed-solomon-tasks/c969-theorem-domain-v1.json"
+    ))
+    .expect("frozen theorem-domain registry must parse");
+    assert_eq!(registry.schema, "c969-theorem-domain-v1");
+    assert_eq!(registry.registry_version, 1);
+    registry
+}
+
+fn deep_domain_level(redundancy: usize, q: u32) -> Option<TheoremDomainLevel> {
+    theorem_domain_registry()
+        .levels
+        .into_iter()
+        .find(|level| level.redundancy == redundancy)
+        .filter(|level| {
+            level
+                .deep_predicate
+                .strip_prefix("q>=")
+                .and_then(|threshold| threshold.parse::<u32>().ok())
+                .is_some_and(|threshold| q >= threshold)
+        })
+}
+
+fn split_free_source(kind: PersistentKind, frozen: Option<&FrozenOrbit>) -> String {
+    match kind {
+        PersistentKind::Tangent | PersistentKind::Sigma => {
+            "intrinsic quadratic Hankel-gcd replay".into()
+        }
+        _ if frozen.is_some() => "frozen semilinear exception registry".into(),
+        _ => "locator search exhausted through degree r-2".into(),
+    }
+}
+
+fn deep_family_evidence(
+    kind: PersistentKind,
+    frozen: Option<&FrozenOrbit>,
+) -> Option<DeepFamilyEvidence> {
+    match kind {
+        PersistentKind::Tangent | PersistentKind::Sigma => {
+            Some(DeepFamilyEvidence::Persistent { kind })
+        }
+        _ => frozen.map(|record| DeepFamilyEvidence::FrozenOrbit {
+            pgl_orbit_count: record.pgl_orbit_count,
+            semilinear_orbit_size: record.semilinear_orbit_size,
+            semilinear_stabilizer_order: record.semilinear_stabilizer_order,
+        }),
+    }
+}
+
+pub fn verify_deep_certificate(
+    certificate: &DeepCertificate,
+    transporter_limit: u64,
+) -> Result<(), Error> {
+    if certificate.schema != DEEP_CERTIFICATE_SCHEMA || certificate.domain_registry_version != 1 {
+        return Err(Error::BadDeepCertificate);
+    }
+    let (field, syndrome) =
+        validate_request(&certificate.request).map_err(|_| Error::BadDeepCertificate)?;
+    if syndrome != certificate.normalized_syndrome
+        || certificate.distance + 1 != certificate.request.redundancy
+    {
+        return Err(Error::BadDeepCertificate);
+    }
+
+    let canonicalization = canonicalize_syndrome(&certificate.request, transporter_limit)
+        .map_err(|_| Error::BadDeepCertificate)?;
+    if canonicalization.canonical_syndrome != certificate.canonical_syndrome
+        || canonicalization.transporter != certificate.transporter
+    {
+        return Err(Error::BadDeepCertificate);
+    }
+    let (transported, scale) = apply_semilinear(
+        &field,
+        &syndrome,
+        certificate.transporter.frobenius_exponent,
+        certificate.transporter.matrix,
+    )
+    .map_err(|_| Error::BadDeepCertificate)?;
+    if transported != certificate.canonical_syndrome
+        || scale != certificate.transporter.projective_output_scale
+    {
+        return Err(Error::BadDeepCertificate);
+    }
+
+    let persistent = persistent_kind(&field, &syndrome);
+    let frozen = frozen_orbit_lookup(
+        &field,
+        certificate.request.redundancy,
+        &certificate.canonical_syndrome,
+    );
+    let replayed_family = match persistent {
+        PersistentKind::Tangent => Some("persistent.tangent"),
+        PersistentKind::Sigma => Some("persistent.sigma"),
+        _ => frozen.as_ref().map(|record| record.family.as_str()),
+    };
+    if replayed_family != Some(certificate.family.as_str())
+        || deep_family_evidence(persistent, frozen.as_ref())
+            != Some(certificate.family_evidence.clone())
+        || split_free_source(persistent, frozen.as_ref()) != certificate.split_free_source
+    {
+        return Err(Error::BadDeepCertificate);
+    }
+
+    let level = deep_domain_level(certificate.request.redundancy, field.order())
+        .ok_or(Error::BadDeepCertificate)?;
+    let expected_radius_source = format!(
+        "theorem-domain-v1:R{} rho={} for {}",
+        level.redundancy, level.covering_radius, level.deep_predicate
+    );
+    if level.covering_radius != certificate.distance
+        || !level.families.contains(&certificate.family)
+        || certificate.radius_source != expected_radius_source
+    {
+        return Err(Error::BadDeepCertificate);
+    }
+    Ok(())
+}
+
 pub fn classify(
     request: &Request,
     locator_candidate_limit: u64,
@@ -511,6 +677,7 @@ pub fn classify(
                     family: None,
                     canonicalization: None,
                     locator_certificate: Some(certificate),
+                    deep_certificate: None,
                     split_free_source: None,
                     radius_source: None,
                     note: "explicit split locator and nonzero magnitudes certify a closer word"
@@ -534,50 +701,38 @@ pub fn classify(
         _ => frozen.as_ref().map(|record| record.family.clone()),
     };
     let q = field.order();
-    let (status, distance, radius_source, note) = match request.redundancy {
-        5 if q >= 7 && family.is_some() => (
-            VerdictStatus::Deep,
-            Some(4),
-            Some("theorem-domain-v1:R5 rho=4".into()),
-            "frozen R5 family and radius routes are both complete".into(),
-        ),
-        6 if q >= 7 && family.is_some() => (
-            VerdictStatus::Deep,
-            Some(5),
-            Some("theorem-domain-v1:R6 rho=5".into()),
-            "frozen R6 family and radius routes are both complete".into(),
-        ),
-        7 if matches!(q, 7..=9) && family.is_some() => (
+    let domain_level = deep_domain_level(request.redundancy, q);
+    let (status, distance, radius_source, note) = if request.redundancy == 7
+        && matches!(q, 7..=9)
+        && family.is_some()
+    {
+        (
             VerdictStatus::Unresolved,
             None,
             None,
             "split-free classification is exact, but the frozen surface has no covering-radius premise".into(),
-        ),
-        7 if q >= 11 && family.is_some() => (
-            VerdictStatus::Deep,
-            Some(6),
-            Some("theorem-domain-v1:R7 rho=6 for q>=11".into()),
-            "frozen R7 family and radius routes are both complete".into(),
-        ),
-        8 if q >= 43 && family.is_some() => (
-            VerdictStatus::Deep,
-            Some(7),
-            Some("theorem-domain-v1:R8 rho=7 for q>=43".into()),
-            "persistent-only R8 theorem applies".into(),
-        ),
-        9 if q >= 53 && family.is_some() => (
-            VerdictStatus::Deep,
-            Some(8),
-            Some("theorem-domain-v1:R9 rho=8 for q>=53".into()),
-            "persistent-only R9 theorem applies".into(),
-        ),
-        10 if q >= 59 && family.is_some() => (
-            VerdictStatus::Deep,
-            Some(9),
-            Some("theorem-domain-v1:R10 rho=9 for q>=59".into()),
-            "persistent-only R10 theorem applies".into(),
-        ),
-        _ => (
+        )
+    } else if let (Some(family), Some(level)) = (family.as_ref(), domain_level.as_ref()) {
+        if level.families.contains(family) {
+            (
+                VerdictStatus::Deep,
+                Some(level.covering_radius),
+                Some(format!(
+                    "theorem-domain-v1:R{} rho={} for {}",
+                    level.redundancy, level.covering_radius, level.deep_predicate
+                )),
+                "frozen family and covering-radius routes are both complete".into(),
+            )
+        } else {
+            (
+                VerdictStatus::Unsupported,
+                None,
+                None,
+                "recognized family is absent from the applicable theorem-domain row".into(),
+            )
+        }
+    } else {
+        (
             VerdictStatus::Unsupported,
             None,
             None,
@@ -585,10 +740,30 @@ pub fn classify(
                 "family recognized, but code classification lies outside the frozen theorem range"
                     .into()
             } else {
-                "split-free input has no enabled structural adapter in this implementation"
-                    .into()
+                "split-free input has no enabled structural adapter in this implementation".into()
             },
-        ),
+        )
+    };
+    let replay_source = split_free_source(persistent, frozen.as_ref());
+    let deep_certificate = if status == VerdictStatus::Deep {
+        Some(DeepCertificate {
+            schema: DEEP_CERTIFICATE_SCHEMA.into(),
+            domain_registry_version: 1,
+            request: request.clone(),
+            normalized_syndrome: syndrome.clone(),
+            distance: distance.expect("DEEP verdict has radius"),
+            family: family.clone().expect("DEEP verdict has family"),
+            family_evidence: deep_family_evidence(persistent, frozen.as_ref())
+                .expect("DEEP verdict has family evidence"),
+            canonical_syndrome: canonicalization.canonical_syndrome.clone(),
+            transporter: canonicalization.transporter.clone(),
+            split_free_source: replay_source.clone(),
+            radius_source: radius_source
+                .clone()
+                .expect("DEEP verdict has radius source"),
+        })
+    } else {
+        None
     };
     Ok(ClassificationResult {
         status,
@@ -597,13 +772,8 @@ pub fn classify(
         family,
         canonicalization: Some(canonicalization),
         locator_certificate: None,
-        split_free_source: Some(match persistent {
-            PersistentKind::Tangent | PersistentKind::Sigma => {
-                "intrinsic quadratic Hankel-gcd replay".into()
-            }
-            _ if frozen.is_some() => "frozen semilinear exception registry".into(),
-            _ => "locator search exhausted through degree r-2".into(),
-        }),
+        deep_certificate,
+        split_free_source: Some(replay_source),
         radius_source,
         note,
     })
@@ -1464,6 +1634,20 @@ mod tests {
         assert_eq!(result.status, VerdictStatus::Deep);
         assert_eq!(result.distance, Some(4));
         assert_eq!(result.family.as_deref(), Some("r5.char3_wild"));
+        let certificate = result.deep_certificate.as_ref().unwrap();
+        verify_deep_certificate(certificate, 10_000).unwrap();
+        let mut corrupted = certificate.clone();
+        if let DeepFamilyEvidence::FrozenOrbit {
+            semilinear_orbit_size,
+            ..
+        } = &mut corrupted.family_evidence
+        {
+            *semilinear_orbit_size += 1;
+        }
+        assert_eq!(
+            verify_deep_certificate(&corrupted, 10_000),
+            Err(Error::BadDeepCertificate)
+        );
     }
 
     #[test]
@@ -1504,5 +1688,31 @@ mod tests {
             search_exact_locator(&request(prime_field(7), 5, vec![0, 3, 5, 4, 1]), 10_000).unwrap();
         certificate.magnitudes[0] = 0;
         assert_eq!(verify_certificate(&certificate), Err(Error::BadMagnitude));
+    }
+
+    #[test]
+    fn deep_certificate_verifier_rejects_corrupted_routes() {
+        let result = classify(
+            &request(prime_field(17), 6, vec![0, 0, 0, 0, 1, 0]),
+            10_000,
+            10_000,
+        )
+        .unwrap();
+        let certificate = result.deep_certificate.unwrap();
+        verify_deep_certificate(&certificate, 10_000).unwrap();
+
+        let mut corrupted = certificate.clone();
+        corrupted.radius_source.push_str("-corrupt");
+        assert_eq!(
+            verify_deep_certificate(&corrupted, 10_000),
+            Err(Error::BadDeepCertificate)
+        );
+
+        let mut corrupted = certificate;
+        corrupted.family = "r6.sporadic".into();
+        assert_eq!(
+            verify_deep_certificate(&corrupted, 10_000),
+            Err(Error::BadDeepCertificate)
+        );
     }
 }

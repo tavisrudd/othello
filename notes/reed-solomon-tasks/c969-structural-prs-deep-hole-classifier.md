@@ -20,7 +20,9 @@ exact
 bounded small-field fallback.  Uniform nonpersistent formula adapters and
 formula-speed canonicalizers remain open; the remaining complexity work is
 C607's general fixed-parameter theorem and the nonterminal classifier
-branches.  Exact
+branches.  Positive `DEEP` results now include an independently replayed
+certificate binding the theorem-domain row, canonical transporter, intrinsic
+or frozen family evidence, split-free route, and radius promotion.  Exact
 decoding remains complete within an explicit candidate budget.  Code and
 mathematics only; no manuscript edits.
 

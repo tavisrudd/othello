@@ -1,7 +1,8 @@
 use clap::{Parser, Subcommand};
 use prs_classifier::{
-    canonicalize_syndrome, classify, search_exact_locator, verify_certificate, LocatorCertificate,
-    Request,
+    canonicalize_syndrome, classify, search_exact_locator, verify_certificate,
+    verify_deep_certificate, DeepCertificate, LocatorCertificate, Request, CERTIFICATE_SCHEMA,
+    DEEP_CERTIFICATE_SCHEMA,
 };
 use std::fs;
 use std::io::{self, Read};
@@ -44,8 +45,20 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let cli = Cli::parse();
     match cli.command {
         Command::VerifyCertificate { input } => {
-            let certificate: LocatorCertificate = serde_json::from_str(&read_input(&input)?)?;
-            verify_certificate(&certificate)?;
+            let input = read_input(&input)?;
+            let value: serde_json::Value = serde_json::from_str(&input)?;
+            match value.get("schema").and_then(serde_json::Value::as_str) {
+                Some(CERTIFICATE_SCHEMA) => {
+                    verify_certificate(&serde_json::from_value::<LocatorCertificate>(value)?)?;
+                }
+                Some(DEEP_CERTIFICATE_SCHEMA) => {
+                    verify_deep_certificate(
+                        &serde_json::from_value::<DeepCertificate>(value)?,
+                        10_000_000,
+                    )?;
+                }
+                _ => return Err("unsupported certificate schema".into()),
+            }
             println!("{{\"status\":\"VALID\"}}");
         }
         Command::Distance(args) | Command::Decode(args) => {

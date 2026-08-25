@@ -50,6 +50,47 @@
       },
       "additionalProperties": false
     },
+    "deep_certificate": {
+      "type": "object",
+      "required": [
+        "schema",
+        "domain_registry_version",
+        "request",
+        "normalized_syndrome",
+        "distance",
+        "family",
+        "family_evidence",
+        "canonical_syndrome",
+        "transporter",
+        "split_free_source",
+        "radius_source"
+      ],
+      "properties": {
+        "schema": {"const": "c969-deep-certificate-v1"},
+        "domain_registry_version": {"const": 1},
+        "request": {"$ref": "#"},
+        "normalized_syndrome": {"type": "array", "items": {"type": "integer", "minimum": 0}},
+        "distance": {"type": "integer", "minimum": 0},
+        "family": {"type": "string"},
+        "family_evidence": {
+          "type": "object",
+          "required": ["route"],
+          "properties": {
+            "route": {"enum": ["persistent", "frozen_orbit"]},
+            "kind": {"enum": ["tangent", "sigma"]},
+            "pgl_orbit_count": {"type": "integer", "minimum": 1},
+            "semilinear_orbit_size": {"type": "integer", "minimum": 1},
+            "semilinear_stabilizer_order": {"type": "integer", "minimum": 1}
+          },
+          "additionalProperties": false
+        },
+        "canonical_syndrome": {"type": "array", "items": {"type": "integer", "minimum": 0}},
+        "transporter": {"$ref": "#/$defs/transporter"},
+        "split_free_source": {"type": "string"},
+        "radius_source": {"type": "string"}
+      },
+      "additionalProperties": false
+    },
     "verdict": {
       "type": "object",
       "required": ["status", "distance", "domain_registry_version", "certificate"],

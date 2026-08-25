@@ -125,10 +125,10 @@ both infinity charts, its bilinear last-two-root equation, the collision
 divisor, and a bounded small-field branch.  Failure through degree `r-1`
 must prove that the final `r`-column basis solution has no zero coefficient.
 
-The proposed R5/R6/R7 operation counts remain hypotheses until that solver is
-proved: `O(q)`, `O(q^2)`, and `O(q^3)` field operations, respectively, plus
-fixed-degree factorization.  The generic deterministic theorem and the
-constructive implementation have different cost claims.  Kayal supplies the
+The R5/R6/R7 selector bounds are now proved: `O(q)`, `O(q^2)`, and `O(q^3)`
+field operations, respectively, plus fixed-degree factorization.  The generic
+deterministic theorem and the constructive implementation still have different
+cost claims.  Kayal supplies the
 candidate `F(r) poly(log q)` decision route only after a uniform exponent is
 extracted; unconditional explicit recovery may use
 `F(r) q poly(log q)` self-reduction.  No implementation benchmark may present
@@ -162,9 +162,14 @@ Exact decoding now searches through degree `r-1`; if that complete search is
 empty, any fixed `r` distinct NRC columns form a basis and the failed lower
 search forces every recovered coefficient to be nonzero.  This supplies a
 replayable nearest-word certificate at distance `r` as well.  The implementation
-is exact within its candidate budget, but its terminal fallback has
-`q^(r-2)` projective candidates before root testing and does not discharge
-C608's faster `O(q),O(q^2),O(q^3)` selection bounds.
+is exact within its candidate budget.  C608's terminal gate is now discharged
+by the proved 12-point bilinear selector in
+`c969-terminal-hyperplane-solver.md`, with streaming `O(q)`, `O(q^2)`, and
+`O(q^3)` prefix enumeration and a bounded small-field oracle.  `DEEP` results
+now carry a separate `c969-deep-certificate-v1`; its verifier reparses the
+frozen theorem-domain row, recomputes the canonical transporter, replays the
+intrinsic persistent invariant or frozen orbit row, and checks the independent
+covering-radius promotion.
 
 ## Partial mystery and risk ledger
 
