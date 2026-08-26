@@ -59,7 +59,8 @@ algorithms rather than mirroring the Python module tree.
 representation.
 
 Dependencies are admitted when used. `rustc-hash` serves deterministic cold
-interning, `rayon` is an optional coarse-parallel feature, `serde` handles cold
+interning, `rayon` optionally partitions independent composition frontiers and
+Pareto/lattice kernels with deterministic reduction, `serde` handles cold
 boundaries, and `thiserror` handles checked input failures. `proptest` and
 `serde_json` are development-only. Criterion 0.7 supplies the Rust-1.82-compatible
 statistical locality benchmark target.
@@ -222,7 +223,8 @@ and 33.4% to retiring; multiplexed counters make these approximate. The change
 is state representation and allocation removal, not reduced transition counts.
 
 Repeated callers can pass a `WeightedRepairWorkspace` to
-`solve_adaptive_with_workspace` or `solve_dense_lattice_with_workspace`.
+`solve_adaptive_with_workspace`, `solve_adaptive_parallel_with_workspace`, or
+`solve_dense_lattice_with_workspace`.
 Frontiers, witnesses, membership bits, and narrow packed metadata then retain
 their allocations between exact solves; result ownership remains unchanged.
 The workspace is problem-independent and offers `shrink_to_fit` when a caller
@@ -267,6 +269,15 @@ production-equivalent profile and `x86-64-v3`, its point estimates are 3.794 us
 for balanced, 8.097 us for small-state, and 67.941 us for large nonuniform.
 Criterion values are within-harness microbenchmark baselines; release claims
 continue to use the pinned rotated cross-binary harness.
+
+The opt-in `parallel_kernels` sweep measures exact output parity at 1, 2, 4,
+6, 8, 12, 16, 20, and 24 workers. On the 24-core benchmark host, the bounded
+width-nine composition fixture improves from 4.925 ms sequential to 1.562 ms
+at 16 workers (`3.15x`); 24 workers take 1.831 ms. The heterogeneous adaptive
+scheduler fixture improves from 44.402 ms to 18.189 ms at 12 workers
+(`2.44x`); 24 workers take 20.831 ms. These two fixtures motivate the CLI's
+command-specific default caps; they are crossover measurements, not universal
+thread-count prescriptions.
 
 Explicit SIMD was considered after profiling. The stride/block prefix loop is
 already contiguous and SIMD-friendly, but after division removal it was not
@@ -457,6 +468,8 @@ nix shell nixpkgs#python3 --command \
     --baseline-binary /path/to/saved-pre-locality-binary --ab-rounds 21
 nix shell nixpkgs#cargo nixpkgs#rustc --command \
   cargo bench --bench scheduler_locality
+nix shell nixpkgs#cargo nixpkgs#rustc --command \
+  cargo bench --features parallel --bench parallel_kernels
 nix shell nixpkgs#python3 --command \
   python3 run_benchmarks.py --write --tuning-only --ab-rounds 21
 ```

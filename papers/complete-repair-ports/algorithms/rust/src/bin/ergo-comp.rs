@@ -5,7 +5,11 @@ use ergo_comp::{
 };
 use serde::{Deserialize, Serialize};
 use std::io::{self, Read};
+use std::num::NonZeroUsize;
 use std::path::{Path, PathBuf};
+
+const DEFAULT_COMPOSITION_THREADS: usize = 16;
+const DEFAULT_SCHEDULER_THREADS: usize = 12;
 
 #[derive(Debug, Parser)]
 #[command(
@@ -25,12 +29,24 @@ enum Command {
         /// JSON input file, or '-' for standard input.
         #[arg(short, long, default_value = "-")]
         input: PathBuf,
+        /// Use the optional parallel composition kernel.
+        #[arg(long)]
+        parallel: bool,
+        /// Number of workers; defaults to min(available parallelism, 16).
+        #[arg(long, requires = "parallel")]
+        threads: Option<NonZeroUsize>,
     },
     /// Maximize simultaneous repairs under resource capacities.
     Schedule {
         /// JSON input file, or '-' for standard input.
         #[arg(short, long, default_value = "-")]
         input: PathBuf,
+        /// Use parallel Pareto kernels when the selected backend benefits.
+        #[arg(long)]
+        parallel: bool,
+        /// Number of workers; defaults to min(available parallelism, 12).
+        #[arg(long, requires = "parallel")]
+        threads: Option<NonZeroUsize>,
     },
 }
 
@@ -136,7 +152,7 @@ fn write_json<T: Serialize>(value: &T) -> Result<()> {
     Ok(())
 }
 
-fn compose_for<const P: u8>(input: ComposeInput) -> Result<ComposeOutput> {
+fn compose_for<const P: u8>(input: ComposeInput, parallel: bool) -> Result<ComposeOutput> {
     let entries = input
         .inner
         .entries
@@ -151,8 +167,19 @@ fn compose_for<const P: u8>(input: ComposeInput) -> Result<ComposeOutput> {
         .map(MatrixSpec::into_matrix::<P>)
         .collect::<Result<Vec<_>>>()?;
     let target = input.target.into_matrix::<P>()?;
-    let compiled = CompositionTable::compose::<P>(&outer_blocks, &inner)
-        .context("failed to compose recovery costs")?;
+    let compiled = if parallel {
+        #[cfg(feature = "parallel")]
+        {
+            CompositionTable::compose_parallel::<P>(&outer_blocks, &inner)
+        }
+        #[cfg(not(feature = "parallel"))]
+        {
+            bail!("parallel execution requires building ergo-comp with --features parallel")
+        }
+    } else {
+        CompositionTable::compose::<P>(&outer_blocks, &inner)
+    }
+    .context("failed to compose recovery costs")?;
     let answer = compiled
         .answer::<P>(&target)
         .context("failed to reconstruct composition witness")?;
@@ -177,19 +204,19 @@ fn compose_for<const P: u8>(input: ComposeInput) -> Result<ComposeOutput> {
     })
 }
 
-fn compose(input: ComposeInput) -> Result<ComposeOutput> {
+fn compose(input: ComposeInput, parallel: bool) -> Result<ComposeOutput> {
     match input.prime {
-        2 => compose_for::<2>(input),
-        3 => compose_for::<3>(input),
-        5 => compose_for::<5>(input),
-        7 => compose_for::<7>(input),
-        11 => compose_for::<11>(input),
-        13 => compose_for::<13>(input),
+        2 => compose_for::<2>(input, parallel),
+        3 => compose_for::<3>(input, parallel),
+        5 => compose_for::<5>(input, parallel),
+        7 => compose_for::<7>(input, parallel),
+        11 => compose_for::<11>(input, parallel),
+        13 => compose_for::<13>(input, parallel),
         prime => bail!("unsupported prime {prime}; supported primes are 2, 3, 5, 7, 11, and 13"),
     }
 }
 
-fn schedule(input: ScheduleInput) -> Result<ScheduleOutput> {
+fn schedule(input: ScheduleInput, parallel: bool) -> Result<ScheduleOutput> {
     let problem = match input.positive_grading {
         Some(weights) => WeightedRepairProblem::from_families_with_positive_grading(
             &input.capacities,
@@ -203,9 +230,19 @@ fn schedule(input: ScheduleInput) -> Result<ScheduleOutput> {
         WeightedSchedulerBackend::SparsePareto => "sparse-pareto",
         WeightedSchedulerBackend::DenseLattice => "dense-lattice",
     };
-    let answer = problem
-        .solve_adaptive()
-        .context("failed to solve repair scheduler")?;
+    let answer = if parallel {
+        #[cfg(feature = "parallel")]
+        {
+            problem.solve_adaptive_parallel()
+        }
+        #[cfg(not(feature = "parallel"))]
+        {
+            bail!("parallel execution requires building ergo-comp with --features parallel")
+        }
+    } else {
+        problem.solve_adaptive()
+    }
+    .context("failed to solve repair scheduler")?;
     Ok(ScheduleOutput {
         repaired_count: answer.repaired_count(),
         complete: answer.complete(),
@@ -225,10 +262,66 @@ fn schedule(input: ScheduleInput) -> Result<ScheduleOutput> {
     })
 }
 
+fn run_with_threads<T: Send>(
+    parallel: bool,
+    threads: Option<NonZeroUsize>,
+    _default_threads: usize,
+    operation: impl FnOnce() -> Result<T> + Send,
+) -> Result<T> {
+    if !parallel {
+        return operation();
+    }
+    #[cfg(feature = "parallel")]
+    {
+        let threads = threads.map_or_else(
+            || {
+                std::thread::available_parallelism()
+                    .map_or(1, NonZeroUsize::get)
+                    .min(_default_threads)
+            },
+            NonZeroUsize::get,
+        );
+        rayon::ThreadPoolBuilder::new()
+            .num_threads(threads)
+            .build()
+            .context("failed to create parallel worker pool")?
+            .install(operation)
+    }
+    #[cfg(not(feature = "parallel"))]
+    {
+        let _ = threads;
+        bail!("parallel execution requires building ergo-comp with --features parallel")
+    }
+}
+
 fn main() -> Result<()> {
     match Cli::parse().command {
-        Command::Compose { input } => write_json(&compose(read_json(&input)?)?),
-        Command::Schedule { input } => write_json(&schedule(read_json(&input)?)?),
+        Command::Compose {
+            input,
+            parallel,
+            threads,
+        } => {
+            let input = read_json(&input)?;
+            write_json(&run_with_threads(
+                parallel,
+                threads,
+                DEFAULT_COMPOSITION_THREADS,
+                || compose(input, parallel),
+            )?)
+        }
+        Command::Schedule {
+            input,
+            parallel,
+            threads,
+        } => {
+            let input = read_json(&input)?;
+            write_json(&run_with_threads(
+                parallel,
+                threads,
+                DEFAULT_SCHEDULER_THREADS,
+                || schedule(input, parallel),
+            )?)
+        }
     }
 }
 
@@ -246,25 +339,28 @@ mod tests {
 
     #[test]
     fn composition_returns_cost_and_local_witness() {
-        let output = compose(ComposeInput {
-            prime: 3,
-            inner: CostTableSpec {
-                rows: 1,
-                cols: 1,
-                entries: vec![
-                    CostEntrySpec {
-                        label: matrix(1, 1, &[0]),
-                        cost: 0,
-                    },
-                    CostEntrySpec {
-                        label: matrix(1, 1, &[1]),
-                        cost: 2,
-                    },
-                ],
+        let output = compose(
+            ComposeInput {
+                prime: 3,
+                inner: CostTableSpec {
+                    rows: 1,
+                    cols: 1,
+                    entries: vec![
+                        CostEntrySpec {
+                            label: matrix(1, 1, &[0]),
+                            cost: 0,
+                        },
+                        CostEntrySpec {
+                            label: matrix(1, 1, &[1]),
+                            cost: 2,
+                        },
+                    ],
+                },
+                outer_blocks: vec![matrix(1, 1, &[1])],
+                target: matrix(1, 1, &[1]),
             },
-            outer_blocks: vec![matrix(1, 1, &[1])],
-            target: matrix(1, 1, &[1]),
-        })
+            false,
+        )
         .unwrap();
         assert!(output.feasible);
         assert_eq!(output.cost, Some(2));
@@ -274,11 +370,14 @@ mod tests {
 
     #[test]
     fn scheduler_returns_complete_assignment_and_loads() {
-        let output = schedule(ScheduleInput {
-            capacities: vec![1, 1],
-            families: vec![vec![vec![1, 0], vec![0, 1]], vec![vec![1, 0], vec![0, 1]]],
-            positive_grading: Some(vec![1, 1]),
-        })
+        let output = schedule(
+            ScheduleInput {
+                capacities: vec![1, 1],
+                families: vec![vec![vec![1, 0], vec![0, 1]], vec![vec![1, 0], vec![0, 1]]],
+                positive_grading: Some(vec![1, 1]),
+            },
+            false,
+        )
         .unwrap();
         assert!(output.complete);
         assert_eq!(output.repaired_count, 2);

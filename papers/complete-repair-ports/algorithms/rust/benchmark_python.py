@@ -61,6 +61,25 @@ def scheduler_grid_spec(variant: str):
     return backend, tuple(int(field) for field in fields[2:])
 
 
+def heterogeneous_scheduler_problem(spec: tuple[int, int, int]):
+    resource_count, capacity, demand_count = spec
+    capacities = {resource: capacity for resource in range(resource_count)}
+    families = []
+    for demand in range(demand_count):
+        family = []
+        for resource in range(resource_count):
+            family.append({resource: 1 + int((demand + resource) % 3 == 0)})
+        families.append(tuple(family))
+    return tuple(families), capacities
+
+
+def heterogeneous_scheduler_grid_spec(variant: str):
+    fields = variant.split(":")
+    if len(fields) != 5 or fields[0] != "scheduler-heterogeneous-grid":
+        return None
+    return fields[1], tuple(int(field) for field in fields[2:])
+
+
 def graded_scheduler_problem(spec: tuple[int, int, int, int, int]):
     resource_count, capacity, demand_count, option_count, seed = spec
     capacities = {resource: capacity for resource in range(resource_count)}
@@ -155,11 +174,14 @@ def main() -> None:
     repetitions = int(repetitions_text)
     grid = scheduler_grid_spec(variant)
     graded_grid = graded_scheduler_grid_spec(variant)
+    heterogeneous_grid = heterogeneous_scheduler_grid_spec(variant)
     cp_model = None
     if variant in ("scheduler-cpsat", "scheduler-cpsat-small") or (
         grid is not None and grid[0] == "cpsat"
     ) or (
         graded_grid is not None and graded_grid[0].startswith("cpsat")
+    ) or (
+        heterogeneous_grid is not None and heterogeneous_grid[0].startswith("cpsat")
     ):
         from ortools.sat.python import cp_model as loaded_cp_model
 
@@ -177,11 +199,17 @@ def main() -> None:
         grid is not None and grid[0] == "cpsat"
     ) or (
         graded_grid is not None and graded_grid[0].startswith("cpsat")
+    ) or (
+        heterogeneous_grid is not None and heterogeneous_grid[0].startswith("cpsat")
     ):
         assert cp_model is not None
-        if graded_grid is not None:
+        if heterogeneous_grid is not None:
+            families, capacities = heterogeneous_scheduler_problem(heterogeneous_grid[1])
+            if heterogeneous_grid[0].startswith("cpsat-structured-"):
+                families = canonicalize_weighted_families(families, capacities)
+        elif graded_grid is not None:
             families, capacities = graded_scheduler_problem(graded_grid[1])
-            if graded_grid[0] == "cpsat-structured":
+            if graded_grid[0].startswith("cpsat-structured"):
                 families = canonicalize_weighted_families(families, capacities)
         else:
             families, capacities = scheduler_problem(
@@ -204,7 +232,7 @@ def main() -> None:
                 <= capacity
             )
         model.maximize(sum(variable for family in choices for variable in family))
-        if graded_grid is not None and graded_grid[0] == "cpsat-structured":
+        if graded_grid is not None and graded_grid[0].startswith("cpsat-structured"):
             resource_count, capacity, demand_count, _, _ = graded_grid[1]
             weights = tuple(1 if resource % 2 == 0 else 2 for resource in range(resource_count))
             capacity_mass = capacity * sum(weights)
@@ -212,14 +240,23 @@ def main() -> None:
                 sum(variable for family in choices for variable in family)
                 <= min(demand_count, capacity_mass // 4)
             )
-        reusable_solver = (
-            cp_model.CpSolver()
-            if graded_grid is not None and graded_grid[0] == "cpsat-structured"
-            else None
+        structured = (
+            graded_grid is not None and graded_grid[0].startswith("cpsat-structured")
+        ) or (
+            heterogeneous_grid is not None
+            and heterogeneous_grid[0].startswith("cpsat-structured")
         )
+        reusable_solver = cp_model.CpSolver() if structured else None
+        backend = (
+            heterogeneous_grid[0]
+            if heterogeneous_grid is not None
+            else graded_grid[0] if graded_grid is not None else grid[0] if grid is not None else ""
+        )
+        worker_suffix = backend.rsplit("-", 1)[-1]
+        workers = int(worker_suffix) if structured and worker_suffix.isdigit() else 1
         for _ in range(repetitions):
             solver = reusable_solver or cp_model.CpSolver()
-            solver.parameters.num_workers = 1
+            solver.parameters.num_workers = workers
             solver.parameters.random_seed = 0
             status = solver.solve(model)
             if status != cp_model.OPTIMAL:

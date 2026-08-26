@@ -45,6 +45,11 @@ harness = false
 name = "balanced_frontend"
 harness = false
 
+[[bench]]
+name = "parallel_kernels"
+harness = false
+required-features = ["parallel"]
+
 
 [profile.release]
 opt-level = 3

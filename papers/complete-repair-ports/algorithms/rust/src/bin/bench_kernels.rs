@@ -67,6 +67,41 @@ fn scheduler_grid_spec(variant: &str) -> Option<(&str, usize, u32, usize, usize,
         .then_some((backend, resources, capacity, demands, options, seed))
 }
 
+fn heterogeneous_scheduler_problem_with(
+    resource_count: usize,
+    capacity: u32,
+    demand_count: usize,
+) -> WeightedRepairProblem {
+    let capacities = vec![capacity; resource_count];
+    let families = (0..demand_count)
+        .map(|demand| {
+            (0..resource_count)
+                .map(|resource| {
+                    let mut loads = vec![0u32; resource_count];
+                    loads[resource] = 1 + u32::from((demand + resource) % 3 == 0);
+                    loads
+                })
+                .collect::<Vec<_>>()
+        })
+        .collect::<Vec<_>>();
+    WeightedRepairProblem::from_families(&capacities, &families).unwrap()
+}
+
+fn heterogeneous_scheduler_grid_spec(variant: &str) -> Option<(&str, usize, u32, usize)> {
+    let mut fields = variant.split(':');
+    if fields.next()? != "scheduler-heterogeneous-grid" {
+        return None;
+    }
+    let backend = fields.next()?;
+    let resources = fields.next()?.parse().ok()?;
+    let capacity = fields.next()?.parse().ok()?;
+    let demands = fields.next()?.parse().ok()?;
+    fields
+        .next()
+        .is_none()
+        .then_some((backend, resources, capacity, demands))
+}
+
 fn graded_scheduler_problem_with(
     resource_count: usize,
     capacity: u32,
@@ -200,6 +235,46 @@ fn main() {
     let mut work = 0u64;
     let mut peak_states = 0u64;
     let mut checksum = 0u64;
+    if let Some((backend, resources, capacity, demands)) =
+        heterogeneous_scheduler_grid_spec(&variant)
+    {
+        let problem = heterogeneous_scheduler_problem_with(resources, capacity, demands);
+        let planner_dense = problem.recommended_backend() == WeightedSchedulerBackend::DenseLattice;
+        #[cfg(feature = "parallel")]
+        let parallel_pool = backend.strip_prefix("parallel-").map(|threads| {
+            rayon::ThreadPoolBuilder::new()
+                .num_threads(threads.parse::<usize>().expect("invalid thread count"))
+                .build()
+                .unwrap()
+        });
+        for _ in 0..repetitions {
+            let answer = if backend == "adaptive" {
+                problem.solve_adaptive().unwrap()
+            } else if backend.starts_with("parallel-") {
+                #[cfg(feature = "parallel")]
+                {
+                    parallel_pool
+                        .as_ref()
+                        .expect("parallel pool was compiled")
+                        .install(|| problem.solve_adaptive_parallel().unwrap())
+                }
+                #[cfg(not(feature = "parallel"))]
+                panic!("parallel benchmark requires the parallel feature")
+            } else {
+                panic!("unknown heterogeneous scheduler backend")
+            };
+            work += answer.transitions_examined;
+            peak_states = peak_states.max(u64::from(answer.peak_pareto_states));
+            checksum = checksum.wrapping_add(answer.repaired_count() as u64);
+            black_box(answer);
+        }
+        let elapsed_ns = started.elapsed().as_nanos();
+        println!(
+            "{{\"variant\":\"{variant}\",\"repetitions\":{repetitions},\"elapsed_ns\":{elapsed_ns},\"work\":{work},\"peak_states\":{peak_states},\"peak_rss_kib\":{},\"checksum\":{checksum},\"planner_dense\":{planner_dense}}}",
+            peak_rss_kib()
+        );
+        return;
+    }
     if let Some((backend, resources, capacity, demands, options, seed)) =
         graded_scheduler_grid_spec(&variant)
     {

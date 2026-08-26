@@ -90,6 +90,22 @@ Matrix data is row-major and reduced modulo the declared prime. The composition
 command currently dispatches prime fields of orders 2, 3, 5, 7, 11, and 13;
 the library API can instantiate other prime orders at compile time.
 
+Large composition frontiers and generic scheduler Pareto/lattice kernels can
+run in parallel without changing the exact result or canonical witness:
+
+```sh
+cargo run --release --features parallel --bin ergo-comp -- \
+  compose --parallel --input examples/data/compose.json
+
+cargo run --release --features parallel --bin ergo-comp -- \
+  schedule --parallel --threads 12 --input examples/data/schedule.json
+```
+
+`--parallel` uses measured command-specific caps: at most 16 workers for
+composition and 12 for scheduling. `--threads N` makes the worker count
+explicit. Small or already-fused kernels stay serial when dispatch overhead
+would exceed the available parallel work.
+
 ## Why compilation matters
 
 A generic solver sees variables and constraints. ERGO-Comp also sees the

@@ -3,6 +3,9 @@ use std::hash::{Hash, Hasher};
 use rustc_hash::{FxHashMap, FxHasher};
 use thiserror::Error;
 
+#[cfg(feature = "parallel")]
+use rayon::prelude::*;
+
 const NONE: u32 = u32::MAX;
 const MAX_DENSE_LATTICE_STATES: usize = 1 << 24;
 const MAX_GRADED_SHELL_TABLE_CELLS: usize = 1 << 22;
@@ -10,6 +13,8 @@ const DENSE_DOMINANCE_WORK_MARGIN: usize = 4;
 const DENSE_REACHABLE_BOUND_MARGIN: usize = 4;
 const DENSE_ANTICHAIN_OCCUPANCY_DENOMINATOR: usize = 128;
 const DENSE_GRADED_NARROW_OCCUPANCY_DENOMINATOR: usize = 4096;
+#[cfg(feature = "parallel")]
+const PARALLEL_PARETO_WORK: usize = 1 << 16;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Error)]
 pub enum SchedulerError {
@@ -375,6 +380,7 @@ impl WeightedRepairProblem {
 
     fn solve_impl<const DENSE: bool, const PACKED: bool, const WIDE: bool>(
         &self,
+        _parallel: bool,
     ) -> Result<WeightedParallelRepairResult, SchedulerError> {
         let width = self.capacities.len();
         let (dense_strides, dense_state_space) = if DENSE {
@@ -614,23 +620,10 @@ impl WeightedRepairProblem {
                         &self.capacities,
                         &dense_strides,
                         dense_state_space,
+                        _parallel,
                     )
                 } else {
-                    let mut keep = vec![true; updated.len()];
-                    for (index, state) in updated.iter().enumerate() {
-                        let state_start = state.load_start as usize;
-                        keep[index] = !updated.iter().enumerate().any(|(other_index, other)| {
-                            if other_index == index || other.repairs < state.repairs {
-                                return false;
-                            }
-                            let other_start = other.load_start as usize;
-                            loads[other_start..other_start + width]
-                                .iter()
-                                .zip(&loads[state_start..state_start + width])
-                                .all(|(left, right)| left <= right)
-                        });
-                    }
-                    keep
+                    quadratic_pareto_keep(&updated, &loads, width, _parallel)
                 };
                 if dense_packed.is_some() {
                     packed_states = updated_packed
@@ -699,13 +692,40 @@ impl WeightedRepairProblem {
     }
 
     pub fn solve(&self) -> Result<WeightedParallelRepairResult, SchedulerError> {
-        self.solve_impl::<false, false, false>()
+        self.solve_impl::<false, false, false>(false)
+    }
+
+    /// Solves with parallel Pareto kernels when the frontier is large enough.
+    #[cfg(feature = "parallel")]
+    pub fn solve_parallel(&self) -> Result<WeightedParallelRepairResult, SchedulerError> {
+        self.solve_impl::<false, false, false>(true)
     }
 
     pub fn solve_adaptive(&self) -> Result<WeightedParallelRepairResult, SchedulerError> {
         match self.recommended_backend() {
             WeightedSchedulerBackend::SparsePareto => self.solve(),
             WeightedSchedulerBackend::DenseLattice => self.solve_dense_lattice(),
+        }
+    }
+
+    /// Selects the exact backend and parallelizes its profitable independent work.
+    #[cfg(feature = "parallel")]
+    pub fn solve_adaptive_parallel(&self) -> Result<WeightedParallelRepairResult, SchedulerError> {
+        let mut workspace = WeightedRepairWorkspace::new();
+        self.solve_adaptive_parallel_with_workspace(&mut workspace)
+    }
+
+    /// Parallel adaptive solve with reusable storage for fused dense kernels.
+    #[cfg(feature = "parallel")]
+    pub fn solve_adaptive_parallel_with_workspace(
+        &self,
+        workspace: &mut WeightedRepairWorkspace,
+    ) -> Result<WeightedParallelRepairResult, SchedulerError> {
+        match self.recommended_backend() {
+            WeightedSchedulerBackend::SparsePareto => self.solve_parallel(),
+            WeightedSchedulerBackend::DenseLattice => {
+                self.solve_dense_lattice_parallel_with_workspace(workspace)
+            }
         }
     }
 
@@ -1186,10 +1206,29 @@ impl WeightedRepairProblem {
                     Err(SchedulerError::TooLarge)
                 }
             } else {
-                self.solve_impl::<true, true, false>()
+                self.solve_impl::<true, true, false>(false)
             }
         } else {
-            self.solve_impl::<true, true, true>()
+            self.solve_impl::<true, true, true>(false)
+        }
+    }
+
+    #[cfg(feature = "parallel")]
+    fn solve_dense_lattice_parallel_with_workspace(
+        &self,
+        workspace: &mut WeightedRepairWorkspace,
+    ) -> Result<WeightedParallelRepairResult, SchedulerError> {
+        if dense_packed_bits(&self.capacities).is_some_and(|bits| bits <= 64) {
+            if self
+                .graded_repair_upper_bound()
+                .is_some_and(|repairs| repairs <= u8::MAX as usize)
+            {
+                self.solve_dense_lattice_with_workspace(workspace)
+            } else {
+                self.solve_impl::<true, true, false>(true)
+            }
+        } else {
+            self.solve_impl::<true, true, true>(true)
         }
     }
 
@@ -1210,12 +1249,12 @@ impl WeightedRepairProblem {
     pub fn solve_dense_lattice_unpacked(
         &self,
     ) -> Result<WeightedParallelRepairResult, SchedulerError> {
-        self.solve_impl::<true, false, false>()
+        self.solve_impl::<true, false, false>(false)
     }
 
     #[doc(hidden)]
     pub fn solve_dense_lattice_wide(&self) -> Result<WeightedParallelRepairResult, SchedulerError> {
-        self.solve_impl::<true, true, true>()
+        self.solve_impl::<true, true, true>(false)
     }
 
     pub fn solve_mixed_radix(&self) -> Result<WeightedParallelRepairResult, SchedulerError> {
@@ -1461,6 +1500,7 @@ fn dense_pareto_keep(
     capacities: &[u32],
     strides: &[usize],
     state_space: usize,
+    _parallel: bool,
 ) -> Vec<bool> {
     let width = capacities.len();
     let mut keys = Vec::with_capacity(states.len());
@@ -1478,6 +1518,19 @@ fn dense_pareto_keep(
     for (&capacity, &stride) in capacities.iter().zip(strides) {
         let radix = capacity as usize + 1;
         let block = stride * radix;
+        #[cfg(feature = "parallel")]
+        if _parallel && state_space >= PARALLEL_PARETO_WORK && state_space / block > 1 {
+            prefix_best.par_chunks_mut(block).for_each(|values| {
+                for digit in 1..radix {
+                    let start = digit * stride;
+                    for offset in 0..stride {
+                        let key = start + offset;
+                        values[key] = values[key].max(values[key - stride]);
+                    }
+                }
+            });
+            continue;
+        }
         for base in (0..state_space).step_by(block) {
             for digit in 1..radix {
                 let start = base + digit * stride;
@@ -1488,21 +1541,84 @@ fn dense_pareto_keep(
             }
         }
     }
+    #[cfg(feature = "parallel")]
+    if _parallel && states.len().saturating_mul(width) >= PARALLEL_PARETO_WORK {
+        return states
+            .par_iter()
+            .zip(keys.par_iter().copied())
+            .map(|(state, key)| dense_state_is_pareto(state, key, loads, strides, &prefix_best))
+            .collect();
+    }
     states
         .iter()
         .zip(keys)
-        .map(|(state, key)| {
-            let start = state.load_start as usize;
-            let strict_best = strides
-                .iter()
-                .enumerate()
-                .filter(|&(coordinate, _)| loads[start + coordinate] != 0)
-                .map(|(_, &stride)| prefix_best[key - stride])
-                .max()
-                .unwrap_or(0);
-            strict_best < state.repairs + 1
-        })
+        .map(|(state, key)| dense_state_is_pareto(state, key, loads, strides, &prefix_best))
         .collect()
+}
+
+fn dense_state_is_pareto(
+    state: &ScheduleState,
+    key: usize,
+    loads: &[u32],
+    strides: &[usize],
+    prefix_best: &[u32],
+) -> bool {
+    let start = state.load_start as usize;
+    let strict_best = strides
+        .iter()
+        .enumerate()
+        .filter(|&(coordinate, _)| loads[start + coordinate] != 0)
+        .map(|(_, &stride)| prefix_best[key - stride])
+        .max()
+        .unwrap_or(0);
+    strict_best < state.repairs + 1
+}
+
+fn quadratic_pareto_keep(
+    states: &[ScheduleState],
+    loads: &[u32],
+    width: usize,
+    _parallel: bool,
+) -> Vec<bool> {
+    #[cfg(feature = "parallel")]
+    if _parallel
+        && states
+            .len()
+            .saturating_mul(states.len())
+            .saturating_mul(width)
+            >= PARALLEL_PARETO_WORK
+    {
+        return states
+            .par_iter()
+            .enumerate()
+            .map(|(index, state)| state_is_pareto(states, loads, width, index, state))
+            .collect();
+    }
+    states
+        .iter()
+        .enumerate()
+        .map(|(index, state)| state_is_pareto(states, loads, width, index, state))
+        .collect()
+}
+
+fn state_is_pareto(
+    states: &[ScheduleState],
+    loads: &[u32],
+    width: usize,
+    index: usize,
+    state: &ScheduleState,
+) -> bool {
+    let state_start = state.load_start as usize;
+    !states.iter().enumerate().any(|(other_index, other)| {
+        if other_index == index || other.repairs < state.repairs {
+            return false;
+        }
+        let other_start = other.load_start as usize;
+        loads[other_start..other_start + width]
+            .iter()
+            .zip(&loads[state_start..state_start + width])
+            .all(|(left, right)| left <= right)
+    })
 }
 
 fn hash_slice(load: &[u32]) -> u64 {
@@ -1974,6 +2090,52 @@ mod tests {
         assert_eq!(ceil_sqrt(15), 4);
         assert_eq!(ceil_sqrt(16), 4);
         assert_eq!(ceil_sqrt(17), 5);
+    }
+
+    #[cfg(feature = "parallel")]
+    #[test]
+    fn parallel_sparse_solver_matches_the_canonical_result() {
+        let families = (0..10)
+            .map(|demand| {
+                (0..6)
+                    .map(|resource| {
+                        let mut loads = vec![0u32; 6];
+                        loads[resource] = 1 + u32::from((demand + resource) % 3 == 0);
+                        loads
+                    })
+                    .collect::<Vec<_>>()
+            })
+            .collect::<Vec<_>>();
+        let problem = WeightedRepairProblem::from_families(&[5; 6], &families).unwrap();
+        let sequential = problem.solve().unwrap();
+        let adaptive = problem.solve_adaptive().unwrap();
+        assert_eq!(
+            problem.recommended_backend(),
+            WeightedSchedulerBackend::DenseLattice
+        );
+        for threads in [1, 2, 24] {
+            let pool = rayon::ThreadPoolBuilder::new()
+                .num_threads(threads)
+                .build()
+                .unwrap();
+            let mut workspace = WeightedRepairWorkspace::new();
+            assert_eq!(
+                pool.install(|| problem.solve_parallel().unwrap()),
+                sequential
+            );
+            assert_eq!(
+                pool.install(|| problem.solve_adaptive_parallel().unwrap()),
+                adaptive
+            );
+            assert_eq!(
+                pool.install(|| {
+                    problem
+                        .solve_adaptive_parallel_with_workspace(&mut workspace)
+                        .unwrap()
+                }),
+                adaptive
+            );
+        }
     }
 
     proptest! {

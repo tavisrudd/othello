@@ -4,6 +4,9 @@ use crate::matrix::{Matrix, MatrixError};
 use rustc_hash::FxHashMap;
 use thiserror::Error;
 
+#[cfg(feature = "parallel")]
+use rayon::prelude::*;
+
 #[derive(Debug, Error)]
 pub enum CompositionError {
     #[error(transparent)]
@@ -167,6 +170,26 @@ impl CompositionTable {
         outer_blocks: &[Matrix],
         inner: &CostTable,
     ) -> Result<Self, CompositionError> {
+        Self::compose_impl::<P>(outer_blocks, inner, false)
+    }
+
+    /// Composes independent frontier transitions in parallel.
+    ///
+    /// Small frontiers stay on the sequential kernel to avoid scheduling
+    /// overhead. The result and canonical witness are identical to [`Self::compose`].
+    #[cfg(feature = "parallel")]
+    pub fn compose_parallel<const P: u8>(
+        outer_blocks: &[Matrix],
+        inner: &CostTable,
+    ) -> Result<Self, CompositionError> {
+        Self::compose_impl::<P>(outer_blocks, inner, true)
+    }
+
+    fn compose_impl<const P: u8>(
+        outer_blocks: &[Matrix],
+        inner: &CostTable,
+        _parallel: bool,
+    ) -> Result<Self, CompositionError> {
         Prime::<P>::validate().map_err(MatrixError::from)?;
         let Some(first) = outer_blocks.first() else {
             return Err(CompositionError::Shape);
@@ -209,6 +232,35 @@ impl CompositionTable {
                     &mut increments[choice * output_len..(choice + 1) * output_len],
                 );
             }
+            #[cfg(feature = "parallel")]
+            if _parallel
+                && states.len().saturating_mul(inner.records.len())
+                    >= PARALLEL_COMPOSITION_TRANSITIONS
+            {
+                let added = u64::try_from(states.len())
+                    .ok()
+                    .and_then(|states| {
+                        u64::try_from(inner.records.len())
+                            .ok()
+                            .and_then(|choices| states.checked_mul(choices))
+                    })
+                    .ok_or(CompositionError::Overflow)?;
+                transitions = transitions
+                    .checked_add(added)
+                    .ok_or(CompositionError::Overflow)?;
+                states = parallel_composition_step::<P>(
+                    block_index,
+                    output_rows,
+                    demand_cols,
+                    &states,
+                    &mut labels,
+                    &mut witnesses,
+                    inner,
+                    &increments,
+                )?;
+                continue;
+            }
+
             let mut next = Vec::<CostRecord>::new();
             let mut next_index: FxHashMap<Box<[u8]>, usize> = FxHashMap::default();
             for state in &states {
@@ -321,6 +373,134 @@ impl CompositionTable {
     }
 }
 
+#[cfg(feature = "parallel")]
+const PARALLEL_COMPOSITION_TRANSITIONS: usize = 4_096;
+
+#[cfg(feature = "parallel")]
+#[derive(Clone, Copy)]
+struct PendingComposition {
+    cost: u32,
+    parent: u32,
+    choice: u32,
+}
+
+#[cfg(feature = "parallel")]
+#[allow(clippy::too_many_arguments)]
+fn parallel_composition_step<const P: u8>(
+    block_index: usize,
+    output_rows: usize,
+    demand_cols: usize,
+    states: &[CostRecord],
+    labels: &mut FlatMatrixArena,
+    witnesses: &mut Vec<CompositionWitnessNode>,
+    inner: &CostTable,
+    increments: &[u8],
+) -> Result<Vec<CostRecord>, CompositionError> {
+    let output_len = output_rows * demand_cols;
+    let workers = rayon::current_num_threads().max(1);
+    let chunk_len = states.len().div_ceil(workers).max(1);
+    let partials = states
+        .par_chunks(chunk_len)
+        .map(|chunk| {
+            let mut local = FxHashMap::<Box<[u8]>, PendingComposition>::default();
+            let mut target = vec![0u8; output_len];
+            for state in chunk {
+                let state_label = labels.get(state.label);
+                for (choice, inner_record) in inner.records.iter().enumerate() {
+                    let increment = &increments[choice * output_len..(choice + 1) * output_len];
+                    add_into::<P>(state_label.data, increment, &mut target);
+                    let candidate = PendingComposition {
+                        cost: state
+                            .cost
+                            .checked_add(inner_record.cost)
+                            .ok_or(CompositionError::Overflow)?,
+                        parent: state.witness,
+                        choice: u32::try_from(choice).map_err(|_| CompositionError::Overflow)?,
+                    };
+                    if let Some(incumbent) = local.get_mut(target.as_slice()) {
+                        if pending_is_better(witnesses, candidate, *incumbent) {
+                            *incumbent = candidate;
+                        }
+                    } else {
+                        local.insert(target.clone().into_boxed_slice(), candidate);
+                    }
+                }
+            }
+            Ok(local)
+        })
+        .collect::<Result<Vec<_>, CompositionError>>()?;
+
+    let mut next = Vec::<CostRecord>::new();
+    let mut next_index = FxHashMap::<Box<[u8]>, usize>::default();
+    for partial in partials {
+        for (label_data, candidate) in partial {
+            if let Some(&position) = next_index.get(label_data.as_ref()) {
+                let incumbent = next[position];
+                let better = candidate.cost < incumbent.cost
+                    || (candidate.cost == incumbent.cost
+                        && path_is_lex_smaller(
+                            witnesses,
+                            candidate.parent,
+                            candidate.choice,
+                            incumbent.witness,
+                        ));
+                if better {
+                    let witness = push_witness(
+                        witnesses,
+                        candidate.parent,
+                        candidate.choice as usize,
+                        block_index,
+                    )?;
+                    next[position].cost = candidate.cost;
+                    next[position].witness = witness;
+                }
+            } else {
+                let label = labels.push(output_rows, demand_cols, &label_data);
+                let witness = push_witness(
+                    witnesses,
+                    candidate.parent,
+                    candidate.choice as usize,
+                    block_index,
+                )?;
+                let position = next.len();
+                next_index.insert(label_data, position);
+                next.push(CostRecord {
+                    label,
+                    cost: candidate.cost,
+                    witness,
+                    _reserved: 0,
+                });
+            }
+        }
+    }
+    next.sort_unstable_by(|left, right| {
+        labels
+            .get(left.label)
+            .data
+            .cmp(labels.get(right.label).data)
+    });
+    Ok(next)
+}
+
+#[cfg(feature = "parallel")]
+fn pending_is_better(
+    witnesses: &[CompositionWitnessNode],
+    candidate: PendingComposition,
+    incumbent: PendingComposition,
+) -> bool {
+    candidate.cost < incumbent.cost
+        || (candidate.cost == incumbent.cost
+            && virtual_path(witnesses, candidate.parent, candidate.choice)
+                < virtual_path(witnesses, incumbent.parent, incumbent.choice))
+}
+
+#[cfg(feature = "parallel")]
+fn virtual_path(witnesses: &[CompositionWitnessNode], parent: u32, choice: u32) -> Vec<u32> {
+    let mut path = path_choices(witnesses, parent);
+    path.push(choice);
+    path
+}
+
 #[inline]
 fn multiply_into<const P: u8>(left: &Matrix, right: &[u8], right_cols: usize, output: &mut [u8]) {
     let shared = left.cols();
@@ -425,5 +605,53 @@ mod tests {
         assert_eq!(answer.cost, 1);
         assert_eq!(answer.local_labels[0].as_slice(), &[0]);
         assert_eq!(answer.local_labels[1].as_slice(), &[1]);
+    }
+
+    #[cfg(feature = "parallel")]
+    #[test]
+    fn parallel_composition_matches_costs_and_canonical_witnesses() {
+        let entries = (0u16..256)
+            .map(|bits| {
+                let data = (0..8)
+                    .map(|shift| ((bits >> shift) & 1) as u8)
+                    .collect::<Vec<_>>();
+                (Matrix::new::<2>(8, 1, data).unwrap(), bits.count_ones())
+            })
+            .collect::<Vec<_>>();
+        let inner = CostTable::from_entries::<2>(8, 1, entries).unwrap();
+        let identity = Matrix::new::<2>(
+            8,
+            8,
+            (0..64)
+                .map(|index| u8::from(index / 8 == index % 8))
+                .collect::<Vec<_>>(),
+        )
+        .unwrap();
+        let blocks = [identity.clone(), identity];
+        let sequential = CompositionTable::compose::<2>(&blocks, &inner).unwrap();
+        let parallel = CompositionTable::compose_parallel::<2>(&blocks, &inner).unwrap();
+        assert_eq!(parallel.transitions(), sequential.transitions());
+        assert_eq!(parallel.len(), sequential.len());
+        for bits in 0u16..256 {
+            let target = Matrix::new::<2>(
+                8,
+                1,
+                (0..8)
+                    .map(|shift| ((bits >> shift) & 1) as u8)
+                    .collect::<Vec<_>>(),
+            )
+            .unwrap();
+            let sequential_answer = sequential.answer::<2>(&target).unwrap().unwrap();
+            let parallel_answer = parallel.answer::<2>(&target).unwrap().unwrap();
+            assert_eq!(parallel_answer.cost, sequential_answer.cost);
+            assert_eq!(parallel_answer.local_labels.len(), 2);
+            for (parallel_label, sequential_label) in parallel_answer
+                .local_labels
+                .iter()
+                .zip(&sequential_answer.local_labels)
+            {
+                assert_eq!(parallel_label, sequential_label);
+            }
+        }
     }
 }
