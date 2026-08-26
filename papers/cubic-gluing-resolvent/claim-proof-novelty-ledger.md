@@ -1,7 +1,7 @@
 # Claim / proof / novelty ledger
 
 Status as of 2026-08-21.  “Programme input” means a theorem proved in the
-companion manuscript `papers/cubic-stabilization-epilogue`, not a claim to a
+companion manuscript `papers/cubic-stabilization-m1`, not a claim to a
 classical source.
 
 | Claim | Status and proof provider | Priority boundary |
