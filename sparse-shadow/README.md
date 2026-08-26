@@ -74,7 +74,8 @@ nested canonical certificate for compatibility.
 
 See `docs/schema-v1.md`, `docs/certificate-rules-v1.md`,
 `docs/dependency-audit.md`, `docs/prior-art-audit.md`, and
-`docs/performance-paper-i.md` for the frozen boundaries and measured evidence.
+the `docs/performance-paper-*.md` records for the frozen boundaries and measured
+evidence.
 
 ## External canonicalization baselines
 

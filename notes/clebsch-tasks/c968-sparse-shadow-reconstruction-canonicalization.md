@@ -336,3 +336,5 @@ with a separate set-based enumerator, and reconstructs both the rational twist
 and calibrated conference two-graph. Validation, corruption, arbitrary
 relabeling, idempotence, CLI certificate, and zero-allocation hot-loop gates are
 green. All five paper adapters are now enabled from paper-owned exports.
+The pinned release profile and allocation audit are recorded in
+`../../sparse-shadow/docs/performance-paper-iii.md`.
