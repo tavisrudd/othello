@@ -2175,6 +2175,122 @@ Mason-to-C949 passage must remove and add simultaneously; the exact
 `2q-1` incidence exchange, rather than net size six, is the true sharpness
 mechanism.
 
+There is also an all-signature complement comparison.  A near-sharp complete
+arc of size
+
+```text
+q^2/3+5q/3+eta
+```
+
+has a minimal `r`-fold blocking complement `B` of size
+
+```text
+|B|=2r(q-1)+1-eta=|S|+1-eta,
+```
+
+where `S` denotes any Mason large-root set.  Put `P=B setminus S` and
+`N=S setminus B`.  Since `S` avoids its three zero sides while `B` meets
+each in at least `r` points, and only the three vertices can be counted on
+two sides,
+
+```text
+|P|>=3r-3=q-3,
+|N|=|P|+eta-1>=q+eta-4,
+|B triangle S|>=2q+eta-7.                       (SR24a-Mason-distance)
+```
+
+Thus no bounded or local Mason perturbation can realize any of the concurrent
+or triangular `(SR11)` branches.  This does not rule out the required global
+`Theta(q)` trade.
+
+Minimality gives a robust strengthening.  Write
+
+```text
+|P|=q-3+e,                  |N|=|P|+eta-1.
+```
+
+The `2q-2` Mason `r`-secants partition `S`.  If `x_T=|P intersect T|` and
+`y_T=|N intersect T|` on such a block, blocking gives `x_T-y_T>=0`.  An
+external point lies on `0,2,4` Mason `r`-secants according as it is a zero-
+triangle vertex, an open-side point, or an off-triangle point.  Therefore the
+total block deficit satisfies
+
+```text
+D=sum_T(x_T-y_T)=sum_(x in P) tau(x)-|N|
+ >=q+e-eta-8.                               (SR24a-Mason-deficit)
+```
+
+Let `f` count the off-triangle points of `P`.  The zero sides force at least
+`q-3` boundary points, so `f<=e`.  Delete the at most `4f` Mason blocks
+incident with an off-triangle addition.  They carry at most `4f` off-triangle
+and `12f` boundary incidences.  On the remaining blocks the total deficit is
+at least
+
+```text
+q-15e-eta-8.                                  (SR24a-Mason-clean-deficit)
+```
+
+Each remaining deficient block has `x_T<=3`, hence retains at least `r-2`
+points of `S`, none of which has a tight Mason `r`-secant in `B`.  Since `B`
+is minimal, every such point must instead lie on a former Mason `2r`-secant
+made tight by
+
+```text
+|N intersect H|-|P intersect H|=r.
+```
+
+If `E` is the set of these converted lines, pair counting on their at least
+`r` deleted points gives
+
+```text
+|E| binom(r,2)<=binom(|N|,2).                  (SR24a-Mason-converted)
+```
+
+When `eta=o(q)`, fix `epsilon>0` and suppose
+`e<=(1/15-epsilon)q`.  The right side makes `|E|=O(1)`, so these lines cover
+only `O(q)` Mason points.  But `(SR24a-Mason-clean-deficit)` supplies
+`Omega_epsilon(q)` deficient partition blocks, each with `r-2` surviving
+points, requiring `Omega_epsilon(q^2)` coverage.  Hence
+
+```text
+eta=o(q)  implies  e>=q/15-o(q),
+|B setminus S|>=16q/15-o(q).                  (SR24a-Mason-essential-gap)
+```
+
+Pair counting gives an explicit refinement.  In the only remaining regime
+`e<=q/15+o(q)`, one has `|N|/r -> 16/5`, so `(SR24a-Mason-converted)` gives
+`|E|<=10` for all sufficiently large `q`.  A converted line is a tight
+`B`-line and hence covers at most `r` of the orphaned survivors.  Therefore
+
+```text
+(q-8-eta-15e)(r-2)/3 <= 10r,
+e >= (q-8-eta-30r/(r-2))/15
+   =q/15-eta/15-O(1).                          (SR24a-Mason-essential-gap')
+```
+
+Thus even the smallest possible triangle fill is not the start of a
+near-sharp construction: any Mason-based witness needs a further linear-size
+global trade which creates new essential `r`-secants.  This is a stability
+obstruction around Mason, not nonexistence of arbitrary near-sharp blocking
+sets.
+
+The first two line moments make the same boundary visible without choosing a
+trade.  For `delta=1-eta`, write `|B|=2r(q-1)+delta` and
+`c_ell=|B intersect ell|-r`.  Then
+
+```text
+sum_ell c_ell=(q+1)|B|-r(q^2+q+1),
+sum_ell c_ell(r-c_ell)
+ =-6r^2+r(4-q)delta-delta^2.                   (SR24a-Mason-excess)
+```
+
+At `eta=1` the right side is `-6r^2`.  Hence a hypothetical complement of
+Mason's exact size cannot have only line sizes `r,2r`: its lines above `2r`
+must contribute overload energy at least `6r^2`.  Since one line contributes
+at most `(2r+1)(r+1)`, at least three overloaded lines are necessary for
+large `q`.  This recovers the three-generator threshold from the complement
+side, but does not classify the overloaded lines or prove the upper bound.
+
 The minimal same-triangle trade is in fact impossible, and the obstruction
 has a quantitative stability margin.  Write
 
@@ -5700,8 +5816,13 @@ family is lower priority.
   root is separated from this seed by at least
   `2q/3-1+ceil((sqrt(q)-2)/3)` exchanges; if it retains the Mason triangle,
   the bound improves to `2q-1+ceil((sqrt(q)-2)/3)`.  This closes the direct
-  six-point and minimal-trade mechanisms but does not classify arbitrary
-  small roots.
+  six-point and minimal-trade mechanisms.  On the complementary blocking-set
+  side, essential-secants strengthen this across all `(SR11)` signatures:
+  any `eta=o(q)` Mason trade needs at least `16q/15-o(q)` additions, since a
+  smaller trade leaves quadratically many orphaned Mason points but only
+  constantly many old `2q/3`-secants can be converted to tight lines.  These
+  are stability/separation theorems; they do not classify arbitrary small
+  roots or minimal blocking sets.
   The other triangular row requires a linear
   high-secant trade and
   is therefore a less rigid first target.
