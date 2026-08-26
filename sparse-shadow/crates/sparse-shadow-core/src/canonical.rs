@@ -3,8 +3,9 @@ use std::collections::BTreeSet;
 use serde::{Deserialize, Serialize};
 
 use crate::{
-    BinaryRelation, DeclaredAction, GatedPaperIv, InputArtifact, PaperIOrientation, ProfileInput,
-    RelationalShadow, ShadowError, VerificationReport, WeightedPair, validate, verify_certificate,
+    BinaryRelation, DeclaredAction, GatedPaperIi, GatedPaperIv, InputArtifact, PaperIOrientation,
+    ProfileInput, RelationalShadow, ShadowError, VerificationReport, WeightedPair, validate,
+    verify_certificate,
 };
 
 pub const CANONICAL_SCHEMA_VERSION: &str = "sparse-shadow-canonical/v2";
@@ -74,6 +75,7 @@ pub fn canonicalize(input: &InputArtifact) -> Result<CanonicalArtifact, ShadowEr
     validate(input)?;
     let paper = match &input.profile {
         ProfileInput::PaperIOrientation(paper) => paper,
+        ProfileInput::PaperIiTrade(value) => return canonicalize_paper_ii(input, value),
         ProfileInput::PaperIvMinimumWords(value) => return canonicalize_paper_iv(input, value),
         _ => return Err(gated_error(&input.profile)),
     };
@@ -112,6 +114,81 @@ pub fn canonicalize(input: &InputArtifact) -> Result<CanonicalArtifact, ShadowEr
         stats: search.stats,
         certificate,
     })
+}
+
+fn canonicalize_paper_ii(
+    input: &InputArtifact,
+    value: &GatedPaperIi,
+) -> Result<CanonicalArtifact, ShadowError> {
+    let search = crate::paper_ii::search(value)?;
+    let input_to_canonical = to_u32_permutation(&search.best_permutation)?;
+    let automorphisms = automorphisms(&search.best_permutation, &search.equal_permutations)?;
+    let canonical = relabel_paper_ii(input, value, &input_to_canonical, &automorphisms)?;
+    let canonical_json = serde_json::to_string(&canonical)?;
+    let canonical_id = blake3::hash(canonical_json.as_bytes()).to_hex().to_string();
+    let automorphism_generators = generating_set(&automorphisms);
+    let vertex_orbits = permutation_orbits(input_to_canonical.len(), &automorphisms)?;
+    let point_stabilizers = point_stabilizers(&vertex_orbits, &automorphisms)?;
+    let automorphism_order = automorphisms.len() as u64;
+    let certificate = CanonicalCertificate {
+        certificate_schema: "sparse-shadow-certificate/v1".into(),
+        proof_system: "paper-ii-declared-action-exhaustion/v1".into(),
+        input_to_canonical: input_to_canonical.clone(),
+        canonical_json,
+        canonical_id: canonical_id.clone(),
+        winning_trace: Vec::new(),
+        automorphisms: automorphisms.clone(),
+        search_stats: search.stats.clone(),
+    };
+    Ok(CanonicalArtifact {
+        schema: CANONICAL_SCHEMA_VERSION.into(),
+        canonical_id,
+        canonical,
+        input_to_canonical,
+        automorphism_generators,
+        automorphism_order,
+        vertex_orbits,
+        point_stabilizers,
+        stats: search.stats,
+        certificate,
+    })
+}
+
+pub(crate) fn relabel_paper_ii(
+    input: &InputArtifact,
+    value: &GatedPaperIi,
+    input_to_canonical: &[u32],
+    _automorphisms: &[Vec<u32>],
+) -> Result<InputArtifact, ShadowError> {
+    let permutation = input_to_canonical
+        .iter()
+        .map(|&image| image as usize)
+        .collect::<Vec<_>>();
+    let mut canonical = value.clone();
+    canonical.trade_halves = [
+        crate::paper_ii::relabel_blocks(&value.trade_halves[0], &permutation)?,
+        crate::paper_ii::relabel_blocks(&value.trade_halves[1], &permutation)?,
+    ];
+    let declared_group = crate::paper_ii::declared_group(value)?;
+    let mut canonical_group = declared_group
+        .iter()
+        .map(|automorphism| {
+            let mut conjugate = vec![0; input_to_canonical.len()];
+            for old in 0..input_to_canonical.len() {
+                conjugate[input_to_canonical[old] as usize] = input_to_canonical[automorphism[old]];
+            }
+            conjugate
+        })
+        .collect::<Vec<_>>();
+    canonical_group.sort_unstable();
+    canonical_group.dedup();
+    canonical.action = DeclaredAction::VertexPermutations {
+        degree: u32::try_from(input_to_canonical.len()).expect("Paper-II degree fits u32"),
+        generators: generating_set(&canonical_group),
+    };
+    let mut artifact = input.clone();
+    artifact.profile = ProfileInput::PaperIiTrade(Box::new(canonical));
+    Ok(artifact)
 }
 
 fn canonicalize_paper_iv(

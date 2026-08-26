@@ -4,9 +4,11 @@ use clap::{Parser, Subcommand};
 use serde::{Deserialize, Serialize};
 use sparse_shadow_core::{
     CanonicalArtifact, CanonicalCertificate, EquivalenceCertificate, InputArtifact,
-    PaperIvReconstructionArtifact, ProfileInput, ReconstructionArtifact, ShadowError, canonicalize,
-    compare, reconstruct, reconstruct_paper_iv, validate, verify_canonical_artifact,
-    verify_certificate, verify_equivalence, verify_paper_iv_reconstruction, verify_reconstruction,
+    PaperIiReconstructionArtifact, PaperIvReconstructionArtifact, ProfileInput,
+    ReconstructionArtifact, ShadowError, canonicalize, compare, reconstruct, reconstruct_paper_ii,
+    reconstruct_paper_iv, validate, verify_canonical_artifact, verify_certificate,
+    verify_equivalence, verify_paper_ii_reconstruction, verify_paper_iv_reconstruction,
+    verify_reconstruction,
 };
 use thiserror::Error;
 
@@ -69,6 +71,7 @@ enum CanonicalProof {
 #[serde(untagged)]
 enum ReconstructionProof {
     PaperIv(Box<PaperIvReconstructionArtifact>),
+    PaperIi(Box<PaperIiReconstructionArtifact>),
     PaperI(Box<ReconstructionArtifact>),
 }
 
@@ -93,6 +96,9 @@ fn run() -> Result<(), CliError> {
         Command::Reconstruct { input } => {
             let input = read_input(&input)?;
             match &input.profile {
+                ProfileInput::PaperIiTrade(_) => {
+                    print_json(&reconstruct_paper_ii(&input)?)?;
+                }
                 ProfileInput::PaperIvMinimumWords(_) => {
                     print_json(&reconstruct_paper_iv(&input)?)?;
                 }
@@ -127,6 +133,9 @@ fn run() -> Result<(), CliError> {
             match read_json::<ReconstructionProof>(&certificate)? {
                 ReconstructionProof::PaperIv(certificate) => {
                     print_json(&verify_paper_iv_reconstruction(&input, &certificate)?)?;
+                }
+                ReconstructionProof::PaperIi(certificate) => {
+                    print_json(&verify_paper_ii_reconstruction(&input, &certificate)?)?;
                 }
                 ReconstructionProof::PaperI(certificate) => {
                     print_json(&verify_reconstruction(&input, &certificate)?)?;

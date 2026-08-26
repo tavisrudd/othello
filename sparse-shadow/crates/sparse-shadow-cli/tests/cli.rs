@@ -21,6 +21,48 @@ fn paper_iv_export() -> PathBuf {
         .join("../../../papers/q13-passant-code/verification/sparse_shadow_export.json")
 }
 
+fn paper_ii_export() -> PathBuf {
+    PathBuf::from(env!("CARGO_MANIFEST_DIR")).join(
+        "../../../papers/clebsch-factorization/verification/evidence/sparse_shadow_export.json",
+    )
+}
+
+#[test]
+fn paper_ii_cli_canonical_and_reconstruction_artifacts_replay() {
+    let input = paper_ii_export();
+    if !input.exists() {
+        return;
+    }
+    let input_path = input.to_str().expect("UTF-8 export path");
+    let canonical = run(&["canonicalize", input_path]);
+    assert!(
+        canonical.status.success(),
+        "{}",
+        String::from_utf8_lossy(&canonical.stderr)
+    );
+    let canonical_path = write_temp_json("paper-ii-canonical", &canonical.stdout);
+    assert_valid(&run(&[
+        "verify-certificate",
+        input_path,
+        canonical_path.to_str().expect("UTF-8 temp path"),
+    ]));
+    fs::remove_file(canonical_path).expect("temporary canonical artifact removes");
+
+    let reconstruction = run(&["reconstruct", input_path]);
+    assert!(
+        reconstruction.status.success(),
+        "{}",
+        String::from_utf8_lossy(&reconstruction.stderr)
+    );
+    let reconstruction_path = write_temp_json("paper-ii-reconstruction", &reconstruction.stdout);
+    assert_valid(&run(&[
+        "verify-reconstruction-certificate",
+        input_path,
+        reconstruction_path.to_str().expect("UTF-8 temp path"),
+    ]));
+    fs::remove_file(reconstruction_path).expect("temporary reconstruction removes");
+}
+
 fn run(args: &[&str]) -> std::process::Output {
     Command::new(env!("CARGO_BIN_EXE_sparse-shadow"))
         .args(args)

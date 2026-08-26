@@ -2,7 +2,7 @@
 
 **Lane:** clebsch
 
-**Status:** active at three external source gates; Paper-I and Paper-IV canonicalization, reconstruction, independent replay, hot-layout, golden-output, and nauty gates green; Papers II, III, and V remain gated; standalone Rust tool; no manuscript or Lean edits
+**Status:** active at two external source gates; Papers I, II, and IV canonicalization, reconstruction, independent replay, hot-layout, golden/backend gates green; Papers III and V remain gated; standalone Rust tool; no manuscript or Lean edits
 
 ## Goal
 
@@ -294,7 +294,21 @@ the canonical shadow to the exact symmetric-square GF(13) model, and emits all
 relabeling, idempotence, zero-allocation hot-loop, golden-output, and nauty
 2.9.3 gates are green; see
 `../2026-08-25-c968-paper-iv-sparse-shadow-export.md` and
-`../../sparse-shadow/docs/performance-paper-iv.md`.  Papers II, III, and V still
+`../../sparse-shadow/docs/performance-paper-iv.md`. Papers III and V still
 require the complete paper-owned export named in their gated fixtures; nearby
-evidence JSON and trust manifests remain insufficient.  No unblocked C968
-implementation frontier remains until one of those three exports freezes.
+evidence JSON and trust manifests remain insufficient.
+
+## 2026-08-25 Paper-II integration
+
+Paper II's paper-owned export freezes the 22 H3 perfect matchings on `P1(F11)`,
+their two 11-element PSL sheets, a four-generator `PGL2(11)` action, and the
+cubic-first odd calibration. C968 exhausts the 1,320-element declared action,
+independently replays the canonical certificate through a set-of-secants
+representation, recovers the matching carrier and oriented sheets, verifies
+the 660-element stabilizer, and cross-checks it with nauty 2.9.3. The hot orbit
+loop is allocation-free. See
+`../2026-08-25-c968-paper-ii-sparse-shadow-export.md` and
+`../../sparse-shadow/docs/performance-paper-ii.md`.
+
+Papers III and V still require their complete paper-owned exports. No unblocked
+C968 implementation frontier remains until one freezes.

@@ -1,0 +1,19 @@
+{
+  "automorphism_order": 660,
+  "canonical_id": "e466a258a4e60ab2ab2c8dfe1b0e395dff8f036339937cad3b86a93ad66c795c",
+  "carrier": {
+    "endpoint_count": 12,
+    "full_action_order": 1320,
+    "matching_count": 22,
+    "oriented_stabilizer_order": 660,
+    "sheet_sizes": [11, 11]
+  },
+  "proof_system": "paper-ii-declared-action-exhaustion/v1",
+  "search_stats": {
+    "arena_grows": 0,
+    "canonical_leaves": 1320,
+    "max_depth": 0,
+    "refinement_rounds": 0,
+    "search_nodes": 1320
+  }
+}

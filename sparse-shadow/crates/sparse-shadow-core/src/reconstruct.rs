@@ -11,6 +11,8 @@ use crate::{
 
 pub const RECONSTRUCTION_SCHEMA_VERSION: &str = "sparse-shadow-reconstruction/v2";
 pub const PAPER_I_CARRIER_SCHEMA_VERSION: &str = "sparse-shadow-paper-i-carrier/v1";
+pub const PAPER_II_CARRIER_SCHEMA_VERSION: &str = "sparse-shadow-paper-ii-carrier/v1";
+pub const PAPER_II_RECONSTRUCTION_SCHEMA_VERSION: &str = "sparse-shadow-paper-ii-reconstruction/v1";
 pub const PAPER_IV_CARRIER_SCHEMA_VERSION: &str = "sparse-shadow-paper-iv-carrier/v1";
 pub const PAPER_IV_RECONSTRUCTION_SCHEMA_VERSION: &str = "sparse-shadow-paper-iv-reconstruction/v1";
 
@@ -34,6 +36,30 @@ pub struct ReconstructionArtifact {
     pub schema: String,
     pub profile: String,
     pub carrier: PaperICarrier,
+    pub ambiguity: Ambiguity,
+    pub exact_oriented_return: bool,
+    pub round_trip_shadow: InputArtifact,
+    pub canonical: CanonicalArtifact,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct PaperIiCarrier {
+    pub schema: String,
+    pub field: FiniteFieldSpec,
+    pub endpoint_count: u32,
+    pub matchings: Vec<Vec<[u32; 2]>>,
+    pub oriented_sheets: [Vec<u32>; 2],
+    pub full_action_order: u64,
+    pub oriented_stabilizer_order: u64,
+}
+
+#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct PaperIiReconstructionArtifact {
+    pub schema: String,
+    pub profile: String,
+    pub carrier: PaperIiCarrier,
     pub ambiguity: Ambiguity,
     pub exact_oriented_return: bool,
     pub round_trip_shadow: InputArtifact,
@@ -108,6 +134,96 @@ pub fn reconstruct(input: &InputArtifact) -> Result<ReconstructionArtifact, Shad
         exact_oriented_return: calibrated,
         round_trip_shadow: canonical.canonical.clone(),
         canonical,
+    })
+}
+
+/// Reconstruct the Paper-II matching carrier and its calibrated sheet orientation.
+///
+/// # Errors
+///
+/// Returns an error if validation, canonicalization, or carrier recovery fails.
+pub fn reconstruct_paper_ii(
+    input: &InputArtifact,
+) -> Result<PaperIiReconstructionArtifact, ShadowError> {
+    let canonical = canonicalize(input)?;
+    let carrier = recover_paper_ii_carrier(&canonical.canonical)?;
+    Ok(PaperIiReconstructionArtifact {
+        schema: PAPER_II_RECONSTRUCTION_SCHEMA_VERSION.into(),
+        profile: "paper_ii_trade".into(),
+        carrier,
+        ambiguity: Ambiguity::OrientationC2 {
+            killed_by_calibration: true,
+        },
+        exact_oriented_return: true,
+        round_trip_shadow: canonical.canonical.clone(),
+        canonical,
+    })
+}
+
+/// Independently replay a Paper-II carrier reconstruction.
+///
+/// # Errors
+///
+/// Returns an error if the canonical proof, carrier, round trip, or ambiguity is corrupt.
+pub fn verify_paper_ii_reconstruction(
+    input: &InputArtifact,
+    artifact: &PaperIiReconstructionArtifact,
+) -> Result<VerificationReport, ShadowError> {
+    if artifact.schema != PAPER_II_RECONSTRUCTION_SCHEMA_VERSION
+        || artifact.profile != "paper_ii_trade"
+        || artifact.ambiguity
+            != (Ambiguity::OrientationC2 {
+                killed_by_calibration: true,
+            })
+        || !artifact.exact_oriented_return
+    {
+        return Err(ShadowError::Certificate(
+            "Paper-II reconstruction metadata is inconsistent".into(),
+        ));
+    }
+    let report = verify_canonical_artifact(input, &artifact.canonical)?;
+    if artifact.carrier != recover_paper_ii_carrier(&artifact.canonical.canonical)?
+        || artifact.round_trip_shadow != artifact.canonical.canonical
+    {
+        return Err(ShadowError::Certificate(
+            "Paper-II carrier or round trip is corrupt".into(),
+        ));
+    }
+    Ok(report)
+}
+
+fn recover_paper_ii_carrier(input: &InputArtifact) -> Result<PaperIiCarrier, ShadowError> {
+    let ProfileInput::PaperIiTrade(value) = &input.profile else {
+        return Err(ShadowError::Invalid(
+            "Paper-II reconstruction received another profile".into(),
+        ));
+    };
+    let mut indexed = value
+        .trade_halves
+        .iter()
+        .enumerate()
+        .flat_map(|(sheet, half)| half.iter().map(move |block| (sheet, block)))
+        .collect::<Vec<_>>();
+    indexed.sort_unstable_by_key(|(_, block)| block.support.clone());
+    let mut matchings = Vec::with_capacity(22);
+    let mut oriented_sheets = [Vec::new(), Vec::new()];
+    for (index, (sheet, block)) in indexed.into_iter().enumerate() {
+        let matching = block
+            .support
+            .iter()
+            .map(|&edge| [edge / 12, edge % 12])
+            .collect::<Vec<_>>();
+        matchings.push(matching);
+        oriented_sheets[sheet].push(index as u32);
+    }
+    Ok(PaperIiCarrier {
+        schema: PAPER_II_CARRIER_SCHEMA_VERSION.into(),
+        field: value.field.clone(),
+        endpoint_count: 12,
+        matchings,
+        oriented_sheets,
+        full_action_order: 1320,
+        oriented_stabilizer_order: 660,
     })
 }
 

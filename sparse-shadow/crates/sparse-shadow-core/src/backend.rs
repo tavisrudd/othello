@@ -60,7 +60,7 @@ impl BackendComparison {
     }
 }
 
-/// Encode an enabled Paper-I or Paper-IV shadow as a colored incidence graph.
+/// Encode an enabled Paper-I, Paper-II, or Paper-IV shadow as a colored incidence graph.
 ///
 /// Original vertices retain their typed data as color classes. Every relation
 /// or weighted-pair edge becomes a vertex in a relation-specific color class
@@ -76,6 +76,9 @@ pub fn encode_colored_incidence(
     input: &InputArtifact,
 ) -> Result<ColoredIncidenceGraph, ShadowError> {
     validate(input)?;
+    if let ProfileInput::PaperIiTrade(value) = &input.profile {
+        return encode_paper_ii(value);
+    }
     if let ProfileInput::PaperIvMinimumWords(value) = &input.profile {
         return encode_paper_iv(value);
     }
@@ -151,6 +154,37 @@ pub fn encode_colored_incidence(
     }
     edges.sort_unstable();
 
+    Ok(ColoredIncidenceGraph {
+        schema: BACKEND_GRAPH_SCHEMA_VERSION.into(),
+        colors,
+        edges,
+        original_vertex_nodes,
+    })
+}
+
+fn encode_paper_ii(value: &crate::GatedPaperIi) -> Result<ColoredIncidenceGraph, ShadowError> {
+    let degree = 12_u32;
+    let original_vertex_nodes = (0..degree).collect::<Vec<_>>();
+    let mut colors = vec![0_u32; degree as usize];
+    let mut edges = Vec::with_capacity(22 * 6 * 3);
+    for (sheet, half) in value.trade_halves.iter().enumerate() {
+        for block in half {
+            let matching_node = u32::try_from(colors.len())
+                .map_err(|_| ShadowError::Invalid("Paper-II encoding exceeds u32".into()))?;
+            colors.push(1 + u32::try_from(sheet).expect("two Paper-II sheets fit u32"));
+            for &encoded in &block.support {
+                let edge_node = u32::try_from(colors.len())
+                    .map_err(|_| ShadowError::Invalid("Paper-II encoding exceeds u32".into()))?;
+                colors.push(3);
+                let left = encoded / degree;
+                let right = encoded % degree;
+                edges.push([left.min(edge_node), left.max(edge_node)]);
+                edges.push([right.min(edge_node), right.max(edge_node)]);
+                edges.push([matching_node.min(edge_node), matching_node.max(edge_node)]);
+            }
+        }
+    }
+    edges.sort_unstable();
     Ok(ColoredIncidenceGraph {
         schema: BACKEND_GRAPH_SCHEMA_VERSION.into(),
         colors,
@@ -273,6 +307,7 @@ pub fn verify_backend_comparison(
 fn authoritative_backend(native: &CanonicalArtifact) -> Result<&'static str, ShadowError> {
     match native.certificate.proof_system.as_str() {
         "paper-i-ir-exhaustion/v1" => Ok("native-paper-i-ir/v1"),
+        "paper-ii-declared-action-exhaustion/v1" => Ok("native-paper-ii-declared-action/v1"),
         "paper-iv-weighted-scheme-ir-exhaustion/v1" => Ok("native-paper-iv-weighted-scheme-ir/v1"),
         _ => Err(ShadowError::Certificate(
             "external comparison names an unsupported native proof system".into(),

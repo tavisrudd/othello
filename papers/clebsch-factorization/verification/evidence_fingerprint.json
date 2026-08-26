@@ -9,7 +9,7 @@
     "nix_lock": "d09429301f88f348b7cbe8de2356bf024efa15063585c21c558afb515c3e77f5"
   },
   "trust_manifest_sha256": "62cc17ce3810db416532c5520026f2109e608c5839383e05a57478c672400955",
-  "runner_sha256": "5d03064c7ec2bb63350b5bbe90556f862248c1f7ecea0bcffd58502cd971b887",
+  "runner_sha256": "ea5e28887c323ac9872df30df9cdb077c8a04290f183a1e07b1e9567089e1fe2",
   "review_sources_sha256": {
     "normalized_manuscript": "5ad62812f1d88da8f31f4a61fbe18deaa2b746d187c14be85e0d71ec2b86656d",
     "normalized_statement_identity": "3160e1cbcc81933b6f7e2bee2500b78465fd102c354a12c2443e456606171b60",

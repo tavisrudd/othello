@@ -28,6 +28,30 @@ fn paper_i_encoding_has_frozen_shape() {
 }
 
 #[test]
+fn paper_ii_encoding_has_frozen_shape() {
+    let path = std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR")).join(
+        "../../../papers/clebsch-factorization/verification/evidence/sparse_shadow_export.json",
+    );
+    if !path.exists() {
+        return;
+    }
+    let input: InputArtifact =
+        serde_json::from_slice(&std::fs::read(path).expect("read export")).expect("parse export");
+    let graph = encode_colored_incidence(&input).expect("Paper-II export encodes");
+    assert_eq!(graph.colors.len(), 166);
+    assert_eq!(graph.edges.len(), 396);
+    assert_eq!(graph.original_vertex_nodes, (0..12).collect::<Vec<_>>());
+    assert_eq!(
+        graph
+            .colors
+            .iter()
+            .copied()
+            .collect::<std::collections::BTreeSet<_>>(),
+        std::collections::BTreeSet::from([0, 1, 2, 3])
+    );
+}
+
+#[test]
 fn calibration_is_a_distinct_original_vertex_color_class() {
     let input: InputArtifact = serde_json::from_str(CALIBRATED_FIXTURE).expect("fixture parses");
     let graph = encode_colored_incidence(&input).expect("fixture encodes");

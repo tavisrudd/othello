@@ -5,6 +5,7 @@ mod canonical;
 mod equivalence;
 mod error;
 mod hot;
+mod paper_ii;
 mod paper_iv;
 mod paper_iv_reference;
 mod reconstruct;
@@ -25,10 +26,12 @@ pub use equivalence::{
 };
 pub use error::ShadowError;
 pub use reconstruct::{
-    Ambiguity, MarkingTorsor, PAPER_I_CARRIER_SCHEMA_VERSION, PAPER_IV_CARRIER_SCHEMA_VERSION,
-    PAPER_IV_RECONSTRUCTION_SCHEMA_VERSION, PaperICarrier, PaperIvCarrier,
-    PaperIvReconstructionArtifact, PaperIvRelation, RECONSTRUCTION_SCHEMA_VERSION,
-    ReconstructionArtifact, reconstruct, reconstruct_paper_iv, verify_paper_iv_reconstruction,
+    Ambiguity, MarkingTorsor, PAPER_I_CARRIER_SCHEMA_VERSION, PAPER_II_CARRIER_SCHEMA_VERSION,
+    PAPER_II_RECONSTRUCTION_SCHEMA_VERSION, PAPER_IV_CARRIER_SCHEMA_VERSION,
+    PAPER_IV_RECONSTRUCTION_SCHEMA_VERSION, PaperICarrier, PaperIiCarrier,
+    PaperIiReconstructionArtifact, PaperIvCarrier, PaperIvReconstructionArtifact, PaperIvRelation,
+    RECONSTRUCTION_SCHEMA_VERSION, ReconstructionArtifact, reconstruct, reconstruct_paper_ii,
+    reconstruct_paper_iv, verify_paper_ii_reconstruction, verify_paper_iv_reconstruction,
     verify_reconstruction,
 };
 pub use schema::{

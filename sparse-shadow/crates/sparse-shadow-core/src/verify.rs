@@ -4,8 +4,8 @@ use serde::{Deserialize, Serialize};
 
 use crate::{
     ActionKind, AmbiguitySpec, BinaryRelation, BranchDecision, CanonicalCertificate,
-    DeclaredAction, GatedPaperIv, InputArtifact, PaperIOrientation, ProfileInput, RelationalShadow,
-    ShadowError,
+    DeclaredAction, GatedPaperIi, GatedPaperIv, InputArtifact, PaperIOrientation, ProfileInput,
+    RelationalShadow, ShadowError,
 };
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
@@ -94,7 +94,7 @@ pub fn validate(input: &InputArtifact) -> Result<VerificationReport, ShadowError
                 }
             }
         }
-        ProfileInput::PaperIiTrade(value) => validate_gate("paper_ii_trade", &value.gate)?,
+        ProfileInput::PaperIiTrade(value) => checked_automorphisms = validate_paper_ii(value)?,
         ProfileInput::PaperIiiFourShadow(value) => {
             validate_gate("paper_iii_four_shadow", &value.gate)?;
         }
@@ -133,6 +133,7 @@ pub fn verify_certificate(
     // starts from raw relations and trusts neither cached refinement nor hashes.
     let recomputed = match certificate.proof_system.as_str() {
         "paper-i-ir-exhaustion/v1" => reference_canonicalize(input)?,
+        "paper-ii-declared-action-exhaustion/v1" => reference_canonicalize_paper_ii(input)?,
         "paper-iv-weighted-scheme-ir-exhaustion/v1" => reference_canonicalize_paper_iv(input)?,
         _ => {
             return Err(ShadowError::Certificate(
@@ -200,6 +201,79 @@ struct ReferenceSearch<'a> {
     winning_trace: Vec<BranchDecision>,
     equal_permutations: Vec<Vec<u32>>,
     stats: crate::SearchStats,
+}
+
+fn reference_canonicalize_paper_ii(input: &InputArtifact) -> Result<ReferenceResult, ShadowError> {
+    validate(input)?;
+    let ProfileInput::PaperIiTrade(value) = &input.profile else {
+        return Err(ShadowError::Certificate(
+            "Paper-II checker received another profile".into(),
+        ));
+    };
+    let group = crate::paper_ii::declared_group(value)?;
+    let mut best_key = None;
+    let mut best = Vec::new();
+    let mut equal = Vec::new();
+    for permutation in &group {
+        let mut key = BTreeSet::new();
+        for block in value.trade_halves.iter().flatten() {
+            let mut secants = BTreeSet::new();
+            for &encoded in &block.support {
+                let mut image = [
+                    u32::try_from(permutation[encoded as usize / 12])
+                        .expect("Paper-II image fits u32"),
+                    u32::try_from(permutation[encoded as usize % 12])
+                        .expect("Paper-II image fits u32"),
+                ];
+                image.sort_unstable();
+                secants.insert(image);
+            }
+            key.insert((block.sign, block.weight, secants));
+        }
+        match best_key.as_ref().map(|old| key.cmp(old)) {
+            None | Some(std::cmp::Ordering::Less) => {
+                best_key = Some(key);
+                best.clone_from(permutation);
+                equal = vec![permutation.clone()];
+            }
+            Some(std::cmp::Ordering::Equal) => equal.push(permutation.clone()),
+            Some(std::cmp::Ordering::Greater) => {}
+        }
+    }
+    let input_to_canonical = best
+        .iter()
+        .map(|&image| u32::try_from(image).expect("Paper-II image fits u32"))
+        .collect::<Vec<_>>();
+    let mut automorphisms = equal
+        .iter()
+        .map(|candidate| {
+            let mut inverse = vec![0; candidate.len()];
+            for (old, &new) in candidate.iter().enumerate() {
+                inverse[new] = old;
+            }
+            best.iter()
+                .map(|&canonical| {
+                    u32::try_from(inverse[canonical]).expect("Paper-II image fits u32")
+                })
+                .collect::<Vec<_>>()
+        })
+        .collect::<Vec<_>>();
+    automorphisms.sort_unstable();
+    let canonical =
+        crate::canonical::relabel_paper_ii(input, value, &input_to_canonical, &automorphisms)?;
+    Ok(ReferenceResult {
+        canonical_json: serde_json::to_string(&canonical)?,
+        input_to_canonical,
+        winning_trace: Vec::new(),
+        automorphisms,
+        search_stats: crate::SearchStats {
+            search_nodes: group.len() as u64,
+            canonical_leaves: group.len() as u64,
+            refinement_rounds: 0,
+            max_depth: 0,
+            arena_grows: 0,
+        },
+    })
 }
 
 fn reference_canonicalize_paper_iv(input: &InputArtifact) -> Result<ReferenceResult, ShadowError> {
@@ -495,6 +569,123 @@ fn validate_gate(profile: &'static str, gate: &crate::FixtureGate) -> Result<(),
     })
 }
 
+#[allow(clippy::too_many_lines)] // One linear exact-contract audit is easier to review atomically.
+fn validate_paper_ii(value: &GatedPaperIi) -> Result<usize, ShadowError> {
+    if !value.gate.enabled {
+        validate_gate("paper_ii_trade", &value.gate)?;
+        unreachable!();
+    }
+    if value.source.paper != "II"
+        || value.source.theorem != "quadratic trade, carrier gate, and cubic orientation"
+        || value.source.artifact
+            != "papers/clebsch-factorization/verification/evidence/profile_incidence.json"
+        || value.source.sha256 != "58a81d66c5248f116c3ddd99a33da811c05b5b10c66b4d695f5656b78b977f57"
+        || value.field.characteristic != 11
+        || value.field.degree != 1
+        || !value.field.modulus_coefficients_low_to_high.is_empty()
+        || value.field.element_encoding != "least_nonnegative_residue"
+        || value.matching_count != 22
+        || value.carrier_hypothesis != "complete splitting into secants"
+        || value.recovered_carrier != "the 22 H3 matching configurations on P1(F11)"
+        || !matches!(value.ambiguity, AmbiguitySpec::OrientationC2 {})
+    {
+        return Err(ShadowError::Invalid(
+            "invalid Paper-II source or recovery contract".into(),
+        ));
+    }
+    if value.trade_halves.iter().any(|half| half.len() != 11) {
+        return Err(ShadowError::Invalid(
+            "Paper-II trade must have two eleven-block halves".into(),
+        ));
+    }
+    let degree = 12_usize;
+    let mut all = BTreeSet::new();
+    for (half_index, half) in value.trade_halves.iter().enumerate() {
+        let expected_sign = if half_index == 0 { 1 } else { -1 };
+        for block in half {
+            if block.weight != 1 || block.sign != expected_sign || block.support.len() != 6 {
+                return Err(ShadowError::Invalid(
+                    "invalid Paper-II signed matching block".into(),
+                ));
+            }
+            let mut vertices = BTreeSet::new();
+            for &edge in &block.support {
+                let (left, right) = (edge as usize / degree, edge as usize % degree);
+                if left >= right || right >= degree {
+                    return Err(ShadowError::Invalid(
+                        "invalid Paper-II encoded secant".into(),
+                    ));
+                }
+                vertices.insert(left);
+                vertices.insert(right);
+            }
+            if vertices.len() != degree || !all.insert(block.support.clone()) {
+                return Err(ShadowError::Invalid(
+                    "Paper-II blocks are not distinct perfect matchings".into(),
+                ));
+            }
+        }
+    }
+    let Some(calibration) = &value.odd_calibration else {
+        return Err(ShadowError::Invalid(
+            "Paper-II export lacks cubic odd calibration".into(),
+        ));
+    };
+    if calibration.name != "cubic_first_coordinate_mod_11"
+        || calibration.value != 6
+        || calibration.support != [0, 2, 3, 4, 5, 6, 8, 9, 10, 11, 12, 13, 15, 16, 17, 18, 19]
+        || value.minimality_collisions.len() != 2
+        || value.minimality_collisions[0].boundary != "degree_1"
+        || value.minimality_collisions[1].boundary != "degree_2"
+        || value.minimality_collisions[0].common_restricted_shadow_blake3
+            != "d308a2f201977287aaea705410e4a01696c24728ed0dbd30e44ea43dcbd9dd5b"
+        || value.minimality_collisions[1].common_restricted_shadow_blake3
+            != "596b8c429d1cb24e8d9ba9a1ebd4ee76702f21953611482eb0a1e5d7e1fb4734"
+    {
+        return Err(ShadowError::Invalid(
+            "invalid Paper-II cubic/minimality calibration".into(),
+        ));
+    }
+    let DeclaredAction::VertexPermutations {
+        degree: action_degree,
+        generators,
+    } = &value.action
+    else {
+        return Err(ShadowError::Invalid(
+            "Paper-II action must use vertex permutations".into(),
+        ));
+    };
+    if *action_degree != 12 || generators.is_empty() {
+        return Err(ShadowError::Invalid(
+            "invalid Paper-II action degree".into(),
+        ));
+    }
+    for generator in generators {
+        validate_permutation(generator, degree)?;
+        let moved = value
+            .trade_halves
+            .iter()
+            .flatten()
+            .map(|block| {
+                let permutation = generator.iter().map(|&x| x as usize).collect::<Vec<_>>();
+                crate::paper_ii::relabel_support(block, &permutation)
+            })
+            .collect::<Result<BTreeSet<_>, _>>()?;
+        if moved != all {
+            return Err(ShadowError::Invalid(
+                "Paper-II action does not preserve the matching carrier".into(),
+            ));
+        }
+    }
+    let order = generated_permutation_group_order(generators, degree, 1320)?;
+    if order != 1320 {
+        return Err(ShadowError::Invalid(
+            "Paper-II generators do not generate PGL2(11)".into(),
+        ));
+    }
+    Ok(order)
+}
+
 fn validate_paper_iv(value: &GatedPaperIv) -> Result<usize, ShadowError> {
     if !value.gate.enabled {
         validate_gate("paper_iv_minimum_words", &value.gate)?;
@@ -694,6 +885,38 @@ fn validate_paper_i_partition(relations: &[BinaryRelation], n: usize) -> Result<
 }
 
 fn verify_automorphism(input: &InputArtifact, permutation: &[u32]) -> Result<(), ShadowError> {
+    if let ProfileInput::PaperIiTrade(value) = &input.profile {
+        validate_permutation(permutation, 12)
+            .map_err(|error| ShadowError::Certificate(error.to_string()))?;
+        let expected = value
+            .trade_halves
+            .iter()
+            .flatten()
+            .map(|block| (block.sign, block.weight, block.support.clone()))
+            .collect::<BTreeSet<_>>();
+        let permutation = permutation
+            .iter()
+            .map(|&image| image as usize)
+            .collect::<Vec<_>>();
+        let actual = value
+            .trade_halves
+            .iter()
+            .flatten()
+            .map(|block| {
+                Ok((
+                    block.sign,
+                    block.weight,
+                    crate::paper_ii::relabel_support(block, &permutation)?,
+                ))
+            })
+            .collect::<Result<BTreeSet<_>, ShadowError>>()?;
+        if actual != expected {
+            return Err(ShadowError::Certificate(
+                "automorphism does not preserve the oriented Paper-II trade".into(),
+            ));
+        }
+        return Ok(());
+    }
     if let ProfileInput::PaperIvMinimumWords(value) = &input.profile {
         let degree = value.coordinate_count as usize;
         validate_permutation(permutation, degree)

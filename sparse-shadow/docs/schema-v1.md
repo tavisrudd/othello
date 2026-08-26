@@ -7,13 +7,14 @@ This version names the input interchange schema. Canonical output uses
 `sparse-shadow-canonical/v2`: v2 adds the verified point-stabilizer surface to
 the earlier canonical wrapper. The independent canonical proof remains
 `sparse-shadow-certificate/v1` because its eight-rule payload did not change.
-Paper-I reconstruction uses `sparse-shadow-reconstruction/v2`. Paper IV uses
+Paper-I reconstruction uses `sparse-shadow-reconstruction/v2`. Paper II uses
+`sparse-shadow-paper-ii-reconstruction/v1`; Paper IV uses
 `sparse-shadow-paper-iv-reconstruction/v1` with a typed full-plane carrier.
 
 | adapter | observed shadow | action | recovered carrier | residual ambiguity | v1 state |
 |---|---|---|---|---|---|
 | `paper_i_orientation` | two five-valent orbital relations, antipodes, optional calibrated triangle | color-preserving vertex permutations preserving named relations | six-axis/conference carrier | free orientation `C2` unless calibrated | enabled |
-| `paper_ii_trade` | signed strength-two trade and carrier metadata | declared matching/configuration permutation action | surviving matching configuration and sheet pair | unordered complementary sheets | gated |
+| `paper_ii_trade` | 22 perfect matchings split into two signed 11-element sheets, with cubic odd calibration | declared `PGL2(11)` endpoint action | the H3 matching carrier and oriented sheet pair | orientation `C2`, killed by the cubic calibration | enabled |
 | `paper_iii_four_shadow` | reduced branch sextic plus one rational fibre, and the marked family of aligned four-sets | marked-vertex action | rational quadratic twist and two-graph/conference signing | rational square-class before the fibre; complement/global-negation `C2` before triangle calibration | gated |
 | `paper_iv_minimum_words` | weighted pair section of the 78-coordinate minimum-support hypergraph | coordinate action preserving pair multiplicities | incidence/code, elliptic scheme, `PG(2,13)`, conic, polarity | ordered-frame/field-labeling `PGL2(13)` torsor | enabled |
 | `paper_v_chordal_conference` | retained Paper-II residue, outer involution, and optional selected chordal line | marked residue action | singular quartic, twelve points, six-axis carrier, chordal/conference companions | conference opposition `C2`; exact return only with the selected line | gated |
@@ -22,6 +23,8 @@ Unknown fields are rejected at struct and tagged-enum boundaries, including
 profile tags, actions, base fields, ambiguity kinds, and certificate outcomes.
 The four source-gate fixtures have exact value-level parse/serialize round trips;
 Paper IV's separate paper-owned export is enabled and fully replayed.
+Paper II's separate paper-owned export is likewise enabled; its disabled fixture
+remains the fail-closed schema example.
 Vertices are numbered `0..n-1`; each named
 undirected relation is a duplicate-free list of ordered-normalized pairs
 `[min,max]`. Relation order is semantic and frozen. A canonical artifact

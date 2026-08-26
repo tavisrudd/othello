@@ -846,6 +846,15 @@ def main() -> int:
         ],
         paper_root,
     )
+    run(
+        [
+            "python3",
+            "verification/generate_sparse_shadow_export.py",
+            "--check",
+            "verification/evidence/sparse_shadow_export.json",
+        ],
+        paper_root,
+    )
     identity = json.loads(
         (paper_root / "verification" / "statement_identity.json").read_text(
             encoding="utf-8"

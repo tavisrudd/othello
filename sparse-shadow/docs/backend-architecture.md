@@ -9,7 +9,7 @@ validate a native certificate by assertion.
 
 The backend order is:
 
-1. native `paper-i-ir-exhaustion/v1`: always available and authoritative;
+1. the adapter-specific native proof system: always available and authoritative;
 2. nauty 2.9.3: implemented as an optional external baseline;
 3. bliss: reserved in the backend-neutral schema for a later adapter.
 
@@ -33,6 +33,12 @@ color-preserving automorphism of the encoding restricts exactly to an
 automorphism of the relational shadow and conversely. The Paper-I fixture has
 78 encoded vertices and 132 incidence edges. Directed relation ports are not
 defined in v1 and therefore fail closed.
+
+For Paper II, the encoding has 12 endpoint nodes, 22 sheet-colored matching
+nodes, and 132 secant nodes. Each secant node is joined to its two endpoints
+and its matching node. Its color-preserving automorphism group is therefore the
+cubic-oriented trade stabilizer; nauty 2.9.3 independently returns order 660.
+Paper IV uses one colored node per weighted pair.
 
 ## Comparison contract
 
